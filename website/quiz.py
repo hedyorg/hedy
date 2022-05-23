@@ -84,7 +84,7 @@ def routes(app, database, achievements, quizzes):
             'level': level,
             'correct_answer_text': question.get("mp_choice_options")[body.get('answer') - 1].get('option'),
             'feedback': question.get("mp_choice_options")[body.get('answer') - 1].get('feedback'),
-            'max_question': question_number < QUIZZES[g.lang].get_highest_question_level(level),
+            'max_question': QUIZZES[g.lang].get_highest_question_level(level),
             'next_question': True if question_number < QUIZZES[g.lang].get_highest_question_level(level) else False
         }
 
@@ -96,10 +96,14 @@ def routes(app, database, achievements, quizzes):
                 session['total_score'] = session.get('total_score', 0) + score
                 session['correct_answer'] = session.get('correct_answer', 0) + 1
                 session['correctly_answered_questions_numbers'].append(body.get('question'))
+        else:
+            response['correct'] = False
 
-            return jsonify(response), 200
+        print("LETS PRINT SOME STATS:")
+        print(session['total_score'])
+        print(session['correct_answer'])
+        print(session['correctly_answered_questions_numbers'])
 
-        response['correct'] = False
         return jsonify(response), 200
 
 
