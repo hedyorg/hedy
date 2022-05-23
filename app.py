@@ -1074,11 +1074,13 @@ def landing_page(user, first):
     username = user['username']
 
     user_info = DATABASE.get_public_profile_settings(username)
-    user_programs = DATABASE.public_programs_for_user(username)
+    user_programs = DATABASE.programs_for_user(username)
+    if user_programs:
+        user_programs = user_programs[:1][0]
     user_achievements = DATABASE.progress_by_username(username)
 
     return render_template('landing-page.html', page_title=gettext('title_landing-page'),
-                           user_info=user_info, programs=user_programs, achievements=user_achievements,
+                           user_info=user_info, program=user_programs, achievements=user_achievements,
                            user=user['username'])
 
 
