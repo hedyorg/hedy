@@ -1072,7 +1072,7 @@ def landing_page(user, first):
 
     user_info = DATABASE.get_public_profile_settings(username)
     user_programs = DATABASE.programs_for_user(username)
-    # Only return the last program to the user
+    # Only return the last program of the user
     if user_programs:
         user_programs = user_programs[:1][0]
     user_achievements = DATABASE.progress_by_username(username)
