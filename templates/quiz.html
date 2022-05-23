@@ -143,7 +143,7 @@
         </div>
     </div>
     {% if next_level %}
-        <div class="p-10 button-bar border-t-8 border-green-600">
+        <div class="flex py-4 px-4 bg-green-300 justify-between border-t-8 border-green-600">
             <button class="green-btn ltr:ml-1 rtl:mr-1" onclick="window.parent.location='/hedy/{{ next_level }}';">
                 {{_('advance_button')|replace("{level}", next_level)}}
             </button>

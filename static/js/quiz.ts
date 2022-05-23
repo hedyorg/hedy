@@ -197,6 +197,6 @@ export function showQuizResults(level: number) {
 
 function showResults(response: any) {
     $('#quiz_container').hide();
-    $('#quiz_end_score').val(response.score);
+    $('#quiz_end_score').text(response.score);
     $('#end_quiz_container').show();
 }

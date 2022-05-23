@@ -128,10 +128,8 @@ def routes(app, database, achievements, quizzes):
                     achievement = ACHIEVEMENTS.add_single_achievement(username, "quiz_master")
             if achievement:
                 response['achievement'] = json.dumps(achievement)
-        else:
-            username = f'anonymous:{utils.session_id()}'
-        response['answers'] = DATABASE.get_quiz_answer(username, level, session['quiz-attempt-id'])
 
+        print(response)
         return jsonify(response), 200
 
 
