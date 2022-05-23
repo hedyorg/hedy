@@ -62,21 +62,20 @@ class HighlightTester(unittest.TestCase):
         valid, ind_error = self.check(result, expected)
         if not valid:
 
-            # calculate windows around error
-            MAX_CH_PRINT = 40
-            start = ind_error - MAX_CH_PRINT
-            end   = ind_error + MAX_CH_PRINT
+            code_list     = code.split('\n')
+            expected_list = expected.split('\n')
+            result_list   = result.split('\n')
 
-            if start < 0 :
-                start = 0
-            if end > len(code):
-                end = len(code)
+            line_cpt = 0
+            while ind_error >= len(code_list[line_cpt]):
+                ind_error -= len(code_list[line_cpt]) +1
+                line_cpt += 1
 
             print("ERROR in level {} in {}:".format(level, lang))
-            print("In this code :", code.replace("\n", "\\n")[start:end])
-            print("We want      :", expected.replace("\n", "\\n")[start:end])
-            print("We have      :", result.replace("\n", "\\n")[start:end])
-            print("At           :", " " * ind + "^")
+            print("In this code :", code_list[line_cpt] )
+            print("We want      :", expected_list[line_cpt] )
+            print("We have      :", result_list[line_cpt] )
+            print("At           :", " " * ind_error + "^")
         self.assertTrue(valid)
 
 
@@ -295,7 +294,6 @@ class HighlightTester(unittest.TestCase):
                 return False, cpt
 
             cpt += 1
-            if result[i] == "\n" : cpt += 1
 
         return True, -1
 
