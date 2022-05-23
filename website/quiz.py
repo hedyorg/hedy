@@ -79,9 +79,10 @@ def routes(app, database, achievements, quizzes):
         is_correct = True if question['correct_answer'] == ANSWER_PARSER.get(body.get('answer')) else False
 
         username = current_user()['username'] or f'anonymous:{utils.session_id()}'
+        answer = ANSWER_PARSER(body.get('answer'))
         DATABASE.record_quiz_answer(session['quiz-attempt-id'], username=username, level=level,
                                     is_correct=is_correct, question_number=question_number,
-                                    answer=body.get('answer'))
+                                    answer=answer)
 
         response = {
             'question_text': question.get("question_text"),
