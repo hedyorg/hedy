@@ -54,6 +54,12 @@ def routes(app, database, achievements, quizzes):
             return gettext('question_doesnt_exist'), 400
 
         question = QUIZZES[g.lang].get_quiz_data_for_level_question(level, question, g.keyword_lang)
+        for option in question['mp_choice_options']:
+            option['option'].replace("`", "<code>")
+            option['option'].replace("<code> ", "</code> ")
+            print(option)
+
+
         return jsonify(question), 200
 
     @app.route('/quiz/submit_answer/', methods=["POST"])

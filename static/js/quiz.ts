@@ -68,7 +68,7 @@ function showAnswers(options: any, level: number, question: number) {
         if (options[i-1].option.includes("```")) {
             $('#answer_text_' + i).hide();
             let editor = ace.edit('answer_code_' + i);
-            editor.setValue(options[i-1].option.replace("`", ""));
+            editor.setValue(options[i-1].option.replace("`/g", ""));
             $('#answer_code_' + i).show();
         } else {
             // Todo TB -> If we find a single backtick -> it's a command we have to surround it with a code block
