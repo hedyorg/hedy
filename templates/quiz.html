@@ -95,7 +95,49 @@
     </div>
 </div>
 <div id="quiz_feedback_container" class="hidden">
-    <!-- Show the feedback here after answering a question -->
+    <div class="p-8">
+        <div class="flex flex-col">
+            <div class="text-green-900 text-2xl text-center flex flex-row justify-center font-slab">
+                <p>{{_('question')}}</p>
+                <p id="question_number_container"></p>
+                <p id="question_length_container"></p>
+            </div>
+            <p class="italic text-3xl font-bold tracking-wide text-blue-900 text-center justify-center font-slab">
+                <p id="question_feedback_text_container"></p>
+            </p>
+            <div class="rounded-full bg-green-500 flex h-32 w-32 text-center flex items-center justify-center place-self-center hidden" id="feedback_correct_container">
+                <p class="m-4 text-white font-extrabold text-center text-4xl font-slab">
+                    {{_('feedback_success')}}
+                </p>
+            </div>
+            <div class="rounded-full bg-red-500 flex h-32 w-32 text-center flex items-center justify-center place-self-center hidden" id="feedback_incorrect_container">
+                <p class="m-4 text-white text-center font-extrabold text-4xl font-slab">
+                    {{_('feedback_failure')}}
+                </p>
+            </div>
+            <p class="text-2xl text-center hidden" id="feedback_feedback_container">
+                <i id="feedback_feedback_text"></i>
+            </p>
+            <div class="flex flex-col justify-center">
+                <p class="text-black text-center font-extrabold text-4xl font-slab">
+                    {{_('correct_answer')}}
+                </p>
+                <div class="w-full text-center">
+                    <div class="pt-8 px-2 mx-auto mb-2 text-lg" id="feedback_correct_answer_container"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="p-10 button-bar border-t-8 border-green-600" id="quiz_next_question_container">
+        <button class="green-btn ltr:ml-1 rtl:mr-1 ltr:text-right-0 rtl:text-left-0"
+            onclick="hedyApp.loadQuestQuestion();">
+                {{ _('go_to_question') }}
+        </button>
+        <button class="green-btn ltr:ml-1 rtl:mr-1 ltr:right-0 rtl:left-0"
+            onclick="hedyApp.loadQuizResults();">
+                {{ _('go_to_quiz_result') }}
+        </button>
+    </div>
 </div>
 <div id="end_quiz_container" class="hidden">
     <div class="flex flex-col justify-center items-center p-8">

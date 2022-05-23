@@ -101,3 +101,7 @@ function showFeedback(question: any) {
     console.log(question)
     console.log("Antwoord is goed....");
 }
+
+export function loadQuizResults() {
+    console.log("Laad de resultaten...");
+}
