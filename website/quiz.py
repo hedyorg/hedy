@@ -107,12 +107,13 @@ def routes(app, database, achievements, quizzes):
 
     @app.route('/quiz/get_results/<level>', methods=['GET'])
     def get_results(level):
+        level = int(level)
         questions = QUIZZES[g.lang].get_quiz_data_for_level(level, g.keyword_lang)
+        print(questions)
 
         achievement = None
         total_score = round(session.get('total_score', 0) / max_score(questions) * 100)
         response = {
-            'end': True,
             'score': total_score,
             'questions': questions
         }
@@ -131,8 +132,8 @@ def routes(app, database, achievements, quizzes):
         else:
             username = f'anonymous:{utils.session_id()}'
         response['answers'] = DATABASE.get_quiz_answer(username, level, session['quiz-attempt-id'])
-
-        return jsonify({}), 200
+        print(response['answers'])
+        return jsonify(response), 200
 
 
 def correct_answer_score(question):
