@@ -1071,7 +1071,15 @@ def landing_page(user, first):
     if first:
         print("eerste keer!")
 
-    return render_template('landing-page.html', page_title=gettext('title_landing-page'), user=user['username'])
+    username = user['username']
+
+    user_info = DATABASE.get_public_profile_settings(username)
+    user_programs = DATABASE.public_programs_for_user(username)
+    user_achievements = DATABASE.progress_by_username(username)
+
+    return render_template('landing-page.html', page_title=gettext('title_landing-page'),
+                           user_info=user_info, programs=user_programs, achievements=user_achievements,
+                           user=user['username'])
 
 
 @app.route('/for-teachers', methods=['GET'])
