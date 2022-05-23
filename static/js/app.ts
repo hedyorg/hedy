@@ -14,6 +14,8 @@ export let theModalEditor: AceAjax.Editor;
     window.State = {};
   }
 
+
+
   // Set const value to determine the current page direction -> useful for ace editor settings
   const dir = $("#main_container").attr("dir");
 
@@ -35,6 +37,13 @@ export let theModalEditor: AceAjax.Editor;
       exampleEditor.setOptions({ minLines: 10 });
     } else if ($(preview).hasClass('cheatsheet')) {
       exampleEditor.setOptions({ minLines: 1 });
+    } else if ($(preview).hasClass('parsons')) {
+      exampleEditor.setOptions({
+        minLines: 1,
+        showGutter: false,
+        showPrintMargin: false,
+        highlightActiveLine: false
+      });
     } else {
       exampleEditor.setOptions({ minLines: 2 });
     }
@@ -283,7 +292,7 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
       dataType: 'json'
     }).done(function(response: any) {
       console.log('Response', response);
-      if (response.Warning) {
+      if (response.Warning && $('#editor').is(":visible")) {
         storeFixedCode(response, level);
         error.showWarning(ErrorMessages['Transpile_warning'], response.Warning);
       }
@@ -382,6 +391,7 @@ function showAchievement(achievement: any[]){
   return new Promise<void>((resolve)=>{
         $('#achievement_reached_title').text('"' + achievement[0] + '"');
         $('#achievement_reached_text').text(achievement[1]);
+        $('#achievement_reached_statics').text(achievement[2]);
         $('#achievement_pop-up').fadeIn(1000, function () {
           setTimeout(function(){
             $('#achievement_pop-up').fadeOut(1000);
@@ -705,6 +715,36 @@ export function submit_program (id: string, index: number) {
     change_to_submitted(index);
   }).fail(function(err) {
       return modal.alert(err.responseText, 3000, true);
+  });
+}
+
+export function set_explore_favourite(id: string, favourite: number) {
+  let prompt = "Are you sure you want to remove this program as a \"Hedy\'s choice\" program?";
+  if (favourite) {
+    prompt = "Are you sure you want to set this program as a \"Hedy\'s choice\" program?";
+  }
+  modal.confirm (prompt, function () {
+    $.ajax({
+      type: 'POST',
+      url: '/programs/set_hedy_choice',
+      data: JSON.stringify({
+        id: id,
+        favourite: favourite
+    }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function(response) {
+        modal.alert(response.message, 3000, false);
+        if (favourite == 1) {
+          $('#' + id).removeClass('text-white');
+          $('#' + id).addClass('text-yellow-500');
+        } else {
+          $('#' + id).removeClass('text-yellow-500');
+          $('#' + id).addClass('text-white');
+        }
+    }).fail(function(err) {
+        return modal.alert(err.responseText, 3000, true);
+    });
   });
 }
 
@@ -1042,6 +1082,30 @@ export function showVariableView() {
   }
 }
 
+//Feature flag for variable and values view
+var variable_view = false;
+
+if(window.State.level != null){
+  let level = Number(window.State.level);
+  variable_view = level >= 2;
+  hide_if_no_variables();
+}
+
+function hide_if_no_variables(){
+  if($('#variables #variable-list li').length == 0){
+    $('#variable_button').hide();
+  }
+  else{
+    $('#variable_button').show();
+  }
+}
+
+//Hides the HTML DIV for variables if feature flag is false
+if (!variable_view) {
+  $('#variables').hide();
+  $('#variable_button').hide();
+}
+
 //Feature flag for step by step debugger. Becomes true automatically for level 7 and below.
 var step_debugger = false;
 if(window.State.level != null){
@@ -1055,13 +1119,16 @@ if (!step_debugger) {
 }
 
 export function show_variables() {
-  const variableList = $('#variable-list');
-  if (variableList.hasClass('hidden')) {
-    variableList.removeClass('hidden');
+  if (variable_view === true) {
+    const variableList = $('#variable-list');
+    if (variableList.hasClass('hidden')) {
+      variableList.removeClass('hidden');
+    }
   }
 }
 
-export function load_variables(variables: any){
+export function load_variables(variables: any) {
+  if (variable_view === true) {
     //@ts-ignore
     variables = clean_variables(variables);
     const variableList = $('#variable-list');
@@ -1069,6 +1136,8 @@ export function load_variables(variables: any){
     for (const i in variables) {
       variableList.append(`<li style=color:${variables[i][2]}>${variables[i][0]}: ${variables[i][1]}</li>`);
     }
+    hide_if_no_variables();
+  }
 }
 
 // Color-coding string, numbers, booleans and lists
@@ -1095,16 +1164,18 @@ function special_style_for_variable(variable: any){
 //hiding certain variables from the list unwanted for users
 // @ts-ignore
 function clean_variables(variables: any) {
-  const new_variables = [];
-  const unwanted_variables = ["random", "time", "int_saver","int_$rw$", "turtle", "t"];
-  for (const variable in variables) {
-    if (!variable.includes('__') && !unwanted_variables.includes(variable)) {
-    let extraStyle = special_style_for_variable(variables[variable]);
-    let newTuple = [variable, variables[variable].v, extraStyle];
-    new_variables.push(newTuple);
+  if (variable_view === true) {
+    const new_variables = [];
+    const unwanted_variables = ["random", "time", "int_saver", "int_$rw$", "turtle", "t"];
+    for (const variable in variables) {
+      if (!variable.includes('__') && !unwanted_variables.includes(variable)) {
+        let extraStyle = special_style_for_variable(variables[variable]);
+        let newTuple = [variable, variables[variable].v, extraStyle];
+        new_variables.push(newTuple);
+      }
     }
+    return new_variables;
   }
-  return new_variables;
 }
 
 export function get_trimmed_code() {
@@ -1115,6 +1186,30 @@ export function get_trimmed_code() {
   } catch (e) {
     console.error(e);
   }
+
+  // If the main editor is hidden -> we are solving a parsons problem
+  if ($('#editor').is(":hidden")){
+    let code = "";
+    let count = 65;
+
+    $('.compiler-parsons-box').each(function() {
+      let text = $(this).attr('code') || "";
+      if (text.length > 1) {
+        code += text;
+      }
+      $(this).parents().removeClass('border-black');
+      // @ts-ignore
+      if ($(this).attr('index').charCodeAt(0) == count) {
+        console.log("Deze staat op de juiste plek!");
+        $(this).parents().addClass('border-green-500');
+      } else {
+        $(this).parents().addClass('border-red-500');
+      }
+      count += 1;
+    });
+    return code.replace(/ +$/mg, '');
+  }
+  //console.log('Hello world');
   // FH Feb: the above code turns out not to remove spaces from lines that contain only whitespace,
   // but that upsets the parser so this removes those spaces also:
   // Remove whitespace at the end of every line
@@ -1500,8 +1595,9 @@ function adjustLines(disabledRow: []) {
 }
 
 function debugRun() {
-  if (window.State.level != null && window.State.lang != null) {
-    runit(window.State.level, window.State.lang, "", function () {
+  let language = window.State.lang ?? window.State.keyword_language;
+  if (window.State.level != null && language != null) {
+    runit(window.State.level, language, "", function () {
       $('#output').focus();
     });
   }

@@ -353,11 +353,17 @@ class ExtractAST(Transformer):
         return Tree('punctuation', [''.join([str(c) for c in args])], meta)
 
     def list_access(self, meta, args):
+        # FH, may 2022 I don't fully understand why we remove INT here and just plemp
+        # the number in the tree. should be improved but that requires rewriting the further processing code too (TODO)
         if type(args[1]) == Tree:
             if "random" in args[1].data:
                 return Tree('list_access', [args[0], 'random'], meta)
-            else:
+            elif args[1].data == "var_access":
                 return Tree('list_access', [args[0], args[1].children[0]], meta)
+            else:
+                # convert to latin int
+                latin_int_index = str(int(args[1].children[0]))
+                return Tree('list_access', [args[0], latin_int_index], meta)
         else:
             return Tree('list_access', [args[0], args[1]], meta)
 
@@ -1157,13 +1163,13 @@ class ConvertToPython_1(ConvertToPython):
         return ''.join([str(c) for c in args])
 
     def integer(self, args):
-        return str(args[0])
+        return str(int(args[0]))
 
     def number(self, args):
-        return str(args[0])
+        return str(int(args[0]))
 
     def NEGATIVE_NUMBER(self, args):
-        return str(args[0])
+        return str(int(args[0]))
 
     def print(self, args):
         # escape needed characters
@@ -1627,10 +1633,23 @@ for {iterator} in range({begin}, {end} + {stepvar_name}, {stepvar_name}):
 @hedy_transpiler(level=12)
 class ConvertToPython_12(ConvertToPython_11):
     def number(self, args):
-        return ''.join(args)
+        # try all ints? return ints
+        try:
+            all_int = [str(int(x)) == x for x in args]
+            if all(all_int):
+                return ''.join(args)
+            else:
+                # int succeeds but does nto return the same? these are non-latin numbers
+                # and need to be casted
+                return ''.join([str(int(x)) for x in args])
+        except Exception as E:
+            # if not? make into all floats
+            numbers = [str(float(x)) for x in args]
+            return ''.join(numbers)
 
     def NEGATIVE_NUMBER(self, args):
-        return ''.join(args)
+        numbers = [str(float(x)) for x in args]
+        return ''.join(numbers)
 
     def text_in_quotes(self, args):
         # We need to re-add the quotes, so that the Python code becomes name = 'Jan' or "Jan's"
@@ -1698,6 +1717,7 @@ class ConvertToPython_12(ConvertToPython_11):
 
     def var(self, args):
         name = args[0]
+        self.check_var_usage(args)
         self.check_var_usage(args)
         return hash_var(name)
 

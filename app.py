@@ -1,4 +1,6 @@
 # coding=utf-8
+import random
+
 from website import auth
 from website import statistics
 from website import quiz
@@ -17,7 +19,7 @@ from hedy_content import COUNTRIES, ALL_LANGUAGES, ALL_KEYWORD_LANGUAGES, NON_LA
 import hedyweb
 import hedy_content
 from flask_babel import gettext
-from flask_babel import Babel, refresh
+from flask_babel import Babel
 from flask_compress import Compress
 from flask_helpers import render_template
 from flask import Flask, request, jsonify, session, abort, g, redirect, Response, make_response, Markup
@@ -26,7 +28,6 @@ from werkzeug.urls import url_encode
 from babel import Locale
 from flask_commonmark import Commonmark
 import traceback
-import re
 import logging
 import json
 import hedy
@@ -57,6 +58,10 @@ for lang in ALL_LANGUAGES.keys():
 ADVENTURES = collections.defaultdict(hedy_content.NoSuchAdventure)
 for lang in ALL_LANGUAGES.keys():
     ADVENTURES[lang] = hedy_content.Adventures(lang)
+
+PARSONS = collections.defaultdict()
+for lang in ALL_LANGUAGES.keys():
+    PARSONS[lang] = hedy_content.ParsonsProblem(lang)
 
 QUIZZES = collections.defaultdict(hedy_content.NoSuchQuiz)
 for lang in ALL_LANGUAGES.keys():
@@ -96,6 +101,25 @@ NORMAL_PREFIX_CODE = textwrap.dedent("""\
       return(int_saver(s))
 """)
 
+
+def load_parsons_per_level(level):
+    all_parsons = []
+    parsons = PARSONS[g.lang].get_parsons(g.keyword_lang)
+    for short_name, parson in parsons.items():
+        if level not in parson['levels']:
+            continue
+        level_parson = parson['levels'].get(level)
+        current_parson = {
+            'short_name': short_name,
+            'name': parson['name'],
+            'text': level_parson['text'],
+            'example': level_parson['example'],
+            'story': level_parson['story'],
+            # We use this overly complex line to shuffle the dict items in one go
+            'code_lines': {i: level_parson['code_lines'][i] for i in list(set(level_parson['code_lines']))}
+        }
+        all_parsons.append(current_parson)
+    return all_parsons
 
 def load_adventures_per_level(level):
     loaded_programs = {}
@@ -295,7 +319,7 @@ if utils.is_heroku() and not os.getenv('HEROKU_RELEASE_CREATED_AT'):
 def enrich_context_with_user_info():
     user = current_user()
     data = {'username': user.get('username', ''),
-            'is_teacher': is_teacher(user)}
+            'is_teacher': is_teacher(user), 'is_admin': is_admin(user)}
     return data
 
 
@@ -717,8 +741,9 @@ def get_user_formatted_age(now, date):
 
 
 @app.route('/tutorial', methods=['GET'])
-@requires_login
-def tutorial_index(user):
+def tutorial_index():
+    if not current_user()['username']:
+        return redirect('/login')
     level = 1
     commands = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
     adventures = load_adventures_per_level(level)
@@ -788,8 +813,7 @@ def index(level, program_id):
     adventures = load_adventures_per_level(level)
     customizations = {}
     if current_user()['username']:
-        customizations = DATABASE.get_student_class_customizations(current_user()[
-                                                                   'username'])
+        customizations = DATABASE.get_student_class_customizations(current_user()['username'])
 
     if 'levels' in customizations:
         available_levels = customizations['levels']
@@ -804,6 +828,8 @@ def index(level, program_id):
     if 'levels' in customizations and level not in available_levels:
         return utils.error_page(error=403, ui_message=gettext('level_not_class'))
 
+    parsons = load_parsons_per_level(level)
+    print(parsons)
     commands = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
 
     teacher_adventures = []
@@ -835,6 +861,7 @@ def index(level, program_id):
         quiz=quiz,
         quiz_questions=quiz_questions,
         adventures=adventures,
+        parsons=parsons,
         customizations=customizations,
         hide_cheatsheet=hide_cheatsheet,
         enforce_developers_mode=enforce_developers_mode,
@@ -1038,31 +1065,6 @@ def main_page(page):
         else:
             return utils.error_page(error=403, ui_message=gettext('not_user'))
 
-    if page == 'for-teachers':
-        for_teacher_translations = hedyweb.PageTranslations(
-            page).get_page_translations(g.lang)
-        if is_teacher(user):
-            welcome_teacher = session.get('welcome-teacher') or False
-            session.pop('welcome-teacher', None)
-            teacher_classes = [] if not current_user(
-            )['username'] else DATABASE.get_teacher_classes(current_user()['username'], True)
-            adventures = []
-            for adventure in DATABASE.get_teacher_adventures(current_user()['username']):
-                adventures.append(
-                    {'id': adventure.get('id'),
-                     'name': adventure.get('name'),
-                     'date': utils.datetotimeordate(utils.mstoisostring(adventure.get('date'))),
-                     'level': adventure.get('level')
-                     }
-                )
-
-            return render_template('for-teachers.html', current_page='my-profile',
-                                   page_title=gettext('title_for-teacher'),
-                                   content=for_teacher_translations, teacher_classes=teacher_classes,
-                                   teacher_adventures=adventures, welcome_teacher=welcome_teacher)
-        else:
-            return utils.error_page(error=403, ui_message=gettext('not_teacher'))
-
     requested_page = hedyweb.PageTranslations(page)
     if not requested_page.exists():
         abort(404)
@@ -1070,6 +1072,32 @@ def main_page(page):
     main_page_translations = requested_page.get_page_translations(g.lang)
     return render_template('main-page.html', page_title=gettext('title_start'),
                            current_page='start', content=main_page_translations)
+
+
+@app.route('/for-teachers', methods=['GET'])
+@requires_login
+def for_teachers_page(user):
+    if not is_teacher(user):
+        return utils.error_page(error=403, ui_message=gettext('not_teacher'))
+
+    page_translations = hedyweb.PageTranslations('for-teachers').get_page_translations(g.lang)
+    welcome_teacher = session.get('welcome-teacher') or False
+    session.pop('welcome-teacher', None)
+
+    teacher_classes = DATABASE.get_teacher_classes(current_user()['username'], True)
+    adventures = []
+    for adventure in DATABASE.get_teacher_adventures(current_user()['username']):
+        adventures.append(
+          {'id': adventure.get('id'),
+           'name': adventure.get('name'),
+           'date': utils.datetotimeordate(utils.mstoisostring(adventure.get('date'))),
+           'level': adventure.get('level')
+           }
+        )
+
+    return render_template('for-teachers.html', current_page='my-profile', page_title=gettext('title_for-teacher'),
+                           content=page_translations, teacher_classes=teacher_classes,
+                           teacher_adventures=adventures, welcome_teacher=welcome_teacher)
 
 
 @app.route('/explore', methods=['GET'])
@@ -1116,14 +1144,28 @@ def explore():
             'level': program['level'],
             'id': program['id'],
             'error': program['error'],
+            'hedy_choice': True if program.get('hedy_choice') == 1 else False,
             'public_user': True if public_profile else None,
             'code': "\n".join(code.split("\n")[:4])
         })
 
-    adventures_names = hedy_content.Adventures(
-        session['lang']).get_adventure_names()
+    favourite_programs = DATABASE.get_hedy_choices()
+    hedy_choices = []
+    for program in favourite_programs:
+        hedy_choices.append({
+            'username': program['username'],
+            'name': program['name'],
+            'level': program['level'],
+            'id': program['id'],
+            'hedy_choice': True,
+            'public_user': True if public_profile else None,
+            'code': "\n".join(program['code'].split("\n")[:4])
+        })
 
-    return render_template('explore.html', programs=filtered_programs,
+    print(hedy_choices)
+    adventures_names = hedy_content.Adventures(session['lang']).get_adventure_names()
+
+    return render_template('explore.html', programs=filtered_programs, favourite_programs=hedy_choices,
                            filtered_level=level,
                            achievement=achievement,
                            filtered_adventure=adventure,
@@ -1208,7 +1250,7 @@ def teacher_tutorial_steps(step):
 def get_tutorial_translation(step):
     # We also retrieve the example code snippet as a "tutorial step" to reduce the need of new code
     if step == "code_snippet":
-        return jsonify({'code': gettext('tutorial_code_snippet')}), 200
+        return jsonify({'code': gettext('tutorial_code_snippet'), 'output': gettext('tutorial_code_output')}), 200
     try:
         step = int(step)
     except ValueError:
