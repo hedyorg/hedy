@@ -56,7 +56,7 @@ def extract_Lark_grammar_from_yaml():
         with open(lark_filesname_with_path, 'w', encoding='utf-8') as f:
             f.write(translated_template)
 
-# extract_Lark_grammar_from_yaml()
+extract_Lark_grammar_from_yaml()
 
 def relax_keywords_ar():
   input_path = '../content/keywords/'
