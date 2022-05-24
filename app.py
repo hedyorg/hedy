@@ -1132,20 +1132,25 @@ def explore():
         # If program does not have an error value set -> parse it and set value
         if 'error' not in program:
             try:
-                hedy.transpile(program.get('code'), program.get(
-                    'level'), program.get('lang'))
+                hedy.transpile(program.get('code'), program.get('level'), program.get('lang'))
                 program['error'] = False
             except:
                 program['error'] = True
             DATABASE.store_program(program)
-        public_profile = DATABASE.get_public_profile_settings(
-            program['username'])
+        public_profile = DATABASE.get_public_profile_settings(program['username'])
+
         # If the language doesn't match the user -> parse the keywords
-        if program.get("lang", "en") != g.keyword_lang and program.get("lang") in ALL_KEYWORD_LANGUAGES.keys():
-            code = hedy_translation.translate_keywords(program.get('code'), from_lang=program.get('lang'),
-                                                       to_lang=g.keyword_lang, level=int(program.get('level', 1)))
-        else:
-            code = program['code']
+        # We perform a "double parse" to make sure english keywords are also always translated
+        code = program['code']
+
+        # First, if the program language is not equal to english and the language supports keywords
+        # It might contain non-english keywords -> parse all to english
+        if program.get("lang") != "en" and program.get("lang") in ALL_KEYWORD_LANGUAGES.keys():
+            code = hedy_translation.translate_keywords(code, from_lang=program.get('lang'), to_lang="en", level=int(program.get('level', 1)))
+        # If the keyword language is non-English -> parse again to guarantee completely localized keywords
+        if g.keyword_lang != "en":
+            code = hedy_translation.translate_keywords(code, from_lang="en", to_lang=g.keyword_lang, level=int(program.get('level', 1)))
+
         filtered_programs.append({
             'username': program['username'],
             'name': program['name'],
