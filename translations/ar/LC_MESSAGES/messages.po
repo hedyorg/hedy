@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-05-23 17:24+0200\n"
-"PO-Revision-Date: 2022-05-19 12:38+0000\n"
+"PO-Revision-Date: 2022-05-23 12:18+0000\n"
 "Last-Translator: Alaaeddin Swidan <alaaeddin.swidan@live.com>\n"
 "Language: ar\n"
 "Language-Team: ar <LL@li.org>\n"
@@ -100,7 +100,7 @@ msgstr "هيدي - استرجاع الحساب"
 
 #: app.py:1005
 msgid "title_reset"
-msgstr "هيدي - اعادة ضبط كلمة السر"
+msgstr "هيدي - اعادة ضبط كلمة المرور"
 
 #: app.py:1031
 msgid "title_my-profile"
@@ -205,7 +205,7 @@ msgstr ""
 
 #: app.py:1225
 msgid "tutorial_quiz_title"
-msgstr "فحص سريع"
+msgstr "الفحص السريع"
 
 #: app.py:1225
 msgid "tutorial_quiz_message"
@@ -293,9 +293,8 @@ msgstr "انشاء حسابات"
 #: app.py:1247
 msgid "tutorial_accounts_message"
 msgstr ""
-"يمكنك انشاء عدة حسابات في المرة الواحدة، عليك فقط تزويد اسم المستخدم "
-"وكلمة السر. يمكنك أيضاً أن تضيف هذا الحسابات إلى واحد من صفوفك بشكل "
-"مباشر."
+"يمكنك انشاء عدة حسابات في المرة الواحدة، عليك فقط تزويد اسم المستخدم وكلمة "
+"المرور. يمكنك أيضاً أن تضيف هذا الحسابات إلى واحد من صفوفك بشكل مباشر."
 
 #: app.py:1249
 msgid "tutorial_documentation_title"
@@ -379,497 +378,412 @@ msgstr ""
 "{offending_keyword} للمستوى {working_level}. تلميح: {tip}"
 
 #: content/error-messages.txt:2
-#, fuzzy
 msgid "Incomplete"
 msgstr ""
-"Oops! You forgot a bit of code! On line {line_number}, you need to enter "
-"text behind {incomplete_command}."
+"أوه! لقد نسيت أن تكمل جزءاً من البرنامج! في السطر رقم {line_number}، عليك أن "
+"تكمل كتابة الكود بعد {incomplete_command}."
 
 #: content/error-messages.txt:3
-#, fuzzy
 msgid "Invalid"
 msgstr ""
-"{invalid_command} is not a Hedy level {level} command. Did you mean "
-"{guessed_command}?"
+"{invalid_command} ليس أمراً برمجياً ضمن المستوى {level} من هيدي. هل كنت تقصد "
+"الأمر {guessed_command}؟"
 
 #: content/error-messages.txt:4
-#, fuzzy
 msgid "Invalid Space"
 msgstr ""
-"Oops! You started a line with a space on line {line_number}. Spaces "
-"confuse computers, can you remove it?"
+"أوه! يوجد مسافة زائدة في بداية السطر رقم {line_number}، المسافات تربك "
+"الحاسوب أحياناً. هل باستطاعتك أن تمسحها؟"
 
 #: content/error-messages.txt:5
-#, fuzzy
 msgid "Has Blanks"
 msgstr ""
-"Your code is incomplete. It contains blanks that you have to replace with"
-" code."
+"البرنامج الخاص بك غير مكتمل. عليك أن تستبدل الفراغات الموجودة وتضع مكانها "
+"الكود الذي تريد للحاسوب أن ينفذه."
 
 #: content/error-messages.txt:6
-#, fuzzy
 msgid "No Indentation"
 msgstr ""
-"You used too few spaces in line {line_number}. You used {leading_spaces} "
-"spaces, which is not enough. Start every new block with {indent_size} "
-"spaces more than the line before."
+"لقد استخدمت عدداً غير كافي من الفراغات كإزاحة في السطر رقم {line_number}. "
+"لقد استخدمت {leading_spaces} إزاحات وهذا غير كافٍ. يجب عليك أن تبدأ كل "
+"مجموعة جديدة من الكود ب {indent_size} إزاحات أكثر من السطر الذي يسبقها."
 
 #: content/error-messages.txt:7
-#, fuzzy
 msgid "Unexpected Indentation"
 msgstr ""
-"You used too many spaces in line {line_number}. You used {leading_spaces}"
-" spaces, which is too much. Start every new block with {indent_size} "
-"spaces more than the line before."
+"لقد استخدمت عدداً أكثر من اللازم من الفراغات كإزاحة في السطر رقم "
+"{line_number}. لقد استخدمت {leading_spaces} إزاحات وهذا أكثر من اللازم. يجب "
+"عليك أن تبدأ كل مجموعة جديدة من الكود ب {indent_size} إزاحات أكثر من السطر "
+"الذي يسبقها."
 
 #: content/error-messages.txt:8
-#, fuzzy
 msgid "Parse"
 msgstr ""
-"The code you entered is not valid Hedy code. There is a mistake on line "
-"{location[0]}, at position {location[1]}. You typed {character_found}, "
-"but that is not allowed."
+"الكود الذي أدخلته ليس مطابقاً لبرمجيات هيدي. يوجد خطأفي في السطر رقم "
+"{location[0]} والموضع {location[1]}. لقد أدخلت الرمز {character_found} لكن "
+"هذا غير مسموح به."
 
 #: content/error-messages.txt:9
-#, fuzzy
 msgid "Unquoted Text"
 msgstr ""
-"Be careful. If you ask or print something the text should start and "
-"finish with a quotation mark. You forgot one somewhere."
+"انتبه! عند استعمال الأوامر اسأل أو قول يجب أن يكون النص بين علامات الاقتباس "
+"\". على ما يبدو أنك نسيت اضافة واحدة منهم في مكان ما."
 
 #: content/error-messages.txt:10
-#, fuzzy
 msgid "Unquoted Assignment"
 msgstr ""
-"From this level, you need to place texts to the right of the `is` between"
-" quotes. You forgot that for the text {text}."
+"ابتداء من هذا المستوى عليك وضع النص على يسار `هو` بين علامات الاقتباس. لقد "
+"نسيت فعل ذلك مع النص {text}."
 
 #: content/error-messages.txt:11
-#, fuzzy
 msgid "Unquoted Equality Check"
 msgstr ""
-"If you want to check if a variable is equal to multiple words, the words "
-"should be surrounded by quotation marks!"
+"اذا كنت تريد فحص ما اذا كان المتغير مساويا لنص من عدة كلمات، هذه الكلمات يجب "
+"أن تكون محاطة بعلامات الاقتباس!"
 
 #: content/error-messages.txt:12
-#, fuzzy
 msgid "Var Undefined"
 msgstr ""
-"You tried to use the variable {name}, but you did not set it. It is also "
-"possible that you were trying to use the word {name} but forgot quotation"
-" marks."
+"لقد قمت باستعمال المتغير {name} لكنك لم تقم بضبط قيمته ابتداء. من الممكن "
+"أيضاً أنك كنت تريد استعمال الكلمة {name} ولكن نسيت وضع علامات الاقتباس."
 
 #: content/error-messages.txt:13
-#, fuzzy
 msgid "Cyclic Var Definition"
 msgstr ""
-"The name {variable} needs to be set before you can use it on the right-"
-"hand side of the is command"
+"يجب أن تضبط قيمة المتغير {name} قبل أن تستعمله على الجانب الأيسر من من الأمر "
+"هو."
 
 #: content/error-messages.txt:14
-#, fuzzy
 msgid "Lonely Echo"
 msgstr ""
-"You used an echo before an ask, or an echo without an ask. First ask for "
-"input, then echo."
+"لقد استعملت الأمر ردد قبل الأمر اسأل، أو استعملت الأمر ردد بدون استعمال "
+"الأمر اسأل. قم باستعمال الأمر اسأل للحصول على اجابة أولاً ثم استعمل الأمر "
+"ردد."
 
 #: content/error-messages.txt:15
-#, fuzzy
 msgid "Too Big"
 msgstr ""
-"Wow! Your program has an impressive {lines_of_code} lines of code! But we"
-" can only process {max_lines} lines in this level. Make your program "
-"smaller and try again."
+"واو! برنامجك يحتوي على {lines_of_code} سطر برمجي! لكننا نستطيع معالجة "
+"{max_lines} سطر برمجي كحد أقصى في هذا المستوى. اجعل برنامجك أصغر وحاول مرة "
+"أخرى."
 
 #: content/error-messages.txt:16
-#, fuzzy
 msgid "Invalid Argument Type"
 msgstr ""
-"You cannot use {command} with {invalid_argument} because it is "
-"{invalid_type}. Try changing {invalid_argument} to {allowed_types}."
+"لا يمكن استعمال الأمر {command} مع {invalid_argument} وذلك بسبب كونها "
+"{invalid_type}. حاول تغيير {invalid_argument} الى {allowed_types}."
 
 #: content/error-messages.txt:17
-#, fuzzy
 msgid "Invalid Argument"
 msgstr ""
-"You cannot use the command {command} with {invalid_argument} . Try "
-"changing {invalid_argument} to {allowed_types}."
+"لا يمكن استعمال الأمر {command} مع {invalid_argument}. حاول تغيير "
+"{invalid_argument} الى {allowed_types}."
 
 #: content/error-messages.txt:18
-#, fuzzy
 msgid "Invalid Type Combination"
 msgstr ""
-"You cannot use {invalid_argument} and {invalid_argument_2} with {command}"
-" because one is {invalid_type} and the other is {invalid_type_2}. Try "
-"changing {invalid_argument} to {invalid_type_2} or {invalid_argument_2} "
-"to {invalid_type}."
+"لا يمكن استعمال {invalid_argument} و{invalid_argument_2} مع الأمر {command} "
+"وذلك بسبب كون الأول{invalid_type} وكون الآخر {invalid_type_2}. حاول تغيير "
+"{invalid_argument} الى {invalid_type_2} أو {invalid_argument_2} الى "
+"{invalid_type}."
 
 #: content/error-messages.txt:19
-#, fuzzy
 msgid "Unsupported Float"
 msgstr ""
-"Non-integer numbers are not supported yet but they will be in a few "
-"levels. For now change {value} to an integer."
+"لا ندعم الأرقام غير الصحيحة (الأرقام العشرية)حتى الان، ولكنها ستكون مدعومة "
+"بعد عدة مستويات. في الوقت الحالي قم بتغيير {value} الر رقم صحيح."
 
 #: content/error-messages.txt:20
-#, fuzzy
 msgid "Locked Language Feature"
 msgstr ""
-"You are using {concept}! That is awesome, but {concept} is not unlocked "
-"yet! It will be unlocked in a later level."
+"أنت تستعمل {concept}! هذا مدهش، لكن {concept} غير متاح لك حالياً! سيتاح لك "
+"استعماله في مستوى لاحق."
 
 #: content/error-messages.txt:21
-#, fuzzy
 msgid "Missing Command"
-msgstr "It looks like you forgot to use a command on line {line_number}."
+msgstr "يبدو أنك نسيت استخدام أمر برمجي في السطر رقم {line_number}."
 
 #: content/error-messages.txt:22
-#, fuzzy
 msgid "Missing Inner Command"
 msgstr ""
-"It looks like you forgot to use a command with the {command} statement "
-"you used on line {line_number}."
+"يبدو أنك نسيت استخدام أمر برمجي مع الجملة {command} التي استعملتها في السطر "
+"رقم {line_number}."
 
 #: content/error-messages.txt:23
-#, fuzzy
 msgid "Unsupported String Value"
-msgstr "Text values cannot contain {invalid_value}."
+msgstr "النصوص لا يمكن أن تحتوي على {invalid_value}."
 
 #: content/error-messages.txt:24
-#, fuzzy
 msgid "ask_needs_var"
 msgstr ""
-"Starting in level 2, ask needs to be used with a variable. Example: name "
-"is ask What are you called?"
+"ابتداء من المستوى الثاني، نستخدم الأمر اسأل مع متغير. مثال: الاسم هو اسأل ما "
+"اسمك؟"
 
 #: content/error-messages.txt:25
-#, fuzzy
 msgid "echo_out"
 msgstr ""
-"Starting in level 2 echo is no longer needed. You can repeat an answer "
-"with ask and print now. Example: name is ask What are you called? print "
-"hello name"
+"لم نعد بحاجة الى الأمر ردد ابتداء من المستوى الثاني. يمكنك أن تكرر اجابة "
+"سؤال ما من خلال استخدام الأمر اسأل والأمر قول. مثال: الاسم هو اسأل ما اسمك؟ "
+"قول مرحبا الاسم"
 
 #: content/error-messages.txt:26
-#, fuzzy
 msgid "space"
-msgstr "a space"
+msgstr "مسافة إزاحة"
 
 #: content/error-messages.txt:27
-#, fuzzy
 msgid "comma"
-msgstr "a comma"
+msgstr "فاصلة"
 
 #: content/error-messages.txt:28
-#, fuzzy
 msgid "question mark"
-msgstr "a question mark"
+msgstr "علامة سؤال"
 
 #: content/error-messages.txt:29
-#, fuzzy
 msgid "newline"
-msgstr "a new line"
+msgstr "سطر جديد"
 
 #: content/error-messages.txt:30
-#, fuzzy
 msgid "period"
-msgstr "a period"
+msgstr "نقطة"
 
 #: content/error-messages.txt:31
-#, fuzzy
 msgid "exclamation mark"
-msgstr "an exclamation mark"
+msgstr "علامة تعجب"
 
 #: content/error-messages.txt:32
-#, fuzzy
 msgid "dash"
-msgstr "a dash"
+msgstr "علامة الشرطة"
 
 #: content/error-messages.txt:33
-#, fuzzy
 msgid "star"
-msgstr "a star"
+msgstr "علامة النجمة"
 
 #: content/error-messages.txt:34
-#, fuzzy
 msgid "single quotes"
-msgstr "a single quote"
+msgstr "علامة اقتباس أحادية"
 
 #: content/error-messages.txt:35
-#, fuzzy
 msgid "double quotes"
-msgstr "double quotes"
+msgstr "علامة اقتباس مزدوجة"
 
 #: content/error-messages.txt:36
-#, fuzzy
 msgid "slash"
-msgstr "a slash"
+msgstr "علامة الخط المائل ناحية اليمين"
 
 #: content/error-messages.txt:37
-#, fuzzy
 msgid "string"
-msgstr "text"
+msgstr "نص"
 
 #: content/error-messages.txt:38
-#, fuzzy
 msgid "nested blocks"
-msgstr "a block in a block"
+msgstr "مجموعة ضمن مجموعة"
 
 #: content/error-messages.txt:39
 msgid "or"
 msgstr "أو"
 
 #: content/error-messages.txt:40
-#, fuzzy
 msgid "number"
-msgstr "a number"
+msgstr "رقم"
 
 #: content/error-messages.txt:41
-#, fuzzy
 msgid "integer"
-msgstr "a number"
+msgstr "رقم"
 
 #: content/error-messages.txt:42
-#, fuzzy
 msgid "float"
-msgstr "a number"
+msgstr "رقم"
 
 #: content/error-messages.txt:43
-#, fuzzy
 msgid "list"
-msgstr "a list"
+msgstr "قائمة"
 
 #: content/error-messages.txt:44
-#, fuzzy
 msgid "input"
-msgstr "input from ask"
+msgstr "اجابة باستخدام اسأل"
 
 #: templates/achievements.html:5
-#, fuzzy
 msgid "general"
-msgstr "Gender"
+msgstr "عام"
 
 #: templates/achievements.html:9
-#, fuzzy
 msgid "programs_created"
-msgstr "My programs"
+msgstr "البرامج المنشأة"
 
 #: templates/achievements.html:10
-#, fuzzy
 msgid "programs_saved"
-msgstr "Programs"
+msgstr "البرامج المحفوظة"
 
 #: templates/achievements.html:11
-#, fuzzy
 msgid "programs_submitted"
-msgstr "programs submitted"
+msgstr "البرامج التي تم تسليمها"
 
 #: templates/achievements.html:13 templates/achievements.html:25
-#, fuzzy
 msgid "teacher"
-msgstr "Looks like you are not a teacher!"
+msgstr "معلم"
 
 #: templates/achievements.html:16 templates/achievements.html:53
-#, fuzzy
 msgid "hidden"
-msgstr "Hint?"
+msgstr "مخفي"
 
 #: templates/achievements.html:23
-#, fuzzy
 msgid "hedy_achievements"
-msgstr "My achievements"
+msgstr "انجازات هيدي"
 
 #: templates/cheatsheet.html:14
-#, fuzzy
 msgid "cheatsheet_title"
-msgstr "Hide cheatsheet"
+msgstr "ورقة غش"
 
 #: templates/class-overview.html:16
-#, fuzzy
 msgid "visible_columns"
-msgstr "Visible columns"
+msgstr "خانات مرئية"
 
 #: templates/class-overview.html:21 templates/class-overview.html:64
 #: templates/class-overview.html:108 templates/create-accounts.html:16
 #: templates/login.html:12 templates/profile.html:87 templates/recover.html:8
 #: templates/signup.html:10
-#, fuzzy
 msgid "username"
-msgstr "Username"
+msgstr "اسم المستخدم"
 
 #: templates/class-overview.html:25 templates/class-overview.html:65
-#, fuzzy
 msgid "last_login"
-msgstr "Last login"
+msgstr "اخر تسجيل دخول"
 
 #: templates/class-overview.html:29 templates/class-overview.html:66
-#, fuzzy
 msgid "highest_level_reached"
-msgstr "Highest level reached"
+msgstr "أعلى مستوى تم الوصول له"
 
 #: templates/class-overview.html:35 templates/class-overview.html:67
-#, fuzzy
 msgid "number_programs"
-msgstr "Number of programs"
+msgstr "عدد البرامج"
 
 #: templates/class-overview.html:39 templates/class-overview.html:68
-#, fuzzy
 msgid "programs"
-msgstr "Programs"
+msgstr "البرامج"
 
 #: templates/class-overview.html:43 templates/class-overview.html:69
-#, fuzzy
 msgid "latest_shared_program"
-msgstr "Latest shared program"
+msgstr "اخر برنامج تم مشاركته"
 
 #: templates/class-overview.html:49 templates/class-overview.html:70
 #: templates/class-overview.html:83 templates/profile.html:145
 #: templates/profile.html:147 templates/profile.html:160
-#, fuzzy
 msgid "change_password"
-msgstr "Change password"
+msgstr "تغيير كلمة السر"
 
 #: templates/class-overview.html:53 templates/class-overview.html:71
-#, fuzzy
 msgid "remove_student"
-msgstr "Remove student"
+msgstr "ازالة تلميذ"
 
 #: templates/class-overview.html:81
-#, fuzzy
 msgid "page"
-msgstr "page"
+msgstr "صفحة"
 
 #: templates/class-overview.html:83
-#, fuzzy
 msgid "enter_password"
-msgstr "Enter a new password for"
+msgstr "أدخل كلمة سر جديدة ل"
 
 #: templates/class-overview.html:83
-#, fuzzy
 msgid "password_change_prompt"
-msgstr "Are you sure you want to change this password?"
+msgstr "هل أنت متأكد أنك تريد تغيير كلمة السر هذه؟"
 
 #: templates/class-overview.html:84
-#, fuzzy
 msgid "remove_student_prompt"
-msgstr "Are you sure you want to remove the student from the class?"
+msgstr "هل أنت متأكد أنك تريد ازالة التلميذ من الصف؟"
 
 #: templates/class-overview.html:84 templates/class-overview.html:120
 #: templates/customize-adventure.html:52 templates/for-teachers.html:43
 #: templates/for-teachers.html:53
-#, fuzzy
 msgid "remove"
-msgstr "Remove"
+msgstr "ازالة"
 
 #: templates/class-overview.html:90
-#, fuzzy
 msgid "class_link"
-msgstr "Link to join class"
+msgstr "رابط الإنضمام الى الصف"
 
 #: templates/class-overview.html:92 templates/customize-class.html:5
-#, fuzzy
 msgid "customize_class"
-msgstr "Customize class"
+msgstr "تخصيص الصف"
 
 #: templates/class-overview.html:93 templates/for-teachers.html:32
-#, fuzzy
 msgid "class_name_prompt"
-msgstr "Please enter the name of the class"
+msgstr "أدخل اسم الصف رجاء"
 
 #: templates/class-overview.html:93
-#, fuzzy
 msgid "rename_class"
-msgstr "Rename class"
+msgstr "اعادة تسمية الصف"
 
 #: templates/class-overview.html:94
-#, fuzzy
 msgid "invite_prompt"
-msgstr "Enter a username"
+msgstr "أدخل اسم مستخدم"
 
 #: templates/class-overview.html:94
-#, fuzzy
 msgid "invite_student"
-msgstr "Invite student"
+msgstr "دعوة تلميذ"
 
 #: templates/class-overview.html:95
-#, fuzzy
 msgid "class_stats"
-msgstr "Show class statistics"
+msgstr "احصائيات الصف"
 
 #: templates/class-overview.html:98 templates/customize-adventure.html:59
-#, fuzzy
 msgid "back_to_teachers_page"
-msgstr "Go back to teachers page"
+msgstr "الرجوع الى صفحة المعلم"
 
 #: templates/class-overview.html:99
-#, fuzzy
 msgid "delete_class_prompt"
-msgstr "Are you sure you want to delete the class?"
+msgstr "هل أنت متأكد أنك تريدحذف الصف؟"
 
 #: templates/class-overview.html:99
-#, fuzzy
 msgid "delete_class"
-msgstr "Delete class permanently"
+msgstr "حذف الصف بشكل نهائي"
 
 #: templates/class-overview.html:103
-#, fuzzy
 msgid "pending_invites"
-msgstr "Pending invites"
+msgstr "الدعوات قيد الإنتظار"
 
 #: templates/class-overview.html:109
-#, fuzzy
 msgid "invite_date"
-msgstr "Invite date"
+msgstr "تاريخ الدعوة"
 
 #: templates/class-overview.html:110
-#, fuzzy
 msgid "expiration_date"
-msgstr "Expiration date"
+msgstr "تاريخ انتهاء الصلاحية"
 
 #: templates/class-overview.html:111
-#, fuzzy
 msgid "remove_invite"
-msgstr "Remove invite"
+msgstr "حذف الدعوة"
 
 #: templates/class-overview.html:120 templates/profile.html:15
-#, fuzzy
 msgid "delete_invite_prompt"
-msgstr "Are you sure you want to remove this class invitation?"
+msgstr "هل أنت متأكد أنك تريد حذف الدعوة الى هذا الصف؟"
 
 #: templates/class-prejoin.html:7
-#, fuzzy
 msgid "class_already_joined"
-msgstr "You are already a student of class"
+msgstr "أنت بالفعل تلميذ في صف"
 
 #: templates/class-prejoin.html:11
-#, fuzzy
 msgid "goto_profile"
-msgstr "Go to my profile"
+msgstr "الذهاب الى ملفي الشخصي"
 
 #: templates/class-prejoin.html:15 templates/profile.html:12
-#, fuzzy
 msgid "prompt_join_class"
-msgstr "Do you want to join this class?"
+msgstr "هل تريد الإنضمام الى هذا الصف؟"
 
 #: templates/class-prejoin.html:17 website/teacher.py:182
-#, fuzzy
 msgid "join_prompt"
-msgstr "You need to have an account to join a class. Would you like to login now?"
+msgstr "يجب أن يكون لديك حساب لتنضم الى صف. هل تريد تسجيل الدحول الآن؟"
 
 #: templates/class-prejoin.html:17 templates/profile.html:14
-#, fuzzy
 msgid "join_class"
-msgstr "Join class"
+msgstr "انضم الى صف"
 
 #: templates/class-stats.html:22 templates/customize-class.html:160
-#, fuzzy
 msgid "back_to_class"
-msgstr "Go back to class"
+msgstr "الرجوع الى صف"
 
 #: templates/code-page.html:8 templates/for-teachers.html:9
-#, fuzzy
 msgid "next_step_tutorial"
-msgstr "Next step >>>"
+msgstr "الخطوة التالية >>>"
 
 #: templates/code-page.html:35 templates/code-page.html:45
 #: templates/customize-class.html:28 templates/customize-class.html:64
@@ -877,14 +791,12 @@ msgstr "Next step >>>"
 #: templates/level-page.html:6 templates/level-page.html:11
 #: templates/quiz/startquiz.html:10 templates/view-program-page.html:12
 #: templates/view-program-page.html:28
-#, fuzzy
 msgid "level_title"
-msgstr "Level"
+msgstr "مستوى"
 
 #: templates/create-accounts.html:5
-#, fuzzy
 msgid "create_multiple_accounts"
-msgstr "Create multiple accounts"
+msgstr "انشاء عدة حسابات"
 
 #: templates/create-accounts.html:7
 #, fuzzy
@@ -899,60 +811,50 @@ msgstr ""
 "password needs to be <b>at least</b> 6 characters."
 
 #: templates/create-accounts.html:10
-#, fuzzy
 msgid "create_accounts_prompt"
-msgstr "Are you sure you want to create these accounts?"
+msgstr "هل أنت متأكد أنك تريد انشاء هذه الحسابات؟"
 
 #: templates/create-accounts.html:17 templates/login.html:15
 #: templates/reset.html:8 templates/signup.html:19
-#, fuzzy
 msgid "password"
-msgstr "Password"
+msgstr "كلمة السر"
 
 #: templates/create-accounts.html:19
-#, fuzzy
 msgid "select_class"
-msgstr "Select class"
+msgstr "اختر الصف"
 
 #: templates/create-accounts.html:35 templates/programs.html:24
-#, fuzzy
 msgid "reset_view"
-msgstr "Reset"
+msgstr "اعادة ضبط"
 
 #: templates/create-accounts.html:36 templates/for-teachers.html:64
-#, fuzzy
 msgid "create_accounts"
-msgstr "Create multiple accounts"
+msgstr "انشاء عدة حسابات"
 
 #: templates/customize-adventure.html:5
-#, fuzzy
 msgid "customize_adventure"
-msgstr "Customize adventure"
+msgstr "تخصيص مغامرة"
 
 #: templates/customize-adventure.html:7
-#, fuzzy
 msgid "update_adventure_prompt"
-msgstr "Are you sure you want to update this adventure?"
+msgstr "هل أنت متأكد أنك تريد تعديل هذه المغامرة؟"
 
 #: templates/customize-adventure.html:10
-#, fuzzy
 msgid "general_settings"
-msgstr "General settings"
+msgstr "اعدادات عامة"
 
 #: templates/customize-adventure.html:12 templates/for-teachers.html:18
 #: templates/for-teachers.html:39
-#, fuzzy
 msgid "name"
-msgstr "Name"
+msgstr "الاسم"
 
 #: templates/customize-adventure.html:16 templates/customize-adventure.html:18
 #: templates/explore.html:22 templates/explore.html:52
 #: templates/explore.html:80 templates/for-teachers.html:40
 #: templates/programs.html:12 templates/programs.html:39
 #: templates/programs.html:47
-#, fuzzy
 msgid "level"
-msgstr "Level"
+msgstr "مستوى"
 
 #: templates/customize-adventure.html:25
 #, fuzzy
@@ -971,9 +873,8 @@ msgstr ""
 "template or example of the code. Please use pre anchors like this:"
 
 #: templates/customize-adventure.html:36
-#, fuzzy
 msgid "hello_world_snippet"
-msgstr "Hide cheatsheet"
+msgstr "قول مرحباً أيها العالم!"
 
 #: templates/customize-adventure.html:39
 #, fuzzy
@@ -987,9 +888,8 @@ msgstr ""
 #: templates/customize-class.html:94 templates/explore.html:28
 #: templates/programs.html:18 templates/programs.html:40
 #: templates/view-adventure.html:6
-#, fuzzy
 msgid "adventure"
-msgstr "Adventure"
+msgstr "مغامرة"
 
 #: templates/customize-adventure.html:44
 #, fuzzy
@@ -1006,24 +906,20 @@ msgstr ""
 "</pre>"
 
 #: templates/customize-adventure.html:47
-#, fuzzy
 msgid "adventure_terms"
-msgstr "I agree that my adventure might be made publicly available on Hedy."
+msgstr "أوافق على أن مغامرتي قد تصير متاحة على العام على هيدي."
 
 #: templates/customize-adventure.html:50
-#, fuzzy
 msgid "preview"
-msgstr "Preview"
+msgstr "معاينة"
 
 #: templates/customize-adventure.html:51 templates/customize-class.html:155
-#, fuzzy
 msgid "save"
-msgstr "Save"
+msgstr "حفظ"
 
 #: templates/customize-adventure.html:52 templates/for-teachers.html:53
-#, fuzzy
 msgid "delete_adventure_prompt"
-msgstr "Are you sure you want to remove this adventure?"
+msgstr "هل أنت متأكد أنك تريد حذف هذه المغامرة؟"
 
 #: templates/customize-class.html:7
 #, fuzzy
@@ -1051,9 +947,8 @@ msgid "customize_class_step_4"
 msgstr "Customize class"
 
 #: templates/customize-class.html:14
-#, fuzzy
 msgid "customize_class_step_5"
-msgstr "Customize class"
+msgstr "اضافة مغامرات شخصية"
 
 #: templates/customize-class.html:15
 #, fuzzy
@@ -1076,97 +971,79 @@ msgid "customize_class_exp_2"
 msgstr "Customize class"
 
 #: templates/customize-class.html:23
-#, fuzzy
 msgid "select_adventures"
-msgstr "Select adventures"
+msgstr "اختيار المغامرات"
 
 #: templates/customize-class.html:59
-#, fuzzy
 msgid "opening_dates"
-msgstr "Opening dates"
+msgstr "تواريخ الافتتاح"
 
 #: templates/customize-class.html:65
-#, fuzzy
 msgid "opening_date"
-msgstr "Opening date"
+msgstr "تاريخ الافتتاح"
 
 #: templates/customize-class.html:75 templates/customize-class.html:77
-#, fuzzy
 msgid "directly_available"
-msgstr "Directly open"
+msgstr "افتتح مباشرة"
 
 #: templates/customize-class.html:89
-#, fuzzy
 msgid "select_own_adventures"
-msgstr "Select own adventures"
+msgstr "اختيار المغامرات الذاتية"
 
 #: templates/customize-class.html:96 templates/customize-class.html:120
 #: templates/profile.html:47 templates/profile.html:122
 #: templates/profile.html:131 templates/signup.html:26 templates/signup.html:45
 #: templates/signup.html:53
-#, fuzzy
 msgid "select"
-msgstr "Select"
+msgstr "اختر"
 
 #: templates/customize-class.html:114
-#, fuzzy
 msgid "other_settings"
-msgstr "Other settings"
+msgstr "اعدادات أخرى"
 
 #: templates/customize-class.html:119
-#, fuzzy
 msgid "option"
-msgstr "Option"
+msgstr "خيار"
 
 #: templates/customize-class.html:125
-#, fuzzy
 msgid "mandatory_mode"
-msgstr "Mandatory developer's mode"
+msgstr "وضع المبرمج الإلزامي"
 
 #: templates/customize-class.html:131
-#, fuzzy
 msgid "hide_cheatsheet"
-msgstr "Hide cheatsheet"
+msgstr "اخفاء ورقة الغش"
 
 #: templates/customize-class.html:137
-#, fuzzy
 msgid "hide_keyword_switcher"
-msgstr "Hide keyword switcher"
+msgstr "اخفاء تبديل الكلمات المفتاحية"
 
 #: templates/customize-class.html:143
-#, fuzzy
 msgid "hide_quiz"
-msgstr "Quiz end"
+msgstr "نهاية الفحص السريع"
 
 #: templates/customize-class.html:154
-#, fuzzy
 msgid "reset_adventure_prompt"
-msgstr "Are you sure you want to reset all selected adventures?"
+msgstr "هل أنت متأكد أنك تريد إعادة ضبط كل المغامرات المختارة؟"
 
 #: templates/customize-class.html:154
-#, fuzzy
 msgid "reset_adventures"
-msgstr "Reset selected adventures"
+msgstr "إعادة ضبط المغامرات المختارة"
 
 #: templates/customize-class.html:158
-#, fuzzy
 msgid "remove_customizations_prompt"
-msgstr "Are you sure you want to remove this class their customizations?"
+msgstr "هل أنت متأكد أنك تريد إزالة التخصيصات المتعلقة بهذا الصف؟"
 
 #: templates/customize-class.html:159
-#, fuzzy
 msgid "remove_customization"
-msgstr "Remove customization"
+msgstr "إزالة التخصيصات"
 
 #: templates/error-page.html:12
-#, fuzzy
 msgid "go_back_to_main"
-msgstr "Go back to main page"
+msgstr "الرجوع الى الصفحة الرئيسية"
 
-#: templates/explore.html:12 templates/landing-page.html:33
-#, fuzzy
+#: templates/explore.html:12 templates/landing-page.html:45
 msgid "explore_programs"
-msgstr "Explore programs"
+msgstr "استكشف البرامج"
 
 #: templates/explore.html:15
 #, fuzzy
@@ -1181,161 +1058,130 @@ msgstr ""
 "There you will find all their shared programs and much more!"
 
 #: templates/explore.html:35 templates/programs.html:25
-#, fuzzy
 msgid "search_button"
-msgstr "Save & share code"
+msgstr "البحث"
 
 #: templates/explore.html:43
-#, fuzzy
 msgid "hedy_choice_title"
-msgstr "Hedy's Choice"
+msgstr "اختيار هيدي"
 
 #: templates/explore.html:55 templates/explore.html:83
-#, fuzzy
 msgid "creator"
-msgstr "Creator"
+msgstr "مبتكر"
 
 #: templates/explore.html:61 templates/explore.html:89
-#, fuzzy
 msgid "view_program"
-msgstr "View program"
+msgstr "معاينة البرنامج"
 
 #: templates/for-teachers.html:14 templates/profile.html:72
 #: templates/profile.html:74
-#, fuzzy
 msgid "my_classes"
-msgstr "My classes"
+msgstr "صفوفي"
 
 #: templates/for-teachers.html:19
-#, fuzzy
 msgid "students"
-msgstr "students"
+msgstr "تلاميذ"
 
 #: templates/for-teachers.html:32
-#, fuzzy
 msgid "create_class"
-msgstr "Create a new class"
+msgstr "انشاء صف جديد"
 
 #: templates/for-teachers.html:35
-#, fuzzy
 msgid "my_adventures"
-msgstr "My adventures"
+msgstr "مغامراتي"
 
 #: templates/for-teachers.html:41
-#, fuzzy
 msgid "last_update"
-msgstr "Last update"
+msgstr "اخر تحديث"
 
 #: templates/for-teachers.html:42 templates/for-teachers.html:52
-#, fuzzy
 msgid "view"
-msgstr "View"
+msgstr "معاينة"
 
 #: templates/for-teachers.html:59
-#, fuzzy
 msgid "adventure_prompt"
-msgstr "Please enter the name of the adventure"
+msgstr "الرجاء إدخال اسم المغامرة"
 
 #: templates/for-teachers.html:59 website/teacher.py:500
-#, fuzzy
 msgid "create_adventure"
-msgstr "Create adventure"
+msgstr "انشاء مغامرة"
 
 #: templates/for-teachers.html:62
-#, fuzzy
 msgid "create_student_accounts"
-msgstr "Create student accounts"
+msgstr "انشاء حسابات للتلاميذ"
 
 #: templates/for-teachers.html:122
-#, fuzzy
 msgid "teacher_welcome"
 msgstr ""
-"Welcome to Hedy! Your are now the proud owner of a teachers account which"
-" allows you to create classes and invite students."
+"مرحباً في هيدي! بكل فخر أنت الآن تمتلك حساباً كمعلم وذا يسمح لك بانشاء صفوف "
+"ودعوة تلاميذ."
 
-#: templates/incl-adventure-tabs.html:27
-#, fuzzy
+#: templates/incl-adventure-tabs.html:19
 msgid "quiz_tab"
-msgstr "End quiz"
+msgstr "انهاء الفحص السريع"
 
-#: templates/incl-adventure-tabs.html:31
-#, fuzzy
+#: templates/incl-adventure-tabs.html:23
 msgid "specific_adventure_mode"
 msgstr ""
-"You're currently in adventure '{adventure}', click on 'Hedy' to view all "
-"adventures."
+"أنت حالياً في المغامرة '{adventure}'، اضغط على \"هيدي\" لمعاينة كل المغامرات."
 
-#: templates/incl-adventure-tabs.html:102
-#, fuzzy
+#: templates/incl-adventure-tabs.html:69
 msgid "end"
-msgstr "Gender"
+msgstr "انهاء"
 
-#: templates/incl-adventure-tabs.html:103
-#, fuzzy
+#: templates/incl-adventure-tabs.html:70
 msgid "quiz_description"
-msgstr "Question"
+msgstr "هذه نهاية المستويات كافة! قم بعمل الفحص السريع الآن لتختبر معرفتك."
 
-#: templates/incl-adventure-tabs.html:104
-#, fuzzy
+#: templates/incl-adventure-tabs.html:71
 msgid "go_to_quiz"
-msgstr "Go to quiz"
+msgstr "الذهاب الى الفحص السريع"
 
-#: templates/incl-editor-and-output.html:107
-#, fuzzy
+#: templates/incl-editor-and-output.html:95
 msgid "variables"
-msgstr "Variables"
+msgstr "المتغيرات"
+
+#: templates/incl-editor-and-output.html:111
+msgid "enter_text"
+msgstr "أدخل الإجابة هنا..."
+
+#: templates/incl-editor-and-output.html:112
+msgid "enter"
+msgstr "الدخول"
+
+#: templates/incl-editor-and-output.html:122
+msgid "already_program_running"
+msgstr "هناك بالفعل برنامج اخر تحت التنفيذ، قم بانهاء ذلك البرنامج أولاً."
+
+#: templates/incl-editor-and-output.html:122
+msgid "run_code_button"
+msgstr "تنفيذ البرنامج"
 
 #: templates/incl-editor-and-output.html:123
-#, fuzzy
-msgid "enter_text"
-msgstr "Enter your answer here..."
-
-#: templates/incl-editor-and-output.html:124
-#, fuzzy
-msgid "enter"
-msgstr "Enter"
-
-#: templates/incl-editor-and-output.html:134
-#, fuzzy
-msgid "already_program_running"
-msgstr "There is already a program running, finish that one first."
-
-#: templates/incl-editor-and-output.html:134
-#, fuzzy
-msgid "run_code_button"
-msgstr "Run code"
-
-#: templates/incl-editor-and-output.html:135
-#, fuzzy
 msgid "stop_code_button"
-msgstr "Save code"
+msgstr "ايقاف البرنامج"
 
-#: templates/incl-editor-and-output.html:144
-#, fuzzy
+#: templates/incl-editor-and-output.html:132
 msgid "edit_code_button"
-msgstr "Edit code"
+msgstr "تعديل البرنامج"
 
-#: templates/incl-editor-and-output.html:150
-#, fuzzy
+#: templates/incl-editor-and-output.html:138
 msgid "read_code_label"
-msgstr "Read aloud"
+msgstr "القراءة بصوت عال"
 
-#: templates/incl-editor-and-output.html:160
-#: templates/incl-editor-and-output.html:169
-#, fuzzy
+#: templates/incl-editor-and-output.html:148
+#: templates/incl-editor-and-output.html:157
 msgid "regress_button"
-msgstr "Go back to level {level}"
+msgstr "الرجوع الى المستوى {level}"
 
-#: templates/incl-editor-and-output.html:163
-#: templates/incl-editor-and-output.html:172
-#, fuzzy
+#: templates/incl-editor-and-output.html:151
+#: templates/incl-editor-and-output.html:160
 msgid "advance_button"
-msgstr "Go to level {level}"
+msgstr "الذهاب الى المستوى {level}"
 
-#: templates/incl-editor-and-output.html:186
-#, fuzzy
+#: templates/incl-editor-and-output.html:174
 msgid "developers_mode"
-msgstr "Programmer's mode"
+msgstr "وضع المبرمج"
 
 #: templates/incl-menubar.html:8
 msgid "nav_start"
@@ -1354,50 +1200,41 @@ msgid "nav_learn_more"
 msgstr "المزيد من المعلومات"
 
 #: templates/incl-menubar.html:13 templates/public-page.html:56
-#, fuzzy
 msgid "program_header"
-msgstr "My programs"
+msgstr "برامجي"
 
 #: templates/incl-menubar.html:20
-#, fuzzy
 msgid "my_achievements"
-msgstr "My achievements"
+msgstr "مغامراتي"
 
 #: templates/incl-menubar.html:23
-#, fuzzy
 msgid "my_account"
-msgstr "My account"
+msgstr "حسابي"
 
 #: templates/incl-menubar.html:27
-#, fuzzy
 msgid "for_teachers"
-msgstr "For teachers"
+msgstr "للمعلمين"
 
 #: templates/incl-menubar.html:31
-#, fuzzy
 msgid "logout"
-msgstr "Log out"
+msgstr "تسجيل الخروج"
 
 #: templates/incl-menubar.html:36 templates/login.html:19
 #: templates/signup.html:109
-#, fuzzy
 msgid "login"
-msgstr "Log in"
+msgstr "تسجيل الدخول"
 
 #: templates/incl-menubar.html:45
-#, fuzzy
 msgid "search"
-msgstr "Search..."
+msgstr "ابحث..."
 
 #: templates/incl-menubar.html:50
-#, fuzzy
 msgid "keyword_support"
-msgstr "Translated keywords"
+msgstr "الأوامر البرمجية المترجمة"
 
 #: templates/incl-menubar.html:58
-#, fuzzy
 msgid "non_keyword_support"
-msgstr "Translated content"
+msgstr "المحتوى المترجم"
 
 #: templates/landing-page.html:6
 #, fuzzy
@@ -1406,22 +1243,25 @@ msgstr ""
 "Welcome to Hedy! Your are now the proud owner of a teachers account which"
 " allows you to create classes and invite students."
 
-#: templates/landing-page.html:6
-#, fuzzy
-msgid "welcome_back"
-msgstr ""
-"Welcome to Hedy! Your are now the proud owner of a teachers account which"
-" allows you to create classes and invite students."
+#: templates/landing-page.html:9
+msgid "landing_page_intro"
+msgstr "مرحباً بك في عالم هيدي المدهش!"
 
 #: templates/landing-page.html:13
-#, fuzzy
-msgid "start_teacher_tutorial"
-msgstr "Start teacher tutorial"
+msgid "landing_page_teacher"
+msgstr "اذا لم تستخدم هيدي من قبل فإننا ننصحك البدء بالدليل التوجيهي للمعلمين."
 
-#: templates/landing-page.html:20
-#, fuzzy
+#: templates/landing-page.html:15
+msgid "landing_page_student"
+msgstr "اذا لم تستخدم هيدي من قبل فإننا ننصحك البدء بالدليل التوجيهي."
+
+#: templates/landing-page.html:25
+msgid "start_teacher_tutorial"
+msgstr "بدء الدليل التوجيهي للمعلم"
+
+#: templates/landing-page.html:32
 msgid "start_hedy_tutorial"
-msgstr "Start hedy tutorial"
+msgstr "بدء الدليل التوجيهي"
 
 #: templates/landing-page.html:27
 #, fuzzy
@@ -1429,805 +1269,651 @@ msgid "start_programming"
 msgstr "Directly start programming"
 
 #: templates/landing-page.html:39
-#, fuzzy
-msgid "your_account"
-msgstr "No account?"
-
-#: templates/landing-page.html:52 templates/public-page.html:16
-#, fuzzy
-msgid "achievements"
-msgstr "achievements"
-
-#: templates/landing-page.html:59
-#, fuzzy
-msgid "no_public_profile"
-msgstr "Public profile"
-
-#: templates/landing-page.html:66 templates/landing-page.html:68
-#: templates/public-page.html:28 templates/public-page.html:30
-#, fuzzy
-msgid "amount_created"
-msgstr "programs created"
-
-#: templates/landing-page.html:72 templates/landing-page.html:74
-#: templates/public-page.html:34 templates/public-page.html:36
-#, fuzzy
-msgid "amount_saved"
-msgstr "programs saved"
-
-#: templates/landing-page.html:78 templates/landing-page.html:80
-#: templates/public-page.html:40 templates/public-page.html:42
-#, fuzzy
-msgid "amount_submitted"
-msgstr "programs submitted"
-
-#: templates/landing-page.html:88 templates/public-page.html:50
-#, fuzzy
-msgid "last_achievement"
-msgstr "Last earned achievement"
-
-#: templates/landing-page.html:95
-#, fuzzy
-msgid "your_last_program"
-msgstr "Favourite program"
+msgid "directly_start_programming"
+msgstr "ابدأ البرمجة مباشرة"
 
 #: templates/layout.html:23 templates/signup.html:64
-#, fuzzy
 msgid "yes"
-msgstr "Yes"
+msgstr "نعم"
 
 #: templates/layout.html:24 templates/signup.html:68
-#, fuzzy
 msgid "no"
-msgstr "No"
+msgstr "لا"
 
 #: templates/layout.html:32
-#, fuzzy
 msgid "ok"
-msgstr "OK"
+msgstr "حسناً"
 
 #: templates/layout.html:33
-#, fuzzy
 msgid "cancel"
-msgstr "Cancel"
+msgstr "الغاء"
 
 #: templates/layout.html:46 templates/programs.html:68
 #: templates/programs.html:76
-#, fuzzy
 msgid "copy_link_to_share"
-msgstr "Copy link to share"
+msgstr "انسخ الرابط لمشاركته"
 
 #: templates/layout.html:92 templates/quiz/endquiz.html:18
 #: templates/quiz/quiz.html:29
-#, fuzzy
 msgid "achievement_earned"
-msgstr "You've earned an achievement!"
+msgstr "لقد ا حصلت على انجاز!"
 
 #: templates/learn-more.html:7
-#, fuzzy
 msgid "mailing_title"
-msgstr "Title"
+msgstr "اشترك في نشرة هيدي الإخبارية"
 
 #: templates/learn-more.html:10 templates/profile.html:90
 #: templates/recover.html:8 templates/signup.html:13
-#, fuzzy
 msgid "email"
-msgstr "Email"
+msgstr "البريد الإلكتروني"
 
 #: templates/learn-more.html:14
-#, fuzzy
 msgid "surname"
-msgstr "Username"
+msgstr "الاسم الأول"
 
 #: templates/learn-more.html:18
-#, fuzzy
 msgid "lastname"
-msgstr "Name"
+msgstr "اسم العائلة"
 
 #: templates/learn-more.html:22 templates/profile.html:129
 #: templates/signup.html:52
-#, fuzzy
 msgid "country"
-msgstr "Country"
+msgstr "البلد"
 
 #: templates/learn-more.html:31
-#, fuzzy
 msgid "subscribe"
-msgstr "Subscribe to the newsletter"
+msgstr "اشترك"
 
 #: templates/learn-more.html:32
-#, fuzzy
 msgid "required_field"
-msgstr "Fields marked with an * are required"
+msgstr "مطلوب تعبئة الحقول مع علامة ال *"
 
 #: templates/learn-more.html:35
-#, fuzzy
 msgid "previous_campaigns"
-msgstr "View previous campaigns"
+msgstr "عرض الحملات السابقة"
 
 #: templates/level-page.html:8
-#, fuzzy
 msgid "step_title"
-msgstr "Assignment"
+msgstr "المهمة"
 
 #: templates/level-page.html:12
-#, fuzzy
 msgid "save_code_button"
-msgstr "Save code"
+msgstr "حفظ البرنامج"
 
 #: templates/level-page.html:13
-#, fuzzy
 msgid "share_code_button"
-msgstr "Save & share code"
+msgstr "حفظ ومشاركة البرنامج"
 
 #: templates/level-page.html:31
-#, fuzzy
 msgid "try_button"
-msgstr "Try"
+msgstr "حاول"
 
 #: templates/login.html:10
-#, fuzzy
 msgid "login_long"
-msgstr "Log in to your account"
+msgstr "الدخول الى حسابك"
 
 #: templates/login.html:26 website/auth.py:291
-#, fuzzy
 msgid "no_account"
-msgstr "No account?"
+msgstr "ليس لديك حساب؟"
 
 #: templates/login.html:28 templates/signup.html:6 templates/signup.html:105
-#, fuzzy
 msgid "create_account"
-msgstr "Create account"
+msgstr "انشاء حساب"
 
 #: templates/login.html:33
-#, fuzzy
 msgid "forgot_password"
-msgstr "Forgot your password?"
+msgstr "نسيت كلمة السر؟"
 
 #: templates/main-page.html:10
-#, fuzzy
 msgid "main_title"
-msgstr "Title"
+msgstr "هيدي"
 
 #: templates/main-page.html:11
-#, fuzzy
 msgid "main_subtitle"
-msgstr "programs submitted"
+msgstr "لغة برمجة متدرجة"
 
 #: templates/main-page.html:14
-#, fuzzy
 msgid "try_it"
-msgstr "Try"
+msgstr "جرب ذلك"
 
 #: templates/profile.html:4
-#, fuzzy
 msgid "account_overview"
-msgstr "Account overview"
+msgstr "معاينة الحساب"
 
 #: templates/profile.html:6 templates/profile.html:8
-#, fuzzy
 msgid "my_messages"
-msgstr "My messages"
+msgstr "رسائلي"
 
 #: templates/profile.html:11
-#, fuzzy
 msgid "invite_message"
-msgstr "You have received an invitation to join class"
+msgstr "لقد تلقيت دعوة للإنضمام إلى الصف"
 
 #: templates/profile.html:12
-#, fuzzy
 msgid "sent_by"
-msgstr "This invitation is sent by"
+msgstr "تم إرسال الدعوة من قبل"
 
 #: templates/profile.html:15
-#, fuzzy
 msgid "delete_invite"
-msgstr "Delete invitation"
+msgstr "حذف الدعوة"
 
 #: templates/profile.html:21 templates/profile.html:23
-#, fuzzy
 msgid "public_profile"
-msgstr "Public profile"
+msgstr "الملف العام"
 
 #: templates/profile.html:24
-#, fuzzy
 msgid "public_profile_visit"
-msgstr "You can visit your public profile! Click"
+msgstr "يمكنك زيارة ملفك العام! اضغط"
 
 #: templates/profile.html:24
-#, fuzzy
 msgid "public_profile_link"
-msgstr "here"
+msgstr "هنا"
 
 #: templates/profile.html:27
-#, fuzzy
 msgid "profile_picture"
-msgstr "Profile picture"
+msgstr "الصورة الشخصية"
 
 #: templates/profile.html:40
-#, fuzzy
 msgid "personal_text"
-msgstr "Personal text"
+msgstr "النص الشخصي"
 
 #: templates/profile.html:41
-#, fuzzy
 msgid "your_personal_text"
-msgstr "Your personal text..."
+msgstr "نصّك الشخصي..."
 
 #: templates/profile.html:45
-#, fuzzy
 msgid "favourite_program"
-msgstr "Favourite program"
+msgstr "البرامج المفضلة"
 
 #: templates/profile.html:56
-#, fuzzy
 msgid "public_profile_info"
 msgstr ""
-"By selecting this box I make my profile visible for everyone. Be careful "
-"not to share personal information like your name or home address, because"
-" everyone will be able to see it!"
+"بتحديد هذا الخانة أجعل ملفي الشخصي مرئيًا للجميع. انتبه على عدم مشاركة "
+"معلومات شخصية مثل اسمك أو عنوان منزلك ، لأن الجميع سيتمكن من رؤيتها!"
 
 #: templates/profile.html:59
-#, fuzzy
 msgid "update_public"
-msgstr "Update public profile"
+msgstr "تحديث الملف العام"
 
 #: templates/profile.html:61 templates/profile.html:142
-#, fuzzy
 msgid "are_you_sure"
-msgstr "Are you sure? You cannot revert this action."
+msgstr "هل أنت متأكد؟ لا يمكنك التراجع عن هذا الإجراء."
 
 #: templates/profile.html:61
-#, fuzzy
 msgid "delete_public"
-msgstr "Delete public profile"
+msgstr "حذف الملف العام"
 
 #: templates/profile.html:77
-#, fuzzy
 msgid "self_removal_prompt"
-msgstr "Are you sure you want to leave this class?"
+msgstr "هل أنت متأكد أنك تريد مغادرة هذا الصف؟"
 
 #: templates/profile.html:77
-#, fuzzy
 msgid "leave_class"
-msgstr "Leave class"
+msgstr "مغادرة الصف"
 
 #: templates/profile.html:82 templates/profile.html:85
-#, fuzzy
 msgid "settings"
-msgstr "My personal settings"
+msgstr "اعداداتي الشخصية"
 
 #: templates/profile.html:93 templates/signup.html:41
-#, fuzzy
 msgid "birth_year"
-msgstr "Birth year"
+msgstr "سنة الميلاد"
 
 #: templates/profile.html:96 templates/signup.html:25
-#, fuzzy
 msgid "preferred_language"
-msgstr "Preferred language"
+msgstr "اللغة المفضلة"
 
 #: templates/profile.html:106 templates/signup.html:34
-#, fuzzy
 msgid "preferred_keyword_language"
-msgstr "Preferred keyword language"
+msgstr "اللغة المفضلة للأوامر البرمجية"
 
 #: templates/profile.html:120 templates/signup.html:44
-#, fuzzy
 msgid "gender"
-msgstr "Gender"
+msgstr "الجنس"
 
 #: templates/profile.html:123 templates/signup.html:46
-#, fuzzy
 msgid "female"
-msgstr "Female"
+msgstr "بنت / أنثى"
 
 #: templates/profile.html:124 templates/signup.html:47
-#, fuzzy
 msgid "male"
-msgstr "Male"
+msgstr "ولد / ذكر"
 
 #: templates/profile.html:125 templates/signup.html:48
-#, fuzzy
 msgid "other"
-msgstr "Other"
+msgstr "آخر"
 
 #: templates/profile.html:138
-#, fuzzy
 msgid "update_profile"
-msgstr "Update profile"
+msgstr "تحديث الملف الشخصي"
 
 #: templates/profile.html:142
-#, fuzzy
 msgid "destroy_profile"
-msgstr "Delete profile"
+msgstr "حذف الملف الشخصي"
 
 #: templates/profile.html:149
-#, fuzzy
 msgid "current_password"
-msgstr "Current password"
+msgstr "كلمة السر الحالية"
 
 #: templates/profile.html:153
-#, fuzzy
 msgid "new_password"
-msgstr "New password"
+msgstr "كلمة السر الجديدة"
 
 #: templates/profile.html:157
-#, fuzzy
 msgid "repeat_new_password"
-msgstr "Repeat new password"
+msgstr "أعد ادخال كلمة السر"
 
 #: templates/programs.html:7
-#, fuzzy
 msgid "recent"
-msgstr "My recent programs"
+msgstr "برامجي الأخيرة"
 
 #: templates/programs.html:33 templates/view-program-page.html:7
-#, fuzzy
 msgid "submitted_header"
-msgstr "This is a submitted program and can't be altered."
+msgstr "هذا برنامج تسليمه ولا يمكن نعديله."
 
 #: templates/programs.html:38
-#, fuzzy
 msgid "title"
-msgstr "Title"
+msgstr "العنوان"
 
 #: templates/programs.html:41 templates/view-program-page.html:8
-#, fuzzy
 msgid "last_edited"
-msgstr "Last edited"
+msgstr "تاريخ آخر تعديل"
 
 #: templates/programs.html:59
-#, fuzzy
 msgid "favourite_confirm"
-msgstr "Are you sure you want to set this program as your favourite?"
+msgstr "هل أنت متأكد أنك تريد تحديد هذا البرنامج كبرنامج المفضل؟"
 
 #: templates/programs.html:67 templates/programs.html:72
-#, fuzzy
 msgid "open"
-msgstr "Open"
+msgstr "افتح"
 
 #: templates/programs.html:68 templates/programs.html:76
-#, fuzzy
 msgid "copy_clipboard"
-msgstr "Successfully copied to clipboard"
+msgstr "تم النسخ الى الحافظة (ذاكرة التخزين المؤقت) بنجاح"
 
 #: templates/programs.html:69 templates/programs.html:73
-#, fuzzy
 msgid "delete_confirm"
-msgstr "Are you sure you want to delete the program?"
+msgstr "هل أنت متأكد من أنك تريد حذف البرنامج؟"
 
 #: templates/programs.html:69 templates/programs.html:73
-#, fuzzy
 msgid "delete"
-msgstr "Delete"
+msgstr "حذف"
 
 #: templates/programs.html:75
-#, fuzzy
 msgid "unshare_confirm"
-msgstr "Are you sure you want to make the program private?"
+msgstr "هل أنت متأكد من أنك تريد جعل البرنامج خاصاً/سرّياً؟"
 
 #: templates/programs.html:75
-#, fuzzy
 msgid "unshare"
-msgstr "Unshare"
+msgstr "الغاء المشاركة"
 
 #: templates/programs.html:77
-#, fuzzy
 msgid "submit_warning"
-msgstr "Are you sure you want to submit this program?"
+msgstr "هل أنت متأكد أنك تريد ارسال هذا البرنامج؟"
 
 #: templates/programs.html:77
-#, fuzzy
 msgid "submit_program"
-msgstr "Submit"
+msgstr "ارسال"
 
 #: templates/programs.html:80
-#, fuzzy
 msgid "share_confirm"
-msgstr "Are you sure you want to make the program public?"
+msgstr "هل أنت متأكد من أنك تريد جعل البرنامج عاماً/علنياً؟"
 
 #: templates/programs.html:80
-#, fuzzy
 msgid "share"
-msgstr "Share"
+msgstr "مشاركة"
 
 #: templates/programs.html:86
-#, fuzzy
 msgid "no_programs"
-msgstr "You have no programs yet."
+msgstr "ليس لديك أي برامج بعد."
 
 #: templates/programs.html:88
-#, fuzzy
 msgid "write_first_program"
-msgstr "Write your first program!"
+msgstr "اكتب أول برامجك!"
+
+#: templates/public-page.html:16
+msgid "achievements"
+msgstr "انجازات"
+
+#: templates/public-page.html:28 templates/public-page.html:30
+msgid "amount_created"
+msgstr "البرامج المنشأة"
+
+#: templates/public-page.html:34 templates/public-page.html:36
+msgid "amount_saved"
+msgstr "البرامج المحفوظة"
+
+#: templates/public-page.html:40 templates/public-page.html:42
+msgid "amount_submitted"
+msgstr "البرامج المرسلة"
+
+#: templates/public-page.html:50
+msgid "last_achievement"
+msgstr "آخر انجاز تم تحقيقه"
 
 #: templates/public-page.html:85
-#, fuzzy
 msgid "no_shared_programs"
-msgstr "has no shared programs..."
+msgstr "ليس لديه برامج تم مشاركتها..."
 
 #: templates/recover.html:6
-#, fuzzy
 msgid "recover_password"
-msgstr "Request a password reset"
+msgstr "طلب إعادة ضبط كلمة السر"
 
 #: templates/recover.html:11
-#, fuzzy
 msgid "send_password_recovery"
-msgstr "Send me a password recovery link"
+msgstr "ارسال رابط لاسترجاع كلمة السر"
 
 #: templates/reset.html:6 templates/reset.html:19
-#, fuzzy
 msgid "reset_password"
-msgstr "Reset password"
+msgstr "اعادة ضبط كلمة السر"
 
 #: templates/reset.html:12 templates/signup.html:22
-#, fuzzy
 msgid "password_repeat"
-msgstr "Repeat password"
+msgstr "اعادة كلمة السر"
 
 #: templates/signup.html:7
-#, fuzzy
 msgid "create_account_explanation"
-msgstr "Having your own account allows you to save your programs."
+msgstr "يسمح لك امتلاك حسابك الخاص بحفظ برامجك."
 
 #: templates/signup.html:16
-#, fuzzy
 msgid "email_repeat"
-msgstr "Repeat email"
+msgstr "اعادة البريد اإلكتروني"
 
 #: templates/signup.html:60
-#, fuzzy
 msgid "programming_experience"
-msgstr "Do you have programming experience?"
+msgstr "هل لديك خبرة سابقة في البرمجة؟"
 
 #: templates/signup.html:74
-#, fuzzy
 msgid "languages"
-msgstr "Which of these programming languages have you used before?"
+msgstr "أي من لغات البرمجة التالية استخدمتها من قبل؟"
 
 #: templates/signup.html:79
-#, fuzzy
 msgid "other_block"
-msgstr "Another block language"
+msgstr "لغة برمجة أخرى تستعمل اللبنات البرمجية"
 
 #: templates/signup.html:85
-#, fuzzy
 msgid "other_text"
-msgstr "Another text language"
+msgstr "لغة برمجية نصّية أخرى"
 
 #: templates/signup.html:91
-#, fuzzy
 msgid "request_teacher"
-msgstr "Would you like to apply for a teacher's account?"
+msgstr "هل ترغب في التقدم بطلب للحصول على حساب المعلم؟"
 
 #: templates/signup.html:94
-#, fuzzy
 msgid "subscribe_newsletter"
-msgstr "Subscribe to the newsletter"
+msgstr "اشترك في النشرة الإخبارية"
 
 #: templates/signup.html:99
-#, fuzzy
 msgid "agree_with"
-msgstr "I agree to the"
+msgstr "أوافق على"
 
 #: templates/signup.html:99
-#, fuzzy
 msgid "privacy_terms"
-msgstr "privacy terms"
+msgstr "شروط الخصوصية"
 
 #: templates/signup.html:102
-#, fuzzy
 msgid "agree_third_party"
 msgstr ""
-"I consent to being contacted by partners of Leiden University with sales "
-"opportunities (optional)"
+"أوافق على أن يتم الاتصال بي من قبل شركاء جامعة لايدن (Leiden) مع عروض "
+"تسويقية (اختياري)"
 
 #: templates/signup.html:109
-#, fuzzy
 msgid "already_account"
-msgstr "Already have an account?"
+msgstr "هل لديك حساب بالفعل؟"
 
 #: templates/teacher-invitation.html:5
-#, fuzzy
 msgid "teacher_invitation_require_login"
 msgstr ""
-"To set up your profile as a teacher we will need you to log in. If you "
-"don't have an account, please create one."
+"لإعداد ملفك الشخصي كمعلم ، سنحتاج منك تسجيل الدخول. إذا لم يكن لديك حساب ، "
+"فالرجاء إنشاء حساب."
 
 #: templates/view-program-page.html:13
-#, fuzzy
 msgid "by"
-msgstr "by"
+msgstr "عند"
 
 #: templates/quiz/endquiz.html:27
-#, fuzzy
 msgid "end_quiz"
-msgstr "Quiz end"
+msgstr "نهاية الإختبار السريع"
 
 #: templates/quiz/endquiz.html:28 templates/quiz/quiz-result-overview.html:23
-#, fuzzy
 msgid "score"
-msgstr "Score"
+msgstr "النتيجة"
 
 #: templates/quiz/endquiz.html:37 templates/quiz/quiz-result-overview.html:109
-#, fuzzy
 msgid "go_to_level"
-msgstr "Go to level"
+msgstr "الذهاب إلى المستوى"
 
 #: templates/quiz/feedback.html:8 templates/quiz/quiz.html:16
-#, fuzzy
 msgid "question"
-msgstr "Question"
+msgstr "السؤال"
 
 #: templates/quiz/feedback.html:17
-#, fuzzy
 msgid "feedback_success"
-msgstr "Good!"
+msgstr "أحسنت!"
 
 #: templates/quiz/feedback.html:23
-#, fuzzy
 msgid "feedback_failure"
-msgstr "Wrong!"
+msgstr "إجابة خاطئة!"
 
 #: templates/quiz/feedback.html:36
-#, fuzzy
 msgid "correct_answer"
-msgstr "The correct answer is"
+msgstr "الإجابة الصحيحة هي"
 
 #: templates/quiz/feedback.html:54
-#, fuzzy
 msgid "go_to_question"
-msgstr "Go to question"
+msgstr "الذهاب إلى السؤال"
 
 #: templates/quiz/feedback.html:58
-#, fuzzy
 msgid "go_to_quiz_result"
-msgstr "Go to quiz result"
+msgstr "الذهاب إلى نتيجة الفحص السريع"
 
 #: templates/quiz/quiz-result-overview.html:22
-#, fuzzy
 msgid "results_quiz"
-msgstr "Quiz results"
+msgstr "نتيجة الفحص السريع"
 
 #: templates/quiz/quiz-result-overview.html:45
-#, fuzzy
 msgid "correct"
-msgstr "Correct"
+msgstr "اجابة صحيحة"
 
 #: templates/quiz/quiz-result-overview.html:62
-#, fuzzy
 msgid "incorrect"
-msgstr "Incorrect!"
+msgstr "إجابة خاطئة"
 
 #: templates/quiz/quiz-result-overview.html:92
 #: templates/quiz/quiz-result-overview.html:96
 #: templates/quiz/quiz-result-overview.html:100 templates/quiz/quiz.html:16
-#, fuzzy
 msgid "attempt"
-msgstr "Attempt"
+msgstr "محاولة"
 
 #: templates/quiz/quiz.html:49 templates/quiz/quiz.html:55
 #: templates/quiz/quiz_question.html:17
-#, fuzzy
 msgid "hint"
-msgstr "Hint?"
+msgstr "تلميح؟"
 
 #: templates/quiz/quiz_question.html:62
-#, fuzzy
 msgid "go_to_answer"
-msgstr "Go to answer"
+msgstr "الذهاب إلى الإجابة"
 
 #: templates/quiz/quiz_question.html:64
-#, fuzzy
 msgid "submit_answer"
-msgstr "Answer question"
+msgstr "إجابة السؤال"
 
 #: templates/quiz/startquiz.html:9
-#, fuzzy
 msgid "start_quiz"
-msgstr "Start quiz"
+msgstr "بدء الفحص السريع"
 
 #: templates/quiz/startquiz.html:15
-#, fuzzy
 msgid "go_to_first_question"
-msgstr "Go to question 1"
+msgstr "الذهاب الى السؤال ١"
 
 #: website/achievements.py:164
-#, fuzzy
 msgid "percentage_achieved"
-msgstr "Achieved by {percentage}% of the users"
+msgstr "أنجزه {percentage}{٪} من المستخدمين"
 
-#: website/admin.py:19 website/admin.py:79 website/admin.py:100
-#: website/admin.py:118 website/admin.py:125 website/admin.py:148
-#, fuzzy
+#: website/admin.py:18 website/admin.py:78 website/admin.py:98
+#: website/admin.py:116 website/admin.py:123 website/admin.py:146
 msgid "title_admin"
-msgstr "Hedy - Administrator page"
+msgstr "هيدي - صفحة الإدارة"
 
 #: website/auth.py:182 website/auth.py:195 website/auth.py:280
 #: website/auth.py:418 website/auth.py:423 website/auth.py:471
 #: website/auth.py:635 website/auth.py:644 website/auth.py:673
 #: website/auth.py:720 website/auth.py:727 website/auth.py:747
 #: website/teacher.py:301 website/teacher.py:342
-#, fuzzy
 msgid "username_invalid"
-msgstr "Your username is invalid."
+msgstr "اسم المستخدم الخاص بك غير صالح."
 
 #: website/auth.py:184 website/auth.py:197
-#, fuzzy
 msgid "username_special"
-msgstr "Username cannot contain `:` or `@`."
+msgstr "اسم المستخدم لا يمكن أن يتضمن `:` أو `@`."
 
 #: website/auth.py:186 website/auth.py:199
-#, fuzzy
 msgid "username_three"
-msgstr "Username must contain at least three characters."
+msgstr "اسم المستخدم يجب أن يتكون من ثلاثة أحرف على الأقل."
 
 #: website/auth.py:188 website/auth.py:203 website/auth.py:282
 #: website/auth.py:473 website/auth.py:496 website/auth.py:508
 #: website/auth.py:677
-#, fuzzy
 msgid "password_invalid"
-msgstr "Your password is invalid."
+msgstr "كلمة المرور الخاصة بك غير صالحة."
 
 #: website/auth.py:190 website/auth.py:205
-#, fuzzy
 msgid "passwords_six"
-msgstr "All passwords need to be six characters or longer."
+msgstr "كلمة المرور يجب أن تتكون من ستة أحرف أو أكثر."
 
 #: website/auth.py:201 website/auth.py:535 website/auth.py:749
 #: website/auth.py:754
-#, fuzzy
 msgid "email_invalid"
-msgstr "Please enter a valid email."
+msgstr "الرجاء ادخال بريد الكتروني صحيح."
 
 #: website/auth.py:291
-#, fuzzy
 msgid "invalid_username_password"
-msgstr "Invalid username/password."
+msgstr "اسم المستخدم/كلمة المرور غير صحيحة."
 
 #: website/auth.py:342 website/auth.py:344
-#, fuzzy
 msgid "repeat_match_email"
-msgstr "The repeated email does not match."
+msgstr "البريد الإلكتروني المكرر لا يتطابق."
 
 #: website/auth.py:346 website/auth.py:498 website/auth.py:502
 #: website/auth.py:681
-#, fuzzy
 msgid "repeat_match_password"
-msgstr "The repeated password does not match."
+msgstr "كلمة المرور المكررة غير متطابقة."
 
 #: website/auth.py:348 website/auth.py:526
-#, fuzzy
 msgid "language_invalid"
-msgstr "Please select a valid language."
+msgstr "الرجاء اختيار لغة صحيحة."
 
 #: website/auth.py:350
-#, fuzzy
 msgid "agree_invalid"
-msgstr "You have to agree with the privacy terms."
+msgstr "يجب أن توافق على شروط الخصوصية."
 
 #: website/auth.py:352 website/auth.py:529
-#, fuzzy
 msgid "keyword_language_invalid"
 msgstr ""
-"Please select a valid keyword language (select English or your own "
-"language)."
+"الرجاء اختيار لغة صحيحة للكلمات المفتاحية (الأوامر البرمجية). اختر اللغة "
+"الإنجليزية أو لغتك الخاصة."
 
 #: website/auth.py:357 website/auth.py:540
-#, fuzzy
 msgid "year_invalid"
-msgstr "Please enter a year between 1900 and {year}."
+msgstr "الرجاء ادخال سنة بين ١٩٩٠ و {year}."
 
 #: website/auth.py:360 website/auth.py:543
-#, fuzzy
 msgid "gender_invalid"
-msgstr "Please select a valid gender, choose (Female, Male, Other)."
+msgstr "الرجاء تحديد جنس صالح واختيار (أنثى ، ذكر ، أخرى)."
 
 #: website/auth.py:363 website/auth.py:546
-#, fuzzy
 msgid "country_invalid"
-msgstr "Please select a valid country."
+msgstr "الرجاء اختيار بلد صحيح."
 
 #: website/auth.py:365 website/auth.py:368 website/auth.py:548
 #: website/auth.py:551
-#, fuzzy
 msgid "experience_invalid"
-msgstr "Please select a valid experience, choose (Yes, No)."
+msgstr "الرجاء اختيار الخبرة بشكل صحيح (نعم ، لا)."
 
 #: website/auth.py:371 website/auth.py:554
-#, fuzzy
 msgid "programming_invalid"
-msgstr "Please select a valid programming language."
+msgstr "الرجاء اختيار لغة برمجة بشكل صحيح."
 
 #: website/auth.py:374
-#, fuzzy
 msgid "exists_username"
-msgstr "That username is already in use."
+msgstr "اسم المستخدم هذا قيد الإستخدام بالفعل."
 
 #: website/auth.py:376 website/auth.py:562
-#, fuzzy
 msgid "exists_email"
-msgstr "That email is already in use."
+msgstr "البريد الاإلكتروني هذا قيد الإستخدام بالفعل."
 
 #: website/auth.py:416 website/auth.py:431 website/auth.py:675
 #: website/auth.py:685
-#, fuzzy
 msgid "token_invalid"
-msgstr "Your token is invalid."
+msgstr "الرمز الخاص بك غير صالح."
 
 #: website/auth.py:475 website/auth.py:500 website/auth.py:679
-#, fuzzy
 msgid "password_six"
-msgstr "Your password must contain at least six characters."
+msgstr "كلمة السر المختارة يجب أن تتكون من ستة أحرف على الأقل."
 
 #: website/auth.py:478 website/auth.py:481
-#, fuzzy
 msgid "password_change_not_allowed"
-msgstr "You're not allowed to change the password of this user."
+msgstr "لا يمكنك تغيير كلمة السر لهذا المستخدم."
 
 #: website/auth.py:486
-#, fuzzy
 msgid "password_change_success"
-msgstr "Password of your student is successfully changed."
+msgstr "تم تغيير كلمة السر للتلميذ الخاص بك بنجاح."
 
 #: website/auth.py:517
-#, fuzzy
 msgid "password_updated"
-msgstr "Password updated."
+msgstr "تم تحديث كلمة السر."
 
 #: website/auth.py:601
-#, fuzzy
 msgid "profile_updated"
-msgstr "Profile updated."
+msgstr "تم تحديث الملف الشخصي."
 
 #: website/auth.py:604
-#, fuzzy
 msgid "profile_updated_reload"
-msgstr "Profile updated, page will be re-loaded."
+msgstr "تم تحديث الملف الشخصي، سيتم إعادة تحميل الصفحة."
 
 #: website/auth.py:664
-#, fuzzy
 msgid "sent_password_recovery"
 msgstr ""
-"You should soon receive an email with instructions on how to reset your "
-"password."
+"ستصلك على الفور رسالة على البريد الإلكتروني مع التعليمات الخاصة بإعادة ضبط "
+"كلمة السر الخاصة بك."
 
 #: website/auth.py:704
-#, fuzzy
 msgid "password_resetted"
 msgstr ""
-"Your password has been successfully reset. You are being redirected to "
-"the login page."
+"تم إعادة ضبط كلمة السر الخاصة بك بنجاح، سيتم إعادة تحويلك إلى صفحة تسجيل "
+"الدخول."
 
 #: website/auth.py:722
-#, fuzzy
 msgid "teacher_invalid"
-msgstr "Your teacher value is invalid."
+msgstr "قيمة المعلم الخاصة بك غير صالحة."
 
 #: website/auth.py:810
-#, fuzzy
 msgid "mail_welcome_verify_body"
 msgstr ""
-"Your Hedy account has been created successfully. Welcome!\n"
-"Please click on this link to verify your email address: {link}"
+"تم انشاء حساب هيدي الخاص بك بنجاح. أهلاً بك!\n"
+"الرجاء الضغط على هذا الرابط للتحقق من بريدك الإلكتروني: {link}"
 
 #: website/auth.py:812
-#, fuzzy
 msgid "mail_change_password_body"
-msgstr "Change password"
+msgstr ""
+"تم تغيير كلمة مرور هيدي الخاصة بك. إذا كنت أنت من قام/طلب هذا ، فكل شيء على "
+"ما يرام.\n"
+"إذا لم تقم بطلب/بفعل تغيير كلمة المرور الخاصة بك ، فيرجى الاتصال بنا على "
+"الفور من خلال الرد على هذا البريد الإلكتروني."
 
 #: website/auth.py:814
-#, fuzzy
 msgid "mail_recover_password_body"
-msgstr "Request a password reset"
+msgstr ""
+"من خلال الضغط على هذا الرابط ، يمكنك ضبط كلمة مرور جديدة لـهيدي. هذا الرابط "
+"صالح لمدة <b> ٤ </b> ساعات.\n"
+"إذا لم تطلب إعادة ضبط كلمة المرور ، فيرجى تجاهل هذا البريد الإلكتروني: {link}"
 
 #: website/auth.py:816
-#, fuzzy
 msgid "mail_reset_password_body"
-msgstr "Reset password"
+msgstr ""
+"تمت إعادة ضبط كلمة مرور هيدي الخاصة بك إلى كلمة مرور جديدة. إذا كنت أنت من "
+"طلب/قام بهذا ، فكل شيء على ما يرام.\n"
+"إذا لم تقم بطلب/بفعل تغيير كلمة المرور الخاصة بك ، فيرجى الاتصال بنا على "
+"الفور من خلال الرد على هذا البريد الإلكتروني."
 
 #: website/auth.py:818
 #, fuzzy
@@ -2254,270 +1940,218 @@ msgstr ""
 "Keep programming!"
 
 #: website/auth.py:824
-#, fuzzy
 msgid "mail_welcome_verify_subject"
-msgstr "Welcome to Hedy"
+msgstr "مرحباً بك في هيدي"
 
 #: website/auth.py:826
-#, fuzzy
 msgid "mail_change_password_subject"
-msgstr "Change password"
+msgstr "تم تغيير كلمة مرور هيدي الخاصة بك"
 
 #: website/auth.py:828
-#, fuzzy
 msgid "mail_recover_password_subject"
-msgstr "Request a password reset"
+msgstr "طلب إعادة ضبط كلمة المرور."
 
 #: website/auth.py:830
-#, fuzzy
 msgid "mail_reset_password_subject"
-msgstr "Reset password"
+msgstr "تم إعادة ضبط كلمة مرور هيدي الخاصة بك"
 
 #: website/auth.py:832
-#, fuzzy
 msgid "mail_welcome_teacher_subject"
-msgstr "Your Hedy teacher account is ready"
+msgstr "حساب هيدي الخاص بك كمعلم جاهز"
 
 #: website/auth.py:836
-#, fuzzy
 msgid "user"
-msgstr "Username"
+msgstr "مستخدم"
 
 #: website/auth.py:841
-#, fuzzy
 msgid "mail_hello"
-msgstr "Hi {username}!"
+msgstr "مرحباً {username}!"
 
 #: website/auth.py:843
-#, fuzzy
 msgid "mail_goodbye"
 msgstr ""
-"Thank you!\n"
-"The Hedy team"
+"شكراً لك!\n"
+"فريق هيدي"
 
 #: website/auth.py:851
-#, fuzzy
 msgid "copy_mail_link"
-msgstr "Please copy and paste this link into a new tab:"
+msgstr "الرجاء نسخ هذا الرابط ولصقه في تبويبة جديدة:"
 
 #: website/auth.py:852
-#, fuzzy
 msgid "link"
-msgstr "Log in"
+msgstr "الرابط"
 
 #: website/programs.py:41
-#, fuzzy
 msgid "delete_success"
-msgstr "Program deleted successfully."
+msgstr "تم حذف البرنامج بنجاح."
 
 #: website/programs.py:55
-#, fuzzy
 msgid "save_prompt"
 msgstr ""
-"You need to have an account to save your program. Would you like to login"
-" now?"
+"يجب أن يكون لديك حساب لتتمكن من حفظ برنامجك. هل ترغب بتسجيل الدخول الآن؟"
 
 #: website/programs.py:60
-#, fuzzy
 msgid "overwrite_warning"
 msgstr ""
-"You already have a program with this name, saving this program will "
-"overwrite the old one. Are you sure?"
+"لديك برنامج بهذا اإسم بالفعل، سيؤدي حفظ هذا البرنامج إلى استبدال البرنامج "
+"القديم. هل أنت متأكد؟"
 
 #: website/programs.py:87
-#, fuzzy
 msgid "save_parse_warning"
-msgstr "This program contains an error, are you sure you want to save it?"
+msgstr "هذا البرنامج يحتوي على خطأ، هل أنت متأكد أنك تريد حفظه؟"
 
 #: website/programs.py:131 website/programs.py:132
-#, fuzzy
 msgid "save_success_detail"
-msgstr "Program saved successfully."
+msgstr "تم حفظ البرنامج بنجاح."
 
 #: website/programs.py:160
-#, fuzzy
 msgid "share_success_detail"
-msgstr "Program shared successfully."
+msgstr "تم مشاركة البرنامج بنجاح."
 
 #: website/programs.py:162
-#, fuzzy
 msgid "unshare_success_detail"
-msgstr "Program unshared successfully."
+msgstr "تم التراجع عن مشاركة البرنامج بنجاح."
 
 #: website/programs.py:202
-#, fuzzy
 msgid "favourite_success"
-msgstr "Your program is set as favourite."
+msgstr "تم ضبط البرنامج كمفضل."
 
 #: website/statistics.py:37 website/teacher.py:27 website/teacher.py:35
 #: website/teacher.py:210 website/teacher.py:232 website/teacher.py:244
 #: website/teacher.py:311 website/teacher.py:350
-#, fuzzy
 msgid "retrieve_class_error"
-msgstr "Only teachers can retrieve classes"
+msgstr "يمكن للمعلمين فقط استرجاع الصفوف"
 
 #: website/statistics.py:41 website/teacher.py:38 website/teacher.py:132
 #: website/teacher.py:151 website/teacher.py:213 website/teacher.py:235
 #: website/teacher.py:247 website/teacher.py:314 website/teacher.py:353
-#, fuzzy
 msgid "no_such_class"
-msgstr "No such Hedy class"
+msgstr "لا وجود لهذا الصف في هيدي"
 
 #: website/statistics.py:45
-#, fuzzy
 msgid "title_class statistics"
-msgstr "My statistics"
+msgstr "احصائياتي"
 
 #: website/teacher.py:75
-#, fuzzy
 msgid "title_class-overview"
-msgstr "Hedy - Class overview"
+msgstr "هيدي - نظرة عامة على الصف"
 
 #: website/teacher.py:84
-#, fuzzy
 msgid "only_teacher_create_class"
-msgstr "Only teachers are allowed to create classes!"
+msgstr "يمكن للمعلمين فقط انشاء صفوف!"
 
 #: website/teacher.py:91 website/teacher.py:126
-#, fuzzy
 msgid "class_name_invalid"
-msgstr "This class name is invalid."
+msgstr "اسم هذا الصف غير صالح."
 
 #: website/teacher.py:93 website/teacher.py:128
-#, fuzzy
 msgid "class_name_empty"
-msgstr "You didn't enter a class name!"
+msgstr "لم تدخل اسم الصف!"
 
 #: website/teacher.py:99
-#, fuzzy
 msgid "class_name_duplicate"
-msgstr "You already have a class with this name."
+msgstr "لديك بالفعل صف بهذا الإسم."
 
 #: website/teacher.py:163 website/teacher.py:179 website/teacher.py:532
-#, fuzzy
 msgid "invalid_class_link"
-msgstr "Invalid link for joining the class."
+msgstr "رابط الانضمام للصف غير صالح."
 
 #: website/teacher.py:167 website/teacher.py:169
-#, fuzzy
 msgid "title_join-class"
-msgstr "Hedy - Join class"
+msgstr "هيدي - انضم الى صف"
 
 #: website/teacher.py:223
-#, fuzzy
 msgid "title_customize-class"
-msgstr "Hedy - Customize class"
+msgstr "هيدي - تخصيص صف"
 
 #: website/teacher.py:238
-#, fuzzy
 msgid "customization_deleted"
-msgstr "Customizations successfully deleted."
+msgstr "تم حذف التخصيصات بنجاح."
 
 #: website/teacher.py:291
-#, fuzzy
 msgid "class_customize_success"
-msgstr "Class successfully customized."
+msgstr "تم انشاء التخصيصات للصف بنجاح."
 
 #: website/teacher.py:305
-#, fuzzy
 msgid "username_empty"
-msgstr "You didn't enter an username!"
+msgstr "لم تدخل اسم المستخدم!"
 
 #: website/teacher.py:318
-#, fuzzy
 msgid "student_not_existing"
-msgstr "This username doesn't exist."
+msgstr "اسم المستخدم غير موجود."
 
 #: website/teacher.py:320
-#, fuzzy
 msgid "student_already_in_class"
-msgstr "This student is already in your class."
+msgstr "هذا التلميذ بالفعل موجود في الصف الخاص بك."
 
 #: website/teacher.py:322
-#, fuzzy
 msgid "student_already_invite"
-msgstr "This student already has a pending invitation."
+msgstr "هذا التلميذ بالفعل لديه دعوة قيد الإنتظار."
 
 #: website/teacher.py:381
-#, fuzzy
 msgid "no_accounts"
-msgstr "There are no accounts to create."
+msgstr "لا يوجد حسابات ليتم انشاءها."
 
 #: website/teacher.py:391
-#, fuzzy
 msgid "unique_usernames"
-msgstr "All usernames need to be unique."
+msgstr "يجب أن تكون جميع أسماء المستخدمين لا نظير لها."
 
 #: website/teacher.py:400
-#, fuzzy
 msgid "usernames_exist"
-msgstr "One or more usernames is already in use."
+msgstr "اسم مستخدم واحد أو أكثر قيد الاستخدام بالفعل."
 
 #: website/teacher.py:411
-#, fuzzy
 msgid "accounts_created"
-msgstr "Accounts where successfully created."
+msgstr "تم إنشاء الحسابات بنجاح."
 
 #: website/teacher.py:417 website/teacher.py:422 website/teacher.py:433
 #: website/teacher.py:462 website/teacher.py:488
-#, fuzzy
 msgid "retrieve_adventure_error"
-msgstr "You're not allowed to view this adventure!"
+msgstr "لا يسمح لك بمعاينة هذه المغامرة!"
 
 #: website/teacher.py:427
-#, fuzzy
 msgid "title_view-adventure"
-msgstr "Hedy - View adventure"
+msgstr "هيدي - معاينة مغامرة"
 
 #: website/teacher.py:438
-#, fuzzy
 msgid "title_customize-adventure"
-msgstr "Hedy - Customize adventure"
+msgstr "هيدي - تخصيص مغامرة"
 
 #: website/teacher.py:449
-#, fuzzy
 msgid "adventure_id_invalid"
-msgstr "This adventure id is invalid."
+msgstr "رمز المغامرة هذا غير صالح."
 
 #: website/teacher.py:451 website/teacher.py:507
-#, fuzzy
 msgid "adventure_name_invalid"
-msgstr "This adventure name is invalid."
+msgstr "اسم المغامرة غير صالح."
 
 #: website/teacher.py:453
-#, fuzzy
 msgid "level_invalid"
-msgstr "This Hedy level in invalid."
+msgstr "هذا المستوى من هيدي غير صحيح."
 
 #: website/teacher.py:455
-#, fuzzy
 msgid "content_invalid"
-msgstr "This adventure is invalid."
+msgstr "هذه المغامرة غير صالحة"
 
 #: website/teacher.py:457
-#, fuzzy
 msgid "adventure_length"
-msgstr "Your adventure has to be at least 20 characters."
+msgstr "المغامرة يجب أن تحتوي على ٢٠ حرفاً على الأقل."
 
 #: website/teacher.py:459
-#, fuzzy
 msgid "public_invalid"
-msgstr "This agreement selection is invalid"
+msgstr "اختيار الاتفاقية هذا غير صالح"
 
 #: website/teacher.py:470 website/teacher.py:514
-#, fuzzy
 msgid "adventure_duplicate"
-msgstr "You already have an adventure with this name."
+msgstr "لديك بالفعل مغامرة بنفس هذا الإسم."
 
 #: website/teacher.py:482
-#, fuzzy
 msgid "adventure_updated"
-msgstr "The adventure has been updated!"
+msgstr "تم تحديث المغامرة!"
 
 #: website/teacher.py:509
-#, fuzzy
 msgid "adventure_empty"
-msgstr "You didn't enter an adventure name!"
+msgstr "لم تدخل اسم المغامرة!"
 
 #~ msgid "set_preferred_lang"
 #~ msgstr ""
