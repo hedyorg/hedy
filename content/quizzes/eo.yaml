@@ -12,7 +12,7 @@ levels:
             -   option: Heidi
                 feedback: Not this one!
             correct_answer: A
-            hint: It's named after Hedy Lamarr.
+            hint: Ĝi estas nomita laŭ Hedy Lamarr.
             question_score: '10'
         2:
             question_text: Which command makes text appear?
@@ -21,23 +21,23 @@ levels:
                 feedback: '`{echo}` repeats a given answer.'
             -   option: "```\n{print}\n```"
                 feedback: Ĝuste!
-            -   option: "```\nhello\n```\n"
-                feedback: Hello isn't a command.
+            -   option: "```\nsaluton\n```\n"
+                feedback: '`saluton` ne estas komando.'
             -   option: "```\n{ask}\n```\n"
                 feedback: With `{ask}`, you can ask a question.
             correct_answer: B
-            hint: _?_ Hello world!
+            hint: _?_ Saluton mondo!
             question_score: '10'
         3:
             question_text: How do you ask what someone's favorite color is?
             mp_choice_options:
-            -   option: "```\n{print} What is your favorite color?\n```\n"
+            -   option: "```\n{print} Kio estas via plej ŝatata koloro?\n```\n"
                 feedback: "`{print}` prints text, but it doesn't ask questions."
-            -   option: "```\n{ask} {print} What is your favorite color?\n```\n"
-                feedback: You only need one command, not two.
-            -   option: "```\n{ask} What is your favorite color?\n```\n"
+            -   option: "```\n{ask} {print} Kio estas via plej ŝatata koloro?\n```\n"
+                feedback: Vi bezonas nur unu komandon, ne du.
+            -   option: "```\n{ask} Kio estas via plej ŝatata koloro?\n```\n"
                 feedback: Bonege!
-            -   option: "```\n{echo} What is your favorite color?\n```\n"
+            -   option: "```\n{echo} Kio estas via plej ŝatata koloro?\n```\n"
                 feedback: '`{echo}` repeats your answer back to you.'
             correct_answer: C
             hint: You can ask something with the `{ask}` command
@@ -46,13 +46,13 @@ levels:
             question_text: What is wrong with this code?
             code: "Hi Im Hedy!\n{ask} Who are you?\n{echo} Hi..."
             mp_choice_options:
-            -   option: '`{print}` in line 1 is missing.'
+            -   option: '`{print}` en linio 1 mankas.'
                 feedback: Ĝuste!
             -   option: Im in line 1 is spelled wrong.
                 feedback: Im is spelled wrong on purpose; Hedy doesn't understand the apostrophes yet.
             -   option: "`{echo}` ne estas komando."
                 feedback: "`{echo}` is a command, there's another mistake."
-            -   option: Nothing! This is a perfect code!
+            -   option: Nenio! Jen perfekta kodo!
                 feedback: Wrong, look carefully!
             correct_answer: A
             hint: Line 1 doesn't seem right
@@ -64,7 +64,7 @@ levels:
             -   option: "```\n{print}\n```\n"
                 feedback: No, you would like the answer to be repeated back to you.
             -   option: "```\nHedy\n```\n"
-                feedback: Hedy isn't a command.
+                feedback: '`Hedy` ne estas komando.'
             -   option: "```\n{ask}\n```\n"
                 feedback: With `{ask}` you can ask a question.
             -   option: "```\n{echo}\n```\n"
@@ -73,7 +73,7 @@ levels:
             hint: You want to see the answer at the end of line 2...
             question_score: '10'
         6:
-            question_text: What's wrong with this code?
+            question_text: Kio estas malĝusta pri la jena kodo?
             code: "{print} Hi im Hedy!\n{print} Which football team do you support?\n{echo} You support...\n{print} Cool! Me too!"
             mp_choice_options:
             -   option: In line 1 `{print}` should be replaced with `{ask}`.
@@ -88,7 +88,7 @@ levels:
             hint: Check the `{print}` commands.
             question_score: '10'
         7:
-            question_text: What's wrong with this code?
+            question_text: Kio estas malĝusta pri la jena kodo?
             code: "{print} Welcome at Hedys restaurant!\n{ask} What would you like to eat?\n{echo} So you want to order ...\n{print} Coming right up! Enjoy!"
             mp_choice_options:
             -   option: In line 1 `{print}` needs to be replaced with `{ask}`
@@ -97,13 +97,13 @@ levels:
                 feedback: Are you sure something's wrong?
             -   option: In line 3 `{echo}` needs to be replaced with `{print}`
                 feedback: Are you sure something is wrong?
-            -   option: Nothing! This is a perfect code!
+            -   option: Nenio! Jen perfekta kodo!
                 feedback: Ĝuste!
             correct_answer: D
             hint: Check the code line by line
             question_score: '10'
         8:
-            question_text: How do you use the `{echo}` command?
+            question_text: Kial uzi la komandon `{echo}`?
             mp_choice_options:
             -   option: You can use it to `{ask}` a question.
                 feedback: That's what `{ask}` is for!
@@ -117,13 +117,13 @@ levels:
             hint: '`{echo}` is used after an `{ask}` command.'
             question_score: '10'
         9:
-            question_text: What's wrong with this code?
+            question_text: Kio estas malĝusta pri la jena kodo?
             code: "{print} Hello!\n{print} How are you doing?\n{echo} So you are doing..."
             mp_choice_options:
-            -   option: '`{print}` in line 1 should be `{ask}`'
+            -   option: '`{print}` en linio 1 estu `{ask}`'
                 feedback: No, `{print}` is right. Where is the question being asked?
             -   option: '`{print}` in line 2 should be `{ask}`'
-                feedback: Super!
+                feedback: Bonege!
             -   option: '`{echo}` in line 3 should be `{ask}`'
                 feedback: No, `{echo}` is right. Where is the question being asked?
             -   option: Nothing. This is a perfect code!
@@ -132,19 +132,19 @@ levels:
             hint: '`{ask}` allows you to ask a question'
             question_score: '10'
         10:
-            question_text: Are you ready for level 2?
+            question_text: Ĉu vi pretas por nivelo 2?
             mp_choice_options:
-            -   option: Yes!
+            -   option: Jes!
                 feedback: Bonege! Let's go to the next level!
-            -   option: No
+            -   option: Ne
                 feedback: What a shame... You can practice some more in level 1!
             correct_answer: A
-            hint: Let's go!
+            hint: Ek!
             question_score: '10'
     3:
         2:
             correct_answer: A
-            question_text: What's wrong with this code?
+            question_text: Kio estas malĝusta pri la jena kodo?
             code: "animals {is} dog cat cow\n{print} animals {at} {random}"
             mp_choice_options:
             -   option: 'You need commas in line 1: dog, cat, cow.'
@@ -172,7 +172,7 @@ levels:
             hint: Arbitrarily means without a plan or randomly.
             question_score: '10'
         3:
-            question_text: What's wrong in line 2 of this code?
+            question_text: Kio estas malĝusta en linio 2 de la jena kodo?
             code: "options {is} rock, paper, scissors\n{print} rock, paper, scissors {at} {random}"
             mp_choice_options:
             -   option: "```\n{at} {random} {print} options\n```\n"
@@ -217,13 +217,13 @@ levels:
             hint: Does this code even have a mistake?
             question_score: '10'
         6:
-            question_text: What's wrong with this code?
+            question_text: Kio estas malĝusta pri la jena kodo?
             code: "question {is} {ask} What do you want to know?\nanswers yes, no, maybe\n{print} answers {at} {random}"
             mp_choice_options:
             -   option: Line 2 needs to say question instead of answers
                 feedback: No that's not right
             -   option: Line 2 needs the `{is}` command
-                feedback: Correct
+                feedback: Ĝuste
             -   option: Line 3 needs to say answer instead of answers
                 feedback: No the variable's called answers
             -   option: Nothing! This code is great!
@@ -262,7 +262,7 @@ levels:
             hint: There are 3 flavors, bit 2 are removed. Which one remains?
             question_score: '10'
         9:
-            question_text: What's wrong with this code?
+            question_text: Kio estas malĝusta pri la jena kodo?
             code: "colors {is} blue, purple, green\nchosen_color {is} {ask} Which haircolor wouldn't your like to have?\n{remove} chosen_color {from} colors\n{print} I will dye my hair color {at} {random}"
             mp_choice_options:
             -   option: 'Line 3 should say: `{remove}` blue `{from}` colors'
@@ -281,7 +281,7 @@ levels:
             code: "walkers {is} dad, mom, Sam, Petra\nwalked_yesterday {is} {ask} Who walked the dogs yesterday?\n{print} walked_yesterday shouldn't have to walk the dogs again today\n_?_\n{print} walkers {at} {random} , it's your turn to walk the dogs!"
             mp_choice_options:
             -   option: "```\n{remove} walked_yesterday {from} walkers\n```\n"
-                feedback: Super!
+                feedback: Bonege!
             -   option: "```\n{remove} walked yesterday {to} walkers\n```\n"
                 feedback: '`{remove} {from}` or `{add} {to}`, not `{remove} {to}`'
             -   option: "```\n{remove} walkers {from} yesterday\n```\n"
@@ -300,17 +300,17 @@ levels:
             -   option: In level 2 the `{ask}` command doesn't exist anymore
                 feedback: '`{ask}` still works!'
             -   option: In level 2 the `{echo}` command doesn't exist anymore
-                feedback: Good
+                feedback: Bone
             -   option: In level 2 all the level 1 commands still work
                 feedback: No one command doesn't work anymore.
             correct_answer: C
-            hint: '`{print}` and `{ask}` still exist.'
+            hint: '`{print}` kaj `{ask}` ankoraŭ ekzistas.'
             question_score: '10'
         2:
             question_text: Which code is correct?
             mp_choice_options:
             -   option: "```\nname {is} {ask} What is your name?\n```\n"
-                feedback: Super!
+                feedback: Bonege!
             -   option: "```\n{ask} {is} name What is your name\n```\n"
                 feedback: The words are right, the order is not!
             -   option: "```\n{ask} What is your name?\n```\n"
@@ -370,7 +370,7 @@ levels:
             code: "{print} And the award for best programming language goes to...\n_?_\n{print} Hedy!"
             mp_choice_options:
             -   option: "```\n{sleep}\n```\n"
-                feedback: Perfect!
+                feedback: Perfekte!
             -   option: "```\n{echo}\n```\n"
                 feedback: There is nothing to repeat back here
             -   option: "```\n{print}\n```\n"
@@ -387,7 +387,7 @@ levels:
             -   option: "```\n{print} 3\n```\n"
                 feedback: You don't need to `{print}`
             -   option: "```\n{sleep} 3\n```\n"
-                feedback: Perfect!
+                feedback: Perfekte!
             -   option: "```\n{sleep}\n```\n"
                 feedback: This way the bomb will explode in 1 second
             -   option: "```\n{sleep} {sleep} {sleep}\n```\n"
@@ -443,7 +443,7 @@ levels:
     10:
         9:
             mp_choice_options:
-            -   feedback: Perfect!
+            -   feedback: Perfekte!
                 option: Timon, what would you like to eat as your appetizer?
             -   option: Onno, what would you like to eat as your appetizer?
                 feedback: Timon is first on the list!
@@ -488,15 +488,15 @@ levels:
             question_score: '10'
         2:
             question_text: Which output is correct?
-            code: "meals = pizza, pasta, pancakes\n{for} meal {in} meals\n    {print} 'I love ' meal"
+            code: "manĝaĵoj = pico, pastaĵoj, patkuko\n{for} manĝaĵo {in} manĝaĵoj\n    {print} meal ' plaĉas al mi'"
             mp_choice_options:
-            -   option: I love pizza
+            -   option: pico plaĉas al mi
                 feedback: Line 2 says `{for}` each meal in the list of meals. So each meal is printed.
-            -   option: I love pasta
+            -   option: pastaĵoj plaĉas al mi
                 feedback: Line 2 says `{for}` each meal in the list of meals. So each meal is printed.
-            -   option: I love pancakes
+            -   option: patkuko plaĉas al mi
                 feedback: Line 2 says `{for}` each meal in the list of meals. So each meal is printed.
-            -   option: "I love pizza\nI love pasta\nI love pancakes"
+            -   option: "pico plaĉas al mi\npastaĵoj plaĉas al mi\npatkuko plaĉas al mi"
                 feedback: Bonege!
             correct_answer: D
             hint: Line 2 says for each meal in the list of meals. So each meal is printed.
@@ -517,7 +517,7 @@ levels:
             hint: Line 2 says {for} each animal in the list of animals. So each animal is printed
             question_score: '10'
         4:
-            question_text: What's wrong with this code?
+            question_text: Kio estas malĝusta pri la jena kodo?
             code: "groceries = apples, bread, milk\n{for} item {in} groceries\n    {print} 'We need ' groceries"
             mp_choice_options:
             -   option: Line 2 needs to start with 4 spaces as indentation
@@ -542,9 +542,9 @@ levels:
             -   option: choice
                 feedback: You are very close. But you need Hedy to pick from the list called 'choices' not 'choice'...
             -   option: dice
-                feedback: Look at the names of the variables.
+                feedback: Rigardu la nomojn de la variabloj.
             correct_answer: B
-            hint: Hedy needs to pick a number `{at} {random}`
+            hint: Hedy bezonas elekti nombron `{at} {random}`
             question_score: '10'
         6:
             question_text: Which of the answers below is a possible outcome when you run the code?
@@ -557,21 +557,21 @@ levels:
             -   option: Meredith chooses paper
                 feedback: Kelly wants to play too!
             -   option: "Kelly chooses paper\nMeredith chooses scissors"
-                feedback: Amazing!
+                feedback: Mirinde!
             correct_answer: D
             hint: Each player will pick an option. The player that's first on the list will go first.
             question_score: '10'
         7:
             question_text: What line should be on the _?_ in this code that decides what these people will have for dinner?
-            code: "names = Ron, Leslie, April, Andy\nfood = pasta, fries, salad\n_?_\n    {print} name ' has to eat ' food {at} {random} ' for dinner'"
+            code: "nomoj = Ron, Leslie, April, Andy\nmanĝaĵo = pastaĵoj, terpomfritoj, salato\n_?_\n    {print} nomo ' devas manĝi ' manĝaĵo {at} {random} ' por vespermanĝo'"
             mp_choice_options:
-            -   option: "```\n{for} name {in} names\n```\n"
+            -   option: "```\n{for} nomo {in} nomoj\n```\n"
                 feedback: You are on fire!
-            -   option: "```\n{for} names {in} name\n```\n"
+            -   option: "```\n{for} nomoj {in} nomo\n```\n"
                 feedback: No it should be for each name in the list nameS, so the other way around
-            -   option: "```\n{for} food {in} food\n```\n"
+            -   option: "```\n{for} manĝaĵo {in} manĝaĵo\n```\n"
                 feedback: Each name should be told what they will have for dinner.
-            -   option: "```\n{for} name {in} food\n```\n"
+            -   option: "```\n{for} nomo {in} manĝaĵo\n```\n"
                 feedback: Each name should be told what they will have for dinner.
             correct_answer: A
             hint: Each name should be told what they will have for dinner.
@@ -612,7 +612,7 @@ levels:
             -   option: "```\n{print} `hello`\n```\n"
                 feedback: This quotation mark is skewed, you need a straight one.
             -   option: "```\n{print} 'hello'\n```\n"
-                feedback: Correct
+                feedback: Ĝuste
             -   option: "```\n{print} hello\n```\n"
                 feedback: There are no quotation marks here!.
             -   option: "```\n{print} ,hello,\n```\n"
@@ -630,7 +630,7 @@ levels:
             -   option: "```\n'{print} Hi Im Hedy'\n```\n"
                 feedback: The first quotation mark should be behind the word {print}
             -   option: "```\n{print} 'Hi Im Hedy'\n```\n"
-                feedback: Perfect!
+                feedback: Perfekte!
             correct_answer: D
             hint: Both before and after the words you want to print should be a quotation mark.
             question_score: '10'
@@ -640,7 +640,7 @@ levels:
             -   option: "You need quotation marks around the word `{print}`, like this: `'{print}'`."
                 feedback: The quotation marks shouldn't be around the command itself.
             -   option: You need quotation marks around the words you want to print.
-                feedback: Super!
+                feedback: Bonege!
             -   option: You do not need quotation marks when using the `{ask}` command
                 feedback: Both `{print}` and `{ask}` require quotation marks
             -   option: You can choose yourself whether to use quotation marks or not.
@@ -679,7 +679,7 @@ levels:
             hint: 'Think carefully: what is a variable and should be outside of the quotation marks? And what are normal words that should be inside?.'
             question_score: '10'
         7:
-            question_text: What's wrong with this code?
+            question_text: Kio estas malĝusta pri la jena kodo?
             code: "question {is} {ask} What do you want to know?\nanswers {is} yes, no, maybe\n{print} answers {at} {random}"
             mp_choice_options:
             -   option: Quotation marks are missing in line 1
@@ -702,7 +702,7 @@ levels:
             -   option: "```\n{print} 'So you pick ' door door\n```\n"
                 feedback: If the player chooses door 3, Hedy will say 'So you pick 3 3
             -   option: "```\n{print} 'So you pick door ' door\n```\n"
-                feedback: Super!
+                feedback: Bonege!
             -   option: "```\n{print} 'So you pick door door'\n```\n"
                 feedback: Hedy will literally print 'So you pick door door
             correct_answer: C
@@ -730,7 +730,7 @@ levels:
             -   option: Quotation marks are missing in line 1
                 feedback: A list doesn't need quotation marks
             -   option: Quotation marks are missing in line 2
-                feedback: Correct
+                feedback: Ĝuste
             -   option: Quotation marks are missing in both line 2 and 3
                 feedback: Line 3 doesn't need quotation marks because it's not printed literally
             -   option: Nothing, this code has no mistakes
@@ -926,7 +926,7 @@ levels:
             -   option: '30'
                 feedback: This would be the right answer if there were no quotation marks.
             -   option: '13'
-                feedback: Try again..
+                feedback: Reprovu..
             -   option: 3*10
                 feedback: Ĝuste! There are quotation marks, so Hedy will print it literally.
             -   option: Nothing, Hedy will give an error message.
@@ -1031,7 +1031,7 @@ levels:
             -   option: You can only fill in the word is on the `_?_`
                 feedback: You are allowed to use the `=` sign as well
             -   option: You can fill in either the word is or the `=` sign on the `_?_`
-                feedback: Amazing!
+                feedback: Mirinde!
             -   option: You have to fill in =is= on the `_?_`
                 feedback: No, one `=` sign is enough
             -   option: You can only use the `=` sign when working with numbers, not with words.
@@ -1120,7 +1120,7 @@ levels:
             -   option: "the wheels on the bus go\nround and round\nthe wheels on the bus go\nround and round\nthe wheels on the bus go\nround and round"
                 feedback: Only the second line is repeated 3 times
             -   option: "the wheels on the bus go\nround and round\nround and round\nround and round"
-                feedback: All though the town! Perfect!
+                feedback: All though the town! Perfekte!
             correct_answer: D
             hint: Only 'round and round' is repeated 3 times.
             question_score: '10'
@@ -1429,13 +1429,13 @@ levels:
             code: "{if} food {is} pizza\n{if} size {is} medium\n{if} drink {is} coke\nprice = price - 2"
             mp_choice_options:
             -   option: "```\n{if} food {is} pizza\n    {if} size {is} medium\n        {if} drink {is} coke\n            price = price - 2\n```\n"
-                feedback: Amazing!
+                feedback: Mirinde!
             -   option: "```\n{if} food {is} pizza\n    {if} size {is} medium\n{if} drink {is} coke\n    price = price - 2\n```\n"
-                feedback: Try again!
+                feedback: Reprovu!
             -   option: "```\n{if} food {is} pizza\n{if} size {is} medium\n{if} drink {is} coke\n        price = price - 2\n```\n"
-                feedback: Try again
+                feedback: Reprovu
             -   option: "```\n{if} food {is} pizza\n    {if} size {is} medium\n        {if} drink {is} coke\n        price = price - 2\n```\n"
-                feedback: Try again
+                feedback: Reprovu
             correct_answer: A
             hint: After each `{if}` command, the line below should indent
             question_score: '10'
@@ -1530,7 +1530,7 @@ levels:
             hint: It has to be a calculation...
             question_score: '10'
         4:
-            question_text: What's wrong with this code?
+            question_text: Kio estas malĝusta pri la jena kodo?
             code: "{for} i {in} {range} 1 {to} 10\n{print} i"
             mp_choice_options:
             -   option: The i in the last line need quotation marks
@@ -1540,7 +1540,7 @@ levels:
             -   option: Line 1 needs to start with an indention.
                 feedback: Not line 1...
             -   option: Line 2 needs to start with an indention
-                feedback: Perfect!
+                feedback: Perfekte!
             correct_answer: D
             hint: There is something wrong with the indention
             question_score: '10'
@@ -1598,7 +1598,7 @@ levels:
             -   option: 23 hi 24 hi 25 hi
                 feedback: The numbers don't appear. It doesn't say `{print}` i
             -   option: "hi\nhi\nhi"
-                feedback: Correct
+                feedback: Ĝuste
             -   option: The word 'hi' will appear 25 times in a row.
                 feedback: No it will only appear 3 times.
             correct_answer: C
@@ -1608,14 +1608,14 @@ levels:
             question_text: How many times does Hedy chant Hip Hip Hooray?
             code: "age = {ask} 'How old are you?'\n{for} i {in} {range} 1 {to} age\n    {print} 'Hip Hip Hoorray!'"
             mp_choice_options:
-            -   option: 1 time
-                feedback: Try again
-            -   option: 2 times
-                feedback: Try again
-            -   option: Never
-                feedback: Try again
-            -   option: That depends on how old you are
-                feedback: That's right!
+            -   option: 1 fojon
+                feedback: Reprovu
+            -   option: 2 fojojn
+                feedback: Reprovu
+            -   option: Neniam
+                feedback: Reprovu
+            -   option: Depende de tiom, kiom vi aĝas
+                feedback: Ĝuste!
             correct_answer: D
             hint: '`{for}` i `{in}` `{range}` 1 `{to}` age'
             question_score: '10'
