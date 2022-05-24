@@ -40,11 +40,15 @@ def routes(app, database):
         keyword_language = None if keyword_language == "null" else keyword_language
 
         filtering = False
-        if substring or start_date or end_date or language or keyword_language or category == "all":
+        if substring or start_date or end_date or language or keyword_language:
             filtering = True
 
         # After hitting 1k users, it'd be wise to add pagination.
-        users = DATABASE.all_users(filtering)
+        if filtering or category == "all":
+            users = DATABASE.all_users(True)
+        else:
+            users = DATABASE.all_users(False)
+
         userdata = []
         fields = [
             'username', 'email', 'birth_year', 'country',
