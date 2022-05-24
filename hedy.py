@@ -2292,6 +2292,10 @@ def transpile_inner(input_string, level, lang="en"):
 
         lookup_table = create_lookup_table(abstract_syntax_tree, level, lang, input_string)
 
+        # FH, may 2022. for now, we just out arabic numerals when the language is ar
+        # this can be changed into a profile setting or could be detected
+        # in usage of programs
+
         if lang == "ar":
             numerals_language = "Arabic"
         else:
