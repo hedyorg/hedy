@@ -588,10 +588,7 @@ class TestsLevel6(HedyTester):
         expected = textwrap.dedent("""\
             print(f'٥ ضرب ٥ يساوي {convert_numerals("Arabic",int(5) * int(5))}')""")
 
-        output = '٥ ضرب ٥ يساوي ٢' # this misses the final 0 cause recursion does not
-        # work properly in exec that we use in testing.
-        # It does work in prod/Skulpt and will show this:
-        # ٥ ضرب ٥ تساوي ٢٥
+        output = '٥ ضرب ٥ يساوي ٢٥'
 
         self.multi_level_tester(
             max_level=11,

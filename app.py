@@ -126,17 +126,20 @@ NORMAL_PREFIX_CODE = textwrap.dedent("""\
         'Urdu': ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹']}
     
       numerals_list = numerals_dict_return[alphabet]
+      number=str(number)
+      
       if number.isnumeric():
+        number = int(number)
         numerals_list = numerals_dict_return[alphabet]
         if number <= 9:
           return numerals_list[number]
         else:
           last_digit = number // 10
           rest = number % 10
-          return numerals_list[last_digit]
+          return numerals_list[last_digit] + convert_numerals(alphabet, rest)
       else:
         return number
-    """)
+        """)
 
 
 def load_parsons_per_level(level):
