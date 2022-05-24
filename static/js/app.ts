@@ -869,9 +869,7 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
   } else {
     // Otherwise make sure that it is shown as it might be hidden from a previous code execution.
     $('#turtlecanvas').show();
-    console.log(code);
-    console.log(turtle_prefix + code);
-    //code = turtle_prefix + code
+    code = turtle_prefix + code
   }
 
   Sk.configure({
