@@ -1595,8 +1595,9 @@ function adjustLines(disabledRow: []) {
 }
 
 function debugRun() {
-  if (window.State.level != null && window.State.lang != null) {
-    runit(window.State.level, window.State.lang, "", function () {
+  let language = window.State.lang ?? window.State.keyword_language;
+  if (window.State.level != null && language != null) {
+    runit(window.State.level, language, "", function () {
       $('#output').focus();
     });
   }

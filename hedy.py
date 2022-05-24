@@ -1100,7 +1100,12 @@ class ConvertToPython(Transformer):
         # this function checks whether arguments are valid
         # we can proceed if all arguments are either quoted OR all variables
 
-        args_to_process = [a for a in args if not isinstance(a, Tree)]#we do not check trees (calcs) they are always ok
+        def is_var_candidate(arg) -> bool:
+            return not isinstance(arg, Tree) and \
+                    not ConvertToPython.is_int(arg) and \
+                    not ConvertToPython.is_float(arg)
+
+        args_to_process = [a for a in args if is_var_candidate(a)]#we do not check trees (calcs) they are always ok
 
         unquoted_args = [a for a in args_to_process if not ConvertToPython.is_quoted(a)]
         unquoted_in_lookup = [self.is_variable(a) for a in unquoted_args]
