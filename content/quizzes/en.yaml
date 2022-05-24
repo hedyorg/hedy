@@ -1470,7 +1470,7 @@ levels:
                     {print} 'Help !'
                     {repeat} 3 {times} {print} 'Please help me !'
                     ```
-                feedback: "Je herhaalt de verkeerde regel"
+                feedback: "Your repeated line is incorrect."
             -   option: |
                     ```
                     {print} 'Batman was flying through Gotham.'
@@ -1478,7 +1478,7 @@ levels:
                     {repeat} 3 {times} 'Help !'
                     {print} 'Please help me !'
                     ```
-                feedback: "Het commando `{print}` mist op regel 3"
+                feedback: "The `{print}` command is missing on line 3."
             -   option: |
                     ```
                     {print} Batman was flying through Gotham.
@@ -1486,7 +1486,7 @@ levels:
                     {repeat} 3 {times} {print} Help !
                     {print} Please help me !
                     ```
-                feedback: "Je vergeet de aanhalingstekens"
+                feedback: "You're missing the quotation marks"
             -   option: |
                     ```
                     {print} 'Batman was flying through Gotham.'
@@ -1496,7 +1496,7 @@ levels:
                     ```
                 feedback: "Perfect"
             question_score: '10'
-            hint: "'Help !' wordt 3x herhaald."
+            hint: "'Help !' is repeated 3 times."
             correct_answer: "D"
         10:
             question_text: "What Hedy code belongs to this output?"
