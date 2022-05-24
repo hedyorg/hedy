@@ -41,7 +41,7 @@
                             <pre class="no-copy-button" level="{{ level_source }}">{{correct_option.option|commonmark}}</pre>
                         </div>
                     {% else %}
-                        <div class="pt-8 px-2 mx-auto mb-2 text-lg">{{ correct_option.option }}</div>
+                        <div class="pt-8 px-2 mx-auto mb-2 text-lg">{% if correct_option|length < 2 %}{{ correct_option.option }}{% else %}{{ correct_option.option|commonmark }}{% endif %}</div>
                     {% endif %}
                 </div>
             </div>
