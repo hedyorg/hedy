@@ -1180,7 +1180,6 @@ def explore():
             'code': "\n".join(program['code'].split("\n")[:4])
         })
 
-    print(hedy_choices)
     adventures_names = hedy_content.Adventures(session['lang']).get_adventure_names()
 
     return render_template('explore.html', programs=filtered_programs, favourite_programs=hedy_choices,
