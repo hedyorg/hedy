@@ -885,10 +885,14 @@ def view_program(id):
     result['public_profile'] = True if DATABASE.get_public_profile_settings(
         result['username']) else None
 
-    # If the language doesn't match the user -> parse the keywords
-    if result.get("lang", "en") not in [g.lang, "en"] and g.lang in ALL_KEYWORD_LANGUAGES:
-        result['code'] = hedy_translation.translate_keywords(result.get(
-            'code'), result.get('lang', 'en'), g.lang, level=int(result.get('level', 1)))
+    code = result['code']
+    if result.get("lang") != "en" and result.get("lang") in ALL_KEYWORD_LANGUAGES.keys():
+        code = hedy_translation.translate_keywords(code, from_lang=result.get('lang'), to_lang="en", level=int(result.get('level', 1)))
+    # If the keyword language is non-English -> parse again to guarantee completely localized keywords
+    if g.keyword_lang != "en":
+        code = hedy_translation.translate_keywords(code, from_lang="en", to_lang=g.keyword_lang, level=int(result.get('level', 1)))
+
+    result['code'] = code
 
     arguments_dict = {}
     arguments_dict['program_id'] = id
