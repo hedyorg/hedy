@@ -1055,12 +1055,6 @@ def main_page(page):
 
     user = current_user()
 
-    if page == 'landing-page':
-        if user['username']:
-            return render_template('landing-page.html', page_title=gettext('title_landing-page'), user=user['username'])
-        else:
-            return utils.error_page(error=403, ui_message=gettext('not_user'))
-
     requested_page = hedyweb.PageTranslations(page)
     if not requested_page.exists():
         abort(404)
@@ -1068,6 +1062,24 @@ def main_page(page):
     main_page_translations = requested_page.get_page_translations(g.lang)
     return render_template('main-page.html', page_title=gettext('title_start'),
                            current_page='start', content=main_page_translations)
+
+
+@app.route('/landing-page/', methods=['GET'], defaults={'first': False})
+@app.route('/landing-page/<first>', methods=['GET'])
+@requires_login
+def landing_page(user, first):
+    username = user['username']
+
+    user_info = DATABASE.get_public_profile_settings(username)
+    user_programs = DATABASE.programs_for_user(username)
+    # Only return the last program of the user
+    if user_programs:
+        user_programs = user_programs[:1][0]
+    user_achievements = DATABASE.progress_by_username(username)
+
+    return render_template('landing-page.html', first_time=True if first else False,
+                           page_title=gettext('title_landing-page'), user=user['username'],
+                           user_info=user_info, program=user_programs, achievements=user_achievements)
 
 
 @app.route('/for-teachers', methods=['GET'])
