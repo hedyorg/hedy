@@ -1570,12 +1570,6 @@ class ConvertToPython_7(ConvertToPython_6):
 @hedy_transpiler(level=8)
 @hedy_transpiler(level=9)
 class ConvertToPython_8_9(ConvertToPython_7):
-    def __init__(self, punctuation_symbols, lookup, numerals_language):
-        # todo FH, may 2022, why do we have another contructor here that does the same
-        # as the one from level 1?
-        self.punctuation_symbols = punctuation_symbols
-        self.lookup = lookup
-        self.numerals_language = numerals_language
 
     def command(self, args):
         return "".join(args)
