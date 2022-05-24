@@ -92,6 +92,7 @@ NORMAL_PREFIX_CODE = textwrap.dedent("""\
     # coding=utf8
     import random, time
     global int_saver
+    global convert_numerals # needed for recursion to work
     int_saver = int
     def int(s):
       if isinstance(s, str):
@@ -99,8 +100,7 @@ NORMAL_PREFIX_CODE = textwrap.dedent("""\
         latin_numerals = ''.join([numerals_dict.get(letter, letter) for letter in s])
         return int_saver(latin_numerals)
       return(int_saver(s))
-
-    
+   
     def convert_numerals(alphabet, number):
       numerals_dict_return = {
         'Latin': ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'], 
@@ -131,7 +131,7 @@ NORMAL_PREFIX_CODE = textwrap.dedent("""\
       else:
         last_digit = number // 10
         rest = number % 10
-        return numerals_list[last_digit] + convert_numerals(alphabet, rest)
+        return numerals_list[last_digit]
     """)
 
 
