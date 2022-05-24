@@ -66,7 +66,7 @@ levels:
             -   option: "```\nHedy\n```\n"
                 feedback: '`Hedy` ne estas komando.'
             -   option: "```\n{ask}\n```\n"
-                feedback: With `{ask}` you can ask a question.
+                feedback: Per `{ask}`, vi povas demandi pri io.
             -   option: "```\n{echo}\n```\n"
                 feedback: Right on!
             correct_answer: D
@@ -77,11 +77,11 @@ levels:
             code: "{print} Hi im Hedy!\n{print} Which football team do you support?\n{echo} You support...\n{print} Cool! Me too!"
             mp_choice_options:
             -   option: In line 1 `{print}` should be replaced with `{ask}`.
-                feedback: '`{print}` in line 1 is correct.'
+                feedback: '`{print}` en linio 1 estas ĝusta.'
             -   option: In line 2, `{print}` should be replaced with `{ask}`.
                 feedback: Bonege! You paid attention!
             -   option: Line 3 has to begin with `{print}` instead of `{echo}`.
-                feedback: '`{echo}` is correct.'
+                feedback: '`{echo}` estas ĝusta.'
             -   option: In line 4, `{print}` is spelled wrong.
                 feedback: No, there is a mistake somewhere else
             correct_answer: B
@@ -476,11 +476,11 @@ levels:
             code: "compliments = perfect, great job, amazing\n_?_\n    {print} compliment"
             mp_choice_options:
             -   option: "```\n{for} each compliment\n```\n"
-                feedback: That's not it
+                feedback: Vi malpravas
             -   option: "```\n{for} compliment {in} compliments\n```\n"
                 feedback: You deserve all those compliments!
             -   option: "```\n{if} compliment {in} compliments\n```\n"
-                feedback: That's not it
+                feedback: Vi malpravas
             -   option: "```\n{for} compliments {in} compliment\n```\n"
                 feedback: Almost there!
             correct_answer: B
@@ -581,7 +581,7 @@ levels:
             code: "names = Donna, Tommy, Ben\ncolors = blue, red, purple\n{for} name {in} names\n    {print} _?_"
             mp_choice_options:
             -   option: "```\n'name gets a color shirt'\n```\n"
-                feedback: That's not it!
+                feedback: Vi malpravas!
             -   option: "```\nname 'gets a ' colors {at} {random} ' shirt'\n```\n"
                 feedback: Great job! This was a hard one!
             -   option: "```\nnames 'gets a ' color {at} {random} ' shirt'\n```\n"
@@ -748,7 +748,7 @@ levels:
             -   option: "```\n{if}\n```\n"
                 feedback: The `{if}` command is used in the line above.
             -   option: "```\n{sleep}\n```\n"
-                feedback: That's not it!
+                feedback: Vi malpravas!
             -   option: "```\n{else}\n```\n"
                 feedback: That's right!
             correct_answer: D
@@ -909,11 +909,11 @@ levels:
             question_text: Which sign do you use for an addition?
             mp_choice_options:
             -   option: '-'
-                feedback: That's not it
+                feedback: Vi malpravas
             -   option: plus
-                feedback: That's not it
+                feedback: Vi malpravas
             -   option: '*'
-                feedback: That's not it
+                feedback: Vi malpravas
             -   option: +
                 feedback: Ĝuste!
             correct_answer: D
@@ -1049,37 +1049,37 @@ levels:
                 feedback: Correct, one line at a time
             -   option: '2'
                 feedback: In this level only one line at a time
-            -   option: infinite
+            -   option: senfine
                 feedback: In this level you can only repeat one line at a time
             correct_answer: B
             hint: You can only repeat 1 line at a time
             question_score: '10'
         2:
-            question_text: Which code is right?
+            question_text: Kiu kodo estas ĝusta?
             mp_choice_options:
-            -   option: "```\n{print} 100 {times} 'hello'\n```\n"
-                feedback: "`{repeat}` 100 `{times}` `{print}` 'hello'"
-            -   option: "```\n{print} {repeat} 100 {times} 'hello'\n```\n"
-                feedback: "{repeat} 100 {times} {print} 'hello'"
-            -   option: "```\n{repeat} 'hello' 100 {times}\n```\n"
-                feedback: "{repeat} 100 {times} {print} 'hello'"
-            -   option: "```\n{repeat} 100 {times} {print} 'hello'\n```\n"
+            -   option: "```\n{print} 100 {times} 'saluton'\n```\n"
+                feedback: "`{repeat}` 100 `{times}` `{print}` 'saluton'"
+            -   option: "```\n{print} {repeat} 100 {times} 'saluton'\n```\n"
+                feedback: "{repeat} 100 {times} {print} 'saluton'"
+            -   option: "```\n{repeat} 'saluton' 100 {times}\n```\n"
+                feedback: "{repeat} 100 {times} {print} 'saluton'"
+            -   option: "```\n{repeat} 100 {times} {print} 'saluton'\n```\n"
                 feedback: That's right!
             correct_answer: D
             hint: First the repeat command, then the `{print}` command
             question_score: '10'
         3:
-            question_text: Is this code right or wrong?
-            code: "{repeat} 100 {times} 'Hello!'"
+            question_text: Ĉu la jena kodo estas ĝusta aŭ ne?
+            code: "{repeat} 100 {times} 'Saluton!'"
             mp_choice_options:
             -   option: Right
-                feedback: No, a word is missing
-            -   option: Wrong, the word `{repeat}` is missing
+                feedback: Ne, vorto mankas
+            -   option: Vi malpravas, la vorto `{repeat}` mankas
                 feedback: The word `{repeat}` is there, another word is missing
-            -   option: Wrong, the word `{times}` is missing
+            -   option: Vi malpravas, la vorto `{times}` mankas
                 feedback: The word `{times}` is there, another word is missing.
-            -   option: Wrong, the word `{print}` is missing
-                feedback: Correct
+            -   option: Vi malpravas, la vorto `{print}` mankas
+                feedback: Ĝuste
             correct_answer: D
             hint: "It should be: `{repeat}` 100 `{times}` `{print}` 'Hello'"
             question_score: '10'
@@ -1099,13 +1099,13 @@ levels:
             hint: I'm is wrong, you can't use apostrophes
             question_score: '10'
         5:
-            question_text: Is this code right or wrong?
+            question_text: Ĉu la jena kodo estas ĝusta aŭ ne?
             code: "{repeat} 100 {times} {print} 'Hedy is awesome!'"
             mp_choice_options:
-            -   option: Correct
-                feedback: That's right!
-            -   option: Wrong
-                feedback: That's not it
+            -   option: Ĝuste
+                feedback: Vi pravas!
+            -   option: Malĝuste
+                feedback: Vi malpravas
             correct_answer: A
             hint: The code is correct!
             question_score: '10'
@@ -1355,11 +1355,11 @@ levels:
             code: "password = {ask} 'What is the password?'\ncorrect_password = Hedy\n{if} password {is} correct_password\n    {repeat} 2 {times}\n        {print} 'Good job!'\n        {print} 'You can use the computer!'\n{else}\n    {print} 'The computer will explode in 5... 4... 3... 2... 1...'"
             mp_choice_options:
             -   option: "Good job! \n Good job!"
-                feedback: That's not it!
+                feedback: Vi malpravas!
             -   option: The computer will explode in 5... 4... 3... 2... 1...
-                feedback: That's not it!
+                feedback: Vi malpravas!
             -   option: "Good job ! \n Good job! \n You can use the computer!"
-                feedback: That's not it!
+                feedback: Vi malpravas!
             -   option: "Good job! \n You can use the computer! \n Good job! \n You can use the computer!"
                 feedback: Ĝuste!
             correct_answer: D
@@ -1491,11 +1491,11 @@ levels:
             -   option: "1\n2\n3"
                 feedback: Ĝuste!
             -   option: 1 2 3
-                feedback: That's not it
+                feedback: Vi malpravas
             -   option: 1, 2, 3
-                feedback: That's not it
+                feedback: Vi malpravas
             -   option: '123'
-                feedback: That's not it
+                feedback: Vi malpravas
             correct_answer: A
             hint: How do the numbers appear in the screen?
             question_score: '10'
