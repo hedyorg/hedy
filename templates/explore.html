@@ -32,7 +32,7 @@
                 </select>
                 <select id="explore_page_language" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded ltr:mr-4 rtl:ml-4">
                     <option disabled selected value="">{{_('language')}}</option>
-                    <option value="{{ current_language().lang}}" {% if filtered_language and filterd_language == current_language().lang %}selected{% endif %}>{{current_language().sym}}</option>
+                    <option value="{{ current_language().lang}}" {% if filtered_lang and filtered_lang == current_language().lang %}selected{% endif %}>{{current_language().sym}}</option>
                     {% for language in other_languages() %}
                         <option value="{{language.lang}}"{% if filtered_lang and filtered_lang == language.lang %}selected{% endif %}>{{language.sym}}</option>
                     {% endfor %}
