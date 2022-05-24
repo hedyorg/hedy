@@ -43,6 +43,8 @@ def routes(app, database):
         if substring or start_date or end_date or language or keyword_language or category == "all":
             filtering = True
 
+        print(filtering)
+
         # After hitting 1k users, it'd be wise to add pagination.
         users = DATABASE.all_users(filtering)
         userdata = []
@@ -78,8 +80,7 @@ def routes(app, database):
 
         return render_template('admin/admin-users.html', users=userdata, page_title=gettext('title_admin'),
                                filter=category, start_date=start_date, end_date=end_date, email_filter=substring,
-                               language_filter=language, keyword_language_filter=keyword_language,
-                               program_count=DATABASE.all_programs_count(), user_count=DATABASE.all_users_count())
+                               language_filter=language, keyword_language_filter=keyword_language)
 
     @app.route('/admin/classes', methods=['GET'])
     @requires_login
