@@ -2292,7 +2292,10 @@ def transpile_inner(input_string, level, lang="en"):
 
         lookup_table = create_lookup_table(abstract_syntax_tree, level, lang, input_string)
 
-        numerals_language = "Latin"
+        if lang == "ar":
+            numerals_language = "Arabic"
+        else:
+            numerals_language = "Latin"
         # grab the right transpiler from the lookup
         convertToPython = TRANSPILER_LOOKUP[level]
         python = convertToPython(punctuation_symbols, lookup_table, numerals_language).transform(abstract_syntax_tree)
