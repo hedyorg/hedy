@@ -221,10 +221,12 @@ class Database:
     def get_all_explore_programs(self):
         return PROGRAMS.get_many({'public': 1}, sort_key='date', limit=48, reverse=True)
 
-    def get_filtered_explore_programs(self, level=None, adventure=None):
+    def get_filtered_explore_programs(self, level=None, adventure=None, language=None):
         programs = PROGRAMS.get_many({'public': 1}, sort_key='date', reverse=True)
         if level:
             programs = [x for x in programs if x.get('level') == int(level)]
+        if language:
+            programs = [x for x in programs if x.get('lang') == language]
         if adventure:
             # If the adventure we filter on is called 'default' -> return all programs WITHOUT an adventure
             if adventure == "default":

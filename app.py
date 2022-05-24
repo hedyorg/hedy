@@ -1119,15 +1119,16 @@ def explore():
 
     level = request.args.get('level', default=None, type=str)
     adventure = request.args.get('adventure', default=None, type=str)
+    language = request.args.get('lang', default=None, type=str)
 
     level = None if level == "null" else level
     adventure = None if adventure == "null" else adventure
+    language = None if language == "null" else language
 
     achievement = None
-    if level or adventure:
-        programs = DATABASE.get_filtered_explore_programs(level, adventure)
-        achievement = ACHIEVEMENTS.add_single_achievement(
-            current_user()['username'], "indiana_jones")
+    if level or adventure or language:
+        programs = DATABASE.get_filtered_explore_programs(level, adventure, language)
+        achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "indiana_jones")
     else:
         programs = DATABASE.get_all_explore_programs()
 
@@ -1186,6 +1187,7 @@ def explore():
                            filtered_level=level,
                            achievement=achievement,
                            filtered_adventure=adventure,
+                           filtered_lang=language,
                            max_level=hedy.HEDY_MAX_LEVEL,
                            adventures_names=adventures_names,
                            page_title=gettext('title_explore'),
