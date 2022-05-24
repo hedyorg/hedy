@@ -1,10 +1,10 @@
 levels:
     1:
         1:
-            question_text: What's this programming language called?
+            question_text: Kio estas la nomo de ĉi tiu programlingvo?
             mp_choice_options:
             -   option: Hedy
-                feedback: Good job!
+                feedback: Bonege!
             -   option: Heddy
                 feedback: Not this one!
             -   option: Haydie
@@ -20,7 +20,7 @@ levels:
             -   option: "```\n{echo}\n```\n"
                 feedback: '`{echo}` repeats a given answer.'
             -   option: "```\n{print}\n```"
-                feedback: Correct!
+                feedback: Ĝuste!
             -   option: "```\nhello\n```\n"
                 feedback: Hello isn't a command.
             -   option: "```\n{ask}\n```\n"
@@ -36,7 +36,7 @@ levels:
             -   option: "```\n{ask} {print} What is your favorite color?\n```\n"
                 feedback: You only need one command, not two.
             -   option: "```\n{ask} What is your favorite color?\n```\n"
-                feedback: Great!
+                feedback: Bonege!
             -   option: "```\n{echo} What is your favorite color?\n```\n"
                 feedback: '`{echo}` repeats your answer back to you.'
             correct_answer: C
@@ -47,10 +47,10 @@ levels:
             code: "Hi Im Hedy!\n{ask} Who are you?\n{echo} Hi..."
             mp_choice_options:
             -   option: '`{print}` in line 1 is missing.'
-                feedback: Correct!
+                feedback: Ĝuste!
             -   option: Im in line 1 is spelled wrong.
                 feedback: Im is spelled wrong on purpose; Hedy doesn't understand the apostrophes yet.
-            -   option: "`{echo}` isn't a command."
+            -   option: "`{echo}` ne estas komando."
                 feedback: "`{echo}` is a command, there's another mistake."
             -   option: Nothing! This is a perfect code!
                 feedback: Wrong, look carefully!
@@ -79,7 +79,7 @@ levels:
             -   option: In line 1 `{print}` should be replaced with `{ask}`.
                 feedback: '`{print}` in line 1 is correct.'
             -   option: In line 2, `{print}` should be replaced with `{ask}`.
-                feedback: Great! You paid attention!
+                feedback: Bonege! You paid attention!
             -   option: Line 3 has to begin with `{print}` instead of `{echo}`.
                 feedback: '`{echo}` is correct.'
             -   option: In line 4, `{print}` is spelled wrong.
@@ -98,7 +98,7 @@ levels:
             -   option: In line 3 `{echo}` needs to be replaced with `{print}`
                 feedback: Are you sure something is wrong?
             -   option: Nothing! This is a perfect code!
-                feedback: Correct!
+                feedback: Ĝuste!
             correct_answer: D
             hint: Check the code line by line
             question_score: '10'
@@ -135,7 +135,7 @@ levels:
             question_text: Are you ready for level 2?
             mp_choice_options:
             -   option: Yes!
-                feedback: Great! Let's go to the next level!
+                feedback: Bonege! Let's go to the next level!
             -   option: No
                 feedback: What a shame... You can practice some more in level 1!
             correct_answer: A
@@ -167,7 +167,7 @@ levels:
             -   option: "```\n{is}\n```\n"
                 feedback: '`{is}` is used to make a list'
             -   option: "```\n{at} {random}\n```\n"
-                feedback: Correct!
+                feedback: Ĝuste!
             correct_answer: D
             hint: Arbitrarily means without a plan or randomly.
             question_score: '10'
@@ -193,7 +193,7 @@ levels:
             -   option: "```\n{print} price\n```\n"
                 feedback: You don't want to `{print}` the word price, but you want to `{print}` one price out of your list `{at} {random}`
             -   option: "```\n{print} prices {at} {random}\n```\n"
-                feedback: Great! You've really paid attention.
+                feedback: Bonege! You've really paid attention.
             -   option: "```\n{print} {at} {random} price\n```\n"
                 feedback: '`{at} {random}` is placed behind the variable.'
             -   option: Nothing, this code is alright.
@@ -240,7 +240,7 @@ levels:
             -   option: The `{add}` command adds a random book to a list
                 feedback: It doesn't. It adds your answer to the list!
             -   option: The `{add}` command adds your favorite book to the list
-                feedback: Correct!
+                feedback: Ĝuste!
             -   option: The `{add}` command prints your favorite book.
                 feedback: No, it adds your favorite book to the list
             correct_answer: C
@@ -417,7 +417,7 @@ levels:
             -   option: 'Line 1 should say: dogs `{is}` animals'
                 feedback: The variable name is animal
             -   option: 'Line 1 should say: animal `{is}` dogs'
-                feedback: Great!
+                feedback: Bonege!
             -   option: 'Line 2 should say: `{print}` I love animals'
                 feedback: The variable name is animal
             -   option: 'Line 2 should say: `{sleep}` I love animals'
@@ -497,7 +497,7 @@ levels:
             -   option: I love pancakes
                 feedback: Line 2 says `{for}` each meal in the list of meals. So each meal is printed.
             -   option: "I love pizza\nI love pasta\nI love pancakes"
-                feedback: Great!
+                feedback: Bonege!
             correct_answer: D
             hint: Line 2 says for each meal in the list of meals. So each meal is printed.
             question_score: '10'
@@ -510,7 +510,7 @@ levels:
             -   option: dogs, cats, hamsters, chickens are lovely pets
                 feedback: Each animal gets their own line in the output.
             -   option: "dogs are lovely pets\ncats are lovely pets\nhamsters are lovely pets\nchickens are lovely pets"
-                feedback: Great!
+                feedback: Bonege!
             -   option: You don't know yet. Because it chooses one of the animals {at} {random}.
                 feedback: Line 2 says {for} each animal in the list of animals. So each animal is {print}ed.
             correct_answer: C
@@ -668,7 +668,7 @@ levels:
             code: prices {is} 1 dollar, 100 dollars, 1 million dollars
             mp_choice_options:
             -   option: "```\n{print} 'You win...' prices {at} {random}\n```\n"
-                feedback: Great! You get it!
+                feedback: Bonege! You get it!
             -   option: "```\n{print} You win... 'prices {at} {random}'\n```\n"
                 feedback: Hedy will literally print 'prices {at} {random}'
             -   option: "```\n{print} You win... prices {at} {random}\n```\n"
@@ -683,7 +683,7 @@ levels:
             code: "question {is} {ask} What do you want to know?\nanswers {is} yes, no, maybe\n{print} answers {at} {random}"
             mp_choice_options:
             -   option: Quotation marks are missing in line 1
-                feedback: Correct!
+                feedback: Ĝuste!
             -   option: Quotation marks are missing in line 2
                 feedback: A variable doesn't need quotes
             -   option: Quotation marks are missing in line 3
@@ -771,9 +771,9 @@ levels:
             question_score: '10'
         3:
             question_text: What is the right password?
-            code: "password {is} {ask} 'What is the password?'\n{if} password {is} SECRET {print} 'Correct!'\n{else} {print} 'ALARM! INTRUDER!'"
+            code: "password {is} {ask} 'What is the password?'\n{if} password {is} SECRET {print} 'Ĝuste!'\n{else} {print} 'ALARM! INTRUDER!'"
             mp_choice_options:
-            -   option: Correct!
+            -   option: Ĝuste!
                 feedback: This is printed when you type in the correct password
             -   option: SECRET
                 feedback: That's right!'
@@ -782,11 +782,11 @@ levels:
             -   option: ALARM INTRUDER
                 feedback: This is printed when you type in the incorrect password!
             correct_answer: B
-            hint: "`{if}` password `{is}` ... `{print}` 'Correct!'!'"
+            hint: "`{if}` password `{is}` ... `{print}` 'Ĝuste!'!'"
             question_score: '10'
         4:
             question_text: What does Hedy print when you type in the wrong password?
-            code: "password {is} {ask} 'What is the password?'\n{if} password {is} SECRET {print} 'Correct!'\n{else} {print} 'ALARM! INTRUDER!'"
+            code: "password {is} {ask} 'What is the password?'\n{if} password {is} SECRET {print} 'Ĝuste!'\n{else} {print} 'ALARM! INTRUDER!'"
             mp_choice_options:
             -   option: Correct
                 feedback: That's printed if the correct answer is given, not the wrong one...
@@ -801,7 +801,7 @@ levels:
             question_score: '10'
         5:
             question_text: Why will Hedy say 'ALARM! INTRUDER' when you type in 'secret'?
-            code: "password {is} {ask} 'What is the password?'\n{if} password {is} SECRET {print} 'Correct!'\n{else} {print} 'ALARM! INTRUDER!'"
+            code: "password {is} {ask} 'What is the password?'\n{if} password {is} SECRET {print} 'Ĝuste!'\n{else} {print} 'ALARM! INTRUDER!'"
             mp_choice_options:
             -   option: Because it needs to be in capitals, so SECRET
                 feedback: Indeed!
@@ -823,7 +823,7 @@ levels:
             -   option: "```\n{at} {random}\n```\n"
                 feedback: No, you need `{else}`.
             -   option: "```\n{else}\n```\n"
-                feedback: Great!
+                feedback: Bonege!
             -   option: "```\n{print}\n```\n"
                 feedback: '`{print}` is already there, we need a word before it!'
             correct_answer: C
@@ -895,7 +895,7 @@ levels:
             code: '{print} 2*10'
             mp_choice_options:
             -   option: '20'
-                feedback: Correct!
+                feedback: Ĝuste!
             -   option: '12'
                 feedback: No, the plus sign is used in addition
             -   option: 2*10
@@ -915,7 +915,7 @@ levels:
             -   option: '*'
                 feedback: That's not it
             -   option: +
-                feedback: Correct!
+                feedback: Ĝuste!
             correct_answer: D
             hint: It's the plus sign.
             question_score: '10'
@@ -928,7 +928,7 @@ levels:
             -   option: '13'
                 feedback: Try again..
             -   option: 3*10
-                feedback: Correct! There are quotation marks, so Hedy will print it literally.
+                feedback: Ĝuste! There are quotation marks, so Hedy will print it literally.
             -   option: Nothing, Hedy will give an error message.
                 feedback: No, Hedy will print it literally.
             correct_answer: C
@@ -960,7 +960,7 @@ levels:
             -   option: 15 dollars
                 feedback: The * means multiplication.
             -   option: 50 dollars
-                feedback: Great!
+                feedback: Bonege!
             correct_answer: D
             hint: '`price` `is` `people` `times` 10'
             question_score: '10'
@@ -1001,7 +1001,7 @@ levels:
             -   option: There shouldn't be quotation marks in line 2
                 feedback: No, there should be!
             -   option: The variable is called correct answer, but a variable's name can only be 1 word. So it should be correct_answer
-                feedback: Correct!
+                feedback: Ĝuste!
             -   option: The `{if}` and `{else}` commands should be in the same line.
                 feedback: No, that's not true.
             -   option: The variable in line 2 can't be called answer, because it is too similar to the variable correct answer.
@@ -1131,7 +1131,7 @@ levels:
             -   option: "We will We will\nROCK YOU!"
                 feedback: "'We will' won't appear twice in the same line"
             -   option: "We will\nWe will\nROCK YOU!"
-                feedback: Great!
+                feedback: Bonege!
             -   option: "We will\nROCK YOU!\nWe will\nROCK YOU!"
                 feedback: ROCK YOU! won't be repeated
             -   option: "We will\nROCK YOU!"
@@ -1176,7 +1176,7 @@ levels:
             -   option: "```\n{repeat} 2 {times} 'if youre happy and you know it clap your hands'\n{print} 'if youre happy and you know it and you really want to show it'\n{print} 'if youre happy and you know it clap your hands'\n```\n"
                 feedback: Almost! the first line needs an extra word
             -   option: "```\n{repeat} 2 {times} {print} 'if youre happy and you know it clap your hands'\n{print} 'if youre happy and you know it and you really want to show it'\n{print} 'if youre happy and you know it clap your hands'\n```\n"
-                feedback: Great!
+                feedback: Bonege!
             -   option: "```\n{repeat} 3 {times} {print} 'if youre happy and you know it clap your hands'\n{print} 'if youre happy and you know it and you really want to show it'\n```\n"
                 feedback: This is not in the right order.
             -   option: "```\n{repeat} 4 {times} 'if youre happy and you know it'\n{repeat} 2 times 'clap your hands'\n{print} 'and you really want to show it'\n{print} 'clap your hands'\n```\n"
@@ -1211,7 +1211,7 @@ levels:
             -   option: There is a spelling mistake in the `{repeat}` command.
                 feedback: Nee, repeat is de goede spelling
             -   option: The second line need to start with 4 spaces as indentation.
-                feedback: Correct!
+                feedback: Ĝuste!
             correct_answer: D
             hint: Something is missing in the second line?
             question_score: '10'
@@ -1237,7 +1237,7 @@ levels:
             -   option: "The children went: \n Yay! \n Were going on holiday!"
                 feedback: Mind the `{repeat}` command !
             -   option: "The children went: \n Yay! \n Were going on holiday! \n Yay! \n Were going on holiday!"
-                feedback: Correct!
+                feedback: Ĝuste!
             -   option: "The children went: \n Yay! \n Yay! \n Were going on holiday! \n Were going on holiday!"
                 feedback: This order is incorrect.
             -   option: "The children went: \n Yay! \n Yay! \n Were going on holiday!"
@@ -1361,7 +1361,7 @@ levels:
             -   option: "Good job ! \n Good job! \n You can use the computer!"
                 feedback: That's not it!
             -   option: "Good job! \n You can use the computer! \n Good job! \n You can use the computer!"
-                feedback: Correct!
+                feedback: Ĝuste!
             correct_answer: D
             hint: Everything under the `{repeat}` command is repeated twice.
             question_score: '10'
@@ -1489,7 +1489,7 @@ levels:
             code: "{for} i {in} {range} 1 {to} 3\n    {print} i"
             mp_choice_options:
             -   option: "1\n2\n3"
-                feedback: Correct!
+                feedback: Ĝuste!
             -   option: 1 2 3
                 feedback: That's not it
             -   option: 1, 2, 3
@@ -1583,7 +1583,7 @@ levels:
             -   option: "```\n{for} i {in} {range} 1 {to} guests\n```\n"
                 feedback: The variable is not named guests
             -   option: "```\n{for} i {in} {range} 1 {to} people\n```\n"
-                feedback: Great!
+                feedback: Bonege!
             -   option: "```\n{for} i {in} {range} 0 {to} people\n```\n"
                 feedback: That's one order too many!
             correct_answer: C
