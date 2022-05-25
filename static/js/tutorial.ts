@@ -44,8 +44,6 @@ function runButtonStep() {
   $('#runButtonContainer').addClass("z-40");
   addHighlightBorder("runButtonContainer");
 
-  $('#runit').removeAttr('onclick');
-
   relocatePopup(50, 30);
   tutorialPopup(current_step);
 }
