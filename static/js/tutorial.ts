@@ -1,5 +1,5 @@
-import {modal} from "./modal";
-import {pushAchievement, theGlobalEditor} from "./app";
+import {error, modal} from "./modal";
+import {get_trimmed_code, pushAchievement, runit, runPythonProgram, showAchievements, theGlobalEditor} from "./app";
 
 let current_step = 0;
 let student = true;
@@ -21,6 +21,7 @@ function codeEditorStep() {
   addHighlightBorder("editor");
 
   relocatePopup(65, 30);
+  theGlobalEditor?.setValue("print ___");
   tutorialPopup(current_step);
 }
 
@@ -28,6 +29,8 @@ function codeOutputStep() {
   removeBorder("editor");
   $('#code_output').addClass("z-40");
   addHighlightBorder("code_output");
+
+  runit(window.State.level || "", "en", "", () => void);
 
   relocatePopup(35, 30);
   tutorialPopup(current_step);

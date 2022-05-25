@@ -489,6 +489,20 @@ def parse_by_id(user):
         return 'this is not your program!', 400
 
 
+@app.route('/parse_tutorial', methods=['POST'])
+@requires_login
+def parse_tutorial(user):
+    body = request.json
+
+    code = body['code']
+    level = int(body['level'])
+    try:
+        result = hedy.transpile(code, level, "en")
+        jsonify({'code': NORMAL_PREFIX_CODE + result.code}), 200
+    except:
+        return "error", 400
+
+
 def transpile_add_stats(code, level, lang_):
     username = current_user()['username'] or None
     try:
