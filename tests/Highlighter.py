@@ -384,14 +384,8 @@ class SimulatorAce:
 
         default_token = "text"
 
-        find_transition = True
+        find_transition, next_transition = self.find_match(code, current_position, current_state)
         while find_transition:
-
-            find_transition, next_transition = self.find_match(code, current_position, current_state)
-
-            # if there are no matches
-            if not find_transition :
-                break
 
             # get match
             current_rule, current_match = next_transition["rule"], next_transition["match"]
@@ -421,6 +415,8 @@ class SimulatorAce:
                     output.append(TOKEN_CODE[tok] * len(submatch))
                     pos += len(submatch)
 
+
+
             # get nexts values
             current_position = current_match.end()
 
@@ -428,7 +424,9 @@ class SimulatorAce:
                 current_state = current_rule['next']
 
             if current_position == len(code):
-                break
+                find_transition = False
+            else:
+                find_transition, next_transition = self.find_match(code, current_position, current_state)
 
 
 
