@@ -399,7 +399,7 @@ def parse():
 
             try:
                 transpile_result = transpile_add_stats(code, level, lang)
-                if username:
+                if username and not body.get('tutorial'):
                     DATABASE.increase_user_run_count(username)
                     ACHIEVEMENTS.increase_count("run")
             except hedy.exceptions.FtfyException as ex:
@@ -431,7 +431,7 @@ def parse():
         except:
             pass
         try:
-            if username and ACHIEVEMENTS.verify_run_achievements(username, code, level, response):
+            if username and not body.get('tutorial') and ACHIEVEMENTS.verify_run_achievements(username, code, level, response):
                 response['achievements'] = ACHIEVEMENTS.get_earned_achievements()
         except Exception as E:
             print(f"error determining achievements for {code} with {E}")
