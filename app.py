@@ -885,10 +885,14 @@ def view_program(id):
     result['public_profile'] = True if DATABASE.get_public_profile_settings(
         result['username']) else None
 
-    # If the language doesn't match the user -> parse the keywords
-    if result.get("lang", "en") not in [g.lang, "en"] and g.lang in ALL_KEYWORD_LANGUAGES:
-        result['code'] = hedy_translation.translate_keywords(result.get(
-            'code'), result.get('lang', 'en'), g.lang, level=int(result.get('level', 1)))
+    code = result['code']
+    if result.get("lang") != "en" and result.get("lang") in ALL_KEYWORD_LANGUAGES.keys():
+        code = hedy_translation.translate_keywords(code, from_lang=result.get('lang'), to_lang="en", level=int(result.get('level', 1)))
+    # If the keyword language is non-English -> parse again to guarantee completely localized keywords
+    if g.keyword_lang != "en":
+        code = hedy_translation.translate_keywords(code, from_lang="en", to_lang=g.keyword_lang, level=int(result.get('level', 1)))
+
+    result['code'] = code
 
     arguments_dict = {}
     arguments_dict['program_id'] = id
@@ -1055,12 +1059,6 @@ def main_page(page):
 
     user = current_user()
 
-    if page == 'landing-page':
-        if user['username']:
-            return render_template('landing-page.html', page_title=gettext('title_landing-page'), user=user['username'])
-        else:
-            return utils.error_page(error=403, ui_message=gettext('not_user'))
-
     requested_page = hedyweb.PageTranslations(page)
     if not requested_page.exists():
         abort(404)
@@ -1068,6 +1066,24 @@ def main_page(page):
     main_page_translations = requested_page.get_page_translations(g.lang)
     return render_template('main-page.html', page_title=gettext('title_start'),
                            current_page='start', content=main_page_translations)
+
+
+@app.route('/landing-page/', methods=['GET'], defaults={'first': False})
+@app.route('/landing-page/<first>', methods=['GET'])
+@requires_login
+def landing_page(user, first):
+    username = user['username']
+
+    user_info = DATABASE.get_public_profile_settings(username)
+    user_programs = DATABASE.programs_for_user(username)
+    # Only return the last program of the user
+    if user_programs:
+        user_programs = user_programs[:1][0]
+    user_achievements = DATABASE.progress_by_username(username)
+
+    return render_template('landing-page.html', first_time=True if first else False,
+                           page_title=gettext('title_landing-page'), user=user['username'],
+                           user_info=user_info, program=user_programs, achievements=user_achievements)
 
 
 @app.route('/for-teachers', methods=['GET'])
@@ -1120,20 +1136,25 @@ def explore():
         # If program does not have an error value set -> parse it and set value
         if 'error' not in program:
             try:
-                hedy.transpile(program.get('code'), program.get(
-                    'level'), program.get('lang'))
+                hedy.transpile(program.get('code'), program.get('level'), program.get('lang'))
                 program['error'] = False
             except:
                 program['error'] = True
             DATABASE.store_program(program)
-        public_profile = DATABASE.get_public_profile_settings(
-            program['username'])
+        public_profile = DATABASE.get_public_profile_settings(program['username'])
+
         # If the language doesn't match the user -> parse the keywords
-        if program.get("lang", "en") != g.keyword_lang and program.get("lang") in ALL_KEYWORD_LANGUAGES.keys():
-            code = hedy_translation.translate_keywords(program.get('code'), from_lang=program.get('lang'),
-                                                       to_lang=g.keyword_lang, level=int(program.get('level', 1)))
-        else:
-            code = program['code']
+        # We perform a "double parse" to make sure english keywords are also always translated
+        code = program['code']
+
+        # First, if the program language is not equal to english and the language supports keywords
+        # It might contain non-english keywords -> parse all to english
+        if program.get("lang") != "en" and program.get("lang") in ALL_KEYWORD_LANGUAGES.keys():
+            code = hedy_translation.translate_keywords(code, from_lang=program.get('lang'), to_lang="en", level=int(program.get('level', 1)))
+        # If the keyword language is non-English -> parse again to guarantee completely localized keywords
+        if g.keyword_lang != "en":
+            code = hedy_translation.translate_keywords(code, from_lang="en", to_lang=g.keyword_lang, level=int(program.get('level', 1)))
+
         filtered_programs.append({
             'username': program['username'],
             'name': program['name'],
