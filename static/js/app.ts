@@ -1496,7 +1496,8 @@ export function select_profile_image(image: number) {
 export function filter_programs() {
   const level = $('#explore_page_level').val();
   const adventure = $('#explore_page_adventure').val();
-  window.open('?level=' + level + "&adventure=" + adventure, "_self");
+  const language = $('#explore_page_language').val();
+  window.open('?level=' + level + "&adventure=" + adventure + "&lang=" + language, "_self");
 }
 
 export function filter_user_programs(username: string, own_request?: boolean) {
