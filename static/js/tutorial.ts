@@ -310,6 +310,8 @@ export function startTutorial() {
   $('#tutorial-mask').show();
   $('#adventures').hide();
   $('#variables_container').hide();
+  theGlobalEditor?.setValue("");
+
   current_step = 0;
   student = true;
   tutorialPopup(current_step);
