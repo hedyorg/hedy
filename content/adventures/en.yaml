@@ -1058,16 +1058,16 @@ adventures:
                     ```
                     {print} Drawing figures
                     angle {is} 90
-                    {turn} angle
                     {forward} 25
                     {turn} angle
                     {forward} 25
+                    {turn} angle
                     ```
                 start_code: |-
                     {print} Turtle race!
                     hoek {is} 90
-                    {turn} hoek
                     {forward} 25
+                    {turn} hoek
             3:
                 story_text: |
                     ## Searching turtle
@@ -1075,8 +1075,6 @@ adventures:
                     Use `{at} {random}` to choose a value from a list. You can copy and paste lines 2 and 3 to create a longer random path.
                 example_code: |
                     ## Example Hedy code
-
-
                     ```
                     angles {is} 10, 50, 90, 150, 250
                     {turn} angles {at} {random}
@@ -1096,16 +1094,16 @@ adventures:
                     ```
                     {print} 'Drawing figures'
                     angle {is} 90
-                    {turn} angle
                     {forward} 25
                     {turn} angle
                     {forward} 25
+                    {turn} angle
                     ```
                 start_code: |-
                     {print} 'Drawing figures'
+                    {forward} 25
                     angle {is} 90
                     {turn} angle
-                    {forward} 25
 
             5:
                 story_text: |
