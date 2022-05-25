@@ -59,7 +59,7 @@ One important thing to notice is the **grayed pieces of tekst**. This is compute
 
 
 
-That's all for now, any problems, let us know so we can address them here for future translators. You can reach us at [hedy@felienne.com](mailto:hedy@felienne.com). Or you can join our [Slack channel](https://join.slack.com/share/enQtMzUxNzkyNzUxMTAxMy1hYzA1NzRkODU2M2Y1YjliZThjODgyZTQwZGMyMThmYmVlYTcyMjAxNTUyYmYxODdjZjBkOWJkYjQwNGYyMzFl?cdn_fallback=1)
+If you run into any problems, let us know, so we can address them here for future translators. You can reach us at [hedy@felienne.com](mailto:hedy@felienne.com), or you can join our [Discord #translators channel](https://discord.gg/aQqDWFbk)
 
 Fixing Weblate issues
 ================
