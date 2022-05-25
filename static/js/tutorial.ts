@@ -85,6 +85,9 @@ function levelDefaultStep() {
   $('#adventures').addClass('z-40 bg-gray-100');
   $('#adventures').show();
 
+  // Set to false, prevent "are you sure you want to switch without saving" pop-up
+  window.State.unsaved_changes = false;
+
   addHighlightBorder("adventures");
   relocatePopup(50, 40);
   tutorialPopup(current_step);
@@ -112,6 +115,9 @@ function saveShareStep() {
   $('#level-header').addClass("z-40");
   $('#cheatsheet_container').hide();
   addHighlightBorder("level-header");
+
+  $('#save_program_button').removeAttr('onclick');
+  $('#share_program_button').removeAttr('onclick');
 
   relocatePopup(50, 30);
   tutorialPopup(current_step);
