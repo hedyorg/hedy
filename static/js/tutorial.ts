@@ -70,6 +70,7 @@ function nextLevelStep() {
   $('#runButtonContainer').removeClass('z-40');
 
   $('#next_level_button').addClass("z-40");
+  $('#next_level_button').removeAttr('onclick');
   addHighlightBorder("next_level_button");
 
   relocatePopup(50, 30);
