@@ -8,8 +8,7 @@
     </script>
 {% endif %}
 
-<div id="achievement_pop-up" class="inset-0 absolute z-10 fixed w-1/2 hidden"
-     style="top: 50%; left: 50%; transform: translate(-50%, -50%);">
+<div id="achievement_pop-up" class="inset-0 z-10 fixed w-1/2 hidden top-1/2 left-1/2 translate-x-1/2 -translate-y-1/2">
     <div class="bg-blue-600 border-2 border-black rounded-lg px-16 pt-0 pb-4 text-center">
         <h3 class="text-white">{{ auth.achievement_earned }}</h3>
         <img id="achievement_reached_image" src="{{ static('/images/achievement.png') }}" class="h-32 mx-auto">
@@ -21,16 +20,16 @@
     <div class="flex flex-col justify-center items-center mb-4">
         <h1 class="font-bold text-4xl font-slab">{{_('results_quiz')}}</h1>
         <h3 class="font-semibold text-2xl italic font-slab">{{_('score')}}</h3>
-        <div class="border-4 border-yellow-600 rounded-full  h-24 w-24  flex items-center bg-yellow-300 justify-center">
+        <div class="border-4 border-yellow-600 rounded-full h-24 w-24 flex items-center bg-yellow-300 justify-center">
             <p class="text-yellow-600 font-bold text-4xl text-center font-slab ">{{ total_score|string }}</p></div>
     </div>
-    <div class="container-results m-6">
+    <div class="m-6">
         {% for i in range(result_items|length) %}
-            <div class="flex grid grid-rows">
-                <div class=" grid-item grid grid-cols-2 gap-x-4">
+            <div class="grid grid-rows">
+                <div class="grid-item grid grid-cols-2 gap-x-4">
                     <div class="bg-blue-500 rounded-t-md pt-2 flex-col-75">
                         {% if "question_text" in result_items[i] %}
-                            <p class="flex text-white place-content-center text-center font-slab font-semibold text-2xl italic question-text text-2xl"> {{ i + 1 }}) {{ result_items[i].question_text | nl2br }}</p>
+                            <p class="flex text-white place-content-center text-center font-slab font-semibold text-2xl italic"> {{ i + 1 }}) {{ result_items[i].question_text | nl2br }}</p>
                         {% endif %}
                         {% if "question_code" in result_items[i] %}
                             {% if result_items[i]["question_code"] %}
@@ -41,7 +40,7 @@
                         {% endif %}
                     </div>
                     {% if result_items[i].is_correct %}
-                        <p class="place-content-center text-white font-semibold text-xl font-slab bg-green-500 flex  m-0 rounded-t-md pb-6 pt-2 text-center flex-col-25">
+                        <p class="place-content-center text-white font-semibold text-xl font-slab bg-green-500 flex  m-0 rounded-t-md pb-6 pt-2 text-center">
                             </br> {{_('correct')}}
                             {% if result_items[i].index_chosen == 0 %}
                                 {{ triangle|safe }}
@@ -58,7 +57,7 @@
                             {% endif %}
                         </p>
                     {% else %}
-                        <p class="place-content-center text-white font-semibold text-xl font-slab bg-red-500 flex m-0 rounded-t-md pb-6 pt-2 text-center flex-col-25">
+                        <p class="place-content-center text-white font-semibold text-xl font-slab bg-red-500 flex m-0 rounded-t-md pb-6 pt-2 text-center">
                             </br>  {{_('incorrect')}}
                             {% if result_items[i].index_chosen == 0 %}
                                 {{ triangle|safe }}
@@ -77,7 +76,7 @@
                     {% endif %}
                 </div>
                 <div class="grid-item grid grid-cols-2 gap-x-4">
-                    <div class="table-el bg-blue-200 shadow-lg flex flex-col-75 place-content-center rounded-b-md">
+                    <div class="mb-4 bg-blue-200 shadow-lg flex place-content-center rounded-b-md">
                         {% if (result_items[i].option|commonmark)[0:5] == "<pre>" %}
                             <!-- Todo TB -> Ace editor not working in this place (yet)... -->
                             <div class="mx-4 mb-2 turn-pre-into-ace">
@@ -88,15 +87,15 @@
                         {% endif %}
                     </div>
                     {% if result_items[i].is_correct and result_items[i].attempts ==  1 %}
-                        <p class="place-content-center table-el text-center bg-green-200 text-xl font-slab flex m-0 rounded-b-md flex-col-25 mr-4">
+                        <p class="place-content-center mb-4 text-center bg-green-200 text-xl font-slab flex m-0 rounded-b-md flex-col mr-4">
                             In {{ result_items[i].attempts }} {{_('attempt')|lower }}
                         </p>
                     {% elif result_items[i].is_correct and result_items[i].attempts > 1 %}
-                        <p class="place-content-center table-el text-center bg-green-200 text-xl font-slab flex m-0 rounded-b-md flex-col-25 mr-4">
+                        <p class="place-content-center mb-4 text-center bg-green-200 text-xl font-slab flex m-0 rounded-b-md flex-col mr-4">
                             In {{ result_items[i].attempts }} {{_('attempt')}}
                         </p>
                     {% else %}
-                        <p class="place-content-center table-el text-center bg-red-200 text-xl font-slab flex m-0 rounded-b-md flex-col-25 mr-4">
+                        <p class="place-content-center mb-4 text-center bg-red-200 text-xl font-slab flex m-0 rounded-b-md flex-col mr-4">
                             In {{ result_items[i].attempts }} {{_('attempt')}}
                         </p>
                     {% endif %}
@@ -104,7 +103,7 @@
             </div>
         {% endfor %}
     </div>
-    <div class="p-10 button-bar border-t-8 border-green-600">
+    <div class="flex p-4 bg-green-200 justify-between border-t-8 border-green-600">
         <button class="green-btn ltr:ml-1 rtl:mr-1"
                 onclick="window.parent.location = '{{ hedy_link(level, next_assignment) }}';"> {{_('go_to_level')}} {{ level }}
         </button>

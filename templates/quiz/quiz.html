@@ -8,23 +8,23 @@
         <link rel="stylesheet" href="{{ static('/css/progress-bar.css')}}">
     </head>
     <body dir="{{ g.dir }}">
-        <div class="container" >
+        <div class="max-w-full" >
              <!-- Responsive Arrow Progress Bar -->
-              <div class="arrow-steps clearfix">
+              <div class="flex items-center justify-around w-full clearfix">
                   {% for i in range(questions|length)%}
                        {% if i + 1 == question_nr %}
-                        <div class="step current"><span><a class="step-text" href="#">{{_('question')}} {{ i + 1 }}<br>{{_('attempt')}} {{ attempt }}</a></span></div>
+                        <div class="flex flex-1 justify-around items-center text-sm text-center cursor-default float-left relative step current"><span><a class="step-text" href="#">{{_('question')}} {{ i + 1 }}<br>{{_('attempt')}} {{ attempt }}</a></span></div>
                        {% elif not quiz_answers[i + 1] %}
-                           <div class="step"><span><a class="step-text" href="#">{{ i + 1 }}</a></span></div>
+                           <div class="step flex flex-1 justify-around items-center text-sm text-center cursor-default float-left relative"><span><a class="step-text" href="#">{{ i + 1 }}</a></span></div>
                        {% elif quiz_answers[i + 1][-1] != questions[i + 1].correct_answer %}
-                             <div class="step incorrect flex flex-row justify-items ">{{ cross|safe }}<p class="ltr:mr-3 rtl:ml-3 font-bold">{{ i + 1 }}</p></div>
+                             <div class="step flex flex-row flex-1 justify-around items-center text-sm text-center cursor-default float-left relative incorrect">{{ cross|safe }}<p class="ltr:mr-3 rtl:ml-3 font-bold">{{ i + 1 }}</p></div>
                        {% elif quiz_answers[i + 1][-1] == questions[i + 1].correct_answer %}
-                           <div class="step check flex flex-row justify-items ">{{ check|safe }}<p class="ltr:mr-3 rtl:ml-3 font-bold">{{ i + 1 }}</p></div>
+                           <div class="step flex flex-1 flex-row justify-around items-center text-sm text-center cursor-default float-left relative check">{{ check|safe }}<p class="ltr:mr-3 rtl:ml-3 font-bold">{{ i + 1 }}</p></div>
                       {% endif %}
                   {% endfor %}
             </div>
         </div>
-        <div id="achievement_pop-up" class="inset-0 absolute z-10 fixed w-1/2 hidden" style="top: 50%; left: 50%; transform: translate(-50%, -50%);">
+        <div id="achievement_pop-up" class="inset-0 z-10 fixed w-1/2 hidden" style="top: 50%; left: 50%; transform: translate(-50%, -50%);">
             <div class="bg-blue-600 border-2 border-black rounded-lg px-16 pt-0 pb-4 text-center">
                 <h3 class="text-white">{{_('achievement_earned')}}</h3>
                 <img id="achievement_reached_image" src="{{static('/images/achievement.png')}}" class="h-32 mx-auto">

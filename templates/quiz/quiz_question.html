@@ -25,9 +25,9 @@
                 {% for column in row %}
                     <div class="
                         {% if question_options[counter.value].char_index == chosen_option %}
-                            option-block incorrect-option p-1 border-blue-600 tw-border-3 rounded-lg shadow-lg radio-block flex flex-row
+                            option-block incorrect-option p-1 border-[3px] rounded-lg shadow-lg flex flex-row
                         {% else %}
-                            option-block p-1 border-blue-600 tw-border-3 rounded-lg shadow-lg radio-block flex flex-row
+                            option-block p-1 border-blue-600 border-[3px] rounded-lg shadow-lg flex flex-row
                         {% endif %}
                     ">
                         {% if counter.value == 0 %}

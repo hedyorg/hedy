@@ -2,15 +2,15 @@
         <link rel="stylesheet" href="{{static('/css/generated.css')}}">
         <link rel="stylesheet" href="{{static('/css/additional.css')}}">
         <link rel="stylesheet" href="{{ static('/css/quiz-css.css') }}">
-        <div class="flex-container">
-            <div class="center-picture p-10"><img class="rounded-full border-green-600 border-8" src="{{ static('/images/quiz_logo.jpg') }}" alt="quiz_logo"/>
+        <div class="flex flex-col">
+            <div class="flex text-center justify-center bg-blue-200 p-10 center-picture"><img class="rounded-full border-green-600 border-8" src="{{ static('/images/quiz_logo.jpg') }}" alt="quiz_logo"/>
             </div>
-            <div class="title-block p-8 border-t-8 border-blue-600">
-                <h1 class="start-quiz-title font-slab">{{_('start_quiz')}}</h1>
-                <h2 class="start-quiz-subtitle"><i> {{_('level_title')}} {{ level }} </i></h2>
+            <div class="bg-blue-500 p-8 border-t-8 border-blue-600">
+                <h1 class="text-center text-white font-bold">{{_('start_quiz')}}</h1>
+                <h2 class="text-center text-white"><i> {{_('level_title')}} {{ level }} </i></h2>
             </div>
         </div>
-        <div class="p-10 button-bar border-t-8 border-green-600 ">
+        <div class="p-4 bg-green-200 flex justify-between border-t-8 border-green-600 ">
             <button class="green-btn ltr:ml-1 rtl:mr-1" onclick="window.location = '/quiz/quiz_questions/{{level}}/1/1'">
                 {{_('go_to_first_question')}}
             </button>
