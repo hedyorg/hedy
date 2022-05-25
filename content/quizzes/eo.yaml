@@ -74,16 +74,16 @@ levels:
             question_score: '10'
         6:
             question_text: Kio estas malĝusta pri la jena kodo?
-            code: "{print} Hi im Hedy!\n{print} Which football team do you support?\n{echo} You support...\n{print} Cool! Me too!"
+            code: "{print} Saluton mi estas Hedy!\n{print} Kiun futbalan teamon vi subtenas?\n{echo} Vi subtenas...\n{print} Bonege! Mi ankaŭ!"
             mp_choice_options:
-            -   option: In line 1 `{print}` should be replaced with `{ask}`.
+            -   option: En linio 1, `{print}` estu anstataŭigita per `{ask}`.
                 feedback: '`{print}` en linio 1 estas ĝusta.'
-            -   option: In line 2, `{print}` should be replaced with `{ask}`.
+            -   option: En linio 2, `{print}` estu anstataŭigita per `{ask}`.
                 feedback: Bonege! You paid attention!
-            -   option: Line 3 has to begin with `{print}` instead of `{echo}`.
+            -   option: Linio 3 devas komenci per `{print}` anstataŭ `{echo}`.
                 feedback: '`{echo}` estas ĝusta.'
-            -   option: In line 4, `{print}` is spelled wrong.
-                feedback: No, there is a mistake somewhere else
+            -   option: En linio 4, `{print}` estas skribita malĝuste.
+                feedback: Ne, estas eraro ie aliloke
             correct_answer: B
             hint: Check the `{print}` commands.
             question_score: '10'
@@ -91,12 +91,12 @@ levels:
             question_text: Kio estas malĝusta pri la jena kodo?
             code: "{print} Welcome at Hedys restaurant!\n{ask} What would you like to eat?\n{echo} So you want to order ...\n{print} Coming right up! Enjoy!"
             mp_choice_options:
-            -   option: In line 1 `{print}` needs to be replaced with `{ask}`
-                feedback: Are you sure something is wrong?
-            -   option: In line 1 `{print}` needs to be replaced with `{echo}`
-                feedback: Are you sure something's wrong?
-            -   option: In line 3 `{echo}` needs to be replaced with `{print}`
-                feedback: Are you sure something is wrong?
+            -   option: En linio 1, `{print}` devas esti anstataŭigita per `{ask}`
+                feedback: Ĉu vi certas, ke io estas malĝusta?
+            -   option: En linio 1, `{print}` devas esti anstataŭigita per `{echo}`
+                feedback: Ĉu vi certas, ke io estas malĝusta?
+            -   option: En linio 3, `{echo}` devas esti anstataŭigita per `{print}`
+                feedback: Ĉu vi certas, ke io estas malĝusta?
             -   option: Nenio! Jen perfekta kodo!
                 feedback: Ĝuste!
             correct_answer: D
@@ -126,7 +126,7 @@ levels:
                 feedback: Bonege!
             -   option: '`{echo}` in line 3 should be `{ask}`'
                 feedback: No, `{echo}` is right. Where is the question being asked?
-            -   option: Nothing. This is a perfect code!
+            -   option: Nenio. Jen perfekta kodo!
                 feedback: Look carefully for the mistake...
             correct_answer: B
             hint: '`{ask}` allows you to ask a question'
@@ -212,7 +212,7 @@ levels:
             -   option: Line 2 needs to say answers `{at} {random}` `{is}` yes, no, maybe
                 feedback: No, that's not wrong.
             -   option: Nothing, this code is perfect
-                feedback: That's right!
+                feedback: Vi pravas!
             correct_answer: D
             hint: Does this code even have a mistake?
             question_score: '10'
@@ -257,7 +257,7 @@ levels:
             -   option: paprika
                 feedback: Paprika is removed from the list
             -   option: sour cream
-                feedback: That's right!
+                feedback: Vi pravas!
             correct_answer: D
             hint: There are 3 flavors, bit 2 are removed. Which one remains?
             question_score: '10'
@@ -309,13 +309,13 @@ levels:
         2:
             question_text: Which code is correct?
             mp_choice_options:
-            -   option: "```\nname {is} {ask} What is your name?\n```\n"
+            -   option: "```\nnomo {is} {ask} Kio estas via nomo?\n```\n"
                 feedback: Bonege!
-            -   option: "```\n{ask} {is} name What is your name\n```\n"
+            -   option: "```\n{ask} {is} nomo Kio estas via nomo\n```\n"
                 feedback: The words are right, the order is not!
-            -   option: "```\n{ask} What is your name?\n```\n"
+            -   option: "```\n{ask} Kio estas via nomo?\n```\n"
                 feedback: This worked in level 1, but in level 2 and up it works differently.
-            -   option: "```\n{ask} What is your name? {is} name\n```\n"
+            -   option: "```\n{ask} Kio estas via nomo? {is} nomo\n```\n"
                 feedback: The words are right, the order isn't!
             correct_answer: A
             hint: "`{ask}` doesn't work like in level 1"
@@ -337,15 +337,15 @@ levels:
             question_score: '10'
         4:
             question_text: What will you see on the output screen when you run this code?
-            code: "name {is} Hedy\n{print} Hi my name is name!"
+            code: "nomo {is} Hedy\n{print} Saluton mia nomo estas nomo!"
             mp_choice_options:
-            -   option: Hi my name is name
-                feedback: The variable name is replaced with Hedy
-            -   option: Hi my name is Hedy
-                feedback: The variable name is replaced with Hedy
-            -   option: Hi my Hedy is name
-                feedback: The variable name is replaced with Hedy
-            -   option: Hi my Hedy is Hedy
+            -   option: Saluton mia nomo estas nomo
+                feedback: La variablo `nomo` estas anstataŭigota per `Hedy`
+            -   option: Saluton mia nomo estas Hedy
+                feedback: La variablo `nomo` estas anstataŭigota per `Hedy`
+            -   option: Saluton mia Hedy estas nomo
+                feedback: La variablo `nomo` estas anstataŭigota per `Hedy`
+            -   option: Saluton mia Hedy estas Hedy
                 feedback: Correct, this mistake will be fixed in level 3!
             correct_answer: D
             hint: "'name' is being replaced with 'Hedy' in both places"
@@ -359,7 +359,7 @@ levels:
             -   option: It closes down Hedy
                 feedback: fortunately not!
             -   option: Your program pauses for a second and then continues
-                feedback: That's right!
+                feedback: Vi pravas!
             -   option: You put it at the end so Hedy knows your program is finished
                 feedback: No it would be useless at the end of your code
             correct_answer: C
@@ -436,7 +436,7 @@ levels:
             -   option: "```\nstrawberries, chocolate, vanilla\n```\n"
                 feedback: This way you are making a list. You don't want that now.
             -   option: "```\n{ask} What flavor icecream do you like?\n```\n"
-                feedback: That's right!
+                feedback: Vi pravas!
             correct_answer: D
             hint: You want to `{ask}` a question
             question_score: '10'
@@ -538,7 +538,7 @@ levels:
             -   option: players
                 feedback: It would say 'Ann throws Jesse', instead of 'Ann throws 6'.
             -   option: choices
-                feedback: That's right!
+                feedback: Vi pravas!
             -   option: choice
                 feedback: You are very close. But you need Hedy to pick from the list called 'choices' not 'choice'...
             -   option: dice
@@ -750,7 +750,7 @@ levels:
             -   option: "```\n{sleep}\n```\n"
                 feedback: Vi malpravas!
             -   option: "```\n{else}\n```\n"
-                feedback: That's right!
+                feedback: Vi pravas!
             correct_answer: D
             hint: Which one goes together with the `{if}` command?
             question_score: '10'
@@ -759,58 +759,58 @@ levels:
             code: "name {is} {ask} 'What is your name?'\n{if} name {is} Hedy {print} 'fun' {else} {print} 'less fun'"
             mp_choice_options:
             -   option: fun
-                feedback: That's right!
+                feedback: Vi pravas!
             -   option: less fun
                 feedback: If the name is Hedy, it will say 'fun''
             -   option: Hedy
                 feedback: No, it doesn't print the name
-            -   option: Error
+            -   option: Eraro
                 feedback: Fortunately not!
             correct_answer: A
             hint: '`{if}` name `{is}` Hedy `{print}` ...?'
             question_score: '10'
         3:
             question_text: What is the right password?
-            code: "password {is} {ask} 'What is the password?'\n{if} password {is} SECRET {print} 'Ĝuste!'\n{else} {print} 'ALARM! INTRUDER!'"
+            code: "pasvorto {is} {ask} 'Kio estas la pasvorto?'\n{if} pasvorto {is} SEKRETO {print} 'Ĝuste!'\n{else} {print} 'ALARMO! ENTRUDULO!'"
             mp_choice_options:
             -   option: Ĝuste!
                 feedback: This is printed when you type in the correct password
-            -   option: SECRET
-                feedback: That's right!'
-            -   option: password
+            -   option: SEKRETO
+                feedback: Vi pravas!'
+            -   option: pasvorto
                 feedback: The password isn't password...
-            -   option: ALARM INTRUDER
+            -   option: ALARMO ENTRUDULO
                 feedback: This is printed when you type in the incorrect password!
             correct_answer: B
             hint: "`{if}` password `{is}` ... `{print}` 'Ĝuste!'!'"
             question_score: '10'
         4:
             question_text: What does Hedy print when you type in the wrong password?
-            code: "password {is} {ask} 'What is the password?'\n{if} password {is} SECRET {print} 'Ĝuste!'\n{else} {print} 'ALARM! INTRUDER!'"
+            code: "pasvorto {is} {ask} 'Kio estas la pasvorto?'\n{if} pasvorto {is} SEKRETO {print} 'Ĝuste!'\n{else} {print} 'ALARMO! ENTRUDULO!'"
             mp_choice_options:
-            -   option: Correct
+            -   option: Ĝuste
                 feedback: That's printed if the correct answer is given, not the wrong one...
-            -   option: SECRET
+            -   option: SEKRETO
                 feedback: That's not the right answer
-            -   option: Wrong!
+            -   option: Malĝuste!
                 feedback: No, this is not what Hedy will print
-            -   option: ALARM! INTRUDER!
+            -   option: ALARMO! ENTRUDULO!
                 feedback: Great job!
             correct_answer: D
             hint: Your computer will sound the alarm for intruders!
             question_score: '10'
         5:
-            question_text: Why will Hedy say 'ALARM! INTRUDER' when you type in 'secret'?
-            code: "password {is} {ask} 'What is the password?'\n{if} password {is} SECRET {print} 'Ĝuste!'\n{else} {print} 'ALARM! INTRUDER!'"
+            question_text: Kial Hedy diros «ALARMO! ENTRUDULO!», se vi tajpos «sekreto»?
+            code: "pasvorto {is} {ask} 'Kio estas la pasvorto?'\n{if} pasvorto {is} SEKRETO {print} 'Ĝuste!'\n{else} {print} 'ALARMO! ENTRUDULO!'"
             mp_choice_options:
             -   option: Because it needs to be in capitals, so SECRET
-                feedback: Indeed!
-            -   option: Because the password is alarm
-                feedback: No, this is not the password.
+                feedback: Jes ja!
+            -   option: Ĉar la pasvorto estas alarmo
+                feedback: Ne, tio ne estas la pasvorto.
             -   option: Because it's spelled wrong.
                 feedback: That's not how you spell secret
-            -   option: Because Hedy makes a mistake
-                feedback: No, Hedy is right
+            -   option: Ĉar Hedy eraras
+                feedback: Ne, Hedy pravas
             correct_answer: A
             hint: The spelling of the word has to be exactly the same.
             question_score: '10'
@@ -840,7 +840,7 @@ levels:
             -   option: "```\n{else}\n```\n"
                 feedback: There already is an `{else}` command
             -   option: "```\n{print}\n```\n"
-                feedback: Awesome!
+                feedback: Bonege!
             correct_answer: D
             hint: After `{else}` a `{print}` command follows
             question_score: '10'
@@ -879,7 +879,7 @@ levels:
             code: "{print} 'Escape from the haunted house!'\n{print} 'There are 3 doors in front of you'\ndoor {is} {ask} 'Which door do you choose?'\nmonsters {is} vampire, werewolf, giant spider\n{if} door {is} 2 {print} 'Yay, you can escape!'\n{else} {print} 'You are being devoured by a... ' monsters {at} {random}"
             mp_choice_options:
             -   option: Hedy picks a random monster each time.
-                feedback: Awesome!
+                feedback: Bonege!
             -   option: vampire
                 feedback: Not always...
             -   option: werewolf
@@ -943,7 +943,7 @@ levels:
             -   option: '10'
                 feedback: Please try again.
             -   option: Your lucky number is... 30
-                feedback: That's right!
+                feedback: Vi pravas!
             -   option: Your lucky number is... 10
                 feedback: Her lucky number is name times age...
             correct_answer: C
@@ -988,7 +988,7 @@ levels:
             -   option: Because Hedy doesn't understand `price = 3`.
                 feedback: Hedy would understand, but it wouldn't be right.
             -   option: Because Hedy would otherwise forget about the previous order. The price would be 3 dollars in total.
-                feedback: That's right!
+                feedback: Vi pravas!
             -   option: Because the price is 0 dollars to begin with.
                 feedback: That's true, but not the reason
             correct_answer: C
@@ -1064,7 +1064,7 @@ levels:
             -   option: "```\n{repeat} 'saluton' 100 {times}\n```\n"
                 feedback: "{repeat} 100 {times} {print} 'saluton'"
             -   option: "```\n{repeat} 100 {times} {print} 'saluton'\n```\n"
-                feedback: That's right!
+                feedback: Vi pravas!
             correct_answer: D
             hint: First the repeat command, then the `{print}` command
             question_score: '10'
@@ -1072,7 +1072,7 @@ levels:
             question_text: Ĉu la jena kodo estas ĝusta aŭ ne?
             code: "{repeat} 100 {times} 'Saluton!'"
             mp_choice_options:
-            -   option: Right
+            -   option: Prave
                 feedback: Ne, vorto mankas
             -   option: Vi malpravas, la vorto `{repeat}` mankas
                 feedback: The word `{repeat}` is there, another word is missing
@@ -1088,7 +1088,7 @@ levels:
             code: "{print} 'I'm blue'\n{repeat} 7 {times} {print} 'da ba dee, da ba da'"
             mp_choice_options:
             -   option: "```\nI'm\n```\n"
-                feedback: That's right!
+                feedback: Vi pravas!
             -   option: "```\n{print}\n```\n"
                 feedback: '`{print}` is spelled correctly'
             -   option: "```\n{repeat}\n```\n"
@@ -1165,7 +1165,7 @@ levels:
             -   option: "```\n{print} Batman was flying through Gotham.\n{print} When suddenly he heard someone screaming...\n{repeat} 3 {times} {print} Help !\n{print} Please help me !\n```\n"
                 feedback: Je vergeet de aanhalingstekens
             -   option: "```\n{print} 'Batman was flying through Gotham.'\n{print} 'When suddenly he heard someone screaming...'\n{repeat} 3 {times} {print} 'Help !'\n{print} 'Please help me !'\n```\n"
-                feedback: Perfect
+                feedback: Perfekte
             question_score: '10'
             hint: "'Help !' wordt 3x herhaald."
             correct_answer: D
@@ -1224,7 +1224,7 @@ levels:
             -   option: "Baby shark tututudutudu \n Baby shark \n Baby shark tututudutudu \n Baby shark \n Baby shark tututudutudu \n Baby shark"
                 feedback: The last line has no indentation, so it's not repeated.
             -   option: "Baby shark tututudutudu \n Baby shark tututudutudu \n Baby shark tututudutudu \n Baby shark"
-                feedback: Right!
+                feedback: Vi pravas!
             -   option: "Baby shark tututudutudu \n Baby shark \n Baby shark \n Baby shark"
                 feedback: What is being repeated and what isn't.
             correct_answer: C
@@ -1250,7 +1250,7 @@ levels:
             code: "end = {ask} 'Do you want a happy or a sad ending?'\n{if} end {is} happy {print} 'They lived happily ever after'\n{else} {print} 'The world exploded. The end.'"
             mp_choice_options:
             -   option: The `{print}` commands on the last two lines should start on new lines en start with 4 spaces.
-                feedback: That's right!
+                feedback: Vi pravas!
             -   option: '`{else}` is not a command!'
                 feedback: It is!
             -   option: Lines that start with `{if}` should start with 4 spaces
@@ -1340,7 +1340,7 @@ levels:
             code: "{repeat} 3 {times}\n   eten = {ask} 'What would you like to eat?'\n   {if} food {is} fries\n       sauce = {ask} 'What sauce would you like?'\n       {print} 'One fries with ' sauce\n   {if} food {is} pizza\n       topping = {ask} 'What topping would you like?'\n       {print} 'One pizza with ' topping\n{print} 'That you for your order'"
             mp_choice_options:
             -   option: Nothing this code is correct!
-                feedback: That's right!.
+                feedback: Vi pravas!.
             -   option: You're not allowed to use an `{if}` command after an `{ask}` command.
                 feedback: You are!.
             -   option: You don't have to use indentation twice.
@@ -1389,7 +1389,7 @@ levels:
             -   option: "Cinderella with shoe size 40 gets the output: 'I was looking for you!'"
                 feedback: No, she gets 'Ill keep looking'
             -   option: Sleeping Beauty with shoe size 40 gets the output 'Ill keep looking'
-                feedback: That's right!
+                feedback: Vi pravas!
             -   option: Cinderella with shoe size 40 gets the output 'I was looking for you!'
                 feedback: No she gets 'Ill keep looking'
             correct_answer: C
@@ -1404,7 +1404,7 @@ levels:
             -   option: "```\ndesert = {ask} 'What is your favorite type of desert?'\n{if} desert {is} icecream\n{repeat} 3 {times}\n    {print} 'Icecream is the best!'\n```\n"
                 feedback: Use indentation after an `{if}` command
             -   option: "```\ndesert = {ask} 'What is your favorite type of desert?'\n{if} desert {is} icecream\n    {repeat} 3 {times}\n        {print} 'Icecream is the best!'\n```\n"
-                feedback: Perfect
+                feedback: Perfekte
             -   option: "```\n{repeat} 3 {times}\n    desert = {ask} 'What is your favorite type of desert?'\n    {if} desert {is} icecream\n        {repeat} 3 {times}\n        {print} 'Icecream is the best!'\n```\n"
                 feedback: There are 2 `{repeat}` commands in this code.
             correct_answer: C
@@ -1504,7 +1504,7 @@ levels:
             code: "1\n2\n3\n4\n5\nOnce I caught a fish alive!"
             mp_choice_options:
             -   option: "```\n{for} i {in} {range} 1 {to} 5\n    {print} i\n{print} 'Once I caught a fish alive!'\n```\n"
-                feedback: Perfect
+                feedback: Perfekte
             -   option: "```\n{for} i {in} {range} 1 {to} 5\n{print} i\n{print} 'Once I caught a fish alive!'\n```\n"
                 feedback: This code won't work. You need an indent after {for}.
             -   option: "```\n{for} i {in} {range} 1 {to} 5\n    {print} i\n    {print} 'Once I caught a fish alive!'\n```\n"
@@ -1525,7 +1525,7 @@ levels:
             -   option: "```\n{for} i {in} {range} 10 to 0\n    {print} i\n```\n"
                 feedback: Unfortunately this does not exist.
             -   option: "```\n{for} i {in} {range} 0 {to} 10\n    {print} 10 - i\n```\n"
-                feedback: That's right!
+                feedback: Vi pravas!
             correct_answer: D
             hint: It has to be a calculation...
             question_score: '10'
@@ -1549,13 +1549,13 @@ levels:
             code: "{for} i {in} _?_ 1 {to} 10\n    {print} i"
             mp_choice_options:
             -   option: "```\ncounter\n```\n"
-                feedback: No
+                feedback: Ne
             -   option: "```\n{range}\n```\n"
-                feedback: Correct
+                feedback: Ĝuste
             -   option: "```\n{if}\n```\n"
-                feedback: No
+                feedback: Ne
             -   option: "```\n{for}\n```\n"
-                feedback: No
+                feedback: Ne
             correct_answer: B
             hint: What did you learn in this level?
             question_score: '10'
@@ -1564,13 +1564,13 @@ levels:
             code: "{for} i {in} {range} 0 {to} 2\n    {print} 'Hello'"
             mp_choice_options:
             -   option: 1 time
-                feedback: No
+                feedback: Ne
             -   option: 2 times
-                feedback: No
+                feedback: Ne
             -   option: 3 times
-                feedback: That's right!
-            -   option: Never
-                feedback: No
+                feedback: Vi pravas!
+            -   option: Neniam
+                feedback: Ne
             correct_answer: C
             hint: 0 also counts. So 0,1,2 that's 3 times.
             question_score: '10'
@@ -1626,7 +1626,7 @@ levels:
             -   option: "```\n{for} i {in} {range} 1 {to} 3\n    {print} Baby shark tututudutudu\n    {print} Baby shark\n```\n"
                 feedback: Mind the indention
             -   option: "```\n{for} i {in} {range} 1 {to} 3\n    {print} Baby shark tututudutudu\n{print} Baby shark\n```\n"
-                feedback: That's right!
+                feedback: Vi pravas!
             -   option: "```\n{for} i {in} {range} 0 {to} 3\n    {print} Baby shark tututudutudu\n{print} Baby shark\n```\n"
                 feedback: '`{range}` 0 `{to}` 3 is 4 times.'
             -   option: "```\n{for} i {in} {range} 0 {to} 3\n    {print} Baby shark tututudutudu\n    {print} Baby shark\n```\n"
