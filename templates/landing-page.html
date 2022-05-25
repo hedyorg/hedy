@@ -2,49 +2,107 @@
 
 {% block main %}
 <div class="px-8">
-    <div id="landing_page_text" class="mt-4 w-3/4 mx-auto text-center">
-        <h1>{{_('welcome')}} {{ user }}!</h1>
-        <div class="mt-4">
-          <p class="text-lg">
-            {{_('landing_page_intro')}}
-          </p>
-          <p class="text-lg mt-0 pt-0">
-            {% if is_teacher %}
-              {{_('landing_page_teacher')}}
-            {% else %}
-              {{_('landing_page_student')}}
-            {% endif %}
-          </p>
-        </div>
+    <div id="landing_page_text" class="mt-4 px-4 text-center">
+        <h2 class="text-4xl">{% if first_time %}{{_('welcome')}}{% else %}{{_('welcome_back')}}{% endif %} {{ user }}!</h2>
     </div>
-    <div class="mt-8 mx-auto w-full flex flex-row justify-around">
+    <div class="mt-8 mx-auto flex justify-around">
         {% if is_teacher %}
-            <div class="border rounded-lg flex flex-col items-center mx-4 px-4 bg-white text-center border-green-500 bg-gray-200 hover:bg-green-400 cursor-pointer" onclick="window.location = '/teacher-tutorial'">
+            <div class="border-2 rounded-lg flex flex-col items-center mx-4 px-4 bg-white text-center border-green-400 bg-gray-200 hover:bg-green-400 cursor-pointer" onclick="window.location = '/teacher-tutorial'">
               <img src="/images/profile_images/3.png" class="h-32 mt-8">
               <div class="my-4">
                 <p class="text-xl">{{_('start_teacher_tutorial')}}</p>
               </div>
             </div>
         {% else %}
-            <div class="border rounded-lg flex flex-col items-center mx-4 px-4 bg-white text-center border-green-500 bg-gray-200 hover:bg-green-400 cursor-pointer" onclick="window.location = '/tutorial'">
+            <div class="border-2 rounded-lg flex flex-col items-center mx-4 px-4 bg-white text-center border-green-400 bg-gray-200 hover:bg-green-400 cursor-pointer" onclick="window.location = '/tutorial'">
               <img src="/images/profile_images/3.png" class="h-32 mt-8">
               <div class="my-4">
                 <p class="text-xl">{{_('start_hedy_tutorial')}}</p>
               </div>
             </div>
         {% endif %}
-        <div class="border rounded-lg flex flex-col items-center mx-4 px-4 bg-white text-center border-green-500 bg-gray-200 hover:bg-green-400 cursor-pointer" onclick="window.location = '/hedy'">
+        <div class="border-2 rounded-lg flex flex-col items-center mx-4 px-4 bg-white text-center border-green-400 bg-gray-200 hover:bg-green-400 cursor-pointer" onclick="window.location = '/hedy'">
             <img src="/images/Hedy-logo.png" class="h-32 mt-8">
             <div class="mt-4">
-              <p class="text-xl">{{_('directly_start_programming')}}</p>
+              <p class="text-xl">{{_('start_programming')}}</p>
             </div>
         </div>
-        <div class="border rounded-lg flex flex-col items-center mx-4 px-4 bg-white text-center border-green-500 bg-gray-200 hover:bg-green-400 cursor-pointer" onclick="window.location = '/explore'">
+        <div class="border-2 rounded-lg flex flex-col items-center mx-4 px-4 bg-white text-center border-green-500 bg-gray-200 hover:bg-green-400 cursor-pointer" onclick="window.location = '/explore'">
             <img src="/images/profile_images/5.png" class="h-32 mt-8">
             <div class="mt-4">
               <p class="text-xl">{{_('explore_programs')}}</p>
             </div>
         </div>
     </div>
+    {% if not first_time %}
+        <div class="mt-8">
+            <h2>{{_('your_account')}}</h2>
+            <div id="general_info" class="flex flex-row items-center h-64 mt-8 mx-2">
+                <div class="w-1/3 mr-4 h-full flex items-center justify-center">
+                    {% if user_info.image %}
+                        <img src="{{static('/images/profile_images/' + user_info.image + '.png')}}" class="w-64">
+                    {% else %}
+                        <img src="{{static('/images/Hedy-logo.png')}}" class="w-64">
+                    {% endif %}
+                </div>
+                <div class="w-full h-full bg-blue-200 flex flex-col rounded-lg border border-black">
+                    <div class="flex flex-row items-center h-12 bg-blue-600 rounded-t-lg px-4 font-medium">
+                        <div class="text-white tracking-wide text-4xl">{{ user }}</div>
+                        {% if achievements['achieved'] %}
+                            <div class="text-white text-xl ml-auto">{{ achievements['achieved']|length }} {{_('achievements')}}</div>
+                        {% endif %}
+                    </div>
+                    <div class="my-auto px-16 text-xl italic" rel="noreferrer">
+                        {% if user_info.personal_text %}
+                            {{ user_info.personal_text }}
+                        {% else %}
+                            {{_('no_public_profile')}}
+                        {% endif %}
+                    </div>
+                    {% if achievements %}
+                        <div class="mt-auto">
+                            <div class="font-semibold bg-blue-600 pb-2 pt-2 text-white flex flex-row justify-center rounded-b-lg">
+                                {% if achievements.run_programs %}
+                                    <div>{{ achievements.run_programs }} {{_('amount_created')}}</div>
+                                {% else %}
+                                    <div>0 {{_('amount_created')}}</div>
+                                {% endif %}
+                                <div class="mx-2">|</div>
+                                {% if achievements.saved_programs %}
+                                    <div>{{ achievements.saved_programs }} {{_('amount_saved')}}</div>
+                                {% else %}
+                                    <div>0 {{_('amount_saved')}}</div>
+                                {% endif %}
+                                <div class="mx-2">|</div>
+                                {% if achievements.submitted_programs %}
+                                    <div>{{ achievements.submitted_programs }} {{_('amount_submitted')}}</div>
+                                {% else %}
+                                    <div>0 {{_('amount_submitted')}}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+                {% if last_achieved %}
+                    <div class="text-center rounded-lg bg-yellow-400 w-1/3 ml-4 mr-4 border border-black">
+                        <h3>{{_('last_achievement')}}</h3>
+                        <img class="w-full px-8 mt-2" src="{{static('/images/achievement.png')}}">
+                        <h4>{{ achievements[last_achieved].title }}</h4>
+                    </div>
+                {% endif %}
+            </div>
+            {% if program %}
+                <h2>{{_('your_last_program')}}</h2>
+                <div class="w-full rounded-lg border border-black mt-4 relative bg-blue-200 cursor-pointer" onclick="window.open (hedyApp.viewProgramLink('{{program.id}}'))">
+                    <div class="flex items-center justify-center mt-2 mb-2">
+                        <p>{{ program.name }}</p>
+                    </div>
+                    <div class="relative mb-4 px-4 turn-pre-into-ace">
+                        <pre class="no-copy-button" level="{{ program.level }}">{{ program.code | truncate(200) }}</pre>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    {% endif %}
 </div>
 {% endblock %}
