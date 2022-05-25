@@ -43,17 +43,17 @@ levels:
             hint: You can ask something with the `{ask}` command
             question_score: '10'
         4:
-            question_text: What is wrong with this code?
-            code: "Hi Im Hedy!\n{ask} Who are you?\n{echo} Hi..."
+            question_text: Kiel la jena kodo estas erara?
+            code: "Saluton de l programlingvo Hedy!\n{ask} Kiu vi estas?\n{echo} Saluton..."
             mp_choice_options:
             -   option: '`{print}` en linio 1 mankas.'
                 feedback: Ĝuste!
-            -   option: Im in line 1 is spelled wrong.
-                feedback: Im is spelled wrong on purpose; Hedy doesn't understand the apostrophes yet.
+            -   option: Apostrofo mankas en linio 1.
+                feedback: La apostrofo intence mankas; Hedy ankoraŭ ne komprenas apostrofojn.
             -   option: "`{echo}` ne estas komando."
-                feedback: "`{echo}` is a command, there's another mistake."
+                feedback: "`{echo}` ja estas komando."
             -   option: Nenio! Jen perfekta kodo!
-                feedback: Wrong, look carefully!
+                feedback: Malĝuste, rigardu atente!
             correct_answer: A
             hint: Line 1 doesn't seem right
             question_score: '10'
@@ -68,7 +68,7 @@ levels:
             -   option: "```\n{ask}\n```\n"
                 feedback: Per `{ask}`, vi povas demandi pri io.
             -   option: "```\n{echo}\n```\n"
-                feedback: Right on!
+                feedback: Ĝuste!
             correct_answer: D
             hint: You want to see the answer at the end of line 2...
             question_score: '10'
@@ -110,7 +110,7 @@ levels:
             -   option: You can use it to `{print}` text.
                 feedback: That's what `{print}` is for!
             -   option: You can use it to repeat an answer.
-                feedback: Good job!
+                feedback: Bonege!
             -   option: You can use it to make text disappear.
                 feedback: That's not right...
             correct_answer: C
@@ -118,13 +118,13 @@ levels:
             question_score: '10'
         9:
             question_text: Kio estas malĝusta pri la jena kodo?
-            code: "{print} Hello!\n{print} How are you doing?\n{echo} So you are doing..."
+            code: "{print} Saluton!\n{print} Kiel vi fartas?\n{echo} Do vi fartas..."
             mp_choice_options:
             -   option: '`{print}` en linio 1 estu `{ask}`'
                 feedback: No, `{print}` is right. Where is the question being asked?
-            -   option: '`{print}` in line 2 should be `{ask}`'
+            -   option: '`{print}` en linio 2 estu `{ask}`'
                 feedback: Bonege!
-            -   option: '`{echo}` in line 3 should be `{ask}`'
+            -   option: '`{echo}` en linio 3 estu `{ask}`'
                 feedback: No, `{echo}` is right. Where is the question being asked?
             -   option: Nenio. Jen perfekta kodo!
                 feedback: Look carefully for the mistake...
@@ -293,7 +293,7 @@ levels:
             question_score: '10'
     2:
         1:
-            question_text: Which statement is true?
+            question_text: Kiu aserto estas vera?
             mp_choice_options:
             -   option: In level 2 the `{print}` command doesn't exist anymore
                 feedback: '`{print}` still works'
@@ -351,14 +351,14 @@ levels:
             hint: "'name' is being replaced with 'Hedy' in both places"
             question_score: '10'
         5:
-            question_text: What happens when you use the `{sleep}` command?
+            question_text: Kio okazas, kiam oni uzas la komandon `{sleep}`?
             code: '{sleep}'
             mp_choice_options:
-            -   option: It slows down your computer
-                feedback: fortunately not!
-            -   option: It closes down Hedy
-                feedback: fortunately not!
-            -   option: Your program pauses for a second and then continues
+            -   option: Tio malrapidigas la komputilon
+                feedback: feliĉe, ne!
+            -   option: Tio fermas Hedy
+                feedback: feliĉe, ne!
+            -   option: La programo paŭzas dum sekundo kaj poste daŭras ruliĝi
                 feedback: Vi pravas!
             -   option: You put it at the end so Hedy knows your program is finished
                 feedback: No it would be useless at the end of your code
@@ -366,8 +366,8 @@ levels:
             hint: The computer waits for a second at the `{sleep}` command
             question_score: '10'
         6:
-            question_text: What should be on the lines?
-            code: "{print} And the award for best programming language goes to...\n_?_\n{print} Hedy!"
+            question_text: Kio estu en la mankanta linio?
+            code: "{print} Kaj la premion por la plej bona programingvo gajnas...\n_?_\n{print} Hedy!"
             mp_choice_options:
             -   option: "```\n{sleep}\n```\n"
                 feedback: Perfekte!
@@ -385,7 +385,7 @@ levels:
             code: "{print} I will explode in 3 seconds!\n_?_\n{print} BOOM!"
             mp_choice_options:
             -   option: "```\n{print} 3\n```\n"
-                feedback: You don't need to `{print}`
+                feedback: Vi ne bezonas la komandon `{print}`
             -   option: "```\n{sleep} 3\n```\n"
                 feedback: Perfekte!
             -   option: "```\n{sleep}\n```\n"
@@ -396,17 +396,17 @@ levels:
             hint: You want the computer to wait for 3 seconds
             question_score: '10'
         8:
-            question_text: How would you correct the first line of code?
-            code: "{ask} {is} How old are you?\n{print} age"
+            question_text: Kiel korekti la unuan linion de la jena kodo?
+            code: "{ask} {is} Kian aĝon vi havas?\n{print} aĝo"
             mp_choice_options:
-            -   option: "```\nage {ask} {is} How old are you?\n```\n"
-                feedback: That is the wrong order
-            -   option: "```\n{ask} {is} age How old are you?\n```\n"
-                feedback: That is the wrong order
-            -   option: "```\nage {is} {ask} How old are you?\n```\n"
-                feedback: You get it!
-            -   option: "```\nage {is} How old are you?\n```\n"
-                feedback: Where is the `{ask}` command?
+            -   option: "```\naĝo {ask} {is} Kian aĝon vi havas?\n```\n"
+                feedback: La ordo estas malĝusta
+            -   option: "```\n{ask} {is} aĝo Kian aĝon vi havas?\n```\n"
+                feedback: La ordo estas malĝusta
+            -   option: "```\naĝo {is} {ask} Kian aĝon vi havas?\n```\n"
+                feedback: Vi pravas!
+            -   option: "```\naĝo {is} Kian aĝon vi havas?\n```\n"
+                feedback: Kie estas la komando `{ask}`?
             correct_answer: C
             hint: The variable name should come first
             question_score: '10'
@@ -635,7 +635,7 @@ levels:
             hint: Both before and after the words you want to print should be a quotation mark.
             question_score: '10'
         4:
-            question_text: Which statement is true?
+            question_text: Kiu aserto estas vera?
             mp_choice_options:
             -   option: "You need quotation marks around the word `{print}`, like this: `'{print}'`."
                 feedback: The quotation marks shouldn't be around the command itself.
@@ -724,7 +724,7 @@ levels:
             hint: What are Hedy's options to randomly pick from?
             question_score: '10'
         10:
-            question_text: Which statement is true?
+            question_text: Kiu aserto estas vera?
             code: "people {is} mom, dad, Emma, Sophie\n{print} The dishes are done by...\n{print} people {at} {random}"
             mp_choice_options:
             -   option: Quotation marks are missing in line 1
@@ -926,7 +926,7 @@ levels:
             -   option: '30'
                 feedback: This would be the right answer if there were no quotation marks.
             -   option: '13'
-                feedback: Reprovu..
+                feedback: Reprovu...
             -   option: 3*10
                 feedback: Ĝuste! There are quotation marks, so Hedy will print it literally.
             -   option: Nothing, Hedy will give an error message.
@@ -935,7 +935,7 @@ levels:
             hint: Mind the quotation marks!!
             question_score: '10'
         4:
-            question_text: Kim is 10 years old. What will Hedy print for her?
+            question_text: Kim estas 10 jarojn aĝa. Kion Hedy presos por ŝi?
             code: "name = {ask} 'How many letters are in your name?'\nage = {ask} 'How old are you?'\nluckynumber = name*age\n{print} 'Your lucky number is...' luckynumber"
             mp_choice_options:
             -   option: '30'
@@ -1025,7 +1025,7 @@ levels:
             hint: (2 bananas + 3 hygiene) * 10 football = 5*10 =?
             question_score: '10'
         10:
-            question_text: Which statement is true?
+            question_text: Kiu aserto estas vera?
             code: "name _?_ Hedy\n{print} name 'is walking trough the forrest'"
             mp_choice_options:
             -   option: You can only fill in the word is on the `_?_`
@@ -1140,28 +1140,28 @@ levels:
             hint: Mind the `{repeat}` command.
             question_score: '10'
         8:
-            question_text: Welke Hedy code hoort bij dit resultaat
+            question_text: Kiu kodo presas la jenon?
             code: "Here comes the sun\nDo do do do\nHere comes the sun\nAnd I say\nIts alright"
             mp_choice_options:
             -   option: "```\n{print} 'Here comes the sun'\n{print} 'Do do do do'\n{print} 'Here comes the sun'\n{print} 'And I say'\n{print} 'Its alright'\n```\n"
-                feedback: Perfect, je kan het `{repeat}` commando hier niet gebruiken.
+                feedback: Perfekte, vi ne povas uzi la komandon `{repeat}` ĉi tie.
             -   option: "```\n{repeat} 2 {times} {print} 'Here comes the sun'\n{print} 'And I say'\n{print} 'Its alright'\"\n"
                 feedback: Waar is de 'Do do do do' gebleven?
             -   option: "```\n{repeat} 2 {times} {print} 'Here comes the sun'\n{print} 'Do do do do'\n{print} 'And I say'\n{print} 'Its alright'\n```\n"
-                feedback: Dit is niet de juiste volgorde..
+                feedback: Tio ne estas la ĝusta ordo..
             -   option: "```\n{repeat} 2 {times} {print} 'Here comes the sun'\n{repeat} 2 {times} {print} 'Do do'\n{print} 'And I say'\n{print} 'Its alright'\"\n```\n"
-                feedback: Dit is niet de juiste volgorde..
+                feedback: Tio ne estas la ĝusta ordo..
             hint: '`{repeat}` kan alleen worden gebruikt als je dezelfde regel meerdere keren achter elkaar wil uitvoeren.'
             correct_answer: A
             question_score: '10'
         9:
-            question_text: Welke Hedy code hoort bij dit resultaat ?
+            question_text: Kiu kodo presas la jenon?
             code: "Batman was flying through Gotham.\nWhen suddenly he heard someone screaming...\nHelp !\nHelp !\nHelp !\nPlease help me !\""
             mp_choice_options:
             -   option: "```\n{print} 'Batman was flying through Gotham. '\n{print} 'When suddenly he heard someone screaming...'\n{print} 'Help !'\n{repeat} 3 {times} {print} 'Please help me !'\n```\n"
                 feedback: Je herhaalt de verkeerde regel
             -   option: "```\n{print} 'Batman was flying through Gotham.'\n{print} 'When suddenly he heard someone screaming...'\n{repeat} 3 {times} 'Help !'\n{print} 'Please help me !'\n```\n"
-                feedback: Het commando `{print}` mist op regel 3
+                feedback: La komando `{print}` mankas en linio 3.
             -   option: "```\n{print} Batman was flying through Gotham.\n{print} When suddenly he heard someone screaming...\n{repeat} 3 {times} {print} Help !\n{print} Please help me !\n```\n"
                 feedback: Je vergeet de aanhalingstekens
             -   option: "```\n{print} 'Batman was flying through Gotham.'\n{print} 'When suddenly he heard someone screaming...'\n{repeat} 3 {times} {print} 'Help !'\n{print} 'Please help me !'\n```\n"
@@ -1170,7 +1170,7 @@ levels:
             hint: "'Help !' wordt 3x herhaald."
             correct_answer: D
         10:
-            question_text: What Hedy code belongs to this output?
+            question_text: Kiu kodo presas la jenon?
             code: "if youre happy and you know it clap your hands\nif youre happy and you know it clap your hands\nif youre happy and you know it and you really want to show it\nif youre happy and you know it clap your hands"
             mp_choice_options:
             -   option: "```\n{repeat} 2 {times} 'if youre happy and you know it clap your hands'\n{print} 'if youre happy and you know it and you really want to show it'\n{print} 'if youre happy and you know it clap your hands'\n```\n"
@@ -1320,7 +1320,7 @@ levels:
             hint: The lines after an `{if}` or `{else}` command should start with 4 spaces.
             question_score: '10'
         10:
-            question_text: Which statement is true?
+            question_text: Kiu aserto estas vera?
             code: "1 level = {ask} 'What level are you on?\"\n2 {if} level {is} 8\n3 {print} Great job!"
             mp_choice_options:
             -   option: All lines should start with 4 spaces
@@ -1381,7 +1381,7 @@ levels:
             hint: Follow the right path
             question_score: '10'
         4:
-            question_text: Which statement is true?
+            question_text: Kiu aserto estas vera?
             code: "name = {ask} 'What is your name?'\nsize = {ask} 'What is your shoe size?'\n{if} size {is} 38\n    {if} name {is} Cinderella\n        {print} 'I was looking for you!'\n    {else}\n        {print} 'You are not the one!'\n{else}\n    {print} 'Ill keep looking'"
             mp_choice_options:
             -   option: Sleeping Beauty with shoe size 38 gets the output 'Ill keep looking'
@@ -1469,7 +1469,7 @@ levels:
             hint: You can put an `{if}` command inside an `{if}` command.
             question_score: '10'
         10:
-            question_text: Which statement is true?
+            question_text: Kiu aserto estas vera?
             code: "1 {repeat} 2 {times}\n2 {if} level {is} 9\n3 {print} Great job!"
             mp_choice_options:
             -   option: All lines should start with 4 spaces
@@ -1560,19 +1560,19 @@ levels:
             hint: What did you learn in this level?
             question_score: '10'
         6:
-            question_text: How many times does the word Hello appear on your screen when you run the code?
-            code: "{for} i {in} {range} 0 {to} 2\n    {print} 'Hello'"
+            question_text: Kiom da fojoj la vorto «Saluton» aperas sur via ekrano, kiam oni rulas la jenan kodon?
+            code: "{for} i {in} {range} 0 {to} 2\n    {print} 'Saluton'"
             mp_choice_options:
-            -   option: 1 time
+            -   option: 1 fojo
                 feedback: Ne
-            -   option: 2 times
+            -   option: 2 fojoj
                 feedback: Ne
-            -   option: 3 times
+            -   option: 3 fojoj
                 feedback: Vi pravas!
             -   option: Neniam
                 feedback: Ne
             correct_answer: C
-            hint: 0 also counts. So 0,1,2 that's 3 times.
+            hint: 0 ankaŭ validas. Do 0, 1, 2 – jen tri fojoj.
             question_score: '10'
         7:
             question_text: What should be on the place of the question mark?
