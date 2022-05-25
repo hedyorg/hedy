@@ -1,5 +1,5 @@
-import {error, modal} from "./modal";
-import {get_trimmed_code, pushAchievement, runit, runPythonProgram, showAchievements, theGlobalEditor} from "./app";
+import {modal} from "./modal";
+import {pushAchievement, runit, theGlobalEditor} from "./app";
 
 let current_step = 0;
 let student = true;
@@ -30,7 +30,9 @@ function codeOutputStep() {
   $('#code_output').addClass("z-40");
   addHighlightBorder("code_output");
 
-  runit(window.State.level || "", "en", "", () => void);
+  runit ("1", "en", "", function () {
+    $ ('#output').focus ();
+  });
 
   relocatePopup(35, 30);
   tutorialPopup(current_step);
