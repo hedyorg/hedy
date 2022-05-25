@@ -51,22 +51,14 @@ function runButtonStep() {
 }
 
 function tryRunButtonStep() {
-  let example_output = "Hello world!\nI'm learning Hedy with the tutorial!";
   $.ajax({
       type: 'GET',
       url: '/get_tutorial_step/code_snippet/',
       dataType: 'json'
     }).done(function(response: any) {
        theGlobalEditor?.setValue(response.code);
-       example_output = response.output;
     }).fail(function() {
        theGlobalEditor?.setValue("print Hello world!\nprint I'm learning Hedy with the tutorial!");
-    }).then(function() {
-        theGlobalEditor?.setOptions({readOnly: true});
-        example_output = JSON.stringify(example_output);
-        // This is not really nice as we "copy" the addToOutput function from app.ts, but it works to prevent achievements
-        // We simpy generate the output on the response and add it to the output when pressing "runit"
-        $('#runit').attr('onClick', '$("#output").empty();$("<span>").text(' + example_output + ').css({color: "white"}).appendTo("#output");');
     });
 
   relocatePopup(50, 70);
