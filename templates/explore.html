@@ -18,16 +18,23 @@
     <div class="w-full mb-4" id="program_filter">
         <form onsubmit="event.preventDefault (); hedyApp.filter_programs();">
             <div class="flex flex-row px-4 w-full items-center border border-gray-400 py-2 rounded-lg">
+                <select id="explore_page_adventure" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded ltr:mr-4 rtl:ml-4">
+                    <option disabled selected value="">{{ _('adventure') }}</option>
+                    {% for adventure_key, name in adventures_names.items() %}
+                        <option value="{{ adventure_key }}" {% if filtered_adventure and adventure_key == filtered_adventure %}selected{% endif %}>{{ name }}</option>
+                    {% endfor %}
+                </select>
                 <select id="explore_page_level" class="block appearance-none w-1/3 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded ltr:mr-4 rtl:ml-4">
                     <option disabled selected value="">{{_('level')}}</option>
                     {% for i in range(1, (max_level + 1)) %}
                         <option value="{{ i }}" {% if filtered_level and i|string == filtered_level %}selected{% endif %}>{{ i }}</option>
                     {% endfor %}
                 </select>
-                <select id="explore_page_adventure" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded ltr:mr-4 rtl:ml-4">
-                    <option disabled selected value="">{{ _('adventure') }}</option>
-                    {% for adventure_key, name in adventures_names.items() %}
-                        <option value="{{ adventure_key }}" {% if filtered_adventure and adventure_key == filtered_adventure %}selected{% endif %}>{{ name }}</option>
+                <select id="explore_page_language" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded ltr:mr-4 rtl:ml-4">
+                    <option disabled selected value="">{{_('language')}}</option>
+                    <option value="{{ current_language().lang}}" {% if filtered_lang and filtered_lang == current_language().lang %}selected{% endif %}>{{current_language().sym}}</option>
+                    {% for language in other_languages() %}
+                        <option value="{{language.lang}}"{% if filtered_lang and filtered_lang == language.lang %}selected{% endif %}>{{language.sym}}</option>
                     {% endfor %}
                 </select>
                 <div class="flex flex-row ltr:ml-auto rtl:mr-auto">
