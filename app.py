@@ -399,7 +399,7 @@ def parse():
 
             try:
                 transpile_result = transpile_add_stats(code, level, lang)
-                if username:
+                if username and not body.get('tutorial'):
                     DATABASE.increase_user_run_count(username)
                     ACHIEVEMENTS.increase_count("run")
             except hedy.exceptions.FtfyException as ex:
@@ -431,7 +431,7 @@ def parse():
         except:
             pass
         try:
-            if username and ACHIEVEMENTS.verify_run_achievements(username, code, level, response):
+            if username and not body.get('tutorial') and ACHIEVEMENTS.verify_run_achievements(username, code, level, response):
                 response['achievements'] = ACHIEVEMENTS.get_earned_achievements()
         except Exception as E:
             print(f"error determining achievements for {code} with {E}")
@@ -487,6 +487,20 @@ def parse_by_id(user):
             return {"error": "parsing error"}, 200
     else:
         return 'this is not your program!', 400
+
+
+@app.route('/parse_tutorial', methods=['POST'])
+@requires_login
+def parse_tutorial(user):
+    body = request.json
+
+    code = body['code']
+    level = int(body['level'])
+    try:
+        result = hedy.transpile(code, level, "en")
+        jsonify({'code': NORMAL_PREFIX_CODE + result.code}), 200
+    except:
+        return "error", 400
 
 
 def transpile_add_stats(code, level, lang_):
@@ -1268,7 +1282,7 @@ def teacher_tutorial_steps(step):
 def get_tutorial_translation(step):
     # We also retrieve the example code snippet as a "tutorial step" to reduce the need of new code
     if step == "code_snippet":
-        return jsonify({'code': gettext('tutorial_code_snippet'), 'output': gettext('tutorial_code_output')}), 200
+        return jsonify({'code': gettext('tutorial_code_snippet')}), 200
     try:
         step = int(step)
     except ValueError:

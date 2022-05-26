@@ -285,6 +285,7 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
         level: level,
         code: code,
         lang: lang,
+        tutorial: $('#code_output').hasClass("z-40"), // if so -> tutorial mode
         read_aloud : !!$('#speak_dropdown').val(),
         adventure_name: window.State.adventure_name
       }),
