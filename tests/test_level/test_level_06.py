@@ -363,7 +363,7 @@ class TestsLevel6(HedyTester):
             max_level=7,
             code=code,
             expected=expected,
-            expected_commands=['is', 'else', 'print', 'print']
+            expected_commands=['is', 'if', 'else', 'print', 'print']
         )
 
     def test_if_equality_linebreak_print_else_print(self):
