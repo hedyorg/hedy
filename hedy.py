@@ -861,7 +861,7 @@ class AllCommands(Transformer):
             return 'input'
         if keyword == 'print_empty_brackets':
             return 'print'
-        return keyword
+        return str(keyword)
 
     def __default__(self, args, children, meta):
         # if we are matching a rule that is a command
@@ -870,6 +870,8 @@ class AllCommands(Transformer):
         operators = ['addition', 'subtraction', 'multiplication', 'division'] # for the achievements we want to be able to also detct which operators were used by a kid
 
         if production_rule_name in commands_per_level[self.level] or production_rule_name in operators:
+            if production_rule_name == 'else': # use of else also has an if
+                return ['if', 'else'] + leaves
             return [production_rule_name] + leaves
         else:
             return leaves # 'pop up' the children
