@@ -134,67 +134,24 @@ class HighlightTester(unittest.TestCase):
         simulator = SimulatorAce(state_machine)
         result = simulator.highlight(code)
 
-        valid, ind_error = self.compare(result, expected)
+        result = list(result)
+        expected = list(expected)
 
-        if not valid:
+        # check if they are same length
+        self.assertEqual(len(result),len(expected))
 
-            code_list     = code.split('\n')
-            expected_list = expected.split('\n')
-            result_list   = result.split('\n')
+        # replacement of space by result coloration
+        for i in range(len(result)):
+            if expected[i] == " ":
+                # only if it's different from pink
+                self.assertIn(result[i], ['T', 'K', 'C', 'N', 'S'])
+                result[i] = expected[i]
 
-            line_cpt = 0
-            while ind_error >= len(code_list[line_cpt]):
-                ind_error -= len(code_list[line_cpt]) +1
-                line_cpt += 1
+        result = "".join(result)
+        expected = "".join(expected)
 
-            print("ERROR in this code :")
-            print("In this code :", code_list[line_cpt] )
-            print("We want      :", expected_list[line_cpt] )
-            print("We have      :", result_list[line_cpt] )
-            print("At           :", " " * ind_error + "^")
-
-        self.assertTrue(valid)
-
-
-    
-
-    
-    def compare(self, result, expected):
-        """Compare two colorations
-
-        This function allows to compare 2 syntactic colorations
-        one desired and the other obtained, and manages some special cases.
-
-        This function takes into account the characters
-        whose coloring has not been fixed.
-
-        Arguments :
-            - result : str,
-            - expected : str,
-
-        Returns a boolean and a value:
-            - If the 2 highlights are consistent, the boolean will be true and the value unused
-            - if there is an error in the highlight, the boolean will be false and
-            the value will be the number of the 1st character where there is an inconsistency
-        """
-        if len(result) != len(expected):
-            raise ValueError(f"The desired highlight {len(expected)} and the obtained highlight {len(result)} do not have the same length !")
-
-        cpt = 0
-        for i in range(len(expected)):
-            ch_wanted, ch_result = expected[i], result[i]
-
-            if ch_wanted == ch_result:
-                pass # if they are the same, no problem 
-            elif ch_wanted == " " and ch_result in ['T', 'K', 'C', 'N', 'S']:
-                pass # if it was not fixed at the beginning, everything is tolerated except the pink highlighting
-            else:
-                # in all other cases, an error is returned indicating the number of the problematic character
-                return False, cpt
-
-            cpt += 1
-
-        return True, -1
+        # test between two coloration
+        self.assertEqual(result ,expected)
 
 
 
