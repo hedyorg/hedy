@@ -41,12 +41,18 @@ def extract_Lark_grammar_from_yaml():
 
         translation_copy = copy.deepcopy(translations)
         for k, v in translation_copy.items():
+            if yaml_lang == "ar":
+              mixed_tatweel_in = ''.join([' "ـ"* ' + '"'+l+'"' for l in v]) + ' "ـ"* '
+              translations[k] = mixed_tatweel_in
+            else:
+              # other languages need their translations surrounded by "'s
+              translations[k] = '"' + v + '"'
+
+            # we use | if we have multiple options, such as repete and repète
             if "|" in v:
                 valid_translation = ""
                 options = v.split("|")
-                for i in range(0, len(options)-1):
-                    valid_translation += options[i] + "\" | "
-                valid_translation += "\"" + (options[-1])
+                valid_translation = ' | '.join(['"' + option + '"' for option in options])
                 translations[k] = valid_translation
 
         translated_template = template.format(**translations)
@@ -57,27 +63,5 @@ def extract_Lark_grammar_from_yaml():
             f.write(translated_template)
 
 extract_Lark_grammar_from_yaml()
-
-def relax_keywords_ar():
-  input_path = '../content/keywords/'
-  current_grammar_path = '../grammars/'
-  output_path = '../grammars-transformed/'
-  Path(output_path).mkdir(parents=True, exist_ok=True)
-
-  ar_yaml_path = os.path.join(input_path, 'ar' + '.yaml')
-  with open(ar_yaml_path, 'r', encoding='utf-8') as stream:
-    ar_yaml = yaml.safe_load(stream)
-    ar_yaml_relaxed = {}
-    for k, v in ar_yaml.items():
-      tatweel_appended = [f'"{l}"' for l in v]
-      ar_yaml_relaxed[k] = ' "ـ"* ' + ' "ـ"* '.join(tatweel_appended) + ' "ـ"* '
-
-  ar_yaml_output_path = os.path.join(output_path, 'ar' + '.yaml')
-
-  with open(ar_yaml_output_path, 'w+', encoding='utf-8') as f:
-    yaml.safe_dump(ar_yaml_relaxed, f, allow_unicode=True)
-
-relax_keywords_ar()
-
 
 
