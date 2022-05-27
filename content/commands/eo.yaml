@@ -17,36 +17,36 @@
     demo_code: '{repeat} 3 {times} {forward} 10'
 9:
 -   name: '`{if}` kun pluraj linioj'
-    explanation: The answer of a sum of questions with '{ask}' and see if it is correct. Now we print out two lines.
+    explanation: La respondo al demando pri sumo per `{ask}`; kontrolu, ĉu ĝi estas ĝusta. Nun ni presu du liniojn.
     example: "Ekzemple: respondo = {ask} 'Kio estas 20 plus 20?'"
     demo_code: "respondo = {ask} 'Kio estas 20 plus 20?'\n{if} respondo {is} 20\n    {print} 'Bonege!'\n    {print} 'La ĝusta respondo estas ja ' respondo\n{else}\n    {print} 'Vi malpravas.'\n    {print} 'La ĝusta respondo estas 20'"
 -   name: '`{repeat}` kaj testudo'
-    explanation: '{repeat} multiple lines'
+    explanation: '`{repeat}` plurajn liniojn'
     example: 'Ekzemple: krei kvadraton'
     demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
 14:
 -   name: Pli malgranda
-    explanation: We use the `<` to check if the first number is smaller than the second number.
+    explanation: Oni uzas la signon `<` por kontroli, ĉu la unua nombro estas pli malgranda ol la dua nombro.
     example: 'Ekzemple: aĝo < 12'
     demo_code: "aĝo = {ask} 'Kian aĝon vi havas?'\n{if} aĝo < 13\n    {print} 'Vi estas pli juna ol mi!'"
 -   name: Pli granda
-    explanation: We use the `>` to check if the first number is bigger than the second number.
+    explanation: Oni uzas la signon `>` por kontroli, ĉu la unua nombro estas pli granda ol la dua nombro.
     example: 'Ekzemple: aĝo > 12'
     demo_code: "aĝo = {ask} 'Kian aĝon vi havas?'\n{if} aĝo > 13\n    {print} 'Vi estas pli aĝa ol mi!'"
 -   name: Egala
-    explanation: We use the `==` to check if two things are the same.
+    explanation: Oni uzas la signon `==` por kontroli, ĉu la unua egalas la duan.
     example: 'Ekzemple: respondo == 25'
     demo_code: "respondo = {ask} 'Kio estas 5 * 5?'\n{if} respondo == 25\n    {print} 'Vi pravas!'"
 -   name: Ne egala
-    explanation: 'We use the `!=` to check if two things are not the same. '
+    explanation: 'Oni uzas la signon `!=` por kontroli, ĉu la unua diferencas de la duan. '
     example: 'Ekzemple: respondo != 25'
     demo_code: "respondo = {ask} 'Kio estas 5 * 5?'\n{if} respondo != 25\n    {print} 'Tio ne pravas!'"
 -   name: Pli malgranda aŭ egala
-    explanation: We use the `<=` to check if the first number is smaller than or equal to the second number.
+    explanation: Oni uzas la signon `<=` por kontroli, ĉu la unua nombro estas pli malgranda ol aŭ egala al la dua nombro.
     example: 'Ekzemple: aĝo <= 12'
     demo_code: "aĝo = {ask} 'Kian aĝon vi havas?'\n{if} aĝo <= 12\n    {print} 'Vi estas pli juna ol mi!'"
 -   name: Pli granda aŭ egala
-    explanation: We use the `>=` to check if the first number is bigger than or equal to the second number.
+    explanation: Oni uzas la signon `>=` por kontroli, ĉu la unua nombro estas pli granda ol aŭ egala al la dua nombro.
     example: 'Ekzemple: aĝo >= 14'
     demo_code: "aĝo = {ask} 'Kian aĝon vi havas?'\n{if} aĝo >= 14\n    {print} 'Vi estas pli aĝa ol mi!'"
 1:
@@ -144,7 +144,7 @@
     example: "Ekzemple: {print} '5 multiplikite per 5 estas ' 5 * 5"
     demo_code: "{print} '5 multiplikite per 5 estas ' 5 * 5"
 -   name: '{ask}'
-    explanation: '{ask} for a calculation and check whether it is correct.'
+    explanation: 'demandi pri kalkulo kaj kontroli, ĉu la respondo estas ĝusta.'
     example: "Ekzemple: respondo {is} {ask} 'Kio estas 10 plus 10?'"
     demo_code: "respondo = {ask} 'Kio estas 10 plus 10?'\n{if} respondo {is} 20 {print} 'Jes!' {else} {print} 'Vi malpravas'"
 -   name: '`{ask}` kaj `{if}` kun testudo'
@@ -153,11 +153,11 @@
     demo_code: "anguloj = {ask} 'Kiom da anguloj?'\nangulo = 360 / anguloj\n{forward} 50"
 8:
 -   name: '{print}'
-    explanation: print something. Remember to use a quotation mark for literal printing.
+    explanation: presi ion. Ne forgesu uzi citilojn por laŭvorta presado.
     example: "Ekzemple: {print} '5 multiplikite per 5 estas ' 5 * 5"
     demo_code: "{print} '5 multiplikite per 5 estas ' 5 * 5"
 -   name: '{ask}'
-    explanation: ask for the answer to a sum and check if it is correct. We can now print 2 lines.
+    explanation: demandi pri sumo kaj kontroli, ĉu la respondo estas ĝusta. Ni povas nun presi du liniojn.
     example: "Ekzemple: respondo {is} {ask} 'Kio estas 5 plus 5?'"
     demo_code: "respondo = {ask} 'Kio estas 5 plus 5?'\n{if} respondo {is} 10\n    {print} 'Bonege!'\n    {print} 'Ja la prava respondo estas ' respondo\nelse\n    {print} 'Ho!'\n    {print} 'La prava respondo estas 10'"
 -   name: '`{repeat}` kun testudo'
@@ -166,7 +166,7 @@
     demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
 10:
 -   name: '{print}'
-    explanation: print something. Remember to use a quotation mark for literal printing.
+    explanation: presi ion. Ne forgesu uzi citilojn por laŭvorta presado.
     example: "Ekzemple: {print} '5 multiplikite per 5 estas ' 5 * 5"
     demo_code: "{print} '5 multiplikite per 5 estas ' 5 * 5"
 -   name: '`{for}` kun listo'
@@ -179,11 +179,11 @@
     example: '{for} nombro {in} {range} 1 {to} 5'
     demo_code: "{for} nombro {in} {range} 1 {to} 5\n    {print} nombro"
 -   name: '{ask}'
-    explanation: ask for the answer to a sum and check if it is correct. We can now print 2 lines.
+    explanation: demandi pri sumo kaj kontroli, ĉu la respondo estas ĝusta. Ni povas nun presi du liniojn.
     example: "Ekzemple: respondo = {ask} 'Kio estas 5 plus 5?'"
     demo_code: "respondo = {ask} 'Kio estas 5 plus 5?'\n{if} respondo {is} 10\n    {print} 'Bonege!'\n    {print} 'Ja la prava respondo estas ' respondo\nelse\n    {print} 'Ho!'\n    {print} 'La prava respondo estas 10'"
 12:
--   name: float directly
+-   name: decimala nombro rekte
     explanation: Decimalaj nombroj
     example: '{print} 2.5 + 2.5'
     demo_code: "{print} 'Ni ekkalkulu!'\n{print} 'Du kaj duono plus du kaj duono estas...'\n{print} 2.5 + 2.5\n"
@@ -201,20 +201,20 @@
     demo_code: "superherooj = 'Ferviro', 'Vespertviro', 'Superviro'\n{print} superherooj {at} {random}\n"
 13:
 -   name: '{and}'
-    explanation: Two parts both need to be correct
+    explanation: Ambaŭ partoj devas esti ĝustaj
     example: '{se} 3+2 {is} 5 {and} 2+2 {is} 4'
     demo_code: "respondo1 = {ask} 'Kio estas 3+2?'\nrespondo2 = {ask} 'Kio estas 2+2?'\n{if} respondo1 {is} 5 {and} respondo2 {is} 4\n    {print} 'Ambaŭ respondoj pravas!'\n{else}\n    {print} 'Almenaŭ unu respondo malpravas!'"
 -   name: '{or}'
-    explanation: At least 1 of the two parts need to be correct. If both are correct, it is also fine.
+    explanation: Almenaŭ unu el la du partoj devas esti ĝusta. Se ambaŭ estas ĝustaj, tio ankaŭ sufiĉas.
     example: '{if} 3+2 {is} 5 {or} 2+2 {is} 4'
     demo_code: "respondo1 = {ask} 'Kio estas 3+2?'\nrespondo2 = {ask} 'Kio estas 2+2?'\n{if} respondo1 {is} 5 {or} respondo2 {is} 4\n    {print} 'Almenaŭ unu respondo pravas!'\nelse\n    {print} 'Ambaŭ respondoj malpravas!'"
 15:
 -   name: '{while}'
-    explanation: We can use the `{while}` loop with not equal
+    explanation: Oni povas uzi `{while}`-iteracion kun `!=`
     example: 'Ekzemple: {while} ĝusta_respondo != 25'
     demo_code: "respondo = 0\n{while} respondo != 25\n    respondo = {ask} 'Kio estas 5 * 5?'\n{print} 'Vi respondis prave'"
--   name: Smaller {while}
-    explanation: 'We can also use the `{while}` loop with `<` and `>`. '
+-   name: '`{while}` kun plimalgrandeco'
+    explanation: 'Oni povas ankaŭ uzi `{while}`-iteracion kune kun `<` aŭ `>`. '
     example: 'Ekzemple: {while} nombro < 3'
     demo_code: "nombro = 1\n{while} nombro < 3\n    {print} 'Ni faros tion ' 3 - nombro ' fojojn plu'\n    nombro = nombro + 1\n{print} 'Ni finiĝis'"
 16:
@@ -222,7 +222,7 @@
     explanation: Listoj per rektaj krampoj
     example: "Ekzemple: fruktoj = ['pomo', 'banano', 'ĉerizo']"
     demo_code: "fruktoj = ['pomo', 'banano', 'ĉerizo']\n{print} fruktoj"
--   name: Get an item from a list
+-   name: Akiri eron el listo
     explanation: Por elekti eron el listo, oni uzas `[numero]`. Tiel, `fruktoj[1]` signifas la unuan eron el la listo `fruktoj`!
     example: 'Ekzemple: unuafrukto = fruktoj[1]'
     demo_code: "fruktoj = ['banano', 'pomo', 'ĉerizo']\nunuafrukto = fruktoj[1]\n{print} unuafrukto"
@@ -236,11 +236,11 @@
     example: '{elif} a {is} 5:'
     demo_code: "a = 2\n{if} a == 1:\n    {print} 'a estas 1'\n{elif} a == 2:\n    {print} 'a estas 2'\n{else}:\n    {print} 'a ne estas 1 nek 2'"
 -   name: '{print}'
-    explanation: When we use a `{for}`, we need to put a `:` behind the `{for}` statement!
+    explanation: Kiam oni uzas la ŝlosilvorton `{for}`, oni devas meti `:` post la `{for}`-deklaro!
     example: '{for} i {in} {range} 1 {to} 10:'
     demo_code: "{for} i {in} {range} 1 {to} 12:\n    {print} i\n{print} 'Jen mi venas!'"
 -   name: '{if}'
-    explanation: We need to do the same with all of our `{if}` statements
+    explanation: Oni faru la saman pri la ŝlosilvorto `{if}`
     example: "{if} koloro {is} verda:'"
     demo_code: "koloro = {ask} 'Kio estas via plej ŝatata koloro?'\n{if} koloro == 'verda':\n    {print} 'Via plej ŝatata koloro estas verda'\n{else}:\n    {print} 'Via plej ŝatata koloro ne estas verda'"
 18:
@@ -253,7 +253,7 @@
     example: '{range}'
     demo_code: "{for} i {in} {range} (1,10):\n    {print}('Saluton, numero ', i)"
 -   name: '`{print}` kun variablo'
-    explanation: With `{print}` you need to use parentheses and commas if you {print} more items
+    explanation: Pri `{print}`, oni devas uzi rondajn krampojn kaj komojn, se oni volas presi plurajn aĵojn
     example: '{print}'
     demo_code: "nomo = 'Hedy'\n{print}('mia nomo estas ', nomo)"
 -   name: demandi pri io per `{input}`
