@@ -459,13 +459,11 @@ def parse():
                 exception = ex
         try:
             response['Code'] = transpile_result.code
-            if transpile_result.has_turtle:
-                response['has_turtle'] = True
+            response['has_turtle'] = transpile_result.has_turtle
         except:
             pass
         try:
-            if 'sleep' in hedy.all_commands(code, level, lang):
-                response['has_sleep'] = True
+            response['has_sleep'] = 'sleep' in hedy.all_commands(code, level, lang)
         except:
             pass
         try:
