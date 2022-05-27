@@ -439,7 +439,7 @@ def parse():
 
             try:
                 transpile_result = transpile_add_stats(code, level, lang)
-                if username:
+                if username and not body.get('tutorial'):
                     DATABASE.increase_user_run_count(username)
                     ACHIEVEMENTS.increase_count("run")
             except hedy.exceptions.FtfyException as ex:
@@ -471,7 +471,7 @@ def parse():
         except:
             pass
         try:
-            if username and ACHIEVEMENTS.verify_run_achievements(username, code, level, response):
+            if username and not body.get('tutorial') and ACHIEVEMENTS.verify_run_achievements(username, code, level, response):
                 response['achievements'] = ACHIEVEMENTS.get_earned_achievements()
         except Exception as E:
             print(f"error determining achievements for {code} with {E}")
@@ -527,6 +527,20 @@ def parse_by_id(user):
             return {"error": "parsing error"}, 200
     else:
         return 'this is not your program!', 400
+
+
+@app.route('/parse_tutorial', methods=['POST'])
+@requires_login
+def parse_tutorial(user):
+    body = request.json
+
+    code = body['code']
+    level = int(body['level'])
+    try:
+        result = hedy.transpile(code, level, "en")
+        jsonify({'code': NORMAL_PREFIX_CODE + result.code}), 200
+    except:
+        return "error", 400
 
 
 def transpile_add_stats(code, level, lang_):
@@ -925,10 +939,14 @@ def view_program(id):
     result['public_profile'] = True if DATABASE.get_public_profile_settings(
         result['username']) else None
 
-    # If the language doesn't match the user -> parse the keywords
-    if result.get("lang", "en") not in [g.lang, "en"] and g.lang in ALL_KEYWORD_LANGUAGES:
-        result['code'] = hedy_translation.translate_keywords(result.get(
-            'code'), result.get('lang', 'en'), g.lang, level=int(result.get('level', 1)))
+    code = result['code']
+    if result.get("lang") != "en" and result.get("lang") in ALL_KEYWORD_LANGUAGES.keys():
+        code = hedy_translation.translate_keywords(code, from_lang=result.get('lang'), to_lang="en", level=int(result.get('level', 1)))
+    # If the keyword language is non-English -> parse again to guarantee completely localized keywords
+    if g.keyword_lang != "en":
+        code = hedy_translation.translate_keywords(code, from_lang="en", to_lang=g.keyword_lang, level=int(result.get('level', 1)))
+
+    result['code'] = code
 
     arguments_dict = {}
     arguments_dict['program_id'] = id
@@ -1155,15 +1173,16 @@ def explore():
 
     level = request.args.get('level', default=None, type=str)
     adventure = request.args.get('adventure', default=None, type=str)
+    language = request.args.get('lang', default=None, type=str)
 
     level = None if level == "null" else level
     adventure = None if adventure == "null" else adventure
+    language = None if language == "null" else language
 
     achievement = None
-    if level or adventure:
-        programs = DATABASE.get_filtered_explore_programs(level, adventure)
-        achievement = ACHIEVEMENTS.add_single_achievement(
-            current_user()['username'], "indiana_jones")
+    if level or adventure or language:
+        programs = DATABASE.get_filtered_explore_programs(level, adventure, language)
+        achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "indiana_jones")
     else:
         programs = DATABASE.get_all_explore_programs()
 
@@ -1172,20 +1191,25 @@ def explore():
         # If program does not have an error value set -> parse it and set value
         if 'error' not in program:
             try:
-                hedy.transpile(program.get('code'), program.get(
-                    'level'), program.get('lang'))
+                hedy.transpile(program.get('code'), program.get('level'), program.get('lang'))
                 program['error'] = False
             except:
                 program['error'] = True
             DATABASE.store_program(program)
-        public_profile = DATABASE.get_public_profile_settings(
-            program['username'])
+        public_profile = DATABASE.get_public_profile_settings(program['username'])
+
         # If the language doesn't match the user -> parse the keywords
-        if program.get("lang", "en") != g.keyword_lang and program.get("lang") in ALL_KEYWORD_LANGUAGES.keys():
-            code = hedy_translation.translate_keywords(program.get('code'), from_lang=program.get('lang'),
-                                                       to_lang=g.keyword_lang, level=int(program.get('level', 1)))
-        else:
-            code = program['code']
+        # We perform a "double parse" to make sure english keywords are also always translated
+        code = program['code']
+
+        # First, if the program language is not equal to english and the language supports keywords
+        # It might contain non-english keywords -> parse all to english
+        if program.get("lang") != "en" and program.get("lang") in ALL_KEYWORD_LANGUAGES.keys():
+            code = hedy_translation.translate_keywords(code, from_lang=program.get('lang'), to_lang="en", level=int(program.get('level', 1)))
+        # If the keyword language is non-English -> parse again to guarantee completely localized keywords
+        if g.keyword_lang != "en":
+            code = hedy_translation.translate_keywords(code, from_lang="en", to_lang=g.keyword_lang, level=int(program.get('level', 1)))
+
         filtered_programs.append({
             'username': program['username'],
             'name': program['name'],
@@ -1210,13 +1234,13 @@ def explore():
             'code': "\n".join(program['code'].split("\n")[:4])
         })
 
-    print(hedy_choices)
     adventures_names = hedy_content.Adventures(session['lang']).get_adventure_names()
 
     return render_template('explore.html', programs=filtered_programs, favourite_programs=hedy_choices,
                            filtered_level=level,
                            achievement=achievement,
                            filtered_adventure=adventure,
+                           filtered_lang=language,
                            max_level=hedy.HEDY_MAX_LEVEL,
                            adventures_names=adventures_names,
                            page_title=gettext('title_explore'),
@@ -1298,7 +1322,7 @@ def teacher_tutorial_steps(step):
 def get_tutorial_translation(step):
     # We also retrieve the example code snippet as a "tutorial step" to reduce the need of new code
     if step == "code_snippet":
-        return jsonify({'code': gettext('tutorial_code_snippet'), 'output': gettext('tutorial_code_output')}), 200
+        return jsonify({'code': gettext('tutorial_code_snippet')}), 200
     try:
         step = int(step)
     except ValueError:
