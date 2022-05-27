@@ -92,6 +92,7 @@ NORMAL_PREFIX_CODE = textwrap.dedent("""\
     # coding=utf8
     import random, time
     global int_saver
+    global convert_numerals # needed for recursion to work
     int_saver = int
     def int(s):
       if isinstance(s, str):
@@ -99,7 +100,46 @@ NORMAL_PREFIX_CODE = textwrap.dedent("""\
         latin_numerals = ''.join([numerals_dict.get(letter, letter) for letter in s])
         return int_saver(latin_numerals)
       return(int_saver(s))
-""")
+   
+    def convert_numerals(alphabet, number):
+      numerals_dict_return = {
+        'Latin': ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'], 
+        'Brahmi': ['𑁦', '𑁧', '𑁨', '𑁩', '𑁪', '𑁫', '𑁬', '𑁭', '𑁮', '𑁯'], 
+        'Devanagari': ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९'], 
+        'Gujarati': ['૦', '૧', '૨', '૩', '૪', '૫', '૬', '૭', '૮', '૯'], 
+        'Gurmukhi': ['੦', '੧', '੨', '੩', '੪', '੫', '੬', '੭', '੮', '੯'], 
+        'Bengali': ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'],
+        'Kannada': ['೦', '೧', '೨', '೩', '೪', '೫', '೬', '೭', '೮', '೯'],
+        'Odia': ['୦', '୧', '୨', '୩', '୪', '୫', '୬', '୭', '୮', '୯'],
+        'Malayalam': ['൦', '൧', '൨', '൩', '൪', '൫', '൬', '൭', '൮', '൯'],
+        'Tamil': ['௦', '௧', '௨', '௩', '௪', '௫', '௬', '௭', '௮', '௯'],
+        'Telugu':['౦', '౧', '౨', '౩', '౪', '౫', '౬', '౭', '౮', '౯'],
+        'Burmese':['၀', '၁', '၂', '၃', '၄', '၅', '၆', '၇', '၈', '၉'],
+        'Tibetan':['༠', '༡', '༢', '༣', '༤', '༥', '༦', '༧', '༨', '༩'],
+        'Mongolian':['᠐', '᠑', '᠒', '᠓', '᠔', '᠕', '᠖', '᠗', '᠘', '᠙'],
+        'Khmer':['០', '១', '២', '៣', '៤', '៥', '៦', '៧', '៨', '៩'],
+        'Thai':['๐', '๑', '๒', '๓', '๔', '๕', '๖', '๗', '๘', '๙'],
+        'Lao':['໐', '໑', '໒', '໓', '໔', '໕', '໖', '໗', '໘', '໙'],
+        'Javanese':['꧐', '꧑', '꧒', '꧓', '꧔', '꧕', '꧖', '꧗', '꧘', '꧙'],
+        'Arabic':['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'],
+        'Persian':['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'],
+        'Urdu': ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹']}
+    
+      numerals_list = numerals_dict_return[alphabet]
+      number=str(number)
+      
+      if number.isnumeric():
+        number = int(number)
+        numerals_list = numerals_dict_return[alphabet]
+        if number <= 9:
+          return numerals_list[number]
+        else:
+          last_digit = number // 10
+          rest = number % 10
+          return numerals_list[last_digit] + convert_numerals(alphabet, rest)
+      else:
+        return number
+        """)
 
 
 def load_parsons_per_level(level):
