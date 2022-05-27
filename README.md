@@ -9,7 +9,7 @@ The latest version of Hedy can be found at [hedycode.com](https://hedycode.com).
 What's next?
 ------------
 
-If you want to see what the core team will work on next, you can follow [our Project](https://github.com/Felienne/hedy/projects/5) or follow the [Discussions](https://github.com/Felienne/hedy/discussions).
+If you want to see what the core team will work on next, you can follow [our Project](https://github.com/Felienne/hedy/projects/5), the [Discussions](https://github.com/Felienne/hedy/discussions) or join our [Discord](https://discord.gg/8yY7dEme9r) channel.
 
 Živjo Hedy! Привет Hedy! !Hedy سلام
 ----------------------------------------------
@@ -24,7 +24,7 @@ A simple way to help out Hedy is to [help us translate Hedy](TRANSLATING.md) usi
 I have an idea for what you should build or improve!
 ----------------------------------------------------
 
-Great! We have two ways of monitoring ideas.
+Great! We have multiple ways of monitoring ideas.
 
 If is is a small fix, it is best to [make an issue](https://github.com/Felienne/hedy/issues/new/choose). Issues are meant for things we know that we want to work on, such as:
 
@@ -34,10 +34,10 @@ If is is a small fix, it is best to [make an issue](https://github.com/Felienne/
 If it is a new idea, [start a discussion](https://github.com/Felienne/hedy/discussions/categories/ideas). Discussions are a place to chat about stuff we do not know if we want to work on yet, or we are not sure how to do, such as:
 
 * New keywords
-* new meanings for existing keywords
+* New meanings for existing keywords
 * Experimental improvements to the parser/transpiler
 
-Please note that we want to be a friendly and welcoming open source project. If you submit an issue, refrain from saying things are "bad", or "wrong" or "broken". Assume that code that is there was made by people that do their best! Neutrally phrased messages are nicer for everyone. For example use "did not do what I expected", "appears not to work" or "could be improved".
+Please note that we want to be a friendly and welcoming open source project. If you submit an issue, refrain from saying things are "bad", or "wrong" or "broken". Assume that code that is there was made by people that do their best! Neutrally phrased messages are nicer for everyone. For example use "did not do what I expected", "appears not to work" or "could be improved". Also feel free to join our [Discord](https://discord.gg/8yY7dEme9r) channel to discuss ideas, get in touch with us our show of your Hedy related creations.
 
 Want to help improve Hedy?
 --------------------------

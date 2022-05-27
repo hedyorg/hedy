@@ -96,6 +96,7 @@ def routes(app, database, achievements, quizzes):
 
         quiz_answers = DATABASE.get_quiz_answer(username, level_source, session['quiz-attempt-id'])
 
+        print(question)
         # Todo TB -> We have to do some magic here to format() the keywords into the quiz
 
         return render_template('quiz/quiz_question.html',
