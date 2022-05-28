@@ -50,7 +50,6 @@ ABBREVIATION = {
     "I"                   : "I",
 }
 
-
 class HighlightTester(unittest.TestCase):
 
     def assert_highlighted_chr(self, code, expected, level, lang="en"):
@@ -81,14 +80,8 @@ class HighlightTester(unittest.TestCase):
         if len(args)%2 != 0:
             raise RuntimeError(f'Pass an even number of strings to assert_highlighted_chr_multi_line (alternatingly code and highlighting). Got: {args}')
 
-        code = []
-        expected = []
-        for i, line in enumerate(args):
-            if i%2 == 0: code.append(line)
-            else: expected.append(line)
-
-        code = "\n".join(code)
-        expected = "\n".join(expected)
+        code = '\n'.join(line for i, line in enumerate(args) if i%2 == 0)
+        expected = '\n'.join(line for i, line in enumerate(args) if i%2 != 0)
 
         self.assert_highlighted_chr(code, expected, level, lang)
 
@@ -140,12 +133,21 @@ class HighlightTester(unittest.TestCase):
         # check if they are same length
         self.assertEqual(len(result),len(expected))
 
+        useIndefined = False
+
         # replacement of space by result coloration
         for i in range(len(result)):
-            if expected[i] == " ":
-                # only if it's different from pink
+            if code[i] == " ":
+                # coloration in space are same
                 self.assertIn(result[i], ['T', 'K', 'C', 'N', 'S'])
                 result[i] = expected[i]
+
+            elif expected[i] == " ":
+                # if we wait Space coloration, we accept everyting
+                result[i] = expected[i]
+                useIndefined = True
+
+        # self.assertFalse(useIndefined)
 
         result = "".join(result)
         expected = "".join(expected)
@@ -167,10 +169,10 @@ class HighlightTester(unittest.TestCase):
 
         Returns a state machine.
         """
-        os.chdir(os.path.dirname(__file__) +"/..")
-
+        root_dir = os.path.dirname(__file__) +"/.."
+        
         # get traduction
-        with open('highlighting/highlighting-trad.json') as file_regex_trad:
+        with open(f'{root_dir}/highlighting/highlighting-trad.json') as file_regex_trad:
             data_regex_trad = json.load(file_regex_trad)
     
         if lang not in data_regex_trad.keys():
@@ -179,7 +181,7 @@ class HighlightTester(unittest.TestCase):
         regex_trad = data_regex_trad[lang]
 
         # get state_machine
-        with open('highlighting/highlighting.json') as file_regex:
+        with open(f'{root_dir}/highlighting/highlighting.json') as file_regex:
             data_regex = json.load(file_regex)
 
         # apply translation of keywords
