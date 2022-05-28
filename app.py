@@ -458,16 +458,12 @@ def parse():
                 response['Location'] = ex.error_location
                 exception = ex
         try:
-            if transpile_result.has_turtle:
-                response['Code'] = TURTLE_PREFIX_CODE + transpile_result.code
-                response['has_turtle'] = True
-            else:
-                response['Code'] = NORMAL_PREFIX_CODE + transpile_result.code
+            response['Code'] = transpile_result.code
+            response['has_turtle'] = transpile_result.has_turtle
         except:
             pass
         try:
-            if 'sleep' in hedy.all_commands(code, level, lang):
-                response['has_sleep'] = True
+            response['has_sleep'] = 'sleep' in hedy.all_commands(code, level, lang)
         except:
             pass
         try:
