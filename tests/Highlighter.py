@@ -15,6 +15,8 @@ TOKEN_CODE = {
     "invalid" :            'I',
 }
 
+# for the caractere SPACE, all this highlights are equals
+SAME_COLOR_FOR_SPACE = ['T','K','C','N','S']
 
 ABBREVIATION = {
     "text"                : "T",
@@ -133,21 +135,12 @@ class HighlightTester(unittest.TestCase):
         # check if they are same length
         self.assertEqual(len(result),len(expected))
 
-        useIndefined = False
-
         # replacement of space by result coloration
         for i in range(len(result)):
             if code[i] == " ":
                 # coloration in space are same
-                self.assertIn(result[i], ['T', 'K', 'C', 'N', 'S'])
+                self.assertIn(result[i], SAME_COLOR_FOR_SPACE)
                 result[i] = expected[i]
-
-            elif expected[i] == " ":
-                # if we wait Space coloration, we accept everyting
-                result[i] = expected[i]
-                useIndefined = True
-
-        # self.assertFalse(useIndefined)
 
         result = "".join(result)
         expected = "".join(expected)

@@ -413,7 +413,7 @@ class HighlighterTestWebSite(HighlightTester):
     def test_3_2(self):
         self.assert_highlighted_chr_multi_line(
             "animals is dog, cat, kangaroo",
-            "TTTTTTT KK TTT  TTT  TTTTTTTT",
+            "TTTTTTT KK TTTT TTTT TTTTTTTT",
             "print animals at random",
             "KKKKK TTTTTTT KK KKKKKK",
             level="level3", lang='en')
@@ -422,7 +422,7 @@ class HighlighterTestWebSite(HighlightTester):
     def test_3_3(self):
         self.assert_highlighted_chr_multi_line(
             "animals is dog, cat, kangaroo",
-            "TTTTTTT KK TTT  TTT  TTTTTTTT",
+            "TTTTTTT KK TTTT TTTT TTTTTTTT",
             "add penguin to animals",
             "KKK TTTTTTT KK TTTTTTT",
             "remove cat from animals",
@@ -442,7 +442,7 @@ class HighlighterTestWebSite(HighlightTester):
     def test_3_5(self):
         self.assert_highlighted_chr_multi_line(
             "animals is 🦔, 🐿, 🦉, 🦇",
-            "TTTTTTT KK T  T  T  T",
+            "TTTTTTT KK TT TT TT T",
             "print He now hears the sound of an animals at random",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT KK KKKKKK",
             level="level3", lang='en')
@@ -453,7 +453,7 @@ class HighlighterTestWebSite(HighlightTester):
             "print He hears a sound",
             "KKKKK TTTTTTTTTTTTTTTT",
             "animals is 🐿, 🦔, 🦇, 🦉",
-            "TTTTTTT KK T  T  T  T",
+            "TTTTTTT KK TT TT TT T",
             "animal is ask What do you think it is?",
             "TTTTTT KK KKK TTTTTTTTTTTTTTTTTTTTTTTT",
             "add animal to animals",
@@ -468,9 +468,9 @@ class HighlighterTestWebSite(HighlightTester):
             "print His backpack got way too heavy.",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
             "print Inside were a bottle of water, a flashlight and a brick.",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTT  TTTTTTTTTTTTTTTTTTTTTTTTT",
+            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT TTTTTTTTTTTTTTTTTTTTTTTTT",
             "bag is water, flashlight, brick",
-            "TTT KK TTTTT  TTTTTTTTTT  TTTTT",
+            "TTT KK TTTTTT TTTTTTTTTTT TTTTT",
             "dump is ask Which item should he dump?",
             "TTTT KK KKK TTTTTTTTTTTTTTTTTTTTTTTTTT",
             "remove dump from bag",
@@ -481,7 +481,7 @@ class HighlighterTestWebSite(HighlightTester):
     def test_3_8(self):
         self.assert_highlighted_chr_multi_line(
             "words is squawk, Hedy",
-            "TTTTT KK TTTTTT  TTTT",
+            "TTTTT KK TTTTTTT TTTT",
             "print Train your parrot!",
             "KKKKK TTTTTTTTTTTTTTTTTT",
             "new_word is ask Which word do you want to teach them?",
@@ -505,7 +505,7 @@ class HighlighterTestWebSite(HighlightTester):
     def test_3_10(self):
         self.assert_highlighted_chr_multi_line(
             "angles is 10, 50, 90, 150, 250",
-            "TTTTTT KK TT  TT  TT  TTT  TTT",
+            "TTTTTT KK TTT TTT TTT TTTT TTT",
             "turn angles at random",
             "KKKK TTTTTT KK KKKKKK",
             "forward 25",
@@ -523,7 +523,7 @@ class HighlighterTestWebSite(HighlightTester):
     def test_3_12(self):
         self.assert_highlighted_chr_multi_line(
             "people is mom, dad, Emma, Sophie",
-            "TTTTTT KK TTT  TTT  TTTT  TTTTTT",
+            "TTTTTT KK TTTT TTTT TTTTT TTTTTT",
             "print people at random",
             "KKKKK TTTTTT KK KKKKKK",
             level="level3", lang='en')
@@ -532,7 +532,7 @@ class HighlighterTestWebSite(HighlightTester):
     def test_3_13(self):
         self.assert_highlighted_chr_multi_line(
             "people is mom, dad, Emma, Sophie",
-            "TTTTTT KK TTT  TTT  TTTT  TTTTTT",
+            "TTTTTT KK TTTT TTTT TTTTT TTTTTT",
             "your_name is ask Who are you?",
             "TTTTTTTTT KK KKK TTTTTTTTTTTT",
             "remove your_name from people",
@@ -552,7 +552,7 @@ class HighlighterTestWebSite(HighlightTester):
     def test_3_15(self):
         self.assert_highlighted_chr_multi_line(
             "choices is 1, 2, 3, 4, 5, earthworm",
-            "TTTTTTT KK T  T  T  T  T  TTTTTTTTT",
+            "TTTTTTT KK TT TT TT TT TT TTTTTTTTT",
             "print choices at random",
             "KKKKK TTTTTTT KK KKKKKK",
             level="level3", lang='en')
@@ -568,7 +568,7 @@ class HighlighterTestWebSite(HighlightTester):
     def test_3_17(self):
         self.assert_highlighted_chr_multi_line(
             "choices is rock, paper, scissors",
-            "TTTTTTT KK TTTT  TTTTT  TTTTTTTT",
+            "TTTTTTT KK TTTTT TTTTTT TTTTTTTT",
             "print choices at random",
             "KKKKK TTTTTTT KK KKKKKK",
             level="level3", lang='en')
@@ -583,7 +583,7 @@ class HighlighterTestWebSite(HighlightTester):
             "print This is what you want to know: question",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
             "answers is yes, no, maybe",
-            "TTTTTTT KK TTT  TT  TTTTT",
+            "TTTTTTT KK TTTT TTT TTTTT",
             "print My crystal ball says...",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTT",
             "sleep 2",
@@ -598,7 +598,7 @@ class HighlighterTestWebSite(HighlightTester):
             "print Mystery milkshake",
             "KKKKK TTTTTTTTTTTTTTTTT",
             "flavors is strawberry, chocolate, vanilla",
-            "TTTTTTT KK TTTTTTTTTT  TTTTTTTTT  TTTTTTT",
+            "TTTTTTT KK TTTTTTTTTTT TTTTTTTTTT TTTTTTT",
             "allergies is ask Are you allergic to any falvors?",
             "TTTTTTTTT KK KKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
             "remove allergies from flavors",
@@ -615,27 +615,27 @@ class HighlighterTestWebSite(HighlightTester):
             "print The only restaurant that will randomly choose your meal and its price for you!",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
             "starters is salad, soup, carpaccio",
-            "TTTTTTTT KK TTTTT  TTTT  TTTTTTTTT",
+            "TTTTTTTT KK TTTTTT TTTTT TTTTTTTTT",
             "mains is pizza, brussels sprouts, spaghetti",
-            "TTTTT KK TTTTT  TTTTTTTTTTTTTTTT  TTTTTTTTT",
+            "TTTTT KK TTTTTT TTTTTTTTTTTTTTTTT TTTTTTTTT",
             "desserts is brownies, ice cream, french cheeses",
-            "TTTTTTTT KK TTTTTTTT  TTTTTTTTT  TTTTTTTTTTTTTT",
+            "TTTTTTTT KK TTTTTTTTT TTTTTTTTTT TTTTTTTTTTTTTT",
             "drinks is cola, beer, water",
-            "TTTTTT KK TTTT  TTTT  TTTTT",
+            "TTTTTT KK TTTTT TTTTT TTTTT",
             "prices is 1 dollar, 10 dollars, 100 dollars",
             "TTTTTTTKKTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
             "print You will start with: starters at random",
-            "KKKKK                               KK KKKKKK",
+            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTT KK KKKKKK",
             "print Then we'll serve: mains at random",
-            "KKKKK                         KK KKKKKK",
+            "KKKKK TTTTTTTTTTTTTTTTTTTTTTT KK KKKKKK",
             "print And as dessert: desserts at random",
-            "KKKKK                          KK KKKKKK",
+            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTT KK KKKKKK",
             "print You will get a drinks at random to drink",
-            "KKKKK                       KK KKKKKK         ",
+            "KKKKK TTTTTTTTTTTTTTTTTTTTT KK KKKKKK TTTTTTTT",
             "print That will be: prices at random",
-            "KKKKK                      KK KKKKKK",
+            "KKKKK TTTTTTTTTTTTTTTTTTTT KK KKKKKK",
             "print Thank you and enjoy your meal!",
-            "KKKKK                               ",
+            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
             level="level3", lang='en')
 
 
@@ -650,7 +650,7 @@ class HighlighterTestWebSite(HighlightTester):
             "print You picked door ... choice",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTT",
             "monsters is a zombie, a vampire, NOTHING YOUVE ESCAPED",
-            "TTTTTTTT KK TTTTTTTT  TTTTTTTTT  TTTTTTTTTTTTTTTTTTTTT",
+            "TTTTTTTT KK TTTTTTTTT TTTTTTTTTT TTTTTTTTTTTTTTTTTTTTT",
             "print You see...",
             "KKKKK TTTTTTTTTT",
             "sleep",
@@ -712,7 +712,7 @@ class HighlighterTestWebSite(HighlightTester):
             "print name 'is a bit scared'",
             "KKKKK TTTT SSSSSSSSSSSSSSSSS",
             "animals is 🦔, 🐿, 🦉, 🦇",
-            "TTTTTTT KK  K  K  K  ",
+            "TTTTTTT KK TK TK TK T",
             "print 'He hears the sound of an' animals at random",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSS TTTTTTT KK KKKKKK",
             "print name 'is afraid this is a haunted forest'",
@@ -1060,18 +1060,6 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKKKK TT",
             level="level5", lang='en')
 
-
-    def test_5_11(self):
-        self.assert_highlighted_chr_multi_line(
-            "people is mom, dad, Emma, Sophie",
-            "TTTTTT KK TTTK TTTK TTTTK TTTTTT",
-            "dishwasher is people at random",
-            "TTTTTTTTTT KK TTTTTT KK KKKKKK",
-            "if dishwasher is Sophie print _ too bad I have to do the dishes _ else print 'luckily no dishes because' _ 'is already washing up'",
-            "KK TTTTTTTTTT KK TTTTTT KKKKK I                                 I KKKK KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSS I SSSSSSSSSSSSSSSSSSSSSSS",
-            level="level5", lang='en')
-
-
     def test_5_12(self):
         self.assert_highlighted_chr(
             "print 'Who does the dishes?'",
@@ -1245,7 +1233,7 @@ class HighlighterTestWebSite(HighlightTester):
             "print 'You would like ' drinks",
             "KKKKK SSSSSSSSSSSSSSSSS TTTTTT",
             "print 'That will be ' price ' dollars for your ' order ' please'",
-            "KKKKK SSSSSSSSSSSSSSS TTTTT SSSSSSSSSSSSSSSSSSSS       SSSSSSSSS",
+            "KKKKK SSSSSSSSSSSSSSS TTTTT SSSSSSSSSSSSSSSSSSSS TTTTT SSSSSSSSS",
             "print 'The drinks are free in this level because Hedy cant calculate the price yet...'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             level="level5", lang='en')
@@ -1378,7 +1366,7 @@ class HighlighterTestWebSite(HighlightTester):
             "dishwasher = people at random",
             "TTTTTTTTTT K TTTTTT KK KKKKKK",
             "print 'Tuesday the dishes are done by: ' dishwasher",
-            "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS           ",
+            "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS TTTTTTTTTT",
             "remove dishwasher from people",
             "KKKKKK TTTTTTTTTT KKKK TTTTTT",
             "dishwasher = people at random",
@@ -2285,7 +2273,7 @@ class HighlighterTestWebSite(HighlightTester):
             "print 'E I E I O!'",
             "KKKKK SSSSSSSSSSSS",
             "print 'and on that farm he had a ' animal",
-            "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSS       ",
+            "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSS TTTTTT",
             "print 'E I E I O!'",
             "KKKKK SSSSSSSSSSSS",
             "print 'with a ' sound sound ' here'",
@@ -2349,7 +2337,7 @@ class HighlighterTestWebSite(HighlightTester):
             "for number1 in numbers",
             "KKK TTTTTTT KK TTTTTTT",
             "for number2 in numbers",
-            "KK  TTTTTTT KK TTTTTTT",
+            "KKK TTTTTTT KK TTTTTTT",
             "answer = ask 'How much is ' number2 ' times ' number1 '?'",
             "TTTTTT K KKK SSSSSSSSSSSSSS TTTTTTT SSSSSSSSS TTTTTTT SSS",
             "correct = number1 * number2",
@@ -3515,7 +3503,7 @@ class HighlighterTestWebSite(HighlightTester):
             "numbers = [1, 2, 3]",
             "TTTTTTT K KNK NK NK",
             "i = numbers[random]",
-            "T K TTTTTTTK      K",
+            "T K TTTTTTTKTTTTTTK",
             "hint = ['growling', 'a cackling laugh', 'fluttering batwings']",
             "TTTT K KSSSSSSSSSSK SSSSSSSSSSSSSSSSSSK SSSSSSSSSSSSSSSSSSSSSK",
             "monsters = ['zombie', 'witch', 'vampire']",
@@ -3685,878 +3673,3 @@ class HighlighterTestWebSite(HighlightTester):
             level="level18", lang='en')
 
 
-
-
-    def test_nl_1_1(self):
-        self.assert_highlighted_chr(
-            "print hallo wereld!",
-            "KKKKK TTTTTTTTTTTTT",
-            level="level1", lang='nl')
-
-
-    def test_nl_1_2(self):
-        self.assert_highlighted_chr_multi_line(
-            "print Hallo!",
-            "KKKKK TTTTTT",
-            "print Welkom bij Hedy!",
-            "KKKKK TTTTTTTTTTTTTTTT",
-            level="level1", lang='nl')
-
-
-    def test_nl_1_3(self):
-        self.assert_highlighted_chr_multi_line(
-            "vraag Hoe heet je?",
-            "KKKKK TTTTTTTTTTTT",
-            "echo hallo",
-            "KKKK TTTTT",
-            level="level1", lang='nl')
-
-
-    def test_nl_1_4(self):
-        self.assert_highlighted_chr(
-            "vraag wie is de hoofdpersoon van jouw verhaal",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            level="level1", lang='nl')
-
-
-    def test_nl_1_5(self):
-        self.assert_highlighted_chr_multi_line(
-            "vraag De hoofdpersoon van dit verhaal is",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            "print De hoofdpersoon gaat nu in het bos lopen",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            "echo Hij is wel een beetje bang, die",
-            "KKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            "print Overal hoort hij gekke geluiden",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            "print Hij is bang dat dit een spookbos is",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            level="level1", lang='nl')
-
-
-    def test_nl_1_6(self):
-        self.assert_highlighted_chr(
-            "print Hier begint jouw verhaal",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTT",
-            level="level1", lang='nl')
-
-
-    def test_nl_1_7(self):
-        self.assert_highlighted_chr_multi_line(
-            "print Ik ben papegaai Hedy",
-            "KKKKK TTTTTTTTTTTTTTTTTTTT",
-            "vraag Wie ben jij?",
-            "KKKKK TTTTTTTTTTTT",
-            "echo",
-            "KKKK",
-            "echo",
-            "KKKK",
-            level="level1", lang='nl')
-
-
-    def test_nl_1_8(self):
-        self.assert_highlighted_chr(
-            "print Ik ben Hedy de papegaai!",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTT",
-            level="level1", lang='nl')
-
-
-    def test_nl_1_9(self):
-        self.assert_highlighted_chr_multi_line(
-            "draai rechts",
-            "KKKKK KKKKKK",
-            "vooruit 50",
-            "KKKKKKK   ",
-            "draai links",
-            "KKKKK KKKKK",
-            "vooruit 50",
-            "KKKKKKK   ",
-            level="level1", lang='nl')
-
-
-    def test_nl_1_10(self):
-        self.assert_highlighted_chr_multi_line(
-            "vooruit 50",
-            "KKKKKKK   ",
-            "draai rechts",
-            "KKKKK KKKKKK",
-            level="level1", lang='nl')
-
-
-    def test_nl_1_11(self):
-        self.assert_highlighted_chr_multi_line(
-            "print wat kies jij?",
-            "KKKKK TTTTTTTTTTTTT",
-            "vraag kies uit steen, papier of schaar",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            "echo dus jouw keuze was:",
-            "KKKK TTTTTTTTTTTTTTTTTTT",
-            level="level1", lang='nl')
-
-
-    def test_nl_1_12(self):
-        self.assert_highlighted_chr(
-            "print Welkom bij jouw eigen steen papier schaar!",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            level="level1", lang='nl')
-
-
-    def test_nl_1_13(self):
-        self.assert_highlighted_chr_multi_line(
-            "print Hoi, ik ben Hedy de waarzegger!",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            "vraag Wie ben jij?",
-            "KKKKK TTTTTTTTTTTT",
-            "print Ik voorspel... Ik voorspel...",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            "echo Jouw naam is",
-            "KKKK TTTTTTTTTTTT",
-            level="level1", lang='nl')
-
-
-    def test_nl_1_14(self):
-        self.assert_highlighted_chr(
-            "# Maak jouw eigen code hier",
-            "CCCCCCCCCCCCCCCCCCCCCCCCCCC",
-            level="level1", lang='nl')
-
-
-    def test_nl_1_15(self):
-        self.assert_highlighted_chr_multi_line(
-            "print Welkom bij McHedy! 🍟",
-            "KKKKK TTTTTTTTTTTTTTTTTTTT",
-            "vraag Wat wilt u bestellen?",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTT",
-            "echo Dus u wilt graag",
-            "KKKK TTTTTTTTTTTTTTTT",
-            "print Bedankt voor uw bestelling!",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            "print Het komt eraan!",
-            "KKKKK TTTTTTTTTTTTTTT",
-            level="level1", lang='nl')
-
-
-    def test_nl_1_16(self):
-        self.assert_highlighted_chr(
-            "print Welkom bij McHedy!",
-            "KKKKK TTTTTTTTTTTTTTTTTT",
-            level="level1", lang='nl')
-
-
-    def test_nl_1_17(self):
-        self.assert_highlighted_chr_multi_line(
-            "print Hoe ben ik hier terechtgekomen?",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            "print Ik herinner me dat ik mijn vrienden vertelde over die verlaten villa..",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            "print en toen werd ineens alles zwart.",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            "print Maar waarom lig ik hier nu op de grond...?",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            "print ik heb knallende hoofdpijn, alsof ik een harde klap heb gehad.",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            "print Huh? Wat is dat geluid?",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTT",
-            "print Oh nee! Volgens mij ben ik niet alleen in dit huis!",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            "print Ik moet maken dat ik wegkom!",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            "print Er staan drie deuren voor me, maar welke moet ik kiezen?",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            "vraag Welke deur kies ik?",
-            "KKKKK TTTTTTTTTTTTTTTTTTT",
-            "echo Ik kies deur",
-            "KKKK TTTTTTTTTTTT",
-            "print ...?",
-            "KKKKK TTTT",
-            level="level1", lang='nl')
-
-
-    def test_nl_1_18(self):
-        self.assert_highlighted_chr(
-            "print Hoe ben ik hier terechtgekomen?",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            level="level1", lang='nl')
-
-
-    def test_nl_1_19(self):
-        self.assert_highlighted_chr(
-            "print Op naar het volgende level!",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            level="level1", lang='nl')
-
-
-    def test_nl_1_20(self):
-        self.assert_highlighted_chr_multi_line(
-            "print Welkom bij restaurant Hedy",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTT",
-            "vraag Wat wilt u eten?",
-            "KKKKK TTTTTTTTTTTTTTTT",
-            "echo Dus dit wilt u eten",
-            "KKKK TTTTTTTTTTTTTTTTTTT",
-            "vraag Wat wilt u drinken",
-            "KKKKK TTTTTTTTTTTTTTTTTT",
-            "echo Dus dit wilt u drinken",
-            "KKKK TTTTTTTTTTTTTTTTTTTTTT",
-            level="level1", lang='nl')
-
-
-    def test_nl_2_2(self):
-        self.assert_highlighted_chr_multi_line(
-            "naam is Hedy",
-            "TTTT KK TTTT",
-            "leeftijd is 15",
-            "TTTTTTTT KK TT",
-            "print naam is leeftijd jaar oud",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTT",
-            level="level2", lang='nl')
-
-
-    def test_nl_2_3(self):
-        self.assert_highlighted_chr_multi_line(
-            "antwoord is vraag Hoe heet jij?",
-            "TTTTTTTT KK KKKKK TTTTTTTTTTTTT",
-            "print Hoi antwoord",
-            "KKKKK TTTTTTTTTTTT",
-            level="level2", lang='nl')
-
-
-    def test_nl_2_4(self):
-        self.assert_highlighted_chr_multi_line(
-            "print Mijn favoriete kleur is...",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTT",
-            "slaap 2",
-            "KKKKK T",
-            "print groen!",
-            "KKKKK TTTTTT",
-            level="level2", lang='nl')
-
-
-    def test_nl_2_5(self):
-        self.assert_highlighted_chr(
-            "print hallo wereld!",
-            "KKKKK TTTTTTTTTTTTT",
-            level="level2", lang='nl')
-
-
-    def test_nl_2_6(self):
-        self.assert_highlighted_chr_multi_line(
-            "naam is vraag Hoe heet de hoofdpersoon?",
-            "TTTT KK KKKKK TTTTTTTTTTTTTTTTTTTTTTTTT",
-            "print naam gaat nu in het bos lopen",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            "print naam is wel een beetje bang",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            "print ineens hoort hij een vreemd geluid",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            "slaap 2",
-            "KKKKK T",
-            "print naam is bang dat dit een spookbos is",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            level="level2", lang='nl')
-
-
-    def test_nl_2_7(self):
-        self.assert_highlighted_chr(
-            "print Hier komt straks jouw verhaal!",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            level="level2", lang='nl')
-
-
-    def test_nl_2_8(self):
-        self.assert_highlighted_chr_multi_line(
-            "print Ik ben papegaai Hedy",
-            "KKKKK TTTTTTTTTTTTTTTTTTTT",
-            "naam is vraag Wie ben jij?",
-            "TTTT KK KKKKK TTTTTTTTTTTT",
-            "print naam",
-            "KKKKK TTTT",
-            "slaap",
-            "KKKKK",
-            "print koppie krauw",
-            "KKKKK TTTTTTTTTTTT",
-            "slaap",
-            "KKKKK",
-            "print naam",
-            "KKKKK TTTT",
-            level="level2", lang='nl')
-
-
-    def test_nl_2_9(self):
-        self.assert_highlighted_chr(
-            "print Ik ben Hedy de papegaai!",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTT",
-            level="level2", lang='nl')
-
-
-    def test_nl_2_10(self):
-        self.assert_highlighted_chr_multi_line(
-            "print Figuren tekenen",
-            "KKKKK TTTTTTTTTTTTTTT",
-            "hoek is 90",
-            "TTTT KK TT",
-            "draai hoek",
-            "KKKKK TTTT",
-            "vooruit 25",
-            "KKKKKKK TT",
-            "draai hoek",
-            "KKKKK TTTT",
-            "vooruit 25",
-            "KKKKKKK TT",
-            level="level2", lang='nl')
-
-
-    def test_nl_2_11(self):
-        self.assert_highlighted_chr_multi_line(
-            "print Schildpaddenrace!",
-            "KKKKK TTTTTTTTTTTTTTTTT",
-            "hoek is 90",
-            "TTTT KK TT",
-            "draai hoek",
-            "KKKKK TTTT",
-            "vooruit 25",
-            "KKKKKKK TT",
-            level="level2", lang='nl')
-
-
-    def test_nl_2_12(self):
-        self.assert_highlighted_chr_multi_line(
-            "keuze is _",
-            "TTTTT KK  ",
-            "print ik kies keuze",
-            "KKKKK TTTTTTTTTTTTT",
-            level="level2", lang='nl')
-
-
-    def test_nl_2_13(self):
-        self.assert_highlighted_chr(
-            "# Schrijf jouw code hier",
-            "CCCCCCCCCCCCCCCCCCCCCCCC",
-            level="level2", lang='nl')
-
-
-    def test_nl_2_14(self):
-        self.assert_highlighted_chr_multi_line(
-            "print Welkom bij McHedy!",
-            "KKKKK TTTTTTTTTTTTTTTTTT",
-            "eten is vraag Wat wilt u eten?",
-            "TTTT KK KKKKK TTTTTTTTTTTTTTTT",
-            "saus is vraag Welke saus wilt u daarbij?",
-            "TTTT KK KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTT",
-            "drinken is vraag Wat wilt u drinken?",
-            "TTTTTTT KK KKKKK TTTTTTTTTTTTTTTTTTT",
-            "print U heeft eten met saus en drinken besteld.",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            "print Bedankt voor uw bestelling!",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            level="level2", lang='nl')
-
-
-    def test_nl_2_15(self):
-        self.assert_highlighted_chr_multi_line(
-            "monster1 is 👻",
-            "TTTTTTTT KK T",
-            "monster2 is 🤡",
-            "TTTTTTTT KK T",
-            "monster3 is 👶",
-            "TTTTTTTT KK T",
-            "print Je stapt het oude verlaten spookhuis binnen",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            "print Meteen hoor je het geluid van een monster1",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            "print Dus snel ren je naar de volgende kamer.",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            "print Maar daar wordt je opgewacht door een monster2",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            "print HELP!",
-            "KKKKK TTTTT",
-            "print Je rent naar de keuken, maar wordt daar aangevallen door een monster3",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            level="level2", lang='nl')
-
-
-    def test_nl_2_16(self):
-        self.assert_highlighted_chr(
-            "monster1 is _",
-            "TTTTTTTT KK  ",
-            level="level2", lang='nl')
-
-
-    def test_nl_2_17(self):
-        self.assert_highlighted_chr(
-            "print Op naar het volgende level!",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            level="level2", lang='nl')
-
-
-    def test_nl_3_2(self):
-        self.assert_highlighted_chr_multi_line(
-            "dieren is hond, kat, kangoeroe",
-            "TTTTTT KK TTTT  TTT  TTTTTTTTT",
-            "print dieren op willekeurig",
-            "KKKKK TTTTTT KK KKKKKKKKKKK",
-            level="level3", lang='nl')
-
-
-    def test_nl_3_3(self):
-        self.assert_highlighted_chr_multi_line(
-            "taarten is aardbei, chocolade",
-            "TTTTTTT KK TTTTTTT  TTTTTTTTT",
-            "voeg appel toe aan taarten",
-            "KKKK TTTTT KKK KKK TTTTTTT",
-            "verwijder chocolade uit taarten",
-            "KKKKKKKKK TTTTTTTTT KKK TTTTTTT",
-            "print taarten op willekeurig",
-            "KKKKK TTTTTTT KK KKKKKKKKKKK",
-            level="level3", lang='nl')
-
-
-    def test_nl_3_4(self):
-        self.assert_highlighted_chr(
-            "print hallo wereld!",
-            "KKKKK TTTTTTTTTTTTT",
-            level="level3", lang='nl')
-
-
-    def test_nl_3_5(self):
-        self.assert_highlighted_chr(
-            "print Hier komt straks jouw verhaal!",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            level="level3", lang='nl')
-
-
-    def test_nl_3_6(self):
-        self.assert_highlighted_chr_multi_line(
-            "dieren is 🦇, 🐿, 🦉, 🦔",
-            "TTTTTT KK T  T  T  T",
-            "print Hij hoort nu het geluid van een dieren op willekeurig",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT KK KKKKKKKKKKK",
-            level="level3", lang='nl')
-
-
-    def test_nl_3_7(self):
-        self.assert_highlighted_chr_multi_line(
-            "print Hij hoort een geluid...",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTT",
-            "dieren is 🐿, 🦔, 🦇, 🦉",
-            "TTTTTT KK T  T  T  T",
-            "dier is vraag Wat denk jij dat het is?",
-            "TTTT KK KKKKK TTTTTTTTTTTTTTTTTTTTTTTT",
-            "voeg dier toe aan dieren",
-            "KKKK TTTT KKK KKK TTTTTT",
-            "print het was een dieren op willekeurig",
-            "KKKKK TTTTTTTTTTT TTTTTT KK KKKKKKKKKKK",
-            level="level3", lang='nl')
-
-
-    def test_nl_3_8(self):
-        self.assert_highlighted_chr_multi_line(
-            "print Zijn rugzak is veel te zwaar...",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            "print In de rugzak zitten een fles water, een zaklamp en een baksteen.",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            "tas is water, zaklamp, baksteen",
-            "TTT KK TTTTT  TTTTTTT  TTTTTTTT",
-            "weggooien is vraag Welk ding zal onze held weggooien?",
-            "TTTTTTTTT KK KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            "verwijder weggooien uit tas",
-            "KKKKKKKKK TTTTTTTTT KKK TTT",
-            level="level3", lang='nl')
-
-
-    def test_nl_3_9(self):
-        self.assert_highlighted_chr_multi_line(
-            "woorden is lorre, Hedy",
-            "TTTTTTT KK TTTTT  TTTT",
-            "print Train je papegaai!",
-            "KKKKK TTTTTTTTTTTTTTTTTT",
-            "nieuw_woord is vraag Welk woord moet je papegaai leren?",
-            "TTTTTTTTTTT KK KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            "voeg nieuw_woord toe aan woorden",
-            "KKKK TTTTTTTTTTT KKK KKK TTTTTTT",
-            "print 🧒: Zeg nieuw_woord , Hedy!",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTT",
-            "print 🦜: woorden op willekeurig",
-            "KKKKK TTTTTTTTTT KK KKKKKKKKKKK",
-            level="level3", lang='nl')
-
-
-    def test_nl_3_10(self):
-        self.assert_highlighted_chr(
-            "# Schrijf jouw code hier",
-            "CCCCCCCCCCCCCCCCCCCCCCCC",
-            level="level3", lang='nl')
-
-
-    def test_nl_3_11(self):
-        self.assert_highlighted_chr_multi_line(
-            "hoeken is 10, 50, 90, 150, 250",
-            "TTTTTT KK TT  TT  TT  TTT  TTT",
-            "draai hoeken op willekeurig",
-            "KKKKK TTTTTT KK KKKKKKKKKKK",
-            "vooruit 25",
-            "KKKKKKK TT",
-            level="level3", lang='nl')
-
-
-    def test_nl_3_12(self):
-        self.assert_highlighted_chr_multi_line(
-            "print Schildpaddenrace!",
-            "KKKKK TTTTTTTTTTTTTTTTT",
-            "hoek is 90",
-            "TTTT KK TT",
-            "draai hoek",
-            "KKKKK TTTT",
-            "vooruit 25",
-            "KKKKKKK TT",
-            level="level3", lang='nl')
-
-
-    def test_nl_3_13(self):
-        self.assert_highlighted_chr_multi_line(
-            "mensen is mama, papa, Emma, Sophie",
-            "TTTTTT KK TTTT  TTTT  TTTT  TTTTTT",
-            "print mensen op willekeurig",
-            "KKKKK TTTTTT KK KKKKKKKKKKK",
-            level="level3", lang='nl')
-
-
-    def test_nl_3_14(self):
-        self.assert_highlighted_chr_multi_line(
-            "mensen is mama, papa, Emma, Sophie",
-            "TTTTTT KK TTTT  TTTT  TTTT  TTTTTT",
-            "jouw_naam is vraag Wie ben jij?",
-            "TTTTTTTTT KK KKKKK TTTTTTTTTTTT",
-            "verwijder jouw_naam uit mensen",
-            "KKKKKKKKK TTTTTTTTT KKK TTTTTT",
-            "print mensen op willekeurig doet de afwas vanavond!",
-            "KKKKK TTTTTT KK KKKKKKKKKKK TTTTTTTTTTTTTTTTTTTTTTT",
-            level="level3", lang='nl')
-
-
-    def test_nl_3_15(self):
-        self.assert_highlighted_chr(
-            "print Wie doet de afwas?",
-            "KKKKK TTTTTTTTTTTTTTTTTT",
-            level="level3", lang='nl')
-
-
-    def test_nl_3_16(self):
-        self.assert_highlighted_chr_multi_line(
-            "keuzes is 1, 2, 3, 4, 5, regenworm",
-            "TTTTTT KK T  T  T  T  T  TTTTTTTTT",
-            "print keuzes op willekeurig",
-            "KKKKK TTTTTT KK KKKKKKKKKKK",
-            level="level3", lang='nl')
-
-
-    def test_nl_3_17(self):
-        self.assert_highlighted_chr(
-            "print Wat zal de dobbelsteen deze keer aangeven?",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            level="level3", lang='nl')
-
-
-    def test_nl_3_18(self):
-        self.assert_highlighted_chr_multi_line(
-            "keuzes is steen, papier, schaar",
-            "TTTTTT KK TTTTT  TTTTTT  TTTTTT",
-            "print keuzes op willekeurig",
-            "KKKKK TTTTTT KK KKKKKKKKKKK",
-            level="level3", lang='nl')
-
-
-    def test_nl_3_19(self):
-        self.assert_highlighted_chr(
-            "print Welkom bij jouw eigen steen papier schaar!",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            level="level3", lang='nl')
-
-
-    def test_nl_3_20(self):
-        self.assert_highlighted_chr_multi_line(
-            "print Hoi Ik ben Hedy de Waarzegger",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            "vraag is vraag Wat wil je weten?",
-            "TTTTT KK KKKKK TTTTTTTTTTTTTTTTT",
-            "print vraag",
-            "KKKKK TTTTT",
-            "antwoorden is ja, nee, misschien",
-            "TTTTTTTTTT KK TT  TTT  TTTTTTTTT",
-            "print Mijn glazen bol zegt...",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTT",
-            "slaap 2",
-            "KKKKK T",
-            "print antwoorden op willekeurig",
-            "KKKKK TTTTTTTTTT KK KKKKKKKKKKK",
-            level="level3", lang='nl')
-
-
-    def test_nl_3_21(self):
-        self.assert_highlighted_chr_multi_line(
-            "gerechten is patat, pizza, spruitjes",
-            "TTTTTTTTT KK TTTTT  TTTTT  TTTTTTTTT",
-            "toetjes is een ijsje, appeltaart, franse stinkkaas",
-            "TTTTTTT KK TTTTTTTTT  TTTTTTTTTT  TTTTTTTTTTTTTTTT",
-            "drinken is cola, water, bier",
-            "TTTTTTT KK TTTT  TTTTT  TTTT",
-            "prijzen is 1 euro, 10 euro, 100 euro",
-            "TTTTTTT KK TTTTTT  TTTTTTT  TTTTTTTT",
-            "print Welkom bij het willekeurig restaurant",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            "print Vandaag eet u gerechten op willekeurig",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTT KK KKKKKKKKKKK",
-            "print Daarbij drinkt u drinken op willekeurig",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTT KK KKKKKKKKKKK",
-            "print En u krijgt toetjes op willekeurig achteraf",
-            "KKKKK TTTTTTTTTTTTTTTTTTT KK KKKKKKKKKKK TTTTTTTT",
-            "print Dat wordt dan prijzen op willekeurig",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTT KK KKKKKKKKKKK",
-            "print Eet smakelijk!",
-            "KKKKK TTTTTTTTTTTTTT",
-            level="level3", lang='nl')
-
-
-    def test_nl_3_22(self):
-        self.assert_highlighted_chr_multi_line(
-            "print Mysterie Milkshake",
-            "KKKKK TTTTTTTTTTTTTTTTTT",
-            "smaken is aardbei, banaan, chocolade",
-            "TTTTTT KK TTTTTTT  TTTTTT  TTTTTTTTT",
-            "allergie is vraag Ben je allergisch voor een smaak?",
-            "TTTTTTTT KK KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            "verwijder allergie uit smaken",
-            "KKKKKKKKK TTTTTTTT KKK TTTTTT",
-            "print Jij krijgt een milkshake  smaken op willekeurig",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT KK KKKKKKKKKKK",
-            level="level3", lang='nl')
-
-
-    def test_nl_3_23(self):
-        self.assert_highlighted_chr_multi_line(
-            "print Ontsnap uit het spookhuis!",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTT",
-            "print Voor je staan drie deuren...",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            "keuze is vraag Welke deur kies je?",
-            "TTTTT KK KKKKK TTTTTTTTTTTTTTTTTTT",
-            "print Je koos deur keuze",
-            "KKKKK TTTTTTTTTTTTTTTTTT",
-            "monsters is een zombie, een vampier, NIKS JE ONTSNAPT",
-            "TTTTTTTT KK TTTTTTTTTT  TTTTTTTTTTT  TTTTTTTTTTTTTTTT",
-            "print Jij ziet...",
-            "KKKKK TTTTTTTTTTT",
-            "slaap",
-            "KKKKK",
-            "print monsters op willekeurig",
-            "KKKKK TTTTTTTT KK KKKKKKKKKKK",
-            level="level3", lang='nl')
-
-
-    def test_nl_3_24(self):
-        self.assert_highlighted_chr(
-            "print Ontsnap uit het spookhuis!",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTT",
-            level="level3", lang='nl')
-
-
-    def test_nl_3_25(self):
-        self.assert_highlighted_chr_multi_line(
-            "naam is Sophie",
-            "TTTT KK TTTTTT",
-            "print Mijn naam is naam",
-            "KKKKK TTTTTTTTTTTTTTTTT",
-            level="level3", lang='nl')
-
-
-    def test_nl_3_26(self):
-        self.assert_highlighted_chr(
-            "print Op naar het volgende level!",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            level="level3", lang='nl')
-
-
-
-    def test_nl_4_1(self):
-        self.assert_highlighted_chr(
-            "print 'hallo wereld'",
-            "KKKKK SSSSSSSSSSSSSS",
-            level="level4", lang='nl')
-
-
-    def test_nl_4_3(self):
-        self.assert_highlighted_chr_multi_line(
-            "print 'Vanaf nu gebruiken we aanhalingstekens!'",
-            "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            "antwoord is vraag 'Wat gebruiken we vanaf nu?'",
-            "TTTTTTTT KK KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            "print 'We gebruiken ' antwoord",
-            "KKKKK SSSSSSSSSSSSSSS TTTTTTTT",
-            level="level4", lang='nl')
-
-
-    def test_nl_4_4(self):
-        self.assert_highlighted_chr_multi_line(
-            "naam is Hans",
-            "TTTT KK TTTT",
-            "print 'De naam van de hoofdpersoon is' naam",
-            "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS     ",
-            "print naam 'gaat nu in het bos lopen'",
-            "KKKKK TTTT SSSSSSSSSSSSSSSSSSSSSSSSSS",
-            "print naam 'is wel een beetje bang'",
-            "KKKKK TTTT SSSSSSSSSSSSSSSSSSSSSSSS",
-            "dieren is 🦔, 🦉, 🐿, 🦇",
-            "TTTTTT KK TK TK TK T",
-            "print 'Hij hoort het geluid van een ' dieren op willekeurig",
-            "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS TTTTTT KK KKKKKKKKKKK",
-            "print naam ' is bang dat dit een spookbos is'",
-            "KKKKK TTTT SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level4", lang='nl')
-
-
-    def test_nl_4_5(self):
-        self.assert_highlighted_chr(
-            "print 'Hier komt straks jouw verhaal!'",
-            "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level4", lang='nl')
-
-
-    def test_nl_4_6(self):
-        self.assert_highlighted_chr_multi_line(
-            "print 'Figuren tekenen'",
-            "KKKKK SSSSSSSSSSSSSSSSS",
-            "hoek is 90",
-            "TTTT KK TT",
-            "draai hoek",
-            "KKKKK TTTT",
-            "vooruit 25",
-            "KKKKKKK TT",
-            "draai hoek",
-            "KKKKK TTTT",
-            "vooruit 25",
-            "KKKKKKK TT",
-            level="level4", lang='nl')
-
-
-    def test_nl_4_7(self):
-        self.assert_highlighted_chr_multi_line(
-            "print 'Figuren tekenen'",
-            "KKKKK SSSSSSSSSSSSSSSSS",
-            "hoek is 90",
-            "TTTT KK TT",
-            "draai hoek",
-            "KKKKK TTTT",
-            "vooruit 25",
-            "KKKKKKK TT",
-            level="level4", lang='nl')
-
-
-    def test_nl_4_8(self):
-        self.assert_highlighted_chr_multi_line(
-            "mensen is mama, papa, Emma, Sophie",
-            "TTTTTT KK TTTTK TTTTK TTTTK TTTTTT",
-            "print ' de afwas wordt gedaan door '",
-            "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            "print mensen op _",
-            "KKKKK TTTTTT KK I",
-            level="level4", lang='nl')
-
-
-    def test_nl_4_9(self):
-        self.assert_highlighted_chr(
-            "print 'Wie doet de afwas?'",
-            "KKKKK SSSSSSSSSSSSSSSSSSSS",
-            level="level4", lang='nl')
-
-
-    def test_nl_4_10(self):
-        self.assert_highlighted_chr_multi_line(
-            "keuzes is 1, 2, 3, 4, 5, regenworm",
-            "TTTTTT KK TK TK TK TK TK TTTTTTTTT",
-            "print ' jij gooide '",
-            "KKKKK SSSSSSSSSSSSSS",
-            level="level4", lang='nl')
-
-
-    def test_nl_4_11(self):
-        self.assert_highlighted_chr(
-            "print 'Wat zal de dobbelsteen deze keer aangeven?'",
-            "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level4", lang='nl')
-
-
-    def test_nl_4_12(self):
-        self.assert_highlighted_chr_multi_line(
-            "keuzes is steen, papier, schaar",
-            "TTTTTT KK TTTTTK TTTTTTK TTTTTT",
-            "print ' De computer koos: ' _ op _",
-            "KKKKK SSSSSSSSSSSSSSSSSSSSS I KK I",
-            level="level4", lang='nl')
-
-
-    def test_nl_4_13(self):
-        self.assert_highlighted_chr(
-            "print 'Welkom bij jouw eigen steen papier schaar!'",
-            "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level4", lang='nl')
-
-
-    def test_nl_4_14(self):
-        self.assert_highlighted_chr_multi_line(
-            "print 'Hoi ik ben Hedy de Waarzegger!'",
-            "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            "voorspelling is vraag 'Wat wil je weten?'",
-            "TTTTTTTTTTTT KK KKKKK SSSSSSSSSSSSSSSSSSS",
-            "print 'Dit is je vraag: ' voorspelling",
-            "KKKKK SSSSSSSSSSSSSSSSSSS TTTTTTTTTTTT",
-            "antwoorden is ja, nee, misschien",
-            "TTTTTTTTTT KK TTK TTTK TTTTTTTTT",
-            "print 'Mijn glazen bol zegt...'",
-            "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSS",
-            "slaap 2",
-            "KKKKK T",
-            "print antwoorden op willekeurig",
-            "KKKKK TTTTTTTTTT KK KKKKKKKKKKK",
-            level="level4", lang='nl')
-
-
-    def test_nl_4_15(self):
-        self.assert_highlighted_chr(
-            "# Schrijf jouw code hier",
-            "CCCCCCCCCCCCCCCCCCCCCCCC",
-            level="level4", lang='nl')
-
-
-    def test_nl_4_16(self):
-        self.assert_highlighted_chr_multi_line(
-            "print 'Welkom bij Restaurant Hedy'",
-            "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level4", lang='nl')
-
-
-    def test_nl_4_17(self):
-        self.assert_highlighted_chr(
-            "print 'Ontsnap uit het spookhuis!'",
-            "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level4", lang='nl')
-
-
-    def test_nl_4_18(self):
-        self.assert_highlighted_chr_multi_line(
-            "print 'Ontsnap uit het spookhuis!'",
-            "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level4", lang='nl')
-
-
-    def test_nl_4_19(self):
-        self.assert_highlighted_chr_multi_line(
-            "wachtwoord is vraag 'Wat is het goede wachtwoord?'",
-            "TTTTTTTTTT KK KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level4", lang='nl')
-
-
-    def test_nl_4_20(self):
-        self.assert_highlighted_chr(
-            "print 'Op naar het volgende level!'",
-            "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level4", lang='nl')

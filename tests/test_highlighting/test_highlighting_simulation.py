@@ -41,7 +41,7 @@ class HighlighterTestLeveLSimulation(HighlightTester):
     def test_4(self):
         self.assert_highlighted_chr(
             "qmaaqgbaeveqmcbazqdqaqmcqbadqcc",
-            "CC  CCKNNNNNN NNNNNNNNN NNNNN  ",
+            "CCTTCCKNNNNNNTNNNNNNNNNTNNNNNTT",
             rule_name="rules2")
 
     def test_5(self):
@@ -64,7 +64,7 @@ class HighlighterTestLeveLSimulation(HighlightTester):
     def test_7(self):
         self.assert_highlighted_chr(
             "qmczqdqaqmcqbadq\ngrbnorbTestananaeqwswsmsazqdqaqmcqbadqcc\ngrbnorbTestananaeqwswsmsazqdqaqmcqbadqcc\n\ngrbnorbTestananaeqwswsmsbzqdqaqmcqbadqcc\ngrbnorbTestananaeqwswsmsazqdqaqmcqbadqcc\n\ngrbnorbTestananaeqwswsmsbzqdqaqmcqbadqcc",
-            "CCKNNNNNNN NNNNN\nNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN NNNNN  \n       CCCC     NCCCCCCCKNNNNNNN NNNNN  \n\n       CCCC     NCCCCCCCSIIIIIIIKIIIIIKK\nIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIKIIIIIKK\n\n       CCCC     NCCCCCCCSIIIIIIIKIIIIIKK",
+            "CCKNNNNNNNTNNNNN\nNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNTNNNNNTT\nTTTTTTTCCCCTTTTTNCCCCCCCKNNNNNNNTNNNNNTT\n\nTTTTTTTCCCCTTTTTNCCCCCCCSIIIIIIIKIIIIIKK\nIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIKIIIIIKK\n\nTTTTTTTCCCCTTTTTNCCCCCCCSIIIIIIIKIIIIIKK",
             rule_name="rules4")
 
 
