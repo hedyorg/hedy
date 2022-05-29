@@ -1,7 +1,7 @@
 from tests.Highlighter import HighlightTester
 from parameterized import parameterized
 
-class HighlighterTestPrint(HighlightTester):
+class HighlighterTestRepeat(HighlightTester):
 
 
     @parameterized.expand([
