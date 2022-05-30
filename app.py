@@ -553,7 +553,7 @@ def parse_tutorial(user):
 # this is a route for testing purposes
 @app.route("/dst")
 def download_dst_file():
-    return send_file('generated_pattern.dst', as_attachment=True, cache_timeout=0)
+    return send_file('generated_pattern.dst', as_attachment=True, cache_timeout=1)
 
 def transpile_add_stats(code, level, lang_):
     username = current_user()['username'] or None
