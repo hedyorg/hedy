@@ -79,7 +79,7 @@ def routes(app, database, achievements, quizzes):
 
         session['attempt'] += 1
 
-        if session.get('attempt') > 2:
+        if session.get('attempt') > MAX_ATTEMPTS:
             return gettext('too_many_attempts'), 400
 
         if question_number > QUIZZES[g.lang].get_highest_question_level(level) or question_number < 1:
