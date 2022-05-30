@@ -42,6 +42,7 @@ def routes(app, database, achievements, quizzes):
         # Sets the values of total_score and correct on the beginning of the quiz at 0
         session['total_score'] = 0
         session['correct_answer'] = 0
+        session['correctly_answered_questions_numbers'] = []
 
         statistics.add(current_user()['username'], lambda id_: DATABASE.add_quiz_started(id_, level))
 
@@ -60,14 +61,11 @@ def routes(app, database, achievements, quizzes):
         if not session.get('quiz-attempt-id'):
             return redirect(url_for('get_quiz_start', level=level_source, lang=g.lang))
 
-        quiz_for_lang = QUIZZES[g.lang]
-        quiz_for_lang.set_keyword_language(g.keyword_lang)
-
-        if question_nr > quiz_for_lang.get_highest_question_level(level_source):
+        if question_nr > QUIZZES[g.lang].get_highest_question_level(level_source):
             return redirect(url_for('quiz_finished', level=level_source, lang=g.lang))
 
-        questions = quiz_for_lang.get_quiz_data_for_level(level_source)
-        question = quiz_for_lang.get_quiz_data_for_level_question(level_source, question_nr)
+        questions = QUIZZES[g.lang].get_quiz_data_for_level(level_source, g.keyword_lang)
+        question = QUIZZES[g.lang].get_quiz_data_for_level_question(level_source, question_nr, g.keyword_lang)
 
         if not questions:
             return no_quiz_data_error()
@@ -98,6 +96,7 @@ def routes(app, database, achievements, quizzes):
 
         quiz_answers = DATABASE.get_quiz_answer(username, level_source, session['quiz-attempt-id'])
 
+        print(question)
         # Todo TB -> We have to do some magic here to format() the keywords into the quiz
 
         return render_template('quiz/quiz_question.html',
@@ -129,10 +128,7 @@ def routes(app, database, achievements, quizzes):
         if not is_quiz_enabled():
             return quiz_disabled_error()
 
-        quiz_for_lang = QUIZZES[g.lang]
-        quiz_for_lang.set_keyword_language(g.keyword_lang)
-
-        questions = quiz_for_lang.get_quiz_data_for_level(level)
+        questions = QUIZZES[g.lang].get_quiz_data_for_level(level, g.keyword_lang)
 
         if not questions:
             return no_quiz_data_error()
@@ -153,7 +149,7 @@ def routes(app, database, achievements, quizzes):
                 achievement = json.dumps(achievement)
 
         # Reading the yaml file
-        questions = QUIZZES[g.lang].get_quiz_data_for_level(level)
+        questions = QUIZZES[g.lang].get_quiz_data_for_level(level, g.keyword_lang)
         if not questions:
             return no_quiz_data_error()
 
@@ -202,11 +198,8 @@ def routes(app, database, achievements, quizzes):
             # The value is a character and not a text
             chosen_option = request.form.get("submit-button")
 
-            quiz_for_lang = QUIZZES[g.lang]
-            quiz_for_lang.set_keyword_language(g.keyword_lang)
-
-            questions = quiz_for_lang.get_quiz_data_for_level(level_source)
-            question = quiz_for_lang.get_quiz_data_for_level_question(level_source, question_nr)
+            questions = QUIZZES[g.lang] .get_quiz_data_for_level(level_source, g.keyword_lang)
+            question = QUIZZES[g.lang] .get_quiz_data_for_level_question(level_source, question_nr, g.keyword_lang)
 
             if not questions:
                 return no_quiz_data_error()
@@ -233,8 +226,11 @@ def routes(app, database, achievements, quizzes):
 
             if is_correct:
                 score = int(correct_answer_score(question))
-                session['total_score'] = session.get('total_score', 0) + score
-                session['correct_answer'] = session.get('correct_answer', 0) + 1
+                correct_question_nrs = get_correctly_answered_question_nrs()
+                if question_nr not in correct_question_nrs:
+                    session['total_score'] = session.get('total_score', 0) + score
+                    session['correct_answer'] = session.get('correct_answer', 0) + 1
+                    session['correctly_answered_questions_numbers'].append(question_nr)
 
                 quiz_answers = DATABASE.get_quiz_answer(username, level_source, session['quiz-attempt-id'])
                 return redirect(url_for('quiz_feedback', quiz_answers=quiz_answers, level_source=level_source,
@@ -260,11 +256,8 @@ def routes(app, database, achievements, quizzes):
         if not session.get('quiz-attempt-id'):
             return redirect(url_for('get_quiz_start', level=level_source, lang=g.lang))
 
-        quiz_for_lang = QUIZZES[g.lang]
-        quiz_for_lang.set_keyword_language(g.keyword_lang)
-
-        questions = quiz_for_lang.get_quiz_data_for_level(level_source)
-        question = quiz_for_lang.get_quiz_data_for_level_question(level_source, question_nr)
+        questions = QUIZZES[g.lang].get_quiz_data_for_level(level_source, g.keyword_lang)
+        question = QUIZZES[g.lang].get_quiz_data_for_level_question(level_source, question_nr, g.keyword_lang)
 
         if not questions:
             return no_quiz_data_error()
@@ -304,24 +297,15 @@ def routes(app, database, achievements, quizzes):
 
 
 def get_result_items(quiz_answers, questions):
-    result_items = []
-    for i in range(len(questions)):
-        item = {}
-        item["question_text"] = questions[i + 1]["question_text"]
-        item["question_code"] = questions[i + 1]["code"]
-        item["is_correct"] = quiz_answers[i + 1][-1] == questions[i + 1]["correct_answer"]
-        item["index_chosen"] = index_from_letter(quiz_answers[i + 1][-1])
-        item["index_correct"] = index_from_letter(questions[i + 1]["correct_answer"])
-        item["attempts"] = len(quiz_answers[i + 1])
-        if "option_text" in question_options_for(questions[i + 1])[
-            index_from_letter(questions[i + 1]["correct_answer"])]:
-            item["option_text"] = \
-            question_options_for(questions[i + 1])[index_from_letter(questions[i + 1]["correct_answer"])]["option_text"]
-        elif "code" in question_options_for(questions[i + 1])[index_from_letter(questions[i + 1]["correct_answer"])]:
-            item["code"] = \
-            question_options_for(questions[i + 1])[index_from_letter(questions[i + 1]["correct_answer"])]["code"]
-        result_items.append(item)
-    return result_items
+    return [{
+        'question_text': q.get('question_text'),
+        'question_code': q.get('code'),
+        'is_correct': quiz_answers[k][-1] == q.get("correct_answer"),
+        'index_chosen': index_from_letter(quiz_answers[k][-1]),
+        'index_correct': index_from_letter(q.get("correct_answer")),
+        'attempts': len([a for a in quiz_answers[k] if a is not None]),
+        'option': question_options_for(q)[index_from_letter(q["correct_answer"])]["option"]
+    } for k, q in questions.items()]
 
 
 def is_quiz_enabled():
@@ -381,6 +365,12 @@ def question_options_for(question):
     return [
         dict(**answer, char_index=letter_from_index(i))
         for i, answer in enumerate(question['mp_choice_options'])]
+
+
+def get_correctly_answered_question_nrs():
+    if 'correctly_answered_questions_numbers' not in session:
+        session['correctly_answered_questions_numbers'] = list()
+    return session['correctly_answered_questions_numbers']
 
 
 def escape_newlines(x):

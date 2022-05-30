@@ -2,7 +2,6 @@ adventures:
     default:
         name: "Introduction"
         description: "Level explanation"
-        image: "hedy-logo.png"
         default_save_name: "intro"
         levels:
             1:
@@ -105,9 +104,9 @@ adventures:
                 example_code: |
                     ## Example Hedy code
                     ```
-                    print 'You need to use quotation marks from now on!'
-                    answer is ask 'What do we need to use from now on?'
-                    print 'We need to use ' answer
+                    {print} 'You need to use quotation marks from now on!'
+                    answer {is} {ask} 'What do we need to use from now on?'
+                    {print} 'We need to use ' answer
                     ```
                 story_text_2: |
                     ## Adventures are getting more and more difficult
@@ -121,7 +120,7 @@ adventures:
                     ## If... else....
                     In level 5 there is something new, the `{if}`! With the `{if}` you can choose between two different options.
                     This code prints nice if you enter Hedy as a name, and boo! if you enter something else.
-                    `{ask}` {and} `{print}` still work like they did in level 4.
+                    `{ask}` and `{print}` still work like they did in level 4.
                 example_code: |
                     ## Example Hedy Code
                     ```
@@ -155,14 +154,14 @@ adventures:
 
                      The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.
 
-                     The {times} is a bit different, because there is no {times} symbol on your keyboard. Just search, there really isn't!
+                     The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!
                      That is why we multiply with the asterisk above 8: `5 * 5`. Read that as "5 times 5" that helps you remember it best.
                 example_code: |
                     ## Example Hedy code
                     ```
                     {print} '5 plus 5 is ' 5 + 5
                     {print} '5 minus 5 is ' 5 - 5
-                    {print} '5 {times} 5 is ' 5 * 5
+                    {print} '5 times 5 is ' 5 * 5
                     ```
                 story_text_2: |
                     We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:
@@ -175,11 +174,11 @@ adventures:
                 start_code: "{repeat} 3 {times} {print} 'Hedy is fun!'"
                 story_text: |
                     ## Level 7! Level 7!
-                    Level 7 adds the `{repeat}` command. {repeat} can be used to execute one line of code multiple times.
+                    Level 7 adds the `{repeat}` command.  `{repeat}` can be used to execute one line of code multiple times.
                 example_code: |
                     ## Example Hedy code
                     ```
-                    {repeat} 3 {times} {print} 'Hedy {is} fun!'
+                    {repeat} 3 {times} {print} 'Hedy is fun!'
                     ```
             8:
                 start_code: |-
@@ -188,7 +187,7 @@ adventures:
                         {print} 'This will be printed 5 times'
                 story_text: |
                     ## Indentation
-                    `{ask}` {and} `{print}` still work as you know them. But `{if}` {and} `{repeat}` have changed!
+                    `{ask}` and `{print}` still work as you know them. But `{if}` and `{repeat}` have changed!
                     You can now execute groups of code together, but you will have to *indent* the code.
                     That means putting four spaces at the beginning of the line. You will also have to indent when you just want to create a block of one line.
                 example_code: |
@@ -204,11 +203,11 @@ adventures:
                         food = {ask} 'What do you want?'
                         {if} food {is} pizza
                             {print} 'nice!'
-                        else
+                        {else}
                             {print} 'pizza is better'
                 story_text: |
                     ## All together now!
-                    In this level you can not only use multiple lines with `{if}` {and} `{repeat}`, but you can also put them together!
+                    In this level you can not only use multiple lines with `{if}` and `{repeat}`, but you can also put them together!
                     In the example you see an `{if}` command within a `{repeat}` command. It is also allowed the other way around, and an `{if}` is also allowed in an `{if}` and a `{repeat}` in a `{repeat}`.
                     Give it a try!
                 example_code: |
@@ -218,7 +217,7 @@ adventures:
                         food = {ask} 'What do you want?'
                         {if} food {is} pizza
                             {print} 'nice!'
-                        else
+                        {else}
                             {print} 'pizza is better'
                     ```
             10:
@@ -226,7 +225,7 @@ adventures:
                     animals {is} dog, cat, blobfish
                     {for} animal {in} animals
                       {print} 'I love ' animal
-                story_text: |
+                story_text: |-
                     ## For each item in my list...
                     In this level we learn a new code called `{for}`. With `{for}` you can make a list and use all elements.
                     `{for}` creates a block, like `{repeat}` and `{if}` so all lines in the block need to start with spaces.
@@ -241,21 +240,21 @@ adventures:
                 start_code: |-
                     {for} counter {in} {range} 1 {to} 5
                         {print} counter
-                story_text: |
+                story_text: |-
                     ## Loops!
                     `{print}` works just the same but we add a new form of the `{for}`. You can now write `{for} counter {in} {range} 1 {to} 5` and use `counter` in your program.
                     Try it out to see what happens! Remember to use indentations after the `{for}` and `{if}` statements (That means starting a sentence with four spaces)
                 example_code: |
                     ## Example Hedy code
                     ```
-                    for counter in range 1 to 5
-                        print counter
+                    {for} counter {in} {range} 1 {to} 5
+                        {print} counter
                     ```
             12:
                 start_code: |-
                     {print} 'decimal numbers now need to use a dot'
                     {print} 2.5 + 2.5
-                story_text: |
+                story_text: |-
                     ## Numbers and texts
                     **Decimal numbers**
                     So far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the `.` for decimal numbers.
@@ -298,14 +297,14 @@ adventures:
                     score = 25
                     {print} 'You got ' score
                     ```
-                story_text_6: |
+                story_text_6: |-
                     **Maths with words** 
                     In this level it is also allowed to use the + sign with texts. For example:
                 example_code_6: |
                     ```
                     a = 'Hello '
                     b = 'world!'
-                    print a + b
+                    {print} a + b
                     ```
             13:
                 start_code: |-
@@ -313,22 +312,22 @@ adventures:
                     age = {ask} 'what is your age?'
                     {if} name {is} 'Hedy' {and} age {is} 2
                         {print} 'You are the real Hedy!'
-                story_text: |
+                story_text: |-
                     ## And... Or..?
                     We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two if's but can use `{and}` and `{or}`. If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct.
                 example_code: |
                     ```
-                    name = ask 'what is your name?'
-                    age = ask 'what is your age?'
-                    if name is 'Hedy' and age is 2
-                        print 'You are the real Hedy!'
+                    name = {ask} 'what is your name?'
+                    age = {ask} 'what is your age?'
+                    {if} name {is} 'Hedy' {and} age {is} 2
+                        {print} 'You are the real Hedy!'
                     ```
             14:
                 start_code: |-
                     age = {ask} 'How old are you?'
                     {if} age < 13
                         {print} 'You are younger than me!'
-                    else
+                    {else}
                         {print} 'You are older than me!'
                 story_text: |
                     ## Great, Greater, Greatest!
@@ -351,7 +350,7 @@ adventures:
                     ```
                     name = {ask} 'What is your name?'
                     {if} name == 'Hedy'
-                        {print} 'You are coo!'
+                        {print} 'You are cool!'
                     ```
                 story_text_3: |
                     You can also compare if something is *not* equal to something else using `!=` like this:
@@ -367,7 +366,7 @@ adventures:
                     {while} answer != 25
                         answer = {ask} 'What is 5 times 5?'
                     {print} 'A correct answer has been given'
-                story_text: |
+                story_text: |-
                     ## More loops!
                     We are going to learn a new loop, the `{while}` loop! We continue the loop as long as the statement is true.
                     So don't forget to change the value in the loop.
@@ -378,15 +377,15 @@ adventures:
                     ## Example Hedy code
                     ```
                     answer = 0
-                    while answer != 25
-                        answer = ask 'What is 5 times 5?'
-                    print 'A correct answer has been given'
+                    {while} answer != 25
+                        answer = {ask} 'What is 5 times 5?'
+                    {print} 'A correct answer has been given'
                     ```
             16:
                 start_code: |-
                     fruit = ['apple', 'banana', 'cherry']
                     {print} fruit
-                story_text: |
+                story_text: |-
                     ## More and more like real code!
                     We are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels.
                     You can use the square brackets as well to point out a place in the lists.
@@ -404,15 +403,17 @@ adventures:
                     {for} i {in} {range} 1 {to} 10:
                         {print} i
                     {print} 'Ready or not, here I come!'
-                story_text: |
+                story_text: |-
                     ## Elif
                     Now we are going to change a little bit with indentation. Every time that we need an indentation, we need `:` at the line before the indentation.
 
-                    In this level you can also use a new command: `{elif}`. `{elif}` is short for {else} {if} and you need it when you you want to make 3 (or more!) options.
+                    In this level you can also use a new command: `{elif}`. `{elif}` is short for {else} {if} and you need it when you want to make 3 (or more!) options.
                     Check it out!
+                example_code: |
+                    ## Example Hedy Code
                     ```
                     prices = ['1 million dollars', 'an apple pie', 'nothing']
-                    your_price = prices[random]
+                    your_price = prices[{random}]
                     {print} 'You win ' your_price
                     {if} your_price == '1 million dollars' :
                         {print} 'Yeah! You are rich!'
@@ -427,21 +428,37 @@ adventures:
                     {print}('My name is ', naam)
                 story_text: |-
                     ## The last level!
-                    We arrived at real pythoncode! That means we need to use parentheses with {print} and {range} from now on.
-                    That looks like this:
+                    We arrived at real Python code! That means we need to use parentheses with {print} and {range} from now on.
+
+                example_code: |
+                    ## Example Hedy Code
                     ```
                     {print}('my name is Hedy!')
                     ```
-                    If you want to print more than one items, you need to separate them by commas.
+
+                story_text_2: |-
+                    If you want to print more than one item, you need to separate them by commas.
+
+                example_code_2: |
                     ```
-                    name = 'Hedy'
-                    {print}('my name is ', name)
+                    temperature = 25
+                    {print}('It is ', temperature, 'degrees outside')
+                    ```
+
+                story_text_3: |-
+                    ##  Input
+                    The final change we will need to make to get Python code is changing `{ask}` into `{input}`.
+
+                example_code_3: |
+                    ```
+                    {print}('My name is Hedy!')
+                    name = {input}('What is your name?')
+                    {print}('So your name is ', name)
                     ```
 
     story:
         name: "Story"
         description: "Story"
-        image: "story.png"
         default_save_name: "Story"
         levels:
             1:
@@ -455,8 +472,8 @@ adventures:
                     {ask} who is the star in your story?
                     ```
 
-                    After that first line, start with `{print}` {if} the sentence needs to be printed.
-                    You use `{echo}` {if} you want your main character to be at the end of the sentence.
+                    After that first line, start with `{print}` if the sentence needs to be printed.
+                    You use `{echo}` if you want your main character to be at the end of the sentence.
                 example_code: |
                     ## Example Hedy code
 
@@ -477,9 +494,8 @@ adventures:
                     You do have to program a little bit extra for that. You must now name your main character first.
 
                     You can then put that name anywhere in a sentence.
-                example_code: |
+                example_code: |-
                     ## Example Hedy code
-
 
                     ```
                     name {is} {ask} What is the name of the main character?
@@ -497,7 +513,6 @@ adventures:
 
                 example_code: |
                     ## Example Hedy Code
-
                     ```
                     animals {is} 🦔, 🐿, 🦉, 🦇
                     {print} He now hears the sound of an animals {at} {random}
@@ -629,8 +644,8 @@ adventures:
                     {else}
                         {print} 'Robin goes home'
                     ```
-                story_text_2: |
-                    The example above is pretty straightforward, but with nesting you can really elaborate your code and turn your story into a real game. Check out this example!
+                story_text_2: |-
+                    The example above is pretty straightforward, but by nesting {if} you can really elaborate your code and turn your story into a real game. Check out this example!
                 example_code_2: |
                     ## Elaborate code
                     ```
@@ -683,13 +698,11 @@ adventures:
                     ```
                 start_code: "# place your code here"
             12:
-                story_text: |
+                story_text: |-
                     ## Story
                     In this level you can use the quotation marks to save multiple words in a variable.
                 example_code: |
                     ## Example Hedy code
-
-
                     ```
                     name = 'The Queen of England'
                     {print} name ' was eating a piece of cake, when suddenly...'
@@ -754,7 +767,6 @@ adventures:
     parrot:
         name: "Parrot"
         description: "Create your own online pet parrot that will copy you!"
-        image: "story.png"
         default_save_name: "Parrot"
         levels:
             1:
@@ -826,7 +838,6 @@ adventures:
     songs:
         name: "Sing a song!"
         description: "Print a song"
-        image: "songs.png"
         default_save_name: "Song"
         levels:
             6:
@@ -961,10 +972,10 @@ adventures:
                     actions = 'clap your hands', 'stomp your feet', 'shout Hurray!'
                     {for} action {in} actions
                         {for} i {in} {range} 1 {to} 2
-                            {print} '{if} youre happy and you know it'
+                            {print} 'if youre happy and you know it'
                             {print} action
-                        {print} '{if} youre happy and you know it and you really want to show it'
-                        {print} '{if} youre happy and you know it'
+                        {print} 'if youre happy and you know it and you really want to show it'
+                        {print} 'if youre happy and you know it'
                         {print} action
                     ```
                 start_code: "# place your code here"
@@ -1007,7 +1018,6 @@ adventures:
     turtle:
         name: "Turtle"
         description: "Make your own drawing"
-        image: "turtle.gif"
         default_save_name: "Turtle"
         levels:
             1:
@@ -1031,15 +1041,20 @@ adventures:
             2:
                 story_text: |
                     ## Turtle
-                    In level 1 the turtle could only turn left or right. That is a bit boring!
+                    In this level you can use variables to make the turtle interactive. For example you can ask the player how many steps the turtle must make.
+                example_code: |
+                    ## Example Hedy code
+                    ```
+                    answer {is} {ask} How many steps should the turtle make?
+                    {forward} answer
+                    ```
+                story_text_2: |
+                    Also, in level 1 the turtle could only turn left or right. That is a bit boring!
                     In level 2 he can point his nose in all directions.
 
                     Use 90 to turn a quarter. We call this degrees. A full turn is 360 degrees.
                     Can you make a figure with this code? Maybe a triangle or a circle?
-                example_code: |
-                    ## Example Hedy code
-
-
+                example_code_2: |
                     ```
                     {print} Drawing figures
                     angle {is} 90
@@ -1048,7 +1063,7 @@ adventures:
                     {turn} angle
                     {forward} 25
                     ```
-                start_code: |
+                start_code: |-
                     {print} Turtle race!
                     hoek {is} 90
                     {turn} hoek
@@ -1067,7 +1082,7 @@ adventures:
                     {turn} angles {at} {random}
                     {forward} 25
                     ```
-                start_code: |
+                start_code: |-
                     angles {is} 10, 50, 90, 150, 250
                     {turn} angles {at} {random}
                     {forward} 25
@@ -1086,7 +1101,7 @@ adventures:
                     {turn} angle
                     {forward} 25
                     ```
-                start_code: |
+                start_code: |-
                     {print} 'Drawing figures'
                     angle {is} 90
                     {turn} angle
@@ -1113,7 +1128,7 @@ adventures:
                     {turn} angle
                     {forward} 25
                     ```
-                start_code: |
+                start_code: |-
                     {print} 'Drawing Figures'
                     figure {is} {ask} 'Do you want a square or a triangle?'
                     {if} figure {is} triangle angle {is} 120 {else} angle {is} 90
@@ -1146,7 +1161,7 @@ adventures:
                     {forward} 50
                     {turn} angle
                     ```
-                start_code: |
+                start_code: |-
                     {print} 'Drawing figures'
             7:
                 story_text: |
@@ -1160,7 +1175,7 @@ adventures:
                     {print} 'Draw figures'
                     {repeat} 3 {times} {forward} 10
                     ```
-                start_code: |
+                start_code: |-
                     {print} 'Draw figures'
                     {repeat} 3 {times} {forward} 10
             8:
@@ -1193,12 +1208,11 @@ adventures:
                         {turn} _
                         {forward} _
                     ```
-                start_code: |
-                    hoeken = {ask} 'How many angles should I draw?'
+                start_code: |-
+                    angles = {ask} 'How many angles should I draw?'
     dishes:
         name: "Dishes?"
         description: "Use the computer to see who does the dishes (Start at level 2)"
-        image: "dishes.png"
         default_save_name: "Dishes"
         levels:
             3:
@@ -1325,7 +1339,6 @@ adventures:
     dice:
         name: "Dice"
         description: "Make your own dice"
-        image: "dice.png"
         default_save_name: "Dice"
         levels:
             3:
@@ -1451,7 +1464,6 @@ adventures:
     rock:
         name: "Rock, paper, scissors"
         description: "Make your own rock, paper, scissors game"
-        image: "rock.png"
         default_save_name: "Rock"
         levels:
             1:
@@ -1466,7 +1478,7 @@ adventures:
 
                     ```
                     {print} what do you choose?
-                    {ask} choose {from} rock, paper or scissors
+                    {ask} choose from rock, paper or scissors
                     {echo} so your choice was:
                     ```
                     Instead of using words, you could also use emojis of course: ✊✋✌
@@ -1626,7 +1638,6 @@ adventures:
     calculator:
         name: "Calculator"
         description: "Create a calculator"
-        image: "calculator.png"
         default_save_name: "Calculator"
         levels:
             6:
@@ -1768,7 +1779,6 @@ adventures:
     restaurant:
         name: "Restaurant"
         description: "Create your own virtual restaurant"
-        image: "restaurant.png"
         default_save_name: "Restaurant"
         levels:
             1:
@@ -2137,7 +2147,6 @@ adventures:
     fortune:
         name: "Fortune teller"
         description: "Let Hedy predict the future"
-        image: "fortuneteller.png"
         default_save_name: "Fortune Teller"
         levels:
             1:
@@ -2380,7 +2389,6 @@ adventures:
     haunted:
         name: "Haunted House"
         description: "Escape from the haunted house"
-        image: "hauntedhouse.gif"
         default_save_name: "Haunted House"
         levels:
             1:
@@ -2627,7 +2635,6 @@ adventures:
     piggybank:
         name: "Piggy Bank"
         description: "Count your pocketmoney!"
-        image: "piggy.png"
         default_save_name: "Piggy Bank"
         levels:
             12:
@@ -2672,7 +2679,6 @@ adventures:
     quizmaster:
         name: "Quizmaster"
         description: "Make your own quiz!"
-        image: "quizmaster.png"
         default_save_name: "Quizmaster"
         levels:
             14:
@@ -2706,7 +2712,6 @@ adventures:
     language:
         name: "Language"
         description: "Practice words in a foreign language"
-        image: "languages.png"
         default_save_name: "Language"
         levels:
             5:
@@ -2751,7 +2756,6 @@ adventures:
     secret:
         name: "SuperSpy"
         description: "Make your own spy code"
-        image: "story.png"
         default_save_name: "SuperSpy"
         levels:
             12:
@@ -2790,10 +2794,401 @@ adventures:
                         print 'Go to the trainstation at 10.00'
                      ```
                 start_code: "## place your code here"
+    blackjack:
+        name: "Blackjack"
+        description: "Try to get as close to 21 as you can"
+        default_save_name: "Blackjack"
+        levels:
+            17:
+                story_text: |
+                    ## Create a game of Blackjack
+                    Blackjack is a simple game of cards in which you have to get as close to 21 points as possible. You get two cards. Each card is worth their numeral value, and the face cards (Jack, Queen and King) are worth 10 points.
+                    The Ace is worth either 1 or 11 points (you can choose). The dealer, your opponent, also gets two cards.
+                    If you want, you can get another card, and its points will be added to your total. The dealer can also choose to take another card.
+                    But be careful not to get more than 21 points, because if you do, you lose!
+                    The player who gets closest to 21, without going over it, wins!
+
+                    Have fun!
+                example_code: |
+                    ## Example Hedy code
+                    ```
+                    {print} 'BLACKJACK'
+                    cards = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Jack', 'Queen','King', 'Ace']
+                    points = 0
+                    dealer_points = 0
+                    card_1 = cards[{random}]
+                    card_2 = cards[{random}]
+                    card_3 = cards [{random}]
+                    dealer_card_1 = cards[{random}]
+                    dealer_card_2 = cards[{random}]
+                    dealer_card_3 = cards[{random}]
+                    # Points for card 1
+                    {if} card_1 == 'Jack' {or} card_1 == 'Queen' {or} card_1 == 'King':
+                        points = points + 10
+                    {elif} card_1 == 'Ace':
+                        points = points + 11
+                    {else}:
+                        points = points + card_1
+                    # Points for card 2
+                    {if} card_2 == 'Jack' {or} card_2 == 'Queen' {or} card_2 == 'King':
+                        points = points + 10
+                    {elif} card_2 == 'Ace':
+                        points = points + 11
+                    {else}:
+                        points = points + card_2
+                    # Points for dealer card 1
+                    {if} dealer_card_1 == 'Jack' {or} dealer_card_1 == 'Queen' {or} dealer_card_1 == 'King':
+                        dealer_points = dealer_points + 10
+                    {elif} dealer_card_1 == 'Ace':
+                        dealer_points = dealer_points + 11
+                    {else}:
+                        dealer_points = dealer_points + dealer_card_1
+                    # Points for dealer card 2
+                    {if} dealer_card_2 == 'Jack' {or} dealer_card_2 == 'Queen' {or} dealer_card_2 == 'King':
+                        dealer_points = dealer_points + 10
+                    {elif} dealer_card_2 == 'Ace':
+                        dealer_points = dealer_points + 11
+                    {else}:
+                        dealer_points = dealer_points + dealer_card_2
+                    # Two Aces
+                    {if} card_1 == 'Ace' {and} card_2 == 'Ace':
+                        points = 12
+                    {if} dealer_card_1 == 'Ace' {and} dealer_card_2 == 'Ace':
+                        dealer_points = 12
+                    # Scoreboard
+                    {print} 'You have a ' card_1 ' and a ' card_2 ' (' points ' points)'
+                    {print} 'The dealer has a ' dealer_card_1 ' and a ' dealer_card_2 ' (' dealer_points ' points)'
+                    # Extra card for the player
+                    hit = {ask} 'Do you want an extra card?'
+                    {if} hit == 'yes':
+                        {if} card_3 == 'Jack' {or} card_3 == 'Queen' {or} card_3 == 'King':
+                            points = points + 10
+                        {elif} card_3 == 'Ace':
+                            {if} points > 11:
+                                points = points + 11
+                            {else}:
+                                points = points + 1
+                        {else}:
+                            points = points + card_3
+                        print 'You get an extra ' card_3 ' (' points ' points)'
+                    {else}:
+                        print 'No extra cards'
+                    # Winner
+                    {if} points > 21 {or} dealer_points > points {or} dealer_points == 21:
+                        {print} 'You lose'
+                    {elif} dealer_points < 17:
+                        {print} 'The dealer takes an extra card. It is a... ' dealer_card_3
+                        {if} dealer_card_3 == 'Jack' {or} dealer_card_3 == 'Queen' {or} dealer_card_3 == 'King':
+                            dealer_points = dealer_points + 10
+                        {elif} dealer_card_3 == 'Ace':
+                            {if} dealer_points < 11:
+                                dealer_points = dealer_points + 11
+                            {else}:
+                                dealer_points = dealer_points + 1
+                        {else}:
+                            dealer_points = dealer_points + dealer_card_3
+                        {print} 'The dealer has ' dealer_points ' points now'
+                        {if} dealer_points < 21 {and} dealer_points > points:
+                            {print} 'You lose'
+                        {else}:
+                            {print} 'You win'
+                    {elif} points > dealer_points {and} points < 21:
+                        {print} 'You win!'
+                    ```
+                start_code: "# place your code here"
+    tic:
+        name: "Tic Tac Toe"
+        description: "Play a game of Tic Tac Toe!"
+        default_save_name: "Tic"
+        levels:
+            13:
+                story_text: |
+                    ## Tic Tac Toe
+                    In this adventure you can program a game of Tic Tac Toe. You can play with two people. Taking turns, you pick a number of the spot (1 - 9) you want to put your sign (x or o) on.
+                    The first player that gets 3 in a row (horizontally, vertically or diagonally) wins!
+                example_code: |
+                    ## Example Hedy code
+                    ```
+                    sign = 'x'
+                    open_spots = 1, 2, 3, 4, 5, 6, 7, 8, 9
+                    game = 'on'
+                    spot_1 = '.'
+                    spot_2 = '.'
+                    spot_3 = '.'
+                    spot_4 = '.'
+                    spot_5 = '.'
+                    spot_6 = '.'
+                    spot_7 = '.'
+                    spot_8 = '.'
+                    spot_9 = '.'
+                    {print} 'TIC TAC TOE!'
+                    {print} spot_1 spot_2 spot_3
+                    {print} spot_4 spot_5 spot_6
+                    {print} spot_7 spot_8 spot_9
+                    {print} ' '
+                    {for} i {in} {range} 1 {to} 9
+                        {if} game {is} 'on'
+                            choice = {ask} 'Player ' sign ', which spot?'
+                            {if} choice {in} open_spots
+                                {remove} choice {from} open_spots
+                                {if} choice {is} 1
+                                    spot_1 = sign
+                                {if} choice {is} 2
+                                    spot_2 = sign
+                                {if} choice {is} 3
+                                    spot_3 = sign
+                                {if} choice {is} 4
+                                    spot_4 = sign
+                                {if} choice {is} 5
+                                    spot_5 = sign
+                                {if} choice {is} 6
+                                    spot_6 = sign
+                                {if} choice {is} 7
+                                    spot_7 = sign
+                                {if} choice {is} 8
+                                    spot_8 = sign
+                                {if} choice {is} 9
+                                    spot_9 = sign
+                            {else}
+                                {print} 'That spot was already taken'
+                            {print} spot_1 spot_2 spot_3
+                            {print} spot_4 spot_5 spot_6
+                            {print} spot_7 spot_8 spot_9
+                            {print} ' '
+                            winner = {ask} 'Did you win?'
+                            {if} winner {is} 'yes'
+                                {print} 'Good job, player ' sign '!'
+                                game = 'over'
+                            {else}
+                                {if} sign {is} 'x'
+                                    sign = 'o'
+                                {else}
+                                    sign = 'x'
+                    ```
+                start_code: "## place your code here"
+            14:
+                story_text: |
+                    ## Tic Tac Toe
+                    In the previous levels you've made a tic tac toe game. Now you've learned how to use the = sign, the == sign and the != sign.
+                    You can use this knowledge in your new Tic Tac Toe game, like this:
+                example_code: |
+                    ## Example Hedy code
+                    ```
+                    sign = 'x'
+                    open_spots = 1, 2, 3, 4, 5, 6, 7, 8, 9
+                    game = 'on'
+                    spot_1 = '.'
+                    spot_2 = '.'
+                    spot_3 = '.'
+                    spot_4 = '.'
+                    spot_5 = '.'
+                    spot_6 = '.'
+                    spot_7 = '.'
+                    spot_8 = '.'
+                    spot_9 = '.'
+                    {print} 'TIC TAC TOE!'
+                    {print} spot_1 spot_2 spot_3
+                    {print} spot_4 spot_5 spot_6
+                    {print} spot_7 spot_8 spot_9
+                    {print} ' '
+                    {for} i {in} {range} 1 {to} 9
+                        {if} game != 'over'
+                            choice = {ask} 'Player ' sign ', which spot?'
+                            {if} choice {in} open_spots
+                                {remove} choice {from} open_spots
+                                {if} choice == 1
+                                    spot_1 = sign
+                                {if} choice == 2
+                                    spot_2 = sign
+                                {if} choice == 3
+                                    spot_3 = sign
+                                {if} choice == 4
+                                    spot_4 = sign
+                                {if} choice == 5
+                                    spot_5 = sign
+                                {if} choice == 6
+                                    spot_6 = sign
+                                {if} choice == 7
+                                    spot_7 = sign
+                                {if} choice == 8
+                                    spot_8 = sign
+                                {if} choice == 9
+                                    spot_9 = sign
+                            {else}
+                                {print} 'That spot was already taken'
+                            {print} spot_1 spot_2 spot_3
+                            {print} spot_4 spot_5 spot_6
+                            {print} spot_7 spot_8 spot_9
+                            {print} ' '
+                            winner = {ask} 'Did you win?'
+                            {if} winner == 'yes'
+                                {print} 'Good job, player ' sign '!'
+                                game = 'over'
+                            {else}
+                                {if} sign == 'x'
+                                    sign = 'o'
+                                {else}
+                                    sign = 'x'
+                    ```
+                start_code: "## place your code here"
+            15:
+                story_text: |
+                    ## Tic Tac Toe
+                    In this level you can improve your Tic Tac Toe game with the {while} loop. With this loop you can combine the `{if} game != 'over'` and the `{for} i {in} {range} 1 to 9` into one simple line.
+                    Check it out:
+                example_code: |
+                    ## Example Hedy code
+                    ```
+                    sign = 'x'
+                    open_spots = 1, 2, 3, 4, 5, 6, 7, 8, 9
+                    game = 'on'
+                    spot_1 = '.'
+                    spot_2 = '.'
+                    spot_3 = '.'
+                    spot_4 = '.'
+                    spot_5 = '.'
+                    spot_6 = '.'
+                    spot_7 = '.'
+                    spot_8 = '.'
+                    spot_9 = '.'
+                    {print} 'TIC TAC TOE!'
+                    {print} spot_1 spot_2 spot_3
+                    {print} spot_4 spot_5 spot_6
+                    {print} spot_7 spot_8 spot_9
+                    {print} ' '
+                    {while} game != 'over'
+                        choice = {ask} 'Player ' sign ', which spot?'
+                        {if} choice {in} open_spots
+                            {remove} choice {from} open_spots
+                            {if} choice == 1
+                                spot_1 = sign
+                            {if} choice == 2
+                                spot_2 = sign
+                            {if} choice == 3
+                                spot_3 = sign
+                            {if} choice == 4
+                                spot_4 = sign
+                            {if} choice == 5
+                                spot_5 = sign
+                            {if} choice == 6
+                                spot_6 = sign
+                            {if} choice == 7
+                                spot_7 = sign
+                            {if} choice == 8
+                                spot_8 = sign
+                            {if} choice == 9
+                                spot_9 = sign
+                        {else}
+                            {print} 'That spot was already taken'
+                        {print} spot_1 spot_2 spot_3
+                        {print} spot_4 spot_5 spot_6
+                        {print} spot_7 spot_8 spot_9
+                        {print} ' '
+                        winner = {ask} 'Did you win?'
+                        {if} winner == 'yes'
+                            {print} 'Good job, player ' sign '!'
+                            game = 'over'
+                        {else}
+                            {if} sign == 'x'
+                                sign = 'o'
+                            {else}
+                                sign = 'x'
+                    ```
+                start_code: "## place your code here"
+            17:
+                story_text: |
+                    ## Tic Tac Toe
+                    In the previous levels the tic tac toe game had an annoying feature. After every move, you had to fill in yourself if you had won or not.
+                    This made the game playable, but also quite slow. In this level we have learned the `{elif}` command, that could solve that problem.
+                    To use the {elif} to let Hedy check whether or not a player has won is fun, but it also requires a fair amount of extra lines.
+
+                    In the example code you see that we added the requirements to win (3 spots in a row horizontally, vertically or diagonally).
+                    You can find them in line 46 to 69. You can see that each time the requirement is met (so if a player has won) the variable game is set to 'over'.
+                    This means that the {while} loop will be stopped and the game ends.
+
+                example_code: |
+                    ## Example code
+                    ```
+                    sign = 'x'
+                    open_spots = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+                    game = 'on'
+                    spot_1 = '.'
+                    spot_2 = '.'
+                    spot_3 = '.'
+                    spot_4 = '.'
+                    spot_5 = '.'
+                    spot_6 = '.'
+                    spot_7 = '.'
+                    spot_8 = '.'
+                    spot_9 = '.'
+                    {print} 'TIC TAC TOE!'
+                    {print} spot_1 spot_2 spot_3
+                    {print} spot_4 spot_5 spot_6
+                    {print} spot_7 spot_8 spot_9
+                    {print} ' '
+                    {while} game != 'over':
+                        choice = {ask} 'Player ' sign ', which spot?'
+                        {if} choice {in} open_spots:
+                            {remove} choice {from} open_spots
+                            {if} choice == 1:
+                                spot_1 = sign
+                            {if} choice == 2:
+                                spot_2 = sign
+                            {if} choice == 3:
+                                spot_3 = sign
+                            {if} choice == 4:
+                                spot_4 = sign
+                            {if} choice == 5:
+                                spot_5 = sign
+                            {if} choice == 6:
+                                spot_6 = sign
+                            {if} choice == 7:
+                                spot_7 = sign
+                            {if} choice == 8:
+                                spot_8 = sign
+                            {if} choice == 9:
+                                spot_9 = sign
+                        {else}:
+                            {print} 'That spot was already taken'
+                        {print} spot_1 spot_2 spot_3
+                        {print} spot_4 spot_5 spot_6
+                        {print} spot_7 spot_8 spot_9
+                        {print} ' '
+                        {if} spot_1 == spot_2 {and} spot_2 == spot_3 {and} spot_1 != '.':
+                            {print} 'Player ' sign ' wins!'
+                            game = 'over'
+                        {elif} spot_4 == spot_5 {and} spot_5 == spot_6 {and} spot_4 != '.':
+                            {print} 'Player ' sign ' wins!'
+                            game = 'over'
+                        {elif} spot_7 == spot_8 {and} spot_8 == spot_9 {and} spot_7 != '.':
+                            {print} 'Player ' sign ' wins!'
+                            game = 'over'
+                        {elif} spot_1 == spot_4 {and} spot_4 == spot_7 {and} spot_1 != '.':
+                            {print} 'Player ' sign ' wins!'
+                            game = 'over'
+                        {elif} spot_2 == spot_5 {and} spot_5 == spot_8 {and} spot_2 != '.':
+                            {print} 'Player ' sign ' wins!'
+                            game = 'over'
+                        {elif} spot_3 == spot_6 {and} spot_6 == spot_9 {and} spot_3 != '.':
+                            {print} 'Player ' sign ' wins!'
+                            game = 'over'
+                        {elif} spot_1 == spot_5 {and} spot_5 == spot_9 {and} spot_1 != '.':
+                            {print} 'Player ' sign ' wins!'
+                            game = 'over'
+                        {elif} spot_3 == spot_5 {and} spot_5 == spot_7 {and} spot_3 != '.':
+                            {print} 'Player ' sign ' wins!'
+                            game = 'over'
+                        {else}:
+                            {if} sign == 'x':
+                                sign = 'o'
+                            {else}:
+                                sign = 'x'
+                    ```
+
+                start_code: "## place your code here"
     next:
         name: "What's next?"
         description: "What's Next?"
-        image: "hedy-logo.png"
         default_save_name: "Next"
         levels:
             1:

@@ -1,6 +1,6 @@
       {# TABS #}
       <div id="adventures">
-        <div class="flex flex-row overflow-x-scroll overflow-y-hidden mb-2 px-2 pt-2">
+        <div class="flex flex-row overflow-x-scroll overflow-y-hidden mb-2 px-2 pt-2" id="adventures-buttons">
             {% for adventure in adventures %}
               {% if 'adventures' not in customizations or (customizations['adventures'][adventure.short_name] and level|int in customizations['adventures'][adventure.short_name]) %}
                 <div class="tab {% if loop.index == 1 %}tab-selected{% endif %} z-10 whitespace-nowrap flex items-center justify-center" tabindex="0" data-tab="{{adventure.short_name}}">
@@ -8,15 +8,25 @@
                 </div>
               {% endif %}
             {% endfor %}
+            <!-- Add the tab for the parsons problem (if it exists -->
+            {% if parsons %}
+                {% for parson in parsons %}
+                    <div class="tab parsons_tab z-10 whitespace-nowrap flex items-center justify-center" tabindex="0" data-tab="{{parson['short_name']}}">
+                        {{parson['name']}}
+                    </div>
+                {% endfor %}
+            {% endif %}
             {% for adventure in teacher_adventures %}
                 <div class="tab teacher_tab z-10 whitespace-nowrap flex items-center justify-center" tabindex="0" data-tab="{{adventure.name}}">
                     {{ adventure.name }}
                 </div>
             {% endfor %}
             <!-- Add the tab for the quiz -->
-            <div class="tab z-10 whitespace-nowrap flex items-center justify-center" tabindex="0" data-tab="quiz">
-                    {{_('quiz_tab')}}
-            </div>
+            {% if quiz %}
+                <div class="tab z-10 whitespace-nowrap flex items-center justify-center" tabindex="0" data-tab="quiz">
+                        {{_('quiz_tab')}}
+                </div>
+            {% endif %}
             {% if specific_adventure %}
                 <h2 class="z-10 my-0 ml-auto pt-8 text-red-500 text-base">{{ _('specific_adventure_mode')|replace("{adventure}", adventures[0].name) }}</h2>
             {% endif %}
@@ -53,6 +63,31 @@
           </div>
           {% endif %}
         {% endfor %}
+        {% if parsons %}
+            {% for parson in parsons %}
+                <div data-tabtarget="{{parson['short_name']}}" class="hidden">
+                    <div class="flex flex-row">
+                        <div class="w-1/2 p-2 ltr:mr-2 rtl:ml-2">
+                            {{ parson['text']|commonmark }}
+                            <div class="flex flex-col mx-auto items-center" id="start_parsons_options">
+                                {% for key, line in parson.code_lines.items() %}
+                                    <div class="relative w-full mb-2 border-4 border-black rounded-lg" style="background-color: #272822;">
+                                        <div index="{{ key }}" draggable="true" code="{% if line[0] == '_' %}    {{line[1:]}}{% else %}{{line}}{% endif %}" class="start-parsons-box w-full absolute inset-0 z-10 rounded-lg"></div>
+                                        <pre level="{{ level }}" id="start_parsons_{{ loop.index }}" class="no-copy-button parsons text-sm">{% if line[0] == '_' %}    {{line[1:]}}{% else %}{{line}}{% endif %}</pre>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <div class="w-1/2 ltr:ml-2 rtl:mr-2">
+                            {{ parson['example']|commonmark }}
+                            {{ parson['story']|commonmark }}
+                        </div>
+                    </div>
+                    <div class="ltr:clear-right rtl:clear-left"></div>
+                </div>
+            {% endfor %}
+        {% endif %}
         {% for adventure in teacher_adventures %}
             <div data-tabtarget="{{adventure.name}}" class="hidden">
                 <div>
@@ -62,10 +97,81 @@
             </div>
         {% endfor %}
         <!-- Add the tabtarget for the quiz -->
-        <div data-tabtarget="quiz" class="hidden">
-            <h2>{{_('end')}}</h2>
-            <div>{{_('quiz_description')}}</div>
-            <input type="submit" class="green-btn h-3/5 mt-4" value="{{ _('go_to_quiz') }}" onclick="hedyApp.load_quiz ({{level_nr}})">
-        </div>
+        {% if quiz %}
+            <div data-tabtarget="quiz" class="hidden">
+                <h2>{{_('end')}}</h2>
+                <div>{{_('quiz_description')}}</div>
+                <input type="submit" class="green-btn h-3/5 mt-4" value="{{ _('go_to_quiz') }}" onclick="hedyApp.load_quiz ({{level_nr}})">
+            </div>
+        {% endif %}
       </div>
     </div>
+<!-- Todo TB: This is fine for now, but we should move this to app.ts in the near future (05-22) -->
+<script>
+document.addEventListener('DOMContentLoaded', (event) => {
+     function handleDragStart(e){
+         this.style.opacity = 0.4;
+         this.style.background = "#272822";
+
+         dragSrcEl = this;
+
+         $('.parsons_code_container').removeClass('border-green-500 border-red-500');
+         $('.parsons_code_container').addClass('border-black');
+
+         e.dataTransfer.effectAllowed = 'move';
+         e.dataTransfer.setData('code', this.getAttribute('code'));
+         e.dataTransfer.setData('text/plain', this.getAttribute('index'));
+     }
+
+     function handleDragEnd(e) {
+         this.style.opacity = '1';
+         this.style.background = "";
+
+         start_items.forEach(function (item) {
+             item.classList.remove('over');
+         });
+         goal_items.forEach(function (item) {
+             item.classList.remove('over');
+         });
+     }
+
+     function handleDragOver(e) {
+         e.preventDefault();
+     }
+
+     function handleDrop(e) {
+         e.stopPropagation(); // stops the browser from redirecting.
+
+         if (dragSrcEl !== this) {
+             // Now it gets complex: also update both ace editors
+             let start_ace = ace.edit(dragSrcEl.parentNode.childNodes[3].getAttribute('id'));
+             let goal_ace = ace.edit(this.parentNode.childNodes[3].getAttribute('id'));
+
+             start_ace.session.setValue(this.getAttribute('code').replace(/\n+$/, ''), -1);
+             goal_ace.session.setValue(e.dataTransfer.getData('code').replace(/\n+$/, ''), -1);
+
+             dragSrcEl.setAttribute('index', this.getAttribute('index'));
+             dragSrcEl.setAttribute('code', this.getAttribute('code'));
+
+             this.setAttribute('index', e.dataTransfer.getData('text/plain'));
+             this.setAttribute('code', e.dataTransfer.getData('code'));
+         }
+         return false;
+     }
+
+     let start_items = document.querySelectorAll('.start-parsons-box');
+     start_items.forEach(function (item) {
+         item.addEventListener('dragstart', handleDragStart);
+         item.addEventListener('dragover', handleDragOver);
+         item.addEventListener('dragend', handleDragEnd);
+         item.addEventListener('drop', handleDrop);
+     });
+     let goal_items = document.querySelectorAll('.compiler-parsons-box');
+     goal_items.forEach(function (item) {
+         item.addEventListener('dragstart', handleDragStart);
+         item.addEventListener('dragover', handleDragOver);
+         item.addEventListener('dragend', handleDragEnd);
+         item.addEventListener('drop', handleDrop);
+     });
+ });
+</script>

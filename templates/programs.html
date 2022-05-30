@@ -32,23 +32,25 @@
     <div id="program_{{ loop.index }}" class="program w-full border-solid border-2 {% if program.submitted %} border-gray-400 bg-gray-400 {% else %} border-orange-400 {% endif %} rounded p-4 mb-4">
         <h3 id="submitted_header_{{ loop.index }}" class="mt-0 mb-4 text-red-500 text-center {% if not program.submitted %} hidden{% endif %}">{{_('submitted_header')}}</h3>
         <div class="flex flex-row">
-            <table class="table-auto mb-4 w-1/2">
+            <table class="table-auto mb-4 w-3/4">
             <thead>
                 <tr class="text-left">
-                    <th class="w-1/4 text-blue-600">{{_('title')}}</th>
-                    <th class="w-1/4 text-blue-600">{{_('level')}}</th>
-                    <th class="w-1/4 text-blue-600">{{_('last_edited')}}</th>
+                    <th class="w-72 text-blue-600">{{_('title')}}</th>
+                    <th class="w-24 text-blue-600">{{_('level')}}</th>
+                    <th class="w-52 text-blue-600">{{_('adventure')}}</th>
+                    <th class="text-blue-600">{{_('last_edited')}}</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                  {% if program.adventure_name %}
-                    <td>{{_('adventure')}}: {{adventure_names.get(program.adventure_name)}} - {{program.name}}</td>
-                  {% else %}
                     <td>{{program.name}}</td>
-                  {% endif %}
-                  <td>{{_('level')}} {{ program.level }}</td>
-                  <td>{{ program.date }}</td>
+                    <td>{{_('level')}} {{ program.level }}</td>
+                    {% if program.adventure_name %}
+                        <td>{{adventure_names.get(program.adventure_name)}}</td>
+                    {% else %}
+                        <td>-</td>
+                    {% endif %}
+                    <td>{{ program.date }}</td>
                 </tr>
             </tbody>
             </table>

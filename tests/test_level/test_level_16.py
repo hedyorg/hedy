@@ -26,6 +26,24 @@ class TestsLevel16(HedyTester):
             extra_check_function=check_in_list
         )
 
+    def test_print_list_var_arabic_number(self):
+        code = textwrap.dedent("""\
+            dieren is ['Hond', 'Kat', 'Kangoeroe']
+            print dieren[١]""")
+
+        expected = textwrap.dedent("""\
+            dieren = ['Hond', 'Kat', 'Kangoeroe']
+            print(f'''{dieren[1-1]}''')""")
+
+        check_in_list = (lambda x: HedyTester.run_code(x) == 'Hond')
+
+        self.multi_level_tester(
+            code=code,
+            max_level=17,
+            expected=expected,
+            extra_check_function=check_in_list
+        )
+
     def test_print_list_commas(self):
         code = textwrap.dedent("""\
             szamok1 = ['1' , '2' , '3' , '4' , '5']
@@ -86,8 +104,8 @@ class TestsLevel16(HedyTester):
         expected = textwrap.dedent("""\
         vrienden = ['Ahmed', 'Ben', 'Cayden']
         geluksgetallen = [15, 18, 6]
-        step = 1 if int(1) < int(3) else -1
-        for v7dd7ec2093c0f55999a450adc7e4fe49 in range(int(1), int(3) + step, step):
+        step = 1 if 1 < 3 else -1
+        for v7dd7ec2093c0f55999a450adc7e4fe49 in range(1, 3 + step, step):
           print(f'''het geluksgetal van {vrienden[v7dd7ec2093c0f55999a450adc7e4fe49-1]}''')
           print(f'''is {geluksgetallen[v7dd7ec2093c0f55999a450adc7e4fe49-1]}''')
           time.sleep(0.1)""")

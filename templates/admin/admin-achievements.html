@@ -1,0 +1,33 @@
+{% extends "auth.html" %}
+
+{% block main %}
+<div class="flex flex-row border-b">
+    <h1>Achievements overview</h1>
+    <div class="ltr:ml-auto rtl:mr-auto">
+        <button type="reset" class="green-btn my-1 mx-2 text-white" onclick="window.open('/admin', '_self');">Return to admin page</button>
+    </div>
+</div>
+<h4 class="text-center">Total amount of users with achievements: {{ total }}</h4>
+<div class="program w-3/4 mx-auto border-solid border-2 border-orange-400 rounded p-4">
+  <table class="table-auto mb-4 w-full text-sm">
+    <thead>
+      <tr class="font-bold text-left">
+          <td id="name_header">Achievement name</td>
+          <td id="description_header">Description</td>
+          <td id="achieved_header">Achieved</td>
+          <td id="percentage_header">Percentage</td>
+      </tr>
+    </thead>
+    <tbody>
+      {% for key, data in stats.items() %}
+          <tr>
+            <td class="name_cell">{{data.name}}</td>
+            <td class="description_cell">{{data.description}}</td>
+            <td class="achieved_cell">{{data.count}}</td>
+            <td class="percentage_cell">{{(data.count / total * 100)|round(2)}}%</td>
+          </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

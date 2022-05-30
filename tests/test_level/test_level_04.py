@@ -137,12 +137,64 @@ class TestsLevel4(HedyTester):
     @parameterized.expand(HedyTester.quotes)
     def test_print_without_opening_quote_gives_error(self, q):
         code = f"print hedy 123{q}"
-        self.single_level_tester(code, exception=hedy.exceptions.UnquotedTextException)
+        self.multi_level_tester(
+            code,
+            max_level=6,
+            exception=hedy.exceptions.UnquotedTextException
+        )
 
     @parameterized.expand(HedyTester.quotes)
     def test_print_without_closing_quote_gives_error(self, q):
         code = f"print {q}hedy 123"
-        self.single_level_tester(code, exception=hedy.exceptions.UnquotedTextException)
+        self.multi_level_tester(
+            code,
+            max_level=6,
+            exception=hedy.exceptions.UnquotedTextException
+        )
+
+    def test_print_single_quoted_text_var(self):
+        code = textwrap.dedent("""\
+        naam is 'Hedy'
+        print 'ik heet ' naam""")
+
+        expected = textwrap.dedent("""\
+        naam = '\\'Hedy\\''
+        print(f'ik heet {naam}')""")
+
+        self.multi_level_tester(
+            max_level=11,
+            code=code,
+            expected=expected
+        )
+
+    def test_print_double_quoted_text_var(self):
+        code = textwrap.dedent("""\
+        naam is "Hedy"
+        print 'ik heet ' naam""")
+
+        expected = textwrap.dedent("""\
+        naam = '"Hedy"'
+        print(f'ik heet {naam}')""")
+
+        self.multi_level_tester(
+            max_level=11,
+            code=code,
+            expected=expected
+        )
+
+    # issue 1795
+    def test_print_quoted_var_reference(self):
+        code = textwrap.dedent("""\
+        naam is 'Daan'
+        woord1 is zomerkamp
+        print 'naam' ' is naar het' 'woord1'""")
+
+        expected = textwrap.dedent("""\
+        naam = '\\'Daan\\''
+        woord1 = 'zomerkamp'
+        print(f'naam is naar hetwoord1')""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=11)
 
     #
     # ask tests
@@ -203,8 +255,7 @@ class TestsLevel4(HedyTester):
         dieren = input(f'hond, kat, kangoeroe')
         print(f'{dieren}')""")
 
-        # TODO: set max_level to 11 after #2497 is merged
-        self.multi_level_tester(code=code, expected=expected, max_level=5)
+        self.multi_level_tester(code=code, expected=expected, max_level=11)
 
     @parameterized.expand(HedyTester.quotes)
     def test_ask_es(self, q):
@@ -268,6 +319,50 @@ class TestsLevel4(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
+    #
+    # sleep tests
+    #
+    def test_sleep_with_input_variable(self):
+        code = textwrap.dedent("""\
+            n is ask "how long"
+            sleep n""")
+        expected = HedyTester.dedent(
+            "n = input(f'how long')",
+            HedyTester.sleep_command_transpiled("n"))
+
+        self.multi_level_tester(max_level=11, code=code, expected=expected)
+
+    #
+    # is tests
+    #
+    def test_assign_print(self):
+        code = textwrap.dedent("""\
+        naam is Hedy
+        print 'ik heet' naam""")
+
+        expected = textwrap.dedent("""\
+        naam = 'Hedy'
+        print(f'ik heet{naam}')""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=11)
+
+    def test_assign_underscore(self):
+        code = textwrap.dedent("""\
+        voor_naam is Hedy
+        print 'ik heet ' voor_naam""")
+
+        expected = textwrap.dedent("""\
+        voor_naam = 'Hedy'
+        print(f'ik heet {voor_naam}')""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=11)
+
+    def test_assign_period(self):
+        code = "period is ."
+        expected = "period = '.'"
+
+        self.multi_level_tester(code=code, expected=expected, max_level=11)
+
     def test_assign_list_values_with_inner_single_quotes(self):
         code = textwrap.dedent(f"""\
           taart is 'appeltaart, choladetaart, kwarktaart'
@@ -312,29 +407,14 @@ class TestsLevel4(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
-    #
-    # is tests
-    #
-    def test_assign_print(self):
-        code = textwrap.dedent("""\
-        naam is Hedy
-        print 'ik heet' naam""")
-
-        expected = textwrap.dedent("""\
-        naam = 'Hedy'
-        print(f'ik heet{naam}')""")
-
+    def test_assign_single_quoted_text(self):
+        code = """message is 'Hello welcome to Hedy.'"""
+        expected = """message = '\\'Hello welcome to Hedy.\\''"""
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
-    def test_assign_underscore(self):
-        code = textwrap.dedent("""\
-        voor_naam is Hedy
-        print 'ik heet ' voor_naam""")
-
-        expected = textwrap.dedent("""\
-        voor_naam = 'Hedy'
-        print(f'ik heet {voor_naam}')""")
-
+    def test_assign_double_quoted_text(self):
+        code = '''message is "Hello welcome to Hedy."'''
+        expected = """message = '"Hello welcome to Hedy."'"""
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
     #
@@ -461,7 +541,7 @@ class TestsLevel4(HedyTester):
         print {q}Hello{q}
         print {q}World""")
 
-        line, column = self._codeToInvalidInfo(code)
+        line, column = self.codeToInvalidInfo(code)
 
         self.assertEqual(2, line)
         self.assertEqual(7, column)
@@ -472,16 +552,7 @@ class TestsLevel4(HedyTester):
         print {q}Hello{q}
         print World{q}""")
 
-        line, column = self._codeToInvalidInfo(code)
+        line, column = self.codeToInvalidInfo(code)
 
         self.assertEqual(2, line)
         self.assertEqual(7, column)
-
-    def _codeToInvalidInfo(self, code):
-        instance = hedy.IsValid()
-        instance.level = self.level
-        program_root = hedy.parse_input(code, self.level, 'en')
-        is_valid = instance.transform(program_root)
-        _, invalid_info = is_valid
-
-        return invalid_info[0].line, invalid_info[0].column

@@ -10,16 +10,22 @@ import hedy_content
 Rule = namedtuple("Rule", "keyword line start end value")
 
 
-def keywords_to_dict(to_lang="nl"):
+def keywords_to_dict(lang="nl"):
     """"Return a dictionary of keywords from language of choice. Key is english value is lang of choice"""
     base = path.abspath(path.dirname(__file__))
 
     keywords_path = 'content/keywords/'
     yaml_filesname_with_path = path.join(
-        base, keywords_path, to_lang + '.yaml')
+        base, keywords_path, lang + '.yaml')
 
     with open(yaml_filesname_with_path, 'r', encoding='UTF-8') as stream:
         command_combinations = yaml.safe_load(stream)
+
+    for k, v in command_combinations.items():
+        if type(v) == str and "|" in v:
+            # when we have several options, pick the first one as default
+            command_combinations[k] = v.split('|')[0]
+
 
     return command_combinations
 
@@ -230,10 +236,10 @@ class Translator(Visitor):
     def while_loop(self, tree):
         self.add_rule('_WHILE', 'while', tree)
 
-    def andcondition(self, tree):
+    def and_condition(self, tree):
         self.add_rule('_AND', 'and', tree)
 
-    def orcondition(self, tree):
+    def or_condition(self, tree):
         self.add_rule('_OR', 'or', tree)
 
     def input(self, tree):

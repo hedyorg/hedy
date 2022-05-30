@@ -18,7 +18,7 @@ red: ("rouge" | "red") _SPACE?
 white: ("blanc" | "white") _SPACE?
 yellow: ("jaune" | "yellow") _SPACE?
 _IS: _SPACE ("est" | "is") _SPACE
-_SLEEP: "dors" | "sleep" _SPACE?
+_SLEEP: ("dors" | "sleep") _SPACE?
 _ADD_LIST: ("ajoute" | "add") _SPACE
 _TO_LIST: _SPACE ("à" | "a" | "to") _SPACE
 _REMOVE: ("supprime" | "remove") _SPACE
@@ -32,11 +32,11 @@ _AND: _SPACE ("et" | "and") _SPACE
 _REPEAT:  ("repete" | "répète" | "repeat") _SPACE 
 _TIMES: _SPACE ("fois" | "times")
 _FOR: ("pour" | "for") _SPACE
-_RANGE: ("range" | "range") _SPACE?
+_RANGE: ("intervalle" | "range") _SPACE?
 _TO: _SPACE ("à" | "a" | "to") _SPACE
 _STEP: "pas" | "step"
 _ELIF: _SPACE? ("sinon si" | "elif") _SPACE
-_INPUT: "saisie" | "input"
+_INPUT: "demande" | "input"
 _OR: _SPACE ("ou" | "or") _SPACE
 _WHILE: ("tant que" | "while") _SPACE
 _LENGTH: "longueur" | "length"

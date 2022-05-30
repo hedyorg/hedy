@@ -9,6 +9,6 @@ equality_check: (var_access | text_in_quotes | NUMBER) (_IS| _EQUALS) (var_acces
 in_list_check: (var_access | text_in_quotes | NUMBER) _IN var_access
 
 // all literal strings have to be quoted now, so arithmetic operators don't need to be excluded anymore
-text_with_spaces_without_single_quotes: /(?:[^\n،,' ]| (?!else))+/ -> text
-text_with_spaces_without_double_quotes: /(?:[^\n،," ]| (?!else))+/ -> text
+text_with_spaces_without_single_quotes: /(?:[^\n،,' ]| (?!else|başka|अन्यथा|否则|ellers|anders|sinon|sino|وإلا))+/ -> text
+text_with_spaces_without_double_quotes: /(?:[^\n،," ]| (?!else|başka|अन्यथा|否则|ellers|anders|sinon|sino|وإلا))+/ -> text
 text_in_quotes: _SINGLE_QUOTE text_with_spaces_without_single_quotes _SINGLE_QUOTE | _DOUBLE_QUOTE text_with_spaces_without_double_quotes _DOUBLE_QUOTE

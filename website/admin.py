@@ -1,10 +1,11 @@
 from flask_babel import gettext
 
+import hedyweb
+from website import statistics
 from website.auth import requires_login, current_user, is_admin, pick
 import utils
-from flask import request, g
+from flask import request
 from flask_helpers import render_template
-import hedyweb
 
 
 def routes(app, database):
@@ -16,7 +17,6 @@ def routes(app, database):
         if not utils.is_testing_request(request) and not is_admin(current_user()):
             return utils.error_page(error=403, ui_message=gettext('unauthorized'))
         return render_template('admin/admin.html', page_title=gettext('title_admin'))
-
 
     @app.route('/admin/users', methods=['GET'])
     @requires_login
@@ -40,11 +40,14 @@ def routes(app, database):
         keyword_language = None if keyword_language == "null" else keyword_language
 
         filtering = False
-        if substring or start_date or end_date or language or keyword_language or category == "all":
+        if substring or start_date or end_date or language or keyword_language:
             filtering = True
 
-        # After hitting 1k users, it'd be wise to add pagination.
-        users = DATABASE.all_users(filtering)
+        if filtering or category == "all":
+            users = DATABASE.all_users(True)
+        else:
+            users = DATABASE.all_users(False)
+
         userdata = []
         fields = [
             'username', 'email', 'birth_year', 'country',
@@ -76,17 +79,9 @@ def routes(app, database):
                         continue
             userdata.append(data)
 
-        userdata.sort(key=lambda user: user['created'], reverse=True)
-        counter = 1
-        for user in userdata:
-            user['index'] = counter
-            counter = counter + 1
-
         return render_template('admin/admin-users.html', users=userdata, page_title=gettext('title_admin'),
                                filter=category, start_date=start_date, end_date=end_date, email_filter=substring,
-                               language_filter=language, keyword_language_filter=keyword_language,
-                               program_count=DATABASE.all_programs_count(), user_count=DATABASE.all_users_count())
-
+                               language_filter=language, keyword_language_filter=keyword_language)
 
     @app.route('/admin/classes', methods=['GET'])
     @requires_login
@@ -94,14 +89,15 @@ def routes(app, database):
         if not is_admin(user):
             return utils.error_page(error=403, ui_message=gettext('unauthorized'))
 
-        # Retrieving the user for each class to find the "last_used" is expensive -> improve when we have 100+ classes
         classes = [{
             "name": Class.get('name'),
             "teacher": Class.get('teacher'),
             "students": len(Class.get('students')) if 'students' in Class else 0,
-            "id": Class.get('id'),
-            "last_used": utils.datetotimeordate(utils.mstoisostring(DATABASE.user_by_username(Class.get('teacher')).get('last_login')))} for Class in DATABASE.all_classes()]
-        classes = sorted(classes, key=lambda d: d['last_used'], reverse=True)
+            "stats": statistics.get_general_class_stats(Class.get('students', [])),
+            "id": Class.get('id')
+        } for Class in DATABASE.all_classes()]
+
+        classes = sorted(classes, key=lambda d: d.get('stats').get('week').get('runs'), reverse=True)
 
         return render_template('admin/admin-classes.html', classes=classes, page_title=gettext('title_admin'))
 
@@ -129,4 +125,27 @@ def routes(app, database):
         if not is_admin(user):
             return utils.error_page(error=403, ui_message=gettext('unauthorized'))
         return render_template('admin/admin-stats.html', page_title=gettext('title_admin'))
+
+    @app.route('/admin/achievements', methods=['GET'])
+    @requires_login
+    def get_admin_achievements_page(user):
+        if not is_admin(user):
+            return utils.error_page(error=403, ui_message=gettext('unauthorized'))
+
+        stats = {}
+        achievements = hedyweb.AchievementTranslations().get_translations("en").get("achievements")
+        for achievement in achievements.keys():
+            stats[achievement] = {}
+            stats[achievement]["name"] = achievements.get(achievement).get("title")
+            stats[achievement]["description"] = achievements.get(achievement).get("text")
+            stats[achievement]["count"] = 0
+
+        user_achievements = DATABASE.get_all_achievements()
+        total = len(user_achievements)
+        for user in user_achievements:
+            for achieved in user.get("achieved", []):
+                stats[achieved]["count"] += 1
+
+        return render_template('admin/admin-achievements.html', stats=stats,
+                               total=total, page_title=gettext('title_admin'))
 

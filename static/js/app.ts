@@ -1,7 +1,4 @@
 // It's important that this file gets loaded first
-import './syntaxLang-en';
-import './syntaxLang-es';
-import './syntaxLang-nl';
 import './syntaxModesRules';
 
 import { modal, error, success } from './modal';
@@ -10,7 +7,71 @@ import { auth } from './auth';
 export let theGlobalEditor: AceAjax.Editor;
 export let theModalEditor: AceAjax.Editor;
 
-var StopExecution = false;
+const turtle_prefix =
+`# coding=utf8
+import random, time, turtle
+t = turtle.Turtle()
+t.hideturtle()
+t.speed(0)
+t.penup()
+t.goto(50,100)
+t.showturtle()
+t.pendown()
+t.speed(3)
+`;
+
+const normal_prefix =
+`# coding=utf8
+import random, time
+global int_saver
+global convert_numerals # needed for recursion to work
+int_saver = int
+def int(s):
+  if isinstance(s, str):
+    numerals_dict = {'0': '0', '1': '1', '2': '2', '3': '3', '4': '4', '5': '5', '6': '6', '7': '7', '8': '8', '9': '9', '𑁦': '0', '𑁧': '1', '𑁨': '2', '𑁩': '3', '𑁪': '4', '𑁫': '5', '𑁬': '6', '𑁭': '7', '𑁮': '8', '𑁯': '9', '०': '0', '१': '1', '२': '2', '३': '3', '४': '4', '५': '5', '६': '6', '७': '7', '८': '8', '९': '9', '૦': '0', '૧': '1', '૨': '2', '૩': '3', '૪': '4', '૫': '5', '૬': '6', '૭': '7', '૮': '8', '૯': '9', '੦': '0', '੧': '1', '੨': '2', '੩': '3', '੪': '4', '੫': '5', '੬': '6', '੭': '7', '੮': '8', '੯': '9', '০': '0', '১': '1', '২': '2', '৩': '3', '৪': '4', '৫': '5', '৬': '6', '৭': '7', '৮': '8', '৯': '9', '೦': '0', '೧': '1', '೨': '2', '೩': '3', '೪': '4', '೫': '5', '೬': '6', '೭': '7', '೮': '8', '೯': '9', '୦': '0', '୧': '1', '୨': '2', '୩': '3', '୪': '4', '୫': '5', '୬': '6', '୭': '7', '୮': '8', '୯': '9', '൦': '0', '൧': '1', '൨': '2', '൩': '3', '൪': '4', '൫': '5', '൬': '6', '൭': '7', '൮': '8', '൯': '9', '௦': '0', '௧': '1', '௨': '2', '௩': '3', '௪': '4', '௫': '5', '௬': '6', '௭': '7', '௮': '8', '௯': '9', '౦': '0', '౧': '1', '౨': '2', '౩': '3', '౪': '4', '౫': '5', '౬': '6', '౭': '7', '౮': '8', '౯': '9', '၀': '0', '၁': '1', '၂': '2', '၃': '3', '၄': '4', '၅': '5', '၆': '6', '၇': '7', '၈': '8', '၉': '9', '༠': '0', '༡': '1', '༢': '2', '༣': '3', '༤': '4', '༥': '5', '༦': '6', '༧': '7', '༨': '8', '༩': '9', '᠐': '0', '᠑': '1', '᠒': '2', '᠓': '3', '᠔': '4', '᠕': '5', '᠖': '6', '᠗': '7', '᠘': '8', '᠙': '9', '០': '0', '១': '1', '២': '2', '៣': '3', '៤': '4', '៥': '5', '៦': '6', '៧': '7', '៨': '8', '៩': '9', '๐': '0', '๑': '1', '๒': '2', '๓': '3', '๔': '4', '๕': '5', '๖': '6', '๗': '7', '๘': '8', '๙': '9', '໐': '0', '໑': '1', '໒': '2', '໓': '3', '໔': '4', '໕': '5', '໖': '6', '໗': '7', '໘': '8', '໙': '9', '꧐': '0', '꧑': '1', '꧒': '2', '꧓': '3', '꧔': '4', '꧕': '5', '꧖': '6', '꧗': '7', '꧘': '8', '꧙': '9', '٠': '0', '١': '1', '٢': '2', '٣': '3', '٤': '4', '٥': '5', '٦': '6', '٧': '7', '٨': '8', '٩': '9', '۰': '0', '۱': '1', '۲': '2', '۳': '3', '۴': '4', '۵': '5', '۶': '6', '۷': '7', '۸': '8', '۹': '9', '〇': '0', '一': '1', '二': '2', '三': '3', '四': '4', '五': '5', '六': '6', '七': '7', '八': '8', '九': '9', '零': '0'}
+    latin_numerals = ''.join([numerals_dict.get(letter, letter) for letter in s])
+    return int_saver(latin_numerals)
+  return(int_saver(s))
+
+def convert_numerals(alphabet, number):
+  numerals_dict_return = {
+    'Latin': ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
+    'Brahmi': ['𑁦', '𑁧', '𑁨', '𑁩', '𑁪', '𑁫', '𑁬', '𑁭', '𑁮', '𑁯'],
+    'Devanagari': ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९'],
+    'Gujarati': ['૦', '૧', '૨', '૩', '૪', '૫', '૬', '૭', '૮', '૯'],
+    'Gurmukhi': ['੦', '੧', '੨', '੩', '੪', '੫', '੬', '੭', '੮', '੯'],
+    'Bengali': ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'],
+    'Kannada': ['೦', '೧', '೨', '೩', '೪', '೫', '೬', '೭', '೮', '೯'],
+    'Odia': ['୦', '୧', '୨', '୩', '୪', '୫', '୬', '୭', '୮', '୯'],
+    'Malayalam': ['൦', '൧', '൨', '൩', '൪', '൫', '൬', '൭', '൮', '൯'],
+    'Tamil': ['௦', '௧', '௨', '௩', '௪', '௫', '௬', '௭', '௮', '௯'],
+    'Telugu':['౦', '౧', '౨', '౩', '౪', '౫', '౬', '౭', '౮', '౯'],
+    'Burmese':['၀', '၁', '၂', '၃', '၄', '၅', '၆', '၇', '၈', '၉'],
+    'Tibetan':['༠', '༡', '༢', '༣', '༤', '༥', '༦', '༧', '༨', '༩'],
+    'Mongolian':['᠐', '᠑', '᠒', '᠓', '᠔', '᠕', '᠖', '᠗', '᠘', '᠙'],
+    'Khmer':['០', '១', '២', '៣', '៤', '៥', '៦', '៧', '៨', '៩'],
+    'Thai':['๐', '๑', '๒', '๓', '๔', '๕', '๖', '๗', '๘', '๙'],
+    'Lao':['໐', '໑', '໒', '໓', '໔', '໕', '໖', '໗', '໘', '໙'],
+    'Javanese':['꧐', '꧑', '꧒', '꧓', '꧔', '꧕', '꧖', '꧗', '꧘', '꧙'],
+    'Arabic':['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'],
+    'Persian':['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'],
+    'Urdu': ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹']}
+
+  numerals_list = numerals_dict_return[alphabet]
+  number=str(number)
+
+  if number.isnumeric():
+    number = int(number)
+    numerals_list = numerals_dict_return[alphabet]
+    if number <= 9:
+      return numerals_list[number]
+    else:
+      last_digit = number // 10
+      rest = number % 10
+      return numerals_list[last_digit] + convert_numerals(alphabet, rest)
+  else:
+    return number
+`;
 
 (function() {
   // A bunch of code expects a global "State" object. Set it here if not
@@ -18,6 +79,8 @@ var StopExecution = false;
   if (!window.State) {
     window.State = {};
   }
+
+
 
   // Set const value to determine the current page direction -> useful for ace editor settings
   const dir = $("#main_container").attr("dir");
@@ -27,11 +90,8 @@ var StopExecution = false;
 
   // Any code blocks we find inside 'turn-pre-into-ace' get turned into
   // read-only editors (for syntax highlighting)
-  let counter = 0
   for (const preview of $('.turn-pre-into-ace pre').get()) {
-    counter += 1;
     $(preview).addClass('text-lg rounded');
-    $(preview).attr('id', "code_block_" + counter);
     // We set the language of the editor to the current keyword_language -> needed when copying to main editor
     $(preview).attr('lang', <string>window.State.keyword_language);
     $(preview).addClass('overflow-x-hidden');
@@ -43,6 +103,13 @@ var StopExecution = false;
       exampleEditor.setOptions({ minLines: 10 });
     } else if ($(preview).hasClass('cheatsheet')) {
       exampleEditor.setOptions({ minLines: 1 });
+    } else if ($(preview).hasClass('parsons')) {
+      exampleEditor.setOptions({
+        minLines: 1,
+        showGutter: false,
+        showPrintMargin: false,
+        highlightActiveLine: false
+      });
     } else {
       exampleEditor.setOptions({ minLines: 2 });
     }
@@ -112,6 +179,8 @@ var StopExecution = false;
         window.State.unsaved_changes = true;
 
         clearErrors(editor);
+        //removing the debugging state when loading in the editor
+      stopDebug();
       });
     }
 
@@ -225,6 +294,22 @@ function clearErrors(editor: AceAjax.Editor) {
   }
 }
 
+export function stopit() {
+  // We bucket-fix stop the current program by setting the run limit to 1ms
+  Sk.execLimit = 1;
+  $('#stopit').hide();
+  $('#runit').show();
+
+  // This gets a bit complex: if we do have some input modal waiting, fake submit it and hide it
+  // This way the Promise is no longer "waiting" and can no longer mess with our next program
+  if ($('#inline-modal').is(":visible")) {
+    $('#inline-modal form').submit();
+    $('#inline-modal').hide();
+  }
+
+  window.State.disable_run = false;
+}
+
 export function runit(level: string, lang: string, disabled_prompt: string, cb: () => void) {
   if (window.State.disable_run) {
     // If there is no message -> don't show a prompt
@@ -233,25 +318,23 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
     } return;
   }
   if (reloadOnExpiredSession ()) return;
-  StopExecution = true;
 
+  // We set the run limit to 1ms -> make sure that the previous programs stops (if there is any)
+  Sk.execLimit = 1;
+  $('#runit').hide();
+  $('#stopit').show();
 
   const outputDiv = $('#output');
   //Saving the variable button because sk will overwrite the output div
   const variableButton = $(outputDiv).find('#variable_button');
   const variables = $(outputDiv).find('#variables');
   outputDiv.empty();
-  $('#turtlecanvas').empty();
 
   outputDiv.addClass("overflow-auto");
   outputDiv.append(variableButton);
   outputDiv.append(variables);
   error.hide();
   success.hide();
-
-  var runItBtn = $('#runit');
-  runItBtn.prop('disabled', true);
-  setTimeout(function() {runItBtn.prop('disabled', false)}, 500);
 
   try {
     level = level.toString();
@@ -268,6 +351,7 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
         level: level,
         code: code,
         lang: lang,
+        tutorial: $('#code_output').hasClass("z-40"), // if so -> tutorial mode
         read_aloud : !!$('#speak_dropdown').val(),
         adventure_name: window.State.adventure_name
       }),
@@ -275,7 +359,7 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
       dataType: 'json'
     }).done(function(response: any) {
       console.log('Response', response);
-      if (response.Warning) {
+      if (response.Warning && $('#editor').is(":visible")) {
         storeFixedCode(response, level);
         error.showWarning(ErrorMessages['Transpile_warning'], response.Warning);
       }
@@ -290,12 +374,13 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
           // @ts-ignore
           highlightAceError(editor, response.Location[0], response.Location[1]);
         }
+        $('#stopit').hide();
+        $('#runit').show();
         return;
       }
-        runPythonProgram(response.Code, response.has_turtle, response.has_sleep, response.Warning, cb).catch(function(err) {
-        // If it is an error we throw due to program execution while another is running -> don't show and log it
-        if (!(err.message == "\"program_interrupt\"")) {
-          console.log(err);
+      runPythonProgram(response.Code, response.has_turtle, response.has_sleep, response.Warning, cb).catch(function(err) {
+        // The err is null if we don't understand it -> don't show anything
+        if (err != null) {
           error.show(ErrorMessages['Execute_error'], err.message);
           reportClientError(level, code, err.message);
         }
@@ -373,6 +458,7 @@ function showAchievement(achievement: any[]){
   return new Promise<void>((resolve)=>{
         $('#achievement_reached_title').text('"' + achievement[0] + '"');
         $('#achievement_reached_text').text(achievement[1]);
+        $('#achievement_reached_statics').text(achievement[2]);
         $('#achievement_pop-up').fadeIn(1000, function () {
           setTimeout(function(){
             $('#achievement_pop-up').fadeOut(1000);
@@ -699,6 +785,36 @@ export function submit_program (id: string, index: number) {
   });
 }
 
+export function set_explore_favourite(id: string, favourite: number) {
+  let prompt = "Are you sure you want to remove this program as a \"Hedy\'s choice\" program?";
+  if (favourite) {
+    prompt = "Are you sure you want to set this program as a \"Hedy\'s choice\" program?";
+  }
+  modal.confirm (prompt, function () {
+    $.ajax({
+      type: 'POST',
+      url: '/programs/set_hedy_choice',
+      data: JSON.stringify({
+        id: id,
+        favourite: favourite
+    }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function(response) {
+        modal.alert(response.message, 3000, false);
+        if (favourite == 1) {
+          $('#' + id).removeClass('text-white');
+          $('#' + id).addClass('text-yellow-500');
+        } else {
+          $('#' + id).removeClass('text-yellow-500');
+          $('#' + id).addClass('text-white');
+        }
+    }).fail(function(err) {
+        return modal.alert(err.responseText, 3000, true);
+    });
+  });
+}
+
 export function copy_to_clipboard (string: string, prompt: string) {
   // https://hackernoon.com/copying-text-to-clipboard-with-javascript-df4d4988697f
   var el = document.createElement ('textarea');
@@ -760,10 +876,6 @@ window.onerror = function reportClientException(message, source, line_number, co
 }
 
 function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep: boolean, hasWarnings: boolean, cb: () => void) {
-  // We keep track of how many programs are being run at the same time to avoid prints from multiple simultaneous programs.
-  // Please see note at the top of the `outf` function.
-  window.State.programsInExecution = 1;
-
   const outputDiv = $('#output');
   //Saving the variable button because sk will overwrite the output div
   const variableButton = $(outputDiv).find('#variable_button');
@@ -772,11 +884,14 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
   outputDiv.append(variableButton);
   outputDiv.append(variables);
 
+  var storage = window.localStorage;
+  var debug = storage.getItem("debugLine")
+
   Sk.pre = "output";
   const turtleConfig = (Sk.TurtleGraphics || (Sk.TurtleGraphics = {}));
   turtleConfig.target = 'turtlecanvas';
   // If the adventures are not shown -> increase height of turtleConfig
-  if ($('#adventures').is(":hidden")) {
+  if ($('#adventures-tab').is(":hidden")) {
       turtleConfig.height = 600;
       turtleConfig.worldHeight = 600;
   } else {
@@ -791,9 +906,11 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     // There might still be a visible turtle panel. If the new program does not use the Turtle,
     // remove it (by clearing the '#turtlecanvas' div)
     $('#turtlecanvas').empty();
+    code = normal_prefix + code
   } else {
     // Otherwise make sure that it is shown as it might be hidden from a previous code execution.
     $('#turtlecanvas').show();
+    code = turtle_prefix + code
   }
 
   Sk.configure({
@@ -803,45 +920,64 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     inputfunTakesPrompt: true,
     __future__: Sk.python3,
     timeoutMsg: function () {
-      pushAchievement("hedy_hacking");
-      return ErrorMessages ['Program_too_long']
+      // If the timeout is 1 this is due to us stopping the program: don't show "too long" warning
+      $('#stopit').hide();
+      $('#runit').show();
+      if (Sk.execLimit != 1) {
+        pushAchievement("hedy_hacking");
+        return ErrorMessages ['Program_too_long'];
+      } else {
+        return null;
+      }
     },
-    // Give up after three seconds of execution, there might be an infinite loop.
-    // This function can be customized later to yield different timeouts for different levels.
+    // We want to make the timeout function a bit more sophisticated that simply setting a value
+    // In levels 1-6 users are unable to create loops and programs with a lot of lines are caught server-sided
+    // So: a very large limit in these levels, keep the limit on other onces.
     execLimit: (function () {
-      // const level = window.State.level;
-      return ((hasTurtle || hasSleep) ? 20000 : 3000);
+      const level = Number(window.State.level) || 0;
+      if (level < 7) {
+        // Set a non-realistic time-out of 5 minutes
+        return (3000000);
+      }
+      // Set a time-out of either 20 seconds (when turtle / sleep) or 5 seconds when not
+      return ((hasTurtle || hasSleep) ? 20000 : 5000);
     }) ()
   });
 
-  StopExecution = false;
   return Sk.misceval.asyncToPromise( () =>
     Sk.importMainWithBody("<stdin>", false, code, true), {
       "*": () => {
-        if (StopExecution) {
-          window.State.programsInExecution = 0;
-          throw "program_interrupt";
-        }
+        // We don't do anything here...
       }
     }
    ).then(function(_mod) {
     console.log('Program executed');
+    //@ts-ignore
+    const pythonVariables = Sk.globals;
+    load_variables(pythonVariables);
+    $('#stopit').hide();
+    $('#runit').show();
 
     // Check if the program was correct but the output window is empty: Return a warning
     if (window.State.programsInExecution === 1 && $('#output').is(':empty') && $('#turtlecanvas').is(':empty')) {
-      pushAchievement("error_or_empty");
-      error.showWarning(ErrorMessages['Transpile_warning'], ErrorMessages['Empty_output']);
+      if(debug == null){
+        pushAchievement("error_or_empty");
+        error.showWarning(ErrorMessages['Transpile_warning'], ErrorMessages['Empty_output']);
+      }
       return;
     }
     window.State.programsInExecution--;
-    if(!hasWarnings) {
-      showSuccesMessage();
+    if (!hasWarnings) {
+      if (debug == null) {
+        showSuccesMessage();
+      }
     }
     if (cb) cb ();
   }).catch(function(err) {
-    // Extract error message from error
-    console.log(err);
-    const errorMessage = errorMessageFromSkulptError(err) || JSON.stringify(err);
+    const errorMessage = errorMessageFromSkulptError(err) || null;
+    if (!errorMessage) {
+      throw null;
+    }
     throw new Error(errorMessage);
   });
 
@@ -868,9 +1004,6 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
   function outf(text: string) {
     // If there's more than one program being executed at a time, we ignore it.
     // This happens when a program requiring user input is suspended when the user changes the code.
-    //@ts-ignore
-    const pythonVariables = Sk.globals;
-    load_variables(pythonVariables);
     if (window.State.programsInExecution > 1) return;
     addToOutput(text, 'white');
     speak(text)
@@ -885,11 +1018,13 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
   // This method draws the prompt for asking for user input.
   function inputFromInlineModal(prompt: string) {
     // We give the user time to give input.
-    Sk.execStart = new Date (new Date ().getTime () + 1000 * 60 * 60 * 24 * 365);
+    var storage = window.localStorage;
+    var debug = storage.getItem("debugLine")
+    if (storage.getItem("prompt-" + prompt) == null) {
+    Sk.execStart = new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 365);
     $('#turtlecanvas').hide();
     return new Promise(function(ok) {
       window.State.disable_run = true;
-      $ ('#runit').css('background-color', 'gray');
 
       const input = $('#inline-modal input[type="text"]');
       $('#inline-modal .caption').text(prompt);
@@ -901,10 +1036,7 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
         input.focus();
       }, 0);
       $('#inline-modal form').one('submit', function(event) {
-
         window.State.disable_run = false;
-        $ ('#runit').css('background-color', '');
-
         event.preventDefault();
         $('#inline-modal').hide();
         if (hasTurtle) {
@@ -917,13 +1049,22 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
         // replying to a query.
         setTimeout (function () {
            ok(input.val());
+           if (debug != null) {
+              storage.setItem("prompt-" + prompt, input.val()!.toString());
+           }
            $ ('#output').focus ();
         }, 0);
 
-        return false;
+          return false;
+        });
+        $('#inline-modal').show();
       });
-      $('#inline-modal').show();
-    });
+    } else {
+      return new Promise(function (ok) {
+        ok(storage.getItem("prompt-" + prompt));
+
+      });
+    }
   }
 }
 
@@ -1013,10 +1154,37 @@ export function showVariableView() {
 //Feature flag for variable and values view
 var variable_view = false;
 
+if(window.State.level != null){
+  let level = Number(window.State.level);
+  variable_view = level >= 2;
+  hide_if_no_variables();
+}
+
+function hide_if_no_variables(){
+  if($('#variables #variable-list li').length == 0){
+    $('#variable_button').hide();
+  }
+  else{
+    $('#variable_button').show();
+  }
+}
+
 //Hides the HTML DIV for variables if feature flag is false
 if (!variable_view) {
   $('#variables').hide();
   $('#variable_button').hide();
+}
+
+//Feature flag for step by step debugger. Becomes true automatically for level 7 and below.
+var step_debugger = false;
+if(window.State.level != null){
+  let level = Number(window.State.level);
+  step_debugger = level <= 7;
+}
+
+//Hides the debug button if feature flag is false
+if (!step_debugger) {
+  $('#debug_button').hide();
 }
 
 export function show_variables() {
@@ -1028,16 +1196,17 @@ export function show_variables() {
   }
 }
 
-export function load_variables(variables: any){
-    if (variable_view === true) {
-      //@ts-ignore
-      variables = clean_variables(variables);
-      const variableList = $('#variable-list');
-      variableList.empty();
-      for (const i in variables) {
-        variableList.append(`<li style=color:${variables[i][2]}>${variables[i][0]}: ${variables[i][1]}</li>`);
-      }
+export function load_variables(variables: any) {
+  if (variable_view === true) {
+    //@ts-ignore
+    variables = clean_variables(variables);
+    const variableList = $('#variable-list');
+    variableList.empty();
+    for (const i in variables) {
+      variableList.append(`<li style=color:${variables[i][2]}>${variables[i][0]}: ${variables[i][1]}</li>`);
     }
+    hide_if_no_variables();
+  }
 }
 
 // Color-coding string, numbers, booleans and lists
@@ -1066,12 +1235,12 @@ function special_style_for_variable(variable: any){
 function clean_variables(variables: any) {
   if (variable_view === true) {
     const new_variables = [];
-    const unwanted_variables = ["random", "time", "int_saver","int_$rw$", "turtle", "t"];
+    const unwanted_variables = ["random", "time", "int_saver", "int_$rw$", "turtle", "t"];
     for (const variable in variables) {
       if (!variable.includes('__') && !unwanted_variables.includes(variable)) {
-      let extraStyle = special_style_for_variable(variables[variable]);
-      let newTuple = [variable, variables[variable].v, extraStyle];
-      new_variables.push(newTuple);
+        let extraStyle = special_style_for_variable(variables[variable]);
+        let newTuple = [variable, variables[variable].v, extraStyle];
+        new_variables.push(newTuple);
       }
     }
     return new_variables;
@@ -1086,10 +1255,55 @@ export function get_trimmed_code() {
   } catch (e) {
     console.error(e);
   }
+
+  // If the main editor is hidden -> we are solving a parsons problem
+  if ($('#editor').is(":hidden")){
+    let code = "";
+    let count = 65;
+
+    $('.compiler-parsons-box').each(function() {
+      let text = $(this).attr('code') || "";
+      if (text.length > 1) {
+        code += text;
+      }
+      $(this).parents().removeClass('border-black');
+      // @ts-ignore
+      if ($(this).attr('index').charCodeAt(0) == count) {
+        console.log("Deze staat op de juiste plek!");
+        $(this).parents().addClass('border-green-500');
+      } else {
+        $(this).parents().addClass('border-red-500');
+      }
+      count += 1;
+    });
+    return code.replace(/ +$/mg, '');
+  }
+  //console.log('Hello world');
   // FH Feb: the above code turns out not to remove spaces from lines that contain only whitespace,
   // but that upsets the parser so this removes those spaces also:
   // Remove whitespace at the end of every line
-  return theGlobalEditor?.getValue().replace(/ +$/mg, '');
+
+  // ignore the lines with a breakpoint in it.
+  let breakpoints = editor.session.getBreakpoints();
+  let code = theGlobalEditor.getValue();
+  var storage = window.localStorage;
+  var debugLines = storage.getItem('debugLine');
+  if (code) {
+    let lines = code.split('\n');
+    if(debugLines != null){
+      lines = lines.slice(0, parseInt(debugLines) + 1);
+    }
+    for (let i = 0; i < lines.length; i++) {
+      if (breakpoints[i] == 'ace_breakpoint') {
+        lines[i] = '';
+      }
+      code = lines.join('\n');
+    }
+  }
+
+  // regex for any number of whitespace \s*
+  // g: global (replace all matches, not just the first one)
+  return code.replace(/\s*$/gm, '');
 }
 
 export function confetti_cannon(){
@@ -1262,13 +1476,13 @@ export function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean): Ac
   }
 export function toggle_developers_mode(enforced: boolean) {
   if ($('#developers_toggle').is(":checked") || enforced) {
-      $('#adventures').hide();
+      $('#adventures-tab').hide();
       pushAchievement("lets_focus");
   } else {
-      $('#adventures').show();
+      $('#adventures-tab').show();
   }
 
-  if ($('#adventures').is(":hidden")) {
+  if ($('#adventures-tab').is(":hidden")) {
     $('#editor-area').removeClass('mt-5');
     $('#code_editor').css('height', 36 + "em");
     $('#code_output').css('height', 36 + "em");
@@ -1351,7 +1565,8 @@ export function select_profile_image(image: number) {
 export function filter_programs() {
   const level = $('#explore_page_level').val();
   const adventure = $('#explore_page_adventure').val();
-  window.open('?level=' + level + "&adventure=" + adventure, "_self");
+  const language = $('#explore_page_language').val();
+  window.open('?level=' + level + "&adventure=" + adventure + "&lang=" + language, "_self");
 }
 
 export function filter_user_programs(username: string, own_request?: boolean) {
@@ -1381,3 +1596,252 @@ export function filter_admin() {
     window.open('?filter=' + filter + "&start=" + start_date + "&end=" + end_date, "_self");
   }
 }
+
+if ($("#editor").length) {
+  var editor = ace.edit("editor");
+  editor.on("guttermousedown", function (e: any) {
+    var editorContainer = document.getElementById("editor");
+    var textContainer = editorContainer?.getElementsByClassName("ace_text-layer")[0];
+    var lines = textContainer?.getElementsByClassName("ace_line");
+    var target = e.domEvent.target;
+
+    if (lines) {
+      if (target.className.indexOf("ace_gutter-cell") == -1)
+        return;
+
+      if (e.clientX > 25 + target.getBoundingClientRect().left)
+        return;
+
+      var breakpoints = e.editor.session.getBreakpoints(row, 0);
+      var row = e.getDocumentPosition().row;
+      if (typeof breakpoints[row] === typeof undefined && row != e.editor.getLastVisibleRow() + 1) {
+        e.editor.session.setBreakpoint(row);
+        row = getCorrectVisibleRow(row, e.editor);
+        lines[row].innerHTML = addDisabledClass(lines[row]);
+        e.stop();
+      } else {
+        e.editor.session.clearBreakpoint(row);
+        // calculating the correct line to edit
+        row = getCorrectVisibleRow(row, e.editor);
+        lines[row].innerHTML = removeDisabledClass(lines[row]);
+        e.stop();
+      }
+    }
+  });
+
+  editor.renderer.on("afterRender", function () {
+    var breakpoints = editor.session.getBreakpoints();
+    adjustLines(breakpoints);
+    setDebugLine()
+  });
+}
+
+function getCorrectVisibleRow(row: number, editor: any) {
+  var firstVisibleRow = editor.getFirstVisibleRow();
+  return row - firstVisibleRow;
+}
+
+function adjustLines(disabledRow: []) {
+  // We have to specify the correct editor here
+  var editorContainer = document.getElementById("editor");
+  var textContainer = editorContainer?.getElementsByClassName("ace_text-layer")[0];
+  var lines = textContainer?.getElementsByClassName("ace_line");
+  var firstVisibleRow = editor.getFirstVisibleRow();
+  var lastVisibleRow = editor.getLastVisibleRow();
+
+  if (lines) {
+    var arr = disabledRow.slice(firstVisibleRow, lastVisibleRow + 1);
+
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i] == 'ace_breakpoint') {
+        var currentLine = lines[i];
+        currentLine.innerHTML = addDisabledClass(currentLine);
+      } else {
+        var currentLine = lines[i];
+        currentLine.innerHTML = removeDisabledClass(currentLine);
+      }
+    }
+  }
+}
+
+function debugRun() {
+  let language = window.State.lang ?? window.State.keyword_language;
+  if (window.State.level != null && language != null) {
+    runit(window.State.level, language, "", function () {
+      $('#output').focus();
+    });
+  }
+}
+
+export function startDebug() {
+  if (step_debugger === true) {
+    var debugButton = $("#debug_button");
+    debugButton.hide();
+    var continueButton = $("#debug_continue");
+    var stopButton = $("#debug_stop");
+    var resetButton = $("#debug_restart");
+    var runButtonContainer = $("#runButtonContainer");
+
+    runButtonContainer.hide();
+    continueButton.show();
+    stopButton.show();
+    resetButton.show();
+
+    incrementDebugLine();
+    debugRun();
+  }
+}
+
+export function resetDebug() {
+  if (step_debugger === true) {
+    var storage = window.localStorage;
+    var debugLine = storage.getItem("debugLine");
+    var continueButton = $("#debug_continue");
+    continueButton.show();
+
+    if (debugLine == null) {
+      storage.setItem("debugLine", "0");
+      clearDebugVariables();
+      setDebugLine(true);
+      debugRun();
+      return;
+    } else {
+      storage.setItem("debugLine", "0");
+      clearDebugVariables();
+      setDebugLine(true);
+      debugRun();
+    }
+  }
+}
+
+export function stopDebug() {
+  if (step_debugger === true) {
+    var debugButton = $("#debug_button");
+    debugButton.show();
+    var continueButton = $("#debug_continue");
+    var stopButton = $("#debug_stop");
+    var resetButton = $("#debug_restart");
+    var runButtonContainer = $("#runButtonContainer");
+
+    runButtonContainer.show();
+    continueButton.hide();
+    stopButton.hide();
+    resetButton.hide();
+
+    var storage = window.localStorage;
+    var debugLine = storage.getItem("debugLine");
+
+    clearDebugVariables();
+
+    if (debugLine == null) {
+      setDebugLine(true);
+      return;
+    } else {
+      storage.removeItem("debugLine");
+      setDebugLine(true);
+    }
+  }
+}
+
+function clearDebugVariables() {
+  var storage = window.localStorage;
+  var keysToRemove = {...localStorage};
+
+  for (var key in keysToRemove) {
+    if (key.includes("prompt-")) {
+      storage.removeItem(key);
+    }
+  }
+}
+
+export function incrementDebugLine() {
+  var storage = window.localStorage;
+  var debugLine = storage.getItem("debugLine");
+  if (debugLine == null) {
+    storage.setItem("debugLine", "0");
+    setDebugLine();
+    return;
+  } else {
+    var debugLineInt = parseInt(debugLine);
+    debugLineInt++;
+    storage.setItem("debugLine", debugLineInt.toString());
+  }
+  setDebugLine();
+
+  var lengthOfEntireEditor = theGlobalEditor.getValue().split("\n").filter(e => e).length;
+  var debugLine = storage.getItem("debugLine");
+  if (debugLine != null) {
+    var currentLine = parseInt(debugLine);
+    if (currentLine <= lengthOfEntireEditor) {
+      debugRun();
+    }
+  }
+}
+
+function setDebugLine(reset: Boolean = false) {
+  if (step_debugger === true) {
+    var storage = window.localStorage;
+
+    var editorContainer = document.getElementById("editor");
+    var textContainer = editorContainer?.getElementsByClassName("ace_text-layer")[0];
+    var lines = textContainer?.getElementsByClassName("ace_line");
+    var firstVisibleRow = editor.getFirstVisibleRow();
+    var lastVisibleRow = editor.getLastVisibleRow();
+    var lengthOfEntireEditor = theGlobalEditor.getValue().split("\n").filter(e => e).length;
+    var indexArray = []
+    for (var x = firstVisibleRow; x <= lastVisibleRow; x++) {
+      indexArray.push(x);
+    }
+
+    if (lines) {
+      var debugLine = storage.getItem("debugLine");
+      if (debugLine != null) {
+        var debugLineNumber = parseInt(debugLine);
+        for (var i = 0; i < indexArray.length; i++) {
+          if (indexArray[i] == debugLineNumber) {
+            lines[i].innerHTML = addDebugClass(lines[i]);
+          } else {
+            lines[i].innerHTML = removeDebugClass(lines[i]);
+          }
+          if (debugLineNumber == lengthOfEntireEditor) {
+            stopDebug();
+            var continueButton = $("#debug_continue");
+            continueButton.hide();
+            return;
+          }
+        }
+      }
+      if (reset) {
+        for (var i = 0; i < indexArray.length; i++) {
+          lines[i].innerHTML = removeDebugClass(lines[i]);
+        }
+        //force resetting the rendering of the ace editor to remove the highlighted line
+        editor.resize(true);
+      }
+    }
+  }
+}
+
+function addDisabledClass(str: Element) {
+  if (!str.children[0]?.innerHTML?.includes("ace-disabled")) {
+    return '<div class="ace-disabled">' + str.innerHTML + '</div>';
+  }
+  return str.innerHTML;
+}
+
+function removeDisabledClass(str: Element) {
+  return str.innerHTML.replace('<div class="ace-disabled">', '').replace('</div>', '');
+}
+
+function addDebugClass(str: Element) {
+  if (!str.children[0]?.innerHTML?.includes("debugLine")) {
+    return '<div class="debugLine">' + str.innerHTML + '</div>';
+  }
+  return str.innerHTML;
+}
+
+function removeDebugClass(str: Element) {
+  return str.innerHTML.replace('<div class="debugLine">', '').replace('</div>', '');
+}
+
+
