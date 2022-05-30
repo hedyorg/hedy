@@ -353,11 +353,17 @@ class ExtractAST(Transformer):
         return Tree('punctuation', [''.join([str(c) for c in args])], meta)
 
     def list_access(self, meta, args):
+        # FH, may 2022 I don't fully understand why we remove INT here and just plemp
+        # the number in the tree. should be improved but that requires rewriting the further processing code too (TODO)
         if type(args[1]) == Tree:
             if "random" in args[1].data:
                 return Tree('list_access', [args[0], 'random'], meta)
-            else:
+            elif args[1].data == "var_access":
                 return Tree('list_access', [args[0], args[1].children[0]], meta)
+            else:
+                # convert to latin int
+                latin_int_index = str(int(args[1].children[0]))
+                return Tree('list_access', [args[0], latin_int_index], meta)
         else:
             return Tree('list_access', [args[0], args[1]], meta)
 
@@ -1038,8 +1044,9 @@ def hedy_transpiler(level):
     return decorator
 
 class ConvertToPython(Transformer):
-    def __init__(self, punctuation_symbols, lookup):
+    def __init__(self, lookup, numerals_language="Latin"):
         self.lookup = lookup
+        self.numerals_language = numerals_language
 
     def is_variable(self, name):
         all_names = [a.name for a in self.lookup]
@@ -1093,7 +1100,12 @@ class ConvertToPython(Transformer):
         # this function checks whether arguments are valid
         # we can proceed if all arguments are either quoted OR all variables
 
-        args_to_process = [a for a in args if not isinstance(a, Tree)]#we do not check trees (calcs) they are always ok
+        def is_var_candidate(arg) -> bool:
+            return not isinstance(arg, Tree) and \
+                    not ConvertToPython.is_int(arg) and \
+                    not ConvertToPython.is_float(arg)
+
+        args_to_process = [a for a in args if is_var_candidate(a)]#we do not check trees (calcs) they are always ok
 
         unquoted_args = [a for a in args_to_process if not ConvertToPython.is_quoted(a)]
         unquoted_in_lookup = [self.is_variable(a) for a in unquoted_args]
@@ -1143,8 +1155,9 @@ class ConvertToPython(Transformer):
 @hedy_transpiler(level=1)
 class ConvertToPython_1(ConvertToPython):
 
-    def __init__(self, punctuation_symbols, lookup):
+    def __init__(self, punctuation_symbols, lookup, numerals_language):
         self.punctuation_symbols = punctuation_symbols
+        self.numerals_language = numerals_language
         self.lookup = lookup
         __class__.level = 1
 
@@ -1396,7 +1409,11 @@ class ConvertToPython_4(ConvertToPython_3):
 
     def process_variable_for_fstring(self, name):
         if self.is_variable(name):
-            return "{" + hash_var(name) + "}"
+            if self.numerals_language == "Latin":
+                converted = hash_var(name)
+            else:
+                converted = f'convert_numerals("{self.numerals_language}",{hash_var(name)})'
+            return "{" + converted + "}"
         else:
             if self.is_quoted(name):
                 name = name[1:-1]
@@ -1476,7 +1493,11 @@ class ConvertToPython_6(ConvertToPython_5):
         args_new = []
         for a in args:
             if isinstance(a, Tree):
-                args_new.append("{" + a.children[0] + "}")
+                if self.numerals_language == "Latin":
+                    args_new.append("{" + a.children[0] + "}")
+                else:
+                    converted = f'convert_numerals("{self.numerals_language}",{a.children[0]})'
+                    args_new.append("{" + converted + "}")
             else:
                 args_new.append(self.process_variable_for_fstring(a))
 
@@ -1554,9 +1575,6 @@ class ConvertToPython_7(ConvertToPython_6):
 @hedy_transpiler(level=8)
 @hedy_transpiler(level=9)
 class ConvertToPython_8_9(ConvertToPython_7):
-    def __init__(self, punctuation_symbols, lookup):
-        self.punctuation_symbols = punctuation_symbols
-        self.lookup = lookup
 
     def command(self, args):
         return "".join(args)
@@ -2274,9 +2292,17 @@ def transpile_inner(input_string, level, lang="en"):
 
         lookup_table = create_lookup_table(abstract_syntax_tree, level, lang, input_string)
 
+        # FH, may 2022. for now, we just out arabic numerals when the language is ar
+        # this can be changed into a profile setting or could be detected
+        # in usage of programs
+
+        if lang == "ar":
+            numerals_language = "Arabic"
+        else:
+            numerals_language = "Latin"
         # grab the right transpiler from the lookup
-        transpiler = TRANSPILER_LOOKUP[level]
-        python = transpiler(punctuation_symbols, lookup_table).transform(abstract_syntax_tree)
+        convertToPython = TRANSPILER_LOOKUP[level]
+        python = convertToPython(punctuation_symbols, lookup_table, numerals_language).transform(abstract_syntax_tree)
 
 
         has_turtle = UsesTurtle().transform(abstract_syntax_tree)

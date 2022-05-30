@@ -221,10 +221,12 @@ class Database:
     def get_all_explore_programs(self):
         return PROGRAMS.get_many({'public': 1}, sort_key='date', limit=48, reverse=True)
 
-    def get_filtered_explore_programs(self, level=None, adventure=None):
+    def get_filtered_explore_programs(self, level=None, adventure=None, language=None):
         programs = PROGRAMS.get_many({'public': 1}, sort_key='date', reverse=True)
         if level:
             programs = [x for x in programs if x.get('level') == int(level)]
+        if language:
+            programs = [x for x in programs if x.get('lang') == language]
         if adventure:
             # If the adventure we filter on is called 'default' -> return all programs WITHOUT an adventure
             if adventure == "default":
@@ -241,14 +243,6 @@ class Database:
 
     def set_program_as_hedy_choice(self, id, favourite):
         PROGRAMS.update({'id': id}, {'hedy_choice': 1 if favourite else None})
-
-    def all_programs_count(self):
-        """Return the total number of all programs."""
-        return PROGRAMS.item_count()
-
-    def all_users_count(self):
-        """Return the total number of all users."""
-        return USERS.item_count()
 
     def get_class(self, id):
         """Return the classes with given id."""

@@ -1115,7 +1115,7 @@ levels:
             hint: "The `*` is used as a multiplication sign"
             question_score: '10'
         2:
-            question_text: "Which sign do you use for an addition?"
+            question_text: "What do you use when you want to add two numbers?"
             mp_choice_options:
             -   option: "-"
                 feedback: "That's not it"
@@ -1416,7 +1416,7 @@ levels:
             hint: "Mind the `{repeat}` command."
             question_score: '10'
         8:
-            question_text: "Welke Hedy code hoort bij dit resultaat"
+            question_text: "What Hedy code belongs to this output?"
             code: "Here comes the sun\nDo do do do\nHere comes the sun\nAnd I say\nIts alright"
             mp_choice_options:
             -   option: |
@@ -1427,13 +1427,13 @@ levels:
                     {print} 'And I say'
                     {print} 'Its alright'
                     ```
-                feedback: "Perfect, je kan het `{repeat}` commando hier niet gebruiken."
+                feedback: "Awesome, you can't use the `{repeat}` command here."
             -   option: |
                     ```
                     {repeat} 2 {times} {print} 'Here comes the sun'
                     {print} 'And I say'
                     {print} 'Its alright'"
-                feedback: "Waar is de 'Do do do do' gebleven?"
+                feedback: "Where did you leave 'Do do do do'?"
             -   option: |
                     ```
                     {repeat} 2 {times} {print} 'Here comes the sun'
@@ -1441,7 +1441,7 @@ levels:
                     {print} 'And I say'
                     {print} 'Its alright'
                     ```
-                feedback: "Dit is niet de juiste volgorde.."
+                feedback: "This is not the correct order.."
             -   option: |
                     ```
                     {repeat} 2 {times} {print} 'Here comes the sun'
@@ -1449,12 +1449,12 @@ levels:
                     {print} 'And I say'
                     {print} 'Its alright'"
                     ```
-                feedback: "Dit is niet de juiste volgorde.."
-            hint: "`{repeat}` kan alleen worden gebruikt als je dezelfde regel meerdere keren achter elkaar wil uitvoeren."
+                feedback: "This is not the correct order.."
+            hint: "`{repeat}` can only be used if you want to execute the same line multiple times in a row."
             correct_answer: "A"
             question_score: '10'
         9:
-            question_text: "Welke Hedy code hoort bij dit resultaat ?"
+            question_text: "What Hedy code belongs to this output?"
             code: |-
                 Batman was flying through Gotham.
                 When suddenly he heard someone screaming...
@@ -1467,26 +1467,26 @@ levels:
                     ```
                     {print} 'Batman was flying through Gotham. '
                     {print} 'When suddenly he heard someone screaming...'
-                    {print} 'Help !'
-                    {repeat} 3 {times} {print} 'Please help me !'
+                    {print} 'Help!'
+                    {repeat} 3 {times} {print} 'Please help me!'
                     ```
-                feedback: "Je herhaalt de verkeerde regel"
+                feedback: "Your repeated line is incorrect."
             -   option: |
                     ```
                     {print} 'Batman was flying through Gotham.'
                     {print} 'When suddenly he heard someone screaming...'
-                    {repeat} 3 {times} 'Help !'
-                    {print} 'Please help me !'
+                    {repeat} 3 {times} 'Help!'
+                    {print} 'Please help me!'
                     ```
-                feedback: "Het commando `{print}` mist op regel 3"
+                feedback: "The `{print}` command is missing on line 3."
             -   option: |
                     ```
                     {print} Batman was flying through Gotham.
                     {print} When suddenly he heard someone screaming...
-                    {repeat} 3 {times} {print} Help !
-                    {print} Please help me !
+                    {repeat} 3 {times} {print} Help!
+                    {print} Please help me!
                     ```
-                feedback: "Je vergeet de aanhalingstekens"
+                feedback: "You're missing the quotation marks"
             -   option: |
                     ```
                     {print} 'Batman was flying through Gotham.'
@@ -1496,7 +1496,7 @@ levels:
                     ```
                 feedback: "Perfect"
             question_score: '10'
-            hint: "'Help !' wordt 3x herhaald."
+            hint: "'Help!' is repeated 3 times."
             correct_answer: "D"
         10:
             question_text: "What Hedy code belongs to this output?"
