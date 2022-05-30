@@ -1076,11 +1076,13 @@ adventures:
                 example_code: |
                     ## Example Hedy code
                     ```
+                    {forward} 100
                     angles {is} 10, 50, 90, 150, 250
                     {turn} angles {at} {random}
                     {forward} 25
                     ```
                 start_code: |-
+                    {forward} 100
                     angles {is} 10, 50, 90, 150, 250
                     {turn} angles {at} {random}
                     {forward} 25
@@ -1187,6 +1189,7 @@ adventures:
 
                     ```
                     angle = 90
+                    {forward} 50
                     {repeat} 10 {times}
                         {turn} angle
                         {forward} 50
@@ -1202,6 +1205,7 @@ adventures:
                     ```
                     angles = {ask} 'How many angles should I draw?'
                     angle = 360 / angles
+                    {forward} _
                     {repeat} angle {times}
                         {turn} _
                         {forward} _
