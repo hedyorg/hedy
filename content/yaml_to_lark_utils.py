@@ -11,8 +11,10 @@ def extract_Lark_grammar_from_yaml():
     Args:
         only_new_lang (bool, optional): Specifies if only a lark file should be created for a new keyword language or for all languages. Defaults to True.
     """
-    input_path = '../content/keywords/'
-    current_grammar_path = '../grammars/'
+    dirname = os.path.dirname(__file__)
+    input_path = os.path.join(dirname, 'keywords')
+    current_grammar_path = os.path.join(dirname, '../grammars')
+
     yaml_languages = [f.replace('.yaml', '') for f in os.listdir(input_path) if
                       os.path.isfile(os.path.join(input_path, f)) and f.endswith('.yaml')]
 
