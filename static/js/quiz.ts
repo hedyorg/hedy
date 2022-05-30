@@ -149,7 +149,7 @@ function showFeedback(response: any, question: string, correct: boolean) {
         $('#results_button').show();
     }
 
-    $('#question_feedback_text_container').text(response.question_text);
+    $('#question_feedback_text_container').html(parseCodeBlocks(response.question_text));
     $('#feedback_feedback_text').text(response.feedback);
     if (response.correct_answer_text.includes("```")) {
         let editor = ace.edit("feedback_answer_code");
