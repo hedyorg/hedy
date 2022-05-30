@@ -1,16 +1,12 @@
 import json
 import uuid
-
 from flask_babel import gettext
-
-from config import config
 from website import statistics
 from website.auth import current_user
 import utils
-from flask import request, g, session, redirect, url_for, jsonify
-from flask_helpers import render_template
+from flask import request, g, session, jsonify
 
-MAX_ATTEMPTS = 3
+MAX_ATTEMPTS = 2
 
 ANSWER_PARSER = {
     1: 'A',
@@ -41,7 +37,6 @@ def routes(app, database, achievements, quizzes):
 
         session['quiz-attempt-id'] = uuid.uuid4().hex
         session['total_score'] = 0
-        session['correct_answer'] = 0
         session['correctly_answered_questions_numbers'] = []
 
         statistics.add(current_user()['username'], lambda id_: DATABASE.add_quiz_started(id_, body.get('level')))
@@ -99,7 +94,6 @@ def routes(app, database, achievements, quizzes):
             correct_question_nrs = get_correctly_answered_question_nrs()
             if body.get('question') not in correct_question_nrs:
                 session['total_score'] = session.get('total_score', 0) + score
-                session['correct_answer'] = session.get('correct_answer', 0) + 1
                 session['correctly_answered_questions_numbers'].append(body.get('question'))
         else:
             response['correct'] = False
