@@ -1065,9 +1065,9 @@ adventures:
                     ```
                 start_code: |-
                     {print} Turtle race!
-                    hoek {is} 90
+                    angle {is} 90
                     {forward} 25
-                    {turn} hoek
+                    {turn} angle
             3:
                 story_text: |
                     ## Searching turtle
@@ -1119,7 +1119,6 @@ adventures:
                     figure {is} {ask} 'Do you want a square or a triangle?'
                     {if} figure {is} triangle angle {is} 120
                     {else} angle {is} 90
-                    {turn} angle
                     {forward} 25
                     {turn} angle
                     {forward} 25
@@ -1127,6 +1126,7 @@ adventures:
                     {forward} 25
                     {turn} angle
                     {forward} 25
+                    {turn} angle
                     ```
                 start_code: |-
                     {print} 'Drawing Figures'
