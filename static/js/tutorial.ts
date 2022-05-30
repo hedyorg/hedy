@@ -1,5 +1,5 @@
 import {modal} from "./modal";
-import {pushAchievement, theGlobalEditor} from "./app";
+import {pushAchievement, runit, theGlobalEditor} from "./app";
 
 let current_step = 0;
 let student = true;
@@ -21,6 +21,7 @@ function codeEditorStep() {
   addHighlightBorder("editor");
 
   relocatePopup(65, 30);
+  theGlobalEditor?.setValue("print ___");
   tutorialPopup(current_step);
 }
 
@@ -28,6 +29,10 @@ function codeOutputStep() {
   removeBorder("editor");
   $('#code_output').addClass("z-40");
   addHighlightBorder("code_output");
+
+  runit ("1", "en", "", function () {
+    $ ('#output').focus ();
+  });
 
   relocatePopup(35, 30);
   tutorialPopup(current_step);
@@ -39,29 +44,19 @@ function runButtonStep() {
   $('#runButtonContainer').addClass("z-40");
   addHighlightBorder("runButtonContainer");
 
-  $('#runit').removeAttr('onclick');
-
   relocatePopup(50, 30);
   tutorialPopup(current_step);
 }
 
 function tryRunButtonStep() {
-  let example_output = "Hello world!\nI'm learning Hedy with the tutorial!";
   $.ajax({
       type: 'GET',
       url: '/get_tutorial_step/code_snippet/',
       dataType: 'json'
     }).done(function(response: any) {
        theGlobalEditor?.setValue(response.code);
-       example_output = response.output;
     }).fail(function() {
        theGlobalEditor?.setValue("print Hello world!\nprint I'm learning Hedy with the tutorial!");
-    }).then(function() {
-        theGlobalEditor?.setOptions({readOnly: true});
-        example_output = JSON.stringify(example_output);
-        // This is not really nice as we "copy" the addToOutput function from app.ts, but it works to prevent achievements
-        // We simpy generate the output on the response and add it to the output when pressing "runit"
-        $('#runit').attr('onClick', '$("#output").empty();$("<span>").text(' + example_output + ').css({color: "white"}).appendTo("#output");');
     });
 
   relocatePopup(50, 70);
@@ -75,6 +70,7 @@ function nextLevelStep() {
   $('#runButtonContainer').removeClass('z-40');
 
   $('#next_level_button').addClass("z-40");
+  $('#next_level_button').removeAttr('onclick');
   addHighlightBorder("next_level_button");
 
   relocatePopup(50, 30);
@@ -88,6 +84,9 @@ function levelDefaultStep() {
   $('#code_content_container').addClass('z-40');
   $('#adventures').addClass('z-40 bg-gray-100');
   $('#adventures').show();
+
+  // Set to false, prevent "are you sure you want to switch without saving" pop-up
+  window.State.unsaved_changes = false;
 
   addHighlightBorder("adventures");
   relocatePopup(50, 40);
@@ -116,6 +115,9 @@ function saveShareStep() {
   $('#level-header').addClass("z-40");
   $('#cheatsheet_container').hide();
   addHighlightBorder("level-header");
+
+  $('#save_program_button').removeAttr('onclick');
+  $('#share_program_button').removeAttr('onclick');
 
   relocatePopup(50, 30);
   tutorialPopup(current_step);
@@ -305,6 +307,8 @@ export function startTutorial() {
   $('#tutorial-mask').show();
   $('#adventures').hide();
   $('#variables_container').hide();
+  theGlobalEditor?.setValue("");
+
   current_step = 0;
   student = true;
   tutorialPopup(current_step);
