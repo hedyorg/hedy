@@ -1278,18 +1278,20 @@ def tutorial_steps(step):
     elif step == 5:
         translation = [gettext('tutorial_speakaloud_title'), gettext('tutorial_speakaloud_message')]
     elif step == 6:
-        translation = [gettext('tutorial_nextlevel_title'), gettext('tutorial_nextlevel_message')]
+        translation = [gettext('tutorial_speakaloud_run_title'), gettext('tutorial_speakaloud_run_message')]
     elif step == 7:
-        translation = [gettext('tutorial_leveldefault_title'), gettext('tutorial_leveldefault_message')]
+        translation = [gettext('tutorial_nextlevel_title'), gettext('tutorial_nextlevel_message')]
     elif step == 8:
-        translation = [gettext('tutorial_adventures_title'), gettext('tutorial_adventures_message')]
+        translation = [gettext('tutorial_leveldefault_title'), gettext('tutorial_leveldefault_message')]
     elif step == 9:
-        translation = [gettext('tutorial_quiz_title'), gettext('tutorial_quiz_message')]
+        translation = [gettext('tutorial_adventures_title'), gettext('tutorial_adventures_message')]
     elif step == 10:
-        translation = [gettext('tutorial_saveshare_title'), gettext('tutorial_saveshare_message')]
+        translation = [gettext('tutorial_quiz_title'), gettext('tutorial_quiz_message')]
     elif step == 11:
-        translation = [gettext('tutorial_cheatsheet_title'), gettext('tutorial_cheatsheet_message')]
+        translation = [gettext('tutorial_saveshare_title'), gettext('tutorial_saveshare_message')]
     elif step == 12:
+        translation = [gettext('tutorial_cheatsheet_title'), gettext('tutorial_cheatsheet_message')]
+    elif step == 13:
         translation = [gettext('tutorial_end_title'), gettext('tutorial_end_message')]
     else:
         translation = [gettext('tutorial_title_not_found'), gettext('tutorial_message_not_found')]
