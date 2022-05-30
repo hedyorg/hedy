@@ -52,7 +52,7 @@ export function loadQuestQuestion(level: number, question: number) {
 }
 
 function showQuestion(question: string) {
-    $('#quiz_question_title').text(question);
+    $('#quiz_question_title').html(parseCodeBlocks(question));
     $('#quiz_question_container').show();
 }
 
@@ -101,7 +101,7 @@ function highlightQuestionBar(question: number) {
 }
 
 function loadHint(hint: string) {
-    $('#quiz_question_hint').text(hint);
+    $('#quiz_question_hint').html(parseCodeBlocks(hint));
     $('#quiz_question_hint').hide();
 }
 
@@ -121,6 +121,9 @@ export function answerQuestion(answer_number: number) {
       contentType: 'application/json',
       dataType: 'json'
     }).done(function(response: any) {
+        // We have two options:
+        // This is either attempt 1 or attempt 2
+        // Update this function and think how to handle this!
         if (response.correct) {
             showFeedback(response, question || "", true);
             updateHeader(question || "", true);
