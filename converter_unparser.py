@@ -5,16 +5,6 @@ from lark.indenter import Indenter
 import hedy
 import sys
 
-level = 0
-
-def parser(input_string, sub = 0):
-    parser = hedy.get_parser(level, sub)
-
-    if level >= 8:
-        input_string = hedy.preprocess_blocks(input_string)
-
-    return parser.parse(input_string+ '\n')
-
 #==============================================================================
 #   UTILITY functions
 #==============================================================================
@@ -337,9 +327,9 @@ def start_unparsing(Tree, lvl):
     #process grammar
     grammar = prep_grammar(lvl)
     grammar = simp_grammar(grammar)
-    print("\nresult:")
-    for key in grammar: print (key + " : " + grammar[key])
-    print("\n")
+    #print("\nresult:")
+    #for key in grammar: print (key + " : " + grammar[key])
+    #print("\n")
     #start unparsing
     return unparsing(Tree, grammar, 0)
 
@@ -420,6 +410,7 @@ def get_group_format(Tree, grammar, Templates, rule):
 # This function deals with the operators in the top level of a rule.
 def get_op_format(Tree, grammar, Templates, rule):
     result = []
+    correct = []
     prog = []
     groups = get_groupings(rule, [' ', '+', '?', '*', '|'])
     none = ["?", "*"]
@@ -538,50 +529,6 @@ def unparsing(Tree, grammar, number_of_indents):
 #   USE and TEST functions
 #==============================================================================
 
-#used to test the multiline function for grammar
-def test_multi():
-    gramm = []
-    result = {}
-    print("testing multi...")
-    with open("scriptie_tests/multitest.lark", "r", encoding="utf-8") as file:
-        grammar = file.read()
-    for line in grammar.split('\n'):
-        print(line)
-        gramm.append(line)
-    gramm = first_pass(gramm)
-    for line in gramm: print(line)
-    for line in gramm:
-        if len(get_groupings(line, [":"])) > 1: #add the rules to the dictionary
-            if "->" in line: # line contains alias
-                result = prep_alias(result, line)
-            else:
-                parts = get_groupings(line, [":"])
-                result[parts[0].split(":",1)[0].strip()] = parts[1].strip()
-
-    # process inline "?" stuff:
-    list = []
-    for line in result:
-        if line[0] == '?': list.append(line)
-
-    for line in list:
-        for line2 in result:
-            result[line2] = prep_inline(result[line2], line[1:], result[line])
-        del result[line]
-    for line in result: print(line, " : ", result[line])
-    print("DOOOONNNEEEE")
-
-#used to test just the unparser
-def test_unparser(input_string, _level):
-    global level
-    level = int(_level)
-    parse = parser(input_string)
-    unparse = unparser().transform(parse)
-    if (input_string != unparse):
-        return False
-    return True
-
-#used to test the unparser in the ASTtransformer
+#used to run the unparser
 def execute(Tree, lvl):
-    global level
-    level = lvl
     return start_unparsing(Tree,lvl)
