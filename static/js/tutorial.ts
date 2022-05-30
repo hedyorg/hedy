@@ -82,6 +82,7 @@ function runSpeakAloudStep() {
   $('#code_output').addClass('z-40');
   $('#runButtonContainer').addClass('z-40');
 
+  relocatePopup(50, 70);
   tutorialPopup(current_step);
 }
 
