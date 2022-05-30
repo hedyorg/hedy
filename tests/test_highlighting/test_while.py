@@ -58,7 +58,7 @@ class HighlighterTestWhile(HighlightTester):
         ("level17"),
         ("level18"),
     ])
-    def test_while_number(self, level):
+    def test_while_var(self, level):
         self.assert_highlighted_chr(
             "while keys == var",
             "KKKKK TTTT KK TTT",
@@ -70,7 +70,7 @@ class HighlighterTestWhile(HighlightTester):
         ("level17"),
         ("level18"),
     ])
-    def test_while_diff_number(self, level):
+    def test_while_diff_var(self, level):
         self.assert_highlighted_chr(
             "while keys != var",
             "KKKKK TTTT KK TTT",
