@@ -22,7 +22,7 @@ from flask_babel import gettext
 from flask_babel import Babel
 from flask_compress import Compress
 from flask_helpers import render_template
-from flask import Flask, request, jsonify, session, abort, g, redirect, Response, make_response, Markup
+from flask import Flask, request, jsonify, session, abort, g, redirect, Response, make_response, Markup, send_file
 from config import config
 from werkzeug.urls import url_encode
 from babel import Locale
@@ -402,6 +402,7 @@ def echo_session_vars_main():
 
 @app.route('/parse', methods=['POST'])
 def parse():
+    dst = True
     body = request.json
     if not body:
         return "body must be an object", 400
@@ -436,7 +437,6 @@ def parse():
 
     try:
         with querylog.log_time('transpile'):
-
             try:
                 transpile_result = transpile_add_stats(code, level, lang)
                 if username and not body.get('tutorial'):
@@ -459,8 +459,20 @@ def parse():
                 exception = ex
         try:
             response['Code'] = transpile_result.code
-            response['has_turtle'] = transpile_result.has_turtle
-        except:
+            if transpile_result.has_turtle:
+                response['has_turtle'] = True
+                if dst:
+                    threader = textwrap.dedent("""
+                    import time
+                    from turtlethread import Turtle
+                    t = Turtle()
+                    with t.running_stitch(stitch_length=20):
+                    """)
+                    lines = transpile_result.code.split("\n")
+                    threader += "  " + "\n  ".join(lines)
+                    threader += "\n" + 't.save("generated_pattern.dst")'
+                    exec(threader)
+        except Exception as E:
             pass
         try:
             response['has_sleep'] = 'sleep' in hedy.all_commands(code, level, lang)
@@ -538,6 +550,10 @@ def parse_tutorial(user):
     except:
         return "error", 400
 
+# this is a route for testing purposes
+@app.route("/dst")
+def download_dst_file():
+    return send_file('generated_pattern.dst', as_attachment=True, cache_timeout=0)
 
 def transpile_add_stats(code, level, lang_):
     username = current_user()['username'] or None
