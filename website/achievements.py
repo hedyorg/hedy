@@ -212,8 +212,8 @@ class Achievements:
             for command in list(set(commands_in_code)):  # To remove duplicates
                 if command not in session['commands'] and command in self.all_commands:
                     session['new_commands'].append(command)
-            print(set(session['commands']).union(set(session['new_commands'])))
-            print(self.all_commands)
+            print(sorted(list(set(session['commands']).union(set(session['new_commands'])))))
+            print(sorted(list(self.all_commands)))
             if set(session['commands']).union(set(session['new_commands'])) == self.all_commands:
                 session['new_achieved'].append("trying_is_key")
         if 'did_you_say_please' not in session['achieved'] and "ask" in hedy.all_commands(code, level, session['lang']):
