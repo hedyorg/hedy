@@ -17,6 +17,15 @@ ANSWER_PARSER = {
     6: 'F'
 }
 
+REVERSE_ANSWER_PARSER = {
+    'A': 1,
+    'B': 2,
+    'C': 3,
+    'D': 4,
+    'E': 5,
+    'F': 6
+}
+
 
 def routes(app, database, achievements, quizzes):
     global DATABASE
@@ -36,6 +45,7 @@ def routes(app, database, achievements, quizzes):
             return gettext('level_invalid'), 400
 
         session['quiz-attempt-id'] = uuid.uuid4().hex
+        session['attempt'] = 0
         session['total_score'] = 0
         session['correctly_answered_questions_numbers'] = []
 
@@ -45,6 +55,7 @@ def routes(app, database, achievements, quizzes):
 
     @app.route('/quiz/get-question/<int:level>/<int:question>', methods=['GET'])
     def get_quiz_question(level, question):
+        session['attempt'] = 0
         if question > QUIZZES[g.lang].get_highest_question_level(level) or question < 1:
             return gettext('question_doesnt_exist'), 400
 
@@ -66,6 +77,11 @@ def routes(app, database, achievements, quizzes):
         level = int(body['level'])
         question_number = int(body['question'])
 
+        session['attempt'] += 1
+
+        if session.get('attempt') > 2:
+            return gettext('too_many_attempts'), 400
+
         if question_number > QUIZZES[g.lang].get_highest_question_level(level) or question_number < 1:
             return gettext('question_doesnt_exist'), 400
 
@@ -82,7 +98,8 @@ def routes(app, database, achievements, quizzes):
         response = {
             'question_text': question.get("question_text"),
             'level': level,
-            'correct_answer_text': question.get("mp_choice_options")[body.get('answer') - 1].get('option'),
+            'attempt': session.get('attempt'),
+            'correct_answer_text': question.get("mp_choice_options")[REVERSE_ANSWER_PARSER.get(question.get('correct_answer'))-1].get('option'),
             'feedback': question.get("mp_choice_options")[body.get('answer') - 1].get('feedback'),
             'max_question': QUIZZES[g.lang].get_highest_question_level(level),
             'next_question': True if question_number < QUIZZES[g.lang].get_highest_question_level(level) else False

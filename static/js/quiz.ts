@@ -66,6 +66,7 @@ function showAnswers(options: any, level: number, question: number) {
     // This solution is far from beautiful but seems to best approach to parse YAML code down to the editor
     // If we find three backticks -> the answer is a code snippet: remove the backticks and show as snippet
     $('.option-block').hide();
+    $('.option-block').removeClass('incorrect-option');
     for (let i = 1; i < options.length+1; ++i) {
         if (options[i-1].option.includes("```")) {
             $('#answer_text_' + i).hide();
@@ -121,10 +122,11 @@ export function answerQuestion(answer_number: number) {
       contentType: 'application/json',
       dataType: 'json'
     }).done(function(response: any) {
-        // We have two options:
-        // This is either attempt 1 or attempt 2
-        // Update this function and think how to handle this!
-        if (response.correct) {
+        if (response.attempt == 1 && !response.correct) {
+            highlightFaultyAnswer(answer_number);
+            showFaultyFeedback(response.feedback);
+        }
+        else if (response.correct) {
             showFeedback(response, question || "", true);
             updateHeader(question || "", true);
         } else {
@@ -134,6 +136,16 @@ export function answerQuestion(answer_number: number) {
     }).fail(function(err) {
        modal.alert(err.responseText, 3000, true);
     });
+}
+
+function highlightFaultyAnswer(answer_number: number) {
+    $('.option-block').removeClass('active');
+    $('#answer_container_' + answer_number).addClass('incorrect-option');
+}
+
+function showFaultyFeedback(feedback: string) {
+    $('#quiz_question_hint').html(parseCodeBlocks(feedback));
+    $('#quiz_question_hint').show();
 }
 
 function showFeedback(response: any, question: string, correct: boolean) {
