@@ -58,6 +58,7 @@ function showQuestion(question: string) {
 
 function showQuestionCode(code: string) {
     $('#quiz_question_code_container').show();
+    $('#quiz_question_code_container').click();
     let editor = ace.edit("quiz_question_code");
     editor.setValue(code);
 }
@@ -74,6 +75,8 @@ function showAnswers(options: any, level: number, question: number) {
             // This does look like magic: It removes all backticks and the resting newlines, tabs and whitespaces
             editor.setValue(options[i-1].option.replace(new RegExp('`', 'g'),"").replace(/\s+/g, " "));
             $('#answer_code_' + i).show();
+            // We have to "click" the editor as for some reason the code is always selected?
+            $('#answer_code_' + i).click();
         } else {
             $('#answer_text_' + i).html(parseCodeBlocks(options[i - 1].option));
             $('#answer_code_' + i).hide();
