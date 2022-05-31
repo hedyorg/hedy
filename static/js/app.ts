@@ -399,6 +399,11 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
   }
 }
 
+export function saveDST() {
+  // Create a POST to the back-end -> with the code
+  // Get the .dst file as return
+}
+
 function storeFixedCode(response: any, level: string) {
   if (response.FixedCode) {
     sessionStorage.setItem ("fixed_level_{lvl}__code".replace("{lvl}", level), response.FixedCode);
@@ -905,12 +910,12 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     // There might still be a visible turtle panel. If the new program does not use the Turtle,
     // remove it (by clearing the '#turtlecanvas' div)
     $('#turtlecanvas').empty();
-    $('#saveit').hide();
+    $('#saveDST').hide();
     code = normal_prefix + code
   } else {
     // Otherwise make sure that it is shown as it might be hidden from a previous code execution.
     $('#turtlecanvas').show();
-    $('#saveit').show();
+    $('#saveDST').show();
     code = turtle_prefix + code
   }
 
