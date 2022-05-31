@@ -16,6 +16,6 @@ class TestsUnparserLark(HedyTester):
     #foo | _bar | _this => foo | _bar hasn't been implemented, it caused errors.
     def test_simplify(self):
         input = {"plus":"_foo+", "question":"_foo?", "star":"_foo*", "options":"foo | _bar?"}
-        expected = {"plus":"_foo", "question":"", "star":"", "options":"foo | _bar?"}
+        expected = {"plus":"_foo", "question":"", "star":"", "options":"foo | \"\""}
         output = unparser.simp_grammar(input)
         self.assertEqual(expected, output)

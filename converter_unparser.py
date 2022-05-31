@@ -290,7 +290,7 @@ def process_rule(grammar, rule):
 
 # Processes rule(sections) with multiple options
 # should have one option which doesn't create a tree
-# example: turning rule | _rule into rule
+# example: turning rule | _rule | _other into rule | _rule
 def process_split(grammar, rule):
     has_alternative = False
     options = get_groupings(rule, ['|'])
@@ -300,10 +300,14 @@ def process_split(grammar, rule):
             if option[-1] == "|": option = option[0:-1]
             option = option.strip()
             #process rules
-            if (creates_tree(grammar, option) or has_alternative):
+            if (creates_tree(grammar, option)):
                 option = process_rule(grammar, option)
+            elif has_alternative: continue
             else:
                 has_alternative = True
+                temp_option = process_rule(grammar, option)
+                if (temp_option.strip() == ""): option = "\"\""
+                else: option = temp_option
             if (option.strip() == ""): continue
             #put them all back together
             if not (value == ""): value += " | "
@@ -371,7 +375,6 @@ def simple_format(Tree, grammar, Templates, rule):
                 #does the child match what's expected in rule?
                 if (Tree.children[nr_child].data == rule):
                     result.append((str(template) + " " + str(rule), nr_child+1))
-
     return result
 
 # Grammar format requirements: <- requirements need to be rechecked if still necessary
@@ -512,7 +515,7 @@ def unparsing(Tree, grammar, number_of_indents):
             temp.append(possibility)
 
     if temp == []:
-        print("\nThere is an error during Unparsing, get_format returned empty \n\n", Tree.data,"\n", grammar.get(Tree.data))
+        print("\nThere is an error during Unparsing, get_format returned empty \n\n", Tree.data,"\n", grammar.get(Tree.data),"\n",Tree)
         return ''
 
     rule = temp[0][0]
