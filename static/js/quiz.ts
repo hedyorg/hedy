@@ -74,7 +74,7 @@ function showAnswers(options: any, level: number, question: number) {
             $('#answer_text_' + i).hide();
             let editor = ace.edit('answer_code_' + i);
             // This does look like magic: It removes all backticks and the resting newlines, tabs and whitespaces
-            editor.setValue(options[i-1].option.replace(new RegExp('`', 'g'),"").replace(/\s+/g, " "));
+            editor.setValue($.trim(options[i-1].option.replace(new RegExp('`', 'g'),"").replace(/\s+/g, " ")));
             editor.clearSelection(); // Make sure the ace editor is not selected
             editor.renderer.$cursorLayer.element.style.display = "none"; // Also remove the cursor
             $('#answer_code_' + i).show();
