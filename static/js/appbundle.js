@@ -2,12 +2,11 @@ var hedyApp=(()=>{var Ud=Object.defineProperty,qd=Object.defineProperties;var Gd
 import random, time, turtle
 t = turtle.Turtle()
 t.hideturtle()
-t.speed(0)
 t.penup()
-t.goto(50,100)
-t.showturtle()
+t.left(90)
 t.pendown()
 t.speed(3)
+t.showturtle()
 `,If=`# coding=utf8
 import random, time
 global int_saver
