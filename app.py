@@ -472,7 +472,9 @@ def parse_tutorial(user):
 @app.route("/dst", methods=['POST'])
 def download_dst_file():
     body = request.json
-    code = body.get("code")
+    print(body)
+
+    transpiled_code = hedy.transpile(body.get('code'), body.get('level'), body.get('lang'))
 
     threader = textwrap.dedent("""
     import time
@@ -480,11 +482,13 @@ def download_dst_file():
     t = Turtle()
     with t.running_stitch(stitch_length=20):
     """)
-    lines = code.split("\n")
+    lines = transpiled_code.split("\n")
     threader += "  " + "\n  ".join(lines)
     threader += "\n" + 't.save("generated_pattern.dst")'
     exec(threader)
+    # At this point the file should be saved!
     return send_file('generated_pattern.dst', as_attachment=True, cache_timeout=1)
+
 
 def transpile_add_stats(code, level, lang_):
     username = current_user()['username'] or None

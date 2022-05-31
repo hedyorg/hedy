@@ -322,6 +322,7 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
   Sk.execLimit = 1;
   $('#runit').hide();
   $('#stopit').show();
+  $('#saveDST').hide();
 
   const outputDiv = $('#output');
   //Saving the variable button because sk will overwrite the output div
@@ -400,8 +401,20 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
 }
 
 export function saveDST() {
-  // Create a POST to the back-end -> with the code
-  // Get the .dst file as return
+  $.ajax({
+    type: 'POST',
+    url: '/dst',
+    data: JSON.stringify({
+      level: window.State.level,
+      code: get_trimmed_code(),
+      lang: window.State.lang,
+    }),
+    contentType: 'application/json',
+    dataType: 'json'
+    }).done(function(response: any) {
+      console.log("Het werkt!");
+      console.log(response);
+  });
 }
 
 function storeFixedCode(response: any, level: string) {
@@ -887,7 +900,6 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
   outputDiv.empty();
   outputDiv.append(variableButton);
   outputDiv.append(variables);
-  $('#saveDST').hide();
 
   var storage = window.localStorage;
   var debug = storage.getItem("debugLine")
