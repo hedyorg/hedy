@@ -40,21 +40,16 @@ def collect_snippets(path):
                             code = tag.contents[0].contents[0]
                             if hash(code) in unique_snippets_table:
                                 print("Identical code already being tested...")
-                                continue
                             else:
                                 unique_snippets_table.add(hash(code))
-                                print(unique_snippets_table)
-                                continue
                         except:
                             print("Code container is empty...")
-                            continue
                         Hedy_snippets.append(Snippet(f, level_number, adventure_name + ' snippet #' + str(code_snippet_counter), code, adventure_name))
                     # code snippets inside start_code
                     try:
                         start_code = level['start_code']
                         if hash(start_code) in unique_snippets_table:
                             print("Identical code already being tested...")
-                            continue
                         else:
                             unique_snippets_table.add(hash(start_code))
                         Hedy_snippets.append(Snippet(f, level_number, 'start_code', start_code, adventure_name))
@@ -70,14 +65,10 @@ def collect_snippets(path):
                             code = tag.contents[0].contents[0]
                             if hash(code) in unique_snippets_table:
                                 print("Identical code already being tested...")
-                                continue
                             else:
                                 unique_snippets_table.add(hash(code))
-                                print(unique_snippets_table)
-                                continue
                         except:
                             print("Code container is empty...")
-                            continue
                         Hedy_snippets.append(Snippet(f, level_number, adventure_name + ' snippet #' + str(code_snippet_counter), code, adventure_name))
 
 
