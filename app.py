@@ -469,10 +469,11 @@ def parse_tutorial(user):
         return "error", 400
 
 # this is a route for testing purposes
-@app.route("/dst")
+@app.route("/dst", methods=['POST'])
 def download_dst_file():
-    code = ""
-    # It would be nice if we did all the generating of the file only on the press of the button
+    body = request.json
+    code = body.get("code")
+
     threader = textwrap.dedent("""
     import time
     from turtlethread import Turtle

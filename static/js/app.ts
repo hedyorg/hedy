@@ -887,6 +887,7 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
   outputDiv.empty();
   outputDiv.append(variableButton);
   outputDiv.append(variables);
+  $('#saveDST').hide();
 
   var storage = window.localStorage;
   var debug = storage.getItem("debugLine")
@@ -910,12 +911,10 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     // There might still be a visible turtle panel. If the new program does not use the Turtle,
     // remove it (by clearing the '#turtlecanvas' div)
     $('#turtlecanvas').empty();
-    $('#saveDST').hide();
     code = normal_prefix + code
   } else {
     // Otherwise make sure that it is shown as it might be hidden from a previous code execution.
     $('#turtlecanvas').show();
-    $('#saveDST').show();
     code = turtle_prefix + code
   }
 
@@ -963,6 +962,9 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     load_variables(pythonVariables);
     $('#stopit').hide();
     $('#runit').show();
+    if (hasTurtle) {
+      $('#saveDST').show();
+    }
 
     // Check if the program was correct but the output window is empty: Return a warning
     if (window.State.programsInExecution === 1 && $('#output').is(':empty') && $('#turtlecanvas').is(':empty')) {
