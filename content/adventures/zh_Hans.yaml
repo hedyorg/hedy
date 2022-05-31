@@ -109,7 +109,7 @@ adventures:
                     在这个级别中，你不仅可以一起使用`{if}`条件语句和`{repeat}`循环语句编写多行代码，还可以将它们嵌套在一起使用！
                     在范例中，你可以在 `{repeat}` 命令中嵌入一个 `{if}` 命令。反之亦然，你可以在 `{if}`命令中嵌入一个 `{repeat}` 命令。当然，你也可以在一个 `{if}`条件语句中嵌入一个`{if}`条件语句，在一个`{repeat}`循环语句中嵌入一个`{repeat}`循环语句。
                     试试吧！
-                example_code: "## 海迪代码范例\n```\n{repeat} 3 {times}\n    食物 = {ask} '你想吃什么？'\n    {if} 食物 {is} 披萨\n        {print} '好啊！'\n   {else}\n        {print} '披萨更好吃'\n```\n"
+                example_code: "## 海迪代码范例\n```\n{repeat} 3 {times}\n    食物 = {ask} '你想吃什么？'\n    {if} 食物 {is} 披萨\n        {print} '好啊！'\n    {else}\n        {print} '披萨更好吃'\n```\n"
             10:
                 start_code: |-
                     动物 {is} 狗，猫，泡泡鱼
