@@ -106,9 +106,9 @@ def translate_keywords_in_snippets(snippets):
 
 Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/adventures')]
 
-lang = 'es' #useful if you want to test just 1 language
-if lang:
-    Hedy_snippets = [(name, snippet) for (name, snippet) in Hedy_snippets if snippet.language[:2] == lang]
+# lang = 'es' #useful if you want to test just 1 language
+# if lang:
+#     Hedy_snippets = [(name, snippet) for (name, snippet) in Hedy_snippets if snippet.language[:2] == lang]
 
 # level = 15
 # if level:
