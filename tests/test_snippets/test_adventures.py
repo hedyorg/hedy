@@ -49,8 +49,7 @@ def collect_snippets(path):
                             print("Code container is empty...")
                             continue
                         Hedy_snippets.append(Snippet(f, level_number, adventure_name + ' snippet #' + str(code_snippet_counter), code, adventure_name))
-
-                    # start_code
+                    # code snippets inside start_code
                     try:
                         start_code = level['start_code']
                         if hash(start_code) in unique_snippets_table:
@@ -59,10 +58,29 @@ def collect_snippets(path):
                         else:
                             unique_snippets_table.add(hash(start_code))
                         Hedy_snippets.append(Snippet(f, level_number, 'start_code', start_code, adventure_name))
-
                     except KeyError:
                         print(f'Problem reading startcode for {lang} level {level}')
                         pass
+                    # Code snippets inside example code
+                    for tag in utils.markdown_to_html_tags(level['example_code']):
+                        if tag.name != 'pre' or not tag.contents[0]:
+                            continue
+                        code_snippet_counter += 1
+                        try:
+                            code = tag.contents[0].contents[0]
+                            if hash(code) in unique_snippets_table:
+                                print("Identical code already being tested...")
+                                continue
+                            else:
+                                unique_snippets_table.add(hash(code))
+                                print(unique_snippets_table)
+                                continue
+                        except:
+                            print("Code container is empty...")
+                            continue
+                        Hedy_snippets.append(Snippet(f, level_number, adventure_name + ' snippet #' + str(code_snippet_counter), code, adventure_name))
+
+
 
   return Hedy_snippets
 
