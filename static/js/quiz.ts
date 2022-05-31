@@ -174,7 +174,7 @@ function showFeedback(response: any, question: string, correct: boolean) {
     $('#feedback_feedback_text').text(response.feedback);
     if (response.correct_answer_text.includes("```")) {
         let editor = ace.edit("feedback_answer_code");
-        editor.setValue(response.correct_answer_text.replace(new RegExp('`', 'g'),"").replace(/\s+/g, " "));
+        editor.setValue($.trim(response.correct_answer_text.replace(new RegExp('`', 'g'),"").replace(/\s+/g, " ")));
         editor.clearSelection(); // Make sure the ace editor is not selected
         editor.renderer.$cursorLayer.element.style.display = "none"; // Also remove the cursor
         $('#feedback_correct_answer_container').hide();
