@@ -16,6 +16,7 @@ INVITATIONS = dynamo.Table(storage, 'class_invitations', partition_key='username
 CUSTOMIZATIONS = dynamo.Table(storage, 'class_customizations', partition_key='id')
 ACHIEVEMENTS = dynamo.Table(storage, 'achievements', partition_key='username')
 PUBLIC_PROFILES = dynamo.Table(storage, 'public_profiles', partition_key='username')
+PARSONS = dynamo.Table(storage, 'parsons', partition_key='username')
 
 # Information on quizzes. We will update this record in-place as the user completes
 # more of the quiz. The database is formatted like this:
@@ -468,6 +469,9 @@ class Database:
 
     def forget_public_profile(self, username):
         PUBLIC_PROFILES.delete({'username': username})
+
+    def store_parsons(self, attempt):
+        PARSONS.create(attempt)
 
     def add_quiz_started(self, id, level):
         key = {"id#level": f'{id}#{level}', 'week': self.to_year_week(date.today())}

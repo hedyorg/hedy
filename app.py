@@ -809,7 +809,6 @@ def index(level, program_id):
         return utils.error_page(error=403, ui_message=gettext('level_not_class'))
 
     parsons = load_parsons_per_level(level)
-    print(parsons)
     commands = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
 
     teacher_adventures = []
@@ -1270,6 +1269,27 @@ def get_teacher_tutorial_translation(step):
 
     translation = teacher_tutorial_steps(step)
     return jsonify({'translation': translation}), 200
+
+@app.route('/store_parsons_order', methods=['POST'])
+def store_parsons_order():
+    body = request.json
+    # Validations
+    if not isinstance(body, dict):
+        return 'body must be an object', 400
+    if not isinstance(body.get('level'), str):
+        return 'level must be a string', 400
+    if not isinstance(body.get('order'), list):
+        return 'order must be a list', 400
+
+    attempt = {
+        'username': current_user()['username'] or f'anonymous:{utils.session_id()}',
+        'level': int(body['level']),
+        'order': body['order'],
+        'timestamp': utils.timems()
+    }
+
+    DATABASE.store_parsons(attempt)
+    return jsonify({}), 200
 
 @app.route('/client_messages.js', methods=['GET'])
 def client_messages():

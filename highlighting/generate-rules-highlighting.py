@@ -10,7 +10,7 @@ from definition import TRANSLATE_WORD
 
 # destinations of files containing syntax highlighting rules
 OUTPUT_PATH_HIGHLIGHT  = "highlighting/highlighting.json"
-OUTPUT_PATH_TRADUCTION = "highlighting/highlighting-trad.json"
+OUTPUT_PATH_TRANSLATION = "highlighting/highlighting-trad.json"
 
 # Files containing translations of keywords
 KEYWORDS_PATH = 'content/keywords/'
@@ -72,7 +72,7 @@ def validate_ruleset(levels):
 
 
 # Function to get the translations of the keywords
-def get_traduction(KEYWORDS_PATH, KEYWORDS_PATTERN):
+def get_translations(KEYWORDS_PATH, KEYWORDS_PATTERN):
     tmp = {}
 
     list_language_file = os.listdir(KEYWORDS_PATH)
@@ -118,11 +118,11 @@ os.chdir(os.path.dirname(__file__) +"/..")
 
 
 
-print("Generation of traductions.....................", end="")
-language_keywords = get_traduction(KEYWORDS_PATH,KEYWORDS_PATTERN)
+print("Generation of translations.....................", end="")
+language_keywords = get_translations(KEYWORDS_PATH, KEYWORDS_PATTERN)
 # Saving the rules in the corresponding file
-file_lang = open(OUTPUT_PATH_TRADUCTION,"w")
-file_lang.write(json.dumps(language_keywords,indent=4))
+file_lang = open(OUTPUT_PATH_TRANSLATION, "w")
+file_lang.write(json.dumps(language_keywords, indent=4))
 file_lang.close()
 print(" Done !")
 
