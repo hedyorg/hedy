@@ -2,10 +2,8 @@ var hedyApp=(()=>{var Kd=Object.defineProperty,ef=Object.defineProperties;var tf
 import random, time, turtle
 t = turtle.Turtle()
 t.hideturtle()
-t.speed(0)
 t.penup()
-t.goto(50,100)
-t.showturtle()
+t.left(90)
 t.pendown()
 t.speed(3)
 `,Vf=`# coding=utf8
