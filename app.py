@@ -464,7 +464,7 @@ def parse_tutorial(user):
     level = int(body['level'])
     try:
         result = hedy.transpile(code, level, "en")
-        jsonify({'code': NORMAL_PREFIX_CODE + result.code}), 200
+        jsonify({'code': result.code}), 200
     except:
         return "error", 400
 
