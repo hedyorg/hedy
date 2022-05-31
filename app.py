@@ -1285,7 +1285,7 @@ def store_parsons_order():
         'username': current_user()['username'] or f'anonymous:{utils.session_id()}',
         'level': int(body['level']),
         'order': body['order'],
-        'correct': body['correct'],
+        'correct': 1 if body['correct'] else 0,
         'timestamp': utils.timems()
     }
 
