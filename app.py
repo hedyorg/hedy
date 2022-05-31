@@ -332,7 +332,6 @@ def echo_session_vars_main():
 
 @app.route('/parse', methods=['POST'])
 def parse():
-    dst = True
     body = request.json
     if not body:
         return "body must be an object", 400
@@ -391,17 +390,6 @@ def parse():
             response['Code'] = transpile_result.code
             if transpile_result.has_turtle:
                 response['has_turtle'] = True
-                if dst:
-                    threader = textwrap.dedent("""
-                    import time
-                    from turtlethread import Turtle
-                    t = Turtle()
-                    with t.running_stitch(stitch_length=20):
-                    """)
-                    lines = transpile_result.code.split("\n")
-                    threader += "  " + "\n  ".join(lines)
-                    threader += "\n" + 't.save("generated_pattern.dst")'
-                    exec(threader)
         except Exception as E:
             pass
         try:
@@ -483,6 +471,18 @@ def parse_tutorial(user):
 # this is a route for testing purposes
 @app.route("/dst")
 def download_dst_file():
+    code = ""
+    # It would be nice if we did all the generating of the file only on the press of the button
+    threader = textwrap.dedent("""
+    import time
+    from turtlethread import Turtle
+    t = Turtle()
+    with t.running_stitch(stitch_length=20):
+    """)
+    lines = code.split("\n")
+    threader += "  " + "\n  ".join(lines)
+    threader += "\n" + 't.save("generated_pattern.dst")'
+    exec(threader)
     return send_file('generated_pattern.dst', as_attachment=True, cache_timeout=1)
 
 def transpile_add_stats(code, level, lang_):

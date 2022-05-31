@@ -905,10 +905,12 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     // There might still be a visible turtle panel. If the new program does not use the Turtle,
     // remove it (by clearing the '#turtlecanvas' div)
     $('#turtlecanvas').empty();
+    $('#saveit').hide();
     code = normal_prefix + code
   } else {
     // Otherwise make sure that it is shown as it might be hidden from a previous code execution.
     $('#turtlecanvas').show();
+    $('#saveit').show();
     code = turtle_prefix + code
   }
 
