@@ -1282,6 +1282,7 @@ def store_parsons_order():
         return 'order must be a list', 400
 
     attempt = {
+        'attemptID': utils.random_id_generator(8),
         'username': current_user()['username'] or f'anonymous:{utils.session_id()}',
         'level': int(body['level']),
         'order': body['order'],
