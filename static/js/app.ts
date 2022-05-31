@@ -11,11 +11,12 @@ const turtle_prefix =
 `# coding=utf8
 import random, time, turtle
 t = turtle.Turtle()
+t.hideturtle()
 t.penup()
 t.left(90)
-t.showturtle()
 t.pendown()
 t.speed(3)
+t.showturtle()
 `;
 
 const normal_prefix =
