@@ -11,10 +11,7 @@ const turtle_prefix =
 `# coding=utf8
 import random, time, turtle
 t = turtle.Turtle()
-t.hideturtle()
-t.speed(0)
 t.penup()
-t.goto(0, -80)
 t.left(90)
 t.showturtle()
 t.pendown()
