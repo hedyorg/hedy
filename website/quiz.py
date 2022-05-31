@@ -1,16 +1,12 @@
 import json
 import uuid
-
 from flask_babel import gettext
-
-from config import config
 from website import statistics
 from website.auth import current_user
 import utils
-from flask import request, g, session, redirect, url_for, jsonify
-from flask_helpers import render_template
+from flask import request, g, session, jsonify
 
-MAX_ATTEMPTS = 3
+MAX_ATTEMPTS = 2
 
 ANSWER_PARSER = {
     1: 'A',
@@ -19,6 +15,15 @@ ANSWER_PARSER = {
     4: 'D',
     5: 'E',
     6: 'F'
+}
+
+REVERSE_ANSWER_PARSER = {
+    'A': 1,
+    'B': 2,
+    'C': 3,
+    'D': 4,
+    'E': 5,
+    'F': 6
 }
 
 
@@ -40,8 +45,8 @@ def routes(app, database, achievements, quizzes):
             return gettext('level_invalid'), 400
 
         session['quiz-attempt-id'] = uuid.uuid4().hex
+        session['attempt'] = 0
         session['total_score'] = 0
-        session['correct_answer'] = 0
         session['correctly_answered_questions_numbers'] = []
 
         statistics.add(current_user()['username'], lambda id_: DATABASE.add_quiz_started(id_, body.get('level')))
@@ -50,6 +55,7 @@ def routes(app, database, achievements, quizzes):
 
     @app.route('/quiz/get-question/<int:level>/<int:question>', methods=['GET'])
     def get_quiz_question(level, question):
+        session['attempt'] = 0
         if question > QUIZZES[g.lang].get_highest_question_level(level) or question < 1:
             return gettext('question_doesnt_exist'), 400
 
@@ -71,6 +77,11 @@ def routes(app, database, achievements, quizzes):
         level = int(body['level'])
         question_number = int(body['question'])
 
+        session['attempt'] += 1
+
+        if session.get('attempt') > MAX_ATTEMPTS:
+            return gettext('too_many_attempts'), 400
+
         if question_number > QUIZZES[g.lang].get_highest_question_level(level) or question_number < 1:
             return gettext('question_doesnt_exist'), 400
 
@@ -87,7 +98,8 @@ def routes(app, database, achievements, quizzes):
         response = {
             'question_text': question.get("question_text"),
             'level': level,
-            'correct_answer_text': question.get("mp_choice_options")[body.get('answer') - 1].get('option'),
+            'attempt': session.get('attempt'),
+            'correct_answer_text': question.get("mp_choice_options")[REVERSE_ANSWER_PARSER.get(question.get('correct_answer'))-1].get('option'),
             'feedback': question.get("mp_choice_options")[body.get('answer') - 1].get('feedback'),
             'max_question': QUIZZES[g.lang].get_highest_question_level(level),
             'next_question': True if question_number < QUIZZES[g.lang].get_highest_question_level(level) else False
@@ -99,7 +111,6 @@ def routes(app, database, achievements, quizzes):
             correct_question_nrs = get_correctly_answered_question_nrs()
             if body.get('question') not in correct_question_nrs:
                 session['total_score'] = session.get('total_score', 0) + score
-                session['correct_answer'] = session.get('correct_answer', 0) + 1
                 session['correctly_answered_questions_numbers'].append(body.get('question'))
         else:
             response['correct'] = False
