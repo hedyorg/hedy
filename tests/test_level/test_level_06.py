@@ -363,7 +363,7 @@ class TestsLevel6(HedyTester):
             max_level=7,
             code=code,
             expected=expected,
-            expected_commands=['is', 'else', 'print', 'print']
+            expected_commands=['is', 'if', 'else', 'print', 'print']
         )
 
     def test_if_equality_linebreak_print_else_print(self):
@@ -586,9 +586,16 @@ class TestsLevel6(HedyTester):
             قول "٥ ضرب ٥ يساوي " ٥*٥""")
 
         expected = textwrap.dedent("""\
-            print(f'٥ ضرب ٥ يساوي {int(5) * int(5)}')""")
+            print(f'٥ ضرب ٥ يساوي {convert_numerals("Arabic",int(5) * int(5))}')""")
 
-        self.multi_level_tester(max_level=11, code=code, expected=expected, lang='ar')
+        output = '٥ ضرب ٥ يساوي ٢٥'
+
+        self.multi_level_tester(
+            max_level=11,
+            code=code,
+            expected=expected,
+            output=output,
+            lang='ar')
 
     def test_print_calc_arabic_directly_in_en(self):
         # TODO: can also be generalized for other ops
@@ -787,3 +794,12 @@ class TestsLevel6(HedyTester):
           print(f'meh')""")
 
         self.multi_level_tester(max_level=7, code=code, expected=expected)
+
+    def test_print_single_number(self):
+        code = textwrap.dedent("""\
+                print 5""")
+
+        expected = textwrap.dedent("""\
+                print(f'5')""")
+
+        self.multi_level_tester(max_level=6, code=code, expected=expected)

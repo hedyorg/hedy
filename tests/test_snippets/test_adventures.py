@@ -43,14 +43,11 @@ def collect_snippets(path):
                                 continue
                             else:
                                 unique_snippets_table.add(hash(code))
-                                print(unique_snippets_table)
-                                continue
                         except:
                             print("Code container is empty...")
                             continue
                         Hedy_snippets.append(Snippet(f, level_number, adventure_name + ' snippet #' + str(code_snippet_counter), code, adventure_name))
-
-                    # start_code
+                    # code snippets inside start_code
                     try:
                         start_code = level['start_code']
                         if hash(start_code) in unique_snippets_table:
@@ -59,10 +56,27 @@ def collect_snippets(path):
                         else:
                             unique_snippets_table.add(hash(start_code))
                         Hedy_snippets.append(Snippet(f, level_number, 'start_code', start_code, adventure_name))
-
                     except KeyError:
                         print(f'Problem reading startcode for {lang} level {level}')
                         pass
+                    # Code snippets inside example code
+                    for tag in utils.markdown_to_html_tags(level['example_code']):
+                        if tag.name != 'pre' or not tag.contents[0]:
+                            continue
+                        code_snippet_counter += 1
+                        try:
+                            code = tag.contents[0].contents[0]
+                            if hash(code) in unique_snippets_table:
+                                print("Identical code already being tested...")
+                                continue
+                            else:
+                                unique_snippets_table.add(hash(code))
+                        except:
+                            print("Code container is empty...")
+                            continue
+                        Hedy_snippets.append(Snippet(f, level_number, adventure_name + ' snippet #' + str(code_snippet_counter), code, adventure_name))
+
+
 
   return Hedy_snippets
 
@@ -92,10 +106,10 @@ def translate_keywords_in_snippets(snippets):
 
 Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/adventures')]
 
-# lang = 'ar' #useful if you want to test just 1 language
+# lang = 'es' #useful if you want to test just 1 language
 # if lang:
 #     Hedy_snippets = [(name, snippet) for (name, snippet) in Hedy_snippets if snippet.language[:2] == lang]
-#
+
 # level = 15
 # if level:
 #     Hedy_snippets = [(name, snippet) for (name, snippet) in Hedy_snippets if snippet.level == level]

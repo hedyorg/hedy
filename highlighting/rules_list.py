@@ -98,7 +98,7 @@ def rule_all(level):
     for command in keyword_by_level["K"]:
         list_rules.append({
             'regex': K(command),
-            'token': "keyword",
+            'token': ["keyword"],
             'next': "start", 
         })
 
@@ -118,7 +118,7 @@ def rule_all(level):
     for command in keyword_by_level["K_SP"]:
         list_rules.append({
             'regex': K(command) + END_WORD,
-            'token': "keyword",
+            'token': ["keyword"],
             'next': "start", 
         })
 

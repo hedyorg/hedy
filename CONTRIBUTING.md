@@ -13,6 +13,10 @@ The core team (currently consisting of [Felienne](https://github.com/Felienne), 
 
 Other project boards are student projects that keep track of their own issues, these are typically not open for contributors to work on since we want the students to do their own projects :)
 
+**Discord**
+
+We also run a Discord channel to enable users and contributors to get in touch with us, ask any questions and show off awesome Hedy related content. It is a great way for you as a contributor to stay connected and up-to-date with the Hedy project. Feel free to join the channel to get in touch with us! You can join the channel through [this](https://discord.gg/8yY7dEme9r) Discord link.
+
 **Discussions**
 
 The [Discussion board](https://github.com/Felienne/hedy/discussions) has ideas that are not yet detailed enough to be put into issue, like big new features or overhuals of the language or architecture. If you are interested in picking up such a large feature do [let us know](mailto:hedy@felienne.com) and read the corresponding discussion to see what has alrady been considered.
@@ -46,6 +50,7 @@ If you want to run the website version locally, run:
 ```bash
 (.env)$ python app.py
 ```
+Your local Hedy version should be available on address `http://0.0.0.0:8080/`. It appears that on some Windows machines this address does not work, make sure the server is still running and try visiting the website on `http://localhost:8080/`.
 
 To run the unit tests:
 

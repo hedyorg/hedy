@@ -54,7 +54,9 @@
                                     <pre class="no-copy-button" level="{{ level_source }}">{{question_options[counter.value].option|commonmark}}</pre>
                                 </div>
                             {% else %}
-                                <div class="pt-8 px-2 mx-2 mb-2 text-lg">{{ question_options[counter.value].option|commonmark }}</div>
+                                <!-- Not a really nice solution but if the option is only one char it might be a mathematical operation like "+"
+                                    When using common mark this is replaced in HTML by a empty black dot marker, so we make a bucket fix -->
+                                <div class="pt-8 px-2 mx-2 mb-2 text-lg">{% if question_options[counter.value].option|length < 2  %}{{ question_options[counter.value].option }}{% else %}{{ question_options[counter.value].option|commonmark }}{% endif %}</div>
                             {% endif %}
                         </div>
                         <button class="submit-button" type="submit" name="submit-button" value="{{ question_options[counter.value].char_index }}">
