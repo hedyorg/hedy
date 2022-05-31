@@ -995,10 +995,10 @@ adventures:
                     ```
                     {print} Figuren tekenen
                     hoek {is} 90
-                    {forward} 25
                     {turn} hoek
                     {forward} 25
                     {turn} hoek
+                    {forward} 25
                     ```
                 start_code: |-
                     {print} Schildpaddenrace!
@@ -1023,8 +1023,8 @@ adventures:
                 start_code: |-
                     {print} Schildpaddenrace!
                     hoek {is} 90
-                    {forward} 25
                     {turn} hoek
+                    {forward} 25
             4:
                 story_text: |
                     ## Tekenen maar
@@ -1034,18 +1034,17 @@ adventures:
                     ```
                     {print} 'Figuren tekenen'
                     hoek {is} 90
-                    {forward} 25
                     {turn} hoek
                     {forward} 25
                     {turn} hoek
+                    {forward} 25
                     ```
 
                 start_code: |-
                     {print} 'Figuren tekenen'
                     hoek {is} 90
-                    {forward} 25
                     {turn} hoek
-
+                    {forward} 25
             5:
                 story_text: |
                     ## Tekenen maar
@@ -1057,7 +1056,6 @@ adventures:
                     figuur {is} {ask} 'Wil je een driehoek of een vierkant?'
                     {if} figuur {is} driehoek hoek {is} 120
                     {else} hoek {is} 90
-                    {forward} 25
                     {turn} hoek
                     {forward} 25
                     {turn} hoek
@@ -1065,6 +1063,7 @@ adventures:
                     {turn} hoek
                     {forward} 25
                     {turn} hoek
+                    {forward} 25
                     ```
                 start_code: |-
                     {print} 'Figuren tekenen'
