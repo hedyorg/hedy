@@ -3,6 +3,7 @@ export * from './app';
 export * from './auth';
 export * from './statistics';
 export * from './tutorial';
+export * from './quiz';
 import './syntaxModesRules';
 import './tabs';
 import './translating';

@@ -826,6 +826,9 @@ def index(level, program_id):
         hide_cheatsheet = True
 
     quiz = True if QUIZZES[g.lang].get_quiz_data_for_level(level) else False
+    quiz_questions = 0
+    if quiz:
+        quiz_questions = len(QUIZZES[g.lang].get_quiz_data_for_level(level))
     if 'other_settings' in customizations and 'hide_quiz' in customizations['other_settings']:
         quiz = False
 
@@ -835,6 +838,7 @@ def index(level, program_id):
         level_number=level,
         version=version(),
         quiz=quiz,
+        quiz_questions=quiz_questions,
         adventures=adventures,
         parsons=parsons,
         customizations=customizations,
