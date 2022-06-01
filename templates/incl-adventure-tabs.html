@@ -99,9 +99,9 @@
         <!-- Add the tabtarget for the quiz -->
         {% if quiz %}
             <div data-tabtarget="quiz" class="hidden">
-                <h2>{{_('end')}}</h2>
-                <div>{{_('quiz_description')}}</div>
-                <input type="submit" class="green-btn h-3/5 mt-4" value="{{ _('go_to_quiz') }}" onclick="hedyApp.load_quiz ({{level_nr}})">
+                <div>
+                    {% include 'quiz.html' %}
+                </div>
             </div>
         {% endif %}
       </div>
