@@ -93,9 +93,9 @@ def get_translations(KEYWORDS_PATH, KEYWORDS_PATTERN):
         result[language_code] = {}
         if language_code == "en":
            for keyword in sorted(tmp[language_code].keys()) :
-               result[language_code][keyword] = "({})".format(tmp['en'][keyword])
+               result[language_code][keyword] = "{}".format(tmp['en'][keyword])
         else:
-           for keyword in tmp[language_code] :
+           for keyword in sorted(tmp[language_code].keys()) :
                 word = tmp[language_code][keyword]
                 if word != tmp['en'][keyword] :
 
@@ -105,9 +105,9 @@ def get_translations(KEYWORDS_PATH, KEYWORDS_PATTERN):
                         word = ch + ch.join(list(word)) + ch
 
 
-                    result[language_code][keyword] = "({}|{})".format(word, tmp['en'][keyword])
+                    result[language_code][keyword] = "{}|{}".format(word, tmp['en'][keyword])
                 else:
-                    result[language_code][keyword] = "({})".format(tmp['en'][keyword])
+                    result[language_code][keyword] = "{}".format(tmp['en'][keyword])
 
 
     return result
@@ -128,7 +128,7 @@ print(" Done !")
 
 
 
-print("Generation of syntax highlighting rules.......", end="")
+print("Generation of syntax highlighting rules........", end="")
 
 # List of rules by level
 levels = generate_rules()

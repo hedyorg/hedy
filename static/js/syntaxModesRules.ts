@@ -23,13 +23,13 @@ function convert(o:(object|undefined)) {
   }
 }
 
-// here we need to transfome (__<KEYWORD>__) in a current kayword with translation
+// here we need to transfome __<KEYWORD>__ in a current kayword with translation
 function convertReg(oldReg:string, TRAD:Map<string,string> ) {
   var newReg = oldReg;
 
   TRAD.forEach((value,key) => {
     key = key;
-    var reg = new RegExp('\\(__' + key + '__\\)','g');
+    var reg = new RegExp('__' + key + '__','g');
     newReg = newReg.replace(reg, value); 
   });
 

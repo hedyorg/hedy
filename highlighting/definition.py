@@ -58,11 +58,27 @@ TRANSLATE_WORD = [
 	"input",
 	"or",
 	"while",
-	"length"
+	"length",
+	"0",
+	"1",
+	"2",
+	"3",
+	"4",
+	"5",
+	"6",
+	"7",
+	"8",
+	"9",
 ]
 
-def K(word):
-	if word in TRANSLATE_WORD:
-		return "(__"+word+"__)"
+def K(word, withoutGroup = False):
+	if withoutGroup:
+		if word in TRANSLATE_WORD:
+			return "__"+word+"__"
+		else:
+			return word
 	else:
-		return "(" + word + ")"
+		if word in TRANSLATE_WORD:
+			return "(__"+word+"__)"
+		else:
+			return "(" + word + ")"
