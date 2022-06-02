@@ -1257,13 +1257,14 @@ function clean_variables(variables: any) {
   }
 }
 
-function store_parsons_attempt(order: Array<string>) {
+function store_parsons_attempt(order: Array<string>, correct: boolean) {
   $.ajax({
     type: 'POST',
     url: '/store_parsons_order',
     data: JSON.stringify({
       level: window.State.level,
-      order: order
+      order: order,
+      correct: correct
     }),
     contentType: 'application/json',
     dataType: 'json'
@@ -1299,7 +1300,7 @@ function get_parsons_code() {
     });
     // Before returning the code we want to a-sync store the attempt in the database
     // We only have to set the order and level, rest is handled by the back-end
-    store_parsons_attempt(order);
+    store_parsons_attempt(order, !mistake);
     if (mistake) {
       return "";
     }
