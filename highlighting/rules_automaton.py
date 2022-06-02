@@ -56,33 +56,109 @@ def rule_level1_old():
     } ]}
 
 def rule_level1():
-    return {"start" : [{
-        'regex': " ",
-        'token': 'text',
+    return {
+    "start" : [{
+        'regex': "#.*$",
+        'token': "comment",
+        'next': 'start',
+    },{
+        'regex': START_LINE + K("print"),
+        'token': ["text",'keyword'],
+        'next': 'string',
+    },{
+        'regex': START_LINE + K("ask"),
+        'token': ["text",'keyword'],
+        'next': 'string',
+    },{
+        'regex': START_LINE + K("echo"),
+        'token': ["text",'keyword'],
+        'next': 'string',
+    },{
+        'regex': START_LINE + K("forward"),
+        'token': ["text",'keyword'],
+        'next': 'string',
+    },{
+        'regex': START_LINE + K("turn"),
+        'token': ["text",'keyword'],
+        'next': 'angle',
+    },{
+        'regex': START_LINE + K("color"),
+        'token': ["text",'keyword'],
+        'next': 'color',
+    }],
+    "string" : [{
+        'regex': "$",
+        'token': ["text"],
         'next': 'start',
     },{
         'regex': "#.*$",
         'token': "comment",
         'next': 'start',
-    },{
-        'regex': K("print"),
-        'token': 'keyword',
-        'next': 'string',
-    },{
-        'regex': K("ask"),
-        'token': 'keyword',
-        'next': 'string',
-    },{
-        'regex': K("echo"),
-        'token': 'keyword',
-        'next': 'string',
-    }],"string" : [{
+    }],
+    "color" : [{
         'regex': "$",
         'token': ["text"],
         'next': 'start',
     },{
-        'regex': ".",
+        'regex': K("purple"),
+        'token': ["keyword"],
+        'next': 'start',
+    },{
+        'regex': K("red"),
+        'token': ["keyword"],
+        'next': 'start',
+    },{
+        'regex': K("black"),
+        'token': ["keyword"],
+        'next': 'start',
+    },{
+        'regex': K("blue"),
+        'token': ["keyword"],
+        'next': 'start',
+    },{
+        'regex': K("brown"),
+        'token': ["keyword"],
+        'next': 'start',
+    },{
+        'regex': K("gray"),
+        'token': ["keyword"],
+        'next': 'start',
+    },{
+        'regex': K("green"),
+        'token': ["keyword"],
+        'next': 'start',
+    },{
+        'regex': K("orange"),
+        'token': ["keyword"],
+        'next': 'start',
+    },{
+        'regex': K("pink"),
+        'token': ["keyword"],
+        'next': 'start',
+    },{
+        'regex': K("white"),
+        'token': ["keyword"],
+        'next': 'start',
+    },{
+        'regex': K("yellow"),
+        'token': ["keyword"],
+        'next': 'start',
+    },{
+        'regex': "#.*$",
+        'token': "comment",
+        'next': 'start',
+    }],
+    "angle" : [{
+        'regex': "$",
         'token': ["text"],
+        'next': 'start',
+    },{
+        'regex': K("right"),
+        'token': ["keyword"],
+        'next': 'start',
+    },{
+        'regex': K("left"),
+        'token': ["keyword"],
         'next': 'start',
     },{
         'regex': "#.*$",
