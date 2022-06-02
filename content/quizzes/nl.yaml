@@ -28,7 +28,7 @@ levels:
                     ```
                     {print}
                     ```
-                feedback: "Goed ! Met {print} kun je tekst printen !"
+                feedback: "Goed!"
             -   option: |
                     ```
                     hallo
@@ -38,7 +38,7 @@ levels:
                     ```
                     {ask}
                     ```
-                feedback: "Met {ask} kun je een vraag stellen..."
+                feedback: "Met `{ask}` kun je een vraag stellen..."
             correct_answer: "B"
             hint: "_?_ Hallo wereld !"
             question_score: '10'
@@ -49,12 +49,12 @@ levels:
                     ```
                     {print} Wat is je lievelingskleur ?
                     ```
-                feedback: "Met {print} print je iets"
+                feedback: "Met `{print}` print je iets"
             -   option: |
                     ```
                     {ask} {print} Wat is je lievelingskleur ?
                     ```
-                feedback: "{ask} en {print} is dubbelop, je hebt maar één commando nodig."
+                feedback: "Je hebt maar één commando nodig, geen twee."
             -   option: |
                     ```
                     {ask} Wat is je lievelingskleur ?
@@ -64,9 +64,9 @@ levels:
                     ```
                     {echo} Wat is je lievelingskleur ?
                     ```
-                feedback: "{echo} herhaalt het antwoord."
+                feedback: "`{echo}` herhaalt het antwoord."
             correct_answer: "C"
-            hint: "Het Engelse woord voor vragen is {ask}"
+            hint: "Je kunt iets vragen met `{ask}`"
             question_score: '10'
         4:
             question_text: "Wat is er mis met deze code ?"
