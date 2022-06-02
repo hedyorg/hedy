@@ -15,13 +15,15 @@
 </div>
 <div id="quiz_container" class="hidden">
     <div class="arrow-steps clearfix">
-        {% for i in range(1, quiz_questions + 1)%}
-           {% if i == 1 %}
-               <div class="step current" id="question_header_{{i}}"><span><a class="step-text"><span class="question_header_text_container" id="question_header_text_{{i}}">{{_('question')}}</span> {{ i }}</a></span></div>
-           {% else %}
-               <div class="step" id="question_header_{{i}}"><span><a class="step-text"><span class="question_header_text_container" id="question_header_text_{{i}}" style="display: none;">{{_('question')}}</span> {{ i }}</a></span></div>
-           {% endif %}
-        {% endfor %}
+        {%  if quiz_questions %}
+            {% for i in range(1, quiz_questions + 1)%}
+               {% if i == 1 %}
+                   <div class="step current" id="question_header_{{i}}"><span><a class="step-text"><span class="question_header_text_container" id="question_header_text_{{i}}">{{_('question')}}</span> {{ i }}</a></span></div>
+               {% else %}
+                   <div class="step" id="question_header_{{i}}"><span><a class="step-text"><span class="question_header_text_container" id="question_header_text_{{i}}" style="display: none;">{{_('question')}}</span> {{ i }}</a></span></div>
+               {% endif %}
+            {% endfor %}
+        {% endif %}
     </div>
     <div id="quiz_question_container">
         <p class="italic text-3xl font-bold text-blue-900 text-center font-slab" id="quiz_question_title"></p> <!-- question -->
