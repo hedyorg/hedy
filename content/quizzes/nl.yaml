@@ -11,16 +11,13 @@ levels:
                 feedback: "Deze is het niet !"
             -   option: "Henk"
                 feedback: "Deze is het niet !"
-            -   option: "Haydie2"
-                feedback: "Deze is het niet !"
-            -   option: "Henk2"
-                feedback: "Deze is het niet !"
+            -   feedback: "Deze is het niet !"
+            -   feedback: "Deze is het niet !"
             correct_answer: "A"
             hint: "We beginnen met een simpele vraag."
             question_score: '10'
         2:
             question_text: "Welk commando moet je invullen op de streepjes om Hallo ! te laten verschijnen in je uitvoerscherm ?"
-            code: "_?_ Hallo !"
             mp_choice_options:
             -   option: |
                     ```
@@ -1646,15 +1643,6 @@ levels:
             question_score: '10'
         8:
             question_text: "Wat `{print}` Hedy als je het goede wachtwoord 'Hedy' intypt ?"
-            code: |-
-                wachtwoord {is} {ask} 'Wat is het wachtwoord ?'
-                goedewachtwoord {is} Hedy
-                {if} wachtwoord {is} goedewachtwoord
-                    {repeat} 2 {times}
-                        {print} 'Goed gedaan !'
-                        {print} 'Je mag computeren !'
-                {else}
-                    {print} 'De computer ontploft in 5... 4... 3... 2... 1...'
             mp_choice_options:
             -   option: "Goed gedaan ! \n Goed gedaan !"
                 feedback: "Niets !"
