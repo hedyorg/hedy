@@ -17,11 +17,11 @@ levels:
         2:
             question_text: "Quelle commande fait apparaître du texte ?"
             mp_choice_options:
-            -   option: "{echo}"
+            -   option: "```\n{echo}\n```\n"
                 feedback: "{echo} répète une réponse donnée."
             -   option: "```{print}```"
                 feedback: "Correct !"
-            -   option: "Bonjour"
+            -   option: "```\nBonjour\n```\n"
                 feedback: "Bonjour n'est pas une commande."
             -   option: "ask"
                 feedback: "Avec `{ask}`, tu peux poser une question."
