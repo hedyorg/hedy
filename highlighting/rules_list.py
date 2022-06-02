@@ -47,10 +47,13 @@ def rule_all(level):
     # Rule for comments :
     list_rules.append( { 'regex': '#.*$', 'token': 'comment', 'next': 'start' } )
 
-    # Rule for quoted string :
+    ## Rule for quoted string :
+    # complete
     list_rules.append( { 'regex': '\"[^\"]*\"', 'token': 'constant.character', 'next': 'start' } )
-
     list_rules.append( { 'regex': "\'[^\']*\'", 'token': 'constant.character', 'next': 'start' } )
+    # incomplete
+    list_rules.append( { 'regex': '\"[^\"]*$', 'token': 'constant.character', 'next': 'start' } )
+    list_rules.append( { 'regex': "\'[^\']*$", 'token': 'constant.character', 'next': 'start' } )
 
     # Rule for blanks marks :
     list_rules.append( { 'regex': '_\\?_', 'token': 'invalid', 'next': 'start' })

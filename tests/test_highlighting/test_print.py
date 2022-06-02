@@ -37,6 +37,51 @@ class HighlighterTestPrint(HighlightTester):
             level=level, lang='en')
 
 
+    @parameterized.expand([
+        ("level4"),
+        ("level5"),
+        ("level6"),
+        ("level7"),
+        ("level8"),
+        ("level9"),
+        ("level10"),
+        ("level11"),
+        ("level12"),
+        ("level13"),
+        ("level14"),
+        ("level15"),
+        ("level16"),
+        ("level17"),
+    ])
+    def test_print_incomplete1(self, level):
+        self.assert_highlighted_chr(
+            "print 'hello world!' var at random",
+            "KKKKK SSSSSSSSSSSSSS TTT KK KKKKKK",
+            level=level, lang='en')
+
+    @parameterized.expand([
+        ("level4"),
+        ("level5"),
+        ("level6"),
+        ("level7"),
+        ("level8"),
+        ("level9"),
+        ("level10"),
+        ("level11"),
+        ("level12"),
+        ("level13"),
+        ("level14"),
+        ("level15"),
+        ("level16"),
+        ("level17"),
+    ])
+    def test_print_incomplete2(self, level):
+        self.assert_highlighted_chr(
+            "print 'hello world! var at random",
+            "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSS",
+            level=level, lang='en')
+
+
 
     @parameterized.expand([
         ("level3"),
