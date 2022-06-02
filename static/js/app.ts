@@ -234,6 +234,8 @@ def convert_numerals(alphabet, number):
    */
   function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean): AceAjax.Editor {
     const editor = ace.edit(element);
+    // Remove the cursor
+    editor.renderer.$cursorLayer.element.style.display = "none";
     editor.setTheme("ace/theme/monokai");
     if (isReadOnly) {
       editor.setOptions({
