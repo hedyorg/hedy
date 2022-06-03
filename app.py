@@ -828,7 +828,6 @@ def index(level, program_id):
         return utils.error_page(error=403, ui_message=gettext('level_not_class'))
 
     parsons = load_parsons_per_level(level)
-    print(parsons)
     commands = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
 
     teacher_adventures = []
@@ -846,6 +845,9 @@ def index(level, program_id):
         hide_cheatsheet = True
 
     quiz = True if QUIZZES[g.lang].get_quiz_data_for_level(level) else False
+    quiz_questions = 0
+    if quiz:
+        quiz_questions = len(QUIZZES[g.lang].get_quiz_data_for_level(level))
     if 'other_settings' in customizations and 'hide_quiz' in customizations['other_settings']:
         quiz = False
 
@@ -855,6 +857,7 @@ def index(level, program_id):
         level_number=level,
         version=version(),
         quiz=quiz,
+        quiz_questions=quiz_questions,
         adventures=adventures,
         parsons=parsons,
         customizations=customizations,
@@ -1225,18 +1228,22 @@ def tutorial_steps(step):
     elif step == 4:
         translation = [gettext('tutorial_tryit_title'), gettext('tutorial_tryit_message')]
     elif step == 5:
-        translation = [gettext('tutorial_nextlevel_title'), gettext('tutorial_nextlevel_message')]
+        translation = [gettext('tutorial_speakaloud_title'), gettext('tutorial_speakaloud_message')]
     elif step == 6:
-        translation = [gettext('tutorial_leveldefault_title'), gettext('tutorial_leveldefault_message')]
+        translation = [gettext('tutorial_speakaloud_run_title'), gettext('tutorial_speakaloud_run_message')]
     elif step == 7:
-        translation = [gettext('tutorial_adventures_title'), gettext('tutorial_adventures_message')]
+        translation = [gettext('tutorial_nextlevel_title'), gettext('tutorial_nextlevel_message')]
     elif step == 8:
-        translation = [gettext('tutorial_quiz_title'), gettext('tutorial_quiz_message')]
+        translation = [gettext('tutorial_leveldefault_title'), gettext('tutorial_leveldefault_message')]
     elif step == 9:
-        translation = [gettext('tutorial_saveshare_title'), gettext('tutorial_saveshare_message')]
+        translation = [gettext('tutorial_adventures_title'), gettext('tutorial_adventures_message')]
     elif step == 10:
-        translation = [gettext('tutorial_cheatsheet_title'), gettext('tutorial_cheatsheet_message')]
+        translation = [gettext('tutorial_quiz_title'), gettext('tutorial_quiz_message')]
     elif step == 11:
+        translation = [gettext('tutorial_saveshare_title'), gettext('tutorial_saveshare_message')]
+    elif step == 12:
+        translation = [gettext('tutorial_cheatsheet_title'), gettext('tutorial_cheatsheet_message')]
+    elif step == 13:
         translation = [gettext('tutorial_end_title'), gettext('tutorial_end_message')]
     else:
         translation = [gettext('tutorial_title_not_found'), gettext('tutorial_message_not_found')]
@@ -1285,6 +1292,29 @@ def get_teacher_tutorial_translation(step):
 
     translation = teacher_tutorial_steps(step)
     return jsonify({'translation': translation}), 200
+
+@app.route('/store_parsons_order', methods=['POST'])
+def store_parsons_order():
+    body = request.json
+    # Validations
+    if not isinstance(body, dict):
+        return 'body must be an object', 400
+    if not isinstance(body.get('level'), str):
+        return 'level must be a string', 400
+    if not isinstance(body.get('order'), list):
+        return 'order must be a list', 400
+
+    attempt = {
+        'id': utils.random_id_generator(12),
+        'username': current_user()['username'] or f'anonymous:{utils.session_id()}',
+        'level': int(body['level']),
+        'order': body['order'],
+        'correct': 1 if body['correct'] else 0,
+        'timestamp': utils.timems()
+    }
+
+    DATABASE.store_parsons(attempt)
+    return jsonify({}), 200
 
 @app.route('/client_messages.js', methods=['GET'])
 def client_messages():
