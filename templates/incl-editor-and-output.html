@@ -135,7 +135,7 @@
           <button id="stopit" class="red-btn" onclick="hedyApp.stopit()" style="display: none;">{{_('stop_code_button')}}</button>
         </div>
         <div id="saveDSTContainer" class="mx-2">
-          <button id="saveDST" class="green-btn hidden" onclick="window.location('/dst/{{ level }}/{{ g.keyword_lang }}')">💾</button>
+          <button id="saveDST" class="green-btn hidden" onclick="window.location = '/dst/{{ level }}/{{ g.keyword_lang }}'">💾</button>
         </div>
         <div id="debug_container" class="ltr:ml-auto rtl:mr-auto">
           <button id="debug_button" class="green-btn" onclick="hedyApp.startDebug()">🐞</button>

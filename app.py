@@ -23,7 +23,7 @@ from flask_babel import Babel
 from flask_compress import Compress
 from flask_helpers import render_template
 from flask import Flask, request, jsonify, session, abort, g, redirect, Response, make_response, Markup, send_file, \
-    send_from_directory
+    send_from_directory, after_this_request
 from config import config
 from werkzeug.urls import url_encode
 from babel import Locale
@@ -473,8 +473,7 @@ def parse_tutorial(user):
 # this is a route for testing purposes
 @app.route("/dst/<level>/<lang>/", methods=['GET'])
 def download_dst_file(level, lang):
-    body = request.json
-    transpiled_code = hedy.transpile(body.get('code'), body.get('level'), body.get('lang'))
+    transpiled_code = hedy.transpile("forward 100", level, lang)
     filename = utils.random_id_generator(12)
 
     threader = textwrap.dedent("""
@@ -488,7 +487,14 @@ def download_dst_file(level, lang):
     threader += "\n" + 't.save("dst_files/' + filename + '.dst")'
     exec(threader)
 
-    return send_from_directory(directory='dst_files', filename=filename)
+    @after_this_request
+    def remove_file(response):
+        try:
+            os.remove("dst_files/" + filename +".dst")
+        except Exception as error:
+            app.logger.error("Error removing or closing downloaded file handle", error)
+        return response
+    return send_file(open("dst_files/" + filename + ".dst", 'r'))
 
 
 def transpile_add_stats(code, level, lang_):
