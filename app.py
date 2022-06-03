@@ -22,7 +22,8 @@ from flask_babel import gettext
 from flask_babel import Babel
 from flask_compress import Compress
 from flask_helpers import render_template
-from flask import Flask, request, jsonify, session, abort, g, redirect, Response, make_response, Markup, send_file
+from flask import Flask, request, jsonify, session, abort, g, redirect, Response, make_response, Markup, send_file, \
+    send_from_directory
 from config import config
 from werkzeug.urls import url_encode
 from babel import Locale
@@ -468,11 +469,13 @@ def parse_tutorial(user):
     except:
         return "error", 400
 
+
 # this is a route for testing purposes
-@app.route("/dst", methods=['POST'])
-def download_dst_file():
+@app.route("/dst/<level>/<lang>/", methods=['GET'])
+def download_dst_file(level, lang):
     body = request.json
     transpiled_code = hedy.transpile(body.get('code'), body.get('level'), body.get('lang'))
+    filename = utils.random_id_generator(12)
 
     threader = textwrap.dedent("""
     import time
@@ -482,10 +485,10 @@ def download_dst_file():
     """)
     lines = transpiled_code.code.split("\n")
     threader += "  " + "\n  ".join(lines)
-    threader += "\n" + 't.save("generated_pattern.dst")'
+    threader += "\n" + 't.save("dst_files/' + filename + '.dst")'
     exec(threader)
-    # At this point the file should be saved!
-    return send_file('generated_pattern.dst', as_attachment=True, cache_timeout=1)
+
+    return send_from_directory(directory='dst_files', filename=filename)
 
 
 def transpile_add_stats(code, level, lang_):

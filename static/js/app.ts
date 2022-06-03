@@ -413,6 +413,7 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
   }
 }
 
+/*
 export function saveDST() {
   $.ajax({
     type: 'POST',
@@ -429,6 +430,7 @@ export function saveDST() {
       console.log(response);
   });
 }
+*/
 
 function storeFixedCode(response: any, level: string) {
   if (response.FixedCode) {
