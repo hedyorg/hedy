@@ -492,6 +492,7 @@ def prepare_dst_file():
 # this is a route for testing purposes
 @app.route("/download_dst/<filename>", methods=['GET'])
 def download_dst_file(filename):
+    # https://stackoverflow.com/questions/24612366/delete-an-uploaded-file-after-downloading-it-from-flask
     @after_this_request
     def remove_file(response):
         try:
