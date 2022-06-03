@@ -22,8 +22,7 @@ from flask_babel import gettext
 from flask_babel import Babel
 from flask_compress import Compress
 from flask_helpers import render_template
-from flask import Flask, request, jsonify, session, abort, g, redirect, Response, make_response, Markup, send_file, \
-    send_from_directory, after_this_request
+from flask import Flask, request, jsonify, session, abort, g, redirect, Response, make_response, Markup, send_file, after_this_request
 from config import config
 from werkzeug.urls import url_encode
 from babel import Locale
