@@ -497,7 +497,7 @@ def download_dst_file(filename):
         try:
             os.remove("dst_files/" + filename + ".dst")
         except Exception as error:
-            app.logger.error("Error removing or closing downloaded file handle", error)
+            print("Error removing the generated .dst file!")
         return response
     # Once the file is downloaded -> remove it
     return send_file("dst_files/" + filename + ".dst", as_attachment=True)
