@@ -496,7 +496,7 @@ def download_dst_file(filename):
     def remove_file(response):
         try:
             os.remove("dst_files/" + filename + ".dst")
-        except Exception as error:
+        except:
             print("Error removing the generated .dst file!")
         return response
     # Once the file is downloaded -> remove it
