@@ -413,11 +413,10 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
   }
 }
 
-/*
 export function saveDST() {
   $.ajax({
     type: 'POST',
-    url: '/dst',
+    url: '/generate_dst',
     data: JSON.stringify({
       level: window.State.level,
       code: get_trimmed_code(),
@@ -426,11 +425,12 @@ export function saveDST() {
     contentType: 'application/json',
     dataType: 'json'
     }).done(function(response: any) {
-      console.log("Het werkt!");
-      console.log(response);
+      if (response.filename) {
+        // Download the file
+        window.location.replace('/download_dst/' + response.filename);
+      }
   });
 }
-*/
 
 function storeFixedCode(response: any, level: string) {
   if (response.FixedCode) {

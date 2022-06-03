@@ -469,32 +469,39 @@ def parse_tutorial(user):
     except:
         return "error", 400
 
-
-# this is a route for testing purposes
-@app.route("/dst/<level>/<lang>/", methods=['GET'])
-def download_dst_file(level, lang):
-    transpiled_code = hedy.transpile("forward 100", level, lang)
+@app.route("/generate_dst", methods=['POST'])
+def prepare_dst_file():
+    body = request.json
+    # Prepare the file -> return the "secret" filename as response
+    transpiled_code = hedy.transpile(body.get("code"), body.get("level"), body.get("lang"))
     filename = utils.random_id_generator(12)
 
     threader = textwrap.dedent("""
-    import time
-    from turtlethread import Turtle
-    t = Turtle()
-    with t.running_stitch(stitch_length=20):
-    """)
+        import time
+        from turtlethread import Turtle
+        t = Turtle()
+        with t.running_stitch(stitch_length=20):
+        """)
     lines = transpiled_code.code.split("\n")
     threader += "  " + "\n  ".join(lines)
     threader += "\n" + 't.save("dst_files/' + filename + '.dst")'
     exec(threader)
 
+    return jsonify({'filename': filename}), 200
+
+
+# this is a route for testing purposes
+@app.route("/download_dst/<filename>", methods=['GET'])
+def download_dst_file(filename):
     @after_this_request
     def remove_file(response):
         try:
-            os.remove("dst_files/" + filename +".dst")
+            os.remove("dst_files/" + filename + ".dst")
         except Exception as error:
             app.logger.error("Error removing or closing downloaded file handle", error)
         return response
-    return send_file(open("dst_files/" + filename + ".dst", 'r'))
+    # Once the file is downloaded -> remove it
+    return send_file("dst_files/" + filename + ".dst", as_attachment=True)
 
 
 def transpile_add_stats(code, level, lang_):
