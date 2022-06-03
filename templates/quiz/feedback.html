@@ -47,7 +47,7 @@
             </div>
         </div>
     </div>
-    <div class="p-10 button-bar border-t-8 bg-green-300 border-green-600">
+    <div class="p-10 border-t-8 bg-green-300 border-green-600 button-bar">
         {% if question_nr < questions|length %}
             <button class="green-btn ltr:ml-1 rtl:mr-1 ltr:text-right-0 rtl:text-left-0"
                     onclick="window.location = '/quiz/quiz_questions/{{ level_source }}/{{ question_nr + 1 }}/1?lang={{lang}}'">
