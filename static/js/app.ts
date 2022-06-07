@@ -12,12 +12,11 @@ const turtle_prefix =
 import random, time, turtle
 t = turtle.Turtle()
 t.hideturtle()
-t.speed(0)
 t.penup()
-t.goto(50,100)
-t.showturtle()
+t.left(90)
 t.pendown()
 t.speed(3)
+t.showturtle()
 `;
 
 const normal_prefix =
@@ -237,6 +236,8 @@ def convert_numerals(alphabet, number):
     const editor = ace.edit(element);
     editor.setTheme("ace/theme/monokai");
     if (isReadOnly) {
+      // Remove the cursor
+      editor.renderer.$cursorLayer.element.style.display = "none";
       editor.setOptions({
         readOnly: true,
         showGutter: false,
@@ -339,7 +340,18 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
   try {
     level = level.toString();
     var editor = theGlobalEditor;
-    var code = get_trimmed_code();
+    var code = "";
+    if ($('#parsons_container').is(":visible")) {
+      code = get_parsons_code();
+      // We return no code if all lines are empty or there is a mistake -> clear errors and do nothing
+      if (!code) {
+        clearErrors(editor);
+        stopit();
+        return;
+      }
+    } else {
+      code = get_trimmed_code();
+    }
 
     clearErrors(editor);
     removeBulb();
@@ -1247,6 +1259,57 @@ function clean_variables(variables: any) {
   }
 }
 
+function store_parsons_attempt(order: Array<string>, correct: boolean) {
+  $.ajax({
+    type: 'POST',
+    url: '/store_parsons_order',
+    data: JSON.stringify({
+      level: window.State.level,
+      order: order,
+      correct: correct
+    }),
+    contentType: 'application/json',
+    dataType: 'json'
+  }).done(function() {
+      // Let's do nothing: saving is not a user relevant action -> no feedback required
+    }).fail(function(xhr) {
+      console.error(xhr);
+    });
+}
+
+function get_parsons_code() {
+    let code = "";
+    let count = 65;
+    let order = new Array();
+    let mistake = false;
+
+    $('.compiler-parsons-box').each(function() {
+      // When the value is 0 there is no code box in the expected spot
+      let text = $(this).attr('code') || "";
+      if (text.length > 1) {
+        code += text;
+      }
+      $(this).parents().removeClass('border-black');
+      let index = $(this).attr('index') || "-";
+      if (index.charCodeAt(0) == count) {
+        $(this).parents().addClass('border-green-500');
+      } else {
+        mistake = true;
+        $(this).parents().addClass('border-red-500');
+      }
+      order.push(index);
+      count += 1;
+    });
+    // Before returning the code we want to a-sync store the attempt in the database
+    // We only have to set the order and level, rest is handled by the back-end
+    store_parsons_attempt(order, !mistake);
+    if (mistake) {
+      return "";
+    }
+
+    return code.replace(/ +$/mg, '');
+}
+
 export function get_trimmed_code() {
   try {
     // This module may or may not exist, so let's be extra careful here.
@@ -1255,30 +1318,6 @@ export function get_trimmed_code() {
   } catch (e) {
     console.error(e);
   }
-
-  // If the main editor is hidden -> we are solving a parsons problem
-  if ($('#editor').is(":hidden")){
-    let code = "";
-    let count = 65;
-
-    $('.compiler-parsons-box').each(function() {
-      let text = $(this).attr('code') || "";
-      if (text.length > 1) {
-        code += text;
-      }
-      $(this).parents().removeClass('border-black');
-      // @ts-ignore
-      if ($(this).attr('index').charCodeAt(0) == count) {
-        console.log("Deze staat op de juiste plek!");
-        $(this).parents().addClass('border-green-500');
-      } else {
-        $(this).parents().addClass('border-red-500');
-      }
-      count += 1;
-    });
-    return code.replace(/ +$/mg, '');
-  }
-  //console.log('Hello world');
   // FH Feb: the above code turns out not to remove spaces from lines that contain only whitespace,
   // but that upsets the parser so this removes those spaces also:
   // Remove whitespace at the end of every line

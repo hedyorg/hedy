@@ -62,6 +62,7 @@ function resetWindow() {
     if (tabName === 'dragging'){
       $ ('#editor').hide();
       $ ('#parsons_container').show();
+      $('#debug_container').hide();
       return;
     }
 
@@ -81,6 +82,7 @@ function resetWindow() {
 
     $ ('#editor').show();
     $ ('#parsons_container').hide();
+    $('#debug_container').show();
     
     // Make sure that the adventure tab is hidden when switching and developer's mode is toggled on
     if ($('#developers_toggle').is(":checked")) {
