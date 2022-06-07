@@ -431,3 +431,16 @@ input:checked ~ .toggle-path {
 .option-block {
   @apply w-full relative block align-top;
 }
+
+/* Not really nice, but we have to use the !important attribute to overwrite the current style */
+.incorrect-option {
+    background-color: rgba(234, 55, 55, 0.6) !important;
+    border: 5px #c21919 dashed!important;
+}
+
+/* Also not really nice, but with the relic quiz code still an improvement */
+.quiz-icons {
+  @apply h-14 w-14 relative;
+  top: -30px;
+  left: -10px;
+}

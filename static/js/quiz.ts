@@ -3,8 +3,8 @@ import {showAchievements} from "./app";
 
 (function() {
     $('.option-block').on("click", function () {
-        $('.option-block').removeClass('border-double');
-        $(this).addClass('border-double');
+        $('.option-block').removeClass('border-double border-8 active');
+        $(this).addClass('border-double border-8 active');
     });
 })();
 
@@ -29,7 +29,8 @@ export function startQuiz(level: number) {
 export function loadQuestQuestion(level: number, question: number) {
     // If we get the request from the feedback page -> hide just to be sure also remove selected answer
     $('#quiz_feedback_container').hide();
-    $('.option-block').removeClass('active');
+    $('.option-block').removeClass('border-double border-8 active');
+    $('.submit-button').hide();
 
     $.ajax({
       type: 'GET',

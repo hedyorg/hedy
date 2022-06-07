@@ -1574,6 +1574,11 @@ code {
   border-color: rgb(56 161 105 / var(--tw-border-opacity));
 }
 
+.border-blue-400 {
+  --tw-border-opacity: 1;
+  border-color: rgb(99 179 237 / var(--tw-border-opacity));
+}
+
 .border-yellow-600 {
   --tw-border-opacity: 1;
   border-color: rgb(214 158 46 / var(--tw-border-opacity));
@@ -1592,11 +1597,6 @@ code {
 .border-orange-600 {
   --tw-border-opacity: 1;
   border-color: rgb(221 107 32 / var(--tw-border-opacity));
-}
-
-.border-blue-400 {
-  --tw-border-opacity: 1;
-  border-color: rgb(99 179 237 / var(--tw-border-opacity));
 }
 
 .border-red-400 {
@@ -2600,6 +2600,28 @@ input:checked ~ .toggle-path {
   vertical-align: top;
 }
 
+/* Not really nice, but we have to use the !important attribute to overwrite the current style */
+
+.incorrect-option {
+  background-color: rgba(234, 55, 55, 0.6) !important;
+  border: 5px #c21919 dashed!important;
+}
+
+/* Also not really nice, but with the relic quiz code still an improvement */
+
+.quiz-icons {
+  position: relative;
+  height: 3.5rem;
+  width: 3.5rem;
+  top: -30px;
+  left: -10px;
+}
+
+.hover\:border-blue-600:hover {
+  --tw-border-opacity: 1;
+  border-color: rgb(49 130 206 / var(--tw-border-opacity));
+}
+
 .hover\:bg-blue-600:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(49 130 206 / var(--tw-bg-opacity));
@@ -2608,6 +2630,16 @@ input:checked ~ .toggle-path {
 .hover\:bg-green-400:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(104 211 145 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-blue-400:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(99 179 237 / var(--tw-bg-opacity));
+}
+
+.hover\:text-white:hover {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .hover\:opacity-75:hover {
