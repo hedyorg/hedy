@@ -55,10 +55,10 @@
         <table class="table-auto text-sm">
         <thead>
             <tr class="font-bold text-left">
-                <th class="w-40">{{_('username')}}</th>
-                <th class="w-52">{{_('invite_date')}}</th>
-                <th class="w-52">{{_('expiration_date')}}</th>
-                <th class="w-64">{{_('remove_invite')}}</th>
+                <th class="ltr:pr-4 rtl:pl-4">{{_('username')}}</th>
+                <th class="w-40">{{_('invite_date')}}</th>
+                <th class="w-40">{{_('expiration_date')}}</th>
+                <th class="px-4 text-center">{{_('remove')}}</th>
             </tr>
         </thead>
         <tbody>
@@ -67,7 +67,7 @@
                 <td>{{invite.username}}</td>
                 <td>{{invite.timestamp}}</td>
                 <td>{{invite.expire_timestamp}}</td>
-                <td><a href="#" onclick='hedyApp.remove_student_invite("{{invite.username}}", "{{ class_info.id }}", {{_('delete_invite_prompt')|tojson}})'>{{_('remove')}}</a></td>
+                <td class="text-center"><a href="#" onclick='hedyApp.remove_student_invite("{{invite.username}}", "{{ class_info.id }}", {{_('delete_invite_prompt')|tojson}})'>🗑️</a></td>
             </tr>
         {% endfor %}
         </tbody>
