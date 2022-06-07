@@ -3,8 +3,8 @@ import {showAchievements} from "./app";
 
 (function() {
     $('.option-block').on("click", function () {
-        $('.option-block').removeClass('active');
-        $(this).addClass('active');
+        $('.option-block').removeClass('border-double');
+        $(this).addClass('border-double');
     });
 })();
 
