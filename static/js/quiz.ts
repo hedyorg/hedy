@@ -107,8 +107,9 @@ function parseCodeBlocks(option: string) {
 }
 
 function highlightQuestionBar(question: number) {
-    $('.step').removeClass('current');
     $('.question_header_text_container').hide();
+    $('.step').removeClass('current');
+
     $('#question_header_text_' + question).show();
     $('#question_header_' + question).addClass('current');
 }
@@ -203,9 +204,9 @@ function showFeedback(response: any, question: string, correct: boolean) {
 
 function updateHeader(question: string, correct: boolean) {
     if (correct) {
-        $('#question_header_' + question).addClass('check');
+        $('#question_header_' + question).addClass('bg-green-400');
     } else {
-        $('#question_header_' + question).addClass('incorrect');
+        $('#question_header_' + question).addClass('bg-red-400');
     }
 }
 

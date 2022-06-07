@@ -15,13 +15,13 @@
     </div>
 </div>
 <div id="quiz_container" class="hidden">
-    <div class="arrow-steps clearfix">
+    <div class="flex flex-row items-center justify-around gap-2">
         {%  if quiz_questions %}
             {% for i in range(1, quiz_questions + 1)%}
                {% if i == 1 %}
-                   <div class="step current" id="question_header_{{i}}"><span><a class="step-text"><span class="question_header_text_container" id="question_header_text_{{i}}">{{_('question')}}</span> {{ i }}</a></span></div>
+                   <div class="step current bg-gray-200" id="question_header_{{i}}"><span class="question_header_text_container" id="question_header_text_{{i}}">{{_('question')}}</span> {{ i }}</div>
                {% else %}
-                   <div class="step" id="question_header_{{i}}"><span><a class="step-text"><span class="question_header_text_container" id="question_header_text_{{i}}" style="display: none;">{{_('question')}}</span> {{ i }}</a></span></div>
+                   <div class="step {% if i % 2 == 0 %}bg-gray-400{% else %}bg-gray-200{% endif %}" id="question_header_{{i}}"><span class="question_header_text_container" id="question_header_text_{{i}}" style="display: none;">{{_('question')}}</span> {{ i }}</div>
                {% endif %}
             {% endfor %}
         {% endif %}
