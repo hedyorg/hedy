@@ -30,7 +30,7 @@ Run Hedy code on your machine
 
 If you are going to contribute to the code of Hedy, you will probably want to run the code on your own computer. For this you need to:
 - install Python 3.7 or higher;
-- install Microsoft Visual C++ 14.0 or higher, which you can [download here](http://landinghub.visualstudio.com/visual-cpp-build-tools)
+- install Microsoft Visual C++ 14.0 or higher, which you can [download here](https://code.visualstudio.com/Download)
 Then, here's how to get started once you have downloaded or cloned the code:
 
 ```bash
