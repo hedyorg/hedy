@@ -236,6 +236,8 @@ def convert_numerals(alphabet, number):
     const editor = ace.edit(element);
     editor.setTheme("ace/theme/monokai");
     if (isReadOnly) {
+      // Remove the cursor
+      editor.renderer.$cursorLayer.element.style.display = "none";
       editor.setOptions({
         readOnly: true,
         showGutter: false,

@@ -288,7 +288,7 @@ class TestPages(AuthHelper):
         self.given_fresh_user_is_logged_in()
 
         body = {'email': self.user['email'], 'keyword_language': self.user['keyword_language']}
-        pages = ['/', '/hedy', '/explore', '/learn-more', '/programs', '/my-achievements', '/my-profile']
+        pages = ['/', '/hedy', '/tutorial', '/explore', '/learn-more', '/programs', '/my-achievements', '/my-profile']
 
         for language in ALL_LANGUAGES.keys():
             body['language'] = language
