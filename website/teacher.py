@@ -37,24 +37,23 @@ def routes(app, database, achievements):
         if not Class or Class['teacher'] != user['username']:
             return utils.error_page(error=404, ui_message=gettext('no_such_class'))
         students = []
+
         for student_username in Class.get('students', []):
             student = DATABASE.user_by_username(student_username)
             programs = DATABASE.programs_for_user(student_username)
             highest_level = max(program['level'] for program in programs) if len(programs) else 0
-            sorted_public_programs = list(
-                sorted([program for program in programs if program.get('public')], key=lambda p: p['date']))
-            if sorted_public_programs:
-                latest_shared = sorted_public_programs[-1]
-                latest_shared['link'] = f"/hedy/{latest_shared['id']}/view"
-            else:
-                latest_shared = None
             students.append({
                 'username': student_username,
-                'last_login': utils.datetotimeordate(utils.mstoisostring(student['last_login'])),
+                'last_login': student['last_login'],
                 'programs': len(programs),
-                'highest_level': highest_level,
-                'latest_shared': latest_shared
+                'highest_level': highest_level
             })
+
+        # Sort the students by their last login
+        students = sorted(students, key=lambda d: d.get('last_login', 0), reverse=True)
+        # After sorting: replace the number value by a string format date
+        for student in students:
+            student['last_login'] = utils.datetotimeordate(utils.mstoisostring(student.get('last_login', 0)))
 
         if utils.is_testing_request(request):
             return jsonify({'students': students, 'link': Class['link'], 'name': Class['name'], 'id': Class['id']})
