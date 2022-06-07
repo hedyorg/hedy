@@ -41,19 +41,17 @@
       </table>
   </div>
   <p>{{_('class_link')}}: <a href="{{class_info.link}}"><span class="text-blue-500">{{class_info.link}}</span></a></p>
-  <div class="mt-4 flex flex-row">
+  <div class="mt-4 flex flex-row gap-2">
     <button class="green-btn" onclick="window.location.href = '/for-teachers/customize-class/{{class_info.id}}'">{{_('customize_class')}}</button>
-    <button class="green-btn ltr:ml-4 rtl:mr-4" onclick='hedyApp.invite_student("{{class_info.id}}", {{_('invite_prompt')|tojson}})'>{{_('invite_student')}}</button>
-    <button class="green-btn ltr:ml-4 rtl:mr-4" onclick="window.location.href = '/stats/class/{{class_info.id}}'">{{_('class_stats')}}</button>
+    <button class="green-btn" onclick='hedyApp.invite_student("{{class_info.id}}", {{_('invite_prompt')|tojson}})'>{{_('invite_student')}}</button>
+    <button class="green-btn" onclick="window.location.href = '/stats/class/{{class_info.id}}'">{{_('class_stats')}}</button>
+    <button class="blue-btn ltr:ml-auto rtl:mr-auto" onclick="window.location.href = '/for-teachers'">{{_('back_to_teachers_page')}}</button>
+    <button class="red-btn" onclick='hedyApp.delete_class("{{class_info.id}}", {{_('delete_class_prompt')|tojson}})'>{{_('delete_class')}}</button>
   </div>
-  <div class="mt-4 flex flex-row">
-    <button class="blue-btn" onclick="window.location.href = '/for-teachers'">{{_('back_to_teachers_page')}}</button>
-    <button class="red-btn ltr:ml-4 rtl:mr-4" onclick='hedyApp.delete_class("{{class_info.id}}", {{_('delete_class_prompt')|tojson}})'>{{_('delete_class')}}</button>
-  </div>
-  <div class="mt-4">
   {% if invites %}
+    <div class="mt-6">
       <h2>{{_('pending_invites')}}</h2>
-      <div class="inline-block border-solid border-2 border-orange-400 rounded my-5 p-4">
+      <div class="inline-block border-solid border-2 border-orange-400 rounded mt-2 mb-4 p-4">
         <table class="table-auto text-sm">
         <thead>
             <tr class="font-bold text-left">
@@ -75,8 +73,8 @@
         </tbody>
         </table>
       </div>
+    </div>
   {% endif %}
-  </div>
 </div>
 <script>
 // Todo: TB -> As we use the same function on the /admin page it would be nice to store this in a function in app.ts
