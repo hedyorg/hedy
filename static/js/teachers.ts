@@ -495,7 +495,6 @@ export function create_accounts(prompt: string) {
                 $('#account_rows_container').find(':input').each(function () {
                    $(this).val("");
                 });
-                $('#download_credentials_checkbox').prop("checked", false);
             }
         }).fail(function (err) {
             modal.alert(err.responseText, 3000, true);
