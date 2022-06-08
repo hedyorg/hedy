@@ -1570,13 +1570,16 @@ def on_server_start():
 
     # Start a scheduler to retrieve all public program on interval -> reduce server and database load on runtime
     scheduler = APScheduler()
+    scheduler.api_enabled = True
     scheduler.init_app(app)
     scheduler.start()
-    # Disable logging from the scheduler
-    logging.getLogger('apscheduler').setLevel(logging.WARNING)
 
-    @scheduler.task('interval', id='update_public_programs', seconds=10, misfire_grace_time=900)
+    # Only log critical messages as the logger does not seem to work for these @scheduler jobs
+    logging.getLogger('apscheduler').setLevel(logging.CRITICAL)
+
+    @scheduler.task('interval', id='update_public_programs', seconds=2, misfire_grace_time=900)
     def job1():
+        print("Newest public programs retrieved!")
         hedy_content.update_public_programs()
 
 
