@@ -55,6 +55,7 @@ PROGRAM_STATS = dynamo.Table(storage, 'program-stats', partition_key='id#level',
 QUIZ_STATS = dynamo.Table(storage, 'quiz-stats', partition_key='id#level', sort_key='week',
                           indexed_fields=[dynamo.IndexKey('id', 'week')])
 
+
 class Database:
     def record_quiz_answer(self, attempt_id, username, level, question_number, answer, is_correct):
         """Update the current quiz record with a new answer.
@@ -220,21 +221,7 @@ class Database:
         return users[:200]
 
     def get_all_explore_programs(self):
-        return PROGRAMS.get_many({'public': 1}, sort_key='date', limit=48, reverse=True)
-
-    def get_filtered_explore_programs(self, level=None, adventure=None, language=None):
-        programs = PROGRAMS.get_many({'public': 1}, sort_key='date', reverse=True)
-        if level:
-            programs = [x for x in programs if x.get('level') == int(level)]
-        if language:
-            programs = [x for x in programs if x.get('lang') == language]
-        if adventure:
-            # If the adventure we filter on is called 'default' -> return all programs WITHOUT an adventure
-            if adventure == "default":
-                programs = [x for x in programs if x.get('adventure_name') == ""]
-                return programs[-48:]
-            programs = [x for x in programs if x.get('adventure_name') == adventure]
-        return programs[-48:]
+        return PROGRAMS.get_many({'public': 1}, sort_key='date', reverse=True)
 
     def get_all_hedy_choices(self):
         return PROGRAMS.get_many({'hedy_choice': 1}, sort_key='date', reverse=True)

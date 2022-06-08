@@ -1,10 +1,13 @@
 import copy
 import os
 from babel import Locale
+
+from website.database import Database
 from website.yaml_file import YamlFile
 import iso3166
-
-import random
+import time
+import atexit
+from apscheduler.schedulers.background import Scheduler
 
 # Define and load all countries
 COUNTRIES = {k: v.name for k, v in iso3166.countries_by_alpha2.items()}
@@ -38,6 +41,20 @@ ADVENTURE_ORDER = [
     'next',
     'end'
 ]
+
+
+PUBLIC_PROGRAMS = []
+# We make a cron job to update all public programs each 10 minutes for the /explore page
+cron = Scheduler(daemon=True)
+# Explicitly kick off the background thread
+cron.start()
+
+@cron.interval_schedule(minutes=10)
+def get_all_public_programs():
+    PUBLIC_PROGRAMS = Database.get_all_explore_programs()
+
+# Shutdown your cron thread if the web process is stopped
+atexit.register(lambda: cron.shutdown(wait=False))
 
 # load all available languages in dict
 # list_translations of babel does about the same, but without territories.

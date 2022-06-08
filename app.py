@@ -1113,7 +1113,7 @@ def explore():
         programs = DATABASE.get_filtered_explore_programs(level, adventure, language)
         achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "indiana_jones")
     else:
-        programs = DATABASE.get_all_explore_programs()
+        programs = hedy_content.PUBLIC_PROGRAMS[-48:]
 
     filtered_programs = []
     for program in programs:
