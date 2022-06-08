@@ -145,9 +145,7 @@ def load_adventures_per_level(level):
     return all_adventures
 
 
-logging.basicConfig(
-    level=logging.DEBUG,
-    format='[%(asctime)s] %(levelname)-8s: %(message)s')
+logging.basicConfig()
 
 # Return the session language, if not: return best match
 
@@ -1576,12 +1574,13 @@ def on_server_start():
 
     # Only log critical messages as the logger does not seem to work for these @scheduler jobs
     # https://apscheduler.readthedocs.io/en/stable/userguide.html#scheduler-events
-    logging.getLogger('apscheduler.executors.default').setLevel(logging.CRITICAL)
+    # logging.getLogger('apscheduler.executors.default').setLevel(logging.CRITICAL)
 
     # https://viniciuschiele.github.io/flask-apscheduler/rst/usage.html
     @scheduler.task('interval', id='update_public_programs', seconds=10, misfire_grace_time=900)
     def job1():
         print("Newest public programs retrieved!")
+        print("test...")
         PUBLIC_PROGRAMS = DATABASE.get_all_explore_programs()
         print(PUBLIC_PROGRAMS)
 
