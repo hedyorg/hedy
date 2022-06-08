@@ -51,6 +51,16 @@ app = Flask(__name__, static_url_path='')
 app.url_map.strict_slashes = False  # Ignore trailing slashes in URLs
 babel = Babel(app)
 
+scheduler = APScheduler()
+scheduler.init_app(app)
+scheduler.start()
+
+
+# Only log critical messages as the logger does not seem to work for these @scheduler jobs
+# https://apscheduler.readthedocs.io/en/stable/userguide.html#scheduler-events
+# logging.getLogger('apscheduler.executors.default').setLevel(logging.CRITICAL)
+
+
 COMMANDS = collections.defaultdict(hedy_content.NoSuchCommand)
 for lang in ALL_LANGUAGES.keys():
     COMMANDS[lang] = hedy_content.Commands(lang)
@@ -1569,22 +1579,6 @@ def on_server_start():
     """
 
     # Start a scheduler to retrieve all public program on interval -> reduce server and database load on runtime
-    scheduler = APScheduler()
-    scheduler.api_enabled = True
-    scheduler.init_app(app)
-    scheduler.start()
-
-    # Only log critical messages as the logger does not seem to work for these @scheduler jobs
-    # https://apscheduler.readthedocs.io/en/stable/userguide.html#scheduler-events
-    logging.getLogger('apscheduler.executors.default').setLevel(logging.CRITICAL)
-
-    # https://viniciuschiele.github.io/flask-apscheduler/rst/usage.html
-    @scheduler.task('interval', id='update_public_programs', seconds=10, misfire_grace_time=900)
-    def job1():
-        print("Update new public programs...")
-        PUBLIC_PROGRAMS = DATABASE.get_all_explore_programs()
-        print(PUBLIC_PROGRAMS)
-
 
 if __name__ == '__main__':
     # Start the server on a developer machine. Flask is initialized in DEBUG mode, so it
@@ -1597,6 +1591,13 @@ if __name__ == '__main__':
     is_in_debugger = sys.gettrace() is not None
 
     on_server_start()
+
+    # https://viniciuschiele.github.io/flask-apscheduler/rst/usage.html
+    @scheduler.task('interval', id='update_public_programs', seconds=5)
+    def job1():
+        with scheduler.app.app_context():
+            hedy_content.update_public_programs()
+            print(PUBLIC_PROGRAMS)
 
     # Threaded option enables multiple instances for multiple user access support
     app.run(threaded=True, debug=not is_in_debugger,

@@ -40,8 +40,12 @@ ADVENTURE_ORDER = [
 ]
 
 DATABASE = database.Database()
-PUBLIC_PROGRAMS = []
+PUBLIC_PROGRAMS = DATABASE.get_all_explore_programs()
 
+
+def update_public_programs():
+    global PUBLIC_PROGRAMS
+    PUBLIC_PROGRAMS = DATABASE.get_all_explore_programs()
 
 # load all available languages in dict
 # list_translations of babel does about the same, but without territories.
