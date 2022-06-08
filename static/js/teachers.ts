@@ -489,7 +489,7 @@ export function create_accounts(prompt: string) {
                 return;
             } else {
                 modal.alert(response.success, 3000, false);
-                if ($('#download_credentials_checkbox').prop('checked')) {
+                if ($("input[name='download_credentials_checkbox']:checked").val() == "yes") {
                     download_login_credentials(accounts);
                 }
                 $('#account_rows_container').find(':input').each(function () {
