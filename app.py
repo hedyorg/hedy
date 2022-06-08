@@ -1591,6 +1591,16 @@ if __name__ == '__main__':
     is_in_debugger = sys.gettrace() is not None
 
     on_server_start()
+    logging.getLogger('apscheduler.executors.default').propagate = False
+
+
+    class NoRunningFilter(logging.Filter):
+        def filter(self, record):
+            return not record.msg.startswith('Running job')
+
+
+    my_filter = NoRunningFilter()
+    logging.getLogger("apscheduler.scheduler").addFilter(my_filter)
 
     # https://viniciuschiele.github.io/flask-apscheduler/rst/usage.html
     @scheduler.task('interval', id='update_public_programs', seconds=5)
