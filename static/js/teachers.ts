@@ -489,6 +489,9 @@ export function create_accounts(prompt: string) {
                 return;
             } else {
                 modal.alert(response.success, 3000, false);
+                if ($('#download_credentials_checkbox').prop('checked')) {
+                    download_login_credentials(accounts);
+                }
                 $('#account_rows_container').find(':input').each(function () {
                    $(this).val("");
                 });
@@ -497,4 +500,8 @@ export function create_accounts(prompt: string) {
             modal.alert(err.responseText, 3000, true);
         });
     });
+}
+
+function download_login_credentials(accounts: any) {
+    console.log(accounts)
 }
