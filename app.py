@@ -7,7 +7,6 @@ from website import quiz
 from website import admin
 from website import teacher
 from website import programs
-import textwrap
 import utils
 from utils import timems, load_yaml_rt, dump_yaml_rt, version, is_debug_mode
 from website.log_fetcher import log_fetcher
@@ -34,6 +33,7 @@ import hedy
 import collections
 import datetime
 import sys
+from flask_apscheduler import APScheduler
 
 if (sys.version_info.major < 3 or sys.version_info.minor < 7):
     print('Hedy requires Python 3.7 or newer to run. However, your version of Python is',
@@ -1567,7 +1567,15 @@ def on_server_start():
 
     Use this to initialize objects, dependencies and connections.
     """
-    pass
+
+    # Start a scheduler to retrieve all public program on interval -> reduce server and database load on runtime
+    scheduler = APScheduler()
+    scheduler.init_app(app)
+    scheduler.start()
+
+    @scheduler.task('interval', id='update_public_programs', seconds=10, misfire_grace_time=900)
+    def job1():
+        hedy_content.update_public_programs()
 
 
 if __name__ == '__main__':

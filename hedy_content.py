@@ -2,12 +2,9 @@ import copy
 import os
 from babel import Locale
 
-from website.database import Database
+from website import database
 from website.yaml_file import YamlFile
 import iso3166
-
-import atexit
-from apscheduler.schedulers.background import BackgroundScheduler
 
 # Define and load all countries
 COUNTRIES = {k: v.name for k, v in iso3166.countries_by_alpha2.items()}
@@ -42,15 +39,13 @@ ADVENTURE_ORDER = [
     'end'
 ]
 
+DATABASE = database.Database()
+PUBLIC_PROGRAMS = DATABASE.get_all_explore_programs()
 
-# https://stackoverflow.com/questions/21214270/how-to-schedule-a-function-to-run-every-hour-on-flask
-PUBLIC_PROGRAMS = []
-def get_public_programs():
-    PUBLIC_PROGRAMS = Database.get_all_explore_programs()
 
-sched = BackgroundScheduler(daemon=True)
-sched.add_job(get_public_programs, 'interval', minutes=10)
-sched.start()
+def update_public_programs():
+    PUBLIC_PROGRAMS = DATABASE.get_all_explore_programs()
+
 
 # load all available languages in dict
 # list_translations of babel does about the same, but without territories.
