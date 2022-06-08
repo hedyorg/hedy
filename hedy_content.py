@@ -43,10 +43,10 @@ ADVENTURE_ORDER = [
 ]
 
 
+# https://stackoverflow.com/questions/21214270/how-to-schedule-a-function-to-run-every-hour-on-flask
 PUBLIC_PROGRAMS = []
 def get_public_programs():
     PUBLIC_PROGRAMS = Database.get_all_explore_programs()
-
 
 sched = BackgroundScheduler(daemon=True)
 sched.add_job(get_public_programs, 'interval', minutes=10)
