@@ -1576,13 +1576,14 @@ def on_server_start():
 
     # Only log critical messages as the logger does not seem to work for these @scheduler jobs
     # https://apscheduler.readthedocs.io/en/stable/userguide.html#scheduler-events
-    logging.getLogger('apscheduler').setLevel(logging.CRITICAL)
+    logging.getLogger('apscheduler.executors.default').setLevel(logging.CRITICAL)
 
     # https://viniciuschiele.github.io/flask-apscheduler/rst/usage.html
     @scheduler.task('interval', id='update_public_programs', seconds=10, misfire_grace_time=900)
     def job1():
         print("Newest public programs retrieved!")
         PUBLIC_PROGRAMS = DATABASE.get_all_explore_programs()
+        print(PUBLIC_PROGRAMS)
 
 
 if __name__ == '__main__':
