@@ -1572,6 +1572,8 @@ def on_server_start():
     scheduler = APScheduler()
     scheduler.init_app(app)
     scheduler.start()
+    # Disable logging from the scheduler
+    logging.getLogger('apscheduler').setLevel(logging.WARNING)
 
     @scheduler.task('interval', id='update_public_programs', seconds=10, misfire_grace_time=900)
     def job1():
