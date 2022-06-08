@@ -503,5 +503,20 @@ export function create_accounts(prompt: string) {
 }
 
 function download_login_credentials(accounts: any) {
-    console.log(accounts)
+    // https://stackoverflow.com/questions/14964035/how-to-export-javascript-array-info-to-csv-on-client-side
+    let csvContent = "data:text/csv;charset=utf-8,";
+    csvContent += "Username, Password" + "\r\n";
+
+    accounts.forEach(function(account: any) {
+        let row = account.username + "," + account.password;
+        csvContent += row + "\r\n";
+    });
+
+    var encodedUri = encodeURI(csvContent);
+    var link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "accounts.csv");
+    document.body.appendChild(link); // Required for Firefox
+
+    link.click();
 }
