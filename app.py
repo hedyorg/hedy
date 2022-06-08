@@ -14,7 +14,7 @@ from website.auth import current_user, login_user_from_token_cookie, requires_lo
 from website.yaml_file import YamlFile
 from website import querylog, aws_helpers, jsonbin, translating, ab_proxying, cdn, database, achievements
 import hedy_translation
-from hedy_content import COUNTRIES, ALL_LANGUAGES, ALL_KEYWORD_LANGUAGES, NON_LATIN_LANGUAGES
+from hedy_content import COUNTRIES, ALL_LANGUAGES, ALL_KEYWORD_LANGUAGES, NON_LATIN_LANGUAGES, PUBLIC_PROGRAMS
 import hedyweb
 import hedy_content
 from flask_babel import gettext
@@ -1113,7 +1113,7 @@ def explore():
         programs = DATABASE.get_filtered_explore_programs(level, adventure, language)
         achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "indiana_jones")
     else:
-        programs = hedy_content.PUBLIC_PROGRAMS[-48:]
+        programs = PUBLIC_PROGRAMS[-48:]
 
     filtered_programs = []
     for program in programs:
@@ -1579,10 +1579,10 @@ def on_server_start():
     logging.getLogger('apscheduler').setLevel(logging.CRITICAL)
 
     # https://viniciuschiele.github.io/flask-apscheduler/rst/usage.html
-    @scheduler.task('interval', id='update_public_programs', seconds=30, misfire_grace_time=900)
+    @scheduler.task('interval', id='update_public_programs', seconds=10, misfire_grace_time=900)
     def job1():
         print("Newest public programs retrieved!")
-        hedy_content.update_public_programs()
+        PUBLIC_PROGRAMS = DATABASE.get_all_explore_programs()
 
 
 if __name__ == '__main__':

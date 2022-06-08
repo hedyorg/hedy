@@ -40,12 +40,7 @@ ADVENTURE_ORDER = [
 ]
 
 DATABASE = database.Database()
-PUBLIC_PROGRAMS = DATABASE.get_all_explore_programs()
-
-
-def update_public_programs():
-    global PUBLIC_PROGRAMS
-    PUBLIC_PROGRAMS = DATABASE.get_all_explore_programs()
+PUBLIC_PROGRAMS = []
 
 
 # load all available languages in dict
