@@ -44,6 +44,7 @@ PUBLIC_PROGRAMS = DATABASE.get_all_explore_programs()
 
 
 def update_public_programs():
+    global PUBLIC_PROGRAMS
     PUBLIC_PROGRAMS = DATABASE.get_all_explore_programs()
 
 

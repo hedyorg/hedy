@@ -1575,9 +1575,11 @@ def on_server_start():
     scheduler.start()
 
     # Only log critical messages as the logger does not seem to work for these @scheduler jobs
+    # https://apscheduler.readthedocs.io/en/stable/userguide.html#scheduler-events
     logging.getLogger('apscheduler').setLevel(logging.CRITICAL)
 
-    @scheduler.task('interval', id='update_public_programs', seconds=2, misfire_grace_time=900)
+    # https://viniciuschiele.github.io/flask-apscheduler/rst/usage.html
+    @scheduler.task('interval', id='update_public_programs', seconds=30, misfire_grace_time=900)
     def job1():
         print("Newest public programs retrieved!")
         hedy_content.update_public_programs()
