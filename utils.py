@@ -9,7 +9,7 @@ import string
 import random
 import uuid
 
-from flask_babel import gettext
+from flask_babel import gettext, format_date, format_datetime
 from ruamel import yaml
 from website import querylog
 import commonmark
@@ -252,6 +252,11 @@ def mstoisostring(date):
 
 def stoisostring(date):
     return datetime.datetime.fromtimestamp(date)
+
+def localized_date_format(date):
+    # Improve the date by using the Flask Babel library and return timestamp as expected by language
+    timestamp = datetime.datetime.fromtimestamp(int(str(date)[:-3]))
+    return format_date(timestamp, format='medium') + " " + format_datetime(timestamp, "H:mm")
 
 def datetotimeordate(date):
     return date.replace("T", " ")
