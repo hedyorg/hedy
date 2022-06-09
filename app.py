@@ -743,7 +743,7 @@ def teacher_tutorial(user):
         adventures.append(
             {'id': adventure.get('id'),
              'name': adventure.get('name'),
-             'date': utils.datetotimeordate(utils.mstoisostring(adventure.get('date'))),
+             'date': utils.localized_date_format(adventure.get('date')),
              'level': adventure.get('level')
              }
         )
@@ -889,8 +889,7 @@ def view_program(id):
         now = timems()
         arguments_dict['program_age'] = get_user_formatted_age(
             now, result['date'])
-        arguments_dict[
-            'program_timestamp'] = f"{datetime.datetime.fromtimestamp(result['date'] / 1000.0).strftime('%d-%m-%Y, %H:%M:%S')} GMT"
+        arguments_dict['program_timestamp'] = utils.localized_date_format(result['date'])
     else:
         arguments_dict['show_edit_button'] = True
 
@@ -1085,7 +1084,7 @@ def for_teachers_page(user):
         adventures.append(
           {'id': adventure.get('id'),
            'name': adventure.get('name'),
-           'date': utils.datetotimeordate(utils.mstoisostring(adventure.get('date'))),
+           'date': utils.localized_date_format(adventure.get('date')),
            'level': adventure.get('level')
            }
         )
