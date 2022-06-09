@@ -253,9 +253,12 @@ def mstoisostring(date):
 def stoisostring(date):
     return datetime.datetime.fromtimestamp(date)
 
-def localized_date_format(date):
+def localized_date_format(date, short_format=False):
     # Improve the date by using the Flask Babel library and return timestamp as expected by language
-    timestamp = datetime.datetime.fromtimestamp(int(str(date)[:-3]))
+    if short_format:
+        timestamp = datetime.datetime.fromtimestamp(int(str(date)))
+    else:
+        timestamp = datetime.datetime.fromtimestamp(int(str(date)[:-3]))
     return format_date(timestamp, format='medium') + " " + format_datetime(timestamp, "H:mm")
 
 def datetotimeordate(date):
