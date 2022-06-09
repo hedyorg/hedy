@@ -18,7 +18,7 @@ class HighlighterTestNumbers(HighlightTester):
         ("level16"),
         ("level17"),
     ])
-    def test_is_number(self, level):
+    def test_nb_is_number(self, level):
         self.assert_highlighted_chr(
             "sword is 12346",
             "TTTTT KK NNNNN",
@@ -38,7 +38,7 @@ class HighlighterTestNumbers(HighlightTester):
         ("level16"),
         ("level17"),
     ])
-    def test_is_number_equal(self, level):
+    def test_nb_is_number_equal(self, level):
         self.assert_highlighted_chr(
             "sword = 12346",
             "TTTTT K NNNNN",
@@ -52,7 +52,7 @@ class HighlighterTestNumbers(HighlightTester):
         ("level16"),
         ("level17"),
     ])
-    def test_is_number_equal_float(self, level):
+    def test_nb_is_number_float(self, level):
         self.assert_highlighted_chr(
             "sword = 123.46",
             "TTTTT K NNNNNN",
@@ -66,7 +66,7 @@ class HighlighterTestNumbers(HighlightTester):
         ("level16"),
         ("level17"),
     ])
-    def test_is_number_equal_float(self, level):
+    def test_nb_is_number_equal_float(self, level):
         self.assert_highlighted_chr(
             "sword is 123.46",
             "TTTTT KK NNNNNN",
@@ -80,7 +80,7 @@ class HighlighterTestNumbers(HighlightTester):
         ("level10"),
         ("level11"),
     ])
-    def test_is_number_equal_float_unknow(self, level):
+    def test_nb_is_number_equal_float_unknow(self, level):
         self.assert_highlighted_chr(
             "sword = 123.46",
             "TTTTT K NNNTTT",
@@ -101,7 +101,7 @@ class HighlighterTestNumbers(HighlightTester):
         ("level16"),
         ("level17"),
     ])
-    def test_is_number_equal_plus(self, level):
+    def test_nb_is_number_equal_plus(self, level):
         self.assert_highlighted_chr(
             "sword = 12346 + 78564",
             "TTTTT K NNNNN K NNNNN",
@@ -116,7 +116,7 @@ class HighlighterTestNumbers(HighlightTester):
         ("level16"),
         ("level17"),
     ])
-    def test_is_number_equal_float_plus(self, level):
+    def test_nb_is_number_equal_float_plus(self, level):
         self.assert_highlighted_chr(
             "sword = 123.46 + 7949.8",
             "TTTTT K NNNNNN K NNNNNN",
@@ -137,7 +137,7 @@ class HighlighterTestNumbers(HighlightTester):
         ("level16"),
         ("level17"),
     ])
-    def test_is_number_equal_minus(self, level):
+    def test_nb_is_number_equal_minus(self, level):
         self.assert_highlighted_chr(
             "sword = 12346 - 78564",
             "TTTTT K NNNNN K NNNNN",
@@ -152,7 +152,7 @@ class HighlighterTestNumbers(HighlightTester):
         ("level16"),
         ("level17"),
     ])
-    def test_is_number_equal_float_minus(self, level):
+    def test_nb_is_number_equal_float_minus(self, level):
         self.assert_highlighted_chr(
             "sword = 123.46 - 7949.8",
             "TTTTT K NNNNNN K NNNNNN",
@@ -174,7 +174,7 @@ class HighlighterTestNumbers(HighlightTester):
         ("level16"),
         ("level17"),
     ])
-    def test_is_number_equal_multi(self, level):
+    def test_nb_is_number_equal_multi(self, level):
         self.assert_highlighted_chr(
             "sword = 12346 * 78564",
             "TTTTT K NNNNN K NNNNN",
@@ -189,7 +189,7 @@ class HighlighterTestNumbers(HighlightTester):
         ("level16"),
         ("level17"),
     ])
-    def test_is_number_equal_float_multi(self, level):
+    def test_nb_is_number_equal_float_multi(self, level):
         self.assert_highlighted_chr(
             "sword = 123.46 * 7949.8",
             "TTTTT K NNNNNN K NNNNNN",
@@ -209,7 +209,7 @@ class HighlighterTestNumbers(HighlightTester):
         ("level16"),
         ("level17"),
     ])
-    def test_is_number_equal_div(self, level):
+    def test_nb_is_number_equal_div(self, level):
         self.assert_highlighted_chr(
             "sword = 12346 / 78564",
             "TTTTT K NNNNN K NNNNN",
@@ -224,7 +224,7 @@ class HighlighterTestNumbers(HighlightTester):
         ("level16"),
         ("level17"),
     ])
-    def test_is_number_equal_float_div(self, level):
+    def test_nb_is_number_equal_float_div(self, level):
         self.assert_highlighted_chr(
             "sword = 123.46 / 7949.8",
             "TTTTT K NNNNNN K NNNNNN",

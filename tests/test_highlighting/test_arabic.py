@@ -8,7 +8,7 @@ class HighlighterTestPrintArabic(HighlightTester):
         ("level2"),
         ("level3"),
     ])
-    def test_print1(self, level):
+    def test_ar_print1(self, level):
         self.assert_highlighted_chr(
             "قول مرحبا أيها العالم!",
             "KKK TTTTTTTTTTTTTTTTTT",
@@ -30,7 +30,7 @@ class HighlighterTestPrintArabic(HighlightTester):
         ("level16"),
         ("level17"),
     ])
-    def test_print2(self, level):
+    def test_ar_print2(self, level):
         self.assert_highlighted_chr(
             'قول "مرحبا أيها العالم"',
             "KKK SSSSSSSSSSSSSSSSSSS",
@@ -55,7 +55,7 @@ class HighlighterTestPrintArabic(HighlightTester):
         ("level16"),
         ("level17"),
     ])
-    def test_print_random_alone(self, level):
+    def test_ar_print_random_alone(self, level):
         self.assert_highlighted_chr(
             "قول حيواناتي بشكل عشوائي",
             "KKK TTTTTTTT KKKK KKKKKK",
@@ -63,7 +63,7 @@ class HighlighterTestPrintArabic(HighlightTester):
 
 
 
-    def test_print_random1(self):
+    def test_ar_print_random1(self):
         self.assert_highlighted_chr(
             "قول حيواناتي بشكل عشوائي مرحبا أيها العالم!",
             "KKK TTTTTTTT KKKK KKKKKK TTTTTTTTTTTTTTTTTT",
@@ -85,7 +85,7 @@ class HighlighterTestPrintArabic(HighlightTester):
         ("level16"),
         ("level17"),
     ])
-    def test_print_random2(self, level):
+    def test_ar_print_random2(self, level):
         self.assert_highlighted_chr(
             'قول حيواناتي بشكل عشوائي "مرحبا أيها العالم!"',
             "KKK TTTTTTTT KKKK KKKKKK SSSSSSSSSSSSSSSSSSSS",
@@ -106,7 +106,7 @@ class HighlighterTestPrintArabic(HighlightTester):
         ("level16"),
         ("level17"),
     ])
-    def test_is_number_equal_plus(self, level):
+    def test_ar_is_number_equal_plus(self, level):
         self.assert_highlighted_chr(
             "sword = ١٢٣٤٦ + ٧٨٥٦٤",
             "TTTTT K NNNNN K NNNNN",
@@ -121,7 +121,7 @@ class HighlighterTestPrintArabic(HighlightTester):
         ("level16"),
         ("level17"),
     ])
-    def test_is_number_equal_float_plus(self, level):
+    def test_ar_is_number_equal_float_plus(self, level):
         self.assert_highlighted_chr(
             "sword = ١٢٣.٤٦ + ٧٩٤٩.٨",
             "TTTTT K NNNNNN K NNNNNN",
@@ -142,7 +142,7 @@ class HighlighterTestPrintArabic(HighlightTester):
         ("level16"),
         ("level17"),
     ])
-    def test_print_mul(self, level):
+    def test_ar_print_mul(self, level):
         self.assert_highlighted_chr(
             'قول "مرحبا أيها العالم" ١٢٣٤٦ * ٧٩٤٩٨',
             "KKK SSSSSSSSSSSSSSSSSSS NNNNN K NNNNN",
@@ -156,7 +156,7 @@ class HighlighterTestPrintArabic(HighlightTester):
         ("level16"),
         ("level17"),
     ])
-    def test_print_div_float(self, level):
+    def test_ar_print_div_float(self, level):
         self.assert_highlighted_chr(
             'قول "مرحبا أيها العالم" ١٢٣.٤٦ / ٧٩٤٩.٨',
             "KKK SSSSSSSSSSSSSSSSSSS NNNNNN K NNNNNN",

@@ -60,7 +60,7 @@ TRANSLATE_WORD = [
 	"input",
 	"or",
 	"while",
-	"length",
+	"length"
 ]
 
 def K(word, withoutGroup = False):
