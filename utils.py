@@ -9,7 +9,7 @@ import string
 import random
 import uuid
 
-from flask_babel import gettext, format_date, format_datetime
+from flask_babel import gettext, format_date, format_datetime, format_timedelta
 from ruamel import yaml
 from website import querylog
 import commonmark
@@ -249,6 +249,13 @@ def atomic_write_file(filename, mode='wb'):
 # and then invoking the `isoformat` date function on it
 def mstoisostring(date):
     return datetime.datetime.fromtimestamp(int(str(date)[:-3])).isoformat()
+
+def delta_timestamp(date, short_format=False):
+    if short_format:
+        delta = datetime.datetime.now() - datetime.datetime.fromtimestamp(int(str(date)))
+    else:
+        delta = datetime.datetime.now() - datetime.datetime.fromtimestamp(int(str(date)[:-3]))
+    return format_timedelta(delta)
 
 def stoisostring(date):
     return datetime.datetime.fromtimestamp(date)

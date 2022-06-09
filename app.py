@@ -18,7 +18,7 @@ import hedy_translation
 from hedy_content import COUNTRIES, ALL_LANGUAGES, ALL_KEYWORD_LANGUAGES, NON_LATIN_LANGUAGES
 import hedyweb
 import hedy_content
-from flask_babel import gettext
+from flask_babel import gettext, format_timedelta
 from flask_babel import Babel
 from flask_compress import Compress
 from flask_helpers import render_template
@@ -643,7 +643,7 @@ def programs_page(user):
     programs = []
     now = timems()
     for item in result:
-        date = get_user_formatted_age(now, item['date'])
+        date = utils.delta_timestamp(item['date'])
         # This way we only keep the first 4 lines to show as preview to the user
         code = "\n".join(item['code'].split("\n")[:4])
         programs.append(
@@ -703,21 +703,6 @@ def get_log_results():
         query_execution_id, next_token)
     response = {'data': data, 'next_token': next_token}
     return jsonify(response)
-
-
-def get_user_formatted_age(now, date):
-    program_age = now - date
-    if program_age < 1000 * 60 * 60:
-        measure = gettext('minutes')
-        date = round(program_age / (1000 * 60))
-    elif program_age < 1000 * 60 * 60 * 24:
-        measure = gettext('hours')
-        date = round(program_age / (1000 * 60 * 60))
-    else:
-        measure = gettext('days')
-        date = round(program_age / (1000 * 60 * 60 * 24))
-    age = {'time': str(date) + " " + measure}
-    return gettext('ago').format(**age)
 
 
 @app.route('/tutorial', methods=['GET'])
@@ -886,9 +871,6 @@ def view_program(id):
 
     if "submitted" in result and result['submitted']:
         arguments_dict['show_edit_button'] = False
-        now = timems()
-        arguments_dict['program_age'] = get_user_formatted_age(
-            now, result['date'])
         arguments_dict['program_timestamp'] = utils.localized_date_format(result['date'])
     else:
         arguments_dict['show_edit_button'] = True
