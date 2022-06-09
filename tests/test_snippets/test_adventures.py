@@ -103,9 +103,10 @@ def translate_keywords_in_snippets(snippets):
 
     return snippets
 
-Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/adventures', filtered_language='ar')]
+# use this to filter on 1 lang:
+# Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/adventures', filtered_language='ar')]
 
-
+Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/adventures')]
 
 # level = 15
 # if level:
