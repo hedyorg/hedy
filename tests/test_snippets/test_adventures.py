@@ -18,7 +18,7 @@ def collect_snippets(path, filtered_language = None):
   files = [f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f)) and f.endswith('.yaml')]
   for f in files:
       lang = f.split(".")[0]
-      if filtered_language and lang == filtered_language:
+      if not filtered_language or (filtered_language and lang == filtered_language):
           f = os.path.join(path, f)
           yaml = YamlFile.for_file(f)
 
