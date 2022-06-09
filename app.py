@@ -1,13 +1,10 @@
 # coding=utf-8
-import random
-
 from website import auth
 from website import statistics
 from website import quiz
 from website import admin
 from website import teacher
 from website import programs
-import textwrap
 import utils
 from utils import timems, load_yaml_rt, dump_yaml_rt, version, is_debug_mode
 from website.log_fetcher import log_fetcher
@@ -35,6 +32,7 @@ import collections
 import datetime
 import sys
 
+# Todo TB: This can introduce a possible app breaking bug when switching to Python 4 -> e.g. Python 4.0.1 is invalid
 if (sys.version_info.major < 3 or sys.version_info.minor < 7):
     print('Hedy requires Python 3.7 or newer to run. However, your version of Python is',
           '.'.join([str(sys.version_info.major), str(sys.version_info.minor), str(sys.version_info.micro)]))
@@ -643,7 +641,7 @@ def programs_page(user):
     programs = []
     now = timems()
     for item in result:
-        date = get_user_formatted_age(now, item['date'])
+        date = utils.delta_timestamp(item['date'])
         # This way we only keep the first 4 lines to show as preview to the user
         code = "\n".join(item['code'].split("\n")[:4])
         programs.append(
@@ -705,21 +703,6 @@ def get_log_results():
     return jsonify(response)
 
 
-def get_user_formatted_age(now, date):
-    program_age = now - date
-    if program_age < 1000 * 60 * 60:
-        measure = gettext('minutes')
-        date = round(program_age / (1000 * 60))
-    elif program_age < 1000 * 60 * 60 * 24:
-        measure = gettext('hours')
-        date = round(program_age / (1000 * 60 * 60))
-    else:
-        measure = gettext('days')
-        date = round(program_age / (1000 * 60 * 60 * 24))
-    age = {'time': str(date) + " " + measure}
-    return gettext('ago').format(**age)
-
-
 @app.route('/tutorial', methods=['GET'])
 def tutorial_index():
     if not current_user()['username']:
@@ -743,7 +726,7 @@ def teacher_tutorial(user):
         adventures.append(
             {'id': adventure.get('id'),
              'name': adventure.get('name'),
-             'date': utils.datetotimeordate(utils.mstoisostring(adventure.get('date'))),
+             'date': utils.localized_date_format(adventure.get('date')),
              'level': adventure.get('level')
              }
         )
@@ -886,11 +869,7 @@ def view_program(id):
 
     if "submitted" in result and result['submitted']:
         arguments_dict['show_edit_button'] = False
-        now = timems()
-        arguments_dict['program_age'] = get_user_formatted_age(
-            now, result['date'])
-        arguments_dict[
-            'program_timestamp'] = f"{datetime.datetime.fromtimestamp(result['date'] / 1000.0).strftime('%d-%m-%Y, %H:%M:%S')} GMT"
+        arguments_dict['program_timestamp'] = utils.localized_date_format(result['date'])
     else:
         arguments_dict['show_edit_button'] = True
 
@@ -1085,7 +1064,7 @@ def for_teachers_page(user):
         adventures.append(
           {'id': adventure.get('id'),
            'name': adventure.get('name'),
-           'date': utils.datetotimeordate(utils.mstoisostring(adventure.get('date'))),
+           'date': utils.localized_date_format(adventure.get('date')),
            'level': adventure.get('level')
            }
         )
