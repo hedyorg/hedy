@@ -164,8 +164,12 @@
     </div>
 </div>
 <script>
+// If we return something a pop-up will be given: "are you sure you want to leave?"
+// Best we can do as the beforeunload doesn't allow the call of functions or other methods
 $(window).bind('beforeunload', function(){
-  validate_changes();
+    if (window.State.unsaved_changes) {
+        return " ";
+    };
 });
 function validate_changes() {
     if(window.State.unsaved_changes) {
