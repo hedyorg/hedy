@@ -53,7 +53,7 @@ def routes(app, database, achievements):
         students = sorted(students, key=lambda d: d.get('last_login', 0), reverse=True)
         # After sorting: replace the number value by a string format date
         for student in students:
-            student['last_login'] = utils.datetotimeordate(utils.mstoisostring(student.get('last_login', 0)))
+            student['last_login'] = utils.localized_date_format(student.get('last_login', 0))
 
         if utils.is_testing_request(request):
             return jsonify({'students': students, 'link': Class['link'], 'name': Class['name'], 'id': Class['id']})
