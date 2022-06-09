@@ -75,6 +75,8 @@ def validate_ruleset(levels):
 def get_translations(KEYWORDS_PATH, KEYWORDS_PATTERN):
     tmp = {}
 
+    digits = {}
+
     list_language_file = os.listdir(KEYWORDS_PATH)
 
     for language_file in list_language_file:
@@ -84,9 +86,13 @@ def get_translations(KEYWORDS_PATH, KEYWORDS_PATTERN):
 
         yaml_file = yaml.safe_load(keywords_file)
         tmp[language_code] = {}
+        digits[language_code] = []
         for k in yaml_file:
-            if k in TRANSLATE_WORD:
-                tmp[language_code][k] = str(yaml_file[k])
+            if str(k) in TRANSLATE_WORD:
+                tmp[language_code][str(k)] = str(yaml_file[k])
+            elif str(k) in ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+                digits[language_code].append(str(yaml_file[k]))
+
 
     result = {}
     for language_code in sorted(tmp.keys()):
@@ -109,6 +115,18 @@ def get_translations(KEYWORDS_PATH, KEYWORDS_PATTERN):
                 else:
                     result[language_code][keyword] = "{}".format(tmp['en'][keyword])
 
+    # add digits
+    for language_code in sorted(tmp.keys()):
+        result[language_code]["DIGIT"] = []
+        for d in digits["en"]:
+            if d not in result[language_code]["DIGIT"]:
+                result[language_code]["DIGIT"].append(d)
+        
+        for d in digits[language_code]:
+            if d not in result[language_code]["DIGIT"]:
+                result[language_code]["DIGIT"].append(d)
+
+        result[language_code]["DIGIT"] = "".join(result[language_code]["DIGIT"])
 
     return result
 

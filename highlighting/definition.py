@@ -16,6 +16,8 @@ END_LINE = '( *$)'
 START_WORD = '(^| )'
 END_WORD   = '(?![' + CHARACTER + '])'
 
+DIGIT = '[__DIGIT__]'
+
 TRANSLATE_WORD = [
 	"print",
 	"ask",
@@ -59,16 +61,6 @@ TRANSLATE_WORD = [
 	"or",
 	"while",
 	"length",
-	"0",
-	"1",
-	"2",
-	"3",
-	"4",
-	"5",
-	"6",
-	"7",
-	"8",
-	"9",
 ]
 
 def K(word, withoutGroup = False):
