@@ -3,6 +3,12 @@ import {getHighlighter, showAchievements, turnIntoAceEditor} from "./app";
 
 import DOMPurify from 'dompurify'
 
+window.addEventListener('beforeunload', function () {
+    if (window.State.unsaved_changes) {
+        modal.confirm(ErrorMessages['Unsaved_Changes'], function(){});
+    }
+});
+
 export function create_class(class_name_prompt: string) {
   modal.prompt (class_name_prompt, '', function (class_name) {
     $.ajax({
@@ -363,6 +369,7 @@ export function save_customizations(class_id: string) {
       dataType: 'json'
     }).done(function (response) {
       modal.alert(response.success, 3000, false);
+      window.State.unsaved_changes = true;
       $('#remove_customizations_button').removeClass('hidden');
     }).fail(function (err) {
       modal.alert(err.responseText, 3000, true);
@@ -398,6 +405,8 @@ export function remove_customizations(class_id: string, prompt: string) {
 }
 
 export function select_all_levels_adventure(adventure_name: string) {
+    window.State.unsaved_changes = true;
+
     let first_input = true;
     let checked = true;
     $('.adventure_level_input').each(function() {
@@ -413,6 +422,8 @@ export function select_all_levels_adventure(adventure_name: string) {
 }
 
 export function select_all_level_adventures(level: string) {
+    window.State.unsaved_changes = true;
+
     // It is not selected yet -> select all and change color
     if ($('#level_button_' + level).hasClass('blue-btn')) {
         $('.adventure_level_' + level).each(function(){
