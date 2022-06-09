@@ -1,13 +1,10 @@
 # coding=utf-8
-import random
-
 from website import auth
 from website import statistics
 from website import quiz
 from website import admin
 from website import teacher
 from website import programs
-import textwrap
 import utils
 from utils import timems, load_yaml_rt, dump_yaml_rt, version, is_debug_mode
 from website.log_fetcher import log_fetcher
@@ -18,7 +15,7 @@ import hedy_translation
 from hedy_content import COUNTRIES, ALL_LANGUAGES, ALL_KEYWORD_LANGUAGES, NON_LATIN_LANGUAGES
 import hedyweb
 import hedy_content
-from flask_babel import gettext, format_timedelta
+from flask_babel import gettext
 from flask_babel import Babel
 from flask_compress import Compress
 from flask_helpers import render_template
