@@ -13,7 +13,7 @@ adventures:
             9:
                 start_code: '# via kodo ĉi tie'
                 story_text: "## Story\nIn this level you can use nesting to put {if}, {repeat} or {for} commands inside other {if}, {repeat} or {for} commands. This gives you many options and really helps you to make your story interactive.\n"
-                example_code: "## Example Hedy Code\n```\n{print} 'Robin is walking downtown'\nlocation = {ask} 'Is Robin going into a shop, or does she go home?'\n{if} location {is} shop\n    {print} 'She enters the shop.'\n    {print} 'Robin sees an interesting looking book'\n    book = {ask} 'Does Robin buy the book?'\n    {if} book {is} yes\n        {print} 'Robin buys the book and goes home'\n    {else}\n        {print} 'Robin leaves the shop and goes home'\n{else}\n    {print} 'Robin goes home'\n```\n"
+                example_code: "## Ekzempla Hedy-kodo\n```\n{print} 'Robin is walking downtown'\nlocation = {ask} 'Is Robin going into a shop, or does she go home?'\n{if} location {is} shop\n    {print} 'She enters the shop.'\n    {print} 'Robin sees an interesting looking book'\n    book = {ask} 'Does Robin buy the book?'\n    {if} book {is} yes\n        {print} 'Robin buys the book and goes home'\n    {else}\n        {print} 'Robin leaves the shop and goes home'\n{else}\n    {print} 'Robin goes home'\n```\n"
                 story_text_2: The example above is pretty straightforward, but by nesting {if} you can really elaborate your code and turn your story into a real game. Check out this example!
                 example_code_2: "## Elaborate code\n```\nsword = lost\ngame = on\n{print} 'Our hero is walking through the forest'\n{print} 'The path splits two ways'\n{repeat} 2 {times}\n    {if} game {is} on\n        path = {ask} 'Which path should she choose?'\n        {if} path {is} left\n            {if} sword {is} found\n                {print} 'Our hero comes across a dragon!'\n                {print} 'Luckily our hero has a sword to defeat the beast!'\n                game = over\n            {else}\n                {print} 'Our hero finds a dragon, but she doesnt have any weapons!'\n                {print} 'Our hero is beaten by the dragon...'\n                {print} 'Try again'\n                game = over\n        {if} path {is} right\n            {if} sword {is} lost\n                {print} 'Our hero finds a sword'\n                {print} 'This could come in very handy'\n                sword = found\n            {else}\n                {print} 'You have already found the sword. There is nothing left here.'\n                {print} 'She walks back'\n```\n"
             10:
@@ -249,7 +249,7 @@ adventures:
                 start_code: '# via kodo ĉi tie'
             2:
                 story_text: "## Restaurant\nIn level 2 you could expand your restaurant by using variables. In level 1 Hedy could only {echo} the order once and only remember the last thing that was ordered.\nNow you can use variables and Hedy can remember both the food and the drinks!\n"
-                example_code: "## Example Hedy Code\n```\n{print} Bonvenon al Hedy's restaurant!\n{print} Today we're serving pizza or lasagna.\nfood {is} {ask} What would you like to eat?\n{print} Great choice! The food is my favorite!\ntopping {is} {ask} Would you like meat or veggies on that?\n{print} food with topping is on its way!\ndrinks {is} {ask} What would you like to drink with that?\n{print} Thank you for your order.\n{print} Your food and drinks will be right there!\n```\n"
+                example_code: "## Ekzempla Hedy-kodo\n```\n{print} Bonvenon al Hedy's restaurant!\n{print} Today we're serving pizza or lasagna.\nfood {is} {ask} What would you like to eat?\n{print} Great choice! The food is my favorite!\ntopping {is} {ask} Would you like meat or veggies on that?\n{print} food with topping is on its way!\ndrinks {is} {ask} What would you like to drink with that?\n{print} Thank you for your order.\n{print} Your food and drinks will be right there!\n```\n"
                 start_code: '# via kodo ĉi tie'
             3:
                 story_text: "## Random Restaurant\nHaving trouble to decide what you wanna have for dinner? You can let Hedy choose for you!\nSimply add lists of your favorite (or least favorite) meals and Hedy can randomly choose your dinner.\nYou can also have a bit of fun, by letting Hedy choose the price for your dinner as well! What will you get?\n"
@@ -314,7 +314,7 @@ adventures:
             2:
                 start_code: monster1 {is} _
                 story_text: "## Haunted House\nIn this haunted house you can choose your monsters with emojis. Of course you could also use words.\n"
-                example_code: "## Example Hedy Code\n```\nmonster_1 {is} \U0001F47B\nmonster_2 {is} \U0001F921\nmonster_3 {is} \U0001F476\n{print} You enter the haunted house.\n{print} Suddenly you see a monster_1\n{print} You run into the other room, but a monster_2 is waiting there for you!\n{print} Oh no! Quickly get to the kitchen.\n{print} But as you enter monster_3 attacks you!\n```\n"
+                example_code: "## Ekzempla Hedy-kodo\n```\nmonster_1 {is} \U0001F47B\nmonster_2 {is} \U0001F921\nmonster_3 {is} \U0001F476\n{print} You enter the haunted house.\n{print} Suddenly you see a monster_1\n{print} You run into the other room, but a monster_2 is waiting there for you!\n{print} Oh no! Quickly get to the kitchen.\n{print} But as you enter monster_3 attacks you!\n```\n"
             3:
                 start_code: '# via kodo ĉi tie'
                 story_text: "## Haunted house game\nIn the previous levels you've made an introduction to your haunted house game, but as you might have noticed the story would always have a dreadful end.\nIn this level you can make your story more interactive by changing the outcome of the game; sometimes you'll get eaten, sometimes you'll escape!\nLet Hedy decide randomly!\n"
@@ -420,7 +420,7 @@ adventures:
             5:
                 start_code: "name {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'cool!' {else} {print} 'meh'"
                 story_text: "## If... else....\nIn level 5 there is something new, the `{if}`! With the `{if}` you can choose between two different options.\nThis code prints nice if you enter Hedy as a name, and boo! if you enter something else.\n`{ask}` and `{print}` still work like they did in level 4.\n"
-                example_code: "## Example Hedy Code\n```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'\n```\n"
+                example_code: "## Ekzempla Hedy-kodo\n```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'\n```\n"
                 story_text_3: "## Lists\nWhen we want to check if something is in a list, we can now use the `{in}` command.\nThis code prints pretty! if you choose green or yellow, and meh otherwise.\n"
                 example_code_3: "```\nbelaj_koloroj {is} verda, flava\nkoloro {is} {ask} 'Kio estas via plej ŝatata koloro?'\n{if} koloro {in} belaj_koloroj {print} 'bela!'\n{else} {print} 'ba!'\n```\n"
                 story_text_2: "Sometimes code with an `{if}` gets really long and does not fit on the line well. <br> You may also divide the code over two lines, starting the second line at the `{else}` like this:\n"
@@ -472,7 +472,7 @@ adventures:
             14:
                 start_code: "age = {ask} 'How old are you?'\n{if} age < 13\n    {print} 'You are younger than me!'\nelse\n    {print} 'You are older than me!'"
                 story_text: "## Great, Greater, Greatest!\nWe are going to learn more new items. You might know them already from mathematics, the `<` and `>`.\nThe `<` checks if the first number is smaller than the second, for example `age < 12` checks if `age` {is} smaller than 12.\nIf you want to check if the first number is smaller or equal to the second, you can use `<=`, for example `age <= 11`.\nThe `>` checks if the first number is bigger than the second, for example `points > 10` checks if `points` is larger than 10.\nIf you want to check if the first number is bigger or equal to the second, you can use `>=`, for example `points >= 11`.\nYou use these comparisons in an `{if}`, like this:\n"
-                example_code: "## Example Hedy Code\n```\nage = {ask} 'How old are you?'\n{if} age > 12\n    {print} 'You are older than I am!'\n```\n"
+                example_code: "## Ekzempla Hedy-kodo\n```\nage = {ask} 'How old are you?'\n{if} age > 12\n    {print} 'You are older than I am!'\n```\n"
                 story_text_2: "From this level on, if you want to compare exactly, you can use two equal signs. This is what most programming languages do:\n"
                 example_code_2: "```\nname = {ask} 'What is your name?'\n{if} name == 'Hedy'\n    {print} 'You are cool!'\n```\n"
                 story_text_3: "You can also compare if something is *not* equal to something else using `!=` like this:\n"
@@ -484,15 +484,15 @@ adventures:
             16:
                 start_code: "fruktoj = ['pomo', 'banano', 'ĉerizo']\n{print} fruktoj"
                 story_text: "## More and more like real code!\nWe are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels.\nYou can use the square brackets as well to point out a place in the lists."
-                example_code: "## Example Hedy Code\n```\nfriends = ['Ahmed', 'Ben', 'Cayden']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'the lucky number of ' friends[i]\n    {print} 'is ' lucky_numbers[i]\n```\n"
+                example_code: "## Ekzempla Hedy-kodo\n```\nfriends = ['Ahmed', 'Ben', 'Cayden']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'the lucky number of ' friends[i]\n    {print} 'is ' lucky_numbers[i]\n```\n"
             17:
                 start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Jen mi venas!'"
                 story_text: "## Elif\nNow we are going to change indentation a little bit. Every time that we need an indentation, we need `:` at the line before the indentation.\n\nIn this level you can also use a new command: `{elif}`. `{elif}` is short for {else} {if} and you need it when you want to make 3 (or more!) options.\nCheck it out!"
-                example_code: "## Example Hedy Code\n```\nprices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
+                example_code: "## Ekzempla Hedy-kodo\n```\nprices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
             18:
                 start_code: "nomo = 'Hedy'\n{print}('Mia nomo estas ', nomo)"
                 story_text: "## The last level!\nWe arrived at real Python code! That means we need to use parentheses with {print} and {range} from now on."
-                example_code: "## Example Hedy Code\n```\n{print}('mia nomo estas Hedy!')\n```\n"
+                example_code: "## Ekzempla Hedy-kodo\n```\n{print}('mia nomo estas Hedy!')\n```\n"
                 story_text_2: If you want to print more than one item, you need to separate them by commas.
                 example_code_2: "```\ntemperature = 25\n{print}('It is ', temperature, 'degrees outside')\n```\n"
                 story_text_3: "##  Input\nThe final change we will need to make to get Python code is changing `{ask}` into `{input}`."
@@ -502,7 +502,7 @@ adventures:
             13:
                 start_code: "{print} 'Lets go to the next level!'"
                 story_text: "## What's next?\nWith the program below you can calulate {if} you've passed a subject at school (so, a grade of six or higher).\nYou can see this code is extremely inefficient, du to the very long code in line 5.\nAll the different grades from 1 to 5 had to be programmed seperately. Lucky for you, in the next level you'll learn how to do this without this extremely long code!\n"
-                example_code: "## Example Hedy Code\n```\nfirst_grade = {ask} 'What score did you get on your first test?'\nsecond_grade = {ask} 'What score did you get on your second test?'\nadded {is} first_grade + second_grade\nmean_grade {is} added / 2\n{if} mean_grade = 1 {or} mean_grade = 2 {or} mean_grade = 3 {or} mean_grade = 4 {or} mean_grade = 5\n    {print} 'Oh no! You have failed the subject...'\n{else}\n    {print} 'Great! You have passed the subject!'\n```\n"
+                example_code: "## Ekzempla Hedy-kodo\n```\nfirst_grade = {ask} 'What score did you get on your first test?'\nsecond_grade = {ask} 'What score did you get on your second test?'\nadded {is} first_grade + second_grade\nmean_grade {is} added / 2\n{if} mean_grade = 1 {or} mean_grade = 2 {or} mean_grade = 3 {or} mean_grade = 4 {or} mean_grade = 5\n    {print} 'Oh no! You have failed the subject...'\n{else}\n    {print} 'Great! You have passed the subject!'\n```\n"
             18:
                 start_code: "{print} ('Great job!!!')"
                 story_text: "## What's next?\nCongratulations! You have reached the last level of Hedy! But no worries, we are working very hard to create more levels and new adventures. So please come back later to check out the newest levels!\n"
@@ -526,19 +526,19 @@ adventures:
                 start_code: "{print} 'On to the next level!'"
             6:
                 story_text: "## What's next?\n Great job! You've reached the end of this level, which means you have practiced with `{if}` and `{else}`. You have probably noticed that your codes are getting longer and longer.\n For example {if} you want to program 'Happy Birthday'.\n\nThat's a lot of code for mainly the same words over and over again. Luckily in the next level has a solution with the `{repeat}` command, that allows you to repeat a line of code multiple times.\n"
-                example_code: "## Example Hedy Code\n ```\n {print} 'happy birthday to you'\n {print} 'happy birthday to you'\n {print} 'happy birthday dear Hedy'\n {print} 'happy birthday to you'\n ```\n"
+                example_code: "## Ekzempla Hedy-kodo\n ```\n {print} 'happy birthday to you'\n {print} 'happy birthday to you'\n {print} 'happy birthday dear Hedy'\n {print} 'happy birthday to you'\n ```\n"
                 start_code: "{print} 'On to the next level!'"
             7:
                 story_text: "## What's next?\nNow you've learned how to repeat one single line of code. This comes in handy, but it's not always enough. Sometimes you want to repeat multiple lines at once.\nthe next level allows you to group a couple of lines of code, and repeat that little group of lines all at once!\n"
-                example_code: "## Example Hedy Code\n```\n{repeat} 5 {times} {print} 'In the next level you can repeat multiple lines of code at once!'\n```\n"
+                example_code: "## Ekzempla Hedy-kodo\n```\n{repeat} 5 {times} {print} 'In the next level you can repeat multiple lines of code at once!'\n```\n"
                 start_code: "{print} 'Lets go to the next level!'"
             8:
                 story_text: "## What's next?\nGreat job! You've reached the end of another level! In this level you've learned to use multiple lines of code in an {if} or {repeat} command. But you can't yet combine the two...\nGood news! In the next level you will be allowed to put an {if} inside an {if}, or inside a {repeat} command.\n"
-                example_code: "## Example Hedy Code\n```\nanswer = {ask} 'Would you like to go to the next level?'\n{if} answer {is} yes\n    {print} 'Great! You can use the {repeat} commando in the {if} command!'\n    {print} 'Hooray!'\n    {print} 'Hooray!'\n    {print} 'Hooray!'\n{else}\n    {print} 'Okay, you can stay here for a little longer!'\n```\n"
+                example_code: "## Ekzempla Hedy-kodo\n```\nanswer = {ask} 'Would you like to go to the next level?'\n{if} answer {is} yes\n    {print} 'Great! You can use the {repeat} commando in the {if} command!'\n    {print} 'Hooray!'\n    {print} 'Hooray!'\n    {print} 'Hooray!'\n{else}\n    {print} 'Okay, you can stay here for a little longer!'\n```\n"
                 start_code: "{print} 'Lets go to the next level!'"
             9:
                 story_text: "## What's next?\nYou're doing great! In this level we still face a small problem. You have learned to repeat lines, but what if you'd want to slightly change the line.\nFor example if you want to sing the song '{if} you're happy and you know it'. It would look like this:\n\nIf you'd also want the next verse 'stomp your feet', and the next one, and the next one, you'd have to change the code completely.\nIn the next level you'll learn the `{for}` command, which allows you to make a list of actions and repeat the code with another action each time!\nPlease take a look!\n"
-                example_code: "## Example Hedy Code\n```\n{repeat} 2 {times}\n    {print} '{if} youre happy and you know it clap your hands'\n{print} '{if} youre happy and you know it and you really want to show it'\n{print} '{if} youre happy and you know it clap your hands'\n```\n"
+                example_code: "## Ekzempla Hedy-kodo\n```\n{repeat} 2 {times}\n    {print} '{if} youre happy and you know it clap your hands'\n{print} '{if} youre happy and you know it and you really want to show it'\n{print} '{if} youre happy and you know it clap your hands'\n```\n"
                 start_code: "{print} 'Lets go to the next level!'"
             10:
                 story_text: "## What's next?\nYou have reached the end of this level, you're doing great! You are about to go to the next level. In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.\nIn Python there is no `{repeat}` command, but there is a command that works like {repeat}. Are you curious to find out how to say `{repeat}` in Python language? Quickly go on to find out!\n"
@@ -553,7 +553,7 @@ adventures:
                 start_code: "{print} 'Lets go to the next level!'"
             14:
                 story_text: "## What's next?\nIn this game below a code has been made to make sure the player can play on as long as he/she wants...\nBut the code is ineffective and way too long. Also, what {if} the player wants to play 101 games instead of 100?\nYou can't play to infinity?\nIn the next level you will learn a command that makes all of this a lot easier!\n"
-                example_code: "## Example Hedy Code\n```\ngame {is} 'on'\n{for} i {in} {range} 1 {to} 100\n    {if} game {is} 'on'\n        answer = {ask} 'Do you want to continue?'\n        {if} answer {is} 'no'\n            game {is} 'over'\n        {if} answer {is} 'yes'\n            {print} 'Ok we will continue'\n```\n"
+                example_code: "## Ekzempla Hedy-kodo\n```\ngame {is} 'on'\n{for} i {in} {range} 1 {to} 100\n    {if} game {is} 'on'\n        answer = {ask} 'Do you want to continue?'\n        {if} answer {is} 'no'\n            game {is} 'over'\n        {if} answer {is} 'yes'\n            {print} 'Ok we will continue'\n```\n"
                 start_code: "{print} 'Lets go to the next level!'"
             15:
                 story_text: "## What's next?\nIn the next level we will grow a bit more towards real Python code. thon code. You will also learn how to match two lists together.\nThis way you can program a code in which the correct animal is matched to the right sound.\nBecause the two codes below... Are obviously nonsense!\n"
