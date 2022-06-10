@@ -95,7 +95,7 @@ if __name__ == '__main__':
         sys.exit(1)    
     
 def main():
-`;
+  `;
 
 (function() {
   // A bunch of code expects a global "State" object. Set it here if not
@@ -944,6 +944,7 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasWarnin
     // remove it (by clearing the '#turtlecanvas' div)
     $('#turtlecanvas').empty();
     code = normal_prefix + code
+    console.log(code)
   } else {
     // Otherwise make sure that it is shown as it might be hidden from a previous code execution.
     $('#turtlecanvas').show();
