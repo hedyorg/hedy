@@ -49,10 +49,9 @@
     <button class="red-btn" onclick='hedyApp.delete_class("{{class_info.id}}", {{_('delete_class_prompt')|tojson}})'>{{_('delete_class')}}</button>
   </div>
   <div id="add_students_options" class="flex flex-row gap-2 border-t border-gray-500 pt-2 mt-4" style="display: none;">
-      <!-- <p>{{_('class_link')}}: <a href="{{class_info.link}}"><span class="text-blue-500">{{class_info.link}}</span></a></p> -->
       <button class="green-btn" onclick='hedyApp.copy_join_link("{{class_info.link}}", {{_('copy_link_success')|tojson}})'>{{_('copy_join_link')}}</button>
       <button class="green-btn" onclick='hedyApp.invite_student("{{class_info.id}}", {{_('invite_prompt')|tojson}})'>{{_('invite_by_username')}}</button>
-      <button class="green-btn">{{_('create_accounts')}}</button>
+      <button class="green-btn" onclick="window.open('/for-teachers/create-accounts', '_self')">{{_('create_accounts')}}</button>
   </div>
   {% if invites %}
     <div class="mt-6">
