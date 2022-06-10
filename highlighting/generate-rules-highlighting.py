@@ -68,65 +68,106 @@ def validate_ruleset(levels):
     raise RuntimeError(f'{errors} rules are invalid')
 
 
+def get_yaml_content(file_name):
+    """Recover the content of YAML files
 
+    For each yaml file, the function returns a dictionary
+    containing the contents of the file.
+    All keys and values are strings
+
+    Arguments :
+        - file_name : str, The full path of the file
+
+    Returns a dict.
+    """
+
+    keywords_file = open(file_name, newline="", encoding='utf-8')
+    yaml_file = yaml.safe_load(keywords_file)
+    commandes = {}
+    for k in yaml_file:
+        commandes[str(k)] = str(yaml_file[k])
+    return commandes
+
+
+def get_commands(language_code, keywords, keywords_ref, TRANSLATE_WORD):
+    """Create keyword translations
+
+    For each language, this function returns a dictionary
+    with the translation of the keyword, usable by the regex
+
+    Arguments :
+        - language_code : str, Language code (for execption creation)
+        - keywords : str, The yaml content of the language you want to translate
+        - keywords_ref : str, The content of the reference language yaml 
+        - TRANSLATE_WORD : str, List of keywords to be translated
+
+    Returns a dict.
+    """
+    R = {}
+    for keyword in sorted(keywords.keys()) :
+        word = keywords[keyword]
+
+        if keyword in TRANSLATE_WORD:
+
+            # special case for arabic 'underscore'
+            if language_code == "ar":
+                ch = "\u0640*"
+                word = ch + ch.join(list(word)) + ch
+            
+            # if the keyword is identical to the reference, we keep only one of the 2
+            if word == keywords_ref[keyword] :
+                R[keyword] = "{}".format(keywords_ref[keyword])
+            else:
+                R[keyword] = "{}|{}".format(word, keywords_ref[keyword])
+
+    return R
+
+
+def get_digits(keywords, keywords_ref):
+    """Create digits translations
+
+    Assembles the digits of the yaml files into a compact regex,
+    including the digits of the reference language
+
+    Arguments :
+        - keywords : str, The yaml content of the language you want to translate
+        - keywords_ref : str, The content of the reference language yaml 
+
+    Returns a dict.
+    """
+    digits = []
+
+    for d in '0123456789':
+        if keywords_ref[d] not in digits:
+            digits.append(keywords_ref[d])
+        if keywords[d] not in digits:
+            digits.append(keywords[d])
+
+    return "".join(digits)
 
 
 # Function to get the translations of the keywords
 def get_translations(KEYWORDS_PATH, KEYWORDS_PATTERN):
     tmp = {}
 
-    digits = {}
-
     list_language_file = os.listdir(KEYWORDS_PATH)
 
+    # get content
     for language_file in list_language_file:
         language_code = re.search(KEYWORDS_PATTERN,language_file).group(1)
+        tmp[language_code] = get_yaml_content(os.path.join(KEYWORDS_PATH, language_file))
 
-        keywords_file = open(os.path.join(KEYWORDS_PATH, language_file), newline="", encoding='utf-8')
-
-        yaml_file = yaml.safe_load(keywords_file)
-        tmp[language_code] = {}
-        digits[language_code] = []
-        for k in yaml_file:
-            if str(k) in TRANSLATE_WORD:
-                tmp[language_code][str(k)] = str(yaml_file[k])
-            elif str(k) in ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
-                digits[language_code].append(str(yaml_file[k]))
-
+    # english is ref
+    reference = tmp["en"]
 
     result = {}
     for language_code in sorted(tmp.keys()):
-        result[language_code] = {}
-        if language_code == "en":
-           for keyword in sorted(tmp[language_code].keys()) :
-               result[language_code][keyword] = "{}".format(tmp['en'][keyword])
-        else:
-           for keyword in sorted(tmp[language_code].keys()) :
-                word = tmp[language_code][keyword]
-                if word != tmp['en'][keyword] :
 
-                    # special case for arabic 'underscore'
-                    if language_code == "ar":
-                        ch = "\u0640*"
-                        word = ch + ch.join(list(word)) + ch
+        # KEYWORDS 
+        result[language_code] = get_commands(language_code, tmp[language_code], reference, TRANSLATE_WORD)
 
-
-                    result[language_code][keyword] = "{}|{}".format(word, tmp['en'][keyword])
-                else:
-                    result[language_code][keyword] = "{}".format(tmp['en'][keyword])
-
-    # add digits
-    for language_code in sorted(tmp.keys()):
-        result[language_code]["DIGIT"] = []
-        for d in digits["en"]:
-            if d not in result[language_code]["DIGIT"]:
-                result[language_code]["DIGIT"].append(d)
-        
-        for d in digits[language_code]:
-            if d not in result[language_code]["DIGIT"]:
-                result[language_code]["DIGIT"].append(d)
-
-        result[language_code]["DIGIT"] = "".join(result[language_code]["DIGIT"])
+        # DIGITS
+        result[language_code]["DIGIT"] = get_digits(tmp[language_code], reference)
 
     return result
 
