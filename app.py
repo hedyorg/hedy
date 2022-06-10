@@ -792,6 +792,11 @@ def index(level, program_id):
         return utils.error_page(error=403, ui_message=gettext('level_not_class'))
 
     parsons = load_parsons_per_level(level)
+
+    hide_parsons = False
+    if 'other_settings' in customizations and 'hide_parsons' in customizations['other_settings']:
+        hide_parsons = True
+
     commands = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
 
     teacher_adventures = []
@@ -826,6 +831,7 @@ def index(level, program_id):
         parsons=parsons,
         customizations=customizations,
         hide_cheatsheet=hide_cheatsheet,
+        hide_parsons=hide_parsons,
         enforce_developers_mode=enforce_developers_mode,
         teacher_adventures=teacher_adventures,
         loaded_program=loaded_program,

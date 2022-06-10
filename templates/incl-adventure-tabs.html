@@ -8,8 +8,8 @@
                 </div>
               {% endif %}
             {% endfor %}
-            <!-- Add the tab for the parsons problem (if it exists -->
-            {% if parsons %}
+            <!-- Add the tab for the parsons problem (if it exists) -->
+            {% if parsons and not hide_parsons %}
                 {% for parson in parsons %}
                     <div class="tab parsons_tab z-10 whitespace-nowrap flex items-center justify-center" tabindex="0" data-tab="{{parson['short_name']}}">
                         {{parson['name']}}
@@ -63,7 +63,7 @@
           </div>
           {% endif %}
         {% endfor %}
-        {% if parsons %}
+        {% if parsons and not hide_parsons %}
             {% for parson in parsons %}
                 <div data-tabtarget="{{parson['short_name']}}" class="hidden">
                     <div class="flex flex-row">

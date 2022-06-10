@@ -49,7 +49,7 @@ class PageTranslations:
         return d
 
 
-def render_code_editor_with_tabs(commands, max_level, level_number, version, quiz, quiz_questions, loaded_program, adventures, parsons, customizations, hide_cheatsheet, enforce_developers_mode, teacher_adventures, adventure_name):
+def render_code_editor_with_tabs(commands, max_level, level_number, version, quiz, quiz_questions, loaded_program, adventures, parsons, customizations, hide_cheatsheet, hide_parsons, enforce_developers_mode, teacher_adventures, adventure_name):
     arguments_dict = {}
 
     # Meta stuff
@@ -59,6 +59,7 @@ def render_code_editor_with_tabs(commands, max_level, level_number, version, qui
     arguments_dict['prev_level'] = int(level_number) - 1 if int(level_number) > 1 else None
     arguments_dict['next_level'] = int(level_number) + 1 if int(level_number) < max_level else None
     arguments_dict['customizations'] = customizations
+    arguments_dict['hide_parsons'] = hide_parsons
     arguments_dict['hide_cheatsheet'] = hide_cheatsheet
     arguments_dict['enforce_developers_mode'] = enforce_developers_mode
     arguments_dict['teacher_adventures'] = teacher_adventures
