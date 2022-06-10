@@ -508,3 +508,14 @@ export function create_accounts(prompt: string) {
         });
     });
 }
+
+export function copy_join_link(link: string, success: string) {
+    // https://qawithexperts.com/article/javascript/creating-copy-to-clipboard-using-javascript-or-jquery/364
+    var sampleTextarea = document.createElement("textarea");
+    document.body.appendChild(sampleTextarea);
+    sampleTextarea.value = link;
+    sampleTextarea.select();
+    document.execCommand("copy");
+    document.body.removeChild(sampleTextarea);
+    modal.alert(success, 3000, false);
+}
