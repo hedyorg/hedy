@@ -40,21 +40,23 @@
       </tbody>
       </table>
   </div>
-
   <div class="mt-4 flex flex-row gap-2">
-    <button class="green-btn" onclick=$('#add_students_options').toggle();>{{_('add_students')}}</button>
+    <button class="green-btn" onclick=$('#add_students_options').toggle();$(this).toggleClass('green-btn');$(this).toggleClass('blue-btn');>{{_('add_students')}}</button>
     <button class="green-btn" onclick="window.location.href = '/for-teachers/customize-class/{{class_info.id}}'">{{_('customize_class')}}</button>
     <button class="green-btn" onclick="window.location.href = '/stats/class/{{class_info.id}}'">{{_('class_stats')}}</button>
     <button class="blue-btn ltr:ml-auto rtl:mr-auto" onclick="window.location.href = '/for-teachers'">{{_('back_to_teachers_page')}}</button>
     <button class="red-btn" onclick='hedyApp.delete_class("{{class_info.id}}", {{_('delete_class_prompt')|tojson}})'>{{_('delete_class')}}</button>
   </div>
-  <div id="add_students_options" class="flex flex-row gap-2 border-t border-gray-500 pt-2 mt-4" style="display: none;">
-      <button class="green-btn" onclick='hedyApp.copy_join_link("{{class_info.link}}", {{_('copy_link_success')|tojson}})'>{{_('copy_join_link')}}</button>
-      <button class="green-btn" onclick='hedyApp.invite_student("{{class_info.id}}", {{_('invite_prompt')|tojson}})'>{{_('invite_by_username')}}</button>
-      <button class="green-btn" onclick="window.open('/for-teachers/create-accounts', '_self')">{{_('create_accounts')}}</button>
+  <div id="add_students_options" class="flex flex-col items-center border-t border-gray-500 mt-4" style="display: none;">
+      <h2 class="my-4 pt-4">{{_('add_students_options')}}</h2>
+      <div class="flex flex-row gap-2">
+        <button class="green-btn" onclick='hedyApp.copy_join_link("{{class_info.link}}", {{_('copy_link_success')|tojson}})'>{{_('copy_join_link')}}</button>
+        <button class="green-btn" onclick='hedyApp.invite_student("{{class_info.id}}", {{_('invite_prompt')|tojson}})'>{{_('invite_by_username')}}</button>
+        <button class="green-btn" onclick="window.open('/for-teachers/create-accounts', '_self')">{{_('create_accounts')}}</button>
+      </div>
   </div>
   {% if invites %}
-    <div class="mt-6">
+    <div class="border-t border-gray-500 pt-4 mt-4">
       <h2>{{_('pending_invites')}}</h2>
       <div class="inline-block border-solid border-2 border-orange-400 rounded mt-2 mb-4 p-4">
         <table class="table-auto text-sm">
