@@ -390,7 +390,7 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
         $('#runit').show();
         return;
       }
-      runPythonProgram(response.Code, response.has_turtle, response.has_sleep, response.Warning, cb).catch(function(err) {
+      runPythonProgram(response.Code, response.has_turtle, response.Warning, cb).catch(function(err) {
         // The err is null if we don't understand it -> don't show anything
         if (err != null) {
           error.show(ErrorMessages['Execute_error'], err.message);
@@ -887,7 +887,7 @@ window.onerror = function reportClientException(message, source, line_number, co
   });
 }
 
-function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep: boolean, hasWarnings: boolean, cb: () => void) {
+function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasWarnings: boolean, cb: () => void) {
   const outputDiv = $('#output');
   //Saving the variable button because sk will overwrite the output div
   const variableButton = $(outputDiv).find('#variable_button');
@@ -942,17 +942,8 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
         return null;
       }
     },
-    // We want to make the timeout function a bit more sophisticated that simply setting a value
-    // In levels 1-6 users are unable to create loops and programs with a lot of lines are caught server-sided
-    // So: a very large limit in these levels, keep the limit on other onces.
     execLimit: (function () {
-      const level = Number(window.State.level) || 0;
-      if (level < 7) {
-        // Set a non-realistic time-out of 5 minutes
-        return (3000000);
-      }
-      // Set a time-out of either 20 seconds (when turtle / sleep) or 5 seconds when not
-      return ((hasTurtle || hasSleep) ? 20000 : 5000);
+      return 3000000; // Set a very high timeout of 5 minutes -> handle the rest within the prefix
     }) ()
   });
 

@@ -391,10 +391,6 @@ def parse():
         except:
             pass
         try:
-            response['has_sleep'] = 'sleep' in hedy.all_commands(code, level, lang)
-        except:
-            pass
-        try:
             if username and not body.get('tutorial') and ACHIEVEMENTS.verify_run_achievements(username, code, level, response):
                 response['achievements'] = ACHIEVEMENTS.get_earned_achievements()
         except Exception as E:
