@@ -341,7 +341,7 @@ adventures:
                     for i in range 1 to 10:
                         print i
                     print 'Už jdu!'
-                story_text: Teď trochu změníme odsazení. Pokaždé, když ho budeme potřebovat, musí předchozí řádek končit `:`.
+                story_text: "## Elif\nNyní trochu změníme odsazení. Pokaždé, když potřebujeme odsazení, je třeba zapsat znak `:` na řádku před tímto odsazením.\n\nV této úrovni můžete také použít nový příkaz: `{elif}`. Příkaz `{elif}` je zkratka z {else} {if} a využijete jej, když chcete provést tři (nebo více!) možností.\nVyzkoušejte jej!"
                 example_code: "## Example Hedy Code\n```\nprices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
             18:
                 start_code: "naam = 'Hedy'\n{print}('My name is ', naam)"
@@ -421,7 +421,7 @@ adventures:
             9:
                 story_text: "## Story\nIn this level you can use nesting to put {if}, {repeat} or {for} commands inside other {if}, {repeat} or {for} commands. This gives you many options and really helps you to make your story interactive.\n"
                 example_code: "## Example Hedy Code\n```\n{print} 'Robin is walking downtown'\nlocation = {ask} 'Is Robin going into a shop, or does she go home?'\n{if} location {is} shop\n    {print} 'She enters the shop.'\n    {print} 'Robin sees an interesting looking book'\n    book = {ask} 'Does Robin buy the book?'\n    {if} book {is} yes\n        {print} 'Robin buys the book and goes home'\n    {else}\n        {print} 'Robin leaves the shop and goes home'\n{else}\n    {print} 'Robin goes home'\n```\n"
-                story_text_2: "The example above is pretty straightforward, but with nesting you can really elaborate your code and turn your story into a real game. Check out this example!\n"
+                story_text_2: "Výše uvedený příklad je poměrně jednoduchý, ale vnořením {if} můžete svůj kód více propracovat a proměnit svůj příběh ve skutečnou hru. Podívejte se na tento příklad!"
                 example_code_2: "## Elaborate code\n```\nsword = lost\ngame = on\n{print} 'Our hero is walking through the forest'\n{print} 'The path splits two ways'\n{repeat} 2 {times}\n    {if} game {is} on\n        path = {ask} 'Which path should she choose?'\n        {if} path {is} left\n            {if} sword {is} found\n                {print} 'Our hero comes across a dragon!'\n                {print} 'Luckily our hero has a sword to defeat the beast!'\n                game = over\n            {else}\n                {print} 'Our hero finds a dragon, but she doesnt have any weapons!'\n                {print} 'Our hero is beaten by the dragon...'\n                {print} 'Try again'\n                game = over\n        {if} path {is} right\n            {if} sword {is} lost\n                {print} 'Our hero finds a sword'\n                {print} 'This could come in very handy'\n                sword = found\n            {else}\n                {print} 'You have already found the sword. There is nothing left here.'\n                {print} 'She walks back'\n```\n"
                 start_code: '# place your code here'
             5:
