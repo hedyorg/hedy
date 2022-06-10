@@ -226,7 +226,7 @@ class Database:
 
     # We have to perform so magic caching to make sure this is still scalable
     def get_filtered_explore_programs(self, level=None, adventure=None, language=None):
-        programs = hedy_content.PUBLIC_PROGRAMS
+        programs = []
         if level:
             programs = [x for x in programs if x.get('level') == int(level)]
         if language:

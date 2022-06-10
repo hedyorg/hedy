@@ -53,10 +53,13 @@ class Config:
 
 scheduler = APScheduler()
 
+PUBLIC_PROGRAMS = []
 
-@scheduler.task("interval", id="do_job_1", minutes=10, misfire_grace_time=900)
+
+@scheduler.task("interval", id="do_job_1", seconds=5, misfire_grace_time=900)
 def job1():
-    hedy_content.PUBLIC_PROGRAMS = DATABASE.get_all_explore_programs()
+    global PUBLIC_PROGRAMS
+    PUBLIC_PROGRAMS = DATABASE.get_all_explore_programs()
 
 
 # Setting up Flask and babel (web and translations)
