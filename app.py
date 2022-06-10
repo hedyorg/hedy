@@ -20,6 +20,7 @@ from flask_babel import Babel
 from flask_compress import Compress
 from flask_helpers import render_template
 from flask import Flask, request, jsonify, session, abort, g, redirect, Response, make_response, Markup
+from flask_apscheduler import APScheduler
 from config import config
 from werkzeug.urls import url_encode
 from babel import Locale
@@ -44,9 +45,32 @@ from os import path
 os.chdir(os.path.join(os.getcwd(), __file__.replace(
     os.path.basename(__file__), '')))
 
+class Config:
+    """App configuration."""
+
+    SCHEDULER_API_ENABLED = True
+
+
+scheduler = APScheduler()
+
+
+@scheduler.task("interval", id="do_job_1", minutes=10, misfire_grace_time=900)
+def job1():
+    hedy_content.PUBLIC_PROGRAMS = DATABASE.get_all_explore_programs()
+
+
 # Setting up Flask and babel (web and translations)
 app = Flask(__name__, static_url_path='')
+app.config.from_object(Config())
 app.url_map.strict_slashes = False  # Ignore trailing slashes in URLs
+
+
+# if you don't wanna use a config, you can set options here:
+# scheduler.api_enabled = True
+scheduler.init_app(app)
+scheduler.start()
+
+
 babel = Babel(app)
 
 COMMANDS = collections.defaultdict(hedy_content.NoSuchCommand)

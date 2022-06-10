@@ -39,6 +39,8 @@ ADVENTURE_ORDER = [
     'end'
 ]
 
+PUBLIC_PROGRAMS = []
+
 # load all available languages in dict
 # list_translations of babel does about the same, but without territories.
 languages = {}

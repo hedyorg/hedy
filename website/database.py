@@ -1,3 +1,4 @@
+import hedy_content
 from utils import timems, times
 from datetime import date
 from . import dynamo
@@ -219,11 +220,13 @@ class Database:
             return users
         return users[:200]
 
+    # This is efficient as it is, leave for now
     def get_all_explore_programs(self):
         return PROGRAMS.get_many({'public': 1}, sort_key='date', limit=48, reverse=True)
 
+    # We have to perform so magic caching to make sure this is still scalable
     def get_filtered_explore_programs(self, level=None, adventure=None, language=None):
-        programs = PROGRAMS.get_many({'public': 1}, sort_key='date', reverse=True)
+        programs = hedy_content.PUBLIC_PROGRAMS
         if level:
             programs = [x for x in programs if x.get('level') == int(level)]
         if language:
