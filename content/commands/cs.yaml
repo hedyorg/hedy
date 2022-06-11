@@ -347,7 +347,7 @@
         else:
             print 'Barva není zelená.'
     name: '{print}'
--   explanation: 'Teď ti ukážeme nový příkaz, který můžeš začít používat: `elif`. `elif` je zkratka pro "else if", česky to znamená "jinak pokud". Nejdřív zkontrolujeme, jestli platí `if`, pokud ne, zjistíme, jestli je pravdivý `elif` a pokud i ten neplatí, vykoná se příkaz v `else`.'
+-   explanation: 'Obdobně je třeba postupovat u všech příkazů `{if}`'
     example: 'elif a is 5:'
     demo_code: |-
         a = 2
@@ -373,8 +373,8 @@
 -   name: '{print} with var'
     explanation: Pro tisk pomocí `{print}` musíš použít závorky a čárky pokud chceš tisknout {print} více slov
     example: '{print}'
-    demo_code: "name = 'Hedy'\n{print}('my name is ', name)"
+    demo_code: "name = 'Hedy'\n{print}('jmenuji se ', name)"
 -   name: zeptej se na něco pomocí {input}
     explanation: Použij `{input}` místo příkazu`{ask}` na provedení dotazu pro vstupní textové pole
     example: '{input}'
-    demo_code: "name = {input}('What is your name?')\n{print}('So your name is ', name)"
+    demo_code: "name = {input}('Jak se jmenuješ?')\n{print}('Tvé jméno tedy je ', name)"
