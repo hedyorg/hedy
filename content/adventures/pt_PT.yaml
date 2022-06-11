@@ -323,11 +323,7 @@ adventures:
                     ## Cria uma história
                     No nível 1 podes criar uma história com um personagem principal diferente, saído da tua imaginação.
 
-                    Como primeira linha, usa este código:
-
-                    ```
-                    ask quem e o protagonista da tua historia
-                    ```
+                    Como primeira linha, usa este código `{ask}`.
 
                     Após a primeira linha, começa com `print` se quiseres que a frase seja escrita.
                     Utilizas `echo` se quiseres colocar o teu personagem principal no final da frase.
@@ -377,6 +373,8 @@ adventures:
 
                     Precisas usar aspas simples para tudo aquilo que queres escrever.
 
+                start_code: "print 'A tua história será escrita aqui!'"
+                example_code: |-
                     ## Exemplo de código Hedy
                     ```
                     nome is Ricardo
@@ -387,35 +385,19 @@ adventures:
                     print 'Ele ouve um som de uma' animais at random
                     print nome 'tem medo que a floresta seja assombrada'
                     ```
-                start_code: "print 'A tua história será escrita aqui!'"
-                example_code: "## Exemplo de código Hedy\n\n```\nname {is} Hans\n{print} 'The name of the main character is' name\n{print} name 'is now going to walk in the woods'\n{print} name 'is a bit scared'\nanimals {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} 'He hears the sound of an' animals {at} {random}\n{print} name 'is afraid this is a haunted forest'\n```\n"
             3:
                 story_text: |
                     ## Aleatoriedade
                     Podes também acrescentar algo aleatório à tua história. Pode ser um monstro, um animal ou qualquer outro obstáculo.
 
-                    Podemos fazê-lo da seguinte maneira:
-                    ```
-                    animais is coruja, cobra, raposa
-                    print Agora consegue ouvir o barulho de uma animais at random
-                    ```
+                    Podemos fazê-lo da seguinte maneira.
 
-                    ## O que se segue?
-                    Tentaste criar uma frase que continha a palavra nome, e.g.
-
-                    ```
-                    print o meu nome é nome
-                    ```
-
-                    Tenta fazê-lo, se ainda não tentaste.
-
-                    Não funciona como seria de esperar, vai escrever o meu Manuel é Manuel. Vais conseguir resolver isto no nível 3.
                 example_code: |
                    ## Exemplo de código Hedy
 
                     ```
-                    animals {is} 🦔, 🐿, 🦉, 🦇
-                    {print} He now hears the sound of an animals {at} {random}
+                    animais is coruja, cobra, raposa
+                    print Agora consegue ouvir o barulho de uma animais at random
                     ```
                 story_text_2: |
                     The command `{add}` can also come in handy in your story. For example
@@ -525,9 +507,41 @@ adventures:
                 example_code: "## 5 Little Monkeys Jumping on the bed\n```\nmonkeys = 5, 4, 3, 2\n{for} monkey {in} monkeys\n    {print} monkey ' little monkeys jumping on the bed'\n    {print} 'One fell off and bumped his head'\n    {print} 'Mama called the doctor and the doctor said'\n    {print} 'NO MORE MONKEYS JUMPING ON THE BED!'\n```\n\n## Baby Shark\n```\nsharks = baby, mommy, daddy, grandma, grandpa\n{for} shark {in} sharks\n    {print} shark 'tututututudu'\n    {print} shark 'tututututudu'\n    {print} shark 'tututututudu'\n    {print} shark\n```\n## Old McDonald\n```\nanimals = pig, dog, cow\n{for} animal {in} animals\n    {if} animal {is} pig\n        sound = oink\n    {if} animal {is} dog\n        sound = woof\n    {if} animal {is} cow\n        sound = moo\n    {print} 'Old McDonald had a farm'\n    {print} 'E I E I O!'\n    {print} 'and on that farm he had a ' animal\n    {print} 'E I E I O!'\n    {print} 'with a ' sound sound ' here'\n    {print} 'and a ' sound sound ' there'\n    {print} 'here a ' sound\n    {print} 'there a ' sound\n    {print} 'everywhere a ' sound sound\n```\n"
                 start_code: '# place your code here'
             16:
-                story_text: "## Sing a song!\nIn this level, you can program a song like OldMacDonald even more quickly. You can connect the right animal to the right sound by simply putting them in the same place in the list.\nThe Drunken Sailor is also quickly made in this level. You only need 8 lines for the entire song, check it out!\n\n## Old MacDonald\n```\nanimals = ['pig', 'dog', 'cow']\nsounds = ['oink', 'woof', 'moo']\n{for} i {in} {range} 1 {to} 3\n    animal = animals[i]\n    sound = sounds[i]\n    {print} 'Old McDonald had a farm'\n    {print} 'E I E I O!'\n    {print} 'and on that farm he had a ' animal\n    {print} 'E I E I O!'\n    {print} 'with a ' sound sound ' here'\n    {print} 'and a ' sound sound ' there'\n    {print} 'here a ' sound\n    {print} 'there a ' sound\n    {print} 'everywhere a ' sound sound\n```\n\n## Drunken Sailor\n```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines\n    {for} i {in} {range} 1 {to} 3\n        {print} line\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
-                start_code: '# place your code here'
-                example_code: "## Old MacDonald\n```\nanimals = ['pig', 'dog', 'cow']\nsounds = ['oink', 'woof', 'moo']\n{for} i {in} {range} 1 {to} 3\n    animal = animals[i]\n    sound = sounds[i]\n    {print} 'Old McDonald had a farm'\n    {print} 'E I E I O!'\n    {print} 'and on that farm he had a ' animal\n    {print} 'E I E I O!'\n    {print} 'with a ' sound sound ' here'\n    {print} 'and a ' sound sound ' there'\n    {print} 'here a ' sound\n    {print} 'there a ' sound\n    {print} 'everywhere a ' sound sound\n```\n\n## Drunken Sailor\n```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines\n    {for} i {in} {range} 1 {to} 3\n        {print} line\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
+                story_text: |
+                    ## Sing a song!
+                    In this level, you can program a song like OldMacDonald even more quickly. You can connect the right animal to the right sound by simply putting them in the same place in the list.
+                    The Drunken Sailor is also quickly made in this level. You only need 8 lines for the entire song, check it out!
+                example_code: |
+                    ## Old MacDonald
+                    ```
+                    animals = ['pig', 'dog', 'cow']
+                    sounds = ['oink', 'woof', 'moo']
+                    {for} i {in} {range} 1 {to} 3
+                        animal = animals[i]
+                        sound = sounds[i]
+                        {print} 'Old McDonald had a farm'
+                        {print} 'E I E I O!'
+                        {print} 'and on that farm he had a ' animal
+                        {print} 'E I E I O!'
+                        {print} 'with a ' sound sound ' here'
+                        {print} 'and a ' sound sound ' there'
+                        {print} 'here a ' sound
+                        {print} 'there a ' sound
+                        {print} 'everywhere a ' sound sound
+                    ```
+
+                    ## Drunken Sailor
+                    ```
+                    lines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']
+                    {for} line {in} lines
+                        {for} i {in} {range} 1 {to} 3
+                            {print} line
+                        {print} 'early in the morning'
+                        {for} i {in} {range} 1 {to} 3
+                            {print} 'way hay and up she rises'
+                        {print} 'early in the morning'
+                    ```
+                start_code: "# place your code here"
         description: Print a song
         default_save_name: Song
     turtle:
@@ -711,77 +725,373 @@ adventures:
                 start_code: "{print} 'Welcome to this calculator!'"
                 example_code: "## Exemplo de código Hedy\n\n```\ncorrect_answer = 11 * 27\nanswer = {ask} 'How much is 11 times 27?'\n{if} answer {is} correct_answer {print} 'good job!'\n{else} {print} 'Wrong! It was ' correct_answer\n```\n"
     restaurant:
-        name: Restaurant
-        description: Create your own virtual restaurant
-        default_save_name: Restaurant
+        name: "Restaurant"
+        description: "Create your own virtual restaurant"
+        default_save_name: "Restaurant"
         levels:
-            12:
-                story_text: "## Restaurant\nFrom this level on you can use decimal numbers to make you menu more realistic.\n"
-                example_code: "## Exemplo de código Hedy\n\n```\nprice = 0\nfood = {ask} 'What would you like to order?'\ndrinks = {ask} 'What would you like to drink?'\n{if} food {is} 'hamburger'\n    price = price + 6.50\n{if} food {is} 'pizza'\n    price = price + 5.75\n{if} drinks {is} 'water'\n    price = price + 1.20\n{if} drink {is} 'soda'\n    price = price + 2.35\n{print} 'That will be ' price ' dollar, please'\n```\n"
-                start_code: '# place your code here'
-            10:
-                story_text_2: "## Exemplo de código Hedy\n\nOf course, you could also order for multiple people!\n"
-                start_code: courses = appetizer, main course, dessert
-                example_code: "## Exemplo de código Hedy\n\n```\ncourses = appetizer, main course, dessert\n{for} course {in} courses\n    food = {ask} 'What would you like to eat as your ' course '?'\n    {print} food ' will be your ' course\n```\n"
-                example_code_2: "```\ncourses = appetizer, main course, dessert\nnames = Timon, Onno\n{for} name {in} names\n    {for} course {in} courses\n        food = {ask} name ', what would you like to eat as your ' course '?'\n        {print} name ' orders ' food ' as their ' course\n```\n"
-                story_text: "## Restaurant\nIn this level you'll learn how to easily {ask} your guests' orders in a short code.\n"
-            9:
-                story_text: "## Restaurant\nIn this level you can use nesting to make your restaurant more realistic and more fun!\nFor example you would {ask} for sauce {if} somebody orders fries, but you wouldn't {if} someone orders pizza!\nCheck out the example, and try this at your own virtual restaurant!\n"
-                example_code: "## Exemplo de código Hedy\n\n```\n{print} 'Welcome to Hedys restaurant!'\npeople = {ask} 'How many people will be joining us today?'\n{print} 'Great!'\nprice = 0\n{repeat} people {times}\n    food = {ask} 'What would you like to order?'\n    {print} food\n    {if} food {is} fries\n        price = price + 3\n        sauce = {ask} 'What kind of sauce would you like with your fries?'\n        {if} sauce {is} no\n            {print} 'no sauce'\n        {else}\n            price = price + 1\n            {print} 'with ' sauce\n    {if} food {is} pizza\n        price = price + 4\n{print} 'That will be ' price ' dollar'\n{print} 'Enjoy your meal!'\n```\n"
-                start_code: '# place your code here'
-            6:
-                story_text: "## Restaurant\nIn this level you can use maths to calculate the total price of your customer's order, which can make your virtual restaurant more realistic.\n"
-                story_text_2: "But you can also add many more things to your virtual restaurant, for example more courses.\n"
-                example_code_2: "## Exemplo de código Hedy(Elaborate)\nIn this example there are three courses, which requires more code and more additions in calculating the price.\n```\n{print} 'Welcome to Hedys restaurant'\n{print} 'Here is our menu:'\n{print} 'Our starters are salad, soup, or carpaccio'\n{print} 'Our main courses are pizza, lasagne, or spaghetti'\n{print} 'Our desserts are brownie, icecream, or milkshake'\nstarter = {ask} 'Which starter would you like to have?'\nmain = {ask} 'Which main course would you like?'\ndessert = {ask} 'Which dessert do you pick?'\nprice = 0\n{if} starter {is} soup price = price + 6 {else} price = price + 7\n{if} main {is} pizza price = price + 10\n{if} main {is} lasagne price = price + 12\n{if} main {is} spaghetti price = price + 8\n{if} dessert {is} brownie price = price + 7\n{if} dessert {is} icecream price = price + 5\n{if} dessert {is} milkshake price = price + 4\n{print} 'You have ordered ' starter ' , ' main ' and ' dessert\n{print} 'That will be ' price ' dollars, please'\n{print} 'Thank you, enjoy your meal!'\n```\n## Challenge\nYou can add many more things to your virtual restaurant. For example, can you...\n- {ask} how many people are coming and multiply the price by that amount?\n- add another course?\n- give people a discount when they enter a (secret) couponcode?\n- add a children's menu?\n- think of other fun things to add?\n"
-                example_code: "## Exemplo de código Hedy (Simple)\nYou can make a simple restaurant code, like this:\n```\n{print} 'Welcome to Hedys restaurant'\n{print} 'Here is our menu:'\n{print} 'Our main courses are pizza, lasagne, or spaghetti'\nmain = {ask} 'Which main course would you like?'\nprice = 0\n{if} main {is} pizza price = 10\n{if} main {is} lasagne price = 12\n{if} main {is} spaghetti price = 8\n{print} 'You have ordered ' main\n{print} 'That will be ' price ' dollars, please'\n{print} 'Thank you, enjoy your meal!'\n```\n"
-                start_code: '# place your code here'
-            5:
-                story_text: "## Restaurant\nIn this level the {if} command allows you to {ask} your customers questions and give different responses to the answers.\nIn the example below, you see that you can {ask} the customer {if} they want to hear the specials and Hedy can respond accordingly.\n"
-                example_code: "## Exemplo de código Hedy\n\n```\n{print} 'Welcome to Hedys restaurant!'\nspecial {is} {ask} 'Would you like to hear our specials today?'\n{if} special {is} yes {print} 'Todays special is chicken piri piri and rice.' {else} {print} 'No problem.'\nfood {is} {ask} 'What would you like to eat?'\n{print} 'One ' food ', coming right up!'\ndrink {is} {ask} 'What would you like to drink with that?'\n{if} drink {is} cola {print} 'Im sorry, we are out of cola!' {else} {print} 'Great choice!'\nanything {is} {ask} 'Would you like anything {else}?'\n{print} 'Let me repeat your order...'\n{print} 'One ' food\n{if} drink {is} cola {print} 'and...' {else} {print} 'One ' drink\n{if} anything {is} no {print} 'Thats it!' {else} {print} 'One ' anything\n{print} 'Thank you for your order and enjoy your meal!'\n```\n\n## Challenge\nCan you think of more questions to {ask} the customers when they are ordering, and make up different responses to their answers by using the {if} command?\n"
-                start_code: '# place your code here'
-                story_text_2: "## Challenge\nCan you think of more questions to {ask} the customers when they are ordering, and make up different responses to their answers by using the {if} command?\n"
             1:
-                example_code: "## Exemplo de código Hedy\n\n  ```\n {print} Welcome to Hedy's restaurant \U0001F35F\n {ask} What would you like to order?\n {echo} So you would like to order\n {print} Thanks you for your order!\n {print} It's on its way!\n ```\n\n## Challenge\nCan you think of more lines to add to your restaurant code? For example, can you {ask} the guests what they'd like to drink, tell them the price, or wish them a pleasant meal?\n"
-                story_text: "## Restaurant\n In level 1 you can make your own virtual restaurant and take your guests' orders.\n"
-                start_code: '# place your code here'
-                story_text_2: "## Challenge\nCan you think of more lines to add to your restaurant code? For example, can you {ask} the guests what they'd like to drink, tell them the price, or wish them a pleasant meal?\n"
-            3:
-                story_text_2: "## Allergies\nDoes your costumer have any allergies or do they dislike certain dishes? Then you can use the `{remove}`command to remove it from your menu.\n"
-                example_code_2: "```\n{print} Mystery milkshake\nflavors {is} strawberry, chocolate, vanilla\nallergies {is} {ask} Are you allergic to any falvors?\n{remove} allergies {from} flavors\n{print} You get a flavors {at} {random} milkshake\n```\n"
-                story_text: "## Random Restaurant\nHaving trouble to decide what you wanna have for dinner? You can let Hedy choose for you!\nSimply add lists of your favorite (or least favorite) meals and Hedy can randomly choose your dinner.\nYou can also have a bit of fun, by letting Hedy choose the price for your dinner as well! What will you get?\n"
-                example_code: "## Exemplo de código Hedy\n\n```\n{print} Welcome to Hedy's Random Restaurant!\n{print} The only restaurant that will randomly choose your meal and its price for you!\nstarters {is} salad, soup, carpaccio\nmains {is} pizza, brussels sprouts, spaghetti\ndesserts {is} brownies, ice cream, french cheeses\ndrinks {is} cola, beer, water\nprices {is} 1 dollar, 10 dollars, 100 dollars\n{print} You will start with: starters {at} {random}\n{print} Then we'll serve: mains {at} {random}\n{print} And as dessert: desserts {at} {random}\n{print} You will get a drinks {at} {random} to drink\n{print} That will be: prices {at} {random}\n{print} Thank you and enjoy your meal!\n```\n"
-                start_code: '# place your code here'
+                story_text: |
+                    ## Restaurant
+                     In level 1 you can make your own virtual restaurant and take your guests' orders.
+                example_code: |
+                    ## Example Hedy code
+
+                      ```
+                     {print} Welcome to Hedy's restaurant 🍟
+                     {ask} What would you like to order?
+                     {echo} So you would like to order
+                     {print} Thanks you for your order!
+                     {print} It's on its way!
+                     ```
+                story_text_2: |
+                    ## Challenge
+                    Can you think of more lines to add to your restaurant code? For example, can you {ask} the guests what they'd like to drink, tell them the price, or wish them a pleasant meal?
+                start_code: "# place your code here"
             2:
-                story_text: "## Restaurant\nIn level 2 you could expand your restaurant by using variables. In level 1 Hedy could only {echo} the order once and only remember the last thing that was ordered.\nNow you can use variables and Hedy can remember both the food and the drinks!\n"
-                example_code: "## Exemplo de código Hedy\n```\n{print} Welcome to Hedy's restaurant!\n{print} Today we're serving pizza or lasagna.\nfood {is} {ask} What would you like to eat?\n{print} Great choice! The food is my favorite!\ntopping {is} {ask} Would you like meat or veggies on that?\n{print} food with topping is on its way!\ndrinks {is} {ask} What would you like to drink with that?\n{print} Thank you for your order.\n{print} Your food and drinks will be right there!\n```\n"
-                start_code: '# place your code here'
-            11:
-                story_text: "## Restaurant\nWe can use the `{for} i {in} {range} 1 {to} 5` to {print} the orders from multiple customers in an orderly manner.\n"
-                example_code: "## Exemplo de código Hedy\n\n```\n{print} 'Welcome to Restaurant Hedy!'\npeople = {ask} 'For how many people would you like to order?'\n{for} i {in} {range} 1 {to} people\n    {print} 'Order number ' i\n    food = {ask} 'What would you like to eat?'\n    {print} food\n    {if} food {is} fries\n        sauce = {ask} 'What kind of sauce would you like with that?'\n        {print} sauce\n    drinks = {ask} 'What would you like to drink?'\n    {print} drinks\nprice = 4 * people\n{print} 'That will be ' price ' dollars, please!'\n```\n"
-                start_code: '# place your code here'
-            8:
-                story_text: "## Restaurant\nIn this level you can make your virtual restaurant more elaborate by repeating multiple lines of code. Like this:\n"
-                example_code: "```\n{print} 'Welcome to Hedys restaurant!'\npeople = {ask} 'How many people will be joining us today?'\n{print} 'Great!'\n{repeat} people {times}\n    food = {ask} 'What would you like to order?'\n    {print} food\n{print} 'Thank you for ordering!'\n{print} 'Enjoy your meal!'\n```\n\n## Challenge\nOf course, this code can be expanded with more items on the menu, offering drinks, and/or multiple courses, so feel free to add as many options as you like!\n"
-                start_code: '# place your code here'
-                story_text_2: "## Challenge\nOf course, this code can be expanded with more items on the menu, offering drinks, and/or multiple courses, so feel free to add as many options as you like!\n"
-            7:
-                story_text: "## Restaurant\nIn this level you've learned how to use the {repeat} command to repeat a line of code a certain amount of times.\nYou can use that in your restaurant to {ask} multiple people what they'd like to eat. Like this:\n\n```\n{print} 'Welcome to Hedys restaurant!'\npeople = {ask} 'How many people are joining us today?'\n{repeat} people times food = {ask} 'What would you like to eat?'\n{print} 'Thanks for your order! Its coming right up!'\n```\n"
-                start_code: '# place your code here'
-                example_code: "```\n{print} 'Welcome to Hedys restaurant!'\npeople = {ask} 'How many people are joining us today?'\n{repeat} people times food = {ask} 'What would you like to eat?'\n{print} 'Thanks for your order! Its coming right up!'\n```\n"
+                story_text: |
+                    ## Restaurant
+                    In level 2 you could expand your restaurant by using variables. In level 1 Hedy could only {echo} the order once and only remember the last thing that was ordered.
+                    Now you can use variables and Hedy can remember both the food and the drinks!
+                example_code: |
+                    ## Example Hedy Code
+                    ```
+                    {print} Welcome to Hedy's restaurant!
+                    {print} Today we're serving pizza or lasagna.
+                    food {is} {ask} What would you like to eat?
+                    {print} Great choice! The food is my favorite!
+                    topping {is} {ask} Would you like meat or veggies on that?
+                    {print} food with topping is on its way!
+                    drinks {is} {ask} What would you like to drink with that?
+                    {print} Thank you for your order.
+                    {print} Your food and drinks will be right there!
+                    ```
+                start_code: "# place your code here"
+            3:
+                story_text: |
+                    ## Random Restaurant
+                    Having trouble to decide what you wanna have for dinner? You can let Hedy choose for you!
+                    Simply add lists of your favorite (or least favorite) meals and Hedy can randomly choose your dinner.
+                    You can also have a bit of fun, by letting Hedy choose the price for your dinner as well! What will you get?
+
+                example_code: |
+                    ## Example Hedy code
+
+                    ```
+                    {print} Welcome to Hedy's Random Restaurant!
+                    {print} The only restaurant that will randomly choose your meal and its price for you!
+                    starters {is} salad, soup, carpaccio
+                    mains {is} pizza, brussels sprouts, spaghetti
+                    desserts {is} brownies, ice cream, french cheeses
+                    drinks {is} cola, beer, water
+                    prices {is} 1 dollar, 10 dollars, 100 dollars
+                    {print} You will start with: starters {at} {random}
+                    {print} Then we'll serve: mains {at} {random}
+                    {print} And as dessert: desserts {at} {random}
+                    {print} You will get a drinks {at} {random} to drink
+                    {print} That will be: prices {at} {random}
+                    {print} Thank you and enjoy your meal!
+                    ```
+                story_text_2: |
+                    ## Allergies
+                    Does your costumer have any allergies or do they dislike certain dishes? Then you can use the `{remove}`command to remove it from your menu.
+
+                example_code_2: |
+                    ```
+                    {print} Mystery milkshake
+                    flavors {is} strawberry, chocolate, vanilla
+                    allergies {is} {ask} Are you allergic to any falvors?
+                    {remove} allergies {from} flavors
+                    {print} You get a flavors {at} {random} milkshake
+                    ```
+                start_code: "# place your code here"
             4:
-                story_text: "## Restaurant\nIn thsi level you have to use quotation marks when using the `{print}` command.\nCan you make your code from the previous levels work in this level too by adding the quotation marks?\n\nBe careful! In the previous levels apostrophes were allowed in the text, but in this level Hedy will confuse them for quotation marks and the code will not work!\nSo instead of typing  `{print} Today we're serving pizza` , you should type `{print} 'Today we are serving pizza'`\n\n## Example Hedy Restaurant\n```\n{print} 'Welcome to Hedys restaurant!'\n{print} 'Today we are serving pizza or lasagna.'\nfood {is} {ask} 'What would you like to eat?'\n{print} 'Great choice! The ' food ' is my favorite!'\ntopping {is} {ask} 'Would you like meat or veggies on that?'\n{print} food ' with ' topping ' is on its way!'\ndrinks {is} {ask} 'What would you like to drink with that?'\n{print} 'Thank you for your order.'\n{print} 'Your ' food ' and ' drinks ' will be right there!'\n```\n"
-                start_code: '# place your code here'
-                example_code: "## Example Hedy Restaurant\n```\n{print} 'Welcome to Hedys restaurant!'\n{print} 'Today we are serving pizza or lasagna.'\nfood {is} {ask} 'What would you like to eat?'\n{print} 'Great choice! The ' food ' is my favorite!'\ntopping {is} {ask} 'Would you like meat or veggies on that?'\n{print} food ' with ' topping ' is on its way!'\ndrinks {is} {ask} 'What would you like to drink with that?'\n{print} 'Thank you for your order.'\n{print} 'Your ' food ' and ' drinks ' will be right there!'\n```\n"
-            15:
-                story_text: "## Restaurant\nWith the `{while}` you can make sure your costumers can keep adding orders until they are done.\n"
-                example_code: "## Exemplo de código Hedy\n\n```\n{print} 'Welcome at McHedy'\nmore = 'yes'\n{while} more == 'yes'\n    order = {ask} 'What would you like to order?'\n    {print} order\n    more = {ask} 'Would you like to order anything {else}?'\n{print} 'Thank you!'\n"
-                start_code: '# place your code here'
+                story_text: |
+                    ## Restaurant
+                    In thsi level you have to use quotation marks when using the `{print}` command.
+                    Can you make your code from the previous levels work in this level too by adding the quotation marks?
+
+                    Be careful! In the previous levels apostrophes were allowed in the text, but in this level Hedy will confuse them for quotation marks and the code will not work!
+                    So instead of typing  `{print} Today we're serving pizza` , you should type `{print} 'Today we are serving pizza'`
+                example_code: |
+                    ## Example Hedy Restaurant
+                    ```
+                    {print} 'Welcome to Hedys restaurant!'
+                    {print} 'Today we are serving pizza or lasagna.'
+                    food {is} {ask} 'What would you like to eat?'
+                    {print} 'Great choice! The ' food ' is my favorite!'
+                    topping {is} {ask} 'Would you like meat or veggies on that?'
+                    {print} food ' with ' topping ' is on its way!'
+                    drinks {is} {ask} 'What would you like to drink with that?'
+                    {print} 'Thank you for your order.'
+                    {print} 'Your ' food ' and ' drinks ' will be right there!'
+                    ```
+                start_code: "# place your code here"
+            5:
+                story_text: |
+                    ## Restaurant
+                    In this level the {if} command allows you to {ask} your customers questions and give different responses to the answers.
+                    In the example below, you see that you can {ask} the customer {if} they want to hear the specials and Hedy can respond accordingly.
+
+                example_code: |
+                    ## Example Hedy code
+
+                    ```
+                    {print} 'Welcome to Hedys restaurant!'
+                    special {is} {ask} 'Would you like to hear our specials today?'
+                    {if} special {is} yes {print} 'Todays special is chicken piri piri and rice.' {else} {print} 'No problem.'
+                    food {is} {ask} 'What would you like to eat?'
+                    {print} 'One ' food ', coming right up!'
+                    drink {is} {ask} 'What would you like to drink with that?'
+                    {if} drink {is} cola {print} 'Im sorry, we are out of cola!' {else} {print} 'Great choice!'
+                    anything {is} {ask} 'Would you like anything {else}?'
+                    {print} 'Let me repeat your order...'
+                    {print} 'One ' food
+                    {if} drink {is} cola {print} 'and...' {else} {print} 'One ' drink
+                    {if} anything {is} no {print} 'Thats it!' {else} {print} 'One ' anything
+                    {print} 'Thank you for your order and enjoy your meal!'
+                    ```
+                story_text_2: |
+                    ## Challenge
+                    Can you think of more questions to {ask} the customers when they are ordering, and make up different responses to their answers by using the {if} command?
+
+                start_code: "# place your code here"
+            6:
+                story_text: |
+                    ## Restaurant
+                    In this level you can use maths to calculate the total price of your customer's order, which can make your virtual restaurant more realistic.
+
+                example_code: |
+                    ## Example Hedy code (Simple)
+                    You can make a simple restaurant code, like this:
+                    ```
+                    {print} 'Welcome to Hedys restaurant'
+                    {print} 'Here is our menu:'
+                    {print} 'Our main courses are pizza, lasagne, or spaghetti'
+                    main = {ask} 'Which main course would you like?'
+                    price = 0
+                    {if} main {is} pizza price = 10
+                    {if} main {is} lasagne price = 12
+                    {if} main {is} spaghetti price = 8
+                    {print} 'You have ordered ' main
+                    {print} 'That will be ' price ' dollars, please'
+                    {print} 'Thank you, enjoy your meal!'
+                    ```
+                story_text_2: |
+                    But you can also add many more things to your virtual restaurant, for example more courses.
+
+                    ## Challenge
+                    You can add many more things to your virtual restaurant. For example, can you...
+                    - {ask} how many people are coming and multiply the price by that amount?
+                    - add another course?
+                    - give people a discount when they enter a (secret) couponcode?
+                    - add a children's menu?
+                    - think of other fun things to add?
+                example_code_2: |
+                    ## Example Hedy code (Elaborate)
+                    In this example there are three courses, which requires more code and more additions in calculating the price.
+                    ```
+                    {print} 'Welcome to Hedys restaurant'
+                    {print} 'Here is our menu:'
+                    {print} 'Our starters are salad, soup, or carpaccio'
+                    {print} 'Our main courses are pizza, lasagne, or spaghetti'
+                    {print} 'Our desserts are brownie, icecream, or milkshake'
+                    starter = {ask} 'Which starter would you like to have?'
+                    main = {ask} 'Which main course would you like?'
+                    dessert = {ask} 'Which dessert do you pick?'
+                    price = 0
+                    {if} starter {is} soup price = price + 6 {else} price = price + 7
+                    {if} main {is} pizza price = price + 10
+                    {if} main {is} lasagne price = price + 12
+                    {if} main {is} spaghetti price = price + 8
+                    {if} dessert {is} brownie price = price + 7
+                    {if} dessert {is} icecream price = price + 5
+                    {if} dessert {is} milkshake price = price + 4
+                    {print} 'You have ordered ' starter ' , ' main ' and ' dessert
+                    {print} 'That will be ' price ' dollars, please'
+                    {print} 'Thank you, enjoy your meal!'
+                    ```
+                start_code: "# place your code here"
+            7:
+                story_text: |
+                    ## Restaurant
+                    In this level you've learned how to use the {repeat} command to repeat a line of code a certain amount of times.
+                    You can use that in your restaurant to {ask} multiple people what they'd like to eat. Like this:
+                example_code: |
+                    ```
+                    {print} 'Welcome to Hedys restaurant!'
+                    people = {ask} 'How many people are joining us today?'
+                    {repeat} people times food = {ask} 'What would you like to eat?'
+                    {print} 'Thanks for your order! Its coming right up!'
+                    ```
+                start_code: "# place your code here"
+            8:
+                story_text: |
+                    ## Restaurant
+                    In this level you can make your virtual restaurant more elaborate by repeating multiple lines of code. Like this:
+                example_code: |
+                    ```
+                    {print} 'Welcome to Hedys restaurant!'
+                    people = {ask} 'How many people will be joining us today?'
+                    {print} 'Great!'
+                    {repeat} people {times}
+                        food = {ask} 'What would you like to order?'
+                        {print} food
+                    {print} 'Thank you for ordering!'
+                    {print} 'Enjoy your meal!'
+                    ```
+                story_text_2: |
+                    ## Challenge
+                    Of course, this code can be expanded with more items on the menu, offering drinks, and/or multiple courses, so feel free to add as many options as you like!
+                start_code: "# place your code here"
+            9:
+                story_text: |
+                    ## Restaurant
+                    In this level you can use nesting to make your restaurant more realistic and more fun!
+                    For example you would {ask} for sauce {if} somebody orders fries, but you wouldn't {if} someone orders pizza!
+                    Check out the example, and try this at your own virtual restaurant!
+                example_code: |
+                    ## Example Hedy code
+
+                    ```
+                    {print} 'Welcome to Hedys restaurant!'
+                    people = {ask} 'How many people will be joining us today?'
+                    {print} 'Great!'
+                    price = 0
+                    {repeat} people {times}
+                        food = {ask} 'What would you like to order?'
+                        {print} food
+                        {if} food {is} fries
+                            price = price + 3
+                            sauce = {ask} 'What kind of sauce would you like with your fries?'
+                            {if} sauce {is} no
+                                {print} 'no sauce'
+                            {else}
+                                price = price + 1
+                                {print} 'with ' sauce
+                        {if} food {is} pizza
+                            price = price + 4
+                    {print} 'That will be ' price ' dollar'
+                    {print} 'Enjoy your meal!'
+                    ```
+                start_code: "# place your code here"
+            10:
+                story_text: |
+                    ## Restaurant
+                    In this level you'll learn how to easily {ask} your guests' orders in a short code.
+                example_code: |
+                    ## Example Hedy code
+
+                    ```
+                    courses = appetizer, main course, dessert
+                    {for} course {in} courses
+                        food = {ask} 'What would you like to eat as your ' course '?'
+                        {print} food ' will be your ' course
+                    ```
+                story_text_2: |
+                    ## Example Hedy code
+
+                    Of course, you could also order for multiple people!
+                example_code_2: |
+                    ```
+                    courses = appetizer, main course, dessert
+                    names = Timon, Onno
+                    {for} name {in} names
+                        {for} course {in} courses
+                            food = {ask} name ', what would you like to eat as your ' course '?'
+                            {print} name ' orders ' food ' as their ' course
+                    ```
+                start_code: "courses = appetizer, main course, dessert"
+            11:
+                story_text: |
+                    ## Restaurant
+                    We can use the `{for} i {in} {range} 1 {to} 5` to {print} the orders from multiple customers in an orderly manner.
+                example_code: |
+                    ## Example Hedy code
+
+                    ```
+                    {print} 'Welcome to Restaurant Hedy!'
+                    people = {ask} 'For how many people would you like to order?'
+                    {for} i {in} {range} 1 {to} people
+                        {print} 'Order number ' i
+                        food = {ask} 'What would you like to eat?'
+                        {print} food
+                        {if} food {is} fries
+                            sauce = {ask} 'What kind of sauce would you like with that?'
+                            {print} sauce
+                        drinks = {ask} 'What would you like to drink?'
+                        {print} drinks
+                    price = 4 * people
+                    {print} 'That will be ' price ' dollars, please!'
+                    ```
+                start_code: "# place your code here"
+            12:
+                story_text: |
+                    ## Restaurant
+                    From this level on you can use decimal numbers to make you menu more realistic.
+                example_code: |
+                    ## Example Hedy code
+
+                    ```
+                    price = 0
+                    food = {ask} 'What would you like to order?'
+                    drinks = {ask} 'What would you like to drink?'
+                    {if} food {is} 'hamburger'
+                        price = price + 6.50
+                    {if} food {is} 'pizza'
+                        price = price + 5.75
+                    {if} drinks {is} 'water'
+                        price = price + 1.20
+                    {if} drink {is} 'soda'
+                        price = price + 2.35
+                    {print} 'That will be ' price ' dollar, please'
+                    ```
+                start_code: "# place your code here"
             13:
-                example_code_2: "## Exemplo de código Hedy\n```\ndrinks = {ask} 'What would you like to drink?'\n{if} drinks {is} 'water' {or} drinks {is} 'juice'\n    {print} 'Thats a healthy choice'\n```\n"
-                story_text: "## Restaurant\nIn this level we can use the new commands to upgrade our restaurant.\nWe use `{and}` to see {if} two things are both the case.\n"
-                example_code: "## Exemplo de código Hedy\n```\nprice = 10\nfood = {ask} 'What would you like to eat?'\ndrinks = {ask} 'What would you like to drink?'\n{if} food {is} 'sandwich' {and} drinks {is} 'juice'\n    {print} 'Thats our discount menu'\n    price = price - 3\n{print} 'That will be ' price ' dollars'\n```\n"
-                story_text_2: "We use `{or}` to see {if} one our of two things is the case.\n"
-                start_code: '# place your code here'
+                story_text: |
+                    ## Restaurant
+                    In this level we can use the new commands to upgrade our restaurant.
+                    We use `{and}` to see {if} two things are both the case.
+
+                example_code: |
+                    ## Example Hedy code
+                    ```
+                    price = 10
+                    food = {ask} 'What would you like to eat?'
+                    drinks = {ask} 'What would you like to drink?'
+                    {if} food {is} 'sandwich' {and} drinks {is} 'juice'
+                        {print} 'Thats our discount menu'
+                        price = price - 3
+                    {print} 'That will be ' price ' dollars'
+                    ```
+                story_text_2: |
+                    We use `{or}` to see {if} one our of two things is the case.
+
+                example_code_2: |
+                    ## Example Hedy code
+                    ```
+                    drinks = {ask} 'What would you like to drink?'
+                    {if} drinks {is} 'water' {or} drinks {is} 'juice'
+                        {print} 'Thats a healthy choice'
+                    ```
+                start_code: "# place your code here"
+            15:
+                story_text: |
+                    ## Restaurant
+                    With the `{while}` you can make sure your costumers can keep adding orders until they are done.
+
+                example_code: |
+                    ## Example Hedy code
+
+                    ```
+                    {print} 'Welcome at McHedy'
+                    more = 'yes'
+                    {while} more == 'yes'
+                        order = {ask} 'What would you like to order?'
+                        {print} order
+                        more = {ask} 'Would you like to order anything {else}?'
+                    {print} 'Thank you!'
+                    ```
+                start_code: "# place your code here"
     fortune:
         description: Let Hedy predict the future
         levels:
@@ -832,48 +1142,251 @@ adventures:
         name: Fortune teller
         default_save_name: Fortune Teller
     haunted:
-        name: Haunted House
-        description: escape from the haunted house
-        default_save_name: Haunted House
+        name: "Haunted House"
+        description: "Escape from the haunted house"
+        default_save_name: "Haunted House"
         levels:
             1:
-                start_code: '{print} How did I get here?'
-                story_text: "## Haunted house\nIn this adventure you are working towards making a game in which you have to escape from a haunted house by picking the correct door.\nIf you pick the right door you'll survive, but {if} not a terrible monster might...\n\nIn level 1 we start our haunted house game by making up a scary story and {ask} the player what monster they'll see in the haunted house.\n"
-                example_code: "## Exemplo de código Hedy\n\n\n```\n{print} How did I get here?\n{print} I remember my friend telling me to go into the old mansion...\n{print} and suddenly everything went black.\n{print} But how did I end up on the floor...?\n{print} My head hurts like Ive been hit by a baseball bat!\n{print} What's that sound?\n{print} Oh no! I feel like Im not alone in this house!\n{print} I need to get out of here!\n{print} There are 3 doors in front of me..\n{ask} Which door should i pick?\n{echo} I choose door\n{print} ...?\n```\n\n## Challenge\nCan you finish the scary story? Or make up your own haunted house story?\n"
-                story_text_2: "## Challenge\nCan you finish the scary story? Or make up your own haunted house story?\n"
+                story_text: |
+                    ## Haunted house
+                    In this adventure you are working towards making a game in which you have to escape from a haunted house by picking the correct door.
+                    If you pick the right door you'll survive, but {if} not a terrible monster might...
+
+                    In level 1 we start our haunted house game by making up a scary story and {ask} the player what monster they'll see in the haunted house.
+                example_code: |
+                    ## Example Hedy code
+
+
+                    ```
+                    {print} How did I get here?
+                    {print} I remember my friend telling me to go into the old mansion...
+                    {print} and suddenly everything went black.
+                    {print} But how did I end up on the floor...?
+                    {print} My head hurts like Ive been hit by a baseball bat!
+                    {print} What's that sound?
+                    {print} Oh no! I feel like Im not alone in this house!
+                    {print} I need to get out of here!
+                    {print} There are 3 doors in front of me..
+                    {ask} Which door should i pick?
+                    {echo} I choose door
+                    {print} ...?
+                    ```
+                story_text_2: |
+                    ## Challenge
+                    Can you finish the scary story? Or make up your own haunted house story?
+                start_code: "{print} How did I get here?"
             2:
-                start_code: monster1 {is} _
-                story_text: "## Haunted House\nIn this haunted house you can choose your monsters with emojis. Of course you could also use words.\n\n## Exemplo de código Hedy\n```\nmonster1 {is} \U0001F47B\nmonster2 {is} \U0001F921\nmonster3 {is} \U0001F476\n{print} You enter the haunted house.\n{print} Suddenly you see a monster1\n{print} You run into the other room, but a monster2 is waiting there for you!\n{print} Oh no! Quickly get to the kitchen.\n{print} But as you enter monster3 attacks you!\n```\n"
-                example_code: "## Exemplo de código Hedy\n```\nmonster_1 {is} \U0001F47B\nmonster_2 {is} \U0001F921\nmonster_3 {is} \U0001F476\n{print} You enter the haunted house.\n{print} Suddenly you see a monster_1\n{print} You run into the other room, but a monster_2 is waiting there for you!\n{print} Oh no! Quickly get to the kitchen.\n{print} But as you enter monster_3 attacks you!\n```\n"
-            14:
-                story_text: "## Haunted House\nIn this level you can use the `<` and `>` symbol to introduce lives to your game.\n"
-                example_code: "## Exemplo de código Hedy\n\n```\n{print} 'Escape from the haunted house'\nlives = 3\ndoors = 1, 2, 3\nmonsters = 'the wicked witch', 'a zombie', 'a sleeping 3 headed dog'\n{for} i {in} {range} 1 {to} 10\n    {if} lives > 0\n        good_door = doors {at} {random}\n        monster = monsters {at} {random}\n        chosen_door = {ask} 'Which door do you choose?'\n        {if} good_door == chosen_door\n            {print} 'You have chosen the correct door'\n        {else}\n            {print} 'You see...' monster\n            {if} monster == 'a sleeping 3 headed dog'\n                {print} 'Pffieuw.... Its asleep'\n            {else}\n                {print} 'You lose one life'\n                lives = lives -1\n    {else}\n        {print} 'GAME OVER'\n```\n"
-                start_code: '# place your code here'
-            11:
-                start_code: "{print} 'Escape from the haunted house!'"
-                story_text: "## Haunted House\nIn this level we've changed the repeat command and we've added a line to our haunted house that tells the player in which room they are.\n"
-                example_code: "## Exemplo de código Hedy\n\n```\n{print} 'Escape from the Haunted House!'\nplayer {is} alive\ndoors = 1, 2, 3\nmonsters = zombie, vampire, giant spider\n{for} i {in} {range} 1 {to} 3\n    {if} player {is} alive\n        correct_door = doors {at} {random}\n        {print} 'Room ' i\n        {print} 'There are 3 doors in front of you...'\n        chosendoor = {ask} 'Which door do you choose?'\n        {if} chosendoor {is} correct_door\n            {print} 'No monsters here!'\n        {else}\n            {print} 'You are eaten by a ' monsters {at} {random}\n            player = dead\n    {else}\n        {print} 'GAME OVER'\n{if} player {is} alive\n    {print} 'Great! You survived!'\n```\n"
-            9:
-                story_text: "## Haunted House\nIn this level you can use nesting, which allows you to make the haunted house even more interactive!\n"
-                example_code: "## Exemplo de código Hedy\n\n```\n{print} 'Escape from the Haunted House!'\nplayer = alive\ndoors = 1, 2, 3\nmonsters = zombie, vampire, giant spider\n{repeat} 3 {times}\n    {if} player {is} alive\n        correct_door {is} doors {at} {random}\n        {print} 'There are 3 doors in front of you...'\n        chosen_door = {ask} 'Which door do you choose?'\n        {if} chosen_door {is} correct_door\n            {print} 'No monsters here!'\n        {else}\n            {print} 'You are eaten by a ' monsters {at} {random}\n            player = dead\n    {else}\n        {print} 'GAME OVER'\n{if} player {is} alive\n    {print} 'Great! You survived!'\n```\n## Challenge\nNow it's very hard to win this game, can you make it easier to win?\nFor example by only having 1 wrong door and 2 correct doors instead of 1 correct door en 2 wrong ones?\n"
-                start_code: "{print} 'Escape from the haunted house!'"
-            5:
-                story_text: "## Haunted House\nUp until this level the haunted house game always asked the player to choose a door, but as you might have noticed, they didn't really have to answer correctly.\nIf the player filled in a completely random answer, the game would still work and the player might even win (despite not picking a door).\nIn this level you can only win the game by picking the same door Hedy picked randomly.\n"
-                example_code: "## Exemplo de código Hedy\n\n```\n{print} 'Escape from the haunted house!'\n{print} 'There are 3 doors in front of you...'\ndoors {is} 1, 2, 3\nmonsters {is} werewolf, mummy, vampire, zombie\nchosen_door {is} {ask} 'Which door do you choose?'\n{print} 'You chose door...' chosen_door\n{sleep}\ncorrect_door {is} doors {at} {random}\n{if} chosen_door {is} correct_door {print} 'Great! Youve escaped!'\n{else} {print} 'Oh no! You are being eaten by a...' monsters {at} {random}\n```\n"
-                start_code: '# place your code here'
-            4:
-                story_text: "## Haunted house\nIn this level you learn how to use quotation marks in your games.\nCan you make your Haunted House level 4 proof?\n"
-                start_code: '# place your code here'
-                example_code: "```\n{print} _Escape from the haunted house!_\n{print} _There are 3 doors in front of you..._\nchoice {is} {ask} _Which door do you choose?_\n{print} _You picked door ..._ choice\nmonsters {is} a zombie, a vampire, NOTHING YOUVE ESCAPED\n{print} _You see..._\n{sleep}\n{print} monsters {at} {random}\n ```\n"
+                story_text: |
+                    ## Haunted House
+                    In this haunted house you can choose your monsters with emojis. Of course you could also use words.
+                example_code: |
+                    ## Example Hedy Code
+                    ```
+                    monster_1 {is} 👻
+                    monster_2 {is} 🤡
+                    monster_3 {is} 👶
+                    {print} You enter the haunted house.
+                    {print} Suddenly you see a monster_1
+                    {print} You run into the other room, but a monster_2 is waiting there for you!
+                    {print} Oh no! Quickly get to the kitchen.
+                    {print} But as you enter monster_3 attacks you!
+                    ```
+                start_code: "monster1 {is} _"
             3:
-                story_text: "## Haunted house game\nIn the previous levels you've made an introduction to your haunted house game, but as you might have noticed the story would always have a dreadful end.\nIn this level you can make your story more interactive by changing the outcome of the game; sometimes you'll get eaten, sometimes you'll escape!\nLet Hedy decide randomly!\n"
-                example_code: "## Exemplo de código Hedy\n\n```\n{print} Escape from the haunted house!\n{print} There are 3 doors in front of you...\nchoice {is} {ask} Which door do you choose?\n{print} You picked door ... choice\nmonsters {is} a zombie, a vampire, NOTHING YOUVE ESCAPED\n{print} You see...\n{sleep}\n{print} monsters {at} {random}\n```\n\n## Challenge\nThis story is pretty straight {forward}, maybe you can spook it up a bit by adding a more exciting story.\nAlso you have very limited outcomes right now, there are only 3 options of what's behind the doors. Maybe you can think of more monsters to add to the list!\n\n## Change the game into a tv gameshow!\nLastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!\nCan you do it?\n"
-                start_code: '# place your code here'
-                story_text_2: "## Challenge\nThis story is pretty straight {forward}, maybe you can spook it up a bit by adding a more exciting story.\nAlso you have very limited outcomes right now, there are only 3 options of what's behind the doors. Maybe you can think of more monsters to add to the list!\n\n## Change the game into a tv gameshow!\nLastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!\nCan you do it?\n"
+                story_text: |
+                    ## Haunted house game
+                    In the previous levels you've made an introduction to your haunted house game, but as you might have noticed the story would always have a dreadful end.
+                    In this level you can make your story more interactive by changing the outcome of the game; sometimes you'll get eaten, sometimes you'll escape!
+                    Let Hedy decide randomly!
+                example_code: |
+                    ## Example Hedy code
+                    ```
+                    {print} Escape from the haunted house!
+                    {print} There are 3 doors in front of you...
+                    choice {is} {ask} Which door do you choose?
+                    {print} You picked door ... choice
+                    monsters {is} a zombie, a vampire, NOTHING YOUVE ESCAPED
+                    {print} You see...
+                    {sleep}
+                    {print} monsters {at} {random}
+                    ```
+                story_text_2: |
+                    ## Challenge
+                    This story is pretty straight {forward}, maybe you can spook it up a bit by adding a more exciting story.
+                    Also you have very limited outcomes right now, there are only 3 options of what's behind the doors. Maybe you can think of more monsters to add to the list!
+
+                    ## Change the game into a tv gameshow!
+                    Lastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!
+                    Can you do it?
+                start_code: "# place your code here"
+            4:
+                story_text: |
+                    ## Haunted house
+                    In this level you learn how to use quotation marks in your games.
+                    Can you make your Haunted House level 4 proof?
+                example_code: |
+                    ```
+                    {print} _Escape from the haunted house!_
+                    {print} _There are 3 doors in front of you..._
+                    choice {is} {ask} _Which door do you choose?_
+                    {print} _You picked door ..._ choice
+                    monsters {is} a zombie, a vampire, NOTHING YOUVE ESCAPED
+                    {print} _You see..._
+                    {sleep}
+                    {print} monsters {at} {random}
+                     ```
+
+                start_code: "# place your code here"
+            5:
+                story_text: |
+                    ## Haunted House
+                    Up until this level the haunted house game always asked the player to choose a door, but as you might have noticed, they didn't really have to answer correctly.
+                    If the player filled in a completely random answer, the game would still work and the player might even win (despite not picking a door).
+                    In this level you can only win the game by picking the same door Hedy picked randomly.
+                example_code: |
+                    ## Example Hedy code
+
+                    ```
+                    {print} 'Escape from the haunted house!'
+                    {print} 'There are 3 doors in front of you...'
+                    doors {is} 1, 2, 3
+                    monsters {is} werewolf, mummy, vampire, zombie
+                    chosen_door {is} {ask} 'Which door do you choose?'
+                    {print} 'You chose door...' chosen_door
+                    {sleep}
+                    correct_door {is} doors {at} {random}
+                    {if} chosen_door {is} correct_door {print} 'Great! Youve escaped!'
+                    {else} {print} 'Oh no! You are being eaten by a...' monsters {at} {random}
+                    ```
+
+                start_code: "# place your code here"
+            9:
+                story_text: |
+                    ## Haunted House
+                    In this level you can use nesting, which allows you to make the haunted house even more interactive!
+
+                    ## Challenge
+                    Now it's very hard to win this game, can you make it easier to win?
+                    For example by only having 1 wrong door and 2 correct doors instead of 1 correct door and 2 wrong ones?
+                example_code: |
+                    ## Example Hedy code
+
+                    ```
+                    {print} 'Escape from the Haunted House!'
+                    player = alive
+                    doors = 1, 2, 3
+                    monsters = zombie, vampire, giant spider
+                    {repeat} 3 {times}
+                        {if} player {is} alive
+                            correct_door {is} doors {at} {random}
+                            {print} 'There are 3 doors in front of you...'
+                            chosen_door = {ask} 'Which door do you choose?'
+                            {if} chosen_door {is} correct_door
+                                {print} 'No monsters here!'
+                            {else}
+                                {print} 'You are eaten by a ' monsters {at} {random}
+                                player = dead
+                        {else}
+                            {print} 'GAME OVER'
+                    {if} player {is} alive
+                        {print} 'Great! You survived!'
+                    ```
+                start_code: "{print} 'Escape from the haunted house!'"
+            11:
+                story_text: |
+                    ## Haunted House
+                    In this level we've changed the repeat command and we've added a line to our haunted house that tells the player in which room they are.
+                example_code: |
+                    ## Example Hedy code
+
+                    ```
+                    {print} 'Escape from the Haunted House!'
+                    player {is} alive
+                    doors = 1, 2, 3
+                    monsters = zombie, vampire, giant spider
+                    {for} i {in} {range} 1 {to} 3
+                        {if} player {is} alive
+                            correct_door = doors {at} {random}
+                            {print} 'Room ' i
+                            {print} 'There are 3 doors in front of you...'
+                            chosendoor = {ask} 'Which door do you choose?'
+                            {if} chosendoor {is} correct_door
+                                {print} 'No monsters here!'
+                            {else}
+                                {print} 'You are eaten by a ' monsters {at} {random}
+                                player = dead
+                        {else}
+                            {print} 'GAME OVER'
+                    {if} player {is} alive
+                        {print} 'Great! You survived!'
+                    ```
+                start_code: "{print} 'Escape from the haunted house!'"
+            14:
+                story_text: |
+                    ## Haunted House
+                    In this level you can use the `<` and `>` symbol to introduce lives to your game.
+                example_code: |
+                    ## Example Hedy code
+
+                    ```
+                    {print} 'Escape from the haunted house'
+                    lives = 3
+                    doors = 1, 2, 3
+                    monsters = 'the wicked witch', 'a zombie', 'a sleeping 3 headed dog'
+                    {for} i {in} {range} 1 {to} 10
+                        {if} lives > 0
+                            good_door = doors {at} {random}
+                            monster = monsters {at} {random}
+                            chosen_door = {ask} 'Which door do you choose?'
+                            {if} good_door == chosen_door
+                                {print} 'You have chosen the correct door'
+                            {else}
+                                {print} 'You see...' monster
+                                {if} monster == 'a sleeping 3 headed dog'
+                                    {print} 'Pffieuw.... Its asleep'
+                                {else}
+                                    {print} 'You lose one life'
+                                    lives = lives -1
+                        {else}
+                            {print} 'GAME OVER'
+                    ```
+                start_code: "# place your code here"
             16:
-                story_text: "## Haunted House Game\nThis haunted house game uses the connection between the lists you can use in this level.\nFor example: all the properties that belong to the zombie are first in all the lists, witch second and vampire third.\nCheck out the code!\n"
-                example_code: "## Exemplo de código Hedy\n\n```\nnumbers = [1, 2, 3]\ni = numbers[random]\nhint = ['growling', 'a cackling laugh', 'fluttering batwings']\nmonsters = ['zombie', 'witch', 'vampire']\nbad_fate = ['Your brain is eaten', 'You are forever cursed', 'You are bitten']\ngood_fate = ['You throw the ham. The zombie is distracted and starts etaing it.', 'You set the curtains on fire. The witch flees out of fear for the fire', 'The vampire hates garlic and flees']\nweapons = ['ham', 'lighter', 'garlic']\n{print} 'You are standing in front of an old mension'\n{print} 'Something is not right here'\n{print} 'You hear ' hint[i]\n{print} 'You are going to explore it'\n{print} 'You enter the kitchen en see a lighter, a raw ham and a garlic.'\nyour_weapon = {ask} 'What do you bring with you?'\n{print} 'With your ' your_weapon ' you enter the living room'\n{print} 'There you find a ' monsters[i]\nneeded_weapon = weapons[i]\n{if} your_weapon == needed_weapon\n    {print} 'You use your ' your_weapon\n    {print} good_fate[i]\n    {print} 'YOU WIN!'\n{else}\n    {print} 'You have chosen the wrong weapon...'\n    {print} bad_fate[i]\n    {print} 'GAME OVER'\n```\n"
-                start_code: '# place your code here'
+                story_text: |
+                    ## Haunted House Game
+                    This haunted house game uses the connection between the lists you can use in this level.
+                    For example: all the properties that belong to the zombie are first in all the lists, witch second and vampire third.
+                    Check out the code!
+                example_code: |
+                    ## Example Hedy code
+
+                    ```
+                    numbers = [1, 2, 3]
+                    i = numbers[{random}]
+                    hint = ['growling', 'a cackling laugh', 'fluttering batwings']
+                    monsters = ['zombie', 'witch', 'vampire']
+                    bad_fate = ['Your brain is eaten', 'You are forever cursed', 'You are bitten']
+                    good_fate = ['You throw the ham. The zombie is distracted and starts etaing it.', 'You set the curtains on fire. The witch flees out of fear for the fire', 'The vampire hates garlic and flees']
+                    weapons = ['ham', 'lighter', 'garlic']
+                    {print} 'You are standing in front of an old mansion'
+                    {print} 'Something is not right here'
+                    {print} 'You hear ' hint[i]
+                    {print} 'You are going to explore it'
+                    {print} 'You enter the kitchen and see a lighter, a raw ham and a garlic.'
+                    your_weapon = {ask} 'What do you bring with you?'
+                    {print} 'With your ' your_weapon ' you enter the living room'
+                    {print} 'There you find a ' monsters[i]
+                    needed_weapon = weapons[i]
+                    {if} your_weapon == needed_weapon
+                        {print} 'You use your ' your_weapon
+                        {print} good_fate[i]
+                        {print} 'YOU WIN!'
+                    {else}
+                        {print} 'You have chosen the wrong weapon...'
+                        {print} bad_fate[i]
+                        {print} 'GAME OVER'
+                    ```
+                start_code: "# place your code here"
     piggybank:
         levels:
             12:
