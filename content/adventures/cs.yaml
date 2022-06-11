@@ -344,13 +344,38 @@ adventures:
                 story_text: Teď trochu změníme odsazení. Pokaždé, když ho budeme potřebovat, musí předchozí řádek končit `:`.
                 example_code: "## Example Hedy Code\n```\nprices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
             18:
-                start_code: "naam = 'Hedy'\n{print}('My name is ', naam)"
-                story_text: "We arrived at real Python code! That means we need to use parentheses with {print} and {range} from now on.\nThat looks like this:\n```\n{print}('my name is Hedy!')\n```\nIf you want to print more thant one items, you need to separate them by commas.\n```\nnaam = 'Hedy'\n{print}('my name is ', naam)\n```"
-                example_code: "## Example Hedy Code\n```\n{print}('my name is Hedy!')\n```\n"
-                story_text_2: If you want to print more than one item, you need to separate them by commas.
-                example_code_2: "```\ntemperature = 25\n{print}('Is is ', temperature, 'degrees outside')\n```\n"
-                story_text_3: "##  Input\nThe final change we will need to make to get Python code is changing `{ask}` into `{input}`."
-                example_code_3: "```\n{print}('My name is Hedy!')\nname = {input}('What is your name?')\n{print}('So your name is ', name)\n```\n"
+                start_code: |-
+                    naam = 'Hedy'
+                    {print}('My name is ', naam)
+                story_text: |-
+                    ## The last level!
+                    We arrived at real Python code! That means we need to use parentheses with {print} and {range} from now on.
+
+                example_code: |
+                    ## Example Hedy Code
+                    ```
+                    {print}('my name is Hedy!')
+                    ```
+
+                story_text_2: |-
+                    If you want to print more than one item, you need to separate them by commas.
+
+                example_code_2: |
+                    ```
+                    temperature = 25
+                    {print}('It is ', temperature, 'degrees outside')
+                    ```
+
+                story_text_3: |-
+                    ##  Input
+                    The final change we will need to make to get Python code is changing `{ask}` into `{input}`.
+
+                example_code_3: |
+                    ```
+                    {print}('My name is Hedy!')
+                    name = {input}('What is your name?')
+                    {print}('So your name is ', name)
+                    ```
     story:
         name: Story
         description: Story

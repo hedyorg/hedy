@@ -236,84 +236,6 @@ adventures:
                     if name is 'Hedy' and age is 2
                         print 'You are the real Hedy!'
                 story_text: "Kita sekarang akan belajar menggunakan perintah `and` dan `or`! Jika kamu mau mengecek apakah dua kondisi terpenuhi, kamu tidak perlu menggunakan dua `if`. Kamu dapat menggunakan `and` untuk menggabungkan kedua kondisi, sisi kiri dan kanan dari `and` harus terpenuhi keduanya. Kamu dapat menggunakan `or` jika hanya salah satu dari dua kondisi yang perlu dipenuhi. "
-                #16:
-                #    start_code: |-
-                #        # Ini adalah sebuah program yang akan menanyakan beberapa pertanyaan matematika
-                #        for i in range(1, 10):
-                #            # Kita akan mulai menanyakan tabel perkalian 5
-                #            jawaban is input('Apa hasil dari ' i ' kali 5?')
-                #            # Kita mengecek apakah jawaban tersebut benar
-                #            jawaban_benar is i * 5
-                #            if jawaban is jawaban_benar:
-                #                print(jawaban ' benar')
-                #            else:
-                #                print('Itu salah, seharusnya dijawab: ' i*5)
-                #    story_text: 'Ketika kita membuat program yang lebih besar, kita perlu sebuah cara untuk mengingat apa yang dilakukan oleh setiap bagian program. Kita dapat menggunakan komentar untuk ini. Sebuah komentar terlihat sebagai berikut: ` # Ini sebuah komentar`. Apapun yang ada setelah simbol # tidak akan diperhitungkan oleh program.'
-                #    commands:
-                #    -   name: Komentar
-                #        explanation: Kita dapat menggunakan komentar kapanpun kita mau
-                #        example: '# Ini sebuah komentar'
-                #        demo_code: |-
-                #            # Program ini menampilkan Halo!
-                #            # Ini dibuat di Hedy
-                #            # Ini tidak melakukan apa-apa selain menampilkan Halo!
-                #            print('Halo!')
-                #20:
-                #    start_code: |-
-                #        buah = ['apel', 'pisang', 'ceri']
-                #        for i in range(1, 3):
-                #            print(buah[i])
-                #    story_text: Kita juga bisa melihat semua nilai didalam list dengan pengulangan. Karena ada tiga nilai dalam list, kita melakukan pengulangan dari 1 ke 3. Sekarang kita bisa menampilkan semua nilai didalam sebuah pengulangan.
-                #    commands:
-                #    -   name: Ukuran dari list
-                #        explanation: Dengan `length` kita dapat mengetahui ukuran dari sebuah list. List pada contoh berukuran 3 karena ada tiga nilai didalamnya.
-                #        example: length(list)
-                #        demo_code: |-
-                #            buah = ['apel', 'pisang', 'ceri']
-                #            print('Ukuran dari sebuah list adalah ' length(buah))
-                #            for i in range(1, length(buah)):
-                #                print(buah[i])
-                #21:
-                #    start_code: |-
-                #        print('Apakah hasil 5+3?')
-                #        jawaban = 5+3
-                #        print('Jawaban adalah:')
-                #        print(jawaban)
-                #        if jawaban == 8:
-                #            print('Itu benar!')
-                #        else:
-                #            print('Oh tidak, jawaban itu salah!')
-                #    story_text: Sekarang kita akan mengubah perintah `is` ke `=` dan `==`. Kita menggunakan `=` jika kita ingin mengisi sebuah nilai ke variabel. Jika kamu ingin mengisi 8 ke sebuah variabel bernama `jawaban`, kamu harus menuliskan `jawaban = 8`. Simbol `==` digunakan jika kita ingin mengecek apakah dua nilai sama.
-                #    commands:
-                #    -   name: Perbandingan
-                #        explanation: Jika kita ingin membandingkan, kita menggunakan `==`. Misal `5+3 == 8` mengecek apakah 5+3 sama dengan 8.
-                #        example: 'Sebagai contoh: 5+3 == 8'
-                #        demo_code: |-
-                #            if 5+3 == 8:
-                #                print('5+3 adalah betul 8')
-                #            else:
-                #                print('Ini tidak akan ditambilkan karena 5+3 selalu 8!')
-                #    -   name: Pengisian nilai
-                #        explanation: Jika kita ingin mengatakan bahwa sebuah variabel bernama `jawaban` bernilai 8, kita menuliskan `jawaban = 8`.
-                #        example: 'Sebagai contoh: jawaban = 8'
-                #        demo_code: |-
-                #            print('Apa hasil dari 5+3?')
-                #            jawaban = 5+3
-                #            print('Jawaban adalah :')
-                #            print(jawaban)
-                #    -   name: Perbandingan dan pengisian nilai
-                #        explanation: Jika kita akan membandingkan dua nilai, kita menggunakan `==`. Jika kita akan mengisi sebuah variabel dengan nilai, kita menggunakan `=`.
-                #        example: Sebagai contoh, '5+3 == 8' dan 'answer = 8'
-                #        demo_code: |-
-                #            print('Apakah hasil dari 5+3?')
-                #            jawaban = 5+3
-                #            print('jawaban adalah:')
-                #            print(jawaban)
-                #            if jawaban == 8:
-                #                print('Itu benar!')
-                #            else:
-                #                print('Tidak, itu salah!')
-                #
                 example_code: "```\nname = ask 'what is your name?'\nage = ask 'what is your age?'\nif name is 'Hedy' and age is 2\n    print 'You are the real Hedy!'\n```\n"
             14:
                 start_code: |-
@@ -350,13 +272,38 @@ adventures:
                 story_text: Kali ini kita akan mengganti proses indentasi sedikit. Setiap kali kita membutuhkan indentasi, kita perlu menambahkan `:` pada akhir baris sebelumnya
                 example_code: "## Example Hedy Code\n```\nprices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
             18:
-                start_code: "naam = 'Hedy'\n{print}('My name is ', naam)"
-                story_text: "We arrived at real Python code! That means we need to use parentheses with {print} and {range} from now on.\nThat looks like this:\n```\n{print}('my name is Hedy!')\n```\nIf you want to print more thant one items, you need to separate them by commas.\n```\nnaam = 'Hedy'\n{print}('my name is ', naam)\n```"
-                example_code: "## Example Hedy Code\n```\n{print}('my name is Hedy!')\n```\n"
-                story_text_2: If you want to print more than one item, you need to separate them by commas.
-                example_code_2: "```\ntemperature = 25\n{print}('Is is ', temperature, 'degrees outside')\n```\n"
-                story_text_3: "##  Input\nThe final change we will need to make to get Python code is changing `{ask}` into `{input}`."
-                example_code_3: "```\n{print}('My name is Hedy!')\nname = {input}('What is your name?')\n{print}('So your name is ', name)\n```\n"
+                start_code: |-
+                    naam = 'Hedy'
+                    {print}('My name is ', naam)
+                story_text: |-
+                    ## The last level!
+                    We arrived at real Python code! That means we need to use parentheses with {print} and {range} from now on.
+
+                example_code: |
+                    ## Example Hedy Code
+                    ```
+                    {print}('my name is Hedy!')
+                    ```
+
+                story_text_2: |-
+                    If you want to print more than one item, you need to separate them by commas.
+
+                example_code_2: |
+                    ```
+                    temperature = 25
+                    {print}('It is ', temperature, 'degrees outside')
+                    ```
+
+                story_text_3: |-
+                    ##  Input
+                    The final change we will need to make to get Python code is changing `{ask}` into `{input}`.
+
+                example_code_3: |
+                    ```
+                    {print}('My name is Hedy!')
+                    name = {input}('What is your name?')
+                    {print}('So your name is ', name)
+                    ```
     story:
         name: Cerita
         description: Cerita

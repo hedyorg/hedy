@@ -231,103 +231,7 @@ adventures:
                     if nome is 'Hedy' and idade is 2
                         print 'Você é realmente Hedy!'
                 story_text: "Agora vamos aprender `and` e `or`! Se você quiser verificar duas instruções, não é necessário usar dois `if` porque você pode usar `and` e `or`. Se você usar `and`, ambas as instruções, à esquerda e à direita do `and` têm de ser verdadeiras. Podemos também utilizar `or`. Neste caso, apenas uma das instruções tem de ser verdadeira."
-                #16:
-                #    start_code: |-
-                #        # Este é um programa que vai perguntar algumas questões de Matemática
-                #        for i in range(1, 10):
-                #            # Vamos perguntar pela tabuada do 5
-                #            resposta is input('Quanto é ' i ' vezes 5?')
-                #            # Verificamos se o resultado é igual ao nosso cálculo
-                #            resposta_certa is i * 5
-                #            if resposta is resposta_certa:
-                #                print(resposta ' está certo!')
-                #            else:
-                #                print('Está errado, a resposta devia ser: ' i*5)
-                #    story_text: |-
-                #        Quando você estiver criando programas maiores, vai precisar
-                #        arranjar uma maneira de lembrar o que cada pedaço de código faz.
-                #        Usamos os comentários para isso. Um comentário se parece com isso:
-                #        ` # Isto é um comentário`. Tudo o que aparecer depois do # será
-                #        invisível para o código.
-                #    commands:
-                #    -   name: "Comentário"
-                #        explanation: "Podemos colocar comentários onde quisermos."
-                #        example: "# Isto é um comentário"
-                #        demo_code: |-
-                #            # Este programa escreve Olá!
-                #            # Este programa foi feito em Hedy
-                #            # Não faz mais nada além de escrever Olá!
-                #            print('Olá!')
-                #20:
-                #    start_code: |-
-                #        fruta = ['maçã', 'banana', 'cereja']
-                #        for i in range(1, 3):
-                #            print(fruta[i])
-                #    story_text: |-
-                #        Podemos também ver tudo na lista com o ciclo `for`. Como
-                #        existem três coisas na lista, passamos o ciclo de 1 até 3.
-                #        Durante o ciclo nós printamos tudo que há na lista.
-                #    commands:
-                #    -   name: "Tamanho da lista"
-                #        explanation: |-
-                #            Com `length` podemos saber o tamanho da lista. A lista no
-                #            exemplo tem tamanho 3, porque existem três coisas na lista.
-                #        example: "length(lista)"
-                #        demo_code: |-
-                #            fruta = ['maçã', 'banana', 'cereja']
-                #            print('tamanho da lista é ' length(fruta))
-                #            for i in range(1, length(fruta)):
-                #                print(fruta[i])
-                #21:
-                #    start_code: |-
-                #        print('Quanto é 5+3?')
-                #        resposta = 5+3
-                #        print('Resposta é agora:')
-                #        print(resposta)
-                #        if resposta == 8:
-                #            print('Está certo!')
-                #        else:
-                #            print('Oh não, está errado!')
-                #    story_text: |-
-                #        Agora vamos substituir o `is` por `=` e `==`. Usamos `=` se
-                #        quisermos atribuir um determinado valor a uma variável. Se
-                #        quisermos atribuir 8 à variável chamada resposta, então
-                #        escrevemos resposta = 8. Utilizamos `==` quando queremos
-                #        saber se duas coisas são iguais.
-                #    commands:
-                #    -   name: "Comparar"
-                #        explanation: "Se quisermos comparar, usamos ==. 5+3 == 8 verifica se 5+3 é igual a 8"
-                #        example: "Por exemplo: 5+3 == 8"
-                #        demo_code: |-
-                #            if 5+3 == 8:
-                #                print('5+3 é realmente 8')
-                #            else:
-                #                print('Isto não será printado, porque 5+3 é 8!')
-                #    -   name: "Atribuir valor"
-                #        explanation: |-
-                #            Se quisermos dizer que uma variável chamada resposta é 8,
-                #            escrevemos resposta = 8.
-                #        example: "Por exemplo: resposta = 8"
-                #        demo_code: |-
-                #            print('Quanto é 5+3?')
-                #            resposta = 5+3
-                #            print('Resposta é agora:')
-                #            print(resposta)
-                #    -   name: "Comparar e atribuir valor"
-                #        explanation: |-
-                #            Se vamos comparar dois valores, utilizamos `==`. Se
-                #            vamos atribuir um valor a uma variável, usamos `=`.
-                #        example: "Por exemplo: 5+3 == 8, resposta = 8"
-                #        demo_code: |-
-                #            print('Quanto é 5+3?')
-                #            resposta = 5+3
-                #            print('Resposta é agora:')
-                #            print(resposta)
-                #            if resposta == 8:
-                #                print('Está certo!')
-                #            else:
-                #                print('Não, está errado!')
-                example_code: "```\nname = ask 'what is your name?'\nage = ask 'what is your age?'\nif name is 'Hedy' and age is 2\n    print 'You are the real Hedy!'\n```\n"
+                 example_code: "```\nname = ask 'what is your name?'\nage = ask 'what is your age?'\nif name is 'Hedy' and age is 2\n    print 'You are the real Hedy!'\n```\n"
             14:
                 start_code: |-
                     idade = ask 'Quantos anos você tem?'
@@ -368,13 +272,39 @@ adventures:
                 story_text: "Agora vamos mudar um pouco as coisas com a indentação. Cada vez que precisarmos de indentação, temos de colocar `:` na linha antes da indentação."
                 example_code: "## Exemplo de código Hedy\n```\nprices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
             18:
-                start_code: "naam = 'Hedy'\n{print}('My name is ', naam)"
-                story_text: "We arrived at real Python code! That means we need to use parentheses with {print} and {range} from now on.\nThat looks like this:\n```\n{print}('my name is Hedy!')\n```\nIf you want to print more thant one items, you need to separate them by commas.\n```\nnaam = 'Hedy'\n{print}('my name is ', naam)\n```"
-                example_code_3: "```\n{print}('My name is Hedy!')\nname = {input}('What is your name?')\n{print}('So your name is ', name)\n```\n"
-                example_code: "## Exemplo de código Hedy\n```\n{print}('my name is Hedy!')\n```\n"
-                story_text_2: If you want to print more than one item, you need to separate them by commas.
-                example_code_2: "```\ntemperature = 25\n{print}('Is is ', temperature, 'degrees outside')\n```\n"
-                story_text_3: "##  Input\nThe final change we will need to make to get Python code is changing `{ask}` into `{input}`."
+                start_code: |-
+                    naam = 'Hedy'
+                    {print}('My name is ', naam)
+                story_text: |-
+                    ## The last level!
+                    We arrived at real Python code! That means we need to use parentheses with {print} and {range} from now on.
+
+                example_code: |
+                    ## Example Hedy Code
+                    ```
+                    {print}('my name is Hedy!')
+                    ```
+
+                story_text_2: |-
+                    If you want to print more than one item, you need to separate them by commas.
+
+                example_code_2: |
+                    ```
+                    temperature = 25
+                    {print}('It is ', temperature, 'degrees outside')
+                    ```
+
+                story_text_3: |-
+                    ##  Input
+                    The final change we will need to make to get Python code is changing `{ask}` into `{input}`.
+
+                example_code_3: |
+                    ```
+                    {print}('My name is Hedy!')
+                    name = {input}('What is your name?')
+                    {print}('So your name is ', name)
+                    ```
+
     story:
         levels:
             10:
