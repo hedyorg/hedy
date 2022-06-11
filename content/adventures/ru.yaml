@@ -122,7 +122,8 @@ adventures:
                 story_text_2: "The command `{add}` can also come in handy in your story.\n"
                 example_code_3: "## Example Hedy code\n\n```\n{print} His backpack got way too heavy.\n{print} Inside were a bottle of water, a flashlight and a brick.\nbag {is} water, flashlight, brick\ndump {is} {ask} Which item should he dump?\n{remove} dump {from} bag\n```\n"
             1:
-                story_text: "## Make a story\nIn level 1 you can make a story with a different main character that you enter yourself.\n\nAs the first line, use this code:\n\n```\n{ask} who is the star in your story?\n```\n\nAfter that first line, start with `{print}` {if} the sentence needs to be printed.\nYou use `{echo}` {if} you want your main character to be at the end of the sentence.\n"
+                story_text: "## Make a story\nIn level 1 you can make a story with a different main character that you enter yourself.\n\nIn the first line, use `{ask}` and ask who the main character in your story will be.\nAfter that first line, start with `{print}` {if} the sentence needs to be printed.\nYou use `{echo}` {if} you want your main character to be at the end of the sentence.\n"
+
                 example_code: "## Example Hedy code\n\n\n```\n{ask} The main character of this story is\n{print} The main character is now going to walk in the forest\n{echo} He's a bit scared,\n{print} He hears crazy noises everywhere\n{print} He's afraid this is a haunted forest\n```\n"
                 start_code: '{print} Your story starts here'
             2:

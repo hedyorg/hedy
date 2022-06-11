@@ -369,7 +369,8 @@ adventures:
         levels:
             1:
                 start_code: '{print} Your story starts here'
-                story_text: "## Make a story\nIn level 1 you can make a story with a different main character that you enter yourself.\n\nAs the first line, use this code:\n\n```\n{ask} who is the star in your story?\n```\n\nAfter that first line, start with `{print}` {if} the sentence needs to be printed.\nYou use `{echo}` {if} you want your main character to be at the end of the sentence.\n"
+                story_text: "## Make a story\nIn level 1 you can make a story with a different main character that you enter yourself.\n\nIn the first line, use `{ask}` and ask who the main character in your story will be.\nAfter that first line, start with `{print}` {if} the sentence needs to be printed.\nYou use `{echo}` {if} you want your main character to be at the end of the sentence.\n"
+
                 example_code: "## Example Hedy code\n\n\n```\n{ask} The main character of this story is\n{print} The main character is now going to walk in the forest\n{echo} He's a bit scared,\n{print} He hears crazy noises everywhere\n{print} He's afraid this is a haunted forest\n```\n"
             7:
                 start_code: "{repeat} 5 {times} {print} 'Help!'"

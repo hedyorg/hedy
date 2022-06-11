@@ -62,7 +62,7 @@ adventures:
                 story_text: "ask na print zinatumika kama tulivio zitumia kwenye kiwango cha sita. Ila matumizi ya if na repeat zimebadilika! Sasa unaweza kutekeleza kikundi cha code kwa pamoja, ila utatakiwa kuweka ujazo(indent). Kinamaanisha utaweka nafasi(space) mara nne ukianza ukiandika kwenye mstari. Utafanya hivyo ataukiandika kikundi(block) cha code ata kama ni mstari moja tu. Kama utatumia if na repeat, utatakiwa ujazo kila kikundi(block) cha code. Rejea mfano zifuatazo kwa maelezo zaid!"
                 example_code: "## Example Hedy code\n```\n{repeat} 5 {times}\n    {print} 'Hello everyone'\n    {print} 'This is all repeated 5 times'\n```\n"
             9:
-                story_text: "In this level you can not only use multiple lines with `{if}` {and} `{repeat}`, but you can also put them together!\nIn the example you see an `{if}` command within a `{repeat}` command. It is also allowed the other way around, and an `{if}` is also allowed in an `{if}` and a `{repeat}` in a `{repeat}`.\nGive it a try!\n\n## Example Hedy code\n```\n{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} 'pizza'\n        {print} 'nice!'\n    else\n        {print} 'pizza is better'\n```\n"
+                story_text: "In this level you can not only use multiple lines with `{if}` {and} `{repeat}`, but you can also put them together!\nIn the example you see an `{if}` command within a `{repeat}` command. It is also allowed the other way around, and an `{if}` is also allowed in an `{if}` and a `{repeat}` in a `{repeat}`.\nGive it a try!\n"
                 start_code: "{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} 'pizza'\n        {print} 'nice!'\n    else\n        {print} 'pizza is better'"
                 example_code: "## Example Hedy code\n```\n{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    else\n        {print} 'pizza is better'\n```\n"
             10:
@@ -298,7 +298,8 @@ adventures:
                     ```
                 start_code: "{print} Your story"
             1:
-                story_text: "## Make a story\nIn level 1 you can make a story with a different main character that you enter yourself.\n\nAs the first line, use this code:\n\n```\n{ask} who is the star in your story?\n```\n\nAfter that first line, start with `{print}` {if} the sentence needs to be printed.\nYou use `{echo}` {if} you want your main character to be at the end of the sentence.\n"
+                story_text: "## Make a story\nIn level 1 you can make a story with a different main character that you enter yourself.\n\nIn the first line, use `{ask}` and ask who the main character in your story will be.\nAfter that first line, start with `{print}` {if} the sentence needs to be printed.\nYou use `{echo}` {if} you want your main character to be at the end of the sentence.\n"
+
                 example_code: "## Example Hedy code\n\n\n```\n{ask} The main character of this story is\n{print} The main character is now going to walk in the forest\n{echo} He's a bit scared,\n{print} He hears crazy noises everywhere\n{print} He's afraid this is a haunted forest\n```\n"
                 start_code: '{print} Your story starts here'
             8:
