@@ -38,6 +38,9 @@ def collect_snippets(path):
                         code_snippet_counter += 1
                         try:
                             code = tag.contents[0].contents[0]
+                            feedback = f'Example code found in story_text {name} {lang}, {level_number}, not recommended!'
+                            print(feedback)
+
                             if hash(code) in unique_snippets_table:
                                 print("Identical code already being tested...")
                                 continue
@@ -57,7 +60,7 @@ def collect_snippets(path):
                             unique_snippets_table.add(hash(start_code))
                         Hedy_snippets.append(Snippet(f, level_number, 'start_code', start_code, adventure_name))
                     except KeyError:
-                        print(f'Problem reading startcode for {lang} level {level}')
+                        print(f'Problem reading start code for {lang} level {level}')
                         pass
                     # Code snippets inside example code
                     for tag in utils.markdown_to_html_tags(level['example_code']):
