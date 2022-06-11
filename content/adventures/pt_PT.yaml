@@ -551,6 +551,8 @@ adventures:
                 example_code: "## Exemplo de código Hedy\n\n```\n{turn} right\n{forward} 50\n{turn} left\n{forward} 50\n```\n"
                 story_text: "## Let's draw\nIn level 1 you can also use Hedy to draw. By combining turns and lines, you can make a square or a stair!\n\nUsing `{forward}` you draw a line forwards. The number behind it determines how far the turtle will walk. `{turn} right` turns a quarter turn in clockwise direction, `{turn} left` turns counter clockwise.\n\nThis is the start of a little staircase. Can you make it have 5 steps?\n"
                 start_code: "{forward} 50\n{turn} left"
+                story_text_2: "## Colors\nYou can also change the color of the lines with the command `{color}`. Check out the example.\nYou can also use the command `{color} {white}` to make 'invisible' lines. You could use these white lines to move the turtle anywhere in the screen before you start drawing.\n"
+                example_code_2: "```\n{color} {white}\n{forward} -80\n{color} {green}\n{forward} 50\n{color} {yellow}\n{forward} 50\n{color} {red}\n{forward} 50\n```\n"
             2:
                 start_code: "{print} Turtle race!\nhoek {is} 90\n{turn} hoek\n{forward} 25\n"
                 example_code: "## Exemplo de código Hedy\n\n\n```\n{print} Drawing figures\nangle {is} 90\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n```\n"

@@ -1022,15 +1022,34 @@ adventures:
                     You can also use Hedy to draw. By combining turns and lines, you can make a square or stairs!
 
                     Using `{forward}` you draw a line forwards. The number behind it determines how far the turtle will walk. `{turn} {right}` turns a quarter turn in clockwise direction, `{turn} {left}` turns counter clockwise.
+                    If you want to go backwards, you use the `{forward}` command but with a negative number. So for example `{forward} -100`
 
                     This is the start of a little staircase. Can you make it have 5 steps?
+
                 example_code: |
                     ## Example Hedy code
 
                     ```
+                    {forward} 50
                     {turn} {right}
                     {forward} 50
                     {turn} {left}
+                    {forward} 50
+                    ```
+                story_text_2: |
+                    ## Colors
+                    You can also change the color of the lines with the command `{color}`. Check out the example.
+                    You can also use the command `{color} {white}` to make 'invisible' lines. You could use these white lines to move the turtle anywhere in the screen before you start drawing.
+
+                example_code_2: |
+                    ```
+                    {color} {white}
+                    {forward} -80
+                    {color} {green}
+                    {forward} 50
+                    {color} {yellow}
+                    {forward} 50
+                    {color} {red}
                     {forward} 50
                     ```
                 start_code: "{forward} 50\n{turn} {left}"

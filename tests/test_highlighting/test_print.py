@@ -37,6 +37,51 @@ class HighlighterTestPrint(HighlightTester):
             level=level, lang='en')
 
 
+    @parameterized.expand([
+        ("level4"),
+        ("level5"),
+        ("level6"),
+        ("level7"),
+        ("level8"),
+        ("level9"),
+        ("level10"),
+        ("level11"),
+        ("level12"),
+        ("level13"),
+        ("level14"),
+        ("level15"),
+        ("level16"),
+        ("level17"),
+    ])
+    def test_print_incomplete1(self, level):
+        self.assert_highlighted_chr(
+            "print 'hello world!' var at random",
+            "KKKKK SSSSSSSSSSSSSS TTT KK KKKKKK",
+            level=level, lang='en')
+
+    @parameterized.expand([
+        ("level4"),
+        ("level5"),
+        ("level6"),
+        ("level7"),
+        ("level8"),
+        ("level9"),
+        ("level10"),
+        ("level11"),
+        ("level12"),
+        ("level13"),
+        ("level14"),
+        ("level15"),
+        ("level16"),
+        ("level17"),
+    ])
+    def test_print_incomplete2(self, level):
+        self.assert_highlighted_chr(
+            "print 'hello world! var at random",
+            "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSS",
+            level=level, lang='en')
+
+
 
     @parameterized.expand([
         ("level3"),
@@ -141,3 +186,145 @@ class HighlighterTestPrint(HighlightTester):
             "KKKKKKSSSSSSSSSSSSSK TTTTK SSSSSSSSSSSSSK",
             level="level18", lang='en')
 
+    @parameterized.expand([
+        ("level6"),
+        ("level7"),
+        ("level8"),
+        ("level9"),
+        ("level10"),
+        ("level11"),
+        ("level12"),
+        ("level13"),
+        ("level14"),
+        ("level15"),
+        ("level16"),
+        ("level17"),
+    ])
+    def test_print_number_equal_plus(self, level):
+        self.assert_highlighted_chr(
+            "print 'answer is' 12346 + 78564",
+            "KKKKK SSSSSSSSSSS NNNNN K NNNNN",
+            level=level, lang="en")
+
+
+    @parameterized.expand([
+        ("level12"),
+        ("level13"),
+        ("level14"),
+        ("level15"),
+        ("level16"),
+        ("level17"),
+    ])
+    def test_print_number_equal_float_plus(self, level):
+        self.assert_highlighted_chr(
+            "print 'answer is' 123.46 + 7949.8",
+            "KKKKK SSSSSSSSSSS NNNNNN K NNNNNN",
+            level=level, lang="en")
+
+
+    @parameterized.expand([
+        ("level6"),
+        ("level7"),
+        ("level8"),
+        ("level9"),
+        ("level10"),
+        ("level11"),
+        ("level12"),
+        ("level13"),
+        ("level14"),
+        ("level15"),
+        ("level16"),
+        ("level17"),
+    ])
+    def test_print_number_equal_minus(self, level):
+        self.assert_highlighted_chr(
+            "print 'answer is' 12346 - 78564",
+            "KKKKK SSSSSSSSSSS NNNNN K NNNNN",
+            level=level, lang="en")
+
+
+    @parameterized.expand([
+        ("level12"),
+        ("level13"),
+        ("level14"),
+        ("level15"),
+        ("level16"),
+        ("level17"),
+    ])
+    def test_print_number_equal_float_minus(self, level):
+        self.assert_highlighted_chr(
+            "print 'answer is' 123.46 - 7949.8",
+            "KKKKK SSSSSSSSSSS NNNNNN K NNNNNN",
+            level=level, lang="en")
+
+
+
+    @parameterized.expand([
+        ("level6"),
+        ("level7"),
+        ("level8"),
+        ("level9"),
+        ("level10"),
+        ("level11"),
+        ("level12"),
+        ("level13"),
+        ("level14"),
+        ("level15"),
+        ("level16"),
+        ("level17"),
+    ])
+    def test_print_number_equal_multi(self, level):
+        self.assert_highlighted_chr(
+            "print 'answer is' 12346 * 78564",
+            "KKKKK SSSSSSSSSSS NNNNN K NNNNN",
+            level=level, lang="en")
+
+
+    @parameterized.expand([
+        ("level12"),
+        ("level13"),
+        ("level14"),
+        ("level15"),
+        ("level16"),
+        ("level17"),
+    ])
+    def test_print_number_equal_float_multi(self, level):
+        self.assert_highlighted_chr(
+            "print 'answer is' 123.46 * 7949.8",
+            "KKKKK SSSSSSSSSSS NNNNNN K NNNNNN",
+            level=level, lang="en")
+
+    @parameterized.expand([
+        ("level6"),
+        ("level7"),
+        ("level8"),
+        ("level9"),
+        ("level10"),
+        ("level11"),
+        ("level12"),
+        ("level13"),
+        ("level14"),
+        ("level15"),
+        ("level16"),
+        ("level17"),
+    ])
+    def test_print_number_equal_div(self, level):
+        self.assert_highlighted_chr(
+            "print 'answer is' 12346 / 78564",
+            "KKKKK SSSSSSSSSSS NNNNN K NNNNN",
+            level=level, lang="en")
+
+
+    @parameterized.expand([
+        ("level12"),
+        ("level13"),
+        ("level14"),
+        ("level15"),
+        ("level16"),
+        ("level17"),
+    ])
+    def test_print_number_equal_float_div(self, level):
+        self.assert_highlighted_chr(
+            "print 'answer is' 123.46 / 7949.8",
+            "KKKKK SSSSSSSSSSS NNNNNN K NNNNNN",
+            level=level, lang="en")

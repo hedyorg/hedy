@@ -47,10 +47,13 @@ def rule_all(level):
     # Rule for comments :
     list_rules.append( { 'regex': '#.*$', 'token': 'comment', 'next': 'start' } )
 
-    # Rule for quoted string :
+    ## Rule for quoted string :
+    # complete
     list_rules.append( { 'regex': '\"[^\"]*\"', 'token': 'constant.character', 'next': 'start' } )
-
     list_rules.append( { 'regex': "\'[^\']*\'", 'token': 'constant.character', 'next': 'start' } )
+    # incomplete
+    list_rules.append( { 'regex': '\"[^\"]*$', 'token': 'constant.character', 'next': 'start' } )
+    list_rules.append( { 'regex': "\'[^\']*$", 'token': 'constant.character', 'next': 'start' } )
 
     # Rule for blanks marks :
     list_rules.append( { 'regex': '_\\?_', 'token': 'invalid', 'next': 'start' })
@@ -60,9 +63,9 @@ def rule_all(level):
     # Rules for numbers
     if (NUMBERS[level]["number"]) :
         if (NUMBERS[level]["number_with_decimal"]) :
-            number_regex = '([0-9]*\\.?[0-9]+)'
+            number_regex = '(' + DIGIT + '*\\.?' + DIGIT + '+)'
         else:
-            number_regex = '([0-9]+)'
+            number_regex = '(' + DIGIT + '+)'
 
         list_rules.append({'regex': START_WORD + number_regex + END_WORD, 'token': ['text','variable'], 'next':'start'} )
 

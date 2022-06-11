@@ -59,7 +59,7 @@ def routes(app, database):
             data = pick(user, *fields)
             data['email_verified'] = not bool(data['verification_pending'])
             data['is_teacher'] = bool(data['is_teacher'])
-            data['created'] = utils.datetotimeordate (utils.mstoisostring(data['created'])) if data['created'] else '?'
+            data['created'] = utils.localized_date_format(data.get('created')) if data.get('created') else '-'
             if filtering and category == "language":
                 if language != data['language']:
                     continue
@@ -73,7 +73,7 @@ def routes(app, database):
                 if (start_date and utils.datetotimeordate(start_date) >= data['created']) or (end_date and utils.datetotimeordate(end_date) <= data['created']):
                     continue
             if data['last_login']:
-                data['last_login'] = utils.datetotimeordate(utils.mstoisostring(data['last_login'])) if data['last_login'] else '?'
+                data['last_login'] = utils.localized_date_format(data['last_login']) if data.get('last_login') else '-'
                 if filtering and category == "last_login":
                     if (start_date and utils.datetotimeordate(start_date) >= data['last_login']) or (end_date and utils.datetotimeordate(end_date) <= data['last_login']):
                         continue
@@ -113,7 +113,7 @@ def routes(app, database):
             "name": adventure.get('name'),
             "level": adventure.get('level'),
             "public": "Yes" if adventure.get('public') else "No",
-            "date": utils.datetotimeordate(utils.mstoisostring(adventure.get('date')))
+            "date": utils.localized_date_format(adventure.get('date'))
         } for adventure in DATABASE.all_adventures()]
         adventures = sorted(adventures, key=lambda d: d['date'], reverse=True)
 
