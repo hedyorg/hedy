@@ -27,38 +27,38 @@
     example: 'Example: {turn}'
 2:
 -   explanation: Pojmenuj slovo pomocí `is` pro další použití v kódu.
-    example: 'Příklad: jmeno is Hedy'
+    example: 'Příklad: jmeno {is} Hedy'
     demo_code: |-
-        jmeno is Hedy
-        print Ahoj jmeno
+        jmeno {is} Hedy
+        {print} Vítej jmeno
     name: '{is}'
--   explanation: Zeptej se na něco příkazem `ask`. Pozor! Musíš odpověď pojmenovat pomocí `is`.
-    example: 'Příklad: barva is ask Jaká je tvoje nejoblíbenější barva?'
+-   explanation: Zeptej se na něco příkazem `{ask}. Pozor! Musíš odpověď pojmenovat pomocí `{is}`.
+    example: 'Příklad: barva {is} {ask} Jaká je tvá oblíbená barva?'
     demo_code: |-
-        barva is ask Jaká je tvoje nejoblíbenější barva?
-        print barva je tvoje nejoblíbenější!
+        barva {is} {ask} Jaká je tvá oblíbená barva?
+        {print} barva je tvá oblíbená!
     name: '{ask}'
 -   name: '{sleep}'
     example: 'Example: {sleep} 2 '
-    explanation: Let Hedy pause for a (couple of) second(s).
-    demo_code: "{print} Let me think for one second...\n{sleep}\n{print} Hmm.. I need 3 more seconds...\n{sleep} 3\n{print} Eureka! Ive got it!"
--   name: is - turtle
-    demo_code: "angle {is} 90\n{turn} angle\n{forward} 100"
-    explanation: Give a number a name using `{is}`. You can choose the name yourself.
-    example: 'Example: angle {is} 90'
+    explanation: Hedy se na nějakou chvíli pozastaví (v sekundách).
+    demo_code: "{print} Nech mě chvíli přemýšlet...\n{sleep}\n{print} Hmm... potřebuji ještě alespoň tři sekundy...\n{sleep} 3\n{print} Heuréka! Mám to!"
+-   name: je - želva
+    demo_code: "uhel {is} 90\n{turn} uhel\n{forward} 100"
+    explanation: Pojmenujte číslo pomocí `{is}`. Jméno si můžete vybrat sami.
+    example: 'Příklad: uhel {is} 90'
 3:
--   explanation: Vyber náhodné slovo ze seznamu pomocí `at` a `random`.
-    example: 'Příklad: zvirata is pes, kočka, klokan'
+-   explanation: Vybere náhodné slovo ze seznamu s užitím `{at}` a `{random}`
+    example: 'Příklad: zvirata {is}  pes, kočka, klokan'
     demo_code: |-
-        zvirata is pes, kočka, klokan
-        print zvirata at random
+        zvire {is} pes, kocka, klokan
+        {print} zvire {at} {random}
     name: choose_random
 -   name: '{add}'
-    explanation: add an item to a list
-    example: 'Example: {add} dog {to_list} animals'
-    demo_code: "animals {is} cow, cat\n{add} dog {to_list} animals"
+    explanation: přidá položku do seznamu
+    example: 'Příklad: {add} pes {to_list} zvirata'
+    demo_code: "zvirata {is} kráva, kočka\n{add} pes {to_list} zvirata"
 -   name: '{remove}'
-    explanation: remove an item from a list
+    explanation: odebere položku ze seznamu
     example: 'Example: {remove} dog {from} animals'
     demo_code: "animals {is} cat, dog, cow\n{remove} dog {from} animals"
 4:
