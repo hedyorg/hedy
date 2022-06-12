@@ -25,8 +25,12 @@ class TestsLevel7(HedyTester):
     def test_repeat_turtle(self):
         code = "repeat 3 times forward 100"
 
-        expected = HedyTester.dedent(
-            "for i in range(int('3')):",
+        expected = HedyTester.dedent("""\
+            try:
+              times = int('3')
+            except ValueError:
+              raise Exception(f'While running your program the command <span class="command-highlighted">repeat</span> received the value <span class="command-highlighted">{"3"}</span> which is not allowed. Try changing the value to a number.')
+            for i in range(times):""",
             (HedyTester.forward_transpiled(100), '  '))
 
         self.single_level_tester(code=code, expected=expected, extra_check_function=self.is_turtle())
@@ -35,7 +39,11 @@ class TestsLevel7(HedyTester):
         code = "repeat 5 times print 'me wants a cookie!'"
 
         expected = textwrap.dedent("""\
-        for i in range(int('5')):
+        try:
+          times = int('5')
+        except ValueError:
+          raise Exception(f'While running your program the command <span class="command-highlighted">repeat</span> received the value <span class="command-highlighted">{"5"}</span> which is not allowed. Try changing the value to a number.')
+        for i in range(times):
           print(f'me wants a cookie!')
           time.sleep(0.1)""")
 
@@ -55,7 +63,11 @@ class TestsLevel7(HedyTester):
 
         expected = textwrap.dedent("""\
         n = '5'
-        for i in range(int(n)):
+        try:
+          times = int(n)
+        except ValueError:
+          raise Exception(f'While running your program the command <span class="command-highlighted">repeat</span> received the value <span class="command-highlighted">{n}</span> which is not allowed. Try changing the value to a number.')
+        for i in range(times):
           print(f'me wants a cookie!')
           time.sleep(0.1)""")
 
@@ -94,7 +106,11 @@ class TestsLevel7(HedyTester):
 
         expected = textwrap.dedent("""\
         n = input(f'How many times?')
-        for i in range(int(n)):
+        try:
+          times = int(n)
+        except ValueError:
+          raise Exception(f'While running your program the command <span class="command-highlighted">repeat</span> received the value <span class="command-highlighted">{n}</span> which is not allowed. Try changing the value to a number.')
+        for i in range(times):
           print(f'n')
           time.sleep(0.1)""")
 
@@ -105,7 +121,11 @@ class TestsLevel7(HedyTester):
         code = textwrap.dedent(f"repeat {number} times print 'me wants a cookie!'")
 
         expected = textwrap.dedent(f"""\
-        for i in range(int('{int(number)}')):
+        try:
+          times = int('{int(number)}')
+        except ValueError:
+          raise Exception(f'While running your program the command <span class="command-highlighted">repeat</span> received the value <span class="command-highlighted">{{"{int(number)}"}}</span> which is not allowed. Try changing the value to a number.')
+        for i in range(times):
           print(f'me wants a cookie!')
           time.sleep(0.1)""")
 
@@ -123,7 +143,11 @@ class TestsLevel7(HedyTester):
         repeat 10 times print 'me wants a cookie!'""")
 
         expected = textwrap.dedent("""\
-        for i in range(int('10')):
+        try:
+          times = int('10')
+        except ValueError:
+          raise Exception(f'While running your program the command <span class="command-highlighted">repeat</span> received the value <span class="command-highlighted">{"10"}</span> which is not allowed. Try changing the value to a number.')
+        for i in range(times):
           print(f'me wants a cookie!')
           time.sleep(0.1)""")
 
@@ -153,7 +177,11 @@ class TestsLevel7(HedyTester):
 
         expected = textwrap.dedent("""\
         i = 'hallo!'
-        for _i in range(int('5')):
+        try:
+          times = int('5')
+        except ValueError:
+          raise Exception(f'While running your program the command <span class="command-highlighted">repeat</span> received the value <span class="command-highlighted">{"5"}</span> which is not allowed. Try changing the value to a number.')
+        for _i in range(times):
           print(f'me wants a cookie!')
           time.sleep(0.1)
         print(f'{i}')""")
@@ -180,7 +208,11 @@ class TestsLevel7(HedyTester):
         expected = textwrap.dedent("""\
         naam = 'Hedy'
         if str(naam) == str('Hedy'):
-          for i in range(int('3')):
+          try:
+            times = int('3')
+          except ValueError:
+            raise Exception(f'While running your program the command <span class="command-highlighted">repeat</span> received the value <span class="command-highlighted">{"3"}</span> which is not allowed. Try changing the value to a number.')
+          for i in range(times):
             print(f'Hallo Hedy!')
             time.sleep(0.1)""")
 
