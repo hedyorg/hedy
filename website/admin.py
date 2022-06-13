@@ -42,7 +42,6 @@ def routes(app, database):
         keyword_language = None if keyword_language == "null" else keyword_language
 
         if category:
-            filtering = True
             users = DATABASE.all_users(True)
         else:
             users = DATABASE.all_users(False)
@@ -68,7 +67,8 @@ def routes(app, database):
                 if keyword_language != data['keyword_language']:
                     continue
             if category == "email":
-                if substring not in data['email']:
+                data['email'] = "" if not data.get('email') else data['email']
+                if substring and substring not in data['email']:
                     continue
             if category == "created":
                 if start_date and utils.string_date_to_date(start_date) > data['created']:
