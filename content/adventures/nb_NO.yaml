@@ -179,6 +179,8 @@ adventures:
                 story_text: "## La oss tegne\nDu ha også bruke Hedy til å tegne. Ved å kombinere svinger og linjer så kan du lage firkanter eller trapper!\n\nVed å bruke `{forward}` kan du tegne en linje fremover. Talle bak kommandoen bestemmer hvor langt skilpadden vil gå. `{turn} {right}` snur skilpadden en kvart runde med klokken, `{turn} {left}` snur skilpadden mot klokken.\n\nDette er starten på en liten trapp. Kan du få den til å ha 5 trinn?\n"
                 example_code: "## Eksempel Hedykode\n\n```\n{turn} {right}\n{forward} 50\n{turn} {left}\n{forward} 50\n```\n"
                 start_code: "{forward} 50\n{turn} {left}"
+                story_text_2: "## Colors\nYou can also change the color of the lines with the command `{color}`. Check out the example.\nYou can also use the command `{color} {white}` to make 'invisible' lines. You could use these white lines to move the turtle anywhere in the screen before you start drawing.\n"
+                example_code_2: "```\n{color} {white}\n{forward} -80\n{color} {green}\n{forward} 50\n{color} {yellow}\n{forward} 50\n{color} {red}\n{forward} 50\n```\n"
             2:
                 story_text: "## Skilpadde\nPå nivå 1 kunne skilpadden kun snu seg til høyre eller venstre. Det er litt kjedelig!\nPå nivå 2 kan den peke nesen i alle retninger.\n\nBruk 90 til å snu en kvart omdreining. Vi kalle dette grader. En full rotasjon er 360 grader.\nKan du lage en liten figur med denne koden? Kanskje et triangel eller en sirkel?\n"
                 example_code: "## Eksempel Hedykode\n\n\n```\n{print} Tegner figurer\nvinkel {is} 90\n{turn} vinkel\n{forward} 25\n{turn} vinkel\n{forward} 25\n```\n"

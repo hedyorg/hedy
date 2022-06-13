@@ -182,7 +182,7 @@ class HighlightTester(unittest.TestCase):
             for state in lvl_rules["rules"]:
                 for rule in lvl_rules["rules"][state]:
                     for key in regex_trad:
-                        rule['regex'] = rule['regex'].replace("(__" + key + "__)", regex_trad[key])
+                        rule['regex'] = rule['regex'].replace("__" + key + "__", regex_trad[key])
 
         # get state_machine for the level
         state_machine = [item for item in data_regex if item['name']==level]
