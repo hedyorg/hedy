@@ -56,6 +56,7 @@
                   {% if story.example_code %}
                       <div class="border"></div>
                       <div class="w-1/2 p-2 ltr:ml-2 rtl:mr-2">
+                          <h2>{{_('example_code_header')}}</h2>
                           {{ story.example_code|commonmark }}
                       </div>
                   {% endif %}
