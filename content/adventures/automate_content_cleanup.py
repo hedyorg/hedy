@@ -3,10 +3,17 @@ fw = open("nl-cleaned.yaml", "w")
 
 lines = fr.readlines()
 counter = 0
+
+to_clean = ["## Voorbeeldcode", "## Voorbeeld code", "## Voorbeeld Hedy Code", "## Voorbeeld Hedy code"]
+
 for line in lines:
-    # Update this line for each language (manually...)
-    if "## Voorbeeldcode" in line or "## Voorbeeld code" in line or "## Voorbeeld Hedy Code" in line or "## Voorbeeld Hedy code" in line:
-        counter += 1
+    for option in to_clean:
+        if option in line:
+            if "example_code:" in line:
+                fixed_line = line.replace(option, "")
+                fw.write(fixed_line)
+            counter += 1
+            break
     else:
         fw.write(line)
 print(f"We have deleted {counter} lines")
