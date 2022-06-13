@@ -37,11 +37,10 @@ reserved_words = ['and', 'except', 'lambda', 'with', 'as', 'finally', 'nonlocal'
 
 # Let's retrieve all keywords dynamically from the cached KEYWORDS dictionary
 indent_keywords = []
-requires_indentation = ['if', 'for', 'repeat']
 for lang, keywords in KEYWORDS.items():
-    for keyword in requires_indentation:
+    for keyword in ['if', 'for', 'repeat']:
         indent_keywords.append(keywords.get(keyword))
-print(indent_keywords)
+
 
 class Command:
     print = 'print'
