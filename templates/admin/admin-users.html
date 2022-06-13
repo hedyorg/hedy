@@ -69,19 +69,19 @@
                     <option value="keyword_language" {% if filter and filter == "keyword_language" %} selected {% endif %}>Keyword language</option>
                 </select>
                 <div class="flex flex-row items-center">
-                    <input placeholder="Enter a substring..." id="email_filter_input" type="text" {% if email_filter %} value="{{ email_filter }}" {% endif %} class="filter_input inline-block {% if not filter or filter != "email" %}hidden{% endif %} appearance-none w-full h-16 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded my-2 ltr:mr-2 rtl:ml-2">
-                    <select id="language_filter_input" class="filter_input {% if not filter or filter != "language" %}hidden{% endif %} inline-block appearance-none w-full h-16 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded my-2 ltr:mr-2 rtl:ml-2">
+                    <input placeholder="Enter a substring..." id="email_filter_input" type="text" {% if filter == "email" %} value="{{ email_filter }}" {% endif %} class="filter_input inline-block appearance-none w-full h-16 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded my-2 ltr:mr-2 rtl:ml-2" {% if filter != "email" %}style="display: none;"{% endif %}>
+                    <select id="language_filter_input" class="filter_input inline-block appearance-none w-full h-16 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded my-2 ltr:mr-2 rtl:ml-2" {% if filter != "language" %}style="display: none;"{% endif %}>
                         <option value="{{ current_language().lang }}"{% if language_filter and language_filter == current_language().lang %} selected {% endif %}>{{ current_language().sym }}</option>
                         {% for lang in other_languages() %}
                             <option value="{{ lang.lang }}" {% if language_filter and language_filter == lang.lang %} selected {% endif %}>{{ lang.sym }}</option>
                         {% endfor %}
                     </select>
-                    <select id="keyword_language_filter_input" class="filter_input {% if not filter or filter != "keyword_language" %}hidden{% endif %} inline-block appearance-none w-full h-16 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded my-2 ltr:mr-2 rtl:ml-2">
+                    <select id="keyword_language_filter_input" class="filter_input inline-block appearance-none w-full h-16 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded my-2 ltr:mr-2 rtl:ml-2" {% if filter != "keyword_language" %}style="display: none;"{% endif %}>
                         {% for lang in keyword_languages() %}
                             <option value="{{ lang.lang }}" {% if keyword_language_filter and keyword_language_filter == lang.lang %} selected {% endif %}>{{ lang.sym }}</option>
                         {% endfor %}
                     </select>
-                    <div id="date_filter_input" class="filter_input flex flex-row w-full {% if filter and filter != "email" %}hidden{% endif %}">
+                    <div id="date_filter_input" class="filter_input flex flex-row w-full" {% if filter and filter != "created" and filter != "last_login" %}style="display: none;"{% endif %}>
                         <input type="date" id="admin_start_date" {% if start_date %} value="{{ start_date }}" {% endif %} class="inline-block appearance-none w-full h-16 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded my-2 ltr:mr-1 rtl:ml-1">
                         <input type="date" id="admin_end_date" {% if end_date %} value="{{ end_date }}" {% endif %} class="inline-block appearance-none w-full h-16 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded my-2">
                     </div>
