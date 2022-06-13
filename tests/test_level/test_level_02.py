@@ -251,6 +251,35 @@ class TestsLevel2(HedyTester):
             max_level=self.max_turtle_level,
         )
 
+    def test_turn_with_non_latin_number_var(self):
+        code = textwrap.dedent("""\
+        الزاوية هي ٩٠
+        استدر الزاوية
+        تقدم ١٠٠""")
+        expected = textwrap.dedent("""\
+        v6123bda07174d1580194658be2060682 = '٩٠'
+        trtl = v6123bda07174d1580194658be2060682
+        try:
+          trtl = int(trtl)
+        except ValueError:
+          raise Exception(f'While running your program the command <span class="command-highlighted">turn</span> received the value <span class="command-highlighted">{trtl}</span> which is not allowed. Try changing the value to a number.')
+        t.right(min(600, trtl) if trtl > 0 else max(-600, trtl))
+        trtl = 100
+        try:
+          trtl = int(trtl)
+        except ValueError:
+          raise Exception(f'While running your program the command <span class="command-highlighted">forward</span> received the value <span class="command-highlighted">{trtl}</span> which is not allowed. Try changing the value to a number.')
+        t.forward(min(600, trtl) if trtl > 0 else max(-600, trtl))
+        time.sleep(0.1)""")
+
+        self.multi_level_tester(
+            code=code,
+            lang='ar',
+            expected=expected,
+            extra_check_function=self.is_turtle(),
+            max_level=self.max_turtle_level,
+        )
+
     def test_one_turn_with_text_gives_type_error(self):
         code = "turn koekoek"
 

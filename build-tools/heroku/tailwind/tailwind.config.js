@@ -7,7 +7,7 @@ module.exports = {
       '../../../templates/**/*.html',
       '../../../main/**/*.md',
       '../../../content/**/*.md',
-      '../../../static/js/**/*.js',
+      '../../../static/js/*.ts',
   ],
   theme: {
     extend: {},

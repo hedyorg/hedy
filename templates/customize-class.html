@@ -157,10 +157,28 @@
                 <div class="flex flex-row mt-2 ml-auto">
                     <button class="red-btn {% if not customizations %}hidden{% endif %}" id="remove_customizations_button" onclick='hedyApp.remove_customizations("{{class_info.id}}", {{_('remove_customizations_prompt')|tojson}})'>
                     {{_('remove_customization')}}</button>
-                    <button class="green-btn ltr:ml-2 rtl:mr-2" onclick="window.location.href = '/for-teachers/class/{{class_info.id}}'">{{_('back_to_class')}}</button>
+                    <button class="green-btn ltr:ml-2 rtl:mr-2" onclick=validate_changes()>{{_('back_to_class')}}</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script>
+// If we return something a pop-up will be given: "are you sure you want to leave?"
+// Best we can do as the beforeunload doesn't allow the call of functions or other methods
+$(window).bind('beforeunload', function(){
+    if (window.State.unsaved_changes) {
+        return " ";
+    };
+});
+function validate_changes() {
+    if(window.State.unsaved_changes) {
+        hedyApp.modal.confirm({{_('unsaved_class_changes')|tojson}}, function(){
+            window.location = "/for-teachers/class/{{class_info.id}}";
+        });
+    } else {
+        window.location = "/for-teachers/class/{{class_info.id}}";
+    }
+}
+</script>
 {% endblock %}
