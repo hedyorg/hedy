@@ -474,10 +474,13 @@ def prepare_dst_file():
     transpiled_code = hedy.transpile(body.get("code"), body.get("level"), body.get("lang"))
     filename = utils.random_id_generator(12)
 
+    # We have to turn the turtle 90 degrees to align with the user perspective app.ts#16
+    # This is not a really nice solution, but as we store the prefix on the front-end it should be good for now
     threader = textwrap.dedent("""
         import time
         from turtlethread import Turtle
         t = Turtle()
+        t.left(90)
         with t.running_stitch(stitch_length=20):
         """)
     lines = transpiled_code.code.split("\n")
