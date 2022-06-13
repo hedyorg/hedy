@@ -251,6 +251,24 @@ class TestsLevel2(HedyTester):
             max_level=self.max_turtle_level,
         )
 
+    def test_turn_with_non_latin_number_var(self):
+        code = textwrap.dedent("""\
+        الزاوية هي ٩٠
+        استدر الزاوية
+        تقدم ١٠٠
+        """)
+        expected = HedyTester.dedent(
+            "direction = '٩٠'",
+            HedyTester.turn_transpiled('direction'))
+
+        self.multi_level_tester(
+            code=code,
+            lang='ar',
+            expected=expected,
+            extra_check_function=self.is_turtle(),
+            max_level=self.max_turtle_level,
+        )
+
     def test_one_turn_with_text_gives_type_error(self):
         code = "turn koekoek"
 
