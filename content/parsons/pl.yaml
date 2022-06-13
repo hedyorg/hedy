@@ -1,152 +1,152 @@
 parsons:
     dragging:
-        name: "Dragging"
+        name: "Przeciąganie"
         levels:
             1:
                 text: |
-                    ## Drag the code in the correct order
+                    ## Przeciągnij kod w odpowiedniej kolejności
                 example: |
-                    ## What is my code supposed to do?
+                    ## Co mój kod powinien robić?
                 story: |
-                    You're a customer at bakery Hedy.
-                    You want into the bakery and are welcomed by the baker.
-                    He asks what type of pie you want to order.
-                    Your order is being prepared.
+                    Jesteś klientem w piekarni Hedy.
+                    Wchodzisz do piekarni i jesteś przywitany przez piekarza.
+                    Piekarz pyta się, jaki rodzaj ciasta chcesz zamówić.
+                    Następnie, twoje zamówienie jest przygotowywane.
                 code_lines:
                     A: |
-                        {print} Welcome to bakery Hedy!
+                        {print} Witaj w piekarni Hedy!
                     B: |
-                        {ask} What type of pie do you want to order?
+                        {ask} Jaki rodzaj ciasta chcesz zamówić?
                     C: |
-                        {echo} So you want
+                        {echo} A więc chcesz
                     D: |
-                        {print} Your order is being prepared!
+                        {print} Twoje zamówienie jest przygotowywane!
             2:
                 text: |
-                    ## Drag the code in the correct order
+                    ## Przeciągnij kod w odpowiedniej kolejności
                 example: |
-                    ## What is my code supposed to do?
+                    ## Co mój kod powinien robić?
                 story: |
-                    You and your friends are going to watch some Netflix.
-                    Show which movie you're about to watch and wish the viewers lot of fun!
+                    Ty i twoi przyjaciele zamierzacie obejrzeć coś na Netflixie.
+                    Pokaż, który film zamierzasz obejrzeć i życz widzom dobrej zabawy!
                 code_lines:
                     A: |
-                        {print} It is time for an evening of Netflix
+                        {print} Czas na wieczór z Netflixem
                     B: |
-                        film {is} Sonic the Hedgehog 2
+                        film {is} Jeż Sonic 2
                     C: |
-                        {print} We're going to the movies
+                        {print} Idziemy obejrzeć film
                     D: |
-                        {print} Have lot of fun!
+                        {print} Dobrej zabawy!
             3:
                 text: |
-                    ## Drag the code in the correct order
+                    ## Przeciągnij kod w odpowiedniej kolejności
                 example: |
-                    ## What is my code supposed to do?
+                    ## Co mój kod powinien robić?
                 story: |
-                    The new school year at Hogwarts is starting! 
-                    It is the job of the sorting hat to sort you into one of the houses.
-                    Which house will you be sorted into?
-                    Are you a Gryffindor, Hufflepuf, Ravenclaw or Slytherin.
-                    Let the program wait a short period before revealing your house.
+                    W Hogwarcie rozpoczyna się nowy rok szkolny!
+                    Zadaniem Tiary Przydziału jest przydzielenie Cię do jednego z domów.
+                    Do którego domy zostaniesz przydzielony?
+                    Jesteś z Gryffindoru, Hufflepufu, Ravenclawu lub Slytherinu.
+                    Niech twój program przeczeka krótką chwilę przed przydzieleniem cię do domu.
                 code_lines:
                     A: |
-                        {print} The new school year at Hogwarts is starting!
+                        {print} W Hogwarcie rozpoczyna się nowy rok szkolny!
                     B: |
-                        {print} The sorting hat is ready to sort you into one of the houses.
+                        {print} Tiara Przydziału jest gotowa, by przydzielić cię do jednego z domów.
                     C: |
-                        houses {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin
+                        domy {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin
                     D: |
                         {sleep} 2
                     E: |
-                        {print} And it is houses {at} {random}
+                        {print} A ten dom to domy {at} {random}
             4:
                 text: |
-                    ## Drag the code in the correct order
+                    ## Przeciągnij kod w odpowiedniej kolejności
                 example: |
-                    ## What is my code supposed to do?
+                    ## Co mój kod powinien robić?
                 story: |
-                    You are the newest Pokémon trainer from Pallet Town!
-                    Make a program that selects your first Pokémon.
-                    Let the program wait a minute before revealing your first pokémon.
+                    Jesteś nowym trenerem Pokémonów z Pallet Town!
+                    Stwórz program, który wybierze dla ciebie Pokémona.
+                    Niech twój program poczeka 1 minutę przed pokazaniem ci twojego nowego Pokémona.
                 code_lines:
                     A: |
-                        pokemons {is} Pikachu, Charmander, Bulbasaur, Squirtle
+                        pokemony {is} Pikachu, Charmander, Bulbasaur, Squirtle
                     B: |
-                        {print} 'This is going to be your first pokémon!'
+                        {print} 'To będzie twój pierwszy Pokémon!'
                     C: |
                         {sleep}
                     D: |
-                        {print} pokemons {at} {random}
+                        {print} pokemony {at} {random}
             5:
                 text: |
-                    ## Drag the code in the correct order
+                    ## Przeciągnij kod w odpowiedniej kolejności
                 example: |
-                    ## What is my code supposed to do?
+                    ## Co mój kod powinien robić?
                 story: |
-                    Make a program that checks if your favourite movie is already in the list of the computer.
-                    If so, print that you have great taste, otherwise add the movie to the list.
+                    Stwórz program, który sprawdzi, czy twój ulubiony film już znajduje się na liście.
+                    Jeśli tak, wyświetl, że masz wspaniały gust, w przeciwnym wypadku dodaj ten film do listy.
                 code_lines:
                     A: |
-                        favoriete_movies {is} Batman, Spiderman, The Avengers, Jurassic Park
+                        ulubione_filmy {is} Batman, Spiderman, Avengers, Park Jurajski
                     B: |
-                        movie {is} {ask} 'What is your favourite movie?'
+                        film {is} {ask} 'Jaki jest twój ulubiony film?'
                     C: |
-                        {if} movie {in} favoriete_movies {print} 'You have great taste!'
+                        {if} film {in} ulubione_filmy {print} 'Masz wspaniały gust!'
                     D: |
-                        {else} {print} 'Such a shame that your favourite movie is not in the list, we will add it right away!'
+                        {else} {print} 'Co za szkoda, że twój ulubiony film nie znajduje się na liście. Dodamy go od razu!'
                     E: |
-                        {add} movie {to_list} favoriete_movies
+                        {add} film {to_list} ulubione_filmy
             6:
                 text: |
-                    ## Drag the code in the correct order
+                    ## Przeciągnij kod w odpowiedniej kolejności
                 example: |
-                    ## What is my code supposed to do?
+                    ## Co mój kod powinien robić?
                 story: |
-                    Make a program that calculates how old you are in dog and cat years.
-                    First ask the age of the user and start calculating.
-                    First calculate the dogyears then the catyears.
-                    Show the user the different ages.
+                    Stwórz program wyliczający twój wiek w psich i kocich latach.
+                    Najpierw zapytaj o wiek i zacznij obliczenia.
+                    Oblicz psie lata, potem kocie.
+                    Pokaż wyniki.
                 code_lines:
                     A: |
-                        age = {ask} 'How old are you?'
+                        wiek = {ask} 'Ile masz lat?'
                     B: |
-                        dog_age = age * 7
+                        wiek_psi = wiek * 7
                     C: |
-                        cat_age = age * 5
+                        wiek_koci = age * 5
                     D: |
-                        {print} 'In dogyears you are ' dog_age ' years old.'
+                        {print} 'W psich latach masz ' wiek_psi' lat.'
                     E: |
-                        {print} 'In catyears you are ' cat_age ' years old.'
+                        {print} 'W kocich latach masz ' wiek_koci ' lat.'
             7:
                 text: |
-                    ## Drag the code in the correct order
+                    ## Przeciągnij kod w odpowiedniej kolejności
                 example: |
-                    ## What is my code supposed to do?
+                    ## Co mój kod powinien robić?
                 story: |
-                    In a chess tournament there are three players left.
-                    Create a program that decides which two players first play against each other.
-                    First print the two players who play the first match, then print against which player the winner will play.
+                    W zawodach szachowych pozostało trzech graczy.
+                    Stwórz program, który zdecyduje, którzy dwaj gracze będą grać ze sobą jako pierwsi.
+                    Najpierw wypisz dwóch graczy, którzy będą grać jako pierwsi, potem wypisz przeciwko komu będzie grał zwycięzca z tej dwójki.
                 code_lines:
                     A: |
-                        players = Liam, Noah, Sophie
+                        gracze = Adam, Tomek, Ania
                     B: |
-                        player1 = players {at} {random}
+                        gracz1 = gracze {at} {random}
                     C: |
-                        player2 = players {at} {random}
+                        gracz2 = gracze {at} {random}
                     D: |
-                        {print} player1 ' first plays against ' player2
+                        {print} gracz1 'najpierw gra przeciwko ' gracz2
                     E: |
-                        {remove} player1 {from} players
+                        {remove} gracz1 {from} gracze
                     F: |
-                        {remove} player2 {from} players
+                        {remove} gracz2 {from} gracze
                     G: |
-                        {print} 'The winner plays against ' players {at} {random}
+                        {print} 'Zwycięzca gra z' gracze {at} {random}
             8:
                 text: |
-                    ## Drag the code in the correct order
+                    ## Przeciągnij kod w odpowiedniej kolejności
                 example: |
-                    ## What is my code supposed to do?
+                    ## Co mój kod powinien robić?
                 story: |
                     You and your friends are playing Pokémon Go! Create a program that decides in which team you will be selected.
                     Either red, yellow or blue!
