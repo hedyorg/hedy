@@ -25,31 +25,31 @@
     demo_code: "{forward} 25\n{turn} {left}\n{forward} 25\n{turn} {right}"
 2:
 -   name: "{is}"
-    explanation: "Give a word a name to use in the program using `{is}`. You can choose the name yourself."
-    example: "Example: name {is} Hedy."
+    explanation: "Nadaj nazwę wartość za pomocą `{is}`. Nazwę możesz wybrać samodzielnie."
+    example: "Przykład: imię {is} Hedy."
     demo_code: |-
-        name {is} Hedy
-        {print} welcome name
+        imię {is} Hedy
+        {print} witaj imię
 -   name: "{ask}"
-    explanation: "ask something with `{ask}`. Beware! You need to give the answer a name with `{is}`."
-    example: "Example: color {is} {ask} What is your favorite color?"
+    explanation: "Zadaj pytanie za pomocą `{ask}`. Uważaj! Musisz nadać nazwę odpowiedzi używając `{is}`."
+    example: "Przykład: kolor {is} {ask} Jaki jest twój ulubiony kolor?"
     demo_code: |-
-        color {is} {ask} What is your favorite color?
-        {print} color is your favorite!
+        kolor {is} {ask} Jaki jest twój ulubiony kolor?
+        {print} kolor jest twoim ulubionym kolorem!
 -   name: "{sleep}"
     explanation: "Let Hedy pause for a (couple of) second(s)."
-    example: "Example: {sleep} 2 "
+    example: "Przykład: {sleep} 2 "
     demo_code: |-
-        {print} Let me think for one second...
+        {print} Daj mi pomyśleć przez 1 sekundę..
         {sleep}
-        {print} Hmm.. I need 3 more seconds...
+        {print} Hmm.. Potrzebuję jeszcze 3 sekundy...
         {sleep} 3
-        {print} Eureka! Ive got it!
--   explanation: "Give a number a name using `{is}`. You can choose the name yourself."
-    example: "Example: angle {is} 90"
+        {print} Eureka! Wymyśliłem!
+-   explanation: "Nadaj nazwę liczbie za pomocą `{is}`. Nazwę możesz wybrać samodzielnie."
+    example: "Przykład: kąt {is} 90"
     demo_code: |-
-        angle {is} 90
-        {turn} angle
+        kąt {is} 90
+        {turn} kąt
         {forward} 100
     name: is - turtle
 3:
