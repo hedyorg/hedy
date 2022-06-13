@@ -60,6 +60,7 @@ def routes(app, database):
             data['email_verified'] = not bool(data['verification_pending'])
             data['is_teacher'] = bool(data['is_teacher'])
             data['created'] = utils.timestamp_to_date(data['created'])
+            data['last_login'] = utils.timestamp_to_date(data['last_login']) if data.get('last_login') else None
             if category == "language":
                 if language != data['language']:
                     continue
@@ -75,11 +76,13 @@ def routes(app, database):
                     continue
                 if end_date and utils.string_date_to_date(end_date) < data['created']:
                     continue
-            if data['last_login']:
-                data['last_login'] = utils.localized_date_format(data['last_login']) if data.get('last_login') else '-'
-                if category == "last_login":
-                    if (start_date and utils.datetotimeordate(start_date) >= data['last_login']) or (end_date and utils.datetotimeordate(end_date) <= data['last_login']):
-                        continue
+            if category == "last_login":
+                if not data.get('last_login'):
+                    continue
+                if start_date and utils.string_date_to_date(start_date) > data['last_login']:
+                    continue
+                if end_date and utils.string_date_to_date(end_date) < data['last_login']:
+                    continue
             userdata.append(data)
 
         return render_template('admin/admin-users.html', users=userdata, page_title=gettext('title_admin'),
