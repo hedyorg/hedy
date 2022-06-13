@@ -148,21 +148,21 @@ parsons:
                 example: |
                     ## Co mój kod powinien robić?
                 story: |
-                    You and your friends are playing Pokémon Go! Create a program that decides in which team you will be selected.
-                    Either red, yellow or blue!
+                    Ty i twoi przyjaciele gracie w Pokémon Go! Stwórz program, który zdecyduje, jaki zespół będziesz reprezentował.
+                    Do wyboru są czerwony, żółty lub niebieski!
                 code_lines:
                     A: |
-                        teams = red, yellow, blue
+                        zespoły = czerwony, żółty, niebieski
                     B: |
-                        {print} 'Red of Blue?'
+                        {print} 'Czerwony czy niebieski?'
                     C: |
-                        {print} 'You are selected in team '
+                        {print} 'Reprezentujesz zespół '
                     D: |
                         {repeat} 5 {times}
                     E: |
-                        {print} teams {at} {random}
+                        {print} zespoły {at} {random}
                     F: |
-                        sleep 2
+                        śpij 2
                     G: |
-                        {print} teams {at} random '!'
+                        {print} zespoły {at} losowa '!'
 
