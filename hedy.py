@@ -38,7 +38,7 @@ reserved_words = ['and', 'except', 'lambda', 'with', 'as', 'finally', 'nonlocal'
 # Let's retrieve all keywords dynamically from the cached KEYWORDS dictionary
 indent_keywords = []
 for lang, keywords in KEYWORDS.items():
-    for keyword in ['if', 'for', 'repeat']:
+    for keyword in ['if', 'for', 'repeat', 'while']:
         indent_keywords.append(keywords.get(keyword))
 
 
