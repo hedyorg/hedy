@@ -20,6 +20,8 @@ import yaml
 import sys
 
 # Some useful constants
+from hedy_content import KEYWORDS
+
 HEDY_MAX_LEVEL = 18
 MAX_LINES = 100
 LEVEL_STARTING_INDENTATION = 8
@@ -33,6 +35,13 @@ TRANSPILER_LOOKUP = {}
 # Python keywords need hashing when used as var names
 reserved_words = ['and', 'except', 'lambda', 'with', 'as', 'finally', 'nonlocal', 'while', 'assert', 'False', 'None', 'yield', 'break', 'for', 'not', 'class', 'from', 'or', 'continue', 'global', 'pass', 'def', 'if', 'raise', 'del', 'import', 'return', 'elif', 'in', 'True', 'else', 'is', 'try']
 
+# Let's retrieve all keywords dynamically from the cached KEYWORDS dictionary
+indent_keywords = []
+requires_indentation = ['if', 'for', 'repeat']
+for lang, keywords in KEYWORDS.items():
+    for keyword in requires_indentation:
+        indent_keywords.append(keywords.get(keyword))
+print(indent_keywords)
 
 class Command:
     print = 'print'
@@ -2035,7 +2044,6 @@ def find_indent_length(line):
     return number_of_spaces
 
 def needs_indentation(code):
-    keywords_requiring_indentation = ['if', 'als', 'si', 'for', 'repeat', 'répète', 'repete', 'herhaal']
     # this is done a bit half-assed, clearly *parsing* the one line would be superior
     # because now a line like
     # repeat is 5 would also require indentation!
@@ -2044,7 +2052,7 @@ def needs_indentation(code):
         return False
 
     first_keyword = all_words[0]
-    return first_keyword in keywords_requiring_indentation
+    return first_keyword in indent_keywords
 
 
 
