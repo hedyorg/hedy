@@ -341,7 +341,7 @@ adventures:
                     for i in range 1 to 10:
                         print i
                     print 'Už jdu!'
-                story_text: Teď trochu změníme odsazení. Pokaždé, když ho budeme potřebovat, musí předchozí řádek končit `:`.
+                story_text: "## Elif\nNyní trochu změníme odsazení. Pokaždé, když potřebujeme odsazení, je třeba zapsat znak `:` na řádku před tímto odsazením.\n\nV této úrovni můžete také použít nový příkaz: `{elif}`. Příkaz `{elif}` je zkratka z {else} {if} a využijete jej, když chcete provést tři (nebo více!) možností.\nVyzkoušejte jej!"
                 example_code: "## Example Hedy Code\n```\nprices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
             18:
                 start_code: "naam = 'Hedy'\n{print}('My name is ', naam)"
@@ -421,7 +421,7 @@ adventures:
             9:
                 story_text: "## Story\nIn this level you can use nesting to put {if}, {repeat} or {for} commands inside other {if}, {repeat} or {for} commands. This gives you many options and really helps you to make your story interactive.\n"
                 example_code: "## Example Hedy Code\n```\n{print} 'Robin is walking downtown'\nlocation = {ask} 'Is Robin going into a shop, or does she go home?'\n{if} location {is} shop\n    {print} 'She enters the shop.'\n    {print} 'Robin sees an interesting looking book'\n    book = {ask} 'Does Robin buy the book?'\n    {if} book {is} yes\n        {print} 'Robin buys the book and goes home'\n    {else}\n        {print} 'Robin leaves the shop and goes home'\n{else}\n    {print} 'Robin goes home'\n```\n"
-                story_text_2: "The example above is pretty straightforward, but with nesting you can really elaborate your code and turn your story into a real game. Check out this example!\n"
+                story_text_2: "Výše uvedený příklad je poměrně jednoduchý, ale vnořením {if} můžete svůj kód více propracovat a proměnit svůj příběh ve skutečnou hru. Podívejte se na tento příklad!"
                 example_code_2: "## Elaborate code\n```\nsword = lost\ngame = on\n{print} 'Our hero is walking through the forest'\n{print} 'The path splits two ways'\n{repeat} 2 {times}\n    {if} game {is} on\n        path = {ask} 'Which path should she choose?'\n        {if} path {is} left\n            {if} sword {is} found\n                {print} 'Our hero comes across a dragon!'\n                {print} 'Luckily our hero has a sword to defeat the beast!'\n                game = over\n            {else}\n                {print} 'Our hero finds a dragon, but she doesnt have any weapons!'\n                {print} 'Our hero is beaten by the dragon...'\n                {print} 'Try again'\n                game = over\n        {if} path {is} right\n            {if} sword {is} lost\n                {print} 'Our hero finds a sword'\n                {print} 'This could come in very handy'\n                sword = found\n            {else}\n                {print} 'You have already found the sword. There is nothing left here.'\n                {print} 'She walks back'\n```\n"
                 start_code: '# place your code here'
             5:
@@ -500,41 +500,43 @@ adventures:
         default_save_name: turtle
         levels:
             5:
-                start_code: "{print} 'Drawing Figures'\nfigure {is} {ask} 'Do you want a square or a triangle?'\n{if} figure {is} triangle angle {is} 120 {else} angle {is} 90\n{turn} angle\n{forward} 25\n"
-                story_text: "## Let's draw\nIn level 5 you can make a choice with `{if}`. For example between different types of figures.\n"
-                example_code: "## Example Hedy code\n\n```\n{print} 'Drawing Figures'\nfigure {is} {ask} 'Do you want a square or a triangle?'\n{if} figure {is} triangle angle {is} 120\n{else} angle {is} 90\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n```\n"
+                start_code: "{print} 'Kreslení obrazce'\nfigure {is} {ask} 'Chcete nakreslit čtverec nebo trojúhelník?'\n{if} figure {is} triangle angle {is} 120 {else} angle {is} 90\n{turn} angle\n{forward} 25"
+                story_text: "## Kreslíme\nV páté úrovni můžete provést volbu pomocí příkazu `{if}`. Například mezi různými typy obrazců.\n"
+                example_code: "## Ukázka kódu Hedy\n\n```\n{print} 'Kreslení obrazce'\nfigure {is} {ask} 'Chcete nakreslit čtverec nebo trojúhelník?'\n{if} figure {is} triangle angle {is} 120\n{else} angle {is} 90\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n```\n"
             8:
-                story_text: "## Let's draw\nNow that we can repeat several lines, we can make figures more easily.\nWe only have to set the angle once and then use that variable in the `{repeat}`.\n"
-                example_code: "## Example Hedy code\n\n```\nangle = 90\n{repeat} 10 {times}\n    {turn} angle\n    {forward} 50\n```\n"
-                story_text_2: "## Interaction\nAlso, we can now improve the program that draws different figures.\nCan you figure out how far the turtle has to turn here? Finish the code and you can draw any polygon you'd like!\n"
+                story_text: "## Kreslíme\nNyní, když můžeme opakovat několik řádků, můžeme snadněji vytvářet obrazce.\nÚhel nastavíme pouze jednou a pak tuto proměnnou použijeme v příkazu `{repeat}`.\n"
+                example_code: "## Ukázka kódu Hedy\n\n```\nangle = 90\n{repeat} 10 {times}\n    {turn} angle\n    {forward} 50\n```\n"
+                story_text_2: "## Interakce\nNyní můžeme vylepšit program, který kreslí různé obrazce.\nDokážete určit, kolikrát se musí želva otočit? Dokončete kód a nakreslete libovolný mnohoúhelník!\n"
                 example_code_2: "## Example Hedy code\n\n```\nangles = {ask} 'How many angles should I draw?'\nangle = 360 / angles\n{repeat} angle {times}\n    {turn} _\n    {forward} _\n```\n"
                 start_code: "hoeken = {ask} 'How many angles should I draw?'\n"
             1:
                 example_code: "## Example Hedy code\n\n```\n{turn} right\n{forward} 50\n{turn} left\n{forward} 50\n```\n"
                 start_code: "{forward} 50\n{turn} left"
                 story_text: "## Let's draw\nIn level 1 you can also use Hedy to draw. By combining turns and lines, you can make a square or a stair!\n\nUsing `{forward}` you draw a line forwards. The number behind it determines how far the turtle will walk. `{turn} right` turns a quarter turn in clockwise direction, `{turn} left` turns counter clockwise.\n\nThis is the start of a little staircase. Can you make it have 5 steps?\n"
+                story_text_2: "## Barvy\nBarvu čáry můžete změnit také pomocí příkazu `{color}`. Podívejte se na příklad.\nMůžete také použít příkaz `{color} {white}` k vytvoření \"neviditelných\" čar. Tyto bílé čáry můžete použít k přesunu želvy kamkoli na obrazovku předtím, než začnete kreslit.\n"
+                example_code_2: "```\n{color} {white}\n{forward} -80\n{color} {green}\n{forward} 50\n{color} {yellow}\n{forward} 50\n{color} {red}\n{forward} 50\n```\n"
             2:
-                story_text: "In level 1 the turtle could only turn left or right. That is a bit boring!\nIn level 2 he can point his nose in all directions.\n\nUse 90 to turn a quarter. We call this degrees. A full turn is 360 degrees.\nCan you make a figure with this code? Maybe a triangle or a circle?\n"
-                example_code: "## Example Hedy code\n\n\n```\n{print} Drawing figures\nangle {is} 90\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n```\n"
-                start_code: "{print} Turtle race!\nhoek {is} 90\n{turn} hoek\n{forward} 25\n"
-                story_text_2: "Also, in level 1 the turtle could only turn left or right. That is a bit boring!\nIn level 2 he can point his nose in all directions.\n\nUse 90 to turn a quarter. We call this degrees. A full turn is 360 degrees.\nCan you make a figure with this code? Maybe a triangle or a circle?\n"
-                example_code_2: "```\n{print} Drawing figures\nangle {is} 90\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n```\n"
+                story_text: "## Želva\nV této úrovni můžete použít proměnné, aby byla želva interaktivní. Například se můžete  zeptat hráče, kolik kroků má želva udělat.\n"
+                example_code: "## Příklad kódu Hedy\n```\nanswer {is} {ask} Kolik kroků má želva udělat?\n{forward} answer\n```\n"
+                start_code: "{print} Želví závod!\nhoek {is} 90\n{turn} hoek\n{forward} 25"
+                story_text_2: "V první úrovni mohla želva zatáčet pouze doleva nebo doprava. To je trochu nuda!\nVe druhé úrovni může mířit nosem do všech směrů.\n\nK otočení o čtvrtinu použijte hodnotu 90. Říkáme tomu stupně. Úplné otočení je 360 stupňů.\nDokážete z tohoto kódu vytvořit obrazec? Třeba trojúhelník nebo kruh?\n"
+                example_code_2: "```\n{print} Kreslení obrazce\nangle {is} 90\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n```\n"
             4:
-                start_code: "{print} 'Drawing figures'\nangle {is} 90\n{turn} angle\n{forward} 25\n"
-                story_text: "## Let's draw\nIn level 4 you have to use quotation marks with `{print}` and `{ask}`. Also when drawing!\n"
-                example_code: "## Example Hedy code\n\n```\n{print} 'Drawing figures'\nangle {is} 90\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n```\n"
+                start_code: "{print} 'Kreslení obrazce'\nangle {is} 90\n{turn} angle\n{forward} 25"
+                story_text: "## Kreslíme\nVe čtvrté úrovni musíte i při kreslení používat uvozovky s příkazy `{print}` a `{ask}`!\n"
+                example_code: "## Ukázka kódu Hedy\n\n```\n{print} 'Kreslení obrazce'\nangle {is} 90\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n```\n"
             3:
-                story_text: "## Searching turtle\nIn this level you can use use `{random}` with the drawing turtle. A random choice makes the turtle walk a different path each time.\nUse `{at} {random}` to choose a value from a list. You can copy and paste lines 2 and 3 to create a longer random path.\n"
-                example_code: "## Example Hedy code\n\n\n```\nangles {is} 10, 50, 90, 150, 250\n{turn} angles {at} {random}\n{forward} 25\n```\n"
-                start_code: "angles {is} 10, 50, 90, 150, 250\n{turn} angles {at} {random}\n{forward} 25\n"
+                story_text: "## Hledání želvy\nV této úrovni můžete použít příkaz `{at} {random}` s kreslící želvou. Náhodná hodnota způsobí, že želva půjde pokaždé jinou cestou.\nPoužijte `{at} {random}` k výběru hodnotu ze seznamu. Můžete zkopírovat a vložit řádky 2 a 3 a vytvořit tak delší náhodnou cestu.\n"
+                example_code: "## Ukázka kódu Hedy\n\n\n```\nangles {is} 10, 50, 90, 150, 250\n{turn} angles {at} {random}\n{forward} 25\n```\n"
+                start_code: "angles {is} 10, 50, 90, 150, 250\n{turn} angles {at} {random}\n{forward} 25"
             7:
-                story_text: "## Let's draw\nIn this level you can repeat one line of code with `{repeat}`.\n"
-                example_code: "## Example Hedy code\n\n```\n{print} 'Draw figures'\n{repeat} 3 {times} {forward} 10\n```\n"
-                start_code: "{print} 'Draw figures'\n{repeat} 3 {times} {forward} 10\n"
+                story_text: "## Kreslíme\nV této úrovni můžete opakovat jeden řádek kódu pomocí příkazu `{repeat}`.\n"
+                example_code: "## Ukázka kódu Hedy\n\n```\n{print} 'Kreslení obrazce'\n{repeat} 3 {times} {forward} 10\n```\n"
+                start_code: "{print} 'Kreslení obrazce'\n{repeat} 3 {times} {forward} 10"
             6:
-                story_text: "## Let's draw\nIn this level you can use calculations to draw different figures.\nYou may have learned in school that turning a full circle is 360 degrees. If not, now you know!\nThat's why you also use 90 degrees for a square. 360 divided by 4 is 90.\nNow that we can do math with Hedy, we can draw all the figures we want!\n"
-                example_code: "## Example Hedy code\n\n```\nangles = {ask} 'How many angles do you want?'\nangle = 360 / angles\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n```\n"
-                start_code: "{print} 'Drawing figures'\n"
+                story_text: "## Kreslíme\nV této úrovni můžete pomocí výpočtů kreslit různé obrazce.\nMožná jste se ve škole učili, že otočení celého kruhu je 360 stupňů. Pokud ne, teď už to víte!\nProto také používáte 90 stupňů pro čtverec. Když 360 vydělíte 4, je to 90.\nTeď, když umíme s Hedy počítat, můžeme kreslit jakékoliv obrazce, které chceme!\n"
+                example_code: "## Ukázka kódu Hedy\n\n```\nangles = {ask} 'Kolik úhlů chcete?'\nangle = 360 / angles\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n```\n"
+                start_code: "{print} 'Kreslení obrazce'"
     dishes:
         levels:
             7:
