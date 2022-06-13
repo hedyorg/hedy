@@ -483,6 +483,8 @@ def prepare_dst_file():
     lines = transpiled_code.code.split("\n")
     threader += "  " + "\n  ".join(lines)
     threader += "\n" + 't.save("dst_files/' + filename + '.dst")'
+    if not os.path.isdir('dst_files'):
+        os.makedirs('dst_files')
     exec(threader)
 
     return jsonify({'filename': filename}), 200
