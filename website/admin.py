@@ -68,8 +68,7 @@ def routes(app, database):
                 if keyword_language != data['keyword_language']:
                     continue
             if category == "email":
-                data['email'] = "" if not data.get('email') else data['email']
-                if substring and substring not in data['email']:
+                if not data.get('email') or (substring and substring not in data.get('email')):
                     continue
             if category == "created":
                 if start_date and utils.string_date_to_date(start_date) > data['created']:
