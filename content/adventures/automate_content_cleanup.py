@@ -1,10 +1,10 @@
-fr = open("fr.yaml", "r")
-fw = open("fr-cleaned.yaml", "w")
+fr = open("zh_Hans.yaml", "r")
+fw = open("zh_Hans-cleaned.yaml", "w")
 
 lines = fr.readlines()
 counter = 0
 
-to_clean = ["## Exemple de code", "## Example code", "## Example Hedy Code", "## Example Hedy code"]
+to_clean = ["## 海迪代码范例", "## Example code", "## Example Hedy Code", "## Example Hedy code"]
 
 for line in lines:
     for option in to_clean:
