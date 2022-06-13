@@ -14,6 +14,8 @@ for line in lines:
                 start_index = line.index(option)
                 end_index = start_index + line[start_index:].index("\\n")
                 fixed_line = line[:start_index] + line[end_index+2:]
+                while fixed_line[:2] == "\\n":
+                    fixed_line = fixed_line[2:]
                 fw.write(fixed_line)
             counter += 1
             break
