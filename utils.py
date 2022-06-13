@@ -250,6 +250,15 @@ def atomic_write_file(filename, mode='wb'):
 def mstoisostring(date):
     return datetime.datetime.fromtimestamp(int(str(date)[:-3])).isoformat()
 
+def string_date_to_date(date):
+    return datetime.datetime.strptime(date, "%Y-%m-%d")
+
+def timestamp_to_date(timestamp, short_format=False):
+    if short_format:
+        return datetime.datetime.fromtimestamp(int(str(timestamp)))
+    else:
+        return datetime.datetime.fromtimestamp(int(str(timestamp)[:-3]))
+
 def delta_timestamp(date, short_format=False):
     if short_format:
         delta = datetime.datetime.now() - datetime.datetime.fromtimestamp(int(str(date)))
@@ -269,6 +278,7 @@ def localized_date_format(date, short_format=False):
     return format_date(timestamp, format='medium') + " " + format_datetime(timestamp, "H:mm")
 
 def datetotimeordate(date):
+    print(date)
     return date.replace("T", " ")
 
 # https://stackoverflow.com/a/2257449

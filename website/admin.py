@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from flask_babel import gettext
 
 import hedyweb
@@ -39,11 +41,8 @@ def routes(app, database):
         language = None if language == "null" else language
         keyword_language = None if keyword_language == "null" else keyword_language
 
-        filtering = False
-        if substring or start_date or end_date or language or keyword_language:
+        if category:
             filtering = True
-
-        if filtering or category == "all":
             users = DATABASE.all_users(True)
         else:
             users = DATABASE.all_users(False)
@@ -55,26 +54,30 @@ def routes(app, database):
             'is_teacher', 'program_count', 'prog_experience', 'experience_languages', 'language', 'keyword_language'
         ]
 
+        print(category)
+
         for user in users:
             data = pick(user, *fields)
             data['email_verified'] = not bool(data['verification_pending'])
             data['is_teacher'] = bool(data['is_teacher'])
-            data['created'] = utils.localized_date_format(data.get('created')) if data.get('created') else '-'
-            if filtering and category == "language":
+            data['created'] = utils.timestamp_to_date(data['created'])
+            if category == "language":
                 if language != data['language']:
                     continue
-            if filtering and category == "keyword_language":
+            if category == "keyword_language":
                 if keyword_language != data['keyword_language']:
                     continue
-            if filtering and category == "email":
+            if category == "email":
                 if substring not in data['email']:
                     continue
-            if filtering and category == "created":
-                if (start_date and utils.datetotimeordate(start_date) >= data['created']) or (end_date and utils.datetotimeordate(end_date) <= data['created']):
+            if category == "created":
+                if start_date and utils.string_date_to_date(start_date) > data['created']:
+                    continue
+                if end_date and utils.string_date_to_date(end_date) < data['created']:
                     continue
             if data['last_login']:
                 data['last_login'] = utils.localized_date_format(data['last_login']) if data.get('last_login') else '-'
-                if filtering and category == "last_login":
+                if category == "last_login":
                     if (start_date and utils.datetotimeordate(start_date) >= data['last_login']) or (end_date and utils.datetotimeordate(end_date) <= data['last_login']):
                         continue
             userdata.append(data)
