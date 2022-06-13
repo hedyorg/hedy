@@ -324,6 +324,7 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
   Sk.execLimit = 1;
   $('#runit').hide();
   $('#stopit').show();
+  $('#saveDST').hide();
 
   const outputDiv = $('#output');
   //Saving the variable button because sk will overwrite the output div
@@ -410,6 +411,25 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
   } catch (e: any) {
     modal.alert(e.responseText, 3000, true);
   }
+}
+
+export function saveDST() {
+  $.ajax({
+    type: 'POST',
+    url: '/generate_dst',
+    data: JSON.stringify({
+      level: window.State.level,
+      code: get_trimmed_code(),
+      lang: window.State.lang,
+    }),
+    contentType: 'application/json',
+    dataType: 'json'
+    }).done(function(response: any) {
+      if (response.filename) {
+        // Download the file
+        window.location.replace('/download_dst/' + response.filename);
+      }
+  });
 }
 
 function storeFixedCode(response: any, level: string) {
@@ -969,6 +989,9 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     load_variables(pythonVariables);
     $('#stopit').hide();
     $('#runit').show();
+    if (hasTurtle) {
+      $('#saveDST').show();
+    }
 
     // Check if the program was correct but the output window is empty: Return a warning
     if (window.State.programsInExecution === 1 && $('#output').is(':empty') && $('#turtlecanvas').is(':empty')) {
