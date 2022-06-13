@@ -1,17 +1,17 @@
 1:
--   explanation: Vypiš něco pomocí `print`.
-    example: 'Příklad: print Vítej v Hedy!'
-    demo_code: print Vítej v Hedy!
+-   explanation: vypiš něco pomocí `{print}`.
+    example: 'Příklad:{print}  Vítej v Hedy!'
+    demo_code: '{print} Vítej v Hedy!'
     name: '{print}'
--   explanation: Zeptej se na něco pomocí `ask`.
-    example: 'Příklad: ask Jaká je tvoje nejoblíbenější barva?'
-    demo_code: ask Jaká je tvoje nejoblíbenější barva?
+-   explanation: Zeptej se na něco pomocí `{ask}`.
+    example: 'Příklad: {ask}Jaká je tvoje nejoblíbenější barva?'
+    demo_code: '{ask} Jaká je tvoje nejoblíbenější barva?'
     name: '{ask}'
--   explanation: Zopakuj něco pomocí `echo`.
-    example: 'Příklad: echo Tvoje nejoblíbenější barva tedy je'
+-   explanation: Zopakuj něco pomocí `{echo}`.
+    example: 'Příklad: {echo} Tvoje nejoblíbenější barva tedy je '
     demo_code: |-
-        ask Jaká je tvoje nejoblíbenější barva?
-        echo Tvoje nejoblíbenější barva tedy je
+        {ask} Jaká je tvoje nejoblíbenější barva?
+        {echo}  Tvoje nejoblíbenější barva tedy je
     name: '{echo}'
 -   name: '{print} emojis'
     explanation: print an emoji with `{print}`
@@ -184,8 +184,8 @@
             {forward} 50
 10:
 -   name: "{print}"
-    explanation: "print something. Remember to use a quotation mark for literal printing."
-    example: "Example: {print} '5 times 5 is ' 5 * 5"
+    explanation: "vytiskni printem něco. Nezapomeň použít uvozovky pro tisk  textu."
+    example: "Příklad: {print} '5 krát 5 je ' 5 * 5"
     demo_code: "{print} '5 times 5 is ' 5 * 5"
 -   name: "{for} with a list"
     explanation: "print all things in a list "
@@ -323,8 +323,8 @@
         ovoce = ['jablko', 'banán', 'třešně']
         prvni_ovoce = ovoce[1]
         print prvni_ovoce
--   name: Získej náhodnou položku ze seznamu.
-    explanation: Abychom dostali náhodnou položku ze seznamu, použijeme [random]. Např. ovoce[random] nám vrátí náhodného člena seznamu!
+-   name: Získej náhodé ovoce ze seznamu
+    explanation: Abychom dostali náhodnou položku ze seznamu, použijeme [random]. Např. ovoce[random] nám vrátí náhodné ovoce ze seznamu!
     example: 'Příklad: nahodneovoce is ovoce[random]'
     demo_code: |-
         ovoce = ['jablko', 'banán', 'třešně']
@@ -347,7 +347,7 @@
         else:
             print 'Barva není zelená.'
     name: '{print}'
--   explanation: 'Teď ti ukážeme nový příkaz, který můžeš začít používat: `elif`. `elif` je zkratka pro "else if", česky to znamená "jinak pokud". Nejdřív zkontrolujeme, jestli platí `if`, pokud ne, zjistíme, jestli je pravdivý `elif` a pokud i ten neplatí, vykoná se příkaz v `else`.'
+-   explanation: 'Obdobně je třeba postupovat u všech příkazů `{if}`'
     example: 'elif a is 5:'
     demo_code: |-
         a = 2
@@ -365,8 +365,16 @@
     demo_code: |-
         {print}('hi!')
 -   name: "{print} with var"
-    explanation: "With `{print}` you need to use parentheses and commas if you {print} more items"
-    example: "{print}"
+    explanation: "Po příkazu `{range}` musíš použít závorky"
+    example: "{range}"
     demo_code: |-
         name = 'Hedy'
         {print}('my name is ', name)
+-   name: '{print} with var'
+    explanation: Pro tisk pomocí `{print}` musíš použít závorky a čárky pokud chceš tisknout {print} více slov
+    example: '{print}'
+    demo_code: "name = 'Hedy'\n{print}('jmenuji se ', name)"
+-   name: zeptej se na něco pomocí {input}
+    explanation: Použij `{input}` místo příkazu`{ask}` na provedení dotazu pro vstupní textové pole
+    example: '{input}'
+    demo_code: "name = {input}('Jak se jmenuješ?')\n{print}('Tvé jméno tedy je ', name)"

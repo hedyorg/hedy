@@ -9,13 +9,14 @@ storage = dynamo.AwsDynamoStorage.from_env() or dynamo.MemoryStorage('dev_databa
 
 USERS = dynamo.Table(storage, 'users', 'username', indexed_fields=[dynamo.IndexKey('email')])
 TOKENS = dynamo.Table(storage, 'tokens', 'id', indexed_fields=[dynamo.IndexKey(v) for v in ['id', 'username']])
-PROGRAMS = dynamo.Table(storage, 'programs', 'id', indexed_fields=[dynamo.IndexKey(v) for v in ['username', 'public']])
+PROGRAMS = dynamo.Table(storage, 'programs', 'id', indexed_fields=[dynamo.IndexKey(v) for v in ['username', 'public', 'hedy_choice']])
 CLASSES = dynamo.Table(storage, 'classes', 'id', indexed_fields=[dynamo.IndexKey(v) for v in ['teacher', 'link']])
 ADVENTURES = dynamo.Table(storage, 'adventures', 'id', indexed_fields=[dynamo.IndexKey('creator')])
 INVITATIONS = dynamo.Table(storage, 'class_invitations', partition_key='username', indexed_fields=[dynamo.IndexKey('class_id')])
 CUSTOMIZATIONS = dynamo.Table(storage, 'class_customizations', partition_key='id')
 ACHIEVEMENTS = dynamo.Table(storage, 'achievements', partition_key='username')
 PUBLIC_PROFILES = dynamo.Table(storage, 'public_profiles', partition_key='username')
+PARSONS = dynamo.Table(storage, 'parsons', 'id')
 
 # Information on quizzes. We will update this record in-place as the user completes
 # more of the quiz. The database is formatted like this:
@@ -88,6 +89,14 @@ class Database:
             array_quiz_answers.append(answers)
         return array_quiz_answers
 
+    def level_programs_for_user(self, username, level):
+        """List level programs for the given user, newest first.
+
+        Returns: [{ code, name, program, level, adventure_name, date }]
+        """
+        programs = PROGRAMS.get_many({'username': username}, reverse=True)
+        return [x for x in programs if x.get('level') == int(level)]
+
     def programs_for_user(self, username):
         """List programs for the given user, newest first.
 
@@ -100,8 +109,10 @@ class Database:
         if level:
             programs = [x for x in programs if x.get('level') == int(level)]
         if adventure:
-            programs = [x for x in programs if x.get('adventure_name') == adventure]
-        return programs
+            # If the adventure we filter on is called 'default' -> return all programs WITHOUT an adventure
+            if adventure == "default":
+                return [x for x in programs if x.get('adventure_name') == ""]
+            return [x for x in programs if x.get('adventure_name') == adventure]
 
     def public_programs_for_user(self, username):
         programs = PROGRAMS.get_many({'username': username}, reverse=True)
@@ -201,29 +212,38 @@ class Database:
 
     def all_users(self, filtering=False):
         """Return all users."""
-        # If we have some filtering -> return all possible users, otherwise return last 500
+        # If we have some filtering -> return all possible users, otherwise return last 200
+        users = list(USERS.scan())
+        users.sort(key=lambda user: user.get('created', 0), reverse=True)
         if filtering:
-            return USERS.scan()
-        return USERS.scan(limit=500)
+            return users
+        return users[:200]
 
     def get_all_explore_programs(self):
-        return PROGRAMS.get_many({'public': 1}, limit=48)
+        return PROGRAMS.get_many({'public': 1}, sort_key='date', limit=48, reverse=True)
 
-    def get_filtered_explore_programs(self, level=None, adventure=None):
-        programs = PROGRAMS.get_many({'public': 1})
+    def get_filtered_explore_programs(self, level=None, adventure=None, language=None):
+        programs = PROGRAMS.get_many({'public': 1}, sort_key='date', reverse=True)
         if level:
             programs = [x for x in programs if x.get('level') == int(level)]
+        if language:
+            programs = [x for x in programs if x.get('lang') == language]
         if adventure:
+            # If the adventure we filter on is called 'default' -> return all programs WITHOUT an adventure
+            if adventure == "default":
+                programs = [x for x in programs if x.get('adventure_name') == ""]
+                return programs[-48:]
             programs = [x for x in programs if x.get('adventure_name') == adventure]
         return programs[-48:]
 
-    def all_programs_count(self):
-        """Return the total number of all programs."""
-        return PROGRAMS.item_count()
+    def get_all_hedy_choices(self):
+        return PROGRAMS.get_many({'hedy_choice': 1}, sort_key='date', reverse=True)
 
-    def all_users_count(self):
-        """Return the total number of all users."""
-        return USERS.item_count()
+    def get_hedy_choices(self):
+        return PROGRAMS.get_many({'hedy_choice': 1}, sort_key='date', limit=4, reverse=True)
+
+    def set_program_as_hedy_choice(self, id, favourite):
+        PROGRAMS.update({'id': id}, {'hedy_choice': 1 if favourite else None})
 
     def get_class(self, id):
         """Return the classes with given id."""
@@ -376,19 +396,29 @@ class Database:
         else:
             return None
 
+    def get_all_achievements(self):
+        return ACHIEVEMENTS.scan()
+
     def add_achievement_to_username(self, username, achievement):
+        new_user = False
         user_achievements = ACHIEVEMENTS.get({'username': username})
         if not user_achievements:
+            new_user = True
             user_achievements = {'username': username}
         if 'achieved' not in user_achievements:
             user_achievements['achieved'] = []
         if achievement not in user_achievements['achieved']:
             user_achievements['achieved'].append(achievement)
             ACHIEVEMENTS.put(user_achievements)
+        if new_user:
+            return True
+        return False
 
     def add_achievements_to_username(self, username, achievements):
+        new_user = False
         user_achievements = ACHIEVEMENTS.get({'username': username})
         if not user_achievements:
+            new_user = True
             user_achievements = {'username': username}
         if 'achieved' not in user_achievements:
             user_achievements['achieved'] = []
@@ -397,6 +427,9 @@ class Database:
                 user_achievements['achieved'].append(achievement)
         user_achievements['achieved'] = list(dict.fromkeys(user_achievements['achieved']))
         ACHIEVEMENTS.put(user_achievements)
+        if new_user:
+            return True
+        return False
 
     def add_commands_to_username(self, username, commands):
         user_achievements = ACHIEVEMENTS.get({'username': username})
@@ -436,6 +469,9 @@ class Database:
 
     def forget_public_profile(self, username):
         PUBLIC_PROFILES.delete({'username': username})
+
+    def store_parsons(self, attempt):
+        PARSONS.create(attempt)
 
     def add_quiz_started(self, id, level):
         key = {"id#level": f'{id}#{level}', 'week': self.to_year_week(date.today())}

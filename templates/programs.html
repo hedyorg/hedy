@@ -16,10 +16,8 @@
             </select>
             <select id="user_program_page_adventure" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded ltr:mr-4 rtl:ml-4">
                 <option disabled selected value="">{{ _('adventure') }}</option>
-                {% for adventure_key, adventure in adventure_names.items() %}
-                    {% for name, levels in adventure.items() %}
-                        <option value="{{ adventure_key }}" {% if filtered_adventure and adventure_key == filtered_adventure %}selected{% endif %}>{{ name }}</option>
-                    {% endfor %}
+                {% for adventure_key, name in adventure_names.items() %}
+                    <option value="{{ adventure_key }}" {% if filtered_adventure and adventure_key == filtered_adventure %}selected{% endif %}>{{ name }}</option>
                 {% endfor %}
             </select>
             <div class="flex flex-row ltr:ml-auto rtl:mr-auto">
@@ -34,23 +32,25 @@
     <div id="program_{{ loop.index }}" class="program w-full border-solid border-2 {% if program.submitted %} border-gray-400 bg-gray-400 {% else %} border-orange-400 {% endif %} rounded p-4 mb-4">
         <h3 id="submitted_header_{{ loop.index }}" class="mt-0 mb-4 text-red-500 text-center {% if not program.submitted %} hidden{% endif %}">{{_('submitted_header')}}</h3>
         <div class="flex flex-row">
-            <table class="table-auto mb-4 w-1/2">
+            <table class="table-auto mb-4 w-3/4">
             <thead>
                 <tr class="text-left">
-                    <th class="w-1/4 text-blue-600">{{_('title')}}</th>
-                    <th class="w-1/4 text-blue-600">{{_('level')}}</th>
-                    <th class="w-1/4 text-blue-600">{{_('last_edited')}}</th>
+                    <th class="w-72 text-blue-600">{{_('title')}}</th>
+                    <th class="w-24 text-blue-600">{{_('level')}}</th>
+                    <th class="w-52 text-blue-600">{{_('adventure')}}</th>
+                    <th class="text-blue-600">{{_('last_edited')}}</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                  {% if program.adventure_name %}
-                    <td>{{_('adventure')}}: {{adventures.get (program.adventure_name, {}).name or program.adventure_name}} - {{program.name}}</td>
-                  {% else %}
                     <td>{{program.name}}</td>
-                  {% endif %}
-                  <td>{{_('level')}} {{ program.level }}</td>
-                  <td>{{ program.date }}</td>
+                    <td>{{_('level')}} {{ program.level }}</td>
+                    {% if program.adventure_name %}
+                        <td>{{adventure_names.get(program.adventure_name)}}</td>
+                    {% else %}
+                        <td>-</td>
+                    {% endif %}
+                    <td>{{ program.date }}</td>
                 </tr>
             </tbody>
             </table>
@@ -60,8 +60,8 @@
                 </div>
             {% endif %}
         </div>
-        <div class="w-3/4 border-solid border-2 rounded w-1/2 p-2 mb-4">
-          <pre>{{program.code | truncate (50) }}</pre>
+        <div class="w-3/4 turn-pre-into-ace mb-4">
+          <pre level="{{ program.level }}" class="no-copy-button">{{program.code }}</pre>
         </div>
         <div id="submitted_button_container_{{ loop.index }}" class="flex flex-row {% if not program.submitted %} hidden {% endif %}">
             <button class="green-btn" onclick="window.open (hedyApp.viewProgramLink('{{program.id}}'))">{{_('open')}}</button>
@@ -71,7 +71,7 @@
         <div id="non_submitted_button_container_{{ loop.index }}" class="flex flex-row w-full {% if program.submitted %} hidden {% endif %}">
             <a href="/hedy/{{program.level|string}}/{{program.id}}"><button class="green-btn">{{_('open')}}</button></a>
             <button class="red-btn mx-2" onclick="hedyApp.delete_program('{{ program.id }}', {{ loop.index }}, '{{_('delete_confirm')}}')">{{_('delete')}}</button>
-            <div id="public_button_container_{{ loop.index }}" class="flex flex-row w-full {% if not program.public %} hidden {% endif %}">
+            <div id="public_button_container_{{ loop.index }}" class="flex flex-row w-full" {% if not program.public %}style="display: none;"{% endif %}> <!-- ml-auto alignment doesn't work with hidden but does with display: none; -->
                 <button class="blue-btn" onclick="hedyApp.modal.confirm ('{{_('unshare_confirm')}}', function () {hedyApp.share_program ('{{program.id}}', {{ loop.index }}, false)})">{{_('unshare')}}</button>
                 <button class="blue-btn mx-2" onclick="hedyApp.copy_to_clipboard(hedyApp.viewProgramLink('{{program.id}}'), '{{_('copy_clipboard')}}')">{{_('copy_link_to_share')}}</button>
                 <button class="green-btn ltr:ml-auto rtl:mr-auto" onclick="hedyApp.modal.confirm ('{{_('submit_warning')}}', function () {hedyApp.submit_program ('{{program.id}}', {{ loop.index }})})">{{_('submit_program')}}</button>
@@ -93,6 +93,15 @@
 </div>
 {% endblock %}
 {% block scripts %}
+  <script src="{{static('/vendor/ace.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
+  <script src="{{static('/vendor/ext-whitespace.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
+  <script src="{{static('/vendor/ext-rtl.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
+  <script src="/client_messages.js" type="text/javascript" crossorigin="anonymous"></script>
+  <script>
+      window.State = {};
+      window.State.lang = "{{ g.lang }}";
+      window.State.level = "{{ level }}";
+      window.State.keyword_language = "{{ g.keyword_lang }}";
+  </script>
   <script src="{{static('/js/appbundle.js')}}" type="text/javascript" crossorigin="anonymous"></script>
-  <script>window.State = {lang: "{{ g.lang }}", level: "{{ level }}"}</script>
 {% endblock %}

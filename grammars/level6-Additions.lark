@@ -1,7 +1,9 @@
 _print_argument: (_SPACE | quoted_text | list_access | print_expression)*
 ?print_expression: INT | var_access | error_unsupported_number | expression
 
-command:+= ask | list_access_var | assign -= ask | list_access | list_access_var | assign
+// redefining it entirely since it has many order-depending rules
+command: print | turtle | add | remove | sleep | error_print_no_quotes | ifelse | ifs | ask | list_access_var | assign | assign_list
+_if_less_command: print | turtle | add | remove | sleep | error_print_no_quotes | ask | list_access_var | assign | assign_list
 
 //splitting  these commands into two rules, one for equals and one for is so they can be properly handled in the translator
 ask: var (_IS | _EQUALS) _ASK (_print_argument)?
@@ -14,9 +16,10 @@ list_access_var: var (_IS | _EQUALS) var _AT (INT | random)
 assign_list: var (_IS | _EQUALS) textwithspaces (_COMMA textwithspaces)+
 assign: var (_IS | _EQUALS) expression | var ( _IS  | _EQUALS) textwithoutspaces | var (_IS | _EQUALS) textwithspaces
 
+sleep: _SLEEP (INT | list_access | var_access | expression)?
+
 ?expression: simple_expression | expression _MULTIPLY atom -> multiplication | expression _DIVIDE atom -> division | expression _PLUS atom -> addition | expression _MINUS atom -> subtraction
 ?simple_expression: atom _MULTIPLY atom -> multiplication | atom _DIVIDE atom -> division | atom _PLUS atom -> addition | atom _MINUS atom -> subtraction
 ?atom: INT | var_access | error_unsupported_number | textwithoutspaces
-error_unsupported_number: /([-+]?(\d+[\.,]\d+))/ -> error_unsupported_number
+error_unsupported_number: /([-+]?(\d+[\.،,，]\d+))/ -> error_unsupported_number
 
-textwithoutspaces: /(?:[^\n،, *+\-\/ei]|e(?!lse)|i(?!f))+/ -> text //new cause in level 6 calculation elements need to be escaped too

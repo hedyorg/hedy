@@ -105,3 +105,31 @@ body[dir='rtl'] #editor-area .ace_gutter-layer {
     background-color: #A0B4A8;
     border-color: #6BC196;
 }
+
+.ace_gutter-cell.ace_breakpoint {
+    visibility: hidden;
+}
+
+.ace_gutter-cell.ace_breakpoint::after {
+    visibility: visible;
+    border-radius: 14px 14px 14px 14px;
+    width: 21px;
+    content: "😴";
+    z-index: 3;
+    position: absolute;
+    left: 0;
+}
+
+.ace_layer.ace_gutter-layer.ace_folding-enabled {
+    width: 36px !important;
+}
+
+.ace-disabled {
+    text-decoration: line-through;
+}
+
+.debugLine {
+    position: absolute;
+    background: #2D6099;
+    z-index: 20
+}

@@ -1,13 +1,12 @@
 import json
 from flask_babel import gettext
 import hedy
-from website.auth import validate_signup_data, store_new_account, requires_login, is_teacher, is_admin, current_user
+from website.auth import requires_login, is_teacher, is_admin, current_user, validate_student_signup_data, store_new_student_account
 import utils
 import uuid
 from flask import g, request, jsonify, redirect
 from flask_helpers import render_template
 import os
-import hedyweb
 import hedy_content
 from config import config
 
@@ -38,24 +37,23 @@ def routes(app, database, achievements):
         if not Class or Class['teacher'] != user['username']:
             return utils.error_page(error=404, ui_message=gettext('no_such_class'))
         students = []
+
         for student_username in Class.get('students', []):
             student = DATABASE.user_by_username(student_username)
             programs = DATABASE.programs_for_user(student_username)
             highest_level = max(program['level'] for program in programs) if len(programs) else 0
-            sorted_public_programs = list(
-                sorted([program for program in programs if program.get('public')], key=lambda p: p['date']))
-            if sorted_public_programs:
-                latest_shared = sorted_public_programs[-1]
-                latest_shared['link'] = f"/hedy/{latest_shared['id']}/view"
-            else:
-                latest_shared = None
             students.append({
                 'username': student_username,
-                'last_login': utils.datetotimeordate(utils.mstoisostring(student['last_login'])),
+                'last_login': student['last_login'],
                 'programs': len(programs),
-                'highest_level': highest_level,
-                'latest_shared': latest_shared
+                'highest_level': highest_level
             })
+
+        # Sort the students by their last login
+        students = sorted(students, key=lambda d: d.get('last_login', 0), reverse=True)
+        # After sorting: replace the number value by a string format date
+        for student in students:
+            student['last_login'] = utils.localized_date_format(student.get('last_login', 0))
 
         if utils.is_testing_request(request):
             return jsonify({'students': students, 'link': Class['link'], 'name': Class['name'], 'id': Class['id']})
@@ -69,8 +67,8 @@ def routes(app, database, achievements):
         invites = []
         for invite in DATABASE.get_class_invites(Class['id']):
             invites.append({'username': invite['username'],
-                            'timestamp': utils.stoisostring(invite['timestamp']),
-                            'expire_timestamp': utils.stoisostring(invite['ttl'])})
+                            'timestamp': utils.localized_date_format(invite['timestamp'], short_format=True),
+                            'expire_timestamp': utils.localized_date_format(invite['ttl'], short_format=True)})
 
         return render_template('class-overview.html', current_page='my-profile',
                                 page_title=gettext('title_class-overview'),
@@ -382,39 +380,30 @@ def routes(app, database, achievements):
             return gettext('no_accounts'), 400
 
         usernames = []
-        mails = []
 
         # Validation for correct types and duplicates
         for account in body.get('accounts', []):
-            validation = validate_signup_data(account)
+            validation = validate_student_signup_data(account)
             if validation:
                 return validation, 400
             if account.get('username').strip().lower() in usernames:
                 return {'error': gettext('unique_usernames'), 'value': account.get('username')}, 200
             usernames.append(account.get('username').strip().lower())
-            if account.get('email').strip().lower() in mails:
-                return {'error': gettext('unique_emails'), 'value': account.get('email')}, 200
-            mails.append(account.get('email').strip().lower())
 
         # Validation for duplicates in the db
         classes = DATABASE.get_teacher_classes(user['username'], False)
-        print(classes)
         for account in body.get('accounts', []):
             if account.get('class') and account['class'] not in [i.get('name') for i in classes]:
                 return "not your class", 404
-            user = DATABASE.user_by_username(account.get('username').strip().lower())
-            if user:
+            if DATABASE.user_by_username(account.get('username').strip().lower()):
                 return {'error': gettext('usernames_exist'), 'value': account.get('username').strip().lower()}, 200
-            email = DATABASE.user_by_email(account.get('email').strip().lower())
-            if email:
-                return {'error': gettext('emails_exist'), 'value': account.get('email').strip().lower()}, 200
 
         # Now -> actually store the users in the db
         for account in body.get('accounts', []):
             # Set the current teacher language and keyword language as new account language
             account['language'] = g.lang
             account['keyword_language'] = g.keyword_lang
-            store_new_account(account, account.get('email').strip().lower())
+            store_new_student_account(account, user['username'])
             if account.get('class'):
                 class_id = [i.get('id') for i in classes if i.get('name') == account.get('class')][0]
                 DATABASE.add_student_to_class(class_id, account.get('username').strip().lower())
@@ -432,7 +421,7 @@ def routes(app, database, achievements):
             return utils.error_page(error=403, ui_message=gettext('retrieve_adventure_error'))
 
         # Add level to the <pre> tag to let syntax highlighting know which highlighting we need!
-        adventure['content'] = adventure['content'].replace("<pre>", "<pre level='" + str(adventure['level']) + "'>")
+        adventure['content'] = adventure['content'].replace("<pre>", "<pre class='no-copy-button' level='" + str(adventure['level']) + "'>")
         return render_template('view-adventure.html', adventure=adventure,
                                page_title=gettext('title_view-adventure'), current_page='my-profile')
 

@@ -1,58 +1,42 @@
-_PRINT: ("قول" | "print") _SPACE?
-_ASK: ("اسأل" | "ask") _SPACE?
-_ECHO: ("ردد" | "echo") _SPACE?
-_FORWARD: ("تقدم" | "forward") _SPACE?
-left: "left" _SPACE?
-right: "right" _SPACE?
-_COLOR : "color" _SPACE?
-black: "black" _SPACE?
-blue: "blue" _SPACE?
-brown: "brown" _SPACE?
-gray: "gray" _SPACE?
-green: "green" _SPACE?
-orange: "orange" _SPACE?
-pink: "pink" _SPACE?
-purple: "purple" _SPACE?
-red: "red" _SPACE?
-white: "white" _SPACE?
-yellow: "yellow" _SPACE?
-_IS: _SPACE ( "هو" | "is") _SPACE
-_AT: _SPACE ("بشكل" | "at") _SPACE
-random: ("عشوائي" | "random") _SPACE?
-_IN: _SPACE ("في" | "in") _SPACE
-_IF: ("اذا" | "if") _SPACE
-_ELSE: "وإلا" | "else"
-_TURN: ("انعطف" | "turn") _SPACE?
-_SLEEP: ("slaap" | "sleep") _SPACE? //placing Dutch words here so it will be easier to copy-paste arabic in
-_ADD_LIST: ("voeg" | "add") _SPACE
-_TO_LIST: _SPACE ("toe aan" | "to") _SPACE
-_REMOVE: ("verwijder" | "remove") _SPACE
-_FROM: _SPACE ("uit" | "from") _SPACE
-
-//yet to be translated
-_AND: _SPACE "and" _SPACE
-
-//level 5
-_REPEAT: "repeat" _SPACE
-_TIMES: _SPACE "times"
-
-//level 8
-_FOR: "for" _SPACE
-_RANGE: "range" _SPACE?
-_TO: _SPACE "to" _SPACE
-_STEP: "step"
-
-//level 9
-_ELIF: _SPACE? "elif" _SPACE
-
-//level 11
-_INPUT: "input"
-
-//level 14
-_OR: _SPACE "or" _SPACE
-
-//level 17
-_WHILE: "while" _SPACE
-
-//level 19
-_LENGTH: "length"
+_PRINT: ( "ـ"* "ق" "ـ"* "و" "ـ"* "ل" "ـ"*  | "print") _SPACE?
+_ASK: ( "ـ"* "ا" "ـ"* "س" "ـ"* "أ" "ـ"* "ل" "ـ"*  | "ask") _SPACE?
+_ECHO: ( "ـ"* "ر" "ـ"* "د" "ـ"* "د" "ـ"*  | "echo") _SPACE?
+_FORWARD: ( "ـ"* "ت" "ـ"* "ق" "ـ"* "د" "ـ"* "م" "ـ"*  | "forward") _SPACE?
+_TURN: ( "ـ"* "ا" "ـ"* "س" "ـ"* "ت" "ـ"* "د" "ـ"* "ر" "ـ"*  | "turn") _SPACE?
+left: ( "ـ"* "ي" "ـ"* "س" "ـ"* "ا" "ـ"* "ر" "ـ"*  | "left") _SPACE?
+right: ( "ـ"* "ي" "ـ"* "م" "ـ"* "ي" "ـ"* "ن" "ـ"*  | "right") _SPACE?
+black: ( "ـ"* "ا" "ـ"* "س" "ـ"* "و" "ـ"* "د" "ـ"*  | "black") _SPACE?
+blue: ( "ـ"* "ا" "ـ"* "ز" "ـ"* "ر" "ـ"* "ق" "ـ"*  | "blue") _SPACE?
+brown: ( "ـ"* "ب" "ـ"* "ن" "ـ"* "ي" "ـ"*  | "brown") _SPACE?
+gray: ( "ـ"* "ر" "ـ"* "م" "ـ"* "ا" "ـ"* "د" "ـ"* "ي" "ـ"*  | "gray") _SPACE?
+green: ( "ـ"* "ا" "ـ"* "خ" "ـ"* "ض" "ـ"* "ر" "ـ"*  | "green") _SPACE?
+orange: ( "ـ"* "ب" "ـ"* "ر" "ـ"* "ت" "ـ"* "ق" "ـ"* "ا" "ـ"* "ل" "ـ"* "ي" "ـ"*  | "orange") _SPACE?
+pink: ( "ـ"* "ز" "ـ"* "ه" "ـ"* "ر" "ـ"* "ي" "ـ"*  | "pink") _SPACE?
+purple: ( "ـ"* "ب" "ـ"* "ن" "ـ"* "ف" "ـ"* "س" "ـ"* "ج" "ـ"* "ي" "ـ"*  | "purple") _SPACE?
+red: ( "ـ"* "ا" "ـ"* "ح" "ـ"* "م" "ـ"* "ر" "ـ"*  | "red") _SPACE?
+white: ( "ـ"* "ا" "ـ"* "ب" "ـ"* "ي" "ـ"* "ض" "ـ"*  | "white") _SPACE?
+yellow: ( "ـ"* "ا" "ـ"* "ص" "ـ"* "ف" "ـ"* "ر" "ـ"*  | "yellow") _SPACE?
+_IS: _SPACE ("هو" | "هي" | "is") _SPACE
+_SLEEP: ( "ـ"* "s" "ـ"* "l" "ـ"* "e" "ـ"* "e" "ـ"* "p" "ـ"*  | "sleep") _SPACE?
+_ADD_LIST: ( "ـ"* "ا" "ـ"* "ض" "ـ"* "ف" "ـ"*  | "add") _SPACE
+_TO_LIST: _SPACE ( "ـ"* "ا" "ـ"* "ل" "ـ"* "ى" "ـ"*  | "to") _SPACE
+_REMOVE: ( "ـ"* "ا" "ـ"* "ز" "ـ"* "ل" "ـ"*  | "remove") _SPACE
+_FROM: _SPACE ( "ـ"* "م" "ـ"* "ن" "ـ"*  | "from") _SPACE
+_AT: _SPACE ( "ـ"* "ب" "ـ"* "ش" "ـ"* "ك" "ـ"* "ل" "ـ"*  | "at") _SPACE
+random: ( "ـ"* "ع" "ـ"* "ش" "ـ"* "و" "ـ"* "ا" "ـ"* "ئ" "ـ"* "ي" "ـ"*  | "random") _SPACE?
+_IN: _SPACE ( "ـ"* "ف" "ـ"* "ي" "ـ"*  | "in") _SPACE
+_IF: ( "ـ"* "ا" "ـ"* "ذ" "ـ"* "ا" "ـ"*  | "if") _SPACE
+_ELSE:  "ـ"* "و" "ـ"* "إ" "ـ"* "ل" "ـ"* "ا" "ـ"*  | "else"
+_AND: _SPACE ( "ـ"* "و" "ـ"*  | "and") _SPACE
+_REPEAT: ( "ـ"* "ك" "ـ"* "ر" "ـ"* "ر" "ـ"*  | "repeat") _SPACE
+_TIMES: _SPACE ( "ـ"* "م" "ـ"* "ر" "ـ"* "ة" "ـ"*  | "times")
+_FOR: ( "ـ"* "ل" "ـ"* "ك" "ـ"* "ل" "ـ"*  | "for") _SPACE
+_RANGE: ( "ـ"* "ن" "ـ"* "ط" "ـ"* "ا" "ـ"* "ق" "ـ"*  | "range") _SPACE?
+_TO: _SPACE ( "ـ"* "ا" "ـ"* "ل" "ـ"* "ى" "ـ"*  | "to") _SPACE
+_STEP:  "ـ"* "خ" "ـ"* "ط" "ـ"* "و" "ـ"* "ة" "ـ"*  | "step"
+_ELIF: _SPACE? ( "ـ"* "و" "ـ"* "إ" "ـ"* "ل" "ـ"* "ا" "ـ"* " " "ـ"* "ا" "ـ"* "ذ" "ـ"* "ا" "ـ"*  | "elif") _SPACE
+_INPUT: ( "ـ"* "ا" "ـ"* "د" "ـ"* "خ" "ـ"* "ل" "ـ"*  | "input")
+_OR: _SPACE ( "ـ"* "أ" "ـ"* "و" "ـ"*  | "or") _SPACE
+_WHILE: ( "ـ"* "ب" "ـ"* "ي" "ـ"* "ن" "ـ"* "م" "ـ"* "ا" "ـ"*  | "while") _SPACE
+_LENGTH:  "ـ"* "ط" "ـ"* "و" "ـ"* "ل" "ـ"*  | "length"
+_COLOR : ( "ـ"* "ل" "ـ"* "و" "ـ"* "ن" "ـ"*  | "color") _SPACE?

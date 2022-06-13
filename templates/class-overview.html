@@ -9,53 +9,8 @@
     });
     </script>
     {% endif %}
-    <div class="flex flex-row mb-4 items-center w-full">
-        <h1 class="inline-block w-80">{{class_info.name}}</h1>
-        <div class="px-4 flex w-full flex-row border border-gray-400 py-2 rounded-lg">
-            <div class="flex flex-row items-center">
-                <h3 class="inline-block w-64 my-2">{{_('visible_columns')}}</h3>
-                <div class="flex flex-row w-full ml-auto">
-                    <div class="flex flex-col mx-2">
-                        <div class="flex flex-row items-center">
-                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="username" name="username">
-                            <label class="inline-block" for="subscribe">{{_('username')}}</label>
-                        </div>
-                        <div class="flex flex-row items-center">
-                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="last_login" name="last_login">
-                            <label class="inline-block" for="last_login">{{_('last_login')}}</label>
-                        </div>
-                        <div class="flex flex-row items-center">
-                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="highest_level" name="highest_level">
-                            <label class="inline-block" for="highest_level">{{_('highest_level_reached')}}</label>
-                        </div>
-                    </div>
-                    <div class="flex flex-col mx-2">
-                        <div class="flex flex-row items-center">
-                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="amount_programs" name="amount_programs">
-                            <label class="inline-block" for="amount_programs">{{_('number_programs')}}</label>
-                        </div>
-                        <div class="flex flex-row items-center">
-                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="overview" name="overview">
-                            <label class="inline-block" for="overview">{{_('programs')}}</label>
-                        </div>
-                        <div class="flex flex-row items-center">
-                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="last_shared" name="last_shared">
-                            <label class="inline-block" for="last_shared">{{_('latest_shared_program')}}</label>
-                        </div>
-                    </div>
-                    <div class="flex flex-col mx-2">
-                        <div class="flex flex-row items-center">
-                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" id="change_password" name="change_password">
-                            <label class="inline-block" for="change_password">{{_('change_password')}}</label>
-                        </div>
-                        <div class="flex flex-row items-center">
-                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" id="remove_student" name="remove_student">
-                            <label class="inline-block" for="remove_student">{{_('remove_student')}}</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="flex flex-row mb-4 items-center gap-x-2">
+        <h1 class="inline-block">{{class_info.name}}️</h1><span class="cursor-pointer" onclick='hedyApp.rename_class("{{class_info.id}}", {{_('class_name_prompt')|tojson}})'>✏️</span>
     </div>
   <div class="program w-full border-solid border-2 border-orange-400 rounded p-4 mb-4">
       <table class="table-auto w-full text-sm">
@@ -66,9 +21,8 @@
           <th id="highest_level_header">{{_('highest_level_reached')}}</th>
           <th id="amount_programs_header">{{_('number_programs')}}</th>
           <th id="overview_header">{{_('programs')}}</th>
-          <th id="last_shared_header">{{_('latest_shared_program')}}</th>
-          <th id="change_password_header" class="hidden">{{_('change_password')}}</th>
-          <th id="remove_student_header" class="hidden">{{_('remove_student')}}</th>
+          <th id="change_password_header" class="text-center">{{_('password')}}</th>
+          <th id="remove_student_header" class="text-center">{{_('remove')}}</th>
         </tr>
       </thead>
       <tbody>
@@ -79,36 +33,32 @@
             <td class="highest_level_cell">{{student.highest_level}}</td>
             <td class="amount_programs_cell">{{student.programs}}</td>
             <td class="overview_cell"><a href="/programs?user={{student.username}}">{{student.username}}'s {{_('page')}}</a></td>
-            <td class="last_shared_cell">{% if student.latest_shared %}<a target="_blank" href="{{student.latest_shared.link}}">{{student.latest_shared.name}} ({{student.latest_shared.level}})</a>{% else %}-{% endif %}</td>
-            <td class="change_password_cell hidden"><a href="#" onclick='hedyApp.change_password_student("{{student.username}}", {{_('enter_password')|tojson}}, {{_('password_change_prompt')|tojson}})'>{{_('change_password')}}</a></td>
-            <td class="remove_student_cell hidden"><a href="#" onclick='hedyApp.remove_student("{{class_info.id}}", "{{student.username}}", {{_('remove_student_prompt')|tojson}})'>{{_('remove')}}{{student.username}}</a></td>
+            <td class="change_password_cell text-center"><a href="#" class="no-underline" onclick='hedyApp.change_password_student("{{student.username}}", {{_('enter_password')|tojson}}, {{_('password_change_prompt')|tojson}})'>✏️</a></td>
+            <td class="remove_student_cell text-center"><a href="#" class="no-underline" onclick='hedyApp.remove_student("{{class_info.id}}", "{{student.username}}", {{_('remove_student_prompt')|tojson}})'>🗑️</a></td>
           </tr>
         {% endfor %}
       </tbody>
       </table>
   </div>
   <p>{{_('class_link')}}: <a href="{{class_info.link}}"><span class="text-blue-500">{{class_info.link}}</span></a></p>
-  <div class="mt-4 flex flex-row">
+  <div class="mt-4 flex flex-row gap-2">
     <button class="green-btn" onclick="window.location.href = '/for-teachers/customize-class/{{class_info.id}}'">{{_('customize_class')}}</button>
-    <button class="green-btn ltr:ml-4 rtl:mr-4" onclick='hedyApp.rename_class("{{class_info.id}}", {{_('class_name_prompt')|tojson}})'>{{_('rename_class')}}</button>
-    <button class="green-btn ltr:ml-4 rtl:mr-4" onclick='hedyApp.invite_student("{{class_info.id}}", {{_('invite_prompt')|tojson}})'>{{_('invite_student')}}</button>
-    <button class="green-btn ltr:ml-4 rtl:mr-4" onclick="window.location.href = '/stats/class/{{class_info.id}}'">{{_('class_stats')}}</button>
+    <button class="green-btn" onclick='hedyApp.invite_student("{{class_info.id}}", {{_('invite_prompt')|tojson}})'>{{_('invite_student')}}</button>
+    <button class="green-btn" onclick="window.location.href = '/stats/class/{{class_info.id}}'">{{_('class_stats')}}</button>
+    <button class="blue-btn ltr:ml-auto rtl:mr-auto" onclick="window.location.href = '/for-teachers'">{{_('back_to_teachers_page')}}</button>
+    <button class="red-btn" onclick='hedyApp.delete_class("{{class_info.id}}", {{_('delete_class_prompt')|tojson}})'>{{_('delete_class')}}</button>
   </div>
-  <div class="mt-4 flex flex-row">
-    <button class="blue-btn" onclick="window.location.href = '/for-teachers'">{{_('back_to_teachers_page')}}</button>
-    <button class="red-btn ltr:ml-4 rtl:mr-4" onclick='hedyApp.delete_class("{{class_info.id}}", {{_('delete_class_prompt')|tojson}})'>{{_('delete_class')}}</button>
-  </div>
-  <div class="mt-4">
   {% if invites %}
+    <div class="mt-6">
       <h2>{{_('pending_invites')}}</h2>
-      <div class="inline-block border-solid border-2 border-orange-400 rounded my-5 p-4">
+      <div class="inline-block border-solid border-2 border-orange-400 rounded mt-2 mb-4 p-4">
         <table class="table-auto text-sm">
         <thead>
             <tr class="font-bold text-left">
-                <th class="w-40">{{_('username')}}</th>
-                <th class="w-52">{{_('invite_date')}}</th>
-                <th class="w-52">{{_('expiration_date')}}</th>
-                <th class="w-64">{{_('remove_invite')}}</th>
+                <th class="ltr:pr-4 rtl:pl-4">{{_('username')}}</th>
+                <th class="w-40">{{_('invite_date')}}</th>
+                <th class="w-40">{{_('expiration_date')}}</th>
+                <th class="px-4 text-center">{{_('remove')}}</th>
             </tr>
         </thead>
         <tbody>
@@ -117,14 +67,14 @@
                 <td>{{invite.username}}</td>
                 <td>{{invite.timestamp}}</td>
                 <td>{{invite.expire_timestamp}}</td>
-                <td><a href="#" onclick='hedyApp.remove_student_invite("{{invite.username}}", "{{ class_info.id }}", {{_('delete_invite_prompt')|tojson}})'>{{_('remove')}}</a></td>
+                <td class="text-center"><a href="#" onclick='hedyApp.remove_student_invite("{{invite.username}}", "{{ class_info.id }}", {{_('delete_invite_prompt')|tojson}})'>🗑️</a></td>
             </tr>
         {% endfor %}
         </tbody>
         </table>
       </div>
+    </div>
   {% endif %}
-  </div>
 </div>
 <script>
 // Todo: TB -> As we use the same function on the /admin page it would be nice to store this in a function in app.ts

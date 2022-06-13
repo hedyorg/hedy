@@ -6,66 +6,75 @@ import yaml
 from os import path
 import hedy_content
 
-KEYWORD_LANGUAGES = list(hedy_content.ALL_KEYWORD_LANGUAGES.keys())
-
 # Holds the token that needs to be translated, its line number, start and end indexes and its value (e.g. ", ").
 Rule = namedtuple("Rule", "keyword line start end value")
 
 
-def keywords_to_dict(to_lang="nl"):
+def keywords_to_dict(lang="nl"):
     """"Return a dictionary of keywords from language of choice. Key is english value is lang of choice"""
     base = path.abspath(path.dirname(__file__))
 
     keywords_path = 'content/keywords/'
-    yaml_filesname_with_path = path.join(base, keywords_path, to_lang + '.yaml')
+    yaml_filesname_with_path = path.join(
+        base, keywords_path, lang + '.yaml')
 
     with open(yaml_filesname_with_path, 'r', encoding='UTF-8') as stream:
         command_combinations = yaml.safe_load(stream)
+
+    for k, v in command_combinations.items():
+        if type(v) == str and "|" in v:
+            # when we have several options, pick the first one as default
+            command_combinations[k] = v.split('|')[0]
+
 
     return command_combinations
 
 
 def all_keywords_to_dict():
-    """Return a dictionary where each key is a list of the translations of that keyword. Used for testing"""    
-    keyword_list = []
-    for lang in KEYWORD_LANGUAGES:
+    """Return a dictionary where each value is a list of the translations of that keyword (key). Used for testing"""
+    keyword_dict = {}
+    for lang in hedy_content.ALL_KEYWORD_LANGUAGES:
         commands = keywords_to_dict(lang)
-        keyword_list.append(commands)
+        keyword_dict[lang] = commands
 
-    #gets the translation but defaults to the key k (in En) when it is not present
-    all_translations = {k: [d.get(k, k) for d in keyword_list] for k in keyword_list[0]}
+    all_translations = {k: [v.get(k,k) for v in keyword_dict.values()] for k in keyword_dict['en']}
     return all_translations
 
 
 def translate_keywords(input_string_, from_lang="en", to_lang="nl", level=1):
     """"Return code with keywords translated to language of choice in level of choice"""
+    try:
+        processed_input = hedy.process_input_string(input_string_, level, escape_backslashes=False)
 
-    processed_input = hedy.process_input_string(input_string_, level)
+        parser = hedy.get_parser(level, from_lang, True)
+        keyword_dict_from = keywords_to_dict(from_lang)
+        keyword_dict_to = keywords_to_dict(to_lang)
 
-    parser = hedy.get_parser(level, from_lang, True)
-    keyword_dict_from = keywords_to_dict(from_lang)
-    keyword_dict_to = keywords_to_dict(to_lang)
+        program_root = parser.parse(processed_input + '\n').children[0]
 
-    program_root = parser.parse(processed_input + '\n').children[0]
+        translator = Translator(processed_input)
+        translator.visit(program_root)
+        ordered_rules = reversed(
+            sorted(translator.rules, key=operator.attrgetter("line", "start")))
 
-    translator = Translator(processed_input)
-    translator.visit(program_root)
-    ordered_rules = reversed(sorted(translator.rules, key=operator.attrgetter("line", "start")))
+        # FH Feb 2022 TODO trees containing invalid nodes are happily translated, should be stopped here!
 
-    # FH Feb 2022 TODO trees containing invalid nodes are happily translated, should be stopped here!
+        result = processed_input
+        for rule in ordered_rules:
+            if rule.keyword in keyword_dict_from and rule.keyword in keyword_dict_to:
+                lines = result.splitlines()
+                line = lines[rule.line-1]
+                replaced_line = replace_token_in_line(
+                    line, rule, keyword_dict_from[rule.keyword], keyword_dict_to[rule.keyword])
+                result = replace_line(lines, rule.line-1, replaced_line)
 
-    result = processed_input
-    for rule in ordered_rules:
-        if rule.keyword in keyword_dict_from and rule.keyword in keyword_dict_to:
-            lines = result.splitlines()
-            line = lines[rule.line-1]
-            replaced_line = replace_token_in_line(line, rule, keyword_dict_from[rule.keyword], keyword_dict_to[rule.keyword])
-            result = replace_line(lines, rule.line-1, replaced_line)
+        # For now the needed post processing is only removing the 'end-block's added during pre-processing
+        result = '\n'.join([line for line in result.splitlines()
+                           if not line.startswith('end-block')])
 
-    # For now the needed post processing is only removing the 'end-block's added during pre-processing
-    result = '\n'.join([line for line in result.splitlines() if not line.startswith('end-block')])
-
-    return result
+        return result
+    except:
+        return input_string_
 
 
 def replace_line(lines, index, line):
@@ -138,19 +147,22 @@ class Translator(Visitor):
 
     def left(self, tree):
         token = tree.children[0]
-        rule = Rule('left', token.line, token.column - 1, token.end_column - 2, token.value)
+        rule = Rule('left', token.line, token.column -
+                    1, token.end_column - 2, token.value)
         self.rules.append(rule)
 
     def right(self, tree):
         token = tree.children[0]
-        rule = Rule('right', token.line, token.column - 1, token.end_column - 2, token.value)
+        rule = Rule('right', token.line, token.column -
+                    1, token.end_column - 2, token.value)
         self.rules.append(rule)
 
     def assign_list(self, tree):
         self.add_rule('_IS', 'is', tree)
         commas = self.get_keyword_tokens('_COMMA', tree)
         for comma in commas:
-            rule = Rule('comma', comma.line, comma.column - 1, comma.end_column - 2, comma.value)
+            rule = Rule('comma', comma.line, comma.column -
+                        1, comma.end_column - 2, comma.value)
             self.rules.append(rule)
 
     def assign(self, tree):
@@ -169,7 +181,8 @@ class Translator(Visitor):
 
     def random(self, tree):
         token = tree.children[0]
-        rule = Rule('random', token.line, token.column - 1, token.end_column - 2, token.value)
+        rule = Rule('random', token.line, token.column -
+                    1, token.end_column - 2, token.value)
         self.rules.append(rule)
 
     def ifs(self, tree):
@@ -223,10 +236,10 @@ class Translator(Visitor):
     def while_loop(self, tree):
         self.add_rule('_WHILE', 'while', tree)
 
-    def andcondition(self, tree):
+    def and_condition(self, tree):
         self.add_rule('_AND', 'and', tree)
 
-    def orcondition(self, tree):
+    def or_condition(self, tree):
         self.add_rule('_OR', 'or', tree)
 
     def input(self, tree):
@@ -240,7 +253,8 @@ class Translator(Visitor):
     def add_rule(self, token_name, token_keyword, tree):
         token = self.get_keyword_token(token_name, tree)
         if token:
-            rule = Rule(token_keyword, token.line, token.column - 1, token.end_column - 2, token.value)
+            rule = Rule(token_keyword, token.line, token.column -
+                        1, token.end_column - 2, token.value)
             self.rules.append(rule)
 
     def get_keyword_token(self, token_type, node):

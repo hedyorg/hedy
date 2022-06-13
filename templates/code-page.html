@@ -1,19 +1,31 @@
 {% extends "level-page.html" %}
 {% block levelbody %}
+{% if tutorial %}
+<div id="tutorial-pop-up" class="z-50 fixed hidden" style="width: 500px; top: 20%; left: 50%; transform: translate(-50%, -50%);">
+      <div class="bg-blue-500 border border-black rounded-lg px-8 py-4 text-center">
+          <h2 id="tutorial_title" class="text-white"></h2>
+          <p id="tutorial_text"></p>
+          <button id="tutorial_next_button" class="green-btn mt-4">{{_('next_step_tutorial')}}</button>
+      </div>
+  </div>
+{% endif %}
 <div tabindex="0" class="flex-grow p-4 overflow-y-scroll">
     {# When we're NOT in adventure mode but DO have adventures, render them in tabs #}
     {% include "incl-adventure-tabs.html" %}
 
     {% include "incl-editor-and-output.html" %}
 
-    <div class="text-sm mt-10 ltr:mr-5 rtl:ml-5 font-extralight">
-    Latest update: {{latest}}
-    </div>
+    {% if latest %}
+      <div class="text-sm mt-10 ltr:mr-5 rtl:ml-5 font-extralight">
+      Latest update: {{latest}}
+      </div>
+    {% endif %}
 </div>
-
 {% endblock %}
 
 {% block scripts %}
+  <link rel="stylesheet" href="{{ static('/css/quiz-css.css')}}">
+  <link rel="stylesheet" href="{{ static('/css/progress-bar.css')}}">
   <script src="{{static('/vendor/ace.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
   <script src="{{static('/vendor/ext-whitespace.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
   <script src="{{static('/vendor/ext-rtl.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
@@ -38,4 +50,12 @@
   <script src="{{static('/vendor/skulpt.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
   <script src="{{static('/vendor/skulpt-stdlib.js')}}" type="text/javascript" crossorigin="anonymous"></script>
   <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+  <!-- If we are in tutorial mode -> hide most features, slowly release them -->
+  {% if tutorial %}
+    <script>
+      $(document).ready(function() {
+        hedyApp.startTutorial();
+      });
+    </script>
+  {% endif %}
 {% endblock %}

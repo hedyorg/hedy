@@ -57,12 +57,12 @@
     <div class="flex flex-row">
         <div class="flex flex-col ltr:mr-4 rtl:ml-4">
             <h3 class="px-4">{{_('opening_dates')}}</h3>
-            <div class="border border-gray-400 w-3/4 py-2 px-4 rounded-lg">
+            <div class="border border-gray-400 w-full py-2 px-4 rounded-lg">
                 <table class="table-auto text-center opening_dates_overview">
                     <thead>
                         <tr>
-                            <th class="w-40 border-r border-gray-400 text-left px-4">{{ _('level_title') }}</th>
-                            <th class="w-64">{{_('opening_date')}}</th>
+                            <th class="w-64 border-r border-gray-400 text-left px-4">{{ _('level_title') }}</th>
+                            <th class="w-full">{{_('opening_date')}}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -72,11 +72,11 @@
                                 <td class="border-t border-gray-400 ltr:pl-2 rtl:pr-2">
                                     <input level="{{ i }}"
                                        {% if customizations and 'opening_dates' in customizations and i|string in customizations['opening_dates'] %}
-                                        type="date" value="{{ customizations['opening_dates'][i|string] }}"
+                                        type="date" value="{{ customizations['opening_dates'][i|string] }}" placeholder="{{_('directly_available')}}"
                                        {% else %}
                                         type="text" onfocus="(this.type='date')" placeholder="{{_('directly_available')}}"
                                        {% endif %}
-                                       class="inline-block text-center appearance-none bg-gray-200 border border-gray-200 w-full h-10 my-1 text-gray-700 py-2 px-4 rounded">
+                                       class="opening_date_input inline-block text-center appearance-none bg-gray-200 border border-gray-200 w-full h-10 my-1 text-gray-700 py-2 px-4 rounded">
                                 </td>
                             </tr>
                         {% endfor %}
@@ -85,76 +85,100 @@
             </div>
         </div>
         <div class="flex flex-col ltr:ml-4 rtl:mr-4">
-            <h3 class="px-4">{{_('select_own_adventures')}}</h3>
-            <div class="border border-gray-400 py-2 px-4 rounded-lg">
-                <table class="table-auto text-center w-full customize_own_adventure_overview">
-                    <thead>
-                        <tr>
-                            <th class="w-64 text-left border-r border-gray-400">{{ _('adventure') }}</th>
-                            <th class="w-64 border-r border-gray-400">{{ _('level_title') }}</th>
-                            <th class="w-64">{{_('select')}}?</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for adventure in teacher_adventures %}
+            <div class="flex flex-col">
+                <h3 class="px-4">{{_('select_own_adventures')}}</h3>
+                <div class="border border-gray-400 py-2 px-4 rounded-lg">
+                    <table class="table-auto text-center w-full customize_own_adventure_overview">
+                        <thead>
                             <tr>
-                                <td class="text-left border-t border-r border-gray-400">{{ adventure.name }}</td>
-                                <td class="border-t border-r border-gray-400">{{ adventure.level }}</td>
-                                <td class="border-t border-gray-400 ">
-                                    <input class="teacher_adventures_checkbox" {% if adventure.id in customizations['teacher_adventures'] %}checked{% endif %} type="checkbox" id="{{ adventure.id }}">
+                                <th class="w-64 text-left border-r border-gray-400">{{ _('adventure') }}</th>
+                                <th class="w-64 border-r border-gray-400">{{ _('level_title') }}</th>
+                                <th class="w-64">{{_('select')}}?</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for adventure in teacher_adventures %}
+                                <tr>
+                                    <td class="text-left border-t border-r border-gray-400">{{ adventure.name }}</td>
+                                    <td class="border-t border-r border-gray-400">{{ adventure.level }}</td>
+                                    <td class="border-t border-gray-400 ">
+                                        <input class="teacher_adventures_checkbox" {% if adventure.id in customizations['teacher_adventures'] %}checked{% endif %} type="checkbox" id="{{ adventure.id }}">
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="flex flex-col">
+                <h3 class="px-4">{{_('other_settings')}}</h3>
+                <div class="border border-gray-400 py-2 px-4 rounded-lg">
+                    <table class="table-auto text-center w-full customize_other_settings">
+                        <thead>
+                            <tr>
+                                <th class="w-64 text-left border-r border-gray-400">{{_('option')}}</th>
+                                <th class="w-40">{{_('select')}}?</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-left border-t border-r border-gray-400">{{_('mandatory_mode')}}</td>
+                                <td class="border-t border-gray-400">
+                                    <input class="other_settings_checkbox" id="developers_mode" type="checkbox" {% if "developers_mode" in customizations['other_settings'] %}checked{% endif %}>
                                 </td>
                             </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+                            <tr>
+                                <td class="text-left border-t border-r border-gray-400">{{_('hide_cheatsheet')}}</td>
+                                <td class="border-t border-gray-400">
+                                    <input class="other_settings_checkbox" id="hide_cheatsheet" type="checkbox" {% if "hide_cheatsheet" in customizations['other_settings'] %}checked{% endif %}>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-left border-t border-r border-gray-400">{{_('hide_keyword_switcher')}}</td>
+                                <td class="border-t border-gray-400">
+                                    <input class="other_settings_checkbox" id="hide_keyword_switcher" type="checkbox" {% if "hide_keyword_switcher" in customizations['other_settings'] %}checked{% endif %}>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-left border-t border-r border-gray-400">{{_('hide_quiz')}}</td>
+                                <td class="border-t border-gray-400">
+                                    <input class="other_settings_checkbox" id="hide_quiz" type="checkbox" {% if "hide_quiz" in customizations['other_settings'] %}checked{% endif %}>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
-    </div>
-    <div class="flex flex-row mt-4 items-center">
-        <div class="flex flex-col ltr:ml-4 rtl:mr-4">
-            <h3 class="px-4">{{_('other_settings')}}</h3>
-            <div class="border border-gray-400 py-2 px-4 rounded-lg">
-                <table class="table-auto text-center w-full customize_other_settings">
-                    <thead>
-                        <tr>
-                            <th class="w-64 text-left border-r border-gray-400">{{_('option')}}</th>
-                            <th class="w-40">{{_('select')}}?</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="text-left border-t border-r border-gray-400">{{_('mandatory_mode')}}</td>
-                            <td class="border-t border-gray-400">
-                                <input class="other_settings_checkbox" id="developers_mode" type="checkbox" {% if "developers_mode" in customizations['other_settings'] %}checked{% endif %}>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text-left border-t border-r border-gray-400">{{_('hide_cheatsheet')}}</td>
-                            <td class="border-t border-gray-400">
-                                <input class="other_settings_checkbox" id="hide_cheatsheet" type="checkbox" {% if "hide_cheatsheet" in customizations['other_settings'] %}checked{% endif %}>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text-left border-t border-r border-gray-400">{{_('hide_keyword_switcher')}}</td>
-                            <td class="border-t border-gray-400">
-                                <input class="other_settings_checkbox" id="hide_keyword_switcher" type="checkbox" {% if "hide_keyword_switcher" in customizations['other_settings'] %}checked{% endif %}>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div class="flex flex-col">
-            <div class="flex flex-row ml-auto">
-                <button class="yellow-btn text-white" onclick="hedyApp.modal.confirm('{{_('reset_adventure_prompt')}}', function(){$('.adventure_level_input').prop('checked', false);$('.teacher_adventures_checkbox').prop('checked', false);});">{{_('reset_adventures')}}</button>
-                <button class="blue-btn ltr:ml-2 rtl:mr-2" onclick="hedyApp.save_customizations('{{class_info.id}}')">{{_('save')}}</button>
-            </div>
-            <div class="flex flex-row mt-2 ml-auto">
-                <button class="red-btn {% if not customizations %}hidden{% endif %}" id="remove_customizations_button" onclick="hedyApp.remove_customizations('{{class_info.id}}', '{{_('remove_customizations_prompt')}}')">
-                {{_('remove_customization')}}</button>
-                <button class="green-btn ltr:ml-2 rtl:mr-2" onclick="window.location.href = '/for-teachers/class/{{class_info.id}}'">{{_('back_to_class')}}</button>
+            <div class="flex flex-col mt-8">
+                <div class="flex flex-row ml-auto">
+                    <button class="yellow-btn text-white" onclick="hedyApp.modal.confirm('{{_('reset_adventure_prompt')}}', function(){$('.adventure_level_input').prop('checked', false);$('.teacher_adventures_checkbox').prop('checked', false);});">{{_('reset_adventures')}}</button>
+                    <button class="blue-btn ltr:ml-2 rtl:mr-2" onclick="hedyApp.save_customizations('{{class_info.id}}')">{{_('save')}}</button>
+                </div>
+                <div class="flex flex-row mt-2 ml-auto">
+                    <button class="red-btn {% if not customizations %}hidden{% endif %}" id="remove_customizations_button" onclick='hedyApp.remove_customizations("{{class_info.id}}", {{_('remove_customizations_prompt')|tojson}})'>
+                    {{_('remove_customization')}}</button>
+                    <button class="green-btn ltr:ml-2 rtl:mr-2" onclick=validate_changes()>{{_('back_to_class')}}</button>
+                </div>
             </div>
         </div>
     </div>
 </div>
+<script>
+// If we return something a pop-up will be given: "are you sure you want to leave?"
+// Best we can do as the beforeunload doesn't allow the call of functions or other methods
+$(window).bind('beforeunload', function(){
+    if (window.State.unsaved_changes) {
+        return " ";
+    };
+});
+function validate_changes() {
+    if(window.State.unsaved_changes) {
+        hedyApp.modal.confirm({{_('unsaved_class_changes')|tojson}}, function(){
+            window.location = "/for-teachers/class/{{class_info.id}}";
+        });
+    } else {
+        window.location = "/for-teachers/class/{{class_info.id}}";
+    }
+}
+</script>
 {% endblock %}

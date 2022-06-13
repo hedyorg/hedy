@@ -1,5 +1,4 @@
 import textwrap
-import app
 import hedy, hedy_translation
 import re
 import sys
@@ -7,6 +6,8 @@ import io, os
 from contextlib import contextmanager
 import inspect
 import unittest
+import utils
+
 
 class Snippet:
   def __init__(self, filename, level, field_name, code, adventure_name=None):
@@ -43,11 +44,11 @@ class HedyTester(unittest.TestCase):
   @staticmethod
   def run_code(parse_result):
     if parse_result.has_turtle:
-      code = app.TURTLE_PREFIX_CODE + parse_result.code
+      code = utils.TURTLE_PREFIX_CODE + parse_result.code
     else:
-      code = app.NORMAL_PREFIX_CODE + parse_result.code
+      code = utils.NORMAL_PREFIX_CODE + parse_result.code
 # remove sleep comments to make program execution less slow
-    code = re.sub(r'time\.sleep\([^)]*\)', 'pass', code)
+    code = re.sub(r'time\.sleep\([^\n]*\)', 'pass', code)
 
     with HedyTester.captured_output() as (out, err):
       exec(code)
@@ -78,6 +79,15 @@ class HedyTester(unittest.TestCase):
       t = tuple((item[i] for item in args))
       res.append(t)
     return res
+
+  def codeToInvalidInfo(self, code):
+    instance = hedy.IsValid()
+    instance.level = self.level
+    program_root = hedy.parse_input(code, self.level, 'en')
+    is_valid = instance.transform(program_root)
+    _, invalid_info = is_valid
+
+    return invalid_info[0].line, invalid_info[0].column
 
   def multi_level_tester(self, code, max_level=hedy.HEDY_MAX_LEVEL, expected=None, exception=None, extra_check_function=None, expected_commands=None, lang='en', translate=True, output=None):
     # used to test the same code snippet over multiple levels
@@ -203,6 +213,14 @@ class HedyTester(unittest.TestCase):
       except ValueError:
         raise Exception(f'While running your program the command <span class="command-highlighted">{command_text}</span> received the value <span class="command-highlighted">{{trtl}}</span> which is not allowed. Try changing the value to a number.')
       t.{command}(min(600, trtl) if trtl > 0 else max(-600, trtl)){suffix}""")
+
+  @staticmethod
+  def sleep_command_transpiled(val):
+    return textwrap.dedent(f"""\
+        try:
+          time.sleep(int({val}))
+        except ValueError:
+          raise Exception(f'While running your program the command <span class="command-highlighted">sleep</span> received the value <span class="command-highlighted">{{{val}}}</span> which is not allowed. Try changing the value to a number.')""")
 
   # Used to overcome indentation issues when the above code is inserted
   # in test cases which use different indentation style (e.g. 2 or 4 spaces)

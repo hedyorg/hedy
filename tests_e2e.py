@@ -16,6 +16,8 @@ import utils
 from config import config as CONFIG
 
 # *** GLOBAL VARIABLES ***
+from hedy import HEDY_MAX_LEVEL
+from hedy_content import ALL_LANGUAGES
 
 HOST = os.getenv('ENDPOINT', 'http://localhost:' + str(CONFIG['port']) + '/')
 if not HOST.endswith('/'): HOST += '/'
@@ -279,6 +281,24 @@ class TestPages(AuthHelper):
         # THEN receive an 404 response code from the server
         self.get_data('/cheatsheet/123', expect_http_code=404)
         self.get_data('/cheatsheet/panda', expect_http_code=404)
+
+    def test_all_languages(self):
+        # WHEN trying all languages to reach all pages
+        # THEN receive an OK response from the server
+        self.given_fresh_user_is_logged_in()
+
+        body = {'email': self.user['email'], 'keyword_language': self.user['keyword_language']}
+        pages = ['/', '/hedy', '/tutorial', '/explore', '/learn-more', '/programs', '/my-achievements', '/my-profile']
+
+        for language in ALL_LANGUAGES.keys():
+            body['language'] = language
+            self.post_data('profile', body)
+
+            for page in pages:
+                if page == "/hedy":
+                    for i in range(2, HEDY_MAX_LEVEL+1):
+                        self.get_data(page + "/" + str(i))
+                self.get_data(page)
 
 class TestSessionVariables(AuthHelper):
     def test_get_session_variables(self):
@@ -1173,7 +1193,6 @@ class TestClasses(AuthHelper):
         class_student = Class_data['students'][0]
         self.assertEqual(class_student['highest_level'], 0)
         self.assertEqual(class_student['programs'], 0)
-        self.assertEqual(class_student['latest_shared'], None)
         self.assertIsInstance(class_student['last_login'], str)
         self.assertEqual(class_student['username'], student['username'])
 
@@ -1426,6 +1445,49 @@ class TestCustomAdventures(AuthHelper):
         # WHEN attempting to remove the adventure
         # THEN receive an OK response from the server
         self.delete_data('for-teachers/customize-adventure/' + body.get('id', ""), expect_http_code=200)
+
+
+class TestMultipleAccounts(AuthHelper):
+    def test_not_allowed_create_accounts(self):
+        # GIVEN a new user without teacher permissions
+        self.given_fresh_user_is_logged_in()
+
+        # WHEN trying to create multiple accounts
+        # THEN receive a forbidden response code from the server
+        self.post_data('for-teachers/create-accounts', {}, expect_http_code=403)
+
+    def test_invalid_create_accounts(self):
+        # GIVEN a new teacher
+        self.given_fresh_teacher_is_logged_in()
+
+        # WHEN attempting to create invalid accounts
+        invalid_bodies = [
+            '',
+            [],
+            {},
+            {'accounts': []},
+            {'accounts': [{'username': 123}]},
+            {'accounts': [{'username': 'panda', 'password': 123}]},
+            {'accounts': [{'username': '@', 'password': 'test123'}]},
+            {'accounts': [{'username': 'panda', 'password': 'test123'}, {'username': 'panda2', 'password': 123}]}
+        ]
+
+        for invalid_body in invalid_bodies:
+            self.post_data('for-teachers/create-accounts', invalid_body, expect_http_code=400)
+
+    def test_create_accounts(self):
+        # GIVEN a new teacher
+        self.given_fresh_teacher_is_logged_in()
+
+        # WHEN attempting to create a valid adventure
+        # THEN receive an OK response with the server
+        body = {
+            'accounts': [
+                {'username': 'panda', 'password': 'test123'},
+                {'username': 'panda2', 'password': 'test321'}
+            ]
+        }
+        self.post_data('for-teachers/create-accounts', body, expect_http_code=200)
 
 # *** CLEANUP OF USERS CREATED DURING THE TESTS ***
 

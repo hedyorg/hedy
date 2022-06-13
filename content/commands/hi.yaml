@@ -386,7 +386,7 @@
         {print} 'तैयार या नहीं, यहाँ मैं आया!'
 -   name: '{if}'
     explanation: हमें अपने सभी `{if}` कथनों के साथ भी ऐसा ही करने की आवश्यकता है
-    example: अगर रंग {है} हरा:'
+    example: अगर रंग है हरा:'
     demo_code: |-
         रंग = {ask} 'आपका पसंदीदा रंग क्या है?'
         {if} रंग == हरा:
@@ -405,3 +405,11 @@
     demo_code: |-
         name = 'Hedy'
         {print}('my name is ', name)
+-   name: '{print} with var'
+    explanation: With `{print}` you need to use parentheses and commas if you {print} more items
+    example: '{print}'
+    demo_code: "name = 'Hedy'\n{print}('my name is ', name)"
+-   name: ask something with {input}
+    explanation: Use `{input}` instead of `{ask}` to ask something
+    example: '{input}'
+    demo_code: "name = {input}('What is your name?')\n{print}('So your name is ', name)"

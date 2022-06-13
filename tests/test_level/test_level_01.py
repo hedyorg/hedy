@@ -140,6 +140,79 @@ class TestsLevel1(HedyTester):
 
         self.single_level_tester(code=code, expected=expected, output=output, lang='ar')
 
+    def test_print_ar_tatweel_all_places(self):
+        code = "ـــقــولـ أ"
+        expected = "print('أ')"
+        output = 'أ'
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            output=output,
+            translate=False, #translation will remove the tatweels, we will deal with that later
+            lang='ar')
+
+    def test_ask_ar_tatweel_all_places(self):
+        code = "اســأل أ"
+        expected = "answer = input('أ')"
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            translate=False, #translation will remove the tatweels, we will deal with that later
+            lang='ar')
+
+    # def test_print_ar_tatweel_itself(self):
+    # FH, May 2022, sadly beginning a string with tatweel does not work
+    # would need complex changes to the grammar (documented further in the grammar of level 1)
+    # so I am leaving this as it is for now
+    #     code = "قول ـ"
+    #     expected = "print('ـ')"
+    #     output = 'ـ'
+    #
+    #     self.single_level_tester(
+    #         code=code,
+    #         expected=expected,
+    #         output=output,
+    #         translate=False, #translation will remove the tatweels, we will deal with that later
+    #         lang='ar')
+
+    def test_print_ar_tatweel_printing(self):
+        code = "قول لــــ"
+        expected = "print('لــــ')"
+        output = 'لــــ'
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            output=output,
+            translate=False, #translation will remove the tatweels, we will deal with that later
+            lang='ar')
+
+    def test_print_ar_tatweel_begin(self):
+        code = "ـــقول أ"
+        expected = "print('أ')"
+        output = 'أ'
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            output=output,
+            translate=False, #translation will remove the tatweels, we will deal with that later
+            lang='ar')
+
+    def test_print_ar_tatweel_multiple_end(self):
+        code = "ـــقــوـلــــ أ"
+        expected = "print('أ')"
+        output = 'أ'
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+            output=output,
+            translate=False, #translation will remove the tatweels, we will deal with that later
+            lang='ar')
+
     def test_print_ar_2(self):
         code = "قول مرحبا أيها العالم!"
         expected = "print('مرحبا أيها العالم!')"
@@ -318,35 +391,36 @@ class TestsLevel1(HedyTester):
             max_level=self.max_turtle_level,
             extra_check_function=self.is_turtle()
         )
+
     #
     # color tests
     #
     def test_color_no_args(self):
-      code = "color"
-      expected = "t.pencolor('black')"
-      self.single_level_tester(code=code, expected=expected,
-                               extra_check_function=self.is_turtle())
+        code = "color"
+        expected = "t.pencolor('black')"
+        self.single_level_tester(code=code, expected=expected,
+                                 extra_check_function=self.is_turtle())
 
     def test_one_color_red(self):
-      code = "color red"
-      expected = "t.pencolor('red')"
+        code = "color red"
+        expected = "t.pencolor('red')"
 
-      self.single_level_tester(code=code, expected=expected,
-                               extra_check_function=self.is_turtle())
+        self.single_level_tester(code=code, expected=expected,
+                                 extra_check_function=self.is_turtle())
 
     def test_one_color_purple(self):
-      code = "color purple"
-      expected = "t.pencolor('purple')"
+        code = "color purple"
+        expected = "t.pencolor('purple')"
 
-      self.single_level_tester(code=code, expected=expected,
-                               extra_check_function=self.is_turtle())
+        self.single_level_tester(code=code, expected=expected,
+                                 extra_check_function=self.is_turtle())
 
     def test_one_color_purple_nl(self):
-      code = "kleur paars"
-      expected = "t.pencolor('purple')"
+        code = "kleur paars"
+        expected = "t.pencolor('purple')"
 
-      self.single_level_tester(code=code, expected=expected,
-                               extra_check_function=self.is_turtle(), lang='nl')
+        self.single_level_tester(code=code, expected=expected,
+                                 extra_check_function=self.is_turtle(), lang='nl')
 
     #
     # turn tests
@@ -451,7 +525,7 @@ class TestsLevel1(HedyTester):
             HedyTester.forward_transpiled(100))
 
         self.multi_level_tester(
-            max_level=7,
+            max_level=self.max_turtle_level,
             code=code,
             expected=expected,
             extra_check_function=self.is_turtle(),

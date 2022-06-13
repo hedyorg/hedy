@@ -128,7 +128,7 @@ class TestsLevel2(HedyTester):
         code = "kleur is ask wat is je lievelingskleur?"
         expected = "kleur = input('wat is je lievelingskleur'+'?')"
 
-        self.single_level_tester(code=code, expected=expected)
+        self.multi_level_tester(code=code, expected=expected, max_level=3)
 
     def test_ask_single_quoted_text(self):
         code = "name is ask 'Who's that'"
@@ -179,17 +179,6 @@ class TestsLevel2(HedyTester):
         expected = textwrap.dedent("""\
         ve1760b6272d4c9f816e62af4882d874f = input('আপনার প্রিয় রং কি'+'?')
         print(f'{ve1760b6272d4c9f816e62af4882d874f} is আপনার প্রিয')""")
-
-        self.multi_level_tester(code=code, expected=expected, max_level=3)
-
-    def test_ask_hungarian_var(self):
-        code = textwrap.dedent("""\
-        állatok is kutya
-        print állatok""")
-
-        expected = textwrap.dedent("""\
-        v79de0191e90551f058d466c5e8c267ff = 'kutya'
-        print(f'{v79de0191e90551f058d466c5e8c267ff}')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=3)
 
@@ -319,32 +308,73 @@ class TestsLevel2(HedyTester):
     #
     # sleep tests
     #
+
     def test_sleep(self):
         code = "sleep"
         expected = "time.sleep(1)"
 
-        self.multi_level_tester(
-            code=code,
-            expected=expected
-        )
+        self.multi_level_tester(code=code, expected=expected)
 
     def test_sleep_with_default_number(self):
         code = "sleep 1"
-        expected = "time.sleep(1)"
+        expected = HedyTester.sleep_command_transpiled('"1"')
 
-        self.multi_level_tester(
-            code=code,
-            expected=expected
-        )
+        self.multi_level_tester(code=code, expected=expected)
 
     def test_sleep_with_number(self):
-        code = "sleep 2"
-        expected = "time.sleep(2)"
+        code = "sleep 20"
+        expected = HedyTester.sleep_command_transpiled('"20"')
 
-        self.multi_level_tester(
-            code=code,
-            expected=expected
-        )
+        self.multi_level_tester(code=code, expected=expected)
+
+    def test_sleep_with_number_hi(self):
+        code = "sleep २"
+        expected = HedyTester.sleep_command_transpiled('"2"')
+
+        self.multi_level_tester(code=code, expected=expected)
+
+    def test_sleep_with_number_ar(self):
+        code = "sleep ٣"
+        expected = HedyTester.sleep_command_transpiled('"3"')
+
+        self.multi_level_tester(code=code, expected=expected)
+
+    def test_sleep_with_number_variable(self):
+        code = textwrap.dedent("""\
+            n is 2
+            sleep n""")
+        expected = HedyTester.dedent(
+            "n = '2'",
+            HedyTester.sleep_command_transpiled("n"))
+
+        self.multi_level_tester(max_level=11, code=code, expected=expected)
+
+    def test_sleep_with_number_variable_hi(self):
+        code = textwrap.dedent("""\
+            n is २
+            sleep n""")
+        expected = HedyTester.dedent(
+            "n = '२'",
+            HedyTester.sleep_command_transpiled("n"))
+
+        self.multi_level_tester(max_level=11, code=code, expected=expected)
+
+    def test_sleep_with_input_variable(self):
+        code = textwrap.dedent("""\
+            n is ask how long
+            sleep n""")
+        expected = HedyTester.dedent(
+            "n = input('how long')",
+            HedyTester.sleep_command_transpiled("n"))
+
+        self.multi_level_tester(max_level=3, code=code, expected=expected)
+
+    def test_sleep_with_string_variable_gives_error(self):
+        code = textwrap.dedent("""\
+            n is test
+            sleep n""")
+
+        self.multi_level_tester(max_level=11, code=code, exception=hedy.exceptions.InvalidArgumentTypeException)
 
     #
     # is tests
@@ -385,6 +415,30 @@ class TestsLevel2(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
+    def test_assign_text_to_hungarian_var(self):
+        code = textwrap.dedent("""\
+        állatok is kutya
+        print állatok""")
+
+        expected = textwrap.dedent("""\
+        v79de0191e90551f058d466c5e8c267ff = 'kutya'
+        print(f'{v79de0191e90551f058d466c5e8c267ff}')""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=11)
+
+    def test_assign_bengali_var(self):
+        hashed_var = hedy.hash_var("নাম")
+        code = "নাম is হেডি"
+        expected = f"{hashed_var} = 'হেডি'"
+
+        self.multi_level_tester(code=code, expected=expected, max_level=11)
+
+    def test_assign_python_keyword(self):
+        code = "for is Hedy"
+        expected = "vd55669822f1a8cf72ec1911e462a54eb = 'Hedy'"
+
+        self.multi_level_tester(code=code, expected=expected, max_level=11)
+
     #
     # markup tests
     #
@@ -393,7 +447,7 @@ class TestsLevel2(HedyTester):
         expected = textwrap.dedent("""\
         print(f'hallo wereld')""")
 
-        self.single_level_tester(code=code, expected=expected)
+        self.multi_level_tester(code=code, expected=expected, max_level=3)
 
     #
     # combined tests
@@ -420,11 +474,11 @@ class TestsLevel2(HedyTester):
 
     def test_forward_ask(self):
         code = textwrap.dedent("""\
-        afstand is ask hoe ver dan?
-        forward afstand""")
+            afstand is ask hoe ver dan?
+            forward afstand""")
         expected = HedyTester.dedent(
-        "afstand = input('hoe ver dan'+'?')",
-        HedyTester.forward_transpiled('afstand'))
+            "afstand = input('hoe ver dan'+'?')",
+            HedyTester.forward_transpiled('afstand'))
 
         self.multi_level_tester(
             code=code,

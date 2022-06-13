@@ -63,6 +63,41 @@ class TestsLevel11(HedyTester):
 
     self.single_level_tester(code=code, expected=expected)
 
+  def test_repeat_with_indent(self):
+    code = textwrap.dedent("""\
+    repeat 5 times
+        print 'koekoek'""")
+
+
+    expected = textwrap.dedent("""\
+    for i in range(int('5')):
+      print(f'koekoek')
+      time.sleep(0.1)""")
+
+    self.single_level_tester(code=code, expected=expected)
+
+  def test_repeat_with_variable_print(self):
+    code = textwrap.dedent("""\
+    n is 5
+    repeat n times
+        print 'me wants a cookie!'""")
+
+    expected = textwrap.dedent("""\
+    n = '5'
+    for i in range(int(n)):
+      print(f'me wants a cookie!')
+      time.sleep(0.1)""")
+
+    output = textwrap.dedent("""\
+    me wants a cookie!
+    me wants a cookie!
+    me wants a cookie!
+    me wants a cookie!
+    me wants a cookie!""")
+
+    self.single_level_tester(code=code, expected=expected, output=output)
+
+
   def test_for_loop_with_print(self):
     code = textwrap.dedent("""\
     for i in range 1 to 10
@@ -75,12 +110,26 @@ class TestsLevel11(HedyTester):
       time.sleep(0.1)
     print(f'wie niet weg is is gezien')""")
 
+    output = textwrap.dedent("""\
+    1
+    2
+    3
+    4
+    5
+    6
+    7
+    8
+    9
+    10
+    wie niet weg is is gezien""")
+
     self.single_level_tester(
       code=code,
       expected=expected,
-      expected_commands=['for', 'print', 'print'])
+      expected_commands=['for', 'print', 'print'],
+      output=output)
 
-  def test_for_loop_hindi(self):
+  def test_for_loop_hindi_variable(self):
     code = textwrap.dedent("""\
     for काउंटर in range 1 to 5
         print काउंटर""")
@@ -93,6 +142,56 @@ class TestsLevel11(HedyTester):
 
     self.single_level_tester(
       code=code,
+      expected=expected,
+      expected_commands=['for', 'print'])
+
+  def test_for_loop_arabic_range_latin_output(self):
+    code = textwrap.dedent("""\
+    for دورة in range ١ to ٥
+        print دورة""")
+
+    expected = textwrap.dedent("""\
+    step = 1 if int(1) < int(5) else -1
+    for v637d5dd1f16a4cc1d923588cb55ede49 in range(int(1), int(5) + step, step):
+      print(f'{v637d5dd1f16a4cc1d923588cb55ede49}')
+      time.sleep(0.1)""")
+
+    output=textwrap.dedent("""\
+    1
+    2
+    3
+    4
+    5""")
+
+    self.single_level_tester(
+      code=code,
+      output=output,
+      expected=expected,
+      expected_commands=['for', 'print'])
+
+  def test_for_loop_arabic_range_arabic_output(self):
+    code = textwrap.dedent("""\
+    for دورة in range ١ to ٥
+        print دورة""")
+
+    expected = textwrap.dedent("""\
+    step = 1 if int(1) < int(5) else -1
+    for v637d5dd1f16a4cc1d923588cb55ede49 in range(int(1), int(5) + step, step):
+      print(f'{convert_numerals("Arabic",v637d5dd1f16a4cc1d923588cb55ede49)}')
+      time.sleep(0.1)""")
+
+    output=textwrap.dedent("""\
+    ١
+    ٢
+    ٣
+    ٤
+    ٥""")
+
+    self.single_level_tester(
+      code=code,
+      output=output,
+      lang='ar',
+      translate=False,
       expected=expected,
       expected_commands=['for', 'print'])
 

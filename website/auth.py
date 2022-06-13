@@ -115,12 +115,12 @@ def is_user_logged_in():
 def forget_current_user():
     session.pop('user', None)  # We are not interested in the value of the use key.
     session.pop('achieved', None)  # Delete session achievements if existing
-    session.pop('keyword_lang', None)  # Delete session achievements if existing
+    session.pop('keyword_lang', None)  # Delete session keyword language if existing
 
 
 def is_admin(user):
     admin_user = os.getenv('ADMIN_USER')
-    return user['username'] == admin_user or user['email'] == admin_user
+    return user.get('username') == admin_user or user.get('email') == admin_user
 
 
 def is_teacher(user):
@@ -135,7 +135,7 @@ def update_is_teacher(user, is_teacher_value=1):
     DATABASE.update_user(user['username'], {'is_teacher': is_teacher_value})
 
     if user_becomes_teacher and not is_testing_request(request):
-        send_email_template('welcome_teacher', user['email'], '')
+        send_email_template(template='welcome_teacher', email=user['email'], username=user['username'])
 
 
 # Thanks to https://stackoverflow.com/a/34499643
@@ -177,6 +177,18 @@ def prepare_user_db(username, password):
 
     return username, hashed, hashed_token
 
+def validate_student_signup_data(account):
+    if not isinstance(account.get('username'), str):
+        return gettext('username_invalid')
+    if '@' in account.get('username') or ':' in account.get('username'):
+        return gettext('username_special')
+    if len(account.get('username').strip()) < 3:
+        return gettext('username_three')
+    if not isinstance(account.get('password'), str):
+        return gettext('password_invalid')
+    if len(account.get('password')) < 6:
+        return gettext('passwords_six')
+    return None
 
 def validate_signup_data(account):
     if not isinstance(account.get('username'), str):
@@ -192,6 +204,22 @@ def validate_signup_data(account):
     if len(account.get('password')) < 6:
         return gettext('passwords_six')
     return None
+
+
+def store_new_student_account(account, teacher_username):
+    username, hashed, hashed_token = prepare_user_db(account['username'], account['password'])
+    user = {
+        'username': username,
+        'password': hashed,
+        'language': account['language'],
+        'keyword_language': account['keyword_language'],
+        'created': timems(),
+        'teacher': teacher_username,
+        'verification_pending': hashed_token,
+        'last_login': timems()
+    }
+    DATABASE.store_user(user)
+    return user
 
 
 def store_new_account(account, email):
@@ -220,13 +248,22 @@ def store_new_account(account, email):
         resp = make_response({'username': username, 'token': hashed_token})
     # Otherwise, we send an email with a verification link and we return an empty body
     else:
-        send_email_template('welcome_verify', email,
-                            email_base_url() + '/auth/verify?username=' + urllib.parse.quote_plus(
-                                username) + '&token=' + urllib.parse.quote_plus(hashed_token), lang=user['language'],
-                            username=user['username'])
+        send_email_template(template='welcome_verify', email=email,
+                            link=create_verify_link(username, hashed_token), username=user['username'])
         resp = make_response({})
     return user, resp
 
+
+def create_recover_link(username, token):
+    email = email_base_url() + '/reset?username='
+    email += urllib.parse.quote_plus(username) + '&token=' + urllib.parse.quote_plus(token)
+    return email
+
+
+def create_verify_link(username, token):
+    email = email_base_url() + '/auth/verify?username='
+    email += urllib.parse.quote_plus(username) + '&token=' + urllib.parse.quote_plus(token)
+    return email
 
 # Note: translations are used only for texts that will be seen by a GUI user.
 def routes(app, database):
@@ -265,12 +302,18 @@ def routes(app, database):
         else:
             DATABASE.record_login(user['username'])
 
+        # Make an empty response to make sure we have one
+        resp = make_response()
+
         if is_admin(user):
             resp = make_response({'admin': True})
         elif user.get('is_teacher'):
             resp = make_response({'teacher': True})
-        else:
-            resp = make_response({'teacher': False})
+
+        # If the user is a student (and has a related teacher) and the verification is still pending -> first login
+        if user.get('teacher') and user.get('verification_pending'):
+            DATABASE.update_user(user['username'], {'verification_pending': None})
+            resp = make_response({'first_time': True})
 
         # We set the cookie to expire in a year, just so that the browser won't invalidate it if the same cookie gets renewed by constant use.
         # The server will decide whether the cookie expires.
@@ -469,7 +512,7 @@ def routes(app, database):
         DATABASE.update_user(user['username'], {'password': hashed})
         # We are not updating the user in the Flask session, because we should not rely on the password in anyway.
         if not is_testing_request(request):
-            send_email_template('change_password', user['email'], '', lang=user['language'], username=user['username'])
+            send_email_template(template='change_password', email=user['email'], username=user['username'])
 
         return gettext('password_updated'), 200
 
@@ -479,13 +522,17 @@ def routes(app, database):
         body = request.json
         if not isinstance(body, dict):
             return gettext('ajax_error'), 400
-        if not isinstance(body.get('email'), str) or not valid_email(body['email']):
-            return gettext('email_invalid'), 400
         if not isinstance(body.get('language'), str) or body.get('language') not in ALL_LANGUAGES.keys():
             return gettext('language_invalid'), 400
         if not isinstance(body.get('keyword_language'), str) or body.get('keyword_language') not in ['en', body.get(
                 'language')] or body.get('keyword_language') not in ALL_KEYWORD_LANGUAGES.keys():
             return gettext('keyword_language_invalid'), 400
+
+        # Mail is a unique field, only mandatory if the user doesn't have a related teacher (and no mail address)
+        user = DATABASE.user_by_username(user['username'])
+        if not user.get('teacher') or 'email' in body:
+            if not isinstance(body.get('email'), str) or not valid_email(body['email']):
+                return gettext('email_invalid'), 400
 
         # Validations, optional fields
         if 'birth_year' in body:
@@ -509,7 +556,7 @@ def routes(app, database):
         resp = {}
         if 'email' in body:
             email = body['email'].strip().lower()
-            if email != user['email']:
+            if email != user.get('email'):
                 exists = DATABASE.user_by_email(email)
                 if exists:
                     return gettext('exists_email'), 403
@@ -520,10 +567,9 @@ def routes(app, database):
                 if is_testing_request(request):
                     resp = {'username': user['username'], 'token': hashed_token}
                 else:
-                    send_email_template('welcome_verify', email,
-                                        email_base_url() + '/auth/verify?username=' + urllib.parse.quote_plus(
-                                            user['username']) + '&token=' + urllib.parse.quote_plus(hashed_token),
-                                        lang=body['language'], username=user['username'])
+                    send_email_template(template='welcome_verify', email=email,
+                                        link=create_verify_link(user['username'], hashed_token),
+                                        username=user['username'])
 
                 # We check whether the user is in the Mailchimp list.
                 if not is_testing_request(request) and MAILCHIMP_API_URL:
@@ -597,18 +643,24 @@ def routes(app, database):
         if not user:
             return gettext('username_invalid'), 403
 
+        # In this case -> account has a related teacher (and is a student)
+        # We still store the token, but sent the mail to the teacher instead
+        if user.get('teacher') and not user.get('email'):
+            email = DATABASE.user_by_username(user.get('teacher')).get('email')
+        else:
+            email = user['email']
+
         # Create a token -> use the reset_length value as we don't want the token to live as long as a login one
         token = make_salt()
+        # Todo TB -> Don't we want to use a hashed token here as well?
         DATABASE.store_token({'id': token, 'username': user['username'], 'ttl': times() + reset_length})
 
         if is_testing_request(request):
             # If this is an e2e test, we return the email verification token directly instead of emailing it.
             return jsonify({'username': user['username'], 'token': token}), 200
         else:
-            send_email_template('recover_password', user['email'],
-                                email_base_url() + '/reset?username=' + urllib.parse.quote_plus(
-                                    user['username']) + '&token=' + urllib.parse.quote_plus(token),
-                                lang=user['language'], username=user['username'])
+            send_email_template(template='recover_password', email=email,
+                                link=create_recover_link(user['username'], token), username=user['username'])
             return jsonify({'message':gettext('sent_password_recovery')}), 200
 
     @app.route('/auth/reset', methods=['POST'])
@@ -639,8 +691,15 @@ def routes(app, database):
         # Delete all tokens of the user -> automatically logout all long-lived sessions
         DATABASE.delete_all_tokens(body['username'])
 
+        # In this case -> account has a related teacher (and is a student)
+        # We mail the teacher instead
+        if user.get('teacher') and not user.get('email'):
+            email = DATABASE.user_by_username(user.get('teacher')).get('email')
+        else:
+            email = user['email']
+
         if not is_testing_request(request):
-            send_email_template('reset_password', user['email'], None, lang=user['language'], username=user['username'])
+            send_email_template(template='reset_password', email=email, username=user['username'])
 
         return jsonify({'message':gettext('password_resetted')}), 200
 
@@ -704,10 +763,9 @@ def routes(app, database):
         if is_testing_request(request):
             resp = {'username': user['username'], 'token': hashed_token}
         else:
-            send_email_template('welcome_verify', body['email'],
-                                email_base_url() + '/auth/verify?username=' + urllib.parse.quote_plus(
-                                    user['username']) + '&token=' + urllib.parse.quote_plus(hashed_token),
-                                lang=user['language'], username=user['username'])
+            send_email_template(template='welcome_verify', email=body['email'],
+                                link=create_verify_link(user['username'], hashed_token),
+                                username=user['username'])
 
         return {}, 200
 
@@ -747,16 +805,42 @@ def send_email(recipient, subject, body_plain, body_html):
         print('Email sent to ' + recipient)
 
 
-def send_email_template(template, email, link='', lang="en", username=''):
-    # Not really nice, but we don't call this often as it is cached
-    texts = collections.defaultdict(lambda: 'Unknown Exception')
-    texts.update(YamlFile.for_file('content/emails/en.yaml').to_dict())
-    texts.update(YamlFile.for_file(f'content/emails/{lang}.yaml').to_dict())
+def get_template_translation(template):
+    if template == 'welcome_verify':
+        return gettext('mail_welcome_verify_body')
+    elif template == 'change_password':
+        return gettext('mail_change_password_body')
+    elif template == 'recover_password':
+        return gettext('mail_recover_password_body')
+    elif template == 'reset_password':
+        return gettext('mail_reset_password_body')
+    elif template == 'welcome_teacher':
+        return gettext('mail_welcome_teacher_body')
+    return None
 
-    subject = texts[template + '_subject']
-    body = texts['hello'].format(username=username) + "\n\n"
-    body += texts[template + '_body'] + "\n\n"
-    body += texts['goodbye']
+
+def get_subject_translation(template):
+    if template == 'welcome_verify':
+        return gettext('mail_welcome_verify_subject')
+    elif template == 'change_password':
+        return gettext('mail_change_password_subject')
+    elif template == 'recover_password':
+        return gettext('mail_recover_password_subject')
+    elif template == 'reset_password':
+        return gettext('mail_reset_password_subject')
+    elif template == 'welcome_teacher':
+        return gettext('mail_welcome_teacher_subject')
+    return None
+
+
+def send_email_template(template, email, link=None, username=gettext('user')):
+    subject = get_subject_translation(template)
+    if not subject:
+        print("Something went wrong, mail template could not be found...")
+        return
+    body = gettext('mail_hello').format(username=username) + "\n\n"
+    body += get_template_translation(template) + "\n\n"
+    body += gettext('mail_goodbye')
 
     with open('templates/base_email.html', 'r', encoding='utf-8') as f:
         body_html = f.read()
@@ -764,8 +848,8 @@ def send_email_template(template, email, link='', lang="en", username=''):
     body_html = body_html.format(content=body)
     body_plain = body
     if link:
-        body_plain = body_plain.format(link='Please copy and paste this link into a new tab: ' + link)
-        body_html = body_html.format(link='<a href="' + link + '">Link</a>')
+        body_plain = body_plain.format(link=gettext('copy_mail_link') + " " + link)
+        body_html = body_html.format(link='<a href="' + link + '">{link}</a>').format(link=gettext('link'))
 
     send_email(email, subject, body_plain, body_html)
 

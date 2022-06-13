@@ -21,6 +21,9 @@ cd $scriptdir
 # all CSS classes that aren't used in our application (determined by searching
 # for CSS classes in the HTML templates and JavaScript files).
 
+echo '-----> Creating lark grammar files'
+python ../../content/yaml_to_lark_utils.py
+
 echo '-----> Doing a Tailwind build'
 tailwind/generate-css
 

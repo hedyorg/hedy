@@ -14,16 +14,16 @@
         {ask} Quelle est ta couleur préférée?
         {echo} donc ta couleur préférée est
 -   name: '{print} emojis'
-    explanation: print an emoji with `{print}`
-    example: 'Example: {print} 🙋‍ 🌍 ❗'
+    explanation: afficher un emoji avec `{print}`
+    example: 'Exemple : {print} 🙋‍ 🌍 ❗'
     demo_code: '{print} 🙋 🌍 ❗'
--   example: 'Example: {forward} 100'
+-   example: 'Exemple : {forward} 100'
     demo_code: '{forward} 100'
     name: '{forward}'
-    explanation: Draw a line with `{forward}`.
+    explanation: Dessiner une ligne avec `{forward}`.
 -   name: '{turn}'
-    explanation: turn the drawing turtle with `{turn}`
-    example: 'Example: {turn}'
+    explanation: tourner la tortue qui dessine avec `{turn}`
+    example: 'Exemple : {turn}'
     demo_code: "{forward} 25\n{turn} left\n{forward} 25\n{turn} right"
 2:
 -   name: "{is}"
@@ -38,13 +38,13 @@
     demo_code: |-
         couleur {is} {ask} Quelle est ta couleur préférée?
         {print} couleur est ton préféré !
--   explanation: Let Hedy pause for a (couple of) second(s).
+-   explanation: Laissez Hedy faire une pause d'une (ou plusieurs) seconde(s).
     name: '{sleep}'
-    example: 'Example: {sleep} 2 '
-    demo_code: "{print} Let me think for one second...\n{sleep}\n{print} Hmm.. I need 3 more seconds...\n{sleep} 3\n{print} Eureka! Ive got it!"
+    example: 'Exemple : {sleep} 2 '
+    demo_code: "{print} Laissez-moi réfléchir une seconde...\n{sleep}\n{print} Hmm... Il me faut encore 3 secondes...\n{sleep} 3\n{print} Eureka ! Je l'ai eu !"
 -   name: is - turtle
-    explanation: Give a number a name using `{is}`. You can choose the name yourself.
-    example: 'Example: angle {is} 90'
+    explanation: Donnez un nom à un numéro en utilisant `{is}`. Tu peux choisir le nom toi-même.
+    example: 'Exemple : angle {is} 90'
     demo_code: "angle {is} 90\n{turn} angle\n{forward} 100"
 3:
 -   name: "choisi_au hasard"
@@ -53,14 +53,14 @@
     demo_code: |-
         animaux {is} chien, chat, kangourou
         {print} animaux {at} {random}
--   demo_code: "animals {is} cow, cat\n{add} dog {to_list} animals"
+-   demo_code: "animaux {is} vache, chat\n{add} chien {to_list} animaux"
     explanation: add an item to a list
-    example: 'Example: {add} dog {to_list} animals'
+    example: 'Exemple :  {add} chien {to_list} animaux'
     name: '{add}'
 -   name: '{remove}'
-    explanation: remove an item from a list
-    example: 'Example: {remove} dog {from} animals'
-    demo_code: "animals {is} cat, dog, cow\n{remove} dog {from} animals"
+    explanation: supprimer un élément d'une liste
+    example: 'Exemple: {remove} chien {from} animaux'
+    demo_code: "animaux {is} chat, chien, vache\n{remove} chien {from} animaux"
 4:
 -   name: "{print}"
     explanation: "Afficher exactement ce qui est entre les guilllemets"
@@ -95,9 +95,9 @@
     demo_code: |-
         couleur {is} {ask} 'Quelle est ta couleur préférée?'
         {if} couleur {is} vert {print} 'joli!' {else} {print} 'bof'
--   name: '{if} with turtle'
+-   name: '{if} avec la tortue'
     demo_code: "answer {is} {ask} 'How far should I walk?'\n{if} answer {is} far {forward} 100 {else} {forward} 5"
-    explanation: Make a choice with `{if}`
+    explanation: Faites un choix avec `{if}`.
     example: 'Example: {if} answer {is} far {forward} 100 {else} {forward} 5'
 -   name: '{in}'
     explanation: Check elements with `{in}`
@@ -356,7 +356,7 @@
         {else}:
             {print} 'Tu as choisi un autre couleur que le vert.'
 -   name: "(Optionnel) `{elif}`"
-    explanation: "Pour compléter il-y-a encore un nouveau commande quelle tu peux utiliser: `{elif}`. `{elif}` signifie `{else} {if}`. Tu regardes alors auparavant à `{if}` et quand ça n'est pas vrai, tu avances à `{elif}`. Quand ça n'est pas vrai aussi, tu avances à `{else}`."
+    explanation: "Nous devons faire de même avec toutes nos `{if}` déclarations."
     example: "{elif} a {is} 5"
     demo_code: |-
         a = 2
@@ -378,3 +378,11 @@
     demo_code: |-
         name = 'Hedy'
         {print}('my name is ', name)
+-   name: '{print} with var'
+    explanation: With `{print}` you need to use parentheses and commas if you {print} more items
+    example: '{print}'
+    demo_code: "name = 'Hedy'\n{print}('my name is ', name)"
+-   name: ask something with {input}
+    explanation: Use `{input}` instead of `{ask}` to ask something
+    example: '{input}'
+    demo_code: "name = {input}('What is your name?')\n{print}('So your name is ', name)"
