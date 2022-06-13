@@ -10,7 +10,7 @@ for line in lines:
     for option in to_clean:
         if option in line:
             # This is needed due to how Weblate stores the YAML files: all on one line, remove only the relevant part
-            if "example_code:" in line or "example_code_2:" in line or "story_text" in line:
+            if "example_code:" in line or "example_code_2:" in line or "example_code_3:" in line or "story_text" in line:
                 start_index = line.index(option)
                 end_index = start_index + line[start_index:].index("\\n")
                 fixed_line = line[:start_index] + line[end_index+2:]
