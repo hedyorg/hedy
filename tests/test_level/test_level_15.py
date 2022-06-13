@@ -1,4 +1,5 @@
 import hedy
+import exceptions
 import textwrap
 from tests.Tester import HedyTester
 
@@ -96,4 +97,17 @@ class TestsLevel15(HedyTester):
       code=code,
       max_level=16,
       expected=expected
+    )
+
+  def test_missing_indent_while(self):
+    code = textwrap.dedent(f"""\
+    answer = 0
+    while answer != 25
+    answer = ask 'What is 5 times 5?'
+    print 'A correct answer has been given'""")
+
+    self.multi_level_tester(
+      code=code,
+      max_level=15,
+      exception=exceptions.NoIndentationException
     )
