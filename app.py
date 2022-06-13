@@ -31,6 +31,7 @@ import hedy
 import collections
 import datetime
 import sys
+import textwrap
 
 # Todo TB: This can introduce a possible app breaking bug when switching to Python 4 -> e.g. Python 4.0.1 is invalid
 if (sys.version_info.major < 3 or sys.version_info.minor < 7):
