@@ -1,10 +1,10 @@
-fr = open("eo.yaml", "r")
-fw = open("eo-cleaned.yaml", "w")
+fr = open("es.yaml", "r")
+fw = open("es-cleaned.yaml", "w")
 
 lines = fr.readlines()
 counter = 0
 
-to_clean = ["## Ekzempla Hedy-kodo", "## Ekzempla kodo", "## Elaborate code", "## Example Hedy Code", "## Example Hedy code"]
+to_clean = ["## Código de ejemplo", "## Código de ejemplo de Hedy", "## Programa Hedy de ejemplo", "## Example Hedy Code", "## Example Hedy code"]
 
 for line in lines:
     for option in to_clean:
