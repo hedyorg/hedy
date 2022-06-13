@@ -362,6 +362,22 @@ class TestsLevel8(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
+    def test_if_empty_line_with_whitespace_else_print(self):
+        code = textwrap.dedent("""\
+        if 1 is 2
+            print 'nice!'
+               
+        else
+            print 'pizza is better'""")
+
+        expected = textwrap.dedent("""\
+        if str('1') == str('2'):
+          print(f'nice!')
+        else:
+          print(f'pizza is better')""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=11)
+
     #
     # repeat command
     #
