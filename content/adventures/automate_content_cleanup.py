@@ -1,5 +1,5 @@
-fr = open("bg.yaml", "r")
-fw = open("bg-cleaned.yaml", "w")
+fr = open("cs.yaml", "r")
+fw = open("cs-cleaned.yaml", "w")
 
 lines = fr.readlines()
 counter = 0
