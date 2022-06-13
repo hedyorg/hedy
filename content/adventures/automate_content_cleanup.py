@@ -1,17 +1,19 @@
-fr = open("nl.yaml", "r")
-fw = open("nl-cleaned.yaml", "w")
+fr = open("bg.yaml", "r")
+fw = open("bg-cleaned.yaml", "w")
 
 lines = fr.readlines()
 counter = 0
 
-to_clean = ["## Voorbeeldcode", "## Voorbeeld code", "## Voorbeeld Hedy Code", "## Voorbeeld Hedy code"]
+to_clean = ["## Example Hedy code", "## Example code", "## Example Hedy Code", "## Example Hedy code"]
 
 for line in lines:
     for option in to_clean:
         if option in line:
             # This is needed due to how Weblate stores the YAML files: all on one line, remove only the relevant part
             if "example_code:" in line:
-                fixed_line = line.replace(option + "\\n", "")
+                start_index = line.index(option)
+                end_index = start_index + line[start_index:].index("\\n")
+                fixed_line = line[:start_index] + line[end_index+2:]
                 fw.write(fixed_line)
             counter += 1
             break
