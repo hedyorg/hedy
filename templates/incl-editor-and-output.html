@@ -134,6 +134,9 @@
           <button id="runit" class="green-btn" onclick="hedyApp.runit({{ level }}, '{{ g.lang }}', '{{_('already_program_running')}}')">{{_('run_code_button')}} </button>
           <button id="stopit" class="red-btn" onclick="hedyApp.stopit()" style="display: none;">{{_('stop_code_button')}}</button>
         </div>
+        <div id="saveDSTContainer" class="mx-2">
+          <button id="saveDST" class="green-btn hidden" onclick="hedyApp.saveDST();">💾</button>
+        </div>
         <div id="debug_container" class="ltr:ml-auto rtl:mr-auto">
           <button id="debug_button" class="green-btn" onclick="hedyApp.startDebug()">🐞</button>
           <button id="debug_restart" class="green-btn hidden" onclick="hedyApp.resetDebug()">🔄</button>
