@@ -152,6 +152,11 @@ If your PR still needs a review, make sure to run the Tailwind script again afte
 Don't worry if you make a mistake here, the files are always generated again on deploy. Making sure they are always up-to-date.
 
 #### Conflict with some (or all of the) `.po files`
+When having a merge conflict with (some of) the .po files this is probably the result of you working with the Babel translations.
+When adding a new translatable string all .po files are updated and the _Last revision_ header of each file is updated as well.
+As Weblate automatically updates these files as well it might happen that another branch already merge into main triggered Weblate, resulting in merge conflicts in your branch.
+These headers don't have influence on the functionality, but it is good practice to keep the main branch header when solving these conflicts.
+The po files are **not** generated on deploy, so we should be careful to correctly merge these.
 
 #### Conflict with `appbundle.js` and `appbundle.js.map`
 When having a merge conflict with the `appbundle` files this is probably the result of you working on TypeScript code and updating the files.
