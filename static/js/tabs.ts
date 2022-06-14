@@ -59,14 +59,7 @@ function resetWindow() {
     document.getElementById("repair_button").style.visibility = "hidden";
     resetWindow();
 
-    if (tabName === 'parsons'){
-      $ ('#editor').hide();
-      $ ('#parsons_container').show();
-      $('#debug_container').hide();
-      return;
-    }
-
-    if (tabName === 'quiz') {
+    if (tabName === 'quiz' || tabName == 'parsons') {
         // If the developer's mode is still on -> make sure we do show the tab
         if ($('#developers_toggle').is(":checked")) {
           $('#adventures-tab').show();
