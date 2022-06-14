@@ -499,6 +499,9 @@ export function create_accounts(prompt: string) {
                 return;
             } else {
                 modal.alert(response.success, 3000, false);
+                if ($("input[name='download_credentials_checkbox']:checked").val() == "yes") {
+                    download_login_credentials(accounts);
+                }
                 $('#account_rows_container').find(':input').each(function () {
                    $(this).val("");
                 });
@@ -507,4 +510,23 @@ export function create_accounts(prompt: string) {
             modal.alert(err.responseText, 3000, true);
         });
     });
+}
+
+function download_login_credentials(accounts: any) {
+    // https://stackoverflow.com/questions/14964035/how-to-export-javascript-array-info-to-csv-on-client-side
+    let csvContent = "data:text/csv;charset=utf-8,";
+    csvContent += "Username, Password" + "\r\n";
+
+    accounts.forEach(function(account: any) {
+        let row = account.username + "," + account.password;
+        csvContent += row + "\r\n";
+    });
+
+    var encodedUri = encodeURI(csvContent);
+    var link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "accounts.csv");
+    document.body.appendChild(link); // Required for Firefox
+
+    link.click();
 }
