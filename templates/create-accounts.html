@@ -25,8 +25,21 @@
                     </div>
                 {% endfor %}
             </div>
-            <div class="flex flex-row justify-end">
-                <svg class="fill-current w-8 h-8 ltr:mr-4 mb-2 text-green-500 cursor-pointer" xmlns="http://www.w3.org/2000/svg" onclick="hedyApp.add_account_placeholder();" viewBox="0 0 24 24"><path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z"/></svg>
+            <div class="flex flex-row items-center">
+                <div class="flex flex-row items-center gap-4 border rounded-lg border-gray-500 py-2 px-8 mx-auto">
+                    <div class="italic text-xl text-blue-600">{{_('download_login_credentials')}}</div>
+                    <div>
+                        <div class="flex flex-row items-center gap-4">
+                            <input type="radio" name="download_credentials_checkbox" value="yes" checked>
+                            <label for="yes">{{_('yes')}}</label>
+                        </div>
+                        <div class="flex flex-row items-center gap-4">
+                            <input type="radio" name="download_credentials_checkbox" value="no">
+                            <label for="no">{{_('no')}}</label>
+                        </div>
+                    </div>
+                </div>
+                <svg class="fill-current w-8 h-8 ltr:ml-auto rtl:mr-auto ltr:mr-4 rtl:ml-4 mb-2 text-green-500 cursor-pointer" xmlns="http://www.w3.org/2000/svg" onclick="hedyApp.add_account_placeholder();" viewBox="0 0 24 24"><path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z"/></svg>
             </div>
         </div>
         <div class="flex flex-row mt-4">

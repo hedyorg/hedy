@@ -19,7 +19,7 @@ from flask_babel import gettext
 from flask_babel import Babel
 from flask_compress import Compress
 from flask_helpers import render_template
-from flask import Flask, request, jsonify, session, abort, g, redirect, Response, make_response, Markup
+from flask import Flask, request, jsonify, session, abort, g, redirect, Response, make_response, Markup, send_file, after_this_request
 from config import config
 from werkzeug.urls import url_encode
 from babel import Locale
@@ -31,6 +31,7 @@ import hedy
 import collections
 import datetime
 import sys
+import textwrap
 
 # Todo TB: This can introduce a possible app breaking bug when switching to Python 4 -> e.g. Python 4.0.1 is invalid
 if (sys.version_info.major < 3 or sys.version_info.minor < 7):
@@ -364,7 +365,6 @@ def parse():
 
     try:
         with querylog.log_time('transpile'):
-
             try:
                 transpile_result = transpile_add_stats(code, level, lang)
                 if username and not body.get('tutorial'):
@@ -387,8 +387,9 @@ def parse():
                 exception = ex
         try:
             response['Code'] = transpile_result.code
-            response['has_turtle'] = transpile_result.has_turtle
-        except:
+            if transpile_result.has_turtle:
+                response['has_turtle'] = True
+        except Exception as E:
             pass
         try:
             response['has_sleep'] = 'sleep' in hedy.all_commands(code, level, lang)
@@ -465,6 +466,46 @@ def parse_tutorial(user):
         jsonify({'code': result.code}), 200
     except:
         return "error", 400
+
+@app.route("/generate_dst", methods=['POST'])
+def prepare_dst_file():
+    body = request.json
+    # Prepare the file -> return the "secret" filename as response
+    transpiled_code = hedy.transpile(body.get("code"), body.get("level"), body.get("lang"))
+    filename = utils.random_id_generator(12)
+
+    # We have to turn the turtle 90 degrees to align with the user perspective app.ts#16
+    # This is not a really nice solution, but as we store the prefix on the front-end it should be good for now
+    threader = textwrap.dedent("""
+        import time
+        from turtlethread import Turtle
+        t = Turtle()
+        t.left(90)
+        with t.running_stitch(stitch_length=20):
+        """)
+    lines = transpiled_code.code.split("\n")
+    threader += "  " + "\n  ".join(lines)
+    threader += "\n" + 't.save("dst_files/' + filename + '.dst")'
+    if not os.path.isdir('dst_files'):
+        os.makedirs('dst_files')
+    exec(threader)
+
+    return jsonify({'filename': filename}), 200
+
+
+# this is a route for testing purposes
+@app.route("/download_dst/<filename>", methods=['GET'])
+def download_dst_file(filename):
+    # https://stackoverflow.com/questions/24612366/delete-an-uploaded-file-after-downloading-it-from-flask
+    @after_this_request
+    def remove_file(response):
+        try:
+            os.remove("dst_files/" + filename + ".dst")
+        except:
+            print("Error removing the generated .dst file!")
+        return response
+    # Once the file is downloaded -> remove it
+    return send_file("dst_files/" + filename + ".dst", as_attachment=True)
 
 
 def transpile_add_stats(code, level, lang_):
