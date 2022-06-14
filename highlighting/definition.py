@@ -16,6 +16,8 @@ END_LINE = '( *$)'
 START_WORD = '(^| )'
 END_WORD   = '(?![' + CHARACTER + '])'
 
+DIGIT = '[__DIGIT__]'
+
 TRANSLATE_WORD = [
 	"print",
 	"ask",
@@ -61,8 +63,14 @@ TRANSLATE_WORD = [
 	"length"
 ]
 
-def K(word):
-	if word in TRANSLATE_WORD:
-		return "(__"+word+"__)"
+def K(word, withoutGroup = False):
+	if withoutGroup:
+		if word in TRANSLATE_WORD:
+			return "__"+word+"__"
+		else:
+			return word
 	else:
-		return "(" + word + ")"
+		if word in TRANSLATE_WORD:
+			return "(__"+word+"__)"
+		else:
+			return "(" + word + ")"

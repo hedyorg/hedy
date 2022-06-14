@@ -9,7 +9,7 @@ import string
 import random
 import uuid
 
-from flask_babel import gettext, format_date, format_datetime
+from flask_babel import gettext, format_date, format_datetime, format_timedelta
 from ruamel import yaml
 from website import querylog
 import commonmark
@@ -250,15 +250,35 @@ def atomic_write_file(filename, mode='wb'):
 def mstoisostring(date):
     return datetime.datetime.fromtimestamp(int(str(date)[:-3])).isoformat()
 
+def string_date_to_date(date):
+    return datetime.datetime.strptime(date, "%Y-%m-%d")
+
+def timestamp_to_date(timestamp, short_format=False):
+    if short_format:
+        return datetime.datetime.fromtimestamp(int(str(timestamp)))
+    else:
+        return datetime.datetime.fromtimestamp(int(str(timestamp)[:-3]))
+
+def delta_timestamp(date, short_format=False):
+    if short_format:
+        delta = datetime.datetime.now() - datetime.datetime.fromtimestamp(int(str(date)))
+    else:
+        delta = datetime.datetime.now() - datetime.datetime.fromtimestamp(int(str(date)[:-3]))
+    return format_timedelta(delta)
+
 def stoisostring(date):
     return datetime.datetime.fromtimestamp(date)
 
-def localized_date_format(date):
+def localized_date_format(date, short_format=False):
     # Improve the date by using the Flask Babel library and return timestamp as expected by language
-    timestamp = datetime.datetime.fromtimestamp(int(str(date)[:-3]))
+    if short_format:
+        timestamp = datetime.datetime.fromtimestamp(int(str(date)))
+    else:
+        timestamp = datetime.datetime.fromtimestamp(int(str(date)[:-3]))
     return format_date(timestamp, format='medium') + " " + format_datetime(timestamp, "H:mm")
 
 def datetotimeordate(date):
+    print(date)
     return date.replace("T", " ")
 
 # https://stackoverflow.com/a/2257449
