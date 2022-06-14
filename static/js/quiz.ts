@@ -33,8 +33,10 @@ export function startQuiz(level: number) {
 
 export function loadQuestQuestion(level: number, question: number) {
     // If we get the request from the feedback page -> hide just to be sure also remove selected answer
+    console.log("We load the question!");
+
     $('#quiz_feedback_container').hide();
-    $('.option-block').removeClass('border-double border-8 active');
+
     $('.submit-button').hide();
 
     $.ajax({
@@ -94,6 +96,7 @@ function showAnswers(options: any, level: number, question: number) {
         // Set relevant info on container so we can catch this on answering
         $('#answer_container_' + i).attr('level', level);
         $('#answer_container_' + i).attr('question', question);
+        $('#answer_container_' + i).removeClass('border-double border-8 active');
         $('#answer_container_' + i).show();
     }
     $('#quiz_answers_container').show();
