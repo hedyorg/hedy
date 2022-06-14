@@ -346,6 +346,8 @@ adventures:
                 story_text: "## ＃＃＃让我们画画\n你也可以用海迪来画画。通过结合旋转和画线，你可以画出一个正方形或楼梯!\n\n使用`{forward}`你可以向前画一条线。它后面的数字决定了海龟会走多远。`{turn} {right}`是顺时针转四分之一圈，`{turn} {left}`是逆时针转。\n\n让我们开始画一个小楼梯。你能使它有5个台阶吗？\n"
                 example_code: "## 海迪代码范例\n\n```\n{turn} {right}\n{forward} 50\n{turn}{left}\n{forward} 50\n```\n"
                 start_code: "{forward} 50\n{turn} {left}"
+                example_code_2: "```\n{color} {white}\n{forward} -80\n{color} {green}\n{forward} 50\n{color} {yellow}\n{forward} 50\n{color} {red}\n{forward} 50\n```\n"
+                story_text_2: "## Colors\nYou can also change the color of the lines with the command `{color}`. Check out the example.\nYou can also use the command `{color} {white}` to make 'invisible' lines. You could use these white lines to move the turtle anywhere in the screen before you start drawing.\n"
             3:
                 story_text: "## 寻找海龟\n在这个级别中，您可以将 `{at} {random}` 与海龟绘图一起使用。使用随机选择使乌龟每次走不同的路径。\n使用 `{at} {random}` 从列表中选择一个值。您可以复制并粘贴第 2 行和第 3 行以创建更长的随机路径。\n"
                 example_code: "## Example Hedy code\n\n\n```\nangles {is} 10, 50, 90, 150, 250\n{turn} angles {at} {random}\n{forward} 25\n```\n"

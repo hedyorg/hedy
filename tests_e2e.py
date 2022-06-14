@@ -1193,7 +1193,6 @@ class TestClasses(AuthHelper):
         class_student = Class_data['students'][0]
         self.assertEqual(class_student['highest_level'], 0)
         self.assertEqual(class_student['programs'], 0)
-        self.assertEqual(class_student['latest_shared'], None)
         self.assertIsInstance(class_student['last_login'], str)
         self.assertEqual(class_student['username'], student['username'])
 
