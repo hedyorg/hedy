@@ -134,6 +134,11 @@ When adding new Babel related translation the implementation is a bit more compl
     * ```pybabel compile -d translations```
 8. This action will also always be run on deployment to make sure the translations are up-to-date
 
+## Solving common merge conflicts
+When working on an issue in a branch it might happen that the main branch is updated before your contribution is finished.
+If you create a Pull Request it is possible that GitHub returns _merge conflicts_: 
+you've worked on the same code as the updated part of main and GitHub in uncertain on which code to keep when merging.
+
 ## Using Docker
 
 If you want to run the website locally, but would prefer to use Docker instead
