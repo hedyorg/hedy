@@ -22,7 +22,7 @@ class Achievements:
             for command in hedy.commands_per_level.get(i):
                 commands.append(command)
         commands = set(commands)
-        # We manually remove the redundant commands, these are stored in the commands_per_level but not used by the parser
+        # We manually remove the redundant commands, these are stored in the commands_per_level but not returned by the parser via AllCommands()
         redundant_commands = {'at', 'from', 'times', 'range', 'to'}
         return commands - redundant_commands
 
