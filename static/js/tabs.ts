@@ -59,7 +59,7 @@ function resetWindow() {
     document.getElementById("repair_button").style.visibility = "hidden";
     resetWindow();
 
-    if (tabName === 'dragging'){
+    if (tabName === 'parsons'){
       $ ('#editor').hide();
       $ ('#parsons_container').show();
       $('#debug_container').hide();
