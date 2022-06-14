@@ -66,11 +66,11 @@
             <div data-tabtarget="parsons" class="hidden">
                 <div class="flex flex-row items-center">
                 {% for parson in parsons %}
-                    <div class="tab{% if loop.index == 1 %} tab-selected{% endif %}" onclick="hedyApp.switchToParsonsTab('{{parson['short_name']}}');">{{ parson['name'] }}</div>
+                    <div class="tab{% if loop.index == 1 %} tab-selected{% endif %} parsons-exercise-tab" name="{{parson['short_name']}}">{{ parson['name'] }}</div>
                 {% endfor %}
                 </div>
                 {% for parson in parsons %}
-                    <div class="flex flex-row parsons-exercise-tab" id="{{parsons['short_name']}}">
+                    <div class="flex flex-row parsons-exercise-body" id="{{parson['short_name']}}">
                         <div class="w-1/2 p-2 ltr:mr-2 rtl:ml-2">
                             {{ parson['text']|commonmark }}
                             <div class="flex flex-col mx-auto items-center" id="start_parsons_options">
