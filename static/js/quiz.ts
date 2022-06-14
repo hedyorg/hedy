@@ -32,10 +32,8 @@ export function startQuiz(level: number) {
 }
 
 export function loadQuestQuestion(level: number, question: number) {
-    // If we get the request from the feedback page -> hide just to be sure also remove selected answer
+    // If we get the request from the feedback page -> always hide the feedback container
     $('#quiz_feedback_container').hide();
-    $('.option-block').removeClass('border-double border-8 active');
-    $('.submit-button').hide();
 
     $.ajax({
       type: 'GET',
@@ -91,10 +89,13 @@ function showAnswers(options: any, level: number, question: number) {
             $('#answer_code_' + i).hide();
             $('#answer_text_' + i).show();
         }
+        let container = $('#answer_container_' + i);
         // Set relevant info on container so we can catch this on answering
-        $('#answer_container_' + i).attr('level', level);
-        $('#answer_container_' + i).attr('question', question);
-        $('#answer_container_' + i).show();
+        container.attr('level', level);
+        container.attr('question', question);
+        container.removeClass('border-double border-8 active');
+        container.find(".submit-button").hide(); // Not sure why but $('.submit-button').hide() doesn't work globally!
+        container.show();
     }
     $('#quiz_answers_container').show();
 }
