@@ -349,6 +349,8 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
         clearErrors(editor);
         stopit();
         return;
+      } else {
+        // The parsons order is correct: show button for "go to next exercise" (if it exists)
       }
     } else {
       code = get_trimmed_code();
@@ -1300,6 +1302,8 @@ function store_parsons_attempt(order: Array<string>, correct: boolean) {
     });
 }
 
+
+// Todo: As the parsons functionality will rapidly increase, we should probably all store this in a dedicated file (?)
 function get_parsons_code() {
     let code = "";
     let count = 65;
