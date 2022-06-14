@@ -870,20 +870,20 @@ adventures:
                 start_code: print 'Üdvözölünk a számológépnél!'
                 example_code: |-
                     ## Példa Hedy kód
-                          ```
-                          pontszam = 0
-                          repeat 10 times
-                              szamok = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                              szam1 = szamok at random
-                              szam2 = szamok at random
-                              helyesvalasz = szam1 * szam2
-                              print 'Mennyi ' szam1 ' * ' szam2 '?'
-                              valasz = ask 'Gépeld ide a válaszodat...'
-                              print 'A válaszod: ' valasz
-                              if valasz is helyesvalasz
-                                  pontszam = pontszam + 1
-                          print 'Szép munka! A pontszámod... ' pontszam ' a 10-ből!'
-                          ```
+                    ```
+                    pontszam = 0
+                    repeat 10 times
+                        szamok = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                        szam1 = szamok at random
+                        szam2 = szamok at random
+                        helyesvalasz = szam1 * szam2
+                        print 'Mennyi ' szam1 ' * ' szam2 '?'
+                        valasz = ask 'Gépeld ide a válaszodat...'
+                        print 'A válaszod: ' valasz
+                        if valasz is helyesvalasz
+                            pontszam = pontszam + 1
+                    print 'Szép munka! A pontszámod... ' pontszam ' a 10-ből!'
+                    ```
             6:
                 story_text: |-
                     ## Számológép
