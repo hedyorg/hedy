@@ -688,7 +688,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "variable"
@@ -696,16 +696,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__print__)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": [
-                        "text",
-                        "keyword",
-                        "variable"
-                    ],
-                    "next": "start"
-                },
-                {
-                    "regex": "(^| )(__ask__)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__print__)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -714,7 +705,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__sleep__)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__ask__)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -723,7 +714,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__forward__)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__sleep__)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -732,7 +723,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__turn__)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__forward__)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -741,7 +732,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__random__)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__turn__)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -750,7 +741,16 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(,)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__random__)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "keyword",
+                        "variable"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(,)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -758,7 +758,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(-)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(-)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -766,7 +766,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(=)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(=)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -774,7 +774,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(/)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(/)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -782,7 +782,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(\\*)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(\\*)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -790,7 +790,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(\\+)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(\\+)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -1005,7 +1005,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "variable"
@@ -1013,16 +1013,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__print__)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": [
-                        "text",
-                        "keyword",
-                        "variable"
-                    ],
-                    "next": "start"
-                },
-                {
-                    "regex": "(^| )(__ask__)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__print__)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -1031,7 +1022,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__sleep__)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__ask__)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -1040,7 +1031,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__forward__)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__sleep__)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -1049,7 +1040,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__turn__)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__forward__)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -1058,7 +1049,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__random__)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__turn__)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -1067,7 +1058,16 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(,)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__random__)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "keyword",
+                        "variable"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(,)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -1075,7 +1075,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(-)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(-)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -1083,7 +1083,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(=)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(=)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -1091,7 +1091,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(/)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(/)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -1099,7 +1099,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(\\*)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(\\*)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -1107,7 +1107,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(\\+)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(\\+)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -1338,7 +1338,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "variable"
@@ -1346,16 +1346,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__print__)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": [
-                        "text",
-                        "keyword",
-                        "variable"
-                    ],
-                    "next": "start"
-                },
-                {
-                    "regex": "(^| )(__ask__)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__print__)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -1364,7 +1355,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__sleep__)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__ask__)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -1373,7 +1364,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__forward__)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__sleep__)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -1382,7 +1373,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__turn__)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__forward__)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -1391,7 +1382,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__random__)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__turn__)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -1400,7 +1391,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__else__)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__random__)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -1409,7 +1400,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__times__)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__else__)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -1418,7 +1409,16 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(,)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__times__)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "keyword",
+                        "variable"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(,)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -1426,7 +1426,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(-)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(-)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -1434,7 +1434,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(=)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(=)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -1442,7 +1442,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(/)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(/)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -1450,7 +1450,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(\\*)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(\\*)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -1458,7 +1458,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(\\+)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(\\+)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -1689,7 +1689,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "variable"
@@ -1697,16 +1697,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__print__)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": [
-                        "text",
-                        "keyword",
-                        "variable"
-                    ],
-                    "next": "start"
-                },
-                {
-                    "regex": "(^| )(__ask__)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__print__)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -1715,7 +1706,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__sleep__)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__ask__)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -1724,7 +1715,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__forward__)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__sleep__)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -1733,7 +1724,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__turn__)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__forward__)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -1742,7 +1733,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__random__)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__turn__)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -1751,7 +1742,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__else__)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__random__)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -1760,7 +1751,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__times__)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__else__)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -1769,7 +1760,16 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(,)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__times__)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "keyword",
+                        "variable"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(,)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -1777,7 +1777,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(-)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(-)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -1785,7 +1785,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(=)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(=)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -1793,7 +1793,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(/)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(/)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -1801,7 +1801,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(\\*)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(\\*)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -1809,7 +1809,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(\\+)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(\\+)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -2040,7 +2040,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "variable"
@@ -2048,16 +2048,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__print__)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": [
-                        "text",
-                        "keyword",
-                        "variable"
-                    ],
-                    "next": "start"
-                },
-                {
-                    "regex": "(^| )(__ask__)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__print__)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -2066,7 +2057,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__sleep__)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__ask__)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -2075,7 +2066,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__forward__)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__sleep__)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -2084,7 +2075,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__turn__)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__forward__)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -2093,7 +2084,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__random__)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__turn__)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -2102,7 +2093,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__else__)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__random__)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -2111,7 +2102,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__times__)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__else__)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -2120,7 +2111,16 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(,)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__times__)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "keyword",
+                        "variable"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(,)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -2128,7 +2128,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(-)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(-)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -2136,7 +2136,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(=)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(=)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -2144,7 +2144,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(/)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(/)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -2152,7 +2152,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(\\*)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(\\*)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -2160,7 +2160,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(\\+)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(\\+)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -2399,7 +2399,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "variable"
@@ -2407,16 +2407,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__print__)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": [
-                        "text",
-                        "keyword",
-                        "variable"
-                    ],
-                    "next": "start"
-                },
-                {
-                    "regex": "(^| )(__ask__)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__print__)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -2425,7 +2416,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__sleep__)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__ask__)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -2434,7 +2425,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__random__)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__sleep__)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -2443,7 +2434,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__else__)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__random__)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -2452,7 +2443,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__times__)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__else__)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -2461,7 +2452,16 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(,)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__times__)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "keyword",
+                        "variable"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(,)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -2469,7 +2469,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(-)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(-)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -2477,7 +2477,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(=)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(=)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -2485,7 +2485,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(/)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(/)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -2493,7 +2493,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(\\*)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(\\*)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -2501,7 +2501,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(\\+)([0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(\\+)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -2740,7 +2740,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "variable"
@@ -2748,16 +2748,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__print__)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": [
-                        "text",
-                        "keyword",
-                        "variable"
-                    ],
-                    "next": "start"
-                },
-                {
-                    "regex": "(^| )(__ask__)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__print__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -2766,7 +2757,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__sleep__)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__ask__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -2775,7 +2766,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__random__)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__sleep__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -2784,7 +2775,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__else__)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__random__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -2793,7 +2784,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__times__)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__else__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -2802,7 +2793,16 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(,)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__times__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "keyword",
+                        "variable"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(,)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -2810,7 +2810,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(-)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(-)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -2818,7 +2818,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(=)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(=)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -2826,7 +2826,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(/)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(/)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -2834,7 +2834,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(\\*)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(\\*)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -2842,7 +2842,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(\\+)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(\\+)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -3081,7 +3081,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "variable"
@@ -3089,16 +3089,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__print__)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": [
-                        "text",
-                        "keyword",
-                        "variable"
-                    ],
-                    "next": "start"
-                },
-                {
-                    "regex": "(^| )(__ask__)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__print__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -3107,7 +3098,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__sleep__)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__ask__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -3116,7 +3107,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__random__)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__sleep__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -3125,7 +3116,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__else__)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__random__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -3134,7 +3125,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__times__)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__else__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -3143,7 +3134,16 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(,)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__times__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "keyword",
+                        "variable"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(,)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -3151,7 +3151,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(-)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(-)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -3159,7 +3159,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(=)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(=)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -3167,7 +3167,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(/)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(/)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -3175,7 +3175,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(\\*)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(\\*)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -3183,7 +3183,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(\\+)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(\\+)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -3438,7 +3438,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "variable"
@@ -3446,16 +3446,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__print__)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": [
-                        "text",
-                        "keyword",
-                        "variable"
-                    ],
-                    "next": "start"
-                },
-                {
-                    "regex": "(^| )(__ask__)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__print__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -3464,7 +3455,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__sleep__)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__ask__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -3473,7 +3464,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__random__)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__sleep__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -3482,7 +3473,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__times__)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__random__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -3491,7 +3482,16 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(,)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__times__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "keyword",
+                        "variable"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(,)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -3499,7 +3499,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(-)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(-)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -3507,7 +3507,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(=)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(=)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -3515,7 +3515,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(/)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(/)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -3523,7 +3523,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(\\*)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(\\*)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -3531,7 +3531,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(\\+)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(\\+)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -3539,7 +3539,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(<)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(<)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -3547,7 +3547,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(>)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(>)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -3555,7 +3555,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(!)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(!)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -3831,7 +3831,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "variable"
@@ -3839,16 +3839,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__print__)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": [
-                        "text",
-                        "keyword",
-                        "variable"
-                    ],
-                    "next": "start"
-                },
-                {
-                    "regex": "(^| )(__ask__)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__print__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -3857,7 +3848,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__sleep__)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__ask__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -3866,7 +3857,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__random__)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__sleep__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -3875,7 +3866,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__else__)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__random__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -3884,7 +3875,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__times__)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__else__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -3893,7 +3884,16 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(,)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__times__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "keyword",
+                        "variable"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(,)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -3901,7 +3901,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(-)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(-)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -3909,7 +3909,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(=)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(=)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -3917,7 +3917,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(/)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(/)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -3925,7 +3925,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(\\*)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(\\*)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -3933,7 +3933,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(\\+)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(\\+)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -3941,7 +3941,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(<)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(<)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -3949,7 +3949,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(>)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(>)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -3957,7 +3957,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(!)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(!)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -4241,7 +4241,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "variable"
@@ -4249,16 +4249,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__print__)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": [
-                        "text",
-                        "keyword",
-                        "variable"
-                    ],
-                    "next": "start"
-                },
-                {
-                    "regex": "(^| )(__ask__)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__print__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -4267,7 +4258,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__sleep__)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__ask__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -4276,7 +4267,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__random__)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__sleep__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -4285,7 +4276,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__times__)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__random__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -4294,7 +4285,16 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(,)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__times__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "keyword",
+                        "variable"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(,)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -4302,7 +4302,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(-)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(-)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -4310,7 +4310,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(=)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(=)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -4318,7 +4318,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(/)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(/)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -4326,7 +4326,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(\\*)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(\\*)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -4334,7 +4334,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(\\+)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(\\+)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -4342,7 +4342,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(<)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(<)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -4350,7 +4350,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(>)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(>)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -4358,7 +4358,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(!)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(!)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -4366,7 +4366,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(\\[)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(\\[)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -4374,7 +4374,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(\\])([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(\\])([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -4672,7 +4672,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "variable"
@@ -4680,16 +4680,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__print__)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": [
-                        "text",
-                        "keyword",
-                        "variable"
-                    ],
-                    "next": "start"
-                },
-                {
-                    "regex": "(^| )(__ask__)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__print__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -4698,7 +4689,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__sleep__)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__ask__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -4707,7 +4698,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__random__)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__sleep__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -4716,7 +4707,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__times__)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__random__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -4725,7 +4716,16 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(,)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__times__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "keyword",
+                        "variable"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(,)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -4733,7 +4733,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(-)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(-)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -4741,7 +4741,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(=)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(=)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -4749,7 +4749,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(/)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(/)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -4757,7 +4757,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(\\*)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(\\*)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -4765,7 +4765,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(\\+)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(\\+)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -4773,7 +4773,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(<)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(<)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -4781,7 +4781,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(>)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(>)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -4789,7 +4789,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(!)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(!)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -4797,7 +4797,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(\\[)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(\\[)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -4805,7 +4805,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(\\])([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(\\])([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -4813,7 +4813,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(:)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(:)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -5125,7 +5125,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "variable"
@@ -5133,16 +5133,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__print__)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": [
-                        "text",
-                        "keyword",
-                        "variable"
-                    ],
-                    "next": "start"
-                },
-                {
-                    "regex": "(^| )(__sleep__)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__print__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -5151,7 +5142,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__random__)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__sleep__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -5160,7 +5151,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__times__)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__random__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -5169,7 +5160,16 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(,)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(^| )(__times__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "keyword",
+                        "variable"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(,)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -5177,7 +5177,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(-)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(-)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -5185,7 +5185,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(=)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(=)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -5193,7 +5193,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(/)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(/)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -5201,7 +5201,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(\\*)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(\\*)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -5209,7 +5209,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(\\+)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(\\+)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -5217,7 +5217,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(<)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(<)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -5225,7 +5225,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(>)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(>)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -5233,7 +5233,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(!)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(!)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -5241,7 +5241,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(\\[)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(\\[)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -5249,7 +5249,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(\\])([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(\\])([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -5257,7 +5257,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(:)([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(:)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -5265,7 +5265,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(\\()([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(\\()([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"
@@ -5273,7 +5273,7 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(\\))([0-9]*\\.?[0-9]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "regex": "(\\))([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "keyword",
                         "variable"

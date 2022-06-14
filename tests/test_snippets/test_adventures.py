@@ -13,70 +13,69 @@ os.chdir(os.path.join(os.getcwd(), __file__.replace(os.path.basename(__file__), 
 
 unique_snippets_table = set()
 
-def collect_snippets(path):
+def collect_snippets(path, filtered_language = None):
   Hedy_snippets = []
   files = [f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f)) and f.endswith('.yaml')]
   for f in files:
       lang = f.split(".")[0]
-      f = os.path.join(path, f)
-      yaml = YamlFile.for_file(f)
+      if not filtered_language or (filtered_language and lang == filtered_language):
+          f = os.path.join(path, f)
+          yaml = YamlFile.for_file(f)
 
-      for name, adventure in yaml['adventures'].items():
-          if not name == 'next': # code in next sometimes uses examples from higher levels so is potentially wrong
-            for level_number in adventure['levels']:
-                if level_number > hedy.HEDY_MAX_LEVEL:
-                    print('content above max level!')
-                else:
-                    level = adventure['levels'][level_number]
-                    adventure_name = adventure['name']
+          for name, adventure in yaml['adventures'].items():
+              if not name == 'next': # code in next sometimes uses examples from higher levels so is potentially wrong
+                for level_number in adventure['levels']:
+                    if level_number > hedy.HEDY_MAX_LEVEL:
+                        print('content above max level!')
+                    else:
+                        level = adventure['levels'][level_number]
+                        adventure_name = adventure['name']
 
-                    code_snippet_counter = 0
-                    # code snippets inside story_text
-                    for tag in utils.markdown_to_html_tags(level['story_text']):
-                        if tag.name != 'pre' or not tag.contents[0]:
-                            continue
-                        code_snippet_counter += 1
+                        code_snippet_counter = 0
+                        # code snippets inside story_text
+                        for tag in utils.markdown_to_html_tags(level['story_text']):
+                            if tag.name != 'pre' or not tag.contents[0]:
+                                continue
+                            code_snippet_counter += 1
+                            try:
+                                code = tag.contents[0].contents[0]
+                                if hash(code) in unique_snippets_table:
+                                    print("Identical code already being tested...")
+                                    continue
+                                else:
+                                    unique_snippets_table.add(hash(code))
+                            except:
+                                print("Code container is empty...")
+                                continue
+                            Hedy_snippets.append(Snippet(f, level_number, adventure_name + ' snippet #' + str(code_snippet_counter), code, adventure_name))
+                        # code snippets inside start_code
                         try:
-                            code = tag.contents[0].contents[0]
-                            if hash(code) in unique_snippets_table:
+                            start_code = level['start_code']
+                            if hash(start_code) in unique_snippets_table:
                                 print("Identical code already being tested...")
                                 continue
                             else:
-                                unique_snippets_table.add(hash(code))
-                        except:
-                            print("Code container is empty...")
-                            continue
-                        Hedy_snippets.append(Snippet(f, level_number, adventure_name + ' snippet #' + str(code_snippet_counter), code, adventure_name))
-                    # code snippets inside start_code
-                    try:
-                        start_code = level['start_code']
-                        if hash(start_code) in unique_snippets_table:
-                            print("Identical code already being tested...")
-                            continue
-                        else:
-                            unique_snippets_table.add(hash(start_code))
-                        Hedy_snippets.append(Snippet(f, level_number, 'start_code', start_code, adventure_name))
-                    except KeyError:
-                        print(f'Problem reading startcode for {lang} level {level}')
-                        pass
-                    # Code snippets inside example code
-                    for tag in utils.markdown_to_html_tags(level['example_code']):
-                        if tag.name != 'pre' or not tag.contents[0]:
-                            continue
-                        code_snippet_counter += 1
-                        try:
-                            code = tag.contents[0].contents[0]
-                            if hash(code) in unique_snippets_table:
-                                print("Identical code already being tested...")
+                                unique_snippets_table.add(hash(start_code))
+                            Hedy_snippets.append(Snippet(f, level_number, 'start_code', start_code, adventure_name))
+                        except KeyError:
+                            print(f'Problem reading startcode for {lang} level {level}')
+                            pass
+                        # Code snippets inside example code
+                        for tag in utils.markdown_to_html_tags(level['example_code']):
+                            if tag.name != 'pre' or not tag.contents[0]:
                                 continue
-                            else:
-                                unique_snippets_table.add(hash(code))
-                        except:
-                            print("Code container is empty...")
-                            continue
-                        Hedy_snippets.append(Snippet(f, level_number, adventure_name + ' snippet #' + str(code_snippet_counter), code, adventure_name))
-
-
+                            code_snippet_counter += 1
+                            try:
+                                code = tag.contents[0].contents[0]
+                                if hash(code) in unique_snippets_table:
+                                    print("Identical code already being tested...")
+                                    continue
+                                else:
+                                    unique_snippets_table.add(hash(code))
+                            except:
+                                print("Code container is empty...")
+                                continue
+                            Hedy_snippets.append(Snippet(f, level_number, adventure_name + ' snippet #' + str(code_snippet_counter), code, adventure_name))
 
   return Hedy_snippets
 
@@ -104,11 +103,10 @@ def translate_keywords_in_snippets(snippets):
 
     return snippets
 
-Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/adventures')]
+# use this to filter on 1 lang:
+# Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/adventures', filtered_language='ar')]
 
-# lang = 'es' #useful if you want to test just 1 language
-# if lang:
-#     Hedy_snippets = [(name, snippet) for (name, snippet) in Hedy_snippets if snippet.language[:2] == lang]
+Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/adventures')]
 
 # level = 15
 # if level:

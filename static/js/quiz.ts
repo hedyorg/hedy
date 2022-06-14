@@ -3,8 +3,13 @@ import {showAchievements} from "./app";
 
 (function() {
     $('.option-block').on("click", function () {
-        $('.option-block').removeClass('active');
-        $(this).addClass('active');
+        // Remove active attribute and hide possible answer button
+        $('.option-block').removeClass('border-double border-8 active');
+        $('.submit-button').hide();
+
+        // Add active attribute and show correct answer button
+        $(this).addClass('border-double border-8 active');
+        $(this).find(".submit-button").show();
     });
 })();
 
@@ -29,7 +34,8 @@ export function startQuiz(level: number) {
 export function loadQuestQuestion(level: number, question: number) {
     // If we get the request from the feedback page -> hide just to be sure also remove selected answer
     $('#quiz_feedback_container').hide();
-    $('.option-block').removeClass('active');
+    $('.option-block').removeClass('border-double border-8 active');
+    $('.submit-button').hide();
 
     $.ajax({
       type: 'GET',
@@ -101,8 +107,9 @@ function parseCodeBlocks(option: string) {
 }
 
 function highlightQuestionBar(question: number) {
-    $('.step').removeClass('current');
     $('.question_header_text_container').hide();
+    $('.step').removeClass('current');
+
     $('#question_header_text_' + question).show();
     $('#question_header_' + question).addClass('current');
 }
@@ -197,9 +204,9 @@ function showFeedback(response: any, question: string, correct: boolean) {
 
 function updateHeader(question: string, correct: boolean) {
     if (correct) {
-        $('#question_header_' + question).addClass('check');
+        $('#question_header_' + question).addClass('bg-green-400');
     } else {
-        $('#question_header_' + question).addClass('incorrect');
+        $('#question_header_' + question).addClass('bg-red-400');
     }
 }
 
