@@ -1906,4 +1906,10 @@ function removeDebugClass(str: Element) {
   return str.innerHTML.replace('<div class="debugLine">', '').replace('</div>', '');
 }
 
+export function switchToParsonsTab(tabName: string) {
+  $('.parsons-exercise-tab').hide();
+  $('#' + tabName).show();
+  console.log(tabName);
+}
+
 
