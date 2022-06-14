@@ -1,3 +1,9 @@
-<div>
-    Use this dedicated file for all Parsons related stuff...
+<div class="flex flex-row items-center justify-around gap-2">
+    {% for i in range(1, parsons_exercises + 1)%}
+        {% if i == 1 %}
+         <div class="step current bg-gray-200" id="question_header_{{i}}"><span class="question_header_text_container" id="parsons_header_text_{{i}}">{{_('exercise')}}</span> {{ i }}</div>
+        {% else %}
+            <div class="step {% if i % 2 == 0 %}bg-gray-400{% else %}bg-gray-200{% endif %}" id="parsons_header_{{i}}"><span class="question_header_text_container" id="parsons_header_text_{{i}}" style="display: none;">{{_('exercise')}}</span> {{ i }}</div>
+        {% endif %}
+    {% endfor %}
 </div>
