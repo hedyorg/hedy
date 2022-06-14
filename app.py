@@ -833,6 +833,7 @@ def index(level, program_id):
         return utils.error_page(error=403, ui_message=gettext('level_not_class'))
 
     parsons = load_parsons_per_level(level)
+    max_parsons_lines = max([len(parson.get('code_lines', {})) for parson in parsons])
 
     hide_parsons = False
     if 'other_settings' in customizations and 'hide_parsons' in customizations['other_settings']:
@@ -870,6 +871,7 @@ def index(level, program_id):
         quiz_questions=quiz_questions,
         adventures=adventures,
         parsons=parsons,
+        parsons_lines=max_parsons_lines,
         customizations=customizations,
         hide_cheatsheet=hide_cheatsheet,
         hide_parsons=hide_parsons,
