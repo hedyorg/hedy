@@ -146,15 +146,6 @@ function resetWindow() {
     if (window.history) { window.history.replaceState(null, '', '#' + hashFragment); }
   });
 
-  $('.parsons-exercise-tab').click(function () {
-    $('.parsons-exercise-tab').removeClass('tab-selected');
-    $(this).addClass('tab-selected');
-    let name = $(this).attr('name');
-
-    $('.parsons-exercise-body').hide();
-    $('#' + name).show();
-  });
-
   // If we're opening an adventure from the beginning (either through a link to /hedy/adventures or through a saved program for an adventure), we click on the relevant tab.
   // We click on `level` to load a program associated with level, if any.
   if (window.State && window.State.adventure_name) {
