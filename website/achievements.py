@@ -21,7 +21,10 @@ class Achievements:
         for i in range(1, hedy.HEDY_MAX_LEVEL+1):
             for command in hedy.commands_per_level.get(i):
                 commands.append(command)
-        return set(commands)
+        commands = set(commands)
+        # We manually remove the redundant commands, these are stored in the commands_per_level but not used by the parser
+        redundant_commands = {'at', 'from', 'times', 'range', 'to'}
+        return commands - redundant_commands
 
     def get_global_statistics(self):
         all_achievements = self.DATABASE.get_all_achievements()
@@ -207,13 +210,10 @@ class Achievements:
     def check_code_achievements(self, code, level):
         self.initialize_user_data_if_necessary()
         commands_in_code = hedy.all_commands(code, level, session['lang'])
-        print(commands_in_code)
         if 'trying_is_key' not in session['achieved']:
             for command in list(set(commands_in_code)):  # To remove duplicates
                 if command not in session['commands'] and command in self.all_commands:
                     session['new_commands'].append(command)
-            print(sorted(list(set(session['commands']).union(set(session['new_commands'])))))
-            print(sorted(list(self.all_commands)))
             if set(session['commands']).union(set(session['new_commands'])) == self.all_commands:
                 session['new_achieved'].append("trying_is_key")
         if 'did_you_say_please' not in session['achieved'] and "ask" in hedy.all_commands(code, level, session['lang']):
