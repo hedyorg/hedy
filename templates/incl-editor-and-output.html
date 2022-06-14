@@ -36,7 +36,7 @@
         {% if parsons and not hide_parsons %}
             <div id="parsons_container" class="w-full flex-1" style="display: none;">
                 {% for i in range(parsons_lines) %}
-                   <div class="parsons_code_container relative turn-pre-into-ace w-full mb-2 border-4 border-black rounded-lg" style="background-color: #272822;">
+                   <div class="parsons_code_container relative turn-pre-into-ace w-full mb-2 border-4 border-black rounded-lg" style="background-color: #272822; {% if i > (parsons[0].code_lines|length) - 1 %} display: none;{% endif %}">
                        <div index="-" draggable="true" code="" class="compiler-parsons-box w-full absolute inset-0 z-10 rounded-lg"></div>
                        <pre level="{{ level }}" id="goal_parsons_{{ loop.index }}" class="no-copy-button parsons text-sm"></pre>
                    </div>
