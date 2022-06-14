@@ -9,7 +9,7 @@
               {% endif %}
             {% endfor %}
             <!-- Add the tab for the parsons problem (if it exists) -->
-            {% if parsons and not hide_parsons %}
+            {% if parsons %}
                 <div class="tab parsons_tab z-10 whitespace-nowrap flex items-center justify-center" tabindex="0" data-tab="parsons">
                     {{_('parsons_title')}}
                 </div>
@@ -61,35 +61,17 @@
           </div>
           {% endif %}
         {% endfor %}
-        {% if parsons and not hide_parsons %}
-            <!-- Make a "sub tab" for each problem -->
+        {% if parsons %}
             <div data-tabtarget="parsons" class="hidden">
-                <div class="flex flex-row items-center">
-                {% for parson in parsons %}
-                    <div class="tab{% if loop.index == 1 %} tab-selected{% endif %} parsons-exercise-tab" name="{{parson['short_name']}}">{{ parson['name'] }}</div>
-                {% endfor %}
+                <div class="flex flex-row items-center justify-around gap-2">
+                    {% for i in range(1, parsons_exercises + 1)%}
+                        {% if i == 1 %}
+                            <div class="step current bg-gray-200" id="question_header_{{i}}"><span class="question_header_text_container" id="parsons_header_text_{{i}}">{{_('exercise')}}</span> {{ i }}</div>
+                        {% else %}
+                            <div class="step {% if i % 2 == 0 %}bg-gray-400{% else %}bg-gray-200{% endif %}" id="parsons_header_{{i}}"><span class="question_header_text_container" id="parsons_header_text_{{i}}" style="display: none;">{{_('exercise')}}</span> {{ i }}</div>
+                        {% endif %}
+                    {% endfor %}
                 </div>
-                {% for parson in parsons %}
-                    <div class="flex flex-row parsons-exercise-body" id="{{parson['short_name']}}">
-                        <div class="w-1/2 p-2 ltr:mr-2 rtl:ml-2">
-                            {{ parson['text']|commonmark }}
-                            <div class="flex flex-col mx-auto items-center" id="start_parsons_options">
-                                {% for key, line in parson.code_lines.items() %}
-                                    <div class="relative w-full mb-2 border-4 border-black rounded-lg" style="background-color: #272822;">
-                                        <div index="{{ key }}" draggable="true" code="{% if line[0] == '_' %}    {{line[1:]}}{% else %}{{line}}{% endif %}" class="start-parsons-box w-full absolute inset-0 z-10 rounded-lg"></div>
-                                        <pre level="{{ level }}" id="start_parsons_{{ loop.index }}" class="no-copy-button parsons text-sm">{% if line[0] == '_' %}    {{line[1:]}}{% else %}{{line}}{% endif %}</pre>
-                                    </div>
-                                {% endfor %}
-                            </div>
-                        </div>
-
-                        <div class="w-1/2 ltr:ml-2 rtl:mr-2">
-                            {{ parson['example']|commonmark }}
-                            {{ parson['story']|commonmark }}
-                        </div>
-                    </div>
-                    <div class="ltr:clear-right rtl:clear-left"></div>
-                {% endfor %}
             </div>
         {% endif %}
         {% for adventure in teacher_adventures %}

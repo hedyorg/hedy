@@ -70,26 +70,6 @@ ACHIEVEMENTS_TRANSLATIONS = hedyweb.AchievementTranslations()
 ACHIEVEMENTS = achievements.Achievements()
 DATABASE = database.Database()
 
-
-def load_parsons_per_level(level):
-    all_parsons = []
-    parsons = PARSONS[g.lang].get_parsons(g.keyword_lang)
-    for short_name, parson in parsons.items():
-        if level not in parson['levels']:
-            continue
-        level_parson = parson['levels'].get(level)
-        current_parson = {
-            'short_name': short_name,
-            'name': parson['name'],
-            'text': level_parson['text'],
-            'example': level_parson['example'],
-            'story': level_parson['story'],
-            # We use this overly complex line to shuffle the dict items in one go
-            'code_lines': {i: level_parson['code_lines'][i] for i in list(set(level_parson['code_lines']))}
-        }
-        all_parsons.append(current_parson)
-    return all_parsons
-
 def load_adventures_per_level(level):
     loaded_programs = {}
     # If user is logged in, we iterate their programs that belong to the current level. Out of these, we keep the latest created program for both the level mode(no adventure) and for each of the adventures.
@@ -832,13 +812,6 @@ def index(level, program_id):
     if 'levels' in customizations and level not in available_levels:
         return utils.error_page(error=403, ui_message=gettext('level_not_class'))
 
-    parsons = load_parsons_per_level(level)
-    max_parsons_lines = max([len(parson.get('code_lines', {})) for parson in parsons])
-
-    hide_parsons = False
-    if 'other_settings' in customizations and 'hide_parsons' in customizations['other_settings']:
-        hide_parsons = True
-
     commands = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
 
     teacher_adventures = []
@@ -855,10 +828,19 @@ def index(level, program_id):
     if 'other_settings' in customizations and 'hide_cheatsheet' in customizations['other_settings']:
         hide_cheatsheet = True
 
+    parsons = True if PARSONS[g.lang].get_parsons_data_for_level(level) else False
     quiz = True if QUIZZES[g.lang].get_quiz_data_for_level(level) else False
     quiz_questions = 0
+    parson_exercises = 0
+
     if quiz:
         quiz_questions = len(QUIZZES[g.lang].get_quiz_data_for_level(level))
+    if parsons:
+        parson_exercises = len(PARSONS[g.lang].get_parsons_data_for_level(level))
+
+
+    if 'other_settings' in customizations and 'hide_parsons' in customizations['other_settings']:
+        parsons = False
     if 'other_settings' in customizations and 'hide_quiz' in customizations['other_settings']:
         quiz = False
 
@@ -871,10 +853,9 @@ def index(level, program_id):
         quiz_questions=quiz_questions,
         adventures=adventures,
         parsons=parsons,
-        parsons_lines=max_parsons_lines,
+        parsons_exercises=parson_exercises,
         customizations=customizations,
         hide_cheatsheet=hide_cheatsheet,
-        hide_parsons=hide_parsons,
         enforce_developers_mode=enforce_developers_mode,
         teacher_adventures=teacher_adventures,
         loaded_program=loaded_program,
