@@ -14,7 +14,6 @@ adventures:
                     प्रोग्रामिंग फील्ड के नीचे हरे 'रन कोड' बटन के साथ कोड को स्वयं आज़माएं।
                 start_code: "{print} हेलो दुनिया!"
                 example_code: |-
-                    ## उदाहरण कोड
                     ```
                     {print} हेलो!
                     {print} हेडी में आपका स्वागत है!
@@ -25,7 +24,6 @@ adventures:
 
                     पता नहीं क्या बनाना है? अगले टैब में आपको प्रोग्राम बनाने के लिए विचार मिलेंगे।
                 example_code_2: |-
-                    ## उदाहरण कोड
                     ```
                     {ask} आपका नाम क्या है?
                     {echo} हेलो
@@ -63,14 +61,12 @@ adventures:
 
                 start_code: "{print} हेलो दुनिया  !"
                 example_code: |-
-                    ## उदाहरण कोड
                     ```
                     animals {is} कुत्ता, बिल्ली, कंगारू
                     {print} animals at random
                     ```
                 story_text_2: You can also add items to the list with `{add}` and remove items with `{remove}`.
                 example_code_2: |-
-                    ## उदाहरण कोड
                     ```
                     animals {is} कुत्ता, बिल्ली, कंगारू
                     add पेंगुइन to animals
@@ -91,7 +87,7 @@ adventures:
                     ## कार्यभार अधिक कठिन होते जा रहे हैं
                     आपको फिर से बाईं ओर कमांड और निम्नलिखित टैब में कार्यभार मिलेंगे। लगातार टैब में कार्यभार अब और अधिक कठिन होते जा रहे हैं।
                     इसलिए कहानी के साथ बाईं ओर शुरू करना और दाईं ओर काम करना सबसे अच्छा है, ताकि अधिक से अधिक चुनौती दी जा सके।
-                example_code: "## उदाहरण कोड\n```\nprint 'You need to use quotation marks from now on!'\nanswer is ask 'What do we need to use from now on?'\nprint 'We need to use ' answer\n```\n"
+                example_code: "```\nprint 'You need to use quotation marks from now on!'\nanswer is ask 'What do we need to use from now on?'\nprint 'We need to use ' answer\n```\n"
                 story_text_2: "## Adventures are getting more and more difficult\nThe adventures are now getting more and more difficult in the successive tabs.\nSo it is best to start on the left with the story, and work to the right, in order to be challenged more and more.\n"
             5:
                 start_code: |-
@@ -111,7 +107,6 @@ adventures:
 
                      स्तर 5 में भी, टैब में असाइनमेंट अधिक से अधिक कठिन होते जा रहे हैं। तो, उन्हें बाएं से दाएं करें।
                 example_code: |-
-                  ## उदाहरण हेडी कोड
                     ```
                     नाम {is} {ask} 'आपका नाम क्या है?'
                     {if} नाम {is} हेडी {print} 'अच्छा' {else} प्रिंट 'बू!'
@@ -126,7 +121,6 @@ adventures:
                     ```
                 story_text_2: "Sometimes code with an `{if}` gets really long and does not fit on the line well. <br> You may also divide the code over two lines, starting the second line at the `{else}` like this:\n"
                 example_code_2: |-
-                    ## उदाहरण हेडी कोड
                     ```
                     सुंदर_रंग {is} हरा, पीला
                     रंग {is} {ask} 'आपका पसंदीदा रंग कौन सा है?'
@@ -146,13 +140,11 @@ adventures:
 
                      हम भंडारण में भी बदलाव करते हैं! जब हम कोई नाम या नंबर इस तरह से स्टोर करते हैं, तो अब आप `{is}` के बदले `=` का उपयोग कर सकते हैं:
                 example_code_2: |-
-                    ## उदाहरण हेडी कोड
                     ```
                     नाम = हेडी
                     उत्तर = 20 + 4
                     ```
                 example_code: |-
-                    ## उदाहरण हेडी कोड
                     ```
                     {print} '5 जमा 5' 5 + 5
                     {print} '5 माइनस 5 है' 5 - 5
@@ -165,7 +157,6 @@ adventures:
                     `{ask}`, `{print}` {and} `{if}` ठीक उसी तरह काम करते हैं जैसे उन्होंने स्तर 5 और 6 में किया था।
                     लेकिन स्तर 7 `{repeat}` कमांड जोड़ता है। {repeat} कोड की एक पंक्ति को कई बार निष्पादित करने के लिए उपयोग किया जा सकता है।
                 example_code: |-
-                    ## उदाहरण हेडी कोड
                     ```
                     {repeat} 3 {times} {print} 'हेडी {is} मजेदार!'
                     ```
@@ -180,7 +171,6 @@ adventures:
                     इसका मतलब है कि लाइन की शुरुआत में चार रिक्त स्थान डालने होंगे |
                     यह तब भी लागू होगा जब आप केवल एक पंक्ति का एक ब्लॉक बनाना चाहते हैं| जब आप केवल एक पंक्ति का ब्लॉक बनाना चाहते हैं तो आपको इंडेंट भी करना होगा।
                 example_code: |-
-                    ## उदाहरण हेडी कोड
                     ```
                     {repeat} 5 {times}
                         {print} 'सभी को नमस्कार'
@@ -199,7 +189,6 @@ adventures:
                     उदाहरण में आप एक `{if}` कमांड को `{repeat}` कमांड में देखते हैं। इसे दूसरे तरीके से भी अनुमति दी जाती है, और एक `{if}` में एक `{if}` और `{repeat}` में `{repeat}` की भी अनुमति है।
                     इसे आज़माइए!
                 example_code: |-
-                    ## उदाहरण हेडी कोड
                     ```
                     {repeat} 3 {times}
                         खाना = {ask} 'तुम क्या चाहते हो?'
@@ -217,7 +206,6 @@ adventures:
                     इस स्तर में हम एक नया कोड सीखेंगे जो `{for}` कहलाता है| `{for}` के साथ आप एक सूची बना सकते हैं और सारे तत्वों का प्रयोग कर सकते हैं|
                     `{for}` एक ब्लॉक बनाता है, `{repeat}` और '{if}' की तरह, तो ब्लॉक की सभी पंक्तियों को रिक्त स्थानों से शुरू होने की आवश्यकता है|
                 example_code: |-
-                    ## उदाहरण कोड
                     ```
                     जानवरों {is} कुत्ता, बिल्ली, ब्लॉबफिश
                     {for} जानवर {in} जानवरों
@@ -230,7 +218,7 @@ adventures:
                 story_text: |-
                     `{print}` वैसा ही काम करेगा लेकिन हम `{for}` का एक नया रूप जोड़ते हैं|
                     अब आप '{for} काउंटर  {in} {range} 1 {to} 5' लिख सकते हैं और आपके प्रोग्राम में 'काउंटर' का उपयोग कर सकते हैं| कोशिश करके देखो क्या होता है! `{for}` और '{if}' पंक्तियों के बाद इंडेंटेशन का उपयोग करना ध्यान में रखें (जिसका मतलब है कि सेंटेंस लिखने से पहले 4 रिक्त स्थान डाल दें|)
-                example_code: "## उदाहरण कोड\n```\nfor counter in range 1 to 5\n    print counter\n```\n"
+                example_code: "```\nfor counter in range 1 to 5\n    print counter\n```\n"
             12:
                 start_code: |-
                     {print} 'दशमलव संख्याओं को अब एक बिंदु का उपयोग करने की आवश्यकता है'
@@ -335,7 +323,7 @@ adventures:
 
                     उदाहरण कोड में, हम सही उत्तर दिए जाने तक जारी रखते हैं।
                     यदि सही उत्तर कभी नहीं दिया जाता है, तो लूप कभी समाप्त नहीं होता है!
-                example_code: "## उदाहरण कोड\n```\nanswer = 0\nwhile answer != 25\n    answer = ask 'What is 5 times 5?'\nprint 'A correct answer has been given'\n```\n"
+                example_code: "```\nanswer = 0\nwhile answer != 25\n    answer = ask 'What is 5 times 5?'\nprint 'A correct answer has been given'\n```\n"
             16:
                 start_code: |
                     फल = ['सेब', 'केला', 'चेरी']
@@ -345,7 +333,6 @@ adventures:
                     सूचियों में किसी स्थान की तरफ इशारा करने के लिए आप वर्गाकार कोष्ठकों का भी उपयोग कर सकते हैं।
 
                 example_code: |-
-                    ## उदाहरण कोड
                     ```
                     दोस्त = ['अहमद', 'बेन', 'केडेन']
                     शुभ_संख्याएं = [15, 18, 6]
@@ -384,7 +371,6 @@ adventures:
                     We arrived at real Python code! That means we need to use parentheses with {print} and {range} from now on.
 
                 example_code: |
-                    ## Example Hedy Code
                     ```
                     {print}('my name is Hedy!')
                     ```
@@ -413,8 +399,6 @@ adventures:
         levels:
             4:
                 example_code: |
-                    ## उदाहरण हेडी कोड
-
                     ```
                     नाम {is} हंस
                     {print} 'मुख्य पात्र का नाम है' नाम
@@ -435,8 +419,6 @@ adventures:
                     स्तर 3 में आप अपनी कहानी को और मजेदार बना सकते हैं। आप इस तरह किसी भी राक्षस, जानवर या अन्य बाधा के लिए यादृच्छिकता का उपयोग कर सकते हैं:
 
                 example_code: |
-                    ## उदाहरण हेडी कोड
-
                     ```
                     जानवर {is} 🦔, 🐿, 🦉, 🦇
                     {print} वह अब एक की आवाज सुनता है जानवर {at} {random}
@@ -445,8 +427,6 @@ adventures:
                     आदेश `{add}` भी आपकी कहानी में काम आ सकता है। उदाहरण के लिए
 
                 example_code_2: |-
-                    ## उदाहरण हेडी कोड
-
                     ```
                     {print} वह एक आवाज सुनता है
                     जानवरों {is}🐿, 🦔, 🦇, 🦉
@@ -457,8 +437,6 @@ adventures:
                 story_text_3: |-
                     यह आपकी कहानी में `{remove}` आदेश का एक उदाहरण है
                 example_code_3: |
-                    ## उदाहरण हेडी कोड
-
                     ```
                     {print} उनका बैग बहुत भारी हो गया था।
                     {print} अंदर पानी की एक बोतल, एक टॉर्च और एक ईंट थी।
@@ -477,8 +455,6 @@ adventures:
                     उस पहली पंक्ति के बाद, `{print}` {if} से शुरू करें, वाक्य को मुद्रित करने की आवश्यकता है।
                     आप `{echo}` {if} का उपयोग करते हैं, आप चाहते हैं कि आपका मुख्य चरित्र वाक्य के अंत में हो।
                 example_code: |
-                    ## उदाहरण हेडी कोड
-
                     ```
                     {ask} इस कहानी का मुख्य पात्र है
                     {print} मुख्य पात्र अब जंगल में चलने वाला है
@@ -496,7 +472,6 @@ adventures:
 
                     फिर आप उस नाम को वाक्य में कहीं भी रख सकते हैं।
                 example_code: |
-                    ## उदाहरण हेडी कोड
                     ```
                     नाम {is} {ask} मुख्य पात्र का नाम क्या है?
                     {print} नाम अब जंगल में चलने वाला है
@@ -511,9 +486,6 @@ adventures:
                     ## कहानी
                     इस स्तर में आप एक चर में कई शब्दों को सहेजने के लिए उद्धरण चिह्नों का उपयोग कर सकते हैं।
                 example_code: |
-                    ## उदाहरण हेडी कोड
-
-
                     ```
                     नाम = 'इंग्लैंड की रानी'
                     {print} नाम 'केक का टुकड़ा खा रहा था, जब अचानक...'
@@ -524,8 +496,6 @@ adventures:
                     ## कहानी
                     इस स्तर में आप अपनी कहानी में {for} आदेश का इस्तेमाल कर सकते हैं। इस तरह आप आसानी से बच्चों की किताब 'भूरा भालू, भूरा भालू, आप क्या देखते हैं' को प्रोग्राम कर सकते हैं।
                 example_code: |-
-                    ## उदाहरण हेडी कोड
-
                     ```
                     जानवर = लाल पक्षी, काली भेड़, हरा मेंढक, पीली बत्तख, छोटा बच्चा
                     {print} 'भूरा भालू'
@@ -544,7 +514,6 @@ adventures:
                     ## कहानी
                     इस स्तर पर आप अन्य {if}, {repeat} या {for} आदेश के अंदर {if}, {repeat} या {for} आदेश डालने के लिए नेस्टिंग का उपयोग कर सकते हैं। यह आपको कई विकल्प देता है और वास्तव में आपकी कहानी को परस्पर संवादात्मक बनाने में आपकी मदद करता है।
                 example_code: |-
-                    ## उदाहरण हेडी कोड
                     ```
                     {print} 'रॉबिन शहर में घूम रहा है'
                     स्थान = {ask} 'क्या रॉबिन एक दुकान में जा रहा है, या वह घर जाती है?'
@@ -596,8 +565,6 @@ adventures:
                     ## कहानी
                     इस स्तर में आप अपने {if} आदेश में कई पंक्तियों का उपयोग कर सकते हैं, इस तरह आप अपने सुखद या दुखद अंत को उन्नयन कर सकते हैं!
                 example_code: |
-                    ## उदाहरण हेडी कोड
-
                     ```
                     {print} 'अरे नहीं! टी-रेक्स बंद हो रहा है!'
                     अंत = {ask} 'क्या आप सुखद या दुखद अंत चाहते हैं?'
@@ -614,8 +581,6 @@ adventures:
                 start_code: '#अपना कोड यहां डालें'
             7:
                 example_code: |-
-                    ## उदाहरण हेडी कोड
-
                     ```
                     {print} 'राजकुमार मदद के लिए पुकारता रहा'
                     {repeat} 5 {times} {print} 'सहायता!'
@@ -641,8 +606,6 @@ adventures:
 
                     आप यह भी सुनिश्चित कर सकते हैं कि एक नाम फिर से दर्ज किया जा सकता है। यह पिछले स्तरों की तरह ही काम करता है। आप इसे एक `{if}` के साथ जोड़ सकते हैं, और फिर आप पहले से ही एक पूरा प्रोग्राम बना चुके हैं!
                 example_code: |-
-                    ## उदाहरण हेडी कोड
-
                     ```
                     नाम {is} {ask} 'जंगल में कौन चल रहा है?'
                     {print} नाम 'जंगल के माध्यम से चलता है'
@@ -658,8 +621,6 @@ adventures:
                     `{while}` लूप का उपयोग करना आपकी कहानियों को और दिलचस्प बना सकता है। उदाहरण के लिए, आप `{while} खेल {is} 'चालू'' का उपयोग कर सकते हैं ताकि आप खेल खत्म होने तक खेल सकें।
                     या आप '{while} तलवार {is} 'खोया'' का उपयोग कर सकते हैं ताकि खिलाड़ी तब तक खेल जारी न रख सके जब तक कि उन्हें कुछ न मिल जाए।
                 example_code: |-
-                    ## उदाहरण हेडी कोड
-
                     ```
                     चाबियाँ = 'खोया'
                     {print} 'आप अपने बगीचे में खड़े हैं और आपने अपनी चाबियां खो दी हैं।'
@@ -680,8 +641,6 @@ adventures:
                     ## कहानी
                     `{and}` और `{or}` आदेश का उपयोग करके, आप अपनी कहानियों को छोटा कर सकते हैं। उदाहरण के लिए, ड्रैगन कहानी देखें।
                 example_code: |-
-                    ## उदाहरण हेडी कोड
-
                     ```
                     तलवार = 'खोया'
                     खेल = 'चालू'
@@ -726,9 +685,6 @@ adventures:
                     Use 90 to turn a quarter. We call this degrees. A full turn is 360 degrees.
                     Can you make a figure with this code? Maybe a triangle or a circle?
                 example_code: |
-                    ## उदाहरण कोड
-
-
                     ```
                     {print} Drawing figures
                     angle {is} 90
@@ -745,9 +701,6 @@ adventures:
                     {turn} angles {at} {random}
                     {forward} 25
                 example_code: |
-                    ## उदाहरण कोड
-
-
                     ```
                     angles {is} 10, 50, 90, 150, 250
                     {turn} angles {at} {random}
@@ -762,8 +715,6 @@ adventures:
                     ## Let's draw
                     In level 4 you have to use quotation marks with `{print}` and `{ask}`. Also when drawing!
                 example_code: |
-                    ## उदाहरण कोड
-
                     ```
                     {print} 'Drawing figures'
                     angle {is} 90
@@ -782,8 +733,6 @@ adventures:
                     ## Let's draw
                     In level 5 you can make a choice with `{if}`. For example between different types of figures.
                 example_code: |
-                    ## उदाहरण कोड
-
                     ```
                     {print} 'Drawing Figures'
                     figure {is} {ask} 'Do you want a square or a triangle?'
@@ -813,8 +762,6 @@ adventures:
 
                     This is the start of a little staircase. Can you make it have 5 steps?
                 example_code: |
-                    ## उदाहरण कोड
-
                     ```
                     {turn} right
                     {forward} 50
@@ -832,8 +779,6 @@ adventures:
                     Now that we can repeat several lines, we can make figures more easily.
                     We only have to set the angle once and then use that variable in the `{repeat}`.
                 example_code: |
-                    ## उदाहरण कोड
-
                     ```
                     angle = 90
                     {repeat} 10 {times}
@@ -845,8 +790,6 @@ adventures:
                     Also, we can now improve the program that draws different figures.
                     Can you figure out how far the turtle has to turn here? Finish the code and you can draw any polygon you'd like!
                 example_code_2: |
-                    ## उदाहरण कोड
-
                     ```
                     angles = {ask} 'How many angles should I draw?'
                     angle = 360 / angles
@@ -858,8 +801,6 @@ adventures:
                     hoeken = {ask} 'How many angles should I draw?'
             7:
                 example_code: |
-                    ## उदाहरण कोड
-
                     ```
                     {print} 'Draw figures'
                     {repeat} 3 {times} {forward} 10
@@ -872,8 +813,6 @@ adventures:
                     In this level you can repeat one line of code with `{repeat}`.
             6:
                 example_code: |
-                    ## उदाहरण कोड
-
                     ```
                     angles = {ask} 'How many angles do you want?'
                     angle = 360 / angles
@@ -906,7 +845,6 @@ adventures:
         levels:
             10:
                 example_code: |
-                    ## उदाहरण कोड
                     ```
                     days = Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
                     names = mom, dad, Emma, Sophie
@@ -923,16 +861,12 @@ adventures:
                     With the `{repeat}` you can repeat pieces of code. You can use this to calculate who will be washing dishes for the entire week.
                 start_code: "{print} 'Who does the dishes?'"
                 example_code: |
-                    ## उदाहरण कोड
-
                     ```
                     people = mom, dad, Emma, Sophie
                     {repeat} _ _ {print} 'the dishwasher is' _
                     ```
             6:
                 example_code: |
-                    ## उदाहरण कोड
-
                     ```
                     people = mom, dad, Emma, Sophie
                     emma_washes = 0
@@ -974,8 +908,6 @@ adventures:
                     Can you finish the code so that it prints 'too bad' when it is your turn and otherwise 'yes!'?
                     Don't forget the quotes!
                 example_code: |
-                    ## उदाहरण कोड
-
                     ```
                     people {is} mom, dad, Emma, Sophie
                     dishwasher {is} people {at} {random}
@@ -992,8 +924,6 @@ adventures:
 
                     Tip: Don't forget the quotation marks!
                 example_code: |
-                    ## उदाहरण कोड
-
                     ```
                     people {is} mom, dad, Emma, Sophie
                     {print} _ the dishes are done by _
@@ -1008,8 +938,6 @@ adventures:
                     Then you can let the computer choose very fairly. You can program that in this level!
                     You first make a list of the members of your family. Then choose '{at} {random}' from the list.
                 example_code: |
-                    ## उदाहरण कोड
-
                     ```
                     people {is} mom, dad, Emma, Sophie
                     {print} people {at} {random}
@@ -1039,8 +967,6 @@ adventures:
                     But maybe you want to recreate a die from a completely different game. That's fine too! Then make up your own reaction. Eg 'yes' for 6 and 'pity' for something {else}.
                 start_code: "{print} 'What will the die indicate this time?'"
                 example_code: |
-                    ## उदाहरण कोड
-
                     ```
                     choices {is} 1, 2, 3, 4, 5, earthworm
                     throw {is} _
@@ -1053,8 +979,6 @@ adventures:
                     In this level we can make sentences with the die value in the sentence, with quotes of course.
                     This time the sample code is not quite complete. Can you finish the code?
                 example_code: |
-                    ## उदाहरण कोड
-
                     ```
                     choices {is} 1, 2, 3, 4, 5, earthworm
                     {print} _ you threw _
@@ -1071,8 +995,6 @@ adventures:
 
                     ![Die of earthworms with 1 to 5 and an earthworm on it](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)
                 example_code: |
-                    ## उदाहरण कोड
-
                     ```
                     choices {is} 1, 2, 3, 4, 5, earthworm
                     {print} choices {at} {random}
@@ -1083,8 +1005,6 @@ adventures:
                     ## Dice
                     Is everybody taking too long throwing the dice? In this level you can let Hedy throw all the dice at once!
                 example_code: |
-                    ## उदाहरण कोड
-
                     ```
                     players = Ann, John, Jesse
                     choices = 1, 2, 3, 4, 5, 6
@@ -1101,8 +1021,6 @@ adventures:
 
                     But maybe you want to make a completely different die. Of course you can!
                 example_code: |
-                    ## उदाहरण कोड
-
                     ```
                     choices = 1, 2, 3, 4, 5, earthworm
                     {repeat} _ _ {print} _ _ _
@@ -1115,8 +1033,6 @@ adventures:
                     You may know that the worm counts 5 points for Earthworms. Now after a roll you can immediately calculate how many points you have thrown.
                     This is the code to calculate points for one die:
                 example_code: |
-                    ## उदाहरण कोड
-
                     ```
                     choices = 1, 2, 3, 4, 5, earthworm
                     points = 0
@@ -1136,8 +1052,6 @@ adventures:
                     ## Dice
                     In this game you have to throw 6 in as little tries as possible.
                 example_code: |
-                    ## उदाहरण कोड
-
                     ```
                     options = 1, 2, 3, 4, 5, 6
                     {print} 'Throw 6 as fast as you can!'
@@ -1163,9 +1077,6 @@ adventures:
 
                     With `{ask}` you can make a choice, and with `{echo}` you can repeat that choice.
                 example_code: |
-                    ## उदाहरण कोड
-
-
                     ```
                     {print} what do you choose?
                     {ask} choose {from} rock, paper or scissors
@@ -1178,8 +1089,6 @@ adventures:
                     ## Rock, Paper, Scissors
                     Feeling too lazy to play the game yourself? Let Hedy play it for you!
                 example_code: |
-                    ## उदाहरण कोड
-
                     ```
                     choices = rock, paper, scissors
                     players = Marleen, Michael
@@ -1189,8 +1098,6 @@ adventures:
                 start_code: '# place your code here'
             9:
                 example_code: |
-                    ## उदाहरण कोड
-
                     ```
                     choices {is} rock, paper, scisscors
                     your_choice {is} {ask} 'What do you choose?'
@@ -1219,8 +1126,6 @@ adventures:
                     Then you can use `{if}` to see {if} they are the same or different.
                     Will you finish the code?
                 example_code: |
-                    ## उदाहरण कोड
-
                     ```
                     options {is} rock, paper, scissors
                     computer_choice {is} _
@@ -1238,8 +1143,6 @@ adventures:
                     In this level we can further program rock, paper, scissors. But {if} you want to add text, you have to use quotation marks here too.
                     Do you complete the code by entering the correct commands or characters on the underscores?
                 example_code: |
-                    ## उदाहरण कोड
-
                     ```
                     choices {is} rock, paper, scissors
                     {print} _ The computer chose: _ _ {at} _
@@ -1254,9 +1157,6 @@ adventures:
                     For example, you can let the computer pick from rock, paper and scissors.
                 start_code: '{print} Welcome to your own rock scissors paper!'
                 example_code: |
-                    ## उदाहरण कोड
-
-
                     ```
                     choices {is} rock, paper, scissors
                     {print} choices {at} {random}
@@ -1266,8 +1166,6 @@ adventures:
                     ## Rock, paper, scissors
                     In this level you can practise using the variables, so that you can make the rock, paper, scissors game in the next level!
                 example_code: |
-                    ## उदाहरण कोड
-
                     ```
                     choice {is} _
                     {print} I choose choice
@@ -1278,8 +1176,6 @@ adventures:
                     ## Rock, Paper, Scissors
                     Play until you beat the computer! But first, finish the example code...
                 example_code: |
-                    ## उदाहरण कोड
-
                     ```
                     won = 'no'
                     options = 'rock', 'paper', 'scissors'
@@ -1301,8 +1197,6 @@ adventures:
                     ## Rock, paper, scissors
                     With the `{and}` command you can shorten your rock, paper, scissors code! Check out the example code below and try to finish it.
                 example_code: |
-                    ## उदाहरण कोड
-
                     ```
                     options = 'rock', 'paper', 'scissors'
                     your_choice = {ask} 'What do you choose?'
@@ -1327,8 +1221,6 @@ adventures:
                     ## Calculator
                     In previous levels you've learned how to make a calculator, in this level you can expand that code and make it into a little maths game. Like this...
                 example_code: |
-                    ## उदाहरण कोड
-
                     ```
                     score = 0
                     {repeat} 10 {times}
@@ -1349,8 +1241,6 @@ adventures:
                     ## Calculator
                     Now that you can calculate, you can also create a program to practice maths calculations. You can make up the calculations yourself, for example:
                 example_code: |
-                    ## उदाहरण कोड
-
                     ```
                     correct_answer = 11 * 27
                     answer = {ask} 'How much is 11 times 27?'
@@ -1362,8 +1252,6 @@ adventures:
                     You can also let the computer do random sums on its own using random.
                     This is how you choose a number of tables to practice, and from that you always get a different sum:
                 example_code_2: |
-                    ## उदाहरण कोड
-
                     ```
                     tables = 4, 5, 6, 8
                     numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
@@ -1379,8 +1267,6 @@ adventures:
                     ## Guess which number
                     In this level you can programm the game 'Guess which number'
                 example_code: |
-                    ## उदाहरण कोड
-
                     ```
                     {print} 'Guess which number'
                     numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
@@ -1402,8 +1288,6 @@ adventures:
                     ## Calculator
                     Now you can make a calculator that works for decimal numbers.
                 example_code: |
-                    ## उदाहरण कोड
-
                     ```
                     number1 = {ask} 'What is the first number?'
                     number2 = {ask} 'What is the second number?'
@@ -1416,8 +1300,6 @@ adventures:
                     This calculator game helps you practise your tables of multiplication!
                     If you add more numbers to the list, you can practise all the multiplications.
                 example_code: |
-                    ## उदाहरण कोड
-
                     ```
                     numbers = 1, 2, 3
                     {for} number1 {in} numbers
@@ -1436,8 +1318,6 @@ adventures:
                     You can add the `{while}` loop to the calculator game you've learned to make in a previous level.
                     This makes sure the player can't continue to the next question {if} they answer incorrectly.
                 example_code: |
-                    ## उदाहरण कोड
-
                     ```
                     score = 0
                     {for} i {in} {range} 0 {to} 9
@@ -1467,9 +1347,7 @@ adventures:
                     ## Restaurant
                      In level 1 you can make your own virtual restaurant and take your guests' orders.
                 example_code: |
-                    ## Example Hedy code
-
-                      ```
+                     ```
                      {print} Welcome to Hedy's restaurant 🍟
                      {ask} What would you like to order?
                      {echo} So you would like to order
@@ -1486,7 +1364,6 @@ adventures:
                     In level 2 you could expand your restaurant by using variables. In level 1 Hedy could only {echo} the order once and only remember the last thing that was ordered.
                     Now you can use variables and Hedy can remember both the food and the drinks!
                 example_code: |
-                    ## Example Hedy Code
                     ```
                     {print} Welcome to Hedy's restaurant!
                     {print} Today we're serving pizza or lasagna.
@@ -1507,8 +1384,6 @@ adventures:
                     You can also have a bit of fun, by letting Hedy choose the price for your dinner as well! What will you get?
 
                 example_code: |
-                    ## Example Hedy code
-
                     ```
                     {print} Welcome to Hedy's Random Restaurant!
                     {print} The only restaurant that will randomly choose your meal and its price for you!
@@ -1566,8 +1441,6 @@ adventures:
                     In the example below, you see that you can {ask} the customer {if} they want to hear the specials and Hedy can respond accordingly.
 
                 example_code: |
-                    ## Example Hedy code
-
                     ```
                     {print} 'Welcome to Hedys restaurant!'
                     special {is} {ask} 'Would you like to hear our specials today?'
@@ -1594,7 +1467,7 @@ adventures:
                     In this level you can use maths to calculate the total price of your customer's order, which can make your virtual restaurant more realistic.
 
                 example_code: |
-                    ## Example Hedy code (Simple)
+
                     You can make a simple restaurant code, like this:
                     ```
                     {print} 'Welcome to Hedys restaurant'
@@ -1620,7 +1493,7 @@ adventures:
                     - add a children's menu?
                     - think of other fun things to add?
                 example_code_2: |
-                    ## Example Hedy code (Elaborate)
+
                     In this example there are three courses, which requires more code and more additions in calculating the price.
                     ```
                     {print} 'Welcome to Hedys restaurant'
@@ -1683,8 +1556,6 @@ adventures:
                     For example you would {ask} for sauce {if} somebody orders fries, but you wouldn't {if} someone orders pizza!
                     Check out the example, and try this at your own virtual restaurant!
                 example_code: |
-                    ## Example Hedy code
-
                     ```
                     {print} 'Welcome to Hedys restaurant!'
                     people = {ask} 'How many people will be joining us today?'
@@ -1712,8 +1583,6 @@ adventures:
                     ## Restaurant
                     In this level you'll learn how to easily {ask} your guests' orders in a short code.
                 example_code: |
-                    ## Example Hedy code
-
                     ```
                     courses = appetizer, main course, dessert
                     {for} course {in} courses
@@ -1721,7 +1590,6 @@ adventures:
                         {print} food ' will be your ' course
                     ```
                 story_text_2: |
-                    ## Example Hedy code
 
                     Of course, you could also order for multiple people!
                 example_code_2: |
@@ -1739,8 +1607,6 @@ adventures:
                     ## Restaurant
                     We can use the `{for} i {in} {range} 1 {to} 5` to {print} the orders from multiple customers in an orderly manner.
                 example_code: |
-                    ## Example Hedy code
-
                     ```
                     {print} 'Welcome to Restaurant Hedy!'
                     people = {ask} 'For how many people would you like to order?'
@@ -1762,8 +1628,6 @@ adventures:
                     ## Restaurant
                     From this level on you can use decimal numbers to make you menu more realistic.
                 example_code: |
-                    ## Example Hedy code
-
                     ```
                     price = 0
                     food = {ask} 'What would you like to order?'
@@ -1786,7 +1650,6 @@ adventures:
                     We use `{and}` to see {if} two things are both the case.
 
                 example_code: |
-                    ## Example Hedy code
                     ```
                     price = 10
                     food = {ask} 'What would you like to eat?'
@@ -1800,7 +1663,6 @@ adventures:
                     We use `{or}` to see {if} one our of two things is the case.
 
                 example_code_2: |
-                    ## Example Hedy code
                     ```
                     drinks = {ask} 'What would you like to drink?'
                     {if} drinks {is} 'water' {or} drinks {is} 'juice'
@@ -1813,8 +1675,6 @@ adventures:
                     With the `{while}` you can make sure your costumers can keep adding orders until they are done.
 
                 example_code: |
-                    ## Example Hedy code
-
                     ```
                     {print} 'Welcome at McHedy'
                     more = 'yes'
@@ -1834,8 +1694,6 @@ adventures:
                     Now that problem is solved, because of the new way of using the repeat command.
                     In the next example you can have your fortune teller {ask} 3 questions and also print them!
                 example_code: |
-                    ## उदाहरण कोड
-
                     ```
                     {print} 'I am Hedy the fortune teller!'
                     {print} 'You can {ask} me 3 questions.'
@@ -1857,8 +1715,6 @@ adventures:
                     In level 1 you can start off easy by letting Hedy introduce herself as a fortune teller and let her {echo} the players' answers.
                     Like this:
                 example_code: |
-                    ## उदाहरण कोड
-
                     ```
                     {print} Hello, I'm Hedy the fortune teller!
                     {ask} Who are you?
@@ -1879,8 +1735,6 @@ adventures:
                     ## Fortune Teller
                     In this level you can make your fortunes multiple words. Like in this example below:
                 example_code: |
-                    ## उदाहरण कोड
-
                     ```
                     fortunes = 'you will be rich', 'you will fall in love', 'you will slip on a banana peel'
                     {print} 'I will take a look in my crystall ball for your future.'
@@ -1891,8 +1745,6 @@ adventures:
                 start_code: '# place your code here'
             10:
                 example_code: |
-                    ## उदाहरण कोड
-
                     ```
                     houses = mansion, apartment, shack, house
                     loves = nobody, a royal, their neighbour, their true love
@@ -1909,7 +1761,6 @@ adventures:
                     ## Fortune Teller
                     In this level you'll learn how to program the game MASH (mansion, apartement, shack, house). In this game you can predict for all the players at once, what their future will look like.
                 example_code_2: |
-                    ## उदाहरण कोड
                     ```
                     houses = Gryffindor, Slytherin, Hufflepuff, Ravenclaw
                     subjects = potions, defence against the dark arts, charms, transfiguration
@@ -1926,8 +1777,6 @@ adventures:
                     ## Fortune Teller
                     In this level you can use the `{repeat}` command to make your machine tell multiple fortunes at once.
                 example_code: |
-                    ## उदाहरण कोड
-
                     ```
                     {print} 'Im Hedy the fortune teller!'
                     {print} 'You can {ask} 3 questions!'
@@ -1955,8 +1804,6 @@ adventures:
                     By using `{if}` and `{else}` you can make sure that you will always get a good fotune, while other people might not.
                     Check out this example to find out how.
                 example_code: |
-                    ## उदाहरण कोड
-
                     ```
                     {print} 'Im Hedy the fortune teller!'
                     {print} 'I can predict {if} youll win the lottery tomorrow!'
@@ -1968,7 +1815,6 @@ adventures:
                     Of course this might raise some suspicion with the other players... To avoid that, you can make sure that Hedy does give different answers every time you run the code.
                     But of course, still gives you a positive answer and the other players a negative one.
                 example_code_2: |
-                    ## उदाहरण कोड
                     ```
                     {print} 'Im Hedy the fortune teller!'
                     {print} 'I can predict {if} you will win the lottery tomorrow!'
@@ -1990,8 +1836,6 @@ adventures:
                     In this level you can use math in your predictions as a fortune teller. This allows you to make up (silly) formulas to calculate the future.
                     For example you could calculate how rich you'll get or how many kids you will have when you grow up.
                 example_code: |
-                    ## उदाहरण कोड
-
                     ```
                     {print} 'I am Hedy the fortune teller!'
                     {print} 'I can predict how many kids youll get when you grow up!'
@@ -2031,8 +1875,6 @@ adventures:
                     Important! Mind that now that we're using quotation marks, Hedy will get confused when you use the apostrophe for contractions like I'm or What's.
                     Make sure to remove those apostrophes and change the spelling to Im or Whats.
                 example_code: |
-                    ## उदाहरण कोड
-
                     ```
                     {print} 'Im Hedy the fortune teller!'
                     question {is} {ask} 'What do you want to know?'
@@ -2049,8 +1891,6 @@ adventures:
                     In the previous levels you've created your first fortune telling machine, but Hedy couldn't really predict anything, only {echo}.
                     In this level you can use a variable and the `{at} {random}` command to really let Hedy choose an answer for you. Check out this code for instance:
                 example_code: |
-                    ## उदाहरण कोड
-
                     In this example the player can {ask} Hedy a yes-no question and Hedy will pick a random answer for you.
                     ```
                     {print} I’m Hedy the fortune teller!
@@ -2073,8 +1913,6 @@ adventures:
         levels:
             12:
                 example_code: |
-                    ## उदाहरण कोड
-
                     ```
                     {print} 'The digital piggy bank'
                     wish = {ask} 'What would you like to buy?'
@@ -2093,8 +1931,6 @@ adventures:
                     ## Piggybank
                     In this level you can let Hedy tell you {if} you have saved up enough money!
                 example_code: |
-                    ## उदाहरण कोड
-
                     ```
                     money = {ask} 'How much money have you saved?'
                     wish = {ask} 'How much money do you need?'
@@ -2123,8 +1959,6 @@ adventures:
                     In this adventure you can make your own quiz! Fill in the blanks, add more questions and enjoy your own quiz!
                     You can make a quiz about anything you like: your hobby, your favorite animal, your favorite book or anything at all!
                 example_code: |
-                    ## उदाहरण कोड
-
                     ```
                     {print} 'Make your own quiz'
                     points_a = 0
@@ -2155,7 +1989,6 @@ adventures:
                     ## Learn a new language
                     Make your own program to practice your vocabulary in a new language.
                 example_code: |
-                    ## Example Hedy code
                     ```
                     {print} 'Learn French!'
                     cat {is} {ask} '🐱'
@@ -2172,7 +2005,6 @@ adventures:
                     Make your own program to practice your vocabulary in a new language.
 
                 example_code: |
-                    ## Example Hedy code
                     ```
                     french_words = ['bonjour', 'ordinateur', 'pomme de terre']
                     translation = ['hello', 'computer', 'potato']
@@ -2229,7 +2061,7 @@ adventures:
                     {else}
                         {print} 'Great! You have passed the subject!'
                     ```
-                example_code: "## उदाहरण कोड\n```\nfirst_grade = {ask} 'What score did you get on your first test?'\nsecond_grade = {ask} 'What score did you get on your second test?'\nadded {is} first_grade + second_grade\nmean_grade {is} added / 2\n{if} mean_grade = 1 {or} mean_grade = 2 {or} mean_grade = 3 {or} mean_grade = 4 {or} mean_grade = 5\n    {print} 'Oh no! You have failed the subject...'\n{else}\n    {print} 'Great! You have passed the subject!'\n```\n"
+                example_code: "```\nfirst_grade = {ask} 'What score did you get on your first test?'\nsecond_grade = {ask} 'What score did you get on your second test?'\nadded {is} first_grade + second_grade\nmean_grade {is} added / 2\n{if} mean_grade = 1 {or} mean_grade = 2 {or} mean_grade = 3 {or} mean_grade = 4 {or} mean_grade = 5\n    {print} 'Oh no! You have failed the subject...'\n{else}\n    {print} 'Great! You have passed the subject!'\n```\n"
             14:
                 start_code: "{print} 'Lets go to the next level!'"
                 story_text: |
@@ -2248,7 +2080,7 @@ adventures:
                             {if} answer {is} 'yes'
                                 {print} 'Ok we will continue'
                     ```
-                example_code: "## उदाहरण कोड\n```\ngame {is} 'on'\n{for} i {in} {range} 1 {to} 100\n    {if} game {is} 'on'\n        answer = {ask} 'Do you want to continue?'\n        {if} answer {is} 'no'\n            game {is} 'over'\n        {if} answer {is} 'yes'\n            {print} 'Ok we will continue'\n```\n"
+                example_code: "```\ngame {is} 'on'\n{for} i {in} {range} 1 {to} 100\n    {if} game {is} 'on'\n        answer = {ask} 'Do you want to continue?'\n        {if} answer {is} 'no'\n            game {is} 'over'\n        {if} answer {is} 'yes'\n            {print} 'Ok we will continue'\n```\n"
             1:
                 start_code: "{print} Let's go!"
                 story_text: |
@@ -2272,7 +2104,7 @@ adventures:
                     Besides, you'll learn how to work with the `{at} {random}` command, that you can use to make games. 
                     So let's go to the next level!
                 story_text_2: "If the player types a hamburger and coke, you can't say `so you would like a hamburger and coke`, but you have to make two separate line. \nAlso, the `{echo}` command only echoes the word at the end of the sentence. So you can't say `your hamburger is coming right up!`.\n\nThat changes in level 2. In level 2 you'll learn to work with variables, that allow you to save multiple pieces of information and print them in any place you want.\nBesides, you'll learn how to work with the `{at} {random}` command, that you can use to make games. \nSo let's go to the next level!\n"
-                example_code: "## उदाहरण कोड\n```\n{print} Welcome at Hedy's\n{ask} What would you like to eat?\n{echo} So you want \n{ask} what would you like to drink?\n{echo} So you want \n```\n"
+                example_code: "```\n{print} Welcome at Hedy's\n{ask} What would you like to eat?\n{echo} So you want \n{ask} what would you like to drink?\n{echo} So you want \n```\n"
             2:
                 story_text: |
                     ## What's next?
@@ -2322,7 +2154,7 @@ adventures:
 
                      ```
                      That's a lot of code for mainly the same words over and over again. Luckily in the next level has a solution with the `{repeat}` command, that allows you to repeat a line of code multiple times.
-                example_code: "## उदाहरण कोड\n ```\n {print} 'happy birthday to you'\n {print} 'happy birthday to you'\n {print} 'happy birthday dear Hedy'\n {print} 'happy birthday to you'\n ```\n"
+                example_code: " ```\n {print} 'happy birthday to you'\n {print} 'happy birthday to you'\n {print} 'happy birthday dear Hedy'\n {print} 'happy birthday to you'\n ```\n"
             7:
                 start_code: "{print} 'Lets go to the next level!'"
                 story_text: |
@@ -2333,7 +2165,7 @@ adventures:
                     ```
                     {repeat} 5 {times} {print} 'In the next level you can repeat multiple lines of code at once!'
                     ```
-                example_code: "## उदाहरण कोड\n```\n{repeat} 5 {times} {print} 'In the next level you can repeat multiple lines of code at once!'\n```\n"
+                example_code: "```\n{repeat} 5 {times} {print} 'In the next level you can repeat multiple lines of code at once!'\n```\n"
             8:
                 start_code: "{print} 'Lets go to the next level!'"
                 story_text: |
@@ -2353,7 +2185,7 @@ adventures:
                         {print} 'Okay, you can stay here for a little longer!'
                     ```
                     In this code Hedy will still say 'Your drink is on its way' even {if} you didn't even want to drink something! In the next level this will be fixed!
-                example_code: "## उदाहरण कोड\n```\nanswer = {ask} 'Would you like to go to the next level?'\n{if} answer {is} yes\n    {print} 'Great! You can use the {repeat} commando in the {if} command!'\n    {print} 'Hooray!'\n    {print} 'Hooray!'\n    {print} 'Hooray!'\n{else}\n    {print} 'Okay, you can stay here for a little longer!'\n```\n"
+                example_code: "```\nanswer = {ask} 'Would you like to go to the next level?'\n{if} answer {is} yes\n    {print} 'Great! You can use the {repeat} commando in the {if} command!'\n    {print} 'Hooray!'\n    {print} 'Hooray!'\n    {print} 'Hooray!'\n{else}\n    {print} 'Okay, you can stay here for a little longer!'\n```\n"
             9:
                 story_text: |
                     ## What's next?
@@ -2372,7 +2204,7 @@ adventures:
                     In the next level you'll learn the `{for}` command, which allows you to make a list of actions and repeat the code with another action each time!
                     Please take a look!
                 start_code: "{print} 'Lets go to the next level!'"
-                example_code: "## उदाहरण कोड\n```\n{repeat} 2 {times}\n    {print} '{if} youre happy and you know it clap your hands'\n{print} '{if} youre happy and you know it and you really want to show it'\n{print} '{if} youre happy and you know it clap your hands'\n```\n"
+                example_code: "```\n{repeat} 2 {times}\n    {print} '{if} youre happy and you know it clap your hands'\n{print} '{if} youre happy and you know it and you really want to show it'\n{print} '{if} youre happy and you know it clap your hands'\n```\n"
             10:
                 story_text: |
                     ## What's next?
@@ -2418,7 +2250,7 @@ adventures:
                     In this system you have to give both the correct username and the correct password.
                     In the next level you will learn the `{and}` command that will make this code a ot shorter and more understandable!
                     Check it out!
-                example_code: "## उदाहरण कोड\n```\nusername {is} {ask} 'What is your username?'\npassword {is} {ask} 'What is your password?'\n{if} username {is} 'Hedy'\n    {if} password {is} 'secret'\n        {print} 'Welcome Hedy!'\n    {else}\n        {print} 'Access denied'\n{else}\n    {print} 'Access denied!'\n```\n"
+                example_code: "```\nusername {is} {ask} 'What is your username?'\npassword {is} {ask} 'What is your password?'\n{if} username {is} 'Hedy'\n    {if} password {is} 'secret'\n        {print} 'Welcome Hedy!'\n    {else}\n        {print} 'Access denied'\n{else}\n    {print} 'Access denied!'\n```\n"
             15:
                 story_text: |
                     ## What's next?
@@ -2458,7 +2290,7 @@ adventures:
                     In this code it would be great to have 2x an `{else}` so you could have one option for the broccoli and one for the green beans. The next level comes with the new command `{elif}` that makes this possible!
                     So check out the next level now!
                 start_code: "{print} 'Lets go to the next level!'"
-                example_code: "## उदाहरण कोड\n```\n{print} 'What is for dinner tonight?'\noptions = ['pizza', 'broccoli', 'green beans']\nchosen = options {at} {random}\n{if} chosen = 'pizza'\n    {print} 'Yummy! Pizza!'\n{else}\n    {print} 'Yikes...'\n```\n"
+                example_code: "```\n{print} 'What is for dinner tonight?'\noptions = ['pizza', 'broccoli', 'green beans']\nchosen = options {at} {random}\n{if} chosen = 'pizza'\n    {print} 'Yummy! Pizza!'\n{else}\n    {print} 'Yikes...'\n```\n"
                 story_text_2: In this code it would be great to have 2x an `{else}` so you could have one option for the broccoli and one for the green beans. The next level comes with the new command `{elif}` that makes this possible! So check out the next level now!
             17:
                 story_text: |
@@ -2483,8 +2315,6 @@ adventures:
                     ## Parrot
                     Create your own online pet parrot that will copy you!
                 example_code: |
-                    ## उदाहरण कोड
-
                     ```
                     {print} Im Hedy the parrot
                     {ask} whats your name?
@@ -2497,8 +2327,6 @@ adventures:
                     ## Parrot
                     Teach your parrot a new word with `{add}`.
                 example_code: |
-                    ## उदाहरण कोड
-
                     ```
                     words {is} squawk, Hedy
                     {print} Train your parrot!
@@ -2513,8 +2341,6 @@ adventures:
                     ## Parrot
                     Reward your parrot {if} it says the correct word!
                 example_code: |
-                    ## उदाहरण कोड
-
                     ```
                     words {is} squawk, Hedy
                     {print} 'Train your parrot!'
@@ -2532,8 +2358,6 @@ adventures:
                     ## Parrot
                     Create your own online pet parrot that will copy you!
                 example_code: |
-                    ## उदाहरण कोड
-
                     ```
                     {print} Im Hedy the parrot
                     name {is} {ask} whats your name?
@@ -2555,8 +2379,6 @@ adventures:
                     Songs often contain a lot of repetition. Sometimes the repetition is also based on counting.
                     For example, in the well-known song 'Bottles of beer'. You can program that song with a little math.
                 example_code: |
-                    ## Example Hedy code
-
                     ```
                     verse = 99
                     {print} verse ' bottles of beer on the wall'
@@ -2580,8 +2402,6 @@ adventures:
 
                     You can make this song much shorter with a `{repeat}`! Can you finish the code?
                 example_code: |
-                    ## Example Hedy code
-
                     ```
                     {repeat} _ _ {print} 'Baby Shark tututudutudu'
                     {print} 'Baby Shark'
@@ -2594,8 +2414,6 @@ adventures:
                     ## Songs
                     In a previous level you've programmed the song 'Bottles of beer'. You made one verse and then had to copy the verses 99 times. In level 7 you can repeat the song 99 times, just by adding one simple line!
                 example_code: |
-                    ## Example Hedy code
-
                     ```
                     verse = 99
                     {repeat} 99 {times}
@@ -2675,8 +2493,6 @@ adventures:
                     ## Sing a song!
                     In this song we can make it even easier to program '{if} you're happy and you know it, clap your hands'. Because we can put all of the actions in a variable, check it out:
                 example_code: |
-                    ## Example Hedy code
-
                     ```
                     actions = 'clap your hands', 'stomp your feet', 'shout Hurray!'
                     {for} action {in} actions
@@ -2737,9 +2553,6 @@ adventures:
 
                     In level 1 we start our haunted house game by making up a scary story and {ask} the player what monster they'll see in the haunted house.
                 example_code: |
-                    ## Example Hedy code
-
-
                     ```
                     {print} How did I get here?
                     {print} I remember my friend telling me to go into the old mansion...
@@ -2763,7 +2576,6 @@ adventures:
                     ## Haunted House
                     In this haunted house you can choose your monsters with emojis. Of course you could also use words.
                 example_code: |
-                    ## Example Hedy Code
                     ```
                     monster_1 {is} 👻
                     monster_2 {is} 🤡
@@ -2782,7 +2594,6 @@ adventures:
                     In this level you can make your story more interactive by changing the outcome of the game; sometimes you'll get eaten, sometimes you'll escape!
                     Let Hedy decide randomly!
                 example_code: |
-                    ## Example Hedy code
                     ```
                     {print} Escape from the haunted house!
                     {print} There are 3 doors in front of you...
@@ -2827,8 +2638,6 @@ adventures:
                     If the player filled in a completely random answer, the game would still work and the player might even win (despite not picking a door).
                     In this level you can only win the game by picking the same door Hedy picked randomly.
                 example_code: |
-                    ## Example Hedy code
-
                     ```
                     {print} 'Escape from the haunted house!'
                     {print} 'There are 3 doors in front of you...'
@@ -2852,8 +2661,6 @@ adventures:
                     Now it's very hard to win this game, can you make it easier to win?
                     For example by only having 1 wrong door and 2 correct doors instead of 1 correct door and 2 wrong ones?
                 example_code: |
-                    ## Example Hedy code
-
                     ```
                     {print} 'Escape from the Haunted House!'
                     player = alive
@@ -2880,8 +2687,6 @@ adventures:
                     ## Haunted House
                     In this level we've changed the repeat command and we've added a line to our haunted house that tells the player in which room they are.
                 example_code: |
-                    ## Example Hedy code
-
                     ```
                     {print} 'Escape from the Haunted House!'
                     player {is} alive
@@ -2909,8 +2714,6 @@ adventures:
                     ## Haunted House
                     In this level you can use the `<` and `>` symbol to introduce lives to your game.
                 example_code: |
-                    ## Example Hedy code
-
                     ```
                     {print} 'Escape from the haunted house'
                     lives = 3
@@ -2941,8 +2744,6 @@ adventures:
                     For example: all the properties that belong to the zombie are first in all the lists, witch second and vampire third.
                     Check out the code!
                 example_code: |
-                    ## Example Hedy code
-
                     ```
                     numbers = [1, 2, 3]
                     i = numbers[{random}]
@@ -2976,11 +2777,11 @@ adventures:
         levels:
             12:
                 story_text: "## Make a secret code like a super spy\nIn this adventure you can create your own super spy code. Encode a message that only the right agent can decipher.\nIf the enemy tries to crack the code, they will get some false info to waste their time.\n"
-                example_code: "## उदाहरण कोड\n```\nname is ask 'What is your name?'\nif name is 'Agent007'\n    a is 'Go to the airport '\nelse\n    a is 'Go to the trainstation '\npassword is ask 'What is the password?'\nif password is 'TOPSECRET'\n    b is 'tomorrow at 02.00'\nelse\n    b is 'today at 10.00'\nprint a + b\n```\n"
+                example_code: "```\nname is ask 'What is your name?'\nif name is 'Agent007'\n    a is 'Go to the airport '\nelse\n    a is 'Go to the trainstation '\npassword is ask 'What is the password?'\nif password is 'TOPSECRET'\n    b is 'tomorrow at 02.00'\nelse\n    b is 'today at 10.00'\nprint a + b\n```\n"
                 start_code: '## place your code here'
             13:
                 story_text: "## Superspy\nThe code you made in the previous level can be made a lot easier in this one with the `{and}` command.\n"
-                example_code: "## उदाहरण कोड\n```\nname is ask 'What is your name?'\npassword is ask 'What is your password?'\nif name is 'Agent007' and password is 'TOPSECRET'\n    print 'Go to the airport at 02.00'\nelse\n    print 'Go to the trainstation at 10.00'\n ```\n"
+                example_code: "```\nname is ask 'What is your name?'\npassword is ask 'What is your password?'\nif name is 'Agent007' and password is 'TOPSECRET'\n    print 'Go to the airport at 02.00'\nelse\n    print 'Go to the trainstation at 10.00'\n ```\n"
                 start_code: '## place your code here'
         name: SuperSpy
     tic:
@@ -2988,19 +2789,19 @@ adventures:
         levels:
             13:
                 story_text: "## Tic Tac Toe\nIn this adventure you can program a game of Tic Tac Toe. You can play with two people. Taking turns, you pick a number of the spot (1 - 9) you want to put your sign (x or o) on.\nThe first player that gets 3 in a row (horizontally, vertically or diagonally) wins!\nHave fun!\n"
-                example_code: "## उदाहरण कोड\n```\nsign = 'x'\nopen_spots = 1, 2, 3, 4, 5, 6, 7, 8, 9\ngame = 'on'\nspot_1 = '.'\nspot_2 = '.'\nspot_3 = '.'\nspot_4 = '.'\nspot_5 = '.'\nspot_6 = '.'\nspot_7 = '.'\nspot_8 = '.'\nspot_9 = '.'\n{print} 'TIC TAC TOE!'\n{print} spot_1 spot_2 spot_3\n{print} spot_4 spot_5 spot_6\n{print} spot_7 spot_8 spot_9\n{print} ' '\n{for} i {in} {range} 1 {to} 9\n    {if} game {is} 'on'\n        choice = {ask} 'Player ' sign ', which spot?'\n        {if} choice {in} open_spots\n            {remove} choice {from} open_spots\n            {if} choice {is} 1\n                spot_1 = sign\n            {if} choice {is} 2\n                spot_2 = sign\n            {if} choice {is} 3\n                spot_3 = sign\n            {if} choice {is} 4\n                spot_4 = sign\n            {if} choice {is} 5\n                spot_5 = sign\n            {if} choice {is} 6\n                spot_6 = sign\n            {if} choice {is} 7\n                spot_7 = sign\n            {if} choice {is} 8\n                spot_8 = sign\n            {if} choice {is} 9\n                spot_9 = sign\n        {else}\n            {print} 'That spot was already taken'\n        {print} spot_1 spot_2 spot_3\n        {print} spot_4 spot_5 spot_6\n        {print} spot_7 spot_8 spot_9\n        {print} ' '\n        winner = {ask} 'Did you win?'\n        {if} winner {is} 'yes'\n            {print} 'Good job, player ' sign '!'\n            game = 'over'\n        {else}\n            {if} sign {is} 'x'\n                sign = 'o'\n            {else}\n                sign = 'x'\n```\n"
+                example_code: "```\nsign = 'x'\nopen_spots = 1, 2, 3, 4, 5, 6, 7, 8, 9\ngame = 'on'\nspot_1 = '.'\nspot_2 = '.'\nspot_3 = '.'\nspot_4 = '.'\nspot_5 = '.'\nspot_6 = '.'\nspot_7 = '.'\nspot_8 = '.'\nspot_9 = '.'\n{print} 'TIC TAC TOE!'\n{print} spot_1 spot_2 spot_3\n{print} spot_4 spot_5 spot_6\n{print} spot_7 spot_8 spot_9\n{print} ' '\n{for} i {in} {range} 1 {to} 9\n    {if} game {is} 'on'\n        choice = {ask} 'Player ' sign ', which spot?'\n        {if} choice {in} open_spots\n            {remove} choice {from} open_spots\n            {if} choice {is} 1\n                spot_1 = sign\n            {if} choice {is} 2\n                spot_2 = sign\n            {if} choice {is} 3\n                spot_3 = sign\n            {if} choice {is} 4\n                spot_4 = sign\n            {if} choice {is} 5\n                spot_5 = sign\n            {if} choice {is} 6\n                spot_6 = sign\n            {if} choice {is} 7\n                spot_7 = sign\n            {if} choice {is} 8\n                spot_8 = sign\n            {if} choice {is} 9\n                spot_9 = sign\n        {else}\n            {print} 'That spot was already taken'\n        {print} spot_1 spot_2 spot_3\n        {print} spot_4 spot_5 spot_6\n        {print} spot_7 spot_8 spot_9\n        {print} ' '\n        winner = {ask} 'Did you win?'\n        {if} winner {is} 'yes'\n            {print} 'Good job, player ' sign '!'\n            game = 'over'\n        {else}\n            {if} sign {is} 'x'\n                sign = 'o'\n            {else}\n                sign = 'x'\n```\n"
                 start_code: '## place your code here'
             17:
                 start_code: '## place your code here'
                 story_text: "## Tic Tac Toe\nIn the previous levels the tic tac toe game had an annoying feature. After every move, you had to fill in yourself if you had won or not.\nThis made the game playable, but also quite slow. In this level we have learned the `{elif}` command, that could solve that problem.\nTo use the {elif} to let Hedy check whether or not a player has won is fun, but it also requires a fair amount of extra lines.\n\nIn the example code you see that we added the requirements to win (3 spots in a row horizontally, vertically or diagonally).\nYou can find them in line 46 to 69. You can see that each time the requirement is met (so if a player has won) the variable game is set to 'over'.\nThis means that the {while} loop will be stopped and the game ends.\n"
-                example_code: "## उदाहरण कोड\n```\nsign = 'x'\nopen_spots = [1, 2, 3, 4, 5, 6, 7, 8, 9]\ngame = 'on'\nspot_1 = '.'\nspot_2 = '.'\nspot_3 = '.'\nspot_4 = '.'\nspot_5 = '.'\nspot_6 = '.'\nspot_7 = '.'\nspot_8 = '.'\nspot_9 = '.'\n{print} 'TIC TAC TOE!'\n{print} spot_1 spot_2 spot_3\n{print} spot_4 spot_5 spot_6\n{print} spot_7 spot_8 spot_9\n{print} ' '\n{while} game != 'over':\n    choice = {ask} 'Player ' sign ', which spot?'\n    {if} choice {in} open_spots:\n        {remove} choice {from} open_spots\n        {if} choice == 1:\n            spot_1 = sign\n        {if} choice == 2:\n            spot_2 = sign\n        {if} choice == 3:\n            spot_3 = sign\n        {if} choice == 4:\n            spot_4 = sign\n        {if} choice == 5:\n            spot_5 = sign\n        {if} choice == 6:\n            spot_6 = sign\n        {if} choice == 7:\n            spot_7 = sign\n        {if} choice == 8:\n            spot_8 = sign\n        {if} choice == 9:\n            spot_9 = sign\n    {else}:\n        {print} 'That spot was already taken'\n    {print} spot_1 spot_2 spot_3\n    {print} spot_4 spot_5 spot_6\n    {print} spot_7 spot_8 spot_9\n    {print} ' '\n    {if} spot_1 == spot_2 {and} spot_2 == spot_3 {and} spot_1 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_4 == spot_5 {and} spot_5 == spot_6 {and} spot_4 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_7 == spot_8 {and} spot_8 == spot_9 {and} spot_7 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_1 == spot_4 {and} spot_4 == spot_7 {and} spot_1 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_2 == spot_5 {and} spot_5 == spot_8 {and} spot_2 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_3 == spot_6 {and} spot_6 == spot_9 {and} spot_3 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_1 == spot_5 {and} spot_5 == spot_9 {and} spot_1 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_3 == spot_5 {and} spot_5 == spot_7 {and} spot_3 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {else}:\n        {if} sign == 'x':\n            sign = 'o'\n        {else}:\n            sign = 'x'\n```\n"
+                example_code: "```\nsign = 'x'\nopen_spots = [1, 2, 3, 4, 5, 6, 7, 8, 9]\ngame = 'on'\nspot_1 = '.'\nspot_2 = '.'\nspot_3 = '.'\nspot_4 = '.'\nspot_5 = '.'\nspot_6 = '.'\nspot_7 = '.'\nspot_8 = '.'\nspot_9 = '.'\n{print} 'TIC TAC TOE!'\n{print} spot_1 spot_2 spot_3\n{print} spot_4 spot_5 spot_6\n{print} spot_7 spot_8 spot_9\n{print} ' '\n{while} game != 'over':\n    choice = {ask} 'Player ' sign ', which spot?'\n    {if} choice {in} open_spots:\n        {remove} choice {from} open_spots\n        {if} choice == 1:\n            spot_1 = sign\n        {if} choice == 2:\n            spot_2 = sign\n        {if} choice == 3:\n            spot_3 = sign\n        {if} choice == 4:\n            spot_4 = sign\n        {if} choice == 5:\n            spot_5 = sign\n        {if} choice == 6:\n            spot_6 = sign\n        {if} choice == 7:\n            spot_7 = sign\n        {if} choice == 8:\n            spot_8 = sign\n        {if} choice == 9:\n            spot_9 = sign\n    {else}:\n        {print} 'That spot was already taken'\n    {print} spot_1 spot_2 spot_3\n    {print} spot_4 spot_5 spot_6\n    {print} spot_7 spot_8 spot_9\n    {print} ' '\n    {if} spot_1 == spot_2 {and} spot_2 == spot_3 {and} spot_1 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_4 == spot_5 {and} spot_5 == spot_6 {and} spot_4 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_7 == spot_8 {and} spot_8 == spot_9 {and} spot_7 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_1 == spot_4 {and} spot_4 == spot_7 {and} spot_1 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_2 == spot_5 {and} spot_5 == spot_8 {and} spot_2 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_3 == spot_6 {and} spot_6 == spot_9 {and} spot_3 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_1 == spot_5 {and} spot_5 == spot_9 {and} spot_1 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_3 == spot_5 {and} spot_5 == spot_7 {and} spot_3 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {else}:\n        {if} sign == 'x':\n            sign = 'o'\n        {else}:\n            sign = 'x'\n```\n"
             14:
                 story_text: "## Tic Tac Toe\nIn the previous levels you've made a tic tac toe game. Now you've learned how to use the = sign, the == sign and the != sign.\nYou can use this knowledge in your new Taic Tac Toe game, like this:\n"
-                example_code: "## उदाहरण कोड\n```\nsign = 'x'\nopen_spots = 1, 2, 3, 4, 5, 6, 7, 8, 9\ngame = 'on'\nspot_1 = '.'\nspot_2 = '.'\nspot_3 = '.'\nspot_4 = '.'\nspot_5 = '.'\nspot_6 = '.'\nspot_7 = '.'\nspot_8 = '.'\nspot_9 = '.'\n{print} 'TIC TAC TOE!'\n{print} spot_1 spot_2 spot_3\n{print} spot_4 spot_5 spot_6\n{print} spot_7 spot_8 spot_9\n{print} ' '\n{for} i {in} {range} 1 {to} 9\n    {if} game != 'over'\n        choice = {ask} 'Player ' sign ', which spot?'\n        {if} choice {in} open_spots\n            {remove} choice {from} open_spots\n            {if} choice == 1\n                spot_1 = sign\n            {if} choice == 2\n                spot_2 = sign\n            {if} choice == 3\n                spot_3 = sign\n            {if} choice == 4\n                spot_4 = sign\n            {if} choice == 5\n                spot_5 = sign\n            {if} choice == 6\n                spot_6 = sign\n            {if} choice == 7\n                spot_7 = sign\n            {if} choice == 8\n                spot_8 = sign\n            {if} choice == 9\n                spot_9 = sign\n        {else}\n            {print} 'That spot was already taken'\n        {print} spot_1 spot_2 spot_3\n        {print} spot_4 spot_5 spot_6\n        {print} spot_7 spot_8 spot_9\n        {print} ' '\n        winner = {ask} 'Did you win?'\n        {if} winner == 'yes'\n            {print} 'Good job, player ' sign '!'\n            game = 'over'\n        {else}\n            {if} sign == 'x'\n                sign = 'o'\n            {else}\n                sign = 'x'\n```\n"
+                example_code: "```\nsign = 'x'\nopen_spots = 1, 2, 3, 4, 5, 6, 7, 8, 9\ngame = 'on'\nspot_1 = '.'\nspot_2 = '.'\nspot_3 = '.'\nspot_4 = '.'\nspot_5 = '.'\nspot_6 = '.'\nspot_7 = '.'\nspot_8 = '.'\nspot_9 = '.'\n{print} 'TIC TAC TOE!'\n{print} spot_1 spot_2 spot_3\n{print} spot_4 spot_5 spot_6\n{print} spot_7 spot_8 spot_9\n{print} ' '\n{for} i {in} {range} 1 {to} 9\n    {if} game != 'over'\n        choice = {ask} 'Player ' sign ', which spot?'\n        {if} choice {in} open_spots\n            {remove} choice {from} open_spots\n            {if} choice == 1\n                spot_1 = sign\n            {if} choice == 2\n                spot_2 = sign\n            {if} choice == 3\n                spot_3 = sign\n            {if} choice == 4\n                spot_4 = sign\n            {if} choice == 5\n                spot_5 = sign\n            {if} choice == 6\n                spot_6 = sign\n            {if} choice == 7\n                spot_7 = sign\n            {if} choice == 8\n                spot_8 = sign\n            {if} choice == 9\n                spot_9 = sign\n        {else}\n            {print} 'That spot was already taken'\n        {print} spot_1 spot_2 spot_3\n        {print} spot_4 spot_5 spot_6\n        {print} spot_7 spot_8 spot_9\n        {print} ' '\n        winner = {ask} 'Did you win?'\n        {if} winner == 'yes'\n            {print} 'Good job, player ' sign '!'\n            game = 'over'\n        {else}\n            {if} sign == 'x'\n                sign = 'o'\n            {else}\n                sign = 'x'\n```\n"
                 start_code: '## place your code here'
             15:
                 story_text: "## Tic Tac Toe\nIn this level you can improve your Tic Tac Toe game with the {while} loop/ With this loop you can combine the `{if} game != 'over'` and the `{for} i {in} {range} 1 to 9` into one simple line.\nCheck it out:\n"
-                example_code: "## उदाहरण कोड\n```\nsign = 'x'\nopen_spots = 1, 2, 3, 4, 5, 6, 7, 8, 9\ngame = 'on'\nspot_1 = '.'\nspot_2 = '.'\nspot_3 = '.'\nspot_4 = '.'\nspot_5 = '.'\nspot_6 = '.'\nspot_7 = '.'\nspot_8 = '.'\nspot_9 = '.'\n{print} 'TIC TAC TOE!'\n{print} spot_1 spot_2 spot_3\n{print} spot_4 spot_5 spot_6\n{print} spot_7 spot_8 spot_9\n{print} ' '\n{while} game != 'over'\n    choice = {ask} 'Player ' sign ', which spot?'\n    {if} choice {in} open_spots\n        {remove} choice {from} open_spots\n        {if} choice == 1\n            spot_1 = sign\n        {if} choice == 2\n            spot_2 = sign\n        {if} choice == 3\n            spot_3 = sign\n        {if} choice == 4\n            spot_4 = sign\n        {if} choice == 5\n            spot_5 = sign\n        {if} choice == 6\n            spot_6 = sign\n        {if} choice == 7\n            spot_7 = sign\n        {if} choice == 8\n            spot_8 = sign\n        {if} choice == 9\n            spot_9 = sign\n    {else}\n        {print} 'That spot was already taken'\n    {print} spot_1 spot_2 spot_3\n    {print} spot_4 spot_5 spot_6\n    {print} spot_7 spot_8 spot_9\n    {print} ' '\n    winner = {ask} 'Did you win?'\n    {if} winner == 'yes'\n        {print} 'Good job, player ' sign '!'\n        game = 'over'\n    {else}\n        {if} sign == 'x'\n            sign = 'o'\n        {else}\n            sign = 'x'\n```\n"
+                example_code: "```\nsign = 'x'\nopen_spots = 1, 2, 3, 4, 5, 6, 7, 8, 9\ngame = 'on'\nspot_1 = '.'\nspot_2 = '.'\nspot_3 = '.'\nspot_4 = '.'\nspot_5 = '.'\nspot_6 = '.'\nspot_7 = '.'\nspot_8 = '.'\nspot_9 = '.'\n{print} 'TIC TAC TOE!'\n{print} spot_1 spot_2 spot_3\n{print} spot_4 spot_5 spot_6\n{print} spot_7 spot_8 spot_9\n{print} ' '\n{while} game != 'over'\n    choice = {ask} 'Player ' sign ', which spot?'\n    {if} choice {in} open_spots\n        {remove} choice {from} open_spots\n        {if} choice == 1\n            spot_1 = sign\n        {if} choice == 2\n            spot_2 = sign\n        {if} choice == 3\n            spot_3 = sign\n        {if} choice == 4\n            spot_4 = sign\n        {if} choice == 5\n            spot_5 = sign\n        {if} choice == 6\n            spot_6 = sign\n        {if} choice == 7\n            spot_7 = sign\n        {if} choice == 8\n            spot_8 = sign\n        {if} choice == 9\n            spot_9 = sign\n    {else}\n        {print} 'That spot was already taken'\n    {print} spot_1 spot_2 spot_3\n    {print} spot_4 spot_5 spot_6\n    {print} spot_7 spot_8 spot_9\n    {print} ' '\n    winner = {ask} 'Did you win?'\n    {if} winner == 'yes'\n        {print} 'Good job, player ' sign '!'\n        game = 'over'\n    {else}\n        {if} sign == 'x'\n            sign = 'o'\n        {else}\n            sign = 'x'\n```\n"
                 start_code: '## place your code here'
         description: Play a game of Tic Tac Toe!
         default_save_name: Tic
@@ -3012,4 +2813,4 @@ adventures:
             17:
                 start_code: '# place your code here'
                 story_text: "## Create a game of Blackjack\nBlackjack is a simple game of cards in which you have to get as close to 21 points as possible. You get two cards. Each card is worth their numeral value, and the face cards (Jack, Queen and King) are worth 10 points.\nThe Ace is worth either 1 or 11 points (you can choose). The dealer, your opponent, also gets two cards.\nIf you want, you can get another card, and its points will be added to your total. The dealer can also choose to take another card.\nBut be careful not to get more than 21 points, because if you do, you lose!\nThe player who gets closest to 21, without going over it, wins!\n\nHave fun!\n"
-                example_code: "## उदाहरण कोड\n```\n{print} 'BLACKJACK'\ncards = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Jack', 'Queen','King', 'Ace']\npoints = 0\ndealer_points = 0\ncard_1 = cards[{random}]\ncard_2 = cards[{random}]\ncard_3 = cards [{random}]\ndealer_card_1 = cards[{random}]\ndealer_card_2 = cards[{random}]\ndealer_card_3 = cards[{random}]\n# Points for card 1\n{if} card_1 == 'Jack' {or} card_1 == 'Queen' {or} card_1 == 'King':\n    points = points + 10\n{elif} card_1 == 'Ace':\n    points = points + 11\n{else}:\n    points = points + card_1\n# Points for card 2\n{if} card_2 == 'Jack' {or} card_2 == 'Queen' {or} card_2 == 'King':\n    points = points + 10\n{elif} card_2 == 'Ace':\n    points = points + 11\n{else}:\n    points = points + card_2\n# Points for dealer card 1\n{if} dealer_card_1 == 'Jack' {or} dealer_card_1 == 'Queen' {or} dealer_card_1 == 'King':\n    dealer_points = dealer_points + 10\n{elif} dealer_card_1 == 'Ace':\n    dealer_points = dealer_points + 11\n{else}:\n    dealer_points = dealer_points + dealer_card_1\n# Points for dealer card 2\n{if} dealer_card_2 == 'Jack' {or} dealer_card_2 == 'Queen' {or} dealer_card_2 == 'King':\n    dealer_points = dealer_points + 10\n{elif} dealer_card_2 == 'Ace':\n    dealer_points = dealer_points + 11\n{else}:\n    dealer_points = dealer_points + dealer_card_2\n# Two Aces\n{if} card_1 == 'Ace' {and} card_2 == 'Ace':\n    points = 12\n{if} dealer_card_1 == 'Ace' {and} dealer_card_2 == 'Ace':\n    dealer_points = 12\n# Scoreboard\n{print} 'You have a ' card_1 ' and a ' card_2 ' (' points ' points)'\n{print} 'The dealer has a ' dealer_card_1 ' and a ' dealer_card_2 ' (' dealer_points ' points)'\n# Extra card for the player\nhit = {ask} 'Do you want an extra card?'\n{if} hit == 'yes':\n    {if} card_3 == 'Jack' {or} card_3 == 'Queen' {or} card_3 == 'King':\n        points = points + 10\n    {elif} card_3 == 'Ace':\n        {if} points > 11:\n            points = points + 11\n        {else}:\n            points = points + 1\n    {else}:\n        points = points + card_3\n    print 'You get an extra ' card_3 ' (' points ' points)'\n{else}:\n    print 'No extra cards'\n# Winner\n{if} points > 21 {or} dealer_points > points {or} dealer_points == 21:\n    {print} 'You lose'\n{elif} dealer_points < 17:\n    {print} 'The dealer takes an extra card. It is a... ' dealer_card_3\n    {if} dealer_card_3 == 'Jack' {or} dealer_card_3 == 'Queen' {or} dealer_card_3 == 'King':\n        dealer_points = dealer_points + 10\n    {elif} dealer_card_3 == 'Ace':\n        {if} dealer_points < 11:\n            dealer_points = dealer_points + 11\n        {else}:\n            dealer_points = dealer_points + 1\n    {else}:\n        dealer_points = dealer_points + dealer_card_3\n    {print} 'The dealer has ' dealer_points ' points now'\n    {if} dealer_points < 21 {and} dealer_points > points:\n        {print} 'You lose'\n    {else}:\n        {print} 'You win'\n{elif} points > dealer_points {and} points < 21:\n    {print} 'You win!'\n```\n"
+                example_code: "```\n{print} 'BLACKJACK'\ncards = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Jack', 'Queen','King', 'Ace']\npoints = 0\ndealer_points = 0\ncard_1 = cards[{random}]\ncard_2 = cards[{random}]\ncard_3 = cards [{random}]\ndealer_card_1 = cards[{random}]\ndealer_card_2 = cards[{random}]\ndealer_card_3 = cards[{random}]\n# Points for card 1\n{if} card_1 == 'Jack' {or} card_1 == 'Queen' {or} card_1 == 'King':\n    points = points + 10\n{elif} card_1 == 'Ace':\n    points = points + 11\n{else}:\n    points = points + card_1\n# Points for card 2\n{if} card_2 == 'Jack' {or} card_2 == 'Queen' {or} card_2 == 'King':\n    points = points + 10\n{elif} card_2 == 'Ace':\n    points = points + 11\n{else}:\n    points = points + card_2\n# Points for dealer card 1\n{if} dealer_card_1 == 'Jack' {or} dealer_card_1 == 'Queen' {or} dealer_card_1 == 'King':\n    dealer_points = dealer_points + 10\n{elif} dealer_card_1 == 'Ace':\n    dealer_points = dealer_points + 11\n{else}:\n    dealer_points = dealer_points + dealer_card_1\n# Points for dealer card 2\n{if} dealer_card_2 == 'Jack' {or} dealer_card_2 == 'Queen' {or} dealer_card_2 == 'King':\n    dealer_points = dealer_points + 10\n{elif} dealer_card_2 == 'Ace':\n    dealer_points = dealer_points + 11\n{else}:\n    dealer_points = dealer_points + dealer_card_2\n# Two Aces\n{if} card_1 == 'Ace' {and} card_2 == 'Ace':\n    points = 12\n{if} dealer_card_1 == 'Ace' {and} dealer_card_2 == 'Ace':\n    dealer_points = 12\n# Scoreboard\n{print} 'You have a ' card_1 ' and a ' card_2 ' (' points ' points)'\n{print} 'The dealer has a ' dealer_card_1 ' and a ' dealer_card_2 ' (' dealer_points ' points)'\n# Extra card for the player\nhit = {ask} 'Do you want an extra card?'\n{if} hit == 'yes':\n    {if} card_3 == 'Jack' {or} card_3 == 'Queen' {or} card_3 == 'King':\n        points = points + 10\n    {elif} card_3 == 'Ace':\n        {if} points > 11:\n            points = points + 11\n        {else}:\n            points = points + 1\n    {else}:\n        points = points + card_3\n    print 'You get an extra ' card_3 ' (' points ' points)'\n{else}:\n    print 'No extra cards'\n# Winner\n{if} points > 21 {or} dealer_points > points {or} dealer_points == 21:\n    {print} 'You lose'\n{elif} dealer_points < 17:\n    {print} 'The dealer takes an extra card. It is a... ' dealer_card_3\n    {if} dealer_card_3 == 'Jack' {or} dealer_card_3 == 'Queen' {or} dealer_card_3 == 'King':\n        dealer_points = dealer_points + 10\n    {elif} dealer_card_3 == 'Ace':\n        {if} dealer_points < 11:\n            dealer_points = dealer_points + 11\n        {else}:\n            dealer_points = dealer_points + 1\n    {else}:\n        dealer_points = dealer_points + dealer_card_3\n    {print} 'The dealer has ' dealer_points ' points now'\n    {if} dealer_points < 21 {and} dealer_points > points:\n        {print} 'You lose'\n    {else}:\n        {print} 'You win'\n{elif} points > dealer_points {and} points < 21:\n    {print} 'You win!'\n```\n"
