@@ -16,7 +16,7 @@ adventures:
 
                     Vous ne savez pas quoi programmer? Dans les onglets suivants, vous trouverez des idées sur les éléments à construire.
                 start_code: "{print} bonjour le monde!"
-                example_code: "## Exemple de code\n```\n{print} Bonjour !\n{print} Bienvenue sur Hedy !\n```\n"
+                example_code: "```\n{print} Bonjour !\n{print} Bienvenue sur Hedy !\n```\n"
                 story_text_2: "You can also ask for input and repeat it back with an `{echo}` command.\nTry the code to your left again.\n\nDon't know what to create? In the next tabs you will find ideas for programs to build.\n"
                 example_code_2: "```\n{ask} What is your name?\n{echo} hello\n```\n"
                 story_text_3: "Let's get started! Don't know what to create? In the next tabs you will find ideas for programs to build.\n"
@@ -79,7 +79,6 @@ adventures:
 
                      Au niveau 5, il y a quelque chose de nouveau, le `{if}`! If est l'anglais pour se. Avec le `{if}`, vous pouvez choisir entre deux options différentes.
 
-                     ## Exemple de code Hedy
                      ```
                      nom {is} {ask} 'quel est votre nom?'
                      {if} nom {is} Hedy {print} 'cool!' {else} {print} 'moins amusant!'
@@ -115,7 +114,6 @@ adventures:
                     Le niveau 5 ajoute la commande `{repeat}`.
                     `{repeat}` te permet d’exécuter une ligne de commande plusieurs fois.
                 example_code: |
-                    ## Exemple de code Hedy
                     ```
                     {repeat} 3 {times} {print} 'Hedy est amusant!'
                     ```
@@ -130,7 +128,6 @@ adventures:
                     Cela veut dire que tu dois mettre 4 espaces au début des lignes.
                     Cela fonctionne aussi si tu veux créer un bloc d’une seule ligne.
                 example_code: |
-                    ## Exemple de code Hedy
                     ```
                     {repeat} 5 {times}
                         {print} 'Bonjour les amis'
