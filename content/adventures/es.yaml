@@ -16,9 +16,9 @@ adventures:
 
                     ¿No sabes qué crear? En las siguientes pestañas encontrarás algunas ideas en las que inspirarte.
                 start_code: "{print} hola mundo!"
-                example_code: "## Código de ejemplo\n```\n{print} Hola!\n{print} Bienvenido a Hedy!\n```\n"
+                example_code: "```\n{print} Hola!\n{print} Bienvenido a Hedy!\n```\n"
                 story_text_2: "También puedes solicitar  entrada y repetirla usando el comando`{echo}`.\nPrueba el código a tu izquierda de nuevo.\n\n¿No sabes qué crear? En las siguientes pestañas vas a encontrar ideas de programas para construir.\n"
-                example_code_2: "## Código de ejemplo\n```\n{ask} ¿Cuál es tu nombre?\n{echo} hola\n```\n"
+                example_code_2: "```\n{ask} ¿Cuál es tu nombre?\n{echo} hola\n```\n"
                 story_text_3: "Let's get started! Don't know what to create? In the next tabs you will find ideas for programs to build.\n"
             2:
                 story_text: |
@@ -49,7 +49,7 @@ adventures:
                     En el nivel 3 también puedes hacer una lista. Puedes dejar al ordenador escoger algo aleatorio de la lista, usando `{at} {random}` (se pronuncia: et ren-dom).
                 start_code: "{print} hola mundo!"
                 story_text_2: También puedes añadir elementos a una lista con `{add}` y quitar elementos con `{remove}`.
-                example_code_2: "## Código de ejemplo de Hedy\n\n```\nanimales {is} perro, gato, canguro\n{add} pingüino {to_list} animales\n{remove} gato {from} animales\n{print} animales {at} {random}\n```\n"
+                example_code_2: "```\nanimales {is} perro, gato, canguro\n{add} pingüino {to_list} animales\n{remove} gato {from} animales\n{print} animales {at} {random}\n```\n"
                 example_code: "```\nanimals {is} dog, cat, kangaroo\n{print} animals {at} {random}\n```\n"
             4:
                 story_text: |
@@ -216,7 +216,6 @@ adventures:
                     En la segunda línea puedes empezar usando `{print}` si quieres imprimir una oración.
                     Puedes usar `{echo}` si quieres poner el nombre del protagonista al final de la oración.
                 example_code: |
-                    ## Programa Hedy de ejemplo
                     ```
                     {ask} El protagonista de esta historia es
                     {print} El protagonista camina por un bosque
@@ -238,8 +237,6 @@ adventures:
 
                     Puedes luego usar este nombre en las oraciones que siguen.
                 example_code: |
-                    ## Programa Hedy de ejemplo
-
                     ```
                     nombre {is} {ask} Cómo se llama el protagonista?
                     {print} nombre está caminando por el bosque
@@ -255,7 +252,6 @@ adventures:
                     En una historia, a veces es necesario repetir algo. Por ejemplo, si alguien pide ayuda, o si se canta una canción.
                     Eso lo puedes hacer ahora en el nivel 6 usando `{repeat}`.
                 example_code: |
-                    ## Programa Hedy de ejemplo
                     ```
                     {print} 'La princesa grita pidiendo ayuda'
                     {repeat} 5 {times} {print} 'Ayuda!'
@@ -278,7 +274,6 @@ adventures:
 
                     Puedes también hacer que se ingrese un nombre para el protagonista. Eso sigue funcionando igual que en el nivel 3. Puedes combinar eso con un `{if}`.
                 example_code: |
-                    ## Programa Hedy de ejemplo
                     ```
                     nombre {is} {ask} 'Quién camina por el bosque?'
                     {print} nombre ' camina por el bosque'
@@ -298,7 +293,6 @@ adventures:
 
                     Para ello ahora debes usar comillas para rodear los textos que deseas imprimir.
                 example_code: |
-                    ## Programa Hedy de ejemplo
                     ```
                     nombre {is} Carlos
                     {print} 'El protagonista de esta historia es' nombre
@@ -323,8 +317,6 @@ adventures:
                     ```
                 start_code: "{print} Aquí viene tu historia!"
                 example_code: |
-                    ## Programa Hedy de ejemplo
-
                     ```
                     animales {is} 🦔, 🐿, 🦉, 🦇
                     {print} Él ahora escucha el ruido de un animales {at} {random}
@@ -343,8 +335,6 @@ adventures:
                 story_text_3: |
                     Este es un ejemplo del comando `{remove}`en tu historia
                 example_code_3: |
-                    ## Programa Hedy de ejemplo
-
                     ```
                     {print} Su mochila se hizo muy pesada.
                     {print} Dentro de ella había una botella de agua, una linterna y un ladrillo
@@ -355,28 +345,28 @@ adventures:
             9:
                 story_text: "## Historia\nEn este nivel puedes usar anidamiento para poner comandos {if}, {repeat} o {for} dentro de otros comandos {if}, {repeat} o {for}. Esto te permite muchas opciones y te ayuda a hacer tu historia más interactiva.\n"
                 story_text_2: "El ejemplo de arriba es bastante sencillo, pero con la anidación puedes realmente elaborar tu código y convertir la historia en un juego real. ¡Mira este ejemplo!\n"
-                example_code: "## Programa Hedy de ejemplo \n```\n{print} 'Robin está caminando hacia el centro de la ciudad'\nlugar = {ask} '¿Robin va a ir a una tienda, o va a ir a casa?'\n{if} lugar {is} tienda\n    {print} 'Ella entra en la tienda.'\n    {print} 'Robin ve un libro que luce interesante'\n    libro = {ask} '¿Compra el libro Robin?'\n    {if} libro {is} si\n        {print} 'Robin compra el libro y se va a casa'\n    {else}\n        {print} 'Robin deja la tienda y se va a casa'\n{else}\n    {print} 'Robin se va a casa'\n```\n"
+                example_code: "```\n{print} 'Robin está caminando hacia el centro de la ciudad'\nlugar = {ask} '¿Robin va a ir a una tienda, o va a ir a casa?'\n{if} lugar {is} tienda\n    {print} 'Ella entra en la tienda.'\n    {print} 'Robin ve un libro que luce interesante'\n    libro = {ask} '¿Compra el libro Robin?'\n    {if} libro {is} si\n        {print} 'Robin compra el libro y se va a casa'\n    {else}\n        {print} 'Robin deja la tienda y se va a casa'\n{else}\n    {print} 'Robin se va a casa'\n```\n"
                 example_code_2: "## Elabora el código\n```\nespada = perdida\njuego = en marcha\n{print} 'Nuestra heroína está caminando en el bosque'\n{print} 'El camino se divide en dos'\n{repeat} 2 {times}\n    {if} juego {is} en marcha\n        camino = {ask} '¿Cuál camino debería escoger ella?'\n        {if} camino {is} izquierda\n            {if} espada {is} encontrada\n                {print} '¡Nuestra heroína se encuentra a un dragón!'\n                {print} '¡Por suerte nuestra heroína tiene una espada para vencer a la bestia!'\n                juego = finalizado\n            {else}\n                {print} '¡Nuestra heroína se encuentra a un dragón, pero no tiene ningún arma!'\n                {print} 'Nuestra heroína es vencida por el dragón...'\n                {print} 'Intenta de nuevo'\n                juego = finalizado\n        {if} camino {is} derecha\n            {if} espada {is} perdida\n                {print} 'Nuestra heroína se encuentra una espada'\n                {print} 'Esto podría ser muy útil'\n                espada = encontrada\n            {else}\n                {print} 'Ya encontraste la espada. No queda nada aquí.'\n                {print} 'Ella se devuelve'\n```\n"
                 start_code: '# coloca tú código aquí'
             12:
                 story_text: "## Historia\nEn este nivel puedes usar las comillas para almacenar múltiples en una variable.\n"
-                example_code: "## Programa Hedy de ejemplo\n\n\n```\nnombre = 'La Reina de Inglaterra'\n{print} nombre ' estaba comiendo un pedazo de pastel, cuando de pronto...'\n```\n"
+                example_code: "```\nnombre = 'La Reina de Inglaterra'\n{print} nombre ' estaba comiendo un pedazo de pastel, cuando de pronto...'\n```\n"
                 start_code: '# coloca tu código aquí'
             8:
                 story_text: "## Historia\nEn este nivel puedes usar múltiples líneas en tu comandos {if}, ¡de esta manera puedes mejorar tu final triste o feliz!\n"
-                example_code: "## Código de Hedy de ejemplo\n\n```\n{print} '¡OH NO! ¡El T-rex se está acercando!'\nfinal = {ask} '¿Quieres un final triste o feliz?'\n{if} final {is} feliz\n    {print} 'Justo a tiempo Richard salta de vuelta en la máquina del tiempo!'\n    {print} 'Michael escribe el código y...'\n    {print} '\U0001F4A5¡ZAP!\U0001F4A5'\n    {print} 'Están de vuelta en su garage'\n{else}\n    {print} 'Michael grita ¡VAMOS RICHARD! ¡CORRE MÁS RÁPIDO!'\n    {print} 'Pero Richard es muy lento...'\n    {print} '¡El T-rex se acerca y se lo come en un una gran mordida!\U0001F996'\n```\n"
+                example_code: "```\n{print} '¡OH NO! ¡El T-rex se está acercando!'\nfinal = {ask} '¿Quieres un final triste o feliz?'\n{if} final {is} feliz\n    {print} 'Justo a tiempo Richard salta de vuelta en la máquina del tiempo!'\n    {print} 'Michael escribe el código y...'\n    {print} '\U0001F4A5¡ZAP!\U0001F4A5'\n    {print} 'Están de vuelta en su garage'\n{else}\n    {print} 'Michael grita ¡VAMOS RICHARD! ¡CORRE MÁS RÁPIDO!'\n    {print} 'Pero Richard es muy lento...'\n    {print} '¡El T-rex se acerca y se lo come en un una gran mordida!\U0001F996'\n```\n"
                 start_code: '# coloca tu código aquí'
             15:
                 story_text: "## Historia\nUsando el bucle `{while}` puedes hacer que tus historias sean más interesantes. Por ejemplo, puedes usar `{while} juego {is} 'en marcha'` de forma que puedas jugar hasta que el juego se ha acabado.\nO puedes usar `{while} espada {is} 'perdida'` de forma que el jugador no pueda continuar el juego hasta que haya encontrado algo.\n"
                 example_code: "```\nkeys = 'lost'\n{print} 'You are standing in your garden and you have lost your keys.'\n{print} 'Where do you want to look for them?'\n{print} 'You can choose: tree, flowerbed, rock, postbox'\n{while} keys == 'lost'\n    location = {ask} 'Where do you want to look?'\n    {if} location == 'flowerbed'\n        {print} 'Here they are!'\n        keys = 'found'\n    {else}\n        {print} 'Nope they are not at the ' location\n{print} 'Now you can enter the house!'\n"
                 start_code: '# coloca tú código aquí'
             13:
-                example_code: "## Programa Hedy de ejemplo\n\n```\nespada = 'perdida'\njuego = 'en marcha'\n{print} 'Nuestra heroína está caminando en el bosque'\n{print} 'El camino se divide en dos'\n{for} i {in} {range} 0 {to} 2\n    {if} juego {is} 'en marcha'\n        camino = {ask} '¿Que camino debería escoger ella?'\n        {if} path {is} 'izquierda' {and} espada {is} 'encontrada'\n            {print} '¡Nuestra heroína se encuentra a un dragón!'\n            {print} '¡Por suerte nuestra heroína tiene una espada para vencer a la bestia!'\n            juego = 'acabado'\n        {if} camino {is} 'izquierda' {and} espada {is} 'perdida'\n            {print} '¡Nuestra heroína, encuentra un dragón, pero no tiene ningún arma!'\n            {print} 'Nuestra heroína es vencida por el dragón...'\n            {print} 'Intenta de nuevo'\n            game = 'acabado'\n        {if} camino {is} 'derecha' {and} espada {is} 'encontrada'\n            {print} 'Ya encontraste la espada. No queda nada aquí.'\n            {print} 'Ella camina de vuelta'\n        {if} camino {is} 'derecha' {and} espada {is} 'perdida'\n            {print} 'Nuestra heroína encuentra una espada'\n            {print} 'Esto podría resultar muy útil'\n            espada = 'encontrada'\n```\n"
+                example_code: "```\nespada = 'perdida'\njuego = 'en marcha'\n{print} 'Nuestra heroína está caminando en el bosque'\n{print} 'El camino se divide en dos'\n{for} i {in} {range} 0 {to} 2\n    {if} juego {is} 'en marcha'\n        camino = {ask} '¿Que camino debería escoger ella?'\n        {if} path {is} 'izquierda' {and} espada {is} 'encontrada'\n            {print} '¡Nuestra heroína se encuentra a un dragón!'\n            {print} '¡Por suerte nuestra heroína tiene una espada para vencer a la bestia!'\n            juego = 'acabado'\n        {if} camino {is} 'izquierda' {and} espada {is} 'perdida'\n            {print} '¡Nuestra heroína, encuentra un dragón, pero no tiene ningún arma!'\n            {print} 'Nuestra heroína es vencida por el dragón...'\n            {print} 'Intenta de nuevo'\n            game = 'acabado'\n        {if} camino {is} 'derecha' {and} espada {is} 'encontrada'\n            {print} 'Ya encontraste la espada. No queda nada aquí.'\n            {print} 'Ella camina de vuelta'\n        {if} camino {is} 'derecha' {and} espada {is} 'perdida'\n            {print} 'Nuestra heroína encuentra una espada'\n            {print} 'Esto podría resultar muy útil'\n            espada = 'encontrada'\n```\n"
                 story_text: "## Story\nUsando los comandos `{and}` y `{or}`puedes acortar tus historias. Por ejemplo, mira la historia del dragón.\n"
                 start_code: '# coloca tu código aquí'
             10:
                 story_text: "## Historia\nEn este nivel puedes usar el comando {for} en tu historia. De esta manera puedes programar fácimelmente el libro para niños 'oso pardo, oso pardo, ¿qué ves?'\n"
-                example_code: "## Programa Hedy de ejemplo\n\n```\nanimales = pájaro rojo, oveja negra, rana verde, pato amarillo, niño pequeño\n{print} 'oso pardo'\n{print} 'oso pardo'\n{print} '¿Qué ves?'\n{for} animal {in} animales\n    {print} 'Veo a un ' animal ' viéndome'\n    {print} animal\n    {print} animal\n    {print} '¿Qué ves?'\n{print} '¡Veo a todos los animales viéndome!'\n```\n"
+                example_code: "```\nanimales = pájaro rojo, oveja negra, rana verde, pato amarillo, niño pequeño\n{print} 'oso pardo'\n{print} 'oso pardo'\n{print} '¿Qué ves?'\n{for} animal {in} animales\n    {print} 'Veo a un ' animal ' viéndome'\n    {print} animal\n    {print} animal\n    {print} '¿Qué ves?'\n{print} '¡Veo a todos los animales viéndome!'\n```\n"
                 start_code: '# coloca tu código aquí'
     songs:
         name: "Canción"
@@ -388,7 +378,6 @@ adventures:
                     ## Canciones
                     En nivel 6 has programado la canción 'Bottles of beer'. Hiciste un versículo y entonces tenías que copiar los versículos 99 veces. En nivel 7 puede repetir la canción 99 veces, ¡simplemente agregando una línea simplee!
                 example_code: |
-                    ## Programa Hedy de ejemplo
                     ```
                     versículo {is} 99
                     {repeat} 99 {times}
@@ -406,7 +395,6 @@ adventures:
                     En las canciones hay a menudo mucha repetición. Por ejemplo, hay canciones que repiten con números.
                     Por ejemplo, la canción de los elefantes que se balancean! Ahora puedes programar esa canción programando con números.
                 example_code: |
-                    ## Programa Hedy de ejemplo
                     ```
                     elefantes {is} 2
                     {print} elefantes ' se balanceaban sobre la tela de una araña'
@@ -437,7 +425,6 @@ adventures:
 
                     Puedes acortar mucho este programa usando el comando `{repeat}`! Puedes intentar escribir el programa?
                 example_code: |
-                    ## Programa Hedy de ejemplo
                     ```
                     {repeat} _ _ {print} 'Bebé Tiburón tututudutudu'
                     {print} 'Bebe Tiburón'
@@ -476,7 +463,6 @@ adventures:
 
                     Este es el comienzo de unas pequeñas escaleras. ¿Puedes llegar a 5 pasos?
                 example_code: |
-                    ## Programa Hedy de ejemplo
                     ```
                     {forward} 50
                     {turn} left
@@ -496,8 +482,6 @@ adventures:
                     Usa 90 para girar un cuarto. A esto lo llamamos grados. Un giro completo es de 360 grados.
                     ¿Puedes hacer una figura con este código? ¿Tal vez un triángulo o un círculo?
                 example_code: |
-                    ## Programa Hedy de ejemplo
-
                     ```
                     {print} Figuras de dibujo
                     ángulo {is} 90
@@ -522,7 +506,6 @@ adventures:
                     hora que podemos repetir varias líneas, podemos hacer cifras más fácilmente.
                     Solo tenemos que establecer el ángulo una vez y luego usar esa variable en el `{repeat}`.
                 example_code: |
-                    ## Programa Hedy de ejemplo
                     ```
                     ángulo {is} 90
                     {repeat} 10 {times}
@@ -534,7 +517,6 @@ adventures:
                     También, ahora podemos mejorar el programa que dibuja diferentes figuras.
                     ¿Puedes averiguar hasta dónde tiene que llegar la tortuga aquí? ¡Termina el código y podrás dibujar cualquier polígono que quieras!
                 example_code_2: |
-                    ## Programa Hedy de ejemplo
                     ```
                     ángulos {is} {ask} '¿Cuántos ángulos debo dibujar?'
                     ángulo {is} 360 / ángulos
@@ -549,7 +531,6 @@ adventures:
                     ## Dibujemos
                     Enivel 6 puede repetir una línea de código con `{repeat}`.
                 example_code: |
-                    ## Programa Hedy de ejemplo
                     ```
                     {print} 'Dibujar figuras'
                     {repeat} 3 {times} {forward} 10
@@ -566,7 +547,6 @@ adventures:
                     Es por eso que también usas 90 grados para un cuadrado. 360 dividido por 4 es 90.
                     Ahora que podemos hacer matemáticas con Hedy, ¡podemos dibujar todas las figuras que queramos!
                 example_code: |
-                    ## Programa Hedy de ejemplo
                     ```
                     ángulos {is} {ask} '¿Cuántos ángulos quieres?'
                     ángulo {is} 360 / ángulos
@@ -590,7 +570,6 @@ adventures:
                     ## Dibujemos
                     En nivel 4 puede elegir con `{if}`. Por ejemplo, entre diferentes tipos de figuras.
                 example_code: |
-                    ## Programa Hedy de ejemplo
                     ```
                     {print} 'Figuras de dibujo'
                     figura {is} preguntar '¿Quieres un cuadrado o un triángulo?'
@@ -614,7 +593,6 @@ adventures:
                     ## Dibujemos
                     En nivel 3 tienes que usar comillas con `{print}` y `{ask}`. ¡También al dibujar!
                 example_code: |
-                    ## Programa Hedy de ejemplo
                     ```
                     {print} 'Figuras de dibujo'
                     ángulo {is} 90
@@ -636,8 +614,6 @@ adventures:
                     También puedes usar `{random}` con la tortuga de dibujo. Una elección aleatoria hace que la tortuga camine por un camino diferente cada vez..
                     Usar `{at} {random}` para elegir un valor de una lista. Puede copiar y pegar las líneas 2 y 3, así que cree una ruta aleatoria más larga.
                 example_code: |
-                    ## Programa Hedy de ejemplo
-
                     ```
                     ángulos {is} 10, 50, 90, 150, 250
                     {turn} ángulos {at} {random}
@@ -659,7 +635,6 @@ adventures:
                     ## Programa de lavado de platos en el nivel 6
                     Cuán seguido lava los platos cada miembro de la familia? Es eso justo? Ahora podemos calcularlo.
                 example_code: |
-                    ## Programa Hedy de ejemplo
                     ```
                     personas {is} mama, papa, Maria, Carlos
                     lavados_de_carlos {is} 0
@@ -681,7 +656,6 @@ adventures:
                     ## Programa de lavado de platos en el nivel 5
                     Usando el comando `{repeat}` puedes repetir porciones de tu programa. De esa forma, puedes determinar quien ha de lavar los platos cada día de la semana.
                 example_code: |
-                    ## Programa Hedy de ejemplo
                     ```
                     personas {is} mamá, papá, María, Carlos
                     {repeat} _ _ {print} 'lavará los platos' _
@@ -697,7 +671,6 @@ adventures:
                     Puede hacer que tu programa imprima 'oh no' si {is} tu turno de lavar los platos, y 'sí!' en caso de que no sea tu turno de lavar los platos?
                     No olvides las comillas!
                 example_code: |
-                    ## Programa Hedy de ejemplo
                     ```
                     personas {is} mamá, papá, María, Carlos
                     lavador {is} personas {at} {random}
@@ -714,7 +687,6 @@ adventures:
                     En cada guión bajo debes colocar un comando o una comilla.
 
                     Consejo: no olvides las comillas!                example_code: |
-                    ## Programa Hedy de ejemplo
                     ```
                     personas {is} mamá, papá, Carlos, María
                     {print} _ los platos serán lavados por _
@@ -731,7 +703,6 @@ adventures:
 
                     Primero debes hacer una lista con los miembros de tu familia. Luego puedes elegir a alguien de la lista usando el comando `{at} {random}`.
                 example_code: |
-                    ## Programa Hedy de ejemplo
                     ```
                     personas {is} mamá, papá, María, Carlos
                     {print} personas {at} {random}
@@ -762,7 +733,6 @@ adventures:
 
                     Tal vez sepas que tirar un gusanito cuenta como 5 puntos. Ahora puedes tirar un dado y luego sumar cuántos puntos has obtenido ya. El siguiente ejemplo es para tirar un sólo dado:
                 example_code: |
-                    ## Programa Hedy de ejemplo
                     ```
                     opciones {is} 1, 2, 3, 4, 5, gusanito
                     puntaje {is} 0
@@ -785,7 +755,6 @@ adventures:
 
                     Pero tal vez prefieras crear un dado distinto o sino inventar un juego completamente distinto.
                 example_code: |
-                    ## Programa Hedy de ejemplo
                     ```
                     opciones {is} 1, 2, 3, 4, 5, gusanito
                     {repeat} _ _ {print} _ _ _
@@ -800,7 +769,6 @@ adventures:
                     Puedes modificar el programa de ejemplo para que éste diga "Puedes dejar de tirar los dados" si el jugador ha obtenido un gusanito.
                     Pero tal vez prefieras crear un dado distinto o sino inventar un juego completamente distinto. Por ejemplo, puedes hacer que el juego responda de manera distinta. Por ejemplo, diciendo 'éxito' si arrojas un 6 o 'que injusticia!' si arrojas algo distinto.
                 example_code: |
-                    ## Programa Hedy de ejemplo
                     ```
                     opciones {is} 1, 2, 3, 4, 5, gusanito
                     tirada {is} _
@@ -814,7 +782,6 @@ adventures:
                     ## Dados
                     En el nivel 3 podemos crear oraciones que incluyan el valor obtenido de la tirada de dados, pero usando comillas.
                     Puedes escribir el programa, reemplazando los guiones bajos?                example_code: |
-                    ## Programa Hedy de ejemplo
                     ```
                     opciones {is} 1, 2, 3, 4, 5, gusanito
                     {print} 'has tirado un ' _
@@ -835,7 +802,6 @@ adventures:
 
                     ![Dado con números del 1 al 5 y un gusanito en lugar del 6](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)
                 example_code: |
-                    ## Programa Hedy de ejemplo
                     ```
                     opciones {is} 1, 2, 3, 4, 5, gusanito
                     {print} opciones {at} {random}
@@ -869,8 +835,6 @@ adventures:
 
                     Con `{ask}` puedes tomar una opción, y con `{echo}` puedes repetir la opción elegida.
                 example_code: |
-                    ## Programa Hedy de ejemplo
-
                     ```
                     {print} Qué eliges?
                     {ask} elige piedra, papel o tijera
@@ -891,7 +855,6 @@ adventures:
                     Luego puedes usar `{if}` para comprobar si ambas opciones fueron iguales o si fueron distintas.
                     Puedes escribir el código?
                 example_code: |
-                    ## Programa Hedy de ejemplo
                     ```
                     opciones {is} piedra, papel, tijera
                     opcióncomputadora {is} _
@@ -910,7 +873,6 @@ adventures:
                     En el nivel 3 podemos seguir desarrollando nuestro juego de piedra, papel o tijera. Pero ahora, si quieres imprimir texto, debes usar comillas.
                     Eres capaz de imprimir un texto adicional? Reemplaza el guión bajo con el código correcto.
                 example_code: |
-                    ## Programa Hedy de ejemplo
                     ```
                     opciones {is} piedra, papel, tijera
                     {print} _ La computadora ha elegido: _ _ {at} _
@@ -926,8 +888,6 @@ adventures:
 
                     De esa manera, la computadora puede elegir una opción: piedra, papel o tijera.
                 example_code: |
-                    ## Programa Hedy de ejemplo
-
                     ```
                     opciones {is} piedra, papel, tijera
                     {print} opciones {at} {random}
@@ -968,7 +928,6 @@ adventures:
                     ## Calculadora
                     En nivel 6 has aprendido a hacer una calculadora, en nivel 7 puedes expandir ese código y convertirlo en un pequeño juego de matemáticas. Así...
                 example_code: |
-                    ## Programa Hedy de ejemplo
                     ```
                     marcado {is} 0
                     {repeat} 10 {times}
@@ -989,7 +948,6 @@ adventures:
                     ## Calculadora
                     Ahora que puedes calcular, puedes escribir un programa para practicar las tablas de multiplicar. Puedes decidir que cuentas incluir, por ejemplo:
                 example_code: |
-                    ## Programa Hedy de ejemplo
                     ```
                     respuestacorrecta {is} 11 * 27
                     respuesta {is} {ask} 'Cuánto es 11 veces 27?'
@@ -1002,7 +960,6 @@ adventures:
 
                     Entonces puedes listar algunas tablas para practicar, y elegir un número distinto para multipicarlas:
                 example_code_2: |
-                    ## Programa Hedy de ejemplo
                     ```
                     tablas {is} 4, 5, 6, 8
                     veces {is} 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
@@ -1040,14 +997,13 @@ adventures:
                     ## Restaurante
                      En nivel 1 puedes hacer tu propio restaurante virtual y tomar los pedidos de tus invitados.
                 example_code: |
-                    ## Programa Hedy de ejemplo
-                      ```
-                     {print} Bienvenido al restaurante Hedy's
-                     {ask} ¿Qué te gustaría pedir?
-                     {echo} Así que te gustaría ordenar
-                     {print} ¡Gracias por su pedido!
-                     {print} ¡Está en camino!
-                     ```
+                    ```
+                    {print} Bienvenido al restaurante Hedy's
+                    {ask} ¿Qué te gustaría pedir?
+                    {echo} Así que te gustaría ordenar
+                    {print} ¡Gracias por su pedido!
+                    {print} ¡Está en camino!
+                    ```
 
                     ## Reto
                     ¿Se te ocurre más líneas para añadir al código de tu restaurante? Por ejemplo, ¿puedis {ask} a los invitados qué les gustaría beber?, decirles el precio, o desearles una comida agradable?
