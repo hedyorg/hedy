@@ -16,8 +16,6 @@ def routes(app, database, achievements, parsons):
 
     @app.route('/parsons/get-exercise/<int:level>/<int:exercise>', methods=['GET'])
     def get_parsons_exercise(level, exercise):
-        print(exercise)
-        print(level)
         if exercise > PARSONS[g.lang].get_highest_exercise_level(level) or exercise < 1:
             return gettext('exercise_doesnt_exist'), 400
 
