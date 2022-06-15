@@ -1,5 +1,5 @@
 import { modal } from './modal';
-import {stopit, theGlobalEditor} from './app';
+import { theGlobalEditor } from './app';
 
 /**
  * Activate tabs
@@ -35,9 +35,6 @@ function resetWindow() {
   }
 
   function switchToTab(tabName: string) {
-    // Stop any possible program from running
-    stopit();
-
     // Find the tab that leads to this selection, and its siblings
     const tab = $('*[data-tab="' + tabName + '"]');
     const allTabs = tab.siblings('*[data-tab]');
@@ -62,7 +59,7 @@ function resetWindow() {
     document.getElementById("repair_button").style.visibility = "hidden";
     resetWindow();
 
-    if (tabName === 'quiz' || tabName == 'parsons') {
+    if (tabName === 'quiz') {
         // If the developer's mode is still on -> make sure we do show the tab
         if ($('#developers_toggle').is(":checked")) {
           $('#adventures-tab').show();
@@ -73,11 +70,12 @@ function resetWindow() {
       $ ('#level-header input').hide ();
       $ ('#editor-area').hide ();
       $('#developers_toggle_container').hide ();
-      if (tabName == 'parsons') {
-        $('#parsons_container').hide();
-        $('#start_parsons_container').show();
-      }
       return;
+    }
+
+    if (tabName == 'parsons') {
+      $('#editor').hide();
+      $('#parsons_code_container').show();
     }
 
     $ ('#editor').show();

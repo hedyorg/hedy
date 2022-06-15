@@ -26,12 +26,58 @@
                   </div>
               </div>
           </div>
-      {% endif %}
+        {% endif %}
       <div class="w-full flex-1 flex flex-col">
         <div id="editor" style="background: #272822; font-size:0.95em; color: white" lang="en"
         data-loaded-program="{{not not loaded_program}}"
           {% if editor_readonly %}data-readonly="true"{% endif %}
           data-lskey="level_{{level_nr}}_{{assignment_nr}}_code" class="w-full flex-1 text-lg rounded">{{(loaded_program or {}).code or adventures[0].loaded_program.code or adventures[0].start_code}}
+        </div>
+        <div id="parsons_code_container" class="grid grid-cols-1 lg:grid-cols-2 gap-4 border-t-2 border-gray-500 pt-4" style="display: none;">
+            <div class="flex flex-col justify-between">
+                <div>
+                    <div class="relative w-full mb-2 border-4 border-black rounded-lg parsons_goal_line_container" style="background-color: #272822;" id="parsons_goal_line_container_1">
+                       <div index="-" draggable="true" code="" class="compiler-parsons-box w-full absolute inset-0 z-10 rounded-lg"></div>
+                       <pre level="{{ level }}" id="goal_parsons_1" class="no-copy-button parsons text-sm"></pre>
+                   </div>
+                   <div class="relative w-full mb-2 border-4 border-black rounded-lg parsons_goal_line_container" style="background-color: #272822;" id="parsons_goal_line_container_2">
+                       <div index="-" draggable="true" code="" class="compiler-parsons-box w-full absolute inset-0 z-10 rounded-lg"></div>
+                       <pre level="{{ level }}" id="goal_parsons_2" class="no-copy-button parsons text-sm"></pre>
+                   </div>
+                   <div class="relative w-full mb-2 border-4 border-black rounded-lg parsons_goal_line_container" style="background-color: #272822;" id="parsons_goal_line_container_3">
+                       <div index="-" draggable="true" code="" class="compiler-parsons-box w-full absolute inset-0 z-10 rounded-lg"></div>
+                       <pre level="{{ level }}" id="goal_parsons_3" class="no-copy-button parsons text-sm"></pre>
+                   </div>
+                   <div class="relative w-full mb-2 border-4 border-black rounded-lg parsons_goal_line_container" style="background-color: #272822;" id="parsons_goal_line_container_4">
+                       <div index="-" draggable="true" code="" class="compiler-parsons-box w-full absolute inset-0 z-10 rounded-lg"></div>
+                       <pre level="{{ level }}" id="goal_parsons_4" class="no-copy-button parsons text-sm"></pre>
+                   </div>
+                   <div class="relative w-full mb-2 border-4 border-black rounded-lg parsons_goal_line_container" style="background-color: #272822;" id="parsons_goal_line_container_5">
+                       <div index="-" draggable="true" code="" class="compiler-parsons-box w-full absolute inset-0 z-10 rounded-lg"></div>
+                       <pre level="{{ level }}" id="goal_parsons_5" class="no-copy-button parsons text-sm"></pre>
+                   </div>
+                   <div class="relative w-full mb-2 border-4 border-black rounded-lg parsons_goal_line_container" style="background-color: #272822;" id="parsons_goal_line_container_6">
+                       <div index="-" draggable="true" code="" class="compiler-parsons-box w-full absolute inset-0 z-10 rounded-lg"></div>
+                       <pre level="{{ level }}" id="goal_parsons_6" class="no-copy-button parsons text-sm"></pre>
+                   </div>
+                   <div class="relative w-full mb-2 border-4 border-black rounded-lg parsons_goal_line_container" style="background-color: #272822;" id="parsons_goal_line_container_7">
+                       <div index="-" draggable="true" code="" class="compiler-parsons-box w-full absolute inset-0 z-10 rounded-lg"></div>
+                       <pre level="{{ level }}" id="goal_parsons_7" class="no-copy-button parsons text-sm"></pre>
+                   </div>
+                   <div class="relative w-full mb-2 border-4 border-black rounded-lg parsons_goal_line_container" style="background-color: #272822;" id="parsons_goal_line_container_8">
+                       <div index="-" draggable="true" code="" class="compiler-parsons-box w-full absolute inset-0 z-10 rounded-lg"></div>
+                       <pre level="{{ level }}" id="goal_parsons_8" class="no-copy-button parsons text-sm"></pre>
+                   </div>
+                   <div class="relative w-full mb-2 border-4 border-black rounded-lg parsons_goal_line_container" style="background-color: #272822;" id="parsons_goal_line_container_9">
+                       <div index="-" draggable="true" code="" class="compiler-parsons-box w-full absolute inset-0 z-10 rounded-lg"></div>
+                       <pre level="{{ level }}" id="goal_parsons_9" class="no-copy-button parsons text-sm"></pre>
+                   </div>
+                   <div class="relative turn-pre-into-ace w-full mb-2 border-4 border-black rounded-lg parsons_goal_line_container" style="background-color: #272822;" id="parsons_goal_line_container_10">
+                       <div index="-" draggable="true" code="" class="compiler-parsons-box w-full absolute inset-0 z-10 rounded-lg"></div>
+                       <pre level="{{ level }}" id="goal_parsons_10" class="no-copy-button parsons text-sm"></pre>
+                   </div>
+                </div>
+            </div>
         </div>
         <!-- errorbox -->
         <div id="errorbox"
