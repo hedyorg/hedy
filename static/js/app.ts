@@ -915,9 +915,6 @@ window.onerror = function reportClientException(message, source, line_number, co
 function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep: boolean, hasWarnings: boolean, cb: () => void) {
   // If we are in the Parsons problem -> use a different output
   let outputDiv = $('#output');
-  if ($('#editor-area').is(':hidden')) {
-    outputDiv = $('#parsons_output');
-  }
 
   //Saving the variable button because sk will overwrite the output div
   const variableButton = $(outputDiv).find('#variable_button');
