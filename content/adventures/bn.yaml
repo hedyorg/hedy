@@ -805,6 +805,8 @@ adventures:
                     {forward} 50
                     ```
                 start_code: "{forward} 50\n{turn} {left}"
+                example_code_2: "```\n{color} {white}\n{forward} -80\n{color} {green}\n{forward} 50\n{color} {yellow}\n{forward} 50\n{color} {red}\n{forward} 50\n```\n"
+                story_text_2: "## Colors\nYou can also change the color of the lines with the command `{color}`. Check out the example.\nYou can also use the command `{color} {white}` to make 'invisible' lines. You could use these white lines to move the turtle anywhere in the screen before you start drawing.\n"
             2:
                 story_text: |
                     ## Turtle
@@ -1478,13 +1480,13 @@ adventures:
                     ## Restaurant
                      In level 1 you can make your own virtual restaurant and take your guests' orders.
                 example_code: |
-                     ```
-                     {print} Welcome to Hedy's restaurant 🍟
-                     {ask} What would you like to order?
-                     {echo} So you would like to order
-                     {print} Thanks you for your order!
-                     {print} It's on its way!
-                     ```
+                    ```
+                    {print} Welcome to Hedy's restaurant 🍟
+                    {ask} What would you like to order?
+                    {echo} So you would like to order
+                    {print} Thanks you for your order!
+                    {print} It's on its way!
+                    ```
                 story_text_2: |
                     ## Challenge
                     Can you think of more lines to add to your restaurant code? For example, can you {ask} the guests what they'd like to drink, tell them the price, or wish them a pleasant meal?
@@ -1597,7 +1599,7 @@ adventures:
                     ## Restaurant
                     In this level you can use maths to calculate the total price of your customer's order, which can make your virtual restaurant more realistic.
 
-                example_code: |
+                example_code: |4
 
                     You can make a simple restaurant code, like this:
                     ```
@@ -1623,7 +1625,7 @@ adventures:
                     - give people a discount when they enter a (secret) couponcode?
                     - add a children's menu?
                     - think of other fun things to add?
-                example_code_2: |
+                example_code_2: |4
 
                     In this example there are three courses, which requires more code and more additions in calculating the price.
                     ```
@@ -1720,7 +1722,7 @@ adventures:
                         food = {ask} 'What would you like to eat as your ' course '?'
                         {print} food ' will be your ' course
                     ```
-                story_text_2: |
+                story_text_2: |4
 
                     Of course, you could also order for multiple people!
                 example_code_2: |
@@ -1849,7 +1851,7 @@ adventures:
                     ## Fortune Teller
                     In the previous levels you've created your first fortune telling machine, but Hedy couldn't really predict anything, only {echo}.
                     In this level you can use a variable and the `{at} {random}` command to really let Hedy choose an answer for you. Check out this code for instance:
-                example_code: |
+                example_code: |4
 
                     In this example the player can {ask} Hedy a yes-no question and Hedy will pick a random answer for you.
                     ```
@@ -2903,12 +2905,12 @@ adventures:
 
                     That's a lot of code for mainly the same words over and over again. Luckily in the next level has a solution with the `{repeat}` command, that allows you to repeat a line of code multiple times.
                 example_code: |
-                     ```
-                     {print} 'happy birthday to you'
-                     {print} 'happy birthday to you'
-                     {print} 'happy birthday dear Hedy'
-                     {print} 'happy birthday to you'
-                     ```
+                    ```
+                    {print} 'happy birthday to you'
+                    {print} 'happy birthday to you'
+                    {print} 'happy birthday dear Hedy'
+                    {print} 'happy birthday to you'
+                    ```
                 start_code: "{print} 'On to the next level!'"
             7:
                 story_text: |
