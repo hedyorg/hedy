@@ -1,3 +1,6 @@
+import copy
+import random
+
 from flask import g, jsonify
 from flask_babel import gettext
 

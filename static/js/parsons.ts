@@ -24,6 +24,8 @@ export function loadParsonsExercise(level: number, exercise: number) {
 }
 
 function showExercise(response: any) {
-    console.log("Let's show the exercise...");
+    console.log("We have decided to shuffle items on the front-end...");
+    let code_lines = response.code_lines.sort( () => Math.random() - 0.5);
     console.log(response);
+    console.log(code_lines);
 }
