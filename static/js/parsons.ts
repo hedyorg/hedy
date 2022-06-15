@@ -1,4 +1,5 @@
 import {modal} from "./modal";
+import {stopit} from "./app";
 
 (function() {
         // We might not need this -> is there something we want to load on page load?
@@ -6,16 +7,36 @@ import {modal} from "./modal";
 )();
 
 export function loadParsonsExercise(level: number, exercise: number) {
+    $('#next_parson_button').hide();
     $.ajax({
       type: 'GET',
       url: '/parsons/get-exercise/' + level + '/' + exercise,
       dataType: 'json'
     }).done(function(response: any) {
         $('#parsons_container').show();
+        $('#next_parson_button').attr('current_exercise', exercise);
+        resetView();
+        updateHeader();
         showExercise(response);
+        updateNextExerciseButton(level, exercise);
     }).fail(function(err) {
        modal.alert(err.responseText, 3000, true);
     });
+}
+
+function resetView() {
+    stopit();
+    $('.parsons_goal_line_container').removeClass('border-green-500 border-red-500');
+    $('.compiler-parsons-box').attr('index', '-');
+    $('.compiler-parsons-box').attr('code', '');
+    $( ".goal_parsons" ).each(function(  ) {
+        ace.edit($(this).attr('id')).setValue('');
+    });
+}
+
+function updateHeader() {
+    // Switch header to next exercise
+    // Do / don't mark with green / red when correct or not?
 }
 
 function showExercise(response: any) {
@@ -28,7 +49,6 @@ function showExercise(response: any) {
     $.each(code_lines, function(key: string, valueObj: string) {
         counter += 1;
         // Temp output to console to make sure TypeScript compiles
-        console.log(key);
         ace.edit('start_parsons_' + counter).session.setValue(valueObj.replace(/\n+$/, ''), -1);
         $('#start_parsons_div_' + counter).attr('index', key);
         $('#start_parsons_div_' + counter).attr('code', valueObj);
@@ -38,6 +58,16 @@ function showExercise(response: any) {
         $('#parsons_goal_line_container_' + counter).show();
     });
     $('#parsons_explanation_story').text(response.story);
+}
+
+function updateNextExerciseButton(level: number, exercise: number) {
+    const max_exercise = <number>($('#next_parson_button').attr('max_exercise') || 1);
+    // If there is another exercise: add the onclick for next exercise
+    if (exercise < max_exercise) {
+        $('#next_parson_button').attr('onclick', 'hedyApp.loadParsonsExercise(' + level + ", " + (exercise+1) + ");");
+    } else {
+        $('#next_parson_button').attr('onclick', null);
+    }
 }
 
 export function loadNextExercise() {

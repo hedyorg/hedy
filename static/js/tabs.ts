@@ -74,8 +74,6 @@ function resetWindow() {
       return;
     }
 
-    console.log(tabName);
-
     if (tabName === 'parsons') {
       $('#editor').hide();
       loadParsonsExercise(<number>(window.State.level || 1), 1);
