@@ -75,6 +75,7 @@ function resetWindow() {
     }
 
     if (tabName === 'parsons') {
+      $ ('#level-header input').hide ();
       $('#editor').hide();
       loadParsonsExercise(<number>(window.State.level || 1), 1);
       $('#parsons_code_container').show();
