@@ -44,6 +44,10 @@ function showExercise(response: any) {
     });
 }
 
+export function loadNextExercise() {
+    // Todo...
+}
+
 // https://stackoverflow.com/questions/26503595/javascript-shuffling-object-properties-with-their-values
 function shuffle_code_lines(code_lines: object) {
     let shuffled = {};
