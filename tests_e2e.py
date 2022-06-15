@@ -288,7 +288,7 @@ class TestPages(AuthHelper):
         self.given_fresh_user_is_logged_in()
 
         body = {'email': self.user['email'], 'keyword_language': self.user['keyword_language']}
-        pages = ['/', '/hedy', '/explore', '/learn-more', '/programs', '/my-achievements', '/my-profile']
+        pages = ['/', '/hedy', '/tutorial', '/explore', '/learn-more', '/programs', '/my-achievements', '/my-profile']
 
         for language in ALL_LANGUAGES.keys():
             body['language'] = language
@@ -1193,7 +1193,6 @@ class TestClasses(AuthHelper):
         class_student = Class_data['students'][0]
         self.assertEqual(class_student['highest_level'], 0)
         self.assertEqual(class_student['programs'], 0)
-        self.assertEqual(class_student['latest_shared'], None)
         self.assertIsInstance(class_student['last_login'], str)
         self.assertEqual(class_student['username'], student['username'])
 

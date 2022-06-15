@@ -1,0 +1,168 @@
+parsons:
+    dragging:
+        name: "Dragging"
+        levels:
+            1:
+                text: |
+                    ## Drag the code in the correct order
+                example: |
+                    ## What is my code supposed to do?
+                story: |
+                    You're a customer at bakery Hedy.
+                    You want into the bakery and are welcomed by the baker.
+                    He asks what type of pie you want to order.
+                    Your order is being prepared.
+                code_lines:
+                    A: |
+                        {print} Welcome to bakery Hedy!
+                    B: |
+                        {ask} What type of pie do you want to order?
+                    C: |
+                        {echo} So you want
+                    D: |
+                        {print} Your order is being prepared!
+            2:
+                text: |
+                    ## Drag the code in the correct order
+                example: |
+                    ## What is my code supposed to do?
+                story: |
+                    You and your friends are going to watch some Netflix.
+                    Show which movie you're about to watch and wish the viewers lot of fun!
+                code_lines:
+                    A: |
+                        {print} It is time for an evening of Netflix
+                    B: |
+                        film {is} Sonic the Hedgehog 2
+                    C: |
+                        {print} We're going to the movies
+                    D: |
+                        {print} Have lot of fun!
+            3:
+                text: |
+                    ## Drag the code in the correct order
+                example: |
+                    ## What is my code supposed to do?
+                story: |
+                    The new school year at Hogwarts is starting! 
+                    It is the job of the sorting hat to sort you into one of the houses.
+                    Which house will you be sorted into?
+                    Are you a Gryffindor, Hufflepuf, Ravenclaw or Slytherin.
+                    Let the program wait a short period before revealing your house.
+                code_lines:
+                    A: |
+                        {print} The new school year at Hogwarts is starting!
+                    B: |
+                        {print} The sorting hat is ready to sort you into one of the houses.
+                    C: |
+                        houses {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin
+                    D: |
+                        {sleep} 2
+                    E: |
+                        {print} And it is houses {at} {random}
+            4:
+                text: |
+                    ## Drag the code in the correct order
+                example: |
+                    ## What is my code supposed to do?
+                story: |
+                    You are the newest Pokémon trainer from Pallet Town!
+                    Make a program that selects your first Pokémon.
+                    Let the program wait a minute before revealing your first pokémon.
+                code_lines:
+                    A: |
+                        pokemons {is} Pikachu, Charmander, Bulbasaur, Squirtle
+                    B: |
+                        {print} 'This is going to be your first pokémon!'
+                    C: |
+                        {sleep}
+                    D: |
+                        {print} pokemons {at} {random}
+            5:
+                text: |
+                    ## Drag the code in the correct order
+                example: |
+                    ## What is my code supposed to do?
+                story: |
+                    Make a program that checks if your favourite movie is already in the list of the computer.
+                    If so, print that you have great taste, otherwise add the movie to the list.
+                code_lines:
+                    A: |
+                        favoriete_movies {is} Batman, Spiderman, The Avengers, Jurassic Park
+                    B: |
+                        movie {is} {ask} 'What is your favourite movie?'
+                    C: |
+                        {if} movie {in} favoriete_movies {print} 'You have great taste!'
+                    D: |
+                        {else} {print} 'Such a shame that your favourite movie is not in the list, we will add it right away!'
+                    E: |
+                        {add} movie {to_list} favoriete_movies
+            6:
+                text: |
+                    ## Drag the code in the correct order
+                example: |
+                    ## What is my code supposed to do?
+                story: |
+                    Make a program that calculates how old you are in dog and cat years.
+                    First ask the age of the user and start calculating.
+                    First calculate the dogyears then the catyears.
+                    Show the user the different ages.
+                code_lines:
+                    A: |
+                        age = {ask} 'How old are you?'
+                    B: |
+                        dog_age = age * 7
+                    C: |
+                        cat_age = age * 5
+                    D: |
+                        {print} 'In dogyears you are ' dog_age ' years old.'
+                    E: |
+                        {print} 'In catyears you are ' cat_age ' years old.'
+            7:
+                text: |
+                    ## Drag the code in the correct order
+                example: |
+                    ## What is my code supposed to do?
+                story: |
+                    In a chess tournament there are three players left.
+                    Create a program that decides which two players first play against each other.
+                    First print the two players who play the first match, then print against which player the winner will play.
+                code_lines:
+                    A: |
+                        players = Liam, Noah, Sophie
+                    B: |
+                        player1 = players {at} {random}
+                    C: |
+                        player2 = players {at} {random}
+                    D: |
+                        {print} player1 ' first plays against ' player2
+                    E: |
+                        {remove} player1 {from} players
+                    F: |
+                        {remove} player2 {from} players
+                    G: |
+                        {print} 'The winner plays against ' players {at} {random}
+            8:
+                text: |
+                    ## Drag the code in the correct order
+                example: |
+                    ## What is my code supposed to do?
+                story: |
+                    You and your friends are playing Pokémon Go! Create a program that decides in which team you will be selected.
+                    Either red, yellow or blue!
+                code_lines:
+                    A: |
+                        teams = red, yellow, blue
+                    B: |
+                        {print} 'Red of Blue?'
+                    C: |
+                        {print} 'You are selected in team '
+                    D: |
+                        {repeat} 5 {times}
+                    E: |
+                        {print} teams {at} {random}
+                    F: |
+                        sleep 2
+                    G: |
+                        {print} teams {at} random '!'
+

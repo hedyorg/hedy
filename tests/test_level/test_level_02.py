@@ -329,13 +329,13 @@ class TestsLevel2(HedyTester):
 
     def test_sleep_with_number_hi(self):
         code = "sleep २"
-        expected = HedyTester.sleep_command_transpiled('"२"')
+        expected = HedyTester.sleep_command_transpiled('"2"')
 
         self.multi_level_tester(code=code, expected=expected)
 
     def test_sleep_with_number_ar(self):
         code = "sleep ٣"
-        expected = HedyTester.sleep_command_transpiled('"٣"')
+        expected = HedyTester.sleep_command_transpiled('"3"')
 
         self.multi_level_tester(code=code, expected=expected)
 

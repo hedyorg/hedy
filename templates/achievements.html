@@ -22,7 +22,7 @@
 {% block main %}
     <h2 class="px-8 mb-4">{{_('hedy_achievements')}}</h2>
     {% for title, subcategory in achievements.items() %}
-        {% if title != "teacher" or is_teacher %}
+        {% if title != _('teacher') or is_teacher %}
             <h1 class="bg-blue-200 ltr:pl-8 ltr:pr-8 py-2 mb-4 rounded-lg text-3xl w-full cursor-pointer" onclick="$('#{{loop.index}}').toggle()">{{title}}</h1>
             <div class="hidden ltr:pl-4 rtl:pr-4 mt-4 mb-4" id="{{loop.index}}">
             {% for subtitle, achievement_keys in subcategory.items() %}
@@ -50,7 +50,7 @@
                                 <img src="{{static('/images/achievement.png')}}" class="px-2">
                             </div>
                             <div class="w-40 h-full opacity-0 hover:opacity-75 bg-black rounded-lg inset-0 absolute z-10 text-center text-white px-4 pt-10">
-                                <p class="font-semibold">{% if title == "hidden" %}???{% else %}{{ translations[achievement].text }}{% endif %}</p>
+                                <p class="font-semibold">{% if title == _('hidden') %}???{% else %}{{ translations[achievement].text }}{% endif %}</p>
                             </div>
                             <div class="text-center flex items-center justify-center h-16">
                                 <p>{{ translations[achievement].title }}</p>

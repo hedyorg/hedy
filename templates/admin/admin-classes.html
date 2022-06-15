@@ -8,14 +8,17 @@
     </div>
 </div>
 <h4 class="text-center">Total amount of shown classes: {{ classes|length }}</h4>
-<div class="program w-3/4 mx-auto border-solid border-2 border-orange-400 rounded p-4">
+<div class="program w-full mx-auto border-solid border-2 border-orange-400 rounded p-4">
   <table class="table-auto mb-4 w-full text-sm">
     <thead>
       <tr class="font-bold text-left">
           <td id="classname_header">Class name</td>
           <td id="teacher_header">Teacher</td>
           <td id="students_header">Students</td>
-          <td id="last_used_header">Last used</td>
+          <td id="runs_week_header">Runs this week</td>
+          <td id="error_percentage_week_header">Error percentage this week</td>
+          <td id="runs_header">Total runs</td>
+          <td id="error_percentage_header">Error percentage</td>
           <td id="statistics_header">Statistics</td>
       </tr>
     </thead>
@@ -25,7 +28,10 @@
             <td class="classname_cell">{{class.name}}</td>
             <td class="teacher_cell">{{class.teacher}}</td>
             <td class="students_cell">{{class.students}}</td>
-            <td class="last_used_cell">{{class.last_used}}</td>
+            <td class="runs_week_cell">{{class.stats.week.runs}}</td>
+            <td class="error_percentage_week_cell">{% if class.stats.week.runs > 0 %}{{(class.stats.week.fails / class.stats.week.runs * 100)|round(2)}}{% else %}0.00{% endif %}%</td>
+            <td class="runs_cell">{{class.stats.total.runs}}</td>
+            <td class="error_percentage_cell">{% if class.stats.total.runs > 0 %}{{(class.stats.total.fails / class.stats.total.runs * 100)|round(2)}}{% else %}0.00{% endif %}%</td>
             <td id="statistics_cell"><a href="/stats/class/{{class.id}}" target="_blank">Click here</a></td>
           </tr>
       {% endfor %}

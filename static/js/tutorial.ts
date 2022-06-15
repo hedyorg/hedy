@@ -1,5 +1,5 @@
 import {modal} from "./modal";
-import {pushAchievement, theGlobalEditor} from "./app";
+import {pushAchievement, runit, theGlobalEditor} from "./app";
 
 let current_step = 0;
 let student = true;
@@ -21,6 +21,7 @@ function codeEditorStep() {
   addHighlightBorder("editor");
 
   relocatePopup(65, 30);
+  theGlobalEditor?.setValue("print ___");
   tutorialPopup(current_step);
 }
 
@@ -28,6 +29,10 @@ function codeOutputStep() {
   removeBorder("editor");
   $('#code_output').addClass("z-40");
   addHighlightBorder("code_output");
+
+  runit ("1", "en", "", function () {
+    $ ('#output').focus ();
+  });
 
   relocatePopup(35, 30);
   tutorialPopup(current_step);
@@ -54,24 +59,42 @@ function tryRunButtonStep() {
        theGlobalEditor?.setValue("print Hello world!\nprint I'm learning Hedy with the tutorial!");
     });
 
-  theGlobalEditor?.setValue("print Hallo wereld!\nprint Ik volg de Hedy tutorial");
-  theGlobalEditor?.setOptions({readOnly: true});
+  relocatePopup(50, 70);
+  tutorialPopup(current_step);
+}
 
-  // If this is the first program of the user -> They will receive an achievement, make sure it is shown
-  $('#achievement_pop-up').removeClass('z-10');
-  $('#achievement_pop-up').addClass('z-50');
+function speakAloudStep() {
+  removeBorder("runButtonContainer");
+  $('#editor').removeClass('z-40');
+  $('#code_output').removeClass('z-40');
+  $('#runButtonContainer').removeClass('z-40');
+
+  $('#speak_container').addClass('z-40 bg-white relative');
+
+  addHighlightBorder("speak_container");
+
+  relocatePopup(50, 30);
+  tutorialPopup(current_step);
+}
+
+function runSpeakAloudStep() {
+  $('#editor').addClass('z-40');
+  $('#code_output').addClass('z-40');
+  $('#runButtonContainer').addClass('z-40');
 
   relocatePopup(50, 70);
   tutorialPopup(current_step);
 }
 
 function nextLevelStep() {
-  removeBorder("runButtonContainer");
+  removeBorder("speak_container");
   $('#editor').removeClass('z-40');
   $('#code_output').removeClass('z-40');
   $('#runButtonContainer').removeClass('z-40');
+  $('#speak_container').removeClass('z-40 bg-white relative');
 
   $('#next_level_button').addClass("z-40");
+  $('#next_level_button').removeAttr('onclick');
   addHighlightBorder("next_level_button");
 
   relocatePopup(50, 30);
@@ -85,6 +108,9 @@ function levelDefaultStep() {
   $('#code_content_container').addClass('z-40');
   $('#adventures').addClass('z-40 bg-gray-100');
   $('#adventures').show();
+
+  // Set to false, prevent "are you sure you want to switch without saving" pop-up
+  window.State.unsaved_changes = false;
 
   addHighlightBorder("adventures");
   relocatePopup(50, 40);
@@ -114,8 +140,11 @@ function saveShareStep() {
   $('#cheatsheet_container').hide();
   addHighlightBorder("level-header");
 
+  $('#save_program_button').removeAttr('onclick');
+  $('#share_program_button').removeAttr('onclick');
+
   relocatePopup(50, 30);
-  tutorialPopup(8);
+  tutorialPopup(current_step);
 }
 
 function cheatsheetStep() {
@@ -149,18 +178,22 @@ function callNextStep() {
   } else if (current_step == 4) {
     tryRunButtonStep();
   } else if (current_step == 5) {
-    nextLevelStep();
+    speakAloudStep();
   } else if (current_step == 6) {
-    levelDefaultStep();
+    runSpeakAloudStep();
   } else if (current_step == 7) {
-    adventureTabsStep();
+    nextLevelStep();
   } else if (current_step == 8) {
-    quizTabStep();
+    levelDefaultStep();
   } else if (current_step == 9) {
-    saveShareStep();
+    adventureTabsStep();
   } else if (current_step == 10) {
-    cheatsheetStep();
+    quizTabStep();
   } else if (current_step == 11) {
+    saveShareStep();
+  } else if (current_step == 12) {
+    cheatsheetStep();
+  } else if (current_step == 13) {
     pushAchievement("well_begun_is_half_done");
     $('#achievement_pop-up').removeClass('z-10');
     $('#achievement_pop-up').addClass('z-50');
@@ -302,6 +335,8 @@ export function startTutorial() {
   $('#tutorial-mask').show();
   $('#adventures').hide();
   $('#variables_container').hide();
+  theGlobalEditor?.setValue("");
+
   current_step = 0;
   student = true;
   tutorialPopup(current_step);

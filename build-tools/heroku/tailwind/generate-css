@@ -5,6 +5,11 @@ cd $scriptdir
 
 staticdir=../../../static
 
-npx tailwindcss build -i styles.css -o $staticdir/css/generated.css
-npx minify $staticdir/css/generated.css > $staticdir/css/generated.css.min
-mv $staticdir/css/generated.css{.min,}
+if [[ "${1:-}" == "--watch" ]]; then
+  echo "👀 Running Tailwind compilation in watch mode. 👀"
+  npx tailwindcss build -i styles.css -o $staticdir/css/generated.css --watch
+else
+  npx tailwindcss build -i styles.css -o $staticdir/css/generated.css
+  npx minify $staticdir/css/generated.css > $staticdir/css/generated.css.min
+  mv $staticdir/css/generated.css{.min,}
+fi

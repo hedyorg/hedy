@@ -49,26 +49,26 @@ class PageTranslations:
         return d
 
 
-def render_code_editor_with_tabs(commands, max_level, level_number, version, quiz, loaded_program, adventures, customizations, hide_cheatsheet, enforce_developers_mode, teacher_adventures, adventure_name):
+def render_code_editor_with_tabs(commands, max_level, level_number, version, quiz, quiz_questions, loaded_program, adventures, parsons, customizations, hide_cheatsheet, enforce_developers_mode, teacher_adventures, adventure_name):
     arguments_dict = {}
 
     # Meta stuff
     arguments_dict['level_nr'] = str(level_number)
     arguments_dict['level'] = level_number
     arguments_dict['current_page'] = 'hedy'
-    arguments_dict['prev_level'] = int(
-        level_number) - 1 if int(level_number) > 1 else None
-    arguments_dict['next_level'] = int(
-        level_number) + 1 if int(level_number) < max_level else None
+    arguments_dict['prev_level'] = int(level_number) - 1 if int(level_number) > 1 else None
+    arguments_dict['next_level'] = int(level_number) + 1 if int(level_number) < max_level else None
     arguments_dict['customizations'] = customizations
     arguments_dict['hide_cheatsheet'] = hide_cheatsheet
     arguments_dict['enforce_developers_mode'] = enforce_developers_mode
     arguments_dict['teacher_adventures'] = teacher_adventures
     arguments_dict['loaded_program'] = loaded_program
     arguments_dict['adventures'] = adventures
+    arguments_dict['parsons'] = parsons
     arguments_dict['adventure_name'] = adventure_name
     arguments_dict['latest'] = version
     arguments_dict['quiz'] = quiz
+    arguments_dict['quiz_questions'] = quiz_questions
 
     return render_template("code-page.html", **arguments_dict, commands=commands)
 

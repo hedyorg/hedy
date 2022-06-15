@@ -46,6 +46,10 @@ sections:
             Vous pouvez sauvegarder vos projets facilement en donnant un nom à votre projet dans la barre blanche et en appuyant sur le bouton vert Enregistrer le code.
 
             Que la programmation commence !
+    -   title: Setting preferred language
+        text: "When students create profile they are supposed to choose a 'preferred language'. Hedy will always be loaded in this selected language.\nChanging this language can always be done later on by navigation to 'My account' and 'My personal settings' again.\nFrom December 2021 on setting a preferred language is obligatory for each Hedy account.\nWhen your account or the accounts of your students have being created earlier than this date you will receive a message that a preferred language is missing.\nDon't worry! Navigate to 'My profile' and set a language in your profile settings.\nUntil you set a language Hedy will be shown in your browser language and, when this language is not supported, in English.\n\n**For non-English speakers**\nNot only can you change the language of the adventures to your own language. You can also choose which language the keywords (for example 'print' or 'ask') should be in.\nThis way you can teach your students to code with English keywords, but you can also let them program in their own laguage. For example Dutch students can use the command 'vraag' instead of 'ask'.\n"
+    -   title: Storing programs
+        text: "Because you are now logged in, you'll see the blue banner with My profile and My programs.\nThese tabs exist for your students too. In My programs you can find all the codes that you've saved.\n\nYou can save your projects easily by giving your project a name in the white bar and pressing the green button Save Code.\nYou (and your students) can also share programs. These programs will be posted on our explore page, for everybody to see and use.\nIf you want to unshare your program, go to 'My programs' and click 'Unshare'.\n"
     key: préparations
 -   title: "L'enseignement avec Hedy"
     subsections:
@@ -84,7 +88,7 @@ sections:
             Comment ont-ils appris de leurs erreurs ? Et bien sûr : Qu'ont-ils créé ?
             Les élèves sont souvent très fiers de leurs propres créations, il est donc souhaitable de garder un peu de temps pour donner à vos élèves l'occasion de montrer leur travail à leurs camarades de classe.
     key: enseigner
--   title: "Frequently made mistakes"
+-   title: "Erreurs fréquemment commises"
     key: "common_mistakes"
     intro: |
         Vous pouvez apprendre de vos erreurs, surtout en codage !
@@ -93,28 +97,28 @@ sections:
     levels:
     -   level: '1'
         sections:
-        -   title: "Students forget to type commandos"
+        -   title: "Les élèves oublient de taper les commandes"
             example:
                 error_text: |
-                    For example they type a sentence without using print.
+                    Par exemple, ils tapent une phrase sans `{print}`.
                 error_code: |
-                    Hedy can't print this
+                    Hedy ne peut pas afficher ça.
                 solution_text: |
-                    Teach your students to always start a line of code with a command.
+                    Apprenez à vos élèves à toujours commencer une ligne par une commande.
                 solution_code: |
                     imprimer Hedy peut imprimer ceci !
-        -   title: "Students use capitals when typing commands"
+        -   title: "Les élèves utilisent des majuscules lorsqu'ils tapent des commandes"
             example:
                 error_text: |
-                    Commands won't work if they are in capitals.
+                    Les commandes ne fonctionneront pas si elles sont en majuscules.
                 error_code: |
                     Demander Pourquoi mon code échoue-t-il ?
                     Imprime Parce que j'utilise des majuscules.
                 solution_text: |
-                    Remove the capitals.
+                    Enlevez les majuscules.
                 solution_code: |
-                    ask Why does my code work now?
-                    print Because I removed the capitals!
+                    {ask} Why does my code work now?
+                    {print} Because I removed the capitals!
         -   title: "Students use echo without ask"
             example:
                 error_text: |

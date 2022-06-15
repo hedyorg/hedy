@@ -467,8 +467,8 @@ levels:
         3:
             question_text: "What's wrong in line 2 of this code?"
             code: |-
-                options {is} rock, paper, scissors
-                {print} rock, paper, scissors {at} {random}
+                volba {is} kámen, nůžky, papír
+                {print} kámen, nůžky, papír {at} {random}
             mp_choice_options:
             -   option: |
                     ```
@@ -477,9 +477,9 @@ levels:
                 feedback: "You're almost there. The order of the words isn't right yet."
             -   option: |
                     ```
-                    {print} rock {at} {random}
+                    {print} kámen {at} {random}
                     ```
-                feedback: "you don't always want the Hedy to {print} rock, sometimes you want scissors or paper."
+                feedback: "Nechceš aby ti Hedy vždycky vytiskl pomocí {print}  kámen, občas chceš také papír nebo nůžky."
             -   option: |
                     ```
                     {print} options {at} {random}
@@ -727,8 +727,8 @@ levels:
         5:
             question_text: "What has to be changed in order for the game to work?"
             code: |-
-                options {is} rock, paper, scissors
-                {print} 'options {at} {random}'
+                volba {is} kámen, nůžky, papír
+                {print} 'volba {at} {random}'
             mp_choice_options:
             -   option: |
                     ```
@@ -748,7 +748,7 @@ levels:
             -   option: "Nothing, the game already works!"
                 feedback: "Look carefully. There is an error."
             correct_answer: "C"
-            hint: "You don't want Hedy to literally print 'options {at} {random}', you want it to print 'rock' or 'paper' or 'scissors'."
+            hint: "Nechceme, aby Hedy doslova vypsala 'volba {at} {random}', ale aby vypsala 'kámen' nebo 'nůžky' nebo 'papír'."
             question_score: '10'
         6:
             question_text: "What would be a good next line in this code?"
@@ -1741,8 +1741,8 @@ levels:
         9:
             question_text: "What line(s) in this code should start with 4 spaces?"
             code: |-
-                1 music = {ask} 'What is your favorite music genre?'
-                2 {if} music is rock
+                1 hudebni_styl = {ask} 'Jaký hudební styl máš nejradši?'
+                2 {if} hudebni_styl is rock
                 3 {print} '🤘'
                 4 {else}
                 5 {print} '👎'
@@ -2405,7 +2405,7 @@ levels:
                 feedback: "It would say 'Ann throws Jesse', instead of 'Ann throws 6'."
             -   option: "choices"
                 feedback: "That's right!"
-            -   option: "choice"
+            -   option: "volba"
                 feedback: "You are very close. But you need Hedy to pick from the list called 'choices' not 'choice'..."
             -   option: "dice"
                 feedback: "Look at the names of the variables."
@@ -2415,20 +2415,20 @@ levels:
         6:
             question_text: "Which of the answers below is a possible outcome when you run the code?"
             code: |-
-                choices = rock, paper, scissors
-                players = Kelly, Meredith
-                {for} player {in} players
-                    {print} player ' chooses ' choices {at} {random}
+                volba =  kámen, nůžky, papír
+                hráči = Kelly, Meredith
+                {for} hráč {in} hráči
+                    {print} hráč ' zvolil ' volba {at} {random}
             mp_choice_options:
             -   option: |-
-                    Kelly chooses rock
+                    Kelly zvovil*a kámen
                 feedback: "Meredith wants to play too!"
             -   option: |-
-                    Meredith chooses scissors
-                    Kelly chooses rock
+                    Meredith zvolila nůžky
+                    Kelly zvolil*a kámen
                 feedback: "So close! But Kelly is first in the list, so she goes first"
             -   option: |-
-                    Meredith chooses paper
+                    Meredith zvolila papír
                 feedback: "Kelly wants to play too!"
             -   option: |-
                     Kelly chooses paper

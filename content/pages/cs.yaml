@@ -1,5 +1,5 @@
 sections:
--   title: Introduction
+-   title: Úvod
     key: intro
     subsections:
     -   title: What's Hedy?
@@ -17,8 +17,12 @@ sections:
     subsections:
     -   title: Setting preferred language
         text: "When students create profile they are supposed to choose a 'preferred language'. Hedy will always be loaded in this selected language.\nChanging this language can always be done later on by navigation to 'My profile' and 'My profile' again.\nFrom December 2021 on setting a preferred language is obligatory for each Hedy account.\nWhen your account or the accounts of your students have being created earlier than this date you will receive a message that a preferred language is missing.\nDon't worry! Navigate to 'My profile' and set a language in your profile settings.\nUntil you set a language Hedy will be shown in your browser language and, when this language is not supported, in English.\n"
-    -   title: Storing programs
+    -   title: Ukládání programů
         text: "Because you are now logged in, you'll see the blue banner with My profile and My programs.\nThese tabs exist for you students too. In My programs you can find all the codes that have been saved.\n\nYou can save your projects easily by giving your project a name in the white bar and pressing the green button Save Code.\n\nLet the programming fun begin!\n"
+    -   title: Nastavení preferovaného jazyka
+        text: "Při vytváření účtu si studenti vyberou \"preferovaný jazyk\". Hedy se vždy zobrazí v tomto vybraném jazyce.\nToto nastavení lze kdykoliv později změnit v sekci  \"Můj účet\" a \"Moje osobní nastavení\".\nOd prosince 2021 je nastavení preferovaného jazyka povinné pro každý účet v Hedy.\nPokud byl váš účet nebo účty vašich studentů vytvořeny dříve než k tomuto datu, zobrazí se zpráva, že preferovaný jazyk není nastavený.\nNemějte obavy! Zobrazte sekci \"Můj účet\" a nastavte si preferovaný jazyk ve svém účtu.\nDokud jazyk nenastavíte, bude se Hedy zobrazovat v jazyce vašeho prohlížeče a pokud tento jazyk není podporován, tak v angličtině.\n\n**Pro neangličtináře**\nNejenže můžete změnit jazyk dobrodružství na svůj vlastní jazyk. Můžete také zvolit, v jakém jazyce mají být klíčová slova (například \"print\" nebo \"ask\").\nTakto můžete své studenty naučit programovat s anglickými klíčovými slovy, ale zároveň je můžete nechat programovat v jejich vlastním jazyce. Například nizozemští studenti mohou místo příkazu 'ask' použít příkaz 'vraag'.\n"
+    -   title: Storing programs
+        text: "Because you are now logged in, you'll see the blue banner with My profile and My programs.\nThese tabs exist for your students too. In My programs you can find all the codes that you've saved.\n\nYou can save your projects easily by giving your project a name in the white bar and pressing the green button Save Code.\nYou (and your students) can also share programs. These programs will be posted on our explore page, for everybody to see and use.\nIf you want to unshare your program, go to 'My programs' and click 'Unshare'.\n"
 -   subsections:
     -   text: "Hedy contains a lot of different levels that each teach a different new skill. We recommend to teach one level per lesson.\nThis gives your students the time to fully grasp a new command or concept and practice with it, before moving on to the next level.\nWe use this structure in our lessons:\n"
         title: ' '
@@ -223,12 +227,12 @@ sections:
                 error_text: "In the example below the password is 'password'. This will result in it always being correct.\n"
                 error_code: "password is ask 'What is the password?'\nif password is password print 'Access granted'\nelse print 'Acces denied!'\n"
                 solution_text: "Pick a different name for your variable.\n"
-                solution_code: "secret_password is ask 'What is the password'\nif secret_password is password print 'Access granted!'\nelse print 'Access denied!'"
+                solution_code: "secret_password is ask 'Jaké je heslo?'\nif secret_password is password print 'Přístup povolen!'\nelse print 'Přístup odepřen!'\n"
         level: '5'
     title: Frequently made mistakes
     key: common_mistakes
     intro: "You can learn from your mistakes, especially in coding!\nMaking mistakes is unavoidable, and a great opportunity to learn, but for teachers it can be a challenge to find the correct fix for a mistake!\nEspecially as the codes get longer and longer as the levels progress. That's why we've made a list with frequently made mistakes in each level, and their solutions.\n"
-title: Hedy documentation
+title: Dokumentace Hedy
 learn-more-sections:
 -   title: "Líbí se ti Hedy?"
     text: |
@@ -247,23 +251,8 @@ learn-more-sections:
     text: |
         Chceš vědět ještě víc? Přečti si [naši studii](https://www.felienne.com/wp-content/uploads/2020/07/Hedy_paper_website_draft.pdf) o návrhu Hedy.
 -   title: "Hedy in the news"
-    text: |-
-        Některé weby a noviny vydaly články o Hedy od jejího vzniku na začátku roku 2020. Tady ukládáme jejich seznam:
-        * [Vives, CodeWeek Special October 2021](images/Vives-174-Codeweek.pdf)
-        * [CodeWeek.eu - Haunted House Challenge,(Anglais) September 2021](https://codeweek.eu/2021/challenges/haunted-house)
-        * [Opensource.com, April 2021](https://opensource.com/article/21/4/hedy-teach-code)
-        * [IO Magazine, April 2021](https://ict-research.nl/wordpress/wp-content/uploads/2021/04/IO-magazine-NR1-2021_web.pdf)
-        * [Ingeniería De Software (Spanish), February 2021](https://ingenieriadesoftware.es/hedy-mejor-lenguaje-ensenar-programacion-ninos/)
-        * [Hello World Magazine, February 2021](images/Hello_World_15_Hedy.pdf)
-        * [Discoro, January 2021](https://discoro.wordpress.com/2021/01/09/hedy-gradually-learning-a-programming-language/)
-        * [Felienne wins the Dutch award for ICT research for Hedy, January 2021](https://www.nwo.nl/en/news/felienne-hermans-receives-dutch-prize-ict-research-2021)
-        * [SlashDot, August 2020](https://news.slashdot.org/story/20/08/17/024248/scientist-proposes-a-new-programming-language-for-teaching-coding-and-python)
-        * [GenBeta (Spanish), August 2020](https://www.genbeta.com/desarrollo/nuevo-lenguaje-para-ensenar-programacion-a-ninos-como-se-ensena-a-leer-escribir-forma-gradual-niveles)
-        * [Developpez (French), August 2020](https://programmation.developpez.com/actu/308095/Une-scientifique-propose-un-nouveau-langage-de-programmation-pour-enseigner-aux-enfants-le-codage-informatique-au-travers-d-une-approche-graduelle-implementee-en-Python-sur-13-paliers/)
-        * [Vives (Dutch), October 2020](images/artikel_vives.pdf) "Met Hedy stap voor stap leren programmeren"
-        * [Leiden University, April 2020](https://www.universiteitleiden.nl/en/news/2020/03/looking-to-distract-the-kids-while-you-work-from-home-get-them-programming)
-        * [Mare (Dutch), April 2020](https://www.mareonline.nl/cultuur/computercode-voor-de-kids/)
-        * [AG Connect (Dutch), April 2020](https://www.agconnect.nl/artikel/stapsgewijs-python-leren-programmeren-met-nieuwe-taal-hedy)
+    text: |
+        Chcete se dozvědět ještě víc? Přečtěte si [výzkumný dokument](https://www.felienne.com/wp-content/uploads/2020/07/Hedy_paper_website_draft.pdf) o návrhu jazyka Hedy.
 -   title: Hedy in the news
     text: "Some websites and newspapers have written about Hedy since our release in early 2020. We keep a list here:\n* [Vives, CodeWeek Special October 2021](images/Vives-174-Codeweek.pdf)\n* [CodeWeek.eu - Haunted House Challenge, September 2021](https://codeweek.eu/2021/challenges/haunted-house)\n* [Opensource.com, April 2021](https://opensource.com/article/21/4/hedy-teach-code)\n* [IO Magazine, April 2021](https://ict-research.nl/wordpress/wp-content/uploads/2021/04/IO-magazine-NR1-2021_web.pdf)\n* [Ingeniería De Software (Spanish), February 2021](https://ingenieriadesoftware.es/hedy-mejor-lenguaje-ensenar-programacion-ninos/)\n* [Hello World Magazine, February 2021](images/Hello_World_15_Hedy.pdf)\n* [Discoro, January 2021](https://discoro.wordpress.com/2021/01/09/hedy-gradually-learning-a-programming-language/)\n* [Felienne wins the Dutch award for ICT research for Hedy, January 2021](https://www.nwo.nl/en/news/felienne-hermans-receives-dutch-prize-ict-research-2021)\n* [SlashDot, August 2020](https://news.slashdot.org/story/20/08/17/024248/scientist-proposes-a-new-programming-language-for-teaching-coding-and-python)\n* [GenBeta (Spanish), August 2020](https://www.genbeta.com/desarrollo/nuevo-lenguaje-para-ensenar-programacion-a-ninos-como-se-ensena-a-leer-escribir-forma-gradual-niveles)\n* [Developpez (French), August 2020](https://programmation.developpez.com/actu/308095/Une-scientifique-propose-un-nouveau-langage-de-programmation-pour-enseigner-aux-enfants-le-codage-informatique-au-travers-d-une-approche-graduelle-implementee-en-Python-sur-13-paliers/)\n* [Vives (Dutch), October 2020](images/artikel_vives.pdf) \"Met Hedy stap voor stap leren programmeren\"\n* [Leiden University, April 2020](https://www.universiteitleiden.nl/en/news/2020/03/looking-to-distract-the-kids-while-you-work-from-home-get-them-programming)\n* [Mare (Dutch), April 2020](https://www.mareonline.nl/cultuur/computercode-voor-de-kids/)\n* [AG Connect (Dutch), April 2020](https://www.agconnect.nl/artikel/stapsgewijs-python-leren-programmeren-met-nieuwe-taal-hedy)\n"
 start-sections:

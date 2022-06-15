@@ -141,7 +141,10 @@ class TestsLevel5(HedyTester):
         if naam == 'James Bond':
           print(f'shaken')""")
 
-        self.single_level_tester(code=code, expected=expected)
+        self.single_level_tester(
+            code=code,
+            expected_commands=['is', 'if', 'print'],
+            expected=expected)
 
     @parameterized.expand(HedyTester.quotes)
     def test_if_equality_quoted_rhs_with_spaces(self, q):
@@ -156,6 +159,23 @@ class TestsLevel5(HedyTester):
 
         self.single_level_tester(code=code, expected=expected)
 
+    def test_ask_if(self):
+        code = textwrap.dedent(f"""\
+        name is ask 'what is your name?'
+        if name is Hedy print 'nice' else print 'boo!'""")
+
+        expected = textwrap.dedent(f"""\
+        name = input(f'what is your name?')
+        if name == 'Hedy':
+          print(f'nice')
+        else:
+          print(f'boo!')""")
+
+        self.single_level_tester(
+            code=code,
+            expected_commands=['ask', 'if', 'else', 'print', 'print'],
+            expected=expected)
+
     def test_if_equality_single_quoted_rhs_with_inner_double_quote(self):
         code = textwrap.dedent(f"""\
         answer is no
@@ -166,7 +186,10 @@ class TestsLevel5(HedyTester):
         if answer == 'He said "no"':
           print(f'no')""")
 
-        self.single_level_tester(code=code, expected=expected)
+        self.single_level_tester(
+            code=code,
+            expected_commands=['is', 'if', 'print'],
+            expected=expected)
 
     def test_if_equality_double_quoted_rhs_with_inner_single_quote(self):
         code = textwrap.dedent(f"""\

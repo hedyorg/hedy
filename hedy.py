@@ -353,11 +353,17 @@ class ExtractAST(Transformer):
         return Tree('punctuation', [''.join([str(c) for c in args])], meta)
 
     def list_access(self, meta, args):
+        # FH, may 2022 I don't fully understand why we remove INT here and just plemp
+        # the number in the tree. should be improved but that requires rewriting the further processing code too (TODO)
         if type(args[1]) == Tree:
             if "random" in args[1].data:
                 return Tree('list_access', [args[0], 'random'], meta)
-            else:
+            elif args[1].data == "var_access":
                 return Tree('list_access', [args[0], args[1].children[0]], meta)
+            else:
+                # convert to latin int
+                latin_int_index = str(int(args[1].children[0]))
+                return Tree('list_access', [args[0], latin_int_index], meta)
         else:
             return Tree('list_access', [args[0], args[1]], meta)
 
@@ -855,7 +861,7 @@ class AllCommands(Transformer):
             return 'input'
         if keyword == 'print_empty_brackets':
             return 'print'
-        return keyword
+        return str(keyword)
 
     def __default__(self, args, children, meta):
         # if we are matching a rule that is a command
@@ -864,6 +870,8 @@ class AllCommands(Transformer):
         operators = ['addition', 'subtraction', 'multiplication', 'division'] # for the achievements we want to be able to also detct which operators were used by a kid
 
         if production_rule_name in commands_per_level[self.level] or production_rule_name in operators:
+            if production_rule_name == 'else': # use of else also has an if
+                return ['if', 'else'] + leaves
             return [production_rule_name] + leaves
         else:
             return leaves # 'pop up' the children
@@ -1038,8 +1046,9 @@ def hedy_transpiler(level):
     return decorator
 
 class ConvertToPython(Transformer):
-    def __init__(self, punctuation_symbols, lookup):
+    def __init__(self, lookup, numerals_language="Latin"):
         self.lookup = lookup
+        self.numerals_language = numerals_language
 
     def is_variable(self, name):
         all_names = [a.name for a in self.lookup]
@@ -1093,7 +1102,12 @@ class ConvertToPython(Transformer):
         # this function checks whether arguments are valid
         # we can proceed if all arguments are either quoted OR all variables
 
-        args_to_process = [a for a in args if not isinstance(a, Tree)]#we do not check trees (calcs) they are always ok
+        def is_var_candidate(arg) -> bool:
+            return not isinstance(arg, Tree) and \
+                    not ConvertToPython.is_int(arg) and \
+                    not ConvertToPython.is_float(arg)
+
+        args_to_process = [a for a in args if is_var_candidate(a)]#we do not check trees (calcs) they are always ok
 
         unquoted_args = [a for a in args_to_process if not ConvertToPython.is_quoted(a)]
         unquoted_in_lookup = [self.is_variable(a) for a in unquoted_args]
@@ -1143,8 +1157,9 @@ class ConvertToPython(Transformer):
 @hedy_transpiler(level=1)
 class ConvertToPython_1(ConvertToPython):
 
-    def __init__(self, punctuation_symbols, lookup):
+    def __init__(self, punctuation_symbols, lookup, numerals_language):
         self.punctuation_symbols = punctuation_symbols
+        self.numerals_language = numerals_language
         self.lookup = lookup
         __class__.level = 1
 
@@ -1157,13 +1172,13 @@ class ConvertToPython_1(ConvertToPython):
         return ''.join([str(c) for c in args])
 
     def integer(self, args):
-        return str(args[0])
+        return str(int(args[0]))
 
     def number(self, args):
-        return str(args[0])
+        return str(int(args[0]))
 
     def NEGATIVE_NUMBER(self, args):
-        return str(args[0])
+        return str(int(args[0]))
 
     def print(self, args):
         # escape needed characters
@@ -1396,7 +1411,11 @@ class ConvertToPython_4(ConvertToPython_3):
 
     def process_variable_for_fstring(self, name):
         if self.is_variable(name):
-            return "{" + hash_var(name) + "}"
+            if self.numerals_language == "Latin":
+                converted = hash_var(name)
+            else:
+                converted = f'convert_numerals("{self.numerals_language}",{hash_var(name)})'
+            return "{" + converted + "}"
         else:
             if self.is_quoted(name):
                 name = name[1:-1]
@@ -1476,7 +1495,11 @@ class ConvertToPython_6(ConvertToPython_5):
         args_new = []
         for a in args:
             if isinstance(a, Tree):
-                args_new.append("{" + a.children[0] + "}")
+                if self.numerals_language == "Latin":
+                    args_new.append("{" + a.children[0] + "}")
+                else:
+                    converted = f'convert_numerals("{self.numerals_language}",{a.children[0]})'
+                    args_new.append("{" + converted + "}")
             else:
                 args_new.append(self.process_variable_for_fstring(a))
 
@@ -1506,7 +1529,10 @@ class ConvertToPython_6(ConvertToPython_5):
     def process_token_or_tree(self, argument):
         if type(argument) is Tree:
             return f'{str(argument.children[0])}'
-        return f"int({argument})"
+        if argument.isnumeric():
+            latin_numeral = int(argument)
+            return f'int({latin_numeral})'
+        return f'int({argument})'
 
     def process_calculation(self, args, operator):
         # arguments of a sum are either a token or a
@@ -1551,19 +1577,22 @@ class ConvertToPython_7(ConvertToPython_6):
 @hedy_transpiler(level=8)
 @hedy_transpiler(level=9)
 class ConvertToPython_8_9(ConvertToPython_7):
-    def __init__(self, punctuation_symbols, lookup):
-        self.punctuation_symbols = punctuation_symbols
-        self.lookup = lookup
 
     def command(self, args):
         return "".join(args)
 
     def repeat(self, args):
+        # todo fh, may 2022, could be merged with 7 if we make
+        # indent a boolean parameter?
+
+        var_name = self.get_fresh_var('i')
+        times = self.process_variable(args[0])
+
         all_lines = [ConvertToPython.indent(x) for x in args[1:]]
         body = "\n".join(all_lines)
         body = sleep_after(body)
 
-        return "for i in range(int(" + str(args[0]) + ")):\n" + body
+        return f"for {var_name} in range(int({times})):\n{body}"
 
     def ifs(self, args):
         args = [a for a in args if a != ""] # filter out in|dedent tokens
@@ -1590,12 +1619,13 @@ class ConvertToPython_8_9(ConvertToPython_7):
 class ConvertToPython_10(ConvertToPython_8_9):
     def for_list(self, args):
       args = [a for a in args if a != ""]  # filter out in|dedent tokens
+      times = self.process_variable(args[0])
 
       body = "\n".join([ConvertToPython.indent(x) for x in args[2:]])
 
       body = sleep_after(body, True)
 
-      return f"for {args[0]} in {args[1]}:\n{body}"
+      return f"for {times} in {args[1]}:\n{body}"
 
 @hedy_transpiler(level=11)
 class ConvertToPython_11(ConvertToPython_10):
@@ -1605,8 +1635,10 @@ class ConvertToPython_11(ConvertToPython_10):
         body = "\n".join([ConvertToPython.indent(x) for x in args[3:]])
         body = sleep_after(body)
         stepvar_name = self.get_fresh_var('step')
-        return f"""{stepvar_name} = 1 if int({args[1]}) < int({args[2]}) else -1
-for {iterator} in range(int({args[1]}), int({args[2]}) + {stepvar_name}, {stepvar_name}):
+        begin = self.process_token_or_tree(args[1])
+        end = self.process_token_or_tree(args[2])
+        return f"""{stepvar_name} = 1 if {begin} < {end} else -1
+for {iterator} in range({begin}, {end} + {stepvar_name}, {stepvar_name}):
 {body}"""
 
 
@@ -1615,10 +1647,23 @@ for {iterator} in range(int({args[1]}), int({args[2]}) + {stepvar_name}, {stepva
 @hedy_transpiler(level=12)
 class ConvertToPython_12(ConvertToPython_11):
     def number(self, args):
-        return ''.join(args)
+        # try all ints? return ints
+        try:
+            all_int = [str(int(x)) == x for x in args]
+            if all(all_int):
+                return ''.join(args)
+            else:
+                # int succeeds but does nto return the same? these are non-latin numbers
+                # and need to be casted
+                return ''.join([str(int(x)) for x in args])
+        except Exception as E:
+            # if not? make into all floats
+            numbers = [str(float(x)) for x in args]
+            return ''.join(numbers)
 
     def NEGATIVE_NUMBER(self, args):
-        return ''.join(args)
+        numbers = [str(float(x)) for x in args]
+        return ''.join(numbers)
 
     def text_in_quotes(self, args):
         # We need to re-add the quotes, so that the Python code becomes name = 'Jan' or "Jan's"
@@ -1686,6 +1731,7 @@ class ConvertToPython_12(ConvertToPython_11):
 
     def var(self, args):
         name = args[0]
+        self.check_var_usage(args)
         self.check_var_usage(args)
         return hash_var(name)
 
@@ -1781,7 +1827,7 @@ class ConvertToPython_18(ConvertToPython_17):
 def merge_grammars(grammar_text_1, grammar_text_2, level):
     # this function takes two grammar files and merges them into one
     # rules that are redefined in the second file are overridden
-    # rule that are new in the second file are added (remaining_rules_grammar_2)
+    # rules that are new in the second file are added (remaining_rules_grammar_2)
 
     merged_grammar = []
 
@@ -1806,9 +1852,9 @@ def merge_grammars(grammar_text_1, grammar_text_2, level):
                     warn_message = f"The rule {name_1} is duplicated on level {level}. Please check!"
                     warnings.warn(warn_message)
                 # Check if the rule is adding or substracting new rules                
-                has_add_op  = definition_2.startswith('+=') 
-                has_sub_op = has_add_op and '-='  in definition_2
-                has_last_op = has_add_op and '>'  in definition_2
+                has_add_op = definition_2.startswith('+=')
+                has_sub_op = has_add_op and '-=' in definition_2
+                has_last_op = has_add_op and '>' in definition_2
                 if has_sub_op:
                     # Get the rules we need to substract
                     part_list = definition_2.split('-=')
@@ -1860,11 +1906,13 @@ def get_remaining_rules(orig_def, sub_def):
     result_cmd_list   = ' | '.join(result_cmd_list) # turn the result list into a string
     return result_cmd_list
 
+
 def create_grammar(level, lang="en"):
     # start with creating the grammar for level 1
     result = get_full_grammar_for_level(1)
-    keys = get_keywords_for_language(lang)
-    result = merge_grammars(result, keys, 1)
+    keywords = get_keywords_for_language(lang)
+
+    result = merge_grammars(result, keywords, 1)
     # then keep merging new grammars in
     for i in range(2, level+1):
         grammar_text_i = get_additional_rules_for_level(i)
@@ -1902,6 +1950,8 @@ def get_full_grammar_for_level(level):
         grammar_text = file.read()
     return grammar_text
 
+# TODO FH, May 2022. I feel there are other places in the code where we also do this
+# opportunity to combine?
 def get_keywords_for_language(language):
     script_dir = path.abspath(path.dirname(__file__))
     try:
@@ -1909,12 +1959,12 @@ def get_keywords_for_language(language):
             raise FileNotFoundError("Local keywords are not enabled")
         filename = "keywords-" + str(language) + ".lark"
         with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
-            grammar_text = file.read()
+            keywords = file.read()
     except FileNotFoundError:
         filename = "keywords-en.lark"
         with open(path.join(script_dir, "grammars", filename), "r", encoding="utf-8") as file:
-            grammar_text = file.read()
-    return grammar_text
+            keywords = file.read()
+    return keywords
 
 PARSER_CACHE = {}
 
@@ -2244,9 +2294,17 @@ def transpile_inner(input_string, level, lang="en"):
 
         lookup_table = create_lookup_table(abstract_syntax_tree, level, lang, input_string)
 
+        # FH, may 2022. for now, we just out arabic numerals when the language is ar
+        # this can be changed into a profile setting or could be detected
+        # in usage of programs
+
+        if lang == "ar":
+            numerals_language = "Arabic"
+        else:
+            numerals_language = "Latin"
         # grab the right transpiler from the lookup
-        transpiler = TRANSPILER_LOOKUP[level]
-        python = transpiler(punctuation_symbols, lookup_table).transform(abstract_syntax_tree)
+        convertToPython = TRANSPILER_LOOKUP[level]
+        python = convertToPython(punctuation_symbols, lookup_table, numerals_language).transform(abstract_syntax_tree)
 
 
         has_turtle = UsesTurtle().transform(abstract_syntax_tree)

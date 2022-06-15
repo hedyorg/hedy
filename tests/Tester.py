@@ -1,5 +1,4 @@
 import textwrap
-import app
 import hedy, hedy_translation
 import re
 import sys
@@ -7,6 +6,8 @@ import io, os
 from contextlib import contextmanager
 import inspect
 import unittest
+import utils
+
 
 class Snippet:
   def __init__(self, filename, level, field_name, code, adventure_name=None):
@@ -43,9 +44,9 @@ class HedyTester(unittest.TestCase):
   @staticmethod
   def run_code(parse_result):
     if parse_result.has_turtle:
-      code = app.TURTLE_PREFIX_CODE + parse_result.code
+      code = utils.TURTLE_PREFIX_CODE + parse_result.code
     else:
-      code = app.NORMAL_PREFIX_CODE + parse_result.code
+      code = utils.NORMAL_PREFIX_CODE + parse_result.code
 # remove sleep comments to make program execution less slow
     code = re.sub(r'time\.sleep\([^\n]*\)', 'pass', code)
 

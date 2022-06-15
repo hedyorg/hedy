@@ -7,12 +7,79 @@ import { auth } from './auth';
 export let theGlobalEditor: AceAjax.Editor;
 export let theModalEditor: AceAjax.Editor;
 
+const turtle_prefix =
+`# coding=utf8
+import random, time, turtle
+t = turtle.Turtle()
+t.hideturtle()
+t.penup()
+t.left(90)
+t.pendown()
+t.speed(3)
+t.showturtle()
+`;
+
+const normal_prefix =
+`# coding=utf8
+import random, time
+global int_saver
+global convert_numerals # needed for recursion to work
+int_saver = int
+def int(s):
+  if isinstance(s, str):
+    numerals_dict = {'0': '0', '1': '1', '2': '2', '3': '3', '4': '4', '5': '5', '6': '6', '7': '7', '8': '8', '9': '9', '𑁦': '0', '𑁧': '1', '𑁨': '2', '𑁩': '3', '𑁪': '4', '𑁫': '5', '𑁬': '6', '𑁭': '7', '𑁮': '8', '𑁯': '9', '०': '0', '१': '1', '२': '2', '३': '3', '४': '4', '५': '5', '६': '6', '७': '7', '८': '8', '९': '9', '૦': '0', '૧': '1', '૨': '2', '૩': '3', '૪': '4', '૫': '5', '૬': '6', '૭': '7', '૮': '8', '૯': '9', '੦': '0', '੧': '1', '੨': '2', '੩': '3', '੪': '4', '੫': '5', '੬': '6', '੭': '7', '੮': '8', '੯': '9', '০': '0', '১': '1', '২': '2', '৩': '3', '৪': '4', '৫': '5', '৬': '6', '৭': '7', '৮': '8', '৯': '9', '೦': '0', '೧': '1', '೨': '2', '೩': '3', '೪': '4', '೫': '5', '೬': '6', '೭': '7', '೮': '8', '೯': '9', '୦': '0', '୧': '1', '୨': '2', '୩': '3', '୪': '4', '୫': '5', '୬': '6', '୭': '7', '୮': '8', '୯': '9', '൦': '0', '൧': '1', '൨': '2', '൩': '3', '൪': '4', '൫': '5', '൬': '6', '൭': '7', '൮': '8', '൯': '9', '௦': '0', '௧': '1', '௨': '2', '௩': '3', '௪': '4', '௫': '5', '௬': '6', '௭': '7', '௮': '8', '௯': '9', '౦': '0', '౧': '1', '౨': '2', '౩': '3', '౪': '4', '౫': '5', '౬': '6', '౭': '7', '౮': '8', '౯': '9', '၀': '0', '၁': '1', '၂': '2', '၃': '3', '၄': '4', '၅': '5', '၆': '6', '၇': '7', '၈': '8', '၉': '9', '༠': '0', '༡': '1', '༢': '2', '༣': '3', '༤': '4', '༥': '5', '༦': '6', '༧': '7', '༨': '8', '༩': '9', '᠐': '0', '᠑': '1', '᠒': '2', '᠓': '3', '᠔': '4', '᠕': '5', '᠖': '6', '᠗': '7', '᠘': '8', '᠙': '9', '០': '0', '១': '1', '២': '2', '៣': '3', '៤': '4', '៥': '5', '៦': '6', '៧': '7', '៨': '8', '៩': '9', '๐': '0', '๑': '1', '๒': '2', '๓': '3', '๔': '4', '๕': '5', '๖': '6', '๗': '7', '๘': '8', '๙': '9', '໐': '0', '໑': '1', '໒': '2', '໓': '3', '໔': '4', '໕': '5', '໖': '6', '໗': '7', '໘': '8', '໙': '9', '꧐': '0', '꧑': '1', '꧒': '2', '꧓': '3', '꧔': '4', '꧕': '5', '꧖': '6', '꧗': '7', '꧘': '8', '꧙': '9', '٠': '0', '١': '1', '٢': '2', '٣': '3', '٤': '4', '٥': '5', '٦': '6', '٧': '7', '٨': '8', '٩': '9', '۰': '0', '۱': '1', '۲': '2', '۳': '3', '۴': '4', '۵': '5', '۶': '6', '۷': '7', '۸': '8', '۹': '9', '〇': '0', '一': '1', '二': '2', '三': '3', '四': '4', '五': '5', '六': '6', '七': '7', '八': '8', '九': '9', '零': '0'}
+    latin_numerals = ''.join([numerals_dict.get(letter, letter) for letter in s])
+    return int_saver(latin_numerals)
+  return(int_saver(s))
+
+def convert_numerals(alphabet, number):
+  numerals_dict_return = {
+    'Latin': ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
+    'Brahmi': ['𑁦', '𑁧', '𑁨', '𑁩', '𑁪', '𑁫', '𑁬', '𑁭', '𑁮', '𑁯'],
+    'Devanagari': ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९'],
+    'Gujarati': ['૦', '૧', '૨', '૩', '૪', '૫', '૬', '૭', '૮', '૯'],
+    'Gurmukhi': ['੦', '੧', '੨', '੩', '੪', '੫', '੬', '੭', '੮', '੯'],
+    'Bengali': ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'],
+    'Kannada': ['೦', '೧', '೨', '೩', '೪', '೫', '೬', '೭', '೮', '೯'],
+    'Odia': ['୦', '୧', '୨', '୩', '୪', '୫', '୬', '୭', '୮', '୯'],
+    'Malayalam': ['൦', '൧', '൨', '൩', '൪', '൫', '൬', '൭', '൮', '൯'],
+    'Tamil': ['௦', '௧', '௨', '௩', '௪', '௫', '௬', '௭', '௮', '௯'],
+    'Telugu':['౦', '౧', '౨', '౩', '౪', '౫', '౬', '౭', '౮', '౯'],
+    'Burmese':['၀', '၁', '၂', '၃', '၄', '၅', '၆', '၇', '၈', '၉'],
+    'Tibetan':['༠', '༡', '༢', '༣', '༤', '༥', '༦', '༧', '༨', '༩'],
+    'Mongolian':['᠐', '᠑', '᠒', '᠓', '᠔', '᠕', '᠖', '᠗', '᠘', '᠙'],
+    'Khmer':['០', '១', '២', '៣', '៤', '៥', '៦', '៧', '៨', '៩'],
+    'Thai':['๐', '๑', '๒', '๓', '๔', '๕', '๖', '๗', '๘', '๙'],
+    'Lao':['໐', '໑', '໒', '໓', '໔', '໕', '໖', '໗', '໘', '໙'],
+    'Javanese':['꧐', '꧑', '꧒', '꧓', '꧔', '꧕', '꧖', '꧗', '꧘', '꧙'],
+    'Arabic':['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'],
+    'Persian':['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'],
+    'Urdu': ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹']}
+
+  numerals_list = numerals_dict_return[alphabet]
+  number=str(number)
+
+  if number.isnumeric():
+    number = int(number)
+    numerals_list = numerals_dict_return[alphabet]
+    if number <= 9:
+      return numerals_list[number]
+    else:
+      last_digit = number // 10
+      rest = number % 10
+      return numerals_list[last_digit] + convert_numerals(alphabet, rest)
+  else:
+    return number
+`;
+
 (function() {
   // A bunch of code expects a global "State" object. Set it here if not
   // set yet.
   if (!window.State) {
     window.State = {};
   }
+
+
 
   // Set const value to determine the current page direction -> useful for ace editor settings
   const dir = $("#main_container").attr("dir");
@@ -22,11 +89,8 @@ export let theModalEditor: AceAjax.Editor;
 
   // Any code blocks we find inside 'turn-pre-into-ace' get turned into
   // read-only editors (for syntax highlighting)
-  let counter = 0
   for (const preview of $('.turn-pre-into-ace pre').get()) {
-    counter += 1;
     $(preview).addClass('text-lg rounded');
-    $(preview).attr('id', "code_block_" + counter);
     // We set the language of the editor to the current keyword_language -> needed when copying to main editor
     $(preview).attr('lang', <string>window.State.keyword_language);
     $(preview).addClass('overflow-x-hidden');
@@ -38,6 +102,13 @@ export let theModalEditor: AceAjax.Editor;
       exampleEditor.setOptions({ minLines: 10 });
     } else if ($(preview).hasClass('cheatsheet')) {
       exampleEditor.setOptions({ minLines: 1 });
+    } else if ($(preview).hasClass('parsons')) {
+      exampleEditor.setOptions({
+        minLines: 1,
+        showGutter: false,
+        showPrintMargin: false,
+        highlightActiveLine: false
+      });
     } else {
       exampleEditor.setOptions({ minLines: 2 });
     }
@@ -165,6 +236,8 @@ export let theModalEditor: AceAjax.Editor;
     const editor = ace.edit(element);
     editor.setTheme("ace/theme/monokai");
     if (isReadOnly) {
+      // Remove the cursor
+      editor.renderer.$cursorLayer.element.style.display = "none";
       editor.setOptions({
         readOnly: true,
         showGutter: false,
@@ -267,7 +340,18 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
   try {
     level = level.toString();
     var editor = theGlobalEditor;
-    var code = get_trimmed_code();
+    var code = "";
+    if ($('#parsons_container').is(":visible")) {
+      code = get_parsons_code();
+      // We return no code if all lines are empty or there is a mistake -> clear errors and do nothing
+      if (!code) {
+        clearErrors(editor);
+        stopit();
+        return;
+      }
+    } else {
+      code = get_trimmed_code();
+    }
 
     clearErrors(editor);
     removeBulb();
@@ -279,6 +363,7 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
         level: level,
         code: code,
         lang: lang,
+        tutorial: $('#code_output').hasClass("z-40"), // if so -> tutorial mode
         read_aloud : !!$('#speak_dropdown').val(),
         adventure_name: window.State.adventure_name
       }),
@@ -286,7 +371,7 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
       dataType: 'json'
     }).done(function(response: any) {
       console.log('Response', response);
-      if (response.Warning) {
+      if (response.Warning && $('#editor').is(":visible")) {
         storeFixedCode(response, level);
         error.showWarning(ErrorMessages['Transpile_warning'], response.Warning);
       }
@@ -385,6 +470,7 @@ function showAchievement(achievement: any[]){
   return new Promise<void>((resolve)=>{
         $('#achievement_reached_title').text('"' + achievement[0] + '"');
         $('#achievement_reached_text').text(achievement[1]);
+        $('#achievement_reached_statics').text(achievement[2]);
         $('#achievement_pop-up').fadeIn(1000, function () {
           setTimeout(function(){
             $('#achievement_pop-up').fadeOut(1000);
@@ -711,6 +797,36 @@ export function submit_program (id: string, index: number) {
   });
 }
 
+export function set_explore_favourite(id: string, favourite: number) {
+  let prompt = "Are you sure you want to remove this program as a \"Hedy\'s choice\" program?";
+  if (favourite) {
+    prompt = "Are you sure you want to set this program as a \"Hedy\'s choice\" program?";
+  }
+  modal.confirm (prompt, function () {
+    $.ajax({
+      type: 'POST',
+      url: '/programs/set_hedy_choice',
+      data: JSON.stringify({
+        id: id,
+        favourite: favourite
+    }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function(response) {
+        modal.alert(response.message, 3000, false);
+        if (favourite == 1) {
+          $('#' + id).removeClass('text-white');
+          $('#' + id).addClass('text-yellow-500');
+        } else {
+          $('#' + id).removeClass('text-yellow-500');
+          $('#' + id).addClass('text-white');
+        }
+    }).fail(function(err) {
+        return modal.alert(err.responseText, 3000, true);
+    });
+  });
+}
+
 export function copy_to_clipboard (string: string, prompt: string) {
   // https://hackernoon.com/copying-text-to-clipboard-with-javascript-df4d4988697f
   var el = document.createElement ('textarea');
@@ -802,9 +918,11 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     // There might still be a visible turtle panel. If the new program does not use the Turtle,
     // remove it (by clearing the '#turtlecanvas' div)
     $('#turtlecanvas').empty();
+    code = normal_prefix + code
   } else {
     // Otherwise make sure that it is shown as it might be hidden from a previous code execution.
     $('#turtlecanvas').show();
+    code = turtle_prefix + code
   }
 
   Sk.configure({
@@ -1045,6 +1163,30 @@ export function showVariableView() {
   }
 }
 
+//Feature flag for variable and values view
+var variable_view = false;
+
+if(window.State.level != null){
+  let level = Number(window.State.level);
+  variable_view = level >= 2;
+  hide_if_no_variables();
+}
+
+function hide_if_no_variables(){
+  if($('#variables #variable-list li').length == 0){
+    $('#variable_button').hide();
+  }
+  else{
+    $('#variable_button').show();
+  }
+}
+
+//Hides the HTML DIV for variables if feature flag is false
+if (!variable_view) {
+  $('#variables').hide();
+  $('#variable_button').hide();
+}
+
 //Feature flag for step by step debugger. Becomes true automatically for level 7 and below.
 var step_debugger = false;
 if(window.State.level != null){
@@ -1058,13 +1200,16 @@ if (!step_debugger) {
 }
 
 export function show_variables() {
-  const variableList = $('#variable-list');
-  if (variableList.hasClass('hidden')) {
-    variableList.removeClass('hidden');
+  if (variable_view === true) {
+    const variableList = $('#variable-list');
+    if (variableList.hasClass('hidden')) {
+      variableList.removeClass('hidden');
+    }
   }
 }
 
-export function load_variables(variables: any){
+export function load_variables(variables: any) {
+  if (variable_view === true) {
     //@ts-ignore
     variables = clean_variables(variables);
     const variableList = $('#variable-list');
@@ -1072,6 +1217,8 @@ export function load_variables(variables: any){
     for (const i in variables) {
       variableList.append(`<li style=color:${variables[i][2]}>${variables[i][0]}: ${variables[i][1]}</li>`);
     }
+    hide_if_no_variables();
+  }
 }
 
 // Color-coding string, numbers, booleans and lists
@@ -1098,16 +1245,69 @@ function special_style_for_variable(variable: any){
 //hiding certain variables from the list unwanted for users
 // @ts-ignore
 function clean_variables(variables: any) {
-  const new_variables = [];
-  const unwanted_variables = ["random", "time", "int_saver","int_$rw$", "turtle", "t"];
-  for (const variable in variables) {
-    if (!variable.includes('__') && !unwanted_variables.includes(variable)) {
-    let extraStyle = special_style_for_variable(variables[variable]);
-    let newTuple = [variable, variables[variable].v, extraStyle];
-    new_variables.push(newTuple);
+  if (variable_view === true) {
+    const new_variables = [];
+    const unwanted_variables = ["random", "time", "int_saver", "int_$rw$", "turtle", "t"];
+    for (const variable in variables) {
+      if (!variable.includes('__') && !unwanted_variables.includes(variable)) {
+        let extraStyle = special_style_for_variable(variables[variable]);
+        let newTuple = [variable, variables[variable].v, extraStyle];
+        new_variables.push(newTuple);
+      }
     }
+    return new_variables;
   }
-  return new_variables;
+}
+
+function store_parsons_attempt(order: Array<string>, correct: boolean) {
+  $.ajax({
+    type: 'POST',
+    url: '/store_parsons_order',
+    data: JSON.stringify({
+      level: window.State.level,
+      order: order,
+      correct: correct
+    }),
+    contentType: 'application/json',
+    dataType: 'json'
+  }).done(function() {
+      // Let's do nothing: saving is not a user relevant action -> no feedback required
+    }).fail(function(xhr) {
+      console.error(xhr);
+    });
+}
+
+function get_parsons_code() {
+    let code = "";
+    let count = 65;
+    let order = new Array();
+    let mistake = false;
+
+    $('.compiler-parsons-box').each(function() {
+      // When the value is 0 there is no code box in the expected spot
+      let text = $(this).attr('code') || "";
+      if (text.length > 1) {
+        code += text;
+      }
+      $(this).parents().removeClass('border-black');
+      let index = $(this).attr('index') || "-";
+      if (index.charCodeAt(0) == count) {
+        $(this).parents().addClass('border-green-500');
+      } else {
+        mistake = true;
+        $(this).parents().addClass('border-red-500');
+      }
+      order.push(index);
+      count += 1;
+    });
+    // Before returning the code we want to a-sync store the attempt in the database
+    // We only have to set the order and level, rest is handled by the back-end
+    store_parsons_attempt(order, !mistake);
+    if (mistake) {
+      return "";
+    }
+
+    return code.replace(/ +$/mg, '');
 }
 
 export function get_trimmed_code() {
@@ -1404,7 +1604,8 @@ export function select_profile_image(image: number) {
 export function filter_programs() {
   const level = $('#explore_page_level').val();
   const adventure = $('#explore_page_adventure').val();
-  window.open('?level=' + level + "&adventure=" + adventure, "_self");
+  const language = $('#explore_page_language').val();
+  window.open('?level=' + level + "&adventure=" + adventure + "&lang=" + language, "_self");
 }
 
 export function filter_user_programs(username: string, own_request?: boolean) {
@@ -1503,8 +1704,9 @@ function adjustLines(disabledRow: []) {
 }
 
 function debugRun() {
-  if (window.State.level != null && window.State.lang != null) {
-    runit(window.State.level, window.State.lang, "", function () {
+  let language = window.State.lang ?? window.State.keyword_language;
+  if (window.State.level != null && language != null) {
+    runit(window.State.level, language, "", function () {
       $('#output').focus();
     });
   }
