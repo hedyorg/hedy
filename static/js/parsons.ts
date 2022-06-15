@@ -24,8 +24,19 @@ export function loadParsonsExercise(level: number, exercise: number) {
 }
 
 function showExercise(response: any) {
-    console.log("We have decided to shuffle items on the front-end...");
-    let code_lines = response.code_lines.sort( () => Math.random() - 0.5);
-    console.log(response);
+    let code_lines = shuffle_code_lines(response.code_lines);
     console.log(code_lines);
+
+}
+
+// https://stackoverflow.com/questions/26503595/javascript-shuffling-object-properties-with-their-values
+function shuffle_code_lines(code_lines: object) {
+    let shuffled = {};
+    let keys = Object.keys(code_lines);
+    keys.sort(function() {return Math.random() - 0.5;});
+    keys.forEach(function(k) {
+        // @ts-ignore
+        shuffled[k] = code_lines[k];
+    });
+    return shuffled;
 }
