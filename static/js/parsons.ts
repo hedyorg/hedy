@@ -16,7 +16,7 @@ export function loadParsonsExercise(level: number, exercise: number) {
         $('#parsons_container').show();
         $('#next_parson_button').attr('current_exercise', exercise);
         resetView();
-        updateHeader();
+        updateHeader(exercise);
         showExercise(response);
         updateNextExerciseButton(level, exercise);
     }).fail(function(err) {
@@ -34,9 +34,12 @@ function resetView() {
     });
 }
 
-function updateHeader() {
-    // Switch header to next exercise
-    // Do / don't mark with green / red when correct or not?
+function updateHeader(exercise: number) {
+    $('.parsons_header_text_container').hide();
+    $('.step').removeClass('current');
+
+    $('#parsons_header_text_' + exercise).show();
+    $('#parsons_header_' + exercise).addClass('current');
 }
 
 function showExercise(response: any) {
