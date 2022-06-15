@@ -70,6 +70,10 @@ function resetWindow() {
       $ ('#level-header input').hide ();
       $ ('#editor-area').hide ();
       $('#developers_toggle_container').hide ();
+      if (tabName == 'parsons') {
+        $('#parsons_container').hide();
+        $('#start_parsons_container').show();
+      }
       return;
     }
 
