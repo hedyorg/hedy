@@ -51,7 +51,7 @@ adventures:
             8:
                 start_code: "{repeat} 5 {times}\n    {print} 'Hallo folkens'\n    {print} 'Dette vil bli skrevet ut 5 ganger'"
                 story_text: "## Innrykk\n`{ask}` {and} `{print}` fungerer fortsatt slik du er vandt til, men `{if}` {and} `{repeat}` har endret seg litt!\nDu kan nå kjøre små blokker med kode sammen, men du må gi koden korrekt *innrykk*.\nDet betyr at du må legge til fire mellomrom på starten av kodelinjen. Du må også ha nytt innrykk når du skal lage en blokk på en linje.\n"
-                example_code: ```\n{repeat} 5 {times}\n    {print} 'Hallo alle sammen'\n    {print} 'Dette blir gjentatt 5 ganger'\n```\n"
+                example_code: "```\n{repeat} 5 {times}\n    {print} 'Hallo alle sammen'\n    {print} 'Dette blir gjentatt 5 ganger'\n```\n"
             9:
                 start_code: "{repeat} 3 {times}\n    matrett = {ask} 'Hva vil du ha?'\n    {if} matrett {is} pizza\n        {print} 'nice!'\n    else\n        {print} 'pizza er bedre'"
                 story_text: "## Alt på en gang nå!\nPå dette nivået kan du bruke både `{if}` med kodeblokker {and} `{repeat}` sammen!\nI eksempelet kan du se en `{if}` kommando inni en `{repeat}` kommando. Det er også mulig å gjøre det motsatte (`{repeat}` inni en `{if}`).\nDu kan også legge en `{if}` inni en annen `{if}` og en `{repeat}` inni en `{repeat}`.\nPrøv å se om du får det til!\n"
