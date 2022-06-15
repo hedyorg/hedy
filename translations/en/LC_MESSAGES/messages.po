@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-06-14 15:41+0200\n"
+"POT-Creation-Date: 2022-06-15 11:11+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -19,28 +19,28 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.10.1\n"
 
-#: app.py:411
+#: app.py:412
 msgid "program_contains_error"
 msgstr "This program contains an error, are you sure you want to share it?"
 
-#: app.py:621
+#: app.py:622
 msgid "title_achievements"
 msgstr "Hedy - My achievements"
 
-#: app.py:638 app.py:742 app.py:1085 website/teacher.py:361
+#: app.py:639 app.py:743 app.py:1085 website/teacher.py:361
 #: website/teacher.py:370
 msgid "not_teacher"
 msgstr "Looks like you are not a teacher!"
 
-#: app.py:641
+#: app.py:642
 msgid "not_enrolled"
 msgstr "Looks like you are not in this class!"
 
-#: app.py:680
+#: app.py:681
 msgid "title_programs"
 msgstr "Hedy - My programs"
 
-#: app.py:690 app.py:700 app.py:704 app.py:719 app.py:1000 app.py:1492
+#: app.py:691 app.py:701 app.py:705 app.py:720 app.py:1000 app.py:1492
 #: website/admin.py:17 website/admin.py:24 website/admin.py:92
 #: website/admin.py:110 website/admin.py:128 website/admin.py:135
 #: website/auth.py:712 website/auth.py:739 website/programs.py:210
@@ -48,19 +48,19 @@ msgstr "Hedy - My programs"
 msgid "unauthorized"
 msgstr "You don't have access rights for this page"
 
-#: app.py:756 app.py:1102
+#: app.py:757 app.py:1102
 msgid "title_for-teacher"
 msgstr "Hedy - For teachers"
 
-#: app.py:773 app.py:775 app.py:918 app.py:940 app.py:942
+#: app.py:774 app.py:776 app.py:918 app.py:940 app.py:942
 msgid "no_such_level"
 msgstr "No such Hedy level!"
 
-#: app.py:783 app.py:790 app.py:872 app.py:878
+#: app.py:784 app.py:791 app.py:872 app.py:878
 msgid "no_such_program"
 msgstr "No such Hedy program!"
 
-#: app.py:813
+#: app.py:814
 msgid "level_not_class"
 msgstr "This level has not been made available in your class yet"
 
@@ -777,8 +777,8 @@ msgstr "Next step >>>"
 #: templates/customize-class.html:28 templates/customize-class.html:64
 #: templates/customize-class.html:71 templates/customize-class.html:95
 #: templates/level-page.html:6 templates/level-page.html:11
-#: templates/quiz.html:8 templates/view-program-page.html:12
-#: templates/view-program-page.html:28
+#: templates/parsons.html:8 templates/quiz.html:8
+#: templates/view-program-page.html:12 templates/view-program-page.html:28
 msgid "level_title"
 msgstr "Level"
 
@@ -1138,49 +1138,49 @@ msgstr ""
 "You're currently in adventure '{adventure}', click on 'Hedy' to view all "
 "adventures."
 
-#: templates/incl-editor-and-output.html:103
+#: templates/incl-editor-and-output.html:95 templates/parsons.html:145
 msgid "variables"
 msgstr "Variables"
 
-#: templates/incl-editor-and-output.html:119
+#: templates/incl-editor-and-output.html:111 templates/parsons.html:160
 msgid "enter_text"
 msgstr "Enter your answer here..."
 
-#: templates/incl-editor-and-output.html:120
+#: templates/incl-editor-and-output.html:112 templates/parsons.html:161
 msgid "enter"
 msgstr "Enter"
 
-#: templates/incl-editor-and-output.html:130
+#: templates/incl-editor-and-output.html:122 templates/parsons.html:130
 msgid "already_program_running"
 msgstr "There is already a program running, finish that one first."
 
-#: templates/incl-editor-and-output.html:130
+#: templates/incl-editor-and-output.html:122 templates/parsons.html:130
 msgid "run_code_button"
 msgstr "Run code"
 
-#: templates/incl-editor-and-output.html:131
+#: templates/incl-editor-and-output.html:123 templates/parsons.html:131
 msgid "stop_code_button"
 msgstr "Stop program"
 
-#: templates/incl-editor-and-output.html:143
+#: templates/incl-editor-and-output.html:135
 msgid "edit_code_button"
 msgstr "Edit code"
 
-#: templates/incl-editor-and-output.html:149
+#: templates/incl-editor-and-output.html:141
 msgid "read_code_label"
 msgstr "Read aloud"
 
-#: templates/incl-editor-and-output.html:159
-#: templates/incl-editor-and-output.html:168
+#: templates/incl-editor-and-output.html:151
+#: templates/incl-editor-and-output.html:160
 msgid "regress_button"
 msgstr "Go back to level {level}"
 
-#: templates/incl-editor-and-output.html:162
-#: templates/incl-editor-and-output.html:171 templates/quiz.html:151
+#: templates/incl-editor-and-output.html:154
+#: templates/incl-editor-and-output.html:163 templates/quiz.html:152
 msgid "advance_button"
 msgstr "Go to level {level}"
 
-#: templates/incl-editor-and-output.html:185
+#: templates/incl-editor-and-output.html:177
 msgid "developers_mode"
 msgstr "Programmer's mode"
 
@@ -1387,9 +1387,27 @@ msgstr "A gradual programming language"
 msgid "try_it"
 msgstr "Try it"
 
-#: templates/parsons.html:4 templates/parsons.html:6
+#: templates/parsons.html:7
+#, fuzzy
+msgid "start_parsons"
+msgstr "Start programming"
+
+#: templates/parsons.html:13
+#, fuzzy
+msgid "go_to_first_exercise"
+msgstr "Go to question 1"
+
+#: templates/parsons.html:22 templates/parsons.html:24
 msgid "exercise"
 msgstr "Exercise"
+
+#: templates/parsons.html:78
+msgid "what_should_my_code_do"
+msgstr "What should my code do?"
+
+#: templates/parsons.html:133
+msgid "next_exercise"
+msgstr "Next exercise"
 
 #: templates/profile.html:4
 msgid "account_overview"
@@ -1603,7 +1621,7 @@ msgstr "Start quiz"
 msgid "go_to_first_question"
 msgstr "Go to question 1"
 
-#: templates/quiz.html:22 templates/quiz.html:24 templates/quiz.html:103
+#: templates/quiz.html:22 templates/quiz.html:24 templates/quiz.html:104
 msgid "question"
 msgstr "Question"
 
@@ -1611,36 +1629,36 @@ msgstr "Question"
 msgid "hint"
 msgstr "Hint?"
 
-#: templates/quiz.html:49 templates/quiz.html:57 templates/quiz.html:67
-#: templates/quiz.html:75 templates/quiz.html:85 templates/quiz.html:93
+#: templates/quiz.html:50 templates/quiz.html:58 templates/quiz.html:68
+#: templates/quiz.html:76 templates/quiz.html:86 templates/quiz.html:94
 msgid "submit_answer"
 msgstr "Answer question"
 
-#: templates/quiz.html:110
+#: templates/quiz.html:111
 msgid "feedback_success"
 msgstr "Good!"
 
-#: templates/quiz.html:115
+#: templates/quiz.html:116
 msgid "feedback_failure"
 msgstr "Wrong!"
 
-#: templates/quiz.html:123
+#: templates/quiz.html:124
 msgid "correct_answer"
 msgstr "The correct answer is"
 
-#: templates/quiz.html:132
+#: templates/quiz.html:133
 msgid "go_to_question"
 msgstr "Go to question"
 
-#: templates/quiz.html:135
+#: templates/quiz.html:136
 msgid "go_to_quiz_result"
 msgstr "Go to quiz result"
 
-#: templates/quiz.html:142
+#: templates/quiz.html:143
 msgid "end_quiz"
 msgstr "Quiz end"
 
-#: templates/quiz.html:143
+#: templates/quiz.html:144
 msgid "score"
 msgstr "Score"
 
@@ -1720,7 +1738,7 @@ msgstr ""
 msgid "by"
 msgstr "by"
 
-#: website/achievements.py:164
+#: website/achievements.py:170
 msgid "percentage_achieved"
 msgstr "Achieved by {percentage}% of the users"
 
@@ -1957,6 +1975,10 @@ msgstr "Please copy and paste this link into a new tab:"
 #: website/auth.py:852
 msgid "link"
 msgstr "Link"
+
+#: website/parsons.py:20
+msgid "exercise_doesnt_exist"
+msgstr ""
 
 #: website/programs.py:41
 msgid "delete_success"

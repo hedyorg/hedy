@@ -42,6 +42,7 @@ function showExercise(response: any) {
         $('#parsons_start_line_container_' + counter).show();
         $('#parsons_goal_line_container_' + counter).show();
     });
+    $('#parsons_explanation_story').text(response.story);
 }
 
 export function loadNextExercise() {

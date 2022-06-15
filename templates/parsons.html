@@ -26,9 +26,9 @@
             {% endfor %}
         </div>
     {% endif %}
-    <div id="parsons_exercise_container">
+    <div id="parsons_exercise_container" class="pt-2">
         <div class="flex flex-row">
-            <div class="w-1/2 p-2 ltr:mr-2 rtl:ml-2">
+            <div class="w-1/2 ltr:mr-2 rtl:ml-2">
                 <p id="parsons_explanation_text"></p>
                 <!-- Let's hard-code 10 possible lines, not really nice: but same approach as quiz. We should improve these two together later on -->
                 <div class="flex flex-col mx-auto items-center" id="parsons_code_lines">
@@ -75,8 +75,8 @@
                 </div>
             </div>
             <div class="w-1/2 ltr:ml-2 rtl:mr-2">
-                <p id="parsons_explanation_example"></p>
-                <p id="parsons_explanation_story"></p>
+                <h2 class="text-center">{{_('what_should_my_code_do')}}</h2>
+                <p id="parsons_explanation_story" class="mx-4 whitespace-pre-wrap"></p>
             </div>
         </div>
         <div class="ltr:clear-right rtl:clear-left"></div>
