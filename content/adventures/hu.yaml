@@ -18,9 +18,9 @@ adventures:
                     Nem tudod mit is csinálj? A következő füleken találsz néhány ötletet.
 
                 start_code: "print Helló világ!"
-                example_code: "## Example code\n```\n{print} Hello!\n{print} Welcome to Hedy!\n```\n"
+                example_code: "```\n{print} Hello!\n{print} Welcome to Hedy!\n```\n"
                 story_text_2: "You can also ask for input and repeat it back with an `{echo}` command.\nTry the code to your left again.\n\nDon't know what to create? In the next tabs you will find ideas for programs to build.\n"
-                example_code_2: "## Example code\n```\n{ask} What is your name?\n{echo} hello\n```\n"
+                example_code_2: "```\n{ask} What is your name?\n{echo} hello\n```\n"
                 story_text_3: "Let's get started! Don't know what to create? In the next tabs you will find ideas for programs to build.\n"
             2:
                 story_text: |
@@ -34,7 +34,7 @@ adventures:
                     A print utasítás úgy működik, mint az 1. szinten, de az echo utasításra már nem lesz
                     szükséged.
                 start_code: "print Helló világ!"
-                example_code: "## Example code\n```\nname {is} Hedy\nage {is} 15\n{print} name is age years old\n```\n"
+                example_code: "```\nname {is} Hedy\nage {is} 15\n{print} name is age years old\n```\n"
                 story_text_2: "`{print}` still works the same, but the `{ask}` command has changed. You need to use a variable in the `{ask}` command as well. It looks like this:\n"
                 example_code_2: "```\nanswer {is} {ask} What is your name?\n{print} Hello answer\n```\n"
                 story_text_3: "Another new command in this level is `{sleep}`, which pauses your program for a second. If you type a number behind the {sleep} command, the program pauses for that amount of seconds.\n"
@@ -181,7 +181,6 @@ adventures:
                     **Decimal numbers**
                     So far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the `.` for decimal numbers.
                 example_code: |
-                    ## Example Hedy code
                     ```
                     {print} 'Two and a half plus two and a half is...'
                     {print} 2.5 + 2.5
@@ -291,7 +290,6 @@ adventures:
                     We arrived at real Python code! That means we need to use parentheses with {print} and {range} from now on.
 
                 example_code: |
-                    ## Example Hedy Code
                     ```
                     {print}('my name is Hedy!')
                     ```
@@ -332,7 +330,6 @@ adventures:
                     Akkor használd az `echo` szót, ha azt szeretnéd, hogy főszereplő neve a mondat végén legyen.
 
                 example_code: |
-                    ## Példa Hedy kódra
                     ```
                     ask A történet főszereplője
                     print A főszereplő most az erdőben fog sétálni
@@ -356,7 +353,6 @@ adventures:
                     Ezt a nevet bárhol elhelyezheted a mondatban.
 
                 example_code: |
-                    ## Példa Hedy kódra
                     ```
                     nev is ask Mi a neve a főszereplőnek?
                     print nev most futni fog az erdőben
@@ -372,7 +368,6 @@ adventures:
                     Az ilyen ismétlést beírhatod a 6. szintbe tartozó történetbe a 'repeat' paranccsal.
                 start_code: repeat 5 times print 'Segítség!'
                 example_code: |-
-                    ## Példa Hedy kód
                     ```
                     print 'A herceg folyamatosan segítséget kért'
                     repeat 5 times print 'Segítség!'
@@ -392,7 +387,6 @@ adventures:
                     szinten. Kombinálhatod ezt egy `if`-fel, és akkor már készítettél is egy egész programot!
                 start_code: print 'Itt lesz hamarosan a történeted!'
                 example_code: |-
-                    ## Példa Hedy kód
                     ```
                     nev is ask 'Ki jár az erdőben?'
                     print nev ' sétál az erdőn'
@@ -410,7 +404,6 @@ adventures:
 
                     Idézőjeleket kell használnod minden kiíratáshoz.
                 example_code: |
-                    ## Példa Hedy kódra
                     ```
                     nev is Jancsi
                     print 'A fő karakter neve ' nev
@@ -496,7 +489,6 @@ adventures:
                     A 6. szinten a "Üveg sör" dalt programoztad. Egy verset alkottál, majd 99 -szer kellett lemásolnod a verssorokat. A 7. szinten 99 alkalommal ismételheted meg a dalt, csak egy egyszerű sor hozzáadásával!
 
                 example_code: |
-                    ## Példa Hedy kódra
                     ```
                     verssor = 99
                     print verssor ' üveg sör a falon'
@@ -520,7 +512,6 @@ adventures:
 
                     A Baby Shark után természetesen más dalokat is programozhat. Sok dal van ismétléssel.
                 example_code: |-
-                    ## Példa Hedy kód
                     ```
                     repeat _ _ print 'Baby Shark tututudutudu'
                     print 'Baby Shark'
@@ -541,7 +532,6 @@ adventures:
 
                     De ahogyan ebben a leckében látni fogod, néha több sort is meg akarsz együtt ismételni. Ezt meg lehet tenni vágással és beillesztéssel, de ez sok munka. A 7. szinten megtanulod, hogyan kell ezt könnyebben megtenni.
                 example_code: |-
-                    ## Példa Hedy kódr
                     ```
                     verssor = 99
                     print verssor ' üveg sör a falon'
@@ -611,7 +601,6 @@ adventures:
                     Az `repeat` segítségével megismételheted a kódrészleteket. Ennek segítségével
                     kiszámíthatod, hogy kik fogj mosogatni az egész héten.
                 example_code: |-
-                    ## Példa Hedy kód
                     ```
                     emberek is anya, apa, Edit, Gizi
                     repeat _ _ print 'a mosogató:' _
@@ -629,7 +618,6 @@ adventures:
                     Most sokat kell másolnod és beillesztened, igaz? Ezt a 7. szinten javítjuk.
                     Ezen a szinten a vége a mosogató kalandnak! De még mindig sok kaland van más szinteken, például egy számológéppel, egy interaktív történettel és egy bonyolultabb játékkal.
                 example_code: |-
-                    ## Példa Hedy kód
                     ```
                     emberek = anya, apa, Edit, Gizi
                     edit_mosogat = 0
@@ -669,7 +657,6 @@ adventures:
                     Minden üres helyet egy paranccsal kell kicserélni.
                     Tipp: Ne felejtsd el az idézőjeleket.
                 example_code: |-
-                    ## Példa Hedy kód
                     ```
                     emberek is anya, apa, Edit, Gizi
                     print _ ő mosogat: _
@@ -694,7 +681,6 @@ adventures:
 
                     Ez nem működik megfelelően! Aztán megkapod: [apu, anya, Edit, Gizi] közül választottam. Ezt meg tudod majd oldani a 3. szinten.
                 example_code: |-
-                    ## Példa Hedy kód
                     ```
                     emberek is anya, apa, Edit, Gizi
                     print emberek at random
@@ -720,7 +706,6 @@ adventures:
                     De talán teljesen más kockát akarsz készíteni. Természetesen lehet!
                 start_code: print 'Mit dobunk ezúttal?'
                 example_code: |-
-                    ## Példa Hedy kód
                     ```
                     dobások is 1, 2, 3, 4, 5, giliszta
                     repeat _ _ print _ _
@@ -741,7 +726,6 @@ adventures:
                     Sikerült kiszámolni a 8 kocka pontszámát? Ehhez sok vágás és beillesztés kellett, igaz? Ezt megkönnyítjük a 7. szinten!
                 start_code: print 'Mit dobunk ezúttal?'
                 example_code: |-
-                    ## Példa Hedy kód
                     ```
                     dobasok = 1, 2, 3, 4, 5, giliszta
                     pontok = 0
@@ -761,7 +745,6 @@ adventures:
                     rendben van! Ezután állítsd be a saját reakcióját. Pl. „Igen” 6-ra és „kár” valami másra.
                 start_code: print 'Mit dobunk ezúttal?'
                 example_code: |-
-                    ## Példa Hedy kód
                     ```
                     dobasok is 1, 2, 3, 4, 5, giliszta
                     dobas _
@@ -775,7 +758,6 @@ adventures:
                     Ezúttal a minta kód nem egészen teljes. Be tudod fejezni a kódot?
                 start_code: print 'Mit dobunk ezúttal?'
                 example_code: |-
-                    ## Példa Hedy kód
                     ```
                     dobasok is 1, 2, 3, 4, 5, earthworm
                     print _ te jössz _
@@ -798,7 +780,6 @@ adventures:
                     Ez nem működik megfelelően! Aztán megkapod: Az [1, 2, 3, 4, 5, földigiliszta] közül
                     választottam. Ezt meg tudod majd oldani a 3. szinten.
                 example_code: |-
-                    ## Példa Hedy kód
                     ```
                     dobasok is 1, 2, 3, 4, 5, giliszta
                     print dobasok at random
@@ -827,7 +808,6 @@ adventures:
                     ## Mi a következő lépés?
                     Az ismétlés természetesen kissé unalmas, mert a számítógép nem választ semmit. Ezt később mi magunk is elkészítjük.
                 example_code: |-
-                    ## Példa Hedy kód
                     ```
                     print Mit választottál?
                     ask Válassz kő, papír és olló közül
@@ -847,7 +827,6 @@ adventures:
                     Először töltsd ki a helyes kódot a pontok helyén, és nézd meg, hogy döntetlen-e.
 
                 example_code: |-
-                    ## Példa Hedy kód
                     ```
                     lehetoseg is kő, papír, olló
                     szamitogepe is _
@@ -866,7 +845,6 @@ adventures:
                     Egészítsd ki a kódot úgy, hogy a helyes parancsokat vagy karaktereket írd be a
                     aláhúzásokra?
                 example_code: |-
-                    ## Példa Hedy
                     ```
                     valasztas is kő, papír, olló
                     print _ A számítógép ezt választotta: _ _ at _
@@ -890,7 +868,6 @@ adventures:
                     Ezt meg tudod majd oldani a 3. szinten.
                 start_code: print Üdvözlünk saját kő papír olló játékodon!
                 example_code: |-
-                    ## Példa Hedy kód
                     ```
                     valasztas is kő, papír, olló
                     print valasztas at random
@@ -927,7 +904,6 @@ adventures:
 
                 start_code: print 'Üdvözölünk a számológépnél!'
                 example_code: |-
-                    ## Példa Hedy kód
                     ```
                     pontszam = 0
                     repeat 10 times
@@ -952,7 +928,6 @@ adventures:
                     Így válassz ki pár táblázatot a gyakorláshoz, és ettől mindig más eredményt kapsz
                 start_code: print 'Üdvözlünk a számológépnél!'
                 example_code_2: |-
-                    ## Példa Hedy kód
                     ```
                     tablazat = 4, 5, 6, 8
                     szamok = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
@@ -1002,7 +977,6 @@ adventures:
                     ## Kihívás
                     Tudnál még egy sort felvenni az éttermi kódodba? Megkérdezheted például a vendégeket, hogy mit szeretnének inni, megmondod-e nekik az árat, vagy kívánsz-e nekik jó étvágyat?
                 example_code: |-
-                    ## Példa Hedy kód
                     ```
                     print Üdvözlünk a Hedy étteremben
                     ask Mit rendelsz?
@@ -1018,7 +992,6 @@ adventures:
                     A 2. szinten változók segítségével bővítheted éttermedet. Az 1. szinten Hedy csak egyszer tudta visszhangozni a sorrendet, és csak az utolsó dologra emlékezett, amit rendeltek.
                     Most már használhatsz változókat, és Hedy emlékszik mind az ételekre, mind az italokra!
                 example_code: |-
-                    ## Példa Hedy étterem
                     ```
                     print Üdvözlünk a Hedy étteremben!
                     print Ma pizzát vagy lasagnat szolgálunk fel.
@@ -1039,7 +1012,6 @@ adventures:
                     Az "for i in 1 in 5" tartományban használhatjuk a több vásárló megrendeléseinek rendezett kiíratására.
 
                 example_code: |
-                    ## Példa Hedy kódra
                     ```
                     print 'Üdvözlünk a Hedynél!'
                     emberek is ask 'Hány ember számára rendelsz?'
@@ -1165,7 +1137,6 @@ adventures:
                     Az alábbi példában láthatod, hogy megkérdezheted az ügyfeledet, hogy szeretné-e hallani a különlegességeket, és Hedy ennek megfelelően válaszolhat.
 
                 example_code: |
-                    ## Példa Hedy kódra
                     ```
                     print 'Üdvözlünk a Hedy Étteremben!'
                     kulonleges is ask 'Szeretnél hallani ma a különlegességeinkről?'
@@ -1197,7 +1168,6 @@ adventures:
                      ma pizzát szolgálunk fel` parancsot.
 
                 example_code: |-
-                    ## Példa Hedy Étterem
                     ```
                     print 'Üdvözlünk a Hedy Étteremben!'
                     print 'Ma pizzát vagy lasagnat szolgálunk fel.'
@@ -1278,7 +1248,6 @@ adventures:
                     Ez egy kis lépcső kezdete. El tudod érni az 5 lépést?
 
                 example_code: |
-                    ## Példa Hedy kódra
                     ```
                     forward 50
                     turn left
@@ -1299,8 +1268,6 @@ adventures:
                     Tudsz ábrát készíteni ezzel a kóddal? Talán egy háromszög vagy egy kör?
 
                 example_code: |
-                    ## Példa Hedy kódra
-
                     ```
                     print Ábrák rajzolása
                     angle is 90
@@ -1331,7 +1298,6 @@ adventures:
                 start_code: szogek is ask 'Hány szöget kell rajzolnom?'
                 story_text_2: "## Interaction\nAlso, we can now improve the program that draws different figures.\nCan you figure out how far the turtle has to turn here? Finish the code and you can draw any polygon you'd like!\n"
                 example_code: |-
-                    ## Példa Hedy kód
                     ```
                     szog is 90
                     repeat 10 times
@@ -1356,7 +1322,6 @@ adventures:
                     print 'Alakzat rajzolása'
                     repeat 3 times forward 10
                 example_code: |-
-                    ## Példa Hedy kód
                     ```
                     print 'Alakzat rajzolása'
                     repeat 3 times forward 10
@@ -1400,7 +1365,6 @@ adventures:
                     turn szog
                     forward 25
                 example_code: |-
-                    ## Példa Hedy kód
                     ```
                     print 'Ábrák rajzolása'
                     alakzat is ask 'Négyzetet vagy háromszöget akarsz rajzolni?'
@@ -1420,7 +1384,6 @@ adventures:
                     A 3. szinten idézőjeleket kell használni a "print" és az "ask" szöveggel. A teknős használata közben is
 
                 example_code: |
-                    ## Példa Hedy kódra
                     ```
                     print 'Teknős verseny'
                     irany is ask 'Hány fokot forduljon?'
@@ -1469,7 +1432,6 @@ adventures:
                     Mint ez:
 
                 example_code: |
-                    ## Példa Hedy kódra
                     ```
                     print Szia, Hedy, a jósnő vagyok!
                     ask Ki vagy te?
@@ -1494,7 +1456,7 @@ adventures:
                     A következő példában a jósnő 3 kérdést tehet fel, és kiírathatja őket!
 
                 example_code: |-
-                    ## Példa Hedy -kódra
+
                     ```
                     print 'Hedy a jósnő vagyok!'
                     print 'Feltehetsz 3 kérdést.'
@@ -1523,7 +1485,7 @@ adventures:
                     print 'Hedy, a jósnő vagyok!'
                     print 'Feltehetsz 3 kérdést!'
                 example_code: |-
-                    ## Példa Hedy -kódra
+
                     ```
                     print 'Hedy, a jósnő vagyok!'
                     print 'Feltehetsz 3 kérdést!'
@@ -1542,7 +1504,7 @@ adventures:
                     print 'Hedy, a jósnő vagyok!'
                     print 'Meg tudom jósolni, hány gyermeked lesz, ha felnősz!'
                 example_code: |-
-                    ## Példa Hedy -kódra
+
                     ```
                     print 'Hedy, a jósnő vagyok!'
                     print 'Meg tudom jósolni, hány gyermeked lesz, ha felnősz!'
@@ -1587,7 +1549,7 @@ adventures:
                 start_code: print 'Szia, Hedy, a jósnő vagyok!'
                 story_text_2: "Replace Hedy with your own name in the last line, and Hedy will always predict that you will win the lottery and others won't!\nOf course this might raise some suspicion with the other players... To avoid that, you can make sure that Hedy does give different answers every time you run the code.\nBut of course, still gives you a positive answer and the other players a negative one.\n"
                 example_code: |-
-                    ## Példa Hedy -kódra
+
                     ```
                     print 'Szia, Hedy, a jósnő vagyok'
                     print 'Meg tudom jósolni, nyersz-e a lottón holnap!'
@@ -1595,7 +1557,6 @@ adventures:
                     if szemely is Hedy print 'Bizonyosan nyerni fogsz!' else print 'Balszerencse! Valaki más nyer!'
                     ```
                 example_code_2: |-
-                    ## Példa Hedy -kódra 2
                     ```
                     print 'Szia, Hedy, a jósnő vagyok'
                     print 'Meg tudom jósolni, nyersz-e a lottón holnap!'
@@ -1618,7 +1579,7 @@ adventures:
                     Fontos! Ne feledd, hogy most, amikor idézőjeleket használunk, Hedy összezavarodik, amikor az aposztrófot más szövegösszefüggésben használod.
 
                 example_code: |-
-                    ## Példa Hedy -kódra
+
                     ```
                     print 'Szia, Hedy, a jósnő vagyok!'
                     kerdes is ask 'Mit akarsz tudni?'
@@ -1633,12 +1594,9 @@ adventures:
                     Az 1. szinten megalkottad első jóslásgépedet, de Hedy nem tudott igazán megjósolni semmit, csak visszhangot.
                     A 2. szinten használhatsz egy változót és az `at random`  parancsot, hogy valóban engedd, hogy Hedy válaszoljon Neked. Nézd meg például ezt a kódot:
 
-
-
                     ## Kihívások
                     Most Hedy csak igennel, nemmel vagy talán válaszolhat. Adhatsz Hedynek több válaszlehetőséget, például „határozottan” vagy „kérdezz újra”
                 example_code: |-
-                    ## Példa Hedy -kódra
                     Ebben a példában a játékos igen-nem kérdést tehet fel Hedynek, és Hedy véletlenszerű választ ad.
                     ```
                     print Szia Hedy a jósnő vagyok!
@@ -1672,8 +1630,6 @@ adventures:
                     Az 1. szinten elkezdjük a kísértetjárta ház játékunkat egy ijesztő történet kitalálásával, és megkérdezzük a játékost, hogy milyen szörnyet látnak a kísértetjárta házban.
 
                 example_code: |
-                    ## Példa Hedy kódra
-
                     ```
                     print Hogyan kerültem ide?
                     print Emlékszem, a barátom azt mondta, menjek be a régi kastélyba ...
@@ -1700,7 +1656,7 @@ adventures:
 
                 start_code: print 'Szabadulj ki a kísértetházból'
                 example_code: |-
-                    ## Példa Hedy -kódra
+
                     ```
                     print 'Szabadulj ki a kísértetházból'
                     jatekos is elo
@@ -1729,7 +1685,6 @@ adventures:
                     A 4. szinten csak akkor nyerheti meg a játékot, ha ugyanazt az ajtót választja, amelyet Hedy véletlenszerűen választott ki.
 
                 example_code: |
-                    ## Példa Hedy kódra
                     ```
                     print 'Szabadulj ki a kísértetházból!'
                     print 'Három ajtó van előtted...'
@@ -1766,7 +1721,7 @@ adventures:
                     Meg tudod csinálni?
                 start_code: print 'Szabadulj ki a kísértetházból'
                 example_code: |-
-                    ## Példa Hedy -kódra
+
                     ```
                     print Szabadulj ki a kísértetházból!
                     print Három ajtó van előtted...
@@ -1794,7 +1749,6 @@ adventures:
                     ## Haunted House
                     In this haunted house you can choose your monsters with emojis. Of course you could also use words.
                 example_code: |
-                    ## Example Hedy Code
                     ```
                     monster_1 {is} 👻
                     monster_2 {is} 🤡
@@ -1828,7 +1782,7 @@ adventures:
                 start_code: print Menjünk!
                 story_text_2: "If the player types a hamburger and coke, you can't say `so you would like a hamburger and coke`, but you have to make two separate line. \nAlso, the `{echo}` command only echoes the word at the end of the sentence. So you can't say `your hamburger is coming right up!`.\n\nThat changes in level 2. In level 2 you'll learn to work with variables, that allow you to save multiple pieces of information and print them in any place you want.\nBesides, you'll learn how to work with the `{at} {random}` command, that you can use to make games. \nSo let's go to the next level!\n"
                 example_code: |-
-                    ## Példa Hedy -kódra
+
                     ```
                     print Üdvözlünk a Hedynél
                     ask Mit szeretnél enni?
@@ -1883,7 +1837,7 @@ adventures:
 
                 start_code: print 'Menjünk a következő szintre!'
                 example_code: |-
-                    ## Példa Hedy -kódra
+
                     ```
                     repeat 5 times print 'A 7. szinten egyszerre több sor kódot is megismételhetsz!'
                     ```
@@ -1908,7 +1862,7 @@ adventures:
                     Ez sok kód főleg ugyanazokra a szavakra újra és újra. Szerencsére az 5. szinten van egy megoldás az "repeat" paranccsal, amely lehetővé teszi egy kódsor többszörös megismétlését.
                 start_code: "print 'Menjünk a következő szintre!'"
                 example_code: |-
-                    ## Példa Hedy -kódra
+
                     ```
                     print 'boldog születésnapot'
                     print 'boldog születésnapot'
@@ -2029,7 +1983,6 @@ adventures:
                     ## Learn a new language
                     Make your own program to practice your vocabulary in a new language.
                 example_code: |
-                    ## Example Hedy code
                     ```
                     {print} 'Learn French!'
                     cat {is} {ask} '🐱'
@@ -2046,7 +1999,6 @@ adventures:
                     Make your own program to practice your vocabulary in a new language.
 
                 example_code: |
-                    ## Example Hedy code
                     ```
                     french_words = ['bonjour', 'ordinateur', 'pomme de terre']
                     translation = ['hello', 'computer', 'potato']
@@ -2092,7 +2044,7 @@ adventures:
                 story_text: "## Tic Tac Toe\nIn this level you can improve your Tic Tac Toe game with the {while} loop/ With this loop you can combine the `{if} game != 'over'` and the `{for} i {in} {range} 1 to 9` into one simple line.\nCheck it out:\n"
                 example_code: "## Hedy Code példa\n```\nsign = 'x'\nopen_spots = 1, 2, 3, 4, 5, 6, 7, 8, 9\ngame = 'on'\nspot_1 = '.'\nspot_2 = '.'\nspot_3 = '.'\nspot_4 = '.'\nspot_5 = '.'\nspot_6 = '.'\nspot_7 = '.'\nspot_8 = '.'\nspot_9 = '.'\n{print} 'TIC TAC TOE!'\n{print} spot_1 spot_2 spot_3\n{print} spot_4 spot_5 spot_6\n{print} spot_7 spot_8 spot_9\n{print} ' '\n{while} game != 'over'\n    choice = {ask} 'Player ' sign ', which spot?'\n    {if} choice {in} open_spots\n        {remove} choice {from} open_spots\n        {if} choice == 1\n            spot_1 = sign\n        {if} choice == 2\n            spot_2 = sign\n        {if} choice == 3\n            spot_3 = sign\n        {if} choice == 4\n            spot_4 = sign\n        {if} choice == 5\n            spot_5 = sign\n        {if} choice == 6\n            spot_6 = sign\n        {if} choice == 7\n            spot_7 = sign\n        {if} choice == 8\n            spot_8 = sign\n        {if} choice == 9\n            spot_9 = sign\n    {else}\n        {print} 'That spot was already taken'\n    {print} spot_1 spot_2 spot_3\n    {print} spot_4 spot_5 spot_6\n    {print} spot_7 spot_8 spot_9\n    {print} ' '\n    winner = {ask} 'Did you win?'\n    {if} winner == 'yes'\n        {print} 'Good job, player ' sign '!'\n        game = 'over'\n    {else}\n        {if} sign == 'x'\n            sign = 'o'\n        {else}\n            sign = 'x'\n```\n"
             17:
-                example_code: "## Example code\n```\nsign = 'x'\nopen_spots = [1, 2, 3, 4, 5, 6, 7, 8, 9]\ngame = 'on'\nspot_1 = '.'\nspot_2 = '.'\nspot_3 = '.'\nspot_4 = '.'\nspot_5 = '.'\nspot_6 = '.'\nspot_7 = '.'\nspot_8 = '.'\nspot_9 = '.'\n{print} 'TIC TAC TOE!'\n{print} spot_1 spot_2 spot_3\n{print} spot_4 spot_5 spot_6\n{print} spot_7 spot_8 spot_9\n{print} ' '\n{while} game != 'over':\n    choice = {ask} 'Player ' sign ', which spot?'\n    {if} choice {in} open_spots:\n        {remove} choice {from} open_spots\n        {if} choice == 1:\n            spot_1 = sign\n        {if} choice == 2:\n            spot_2 = sign\n        {if} choice == 3:\n            spot_3 = sign\n        {if} choice == 4:\n            spot_4 = sign\n        {if} choice == 5:\n            spot_5 = sign\n        {if} choice == 6:\n            spot_6 = sign\n        {if} choice == 7:\n            spot_7 = sign\n        {if} choice == 8:\n            spot_8 = sign\n        {if} choice == 9:\n            spot_9 = sign\n    {else}:\n        {print} 'That spot was already taken'\n    {print} spot_1 spot_2 spot_3\n    {print} spot_4 spot_5 spot_6\n    {print} spot_7 spot_8 spot_9\n    {print} ' '\n    {if} spot_1 == spot_2 {and} spot_2 == spot_3 {and} spot_1 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_4 == spot_5 {and} spot_5 == spot_6 {and} spot_4 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_7 == spot_8 {and} spot_8 == spot_9 {and} spot_7 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_1 == spot_4 {and} spot_4 == spot_7 {and} spot_1 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_2 == spot_5 {and} spot_5 == spot_8 {and} spot_2 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_3 == spot_6 {and} spot_6 == spot_9 {and} spot_3 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_1 == spot_5 {and} spot_5 == spot_9 {and} spot_1 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_3 == spot_5 {and} spot_5 == spot_7 {and} spot_3 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {else}:\n        {if} sign == 'x':\n            sign = 'o'\n        {else}:\n            sign = 'x'\n```\n"
+                example_code: "```\nsign = 'x'\nopen_spots = [1, 2, 3, 4, 5, 6, 7, 8, 9]\ngame = 'on'\nspot_1 = '.'\nspot_2 = '.'\nspot_3 = '.'\nspot_4 = '.'\nspot_5 = '.'\nspot_6 = '.'\nspot_7 = '.'\nspot_8 = '.'\nspot_9 = '.'\n{print} 'TIC TAC TOE!'\n{print} spot_1 spot_2 spot_3\n{print} spot_4 spot_5 spot_6\n{print} spot_7 spot_8 spot_9\n{print} ' '\n{while} game != 'over':\n    choice = {ask} 'Player ' sign ', which spot?'\n    {if} choice {in} open_spots:\n        {remove} choice {from} open_spots\n        {if} choice == 1:\n            spot_1 = sign\n        {if} choice == 2:\n            spot_2 = sign\n        {if} choice == 3:\n            spot_3 = sign\n        {if} choice == 4:\n            spot_4 = sign\n        {if} choice == 5:\n            spot_5 = sign\n        {if} choice == 6:\n            spot_6 = sign\n        {if} choice == 7:\n            spot_7 = sign\n        {if} choice == 8:\n            spot_8 = sign\n        {if} choice == 9:\n            spot_9 = sign\n    {else}:\n        {print} 'That spot was already taken'\n    {print} spot_1 spot_2 spot_3\n    {print} spot_4 spot_5 spot_6\n    {print} spot_7 spot_8 spot_9\n    {print} ' '\n    {if} spot_1 == spot_2 {and} spot_2 == spot_3 {and} spot_1 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_4 == spot_5 {and} spot_5 == spot_6 {and} spot_4 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_7 == spot_8 {and} spot_8 == spot_9 {and} spot_7 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_1 == spot_4 {and} spot_4 == spot_7 {and} spot_1 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_2 == spot_5 {and} spot_5 == spot_8 {and} spot_2 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_3 == spot_6 {and} spot_6 == spot_9 {and} spot_3 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_1 == spot_5 {and} spot_5 == spot_9 {and} spot_1 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_3 == spot_5 {and} spot_5 == spot_7 {and} spot_3 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {else}:\n        {if} sign == 'x':\n            sign = 'o'\n        {else}:\n            sign = 'x'\n```\n"
                 start_code: '## place your code here'
                 story_text: "## Tic Tac Toe\nIn the previous levels the tic tac toe game had an annoying feature. After every move, you had to fill in yourself if you had won or not.\nThis made the game playable, but also quite slow. In this level we have learned the `{elif}` command, that could solve that problem.\nTo use the {elif} to let Hedy check whether or not a player has won is fun, but it also requires a fair amount of extra lines.\n\nIn the example code you see that we added the requirements to win (3 spots in a row horizontally, vertically or diagonally).\nYou can find them in line 46 to 69. You can see that each time the requirement is met (so if a player has won) the variable game is set to 'over'.\nThis means that the {while} loop will be stopped and the game ends.\n"
         default_save_name: Tic
