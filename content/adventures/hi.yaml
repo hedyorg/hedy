@@ -322,7 +322,7 @@ adventures:
                     {if} उम्र> 12
                         {print} 'आप मुझसे बड़े हैं!'
                     ```
-                story_text_3: "आप इस तरह `!=` का उपयोग करके तुलना कर सकते हैं कि क्या कुछ *नहीं* के बराबर है".
+                story_text_3: "आप इस तरह `!=` का उपयोग करके तुलना कर सकते हैं कि क्या कुछ *नहीं* के बराबर है"
             15:
                 start_code: |-
                     उत्तर = 0
@@ -472,16 +472,12 @@ adventures:
                     ## एक कहानी बनाओ
                     स्तर 1 में आप एक अलग मुख्य पात्र के साथ एक कहानी बना सकते हैं जिसे आप स्वयं दर्ज करते हैं।
 
-                    पहली पंक्ति के रूप में, इस कोड का उपयोग करें:
+                    पहली पंक्ति के रूप में, इस कोड का उपयोग करें  `{ask}`.
 
-                    ```
-                    {ask} आपकी कहानी का सितारा कौन है?
-                    ```
                     उस पहली पंक्ति के बाद, `{print}` {if} से शुरू करें, वाक्य को मुद्रित करने की आवश्यकता है।
                     आप `{echo}` {if} का उपयोग करते हैं, आप चाहते हैं कि आपका मुख्य चरित्र वाक्य के अंत में हो।
                 example_code: |
                     ## उदाहरण हेडी कोड
-
 
                     ```
                     {ask} इस कहानी का मुख्य पात्र है
@@ -501,8 +497,6 @@ adventures:
                     फिर आप उस नाम को वाक्य में कहीं भी रख सकते हैं।
                 example_code: |
                     ## उदाहरण हेडी कोड
-
-
                     ```
                     नाम {is} {ask} मुख्य पात्र का नाम क्या है?
                     {print} नाम अब जंगल में चलने वाला है
@@ -2152,16 +2146,16 @@ adventures:
                     ```
                 start_code: '# place your code here'
     language:
-        default_save_name: language
-        name: Language
-        description: Practice words in a foreign language
+        name: "Language"
+        description: "Practice words in a foreign language"
+        default_save_name: "Language"
         levels:
             5:
                 story_text: |
                     ## Learn a new language
                     Make your own program to practice your vocabulary in a new language.
-
-                    ## उदाहरण कोड
+                example_code: |
+                    ## Example Hedy code
                     ```
                     {print} 'Learn French!'
                     cat {is} {ask} '🐱'
@@ -2171,15 +2165,14 @@ adventures:
                     {if} frog {is} grenouille {print} 'Super!'
                     {else} {print} 'No, frog is grenouille'
                     ```
-                start_code: '# place your code here'
-                example_code: "## उदाहरण कोड\n```\n{print} 'Learn French!'\ncat {is} {ask} '\U0001F431'\n{if} cat {is} chat {print} 'Terrific!'\n{else} {print} 'No, cat is chat'\nfrog {is} {ask} '\U0001F438'\n{if} frog {is} grenouille {print} 'Super!'\n{else} {print} 'No, frog is grenouille'\n```\n"
+                start_code: "# place your code here"
             16:
                 story_text: |
                     ## Learn a new language
                     Make your own program to practice your vocabulary in a new language.
-                example_code: |
-                    ## उदाहरण कोड
 
+                example_code: |
+                    ## Example Hedy code
                     ```
                     french_words = ['bonjour', 'ordinateur', 'pomme de terre']
                     translation = ['hello', 'computer', 'potato']
@@ -2194,7 +2187,7 @@ adventures:
                             {print} 'Wrong, ' french_words[i] ' means ' translation[i]
                     {print} 'You gave ' score ' correct answers.'
                     ```
-                start_code: '# place your code here'
+                start_code: "# place your code here"
     next:
         levels:
             5:
@@ -2552,44 +2545,67 @@ adventures:
                     ```
                 start_code: '{print} Im Hedy the parrot!'
     songs:
-        name: Sing a song!
-        description: Print a song
+        name: "Sing a song!"
+        description: "Print a song"
+        default_save_name: "Song"
         levels:
-            12:
-                example_code: |
-                    ## उदाहरण कोड
-
-                    ```
-                    actions = 'clap your hands', 'stomp your feet', 'shout Hurray!'
-                    {for} action {in} actions
-                        {for} i {in} {range} 1 {to} 2
-                            {print} '{if} youre happy and you know it'
-                            {print} action
-                        {print} '{if} youre happy and you know it and you really want to show it'
-                        {print} '{if} youre happy and you know it'
-                        {print} action
-                    ```
-                story_text: |
-                    ## Sing a song!
-                    In this song we can make it even easier to program '{if} you're happy and you know it, clap your hands'. Because we can put all of the actions in a variable, check it out:
-                start_code: '# place your code here'
-            11:
+            6:
                 story_text: |
                     ## Songs
-                    In this level you can use the `{for} i {in} {range}` command to make songs that use counting.
+                    Songs often contain a lot of repetition. Sometimes the repetition is also based on counting.
+                    For example, in the well-known song 'Bottles of beer'. You can program that song with a little math.
                 example_code: |
-                    ## 5 little monkeys
+                    ## Example Hedy code
+
                     ```
-                    {for} i {in} {range} 5 {to} 1
-                        {print} i ' little monkeys jumping on the bed'
-                        {print} 'One fell off and bumped his head'
-                        {print} 'Mama called the doctor and the doctor said'
-                        {if} i {is} 1
-                            {print} 'PUT THOSE MONKEYS RIGHT TO BED!'
-                        {else}
-                            {print} 'NO MORE MONKEYS JUMPING ON THE BED!'
+                    verse = 99
+                    {print} verse ' bottles of beer on the wall'
+                    {print} verse ' bottles of beer'
+                    {print} 'Take one down, pass it around'
+                    verse = verse - 1
+                    {print} verse ' bottles of beer on the wall'
                     ```
-                start_code: '# place your code here'
+
+                    You can now repeat lines 2 to 9 as many times as you want by copying the lines.
+                start_code: "{print} 'Baby shark'"
+            7:
+                story_text: |
+                    ## Songs
+                    Songs often contain a lot of repetition. For example... Baby Shark! If you sing it, you keep singing the same thing:
+
+                    Baby Shark tututudutudu <br>
+                    Baby Shark tututudutudu <br>
+                    Baby Shark tututudutudu <br>
+                    Baby Shark
+
+                    You can make this song much shorter with a `{repeat}`! Can you finish the code?
+                example_code: |
+                    ## Example Hedy code
+
+                    ```
+                    {repeat} _ _ {print} 'Baby Shark tututudutudu'
+                    {print} 'Baby Shark'
+                    ```
+
+                    After Baby Shark you can of course also program other songs. There are many songs with repetition.
+                start_code: "{print} 'Baby Shark'"
+            8:
+                story_text: |
+                    ## Songs
+                    In a previous level you've programmed the song 'Bottles of beer'. You made one verse and then had to copy the verses 99 times. In level 7 you can repeat the song 99 times, just by adding one simple line!
+                example_code: |
+                    ## Example Hedy code
+
+                    ```
+                    verse = 99
+                    {repeat} 99 {times}
+                        {print} verse ' bottles of beer on the wall'
+                        {print} verse ' bottles of beer'
+                        {print} 'Take one down, pass it around'
+                        verse = verse - 1
+                        {print} verse ' bottles of beer on the wall'
+                    ```
+                start_code: "# place your code here"
             10:
                 story_text: |
                     ## Songs
@@ -2636,70 +2652,48 @@ adventures:
                         {print} 'there a ' sound
                         {print} 'everywhere a ' sound sound
                     ```
-                start_code: '# place your code here'
-            8:
+                start_code: "# place your code here"
+            11:
                 story_text: |
                     ## Songs
-                    In a previous level you've programmed the song 'Bottles of beer'. You made one verse and then had to copy the verses 99 times. In level 7 you can repeat the song 99 times, just by adding one simple line!
+                    In this level you can use the `{for} i {in} {range}` command to make songs that use counting.
                 example_code: |
-                    ## उदाहरण कोड
-
+                    ## 5 little monkeys
                     ```
-                    verse = 99
-                    {repeat} 99 {times}
-                        {print} verse ' bottles of beer on the wall'
-                        {print} verse ' bottles of beer'
-                        {print} 'Take one down, pass it around'
-                        verse = verse - 1
-                        {print} verse ' bottles of beer on the wall'
+                    {for} i {in} {range} 5 {to} 1
+                        {print} i ' little monkeys jumping on the bed'
+                        {print} 'One fell off and bumped his head'
+                        {print} 'Mama called the doctor and the doctor said'
+                        {if} i {is} 1
+                            {print} 'PUT THOSE MONKEYS RIGHT TO BED!'
+                        {else}
+                            {print} 'NO MORE MONKEYS JUMPING ON THE BED!'
                     ```
-                start_code: '# place your code here'
-            7:
-                example_code: |
-                    ## उदाहरण कोड
-
-                    ```
-                    {repeat} _ _ {print} 'Baby Shark tututudutudu'
-                    {print} 'Baby Shark'
-                    ```
-
-                    After Baby Shark you can of course also program other songs. There are many songs with repetition.
-                start_code: "{print} 'Baby Shark'"
+                start_code: "# place your code here"
+            12:
                 story_text: |
-                    ## Songs
-                    Songs often contain a lot of repetition. For example... Baby Shark! If you sing it, you keep singing the same thing:
-
-                    Baby Shark tututudutudu <br>
-                    Baby Shark tututudutudu <br>
-                    Baby Shark tututudutudu <br>
-                    Baby Shark
-
-                    You can make this song much shorter with a `{repeat}`! Can you finish the code?
-            6:
+                    ## Sing a song!
+                    In this song we can make it even easier to program '{if} you're happy and you know it, clap your hands'. Because we can put all of the actions in a variable, check it out:
                 example_code: |
-                    ## उदाहरण कोड
+                    ## Example Hedy code
 
                     ```
-                    verse = 99
-                    {print} verse ' bottles of beer on the wall'
-                    {print} verse ' bottles of beer'
-                    {print} 'Take one down, pass it around'
-                    verse = verse - 1
-                    {print} verse ' bottles of beer on the wall'
+                    actions = 'clap your hands', 'stomp your feet', 'shout Hurray!'
+                    {for} action {in} actions
+                        {for} i {in} {range} 1 {to} 2
+                            {print} 'if youre happy and you know it'
+                            {print} action
+                        {print} 'if youre happy and you know it and you really want to show it'
+                        {print} 'if youre happy and you know it'
+                        {print} action
                     ```
-
-                    You can now repeat lines 2 to 9 as many times as you want by copying the lines.
-                story_text: |
-                    ## Songs
-                    Songs often contain a lot of repetition. Sometimes the repetition is also based on counting.
-                    For example, in the well-known song 'Bottles of beer'. You can program that song with a little math.
-                start_code: "{print} 'Baby shark'"
+                start_code: "# place your code here"
             16:
                 story_text: |
                     ## Sing a song!
                     In this level, you can program a song like OldMacDonald even more quickly. You can connect the right animal to the right sound by simply putting them in the same place in the list.
                     The Drunken Sailor is also quickly made in this level. You only need 8 lines for the entire song, check it out!
-
+                example_code: |
                     ## Old MacDonald
                     ```
                     animals = ['pig', 'dog', 'cow']
@@ -2729,13 +2723,11 @@ adventures:
                             {print} 'way hay and up she rises'
                         {print} 'early in the morning'
                     ```
-                start_code: '# place your code here'
-                example_code: "## Old MacDonald\n```\nanimals = ['pig', 'dog', 'cow']\nsounds = ['oink', 'woof', 'moo']\n{for} i {in} {range} 1 {to} 3\n    animal = animals[i]\n    sound = sounds[i]\n    {print} 'Old McDonald had a farm'\n    {print} 'E I E I O!'\n    {print} 'and on that farm he had a ' animal\n    {print} 'E I E I O!'\n    {print} 'with a ' sound sound ' here'\n    {print} 'and a ' sound sound ' there'\n    {print} 'here a ' sound\n    {print} 'there a ' sound\n    {print} 'everywhere a ' sound sound\n```\n\n## Drunken Sailor\n```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines\n    {for} i {in} {range} 1 {to} 3\n        {print} line\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
-        default_save_name: Song
+                start_code: "# place your code here"
     haunted:
-        name: Haunted House
-        description: escape from the haunted house
-        default_save_name: Haunted House
+        name: "Haunted House"
+        description: "Escape from the haunted house"
+        default_save_name: "Haunted House"
         levels:
             1:
                 story_text: |
@@ -2744,9 +2736,8 @@ adventures:
                     If you pick the right door you'll survive, but {if} not a terrible monster might...
 
                     In level 1 we start our haunted house game by making up a scary story and {ask} the player what monster they'll see in the haunted house.
-                start_code: '{print} How did I get here?'
                 example_code: |
-                    ## उदाहरण कोड
+                    ## Example Hedy code
 
 
                     ```
@@ -2763,64 +2754,133 @@ adventures:
                     {echo} I choose door
                     {print} ...?
                     ```
-
+                story_text_2: |
                     ## Challenge
                     Can you finish the scary story? Or make up your own haunted house story?
-                story_text_2: "## Challenge\nCan you finish the scary story? Or make up your own haunted house story?\n"
+                start_code: "{print} How did I get here?"
             2:
                 story_text: |
                     ## Haunted House
                     In this haunted house you can choose your monsters with emojis. Of course you could also use words.
-
-                    ## उदाहरण कोड
+                example_code: |
+                    ## Example Hedy Code
                     ```
-                    monster1 {is} 👻
-                    monster2 {is} 🤡
-                    monster3 {is} 👶
-                    {print} You enter the hounted house.
-                    {print} Suddenly you see a monster1
-                    {print} You run into the other room, but a monster2 is waiting there for you!
+                    monster_1 {is} 👻
+                    monster_2 {is} 🤡
+                    monster_3 {is} 👶
+                    {print} You enter the haunted house.
+                    {print} Suddenly you see a monster_1
+                    {print} You run into the other room, but a monster_2 is waiting there for you!
                     {print} Oh no! Quickly get to the kitchen.
-                    {print} But as you enter monster3 attacks you!
+                    {print} But as you enter monster_3 attacks you!
                     ```
-                start_code: monster1 {is} _
-                example_code: "## उदाहरण कोड\n```\nmonster_1 {is} \U0001F47B\nmonster_2 {is} \U0001F921\nmonster_3 {is} \U0001F476\n{print} You enter the haunted house.\n{print} Suddenly you see a monster_1\n{print} You run into the other room, but a monster_2 is waiting there for you!\n{print} Oh no! Quickly get to the kitchen.\n{print} But as you enter monster_3 attacks you!\n```\n"
-            14:
+                start_code: "monster1 {is} _"
+            3:
+                story_text: |
+                    ## Haunted house game
+                    In the previous levels you've made an introduction to your haunted house game, but as you might have noticed the story would always have a dreadful end.
+                    In this level you can make your story more interactive by changing the outcome of the game; sometimes you'll get eaten, sometimes you'll escape!
+                    Let Hedy decide randomly!
+                example_code: |
+                    ## Example Hedy code
+                    ```
+                    {print} Escape from the haunted house!
+                    {print} There are 3 doors in front of you...
+                    choice {is} {ask} Which door do you choose?
+                    {print} You picked door ... choice
+                    monsters {is} a zombie, a vampire, NOTHING YOUVE ESCAPED
+                    {print} You see...
+                    {sleep}
+                    {print} monsters {at} {random}
+                    ```
+                story_text_2: |
+                    ## Challenge
+                    This story is pretty straight {forward}, maybe you can spook it up a bit by adding a more exciting story.
+                    Also you have very limited outcomes right now, there are only 3 options of what's behind the doors. Maybe you can think of more monsters to add to the list!
+
+                    ## Change the game into a tv gameshow!
+                    Lastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!
+                    Can you do it?
+                start_code: "# place your code here"
+            4:
+                story_text: |
+                    ## Haunted house
+                    In this level you learn how to use quotation marks in your games.
+                    Can you make your Haunted House level 4 proof?
+                example_code: |
+                    ```
+                    {print} _Escape from the haunted house!_
+                    {print} _There are 3 doors in front of you..._
+                    choice {is} {ask} _Which door do you choose?_
+                    {print} _You picked door ..._ choice
+                    monsters {is} a zombie, a vampire, NOTHING YOUVE ESCAPED
+                    {print} _You see..._
+                    {sleep}
+                    {print} monsters {at} {random}
+                     ```
+
+                start_code: "# place your code here"
+            5:
                 story_text: |
                     ## Haunted House
-                    In this level you can use the `<` and `>` symbol to introduce lives to your game.
+                    Up until this level the haunted house game always asked the player to choose a door, but as you might have noticed, they didn't really have to answer correctly.
+                    If the player filled in a completely random answer, the game would still work and the player might even win (despite not picking a door).
+                    In this level you can only win the game by picking the same door Hedy picked randomly.
                 example_code: |
-                    ## उदाहरण कोड
+                    ## Example Hedy code
 
                     ```
-                    {print} 'Escape from the haunted house'
-                    lives = 3
+                    {print} 'Escape from the haunted house!'
+                    {print} 'There are 3 doors in front of you...'
+                    doors {is} 1, 2, 3
+                    monsters {is} werewolf, mummy, vampire, zombie
+                    chosen_door {is} {ask} 'Which door do you choose?'
+                    {print} 'You chose door...' chosen_door
+                    {sleep}
+                    correct_door {is} doors {at} {random}
+                    {if} chosen_door {is} correct_door {print} 'Great! Youve escaped!'
+                    {else} {print} 'Oh no! You are being eaten by a...' monsters {at} {random}
+                    ```
+
+                start_code: "# place your code here"
+            9:
+                story_text: |
+                    ## Haunted House
+                    In this level you can use nesting, which allows you to make the haunted house even more interactive!
+
+                    ## Challenge
+                    Now it's very hard to win this game, can you make it easier to win?
+                    For example by only having 1 wrong door and 2 correct doors instead of 1 correct door and 2 wrong ones?
+                example_code: |
+                    ## Example Hedy code
+
+                    ```
+                    {print} 'Escape from the Haunted House!'
+                    player = alive
                     doors = 1, 2, 3
-                    monsters = 'the wicked witch', 'a zombie', 'a sleeping 3 headed dog'
-                    {for} i {in} {range} 1 {to} 10
-                        {if} lives > 0
-                            good_door = doors {at} {random}
-                            monster = monsters {at} {random}
+                    monsters = zombie, vampire, giant spider
+                    {repeat} 3 {times}
+                        {if} player {is} alive
+                            correct_door {is} doors {at} {random}
+                            {print} 'There are 3 doors in front of you...'
                             chosen_door = {ask} 'Which door do you choose?'
-                            {if} good_door == chosen_door
-                                {print} 'You have chosen the correct door'
+                            {if} chosen_door {is} correct_door
+                                {print} 'No monsters here!'
                             {else}
-                                {print} 'You see...' monster
-                                {if} monster == 'a sleeping 3 headed dog'
-                                    {print} 'Pffieuw.... Its asleep'
-                                {else}
-                                    {print} 'You lose one life'
-                                    lives = lives -1
+                                {print} 'You are eaten by a ' monsters {at} {random}
+                                player = dead
                         {else}
                             {print} 'GAME OVER'
+                    {if} player {is} alive
+                        {print} 'Great! You survived!'
                     ```
-                start_code: '# place your code here'
+                start_code: "{print} 'Escape from the haunted house!'"
             11:
                 story_text: |
                     ## Haunted House
                     In this level we've changed the repeat command and we've added a line to our haunted house that tells the player in which room they are.
                 example_code: |
-                    ## उदाहरण कोड
+                    ## Example Hedy code
 
                     ```
                     {print} 'Escape from the Haunted House!'
@@ -2844,95 +2904,36 @@ adventures:
                         {print} 'Great! You survived!'
                     ```
                 start_code: "{print} 'Escape from the haunted house!'"
-            9:
+            14:
                 story_text: |
                     ## Haunted House
-                    In this level you can use nesting, which allows you to make the haunted house even more interactive!
+                    In this level you can use the `<` and `>` symbol to introduce lives to your game.
                 example_code: |
-                    ## उदाहरण कोड
+                    ## Example Hedy code
 
                     ```
-                    {print} 'Escape from the Haunted House!'
-                    player = alive
+                    {print} 'Escape from the haunted house'
+                    lives = 3
                     doors = 1, 2, 3
-                    monsters = zombie, vampire, giant spider
-                    {repeat} 3 {times}
-                        {if} player {is} alive
-                            correct_door {is} doors {at} {random}
-                            {print} 'There are 3 doors in front of you...'
+                    monsters = 'the wicked witch', 'a zombie', 'a sleeping 3 headed dog'
+                    {for} i {in} {range} 1 {to} 10
+                        {if} lives > 0
+                            good_door = doors {at} {random}
+                            monster = monsters {at} {random}
                             chosen_door = {ask} 'Which door do you choose?'
-                            {if} chosen_door {is} correct_door
-                                {print} 'No monsters here!'
+                            {if} good_door == chosen_door
+                                {print} 'You have chosen the correct door'
                             {else}
-                                {print} 'You are eaten by a ' monsters {at} {random}
-                                player = dead
+                                {print} 'You see...' monster
+                                {if} monster == 'a sleeping 3 headed dog'
+                                    {print} 'Pffieuw.... Its asleep'
+                                {else}
+                                    {print} 'You lose one life'
+                                    lives = lives -1
                         {else}
                             {print} 'GAME OVER'
-                    {if} player {is} alive
-                        {print} 'Great! You survived!'
                     ```
-                    ## Challenge
-                    Now it's very hard to win this game, can you make it easier to win?
-                    For example by only having 1 wrong door and 2 correct doors instead of 1 correct door en 2 wrong ones?
-                start_code: "{print} 'Escape from the haunted house!'"
-            5:
-                story_text: |
-                    ## Haunted House
-                    Up until this level the haunted house game always asked the player to choose a door, but as you might have noticed, they didn't really have to answer correctly.
-                    If the player filled in a completely random answer, the game would still work and the player might even win (despite not picking a door).
-                    In this level you can only win the game by picking the same door Hedy picked randomly.
-                example_code: |
-                    ## उदाहरण कोड
-
-                    ```
-                    {print} 'Escape from the haunted house!'
-                    {print} 'There are 3 doors in front of you...'
-                    doors {is} 1, 2, 3
-                    monsters {is} werewolf, mummy, vampire, zombie
-                    chosen_door {is} {ask} 'Which door do you choose?'
-                    {print} 'You chose door...' chosen_door
-                    {sleep}
-                    correct_door {is} doors {at} {random}
-                    {if} chosen_door {is} correct_door {print} 'Great! Youve escaped!'
-                    {else} {print} 'Oh no! You are being eaten by a...' monsters {at} {random}
-                    ```
-                start_code: '# place your code here'
-            4:
-                story_text: |
-                    ## Haunted house
-                    In this level you learn how to use quotation marks in your games.
-                    Can you make your Haunted House level 4 proof?
-                start_code: '# place your code here'
-                example_code: "```\n{print} _Escape from the haunted house!_\n{print} _There are 3 doors in front of you..._\nchoice {is} {ask} _Which door do you choose?_\n{print} _You picked door ..._ choice\nmonsters {is} a zombie, a vampire, NOTHING YOUVE ESCAPED\n{print} _You see..._\n{sleep}\n{print} monsters {at} {random}\n ```\n"
-            3:
-                story_text: |
-                    ## Haunted house game
-                    In the previous levels you've made an introduction to your haunted house game, but as you might have noticed the story would always have a dreadful end.
-                    In this level you can make your story more interactive by changing the outcome of the game; sometimes you'll get eaten, sometimes you'll escape!
-                    Let Hedy decide randomly!
-                example_code: |
-                    ## उदाहरण कोड
-
-                    ```
-                    {print} Escape from the haunted house!
-                    {print} There are 3 doors in front of you...
-                    choice {is} {ask} Which door do you choose?
-                    {print} You picked door ... choice
-                    monsters {is} a zombie, a vampire, NOTHING YOUVE ESCAPED
-                    {print} You see...
-                    {sleep}
-                    {print} monsters {at} {random}
-                    ```
-
-                    ## Challenge
-                    This story is pretty straight {forward}, maybe you can spook it up a bit by adding a more exciting story.
-                    Also you have very limited outcomes right now, there are only 3 options of what's behind the doors. Maybe you can think of more monsters to add to the list!
-
-                    ## Change the game into a tv gameshow!
-                    Lastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!
-                    Can you do it?
-                start_code: '# place your code here'
-                story_text_2: "## Challenge\nThis story is pretty straight {forward}, maybe you can spook it up a bit by adding a more exciting story.\nAlso you have very limited outcomes right now, there are only 3 options of what's behind the doors. Maybe you can think of more monsters to add to the list!\n\n## Change the game into a tv gameshow!\nLastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!\nCan you do it?\n"
+                start_code: "# place your code here"
             16:
                 story_text: |
                     ## Haunted House Game
@@ -2940,21 +2941,21 @@ adventures:
                     For example: all the properties that belong to the zombie are first in all the lists, witch second and vampire third.
                     Check out the code!
                 example_code: |
-                    ## उदाहरण कोड
+                    ## Example Hedy code
 
                     ```
                     numbers = [1, 2, 3]
-                    i = numbers[random]
+                    i = numbers[{random}]
                     hint = ['growling', 'a cackling laugh', 'fluttering batwings']
                     monsters = ['zombie', 'witch', 'vampire']
                     bad_fate = ['Your brain is eaten', 'You are forever cursed', 'You are bitten']
                     good_fate = ['You throw the ham. The zombie is distracted and starts etaing it.', 'You set the curtains on fire. The witch flees out of fear for the fire', 'The vampire hates garlic and flees']
                     weapons = ['ham', 'lighter', 'garlic']
-                    {print} 'You are standing in front of an old mension'
+                    {print} 'You are standing in front of an old mansion'
                     {print} 'Something is not right here'
                     {print} 'You hear ' hint[i]
                     {print} 'You are going to explore it'
-                    {print} 'You enter the kitchen en see a lighter, a raw ham and a garlic.'
+                    {print} 'You enter the kitchen and see a lighter, a raw ham and a garlic.'
                     your_weapon = {ask} 'What do you bring with you?'
                     {print} 'With your ' your_weapon ' you enter the living room'
                     {print} 'There you find a ' monsters[i]
@@ -2968,7 +2969,7 @@ adventures:
                         {print} bad_fate[i]
                         {print} 'GAME OVER'
                     ```
-                start_code: '# place your code here'
+                start_code: "# place your code here"
     secret:
         description: Make your own spy code
         default_save_name: language

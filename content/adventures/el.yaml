@@ -20,11 +20,7 @@ adventures:
                 story_text_3: "Let's get started! Don't know what to create? In the next tabs you will find ideas for programs to build.\n"
             2:
                 story_text: |
-                    Στο επίπεδο 2 θα μάθουμε κάτι καινούριο. Μπορείς να ορίσεις μια λέξη με την `is`.  Μπορείς να χρησιμοποιήσεις τη λέξη οπουδήποτε στον κώδικά σου και θα αντικατασταθεί από την Hedy, ως εξής: 
-
-                    ```name {is} Χέντι
-                    {print} Γεια name
-                    ```
+                    Στο επίπεδο 2 θα μάθουμε κάτι καινούριο. Μπορείς να ορίσεις μια λέξη με την `is`.  Μπορείς να χρησιμοποιήσεις τη λέξη οπουδήποτε στον κώδικά σου και θα αντικατασταθεί από την Hedy, ως εξής:
 
                     Σημείωση: Η `ask` έχει αλλάξει, μπορείς να αποθηκεύσεις την απάντηση με ένα όνομα , κάπως έτσι.
 
@@ -32,7 +28,11 @@ adventures:
 
                     Μια νέα εντολή  σ' αυτό το επίπεδο είναι η `{sleep}`, η οποία σταματάει το πρόγραμμα για ένα δευτερόλεπτο. Αν πλητρολογήσεις έναν αριθμό μετά την εντολή   `{sleep}`, το πρόγραμμα θα σταματήσει για τόσα δευτερόλεπτα όσα ο αριθμός που έθεσες.
                 start_code: 'print γεια σου κόσμε!'
-                example_code: "## Example code\n```\nname {is} Hedy\nage {is} 15\n{print} name is age years old\n```\n"
+                example_code: |-
+                    ```
+                    name {is} Χέντι
+                    {print} Γεια name
+                    ```
                 story_text_2: "`{print}` still works the same, but the `{ask}` command has changed. You need to use a variable in the `{ask}` command as well. It looks like this:\n"
                 example_code_2: |-
                     ## Παράδειγμα κώδικα Hedy
@@ -82,13 +82,6 @@ adventures:
 
                     Όταν θέλουμε να ελέγξουμε ότι κάτι είναι μέσα σε μια λίστα, μπορούμε τώρα να χρησιμοποιούμε το `in` ανάμεσα στο πράγμα και τη λίστα.
 
-                     ## Παράδειγμα κώδικα Hedy
-                     ```
-                     pretty_colors {is} πράσινο, κίτρινο
-                     color {is} {ask} 'Ποιο είναι το αγαπημένο σου χρώμα;'
-                     {if} color {in} pretty_colors {print} 'ωραία!' {else} {print} 'μπου'
-                     ```
-
                     Αυτός ο κώδικας εμφανίζει 'ωραία' αν εισάγεις σαν όνομα το Hedy, και 'μπου!' αν εισάγεις κάτι άλλο.
 
                     ## Οι ασκήσεις γίνονται όλο και πιο δύσκολες
@@ -101,7 +94,13 @@ adventures:
                     {if} name {is} Hedy print 'ωραία' else print 'μπου!'
                     ```
                 story_text_3: "## Lists\nWhen we want to check if something is in a list, we can now use the `{in}` command.\nThis code prints pretty! if you choose green or yellow, and meh otherwise.\n"
-                example_code_3: "```\npretty_colors {is} green, yellow\ncolor {is} {ask} 'What is your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!'\n{else} {print} 'meh'\n```\n"
+                example_code_3: |-
+                    ## Παράδειγμα κώδικα Hedy
+                    ```
+                    pretty_colors {is} πράσινο, κίτρινο
+                    color {is} {ask} 'Ποιο είναι το αγαπημένο σου χρώμα;'
+                    {if} color {in} pretty_colors {print} 'ωραία!' {else} {print} 'μπου'
+                    ```
                 story_text_2: |-
                     ## Υπόδειξη
                     Μερικές φορές ο κώδικας με ένα `{if}` γίνεται μακρύς και δεν χωράει στη γραμμή. <br>Μπορεις να χωρίσεις τον κώδικα σε δύο γραμμές, ξεκινώντας τη δεύτερη γραμμή με ένα `{else}`ως εξής:
@@ -124,10 +123,6 @@ adventures:
 
                     Μπορούμε επίσης να κάνουμε μια αλλαγή στην αποθήκευση! Μπορείς τώρα να χρησιμοποιήσεις `=` αντί για`{is}` όταν αποθηκεύεις ένα όνομα ή έναν αριθμό, ως εξής:
 
-                     ```
-                     name = Hedy
-                     answer = 20 + 4
-                     ```
                 example_code: |-
                     ## Παράδειγμα κώδικα Hedy
                     ```
@@ -136,7 +131,11 @@ adventures:
                     print '5 επί 5 κάνει ' 5 * 5
                     ```
                 story_text_2: "We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:\n"
-                example_code_2: "```\nname = Hedy\nanswer = 20 + 4\n```\n"
+                example_code_2: |-
+                    ```
+                    name = Hedy
+                    answer = 20 + 4
+                    ```
             7:
                 start_code: "repeat 3 times print 'Η Hedy είναι διασκεδαστική!'"
                 story_text: |
@@ -214,10 +213,7 @@ adventures:
                 story_text: |
                     ## Δεκαδικοί αριθμοί
                     Μέχρι τώρα η Hedy δενεπέτρεπε δεκαδικούς αριθμούς όπως 1.5, αλλά δεν θα το επιτρέψουμε πλέον. Σημείωσε ότι οι υπολογιστές χρησιμοποιούν το `.` για τους δεκαδικούς αριθμούς.
-                    ```
-                    {print} 'Δύο και μισό συν δύο και μισό είναι...'
-                    {print} 2.5 + 2.5
-                    ```
+
                     ## Όλα τα κείμενα πρέπει να βρίσκονται μέσα σε εισαωγικά
                     Από αυτό το επίπεδο και μετά πρέπει να χρησιμοποιείς τα εισαγωγικά όταν αποθηκεύεις κείμενο με `=`:
 
@@ -229,30 +225,35 @@ adventures:
                     Οι λίστες είναι κείμενα, άρα θέλουν επίσης εισαγωγικά. Πρόσεξε ότι κάθε στοιχείο στη λίστα έχει εισαγωγικά. 
                     Αυτό σου επιτρέπει να αποθηκέυσεις δυο λέξεις ως ένα στοιχείο, πχ 'Iron Man'.
 
+                    ## Όλο το κείμενο μετά τις συγκρίσεις `{if}` comparisons χρειάζονται επίσης εισαγωγικά
+
+                    ## Οι αριθμοί δεν χρειάζονται εισαγωγικά
+                    Για τους αριθμούς, δεν χρησιμοποιούνται εισαγωγικά στο `=`/
+                example_code: |-
+                    ```
+                    {print} 'Δύο και μισό συν δύο και μισό είναι...'
+                    {print} 2.5 + 2.5
+                    ```
+                example_code_5: |-
+                    ```
+                    score = 25
+                    {print} 'Έφερες ' score
+                    ```
+                example_code_2: "```\nname = 'Hedy the Robot'\n{print} 'Hello ' name\n```\n"
+                story_text_2: "**All texts need to be in quotation marks**\nFor this level on you will also have to use quotation marks when storing a text with `=`:\n"
+                story_text_3: "**All items in lists need quotation marks too**\nLists are texts, so they need quotation marks too. Mind that each single item on the list has quotation marks.\nThis allows you to save two words as 1 item on the list, for example 'Iron Man'.\n"
+                example_code_3: |-
                     ```
                     superheroes = 'Spiderman', 'Batman', 'Iron Man'
                     {print} superheroes {at} {random}
                     ```
-                    ## Όλο το κείμενο μετά τις συγκρίσεις `{if}` comparisons χρειάζονται επίσης εισαγωγικά
+                story_text_4: "**All text after `{if}` comparisons need quotation marks too**\n"
+                example_code_4: |-
                     ```
                     name = {ask} 'Ποιο είναι το όνομά σου;'
                     {if} name = 'Hedy το Ρομπότ'
                         {print} 'Γεια σου!'
                     ```
-                    ## Οι αριθμοί δεν χρειάζονται εισαγωγικά
-                    Για τους αριθμούς, δεν χρησιμοποιούνται εισαγωγικά στο `=`:
-                    ```
-                    score = 25
-                    {print} 'Έφερες ' score
-                    ```
-                example_code: "## Παράδειγμα κώδικα Hedy\n```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n"
-                example_code_5: "```\nscore = 25\n{print} 'You got ' score\n```\n"
-                example_code_2: "```\nname = 'Hedy the Robot'\n{print} 'Hello ' name\n```\n"
-                story_text_2: "**All texts need to be in quotation marks**\nFor this level on you will also have to use quotation marks when storing a text with `=`:\n"
-                story_text_3: "**All items in lists need quotation marks too**\nLists are texts, so they need quotation marks too. Mind that each single item on the list has quotation marks.\nThis allows you to save two words as 1 item on the list, for example 'Iron Man'.\n"
-                example_code_3: "```\nsuperheroes = 'Spiderman', 'Batman', 'Iron Man'\n{print} superheroes {at} {random}\n```\n"
-                story_text_4: "**All text after `{if}` comparisons need quotation marks too**\n"
-                example_code_4: "```\nname = {ask} 'What is your name?'\n{if} name = 'Hedy the Robot'\n    {print} 'Hi there!'\n```\n"
                 story_text_5: "**Numbers don't need quotation marks**\nFor numbers, you do not use quotation marks in the `=`:\n"
                 story_text_6: "**Maths with words** In this level it is also allowed to use the + sign with texts. For example:\n"
                 example_code_6: "```\na = 'Hello '\nb = 'world!'\nprint a + b\n```\n"
@@ -296,7 +297,7 @@ adventures:
                         print 'Είσαι νεότερη από εμένα!'
                     else
                         print 'Είσαι μεγαλύτερη από εμένα!'
-                story_text: "Θα μάθουμε μερικά ακόμα νέα πράγματα! Ίσως να τα γνωρίζεις ήδη από τα μαθηματικά, τα `<` και `>`. \nΤο `<` ελέγχει αν ο πρώτος αριθμός είναι μικρότερος από τον δεύτερο, πχ `age < 12` ελέγχει αν το  `age` είναι μικρότερο από  12.\nΑν θέλεις να ελέγξεις αν ο πρώτος αριθμός είναι μικρότερος ή ίσος από τον δεύτερο, μπορείς να χρησιμοποιήσεις  `<=`, πχ`age <= 11`.\nΤο `>` ελέγχει αν ο πρώτος αριθμός είναι μεγαλύτερος από τον δεύτερο, πχ `points > 10` ελέγχει αν `points` είναι μεγαλύτερο  από 10.\nΑν θέλεις να ελέγξεις αν ο πρώτος αριθμός είναι μεγαλύτερος ή ίσος από τον δεύτερο, μπορείς να χρησιμοποιήσεις`>=`, πχ `points >= 11`.\nΧρησιμοποιείς αυτές τις συγκρίσεις μέσα σε ένα  `{if}`, ως εξής: \n```\nage = {ask} 'Πόσων ετών είσαι;'\n{if} age > 12\n    {print} 'Είσαι μεγαλύτερος από μένα!'\n```\n\nΑπό υτό το επίπεδο και μετά, αν θέλεις να συγκρίνεις ακριβώς, μπορείς να χρησιμοποιείς 2 σύμβολα ίσον. Αυτό είναι που κάνουν και οι περισσότερες γλώσσες προγραμματισμού: \n```\nname = {ask} 'Ποιο είναι το όνομά σου;'\n{if} name == 'Hedy'\n    {print} 'Είσαι τέλεια!'\n```\n\nΜπορείς επίσηςνα συγκρίνεις αν κάτι *δεν* έιναι ίσο με κάτι 'αλλο χρησιμοποιώντας το `!=`ως εξής:\n```\nname = {ask} 'Ποιο είναι το όνομά σου;'\n{if} name != 'Hedy'\n    {print} 'Δεν είσαι η Hedy'\n```\n"
+                story_text: "Θα μάθουμε μερικά ακόμα νέα πράγματα! Ίσως να τα γνωρίζεις ήδη από τα μαθηματικά, τα `<` και `>`. \nΤο `<` ελέγχει αν ο πρώτος αριθμός είναι μικρότερος από τον δεύτερο, πχ `age < 12` ελέγχει αν το  `age` είναι μικρότερο από  12.\nΑν θέλεις να ελέγξεις αν ο πρώτος αριθμός είναι μικρότερος ή ίσος από τον δεύτερο, μπορείς να χρησιμοποιήσεις  `<=`, πχ`age <= 11`.\nΤο `>` ελέγχει αν ο πρώτος αριθμός είναι μεγαλύτερος από τον δεύτερο, πχ `points > 10` ελέγχει αν `points` είναι μεγαλύτερο  από 10.\nΑν θέλεις να ελέγξεις αν ο πρώτος αριθμός είναι μεγαλύτερος ή ίσος από τον δεύτερο, μπορείς να χρησιμοποιήσεις`>=`, πχ `points >= 11`.\nΧρησιμοποιείς αυτές τις συγκρίσεις μέσα σε ένα  `{if}`, ως εξής: \n```\nage = {ask} 'Πόσων ετών είσαι;'\n{if} age > 12\n    {print} 'Είσαι μεγαλύτερος από μένα!'\n```\n\nΑπό υτό το επίπεδο και μετά, αν θέλεις να συγκρίνεις ακριβώς, μπορείς να χρησιμοποιείς 2 σύμβολα ίσον. Αυτό είναι που κάνουν και οι περισσότερες γλώσσες προγραμματισμού."
                 example_code: "## Παράδειγμα κώδικα Hedy\n```\nage = {ask} 'How old are you?'\n{if} age > 12\n    {print} 'You are older than I am!'\n```\n"
                 story_text_2: "From this level on, if you want to compare exactly, you can use two equal signs. This is what most programming languages do:\n"
                 example_code_2: "```\nname = {ask} 'What is your name?'\n{if} name == 'Hedy'\n    {print} 'You are coo!'\n```\n"
@@ -314,23 +315,50 @@ adventures:
                 start_code: |-
                     fruit = ['μήλο', 'μπανάνα', 'κεράσι']
                     print fruit
-                story_text: "Θα κάνουμε λίστες με τον τρόπο που ακολουθεί η Python, με αγκύλες γύρω από τις λίστες! Επίσης διατηρούμε τα εισαγωγικά γύρω από κάθε στοιχείο 'οπως μάθαμε σε προηγούμενα επίπεδα. \nΜπορείς επίσης να χρησιμοποιήσεις τις αγκύλες για να υποδείξεις μια θέση μέσα στις λίστες. \n\n```\nfriends = ['Μαρία', 'Κώστας', 'Αλκμήνη']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'ο τυχερός αριθμός του/της' friends[i]\n    {print} 'είναι' lucky_numbers[i]\n```\n"
-                example_code: "## Παράδειγμα κώδικα Hedy\n```\nfriends = ['Ahmed', 'Ben', 'Cayden']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'the lucky number of ' friends[i]\n    {print} 'is ' lucky_numbers[i]\n```\n"
+                story_text: "Θα κάνουμε λίστες με τον τρόπο που ακολουθεί η Python, με αγκύλες γύρω από τις λίστες! Επίσης διατηρούμε τα εισαγωγικά γύρω από κάθε στοιχείο 'οπως μάθαμε σε προηγούμενα επίπεδα. \nΜπορείς επίσης να χρησιμοποιήσεις τις αγκύλες για να υποδείξεις μια θέση μέσα στις λίστες. ."
+                example_code: |-
+                    ## Παράδειγμα κώδικα Hedy\n\n```\nfriends = ['Μαρία', 'Κώστας', 'Αλκμήνη']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'ο τυχερός αριθμός του/της' friends[i]\n    {print} 'είναι' lucky_numbers[i]\n```\n"
             17:
                 start_code: |-
                     for i in range 1 to 10:
                         print i
                     print 'Έτοιμοι ή όχι, έρχομαι!'
-                story_text: "Τώρα θα αλλάξουμε λίγο τις εσοχές. Κάθε φορά που χρειαζόμαστε μια εσοχή, χρειαζόμαστε ένα `:` στη γραμμή πριν την εσοχή.\n\nΣ' αυτό το επίπεδο μπορείς επίσηςνα χρησιμοποιήσει ςμια νέα εντολή: `{elif}`. 'Η`{elif}` είναι σύντμηση των {else} {if}  και θα το χρειαστείς όταν θέλεις να έχεις 2 (ή περισσότερες!) επιλογές. \nΔοκίμασέ το!\n\nprices = ['1 εκατομμύριο ευρώ', 'μια μηλόπιτα', 'τίποτα']\nyour_price = prices[random]\n{print} 'Κέρδισες ' your_price\n{if} your_price == '1 εκατομμύριο ευρώ' :\n    {print} 'Είσαι πλούσιος!'\n{elif} your_price == 'μια μηλόπιτα' :\n    {print} 'Ωραιότατα, μια μηλόπιτα!'\n{else}:\n    {print} 'Θα έχεις περισσότερη φορά την επόμενη φορά..'\n```\n"
-                example_code: "## Παράδειγμα κώδικα Hedy\n```\nprices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
+                story_text: "Τώρα θα αλλάξουμε λίγο τις εσοχές. Κάθε φορά που χρειαζόμαστε μια εσοχή, χρειαζόμαστε ένα `:` στη γραμμή πριν την εσοχή.\n\nΣ' αυτό το επίπεδο μπορείς επίσηςνα χρησιμοποιήσει ςμια νέα εντολή: `{elif}`. 'Η`{elif}` είναι σύντμηση των {else} {if}  και θα το χρειαστείς όταν θέλεις να έχεις 2 (ή περισσότερες!) επιλογές. \nΔοκίμασέ το!."
+                example_code: "## Παράδειγμα κώδικα Hedy\n```prices = ['1 εκατομμύριο ευρώ', 'μια μηλόπιτα', 'τίποτα']\nyour_price = prices[random]\n{print} 'Κέρδισες ' your_price\n{if} your_price == '1 εκατομμύριο ευρώ' :\n    {print} 'Είσαι πλούσιος!'\n{elif} your_price == 'μια μηλόπιτα' :\n    {print} 'Ωραιότατα, μια μηλόπιτα!'\n{else}:\n    {print} 'Θα έχεις περισσότερη φορά την επόμενη φορά..'\n```"
             18:
-                start_code: "naam = 'Hedy'\n{print}('My name is ', naam)"
-                story_text: "We arrived at real Python code! That means we need to use parentheses with {print} and {range} from now on.\nThat looks like this:\n```\n{print}('my name is Hedy!')\n```\nIf you want to print more thant one items, you need to separate them by commas.\n```\nnaam = 'Hedy'\n{print}('my name is ', naam)\n```"
-                story_text_3: "##  Input\nThe final change we will need to make to get Python code is changing `{ask}` into `{input}`."
-                example_code: "## Παράδειγμα κώδικα Hedy\n```\n{print}('my name is Hedy!')\n```\n"
-                story_text_2: If you want to print more than one item, you need to separate them by commas.
-                example_code_2: "```\ntemperature = 25\n{print}('Is is ', temperature, 'degrees outside')\n```\n"
-                example_code_3: "```\n{print}('My name is Hedy!')\nname = {input}('What is your name?')\n{print}('So your name is ', name)\n```\n"
+                start_code: |-
+                    naam = 'Hedy'
+                    {print}('My name is ', naam)
+                story_text: |-
+                    ## The last level!
+                    We arrived at real Python code! That means we need to use parentheses with {print} and {range} from now on.
+
+                example_code: |
+                    ## Example Hedy Code
+                    ```
+                    {print}('my name is Hedy!')
+                    ```
+
+                story_text_2: |-
+                    If you want to print more than one item, you need to separate them by commas.
+
+                example_code_2: |
+                    ```
+                    temperature = 25
+                    {print}('It is ', temperature, 'degrees outside')
+                    ```
+
+                story_text_3: |-
+                    ##  Input
+                    The final change we will need to make to get Python code is changing `{ask}` into `{input}`.
+
+                example_code_3: |
+                    ```
+                    {print}('My name is Hedy!')
+                    name = {input}('What is your name?')
+                    {print}('So your name is ', name)
+                    ```
+
     story:
         name: "Μια ιστορία"
         description: "Δημιούργησε μια διαδραστική ιστορία"
@@ -1078,7 +1106,7 @@ adventures:
                 start_code: '# place your code here'
                 story_text_2: "## Challenge\nOf course, this code can be expanded with more items on the menu, offering drinks, and/or multiple courses, so feel free to add as many options as you like!\n"
             7:
-                story_text: "## Restaurant\nIn this level you've learned how to use the {repeat} command to repeat a line of code a certain amount of times.\nYou can use that in your restaurant to {ask} multiple people what they'd like to eat. Like this:\n\n```\n{print} 'Welcome to Hedys restaurant!'\npeople = {ask} 'How many people are joining us today?'\n{repeat} people times food = {ask} 'What would you like to eat?'\n{print} 'Thanks for your order! Its coming right up!'\n```\n"
+                story_text: "## Restaurant\nIn this level you've learned how to use the {repeat} command to repeat a line of code a certain amount of times.\nYou can use that in your restaurant to {ask} multiple people what they'd like to eat."
                 start_code: '# place your code here'
                 example_code: "```\n{print} 'Welcome to Hedys restaurant!'\npeople = {ask} 'How many people are joining us today?'\n{repeat} people times food = {ask} 'What would you like to eat?'\n{print} 'Thanks for your order! Its coming right up!'\n```\n"
             6:
