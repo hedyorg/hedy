@@ -10,10 +10,10 @@ export function startParsons(level: number) {
     loadParsonsExercise(level, 1);
 }
 
-export function loadParsonsExercise(level: number, question: number) {
+export function loadParsonsExercise(level: number, exercise: number) {
     $.ajax({
       type: 'GET',
-      url: '/parsons/get-question/' + level + '/' + question,
+      url: '/parsons/get-exercise/' + level + '/' + exercise,
       dataType: 'json'
     }).done(function(response: any) {
         $('#parsons_container').show();
