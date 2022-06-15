@@ -70,6 +70,7 @@ ACHIEVEMENTS_TRANSLATIONS = hedyweb.AchievementTranslations()
 ACHIEVEMENTS = achievements.Achievements()
 DATABASE = database.Database()
 
+
 def load_adventures_per_level(level):
     loaded_programs = {}
     # If user is logged in, we iterate their programs that belong to the current level. Out of these, we keep the latest created program for both the level mode(no adventure) and for each of the adventures.
@@ -837,7 +838,6 @@ def index(level, program_id):
         quiz_questions = len(QUIZZES[g.lang].get_quiz_data_for_level(level))
     if parsons:
         parson_exercises = len(PARSONS[g.lang].get_parsons_data_for_level(level))
-
 
     if 'other_settings' in customizations and 'hide_parsons' in customizations['other_settings']:
         parsons = False
