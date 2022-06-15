@@ -30,10 +30,57 @@
         <div class="flex flex-row">
             <div class="w-1/2 p-2 ltr:mr-2 rtl:ml-2">
                 <p id="parsons_explanation_text"></p>
+                <!-- Let's hard-code 10 possible lines, not really nice: but same approach as quiz. We should improve these two together later on -->
                 <div class="flex flex-col mx-auto items-center" id="parsons_code_lines">
-                    <div class="relative w-full mb-2 border-4 border-black rounded-lg" style="background-color: #272822;">
+                    <div class="relative w-full mb-2 border-4 border-black rounded-lg" style="background-color: #272822;" id="parsons_start_line_container_1">
+                        <!-- The <div> contains the actual code -> support the drag/drop, the pre is only for the visual aspect -->
                         <div index="" draggable="true" code="" class="start-parsons-box w-full absolute inset-0 z-10 rounded-lg"></div>
-                        <pre level="{{ level }}" class="no-copy-button parsons text-sm"></pre>
+                        <pre level="{{ level }}" id="start_parsons_1" class="no-copy-button parsons text-sm"></pre>
+                    </div>
+                    <div class="relative w-full mb-2 border-4 border-black rounded-lg" style="background-color: #272822;" id="parsons_start_line_container_2">
+                        <!-- The <div> contains the actual code -> support the drag/drop, the pre is only for the visual aspect -->
+                        <div index="" draggable="true" code="" class="start-parsons-box w-full absolute inset-0 z-10 rounded-lg"></div>
+                        <pre level="{{ level }}" id="start_parsons_2" class="no-copy-button parsons text-sm"></pre>
+                    </div>
+                    <div class="relative w-full mb-2 border-4 border-black rounded-lg" style="background-color: #272822;" id="parsons_start_line_container_3">
+                        <!-- The <div> contains the actual code -> support the drag/drop, the pre is only for the visual aspect -->
+                        <div index="" draggable="true" code="" class="start-parsons-box w-full absolute inset-0 z-10 rounded-lg"></div>
+                        <pre level="{{ level }}" id="start_parsons_3" class="no-copy-button parsons text-sm"></pre>
+                    </div>
+                    <div class="relative w-full mb-2 border-4 border-black rounded-lg" style="background-color: #272822;" id="parsons_start_line_container_4">
+                        <!-- The <div> contains the actual code -> support the drag/drop, the pre is only for the visual aspect -->
+                        <div index="" draggable="true" code="" class="start-parsons-box w-full absolute inset-0 z-10 rounded-lg"></div>
+                        <pre level="{{ level }}" id="start_parsons_4" class="no-copy-button parsons text-sm"></pre>
+                    </div>
+                    <div class="relative w-full mb-2 border-4 border-black rounded-lg" style="background-color: #272822;" id="parsons_start_line_container_5">
+                        <!-- The <div> contains the actual code -> support the drag/drop, the pre is only for the visual aspect -->
+                        <div index="" draggable="true" code="" class="start-parsons-box w-full absolute inset-0 z-10 rounded-lg"></div>
+                        <pre level="{{ level }}" id="start_parsons_5" class="no-copy-button parsons text-sm"></pre>
+                    </div>
+                    <div class="relative w-full mb-2 border-4 border-black rounded-lg" style="background-color: #272822;" id="parsons_start_line_container_6">
+                        <!-- The <div> contains the actual code -> support the drag/drop, the pre is only for the visual aspect -->
+                        <div index="" draggable="true" code="" class="start-parsons-box w-full absolute inset-0 z-10 rounded-lg"></div>
+                        <pre level="{{ level }}" id="start_parsons_6" class="no-copy-button parsons text-sm"></pre>
+                    </div>
+                    <div class="relative w-full mb-2 border-4 border-black rounded-lg" style="background-color: #272822;" id="parsons_start_line_container_7">
+                        <!-- The <div> contains the actual code -> support the drag/drop, the pre is only for the visual aspect -->
+                        <div index="" draggable="true" code="" class="start-parsons-box w-full absolute inset-0 z-10 rounded-lg"></div>
+                        <pre level="{{ level }}" id="start_parsons_7" class="no-copy-button parsons text-sm"></pre>
+                    </div>
+                    <div class="relative w-full mb-2 border-4 border-black rounded-lg" style="background-color: #272822;" id="parsons_start_line_container_8">
+                        <!-- The <div> contains the actual code -> support the drag/drop, the pre is only for the visual aspect -->
+                        <div index="" draggable="true" code="" class="start-parsons-box w-full absolute inset-0 z-10 rounded-lg"></div>
+                        <pre level="{{ level }}" id="start_parsons_8" class="no-copy-button parsons text-sm"></pre>
+                    </div>
+                    <div class="relative w-full mb-2 border-4 border-black rounded-lg" style="background-color: #272822;" id="parsons_start_line_container_9">
+                        <!-- The <div> contains the actual code -> support the drag/drop, the pre is only for the visual aspect -->
+                        <div index="" draggable="true" code="" class="start-parsons-box w-full absolute inset-0 z-10 rounded-lg"></div>
+                        <pre level="{{ level }}" id="start_parsons_9" class="no-copy-button parsons text-sm"></pre>
+                    </div>
+                    <div class="relative w-full mb-2 border-4 border-black rounded-lg" style="background-color: #272822;" id="parsons_start_line_container_10">
+                        <!-- The <div> contains the actual code -> support the drag/drop, the pre is only for the visual aspect -->
+                        <div index="" draggable="true" code="" class="start-parsons-box w-full absolute inset-0 z-10 rounded-lg"></div>
+                        <pre level="{{ level }}" id="start_parsons_10" class="no-copy-button parsons text-sm"></pre>
                     </div>
                 </div>
             </div>
