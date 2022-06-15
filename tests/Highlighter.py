@@ -54,7 +54,7 @@ ABBREVIATION = {
 
 class HighlightTester(unittest.TestCase):
 
-    def assert_highlighted_chr(self, code, expected, level, lang="en"):
+    def assert_highlighted_chr(self, code, expected, level, lang="en", last_state="start"):
         """Test if the code has the expected coloring on one line
 
         Arguments :
@@ -64,10 +64,10 @@ class HighlightTester(unittest.TestCase):
             - lang : str, code of language
         """
         state_machine = self.get_state_machine(level, lang)
-        self.check(code, expected, state_machine)
+        self.check(code, expected, state_machine, last_state)
 
 
-    def assert_highlighted_chr_multi_line(self, *args, level, lang="en"):
+    def assert_highlighted_chr_multi_line(self, *args, level, lang="en", last_state="start"):
         """Test if the code has the expected coloring on several lines
 
         Arguments :
@@ -85,10 +85,10 @@ class HighlightTester(unittest.TestCase):
         code = '\n'.join(line for i, line in enumerate(args) if i%2 == 0)
         expected = '\n'.join(line for i, line in enumerate(args) if i%2 != 0)
 
-        self.assert_highlighted_chr(code, expected, level, lang)
+        self.assert_highlighted_chr(code, expected, level, lang, last_state)
 
 
-    def assert_highlighted(self, code_coloration, level, lang="en"):
+    def assert_highlighted(self, code_coloration, level, lang="en", last_state="start"):
         """Test if the code has the expected coloring on one line
 
         Arguments :
@@ -97,10 +97,10 @@ class HighlightTester(unittest.TestCase):
             - lang : str, code of language
         """
         code, expected = self.convert(code_coloration)
-        self.assert_highlighted_chr(code, expected, level, lang)
+        self.assert_highlighted_chr(code, expected, level, lang, last_state)
 
 
-    def assert_highlighted_multi_line(self, *args, level, lang="en"):
+    def assert_highlighted_multi_line(self, *args, level, lang="en", last_state="start"):
         """Test if the code has the expected coloring on several lines
 
         Arguments :
@@ -110,11 +110,11 @@ class HighlightTester(unittest.TestCase):
         """
         code_coloration = "\n".join(args)
         code, expected = self.convert(code_coloration)
-        self.assert_highlighted_chr(code, expected, level, lang)
+        self.assert_highlighted_chr(code, expected, level, lang, last_state)
 
 
 
-    def check(self, code, expected, state_machine):
+    def check(self, code, expected, state_machine, last_state='start'):
         """Apply state_machine on code and check if the result is valid
 
         Arguments :
@@ -127,7 +127,7 @@ class HighlightTester(unittest.TestCase):
         and compares with the expected highlighting.
         """
         simulator = SimulatorAce(state_machine)
-        result = simulator.highlight(code)
+        result, last_state_result = simulator.highlight(code)
 
         result = list(result)
         expected = list(expected)
@@ -148,6 +148,8 @@ class HighlightTester(unittest.TestCase):
         # test between two coloration
         self.assertEqual(result ,expected)
 
+        # test fof last state
+        self.assertEqual(last_state, last_state_result)
 
 
     def get_state_machine(self, level, lang="en"):
@@ -313,7 +315,7 @@ class SimulatorAce:
         for line in code.split("\n"):
             output, token = self.highlight_rules_line(line, token)
             outputs.append(output)
-        return "\n".join(outputs)
+        return "\n".join(outputs), token
 
 
     def highlight_rules_line(self, code, start_token="start"):
