@@ -1,5 +1,5 @@
 import { modal } from './modal';
-import { theGlobalEditor } from './app';
+import {stopit, theGlobalEditor} from './app';
 
 /**
  * Activate tabs
@@ -35,6 +35,9 @@ function resetWindow() {
   }
 
   function switchToTab(tabName: string) {
+    // Stop any possible program from running
+    stopit();
+
     // Find the tab that leads to this selection, and its siblings
     const tab = $('*[data-tab="' + tabName + '"]');
     const allTabs = tab.siblings('*[data-tab]');
