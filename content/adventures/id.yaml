@@ -16,7 +16,7 @@ adventures:
 
                     Tidak tahu apa yang mau dibuat? Pada tab-tab berikutnya kamu akan menemukan beberapa ide tentang apa yang bisa dibuat.
                 start_code: print halo dunia!
-                example_code: "## Contoh kode\n```\n{print} Hallo!\n{print} Selamat datang di Hedy!\n```\n"
+                example_code: "```\n{print} Hallo!\n{print} Selamat datang di Hedy!\n```\n"
                 story_text_2: "You can also ask for input and repeat it back with an `{echo}` command.\nTry the code to your left again.\n\nDon't know what to create? In the next tabs you will find ideas for programs to build.\n"
                 example_code_2: "```\n{ask} What is your name?\n{echo} hello\n```\n"
                 story_text_3: "Let's get started! Don't know what to create? In the next tabs you will find ideas for programs to build.\n"
@@ -78,7 +78,6 @@ adventures:
 
                     Pada level 5, ada hal baru, `if`! Dengan `if` kamu bisa memilih antara dua pilihan.
 
-                    ## Contoh kode Hedy
                     ```
                     nama is ask 'siapa nama kamu?'
                     if nama is Hedy print 'keren' else print 'boo'
@@ -116,7 +115,6 @@ adventures:
                     Perkalian sedikit berbeda, karena tidak ada simbol perkalian di keyboard kita. Cobalah cari, ini beneran tidak ada!
                     Karenanya kita melakukan perkalian dengan tanda bintang diatas tombol '8': `5 * 5`. Baca itu sebagai 5 kali 5 dan kamu akan lebih mudah mengingatnya.
 
-                    ## Contoh kode Hedy
                     ```
                     print '5 tambah 5 adalah ' 5 + 5
                     print '5 kurang 5 adalah ' 5 - 5
@@ -131,7 +129,6 @@ adventures:
                     `ask`, `print`, dan `if` berfungsi sama persis dengan yang ada pada level 6.
                     Tapi level 7 menambahkan perintah `repeat`. Perintah repeat dapat digunakan untuk menjalankan satu baris kode beberapa kali
 
-                    ## Contoh kode Hedy
                     ```
                     repeat 3 times print 'Hedy itu menyenangkan!'
                     ```
@@ -146,7 +143,6 @@ adventures:
                     Kamu sekarang dapat mengeksekusi kumpulan kode secara bersamaan, tapi kamu harus memberikan indentasi pada kode tersebut.
                     Indentasi berarti memberikan empat spasi diawal baris. Ini juga berlaku ketika kamu hanya mau mengeksekusi satu baris kode saja.
 
-                    ## Contoh kode Hedy
                     ```
                     repeat 5 times
                         print 'halo semua'
@@ -166,7 +162,6 @@ adventures:
                     Pada contoh kamu lihat sebuah perintah `if` didalam perintah `repeat`. Kamu juga dimungkinkan untuk melakukan sebaliknya, dan `if` juga boleh didalam `if` dan `repeat` didalam `repeat`.
                     Cobalah!
 
-                    ## Contoh kode Hedy
                     ```
                     repeat 3 times
                         makanan = ask 'Apa yang kamu mau?'
@@ -185,7 +180,6 @@ adventures:
                     Pada level ini kita akan belajar perintah `for`. Dengan `for` kamu dapat membuat sebuah daftar dan mengakses semua isinya.
                     `for` membentuk sebuah blok seperti `repeat` dan `if` jadi semua baris untuk aksi harus diawali dengan beberapa spasi.
 
-                    ## Contoh kode Hedy
                     ```
                     hewanhewan is anjing, kucing, ikan
                     for hewan in hewanhewan
@@ -323,7 +317,6 @@ adventures:
                     Kamu bisa menggunakan `echo` jika kamu mau nama karakter utamamu muncul diakhir kalimat.
 
                 example_code: |
-                    ## Contoh kode Hedy
                     ```
                     ask Karakter utama dalam cerita ini adalah
                     print Karakter utama ini sekarang akan berjalan di dalam hutan
@@ -342,7 +335,6 @@ adventures:
                     Kamu lalu dapat menuliskan nama tersebut dimanapun pada sebuah kalimat.
 
                 example_code: |
-                    ## Contoh kode Hedy
                     ```
                     nama is ask Siapa nama karakter utama dalam cerita ini?
                     print nama sekarang akan berjalan di dalam hutan
@@ -358,7 +350,6 @@ adventures:
                     Kamu dapat melakukan pengulangan tersebut pada level 5 dengan perintah `repeat`.
 
                 example_code: |
-                    ## Contoh kode Hedy:
                     ```
                     print 'Sang pangeran mencari bantuan'
                     repeat 5 times print 'Tolong!'
@@ -381,7 +372,6 @@ adventures:
                     Kamu juga dapat menggunakan nama yang dimasukkan. Ini sama dengan yang ada di level 3. Kamu dapat menggabungkan ini dengan `if` dan akhirnya sebuah cerita dengan dua alternatif akhir jadi!
 
                 example_code: |
-                    ## Contoh kode Hedy:
                     ```
                     nama is ask 'Siapakah yang sedang berjalan di dalam hutan?'
                     print nama ' berjalan di dalam hutan'
@@ -398,7 +388,6 @@ adventures:
                     Kamu bisa mengatasi masalah tersebut di level 3. Kamu harus menggunakan tanda kutip satu untuk semua yang akan kamu tampilkan.
 
                 example_code: |
-                    ## Contoh kode Hedy:
                     ```
                     nama is Hans
                     print 'Nama karakter utama adalah ' nama
@@ -483,7 +472,6 @@ adventures:
                     Pada level 6, kamu menuliskan lagu 'botol'. Kamu membuat sebuah reff lalu mengulangnya hingga 99 kali. Pada level 7, kamu dapat melakukannya hanya dengan menambahkan satu baris program.
 
                 example_code: |
-                    ## Contoh kode Hedy
                     ```
                     reff is 99
                     repeat 99 times
@@ -500,7 +488,6 @@ adventures:
                     Lagu-lagu sering memiliki banyak pengulangan. Terkadang pengulangannya didasarkan dari perhitungan. Misal, di sebuah lagu 'Botol'. Kamu dapat membuat program untuk menyanyikan lagu tersebut dengan sedikit matematika.
 
                 example_code: |
-                    ## Contoh kode Hedy
                     ```
                     reff is 99
                     print reff ' botol di dinding'
@@ -532,7 +519,6 @@ adventures:
                     Kamu dapat membuat lagu ini menjadi lebih pendek dengan sebuah `repeat`! Bisakah kamu menyelesaikan kodenya?
 
                 example_code: |
-                    ## Contoh kode Hedy
                     ```
                     repeat _ _ print 'Baby Shark tututudutudu'
                     print 'Baby Shark'
@@ -571,7 +557,6 @@ adventures:
                     Ini merupakan awal dari gambar sebuah tangga kecil. Dapatkan kamu membuatnya memiliki lima anak tangga?
 
                 example_code: |
-                    ## Contoh kode Hedy
                     ```
                     forward 50
                     turn left
@@ -591,7 +576,6 @@ adventures:
                     Gunakan 90 untuk memindahkan arahnya seperempat lingkaran. Kita sebut ini sudut. Satu putaran penuh bernilai 360 derajat. Dapatkah kamu mengerti hasil kode ini? Mungkinkah sebuah segitiga atau sebuah lingkaran?
 
                 example_code: |
-                    ## Contoh kode Hedy
                     ```
                     print Menggambar bentuk
                     sudut is 90
@@ -614,7 +598,6 @@ adventures:
                     Kita hanya perlu mengisi sudut sekali dan menggunakan variabel tersebut dalam `repeat`.
 
                 example_code: |
-                    ## Contoh kode Hedy
                     ```
                     sudut is 90
                     repeat 10 times
@@ -624,7 +607,6 @@ adventures:
                 story_text_2: Selain itu, kita juga bisa meningkatkan kemampuan program untuk menggambar banyak bentuk. Dapatkah kamu tebak seberapa jauh sang kura-kura perlu berbelok disini? Selesaikan kodenya dan kamu dapat menggambar bentuk poligon apapun yang kamu suka!
 
                 example_code_2: |
-                    ## Contoh kode Hedy
                     ```
                     jumlahsudut is ask 'Berapa banyak sudut yang kamu mau?'
                     sudut is 360 / jumlahsudut
@@ -639,7 +621,6 @@ adventures:
                     Pada level 5 kamu bisa mengulangi satu baris kode menggunakan `repeat`
 
                 example_code: |
-                    ## Contoh kode Hedy
                     ```
                     print 'Menggambar bentuk'
                     repeat 3 times forward 10
@@ -656,7 +637,6 @@ adventures:
                     Sekarang karena kamu bisa menggunakan matematika dengan Hedy, kamu bisa menggambar semua bentuk yang kamu inginkan!
 
                 example_code: |
-                    ## Contoh kode Hedy
                     ```
                     jumlahsudut is ask 'Berapa banyak sudut yang kamu mau?'
                     sudut is 360 / jumlahsudut
@@ -680,7 +660,6 @@ adventures:
                     Pada level 4 kita akan mengambil sebuah pilihan dengan `if`. Sebagai contoh: mengambil satu dari kumpulan bentuk.
 
                 example_code: |
-                    ## Contoh kode Hedy
                     ```
                     print 'Menggambar bentuk'
                     bentuk is ask 'Apakah kamu ingin menggambar kotak atau segitiga?'
@@ -706,7 +685,6 @@ adventures:
                     Pada level 3 kamu harus menggunakan tanda kutip satu pada perintah `print` dan `ask`. Begitu juga ketika menggambar!
 
                 example_code: |
-                    ## Contoh kode Hedy
                     ```
                     print 'Menggambar bentuk'
                     sudut is 90
@@ -727,7 +705,6 @@ adventures:
                     Gunakan `at random` untuk memilih nilai dari sebuah list. Kamu dapat menyalin baris 2 dan 3 sehingga membentuk jalur pergerakan yang lebih acak.
 
                 example_code: |
-                    ## Contoh kode Hedy
                     ```
                     sudut is 10, 50, 90, 150, 250
                     turn sudut at random
@@ -749,7 +726,6 @@ adventures:
                     Seberapa sering semua orang mencuci piring? Apakah adil? Kamu harus menghitungnya di level 6.
 
                 example_code: |
-                    ## Contoh kode Hedy
                     ```
                     orang is ibu, ayah, Emma, Sophie
                     emma_cuci is 0
@@ -768,7 +744,6 @@ adventures:
                     Dengan `repeat`, kamu dapat mengulang bagian-bagian kode. Kamu dapat melakukan ini untuk menentukan siapa yang akan mencuci piring selama seminggu kedepan.
 
                 example_code: |
-                    ## Contoh kode Hedy
                     ```
                     orang is ibu, ayah, Emma, Sophie
                     repeat _ _ print 'pencuci piringnya adalah' _
@@ -785,7 +760,6 @@ adventures:
                     Jangan lupakan tanda kutip satu!
 
                 example_code: |
-                    ## Contoh kode Hedy
                     ```
                     orang is ibu, ayah, Emma, Sophie
                     pencucipirng is orang at random
@@ -802,7 +776,6 @@ adventures:
 
                     Tip: Jangan lupa tanda kutip satu!
                 example_code: |
-                    ## Contoh kode Hedy:
                     ```
                     orang is ibu, ayah, Emma, Sophie
                     print _ cuci piring akan dilakukan oleh _
@@ -819,7 +792,6 @@ adventures:
                     Kamu pertama harus membuat daftar anggota keluargamu. Lalu pilihlah dengan `at random` dari dalam daftar tersebut.
 
                 example_code: |
-                    ## Contoh kode Hedy
                     ```
                     orang is ibu, ayah, Emma, Sophie
                     print orang at random
@@ -845,7 +817,6 @@ adventures:
                     Tapi mungkin kamu mau membuat dadu baru. Tentu kamu boleh melakukannya!
 
                 example_code: |
-                    ## Contoh kode Hedy
                     ```
                     pilihan is 1, 2, 3, 4, 5, cacing
                     repeat _ _ print _ _ _
@@ -861,7 +832,6 @@ adventures:
                     Ini adalah kode untuk menghitung poin dari sebuah dadu:
 
                 example_code: |
-                    ## Contoh kode Hedy:
                     ```
                     pilihan is 1, 2, 3, 4, 5, cacing
                     poin is 0
@@ -886,7 +856,6 @@ adventures:
                     Karenanya buatlah respon milikmu sendiri. Misal 'yeah!' untuk 6 dan 'Kasihan' untuk nilai lainnya.
 
                 example_code: |
-                    ## Contoh kode Hedy
                     ```
                     pilihan is 1, 2, 3, 4, 5, cacing
                     lemparan is _
@@ -901,7 +870,6 @@ adventures:
                     Kali ini kode contoh belum sempurna. Dapatkah kamu menyempurnakannya?
 
                 example_code: |
-                    ## Contoh kode Hedy
                     ```
                     pilihan is 1, 2, 3, 4, 5, cacing
                     print _ you threw _
@@ -922,7 +890,6 @@ adventures:
                     ![Dadu earthworms dengan angka 1 sampai 5 dan sebuah cacing tanah](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)
 
                 example_code: |
-                    ## Contoh kode Hedy
                     ```
                     pilihan is 1, 2, 3, 4, 5, cacing
                     print pilihan at random
@@ -949,8 +916,6 @@ adventures:
                     Dengan perintah `ask` kamu bisa mengambil salah satu pilihan, dan dengan `echo` kamu bisa menampilkan pilihan tersebut.
 
                 example_code: |
-                    ## Contoh kode Hedy
-
                     ```
                     print apa yang kamu pilih?
                     ask pilih dari batu, gunting, atau kertas
@@ -968,7 +933,6 @@ adventures:
                     Dapatkah kamu menyelesaikan kode ini?
 
                 example_code: |
-                    ## Contoh kode Hedy
                     ```
                     pilihan is batu, gunting, kertas
                     pil_komputer is _
@@ -989,7 +953,6 @@ adventures:
                     Apakah kamu bisa melengkapi kode berikut dengan memasukkan perintah atau karakter yang benar sebagai pengganti garis bawah?
 
                 example_code: |
-                    ## Contoh kode Hedy:
                     ```
                     pilihan is batu, gunting, kertas
                     print _ Komputer memilih: _ _ at _
@@ -1006,7 +969,6 @@ adventures:
                     Sebagai contoh, kamu dapat membuat komputer memilih antara batu, gunting, atau kertas.
 
                 example_code: |
-                    ## Contoh kode Hedy
                     ```
                     pilihan is batu, gunting, kertas
                     print pilihan at random
@@ -1047,7 +1009,6 @@ adventures:
                     Pada level 6 kamu telah belajar bagaimana membuat kalkulator. Pada level 7 kamu bisa mengembangkan kode tersebut dan membuatnya sebagai permainan matematika, seperti ini...
 
                 example_code: |
-                    ## Contoh kode Hedy
                     ```
                     skor is 0
                     repeat 10 times
@@ -1096,7 +1057,6 @@ adventures:
                     Pada level 1 kamu bisa membuat rumah makan kamu sendiri dan menerima pesanan dari pembeli
 
                 example_code: |
-                    ## Contoh kode Hedy
                       ```
                      print Selamat datang di rumah makan Hedy
                      ask Apa yang mau kamu pesan?
@@ -1116,7 +1076,6 @@ adventures:
                     Sekarang kamu dapat menggunakan variabel dan Hedy dapat mengingat makanan dan minuman yang dipesan!
 
                 example_code: |
-                    ## Contoh kode Hedy
                     ```
                     print Selamat datang di rumah makan Hedy!
                     print Hari ini kami menyediakan pizza atau lasagna.
@@ -1136,7 +1095,6 @@ adventures:
                     Kamu dapat menggunakan `for i in range 1 to 5` untuk menampilkan pesanan dari berbagai pembeli secara terurut.
 
                 example_code: |
-                    ## Contoh kode Hedy
                     ```
                     print 'Selamat datang di rumah makan Hedy!'
                     orang is ask 'For how many orang would you like to order?'
@@ -1203,7 +1161,7 @@ adventures:
                     Pada level 5 kamu dapat menggunakan matematika untuk menghitung total harga dari pesanan pembeli. Ini dapat membuat rumah makan virtual kamu semakin realistis.
 
                 example_code: |
-                    ## Contoh kode Hedy (Sederhana)
+                    ## Sederhana
                     Kamu dapat membuat kode rumah makan sederhana, seperti ini
                     ```
                     print 'Selamat datang di rumah makan Hedy'
@@ -1222,7 +1180,7 @@ adventures:
                 story_text_2: Tapi kamu juga dapat menambahkan hal-hal lain di rumah makan virtual kamu, misalnya menu makanan yang lebih banyak.
 
                 example_code_2: |
-                    ## Contoh kode Hedy (detil)
+                    ## detil
                     Pada contoh ini ada tiga bagian menu, yang memerlukan kode tambahan juga mekanisme perhitungan harga total.
                     ```
                     print 'Selamat datang di rumah makan Hedy'
@@ -1261,7 +1219,6 @@ adventures:
                     Pada contoh dibawah, kamu dapat melihat bahwa kamu dapat menanyakan pembeli apakah mereka ingin tahu menu spesial dan Hedy dapat merespon sesuai dengan jawaban yang diberikan.
 
                 example_code: |
-                    ## Contoh kode Hedy
                     ```
                     print 'Selamat datang di rumah makan Hedy!'
                     spesial is ask 'Apakah kamu ingin tahu menu spesial kami hari ini?'
@@ -1291,7 +1248,6 @@ adventures:
                     Berhati-hatilah! Pada level 2 tanda kutip diperbolehkan di teks namun pada level 3 Hedy tidak akan bisa membedakannya dengan pembatas pada perintah `print`.
 
                 example_code: |
-                    ## Contoh kode Hedy
                     ```
                     print 'Selamat datang di rumah makan Hedy!'
                     print 'Hari ini kami menyediakan pizza atau lasagna.'
@@ -1312,8 +1268,6 @@ adventures:
                     Kamu juga dapat membuat ini menjadi lebih menyenangkan, dengan meminta Hedy untuk memilih harga makan malam kamu juga. Berapa harga yang akan kamu dapatkan?
 
                 example_code: |
-                    ## Contoh kode Hedy rumah makan acak
-
                     ```
                     print Selamat datang di rumah makan Hedy!
                     print Satu-satunya rumah makan yang akan memilih makananmu secara acak juga harganya!
@@ -1376,7 +1330,6 @@ adventures:
                     Seperti ini:
 
                 example_code: |
-                    ## Contoh kode Hedy
                     ```
                     print Halo, aku Hedy sang peramal!
                     ask Siapa kamu?
@@ -1400,7 +1353,6 @@ adventures:
                     Pada contoh berikut kamu dapat membuat sang peramal menanyakan 3 pertanyaan dan juga menampilkannya sekaligus!
 
                 example_code: |
-                    ## Contoh kode Hedy
                     ```
                     print 'Aku Hedy sang peramal!'
                     print 'Kamu dapat bertanya 3 pertanyaan!'
@@ -1417,7 +1369,6 @@ adventures:
                     Pada level 6 kamu dapat menggunakan perintah `repeat` untuk membuat mesin kamu meramal beberapa kali
 
                 example_code: |
-                    ## Contoh kode Hedy:
                     ```
                     print 'Aku Hedy sang peramal!'
                     print 'Kamu dapat bertanya 3 pertanyaan!'
@@ -1445,7 +1396,6 @@ adventures:
                     Sebagai contoh kamu dapat meramal seberapa kaya kamu dan berapa banyak anak yang akan kamu dapat ketika kamu dewasa.
 
                 example_code: |
-                    ## Contoh kode Hedy
                     ```
                     print 'Aku Hedy sang peramal'
                     print 'Aku dapat meramal berapa banyak anak yang akan kamu peroleh ketika kamu dewasa!'
@@ -1480,7 +1430,6 @@ adventures:
                     Cek contoh berikut dan temukan caranya.
 
                 example_code: |
-                    ## Contoh kode Hedy
                     ```
                     print 'Aku Hedy sang peramal!'
                     print 'Aku dapat meramal apakah kamu akan memenangkan undian besok!'
@@ -1490,7 +1439,6 @@ adventures:
                 story_text_2: Ganti Hedy dengan nama kamu pada baris terakhir dan Hedy pasti akan meramal kalau kamu akan memenangkan undian walaupun yang lain tidak! Tentu ini mungkin akan menimbulan kecurigaan bagi para pemain lainnya.... Untuk menghindari itu, kamu dapat memastikan bahwa Hedy memberikan jawaban yang berbeda-beda setiap kali kamu menjalankan kodenya. Tapi tentu saja, tetap memberikan kamu jawaban positif dan memberikan jawaban negatif pada pemain lainnya.
 
                 example_code_2: |
-                    ## Contoh kode Hedy 2
                     ```
                     print 'Aku Hedy sang peramal!'
                     print 'Aku dapat meramal apakah kamu akan memenangkan undian besok!'
@@ -1517,7 +1465,6 @@ adventures:
                     Penting! Ingat juga bahwa karena kita mulai menggunakan tanda kutip satu, Hedy akan bingung ketika kamu menampilkan tanda kutip satu. Pastikan kamu tidak menggunakan karakter tersebut untuk ditampilkan dalam teks.
 
                 example_code: |
-                    ## Contoh kode Hedy
                     ```
                     print 'Aku Hedy sang peramal!'
                     pertanyaan is ask 'Apa yang ingin kamu tahu?'
@@ -1533,7 +1480,6 @@ adventures:
                     Pada level 2 kamu dapat menggunakan variabel dan perintah `at random` untuk membantu Hedy memilih sebuah jawaban untukmu. Lihatlah kode berikut sebagai contoh.
 
                 example_code: |
-                    ## Contoh kode Hedy
                     Pada contoh ini kamu bisa menanyakan pertanyaan benar-salah ke Hedy dan Hedy akan merespon dengan jawaban acak untukmu.
                     ```
                     print Aku Hedy sang peramal!
@@ -1571,7 +1517,6 @@ adventures:
                     Pada level 1 kita memulai permainan rumah berhantu dengan membuat cerita menyeramkan dan menanyakan monster apa yang pemain akan lihat di rumah berhantu.
 
                 example_code: |
-                    ## Contoh kode Hedy
                     ```
                     print Kenapa aku ada disini?
                     print Aku ingat temanku menyarankan untuk tidak ke rumah besar tua itu...
@@ -1597,7 +1542,6 @@ adventures:
                     Pada level 8 kita telah mengubah perintah `repeat` dan menambahkan beberapa baris ke kode permainan rumah berhantu kita, yang menginformasikan ke pemain lokasi ruangan mereka.
 
                 example_code: |
-                    ## Contoh kode Hedy
                     ```
                     print 'Kabur dari rumah berhantu!'
                     pemain is hidup
@@ -1626,7 +1570,6 @@ adventures:
                     Pada level 7 kamu bisa mengulangi beberapa baris kode, memungkinkan kamu untuk membuat permainan rumah berhantu kamu semakin interaktif.
 
                 example_code: |
-                    ## Contoh kode Hedy
                     ```
                     print 'Kabur dari rumah berhantu!'
                     pemain is hidup
@@ -1660,7 +1603,6 @@ adventures:
                     Pada level 4 kamu hanya bisa memenangkan permainan dengan memilih pintu yang sama dengan yang dipilih Hedy secara acak.
 
                 example_code: |
-                    ## Contoh kode Hedy
                     ```
                     print 'Kabur dari rumah berhantu!'
                     print 'Ada 3 pintu di depan kamu...'
@@ -1688,7 +1630,6 @@ adventures:
                     Biarkan Hedy menentukannya secara acak!
 
                 example_code: |
-                    ## Contoh kode Hedy
                     ```
                     print Kabur dari rumah berhantu!
                     print Ada 3 pintu di depan kamu...
