@@ -29,7 +29,6 @@ adventures:
                 story_text_2: "`print` funciona tal e qual como no nível 1 e já não precisas de usar `echo`. Nota: `ask` mudou, também podes guardar a resposta com um nome, da seguinte maneira."
                 example_code: "```\nname {is} Hedy\nage {is} 15\n{print} name is age years old\n```\n"
                 example_code_2: |-
-                    ## Example code
                     ```
                     resposta is ask Como te chamas??
                     ```
@@ -190,7 +189,6 @@ adventures:
                     **Decimal numbers**
                     So far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the `.` for decimal numbers.
                 example_code: |
-                    ## Example Hedy code
                     ```
                     {print} 'Two and a half plus two and a half is...'
                     {print} 2.5 + 2.5
@@ -288,7 +286,6 @@ adventures:
                     We arrived at real Python code! That means we need to use parentheses with {print} and {range} from now on.
 
                 example_code: |
-                    ## Example Hedy Code
                     ```
                     {print}('my name is Hedy!')
                     ```
@@ -736,9 +733,7 @@ adventures:
                     ## Restaurant
                      In level 1 you can make your own virtual restaurant and take your guests' orders.
                 example_code: |
-                    ## Example Hedy code
-
-                      ```
+                     ```
                      {print} Welcome to Hedy's restaurant 🍟
                      {ask} What would you like to order?
                      {echo} So you would like to order
@@ -755,7 +750,6 @@ adventures:
                     In level 2 you could expand your restaurant by using variables. In level 1 Hedy could only {echo} the order once and only remember the last thing that was ordered.
                     Now you can use variables and Hedy can remember both the food and the drinks!
                 example_code: |
-                    ## Example Hedy Code
                     ```
                     {print} Welcome to Hedy's restaurant!
                     {print} Today we're serving pizza or lasagna.
@@ -776,8 +770,6 @@ adventures:
                     You can also have a bit of fun, by letting Hedy choose the price for your dinner as well! What will you get?
 
                 example_code: |
-                    ## Example Hedy code
-
                     ```
                     {print} Welcome to Hedy's Random Restaurant!
                     {print} The only restaurant that will randomly choose your meal and its price for you!
@@ -835,8 +827,6 @@ adventures:
                     In the example below, you see that you can {ask} the customer {if} they want to hear the specials and Hedy can respond accordingly.
 
                 example_code: |
-                    ## Example Hedy code
-
                     ```
                     {print} 'Welcome to Hedys restaurant!'
                     special {is} {ask} 'Would you like to hear our specials today?'
@@ -863,7 +853,7 @@ adventures:
                     In this level you can use maths to calculate the total price of your customer's order, which can make your virtual restaurant more realistic.
 
                 example_code: |
-                    ## Example Hedy code (Simple)
+
                     You can make a simple restaurant code, like this:
                     ```
                     {print} 'Welcome to Hedys restaurant'
@@ -889,7 +879,7 @@ adventures:
                     - add a children's menu?
                     - think of other fun things to add?
                 example_code_2: |
-                    ## Example Hedy code (Elaborate)
+
                     In this example there are three courses, which requires more code and more additions in calculating the price.
                     ```
                     {print} 'Welcome to Hedys restaurant'
@@ -952,8 +942,6 @@ adventures:
                     For example you would {ask} for sauce {if} somebody orders fries, but you wouldn't {if} someone orders pizza!
                     Check out the example, and try this at your own virtual restaurant!
                 example_code: |
-                    ## Example Hedy code
-
                     ```
                     {print} 'Welcome to Hedys restaurant!'
                     people = {ask} 'How many people will be joining us today?'
@@ -981,8 +969,6 @@ adventures:
                     ## Restaurant
                     In this level you'll learn how to easily {ask} your guests' orders in a short code.
                 example_code: |
-                    ## Example Hedy code
-
                     ```
                     courses = appetizer, main course, dessert
                     {for} course {in} courses
@@ -990,7 +976,6 @@ adventures:
                         {print} food ' will be your ' course
                     ```
                 story_text_2: |
-                    ## Example Hedy code
 
                     Of course, you could also order for multiple people!
                 example_code_2: |
@@ -1008,8 +993,6 @@ adventures:
                     ## Restaurant
                     We can use the `{for} i {in} {range} 1 {to} 5` to {print} the orders from multiple customers in an orderly manner.
                 example_code: |
-                    ## Example Hedy code
-
                     ```
                     {print} 'Welcome to Restaurant Hedy!'
                     people = {ask} 'For how many people would you like to order?'
@@ -1031,8 +1014,6 @@ adventures:
                     ## Restaurant
                     From this level on you can use decimal numbers to make you menu more realistic.
                 example_code: |
-                    ## Example Hedy code
-
                     ```
                     price = 0
                     food = {ask} 'What would you like to order?'
@@ -1055,7 +1036,6 @@ adventures:
                     We use `{and}` to see {if} two things are both the case.
 
                 example_code: |
-                    ## Example Hedy code
                     ```
                     price = 10
                     food = {ask} 'What would you like to eat?'
@@ -1069,7 +1049,6 @@ adventures:
                     We use `{or}` to see {if} one our of two things is the case.
 
                 example_code_2: |
-                    ## Example Hedy code
                     ```
                     drinks = {ask} 'What would you like to drink?'
                     {if} drinks {is} 'water' {or} drinks {is} 'juice'
@@ -1082,8 +1061,6 @@ adventures:
                     With the `{while}` you can make sure your costumers can keep adding orders until they are done.
 
                 example_code: |
-                    ## Example Hedy code
-
                     ```
                     {print} 'Welcome at McHedy'
                     more = 'yes'
@@ -1156,9 +1133,6 @@ adventures:
 
                     In level 1 we start our haunted house game by making up a scary story and {ask} the player what monster they'll see in the haunted house.
                 example_code: |
-                    ## Example Hedy code
-
-
                     ```
                     {print} How did I get here?
                     {print} I remember my friend telling me to go into the old mansion...
@@ -1182,7 +1156,6 @@ adventures:
                     ## Haunted House
                     In this haunted house you can choose your monsters with emojis. Of course you could also use words.
                 example_code: |
-                    ## Example Hedy Code
                     ```
                     monster_1 {is} 👻
                     monster_2 {is} 🤡
@@ -1201,7 +1174,6 @@ adventures:
                     In this level you can make your story more interactive by changing the outcome of the game; sometimes you'll get eaten, sometimes you'll escape!
                     Let Hedy decide randomly!
                 example_code: |
-                    ## Example Hedy code
                     ```
                     {print} Escape from the haunted house!
                     {print} There are 3 doors in front of you...
@@ -1246,8 +1218,6 @@ adventures:
                     If the player filled in a completely random answer, the game would still work and the player might even win (despite not picking a door).
                     In this level you can only win the game by picking the same door Hedy picked randomly.
                 example_code: |
-                    ## Example Hedy code
-
                     ```
                     {print} 'Escape from the haunted house!'
                     {print} 'There are 3 doors in front of you...'
@@ -1271,8 +1241,6 @@ adventures:
                     Now it's very hard to win this game, can you make it easier to win?
                     For example by only having 1 wrong door and 2 correct doors instead of 1 correct door and 2 wrong ones?
                 example_code: |
-                    ## Example Hedy code
-
                     ```
                     {print} 'Escape from the Haunted House!'
                     player = alive
@@ -1299,8 +1267,6 @@ adventures:
                     ## Haunted House
                     In this level we've changed the repeat command and we've added a line to our haunted house that tells the player in which room they are.
                 example_code: |
-                    ## Example Hedy code
-
                     ```
                     {print} 'Escape from the Haunted House!'
                     player {is} alive
@@ -1328,8 +1294,6 @@ adventures:
                     ## Haunted House
                     In this level you can use the `<` and `>` symbol to introduce lives to your game.
                 example_code: |
-                    ## Example Hedy code
-
                     ```
                     {print} 'Escape from the haunted house'
                     lives = 3
@@ -1360,8 +1324,6 @@ adventures:
                     For example: all the properties that belong to the zombie are first in all the lists, witch second and vampire third.
                     Check out the code!
                 example_code: |
-                    ## Example Hedy code
-
                     ```
                     numbers = [1, 2, 3]
                     i = numbers[{random}]
@@ -1421,7 +1383,6 @@ adventures:
                     ## Learn a new language
                     Make your own program to practice your vocabulary in a new language.
                 example_code: |
-                    ## Example Hedy code
                     ```
                     {print} 'Learn French!'
                     cat {is} {ask} '🐱'
@@ -1438,7 +1399,6 @@ adventures:
                     Make your own program to practice your vocabulary in a new language.
 
                 example_code: |
-                    ## Example Hedy code
                     ```
                     french_words = ['bonjour', 'ordinateur', 'pomme de terre']
                     translation = ['hello', 'computer', 'potato']
