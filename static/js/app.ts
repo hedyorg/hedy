@@ -350,6 +350,7 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
         stopit();
         return;
       } else {
+        // Add the onclick on the button -> only show if there is another exercise to laod
         $('#nextExercise').show();
       }
     } else {

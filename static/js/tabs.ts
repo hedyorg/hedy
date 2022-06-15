@@ -83,10 +83,11 @@ function resetWindow() {
       $ ('#adventures-tab').css('height', '');
       $ ('#adventures-tab').css('min-height', '14em');
       $ ('#adventures-tab').css('max-height', '100%');
+      $ ('#debug_container').hide();
     } else {
       $ ('#editor').show();
       $ ('#parsons_code_container').hide();
-      $('#debug_container').show();
+      $ ('#debug_container').show();
       $ ('#adventures-tab').css('max-height', '20em');
     }
 
