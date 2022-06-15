@@ -633,6 +633,17 @@ adventures:
                     ## Πρόγραμμα πλυσίματος πιάτων
                     Πόσο συχνά θα πλένει ο καθένας τα πιάτα; Είναι δίκαιο αυτό; Μπορείς να το υπολογίσεις στο επίπεδο 6.
 
+                    Τώρα μπορείς να αντιγράψεις τις γραμμές 3 έως 4 κάποιες φορές (πχ. 7 φορές για όλην την εβδομάδα) για να υπολογίσεις για όλην την εβδομάδα.
+                    Θα κάνεις τον κώδικα για όλην την εβδομάδα;
+
+                    ## Τί ακολουθεί;
+                    Τώρα θα πρέπει να κάνεις πολλή αντιγραφή και επικόλληση, έτσι; Αυτό θα το διορθώσουμε στο επίπεδο 7.
+                    Αυτό το επίπεδο είναι το τέλος της περιπέτειας του πλυσίματος! Όμως υπάρχουν πολλές ακόμα περιπέτειες να ακολουθήσεις σε άλλα επίπεδα, όπως το κομπιουτεράκι, μια διαδραστική ιστορία και ένα πιο περίπλοκο παιχνίδι.
+
+                start_code: "print 'Ποιός θα πλύνει τα πιάτα;'"
+                example_code: "## Παράδειγμα κώδικα Hedy\n\n```\npeople = mom, dad, Emma, Sophie\nemma_washes = 0\ndishwasher = people {at} {random}\n{print} 'The dishwasher is' dishwasher\n{if} dishwasher {is} Emma emma_washes = emma_washes + 1\n{print} 'Emma will do the dishes this week' emma_washes 'times'\n```\n\nNow you can copy lines 3 to 5 a few times (e.g. 7 times for a whole week) to calculate for a whole week again.\nDo you make the code for the whole week?\n"
+                story_text_2: "## Make it fair\nIf you are extremely unlucky the previous program might choose you to to the dishes for the whole week! That's not fair!\nTo create a fairer system you can use the `{remove}` command to remove the chosen person from the list. This way you don't have to do the dishes again untill everybody has had a turn.\n\nMonday and tuesday are ready for you! Can you add the rest of the week?\nAnd... can you come up with a solution for when your list is empty?\n"
+                example_code_2: |-
                     ## Παράδειγμα κωδικα Hedy
                     ```
                     people is μαμά, μπαμπάς, Ελένη, Σοφία
@@ -642,19 +653,6 @@ adventures:
                     if dishwasher is Ελένη eleni_washes is eleni_washes + 1
                     print 'Η Ελένη θα πλύνει τα πιάτα ' eleni_washes 'φορές αυτήν την εβδομάδα'
                     ```
-
-                    Τώρα μπορείς να αντιγράψεις τις γραμμές 3 έως 4 κάποιες φορές (πχ. 7 φορές για όλην την εβδομάδα) για να υπολογίσεις για όλην την εβδομάδα.
-                    Θα κάνεις τον κώδικα για όλην την εβδομάδα;
-
-
-                    ## Τί ακολουθεί;
-                    Τώρα θα πρέπει να κάνεις πολλή αντιγραφή και επικόλληση, έτσι; Αυτό θα το διορθώσουμε στο επίπεδο 7.
-                    Αυτό το επίπεδο είναι το τέλος της περιπέτειας του πλυσίματος! Όμως υπάρχουν πολλές ακόμα περιπέτειες να ακολουθήσεις σε άλλα επίπεδα, όπως το κομπιουτεράκι, μια διαδραστική ιστορία και ένα πιο περίπλοκο παιχνίδι.
-
-                start_code: "print 'Ποιός θα πλύνει τα πιάτα;'"
-                example_code: "## Παράδειγμα κώδικα Hedy\n\n```\npeople = mom, dad, Emma, Sophie\nemma_washes = 0\ndishwasher = people {at} {random}\n{print} 'The dishwasher is' dishwasher\n{if} dishwasher {is} Emma emma_washes = emma_washes + 1\n{print} 'Emma will do the dishes this week' emma_washes 'times'\n```\n\nNow you can copy lines 3 to 5 a few times (e.g. 7 times for a whole week) to calculate for a whole week again.\nDo you make the code for the whole week?\n"
-                story_text_2: "## Make it fair\nIf you are extremely unlucky the previous program might choose you to to the dishes for the whole week! That's not fair!\nTo create a fairer system you can use the `{remove}` command to remove the chosen person from the list. This way you don't have to do the dishes again untill everybody has had a turn.\n\nMonday and tuesday are ready for you! Can you add the rest of the week?\nAnd... can you come up with a solution for when your list is empty?\n"
-                example_code_2: "```\npeople = mom, dad, Emma, Sophie\ndishwasher = people {at} {random}\n{print} 'Monday the dishes are done by: ' dishwasher\n{remove} dishwasher {from} people\ndishwasher = people {at} {random}\n{print} 'Tuesday the dishes are done by: ' dishwasher\n{remove} dishwasher {from} people\ndishwasher = people {at} {random}\n```\n"
             5:
                 story_text: |
                     ## Πρόγραμμα πλυσίματος πιάτων
@@ -1108,7 +1106,7 @@ adventures:
                 start_code: '# place your code here'
                 story_text_2: "## Challenge\nCan you think of more questions to {ask} the customers when they are ordering, and make up different responses to their answers by using the {if} command?\n"
             4:
-                story_text: "## Restaurant\nIn this level you have to use quotation marks when using the `{print}` command.\nCan you make your code from the previous levels work in this level too by adding the quotation marks?\n\nBe careful! In the previous levels apostrophes were allowed in the text, but in this level Hedy will confuse them for quotation marks and the code will not work!\nSo instead of typing  `{print} Today we're serving pizza` , you should type `{print} 'Today we are serving pizza'`.
+                story_text: "## Restaurant\nIn this level you have to use quotation marks when using the `{print}` command.\nCan you make your code from the previous levels work in this level too by adding the quotation marks?\n\nBe careful! In the previous levels apostrophes were allowed in the text, but in this level Hedy will confuse them for quotation marks and the code will not work!\nSo instead of typing  `{print} Today we're serving pizza` , you should type `{print} 'Today we are serving pizza'`."
                 start_code: '# place your code here'
                 example_code: "## Example Hedy Restaurant\n```\n{print} 'Welcome to Hedys restaurant!'\n{print} 'Today we are serving pizza or lasagna.'\nfood {is} {ask} 'What would you like to eat?'\n{print} 'Great choice! The ' food ' is my favorite!'\ntopping {is} {ask} 'Would you like meat or veggies on that?'\n{print} food ' with ' topping ' is on its way!'\ndrinks {is} {ask} 'What would you like to drink with that?'\n{print} 'Thank you for your order.'\n{print} 'Your ' food ' and ' drinks ' will be right there!'\n```\n"
             15:
@@ -1186,48 +1184,251 @@ adventures:
         default_save_name: turtle
         name: Turtle
     haunted:
+        name: "Haunted House"
+        description: "Escape from the haunted house"
+        default_save_name: "Haunted House"
         levels:
             1:
-                start_code: '{print} How did I get here?'
-                story_text: "## Haunted house\nIn this adventure you are working towards making a game in which you have to escape from a haunted house by picking the correct door.\nIf you pick the right door you'll survive, but {if} not a terrible monster might...\n\nIn level 1 we start our haunted house game by making up a scary story and {ask} the player what monster they'll see in the haunted house.\n"
-                example_code: "## Παράδειγμα κώδικα Hedy\n\n\n```\n{print} How did I get here?\n{print} I remember my friend telling me to go into the old mansion...\n{print} and suddenly everything went black.\n{print} But how did I end up on the floor...?\n{print} My head hurts like Ive been hit by a baseball bat!\n{print} What's that sound?\n{print} Oh no! I feel like Im not alone in this house!\n{print} I need to get out of here!\n{print} There are 3 doors in front of me..\n{ask} Which door should i pick?\n{echo} I choose door\n{print} ...?\n```\n\n## Challenge\nCan you finish the scary story? Or make up your own haunted house story?\n"
-                story_text_2: "## Challenge\nCan you finish the scary story? Or make up your own haunted house story?\n"
-            14:
-                story_text: "## Haunted House\nIn this level you can use the `<` and `>` symbol to introduce lives to your game.\n"
-                example_code: "## Παράδειγμα κώδικα Hedy\n\n```\n{print} 'Escape from the haunted house'\nlives = 3\ndoors = 1, 2, 3\nmonsters = 'the wicked witch', 'a zombie', 'a sleeping 3 headed dog'\n{for} i {in} {range} 1 {to} 10\n    {if} lives > 0\n        good_door = doors {at} {random}\n        monster = monsters {at} {random}\n        chosen_door = {ask} 'Which door do you choose?'\n        {if} good_door == chosen_door\n            {print} 'You have chosen the correct door'\n        {else}\n            {print} 'You see...' monster\n            {if} monster == 'a sleeping 3 headed dog'\n                {print} 'Pffieuw.... Its asleep'\n            {else}\n                {print} 'You lose one life'\n                lives = lives -1\n    {else}\n        {print} 'GAME OVER'\n```\n"
-                start_code: '# place your code here'
-            4:
-                story_text: "## Haunted house\nIn this level you learn how to use quotation marks in your games.\nCan you make your Haunted House level 4 proof?\n"
-                start_code: '# place your code here'
-                example_code: "```\n{print} _Escape from the haunted house!_\n{print} _There are 3 doors in front of you..._\nchoice {is} {ask} _Which door do you choose?_\n{print} _You picked door ..._ choice\nmonsters {is} a zombie, a vampire, NOTHING YOUVE ESCAPED\n{print} _You see..._\n{sleep}\n{print} monsters {at} {random}\n ```\n"
-            16:
-                story_text: "## Haunted House Game\nThis haunted house game uses the connection between the lists you can use in this level.\nFor example: all the properties that belong to the zombie are first in all the lists, witch second and vampire third.\nCheck out the code!\n"
-                example_code: "## Παράδειγμα κώδικα Hedy\n\n```\nnumbers = [1, 2, 3]\ni = numbers[random]\nhint = ['growling', 'a cackling laugh', 'fluttering batwings']\nmonsters = ['zombie', 'witch', 'vampire']\nbad_fate = ['Your brain is eaten', 'You are forever cursed', 'You are bitten']\ngood_fate = ['You throw the ham. The zombie is distracted and starts etaing it.', 'You set the curtains on fire. The witch flees out of fear for the fire', 'The vampire hates garlic and flees']\nweapons = ['ham', 'lighter', 'garlic']\n{print} 'You are standing in front of an old mension'\n{print} 'Something is not right here'\n{print} 'You hear ' hint[i]\n{print} 'You are going to explore it'\n{print} 'You enter the kitchen en see a lighter, a raw ham and a garlic.'\nyour_weapon = {ask} 'What do you bring with you?'\n{print} 'With your ' your_weapon ' you enter the living room'\n{print} 'There you find a ' monsters[i]\nneeded_weapon = weapons[i]\n{if} your_weapon == needed_weapon\n    {print} 'You use your ' your_weapon\n    {print} good_fate[i]\n    {print} 'YOU WIN!'\n{else}\n    {print} 'You have chosen the wrong weapon...'\n    {print} bad_fate[i]\n    {print} 'GAME OVER'\n```\n"
-                start_code: '# place your code here'
+                story_text: |
+                    ## Haunted house
+                    In this adventure you are working towards making a game in which you have to escape from a haunted house by picking the correct door.
+                    If you pick the right door you'll survive, but {if} not a terrible monster might...
+
+                    In level 1 we start our haunted house game by making up a scary story and {ask} the player what monster they'll see in the haunted house.
+                example_code: |
+                    ## Example Hedy code
+
+
+                    ```
+                    {print} How did I get here?
+                    {print} I remember my friend telling me to go into the old mansion...
+                    {print} and suddenly everything went black.
+                    {print} But how did I end up on the floor...?
+                    {print} My head hurts like Ive been hit by a baseball bat!
+                    {print} What's that sound?
+                    {print} Oh no! I feel like Im not alone in this house!
+                    {print} I need to get out of here!
+                    {print} There are 3 doors in front of me..
+                    {ask} Which door should i pick?
+                    {echo} I choose door
+                    {print} ...?
+                    ```
+                story_text_2: |
+                    ## Challenge
+                    Can you finish the scary story? Or make up your own haunted house story?
+                start_code: "{print} How did I get here?"
             2:
-                story_text: "## Haunted House\nIn this haunted house you can choose your monsters with emojis. Of course you could also use words.\n\n## Παράδειγμα κώδικα Hedy\n```\nmonster1 {is} \U0001F47B\nmonster2 {is} \U0001F921\nmonster3 {is} \U0001F476\n{print} You enter the haunted house.\n{print} Suddenly you see a monster1\n{print} You run into the other room, but a monster2 is waiting there for you!\n{print} Oh no! Quickly get to the kitchen.\n{print} But as you enter monster3 attacks you!\n```\n"
-                start_code: monster1 {is} _
-                example_code: "## Παράδειγμα κώδικα Hedy\n```\nmonster_1 {is} \U0001F47B\nmonster_2 {is} \U0001F921\nmonster_3 {is} \U0001F476\n{print} You enter the haunted house.\n{print} Suddenly you see a monster_1\n{print} You run into the other room, but a monster_2 is waiting there for you!\n{print} Oh no! Quickly get to the kitchen.\n{print} But as you enter monster_3 attacks you!\n```\n"
-            11:
-                story_text: "## Haunted House\nIn this level we've changed the repeat command and we've added a line to our haunted house that tells the player in which room they are.\n"
-                example_code: "## Παράδειγμα κώδικα Hedy\n\n```\n{print} 'Escape from the Haunted House!'\nplayer {is} alive\ndoors = 1, 2, 3\nmonsters = zombie, vampire, giant spider\n{for} i {in} {range} 1 {to} 3\n    {if} player {is} alive\n        correct_door = doors {at} {random}\n        {print} 'Room ' i\n        {print} 'There are 3 doors in front of you...'\n        chosendoor = {ask} 'Which door do you choose?'\n        {if} chosendoor {is} correct_door\n            {print} 'No monsters here!'\n        {else}\n            {print} 'You are eaten by a ' monsters {at} {random}\n            player = dead\n    {else}\n        {print} 'GAME OVER'\n{if} player {is} alive\n    {print} 'Great! You survived!'\n```\n"
-                start_code: "{print} 'Escape from the haunted house!'"
-            9:
-                story_text: "## Haunted House\nIn this level you can use nesting, which allows you to make the haunted house even more interactive!\n"
-                example_code: "## Παράδειγμα κώδικα Hedy\n\n```\n{print} 'Escape from the Haunted House!'\nplayer = alive\ndoors = 1, 2, 3\nmonsters = zombie, vampire, giant spider\n{repeat} 3 {times}\n    {if} player {is} alive\n        correct_door {is} doors {at} {random}\n        {print} 'There are 3 doors in front of you...'\n        chosen_door = {ask} 'Which door do you choose?'\n        {if} chosen_door {is} correct_door\n            {print} 'No monsters here!'\n        {else}\n            {print} 'You are eaten by a ' monsters {at} {random}\n            player = dead\n    {else}\n        {print} 'GAME OVER'\n{if} player {is} alive\n    {print} 'Great! You survived!'\n```\n## Challenge\nNow it's very hard to win this game, can you make it easier to win?\nFor example by only having 1 wrong door and 2 correct doors instead of 1 correct door en 2 wrong ones?\n"
-                start_code: "{print} 'Escape from the haunted house!'"
-            5:
-                story_text: "## Haunted House\nUp until this level the haunted house game always asked the player to choose a door, but as you might have noticed, they didn't really have to answer correctly.\nIf the player filled in a completely random answer, the game would still work and the player might even win (despite not picking a door).\nIn this level you can only win the game by picking the same door Hedy picked randomly.\n"
-                example_code: "## Παράδειγμα κώδικα Hedy\n\n```\n{print} 'Escape from the haunted house!'\n{print} 'There are 3 doors in front of you...'\ndoors {is} 1, 2, 3\nmonsters {is} werewolf, mummy, vampire, zombie\nchosen_door {is} {ask} 'Which door do you choose?'\n{print} 'You chose door...' chosen_door\n{sleep}\ncorrect_door {is} doors {at} {random}\n{if} chosen_door {is} correct_door {print} 'Great! Youve escaped!'\n{else} {print} 'Oh no! You are being eaten by a...' monsters {at} {random}\n```\n"
-                start_code: '# place your code here'
+                story_text: |
+                    ## Haunted House
+                    In this haunted house you can choose your monsters with emojis. Of course you could also use words.
+                example_code: |
+                    ## Example Hedy Code
+                    ```
+                    monster_1 {is} 👻
+                    monster_2 {is} 🤡
+                    monster_3 {is} 👶
+                    {print} You enter the haunted house.
+                    {print} Suddenly you see a monster_1
+                    {print} You run into the other room, but a monster_2 is waiting there for you!
+                    {print} Oh no! Quickly get to the kitchen.
+                    {print} But as you enter monster_3 attacks you!
+                    ```
+                start_code: "monster1 {is} _"
             3:
-                story_text: "## Haunted house game\nIn the previous levels you've made an introduction to your haunted house game, but as you might have noticed the story would always have a dreadful end.\nIn this level you can make your story more interactive by changing the outcome of the game; sometimes you'll get eaten, sometimes you'll escape!\nLet Hedy decide randomly!\n"
-                example_code: "## Παράδειγμα κώδικα Hedy\n\n```\n{print} Escape from the haunted house!\n{print} There are 3 doors in front of you...\nchoice {is} {ask} Which door do you choose?\n{print} You picked door ... choice\nmonsters {is} a zombie, a vampire, NOTHING YOUVE ESCAPED\n{print} You see...\n{sleep}\n{print} monsters {at} {random}\n```\n\n## Challenge\nThis story is pretty straight {forward}, maybe you can spook it up a bit by adding a more exciting story.\nAlso you have very limited outcomes right now, there are only 3 options of what's behind the doors. Maybe you can think of more monsters to add to the list!\n\n## Change the game into a tv gameshow!\nLastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!\nCan you do it?\n"
-                start_code: '# place your code here'
-                story_text_2: "## Challenge\nThis story is pretty straight {forward}, maybe you can spook it up a bit by adding a more exciting story.\nAlso you have very limited outcomes right now, there are only 3 options of what's behind the doors. Maybe you can think of more monsters to add to the list!\n\n## Change the game into a tv gameshow!\nLastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!\nCan you do it?\n"
-        name: Haunted House
-        description: escape from the haunted house
-        default_save_name: Haunted House
+                story_text: |
+                    ## Haunted house game
+                    In the previous levels you've made an introduction to your haunted house game, but as you might have noticed the story would always have a dreadful end.
+                    In this level you can make your story more interactive by changing the outcome of the game; sometimes you'll get eaten, sometimes you'll escape!
+                    Let Hedy decide randomly!
+                example_code: |
+                    ## Example Hedy code
+                    ```
+                    {print} Escape from the haunted house!
+                    {print} There are 3 doors in front of you...
+                    choice {is} {ask} Which door do you choose?
+                    {print} You picked door ... choice
+                    monsters {is} a zombie, a vampire, NOTHING YOUVE ESCAPED
+                    {print} You see...
+                    {sleep}
+                    {print} monsters {at} {random}
+                    ```
+                story_text_2: |
+                    ## Challenge
+                    This story is pretty straight {forward}, maybe you can spook it up a bit by adding a more exciting story.
+                    Also you have very limited outcomes right now, there are only 3 options of what's behind the doors. Maybe you can think of more monsters to add to the list!
+
+                    ## Change the game into a tv gameshow!
+                    Lastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!
+                    Can you do it?
+                start_code: "# place your code here"
+            4:
+                story_text: |
+                    ## Haunted house
+                    In this level you learn how to use quotation marks in your games.
+                    Can you make your Haunted House level 4 proof?
+                example_code: |
+                    ```
+                    {print} _Escape from the haunted house!_
+                    {print} _There are 3 doors in front of you..._
+                    choice {is} {ask} _Which door do you choose?_
+                    {print} _You picked door ..._ choice
+                    monsters {is} a zombie, a vampire, NOTHING YOUVE ESCAPED
+                    {print} _You see..._
+                    {sleep}
+                    {print} monsters {at} {random}
+                     ```
+
+                start_code: "# place your code here"
+            5:
+                story_text: |
+                    ## Haunted House
+                    Up until this level the haunted house game always asked the player to choose a door, but as you might have noticed, they didn't really have to answer correctly.
+                    If the player filled in a completely random answer, the game would still work and the player might even win (despite not picking a door).
+                    In this level you can only win the game by picking the same door Hedy picked randomly.
+                example_code: |
+                    ## Example Hedy code
+
+                    ```
+                    {print} 'Escape from the haunted house!'
+                    {print} 'There are 3 doors in front of you...'
+                    doors {is} 1, 2, 3
+                    monsters {is} werewolf, mummy, vampire, zombie
+                    chosen_door {is} {ask} 'Which door do you choose?'
+                    {print} 'You chose door...' chosen_door
+                    {sleep}
+                    correct_door {is} doors {at} {random}
+                    {if} chosen_door {is} correct_door {print} 'Great! Youve escaped!'
+                    {else} {print} 'Oh no! You are being eaten by a...' monsters {at} {random}
+                    ```
+
+                start_code: "# place your code here"
+            9:
+                story_text: |
+                    ## Haunted House
+                    In this level you can use nesting, which allows you to make the haunted house even more interactive!
+
+                    ## Challenge
+                    Now it's very hard to win this game, can you make it easier to win?
+                    For example by only having 1 wrong door and 2 correct doors instead of 1 correct door and 2 wrong ones?
+                example_code: |
+                    ## Example Hedy code
+
+                    ```
+                    {print} 'Escape from the Haunted House!'
+                    player = alive
+                    doors = 1, 2, 3
+                    monsters = zombie, vampire, giant spider
+                    {repeat} 3 {times}
+                        {if} player {is} alive
+                            correct_door {is} doors {at} {random}
+                            {print} 'There are 3 doors in front of you...'
+                            chosen_door = {ask} 'Which door do you choose?'
+                            {if} chosen_door {is} correct_door
+                                {print} 'No monsters here!'
+                            {else}
+                                {print} 'You are eaten by a ' monsters {at} {random}
+                                player = dead
+                        {else}
+                            {print} 'GAME OVER'
+                    {if} player {is} alive
+                        {print} 'Great! You survived!'
+                    ```
+                start_code: "{print} 'Escape from the haunted house!'"
+            11:
+                story_text: |
+                    ## Haunted House
+                    In this level we've changed the repeat command and we've added a line to our haunted house that tells the player in which room they are.
+                example_code: |
+                    ## Example Hedy code
+
+                    ```
+                    {print} 'Escape from the Haunted House!'
+                    player {is} alive
+                    doors = 1, 2, 3
+                    monsters = zombie, vampire, giant spider
+                    {for} i {in} {range} 1 {to} 3
+                        {if} player {is} alive
+                            correct_door = doors {at} {random}
+                            {print} 'Room ' i
+                            {print} 'There are 3 doors in front of you...'
+                            chosendoor = {ask} 'Which door do you choose?'
+                            {if} chosendoor {is} correct_door
+                                {print} 'No monsters here!'
+                            {else}
+                                {print} 'You are eaten by a ' monsters {at} {random}
+                                player = dead
+                        {else}
+                            {print} 'GAME OVER'
+                    {if} player {is} alive
+                        {print} 'Great! You survived!'
+                    ```
+                start_code: "{print} 'Escape from the haunted house!'"
+            14:
+                story_text: |
+                    ## Haunted House
+                    In this level you can use the `<` and `>` symbol to introduce lives to your game.
+                example_code: |
+                    ## Example Hedy code
+
+                    ```
+                    {print} 'Escape from the haunted house'
+                    lives = 3
+                    doors = 1, 2, 3
+                    monsters = 'the wicked witch', 'a zombie', 'a sleeping 3 headed dog'
+                    {for} i {in} {range} 1 {to} 10
+                        {if} lives > 0
+                            good_door = doors {at} {random}
+                            monster = monsters {at} {random}
+                            chosen_door = {ask} 'Which door do you choose?'
+                            {if} good_door == chosen_door
+                                {print} 'You have chosen the correct door'
+                            {else}
+                                {print} 'You see...' monster
+                                {if} monster == 'a sleeping 3 headed dog'
+                                    {print} 'Pffieuw.... Its asleep'
+                                {else}
+                                    {print} 'You lose one life'
+                                    lives = lives -1
+                        {else}
+                            {print} 'GAME OVER'
+                    ```
+                start_code: "# place your code here"
+            16:
+                story_text: |
+                    ## Haunted House Game
+                    This haunted house game uses the connection between the lists you can use in this level.
+                    For example: all the properties that belong to the zombie are first in all the lists, witch second and vampire third.
+                    Check out the code!
+                example_code: |
+                    ## Example Hedy code
+
+                    ```
+                    numbers = [1, 2, 3]
+                    i = numbers[{random}]
+                    hint = ['growling', 'a cackling laugh', 'fluttering batwings']
+                    monsters = ['zombie', 'witch', 'vampire']
+                    bad_fate = ['Your brain is eaten', 'You are forever cursed', 'You are bitten']
+                    good_fate = ['You throw the ham. The zombie is distracted and starts etaing it.', 'You set the curtains on fire. The witch flees out of fear for the fire', 'The vampire hates garlic and flees']
+                    weapons = ['ham', 'lighter', 'garlic']
+                    {print} 'You are standing in front of an old mansion'
+                    {print} 'Something is not right here'
+                    {print} 'You hear ' hint[i]
+                    {print} 'You are going to explore it'
+                    {print} 'You enter the kitchen and see a lighter, a raw ham and a garlic.'
+                    your_weapon = {ask} 'What do you bring with you?'
+                    {print} 'With your ' your_weapon ' you enter the living room'
+                    {print} 'There you find a ' monsters[i]
+                    needed_weapon = weapons[i]
+                    {if} your_weapon == needed_weapon
+                        {print} 'You use your ' your_weapon
+                        {print} good_fate[i]
+                        {print} 'YOU WIN!'
+                    {else}
+                        {print} 'You have chosen the wrong weapon...'
+                        {print} bad_fate[i]
+                        {print} 'GAME OVER'
+                    ```
+                start_code: "# place your code here"
     piggybank:
         name: Piggy Bank
         default_save_name: Piggy Bank
@@ -1373,18 +1574,48 @@ adventures:
                 start_code: '# place your code here'
         default_save_name: Quizmaster
     language:
+        name: "Language"
+        description: "Practice words in a foreign language"
+        default_save_name: "Language"
         levels:
-            16:
-                story_text: "## Learn a new language\nMake your own program to practice your vocabulary in a new language.\n"
-                example_code: "## Παράδειγμα κώδικα Hedy\n\n```\nfrench_words = ['bonjour', 'ordinateur', 'pomme de terre']\ntranslation = ['hello', 'computer', 'potato']\nscore = 0\n{for} i {in} {range} 1 {to} 3\n    answer = {ask} 'What does ' french_words[i] ' mean?'\n    correct = translation[i]\n    {if} answer == correct\n        {print} 'Correct!'\n        score = score + 1\n    {else}\n        {print} 'Wrong, ' french_words[i] ' means ' translation[i]\n{print} 'You gave ' score ' correct answers.'\n```\n"
-                start_code: '# place your code here'
             5:
-                story_text: "## Learn a new language\nMake your own program to practice your vocabulary in a new language.\n\n## Παράδειγμα κώδικα Hedy\n```\n{print} 'Learn French!'\ncat {is} {ask} '\U0001F431'\n{if} cat {is} chat {print} 'Terrific!'\n{else} {print} 'No, cat is chat'\nfrog {is} {ask} '\U0001F438'\n{if} frog {is} grenouille {print} 'Super!'\n{else} {print} 'No, frog is grenouille'\n```\n"
-                start_code: '# place your code here'
-                example_code: "## Παράδειγμα κώδικα Hedy\n```\n{print} 'Learn French!'\ncat {is} {ask} '\U0001F431'\n{if} cat {is} chat {print} 'Terrific!'\n{else} {print} 'No, cat is chat'\nfrog {is} {ask} '\U0001F438'\n{if} frog {is} grenouille {print} 'Super!'\n{else} {print} 'No, frog is grenouille'\n```\n"
-        name: Language
-        description: Practice words in a foreign language
-        default_save_name: language
+                story_text: |
+                    ## Learn a new language
+                    Make your own program to practice your vocabulary in a new language.
+                example_code: |
+                    ## Example Hedy code
+                    ```
+                    {print} 'Learn French!'
+                    cat {is} {ask} '🐱'
+                    {if} cat {is} chat {print} 'Terrific!'
+                    {else} {print} 'No, cat is chat'
+                    frog {is} {ask} '🐸'
+                    {if} frog {is} grenouille {print} 'Super!'
+                    {else} {print} 'No, frog is grenouille'
+                    ```
+                start_code: "# place your code here"
+            16:
+                story_text: |
+                    ## Learn a new language
+                    Make your own program to practice your vocabulary in a new language.
+
+                example_code: |
+                    ## Example Hedy code
+                    ```
+                    french_words = ['bonjour', 'ordinateur', 'pomme de terre']
+                    translation = ['hello', 'computer', 'potato']
+                    score = 0
+                    {for} i {in} {range} 1 {to} 3
+                        answer = {ask} 'What does ' french_words[i] ' mean?'
+                        correct = translation[i]
+                        {if} answer == correct
+                            {print} 'Correct!'
+                            score = score + 1
+                        {else}
+                            {print} 'Wrong, ' french_words[i] ' means ' translation[i]
+                    {print} 'You gave ' score ' correct answers.'
+                    ```
+                start_code: "# place your code here"
     secret:
         levels:
             12:

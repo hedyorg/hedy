@@ -63,7 +63,11 @@ def collect_snippets(path, filtered_language = None):
                             print(f'Problem reading startcode for {lang} level {level}')
                             pass
                         # Code snippets inside example code
-                        for tag in utils.markdown_to_html_tags(level['example_code']):
+                        try:
+                            example_code = utils.markdown_to_html_tags(level['example_code'])
+                        except Exception as E:
+                            print(E)
+                        for tag in example_code:
                             if tag.name != 'pre' or not tag.contents[0]:
                                 continue
                             code_snippet_counter += 1
