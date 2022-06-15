@@ -103,7 +103,6 @@ def convert_numerals(alphabet, number):
     } else if ($(preview).hasClass('cheatsheet')) {
       exampleEditor.setOptions({ minLines: 1 });
     } else if ($(preview).hasClass('parsons')) {
-      console.log("Hier komen we als het goed is!");
       exampleEditor.setOptions({
         minLines: 1,
         showGutter: false,
@@ -351,7 +350,7 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
         stopit();
         return;
       } else {
-        // The parsons order is correct: show button for "go to next exercise" (if it exists)
+        $('#nextExercise').show();
       }
     } else {
       code = get_trimmed_code();
@@ -1312,21 +1311,24 @@ function get_parsons_code() {
     let mistake = false;
 
     $('.compiler-parsons-box').each(function() {
-      // When the value is 0 there is no code box in the expected spot
-      let text = $(this).attr('code') || "";
-      if (text.length > 1) {
-        code += text;
+      // We are only interested in the visible code lines
+      if ($(this).parent().is(':visible')) {
+        // When the value is 0 there is no code box in the expected spot
+        let text = $(this).attr('code') || "";
+        if (text.length > 1) {
+          code += text;
+        }
+        $(this).parents().removeClass('border-black');
+        let index = $(this).attr('index') || "-";
+        if (index.charCodeAt(0) == count) {
+          $(this).parents().addClass('border-green-500');
+        } else {
+          mistake = true;
+          $(this).parents().addClass('border-red-500');
+        }
+        order.push(index);
+        count += 1;
       }
-      $(this).parents().removeClass('border-black');
-      let index = $(this).attr('index') || "-";
-      if (index.charCodeAt(0) == count) {
-        $(this).parents().addClass('border-green-500');
-      } else {
-        mistake = true;
-        $(this).parents().addClass('border-red-500');
-      }
-      order.push(index);
-      count += 1;
     });
     // Before returning the code we want to a-sync store the attempt in the database
     // We only have to set the order and level, rest is handled by the back-end
