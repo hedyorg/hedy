@@ -1298,6 +1298,7 @@ function store_parsons_attempt(order: Array<string>, correct: boolean) {
     url: '/store_parsons_order',
     data: JSON.stringify({
       level: window.State.level,
+      exercise: $('#next_parson_button').attr('current_exercise'),
       order: order,
       correct: correct
     }),

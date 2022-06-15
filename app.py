@@ -1291,6 +1291,8 @@ def store_parsons_order():
         return 'body must be an object', 400
     if not isinstance(body.get('level'), str):
         return 'level must be a string', 400
+    if not isinstance(body.get('exercise'), str):
+        return 'exercise must be a string', 400
     if not isinstance(body.get('order'), list):
         return 'order must be a list', 400
 
@@ -1298,6 +1300,7 @@ def store_parsons_order():
         'id': utils.random_id_generator(12),
         'username': current_user()['username'] or f'anonymous:{utils.session_id()}',
         'level': int(body['level']),
+        'exercise': int(body['exercise']),
         'order': body['order'],
         'correct': 1 if body['correct'] else 0,
         'timestamp': utils.timems()
