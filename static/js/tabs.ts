@@ -70,21 +70,22 @@ function resetWindow() {
       $ ('#adventures-tab').css('max-height', '100%');
       $ ('#level-header input').hide ();
       $ ('#editor-area').hide ();
-      $('#developers_toggle_container').hide ();
+      $ ('#developers_toggle_container').hide ();
       return;
     }
 
     if (tabName === 'parsons') {
       $ ('#level-header input').hide ();
-      $('#editor').hide();
+      $ ('#editor').hide();
       loadParsonsExercise(<number>(window.State.level || 1), 1);
-      $('#parsons_code_container').show();
+      $ ('#parsons_code_container').show();
       $ ('#adventures-tab').css('height', '');
       $ ('#adventures-tab').css('min-height', '14em');
       $ ('#adventures-tab').css('max-height', '100%');
       $ ('#debug_container').hide();
     } else {
       $ ('#editor').show();
+      $ ('#level-header input').show ();
       $ ('#parsons_code_container').hide();
       $ ('#debug_container').show();
       $ ('#adventures-tab').css('max-height', '20em');
@@ -96,7 +97,6 @@ function resetWindow() {
       $('#adventures-tab').hide();
     }
     $('#developers_toggle_container').show ();
-    $ ('#level-header input').show ();
     $ ('#editor-area').show ();
 
 
