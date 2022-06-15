@@ -1,5 +1,5 @@
 # coding=utf-8
-from website import auth
+from website import auth, parsons
 from website import statistics
 from website import quiz
 from website import admin
