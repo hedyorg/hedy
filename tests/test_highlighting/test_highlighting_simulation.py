@@ -10,11 +10,11 @@ RULES = {
 
 class HighlighterTestLeveLSimulation(HighlightTester):
 
-    def assert_highlighted_chr(self, code, expected, rule_name, last_state):
+    def assert_highlighted_chr(self, code, expected, rule_name, start_token="start", last_state="start"):
 
         rules = RULES[rule_name]
 
-        self.check(code, expected, rules, last_state)
+        self.check(code, expected, rules, start_token, last_state)
 
 
 
