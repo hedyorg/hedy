@@ -5,11 +5,6 @@ import {modal} from "./modal";
     }
 )();
 
-export function startParsons(level: number) {
-    $('#start_parsons_container').hide();
-    loadParsonsExercise(level, 1);
-}
-
 export function loadParsonsExercise(level: number, exercise: number) {
     $.ajax({
       type: 'GET',

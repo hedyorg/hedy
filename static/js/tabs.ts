@@ -1,5 +1,6 @@
 import { modal } from './modal';
 import { theGlobalEditor } from './app';
+import {loadParsonsExercise} from "./parsons";
 
 /**
  * Activate tabs
@@ -73,20 +74,27 @@ function resetWindow() {
       return;
     }
 
-    if (tabName == 'parsons') {
+    console.log(tabName);
+
+    if (tabName === 'parsons') {
       $('#editor').hide();
+      loadParsonsExercise(<number>(window.State.level || 1), 1);
       $('#parsons_code_container').show();
+      $ ('#adventures-tab').css('height', '');
+      $ ('#adventures-tab').css('min-height', '14em');
+      $ ('#adventures-tab').css('max-height', '100%');
+    } else {
+      $ ('#editor').show();
+      $ ('#parsons_code_container').hide();
+      $('#debug_container').show();
+      $ ('#adventures-tab').css('max-height', '20em');
     }
 
-    $ ('#editor').show();
-    $ ('#parsons_container').hide();
-    $('#debug_container').show();
     
     // Make sure that the adventure tab is hidden when switching and developer's mode is toggled on
     if ($('#developers_toggle').is(":checked")) {
       $('#adventures-tab').hide();
     }
-    $ ('#adventures-tab').css('max-height', '20em')
     $('#developers_toggle_container').show ();
     $ ('#level-header input').show ();
     $ ('#editor-area').show ();
