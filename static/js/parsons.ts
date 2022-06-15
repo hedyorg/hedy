@@ -25,8 +25,21 @@ export function loadParsonsExercise(level: number, exercise: number) {
 
 function showExercise(response: any) {
     let code_lines = shuffle_code_lines(response.code_lines);
-    console.log(code_lines);
+    let counter = 0;
+    // Hide all containers, show the onces relevant dynamically
+    $('.parsons_start_line_container').hide();
+    $('.parsons_goal_line_container').hide();
 
+    $.each(code_lines, function(key: string, valueObj: string) {
+        counter += 1;
+        // Temp output to console to make sure TypeScript compiles
+        console.log(key);
+        ace.edit('start_parsons_' + counter).session.setValue(valueObj.replace(/\n+$/, ''), -1);
+        ace.edit('goal_parsons_' + counter).session.setValue("");
+
+        $('#parsons_start_line_container_' + counter).show();
+        $('#parsons_goal_line_container_' + counter).show();
+    });
 }
 
 // https://stackoverflow.com/questions/26503595/javascript-shuffling-object-properties-with-their-values
