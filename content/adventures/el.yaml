@@ -485,19 +485,14 @@ adventures:
                     ## Τυχαιότητα
                     Μπορείς επίσης να προσθέσεις κάτι τυχαίο στην ιστορία σου. Οποιοδήποτε τέρας, ζώο ή άλλο εμπόδιο.
 
-                    Αυτό πάει κάπως έτσι:
-
-                    ```
-                    animals is κουκουβάγια, σκαντζόχοιρος, αρμαντίλο
-                    print Τώρα ακούει τον ήχο ένος animals at random
-                    ```
+                    Αυτό πάει κάπως έτσι.
                 start_code: "print Η ιστορία σου"
                 example_code: |
                     ## Παράδειγμα κώδικα Hedy
 
                     ```
-                    animals {is} 🦔, 🐿, 🦉, 🦇
-                    {print} He now hears the sound of an animals {at} {random}
+                    animals is κουκουβάγια, σκαντζόχοιρος, αρμαντίλο
+                    print Τώρα ακούει τον ήχο ένος animals at random
                     ```
                 story_text_2: |
                     The command `{add}` can also come in handy in your story. For example
@@ -566,15 +561,14 @@ adventures:
 
                     Μπορείς να κάνεις το τραγούδι αυτό πολύ πιο σύντομο με ένα `repeat`! Μπορείς να ολοκληρώσεις τον κώδικα;
 
+                    Ύστερα από το Μωρό Καρχαρίας μπορείς φυσικά να προγραμματ΄ και άλλα τραγούδια. Υπάρχουν πολλά τραγούδια με επανάληψη.
+                start_code: "print 'Μωρό Καρχαρίας'"
+                example_code: |-
                     ## Παράδειγμα κωδικα Hedy
                     ```
                     repeat _ _ print 'Μωρό Καρχαρίας τουτουρουτουτου'
                     print 'Μωρό Καρχαρίας'
                     ```
-
-                    Ύστερα από το Μωρό Καρχαρίας μπορείς φυσικά να προγραμματ΄ και άλλα τραγούδια. Υπάρχουν πολλά τραγούδια με επανάληψη.
-                start_code: "print 'Μωρό Καρχαρίας'"
-                example_code: "## Παράδειγμα κώδικα Hedy\n\n```\n{repeat} _ _ {print} 'Baby Shark tututudutudu'\n{print} 'Baby Shark'\n```\n\nAfter Baby Shark you can of course also program other songs. There are many songs with repetition.\n"
             6:
                 story_text: |
                     ## Τραγούδια στο επίπεδο 6
@@ -619,11 +613,11 @@ adventures:
                 example_code: "## 5 Little Monkeys Jumping on the bed\n```\nmonkeys = 5, 4, 3, 2\n{for} monkey {in} monkeys\n    {print} monkey ' little monkeys jumping on the bed'\n    {print} 'One fell off and bumped his head'\n    {print} 'Mama called the doctor and the doctor said'\n    {print} 'NO MORE MONKEYS JUMPING ON THE BED!'\n```\n\n## Baby Shark\n```\nsharks = baby, mommy, daddy, grandma, grandpa\n{for} shark {in} sharks\n    {print} shark 'tututututudu'\n    {print} shark 'tututututudu'\n    {print} shark 'tututututudu'\n    {print} shark\n```\n## Old McDonald\n```\nanimals = pig, dog, cow\n{for} animal {in} animals\n    {if} animal {is} pig\n        sound = oink\n    {if} animal {is} dog\n        sound = woof\n    {if} animal {is} cow\n        sound = moo\n    {print} 'Old McDonald had a farm'\n    {print} 'E I E I O!'\n    {print} 'and on that farm he had a ' animal\n    {print} 'E I E I O!'\n    {print} 'with a ' sound sound ' here'\n    {print} 'and a ' sound sound ' there'\n    {print} 'here a ' sound\n    {print} 'there a ' sound\n    {print} 'everywhere a ' sound sound\n```\n"
                 start_code: '# place your code here'
             16:
-                story_text: "## Sing a song!\nIn this level, you can program a song like OldMacDonald even more quickly. You can connect the right animal to the right sound by simply putting them in the same place in the list.\nThe Drunken Sailor is also quickly made in this level. You only need 8 lines for the entire song, check it out!\n\n## Old MacDonald\n```\nanimals = ['pig', 'dog', 'cow']\nsounds = ['oink', 'woof', 'moo']\n{for} i {in} {range} 1 {to} 3\n    animal = animals[i]\n    sound = sounds[i]\n    {print} 'Old McDonald had a farm'\n    {print} 'E I E I O!'\n    {print} 'and on that farm he had a ' animal\n    {print} 'E I E I O!'\n    {print} 'with a ' sound sound ' here'\n    {print} 'and a ' sound sound ' there'\n    {print} 'here a ' sound\n    {print} 'there a ' sound\n    {print} 'everywhere a ' sound sound\n```\n\n## Drunken Sailor\n```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines\n    {for} i {in} {range} 1 {to} 3\n        {print} line\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
+                story_text: "## Sing a song!\nIn this level, you can program a song like OldMacDonald even more quickly. You can connect the right animal to the right sound by simply putting them in the same place in the list.\nThe Drunken Sailor is also quickly made in this level. You only need 8 lines for the entire song, check it out!\n\n## Old MacDonald."
                 start_code: '# place your code here'
                 example_code: "## Old MacDonald\n```\nanimals = ['pig', 'dog', 'cow']\nsounds = ['oink', 'woof', 'moo']\n{for} i {in} {range} 1 {to} 3\n    animal = animals[i]\n    sound = sounds[i]\n    {print} 'Old McDonald had a farm'\n    {print} 'E I E I O!'\n    {print} 'and on that farm he had a ' animal\n    {print} 'E I E I O!'\n    {print} 'with a ' sound sound ' here'\n    {print} 'and a ' sound sound ' there'\n    {print} 'here a ' sound\n    {print} 'there a ' sound\n    {print} 'everywhere a ' sound sound\n```\n\n## Drunken Sailor\n```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines\n    {for} i {in} {range} 1 {to} 3\n        {print} line\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
     dishes:
-        name: "Ποιός πρέπει να πλύνει τα πιάτα;"
+        name: "Ποιός πρέπει να πλύνει τα πιάτα"
         default_save_name: "πιάτα"
         description: "Χρησιμοποίησε τον υπολογιστή για να δεις ποιός πρέπει να πλύνει τα πιάτα (Ξεκίνα από το επίπεδο 2)"
         levels:
@@ -631,14 +625,13 @@ adventures:
                 story_text: |
                     ## Πρόγραμμα πλυσίματος πιάτων
                     Με την `repeat` μπορείς να επαναλάβεις κομμάτια κώδικα. Μπορείς να το χρησιμοποιήσεις αυτό για να υπολογίσεις ποιος θα πλένει τα πιάτα για όλην την εβδομάδα.
-
+                start_code: "print 'Ποιός θα πλύνει τα πιάτα;'"
+                example_code: |-
                     ## Παράδειγμα κωδικα Hedy
                     ```
                     people is μαμά, μπαμπάς, Ελένη, Σοφία
                     repeat _ _ print 'αυτό που θα πλύνει τα πιάτα είναι' _
                     ```
-                start_code: "print 'Ποιός θα πλύνει τα πιάτα;'"
-                example_code: "## Παράδειγμα κώδικα Hedy\n\n```\npeople = mom, dad, Emma, Sophie\n{repeat} _ _ {print} 'the dishwasher is' _\n```\n"
             6:
                 story_text: |
                     ## Πρόγραμμα πλυσίματος πιάτων
@@ -1037,6 +1030,9 @@ adventures:
                     Στο επίπεδο 2 μπορείς να επεκτείνεις το εστιατόριό σου χρησιμοποιώντας μεταβλητές. Στο επίπεδο 1, η Hedy μπορούσε μόνο να εμφανίσει την παραγγελία μια φορά και να θυμηθεί μόνο το τελευταίο αντικείμενο που παραγγέλθηκε.
                     Τώρα μπορείς να χρησιμοποιήσεις μεταβλητές και η Hedy μπορεί να θυμάται και το φαγητό αλλά και τα ποτά!
 
+
+                start_code: "# place your code here"
+                example_code: |-
                     ## Παράδειγμα Εστιατορίου Hedy
 
                     ```
@@ -1045,24 +1041,21 @@ adventures:
                     food is ask Τί θα θέλατε να φάτε;
                     print Καλή επιλογή! Αυτό το φαγητό είναι το αγαπημένο μου!
                     topping is ask Θα θέλατε κρέας ή λαχανικά μαζί με αυτό;
-                    print food with topping ετοιμάζεται! 
+                    print food with topping ετοιμάζεται!
                     drinks is ask Τί θα θέλατε να πιείς με αυτό;
                     print Σας ευχαριστώ για την παραγγελία.
                     print Το φαγητό και τα ποτά σας θα είναι έτοιμα αμέσως!
                     ```
-                start_code: "# place your code here"
-                example_code: "## Παράδειγμα κώδικα Hedy\n```\n{print} Welcome to Hedy's restaurant!\n{print} Today we're serving pizza or lasagna.\nfood {is} {ask} What would you like to eat?\n{print} Great choice! The food is my favorite!\ntopping {is} {ask} Would you like meat or veggies on that?\n{print} food with topping is on its way!\ndrinks {is} {ask} What would you like to drink with that?\n{print} Thank you for your order.\n{print} Your food and drinks will be right there!\n```\n"
             3:
                 story_text: |4
-
-
                     ## Τυχαίο Εστιάτοριο
                     Δυσκολεύεσαι να αποφασίσεις τί θέλεις να φάς για δείπνο. Μπορείς να αφήσεις τη Hedy να επιλέξει για σένα!
                     Απλά πρόσθεσε λίστες από τα αγαπημένα (ή λιγότερα αγαπημένα) γεύματα σου και η Hedy μπορεί να επιλέξει το δείπνο.
                     Μπορείς επίσης να το διασκεδάσεις λίγο, αφήνοντας την Hedy να επιλέξει και την τιμή για το δείπνο σου! Τί θα πάρεις;
 
+                start_code: "# place your code here"
+                example_code: |-
                     ## Παράδειγμα κώδικα Τυχαίου Εστιατορίου της Hedy
-
                     ```
                     print Καλωσήλθατε στο Τυχαίο Εστιατόριο της Hedy!
                     print Το μόνο εστιατόριο που θα επιλέξει τυχαία το γεύμα σας και την τιμή του!
@@ -1076,10 +1069,8 @@ adventures:
                     print Και ως επιδόρπιο: desserts at random
                     print Θα έχετε ένα drinks at random για να πιείτε
                     print Το κόστος θα είναι: prices at random
-                    print Ευχαριστούμε και καλή όρεξη! 
+                    print Ευχαριστούμε και καλή όρεξη!
                     ```
-                start_code: "# place your code here"
-                example_code: "## Παράδειγμα κώδικα Hedy\n\n```\n{print} Welcome to Hedy's Random Restaurant!\n{print} The only restaurant that will randomly choose your meal and its price for you!\nstarters {is} salad, soup, carpaccio\nmains {is} pizza, brussels sprouts, spaghetti\ndesserts {is} brownies, ice cream, french cheeses\ndrinks {is} cola, beer, water\nprices {is} 1 dollar, 10 dollars, 100 dollars\n{print} You will start with: starters {at} {random}\n{print} Then we'll serve: mains {at} {random}\n{print} And as dessert: desserts {at} {random}\n{print} You will get a drinks {at} {random} to drink\n{print} That will be: prices {at} {random}\n{print} Thank you and enjoy your meal!\n```\n"
                 story_text_2: "## Allergies\nDoes your costumer have any allergies or do they dislike certain dishes? Then you can use the `{remove}`command to remove it from your menu.\n"
                 example_code_2: "```\n{print} Mystery milkshake\nflavors {is} strawberry, chocolate, vanilla\nallergies {is} {ask} Are you allergic to any falvors?\n{remove} allergies {from} flavors\n{print} You get a flavors {at} {random} milkshake\n```\n"
             12:
@@ -1121,7 +1112,7 @@ adventures:
                 start_code: '# place your code here'
                 story_text_2: "## Challenge\nCan you think of more questions to {ask} the customers when they are ordering, and make up different responses to their answers by using the {if} command?\n"
             4:
-                story_text: "## Restaurant\nIn thsi level you have to use quotation marks when using the `{print}` command.\nCan you make your code from the previous levels work in this level too by adding the quotation marks?\n\nBe careful! In the previous levels apostrophes were allowed in the text, but in this level Hedy will confuse them for quotation marks and the code will not work!\nSo instead of typing  `{print} Today we're serving pizza` , you should type `{print} 'Today we are serving pizza'`\n\n## Example Hedy Restaurant\n```\n{print} 'Welcome to Hedys restaurant!'\n{print} 'Today we are serving pizza or lasagna.'\nfood {is} {ask} 'What would you like to eat?'\n{print} 'Great choice! The ' food ' is my favorite!'\ntopping {is} {ask} 'Would you like meat or veggies on that?'\n{print} food ' with ' topping ' is on its way!'\ndrinks {is} {ask} 'What would you like to drink with that?'\n{print} 'Thank you for your order.'\n{print} 'Your ' food ' and ' drinks ' will be right there!'\n```\n"
+                story_text: "## Restaurant\nIn this level you have to use quotation marks when using the `{print}` command.\nCan you make your code from the previous levels work in this level too by adding the quotation marks?\n\nBe careful! In the previous levels apostrophes were allowed in the text, but in this level Hedy will confuse them for quotation marks and the code will not work!\nSo instead of typing  `{print} Today we're serving pizza` , you should type `{print} 'Today we are serving pizza'`.
                 start_code: '# place your code here'
                 example_code: "## Example Hedy Restaurant\n```\n{print} 'Welcome to Hedys restaurant!'\n{print} 'Today we are serving pizza or lasagna.'\nfood {is} {ask} 'What would you like to eat?'\n{print} 'Great choice! The ' food ' is my favorite!'\ntopping {is} {ask} 'Would you like meat or veggies on that?'\n{print} food ' with ' topping ' is on its way!'\ndrinks {is} {ask} 'What would you like to drink with that?'\n{print} 'Thank you for your order.'\n{print} 'Your ' food ' and ' drinks ' will be right there!'\n```\n"
             15:
@@ -1359,7 +1350,7 @@ adventures:
                 example_code: "## Παράδειγμα κώδικα Hedy\n\n```\n{print} 'Im Hedy the fortune teller!'\n{print} 'I can predict {if} youll win the lottery tomorrow!'\nperson {is} {ask} 'Who are you?'\n{if} person {is} Hedy {print} 'You will definitely win!\U0001F929' {else} {print} 'Bad luck! Someone {else} will win!\U0001F62D'\n```\n"
                 story_text_2: "Replace Hedy with your own name in the last line, and Hedy will always predict that you will win the lottery and others won't!\nOf course this might raise some suspicion with the other players... To avoid that, you can make sure that Hedy does give different answers every time you run the code.\nBut of course, still gives you a positive answer and the other players a negative one.\n"
                 example_code_2: "## Παράδειγμα κώδικα Hedy\n```\n{print} 'Im Hedy the fortune teller!'\n{print} 'I can predict {if} you will win the lottery tomorrow!'\nperson {is} {ask} 'Who are you?'\ngoodanswer {is} Hurray! You win!, You will definitely win!, We have a winner!\nbadanswer {is} Bad luck! Try again!, Another person will win, You lose!\n{if} person {is} Hedy {print} goodanswer {at} {random} {else} {print} badanswer {at} {random}\n```\n\n## Challenges\nThis concept can be used to make may different programs, just be creative! For example you could create a machine that predicts that your favorite sports team will beat all the competitors!\nOr you could make  Snow White's magic mirror on the wall, to tell everyone you are the fairest of them all!\nLet your imagination do the work!\n"
-                story_text: "## Fortune Teller\nIn thsi level you'll learn to (secretly) tip the odds in your favor, when using the fortune teller!\nBy using `{if}` and `{else}` you can make sure that you will always get a good fotune, while other people might not.\nCheck out this example to find out how.\n"
+                story_text: "## Fortune Teller\nIn this level you'll learn to (secretly) tip the odds in your favor, when using the fortune teller!\nBy using `{if}` and `{else}` you can make sure that you will always get a good fotune, while other people might not.\nCheck out this example to find out how.\n"
                 start_code: '# place your code here'
                 story_text_3: "## Challenges\nThis concept can be used to make may different programs, just be creative! For example you could create a machine that predicts that your favorite sports team will beat all the competitors!\nOr you could make  Snow White's magic mirror on the wall, to tell everyone you are the fairest of them all!\nLet your imagination do the work!\n"
             4:

@@ -33,7 +33,7 @@ adventures:
                 start_code: "print здравей свят!"
                 example_code: "## Example code\n```\nname {is} Hedy\nage {is} 15\n{print} name is age years old\n```\n"
                 story_text_2: "**Внимание!** Запитването с командата `ask` се променя в това ниво, така че отговорът се записва в име, например."
-                example_code_2:
+                example_code_2: |-
                     ```
                     отговорът is ask Как се казваш?
                     ```
@@ -1236,7 +1236,7 @@ adventures:
             4:
                 story_text: |
                     ## Restaurant
-                    In thsi level you have to use quotation marks when using the `{print}` command.
+                    In this level you have to use quotation marks when using the `{print}` command.
                     Can you make your code from the previous levels work in this level too by adding the quotation marks?
 
                     Be careful! In the previous levels apostrophes were allowed in the text, but in this level Hedy will confuse them for quotation marks and the code will not work!
@@ -1561,7 +1561,7 @@ adventures:
             5:
                 story_text_2: "Replace Hedy with your own name in the last line, and Hedy will always predict that you will win the lottery and others won't!\nOf course this might raise some suspicion with the other players... To avoid that, you can make sure that Hedy does give different answers every time you run the code.\nBut of course, still gives you a positive answer and the other players a negative one.\n"
                 example_code_2: "## ## Примерен код на Хеди\n```\n{print} 'Im Hedy the fortune teller!'\n{print} 'I can predict {if} you will win the lottery tomorrow!'\nperson {is} {ask} 'Who are you?'\ngoodanswer {is} Hurray! You win!, You will definitely win!, We have a winner!\nbadanswer {is} Bad luck! Try again!, Another person will win, You lose!\n{if} person {is} Hedy {print} goodanswer {at} {random} {else} {print} badanswer {at} {random}\n```\n\n## Challenges\nThis concept can be used to make may different programs, just be creative! For example you could create a machine that predicts that your favorite sports team will beat all the competitors!\nOr you could make  Snow White's magic mirror on the wall, to tell everyone you are the fairest of them all!\nLet your imagination do the work!\n"
-                story_text: "## Fortune Teller\nIn thsi level you'll learn to (secretly) tip the odds in your favor, when using the fortune teller!\nBy using `{if}` and `{else}` you can make sure that you will always get a good fotune, while other people might not.\nCheck out this example to find out how.\n"
+                story_text: "## Fortune Teller\nIn this level you'll learn to (secretly) tip the odds in your favor, when using the fortune teller!\nBy using `{if}` and `{else}` you can make sure that you will always get a good fotune, while other people might not.\nCheck out this example to find out how.\n"
                 example_code: "## ## Примерен код на Хеди\n\n```\n{print} 'Im Hedy the fortune teller!'\n{print} 'I can predict {if} youll win the lottery tomorrow!'\nperson {is} {ask} 'Who are you?'\n{if} person {is} Hedy {print} 'You will definitely win!\U0001F929' {else} {print} 'Bad luck! Someone {else} will win!\U0001F62D'\n```\n"
                 start_code: '# place your code here'
                 story_text_3: "## Challenges\nThis concept can be used to make may different programs, just be creative! For example you could create a machine that predicts that your favorite sports team will beat all the competitors!\nOr you could make  Snow White's magic mirror on the wall, to tell everyone you are the fairest of them all!\nLet your imagination do the work!\n"
