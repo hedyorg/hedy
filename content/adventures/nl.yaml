@@ -375,7 +375,7 @@ adventures:
 
                     Dus bij de voorbeeldcode gaan we door totdat er een goed antwoord is gegeven.
                     Als er nooit een goed antwoord wordt gegeven, dan stopt de loop nooit!
-                example_code: "## Example Hedy code\n```\nanswer = 0\n{while} answer != 25\n    answer = {ask} 'What is 5 times 5?'\n{print} 'A correct answer has been given'\n```\n"
+                example_code: "```\nanswer = 0\n{while} answer != 25\n    answer = {ask} 'What is 5 times 5?'\n{print} 'A correct answer has been given'\n```\n"
             16:
                 start_code: |-
                     fruit = ['appel', 'banaan', 'kers']
@@ -406,7 +406,7 @@ adventures:
 
                     Daarnaast kun je in dit level een nieuw commando gebruiken `{elif}`. `{elif}` is de afkorting van {else} en {if} en zorgt ervoor dat je 3 (of meer!) opties kunt maken.
                     Kijk maar!
-                example_code: "## Example Hedy Code\n```\nprices = ['1 miljoen euro', 'een appeltaart', 'niets']\njouw_prijs = prices[{random}]\n{print} 'Je wint ' jouw_prijs\n{if} jouw_prijs == '1 miljoen euro' :\n    {print} 'Joepie, je bent rijk!'\n{elif} jouw_prijs == 'een appeltaart' :\n    {print} 'Lekker, een appeltaart!'\n{else}:\n    {print} 'Veel geluk bij de volgende keer..'\n```\n"
+                example_code: "```\nprices = ['1 miljoen euro', 'een appeltaart', 'niets']\njouw_prijs = prices[{random}]\n{print} 'Je wint ' jouw_prijs\n{if} jouw_prijs == '1 miljoen euro' :\n    {print} 'Joepie, je bent rijk!'\n{elif} jouw_prijs == 'een appeltaart' :\n    {print} 'Lekker, een appeltaart!'\n{else}:\n    {print} 'Veel geluk bij de volgende keer..'\n```\n"
             18:
                 start_code: |-
                     naam = 'Hedy'
@@ -414,7 +414,7 @@ adventures:
                 story_text: |-
                     ## Het laatste level!
                     We zijn aangekomen bij echte Python code! Dat betekent wel dat we vanaf nu ronde haakjes moeten gebruiken bij {print} en bij {range}.
-                example_code: "## Example Hedy Code\n```\n{print}('mijn naam is Hedy!')\n```\n"
+                example_code: "```\n{print}('mijn naam is Hedy!')\n```\n"
                 story_text_2: Als je meer dan één tekst wilt printen, moet je die scheiden met komma's.
                 example_code_2: "```\ntemperatuur = 25\n{print}('Het is ', temperatuur, 'graden buiten')\n```\n"
                 story_text_3: "##  Input\nDe laatste aanpassing die we moeten maken om echte Python code te krijgen is het vervangen van `{ask}` door `{input}`."
