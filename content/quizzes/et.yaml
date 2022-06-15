@@ -8,27 +8,27 @@ levels:
             -   option: Heddy
                 feedback: See ei ole õige!
             -   option: Haydie
-                feedback: Not this one!
+                feedback: See ei ole õige!
             -   option: Heidi
-                feedback: Not this one!
+                feedback: See ei ole õige!
             correct_answer: A
-            hint: It's named after Hedy Lamarr.
+            hint: See sai nime Hedy Lamarr' järgi.
             question_score: '10'
         5:
             mp_choice_options:
             -   option: "```\n{print}\n```\n"
-                feedback: No, you would like the answer to be repeated back to you.
-            -   feedback: Hedy isn't a command.
+                feedback: Teisel real peaks sinu vastus sulle tagasi olema korratud.
+            -   feedback: Hedy ei ole käsk.
                 option: "```\nHedy\n```\n"
             -   option: "```\n{ask}\n```\n"
-                feedback: With `{ask}` you can ask a question.
+                feedback: '`{ask}` aitab sul midagi küsida.'
             -   option: "```\n{echo}\n```\n"
-                feedback: Right on!
+                feedback: Tubli!
             correct_answer: D
-            hint: You want to see the answer at the end of line 2...
+            hint: Sa tahad teisel real on vastust tagasi näha.
             question_score: '10'
-            question_text: Which command is missing in line 2?
-            code: "{ask} What is your favorite pet?\n_?_ So your favorite pet is..."
+            question_text: Milline käsk puudub teisel real?
+            code: "{ask} Kes on sinu lemmik loom?\n_?_ Nii et sinu lemmik loom on..."
         6:
             question_text: What's wrong with this code?
             code: "{print} Hi im Hedy!\n{print} Which football team do you support?\n{echo} You support...\n{print} Cool! Me too!"
@@ -84,47 +84,47 @@ levels:
             question_score: '10'
             question_text: Are you ready for level 2?
         2:
-            question_text: Which command makes text appear?
+            question_text: Milline käsk kirjutab teksti ekraanile?
             mp_choice_options:
             -   option: "```\n{echo}\n```\n"
-                feedback: '`{echo}` repeats a given answer.'
+                feedback: '`{echo}` kordab antud vastust.'
             -   option: "```\n{print}\n```\n"
-                feedback: Correct!
-            -   option: "```\nhello\n```\n"
-                feedback: Hello isn't a command.
+                feedback: Õige!
+            -   option: "```\ntere\n```\n"
+                feedback: Tere ei ole käsk, proovi uuesti.
             -   option: "```\n{ask}\n```\n"
-                feedback: With `{ask}`, you can ask a question.
-            hint: _?_ Hello world!
+                feedback: '`{ask}` aitab sul midagi küsida.'
+            hint: _?_ Tere maailm!
             question_score: '10'
             correct_answer: B
         3:
-            question_text: How do you ask what someone's favorite color is?
+            question_text: Kuidas sa kellegi lemmikvärvi küsid?
             mp_choice_options:
-            -   option: "```\n{print} What is your favorite color?\n```\n"
-                feedback: "`{print}` prints text, but it doesn't ask questions."
-            -   option: "```\n{ask} {print} What is your favorite color?\n```\n"
-                feedback: You only need one command, not two.
-            -   option: "```\n{ask} What is your favorite color?\n```\n"
-                feedback: Great!
-            -   option: "```\n{echo} What is your favorite color?\n```\n"
-                feedback: '`{echo}` repeats your answer back to you.'
+            -   option: "```\n{print} Mis on sinu lemmikvärv?\n```\n"
+                feedback: "`{print}` kirjutab teksti ekraanile, aga ei oota vastust."
+            -   option: "```\n{ask} {print} Mis on sinu lemmikvärv?\n```\n"
+                feedback: Sul on ainult ühte käsku vaja, mitte kahte.
+            -   option: "```\n{ask} Mis on sinu lemmikvärv?\n```\n"
+                feedback: Väga tubli!
+            -   option: "```\n{echo} Mis on sinu lemmikvärv?\n```\n"
+                feedback: '`{echo}` kordab mida sa kirjutanud oled, aga ei oota vastust.'
             correct_answer: C
-            hint: You can ask something with the `{ask}` command
+            hint: '`{ask}` käsk aitab sul midagi küsida'
             question_score: '10'
         4:
-            question_text: What is wrong with this code?
-            code: "Hi Im Hedy!\n{ask} Who are you?\n{echo} Hi..."
+            question_text: Mis siin valesti on?
+            code: "Tere, ma olen Hedy!\n{ask} Kes sina oled?\n{echo} Tere..."
             mp_choice_options:
-            -   option: '`{print}` in line 1 is missing.'
-                feedback: Correct!
-            -   option: Im in line 1 is spelled wrong.
-                feedback: Im is spelled wrong on purpose; Hedy doesn't understand the apostrophes yet.
-            -   option: "`{echo}` isn't a command."
-                feedback: "`{echo}` is a command, there's another mistake."
-            -   option: Nothing! This is a perfect code!
-                feedback: Wrong, look carefully!
+            -   option: '`{print}` puudub esimesel real.'
+                feedback: Õige!
+            -   option: '`{ask}` on teisel real valesti kirjutatud. See peab `aks` olema.'
+                feedback: '{ask} on õigesti kirjutatud.'
+            -   option: "`{echo}` ei ole käsk."
+                feedback: "`{echo}` on küll käsk."
+            -   option: Mitte midagi! Kood on õige!
+                feedback: Ei ole, proovi uuesti!
             correct_answer: A
-            hint: Line 1 doesn't seem right
+            hint: Esimene rida ei tundu õige
             question_score: '10'
         9:
             question_text: What's wrong with this code?
