@@ -50,7 +50,7 @@ adventures:
                     这很有用,因为现在你可以打印所有你想要打印的词汇了. 你也可以打印那些用 `{is}`命名并保存的词汇.
 
                      大多数编程语言在打印时也使用引号，所以我们也距离真正的编程更近了一步!
-                example_code: "## 海迪代码范例\n```\n{print} '从现在开始你们需要使用引号！'\n答案 {is} {ask} '从现在开始我们需要使用什么？'\n{print} '我们需要使用 ' 答案\n```\n"
+                example_code: "```\n{print} '从现在开始你们需要使用引号！'\n答案 {is} {ask} '从现在开始我们需要使用什么？'\n{print} '我们需要使用 ' 答案\n```\n"
                 story_text_2: "## Adventures are getting more and more difficult\nThe adventures are now getting more and more difficult in the successive tabs.\nSo it is best to start on the left with the story, and work to the right, in order to be challenged more and more.\n"
             5:
                 start_code: |-
@@ -76,7 +76,7 @@ adventures:
 
                      乘法运算有点不同，因为键盘上面没有乘法符号。你可以找一下, 确实没有！
                      这就是为什么我们要把数字8上面的星号当做乘法符号： `5 * 5`。读作5乘以5，你会很容易记住它。
-                example_code: "## 海迪代码范例\n```\n{print} '5加5是 ' 5 + 5\n{print} '5减去5是' 5 - 5\n{print} '5乘以5是' 5 * 5\n```\n"
+                example_code: "```\n{print} '5加5是 ' 5 + 5\n{print} '5减去5是' 5 - 5\n{print} '5乘以5是' 5 * 5\n```\n"
                 story_text_2: "We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:\n"
                 example_code_2: "```\nname = Hedy\nanswer = 20 + 4\n```\n"
             7:
@@ -84,7 +84,7 @@ adventures:
                 story_text: |
                     ## 第7级！第7级！
                     在第7级的学习内容里面增加了`{repeat}` 循环命令。 `{repeat}` 循环语句可以用来多次执行一段代码。
-                example_code: "## 海迪代码范例\n```\n{repeat} 3 {times} {print} '海迪很好玩！'\n```\n"
+                example_code: "```\n{repeat} 3 {times} {print} '海迪很好玩！'\n```\n"
             8:
                 start_code: |-
                     {repeat} 5 {times}
@@ -109,7 +109,7 @@ adventures:
                     在这个级别中，你不仅可以一起使用`{if}`条件语句和`{repeat}`循环语句编写多行代码，还可以将它们嵌套在一起使用！
                     在范例中，你可以在 `{repeat}` 命令中嵌入一个 `{if}` 命令。反之亦然，你可以在 `{if}`命令中嵌入一个 `{repeat}` 命令。当然，你也可以在一个 `{if}`条件语句中嵌入一个`{if}`条件语句，在一个`{repeat}`循环语句中嵌入一个`{repeat}`循环语句。
                     试试吧！
-                example_code: "## 海迪代码范例\n```\n{repeat} 3 {times}\n    食物 = {ask} '你想吃什么？'\n    {if} 食物 {is} 披萨\n        {print} '好啊！'\n    {else}\n        {print} '披萨更好吃'\n```\n"
+                example_code: "```\n{repeat} 3 {times}\n    食物 = {ask} '你想吃什么？'\n    {if} 食物 {is} 披萨\n        {print} '好啊！'\n    {else}\n        {print} '披萨更好吃'\n```\n"
             10:
                 start_code: |-
                     动物 {is} 狗，猫，泡泡鱼
@@ -125,7 +125,7 @@ adventures:
                     {for} 计数器 {in} {range} 1 {to} 5
                         {print} 计数器
                 story_text: "## 循环！\n`{print}` 的使用方法照旧不变但是我们增加了`{for}`的新形式。 你现在可以在你的程序中编写`{for} counter {in} {range} 1 {to} 5` 和使用 `counter`了。\n试试吧，看看会发生什么！ 记住在`{for}` and `{if}` 语句后使用缩进(这意味着以四个空格开始一个句子)"
-                example_code: "## 海迪代码范例\n```\n{for} 计数器 {in} {range} 1 {to} 5\n    {print} 计数器\n```\n"
+                example_code: "```\n{for} 计数器 {in} {range} 1 {to} 5\n    {print} 计数器\n```\n"
             12:
                 start_code: "{print} 'decimal numbers now need to use a dot'\n{print} 2.5 + 2.5"
                 story_text: "## 数字和文本\n**十进制数**\n到目前为止，海迪不允许出现1.5这样的小数，但现在我们允许了。请注意，计算机使用`.`来表示小数点。"
@@ -191,7 +191,7 @@ adventures:
                         答案 = {ask} '5乘以5等于几?'
                     {print} '已经给出了一个正确的答案'
                 story_text: "## 更多的循环！\n我们将要学习一个新的循环, 就是`{while}` 循环！只要语句为真/有效，我们就不停的执行循环语句！\n所以别忘了改变循环语句中的变量值。\n\n因此在范例代码中，我们一直不停的执行循环语句直到一个正确的答案被给出。 \n如果正确答案一直没有被给出, 这个循环语句就不会结束!"
-                example_code: "## 海迪代码范例\n```\n答案 = 0\n{while} 答案 != 25\n    答案 = {ask} '5乘以5等于几？'\n{print} '已经给出了一个正确答案'\n```\n"
+                example_code: "```\n答案 = 0\n{while} 答案 != 25\n    答案 = {ask} '5乘以5等于几？'\n{print} '已经给出了一个正确答案'\n```\n"
             16:
                 start_code: |-
                     水果 = ['苹果', '香蕉', '樱桃']
@@ -242,8 +242,6 @@ adventures:
                     The command `{add}` can also come in handy in your story. For example
 
                 example_code_2: |
-                    ## 海迪代码范例
-
                     ```
                     {print} 他听到一个声音
                     动物们 {is} 🐿，🦔，🦇，🦉
@@ -276,7 +274,7 @@ adventures:
                 start_code: '# place your code here'
             12:
                 story_text: "## 故事\n在此级别中，您可以使用引号将多个单词保存在一个变量中。"
-                example_code: "## 海迪代码范例\n```\n名字 = '英国女王'\n{print} 名字'正在吃一块蛋糕，突然......'\n```\n"
+                example_code: "```\n名字 = '英国女王'\n{print} 名字'正在吃一块蛋糕，突然......'\n```\n"
                 start_code: '# place your code here'
             9:
                 story_text: "## Story\nIn this level you can use nesting to put {if}, {repeat} or {for} commands inside other {if}, {repeat} or {for} commands. This gives you many options and really helps you to make your story interactive.\n"
@@ -342,7 +340,7 @@ adventures:
                 story_text_2: "Also, in level 1 the turtle could only turn left or right. That is a bit boring!\nIn level 2 he can point his nose in all directions.\n\nUse 90 to turn a quarter. We call this degrees. A full turn is 360 degrees.\nCan you make a figure with this code? Maybe a triangle or a circle?\n"
             1:
                 story_text: "## ＃＃＃让我们画画\n你也可以用海迪来画画。通过结合旋转和画线，你可以画出一个正方形或楼梯!\n\n使用`{forward}`你可以向前画一条线。它后面的数字决定了海龟会走多远。`{turn} {right}`是顺时针转四分之一圈，`{turn} {left}`是逆时针转。\n\n让我们开始画一个小楼梯。你能使它有5个台阶吗？\n"
-                example_code: "## 海迪代码范例\n\n```\n{turn} {right}\n{forward} 50\n{turn}{left}\n{forward} 50\n```\n"
+                example_code: "\n```\n{turn} {right}\n{forward} 50\n{turn}{left}\n{forward} 50\n```\n"
                 start_code: "{forward} 50\n{turn} {left}"
                 example_code_2: "```\n{color} {white}\n{forward} -80\n{color} {green}\n{forward} 50\n{color} {yellow}\n{forward} 50\n{color} {red}\n{forward} 50\n```\n"
                 story_text_2: "## Colors\nYou can also change the color of the lines with the command `{color}`. Check out the example.\nYou can also use the command `{color} {white}` to make 'invisible' lines. You could use these white lines to move the turtle anywhere in the screen before you start drawing.\n"
@@ -401,7 +399,7 @@ adventures:
                 start_code: "{print} 'Who does the dishes?'"
             3:
                 story_text: "## Dishwashing\nDo you always disagree at home about who should wash the dishes or change the litter box today?\nThen you can let the computer choose very fairly. You can program that in this level!\nYou first make a list of the members of your family. Then choose '{at} {random}' from the list.\n"
-                example_code: "## 海迪代码范例\n\n```\n人 {is} 妈妈， 爸爸， 艾玛， 苏菲\n{print} 人 {at} {random}\n```\n"
+                example_code: "\n```\n人 {is} 妈妈， 爸爸， 艾玛， 苏菲\n{print} 人 {at} {random}\n```\n"
                 start_code: '{print} Who does the dishes?'
                 story_text_2: "## Hack the dishwashing program!\nDon't feel like doing the dishes yourself? Hack the program to remove your name from the list.\n"
                 example_code_2: "```\npeople {is} mom, dad, Emma, Sophie\nyour_name {is} {ask} Who are you?\n{remove} your_name {from} people\n{print} people {at} {random} does the dishes\n```\n"
@@ -423,7 +421,7 @@ adventures:
                 example_code: "\n```\n{print} what do you choose?\n{ask} choose {from} rock, paper or scissors\n{echo} so your choice was:\n```\nInstead of using words, you could also use emojis of course: ✊✋✌\n"
                 start_code: '{print} Welcome to your own rock scissors paper!'
             9:
-                example_code: "## 海迪代码范例\n\n```\n选择 {is} 剪刀、石头、布\n你的_选择 {is} {ask} '你选择了什么？'\n{print} '你选择了' 你的_选择\n计算机_选择 {is} 选择 {at} {random}\n{print} '计算机选择了 ' 计算机_选择\n{if} 计算机_选择 {is} 你的_选择\n    {print} '平手'\n{if} 计算机_选择 {is} 石头\n    {if} 你的_选择 {is}布\n        {print} '你赢了！'\n   {if} 你的_选择 {is} 剪刀\n        {print} '你输了！'\n# 完成了这段代码\n```\n"
+                example_code: "\n```\n选择 {is} 剪刀、石头、布\n你的_选择 {is} {ask} '你选择了什么？'\n{print} '你选择了' 你的_选择\n计算机_选择 {is} 选择 {at} {random}\n{print} '计算机选择了 ' 计算机_选择\n{if} 计算机_选择 {is} 你的_选择\n    {print} '平手'\n{if} 计算机_选择 {is} 石头\n    {if} 你的_选择 {is}布\n        {print} '你赢了！'\n   {if} 你的_选择 {is} 剪刀\n        {print} '你输了！'\n# 完成了这段代码\n```\n"
                 story_text: "## Rock, paper, scissors\nIn this level you can program the whole rock, paper, scissors game by nesting the {if}-commands. Can you finish the code?\n"
                 start_code: '# place your code here'
             10:
@@ -440,7 +438,7 @@ adventures:
                 start_code: '# place your code here'
             15:
                 story_text: "## Rock, Paper, Scissors\nPlay until you beat the computer! But first, finish the example code...\n"
-                example_code: "## 海迪代码范例\n\n```\n赢 = '否'\n选项 = '石头', '剪刀', '布'\n{while} 赢 == '否'\n    你的_选择 = {ask} 'What do you choose?你选择了什么？'\n    计算机_选择 = 选项 {at} {random}\n    {print} '你选择了 ' 你的_选择\n    {print} '计算机选择了' 计算机_选择\n    {if} 计算机_选择 == 你的_选择\n        {print} '平手！'\n    {if} 计算机_选择 == '石头' {and} 你的_选择 == '剪刀'\n        {print} '你输了！'\n    {if} 计算机_选择 == '石头' {and} 你的_选择 == '布'\n        {print} '你赢了！'\n        赢 = '是'\n"
+                example_code: "\n```\n赢 = '否'\n选项 = '石头', '剪刀', '布'\n{while} 赢 == '否'\n    你的_选择 = {ask} 'What do you choose?你选择了什么？'\n    计算机_选择 = 选项 {at} {random}\n    {print} '你选择了 ' 你的_选择\n    {print} '计算机选择了' 计算机_选择\n    {if} 计算机_选择 == 你的_选择\n        {print} '平手！'\n    {if} 计算机_选择 == '石头' {and} 你的_选择 == '剪刀'\n        {print} '你输了！'\n    {if} 计算机_选择 == '石头' {and} 你的_选择 == '布'\n        {print} '你赢了！'\n        赢 = '是'\n"
                 start_code: '# place your code here'
             13:
                 story_text: "## Rock, paper, scissors\nWith the `{and}` command you can shorten your rock, paper, scissors code! Check out the example code below and try to finish it.\n"
@@ -458,7 +456,7 @@ adventures:
                 start_code: '# place your code here'
             12:
                 story_text: "## Calculator\nNow you can make a calculator that works for decimal numbers.\n"
-                example_code: "## 海迪代码范例\n\n```\n数字1 = {ask} '第一个数字是几？'\n数字2 = {ask} '第二个数字是几？'\n答案 = 数字1 + 数字2\n{print} 数字1 ' 加 ' 数字2 '等于 ' 答案\n```\n"
+                example_code: "\n```\n数字1 = {ask} '第一个数字是几？'\n数字2 = {ask} '第二个数字是几？'\n答案 = 数字1 + 数字2\n{print} 数字1 ' 加 ' 数字2 '等于 ' 答案\n```\n"
                 start_code: '# place your code here'
             10:
                 story_text: "## Calculator\nThis calculator game helps you practise your tables of multiplication!\nIf you add more numbers to the list, you can practise all the multiplications.\n"
