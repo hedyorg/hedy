@@ -244,6 +244,13 @@ class ParsonsProblem:
             keyword_data[level] = exercises
         return keyword_data
 
+    def get_highest_exercise_level(self, level):
+        if self.debug_mode and not self.data.get("en", None):
+            if not self.file:
+                self.file = YamlFile.for_file(f'content/parsons/{self.language}.yaml').get('levels')
+            self.data["en"] = self.cache_quiz_keywords("en")
+        return len(self.data["en"].get(level, {}))
+
     def get_parsons_data_for_level(self, level, keyword_lang="en"):
         if self.debug_mode and not self.data.get(keyword_lang, None):
             if not self.file:
@@ -251,12 +258,12 @@ class ParsonsProblem:
             self.data[keyword_lang] = self.cache_parsons_keywords(keyword_lang)
         return self.data.get(keyword_lang, {}).get(level, None)
 
-    def get_parsons_data_for_level_question(self, level, question, keyword_lang="en"):
+    def get_parsons_data_for_level_exercise(self, level, excercise, keyword_lang="en"):
         if self.debug_mode and not self.data.get(keyword_lang, None):
             if not self.file:
                 self.file = YamlFile.for_file(f'content/parsons/{self.language}.yaml').get('levels')
             self.data[keyword_lang] = self.cache_parsons_keywords(keyword_lang)
-        return self.data.get(keyword_lang, {}).get(level, {}).get(question, None)
+        return self.data.get(keyword_lang, {}).get(level, {}).get(excercise, None)
 
 
 class Quizzes:

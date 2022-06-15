@@ -1563,6 +1563,10 @@ ACHIEVEMENTS.routes(app, DATABASE)
 
 quiz.routes(app, DATABASE, ACHIEVEMENTS, QUIZZES)
 
+# *** PARSONS BACKEND ***
+
+parsons.routes(app, DATABASE, ACHIEVEMENTS, PARSONS)
+
 
 # *** STATISTICS ***
 
