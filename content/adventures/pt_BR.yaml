@@ -888,18 +888,48 @@ adventures:
         description: What's Next?
         default_save_name: next
     language:
+        name: "Language"
+        description: "Practice words in a foreign language"
+        default_save_name: "Language"
         levels:
-            16:
-                story_text: "## Learn a new language\nMake your own program to practice your vocabulary in a new language.\n"
-                example_code: "## Exemplo de código Hedy\n\n```\nfrench_words = ['bonjour', 'ordinateur', 'pomme de terre']\ntranslation = ['hello', 'computer', 'potato']\nscore = 0\n{for} i {in} {range} 1 {to} 3\n    answer = {ask} 'What does ' french_words[i] ' mean?'\n    correct = translation[i]\n    {if} answer == correct\n        {print} 'Correct!'\n        score = score + 1\n    {else}\n        {print} 'Wrong, ' french_words[i] ' means ' translation[i]\n{print} 'You gave ' score ' correct answers.'\n```\n"
-                start_code: '# place your code here'
             5:
-                story_text: "## Learn a new language\nMake your own program to practice your vocabulary in a new language.\n\n## Exemplo de código Hedy\n```\n{print} 'Learn French!'\ncat {is} {ask} '\U0001F431'\n{if} cat {is} chat {print} 'Terrific!'\n{else} {print} 'No, cat is chat'\nfrog {is} {ask} '\U0001F438'\n{if} frog {is} grenouille {print} 'Super!'\n{else} {print} 'No, frog is grenouille'\n```\n"
-                start_code: '# place your code here'
-                example_code: "## Exemplo de código Hedy\n```\n{print} 'Learn French!'\ncat {is} {ask} '\U0001F431'\n{if} cat {is} chat {print} 'Terrific!'\n{else} {print} 'No, cat is chat'\nfrog {is} {ask} '\U0001F438'\n{if} frog {is} grenouille {print} 'Super!'\n{else} {print} 'No, frog is grenouille'\n```\n"
-        name: Language
-        description: Practice words in a foreign language
-        default_save_name: language
+                story_text: |
+                    ## Learn a new language
+                    Make your own program to practice your vocabulary in a new language.
+                example_code: |
+                    ## Example Hedy code
+                    ```
+                    {print} 'Learn French!'
+                    cat {is} {ask} '🐱'
+                    {if} cat {is} chat {print} 'Terrific!'
+                    {else} {print} 'No, cat is chat'
+                    frog {is} {ask} '🐸'
+                    {if} frog {is} grenouille {print} 'Super!'
+                    {else} {print} 'No, frog is grenouille'
+                    ```
+                start_code: "# place your code here"
+            16:
+                story_text: |
+                    ## Learn a new language
+                    Make your own program to practice your vocabulary in a new language.
+
+                example_code: |
+                    ## Example Hedy code
+                    ```
+                    french_words = ['bonjour', 'ordinateur', 'pomme de terre']
+                    translation = ['hello', 'computer', 'potato']
+                    score = 0
+                    {for} i {in} {range} 1 {to} 3
+                        answer = {ask} 'What does ' french_words[i] ' mean?'
+                        correct = translation[i]
+                        {if} answer == correct
+                            {print} 'Correct!'
+                            score = score + 1
+                        {else}
+                            {print} 'Wrong, ' french_words[i] ' means ' translation[i]
+                    {print} 'You gave ' score ' correct answers.'
+                    ```
+                start_code: "# place your code here"
     secret:
         name: SuperSpy
         description: Make your own spy code

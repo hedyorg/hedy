@@ -36,6 +36,8 @@ def collect_snippets(path, filtered_language = None):
                         for tag in utils.markdown_to_html_tags(level['story_text']):
                             if tag.name != 'pre' or not tag.contents[0]:
                                 continue
+                            feedback = f"Example code in story text {lang}, {adventure_name}, {level_number}, not recommended!"
+                            print(feedback)
                             code_snippet_counter += 1
                             try:
                                 code = tag.contents[0].contents[0]

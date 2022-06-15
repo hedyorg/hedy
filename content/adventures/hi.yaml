@@ -35,9 +35,6 @@ adventures:
                 story_text: |-
                     स्तर २ में हम कुछ नया सीखते हैं। आप `{is}` वाले शब्द को नाम दे सकते हैं। आप अपने कोड में कहीं भी नाम का उपयोग कर सकते हैं और इसे हेडी से बदल दिया जाएगा, जैसे:
 
-                    ```name {is} हेडी
-                    {print} हैलो name
-                    ```
 
                     नोट: `{ask}` बदल गया है, आप उत्तर को एक नाम से भी इस तरह सेव करें:
 
@@ -47,35 +44,42 @@ adventures:
                     प्रिंट अभी भी स्तर १ की तरह काम करता है, और अब आपको `{echo}` की आवश्यकता नहीं है।
 
                     इस स्तर में एक और नया आदेश `स्लीप` है, जो आपके कार्यक्रम को एक सेकंड के लिए रोक देता है। यदि आप {sleep} कमांड के पीछे एक नंबर टाइप करते हैं, तो प्रोग्राम इतने सेकंड के लिए रुक जाता है।
+                start_code: "{print} हेलो दुनिया  !"
+                example_code: |-
+                    ```name {is} हेडी
+                    {print} हैलो name
+                    ```
+                story_text_2: "`{print}` still works the same, but the `{ask}` command has changed. You need to use a variable in the `{ask}` command as well. It looks like this:\n"
+                example_code_2: |-
                     ```
                     {print} 'मेरा पसंदीदा रंग है...'
                     {sleep} २
                     {print} 'हरा!'
                     ```
-                start_code: "{print} हेलो दुनिया  !"
-                example_code: "## उदाहरण कोड\n```\nname {is} Hedy\nage {is} 15\n{print} name is age years old\n```\n"
-                story_text_2: "`{print}` still works the same, but the `{ask}` command has changed. You need to use a variable in the `{ask}` command as well. It looks like this:\n"
-                example_code_2: "```\nanswer {is} {ask} What is your name?\n{print} Hello answer\n```\n"
                 story_text_3: "Another new command in this level is `{sleep}`, which pauses your program for a second. If you type a number behind the {sleep} command, the program pauses for that amount of seconds.\n"
                 example_code_3: "```\n{print} My favorite colour is...\n{sleep} 2\n{print} green!\n```\n"
             3:
                 story_text: |-
                     स्तर 3 में आप एक सूची भी बना सकते हैं। आप कंप्यूटर को सूची से कुछ यादृच्छिक चुनने दे सकते हैं। आप इसे `at random` के साथ करते हैं।
+
+                    आप सूची में वस्तु को `add` के साथ जोड़ सकते हैं और `remove` के साथ वस्तु हटा सकते हैं।
+
+                start_code: "{print} हेलो दुनिया  !"
+                example_code: |-
+                    ## उदाहरण कोड
                     ```
                     animals {is} कुत्ता, बिल्ली, कंगारू
                     {print} animals at random
                     ```
-                    आप सूची में वस्तु को `add` के साथ जोड़ सकते हैं और `remove` के साथ वस्तु हटा सकते हैं।
+                story_text_2: You can also add items to the list with `{add}` and remove items with `{remove}`.
+                example_code_2: |-
+                    ## उदाहरण कोड
                     ```
                     animals {is} कुत्ता, बिल्ली, कंगारू
                     add पेंगुइन to animals
                     remove बिल्ली from animals
                     {print} animals at random
                     ```
-                start_code: "{print} हेलो दुनिया  !"
-                example_code: "## उदाहरण कोड\n\n```\nanimals {is} dog, cat, kangaroo\n{print} animals {at} {random}\n```\n"
-                story_text_2: You can also add items to the list with `{add}` and remove items with `{remove}`.
-                example_code_2: "## उदाहरण कोड\n\n```\nanimals {is} dog, cat, kangaroo\n{add} penguin {to_list} animals\n{remove} cat {from} animals\n{print} animals {at} {random}\n```\n"
             4:
                 start_code: "{print} 'हेलो  दुनिया'"
                 story_text: |-
@@ -101,40 +105,36 @@ adventures:
 
                      स्तर 5 में कुछ नया है, `{if}`! `{if}` से आप दो अलग-अलग विकल्पों में से चुन सकते हैं।
 
-                    ## उदाहरण हेडी कोड
-                     ```
-                     नाम {is} {ask} 'आपका नाम क्या है?'
-                     {if} नाम {is} हेडी {print} 'अच्छा' {else} प्रिंट 'बू!'
-                     ```
 
                      यह कोड अच्छा प्रिंट करता है यदि आप हेडी को एक नाम के रूप में दर्ज करते हैं, और बू! अगर आप कुछ और दर्ज करते हैं।
 
                      जब हम यह जांचना चाहते हैं कि सूची में कुछ है या नहीं, तो अब हम वस्तु और सूची के बीच 'in' का उपयोग कर सकते हैं।
 
-                    ## उदाहरण हेडी कोड
-                     ```
-                     सुंदर_रंग {is} हरा, पीला
-                     रंग {is} {ask} 'आपका पसंदीदा रंग कौन सा है?'
-                     {if} रंग {in} सुंदर_रंग {print} 'सुंदर!' {else} प्रिंट 'मेह'
-                    ```
                     यह कोड सुंदर प्रिंट करता है! यदि आप हरा या पीला चुनते हैं, और मेह अन्यथा।
 
-                    ## टिप
-                     कभी-कभी `{if}` वाला कोड वास्तव में लंबा हो जाता है और लाइन पर ठीक से फिट नहीं होता है। <br> आप कोड को दो पंक्तियों में विभाजित भी कर सकते हैं, दूसरी पंक्ति को `{else}` से इस प्रकार शुरू करते हुए:
-                     ```
-                     name {is} {ask} 'आपका नाम क्या है?'
-                     {if} नाम {is} हेडी {print} 'अच्छा'
-                     {else} {print} 'बू!'
-                     ```
-
-                    ## असाइनमेंट अधिक {and} अधिक कठिन होते जा रहे हैं
-
                      स्तर 5 में भी, टैब में असाइनमेंट अधिक से अधिक कठिन होते जा रहे हैं। तो, उन्हें बाएं से दाएं करें।
-                example_code: "## उदाहरण कोड\n```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'\n```\n"
+                example_code: |-
+                  ## उदाहरण हेडी कोड
+                    ```
+                    नाम {is} {ask} 'आपका नाम क्या है?'
+                    {if} नाम {is} हेडी {print} 'अच्छा' {else} प्रिंट 'बू!'
+                    ```
                 story_text_3: "## Lists\nWhen we want to check if something is in a list, we can now use the `{in}` command.\nThis code prints pretty! if you choose green or yellow, and meh otherwise.\n"
-                example_code_3: "```\npretty_colors {is} green, yellow\ncolor {is} {ask} 'What is your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!'\n{else} {print} 'meh'\n```\n"
+                example_code_3: |-
+                    कभी-कभी `{if}` वाला कोड वास्तव में लंबा हो जाता है और लाइन पर ठीक से फिट नहीं होता है। <br> आप कोड को दो पंक्तियों में विभाजित भी कर सकते हैं, दूसरी पंक्ति को `{else}` से इस प्रकार शुरू करते हुए:
+                    ```
+                    name {is} {ask} 'आपका नाम क्या है?'
+                    {if} नाम {is} हेडी {print} 'अच्छा'
+                    {else} {print} 'बू!'
+                    ```
                 story_text_2: "Sometimes code with an `{if}` gets really long and does not fit on the line well. <br> You may also divide the code over two lines, starting the second line at the `{else}` like this:\n"
-                example_code_2: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice'\n{else} {print} 'boo!'\n```\n"
+                example_code_2: |-
+                    ## उदाहरण हेडी कोड
+                    ```
+                    सुंदर_रंग {is} हरा, पीला
+                    रंग {is} {ask} 'आपका पसंदीदा रंग कौन सा है?'
+                    {if} रंग {in} सुंदर_रंग {print} 'सुंदर!' {else} प्रिंट 'मेह'
+                    ```
             6:
                 start_code: "{print} '५ गुणा ५ है ' 5 * 5"
                 story_text: |-
@@ -146,21 +146,21 @@ adventures:
                     {times} थोड़ा अलग है, क्योंकि आपके कीबोर्ड पर कोई {times} चिन्ह नहीं है। बस खोजें, वास्तव में ऐसा नहीं है!
                      इसलिए हम 8 के ऊपर के तारक से गुणा करते हैं: `5 * 5` । इसे "5 गुना 5" के रूप में पढ़ें जो आपको इसे सबसे अच्छी तरह याद रखने में मदद करता है।
 
-                    ## उदाहरण हेडी कोड
-                     ```
-                     {print} '5 जमा 5' 5 + 5
-                     {print} '5 माइनस 5 है' 5 - 5
-                     {print} '5 times 5 है' 5 * 5
-                     ```
 
                      हम भंडारण में भी बदलाव करते हैं! जब हम कोई नाम या नंबर इस तरह से स्टोर करते हैं, तो अब आप `{is}` के बदले `=` का उपयोग कर सकते हैं:
-
-                     ```
-                     नाम = हेडी
-                     उत्तर = 20 + 4
-                     ```
-                example_code_2: "```\nname = Hedy\nanswer = 20 + 4\n```\n"
-                example_code: "## उदाहरण कोड\n```\n{print} '5 plus 5 is ' 5 + 5\n{print} '5 minus 5 is ' 5 - 5\n{print} '5 {times} 5 is ' 5 * 5\n```\n"
+                example_code_2: |-
+                    ## उदाहरण हेडी कोड
+                    ```
+                    नाम = हेडी
+                    उत्तर = 20 + 4
+                    ```
+                example_code: |-
+                    ## उदाहरण हेडी कोड
+                    ```
+                    {print} '5 जमा 5' 5 + 5
+                    {print} '5 माइनस 5 है' 5 - 5
+                    {print} '5 times 5 है' 5 * 5
+                    ```
                 story_text_2: "We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:\n"
             7:
                 start_code: "{repeat} 3 {times} {print} 'हेडी मजेदार है!'"

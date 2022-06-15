@@ -156,32 +156,6 @@ adventures:
                 story_text: |
                     ## Und... oder...?
                     Wir werden jetzt `{and}` und `{or}` lernen! Wenn du zwei Angaben überprüfen willst, musst du nicht zwei `{if}` verwenden, sondern kannst `{and}` und `{or}` benutzen. Wenn du `{and}` verwendest, müssen beide Angaben, also links und rechts vom `{and}`, wahr sein. Du kannst auch `{or}` verwenden. Dann muss nur eine der beiden Aussage wahr sein.
-                #16:
-                #    start_code: |-
-                #        # Dieses Programm wird ein paar mathematische Fragen stellen
-                #        for i in range(1,10):
-                #            # Wir werden die Multiplikationstabelle der 5 abfragen
-                #            antwort is input('Was ergibt ' i ' mal 5?')
-                #            # Wir prüfen ob die Antwort mit unserer übereinstimmt
-                #            korrekte_antwort is i * 5
-                #            if antwort is korrekte_antwort:
-                #                print(antwort ' ist korrekt!')
-                #            else:
-                #                print('Das ist falsch. Die richtige Antwort lautet: ' i*5)
-                #    story_text: |-
-                #        Wenn du größere Programme erstellst, brauchst du einen Weg, um dir zu merken, was jedes Codestück tut.
-                #        Wir verwenden dafür Kommentare.
-                #        Ein Kommentar sieht folgendermaßen aus:\n ` # Dies ist ein Kommentar`.
-                #        Alles nach dem `#` wird für den Code unsichtbar.
-                #    commands:
-                #    -   name: "Kommentar"
-                #        explanation: "Wir können Kommentare platzieren, wo immer wir wollen."
-                #        example: "# Dies ist ein Kommentar"
-                #        demo_code: |-
-                #            # Dieses Programm gibt Hallo! aus
-                #            # Es ist in Hedy erstellt worden
-                #            # Es macht nichts außer Hallo! zu auszugeben
-                #            print('Hallo!')
                 example_code: "```\nName = ask 'Wie heißt du?'\nAlter = ask 'Wie alt bist du?'\nif Name is 'Hedy' and Alter is 2\n    print 'Du bist die echte Hedy!'\n```\n"
             14:
                 start_code: |-
@@ -237,6 +211,7 @@ adventures:
 
                     In diesem Level kannst du außerdem einen neuen Befehl benutzen: `{elif}`. `{elif}` ist eine Abkürzung für {else} {if} und du brauchst ihn wenn du drei (oder Mehr!) Optionen machen willst.
                     Probier es mal aus!
+                example_code: |-
                     ```
                     Preise = ['1 Million Euro', 'ein Apfelkuchen', 'nichts']
                     dein_Preis = Preise[random]
@@ -248,7 +223,6 @@ adventures:
                     {else}:
                         {print} 'Viel Glück beim nächsten Mal...'
                     ```
-                example_code: "## Example Hedy Code\n```\nprices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
             18:
                 start_code: "Name = 'Hedy'\n{print}('Ich heiße ', Name)"
                 story_text: "## Level 18\nWir sind bei richtigem Python Code angekommen! Das bedeutet dass wir ab jetzt rund Klammern mit den Befehlen {print} und {range} benutzen müssen.\nDas sieht so aus:\n```\n{print}('Ich heiße Hedy!')\n```\nWenn du mehr als ein Element ausgeben möchtest, musst du sie mit Kommas trennen.\n```\nName = 'Hedy'\n{print}('Ich heiße ', Name)\n```"
@@ -267,11 +241,7 @@ adventures:
                     ## Schreibe eine Geschichte
                     In Level 1 kannst Du die Hauptfigur Deiner Geschichte ändern, indem Du ihren Namen selbst eingibst.
 
-                    Nutze diesen Code in der ersten Zeile:
-
-                    ```
-                    ask Wer ist die Hauptfigur Deiner Geschichte?
-                    ```
+                    Nutze `{ask}` Code in der ersten Zeile.
 
                     Anschließend, beginne eine Zeile mit `print`, wenn ein Satz ausgegeben werden soll.
                     Nutze `echo`, wenn Du möchtest, dass der Name Deiner Hauptfigur am Ende des Satzes steht.

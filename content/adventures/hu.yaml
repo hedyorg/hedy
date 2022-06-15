@@ -174,34 +174,60 @@ adventures:
                 example_code: "## Hedy Code példa\n```\nfor counter in range 1 to 5\n    print counter\n```\n"
             12:
                 start_code: |-
-                    print 'decimal numbers now need to use a dot'
-                    print 2.5 + 2.5
-                story_text: |
-                    So far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that cmputers use the . for decimal numbers.
-
-                    For this level on you will also have to use quotation marks when storing a text with `is`:
-
+                    {print} 'decimal numbers now need to use a dot'
+                    {print} 2.5 + 2.5
+                story_text: |-
+                    ## Numbers and texts
+                    **Decimal numbers**
+                    So far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the `.` for decimal numbers.
+                example_code: |
+                    ## Example Hedy code
                     ```
-                    name = 'Hedy'
-                    print 'Hello ' name
+                    {print} 'Two and a half plus two and a half is...'
+                    {print} 2.5 + 2.5
                     ```
-
-                    For numbers, you do not use quotation marks in the `is`:
+                story_text_2: |
+                    **All texts need to be in quotation marks**
+                    For this level on you will also have to use quotation marks when storing a text with `=`:
+                example_code_2: |
+                    ```
+                    name = 'Hedy the Robot'
+                    {print} 'Hello ' name
+                    ```
+                story_text_3: |
+                    **All items in lists need quotation marks too**
+                    Lists are texts, so they need quotation marks too. Mind that each single item on the list has quotation marks.
+                    This allows you to save two words as 1 item on the list, for example 'Iron Man'.
+                example_code_3: |
+                    ```
+                    superheroes = 'Spiderman', 'Batman', 'Iron Man'
+                    {print} superheroes {at} {random}
+                    ```
+                story_text_4: |
+                    **All text after `{if}` comparisons need quotation marks too**
+                example_code_4: |
+                    ```
+                    name = {ask} 'What is your name?'
+                    {if} name = 'Hedy the Robot'
+                        {print} 'Hi there!'
+                    ```
+                story_text_5: |
+                    **Numbers don't need quotation marks**
+                    For numbers, you do not use quotation marks in the `=`:
+                example_code_5: |
                     ```
                     score = 25
-                    print 'You got ' score
+                    {print} 'You got ' score
                     ```
-                example_code_2: "```\nname = 'Hedy the Robot'\n{print} 'Hello ' name\n```\n"
-                story_text_4: "**All text after `{if}` comparisons need quotation marks too**\n"
-                example_code_4: "```\nname = {ask} 'What is your name?'\n{if} name = 'Hedy the Robot'\n    {print} 'Hi there!'\n```\n"
-                story_text_5: "**Numbers don't need quotation marks**\nFor numbers, you do not use quotation marks in the `=`:\n"
-                example_code_5: "```\nscore = 25\n{print} 'You got ' score\n```\n"
-                example_code: "## Hedy Code példa\n```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n"
-                story_text_2: "**All texts need to be in quotation marks**\nFor this level on you will also have to use quotation marks when storing a text with `=`:\n"
-                story_text_3: "**All items in lists need quotation marks too**\nLists are texts, so they need quotation marks too. Mind that each single item on the list has quotation marks.\nThis allows you to save two words as 1 item on the list, for example 'Iron Man'.\n"
-                example_code_3: "```\nsuperheroes = 'Spiderman', 'Batman', 'Iron Man'\n{print} superheroes {at} {random}\n```\n"
-                story_text_6: "**Maths with words** In this level it is also allowed to use the + sign with texts. For example:\n"
-                example_code_6: "```\na = 'Hello '\nb = 'world!'\nprint a + b\n```\n"
+                story_text_6: |-
+                    **Maths with words**
+                    In this level it is also allowed to use the + sign with texts. For example:
+                example_code_6: |
+                    ```
+                    a = 'Hello '
+                    b = 'world!'
+                    {print} a + b
+                    ```
             13:
                 start_code: |
                     name = ask 'what is your name?'
@@ -538,9 +564,41 @@ adventures:
                 story_text: "## Songs\nIn this level you can easily make the childrens' song 'Five little monkeys'. Can you make the last chorus?\nYou can also make the whole baby shark song (including all the other sharks in the family) in only 6 lines!\nOr you can make Old McDonald with all the different animals.\n"
                 start_code: '# place your code here'
             16:
-                story_text: "## Sing a song!\nIn this level, you can program a song like OldMacDonald even more quickly. You can connect the right animal to the right sound by simply putting them in the same place in the list.\nThe Drunken Sailor is also quickly made in this level. You only need 8 lines for the entire song, check it out!\n\n## Old MacDonald\n```\nanimals = ['pig', 'dog', 'cow']\nsounds = ['oink', 'woof', 'moo']\n{for} i {in} {range} 1 {to} 3\n    animal = animals[i]\n    sound = sounds[i]\n    {print} 'Old McDonald had a farm'\n    {print} 'E I E I O!'\n    {print} 'and on that farm he had a ' animal\n    {print} 'E I E I O!'\n    {print} 'with a ' sound sound ' here'\n    {print} 'and a ' sound sound ' there'\n    {print} 'here a ' sound\n    {print} 'there a ' sound\n    {print} 'everywhere a ' sound sound\n```\n\n## Drunken Sailor\n```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines\n    {for} i {in} {range} 1 {to} 3\n        {print} line\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
-                start_code: '# place your code here'
-                example_code: "## Old MacDonald\n```\nanimals = ['pig', 'dog', 'cow']\nsounds = ['oink', 'woof', 'moo']\n{for} i {in} {range} 1 {to} 3\n    animal = animals[i]\n    sound = sounds[i]\n    {print} 'Old McDonald had a farm'\n    {print} 'E I E I O!'\n    {print} 'and on that farm he had a ' animal\n    {print} 'E I E I O!'\n    {print} 'with a ' sound sound ' here'\n    {print} 'and a ' sound sound ' there'\n    {print} 'here a ' sound\n    {print} 'there a ' sound\n    {print} 'everywhere a ' sound sound\n```\n\n## Drunken Sailor\n```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines\n    {for} i {in} {range} 1 {to} 3\n        {print} line\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
+                story_text: |
+                    ## Sing a song!
+                    In this level, you can program a song like OldMacDonald even more quickly. You can connect the right animal to the right sound by simply putting them in the same place in the list.
+                    The Drunken Sailor is also quickly made in this level. You only need 8 lines for the entire song, check it out!
+                example_code: |
+                    ## Old MacDonald
+                    ```
+                    animals = ['pig', 'dog', 'cow']
+                    sounds = ['oink', 'woof', 'moo']
+                    {for} i {in} {range} 1 {to} 3
+                        animal = animals[i]
+                        sound = sounds[i]
+                        {print} 'Old McDonald had a farm'
+                        {print} 'E I E I O!'
+                        {print} 'and on that farm he had a ' animal
+                        {print} 'E I E I O!'
+                        {print} 'with a ' sound sound ' here'
+                        {print} 'and a ' sound sound ' there'
+                        {print} 'here a ' sound
+                        {print} 'there a ' sound
+                        {print} 'everywhere a ' sound sound
+                    ```
+
+                    ## Drunken Sailor
+                    ```
+                    lines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']
+                    {for} line {in} lines
+                        {for} i {in} {range} 1 {to} 3
+                            {print} line
+                        {print} 'early in the morning'
+                        {for} i {in} {range} 1 {to} 3
+                            {print} 'way hay and up she rises'
+                        {print} 'early in the morning'
+                    ```
+                start_code: "# place your code here"
     dishes:
         name: Ki mosogat?
         default_save_name: mosogat
@@ -1382,6 +1440,11 @@ adventures:
                     Iin level 3 you can use use `random` with the drawing turtle. A random choice makes the turtle walk a different path each time.
                     Use `at random` to choose a value from a list. You can copy and paste lines 2 and 3 so create a longer random path.
 
+                start_code: |-
+                    angles is 10, 50, 90, 150, 250
+                    turn angles at random
+                    forward 25
+                example_code: |-
                     ## Hedy Code példa
 
                     ```
@@ -1389,11 +1452,6 @@ adventures:
                     turn angles at random
                     forward 25
                     ```
-                start_code: |-
-                    angles is 10, 50, 90, 150, 250
-                    turn angles at random
-                    forward 25
-                example_code: "## Hedy Code példa\n\n\n```\nangles {is} 10, 50, 90, 150, 250\n{turn} angles {at} {random}\n{forward} 25\n```\n"
     fortune:
         name: Jósnő
         description: Hadd jósolja meg Hedy a jövőt
@@ -1435,6 +1493,7 @@ adventures:
                     A 7. szinten ez a probléma megoldódott az ismétlés parancs új módjának köszönhetően.
                     A következő példában a jósnő 3 kérdést tehet fel, és kiírathatja őket!
 
+                example_code: |-
                     ## Példa Hedy -kódra
                     ```
                     print 'Hedy a jósnő vagyok!'
@@ -1445,7 +1504,6 @@ adventures:
                        print kerdes
                        print 'A kristálygömböm azt mondja...' valasz at random
                     ```
-                example_code: "## Hedy Code példa\n\n```\n{print} 'I am Hedy the fortune teller!'\n{print} 'You can {ask} me 3 questions.'\nanswers = yes, no, maybe\n{repeat} 3 {times}\n   question = {ask} 'What do you want to know?'\n   {print} question\n   {sleep}\n   {print} 'My crystal ball says...' answers {at} {random}\n```\n"
             7:
                 story_text: |-
                     ## Jósnő
@@ -1480,6 +1538,10 @@ adventures:
                     A 5. szinten jövendőmondóként használhatod a matematikát előrejelzéseidben. Ez lehetővé teszi (buta) képletek kitalálását a jövő kiszámításához.
                     Például kiszámíthatod, hogy milyen gazdag leszel, vagy hány gyermeked lesz, ha felnősz.
 
+                start_code: |-
+                    print 'Hedy, a jósnő vagyok!'
+                    print 'Meg tudom jósolni, hány gyermeked lesz, ha felnősz!'
+                example_code: |-
                     ## Példa Hedy -kódra
                     ```
                     print 'Hedy, a jósnő vagyok!'
@@ -1492,6 +1554,7 @@ adventures:
                     print 'Neked ...'
                     print gyerekek ' gyereked lesz!'
                     ```
+
                     ## Példa a buta jósnőre
                     Ha az előző példa nem volt elég buta a számodra, akkor nézd meg ezt!
 
@@ -1505,10 +1568,6 @@ adventures:
                     eredmeny is eredmeny * foci
                     print 'Te ' eredmeny ' százalék okos vagy.'
                     ```
-                start_code: |-
-                    print 'Hedy, a jósnő vagyok!'
-                    print 'Meg tudom jósolni, hány gyermeked lesz, ha felnősz!'
-                example_code: "## Hedy Code példa\n\n```\n{print} 'I am Hedy the fortune teller!'\n{print} 'I can predict how many kids youll get when you grow up!'\nage = {ask} 'How old are you?'\nsiblings = {ask} 'How many siblings do you have?'\nlength = {ask} 'How tall are you in centimetres?'\nkids = length / age\nkids = kids - siblings\n{print} 'You will get ...'\n{sleep}\n{print} kids ' kids!'\n```\n\n## Example Silly Fortune Teller\nIf the previous example wasn't silly enough for you, take a look at this one!\n\n```\n{print} 'Im Hedy the silly fortune teller!'\n{print} 'I will predict how smart you are!'\nfootball = {ask} 'On a scale 1-10 how much do you love football?'\nbananas = {ask} 'How many bananas did you eat this week?'\nhygiene = {ask} 'How many times did you wash your hands today?'\nresult = bananas + hygiene\nresult = result * football\n{print} 'You are ' result ' percent smart.'\n```\n"
             5:
                 story_text: |-
                     ## Jós
@@ -1516,6 +1575,18 @@ adventures:
                     Az `if` és `else` használatával bebiztosíthatod, hogy mindig jó szerencsét kapj, míg mások nem.
                     Tekintsd meg ezt a példát, hogy megtudd, hogyan.
 
+
+                    Cseréld le Hedyt a saját nevedre az utolsó sorban, és Hedy mindig azt jósolja, hogy te nyersz a lottón, mások nem!
+                    Természetesen ez gyanakvást kelthet a többi játékossal szemben ... Ennek elkerülése érdekében gondoskodhatsz arról, hogy Hedy minden alkalommal más válaszokat adjon a kód futtatásakor.
+                    De természetesen neked továbbra is pozitív választ ad, a többi játékosnak pedig negatív választ.
+
+                    ## Kihívások
+                    Ezeb az elven különféle programokat lehet készíteni, csak légy kreatív! Például létrehozhatsz egy olyan gépet, amely megjósolja, hogy kedvenc sportcsapatod legyőzi az összes versenytársat!
+                    Vagy elkészítheted Hófehérke varázslatos tükrét a falon, hogy elmondd mindenkinek, hogy te vagy a legbecsületesebb!
+                    Hagyd, hogy a fantáziád végezze a munkádat!
+                start_code: print 'Szia, Hedy, a jósnő vagyok!'
+                story_text_2: "Replace Hedy with your own name in the last line, and Hedy will always predict that you will win the lottery and others won't!\nOf course this might raise some suspicion with the other players... To avoid that, you can make sure that Hedy does give different answers every time you run the code.\nBut of course, still gives you a positive answer and the other players a negative one.\n"
+                example_code: |-
                     ## Példa Hedy -kódra
                     ```
                     print 'Szia, Hedy, a jósnő vagyok'
@@ -1523,11 +1594,7 @@ adventures:
                     szemely is ask 'Ki vagy te?'
                     if szemely is Hedy print 'Bizonyosan nyerni fogsz!' else print 'Balszerencse! Valaki más nyer!'
                     ```
-
-                    Cseréld le Hedyt a saját nevedre az utolsó sorban, és Hedy mindig azt jósolja, hogy te nyersz a lottón, mások nem!
-                    Természetesen ez gyanakvást kelthet a többi játékossal szemben ... Ennek elkerülése érdekében gondoskodhatsz arról, hogy Hedy minden alkalommal más válaszokat adjon a kód futtatásakor.
-                    De természetesen neked továbbra is pozitív választ ad, a többi játékosnak pedig negatív választ.
-
+                example_code_2: |-
                     ## Példa Hedy -kódra 2
                     ```
                     print 'Szia, Hedy, a jósnő vagyok'
@@ -1537,15 +1604,6 @@ adventures:
                     rosszvalasz is Balszerencse!, Valaki más nyer!, Te veszteni fogsz!
                     if szemely is Hedy print jovalasz at random else print rosszvalasz at random
                     ```
-
-                    ## Kihívások
-                    Ezeb az elven különféle programokat lehet készíteni, csak légy kreatív! Például létrehozhatsz egy olyan gépet, amely megjósolja, hogy kedvenc sportcsapatod legyőzi az összes versenytársat!
-                    Vagy elkészítheted Hófehérke varázslatos tükrét a falon, hogy elmondd mindenkinek, hogy te vagy a legbecsületesebb!
-                    Hagyd, hogy a fantáziád végezze a munkádat!
-                start_code: print 'Szia, Hedy, a jósnő vagyok!'
-                story_text_2: "Replace Hedy with your own name in the last line, and Hedy will always predict that you will win the lottery and others won't!\nOf course this might raise some suspicion with the other players... To avoid that, you can make sure that Hedy does give different answers every time you run the code.\nBut of course, still gives you a positive answer and the other players a negative one.\n"
-                example_code: "## Hedy Code példa\n\n```\n{print} 'Im Hedy the fortune teller!'\n{print} 'I can predict {if} youll win the lottery tomorrow!'\nperson {is} {ask} 'Who are you?'\n{if} person {is} Hedy {print} 'You will definitely win!\U0001F929' {else} {print} 'Bad luck! Someone {else} will win!\U0001F62D'\n```\n"
-                example_code_2: "## Hedy Code példa\n```\n{print} 'Im Hedy the fortune teller!'\n{print} 'I can predict {if} you will win the lottery tomorrow!'\nperson {is} {ask} 'Who are you?'\ngoodanswer {is} Hurray! You win!, You will definitely win!, We have a winner!\nbadanswer {is} Bad luck! Try again!, Another person will win, You lose!\n{if} person {is} Hedy {print} goodanswer {at} {random} {else} {print} badanswer {at} {random}\n```\n\n## Challenges\nThis concept can be used to make may different programs, just be creative! For example you could create a machine that predicts that your favorite sports team will beat all the competitors!\nOr you could make  Snow White's magic mirror on the wall, to tell everyone you are the fairest of them all!\nLet your imagination do the work!\n"
                 story_text_3: "## Challenges\nThis concept can be used to make may different programs, just be creative! For example you could create a machine that predicts that your favorite sports team will beat all the competitors!\nOr you could make  Snow White's magic mirror on the wall, to tell everyone you are the fairest of them all!\nLet your imagination do the work!\n"
             4:
                 start_code: print 'Szia, Hedy, a jósnő vagyok!'
@@ -1559,7 +1617,7 @@ adventures:
 
                     Fontos! Ne feledd, hogy most, amikor idézőjeleket használunk, Hedy összezavarodik, amikor az aposztrófot más szövegösszefüggésben használod.
 
-
+                example_code: |-
                     ## Példa Hedy -kódra
                     ```
                     print 'Szia, Hedy, a jósnő vagyok!'
@@ -1568,7 +1626,6 @@ adventures:
                     valasz is igen, nem, talan
                     print 'A kristálygömböm azt mondja... ' valasz at random
                     ```
-                example_code: "## Hedy Code példa\n\n```\n{print} 'Im Hedy the fortune teller!'\nquestion {is} {ask} 'What do you want to know?'\n{print} 'This is your question: ' question\nanswers {is} yes, no, maybe\n{print} 'My crystal ball says...'\n{sleep} 2\n{print} answers {at} {random}\n```\n"
             3:
                 start_code: print Szia Hedy a jósnő vagyok!
                 story_text: |-
@@ -1576,19 +1633,20 @@ adventures:
                     Az 1. szinten megalkottad első jóslásgépedet, de Hedy nem tudott igazán megjósolni semmit, csak visszhangot.
                     A 2. szinten használhatsz egy változót és az `at random`  parancsot, hogy valóban engedd, hogy Hedy válaszoljon Neked. Nézd meg például ezt a kódot:
 
-                    ## Példa Hedy -kódra
-                    Ebben a példában a játékos igen-nem kérdést tehet fel Hedynek, és Hedy véletlenszerű választ ad.
-                    ```
-                    print Szia Hedy a jósnő vagyok!
-                    kerdes is ask Mit akarsz tudni?
-                    print Ez az amit tudni akarsz: kerdes
-                    valasz is igen, nem, talan
-                    print A kristálygömböm azt mondja... valasz at random
-                    ```
+
 
                     ## Kihívások
                     Most Hedy csak igennel, nemmel vagy talán válaszolhat. Adhatsz Hedynek több válaszlehetőséget, például „határozottan” vagy „kérdezz újra”
-                example_code: "## Hedy Code példa\n\nIn this example the player can {ask} Hedy a yes-no question and Hedy will pick a random answer for you.\n```\n{print} I’m Hedy the fortune teller!\nquestion {is} {ask} What do you want to know?\n{print} This is what you want to know: question\nanswers {is} yes, no, maybe\n{print} My crystal ball says...\n{sleep} 2\n{print} answers {at} {random}\n```\n\n## Challenges\nNow, Hedy can only answer yes, no or maybe. Can you give Hedy more answer options, like 'definitely' or '{ask} again'.\n"
+                example_code: |-
+                    ## Példa Hedy -kódra
+                                Ebben a példában a játékos igen-nem kérdést tehet fel Hedynek, és Hedy véletlenszerű választ ad.
+                                ```
+                                print Szia Hedy a jósnő vagyok!
+                                kerdes is ask Mit akarsz tudni?
+                                print Ez az amit tudni akarsz: kerdes
+                                valasz is igen, nem, talan
+                                print A kristálygömböm azt mondja... valasz at random
+                                ```
                 story_text_2: "## Challenges\nNow, Hedy can only answer yes, no or maybe. Can you give Hedy more answer options, like 'definitely' or '{ask} again'.\n"
             12:
                 story_text: "## Fortune Teller\nIn this level you can make your fortunes multiple words. Like in this example below:\n"
@@ -1639,6 +1697,9 @@ adventures:
                     ## Kísértetház
                     A 8. szinten megváltoztattuk az ismétlés parancsot, és hozzáadtunk egy sort a kísértetjárta házunkhoz, amely megmondja a játékosnak, hogy melyik szobában vannak.
 
+
+                start_code: print 'Szabadulj ki a kísértetházból'
+                example_code: |-
                     ## Példa Hedy -kódra
                     ```
                     print 'Szabadulj ki a kísértetházból'
@@ -1660,8 +1721,6 @@ adventures:
                     if jatekos is elo
                         print 'Nagyszerű! Túlélted!'
                     ```
-                start_code: print 'Szabadulj ki a kísértetházból'
-                example_code: "## Hedy Code példa\n\n```\n{print} 'Escape from the Haunted House!'\nplayer {is} alive\ndoors = 1, 2, 3\nmonsters = zombie, vampire, giant spider\n{for} i {in} {range} 1 {to} 3\n    {if} player {is} alive\n        correct_door = doors {at} {random}\n        {print} 'Room ' i\n        {print} 'There are 3 doors in front of you...'\n        chosendoor = {ask} 'Which door do you choose?'\n        {if} chosendoor {is} correct_door\n            {print} 'No monsters here!'\n        {else}\n            {print} 'You are eaten by a ' monsters {at} {random}\n            player = dead\n    {else}\n        {print} 'GAME OVER'\n{if} player {is} alive\n    {print} 'Great! You survived!'\n```\n"
             5:
                 story_text: |-
                     ## Kísértetház
@@ -1697,6 +1756,16 @@ adventures:
                     A 2. szinten interaktívabbá teheted a történetet a játék kimenetelének megváltoztatásával; néha megesznek, néha megmenekülsz!
                     Hadd döntsön Hedy véletlenszerűen!
 
+
+                    ## Kihívás
+                    Ez a történet meglehetősen egyszerű, talán egy kicsit érdekesebbé teheted egy izgalmasabb történet hozzáadásával.
+                    Továbbá nagyon korlátozott eredményeket érhetsz el, csak 3 lehetőség van arra, hogy mi van az ajtók mögött. Talán még több szörnyetegre gondolhatsz, amelyet felvehetsz a listába!
+
+                    ## Változtasd a játékot tévéműsorrá!
+                    Végezetül szeretnénk egy kihívást küldeni Neked,  hogy változtasd meg ezt a játékot olyan játékműsorrá (mint amilyenek a tévében vannak), ahol a játékosok ajtót vagy bőröndöt választanak, és valamelyik nagy díjat tartalmaz!
+                    Meg tudod csinálni?
+                start_code: print 'Szabadulj ki a kísértetházból'
+                example_code: |-
                     ## Példa Hedy -kódra
                     ```
                     print Szabadulj ki a kísértetházból!
@@ -1707,15 +1776,6 @@ adventures:
                     print Amit látsz...
                     print szornyek at random
                     ```
-                    ## Kihívás
-                    Ez a történet meglehetősen egyszerű, talán egy kicsit érdekesebbé teheted egy izgalmasabb történet hozzáadásával.
-                    Továbbá nagyon korlátozott eredményeket érhetsz el, csak 3 lehetőség van arra, hogy mi van az ajtók mögött. Talán még több szörnyetegre gondolhatsz, amelyet felvehetsz a listába!
-
-                    ## Változtasd a játékot tévéműsorrá!
-                    Végezetül szeretnénk egy kihívást küldeni Neked,  hogy változtasd meg ezt a játékot olyan játékműsorrá (mint amilyenek a tévében vannak), ahol a játékosok ajtót vagy bőröndöt választanak, és valamelyik nagy díjat tartalmaz!
-                    Meg tudod csinálni?
-                start_code: print 'Szabadulj ki a kísértetházból'
-                example_code: "## Hedy Code példa\n\n```\n{print} Escape from the haunted house!\n{print} There are 3 doors in front of you...\nchoice {is} {ask} Which door do you choose?\n{print} You picked door ... choice\nmonsters {is} a zombie, a vampire, NOTHING YOUVE ESCAPED\n{print} You see...\n{sleep}\n{print} monsters {at} {random}\n```\n\n## Challenge\nThis story is pretty straight {forward}, maybe you can spook it up a bit by adding a more exciting story.\nAlso you have very limited outcomes right now, there are only 3 options of what's behind the doors. Maybe you can think of more monsters to add to the list!\n\n## Change the game into a tv gameshow!\nLastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!\nCan you do it?\n"
                 story_text_2: "## Challenge\nThis story is pretty straight {forward}, maybe you can spook it up a bit by adding a more exciting story.\nAlso you have very limited outcomes right now, there are only 3 options of what's behind the doors. Maybe you can think of more monsters to add to the list!\n\n## Change the game into a tv gameshow!\nLastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!\nCan you do it?\n"
             14:
                 story_text: "## Haunted House\nIn this level you can use the `<` and `>` symbol to introduce lives to your game.\n"
@@ -1745,13 +1805,7 @@ adventures:
 
                     Az első szinten észrevehetted, hogy az "echo" parancs egyszerre csak egy bit információt tud menteni.
                     Például az éttermi kalandban visszhangozhattad, hogy mit akart enni a vevő, vagy mit akart inni, de nem mindkettőt egy mondatban.
-                    ```
-                    print Üdvözlünk a Hedynél
-                    ask Mit szeretnél enni?
-                    echo Szóval ezt akarod
-                    ask Mit akarsz inni?
-                    echo Szóval ezt akarod
-                    ```
+
                     Ha a játékos hamburgert és kólát ír be, akkor nem mondhatja azt, hogy "Szóval ezt akarod..  hamburger és kóla", két külön sort kell készíteni.
                     Ezenkívül az "echo" parancs csak a mondat végén visszhangozza a szót. Tehát nem mondhatod, hogy „A hamburger hamarosan jön neked!”.
 
@@ -1760,7 +1814,15 @@ adventures:
                     Menjünk tehát a következő szintre!
                 start_code: print Menjünk!
                 story_text_2: "If the player types a hamburger and coke, you can't say `so you would like a hamburger and coke`, but you have to make two separate line. \nAlso, the `{echo}` command only echoes the word at the end of the sentence. So you can't say `your hamburger is coming right up!`.\n\nThat changes in level 2. In level 2 you'll learn to work with variables, that allow you to save multiple pieces of information and print them in any place you want.\nBesides, you'll learn how to work with the `{at} {random}` command, that you can use to make games. \nSo let's go to the next level!\n"
-                example_code: "## Example code\n```\n{print} Welcome at Hedy's\n{ask} What would you like to eat?\n{echo} So you want \n{ask} what would you like to drink?\n{echo} So you want \n```\n"
+                example_code: |-
+                    ## Példa Hedy -kódra
+                    ```
+                    print Üdvözlünk a Hedynél
+                    ask Mit szeretnél enni?
+                    echo Szóval ezt akarod
+                    ask Mit akarsz inni?
+                    echo Szóval ezt akarod
+                    ```
             2:
                 story_text: |-
                     ## Mi a következő lépés?
@@ -1806,11 +1868,13 @@ adventures:
                     Az 5. szinten megtanultad, hogyan ismételj meg egyetlen kódsort. Ez jól jön, de nem mindig. Néha több sort szeretnél megismételni egy helyen.
                     A 7. szint lehetővé teszi, hogy csoportosíts pár sor kódot, és megismételd ezt a kis sorcsoportot egyszerre!
 
+                start_code: print 'Menjünk a következő szintre!'
+                example_code: |-
+                    ## Példa Hedy -kódra
                     ```
                     repeat 5 times print 'A 7. szinten egyszerre több sor kódot is megismételhetsz!'
                     ```
-                start_code: print 'Menjünk a következő szintre!'
-                example_code: "## Hedy Code példa\n```\n{repeat} 5 {times} {print} 'In the next level you can repeat multiple lines of code at once!'\n```\n"
+
             6:
                 story_text: |-
                     ## Mi a következő lépés?
@@ -1827,15 +1891,17 @@ adventures:
                     ## Mi a következő lépés?
                     Nagyszerű munka! Elérted a 4. szint végét, ami azt jelenti, hogy gyakoroltál az "if" és az "else" kifejezésekkel. Valószínűleg észrevetted, hogy a kódok egyre hosszabbak.
                     Például, ha „Boldog születésnapot” szeretnél programozni
+
+                    Ez sok kód főleg ugyanazokra a szavakra újra és újra. Szerencsére az 5. szinten van egy megoldás az "repeat" paranccsal, amely lehetővé teszi egy kódsor többszörös megismétlését.
+                start_code: "print 'Menjünk a következő szintre!'"
+                example_code: |-
+                    ## Példa Hedy -kódra
                     ```
                     print 'boldog születésnapot'
                     print 'boldog születésnapot'
                     print 'boldog születésnapot kedves Hedy'
                     print 'boldog születésnapot'
                     ```
-                    Ez sok kód főleg ugyanazokra a szavakra újra és újra. Szerencsére az 5. szinten van egy megoldás az "repeat" paranccsal, amely lehetővé teszi egy kódsor többszörös megismétlését.
-                start_code: "print 'Menjünk a következő szintre!'"
-                example_code: "## Free drinks!\n```\n{print} 'Welcome at McHedy'\norder {is} {ask} 'What would you like to eat?'\n{print} 'You would like ' order\n{if} order {is} hamburger price {is} 5\n{if} order {is} fries price {is} 2\ndrinks {is} {ask} 'What would you like to drink?'\n{print} 'You would like ' drinks\n{print} 'That will be ' price ' dollars for your ' order ' please'\n{print} 'The drinks are free in this level because Hedy cant calculate the price yet...'\n```\n"
             4:
                 story_text: |-
                     ## Mi a következő lépés?
@@ -1850,14 +1916,15 @@ adventures:
                     ## Mi a következő lépés?
                     A 2. szinten a változókkal gyakoroltál, de talán találkoztál ezzel a hibával.
 
+                    Természetesen azt akartad kiíratni, hogy  "A nevem Zita", de Hedy az írja ki, hogy "A Zita Zita".
+                    A 3. szinten ezt a problémát idézőjelek segítségével oldják meg.
+                start_code: print Menjünk a következő szintre!
+                example_code: |-
                     Próbálja meg futtatni ezt a kódot:
                     ```
                     nevem is Zita
                     print A nevem nevem
                     ```
-                    Természetesen azt akartad kiíratni, hogy  "A nevem Zita", de Hedy az írja ki, hogy "A Zita Zita".
-                    A 3. szinten ezt a problémát idézőjelek segítségével oldják meg.
-                start_code: print Menjünk a következő szintre!
             9:
                 start_code: "{print} 'Lets go to the next level!'"
                 story_text: "## What's next?\nYou're doing great! In this level we still face a small problem. You have learned to repeat lines, but what {if} you'd want to slightly change the line.\nFor example {if} you want to sing the song '{if} you're happy and you knwo it'\n\nIt would look like this:\n```\n{repeat} 2 {times}\n    {print} '{if} youre happy and you know it clap your hands'\n{print} '{if} youre happy and you know it and you really want to show it'\n{print} '{if} youre happy and you know it clap your hands'\n```\n\nIf you'd also want the next verse 'stomp your feet', and the next one, and the next one, you'd have to change the code completely.\nIn the next level you'll learn the `{for}` command, which allows you to make a list of actions and repeat the code with another action each time!\nPlease take a look!\n"
