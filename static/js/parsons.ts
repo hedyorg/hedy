@@ -35,6 +35,8 @@ function showExercise(response: any) {
         // Temp output to console to make sure TypeScript compiles
         console.log(key);
         ace.edit('start_parsons_' + counter).session.setValue(valueObj.replace(/\n+$/, ''), -1);
+        $('#start_parsons_div_' + counter).attr('index', key);
+        $('#start_parsons_div_' + counter).attr('code', valueObj);
         ace.edit('goal_parsons_' + counter).session.setValue("");
 
         $('#parsons_start_line_container_' + counter).show();
