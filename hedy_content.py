@@ -248,7 +248,7 @@ class ParsonsProblem:
         if self.debug_mode and not self.data.get("en", None):
             if not self.file:
                 self.file = YamlFile.for_file(f'content/parsons/{self.language}.yaml').get('levels')
-            self.data["en"] = self.cache_quiz_keywords("en")
+            self.data["en"] = self.cache_parsons_keywords("en")
         return len(self.data["en"].get(level, {}))
 
     def get_parsons_data_for_level(self, level, keyword_lang="en"):
