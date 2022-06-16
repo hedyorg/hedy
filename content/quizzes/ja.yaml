@@ -1497,7 +1497,7 @@ levels:
             question_text: このプログラミング言語の名前は？
             mp_choice_options:
             -   option: Hedy
-                feedback: Good job!
+                feedback: 素晴らしい！
             -   option: Heddy
                 feedback: これじゃないよ！
             -   option: Haydie
@@ -1511,22 +1511,22 @@ levels:
             question_text: 文字を表示させるコマンドは？
             mp_choice_options:
             -   option: "```\n{echo}\n```\n"
-                feedback: '`{echo}` repeats a given answer.'
+                feedback: '`{echo}` は入力した答えをそのまま繰り返します。'
             -   option: "```\n{print}\n```\n"
-                feedback: Correct!
+                feedback: 正解！
             -   option: "```\nhello\n```\n"
                 feedback: Hello isn't a command.
             -   option: "```\n{ask}\n```\n"
-                feedback: With `{ask}`, you can ask a question.
+                feedback: '`{ask}` で質問することができます。'
             correct_answer: B
             hint: _?_ Hello world!
             question_score: '10'
         3:
-            question_text: How do you ask what someone's favorite color is?
+            question_text: どうやって好きな色を訊きますか？
             mp_choice_options:
-            -   option: "```\n{print} What is your favorite color?\n```\n"
-                feedback: "`{print}` prints text, but it doesn't ask questions."
-            -   option: "```\n{ask} {print} What is your favorite color?\n```\n"
+            -   option: "```\n{print} あなたの好きな色は？\n```\n"
+                feedback: "`{print}` は文字を表示しますが、質問ではありません。"
+            -   option: "```\n{ask} {print} あなたの好きな色は？\n```\n"
                 feedback: You only need one command, not two.
             -   option: "```\n{ask} What is your favorite color?\n```\n"
                 feedback: Great!
@@ -1540,18 +1540,18 @@ levels:
             code: "Hi Im Hedy!\n{ask} Who are you?\n{echo} Hi..."
             mp_choice_options:
             -   option: '`{print}` in line 1 is missing.'
-                feedback: Correct!
+                feedback: 正解！
             -   option: Im in line 1 is spelled wrong.
                 feedback: Im is spelled wrong on purpose; Hedy doesn't understand the apostrophes yet.
             -   option: "`{echo}` isn't a command."
                 feedback: "`{echo}` is a command, there's another mistake."
             -   option: Nothing! This is a perfect code!
-                feedback: Wrong, look carefully!
+                feedback: 違うよ、よく見て！
             correct_answer: A
             hint: Line 1 doesn't seem right
             question_score: '10'
         5:
-            question_text: Which command is missing in line 2?
+            question_text: 2行目に足りないコマンドは？
             code: "{ask} What is your favorite pet?\n_?_ So your favorite pet is..."
             mp_choice_options:
             -   option: "```\n{print}\n```\n"
@@ -1561,7 +1561,7 @@ levels:
             -   option: "```\n{ask}\n```\n"
                 feedback: With `{ask}` you can ask a question.
             -   option: "```\n{echo}\n```\n"
-                feedback: Right on!
+                feedback: その通り！
             correct_answer: D
             hint: You want to see the answer at the end of line 2...
             question_score: '10'
