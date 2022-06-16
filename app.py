@@ -959,6 +959,7 @@ def get_cheatsheet_page(level):
         return utils.error_page(error=404, ui_message=gettext('no_such_level'))
 
     commands = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
+    print(commands)
 
     return render_template("cheatsheet.html", commands=commands, level=level)
 
