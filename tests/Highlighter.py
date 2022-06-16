@@ -68,6 +68,7 @@ class HighlightTester(unittest.TestCase):
         """
         state_machine = self.get_state_machine(level, lang)
         self.check(code, expected, state_machine, start_token, last_state)
+        self.checkInter(code, expected, state_machine, start_token)
 
 
     def assert_highlighted_chr_multi_line(self, *args, level, lang="en", start_token="start", last_state="start"):
@@ -124,7 +125,24 @@ class HighlightTester(unittest.TestCase):
         code, expected = self.convert(code_coloration)
         self.assert_highlighted_chr(code, expected, level, lang, start_token, last_state)
 
+    def checkInter(self, code, expected, state_machine, start_token="start"):
+        """Check the highlighting on the intermediate states
 
+        check intermediate tests, word by word, to make
+        sure that the highlighting when typing the code will be consistent.
+
+        Arguments :
+            - code : str, The code you want to color
+            - expected : str, The expected coloring, character by character,
+                with the code described here TOKEN_CODE
+            - state_machine : a state_machine
+            - start_token : str, token for beginning of the highlighting
+        """
+
+        listCode, listExpected = genInterTest(code, expected)
+
+        for n in range(len(listCode)):
+            self.check(listCode[n], listExpected[n], state_machine, start_token, None)
 
     def check(self, code, expected, state_machine, start_token="start", last_state='start'):
         """Apply state_machine on code and check if the result is valid
@@ -264,7 +282,30 @@ class HighlightTester(unittest.TestCase):
 
 
 
+def genInterTest(code, expected):
+    """generates intermediate tests, word by word,
+    to check that the highlighting when
+    typing the code will be consistent."""
+    C, E = [],[]
+    codes = [k.split(' ') for k in code.split("\n")]
 
+
+    currentCode = []
+
+    for nbLine in range(len(codes)):
+        currentLine = []
+
+        for nbMot in range(len(codes[nbLine])):
+            currentLine.append(codes[nbLine][nbMot])
+
+            # add 
+            current = "\n".join([" ".join(k) for k in currentCode + [currentLine]])
+            C.append(current)
+            E.append(expected[:len(current)])
+
+        currentCode.append(currentLine)
+
+    return C, E
 
 class SimulatorAce:
 
