@@ -241,12 +241,58 @@
                     "next": "start"
                 },
                 {
+                    "regex": "(^ *)(__remove__)( *)(.*)( +)(__from__)( *)$",
+                    "token": [
+                        "text",
+                        "keyword",
+                        "text",
+                        "text",
+                        "text",
+                        "keyword",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^ *)(__remove__)( *)(.*)$",
+                    "token": [
+                        "text",
+                        "keyword",
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
                     "regex": "(^ *)(__add__)( *)(.*)( +)(__to_list__)( *)([0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a]+)$",
                     "token": [
                         "text",
                         "keyword",
                         "text",
                         "text",
+                        "text",
+                        "keyword",
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^ *)(__add__)( *)(.*)( +)(__to_list__)( *)$",
+                    "token": [
+                        "text",
+                        "keyword",
+                        "text",
+                        "text",
+                        "text",
+                        "keyword",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^ *)(__add__)( *)(.*)$",
+                    "token": [
                         "text",
                         "keyword",
                         "text",
