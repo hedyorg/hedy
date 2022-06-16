@@ -229,7 +229,6 @@ adventures:
                 start_code: "الفاكهة = [\"تفاح\"، \"موز\"، \"كرز\"]\n{print} الفاكهة"
                 story_text: "## المزيد والمزيد من البرمجة الحقيقية\nسنتعلم الان كيفية كتابة القائمة باستخدام طريقة لغة البرمجة بايثون (python) عن طريق احاطة القائمة بالأقواس المربعة (أو المعقوفتان)! نستمر بوضع علامات الاقتباس حول كل عنصر نصي (كلمة اواسم مثلا) كما في المستويات السابقة. \nيمكننا استخدام الأقواس المربعة أيضا للاشارة الى مكان محدد في القائمة."
                 example_code: |-
-                    
                     ```
                     صديقي = ["أحمد"، "علاء"، "سامر"]
                     رقم_الحظ = [١٥، ١٨، ٦]
@@ -287,7 +286,6 @@ adventures:
                     ```
                 story_text_2: |
                     The command `{add}` can also come in handy in your story. For example
-
                 example_code_2: |
 
                     {print} He hears a sound
@@ -359,7 +357,7 @@ adventures:
                 example_code: "```\nwords {is} squawk, Hedy\n{print} Train your parrot!\nnew_word {is} {ask} Which word do you want to teach them?\n{add} new_word {to_list} words\n{print} \U0001F9D2 Say new_word , Hedy!\n{print} \U0001F99C words {at} {random}\n```\n"
                 start_code: '# place your code here'
     songs:
-        name: Sing a song!
+        name: غنّ أغنية!
         description: Print a song
         levels:
             8:
@@ -368,14 +366,14 @@ adventures:
                 start_code: '# place your code here'
             7:
                 start_code: "{print} 'Baby Shark'"
-                story_text: "## Songs\nSongs often contain a lot of repetition. For example... Baby Shark! If you sing it, you keep singing the same thing:\n\nBaby Shark tututudutudu <br>\nBaby Shark tututudutudu <br>\nBaby Shark tututudutudu <br>\nBaby Shark\n\nYou can make this song much shorter with a `{repeat}`! Can you finish the code?\n"
+                story_text: "## أغاني\nعادة ما تحتوي الأغاني على الكثير من التكرار. على سبيل المثال... بيبي شارك! اذا غنيتها فأنت فعلياً تقوم بتكرار غناء نفس المقطع:\n\nبيبي شارك توتوتودوتودو <br>\nبيبي شارك توتوتودوتودو <br>\nبيبي شارك توتوتودوتودو <br>\nبيبي شارك\n\nيمكنك أن تصنع هذه الأغنية بعدد قليل من الأوامر البرمجية باستعمال `{repeat}`! هل يمكنك إكمال الكود؟\n"
                 example_code: "```\n{repeat} _ _ {print} 'Baby Shark tututudutudu'\n{print} 'Baby Shark'\n```\n\nAfter Baby Shark you can of course also program other songs. There are many songs with repetition.\n"
             6:
                 start_code: "{print} 'Baby shark'"
                 example_code: "```\nverse = 99\n{print} verse ' bottles of beer on the wall'\n{print} verse ' bottles of beer'\n{print} 'Take one down, pass it around'\nverse = verse - 1\n{print} verse ' bottles of beer on the wall'\n```\n\nYou can now repeat lines 2 to 9 as many times as you want by copying the lines.\n"
                 story_text: "## Songs\nSongs often contain a lot of repetition. Sometimes the repetition is also based on counting.\nFor example, in the well-known song 'Bottles of beer'. You can program that song with a little math.\n"
             12:
-                story_text: "## Sing a song!\nIn this song we can make it even easier to program '{if} you're happy and you know it, clap your hands'. Because we can put all of the actions in a variable, check it out:\n"
+                story_text: "## غنّ أغنية\nIn this song we can make it even easier to program '{if} you're happy and you know it, clap your hands'. Because we can put all of the actions in a variable, check it out:\n"
                 example_code: "```\nactions = 'clap your hands', 'stomp your feet', 'shout Hurray!'\n{for} action {in} actions\n    {for} i {in} {range} 1 {to} 2\n        {print} '{if} youre happy and you know it'\n        {print} action\n    {print} '{if} youre happy and you know it and you really want to show it'\n    {print} '{if} youre happy and you know it'\n    {print} action\n```\n"
                 start_code: '# place your code here'
             11:
@@ -766,12 +764,12 @@ adventures:
                 example_code: "```\nfrench_words = ['bonjour', 'ordinateur', 'pomme de terre']\ntranslation = ['hello', 'computer', 'potato']\nscore = 0\n{for} i {in} {range} 1 {to} 3\n    answer = {ask} 'What does ' french_words[i] ' mean?'\n    correct = translation[i]\n    {if} answer == correct\n        {print} 'Correct!'\n        score = score + 1\n    {else}\n        {print} 'Wrong, ' french_words[i] ' means ' translation[i]\n{print} 'You gave ' score ' correct answers.'\n```\n"
                 start_code: '# place your code here'
             5:
-                story_text: "## Learn a new language\nMake your own program to practice your vocabulary in a new language.\n\n```\n{print} 'Learn French!'\ncat {is} {ask} '\U0001F431'\n{if} cat {is} chat {print} 'Terrific!'\n{else} {print} 'No, cat is chat'\nfrog {is} {ask} '\U0001F438'\n{if} frog {is} grenouille {print} 'Super!'\n{else} {print} 'No, frog is grenouille'\n```\n"
+                story_text: "## تعلم لغة جديدة\nاصنع برنامجك الخاص لتتدرب على مفردات بلغة جديدة.\n"
                 start_code: '# place your code here'
                 example_code: "```\n{print} 'Learn French!'\ncat {is} {ask} '\U0001F431'\n{if} cat {is} chat {print} 'Terrific!'\n{else} {print} 'No, cat is chat'\nfrog {is} {ask} '\U0001F438'\n{if} frog {is} grenouille {print} 'Super!'\n{else} {print} 'No, frog is grenouille'\n```\n"
-        name: Language
-        description: Practice words in a foreign language
-        default_save_name: language
+        name: لغة
+        description: تدرب على كلمات من لغة جديدة
+        default_save_name: لغة
     next:
         name: ما التالي؟
         levels:
