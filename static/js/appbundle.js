@@ -48,15 +48,11 @@ def convert_numerals(alphabet, number):
   numerals_list = numerals_dict_return[alphabet]
   number=str(number)
 
+  number = str(number)
   if number.isnumeric():
-    number = int(number)
     numerals_list = numerals_dict_return[alphabet]
-    if number <= 9:
-      return numerals_list[number]
-    else:
-      last_digit = number // 10
-      rest = number % 10
-      return numerals_list[last_digit] + convert_numerals(alphabet, rest)
+    all_numerals_converted = [numerals_list[int(digit)] for digit in number]
+    return ''.join(all_numerals_converted)
   else:
     return number
 `;(function(){window.State||(window.State={});var c=$("#main_container").attr("dir");b($("#editor"));for(var f=function(S){$(S).addClass("text-lg rounded"),$(S).attr("lang",window.State.keyword_language),$(S).addClass("overflow-x-hidden");var I=T(S,!0);if(I.setOptions({maxLines:1/0}),$(S).hasClass("common-mistakes")?I.setOptions({minLines:10}):$(S).hasClass("cheatsheet")?I.setOptions({minLines:1}):$(S).hasClass("parsons")?I.setOptions({minLines:1,showGutter:!1,showPrintMargin:!1,highlightActiveLine:!1}):I.setOptions({minLines:2}),c==="rtl"&&I.setOptions({rtl:!0}),I.setValue(I.getValue().replace(/\n+$/,""),-1),!$(S).hasClass("no-copy-button")){var A=$("<div>").addClass("absolute ltr:-right-1 rtl:left-2 w-16").css({top:5}).appendTo(S),L="\u21E5";c==="rtl"&&(L="\u21E4"),$("<button>").css({fontFamily:"sans-serif"}).addClass("green-btn").text(L).appendTo(A).click(function(){z.theGlobalEditor===null||z.theGlobalEditor===void 0||z.theGlobalEditor.setValue(I.getValue()+`
