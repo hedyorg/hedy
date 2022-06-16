@@ -36,6 +36,9 @@ def collect_snippets(path, filtered_language = None):
                         for tag in utils.markdown_to_html_tags(level['story_text']):
                             if tag.name != 'pre' or not tag.contents[0]:
                                 continue
+                            # Can be used to catch more languages with example codes in the story_text
+                            # feedback = f"Example code in story text {lang}, {adventure_name}, {level_number}, not recommended!"
+                            # print(feedback)
                             code_snippet_counter += 1
                             try:
                                 code = tag.contents[0].contents[0]
@@ -61,7 +64,11 @@ def collect_snippets(path, filtered_language = None):
                             print(f'Problem reading startcode for {lang} level {level}')
                             pass
                         # Code snippets inside example code
-                        for tag in utils.markdown_to_html_tags(level['example_code']):
+                        try:
+                            example_code = utils.markdown_to_html_tags(level['example_code'])
+                        except Exception as E:
+                            print(E)
+                        for tag in example_code:
                             if tag.name != 'pre' or not tag.contents[0]:
                                 continue
                             code_snippet_counter += 1
@@ -104,7 +111,7 @@ def translate_keywords_in_snippets(snippets):
     return snippets
 
 # use this to filter on 1 lang:
-# Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/adventures', filtered_language='ar')]
+# Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/adventures', filtered_language='pl')]
 
 Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/adventures')]
 
