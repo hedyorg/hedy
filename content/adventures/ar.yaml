@@ -31,8 +31,8 @@ adventures:
                 story_text_3: "لدينا أمر جديد اخر وهو `{sleep}` الذي يعلق عمل البرنامج لمدة ثانية واحدة. اذا كتبت رقما معينا بعد الأمر `{sleep}` فسيتم تعليق عمل البرنامج لعدد معين من الثواني مساوياً للرقم الذي تم تحديده.\n"
                 example_code_3: "```\n{print} لوني المفضل هو ...\n{sleep} ٢\n{print} الأخضر!!\n```\n"
             3:
-                story_text: |-
-                    ##  ا نشاء قائمة!
+                story_text: |
+                    ## انشاء قائمة!
                     في المستوى الثالث يمكنك أن تنشأ قائمة. يمكنك بعدها أن تجعل الحاسوب يختار لك شيئا من القائمة بشكل عشوائي - يمكنك القيام بذك من خلال الأمر `{at} {random}`.
                 start_code: '{print} مرحبا أيها العالم!'
                 example_code: "\n\n```\nالحيوانات {is} كلب، قطة، جمل\n{print} الحيوانات {at} {random}\n```\n"
@@ -41,7 +41,7 @@ adventures:
             4:
                 start_code: '{print} "مرحبا أيها العالم"'
                 story_text: |
-                    ##ع لامات الاقتباس
+                    ## "علامات الاقتباس"
                     هناك تغيير على `{print}` و `{ask}` في المستوى الرابع.
 
                     يجب عليك أن تضع الكلام الذي تريد الكمبيوتر ان يظهره على الشاشة بين علامات اقتباس.
@@ -115,10 +115,10 @@ adventures:
                 #            لوني_المفضل هو اسأل 'ما لونك المفضل؟'
                 #             اذا لوني_المفضل في الالوان_الجميلة قول 'هذا جميل!' وإلا قول 'يا خسارة!!'
                 example_code: "\n```\n{print} \"يجب عليك استعمال علامات الاقتباس من الان وصاعداً!\"\nالجواب {is} {ask} \"ما الذي يجب علينا استعماله من الان وصاعداً؟\"\n{print} \"يجب علينا استعمال \" الجواب \n```\n"
-                story_text_2: "##المغامرات تزداد صعوبة مع الانتقال بين علامات التبويب\nالمغامرات تزداد صعوبة في علامات التبويب المتتالية.\nلذلك من الأفضل البدأ من اليمين مع القصة ومن ثم الانتقال الى اليسار واحدة تلو الأخرى حتى تتجاوز المزيد والمزيد من التحديات.\n"
+                story_text_2: "## المغامرات تزداد صعوبة مع الانتقال بين علامات التبويب\nالمغامرات تزداد صعوبة في علامات التبويب المتتالية.\nلذلك من الأفضل البدأ من اليمين مع القصة ومن ثم الانتقال الى اليسار واحدة تلو الأخرى حتى تتجاوز المزيد والمزيد من التحديات.\n"
             5:
                 start_code: "اسمك {is} {ask} \"ما اسمك؟\"\n{if} اسمك {is} هيدي {print} \"واو هذا رائع!\" {else} {print} \"اه.. حسنا\""
-                story_text: "## اذا .. وإلا\nفي المستوى الخامس لدينا شيء جديد: الأمر `{if}`! باستخدام الأمر `{if}` يمكنك أن تفحص شيئا ما وتقوم بالاختيار بين شيئين مختلفين بناء على نتيجة ذلك الفحص.\nهذا الكود يطبع واو هذا رائع! اذا ادخلت هيدي كإجابة على سؤال الاسم، بينما يطبع اه.. حسنا اذا ادخلت أي شيء اخر.\n`{ask}` و `{print}` لا يزالان يعملان كما في المستوى الرابع.\n"
+                story_text: "## اذا .. وإلا\nفي المستوى الخامس لدينا شيء جديد: الأمر `{if}`! باستخدام الأمر `{if}` يمكنك أن تفحص شيئا ما وتقوم بالاختيار بين أمرين مختلفين بناء على نتيجة ذلك الفحص.\nهذا الكود يطبع واو هذا رائع! اذا ادخلت هيدي كإجابة على سؤال الاسم، بينما يطبع اه.. حسنا اذا أدخلت أي شيء اخر.\n`{ask}` و `{print}` لا يزالان يعملان كما في المستوى الرابع.\n"
                 story_text_2: "يصبح الكود أحياناً طويلاأ جداً عند استخدام `{if}` ولا يمكن أن يحتويه سطر واحد. لذلك، يمكنك أن تقسم الكود بوجود `{if}` الى سطرين: السطر الأول يبدأ مع `{if}` على أن يبدأ السطر الثاني بالأمر `{else}` كما في المثال:\n"
                 example_code_2: "```\nاسمك {is} {ask} \"ما اسمك؟\"\n{if} اسمك {is} هيدي {print} \"واو هذا رائع!\"\n{else} {print} \"اه.. حسنا\"\n```\n"
                 example_code: "\n```\nاسمك {is} {ask} \"ما اسمك؟\"\n{if} اسمك {is} هيدي {print} \"واو هذا رائع!\" {else} {print} \"اه.. حسنا\"\n```\n"
@@ -139,7 +139,7 @@ adventures:
                     {repeat} ٥ {times}
                         {print} "مرحباً يا أصدقاء!"
                         {print} "سيتم تكرار كل هذا ٥ مرات"
-                story_text: "## الإزاحة\n`{ask}` و `{print}` لا يزالان يعملان بنفس الطريقة التي تعرفونها. لكنهناك تغيير على الأوامر `{if}` و `{repeat}`.\nيمكننا الان عند استخدام هذه الأوامر تنفيذ مجموعة من الأسطر البرمجية مع بعضهم (وليس سطر واحد فقط)، ولكن علينا *إزاحة* الكود. \nهذا يعني وضع اربع فراغات (باستخدام مفتاح المسافة على لوحة المفاتيح اربع مرات). يجب علينا أن نقوم بالإزاحة حتى لو كان الكود يتكون من سطر واحد فقط.\n"
+                story_text: "## الإزاحة\n`{ask}` و `{print}` لا يزالان يعملان بنفس الطريقة التي تعرفونها. لكن هناك تغيير على الأوامر `{if}` و `{repeat}`!\nيمكننا الآن عند استخدام هذه الأوامر تنفيذ مجموعة من الأسطر البرمجية مع بعضهم (وليس سطر واحد فقط)، ولكن علينا *إزاحة* الكود.\nهذا يعني وضع اربع فراغات (باستخدام مفتاح المسافة على لوحة المفاتيح أربع مرات). يجب علينا أن نقوم بالإزاحة حتى لو كان الكود التابع يتكون من سطر واحد فقط.\n"
                 example_code: |
                     ```
                     {repeat} ٥ {times}
@@ -154,7 +154,7 @@ adventures:
                             {print} "لذيذ!"
                         {else}
                             {print} "البيتزا أفضل"
-                story_text: "## كلّهم مع بعضهم البعض الان!\nفي هذا المستوى ليس بامكاننا فقط أن نستخدم أكثر من سطر كودي واحد مع `{if}`و `{repeat}`، ولكن أيضاً يمكننا أن نستخدمهم مع بعضهم البعض!\nفي المثال التوضيحي يمكننا أن نرى الأمر `{if}` موجود داخل/ضمن الأمر `{repeat}`. من المسموح أيضاً أن نجمعهم مع بعضهم بطريقة عكسية، كذلك  يمكننا استخدام الأمر `{if}` داخل أمر `{if}`، و الأمر `{repeat}` داخل أمر `{repeat}` اخر.\nفلنجربها!\n"
+                story_text: "## كلّهم مع بعضهم البعض الان!\nفي هذا المستوى ليس بامكاننا فقط أن نستخدم أكثر من سطر برمجي واحد مع `{if}`و `{repeat}`، ولكن أيضاً يمكننا أن نستخدمهم مع بعضهم البعض!\nفي المثال التوضيحي يمكننا أن نرى الأمر `{if}` موجود داخل/ضمن الأمر `{repeat}`. من المسموح أيضاً أن نجمعهم مع بعضهم بطريقة عكسية، كذلك  يمكننا استخدام الأمر `{if}` داخل أمر `{if}`، و الأمر `{repeat}` داخل أمر `{repeat}` اخر.\nفلنجربها!\n"
                 example_code: |
                     ```
                     {repeat} ٣ {times}
@@ -177,12 +177,12 @@ adventures:
                       {print} "أنا أحب " حيوان
                     ```
             11:
-                story_text: |
+                story_text: |-
                     ##  دورات التكرار!
 
                     `{print}` لا زال يعمل بالطريقة نفسها، ولكن أضفنا شكلاً جديداً من الأمر `{for}`. بامكاننا الان أن نكتب `{for} دورة {in} {range} ١ {to} ٥` وأن نستخدم بعدها المتغير `دورة` في البرنامج.
 
-                    فلنجرب الان ونرى ما سيحدث! تذكر أن تضع الإزاحة بعد استخدام الأوامر `{for}` و `{if}`(هذا يعني وضع اربع فراغات قبل بداية السطر الذي يكون ضمن هذه الأوامر)'
+                    فلنجرب الان ونرى ما سيحدث! تذكر أن تضع الإزاحة بعد استخدام الأوامر `{for}` و `{if}`(هذا يعني وضع اربع فراغات قبل بداية السطر الذي يكون ضمن هذه الأوامر)
                 start_code: |
                     {for} دورة {in} {range} ١ {to} ٥
                         {print} دورة
@@ -553,7 +553,7 @@ adventures:
                 example_code: "```\nnumber1 = {ask} 'What is the first number?'\nnumber2 = {ask} 'What is the second number?'\nanswer = number1 + number2\n{print} number1 ' plus ' number2 ' is ' answer\n"
                 start_code: '# place your code here'
             9:
-                story_text: "## Calculator\nIn previous levels you've learned how to make a calculator, in this level you can expand that code and make it into a little maths game. Like this...\n"
+                story_text: "## آلة حاسبة\nلقد تعلمت صنع آلة حاسبة في المستويات السابقة. يمكنك الآن أن تطور البرنامج وتحوله للعبة حسابية. هكذا ...\n"
                 example_code: "```\nscore = 0\n{repeat} 10 {times}\n    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    number1 = numbers {at} {random}\n    number2 = numbers {at} {random}\n    correct_answer = number1 * number2\n    {print} 'What is ' number1 ' times ' number2 '?'\n    answer = {ask} 'Type your answer here...'\n    {print} 'Your answer is' answer\n    {if} answer {is} correct_answer\n        score = score + 1\n{print} 'Great job! Your score is... ' score ' out of 10!'\n```\n"
                 start_code: "{print} 'Welcome to this calculator!'"
             10:
@@ -561,18 +561,18 @@ adventures:
                 example_code: "```\nnumbers = 1, 2, 3\n{for} number1 {in} numbers\n    {for} number2 {in} numbers\n        answer = {ask} 'How much is ' number2 ' times ' number1 '?'\n        correct = number1 * number2\n        {if} answer {is} correct\n            {print} 'Great job!'\n        {else}\n            {print} 'Thats wrong. The right answer is ' correct\n```\n"
                 start_code: '# place your code here'
             6:
-                story_text: "## Calculator\nNow that you can calculate, you can also create a program to practice maths calculations. You can make up the calculations yourself, for example:\n"
-                example_code: "```\ncorrect_answer = 11 * 27\nanswer = {ask} 'How much is 11 times 27?'\n{if} answer {is} correct_answer {print} 'good job!'\n{else} {print} 'Wrong! It was ' correct_answer\n```\n"
-                story_text_2: "## Random numbers\nYou can also let the computer do random sums on its own using random.\nThis is how you choose a number of tables to practice, and from that you always get a different sum:\n"
-                example_code_2: "```\ntables = 4, 5, 6, 8\nnumbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\ntable = tables {at} {random}\nnumber = numbers {at} {random}\ncorrect_answer = table * number\nanswer = {ask} 'how much is ' table ' times ' number '?'\n{if} answer {is} correct_answer {print} 'okay'\n{else} {print} 'mistake! it was ' correct_answer\n```\n"
-                start_code: "{print} 'Welcome to this calculator!'"
+                story_text: "## آلة حاسبة\nبما أننا قادرون على القيام بالعمليات الحسابية، بامكاننا صنع برنامج للتدرب على العمليات الحسابية. يمكنك وضع العمليات الحسابية بنفسك، على سبيل المثال:\n"
+                example_code: "```\nالاجابة_الصحيحة = ١١ * ٢٧\nاجابتك = {ask} \"ما ناتج ١١ ضرب ٢٧؟\"\n{if} اجابتك هي الاجابة_الصحيحة{print} \"أحسنت!\"\n{else} {print} \"خطأ! الاجابة الصحيحة هي \" الاجابة_الصحيحة\n```\n"
+                story_text_2: "## أرقام عشوائية\nبامكانك جعل الحاسوب يقوم بعمليات حسابية عشوائية باستخدام الأمر بشكل عشوائي.\nبهذا الشكل يمكنك اختيار رقم عشوائي و تضربه برقم اخر وسيساعدك ذلك على التدرب على جدول الضرب بحيث تحصل كل مرة على عملية ضرب مختلفة:\n"
+                example_code_2: "```\nالجداول = ٤، ٥، ٦، ٧، ٨\nالأرقام = ١، ٢، ٣، ٤، ٥، ٦، ٧، ٨، ٩، ١٠\nالمضروب = الجداول {at} {random} \nالرقم = الأرقام {at} {random} \nالاجابة_الصحيحة = الرقم * المضروب\nاجابتك = {ask} \"ما ناتج \" الرقم \" ضرب \" المضروب \" ؟\"\n{if} اجابتك هي الاجابة_الصحيحة {print} \"أحسنت!\"\n{else} {print} \"خطأ! الاجابة هي \" الاجابة_الصحيحة\n```\n"
+                start_code: "{print} \"أهلاً بكم في هذه الآلة الحاسبة!\""
             15:
                 story_text: "## Calculator\nYou can add the `{while}` loop to the calculator game you've learned to make in a previous level.\nThis makes sure the player can't continue to the next question {if} they answer incorrectly.\n"
                 example_code: "```\nscore = 0\n{for} i {in} {range} 0 {to} 9\n    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    number1 = numbers {at} {random}\n    number2 = numbers {at} {random}\n    correct = number1 * number2\n    answer = 0\n    {while} answer != correct\n        {print} 'How much is ' number1 ' times ' number2 '?'\n        answer = {ask} 'Fill in your answer:'\n        {print} 'Your answer is ' answer\n    {print} 'Good job!'\n{print} 'You win!'\n```\n"
                 start_code: '# place your code here'
-        name: Calculator
-        description: Create a calculator
-        default_save_name: Calculator
+        name: آلة حاسبة
+        description: اصنع آلة حاسبة
+        default_save_name: آلة حاسبة
     restaurant:
         name: المطعم
         description: اصنع مطعماً افتراضياً خاصاً بك
@@ -738,9 +738,9 @@ adventures:
                 story_text_2: "## Challenge\nThis story is pretty straight {forward}, maybe you can spook it up a bit by adding a more exciting story.\nAlso you have very limited outcomes right now, there are only 3 options of what's behind the doors. Maybe you can think of more monsters to add to the list!\n\n## Change the game into a tv gameshow!\nLastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!\nCan you do it?\n"
         name: بيت الأشباح
     piggybank:
-        name: Piggy Bank
-        description: Count your pocketmoney!
-        default_save_name: Piggy Bank
+        name: البنك الإلكتروني
+        description: احسب مصروفك ومدخراتك!
+        default_save_name: البنك الإلكتروني
         levels:
             14:
                 story_text: "## Piggybank\nIn this level you can let Hedy tell you {if} you have saved up enough money!\n"
@@ -751,9 +751,9 @@ adventures:
                 example_code: "```\n{print} 'The digital piggy bank'\nwish = {ask} 'What would you like to buy?'\nprice = {ask} 'How much does that cost?'\nsaved = {ask} 'How much money have you saved already?'\nallowance = {ask} 'How much pocket money do you get per week?'\nto_save = price - saved\nweeks = to_save / allowance\n{print} 'You can buy a ' wish ' in ' weeks ' weeks.'\n"
                 start_code: '# place your code here'
     quizmaster:
-        name: Quizmaster
-        description: Make your own quiz!
-        default_save_name: Quizmaster
+        name: عريف المسابقات
+        description: اصنع مسابقة جديدة!
+        default_save_name: عريف المسابقات
         levels:
             14:
                 story_text: "## Make your own quiz\nIn this adventure you can make your own quiz! Fill in the blanks, add more questions and enjoy your own quiz!\nYou can make a quiz about anything you like: your hobby, your favorite animal, your favorite book or anything at all!\n"
@@ -855,12 +855,12 @@ adventures:
                 example_code: "```\nname is ask 'What is your name?'\npassword is ask 'What is your password?'\nif name is 'Agent007' and password is 'TOPSECRET'\n    print 'Go to the airport at 02.00'\nelse\n    print 'Go to the trainstation at 10.00'\n ```\n"
                 story_text: "## Superspy\nThe code you made in the previous level can be made a lot easier in this one with the `{and}` command.\n"
                 start_code: '## place your code here'
-        name: SuperSpy
+        name: العميل السري
         description: Make your own spy code
-        default_save_name: language
+        default_save_name: العميل السري
     tic:
-        name: Tic Tac Toe
-        description: Play a game of Tic Tac Toe!
+        name: لعبة إكس-أو
+        description: العب لعبة إكس-أو!
         default_save_name: Tic
         levels:
             14:
@@ -880,9 +880,9 @@ adventures:
                 example_code: "```\nsign = 'x'\nopen_spots = [1, 2, 3, 4, 5, 6, 7, 8, 9]\ngame = 'on'\nspot_1 = '.'\nspot_2 = '.'\nspot_3 = '.'\nspot_4 = '.'\nspot_5 = '.'\nspot_6 = '.'\nspot_7 = '.'\nspot_8 = '.'\nspot_9 = '.'\n{print} 'TIC TAC TOE!'\n{print} spot_1 spot_2 spot_3\n{print} spot_4 spot_5 spot_6\n{print} spot_7 spot_8 spot_9\n{print} ' '\n{while} game != 'over':\n    choice = {ask} 'Player ' sign ', which spot?'\n    {if} choice {in} open_spots:\n        {remove} choice {from} open_spots\n        {if} choice == 1:\n            spot_1 = sign\n        {if} choice == 2:\n            spot_2 = sign\n        {if} choice == 3:\n            spot_3 = sign\n        {if} choice == 4:\n            spot_4 = sign\n        {if} choice == 5:\n            spot_5 = sign\n        {if} choice == 6:\n            spot_6 = sign\n        {if} choice == 7:\n            spot_7 = sign\n        {if} choice == 8:\n            spot_8 = sign\n        {if} choice == 9:\n            spot_9 = sign\n    {else}:\n        {print} 'That spot was already taken'\n    {print} spot_1 spot_2 spot_3\n    {print} spot_4 spot_5 spot_6\n    {print} spot_7 spot_8 spot_9\n    {print} ' '\n    {if} spot_1 == spot_2 {and} spot_2 == spot_3 {and} spot_1 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_4 == spot_5 {and} spot_5 == spot_6 {and} spot_4 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_7 == spot_8 {and} spot_8 == spot_9 {and} spot_7 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_1 == spot_4 {and} spot_4 == spot_7 {and} spot_1 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_2 == spot_5 {and} spot_5 == spot_8 {and} spot_2 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_3 == spot_6 {and} spot_6 == spot_9 {and} spot_3 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_1 == spot_5 {and} spot_5 == spot_9 {and} spot_1 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_3 == spot_5 {and} spot_5 == spot_7 {and} spot_3 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {else}:\n        {if} sign == 'x':\n            sign = 'o'\n        {else}:\n            sign = 'x'\n```\n"
                 start_code: '## place your code here'
     blackjack:
-        name: Blackjack
+        name: لعبة الورق
         description: Try to get as close to 21 as you can
-        default_save_name: Blackjack
+        default_save_name: لعبة الورق
         levels:
             17:
                 story_text: "## Create a game of Blackjack\nBlackjack is a simple game of cards in which you have to get as close to 21 points as possible. You get two cards. Each card is worth their numeral value, and the face cards (Jack, Queen and King) are worth 10 points.\nThe Ace is worth either 1 or 11 points (you can choose). The dealer, your opponent, also gets two cards.\nIf you want, you can get another card, and its points will be added to your total. The dealer can also choose to take another card.\nBut be careful not to get more than 21 points, because if you do, you lose!\nThe player who gets closest to 21, without going over it, wins!\n\nHave fun!\n"
