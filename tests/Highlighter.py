@@ -64,6 +64,7 @@ class HighlightTester(unittest.TestCase):
             - lang : str, code of language
             - start_token : str, token for beginning of the highlighting
             - last_token : str, token for the end of the highlighting
+                                if last_token == None, ignore the end state test
         """
         state_machine = self.get_state_machine(level, lang)
         self.check(code, expected, state_machine, start_token, last_state)
@@ -82,6 +83,7 @@ class HighlightTester(unittest.TestCase):
             - lang : str, code of language
             - start_token : str, token for beginning of the highlighting
             - last_token : str, token for the end of the highlighting
+                                if last_token == None, ignore the end state test
         """
         if len(args)%2 != 0:
             raise RuntimeError(f'Pass an even number of strings to assert_highlighted_chr_multi_line (alternatingly code and highlighting). Got: {args}')
@@ -101,6 +103,7 @@ class HighlightTester(unittest.TestCase):
             - lang : str, code of language
             - start_token : str, token for beginning of the highlighting
             - last_token : str, token for the end of the highlighting
+                                if last_token == None, ignore the end state test
         """
         code, expected = self.convert(code_coloration)
         self.assert_highlighted_chr(code, expected, level, lang, start_token, last_state)
@@ -115,6 +118,7 @@ class HighlightTester(unittest.TestCase):
             - lang : str, code of language
             - start_token : str, token for beginning of the highlighting
             - last_token : str, token for the end of the highlighting
+                                if last_token == None, ignore the end state test
         """
         code_coloration = "\n".join(args)
         code, expected = self.convert(code_coloration)
@@ -132,6 +136,7 @@ class HighlightTester(unittest.TestCase):
             - state_machine : a state_machine
             - start_token : str, token for beginning of the highlighting
             - last_token : str, token for the end of the highlighting
+                                if last_token == None, ignore the end state test
 
         Computes the syntax highlighting of the code from the state_machine,
         and compares with the expected highlighting.
@@ -158,8 +163,9 @@ class HighlightTester(unittest.TestCase):
         # test between two coloration
         self.assertEqual(result ,expected)
 
-        # test fof last state
-        self.assertEqual(last_state, last_state_result)
+        # test for last state
+        if last_state != None:
+            self.assertEqual(last_state, last_state_result)
 
 
     def get_state_machine(self, level, lang="en"):
