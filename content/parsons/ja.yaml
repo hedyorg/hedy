@@ -1,1 +1,85 @@
-{}
+parsons:
+    dragging:
+        name: Dragging
+        levels:
+            1:
+                text: "## Drag the code in the correct order\n"
+                example: "## What is my code supposed to do?\n"
+                story: "You're a customer at bakery Hedy.\nYou want into the bakery and are welcomed by the baker.\nHe asks what type of pie you want to order.\nNext, your order is being prepared.\n"
+                code_lines:
+                    A: "{print} Welcome to bakery Hedy!\n"
+                    B: "{ask} What type of pie do you want to order?\n"
+                    C: "{echo} So you want\n"
+                    D: "{print} Your order is being prepared!\n"
+            4:
+                example: "## What is my code supposed to do?\n"
+                text: "## Drag the code in the correct order\n"
+                story: "You are the newest Pokémon trainer from Pallet Town!\nMake a program that selects your first Pokémon.\nLet the program wait a minute before revealing your first pokémon.\n"
+                code_lines:
+                    A: "pokemons {is} Pikachu, Charmander, Bulbasaur, Squirtle\n"
+                    B: "{print} 'This is going to be your first pokémon!'\n"
+                    C: "{sleep}\n"
+                    D: "{print} pokemons {at} {random}\n"
+            6:
+                example: "## What is my code supposed to do?\n"
+                text: "## Drag the code in the correct order\n"
+                story: "Make a program that calculates how old you are in dog and cat years.\nFirst ask the age of the user and start calculating.\nFirst calculate the dogyears then the catyears.\nShow the user the different ages.\n"
+                code_lines:
+                    A: "age = {ask} 'How old are you?'\n"
+                    B: "dog_age = age * 7\n"
+                    C: "cat_age = age * 5\n"
+                    D: "{print} 'In dogyears you are ' dog_age ' years old.'\n"
+                    E: "{print} 'In catyears you are ' cat_age ' years old.'\n"
+            8:
+                example: "## What is my code supposed to do?\n"
+                text: "## Drag the code in the correct order\n"
+                story: "You and your friends are playing Pokémon Go! Create a program that decides in which team you will be selected.\nEither red, yellow or blue!\n"
+                code_lines:
+                    A: "teams = red, yellow, blue\n"
+                    B: "{print} 'Red of Blue?'\n"
+                    C: "{print} 'You are selected in team '\n"
+                    D: "{repeat} 5 {times}\n"
+                    E: "{print} teams {at} {random}\n"
+                    F: "sleep 2\n"
+                    G: "{print} teams {at} random '!'\n"
+            2:
+                text: "## Drag the code in the correct order\n"
+                example: "## What is my code supposed to do?\n"
+                story: "You and your friends are going to watch some Netflix.\nShow which movie you're about to watch and wish the viewers lot of fun!\n"
+                code_lines:
+                    A: "{print} It is time for an evening of Netflix\n"
+                    B: "film {is} Sonic the Hedgehog 2\n"
+                    C: "{print} We're going to the movies\n"
+                    D: "{print} Have lot of fun!\n"
+            3:
+                text: "## Drag the code in the correct order\n"
+                example: "## What is my code supposed to do?\n"
+                story: "The new school year at Hogwarts is starting! \nIt is the job of the sorting hat to sort you into one of the houses.\nWhich house will you be sorted into?\nAre you a Gryffindor, Hufflepuf, Ravenclaw or Slytherin.\nLet the program wait a short period before revealing your house.\n"
+                code_lines:
+                    A: "{print} The new school year at Hogwarts is starting!\n"
+                    B: "{print} The sorting hat is ready to sort you into one of the houses.\n"
+                    C: "houses {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin\n"
+                    E: "{print} And it is houses {at} {random}\n"
+                    D: "{sleep} 2\n"
+            5:
+                text: "## Drag the code in the correct order\n"
+                example: "## What is my code supposed to do?\n"
+                story: "Make a program that checks if your favourite movie is already in the list of the computer.\nIf so, print that you have great taste, otherwise add the movie to the list.\n"
+                code_lines:
+                    A: "favoriete_movies {is} Batman, Spiderman, The Avengers, Jurassic Park\n"
+                    B: "movie {is} {ask} 'What is your favourite movie?'\n"
+                    C: "{if} movie {in} favoriete_movies {print} 'You have great taste!'\n"
+                    D: "{else} {print} 'Such a shame that your favourite movie is not in the list, we will add it right away!'\n"
+                    E: "{add} movie {to_list} favoriete_movies\n"
+            7:
+                text: "## Drag the code in the correct order\n"
+                example: "## What is my code supposed to do?\n"
+                story: "In a chess tournament there are three players left.\nCreate a program that decides which two players first play against each other.\nFirst print the two players who play the first match, then print against which player the winner will play.\n"
+                code_lines:
+                    A: "players = Liam, Noah, Sophie\n"
+                    B: "player1 = players {at} {random}\n"
+                    C: "player2 = players {at} {random}\n"
+                    D: "{print} player1 ' first plays against ' player2\n"
+                    E: "{remove} player1 {from} players\n"
+                    F: "{remove} player2 {from} players\n"
+                    G: "{print} 'The winner plays against ' players {at} {random}\n"
