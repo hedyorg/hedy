@@ -249,12 +249,10 @@
 -   name: Ungleich
     explanation: 'Wir verwenden das `!=` um zu überprüfen ob zwei Dinge ungleich, also nicht gleich sind. '
     demo_code: "Antwort = {ask} 'Was macht 5 * 5?'\n{if} Antwort != 25\n    {print} 'Das stimmt nicht!'"
--   example: 'Zum Beispiel: Alter <= 12'
-    explanation: Wir verwenden `<=` um zu überprüfen ob die erste Zahl kleiner oder gleich der zweiten Zahl ist.
+-   explanation: Wir verwenden `<=` um zu überprüfen ob die erste Zahl kleiner oder gleich der zweiten Zahl ist.
     name: Kleiner gleich
     demo_code: "Alter = {ask} 'Wie alt bist du?'\n{if} Alter <= 12\n    {print} 'Du bist jünger als ich!'"
--   example: 'Zum Beispiel: Alter >= 14'
-    name: Größer gleich
+-   name: Größer gleich
     explanation: Wir verwenden `>=` um zu überprüfen ob die erste Zahl größer oder gleich der zweiten Zahl ist.
     demo_code: "Alter = {ask} 'Wie alt bist du?'\n{if} Alter >= 14\n    {print} 'Du bist älter als ich!'"
 15:
@@ -331,7 +329,6 @@
 -   name: '{print} with var'
     explanation: With `{print}` you need to use parentheses and commas if you {print} more items
     demo_code: "name = 'Hedy'\n{print}('my name is ', name)"
--   example: '{input}'
-    demo_code: "name = {input}('What is your name?')\n{print}('So your name is ', name)"
+-   demo_code: "name = {input}('What is your name?')\n{print}('So your name is ', name)"
     name: ask something with {input}
     explanation: Use `{input}` instead of `{ask}` to ask something
