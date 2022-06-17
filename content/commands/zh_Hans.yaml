@@ -16,8 +16,7 @@
 -   name: '{forward}'
     explanation: 用 `{forward}`画一条线。
     demo_code: '{forward} 100'
--   example: '例如: {turn}'
-    demo_code: "{forward} 25\n{turn} {left}\n{forward} 25\n{turn} {right}"
+-   demo_code: "{forward} 25\n{turn} {left}\n{forward} 25\n{turn} {right}"
     name: '{turn}'
     explanation: 用`{turn}`旋转海龟绘图
 2:
@@ -46,8 +45,7 @@
 -   name: '{add}'
     explanation: 将一个项目添加到一个列表中
     demo_code: "动物 {is} 奶牛，猫\n{add} 狗 {to_list} 动物"
--   example: '例如: {remove} 狗 {from} 动物'
-    demo_code: "动物 {is} 猫，狗，奶牛\n{remove} 狗 {from} 动物"
+-   demo_code: "动物 {is} 猫，狗，奶牛\n{remove} 狗 {from} 动物"
     name: '{remove}'
     explanation: 从一个列表中移除一个项目
 4:
@@ -167,8 +165,7 @@
         {for} 计数器变量循环范围 {in} {range} 1 {to} 5
             {print} 计数器变量循环范围
     name: '{for} 循环'
--   example: "例如：答案 = {ask} '5加5等于几？'"
-    demo_code: "答案 = {ask} '5加5等于几?'\n{if} 答案 {is} 10\n    {print} '做得好!'\n    {print} '的确, 答案就是 ' 答案\n{else}\n    {print} '糟糕!'\n    {print} '答案就是 10'"
+-   demo_code: "答案 = {ask} '5加5等于几?'\n{if} 答案 {is} 10\n    {print} '做得好!'\n    {print} '的确, 答案就是 ' 答案\n{else}\n    {print} '糟糕!'\n    {print} '答案就是 10'"
     name: '{ask}'
     explanation: 使用ask提问加法运算的答案然后检查答案是否正确。我们现在可以打印两行代码了。
 12:
@@ -229,12 +226,10 @@
 -   name: Equal
     explanation: We use the `==` to check if two things are the same.
     demo_code: "answer = {ask} 'What is 5 * 5?'\n{if} answer == 25\n    {print} 'That {is} correct!'"
--   example: 'For example: answer != 25'
-    name: Not equal
+-   name: Not equal
     explanation: 'We use the `!=` to check if two things are not the same. '
     demo_code: "answer = {ask} 'What is 5 * 5?'\n{if} answer != 25\n    {print} 'That is not correct!'"
--   example: 'For example: age <= 12'
-    demo_code: "age = {ask} 'How old are you?'\n{if} age <= 12\n    {print} 'You are younger than me!'"
+-   demo_code: "age = {ask} 'How old are you?'\n{if} age <= 12\n    {print} 'You are younger than me!'"
     explanation: We use the `<=` to check if the first number is smaller than or equal to the second number.
     name: Smaller {or} equal
 -   name: Bigger or equal
