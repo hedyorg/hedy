@@ -345,7 +345,7 @@ class SimulatorAce:
 
         Returns :
             - string, a character by character coloring, according to the coloring code specified in TOKEN_CODE
-            - string : tokent for the next line
+            - string : token for the next line
         """
 
         # Initialisation output
