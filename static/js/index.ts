@@ -4,6 +4,7 @@ export * from './auth';
 export * from './statistics';
 export * from './tutorial';
 export * from './quiz';
+export * from './parsons';
 import './syntaxModesRules';
 import './tabs';
 import './translating';

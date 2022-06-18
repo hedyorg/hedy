@@ -1,0 +1,39 @@
+{
+  "title": "JSON Schema for Hedy Parsons",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "levels": {
+      "type": "object",
+      "description": "Levels with exercise for the Hedy Parsons",
+      "additionalProperties": {
+        "$ref": "#/Level"
+      }
+    }
+  },
+  "required": [
+    "levels"
+  ],
+  "Level": {
+    "type": "object",
+    "additionalProperties": {
+      "$ref": "#/Exercise"
+    }
+  },
+  "Exercise": {
+    "type": "object",
+    "properties": {
+      "story": {
+        "type": "string"
+      },
+      "code_lines": {
+        "type": "object"
+    },
+    "required": [
+      "story",
+      "code_lines"
+    ]
+  },
+    "additionalProperties": false
+  }
+}
