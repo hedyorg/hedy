@@ -23,35 +23,35 @@
     demo_code: "name {is} Hedy\n{print} welcome name"
 -   name: '{ask}'
     explanation: با دستور `{ask}` یک چیزی بپرسید. توجه کنید که به یک اسم نیاز دارید تا بتونید از دستور `{is}` استفاده کنید.
-    demo_code: "color {is} {ask} What is your favorite color?\n{print} color is your favorite!"
+    demo_code: "رنگ{is} {ask} رنگ مورد علاقه ات چیه؟\n{print} رنگ مورده علاقه ام است!"
 -   name: '{sleep}'
     explanation: بذار هِدی برای یک یا چند ثانیه توقف کنه.
     demo_code: "{print} بزار یه ثانیه فکر کنم...\n{sleep}\n{print}آهان...بیشتر از 3 ثانیه میخوام فرک کنم...\n{sleep} 3\n{print} Eureka! Ive got it!"
 -   explanation: با دستور `{is}` به یک عدد، یک اسم بده. اسم می‌تونه هر چیزی که می‌خوای باشه.
-    demo_code: "angle {is} 90\n{turn} angle\n{forward} 100"
+    demo_code: "زاویه{is} 90\n{turn} زاویه\n{forward} 100"
     name: is - turtle
 3:
--   name: choose_random
-    explanation: Choose a random word from a group with `{at}` and `{random}`
+-   name: یه چیز تصادفی انتخاب کن
+    explanation: یک حرف را به صورت تصادفی انتخاب کن `{at}` و`{random}`
     demo_code: |-
-        animals {is} dog, cat, kangaroo
-        {print} animals {at} {random}
+        حیوانات{is} سگ, گربه, کانگورو
+        {print} حیوانات{at} {random}
 -   name: "{add}"
-    explanation: "add an item to a list"
+    explanation: "یک آیتم به لیست اضافه کن"
     demo_code: |-
-        animals {is} cow, cat
-        {add} dog {to_list} animals
+        حیوانات{is} گاو, گربه
+        {add} سگ{to_list} حیوانات
 -   name: "{remove}"
-    explanation: "remove an item from a list"
+    explanation: "یک آیتم را از لیست حذف کن"
     demo_code: |-
-        animals {is} cat, dog, cow
-        {remove} dog {from} animals
+        حیوانات{is} گربه, سگ, گاو
+        {remove} سگ{from} حیوانات
 4:
 -   name: "{print}"
     explanation: "print exactly using quotation marks"
-    demo_code: "{print} 'Hello welcome to Hedy.'"
+    demo_code: "{print} 'سلام به هدی خوش اومدی.'"
 -   name: "{is}"
-    explanation: "Give a name to some text and `{print}` without quotation marks"
+    explanation: "به متن یک نام بده و `{print}` بدون گیومه"
     demo_code: |-
         name {is} Hedy
         {print} 'my name is ' name
