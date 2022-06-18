@@ -10,11 +10,11 @@ RULES = {
 
 class HighlighterTestLeveLSimulation(HighlightTester):
 
-    def assert_highlighted_chr(self, code, expected, rule_name):
+    def assert_highlighted_chr(self, code, expected, rule_name, start_token="start", last_state="start"):
 
         rules = RULES[rule_name]
 
-        self.check(code, expected, rules)
+        self.check(code, expected, rules, start_token, last_state)
 
 
 
@@ -22,13 +22,13 @@ class HighlighterTestLeveLSimulation(HighlightTester):
         self.assert_highlighted_chr(
             "qmczqdqaqmcqbadqcc",
             "CCTCCCCSIIKIIIIIKK",
-            rule_name="rules1")
+            rule_name="rules1",last_state="StateA")
 
     def test_2(self):
         self.assert_highlighted_chr(
             "qmczqdqbqmcqbadqcc",
             "CCTCCCCKNNTNNNNNTT",
-            rule_name="rules1")
+            rule_name="rules1",last_state="StateB")
 
 
 
@@ -36,25 +36,25 @@ class HighlighterTestLeveLSimulation(HighlightTester):
         self.assert_highlighted_chr(
             "qmaaqgbeveqmcbazqdqaqmcqbadqcc",
             "CCTTCCKNNNNNTNNNNNNNNNTNNNNNTT",
-            rule_name="rules2")
+            rule_name="rules2",last_state="StateB")
 
     def test_4(self):
         self.assert_highlighted_chr(
             "qmaaqgbaeveqmcbazqdqaqmcqbadqcc",
             "CCTTCCKNNNNNNTNNNNNNNNNTNNNNNTT",
-            rule_name="rules2")
+            rule_name="rules2",last_state="StateB")
 
     def test_5(self):
         self.assert_highlighted_chr(
             "qmaaqgbeveqmcbazqdqaqmcqbadqcc",
             "CCTTCCKNNNNNTNNNNNNNNNTNNNNNTT",
-            rule_name="rules3")
+            rule_name="rules3",last_state="StateB")
 
     def test_6(self):
         self.assert_highlighted_chr(
             "qmaaqgbaeveqmcbazqdqaqmcqbadqcc",
             "CCTTCCSSIIIIIKIIIIIIIIIKIIIIIKK",
-            rule_name="rules3")
+            rule_name="rules3",last_state="StateA")
 
 
 
@@ -65,7 +65,7 @@ class HighlighterTestLeveLSimulation(HighlightTester):
         self.assert_highlighted_chr(
             "qmczqdqaqmcqbadq\ngrbnorbTestananaeqwswsmsazqdqaqmcqbadqcc\ngrbnorbTestananaeqwswsmsazqdqaqmcqbadqcc\n\ngrbnorbTestananaeqwswsmsbzqdqaqmcqbadqcc\ngrbnorbTestananaeqwswsmsazqdqaqmcqbadqcc\n\ngrbnorbTestananaeqwswsmsbzqdqaqmcqbadqcc",
             "CCKNNNNNNNTNNNNN\nNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNTNNNNNTT\nTTTTTTTCCCCTTTTTNCCCCCCCKNNNNNNNTNNNNNTT\n\nTTTTTTTCCCCTTTTTNCCCCCCCSIIIIIIIKIIIIIKK\nIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIKIIIIIKK\n\nTTTTTTTCCCCTTTTTNCCCCCCCSIIIIIIIKIIIIIKK",
-            rule_name="rules4")
+            rule_name="rules4",last_state="StateA")
 
 
 
