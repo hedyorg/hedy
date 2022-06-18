@@ -1,5 +1,5 @@
 # coding=utf-8
-from website import auth
+from website import auth, parsons
 from website import statistics
 from website import quiz
 from website import admin
@@ -70,25 +70,6 @@ ACHIEVEMENTS_TRANSLATIONS = hedyweb.AchievementTranslations()
 ACHIEVEMENTS = achievements.Achievements()
 DATABASE = database.Database()
 
-
-def load_parsons_per_level(level):
-    all_parsons = []
-    parsons = PARSONS[g.lang].get_parsons(g.keyword_lang)
-    for short_name, parson in parsons.items():
-        if level not in parson['levels']:
-            continue
-        level_parson = parson['levels'].get(level)
-        current_parson = {
-            'short_name': short_name,
-            'name': parson['name'],
-            'text': level_parson['text'],
-            'example': level_parson['example'],
-            'story': level_parson['story'],
-            # We use this overly complex line to shuffle the dict items in one go
-            'code_lines': {i: level_parson['code_lines'][i] for i in list(set(level_parson['code_lines']))}
-        }
-        all_parsons.append(current_parson)
-    return all_parsons
 
 def load_adventures_per_level(level):
     loaded_programs = {}
@@ -832,12 +813,6 @@ def index(level, program_id):
     if 'levels' in customizations and level not in available_levels:
         return utils.error_page(error=403, ui_message=gettext('level_not_class'))
 
-    parsons = load_parsons_per_level(level)
-
-    hide_parsons = False
-    if 'other_settings' in customizations and 'hide_parsons' in customizations['other_settings']:
-        hide_parsons = True
-
     commands = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
 
     teacher_adventures = []
@@ -854,10 +829,18 @@ def index(level, program_id):
     if 'other_settings' in customizations and 'hide_cheatsheet' in customizations['other_settings']:
         hide_cheatsheet = True
 
+    parsons = True if PARSONS[g.lang].get_parsons_data_for_level(level) else False
     quiz = True if QUIZZES[g.lang].get_quiz_data_for_level(level) else False
     quiz_questions = 0
+    parson_exercises = 0
+
     if quiz:
         quiz_questions = len(QUIZZES[g.lang].get_quiz_data_for_level(level))
+    if parsons:
+        parson_exercises = len(PARSONS[g.lang].get_parsons_data_for_level(level))
+
+    if 'other_settings' in customizations and 'hide_parsons' in customizations['other_settings']:
+        parsons = False
     if 'other_settings' in customizations and 'hide_quiz' in customizations['other_settings']:
         quiz = False
 
@@ -870,9 +853,9 @@ def index(level, program_id):
         quiz_questions=quiz_questions,
         adventures=adventures,
         parsons=parsons,
+        parsons_exercises=parson_exercises,
         customizations=customizations,
         hide_cheatsheet=hide_cheatsheet,
-        hide_parsons=hide_parsons,
         enforce_developers_mode=enforce_developers_mode,
         teacher_adventures=teacher_adventures,
         loaded_program=loaded_program,
@@ -1308,6 +1291,8 @@ def store_parsons_order():
         return 'body must be an object', 400
     if not isinstance(body.get('level'), str):
         return 'level must be a string', 400
+    if not isinstance(body.get('exercise'), str):
+        return 'exercise must be a string', 400
     if not isinstance(body.get('order'), list):
         return 'order must be a list', 400
 
@@ -1315,6 +1300,7 @@ def store_parsons_order():
         'id': utils.random_id_generator(12),
         'username': current_user()['username'] or f'anonymous:{utils.session_id()}',
         'level': int(body['level']),
+        'exercise': int(body['exercise']),
         'order': body['order'],
         'correct': 1 if body['correct'] else 0,
         'timestamp': utils.timems()
@@ -1579,6 +1565,10 @@ ACHIEVEMENTS.routes(app, DATABASE)
 # *** QUIZ BACKEND ***
 
 quiz.routes(app, DATABASE, ACHIEVEMENTS, QUIZZES)
+
+# *** PARSONS BACKEND ***
+
+parsons.routes(app, DATABASE, ACHIEVEMENTS, PARSONS)
 
 
 # *** STATISTICS ***

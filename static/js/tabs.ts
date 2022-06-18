@@ -1,5 +1,6 @@
 import { modal } from './modal';
 import { theGlobalEditor } from './app';
+import {loadParsonsExercise} from "./parsons";
 
 /**
  * Activate tabs
@@ -59,13 +60,6 @@ function resetWindow() {
     document.getElementById("repair_button").style.visibility = "hidden";
     resetWindow();
 
-    if (tabName === 'dragging'){
-      $ ('#editor').hide();
-      $ ('#parsons_container').show();
-      $('#debug_container').hide();
-      return;
-    }
-
     if (tabName === 'quiz') {
         // If the developer's mode is still on -> make sure we do show the tab
         if ($('#developers_toggle').is(":checked")) {
@@ -76,21 +70,33 @@ function resetWindow() {
       $ ('#adventures-tab').css('max-height', '100%');
       $ ('#level-header input').hide ();
       $ ('#editor-area').hide ();
-      $('#developers_toggle_container').hide ();
+      $ ('#developers_toggle_container').hide ();
       return;
     }
 
-    $ ('#editor').show();
-    $ ('#parsons_container').hide();
-    $('#debug_container').show();
+    if (tabName === 'parsons') {
+      $ ('#level-header input').hide ();
+      $ ('#editor').hide();
+      loadParsonsExercise(<number>(window.State.level || 1), 1);
+      $ ('#parsons_code_container').show();
+      $ ('#adventures-tab').css('height', '');
+      $ ('#adventures-tab').css('min-height', '14em');
+      $ ('#adventures-tab').css('max-height', '100%');
+      $ ('#debug_container').hide();
+    } else {
+      $ ('#editor').show();
+      $ ('#level-header input').show ();
+      $ ('#parsons_code_container').hide();
+      $ ('#debug_container').show();
+      $ ('#adventures-tab').css('max-height', '20em');
+    }
+
     
     // Make sure that the adventure tab is hidden when switching and developer's mode is toggled on
     if ($('#developers_toggle').is(":checked")) {
       $('#adventures-tab').hide();
     }
-    $ ('#adventures-tab').css('max-height', '20em')
     $('#developers_toggle_container').show ();
-    $ ('#level-header input').show ();
     $ ('#editor-area').show ();
 
 
