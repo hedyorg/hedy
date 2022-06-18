@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-15 11:11+0200\n"
-"PO-Revision-Date: 2022-06-13 17:15+0000\n"
+"POT-Creation-Date: 2022-06-09 13:50+0200\n"
+"PO-Revision-Date: 2022-06-14 10:01+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language: cs\n"
 "Language-Team: cs <LL@li.org>\n"
@@ -37,7 +37,12 @@ msgstr "Hedy - Moje programy"
 
 #: app.py:691 app.py:701 app.py:705 app.py:720 app.py:1000 app.py:1492
 #: website/admin.py:17 website/admin.py:24 website/admin.py:92
-#: website/admin.py:110 website/admin.py:128 website/admin.py:135
+#: app.py:600
+msgid "example_code_header"
+msgstr "Příklad kódu v Hedy"
+
+#: app.py:671 app.py:681 app.py:685 app.py:700 app.py:991 app.py:1483
+#: website/admin.py:18 website/admin.py:25 website/admin.py:90
 #: website/auth.py:712 website/auth.py:739 website/programs.py:210
 #: website/statistics.py:86
 msgid "unauthorized"
@@ -696,9 +701,10 @@ msgstr "Hide cheatsheet"
 msgid "class_name_prompt"
 msgstr "Please enter the name of the class"
 
-#: templates/class-overview.html:19 templates/class-overview.html:58
-#: templates/create-accounts.html:16 templates/login.html:12
-#: templates/profile.html:87 templates/recover.html:8 templates/signup.html:10
+#: templates/class-overview.html:21 templates/class-overview.html:64
+#: templates/class-overview.html:108 templates/create-accounts.html:16
+#: templates/login.html:12 templates/profile.html:87 templates/recover.html:8
+#: templates/signup.html:10
 msgid "username"
 msgstr "Uživatelské jméno"
 
@@ -727,7 +733,33 @@ msgstr "Programs"
 msgid "password"
 msgstr "Heslo"
 
-#: templates/class-overview.html:25 templates/class-overview.html:61
+#: templates/class-overview.html:49 templates/class-overview.html:70
+#: templates/class-overview.html:83 templates/profile.html:145
+#: templates/profile.html:147 templates/profile.html:160
+msgid "change_password"
+msgstr "Změnit heslo"
+
+#: templates/class-overview.html:81
+#, fuzzy
+msgid "page"
+msgstr "page"
+
+#: templates/class-overview.html:83
+#, fuzzy
+msgid "enter_password"
+msgstr "Enter a new password for"
+
+#: templates/class-overview.html:83
+#, fuzzy
+msgid "password_change_prompt"
+msgstr "Are you sure you want to change this password?"
+
+#: templates/class-overview.html:84
+#, fuzzy
+msgid "remove_student_prompt"
+msgstr "Are you sure you want to remove the student from the class?"
+
+#: templates/class-overview.html:84 templates/class-overview.html:120
 #: templates/customize-adventure.html:52 templates/for-teachers.html:43
 #: templates/for-teachers.html:53
 #, fuzzy
@@ -764,7 +796,12 @@ msgstr "Link to join class"
 msgid "customize_class"
 msgstr "Customize class"
 
-#: templates/class-overview.html:46
+#: templates/class-overview.html:93 templates/for-teachers.html:32
+#, fuzzy
+msgid "class_name_prompt"
+msgstr "Please enter the name of the class"
+
+#: templates/class-overview.html:94
 #, fuzzy
 msgid "invite_prompt"
 msgstr "Enter a username"
@@ -809,7 +846,7 @@ msgstr "Invite date"
 msgid "expiration_date"
 msgstr "Expiration date"
 
-#: templates/class-overview.html:70 templates/profile.html:15
+#: templates/class-overview.html:120 templates/profile.html:15
 #, fuzzy
 msgid "delete_invite_prompt"
 msgstr "Are you sure you want to remove this class invitation?"
@@ -2593,3 +2630,13 @@ msgstr "You didn't enter an adventure name!"
 #~ msgid "remove_invite"
 #~ msgstr "Remove invite"
 
+#: templates/create-accounts.html:30
+#, fuzzy
+msgid "download_login_credentials"
+msgstr ""
+"Do you want to download the login credentials after the accounts creation?"
+
+#: templates/customize-class.html:149
+#, fuzzy
+msgid "hide_parsons"
+msgstr "Hide parsons"
