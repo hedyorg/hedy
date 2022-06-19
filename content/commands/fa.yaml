@@ -28,24 +28,24 @@
     explanation: بذار هِدی برای یک یا چند ثانیه توقف کنه.
     demo_code: "{print} بزار یه ثانیه فکر کنم...\n{sleep}\n{print}آهان...بیشتر از 3 ثانیه میخوام فرک کنم...\n{sleep} 3\n{print} Eureka! Ive got it!"
 -   explanation: با دستور `{is}` به یک عدد، یک اسم بده. اسم می‌تونه هر چیزی که می‌خوای باشه.
-    demo_code: "زاویه{is} 90\n{turn} زاویه\n{forward} 100"
+    demo_code: "زاویه {is} 90\n{turn} زاویه\n{forward} 100"
     name: is - turtle
 3:
 -   name: یه چیز تصادفی انتخاب کن
     explanation: یک حرف را به صورت تصادفی انتخاب کن `{at}` و`{random}`
     demo_code: |-
-        حیوانات{is} سگ, گربه, کانگورو
-        {print} حیوانات{at} {random}
+        حیوانات {is} سگ, گربه, کانگورو
+        {print} حیوانات {at} {random}
 -   name: "{add}"
     explanation: "یک آیتم به لیست اضافه کن"
     demo_code: |-
-        حیوانات{is} گاو, گربه
-        {add} سگ{to_list} حیوانات
+        حیوانات {is} گاو, گربه
+        {add} سگ {to_list} حیوانات
 -   name: "{remove}"
     explanation: "یک آیتم را از لیست حذف کن"
     demo_code: |-
-        حیوانات{is} گربه, سگ, گاو
-        {remove} سگ{from} حیوانات
+        حیوانات {is} گربه, سگ, گاو
+        {remove} سگ {from} حیوانات
 4:
 -   name: "{print}"
     explanation: "print exactly using quotation marks"
