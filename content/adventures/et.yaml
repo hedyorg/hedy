@@ -1,13 +1,13 @@
 adventures:
     default:
-        name: Introduction
+        name: Sissejuhatus
         levels:
             1:
-                start_code: '{print} hello world!'
-                story_text: "## Welcome to Hedy!\nIn Level 1 you can use the commands `{print}`, `{ask}` and `{echo}`.\nType your code in the programming field. Or press the green button in the example code block, and the code will be typed for you!\nTry the code yourself with the green 'Run code' button under the programming field.\n\nYou can print text to the screen using the `{print}` command.\n"
+                start_code: '{print} tere maailm!'
+                story_text: "## Tere tulemast Hedy juurde!\nEsimesel tasemel saad kasutada käske `{print}`, `{ask}` ja `{echo}`.\nKirjuta oma kood programmeerimisväljale või vajuta rohelist nuppu näidiskoodiblokis ja kood kirjutatakse sinu eest!\nProovi kood ise järgi, kasutades rohelist 'Käivita kood' nuppu programmeerimisvälja all.\n\nTeksti saad ekraanile printida kasutades käsku `{print}`.\n"
                 example_code: "```\n{print} Hello!\n{print} Welcome to Hedy!\n```\n"
-                story_text_2: "You can also ask for input with `{ask}` and repeat it back with an `{echo}` command.\n"
-                story_text_3: "Let's get started! Don't know what to create? In the next tabs you will find ideas for programs to build.\n"
+                story_text_2: "Sa saad küsida ka sisestust `{ask}` käsuga ja seda tagasi korrata `{echo}` käsuga.\n"
+                story_text_3: "Alustame! Ei tea, mida luua? Järgmistelt vahekaartidelt leiad ideid programmide loomiseks.\n"
                 example_code_2: "```\n{ask} What is your name?\n{echo} hello\n```\n"
             2:
                 story_text: "## Variables\nIn level 2 we learn two new commands: `{is}` and `{sleep}`.\nYou can name a word with `{is}`. This is called a variable. In this example we made a variable called name and a variable called age. You can use the word name anywhere in your code and it will be replaced by Hedy, like this:\n\nThis way you no longer need the `{echo}` command!\n"
@@ -108,8 +108,8 @@ adventures:
                 start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'"
                 story_text: "## Elif\nNow we are going to change a little bit with indentation. Every time that we need an indentation, we need `:` at the line before the indentation.\n\nIn this level you can also use a new command: `{elif}`. `{elif}` is short for {else} {if} and you need it when you want to make 3 (or more!) options.\nCheck it out!"
                 example_code: "```\nprices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
-        description: Level explanation
-        default_save_name: intro
+        description: Taseme selgitus
+        default_save_name: sissejuhatus
     story:
         levels:
             5:
