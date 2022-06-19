@@ -13,8 +13,7 @@
 -   explanation: print an emoji with `{print}`
     demo_code: '{print} 🙋 🌍 ❗'
     name: '{print} emojis'
--   example: 'Example: {forward} 100'
-    demo_code: '{forward} 100'
+-   demo_code: '{forward} 100'
     name: '{forward}'
     explanation: Draw a line with `{forward}`.
 -   name: '{turn}'
@@ -76,8 +75,7 @@
 -   name: '{if} with turtle'
     explanation: Make a choice with `{if}`
     demo_code: "answer {is} {ask} 'How far should I walk?'\n{if} answer {is} far {forward} 100 {else} {forward} 5"
--   example: "Example: {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
-    demo_code: "pretty_colors {is} green, yellow\ncolor {is} {ask} 'What {is} your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
+-   demo_code: "pretty_colors {is} green, yellow\ncolor {is} {ask} 'What {is} your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
     name: '{in}'
     explanation: Check elements with `{in}`
 6:
@@ -128,8 +126,7 @@
         else
             print 'উফ!'
             print 'সঠিক উত্তর 10'
--   example: 'Example: draw a square'
-    demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
+-   demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
     name: '`{repeat}` with turtle'
     explanation: '{repeat} multiple lines'
 9:

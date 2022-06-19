@@ -1,0 +1,69 @@
+<div id="parsons_container" class="hidden">
+    {% if parsons_exercises > 1 %}
+        <div class="flex flex-row items-center justify-around gap-2 border-b-2 border-gray-500 pb-2">
+            {% for i in range(1, parsons_exercises + 1)%}
+                {% if i == 1 %}
+                 <div class="step current bg-gray-200" id="parsons_header_{{i}}"><span class="parsons_header_text_container" id="parsons_header_text_{{i}}">{{_('exercise')}}</span> {{ i }}</div>
+                {% else %}
+                    <div class="step {% if i % 2 == 0 %}bg-gray-400{% else %}bg-gray-200{% endif %}" id="parsons_header_{{i}}"><span class="parsons_header_text_container" id="parsons_header_text_{{i}}" style="display: none;">{{_('exercise')}}</span> {{ i }}</div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endif %}
+    <div id="parsons_exercise_container" class="pt-2">
+        <div class="flex flex-row">
+            <div class="w-1/2 ltr:mr-2 rtl:ml-2">
+                <p id="parsons_explanation_text"></p>
+                <!-- Let's hard-code 10 possible lines, not really nice: but same approach as quiz. We should improve these two together later on -->
+                <div class="flex flex-col mx-auto items-center" id="parsons_code_lines">
+                    <div class="relative w-full mb-2 border-4 border-black rounded-lg parsons_start_line_container" style="background-color: #272822;" id="parsons_start_line_container_1">
+                        <div index="" draggable="true" id="start_parsons_div_1" code="" class="start-parsons-box w-full absolute inset-0 z-10 rounded-lg"></div>
+                        <pre level="{{ level }}" id="start_parsons_1" class="no-copy-button parsons text-sm"></pre>
+                    </div>
+                    <div class="relative w-full mb-2 border-4 border-black rounded-lg parsons_start_line_container" style="background-color: #272822;" id="parsons_start_line_container_2">
+                        <div index="" draggable="true" id="start_parsons_div_2" code="" class="start-parsons-box w-full absolute inset-0 z-10 rounded-lg"></div>
+                        <pre level="{{ level }}" id="start_parsons_2" class="no-copy-button parsons text-sm"></pre>
+                    </div>
+                    <div class="relative w-full mb-2 border-4 border-black rounded-lg parsons_start_line_container" style="background-color: #272822;" id="parsons_start_line_container_3">
+                        <div index="" draggable="true" id="start_parsons_div_3" code="" class="start-parsons-box w-full absolute inset-0 z-10 rounded-lg"></div>
+                        <pre level="{{ level }}" id="start_parsons_3" class="no-copy-button parsons text-sm"></pre>
+                    </div>
+                    <div class="relative w-full mb-2 border-4 border-black rounded-lg parsons_start_line_container" style="background-color: #272822;" id="parsons_start_line_container_4">
+                        <div index="" draggable="true" id="start_parsons_div_4" code="" class="start-parsons-box w-full absolute inset-0 z-10 rounded-lg"></div>
+                        <pre level="{{ level }}" id="start_parsons_4" class="no-copy-button parsons text-sm"></pre>
+                    </div>
+                    <div class="relative w-full mb-2 border-4 border-black rounded-lg parsons_start_line_container" style="background-color: #272822;" id="parsons_start_line_container_5">
+                        <div index="" draggable="true" id="start_parsons_div_5" code="" class="start-parsons-box w-full absolute inset-0 z-10 rounded-lg"></div>
+                        <pre level="{{ level }}" id="start_parsons_5" class="no-copy-button parsons text-sm"></pre>
+                    </div>
+                    <div class="relative w-full mb-2 border-4 border-black rounded-lg parsons_start_line_container" style="background-color: #272822;" id="parsons_start_line_container_6">
+                        <div index="" draggable="true" id="start_parsons_div_6" code="" class="start-parsons-box w-full absolute inset-0 z-10 rounded-lg"></div>
+                        <pre level="{{ level }}" id="start_parsons_6" class="no-copy-button parsons text-sm"></pre>
+                    </div>
+                    <div class="relative w-full mb-2 border-4 border-black rounded-lg parsons_start_line_container" style="background-color: #272822;" id="parsons_start_line_container_7">
+                        <div index="" draggable="true" id="start_parsons_div_7" code="" class="start-parsons-box w-full absolute inset-0 z-10 rounded-lg"></div>
+                        <pre level="{{ level }}" id="start_parsons_7" class="no-copy-button parsons text-sm"></pre>
+                    </div>
+                    <div class="relative w-full mb-2 border-4 border-black rounded-lg parsons_start_line_container" style="background-color: #272822;" id="parsons_start_line_container_8">
+                        <div index="" draggable="true" id="start_parsons_div_8" code="" class="start-parsons-box w-full absolute inset-0 z-10 rounded-lg"></div>
+                        <pre level="{{ level }}" id="start_parsons_8" class="no-copy-button parsons text-sm"></pre>
+                    </div>
+                    <div class="relative w-full mb-2 border-4 border-black rounded-lg parsons_start_line_container" style="background-color: #272822;" id="parsons_start_line_container_9">
+                        <div index="" draggable="true" id="start_parsons_div_9" code="" class="start-parsons-box w-full absolute inset-0 z-10 rounded-lg"></div>
+                        <pre level="{{ level }}" id="start_parsons_9" class="no-copy-button parsons text-sm"></pre>
+                    </div>
+                    <div class="relative w-full mb-2 border-4 border-black rounded-lg parsons_start_line_container" style="background-color: #272822;" id="parsons_start_line_container_10">
+                        <div index="" draggable="true" id="start_parsons_div_10" code="" class="start-parsons-box w-full absolute inset-0 z-10 rounded-lg"></div>
+                        <pre level="{{ level }}" id="start_parsons_10" class="no-copy-button parsons text-sm"></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="w-1/2 ltr:ml-2 rtl:mr-2">
+                <h2 class="text-center">{{_('what_should_my_code_do')}}</h2>
+                <p id="parsons_explanation_story" class="mx-4 whitespace-pre-wrap"></p>
+            </div>
+        </div>
+        <div class="ltr:clear-right rtl:clear-left"></div>
+    </div>
+</div>
+<!-- Todo TB: This is fine for now, but we should move this to app.ts in the near future (05-22) -->

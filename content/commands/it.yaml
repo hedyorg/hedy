@@ -13,8 +13,7 @@
 -   name: '{print} emojis'
     explanation: print an emoji with `{print}`
     demo_code: '{print} 🙋 🌍 ❗'
--   example: 'Example: {forward} 100'
-    name: '{forward}'
+-   name: '{forward}'
     explanation: Draw a line with `{forward}`.
     demo_code: '{forward} 100'
 -   explanation: turn the drawing turtle with `{turn}`
@@ -130,16 +129,14 @@
         else
             print 'Ops!'
             print 'La risposta è ' risposta
--   example: 'Example: draw a square'
-    name: '`{repeat}` with turtle'
+-   name: '`{repeat}` with turtle'
     explanation: '{repeat} multiple lines'
     demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
 9:
 -   demo_code: "answer = {ask} 'What is 20 plus 20?'\n{if} answer {is} 20\n    {print} 'Well done!!'\n    {print} 'The answer is indeed' answer\nelse\n    {print} 'Wrong'\n    {print} 'The answer is 20'"
     name: '`{if}` with multiple lines'
     explanation: The answer of a sum of questions with '{ask}' and see if it is correct. Now we print out two lines.
--   example: 'Example: create a square'
-    explanation: '{repeat} multiple lines'
+-   explanation: '{repeat} multiple lines'
     demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
     name: '`{repeat}` and turtle'
 10:

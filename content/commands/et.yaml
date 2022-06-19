@@ -31,8 +31,7 @@
     demo_code: "angle {is} 90\n{turn} angle\n{forward} 100"
     name: is - turtle
 3:
--   example: 'Example: animals {is} dog, cat, kangaroo.'
-    name: choose_random
+-   name: choose_random
     explanation: Choose a random word from a group with `{at}` and `{random}`
     demo_code: "animals {is} dog, cat, kangaroo\n{print} animals {at} {random}"
 -   name: '{add}'
@@ -45,8 +44,7 @@
 -   name: '{print}'
     explanation: print exactly using quotation marks
     demo_code: "{print} '5 times 5 is ' 5 * 5"
--   example: "Example: answer {is} {ask} 'What is 10 plus 10?'"
-    demo_code: "answer = {ask} 'What is 10 plus 10?'\n{if} answer {is} 20 {print} 'Yes!' {else} {print} 'Oops'"
+-   demo_code: "answer = {ask} 'What is 10 plus 10?'\n{if} answer {is} 20 {print} 'Yes!' {else} {print} 'Oops'"
     name: '{ask}'
     explanation: '{ask} for a calculation and check whether it is correct.'
 -   name: '`{ask}` {and} `{if}` turtle'
@@ -134,8 +132,7 @@
     explanation: We need to do the same with all of our `{if}` statements
     demo_code: "colour = {ask} 'What is your favorite color?'\n{if} colour == 'green':\n    {print} 'Your favorite colour is green'\n{else}:\n    {print} 'Your favorite colour is not green'"
 4:
--   example: "Example: {print} 'Hello welcome to Hedy.'"
-    name: '{print}'
+-   name: '{print}'
     explanation: print exactly using quotation marks
     demo_code: "{print} 'Hello welcome to Hedy.'"
 -   name: '{is}'
@@ -176,8 +173,7 @@
 -   name: Smaller {or} equal
     explanation: We use the `<=` to check if the first number is smaller than or equal to the second number.
     demo_code: "age = {ask} 'How old are you?'\n{if} age <= 12\n    {print} 'You are younger than me!'"
--   example: 'For example: age >= 14'
-    demo_code: "age = {ask} 'How old are you?'\n{if} age >= 14\n    {print} 'You are older than me!'"
+-   demo_code: "age = {ask} 'How old are you?'\n{if} age >= 14\n    {print} 'You are older than me!'"
     name: Bigger or equal
     explanation: We use the `>=` to check if the first number is bigger than or equal to the second number.
 16:
