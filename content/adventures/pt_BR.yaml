@@ -224,7 +224,7 @@ adventures:
                         {print} i
                     {print} 'Preparado(a) ou não, aqui vou eu!'
                 story_text: "## Senãose\nAgora vamos mudar um pouco a indentação. Toda vez que precisamos de um recuo, precisamos de `:` na linha antes do recuo.\n\nNeste nível você também pode usar um novo comando: `{elif}`. `{elif}` é a abreviação de {else} {if} e você precisa dele quando quiser fazer 3 (ou mais!) opções.\nConfira!"
-                example_code: "```\nprêmios = ['1 milhão de reais, 'uma torta de maça', 'nada']\nseu_prêmio = prêmios[{random}]\n{print} 'Você ganhou ' seu_prêmio\n{if} seu_prêmio == '1 milhão de reais' :\n    {print} 'Isso! Você ficou rico(a)!'\n{elif} seu_prêmio == 'uma torta de maça' :\n    {print} 'Legal, uma torta de maça!'\n{else}:\n    {print} 'Mais sorte da próxima vez..'\n```\n"
+                example_code: "```\nprêmios = ['1 milhão de reais', 'uma torta de maça', 'nada']\nseu_prêmio = prêmios[{random}]\n{print} 'Você ganhou ' seu_prêmio\n{if} seu_prêmio == '1 milhão de reais' :\n    {print} 'Isso! Você ficou rico(a)!'\n{elif} seu_prêmio == 'uma torta de maça' :\n    {print} 'Legal, uma torta de maça!'\n{else}:\n    {print} 'Mais sorte da próxima vez..'\n```\n"
             18:
                 start_code: |-
                     nome = 'Hedy'
