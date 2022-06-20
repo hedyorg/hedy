@@ -93,7 +93,7 @@
             <label for="birth_year" class="inline-block w-72">{{_('birth_year')}}</label><input id="birth_year" class="inline-block w-1/2 px-4 py-1 rounded-lg" type="number">
         </div>
         <div class="flex flex-row items-center mb-2">
-            <label for="language" class="inline-block w-72">{{_('preferred_language')}} <i class="fas fa-fw fa-globe"></i></label>
+            <label for="language" class="inline-block w-72">{{_('preferred_language')}}</label>
             <select id="language" class="block appearance-none w-1/2 text-gray-700 px-4 py-1 rounded-lg" required>
                 <option value="{{ current_language().lang}}">{{current_language().sym}}</option>
                 {% for language in other_languages() %}
