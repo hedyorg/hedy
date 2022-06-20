@@ -57,7 +57,7 @@ adventures:
                 start_code: '{print} دنیا سلام!'
             2:
                 story_text: "## متغیرها\nدر مرحله دوم ما دو تا دستور جدید یاد می‌گیریم: `{is}` و `{sleep}`.\nتو می‌تونی با دستور `{is}` به یک کلمه، یک اسم اختصاص بدی. به این می‌گن «متغیر». توی این مثال ما دو متغیر به نام‌های name و age می‌سازیم. تو می‌تونی از این کلمات در هر جای کد استفاده کنی. مثل:\n\nاینطوری تو دیگه به دستور `{echo}`نیاز نداری!\n"
-                example_code: "## نمونه کد\n```\nname {is} Hedy\nage {is} 15\n{print} name is age years old\n```\n"
+                example_code: "## نمونه کد\n```\n اسمم {is} Hedy\nسن {is} 15\n{print} name is age years old\n```\n"
                 story_text_2: "دستور `{print}` همچنان مثل قبل کار می‌کنه، اما دستور `{ask}` تغییر کرده. تو نیاز داری توی دستور `{ask}` از یک متغیر استفاده کنی. مثل این:\n"
                 example_code_2: "```\nanswer {is} {ask} اسمت چیه؟\n{print} Hello answer\n```\n"
                 story_text_3: "دستور بعد `{sleep}` است، که برنامه رو برای یک ثانیه متوقف می‌کنه. اگر بعد از دستور {sleep} یک عدد بنویسید، برنامه به اون مقدار ثانیه توقف می‌کنه.\n"
@@ -67,8 +67,8 @@ adventures:
                 story_text: "## یک لیست بساز!\nدر سطح 3 شما میتوانید یک لیست بسازید. . می توانید اجازه بدهید که کامپیوتر برای شما یک لیست بسازد شما این کا را با`{at} {random}`انجام می دهید.\n"
                 example_code: "```\nحیوانات {is} سگ, گربه, کانگورو\n{print} حیوانات {at} {random}\n```\n"
                 story_text_2: همچنین شما می توانی با دستور `{add}` به لیست اضافه کنی و با دستور  `{remove}` از لیست حذف کنی.
-                example_code_2: "```\nanimals {is} dog, cat, kangaroo\n{add} penguin {to_list} animals\n{remove} cat {from} animals\n{print} animals {at} {random}\n```\n"
-                start_code: '{print} hello world!'
+                example_code_2: "```\nحیوانات{is} سگ, گربه, کانگورو\n{add} پنگوئن{to_list} حیوانات\n{remove}گربه{from} حیوانات\n{print} حیوانات {at} {random}\n```\n"
+                start_code: '{print}سلام دنیا!'
             4:
                 start_code: "{print} 'Hello world'"
                 story_text: "## 'Quotation marks'\nIn level 4 `{ask}` and `{print}` have changed.\n\nYou must put text that you want to print between quotation marks.\n\nThis is useful, because now you can print all the words you want. Also the words you used to store something with `{is}`.\n\nMost programming languages also use quotation marks when printing, so we are also getting a step closer to real programming!\n"
