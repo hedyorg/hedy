@@ -99,7 +99,7 @@
     </div>
     <div id="quiz_feedback_container" class="hidden">
         <div class="p-8">
-            <div class="flex flex-col">
+            <div class="flex flex-col gap-4">
                 <div class="text-green-900 text-2xl text-center flex flex-row justify-center font-slab">
                     <div class="mx-2">{{_('question')}}</div>
                     <div class="mx-2" id="question_number_container"></div>/<div class="mx-2" id="question_length_container"></div>
@@ -119,12 +119,11 @@
                 <p class="text-2xl text-center hidden" id="feedback_feedback_container">
                     <i id="feedback_feedback_text"></i>
                 </p>
-                <!-- Todo TB: We shouldn't center the text, we should center the div itself with g.dir aligned text! -->
-                <div class="flex flex-col justify-center turn-pre-into-ace">
-                    <p class="text-black text-center font-extrabold text-4xl font-slab">
+                <div class="flex flex-col justify-center items-center gap-4 turn-pre-into-ace">
+                    <p class="text-black font-extrabold text-4xl font-slab">
                         {{_('correct_answer')}}
                     </p>
-                    <div class="w-full text-center pt-8 px-2 mx-auto mb-2 text-lg whitespace-pre-wrap" style="display: none;" id="feedback_correct_answer_container"></div>
+                    <div class="px-2 mx-auto text-lg whitespace-pre-wrap" style="display: none;" id="feedback_correct_answer_container"></div>
                     <pre class="w-1/2 mx-auto no-copy-button" style="display: none;" level="{{ level }}" id="feedback_answer_code"></pre>
                 </div>
             </div>
