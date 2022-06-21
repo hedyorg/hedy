@@ -1,7 +1,17 @@
 {% extends "auth.html" %}
 
 {% block body %}
-<div class="px-8 py-12">
-    Let's go!
+<div class="px-8 py-12 flex flex-col gap-4">
+    <h1 class="text-center">Highscores</h1>
+    <div class="flex flex-row gap-4 items-center justify-center">
+        <button class="green-btn">{{_('whole_world')}}</button>
+        <button class="green-btn">{{_('your_country')}}</button>
+        <button class="green-btn">{{_('your_class')}}</button>
+    </div>
+    <div class="border border-2 border-gray-500 rounded-lg">
+        <table>
+            Dit is een tabel
+        </table>
+    </div>
 </div>
 {% endblock %}
