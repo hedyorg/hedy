@@ -1,120 +1,120 @@
 levels:
     1:
         1:
-            question_text: "What's this programming language called?"
+            question_text: "Jak nazywa się ten język programowania?"
             mp_choice_options:
             -   option: "Hedy"
-                feedback: "Good job!"
+                feedback: "Dobra robota!"
             -   option: "Heddy"
-                feedback: "Not this one!"
+                feedback: "Zła odpowiedź!"
             -   option: "Haydie"
-                feedback: "Not this one!"
+                feedback: "Zła odpowiedź!"
             -   option: "Heidi"
-                feedback: "Not this one!"
+                feedback: "Zła odpowiedź!"
             correct_answer: "A"
-            hint: "It's named after Hedy Lamarr."
+            hint: "Jest nazwany po Hedy Lamarr."
             question_score: '10'
         2:
-            question_text: "Which command makes text appear?"
+            question_text: "Jaka komenda powoduje wyświetlenie się tekstu?"
             mp_choice_options:
             -   option: |
                     ```
                     {echo}
                     ```
-                feedback: "`{echo}` repeats a given answer."
+                feedback: "`{echo}` wyświetla odpowiedź do zadanego wcześniej pytania."
             -   option: |
                     ```
                     {print}
                      ```
-                feedback: "Correct!"
+                feedback: "Zgadza się!"
             -   option: |
                     ```
-                    hello
+                    witaj
                     ```
-                feedback: "Hello isn't a command."
+                feedback: "'witaj' nie jest komendą."
             -   option: |
                     ```
                     {ask}
                     ```
-                feedback: "With `{ask}`, you can ask a question."
+                feedback: "Za pomocą `{ask}` możesz zadać pytanie."
             correct_answer: "B"
-            hint: "_?_ Hello world!"
+            hint: "_?_ Witaj świecie!"
             question_score: '10'
         3:
-            question_text: "How do you ask what someone's favorite color is?"
+            question_text: "Jak zapytasz, jaki jest mój ulubiony kolor?"
             mp_choice_options:
             -   option: |
                     ```
-                    {print} What is your favorite color?
+                    {print} Jaki jest twój ulubiony kolor?
                     ```
-                feedback: "`{print}` prints text, but it doesn't ask questions."
+                feedback: "`{print}` wyświetla tekst, ale nie zadaje pytań."
             -   option: |
                     ```
-                    {ask} {print} What is your favorite color?
+                    {ask} {print} Jaki jest twój ulubiony kolor?
                     ```
-                feedback: "You only need one command, not two."
+                feedback: "Potrzebujesz tylko jednej komendy, nie dwóch."
             -   option: |
                     ```
-                    {ask} What is your favorite color?
+                    {ask} jaki jest twój ulubiony kolor?
                     ```
-                feedback: "Great!"
+                feedback: "Wspaniale!"
             -   option: |
                     ```
-                    {echo} What is your favorite color?
+                    {echo} Jaki jest twój ulubiony kolor?
                     ```
-                feedback: "`{echo}` repeats your answer back to you."
+                feedback: "`{echo}` powtarza odpowiedź do wcześniej zadanego pytania."
             correct_answer: "C"
-            hint: "You can {ask} something with the {ask} command"
+            hint: "Możesz zapytać o coś za pomocą komendy `{ask}`"
             question_score: '10'
         4:
-            question_text: "What is wrong with this code?"
+            question_text: "Co jest nie tak z tym kodem?"
             code: |-
-                Hi Im Hedy!
-                {ask} Who are you?
-                {echo} Hi...
+                Hej, jestem Hedy
+                {ask} Kim jesteś?
+                {echo} Hej...
             mp_choice_options:
-            -   option: "`{print}` in line 1 is missing."
-                feedback: "Correct!"
-            -   option: "Im in line 1 is spelled wrong."
-                feedback: "Im is spelled wrong on purpose; Hedy doesn't understand the apostrophes yet."
-            -   option: "`{echo}` isn't a command."
-                feedback: "`{echo}` is a command, there's another mistake."
-            -   option: "Nothing! This is a perfect code!"
-                feedback: "Wrong, look carefully!"
+            -   option: "Brakuje komendy `{print}` na linii 1."
+                feedback: "Zgadza się!"
+            -   option: "Komendy 'zapytaj' i 'dołącz' są w złej kolejności."
+                feedback: "Komenda 'zapytaj' zadaje pytanie, komenda 'dołącz' wyświetla odpowiedź na to pytanie. Gdyby 'dołącz' było pierwsze, nie byłoby czego wyświetlać."
+            -   option: "`{echo}` nie jest komendą."
+                feedback: "`{echo}` jest komendą, błąd znajduje się gdzie indziej."
+            -   option: "Nic! Ten kod jest bezbłędny!"
+                feedback: "Nie do końca, przyjrzyj się jeszcze raz!"
             correct_answer: "A"
-            hint: "Line 1 doesn't seem right"
+            hint: "Na linii 1 czegoś brakuje"
             question_score: '10'
         5:
-            question_text: "Which command is missing in line 2?"
+            question_text: "Jakiej komendy brakuje na linii 2?"
             code: |-
-                {ask} What is your favorite pet?
-                _?_ So your favorite pet is...
+                {ask} Jak nazywa się twój pies?
+                _?_ Twój pies nazywa się...
             mp_choice_options:
             -   option: |
                     ```
                     {print}
                     ```
-                feedback: "No, you would like the answer to be repeated back to you."
+                feedback: "Nie, imię psa powinno zostać wyświetlone."
             -   option: |
                     ```
                     Hedy
                     ```
-                feedback: "Hedy isn't a command."
+                feedback: "Hedy nie jest komendą."
             -   option: |
                     ```
                     {ask}
                     ```
-                feedback: "With `{ask}` you can ask a question."
+                feedback: "Komenda `{ask}` zadaje pytanie, nie wyświetla odpowiedzi."
             -   option: |
                     ```
                     {echo}
                     ```
-                feedback: "Right on!"
+                feedback: "W punkt!"
             correct_answer: "D"
-            hint: "You want to see the answer at the end of line 2..."
+            hint: "Linia 2 powinna wyświetlać odpowiedź na wcześniejsze pytanie..."
             question_score: '10'
         6:
-            question_text: "What's wrong with this code?"
+            question_text: "Co jest nie tak z tym kodem?"
             code: |-
                 {print} Hi im Hedy!
                 {print} Which football team do you support?
@@ -147,9 +147,9 @@ levels:
             -   option: "In line 3 `{echo}` needs to be replaced with `{print}`"
                 feedback: "Are you sure something is wrong?"
             -   option: "Nothing! This is a perfect code!"
-                feedback: "Correct!"
+                feedback: "Dobrze!"
             correct_answer: "D"
-            hint: "Check the code line by line"
+            hint: "Przyjrzyj się kodowi linijka po linijce"
             question_score: '10'
         8:
             question_text: "How do you use the `{echo}` command?"
@@ -191,7 +191,7 @@ levels:
             -   option: "No"
                 feedback: "What a shame... You can practice some more in level 1!"
             correct_answer: "A"
-            hint: "Let's go!"
+            hint: "Wyśmienicie!"
             question_score: '10'
     2:
         1:
@@ -209,28 +209,28 @@ levels:
             hint: "`{print}` and `{ask}` still exist."
             question_score: '10'
         2:
-            question_text: "Which code is correct?"
+            question_text: "Który kod jest poprawny?"
             mp_choice_options:
             -   option: |
                     ```
-                    name {is} {ask} What is your name?
+                    imię {is} {ask} Jak się nazywasz?
                     ```
                 feedback: "Super!"
             -   option: |
                     ```
-                    {ask} {is} name What is your name
+                    {ask} {is} imię Jak się nazywasz
                     ```
-                feedback: "The words are right, the order is not!"
+                feedback: "Komendy się zgadzają, ale są w złej kolejności!"
             -   option: |
                     ```
-                    {ask} What is your name?
+                    {ask} Jak się nazywasz?
                     ```
                 feedback: "This worked in level 1, but in level 2 and up it works differently."
             -   option: |
                     ```
-                    {ask} What is your name? {is} name
+                    {ask} Jak się nazywasz? {is} imię
                     ```
-                feedback: "The words are right, the order isn't!"
+                feedback: "Komendy się zgadzają, ale są w złej kolejności!"
             correct_answer: "A"
             hint: "`{ask}` doesn't work like in level 1"
             question_score: '10'
@@ -245,7 +245,7 @@ levels:
             -   option: "Marleen goes to the market."
                 feedback: "The second part of the sentence isn't left out!"
             -   option: "Marleen goes to the market and she buys an apple."
-                feedback: "Right on!"
+                feedback: "W punkt!"
             -   option: "Marleen goes to the market and Marleen buys an apple."
                 feedback: "She is not replaced with the name"
             correct_answer: "C"
@@ -269,17 +269,17 @@ levels:
             hint: "'name' is being replaced with 'Hedy' in both places"
             question_score: '10'
         5:
-            question_text: "What happens when you use the `{sleep}` command?"
+            question_text: "Co się stanie, gdy użyjesz komendy `{sleep}`?"
             code: "{sleep}"
             mp_choice_options:
-            -   option: "It slows down your computer"
-                feedback: "fortunately not!"
-            -   option: "It closes down Hedy"
-                feedback: "fortunately not!"
-            -   option: "Your program pauses for a second and then continues"
-                feedback: "That's right!"
-            -   option: "You put it at the end so Hedy knows your program is finished"
-                feedback: "No it would be useless at the end of your code"
+            -   option: "Komputer się wyłączy"
+                feedback: "Na szczęście nie!"
+            -   option: "Okno z Hedy'm się zamknie"
+                feedback: "Na szczęście nie!"
+            -   option: "Program zatrzyma się na jedną sekundę, po czym będzie działał dalej"
+                feedback: "Zgadza się!"
+            -   option: "Nic, taka komenda nie istnieje"
+                feedback: "Taka komenda istnieje i jest całkiem użyteczna"
             correct_answer: "C"
             hint: "The computer waits for a second at the `{sleep}` command"
             question_score: '10'
@@ -314,7 +314,7 @@ levels:
             hint: "Pause for dramatic effect..."
             question_score: '10'
         7:
-            question_text: "What command should be used on line 2?"
+            question_text: "Jakiej komendy brakuje na linii 2?"
             code: |-
                 {print} I will explode in 3 seconds!
                 _?_

@@ -47,6 +47,13 @@ $pajv validate \
     -d "*.yaml"
 echo "------> Quiz yaml files are valid"
 
+echo "------> Validating parsons"
+cd ../parsons/
+$pajv validate \
+    --errors=text \
+    -s "parsons.schema.json" \
+    -d "*.yaml"
+echo "------> Parsons yaml files are valid"
 
 # Validate-texts is producing a lot of noise and it will never fail the build outright
 # anyway (if it would, pajv would have complained earlier), so might as well disable it for now.
