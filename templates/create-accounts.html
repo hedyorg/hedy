@@ -9,6 +9,7 @@
     <div>
         <form onsubmit="hedyApp.create_accounts('{{_('create_accounts_prompt')}}');event.preventDefault();">
         <div class="border rounded-lg px-4 py-2">
+            {{ current_class }}
             <div class="flex flex-col" id="account_rows_container">
                 <!-- we create one hidden row -> we can simply copy this one and append() below when adding rows -->
                 {% for i in range(5) %}
@@ -16,10 +17,7 @@
                         <input id="username" name="username" {% if i != 0 %}required{% endif %} type=text placeholder="{{_('username')}}" class="w-full block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded ltr:mr-4 rtl:ml-4">
                         <input id="password" name="password" {% if i != 0 %}required{% endif %} minlength="6" type=password placeholder="{{_('password')}}" class="w-full block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded ltr:mr-4 rtl:ml-4">
                         <select id="classes" name="class" class="w-full block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded ltr:mr-4 rtl:ml-4">
-                            <option value="" selected disabled>{{_('select_class')}}</option>
-                            {% for class in classes %}
-                                <option value="{{ class.name }}">{{ class.name }}</option>
-                            {% endfor %}
+                            <option selected disabled value="{{ current_class.name }}">{{ current_class.name }}</option>
                         </select>
                         <svg class="fill-current w-40 text-red-500 ltr:ml-2 rtl:mr-2 cursor-pointer" xmlns="http://www.w3.org/2000/svg" onclick="$(this).parent().remove();" viewBox="0 0 20 20"><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
                     </div>
@@ -43,6 +41,7 @@
             </div>
         </div>
         <div class="flex flex-row mt-4">
+            <button class="yellow-btn text-white" onclick="window.open('/for-teachers/class/{{ current_class.id }}', '_self');">{{_('back_to_class')}}</button>
             <div class="ltr:ml-auto">
                 <button type="reset" class="red-btn" onclick="window.open('/for-teachers/create-accounts', '_self');">
                     {{_('reset_view')}}</button>

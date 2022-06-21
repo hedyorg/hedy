@@ -52,7 +52,7 @@
       <div class="flex flex-row gap-2">
         <button class="green-btn" onclick='hedyApp.copy_join_link("{{class_info.link}}", {{_('copy_link_success')|tojson}})'>{{_('copy_join_link')}}</button>
         <button class="green-btn" onclick='hedyApp.invite_student("{{class_info.id}}", {{_('invite_prompt')|tojson}})'>{{_('invite_by_username')}}</button>
-        <button class="green-btn" onclick="window.open('/for-teachers/create-accounts', '_self')">{{_('create_accounts')}}</button>
+        <button class="green-btn" onclick="window.open('/for-teachers/create-accounts/{{ class_info.id }}', '_self')">{{_('create_accounts')}}</button>
       </div>
   </div>
   {% if invites %}
