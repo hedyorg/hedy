@@ -1593,13 +1593,29 @@ levels:
                     {print} 'Baby shark tututudutudu'
                 {print} 'Baby shark'
             mp_choice_options:
-            -   option: "Baby shark tututudutudu \n Baby shark"
+            -   option: |
+                  Baby shark tututudutudu
+                  Baby shark
                 feedback: "Mind the `{repeat}` command!"
-            -   option: "Baby shark tututudutudu \n Baby shark \n Baby shark tututudutudu \n Baby shark \n Baby shark tututudutudu \n Baby shark"
+            -   option: |
+                  Baby shark tututudutudu
+                  Baby shark
+                  Baby shark tututudutudu
+                  Baby shark
+                  Baby shark tututudutudu
+                  Baby shark
                 feedback: "The last line has no indentation, so it's not repeated."
-            -   option: "Baby shark tututudutudu \n Baby shark tututudutudu \n Baby shark tututudutudu \n Baby shark"
+            -   option: |
+                  Baby shark tututudutudu
+                  Baby shark tututudutudu
+                  Baby shark tututudutudu
+                  Baby shark
                 feedback: "Right!"
-            -   option: "Baby shark tututudutudu \n Baby shark \n Baby shark \n Baby shark"
+            -   option: |
+                  Baby shark tututudutudu
+                  Baby shark
+                  Baby shark
+                  Baby shark
                 feedback: "What is being repeated and what isn't."
             correct_answer: "C"
             hint: "What is being repeated and what is not?."
@@ -1651,7 +1667,7 @@ levels:
             -   option: |
                     ```
                     {print} 'Welcome to restaurant Hedy'
-                    food = {ask} 'What whould you like to eat?'
+                    food = {ask} 'What would you like to eat?'
                     {print} food
                     ```
                 feedback: "You need to take 2 orders."
@@ -1659,7 +1675,7 @@ levels:
                     ```
                     {repeat} 2 {times}
                         {print} 'Welcome to restaurant Hedy'
-                        food = {ask} 'What whould you like to eat?'
+                        food = {ask} 'What would you like to eat?'
                         {print} food
                     ```
                 feedback: "The welcome line would be printed twice in this code too"
