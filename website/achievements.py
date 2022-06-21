@@ -21,7 +21,10 @@ class Achievements:
         for i in range(1, hedy.HEDY_MAX_LEVEL+1):
             for command in hedy.commands_per_level.get(i):
                 commands.append(command)
-        return set(commands)
+        commands = set(commands)
+        # We manually remove the redundant commands, these are stored in the commands_per_level but not returned by the parser via AllCommands()
+        redundant_commands = {'at', 'from', 'times', 'range', 'to'}
+        return commands - redundant_commands
 
     def get_global_statistics(self):
         all_achievements = self.DATABASE.get_all_achievements()
@@ -50,7 +53,9 @@ class Achievements:
             else:
                 session['achieved'] = []
             if 'commands' in achievements_data:
-                session['commands'] = achievements_data['commands']
+                # We convert the list to a set perform intersection with all commands and convert to set again
+                # This to prevent "faulty" commands being kept from relic code (such as "multiplication")
+                session['commands'] = list(set(achievements_data['commands']).intersection(self.all_commands))
             else:
                 session['commands'] = []
             if 'run_programs' in achievements_data:
@@ -108,6 +113,7 @@ class Achievements:
             for command in session['new_commands']:
                 session['commands'].append(command)
             session['new_commands'] = []
+            # Only update commands to database if we used new onces
             self.DATABASE.add_commands_to_username(username, session['commands'])
 
         if len(session['new_achieved']) > 0:
@@ -164,7 +170,6 @@ class Achievements:
             stats = gettext('percentage_achieved').format(**{'percentage': percentage})
             translated_achievements.append([translations[achievement]['title'], translations[achievement]['text'], stats])
         session['new_achieved'] = [] # Once we get earned achievements -> empty the array with "waiting" ones
-        session['new_commands'] = []
         return translated_achievements
 
     def check_programs_run(self):
@@ -206,10 +211,10 @@ class Achievements:
         self.initialize_user_data_if_necessary()
         commands_in_code = hedy.all_commands(code, level, session['lang'])
         if 'trying_is_key' not in session['achieved']:
-            for command in set(commands_in_code):
-                if command not in session['commands'] and command not in session['new_commands']:
+            for command in list(set(commands_in_code)):  # To remove duplicates
+                if command not in session['commands'] and command in self.all_commands:
                     session['new_commands'].append(command)
-            if set(session['commands']).union(session['new_commands']) == self.all_commands:
+            if set(session['commands']).union(set(session['new_commands'])) == self.all_commands:
                 session['new_achieved'].append("trying_is_key")
         if 'did_you_say_please' not in session['achieved'] and "ask" in hedy.all_commands(code, level, session['lang']):
             session['new_achieved'].append("did_you_say_please")

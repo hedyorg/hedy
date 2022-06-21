@@ -1,5 +1,5 @@
 # coding=utf-8
-from website import auth
+from website import auth, parsons
 from website import statistics
 from website import quiz
 from website import admin
@@ -19,7 +19,7 @@ from flask_babel import gettext
 from flask_babel import Babel
 from flask_compress import Compress
 from flask_helpers import render_template
-from flask import Flask, request, jsonify, session, abort, g, redirect, Response, make_response, Markup
+from flask import Flask, request, jsonify, session, abort, g, redirect, Response, make_response, Markup, send_file, after_this_request
 from config import config
 from werkzeug.urls import url_encode
 from babel import Locale
@@ -31,6 +31,7 @@ import hedy
 import collections
 import datetime
 import sys
+import textwrap
 
 # Todo TB: This can introduce a possible app breaking bug when switching to Python 4 -> e.g. Python 4.0.1 is invalid
 if (sys.version_info.major < 3 or sys.version_info.minor < 7):
@@ -69,25 +70,6 @@ ACHIEVEMENTS_TRANSLATIONS = hedyweb.AchievementTranslations()
 ACHIEVEMENTS = achievements.Achievements()
 DATABASE = database.Database()
 
-
-def load_parsons_per_level(level):
-    all_parsons = []
-    parsons = PARSONS[g.lang].get_parsons(g.keyword_lang)
-    for short_name, parson in parsons.items():
-        if level not in parson['levels']:
-            continue
-        level_parson = parson['levels'].get(level)
-        current_parson = {
-            'short_name': short_name,
-            'name': parson['name'],
-            'text': level_parson['text'],
-            'example': level_parson['example'],
-            'story': level_parson['story'],
-            # We use this overly complex line to shuffle the dict items in one go
-            'code_lines': {i: level_parson['code_lines'][i] for i in list(set(level_parson['code_lines']))}
-        }
-        all_parsons.append(current_parson)
-    return all_parsons
 
 def load_adventures_per_level(level):
     loaded_programs = {}
@@ -364,7 +346,6 @@ def parse():
 
     try:
         with querylog.log_time('transpile'):
-
             try:
                 transpile_result = transpile_add_stats(code, level, lang)
                 if username and not body.get('tutorial'):
@@ -387,8 +368,9 @@ def parse():
                 exception = ex
         try:
             response['Code'] = transpile_result.code
-            response['has_turtle'] = transpile_result.has_turtle
-        except:
+            if transpile_result.has_turtle:
+                response['has_turtle'] = True
+        except Exception as E:
             pass
         try:
             response['has_sleep'] = 'sleep' in hedy.all_commands(code, level, lang)
@@ -465,6 +447,46 @@ def parse_tutorial(user):
         jsonify({'code': result.code}), 200
     except:
         return "error", 400
+
+@app.route("/generate_dst", methods=['POST'])
+def prepare_dst_file():
+    body = request.json
+    # Prepare the file -> return the "secret" filename as response
+    transpiled_code = hedy.transpile(body.get("code"), body.get("level"), body.get("lang"))
+    filename = utils.random_id_generator(12)
+
+    # We have to turn the turtle 90 degrees to align with the user perspective app.ts#16
+    # This is not a really nice solution, but as we store the prefix on the front-end it should be good for now
+    threader = textwrap.dedent("""
+        import time
+        from turtlethread import Turtle
+        t = Turtle()
+        t.left(90)
+        with t.running_stitch(stitch_length=20):
+        """)
+    lines = transpiled_code.code.split("\n")
+    threader += "  " + "\n  ".join(lines)
+    threader += "\n" + 't.save("dst_files/' + filename + '.dst")'
+    if not os.path.isdir('dst_files'):
+        os.makedirs('dst_files')
+    exec(threader)
+
+    return jsonify({'filename': filename}), 200
+
+
+# this is a route for testing purposes
+@app.route("/download_dst/<filename>", methods=['GET'])
+def download_dst_file(filename):
+    # https://stackoverflow.com/questions/24612366/delete-an-uploaded-file-after-downloading-it-from-flask
+    @after_this_request
+    def remove_file(response):
+        try:
+            os.remove("dst_files/" + filename + ".dst")
+        except:
+            print("Error removing the generated .dst file!")
+        return response
+    # Once the file is downloaded -> remove it
+    return send_file("dst_files/" + filename + ".dst", as_attachment=True)
 
 
 def transpile_add_stats(code, level, lang_):
@@ -791,7 +813,6 @@ def index(level, program_id):
     if 'levels' in customizations and level not in available_levels:
         return utils.error_page(error=403, ui_message=gettext('level_not_class'))
 
-    parsons = load_parsons_per_level(level)
     commands = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
 
     teacher_adventures = []
@@ -808,10 +829,18 @@ def index(level, program_id):
     if 'other_settings' in customizations and 'hide_cheatsheet' in customizations['other_settings']:
         hide_cheatsheet = True
 
+    parsons = True if PARSONS[g.lang].get_parsons_data_for_level(level) else False
     quiz = True if QUIZZES[g.lang].get_quiz_data_for_level(level) else False
     quiz_questions = 0
+    parson_exercises = 0
+
     if quiz:
         quiz_questions = len(QUIZZES[g.lang].get_quiz_data_for_level(level))
+    if parsons:
+        parson_exercises = len(PARSONS[g.lang].get_parsons_data_for_level(level))
+
+    if 'other_settings' in customizations and 'hide_parsons' in customizations['other_settings']:
+        parsons = False
     if 'other_settings' in customizations and 'hide_quiz' in customizations['other_settings']:
         quiz = False
 
@@ -824,6 +853,7 @@ def index(level, program_id):
         quiz_questions=quiz_questions,
         adventures=adventures,
         parsons=parsons,
+        parsons_exercises=parson_exercises,
         customizations=customizations,
         hide_cheatsheet=hide_cheatsheet,
         enforce_developers_mode=enforce_developers_mode,
@@ -1261,6 +1291,8 @@ def store_parsons_order():
         return 'body must be an object', 400
     if not isinstance(body.get('level'), str):
         return 'level must be a string', 400
+    if not isinstance(body.get('exercise'), str):
+        return 'exercise must be a string', 400
     if not isinstance(body.get('order'), list):
         return 'order must be a list', 400
 
@@ -1268,6 +1300,7 @@ def store_parsons_order():
         'id': utils.random_id_generator(12),
         'username': current_user()['username'] or f'anonymous:{utils.session_id()}',
         'level': int(body['level']),
+        'exercise': int(body['exercise']),
         'order': body['order'],
         'correct': 1 if body['correct'] else 0,
         'timestamp': utils.timems()
@@ -1532,6 +1565,10 @@ ACHIEVEMENTS.routes(app, DATABASE)
 # *** QUIZ BACKEND ***
 
 quiz.routes(app, DATABASE, ACHIEVEMENTS, QUIZZES)
+
+# *** PARSONS BACKEND ***
+
+parsons.routes(app, DATABASE, ACHIEVEMENTS, PARSONS)
 
 
 # *** STATISTICS ***

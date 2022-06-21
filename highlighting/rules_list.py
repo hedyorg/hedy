@@ -63,9 +63,9 @@ def rule_all(level):
     # Rules for numbers
     if (NUMBERS[level]["number"]) :
         if (NUMBERS[level]["number_with_decimal"]) :
-            number_regex = '([0-9]*\\.?[0-9]+)'
+            number_regex = '(' + DIGIT + '*\\.?' + DIGIT + '+)'
         else:
-            number_regex = '([0-9]+)'
+            number_regex = '(' + DIGIT + '+)'
 
         list_rules.append({'regex': START_WORD + number_regex + END_WORD, 'token': ['text','variable'], 'next':'start'} )
 

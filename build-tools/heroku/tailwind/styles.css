@@ -426,3 +426,45 @@ body[dir='ltr'] input:checked ~ .toggle-circle {
 input:checked ~ .toggle-path {
   @apply bg-gray-600;
 }
+
+/* Quiz styling */
+.option-block {
+  @apply w-full relative block align-top;
+}
+
+/* Not really nice, but we have to use the !important attribute to overwrite the current style */
+.incorrect-option {
+    background-color: rgba(234, 55, 55, 0.6) !important;
+    border: 5px #c21919 dashed!important;
+}
+
+/* Also not really nice, but with the relic quiz code still an improvement */
+.quiz-icons {
+  @apply h-14 w-14 relative;
+  top: -30px;
+  left: -10px;
+}
+
+/* Todo: There will be a moment where we want to re-write this to Tailwind as well */
+.submit-button {
+  display: none;
+  min-width: 80px;
+  min-height: 40px;
+  color: rgb(236, 236, 236);
+  background-color:#4299e1;
+  border-color: #1267a6;
+  position: absolute;
+  right: 10px;
+  bottom: -20px;
+  padding: 4px 10px;
+  border-radius: 0.25rem;
+  border-bottom-width: 4px;
+}
+
+.step {
+  @apply flex py-2 gap-1 w-full rounded-lg items-center justify-center;
+}
+
+.current {
+  @apply text-white bg-blue-600 !important;
+}
