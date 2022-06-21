@@ -1185,13 +1185,14 @@ def explore():
                            current_page='explore')
 
 
-@app.route('/highscores', methods=['GET'])
+@app.route('/highscores/<filter>', methods=['GET'])
 @requires_login
-def get_highscores(user):
-    # Todo: Do we want to get these values on runtime on cache (as we are planning to-do for explore?)
-    # Also, we have to add a "last updated" value to the achievements db -> first achievement = higher ranking
+def get_highscores_page(user, filter):
+    if filter not in ["global", "country", "class"]:
+        return utils.error_page(error=404, ui_message=gettext('page_not_found'))
+    highscores = DATABASE.get_highscores(filter, user['username'])
 
-    return render_template('highscores.html')
+    return render_template('highscores.html', highscores=highscores)
 
 
 @app.route('/change_language', methods=['POST'])

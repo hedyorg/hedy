@@ -236,6 +236,11 @@ class Database:
             programs = [x for x in programs if x.get('adventure_name') == adventure]
         return programs[-48:]
 
+    def get_highscores(self, filter):
+        if filter == "global":
+            achievements = self.get_all_achievements()
+        return achievements
+
     def get_all_hedy_choices(self):
         return PROGRAMS.get_many({'hedy_choice': 1}, sort_key='date', reverse=True)
 
