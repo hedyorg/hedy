@@ -1,15 +1,15 @@
-<nav aria-label="Website" class="bg-blue-500">
+<nav aria-label="Website" class="bg-blue-500 px-2">
     {% block menu %}
     <ul class="h-full list-none m-0 p-0 flex flex-row items-center gap-2">
         <li><a href="/"><img class="h-10" src="{{static('/images/Hedy-logo.png')}}"></a></li>
-        <li><a class="menubar-btn" href="/start">{{_('nav_start')}}</a></li>
-        <li><a class="menubar-btn" href="/hedy">{{_('nav_hedy')}}</a></li>
-        <li><a class="menubar-btn" href="/explore">{{_('nav_explore')}}</a></li>
-        <li><a class="menubar-btn" href="/learn-more">{{_('nav_learn_more')}}</a></li>
+        <li><a class="menubar-btn {% if current_page == 'start' %}active{% endif %}" href="/start">{{_('nav_start')}}</a></li>
+        <li><a class="menubar-btn {% if current_page == 'hedy' %}active{% endif %}" href="/hedy">{{_('nav_hedy')}}</a></li>
+        <li><a class="menubar-btn {% if current_page == 'explore' %}active{% endif %}" href="/explore">{{_('nav_explore')}}</a></li>
+        <li><a class="menubar-btn {% if current_page == 'learn-more' %}active{% endif %}" href="/learn-more">{{_('nav_learn_more')}}</a></li>
     {% if username %}
-        <li class="ltr:ml-auto rtl:mr-auto"><a class="menubar-btn" href="/programs"><span class="fas fa-fw fa-list-alt"></span> {{_('program_header')}}</a></li>
+        <li class="ltr:ml-auto rtl:mr-auto"><a class="menubar-btn {% if current_page == 'programs' %}active{% endif %}" href="/programs"><span class="fas fa-fw fa-list-alt"></span> {{_('program_header')}}</a></li>
         <li class="dropdown relative z-20 flex">
-            <a class="menubar-btn hover:bg-blue-600" href="/my-profile">
+            <a class="menubar-btn {% if current_page == 'my-profile' %}active{% endif %}" href="/my-profile">
               <span class="fas fa-fw fa-user"></span> {{username}}
             </a>
             <ul class="dropdown-menu absolute hidden rounded-lg border border-black bg-blue-400 list-none ltr:right-0 rtl:left-0 mt-12 ltr:mr-1 rtl:ml-1 w-max">

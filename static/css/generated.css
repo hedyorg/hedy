@@ -2214,6 +2214,9 @@ code {
 
 .menubar-btn {
   display: block;
+  border-bottom-width: 4px;
+  --tw-border-opacity: 1;
+  border-color: rgb(66 153 225 / var(--tw-border-opacity));
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
   padding-left: 1rem;
@@ -2229,8 +2232,15 @@ code {
 }
 
 .menubar-btn:hover {
+  --tw-border-opacity: 1;
+  border-color: rgb(49 130 206 / var(--tw-border-opacity));
   --tw-bg-opacity: 1;
   background-color: rgb(49 130 206 / var(--tw-bg-opacity));
+}
+
+.menubar-btn.active {
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(255 255 255 / var(--tw-border-opacity)) !important;
 }
 
 .dropdown-btn {
