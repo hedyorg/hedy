@@ -1185,6 +1185,12 @@ def explore():
                            current_page='explore')
 
 
+@app.route('/highscores', methods=['GET'])
+@requires_login
+def get_highscores(user):
+    return render_template('highscores.html')
+
+
 @app.route('/change_language', methods=['POST'])
 def change_language():
     body = request.json
