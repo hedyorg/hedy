@@ -1,16 +1,13 @@
-<nav class="bg-blue-500 px-4 text-white flex flex-row items-center">
-    <div class="py-1 ltr:mr-6 rtl:ml-6">
-      <a href="/">
-        <img src="{{static('/images/Hedy-logo.png')}}" style="width: 2.5em;"/>
-      </a>
-    </div>
+<nav aria-label="Website" class="bg-blue-400 h-12">
     {% block menu %}
-    <a class="menubar-btn hover:bg-blue-600 {% if current_page == 'start' %}border-white{% else %}border-transparent{% endif %}" href="/start">{{_('nav_start')}}</a>
-    <a class="menubar-btn hover:bg-blue-600 {% if current_page == 'hedy' %}border-white{% else %}border-transparent{% endif %}" href="/hedy">{{_('nav_hedy')}}</a>
-    <a class="menubar-btn hover:bg-blue-600 {% if current_page == 'explore' %}border-white{% else %}border-transparent{% endif %}" href="/explore">{{_('nav_explore')}}</a>
-    <a class="menubar-btn hover:bg-blue-600 {% if current_page == 'learn-more' %}border-white{% else %}border-transparent{% endif %}" href="/learn-more">{{_('nav_learn_more')}}</a>
+    <ul class="h-full py-0 my-0 list-none flex flex-row items-center gap-4">
+        <li><a href="/"><img class="h-10" src="{{static('/images/Hedy-logo.png')}}"></a></li>
+        <li class="menubar-btn {% if current_page == 'start' %}border-white{% else %}border-transparent{% endif %}"><a class="no-underline" href="/start">{{_('nav_start')}}</a></li>
+        <li><a class="menubar-btn {% if current_page == 'hedy' %}border-white{% else %}border-transparent{% endif %}" href="/hedy">{{_('nav_hedy')}}</a></li>
+        <li><a class="menubar-btn {% if current_page == 'explore' %}border-white{% else %}border-transparent{% endif %}" href="/explore">{{_('nav_explore')}}</a></li>
+        <li><a class="menubar-btn {% if current_page == 'learn-more' %}border-white{% else %}border-transparent{% endif %}" href="/learn-more">{{_('nav_learn_more')}}</a></li>
     {% if username %}
-      <a class="menubar-btn hover:bg-blue-600 ltr:ml-auto rtl:mr-auto {% if current_page == 'programs' %}border-white{% else %}border-transparent{% endif %}" href="/programs"><span class="fas fa-fw fa-list-alt"></span> {{_('program_header')}}</a>
+        <li class=""><a class="menubar-btn {% if current_page == 'programs' %}border-white{% else %}border-transparent{% endif %}" href="/programs"><span class="fas fa-fw fa-list-alt"></span> {{_('program_header')}}</a></li>
       <div class="dropdown relative z-20 flex">
         <a class="menubar-btn hover:bg-blue-600 {% if current_page == 'my-profile' %}border-white{% else %}border-transparent{% endif %}" href="/my-profile">
           <span class="fas fa-fw fa-user"></span> {{username}}
@@ -33,7 +30,7 @@
         </ul>
       </div>
     {% else %}
-      <a class="menubar-btn hover:bg-blue-600 {% if current_page == 'login' %}border-white{% else %}border-transparent{% endif %}" href="/login">{{_('login')}}</a>
+        <li><a class="menubar-btn {% if current_page == 'login' %}border-white{% else %}border-transparent{% endif %}" href="/login">{{_('login')}}</a></li>
     {% endif %}
     {% if not username %}
       <div class="dropdown inline-block relative {% if not username %}ltr:ml-auto rtl:mr-auto{% endif %} py-2 z-20">
@@ -68,6 +65,7 @@
       </div>
     {% endif %}
     {% endblock %}
+    </ul>
 </nav>
 <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
 <script>

@@ -73,7 +73,7 @@
     </div>
     <div class="lg:container mx-auto bg-gray-100 min-h-screen shadow-md flex flex-col">
       {% if menu != False %}
-      {% filter indent(width=6) %}{% include "incl-menubar.html" %}{% endfilter %}
+        {% include "incl-menubar.html" %}
       {% endif %}
       {# Can't reindent this as it may contain preformatted code blocks whose indentation is important. #}
       {% block body %}{% endblock %}
