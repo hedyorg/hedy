@@ -1545,13 +1545,26 @@ levels:
                     {print} 'Hello'
                     {print} 'Im Hedy!'
             mp_choice_options:
-            -   option: "Hello \n Im Hedy!"
+            -   option: |
+                  Hello
+                  Im Hedy!
                 feedback: "Everything is printed twice."
-            -   option: "Hello \n Hello \n Im Hedy"
+            -   option: |
+                  Hello
+                  Hello
+                  Im Hedy
                 feedback: "The second line is repeated twice as well."
-            -   option: "Hello \n Im Hedy! \n Hello \n Im Hedy!"
+            -   option: |
+                  Hello
+                  Im Hedy!
+                  Hello
+                  Im Hedy!
                 feedback: "Super!"
-            -   option: "Hello \n Hello \n Im Hedy! \n Im Hedy!"
+            -   option: |
+                  Hello
+                  Hello
+                  Im Hedy!
+                  Im Hedy!"
                 feedback: "Everything is printed twice"
             correct_answer: "C"
             hint: "Both lines are repeated twice."
