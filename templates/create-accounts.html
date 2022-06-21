@@ -9,7 +9,6 @@
     <div>
         <form onsubmit="hedyApp.create_accounts('{{_('create_accounts_prompt')}}');event.preventDefault();">
         <div class="border rounded-lg px-4 py-2">
-            {{ current_class }}
             <div class="flex flex-col" id="account_rows_container">
                 <!-- we create one hidden row -> we can simply copy this one and append() below when adding rows -->
                 {% for i in range(5) %}
@@ -41,11 +40,11 @@
             </div>
         </div>
         <div class="flex flex-row mt-4">
-            <button class="yellow-btn text-white" onclick="window.open('/for-teachers/class/{{ current_class.id }}', '_self');">{{_('back_to_class')}}</button>
-            <div class="ltr:ml-auto">
+            <button class="green-btn" onclick="window.open('/for-teachers/class/{{ current_class.id }}', '_self');">{{_('back_to_class')}}</button>
+            <div class="ltr:ml-auto flex flex-row gap-2">
                 <button type="reset" class="red-btn" onclick="window.open('/for-teachers/create-accounts', '_self');">
                     {{_('reset_view')}}</button>
-                <button type="submit" class="green-btn ltr:ml-4 rtl:mr-4 px-4">{{_('create_accounts')}}</button>
+                <button type="submit" class="blue-btn px-4">{{_('create_accounts')}}</button>
             </div>
         </div>
         </form>
