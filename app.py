@@ -1190,7 +1190,7 @@ def explore():
 def get_highscores_page(user, filter):
     if filter not in ["global", "country", "class"]:
         return utils.error_page(error=404, ui_message=gettext('page_not_found'))
-    highscores = DATABASE.get_highscores(filter, user['username'])
+    highscores = DATABASE.get_highscores(filter)
 
     return render_template('highscores.html', highscores=highscores)
 
