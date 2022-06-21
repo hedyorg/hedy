@@ -1188,6 +1188,9 @@ def explore():
 @app.route('/highscores', methods=['GET'])
 @requires_login
 def get_highscores(user):
+    # Todo: Do we want to get these values on runtime on cache (as we are planning to-do for explore?)
+    # Also, we have to add a "last updated" value to the achievements db -> first achievement = higher ranking
+
     return render_template('highscores.html')
 
 
