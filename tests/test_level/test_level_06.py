@@ -171,7 +171,7 @@ class TestsLevel6(HedyTester):
         expected = textwrap.dedent("""\
         nummer1 = '٢'
         nummer2 = '2'
-        if convert_numerals('Latin', nummer1) == convert_numerals('Latin',nummer2):
+        if convert_numerals('Latin', nummer1) == convert_numerals('Latin', nummer2):
           print(f'jahoor!')""")
 
         self.multi_level_tester(max_level=7, code=code, expected=expected, output='jahoor!')
