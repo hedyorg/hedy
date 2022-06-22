@@ -161,6 +161,21 @@ class TestsLevel6(HedyTester):
 
         self.multi_level_tester(max_level=7, code=code, expected=expected, output='gelijkspel!')
 
+
+    def test_equality_arabic(self):
+        code = textwrap.dedent("""\
+        nummer1 is ٢
+        nummer2 is 2
+        if nummer1 is nummer2 print 'jahoor!'""")
+
+        expected = textwrap.dedent("""\
+        nummer1 = '٢'
+        nummer2 = '2'
+        if convert_numerals('Latin', nummer1) == convert_numerals('Latin',nummer2):
+          print(f'jahoor!')""")
+
+        self.multi_level_tester(max_level=7, code=code, expected=expected, output='jahoor!')
+
     @parameterized.expand(HedyTester.quotes)
     def test_if_equality_quoted_rhs_with_space(self, q):
         code = textwrap.dedent(f"""\
