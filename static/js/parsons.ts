@@ -26,7 +26,7 @@ export function loadParsonsExercise(level: number, exercise: number) {
 
 function resetView() {
     stopit();
-    $('#parsons_output').empty();
+    $('#output').empty();
     $('.parsons_goal_line_container').removeClass('border-green-500 border-red-500');
     $('.compiler-parsons-box').attr('index', '-');
     $('.compiler-parsons-box').attr('code', '');
