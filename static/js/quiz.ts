@@ -77,8 +77,8 @@ function showAnswers(options: any, level: number, question: number) {
         if (options[i-1].option.includes("```")) {
             $('#answer_text_' + i).hide();
             let editor = ace.edit('answer_code_' + i);
-            // This does look like magic: It removes all backticks and the resting newlines, tabs and whitespaces
-            editor.setValue($.trim(options[i-1].option.replace(new RegExp('`', 'g'),"").replace(/\s+/g, " ")));
+            // This does look like magic: It removes all backticks and the resting newlines
+            editor.setValue($.trim(options[i-1].option.replace(new RegExp('`', 'g'),"")));
             editor.clearSelection(); // Make sure the ace editor is not selected
             editor.renderer.$cursorLayer.element.style.display = "none"; // Also remove the cursor
             $('#answer_code_' + i).show();
@@ -182,7 +182,7 @@ function showFeedback(response: any, question: string, correct: boolean) {
     $('#feedback_feedback_text').text(response.feedback);
     if (response.correct_answer_text.includes("```")) {
         let editor = ace.edit("feedback_answer_code");
-        editor.setValue($.trim(response.correct_answer_text.replace(new RegExp('`', 'g'),"").replace(/\s+/g, " ")));
+        editor.setValue($.trim(response.correct_answer_text.replace(new RegExp('`', 'g'),"")));
         editor.clearSelection(); // Make sure the ace editor is not selected
         editor.renderer.$cursorLayer.element.style.display = "none"; // Also remove the cursor
         $('#feedback_correct_answer_container').hide();
