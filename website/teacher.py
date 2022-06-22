@@ -354,14 +354,16 @@ def routes(app, database, achievements):
         DATABASE.remove_class_invite(username)
         return {}, 200
 
-    @app.route('/for-teachers/create-accounts', methods=['GET'])
+    @app.route('/for-teachers/create-accounts/<class_id>', methods=['GET'])
     @requires_login
-    def create_accounts(user):
+    def create_accounts(user, class_id):
         if not is_teacher(user):
             return utils.error_page(error=403, ui_message=gettext('not_teacher'))
-        classes = DATABASE.get_teacher_classes(user['username'], False)
+        current_class = DATABASE.get_class(class_id)
+        if not current_class or current_class.get('teacher') != user.get('username'):
+            return utils.error_page(error=403, ui_message=gettext('no_such_class'))
 
-        return render_template('create-accounts.html', classes=classes)
+        return render_template('create-accounts.html', current_class = current_class)
 
     @app.route('/for-teachers/create-accounts', methods=['POST'])
     @requires_login
