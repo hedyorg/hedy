@@ -1518,7 +1518,9 @@ class ConvertToPython_6(ConvertToPython_5):
         remaining_text = ' '.join(args[1:])
         arg1 = self.process_variable(remaining_text)
 
-        return f"str({arg0}) == str({arg1})"
+        # FH, 2022 this used to be str but convert_numerals in needed to accept non-latin numbers
+        # and works exactly as str for latin numbers (i.e. does nothing on str, makes 3 into '3')
+        return f"convert_numerals('{self.numerals_language}', {arg0}) == convert_numerals('{self.numerals_language}',{arg1})"
 
     def assign(self, args):
         parameter = args[0]
