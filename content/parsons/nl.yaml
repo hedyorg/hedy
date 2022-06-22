@@ -171,29 +171,27 @@ levels:
     8:
         1:
             story: |
-                Jij en je vrienden spelen Pokémon Go! Maak een programma die bepaalt in welke kleur team je komt
-                rood, geel of blauw!
+                Jij en je vrienden spelen Pokémon Go! Maak een programma dat bepaalt in welke kleur alle teams komen:
+                rood, geel of blauw! Pauzeer na iedere indeling eventjes.
             code_lines:
                 A: |
-                    kleuren = rood, blauw, geel
+                    kleuren = rood, geel, blauw
                 B: |
-                    {print} 'Rood of blauw?'
+                    {print} 'Rood, geel of blauw?'
                 C: |
-                    {print} 'Jij komt bij team '
-                D: |
                     {repeat} 5 {times}
+                D: |
+                        {print} 'Jij komt bij team...'
                 E: |
-                    _{print} kleuren {at} {random}
+                        {print} kleuren {at} {random}
                 F: |
-                    sleep 2
-                G: |-
-                    {print} kleuren {at} random '!'
+                        {sleep} 2
         2:
-            story: "Create a game of hide and seek.\n"
+            story: "Tel af voor een potje verstoppertje.\n"
             code_lines:
                 A: "counter = 11\n"
-                B: "{repeat} 10 {times}\n"
-                C: "counter = counter - 1\n"
-                D: "{print} counter\n"
-                E: "{sleep} 1\n"
-                F: "{print} 'ready or not here i come!'"
+                B: "    {repeat} 10 {times}\n"
+                C: "    counter = counter - 1\n"
+                D: "    {print} counter\n"
+                E: "    {sleep} 1\n"
+                F: "    {print} 'ready or not here i come!'"
