@@ -207,8 +207,8 @@ sections:
                 solution_text: |
                     In this level you have to tell Hedy where to save your answer, so it can be used later on. This is called a variable.
                 solution_code: |
-                    order is What would you like to eat?
-        -   title: "Students try to use the echo command. "
+                    order is ask What would you like to eat?
+        -   title: "Students try to use the echo command "
             example:
                 error_text: |
                     For some students it might be frustrating to learn that the echo command doesn't work anymore. That's why it's very important to explain the advantages of using variables. For example you can use multiple variables in a code, and you can put them anywhere you like in a sentence!
@@ -272,7 +272,7 @@ sections:
 
                     groceries is apples, milk, chocolate
                     print groceries at random
-        -   title: "Students use the name of a variable or list as regular text."
+        -   title: "Students use the name of a variable or list as regular text"
             example:
                 error_text: |
                     This problem probably occured in level 2 as well. Now it can happen with lists too.
@@ -285,7 +285,7 @@ sections:
                     animal is rhino, bee, swan
                     print The best animal is... animal at random
                 solution_text: |
-                    Don;t use the names of variables or lists in regular text to print. In level 4 this problem is solves with quotation marks.
+                    Don't use the names of variables or lists in regular text to print. In level 4 this problem is solves with quotation marks.
                 solution_code: |
                     name is Hedy
                     print Hi I'm name
@@ -306,7 +306,7 @@ sections:
                 solution_code: |
                     birds is sparrow, seagull, robin
                     print birds at random
-        -   title: "Students forget to use the print command when also using the at random command."
+        -   title: "Students forget to use the print command when also using the at random command"
             example:
                 error_text: |
                     Or they will sometimes put at random at the beginning of the line.
@@ -330,7 +330,7 @@ sections:
                 solution_code: |
                     pizzas is funghi, tonno, quattro stagioni
                     print pizzas at random
-        -   title: "Students try to use at random without a list."
+        -   title: "Students try to use at random without a list"
             example:
                 error_text: |
                     For example
@@ -358,7 +358,7 @@ sections:
                     your_name is ask Who are you?
                     add your_name to names
                     print names at random
-        -   title: "Students forget to use to/from in add/remove."
+        -   title: "Students forget to use to/from in add/remove"
             example:
                 error_text: |
                     Without to/from the add/remove command won't work.
@@ -393,7 +393,7 @@ sections:
         -   title: "Students use the wrong quotation marks"
             example:
                 error_text: |
-                    It is important to start your lesson by checking if the students know how to type a quotation mark properly. ELse they might use the "double quotes" or the `skewed one`.
+                    It is important to start your lesson by checking if the students know how to type a quotation mark properly. Else they might use the "double quotes" or the skewed one `.
                 error_code: |
                     print `Welcome to the restaurant`
                     food is ask "What would you like to order?"
@@ -441,10 +441,10 @@ sections:
                     horse is ask 'What is your horse called'
                     if horse is Bonfire print 'cool!'
                     else print 'less cool!'
-        -   title: "Students still forget the quotes on both sides."
+        -   title: "Students still forget the quotes on both sides"
             example:
                 error_text: |
-                    If commandos can get very long and students tend to forget to use quotes.
+                    Codes using the `if` commando can get very long and students tend to forget to use quotes.
                 error_code: |
                     if name is Hedy print fun
                     else print 'meh!
@@ -453,7 +453,7 @@ sections:
                 solution_code: |
                     if name is Hedy print 'fun'
                     else print 'meh!'
-        -   title: "Students use quotes around variable names."
+        -   title: "Students use quotes around variable names"
             example:
                 error_text: |
                     In this level there are no quotes around variable names.
@@ -465,7 +465,7 @@ sections:
                 solution_code: |
                     if name is Hedy print 'fun'
                     else print 'meh!
-        -   title: "Students use long variable names containing two words."
+        -   title: "Students use long variable names containing two words"
             example:
                 error_text: |
                     A variable should be named with one word. You could use an underscore to connect two words. That counts as one.
@@ -510,6 +510,518 @@ sections:
                     secret_password is ask 'What is the password'
                     if secret_password is password print 'Access granted!'
                     else print 'Access denied!'
+    -   level: '6'
+        sections:
+        -   title: "Students struggle with quotation marks"
+            example:
+                error_text: |
+                    Some students struggle with adding quotattion marks or not. If you add quotation marks, the output screen will literally show '5+5'.
+                error_code: |
+                    print '5 + 5'
+                solution_text: |
+                    In this code the output screen will print '10'.
+                solution_code: |
+                    print 5 + 5
+        -   title: "Students struggle with the concept of doing maths with a variable"
+            example:
+                error_text: |
+                    Some students will find it hard to do maths with variables. Try to show them very simple examples, like:
+                error_code: |
+                    age = ask 'How old are you?'
+                    print 'Next year you will be ' age + 1
+                solution_text: |
+                    Or take it a step further like this.
+                solution_code: |
+                    price = 0
+                    print 'Welcome to our burger restaurant'
+                    burger = ask 'Would you like a burger?'
+                    if burger = yes price = price + 10
+                    drink = ask 'Would you like a drink?'
+                    if drink = yes price = price + 4
+                    print 'That will be ' price ' euros please'
+    -   level: '7'
+        sections:
+        -   title: "Students forget one of the word of the repeat command, or they forget the print command"
+            example:
+                error_text: |
+                    Make sure that the students know to use both the full repeat command and the print command.
+                error_code: |
+                    repeat 3 times 'For he`s a jolly good fellow'
+                    repeat 3 print 'Which nobody can deny!'
+                solution_text: |
+                    This is the correct code:
+                solution_code: |
+                    repeat 3 times print 'For he`s a jolly good fellow'
+                    repeat 3 times print 'Which nobody can deny!'
+        -   title: "Students try to repeat multiple lines"
+            example:
+                error_text: |
+                    In this level you can only repeat one line of code multiple times. In this code the student wanted to print 3 different drinks, but it won't work. It will ask the question 3 times and only print the last answer.
+                error_code: |
+                    repeat 3 times drink = ask 'What would you like to drink?'
+                    print drink
+                solution_text: |
+                    You should go to the next level to be able to repeat multiple lines. So on this level you'll have to print everything seperately.
+                solution_code: |
+                    drink = ask 'What would you like to drink?'
+                    print drink
+                    drink = ask 'What would you like to drink?'
+                    print drink
+                    drink = ask 'What would you like to drink?'
+                    print drink
+        -   title: "Students make programs that take too long to run"
+            example:
+                error_text: |
+                    In this level it's very easy to make long codes. The students aren't allowed to make programs that take to long to load (to save our servers).
+                error_code: |
+                    repeat 100 times print 'How many times can I repeat this?'
+                solution_text: |
+                    Make sure the codes aren't too long
+                solution_code: |
+                    repeat 20 times print 'This is enough'
+    -   level: '8'
+        sections:
+        -   title: "Students use the indentation wrong"
+            example:
+                error_text: |
+                    Indentation is a new concept in this level, that is hard to use for some students. Make sure they practise some simple codes before making a whole program with it.
+                error_code: |
+                    repeat 3 times
+                    print 'hello'
+                solution_text: |
+                    This is the correct code:
+                solution_code: |
+                    repeat 3 times
+                        print 'hello'
+        -   title: "Students only repeat 1 line when they wanted to repeat multiple lines"
+            example:
+                error_text: |
+                    For instance, in the code below the student wanted to take the drinks order of 3 people. But insted the program asked 3 times, but only wrote down one order.
+                error_code: |
+                    repeat 3 times
+                        drink = ask 'What would you like to drink?'
+                    print drink
+                solution_text: |
+                    In the correct code the third line starts with indentation too. This way it belongs to the repeat block and therefore it will be repeated 3 times.
+                    Showing your students these differences can help them understand why we need indentation to make our programs work.
+                solution_code: |
+                    repeat 3 times
+                        drink = ask 'What would you like to drink?'
+                        print drink
+        -   title: "Students want to nest if statements, or put if statements inside a loop"
+            example:
+                error_text: |
+                    In this level students aren't allowed yet to put if statements inside other if statements or inside repeat loops.
+                    In the next level this is allowed.
+                error_code: |
+                    birthday = ask 'Is it you birthday?'
+                    if birthday = yes
+                        repeat 3 times
+                            print 'Hip Hip Hooray!'
+                solution_text: |
+                    This is the correct code for this level:
+                solution_code: |
+                    birthday = ask 'Is it you birthday?'
+                    if birthday = yes
+                        print 'Hip Hip Hooray!'
+                        print 'Hip Hip Hooray!'
+                        print 'Hip Hip Hooray!'
+        -   title: "Students make programs that take too long to run"
+            example:
+                error_text: |
+                    In this level it's very easy to make long codes. The students aren't allowed to make programs that take to long to load (to save our servers).
+                error_code: |
+                    repeat 100 times
+                        print 'How many times can I repeat this?'
+                solution_text: |
+                    Make sure the codes aren't too long
+                solution_code: |
+                    repeat 20 times
+                        print 'This is enough'
+        -   title: "Students use the if command to check if the variable value is the same as the variable name"
+            example:
+                error_text: |
+                    We have seen this mistake by some of our students. They make a password for their computer, but they make the password 'password'.
+                    In line 2 the computer is asked to check wheter the variable password is the same as the variable password, so itself. Which means the answer is alway yes.
+                    So with this code the answer will always be 'You can come in' no matter what the player fills in.
+                error_code: |
+                    password is ask 'What is the password?'
+                    if password is password
+                        print 'You can come in'
+                    else
+                        print 'You are not allowed'
+                solution_text: |
+                    You can fix this mistake by adding quotation marks. This way the computer knows that the second password in `if password is 'password'` is a string value (so normal text) and not the variable name.
+                solution_code: |
+                    password is ask 'What is the password?'
+                    if password is 'password'
+                        print 'You can come in'
+                    else
+                        print 'You are not allowed'
+    -   level: '9'
+        sections:
+        -   title: "Students make mistakes with indentation"
+            example:
+                error_text: |
+                    The hardest part about this level is getting the indentation right. Students love nesting if statements, sometimes even inside other nested if statements. Keeping track of indentation can get pretty tough.
+                error_code: |
+                    print 'Robin is walking downtown'
+                    location = ask 'Is Robin going into a shop, or does she go home?'
+                    if location is shop
+                        print 'She enters the shop.'
+                        print 'Robin sees an interesting looking book'
+                        book = ask 'Does Robin buy the book?'
+                            if book is yes
+                    print 'Robin buys the book and goes home'
+                    else
+                        print 'Robin leaves the shop and goes home'
+                    else
+                        print 'Robin goes home'
+                solution_text: |
+                    This is the correct code. Try to keep track of all the different constructions when putting if statements inside other if statements.
+                solution_code: |
+                    print 'Robin is walking downtown'
+                    location = ask 'Is Robin going into a shop, or does she go home?'
+                    if location is shop
+                        print 'She enters the shop.'
+                        print 'Robin sees an interesting looking book'
+                        book = ask 'Does Robin buy the book?'
+                        if book is yes
+                            print 'Robin buys the book and goes home'
+                        else
+                            print 'Robin leaves the shop and goes home'
+                    else
+                        print 'Robin goes home'
+
+    -   level: '10'
+        sections:
+        -   title: "Students so not use the for command correctly"
+            example:
+                error_text: |
+                    We often see that students try to print the list (in the example animals) instead of the items of the list.
+                error_code: |
+                    animals is dog, cat, blobfish
+                    for animal in animals
+                      print 'I love ' animals
+                solution_text: |
+                     The word animals in the last line should be changed into animal.
+                solution_code: |
+                    animals is dog, cat, blobfish
+                    for animal in animals
+                      print 'I love ' animal
+        -   title: "Students forget the indentation"
+            example:
+                error_text: |
+                    Students tend to forget to use indentation after a for command.
+                error_code: |
+                    animals is dog, cat, blobfish
+                    for animal in animals
+                    print 'I love ' animals
+                solution_text: |
+                     You should use indentation after a for command.
+                solution_code: |
+                    animals is dog, cat, blobfish
+                    for animal in animals
+                      print 'I love ' animal
+    -   level: '11'
+        sections:
+        -   title: "Students forget to use indentation"
+            example:
+                error_text: |
+                    Make sure that the students use indentation.
+                error_code: |
+                    for i in range 1 to 5
+                    print i
+                solution_text: |
+                    This is the correct code:
+                solution_code: |
+                    for i in range 1 to 5
+                        print i
+        - title: "Students don't understand the i"
+          example:
+              error_text: |
+                  Some students don't understand that i is a variable. i is chosen, because it is used in Python programming, but you could just as easily use a different variable name.
+                  For example, this code:
+              error_code: |
+                  for i in range 1 to 5
+                  print i
+              solution_text: |
+                  Could just as well be replaced with this code. It works the same.
+              solution_code: |
+                  for banana in range 1 to 5
+                      print banana
+    -   level: '12'
+        sections:
+        -   title: "Students forget quotation marks"
+            example:
+                error_text: |
+                    Students need more quotation marks now than in the previous levels. In this example quotation marks were forgotten in the list and in the if command.
+                error_code: |
+                    superheroes = Spiderman, Batman, Iron Man
+                    superhero = superheroes at random
+                    if superhero = Batman
+                        print 'IM BATMAN!'
+
+                solution_text: |
+                    This is the correct code:
+                solution_code: |
+                    superheroes = 'Spiderman', 'Batman', 'Iron Man'
+                    superhero = superheroes at random
+                    if superhero is 'Batman'
+                        print 'IM BATMAN!'
+        -   title: "Students use quotation marks on numbers they want to use for calculations"
+            example:
+                error_text: |
+                    You can use quotation marks on numbers, but only if you want the computer to think of them as text. This means you can't do calculations with the number.
+                    In the example below, you can't do maths with the number 25, because it's in quotation marks.
+                error_code: |
+                    score = 25
+                    answer is ask 'Do you want a point?'
+                    if answer is 'yes'
+                        score = score + 1
+                        print score
+                solution_text: |
+                    This is the correct code:
+                solution_code: |
+                    score = 25
+                    answer is ask 'Do you want a point?'
+                    if answer is 'yes'
+                        score = score + 1
+                        print score
+        -   title: "Students use commas instead of periods in decimal numbers"
+            example:
+                error_text: |
+                    Decimal numbers can be used from this level on, but you can't use commas.
+                error_code: |
+                    print 2,5 + 2,5
+                solution_text: |
+                    This is the correct code:
+                solution_code: |
+                    print 2.5 + 2.5
+    -   level: '13'
+        sections:
+        -   title: "Students confuse `and` with `or`"
+            example:
+                error_text: |
+                    Both commands might work in the similarly, but their functions are very different.
+                error_code: |
+                    game is ask 'Do you want to play a game?'
+                    time is ask 'Do you have time to play?'
+                    if game is 'yes' or time is 'yes'
+                        print 'Lets play!'
+                solution_text: |
+                    In this case, the person should answer yes on both questions, so you should use `and`.
+                solution_code: |
+                    game is ask 'Do you want to play a game?'
+                    time is ask 'Do you have time to play?'
+                    if game is 'yes' and time is 'yes'
+                        print 'Lets play!'
+    -   level: '14'
+        sections:
+        -   title: "Students confuse the < and > signs"
+            example:
+                error_text: |
+                    Often, students are already familiar with these signs from maths class. But if your students don't know these signs yet, they might have a challenge with it.
+                error_code: |
+                    age = ask 'How old are you?'
+                    if age < 12
+                        print 'You are older than I am!'
+                solution_text: |
+                    This is the correct code:
+                solution_code: |
+                    age = ask 'How old are you?'
+                    if age > 12
+                        print 'You are older than I am!'
+        -   title: "Students use the wrong signs for `!=` `<=` and `>=`"
+            example:
+                error_text: |
+                    These signs are probably new for most students. Make sure to explain these signs to your students.
+                error_code: |
+                    name = ask 'What is your name?'
+                    if name =< 'Hedy'
+                        print 'You are not Hedy'
+                solution_text: |
+                    This is the correct code:
+                solution_code: |
+                    name = ask 'What is your name?'
+                    if name != 'Hedy'
+                        print 'You are not Hedy'
+        -   title: "Students forget to use the == sign"
+            example:
+                error_text: |
+                    In this level, students are still allowed to use = or is. But on other levels, or in python, they might get in trouble for that. So it is best to train them to use it.
+                error_code: |
+                    name = ask 'What is your name?'
+                    if name = 'Hedy'
+                        print 'You are cool!'
+                solution_text: |
+                    This is the correct code:
+                solution_code: |
+                    name = ask 'What is your name?'
+                    if name == 'Hedy'
+                        print 'You are cool!'
+    -   level: '15'
+        sections:
+        -   title: "Students forget indentation in the while loop"
+            example:
+                error_text: |
+                    Indentation is often hard for students.
+                error_code: |
+                    answer = 0
+                    while answer != 25
+                    answer = ask 'What is 5 times 5?'
+                    print 'A correct answer has been given'
+                solution_text: |
+                    This is the correct code:
+                solution_code: |
+                    answer = 0
+                    while answer != 25
+                        answer = ask 'What is 5 times 5?'
+                    print 'A correct answer has been given'
+    -   level: '16'
+        sections:
+        -   title: "Students forget the brackets"
+            example:
+                error_text: |
+                    From this level on lists should be in brackets.
+                error_code: |
+                    icecream = 'starwberry', 'chocolate'
+                    print 'I love ' icecream[random] ' icecream'
+                solution_text: |
+                    This is the correct code:
+                solution_code: |
+                    icecream = ['starwberry', 'chocolate']
+                    print 'I love ' icecream[random] ' icecream'
+        -   title: "Students use the wrong brackets"
+            example:
+                error_text: |
+                    From this level on lists should be in brackets.
+                error_code: |
+                    icecream = ('starwberry', 'chocolate'}
+                    print 'I love ' icecream[random] ' icecream'
+                solution_text: |
+                    This is the correct code:
+                solution_code: |
+                    icecream = ['starwberry', 'chocolate']
+                    print 'I love ' icecream[random] ' icecream'
+        -   title: "Students forget the quotation marks while focussing on the brackets"
+            example:
+                error_text: |
+                    Students are sometimes very focussed on the new aspect of the syntax, that they forget the quotation marks.
+                error_code: |
+                    icecream = [starwberry, chocolate]
+                    print 'I love ' icecream[random] ' icecream'
+                solution_text: |
+                    This is the correct code:
+                solution_code: |
+                    icecream = ['starwberry', 'chocolate']
+                    print 'I love ' icecream[random] ' icecream'
+        -   title: "Students still use the old at random command"
+            example:
+                error_text: |
+                    Students are sometimes very focussed on the new aspect of the syntax, that they forget the quotation marks.
+                error_code: |
+                    icecream = [starwberry, chocolate]
+                    print 'I love ' icecream at random ' icecream'
+                solution_text: |
+                    This is the correct code:
+                solution_code: |
+                    icecream = ['starwberry', 'chocolate']
+                    print 'I love ' icecream[random] ' icecream'
+        -   title: "Students forget the quotation marks while focussing on the brackets"
+            example:
+                error_text: |
+                    Students are sometimes very focussed on the new aspect of the syntax, that they forget the quotation marks.
+                error_code: |
+                    icecream = [starwberry, chocolate]
+                    print 'I love ' icecream[random] ' icecream'
+                solution_text: |
+                    This is the correct code:
+                solution_code: |
+                    icecream = ['starwberry', 'chocolate']
+                    print 'I love ' icecream[random] ' icecream'
+    -   level: '17'
+        sections:
+        -   title: "Students use elif like else, so without a condition"
+            example:
+                error_text: |
+                    Make sure that the students know to use both the full repeat command and the print command.
+                error_code: |
+                    color = ask 'What is your favorite color?'
+                    if color == 'green':
+                        print 'green is nice'
+                    elif:
+                        print 'I like green'
+                solution_text: |
+                    This is the correct code:
+                solution_code: |
+                    color = ask 'What is your favorite color?'
+                    if color == 'green':
+                        print 'green is nice'
+                    elif color == yellow:
+                        print 'yellow is alright'
+                    else:
+                        print 'I like green'
+        -   title: "Students forget the colon"
+            example:
+                error_text: |
+                    After each command that requires indentation, a colon should be used.
+                error_code: |
+                    answer = ask 'How are you doing?'
+                    if answer is 'great'
+                        print 'Me too!'
+                    elif answer is 'bad'
+                        print 'Let me cheer you up!'
+                    else
+                        print 'Im great!'
+                solution_text: |
+                    This is the correct code:
+                solution_code: |
+                    answer = ask 'How are you doing?'
+                    if answer is 'great':
+                        print 'Me too!'
+                    elif answer is 'bad':
+                        print 'Let me cheer you up!'
+                    else:
+                        print 'Im great!'
+    -   level: '18'
+        sections:
+        -   title: "Students forget to use the brackets"
+            example:
+                error_text: |
+                    Students will forget to put brackets around their text.
+                error_code: |
+                    print 'my name is Hedy!'
+                solution_text: |
+                    This is the correct code:
+                solution_code: |
+                    print('my name is Hedy!')'
+        -   title: "Students will still use the ask command"
+            example:
+                error_text: |
+                    The ask command has been used since level 1. So it might be hard for the students to switch to input instead of ask.
+                error_code: |
+                    print('My name is Hedy!')
+                    name = ask('What is your name?')
+                    print('So your name is ', name)
+                solution_text: |
+                    This is the correct code:
+                solution_code: |
+                    print('My name is Hedy!')
+                    name = input('What is your name?')
+                    print('So your name is ', name)
+        -   title: "Students might use the brackets as quotation marks"
+            example:
+                error_text: |
+                    They have learned to keep the variables outside of the quotation marks, so they might do the same with the brackets. Which is not the correct way to use them.
+                error_code: |
+                    temperature = 25
+                    print('It is ') temperature ('degrees outside')
+                solution_text: |
+                    This is the correct code:
+                solution_code: |
+                    temperature = 25
+                    print('It is ', temperature, 'degrees outside')
 learn-more-sections:
 -   title: "Do you like Hedy?"
     text: |
