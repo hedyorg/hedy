@@ -29,7 +29,7 @@ class TestsLevel13(HedyTester):
           leeftijd = float(leeftijd)
         except ValueError:
           pass
-      if str(naam) == str('Felienne') and str(leeftijd) == str('37'):
+      if convert_numerals('Latin', naam) == convert_numerals('Latin', 'Felienne') and str(leeftijd) == convert_numerals('Latin', '37'):
         print(f'''hallo jij!''')""")
 
     self.multi_level_tester(
@@ -62,7 +62,7 @@ class TestsLevel13(HedyTester):
           age = float(age)
         except ValueError:
           pass
-      if str(name) == str('Hedy') and str(age) == str('2'):
+      if convert_numerals('Latin', name) == convert_numerals('Latin', 'Hedy') and str(age) == convert_numerals('Latin', '2'):
         print(f'''You are the real Hedy!''')""")
 
     self.multi_level_tester(
@@ -78,7 +78,7 @@ class TestsLevel13(HedyTester):
       if 5 is 5 or 4 is 4
           print 'hallo'""")
     expected = textwrap.dedent("""\
-      if str('5') == str('5') or str('4') == str('4'):
+      if convert_numerals('Latin', '5') == convert_numerals('Latin', '5') or str('4') == convert_numerals('Latin', '4'):
         print(f'''hallo''')""")
 
     self.multi_level_tester(
