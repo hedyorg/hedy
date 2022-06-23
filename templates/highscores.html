@@ -1,7 +1,7 @@
 {% extends "auth.html" %}
 
 {% block body %}
-<div class="flex flex-col gap-4">
+<div class="px-8 flex flex-col gap-4">
     <h1 class="text-center mt-4">Highscores</h1>
     <div class="flex flex-row gap-4 items-center justify-center">
         <button class="green-btn" onclick="window.location.href = '/highscores/global'">{{_('whole_world')}}</button>
@@ -16,7 +16,7 @@
               <tr class="font-bold text-left">
                   <td class="w-64">{{_('username')}}</td>
                   <td class="w-40">{{_('achievements')[0]|upper}}{{_('achievements')[1:]}}</td>
-                  <td class="w-40">{{_('country')}}</td>
+                  <td class="w-64">{{_('country')}}</td>
                   <td class="w-64">{{_('last_achievement')}}</td>
               </tr>
             </thead>
