@@ -78,7 +78,7 @@ def convert_numerals(alphabet, number):
 
 
   // Set const value to determine the current page direction -> useful for ace editor settings
-  const dir = $("#main_container").attr("dir");
+  const dir = $("body").attr("dir");
 
   // *** EDITOR SETUP ***
   initializeMainEditor($('#editor'));

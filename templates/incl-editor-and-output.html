@@ -219,6 +219,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
      }
 
      function handleDrop(e) {
+         e.preventDefault();
          e.stopPropagation(); // stops the browser from redirecting.
 
          if (dragSrcEl !== this) {
