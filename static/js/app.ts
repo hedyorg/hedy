@@ -99,7 +99,6 @@ def convert_numerals(alphabet, number):
     } else if ($(preview).hasClass('cheatsheet')) {
       exampleEditor.setOptions({ minLines: 1 });
     } else if ($(preview).hasClass('parsons')) {
-      $(preview).children('.ace_scroller').addClass('w-full');
       exampleEditor.setOptions({
         minLines: 1,
         showGutter: false,
