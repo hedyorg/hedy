@@ -439,6 +439,8 @@ class Database:
         if achievement not in user_achievements['achieved']:
             user_achievements['achieved'].append(achievement)
             ACHIEVEMENTS.put(user_achievements)
+        # Update the amount of achievements on the public profile (if exists)
+        self.update_achievements_public_profile(username, len(user_achievements['achieved']))
         if new_user:
             return True
         return False
@@ -456,6 +458,9 @@ class Database:
                 user_achievements['achieved'].append(achievement)
         user_achievements['achieved'] = list(dict.fromkeys(user_achievements['achieved']))
         ACHIEVEMENTS.put(user_achievements)
+
+        # Update the amount of achievements on the public profile (if exists)
+        self.update_achievements_public_profile(username, len(user_achievements['achieved']))
         if new_user:
             return True
         return False
