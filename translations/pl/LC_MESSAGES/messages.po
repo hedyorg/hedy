@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-21 10:36+0200\n"
+"POT-Creation-Date: 2022-06-23 14:02+0200\n"
 "PO-Revision-Date: 2022-06-18 14:19+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language: pl\n"
@@ -25,7 +25,7 @@ msgid "title_achievements"
 msgstr "Hedy - Moje osiągnięcia"
 
 #: app.py:639 app.py:743 app.py:1085 website/teacher.py:361
-#: website/teacher.py:370
+#: website/teacher.py:372
 msgid "not_teacher"
 msgstr "Wygląda na to, że nie jesteś nauczycielem!"
 
@@ -62,8 +62,8 @@ msgstr "Nie ma takiego programu!"
 msgid "level_not_class"
 msgstr "Ten poziom nie jest jeszcze dostępny w twojej klasie"
 
-#: app.py:923 website/teacher.py:419 website/teacher.py:435
-#: website/teacher.py:464 website/teacher.py:490
+#: app.py:923 website/teacher.py:421 website/teacher.py:437
+#: website/teacher.py:466 website/teacher.py:492
 msgid "no_such_adventure"
 msgstr "Ta przygoda nie istnieje!"
 
@@ -355,8 +355,8 @@ msgstr ""
 #: website/auth.py:671 website/auth.py:718 website/auth.py:745
 #: website/quiz.py:43 website/quiz.py:69 website/teacher.py:88
 #: website/teacher.py:123 website/teacher.py:195 website/teacher.py:251
-#: website/teacher.py:298 website/teacher.py:339 website/teacher.py:375
-#: website/teacher.py:446 website/teacher.py:504
+#: website/teacher.py:298 website/teacher.py:339 website/teacher.py:377
+#: website/teacher.py:448 website/teacher.py:506
 msgid "ajax_error"
 msgstr "Wystąpił błąd, proszę spróbować ponownie."
 
@@ -699,6 +699,23 @@ msgstr "Podpowiedź?"
 msgid "hedy_achievements"
 msgstr "Moje osiągnięcia"
 
+#: templates/achievements.html:36 templates/achievements.html:50
+#: templates/landing-page.html:89 templates/layout.html:92
+#: templates/public-page.html:51
+#, fuzzy
+msgid "achievements_logo_alt"
+msgstr "osiągnięcia"
+
+#: templates/achievements.html:37
+#, fuzzy
+msgid "achievements_check_icon_alt"
+msgstr "You've earned an achievement!"
+
+#: templates/base_email.html:3 templates/cheatsheet.html:15
+#: templates/incl-menubar.html:4
+msgid "hedy_logo_alt"
+msgstr ""
+
 #: templates/cheatsheet.html:14
 #, fuzzy
 msgid "cheatsheet_title"
@@ -815,7 +832,7 @@ msgstr "Wprowadź nazwę użytkownika"
 msgid "invite_by_username"
 msgstr "Wszystkie nazwy użytkowników muszą być unikalne."
 
-#: templates/class-overview.html:55 templates/create-accounts.html:49
+#: templates/class-overview.html:55 templates/create-accounts.html:45
 msgid "create_accounts"
 msgstr "Utwórz wiele kont"
 
@@ -841,6 +858,10 @@ msgstr "Are you sure you want to remove this class invitation?"
 msgid "class_already_joined"
 msgstr "You are already a student of class"
 
+#: templates/class-prejoin.html:9 templates/error-page.html:6
+msgid "error_logo_alt"
+msgstr ""
+
 #: templates/class-prejoin.html:11
 #, fuzzy
 msgid "goto_profile"
@@ -859,7 +880,8 @@ msgstr "You need to have an account to join a class. Would you like to login now
 msgid "join_class"
 msgstr "Dołącz do klasy"
 
-#: templates/class-stats.html:22 templates/customize-class.html:166
+#: templates/class-stats.html:22 templates/create-accounts.html:41
+#: templates/customize-class.html:166
 msgid "back_to_class"
 msgstr "Powróć do klasy"
 
@@ -898,26 +920,22 @@ msgstr ""
 msgid "create_accounts_prompt"
 msgstr "Are you sure you want to create these accounts?"
 
-#: templates/create-accounts.html:19
-msgid "select_class"
-msgstr "Wybierz klasę"
-
-#: templates/create-accounts.html:30
+#: templates/create-accounts.html:25
 #, fuzzy
 msgid "download_login_credentials"
 msgstr ""
 
-#: templates/create-accounts.html:34 templates/layout.html:22
+#: templates/create-accounts.html:29 templates/layout.html:22
 #: templates/signup.html:64
 msgid "yes"
 msgstr "Tak"
 
-#: templates/create-accounts.html:38 templates/layout.html:23
+#: templates/create-accounts.html:33 templates/layout.html:23
 #: templates/signup.html:68
 msgid "no"
 msgstr "Nie"
 
-#: templates/create-accounts.html:48 templates/programs.html:24
+#: templates/create-accounts.html:44 templates/programs.html:24
 #, fuzzy
 msgid "reset_view"
 msgstr "Reset"
@@ -1231,7 +1249,7 @@ msgstr "Wyświetl"
 msgid "adventure_prompt"
 msgstr "Please enter the name of the adventure"
 
-#: templates/for-teachers.html:59 website/teacher.py:499
+#: templates/for-teachers.html:59 website/teacher.py:501
 msgid "create_adventure"
 msgstr "Utwórz przygodę"
 
@@ -1299,6 +1317,10 @@ msgstr "Next exercise"
 #: templates/incl-editor-and-output.html:144
 msgid "edit_code_button"
 msgstr "Edytuj kod"
+
+#: templates/incl-editor-and-output.html:146
+msgid "repair_program_logo_alt"
+msgstr ""
 
 #: templates/incl-editor-and-output.html:150
 msgid "read_code_label"
@@ -1389,25 +1411,52 @@ msgstr ""
 "Welcome to Hedy! Your are now the proud owner of a teachers account which"
 " allows you to create classes and invite students."
 
+#: templates/landing-page.html:11
+#, fuzzy
+msgid "teacher_tutorial_logo_alt"
+msgstr "You have received an invitation to join class"
+
 #: templates/landing-page.html:13
 #, fuzzy
 msgid "start_teacher_tutorial"
 msgstr "Start teacher tutorial"
+
+#: templates/landing-page.html:18
+#, fuzzy
+msgid "hedy_tutorial_logo_alt"
+msgstr "Start hedy tutorial"
 
 #: templates/landing-page.html:20
 #, fuzzy
 msgid "start_hedy_tutorial"
 msgstr "Start hedy tutorial"
 
+#: templates/landing-page.html:25
+#, fuzzy
+msgid "start_programming_logo_alt"
+msgstr "Directly start programming"
+
 #: templates/landing-page.html:27
 #, fuzzy
 msgid "start_programming"
 msgstr "Directly start programming"
 
+#: templates/landing-page.html:31
+#, fuzzy
+msgid "explore_programs_logo_alt"
+msgstr "Explore programs"
+
 #: templates/landing-page.html:39
 #, fuzzy
 msgid "your_account"
 msgstr "Nie masz konta?"
+
+#: templates/landing-page.html:43 templates/landing-page.html:45
+#: templates/profile.html:33 templates/public-page.html:7
+#: templates/public-page.html:9
+#, fuzzy
+msgid "profile_logo_alt"
+msgstr "Profil został zaktualizowany."
 
 #: templates/landing-page.html:52 templates/public-page.html:16
 msgid "achievements"
@@ -1775,6 +1824,10 @@ msgstr "Napisz swój pierwszy program!"
 #, fuzzy
 msgid "no_shared_programs"
 msgstr "has no shared programs..."
+
+#: templates/quiz.html:4
+msgid "quiz_logo_alt"
+msgstr ""
 
 #: templates/quiz.html:7
 #, fuzzy
@@ -2226,7 +2279,7 @@ msgstr "Program unshared successfully."
 msgid "favourite_success"
 msgstr "Your program is set as favourite."
 
-#: website/quiz.py:45 website/quiz.py:71 website/teacher.py:452
+#: website/quiz.py:45 website/quiz.py:71 website/teacher.py:454
 msgid "level_invalid"
 msgstr "Ten poziom Hedy jest nieprawidłowy."
 
@@ -2258,6 +2311,7 @@ msgstr "Only teachers can retrieve classes"
 #: website/statistics.py:41 website/teacher.py:38 website/teacher.py:131
 #: website/teacher.py:150 website/teacher.py:212 website/teacher.py:234
 #: website/teacher.py:246 website/teacher.py:313 website/teacher.py:352
+#: website/teacher.py:364
 #, fuzzy
 msgid "no_such_class"
 msgstr "No such Hedy class"
@@ -2289,7 +2343,7 @@ msgstr "You didn't enter a class name!"
 msgid "class_name_duplicate"
 msgstr "You already have a class with this name."
 
-#: website/teacher.py:162 website/teacher.py:178 website/teacher.py:531
+#: website/teacher.py:162 website/teacher.py:178 website/teacher.py:533
 #, fuzzy
 msgid "invalid_class_link"
 msgstr "Invalid link for joining the class."
@@ -2333,71 +2387,71 @@ msgstr "This student is already in your class."
 msgid "student_already_invite"
 msgstr "This student already has a pending invitation."
 
-#: website/teacher.py:380
+#: website/teacher.py:382
 #, fuzzy
 msgid "no_accounts"
 msgstr "There are no accounts to create."
 
-#: website/teacher.py:390
+#: website/teacher.py:392
 msgid "unique_usernames"
 msgstr "Wszystkie nazwy użytkowników muszą być unikalne."
 
-#: website/teacher.py:399
+#: website/teacher.py:401
 #, fuzzy
 msgid "usernames_exist"
 msgstr "One or more usernames is already in use."
 
-#: website/teacher.py:410
+#: website/teacher.py:412
 #, fuzzy
 msgid "accounts_created"
 msgstr "Accounts where successfully created."
 
-#: website/teacher.py:416 website/teacher.py:421 website/teacher.py:432
-#: website/teacher.py:461 website/teacher.py:487
+#: website/teacher.py:418 website/teacher.py:423 website/teacher.py:434
+#: website/teacher.py:463 website/teacher.py:489
 #, fuzzy
 msgid "retrieve_adventure_error"
 msgstr "You're not allowed to view this adventure!"
 
-#: website/teacher.py:426
+#: website/teacher.py:428
 msgid "title_view-adventure"
 msgstr "Hedy - Wyświetl przygodę"
 
-#: website/teacher.py:437
+#: website/teacher.py:439
 #, fuzzy
 msgid "title_customize-adventure"
 msgstr "Hedy - Customize adventure"
 
-#: website/teacher.py:448
+#: website/teacher.py:450
 msgid "adventure_id_invalid"
 msgstr "Ten identyfikator przygody jest nieprawidłowy."
 
-#: website/teacher.py:450 website/teacher.py:506
+#: website/teacher.py:452 website/teacher.py:508
 msgid "adventure_name_invalid"
 msgstr "Ta nazwa przygody jest nieprawidłowa."
 
-#: website/teacher.py:454
+#: website/teacher.py:456
 msgid "content_invalid"
 msgstr "Ta przygoda jest nieprawidłowa."
 
-#: website/teacher.py:456
+#: website/teacher.py:458
 #, fuzzy
 msgid "adventure_length"
 msgstr "Your adventure has to be at least 20 characters."
 
-#: website/teacher.py:458
+#: website/teacher.py:460
 #, fuzzy
 msgid "public_invalid"
 msgstr "This agreement selection is invalid"
 
-#: website/teacher.py:469 website/teacher.py:513
+#: website/teacher.py:471 website/teacher.py:515
 msgid "adventure_duplicate"
 msgstr "Posiadasz już przygodę o tej nazwie."
 
-#: website/teacher.py:481
+#: website/teacher.py:483
 msgid "adventure_updated"
 msgstr "Przygoda została zaktualizowana!"
 
-#: website/teacher.py:508
+#: website/teacher.py:510
 #, fuzzy
 msgid "adventure_empty"
 msgstr "You didn't enter an adventure name!"
@@ -2559,4 +2613,7 @@ msgstr "You didn't enter an adventure name!"
 
 #~ msgid "go_to_first_exercise"
 #~ msgstr "Przejdź do pytania 1"
+
+#~ msgid "select_class"
+#~ msgstr "Wybierz klasę"
 
