@@ -1205,7 +1205,7 @@ def get_highscores_page(user, filter):
     highscores = copy.deepcopy(highscores)
     for highscore in highscores:
         highscore['country'] = "-" if not highscore.get('country') else highscore.get('country')
-        highscore['last_achievement'] = utils.delta_timestamp(highscore.get('last_achievement'))
+        highscore['last_achievement'] = utils.timestamp_to_date(highscore.get('last_achievement'))
     return render_template('highscores.html', highscores=highscores)
 
 

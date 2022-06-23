@@ -1,21 +1,21 @@
 {% extends "auth.html" %}
 
 {% block body %}
-<div class="px-8 py-12 flex flex-col gap-4">
-    <h1 class="text-center">Highscores</h1>
+<div class="flex flex-col gap-4">
+    <h1 class="text-center mt-4">Highscores</h1>
     <div class="flex flex-row gap-4 items-center justify-center">
         <button class="green-btn" onclick="window.location.href = '/highscores/global'">{{_('whole_world')}}</button>
         <button class="green-btn" onclick="window.location.href = '/highscores/country'">{{_('your_country')}}</button>
         <button class="green-btn" onclick="window.location.href = '/highscores/class'">{{_('your_class')}}</button>
     </div>
-    <div class="w-3/4 mx-auto border-solid border-2 border-orange-400 rounded p-4">
-        <table class="table-auto w-full mb-4 text-sm">
+    <div class="border-solid border-2 border-orange-400 rounded p-4 w-fit mx-auto">
+        <table class="mb-4 text-sm">
             <thead>
               <tr class="font-bold text-left">
-                  <td>Username</td>
-                  <td>Amount of achievements</td>
-                  <td>Country</td>
-                  <td>Last achievement update</td>
+                  <td class="w-64">Username</td>
+                  <td class="w-40">Achievements</td>
+                  <td class="w-40">Country</td>
+                  <td class="w-64">Last achievement</td>
               </tr>
             </thead>
             {% for highscore in highscores %}
