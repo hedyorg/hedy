@@ -76,7 +76,7 @@ class TestsLevel17(HedyTester):
     computerc = 'PC'
     userc = 'Hedy'
     print(f'''Pilihan komputer: {computerc}''')
-    if convert_numerals('Latin', userc) == convert_numerals('Latin', computerc) and str(userc) == convert_numerals('Latin', 'Hedy'):
+    if convert_numerals('Latin', userc) == convert_numerals('Latin', computerc) and convert_numerals('Latin', userc) == convert_numerals('Latin', 'Hedy'):
       print(f'''SERI''')
     else:
       print(f'''Komputer''')""")
@@ -116,9 +116,9 @@ class TestsLevel17(HedyTester):
     computerc = 'PC'
     userc = 'Hedy'
     print(f'''Pilihan komputer: {computerc}''')
-    if convert_numerals('Latin', userc) == convert_numerals('Latin', computerc) and str(userc) == convert_numerals('Latin', 'Hedy'):
+    if convert_numerals('Latin', userc) == convert_numerals('Latin', computerc) and convert_numerals('Latin', userc) == convert_numerals('Latin', 'Hedy'):
       print(f'''SERI''')
-    elif convert_numerals('Latin', userc) == convert_numerals('Latin', 'PC') and str(userc) == convert_numerals('Latin', 'Hedy'):
+    elif convert_numerals('Latin', userc) == convert_numerals('Latin', 'PC') and convert_numerals('Latin', userc) == convert_numerals('Latin', 'Hedy'):
       print(f'''HARI''')
     else:
       print(f'''Komputer''')""")
@@ -373,7 +373,7 @@ class TestsLevel17(HedyTester):
           leeftijd = float(leeftijd)
         except ValueError:
           pass
-      if convert_numerals('Latin', leeftijd).zfill(100){comparison}str(12).zfill(100):
+      if str(leeftijd).zfill(100){comparison}str(12).zfill(100):
         print(f'''Dan ben je jonger dan ik!''')""")
 
     self.single_level_tester(code=code, expected=expected)

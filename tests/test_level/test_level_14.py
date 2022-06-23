@@ -23,7 +23,7 @@ class TestsLevel14(HedyTester):
           leeftijd = float(leeftijd)
         except ValueError:
           pass
-      if convert_numerals('Latin', leeftijd).zfill(100){comparison}str(12).zfill(100):
+      if str(leeftijd).zfill(100){comparison}str(12).zfill(100):
         print(f'''Dan ben je jonger dan ik!''')""")
 
     self.multi_level_tester(
@@ -46,7 +46,7 @@ class TestsLevel14(HedyTester):
           name = float(name)
         except ValueError:
           pass
-      if convert_numerals('Latin', name).zfill(100)!='Hedy'.zfill(100):
+      if str(name).zfill(100)!='Hedy'.zfill(100):
         print(f'''meh''')""")
 
     self.multi_level_tester(
@@ -71,7 +71,7 @@ class TestsLevel14(HedyTester):
           v6cdeb9dc4e33aa47ac927755899137f2 = float(v6cdeb9dc4e33aa47ac927755899137f2)
         except ValueError:
           pass
-      if convert_numerals('Latin', v6cdeb9dc4e33aa47ac927755899137f2).zfill(100)>str(12).zfill(100):
+      if str(v6cdeb9dc4e33aa47ac927755899137f2).zfill(100)>str(12).zfill(100):
         print(f'''आप मुझसे छोटे हैं!''')
       else:
         print(f'''आप मुझसे बड़े हैं!''')""")
@@ -125,7 +125,7 @@ class TestsLevel14(HedyTester):
           leeftijd = float(leeftijd)
         except ValueError:
           pass
-      if convert_numerals('Latin', leeftijd).zfill(100){comparison}str(12).zfill(100):
+      if str(leeftijd).zfill(100){comparison}str(12).zfill(100):
         print(f'''Dan ben je jonger dan ik!''')
       else:
         print(f'''Dan ben je ouder dan ik!''')""")
@@ -151,7 +151,7 @@ class TestsLevel14(HedyTester):
         leeftijd = float(leeftijd)
       except ValueError:
         pass
-    if convert_numerals('Latin', leeftijd).zfill(100){comparison}str(12).zfill(100):
+    if str(leeftijd).zfill(100){comparison}str(12).zfill(100):
       print(f'''Dan ben je jonger dan ik!''')""")
 
     self.multi_level_tester(
@@ -302,9 +302,9 @@ class TestsLevel14(HedyTester):
           leeftijd = float(leeftijd)
         except ValueError:
           pass
-      if convert_numerals('Latin', leeftijd).zfill(100){comparison}str(12).zfill(100) or str(leeftijd).zfill(100){comparison}str(15).zfill(100):
+      if str(leeftijd).zfill(100){comparison}str(12).zfill(100) or str(leeftijd).zfill(100){comparison}str(15).zfill(100):
         print(f'''Dan ben je jonger dan ik!''')
-      if convert_numerals('Latin', leeftijd).zfill(100){comparison}str(12).zfill(100) and str(leeftijd).zfill(100){comparison}str(15).zfill(100):
+      if str(leeftijd).zfill(100){comparison}str(12).zfill(100) and str(leeftijd).zfill(100){comparison}str(15).zfill(100):
         print(f'''Some other string!''')""")
 
     self.multi_level_tester(

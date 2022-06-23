@@ -200,7 +200,7 @@ class TestsLevel16(HedyTester):
         expected = textwrap.dedent(f"""\
             balletje = 0
             bingo_getallen = [11, 17, 21]
-            if convert_numerals('Latin', balletje).zfill(100){comparison}str(bingo_getallen[1-1]).zfill(100):
+            if str(balletje).zfill(100){comparison}str(bingo_getallen[1-1]).zfill(100):
               print(f'''ja''')""")
 
         self.single_level_tester(
