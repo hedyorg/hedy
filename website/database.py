@@ -241,6 +241,10 @@ class Database:
         if filter == "global":
             profiles = self.get_all_public_profiles()
         elif filter == "country":
+            for profile in profiles:
+                if not profile.get('country'):
+                    country = self.user_by_username(profile.get('username'), {}).get('country')
+
             profiles = [x for x in self.get_all_public_profiles() if x.get('country') == filter_value]
         elif filter == "class":
             Class = self.get_class(filter_value)
@@ -248,6 +252,11 @@ class Database:
                 profile = self.get_public_profile_settings(student)
                 if profile:
                     profiles.append(profile)
+
+        for profile in profiles:
+            # If the achievements counter is not yet stored on the public profile -> fix manually
+            if not profile.get('achievements'):
+                self.get_all_achievements(profile.get('username'))
 
         profiles = sorted(profiles, key=lambda d: d.get('achievements', 0))[:50]  # Only return the top 50
         return profiles
@@ -467,6 +476,16 @@ class Database:
     def update_public_profile(self, username, data):
         data['username'] = username
         PUBLIC_PROFILES.put(data)
+
+    def update_achievements_public_profile(self, username, achievements):
+        data = PUBLIC_PROFILES.get({'username': username})
+        data['achievements'] = achievements
+        self.update_public_profile(username, data)
+
+    def add_country_public_profile(self, username, country):
+        data = PUBLIC_PROFILES.get({'username': username})
+        data['country'] = country
+        self.update_public_profile(username, data)
 
     def set_favourite_program(self, username, program_id):
         # We can only set a favourite program is there is already a public profile
