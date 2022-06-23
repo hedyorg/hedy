@@ -46,6 +46,11 @@ export function loadQuestQuestion(level: number, question: number) {
             showQuestionCode(response.code);
         } else {
             $('#quiz_question_code_container').hide();
+            if (response.output) {
+                showQuestionOutput(response.output);
+            } else {
+                $('#quiz_question_output_container').hide();
+            }
         }
         showAnswers(response.mp_choice_options, level, question);
         highlightQuestionBar(question);
@@ -66,6 +71,11 @@ function showQuestionCode(code: string) {
     editor.setValue(code);
     editor.clearSelection(); // Make sure the ace editor is not selected
     editor.renderer.$cursorLayer.element.style.display = "none"; // Also remove the cursor
+}
+
+function showQuestionOutput(output: string) {
+    $('#quiz_question_output_container').empty();
+    $('<span>').text(output).appendTo('#quiz_question_output_container');
 }
 
 function showAnswers(options: any, level: number, question: number) {
