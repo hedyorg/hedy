@@ -238,13 +238,14 @@ class Database:
 
     def get_highscores(self, filter, filter_value=None):
         profiles = []
+
         if filter == "global":
             profiles = self.get_all_public_profiles()
         elif filter == "country":
             for profile in profiles:
                 if not profile.get('country'):
                     country = self.user_by_username(profile.get('username'), {}).get('country', None)
-                    self.add_country_public_profile(profile.get('username'), country)
+                    self.update_country_public_profile(profile.get('username'), country)
                     profile['country'] = country
             profiles = [x for x in self.get_all_public_profiles() if x.get('country') == filter_value]
         elif filter == "class":
@@ -260,7 +261,7 @@ class Database:
                 self.update_achievements_public_profile(profile.get('username'), achievements if achievements else 0)
                 profile['achievements'] = achievements if achievements else 0
 
-        profiles = sorted(profiles, key=lambda d: d.get('achievements', 0))[:50]  # Only return the top 50
+        profiles = sorted(profiles, key=lambda d: d.get('achievements'))[:50]  # Only return the top 50
         return profiles
 
 
@@ -484,7 +485,7 @@ class Database:
         data['achievements'] = achievements
         self.update_public_profile(username, data)
 
-    def add_country_public_profile(self, username, country):
+    def update_country_public_profile(self, username, country):
         data = PUBLIC_PROFILES.get({'username': username})
         data['country'] = country
         self.update_public_profile(username, data)
