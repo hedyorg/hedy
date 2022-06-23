@@ -9,9 +9,9 @@
         <button class="green-btn">{{_('your_class')}}</button>
     </div>
     <div class="border border-2 border-gray-500 rounded-lg">
-        <table>
-            Dit is een tabel
-        </table>
+        {% for highscore in highscores %}
+            <p>{{ highscore }}</p>
+        {% endfor %}
     </div>
 </div>
 {% endblock %}

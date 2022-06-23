@@ -1196,7 +1196,7 @@ def get_highscores_page(user, filter):
         country = DATABASE.user_by_username(user['username']).get('country', "GB")
         highscores = DATABASE.get_highscores(filter, country)
     elif filter == "class":
-        class_id = DATABASE.user_by_username(user['username']).get('classes', [])[0]
+        class_id = list(DATABASE.user_by_username(user['username']).get('classes', set()))[0]
         highscores = DATABASE.get_highscores(filter, class_id)
 
     return render_template('highscores.html', highscores=highscores)

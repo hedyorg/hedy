@@ -261,8 +261,8 @@ class Database:
                 self.update_achievements_public_profile(profile.get('username'), len(achievements) if achievements else 0)
                 profile['achievements'] = achievements if achievements else 0
 
-        profiles = sorted(profiles, key=lambda d: d.get('achievements'))[:50]  # Only return the top 50
-        return profiles
+        profiles = sorted(profiles, key=lambda d: d.get('achievements'))
+        return profiles[:50]
 
 
     def get_all_hedy_choices(self):
