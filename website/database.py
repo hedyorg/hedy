@@ -261,7 +261,9 @@ class Database:
                 self.update_achievements_public_profile(profile.get('username'), len(achievements) if achievements else 0)
                 profile['achievements'] = achievements if achievements else 0
 
-        profiles = sorted(profiles, key=lambda d: d.get('achievements'))
+        # First sort by amount of achievements, then by time of getting them -> high/low then low/high
+        profiles = sorted(profiles, key=lambda d: d.get('achievements'), reverse=True)
+        profiles = sorted(profiles, key=lambda d: d.get('last_achievement'))
         return profiles[:50]
 
 

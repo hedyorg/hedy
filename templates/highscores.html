@@ -8,10 +8,25 @@
         <button class="green-btn">{{_('your_country')}}</button>
         <button class="green-btn">{{_('your_class')}}</button>
     </div>
-    <div class="border border-2 border-gray-500 rounded-lg">
-        {% for highscore in highscores %}
-            <p>{{ highscore }}</p>
-        {% endfor %}
+    <div class="w-3/4 mx-auto border-solid border-2 border-orange-400 rounded p-4">
+        <table class="table-auto w-full mb-4 text-sm">
+            <thead>
+              <tr class="font-bold text-left">
+                  <td>Username</td>
+                  <td>Amount of achievements</td>
+                  <td>Country</td>
+                  <td>Last achievement update</td>
+              </tr>
+            </thead>
+            {% for highscore in highscores %}
+                <tr>
+                    <td>{{highscore.username}}</td>
+                    <td>{{highscore.achievements}}</td>
+                    <td>{{highscore.country}}</td>
+                    <td>{{highscore.last_achievement}}</td>
+                </tr>
+            {% endfor %}
+        </table>
     </div>
 </div>
 {% endblock %}

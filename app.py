@@ -1,4 +1,6 @@
 # coding=utf-8
+import copy
+
 from website import auth, parsons
 from website import statistics
 from website import quiz
@@ -1199,6 +1201,11 @@ def get_highscores_page(user, filter):
         class_id = list(DATABASE.user_by_username(user['username']).get('classes', set()))[0]
         highscores = DATABASE.get_highscores(filter, class_id)
 
+    # We have to make the data a bit nicer if possible
+    highscores = copy.deepcopy(highscores)
+    for highscore in highscores:
+        highscore['country'] = "-" if not highscore.get('country') else highscore.get('country')
+        highscore['last_achievement'] = utils.delta_timestamp(highscore.get('last_achievement'))
     return render_template('highscores.html', highscores=highscores)
 
 
