@@ -236,10 +236,7 @@ class Database:
             programs = [x for x in programs if x.get('adventure_name') == adventure]
         return programs[-48:]
 
-    def get_highscores(self, filter, filter_value):
-        # Manually retrieving the country for each user is (very!) expensive
-        # Most efficiently is probably saving the achievement count on the user profile as well
-        # As we already have all relevant information stored there
+    def get_highscores(self, filter, filter_value=None):
         profiles = []
         if filter == "global":
             profiles = self.get_all_public_profiles()
