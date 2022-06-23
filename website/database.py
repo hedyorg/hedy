@@ -487,8 +487,11 @@ class Database:
 
     def update_country_public_profile(self, username, country):
         data = PUBLIC_PROFILES.get({'username': username})
-        data['country'] = country
-        self.update_public_profile(username, data)
+        # If there is no data -> we might have made this request from the /update_profile route without a public profile
+        # In this case don't do anything
+        if data:
+            data['country'] = country
+            self.update_public_profile(username, data)
 
     def set_favourite_program(self, username, program_id):
         # We can only set a favourite program is there is already a public profile
