@@ -20,7 +20,7 @@
             </thead>
             {% for highscore in highscores %}
                 <tr>
-                    <td>{{highscore.username}}</td>
+                    <td><a href="/user/{{highscore.username}}">{{highscore.username}}</a></td>
                     <td>{{highscore.achievements}}</td>
                     <td>{{highscore.country}}</td>
                     <td>{{highscore.last_achievement}}</td>
