@@ -76,6 +76,7 @@ function showQuestionCode(code: string) {
 function showQuestionOutput(output: string) {
     $('#quiz_question_output_container').empty();
     $('<span>').text(output).appendTo('#quiz_question_output_container');
+    $('#quiz_question_output_container').show();
 }
 
 function showAnswers(options: any, level: number, question: number) {
