@@ -355,21 +355,21 @@ adventures:
             5:
                 story_text: "## Let's draw\nIn level 5 you can make a choice with `{if}`. For example between different types of figures.\n"
                 example_code: "```\n{print} 'Drawing Figures'\nfigure {is} {ask} 'Do you want a square or a triangle?'\n{if} figure {is} triangle angle {is} 120\n{else} angle {is} 90\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n```\n"
-                start_code: "{print} 'Drawing Figures'\nfigure {is} {ask} 'Do you want a square or a triangle?'\n{if} figure {is} triangle angle {is} 120 {else} angle {is} 90\n{turn} angle\n{forward} 25\n"
+                start_code: "{print} '绘图'\n图 {is} {ask} '你想要一个正方形还是三角形？'\n{if} 图 {is} 三角形角度 {is} 120 {else} 角度 {is} 90\n{turn} 角度\n{forward} 25"
             8:
                 story_text: "## Let's draw\nNow that we can repeat several lines, we can make figures more easily.\nWe only have to set the angle once and then use that variable in the `{repeat}`.\n"
                 example_code: "```\nangle = 90\n{repeat} 10 {times}\n    {turn} angle\n    {forward} 50\n```\n"
                 example_code_2: "```\nangles = {ask} 'How many angles should I draw?'\nangle = 360 / angles\n{repeat} angle {times}\n    {turn} _\n    {forward} _\n```\n"
                 story_text_2: "## Interaction\nAlso, we can now improve the program that draws different figures.\nCan you figure out how far the turtle has to turn here? Finish the code and you can draw any polygon you'd like!\n"
-                start_code: "hoeken = {ask} 'How many angles should I draw?'\n"
+                start_code: "angles = {ask} '我应该画多少个角？ '"
             7:
                 story_text: "## Let's draw\nIn this level you can repeat one line of code with `{repeat}`.\n"
                 example_code: "```\n{print} 'Draw figures'\n{repeat} 3 {times} {forward} 10\n```\n"
-                start_code: "{print} 'Draw figures'\n{repeat} 3 {times} {forward} 10\n"
+                start_code: "{print} '绘图'\n{repeat} 3 {times} {forward} 10"
             6:
                 story_text: "## Let's draw\nIn this level you can use calculations to draw different figures.\nYou may have learned in school that turning a full circle is 360 degrees. If not, now you know!\nThat's why you also use 90 degrees for a square. 360 divided by 4 is 90.\nNow that we can do math with Hedy, we can draw all the figures we want!\n"
                 example_code: "```\nangles = {ask} 'How many angles do you want?'\nangle = 360 / angles\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n```\n"
-                start_code: "{print} 'Drawing figures'\n"
+                start_code: "{print} '绘图'"
         name: Turtle
         description: Make your own drawing
         default_save_name: turtle
@@ -1335,7 +1335,7 @@ adventures:
                 story_text: "## What's next?\nIn the previous levels you've already learned to use `{at} {random}` which made your games different every time you ran the code.\nBut it's not really interactive, the player doesn't have any influence on what happens in the game.\n\nIn the next level you'll learn the `{if}` command, that allows you to give different responses in your program. This way you can program a secret password for your computer for example.\nSo let's take a peak!\n\n```\npassword {is} {ask} 'What is the correct password?'\n```\n"
                 start_code: "{print} 'Lets go to the next level!'"
             5:
-                story_text: "## What's next?\nNow you've reached the end of this level, so you have learned `{ask}` and `{if}`. For example you can {ask} guests what they would like to eat.\nWhat you can't yet do though, is calculate the price for everyone's dinner.\n\nThe next level makes it possible to use addition, subtraction and multiplication in your programs. This way you can calculate the prices in your restaurant, but you could also add a secret code to give your friends and family a discount.\nAnother option in the next level is programming your own maths game, for your little brother or sister to practice their multiplications.\nGo see for yourself in the next level!\n```\n{print} 'Welcome at McHedy'\norder {is} {ask} 'What would you like to eat?'\n{print} 'You would like ' order\n{if} order {is} hamburger price {is} 5\n{if} order {is} fries price {is} 2\ndrinks {is} {ask} 'What would you like to drink?'\n{print} 'You would like ' drinks\n{print} 'That will be ' price ' dollars for your ' order ' please'\n{print} 'The drinks are free in this level because Hedy cant calculate the price yet...'\n```\n"
+                story_text: "## 下一个级别是什么？\n现在你已经达到了这一级的终点，所以你已经学习了`{ask}`和`{if}`。例如，您可以{ask}客人想吃什么。\n但是，您还不能计算出每个人晚餐的费用。\n\n在下一级中，我们可以在程序中使用加法，减法和乘法。通过这种方式，您可以计算每个人每一餐的费用，但您也可以添加一个折扣码，为您的朋友和家人提供折扣。\n在下一个级别中，我们的另一个选择是编写自己的数学游戏，让你的弟弟或妹妹学习乘法。\n去看看下一个级别！\n"
                 start_code: "{print} 'On to the next level!'"
                 example_code: "## Free drinks!\n```\n{print} 'Welcome at McHedy'\norder {is} {ask} 'What would you like to eat?'\n{print} 'You would like ' order\n{if} order {is} hamburger price {is} 5\n{if} order {is} fries price {is} 2\ndrinks {is} {ask} 'What would you like to drink?'\n{print} 'You would like ' drinks\n{print} 'That will be ' price ' dollars for your ' order ' please'\n{print} 'The drinks are free in this level because Hedy cant calculate the price yet...'\n```\n"
             8:
