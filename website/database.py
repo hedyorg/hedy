@@ -236,13 +236,25 @@ class Database:
             programs = [x for x in programs if x.get('adventure_name') == adventure]
         return programs[-48:]
 
-    def get_highscores(self, filter):
+    def get_highscores(self, filter, filter_value):
         # Manually retrieving the country for each user is (very!) expensive
         # Most efficiently is probably saving the achievement count on the user profile as well
         # As we already have all relevant information stored there
+        profiles = []
         if filter == "global":
-            achievements = self.get_all_achievements()
-        return achievements
+            profiles = self.get_all_public_profiles()
+        elif filter == "country":
+            profiles = [x for x in self.get_all_public_profiles() if x.get('country') == filter_value]
+        elif filter == "class":
+            Class = self.get_class(filter_value)
+            for student in Class.get('students', []):
+                profile = self.get_public_profile_settings(student)
+                if profile:
+                    profiles.append(profile)
+
+        profiles = sorted(profiles, key=lambda d: d.get('achievements', 0))[:50]  # Only return the top 50
+        return profiles
+
 
     def get_all_hedy_choices(self):
         return PROGRAMS.get_many({'hedy_choice': 1}, sort_key='date', reverse=True)
@@ -473,6 +485,9 @@ class Database:
 
     def forget_public_profile(self, username):
         PUBLIC_PROFILES.delete({'username': username})
+
+    def get_all_public_profiles(self):
+        return PUBLIC_PROFILES.scan()
 
     def store_parsons(self, attempt):
         PARSONS.create(attempt)
