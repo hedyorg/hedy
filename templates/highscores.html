@@ -12,10 +12,10 @@
         <table class="mb-4 text-sm">
             <thead>
               <tr class="font-bold text-left">
-                  <td class="w-64">Username</td>
-                  <td class="w-40">Achievements</td>
-                  <td class="w-40">Country</td>
-                  <td class="w-64">Last achievement</td>
+                  <td class="w-64">{{_('username')}}</td>
+                  <td class="w-40">{{_('achievements')[0]|upper}}{{_('achievements')[1:]}}</td>
+                  <td class="w-40">{{_('country')}}</td>
+                  <td class="w-64">{{_('last_achievement')}}</td>
               </tr>
             </thead>
             {% for highscore in highscores %}
