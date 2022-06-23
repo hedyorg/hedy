@@ -43,6 +43,7 @@ export function loadQuestQuestion(level: number, question: number) {
         $('#quiz_container').show();
         showQuestion(response.question_text);
         if (response.code) {
+            $('#quiz_question_output_container').hide();
             showQuestionCode(response.code);
         } else {
             $('#quiz_question_code_container').hide();
