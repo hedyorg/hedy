@@ -25,7 +25,7 @@
                     <td><a href="/user/{{highscore.username}}">{{highscore.username}}</a></td>
                     <td>{{highscore.achievements}}</td>
                     <td>{{highscore.country}}</td>
-                    <td>{{highscore.last_achievement}}</td>
+                    <td>{{_('ago')|replace("{timestamp}", highscore.last_achievement)}}</td>
                 </tr>
             {% endfor %}
         </table>
