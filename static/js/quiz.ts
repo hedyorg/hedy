@@ -75,7 +75,8 @@ function showQuestionCode(code: string) {
 
 function showQuestionOutput(output: string) {
     $('#quiz_question_output_container').empty();
-    $('<span>').text(output).appendTo('#quiz_question_output_container');
+    const color = "white";
+    $('<span class="whitespace-pre-wrap">').text(output).css({color}).appendTo('#quiz_question_output_container');
     $('#quiz_question_output_container').show();
 }
 
