@@ -239,12 +239,12 @@ class Database:
     def get_highscores(self, filter, filter_value=None):
         profiles = []
 
-        if filter == "global":
+        if filter == "global" or filter == "country":
             profiles = self.get_all_public_profiles()
-        elif filter == "country":
+        if filter == "country":
             for profile in profiles:
                 if not profile.get('country'):
-                    country = self.user_by_username(profile.get('username'), {}).get('country', None)
+                    country = self.user_by_username(profile.get('username')).get('country', None)
                     self.update_country_public_profile(profile.get('username'), country)
                     profile['country'] = country
             profiles = [x for x in self.get_all_public_profiles() if x.get('country') == filter_value]
@@ -257,8 +257,8 @@ class Database:
 
         for profile in profiles:
             if not profile.get('achievements'):
-                achievements = self.get_all_achievements(profile.get('username'))
-                self.update_achievements_public_profile(profile.get('username'), achievements if achievements else 0)
+                achievements = self.achievements_by_username(profile.get('username'))
+                self.update_achievements_public_profile(profile.get('username'), len(achievements) if achievements else 0)
                 profile['achievements'] = achievements if achievements else 0
 
         profiles = sorted(profiles, key=lambda d: d.get('achievements'))[:50]  # Only return the top 50
@@ -482,8 +482,11 @@ class Database:
 
     def update_achievements_public_profile(self, username, achievements):
         data = PUBLIC_PROFILES.get({'username': username})
-        data['achievements'] = achievements
-        self.update_public_profile(username, data)
+        # In the case that we make this call but there is no public profile -> don't do anything
+        if data:
+            data['achievements'] = achievements
+            data['last_achievement'] = timems()
+            self.update_public_profile(username, data)
 
     def update_country_public_profile(self, username, country):
         data = PUBLIC_PROFILES.get({'username': username})
