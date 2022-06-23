@@ -7,14 +7,10 @@ levels:
                 Hij vraagt wat voor taart je wil bestellen.
                 Daarna wordt je bestelling klaargezet.
             code_lines:
-                A: |
-                    {print} Welkom bij bakkerij Hedy!
-                B: |
-                    {ask} Wat voor taart wilt u bestellen?
-                C: |
-                    {echo} Dus u wilt
-                D: |
-                    {print} De bestelling wordt klaargezet!
+                A: "{print} Welkom bij bakkerij Hedy!"
+                B: "{ask} Wat voor taart wilt u bestellen?"
+                C: "{echo} Dus u wilt"
+                D: "{print} De bestelling wordt klaargezet!"
         2:
             story: "You're at the DJ Booth requesting a song. Create a program that asks if you are ready to party and then asks which song you would like to hear.\n"
             code_lines:
@@ -28,14 +24,10 @@ levels:
                 Jij en je vrienden gaan Netflix kijken.
                 Laat zien welke film jullie gaan kijken en wens de kijkers veel plezier!
             code_lines:
-                A: |
-                    {print} Het is tijd voor een avondje Netflix
-                B: |
-                    film {is} Sonic the Hedgehog 2
-                C: |
-                    {print} We gaan kijken naar film
-                D: |
-                    {print} Heel veel plezier!
+                A: "{print} Het is tijd voor een avondje Netflix"
+                B: "film {is} Sonic the Hedgehog 2"
+                C: "{print} We gaan kijken naar film"
+                D: "{print} Heel veel plezier!"
         2:
             story: "This is the webshop of a toystore. Create a program where costumers can add an item to their shopping cart.\n"
             code_lines:
@@ -52,16 +44,11 @@ levels:
                 Ben jij een Griffoendor, Huffelpuf, Zwadderich of Ravenklauw. 
                 Laat het programma even wachten voordat het onthult bij welke afdeling jij mag.
             code_lines:
-                A: |
-                    {print} Het nieuwe schooljaar op Zweinstein gaat van start!
-                B: |
-                    {print} De sorteerhoed is er klaar voor om jou in te delen
-                C: |
-                    afdelingen {is} Griffoendor, Huffelpuf, Zwadderich, Ravenklauw
-                D: |
-                    {sleep} 2
-                E: |
-                    {print} het wordt afdelingen {at} {random}
+                A: "{print} Het nieuwe schooljaar op Zweinstein gaat van start!"
+                B: "{print} De sorteerhoed is er klaar voor om jou in te delen"
+                C: "afdelingen {is} Griffoendor, Huffelpuf, Zwadderich, Ravenklauw"
+                D: "{sleep} 2"
+                E: "{print} het wordt afdelingen {at} {random}"
         2:
             story: "Create a program that chooses a random meal for you. Make a list of food and a list of toppings and let the program decide what you'll have!\n"
             code_lines:
@@ -77,14 +64,10 @@ levels:
                 Maak een programma die jouw eerste Pokémon uitkiest.
                 Laat het programma weer even wachten voordat hij jouw eerste pokémon onthult.
             code_lines:
-                A: |
-                    pokemons {is} Pikachu, Charmander, Bulbasaur, Squirtle
-                B: |
-                    {print} 'Dit wordt jouw eerste Pokémon!'
-                C: |
-                    {sleep}
-                D: |
-                    {print} pokemons {at} {random}
+                A: "pokemons {is} Pikachu, Charmander, Bulbasaur, Squirtle"
+                B: "{print} 'Dit wordt jouw eerste Pokémon!'"
+                C: "{sleep}"
+                D: "{print} pokemons {at} {random}"
         2:
             story: "Create a lottery that lets you choose an extra price that you might win.\n"
             code_lines:
@@ -98,16 +81,11 @@ levels:
                 Maak een programma die kijkt of jouw lievelingsfilm al in het lijstje van de computer staat opgeslagen.
                 Zo ja dan print je dat je een goede smaak hebt, zo nee dan voegen we hem graag toe aan de lijst.
             code_lines:
-                A: |
-                    favoriete_film {is} Batman, Spiderman, The Avengers, Jurassic Park
-                B: |
-                    film {is} {ask} 'Wat is jouw lievelingsfilm?'
-                C: |
-                    {if} film {in} favoriete_film {print} 'Jij hebt een goede smaak!'
-                D: |
-                    {else} {print} 'Wat jammer dat jouw favoriete film niet in het lijstje staat, we voegen hem toe aan de lijst!'
-                E: |
-                    {add} film {to_list} favoriete_film
+                A: "favoriete_film {is} Batman, Spiderman, The Avengers, Jurassic Park"
+                B: "film {is} {ask} 'Wat is jouw lievelingsfilm?'"
+                C: "{if} film {in} favoriete_film {print} 'Jij hebt een goede smaak!'"
+                D: "{else} {print} 'Wat jammer dat jouw favoriete film niet in het lijstje staat, we voegen hem toe aan de lijst!'"
+                E: "{add} film {to_list} favoriete_film"
         2:
             story: "Create a maths game.\n"
             code_lines:
@@ -123,16 +101,11 @@ levels:
                 Bereken eerst de hondenjaren en dan de kattenjaren.
                 Laat de gebruiker de nieuwe leeftijden zien!
             code_lines:
-                A: |
-                    leeftijd = {ask} 'Hoe oud ben je?'
-                B: |
-                    hond_leeftijd = leeftijd * 7
-                C: |
-                    kat_leeftijd = leeftijd * 5
-                D: |
-                    {print} 'In hondenjaren ben jij ' hond_leeftijd ' jaar oud.'
-                E: |
-                    {print} 'In kattenjaren ben jij ' kat_leeftijd ' jaar oud.'
+                A: "leeftijd = {ask} 'Hoe oud ben je?'"
+                B: "hond_leeftijd = leeftijd * 7"
+                C: "kat_leeftijd = leeftijd * 5"
+                D: "{print} 'In hondenjaren ben jij ' hond_leeftijd ' jaar oud.'"
+                E: "{print} 'In kattenjaren ben jij ' kat_leeftijd ' jaar oud.'"
         2:
             story: "Create a program that helps you calculate how many cakes you should buy for your birthday party.\n"
             code_lines:
@@ -147,20 +120,13 @@ levels:
                 Maak een programma die beslist welke twee spelers als eerst tegen elkaar mogen schaken.
                 Print eerst de twee spelers die tegen elkaar spelen en print vervolgens de tegen wie de winnaar mag spelen.
             code_lines:
-                A: |
-                    spelers = Freek, Bart, Emma
-                B: |
-                    speler1 = spelers {at} {random}
-                C: |
-                    speler2 = spelers {at} {random}
-                D: |
-                    {print} speler1 ' speelt eerst tegen ' speler2
-                E: |
-                    {remove} speler1 {from} spelers
-                F: |
-                    {remove} speler2 {from} spelers
-                G: |
-                    {print} 'De winnaar speelt tegen ' spelers {at} {random}
+                A: "spelers = Freek, Bart, Emma"
+                B: "speler1 = spelers {at} {random}"
+                C: "speler2 = spelers {at} {random}"
+                D: "{print} speler1 ' speelt eerst tegen ' speler2"
+                E: "{remove} speler1 {from} spelers"
+                F: "{remove} speler2 {from} spelers"
+                G: "{print} 'De winnaar speelt tegen ' spelers {at} {random}"
         2:
             story: "Create the song 'The wheels on the bus go round and round'\n"
             code_lines:
@@ -174,18 +140,13 @@ levels:
                 Jij en je vrienden spelen Pokémon Go! Maak een programma die bepaalt in welke kleur team je komt
                 rood, geel of blauw!
             code_lines:
-                A: "|
-                    "kleuren = rood, blauw, geel
-                B: |
-                    {print} 'Rood of blauw?'
-                C: |
-                    {print} 'Jij komt bij team '
-                D: |
-                    {repeat} 5 {times}
-                E: "    {print} kleuren {at} {random}"
+                A: "teams = rood, blauw, geel"
+                B: "{print} 'Rood of blauw?'"
+                C: "{print} 'Jij komt bij team '"
+                D: "{repeat} 5 {times}"
+                E: "    {print} teams {at} {random}"
                 F: "    sleep 2"
-                G: |
-                    {print} kleuren {at} random '!'
+                G: "{print} teams {at} random '!'"
         2:
             story: "Create a game of hide and seek.\n"
             code_lines:
