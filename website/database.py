@@ -243,8 +243,9 @@ class Database:
         elif filter == "country":
             for profile in profiles:
                 if not profile.get('country'):
-                    country = self.user_by_username(profile.get('username'), {}).get('country')
-
+                    country = self.user_by_username(profile.get('username'), {}).get('country', None)
+                    self.add_country_public_profile(profile.get('username'), country)
+                    profile['country'] = country
             profiles = [x for x in self.get_all_public_profiles() if x.get('country') == filter_value]
         elif filter == "class":
             Class = self.get_class(filter_value)
@@ -254,9 +255,10 @@ class Database:
                     profiles.append(profile)
 
         for profile in profiles:
-            # If the achievements counter is not yet stored on the public profile -> fix manually
             if not profile.get('achievements'):
-                self.get_all_achievements(profile.get('username'))
+                achievements = self.get_all_achievements(profile.get('username'))
+                self.update_achievements_public_profile(profile.get('username'), achievements if achievements else 0)
+                profile['achievements'] = achievements if achievements else 0
 
         profiles = sorted(profiles, key=lambda d: d.get('achievements', 0))[:50]  # Only return the top 50
         return profiles
