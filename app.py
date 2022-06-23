@@ -1192,21 +1192,25 @@ def explore():
 def get_highscores_page(user, filter):
     if filter not in ["global", "country", "class"]:
         return utils.error_page(error=404, ui_message=gettext('page_not_found'))
+
+    classes = list(DATABASE.user_by_username(user['username']).get('classes', set()))
     if filter == "global":
         highscores = DATABASE.get_highscores(filter)
     elif filter == "country":
         country = DATABASE.user_by_username(user['username']).get('country', "GB")
         highscores = DATABASE.get_highscores(filter, country)
     elif filter == "class":
-        class_id = list(DATABASE.user_by_username(user['username']).get('classes', set()))[0]
-        highscores = DATABASE.get_highscores(filter, class_id)
+        # Can't get a class highscore if you're not in a class!
+        if not classes:
+            return utils.error_page(error=403, ui_message=gettext('no_such_class'))
+        highscores = DATABASE.get_highscores(filter, classes[0])
 
     # We have to make the data a bit nicer if possible
     highscores = copy.deepcopy(highscores)
     for highscore in highscores:
         highscore['country'] = "-" if not highscore.get('country') else highscore.get('country')
         highscore['last_achievement'] = utils.delta_timestamp(highscore.get('last_achievement'))
-    return render_template('highscores.html', highscores=highscores)
+    return render_template('highscores.html', highscores=highscores, in_class = True if classes else False)
 
 
 @app.route('/change_language', methods=['POST'])
