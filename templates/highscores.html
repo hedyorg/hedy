@@ -17,21 +17,21 @@
     <div class="border-solid border-2 border-orange-400 rounded p-4 w-fit mx-auto">
         <table class="mb-4 text-sm">
             <thead>
-              <tr class="font-bold text-left">
-                  <td class="w-12"></td>
-                  <td class="w-64">{{_('username')}}</td>
-                  <td class="w-40">{{_('achievements')[0]|upper}}{{_('achievements')[1:]}}</td>
-                  <td class="w-64">{{_('country')}}</td>
-                  <td class="w-64">{{_('last_achievement')}}</td>
+              <tr class="font-bold text-left border-b border-gray-500">
+                  <td class="w-10 text-center"></td>
+                  <td class="w-64 px-2">{{_('username')}}</td>
+                  <td class="w-40 px-2">{{_('achievements')[0]|upper}}{{_('achievements')[1:]}}</td>
+                  <td class="w-64 px-2">{{_('country')}}</td>
+                  <td class="w-64 px-2">{{_('last_achievement')}}</td>
               </tr>
             </thead>
             {% for highscore in highscores %}
                 <tr>
-                    <td class="font-bold">{{ loop.index }}.</td>
-                    <td><a href="/user/{{highscore.username}}">{{highscore.username}}</a></td>
-                    <td>{{highscore.achievements}}</td>
-                    <td>{{highscore.country}}</td>
-                    <td>{{_('ago')|replace("{timestamp}", highscore.last_achievement)}}</td>
+                    <td class="font-bold border-r border-gray-500 text-center">{{ loop.index }}.</td>
+                    <td class="px-2"><a href="/user/{{highscore.username}}">{{highscore.username}}</a></td>
+                    <td class="px-2">{{highscore.achievements}}</td>
+                    <td class="px-2">{{highscore.country}}</td>
+                    <td class="px-2">{{_('ago')|replace("{timestamp}", highscore.last_achievement)}}</td>
                 </tr>
             {% endfor %}
         </table>
