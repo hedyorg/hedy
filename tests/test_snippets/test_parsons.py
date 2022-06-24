@@ -27,6 +27,7 @@ def collect_snippets(path):
                     for exercise_id, exercise in levels[level]:
                         lines = exercise.get('code_lines')
                         code = ""
+                        # The lines have a letter: A: ..., B:...., C:....
                         for letter in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
                             line = lines.get(letter)
                             if line:
@@ -70,10 +71,11 @@ def translate_keywords_in_snippets(snippets):
 Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/parsons')]
 Hedy_snippets = translate_keywords_in_snippets(Hedy_snippets)
 
-class TestsCommandPrograms(unittest.TestCase):
+
+class TestsParsonsPrograms(unittest.TestCase):
 
     @parameterized.expand(Hedy_snippets)
-    def test_defaults(self, name, snippet):
+    def test_parsons(self, name, snippet):
         if snippet is not None:
             print(snippet.code)
             result = HedyTester.validate_Hedy_code(snippet)
