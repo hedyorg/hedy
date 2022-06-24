@@ -18,13 +18,13 @@ def collect_snippets(path):
         yaml = YamlFile.for_file(file)
         levels = yaml.get('levels')
 
-        for level in levels:
+        for level, content in levels.items():
             level_number = int(level)
             if level_number > hedy.HEDY_MAX_LEVEL:
                 print('content above max level!')
             else:
                 try:
-                    for exercise_id, exercise in levels[level]:
+                    for exercise_id, exercise in levels[level].items():
                         lines = exercise.get('code_lines')
                         code = ""
                         # The lines have a letter: A: ..., B:...., C:....
