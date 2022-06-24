@@ -5,12 +5,12 @@
     <h1 class="text-center mt-4">Highscores</h1>
     {% if in_class or has_country %}
         <div class="flex flex-row gap-4 items-center justify-center">
-            <button class="green-btn" onclick="window.location.href = '/highscores/global'">{{_('whole_world')}}</button>
+            <button class="{% if filter == "global" %}blue-btn{% else %}green-btn{% endif %}" onclick="window.location.href = '/highscores/global'">{{_('whole_world')}}</button>
             {% if has_country %}
-                <button class="green-btn" onclick="window.location.href = '/highscores/country'">{{_('your_country')}}</button>
+                <button class="{% if filter == "country" %}blue-btn{% else %}green-btn{% endif %}" onclick="window.location.href = '/highscores/country'">{{_('your_country')}}</button>
                 {% endif %}
             {% if in_class %}
-                <button class="green-btn" onclick="window.location.href = '/highscores/class'">{{_('your_class')}}</button>
+                <button class="{% if filter == "class" %}blue-btn{% else %}green-btn{% endif %}" onclick="window.location.href = '/highscores/class'">{{_('your_class')}}</button>
             {% endif %}
         </div>
     {% endif %}

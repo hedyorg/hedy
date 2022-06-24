@@ -1217,7 +1217,7 @@ def get_highscores_page(user, filter):
         highscore['country'] = "-" if not highscore.get('country') else highscore.get('country')
         highscore['last_achievement'] = utils.delta_timestamp(highscore.get('last_achievement'))
     return render_template('highscores.html', highscores=highscores, has_country=True if country else False,
-                           in_class=True if classes else False)
+                           filter=filter, in_class=True if classes else False)
 
 
 @app.route('/change_language', methods=['POST'])
