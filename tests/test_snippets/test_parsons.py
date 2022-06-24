@@ -34,7 +34,7 @@ def collect_snippets(path):
                                 code += line + "\n"
                             else:
                                 break
-                        Hedy_snippets.append(Snippet(filename=file, level=level, field_name=f"Parsons#{exercise}", code=code))
+                        Hedy_snippets.append(Snippet(filename=file, level=level, field_name=f"{exercise_id}", code=code))
                 except:
                     print(f'Problem reading commands yaml for {lang} level {level}')
 
