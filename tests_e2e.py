@@ -247,7 +247,7 @@ class TestPages(AuthHelper):
             for language in ALL_LANGUAGES.keys():
                 body['language'] = language
                 self.post_data('profile', body)
-                self.get_data("/highscore/" + filter)
+                self.get_data("/highscores/" + filter)
 
     def test_valid_class_highscore_page(self):
         # WHEN a teacher is logged in and create a class
@@ -260,14 +260,14 @@ class TestPages(AuthHelper):
         self.post_data('class/join', {'id': Class['id']}, expect_http_code=200)
 
         # THEN we can access the class highscore page
-        self.get_data("/highscore/class")
+        self.get_data("/highscores/class")
 
     def test_invalid_class_highscore_page(self):
         # WHEN a fresh user is not in a class
         self.given_fresh_user_is_logged_in()
 
         # THEN we can can't access the class highscore page
-        self.get_data("/highscore/class", expect_http_code=403)
+        self.get_data("/highscores/class", expect_http_code=403)
 
 
     def test_all_languages(self):
