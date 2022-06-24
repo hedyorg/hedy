@@ -18,6 +18,7 @@
         <table class="mb-4 text-sm">
             <thead>
               <tr class="font-bold text-left">
+                  <td class="w-12"></td>
                   <td class="w-64">{{_('username')}}</td>
                   <td class="w-40">{{_('achievements')[0]|upper}}{{_('achievements')[1:]}}</td>
                   <td class="w-64">{{_('country')}}</td>
@@ -26,6 +27,7 @@
             </thead>
             {% for highscore in highscores %}
                 <tr>
+                    <td class="font-bold">{{ loop.index }}.</td>
                     <td><a href="/user/{{highscore.username}}">{{highscore.username}}</a></td>
                     <td>{{highscore.achievements}}</td>
                     <td>{{highscore.country}}</td>
