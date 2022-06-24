@@ -243,11 +243,11 @@ class TestPages(AuthHelper):
         self.given_fresh_user_is_logged_in()
         body = {'email': self.user['email'], 'keyword_language': self.user['keyword_language']}
 
-        for filter in ["global", "country"]:
+        for filter in ["", "/country"]:
             for language in ALL_LANGUAGES.keys():
                 body['language'] = language
                 self.post_data('profile', body)
-                self.get_data("/highscores/" + filter)
+                self.get_data("/highscores" + filter)
 
     def test_valid_class_highscore_page(self):
         # WHEN a teacher is logged in and create a class

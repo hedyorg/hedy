@@ -1191,7 +1191,6 @@ def explore():
 @app.route('/highscores/<filter>', methods=['GET'])
 @requires_login
 def get_highscores_page(user, filter):
-    print(filter)
     if filter not in ["global", "country", "class"]:
         return utils.error_page(error=404, ui_message=gettext('page_not_found'))
 
