@@ -10,6 +10,8 @@ from hedy_content import ALL_KEYWORD_LANGUAGES
 # Set the current directory to the root Hedy folder
 os.chdir(os.path.join(os.getcwd(), __file__.replace(os.path.basename(__file__), '')))
 
+unique_snippets_table = set()
+
 def collect_snippets(path):
     Hedy_snippets = []
     files = [f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f)) and f.endswith('.yaml')]
@@ -26,7 +28,11 @@ def collect_snippets(path):
                 try:
                     # commands.k.demo_code
                     for k, command in enumerate(yaml[level]):
-
+                        if hash(command['demo_code']) in unique_snippets_table:
+                            print("Identical code already being tested...")
+                            continue
+                        else:
+                            unique_snippets_table.add(hash(command['demo_code']))
                         command_text_short = command['name'] if 'name' in command.keys() else command['explanation'][0:10]
                         Hedy_snippets.append(
                             Snippet(filename=file, level=level, field_name='command ' + command_text_short + ' demo_code',
