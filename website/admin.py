@@ -1,5 +1,4 @@
 from flask_babel import gettext
-
 import hedyweb
 from website import statistics
 from website.auth import requires_login, current_user, is_admin, pick
@@ -39,11 +38,7 @@ def routes(app, database):
         language = None if language == "null" else language
         keyword_language = None if keyword_language == "null" else keyword_language
 
-        filtering = False
-        if substring or start_date or end_date or language or keyword_language:
-            filtering = True
-
-        if filtering or category == "all":
+        if category:
             users = DATABASE.all_users(True)
         else:
             users = DATABASE.all_users(False)
@@ -55,28 +50,35 @@ def routes(app, database):
             'is_teacher', 'program_count', 'prog_experience', 'experience_languages', 'language', 'keyword_language'
         ]
 
+        print(category)
+
         for user in users:
             data = pick(user, *fields)
             data['email_verified'] = not bool(data['verification_pending'])
             data['is_teacher'] = bool(data['is_teacher'])
-            data['created'] = utils.datetotimeordate (utils.mstoisostring(data['created'])) if data['created'] else '?'
-            if filtering and category == "language":
+            data['created'] = utils.timestamp_to_date(data['created'])
+            data['last_login'] = utils.timestamp_to_date(data['last_login']) if data.get('last_login') else None
+            if category == "language":
                 if language != data['language']:
                     continue
-            if filtering and category == "keyword_language":
+            if category == "keyword_language":
                 if keyword_language != data['keyword_language']:
                     continue
-            if filtering and category == "email":
-                if substring not in data['email']:
+            if category == "email":
+                if not data.get('email') or (substring and substring not in data.get('email')):
                     continue
-            if filtering and category == "created":
-                if (start_date and utils.datetotimeordate(start_date) >= data['created']) or (end_date and utils.datetotimeordate(end_date) <= data['created']):
+            if category == "created":
+                if start_date and utils.string_date_to_date(start_date) > data['created']:
                     continue
-            if data['last_login']:
-                data['last_login'] = utils.datetotimeordate(utils.mstoisostring(data['last_login'])) if data['last_login'] else '?'
-                if filtering and category == "last_login":
-                    if (start_date and utils.datetotimeordate(start_date) >= data['last_login']) or (end_date and utils.datetotimeordate(end_date) <= data['last_login']):
-                        continue
+                if end_date and utils.string_date_to_date(end_date) < data['created']:
+                    continue
+            if category == "last_login":
+                if not data.get('last_login'):
+                    continue
+                if start_date and utils.string_date_to_date(start_date) > data['last_login']:
+                    continue
+                if end_date and utils.string_date_to_date(end_date) < data['last_login']:
+                    continue
             userdata.append(data)
 
         return render_template('admin/admin-users.html', users=userdata, page_title=gettext('title_admin'),
@@ -98,6 +100,7 @@ def routes(app, database):
         } for Class in DATABASE.all_classes()]
 
         classes = sorted(classes, key=lambda d: d.get('stats').get('week').get('runs'), reverse=True)
+        print(classes)
 
         return render_template('admin/admin-classes.html', classes=classes, page_title=gettext('title_admin'))
 
@@ -113,7 +116,7 @@ def routes(app, database):
             "name": adventure.get('name'),
             "level": adventure.get('level'),
             "public": "Yes" if adventure.get('public') else "No",
-            "date": utils.datetotimeordate(utils.mstoisostring(adventure.get('date')))
+            "date": utils.localized_date_format(adventure.get('date'))
         } for adventure in DATABASE.all_adventures()]
         adventures = sorted(adventures, key=lambda d: d['date'], reverse=True)
 

@@ -4,6 +4,9 @@ set -eu
 scriptdir=$(cd $(dirname $0) && pwd)
 cd $scriptdir/../..
 
+echo "------> Dynamically create grammar files to make sure they are up-to-date before testing"
+python content/yaml_to_lark_utils.py
+
 echo "------> Python unit tests"
 
 # This is expected to run from the repo root
