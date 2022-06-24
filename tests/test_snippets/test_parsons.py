@@ -9,8 +9,6 @@ from hedy_content import ALL_KEYWORD_LANGUAGES
 # Set the current directory to the root Hedy folder
 os.chdir(os.path.join(os.getcwd(), __file__.replace(os.path.basename(__file__), '')))
 
-unique_snippets_table = set()
-
 def collect_snippets(path):
     Hedy_snippets = []
     files = [f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f)) and f.endswith('.yaml')]
@@ -36,11 +34,6 @@ def collect_snippets(path):
                                 code += line + "\n"
                             else:
                                 break
-                        if hash(code) in unique_snippets_table:
-                            print("Identical code already being tested...")
-                            continue
-                        else:
-                            unique_snippets_table.add(hash(code))
                         Hedy_snippets.append(Snippet(filename=file, level=level, field_name=f"{exercise_id}", code=code))
                 except:
                     print(f'Problem reading commands yaml for {lang} level {level}')
