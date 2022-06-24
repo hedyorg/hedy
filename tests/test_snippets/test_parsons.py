@@ -31,10 +31,9 @@ def collect_snippets(path):
                         for letter in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
                             line = lines.get(letter)
                             if line:
-                                code += line + "\n"
+                                code += line
                             else:
                                 break
-                        print(code)
                         Hedy_snippets.append(Snippet(filename=file, level=level, field_name="Parsons" + "#" + lang + "#" + exercise_id, code=code))
                 except:
                     print(f'Problem reading commands yaml for {lang} level {level}')
