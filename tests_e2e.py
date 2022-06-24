@@ -237,6 +237,18 @@ class TestPages(AuthHelper):
         self.get_data('/cheatsheet/123', expect_http_code=404)
         self.get_data('/cheatsheet/panda', expect_http_code=404)
 
+    def test_valid_highscore_page(self):
+        # WHEN trying all languages to reach the highscore page
+        # THEN receive an OK response from the server
+        self.given_fresh_user_is_logged_in()
+        body = {'email': self.user['email'], 'keyword_language': self.user['keyword_language']}
+
+        for filter in ["global", "country"]:
+            for language in ALL_LANGUAGES.keys():
+                body['language'] = language
+                self.post_data('profile', body)
+                self.get_data("/highscore/" + filter)
+
     def test_all_languages(self):
         # WHEN trying all languages to reach all pages
         # THEN receive an OK response from the server
