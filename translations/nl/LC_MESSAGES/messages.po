@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-06-23 17:08+0200\n"
+"POT-Creation-Date: 2022-06-23 14:02+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: nl\n"
@@ -653,6 +653,20 @@ msgstr "Verborgen badges"
 msgid "hedy_achievements"
 msgstr "Mijn badges"
 
+#: templates/achievements.html:36 templates/achievements.html:50
+#: templates/landing-page.html:89 templates/layout.html:92
+#: templates/public-page.html:51
+msgid "achievements_logo_alt"
+msgstr "Badges logo"
+
+#: templates/achievements.html:37
+msgid "achievements_check_icon_alt"
+msgstr "Badges check icon"
+
+#: templates/base_email.html:3 templates/cheatsheet.html:15
+msgid "hedy_logo_alt"
+msgstr "Hedy logo"
+
 #: templates/cheatsheet.html:14
 msgid "cheatsheet_title"
 msgstr "Spiekbriefje"
@@ -779,6 +793,10 @@ msgstr "Weet je zeker dat je deze uitnodiging wilt verwijderen?"
 #: templates/class-prejoin.html:7
 msgid "class_already_joined"
 msgstr "Je zit al in deze klas"
+
+#: templates/class-prejoin.html:9 templates/error-page.html:6
+msgid "error_logo_alt"
+msgstr "Error logo"
 
 #: templates/class-prejoin.html:11
 msgid "goto_profile"
@@ -1232,6 +1250,10 @@ msgstr "Volgende opdracht"
 msgid "edit_code_button"
 msgstr "Pas de code aan"
 
+#: templates/incl-editor-and-output.html:146
+msgid "repair_program_logo_alt"
+msgstr "Repareer programma icon"
+
 #: templates/incl-editor-and-output.html:150
 msgid "read_code_label"
 msgstr "Lees voor"
@@ -1315,21 +1337,47 @@ msgstr "Welkom"
 msgid "welcome_back"
 msgstr "Welkom terug"
 
+#: templates/landing-page.html:11
+msgid "teacher_tutorial_logo_alt"
+msgstr "Leraren tutorial icon"
+
 #: templates/landing-page.html:13
 msgid "start_teacher_tutorial"
 msgstr "Begin leraren tutorial"
+
+#: templates/landing-page.html:18
+msgid "hedy_tutorial_logo_alt"
+msgstr "Hedy tutorial icon"
 
 #: templates/landing-page.html:20
 msgid "start_hedy_tutorial"
 msgstr "Begin Hedy tutorial"
 
+#: templates/landing-page.html:25
+msgid "start_programming_logo_alt"
+msgstr "Begin met programmeren icon"
+
 #: templates/landing-page.html:27
 msgid "start_programming"
 msgstr "Begin met programmeren"
 
+#: templates/landing-page.html:31
+msgid "explore_programs_logo_alt"
+msgstr "Programma's ontdekken icon"
+
 #: templates/landing-page.html:39
 msgid "your_account"
 msgstr "Jouw profiel"
+
+#: templates/landing-page.html:43 templates/landing-page.html:45
+#: templates/profile.html:33 templates/public-page.html:7
+#: templates/public-page.html:9
+msgid "profile_logo_alt"
+msgstr "Profiel icon"
+
+#: templates/landing-page.html:52 templates/public-page.html:16
+msgid "achievements"
+msgstr "badges"
 
 #: templates/landing-page.html:59
 msgid "no_public_profile"
@@ -1655,6 +1703,10 @@ msgstr "Schrijf je eerste programma!"
 #: templates/public-page.html:85
 msgid "no_shared_programs"
 msgstr "heeft geen gedeelde programma's..."
+
+#: templates/quiz.html:4
+msgid "quiz_logo_alt"
+msgstr "Quiz logo"
 
 #: templates/quiz.html:7
 msgid "start_quiz"
@@ -2083,6 +2135,13 @@ msgstr ""
 #: website/teacher.py:310 website/teacher.py:349
 msgid "retrieve_class_error"
 msgstr "Alleen leerkrachten mogen klassen openen"
+
+#: website/statistics.py:41 website/teacher.py:38 website/teacher.py:131
+#: website/teacher.py:150 website/teacher.py:212 website/teacher.py:234
+#: website/teacher.py:246 website/teacher.py:313 website/teacher.py:352
+#: website/teacher.py:364
+msgid "no_such_class"
+msgstr "Deze klas bestaat niet."
 
 #: website/statistics.py:45
 msgid "title_class statistics"
