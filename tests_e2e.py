@@ -237,17 +237,35 @@ class TestPages(AuthHelper):
         self.get_data('/cheatsheet/123', expect_http_code=404)
         self.get_data('/cheatsheet/panda', expect_http_code=404)
 
-    def test_valid_highscore_page(self):
+    def test_highscore_pages(self):
         # WHEN trying all languages to reach the highscore page
         # THEN receive an OK response from the server
         self.given_fresh_user_is_logged_in()
         body = {'email': self.user['email'], 'keyword_language': self.user['keyword_language']}
 
-        for filter in ["global", "country"]:
+        for filter in ["global", "country", "class"]:
             for language in ALL_LANGUAGES.keys():
                 body['language'] = language
                 self.post_data('profile', body)
-                self.get_data("/highscore/" + filter)
+                if filter == "class":
+                    # This should return a 403 as we are currently not in a class
+                    self.get_data("/highscore/" + filter, expect_http_code=403)
+                else:
+                    self.get_data("/highscore/" + filter)
+
+    def test_valid_class_highscore_page(self):
+        # WHEN a teacher is logged in and create a class
+        self.given_teacher_is_logged_in()
+        self.post_data('class', {'name': 'class1'})
+        Class = self.get_data('classes')[0]
+
+        # THEN a fresh user logs in and joins this class
+        self.given_fresh_user_is_logged_in()
+        self.post_data('class/join', {'id': Class['id']}, expect_http_code=200)
+
+        # THEN we can access the class highscore page
+        self.get_data("/highscore/class")
+
 
     def test_all_languages(self):
         # WHEN trying all languages to reach all pages
