@@ -243,11 +243,28 @@ class TestPages(AuthHelper):
         self.given_fresh_user_is_logged_in()
         body = {'email': self.user['email'], 'keyword_language': self.user['keyword_language']}
 
-        for filter in ["", "/country"]:
-            for language in ALL_LANGUAGES.keys():
-                body['language'] = language
-                self.post_data('profile', body)
-                self.get_data("/highscores" + filter)
+        for language in ALL_LANGUAGES.keys():
+            body['language'] = language
+            self.post_data('profile', body)
+            self.get_data("/highscores")
+
+    def test_valid_country_highscore_page(self):
+        # WHEN trying to reach the highscores page for a country with a profile country
+        # THEN receive an OK response from the server
+        self.given_fresh_user_is_logged_in()
+
+        # Add a country to the user profile
+        body = {'email': self.user['email'], 'country': 'NL', 'keyword_language': self.user['keyword_language']}
+        self.post_data('profile', body)
+
+        # Receive a valid response
+        self.get_data("/highscores/country")
+
+    def test_invalid_country_highscore_page(self):
+        # WHEN trying to reach the highscores page for a country without a profile country
+        # THEN receive an error response from the server
+        self.given_fresh_user_is_logged_in()
+        self.get_data("/highscores/country", expect_http_code=403)
 
     def test_valid_class_highscore_page(self):
         # WHEN a teacher is logged in and create a class
