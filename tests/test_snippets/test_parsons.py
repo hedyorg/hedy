@@ -31,7 +31,7 @@ def collect_snippets(path):
                         for letter in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
                             line = lines.get(letter)
                             if line:
-                                code += lines + "\n"
+                                code += line + "\n"
                             else:
                                 break
                         print(code)
