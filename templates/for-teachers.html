@@ -74,7 +74,7 @@
             {% endfor %}
         {% else %}
             <p>{{ section.intro|commonmark }}</p>
-            <div class="flex flex-row justify-center">
+            <div class="flex flex-wrap justify-center gap-2">
                 {% for level in section['levels'] %}
                     <button class="green-btn text-xl p-4 mx-2 common-mistakes-button" id="cm-button-{{loop.index}}" onclick="hedyApp.show_common_mistakes('{{loop.index}}')">Level {{ level.level }}</button>
                 {% endfor %}
