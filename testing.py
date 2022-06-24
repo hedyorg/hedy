@@ -1,10 +1,12 @@
 import os
 
 import hedy
+from tests.Tester import Snippet
 from website.yaml_file import YamlFile
 
 
 def get_snippets():
+    Hedy_snippets = []
     path = "content/parsons"
     files = [f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f)) and f.endswith('.yaml')]
     for file in files:
@@ -20,10 +22,7 @@ def get_snippets():
             else:
                 try:
                     for exercise_id, exercise in levels[level].items():
-                        print(exercise_id)
-                        print(exercise)
                         lines = exercise.get('code_lines')
-                        print(lines)
                         code = ""
                         # The lines have a letter: A: ..., B:...., C:....
                         for letter in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
@@ -32,8 +31,10 @@ def get_snippets():
                                 code += line
                             else:
                                 break
-                        print(code)
+                        Hedy_snippets.append(Snippet(filename=file, level=level, field_name="Parsons" + "#" + lang + "#" + exercise_id,code=code))
                 except:
                     print(f'Problem reading commands yaml for {lang} level {level}')
+    return Hedy_snippets
 
-get_snippets()
+snippets = get_snippets()
+print(snippets)
