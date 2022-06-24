@@ -2,15 +2,15 @@ levels:
     1:
         1:
           story: |
-            You're a customer at bakery Hedy.
-            You want into the bakery and are welcomed by the baker.
-            He asks what type of pie you want to order.
-            Next, your order is being prepared.
+            Sa oled klient pagaris Hedy.
+              Sa kõnnid pagarisse sisse ja pagar tervitab sind.
+              Ta küsib millist kooki sa tahad osta.
+              Pärast seda hakkab ta sinu tellimuse kallal tööle.
           code_lines:
-            A: "{print} Welcome to bakery Hedy!"
-            B: "{ask} What type of pie do you want to order?"
-            C: "{echo} So you want"
-            D: "{print} Your order is being prepared!"
+            A: "{print} Tere tulemast pagarisse Hedy!"
+            B: "{ask} Millist kooki sa osta tahad?"
+            C: "{echo} Nii et sa tahad"
+            D: "{print} Sinu tellimus tehakse valmis!"
         2:
           story: |
             You're at the DJ Booth requesting a song. Create a program that asks if you are ready to party and then asks which song you would like to hear.
@@ -22,13 +22,13 @@ levels:
     2:
         1:
           story: |
-            You and your friends are going to watch some Netflix.
-            Show which movie you're about to watch and wish the viewers lot of fun!
+            Sina ja su sõbrad hakkavad Netflixi vaatama.
+              Näita millist filmi te vaatama hakkate ja soovi vaatajatele mõnusat filmielamust!
           code_lines:
-            A: "{print} It is time for an evening of Netflix"
-            B: "film {is} Sonic the Hedgehog 2"
-            C: "{print} We're going to film"
-            D: "{print} Have lot of fun!"
+            A: "{print} On aeg Netflixi õhtu jaoks"
+            B: "film {is} Siil Soonik 2"
+            C: "{print} Me lähme filmi vaatama"
+            D: "{print} Mõnusat filmielamust!"
         2:
           story: |
             This is the webshop of a toystore. Create a program where costumers can add an item to their shopping cart.
@@ -40,17 +40,17 @@ levels:
     3:
         1:
           story: |
-            The new school year at Hogwarts is starting! 
-            It is the job of the sorting hat to sort you into one of the houses.
-            Which house will you be sorted into?
-            Are you a Gryffindor, Hufflepuf, Ravenclaw or Slytherin.
-            Let the program wait a short period before revealing your house.
+            Uus kooliaasta on algamas Sigatüüka koolis!
+              Sorteerimismütsi ülesanne on sind ühte majja määrata.
+              Millisesse majja sind määratakse?
+              Kas sa satud Gryffindori, Hufflepuffi, Ravenclaw'sse või Slytherini.
+              Lase programmil natuke oodata enne kui ta vastuse annab.
           code_lines:
-            A: "{print} The new school year at Hogwarts is starting!"
-            B: "{print} The sorting hat is ready to sort you into one of the houses."
-            C: "houses {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin"
+            A: "{print} Uus kooliaasta Sigatüüka koolis on algamas!"
+            B: "{print} Sorteerimismüts on valmis, et sulle maja määrata."
+            C: "majad {is} Gryffindor, Hufflepuff, Ravenclaw, Slytherin"
             D: "{sleep} 2"
-            E: "{print} And it is houses {at} {random}"
+            E: "{print} Sa oled majas {at} {random}"
         2:
           story: |
             Create a program that chooses a random meal for you. Make a list of food and a list of toppings and let the program decide what you'll have!
@@ -63,14 +63,14 @@ levels:
     4:
         1:
           story: |
-            You are the newest Pokémon trainer from Pallet Town!
-            Make a program that selects your first Pokémon.
-            Let the program wait a minute before revealing your first pokémon.
+            Sa oled kõige uuem Pokémoni treener Pallet linnast!
+              Kirjuta programm, mis valib sinu esimese Pokémoni.
+              Lase programmil üks minut oodata, enne kui ta su esimese Pokémoni ekraanile kuvab.
           code_lines:
-            A: "pokemons {is} Pikachu, Charmander, Bulbasaur, Squirtle"
-            B: "{print} 'This is going to be your first pokémon!'"
+            A: "pokemonid {is} Pikachu, Charmander, Bulbasaur, Squirtle"
+            B: "{print} 'Sellest saab sinu esimene Pokémon!'"
             C: "{sleep}"
-            D: "{print} pokemons {at} {random}"
+            D: "{print} pokemonid {at} {random}"
         2:
           story: |
             Create a lottery that lets you choose an extra price that you might win.
