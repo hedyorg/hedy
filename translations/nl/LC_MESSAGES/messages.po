@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-06-21 10:36+0200\n"
+"POT-Creation-Date: 2022-06-23 14:02+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: nl\n"
@@ -28,7 +28,7 @@ msgid "title_achievements"
 msgstr "Hedy - Mijn badges"
 
 #: app.py:639 app.py:743 app.py:1085 website/teacher.py:361
-#: website/teacher.py:370
+#: website/teacher.py:372
 msgid "not_teacher"
 msgstr "Jij bent geen leraar!"
 
@@ -64,8 +64,8 @@ msgstr "Dit programma bestaat niet!"
 msgid "level_not_class"
 msgstr "Je zit in een klas waar dit level nog niet beschikbaar is gemaakt"
 
-#: app.py:923 website/teacher.py:419 website/teacher.py:435
-#: website/teacher.py:464 website/teacher.py:490
+#: app.py:923 website/teacher.py:421 website/teacher.py:437
+#: website/teacher.py:466 website/teacher.py:492
 msgid "no_such_adventure"
 msgstr "Dit avontuur bestaat niet!"
 
@@ -341,8 +341,8 @@ msgstr "Dit is geen geldige tutorial stap, probeer het opnieuw."
 #: website/auth.py:671 website/auth.py:718 website/auth.py:745
 #: website/quiz.py:43 website/quiz.py:69 website/teacher.py:88
 #: website/teacher.py:123 website/teacher.py:195 website/teacher.py:251
-#: website/teacher.py:298 website/teacher.py:339 website/teacher.py:375
-#: website/teacher.py:446 website/teacher.py:504
+#: website/teacher.py:298 website/teacher.py:339 website/teacher.py:377
+#: website/teacher.py:448 website/teacher.py:506
 msgid "ajax_error"
 msgstr "Er is een fout opgetreden, probeer het nog eens."
 
@@ -646,6 +646,20 @@ msgstr "Verborgen badges"
 msgid "hedy_achievements"
 msgstr "Mijn badges"
 
+#: templates/achievements.html:36 templates/achievements.html:50
+#: templates/landing-page.html:89 templates/layout.html:92
+#: templates/public-page.html:51
+msgid "achievements_logo_alt"
+msgstr "Badges logo"
+
+#: templates/achievements.html:37
+msgid "achievements_check_icon_alt"
+msgstr "Badges check icon"
+
+#: templates/base_email.html:3 templates/cheatsheet.html:15
+msgid "hedy_logo_alt"
+msgstr "Hedy logo"
+
 #: templates/cheatsheet.html:14
 msgid "cheatsheet_title"
 msgstr "Spiekbriefje"
@@ -748,7 +762,7 @@ msgstr "Vul een gebruikersnaam in"
 msgid "invite_by_username"
 msgstr "Uitnodigen bij gebruikersnaam"
 
-#: templates/class-overview.html:55 templates/create-accounts.html:49
+#: templates/class-overview.html:55 templates/create-accounts.html:45
 msgid "create_accounts"
 msgstr "Accounts aanmaken"
 
@@ -772,6 +786,10 @@ msgstr "Weet je zeker dat je deze uitnodiging wilt verwijderen?"
 msgid "class_already_joined"
 msgstr "Je zit al in deze klas"
 
+#: templates/class-prejoin.html:9 templates/error-page.html:6
+msgid "error_logo_alt"
+msgstr "Error logo"
+
 #: templates/class-prejoin.html:11
 msgid "goto_profile"
 msgstr "Ga naar mijn profiel"
@@ -790,7 +808,8 @@ msgstr ""
 msgid "join_class"
 msgstr "Inschrijven voor klas"
 
-#: templates/class-stats.html:22 templates/customize-class.html:166
+#: templates/class-stats.html:22 templates/create-accounts.html:41
+#: templates/customize-class.html:166
 msgid "back_to_class"
 msgstr "Ga terug naar klas"
 
@@ -815,36 +834,32 @@ msgstr "Meerdere accounts aanmaken"
 msgid "accounts_intro"
 msgstr ""
 "Op deze pagina kun je accounts aan maken voor meerdere studenten "
-"tegelijkertijd. Ze worden automatisch toegevoegd aan de huidige klas, controleer of dit klopt!"
-" Door op het groene kruisje rechtsonderin te klikken kun je meer rijen "
-"toevoegen. Met het rode kruisje kun je een rij weer verwijderen. Zorg "
-"ervoor dat alle rijen gevuld zijn voordat je klikt op \"Accounts "
-"aanmaken\". Denk eraan dat elke gebruikersnaam uniek moet zijn. Ook moet "
-"het wachtwoord <b>minimaal</b> 6 tekens zijn."
+"tegelijkertijd. Ze worden automatisch toegevoegd aan de huidige klas, "
+"controleer of dit klopt! Door op het groene kruisje rechtsonderin te "
+"klikken kun je meer rijen toevoegen. Met het rode kruisje kun je een rij "
+"weer verwijderen. Zorg ervoor dat alle rijen gevuld zijn voordat je klikt"
+" op \"Accounts aanmaken\". Denk eraan dat elke gebruikersnaam uniek moet "
+"zijn. Ook moet het wachtwoord <b>minimaal</b> 6 tekens zijn."
 
 #: templates/create-accounts.html:10
 msgid "create_accounts_prompt"
 msgstr "Weet je zeker dat je deze accounts wilt aanmaken?"
 
-#: templates/create-accounts.html:19
-msgid "select_class"
-msgstr "Kies klas"
-
-#: templates/create-accounts.html:30
+#: templates/create-accounts.html:25
 msgid "download_login_credentials"
 msgstr "Wil je de login gegevens downloaden na het aanmaken van de accounts?"
 
-#: templates/create-accounts.html:34 templates/layout.html:22
+#: templates/create-accounts.html:29 templates/layout.html:22
 #: templates/signup.html:64
 msgid "yes"
 msgstr "Ja"
 
-#: templates/create-accounts.html:38 templates/layout.html:23
+#: templates/create-accounts.html:33 templates/layout.html:23
 #: templates/signup.html:68
 msgid "no"
 msgstr "Nee"
 
-#: templates/create-accounts.html:48 templates/programs.html:24
+#: templates/create-accounts.html:44 templates/programs.html:24
 msgid "reset_view"
 msgstr "Reset"
 
@@ -1136,7 +1151,7 @@ msgstr "Bekijk"
 msgid "adventure_prompt"
 msgstr "Geef je nieuwe avontuur een naam"
 
-#: templates/for-teachers.html:59 website/teacher.py:499
+#: templates/for-teachers.html:59 website/teacher.py:501
 msgid "create_adventure"
 msgstr "Maak nieuw avontuur"
 
@@ -1195,6 +1210,10 @@ msgstr "Volgende opdracht"
 #: templates/incl-editor-and-output.html:144
 msgid "edit_code_button"
 msgstr "Pas de code aan"
+
+#: templates/incl-editor-and-output.html:146
+msgid "repair_program_logo_alt"
+msgstr "Repareer programma icon"
 
 #: templates/incl-editor-and-output.html:150
 msgid "read_code_label"
@@ -1275,21 +1294,43 @@ msgstr "Welkom"
 msgid "welcome_back"
 msgstr "Welkom terug"
 
+#: templates/landing-page.html:11
+msgid "teacher_tutorial_logo_alt"
+msgstr "Leraren tutorial icon"
+
 #: templates/landing-page.html:13
 msgid "start_teacher_tutorial"
 msgstr "Begin leraren tutorial"
+
+#: templates/landing-page.html:18
+msgid "hedy_tutorial_logo_alt"
+msgstr "Hedy tutorial icon"
 
 #: templates/landing-page.html:20
 msgid "start_hedy_tutorial"
 msgstr "Begin Hedy tutorial"
 
+#: templates/landing-page.html:25
+msgid "start_programming_logo_alt"
+msgstr "Begin met programmeren icon"
+
 #: templates/landing-page.html:27
 msgid "start_programming"
 msgstr "Begin met programmeren"
 
+#: templates/landing-page.html:31
+msgid "explore_programs_logo_alt"
+msgstr "Programma's ontdekken icon"
+
 #: templates/landing-page.html:39
 msgid "your_account"
 msgstr "Jouw profiel"
+
+#: templates/landing-page.html:43 templates/landing-page.html:45
+#: templates/profile.html:33 templates/public-page.html:7
+#: templates/public-page.html:9
+msgid "profile_logo_alt"
+msgstr "Profiel icon"
 
 #: templates/landing-page.html:52 templates/public-page.html:16
 msgid "achievements"
@@ -1628,6 +1669,10 @@ msgstr "Schrijf je eerste programma!"
 #: templates/public-page.html:85
 msgid "no_shared_programs"
 msgstr "heeft geen gedeelde programma's..."
+
+#: templates/quiz.html:4
+msgid "quiz_logo_alt"
+msgstr "Quiz logo"
 
 #: templates/quiz.html:7
 msgid "start_quiz"
@@ -2029,7 +2074,7 @@ msgstr "Programma wordt niet meer gedeeld."
 msgid "favourite_success"
 msgstr "Je programma is ingesteld als favoriet."
 
-#: website/quiz.py:45 website/quiz.py:71 website/teacher.py:452
+#: website/quiz.py:45 website/quiz.py:71 website/teacher.py:454
 msgid "level_invalid"
 msgstr "Dit Hedy level is ongeldig."
 
@@ -2060,6 +2105,7 @@ msgstr "Alleen leerkrachten mogen klassen openen"
 #: website/statistics.py:41 website/teacher.py:38 website/teacher.py:131
 #: website/teacher.py:150 website/teacher.py:212 website/teacher.py:234
 #: website/teacher.py:246 website/teacher.py:313 website/teacher.py:352
+#: website/teacher.py:364
 msgid "no_such_class"
 msgstr "Deze klas bestaat niet."
 
@@ -2087,7 +2133,7 @@ msgstr "Je hebt geen klasnaam ingevuld!"
 msgid "class_name_duplicate"
 msgstr "Je hebt al een klas met deze naam."
 
-#: website/teacher.py:162 website/teacher.py:178 website/teacher.py:531
+#: website/teacher.py:162 website/teacher.py:178 website/teacher.py:533
 msgid "invalid_class_link"
 msgstr "Ongeldige klassenlink."
 
@@ -2123,64 +2169,64 @@ msgstr "Deze leerling zit al in jouw klas."
 msgid "student_already_invite"
 msgstr "Deze leerling heeft al een openstaande uitnodiging."
 
-#: website/teacher.py:380
+#: website/teacher.py:382
 msgid "no_accounts"
 msgstr "Er zijn geen accounts om aan te maken."
 
-#: website/teacher.py:390
+#: website/teacher.py:392
 msgid "unique_usernames"
 msgstr "Alle gebruikersnamen moeten uniek zijn."
 
-#: website/teacher.py:399
+#: website/teacher.py:401
 msgid "usernames_exist"
 msgstr "Een of meerdere gebruikersnamen is al in gebruik."
 
-#: website/teacher.py:410
+#: website/teacher.py:412
 msgid "accounts_created"
 msgstr "Account succesvol aangemaakt."
 
-#: website/teacher.py:416 website/teacher.py:421 website/teacher.py:432
-#: website/teacher.py:461 website/teacher.py:487
+#: website/teacher.py:418 website/teacher.py:423 website/teacher.py:434
+#: website/teacher.py:463 website/teacher.py:489
 msgid "retrieve_adventure_error"
 msgstr "Jij mag dit avontuur niet bekijken!"
 
-#: website/teacher.py:426
+#: website/teacher.py:428
 msgid "title_view-adventure"
 msgstr "Hedy - Avontuur bekijken"
 
-#: website/teacher.py:437
+#: website/teacher.py:439
 msgid "title_customize-adventure"
 msgstr "Hedy - Avontuur personaliseren"
 
-#: website/teacher.py:448
+#: website/teacher.py:450
 msgid "adventure_id_invalid"
 msgstr "Dit avontuur id is ongeldig."
 
-#: website/teacher.py:450 website/teacher.py:506
+#: website/teacher.py:452 website/teacher.py:508
 msgid "adventure_name_invalid"
 msgstr "Deze avontuur naam is ongeldig."
 
-#: website/teacher.py:454
+#: website/teacher.py:456
 msgid "content_invalid"
 msgstr "Dit avontuur is ongeldig."
 
-#: website/teacher.py:456
+#: website/teacher.py:458
 msgid "adventure_length"
 msgstr "Jouw avontuur moet minimaal 20 karakters zijn."
 
-#: website/teacher.py:458
+#: website/teacher.py:460
 msgid "public_invalid"
 msgstr "Deze waarde voor het beschikbaar maken van je avontuur is ongeldig"
 
-#: website/teacher.py:469 website/teacher.py:513
+#: website/teacher.py:471 website/teacher.py:515
 msgid "adventure_duplicate"
 msgstr "Je hebt al een avontuur met deze naam."
 
-#: website/teacher.py:481
+#: website/teacher.py:483
 msgid "adventure_updated"
 msgstr "Jouw avontuur is bijgewerkt!"
 
-#: website/teacher.py:508
+#: website/teacher.py:510
 msgid "adventure_empty"
 msgstr "Je hebt geen avonturen naam ingevuld!"
 
@@ -2254,4 +2300,7 @@ msgstr "Je hebt geen avonturen naam ingevuld!"
 
 #~ msgid "go_to_first_exercise"
 #~ msgstr "Ga naar opdracht 1"
+
+#~ msgid "select_class"
+#~ msgstr "Kies klas"
 
