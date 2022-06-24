@@ -6,7 +6,9 @@
     {% if in_class or has_country %}
         <div class="flex flex-row gap-4 items-center justify-center">
             <button class="green-btn" onclick="window.location.href = '/highscores/global'">{{_('whole_world')}}</button>
-            <button class="green-btn" onclick="window.location.href = '/highscores/country'">{{_('your_country')}}</button>
+            {% if has_country %}
+                <button class="green-btn" onclick="window.location.href = '/highscores/country'">{{_('your_country')}}</button>
+                {% endif %}
             {% if in_class %}
                 <button class="green-btn" onclick="window.location.href = '/highscores/class'">{{_('your_class')}}</button>
             {% endif %}
