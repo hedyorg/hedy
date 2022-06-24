@@ -31,7 +31,8 @@ def collect_snippets(path):
                         for letter in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
                             line = lines.get(letter)
                             if line:
-                                code += line
+                                # This newline is necessary, weblate just needs to throw an update
+                                code += line + "\n"
                             else:
                                 break
                         Hedy_snippets.append(Snippet(filename=file, level=level, field_name="Parsons" + "#" + lang + "#" + exercise_id, code=code))
