@@ -254,7 +254,12 @@ class TestPages(AuthHelper):
         self.given_fresh_user_is_logged_in()
 
         # Add a country to the user profile
-        body = {'email': self.user['email'], 'country': 'NL', 'keyword_language': self.user['keyword_language']}
+        body = {
+            'email': self.user['email'],
+            'language': self.user['language'],
+            'keyword_language': self.user['keyword_language'],
+            'country': 'NL'
+        }
         self.post_data('profile', body)
 
         # Receive a valid response
