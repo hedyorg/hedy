@@ -33,8 +33,8 @@
                         <div class="w-40 rounded-lg ltr:mr-4 rtl:ml-4 mt-4 relative bg-blue-200">
                             <div class="relative h-40">
                                 <div class="flex items-center justify-center h-40">
-                                    <img src="{{static('/images/achievement.png')}}" class="px-2" alt="Achievement logo">
-                                    <img src="{{static('/images/check.png')}}" class="absolute w-3/4 mt-2 block" alt="Achievement check icon">
+                                    <img src="{{static('/images/achievement.png')}}" class="px-2" alt="{{_('achievements_logo_alt')}}">
+                                    <img src="{{static('/images/check.png')}}" class="absolute w-3/4 mt-2 block" alt="{{_('achievements_check_icon_alt')}}">
                                 </div>
                             </div>
                             <div class="w-40 h-full opacity-0 hover:opacity-75 bg-black rounded-lg inset-0 absolute z-10 text-center text-white px-4 pt-10">
@@ -47,7 +47,7 @@
                     {% else %}
                         <div class="w-40 rounded-lg ltr:mr-4 rtl:ml-4 mt-4 relative bg-gray-500">
                             <div class="flex items-center justify-center h-40">
-                                <img src="{{static('/images/achievement.png')}}" class="px-2" alt="Achievement logo">
+                                <img src="{{static('/images/achievement.png')}}" class="px-2" alt="{{_('achievements_logo_alt')}}">
                             </div>
                             <div class="w-40 h-full opacity-0 hover:opacity-75 bg-black rounded-lg inset-0 absolute z-10 text-center text-white px-4 pt-10">
                                 <p class="font-semibold">{% if title == _('hidden') %}???{% else %}{{ translations[achievement].text }}{% endif %}</p>
