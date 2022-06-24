@@ -31,7 +31,6 @@ def collect_snippets(path):
                         for letter in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
                             line = lines.get(letter)
                             if line:
-                                # This newline is necessary, weblate just needs to throw an update
                                 code += line + "\n"
                             else:
                                 break
