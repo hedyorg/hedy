@@ -247,11 +247,7 @@ class TestPages(AuthHelper):
             for language in ALL_LANGUAGES.keys():
                 body['language'] = language
                 self.post_data('profile', body)
-                if filter == "class":
-                    # This should return a 403 as we are currently not in a class
-                    self.get_data("/highscore/" + filter, expect_http_code=403)
-                else:
-                    self.get_data("/highscore/" + filter)
+                self.get_data("/highscore/" + filter)
 
     def test_valid_class_highscore_page(self):
         # WHEN a teacher is logged in and create a class
@@ -265,6 +261,13 @@ class TestPages(AuthHelper):
 
         # THEN we can access the class highscore page
         self.get_data("/highscore/class")
+
+    def test_invalid_class_highscore_page(self):
+        # WHEN a fresh user is not in a class
+        self.given_fresh_user_is_logged_in()
+
+        # THEN we can can't access the class highscore page
+        self.get_data("/highscore/class", expect_http_code=403)
 
 
     def test_all_languages(self):
