@@ -567,7 +567,7 @@ class TestsLevel1(HedyTester):
         self.multi_level_tester(
             code=code,
             exception=hedy.exceptions.InvalidSpaceException,
-            max_level=1)
+            max_level=3)
 
     def test_word_plus_period_gives_invalid(self):
         code = "word."
