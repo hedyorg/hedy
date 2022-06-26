@@ -7,6 +7,7 @@ from contextlib import contextmanager
 import inspect
 import unittest
 import utils
+import runAST
 
 
 class Snippet:
@@ -111,7 +112,7 @@ class HedyTester(unittest.TestCase):
       self.single_level_tester(code, level, expected=expected, exception=exception, extra_check_function=extra_check_function, expected_commands=expected_commands, lang=lang, translate=translate, output=output)
       print(f'Passed for level {level}')
 
-  def single_level_tester(self, code, level=None, exception=None, expected=None, extra_check_function=None, output=None, expected_commands=None, lang='en', translate=True):
+  def single_level_tester(self, code, level=None, exception=None, expected=None, extra_check_function=None, output=None, expected_commands=None, lang='en', translate=True, converter=True):
     if level is None: # no level set (from the multi-tester)? grap current level from class
       level = self.level
     if exception is not None:
@@ -128,6 +129,12 @@ class HedyTester(unittest.TestCase):
       result = hedy.transpile(code, level, lang)
       self.assertEqual(expected, result.code)
 
+      if converter and lang == "en":
+        converter_output = runAST.unparser_tester(code, level, lang = lang)
+        converter_expected = runAST.parser(code, level, lang = lang)
+        converter_result = runAST.parser(converter_output, level, lang = lang)
+        self.assertEqual(converter_expected, converter_result)
+	
       if translate:
         if lang == 'en': # if it is English
           # and if the code transpiles (evidenced by the fact that we reach this line) we should be able to translate too

@@ -5,6 +5,8 @@ from lark.indenter import Indenter
 import hedy
 import sys
 
+token_list = []
+
 #==============================================================================
 #   UTILITY functions
 #==============================================================================
@@ -166,7 +168,6 @@ def prep_alias(result, line):
             result[line] = prep_inline (result[line], inline[1:], inline)
     return result
 
-#TODO: bracket stuff can possibly be improved with brackets function
 #recursive function to replace inline
 def prep_inline(line, replace, replacement):
     operators = ['+', '?', '*']
@@ -184,10 +185,8 @@ def prep_inline(line, replace, replacement):
                 else: temp += " | " + line_group
             group = temp
         elif group[-1] in operators:
-            #haken als nodig <- ?
             group = prep_inline(group[0:-1], replace, replacement) + group[-1]
         elif group == replace:
-            # are brackets needed?
             if len(get_groupings(line, [' ', '+', '?', '*'])) == 1 and replacement[0] == "(": group = replacement[1:-1]
             else: group = replacement
         elif group[0] == "(" or group[0] == "[":
@@ -200,11 +199,11 @@ def prep_inline(line, replace, replacement):
 # calls all relevent prepare grammar functions.
 # creates a dictionary containing all rules.
 # while dealing with aliases and inline rules.
-def prep_grammar(lvl):
+def prep_grammar(lvl, lang):
     result = {}
     inlines = []
 
-    grammar = hedy.create_grammar(lvl).split('\n')
+    grammar = hedy.create_grammar(lvl, lang).split('\n')
     grammar = first_pass(grammar)
 
     for line in grammar:
@@ -322,20 +321,29 @@ def simp_grammar(grammar):
         grammar[key] = process_split(grammar, value)
     return grammar
 
+def create_token_list(Tree):
+    if isinstance(Tree, Token):
+        if Tree.type not in token_list:
+            token_list.append(Tree.type)
+    else:
+        for child in Tree.children:
+            create_token_list(child)
+
 # Before we really begin with unparsing we first:
 # - Prepare the grammar, to make it easier to deal with certain functionalities
 #   (like handling the aliases)
 # - Simplify the grammar, to remove any unnecesary portions of the grammar
 #   which would only slow down the programs
-def start_unparsing(Tree, lvl):
+def start_unparsing(Tree, lvl,keep_all_tokens, lang):
     #process grammar
-    grammar = prep_grammar(lvl)
-    grammar = simp_grammar(grammar)
+    grammar = prep_grammar(lvl,lang)
+    if not keep_all_tokens: grammar = simp_grammar(grammar)
+    if keep_all_tokens: create_token_list(Tree)
     #print("\nresult:")
     #for key in grammar: print (key + " : " + grammar[key])
     #print("\n")
     #start unparsing
-    return unparsing(Tree, grammar, 0)
+    return unparsing(Tree, grammar, 0, lvl, False, keep_all_tokens)
 
 #==============================================================================
 #   UNPARSING functions
@@ -344,7 +352,7 @@ def start_unparsing(Tree, lvl):
 # If we have one "word" we will handle it here,
 # but will otherwise "send" us to the right function
 # if result is empty, it means there is no fit in the given Templates
-def simple_format(Tree, grammar, Templates, rule):
+def simple_format(Tree, grammar, Templates, rule, keep_all_tokens):
     result = [] # if empty: functions as a False
     group = ["(", "["]
     not_in_tree = ['_', '"']
@@ -353,20 +361,28 @@ def simple_format(Tree, grammar, Templates, rule):
     for possibility in Templates:
         template = possibility[0]
         nr_child = possibility[1]
+        if (len(get_groupings(rule, [' ', '+', '?', '*', '|'])) > 1):
+                result += get_op_format(Tree, grammar, Templates, rule, keep_all_tokens)
         if (rule[0] in group): # this needs to be handled by get_group_format
-            result += get_group_format(Tree, grammar, [possibility], rule[1:-1])
+            result += get_group_format(Tree, grammar, [possibility], rule[1:-1], keep_all_tokens)
         elif (rule[0] in not_in_tree and len(get_groupings(rule, [' ', '+', '?', '*', '|'])) == 1):
-            new_rule = grammar.get(rule)
-            if new_rule == None or rule in do_not_process:
-                # No processing neccesary, add to result
-                result.append((str(template) + " " + str(rule), nr_child))
+            if rule[0] == '"': to_check = rule[1:-1].upper()
+            else: to_check = rule
+            if keep_all_tokens and to_check in token_list:
+                if nr_child < len(Tree.children) and (isinstance(Tree.children[nr_child], Token)) and Tree.children[nr_child].type == to_check:
+                    result.append((str(template) + " " + str(rule), nr_child+1))
             else:
-                # New _rule to go through
-                result += get_format(Tree, grammar, Templates, new_rule)
+                new_rule = grammar.get(rule)
+                if new_rule == None or rule in do_not_process:
+                    # No processing neccesary, add to result
+                    result.append((str(template) + " " + str(rule), nr_child))
+                else:
+                    # New _rule to go through
+                    result += get_format(Tree, grammar, Templates, new_rule, keep_all_tokens)
         else:
             if (nr_child >= len(Tree.children)): continue
             elif (len(get_groupings(rule, [' ', '+', '?', '*', '|'])) > 1):
-                result += get_op_format(Tree, grammar, Templates, rule)
+                result += get_op_format(Tree, grammar, Templates, rule, keep_all_tokens)
             elif (isinstance(Tree.children[nr_child], Token)):
                 #check if what's in rule is also a token
                 if (not rule in grammar.keys()) or (rule.isupper()):
@@ -382,36 +398,36 @@ def simple_format(Tree, grammar, Templates, rule):
 #
 # This function handles all possible options seperated by "|" in a rule.
 # Current version takes the first not in tree if the tree options don't work <- Happens indirectly in unparsing
-def get_options_format(Tree, grammar, Templates, rule):
+def get_options_format(Tree, grammar, Templates, rule, keep_all_tokens):
     result = []
     #Get the options of this rule
     for option in get_groupings(rule, ['|']):
         if option[-1] == "|":
             option = option[0:-1]
-        result += simple_format(Tree, grammar, Templates, option.strip())
+        result += simple_format(Tree, grammar, Templates, option.strip(), keep_all_tokens)
 
     return result
 
 # This function checks if we are dealing with a group,
 # and if so, deals with it appropriately.
-def get_group_format(Tree, grammar, Templates, rule):
+def get_group_format(Tree, grammar, Templates, rule, keep_all_tokens):
     result = []
     if rule[0] == "(" or rule[0] == "[":
         # we are in a group
         if len(get_groupings(rule[1:-1], ['|'])) > 1:
-            result += get_options_format(Tree, grammar, Templates, rule[1:-1])
+            result += get_options_format(Tree, grammar, Templates, rule[1:-1], keep_all_tokens)
         else:
             temp_list = Templates
             for group in get_groupings(rule[1:-1], [' ', '+', '?', '*', '|']):
-                temp_list = get_op_format(Tree, grammar, temp_list, group)
+                temp_list = get_op_format(Tree, grammar, temp_list, group, keep_all_tokens)
             result += temp_list
     else:
         # we're not in a group, so let's go to the next step!
-        result += get_options_format(Tree, grammar, Templates, rule)
+        result += get_options_format(Tree, grammar, Templates, rule, keep_all_tokens)
     return result
 
 # This function deals with the operators in the top level of a rule.
-def get_op_format(Tree, grammar, Templates, rule):
+def get_op_format(Tree, grammar, Templates, rule, keep_all_tokens):
     result = []
     correct = []
     prog = []
@@ -433,12 +449,13 @@ def get_op_format(Tree, grammar, Templates, rule):
             while loop:
                 for template in temp_list:
                     correct = []
-                    list = get_group_format(Tree, grammar, [template], group[0:-1])
+                    list = get_group_format(Tree, grammar, [template], group[0:-1], keep_all_tokens)
                     # check to make sure we won't keep looping non tree items
                     for thing in list:
                         if (template[0] == ""): test = thing[0]
                         else: test = thing[0][len(template[0]):].strip()
                         if creates_tree(grammar, test): correct.append(thing)
+                        elif keep_all_tokens and template[1] != thing[1]: correct.append(thing)
                 temp_list = correct
                 prog += temp_list
                 if temp_list == []: loop = False
@@ -446,9 +463,9 @@ def get_op_format(Tree, grammar, Templates, rule):
         # one if not: +, *
         if (group[-1] not in more):
             if group[-1] in none:
-                prog += get_group_format(Tree, grammar, Templates, group[0:-1])
+                prog += get_group_format(Tree, grammar, Templates, group[0:-1], keep_all_tokens)
             else:
-                prog += get_group_format(Tree, grammar, Templates, group)
+                prog += get_group_format(Tree, grammar, Templates, group, keep_all_tokens)
 
         #next round prep
         Templates = prog
@@ -458,14 +475,14 @@ def get_op_format(Tree, grammar, Templates, rule):
 # This function will look at the rule, and "sends" us to the correct function;
 # get_options_format if on the top level, we have multiple options we can choose
 # get_op_format if we have a single option which we need to work through
-def get_format(Tree, grammar, Templates, rule):
+def get_format(Tree, grammar, Templates, rule, keep_all_tokens):
     if len(get_groupings(rule, ['|'])) > 1:
-        return get_options_format(Tree, grammar, Templates, rule)
+        return get_options_format(Tree, grammar, Templates, rule, keep_all_tokens)
     else:
-        return get_op_format(Tree, grammar, Templates, rule)
+        return get_op_format(Tree, grammar, Templates, rule, keep_all_tokens)
 
 # onderdelen rule stapgeweis afhandelen
-def get_result(Tree, grammar, number_of_indents, rule):
+def get_result(Tree, grammar, number_of_indents, level, rule, fix, keep_all_tokens):
     result = []
     count = 0
     indent_size = 4
@@ -477,6 +494,9 @@ def get_result(Tree, grammar, number_of_indents, rule):
             #specific fixes for hedy
             if (word == "_START_BLOCK"): number_of_indents += 1
             elif (word == "_END_BLOCK"): number_of_indents -= 1
+            elif keep_all_tokens and count < len(Tree.children) and (isinstance(Tree.children[count], Token)) and Tree.children[count].type == word:
+                result.append(Tree.children[count])
+                count += 1
             elif (word == "_SPACE" and last_word == "_EOL"): True
             elif (word == "_EOL"):
                 result.append("\n")
@@ -486,10 +506,17 @@ def get_result(Tree, grammar, number_of_indents, rule):
                 temp = grammar.get(word)
                 if '"' == temp[0]: temp = temp[1:-1]
                 result.append(temp)
-        elif word[0] == '"': result.append(word.split('"')[1])
+        elif word[0] == '"':
+            if keep_all_tokens and count < len(Tree.children) and (isinstance(Tree.children[count], Token)) and Tree.children[count].type == word[1:-1].upper():
+                result.append(Tree.children[count])
+                count+=1
+            else: result.append(word.split('"')[1])
         else:
             if count < len(Tree.children):
-                result.append(unparsing(Tree.children[count],grammar, number_of_indents))
+                temp = fix
+                if fix and not keep_all_tokens: result.append(" ")
+                if ((level == 2 or level == 3) and word == "print"): fix = True
+                result.append(unparsing(Tree.children[count],grammar, number_of_indents, level, fix, keep_all_tokens))
                 count += 1
             else: print("There is a problem with the format")
         last_word = word
@@ -497,11 +524,13 @@ def get_result(Tree, grammar, number_of_indents, rule):
     return ''.join([str(c) for c in result])
 
 # This function will start the unparsing.
-def unparsing(Tree, grammar, number_of_indents):
+def unparsing(Tree, grammar, number_of_indents, level, fix, keep_all_tokens):
     # Templates is used to collect possible correct results.
     Templates = [("", 0)]
+
     #is this a leaf? if so:
-    if (isinstance(Tree, Token)): return Tree.value
+    if (isinstance(Tree, Token)):
+        return Tree.value.replace("\\\\", "\\")
 
     #find rule in grammar & process
     rule = grammar.get(Tree.data)
@@ -510,7 +539,7 @@ def unparsing(Tree, grammar, number_of_indents):
     # Werk regels uit om naar de juiste format te werken
     # kijk hierbij naar de kinderen
     temp = []
-    for possibility in get_format(Tree, grammar, Templates, rule):
+    for possibility in get_format(Tree, grammar, Templates, rule, keep_all_tokens):
         if (possibility[1] == len(Tree.children)):
             temp.append(possibility)
 
@@ -519,12 +548,9 @@ def unparsing(Tree, grammar, number_of_indents):
         return ''
 
     rule = temp[0][0]
-    #TODO: add check to see if it went ok + error code
-
-    #zo ja: rule = opsplitsing
 
     #onderdelen rule stapgeweis afhandelen
-    result = get_result(Tree, grammar, number_of_indents, rule)
+    result = get_result(Tree, grammar, number_of_indents, level, rule, fix, keep_all_tokens)
 
     return result
 
@@ -533,5 +559,5 @@ def unparsing(Tree, grammar, number_of_indents):
 #==============================================================================
 
 #used to run the unparser
-def execute(Tree, lvl):
-    return start_unparsing(Tree,lvl)
+def execute(Tree, lvl, keep_all_tokens = False, lang = "en"):
+    return start_unparsing(Tree,lvl, keep_all_tokens, lang)

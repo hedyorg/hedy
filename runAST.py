@@ -7,22 +7,60 @@ import hedy
 import converter_ASTtransformer as ASTtransformer
 import converter_unparser as unparser
 
-def parser(input_string, level):
+def parser(input_string, level, keep_all_tokens = False, lang = "en"):
     input_string = hedy.process_input_string(input_string, level)
-    parser = hedy.get_parser(level)
-
-#    if level >= 7:
-#        input_string = hedy.preprocess_blocks(input_string, level)
-
+    parser = hedy.get_parser(level, keep_all_tokens = keep_all_tokens, lang = lang)
+#    print(parser.parse(input_string+ '\n').pretty())
     return parser.parse(input_string+ '\n')
 
 def printHelp():
     print("Usage: python hedy.py [--help] <filename> [--level <level (1-8)>]\n\nTo specify a level, add #level <level> to the top of your file or use the --level <level> argument.")
     sys.exit(1)
 
-def unparser_tester(input, level):
-    AST = parser(input,level)
-    return unparser.execute(AST, level)
+def unparser_tester(input, level, lang = "en"):
+    AST = parser(input,level, keep_all_tokens = True, lang=lang)
+    if not valid_and_complete(input, level, lang=lang): return input
+    unparsed = unparser.execute(AST, level, keep_all_tokens = True, lang=lang)
+    print(unparsed[0:-1])
+    return unparsed[0:-1]
+
+def complete_tester(input, level):
+    AST = parser(input,level, keep_all_tokens = True)
+    if level < 18: AST = ASTtransformer.execute(AST, level)
+    print(AST)
+    unparsed = unparser.execute(AST, level+1, keep_all_tokens = True)
+    print(unparsed)
+    return unparsed
+
+def valid_and_complete(program, level, lang="en"):
+    AST = parser(program,level, lang)
+    try:
+        hedy.is_program_valid(AST, program, level, lang)
+        hedy.is_program_complete(AST, level)
+    except:
+        return False
+    return True
+
+def converter(program, level, lang="en"):
+    No_Changes = [2, 4, 5, 6, 8, 9, 10, 12, 13, 14]
+
+    #is the input program valid and complete
+    if not valid_and_complete(program, level, lang="en"): return ""
+    if level in No_Changes: return program
+
+    #Parse
+    AST = parser(program,level, keep_all_tokens = True)
+
+    #Transform
+    if level < 18: AST = ASTtransformer.execute(AST, level)
+    else: print("level too high to Transform")
+
+    #Unparse
+    unparsed = unparser.execute(AST, level+1, keep_all_tokens = True)
+
+    #is the output program valid and complete
+    if not valid_and_complete(unparsed, level+1, lang="en"): return ""
+    return unparsed
 
 def main():
     # python3 hedy.py <filename(0)> [levelargument(1)] [level(2)]
@@ -41,9 +79,9 @@ def main():
             if args[1] == "--level" or args[1] == "-l":
                 try:
                     level = int(args[2])
-                    if level > 16:
+                    if level > 18:
                         print("Level has been set to 8, because the value specified was to high")
-                        level = 16
+                        level = 18
                 except ValueError:
                     print("Level argument is not an integer, skipping argument.")
 
@@ -56,34 +94,19 @@ def main():
             parts = lines[0].split(' ')
             if len(parts) >= 2:
                 level = int(parts[1])
-                if level > 16:
+                if level > 18:
                     print("Level has been set to 8, because the value specified was to high")
-                    level = 16
+                    level = 18
 
-    program = '\n'.join([line
+    program = ''.join([line
         for line in lines
         if not line.startswith('#')])
 
-    #Parse
-    print("Input:")
-    print(program)
-    print("Parsing...")
-    AST = parser(program,level)
-    print("Parser result:")
-    print(AST.pretty())
-    #Transform
-    print("Transforming...")
-    if level < 16:
-        AST = ASTtransformer.execute(AST, level)
-    #    print("Transformer result:")
-    #    print(AST)
-    #else:
-    #    print("level too high to Transform")
-    #Unparse
-    print("Unparsing...")
-    unparsed = unparser.execute(AST, level)
-    #unparser.test_multi()
-    print("Unparser result:")
+#    result = converter(program, level)
+#    print(result[0:-1])
+    AST = parser(program,level, keep_all_tokens = True)
+    print(AST)
+    unparsed = unparser.execute(AST, level, keep_all_tokens = True)
     print(unparsed)
     #Test
     #print("Converting...")

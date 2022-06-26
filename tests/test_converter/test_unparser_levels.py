@@ -148,3 +148,11 @@ class TestsUnparserHedy(HedyTester):
         expected = runAST.parser(input, level)
         result = runAST.parser(output, level)
         self.assertEqual(expected, result)
+
+    def test_level_18(self):
+        level = 18
+        input = "a is 2\nb is 3\nfor a in range(2, 4):\n    a is a + 2\n    b is b + 2"
+        output = runAST.unparser_tester(input, level)
+        expected = runAST.parser(input, level)
+        result = runAST.parser(output, level)
+        self.assertEqual(expected, result)
