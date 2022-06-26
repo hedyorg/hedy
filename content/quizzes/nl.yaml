@@ -1584,10 +1584,6 @@ levels:
             question_score: '10'
         6:
             question_text: "Welke code hoort bij deze uitvoer ?"
-            code: |-
-                Welkom bij restaurant Hedy
-                Pizza
-                Hamburger
             mp_choice_options:
             -   option: |
                     {print} 'Welkom bij restaurant Hedy'
@@ -1726,12 +1722,6 @@ levels:
             question_score: '10'
         2:
             question_text: "Welke code is gebruikt om deze uitvoer te krijgen ?"
-            code: |-
-                1
-                2
-                3
-                4
-                Hoedje van papier
             mp_choice_options:
             -   option: |
                     ```
@@ -1766,18 +1756,6 @@ levels:
             question_score: '10'
         3:
             question_text: "Welke code is gebruikt om deze output te krijgen ?"
-            code: |-
-                10
-                9
-                8
-                7
-                6
-                5
-                4
-                3
-                2
-                1
-                0
             mp_choice_options:
             -   option: |
                     ```
@@ -1938,11 +1916,6 @@ levels:
             question_score: '10'
         10:
             question_text: "Welke code hoort bij deze uitvoer ?"
-            code: |-
-                Baby shark tututudutudu
-                Baby shark tututudutudu
-                Baby shark tututudutudu
-                Baby shark
             mp_choice_options:
             -   option: |
                     ```
@@ -2315,7 +2288,6 @@ levels:
             -   option: "```\n{repeat} 3 {times}\n    desert = {ask} 'What is your favorite type of desert?'\n    {if} desert {is} icecream\n        {repeat} 3 {times}\n        {print} 'Icecream is the best!'\n```\n"
                 feedback: There are 2 `{repeat}` commands in this code.
             question_text: Which code produced this output?
-            code: "Icecream is the best!\nIcecream is the best!\nIcecream is the best!"
             correct_answer: C
             hint: Watch the indentation
             question_score: '10'

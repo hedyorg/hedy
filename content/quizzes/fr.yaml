@@ -1400,10 +1400,6 @@ levels:
             question_score: '10'
         2:
             question_text: "Quelle sera la sortie de ce code ?"
-            code: |-
-                plats = pizza, crêpe, glace
-                for plat in plats
-                    print 'je voudrais une ' plat
             mp_choice_options:
             -   option: "je voudrais une pizza"
                 feedback: "La ligne 2 dit pour 'chaque plat dans la liste des plats' ."
@@ -1421,10 +1417,6 @@ levels:
             question_score: '10'
         3:
             question_text: "Quelle sortie est correcte ?"
-            code: |-
-                animaux = chiens, chats, hamsters
-                for animal in animaux
-                    print 'Les ' animal ' sont mignons'
             mp_choice_options:
             -   option: "chiens sont mignons"
                 feedback: "La ligne 2 dit pour 'chaque animal dans la liste des animaux' ."
@@ -1564,11 +1556,6 @@ levels:
             question_score: '10'
         10:
             question_text: "Quelle est la phrase vraie ?"
-            code: |-
-                lots = 1000€, voiture, sandwich
-                noms = Léa, Louisa, Margaux, Marie, Maelle, Maiwen
-                for lot in lots
-                    print 'Le ' lot ' est gagné par ' noms at random
             mp_choice_options:
             -   option: "Tout le monde gagnera toujours un lot."
                 feedback: "Ce n'est pas vrai, tu pourrais te retrouver sans lot."
@@ -1609,7 +1596,6 @@ levels:
                 feedback: Awesome!
             question_score: '10'
             question_text: Which code was used to create this output?
-            code: "Welcome to restaurant Hedy\nPizza\nHamburger"
             correct_answer: D
             hint: Pay attention to what sould be repeated and what should only be printed once.
         9:
@@ -1847,7 +1833,6 @@ levels:
             -   option: "```\n{repeat} 3 {times}\n    desert = {ask} 'What is your favorite type of desert?'\n    {if} desert {is} icecream\n        {repeat} 3 {times}\n        {print} 'Icecream is the best!'\n```\n"
                 feedback: There are 2 `{repeat}` commands in this code.
             question_text: Which code produced this output?
-            code: "Icecream is the best!\nIcecream is the best!\nIcecream is the best!"
             correct_answer: C
             hint: Watch the indentation
             question_score: '10'
