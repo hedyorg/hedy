@@ -72,6 +72,9 @@ ACHIEVEMENTS_TRANSLATIONS = hedyweb.AchievementTranslations()
 ACHIEVEMENTS = achievements.Achievements()
 DATABASE = database.Database()
 
+# We retrieve these once on server-start: Would be nice to automate this somewhere in the future (06/22)
+PUBLIC_PROGRAMS = DATABASE.get_all_public_programs()
+
 
 def load_adventures_per_level(level):
     loaded_programs = {}
@@ -1121,10 +1124,21 @@ def explore():
 
     achievement = None
     if level or adventure or language:
-        programs = DATABASE.get_filtered_explore_programs(level, adventure, language)
+        programs = PUBLIC_PROGRAMS
+        if level:
+            programs = [x for x in programs if x.get('level') == int(level)]
+        if language:
+            programs = [x for x in programs if x.get('lang') == language]
+        if adventure:
+            # If the adventure we filter on is called 'default' -> return all programs WITHOUT an adventure
+            if adventure == "default":
+                programs = [x for x in programs if x.get('adventure_name') == ""]
+                return programs[-48:]
+            programs = [x for x in programs if x.get('adventure_name') == adventure]
+        programs = programs[-48:]
         achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "indiana_jones")
     else:
-        programs = DATABASE.get_all_explore_programs()
+        programs = PUBLIC_PROGRAMS[:48]
 
     filtered_programs = []
     for program in programs:
