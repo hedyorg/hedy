@@ -222,6 +222,37 @@ class Database:
     def get_all_public_programs(self):
         return PROGRAMS.get_many({'public': 1}, sort_key='date', reverse=True)
 
+    def get_highscores(self, filter, filter_value=None):
+        profiles = []
+
+        if filter == "global" or filter == "country":
+            profiles = self.get_all_public_profiles()
+        if filter == "country":
+            for profile in profiles:
+                if not profile.get('country'):
+                    country = self.user_by_username(profile.get('username')).get('country', None)
+                    self.update_country_public_profile(profile.get('username'), country)
+                    profile['country'] = country
+            profiles = [x for x in self.get_all_public_profiles() if x.get('country') == filter_value]
+        elif filter == "class":
+            Class = self.get_class(filter_value)
+            for student in Class.get('students', []):
+                profile = self.get_public_profile_settings(student)
+                if profile:
+                    profiles.append(profile)
+
+        for profile in profiles:
+            if not profile.get('achievements'):
+                achievements = self.achievements_by_username(profile.get('username'))
+                self.update_achievements_public_profile(profile.get('username'), len(achievements) if achievements else 0)
+                profile['achievements'] = achievements if achievements else 0
+
+        # First sort by amount of achievements, then by time of getting them -> high/low then low/high
+        profiles = sorted(profiles, key=lambda d: d.get('achievements'), reverse=True)
+        profiles = sorted(profiles, key=lambda d: d.get('last_achievement'))
+        return profiles[:50]
+
+
     def get_all_hedy_choices(self):
         return PROGRAMS.get_many({'hedy_choice': 1}, sort_key='date', reverse=True)
 
@@ -396,6 +427,8 @@ class Database:
         if achievement not in user_achievements['achieved']:
             user_achievements['achieved'].append(achievement)
             ACHIEVEMENTS.put(user_achievements)
+        # Update the amount of achievements on the public profile (if exists)
+        self.update_achievements_public_profile(username, len(user_achievements['achieved']))
         if new_user:
             return True
         return False
@@ -413,6 +446,9 @@ class Database:
                 user_achievements['achieved'].append(achievement)
         user_achievements['achieved'] = list(dict.fromkeys(user_achievements['achieved']))
         ACHIEVEMENTS.put(user_achievements)
+
+        # Update the amount of achievements on the public profile (if exists)
+        self.update_achievements_public_profile(username, len(user_achievements['achieved']))
         if new_user:
             return True
         return False
@@ -437,6 +473,22 @@ class Database:
         data['username'] = username
         PUBLIC_PROFILES.put(data)
 
+    def update_achievements_public_profile(self, username, achievements):
+        data = PUBLIC_PROFILES.get({'username': username})
+        # In the case that we make this call but there is no public profile -> don't do anything
+        if data:
+            data['achievements'] = achievements
+            data['last_achievement'] = timems()
+            self.update_public_profile(username, data)
+
+    def update_country_public_profile(self, username, country):
+        data = PUBLIC_PROFILES.get({'username': username})
+        # If there is no data -> we might have made this request from the /update_profile route without a public profile
+        # In this case don't do anything
+        if data:
+            data['country'] = country
+            self.update_public_profile(username, data)
+
     def set_favourite_program(self, username, program_id):
         # We can only set a favourite program is there is already a public profile
         data = PUBLIC_PROFILES.get({'username': username})
@@ -451,6 +503,9 @@ class Database:
 
     def forget_public_profile(self, username):
         PUBLIC_PROFILES.delete({'username': username})
+
+    def get_all_public_profiles(self):
+        return PUBLIC_PROFILES.scan()
 
     def store_parsons(self, attempt):
         PARSONS.create(attempt)

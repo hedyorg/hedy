@@ -78,7 +78,7 @@ def convert_numerals(alphabet, number):
 
 
   // Set const value to determine the current page direction -> useful for ace editor settings
-  const dir = $("#main_container").attr("dir");
+  const dir = $("body").attr("dir");
 
   // *** EDITOR SETUP ***
   initializeMainEditor($('#editor'));
@@ -1318,7 +1318,8 @@ function get_parsons_code() {
         // When the value is 0 there is no code box in the expected spot
         let text = $(this).attr('code') || "";
         if (text.length > 1) {
-          code += text;
+          // Also add a newline as we removed this from the YAML structure
+          code += text + "\n";
         }
         $(this).parents().removeClass('border-black');
         let index = $(this).attr('index') || "-";
