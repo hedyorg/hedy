@@ -119,7 +119,7 @@ In level 15, learners are introduced to the while loop. With the previous knowle
 
 ### Level 16: Adding rectangular brackets
 
-In this level, learners encounter different types of brackets for the first time, because it adds rectangular brackets for list access, which up to now was done with the keyword `at`, following Design Goal 2. THis level also explain accessing lists with a numeric index, starting at 1. The code to access a specific
+In this level, learners encounter brackets for the first time, because it adds rectangular brackets for list access, which up to now was done with the keyword `at`, following Design Goal 2. THis level also explain accessing lists with a numeric index, starting at 1. The code to access a specific
 value has already been available technically since level 2, but there was no explanation yet how to access a specific value and it is not used in examples (and should maybe be removed?)
 
 ### Level 17: Learning elif and the colon
