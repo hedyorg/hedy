@@ -4,7 +4,7 @@
    <h2 class="mx-0 lg:mx-16 px-2 mb-4">{{_('account_overview')}}</h2>
    <div class="flex flex-col gap-4 mx-0 lg:mx-16">
        {% if invite_data %}
-           <h1 class="profile-section-header" onclick="$ ('#messages').toggle()">{{_('my_messages')}}</h1>
+           <h1 class="section-header" onclick="$ ('#messages').toggle()">{{_('my_messages')}}</h1>
            <div id="messages" class="profile-section-body">
              <h2 class="profile-section-body-header">{{_('my_messages')}}</h2>
              {% if invite_data %}
@@ -19,7 +19,7 @@
              {% endif %}
            </div>
        {% endif %}
-       <h1 class="profile-section-header" onclick="$ ('#public_profile').toggle()">{{_('public_profile')}}</h1>
+       <h1 class="section-header" onclick="$ ('#public_profile').toggle()">{{_('public_profile')}}</h1>
        <div id="public_profile" class="profile-section-body">
          <h2 class="profile-section-body-header">{{_('public_profile')}}</h2>
         <div class="flex flex-row my-2 justify-center items-center">
@@ -68,7 +68,7 @@
        </div>
         <!-- If a user doesn't have an email it's a student created by a teacher -> not allowed to leave a class -->
        {% if user_classes and user_data['email'] %}
-           <h1 class="profile-section-header" onclick="$ ('#classes').toggle()">{{_('my_classes')}}</h1>
+           <h1 class="section-header" onclick="$ ('#classes').toggle()">{{_('my_classes')}}</h1>
            <div id="classes" class="profile-section-body">
                <h2 class="profile-section-body-header">{{_('my_classes')}}</h2>
                 <div class="flex flex-col gap-2">
@@ -81,7 +81,7 @@
                 </div>
            </div>
        {% endif %}
-       <h1 class="profile-section-header" onclick="hedyApp.load_profile ('{{user_data['username']}}', '{{user_data['email']}}', '{{user_data['birth_year']}}', '{{user_data['gender']}}', '{{user_data['country']}}')">{{_('settings')}}</h1>
+       <h1 class="section-header" onclick="hedyApp.load_profile ('{{user_data['username']}}', '{{user_data['email']}}', '{{user_data['birth_year']}}', '{{user_data['gender']}}', '{{user_data['country']}}')">{{_('settings')}}</h1>
        <div class="profile-section-body" id="profile">
             <form class="js-validated-form" id="update_profile" onsubmit="event.preventDefault (); hedyApp.auth.submit ('profile')">
             <h2 class="profile-section-body-header">{{_('settings')}}</h2>
@@ -142,7 +142,7 @@
           </form>
           <button class="red-btn" onclick="hedyApp.auth.destroy ('{{_('are_you_sure')}}')">{{_('destroy_profile')}}</button>
        </div>
-      <h1 id="password_toggle" class="profile-section-header" onclick="$ ('#change_password').toggle()">{{_('change_password')}}</h1>
+      <h1 id="password_toggle" class="section-header" onclick="$ ('#change_password').toggle()">{{_('change_password')}}</h1>
         <form class="profile-section-body" id="change_password" onsubmit="event.preventDefault (); hedyApp.auth.submit ('change_password')">
             <h2 class="profile-section-body-header">{{_('change_password')}}</h2>
             <div class="flex flex-row items-center mb-2">
