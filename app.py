@@ -1211,6 +1211,7 @@ def get_highscores_page(user, filter):
     user_data = DATABASE.user_by_username(user['username'])
     classes = list(user_data.get('classes', set()))
     country = user_data.get('country')
+    user_country = COUNTRIES.get(country)
 
     if filter == "global":
         highscores = DATABASE.get_highscores(filter)
@@ -1218,6 +1219,7 @@ def get_highscores_page(user, filter):
         # Can't get a country highscore if you're not in a country!
         if not country:
             return utils.error_page(error=403, ui_message=gettext('no_such_highscore'))
+
         highscores = DATABASE.get_highscores(filter, country)
     elif filter == "class":
         # Can't get a class highscore if you're not in a class!
@@ -1231,7 +1233,7 @@ def get_highscores_page(user, filter):
         highscore['country'] = "-" if not highscore.get('country') else highscore.get('country')
         highscore['last_achievement'] = utils.delta_timestamp(highscore.get('last_achievement'))
     return render_template('highscores.html', highscores=highscores, has_country=True if country else False,
-                           filter=filter, in_class=True if classes else False)
+                           filter=filter, user_country = user_country, in_class=True if classes else False)
 
 
 @app.route('/change_language', methods=['POST'])
@@ -1444,6 +1446,10 @@ def keyword_languages():
 @app.template_global()
 def keyword_languages_keys():
     return [l for l in ALL_KEYWORD_LANGUAGES.keys()]
+
+@app.template_global()
+def get_country(country):
+    return COUNTRIES.get(country, "-")
 
 
 def make_lang_obj(lang):
