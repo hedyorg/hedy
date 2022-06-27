@@ -1,4 +1,6 @@
 # coding=utf-8
+import copy
+
 from website import auth, parsons
 from website import statistics
 from website import quiz
@@ -69,6 +71,9 @@ for lang in ALL_LANGUAGES.keys():
 ACHIEVEMENTS_TRANSLATIONS = hedyweb.AchievementTranslations()
 ACHIEVEMENTS = achievements.Achievements()
 DATABASE = database.Database()
+
+# We retrieve these once on server-start: Would be nice to automate this somewhere in the future (06/22)
+PUBLIC_PROGRAMS = DATABASE.get_all_public_programs()
 
 
 def load_adventures_per_level(level):
@@ -1119,10 +1124,21 @@ def explore():
 
     achievement = None
     if level or adventure or language:
-        programs = DATABASE.get_filtered_explore_programs(level, adventure, language)
+        programs = PUBLIC_PROGRAMS
+        if level:
+            programs = [x for x in programs if x.get('level') == int(level)]
+        if language:
+            programs = [x for x in programs if x.get('lang') == language]
+        if adventure:
+            # If the adventure we filter on is called 'default' -> return all programs WITHOUT an adventure
+            if adventure == "default":
+                programs = [x for x in programs if x.get('adventure_name') == ""]
+                return programs[-48:]
+            programs = [x for x in programs if x.get('adventure_name') == adventure]
+        programs = programs[-48:]
         achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "indiana_jones")
     else:
-        programs = DATABASE.get_all_explore_programs()
+        programs = PUBLIC_PROGRAMS[:48]
 
     filtered_programs = []
     for program in programs:
@@ -1183,6 +1199,39 @@ def explore():
                            adventures_names=adventures_names,
                            page_title=gettext('title_explore'),
                            current_page='explore')
+
+
+@app.route('/highscores', methods=['GET'], defaults={'filter': 'global'})
+@app.route('/highscores/<filter>', methods=['GET'])
+@requires_login
+def get_highscores_page(user, filter):
+    if filter not in ["global", "country", "class"]:
+        return utils.error_page(error=404, ui_message=gettext('page_not_found'))
+
+    user_data = DATABASE.user_by_username(user['username'])
+    classes = list(user_data.get('classes', set()))
+    country = user_data.get('country')
+
+    if filter == "global":
+        highscores = DATABASE.get_highscores(filter)
+    elif filter == "country":
+        # Can't get a country highscore if you're not in a country!
+        if not country:
+            return utils.error_page(error=403, ui_message=gettext('no_such_highscore'))
+        highscores = DATABASE.get_highscores(filter, country)
+    elif filter == "class":
+        # Can't get a class highscore if you're not in a class!
+        if not classes:
+            return utils.error_page(error=403, ui_message=gettext('no_such_highscore'))
+        highscores = DATABASE.get_highscores(filter, classes[0])
+
+    # We have to make the data a bit nicer if possible
+    highscores = copy.deepcopy(highscores)
+    for highscore in highscores:
+        highscore['country'] = "-" if not highscore.get('country') else highscore.get('country')
+        highscore['last_achievement'] = utils.delta_timestamp(highscore.get('last_achievement'))
+    return render_template('highscores.html', highscores=highscores, has_country=True if country else False,
+                           filter=filter, in_class=True if classes else False)
 
 
 @app.route('/change_language', methods=['POST'])

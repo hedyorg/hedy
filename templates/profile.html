@@ -30,7 +30,7 @@
             {% for i in range(1, 13) %}
                 <div class="w-32 h-32 rounded-lg mr-4 relative profile_image {% if (public_settings.image and public_settings.image == i|string()) or (not public_settings.image and i == 1) %}border-2 border-blue-600{% endif %}" id="profile_image_{{ i }}" onclick="hedyApp.select_profile_image({{ i }});">
                     <div class="relative h-full">
-                        <img src="{{static('/images/profile_images/' + i|string() + '.png')}}" class="absolute p-1">
+                        <img src="{{static('/images/profile_images/' + i|string() + '.png')}}" class="absolute p-1" alt="{{_('profile_logo_alt')}}">
                     </div>
                 </div>
             {% endfor %}
