@@ -1,15 +1,15 @@
 7:
 -   name: '{print}'
-    explanation: presi ekzakte per citiloj
+    explanation: Presi ekzakte per citiloj.
     demo_code: "{print} 'Saluton, bonvenon al Hedy.'"
 -   name: '{ask}'
-    explanation: demandu ion per `{ask}`.
+    explanation: Demandu ion per `{ask}`.
     demo_code: "koloro = {ask} 'Kio estas via plej ŝatata koloro?'\n{print} koloro ' estas via plej ŝatata!'"
 -   name: '{if}'
-    explanation: Fari ion kondiĉe per `{if}`
+    explanation: Fari ion kondiĉe per `{if}`.
     demo_code: "koloro = {ask} 'Kio estas via plej ŝatata koloro?'\n{if} koloro {is} verda {print} 'bela!' {else} {print} 'ba!'"
--   name: '{repeat} - testudo'
-    explanation: ripetu kodan linion per `{repeat}`.
+-   name: '`{repeat}` kun testudo'
+    explanation: Ripetu kodan linion per `{repeat}`.
     demo_code: '{repeat} 3 {times} {forward} 10'
 9:
 -   name: '`{if}` kun pluraj linioj'
@@ -39,29 +39,29 @@
     demo_code: "aĝo = {ask} 'Kian aĝon vi havas?'\n{if} aĝo >= 14\n    {print} 'Vi estas pli aĝa ol mi!'"
 1:
 -   name: '{print}'
-    explanation: 'presu ion per `{print}`.'
+    explanation: 'Presu ion per `{print}`.'
     demo_code: '{print} Saluton bonvenon al Hedy!'
 -   name: '{ask}'
-    explanation: demandu ion per `{ask}`.
+    explanation: Demandu ion per `{ask}`.
     demo_code: '{ask} Kio estas via plej ŝatata koloro?'
 -   name: '{echo}'
-    explanation: ripetu ion per `{echo}`.
+    explanation: Ripetu ion per `{echo}`.
     demo_code: "{ask} Kio estas via plej ŝatata koloro?\n{echo} do via plej ŝatata koloro estas"
 -   name: '{print} piktogramojn'
-    explanation: presu piktogramon per `{print}`
+    explanation: Presu piktogramon per `{print}`.
     demo_code: '{print} 🙋 🌍 ❗'
 -   name: '{forward}'
     explanation: Desegnu linion per `{forward}`.
     demo_code: '{forward} 100'
 -   name: '{turn}'
-    explanation: turnu la desegnantan testudon per `{turn}`
+    explanation: Turnu la desegnantan testudon per `{turn}`.
     demo_code: "{forward} 25\n{turn} {left}\n{forward} 25\n{turn} {right}"
 2:
 -   name: '{is}'
     explanation: Donu per `{is}` al vorto nomon uzeblan en la programo. Vi povas mem elekti la nomon.
     demo_code: "nomo {is} Hedy\n{print} bonvenon nomo"
 -   name: '{ask}'
-    explanation: 'demandi pri io per `{ask}`. Averto: vi donu nomon al la respondo per `{is}`.'
+    explanation: 'Demandi pri io per `{ask}`. Averto: vi donu nomon al la respondo per `{is}`.'
     demo_code: "koloro {is} {ask} Kio estas via plej ŝatata koloro?\n{print} koloro estas via plej ŝatata!"
 -   name: '{sleep}'
     explanation: Paŭzigi Hedy dum kelkaj sekundoj.
@@ -71,49 +71,49 @@
     name: '`{is}` kun testudo'
 3:
 -   name: Elekti laŭ hazardo
-    explanation: Elektu hazardan vorton el grupo per `{at}` kaj `{random}`
+    explanation: Elektu hazardan vorton el grupo per `{at}` kaj `{random}`.
     demo_code: "bestoj {is} hundo, kato, kanguruo\n{print} bestoj {at} {random}"
 -   name: '{add}'
-    explanation: aldoni eron al listo
+    explanation: Aldoni eron al listo.
     demo_code: "bestoj {is} bovo, kato\n{add} hundo {to_list} bestoj"
 -   name: '{remove}'
-    explanation: forigu eron el listo
+    explanation: Forigi eron el listo.
     demo_code: "bestoj {is} kato, hundo, bovo\n{remove} hundo {from} bestoj"
 4:
 -   name: '{print}'
-    explanation: presi ekzakte per citiloj
+    explanation: Presi ekzakte per citiloj.
     demo_code: "{print} 'Saluton, bonvenon al Hedy.'"
 -   name: '{is}'
-    explanation: Donu nomon al teksto kaj `{print}` sen citiloj
+    explanation: Donu nomon al teksto kaj `{print}` sen citiloj.
     demo_code: "nomo {is} Hedy\n{print} 'mia nomo estas ' nomo"
 -   name: '{ask}'
-    explanation: demandu ion per `{ask}`.
+    explanation: Demandu ion per `{ask}`.
     demo_code: "koloro {is} {ask} 'Kio estas via plej ŝatata koloro?'\n{print} koloro ' estas via plej ŝatata!'"
 5:
 -   name: '{print}'
-    explanation: presi ekzakte per citiloj
+    explanation: Presi ekzakte per citiloj.
     demo_code: "{print} 'Saluton, bonvenon al Hedy.'"
 -   name: '{ask}'
-    explanation: demandu ion per `{ask}`.
+    explanation: Demandu ion per `{ask}`.
     demo_code: "koloro {is} {ask} 'Kio estas via plej ŝatata koloro?'\n{print} koloro ' estas via plej ŝatata!'"
 -   name: '{if}'
-    explanation: Fari ion kondiĉe per `{if}`
+    explanation: Fari ion kondiĉe per `{if}`.
     demo_code: "koloro {is} {ask} 'Kio estas via plej ŝatata koloro?'\n{if} koloro {is} verda {print} 'bela!' {else} {print} 'ba!'"
 -   name: '{if} kun testudo'
-    explanation: Fari ion kondiĉe per `{if}`
+    explanation: Fari ion kondiĉe per `{if}`.
     demo_code: "respondo {is} {ask} 'Kiel longe mi iru?'\n{if} respondo {is} malproksimen {forward} 100 {else} {forward} 5"
 -   name: '{in}'
-    explanation: Kontrolu elementojn per `{in}`
+    explanation: Kontrolu elementojn per `{in}`.
     demo_code: "belaj_koloroj {is} verda, flava\nkoloro {is} {ask} 'Kio {is} via plej ŝatata koloro?'\n{if} koloro {in} belaj_koloroj {print} 'bela!' {else} {print} 'ba!'"
 6:
 -   name: '{print}'
-    explanation: presi ekzakte per citiloj
+    explanation: Presi ekzakte per citiloj.
     demo_code: "{print} '5 multiplikite per 5 estas ' 5 * 5"
 -   name: '{ask}'
-    explanation: 'demandi pri kalkulo kaj kontroli, ĉu la respondo estas ĝusta.'
+    explanation: 'Demandi pri kalkulo kaj kontroli, ĉu la respondo estas ĝusta.'
     demo_code: "respondo = {ask} 'Kio estas 10 plus 10?'\n{if} respondo {is} 20 {print} 'Jes!' {else} {print} 'Vi malpravas'"
 -   name: '`{ask}` kaj `{if}` kun testudo'
-    explanation: 'Demandu la uzanton pri kiom da anguloj ŝi/li volas'
+    explanation: 'Demandu la uzanton pri kiom da anguloj ŝi/li volas.'
     demo_code: "anguloj = {ask} 'Kiom da anguloj?'\nangulo = 360 / anguloj\n{forward} 50"
 8:
 -   name: '{print}'
