@@ -87,7 +87,7 @@ for students to learn, so this warrants its own level (Design Goal 3).
 
 ### Level 10: For syntax looping over list 
 
-In level 10, learners the range syntax, looping over the values in a list with `for animal in animals`.
+In level 10, learners the `for` syntax to loop over the values in a list with `for animal in animals`.
 This allows the customization of stories, drawing and songs. 
 
 ### Level 11: For syntax with in range
