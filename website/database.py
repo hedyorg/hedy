@@ -222,7 +222,7 @@ class Database:
     def get_all_public_programs(self):
         return PROGRAMS.get_many({'public': 1}, sort_key='date', reverse=True)
 
-    def get_highscores(self, filter, filter_value=None):
+    def get_highscores(self, username, filter, filter_value=None):
         profiles = []
 
         if filter == "global" or filter == "country":
@@ -250,6 +250,16 @@ class Database:
         # First sort by amount of achievements, then by time of getting them -> high/low then low/high
         profiles = sorted(profiles, key=lambda d: d.get('achievements'), reverse=True)
         profiles = sorted(profiles, key=lambda d: d.get('last_achievement'))
+
+        # Add ranking for each profile
+        ranking = 1
+        for profile in profiles:
+            profile['ranking'] = ranking
+            ranking += 1
+
+        # If the user is not in the current top 50: still append to the results
+        if not any(d['username'] == username for d in profiles[:50]):
+            return profiles[:50] + [i for i in profiles if i['username'] == username]
         return profiles[:50]
 
 
