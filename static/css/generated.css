@@ -953,6 +953,11 @@ code {
   margin-right: 0.75rem;
 }
 
+.mx-0 {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
 .mb-4 {
   margin-bottom: 1rem;
 }
@@ -1392,10 +1397,6 @@ code {
 
 .self-end {
   align-self: flex-end;
-}
-
-.justify-self-end {
-  justify-self: end;
 }
 
 .overflow-auto {
@@ -2638,6 +2639,72 @@ p.close-dialog {
   padding-right: 3rem;
 }
 
+/* Profile page */
+
+.profile-section-header {
+  cursor: pointer;
+  border-radius: 0.5rem;
+  --tw-bg-opacity: 1;
+  background-color: rgb(190 227 248 / var(--tw-bg-opacity));
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  font-size: 1.875rem;
+}
+
+.profile-section-body-header {
+  margin-bottom: 1rem;
+  display: inline-block;
+  width: 100%;
+  border-bottom-width: 1px;
+  padding-bottom: 0.5rem;
+}
+
+.profile-section-body {
+  margin-left: auto;
+  margin-right: auto;
+  display: none;
+  width: 100%;
+  border-radius: 0.25rem;
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 1.5rem;
+  padding-bottom: 2rem;
+  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+@media (min-width: 1024px) {
+  .profile-section-body {
+    width: 75%;
+  }
+}
+
+.personal-input {
+  display: block;
+  width: 75%;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border-radius: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  --tw-text-opacity: 1;
+  color: rgb(74 85 104 / var(--tw-text-opacity));
+}
+
+@media (min-width: 1024px) {
+  .personal-input {
+    width: 50%;
+  }
+}
+
 /* Developers mode toggle */
 
 [dir="ltr"] .toggle-circle {
@@ -2988,6 +3055,11 @@ input:checked ~ .toggle-path {
 
   .lg\:order-4 {
     order: 4;
+  }
+
+  .lg\:mx-16 {
+    margin-left: 4rem;
+    margin-right: 4rem;
   }
 
   .lg\:mt-6 {
