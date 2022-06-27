@@ -1228,7 +1228,8 @@ def get_highscores_page(user, filter):
     # We have to make the data a bit nicer if possible
     highscores = copy.deepcopy(highscores)
     for highscore in highscores:
-        highscore['country'] = highscore.get('country', '-')
+        print(highscore)
+        highscore['country'] = highscore.get('country') if highscore.get('country') else "-"
         highscore['last_achievement'] = utils.delta_timestamp(highscore.get('last_achievement'))
     return render_template('highscores.html', highscores=highscores, has_country=True if country else False,
                            filter=filter, in_class=True if classes else False)
