@@ -1213,20 +1213,18 @@ def get_highscores_page(user, filter):
     country = user_data.get('country')
 
     if filter == "global":
-        highscores = DATABASE.get_highscores(filter)
+        highscores = DATABASE.get_highscores(user['username'], filter)
     elif filter == "country":
         # Can't get a country highscore if you're not in a country!
         if not country:
             return utils.error_page(error=403, ui_message=gettext('no_such_highscore'))
-        highscores = DATABASE.get_highscores(filter, country)
+        highscores = DATABASE.get_highscores(user['username'], filter, country)
     elif filter == "class":
         # Can't get a class highscore if you're not in a class!
         if not classes:
             return utils.error_page(error=403, ui_message=gettext('no_such_highscore'))
-        highscores = DATABASE.get_highscores(filter, classes[0])
+        highscores = DATABASE.get_highscores(user['username'], filter, classes[0])
 
-    # We have to make the data a bit nicer if possible
-    highscores = copy.deepcopy(highscores)
     for highscore in highscores:
         highscore['country'] = highscore.get('country') if highscore.get('country') else "-"
         highscore['last_achievement'] = utils.delta_timestamp(highscore.get('last_achievement'))
