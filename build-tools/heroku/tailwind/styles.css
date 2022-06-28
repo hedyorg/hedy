@@ -160,18 +160,23 @@ code {
 }
 
 .menubar-btn {
-  @apply text-white no-underline font-slab font-semibold border-b-4 tracking-wide text-xl py-3 ltr:mr-4 rtl:ml-4;
+  @apply block text-white no-underline font-slab font-semibold border-b-4 border-blue-500 tracking-wide text-xl py-3 px-4;
 }
 
-@screen lg {
-  .menubar-btn {
-    @apply px-2;
-  }
+.menubar-btn:hover {
+  @apply bg-blue-600 border-blue-600;
 }
-@screen xl {
-  .menubar-btn {
-    @apply px-4;
-  }
+
+.menubar-btn.active {
+  @apply border-white !important;
+}
+
+.dropdown-btn {
+  @apply block flex flex-row items-center gap-2 text-white no-underline font-slab tracking-wide text-lg py-2 px-2;
+}
+
+.dropdown-btn:hover {
+  @apply bg-blue-600;
 }
 
 .codebar-btn {
