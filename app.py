@@ -1226,6 +1226,9 @@ def get_highscores_page(user, filter):
             return utils.error_page(error=403, ui_message=gettext('no_such_highscore'))
         highscores = DATABASE.get_highscores(user['username'], filter, classes[0])
 
+    # Make a deepcopy if working locally, otherwise the local database values are by-reference and overwritten
+    if not os.getenv('NO_DEBUG_MODE'):
+        highscores = copy.deepcopy(highscores)
     for highscore in highscores:
         highscore['country'] = highscore.get('country') if highscore.get('country') else "-"
         highscore['last_achievement'] = utils.delta_timestamp(highscore.get('last_achievement'))
