@@ -205,27 +205,6 @@ class AuthHelper(unittest.TestCase):
 # *** TESTS ***
 
 class TestPages(AuthHelper):
-    def test_get_main_page(self):
-        # WHEN attempting to get the main page
-        # THEN receive an OK response code from the server
-        self.get_data('/')
-
-    def test_get_code_page(self):
-        # WHEN attempting to get the code page
-        # THEN receive an OK response code from the server
-        self.get_data('/hedy')
-
-    def test_get_explore_page(self):
-        # WHEN attempting to get the explore page
-        # THEN receive an OK response code from the server
-        self.given_fresh_user_is_logged_in()
-        self.get_data('/explore')
-
-    def test_get_learn_more_page(self):
-        # WHEN attempting to get the learn-more page
-        # THEN receive an OK response code from the server
-        self.get_data('/learn-more')
-
     def test_get_login_page(self):
         # WHEN attempting to get the login page
         # THEN receive an OK response code from the server
@@ -240,30 +219,6 @@ class TestPages(AuthHelper):
         # WHEN attempting to get the signup page
         # THEN receive an OK response code from the server
         self.get_data('/recover')
-
-    def test_get_programs_page(self):
-        # WHEN attempting to get the programs page
-        # THEN receive an OK response code from the server
-        self.given_fresh_user_is_logged_in()
-        self.get_data('/programs')
-
-    def test_get_achievements_page(self):
-        # WHEN attempting to get the achievements page
-        # THEN receive an OK response code from the server
-        self.given_fresh_user_is_logged_in()
-        self.get_data('/my-achievements')
-
-    def test_get_profile_page(self):
-        # WHEN attempting to get the profile page
-        # THEN receive an OK response code from the server
-        self.given_fresh_user_is_logged_in()
-        self.get_data('/my-profile')
-
-    def test_get_landing_page(self):
-        # WHEN attempting to get the landing page
-        # THEN receive an OK response code from the server
-        self.given_fresh_user_is_logged_in()
-        self.get_data('/landing-page')
 
     def test_get_admin_page(self):
         # WHEN attempting to get the admin page
@@ -282,13 +237,68 @@ class TestPages(AuthHelper):
         self.get_data('/cheatsheet/123', expect_http_code=404)
         self.get_data('/cheatsheet/panda', expect_http_code=404)
 
+    def test_highscore_pages(self):
+        # WHEN trying all languages to reach the highscore page
+        # THEN receive an OK response from the server
+        self.given_fresh_user_is_logged_in()
+        body = {'email': self.user['email'], 'keyword_language': self.user['keyword_language']}
+
+        for language in ALL_LANGUAGES.keys():
+            body['language'] = language
+            self.post_data('profile', body)
+            self.get_data("/highscores")
+
+    def test_valid_country_highscore_page(self):
+        # WHEN trying to reach the highscores page for a country with a profile country
+        # THEN receive an OK response from the server
+        self.given_fresh_user_is_logged_in()
+
+        # Add a country to the user profile
+        body = {
+            'email': self.user['email'],
+            'language': self.user['language'],
+            'keyword_language': self.user['keyword_language'],
+            'country': 'NL'
+        }
+        self.post_data('profile', body)
+
+        # Receive a valid response
+        self.get_data("/highscores/country")
+
+    def test_invalid_country_highscore_page(self):
+        # WHEN trying to reach the highscores page for a country without a profile country
+        # THEN receive an error response from the server
+        self.given_fresh_user_is_logged_in()
+        self.get_data("/highscores/country", expect_http_code=403)
+
+    def test_valid_class_highscore_page(self):
+        # WHEN a teacher is logged in and create a class
+        self.given_teacher_is_logged_in()
+        self.post_data('class', {'name': 'class1'})
+        Class = self.get_data('classes')[0]
+
+        # THEN a fresh user logs in and joins this class
+        self.given_fresh_user_is_logged_in()
+        self.post_data('class/join', {'id': Class['id']}, expect_http_code=200)
+
+        # THEN we can access the class highscore page
+        self.get_data("/highscores/class")
+
+    def test_invalid_class_highscore_page(self):
+        # WHEN a fresh user is not in a class
+        self.given_fresh_user_is_logged_in()
+
+        # THEN we can can't access the class highscore page
+        self.get_data("/highscores/class", expect_http_code=403)
+
+
     def test_all_languages(self):
         # WHEN trying all languages to reach all pages
         # THEN receive an OK response from the server
         self.given_fresh_user_is_logged_in()
 
         body = {'email': self.user['email'], 'keyword_language': self.user['keyword_language']}
-        pages = ['/', '/hedy', '/tutorial', '/explore', '/learn-more', '/programs', '/my-achievements', '/my-profile']
+        pages = ['/', '/hedy', '/landing-page', '/tutorial', '/explore', '/learn-more', '/programs', '/my-achievements', '/my-profile']
 
         for language in ALL_LANGUAGES.keys():
             body['language'] = language

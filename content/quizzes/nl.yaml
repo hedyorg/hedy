@@ -1584,10 +1584,6 @@ levels:
             question_score: '10'
         6:
             question_text: "Welke code hoort bij deze uitvoer ?"
-            code: |-
-                Welkom bij restaurant Hedy
-                Pizza
-                Hamburger
             mp_choice_options:
             -   option: |
                     {print} 'Welkom bij restaurant Hedy'
@@ -1615,6 +1611,7 @@ levels:
             correct_answer: "D"
             hint: "Let goed op, de welkomstzin wordt niet herhaald, maar de bestelling wel."
             question_score: '10'
+            output: "Welcome to restaurant Hedy\nPizza\nHamburger"
         7:
             question_text: "Wat is er mis met deze code ?"
             code: |-
@@ -1726,12 +1723,6 @@ levels:
             question_score: '10'
         2:
             question_text: "Welke code is gebruikt om deze uitvoer te krijgen ?"
-            code: |-
-                1
-                2
-                3
-                4
-                Hoedje van papier
             mp_choice_options:
             -   option: |
                     ```
@@ -1764,20 +1755,9 @@ levels:
             correct_answer: "A"
             hint: "Eerst komen alle cijfers en dan pas het zinnetje"
             question_score: '10'
+            output: "1\n2\n3\n4\n5\nOnce I caught a fish alive!"
         3:
             question_text: "Welke code is gebruikt om deze output te krijgen ?"
-            code: |-
-                10
-                9
-                8
-                7
-                6
-                5
-                4
-                3
-                2
-                1
-                0
             mp_choice_options:
             -   option: |
                     ```
@@ -1806,6 +1786,7 @@ levels:
             correct_answer: "D"
             hint: "Het wordt een sommetje..."
             question_score: '10'
+            output: "10\n9\n8\n7\n6\n5\n4\n3\n2\n1\n0"
         4:
             question_text: "Wat is er mis met deze code ?"
             code: |-
@@ -1938,11 +1919,6 @@ levels:
             question_score: '10'
         10:
             question_text: "Welke code hoort bij deze uitvoer ?"
-            code: |-
-                Baby shark tututudutudu
-                Baby shark tututudutudu
-                Baby shark tututudutudu
-                Baby shark
             mp_choice_options:
             -   option: |
                     ```
@@ -1972,6 +1948,7 @@ levels:
             correct_answer: "B"
             hint: "Pas op het inspringen"
             question_score: '10'
+            output: "Baby shark tututudutudu\nBaby shark tututudutudu\nBaby shark tututudutudu\nBaby shark"
     10:
         1:
             question_text: "Wat moet er op _?_ komen te staan ?"
@@ -2315,10 +2292,10 @@ levels:
             -   option: "```\n{repeat} 3 {times}\n    desert = {ask} 'What is your favorite type of desert?'\n    {if} desert {is} icecream\n        {repeat} 3 {times}\n        {print} 'Icecream is the best!'\n```\n"
                 feedback: There are 2 `{repeat}` commands in this code.
             question_text: Which code produced this output?
-            code: "Icecream is the best!\nIcecream is the best!\nIcecream is the best!"
             correct_answer: C
             hint: Watch the indentation
             question_score: '10'
+            output: "Icecream is the best!\nIcecream is the best!\nIcecream is the best!"
         6:
             mp_choice_options:
             -   option: '`{if}`'

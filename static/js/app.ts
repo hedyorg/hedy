@@ -726,12 +726,10 @@ export function share_program(id: string, index: number, Public: boolean) {
       if (response.achievement) {
         showAchievements(response.achievement, false, "");
       }
+      modal.alert (response.message, 3000, false);
       if (Public) {
-        $('#modal-copy-button').attr('onclick', "hedyApp.copy_to_clipboard('" + viewProgramLink(id) + "')");
-        modal.copy_alert (response.message, 5000);
         change_shared(true, index);
       } else {
-        modal.alert (response.message, 3000, false);
         change_shared(false, index);
       }
     }).fail(function(err) {
@@ -1318,7 +1316,8 @@ function get_parsons_code() {
         // When the value is 0 there is no code box in the expected spot
         let text = $(this).attr('code') || "";
         if (text.length > 1) {
-          code += text;
+          // Also add a newline as we removed this from the YAML structure
+          code += text + "\n";
         }
         $(this).parents().removeClass('border-black');
         let index = $(this).attr('index') || "-";

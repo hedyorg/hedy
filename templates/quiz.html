@@ -1,7 +1,7 @@
 <div id="start_quiz_container">
     <div class="flex flex-col">
         <div class="flex items-center justify-center bg-blue-200 p-10">
-            <img class="rounded-full border-green-600 border-8 w-80" src="{{ static('/images/quiz_logo.jpg') }}" alt="Quiz logo">
+            <img class="rounded-full border-green-600 border-8 w-80" src="{{ static('/images/quiz_logo.jpg') }}" alt="{{_('quiz_logo_alt')}}">
         </div>
         <div class="p-8 border-t-8 bg-blue-400 border-blue-600">
             <h1 class="text-center text-white font-bold font-slab">{{_('start_quiz')}}</h1>
@@ -31,6 +31,7 @@
         <div class="turn-pre-into-ace w-3/4 mx-auto my-4 hidden" id="quiz_question_code_container">
             <pre class="quiz-question no-copy-button" id="quiz_question_code" level="{{ level }}"></pre> <!-- question code -->
         </div>
+        <div class="w-3/4 mx-auto my-4 hidden rounded p-2 px-3 bg-gray-900 color-white w-full text-lg overflow-auto" id="quiz_question_output_container"></div> <!-- question output -->
         <div class="text-red-900 text-xl text-center my-2 font-slab font-semibold" id="quiz_question_hint">
             <!-- question hint -->
         </div>
