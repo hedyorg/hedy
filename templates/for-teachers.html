@@ -10,104 +10,108 @@
       </div>
   </div>
 {% endif %}
-<div id="teacher_classes" class="flex flex-col items-center py-4 border-b-2">
-    <h2>{{_('my_classes')}}</h2>
-    {% if teacher_classes %}
-      <table class="table-auto w-1/2 border-separate space-y-6 border border-black mt-4 mb-4">
-        <thead class="bg-gray-200">
-          <tr><th class="p-2 w-3/4">{{_('name')}}</th>
-              <th class="p-2">{{_('students')}}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for class in teacher_classes %}
-            <tr>
-              <td class="px-4 py-2"><a href="for-teachers/class/{{class.id}}">{{class.name|e}}</a></td>
-              <td class="text-center p-2">{{class.students|length}}</td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    {% endif %}
-  <button class="green-btn mt-4" onclick='hedyApp.create_class ({{_('class_name_prompt')|tojson}})'>{{_('create_class')}}</button>
-</div>
-<div id="teacher_adventures" class="flex flex-col items-center mt-4 mb-4 py-4 border-b-2">
-    <h2>{{_('my_adventures')}}</h2>
-    {% if teacher_adventures %}
-        <table class="table-auto w-1/2 border-separate space-y-6 border border-black mt-4 mb-4">
-        <thead class="bg-gray-200">
-          <tr><th class="p-2">{{_('name')}}</th>
-              <th class="p-2">{{_('level')}}</th>
-              <th class="p-2">{{_('last_update')}}</th>
-              <th class="p2">{{_('view')}}</th>
-              <th class="p-2">{{_('remove')}}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for adventure in teacher_adventures %}
-            <tr>
-              <td class="px-4 py-2"><a href="for-teachers/customize-adventure/{{adventure.id}}">{{adventure.name|e}}</a></td>
-              <td class="text-center p-2">{% if adventure.level %}{{adventure.level}}{% else %}-{% endif %}</td>
-              <td class="text-center p-2">{{adventure.date}}</td>
-              <td class="text-center p-2"><a href="#" onclick="window.open('/for-teachers/customize-adventure/view/{{ adventure.id }}');">{{_('view')}}</a></td>
-              <td class="text-center p-2"><a href="#" onclick='hedyApp.delete_adventure("{{adventure.id}}", {{_('delete_adventure_prompt')|tojson}})'>{{_('remove')}}</a></td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    {% endif %}
-    <button class="green-btn mt-4" onclick='hedyApp.create_adventure({{_('adventure_prompt')|tojson}})'>{{_('create_adventure')}}</button>
-</div>
-<div class="w-full mt-4 py-4" id="teacher_documentation">
-    <h2 class="text-center">{{ content['title'] }}</h2>
-    <div class="flex flex-row justify-center mb-4 pb-4 border-b-2">
-    {% for section in content['sections'] %}
-        <button class="green-btn text-xl m-2 p-4 section-button" id="button-{{loop.index}}" onclick="hedyApp.show_doc_section('{{loop.index}}')">{{section.title}}</button>
-    {% endfor %}
+<div class="flex flex-col gap-4">
+    <div id="teacher_classes" class="flex flex-col items-center gap-2 pb-4 border-b">
+        <h2>{{_('my_classes')}}</h2>
+        {% if teacher_classes %}
+          <table class="table-auto w-full lg:w-3/4 border-separate space-y-6 border border-black rounded-lg">
+            <thead class="bg-gray-200">
+              <tr>
+                  <th class="px-4 py-2 w-3/4 text-left">{{_('name')}}</th>
+                  <!-- This is a bucket-fix to get the first letter capitalized, should find a long-term solution -->
+                  <th class="px-4 py-2">{{_('students')[0]|upper}}{{_('students')[1:]}}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for class in teacher_classes %}
+                <tr>
+                  <td class="px-4 py-2"><a href="for-teachers/class/{{class.id}}">{{class.name|e}}</a></td>
+                  <td class="text-center p-2">{{class.students|length}}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        {% endif %}
+      <button class="green-btn mt-4" onclick='hedyApp.create_class ({{_('class_name_prompt')|tojson}})'>{{_('create_class')}}</button>
     </div>
-    {% for section in content['sections'] %}
-        <div class="section hidden" id="section-{{loop.index}}">
-        {% if section.key != "common_mistakes" %}
-            {% for subsection in section['subsections'] %}
-                <h4>{{ subsection.title }}</h4>
-                <p>{{ subsection.text|commonmark }}</p>
-            {% endfor %}
-        {% else %}
-            <p>{{ section.intro|commonmark }}</p>
-            <div class="flex flex-row justify-center">
-                {% for level in section['levels'] %}
-                    <button class="green-btn text-xl p-4 mx-2 common-mistakes-button" id="cm-button-{{loop.index}}" onclick="hedyApp.show_common_mistakes('{{loop.index}}')">Level {{ level.level }}</button>
+    <div id="teacher_adventures" class="flex flex-col items-center gap-2 pb-4 border-b">
+        <h2>{{_('my_adventures')}}</h2>
+        {% if teacher_adventures %}
+            <table class="table-auto w-full lg:w-3/4 border-separate space-y-6 border border-black rounded-lg">
+            <thead class="bg-gray-200">
+              <tr><th class="px-4 py-2 text-left">{{_('name')}}</th>
+                  <th class="p-2">{{_('level')}}</th>
+                  <th class="p-2">{{_('last_update')}}</th>
+                  <th class="p2">{{_('view')}}</th>
+                  <th class="p-2">{{_('remove')}}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for adventure in teacher_adventures %}
+                <tr>
+                  <td class="px-4 py-2"><a href="for-teachers/customize-adventure/{{adventure.id}}">{{adventure.name|e}}</a></td>
+                  <td class="text-center p-2">{% if adventure.level %}{{adventure.level}}{% else %}-{% endif %}</td>
+                  <td class="text-center p-2">{{adventure.date}}</td>
+                  <td class="text-center p-2"><a href="#" onclick="window.open('/for-teachers/customize-adventure/view/{{ adventure.id }}');">{{_('view')}}</a></td>
+                  <td class="text-center p-2"><a href="#" onclick='hedyApp.delete_adventure("{{adventure.id}}", {{_('delete_adventure_prompt')|tojson}})'>{{_('remove')}}</a></td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        {% endif %}
+        <button class="green-btn mt-4" onclick='hedyApp.create_adventure({{_('adventure_prompt')|tojson}})'>{{_('create_adventure')}}</button>
+    </div>
+    <div class="" id="teacher_documentation">
+        <h2 class="text-center">{{ content['title'] }}</h2>
+        <div class="flex flex-wrap gap-2 justify-center pb-4 border-b">
+        {% for section in content['sections'] %}
+            <button class="green-btn p-4 section-button" id="button-{{loop.index}}" onclick="hedyApp.show_doc_section('{{loop.index}}')">{{section.title}}</button>
+        {% endfor %}
+        </div>
+        {% for section in content['sections'] %}
+            <div class="section hidden" id="section-{{loop.index}}">
+            {% if section.key != "common_mistakes" %}
+                {% for subsection in section['subsections'] %}
+                    <h4>{{ subsection.title }}</h4>
+                    <p>{{ subsection.text|commonmark }}</p>
                 {% endfor %}
-            </div>
-            {% for level in section['levels'] %}
-                <div class="common-mistakes-section hidden turn-pre-into-ace mt-4" id="common_mistakes-{{loop.index}}">
-                    {% for mistake_section in level.sections %}
-                        <div class="mt-12">
-                            <h2>{{ mistake_section.title }}</h2>
-                            {% if mistake_section.example %} <!-- In this case we expect an error/solution combination -->
-                                <p>{{ mistake_section.example.error_text|commonmark }}</p>
-                                <div class="w-1/2 turn-pre-into-ace my-5">
-                                    <pre class="common-mistakes no-copy-button" level="{{ level.level }}">{{ mistake_section.example.error_code }}</pre>
-                                </div>
-                                <p>{{ mistake_section.example.solution_text|commonmark }}</p>
-                                <div class="w-1/2 turn-pre-into-ace my-5">
-                                    <pre class="common-mistakes no-copy-button" level="{{ level.level }}">{{ mistake_section.example.solution_code }}</pre>
-                                </div>
-                            {% else %}
-                                <p>{{ mistake_section.text|commonmark }}</p>
-                                {% if mistake_section.code %}
-                                     <div class="w-1/2 turn-pre-into-ace my-5">
-                                         <pre class="common-mistakes no-copy-button" level="{{ level.level }}">{{ mistake_section.code }}</pre>
-                                     </div>
-                                {% endif %}
-                            {% endif %}
-                        </div>
+            {% else %}
+                <p>{{ section.intro|commonmark }}</p>
+                <div class="flex flex-wrap gap-2 justify-center">
+                    {% for level in section['levels'] %}
+                        <button class="green-btn p-4 common-mistakes-button" id="cm-button-{{loop.index}}" onclick="hedyApp.show_common_mistakes('{{loop.index}}')">Level {{ level.level }}</button>
                     {% endfor %}
                 </div>
-            {% endfor %}
-        {% endif %}
-        </div>
-    {% endfor %}
+                {% for level in section['levels'] %}
+                    <div class="common-mistakes-section hidden flex flex-col gap-4 mt-4" id="common_mistakes-{{loop.index}}">
+                        {% for mistake_section in level.sections %}
+                            <div>
+                                <h2>{{ mistake_section.title }}</h2>
+                                {% if mistake_section.example %} <!-- In this case we expect an error/solution combination -->
+                                    <p>{{ mistake_section.example.error_text|commonmark }}</p>
+                                    <div class="w-full lg:w-1/2 turn-pre-into-ace my-5">
+                                        <pre class="common-mistakes no-copy-button" level="{{ level.level }}" style="font-size: 0.95em;">{{ mistake_section.example.error_code }}</pre>
+                                    </div>
+                                    <p>{{ mistake_section.example.solution_text|commonmark }}</p>
+                                    <div class="w-full lg:w-1/2 turn-pre-into-ace my-5">
+                                        <pre class="common-mistakes no-copy-button" level="{{ level.level }}" style="font-size: 0.95em;">{{ mistake_section.example.solution_code }}</pre>
+                                    </div>
+                                {% else %}
+                                    <p>{{ mistake_section.text|commonmark }}</p>
+                                    {% if mistake_section.code %}
+                                         <div class="w-full lg:w-1/2 turn-pre-into-ace my-5">
+                                             <pre class="common-mistakes no-copy-button" level="{{ level.level }}" style="font-size: 0.95em;">{{ mistake_section.code }}</pre>
+                                         </div>
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            </div>
+        {% endfor %}
+    </div>
 </div>
 
 <script>

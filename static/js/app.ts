@@ -95,7 +95,7 @@ def convert_numerals(alphabet, number):
     // Fits to content size
     exampleEditor.setOptions({ maxLines: Infinity });
     if ($(preview).hasClass('common-mistakes')) {
-      exampleEditor.setOptions({ minLines: 10 });
+      exampleEditor.setOptions({ minLines: 5 });
     } else if ($(preview).hasClass('cheatsheet')) {
       exampleEditor.setOptions({ minLines: 1 });
     } else if ($(preview).hasClass('parsons')) {
