@@ -726,12 +726,10 @@ export function share_program(id: string, index: number, Public: boolean) {
       if (response.achievement) {
         showAchievements(response.achievement, false, "");
       }
+      modal.alert (response.message, 3000, false);
       if (Public) {
-        $('#modal-copy-button').attr('onclick', "hedyApp.copy_to_clipboard('" + viewProgramLink(id) + "')");
-        modal.copy_alert (response.message, 5000);
         change_shared(true, index);
       } else {
-        modal.alert (response.message, 3000, false);
         change_shared(false, index);
       }
     }).fail(function(err) {

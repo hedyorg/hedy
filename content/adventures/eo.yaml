@@ -3,7 +3,7 @@ adventures:
         default_save_name: Rakonto
         levels:
             1:
-                start_code: '{print} Your story starts here'
+                start_code: '{print} Jen la komenco de via rakonto'
                 story_text: |
                     ## Make a story
                     In level 1 you can make a story with a different main character that you enter yourself.
@@ -34,7 +34,7 @@ adventures:
             2:
                 story_text: "## Story\nIn level 2 you can make your story more fun. Your main character's name can now be anywhere in the sentence.\n\nYou do have to program a little bit extra for that. You must now name your main character first.\n\nYou can then put that name anywhere in a sentence.\n"
                 example_code: "```\nname {is} {ask} What is the name of the main character?\n{print} name is now going to run in the woods\n{print} name is a bit scared\n{print} Suddenly he hears a crazy noise...\n{sleep}\n{print} name is afraid this is a haunted forest\n```"
-                start_code: '{print} Your story'
+                start_code: '{print} Via rakonto'
             3:
                 story_text: "## Story\nIn level 3 you can make your story more fun. You can use randomness for any monster, animal or other obstacle, like this:\n"
                 example_code: "```\nbestoj {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} Li nun aŭdas la sonon de bestoj {at} {random}\n```\n"
@@ -42,7 +42,7 @@ adventures:
                 example_code_2: "```\n{print} Li aŭdas sonon\nbestoj {is} \U0001F43F, \U0001F994, \U0001F987, \U0001F989\nbesto {is} {ask} Kio estas ĝi laŭ via opinio?\n{add} besto {to_list} bestoj\n{print} ĝi estis bestoj {at} {random}\n```\n"
                 story_text_3: "This is an example of the `{remove}` command in your story\n"
                 example_code_3: "```\n{print} His backpack got way too heavy.\n{print} Inside were a bottle of water, a flashlight and a brick.\nbag {is} water, flashlight, brick\ndump {is} {ask} Which item should he dump?\n{remove} dump {from} bag\n```\n"
-                start_code: '{print} Your story'
+                start_code: '{print} Via rakonto'
             4:
                 story_text: "## Story\nYou may have noticed that there is still a problem in the previous levels. Did you try to print a sentence that contained the word name?\nYou can solve that in this level. You must use quotation marks for everything that you are going to print.\n"
                 example_code: "```\nname {is} Hans\n{print} 'The name of the main character is' name\n{print} name 'is now going to walk in the woods'\n{print} name 'is a bit scared'\nbestoj {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} 'He hears the sound of an' bestoj {at} {random}\n{print} name 'is afraid this is a haunted forest'\n```\n"
@@ -70,18 +70,18 @@ adventures:
             10:
                 start_code: '# via kodo ĉi tie'
                 story_text: "## Songs\nIn this level you can easily make the childrens' song 'Five little monkeys'. Can you make the last chorus?\nYou can also make the whole baby shark song (including all the other sharks in the family) in only 6 lines!\nOr you can make Old McDonald with all the different animals.\n"
-                example_code: "## 5 Little Monkeys Jumping on the bed\n```\nmonkeys = 5, 4, 3, 2\n{for} monkey {in} monkeys\n    {print} monkey ' little monkeys jumping on the bed'\n    {print} 'One fell off and bumped his head'\n    {print} 'Mama called the doctor and the doctor said'\n    {print} 'NO MORE MONKEYS JUMPING ON THE BED!'\n```\n\n## Baby Shark\n```\nsharks = baby, mommy, daddy, grandma, grandpa\n{for} shark {in} sharks\n    {print} shark 'tututututudu'\n    {print} shark 'tututututudu'\n    {print} shark 'tututututudu'\n    {print} shark\n```\n## Old McDonald\n```\nbestoj = pig, hundo, bovo\n{for} besto {in} bestoj\n    {if} besto {is} pig\n        sound = oink\n    {if} besto {is} hundo\n        sound = woof\n    {if} besto {is} bovo\n        sound = moo\n    {print} 'Old McDonald had a farm'\n    {print} 'E I E I O!'\n    {print} 'and on that farm he had a ' besto\n    {print} 'E I E I O!'\n    {print} 'with a ' sound sound ' here'\n    {print} 'and a ' sound sound ' there'\n    {print} 'here a ' sound\n    {print} 'there a ' sound\n    {print} 'everywhere a ' sound sound\n```\n"
+                example_code: "## 5 simietoj saltantaj sur la lito\n```\nsimioj = 5, 4, 3, 2\n{for} simio {in} simioj\n    {print} simio ' simietoj saltantaj sur la lito'\n    {print} 'Oni defalis kaj frapis sian kapon'\n    {print} 'Panjo vokis la kuraciston, kaj la kuracisto diris:'\n    {print} 'SIMIOJ NE SALTU SUR LA LITO!'\n```\n\n## Ŝarkido\n```\nŝarkoj = ŝarkido, panjo, paĉjo, avinjo, avĉjo\n{for} ŝarko {in} ŝarkoj\n    {print} ŝarko 'tututututudu'\n    {print} ŝarko 'tututututudu'\n    {print} ŝarko 'tututututudu'\n    {print} ŝarko\n```\n## Maljuna McDonald\n```\nbestoj = porko, hundo, bovo\n{for} besto {in} bestoj\n    {if} besto {is} porko\n        sono = grunt\n    {if} besto {is} hundo\n        sono = boj\n    {if} besto {is} bovo\n        sono = muĝ\n    {print} 'Maljuna McDonald havis bienon'\n    {print} 'I Aj I Aj O!'\n    {print} 'kaj en la bieno estis ' besto\n    {print} 'I Aj I Aj O!'\n    {print} 'kun ' sono sono ' ĉi tie'\n    {print} 'kaj ' sono sono ' tie'\n    {print} 'jen ' sono\n    {print} 'aliloke ' sono\n    {print} 'ĉie ' sono sono\n```\n"
             6:
                 story_text: "## Songs\nSongs often contain a lot of repetition. Sometimes the repetition is also based on counting.\nFor example, in the well-known song 'Bottles of beer'. You can program that song with a little math.\n"
-                example_code: "```\nverse = 99\n{print} verse ' bottles of beer on the wall'\n{print} verse ' bottles of beer'\n{print} 'Take one down, pass it around'\nverse = verse - 1\n{print} verse ' bottles of beer on the wall'\n```\n\nYou can now repeat lines 2 to 9 as many times as you want by copying the lines.\n"
-                start_code: "{print} 'Baby shark'"
+                example_code: "```\nnombro = 99\n{print} nombro ' boteloj da biero sur la muro'\n{print} nombro ' boteloj da biero'\n{print} 'Prenu unu, ĝuu ĝin kune'\nnombro = nombro - 1\n{print} nombro ' boteloj da biero sur la muro'\n```\n\nYou can now repeat lines 2 to 9 as many times as you want by copying the lines.\n"
+                start_code: "{print} 'Ŝarkido'"
             7:
-                story_text: "## Songs\nSongs often contain a lot of repetition. For example... Baby Shark! If you sing it, you keep singing the same thing:\n\nBaby Shark tututudutudu <br>\nBaby Shark tututudutudu <br>\nBaby Shark tututudutudu <br>\nBaby Shark\n\nYou can make this song much shorter with a `{repeat}`! Can you finish the code?\n"
-                example_code: "```\n{repeat} _ _ {print} 'Baby Shark tututudutudu'\n{print} 'Baby Shark'\n```\n\nAfter Baby Shark you can of course also program other songs. There are many songs with repetition.\n"
-                start_code: "{print} 'Baby Shark'"
+                story_text: "## Kantoj\nKantoj ofte enhavas multe da ripetaĵojn. Ekzemple… Ŝarkido! Se vi kantas ĝin, vi ripete kantas la samajn vortojn:\n\nŜarkido tututudutudu <br>\nŜarkido tututudutudu <br>\nŜarkido tututudutudu <br>\nŜarkido\n\nVi povas malplilongigi la kanton per `{repeat}`! Ĉu vi povas kompletigi la kodon?\n"
+                example_code: "```\n{repeat} _ _ {print} 'Ŝarkido tututudutudu'\n{print} 'Ŝarkido'\n```\n\nPost Ŝarkido, vi povas programi aliajn kantojn. Ekzistas multaj kantoj enhavantaj ripetaĵojn.\n"
+                start_code: "{print} 'Ŝarkido'"
             8:
                 story_text: "## Songs\nIn a previous level you've programmed the song 'Bottles of beer'. You made one verse and then had to copy the verses 99 times. In level 7 you can repeat the song 99 times, just by adding one simple line!\n"
-                example_code: "```\nverse = 99\n{repeat} 99 {times}\n    {print} verse ' bottles of beer on the wall'\n    {print} verse ' bottles of beer'\n    {print} 'Take one down, pass it around'\n    verse = verse - 1\n    {print} verse ' bottles of beer on the wall'\n```\n"
+                example_code: "```\nnombro = 99\n{repeat} 99 {times}\n    {print} nombro ' boteloj da biero sur la muro'\n    {print} nombro ' boteloj da biero'\n    {print} 'Prenu unu, ĝuu ĝin kune'\n    nombro = nombro - 1\n    {print} nombro ' boteloj da biero sur la muro'\n```\n"
                 start_code: '# via kodo ĉi tie'
             11:
                 story_text: "## Songs\nIn this level you can use the `{for} i {in} {range}` command to make songs that use counting.\n"
@@ -96,8 +96,8 @@ adventures:
                 example_code: "## Old MacDonald\n```\nbestoj = ['pig', 'hundo', 'bovo']\nsounds = ['oink', 'woof', 'moo']\n{for} i {in} {range} 1 {to} 3\n    besto = bestoj[i]\n    sound = sounds[i]\n    {print} 'Old McDonald had a farm'\n    {print} 'E I E I O!'\n    {print} 'and on that farm he had a ' besto\n    {print} 'E I E I O!'\n    {print} 'with a ' sound sound ' here'\n    {print} 'and a ' sound sound ' there'\n    {print} 'here a ' sound\n    {print} 'there a ' sound\n    {print} 'everywhere a ' sound sound\n```\n\n## Drunken Sailor\n```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines\n    {for} i {in} {range} 1 {to} 3\n        {print} line\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
                 start_code: '# via kodo ĉi tie'
         name: Sing a song!
-        description: Print a song
-        default_save_name: Song
+        description: Presi kanton
+        default_save_name: Kanto
     turtle:
         levels:
             2:
@@ -253,7 +253,7 @@ adventures:
         levels:
             1:
                 story_text: "## Restaurant\n In level 1 you can make your own virtual restaurant and take your guests' orders.\n"
-                example_code: "\n  ```\n {print} Bonvenon al Hedy's restaurant \U0001F35F\n {ask} What would you like to order?\n {echo} So you would like to order\n {print} Thanks you for your order!\n {print} It's on its way!\n ```\n"
+                example_code: "```\n{print} Bonvenon al Restoracio Hedy \U0001F35F\n{ask} Kion vi volas mendi?\n{echo} Do vi volas mendi\n{print} Dankon pro via mendo!\n{print} Ĝi estas kuirata!\n```\n"
                 story_text_2: "## Challenge\nCan you think of more lines to add to your restaurant code? For example, can you {ask} the guests what they'd like to drink, tell them the price, or wish them a pleasant meal?\n"
                 start_code: '# via kodo ĉi tie'
             2:
@@ -397,8 +397,8 @@ adventures:
         default_save_name: Tic
     default:
         name: Enkonduko
-        description: Level explanation
-        default_save_name: intro
+        description: Klarigo pri nivelo
+        default_save_name: enkonduko
         levels:
             1:
                 story_text: "## Bonvenon al Hedy!\nIn Level 1 you can use the commands `{print}`, `{ask}` and `{echo}`.\nType your code in the programming field. Or press the green button in the example code block, and the code will be typed for you!\nTry the code yourself with the green 'Run code' button under the programming field.\n\nYou can print text to the screen using the `{print}` command.\n"
@@ -427,7 +427,7 @@ adventures:
                 example_code: "```\n{print} 'You need to use quotation marks from now on!'\nanswer {is} {ask} 'What do we need to use from now on?'\n{print} 'We need to use ' answer\n```\n"
                 story_text_2: "## Adventures are getting more and more difficult\nThe adventures are now getting more and more difficult in the successive tabs.\nSo it is best to start on the left with the story, and work to the right, in order to be challenged more and more.\n"
             5:
-                start_code: "name {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'cool!' {else} {print} 'meh'"
+                start_code: "nomo {is} {ask} 'Kio estas via nomo?'\n{if} nomo {is} Hedy {print} 'bone!' {else} {print} 'ba!'"
                 story_text: "## If... else....\nIn level 5 there is something new, the `{if}`! With the `{if}` you can choose between two different options.\nThis code prints nice if you enter Hedy as a name, and boo! if you enter something else.\n`{ask}` and `{print}` still work like they did in level 4.\n"
                 example_code: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'\n```\n"
                 story_text_3: "## Lists\nWhen we want to check if something is in a list, we can now use the `{in}` command.\nThis code prints pretty! if you choose green or yellow, and meh otherwise.\n"
@@ -445,11 +445,11 @@ adventures:
                 story_text: "## Level 7! Level 7!\nLevel 7 adds the `{repeat}` command.  `{repeat}` can be used to execute one line of code multiple times.\n"
                 example_code: "```\n{repeat} 3 {times} {print} 'Hedy estas amuza!'\n```\n"
             8:
-                start_code: "{repeat} 5 {times}\n    {print} 'Hello folks'\n    {print} 'This will be printed 5 times'"
+                start_code: "{repeat} 5 {times}\n    {print} 'Saluton ĉiuj'\n    {print} 'Jen linio represota 5 fojojn'"
                 story_text: "## Indentation\n`{ask}` and `{print}` still work as you know them. But `{if}` and `{repeat}` have changed!\nYou can now execute groups of code together, but you will have to *indent* the code.\nThat means putting four spaces at the beginning of the line. You will also have to indent when you just want to create a block of one line.\n"
                 example_code: "```\n{repeat} 5 {times}\n    {print} 'Hello everyone'\n    {print} 'This is all repeated 5 times'\n```\n"
             9:
-                start_code: "{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    {else}\n        {print} 'pizza is better'"
+                start_code: "{repeat} 3 {times}\n    manĝaĵo = {ask} 'Kion vi volas manĝi?'\n    {if} manĝaĵo {is} pico\n        {print} 'Bonege!'\n    {else}\n        {print} 'Pico estas preferinda.'"
                 story_text: "## All together now!\nIn this level you can not only use multiple lines with `{if}` and `{repeat}`, but you can also put them together!\nIn the example you see an `{if}` command within a `{repeat}` command. It is also allowed the other way around, and an `{if}` is also allowed in an `{if}` and a `{repeat}` in a `{repeat}`.\nGive it a try!\n"
                 example_code: "```\n{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    {else}\n        {print} 'pizza is better'\n```\n"
             10:
@@ -461,13 +461,13 @@ adventures:
                 story_text: "## Loops!\n`{print}` works just the same but we add a new form of the `{for}`. You can now write `{for} counter {in} {range} 1 {to} 5` and use `counter` in your program.\nTry it out to see what happens! Remember to use indentations after the `{for}` and `{if}` statements (That means starting a sentence with four spaces)"
                 example_code: "```\n{for} counter {in} {range} 1 {to} 5\n    {print} counter\n```\n"
             12:
-                start_code: "{print} 'decimal numbers now need to use a dot'\n{print} 2.5 + 2.5"
+                start_code: "{print} 'Decimalaj nombroj nun postulas punkton (ne komon)'\n{print} 2.5 + 2.5"
                 story_text: "## Numbers and texts\n**Decimal numbers**\nSo far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the `.` for decimal numbers."
                 example_code: "```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n"
                 story_text_2: "**All texts need to be in quotation marks**\nFor this level on you will also have to use quotation marks when storing a text with `=`:\n"
                 example_code_2: "```\nnomo = 'Hedy la Roboto'\n{print} 'Saluton ' nomo\n```\n"
                 story_text_3: "**All items in lists need quotation marks too**\nLists are texts, so they need quotation marks too. Mind that each single item on the list has quotation marks.\nThis allows you to save two words as 1 item on the list, for example 'Iron Man'.\n"
-                example_code_3: "```\nsuperheroes = 'Spiderman', 'Batman', 'Iron Man'\n{print} superheroes {at} {random}\n```\n"
+                example_code_3: "```\nsuperherooj = 'Araneviro', 'Vespertviro', 'Ferviro'\n{print} superherooj {at} {random}\n```\n"
                 story_text_4: "**All text after `{if}` comparisons need quotation marks too**\n"
                 example_code_4: "```\nnomo = {ask} 'Kio estas via nomo?'\n{if} nomo = 'Hedy la Roboto'\n    {print} 'Saluton!'\n```\n"
                 story_text_5: "**Numbers don't need quotation marks**\nFor numbers, you do not use quotation marks in the `=`:\n"
@@ -475,7 +475,7 @@ adventures:
                 story_text_6: "**Maths with words** \nIn this level it is also allowed to use the + sign with texts. For example:"
                 example_code_6: "```\na = 'Saluton '\nb = 'mondo!'\n{print} a + b\n```\n"
             13:
-                start_code: "name = {ask} 'what is your name?'\nage = {ask} 'what is your age?'\n{if} name {is} 'Hedy' {and} age {is} 2\n    {print} 'You are the real Hedy!'"
+                start_code: "nomo = {ask} 'Kio estas via nomo?'\naĝo = {ask} 'Kio estas via aĝo?'\n{if} nomo {is} 'Hedy' {and} aĝo {is} 2\n    {print} 'Vi estas la vera Hedy!'"
                 story_text: "## And... Or..?\nWe are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two if's but can use `{and}` and `{or}`. If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct."
                 example_code: "```\nname = {ask} 'what is your name?'\nage = {ask} 'what is your age?'\n{if} name {is} 'Hedy' {and} age {is} 2\n    {print} 'You are the real Hedy!'\n```\n"
             14:
@@ -505,7 +505,7 @@ adventures:
                 story_text_2: If you want to print more than one item, you need to separate them by commas.
                 example_code_2: "```\ntemperature = 25\n{print}('It is ', temperature, 'degrees outside')\n```\n"
                 story_text_3: "##  Input\nThe final change we will need to make to get Python code is changing `{ask}` into `{input}`."
-                example_code_3: "```\n{print}('My name is Hedy!')\nname = {input}('What is your name?')\n{print}('So your name is ', name)\n```\n"
+                example_code_3: "```\n{print}('Mia nomo estas Hedy!')\nnomo = {input}('Kio estas via nomo?')\n{print}('Do via nomo estas ', nomo)\n```\n"
     next:
         levels:
             13:
@@ -580,18 +580,18 @@ adventures:
         description: What's Next?
         default_save_name: Next
     parrot:
-        name: Parrot
+        name: Papago
         description: Create your own online pet parrot that will copy you!
-        default_save_name: Parrot
+        default_save_name: Papago
         levels:
             1:
                 story_text: "## Parrot\nCreate your own online pet parrot that will copy you!\n"
                 example_code: "```\n{print} Im Hedy the parrot\n{ask} whats your name?\n{echo}\n{echo}\n```\n"
-                start_code: '{print} Im Hedy the parrot'
+                start_code: '{print} Mi estas Hedy la papago'
             2:
-                story_text: "## Parrot\nCreate your own online pet parrot that will copy you!\n"
+                story_text: "## Papago\nCreate your own online pet parrot that will copy you!\n"
                 example_code: "```\n{print} Im Hedy the parrot\nname {is} {ask} whats your name?\n{print} name\n{sleep}\n{print} squawk\n{sleep}\n{print} name\n```\n"
-                start_code: '{print} Im Hedy the parrot!'
+                start_code: '{print} Mi estas Hedy la papago!'
             3:
                 story_text: "## Parrot\nTeach your parrot a new word with `{add}`.\n"
                 example_code: "```\nwords {is} squawk, Hedy\n{print} Train your parrot!\nnew_word {is} {ask} Which word do you want to teach them?\n{add} new_word {to_list} words\n{print} \U0001F9D2 Say new_word , Hedy!\n{print} \U0001F99C words {at} {random}\n```\n"

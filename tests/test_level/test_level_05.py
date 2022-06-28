@@ -614,6 +614,16 @@ class TestsLevel5(HedyTester):
             extra_check_function=lambda c: c.exception.error_location[0] == 3 and c.exception.error_location[1] == 1
         )
 
+    def test_line_with_if_with_space_gives_invalid(self):
+        code = textwrap.dedent("""\
+        name is Hedy
+         if name is 3 print 'leuk' else print 'stom'""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.InvalidSpaceException,
+            max_level=7)
+
     def test_pront_should_suggest_print(self):
         code = "pront 'Hedy is leuk!'"
 

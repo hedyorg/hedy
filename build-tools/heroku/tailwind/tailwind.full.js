@@ -11,12 +11,6 @@ module.exports = {
   ],
   theme: {
     extend: {},
-    screens: {
-      // We only need a few breakpoints
-      sm: '640px',
-      lg: '1024px',
-      xl: '1280px',
-    },
     fontSize: {
       xs: '0.75rem',
       sm: '0.875rem',
