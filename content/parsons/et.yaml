@@ -3,9 +3,9 @@ levels:
         1:
           story: |
             Sa oled klient pagaris Hedy.
-              Sa kõnnid pagarisse sisse ja pagar tervitab sind.
-              Ta küsib millist kooki sa tahad osta.
-              Pärast seda hakkab ta sinu tellimuse kallal tööle.
+            Sa kõnnid pagarisse sisse ja pagar tervitab sind.
+            Ta küsib millist kooki sa tahad osta.
+            Pärast seda hakkab ta sinu tellimuse kallal tööle.
           code_lines:
             A: "{print} Tere tulemast pagarisse Hedy!"
             B: "{ask} Millist kooki sa osta tahad?"
@@ -23,7 +23,7 @@ levels:
         1:
           story: |
             Sina ja su sõbrad hakkavad Netflixi vaatama.
-              Näita millist filmi te vaatama hakkate ja soovi vaatajatele mõnusat filmielamust!
+            Näita millist filmi te vaatama hakkate ja soovi vaatajatele mõnusat filmielamust!
           code_lines:
             A: "{print} On aeg Netflixi õhtu jaoks"
             B: "film {is} Siil Soonik 2"
@@ -41,16 +41,16 @@ levels:
         1:
           story: |
             Uus kooliaasta on algamas Sigatüüka koolis!
-              Sorteerimismütsi ülesanne on sind ühte majja määrata.
-              Millisesse majja sind määratakse?
-              Kas sa satud Gryffindori, Hufflepuffi, Ravenclaw'sse või Slytherini.
-              Lase programmil natuke oodata enne kui ta vastuse annab.
+            Sorteerimismütsi ülesanne on sind ühte majja määrata.
+            Millisesse majja sind määratakse?
+            Kas sa satud Gryffindori, Hufflepuffi, Ravenclaw'sse või Slytherini.
+            Lase programmil natuke oodata enne kui ta vastuse annab.
           code_lines:
             A: "{print} Uus kooliaasta Sigatüüka koolis on algamas!"
             B: "{print} Sorteerimismüts on valmis, et sulle maja määrata."
             C: "majad {is} Gryffindor, Hufflepuff, Ravenclaw, Slytherin"
             D: "{sleep} 2"
-            E: "{print} Sa oled majas {at} {random}"
+            E: "{print} Sa oled majad {at} {random}"
         2:
           story: |
             Create a program that chooses a random meal for you. Make a list of food and a list of toppings and let the program decide what you'll have!
@@ -64,8 +64,8 @@ levels:
         1:
           story: |
             Sa oled kõige uuem Pokémoni treener Pallet linnast!
-              Kirjuta programm, mis valib sinu esimese Pokémoni.
-              Lase programmil üks minut oodata, enne kui ta su esimese Pokémoni ekraanile kuvab.
+            Kirjuta programm, mis valib sinu esimese Pokémoni.
+            Lase programmil üks minut oodata, enne kui ta su esimese Pokémoni ekraanile kuvab.
           code_lines:
             A: "pokemonid {is} Pikachu, Charmander, Bulbasaur, Squirtle"
             B: "{print} 'Sellest saab sinu esimene Pokémon!'"
@@ -77,8 +77,8 @@ levels:
           code_lines:
             A: "prices {is} car, hamster, 1 million euros"
             B: "price {is} {ask} 'What would you like to win?'"
-            C: "{add} price to {prices}"
-            D: "{print} 'You won a '"
+            C: "{add} price {to_list} prices"
+            D: "{print} 'You won a ' prices {at} {random}"
     5:
         1:
           story: |  

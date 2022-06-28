@@ -545,13 +545,29 @@ class TestsLevel1(HedyTester):
     #
     # negative tests
     #
-    def test_lines_with_space_gives_invalid(self):
-        code = " print Hallo welkom bij Hedy! "
-        self.single_level_tester(code=code, exception=hedy.exceptions.InvalidSpaceException)
+    def test_print_with_space_gives_invalid(self):
+        code = " print Hallo welkom bij Hedy!"
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.InvalidSpaceException,
+            max_level=3)
+
+    def test_ask_with_space_gives_invalid(self):
+        code = " ask Hallo welkom bij Hedy?"
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.InvalidSpaceException,
+            max_level=1)
 
     def test_lines_with_spaces_gives_invalid(self):
         code = " print Hallo welkom bij Hedy!\n print Hallo welkom bij Hedy!"
-        self.single_level_tester(code=code, exception=hedy.exceptions.InvalidSpaceException)
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.InvalidSpaceException,
+            max_level=3)
 
     def test_word_plus_period_gives_invalid(self):
         code = "word."
