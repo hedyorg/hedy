@@ -10,7 +10,7 @@
         <div class="flex flex-row gap-4 items-center justify-center">
             <button class="{% if filter == "global" %}blue-btn{% else %}green-btn{% endif %}" onclick="window.location.href = '/highscores/global'">{{_('whole_world')}}</button>
             {% if has_country %}
-                <button class="{% if filter == "country" %}blue-btn{% else %}green-btn{% endif %}" onclick="window.location.href = '/highscores/country'">{{_('your_country')}}</button>
+                <button class="{% if filter == "country" %}blue-btn{% else %}green-btn{% endif %}" onclick="window.location.href = '/highscores/country'">{{user_country}}</button>
                 {% endif %}
             {% if in_class %}
                 <button class="{% if filter == "class" %}blue-btn{% else %}green-btn{% endif %}" onclick="window.location.href = '/highscores/class'">{{_('your_class')}}</button>
@@ -33,7 +33,7 @@
                     <td class="font-bold border-r border-gray-500 text-center">{{ highscore.ranking }}.</td>
                     <td class="px-2"><a href="/user/{{highscore.username}}">{{highscore.username}}</a></td>
                     <td class="px-2">{{highscore.achievements}}</td>
-                    <td class="px-2">{{highscore.country}}</td>
+                    <td class="px-2">{{get_country(highscore.country)}}</td>
                     <td class="px-2">{{_('ago')|replace("{timestamp}", highscore.last_achievement)}}</td>
                 </tr>
             {% endfor %}
