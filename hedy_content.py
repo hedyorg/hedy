@@ -2,9 +2,8 @@ import copy
 import os
 from website.yaml_file import YamlFile
 from babel import languages
-import iso3166
-
 from babel import Locale
+import iso3166
 
 # Define and load all countries
 COUNTRIES = {k: v.name for k, v in iso3166.countries_by_alpha2.items()}
@@ -20,15 +19,14 @@ for country in COUNTRIES.keys():
         if found:
             break
         try:
-            l = Locale(language, country)
-            country_name = l.get_territory_name(country)
+            value = language + "_" + country
+            l = Locale.parse(value)
+            country_name = l.get_territory_name(value)
             found = True
         except:
             pass
     if country_name:
         COUNTRIES[country] = country_name
-
-
 
 # Define dictionary for available languages. Fill dynamically later.
 ALL_LANGUAGES = {}
