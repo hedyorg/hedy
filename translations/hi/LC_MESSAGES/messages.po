@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-27 15:04+0200\n"
+"POT-Creation-Date: 2022-06-27 10:59+0200\n"
 "PO-Revision-Date: 2022-06-24 06:10+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language: hi\n"
@@ -705,8 +705,8 @@ msgid "class_name_prompt"
 msgstr "कृपया कक्षा का नाम दर्ज करें"
 
 #: templates/class-overview.html:19 templates/class-overview.html:65
-#: templates/create-accounts.html:16 templates/highscores.html:22
-#: templates/login.html:12 templates/profile.html:89 templates/recover.html:8
+#: templates/create-accounts.html:16 templates/highscores.html:25
+#: templates/login.html:12 templates/profile.html:87 templates/recover.html:8
 #: templates/signup.html:10
 msgid "username"
 msgstr "उपयोगकर्ता नाम"
@@ -821,7 +821,7 @@ msgstr "आमंत्रण तिथि"
 msgid "expiration_date"
 msgstr "Expiration date"
 
-#: templates/class-overview.html:77 templates/profile.html:16
+#: templates/class-overview.html:77 templates/profile.html:15
 msgid "delete_invite_prompt"
 msgstr "क्या आप वाकई इस कक्षा आमंत्रण को हटाना चाहते हैं?"
 
@@ -838,7 +838,7 @@ msgstr "Error logo"
 msgid "goto_profile"
 msgstr "मेरी प्रोफ़ाइल पर जाएँ"
 
-#: templates/class-prejoin.html:15 templates/profile.html:13
+#: templates/class-prejoin.html:15 templates/profile.html:12
 msgid "prompt_join_class"
 msgstr "क्या आप इस कक्षा में शामिल होना चाहते हैं?"
 
@@ -848,7 +848,7 @@ msgstr ""
 "कक्षा में शामिल होने के लिए आपके पास एक खाता होना चाहिए। क्या आप अभी लॉग "
 "इन करना चाहेंगे?"
 
-#: templates/class-prejoin.html:17 templates/profile.html:15
+#: templates/class-prejoin.html:17 templates/profile.html:14
 msgid "join_class"
 msgstr "कक्षा में शामिल हों"
 
@@ -908,7 +908,7 @@ msgstr "हां"
 msgid "no"
 msgstr "नहीं"
 
-#: templates/create-accounts.html:44 templates/programs.html:23
+#: templates/create-accounts.html:44 templates/programs.html:24
 #, fuzzy
 msgid "reset_view"
 msgstr "Reset"
@@ -931,10 +931,10 @@ msgid "name"
 msgstr "नाम"
 
 #: templates/customize-adventure.html:16 templates/customize-adventure.html:18
-#: templates/explore.html:28 templates/explore.html:57
-#: templates/explore.html:85 templates/for-teachers.html:40
-#: templates/programs.html:12 templates/programs.html:37
-#: templates/programs.html:45
+#: templates/explore.html:28 templates/explore.html:59
+#: templates/explore.html:87 templates/for-teachers.html:40
+#: templates/programs.html:12 templates/programs.html:39
+#: templates/programs.html:47
 msgid "level"
 msgstr "स्तर"
 
@@ -966,7 +966,7 @@ msgstr ""
 
 #: templates/customize-adventure.html:43 templates/customize-class.html:28
 #: templates/customize-class.html:94 templates/explore.html:22
-#: templates/programs.html:18 templates/programs.html:38
+#: templates/programs.html:18 templates/programs.html:40
 #: templates/view-adventure.html:6
 msgid "adventure"
 msgstr "साहसिक कार्य "
@@ -1077,8 +1077,8 @@ msgid "select_own_adventures"
 msgstr "खुद के adventures चुनें"
 
 #: templates/customize-class.html:96 templates/customize-class.html:120
-#: templates/profile.html:50 templates/profile.html:124
-#: templates/profile.html:133 templates/signup.html:26 templates/signup.html:45
+#: templates/profile.html:47 templates/profile.html:122
+#: templates/profile.html:131 templates/signup.html:26 templates/signup.html:45
 #: templates/signup.html:53
 msgid "select"
 msgstr "चुनें"
@@ -1164,26 +1164,26 @@ msgstr ""
 msgid "language"
 msgstr "आपने इनमें से किस प्रोग्रामिंग भाषा का पहले उपयोग किया है?"
 
-#: templates/explore.html:41 templates/programs.html:24
+#: templates/explore.html:42 templates/programs.html:25
 #, fuzzy
 msgid "search_button"
 msgstr "कोड को सहेजें और साझा करें"
 
-#: templates/explore.html:48
+#: templates/explore.html:50
 #, fuzzy
 msgid "hedy_choice_title"
 msgstr "Hedy's Choice"
 
-#: templates/explore.html:60 templates/explore.html:88
+#: templates/explore.html:62 templates/explore.html:90
 msgid "creator"
 msgstr "बनाने वाला"
 
-#: templates/explore.html:66 templates/explore.html:94
+#: templates/explore.html:68 templates/explore.html:96
 msgid "view_program"
 msgstr "प्रोग्राम देखें"
 
-#: templates/for-teachers.html:14 templates/profile.html:71
-#: templates/profile.html:73
+#: templates/for-teachers.html:14 templates/profile.html:72
+#: templates/profile.html:74
 msgid "my_classes"
 msgstr "मेरी कक्षाएँ"
 
@@ -1221,36 +1221,48 @@ msgstr ""
 "हेडी में आपका स्वागत है! अब आप एक शिक्षक खाते के गर्वित स्वामी हैं जो "
 "आपको कक्षाएं बनाने और छात्रों को आमंत्रित करने की अनुमति देता है।"
 
-#: templates/highscores.html:8
+#: templates/highscores.html:7
+#, fuzzy
+msgid "highscore_explanation"
+msgstr ""
+"On this page you can look through programs created by other Hedy users. "
+"You can filter on both a Hedy level and adventure. Click on \"View "
+"program\" to open a program and run it. Programs with a red header "
+"contain a mistake. You can still open the program, but running it will "
+"result in an error. You can of course try to fix it! If the creator has a"
+" public profile you can click their username to visit their profile. "
+"There you will find all their shared programs and much more!"
+
+#: templates/highscores.html:11
 msgid "whole_world"
 msgstr ""
 
-#: templates/highscores.html:10
+#: templates/highscores.html:13
 #, fuzzy
 msgid "your_country"
 msgstr "अभी तक कोई खाता नहीं?"
 
-#: templates/highscores.html:13
+#: templates/highscores.html:16
 #, fuzzy
 msgid "your_class"
 msgstr "मेरी कक्षाएँ"
 
-#: templates/highscores.html:23 templates/landing-page.html:52
+#: templates/highscores.html:26 templates/landing-page.html:52
 #: templates/public-page.html:16
 msgid "achievements"
 msgstr "उपलब्धियां"
 
-#: templates/highscores.html:24 templates/learn-more.html:22
-#: templates/profile.html:131 templates/signup.html:52
+#: templates/highscores.html:27 templates/learn-more.html:22
+#: templates/profile.html:129 templates/signup.html:52
 msgid "country"
 msgstr "देश"
 
-#: templates/highscores.html:25 templates/landing-page.html:88
+#: templates/highscores.html:28 templates/landing-page.html:88
 #: templates/public-page.html:50
 msgid "last_achievement"
 msgstr "पिछली अर्जित उपलब्धि"
 
-#: templates/highscores.html:34 templates/programs.html:51
+#: templates/highscores.html:37
 msgid "ago"
 msgstr ""
 
@@ -1453,7 +1465,7 @@ msgid "your_account"
 msgstr "अभी तक कोई खाता नहीं?"
 
 #: templates/landing-page.html:43 templates/landing-page.html:45
-#: templates/profile.html:36 templates/public-page.html:7
+#: templates/profile.html:33 templates/public-page.html:7
 #: templates/public-page.html:9
 #, fuzzy
 msgid "profile_logo_alt"
@@ -1492,8 +1504,8 @@ msgstr "ठीक है"
 msgid "cancel"
 msgstr "रद्द करें"
 
-#: templates/layout.html:45 templates/programs.html:66
-#: templates/programs.html:74
+#: templates/layout.html:45 templates/programs.html:68
+#: templates/programs.html:76
 msgid "copy_link_to_share"
 msgstr "शेयर करने के लिए लिंक कॉपी करें"
 
@@ -1506,7 +1518,7 @@ msgstr "आपने एक उपलब्धि अर्जित की ह�
 msgid "mailing_title"
 msgstr "शीर्षक"
 
-#: templates/learn-more.html:10 templates/profile.html:92
+#: templates/learn-more.html:10 templates/profile.html:90
 #: templates/recover.html:8 templates/signup.html:13
 msgid "email"
 msgstr "ईमेल"
@@ -1597,112 +1609,115 @@ msgstr "What should my code do?"
 msgid "account_overview"
 msgstr "खाता निरीक्षण"
 
-#: templates/profile.html:7 templates/profile.html:9
+#: templates/profile.html:6 templates/profile.html:8
 msgid "my_messages"
 msgstr "मेरे संदेश"
 
-#: templates/profile.html:12
+#: templates/profile.html:11
 msgid "invite_message"
 msgstr "आपको कक्षा में शामिल होने का निमंत्रण मिला है"
 
-#: templates/profile.html:13
+#: templates/profile.html:12
 msgid "sent_by"
 msgstr "यह आमंत्रण इनके द्वारा भेजा गया है"
 
-#: templates/profile.html:16
+#: templates/profile.html:15
 msgid "delete_invite"
 msgstr "आमंत्रण हटाएं"
 
-#: templates/profile.html:22 templates/profile.html:24
+#: templates/profile.html:21 templates/profile.html:23
 msgid "public_profile"
 msgstr "सार्वजानिक पार्श्वचित्र"
 
-#: templates/profile.html:26
-#, fuzzy
-msgid "visit_own_public_profile"
-msgstr "सार्वजानिक पार्श्वचित्र"
+#: templates/profile.html:24
+msgid "public_profile_visit"
+msgstr "आप अपनी सार्वजनिक प्रोफ़ाइल पर जा सकते हैं! क्लिक करें"
 
-#: templates/profile.html:30
+#: templates/profile.html:24
+msgid "public_profile_link"
+msgstr "यहां"
+
+#: templates/profile.html:27
 msgid "profile_picture"
 msgstr "प्रोफ़ाइल फोटो"
 
-#: templates/profile.html:43
+#: templates/profile.html:40
 msgid "personal_text"
 msgstr "व्यक्तिगत पाठ"
 
-#: templates/profile.html:44
+#: templates/profile.html:41
 msgid "your_personal_text"
 msgstr "आपका व्यक्तिगत पाठ..."
 
-#: templates/profile.html:48
+#: templates/profile.html:45
 msgid "favourite_program"
 msgstr "पसंदीदा प्रोग्राम "
 
-#: templates/profile.html:59
+#: templates/profile.html:56
 msgid "public_profile_info"
 msgstr ""
 "इस बॉक्स को चुनकर मैं अपनी प्रोफ़ाइल को सभी के लिए दृश्यमान बनाता हूं। "
 "अपना नाम या घर का पता जैसी व्यक्तिगत जानकारी साझा न करने के लिए सावधान "
 "रहें, क्योंकि हर कोई इसे देख सकेगा!"
 
-#: templates/profile.html:62
+#: templates/profile.html:59
 msgid "update_public"
 msgstr "सार्वजनिक प्रोफ़ाइल अद्यतन करें"
 
-#: templates/profile.html:64 templates/profile.html:143
+#: templates/profile.html:61 templates/profile.html:142
 msgid "are_you_sure"
 msgstr "क्या आपको यकीन है? आप इस क्रिया को लौटा नहीं सकते| "
 
-#: templates/profile.html:64
+#: templates/profile.html:61
 msgid "delete_public"
 msgstr "सार्वजनिक प्रोफ़ाइल हटाएं"
 
-#: templates/profile.html:78
+#: templates/profile.html:77
 msgid "self_removal_prompt"
 msgstr "क्या आप वाकई इस कक्षा को छोड़ना चाहते हैं?"
 
-#: templates/profile.html:78
+#: templates/profile.html:77
 msgid "leave_class"
 msgstr "कक्षा छोड़ें"
 
-#: templates/profile.html:84 templates/profile.html:87
+#: templates/profile.html:82 templates/profile.html:85
 msgid "settings"
 msgstr "ेरी व्यक्तिगत सेटिंग"
 
-#: templates/profile.html:95 templates/signup.html:41
+#: templates/profile.html:93 templates/signup.html:41
 msgid "birth_year"
 msgstr "जन्म वर्ष"
 
-#: templates/profile.html:98 templates/signup.html:25
+#: templates/profile.html:96 templates/signup.html:25
 msgid "preferred_language"
 msgstr "पसंदीदा भाषा"
 
-#: templates/profile.html:108 templates/signup.html:34
+#: templates/profile.html:106 templates/signup.html:34
 #, fuzzy
 msgid "preferred_keyword_language"
 msgstr "Preferred keyword language"
 
-#: templates/profile.html:122 templates/signup.html:44
+#: templates/profile.html:120 templates/signup.html:44
 msgid "gender"
 msgstr "लिंग"
 
-#: templates/profile.html:125 templates/signup.html:46
+#: templates/profile.html:123 templates/signup.html:46
 msgid "female"
 msgstr "महिला"
 
-#: templates/profile.html:126 templates/signup.html:47
+#: templates/profile.html:124 templates/signup.html:47
 msgid "male"
 msgstr "पुरुष"
 
-#: templates/profile.html:127 templates/signup.html:48
+#: templates/profile.html:125 templates/signup.html:48
 msgid "other"
 msgstr "अन्य"
 
-#: templates/profile.html:140
+#: templates/profile.html:138
 msgid "update_profile"
 msgstr "्रोफ़ाइल अपडेट करें"
 
-#: templates/profile.html:143
+#: templates/profile.html:142
 msgid "destroy_profile"
 msgstr "खाता स्थायी रूप से हटाएं"
 
@@ -1727,67 +1742,67 @@ msgstr "नया सांकेतिक शब्द दोहराएं"
 msgid "recent"
 msgstr "मेरे हाल के प्रोग्राम्स"
 
-#: templates/programs.html:31 templates/view-program-page.html:7
+#: templates/programs.html:33 templates/view-program-page.html:7
 msgid "submitted_header"
 msgstr "यह एक प्रस्तुत किया गया प्रोग्राम है और इसे बदला नहीं जा सकता"
 
-#: templates/programs.html:36
+#: templates/programs.html:38
 msgid "title"
 msgstr "शीर्षक"
 
-#: templates/programs.html:39 templates/view-program-page.html:8
+#: templates/programs.html:41 templates/view-program-page.html:8
 msgid "last_edited"
 msgstr "पिछला संपादित"
 
-#: templates/programs.html:57
+#: templates/programs.html:59
 msgid "favourite_confirm"
 msgstr "क्या आप वाकई इस प्रोग्राम को अपने पसंदीदा के रूप में सेट करना चाहते हैं?"
 
-#: templates/programs.html:65 templates/programs.html:70
+#: templates/programs.html:67 templates/programs.html:72
 msgid "open"
 msgstr "खुला"
 
-#: templates/programs.html:66 templates/programs.html:74
+#: templates/programs.html:68 templates/programs.html:76
 msgid "copy_clipboard"
 msgstr "क्लिपबोर्ड पर सफलतापूर्वक कॉपी किया गया"
 
-#: templates/programs.html:67 templates/programs.html:71
+#: templates/programs.html:69 templates/programs.html:73
 msgid "delete_confirm"
 msgstr "क्या आप वाकई प्रोग्राम को हटाना चाहते हैं?"
 
-#: templates/programs.html:67 templates/programs.html:71
+#: templates/programs.html:69 templates/programs.html:73
 msgid "delete"
 msgstr "हटाएँ"
 
-#: templates/programs.html:73
+#: templates/programs.html:75
 msgid "unshare_confirm"
 msgstr "क्या आप वाकई प्रोग्राम को निजी बनाना चाहते हैं?"
 
-#: templates/programs.html:73
+#: templates/programs.html:75
 msgid "unshare"
 msgstr "साझेदारी से हटाएँ"
 
-#: templates/programs.html:75
+#: templates/programs.html:77
 msgid "submit_warning"
 msgstr "क्या आप वाकई इस प्रोग्राम को प्रस्तुत करना चाहते हैं?"
 
-#: templates/programs.html:75
+#: templates/programs.html:77
 msgid "submit_program"
 msgstr "प्रस्तुत"
 
-#: templates/programs.html:78
+#: templates/programs.html:80
 msgid "share_confirm"
 msgstr "क्या आप वाकई प्रोग्राम को सार्वजनिक करना चाहते हैं?"
 
-#: templates/programs.html:78
+#: templates/programs.html:80
 msgid "share"
 msgstr "साझा करें"
 
-#: templates/programs.html:84
+#: templates/programs.html:86
 msgid "no_programs"
 msgstr "आपका अभी तक कोई प्रोग्राम नहीं है।"
 
-#: templates/programs.html:86
+#: templates/programs.html:88
 msgid "write_first_program"
 msgstr "अपना पहला प्रोग्राम लिखें!"
 
@@ -2555,10 +2570,4 @@ msgstr "आपने एक adventure नाम दर्ज नहीं कि
 
 #~ msgid "select_class"
 #~ msgstr "Select class"
-
-#~ msgid "public_profile_visit"
-#~ msgstr "आप अपनी सार्वजनिक प्रोफ़ाइल पर जा सकते हैं! क्लिक करें"
-
-#~ msgid "public_profile_link"
-#~ msgstr "यहां"
 

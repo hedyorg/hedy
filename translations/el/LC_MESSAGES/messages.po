@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-27 15:04+0200\n"
+"POT-Creation-Date: 2022-06-27 10:59+0200\n"
 "PO-Revision-Date: 2022-06-24 06:10+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language: el\n"
@@ -701,8 +701,8 @@ msgid "class_name_prompt"
 msgstr "Παρακαλώ δώσε το όνομα της τάξης"
 
 #: templates/class-overview.html:19 templates/class-overview.html:65
-#: templates/create-accounts.html:16 templates/highscores.html:22
-#: templates/login.html:12 templates/profile.html:89 templates/recover.html:8
+#: templates/create-accounts.html:16 templates/highscores.html:25
+#: templates/login.html:12 templates/profile.html:87 templates/recover.html:8
 #: templates/signup.html:10
 msgid "username"
 msgstr "Όνομα Χρήστη"
@@ -816,7 +816,7 @@ msgstr "Ημερομηνία πρόσκλησης"
 msgid "expiration_date"
 msgstr "Expiration date"
 
-#: templates/class-overview.html:77 templates/profile.html:16
+#: templates/class-overview.html:77 templates/profile.html:15
 msgid "delete_invite_prompt"
 msgstr "Είσαι βέβαιος ότι θέλεις να καταργήσεις αυτήν την πρόσκληση τάξης;"
 
@@ -833,7 +833,7 @@ msgstr "Error logo"
 msgid "goto_profile"
 msgstr "Πήγαινε στο προφίλ μου"
 
-#: templates/class-prejoin.html:15 templates/profile.html:13
+#: templates/class-prejoin.html:15 templates/profile.html:12
 msgid "prompt_join_class"
 msgstr "Θέλεις να συμμετάσχεις στην τάξη;"
 
@@ -843,7 +843,7 @@ msgstr ""
 "Πρέπει να έχεις λογαριασμό για να συμμετάσχεις σε μια τάξη. Θέλεις να "
 "συνδεθείς τώρα;"
 
-#: templates/class-prejoin.html:17 templates/profile.html:15
+#: templates/class-prejoin.html:17 templates/profile.html:14
 msgid "join_class"
 msgstr "Συμμετοχή σε τάξη"
 
@@ -904,7 +904,7 @@ msgstr "Ναι"
 msgid "no"
 msgstr "Όχι"
 
-#: templates/create-accounts.html:44 templates/programs.html:23
+#: templates/create-accounts.html:44 templates/programs.html:24
 msgid "reset_view"
 msgstr "Επαναφορά"
 
@@ -926,10 +926,10 @@ msgid "name"
 msgstr "Όνομα"
 
 #: templates/customize-adventure.html:16 templates/customize-adventure.html:18
-#: templates/explore.html:28 templates/explore.html:57
-#: templates/explore.html:85 templates/for-teachers.html:40
-#: templates/programs.html:12 templates/programs.html:37
-#: templates/programs.html:45
+#: templates/explore.html:28 templates/explore.html:59
+#: templates/explore.html:87 templates/for-teachers.html:40
+#: templates/programs.html:12 templates/programs.html:39
+#: templates/programs.html:47
 msgid "level"
 msgstr "Επίπεδο"
 
@@ -962,7 +962,7 @@ msgstr ""
 
 #: templates/customize-adventure.html:43 templates/customize-class.html:28
 #: templates/customize-class.html:94 templates/explore.html:22
-#: templates/programs.html:18 templates/programs.html:38
+#: templates/programs.html:18 templates/programs.html:40
 #: templates/view-adventure.html:6
 msgid "adventure"
 msgstr "Περιπέτεια"
@@ -1080,8 +1080,8 @@ msgid "select_own_adventures"
 msgstr "Επίλεξε τις δικές σου περιπέτειες"
 
 #: templates/customize-class.html:96 templates/customize-class.html:120
-#: templates/profile.html:50 templates/profile.html:124
-#: templates/profile.html:133 templates/signup.html:26 templates/signup.html:45
+#: templates/profile.html:47 templates/profile.html:122
+#: templates/profile.html:131 templates/signup.html:26 templates/signup.html:45
 #: templates/signup.html:53
 msgid "select"
 msgstr "Επίλεξε"
@@ -1167,26 +1167,26 @@ msgstr ""
 "Ποιες από αυτές τις γλώσσες προγραμματισμού έχεις χρησιμοποιήσει στο "
 "παρελθόν;"
 
-#: templates/explore.html:41 templates/programs.html:24
+#: templates/explore.html:42 templates/programs.html:25
 #, fuzzy
 msgid "search_button"
 msgstr "Αποθήκευσε και μοιράσου κώδικα"
 
-#: templates/explore.html:48
+#: templates/explore.html:50
 #, fuzzy
 msgid "hedy_choice_title"
 msgstr "Hedy's Choice"
 
-#: templates/explore.html:60 templates/explore.html:88
+#: templates/explore.html:62 templates/explore.html:90
 msgid "creator"
 msgstr "Δημιουργός"
 
-#: templates/explore.html:66 templates/explore.html:94
+#: templates/explore.html:68 templates/explore.html:96
 msgid "view_program"
 msgstr "Προβολή προγράμματος"
 
-#: templates/for-teachers.html:14 templates/profile.html:71
-#: templates/profile.html:73
+#: templates/for-teachers.html:14 templates/profile.html:72
+#: templates/profile.html:74
 msgid "my_classes"
 msgstr "Οι τάξεις μου"
 
@@ -1225,36 +1225,51 @@ msgstr ""
 "καθηγητή που σου επιτρέπει να δημιουργείς μαθήματα και να προσκαλείς "
 "μαθητές."
 
-#: templates/highscores.html:8
+#: templates/highscores.html:7
+#, fuzzy
+msgid "highscore_explanation"
+msgstr ""
+"Σε αυτή τη σελίδα μπορείς να δεις προγράμματα που έχουν δημιουργηθεί από "
+"άλλους χρήστες του Hedy. Μπορείς να φιλτράρεις σύμφωνα με επίπεδο Hedy "
+"όσο και με επίπεδο περιπέτειας.\n"
+"Κάνε κλικ στο \"Προβολή προγράμματος\" για να ανοίξεις ένα πρόγραμμα και "
+"εκτέλεσέ το. Τα προγράμματα με κόκκινη κεφαλίδα περιέχουν ένα λάθος. "
+"Μπορείς ακόμα να ανοίξεις το πρόγραμμα, αλλά η εκτέλεσή του θα οδηγήσει "
+"σε σφάλμα. Μπορείς φυσικά να προσπαθήσεις να το διορθώσεις!\n"
+"Εάν ο δημιουργός έχει δημόσιο προφίλ, μπορείς να κάνεις κλικ στο όνομα "
+"χρήστη του για να επισκεφτείς το προφίλ του. Εκεί θα βρεις όλα τα κοινά "
+"τους προγράμματα και πολλά άλλα!\n"
+
+#: templates/highscores.html:11
 msgid "whole_world"
 msgstr ""
 
-#: templates/highscores.html:10
+#: templates/highscores.html:13
 #, fuzzy
 msgid "your_country"
 msgstr "Ακόμα χωρίς λογαριασμό;"
 
-#: templates/highscores.html:13
+#: templates/highscores.html:16
 #, fuzzy
 msgid "your_class"
 msgstr "Οι τάξεις μου"
 
-#: templates/highscores.html:23 templates/landing-page.html:52
+#: templates/highscores.html:26 templates/landing-page.html:52
 #: templates/public-page.html:16
 msgid "achievements"
 msgstr "επιτεύγματα"
 
-#: templates/highscores.html:24 templates/learn-more.html:22
-#: templates/profile.html:131 templates/signup.html:52
+#: templates/highscores.html:27 templates/learn-more.html:22
+#: templates/profile.html:129 templates/signup.html:52
 msgid "country"
 msgstr "Χώρα"
 
-#: templates/highscores.html:25 templates/landing-page.html:88
+#: templates/highscores.html:28 templates/landing-page.html:88
 #: templates/public-page.html:50
 msgid "last_achievement"
 msgstr "Πρόσφατο επίτευγμα"
 
-#: templates/highscores.html:34 templates/programs.html:51
+#: templates/highscores.html:37
 msgid "ago"
 msgstr ""
 
@@ -1455,7 +1470,7 @@ msgid "your_account"
 msgstr "Ακόμα χωρίς λογαριασμό;"
 
 #: templates/landing-page.html:43 templates/landing-page.html:45
-#: templates/profile.html:36 templates/public-page.html:7
+#: templates/profile.html:33 templates/public-page.html:7
 #: templates/public-page.html:9
 #, fuzzy
 msgid "profile_logo_alt"
@@ -1494,8 +1509,8 @@ msgstr "OK"
 msgid "cancel"
 msgstr "Ακύρωση"
 
-#: templates/layout.html:45 templates/programs.html:66
-#: templates/programs.html:74
+#: templates/layout.html:45 templates/programs.html:68
+#: templates/programs.html:76
 msgid "copy_link_to_share"
 msgstr "Αντίγραψε τον σύνδεσμο για κοινή χρήση"
 
@@ -1507,7 +1522,7 @@ msgstr "Κέρδισες ένα επίτευγμα!"
 msgid "mailing_title"
 msgstr "Εγγραφή για Hedy newsletter"
 
-#: templates/learn-more.html:10 templates/profile.html:92
+#: templates/learn-more.html:10 templates/profile.html:90
 #: templates/recover.html:8 templates/signup.html:13
 msgid "email"
 msgstr "Email"
@@ -1591,111 +1606,114 @@ msgstr "What should my code do?"
 msgid "account_overview"
 msgstr "Σύνοψη λογαριασμού"
 
-#: templates/profile.html:7 templates/profile.html:9
+#: templates/profile.html:6 templates/profile.html:8
 msgid "my_messages"
 msgstr "Τα μηνύματά μου"
 
-#: templates/profile.html:12
+#: templates/profile.html:11
 msgid "invite_message"
 msgstr "Έλαβες μια πρόσκληση για να συμμετάσχεις στην τάξη"
 
-#: templates/profile.html:13
+#: templates/profile.html:12
 msgid "sent_by"
 msgstr "Αυτή η πρόσκληση εστάλη από"
 
-#: templates/profile.html:16
+#: templates/profile.html:15
 msgid "delete_invite"
 msgstr "Διαγραφή πρόσκλησης"
 
-#: templates/profile.html:22 templates/profile.html:24
+#: templates/profile.html:21 templates/profile.html:23
 msgid "public_profile"
 msgstr "Δημόσιο προφίλ"
 
-#: templates/profile.html:26
-#, fuzzy
-msgid "visit_own_public_profile"
-msgstr "Δημόσιο προφίλ"
+#: templates/profile.html:24
+msgid "public_profile_visit"
+msgstr "Μπορείς να επισκεφτείς το δημόσιο προφίλ σου! Κάνε κλικ"
 
-#: templates/profile.html:30
+#: templates/profile.html:24
+msgid "public_profile_link"
+msgstr "εδώ"
+
+#: templates/profile.html:27
 msgid "profile_picture"
 msgstr "Εικόνα προφίλ"
 
-#: templates/profile.html:43
+#: templates/profile.html:40
 msgid "personal_text"
 msgstr "Προσωπικό κείμενο"
 
-#: templates/profile.html:44
+#: templates/profile.html:41
 msgid "your_personal_text"
 msgstr "Το προσωπικό σου κείμενο..."
 
-#: templates/profile.html:48
+#: templates/profile.html:45
 msgid "favourite_program"
 msgstr "Αγαπημένο πρόγραμμα"
 
-#: templates/profile.html:59
+#: templates/profile.html:56
 msgid "public_profile_info"
 msgstr ""
 "Επιλέγοντας αυτό το πλαίσιο κάνω το προφίλ μου ορατό σε όλους. Πρόσεξε να"
 " μην κοινοποιείς προσωπικές πληροφορίες όπως το όνομα ή τη διεύθυνση του "
 "σπιτιού σου, γιατί θα μπορούν να τα δουν όλοι!"
 
-#: templates/profile.html:62
+#: templates/profile.html:59
 msgid "update_public"
 msgstr "Ενημέρωση δημόσιου προφίλ"
 
-#: templates/profile.html:64 templates/profile.html:143
+#: templates/profile.html:61 templates/profile.html:142
 msgid "are_you_sure"
 msgstr "Είσαι σίγουρος/η; Δεν μπορείς να αναιρέσεις αυτήν την ενέργεια."
 
-#: templates/profile.html:64
+#: templates/profile.html:61
 msgid "delete_public"
 msgstr "Διαγραφή δημόσιου προφίλ"
 
-#: templates/profile.html:78
+#: templates/profile.html:77
 msgid "self_removal_prompt"
 msgstr "Είστε βέβαιος/α ότι θέλεις να αποχωρήσεις από αυτήν την τάξη;"
 
-#: templates/profile.html:78
+#: templates/profile.html:77
 msgid "leave_class"
 msgstr "Έξοδος από την τάξη"
 
-#: templates/profile.html:84 templates/profile.html:87
+#: templates/profile.html:82 templates/profile.html:85
 msgid "settings"
 msgstr "Οι προσωπικές μου ρυθμίσεις"
 
-#: templates/profile.html:95 templates/signup.html:41
+#: templates/profile.html:93 templates/signup.html:41
 msgid "birth_year"
 msgstr "Έτος γέννησης"
 
-#: templates/profile.html:98 templates/signup.html:25
+#: templates/profile.html:96 templates/signup.html:25
 msgid "preferred_language"
 msgstr "Προτιμώμενη γλώσσα"
 
-#: templates/profile.html:108 templates/signup.html:34
+#: templates/profile.html:106 templates/signup.html:34
 msgid "preferred_keyword_language"
 msgstr "Προτιμώμενη γλώσσα για τα keywords"
 
-#: templates/profile.html:122 templates/signup.html:44
+#: templates/profile.html:120 templates/signup.html:44
 msgid "gender"
 msgstr "Φύλο"
 
-#: templates/profile.html:125 templates/signup.html:46
+#: templates/profile.html:123 templates/signup.html:46
 msgid "female"
 msgstr "Γυναίκα"
 
-#: templates/profile.html:126 templates/signup.html:47
+#: templates/profile.html:124 templates/signup.html:47
 msgid "male"
 msgstr "Άνδρας"
 
-#: templates/profile.html:127 templates/signup.html:48
+#: templates/profile.html:125 templates/signup.html:48
 msgid "other"
 msgstr "Άλλο"
 
-#: templates/profile.html:140
+#: templates/profile.html:138
 msgid "update_profile"
 msgstr "Ενημέρωση προφίλ"
 
-#: templates/profile.html:143
+#: templates/profile.html:142
 msgid "destroy_profile"
 msgstr "Μόνιμη διαγραφή λογαριασμού"
 
@@ -1720,69 +1738,69 @@ msgstr "Επανάλαβε το νέο συνθηματικό"
 msgid "recent"
 msgstr "Τα πρόσφατα προγράμματά μου"
 
-#: templates/programs.html:31 templates/view-program-page.html:7
+#: templates/programs.html:33 templates/view-program-page.html:7
 msgid "submitted_header"
 msgstr "Αυτό είναι ένα υποβληθέν πρόγραμμα και δεν μπορεί να τροποποιηθεί"
 
-#: templates/programs.html:36
+#: templates/programs.html:38
 msgid "title"
 msgstr "Τίτλος"
 
-#: templates/programs.html:39 templates/view-program-page.html:8
+#: templates/programs.html:41 templates/view-program-page.html:8
 msgid "last_edited"
 msgstr "Τελευταία επεξεργασία"
 
-#: templates/programs.html:57
+#: templates/programs.html:59
 msgid "favourite_confirm"
 msgstr ""
 "Είσαι βέβαιος/α ότι θέλεις να ορίσεις αυτό το πρόγραμμα ως το αγαπημένο "
 "σου;"
 
-#: templates/programs.html:65 templates/programs.html:70
+#: templates/programs.html:67 templates/programs.html:72
 msgid "open"
 msgstr "Άνοιγμα"
 
-#: templates/programs.html:66 templates/programs.html:74
+#: templates/programs.html:68 templates/programs.html:76
 msgid "copy_clipboard"
 msgstr "Αντιγράφηκε με επιτυχία στο πρόχειρο"
 
-#: templates/programs.html:67 templates/programs.html:71
+#: templates/programs.html:69 templates/programs.html:73
 msgid "delete_confirm"
 msgstr "Είσαι βέβαιος/α ότι θέλεις να διαγράψεις το πρόγραμμα;"
 
-#: templates/programs.html:67 templates/programs.html:71
+#: templates/programs.html:69 templates/programs.html:73
 msgid "delete"
 msgstr "Διαγραφή"
 
-#: templates/programs.html:73
+#: templates/programs.html:75
 msgid "unshare_confirm"
 msgstr "Είσαι σίγουρος ότι θέλεις να κάνεις το πρόγραμμα ιδιωτικό;"
 
-#: templates/programs.html:73
+#: templates/programs.html:75
 msgid "unshare"
 msgstr "Κατάργηση κοινής χρήσης"
 
-#: templates/programs.html:75
+#: templates/programs.html:77
 msgid "submit_warning"
 msgstr "Είσαι σίγουρος ότι θέλεις να υποβάλεις αυτό το πρόγραμμα;"
 
-#: templates/programs.html:75
+#: templates/programs.html:77
 msgid "submit_program"
 msgstr "Υποβολή"
 
-#: templates/programs.html:78
+#: templates/programs.html:80
 msgid "share_confirm"
 msgstr "Είσαι σίγουρος ότι θέλεις να δημοσιοποιήσεις το πρόγραμμα;"
 
-#: templates/programs.html:78
+#: templates/programs.html:80
 msgid "share"
 msgstr "Μοίρασμα"
 
-#: templates/programs.html:84
+#: templates/programs.html:86
 msgid "no_programs"
 msgstr "Δεν έχεις προγράμματα ακόμα."
 
-#: templates/programs.html:86
+#: templates/programs.html:88
 msgid "write_first_program"
 msgstr "Γράψε το πρώτο σου πρόγραμμα!"
 
@@ -2543,10 +2561,4 @@ msgstr "Δεν έδωσες όνομα περιπέτειας!"
 
 #~ msgid "select_class"
 #~ msgstr "Επίλεξε τάξη"
-
-#~ msgid "public_profile_visit"
-#~ msgstr "Μπορείς να επισκεφτείς το δημόσιο προφίλ σου! Κάνε κλικ"
-
-#~ msgid "public_profile_link"
-#~ msgstr "εδώ"
 
