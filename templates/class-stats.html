@@ -1,6 +1,6 @@
 {% extends "auth.html" %}
 
-{% from "stats-shared.html" import insert_log_search, insert_accordion_tab %}
+{% from "stats-shared.html" import insert_accordion_tab %}
 
 {% block main %}
 <div class="px-8">
@@ -191,11 +191,6 @@
         </div>
       </div>
 
-    {% endcall %}
-
-
-    {% call insert_accordion_tab('tab-multi-five', 'Search program logs') %}
-        {{ insert_log_search(class_info.id, class_info.students) }}
     {% endcall %}
 
   </div>

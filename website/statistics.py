@@ -44,6 +44,20 @@ def routes(app, db):
         return render_template('class-stats.html', class_info={'id': class_id, 'students': students},
                                current_page='my-profile', page_title=gettext('title_class statistics'))
 
+    @app.route('/logs/class/<class_id>', methods=['GET'])
+    @requires_login
+    def render_class_logs(user, class_id):
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(error=403, ui_message=gettext('retrieve_class_error'))
+
+        class_ = DATABASE.get_class(class_id)
+        if not class_ or (class_['teacher'] != user['username'] and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext('no_such_class'))
+
+        students = sorted(class_.get('students', []))
+        return render_template('class-logs.html', class_info={'id': class_id, 'students': students},
+                               current_page='my-profile', page_title=gettext('title_class logs'))
+
     @app.route('/class-stats/<class_id>', methods=['GET'])
     @requires_login
     def get_class_stats(user, class_id):
