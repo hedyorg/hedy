@@ -7,23 +7,21 @@
   {% else %}<h2>{{_('recent')}}</h2>{% endif %}
   <div class="w-full mb-8" id="program_filter">
     <form onsubmit="event.preventDefault (); hedyApp.filter_user_programs({% if from_user %}'{{ from_user }}', false{% else %}'', true{% endif %});">
-        <div class="flex flex-row px-4 w-full items-center border border-gray-400 py-2 rounded-lg">
-            <select id="user_program_page_level" class="block appearance-none w-1/3 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded ltr:mr-4 rtl:ml-4">
+        <div class="flex flex-row px-4 w-full items-center border border-gray-400 py-2 rounded-lg gap-4">
+            <select id="user_program_page_level" class="block appearance-none w-1/3 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded">
                 <option disabled selected value="">{{_('level')}}</option>
                 {% for i in range(1, (max_level + 1)) %}
                     <option value="{{ i }}" {% if filtered_level and i|string == filtered_level %}selected{% endif %}>{{ i }}</option>
                 {% endfor %}
             </select>
-            <select id="user_program_page_adventure" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded ltr:mr-4 rtl:ml-4">
+            <select id="user_program_page_adventure" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded">
                 <option disabled selected value="">{{ _('adventure') }}</option>
                 {% for adventure_key, name in adventure_names.items() %}
                     <option value="{{ adventure_key }}" {% if filtered_adventure and adventure_key == filtered_adventure %}selected{% endif %}>{{ name }}</option>
                 {% endfor %}
             </select>
-            <div class="flex flex-row ltr:ml-auto rtl:mr-auto">
-                <button type="reset" class="red-btn" onclick="window.open('/programs{% if from_user %}?user={{ from_user }}{% endif %}', '_self');">{{_('reset_view')}}</button>
-                <button type="submit" class="green-btn ltr:ml-4 rtl:mr-4 px-4">{{_('search_button')}}</button>
-            </div>
+            <button type="reset" class="red-btn" onclick="window.open('/programs{% if from_user %}?user={{ from_user }}{% endif %}', '_self');">{{_('reset_view')}}</button>
+            <button type="submit" class="green-btn">{{_('search_button')}}</button>
         </div>
     </form>
   </div>
@@ -32,10 +30,10 @@
     <div id="program_{{ loop.index }}" class="program w-full border-solid border-2 {% if program.submitted %} border-gray-400 bg-gray-400 {% else %} border-orange-400 {% endif %} rounded p-4 mb-4">
         <h3 id="submitted_header_{{ loop.index }}" class="mt-0 mb-4 text-red-500 text-center {% if not program.submitted %} hidden{% endif %}">{{_('submitted_header')}}</h3>
         <div class="flex flex-row">
-            <table class="table-auto mb-4 w-3/4">
+            <table class="table-auto mb-4">
             <thead>
                 <tr class="text-left">
-                    <th class="w-72 text-blue-600">{{_('title')}}</th>
+                    <th class="w-64 text-blue-600">{{_('title')}}</th>
                     <th class="w-24 text-blue-600">{{_('level')}}</th>
                     <th class="w-52 text-blue-600">{{_('adventure')}}</th>
                     <th class="text-blue-600">{{_('last_edited')}}</th>
@@ -43,14 +41,14 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>{{program.name}}</td>
+                    <td>{{program.name|truncate(30)}}</td>
                     <td>{{_('level')}} {{ program.level }}</td>
                     {% if program.adventure_name %}
                         <td>{{adventure_names.get(program.adventure_name)}}</td>
                     {% else %}
                         <td>-</td>
                     {% endif %}
-                    <td>{{ program.date }}</td>
+                    <td>{{_('ago')|replace("{timestamp}", program.date)}}</td>
                 </tr>
             </tbody>
             </table>
@@ -63,20 +61,20 @@
         <div class="w-3/4 turn-pre-into-ace mb-4">
           <pre level="{{ program.level }}" class="no-copy-button">{{program.code }}</pre>
         </div>
-        <div id="submitted_button_container_{{ loop.index }}" class="flex flex-row {% if not program.submitted %} hidden {% endif %}">
+        <div id="submitted_button_container_{{ loop.index }}" class="flex flex-row gap-2" {% if not program.submitted %} style="display: none;" {% endif %}>
             <button class="green-btn" onclick="window.open (hedyApp.viewProgramLink('{{program.id}}'))">{{_('open')}}</button>
-            <button class="blue-btn mx-2" onclick="hedyApp.copy_to_clipboard(hedyApp.viewProgramLink('{{program.id}}'), '{{_('copy_clipboard')}}')">{{_('copy_link_to_share')}}</button>
+            <button class="blue-btn" onclick="hedyApp.copy_to_clipboard(hedyApp.viewProgramLink('{{program.id}}'), '{{_('copy_clipboard')}}')">{{_('copy_link_to_share')}}</button>
             <button class="red-btn" onclick="hedyApp.delete_program('{{ program.id }}', {{ loop.index }}, '{{_('delete_confirm')}}')">{{_('delete')}}</button>
         </div>
-        <div id="non_submitted_button_container_{{ loop.index }}" class="flex flex-row w-full {% if program.submitted %} hidden {% endif %}">
+        <div id="non_submitted_button_container_{{ loop.index }}" class="flex flex-row w-full gap-2 {% if program.submitted %} hidden {% endif %}">
             <a href="/hedy/{{program.level|string}}/{{program.id}}"><button class="green-btn">{{_('open')}}</button></a>
-            <button class="red-btn mx-2" onclick="hedyApp.delete_program('{{ program.id }}', {{ loop.index }}, '{{_('delete_confirm')}}')">{{_('delete')}}</button>
-            <div id="public_button_container_{{ loop.index }}" class="flex flex-row w-full" {% if not program.public %}style="display: none;"{% endif %}> <!-- ml-auto alignment doesn't work with hidden but does with display: none; -->
+            <button class="red-btn" onclick="hedyApp.delete_program('{{ program.id }}', {{ loop.index }}, '{{_('delete_confirm')}}')">{{_('delete')}}</button>
+            <div id="public_button_container_{{ loop.index }}" class="flex flex-row w-full gap-2" {% if not program.public %}style="display: none;"{% endif %}> <!-- ml-auto alignment doesn't work with hidden but does with display: none; -->
                 <button class="blue-btn" onclick="hedyApp.modal.confirm ('{{_('unshare_confirm')}}', function () {hedyApp.share_program ('{{program.id}}', {{ loop.index }}, false)})">{{_('unshare')}}</button>
-                <button class="blue-btn mx-2" onclick="hedyApp.copy_to_clipboard(hedyApp.viewProgramLink('{{program.id}}'), '{{_('copy_clipboard')}}')">{{_('copy_link_to_share')}}</button>
+                <button class="blue-btn" onclick="hedyApp.copy_to_clipboard(hedyApp.viewProgramLink('{{program.id}}'), '{{_('copy_clipboard')}}')">{{_('copy_link_to_share')}}</button>
                 <button class="green-btn ltr:ml-auto rtl:mr-auto" onclick="hedyApp.modal.confirm ('{{_('submit_warning')}}', function () {hedyApp.submit_program ('{{program.id}}', {{ loop.index }})})">{{_('submit_program')}}</button>
             </div>
-            <div id="non_public_button_container_{{ loop.index }}" class="flex flex-row {% if program.public %} hidden {% endif %}">
+            <div id="non_public_button_container_{{ loop.index }}" class="{% if program.public %} hidden {% endif %}">
                 <button class="blue-btn" onclick="hedyApp.modal.confirm ('{{_('share_confirm')}}', function () {hedyApp.share_program ('{{program.id}}', {{ loop.index }}, true)})">{{_('share')}}</button>
             </div>
         </div>

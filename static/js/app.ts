@@ -95,7 +95,7 @@ def convert_numerals(alphabet, number):
     // Fits to content size
     exampleEditor.setOptions({ maxLines: Infinity });
     if ($(preview).hasClass('common-mistakes')) {
-      exampleEditor.setOptions({ minLines: 10 });
+      exampleEditor.setOptions({ minLines: 5 });
     } else if ($(preview).hasClass('cheatsheet')) {
       exampleEditor.setOptions({ minLines: 1 });
     } else if ($(preview).hasClass('parsons')) {
@@ -726,12 +726,10 @@ export function share_program(id: string, index: number, Public: boolean) {
       if (response.achievement) {
         showAchievements(response.achievement, false, "");
       }
+      modal.alert (response.message, 3000, false);
       if (Public) {
-        $('#modal-copy-button').attr('onclick', "hedyApp.copy_to_clipboard('" + viewProgramLink(id) + "')");
-        modal.copy_alert (response.message, 5000);
         change_shared(true, index);
       } else {
-        modal.alert (response.message, 3000, false);
         change_shared(false, index);
       }
     }).fail(function(err) {

@@ -1152,7 +1152,7 @@ levels:
             hint: Pay attention to what sould be repeated and what should only be printed once.
             question_score: '10'
             question_text: Which code was used to create this output?
-            code: "Welcome to restaurant Hedy\nPizza\nHamburger"
+            output: "Welcome to restaurant Hedy\nPizza\nHamburger"
         7:
             question_text: What is wrong with this code?
             code: "eten = {ask} 'What would you like to eat?'\n{if} food {is} fries\nsauce = {ask} 'What sauce would you like?'\n    {print} 'One fries with ' sauce\n{if} food {is} pizza\n    topping = {ask} 'What topping would you like?'\n    {print} 'One pizza with ' topping\n{print} 'That you for your order'"
@@ -1219,7 +1219,6 @@ levels:
             hint: Watch the indentation
             question_score: '10'
             question_text: Which code produced this output?
-            code: "Icecream is the best!\nIcecream is the best!\nIcecream is the best!"
             mp_choice_options:
             -   option: "```\ndesert = {ask} 'What is your favorite type of desert?'\n{if} desert {is} icecream\n    {repeat} 3 {times}\n    {print} 'Icecream is the best!'\n```\n"
                 feedback: Don't forget the indentation after `{repeat}` commands.
@@ -1229,6 +1228,7 @@ levels:
                 feedback: Perfect
             -   option: "```\n{repeat} 3 {times}\n    desert = {ask} 'What is your favorite type of desert?'\n    {if} desert {is} icecream\n        {repeat} 3 {times}\n        {print} 'Icecream is the best!'\n```\n"
                 feedback: There are 2 `{repeat}` commands in this code.
+            output: "Icecream is the best!\nIcecream is the best!\nIcecream is the best!"
         6:
             mp_choice_options:
             -   option: '`{if}`'
@@ -1395,7 +1395,6 @@ levels:
             question_score: '10'
         2:
             question_text: Which code was used to get this output?
-            code: "1\n2\n3\n4\n5\nOnce I caught a fish alive!"
             mp_choice_options:
             -   option: "```\n{for} i {in} {range} 1 {to} 5\n    {print} i\n{print} 'Once I caught a fish alive!'\n```\n"
                 feedback: Perfect
@@ -1408,11 +1407,11 @@ levels:
             correct_answer: A
             hint: First all the numbers, then the sentence
             question_score: '10'
+            output: "1\n2\n3\n4\n5\nOnce I caught a fish alive!"
         3:
             hint: It has to be a calculation...
             question_score: '10'
             question_text: Which code was used to get this output?
-            code: "10\n9\n8\n7\n6\n5\n4\n3\n2\n1\n0"
             mp_choice_options:
             -   option: "```\n{for} i {in} {range} 0 {to} 10\n    {print} i\n```\n"
                 feedback: Now Hedy prints the numbers from 0 to 10 instead of 10 to 0.
@@ -1423,6 +1422,7 @@ levels:
             -   option: "```\n{for} i {in} {range} 0 {to} 10\n    {print} 10 - i\n```\n"
                 feedback: That's right!
             correct_answer: D
+            output: "10\n9\n8\n7\n6\n5\n4\n3\n2\n1\n0"
         5:
             question_text: What word should be at the place of the question mark?
             code: "{for} i {in} _?_ 1 {to} 10\n    {print} i"
@@ -1470,7 +1470,6 @@ levels:
             question_score: '10'
         10:
             question_text: Which code belongs to this output?
-            code: "Baby shark tututudutudu\nBaby shark tututudutudu\nBaby shark tututudutudu\nBaby shark"
             mp_choice_options:
             -   option: "```\n{for} i {in} {range} 1 {to} 3\n    {print} Baby shark tututudutudu\n    {print} Baby shark\n```\n"
                 feedback: Mind the indention
@@ -1483,6 +1482,7 @@ levels:
             correct_answer: B
             hint: Mind the indention
             question_score: '10'
+            output: "Baby shark tututudutudu\nBaby shark tututudutudu\nBaby shark tututudutudu\nBaby shark"
     10:
         1:
             mp_choice_options:
