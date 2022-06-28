@@ -43,9 +43,15 @@ export function loadQuestQuestion(level: number, question: number) {
         $('#quiz_container').show();
         showQuestion(response.question_text);
         if (response.code) {
+            $('#quiz_question_output_container').hide();
             showQuestionCode(response.code);
         } else {
             $('#quiz_question_code_container').hide();
+            if (response.output) {
+                showQuestionOutput(response.output);
+            } else {
+                $('#quiz_question_output_container').hide();
+            }
         }
         showAnswers(response.mp_choice_options, level, question);
         highlightQuestionBar(question);
@@ -68,6 +74,13 @@ function showQuestionCode(code: string) {
     editor.renderer.$cursorLayer.element.style.display = "none"; // Also remove the cursor
 }
 
+function showQuestionOutput(output: string) {
+    $('#quiz_question_output_container').empty();
+    const color = "white";
+    $('<span class="whitespace-pre-wrap">').text(output).css({color}).appendTo('#quiz_question_output_container');
+    $('#quiz_question_output_container').show();
+}
+
 function showAnswers(options: any, level: number, question: number) {
     // This solution is far from beautiful but seems to best approach to parse YAML code down to the editor
     // If we find three backticks -> the answer is a code snippet: remove the backticks and show as snippet
@@ -77,8 +90,8 @@ function showAnswers(options: any, level: number, question: number) {
         if (options[i-1].option.includes("```")) {
             $('#answer_text_' + i).hide();
             let editor = ace.edit('answer_code_' + i);
-            // This does look like magic: It removes all backticks and the resting newlines, tabs and whitespaces
-            editor.setValue($.trim(options[i-1].option.replace(new RegExp('`', 'g'),"").replace(/\s+/g, " ")));
+            // This does look like magic: It removes all backticks and the resting newlines
+            editor.setValue($.trim(options[i-1].option.replace(new RegExp('`', 'g'),"")));
             editor.clearSelection(); // Make sure the ace editor is not selected
             editor.renderer.$cursorLayer.element.style.display = "none"; // Also remove the cursor
             $('#answer_code_' + i).show();
@@ -182,7 +195,7 @@ function showFeedback(response: any, question: string, correct: boolean) {
     $('#feedback_feedback_text').text(response.feedback);
     if (response.correct_answer_text.includes("```")) {
         let editor = ace.edit("feedback_answer_code");
-        editor.setValue($.trim(response.correct_answer_text.replace(new RegExp('`', 'g'),"").replace(/\s+/g, " ")));
+        editor.setValue($.trim(response.correct_answer_text.replace(new RegExp('`', 'g'),"")));
         editor.clearSelection(); // Make sure the ace editor is not selected
         editor.renderer.$cursorLayer.element.style.display = "none"; // Also remove the cursor
         $('#feedback_correct_answer_container').hide();
