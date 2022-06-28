@@ -658,9 +658,6 @@ def programs_page(user):
     level = None if level == "null" else level
     adventure = None if adventure == "null" else adventure
 
-    print(level)
-    print(adventure)
-
     if level or adventure:
         result = DATABASE.filtered_programs_for_user(from_user or username, level, adventure)
     else:
