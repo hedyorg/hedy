@@ -991,7 +991,8 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     $('#stopit').hide();
     $('#runit').show();
     if (hasTurtle) {
-      $('#saveDST').show();
+      // Todo TB: Don't show button until we have the tkinter issue figured out on Heroku (29/06)
+      // $('#saveDST').show();
     }
 
     // Check if the program was correct but the output window is empty: Return a warning

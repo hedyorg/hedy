@@ -111,8 +111,10 @@ class Database:
         if adventure:
             # If the adventure we filter on is called 'default' -> return all programs WITHOUT an adventure
             if adventure == "default":
-                return [x for x in programs if x.get('adventure_name') == ""]
-            return [x for x in programs if x.get('adventure_name') == adventure]
+                programs = [x for x in programs if x.get('adventure_name') == ""]
+            else:
+                programs = [x for x in programs if x.get('adventure_name') == adventure]
+        return programs
 
     def public_programs_for_user(self, username):
         programs = PROGRAMS.get_many({'username': username}, reverse=True)
