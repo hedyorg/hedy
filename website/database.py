@@ -230,7 +230,7 @@ class Database:
         # If the filter is global or country -> get all public profiles
         if filter == "global" or filter == "country":
             profiles = self.get_all_public_profiles()
-        # If it's a class, only get the onces
+        # If it's a class, only get the ones from your class
         elif filter == "class":
             Class = self.get_class(filter_value)
             for student in Class.get('students', []):
@@ -240,7 +240,7 @@ class Database:
 
         for profile in profiles:
             if not profile.get('country'):
-                country = self.user_by_username(profile.get('username', {})).get('country', None)
+                country = self.user_by_username(profile.get('username')).get('country')
                 self.update_country_public_profile(profile.get('username'), country)
                 profile['country'] = country
             if not profile.get('achievements'):
