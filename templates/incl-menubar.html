@@ -1,6 +1,6 @@
 <nav aria-label="Website" class="bg-blue-500 px-2">
     {% block menu %}
-    <ul class="h-full list-none flex flex-row items-center ltr:ml-2 rtl:mr-2 gap-1 lg:gap-2">
+    <ul class="h-full list-none flex flex-row items-center mx-2 gap-1 lg:gap-2">
         <li><a href="/"><img class="h-10" src="{{static('/images/Hedy-logo.png')}}" alt="{{_('hedy_logo_alt')}}"></a></li>
         <li class="hidden lg:flex"><a class="menubar-btn{% if current_page == 'start' %} active{% endif %}" href="/start">{{_('nav_start')}}</a></li>
         <li><a class="menubar-btn{% if current_page == 'hedy' %} active{% endif %}" href="/hedy">{{_('nav_hedy')}}</a></li>
