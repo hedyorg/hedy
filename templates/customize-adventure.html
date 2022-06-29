@@ -1,12 +1,12 @@
 {% extends "auth.html" %}
 
 {% block main %}
-<div class="px-8">
+<div class="flex flex-col gap-2">
     <h2>{{_('customize_adventure')}}: {{adventure.name}}</h2>
-    <div class="mt-4 border-gray-400 border-2 rounded-lg p-4">
+    <div class="border-gray-400 border rounded-lg p-4">
         <form onsubmit="event.preventDefault (); hedyApp.update_adventure('{{ adventure.id }}', {% if adventure.content|length > 0 %}false{% else %}true{% endif %}, '{{_('update_adventure_prompt')}}')">
-            <div class="flex flex-row">
-                <div class="flex flex-col ltr:mr-4 rtl:ml-4">
+            <div class="flex flex-col lg:flex-row gap-4">
+                <div class="flex flex-col w-full lg:w-1/2">
                     <h3 class="text-center mt-0 mb-4">{{_('general_settings')}}</h3>
                     <div class="flex flex-row items-center mb-4">
                         <label for="name" class="inline-block w-40 text-xl">{{_('name')}}</label>
@@ -39,7 +39,7 @@
                         {{_('adventure_exp_3')}}
                     </div>
                 </div>
-                <div class="flex flex-col ltr:ml-4 rtl:mr-4">
+                <div class="flex flex-col w-full lg:w-1/2">
                     <h3 class="text-center mt-0 mb-4">{{ _('adventure') }}</h3>
                     <textarea id="custom_adventure_content" class="block appearance-none w-full h-96 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 rounded">{% if adventure.content|length > 0 %}{{ adventure.content }}{% else %}{{_('template_code')}}{% endif %}</textarea>
                     <div class="my-2 flex flex-row items-center text-center border-red-500 border p-4 rounded-lg">
@@ -55,7 +55,7 @@
             </div>
         </form>
     </div>
-    <div class="mt-4 flex flex-row">
+    <div>
         <button class="blue-btn" onclick="window.open('/for-teachers', '_self');">{{_('back_to_teachers_page')}}</button>
     </div>
 </div>
