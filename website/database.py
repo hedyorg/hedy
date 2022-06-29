@@ -251,9 +251,8 @@ class Database:
                 profile['country'] = country
             if not profile.get('achievements'):
                 achievements = self.achievements_by_username(profile.get('username'))
-                amount_achievements = len(achievements) or 0
-                self.update_achievements_public_profile(profile.get('username'), amount_achievements)
-                profile['achievements'] = amount_achievements
+                self.update_achievements_public_profile(profile.get('username'), len(achievements) or 0)
+                profile['achievements'] = len(achievements) or 0
 
         # If we filter on country, make sure to filter out all non-country values
         if filter == "country":
