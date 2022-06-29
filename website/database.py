@@ -240,7 +240,13 @@ class Database:
 
         for profile in profiles:
             if not profile.get('country'):
-                country = self.user_by_username(profile.get('username')).get('country')
+                # This seems to crash on production even if it shouldn't (all profiles should have a username)
+                # To be sure, surround with a try catch
+                try:
+                    country = self.user_by_username(profile.get('username')).get('country')
+                except AttributeError:
+                    print("This profile username is invalid...")
+                    country = None
                 self.update_country_public_profile(profile.get('username'), country)
                 profile['country'] = country
             if not profile.get('achievements'):
