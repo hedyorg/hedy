@@ -244,10 +244,10 @@ class Database:
                 # To be sure, surround with a try catch
                 try:
                     country = self.user_by_username(profile.get('username')).get('country')
+                    self.update_country_public_profile(profile.get('username'), country)
                 except AttributeError:
                     print("This profile username is invalid...")
                     country = None
-                self.update_country_public_profile(profile.get('username'), country)
                 profile['country'] = country
             if not profile.get('achievements'):
                 achievements = self.achievements_by_username(profile.get('username'))
