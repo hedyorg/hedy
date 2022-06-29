@@ -492,11 +492,11 @@ class Database:
     def update_public_profile(self, username, data):
         PUBLIC_PROFILES.update({'username': username}, data)
 
-    def update_achievements_public_profile(self, username, achievements):
+    def update_achievements_public_profile(self, username, amount_achievements):
         data = PUBLIC_PROFILES.get({'username': username})
         # In the case that we make this call but there is no public profile -> don't do anything
         if data:
-            PUBLIC_PROFILES.update({'username': username}, {'achievements': achievements, 'last_achievement': timems()})
+            PUBLIC_PROFILES.update({'username': username}, {'achievements': amount_achievements, 'last_achievement': timems()})
 
     def update_country_public_profile(self, username, country):
         data = PUBLIC_PROFILES.get({'username': username})
