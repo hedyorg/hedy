@@ -1232,7 +1232,7 @@ def get_highscores_page(user, filter):
         highscore['country'] = highscore.get('country') if highscore.get('country') else "-"
         highscore['last_achievement'] = utils.delta_timestamp(highscore.get('last_achievement'))
     return render_template('highscores.html', highscores=highscores, has_country=True if country else False,
-                           filter=filter, user_country = user_country, public_profile = public_profile,
+                           filter=filter, user_country=user_country, public_profile=public_profile,
                            in_class=True if classes else False)
 
 
