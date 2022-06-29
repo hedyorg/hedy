@@ -1207,6 +1207,7 @@ def get_highscores_page(user, filter):
         return utils.error_page(error=404, ui_message=gettext('page_not_found'))
 
     user_data = DATABASE.user_by_username(user['username'])
+    public_profile = True if DATABASE.get_public_profile_settings(user['username']) else False
     classes = list(user_data.get('classes', set()))
     country = user_data.get('country')
     user_country = COUNTRIES.get(country)
@@ -1231,7 +1232,8 @@ def get_highscores_page(user, filter):
         highscore['country'] = highscore.get('country') if highscore.get('country') else "-"
         highscore['last_achievement'] = utils.delta_timestamp(highscore.get('last_achievement'))
     return render_template('highscores.html', highscores=highscores, has_country=True if country else False,
-                           filter=filter, user_country = user_country, in_class=True if classes else False)
+                           filter=filter, user_country = user_country, public_profile = public_profile,
+                           in_class=True if classes else False)
 
 
 @app.route('/change_language', methods=['POST'])
