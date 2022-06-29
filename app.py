@@ -646,8 +646,7 @@ def programs_page(user):
         if from_user not in students:
             return utils.error_page(error=403, ui_message=gettext('not_enrolled'))
 
-    adventures_names = hedy_content.Adventures(
-        session['lang']).get_adventure_names()
+    adventures_names = hedy_content.Adventures(session['lang']).get_adventure_names()
 
     # We request our own page -> also get the public_profile settings
     public_profile = None
@@ -660,8 +659,7 @@ def programs_page(user):
     adventure = None if adventure == "null" else adventure
 
     if level or adventure:
-        result = DATABASE.filtered_programs_for_user(
-            from_user or username, level, adventure)
+        result = DATABASE.filtered_programs_for_user(from_user or username, level, adventure)
     else:
         result = DATABASE.programs_for_user(from_user or username)
 
