@@ -1,0 +1,22 @@
+{% extends "auth.html" %}
+
+{% from "stats-shared.html" import insert_log_search, insert_accordion_tab %}
+
+{% block main %}
+<div class="px-8">
+  <div class="inline-block medium text-2xl">Search class programs: </div>
+
+    <button class="green-btn float-right" onclick="window.location.href='/for-teachers/class/{{class_info.id}}'">
+      {{_('back_to_class')}}
+    </button>
+
+    {{ insert_log_search(class_info.id, class_info.students) }}
+
+</div>
+
+<script>
+  $(function() {
+    hedyApp.logs.initialize();
+  });
+</script>
+{% endblock %}
