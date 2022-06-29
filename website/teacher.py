@@ -69,6 +69,7 @@ def routes(app, database, achievements):
             invites.append({'username': invite['username'],
                             'timestamp': utils.localized_date_format(invite['timestamp'], short_format=True),
                             'expire_timestamp': utils.localized_date_format(invite['ttl'], short_format=True)})
+        print(Class['name'])
 
         return render_template('class-overview.html', current_page='my-profile',
                                 page_title=gettext('title_class-overview'),

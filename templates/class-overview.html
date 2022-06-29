@@ -9,8 +9,8 @@
     });
     </script>
     {% endif %}
-    <div class="flex flex-row mb-4 items-center gap-x-2">
-        <h1 class="inline-block">{{class_info.name}}️</h1><span class="cursor-pointer" onclick='hedyApp.rename_class("{{class_info.id}}", {{_('class_name_prompt')|tojson}})'>✏️</span>
+    <div class="flex flex-row mb-4 items-center gap-2">
+        <h1>{{ class_info.name }}</h1><span class="cursor-pointer" onclick='hedyApp.rename_class("{{class_info.id}}", {{_('class_name_prompt')|tojson}})'>✏️</span>
     </div>
   <div class="program w-full border-solid border-2 border-orange-400 rounded p-4 mb-4">
       <table class="table-auto w-full text-sm">
