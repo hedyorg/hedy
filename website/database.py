@@ -227,15 +227,10 @@ class Database:
     def get_highscores(self, username, filter, filter_value=None):
         profiles = []
 
+        # If the filter is global or country -> get all public profiles
         if filter == "global" or filter == "country":
             profiles = self.get_all_public_profiles()
-        if filter == "country":
-            for profile in profiles:
-                if not profile.get('country'):
-                    country = self.user_by_username(profile.get('username')).get('country', None)
-                    self.update_country_public_profile(profile.get('username'), country)
-                    profile['country'] = country
-            profiles = [x for x in self.get_all_public_profiles() if x.get('country') == filter_value]
+        # If it's a class, only get the ones from your class
         elif filter == "class":
             Class = self.get_class(filter_value)
             for student in Class.get('students', []):
@@ -244,10 +239,24 @@ class Database:
                     profiles.append(profile)
 
         for profile in profiles:
+            if not profile.get('country'):
+                # This seems to crash on production even if it shouldn't (all profiles should have a username)
+                # To be sure, surround with a try catch
+                try:
+                    country = self.user_by_username(profile.get('username')).get('country')
+                    self.update_country_public_profile(profile.get('username'), country)
+                except AttributeError:
+                    print("This profile username is invalid...")
+                    country = None
+                profile['country'] = country
             if not profile.get('achievements'):
                 achievements = self.achievements_by_username(profile.get('username'))
-                self.update_achievements_public_profile(profile.get('username'), len(achievements) if achievements else 0)
-                profile['achievements'] = achievements if achievements else 0
+                self.update_achievements_public_profile(profile.get('username'), len(achievements) or 0)
+                profile['achievements'] = len(achievements) or 0
+
+        # If we filter on country, make sure to filter out all non-country values
+        if filter == "country":
+            profiles = [x for x in profiles if x.get('country') == filter_value]
 
         # Perform a double sorting: first by achievements (high-low), then by timestamp (low-high)
         profiles = sorted(profiles, key=lambda k: (k.get('achievements'), -k.get('last_achievement')), reverse=True)
@@ -481,24 +490,20 @@ class Database:
         ACHIEVEMENTS.update({'username': username}, {'submitted_programs': dynamo.DynamoIncrement(1)})
 
     def update_public_profile(self, username, data):
-        data['username'] = username
-        PUBLIC_PROFILES.put(data)
+        PUBLIC_PROFILES.update({'username': username}, data)
 
-    def update_achievements_public_profile(self, username, achievements):
+    def update_achievements_public_profile(self, username, amount_achievements):
         data = PUBLIC_PROFILES.get({'username': username})
         # In the case that we make this call but there is no public profile -> don't do anything
         if data:
-            data['achievements'] = achievements
-            data['last_achievement'] = timems()
-            self.update_public_profile(username, data)
+            PUBLIC_PROFILES.update({'username': username}, {'achievements': amount_achievements, 'last_achievement': timems()})
 
     def update_country_public_profile(self, username, country):
         data = PUBLIC_PROFILES.get({'username': username})
         # If there is no data -> we might have made this request from the /update_profile route without a public profile
         # In this case don't do anything
         if data:
-            data['country'] = country
-            self.update_public_profile(username, data)
+            PUBLIC_PROFILES.update({'username': username}, {'country': country})
 
     def set_favourite_program(self, username, program_id):
         # We can only set a favourite program is there is already a public profile
