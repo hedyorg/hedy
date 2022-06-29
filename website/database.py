@@ -491,7 +491,7 @@ class Database:
 
     def update_public_profile(self, username, data):
         data['username'] = username
-        PUBLIC_PROFILES.put(data)
+        PUBLIC_PROFILES.update(data)
 
     def update_achievements_public_profile(self, username, achievements):
         data = PUBLIC_PROFILES.get({'username': username})
