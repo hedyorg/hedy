@@ -227,15 +227,10 @@ class Database:
     def get_highscores(self, username, filter, filter_value=None):
         profiles = []
 
+        # If the filter is global or country -> get all public profiles
         if filter == "global" or filter == "country":
             profiles = self.get_all_public_profiles()
-        if filter == "country":
-            for profile in profiles:
-                if not profile.get('country'):
-                    country = self.user_by_username(profile.get('username')).get('country', None)
-                    self.update_country_public_profile(profile.get('username'), country)
-                    profile['country'] = country
-            profiles = [x for x in self.get_all_public_profiles() if x.get('country') == filter_value]
+        # If it's a class, only get the onces
         elif filter == "class":
             Class = self.get_class(filter_value)
             for student in Class.get('students', []):
@@ -244,10 +239,18 @@ class Database:
                     profiles.append(profile)
 
         for profile in profiles:
+            if not profile.get('country'):
+                country = self.user_by_username(profile.get('username', {})).get('country', None)
+                self.update_country_public_profile(profile.get('username'), country)
+                profile['country'] = country
             if not profile.get('achievements'):
                 achievements = self.achievements_by_username(profile.get('username'))
                 self.update_achievements_public_profile(profile.get('username'), len(achievements) if achievements else 0)
                 profile['achievements'] = achievements if achievements else 0
+
+        # If we filter on country, make sure to filter out all non-country values
+        if filter == "country":
+            profiles = [x for x in profiles if x.get('country') == filter_value]
 
         # Perform a double sorting: first by achievements (high-low), then by timestamp (low-high)
         profiles = sorted(profiles, key=lambda k: (k.get('achievements'), -k.get('last_achievement')), reverse=True)
