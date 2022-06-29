@@ -490,24 +490,20 @@ class Database:
         ACHIEVEMENTS.update({'username': username}, {'submitted_programs': dynamo.DynamoIncrement(1)})
 
     def update_public_profile(self, username, data):
-        data['username'] = username
-        PUBLIC_PROFILES.update(data)
+        PUBLIC_PROFILES.update({'username': username}, data)
 
     def update_achievements_public_profile(self, username, achievements):
         data = PUBLIC_PROFILES.get({'username': username})
         # In the case that we make this call but there is no public profile -> don't do anything
         if data:
-            data['achievements'] = achievements
-            data['last_achievement'] = timems()
-            self.update_public_profile(username, data)
+            PUBLIC_PROFILES.update({'username': username}, {'achievements': achievements, 'last_achievement': timems()})
 
     def update_country_public_profile(self, username, country):
         data = PUBLIC_PROFILES.get({'username': username})
         # If there is no data -> we might have made this request from the /update_profile route without a public profile
         # In this case don't do anything
         if data:
-            data['country'] = country
-            self.update_public_profile(username, data)
+            PUBLIC_PROFILES.update({'username': username}, {'country': country})
 
     def set_favourite_program(self, username, program_id):
         # We can only set a favourite program is there is already a public profile
