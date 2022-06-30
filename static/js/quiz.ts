@@ -3,8 +3,13 @@ import {showAchievements} from "./app";
 
 (function() {
     $('.option-block').on("click", function () {
-        $('.option-block').removeClass('active');
-        $(this).addClass('active');
+        // Remove active attribute and hide possible answer button
+        $('.option-block').removeClass('border-double border-8 active');
+        $('.submit-button').hide();
+
+        // Add active attribute and show correct answer button
+        $(this).addClass('border-double border-8 active');
+        $(this).find(".submit-button").show();
     });
 })();
 
@@ -27,9 +32,8 @@ export function startQuiz(level: number) {
 }
 
 export function loadQuestQuestion(level: number, question: number) {
-    // If we get the request from the feedback page -> hide just to be sure also remove selected answer
+    // If we get the request from the feedback page -> always hide the feedback container
     $('#quiz_feedback_container').hide();
-    $('.option-block').removeClass('active');
 
     $.ajax({
       type: 'GET',
@@ -73,8 +77,8 @@ function showAnswers(options: any, level: number, question: number) {
         if (options[i-1].option.includes("```")) {
             $('#answer_text_' + i).hide();
             let editor = ace.edit('answer_code_' + i);
-            // This does look like magic: It removes all backticks and the resting newlines, tabs and whitespaces
-            editor.setValue($.trim(options[i-1].option.replace(new RegExp('`', 'g'),"").replace(/\s+/g, " ")));
+            // This does look like magic: It removes all backticks and the resting newlines
+            editor.setValue($.trim(options[i-1].option.replace(new RegExp('`', 'g'),"")));
             editor.clearSelection(); // Make sure the ace editor is not selected
             editor.renderer.$cursorLayer.element.style.display = "none"; // Also remove the cursor
             $('#answer_code_' + i).show();
@@ -85,10 +89,13 @@ function showAnswers(options: any, level: number, question: number) {
             $('#answer_code_' + i).hide();
             $('#answer_text_' + i).show();
         }
+        let container = $('#answer_container_' + i);
         // Set relevant info on container so we can catch this on answering
-        $('#answer_container_' + i).attr('level', level);
-        $('#answer_container_' + i).attr('question', question);
-        $('#answer_container_' + i).show();
+        container.attr('level', level);
+        container.attr('question', question);
+        container.removeClass('border-double border-8 active');
+        container.find(".submit-button").hide(); // Not sure why but $('.submit-button').hide() doesn't work globally!
+        container.show();
     }
     $('#quiz_answers_container').show();
 }
@@ -101,8 +108,9 @@ function parseCodeBlocks(option: string) {
 }
 
 function highlightQuestionBar(question: number) {
-    $('.step').removeClass('current');
     $('.question_header_text_container').hide();
+    $('.step').removeClass('current');
+
     $('#question_header_text_' + question).show();
     $('#question_header_' + question).addClass('current');
 }
@@ -174,7 +182,7 @@ function showFeedback(response: any, question: string, correct: boolean) {
     $('#feedback_feedback_text').text(response.feedback);
     if (response.correct_answer_text.includes("```")) {
         let editor = ace.edit("feedback_answer_code");
-        editor.setValue($.trim(response.correct_answer_text.replace(new RegExp('`', 'g'),"").replace(/\s+/g, " ")));
+        editor.setValue($.trim(response.correct_answer_text.replace(new RegExp('`', 'g'),"")));
         editor.clearSelection(); // Make sure the ace editor is not selected
         editor.renderer.$cursorLayer.element.style.display = "none"; // Also remove the cursor
         $('#feedback_correct_answer_container').hide();
@@ -197,9 +205,9 @@ function showFeedback(response: any, question: string, correct: boolean) {
 
 function updateHeader(question: string, correct: boolean) {
     if (correct) {
-        $('#question_header_' + question).addClass('check');
+        $('#question_header_' + question).addClass('bg-green-400');
     } else {
-        $('#question_header_' + question).addClass('incorrect');
+        $('#question_header_' + question).addClass('bg-red-400');
     }
 }
 

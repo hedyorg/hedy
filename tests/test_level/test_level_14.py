@@ -319,6 +319,7 @@ class TestsLevel14(HedyTester):
     ('1, 2', '1'),        # list and number
     ('1, 2', "'text'"),   # list and single-quoted text
     ('1, 2', '"text"')])  # list and double-quoted text
+
   def test_not_equal_with_diff_types_gives_error(self, left, right):
     code = textwrap.dedent(f"""\
       a is {left}
@@ -332,4 +333,17 @@ class TestsLevel14(HedyTester):
       exception=exceptions.InvalidTypeCombinationException
     )
 
+  def test_missing_indent_else(self):
+    code = textwrap.dedent(f"""\
+      age = ask 'How old are you?'
+      if age < 13
+          print 'You are younger than me!'
+      else
+      print 'You are older than me!'""")
+
+    self.multi_level_tester(
+      code=code,
+      max_level=15,
+      exception=exceptions.NoIndentationException
+    )
 

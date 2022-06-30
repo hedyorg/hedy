@@ -3,6 +3,13 @@ import {getHighlighter, showAchievements, turnIntoAceEditor} from "./app";
 
 import DOMPurify from 'dompurify'
 
+(function() {
+    // Use this to make sure that we return a prompt when a user leaves the page without saving
+    $( "input" ).change(function() {
+        window.State.unsaved_changes = true;
+    });
+})();
+
 export function create_class(class_name_prompt: string) {
   modal.prompt (class_name_prompt, '', function (class_name) {
     $.ajax({
@@ -363,6 +370,7 @@ export function save_customizations(class_id: string) {
       dataType: 'json'
     }).done(function (response) {
       modal.alert(response.success, 3000, false);
+      window.State.unsaved_changes = false;
       $('#remove_customizations_button').removeClass('hidden');
     }).fail(function (err) {
       modal.alert(err.responseText, 3000, true);
@@ -398,6 +406,7 @@ export function remove_customizations(class_id: string, prompt: string) {
 }
 
 export function select_all_levels_adventure(adventure_name: string) {
+    window.State.unsaved_changes = true;
     let first_input = true;
     let checked = true;
     $('.adventure_level_input').each(function() {
@@ -413,6 +422,7 @@ export function select_all_levels_adventure(adventure_name: string) {
 }
 
 export function select_all_level_adventures(level: string) {
+    window.State.unsaved_changes = true;
     // It is not selected yet -> select all and change color
     if ($('#level_button_' + level).hasClass('blue-btn')) {
         $('.adventure_level_' + level).each(function(){
@@ -489,6 +499,9 @@ export function create_accounts(prompt: string) {
                 return;
             } else {
                 modal.alert(response.success, 3000, false);
+                if ($("input[name='download_credentials_checkbox']:checked").val() == "yes") {
+                    download_login_credentials(accounts);
+                }
                 $('#account_rows_container').find(':input').each(function () {
                    $(this).val("");
                 });
@@ -497,4 +510,34 @@ export function create_accounts(prompt: string) {
             modal.alert(err.responseText, 3000, true);
         });
     });
+}
+
+function download_login_credentials(accounts: any) {
+    // https://stackoverflow.com/questions/14964035/how-to-export-javascript-array-info-to-csv-on-client-side
+    let csvContent = "data:text/csv;charset=utf-8,";
+    csvContent += "Username, Password" + "\r\n";
+
+    accounts.forEach(function(account: any) {
+        let row = account.username + "," + account.password;
+        csvContent += row + "\r\n";
+    });
+
+    var encodedUri = encodeURI(csvContent);
+    var link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "accounts.csv");
+    document.body.appendChild(link); // Required for Firefox
+
+    link.click();
+}
+
+export function copy_join_link(link: string, success: string) {
+    // https://qawithexperts.com/article/javascript/creating-copy-to-clipboard-using-javascript-or-jquery/364
+    var sampleTextarea = document.createElement("textarea");
+    document.body.appendChild(sampleTextarea);
+    sampleTextarea.value = link;
+    sampleTextarea.select();
+    document.execCommand("copy");
+    document.body.removeChild(sampleTextarea);
+    modal.alert(success, 3000, false);
 }
