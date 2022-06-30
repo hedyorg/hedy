@@ -11,15 +11,6 @@ module.exports = {
   ],
   theme: {
     extend: {},
-    screens: {
-      // TODO TB: Re-write this, we don't need manual breakpoints! Just use the "normal" Tailwind ones
-      // We do have a lot of dependencies on the 'lg' breakpoints, should handle this delicately
-      // We only need a few breakpoints
-      sm: '640px',
-      md: '768px',
-      lg: '1024px',
-      xl: '1280px',
-    },
     fontSize: {
       xs: '0.75rem',
       sm: '0.875rem',
