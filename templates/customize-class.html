@@ -1,11 +1,11 @@
 {% extends "auth.html" %}
 
 {% block main %}
-<div class="px-8">
+<div class="flex flex-col gap-2">
     <h2>{{_('customize_class')}}: {{class_info.name}}</h2>
-    <div class="w-full ltr:pr-4 rtl:pl-4">
-            {{ _('customize_class_exp_1')|commonmark }}
-        <div class="border border-gray-400 w-3/4 rounded-lg px-2 py-1 my-2">
+    <div>
+        {{ _('customize_class_exp_1')|commonmark }}
+        <div class="border border-gray-400 w-full lg:w-3/4 rounded-lg px-2 py-1 my-2">
             <ol>
                 <li>{{_('customize_class_step_1')}}</li>
                 <li>{{_('customize_class_step_2')}}</li>
@@ -17,11 +17,11 @@
                 <li>{{_('customize_class_step_8')}}</li>
             </ol>
         </div>
-            {{ _('customize_class_exp_2')|commonmark }}
+        {{ _('customize_class_exp_2')|commonmark }}
     </div>
     <div class="flex flex-col">
         <h3 class="px-4">{{_('select_adventures')}}</h3>
-        <div class="border border-gray-400 py-2 px-4 rounded-lg">
+        <div class="border border-gray-400 py-2 px-4 rounded-lg overflow-x-scroll">
             <table class="table-auto w-full text-center customize_adventure_overview">
                 <thead>
                     <tr>
@@ -38,7 +38,7 @@
                             <td class="text-left adventure_keys border-t border-r border-gray-400 cursor-pointer" onclick="hedyApp.select_all_levels_adventure('{{ key }}');" adventure="{{ key }}">{{ name }}</td>
                             {% for i in range(1, max_level + 1) %}
                                 <td class="border-t border-gray-400">
-                                    {% if i in levels %}<input class="adventure_level_{{ loop.index }} adventure_level_input
+                                    {% if i in levels %}<input class="adventure_level_{{ loop.index }} adventure_level_input cursor-pointer
                                         {% if customizations and i not in customizations['levels'] %} hidden{% endif %}"
                                         adventure="{{ key }}" level="{{ i }}"
                                         {% if (customizations and customizations['adventures'][key] and i in customizations['adventures'][key]) or (not customizations) %}
@@ -54,8 +54,8 @@
             </table>
         </div>
     </div>
-    <div class="flex flex-row">
-        <div class="flex flex-col ltr:mr-4 rtl:ml-4">
+    <div class="flex flex-col lg:flex-row gap-4">
+        <div class="flex flex-col">
             <h3 class="px-4">{{_('opening_dates')}}</h3>
             <div class="border border-gray-400 w-full py-2 px-4 rounded-lg">
                 <table class="table-auto text-center opening_dates_overview">
@@ -84,7 +84,7 @@
                 </table>
             </div>
         </div>
-        <div class="flex flex-col ltr:ml-4 rtl:mr-4">
+        <div class="flex flex-col gap-4">
             <div class="flex flex-col">
                 <h3 class="px-4">{{_('select_own_adventures')}}</h3>
                 <div class="border border-gray-400 py-2 px-4 rounded-lg">
@@ -155,15 +155,15 @@
                     </table>
                 </div>
             </div>
-            <div class="flex flex-col mt-8">
-                <div class="flex flex-row ml-auto">
+            <div class="flex flex-col gap-2">
+                <div class="flex flex-row ml-auto gap-2">
                     <button class="yellow-btn text-white" onclick="hedyApp.modal.confirm('{{_('reset_adventure_prompt')}}', function(){$('.adventure_level_input').prop('checked', false);$('.teacher_adventures_checkbox').prop('checked', false);});">{{_('reset_adventures')}}</button>
-                    <button class="blue-btn ltr:ml-2 rtl:mr-2" onclick="hedyApp.save_customizations('{{class_info.id}}')">{{_('save')}}</button>
+                    <button class="blue-btn" onclick="hedyApp.save_customizations('{{class_info.id}}')">{{_('save')}}</button>
                 </div>
-                <div class="flex flex-row mt-2 ml-auto">
+                <div class="flex flex-row ml-auto gap-2">
                     <button class="red-btn {% if not customizations %}hidden{% endif %}" id="remove_customizations_button" onclick='hedyApp.remove_customizations("{{class_info.id}}", {{_('remove_customizations_prompt')|tojson}})'>
                     {{_('remove_customization')}}</button>
-                    <button class="green-btn ltr:ml-2 rtl:mr-2" onclick=validate_changes()>{{_('back_to_class')}}</button>
+                    <button class="green-btn" onclick=validate_changes()>{{_('back_to_class')}}</button>
                 </div>
             </div>
         </div>

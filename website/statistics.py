@@ -44,6 +44,20 @@ def routes(app, db):
         return render_template('class-stats.html', class_info={'id': class_id, 'students': students},
                                current_page='my-profile', page_title=gettext('title_class statistics'))
 
+    @app.route('/logs/class/<class_id>', methods=['GET'])
+    @requires_login
+    def render_class_logs(user, class_id):
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(error=403, ui_message=gettext('retrieve_class_error'))
+
+        class_ = DATABASE.get_class(class_id)
+        if not class_ or (class_['teacher'] != user['username'] and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext('no_such_class'))
+
+        students = sorted(class_.get('students', []))
+        return render_template('class-logs.html', class_info={'id': class_id, 'students': students},
+                               current_page='my-profile', page_title=gettext('title_class logs'))
+
     @app.route('/class-stats/<class_id>', methods=['GET'])
     @requires_login
     def get_class_stats(user, class_id):
@@ -315,21 +329,23 @@ def _calc_error_rate(fail, success):
 
 
 def get_general_class_stats(students):
-    current_week = DATABASE.to_year_week(DATABASE.parse_date(str(date.today()), date(2022, 1, 1)))
-    week_stats = DATABASE.get_program_stats(students, None, None)
-    runs = 0
-    fails = 0
-    runs_weekly = 0
-    fails_weekly = 0
+    current_week = DATABASE.to_year_week(date.today())
+    data = DATABASE.get_program_stats(students, None, None)
+    successes = 0
+    errors = 0
+    weekly_successes = 0
+    weekly_errors = 0
 
-    for stats in week_stats:
-        runs += int(stats.get('successful_runs', 0))
-        if stats.get('week') == current_week:
-            runs_weekly += int(stats.get('successful_runs', 0))
-        for k, v in stats.items():
-            if k.lower().endswith('exception'):
-                fails += v
-                if stats.get('week') == current_week:
-                    fails_weekly += v
+    for entry in data:
+        entry_successes = int(entry.get('successful_runs', 0))
+        entry_errors = sum([v for k, v in entry.items() if k.lower().endswith('exception')])
+        successes += entry_successes
+        errors += entry_errors
+        if entry.get('week') == current_week:
+            weekly_successes += entry_successes
+            weekly_errors += entry_errors
 
-    return {'week': {'runs': runs_weekly, 'fails': fails_weekly}, 'total': {'runs': runs, 'fails': fails}}
+    return {
+        'week': {'runs': weekly_successes + weekly_errors, 'fails': weekly_errors},
+        'total': {'runs': successes + errors, 'fails': errors}
+    }

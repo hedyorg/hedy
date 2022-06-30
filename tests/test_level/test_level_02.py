@@ -408,6 +408,16 @@ class TestsLevel2(HedyTester):
     #
     # is tests
     #
+
+    def test_assign_with_space_gives_invalid(self):
+        code = " naam is Hedy"
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.InvalidSpaceException,
+            max_level=7)
+
+
     def test_assign(self):
         code = "naam is Felienne"
         expected = "naam = 'Felienne'"

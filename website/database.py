@@ -111,8 +111,10 @@ class Database:
         if adventure:
             # If the adventure we filter on is called 'default' -> return all programs WITHOUT an adventure
             if adventure == "default":
-                return [x for x in programs if x.get('adventure_name') == ""]
-            return [x for x in programs if x.get('adventure_name') == adventure]
+                programs = [x for x in programs if x.get('adventure_name') == ""]
+            else:
+                programs = [x for x in programs if x.get('adventure_name') == adventure]
+        return programs
 
     def public_programs_for_user(self, username):
         programs = PROGRAMS.get_many({'username': username}, reverse=True)
@@ -219,22 +221,57 @@ class Database:
             return users
         return users[:200]
 
-    def get_all_explore_programs(self):
-        return PROGRAMS.get_many({'public': 1}, sort_key='date', limit=48, reverse=True)
+    def get_all_public_programs(self):
+        return PROGRAMS.get_many({'public': 1}, sort_key='date', reverse=True)
 
-    def get_filtered_explore_programs(self, level=None, adventure=None, language=None):
-        programs = PROGRAMS.get_many({'public': 1}, sort_key='date', reverse=True)
-        if level:
-            programs = [x for x in programs if x.get('level') == int(level)]
-        if language:
-            programs = [x for x in programs if x.get('lang') == language]
-        if adventure:
-            # If the adventure we filter on is called 'default' -> return all programs WITHOUT an adventure
-            if adventure == "default":
-                programs = [x for x in programs if x.get('adventure_name') == ""]
-                return programs[-48:]
-            programs = [x for x in programs if x.get('adventure_name') == adventure]
-        return programs[-48:]
+    def get_highscores(self, username, filter, filter_value=None):
+        profiles = []
+
+        # If the filter is global or country -> get all public profiles
+        if filter == "global" or filter == "country":
+            profiles = self.get_all_public_profiles()
+        # If it's a class, only get the ones from your class
+        elif filter == "class":
+            Class = self.get_class(filter_value)
+            for student in Class.get('students', []):
+                profile = self.get_public_profile_settings(student)
+                if profile:
+                    profiles.append(profile)
+
+        for profile in profiles:
+            if not profile.get('country'):
+                # This seems to crash on production even if it shouldn't (all profiles should have a username)
+                # To be sure, surround with a try catch
+                try:
+                    country = self.user_by_username(profile.get('username')).get('country')
+                    self.update_country_public_profile(profile.get('username'), country)
+                except AttributeError:
+                    print("This profile username is invalid...")
+                    country = None
+                profile['country'] = country
+            if not profile.get('achievements'):
+                achievements = self.achievements_by_username(profile.get('username'))
+                self.update_achievements_public_profile(profile.get('username'), len(achievements) or 0)
+                profile['achievements'] = len(achievements) or 0
+
+        # If we filter on country, make sure to filter out all non-country values
+        if filter == "country":
+            profiles = [x for x in profiles if x.get('country') == filter_value]
+
+        # Perform a double sorting: first by achievements (high-low), then by timestamp (low-high)
+        profiles = sorted(profiles, key=lambda k: (k.get('achievements'), -k.get('last_achievement')), reverse=True)
+
+        # Add ranking for each profile
+        ranking = 1
+        for profile in profiles:
+            profile['ranking'] = ranking
+            ranking += 1
+
+        # If the user is not in the current top 50: still append to the results
+        if not any(d['username'] == username for d in profiles[:50]):
+            return profiles[:50] + [i for i in profiles if i['username'] == username]
+        return profiles[:50]
+
 
     def get_all_hedy_choices(self):
         return PROGRAMS.get_many({'hedy_choice': 1}, sort_key='date', reverse=True)
@@ -410,6 +447,8 @@ class Database:
         if achievement not in user_achievements['achieved']:
             user_achievements['achieved'].append(achievement)
             ACHIEVEMENTS.put(user_achievements)
+        # Update the amount of achievements on the public profile (if exists)
+        self.update_achievements_public_profile(username, len(user_achievements['achieved']))
         if new_user:
             return True
         return False
@@ -427,6 +466,9 @@ class Database:
                 user_achievements['achieved'].append(achievement)
         user_achievements['achieved'] = list(dict.fromkeys(user_achievements['achieved']))
         ACHIEVEMENTS.put(user_achievements)
+
+        # Update the amount of achievements on the public profile (if exists)
+        self.update_achievements_public_profile(username, len(user_achievements['achieved']))
         if new_user:
             return True
         return False
@@ -448,8 +490,20 @@ class Database:
         ACHIEVEMENTS.update({'username': username}, {'submitted_programs': dynamo.DynamoIncrement(1)})
 
     def update_public_profile(self, username, data):
-        data['username'] = username
-        PUBLIC_PROFILES.put(data)
+        PUBLIC_PROFILES.update({'username': username}, data)
+
+    def update_achievements_public_profile(self, username, amount_achievements):
+        data = PUBLIC_PROFILES.get({'username': username})
+        # In the case that we make this call but there is no public profile -> don't do anything
+        if data:
+            PUBLIC_PROFILES.update({'username': username}, {'achievements': amount_achievements, 'last_achievement': timems()})
+
+    def update_country_public_profile(self, username, country):
+        data = PUBLIC_PROFILES.get({'username': username})
+        # If there is no data -> we might have made this request from the /update_profile route without a public profile
+        # In this case don't do anything
+        if data:
+            PUBLIC_PROFILES.update({'username': username}, {'country': country})
 
     def set_favourite_program(self, username, program_id):
         # We can only set a favourite program is there is already a public profile
@@ -465,6 +519,9 @@ class Database:
 
     def forget_public_profile(self, username):
         PUBLIC_PROFILES.delete({'username': username})
+
+    def get_all_public_profiles(self):
+        return PUBLIC_PROFILES.scan()
 
     def store_parsons(self, attempt):
         PARSONS.create(attempt)

@@ -1,0 +1,25 @@
+{% extends "auth.html" %}
+
+{% from "stats-shared.html" import insert_log_search %}
+
+{% block main %}
+<div class="flex flex-row mb-4 border-b">
+    <h1>Log Search</h1>
+    <div class="ltr:ml-auto rtl:mr-auto">
+        <button type="reset" class="green-btn my-1 mx-2 text-white" onclick="window.open('/admin', '_self');">Return to admin page</button>
+    </div>
+</div>
+<div class="px-8">
+  <div class="inline-block medium text-2xl">Search program logs</div>
+
+  {{ insert_log_search() }}
+
+</div>
+
+<script>
+  $(function() {
+    hedyApp.logs.initialize();
+  });
+</script>
+
+{% endblock %}
