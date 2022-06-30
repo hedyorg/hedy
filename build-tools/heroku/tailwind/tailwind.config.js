@@ -16,6 +16,7 @@ module.exports = {
       // We do have a lot of dependencies on the 'lg' breakpoints, should handle this delicately
       // We only need a few breakpoints
       sm: '640px',
+      md: '768px',
       lg: '1024px',
       xl: '1280px',
     },
