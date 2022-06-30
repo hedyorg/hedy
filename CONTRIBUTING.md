@@ -131,7 +131,7 @@ When adding new Babel related translation the implementation is a bit more compl
 5. Search for the .po files for the languages you know and find the empty msgstr for your added key(s)
 6. Add your translations there, the other translation will hopefully be quickly picked up by other translators
 7. If you want to test it locally, run:
-    * ```pybabel compile -d translations```
+    * ```pybabel compile -f -d translations```
 8. This action will also always be run on deployment to make sure the translations are up-to-date
 
 ## Solving common merge conflicts
