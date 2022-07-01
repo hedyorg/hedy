@@ -87,6 +87,14 @@ class TestsLevel7(HedyTester):
 
         self.single_level_tester(code=code, exception=hedy.exceptions.InvalidArgumentTypeException)
 
+    def test_repeat_with_missing_print_gives_error(self):
+        code = textwrap.dedent("""\
+        repeat 3 times 'n'""")
+
+    def test_repeat_with_missing_command_gives_error(self):
+        code = textwrap.dedent("""\
+        repeat 3 print 'n'""")
+
     def test_repeat_ask(self):
         code = textwrap.dedent("""\
         n is ask 'How many times?'

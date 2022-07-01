@@ -233,7 +233,7 @@ def get_suggestions_for_language(lang, level):
     # if we allow multiple keyword languages:
     en_commands = get_list_keywords(commands_per_level[level], 'en')
     en_lang_commands = list(set(en_commands + lang_commands))
-            
+
     return en_lang_commands
 
 
@@ -507,11 +507,11 @@ class TypeValidator(Transformer):
                 raise
 
         return self.to_typed_tree(tree, HedyType.none)
-    
+
     def assign_list(self, tree):
         self.save_type_to_lookup(tree.children[0].children[0], HedyType.list)
         return self.to_typed_tree(tree, HedyType.list)
-        
+
     def list_access(self, tree):
         self.validate_args_type_allowed(Command.list_access, tree.children[0], tree.meta)
 
@@ -986,6 +986,13 @@ class IsValid(Filter):
         error = InvalidInfo('invalid repeat', arguments=[str(args[0])], line=meta.line, column=meta.column)
         return False, error, meta
 
+    def error_repeat_no_print(self, meta, args):
+        error = InvalidInfo('repeat missing print', arguments=[str(args[0])], line=meta.line, column=meta.column)
+        return False, error, meta
+
+    def error_repeat_no_times(self, meta, args):
+        error = InvalidInfo('repeat missing times', arguments=[str(args[0])], line=meta.line, column=meta.column)
+        return False, error, meta
     #other rules are inherited from Filter
 
 def valid_echo(ast):
@@ -1533,7 +1540,7 @@ class ConvertToPython_6(ConvertToPython_5):
                 # if the assigned value is not a variable and contains single quotes, escape them
                 value = process_characters_needing_escape(value)
                 return parameter + " = '" + value + "'"
-    
+
     def process_token_or_tree(self, argument):
         if type(argument) is Tree:
             return f'{str(argument.children[0])}'
@@ -1828,7 +1835,7 @@ class ConvertToPython_18(ConvertToPython_17):
 
     def input_empty_brackets(self, args):
         return self.input(args)
-    
+
     def print_empty_brackets(self, args):
         return self.print(args)
 
@@ -1859,7 +1866,7 @@ def merge_grammars(grammar_text_1, grammar_text_2, level):
                 if definition_1.strip() == definition_2.strip():
                     warn_message = f"The rule {name_1} is duplicated on level {level}. Please check!"
                     warnings.warn(warn_message)
-                # Check if the rule is adding or substracting new rules                
+                # Check if the rule is adding or substracting new rules
                 has_add_op = definition_2.startswith('+=')
                 has_sub_op = has_add_op and '-=' in definition_2
                 has_last_op = has_add_op and '>' in definition_2
@@ -1867,9 +1874,9 @@ def merge_grammars(grammar_text_1, grammar_text_2, level):
                     # Get the rules we need to substract
                     part_list = definition_2.split('-=')
                     add_list, sub_list =  (part_list[0], part_list[1]) if has_sub_op else (part_list[0], '')
-                    add_list = add_list[3:]  
+                    add_list = add_list[3:]
                     # Get the rules that need to be last
-                    sub_list = sub_list.split('>')  
+                    sub_list = sub_list.split('>')
                     sub_list, last_list = (sub_list[0], sub_list[1]) if has_last_op  else (sub_list[0], '')
                     sub_list = sub_list + '|' + last_list
                     result_cmd_list = get_remaining_rules(definition_1, sub_list)
@@ -1908,9 +1915,9 @@ def merge_grammars(grammar_text_1, grammar_text_2, level):
     return '\n'.join(merged_grammar)
 
 def get_remaining_rules(orig_def, sub_def):
-    orig_cmd_list     = [command.strip() for command in orig_def.split('|')]                    
-    unwanted_cmd_list = [command.strip() for command in sub_def.split('|')]                    
-    result_cmd_list   = [cmd for cmd in orig_cmd_list if cmd not in unwanted_cmd_list]                    
+    orig_cmd_list     = [command.strip() for command in orig_def.split('|')]
+    unwanted_cmd_list = [command.strip() for command in sub_def.split('|')]
+    result_cmd_list   = [cmd for cmd in orig_cmd_list if cmd not in unwanted_cmd_list]
     result_cmd_list   = ' | '.join(result_cmd_list) # turn the result list into a string
     return result_cmd_list
 
@@ -2218,6 +2225,10 @@ def is_program_valid(program_root, input_string, level, lang):
             raise exceptions.UnquotedEqualityCheck(line_number=line)
         elif invalid_info.error_type == 'invalid repeat':
             raise exceptions.MissingInnerCommandException(command='repeat', level=level, line_number=line)
+        elif invalid_info.error_type == 'repeat missing print':
+            raise exceptions.IncompleteRepeat(command='print', level=level, line_number=line)
+        elif invalid_info.error_type == 'repeat missing times':
+            raise exceptions.IncompleteRepeat(command='times', level=level, line_number=line)    
         elif invalid_info.error_type == 'print without quotes':
             # grammar rule is agnostic of line number so we can't easily return that here
             raise exceptions.UnquotedTextException(level=level)
@@ -2288,7 +2299,7 @@ def transpile_inner(input_string, level, lang="en"):
     input_string = process_input_string(input_string, level)
 
     program_root = parse_input(input_string, level, lang)
-    
+    print(program_root.pretty())
     is_program_valid(program_root, input_string, level, lang)
 
     try:
