@@ -2226,9 +2226,9 @@ def is_program_valid(program_root, input_string, level, lang):
         elif invalid_info.error_type == 'invalid repeat':
             raise exceptions.MissingInnerCommandException(command='repeat', level=level, line_number=line)
         elif invalid_info.error_type == 'repeat missing print':
-            raise exceptions.IncompleteRepeat(command='print', level=level, line_number=line)
+            raise exceptions.IncompleteRepeatException(command='print', level=level, line_number=line)
         elif invalid_info.error_type == 'repeat missing times':
-            raise exceptions.IncompleteRepeat(command='times', level=level, line_number=line)    
+            raise exceptions.IncompleteRepeatException(command='times', level=level, line_number=line)    
         elif invalid_info.error_type == 'print without quotes':
             # grammar rule is agnostic of line number so we can't easily return that here
             raise exceptions.UnquotedTextException(level=level)

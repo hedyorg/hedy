@@ -141,7 +141,7 @@ class MissingInnerCommandException(HedyException):
             level=level,
             line_number=line_number)
 
-class IncompleteRepeat(HedyException):
+class IncompleteRepeatException(HedyException):
     def __init__(self, command, level, line_number):
         super().__init__('Incomplete Repeat',
             command=command,
