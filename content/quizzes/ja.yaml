@@ -1085,6 +1085,7 @@ levels:
             question_text: How many `{if}` commands can be placed inside another `{if}` command?
             hint: You can put an `{if}` command inside an `{if}` command.
             question_score: '10'
+            code: '# No code provided'
         1:
             question_text: What is wrong with this code?
             code: "{repeat} 3 {times}\n   eten = {ask} 'What would you like to eat?'\n   {if} food {is} fries\n       sauce = {ask} 'What sauce would you like?'\n       {print} 'One fries with ' sauce\n   {if} food {is} pizza\n       topping = {ask} 'What topping would you like?'\n       {print} 'One pizza with ' topping\n{print} 'That you for your order'"
