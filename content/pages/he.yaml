@@ -348,7 +348,138 @@ sections:
         -   title: Students use commas instead of periods in decimal numbers
             example:
                 error_text: "Decimal numbers can be used from this level on, but you can't use commas.\n"
+                error_code: "print 2,5 + 2,5\n"
+                solution_text: "This is the correct code:\n"
+                solution_code: "print 2.5 + 2.5\n"
         level: '12'
+    -   sections:
+        -   example:
+                error_code: "game is ask 'Do you want to play a game?'\ntime is ask 'Do you have time to play?'\nif game is 'yes' or time is 'yes'\n    print 'Lets play!'\n"
+                solution_text: "In this case, the person should answer yes on both questions, so you should use `and`.\n"
+                error_text: "Both commands might appear similar, but their functions are very different.\n"
+                solution_code: "game is ask 'Do you want to play a game?'\ntime is ask 'Do you have time to play?'\nif game is 'yes' and time is 'yes'\n    print 'Lets play!'\n"
+            title: Students confuse `and` with `or`
+        level: '13'
+    -   level: '14'
+        sections:
+        -   title: Students confuse the < and > signs
+            example:
+                error_text: "Often, students are already familiar with these signs from maths class. But if your students don't know these signs yet, they might have a challenge with it.\n"
+                solution_text: "This is the correct code:\n"
+                solution_code: "age = ask 'How old are you?'\nif age > 12\n    print 'You are older than I am!'\n"
+                error_code: "age = ask 'How old are you?'\nif age < 12\n    print 'You are older than I am!'\n"
+        -   title: Students use the wrong signs for `!=` `<=` and `>=`
+            example:
+                error_code: "name = ask 'What is your name?'\nif name =< 'Hedy'\n    print 'You are not Hedy'\n"
+                error_text: "These signs are probably new for most students. Make sure to explain these signs to your students.\n"
+                solution_text: "This is the correct code:\n"
+                solution_code: "name = ask 'What is your name?'\nif name != 'Hedy'\n    print 'You are not Hedy'\n"
+        -   title: Students forget to use the == sign
+            example:
+                error_text: "In this level, students are still allowed to use = or is. But on other levels, or in python, they might get in trouble for that. So it is best to train them to use it.\n"
+                error_code: "name = ask 'What is your name?'\nif name = 'Hedy'\n    print 'You are cool!'\n"
+                solution_text: "This is the correct code:\n"
+                solution_code: "name = ask 'What is your name?'\nif name == 'Hedy'\n    print 'You are cool!'\n"
+    -   sections:
+        -   example:
+                error_code: "answer = 0\nwhile answer != 25\nanswer = ask 'What is 5 times 5?'\nprint 'A correct answer has been given'\n"
+                solution_text: "This is the correct code:\n"
+                solution_code: "answer = 0\nwhile answer != 25\n    answer = ask 'What is 5 times 5?'\nprint 'A correct answer has been given'\n"
+                error_text: "Indentation is often hard for students.\n"
+            title: Students forget indentation in the while loop
+        level: '15'
+    -   level: '16'
+        sections:
+        -   title: Students forget the brackets
+            example:
+                error_text: "From this level on lists should be in brackets.\n"
+                error_code: "icecream = 'starwberry', 'chocolate'\nprint 'I love ' icecream[random] ' icecream'\n"
+                solution_text: "This is the correct code:\n"
+                solution_code: "icecream = ['starwberry', 'chocolate']\nprint 'I love ' icecream[random] ' icecream'\n"
+        -   title: Students use the wrong brackets
+            example:
+                error_text: "From this level on lists should be in brackets.\n"
+                error_code: "icecream = ('starwberry', 'chocolate'}\nprint 'I love ' icecream[random] ' icecream'\n"
+                solution_text: "This is the correct code:\n"
+                solution_code: "icecream = ['starwberry', 'chocolate']\nprint 'I love ' icecream[random] ' icecream'\n"
+        -   example:
+                solution_text: "This is the correct code:\n"
+                error_text: "Students are sometimes very focussed on the new aspect of the syntax, that they forget the quotation marks.\n"
+                error_code: "icecream = [starwberry, chocolate]\nprint 'I love ' icecream[random] ' icecream'\n"
+                solution_code: "icecream = ['starwberry', 'chocolate']\nprint 'I love ' icecream[random] ' icecream'\n"
+            title: Students forget the quotation marks while focussing on the brackets
+        -   title: Students still use the old at random command
+            example:
+                error_text: "Students are sometimes very focussed on the new aspect of the syntax, that they forget the quotation marks.\n"
+                error_code: "icecream = [starwberry, chocolate]\nprint 'I love ' icecream at random ' icecream'\n"
+                solution_text: "This is the correct code:\n"
+                solution_code: "icecream = ['starwberry', 'chocolate']\nprint 'I love ' icecream[random] ' icecream'\n"
+        -   title: Students forget the quotation marks while focussing on the brackets
+            example:
+                error_text: "Students are sometimes very focussed on the new aspect of the syntax, that they forget the quotation marks.\n"
+                error_code: "icecream = [starwberry, chocolate]\nprint 'I love ' icecream[random] ' icecream'\n"
+                solution_text: "This is the correct code:\n"
+                solution_code: "icecream = ['starwberry', 'chocolate']\nprint 'I love ' icecream[random] ' icecream'\n"
+    -   sections:
+        -   example:
+                solution_text: "This is the correct code:\n"
+                error_text: "The elif command needs a condition behind it. It cannot be used like else, without a condition.\n"
+                error_code: "color = ask 'What is your favorite color?'\nif color == 'green':\n    print 'green is nice'\nelif:\n    print 'I like green'\n"
+                solution_code: "color = ask 'What is your favorite color?'\nif color == 'green':\n    print 'green is nice'\nelif color == yellow:\n    print 'yellow is alright'\nelse:\n    print 'I like green'\n"
+            title: Students use elif like else, so without a condition
+        -   example:
+                error_code: "answer = ask 'How are you doing?'\nif answer is 'great'\n    print 'Me too!'\nelif answer is 'bad'\n    print 'Let me cheer you up!'\nelse\n    print 'Im great!'\n"
+                solution_text: "This is the correct code:\n"
+                error_text: "After each command that requires indentation, a colon should be used.\n"
+                solution_code: "answer = ask 'How are you doing?'\nif answer is 'great':\n    print 'Me too!'\nelif answer is 'bad':\n    print 'Let me cheer you up!'\nelse:\n    print 'Im great!'\n"
+            title: Students forget the colon
+        level: '17'
+    -   level: '18'
+        sections:
+        -   title: Students forget to use the brackets
+            example:
+                error_text: "Students will forget to put brackets around their text.\n"
+                error_code: "print 'my name is Hedy!'\n"
+                solution_text: "This is the correct code:\n"
+                solution_code: "print('my name is Hedy!')\n"
+        -   example:
+                solution_text: "This is the correct code:\n"
+                solution_code: "print('My name is Hedy!')\nname = input('What is your name?')\nprint('So your name is ', name)\n"
+                error_text: "The ask command has been used since level 1. So it might be hard for the students to switch to input instead of ask.\n"
+                error_code: "print('My name is Hedy!')\nname = ask('What is your name?')\nprint('So your name is ', name)\n"
+            title: Students will still use the ask command
+        -   title: Students might use the brackets as quotation marks
+            example:
+                error_text: "They have learned to keep the variables outside of the quotation marks, so they might do the same with the brackets. Which is not the correct way to use them.\n"
+                solution_code: "temperature = 25\nprint('It is ', temperature, 'degrees outside')\n"
+                error_code: "temperature = 25\nprint('It is ') temperature ('degrees outside')\n"
+                solution_text: "This is the correct code:\n"
     title: Frequently made mistakes
     intro: "You can learn from your mistakes, especially in coding!\nMaking mistakes is unavoidable, and a great opportunity to learn, but for teachers it can be a challenge to find the correct fix for a mistake!\nEspecially as the codes get longer and longer as the levels progress. That's why we've made a list with frequently made mistakes in each level, and their solutions.\n"
 title: Hedy documentation
+learn-more-sections:
+-   title: Do you like Hedy?
+    text: "We love to hear from you!\n\n[Click here to send us a message](mailto:hedy@felienne.com \"About Hedy\")\n"
+-   title: Found a bug?
+    text: "[Let us know on GitHub](https://github.com/Felienne/hedy/issues/new/choose)\n"
+-   title: Want to help?
+    text: "The easiest way is to help with [translating Hedy](https://github.com/Felienne/hedy/blob/main/TRANSLATING.md)\n\nBelow the current status, help us complete a language, or add a new one.\n<a href=\"https://hosted.weblate.org/engage/hedy/\">\n<img src=\"https://hosted.weblate.org/widgets/hedy/-/multi-auto.svg\" alt=\"Translation status\" /></a>\n"
+-   title: Code week talk
+    text: "Want to know more about Hedy? Check out this talk Felienne gave at the European Code Week 2020:\n\n<iframe width=\"560\" height=\"315\" class=\"mx-auto mt-4\" src=\"https://www.youtube.com/embed/R2U9MEowYag?wmode=opaque\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen=\"\"></iframe>\n"
+-   text: "Want to know even more? Read the [research paper](https://www.felienne.com/wp-content/uploads/2020/07/Hedy_paper_website_draft.pdf) about Hedy's design.\n"
+    title: Hedy Paper
+-   title: Hedy in the news
+    text: "Some websites and newspapers have written about Hedy since our release in early 2020. We keep a list here:\n\n* [Heise.de (German), Januari 2022](https://www.heise.de/news/Hedy-die-mitwachsende-Programmiersprache-6336264.html)\n* [Strumenta, November 2021](https://tomassetti.me/teaching-programming-with-hedy/)\n* [Vives (Dutch), CodeWeek Special October 2021](images/Vives-174-Codeweek.pdf)\n* [CodeWeek.eu - Haunted House Challenge, September 2021](https://codeweek.eu/2021/challenges/haunted-house)\n* [Opensource.com, April 2021](https://opensource.com/article/21/4/hedy-teach-code)\n* [IO Magazine, April 2021](https://ict-research.nl/wordpress/wp-content/uploads/2021/04/IO-magazine-NR1-2021_web.pdf)\n* [Ingeniería De Software (Spanish), February 2021](https://ingenieriadesoftware.es/hedy-mejor-lenguaje-ensenar-programacion-ninos/)\n* [Hello World Magazine, February 2021](images/Hello_World_15_Hedy.pdf)\n* [Discoro, January 2021](https://discoro.wordpress.com/2021/01/09/hedy-gradually-learning-a-programming-language/)\n* [Felienne wins the Dutch award for ICT research for Hedy, January 2021](https://www.nwo.nl/en/news/felienne-hermans-receives-dutch-prize-ict-research-2021)\n* [SlashDot, August 2020](https://news.slashdot.org/story/20/08/17/024248/scientist-proposes-a-new-programming-language-for-teaching-coding-and-python)\n* [GenBeta (Spanish), August 2020](https://www.genbeta.com/desarrollo/nuevo-lenguaje-para-ensenar-programacion-a-ninos-como-se-ensena-a-leer-escribir-forma-gradual-niveles)\n* [Developpez (French), August 2020](https://programmation.developpez.com/actu/308095/Une-scientifique-propose-un-nouveau-langage-de-programmation-pour-enseigner-aux-enfants-le-codage-informatique-au-travers-d-une-approche-graduelle-implementee-en-Python-sur-13-paliers/)\n* [Vives (Dutch), October 2020](images/artikel_vives.pdf) \"Met Hedy stap voor stap leren programmeren\"\n* [Leiden University, April 2020](https://www.universiteitleiden.nl/en/news/2020/03/looking-to-distract-the-kids-while-you-work-from-home-get-them-programming)\n* [Mare (Dutch), April 2020](https://www.mareonline.nl/cultuur/computercode-voor-de-kids/)\n* [AG Connect (Dutch), April 2020](https://www.agconnect.nl/artikel/stapsgewijs-python-leren-programmeren-met-nieuwe-taal-hedy)\n"
+start-sections:
+-   title: What is a gradual programming language?
+    text: "Learning to program can be hard. Not that programming itself *is* hard! But there are a lot of rules you need to memorize, just like when you started to learn English.\nSimilarly, you will need a lot of practice to learn programming.\n\nYou can read these sentences with ease. But do you remember when you were learning to read? You took some time then for each letter!\nThat is true for programming too, it might be hard in the beginning, but it will get easier!\n\nThe nice thing about Hedy is that Hedy is *gradual*. That means that you do not have to learn all rules at once.\nThe first few levels do not have that many rules, so you can get used to programming comfortably.\nIn every level we add new rules, increasing the number of commands that you know. Commands are instructions for a computer.\n"
+-   title: Why is Hedy gradual?
+    text: "In this video Felienne, the creator of Hedy, explains why Hedy is gradual.\n\n<iframe width=\"560\" height=\"315\" class=\"mx-auto mt-4\" src=\"https://www.youtube.com/embed/EdqT313rM40\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>\n"
+-   title: Who is Hedy for?
+    text: "Hedy is meant for all kids that want to learn programming! You do need to be able to read English with ease.\n"
+-   text: "No, that is not needed. However, if you have programmed with Scratch or Python, some commands will look familiar to you.\n"
+    title: Do I need programming experience?
+-   title: Is Hedy free?
+    text: "Yes! Leiden University allows us to share it for free. Hedy is also 'Open source', which means that everyone who can program can help us make Hedy better.\nYou can find the code on [GitHub](https://github.com/Felienne/hedy).\nIf you like Hedy and want to contribute, we do accept (and are very grateful for) [donations](https://www.steunleiden.nl/project/hedy)!\n"
+-   title: Do I need to install anything?
+    text: No. Hedy works in the browser, which is the program you are using to look at this page. Probably Chrome or Edge or Firefox. Hedy also works on your phone or tablet.
