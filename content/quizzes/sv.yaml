@@ -1,1 +1,109 @@
-{}
+levels:
+    1:
+        1:
+            question_text: What's this programming language called?
+            mp_choice_options:
+            -   option: Hedy
+                feedback: Good job!
+            -   option: Heddy
+                feedback: Not this one!
+            -   option: Haydie
+                feedback: Not this one!
+            -   option: Heidi
+                feedback: Not this one!
+            correct_answer: A
+            hint: It's named after Hedy Lamarr.
+            question_score: '10'
+        4:
+            mp_choice_options:
+            -   option: '`{print}` in line 1 is missing.'
+                feedback: Correct!
+            -   option: Im in line 1 is spelled wrong.
+                feedback: Im is spelled wrong on purpose; Hedy doesn't understand the apostrophes yet.
+            -   option: "`{echo}` isn't a command."
+                feedback: "`{echo}` is a command, there's another mistake."
+            -   option: Nothing! This is a perfect code!
+                feedback: Wrong, look carefully!
+            correct_answer: A
+            hint: Line 1 doesn't seem right
+            question_text: What is wrong with this code?
+            code: "Hi Im Hedy!\n{ask} Who are you?\n{echo} Hi..."
+            question_score: '10'
+        7:
+            code: "{print} Welcome at Hedys restaurant!\n{ask} What would you like to eat?\n{echo} So you want to order ...\n{print} Coming right up! Enjoy!"
+            mp_choice_options:
+            -   option: In line 1 `{print}` needs to be replaced with `{ask}`
+                feedback: Are you sure something is wrong?
+            -   option: In line 1 `{print}` needs to be replaced with `{echo}`
+                feedback: Are you sure something's wrong?
+            -   option: In line 3 `{echo}` needs to be replaced with `{print}`
+                feedback: Are you sure something is wrong?
+            -   option: Nothing! This is a perfect code!
+                feedback: Correct!
+            hint: Check the code line by line
+            question_score: '10'
+            question_text: What's wrong with this code?
+            correct_answer: D
+        8:
+            question_text: How do you use the `{echo}` command?
+            mp_choice_options:
+            -   option: You can use it to `{ask}` a question.
+                feedback: That's what `{ask}` is for!
+        2:
+            mp_choice_options:
+            -   option: "```\n{echo}\n```\n"
+                feedback: '`{echo}` repeats a given answer.'
+            -   option: "```\n{print}\n```\n"
+                feedback: Correct!
+            -   option: "```\nhello\n```\n"
+                feedback: Hello isn't a command.
+            -   option: "```\n{ask}\n```\n"
+                feedback: With `{ask}`, you can ask a question.
+            correct_answer: B
+            hint: _?_ Hello world!
+            question_text: Which command makes text appear?
+            question_score: '10'
+        3:
+            question_text: How do you ask what someone's favorite color is?
+            mp_choice_options:
+            -   option: "```\n{print} What is your favorite color?\n```\n"
+                feedback: "`{print}` prints text, but it doesn't ask questions."
+            -   option: "```\n{ask} {print} What is your favorite color?\n```\n"
+                feedback: You only need one command, not two.
+            -   option: "```\n{ask} What is your favorite color?\n```\n"
+                feedback: Great!
+            -   option: "```\n{echo} What is your favorite color?\n```\n"
+                feedback: '`{echo}` repeats your answer back to you.'
+            correct_answer: C
+            hint: You can ask something with the `{ask}` command
+            question_score: '10'
+        5:
+            question_text: Which command is missing in line 2?
+            mp_choice_options:
+            -   option: "```\n{print}\n```\n"
+                feedback: No, you would like the answer to be repeated back to you.
+            -   option: "```\nHedy\n```\n"
+                feedback: Hedy isn't a command.
+            -   option: "```\n{ask}\n```\n"
+                feedback: With `{ask}` you can ask a question.
+            -   option: "```\n{echo}\n```\n"
+                feedback: Right on!
+            correct_answer: D
+            hint: You want to see the answer at the end of line 2...
+            question_score: '10'
+            code: "{ask} What is your favorite pet?\n_?_ So your favorite pet is..."
+        6:
+            question_text: What's wrong with this code?
+            code: "{print} Hi im Hedy!\n{print} Which football team do you support?\n{echo} You support...\n{print} Cool! Me too!"
+            mp_choice_options:
+            -   option: In line 1 `{print}` should be replaced with `{ask}`.
+                feedback: '`{print}` in line 1 is correct.'
+            -   option: In line 2, `{print}` should be replaced with `{ask}`.
+                feedback: Great! You paid attention!
+            -   option: Line 3 has to begin with `{print}` instead of `{echo}`.
+                feedback: '`{echo}` is correct.'
+            -   option: In line 4, `{print}` is spelled wrong.
+                feedback: No, there is a mistake somewhere else
+            correct_answer: B
+            hint: Check the `{print}` commands.
+            question_score: '10'
