@@ -43,7 +43,7 @@ def collect_snippets(path, filtered_language = None):
                             try:
                                 code = tag.contents[0].contents[0]
                                 if hash(code) in unique_snippets_table:
-                                    print("Identical code already being tested...")
+
                                     continue
                                 else:
                                     unique_snippets_table.add(hash(code))
@@ -55,7 +55,7 @@ def collect_snippets(path, filtered_language = None):
                         try:
                             start_code = level['start_code']
                             if hash(start_code) in unique_snippets_table:
-                                print("Identical code already being tested...")
+
                                 continue
                             else:
                                 unique_snippets_table.add(hash(start_code))
@@ -74,8 +74,8 @@ def collect_snippets(path, filtered_language = None):
                             code_snippet_counter += 1
                             try:
                                 code = tag.contents[0].contents[0]
+                                # test only unique snippets
                                 if hash(code) in unique_snippets_table:
-                                    print("Identical code already being tested...")
                                     continue
                                 else:
                                     unique_snippets_table.add(hash(code))
