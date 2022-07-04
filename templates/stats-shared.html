@@ -83,21 +83,21 @@
     <div class="w-full flex-1 flex flex-col">
      <button id="search-logs-button" type="button"
              class="shadow green-btn focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 lg:mt-6 rounded"
-             onclick="hedyApp.stats.searchProgramLogs('{{class_id}}')">
+             onclick="hedyApp.logs.searchProgramLogs('{{class_id}}')">
         Search
      </button>
    </div>
   </div>
 </form>
-<table id="search-logs-table" class="table-auto mb-4 w-full">
+<table id="search-logs-table" class="table-fixed mb-4 w-full">
   <thead>
     <tr>
-      <th class="px-4 py-2">Date</th>
-      <th class="px-4 py-2">Level</th>
-      <th class="px-4 py-2">Lang</th>
-      <th class="px-4 py-2">Username</th>
-      <th class="px-4 py-2">Exception</th>
-      <th class="px-4 py-2">Code</th>
+      <th class="px-2">Date</th>
+      <th class="px-2 w-14">Level</th>
+      <th class="px-2 w-14">Lang</th>
+      <th class="px-2">Username</th>
+      <th class="px-2">Exception</th>
+      <th class="px-2 w-1/3">Code</th>
     </tr>
   </thead>
   <tbody>
@@ -105,7 +105,7 @@
 </table>
 <div class="text-center">
   <button type="button" id="logs-load-more" class="green-btn mb-4 hidden"
-          onclick="hedyApp.stats.fetchProgramLogsResults()">
+          onclick="hedyApp.logs.fetchProgramLogsResults()">
     Load more
   </button>
 </div>

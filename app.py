@@ -646,8 +646,7 @@ def programs_page(user):
         if from_user not in students:
             return utils.error_page(error=403, ui_message=gettext('not_enrolled'))
 
-    adventures_names = hedy_content.Adventures(
-        session['lang']).get_adventure_names()
+    adventures_names = hedy_content.Adventures(session['lang']).get_adventure_names()
 
     # We request our own page -> also get the public_profile settings
     public_profile = None
@@ -660,8 +659,7 @@ def programs_page(user):
     adventure = None if adventure == "null" else adventure
 
     if level or adventure:
-        result = DATABASE.filtered_programs_for_user(
-            from_user or username, level, adventure)
+        result = DATABASE.filtered_programs_for_user(from_user or username, level, adventure)
     else:
         result = DATABASE.programs_for_user(from_user or username)
 
@@ -1211,6 +1209,7 @@ def get_highscores_page(user, filter):
     user_data = DATABASE.user_by_username(user['username'])
     classes = list(user_data.get('classes', set()))
     country = user_data.get('country')
+    user_country = COUNTRIES.get(country)
 
     if filter == "global":
         highscores = DATABASE.get_highscores(user['username'], filter)
@@ -1225,11 +1224,14 @@ def get_highscores_page(user, filter):
             return utils.error_page(error=403, ui_message=gettext('no_such_highscore'))
         highscores = DATABASE.get_highscores(user['username'], filter, classes[0])
 
+    # Make a deepcopy if working locally, otherwise the local database values are by-reference and overwritten
+    if not os.getenv('NO_DEBUG_MODE'):
+        highscores = copy.deepcopy(highscores)
     for highscore in highscores:
         highscore['country'] = highscore.get('country') if highscore.get('country') else "-"
         highscore['last_achievement'] = utils.delta_timestamp(highscore.get('last_achievement'))
     return render_template('highscores.html', highscores=highscores, has_country=True if country else False,
-                           filter=filter, in_class=True if classes else False)
+                           filter=filter, user_country = user_country, in_class=True if classes else False)
 
 
 @app.route('/change_language', methods=['POST'])
@@ -1442,6 +1444,10 @@ def keyword_languages():
 @app.template_global()
 def keyword_languages_keys():
     return [l for l in ALL_KEYWORD_LANGUAGES.keys()]
+
+@app.template_global()
+def get_country(country):
+    return COUNTRIES.get(country, "-")
 
 
 def make_lang_obj(lang):

@@ -95,7 +95,7 @@ def convert_numerals(alphabet, number):
     // Fits to content size
     exampleEditor.setOptions({ maxLines: Infinity });
     if ($(preview).hasClass('common-mistakes')) {
-      exampleEditor.setOptions({ minLines: 10 });
+      exampleEditor.setOptions({ minLines: 5 });
     } else if ($(preview).hasClass('cheatsheet')) {
       exampleEditor.setOptions({ minLines: 1 });
     } else if ($(preview).hasClass('parsons')) {
@@ -991,7 +991,8 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     $('#stopit').hide();
     $('#runit').show();
     if (hasTurtle) {
-      $('#saveDST').show();
+      // Todo TB: Don't show button until we have the tkinter issue figured out on Heroku (29/06)
+      // $('#saveDST').show();
     }
 
     // Check if the program was correct but the output window is empty: Return a warning
