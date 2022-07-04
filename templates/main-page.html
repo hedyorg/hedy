@@ -1,20 +1,20 @@
-{% extends "auth.html" %} {% block body %}
-<div class="px-8 py-12 relative text-xl">
-    <a
-        class="github-fork-ribbon left-top z-10" href="https://github.com/felienne/hedy" data-ribbon="Fork me on GitHub" title="Fork me on GitHub">Fork me on GitHub</a>
-    <div class="px-8">
-        <div
-            class="-mx-16 -my-12 px-16 py-8 mb-8 bg-cover flex items-center"
-            style="background-image: url(/images/header.jpg); height: 250px;position: relative;">
-            <div class="flex-1">
-                <h1 class="font-bold font-slab text-white text-6xl text-shadow-md tracking-wide">{{_('main_title')}}</h1>
-                <h2 class="font-sans font-light text-white text-shadow-md tracking-wide my-1">{{_('main_subtitle')}}</h2>
-            </div>
-            <div class="flex-none">
-                <button class="green-btn text-white px-8 py-4" onclick="window.location.href='/hedy'">{{_('try_it')}}</button>
+{% extends "auth.html" %}
+{% block body %}
+<div class="w-full text-xl">
+    <div>
+        <div class="px-8 lg:px-16 bg-cover flex items-center" style="background-image: url(/images/header.jpg); height: 250px;position: relative;">
+            <a class="github-fork-ribbon left-top z-10" href="https://github.com/felienne/hedy" data-ribbon="Fork me on GitHub" title="Fork me on GitHub">Fork me on GitHub</a>
+            <div class="w-full flex flex-row justify-between">
+                <div>
+                    <h1 class="font-bold font-slab text-white text-6xl text-shadow-md tracking-wide">{{_('main_title')}}</h1>
+                    <h2 class="font-sans font-light text-white text-shadow-md tracking-wide my-1">{{_('main_subtitle')}}</h2>
+                </div>
+                <div class="flex items-center">
+                    <button class="green-btn text-white px-8 py-4" onclick="window.location.href='/hedy'">{{_('try_it')}}</button>
+                </div>
             </div>
         </div>
-        <div id="main_page_content">
+        <div id="main_page_content" class="px-4 md:px-8 px-16 py-4 mx-8">
             {% for section in content['start-sections'] %}
                 <h2>{{ section['title'] }}</h2>
                 <p>{{ section['text'] | commonmark }}</p>
