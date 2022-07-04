@@ -85,7 +85,6 @@ export const auth = {
       const payload: User = {
         username: values.username,
         email: values.email,
-        mail_repeat: values.mail_repeat,
         password: values.password,
         password_repeat: values.password_repeat,
         language: values.language,
