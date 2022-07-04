@@ -36,8 +36,8 @@ def collect_snippets(path):
                                 code += line + "\n"
                             else:
                                 break
+                        # test only unique snippets
                         if hash(code) in unique_snippets_table:
-                            print("Identical code already being tested...")
                             continue
                         else:
                             unique_snippets_table.add(hash(code))

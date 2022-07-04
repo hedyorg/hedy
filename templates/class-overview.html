@@ -41,12 +41,17 @@
           </tbody>
           </table>
       </div>
-      <div class="flex flex-row gap-2">
-        <button class="green-btn" onclick=$('#add_students_options').toggle();$(this).toggleClass('green-btn');$(this).toggleClass('blue-btn');>{{_('add_students')}}</button>
-        <button class="green-btn" onclick="window.location.href = '/for-teachers/customize-class/{{class_info.id}}'">{{_('customize_class')}}</button>
-        <button class="green-btn" onclick="window.location.href = '/stats/class/{{class_info.id}}'">{{_('class_stats')}}</button>
-        <button class="blue-btn ltr:ml-auto rtl:mr-auto" onclick="window.location.href = '/for-teachers'">{{_('back_to_teachers_page')}}</button>
-        <button class="red-btn" onclick='hedyApp.delete_class("{{class_info.id}}", {{_('delete_class_prompt')|tojson}})'>{{_('delete_class')}}</button>
+      <div class="flex flex-col gap-4">
+        <div class="flex flex-wrap gap-2">
+            <button class="green-btn" onclick=$('#add_students_options').toggle();$(this).toggleClass('green-btn');$(this).toggleClass('blue-btn');>{{_('add_students')}}</button>
+            <button class="green-btn" onclick="window.location.href = '/for-teachers/customize-class/{{class_info.id}}'">{{_('customize_class')}}</button>
+            <button class="green-btn" onclick="window.location.href = '/stats/class/{{class_info.id}}'">{{_('class_stats')}}</button>
+            <button class="green-btn" onclick="window.location.href = '/logs/class/{{class_info.id}}'">{{_('class_logs')}}</button>
+        </div>
+        <div class="flex flex-wrap justify-between">
+            <button class="blue-btn" onclick="window.location.href = '/for-teachers'">{{_('back_to_teachers_page')}}</button>
+            <button class="red-btn" onclick='hedyApp.delete_class("{{class_info.id}}", {{_('delete_class_prompt')|tojson}})'>{{_('delete_class')}}</button>
+        </div>
       </div>
       <div id="add_students_options" class="flex flex-col items-center border-t border-gray-500" style="display: none;">
           <h2 class="my-4 pt-4">{{_('add_students_options')}}</h2>

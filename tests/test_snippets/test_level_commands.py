@@ -28,8 +28,8 @@ def collect_snippets(path):
                 try:
                     # commands.k.demo_code
                     for k, command in enumerate(yaml[level]):
+                        # test only unique snippets
                         if hash(command['demo_code']) in unique_snippets_table:
-                            print("Identical code already being tested...")
                             continue
                         else:
                             unique_snippets_table.add(hash(command['demo_code']))
