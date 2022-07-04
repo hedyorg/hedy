@@ -1255,3 +1255,383 @@ levels:
             -   option: "```\ndesert = {ask} 'What is your favorite type of desert?'\n{if} desert {is} icecream\n    {repeat} 3 {times}\n        {print} 'Icecream is the best!'\n```\n"
                 feedback: Perfect
             -   option: "```\n{repeat} 3 {times}\n    desert = {ask} 'What is your favorite type of desert?'\n    {if} desert {is} icecream\n        {repeat} 3 {times}\n        {print} 'Icecream is the best!'\n```\n"
+                feedback: There are 2 `{repeat}` commands in this code.
+            correct_answer: C
+            hint: Watch the indentation
+            question_score: '10'
+        10:
+            mp_choice_options:
+            -   feedback: Only line 2 and 3 start with spaces
+                option: All lines should start with 4 spaces
+            -   feedback: Line 3 should start with 8
+                option: Line 2 and 3 should start with 4 spaces
+            -   option: Line 2 and 3 should start with 8 spaces
+                feedback: Line 2 should start with 4
+            -   option: line 2 should atart with 4 spaces and line 3 with 8
+                feedback: You are correct!
+            correct_answer: D
+            hint: The first line doens't start with any spaces
+            question_score: '10'
+            question_text: Which statement is true?
+            code: "1 {repeat} 2 {times}\n2 {if} level {is} 9\n3 {print} Great job!"
+        6:
+            mp_choice_options:
+            -   option: '`{if}`'
+                feedback: Don't forget the others
+            -   option: '`{if}` `{repeat}`'
+                feedback: Don't forget `{else}`!
+            -   option: '`{if}` `{else}` `{repeat}`'
+                feedback: Keep it up!
+            -   option: '`{if}` `{else}` `{repeat}` `{print}`'
+                feedback: Not with print
+            question_text: After which command(s) should you use indentation (starting the next line with 4 spaces)?
+            correct_answer: C
+            hint: Indentation happens on the line below some commands
+            question_score: '10'
+        7:
+            question_text: "In this code from a pizza restaurant. \nYoull get a 5 dollar discount if you order a medium pizza with coke.\n What should you do to debug this code?"
+            code: "{if} food {is} pizza\n{if} size {is} medium\n{if} drink {is} coke\nprice = price - 2"
+            mp_choice_options:
+            -   option: "```\n{if} food {is} pizza\n    {if} size {is} medium\n        {if} drink {is} coke\n            price = price - 2\n```\n"
+                feedback: Amazing!
+            -   feedback: Try again!
+                option: "```\n{if} food {is} pizza\n    {if} size {is} medium\n{if} drink {is} coke\n    price = price - 2\n```\n"
+            -   option: "```\n{if} food {is} pizza\n{if} size {is} medium\n{if} drink {is} coke\n        price = price - 2\n```\n"
+                feedback: Try again
+            -   option: "```\n{if} food {is} pizza\n    {if} size {is} medium\n        {if} drink {is} coke\n        price = price - 2\n```\n"
+                feedback: Try again
+            correct_answer: A
+            hint: After each `{if}` command, the line below should indent
+            question_score: '10'
+        8:
+            question_text: What is wrong is this code?
+            code: "age = {ask} 'Happy Birthday! How old are you?'\nsinging = {ask} 'Would you like us to sing?'\n    if singing {is} yes\n        {repeat} years {times}\n        {print} 'Hip Hip Hooray'"
+            mp_choice_options:
+            -   option: You can't put two questions in a row
+                feedback: Yes you can.
+            -   option: The variable called 'age' is later on used as 'years'
+                feedback: Keen eye! Good job!
+            -   option: You're not allowed to start with 8 spaces, like line 4 and 5 do
+                feedback: You actually must start like that.
+            -   option: A code must always start with a `{print}` command in the first line
+                feedback: That's not true.
+            correct_answer: B
+            hint: The indentation is done right this time
+            question_score: '10'
+        9:
+            question_text: How many `{if}` commands can be placed inside another `{if}` command?
+            code: '# No code provided'
+            mp_choice_options:
+            -   feedback: You are allowed to
+                option: None, that is not allowed
+            -   option: Only 1
+                feedback: You could use more if you like
+            -   option: '3'
+                feedback: You could use more if you like
+            -   option: Infinite, as long as you keep using indentation correctly
+                feedback: That is true
+            correct_answer: D
+            hint: You can put an `{if}` command inside an `{if}` command.
+            question_score: '10'
+    11:
+        1:
+            question_text: What will be the output from this code?
+            code: "{for} i {in} {range} 1 {to} 3\n    {print} i"
+            mp_choice_options:
+            -   option: "1\n2\n3"
+                feedback: Correct!
+            -   option: 1 2 3
+                feedback: That's not it
+            -   option: 1, 2, 3
+                feedback: That's not it
+            -   option: '123'
+                feedback: That's not it
+            correct_answer: A
+            hint: How do the numbers appear in the screen?
+            question_score: '10'
+        6:
+            correct_answer: C
+            code: "{for} i {in} {range} 0 {to} 2\n    {print} 'Hello'"
+            mp_choice_options:
+            -   option: 1 time
+                feedback: No
+            -   option: 2 times
+                feedback: No
+            -   option: 3 times
+                feedback: That's right!
+            -   option: Never
+                feedback: No
+            hint: 0 also counts. So 0,1,2 that's 3 times.
+            question_score: '10'
+            question_text: How many times does the word Hello appear on your screen when you run the code?
+        3:
+            mp_choice_options:
+            -   feedback: Now Hedy prints the numbers from 0 to 10 instead of 10 to 0.
+                option: "```\n{for} i {in} {range} 0 {to} 10\n    {print} i\n```\n"
+            -   option: "```\n{for} i {in} {range} 0 to 10\n    {print} - i\n```\n"
+                feedback: Hedy would print negative numbers in this case.
+            -   option: "```\n{for} i {in} {range} 10 to 0\n    {print} i\n```\n"
+                feedback: Unfortunately this does not exist.
+            -   feedback: That's right!
+                option: "```\n{for} i {in} {range} 0 {to} 10\n    {print} 10 - i\n```\n"
+            question_text: Which code was used to get this output?
+            output: "10\n9\n8\n7\n6\n5\n4\n3\n2\n1\n0"
+            correct_answer: D
+            hint: It has to be a calculation...
+            question_score: '10'
+        2:
+            question_text: Which code was used to get this output?
+            output: "1\n2\n3\n4\n5\nOnce I caught a fish alive!"
+            mp_choice_options:
+            -   option: "```\n{for} i {in} {range} 1 {to} 5\n    {print} i\n{print} 'Once I caught a fish alive!'\n```\n"
+                feedback: Perfect
+            -   option: "```\n{for} i {in} {range} 1 {to} 5\n{print} i\n{print} 'Once I caught a fish alive!'\n```\n"
+                feedback: This code won't work. You need an indent after {for}.
+            -   option: "```\n{for} i {in} {range} 1 {to} 5\n    {print} i\n    {print} 'Once I caught a fish alive!'\n```\n"
+                feedback: Now Hedy will count '1 Once I caught a fish alive!, 2 Once I caught a fish alive! etc.
+            -   option: "```\n{for} i {in} {range} 1 {to} 5\n    {print} 'i'\n{print} 'Once I caught a fish alive!'\n```\n"
+                feedback: i is a variable and shouldn't have quotation marks
+            hint: First all the numbers, then the sentence
+            question_score: '10'
+            correct_answer: A
+        4:
+            mp_choice_options:
+            -   option: The i in the last line need quotation marks
+                feedback: No it doesn't.
+            -   option: You can't use `{range}` 1 `{to}` 5 only `{range}` 1 `{to}` 10
+                feedback: You could use 1 to 5 just as well!
+            -   option: Line 1 needs to start with an indention.
+                feedback: Not line 1...
+            -   option: Line 2 needs to start with an indention
+                feedback: Perfect!
+            question_text: What's wrong with this code?
+            code: "{for} i {in} {range} 1 {to} 10\n{print} i"
+            correct_answer: D
+            hint: There is something wrong with the indention
+            question_score: '10'
+        5:
+            question_text: What word should be at the place of the question mark?
+            code: "{for} i {in} _?_ 1 {to} 10\n    {print} i"
+            mp_choice_options:
+            -   option: "```\ncounter\n```\n"
+                feedback: No
+            -   option: "```\n{range}\n```\n"
+                feedback: Correct
+            -   option: "```\n{if}\n```\n"
+                feedback: No
+            -   option: "```\n{for}\n```\n"
+                feedback: No
+            correct_answer: B
+            hint: What did you learn in this level?
+            question_score: '10'
+        7:
+            question_text: What should be on the place of the question mark?
+            mp_choice_options:
+            -   feedback: There's not always 3 people
+                option: "```\n{for} i {in} {range} 0 {to} 3\n```\n"
+            -   option: "```\n{for} i {in} {range} 1 {to} guests\n```\n"
+                feedback: The variable is not named guests
+            -   option: "```\n{for} i {in} {range} 1 {to} people\n```\n"
+                feedback: Great!
+            -   option: "```\n{for} i {in} {range} 0 {to} people\n```\n"
+                feedback: That's one order too many!
+            code: "{print} 'Welcome to Hedys diner'\npeople is {ask} 'How many people will be eating here tonight?'\n_?_\n    food is {ask} 'What would you like to order?'\n    {print} food"
+            correct_answer: C
+            hint: Use the variable 'people'
+            question_score: '10'
+        8:
+            question_text: What will be the output from this code?
+            code: "{for} i {in} {range} 23 {to} 25\n    {print} 'hi'"
+            mp_choice_options:
+            -   option: "23\n24\n25"
+                feedback: The numbers don't appear. It doesn't say `{print}` i.
+            -   option: 23 hi 24 hi 25 hi
+                feedback: The numbers don't appear. It doesn't say `{print}` i
+            -   option: "hi\nhi\nhi"
+                feedback: Correct
+            -   option: The word 'hi' will appear 25 times in a row.
+                feedback: No it will only appear 3 times.
+            correct_answer: C
+            hint: It doesn't say `{print}` i
+            question_score: '10'
+        9:
+            question_text: How many times does Hedy chant Hip Hip Hooray?
+            code: "age = {ask} 'How old are you?'\n{for} i {in} {range} 1 {to} age\n    {print} 'Hip Hip Hoorray!'"
+            mp_choice_options:
+            -   option: 1 time
+                feedback: Try again
+            -   option: 2 times
+                feedback: Try again
+            -   option: Never
+                feedback: Try again
+            -   option: That depends on how old you are
+                feedback: That's right!
+            correct_answer: D
+            hint: '`{for}` i `{in}` `{range}` 1 `{to}` age'
+            question_score: '10'
+        10:
+            question_text: Which code belongs to this output?
+            mp_choice_options:
+            -   feedback: Mind the indention
+                option: "```\n{for} i {in} {range} 1 {to} 3\n    {print} Baby shark tututudutudu\n    {print} Baby shark\n```\n"
+            -   option: "```\n{for} i {in} {range} 1 {to} 3\n    {print} Baby shark tututudutudu\n{print} Baby shark\n```\n"
+                feedback: That's right!
+            -   option: "```\n{for} i {in} {range} 0 {to} 3\n    {print} Baby shark tututudutudu\n{print} Baby shark\n```\n"
+                feedback: '`{range}` 0 `{to}` 3 is 4 times.'
+            -   option: "```\n{for} i {in} {range} 0 {to} 3\n    {print} Baby shark tututudutudu\n    {print} Baby shark\n```\n"
+                feedback: '`{range}` 0 `{to}` 3 is 4 times.'
+            output: "Baby shark tututudutudu\nBaby shark tututudutudu\nBaby shark tututudutudu\nBaby shark"
+            correct_answer: B
+            hint: Mind the indention
+            question_score: '10'
+    10:
+        1:
+            mp_choice_options:
+            -   option: "```\n{for} each compliment\n```\n"
+                feedback: That's not it
+            -   option: "```\n{for} compliment {in} compliments\n```\n"
+                feedback: You deserve all those compliments!
+            -   option: "```\n{if} compliment {in} compliments\n```\n"
+                feedback: That's not it
+            -   option: "```\n{for} compliments {in} compliment\n```\n"
+                feedback: Almost there!
+            question_text: What do we need to fill in on the `_?_` if we want to print each compliment?
+            code: "compliments = perfect, great job, amazing\n_?_\n    {print} compliment"
+            question_score: '10'
+            correct_answer: B
+            hint: '`{for}` each compliment in the lists of compliments...'
+        4:
+            code: "groceries = apples, bread, milk\n{for} item {in} groceries\n    {print} 'We need ' groceries"
+            mp_choice_options:
+            -   option: Line 2 needs to start with 4 spaces as indentation
+                feedback: No it doesn't. Only line 3 needs indentation, which it has.
+            -   option: Line 3 does not need to start with 4 spaces as indentation
+                feedback: Line 2 is a `{for}`command so line 3 does need to start with an indent.
+            -   option: Line 3 should say item instead of groceries
+                feedback: Good job!
+            -   option: Line 2 should say groceries instead of item
+                feedback: No it does not.
+            question_text: What's wrong with this code?
+            correct_answer: C
+            hint: Line 2 says `{for}` each item in the list of groceries
+            question_score: '10'
+        6:
+            mp_choice_options:
+            -   option: Kelly chooses rock
+                feedback: Meredith wants to play too!
+            -   feedback: So close! But Kelly is first in the list, so she goes first
+                option: "Meredith chooses scissors\nKelly chooses rock"
+            -   option: Meredith chooses paper
+                feedback: Kelly wants to play too!
+            -   option: "Kelly chooses paper\nMeredith chooses scissors"
+                feedback: Amazing!
+            correct_answer: D
+            hint: Each player will pick an option. The player that's first on the list will go first.
+            question_score: '10'
+            question_text: Which of the answers below is a possible outcome when you run the code?
+            code: "choices = rock, paper, scissors\nplayers = Kelly, Meredith\n{for} player {in} players\n    {print} player ' chooses ' choices {at} {random}"
+        7:
+            mp_choice_options:
+            -   option: "```\n{for} name {in} names\n```\n"
+                feedback: You are on fire!
+            -   option: "```\n{for} names {in} name\n```\n"
+                feedback: No it should be for each name in the list nameS, so the other way around
+            -   option: "```\n{for} food {in} food\n```\n"
+                feedback: Each name should be told what they will have for dinner.
+            -   option: "```\n{for} name {in} food\n```\n"
+                feedback: Each name should be told what they will have for dinner.
+            question_text: What line should be on the _?_ in this code that decides what these people will have for dinner?
+            code: "names = Ron, Leslie, April, Andy\nfood = pasta, fries, salad\n_?_\n    {print} name ' has to eat ' food {at} {random} ' for dinner'"
+            correct_answer: A
+            hint: Each name should be told what they will have for dinner.
+            question_score: '10'
+        8:
+            mp_choice_options:
+            -   feedback: That's not it!
+                option: "```\n'name gets a color shirt'\n```\n"
+            -   option: "```\nname 'gets a ' colors {at} {random} ' shirt'\n```\n"
+                feedback: Great job! This was a hard one!
+            -   option: "```\nnames 'gets a ' color {at} {random} ' shirt'\n```\n"
+                feedback: You want each name printed. So the first word should not be names but...
+            -   option: "```\n'people gets a colors shirt'\n```\n"
+                feedback: There is no variable named people..
+            correct_answer: B
+            question_score: '10'
+            hint: Mind the quotation marks and the names of the variables
+            question_text: What should be on the _?_ in this code that decides which color shirt you get?
+            code: "names = Donna, Tommy, Ben\ncolors = blue, red, purple\n{for} name {in} names\n    {print} _?_"
+        10:
+            question_text: What is true about this code?
+            code: "prices = 1 million dollars, car, sandwich\nnames = Bob, Patrick, Sandy, Larry\n{for} price {in} prices\n    {print} 'The ' price 'is won by ' names {at} {random}"
+            mp_choice_options:
+            -   option: Everybody will always win a price.
+                feedback: That is not true, you could end up without a price.
+            -   option: All the prices always go to one single person.
+                feedback: That is not true. All the prices are given away, but to random people
+            -   option: Larry will never win a price
+                feedback: That is not true. Larry has the same odds as the others
+            -   option: Someone might win with two prices
+                feedback: You get it!
+            correct_answer: D
+            hint: Try to imagine the output of this code.
+            question_score: '10'
+        2:
+            question_text: Which output is correct?
+            code: "meals = pizza, pasta, pancakes\n{for} meal {in} meals\n    {print} 'I love ' meal"
+            mp_choice_options:
+            -   option: I love pizza
+                feedback: Line 2 says `{for}` each meal in the list of meals. So each meal is printed.
+            -   option: I love pasta
+                feedback: Line 2 says `{for}` each meal in the list of meals. So each meal is printed.
+            -   option: I love pancakes
+                feedback: Line 2 says `{for}` each meal in the list of meals. So each meal is printed.
+            -   option: "I love pizza\nI love pasta\nI love pancakes"
+                feedback: Great!
+            correct_answer: D
+            question_score: '10'
+            hint: Line 2 says for each meal in the list of meals. So each meal is printed.
+        3:
+            question_text: Which output is correct?
+            code: "animals = dogs, cats, hamsters, chickens\n{for} animal {in} animals\n    {print} animal ' are lovely pets'"
+            mp_choice_options:
+            -   option: dogs are lovely pets
+                feedback: Line 2 says {for} each animal in the list of animals. So each animal is {print}ed.
+            -   option: dogs, cats, hamsters, chickens are lovely pets
+                feedback: Each animal gets their own line in the output.
+            -   option: "dogs are lovely pets\ncats are lovely pets\nhamsters are lovely pets\nchickens are lovely pets"
+                feedback: Great!
+            -   feedback: Line 2 says {for} each animal in the list of animals. So each animal is {print}ed.
+                option: You don't know yet. Because it chooses one of the animals {at} {random}.
+            correct_answer: C
+            hint: Line 2 says {for} each animal in the list of animals. So each animal is printed
+            question_score: '10'
+        5:
+            question_text: What word should be on the _?_ with these digital dice?
+            code: "{print} 'Welcome to the digital dice!'\nplayers = Ann, John, Jesse\nchoices = 1, 2, 3, 4, 5, 6\n{for} player {in} players\n    {print} player ' throws ' _?_ {at} {random}"
+            mp_choice_options:
+            -   option: players
+                feedback: It would say 'Ann throws Jesse', instead of 'Ann throws 6'.
+            -   option: choices
+                feedback: That's right!
+            -   option: choice
+                feedback: You are very close. But you need Hedy to pick from the list called 'choices' not 'choice'...
+            -   option: dice
+                feedback: Look at the names of the variables.
+            correct_answer: B
+            hint: Hedy needs to pick a number `{at} {random}`
+            question_score: '10'
+        9:
+            question_text: What is the first question Hedy will `{ask}` you when you run the program?
+            code: "courses = appetizer, main course, dessert\nnames = Timon, Onno\n{for} name in names\n    {for} course {in} courses\n        food = {ask} name ', what would you like to eat as your ' course '?'\n        {print} name ' orders ' food ' as their ' course"
+            mp_choice_options:
+            -   option: Timon, what would you like to eat as your appetizer?
+                feedback: Perfect!
+            -   option: Onno, what would you like to eat as your appetizer?
+                feedback: Timon is first on the list!
+            -   option: Timon, what would you like to eat as your dessert?
+                feedback: Appetizers are first in the list
+            -   option: You don't know that. Hedy will choose `{at} {random}`.
+                feedback: There is no `{at} {random}` in this code...
+            hint: The first options from both lists are chosen.
+            question_score: '10'
+            correct_answer: A
