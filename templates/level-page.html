@@ -1,15 +1,6 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<div id="level-header" class="flex flex-row items-center justify-center px-4">
-  <div class="tracking-wide whitespace-nowrap">
-    {{ _('level_title') }} {{ level_nr }}
-  </div>
-  <div class="w-full flex items-center justify-end ltr:ml-auto rtl:mr-auto gap-2 ltr:mr-4 rtl:ml-4">
-      <input id="program_name" type="text" class="border border-green-400 rounded p-2 px-3 w-1/2 h-4/5" value="{{ (loaded_program or {}).name or (_('level_title') + ' ' + level_nr)}}">
-      <button id="save_program_button" class="green-btn" onclick="hedyApp.saveit({{ level }}, '{{ g.lang }}', $ ('#program_name').val (), hedyApp.get_trimmed_code(), false);">{{_('save_code_button')}}</button>
-  </div>
-</div>
 <div id="code_content_container">
 {% block levelbody %}{% endblock %}
 </div>

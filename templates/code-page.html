@@ -9,18 +9,20 @@
       </div>
   </div>
 {% endif %}
-<div class="pb-4 pt-2">
-    {# When we're NOT in adventure mode but DO have adventures, render them in tabs #}
-    <div class="px-2 w-full flex flex-col items-center">
-        <div id="adventures_container" class="w-full">
+<div class="pb-4 px-2 pt-2">
+    <div class="w-full flex flex-col">
+        <div class="ltr:ml-2 rtl:mr-2 flex flex-row">
+            <h2 class="border rounded-xl border-gray-700 bg-green-500 text-white px-4 py-1 mt-0 -mb-2" onclick="$('#adventures_container').slideToggle();">Adventures</h2>
+        </div>
+        <div id="adventures_container" class="w-full border-2 border-green-500 py-2 rounded-lg bg-white">
             {% include "incl-adventure-tabs.html" %}
         </div>
     </div>
-    <div class="px-2">
+    <div>
         {% include "incl-editor-and-output.html" %}
     </div>
     {% if latest %}
-      <div class="text-sm mt-10 ltr:mr-5 rtl:ml-5 font-extralight">
+      <div class="text-sm font-extralight">
       Latest update: {{latest}}
       </div>
     {% endif %}
