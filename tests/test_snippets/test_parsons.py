@@ -37,7 +37,6 @@ def collect_snippets(path):
                             else:
                                 break
                         if hash(code) in unique_snippets_table:
-                            print("Identical code already being tested...")
                             continue
                         else:
                             unique_snippets_table.add(hash(code))
