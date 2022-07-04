@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-29 18:16+0200\n"
+"POT-Creation-Date: 2022-07-04 11:29+0200\n"
 "PO-Revision-Date: 2022-06-28 13:25+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language: nb_NO\n"
@@ -663,15 +663,14 @@ msgstr "prestasjoner"
 msgid "achievements_check_icon_alt"
 msgstr "Du oppnådde en prestasjon!"
 
-#: templates/base_email.html:3 templates/cheatsheet.html:15
-#: templates/incl-menubar.html:4
-#, fuzzy
-msgid "hedy_logo_alt"
-msgstr "Hedy logo"
-
 #: templates/cheatsheet.html:14
 msgid "cheatsheet_title"
 msgstr "Skjul hjelpeark"
+
+#: templates/cheatsheet.html:15 templates/incl-menubar.html:4
+#, fuzzy
+msgid "hedy_logo_alt"
+msgstr "Hedy logo"
 
 #: templates/class-logs.html:10 templates/class-stats.html:22
 #: templates/create-accounts.html:41 templates/customize-class.html:166
@@ -683,7 +682,7 @@ msgid "class_name_prompt"
 msgstr "Vennligst oppgi navnet på klassen"
 
 #: templates/class-overview.html:20 templates/class-overview.html:71
-#: templates/create-accounts.html:16 templates/highscores.html:35
+#: templates/create-accounts.html:16 templates/highscores.html:37
 #: templates/login.html:12 templates/profile.html:89 templates/recover.html:8
 #: templates/signup.html:10
 msgid "username"
@@ -1189,7 +1188,12 @@ msgstr ""
 "Velkommen til Hedy! Du er nå den stolte eier av en lærerkonto som gir deg"
 " muligheten til å lage klasser og invitere elever."
 
-#: templates/highscores.html:7
+#: templates/highscores.html:5 templates/incl-menubar.html:16
+#, fuzzy
+msgid "highscores"
+msgstr "Poengsum"
+
+#: templates/highscores.html:8
 #, fuzzy
 msgid "highscore_explanation"
 msgstr ""
@@ -1202,42 +1206,41 @@ msgstr ""
 "brukernavnet for å besøke profilen. På profilen vil du finne alle "
 "programmene de har delt og mye annet!"
 
-#: templates/highscores.html:12 templates/landing-page.html:59
-#, fuzzy
-msgid "no_public_profile"
-msgstr "Offentlig profil"
+#: templates/highscores.html:14
+msgid "highscore_no_public_profile"
+msgstr ""
 
-#: templates/highscores.html:15
+#: templates/highscores.html:17
 #, fuzzy
 msgid "create_public_profile"
 msgstr "Offentlig profil"
 
-#: templates/highscores.html:21
+#: templates/highscores.html:23
 #, fuzzy
 msgid "whole_world"
 msgstr "The world"
 
-#: templates/highscores.html:26
+#: templates/highscores.html:28
 #, fuzzy
 msgid "your_class"
 msgstr "Mine klasser"
 
-#: templates/highscores.html:36 templates/landing-page.html:52
+#: templates/highscores.html:38 templates/landing-page.html:52
 #: templates/public-page.html:16
 msgid "achievements"
 msgstr "prestasjoner"
 
-#: templates/highscores.html:37
+#: templates/highscores.html:39
 #, fuzzy
 msgid "country_title"
 msgstr "Vennligst velg et gyldig land."
 
-#: templates/highscores.html:38 templates/landing-page.html:88
+#: templates/highscores.html:40 templates/landing-page.html:88
 #: templates/public-page.html:50
 msgid "last_achievement"
 msgstr "Nyeste prestasjon"
 
-#: templates/highscores.html:47 templates/programs.html:51
+#: templates/highscores.html:49 templates/programs.html:51
 #, fuzzy
 msgid "ago"
 msgstr "{timestamp} ago"
@@ -1340,11 +1343,6 @@ msgstr "Lær mer"
 msgid "program_header"
 msgstr "Mine programmer"
 
-#: templates/incl-menubar.html:16
-#, fuzzy
-msgid "highscores"
-msgstr "Poengsum"
-
 #: templates/incl-menubar.html:17
 msgid "my_achievements"
 msgstr "Mine prestasjoner"
@@ -1440,6 +1438,11 @@ msgstr "Ingen konto?"
 #, fuzzy
 msgid "profile_logo_alt"
 msgstr "Profil oppdatert."
+
+#: templates/landing-page.html:59
+#, fuzzy
+msgid "no_public_profile"
+msgstr "Offentlig profil"
 
 #: templates/landing-page.html:66 templates/landing-page.html:68
 #: templates/public-page.html:28 templates/public-page.html:30

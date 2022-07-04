@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-29 18:16+0200\n"
+"POT-Creation-Date: 2022-07-04 11:29+0200\n"
 "PO-Revision-Date: 2022-06-28 13:25+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language: sw\n"
@@ -727,16 +727,15 @@ msgstr "achievements"
 msgid "achievements_check_icon_alt"
 msgstr "You've earned an achievement!"
 
-#: templates/base_email.html:3 templates/cheatsheet.html:15
-#: templates/incl-menubar.html:4
-#, fuzzy
-msgid "hedy_logo_alt"
-msgstr "Hedy logo"
-
 #: templates/cheatsheet.html:14
 #, fuzzy
 msgid "cheatsheet_title"
 msgstr "Hide cheatsheet"
+
+#: templates/cheatsheet.html:15 templates/incl-menubar.html:4
+#, fuzzy
+msgid "hedy_logo_alt"
+msgstr "Hedy logo"
 
 #: templates/class-logs.html:10 templates/class-stats.html:22
 #: templates/create-accounts.html:41 templates/customize-class.html:166
@@ -750,7 +749,7 @@ msgid "class_name_prompt"
 msgstr "Please enter the name of the class"
 
 #: templates/class-overview.html:20 templates/class-overview.html:71
-#: templates/create-accounts.html:16 templates/highscores.html:35
+#: templates/create-accounts.html:16 templates/highscores.html:37
 #: templates/login.html:12 templates/profile.html:89 templates/recover.html:8
 #: templates/signup.html:10
 msgid "username"
@@ -1318,7 +1317,12 @@ msgstr ""
 "Welcome to Hedy! Your are now the proud owner of a teachers account which"
 " allows you to create classes and invite students."
 
-#: templates/highscores.html:7
+#: templates/highscores.html:5 templates/incl-menubar.html:16
+#, fuzzy
+msgid "highscores"
+msgstr "Score"
+
+#: templates/highscores.html:8
 #, fuzzy
 msgid "highscore_explanation"
 msgstr ""
@@ -1330,44 +1334,43 @@ msgstr ""
 " public profile you can click their username to visit their profile. "
 "There you will find all their shared programs and much more!"
 
-#: templates/highscores.html:12 templates/landing-page.html:59
-#, fuzzy
-msgid "no_public_profile"
-msgstr "Public profile"
+#: templates/highscores.html:14
+msgid "highscore_no_public_profile"
+msgstr ""
 
-#: templates/highscores.html:15
+#: templates/highscores.html:17
 #, fuzzy
 msgid "create_public_profile"
 msgstr "Public profile"
 
-#: templates/highscores.html:21
+#: templates/highscores.html:23
 #, fuzzy
 msgid "whole_world"
 msgstr "The world"
 
-#: templates/highscores.html:26
+#: templates/highscores.html:28
 #, fuzzy
 msgid "your_class"
 msgstr "My classes"
 
-#: templates/highscores.html:36 templates/landing-page.html:52
+#: templates/highscores.html:38 templates/landing-page.html:52
 #: templates/public-page.html:16
 #, fuzzy
 msgid "achievements"
 msgstr "achievements"
 
-#: templates/highscores.html:37
+#: templates/highscores.html:39
 #, fuzzy
 msgid "country_title"
 msgstr "Please select a valid country."
 
-#: templates/highscores.html:38 templates/landing-page.html:88
+#: templates/highscores.html:40 templates/landing-page.html:88
 #: templates/public-page.html:50
 #, fuzzy
 msgid "last_achievement"
 msgstr "Last earned achievement"
 
-#: templates/highscores.html:47 templates/programs.html:51
+#: templates/highscores.html:49 templates/programs.html:51
 #, fuzzy
 msgid "ago"
 msgstr "{timestamp} ago"
@@ -1475,11 +1478,6 @@ msgstr "Jifunze zaidi"
 msgid "program_header"
 msgstr "Programu zangu"
 
-#: templates/incl-menubar.html:16
-#, fuzzy
-msgid "highscores"
-msgstr "Score"
-
 #: templates/incl-menubar.html:17
 #, fuzzy
 msgid "my_achievements"
@@ -1579,6 +1577,11 @@ msgstr "Hakuna akaunti bado?"
 #, fuzzy
 msgid "profile_logo_alt"
 msgstr "Wasifu umesasishwa."
+
+#: templates/landing-page.html:59
+#, fuzzy
+msgid "no_public_profile"
+msgstr "Public profile"
 
 #: templates/landing-page.html:66 templates/landing-page.html:68
 #: templates/public-page.html:28 templates/public-page.html:30

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-06-29 18:16+0200\n"
+"POT-Creation-Date: 2022-07-04 11:29+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: nl\n"
@@ -661,14 +661,13 @@ msgstr "Badges logo"
 msgid "achievements_check_icon_alt"
 msgstr "Badges check icon"
 
-#: templates/base_email.html:3 templates/cheatsheet.html:15
-#: templates/incl-menubar.html:4
-msgid "hedy_logo_alt"
-msgstr "Hedy logo"
-
 #: templates/cheatsheet.html:14
 msgid "cheatsheet_title"
 msgstr "Spiekbriefje"
+
+#: templates/cheatsheet.html:15 templates/incl-menubar.html:4
+msgid "hedy_logo_alt"
+msgstr "Hedy logo"
 
 #: templates/class-logs.html:10 templates/class-stats.html:22
 #: templates/create-accounts.html:41 templates/customize-class.html:166
@@ -680,7 +679,7 @@ msgid "class_name_prompt"
 msgstr "Vul de naam in van de klas"
 
 #: templates/class-overview.html:20 templates/class-overview.html:71
-#: templates/create-accounts.html:16 templates/highscores.html:35
+#: templates/create-accounts.html:16 templates/highscores.html:37
 #: templates/login.html:12 templates/profile.html:89 templates/recover.html:8
 #: templates/signup.html:10
 msgid "username"
@@ -1172,45 +1171,48 @@ msgstr ""
 "Welkom bij Hedy! Jouw account is omgezet naar een leerkrachtenaccount. Je"
 " kan nu klassen maken en er leerlingen in uitnodigen."
 
-#: templates/highscores.html:7
-#, fuzzy
+#: templates/highscores.html:5 templates/incl-menubar.html:16
+msgid "highscores"
+msgstr "Highscores"
+
+#: templates/highscores.html:8
 msgid "highscore_explanation"
 msgstr ""
 "Op deze pagina kun je de highscores bekijken, gebaseerd op het aantal "
 "gehaalde badges. Bekijk de ranking voor de hele wereld, jouw land of jouw"
 " klas. Klik op een gebruikersnaam om het openbare profiel te bezoeken."
 
-#: templates/highscores.html:12 templates/landing-page.html:59
-msgid "no_public_profile"
-msgstr "Je hebt nog geen openbare profiel en komt daarom niet voor in de highscores. Wil je er eentje aanmaken?"
+#: templates/highscores.html:14
+msgid "highscore_no_public_profile"
+msgstr "Jij hebt geen openbaar profiel en komt daarom niet voor in de highscores. Wil je er eentje maken?"
 
-#: templates/highscores.html:15
+#: templates/highscores.html:17
 msgid "create_public_profile"
 msgstr "Maak openbaar profiel"
 
-#: templates/highscores.html:21
+#: templates/highscores.html:23
 msgid "whole_world"
 msgstr "De wereld"
 
-#: templates/highscores.html:26
+#: templates/highscores.html:28
 msgid "your_class"
 msgstr "Jouw class"
 
-#: templates/highscores.html:36 templates/landing-page.html:52
+#: templates/highscores.html:38 templates/landing-page.html:52
 #: templates/public-page.html:16
 msgid "achievements"
 msgstr "badges"
 
-#: templates/highscores.html:37
+#: templates/highscores.html:39
 msgid "country_title"
 msgstr "Land"
 
-#: templates/highscores.html:38 templates/landing-page.html:88
+#: templates/highscores.html:40 templates/landing-page.html:88
 #: templates/public-page.html:50
 msgid "last_achievement"
 msgstr "Laatst gehaalde badge"
 
-#: templates/highscores.html:47 templates/programs.html:51
+#: templates/highscores.html:49 templates/programs.html:51
 msgid "ago"
 msgstr "{timestamp} geleden"
 
@@ -1306,10 +1308,6 @@ msgstr "Meer info"
 msgid "program_header"
 msgstr "Mijn programma's"
 
-#: templates/incl-menubar.html:16
-msgid "highscores"
-msgstr "Highscores"
-
 #: templates/incl-menubar.html:17
 msgid "my_achievements"
 msgstr "Mijn badges"
@@ -1388,6 +1386,12 @@ msgstr "Jouw profiel"
 #: templates/public-page.html:9
 msgid "profile_logo_alt"
 msgstr "Profiel icon"
+
+#: templates/landing-page.html:59
+msgid "no_public_profile"
+msgstr ""
+"Je hebt nog geen openbare profiel en komt daarom niet voor in de "
+"highscores. Wil je er eentje aanmaken?"
 
 #: templates/landing-page.html:66 templates/landing-page.html:68
 #: templates/public-page.html:28 templates/public-page.html:30

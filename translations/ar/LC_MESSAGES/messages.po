@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-29 18:16+0200\n"
+"POT-Creation-Date: 2022-07-04 11:29+0200\n"
 "PO-Revision-Date: 2022-06-28 13:25+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language: ar\n"
@@ -651,15 +651,14 @@ msgstr "انجازات"
 msgid "achievements_check_icon_alt"
 msgstr "لقد ا حصلت على انجاز!"
 
-#: templates/base_email.html:3 templates/cheatsheet.html:15
-#: templates/incl-menubar.html:4
-#, fuzzy
-msgid "hedy_logo_alt"
-msgstr "Hedy logo"
-
 #: templates/cheatsheet.html:14
 msgid "cheatsheet_title"
 msgstr "ورقة غش"
+
+#: templates/cheatsheet.html:15 templates/incl-menubar.html:4
+#, fuzzy
+msgid "hedy_logo_alt"
+msgstr "Hedy logo"
 
 #: templates/class-logs.html:10 templates/class-stats.html:22
 #: templates/create-accounts.html:41 templates/customize-class.html:166
@@ -671,7 +670,7 @@ msgid "class_name_prompt"
 msgstr "أدخل اسم الصف رجاء"
 
 #: templates/class-overview.html:20 templates/class-overview.html:71
-#: templates/create-accounts.html:16 templates/highscores.html:35
+#: templates/create-accounts.html:16 templates/highscores.html:37
 #: templates/login.html:12 templates/profile.html:89 templates/recover.html:8
 #: templates/signup.html:10
 msgid "username"
@@ -1159,7 +1158,12 @@ msgstr ""
 "مرحباً في هيدي! بكل فخر أنت الآن تمتلك حساباً كمعلم وذا يسمح لك بانشاء "
 "صفوف ودعوة تلاميذ."
 
-#: templates/highscores.html:7
+#: templates/highscores.html:5 templates/incl-menubar.html:16
+#, fuzzy
+msgid "highscores"
+msgstr "النتيجة"
+
+#: templates/highscores.html:8
 #, fuzzy
 msgid "highscore_explanation"
 msgstr ""
@@ -1171,41 +1175,41 @@ msgstr ""
 "عام ، فيمكنك النقر فوق اسم المستخدم الخاص به لزيارة ملفه الشخصي. ستجد "
 "هناك جميع برامجهم التي تم مشاركتها وأكثر من ذلك بكثير!"
 
-#: templates/highscores.html:12 templates/landing-page.html:59
-msgid "no_public_profile"
-msgstr "ليس لديك نص ملف شخصي عام حتى الآن ..."
+#: templates/highscores.html:14
+msgid "highscore_no_public_profile"
+msgstr ""
 
-#: templates/highscores.html:15
+#: templates/highscores.html:17
 #, fuzzy
 msgid "create_public_profile"
 msgstr "الملف العام"
 
-#: templates/highscores.html:21
+#: templates/highscores.html:23
 #, fuzzy
 msgid "whole_world"
 msgstr "The world"
 
-#: templates/highscores.html:26
+#: templates/highscores.html:28
 #, fuzzy
 msgid "your_class"
 msgstr "صفوفي"
 
-#: templates/highscores.html:36 templates/landing-page.html:52
+#: templates/highscores.html:38 templates/landing-page.html:52
 #: templates/public-page.html:16
 msgid "achievements"
 msgstr "انجازات"
 
-#: templates/highscores.html:37
+#: templates/highscores.html:39
 #, fuzzy
 msgid "country_title"
 msgstr "الرجاء اختيار بلد صحيح."
 
-#: templates/highscores.html:38 templates/landing-page.html:88
+#: templates/highscores.html:40 templates/landing-page.html:88
 #: templates/public-page.html:50
 msgid "last_achievement"
 msgstr "آخر انجاز تم تحقيقه"
 
-#: templates/highscores.html:47 templates/programs.html:51
+#: templates/highscores.html:49 templates/programs.html:51
 #, fuzzy
 msgid "ago"
 msgstr "{timestamp} ago"
@@ -1303,11 +1307,6 @@ msgstr "المزيد من المعلومات"
 msgid "program_header"
 msgstr "برامجي"
 
-#: templates/incl-menubar.html:16
-#, fuzzy
-msgid "highscores"
-msgstr "النتيجة"
-
 #: templates/incl-menubar.html:17
 msgid "my_achievements"
 msgstr "مغامراتي"
@@ -1391,6 +1390,10 @@ msgstr "ملفك الشخصي"
 #, fuzzy
 msgid "profile_logo_alt"
 msgstr "تم تحديث الملف الشخصي."
+
+#: templates/landing-page.html:59
+msgid "no_public_profile"
+msgstr "ليس لديك نص ملف شخصي عام حتى الآن ..."
 
 #: templates/landing-page.html:66 templates/landing-page.html:68
 #: templates/public-page.html:28 templates/public-page.html:30
