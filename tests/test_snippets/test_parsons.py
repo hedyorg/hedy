@@ -36,6 +36,7 @@ def collect_snippets(path):
                                 code += line + "\n"
                             else:
                                 break
+                        # test only unique snippets
                         if hash(code) in unique_snippets_table:
                             continue
                         else:

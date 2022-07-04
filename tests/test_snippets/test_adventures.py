@@ -74,6 +74,7 @@ def collect_snippets(path, filtered_language = None):
                             code_snippet_counter += 1
                             try:
                                 code = tag.contents[0].contents[0]
+                                # test only unique snippets
                                 if hash(code) in unique_snippets_table:
                                     continue
                                 else:
