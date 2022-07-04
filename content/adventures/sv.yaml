@@ -2,20 +2,20 @@ adventures:
     default:
         levels:
             1:
-                example_code_2: "```\n{ask} What is your name?\n{echo} hello\n```\n"
-                start_code: '{print} hello world!'
-                story_text: "## Welcome to Hedy!\nIn Level 1 you can use the commands `{print}`, `{ask}` and `{echo}`.\nType your code in the programming field. Or press the green button in the example code block, and the code will be typed for you!\nTry the code yourself with the green 'Run code' button under the programming field.\n\nYou can print text to the screen using the `{print}` command.\n"
-                example_code: "```\n{print} Hello!\n{print} Welcome to Hedy!\n```\n"
-                story_text_2: "You can also ask for input with `{ask}` and repeat it back with an `{echo}` command.\n"
-                story_text_3: "Let's get started! Don't know what to create? In the next tabs you will find ideas for programs to build.\n"
+                example_code_2: "```\n{ask} Vad heter du?\n{echo} Hej\n```\n"
+                start_code: '{print}hej världen!'
+                story_text: "## Välkommen till Hedy!\nPå nivå 1 kan du använda kommandona `{print}`, `{ask}` och `{echo}`.\nSkriv din kod i programmeringsrutan eller tryck på den gröna knappen i exempelrutan så skrivs koden åt dig!\nProva koden själv genom att trycka på den gröna knappen märkt 'Kör koden' under programmeringsrutan.\n\nDu kan skriva text på skärmen genom att använda `{print}` kommandot.\n"
+                example_code: "```\n{print} Hej!\n{print} Välkommen till Hedy!\n```\n"
+                story_text_2: "Du kan också be om en inmatning med `{ask}` och skriva ut det igen med ett `{echo}`-kommando.\n"
+                story_text_3: "Låt oss börja! Vet du inte vad du vill skapa? I de följande flikarna så hittar du idéer på program du kan bygga.\n"
             2:
-                example_code: "```\nname {is} Hedy\nage {is} 15\n{print} name is age years old\n```\n"
-                story_text_2: "`{print}` still works the same, but the `{ask}` command has changed. You need to use a variable in the `{ask}` command as well. It looks like this:\n"
-                story_text: "## Variables\nIn level 2 we learn two new commands: `{is}` and `{sleep}`.\nYou can name a word with `{is}`. This is called a variable. In this example we made a variable called name and a variable called age. You can use the word name anywhere in your code and it will be replaced by Hedy, like this:\n\nThis way you no longer need the `{echo}` command!\n"
-                example_code_2: "```\nanswer {is} {ask} What is your name?\n{print} Hello answer\n```\n"
-                story_text_3: "Another new command in this level is `{sleep}`, which pauses your program for a second. If you type a number behind the {sleep} command, the program pauses for that amount of seconds.\n"
-                example_code_3: "```\n{print} My favorite colour is...\n{sleep} 2\n{print} green!\n```\n"
-                start_code: '{print} hello world!'
+                example_code: "```\nnamn {is} Hedy\nålder {is} 15\n{print} namn är ålder år\n```\n"
+                story_text_2: "`{print}` fungerar fortfarande likadant men `{ask}`-kommandot har ändrats. Nu måste du använda en variabel när du skriver ett `{ask}`-kommando. Det ser ut så här:\n"
+                story_text: "## Variabler\nPå nivå 2 så lär vi oss två nya kommandon: `{is}` och `{sleep}`.\nDu kan ge ett ord ett namn med `{is}`. Det kallas för en variabel. I det här exemplet har vi skapat en variabel som heter namn och en annan variabel som heter ålder. Du kan använda ordet namn var som helst i din kod så byter Hedy ut det. Så här:\n\nPå det här sättet så behöver du inte längre `{echo}`-kommandot!\n"
+                example_code_2: "```\nsvar {is} {ask} Vad heter du?\n{print} Hej svar\n```\n"
+                story_text_3: "Ett annat nytt kommando på den här nivån är `{sleep}`, vilket pausar programmet i en sekund. Om du skriver en siffra bakom {sleep}-kommandot så pausar programmet i så många sekunder.\n"
+                example_code_3: "```\n{print} Min favoritfärg är...\n{sleep} 2\n{print} grön!\n```\n"
+                start_code: '{print} hej världen!'
             6:
                 story_text: "## 1 + 1\n In this level you learn something new: you can now also calculate.\n\n The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.\n\n The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!\n That is why we multiply with the asterisk above 8: `5 * 5`. Read that as \"5 times 5\" that helps you remember it best.\n"
                 example_code_2: "```\nname = Hedy\nanswer = 20 + 4\n```\n"
@@ -82,10 +82,10 @@ adventures:
                 story_text_2: "Sometimes code with an `{if}` gets really long and does not fit on the line well. <br> You may also divide the code over two lines, starting the second line at the `{else}` like this:\n"
                 example_code_2: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice'\n{else} {print} 'boo!'\n```\n"
             3:
-                story_text: "## Make a list!\nIn level 3 you can make a list. You can let the computer choose something random from the list. You do that with `{at} {random}`.\n"
-                example_code: "```\nanimals {is} dog, cat, kangaroo\n{print} animals {at} {random}\n```\n"
-                story_text_2: You can also add items to the list with `{add}` and remove items with `{remove}`.
-                example_code_2: "```\nanimals {is} dog, cat, kangaroo\n{add} penguin {to_list} animals\n{remove} cat {from} animals\n{print} animals {at} {random}\n```\n"
+                story_text: "## Gör en lista!\nPå nivå 3 kan du göra en lista. Du kan låta datorn välja någonting slumpvalt ur den listan. Det gör du med `{at} {random}`.\n"
+                example_code: "```\ndjur {is} hund, katt, känguru\n{print} djur {at} {random}\n```\n"
+                story_text_2: Du kan också lägga till saker till listan med `{add}` och ta bort dem med `{remove}`.
+                example_code_2: "```\ndjur {is} hund, katt, känguru\n{add} pingvin {to_list} djur\n{remove} katt {from} djur\n{print} djur {at} {random}\n```\n"
                 start_code: '{print} hello world!'
             9:
                 start_code: "{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    {else}\n        {print} 'pizza is better'"
