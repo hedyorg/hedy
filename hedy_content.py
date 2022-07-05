@@ -1,13 +1,31 @@
 import copy
 import os
-from babel import Locale
+from babel import Locale, languages
 from website.yaml_file import YamlFile
 import iso3166
 
-import random
-
 # Define and load all countries
 COUNTRIES = {k: v.name for k, v in iso3166.countries_by_alpha2.items()}
+# Iterate through all found country abbreviations
+for country in COUNTRIES.keys():
+    # Get all spoken languages in this "territory"
+    spoken_languages = languages.get_territory_language_info(country).keys()
+    found = False
+    country_name = None
+    # For each language, try to parse the country name -> if correct: adjust in dict and break
+    # If we don't find any, keep the English one
+    for language in spoken_languages:
+        if found:
+            break
+        try:
+            value = language + "_" + country
+            l = Locale.parse(value)
+            country_name = l.get_territory_name(value)
+            found = True
+        except:
+            pass
+    if country_name:
+        COUNTRIES[country] = country_name
 
 # Define dictionary for available languages. Fill dynamically later.
 ALL_LANGUAGES = {}

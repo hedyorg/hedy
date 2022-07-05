@@ -58,6 +58,14 @@ class TestsLevel4(HedyTester):
             max_level=11,
             expected=expected)
 
+    def test_print_with_space_gives_invalid(self):
+        code = " print 'Hallo welkom bij Hedy!'"
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.InvalidSpaceException,
+            max_level=7)
+
     def test_print_no_space(self):
         code = "print'hallo wereld!'"
         expected = "print(f'hallo wereld!')"

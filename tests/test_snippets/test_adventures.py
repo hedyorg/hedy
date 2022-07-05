@@ -43,7 +43,7 @@ def collect_snippets(path, filtered_language = None):
                             try:
                                 code = tag.contents[0].contents[0]
                                 if hash(code) in unique_snippets_table:
-                                    print("Identical code already being tested...")
+
                                     continue
                                 else:
                                     unique_snippets_table.add(hash(code))
@@ -55,7 +55,7 @@ def collect_snippets(path, filtered_language = None):
                         try:
                             start_code = level['start_code']
                             if hash(start_code) in unique_snippets_table:
-                                print("Identical code already being tested...")
+
                                 continue
                             else:
                                 unique_snippets_table.add(hash(start_code))
@@ -74,8 +74,8 @@ def collect_snippets(path, filtered_language = None):
                             code_snippet_counter += 1
                             try:
                                 code = tag.contents[0].contents[0]
+                                # test only unique snippets
                                 if hash(code) in unique_snippets_table:
-                                    print("Identical code already being tested...")
                                     continue
                                 else:
                                     unique_snippets_table.add(hash(code))
@@ -86,32 +86,8 @@ def collect_snippets(path, filtered_language = None):
 
   return Hedy_snippets
 
-def translate_keywords_in_snippets(snippets):
-    # fill keyword dict for all keyword languages
-    keyword_dict = {}
-    for lang in ALL_KEYWORD_LANGUAGES:
-        keyword_dict[lang] = KEYWORDS.get(lang)
-        for k, v in keyword_dict[lang].items():
-            if type(v) == str and "|" in v:
-                # when we have several options, pick the first one as default
-                keyword_dict[lang][k] = v.split('|')[0]
-    english_keywords = KEYWORDS.get("en")
-
-    # We replace the code snippet placeholders with actual keywords to the code is valid: {print} -> print
-    for snippet in snippets:
-        try:
-            if snippet[1].language in ALL_KEYWORD_LANGUAGES.keys():
-                snippet[1].code = snippet[1].code.format(**keyword_dict[snippet[1].language])
-            else:
-                snippet[1].code = snippet[1].code.format(**english_keywords)
-        except KeyError:
-            print("This following snippet contains an invalid placeholder ...")
-            print(snippet)
-
-    return snippets
-
-# use this to filter on 1 lang:
-# Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/adventures', filtered_language='pl')]
+# use this to filter on 1 lang, zh_Hans for Chinese, nb_NO for Norwegian, pt_PT for Portuguese
+# Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/adventures', filtered_language='pt_PT')]
 
 Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/adventures')]
 
@@ -119,7 +95,7 @@ Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/adven
 # if level:
 #     Hedy_snippets = [(name, snippet) for (name, snippet) in Hedy_snippets if snippet.level == level]
 
-Hedy_snippets = translate_keywords_in_snippets(Hedy_snippets)
+Hedy_snippets = HedyTester.translate_keywords_in_snippets(Hedy_snippets)
 
 class TestsAdventurePrograms(unittest.TestCase):
 
