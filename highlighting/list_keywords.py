@@ -24,8 +24,6 @@ LEVELS = {
         "K_SP"    : [],
         "number"  : False,
         "number_with_decimal": False,
-        "ExtraRules" : [
-        ]
     },
     5 :{
         "SP_K_SP" : ["is","at","add","to_list","remove","from","in","if","else"],
@@ -34,8 +32,6 @@ LEVELS = {
         "K_SP"    : [],
         "number"  : False,
         "number_with_decimal": False,
-        "ExtraRules" : [
-        ]
     },
     6 :{
         "SP_K_SP" : ["is","at","add","to_list","remove","from","in","if","else"],
@@ -44,8 +40,6 @@ LEVELS = {
         "K_SP"    : [],
         "number"  : True,
         "number_with_decimal": False,
-        "ExtraRules" : [
-        ]
     },
     7 :{
         "SP_K_SP" : ["is","at","add","to_list","remove","from","in","if","else","repeat","times"],
@@ -54,8 +48,6 @@ LEVELS = {
         "K_SP"    : [],
         "number"  : True,
         "number_with_decimal": False,
-        "ExtraRules" : [
-        ]
     },
     8 :{
         "SP_K_SP" : ["is","at","add","to_list","remove","from","in","if","repeat"],
@@ -64,8 +56,6 @@ LEVELS = {
         "K_SP"    : [],
         "number"  : True,
         "number_with_decimal": False,
-        "ExtraRules" : [
-        ]
     },
     9 :{
         "SP_K_SP" : ["is","at","add","to_list","remove","from","in","if","repeat"],
@@ -74,8 +64,6 @@ LEVELS = {
         "K_SP"    : [],
         "number"  : True,
         "number_with_decimal": False,
-        "ExtraRules" : [
-        ]
     },
     10 :{
         "SP_K_SP" : ["is","at","add","to_list","remove","from","in","if","repeat","for"],
@@ -84,8 +72,6 @@ LEVELS = {
         "K_SP"    : [],
         "number"  : True,
         "number_with_decimal": False,
-        "ExtraRules" : [
-        ]
     },
     11 :{
         "SP_K_SP" : ["is","at","add","to_list","remove","from","in","if","for","range","to","repeat"],
@@ -94,8 +80,6 @@ LEVELS = {
         "K_SP"    : [],
         "number"  : True,
         "number_with_decimal": False,
-        "ExtraRules" : [
-        ]
     },
     12 :{
         "SP_K_SP" : ["is","at","add","to_list","remove","from","in","if","for","range","to","repeat"],
@@ -104,8 +88,6 @@ LEVELS = {
         "K_SP"    : [],
         "number"  : True,
         "number_with_decimal": True ,
-        "ExtraRules" : [
-        ]
     },
     13 :{
         "SP_K_SP" : ["is","at","add","to_list","remove","from","in","if","for","range","to","and","or","repeat"],
@@ -114,8 +96,6 @@ LEVELS = {
         "K_SP"    : [],
         "number"  : True,
         "number_with_decimal": True ,
-        "ExtraRules" : [
-        ]
     },
     14 :{
         "SP_K_SP" : ["is","at","add","to_list","remove","from","in","if","for","range","to","and","or","else","repeat"],
@@ -124,8 +104,6 @@ LEVELS = {
         "K_SP"    : [],
         "number"  : True,
         "number_with_decimal": True ,
-        "ExtraRules" : [
-        ]
     },
     15 :{
         "SP_K_SP" : ["is","at","add","to_list","remove","from","in","if","for","range","to","and","or","while","repeat"],
@@ -134,8 +112,6 @@ LEVELS = {
         "K_SP"    : [],
         "number"  : True,
         "number_with_decimal": True ,
-        "ExtraRules" : [
-        ]
     },
     16 :{
         "SP_K_SP" : ["is","at","add","to_list","remove","from","in","if","else","for","range","to","and","or","while","repeat"],
@@ -144,8 +120,6 @@ LEVELS = {
         "K_SP"    : [],
         "number"  : True,
         "number_with_decimal": True ,
-        "ExtraRules" : [
-        ]
     },
     17 :{
         "SP_K_SP" : ["is","at","add","to_list","remove","from","in","if","else","for","range","to","and","or","while","repeat"],
@@ -154,8 +128,6 @@ LEVELS = {
         "K_SP"    : ["elif"],
         "number"  : True,
         "number_with_decimal": True ,
-        "ExtraRules" : [
-        ]
     },
     18 :{
         "SP_K_SP" : ["is","at","add","to_list","remove","from","in","if","else","for","range","to","and","or","while","input","repeat"],
@@ -164,7 +136,5 @@ LEVELS = {
         "K_SP"    : ["elif"],
         "number"  : True,
         "number_with_decimal": True,
-        "ExtraRules" : [
-        ]
     },
 }
