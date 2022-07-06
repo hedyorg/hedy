@@ -110,7 +110,7 @@ def routes(app, database):
         if not is_admin(user):
             return utils.error_page(error=403, ui_message=gettext('unauthorized'))
 
-        all_adventures = sorted(DATABASE.all_adventures(), key=lambda d: d['date'], reverse=True)
+        all_adventures = sorted(DATABASE.all_adventures(), key=lambda d: d.get('date', 0), reverse=True)
         adventures = [{
             "id": adventure.get('id'),
             "creator": adventure.get('creator'),
