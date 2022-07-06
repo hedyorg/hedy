@@ -110,6 +110,7 @@ def routes(app, database):
         if not is_admin(user):
             return utils.error_page(error=403, ui_message=gettext('unauthorized'))
 
+        all_adventures = sorted(DATABASE.all_adventures(), key=lambda d: d['date'], reverse=True)
         adventures = [{
             "id": adventure.get('id'),
             "creator": adventure.get('creator'),
@@ -117,8 +118,8 @@ def routes(app, database):
             "level": adventure.get('level'),
             "public": "Yes" if adventure.get('public') else "No",
             "date": utils.localized_date_format(adventure.get('date'))
-        } for adventure in DATABASE.all_adventures()]
-        adventures = sorted(adventures, key=lambda d: d['date'], reverse=True)
+        } for adventure in all_adventures]
+
 
         return render_template('admin/admin-adventures.html', adventures=adventures, page_title=gettext('title_admin'))
 
