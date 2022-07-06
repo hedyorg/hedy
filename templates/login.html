@@ -1,39 +1,36 @@
 {% extends "auth.html" %}
 
 {% block main %}
-
 {% block message %}{% endblock %}
-<div>
-    <div class="w-full md:w-3/4 lg:w-1/2 mx-auto flex flex-col items-center gap-4">
-      <div class="bg-white shadow-md rounded-lg rounded py-4">
-          <form onsubmit="event.preventDefault (); hedyApp.auth.submit ('login')" class="flex flex-col items-center gap-2">
-            <h2>{{_('login_long')}}</h2>
-            <div class="w-full flex px-8 flex-row items-center justify-center">
-                <label for="username" class="inline-block w-40">{{_('username')}}</label>
-                <input class="inline-block w-80 px-2 py-1 rounded-lg border-gray-400" id="username" minlength="3" name="username" required>
-            </div>
-            <div class="w-full flex px-8 flex-row items-center justify-center">
-                <label for=password" class="inline-block w-40">{{_('password')}}</label>
-                <input class="inline-block w-80 px-2 py-1 rounded-lg border-gray-400" id="password" minlength="6" name="password" type=password required>
-            </div>
-            <div>
-                <button type="submit" class="green-btn mt-2">
-                    {{_('login')}}
-                </button>
-            </div>
-          </form>
-      </div>
-      <div class="flex flex-row gap-2 items-center">
-          <p class="ltr:mr-4 rtl:ml-4">{{_('no_account')}}</p>
-          <button type="submit" class="green-btn" onclick="window.location.href = '/signup'">
-              {{_('create_account')}}
-          </button>
-      </div>
-      <div>
-        <button type="submit" class="blue-btn" onclick="window.location.href = '/recover'">
-          {{_('forgot_password')}}
-        </button>
-      </div>
-    </div>
+<div class="w-full mx-auto flex flex-col items-center gap-4">
+  <div class="bg-white shadow-md rounded-lg rounded py-4">
+      <form onsubmit="event.preventDefault (); hedyApp.auth.submit ('login')" class="flex flex-col items-center gap-2">
+        <h2>{{_('login_long')}}</h2>
+        <div class="w-full flex px-8 flex-row items-center justify-center">
+            <label for="username" class="inline-block w-40">{{_('username')}}</label>
+            <input class="inline-block w-80 px-2 py-1 rounded-lg border-gray-400" id="username" minlength="3" name="username" required>
+        </div>
+        <div class="w-full flex px-8 flex-row items-center justify-center">
+            <label for=password" class="inline-block w-40">{{_('password')}}</label>
+            <input class="inline-block w-80 px-2 py-1 rounded-lg border-gray-400" id="password" minlength="6" name="password" type=password required>
+        </div>
+        <div>
+            <button type="submit" class="green-btn mt-2">
+                {{_('login')}}
+            </button>
+        </div>
+      </form>
+  </div>
+  <div class="flex flex-row gap-2 items-center">
+      <p class="ltr:mr-4 rtl:ml-4">{{_('no_account')}}</p>
+      <button type="submit" class="green-btn" onclick="window.location.href = '/signup'">
+          {{_('create_account')}}
+      </button>
+  </div>
+  <div>
+    <button type="submit" class="blue-btn" onclick="window.location.href = '/recover'">
+      {{_('forgot_password')}}
+    </button>
+  </div>
 </div>
 {% endblock %}
