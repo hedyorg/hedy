@@ -525,14 +525,7 @@ function highlightAceError(editor: AceAjax.Editor, row: number, col?: number, le
   // This adds a red cross in the left margin.
   // Not sure what the "column" argument does here -- it doesn't seem
   // to make a difference.
-  editor.session.setAnnotations([
-    {
-      row: row - 1,
-      column: (col ?? 1) - 1,
-      text: '',
-      type: 'error',
-    }
-  ]);
+  console.log(col);
 
   if (col === undefined) {
     // Higlight entire row
@@ -542,6 +535,8 @@ function highlightAceError(editor: AceAjax.Editor, row: number, col?: number, le
     );
     return;
   }
+
+  console.log("Hier komen we nooit?");
 
   // Highlight span
   editor.session.addMarker(
