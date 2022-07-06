@@ -522,18 +522,8 @@ function removeBulb(){
  * 'row' and 'col' are 1-based.
  */
 function highlightAceError(editor: AceAjax.Editor, row: number, col?: number, length=1) {
-  // This adds a red cross in the left margin.
-  // Not sure what the "column" argument does here -- it doesn't seem
-  // to make a difference.
-  editor.session.setAnnotations([
-    {
-      row: row - 1,
-      column: (col ?? 1) - 1,
-      text: '',
-      type: 'error',
-    }
-  ]);
-
+  // Set a marker on the error spot, either a fullLine or a text
+  // class defines the related css class for styling; which is fixed in styles.css with Tailwind
   if (col === undefined) {
     // Higlight entire row
     editor.session.addMarker(
