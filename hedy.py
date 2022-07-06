@@ -1086,9 +1086,9 @@ class ConvertToPython(Transformer):
     def process_variable_for_fstring_padded(self, name):
         # used to transform variables in comparisons
         if self.is_variable(name):
-            return f"str({hash_var(name)}).zfill(100)"
+            return f"convert_numerals('{self.numerals_language}', {hash_var(name)}).zfill(100)"
         elif ConvertToPython.is_float(name):
-            return f"str({name}).zfill(100)"
+            return f"convert_numerals('{self.numerals_language}', {name}).zfill(100)"
         elif ConvertToPython.is_quoted(name):
             return f"{name}.zfill(100)"
         else:
