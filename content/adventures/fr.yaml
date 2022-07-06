@@ -19,7 +19,7 @@ adventures:
                 example_code: "```\n{print} Bonjour !\n{print} Bienvenue sur Hedy !\n```\n"
                 story_text_2: "You can also ask for input and repeat it back with an `{echo}` command.\nTry the code to your left again.\n\nDon't know what to create? In the next tabs you will find ideas for programs to build.\n"
                 example_code_2: "```\n{ask} What is your name?\n{echo} hello\n```\n"
-                story_text_3: "Let's get started! Don't know what to create? In the next tabs you will find ideas for programs to build.\n"
+                story_text_3: "Allons-y ! Tu ne sais pas quoi créer ? Tu trouveras des idées de programmes à réaliser dans les onglets suivants.\n"
             2:
                 story_text: |
                     Au niveau 2, nous apprenons quelque chose de nouveau. Vous pouvez nommer un mot avec `{is}`.
@@ -34,11 +34,11 @@ adventures:
 
                     L'impression fonctionne toujours comme au niveau 1 et vous n'avez plus besoin d'une échographie.
                 start_code: "{print} bonjour le monde!"
-                story_text_2: "`{print}` still works the same, but the `{ask}` command has changed. You need to use a variable in the `{ask}` command as well. It looks like this:\n"
+                story_text_2: "`{print}` fonctionne toujours de la même manière, mais la commande `{ask}` a changé. Tu as besoin d’une variable pour stocker la réponse. Voici à quoi cela ressemble :\n"
                 example_code: "```\nname {is} Hedy\nage {is} 15\n{print} name is age years old\n```\n"
-                example_code_2: "```\nanswer {is} {ask} What is your name?\n{print} Hello answer\n```\n"
-                story_text_3: "Another new command in this level is `{sleep}`, which pauses your program for a second. If you type a number behind the {sleep} command, the program pauses for that amount of seconds.\n"
-                example_code_3: "```\n{print} My favorite colour is...\n{sleep} 2\n{print} green!\n```\n"
+                example_code_2: "```\nreponse {is} {ask} Comment t'appelles-tu ?\n{print} Salut reponse\n```\n"
+                story_text_3: "Une autre nouvelle commande de ce niveau est `{sleep}`, qui te permet de mettre le programme en pause pendant un certain temps. Lorsque tu tapes un chiffre après la commande {sleep}, le programme s’interrompt pendant ce nombre de secondes.\n"
+                example_code_3: "```\n{print} Ma couleur préférée est...\n{sleep} 2\n{print} le vert !\n```\n"
             3:
                 story_text: |
                     Au niveau 3, vous pouvez également faire une liste. Vous pouvez ensuite choisir n'importe quoi dans la liste. Vous faites cela avec `{at} {random}` (vous dites: et ren-dom).
@@ -51,7 +51,7 @@ adventures:
                     Vous trouverez tous les codes du niveau 3 dans la barre de gauche. Il existe également des onglets avec des affectations.
                 start_code: "{print} bonjour le monde!"
                 example_code: "```\nanimals {is} dog, cat, kangaroo\n{print} animals {at} {random}\n```\n"
-                story_text_2: You can also add items to the list with `{add}` and remove items with `{remove}`.
+                story_text_2: Dans ce niveau, tu peux aussi ajouter des éléments à une liste par la commande `{add}` et en supprimer avec la commande `{remove}`.
                 example_code_2: "```\nanimals {is} dog, cat, kangaroo\n{add} penguin {to_list} animals\n{remove} cat {from} animals\n{print} animals {at} {random}\n```\n"
             4:
                 start_code: "{print} 'Bonjour le monde'"
@@ -68,7 +68,7 @@ adventures:
                     ## Les affectations deviennent de plus en plus difficiles
                     Vous retrouverez les commandes sur la gauche et les affectations dans les onglets suivants. Les affectations deviennent de plus en plus difficiles dans les onglets successifs.
                     Il est donc préférable de commencer à gauche avec l'histoire, et de travailler à droite pour être de plus en plus contestée.
-                story_text_2: "## Adventures are getting more and more difficult\nThe adventures are now getting more and more difficult in the successive tabs.\nSo it is best to start on the left with the story, and work to the right, in order to be challenged more and more.\n"
+                story_text_2: "## Les aventures deviennent de plus en plus difficiles\nTu trouveras les commandes sur la gauche et les aventures dans les onglets suivants. D’onglet en onglet, les aventures sont maintenant de plus en plus difficiles.\nAlors commence par la gauche avec l’histoire et poursuit vers la droite pour être toujours plus mis au défi.\n"
                 example_code: "```\n{print} 'You need to use quotation marks from now on!'\nanswer {is} {ask} 'What do we need to use from now on?'\n{print} 'We need to use ' answer\n```\n"
             5:
                 start_code: |-
@@ -90,10 +90,10 @@ adventures:
 
                      Toujours au niveau 5, les affectations dans les onglets deviennent de plus en plus difficiles. Alors faites-les de gauche à droite.
                 example_code: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'\n```\n"
-                story_text_3: "## Lists\nWhen we want to check if something is in a list, we can now use the `{in}` command.\nThis code prints pretty! if you choose green or yellow, and meh otherwise.\n"
-                example_code_3: "```\npretty_colors {is} green, yellow\ncolor {is} {ask} 'What is your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!'\n{else} {print} 'meh'\n```\n"
-                story_text_2: "Sometimes code with an `{if}` gets really long and does not fit on the line well. <br> You may also divide the code over two lines, starting the second line at the `{else}` like this:\n"
-                example_code_2: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice'\n{else} {print} 'boo!'\n```\n"
+                story_text_3: "## Listes\nPour vérifier si quelque chose est dans une liste, tu peux maintenant utiliser la commande `{in}`.\nCe code renvoie `joli !` si tu choisis vert ou jaune, sinon il renvoie `mouais`.\n"
+                example_code_3: "```\njolies_couleurs {is} vert, jaune\ncouleur {is} {ask} 'Quelle est ta couleur favorite ?'\n{if} couleur {in} jolies_couleurs {print} 'joli !'\n{else} {print} 'mouais'\n```\n"
+                story_text_2: "Parfois, le code avec un `{if}` devient vraiment long et ne tient plus très bien dans la zone de texte. Tu peux alors le répartir sur deux lignes en commençant la seconde au `{else}`, comme ceci :\n"
+                example_code_2: "```\nnom {is} {ask} 'quel est ton nom ?'\n{if} nom {is} Hedy {print} 'chouette'\n{else} {print} 'oh là là !'\n```\n"
             6:
                 start_code: "{print} '5 fois 5 font ' 5 * 5"
                 story_text: |
