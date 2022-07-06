@@ -295,10 +295,14 @@ class TestPages(AuthHelper):
         # WHEN a fresh user
         self.given_fresh_user_is_logged_in()
 
-        # THEN we can retrieve the program page with a level and adventure filter
-        page = "/programs?level=2&adventure=story"
-        self.get_data(page)
-        # Note that the values of the parameters are not relevant, we want to make sure a valid page is returned
+        # THEN we can retrieve the different filtering options of the programs page
+        filters = [
+            "?level=null&adventure=null",
+            "?level=4&adventure=null"
+            "?level=2&adventure=story"
+        ]
+        for filter in filters:
+            self.get_data("/programs" + filter)
 
     def test_valid_explore_filtering_page(self):
         # WHEN a fresh user
