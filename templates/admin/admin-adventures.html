@@ -1,14 +1,12 @@
 {% extends "auth.html" %}
 
 {% block main %}
-<div class="flex flex-row border-b">
+<div class="flex flex-row items-center justify-between pb-2 border-b">
     <h1>Adventures overview</h1>
-    <div class="ltr:ml-auto rtl:mr-auto">
-        <button type="reset" class="green-btn my-1 mx-2 text-white" onclick="window.open('/admin', '_self');">Return to admin page</button>
-    </div>
+    <button type="reset" class="green-btn" onclick="window.open('/admin', '_self');">Return to admin page</button>
 </div>
 <h4 class="text-center">Total amount of shown adventures: {{ adventures|length }}</h4>
-<div class="program w-3/4 mx-auto border-solid border-2 border-orange-400 rounded p-4">
+<div class="program w-full lg:w-3/4 mx-auto border-solid border-2 border-orange-400 rounded p-4">
   <table class="table-auto mb-4 w-full text-sm">
     <thead>
       <tr class="font-bold text-left">
