@@ -135,7 +135,10 @@ def update_is_teacher(user, is_teacher_value=1):
     DATABASE.update_user(user['username'], {'is_teacher': is_teacher_value})
 
     if user_becomes_teacher and not is_testing_request(request):
-        send_email_template(template='welcome_teacher', email=user['email'], username=user['username'])
+        try:
+            send_email_template(template='welcome_teacher', email=user['email'], username=user['username'])
+        except:
+            print(f"An error occurred when sending a welcome teacher mail to {user['email']}, changes still processed")
 
 
 # Thanks to https://stackoverflow.com/a/34499643
