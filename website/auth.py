@@ -180,6 +180,7 @@ def prepare_user_db(username, password):
 
     return username, hashed, hashed_token
 
+
 def validate_student_signup_data(account):
     if not isinstance(account.get('username'), str):
         return gettext('username_invalid')
@@ -192,6 +193,7 @@ def validate_student_signup_data(account):
     if len(account.get('password')) < 6:
         return gettext('passwords_six')
     return None
+
 
 def validate_signup_data(account):
     if not isinstance(account.get('username'), str):

@@ -3,16 +3,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-04 13:06+0200\n"
+"POT-Creation-Date: 2022-07-06 10:00+0200\n"
 "PO-Revision-Date: 2022-07-04 10:35+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language: el\n"
 "Language-Team: el <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=n != 1\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.9.1\n"
+"Generated-By: Babel 2.10.1\n"
 
 #: app.py:417
 #, fuzzy
@@ -41,7 +41,7 @@ msgstr "Hedy - My programs"
 #: app.py:694 app.py:704 app.py:708 app.py:723 app.py:1003 app.py:1550
 #: website/admin.py:17 website/admin.py:24 website/admin.py:92
 #: website/admin.py:111 website/admin.py:129 website/admin.py:136
-#: website/admin.py:144 website/auth.py:716 website/auth.py:743
+#: website/admin.py:144 website/auth.py:740 website/auth.py:767
 #: website/programs.py:210 website/statistics.py:100
 #, fuzzy
 msgid "unauthorized"
@@ -360,9 +360,9 @@ msgstr "Απόκρυψη των σημειώσεων"
 msgid "invalid_tutorial_step"
 msgstr ""
 
-#: app.py:1489 website/auth.py:278 website/auth.py:333 website/auth.py:469
-#: website/auth.py:494 website/auth.py:524 website/auth.py:637
-#: website/auth.py:675 website/auth.py:722 website/auth.py:749
+#: app.py:1489 website/auth.py:286 website/auth.py:341 website/auth.py:477
+#: website/auth.py:502 website/auth.py:535 website/auth.py:654
+#: website/auth.py:696 website/auth.py:746 website/auth.py:773
 #: website/quiz.py:43 website/quiz.py:69 website/teacher.py:88
 #: website/teacher.py:123 website/teacher.py:195 website/teacher.py:251
 #: website/teacher.py:298 website/teacher.py:339 website/teacher.py:377
@@ -1233,7 +1233,7 @@ msgstr ""
 "καθηγητή που σου επιτρέπει να δημιουργείς μαθήματα και να προσκαλείς "
 "μαθητές."
 
-#: templates/highscores.html:5 templates/incl-menubar.html:16
+#: templates/highscores.html:5 templates/incl-menubar.html:22
 #, fuzzy
 msgid "highscores"
 msgstr "Σκορ"
@@ -1391,41 +1391,41 @@ msgstr "Εξερεύνηση"
 msgid "nav_learn_more"
 msgstr "Μάθε περισσότερα"
 
-#: templates/incl-menubar.html:10 templates/public-page.html:56
+#: templates/incl-menubar.html:13 templates/public-page.html:56
 msgid "program_header"
 msgstr "Τα προγράμματά μου"
 
-#: templates/incl-menubar.html:17
+#: templates/incl-menubar.html:23
 msgid "my_achievements"
 msgstr "Τα επιτεύγματά μου"
 
-#: templates/incl-menubar.html:18
+#: templates/incl-menubar.html:24
 msgid "my_account"
 msgstr "Ο λογαριασμός μου"
 
-#: templates/incl-menubar.html:20
+#: templates/incl-menubar.html:26
 msgid "for_teachers"
 msgstr "Για καθηγητές"
 
-#: templates/incl-menubar.html:22
+#: templates/incl-menubar.html:28
 msgid "logout"
 msgstr "Αποσύνδεση"
 
-#: templates/incl-menubar.html:26 templates/login.html:19
+#: templates/incl-menubar.html:32 templates/login.html:19
 #: templates/signup.html:109
 msgid "login"
 msgstr "Σύνδεση"
 
-#: templates/incl-menubar.html:38
+#: templates/incl-menubar.html:44
 msgid "search"
 msgstr "Αναζήτηση..."
 
-#: templates/incl-menubar.html:43
+#: templates/incl-menubar.html:49
 #, fuzzy
 msgid "keyword_support"
 msgstr "Translated keywords"
 
-#: templates/incl-menubar.html:51
+#: templates/incl-menubar.html:57
 #, fuzzy
 msgid "non_keyword_support"
 msgstr "Translated content"
@@ -1590,7 +1590,7 @@ msgstr "Δοκίμασε το"
 msgid "login_long"
 msgstr "Συνδέσου στο λογαριασμό σου"
 
-#: templates/login.html:26 website/auth.py:291
+#: templates/login.html:26 website/auth.py:299
 msgid "no_account"
 msgstr "Ακόμα χωρίς λογαριασμό;"
 
@@ -1974,162 +1974,167 @@ msgstr "Achieved by {percentage}% of the users"
 msgid "title_admin"
 msgstr "Hedy - Administrator page"
 
-#: website/auth.py:182 website/auth.py:195 website/auth.py:280
-#: website/auth.py:418 website/auth.py:423 website/auth.py:471
-#: website/auth.py:639 website/auth.py:648 website/auth.py:677
-#: website/auth.py:724 website/auth.py:731 website/auth.py:751
+#: website/auth.py:186 website/auth.py:200 website/auth.py:288
+#: website/auth.py:426 website/auth.py:431 website/auth.py:479
+#: website/auth.py:656 website/auth.py:665 website/auth.py:698
+#: website/auth.py:748 website/auth.py:755 website/auth.py:775
 #: website/teacher.py:300 website/teacher.py:341
 msgid "username_invalid"
 msgstr "Το όνομα χρήστη δεν είναι έγκυρο"
 
-#: website/auth.py:184 website/auth.py:197
+#: website/auth.py:188 website/auth.py:202
 msgid "username_special"
 msgstr "To όνομα χρήστη δεν μπορεί να περιέχει `:` ή `@`."
 
-#: website/auth.py:186 website/auth.py:199
+#: website/auth.py:190 website/auth.py:204
 msgid "username_three"
 msgstr "Το όνομα χρήστη πρέπει να περιέχει τουλάχιστον τρείς χαρακτήρες."
 
-#: website/auth.py:188 website/auth.py:203 website/auth.py:282
-#: website/auth.py:473 website/auth.py:496 website/auth.py:508
-#: website/auth.py:681
+#: website/auth.py:192 website/auth.py:208 website/auth.py:290
+#: website/auth.py:481 website/auth.py:504 website/auth.py:516
+#: website/auth.py:702
 msgid "password_invalid"
 msgstr "Το συνθηματικό σου δεν είναι έγκυρο"
 
-#: website/auth.py:190 website/auth.py:205
+#: website/auth.py:194 website/auth.py:210
 msgid "passwords_six"
 msgstr "Όλα τα συνθηματικά πρέπει να έχουν 6 χαρακτήρες ή περισσότερους."
 
-#: website/auth.py:201 website/auth.py:535 website/auth.py:753
-#: website/auth.py:758
+#: website/auth.py:206 website/auth.py:546 website/auth.py:777
+#: website/auth.py:782
 msgid "email_invalid"
 msgstr "Παρακαλώ να εισάγεις ένα έγκυρο email."
 
-#: website/auth.py:291
+#: website/auth.py:260 website/auth.py:526 website/auth.py:687
+#: website/auth.py:730 website/auth.py:799
+msgid "mail_error_change_processed"
+msgstr ""
+
+#: website/auth.py:299
 msgid "invalid_username_password"
 msgstr "Μη έγκυρο όνομα χρήστη/συνθηματικό."
 
-#: website/auth.py:342 website/auth.py:344
+#: website/auth.py:350 website/auth.py:352
 msgid "repeat_match_email"
 msgstr "Το email που επανέλαβες δεν ταιριάζει."
 
-#: website/auth.py:346 website/auth.py:498 website/auth.py:502
-#: website/auth.py:685
+#: website/auth.py:354 website/auth.py:506 website/auth.py:510
+#: website/auth.py:706
 msgid "repeat_match_password"
 msgstr "Το συνθηματικό που επανέλαβες δεν ταιριάζει."
 
-#: website/auth.py:348 website/auth.py:526
+#: website/auth.py:356 website/auth.py:537
 msgid "language_invalid"
 msgstr "Παρακαλώ διάλεξε μια έγκυρη γλώσσα"
 
-#: website/auth.py:350
+#: website/auth.py:358
 msgid "agree_invalid"
 msgstr "Πρέπει να συμφωνήσεις με το απόρρητο και τους όρους"
 
-#: website/auth.py:352 website/auth.py:529
+#: website/auth.py:360 website/auth.py:540
 msgid "keyword_language_invalid"
 msgstr ""
 "Επίλεξε μια έγκυρη γλώσσα λέξεων-κλειδιών (επιλέξτε Αγγλικά ή τη δική σας"
 " γλώσσα)"
 
-#: website/auth.py:357 website/auth.py:540
+#: website/auth.py:365 website/auth.py:551
 msgid "year_invalid"
 msgstr "Παρακαλώ να εισάγεις ένα έτος ανάμεσα στο 1900 και "
 
-#: website/auth.py:360 website/auth.py:543
+#: website/auth.py:368 website/auth.py:554
 msgid "gender_invalid"
 msgstr "Παρακαλώ διάλεξε ένα έγκυρο φύλο, επίλεξε (Γυναίκα, Άνδρας, Άλλο)"
 
-#: website/auth.py:363 website/auth.py:546
+#: website/auth.py:371 website/auth.py:557
 #, fuzzy
 msgid "country_invalid"
 msgstr "Please select a valid country."
 
-#: website/auth.py:365 website/auth.py:368 website/auth.py:548
-#: website/auth.py:551
+#: website/auth.py:373 website/auth.py:376 website/auth.py:559
+#: website/auth.py:562
 msgid "experience_invalid"
 msgstr "Παρακαλώ διάλεξε μια έγκυρη εμπειρία, επίλεξε (Ναι, Όχι)"
 
-#: website/auth.py:371 website/auth.py:554
+#: website/auth.py:379 website/auth.py:565
 msgid "programming_invalid"
 msgstr "Παρακαλώ διάλεξε μια έγκυρη γλώσσα προγραμματισμού"
 
-#: website/auth.py:374
+#: website/auth.py:382
 msgid "exists_username"
 msgstr "Αυτό το όνομα χρήστη χρησιμοποιείται ήδη."
 
-#: website/auth.py:376 website/auth.py:562
+#: website/auth.py:384 website/auth.py:573
 msgid "exists_email"
 msgstr "Αυτό το email χρησιμοποιείται ήδη."
 
-#: website/auth.py:416 website/auth.py:431 website/auth.py:679
-#: website/auth.py:689
+#: website/auth.py:424 website/auth.py:439 website/auth.py:700
+#: website/auth.py:710
 msgid "token_invalid"
 msgstr "Το διακριτικό σου δεν είναι έγκυρο"
 
-#: website/auth.py:475 website/auth.py:500 website/auth.py:683
+#: website/auth.py:483 website/auth.py:508 website/auth.py:704
 msgid "password_six"
 msgstr "Το συνθηματικό πρέπει να περιέχει τουλάχιστον έξι χαρακτήρες."
 
-#: website/auth.py:478 website/auth.py:481
+#: website/auth.py:486 website/auth.py:489
 msgid "password_change_not_allowed"
 msgstr "Δεν επιτρέπεται να αλλάξεις το συνθηματικό αυτού του χρήστη"
 
-#: website/auth.py:486
+#: website/auth.py:494
 msgid "password_change_success"
 msgstr "Το συνθηματικό του μαθητή σου άλλαξε με επιτυχία"
 
-#: website/auth.py:517
+#: website/auth.py:528
 msgid "password_updated"
 msgstr "Το συνθηματικό ενημερώθηκε."
 
-#: website/auth.py:605
+#: website/auth.py:622
 msgid "profile_updated"
 msgstr "Το προφίλ ενημερώθηκε."
 
-#: website/auth.py:608
+#: website/auth.py:625
 msgid "profile_updated_reload"
 msgstr "Το προφίλ ενημερώθηκε, η σελίδα θα ανανεωθεί."
 
-#: website/auth.py:668
+#: website/auth.py:689
 msgid "sent_password_recovery"
 msgstr ""
 "Σύντομα θα λάβεις ένα email με οδηγίες για το πώς να επαναφέρεις το "
 "συνθηματικό σου."
 
-#: website/auth.py:708
+#: website/auth.py:732
 msgid "password_resetted"
 msgstr ""
 "Έγινε επιτυχής επαναφορά του συνθηματικού σου. Θα ανακατευθυνθείς στη "
 "σελίδα σύνδεσης."
 
-#: website/auth.py:726
+#: website/auth.py:750
 msgid "teacher_invalid"
 msgstr "Η βαθμίδα καθηγητή δεν είναι έγκυρη"
 
-#: website/auth.py:814
+#: website/auth.py:841
 #, fuzzy
 msgid "mail_welcome_verify_body"
 msgstr ""
 "Your Hedy account has been created successfully. Welcome!\n"
 "Please click on this link to verify your email address: {link}"
 
-#: website/auth.py:816
+#: website/auth.py:843
 #, fuzzy
 msgid "mail_change_password_body"
 msgstr "Άλλαξε συνθηματικό"
 
-#: website/auth.py:818
+#: website/auth.py:845
 #, fuzzy
 msgid "mail_recover_password_body"
 msgstr "Ζήτησε επαναφορά συνθηματικού"
 
-#: website/auth.py:820
+#: website/auth.py:847
 #, fuzzy
 msgid "mail_reset_password_body"
 msgstr "Επαναφορά συνθηματικού"
 
-#: website/auth.py:822
+#: website/auth.py:849
 #, fuzzy
 msgid "mail_welcome_teacher_body"
 msgstr ""
@@ -2153,54 +2158,54 @@ msgstr ""
 "email</a>.\n"
 "Keep programming!"
 
-#: website/auth.py:828
+#: website/auth.py:855
 #, fuzzy
 msgid "mail_welcome_verify_subject"
 msgstr "Welcome to Hedy"
 
-#: website/auth.py:830
+#: website/auth.py:857
 #, fuzzy
 msgid "mail_change_password_subject"
 msgstr "Άλλαξε συνθηματικό"
 
-#: website/auth.py:832
+#: website/auth.py:859
 #, fuzzy
 msgid "mail_recover_password_subject"
 msgstr "Ζήτησε επαναφορά συνθηματικού"
 
-#: website/auth.py:834
+#: website/auth.py:861
 #, fuzzy
 msgid "mail_reset_password_subject"
 msgstr "Επαναφορά συνθηματικού"
 
-#: website/auth.py:836
+#: website/auth.py:863
 #, fuzzy
 msgid "mail_welcome_teacher_subject"
 msgstr "Your Hedy teacher account is ready"
 
-#: website/auth.py:840
+#: website/auth.py:867
 #, fuzzy
 msgid "user"
 msgstr "Όνομα Χρήστη"
 
-#: website/auth.py:845
+#: website/auth.py:872
 #, fuzzy
 msgid "mail_hello"
 msgstr "Hi {username}!"
 
-#: website/auth.py:847
+#: website/auth.py:874
 #, fuzzy
 msgid "mail_goodbye"
 msgstr ""
 "Thank you!\n"
 "The Hedy team"
 
-#: website/auth.py:855
+#: website/auth.py:882
 #, fuzzy
 msgid "copy_mail_link"
 msgstr "Please copy and paste this link into a new tab:"
 
-#: website/auth.py:856
+#: website/auth.py:883
 #, fuzzy
 msgid "link"
 msgstr "Σύνδεση"
