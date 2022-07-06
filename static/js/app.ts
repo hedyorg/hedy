@@ -525,6 +525,15 @@ function highlightAceError(editor: AceAjax.Editor, row: number, col?: number, le
   // This adds a red cross in the left margin.
   // Not sure what the "column" argument does here -- it doesn't seem
   // to make a difference.
+  editor.session.setAnnotations([
+    {
+      row: row - 1,
+      column: (col ?? 1) - 1,
+      text: '',
+      type: 'error',
+    }
+  ]);
+
   if (col === undefined) {
     // Higlight entire row
     editor.session.addMarker(
@@ -1230,7 +1239,10 @@ export function load_variables(variables: any) {
     const variableList = $('#variable-list');
     variableList.empty();
     for (const i in variables) {
-      variableList.append(`<li style=color:${variables[i][2]}>${variables[i][0]}: ${variables[i][1]}</li>`);
+      // Only append if the variable contains any data (and is not undefined)
+      if (variables[i][1]) {
+        variableList.append(`<li style=color:${variables[i][2]}>${variables[i][0]}: ${variables[i][1]}</li>`);
+      }
     }
     hide_if_no_variables();
   }
