@@ -1,5 +1,10 @@
 {% extends "layout.html" %}
-
+<!--
+Let's add a short explanation:
+    - use the "block body" ot overwrite the complete div within the main container
+    - use the "main body" to focus on the content within the main container
+        - in this case the margins and paddings are already handled -> useful for pages with only "page content"
+-->
 {% block body %}
 <div class="pt-8 px-4 lg:px-16" id="auth_main_container">
 {% block main %}{% endblock %}
