@@ -92,7 +92,7 @@ def rule_level3():
     return add_extra_rule({"start" : [{
         'regex': START_LINE + WORD + SPACE + K("is") + "( *)" + K("ask"),
         'token': ["text",'text','text','keyword','text','keyword'],
-        'next': 'value',
+        'next': 'valueExpr',
     },{
         'regex': START_LINE + WORD + SPACE + K("is"),
         'token': ["text",'text','text','keyword'],
@@ -100,19 +100,19 @@ def rule_level3():
     },{
         'regex': START_LINE + K("print") ,
         'token': ['text','keyword'],
-        'next': 'value',
+        'next': 'valueExpr',
     },{
         'regex': START_LINE + K("turn") ,
         'token': ['text','keyword'],
-        'next': 'value',
+        'next': 'valueExpr',
     },{
         'regex': START_LINE + K("sleep") ,
         'token': ['text','keyword'],
-        'next': 'value',
+        'next': 'valueExpr',
     },{
         'regex': START_LINE + K("forward") ,
         'token': ['text','keyword'],
-        'next': 'value',
+        'next': 'valueExpr',
     },{
         'regex': START_LINE + K("add"),
         'token': ["text",'keyword'],
@@ -123,6 +123,19 @@ def rule_level3():
         'next': 'valRemove',
     }],
     "value" : [{
+        'regex': START_WORD + K("at") + SPACE + K("random") ,
+        'token': ['text','keyword','keyword','keyword'],
+        'next': 'value',
+    },{
+        'regex': START_WORD + K("at") ,
+        'token': ['text','keyword'],
+        'next': 'value',
+    },{
+        'regex': "," ,
+        'token': 'keyword',
+        'next': 'value',
+    }],
+    "valueExpr" : [{
         'regex': START_WORD + K("at") + SPACE + K("random") ,
         'token': ['text','keyword','keyword','keyword'],
         'next': 'value',

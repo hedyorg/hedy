@@ -305,7 +305,7 @@
                         "text",
                         "keyword"
                     ],
-                    "next": "value"
+                    "next": "valueExpr"
                 },
                 {
                     "regex": "(^ *)([0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a]+)( +)(__is__)",
@@ -323,7 +323,7 @@
                         "text",
                         "keyword"
                     ],
-                    "next": "value"
+                    "next": "valueExpr"
                 },
                 {
                     "regex": "(^ *)(__turn__)",
@@ -331,7 +331,7 @@
                         "text",
                         "keyword"
                     ],
-                    "next": "value"
+                    "next": "valueExpr"
                 },
                 {
                     "regex": "(^ *)(__sleep__)",
@@ -339,7 +339,7 @@
                         "text",
                         "keyword"
                     ],
-                    "next": "value"
+                    "next": "valueExpr"
                 },
                 {
                     "regex": "(^ *)(__forward__)",
@@ -347,7 +347,7 @@
                         "text",
                         "keyword"
                     ],
-                    "next": "value"
+                    "next": "valueExpr"
                 },
                 {
                     "regex": "(^ *)(__add__)",
@@ -379,6 +379,56 @@
                     "regex": "_\\?_",
                     "token": "invalid",
                     "next": "value"
+                },
+                {
+                    "regex": "#.*$",
+                    "token": "comment",
+                    "next": "start"
+                },
+                {
+                    "regex": "(^|$)",
+                    "token": [
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__at__)( +)(__random__)",
+                    "token": [
+                        "text",
+                        "keyword",
+                        "keyword",
+                        "keyword"
+                    ],
+                    "next": "value"
+                },
+                {
+                    "regex": "(^| )(__at__)",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
+                    "next": "value"
+                },
+                {
+                    "regex": ",",
+                    "token": "keyword",
+                    "next": "value"
+                }
+            ],
+            "valueExpr": [
+                {
+                    "regex": "(^| )(_)(?= |$)",
+                    "token": [
+                        "text",
+                        "invalid"
+                    ],
+                    "next": "valueExpr"
+                },
+                {
+                    "regex": "_\\?_",
+                    "token": "invalid",
+                    "next": "valueExpr"
                 },
                 {
                     "regex": "#.*$",
