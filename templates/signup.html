@@ -75,10 +75,10 @@
                   </li>
               </ul>
             </div>
-            <div class="signup-container" style="display: none;" id="languages">
+            <div class="border border-gray-400 rounded-lg mx-2 md:mx-4 px-4 md:px-8 lg:px-16 flex flex-row items-center justify-between gap-2 py-2" id="languages">
                 <!-- For some reason the Tailwind 'hidden' class messes up the layout, therefore we "brute"-style it within the element -->
-              <label class="inline-block w-48" for="languages">{{_('languages')}}</label>
-                <ul class="signup-input mt-0">
+              <label class="signup-label" for="languages">{{_('languages')}}</label>
+                <ul class="mt-0">
                 <li class="flex">
                     <div class="flex flex-row items-center gap-2">
                         <input type="checkbox" name="languages" value="scratch">
@@ -105,27 +105,23 @@
                 </li>
               </ul>
             </div>
-            <div class="signup-container">
-                <label for="is_teacher">{{_('request_teacher')}}</label>
-                <div class="signup-input">
+            <!-- The extra check options -->
+            <div class="border border-gray-400 rounded-lg mx-2 md:mx-4 px-4 md:px-8 lg:px-16 flex flex-col gap-2 py-2">
+                <div class="flex flex-row justify-between items-center">
+                    <label for="is_teacher">{{_('request_teacher')}}</label>
                     <input type="checkbox" id="is_teacher" name="is_teacher">
                 </div>
-            </div>
-            <div class="signup-container">
-                <label class="signup-label" for="subscribe">{{_('subscribe_newsletter')}}</label>
-                <div class="signup-input">
+                <div class="flex flex-row justify-between items-center">
+                    <label for="subscribe">{{_('subscribe_newsletter')}}</label>
                     <input type="checkbox" id="subscribe" name="subscribe">
                 </div>
+                <div class="flex flex-row justify-between items-center">
+                    <label for="agree_terms">{{_('agree_with')}} <a href="/privacy" target="_blank">{{_('privacy_terms')}}</a></label>
+                    <input type="checkbox" id="agree_terms" name="agree_terms" required>
+                </div>
+
             </div>
-            <div class="signup-container">
-                <label class="signup-label" for="agree_terms">{{_('agree_with')}} <a href="/privacy" target="_blank">{{_('privacy_terms')}}</a></label>
-                <input type="checkbox" class="signup-input" id="agree_terms" name="agree_terms" required>
-            </div>
-            <div class="signup-container gap-2">
-                <input type="checkbox" class="" id="agree_third_party" name="agree_third_party">
-                <label class="inline-block text-center" for="agree_third_party">{{_('agree_third_party')}}</label>
-            </div>
-            <div>
+            <div class="flex">
                 <button type="submit" class="green-btn mx-auto">{{_('create_account')}}</button>
             </div>
         </form>

@@ -535,7 +535,6 @@ strong {
   padding-left: 1rem;
   padding-right: 1rem;
   font-weight: 700;
-  display: inline-block;
   --tw-border-opacity: 1;
   border-color: rgb(47 133 90 / var(--tw-border-opacity));
   --tw-bg-opacity: 1;
@@ -559,7 +558,6 @@ strong {
   padding-left: 1rem;
   padding-right: 1rem;
   font-weight: 700;
-  display: inline-block;
   --tw-border-opacity: 1;
   border-color: rgb(197 48 48 / var(--tw-border-opacity));
   --tw-bg-opacity: 1;
@@ -583,7 +581,6 @@ strong {
   padding-left: 1rem;
   padding-right: 1rem;
   font-weight: 700;
-  display: inline-block;
   --tw-border-opacity: 1;
   border-color: rgb(183 121 31 / var(--tw-border-opacity));
   --tw-bg-opacity: 1;
@@ -607,7 +604,6 @@ strong {
   padding-left: 1rem;
   padding-right: 1rem;
   font-weight: 700;
-  display: inline-block;
   --tw-border-opacity: 1;
   border-color: rgb(43 108 176 / var(--tw-border-opacity));
   --tw-bg-opacity: 1;
@@ -1248,6 +1244,10 @@ code {
 
 .w-16 {
   width: 4rem;
+}
+
+.w-96 {
+  width: 24rem;
 }
 
 .min-w-min {
@@ -2210,7 +2210,6 @@ code {
   padding-left: 1rem;
   padding-right: 1rem;
   font-weight: 700;
-  display: inline-block;
   --tw-border-opacity: 1;
   border-color: rgb(43 108 176 / var(--tw-border-opacity));
   --tw-bg-opacity: 1;
@@ -3073,6 +3072,18 @@ input:checked ~ .toggle-path {
   }
 }
 
+@media (min-width: 768px) {
+  .md\:mx-4 {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+
+  .md\:px-8 {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
 @media (min-width: 1024px) {
   .lg\:container {
     width: 100%;
@@ -3135,6 +3146,10 @@ input:checked ~ .toggle-path {
 
   .lg\:w-3\/4 {
     width: 75%;
+  }
+
+  .lg\:w-full {
+    width: 100%;
   }
 
   .lg\:grid-cols-2 {
