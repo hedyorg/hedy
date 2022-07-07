@@ -4,6 +4,19 @@
         "rules": {
             "start": [
                 {
+                    "regex": "(^| )(_)(?= |$)",
+                    "token": [
+                        "text",
+                        "invalid"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "_\\?_",
+                    "token": "invalid",
+                    "next": "start"
+                },
+                {
                     "regex": "#.*$",
                     "token": "comment",
                     "next": "start"
@@ -14,7 +27,7 @@
                         "text",
                         "keyword"
                     ],
-                    "next": "none"
+                    "next": "value"
                 },
                 {
                     "regex": "(^ *)(__print__)",
@@ -22,7 +35,7 @@
                         "text",
                         "keyword"
                     ],
-                    "next": "none"
+                    "next": "value"
                 },
                 {
                     "regex": "(^ *)(__echo__)",
@@ -30,7 +43,7 @@
                         "text",
                         "keyword"
                     ],
-                    "next": "none"
+                    "next": "value"
                 },
                 {
                     "regex": "(^ *)(__forward__)",
@@ -38,7 +51,7 @@
                         "text",
                         "keyword"
                     ],
-                    "next": "none"
+                    "next": "value"
                 },
                 {
                     "regex": "(^ *)(__turn__)",
@@ -57,42 +70,86 @@
                     "next": "color"
                 }
             ],
-            "none": [
+            "value": [
                 {
-                    "regex": "(^|$)",
+                    "regex": "(^| )(_)(?= |$)",
                     "token": [
-                        "text"
+                        "text",
+                        "invalid"
                     ],
-                    "next": "start"
+                    "next": "value"
+                },
+                {
+                    "regex": "_\\?_",
+                    "token": "invalid",
+                    "next": "value"
                 },
                 {
                     "regex": "#.*$",
                     "token": "comment",
                     "next": "start"
-                }
-            ],
-            "color": [
+                },
                 {
                     "regex": "(^|$)",
                     "token": [
                         "text"
                     ],
                     "next": "start"
+                }
+            ],
+            "color": [
+                {
+                    "regex": "(^| )(_)(?= |$)",
+                    "token": [
+                        "text",
+                        "invalid"
+                    ],
+                    "next": "color"
                 },
                 {
-                    "regex": "(__purple__|__red__|__black__|__blue__|__brown__|__gray__|__green__|__orange__|__pink__|__white__|__yellow__)",
-                    "token": [
-                        "keyword"
-                    ],
+                    "regex": "_\\?_",
+                    "token": "invalid",
                     "next": "color"
                 },
                 {
                     "regex": "#.*$",
                     "token": "comment",
                     "next": "start"
+                },
+                {
+                    "regex": "(^|$)",
+                    "token": [
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(__black__|__gray__|__white__|__green__|__blue__|__purple__|__brown__|__pink__|__red__|__orange__|__yellow__)",
+                    "token": [
+                        "keyword"
+                    ],
+                    "next": "color"
                 }
             ],
             "direction": [
+                {
+                    "regex": "(^| )(_)(?= |$)",
+                    "token": [
+                        "text",
+                        "invalid"
+                    ],
+                    "next": "direction"
+                },
+                {
+                    "regex": "_\\?_",
+                    "token": "invalid",
+                    "next": "direction"
+                },
+                {
+                    "regex": "#.*$",
+                    "token": "comment",
+                    "next": "start"
+                },
                 {
                     "regex": "(^|$)",
                     "token": [
@@ -106,11 +163,6 @@
                         "keyword"
                     ],
                     "next": "direction"
-                },
-                {
-                    "regex": "#.*$",
-                    "token": "comment",
-                    "next": "start"
                 }
             ]
         }
@@ -119,6 +171,19 @@
         "name": "level2",
         "rules": {
             "start": [
+                {
+                    "regex": "(^| )(_)(?= |$)",
+                    "token": [
+                        "text",
+                        "invalid"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "_\\?_",
+                    "token": "invalid",
+                    "next": "start"
+                },
                 {
                     "regex": "#.*$",
                     "token": "comment",
@@ -130,7 +195,7 @@
                         "text",
                         "keyword"
                     ],
-                    "next": "none"
+                    "next": "value"
                 },
                 {
                     "regex": "(^ *)([0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a]+)( +)(__is__)( +)(__ask__)",
@@ -142,7 +207,7 @@
                         "text",
                         "keyword"
                     ],
-                    "next": "none"
+                    "next": "value"
                 },
                 {
                     "regex": "(^ *)([0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a]+)( +)(__is__)",
@@ -152,7 +217,7 @@
                         "text",
                         "keyword"
                     ],
-                    "next": "none"
+                    "next": "value"
                 },
                 {
                     "regex": "(^ *)(__sleep__)",
@@ -160,7 +225,7 @@
                         "text",
                         "keyword"
                     ],
-                    "next": "none"
+                    "next": "value"
                 },
                 {
                     "regex": "(^ *)(__forward__)",
@@ -168,7 +233,7 @@
                         "text",
                         "keyword"
                     ],
-                    "next": "none"
+                    "next": "value"
                 },
                 {
                     "regex": "(^ *)(__turn__)",
@@ -176,20 +241,33 @@
                         "text",
                         "keyword"
                     ],
-                    "next": "none"
+                    "next": "value"
                 }
             ],
-            "none": [
+            "value": [
+                {
+                    "regex": "(^| )(_)(?= |$)",
+                    "token": [
+                        "text",
+                        "invalid"
+                    ],
+                    "next": "value"
+                },
+                {
+                    "regex": "_\\?_",
+                    "token": "invalid",
+                    "next": "value"
+                },
+                {
+                    "regex": "#.*$",
+                    "token": "comment",
+                    "next": "start"
+                },
                 {
                     "regex": "(^|$)",
                     "token": [
                         "text"
                     ],
-                    "next": "start"
-                },
-                {
-                    "regex": "#.*$",
-                    "token": "comment",
                     "next": "start"
                 }
             ]
@@ -200,103 +278,44 @@
         "rules": {
             "start": [
                 {
-                    "regex": "(^ *)([0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a]+)( +)(__is__)( *)(__ask__)(.*)$",
+                    "regex": "(^| )(_)(?= |$)",
                     "token": [
                         "text",
-                        "text",
-                        "text",
-                        "keyword",
-                        "text",
-                        "keyword",
-                        "text"
+                        "invalid"
                     ],
                     "next": "start"
                 },
                 {
-                    "regex": "(^ *)([0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a]+)( +)(__is__)( *)(.*)$",
-                    "token": [
-                        "text",
-                        "text",
-                        "text",
-                        "keyword",
-                        "text",
-                        "text"
-                    ],
+                    "regex": "_\\?_",
+                    "token": "invalid",
                     "next": "start"
                 },
                 {
-                    "regex": "(^ *)(__remove__)( *)(.*)( +)(__from__)( *)([0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a]+)$",
-                    "token": [
-                        "text",
-                        "keyword",
-                        "text",
-                        "text",
-                        "text",
-                        "keyword",
-                        "text",
-                        "text"
-                    ],
+                    "regex": "#.*$",
+                    "token": "comment",
                     "next": "start"
                 },
                 {
-                    "regex": "(^ *)(__remove__)( *)(.*)( +)(__from__)( *)$",
+                    "regex": "(^ *)([0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a]+)( +)(__is__)( *)(__ask__)",
                     "token": [
                         "text",
+                        "text",
+                        "text",
                         "keyword",
                         "text",
-                        "text",
-                        "text",
-                        "keyword",
-                        "text"
+                        "keyword"
                     ],
-                    "next": "start"
+                    "next": "value"
                 },
                 {
-                    "regex": "(^ *)(__remove__)( *)(.*)$",
+                    "regex": "(^ *)([0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a]+)( +)(__is__)",
                     "token": [
                         "text",
-                        "keyword",
                         "text",
-                        "text"
+                        "text",
+                        "keyword"
                     ],
-                    "next": "start"
-                },
-                {
-                    "regex": "(^ *)(__add__)( *)(.*)( +)(__to_list__)( *)([0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a]+)$",
-                    "token": [
-                        "text",
-                        "keyword",
-                        "text",
-                        "text",
-                        "text",
-                        "keyword",
-                        "text",
-                        "text"
-                    ],
-                    "next": "start"
-                },
-                {
-                    "regex": "(^ *)(__add__)( *)(.*)( +)(__to_list__)( *)$",
-                    "token": [
-                        "text",
-                        "keyword",
-                        "text",
-                        "text",
-                        "text",
-                        "keyword",
-                        "text"
-                    ],
-                    "next": "start"
-                },
-                {
-                    "regex": "(^ *)(__add__)( *)(.*)$",
-                    "token": [
-                        "text",
-                        "keyword",
-                        "text",
-                        "text"
-                    ],
-                    "next": "start"
+                    "next": "value"
                 },
                 {
                     "regex": "(^ *)(__print__)",
@@ -304,7 +323,7 @@
                         "text",
                         "keyword"
                     ],
-                    "next": "start"
+                    "next": "value"
                 },
                 {
                     "regex": "(^ *)(__turn__)",
@@ -312,7 +331,7 @@
                         "text",
                         "keyword"
                     ],
-                    "next": "start"
+                    "next": "value"
                 },
                 {
                     "regex": "(^ *)(__sleep__)",
@@ -320,13 +339,56 @@
                         "text",
                         "keyword"
                     ],
-                    "next": "start"
+                    "next": "value"
                 },
                 {
                     "regex": "(^ *)(__forward__)",
                     "token": [
                         "text",
                         "keyword"
+                    ],
+                    "next": "value"
+                },
+                {
+                    "regex": "(^ *)(__add__)",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
+                    "next": "valAdd"
+                },
+                {
+                    "regex": "(^ *)(__remove__)",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
+                    "next": "valRemove"
+                }
+            ],
+            "value": [
+                {
+                    "regex": "(^| )(_)(?= |$)",
+                    "token": [
+                        "text",
+                        "invalid"
+                    ],
+                    "next": "value"
+                },
+                {
+                    "regex": "_\\?_",
+                    "token": "invalid",
+                    "next": "value"
+                },
+                {
+                    "regex": "#.*$",
+                    "token": "comment",
+                    "next": "start"
+                },
+                {
+                    "regex": "(^|$)",
+                    "token": [
+                        "text"
                     ],
                     "next": "start"
                 },
@@ -338,7 +400,7 @@
                         "keyword",
                         "keyword"
                     ],
-                    "next": "start"
+                    "next": "value"
                 },
                 {
                     "regex": "(^| )(__at__)",
@@ -346,7 +408,22 @@
                         "text",
                         "keyword"
                     ],
-                    "next": "start"
+                    "next": "value"
+                }
+            ],
+            "valAdd": [
+                {
+                    "regex": "(^| )(_)(?= |$)",
+                    "token": [
+                        "text",
+                        "invalid"
+                    ],
+                    "next": "valAdd"
+                },
+                {
+                    "regex": "_\\?_",
+                    "token": "invalid",
+                    "next": "valAdd"
                 },
                 {
                     "regex": "#.*$",
@@ -354,15 +431,106 @@
                     "next": "start"
                 },
                 {
-                    "regex": "_\\?_",
-                    "token": "invalid",
+                    "regex": "(^|$)",
+                    "token": [
+                        "text"
+                    ],
                     "next": "start"
                 },
+                {
+                    "regex": "(^| )(__to_list__)",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
+                    "next": "valueTo"
+                }
+            ],
+            "valueTo": [
                 {
                     "regex": "(^| )(_)(?= |$)",
                     "token": [
                         "text",
                         "invalid"
+                    ],
+                    "next": "valueTo"
+                },
+                {
+                    "regex": "_\\?_",
+                    "token": "invalid",
+                    "next": "valueTo"
+                },
+                {
+                    "regex": "#.*$",
+                    "token": "comment",
+                    "next": "start"
+                },
+                {
+                    "regex": "(^|$)",
+                    "token": [
+                        "text"
+                    ],
+                    "next": "start"
+                }
+            ],
+            "valRemove": [
+                {
+                    "regex": "(^| )(_)(?= |$)",
+                    "token": [
+                        "text",
+                        "invalid"
+                    ],
+                    "next": "valRemove"
+                },
+                {
+                    "regex": "_\\?_",
+                    "token": "invalid",
+                    "next": "valRemove"
+                },
+                {
+                    "regex": "#.*$",
+                    "token": "comment",
+                    "next": "start"
+                },
+                {
+                    "regex": "(^|$)",
+                    "token": [
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__from__)",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
+                    "next": "valueFrom"
+                }
+            ],
+            "valueFrom": [
+                {
+                    "regex": "(^| )(_)(?= |$)",
+                    "token": [
+                        "text",
+                        "invalid"
+                    ],
+                    "next": "valueFrom"
+                },
+                {
+                    "regex": "_\\?_",
+                    "token": "invalid",
+                    "next": "valueFrom"
+                },
+                {
+                    "regex": "#.*$",
+                    "token": "comment",
+                    "next": "start"
+                },
+                {
+                    "regex": "(^|$)",
+                    "token": [
+                        "text"
                     ],
                     "next": "start"
                 }

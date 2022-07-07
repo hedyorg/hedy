@@ -339,7 +339,7 @@ class HighlighterTestWebSite(HighlightTester):
     def test_2_12(self):
         self.assert_highlighted_chr_multi_line(
             "choice is _",
-            "TTTTTT KK T",
+            "TTTTTT KK I",
             "print I choose choice",
             "KKKKK TTTTTTTTTTTTTTT",
             level="level2", lang='en')
@@ -371,7 +371,7 @@ class HighlighterTestWebSite(HighlightTester):
     def test_2_14(self):
         self.assert_highlighted_chr(
             "monster1 is _",
-            "TTTTTTTT KK T",
+            "TTTTTTTT KK I",
             level="level2", lang='en')
 
 
