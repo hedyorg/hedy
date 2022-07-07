@@ -117,7 +117,7 @@ class TestsLevel12(HedyTester):
 
     expected = textwrap.dedent("""\
     naam = 'Hedy'
-    if str(naam) == str('Hedy'):
+    if convert_numerals('Latin', naam) == convert_numerals('Latin', 'Hedy'):
       print(f'''koekoek''')""")
 
     self.multi_level_tester(
@@ -133,7 +133,7 @@ class TestsLevel12(HedyTester):
 
     expected = textwrap.dedent("""\
     naam = 'Hedy'
-    if str(naam) == str('Hedy'):
+    if convert_numerals('Latin', naam) == convert_numerals('Latin', 'Hedy'):
       print(f'''koekoek''')""")
 
     self.multi_level_tester(
@@ -150,7 +150,7 @@ class TestsLevel12(HedyTester):
 
     expected = textwrap.dedent("""\
     naam = 'Hedy'
-    if str(naam) == str('Hedy'):
+    if convert_numerals('Latin', naam) == convert_numerals('Latin', 'Hedy'):
       print(f'''koekoek''')""")
 
     self.multi_level_tester(
@@ -820,7 +820,7 @@ class TestsLevel12(HedyTester):
         print {q}koekoek{q}""")
     expected = textwrap.dedent("""\
     naam = 'Hedy'
-    if str(naam) == str('Hedy'):
+    if convert_numerals('Latin', naam) == convert_numerals('Latin', 'Hedy'):
       print(f'''koekoek''')""")
 
 
@@ -834,7 +834,7 @@ class TestsLevel12(HedyTester):
         print {q}koekoek{q}""")
     expected = textwrap.dedent("""\
     naam = 'Hedy is top'
-    if str(naam) == str('Hedy is top'):
+    if convert_numerals('Latin', naam) == convert_numerals('Latin', 'Hedy is top'):
       print(f'''koekoek''')""")
 
 
@@ -850,7 +850,7 @@ class TestsLevel12(HedyTester):
         print {q}soepkip{q}""")
     expected = textwrap.dedent("""\
     naam = 'Hedy'
-    if str(naam) == str('Hedy'):
+    if convert_numerals('Latin', naam) == convert_numerals('Latin', 'Hedy'):
       print(f'''koekoek''')
     else:
       print(f'''soepkip''')""")
@@ -877,7 +877,7 @@ class TestsLevel12(HedyTester):
         antwoord = float(antwoord)
       except ValueError:
         pass
-    if str(antwoord) == str('20'):
+    if convert_numerals('Latin', antwoord) == convert_numerals('Latin', '20'):
       print(f'''Goedzo!''')
       print(f'''Het antwoord was inderdaad {antwoord}''')
     else:
