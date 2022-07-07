@@ -1874,7 +1874,7 @@ def merge_grammars(grammar_text_1, grammar_text_2, level):
             if line_2 == '' or line_2[0] == '/':  # skip comments and empty lines:
                 continue            
             
-            needs_preprocessing = re.match('((\w|_)+)<((\w|_)+)>', line_2)
+            needs_preprocessing = re.match(r'((\w|_)+)<((\w|_)+)>', line_2)
             if needs_preprocessing:                
                 name_2 = f'{needs_preprocessing.group(1)}'                
                 processor = needs_preprocessing.group(3)
