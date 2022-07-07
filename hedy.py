@@ -41,6 +41,18 @@ for lang, keywords in KEYWORDS.items():
     for keyword in ['if', 'for', 'repeat', 'while', 'else']:
         indent_keywords.append(keywords.get(keyword))
 
+# These are the preprocessor rules that we use to specify changes in the rules that
+# are expected to work across several rules
+# Example 
+# for<needs_colon> instead of defining the whole rule again.
+
+def needs_colon(rule):
+  pos = rule.find('_EOL (_SPACE command)')
+  return f'{rule[0:pos]} _COLON {rule[pos:]}'
+
+PREPROCESS_RULES = {
+    'needs_colon': needs_colon
+}
 
 class Command:
     print = 'print'
@@ -1840,14 +1852,6 @@ class ConvertToPython_18(ConvertToPython_17):
 
     def print_empty_brackets(self, args):
         return self.print(args)
-
-def needs_colon(rule):
-  pos = rule.find('_EOL (_SPACE command)')
-  return f'{rule[0:pos]} _COLON {rule[pos:]}'
-
-PREPROCESS_RULES = {
-    'needs_colon': needs_colon
-}
 
 def merge_grammars(grammar_text_1, grammar_text_2, level):
     # this function takes two grammar files and merges them into one
