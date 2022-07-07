@@ -1839,6 +1839,14 @@ class ConvertToPython_18(ConvertToPython_17):
     def print_empty_brackets(self, args):
         return self.print(args)
 
+def needs_colon(rule):
+  pos = rule.find('_EOL (_SPACE command)')
+  return f'{rule[0:pos]} _COLON {rule[pos:]}'
+
+PREPROCESS_RULES = {
+    'needs_colon': needs_colon
+}
+
 def merge_grammars(grammar_text_1, grammar_text_2, level):
     # this function takes two grammar files and merges them into one
     # rules that are redefined in the second file are overridden
@@ -1858,48 +1866,32 @@ def merge_grammars(grammar_text_1, grammar_text_2, level):
         override_found = False
         for line_2 in rules_grammar_2:
             if line_2 == '' or line_2[0] == '/':  # skip comments and empty lines:
-                continue
-            parts = line_2.split(':')
-            name_2, definition_2 = parts[0], ''.join(parts[1]) #get part before are after :
+                continue            
+            
+            needs_preprocessing = re.match('((\w|_)+)<((\w|_)+)>', line_2)
+            if needs_preprocessing:                
+                name_2 = f'{needs_preprocessing.group(1)}'                
+                processor = needs_preprocessing.group(3)
+            else:                
+                parts = line_2.split(':')
+                name_2, definition_2 = parts[0], ''.join(parts[1]) #get part before are after :
+
             if name_1 == name_2:
                 override_found = True
+                if needs_preprocessing:
+                    definition_2 = PREPROCESS_RULES[processor](definition_1)
+                    line_2_processed = f'{name_2}: {definition_2}'
+                else:
+                    line_2_processed = line_2
                 if definition_1.strip() == definition_2.strip():
                     warn_message = f"The rule {name_1} is duplicated on level {level}. Please check!"
                     warnings.warn(warn_message)
-                # Check if the rule is adding or substracting new rules
-                has_add_op = definition_2.startswith('+=')
-                has_sub_op = has_add_op and '-=' in definition_2
-                has_last_op = has_add_op and '>' in definition_2
-                if has_sub_op:
-                    # Get the rules we need to substract
-                    part_list = definition_2.split('-=')
-                    add_list, sub_list =  (part_list[0], part_list[1]) if has_sub_op else (part_list[0], '')
-                    add_list = add_list[3:]
-                    # Get the rules that need to be last
-                    sub_list = sub_list.split('>')
-                    sub_list, last_list = (sub_list[0], sub_list[1]) if has_last_op  else (sub_list[0], '')
-                    sub_list = sub_list + '|' + last_list
-                    result_cmd_list = get_remaining_rules(definition_1, sub_list)
-                elif has_add_op:
-                     # Get the rules that need to be last
-                    part_list = definition_2.split('>')
-                    add_list, sub_list =  (part_list[0], part_list[1]) if has_last_op else (part_list[0], '')
-                    add_list = add_list[3:]
-                    last_list = sub_list
-                    result_cmd_list = get_remaining_rules(definition_1, sub_list)
-                else:
-                    result_cmd_list = definition_1
-
-                if has_last_op:
-                    new_rule = f"{name_1}: {result_cmd_list} | {add_list} | {last_list}"
-                elif has_add_op:
-                    new_rule = f"{name_1}: {result_cmd_list} | {add_list}"
-                else:
-                    new_rule = line_2
+                # Used to compute the rules that use the merge operators in the grammar
+                # namely +=, -= and >
+                new_rule = merge_rules_operator(definition_1, definition_2, name_1, line_2_processed)
                 #Already procesed so remove it
                 remaining_rules_grammar_2.remove(line_2)
                 break
-
         # new rule found? print that. nothing found? print org rule
         if override_found:
             merged_grammar.append(new_rule)
@@ -1913,6 +1905,39 @@ def merge_grammars(grammar_text_1, grammar_text_2, level):
 
     merged_grammar = sorted(merged_grammar)
     return '\n'.join(merged_grammar)
+
+def merge_rules_operator(prev_definition, new_definition, name, complete_line):
+    # Check if the rule is adding or substracting new rules                
+    has_add_op = new_definition.startswith('+=')
+    has_sub_op = has_add_op and '-=' in new_definition
+    has_last_op = has_add_op and '>' in new_definition
+    if has_sub_op:
+        # Get the rules we need to substract
+        part_list = new_definition.split('-=')
+        add_list, sub_list =  (part_list[0], part_list[1]) if has_sub_op else (part_list[0], '')
+        add_list = add_list[3:]  
+        # Get the rules that need to be last
+        sub_list = sub_list.split('>')  
+        sub_list, last_list = (sub_list[0], sub_list[1]) if has_last_op  else (sub_list[0], '')
+        sub_list = sub_list + '|' + last_list
+        result_cmd_list = get_remaining_rules(prev_definition, sub_list)
+    elif has_add_op:
+            # Get the rules that need to be last
+        part_list = new_definition.split('>')
+        add_list, sub_list =  (part_list[0], part_list[1]) if has_last_op else (part_list[0], '')
+        add_list = add_list[3:]
+        last_list = sub_list
+        result_cmd_list = get_remaining_rules(prev_definition, sub_list)
+    else:
+        result_cmd_list = prev_definition
+
+    if has_last_op:
+        new_rule = f"{name}: {result_cmd_list} | {add_list} | {last_list}"
+    elif has_add_op:
+        new_rule = f"{name}: {result_cmd_list} | {add_list}"
+    else:
+        new_rule = complete_line
+    return new_rule
 
 def get_remaining_rules(orig_def, sub_def):
     orig_cmd_list     = [command.strip() for command in orig_def.split('|')]
