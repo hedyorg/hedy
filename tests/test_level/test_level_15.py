@@ -15,7 +15,7 @@ class TestsLevel15(HedyTester):
       print 'Goed gedaan!'""")
     expected = textwrap.dedent("""\
     antwoord = 0
-    while str(antwoord).zfill(100)!=str(25).zfill(100):
+    while convert_numerals('Latin', antwoord).zfill(100)!=convert_numerals('Latin', 25).zfill(100):
       antwoord = input(f'''Wat is 5 keer 5?''')
       try:
         antwoord = int(antwoord)
@@ -42,7 +42,7 @@ class TestsLevel15(HedyTester):
       affiche 'Goed gedaan!'""")
     expected = textwrap.dedent("""\
     antwoord = 0
-    while str(antwoord).zfill(100)!=str(25).zfill(100):
+    while convert_numerals('Latin', antwoord).zfill(100)!=convert_numerals('Latin', 25).zfill(100):
       antwoord = input(f'''Wat is 5 keer 5?''')
       try:
         antwoord = int(antwoord)
@@ -81,7 +81,7 @@ class TestsLevel15(HedyTester):
       print 'Hoog he?'""")
     expected = textwrap.dedent("""\
     getal = 0
-    while str(getal).zfill(100)<str(100000).zfill(100):
+    while convert_numerals('Latin', getal).zfill(100)<convert_numerals('Latin', 100000).zfill(100):
       getal = input(f'''HOGER!!!!!''')
       try:
         getal = int(getal)

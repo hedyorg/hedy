@@ -23,7 +23,7 @@ class TestsLevel14(HedyTester):
           leeftijd = float(leeftijd)
         except ValueError:
           pass
-      if str(leeftijd).zfill(100){comparison}str(12).zfill(100):
+      if convert_numerals('Latin', leeftijd).zfill(100){comparison}convert_numerals('Latin', 12).zfill(100):
         print(f'''Dan ben je jonger dan ik!''')""")
 
     self.multi_level_tester(
@@ -31,6 +31,29 @@ class TestsLevel14(HedyTester):
       max_level=16,
       expected=expected,
     )
+
+  def test_equality_arabic(self):
+      code = textwrap.dedent("""\
+      nummer1 is ٢
+      nummer2 is 2
+      if nummer1 != nummer2
+          print 'jahoor!'
+      else
+          print 'neejoh!'""")
+
+      expected = textwrap.dedent("""\
+      nummer1 = 2
+      nummer2 = 2
+      if convert_numerals('Latin', nummer1).zfill(100)!=convert_numerals('Latin', nummer2).zfill(100):
+        print(f'''jahoor!''')
+      else:
+        print(f'''neejoh!''')""")
+
+      self.multi_level_tester(
+        max_level=16,
+        code=code,
+        expected=expected,
+        output='neejoh!')
 
   def test_inequality_with_string(self):
     code = textwrap.dedent(f"""\
@@ -46,7 +69,7 @@ class TestsLevel14(HedyTester):
           name = float(name)
         except ValueError:
           pass
-      if str(name).zfill(100)!='Hedy'.zfill(100):
+      if convert_numerals('Latin', name).zfill(100)!='Hedy'.zfill(100):
         print(f'''meh''')""")
 
     self.multi_level_tester(
@@ -71,7 +94,7 @@ class TestsLevel14(HedyTester):
           v6cdeb9dc4e33aa47ac927755899137f2 = float(v6cdeb9dc4e33aa47ac927755899137f2)
         except ValueError:
           pass
-      if str(v6cdeb9dc4e33aa47ac927755899137f2).zfill(100)>str(12).zfill(100):
+      if convert_numerals('Latin', v6cdeb9dc4e33aa47ac927755899137f2).zfill(100)>convert_numerals('Latin', 12).zfill(100):
         print(f'''आप मुझसे छोटे हैं!''')
       else:
         print(f'''आप मुझसे बड़े हैं!''')""")
@@ -99,7 +122,7 @@ class TestsLevel14(HedyTester):
           name = float(name)
         except ValueError:
           pass
-      if str(name) == str('Hedy'):
+      if convert_numerals('Latin', name) == convert_numerals('Latin', 'Hedy'):
         print(f'''meh''')""")
 
     self.multi_level_tester(
@@ -125,7 +148,7 @@ class TestsLevel14(HedyTester):
           leeftijd = float(leeftijd)
         except ValueError:
           pass
-      if str(leeftijd).zfill(100){comparison}str(12).zfill(100):
+      if convert_numerals('Latin', leeftijd).zfill(100){comparison}convert_numerals('Latin', 12).zfill(100):
         print(f'''Dan ben je jonger dan ik!''')
       else:
         print(f'''Dan ben je ouder dan ik!''')""")
@@ -151,7 +174,7 @@ class TestsLevel14(HedyTester):
         leeftijd = float(leeftijd)
       except ValueError:
         pass
-    if str(leeftijd).zfill(100){comparison}str(12).zfill(100):
+    if convert_numerals('Latin', leeftijd).zfill(100){comparison}convert_numerals('Latin', 12).zfill(100):
       print(f'''Dan ben je jonger dan ik!''')""")
 
     self.multi_level_tester(
@@ -197,7 +220,7 @@ class TestsLevel14(HedyTester):
     expected = textwrap.dedent(f"""\
       a = 1
       b = 1.2
-      if str(a).zfill(100)!=str(b).zfill(100):
+      if convert_numerals('Latin', a).zfill(100)!=convert_numerals('Latin', b).zfill(100):
         b = 1""")
 
     self.multi_level_tester(
@@ -222,7 +245,7 @@ class TestsLevel14(HedyTester):
     expected = textwrap.dedent(f"""\
       a = {exp}
       b = {exp}
-      if str(a).zfill(100)!=str(b).zfill(100):
+      if convert_numerals('Latin', a).zfill(100)!=convert_numerals('Latin', b).zfill(100):
         b = 1""")
 
     self.multi_level_tester(
@@ -239,7 +262,7 @@ class TestsLevel14(HedyTester):
 
     expected = textwrap.dedent("""\
     naam = 'Hedy'
-    if str(naam) == str('Hedy'):
+    if convert_numerals('Latin', naam) == convert_numerals('Latin', 'Hedy'):
       print(f'''koekoek''')""")
 
     self.multi_level_tester(
@@ -258,7 +281,7 @@ class TestsLevel14(HedyTester):
     expected = textwrap.dedent(f"""\
     a = [1, 2]
     b = [1, 2]
-    if str(a) == str(b):
+    if convert_numerals('Latin', a) == convert_numerals('Latin', b):
       time.sleep(1)""")
 
     self.multi_level_tester(
@@ -276,7 +299,7 @@ class TestsLevel14(HedyTester):
     expected = textwrap.dedent("""\
     a = [1, 2]
     b = [1, 2]
-    if str(a).zfill(100)!=str(b).zfill(100):
+    if convert_numerals('Latin', a).zfill(100)!=convert_numerals('Latin', b).zfill(100):
       time.sleep(1)""")
 
     self.multi_level_tester(
@@ -302,9 +325,9 @@ class TestsLevel14(HedyTester):
           leeftijd = float(leeftijd)
         except ValueError:
           pass
-      if str(leeftijd).zfill(100){comparison}str(12).zfill(100) or str(leeftijd).zfill(100){comparison}str(15).zfill(100):
+      if convert_numerals('Latin', leeftijd).zfill(100){comparison}convert_numerals('Latin', 12).zfill(100) or convert_numerals('Latin', leeftijd).zfill(100){comparison}convert_numerals('Latin', 15).zfill(100):
         print(f'''Dan ben je jonger dan ik!''')
-      if str(leeftijd).zfill(100){comparison}str(12).zfill(100) and str(leeftijd).zfill(100){comparison}str(15).zfill(100):
+      if convert_numerals('Latin', leeftijd).zfill(100){comparison}convert_numerals('Latin', 12).zfill(100) and convert_numerals('Latin', leeftijd).zfill(100){comparison}convert_numerals('Latin', 15).zfill(100):
         print(f'''Some other string!''')""")
 
     self.multi_level_tester(

@@ -31,8 +31,8 @@ class TestsLevel9(HedyTester):
         expected = textwrap.dedent("""\
         n = '1'
         m = '2'
-        if str(n) == str('1'):
-          if str(m) == str('2'):
+        if convert_numerals('Latin', n) == convert_numerals('Latin', '1'):
+          if convert_numerals('Latin', m) == convert_numerals('Latin', '2'):
             print(f'great!')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
@@ -51,11 +51,11 @@ class TestsLevel9(HedyTester):
         expected = textwrap.dedent("""\
         n = '1'
         m = '2'
-        if str(n) == str('1'):
-          if str(m) == str('2'):
+        if convert_numerals('Latin', n) == convert_numerals('Latin', '1'):
+          if convert_numerals('Latin', m) == convert_numerals('Latin', '2'):
             print(f'great!')
         else:
-          if str(m) == str('3'):
+          if convert_numerals('Latin', m) == convert_numerals('Latin', '3'):
             print(f'awesome')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
@@ -73,8 +73,8 @@ class TestsLevel9(HedyTester):
         expected = textwrap.dedent("""\
         n = '1'
         m = '2'
-        if str(n) == str('1'):
-          if str(m) == str('2'):
+        if convert_numerals('Latin', n) == convert_numerals('Latin', '1'):
+          if convert_numerals('Latin', m) == convert_numerals('Latin', '2'):
             print(f'great!')
           else:
             print(f'awesome')""")
@@ -99,13 +99,13 @@ class TestsLevel9(HedyTester):
         expected = textwrap.dedent("""\
          n = '1'
          m = '2'
-         if str(n) == str('1'):
-           if str(m) == str('2'):
+         if convert_numerals('Latin', n) == convert_numerals('Latin', '1'):
+           if convert_numerals('Latin', m) == convert_numerals('Latin', '2'):
              print(f'great!')
            else:
              print(f'nice!')
          else:
-           if str(m) == str('3'):
+           if convert_numerals('Latin', m) == convert_numerals('Latin', '3'):
              print(f'awesome!')
            else:
              print(f'amazing!')""")
@@ -145,7 +145,7 @@ class TestsLevel9(HedyTester):
         prijs = '0'
         for i in range(int('7')):
           ingredient = input(f'wat wil je kopen?')
-          if str(ingredient) == str('appel'):
+          if convert_numerals('Latin', ingredient) == convert_numerals('Latin', 'appel'):
             prijs = int(prijs) + int(1)
           time.sleep(0.1)
         print(f'Dat is in totaal {prijs} euro.')""")
@@ -165,7 +165,7 @@ class TestsLevel9(HedyTester):
         prijs = '0'
         for i in range(int('7')):
           ingredient = input(f'wat wil je kopen?')
-          if str(ingredient) == str('appel'):
+          if convert_numerals('Latin', ingredient) == convert_numerals('Latin', 'appel'):
             prijs = int(prijs) + int(1)
           time.sleep(0.1)
         print(f'Dat is in totaal {prijs} euro.')""")
@@ -181,7 +181,7 @@ class TestsLevel9(HedyTester):
 
         expected = textwrap.dedent("""\
         kleur = 'groen'
-        if str(kleur) == str('groen'):
+        if convert_numerals('Latin', kleur) == convert_numerals('Latin', 'groen'):
           for i in range(int('3')):
             print(f'mooi')
             time.sleep(0.1)""")
@@ -202,7 +202,7 @@ class TestsLevel9(HedyTester):
 
         expected = textwrap.dedent("""\
         for i in range(int('5')):
-          if str('antwoord2') == str('10'):
+          if convert_numerals('Latin', 'antwoord2') == convert_numerals('Latin', '10'):
             print(f'Goedzo')
           else:
             print(f'lalala')
