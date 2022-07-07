@@ -6,22 +6,22 @@
         <form id="signup" onsubmit="event.preventDefault (); hedyApp.auth.submit ('signup')" class="flex flex-col items-center gap-2">
             <h2 class="py-0 my-0">{{_('create_account')}}</h2>
             <h4 class="text-blue-500 py-0 my-0">{{_('create_account_explanation')}}</h4>
-            <div class="flex flex-col w-full px-16">
-                <div class="flex flex-row items-center mx-auto w-full my-1 border-b pb-2 border-gray-400">
-                    <label class="inline-block w-1/2" for="username">{{_('username')}}</label><input class="inline-block w-1/2 px-2 py-1 rounded-lg" minlength="3" id="username" name="username" required>
-                </div>
-                <div class="flex flex-row items-center mx-auto w-full my-1 border-b pb-2 border-gray-400">
-                    <label class="inline-block w-1/2" for="email">{{_('email')}}</label><input class="inline-block w-1/2 px-2 py-1 rounded-lg" id="email" name="email" type="email" required>
-                </div>
-                <div class="flex flex-row items-center mx-auto w-full my-1 border-b pb-2 border-gray-400">
-                    <label class="inline-block w-1/2" for="mail_repeat">{{_('email_repeat')}}</label><input class="inline-block w-1/2 px-2 py-1 rounded-lg" id="mail_repeat" name="mail_repeat" type="email" autocomplete="off" required>
-                </div>
-                <div class="flex flex-row items-center mx-auto w-full my-1 border-b pb-2 border-gray-400">
-                    <label class="inline-block w-1/2" for="password">{{_('password')}}</label><input class="inline-block w-1/2 px-2 py-1 rounded-lg" minlength="6" id="password" name="password" type=password required>
-                </div>
-                <div class="flex flex-row items-center mx-auto w-full my-1 border-b pb-2 border-gray-400">
-                    <label class="inline-block w-1/2" for="password_repeat">{{_('password_repeat')}}</label><input class="inline-block w-1/2 px-2 py-1 rounded-lg" minlength="6" id="password_repeat" name="password_repeat" type=password required>
-                </div>
+            <div class="w-full flex px-8 flex-row items-center justify-center">
+                <label class="inline-block w-40" for="username">{{_('username')}}</label>
+                <input class="inline-block w-80 px-2 py-1 rounded-lg border-gray-400" minlength="3" id="username" name="username" required>
+            </div>
+            <div class="w-full flex px-8 flex-row items-center justify-center">
+                <label class="inline-block w-40" for="email">{{_('email')}}</label>
+                <input class="inline-block w-80 px-2 py-1 rounded-lg border-gray-400" id="email" name="email" type="email" required>
+            </div>
+            <div class="flex flex-row items-center mx-auto w-full my-1 border-b pb-2 border-gray-400">
+                <label class="inline-block w-1/2" for="password">{{_('password')}}</label>
+                <input class="inline-block w-1/2 px-2 py-1 rounded-lg" minlength="6" id="password" name="password" type=password required>
+            </div>
+            <div class="flex flex-row items-center mx-auto w-full my-1 border-b pb-2 border-gray-400">
+                <label class="inline-block w-1/2" for="password_repeat">{{_('password_repeat')}}</label>
+                <input class="inline-block w-1/2 px-2 py-1 rounded-lg" minlength="6" id="password_repeat" name="password_repeat" type=password required>
+            </div>
                 <div class="flex flex-row items-center mx-auto w-full my-1 border-b pb-2 border-gray-400">
                     <label class="inline-block w-1/2" for="language">{{_('preferred_language')}}</label><select class="block appearance-none w-1/2 text-gray-700 px-4 py-1 rounded-lg" id="language" name="language" required>
                         <option value="" selected disabled hidden>{{_('select')}}</option>
@@ -95,7 +95,6 @@
                       <label class="inline-block w-1/2" for="subscribe">{{_('subscribe_newsletter')}}</label><input class="inline-block ltr:ml-0 rtl:mr-0" type="checkbox" id="subscribe" name="subscribe">
                     </div>
                 </div>
-            </div>
             <div class="flex flex-row items-center w-full px-16">
                 <input type="checkbox" class="ltr:mr-4 rtl:ml-4" id="agree_terms" name="agree_terms" required><label class="inline-block" for="agree_terms">{{_('agree_with')}} <a href="/privacy" target="_blank">{{_('privacy_terms')}}</a></label>
             </div>
