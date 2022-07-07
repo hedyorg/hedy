@@ -75,7 +75,7 @@
                   </li>
               </ul>
             </div>
-            <div class="border border-gray-400 rounded-lg mx-2 md:mx-4 px-4 md:px-8 lg:px-16 flex flex-row items-center justify-between gap-2 py-2" id="languages">
+            <div class="border border-gray-400 rounded-lg mx-4 px-4 md:px-8 flex flex-row items-center justify-between gap-2 py-2" style="display: none;" id="languages">
                 <!-- For some reason the Tailwind 'hidden' class messes up the layout, therefore we "brute"-style it within the element -->
               <label class="signup-label" for="languages">{{_('languages')}}</label>
                 <ul class="mt-0">
@@ -106,7 +106,7 @@
               </ul>
             </div>
             <!-- The extra check options -->
-            <div class="border border-gray-400 rounded-lg mx-2 md:mx-4 px-4 md:px-8 lg:px-16 flex flex-col gap-2 py-2">
+            <div class="border border-gray-400 rounded-lg mx-4 px-4 md:px-8 flex flex-col gap-1 py-2">
                 <div class="flex flex-row justify-between items-center">
                     <label for="is_teacher">{{_('request_teacher')}}</label>
                     <input type="checkbox" id="is_teacher" name="is_teacher">
@@ -119,7 +119,10 @@
                     <label for="agree_terms">{{_('agree_with')}} <a href="/privacy" target="_blank">{{_('privacy_terms')}}</a></label>
                     <input type="checkbox" id="agree_terms" name="agree_terms" required>
                 </div>
-
+            </div>
+            <div class="flex flex-row items-center justify-center px-4 md:px-8 gap-4">
+                <input type="checkbox" id="agree_third_party" name="agree_third_party">
+                <label class="w-96 text-center" for="agree_third_party">{{_('agree_third_party')}}</label>
             </div>
             <div class="flex">
                 <button type="submit" class="green-btn mx-auto">{{_('create_account')}}</button>
