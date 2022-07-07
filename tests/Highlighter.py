@@ -54,7 +54,7 @@ ABBREVIATION = {
 
 class HighlightTester(unittest.TestCase):
 
-    def assert_highlighted_chr(self, code, expected, level, lang="en"):
+    def assert_highlighted_chr(self, code, expected, level, lang="en", start_token="start", last_state="start"):
         """Test if the code has the expected coloring on one line
 
         Arguments :
@@ -62,12 +62,16 @@ class HighlightTester(unittest.TestCase):
             - expected : str, Ex: "KKKKK TTTTTTTTTTTTTTTT"
             - level : str, between "level1" and "level18"
             - lang : str, code of language
+            - start_token : str, token for beginning of the highlighting
+            - last_token : str, token for the end of the highlighting
+                                if last_token == None, ignore the end state test
         """
         state_machine = self.get_state_machine(level, lang)
-        self.check(code, expected, state_machine)
+        self.check(code, expected, state_machine, start_token, last_state)
+        self.checkInter(code, expected, state_machine, start_token)
 
 
-    def assert_highlighted_chr_multi_line(self, *args, level, lang="en"):
+    def assert_highlighted_chr_multi_line(self, *args, level, lang="en", start_token="start", last_state="start"):
         """Test if the code has the expected coloring on several lines
 
         Arguments :
@@ -78,6 +82,9 @@ class HighlightTester(unittest.TestCase):
                 "KK TTTT KK TTTT KKKKK SSSSSS KKKK KKKKK SSSSSS",
             - level : str, between "level1" and "level18"
             - lang : str, code of language
+            - start_token : str, token for beginning of the highlighting
+            - last_token : str, token for the end of the highlighting
+                                if last_token == None, ignore the end state test
         """
         if len(args)%2 != 0:
             raise RuntimeError(f'Pass an even number of strings to assert_highlighted_chr_multi_line (alternatingly code and highlighting). Got: {args}')
@@ -85,36 +92,59 @@ class HighlightTester(unittest.TestCase):
         code = '\n'.join(line for i, line in enumerate(args) if i%2 == 0)
         expected = '\n'.join(line for i, line in enumerate(args) if i%2 != 0)
 
-        self.assert_highlighted_chr(code, expected, level, lang)
+        self.assert_highlighted_chr(code, expected, level, lang, start_token, last_state)
 
 
-    def assert_highlighted(self, code_coloration, level, lang="en"):
+    def assert_highlighted(self, code_coloration, level, lang="en", start_token="start", last_state="start"):
         """Test if the code has the expected coloring on one line
 
         Arguments :
             - code_coloration : str, Ex: "{print|kw} {Welcome to Hedy!|txt}"
             - level : str, between "level1" and "level18"
             - lang : str, code of language
+            - start_token : str, token for beginning of the highlighting
+            - last_token : str, token for the end of the highlighting
+                                if last_token == None, ignore the end state test
         """
         code, expected = self.convert(code_coloration)
-        self.assert_highlighted_chr(code, expected, level, lang)
+        self.assert_highlighted_chr(code, expected, level, lang, start_token, last_state)
 
 
-    def assert_highlighted_multi_line(self, *args, level, lang="en"):
+    def assert_highlighted_multi_line(self, *args, level, lang="en", start_token="start", last_state="start"):
         """Test if the code has the expected coloring on several lines
 
         Arguments :
             - *args : list of str, Ex: "{print|kw} {Welcome to Hedy!|txt}"
             - level : str, between "level1" and "level18"
             - lang : str, code of language
+            - start_token : str, token for beginning of the highlighting
+            - last_token : str, token for the end of the highlighting
+                                if last_token == None, ignore the end state test
         """
         code_coloration = "\n".join(args)
         code, expected = self.convert(code_coloration)
-        self.assert_highlighted_chr(code, expected, level, lang)
+        self.assert_highlighted_chr(code, expected, level, lang, start_token, last_state)
 
+    def checkInter(self, code, expected, state_machine, start_token="start"):
+        """Check the highlighting on the intermediate states
 
+        check intermediate tests, word by word, to make
+        sure that the highlighting when typing the code will be consistent.
 
-    def check(self, code, expected, state_machine):
+        Arguments :
+            - code : str, The code you want to color
+            - expected : str, The expected coloring, character by character,
+                with the code described here TOKEN_CODE
+            - state_machine : a state_machine
+            - start_token : str, token for beginning of the highlighting
+        """
+
+        listCode, listExpected = genInterTest(code, expected)
+
+        for n in range(len(listCode)):
+            self.check(listCode[n], listExpected[n], state_machine, start_token, None)
+
+    def check(self, code, expected, state_machine, start_token="start", last_state='start'):
         """Apply state_machine on code and check if the result is valid
 
         Arguments :
@@ -122,12 +152,15 @@ class HighlightTester(unittest.TestCase):
             - expected : str, The expected coloring, character by character,
                 with the code described here TOKEN_CODE
             - state_machine : a state_machine
+            - start_token : str, token for beginning of the highlighting
+            - last_token : str, token for the end of the highlighting
+                                if last_token == None, ignore the end state test
 
         Computes the syntax highlighting of the code from the state_machine,
         and compares with the expected highlighting.
         """
         simulator = SimulatorAce(state_machine)
-        result = simulator.highlight(code)
+        result, last_state_result = simulator.highlight(code, start_token)
 
         result = list(result)
         expected = list(expected)
@@ -148,6 +181,9 @@ class HighlightTester(unittest.TestCase):
         # test between two coloration
         self.assertEqual(result ,expected)
 
+        # test for last state
+        if last_state != None:
+            self.assertEqual(last_state, last_state_result)
 
 
     def get_state_machine(self, level, lang="en"):
@@ -246,7 +282,30 @@ class HighlightTester(unittest.TestCase):
 
 
 
+def genInterTest(code, expected):
+    """generates intermediate tests, word by word,
+    to check that the highlighting when
+    typing the code will be consistent."""
+    C, E = [],[]
+    codes = [k.split(' ') for k in code.split("\n")]
 
+
+    currentCode = []
+
+    for nbLine in range(len(codes)):
+        currentLine = []
+
+        for nbMot in range(len(codes[nbLine])):
+            currentLine.append(codes[nbLine][nbMot])
+
+            # add 
+            current = "\n".join([" ".join(k) for k in currentCode + [currentLine]])
+            C.append(current)
+            E.append(expected[:len(current)])
+
+        currentCode.append(currentLine)
+
+    return C, E
 
 class SimulatorAce:
 
@@ -299,21 +358,23 @@ class SimulatorAce:
                             raise ValueError(f"The number of groups in the regex is different from the number of tokens. In this rule : {rule}!")
 
 
-    def highlight(self, code):
+    def highlight(self, code, start_token="start"):
         """Simulates the application of syntax highlighting state_machine on a code.
 
         Arguments:
             - code (string): code on which syntax highlighting will be applied.
+            - start_token (string) : first token for the beginning of the line
 
         Returns :
             - string, a character by character coloring, according to the coloring code specified in TOKEN_CODE
+            - string, final token for the code
         """
         outputs = []
-        token = "start"
+        token = start_token
         for line in code.split("\n"):
             output, token = self.highlight_rules_line(line, token)
             outputs.append(output)
-        return "\n".join(outputs)
+        return "\n".join(outputs), token
 
 
     def highlight_rules_line(self, code, start_token="start"):
@@ -325,6 +386,7 @@ class SimulatorAce:
 
         Returns :
             - string, a character by character coloring, according to the coloring code specified in TOKEN_CODE
+            - string : token for the next line
         """
 
         # Initialisation output

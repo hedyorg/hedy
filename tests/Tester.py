@@ -7,6 +7,7 @@ from contextlib import contextmanager
 import inspect
 import unittest
 import utils
+from hedy_content import ALL_KEYWORD_LANGUAGES, KEYWORDS
 
 
 class Snippet:
@@ -228,3 +229,32 @@ class HedyTester(unittest.TestCase):
   def dedent(*args):
     return '\n'.join([textwrap.indent(textwrap.dedent(a[0]), a[1]) if type(a) is tuple else textwrap.dedent(a)
                       for a in args])
+
+  @staticmethod
+  def translate_keywords_in_snippets(snippets):
+    # fill keyword dict for all keyword languages
+    keyword_dict = {}
+    for lang in ALL_KEYWORD_LANGUAGES:
+      keyword_dict[lang] = KEYWORDS.get(lang)
+      for k, v in keyword_dict[lang].items():
+        if type(v) == str and "|" in v:
+          # when we have several options, pick the first one as default
+          keyword_dict[lang][k] = v.split('|')[0]
+    english_keywords = KEYWORDS.get("en")
+
+    # We replace the code snippet placeholders with actual keywords to the code is valid: {print} -> print
+    for snippet in snippets:
+      try:
+        if snippet[1].language in ALL_KEYWORD_LANGUAGES.keys():
+          snippet[1].code = snippet[1].code.format(**keyword_dict[snippet[1].language])
+        else:
+          snippet[1].code = snippet[1].code.format(**english_keywords)
+      except KeyError:
+        print("This following snippet contains an invalid placeholder...")
+        print(snippet)
+      except ValueError:
+        print("This following snippet contains an unclosed invalid placeholder...")
+        print(snippet)
+
+
+    return snippets

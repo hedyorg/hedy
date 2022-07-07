@@ -59,15 +59,11 @@ def convert_numerals(alphabet, number):
   numerals_list = numerals_dict_return[alphabet]
   number=str(number)
 
+  number = str(number)
   if number.isnumeric():
-    number = int(number)
     numerals_list = numerals_dict_return[alphabet]
-    if number <= 9:
-      return numerals_list[number]
-    else:
-      last_digit = number // 10
-      rest = number % 10
-      return numerals_list[last_digit] + convert_numerals(alphabet, rest)
+    all_numerals_converted = [numerals_list[int(digit)] for digit in number]
+    return ''.join(all_numerals_converted)
   else:
     return number
 `;
@@ -82,7 +78,7 @@ def convert_numerals(alphabet, number):
 
 
   // Set const value to determine the current page direction -> useful for ace editor settings
-  const dir = $("#main_container").attr("dir");
+  const dir = $("body").attr("dir");
 
   // *** EDITOR SETUP ***
   initializeMainEditor($('#editor'));
@@ -99,7 +95,7 @@ def convert_numerals(alphabet, number):
     // Fits to content size
     exampleEditor.setOptions({ maxLines: Infinity });
     if ($(preview).hasClass('common-mistakes')) {
-      exampleEditor.setOptions({ minLines: 10 });
+      exampleEditor.setOptions({ minLines: 5 });
     } else if ($(preview).hasClass('cheatsheet')) {
       exampleEditor.setOptions({ minLines: 1 });
     } else if ($(preview).hasClass('parsons')) {
@@ -324,6 +320,7 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
   Sk.execLimit = 1;
   $('#runit').hide();
   $('#stopit').show();
+  $('#saveDST').hide();
 
   const outputDiv = $('#output');
   //Saving the variable button because sk will overwrite the output div
@@ -348,6 +345,11 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
         clearErrors(editor);
         stopit();
         return;
+      } else {
+        // Add the onclick on the button -> only show if there is another exercise to load (set with an onclick)
+        if ($('#next_parson_button').attr('onclick')) {
+          $('#next_parson_button').show();
+        }
       }
     } else {
       code = get_trimmed_code();
@@ -410,6 +412,25 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
   } catch (e: any) {
     modal.alert(e.responseText, 3000, true);
   }
+}
+
+export function saveDST() {
+  $.ajax({
+    type: 'POST',
+    url: '/generate_dst',
+    data: JSON.stringify({
+      level: window.State.level,
+      code: get_trimmed_code(),
+      lang: window.State.lang,
+    }),
+    contentType: 'application/json',
+    dataType: 'json'
+    }).done(function(response: any) {
+      if (response.filename) {
+        // Download the file
+        window.location.replace('/download_dst/' + response.filename);
+      }
+  });
 }
 
 function storeFixedCode(response: any, level: string) {
@@ -705,12 +726,10 @@ export function share_program(id: string, index: number, Public: boolean) {
       if (response.achievement) {
         showAchievements(response.achievement, false, "");
       }
+      modal.alert (response.message, 3000, false);
       if (Public) {
-        $('#modal-copy-button').attr('onclick', "hedyApp.copy_to_clipboard('" + viewProgramLink(id) + "')");
-        modal.copy_alert (response.message, 5000);
         change_shared(true, index);
       } else {
-        modal.alert (response.message, 3000, false);
         change_shared(false, index);
       }
     }).fail(function(err) {
@@ -888,7 +907,9 @@ window.onerror = function reportClientException(message, source, line_number, co
 }
 
 function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep: boolean, hasWarnings: boolean, cb: () => void) {
-  const outputDiv = $('#output');
+  // If we are in the Parsons problem -> use a different output
+  let outputDiv = $('#output');
+
   //Saving the variable button because sk will overwrite the output div
   const variableButton = $(outputDiv).find('#variable_button');
   const variables = $(outputDiv).find('#variables');
@@ -922,7 +943,7 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
   } else {
     // Otherwise make sure that it is shown as it might be hidden from a previous code execution.
     $('#turtlecanvas').show();
-    code = turtle_prefix + code
+    code = normal_prefix + turtle_prefix + code
   }
 
   Sk.configure({
@@ -969,6 +990,9 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     load_variables(pythonVariables);
     $('#stopit').hide();
     $('#runit').show();
+    if (hasTurtle) {
+      $('#saveDST').show();
+    }
 
     // Check if the program was correct but the output window is empty: Return a warning
     if (window.State.programsInExecution === 1 && $('#output').is(':empty') && $('#turtlecanvas').is(':empty')) {
@@ -1265,6 +1289,7 @@ function store_parsons_attempt(order: Array<string>, correct: boolean) {
     url: '/store_parsons_order',
     data: JSON.stringify({
       level: window.State.level,
+      exercise: $('#next_parson_button').attr('current_exercise'),
       order: order,
       correct: correct
     }),
@@ -1277,6 +1302,8 @@ function store_parsons_attempt(order: Array<string>, correct: boolean) {
     });
 }
 
+
+// Todo: As the parsons functionality will rapidly increase, we should probably all store this in a dedicated file (?)
 function get_parsons_code() {
     let code = "";
     let count = 65;
@@ -1284,21 +1311,25 @@ function get_parsons_code() {
     let mistake = false;
 
     $('.compiler-parsons-box').each(function() {
-      // When the value is 0 there is no code box in the expected spot
-      let text = $(this).attr('code') || "";
-      if (text.length > 1) {
-        code += text;
+      // We are only interested in the visible code lines
+      if ($(this).parent().is(':visible')) {
+        // When the value is 0 there is no code box in the expected spot
+        let text = $(this).attr('code') || "";
+        if (text.length > 1) {
+          // Also add a newline as we removed this from the YAML structure
+          code += text + "\n";
+        }
+        $(this).parents().removeClass('border-black');
+        let index = $(this).attr('index') || "-";
+        if (index.charCodeAt(0) == count) {
+          $(this).parents().addClass('border-green-500');
+        } else {
+          mistake = true;
+          $(this).parents().addClass('border-red-500');
+        }
+        order.push(index);
+        count += 1;
       }
-      $(this).parents().removeClass('border-black');
-      let index = $(this).attr('index') || "-";
-      if (index.charCodeAt(0) == count) {
-        $(this).parents().addClass('border-green-500');
-      } else {
-        mistake = true;
-        $(this).parents().addClass('border-red-500');
-      }
-      order.push(index);
-      count += 1;
     });
     // Before returning the code we want to a-sync store the attempt in the database
     // We only have to set the order and level, rest is handled by the back-end
@@ -1882,5 +1913,3 @@ function addDebugClass(str: Element) {
 function removeDebugClass(str: Element) {
   return str.innerHTML.replace('<div class="debugLine">', '').replace('</div>', '');
 }
-
-

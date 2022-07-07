@@ -1400,10 +1400,6 @@ levels:
             question_score: '10'
         2:
             question_text: "Quelle sera la sortie de ce code ?"
-            code: |-
-                plats = pizza, crêpe, glace
-                for plat in plats
-                    print 'je voudrais une ' plat
             mp_choice_options:
             -   option: "je voudrais une pizza"
                 feedback: "La ligne 2 dit pour 'chaque plat dans la liste des plats' ."
@@ -1419,12 +1415,9 @@ levels:
             correct_answer: "D"
             hint: "La ligne 2 dit pour 'chaque plat dans la liste des plats' ."
             question_score: '10'
+            output: "1\n2\n3\n4\n5\nOnce I caught a fish alive!"
         3:
             question_text: "Quelle sortie est correcte ?"
-            code: |-
-                animaux = chiens, chats, hamsters
-                for animal in animaux
-                    print 'Les ' animal ' sont mignons'
             mp_choice_options:
             -   option: "chiens sont mignons"
                 feedback: "La ligne 2 dit pour 'chaque animal dans la liste des animaux' ."
@@ -1440,6 +1433,7 @@ levels:
             correct_answer: "C"
             hint: "La ligne 2 dit pour 'chaque animal dans la liste des animaux' ."
             question_score: '10'
+            output: "10\n9\n8\n7\n6\n5\n4\n3\n2\n1\n0"
         4:
             question_text: "Où est le problème avec ce code ?"
             code: |-
@@ -1564,11 +1558,6 @@ levels:
             question_score: '10'
         10:
             question_text: "Quelle est la phrase vraie ?"
-            code: |-
-                lots = 1000€, voiture, sandwich
-                noms = Léa, Louisa, Margaux, Marie, Maelle, Maiwen
-                for lot in lots
-                    print 'Le ' lot ' est gagné par ' noms at random
             mp_choice_options:
             -   option: "Tout le monde gagnera toujours un lot."
                 feedback: "Ce n'est pas vrai, tu pourrais te retrouver sans lot."
@@ -1581,6 +1570,7 @@ levels:
             correct_answer: "D"
             hint: "Essayez d'imaginer la sortie de ce code."
             question_score: '10'
+            output: "Baby shark tututudutudu\nBaby shark tututudutudu\nBaby shark tututudutudu\nBaby shark"
     8:
         5:
             mp_choice_options:
@@ -1609,9 +1599,9 @@ levels:
                 feedback: Awesome!
             question_score: '10'
             question_text: Which code was used to create this output?
-            code: "Welcome to restaurant Hedy\nPizza\nHamburger"
             correct_answer: D
             hint: Pay attention to what sould be repeated and what should only be printed once.
+            output: "Welcome to restaurant Hedy\nPizza\nHamburger"
         9:
             code: "1 music = {ask} 'What is your favorite music genre?'\n2 {if} music is rock\n3 {print} '\U0001F918'\n4 {else}\n5 {print} '\U0001F44E'"
             mp_choice_options:
@@ -1791,6 +1781,7 @@ levels:
             hint: You can put an `{if}` command inside an `{if}` command.
             question_text: How many `{if}` commands can be placed inside another `{if}` command?
             question_score: '10'
+            code: '# No code provided'
         10:
             mp_choice_options:
             -   option: All lines should start with 4 spaces
@@ -1847,10 +1838,10 @@ levels:
             -   option: "```\n{repeat} 3 {times}\n    desert = {ask} 'What is your favorite type of desert?'\n    {if} desert {is} icecream\n        {repeat} 3 {times}\n        {print} 'Icecream is the best!'\n```\n"
                 feedback: There are 2 `{repeat}` commands in this code.
             question_text: Which code produced this output?
-            code: "Icecream is the best!\nIcecream is the best!\nIcecream is the best!"
             correct_answer: C
             hint: Watch the indentation
             question_score: '10'
+            output: "Icecream is the best!\nIcecream is the best!\nIcecream is the best!"
         6:
             question_text: After which command(s) should you use indentation (starting the next line with 4 spaces)?
             mp_choice_options:

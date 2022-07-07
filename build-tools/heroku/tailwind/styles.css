@@ -160,25 +160,30 @@ code {
 }
 
 .menubar-btn {
-  @apply text-white no-underline font-slab font-semibold border-b-4 tracking-wide text-xl py-3 ltr:mr-4 rtl:ml-4;
+  @apply block text-white text-base lg:text-xl no-underline font-slab font-semibold border-b-4 border-blue-500 tracking-wide py-3 px-2 lg:px-4;
 }
 
-@screen lg {
-  .menubar-btn {
-    @apply px-2;
-  }
+.menubar-btn:hover {
+  @apply bg-blue-600 border-blue-600;
 }
-@screen xl {
-  .menubar-btn {
-    @apply px-4;
-  }
+
+.menubar-btn.active {
+  @apply border-white !important;
+}
+
+.dropdown-btn {
+  @apply block flex flex-row items-center gap-2 text-white no-underline font-slab tracking-wide text-lg py-2 px-2;
+}
+
+.dropdown-btn:hover {
+  @apply bg-blue-600;
 }
 
 .codebar-btn {
   @apply text-black no-underline border-white tracking-wide font-normal px-4 py-3 ltr:mr-4 rtl:ml-4;
 }
 
-#output {
+#output, #quiz_question_output_container {
   font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
 }
 
@@ -206,12 +211,10 @@ code {
 
 ul {
     list-style: disc outside none;
-    @apply ltr:ml-8 rtl:mr-8;
 }
 
 ol {
     list-style: decimal outside none;
-    @apply ltr:ml-8 rtl:mr-8;
 }
 
 /* AUTH */
@@ -265,7 +268,7 @@ body[dir='rtl'] .right-hand-shadow {
   @apply border-green-300;
 }
 
-.parsons_tab {
+.special_tab {
   @apply border-blue-300;
 }
 
@@ -403,7 +406,29 @@ p.close-dialog {
 
 /* Programs */
 .explore-program-box {
-  @apply w-64 h-64 rounded-lg border border-gray-700 m-4 relative bg-blue-200;
+  @apply w-64 h-64 rounded-lg border border-gray-700 relative bg-blue-200;
+}
+
+.explore-program-box-title {
+  @apply text-white text-center ltr:-ml-2 rtl:-mr-2 -mt-8 pt-10 ltr:pl-12 rtl:pr-12 ltr:rotate-6 rtl:-rotate-6 w-72;
+}
+
+/* Profile page */
+
+.section-header {
+  @apply bg-blue-200 px-8 py-2 rounded-lg text-3xl cursor-pointer;
+}
+
+.profile-section-body-header {
+  @apply mb-4 pb-2 border-b inline-block w-full;
+}
+
+.profile-section-body {
+  @apply bg-white shadow-md rounded px-8 py-4 mx-auto w-full lg:w-3/4 hidden;
+}
+
+.personal-input {
+  @apply block appearance-none w-3/4 lg:w-1/2 text-gray-700 px-4 py-1 rounded-lg;
 }
 
 /* Developers mode toggle */
@@ -425,4 +450,46 @@ body[dir='ltr'] input:checked ~ .toggle-circle {
 
 input:checked ~ .toggle-path {
   @apply bg-gray-600;
+}
+
+/* Quiz styling */
+.option-block {
+  @apply w-full relative block align-top;
+}
+
+/* Not really nice, but we have to use the !important attribute to overwrite the current style */
+.incorrect-option {
+    background-color: rgba(234, 55, 55, 0.6) !important;
+    border: 5px #c21919 dashed!important;
+}
+
+/* Also not really nice, but with the relic quiz code still an improvement */
+.quiz-icons {
+  @apply h-14 w-14 relative;
+  top: -30px;
+  left: -10px;
+}
+
+/* Todo: There will be a moment where we want to re-write this to Tailwind as well */
+.submit-button {
+  display: none;
+  min-width: 80px;
+  min-height: 40px;
+  color: rgb(236, 236, 236);
+  background-color:#4299e1;
+  border-color: #1267a6;
+  position: absolute;
+  right: 10px;
+  bottom: -20px;
+  padding: 4px 10px;
+  border-radius: 0.25rem;
+  border-bottom-width: 4px;
+}
+
+.step {
+  @apply flex py-2 gap-1 w-full rounded-lg items-center justify-center;
+}
+
+.current {
+  @apply text-white bg-blue-600 !important;
 }

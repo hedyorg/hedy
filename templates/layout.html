@@ -5,7 +5,6 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&display=swap">
     <link rel="stylesheet" href="{{static('/css/generated.css')}}">
     <link rel="stylesheet" href="{{static('/css/additional.css')}}">
-  	<link rel="stylesheet" href="{{ static('/css/quiz-css.css') }}">
     <link rel="shortcut icon" type="image/png" href="{{static('/images/Hedy-logo.png')}}"/>
     <link rel="stylesheet" href="{{static('/vendor/gh-fork-ribbon.min.css')}}"/>
     <link rel="stylesheet" href="{{static('/fontawesome/css/all.min.css')}}"/>
@@ -74,7 +73,7 @@
     </div>
     <div class="lg:container mx-auto bg-gray-100 min-h-screen shadow-md flex flex-col">
       {% if menu != False %}
-      {% filter indent(width=6) %}{% include "incl-menubar.html" %}{% endfilter %}
+        {% include "incl-menubar.html" %}
       {% endif %}
       {# Can't reindent this as it may contain preformatted code blocks whose indentation is important. #}
       {% block body %}{% endblock %}
@@ -90,7 +89,7 @@
         </div>
         <div class="bg-blue-600 border-2 border-black rounded-lg px-8 pt-0 pb-4 text-center">
             <h3 class="text-white">{{_('achievement_earned')}}</h3>
-            <img id="achievement_reached_image" src="{{static('/images/achievement.png')}}" class="h-32 mx-auto">
+            <img id="achievement_reached_image" src="{{static('/images/achievement.png')}}" class="h-32 mx-auto" alt="{{_('achievements_logo_alt')}}">
             <h4 class="text-white italic" id="achievement_reached_title"></h4>
             <p id="achievement_reached_text"></p>
             <p id="achievement_reached_statics" class="text-white italic"></p>

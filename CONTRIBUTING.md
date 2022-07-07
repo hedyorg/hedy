@@ -126,13 +126,43 @@ When adding new Babel related translation the implementation is a bit more compl
 2. Next we run the following command to let Babel search for keys:
     * ```pybabel extract -F babel.cfg -o messages.pot .```
 3. We now have to add the found keys to all translation files, with the following command:
-    * ```pybabel update -i messages.pot -d translations```
+    * ```pybabel update -i messages.pot -d translations -N```
 4. All keys will be automatically stored in the /translations folder
 5. Search for the .po files for the languages you know and find the empty msgstr for your added key(s)
 6. Add your translations there, the other translation will hopefully be quickly picked up by other translators
 7. If you want to test it locally, run:
-    * ```pybabel compile -d translations```
+    * ```pybabel compile -f -d translations```
 8. This action will also always be run on deployment to make sure the translations are up-to-date
+
+## Solving common merge conflicts
+When working on an issue in a branch it might happen that the main branch is updated before your contribution is finished.
+If you create a Pull Request it is possible that GitHub returns _merge conflicts_: 
+you've worked on the same code as the updated part of main and GitHub in uncertain on which code to keep when merging.
+Always make sure that there are no merge conflicts when setting your PR to _Ready for Review_. 
+In this section we describe the most common merge conflicts and how to solve them:
+
+- Conflict with `generated.css`
+- Conflict with some (or all of the) `.po files`
+- Conflicts with 'appbundle.js' and `appbundle.js.map`
+
+#### Conflict with `generated.css`
+When having a merge conflict with the `generated.css` file this is probably the result of you working on CSS code and updating files with the Tailwind script.
+While working on this the file is updated on the `main` branch as well. In this case you can simply accept your own branch when a conflict occurs.
+If your PR still needs a review, make sure to run the Tailwind script again after the conflicts are solved.
+Don't worry if you make a mistake here, the files are always generated again on deploy. Making sure they are always up-to-date.
+
+#### Conflict with some (or all of the) `.po files`
+When having a merge conflict with (some of) the .po files this is probably the result of you working with the Babel translations.
+When adding a new translatable string all .po files are updated and the _Last revision_ header of each file is updated as well.
+As Weblate automatically updates these files as well it might happen that another branch already merge into main triggered Weblate, resulting in merge conflicts in your branch.
+These headers don't have influence on the functionality, but it is good practice to keep the main branch header when solving these conflicts.
+The po files are **not** generated on deploy, so we should be careful to correctly merge these.
+
+#### Conflict with `appbundle.js` and `appbundle.js.map`
+When having a merge conflict with the `appbundle` files this is probably the result of you working on TypeScript code and updating the files.
+While working on this the file is updated on the `main` branch as well. In this case you can simply accept your own branch when a conflict occurs.
+If your PR still needs a review, make sure to run the TypeScript script again after the conflicts are solved.
+Don't worry if you make a mistake here, the files are always generated again on deploy. Making sure they are always up-to-date.
 
 ## Using Docker
 

@@ -1,5 +1,7 @@
 # coding=utf-8
-from website import auth
+import copy
+
+from website import auth, parsons
 from website import statistics
 from website import quiz
 from website import admin
@@ -19,7 +21,7 @@ from flask_babel import gettext
 from flask_babel import Babel
 from flask_compress import Compress
 from flask_helpers import render_template
-from flask import Flask, request, jsonify, session, abort, g, redirect, Response, make_response, Markup
+from flask import Flask, request, jsonify, session, abort, g, redirect, Response, make_response, Markup, send_file, after_this_request
 from config import config
 from werkzeug.urls import url_encode
 from babel import Locale
@@ -31,6 +33,7 @@ import hedy
 import collections
 import datetime
 import sys
+import textwrap
 
 # Todo TB: This can introduce a possible app breaking bug when switching to Python 4 -> e.g. Python 4.0.1 is invalid
 if (sys.version_info.major < 3 or sys.version_info.minor < 7):
@@ -69,25 +72,9 @@ ACHIEVEMENTS_TRANSLATIONS = hedyweb.AchievementTranslations()
 ACHIEVEMENTS = achievements.Achievements()
 DATABASE = database.Database()
 
+# We retrieve these once on server-start: Would be nice to automate this somewhere in the future (06/22)
+PUBLIC_PROGRAMS = DATABASE.get_all_public_programs()
 
-def load_parsons_per_level(level):
-    all_parsons = []
-    parsons = PARSONS[g.lang].get_parsons(g.keyword_lang)
-    for short_name, parson in parsons.items():
-        if level not in parson['levels']:
-            continue
-        level_parson = parson['levels'].get(level)
-        current_parson = {
-            'short_name': short_name,
-            'name': parson['name'],
-            'text': level_parson['text'],
-            'example': level_parson['example'],
-            'story': level_parson['story'],
-            # We use this overly complex line to shuffle the dict items in one go
-            'code_lines': {i: level_parson['code_lines'][i] for i in list(set(level_parson['code_lines']))}
-        }
-        all_parsons.append(current_parson)
-    return all_parsons
 
 def load_adventures_per_level(level):
     loaded_programs = {}
@@ -364,7 +351,6 @@ def parse():
 
     try:
         with querylog.log_time('transpile'):
-
             try:
                 transpile_result = transpile_add_stats(code, level, lang)
                 if username and not body.get('tutorial'):
@@ -387,8 +373,9 @@ def parse():
                 exception = ex
         try:
             response['Code'] = transpile_result.code
-            response['has_turtle'] = transpile_result.has_turtle
-        except:
+            if transpile_result.has_turtle:
+                response['has_turtle'] = True
+        except Exception as E:
             pass
         try:
             response['has_sleep'] = 'sleep' in hedy.all_commands(code, level, lang)
@@ -465,6 +452,46 @@ def parse_tutorial(user):
         jsonify({'code': result.code}), 200
     except:
         return "error", 400
+
+@app.route("/generate_dst", methods=['POST'])
+def prepare_dst_file():
+    body = request.json
+    # Prepare the file -> return the "secret" filename as response
+    transpiled_code = hedy.transpile(body.get("code"), body.get("level"), body.get("lang"))
+    filename = utils.random_id_generator(12)
+
+    # We have to turn the turtle 90 degrees to align with the user perspective app.ts#16
+    # This is not a really nice solution, but as we store the prefix on the front-end it should be good for now
+    threader = textwrap.dedent("""
+        import time
+        from turtlethread import Turtle
+        t = Turtle()
+        t.left(90)
+        with t.running_stitch(stitch_length=20):
+        """)
+    lines = transpiled_code.code.split("\n")
+    threader += "  " + "\n  ".join(lines)
+    threader += "\n" + 't.save("dst_files/' + filename + '.dst")'
+    if not os.path.isdir('dst_files'):
+        os.makedirs('dst_files')
+    exec(threader)
+
+    return jsonify({'filename': filename}), 200
+
+
+# this is a route for testing purposes
+@app.route("/download_dst/<filename>", methods=['GET'])
+def download_dst_file(filename):
+    # https://stackoverflow.com/questions/24612366/delete-an-uploaded-file-after-downloading-it-from-flask
+    @after_this_request
+    def remove_file(response):
+        try:
+            os.remove("dst_files/" + filename + ".dst")
+        except:
+            print("Error removing the generated .dst file!")
+        return response
+    # Once the file is downloaded -> remove it
+    return send_file("dst_files/" + filename + ".dst", as_attachment=True)
 
 
 def transpile_add_stats(code, level, lang_):
@@ -619,8 +646,7 @@ def programs_page(user):
         if from_user not in students:
             return utils.error_page(error=403, ui_message=gettext('not_enrolled'))
 
-    adventures_names = hedy_content.Adventures(
-        session['lang']).get_adventure_names()
+    adventures_names = hedy_content.Adventures(session['lang']).get_adventure_names()
 
     # We request our own page -> also get the public_profile settings
     public_profile = None
@@ -633,8 +659,7 @@ def programs_page(user):
     adventure = None if adventure == "null" else adventure
 
     if level or adventure:
-        result = DATABASE.filtered_programs_for_user(
-            from_user or username, level, adventure)
+        result = DATABASE.filtered_programs_for_user(from_user or username, level, adventure)
     else:
         result = DATABASE.programs_for_user(from_user or username)
 
@@ -791,7 +816,6 @@ def index(level, program_id):
     if 'levels' in customizations and level not in available_levels:
         return utils.error_page(error=403, ui_message=gettext('level_not_class'))
 
-    parsons = load_parsons_per_level(level)
     commands = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
 
     teacher_adventures = []
@@ -808,10 +832,18 @@ def index(level, program_id):
     if 'other_settings' in customizations and 'hide_cheatsheet' in customizations['other_settings']:
         hide_cheatsheet = True
 
+    parsons = True if PARSONS[g.lang].get_parsons_data_for_level(level) else False
     quiz = True if QUIZZES[g.lang].get_quiz_data_for_level(level) else False
     quiz_questions = 0
+    parson_exercises = 0
+
     if quiz:
         quiz_questions = len(QUIZZES[g.lang].get_quiz_data_for_level(level))
+    if parsons:
+        parson_exercises = len(PARSONS[g.lang].get_parsons_data_for_level(level))
+
+    if 'other_settings' in customizations and 'hide_parsons' in customizations['other_settings']:
+        parsons = False
     if 'other_settings' in customizations and 'hide_quiz' in customizations['other_settings']:
         quiz = False
 
@@ -824,6 +856,7 @@ def index(level, program_id):
         quiz_questions=quiz_questions,
         adventures=adventures,
         parsons=parsons,
+        parsons_exercises=parson_exercises,
         customizations=customizations,
         hide_cheatsheet=hide_cheatsheet,
         enforce_developers_mode=enforce_developers_mode,
@@ -1089,10 +1122,21 @@ def explore():
 
     achievement = None
     if level or adventure or language:
-        programs = DATABASE.get_filtered_explore_programs(level, adventure, language)
+        programs = PUBLIC_PROGRAMS
+        if level:
+            programs = [x for x in programs if x.get('level') == int(level)]
+        if language:
+            programs = [x for x in programs if x.get('lang') == language]
+        if adventure:
+            # If the adventure we filter on is called 'default' -> return all programs WITHOUT an adventure
+            if adventure == "default":
+                programs = [x for x in programs if x.get('adventure_name') == ""]
+                return programs[-48:]
+            programs = [x for x in programs if x.get('adventure_name') == adventure]
+        programs = programs[-48:]
         achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "indiana_jones")
     else:
-        programs = DATABASE.get_all_explore_programs()
+        programs = PUBLIC_PROGRAMS[:48]
 
     filtered_programs = []
     for program in programs:
@@ -1153,6 +1197,43 @@ def explore():
                            adventures_names=adventures_names,
                            page_title=gettext('title_explore'),
                            current_page='explore')
+
+
+@app.route('/highscores', methods=['GET'], defaults={'filter': 'global'})
+@app.route('/highscores/<filter>', methods=['GET'])
+@requires_login
+def get_highscores_page(user, filter):
+    if filter not in ["global", "country", "class"]:
+        return utils.error_page(error=404, ui_message=gettext('page_not_found'))
+
+    user_data = DATABASE.user_by_username(user['username'])
+    public_profile = True if DATABASE.get_public_profile_settings(user['username']) else False
+    classes = list(user_data.get('classes', set()))
+    country = user_data.get('country')
+    user_country = COUNTRIES.get(country)
+
+    if filter == "global":
+        highscores = DATABASE.get_highscores(user['username'], filter)
+    elif filter == "country":
+        # Can't get a country highscore if you're not in a country!
+        if not country:
+            return utils.error_page(error=403, ui_message=gettext('no_such_highscore'))
+        highscores = DATABASE.get_highscores(user['username'], filter, country)
+    elif filter == "class":
+        # Can't get a class highscore if you're not in a class!
+        if not classes:
+            return utils.error_page(error=403, ui_message=gettext('no_such_highscore'))
+        highscores = DATABASE.get_highscores(user['username'], filter, classes[0])
+
+    # Make a deepcopy if working locally, otherwise the local database values are by-reference and overwritten
+    if not os.getenv('NO_DEBUG_MODE'):
+        highscores = copy.deepcopy(highscores)
+    for highscore in highscores:
+        highscore['country'] = highscore.get('country') if highscore.get('country') else "-"
+        highscore['last_achievement'] = utils.delta_timestamp(highscore.get('last_achievement'))
+    return render_template('highscores.html', highscores=highscores, has_country=True if country else False,
+                           filter=filter, user_country=user_country, public_profile=public_profile,
+                           in_class=True if classes else False)
 
 
 @app.route('/change_language', methods=['POST'])
@@ -1261,6 +1342,8 @@ def store_parsons_order():
         return 'body must be an object', 400
     if not isinstance(body.get('level'), str):
         return 'level must be a string', 400
+    if not isinstance(body.get('exercise'), str):
+        return 'exercise must be a string', 400
     if not isinstance(body.get('order'), list):
         return 'order must be a list', 400
 
@@ -1268,6 +1351,7 @@ def store_parsons_order():
         'id': utils.random_id_generator(12),
         'username': current_user()['username'] or f'anonymous:{utils.session_id()}',
         'level': int(body['level']),
+        'exercise': int(body['exercise']),
         'order': body['order'],
         'correct': 1 if body['correct'] else 0,
         'timestamp': utils.timems()
@@ -1362,6 +1446,10 @@ def keyword_languages():
 @app.template_global()
 def keyword_languages_keys():
     return [l for l in ALL_KEYWORD_LANGUAGES.keys()]
+
+@app.template_global()
+def get_country(country):
+    return COUNTRIES.get(country, "-")
 
 
 def make_lang_obj(lang):
@@ -1532,6 +1620,10 @@ ACHIEVEMENTS.routes(app, DATABASE)
 # *** QUIZ BACKEND ***
 
 quiz.routes(app, DATABASE, ACHIEVEMENTS, QUIZZES)
+
+# *** PARSONS BACKEND ***
+
+parsons.routes(app, DATABASE, ACHIEVEMENTS, PARSONS)
 
 
 # *** STATISTICS ***

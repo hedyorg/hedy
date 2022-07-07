@@ -12,28 +12,37 @@
             <div class="flex flex-col" id="account_rows_container">
                 <!-- we create one hidden row -> we can simply copy this one and append() below when adding rows -->
                 {% for i in range(5) %}
-                    <div class="flex flex-row w-full items-center mb-4 account_row {% if i == 0 %}hidden{% endif %}" {% if i == 0 %}id="account_row_unique"{% endif %}>
-                        <input id="username" name="username" {% if i != 0 %}required{% endif %} type=text placeholder="{{_('username')}}" class="w-full block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded ltr:mr-4 rtl:ml-4">
-                        <input id="password" name="password" {% if i != 0 %}required{% endif %} minlength="6" type=password placeholder="{{_('password')}}" class="w-full block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded ltr:mr-4 rtl:ml-4">
-                        <select id="classes" name="class" class="w-full block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded ltr:mr-4 rtl:ml-4">
-                            <option value="" selected disabled>{{_('select_class')}}</option>
-                            {% for class in classes %}
-                                <option value="{{ class.name }}">{{ class.name }}</option>
-                            {% endfor %}
-                        </select>
-                        <svg class="fill-current w-40 text-red-500 ltr:ml-2 rtl:mr-2 cursor-pointer" xmlns="http://www.w3.org/2000/svg" onclick="$(this).parent().remove();" viewBox="0 0 20 20"><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
+                    <div class="flex flex-row w-full gap-4 items-center mb-4 account_row {% if i == 0 %}hidden{% endif %}" {% if i == 0 %}id="account_row_unique"{% endif %}>
+                        <input id="username" name="username" {% if i != 0 %}required{% endif %} type=text placeholder="{{_('username')}}" class="w-full block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded">
+                        <input id="password" name="password" {% if i != 0 %}required{% endif %} minlength="6" type=password placeholder="{{_('password')}}" class="w-full block appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded">
+                        <input id="classes" name="class" value="{{current_class.name}}" disabled class="w-full block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded">
+                        <svg class="fill-current w-40 text-red-500 cursor-pointer" xmlns="http://www.w3.org/2000/svg" onclick="$(this).parent().remove();" viewBox="0 0 20 20"><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
                     </div>
                 {% endfor %}
             </div>
-            <div class="flex flex-row justify-end">
-                <svg class="fill-current w-8 h-8 ltr:mr-4 mb-2 text-green-500 cursor-pointer" xmlns="http://www.w3.org/2000/svg" onclick="hedyApp.add_account_placeholder();" viewBox="0 0 24 24"><path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z"/></svg>
+            <div class="flex flex-row items-center gap-4">
+                <div class="flex flex-row items-center gap-4 border rounded-lg border-gray-500 py-2 px-8 mx-auto">
+                    <div class="italic text-xl text-blue-600">{{_('download_login_credentials')}}</div>
+                    <div>
+                        <div class="flex flex-row items-center gap-4">
+                            <input type="radio" name="download_credentials_checkbox" value="yes" checked>
+                            <label for="yes">{{_('yes')}}</label>
+                        </div>
+                        <div class="flex flex-row items-center gap-4">
+                            <input type="radio" name="download_credentials_checkbox" value="no">
+                            <label for="no">{{_('no')}}</label>
+                        </div>
+                    </div>
+                </div>
+                <svg class="fill-current w-8 h-8 ltr:ml-auto rtl:mr-auto mb-2 text-green-500 cursor-pointer" xmlns="http://www.w3.org/2000/svg" onclick="hedyApp.add_account_placeholder();" viewBox="0 0 24 24"><path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z"/></svg>
             </div>
         </div>
         <div class="flex flex-row mt-4">
-            <div class="ltr:ml-auto">
+            <button class="green-btn" onclick="window.open('/for-teachers/class/{{ current_class.id }}', '_self');">{{_('back_to_class')}}</button>
+            <div class="ltr:ml-auto flex flex-row gap-2">
                 <button type="reset" class="red-btn" onclick="window.open('/for-teachers/create-accounts', '_self');">
                     {{_('reset_view')}}</button>
-                <button type="submit" class="green-btn ltr:ml-4 rtl:mr-4 px-4">{{_('create_accounts')}}</button>
+                <button type="submit" class="blue-btn px-4">{{_('create_accounts')}}</button>
             </div>
         </div>
         </form>

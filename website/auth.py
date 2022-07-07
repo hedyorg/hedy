@@ -135,7 +135,10 @@ def update_is_teacher(user, is_teacher_value=1):
     DATABASE.update_user(user['username'], {'is_teacher': is_teacher_value})
 
     if user_becomes_teacher and not is_testing_request(request):
-        send_email_template(template='welcome_teacher', email=user['email'], username=user['username'])
+        try:
+            send_email_template(template='welcome_teacher', email=user['email'], username=user['username'])
+        except:
+            print(f"An error occurred when sending a welcome teacher mail to {user['email']}, changes still processed")
 
 
 # Thanks to https://stackoverflow.com/a/34499643
@@ -177,6 +180,7 @@ def prepare_user_db(username, password):
 
     return username, hashed, hashed_token
 
+
 def validate_student_signup_data(account):
     if not isinstance(account.get('username'), str):
         return gettext('username_invalid')
@@ -189,6 +193,7 @@ def validate_student_signup_data(account):
     if len(account.get('password')) < 6:
         return gettext('passwords_six')
     return None
+
 
 def validate_signup_data(account):
     if not isinstance(account.get('username'), str):
@@ -248,8 +253,11 @@ def store_new_account(account, email):
         resp = make_response({'username': username, 'token': hashed_token})
     # Otherwise, we send an email with a verification link and we return an empty body
     else:
-        send_email_template(template='welcome_verify', email=email,
+        try:
+            send_email_template(template='welcome_verify', email=email,
                             link=create_verify_link(username, hashed_token), username=user['username'])
+        except:
+            return user, make_response({gettext('mail_error_change_processed')}, 400)
         resp = make_response({})
     return user, resp
 
@@ -512,7 +520,10 @@ def routes(app, database):
         DATABASE.update_user(user['username'], {'password': hashed})
         # We are not updating the user in the Flask session, because we should not rely on the password in anyway.
         if not is_testing_request(request):
-            send_email_template(template='change_password', email=user['email'], username=user['username'])
+            try:
+                send_email_template(template='change_password', email=user['email'], username=user['username'])
+            except:
+                return gettext('mail_error_change_processed'), 400
 
         return gettext('password_updated'), 200
 
@@ -567,9 +578,15 @@ def routes(app, database):
                 if is_testing_request(request):
                     resp = {'username': user['username'], 'token': hashed_token}
                 else:
-                    send_email_template(template='welcome_verify', email=email,
+                    try:
+                        send_email_template(template='welcome_verify', email=email,
                                         link=create_verify_link(user['username'], hashed_token),
                                         username=user['username'])
+                    except:
+                        # Todo TB: Now we only log to the back-end, would be nice to also return the user some info
+                        # We have two options: return an error at this point (don't process changes)
+                        # Add a notification to the response, still process the changes
+                        print(f"Profile changes processed for {user['username']}, mail sending invalid")
 
                 # We check whether the user is in the Mailchimp list.
                 if not is_testing_request(request) and MAILCHIMP_API_URL:
@@ -593,6 +610,10 @@ def routes(app, database):
 
         if updates:
             DATABASE.update_user(username, updates)
+
+        # We might also have to update the value on the public profile data
+        if 'country' in body:
+            DATABASE.update_country_public_profile(username, body.get('country'))
 
         # We want to check if the user choose a new language, if so -> reload
         # We can use g.lang for this to reduce the db calls
@@ -659,8 +680,12 @@ def routes(app, database):
             # If this is an e2e test, we return the email verification token directly instead of emailing it.
             return jsonify({'username': user['username'], 'token': token}), 200
         else:
-            send_email_template(template='recover_password', email=email,
+            try:
+                send_email_template(template='recover_password', email=email,
                                 link=create_recover_link(user['username'], token), username=user['username'])
+            except:
+                return gettext('mail_error_change_processed'), 400
+
             return jsonify({'message':gettext('sent_password_recovery')}), 200
 
     @app.route('/auth/reset', methods=['POST'])
@@ -699,7 +724,10 @@ def routes(app, database):
             email = user['email']
 
         if not is_testing_request(request):
-            send_email_template(template='reset_password', email=email, username=user['username'])
+            try:
+                send_email_template(template='reset_password', email=email, username=user['username'])
+            except:
+                return gettext('mail_error_change_processed'), 400
 
         return jsonify({'message':gettext('password_resetted')}), 200
 
@@ -763,9 +791,12 @@ def routes(app, database):
         if is_testing_request(request):
             resp = {'username': user['username'], 'token': hashed_token}
         else:
-            send_email_template(template='welcome_verify', email=body['email'],
-                                link=create_verify_link(user['username'], hashed_token),
-                                username=user['username'])
+            try:
+                send_email_template(template='welcome_verify', email=body['email'],
+                                    link=create_verify_link(user['username'], hashed_token),
+                                    username=user['username'])
+            except:
+                return gettext('mail_error_change_processed'), 400
 
         return {}, 200
 

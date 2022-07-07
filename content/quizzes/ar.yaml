@@ -1630,10 +1630,6 @@ levels:
             question_score: '10'
         6:
             question_text: "Which code was used to create this output?"
-            code: |-
-                Welcome to restaurant Hedy
-                Pizza
-                Hamburger
             mp_choice_options:
             -   option: |
                     ```
@@ -1669,6 +1665,7 @@ levels:
             correct_answer: "D"
             hint: "Pay attention to what sould be repeated and what should only be printed once."
             question_score: '10'
+            output: "Welcome to restaurant Hedy\nPizza\nHamburger"
         7:
             question_text: "What is wrong with this code?"
             code: |-
@@ -1879,10 +1876,6 @@ levels:
             question_score: '10'
         5:
             question_text: "Which code produced this output?"
-            code: |-
-                Icecream is the best!
-                Icecream is the best!
-                Icecream is the best!
             mp_choice_options:
             -   option: |
                     ```
@@ -1920,6 +1913,7 @@ levels:
             correct_answer: "C"
             hint: "Watch the indentation"
             question_score: '10'
+            output: "Icecream is the best!\nIcecream is the best!\nIcecream is the best!"
         6:
             question_text: "After which command(s) should you use indentation (starting the next line with 4 spaces)?"
             mp_choice_options:
@@ -1999,7 +1993,8 @@ levels:
             question_score: '10'
         9:
             question_text: "How many `{if}` commands can be placed inside another `{if}` command?"
-            code: |
+            code: |-
+                # No code provided
             mp_choice_options:
             -   option: "None, that is not allowed"
                 feedback: "You are allowed to"
@@ -2050,13 +2045,6 @@ levels:
             question_score: '10'
         2:
             question_text: "Which code was used to get this output?"
-            code: |-
-                1
-                2
-                3
-                4
-                5
-                Once I caught a fish alive!
             mp_choice_options:
             -   option: |
                     ```
@@ -2089,20 +2077,9 @@ levels:
             correct_answer: "A"
             hint: "First all the numbers, then the sentence"
             question_score: '10'
+            output: "1\n2\n3\n4\n5\nOnce I caught a fish alive!"
         3:
             question_text: "Which code was used to get this output?"
-            code: |-
-                10
-                9
-                8
-                7
-                6
-                5
-                4
-                3
-                2
-                1
-                0
             mp_choice_options:
             -   option: |
                     ```
@@ -2131,6 +2108,7 @@ levels:
             correct_answer: "D"
             hint: "It has to be a calculation..."
             question_score: '10'
+            output: "10\n9\n8\n7\n6\n5\n4\n3\n2\n1\n0"
         4:
             question_text: "What's wrong with this code?"
             code: |-
@@ -2263,11 +2241,6 @@ levels:
             question_score: '10'
         10:
             question_text: "Which code belongs to this output?"
-            code: |-
-                Baby shark tututudutudu
-                Baby shark tututudutudu
-                Baby shark tututudutudu
-                Baby shark
             mp_choice_options:
             -   option: |
                     ```
@@ -2300,6 +2273,7 @@ levels:
             correct_answer: "B"
             hint: "Mind the indention"
             question_score: '10'
+            output: "Baby shark tututudutudu\nBaby shark tututudutudu\nBaby shark tututudutudu\nBaby shark"
     10:
         1:
             question_text: "What do we need to fill in on the `_?_` if we want to print each compliment?"

@@ -1,13 +1,31 @@
 import copy
 import os
-from babel import Locale
+from babel import Locale, languages
 from website.yaml_file import YamlFile
 import iso3166
 
-import random
-
 # Define and load all countries
 COUNTRIES = {k: v.name for k, v in iso3166.countries_by_alpha2.items()}
+# Iterate through all found country abbreviations
+for country in COUNTRIES.keys():
+    # Get all spoken languages in this "territory"
+    spoken_languages = languages.get_territory_language_info(country).keys()
+    found = False
+    country_name = None
+    # For each language, try to parse the country name -> if correct: adjust in dict and break
+    # If we don't find any, keep the English one
+    for language in spoken_languages:
+        if found:
+            break
+        try:
+            value = language + "_" + country
+            l = Locale.parse(value)
+            country_name = l.get_territory_name(value)
+            found = True
+        except:
+            pass
+    if country_name:
+        COUNTRIES[country] = country_name
 
 # Define dictionary for available languages. Fill dynamically later.
 ALL_LANGUAGES = {}
@@ -221,7 +239,7 @@ class ParsonsProblem:
         self.debug_mode = not os.getenv('NO_DEBUG_MODE')
 
         if not self.debug_mode:
-            self.file = YamlFile.for_file(f'content/parsons/{self.language}.yaml').get('parsons')
+            self.file = YamlFile.for_file(f'content/parsons/{self.language}.yaml').get('levels')
             # We always create one with english keywords
             self.data["en"] = self.cache_parsons_keywords("en")
             if language in ALL_KEYWORD_LANGUAGES.keys():
@@ -229,27 +247,41 @@ class ParsonsProblem:
 
     def cache_parsons_keywords(self, language):
         keyword_data = {}
-        for short_name, parson in self.file.items():
-            parsed_parson = copy.deepcopy(parson)
-            for level in parson.get('levels'):
-                for k, v in parson.get('levels').get(level).get('code_lines').items():
+        for level in copy.deepcopy(self.file):
+            exercises = copy.deepcopy(self.file.get(level))
+            for number, exercise in exercises.items():
+                for k, v in exercise.get('code_lines').items():
                     try:
-                        parsed_parson.get('levels').get(level).get('code_lines')[k] = v.format(**KEYWORDS.get(language))
+                        exercises.get(number).get('code_lines')[k] = v.format(**KEYWORDS.get(language))
                     except IndexError:
                         print("There is an issue due to an empty placeholder in the following line:")
                         print(v)
                     except KeyError:
                         print("There is an issue due to a non-existing key in the following line:")
                         print(v)
-            keyword_data[short_name] = parsed_parson
+            keyword_data[level] = exercises
         return keyword_data
 
-    def get_parsons(self, keyword_lang="en"):
+    def get_highest_exercise_level(self, level):
+        if self.debug_mode and not self.data.get("en", None):
+            if not self.file:
+                self.file = YamlFile.for_file(f'content/parsons/{self.language}.yaml').get('levels')
+            self.data["en"] = self.cache_parsons_keywords("en")
+        return len(self.data["en"].get(level, {}))
+
+    def get_parsons_data_for_level(self, level, keyword_lang="en"):
         if self.debug_mode and not self.data.get(keyword_lang, None):
             if not self.file:
-                self.file = YamlFile.for_file(f'content/parsons/{self.language}.yaml').get('parsons')
+                self.file = YamlFile.for_file(f'content/parsons/{self.language}.yaml').get('levels')
             self.data[keyword_lang] = self.cache_parsons_keywords(keyword_lang)
-        return self.data.get(keyword_lang)
+        return self.data.get(keyword_lang, {}).get(level, None)
+
+    def get_parsons_data_for_level_exercise(self, level, excercise, keyword_lang="en"):
+        if self.debug_mode and not self.data.get(keyword_lang, None):
+            if not self.file:
+                self.file = YamlFile.for_file(f'content/parsons/{self.language}.yaml').get('levels')
+            self.data[keyword_lang] = self.cache_parsons_keywords(keyword_lang)
+        return self.data.get(keyword_lang, {}).get(level, {}).get(excercise, None)
 
 
 class Quizzes:

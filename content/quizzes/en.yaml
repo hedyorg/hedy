@@ -1545,13 +1545,26 @@ levels:
                     {print} 'Hello'
                     {print} 'Im Hedy!'
             mp_choice_options:
-            -   option: "Hello \n Im Hedy!"
+            -   option: |
+                    Hello
+                    Im Hedy!
                 feedback: "Everything is printed twice."
-            -   option: "Hello \n Hello \n Im Hedy"
+            -   option: |
+                    Hello
+                    Hello
+                    Im Hedy
                 feedback: "The second line is repeated twice as well."
-            -   option: "Hello \n Im Hedy! \n Hello \n Im Hedy!"
+            -   option: |
+                    Hello
+                    Im Hedy!
+                    Hello
+                    Im Hedy!
                 feedback: "Super!"
-            -   option: "Hello \n Hello \n Im Hedy! \n Im Hedy!"
+            -   option: |
+                    Hello
+                    Hello
+                    Im Hedy!
+                    Im Hedy!"
                 feedback: "Everything is printed twice"
             correct_answer: "C"
             hint: "Both lines are repeated twice."
@@ -1580,13 +1593,29 @@ levels:
                     {print} 'Baby shark tututudutudu'
                 {print} 'Baby shark'
             mp_choice_options:
-            -   option: "Baby shark tututudutudu \n Baby shark"
+            -   option: |
+                    Baby shark tututudutudu
+                    Baby shark
                 feedback: "Mind the `{repeat}` command!"
-            -   option: "Baby shark tututudutudu \n Baby shark \n Baby shark tututudutudu \n Baby shark \n Baby shark tututudutudu \n Baby shark"
+            -   option: |
+                    Baby shark tututudutudu
+                    Baby shark
+                    Baby shark tututudutudu
+                    Baby shark
+                    Baby shark tututudutudu
+                    Baby shark
                 feedback: "The last line has no indentation, so it's not repeated."
-            -   option: "Baby shark tututudutudu \n Baby shark tututudutudu \n Baby shark tututudutudu \n Baby shark"
+            -   option: |
+                    Baby shark tututudutudu
+                    Baby shark tututudutudu
+                    Baby shark tututudutudu
+                    Baby shark
                 feedback: "Right!"
-            -   option: "Baby shark tututudutudu \n Baby shark \n Baby shark \n Baby shark"
+            -   option: |
+                    Baby shark tututudutudu
+                    Baby shark
+                    Baby shark
+                    Baby shark
                 feedback: "What is being repeated and what isn't."
             correct_answer: "C"
             hint: "What is being repeated and what is not?."
@@ -1599,13 +1628,30 @@ levels:
                     {print} 'Yay!'
                     {print} 'Were going on holiday!'
             mp_choice_options:
-            -   option: "The children went: \n Yay! \n Were going on holiday!"
+            -   option: |
+                    The children went:
+                    Yay!
+                    Were going on holiday!
                 feedback: "Mind the `{repeat}` command !"
-            -   option: "The children went: \n Yay! \n Were going on holiday! \n Yay! \n Were going on holiday!"
+            -   option: |
+                    The children went:
+                    Yay!
+                    Were going on holiday!
+                    Yay!
+                    Were going on holiday!
                 feedback: "Correct!"
-            -   option: "The children went: \n Yay! \n Yay! \n Were going on holiday! \n Were going on holiday!"
+            -   option: |
+                    The children went:
+                    Yay!
+                    Yay!
+                    Were going on holiday!
+                    Were going on holiday!
                 feedback: "This order is incorrect."
-            -   option: "The children went: \n Yay! \n Yay! \n Were going on holiday!"
+            -   option: |
+                    The children went:
+                    Yay!
+                    Yay!
+                    Were going on holiday!
                 feedback: "The last line is repeated too."
             correct_answer: "B"
             hint: "The block under the `{repeat}` command is repeated twice."
@@ -1630,7 +1676,7 @@ levels:
             question_score: '10'
         6:
             question_text: "Which code was used to create this output?"
-            code: |-
+            output: |-
                 Welcome to restaurant Hedy
                 Pizza
                 Hamburger
@@ -1638,7 +1684,7 @@ levels:
             -   option: |
                     ```
                     {print} 'Welcome to restaurant Hedy'
-                    food = {ask} 'What whould you like to eat?'
+                    food = {ask} 'What would you like to eat?'
                     {print} food
                     ```
                 feedback: "You need to take 2 orders."
@@ -1646,7 +1692,7 @@ levels:
                     ```
                     {repeat} 2 {times}
                         {print} 'Welcome to restaurant Hedy'
-                        food = {ask} 'What whould you like to eat?'
+                        food = {ask} 'What would you like to eat?'
                         {print} food
                     ```
                 feedback: "The welcome line would be printed twice in this code too"
@@ -1879,7 +1925,7 @@ levels:
             question_score: '10'
         5:
             question_text: "Which code produced this output?"
-            code: |-
+            output: |-
                 Icecream is the best!
                 Icecream is the best!
                 Icecream is the best!
@@ -1999,7 +2045,8 @@ levels:
             question_score: '10'
         9:
             question_text: "How many `{if}` commands can be placed inside another `{if}` command?"
-            code: |
+            code: |-
+                # No code provided
             mp_choice_options:
             -   option: "None, that is not allowed"
                 feedback: "You are allowed to"
@@ -2050,7 +2097,7 @@ levels:
             question_score: '10'
         2:
             question_text: "Which code was used to get this output?"
-            code: |-
+            output: |-
                 1
                 2
                 3
@@ -2091,7 +2138,7 @@ levels:
             question_score: '10'
         3:
             question_text: "Which code was used to get this output?"
-            code: |-
+            output: |-
                 10
                 9
                 8
@@ -2263,7 +2310,7 @@ levels:
             question_score: '10'
         10:
             question_text: "Which code belongs to this output?"
-            code: |-
+            output: |-
                 Baby shark tututudutudu
                 Baby shark tututudutudu
                 Baby shark tututudutudu

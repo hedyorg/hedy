@@ -143,8 +143,24 @@ def rule_level3():
         'token': ["text",'keyword','text','text','text','keyword','text','text'],
         'next': 'start',
     },{
+        'regex': START_LINE + K("remove") + "( *)(.*)" + SPACE + K("from") + "( *)$",
+        'token': ["text",'keyword','text','text','text','keyword','text'],
+        'next': 'start',
+    },{
+        'regex': START_LINE + K("remove") + "( *)(.*)$",
+        'token': ["text",'keyword','text','text'],
+        'next': 'start',
+    },{
         'regex': START_LINE + K("add") + "( *)(.*)" + SPACE + K("to_list") + "( *)"+ WORD +"$",
         'token': ["text",'keyword','text','text','text','keyword','text','text'],
+        'next': 'start',
+    },{
+        'regex': START_LINE + K("add") + "( *)(.*)" + SPACE + K("to_list") + "( *)$",
+        'token': ["text",'keyword','text','text','text','keyword','text'],
+        'next': 'start',
+    },{
+        'regex': START_LINE + K("add") + "( *)(.*)$",
+        'token': ["text",'keyword','text','text'],
         'next': 'start',
     },{
         'regex': START_LINE + K("print") ,
