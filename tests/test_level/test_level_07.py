@@ -191,7 +191,7 @@ class TestsLevel7(HedyTester):
 
         expected = textwrap.dedent("""\
         naam = 'Hedy'
-        if str(naam) == str('Hedy'):
+        if convert_numerals('Latin', naam) == convert_numerals('Latin', 'Hedy'):
           for i in range(int('3')):
             print(f'Hallo Hedy!')
             time.sleep(0.1)""")
