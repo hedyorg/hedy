@@ -533,9 +533,8 @@ function highlightAceError(editor: AceAjax.Editor, row: number, col?: number) {
     return;
   }
   // If we get here we know there is a column -> dynamically get the length of the error string
-  //let error_sub_row = editor.session.getLine(row -1).slice(col-1);
-  //console.log(error_sub_row);
-  const length = 5;
+  // As we assume the error is supposed to target a specific word we get row[column, whitespace].
+  const length = editor.session.getLine(row -1).slice(col-1).split(/(\s+)/)[0].length;
 
   // If there is a column, only highlight the relevant text
   editor.session.addMarker(
