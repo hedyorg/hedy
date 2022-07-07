@@ -1565,8 +1565,10 @@ export function toggle_developers_mode(enforced: boolean) {
 }
 
 export function toggle_blur_code() {
-  theGlobalEditor.focus();
-  theGlobalEditor.blur();
+  editor.session.addMarker(
+      new ace.Range(0, 1, 1, 2),
+      "editor-blur", "fullLine", false
+    );
 }
 
 export function load_profile(username: string, mail: string, birth_year: number, gender: string, country: string) {
