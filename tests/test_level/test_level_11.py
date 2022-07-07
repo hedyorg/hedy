@@ -18,7 +18,7 @@ class TestsLevel11(HedyTester):
 
     expected = textwrap.dedent("""\
     antwoord = input(f'Hoeveel is 10 plus 10?')
-    if str(antwoord) == str('20'):
+    if convert_numerals('Latin', antwoord) == convert_numerals('Latin', '20'):
       print(f'Goedzo!')
       print(f'Het antwoord was inderdaad {antwoord}')
     else:
@@ -54,7 +54,7 @@ class TestsLevel11(HedyTester):
         x is 222""")
     expected = textwrap.dedent("""\
     a = '5'
-    if str(a) == str('1'):
+    if convert_numerals('Latin', a) == convert_numerals('Latin', '1'):
       x = '2'
     else:
       x = '222'""")
@@ -243,11 +243,11 @@ class TestsLevel11(HedyTester):
     step = 1 if int(0) < int(10) else -1
     for i in range(int(0), int(10) + step, step):
       antwoord = input(f'Wat is 5*5')
-      if str(antwoord) == str('24'):
+      if convert_numerals('Latin', antwoord) == convert_numerals('Latin', '24'):
         print(f'Dat is fout!')
       else:
         print(f'Dat is goed!')
-      if str(antwoord) == str('25'):
+      if convert_numerals('Latin', antwoord) == convert_numerals('Latin', '25'):
         i = '10'
       time.sleep(0.1)""")
 
@@ -267,7 +267,7 @@ class TestsLevel11(HedyTester):
       step = 1 if int(0) < int(10) else -1
       for i in range(int(0), int(10) + step, step):
         antwoord = input(f'Wat is 5*5')
-        if str(antwoord) == str('24'):
+        if convert_numerals('Latin', antwoord) == convert_numerals('Latin', '24'):
           print(f'fout')
         time.sleep(0.1)
       print(f'klaar met for loop')""")
@@ -285,7 +285,7 @@ class TestsLevel11(HedyTester):
     expected = textwrap.dedent("""\
       step = 1 if int(0) < int(10) else -1
       for i in range(int(0), int(10) + step, step):
-        if str(i) == str('2'):
+        if convert_numerals('Latin', i) == convert_numerals('Latin', '2'):
           print(f'2')
         time.sleep(0.1)""")
 
