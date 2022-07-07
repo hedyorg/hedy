@@ -535,6 +535,7 @@ function highlightAceError(editor: AceAjax.Editor, row: number, col?: number) {
   // If we get here we know there is a column -> dynamically get the length of the error string
   //let error_sub_row = editor.session.getLine(row -1).slice(col-1);
   //console.log(error_sub_row);
+  const length = 5;
 
   // If there is a column, only highlight the relevant text
   editor.session.addMarker(
