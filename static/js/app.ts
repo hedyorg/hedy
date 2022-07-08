@@ -1565,17 +1565,13 @@ export function toggle_developers_mode(enforced: boolean) {
 }
 
 export function toggle_blur_code() {
-  var range = new Range(startRow, startColumn, endRow, endColumn);
-  var session = editor.getSession();
-
-  range.start = session.doc.createAnchor(range.start);
-  range.end = session.doc.createAnchor(range.end);
-
-var id = session.addMarker(range, 'your_marker_class_name');
-  editor.session.addMarker(
-      new ace.Range(0, 1, 1, 2),
-      "editor-blur", "fullLine", false
-    );
+  if ($('#editor').css('filter')) {
+    $('#editor').removeAttr("filter");
+    $('#editor').removeAttr("-webkit-filter");
+  } else {
+    $('#editor').css("filter", "blur(3px)");
+    $('#editor').css("-webkit-filter", "blur(3px)");
+  }
 }
 
 export function load_profile(username: string, mail: string, birth_year: number, gender: string, country: string) {
