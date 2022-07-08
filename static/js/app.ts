@@ -537,8 +537,7 @@ function highlightAceError(editor: AceAjax.Editor, row: number, col?: number) {
   const length = editor.session.getLine(row -1).slice(col-1).split(/(\s+)/)[0].length;
 
   // If there is a column, only highlight the relevant text
-  editor.session.addMarker(
-    new ace.Range(row - 1, col - 1, row - 1, col - 1 + length),
+  editor.session.addMarker(new ace.Range(row - 1, col - 1, row - 1, col - 1 + length),
     "editor-error", "text", false
   );
 }
