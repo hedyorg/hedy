@@ -19,16 +19,15 @@
                 <span class="hidden lg:inline-block">{{username}}</span>
             </a>
             <div class="dropdown-menu" style="display: none;">
-                <div class="flex flex-row gap-4">
-                    <a class="dropdown-item" href="/highscores">
-                        <span class="fas fa-trophy"></span>{{_('highscores')}}</a>
-                </div>
-                <a class="dropdown-item" href="/my-achievements"><span class="fas fa-fw fa-list-alt ltr:mr-4 rtl:ml-4"></span>{{_('my_achievements')}}</a>
-                <a class="dropdown-item" href="/my-profile"><span class="fas fa-user-cog ltr:mr-4 rtl:ml-4"></span>{{_('my_account')}}</a>
-              {% if is_teacher %}
-                  <a class="dropdown-item" href="/for-teachers"><span class="fas fa-chalkboard-teacher ltr:mr-4 rtl:ml-4"></span>{{_('for_teachers')}}</a>
-              {% endif %}
-                <a class="dropdown-item" href="#" onclick="hedyApp.auth.logout ();event.preventDefault();"><span class="fas fa-fw fa-sign-out-alt ltr:mr-4 rtl:ml-4"></span>{{_('logout')}}</a>
+                <ul>
+                    <li class="dropdown-item"><a class="text-white no-underline" href="/highscores"><span class="fas fa-trophy ltr:mr-4 rtl:ml-4"></span>{{_('highscores')}}</a></li>
+                    <li class="dropdown-item"><a class="text-white no-underline" href="/my-achievements"><span class="fas fa-fw fa-list-alt ltr:mr-4 rtl:ml-4"></span>{{_('my_achievements')}}</a></li>
+                    <li class="dropdown-item"><a class="text-white no-underline" href="/my-profile"><span class="fas fa-user-cog ltr:mr-4 rtl:ml-4"></span>{{_('my_account')}}</a></li>
+                  {% if is_teacher %}
+                      <li class="dropdown-item"><a class="text-white no-underline" href="/for-teachers"><span class="fas fa-chalkboard-teacher ltr:mr-4 rtl:ml-4"></span>{{_('for_teachers')}}</a></li>
+                  {% endif %}
+                    <li class="dropdown-item"><a class="text-white no-underline" href="#" onclick="hedyApp.auth.logout ();event.preventDefault();"><span class="fas fa-fw fa-sign-out-alt ltr:mr-4 rtl:ml-4"></span>{{_('logout')}}</a></li>
+                </ul>
             </div>
         </li>
     {% else %}
@@ -43,7 +42,7 @@
                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
             </div>
           </a>
-          <div class="dropdown-menu hidden">
+          <div class="dropdown-menu" style="display: none;">
               <div class="p-2"><input id="search_language" placeholder="{{_('search')}}" class="border-2 border-black text-black border-blue-600 rounded h-8 px-2 mt-2 w-full"></div>
               <!-- Let's re-structure this a bit: make two rows one with keyword support, one without -->
               <div class="flex flex-row">
@@ -85,10 +84,4 @@
             }
         });
     });
-// Close the dropdown menu if the user clicks outside of it
-$(document).on("click", function(event){
-    if(!$(event.target).closest(".dropdown").length){
-        $(".dropdown-menu").slideUp("medium");
-    }
-});
 </script>
