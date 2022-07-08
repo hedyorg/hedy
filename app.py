@@ -1035,7 +1035,7 @@ def profile_page(user):
 
 @app.route('/research/<filename>', methods=['GET'])
 def get_research(filename):
-    return send_from_directory('content/research/', filename, as_attachment=True)
+    return send_from_directory('content/research/', filename)
 
 
 @app.route('/<page>')
