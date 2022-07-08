@@ -1029,7 +1029,11 @@ def profile_page(user):
 
     # At this point we want to retrieve all the users non-read updates we created as admin
     # But, we also want to localize them: how do we fix this?
-    messages = []
+    # We also have to think about user interaction:
+    # - Should they be able to delete the message?
+    # - Or should the message disappear when read?
+    # - Can teachers also send messages to their students?
+    messages = ["test123", "nog een bericht..."]
 
     return render_template('profile.html', page_title=gettext('title_my-profile'), programs=programs,
                            user_data=profile, invite_data=invite, messages=messages,
