@@ -57,6 +57,10 @@ ADVENTURE_ORDER = [
     'end'
 ]
 
+RESEARCH = []
+for paper in os.listdir('content/research'):
+    RESEARCH.append(paper)
+
 # load all available languages in dict
 # list_translations of babel does about the same, but without territories.
 languages = {}

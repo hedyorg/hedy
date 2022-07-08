@@ -41,13 +41,14 @@
             <p>{{ section['text'] | commonmark }}</p>
         {% endfor %}
     </div>
+        {% if papers %}
+            <div id="research_container">
+                <h2>Hedy Research</h2>
+                {% for paper in papers %}
+                    <a>{{ paper }}</a>
+                {% endfor %}
+            </div>
+        {% endif %}
     </div>
-    {% if research %}
-    <div id="research_container">
-        {% for paper in reseacher %}
-            <div>Do some stuff...</div>
-        {% endfor %}
-    </div>
-    {% endif %}
 </div>
 {% endblock %}

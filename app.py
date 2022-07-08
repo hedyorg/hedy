@@ -21,7 +21,8 @@ from flask_babel import gettext
 from flask_babel import Babel
 from flask_compress import Compress
 from flask_helpers import render_template
-from flask import Flask, request, jsonify, session, abort, g, redirect, Response, make_response, Markup, send_file, after_this_request
+from flask import Flask, request, jsonify, session, abort, g, redirect, Response, make_response, Markup, send_file, \
+    after_this_request, send_from_directory
 from config import config
 from werkzeug.urls import url_encode
 from babel import Locale
@@ -1032,6 +1033,14 @@ def profile_page(user):
                            user_classes=classes, current_page='my-profile')
 
 
+@app.route('/research/<paper_id>', methods=['GET'])
+def get_research(paper_id):
+    # We have to make some dict matching like this:
+    # {1: 'thesis_blabla_bla.pdf", 2: "another_thesis.pdf"}
+    filename = "test123"
+    return send_from_directory('/content/research', filename, as_attachment=True)
+
+
 @app.route('/<page>')
 def main_page(page):
     if page == 'favicon.ico':
@@ -1041,9 +1050,8 @@ def main_page(page):
         return achievements_page()
 
     if page == 'learn-more':
-        learn_more_translations = hedyweb.PageTranslations(
-            page).get_page_translations(g.lang)
-        return render_template('learn-more.html', page_title=gettext('title_learn-more'),
+        learn_more_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
+        return render_template('learn-more.html', papers=hedy_content.RESEARCH, page_title=gettext('title_learn-more'),
                                current_page='learn-more', content=learn_more_translations)
 
     if page == 'privacy':
