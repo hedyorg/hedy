@@ -32,7 +32,7 @@
         <li><a class="menubar-btn" href="/login">{{_('login')}}</a></li>
     {% endif %}
     {% if not username %}
-      <li class="dropdown relative z-20 ltr:ml-auto rtl:mr-auto cursor-pointer" onclick="$('.dropdown-menu').toggleClass('show');">
+      <li class="dropdown relative z-20 ltr:ml-auto rtl:mr-auto cursor-pointer" onclick="$('.dropdown-menu').toggleClass('hidden');">
           <a class="menubar-btn border-transparent">
             <div class="flex flex-row gap-2 items-center">
                 <i class="fas fa-fw fa-globe"></i>
@@ -40,7 +40,7 @@
                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
             </div>
           </a>
-          <div class="dropdown-menu absolute hidden rounded-lg border border-black bg-blue-400 ltr:right-0 rtl:left-0 ltr:mr-1 rtl:ml-1 w-max">
+          <div class="dropdown-menu absolute hidden block rounded-lg border border-black bg-blue-400 ltr:right-0 rtl:left-0 ltr:mr-1 rtl:ml-1 w-max">
               <div class="p-2"><input id="search_language" placeholder="{{_('search')}}" class="border-2 border-black text-black border-blue-600 rounded h-8 px-2 mt-2 w-full"></div>
               <!-- Let's re-structure this a bit: make two rows one with keyword support, one without -->
               <div class="flex flex-row">
@@ -85,7 +85,7 @@
 // Close the dropdown menu if the user clicks outside of it
 window.onclick = function(event) {
   if (!event.target.matches('.dropdown')) {
-    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var dropdowns = document.getElementsByClassName("dropdown-menu");
     var i;
     for (i = 0; i < dropdowns.length; i++) {
       var openDropdown = dropdowns[i];
