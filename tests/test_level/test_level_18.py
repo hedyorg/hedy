@@ -74,7 +74,7 @@ class TestsLevel18(HedyTester):
 
       expected = textwrap.dedent("""\
       naam = 'Hedy'
-      if str(naam) == str('Hedy'):
+      if convert_numerals('Latin', naam) == convert_numerals('Latin', 'Hedy'):
         print(f'''koekoek''')""")
 
       self.single_level_tester(code=code, expected=expected)
@@ -137,7 +137,7 @@ class TestsLevel18(HedyTester):
           antwoord = float(antwoord)
         except ValueError:
           pass
-      if str(antwoord) == str('20'):
+      if convert_numerals('Latin', antwoord) == convert_numerals('Latin', '20'):
         print(f'''Goedzo!''')
         print(f'''Het antwoord was inderdaad{antwoord}''')
       else:
