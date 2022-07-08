@@ -1027,9 +1027,13 @@ def profile_page(user):
             invite['class_name'] = class_info.get('name')
             invite['join_link'] = class_info.get('link')
 
+    # At this point we want to retrieve all the users non-read updates we created as admin
+    # But, we also want to localize them: how do we fix this?
+    messages = []
+
     return render_template('profile.html', page_title=gettext('title_my-profile'), programs=programs,
-                           user_data=profile, invite_data=invite, public_settings=public_profile_settings,
-                           user_classes=classes, current_page='my-profile')
+                           user_data=profile, invite_data=invite, messages=messages,
+                           public_settings=public_profile_settings, user_classes=classes, current_page='my-profile')
 
 
 @app.route('/<page>')

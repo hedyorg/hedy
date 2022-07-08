@@ -3,7 +3,7 @@
 {% block main %}
    <h2 class="mx-0 lg:mx-16 px-2 mb-4">{{_('account_overview')}}</h2>
    <div class="flex flex-col gap-4 mx-0 lg:mx-16">
-       {% if invite_data %}
+       {% if invite_data or messages %}
            <h1 class="section-header" onclick="$ ('#messages').toggle()">{{_('my_messages')}}</h1>
            <div id="messages" class="profile-section-body">
              <h2 class="profile-section-body-header">{{_('my_messages')}}</h2>
@@ -17,6 +17,13 @@
                     </div>
                  </div>
              {% endif %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div>
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
            </div>
        {% endif %}
        <h1 class="section-header" onclick="$ ('#public_profile').toggle()">{{_('public_profile')}}</h1>
