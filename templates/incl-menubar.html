@@ -32,7 +32,7 @@
         <li><a class="menubar-btn" href="/login">{{_('login')}}</a></li>
     {% endif %}
     {% if not username %}
-      <li class="dropdown relative z-20 ltr:ml-auto rtl:mr-auto cursor-pointer">
+      <li class="dropdown relative z-20 ltr:ml-auto rtl:mr-auto cursor-pointer" onclick="$('.dropdown-menu').toggleClass('show');">
           <a class="menubar-btn border-transparent">
             <div class="flex flex-row gap-2 items-center">
                 <i class="fas fa-fw fa-globe"></i>
@@ -82,4 +82,17 @@
             }
         });
     });
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropdown')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
 </script>

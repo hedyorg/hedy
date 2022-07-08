@@ -75,8 +75,6 @@ def convert_numerals(alphabet, number):
     window.State = {};
   }
 
-
-
   // Set const value to determine the current page direction -> useful for ace editor settings
   const dir = $("body").attr("dir");
 
