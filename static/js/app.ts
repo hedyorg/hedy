@@ -1565,12 +1565,18 @@ export function toggle_developers_mode(enforced: boolean) {
 }
 
 export function toggle_blur_code() {
-  if ($('#editor').css('filter')) {
-    $('#editor').removeAttr("filter");
-    $('#editor').removeAttr("-webkit-filter");
+  // Switch the both icons from hiding / showing
+  $('.blur-toggle').toggle();
+
+  // Keep track of a element attribute "blurred" to indicate if blurred or not
+  if ($('#editor').attr('blurred') == 'true') {
+    $('#editor').css("filter", "");
+    $('#editor').css("-webkit-filter", "");
+    $('#editor').attr('blurred', 'false');
   } else {
     $('#editor').css("filter", "blur(3px)");
     $('#editor').css("-webkit-filter", "blur(3px)");
+    $('#editor').attr('blurred', 'true');
   }
 }
 
