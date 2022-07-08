@@ -42,11 +42,13 @@
         {% endfor %}
     </div>
         {% if papers %}
-            <div id="research_container">
+            <div id="research_container" class="text-xl">
                 <h2>Hedy Research</h2>
-                {% for paper in papers %}
-                    <a>{{ paper }}</a>
+                <ul>
+                {% for name, filename in papers.items() %}
+                    <li><a href="/research/{{ filename }}" target="_blank">{{ name }}</a></li>
                 {% endfor %}
+                </ul>
             </div>
         {% endif %}
     </div>

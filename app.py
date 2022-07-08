@@ -1033,12 +1033,9 @@ def profile_page(user):
                            user_classes=classes, current_page='my-profile')
 
 
-@app.route('/research/<paper_id>', methods=['GET'])
-def get_research(paper_id):
-    # We have to make some dict matching like this:
-    # {1: 'thesis_blabla_bla.pdf", 2: "another_thesis.pdf"}
-    filename = "test123"
-    return send_from_directory('/content/research', filename, as_attachment=True)
+@app.route('/research/<filename>', methods=['GET'])
+def get_research(filename):
+    return send_from_directory('content/research/', filename, as_attachment=True)
 
 
 @app.route('/<page>')
