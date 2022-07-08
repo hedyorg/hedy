@@ -20,13 +20,13 @@
             </a>
             <div class="dropdown-menu" style="display: none;">
                 <ul>
-                    <li class="dropdown-item"><a class="text-white no-underline" href="/highscores"><span class="fas fa-trophy ltr:mr-4 rtl:ml-4"></span>{{_('highscores')}}</a></li>
-                    <li class="dropdown-item"><a class="text-white no-underline" href="/my-achievements"><span class="fas fa-fw fa-list-alt ltr:mr-4 rtl:ml-4"></span>{{_('my_achievements')}}</a></li>
-                    <li class="dropdown-item"><a class="text-white no-underline" href="/my-profile"><span class="fas fa-user-cog ltr:mr-4 rtl:ml-4"></span>{{_('my_account')}}</a></li>
+                    <li><a class="dropdown-item" href="/highscores"><span class="fas fa-trophy ltr:mr-4 rtl:ml-4"></span>{{_('highscores')}}</a></li>
+                    <li><a class="dropdown-item" href="/my-achievements"><span class="fas fa-fw fa-list-alt ltr:mr-4 rtl:ml-4"></span>{{_('my_achievements')}}</a></li>
+                    <li><a class="dropdown-item" href="/my-profile"><span class="fas fa-user-cog ltr:mr-4 rtl:ml-4"></span>{{_('my_account')}}</a></li>
                   {% if is_teacher %}
-                      <li class="dropdown-item"><a class="text-white no-underline" href="/for-teachers"><span class="fas fa-chalkboard-teacher ltr:mr-4 rtl:ml-4"></span>{{_('for_teachers')}}</a></li>
+                      <li><a class="dropdown-item" href="/for-teachers"><span class="fas fa-chalkboard-teacher ltr:mr-4 rtl:ml-4"></span>{{_('for_teachers')}}</a></li>
                   {% endif %}
-                    <li class="dropdown-item"><a class="text-white no-underline" href="#" onclick="hedyApp.auth.logout ();event.preventDefault();"><span class="fas fa-fw fa-sign-out-alt ltr:mr-4 rtl:ml-4"></span>{{_('logout')}}</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="hedyApp.auth.logout ();event.preventDefault();"><span class="fas fa-fw fa-sign-out-alt ltr:mr-4 rtl:ml-4"></span>{{_('logout')}}</a></li>
                 </ul>
             </div>
         </li>
