@@ -248,7 +248,7 @@ adventures:
         default_save_name: Kalkulilo
     restaurant:
         name: Restoracio
-        description: Create your own virtual restaurant
+        description: Kreu vian propran virtualan restoracion
         default_save_name: Restoracio
         levels:
             1:
@@ -418,13 +418,13 @@ adventures:
             3:
                 story_text: "## Faru liston!\nEn Nivelo 3, oni povas fari liston. Oni povas lasi la komputilon elekti hazardaĵon el la listo. Oni faras tion per `{at} {random}`.\n"
                 example_code: "```\nbestoj {is} hundo, kato, kanguruo\n{print} bestoj {at} {random}\n```\n"
-                story_text_2: You can also add items to the list with `{add}` and remove items with `{remove}`.
+                story_text_2: Oni ankaŭ povas aldoni erojn al la listo per `{add}` kaj forigi erojn per `{remove}`.
                 example_code_2: "```\nbestoj {is} hundo, kato, kanguruo\n{add} pingveno {to_list} bestoj\n{remove} kato {from} bestoj\n{print} bestoj {at} {random}\n```\n"
                 start_code: '{print} saluton mondo!'
             4:
                 start_code: "{print} 'Saluton, mondo'"
-                story_text: "## 'Quotation marks'\nIn level 4 `{ask}` and `{print}` have changed.\n\nYou must put text that you want to print between quotation marks.\n\nThis is useful, because now you can print all the words you want. Also the words you used to store something with `{is}`.\n\nMost programming languages also use quotation marks when printing, so we are also getting a step closer to real programming!\n"
-                example_code: "```\n{print} 'You need to use quotation marks from now on!'\nanswer {is} {ask} 'What do we need to use from now on?'\n{print} 'We need to use ' answer\n```\n"
+                story_text: "## 'Citiloj'\nEn Nivelo 4, `{ask}` kaj `{print}` ŝanĝiĝis.\n\nOni devas meti presotan tekston inter citiloj.\n\nTio utilas, ĉar nun oni povas presi ĉiajn ajn vortojn. Kaj simile pri tiuj vortoj, kiujn oni konservas per `{is}`.\n\nPreskaŭ ĉiuj programlingvoj ankaŭ uzas citilojn por presado; tiel ni proksimiĝas al vera programado!\n"
+                example_code: "```\n{print} 'Oni devas uzi citilojn ekde nun!'\nrespondo {is} {ask} 'Kion oni bezonas uzi ekde nun?'\n{print} 'Oni devas uzi ' respondo 'n'\n```\n"
                 story_text_2: "## Adventures are getting more and more difficult\nThe adventures are now getting more and more difficult in the successive tabs.\nSo it is best to start on the left with the story, and work to the right, in order to be challenged more and more.\n"
             5:
                 start_code: "nomo {is} {ask} 'Kio estas via nomo?'\n{if} nomo {is} Hedy {print} 'bone!' {else} {print} 'ba!'"
@@ -436,13 +436,13 @@ adventures:
                 example_code_2: "```\nnomo {is} {ask} 'Kio estas via nomo?'\n{if} nomo {is} Hedy {print} 'bone'\n{else} {print} 'ba!'\n```\n"
             6:
                 start_code: "{print} '5 multiplikite per 5 estas ' 5 * 5"
-                story_text: "## 1 + 1\n In this level you learn something new: you can now also calculate.\n\n The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.\n\n The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!\n That is why we multiply with the asterisk above 8: `5 * 5`. Read that as \"5 times 5\" that helps you remember it best.\n"
+                story_text: "## 1 + 1\n En ĉi tiu nivelo, vi lernas ion novan: vi povas nun ankaŭ kalkuli.\n\n La pluso estas facila; vi skribas ĝin simile al matematiko: `5 + 5` ekzemple. La minuso ankaŭ funkcias bone, jen `5 - 5`.\n\n La multipliko estas iom malsamaj, ĉar ne ekzistas la multipliko-signo en via klavaro. Nu, serĉu; ĝi vere ne ekzistas!\n Tial oni multiplikas per la asterisko (ofte la klavo 8 kun la majuskliga klavo): `5 * 5`. Legu tion kiel «5 multiplikite per 5», por helpi la memoradon.\n"
                 example_code: "```\n{print} '5 plus 5 estas ' 5 + 5\n{print} '5 minus 5 estas ' 5 - 5\n{print} '5 multiplikite per 5 estas ' 5 * 5\n```\n"
                 story_text_2: "We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:\n"
                 example_code_2: "```\nnomo = Hedy\nrespondo = 20 + 4\n```\n"
             7:
                 start_code: "{repeat} 3 {times} {print} 'Hedy estas amuza!'"
-                story_text: "## Level 7! Level 7!\nLevel 7 adds the `{repeat}` command.  `{repeat}` can be used to execute one line of code multiple times.\n"
+                story_text: "## Nivelo 7! Nivelo 7!\nNivelo 7 enkondukas la komandon `{repeat}`. `{repeat}` povas esti uzata por ruli unu linion da kodo plurfoje.\n"
                 example_code: "```\n{repeat} 3 {times} {print} 'Hedy estas amuza!'\n```\n"
             8:
                 start_code: "{repeat} 5 {times}\n    {print} 'Saluton ĉiuj'\n    {print} 'Jen linio represota 5 fojojn'"
@@ -500,9 +500,9 @@ adventures:
                 example_code: "```\nprices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
             18:
                 start_code: "nomo = 'Hedy'\n{print}('Mia nomo estas ', nomo)"
-                story_text: "## The last level!\nWe arrived at real Python code! That means we need to use parentheses with {print} and {range} from now on."
+                story_text: "## La lasta nivelo!\nNi alvenis al vera Python-kodo! Tio signifas, ke ni devas uzi rondajn krampojn kun {print} kaj {range} de nun."
                 example_code: "```\n{print}('mia nomo estas Hedy!')\n```\n"
-                story_text_2: If you want to print more than one item, you need to separate them by commas.
+                story_text_2: Se oni volas presi pli ol unu eron, oni devas apartigi ilin per komoj.
                 example_code_2: "```\ntemperaturo = 25\n{print}('Nun estas ', temperature, 'gradoj ekstere')\n```\n"
                 story_text_3: "##  Input\nThe final change we will need to make to get Python code is changing `{ask}` into `{input}`."
                 example_code_3: "```\n{print}('Mia nomo estas Hedy!')\nnomo = {input}('Kio estas via nomo?')\n{print}('Do via nomo estas ', nomo)\n```\n"
@@ -636,7 +636,7 @@ adventures:
                 start_code: '# via kodo ĉi tie'
     fortune:
         name: Aŭguristo
-        description: Let Hedy predict the future
+        description: Igu Hedy aŭguri la estontecon
         default_save_name: Aŭguristo
         levels:
             1:
