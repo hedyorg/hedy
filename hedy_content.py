@@ -59,7 +59,7 @@ ADVENTURE_ORDER = [
 
 RESEARCH = {}
 for paper in os.listdir('content/research'):
-    # An_approach_to_describing_the_semantics_of_Hedy.pdf -> An approach to describing the semantics of Hedy
+    # An_approach_to_describing_the_semantics_of_Hedy_2022.pdf -> An approach to describing the semantics of Hedy
     name = paper.replace("_", " ").split(".")[0]
     RESEARCH[name] = paper
 
