@@ -1086,9 +1086,9 @@ class ConvertToPython(Transformer):
     def process_variable_for_fstring_padded(self, name):
         # used to transform variables in comparisons
         if self.is_variable(name):
-            return f"str({hash_var(name)}).zfill(100)"
+            return f"convert_numerals('{self.numerals_language}', {hash_var(name)}).zfill(100)"
         elif ConvertToPython.is_float(name):
-            return f"str({name}).zfill(100)"
+            return f"convert_numerals('{self.numerals_language}', {name}).zfill(100)"
         elif ConvertToPython.is_quoted(name):
             return f"{name}.zfill(100)"
         else:
@@ -1525,7 +1525,9 @@ class ConvertToPython_6(ConvertToPython_5):
         remaining_text = ' '.join(args[1:])
         arg1 = self.process_variable(remaining_text)
 
-        return f"str({arg0}) == str({arg1})"
+        # FH, 2022 this used to be str but convert_numerals in needed to accept non-latin numbers
+        # and works exactly as str for latin numbers (i.e. does nothing on str, makes 3 into '3')
+        return f"convert_numerals('{self.numerals_language}', {arg0}) == convert_numerals('{self.numerals_language}', {arg1})"
 
     def assign(self, args):
         parameter = args[0]
@@ -2299,7 +2301,6 @@ def transpile_inner(input_string, level, lang="en"):
     input_string = process_input_string(input_string, level)
 
     program_root = parse_input(input_string, level, lang)
-    print(program_root.pretty())
     is_program_valid(program_root, input_string, level, lang)
 
     try:
