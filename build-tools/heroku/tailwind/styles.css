@@ -27,6 +27,7 @@ h4 {
   @apply font-bold text-base;
 }
 
+/* TB: Why do we have this? It makes it (a lot) harder to style these element within the templates... */
 * + p, * + ul, * + ol, * + pre {
   @apply mt-4;
 }
@@ -272,10 +273,7 @@ body[dir='rtl'] .right-hand-shadow {
   @apply border-blue-300;
 }
 
-.money_tab {
-  @apply border-green-600 bg-green-400 text-white font-semibold;
-}
-
+/* TB: We shouldn't ever do this, all this dynamic handling can already be fixed with Tailwind! */
 @screen lg {
   .tab {
     @apply px-2;
@@ -429,6 +427,20 @@ p.close-dialog {
 
 .personal-input {
   @apply block appearance-none w-3/4 lg:w-1/2 text-gray-700 px-4 py-1 rounded-lg;
+}
+
+/* Signup page */
+.signup-container {
+  @apply mx-auto flex px-8 flex-row items-center;
+}
+
+.signup-label {
+  @apply inline-block w-48;
+}
+
+
+.signup-input {
+  @apply inline-block w-64 md:w-80 lg:w-96 px-2 py-1 rounded-lg border-gray-400;
 }
 
 /* Developers mode toggle */
