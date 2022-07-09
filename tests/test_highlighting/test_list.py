@@ -7,7 +7,7 @@ class HighlighterTestList(HighlightTester):
     def test_list(self):
         self.assert_highlighted_chr(
             "sword is l ost, 12, aver i",
-            "TTTTT KK TTTTTT TTT TTTTTT",
+            "TTTTT KK TTTTTK TTK TTTTTT",
             level="level3", lang="en")
 
 
