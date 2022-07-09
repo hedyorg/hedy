@@ -346,10 +346,6 @@ def routes(app, database):
             return validation, 400
 
         # Validate fields only relevant when creating a single user account
-        if not isinstance(body.get('mail_repeat'), str) or not valid_email(body['mail_repeat']):
-            return gettext('repeat_match_email'), 400
-        if body['email'] != body['mail_repeat']:
-            return gettext('repeat_match_email'), 400
         if not isinstance(body.get('password_repeat'), str) or body['password'] != body['password_repeat']:
             return gettext('repeat_match_password'), 400
         if not isinstance(body.get('language'), str) or body.get('language') not in ALL_LANGUAGES.keys():
@@ -611,9 +607,9 @@ def routes(app, database):
         if updates:
             DATABASE.update_user(username, updates)
 
-        # We might also have to update the value on the public profile data
-        if 'country' in body:
-            DATABASE.update_country_public_profile(username, body.get('country'))
+        # Always make sure that the country stored on the public profile is identical to the profile one
+        DATABASE.update_country_public_profile(username, body.get('country', None))
+
 
         # We want to check if the user choose a new language, if so -> reload
         # We can use g.lang for this to reduce the db calls
