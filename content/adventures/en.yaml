@@ -3150,17 +3150,21 @@ adventures:
                     Maybe you have tried using decimal numbers in your restaurant adventure. If you did, you probably noticed that Hedy didn't understand them yet and always rounded off.
                     From the next level on you can use decimal numbers.
 
-                    Another cool feauture in the next level is that you can use mulitiple words in a variable.
-                    For intance, you could already do this...
                 example_code: |
                     ```
-                    name = {ask} 'Who is your favorite cartoon character?'
-                    {print} 'I love watching ' name
+                    burger is 5
+                    drink is 2
+                    total is burger + drink
+                    print 'You have ordered a burger and a drink'
+                    print 'That costs ' total ' dollars please'
                     ```
-                    But you couldn't use multiple words in a variable like the example below. This program does not work yet in this level!
+                    The code above works, because the burger is 5 dollars and the drink is 2 dollar. But if you charge 50 cents more, the programm doesn't work anymore! Like the code below:
                     ```
-                    show = SpongeBob SquarePants
-                    {print} show 'is my favorite show!'
+                    burger is 5.50
+                    drink is 2.30
+                    total is burger + drink
+                    print 'You have ordered a burger and a drink'
+                    print 'That costs ' total ' dollars please'
                     ```
                     Go to the next level to make this code work!
                 start_code: "{print} 'Lets go to the next level!'"
