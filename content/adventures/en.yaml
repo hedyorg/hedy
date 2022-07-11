@@ -176,14 +176,26 @@ adventures:
                         {print} 'This will be printed 5 times'
                 story_text: |
                     ## Indentation
-                    `{ask}` and `{print}` still work as you know them. But `{if}` and `{repeat}` have changed!
+                    `{ask}` and `{print}` still work as you know them. But `{if}`, `{else}` and `{repeat}` have changed!
                     You can now execute groups of code together, but you will have to *indent* the code.
                     That means putting four spaces at the beginning of the line. You will also have to indent when you just want to create a block of one line.
                 example_code: |
+                    This is how the `{repeat}` command works now:
                     ```
                     {repeat} 5 {times}
                         {print} 'Hello everyone'
                         {print} 'This is all repeated 5 times'
+                    ```
+                    This is how the `{if}` and `{else}` command work now:
+
+                    ```
+                    name {is} {ask} 'What is your name?'
+                    {if} name {is} Hedy
+                        {print} 'Welcome Hedy'
+                        {print} 'You can play on your computer!'
+                    {else}
+                        {print} 'INTRUDER!'
+                        {print} 'You cannot use this computer!'
                     ```
             9:
                 start_code: |-
