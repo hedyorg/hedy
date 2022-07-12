@@ -238,7 +238,6 @@ def rule_level4():
     "valueFrom" : [],
     })
 
-
 def add_extra_rule(automaton):
     for state in automaton:
         if state != "start":

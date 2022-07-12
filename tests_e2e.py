@@ -95,8 +95,8 @@ class AuthHelper(unittest.TestCase):
 
         if username in USERS:
             return USERS[username]
-        body = {'username': username, 'email': username + '@hedy.com', 'mail_repeat': username + '@hedy.com',
-                'language': 'nl', 'keyword_language': 'en', 'agree_terms': True, 'password': 'foobar', 'password_repeat': 'foobar'}
+        body = {'username': username, 'email': username + '@hedy.com', 'language': 'nl', 'keyword_language': 'en',
+                'agree_terms': True, 'password': 'foobar', 'password_repeat': 'foobar'}
         response = request('post', 'auth/signup', {}, body, cookies=self.user_cookies[username])
 
         # It might sometimes happen that by the time we attempted to create the user, another test did it already.
@@ -295,10 +295,27 @@ class TestPages(AuthHelper):
         # WHEN a fresh user
         self.given_fresh_user_is_logged_in()
 
-        # THEN we can retrieve the program page with a level and adventure filter
-        page = "/programs?level=2&adventure=story"
-        self.get_data(page)
-        # Note that the values of the parameters are not relevant, we want to make sure a valid page is returned
+        # THEN we can retrieve the different filtering options of the programs page
+        filters = [
+            "?level=null&adventure=null",
+            "?level=4&adventure=null"
+            "?level=2&adventure=story"
+        ]
+        for filter in filters:
+            self.get_data("/programs" + filter)
+
+    def test_valid_explore_filtering_page(self):
+        # WHEN a fresh user
+        self.given_fresh_user_is_logged_in()
+
+        # THEN we can retrieve the different filtering options of the explore page
+        filters = [
+            "?level=null&adventure=null&lang=null",
+            "?level=3&adventure=parrot&lang=null",
+            "?level=11&adventure=fortune&lang=es"
+        ]
+        for filter in filters:
+            self.get_data("/explore" + filter)
 
     def test_all_languages(self):
         # WHEN trying all languages to reach all pages
@@ -381,8 +398,8 @@ class TestAuth(AuthHelper):
     def test_signup(self):
         # GIVEN a valid username and signup body
         username = self.make_username()
-        user = {'username': username, 'email': username + '@hedy.com', 'mail_repeat': username + '@hedy.com',
-                'password': 'foobar', 'password_repeat': 'foobar', 'language': 'nl', 'keyword_language': 'en', 'agree_terms': True}
+        user = {'username': username, 'email': username + '@hedy.com', 'password': 'foobar',
+                'password_repeat': 'foobar', 'language': 'nl', 'keyword_language': 'en', 'agree_terms': True}
 
         # WHEN signing up a new user
         # THEN receive an OK response code from the server

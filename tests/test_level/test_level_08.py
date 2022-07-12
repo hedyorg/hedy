@@ -40,7 +40,7 @@ class TestsLevel8(HedyTester):
 
         expected = textwrap.dedent("""\
         naam = 'Hedy'
-        if str(naam) == str('Hedy'):
+        if convert_numerals('Latin', naam) == convert_numerals('Latin', 'Hedy'):
           print(f'leuk')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
@@ -53,7 +53,7 @@ class TestsLevel8(HedyTester):
 
         expected = textwrap.dedent("""\
         naam = 'Hedy'
-        if str(naam) == str('Hedy'):
+        if convert_numerals('Latin', naam) == convert_numerals('Latin', 'Hedy'):
           print(f'leuk')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
@@ -66,7 +66,7 @@ class TestsLevel8(HedyTester):
 
         expected = textwrap.dedent("""\
         naam = 'James'
-        if str(naam) == str('trailing_space'):
+        if convert_numerals('Latin', naam) == convert_numerals('Latin', 'trailing_space'):
           print(f'shaken')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
@@ -79,7 +79,7 @@ class TestsLevel8(HedyTester):
 
         expected = textwrap.dedent("""\
         naam = 'James'
-        if str(naam) == str('James Bond'):
+        if convert_numerals('Latin', naam) == convert_numerals('Latin', 'James Bond'):
           print(f'shaken')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
@@ -92,7 +92,7 @@ class TestsLevel8(HedyTester):
 
         expected = textwrap.dedent("""\
         naam = 'James'
-        if str(naam) == str('trailing space'):
+        if convert_numerals('Latin', naam) == convert_numerals('Latin', 'trailing space'):
           print(f'shaken')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
@@ -106,7 +106,7 @@ class TestsLevel8(HedyTester):
 
         expected = textwrap.dedent(f"""\
         naam = 'James'
-        if str(naam) == str('James Bond'):
+        if convert_numerals('Latin', naam) == convert_numerals('Latin', 'James Bond'):
           print(f'shaken')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
@@ -120,7 +120,7 @@ class TestsLevel8(HedyTester):
 
         expected = textwrap.dedent(f"""\
         naam = 'James'
-        if str(naam) == str('Bond James Bond'):
+        if convert_numerals('Latin', naam) == convert_numerals('Latin', 'Bond James Bond'):
           print(f'shaken')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
@@ -133,7 +133,7 @@ class TestsLevel8(HedyTester):
 
         expected = textwrap.dedent(f"""\
         answer = 'no'
-        if str(answer) == str('He said "no"'):
+        if convert_numerals('Latin', answer) == convert_numerals('Latin', 'He said "no"'):
           print(f'no')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
@@ -146,7 +146,7 @@ class TestsLevel8(HedyTester):
 
         expected = textwrap.dedent(f"""\
         answer = 'no'
-        if str(answer) == str('He said \\'no\\''):
+        if convert_numerals('Latin', answer) == convert_numerals('Latin', 'He said \\'no\\''):
           print(f'no')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
@@ -161,7 +161,7 @@ class TestsLevel8(HedyTester):
         expected = textwrap.dedent("""\
         jouwkeuze = 'schaar'
         computerkeuze = 'schaar'
-        if str(computerkeuze) == str(jouwkeuze):
+        if convert_numerals('Latin', computerkeuze) == convert_numerals('Latin', jouwkeuze):
           print(f'gelijkspel!')""")
 
         self.multi_level_tester(max_level=11, code=code, expected=expected, output='gelijkspel!')
@@ -199,7 +199,7 @@ class TestsLevel8(HedyTester):
         cmp = '1'
         test = '2'
         acu = '0'
-        if str(test) == str(cmp):
+        if convert_numerals('Latin', test) == convert_numerals('Latin', cmp):
           acu = int(acu) + int(1)""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
@@ -222,7 +222,7 @@ class TestsLevel8(HedyTester):
         expected = textwrap.dedent("""\
         a = 'test'
         b = '15'
-        if str(a) == str(b):
+        if convert_numerals('Latin', a) == convert_numerals('Latin', b):
           c = '1'""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
@@ -300,7 +300,7 @@ class TestsLevel8(HedyTester):
 
         expected = textwrap.dedent("""\
         naam = 'Hedy'
-        if str(naam) == str('Hedy'):
+        if convert_numerals('Latin', naam) == convert_numerals('Latin', 'Hedy'):
           print(f'leuk')
         else:
           print(f'minder leuk')""")
@@ -318,7 +318,7 @@ class TestsLevel8(HedyTester):
 
         expected = textwrap.dedent("""\
         kleur = 'geel'
-        if str(kleur) == str('groen'):
+        if convert_numerals('Latin', kleur) == convert_numerals('Latin', 'groen'):
           antwoord = 'ok'
         else:
           antwoord = 'stom'
@@ -336,7 +336,7 @@ class TestsLevel8(HedyTester):
 
         expected = textwrap.dedent("""\
         a = '1'
-        if str(a) == str('1'):
+        if convert_numerals('Latin', a) == convert_numerals('Latin', '1'):
           print(f'{a}')
         else:
           print(f'nee')""")
@@ -355,7 +355,7 @@ class TestsLevel8(HedyTester):
         expected = textwrap.dedent("""\
         people = ['mom', 'dad', 'Emma', 'Sophie']
         dishwasher = random.choice(people)
-        if str(dishwasher) == str('Sophie'):
+        if convert_numerals('Latin', dishwasher) == convert_numerals('Latin', 'Sophie'):
           print(f'too bad I have to do the dishes')
         else:
           print(f'luckily no dishes because{dishwasher}is already washing up')""")
@@ -371,7 +371,7 @@ class TestsLevel8(HedyTester):
             print 'pizza is better'""")
 
         expected = textwrap.dedent("""\
-        if str('1') == str('2'):
+        if convert_numerals('Latin', '1') == convert_numerals('Latin', '2'):
           print(f'nice!')
         else:
           print(f'pizza is better')""")
