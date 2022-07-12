@@ -21,7 +21,7 @@ adventures:
                 start_code: '# via kodo ĉi tie'
                 story_text: "## Story\nIn this level you can use nesting to put {if}, {repeat} or {for} commands inside other {if}, {repeat} or {for} commands. This gives you many options and really helps you to make your story interactive.\n"
                 example_code: "```\n{print} 'Robin is walking downtown'\nlocation = {ask} 'Is Robin going into a shop, or does she go home?'\n{if} location {is} shop\n    {print} 'She enters the shop.'\n    {print} 'Robin sees an interesting looking book'\n    book = {ask} 'Does Robin buy the book?'\n    {if} book {is} yes\n        {print} 'Robin buys the book and goes home'\n    {else}\n        {print} 'Robin leaves the shop and goes home'\n{else}\n    {print} 'Robin goes home'\n```\n"
-                story_text_2: The example above is pretty straightforward, but by nesting {if} you can really elaborate your code and turn your story into a real game. Check out this example!
+                story_text_2: La ĉi-supra ekzemplo estas sufiĉe simpla, sed per uzo de `{if}` ene de aliaj `{if}`-blokoj, oni povas ellabori vian kodon kaj igi sian rakonton vera ludo. Rigardu la jenan ekzemplon!
                 example_code_2: "## Elaborate code\n```\nsword = lost\ngame = on\n{print} 'Our hero is walking through the forest'\n{print} 'The path splits two ways'\n{repeat} 2 {times}\n    {if} game {is} on\n        path = {ask} 'Which path should she choose?'\n        {if} path {is} left\n            {if} sword {is} found\n                {print} 'Our hero comes across a dragon!'\n                {print} 'Luckily our hero has a sword to defeat the beast!'\n                game = over\n            {else}\n                {print} 'Our hero finds a dragon, but she doesnt have any weapons!'\n                {print} 'Our hero is beaten by the dragon...'\n                {print} 'Try again'\n                game = over\n        {if} path {is} right\n            {if} sword {is} lost\n                {print} 'Our hero finds a sword'\n                {print} 'This could come in very handy'\n                sword = found\n            {else}\n                {print} 'You have already found the sword. There is nothing left here.'\n                {print} 'She walks back'\n```\n"
             10:
                 start_code: '# via kodo ĉi tie'
@@ -38,9 +38,9 @@ adventures:
             3:
                 story_text: "## Story\nIn level 3 you can make your story more fun. You can use randomness for any monster, animal or other obstacle, like this:\n"
                 example_code: "```\nbestoj {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} Li nun aŭdas la sonon de bestoj {at} {random}\n```\n"
-                story_text_2: "The command `{add}` can also come in handy in your story.\n"
+                story_text_2: "La komando `{add}` ankaŭ povas esti utila en via rakonto.\n"
                 example_code_2: "```\n{print} Li aŭdas sonon\nbestoj {is} \U0001F43F, \U0001F994, \U0001F987, \U0001F989\nbesto {is} {ask} Kio estas ĝi laŭ via opinio?\n{add} besto {to_list} bestoj\n{print} ĝi estis bestoj {at} {random}\n```\n"
-                story_text_3: "This is an example of the `{remove}` command in your story\n"
+                story_text_3: "Jen ekzemplo de la komando `{remove}` en via rakonto\n"
                 example_code_3: "```\n{print} His backpack got way too heavy.\n{print} Inside were a bottle of water, a flashlight and a brick.\nbag {is} water, flashlight, brick\ndump {is} {ask} Which item should he dump?\n{remove} dump {from} bag\n```\n"
                 start_code: '{print} Via rakonto'
             4:
@@ -56,11 +56,11 @@ adventures:
                 example_code: "```\n{print} 'La princo petadis por helpo.'\n{repeat} 5 {times} {print} 'Helpon!'\n{print} 'Kial neniu helpas min?'\n```\n"
                 start_code: "{repeat} 5 {times} {print} 'Helpon!'"
             12:
-                story_text: "## Story\nIn this level you can use the quotation marks to save multiple words in a variable."
+                story_text: "## Rakonto\nEn ĉi tiu nivelo, oni povas uzi la citilojn por konservi plurajn vortojn en variablo."
                 example_code: "```\nnomo = 'La Reĝino de Anglio'\n{print} nomo ' estis manĝanta pecon da kuko, kiam subite…'\n```\n"
                 start_code: '# via kodo ĉi tie'
             13:
-                story_text: "## Story\nBy using the `{and}` and `{or}` commands, you can shorten your stories. For example, check out the dragon story.\n"
+                story_text: "## Rakonto\nUzante la komandojn `{and}` kaj `{or}`, oni povas mallongigi siajn rakontojn. Ekzemple, rigardu la jenan rakonton pri drakoj.\n"
                 example_code: "```\nsword = 'lost'\ngame = 'on'\n{print} 'Our hero is walking through the forest'\n{print} 'The path splits two ways'\n{for} i {in} {range} 0 {to} 2\n    {if} game {is} 'on'\n        path = {ask} 'Which path should she choose?'\n        {if} path {is} 'left' {and} sword {is} 'found'\n            {print} 'Our hero comes across a dragon!'\n            {print} 'Luckily our hero has a sword to defeat the beast!'\n            game = 'over'\n        {if} path {is} 'left' {and} sword {is} 'lost'\n            {print} 'Our hero finds a dragon, but she doesnt have any weapons!'\n            {print} 'Our hero is beaten by the dragon...'\n            {print} 'Try again'\n            game = 'over'\n        {if} path {is} 'right' {and} sword {is} 'found'\n            {print} 'You have already found the sword. There is nothing left here.'\n            {print} 'She walks back'\n        {if} path {is} 'right' {and} sword {is} 'lost'\n            {print} 'Our hero finds a sword'\n            {print} 'This could come in very handy'\n            sword = 'found'\n```\n"
                 start_code: '# via kodo ĉi tie'
         name: Rakonto
@@ -84,16 +84,16 @@ adventures:
                 example_code: "```\nnombro = 99\n{repeat} 99 {times}\n    {print} nombro ' boteloj da biero sur la muro'\n    {print} nombro ' boteloj da biero'\n    {print} 'Prenu unu, ĝuu ĝin kune'\n    nombro = nombro - 1\n    {print} nombro ' boteloj da biero sur la muro'\n```\n"
                 start_code: '# via kodo ĉi tie'
             11:
-                story_text: "## Songs\nIn this level you can use the `{for} i {in} {range}` command to make songs that use counting.\n"
+                story_text: "## Kantoj\nEn ĉi tiu nivelo, oni povas uzi la komandon `{for} i {in} {range}` por fari kantojn, kiuj uzas kalkuladon.\n"
                 example_code: "## 5 little monkeys\n```\n{for} i {in} {range} 5 {to} 1\n    {print} i ' little monkeys jumping on the bed'\n    {print} 'One fell off and bumped his head'\n    {print} 'Mama called the doctor and the doctor said'\n    {if} i {is} 1\n        {print} 'PUT THOSE MONKEYS RIGHT TO BED!'\n    {else}\n        {print} 'NO MORE MONKEYS JUMPING ON THE BED!'\n```\n"
                 start_code: '# via kodo ĉi tie'
             12:
-                story_text: "## Sing a song!\nIn this song we can make it even easier to program '{if} you're happy and you know it, clap your hands'. Because we can put all of the actions in a variable, check it out:\n"
+                story_text: "## Kantu!\nEn ĉi tiu kanto, oni povas eĉ pli facile programi «se vi estas feliĉa kaj vi scias ĝin, frapu la manojn», ĉar oni povas meti ĉiujn agojn en unu variablon jene:\n"
                 example_code: "```\nactions = 'clap your hands', 'stomp your feet', 'shout Hurray!'\n{for} action {in} actions\n    {for} i {in} {range} 1 {to} 2\n        {print} '{if} youre happy and you know it'\n        {print} action\n    {print} '{if} youre happy and you know it and you really want to show it'\n    {print} '{if} youre happy and you know it'\n    {print} action\n```\n"
                 start_code: '# via kodo ĉi tie'
             16:
                 story_text: "## Sing a song!\nIn this level, you can program a song like OldMacDonald even more quickly. You can connect the right animal to the right sound by simply putting them in the same place in the list.\nThe Drunken Sailor is also quickly made in this level. You only need 8 lines for the entire song, check it out!\n"
-                example_code: "## Old MacDonald\n```\nbestoj = ['pig', 'hundo', 'bovo']\nsounds = ['oink', 'woof', 'moo']\n{for} i {in} {range} 1 {to} 3\n    besto = bestoj[i]\n    sound = sounds[i]\n    {print} 'Old McDonald had a farm'\n    {print} 'E I E I O!'\n    {print} 'and on that farm he had a ' besto\n    {print} 'E I E I O!'\n    {print} 'with a ' sound sound ' here'\n    {print} 'and a ' sound sound ' there'\n    {print} 'here a ' sound\n    {print} 'there a ' sound\n    {print} 'everywhere a ' sound sound\n```\n\n## Drunken Sailor\n```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines\n    {for} i {in} {range} 1 {to} 3\n        {print} line\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
+                example_code: "## Maljuna MacDonald\n```\nbestoj = ['porko', 'hundo', 'bovo']\nsonoj = ['oink', 'woof', 'muĝ']\n{for} i {in} {range} 1 {to} 3\n    besto = bestoj[i]\n    sono = sonoj[i]\n    {print} 'Old McDonald had a farm'\n    {print} 'E I E I O!'\n    {print} 'and on that farm he had a ' besto\n    {print} 'E I E I O!'\n    {print} 'with a ' sono sono ' here'\n    {print} 'and a ' sono sono ' there'\n    {print} 'here a ' sono\n    {print} 'there a ' sono\n    {print} 'everywhere a ' sono sono\n```\n\n## Drunken Sailor\n```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines\n    {for} i {in} {range} 1 {to} 3\n        {print} line\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
                 start_code: '# via kodo ĉi tie'
         name: Kantu!
         description: Presi kanton
@@ -139,7 +139,7 @@ adventures:
                 example_code_2: "```\nanguloj = {ask} 'Kiom da anguloj mi desegnu?'\nangulo = 360 / anguloj\n{repeat} angulo {times}\n    {turn} _\n    {forward} _\n```\n"
                 start_code: anguloj = {ask} 'Kiom da anguloj desegni?'
         name: Testudo
-        description: Make your own drawing
+        description: Faru vian propran desegnaĵon
         default_save_name: Testudo
     dishes:
         levels:
@@ -161,7 +161,7 @@ adventures:
                 story_text: "## Dishwashing\nHow often is everyone going to do the dishes? Is that fair? You can count it in this level.\n"
                 example_code: "```\nhomoj = panjo, paĉjo, Emilio, Sofio\nemilio_lavoj = 0\nlavonto = homoj {at} {random}\n{print} 'La lavonto estas' lavonto\n{if} lavonto {is} Emilio emilio_lavoj = emilio_lavoj + 1\n{print} 'Emilio lavos la telerojn ĉi-semajne' emilio_lavoj 'fojojn'\n```\n\nNow you can copy lines 3 to 5 a few times (e.g. 7 times for a whole week) to calculate for a whole week again.\nDo you make the code for the whole week?\n"
                 story_text_2: "## Make it fair\nIf you are extremely unlucky the previous program might choose you to to the dishes for the whole week! That's not fair!\nTo create a fairer system you can use the `{remove}` command to remove the chosen person from the list. This way you don't have to do the dishes again untill everybody has had a turn.\n\nMonday and tuesday are ready for you! Can you add the rest of the week?\nAnd... can you come up with a solution for when your list is empty?\n"
-                example_code_2: "```\npeople = mom, dad, Emma, Sophie\ndishwasher = people {at} {random}\n{print} 'Monday the dishes are done by: ' dishwasher\n{remove} dishwasher {from} people\ndishwasher = people {at} {random}\n{print} 'Tuesday the dishes are done by: ' dishwasher\n{remove} dishwasher {from} people\ndishwasher = people {at} {random}\n```\n"
+                example_code_2: "```\nhomoj = panjo, paĉjo, Emilio, Sofio\nlavonto = homoj {at} {random}\n{print} 'Lunde la telerojn lavos: ' lavonto\n{remove} lavonto {from} homoj\nlavonto = homoj {at} {random}\n{print} 'Marde la telerojn lavos: ' lavonto\n{remove} lavonto {from} homoj\nlavonto = homoj {at} {random}\n```\n"
                 start_code: "{print} 'Kiu lavos la telerojn?'"
             7:
                 story_text: "## Dishwashing\nWith the `{repeat}` you can repeat pieces of code. You can use this to calculate who will be washing dishes for the entire week.\n"
@@ -177,14 +177,14 @@ adventures:
     rock:
         default_save_name: Roko
         name: Roko, papero, tondilo
-        description: Make your own rock, paper, scissors game
+        description: Faru vian propran ludon de roko, papero kaj tondilo
         levels:
             1:
                 story_text: "## Rock, paper, scissors\nIn level 1 you can start with a rock, paper, scissors  game.\n\nWith `{ask}` you can make a choice, and with `{echo}` you can repeat that choice.\n"
                 example_code: "```\n{print} what do you choose?\n{ask} choose from rock, paper or scissors\n{echo} so your choice was:\n```\nInstead of using words, you could also use emojis of course: ✊✋✌\n"
                 start_code: '{print} Bonvenon al ludo de roko, papero kaj tondilo!'
             2:
-                story_text: "## Rock, paper, scissors\nIn this level you can practise using the variables, so that you can make the rock, paper, scissors game in the next level!\n"
+                story_text: "## Roko, papero, tondilo\nEn ĉi tiu nivelo, vi povas praktiki uzi la variablojn, por ke vi povu fari la ludon de roko, papero kaj tondilo en la sekva nivelo!\n"
                 example_code: "```\nelekto {is} _\n{print} Mi elektas elekto\n```\n"
                 start_code: '# via kodo ĉi tie'
             3:
@@ -205,10 +205,10 @@ adventures:
                 start_code: '# via kodo ĉi tie'
             10:
                 story_text: "## Rock, Paper, Scissors\nFeeling too lazy to play the game yourself? Let Hedy play it for you!\n"
-                example_code: "```\nchoices = rock, paper, scissors\nplayers = Marleen, Michael\n{for} player {in} players\n     {print} player ' chooses ' choices {at} {random}\n```\n"
+                example_code: "```\nelektoj = roko, papero, tondilo\nludantoj = Margareto, Miĥaelo\n{for} ludanto {in} ludantoj\n     {print} ludanto ' elektas la jenon: ' elektoj {at} {random}\n```\n"
                 start_code: '# via kodo ĉi tie'
             13:
-                story_text: "## Rock, paper, scissors\nWith the `{and}` command you can shorten your rock, paper, scissors code! Check out the example code below and try to finish it.\n"
+                story_text: "## Roko, papero, tondilo\nPer la komando `{and}`, vi povas mallongigi vian kodon por la ludo! Rigardu la jenan ekzemplokodon kaj provu kompletigi ĝin.\n"
                 example_code: "```\noptions = 'rock', 'paper', 'scissors'\nyour_choice = {ask} 'What do you choose?'\ncomputer_choice = options {at} {random}\n{print} 'You choose ' your_choice\n{print} 'The computer chooses ' computer_choice\n{if} computer_choice {is} your_choice\n    {print} 'Tie'\n{if} computer_choice {is} 'rock' {and} your_choice {is} 'paper'\n    {print} 'You win!'\n{if} computer_choice {is} 'rock' {and} your_choice {is} 'scissors'\n    {print} 'The computer wins!'\n```\n"
                 start_code: '# via kodo ĉi tie'
             15:
@@ -224,7 +224,7 @@ adventures:
                 example_code: "```\nscore = 0\n{for} i {in} {range} 0 {to} 9\n    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    number1 = numbers {at} {random}\n    number2 = numbers {at} {random}\n    correct = number1 * number2\n    answer = 0\n    {while} answer != correct\n        {print} 'How much is ' number1 ' times ' number2 '?'\n        answer = {ask} 'Fill in your answer:'\n        {print} 'Your answer is ' answer\n    {print} 'Good job!'\n{print} 'You win!'\n```\n"
             6:
                 story_text: "## Calculator\nNow that you can calculate, you can also create a program to practice maths calculations. You can make up the calculations yourself, for example:\n"
-                example_code: "```\ncorrect_answer = 11 * 27\nanswer = {ask} 'How much is 11 times 27?'\n{if} answer {is} correct_answer {print} 'good job!'\n{else} {print} 'Wrong! It was ' correct_answer\n```\n"
+                example_code: "```\nĝusta_respondo = 11 * 27\nrespondo = {ask} 'Kiom estas 11 multiplikite per 27?'\n{if} respondo {is} ĝusta_respondo {print} 'Bone!'\n{else} {print} 'Malĝuste! Jen la ĝusta respondo: ' ĝusta_respondo\n```\n"
                 story_text_2: "## Random numbers\nYou can also let the computer do random sums on its own using random.\nThis is how you choose a number of tables to practice, and from that you always get a different sum:\n"
                 example_code_2: "```\ntables = 4, 5, 6, 8\nnumbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\ntable = tables {at} {random}\nnumber = numbers {at} {random}\ncorrect_answer = table * number\nanswer = {ask} 'how much is ' table ' times ' number '?'\n{if} answer {is} correct_answer {print} 'okay'\n{else} {print} 'mistake! it was ' correct_answer\n```\n"
                 start_code: "{print} 'Bonvenon al kalkulilo!'"
@@ -283,7 +283,7 @@ adventures:
                 start_code: '# via kodo ĉi tie'
             7:
                 story_text: "## Restaurant\nIn this level you've learned how to use the {repeat} command to repeat a line of code a certain amount of times.\nYou can use that in your restaurant to {ask} multiple people what they'd like to eat. Like this:\n"
-                example_code: "```\n{print} 'Bonvenon al Hedys restaurant!'\npeople = {ask} 'How many people are joining us today?'\n{repeat} people times food = {ask} 'What would you like to eat?'\n{print} 'Thanks for your order! Its coming right up!'\n```\n"
+                example_code: "```\n{print} 'Bonvenon al Restoracio Hedy!'\nhomoj = {ask} 'How many people are joining us today?'\n{repeat} homoj times food = {ask} 'What would you like to eat?'\n{print} 'Dankon pro via mendo! Its coming right up!'\n```\n"
                 start_code: '# via kodo ĉi tie'
             8:
                 story_text: "## Restaurant\nIn this level you can make your virtual restaurant more elaborate by repeating multiple lines of code. Like this:\n"
@@ -306,7 +306,7 @@ adventures:
                 start_code: '# via kodo ĉi tie'
             12:
                 story_text: "## Restaurant\nFrom this level on you can use decimal numbers to make you menu more realistic.\n"
-                example_code: "```\nprice = 0\nfood = {ask} 'What would you like to order?'\ndrinks = {ask} 'What would you like to drink?'\n{if} food {is} 'hamburger'\n    price = price + 6.50\n{if} food {is} 'pizza'\n    price = price + 5.75\n{if} drinks {is} 'water'\n    price = price + 1.20\n{if} drink {is} 'soda'\n    price = price + 2.35\n{print} 'That will be ' price ' dollar, please'\n```\n"
+                example_code: "```\nprezo = 0\nmanĝaĵo = {ask} 'Kion vi volas mendi?'\ntrinkaĵo = {ask} 'Kion vi volas trinki?'\n{if} manĝaĵo {is} 'hamburgero'\n    prezo = prezo + 6.50\n{if} manĝaĵo {is} 'pico'\n    prezo = prezo + 5.75\n{if} trinkaĵo {is} 'akvo'\n    prezo = prezo + 1.20\n{if} trinkaĵo {is} 'sodakvo'\n    prezo = prezo + 2.35\n{print} 'Bonvolu pagi ' prezo ' spesmilojn'\n```\n"
                 start_code: '# via kodo ĉi tie'
             13:
                 story_text: "## Restaurant\nIn this level we can use the new commands to upgrade our restaurant.\nWe use `{and}` to see {if} two things are both the case.\n"
@@ -321,9 +321,9 @@ adventures:
     haunted:
         levels:
             2:
-                start_code: monster1 {is} _
+                start_code: monstro1 {is} _
                 story_text: "## Haunted House\nIn this haunted house you can choose your monsters with emojis. Of course you could also use words.\n"
-                example_code: "```\nmonster_1 {is} \U0001F47B\nmonster_2 {is} \U0001F921\nmonster_3 {is} \U0001F476\n{print} You enter the haunted house.\n{print} Suddenly you see a monster_1\n{print} You run into the other room, but a monster_2 is waiting there for you!\n{print} Oh no! Quickly get to the kitchen.\n{print} But as you enter monster_3 attacks you!\n```\n"
+                example_code: "```\nmonstro_1 {is} \U0001F47B\nmonstro_2 {is} \U0001F921\nmonstro_3 {is} \U0001F476\n{print} You enter the haunted house.\n{print} Suddenly you see a monstro_1\n{print} You run into the other room, but a monstro_2 is waiting there for you!\n{print} Oh no! Quickly get to the kitchen.\n{print} But as you enter monstro_3 attacks you!\n```\n"
             3:
                 start_code: '# via kodo ĉi tie'
                 story_text: "## Haunted house game\nIn the previous levels you've made an introduction to your haunted house game, but as you might have noticed the story would always have a dreadful end.\nIn this level you can make your story more interactive by changing the outcome of the game; sometimes you'll get eaten, sometimes you'll escape!\nLet Hedy decide randomly!\n"
@@ -345,11 +345,11 @@ adventures:
             9:
                 story_text: "## Haunted House\nIn this level you can use nesting, which allows you to make the haunted house even more interactive!\n\n## Challenge\nNow it's very hard to win this game, can you make it easier to win?\nFor example by only having 1 wrong door and 2 correct doors instead of 1 correct door and 2 wrong ones?\n"
                 example_code: "```\n{print} 'Escape from the Haunted House!'\nplayer = alive\ndoors = 1, 2, 3\nmonsters = zombie, vampire, giant spider\n{repeat} 3 {times}\n    {if} player {is} alive\n        correct_door {is} doors {at} {random}\n        {print} 'There are 3 doors in front of you...'\n        chosen_door = {ask} 'Which door do you choose?'\n        {if} chosen_door {is} correct_door\n            {print} 'No monsters here!'\n        {else}\n            {print} 'You are eaten by a ' monsters {at} {random}\n            player = dead\n    {else}\n        {print} 'GAME OVER'\n{if} player {is} alive\n    {print} 'Great! You survived!'\n```\n"
-                start_code: "{print} 'Escape from the haunted house!'"
+                start_code: "{print} 'Eskapu el la hantata domo!'"
             11:
                 story_text: "## Haunted House\nIn this level we've changed the repeat command and we've added a line to our haunted house that tells the player in which room they are.\n"
                 example_code: "```\n{print} 'Escape from the Haunted House!'\nplayer {is} alive\ndoors = 1, 2, 3\nmonsters = zombie, vampire, giant spider\n{for} i {in} {range} 1 {to} 3\n    {if} player {is} alive\n        correct_door = doors {at} {random}\n        {print} 'Room ' i\n        {print} 'There are 3 doors in front of you...'\n        chosendoor = {ask} 'Which door do you choose?'\n        {if} chosendoor {is} correct_door\n            {print} 'No monsters here!'\n        {else}\n            {print} 'You are eaten by a ' monsters {at} {random}\n            player = dead\n    {else}\n        {print} 'GAME OVER'\n{if} player {is} alive\n    {print} 'Great! You survived!'\n```\n"
-                start_code: "{print} 'Escape from the haunted house!'"
+                start_code: "{print} 'Eskapu el la hantata domo!'"
             14:
                 story_text: "## Haunted House\nIn this level you can use the `<` and `>` symbol to introduce lives to your game.\n"
                 example_code: "```\n{print} 'Escape from the haunted house'\nlives = 3\ndoors = 1, 2, 3\nmonsters = 'the wicked witch', 'a zombie', 'a sleeping 3 headed dog'\n{for} i {in} {range} 1 {to} 10\n    {if} lives > 0\n        good_door = doors {at} {random}\n        monster = monsters {at} {random}\n        chosen_door = {ask} 'Which door do you choose?'\n        {if} good_door == chosen_door\n            {print} 'You have chosen the correct door'\n        {else}\n            {print} 'You see...' monster\n            {if} monster == 'a sleeping 3 headed dog'\n                {print} 'Pffieuw.... Its asleep'\n            {else}\n                {print} 'You lose one life'\n                lives = lives -1\n    {else}\n        {print} 'GAME OVER'\n```\n"
@@ -359,20 +359,20 @@ adventures:
                 example_code: "```\nnumbers = [1, 2, 3]\ni = numbers[{random}]\nhint = ['growling', 'a cackling laugh', 'fluttering batwings']\nmonsters = ['zombie', 'witch', 'vampire']\nbad_fate = ['Your brain is eaten', 'You are forever cursed', 'You are bitten']\ngood_fate = ['You throw the ham. The zombie is distracted and starts etaing it.', 'You set the curtains on fire. The witch flees out of fear for the fire', 'The vampire hates garlic and flees']\nweapons = ['ham', 'lighter', 'garlic']\n{print} 'You are standing in front of an old mansion'\n{print} 'Something is not right here'\n{print} 'You hear ' hint[i]\n{print} 'You are going to explore it'\n{print} 'You enter the kitchen and see a lighter, a raw ham and a garlic.'\nyour_weapon = {ask} 'What do you bring with you?'\n{print} 'With your ' your_weapon ' you enter the living room'\n{print} 'There you find a ' monsters[i]\nneeded_weapon = weapons[i]\n{if} your_weapon == needed_weapon\n    {print} 'You use your ' your_weapon\n    {print} good_fate[i]\n    {print} 'YOU WIN!'\n{else}\n    {print} 'You have chosen the wrong weapon...'\n    {print} bad_fate[i]\n    {print} 'GAME OVER'\n```\n"
                 start_code: '# via kodo ĉi tie'
         name: Hantata domo
-        description: Escape from the haunted house
+        description: Eskapu el la hantata domo
         default_save_name: Hantata domo
     language:
         levels:
             5:
-                story_text: "## Learn a new language\nMake your own program to practice your vocabulary in a new language.\n"
+                story_text: "## Lernu novan lingvon\nFaru vian propran programon por ekzerci vian vortprovizon en nova lingvo.\n"
                 example_code: "```\n{print} 'Lernu la francan!'\nkato {is} {ask} '\U0001F431'\n{if} kato {is} chat {print} 'Bonege!'\n{else} {print} 'Ne, kato estas chat'\nrano {is} {ask} '\U0001F438'\n{if} rano {is} grenouille {print} 'Bonege!'\n{else} {print} 'Ne, rano estas grenouille'\n```\n"
                 start_code: '# via kodo ĉi tie'
             16:
-                story_text: "## Learn a new language\nMake your own program to practice your vocabulary in a new language.\n"
+                story_text: "## Lernu novan lingvon\nFaru vian propran programon por ekzerci vian vortprovizon en nova lingvo.\n"
                 example_code: "```\nfrench_words = ['bonjour', 'ordinateur', 'pomme de terre']\ntranslation = ['hello', 'computer', 'potato']\nscore = 0\n{for} i {in} {range} 1 {to} 3\n    answer = {ask} 'What does ' french_words[i] ' mean?'\n    correct = translation[i]\n    {if} answer == correct\n        {print} 'Correct!'\n        score = score + 1\n    {else}\n        {print} 'Wrong, ' french_words[i] ' means ' translation[i]\n{print} 'You gave ' score ' correct answers.'\n```\n"
                 start_code: '# via kodo ĉi tie'
         name: Lingvo
-        description: Practice words in a foreign language
+        description: Praktiku vortojn de fremda lingvo
         default_save_name: Lingvo
     tic:
         levels:
@@ -425,10 +425,10 @@ adventures:
                 start_code: "{print} 'Saluton, mondo'"
                 story_text: "## 'Citiloj'\nEn Nivelo 4, `{ask}` kaj `{print}` ŝanĝiĝis.\n\nOni devas meti presotan tekston inter citiloj.\n\nTio utilas, ĉar nun oni povas presi ĉiajn ajn vortojn. Kaj simile pri tiuj vortoj, kiujn oni konservas per `{is}`.\n\nPreskaŭ ĉiuj programlingvoj ankaŭ uzas citilojn por presado; tiel ni proksimiĝas al vera programado!\n"
                 example_code: "```\n{print} 'Oni devas uzi citilojn ekde nun!'\nrespondo {is} {ask} 'Kion oni bezonas uzi ekde nun?'\n{print} 'Oni devas uzi ' respondo 'n'\n```\n"
-                story_text_2: "## Adventures are getting more and more difficult\nThe adventures are now getting more and more difficult in the successive tabs.\nSo it is best to start on the left with the story, and work to the right, in order to be challenged more and more.\n"
+                story_text_2: "## Aventuroj fariĝas pli kaj pli malfacilaj\nLa aventuroj nun fariĝas pli kaj pli malfacilaj en la sinsekvaj langetoj.\nDo estas plej bone komenci maldekstre pri la rakonto, kaj moviĝi dekstren, por pliigi la malfacilecon laŭgrade.\n"
             5:
                 start_code: "nomo {is} {ask} 'Kio estas via nomo?'\n{if} nomo {is} Hedy {print} 'bone!' {else} {print} 'ba!'"
-                story_text: "## If... else....\nIn level 5 there is something new, the `{if}`! With the `{if}` you can choose between two different options.\nThis code prints nice if you enter Hedy as a name, and boo! if you enter something else.\n`{ask}` and `{print}` still work like they did in level 4.\n"
+                story_text: "## Se... alie....\nEn Nivelo 5 estas io nova, la `{if}`! Per la `{if}`, oni povas elekti inter du malsamaj opcioj.\nLa jena kodo presos «bone», se vi tajpos «Hedy» kiel nomon, kaj «ba!», se vi tajpos ion alian.\n`{ask}` kaj `{print}` daŭre funkcias kiel en Nivelo 4.\n"
                 example_code: "```\nnomo {is} {ask} 'kio estas via nomo?'\n{if} nomo {is} Hedy {print} 'bone' {else} {print} 'ba!'\n```\n"
                 story_text_3: "## Lists\nWhen we want to check if something is in a list, we can now use the `{in}` command.\nThis code prints pretty! if you choose green or yellow, and meh otherwise.\n"
                 example_code_3: "```\nbelaj_koloroj {is} verda, flava\nkoloro {is} {ask} 'Kio estas via plej ŝatata koloro?'\n{if} koloro {in} belaj_koloroj {print} 'bela!'\n{else} {print} 'ba!'\n```\n"
@@ -438,7 +438,7 @@ adventures:
                 start_code: "{print} '5 multiplikite per 5 estas ' 5 * 5"
                 story_text: "## 1 + 1\n En ĉi tiu nivelo, vi lernas ion novan: vi povas nun ankaŭ kalkuli.\n\n La pluso estas facila; vi skribas ĝin simile al matematiko: `5 + 5` ekzemple. La minuso ankaŭ funkcias bone, jen `5 - 5`.\n\n La multipliko estas iom malsamaj, ĉar ne ekzistas la multipliko-signo en via klavaro. Nu, serĉu; ĝi vere ne ekzistas!\n Tial oni multiplikas per la asterisko (ofte la klavo 8 kun la majuskliga klavo): `5 * 5`. Legu tion kiel «5 multiplikite per 5», por helpi la memoradon.\n"
                 example_code: "```\n{print} '5 plus 5 estas ' 5 + 5\n{print} '5 minus 5 estas ' 5 - 5\n{print} '5 multiplikite per 5 estas ' 5 * 5\n```\n"
-                story_text_2: "We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:\n"
+                story_text_2: "Ni ankaŭ faras ŝanĝon pri konservado de vorto en variablo! Oni nun povas uzi `=` anstataŭ `{is}` por konservi nomon aŭ nombron en variablo, jene:\n"
                 example_code_2: "```\nnomo = Hedy\nrespondo = 20 + 4\n```\n"
             7:
                 start_code: "{repeat} 3 {times} {print} 'Hedy estas amuza!'"
@@ -464,7 +464,7 @@ adventures:
                 start_code: "{print} 'Decimalaj nombroj nun postulas punkton (ne komon)'\n{print} 2.5 + 2.5"
                 story_text: "## Numbers and texts\n**Decimal numbers**\nSo far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the `.` for decimal numbers."
                 example_code: "```\n{print} 'Du kaj duono plus du kaj duono estas…'\n{print} 2.5 + 2.5\n```\n"
-                story_text_2: "**All texts need to be in quotation marks**\nFor this level on you will also have to use quotation marks when storing a text with `=`:\n"
+                story_text_2: "**Ĉiu teksto devas esti inter citiloj**\nPor ĉi tiu nivelo, oni ankaŭ devas uzi citilojn por konservi tekston per `=`:\n"
                 example_code_2: "```\nnomo = 'Hedy la Roboto'\n{print} 'Saluton ' nomo\n```\n"
                 story_text_3: "**All items in lists need quotation marks too**\nLists are texts, so they need quotation marks too. Mind that each single item on the list has quotation marks.\nThis allows you to save two words as 1 item on the list, for example 'Iron Man'.\n"
                 example_code_3: "```\nsuperherooj = 'Araneviro', 'Vespertviro', 'Ferviro'\n{print} superherooj {at} {random}\n```\n"
@@ -484,7 +484,7 @@ adventures:
                 example_code: "```\naĝo = {ask} 'Kian aĝon vi havas?'\n{if} aĝo > 12\n    {print} 'Vi estas pli aĝa ol mi!'\n```\n"
                 story_text_2: "From this level on, if you want to compare exactly, you can use two equal signs. This is what most programming languages do:\n"
                 example_code_2: "```\nnomo = {ask} 'Kio estas via nomo?'\n{if} nomo == 'Hedy'\n    {print} 'Bonege!'\n```\n"
-                story_text_3: "You can also compare if something is *not* equal to something else using `!=` like this:\n"
+                story_text_3: "Oni ankaŭ povas kontroli, ĉu io *ne* egalas ion alian, uzante `!=` jene:\n"
                 example_code_3: "```\nnomo = {ask} 'Kio estas via nomo?'\n{if} nomo != 'Hedy'\n    {print} 'vi ne estas Hedy'\n```\n"
             15:
                 start_code: "respondo = 0\n{while} respondo != 25\n    respondo = {ask} 'Kio estas 5 multiplikite per 5?'\n{print} 'Jen ĝusta respondo'"
@@ -493,7 +493,7 @@ adventures:
             16:
                 start_code: "fruktoj = ['pomo', 'banano', 'ĉerizo']\n{print} fruktoj"
                 story_text: "## More and more like real code!\nWe are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels.\nYou can use the square brackets as well to point out a place in the lists."
-                example_code: "```\nfriends = ['Ahmed', 'Ben', 'Cayden']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'the lucky number of ' friends[i]\n    {print} 'is ' lucky_numbers[i]\n```\n"
+                example_code: "```\namikoj = ['Amano', 'Benjameno', 'Cecilio']\nbonŝancaj_numeroj = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'la bonŝanca numero de ' amikoj[i]\n    {print} 'estas ' bonŝancaj_numeroj[i]\n```\n"
             17:
                 start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Jen mi venas!'"
                 story_text: "## Elif\nNow we are going to change indentation a little bit. Every time that we need an indentation, we need `:` at the line before the indentation.\n\nIn this level you can also use a new command: `{elif}`. `{elif}` is short for {else} {if} and you need it when you want to make 3 (or more!) options.\nCheck it out!"
@@ -504,7 +504,7 @@ adventures:
                 example_code: "```\n{print}('mia nomo estas Hedy!')\n```\n"
                 story_text_2: Se oni volas presi pli ol unu eron, oni devas apartigi ilin per komoj.
                 example_code_2: "```\ntemperaturo = 25\n{print}('Nun estas ', temperature, 'gradoj ekstere')\n```\n"
-                story_text_3: "##  Input\nThe final change we will need to make to get Python code is changing `{ask}` into `{input}`."
+                story_text_3: "##  Enigo\nLa fina ŝanĝo, kiun ni devos fari por havi Python-kodon, estas ŝanĝi `{ask}` al `{input}`."
                 example_code_3: "```\n{print}('Mia nomo estas Hedy!')\nnomo = {input}('Kio estas via nomo?')\n{print}('Do via nomo estas ', nomo)\n```\n"
     next:
         levels:
@@ -517,7 +517,7 @@ adventures:
                 story_text: "## Kio sekvas?\nGratulon! Vi atingis la lastan nivelon de Hedy! Sed ni laboradas por krei pli da niveloj kaj novaj aventuroj. Do bonvolu reveni poste por kontroli la plej novajn nivelojn!\n"
             1:
                 story_text: "## What's next?\nCongratulations! You've reached the end of level 1. Hopefully you've already made some awesome codes, but Hedy has a lot more to discover. \n\nIn the first level you might've notice that the `{echo}` command can only save one bit of information at a time. \nFor example in the restaurant adventure, you could {echo} what the costumer wanted to eat, or what they wanted to drink, but not both in one sentence. \n"
-                example_code: "```\n{print} Welcome at Hedy's\n{ask} What would you like to eat?\n{echo} So you want \n{ask} what would you like to drink?\n{echo} So you want \n```\n"
+                example_code: "```\n{print} Bonvenon al Restoracio Hedy\n{ask} Kion vi volas manĝi?\n{echo} Do vi volas manĝi \n{ask} Kion vi volas trinki?\n{echo} Do vi volas trinki \n```\n"
                 story_text_2: "If the player types a hamburger and coke, you can't say `so you would like a hamburger and coke`, but you have to make two separate line. \nAlso, the `{echo}` command only echoes the word at the end of the sentence. So you can't say `your hamburger is coming right up!`.\n\nThat changes in level 2. In level 2 you'll learn to work with variables, that allow you to save multiple pieces of information and print them in any place you want.\nBesides, you'll learn how to work with the `{at} {random}` command, that you can use to make games. \nSo let's go to the next level!\n"
                 start_code: "{print} Ek!"
             2:
@@ -530,7 +530,7 @@ adventures:
                 story_text: "## What's next?\nIn the previous levels you've already learned to use `{at} {random}` which made your games different every time you ran the code.\nBut it's not really interactive, the player doesn't have any influence on what happens in the game.\n\nIn the next level you'll learn the `{if}` command, that allows you to give different responses in your program. This way you can program a secret password for your computer for example.\nSo let's take a peak!\n\n```\npassword {is} {ask} 'What is the correct password?'\n```\n"
                 start_code: "{print} 'Al la sekva nivelo!'"
             5:
-                story_text: "## What's next?\nNow you've reached the end of this level, so you have learned `{ask}` and `{if}`. For example you can {ask} guests what they would like to eat.\nWhat you can't yet do though, is calculate the price for everyone's dinner.\n\nThe next level makes it possible to use addition, subtraction and multiplication in your programs. This way you can calculate the prices in your restaurant, but you could also add a secret code to give your friends and family a discount.\nAnother option in the next level is programming your own maths game, for your little brother or sister to practice their multiplications.\nGo see for yourself in the next level!\n"
+                story_text: "## Kio sekvos?\nNun vi atingis la finon de ĉi tiu nivelo kaj lernis `{ask}` kaj `{if}`. Ekzemple oni povas uzi `{ask}` por demandi al gastoj, kion ili ŝatus manĝi.\nTamen, oni ankoraŭ ne povas kalkuli la prezon de ĉies vespermanĝo.\n\nLa sekva nivelo ebligas uzi adicion, subtrahon kaj multiplikon en oniaj programoj. Tiel oni povas kalkuli la prezojn en sia restoracio, kaj oni ankaŭ povas aldoni sekretan kodon por doni rabaton al siaj amikoj kaj familio.\nAlia eblo en la sekva nivelo estas programi propran matematikan ludon, por ke via frato aŭ fratino praktiku siajn multiplikojn.\nEk al la sekva nivelo!\n"
                 example_code: "## Free drinks!\n```\n{print} 'Welcome at McHedy'\norder {is} {ask} 'What would you like to eat?'\n{print} 'You would like ' order\n{if} order {is} hamburger price {is} 5\n{if} order {is} fries price {is} 2\ndrinks {is} {ask} 'What would you like to drink?'\n{print} 'You would like ' drinks\n{print} 'That will be ' price ' dollars for your ' order ' please'\n{print} 'The drinks are free in this level because Hedy cant calculate the price yet...'\n```\n"
                 start_code: "{print} 'Al la sekva nivelo!'"
             6:
@@ -538,8 +538,8 @@ adventures:
                 example_code: "```\n{print} 'feliĉan naskiĝtagon al vi'\n{print} 'feliĉan naskiĝtagon al vi'\n{print} 'feliĉan naskiĝtagon kara Hedy'\n{print} 'feliĉan naskiĝtagon al vi'\n```\n"
                 start_code: "{print} 'Al la sekva nivelo!'"
             7:
-                story_text: "## What's next?\nNow you've learned how to repeat one single line of code. This comes in handy, but it's not always enough. Sometimes you want to repeat multiple lines at once.\nthe next level allows you to group a couple of lines of code, and repeat that little group of lines all at once!\n"
-                example_code: "```\n{repeat} 5 {times} {print} 'In the next level you can repeat multiple lines of code at once!'\n```\n"
+                story_text: "## Kio sekvos?\nNun vi lernis kiel ripeti unu linion da kodo. Tio utilas sed ne ĉiam sufiĉas. Kelkfoje oni volas ripeti plurajn liniojn samtempe.\nLa sekva nivelo permesos al vi grupigi kelkajn liniojn da kodo kaj ripeti tiun grupon da linioj samtempe!\n"
+                example_code: "```\n{repeat} 5 {times} {print} 'En la sekva nivelo oni povos ripeti plurajn liniojn da kodo samtempe!'\n```\n"
                 start_code: "{print} 'Al la sekva nivelo!'"
             8:
                 story_text: "## What's next?\nGreat job! You've reached the end of another level! In this level you've learned to use multiple lines of code in an {if} or {repeat} command. But you can't yet combine the two...\nGood news! In the next level you will be allowed to put an {if} inside an {if}, or inside a {repeat} command.\n"
@@ -608,24 +608,24 @@ adventures:
             3:
                 story_text: "## Dice\nIn this level we can choose from a list. With that we can let the computer choose one side of the die.\nTake a look at the games you have in your closet at home.\nAre there games with a (special) die? You can also copy it with this code.\nFor example, the dice of the game Earthworms with the numbers 1 to 5 and an earthworm on it.\n\n![Die of earthworms with 1 to 5 and an earthworm on it](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)\n"
                 example_code: "```\nelektoj {is} 1, 2, 3, 4, 5, lumbriko\n{print} elektoj {at} {random}\n```\n"
-                start_code: '{print} What will the die indicate this time?'
+                start_code: '{print} Kion indikos la ĵetkubo ĉi foje?'
             4:
                 story_text: "## Dice\nIn this level we can make sentences with the die value in the sentence, with quotes of course.\nThis time the sample code is not quite complete. Can you finish the code?\n"
                 example_code: "```\nelektoj {is} 1, 2, 3, 4, 5, lumbriko\n{print} _ la rezulto de via ĵeto estas _\n{print} _ _ _ <- jen vi programu la elektadon\n```\n"
-                start_code: "{print} 'What will the die indicate this time?'"
+                start_code: "{print} 'Kion indikos la ĵetkubo ĉi-foje?'"
             5:
                 story_text: "## Dice\nYou can also make a die again in this level using the `{if}`.\nComplete the sample code so that the code says \"You can stop throwing\" once you have thrown an earthworm.\n\nBut maybe you want to recreate a die from a completely different game. That's fine too! Then make up your own reaction. Eg 'yes' for 6 and 'pity' for something {else}.\n"
                 example_code: "```\nchoices {is} 1, 2, 3, 4, 5, earthworm\nthrow {is} _\n{print} 'you have' _ 'thrown'\n{if} _ {is} earthworm {print} 'You can stop throwing.' _ {print} 'You have to hear it again!'\n```\n"
-                start_code: "{print} 'What will the die indicate this time?'"
+                start_code: "{print} 'Kion indikos la ĵetkubo ĉi-foje?'"
             6:
                 story_text: "## Dice\nYou can also make an Earthworm die again in this, but now you can also calculate how many points have been rolled.\nYou may know that the worm counts 5 points for Earthworms. Now after a roll you can immediately calculate how many points you have thrown.\nThis is the code to calculate points for one die:\n"
                 example_code: "```\nchoices = 1, 2, 3, 4, 5, earthworm\npoints = 0\nthrow = choices {at} {random}\n{print} 'you threw' throw\n{if} throw {is} earthworm points = points + 5 {else} points = points + throw\n{print} 'those are' points ' point'\n```\nCan you make the code so that you get the total score for 8 dice? To do that, you have to cut and paste some lines of the code.\n"
                 example_code_2: "## Looking forward\n\nDid you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!\n"
-                start_code: "{print} 'What will the die indicate this time?'"
+                start_code: "{print} 'Kion indikos la ĵetkubo ĉi-foje?'"
             7:
                 story_text: "## Dice\nYou can also make a die again in level 5. With the `{repeat}` code you can easily roll a whole hand of dice.\nTry to finish the sample code! The dashes should contain multiple commands and characters.\n\nBut maybe you want to make a completely different die. Of course you can!\n"
                 example_code: "```\nelektoj = 1, 2, 3, 4, 5, lumbriko\n{repeat} _ _ {print} _ _ _\n```\n"
-                start_code: "{print} 'What will the die indicate this time?'"
+                start_code: "{print} 'Kion indikos la ĵetkubo ĉi-foje?'"
             10:
                 story_text: "## Dice\nIs everybody taking too long throwing the dice? In this level you can let Hedy throw all the dice at once!\n"
                 example_code: "```\nplayers = Ann, John, Jesse\nchoices = 1, 2, 3, 4, 5, 6\n{for} player {in} players\n    {print} player ' throws ' choices {at} {random}\n    {sleep}\n```\n"
@@ -641,7 +641,7 @@ adventures:
         levels:
             1:
                 story_text: "## Fortune Teller\nHave you ever been to a carnival and had your future predicted by a fortune teller? Or have you ever played with a magic eight ball?\nThen you probably know that they can't really predict your future, but it's still fun to play!\n\nIn the upcoming levels you can learn how to create your own fortune telling machine!\nIn level 1 you can start off easy by letting Hedy introduce herself as a fortune teller and let her {echo} the players' answers.\nLike this:\n"
-                example_code: "```\n{print} Hello, I'm Hedy the fortune teller!\n{ask} Who are you?\n{print} Let me take a look in my crystal ball\n{print} I see... I see...\n{echo} Your name is\n```\n"
+                example_code: "```\n{print} Saluton, mi estas Hedy la aŭguristo!\n{ask} Kiu vi estas?\n{print} Mi rigardu mian kristalan globon\n{print} Mi vidas... mi vidas...\n{echo} Via nomo estas\n```\n"
                 story_text_2: "## Challenge\nHedy now only tells you your name. Can you expand the code so that Hedy can predict more things about you?\nObviously, Hedy isn't a very good fortune teller yet, as she can only repeat the answers that were given by the players!\nTake a look in level 2 to improve your fortune teller.\n"
                 start_code: '# via kodo ĉi tie'
             3:
@@ -684,9 +684,9 @@ adventures:
                 example_code: "```\nfortunes = 'you will be rich', 'you will fall in love', 'you will slip on a banana peel'\n{print} 'I will take a look in my crystall ball for your future.'\n{print} 'I see... I see...'\n{sleep}\n{print} fortunes {at} {random}\n```\n"
                 start_code: '# via kodo ĉi tie'
     piggybank:
-        name: Piggy Bank
+        name: Ŝparujo
         description: Count your pocketmoney!
-        default_save_name: Piggy Bank
+        default_save_name: Ŝparujo
         levels:
             12:
                 story_text: "## Piggy Bank\nIn this adventure you learn how to make a digital piggy bank, to calculate how much money you have and how long you need to save up to buy what you want!\n"
@@ -707,23 +707,23 @@ adventures:
                 start_code: '# via kodo ĉi tie'
     secret:
         name: Superspiono
-        description: Make your own spy code
+        description: Faru vian propran spionkodon
         default_save_name: Superspiono
         levels:
             12:
-                story_text: "## Make a secret code like a super spy\nIn this adventure you can create your own super spy code. Encode a message that only the right agent can decipher.\nIf the enemy tries to crack the code, they will get some false info to waste their time.\n"
-                example_code: "```\nname is ask 'What is your name?'\nif name is 'Agent007'\n    a is 'Go to the airport '\nelse\n    a is 'Go to the trainstation '\npassword is ask 'What is the password?'\nif password is 'TOPSECRET'\n    b is 'tomorrow at 02.00'\nelse\n    b is 'today at 10.00'\nprint a + b\n```\n"
+                story_text: "## Faru sekretan kodon kiel superspiono\nEn ĉi tiu aventuro, vi povas krei vian propran superspionkodon. Kodu mesaĝon, kiun nur la ĝusta agento povas deĉifri.\nSe la malamiko provos solvi la kodon, ili ricevos falsajn informojn por malŝpari sian tempon.\n"
+                example_code: "```\nnomo {is} {ask} 'Kio estas via nomo?'\n{if} nomo {is} 'Agento007'\n    a {is} 'Iru al la flughaveno '\n{else}\n    a {is} 'Iru al la stacidomo '\npasvorto {is} {ask} 'Kio estas la pasvorto?'\n{if} pasvorto {is} 'SEKRETO'\n    b {is} 'morgaŭ je la 2a horo'\nelse\n    b {is} 'hodiaŭ je la 10a horo'\n{print} a + b\n```\n"
                 start_code: '## via kodo ĉi tie'
             13:
-                story_text: "## Superspy\nThe code you made in the previous level can be made a lot easier in this one with the `{and}` command.\n"
+                story_text: "## Superspiono\nLa kodo, kiun vi faris en la antaŭa nivelo, estas simpligebla en ĉi tiu nivelo per la komando `{and}`.\n"
                 example_code: "```\nnomo {is} {ask} 'Kio estas via nomo?'\npasvorto {is} {ask} 'Kio estas via pasvorto?'\n{if} nomo {is} 'Agento007' {and} {password} {is} 'SEKRETO'\n    {print} 'Iru al la flughaveno je la 2a horo'\n{else}\n    {print} 'Iru al la stacidomo je la 10a horo'\n ```\n"
                 start_code: '## via kodo ĉi tie'
     blackjack:
-        name: Blackjack
-        description: Try to get as close to 21 as you can
-        default_save_name: Blackjack
+        name: Nigra fanto
+        description: Provu alproksimiĝi al 21 laŭeble
+        default_save_name: Nigra fanto
         levels:
             17:
-                story_text: "## Create a game of Blackjack\nBlackjack is a simple game of cards in which you have to get as close to 21 points as possible. You get two cards. Each card is worth their numeral value, and the face cards (Jack, Queen and King) are worth 10 points.\nThe Ace is worth either 1 or 11 points (you can choose). The dealer, your opponent, also gets two cards.\nIf you want, you can get another card, and its points will be added to your total. The dealer can also choose to take another card.\nBut be careful not to get more than 21 points, because if you do, you lose!\nThe player who gets closest to 21, without going over it, wins!\n\nHave fun!\n"
-                example_code: "```\n{print} 'BLACKJACK'\ncards = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Jack', 'Queen','King', 'Ace']\npoints = 0\ndealer_points = 0\ncard_1 = cards[{random}]\ncard_2 = cards[{random}]\ncard_3 = cards [{random}]\ndealer_card_1 = cards[{random}]\ndealer_card_2 = cards[{random}]\ndealer_card_3 = cards[{random}]\n# Points for card 1\n{if} card_1 == 'Jack' {or} card_1 == 'Queen' {or} card_1 == 'King':\n    points = points + 10\n{elif} card_1 == 'Ace':\n    points = points + 11\n{else}:\n    points = points + card_1\n# Points for card 2\n{if} card_2 == 'Jack' {or} card_2 == 'Queen' {or} card_2 == 'King':\n    points = points + 10\n{elif} card_2 == 'Ace':\n    points = points + 11\n{else}:\n    points = points + card_2\n# Points for dealer card 1\n{if} dealer_card_1 == 'Jack' {or} dealer_card_1 == 'Queen' {or} dealer_card_1 == 'King':\n    dealer_points = dealer_points + 10\n{elif} dealer_card_1 == 'Ace':\n    dealer_points = dealer_points + 11\n{else}:\n    dealer_points = dealer_points + dealer_card_1\n# Points for dealer card 2\n{if} dealer_card_2 == 'Jack' {or} dealer_card_2 == 'Queen' {or} dealer_card_2 == 'King':\n    dealer_points = dealer_points + 10\n{elif} dealer_card_2 == 'Ace':\n    dealer_points = dealer_points + 11\n{else}:\n    dealer_points = dealer_points + dealer_card_2\n# Two Aces\n{if} card_1 == 'Ace' {and} card_2 == 'Ace':\n    points = 12\n{if} dealer_card_1 == 'Ace' {and} dealer_card_2 == 'Ace':\n    dealer_points = 12\n# Scoreboard\n{print} 'You have a ' card_1 ' and a ' card_2 ' (' points ' points)'\n{print} 'The dealer has a ' dealer_card_1 ' and a ' dealer_card_2 ' (' dealer_points ' points)'\n# Extra card for the player\nhit = {ask} 'Do you want an extra card?'\n{if} hit == 'yes':\n    {if} card_3 == 'Jack' {or} card_3 == 'Queen' {or} card_3 == 'King':\n        points = points + 10\n    {elif} card_3 == 'Ace':\n        {if} points > 11:\n            points = points + 11\n        {else}:\n            points = points + 1\n    {else}:\n        points = points + card_3\n    print 'You get an extra ' card_3 ' (' points ' points)'\n{else}:\n    print 'No extra cards'\n# Winner\n{if} points > 21 {or} dealer_points > points {or} dealer_points == 21:\n    {print} 'You lose'\n{elif} dealer_points < 17:\n    {print} 'The dealer takes an extra card. It is a... ' dealer_card_3\n    {if} dealer_card_3 == 'Jack' {or} dealer_card_3 == 'Queen' {or} dealer_card_3 == 'King':\n        dealer_points = dealer_points + 10\n    {elif} dealer_card_3 == 'Ace':\n        {if} dealer_points < 11:\n            dealer_points = dealer_points + 11\n        {else}:\n            dealer_points = dealer_points + 1\n    {else}:\n        dealer_points = dealer_points + dealer_card_3\n    {print} 'The dealer has ' dealer_points ' points now'\n    {if} dealer_points < 21 {and} dealer_points > points:\n        {print} 'You lose'\n    {else}:\n        {print} 'You win'\n{elif} points > dealer_points {and} points < 21:\n    {print} 'You win!'\n```\n"
+                story_text: "## Kreu ludon de Nigra fanto\nNigra fanto estas simpla kartludo, dum kiu oni provas alproksimiĝi laŭeble al 21 poentoj. Vi ricevas du kartojn. Ĉiu karto valoras sian numeran valoron, kaj la vizaĝkartoj (fanto, damo kaj reĝo) valoras 10 poentojn.\nLa aso valoras aŭ 1 aŭ 11 poentojn (vi povas elekti). La kazinisto, via kontraŭulo, ankaŭ ricevas du kartojn.\nSe vi volas, vi povas akiri alian karton, kaj ĝiaj poentoj estos aldonitaj al via totalo. La kazinisto ankaŭ povas preni alian karton.\nSed atentu ne akiri pli ol 21 poentojn, ĉar se vi tion faros, vi perdos!\nLa ludanto, kiu plej alproksimiĝos al 21, ne superante 21, gajnos!\n\nAmuziĝu!\n"
+                example_code: "```\n{print} 'NIGRA FANTO'\nkartoj = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Fanto', 'Damo', 'Reĝo', 'Aso']\npoentoj = 0\nkazinistaj_poentoj = 0\nkarto_1 = kartoj[{random}]\nkarto_2 = kartoj[{random}]\nkarto_3 = kartoj [{random}]\nkazinista_karto_1 = kartoj[{random}]\nkazinista_karto_2 = kartoj[{random}]\nkazinista_karto_3 = kartoj[{random}]\n# Poentoj de la unua karto\n{if} karto_1 == 'Fanto' {or} karto_1 == 'Damo' {or} karto_1 == 'Reĝo':\n    poentoj = poentoj + 10\n{elif} karto_1 == 'Aso':\n    poentoj = poentoj + 11\n{else}:\n    poentoj = poentoj + karto_1\n# Poentoj de la dua karto\n{if} karto_2 == 'Fanto' {or} karto_2 == 'Damo' {or} karto_2 == 'Reĝo':\n    poentoj = poentoj + 10\n{elif} card_2 == 'Aso':\n    poentoj = poentoj + 11\n{else}:\n    poentoj = poentoj + karto_2\n# Poentoj de la unua karto de la kazinisto\n{if} kazinista_karto_1 == 'Fanto' {or} kazinista_karto_1 == 'Damo' {or} kazinista_karto_1 == 'Reĝo':\n    kazinistaj_poentoj = kazinistaj_poentoj + 10\n{elif} kazinista_karto_1 == 'Aso':\n    kazinistaj_poentoj = kazinistaj_poentoj + 11\n{else}:\n    kazinistaj_poentoj = kazinistaj_poentoj + kazinista_karto_1\n# Poentoj de la dua karto de la kazinisto\n{if} kazinista_karto_2 == 'Fanto' {or} kazinista_karto_2 == 'Damo' {or} kazinista_karto_2 == 'Reĝo':\n    kazinistaj_poentoj = kazinistaj_poentoj + 10\n{elif} kazinista_karto_2 == 'Aso':\n    kazinistaj_poentoj = kazinistaj_poentoj + 11\n{else}:\n    kazinistaj_poentoj = kazinistaj_poentoj + kazinista_karto_2\n# Du asoj\n{if} karto_1 == 'Aso' {and} karto_2 == 'Aso':\n    poentoj = 12\n{if} kazinista_karto_1 == 'Aso' {and} kazinista_karto_2 == 'Aso':\n    kazinistaj_poentoj = 12\n# Montri poentojn\n{print} 'Jen viaj kartoj: ' karto_1 ' kaj ' karto_2 ' (' poentoj ' poentoj)'\n{print} 'Jen la kartoj de la kazinisto: ' kazinista_karto_1 ' kaj ' kazinista_karto_2 ' (' kazinistaj_poentoj ' poentoj)'\n# Kromkarto de la ludanto\nkromkarto = {ask} 'Ĉu vi deziras kroman karton?'\n{if} kromkarto == 'jes':\n    {if} karto_3 == 'Fanto' {or} karto_3 == 'Damo' {or} karto_3 == 'Reĝo':\n        poentoj = poentoj + 10\n    {elif} karto_3 == 'Aso':\n        {if} poentoj > 11:\n            poentoj = poentoj + 11\n        {else}:\n            poentoj = poentoj + 1\n    {else}:\n        poentoj = poentoj + karto_3\n    print 'Vi akiris kroman karton: ' karto_3 ' (' poentoj ' poentoj)'\n{else}:\n    print 'Neniu kroma karto'\n# Gajninto\n{if} poentoj > 21 {or} kazinistaj_poentoj > points {or} kazinistaj_poentoj == 21:\n    {print} 'Vi malgajnas!'\n{elif} kazinistaj_poentoj < 17:\n    {print} 'La kazinisto prenas kroman karton. Ĝi estas... ' kazinista_karto_3\n    {if} kazinista_karto_3 == 'Fanto' {or} kazinista_karto_3 == 'Damo' {or} kazinista_karto_3 == 'Reĝo':\n        kazinistaj_poentoj = kazinistaj_poentoj + 10\n    {elif} kazinista_karto_3 == 'Aso':\n        {if} kazinistaj_poentoj < 11:\n            kazinistaj_poentoj = kazinistaj_poentoj + 11\n        {else}:\n            kazinistaj_poentoj = kazinistaj_poentoj + 1\n    {else}:\n        kazinistaj_poentoj = kazinistaj_poentoj + kazinista_karto_3\n    {print} 'La kazinisto havas ' kazinistaj_poentoj ' poentojn nun'\n    {if} kazinistaj_poentoj < 21 {and} kazinistaj_poentoj > poentoj:\n        {print} 'Vi malgajnas!'\n    {else}:\n        {print} 'Vi gajnas!'\n{elif} poentoj > kazinistaj_poentoj {and} poentoj < 21:\n    {print} 'Vi gajnas!'\n```\n"
                 start_code: '# via kodo ĉi tie'
