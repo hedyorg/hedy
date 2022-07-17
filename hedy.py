@@ -1236,28 +1236,8 @@ class ConvertToPython_1(ConvertToPython):
             return "t.pencolor('black')"  # no arguments defaults to black ink
 
         arg = args[0].data
-        if arg == 'black':
-            return "t.pencolor('black')"
-        elif arg == 'blue':
-            return "t.pencolor('blue')"
-        elif arg == 'brown':
-            return "t.pencolor('brown')"
-        elif arg == 'gray':
-            return "t.pencolor('gray')"
-        elif arg == 'green':
-            return "t.pencolor('green')"
-        elif arg == 'orange':
-            return "t.pencolor('orange')"
-        elif arg == 'pink':
-            return "t.pencolor('pink')"
-        elif arg == 'purple':
-            return "t.pencolor('purple')"
-        elif arg == 'red':
-            return "t.pencolor('red')"
-        elif arg == 'white':
-            return "t.pencolor('white')"
-        elif arg == 'yellow':
-            return "t.pencolor('yellow')"
+        if arg in command_make_color:
+            return f"t.pencolor('{arg}')"
         else:
             # the TypeValidator should protect against reaching this line:
             raise exceptions.InvalidArgumentTypeException(command=Command.color, invalid_type='', invalid_argument=arg,
