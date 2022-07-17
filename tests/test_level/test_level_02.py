@@ -334,6 +334,54 @@ class TestsLevel2(HedyTester):
             max_level=self.max_turtle_level,
         )
 
+    # color tests
+    def test_color_red(self):
+        code = "color red"
+        expected = HedyTester.turtle_color_command_transpiled('red')
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            extra_check_function=self.is_turtle(),
+            max_level=self.max_turtle_level
+        )
+
+    def test_color_with_var(self):
+        code = textwrap.dedent("""\
+            foo is white
+            color foo""")
+        expected = HedyTester.dedent(
+            "foo = 'white'",
+            HedyTester.turtle_color_command_transpiled('{foo}')
+        )
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            extra_check_function=self.is_turtle(),
+            max_level=self.max_turtle_level
+        )
+
+    def test_color_translated(self):
+        code = "kleur blauw"
+        expected = HedyTester.turtle_color_command_transpiled('blue')
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            extra_check_function=self.is_turtle(),
+            lang='nl',
+            max_level=self.max_turtle_level
+        )
+
+    def test_color_with_number_gives_type_error(self):
+        code = "color 14"
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.InvalidArgumentTypeException,
+            max_level=self.max_turtle_level,
+        )
+
     #
     # sleep tests
     #
