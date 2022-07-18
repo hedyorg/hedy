@@ -28,7 +28,7 @@
           </div>
         {% endif %}
         <div>
-            <span class="inline-block bottom-0 ltr:right-0 rtl:left-0 absolute z-10 my-2 mx-2 text-white" onclick="hedyApp.toggle_blur_code();">
+            <span class="inline-block bottom-0 ltr:right-0 rtl:left-0 z-10 absolute my-2 mx-2 text-white" onclick="hedyApp.toggle_blur_code();">
                 <i class="fas fa-eye-slash fa-lg cursor-pointer blur-toggle" aria-hidden="true"></i>
                 <i class="fas fa-eye fa-lg cursor-pointer blur-toggle" style="display: none;" aria-hidden="true"></i>
             </span>
@@ -86,12 +86,12 @@
         </div>
         <!-- okbox -->
         <div id="okbox"
-          class="flex-0 mt-0 bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 px-4 py-3 shadow-md"
+          class="flex-0 z-20 mt-0 bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 px-4 py-3 shadow-md"
           role="alert" style="display: none;">
           <div class="flex">
             <div class="flex w-full justify-between items-center">
               <p class="caption font-bold">Success</p>
-              <button id="confetti-button" class="ltr:mr-8 rtl:ml-8" onclick="hedyApp.confetti_cannon()">🎉</button>
+              <button id="confetti-button" onclick="hedyApp.confetti_cannon()">🎉</button>
               <!-- <p class="details text-sm">Something went according to plan.</p> -->
             </div>
           </div>
