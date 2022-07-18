@@ -1553,7 +1553,7 @@ export function toggle_developers_mode(enforced: boolean) {
       $('#blur_toggle_container').show();
       pushAchievement("lets_focus");
   } else {
-      $('#blur_toggle_container').show();
+      $('#blur_toggle_container').hide();
       $('#adventures-tab').show();
   }
 
