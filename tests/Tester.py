@@ -260,9 +260,9 @@ class HedyTester(unittest.TestCase):
       except KeyError:
         print("This following snippet contains an invalid placeholder...")
         print(snippet)
-        raise Exception("Invalid placeholder found")
+        raise KeyError
       except ValueError:
         print("This following snippet contains an unclosed invalid placeholder...")
         print(snippet)
-        raise Exception("Invalid placeholder found")
+        raise ValueError
     return snippets
