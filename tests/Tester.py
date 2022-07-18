@@ -223,6 +223,14 @@ class HedyTester(unittest.TestCase):
         except ValueError:
           raise Exception(f'While running your program the command <span class="command-highlighted">sleep</span> received the value <span class="command-highlighted">{{{val}}}</span> which is not allowed. Try changing the value to a number.')""")
 
+  @staticmethod
+  def turtle_color_command_transpiled(val):
+    return textwrap.dedent(f"""\
+      trtl = f'{val}'
+      if trtl not in ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']:
+        raise Exception(f'While running your program the command <span class="command-highlighted">color</span> received the value <span class="command-highlighted">{{trtl}}</span> which is not allowed. Try using another color.')
+      t.pencolor(trtl)""")
+
   # Used to overcome indentation issues when the above code is inserted
   # in test cases which use different indentation style (e.g. 2 or 4 spaces)
   @staticmethod

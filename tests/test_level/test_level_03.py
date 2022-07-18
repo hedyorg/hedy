@@ -351,6 +351,36 @@ class TestsLevel3(HedyTester):
         )
 
     #
+    # turn tests
+    #
+    def test_color_with_list_variable_gives_error(self):
+        code = textwrap.dedent("""\
+        c is red, green, blue
+        color c""")
+
+        self.multi_level_tester(
+            max_level=self.max_turtle_level,
+            code=code,
+            exception=hedy.exceptions.InvalidArgumentTypeException
+        )
+
+    def test_color_with_list_access_random(self):
+        code = textwrap.dedent("""\
+        colors is red, green, blue
+        color colors at random""")
+
+        expected = HedyTester.dedent("""\
+        colors = ['red', 'green', 'blue']""",
+        HedyTester.turtle_color_command_transpiled('{random.choice(colors)}'))
+
+        self.multi_level_tester(
+            max_level=self.max_turtle_level,
+            code=code,
+            expected=expected,
+            extra_check_function=self.is_turtle(),
+        )
+
+    #
     # combined tests
     #
     def test_list_access_misspelled_at_gives_error(self):

@@ -129,15 +129,15 @@ def promote_types(types, rules):
 # Commands per Hedy level which are used to suggest the closest command when kids make a mistake
 commands_per_level = {
     1 :['print', 'ask', 'echo', 'turn', 'forward', 'color'],
-    2 :['print', 'ask', 'is', 'turn', 'forward', 'sleep'],
-    3 :['ask', 'is', 'print', 'forward', 'turn', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from'],
-    4 :['ask', 'is', 'print', 'forward', 'turn', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from'],
-    5 :['ask', 'is', 'print', 'forward', 'turn', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else'],
-    6 :['ask', 'is', 'print', 'forward', 'turn', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else'],
-    7 :['ask', 'is', 'print', 'forward', 'turn', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'repeat', 'times'],
-    8 :['ask', 'is', 'print', 'forward', 'turn', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'repeat', 'times'],
-    9 :['ask', 'is', 'print', 'forward', 'turn', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'repeat', 'times'],
-    10 :['ask', 'is', 'print', 'forward', 'turn', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'repeat', 'times', 'for'],
+    2 :['print', 'ask', 'is', 'turn', 'forward', 'color', 'sleep'],
+    3 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from'],
+    4 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from'],
+    5 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else'],
+    6 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else'],
+    7 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'repeat', 'times'],
+    8 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'repeat', 'times'],
+    9 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'repeat', 'times'],
+    10 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'repeat', 'times', 'for'],
     11 :['ask', 'is', 'print', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'range', 'repeat'],
     12 :['ask', 'is', 'print', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'range', 'repeat'],
     13 :['ask', 'is', 'print', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'range', 'repeat', 'and', 'or'],
@@ -165,7 +165,8 @@ commands_and_types_per_level = {
     },
     Command.turn: {1: command_turn_literals,
                    2: [HedyType.integer, HedyType.input]},
-    Command.color: {1: command_make_color},
+    Command.color: {1: command_make_color,
+                    2: [command_make_color, HedyType.string, HedyType.input]},
     Command.forward: {1: [HedyType.integer, HedyType.input]},
     Command.sleep: {1: [HedyType.integer, HedyType.input]},
     Command.list_access: {1: [HedyType.list]},
@@ -1236,28 +1237,8 @@ class ConvertToPython_1(ConvertToPython):
             return "t.pencolor('black')"  # no arguments defaults to black ink
 
         arg = args[0].data
-        if arg == 'black':
-            return "t.pencolor('black')"
-        elif arg == 'blue':
-            return "t.pencolor('blue')"
-        elif arg == 'brown':
-            return "t.pencolor('brown')"
-        elif arg == 'gray':
-            return "t.pencolor('gray')"
-        elif arg == 'green':
-            return "t.pencolor('green')"
-        elif arg == 'orange':
-            return "t.pencolor('orange')"
-        elif arg == 'pink':
-            return "t.pencolor('pink')"
-        elif arg == 'purple':
-            return "t.pencolor('purple')"
-        elif arg == 'red':
-            return "t.pencolor('red')"
-        elif arg == 'white':
-            return "t.pencolor('white')"
-        elif arg == 'yellow':
-            return "t.pencolor('yellow')"
+        if arg in command_make_color:
+            return f"t.pencolor('{arg}')"
         else:
             # the TypeValidator should protect against reaching this line:
             raise exceptions.InvalidArgumentTypeException(command=Command.color, invalid_type='', invalid_argument=arg,
@@ -1284,7 +1265,7 @@ class ConvertToPython_1(ConvertToPython):
         return self.make_turtle_command(parameter, Command.forward, 'forward', True)
 
     def make_color(self, parameter):
-        return self.make_turtle_command(parameter, Command.color, 'color', False)
+        return self.make_turtle_color_command(parameter, Command.color, 'pencolor')
 
     def make_turtle_command(self, parameter, command, command_text, add_sleep):
         variable = self.get_fresh_var('trtl')
@@ -1299,6 +1280,13 @@ class ConvertToPython_1(ConvertToPython):
             return sleep_after(transpiled, False)
         return transpiled
 
+    def make_turtle_color_command(self, parameter, command, command_text):
+        variable = self.get_fresh_var('trtl')
+        return textwrap.dedent(f"""\
+            {variable} = f'{parameter}'
+            if {variable} not in {command_make_color}:
+              raise Exception(f'While running your program the command {style_closest_command(command)} received the value {style_closest_command('{' + variable + '}')} which is not allowed. Try using another color.')
+            t.{command_text}({variable})""")
 
 
 @hedy_transpiler(level=2)
@@ -1317,8 +1305,12 @@ class ConvertToPython_2(ConvertToPython_1):
         if len(args) == 0:
             return "t.pencolor('black')"
         arg = args[0]
-        if self.is_variable(arg):
-            return self.make_color(hash_var(arg))
+        if type(arg) != str:
+            arg = arg.data
+
+        arg = self.process_variable_for_fstring(arg)
+
+        return self.make_color(arg)
 
     def turn(self, args):
         if len(args) == 0:
