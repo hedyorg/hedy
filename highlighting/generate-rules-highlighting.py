@@ -4,7 +4,7 @@ import yaml
 import json
 
 # import rules from files
-from rules_automaton import rule_level1, rule_level2, rule_level3
+from rules_automaton import *
 from rules_list import rule_all
 from definition import TRANSLATE_WORD
 
@@ -22,7 +22,7 @@ def generate_rules():
         { 'name': 'level1' , 'rules': rule_level1() },
         { 'name': 'level2' , 'rules': rule_level2() },
         { 'name': 'level3' , 'rules': rule_level3() },
-        { 'name': 'level4' , 'rules': rule_all(4) },
+        { 'name': 'level4' , 'rules': rule_level4() },
         { 'name': 'level5' , 'rules': rule_all(5) },
         { 'name': 'level6' , 'rules': rule_all(6) },
         { 'name': 'level7' , 'rules': rule_all(7) },
