@@ -43,7 +43,6 @@ def collect_snippets(path, filtered_language = None):
                             try:
                                 code = tag.contents[0].contents[0]
                                 if hash(code) in unique_snippets_table:
-
                                     continue
                                 else:
                                     unique_snippets_table.add(hash(code))
