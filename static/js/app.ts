@@ -1550,8 +1550,10 @@ export function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean): Ac
 export function toggle_developers_mode(enforced: boolean) {
   if ($('#developers_toggle').is(":checked") || enforced) {
       $('#adventures-tab').hide();
+      $('#blur_toggle_container').show();
       pushAchievement("lets_focus");
   } else {
+      $('#blur_toggle_container').show();
       $('#adventures-tab').show();
   }
 
