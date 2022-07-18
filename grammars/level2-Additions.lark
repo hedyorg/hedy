@@ -14,7 +14,7 @@ error_text_dep_2: /([^\n]+)/ -> text //anything can be parsed except for a newli
 sleep: _SLEEP (INT | var_access)?
 
 //in level 2, forward may also depend on a variable
-turtle: _FORWARD ((NEGATIVE_NUMBER | NUMBER | textwithoutspaces))? -> forward | _TURN ((NEGATIVE_NUMBER | NUMBER | textwithoutspaces))? -> turn
+turtle: _FORWARD ((NEGATIVE_NUMBER | NUMBER | textwithoutspaces))? -> forward | _TURN ((NEGATIVE_NUMBER | NUMBER | textwithoutspaces))? -> turn | _COLOR ((black | blue | brown | gray | green | orange | pink | purple | red | white | yellow | textwithoutspaces))? -> color
 assign: var _IS text -> assign
 
 // punctuation (?!.) has to be treated differently since it can be used to separate arguments, e.g.
