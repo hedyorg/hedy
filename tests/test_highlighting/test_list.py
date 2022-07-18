@@ -4,15 +4,18 @@ from parameterized import parameterized
 class HighlighterTestList(HighlightTester):
 
 
-    def test_list(self):
+    @parameterized.expand([
+        ("level3"),
+        ("level4"),
+    ])
+    def test_list(self, level):
         self.assert_highlighted_chr(
             "sword is l ost, 12, aver i",
             "TTTTT KK TTTTTK TTK TTTTTT",
-            level="level3", lang="en")
+            level=level, lang="en")
 
 
     @parameterized.expand([
-        ("level4"),
         ("level5"),
         ("level6"),
         ("level7"),
@@ -31,6 +34,15 @@ class HighlighterTestList(HighlightTester):
         self.assert_highlighted_chr(
             "sword is 'l ost', '12', 'aver i'",
             "TTTTT KK SSSSSSSK SSSSK SSSSSSSS",
+            level=level, lang="en")
+
+    @parameterized.expand([
+        ("level4"),
+    ])
+    def test_list_string_unquote(self, level):
+        self.assert_highlighted_chr(
+            "sword is 'l ost', '12', 'aver i'",
+            "TTTTT KK TTTTTTTK TTTTK TTTTTTTT",
             level=level, lang="en")
 
 
