@@ -172,24 +172,20 @@ code {
   @apply border-white !important;
 }
 
-.dropdown-btn {
-  @apply block flex flex-row items-center gap-2 text-white no-underline font-slab tracking-wide text-lg py-2 px-2;
-}
-
-.dropdown-btn:hover {
-  @apply bg-blue-600;
-}
-
-.codebar-btn {
-  @apply text-black no-underline border-white tracking-wide font-normal px-4 py-3 ltr:mr-4 rtl:ml-4;
-}
-
 #output, #quiz_question_output_container {
   font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
 }
 
-.dropdown:hover .dropdown-menu {
-  display: block;
+.dropdown-menu {
+  @apply absolute overflow-hidden block rounded-lg border border-black bg-blue-400 ltr:right-0 rtl:left-0 ltr:mr-1 rtl:ml-1 w-max;
+}
+
+.cheatsheet-menu {
+  @apply absolute overflow-hidden block rounded-lg border border-black bg-green-400 ltr:right-0 rtl:left-0 ltr:mr-1 rtl:ml-1 w-max;
+}
+
+.dropdown-item {
+  @apply text-white no-underline hover:bg-blue-600 py-2 px-4 w-full inline-block;
 }
 
 .text-shadow {
@@ -422,6 +418,20 @@ p.close-dialog {
 
 .personal-input {
   @apply block appearance-none w-3/4 lg:w-1/2 text-gray-700 px-4 py-1 rounded-lg;
+}
+
+/* Signup page */
+.signup-container {
+  @apply mx-auto flex px-8 flex-row items-center;
+}
+
+.signup-label {
+  @apply inline-block w-48;
+}
+
+
+.signup-input {
+  @apply inline-block w-64 md:w-80 lg:w-96 px-2 py-1 rounded-lg border-gray-400;
 }
 
 /* Developers mode toggle */

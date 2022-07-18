@@ -68,14 +68,20 @@ def convert_numerals(alphabet, number):
     return number
 `;
 
+// Close the dropdown menu if the user clicks outside of it
+$(document).on("click", function(event){
+    if(!$(event.target).closest(".dropdown").length){
+        $(".dropdown-menu").slideUp("medium");
+        $(".cheatsheet-menu").slideUp("medium");
+    }
+});
+
 (function() {
   // A bunch of code expects a global "State" object. Set it here if not
   // set yet.
   if (!window.State) {
     window.State = {};
   }
-
-
 
   // Set const value to determine the current page direction -> useful for ace editor settings
   const dir = $("body").attr("dir");
@@ -1228,7 +1234,10 @@ export function load_variables(variables: any) {
     const variableList = $('#variable-list');
     variableList.empty();
     for (const i in variables) {
-      variableList.append(`<li style=color:${variables[i][2]}>${variables[i][0]}: ${variables[i][1]}</li>`);
+      // Only append if the variable contains any data (and is not undefined)
+      if (variables[i][1]) {
+        variableList.append(`<li style=color:${variables[i][2]}>${variables[i][0]}: ${variables[i][1]}</li>`);
+      }
     }
     hide_if_no_variables();
   }
@@ -1536,8 +1545,10 @@ export function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean): Ac
 export function toggle_developers_mode(enforced: boolean) {
   if ($('#developers_toggle').is(":checked") || enforced) {
       $('#adventures-tab').hide();
+      $('#blur_toggle_container').show();
       pushAchievement("lets_focus");
   } else {
+      $('#blur_toggle_container').hide();
       $('#adventures-tab').show();
   }
 
@@ -1550,6 +1561,22 @@ export function toggle_developers_mode(enforced: boolean) {
     $('#editor-area').addClass('mt-5');
     $('#code_editor').height('22rem');
     $('#code_output').height('22rem');
+  }
+}
+
+export function toggle_blur_code() {
+  // Switch the both icons from hiding / showing
+  $('.blur-toggle').toggle();
+
+  // Keep track of a element attribute "blurred" to indicate if blurred or not
+  if ($('#editor').attr('blurred') == 'true') {
+    $('#editor').css("filter", "");
+    $('#editor').css("-webkit-filter", "");
+    $('#editor').attr('blurred', 'false');
+  } else {
+    $('#editor').css("filter", "blur(3px)");
+    $('#editor').css("-webkit-filter", "blur(3px)");
+    $('#editor').attr('blurred', 'true');
   }
 }
 

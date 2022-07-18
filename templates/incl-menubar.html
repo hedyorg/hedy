@@ -13,34 +13,36 @@
                 <span class="hidden lg:inline-block">{{ _('program_header')}}</span>
             </a>
         </li>
-        <li class="dropdown relative z-20 flex">
-            <a class="menubar-btn {% if current_page == 'my-profile' %}active{% endif %}" href="/my-profile">
+        <li class="dropdown relative z-20">
+            <a class="menubar-btn {% if current_page == 'my-profile' %}active{% endif %} cursor-pointer" onclick="$('.dropdown-menu').slideToggle('medium');">
                 <span class="fas fa-fw fa-user"></span>
                 <span class="hidden lg:inline-block">{{username}}</span>
             </a>
-            <ul class="dropdown-menu absolute overflow-hidden hidden rounded-lg border border-black bg-blue-400 list-none ltr:right-0 rtl:left-0 mt-12 ltr:mr-1 rtl:ml-1 w-max">
-                <li><a class="dropdown-btn" href="/highscores"><span class="fas fa-trophy ltr:mr-4 rtl:ml-4"></span>{{_('highscores')}}</a></li>
-                <li><a class="dropdown-btn" href="/my-achievements"><span class="fas fa-fw fa-list-alt ltr:mr-4 rtl:ml-4"></span>{{_('my_achievements')}}</a></li>
-                <li><a class="dropdown-btn" href="/my-profile"><span class="fas fa-user-cog ltr:mr-4 rtl:ml-4"></span>{{_('my_account')}}</a></li>
-              {% if is_teacher %}
-                  <li><a class="dropdown-btn" href="/for-teachers"><span class="fas fa-chalkboard-teacher ltr:mr-4 rtl:ml-4"></span>{{_('for_teachers')}}</a></li>
-              {% endif %}
-                <li><a class="dropdown-btn" href="#" onclick="hedyApp.auth.logout ();event.preventDefault();"><span class="fas fa-fw fa-sign-out-alt ltr:mr-4 rtl:ml-4"></span>{{_('logout')}}</a></li>
-            </ul>
+            <div class="dropdown-menu" style="display: none;">
+                <ul>
+                    <li><a class="dropdown-item" href="/highscores"><span class="fas fa-trophy ltr:mr-4 rtl:ml-4"></span>{{_('highscores')}}</a></li>
+                    <li><a class="dropdown-item" href="/my-achievements"><span class="fas fa-fw fa-list-alt ltr:mr-4 rtl:ml-4"></span>{{_('my_achievements')}}</a></li>
+                    <li><a class="dropdown-item" href="/my-profile"><span class="fas fa-user-cog ltr:mr-4 rtl:ml-4"></span>{{_('my_account')}}</a></li>
+                  {% if is_teacher %}
+                      <li><a class="dropdown-item" href="/for-teachers"><span class="fas fa-chalkboard-teacher ltr:mr-4 rtl:ml-4"></span>{{_('for_teachers')}}</a></li>
+                  {% endif %}
+                    <li><a class="dropdown-item" href="#" onclick="hedyApp.auth.logout ();event.preventDefault();"><span class="fas fa-fw fa-sign-out-alt ltr:mr-4 rtl:ml-4"></span>{{_('logout')}}</a></li>
+                </ul>
+            </div>
         </li>
     {% else %}
         <li><a class="menubar-btn" href="/login">{{_('login')}}</a></li>
     {% endif %}
     {% if not username %}
       <li class="dropdown relative z-20 ltr:ml-auto rtl:mr-auto">
-          <a class="menubar-btn border-transparent">
+          <a class="menubar-btn border-transparent cursor-pointer" onclick="$('.dropdown-menu').slideToggle('medium');">
             <div class="flex flex-row gap-2 items-center">
                 <i class="fas fa-fw fa-globe"></i>
                 <span class="hidden lg:flex">{{ current_language().sym }}</span>
                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
             </div>
           </a>
-          <div class="dropdown-menu absolute hidden rounded-lg border border-black bg-blue-400 ltr:right-0 rtl:left-0 ltr:mr-1 rtl:ml-1 w-max">
+          <div class="dropdown-menu" style="display: none;">
               <div class="p-2"><input id="search_language" placeholder="{{_('search')}}" class="border-2 border-black text-black border-blue-600 rounded h-8 px-2 mt-2 w-full"></div>
               <!-- Let's re-structure this a bit: make two rows one with keyword support, one without -->
               <div class="flex flex-row">
