@@ -72,6 +72,7 @@ def convert_numerals(alphabet, number):
 $(document).on("click", function(event){
     if(!$(event.target).closest(".dropdown").length){
         $(".dropdown-menu").slideUp("medium");
+        $(".cheatsheet-menu").slideUp("medium");
     }
 });
 
