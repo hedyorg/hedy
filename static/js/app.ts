@@ -1556,8 +1556,10 @@ export function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean): Ac
 export function toggle_developers_mode(enforced: boolean) {
   if ($('#developers_toggle').is(":checked") || enforced) {
       $('#adventures-tab').hide();
+      $('#blur_toggle_container').show();
       pushAchievement("lets_focus");
   } else {
+      $('#blur_toggle_container').hide();
       $('#adventures-tab').show();
   }
 
@@ -1570,6 +1572,22 @@ export function toggle_developers_mode(enforced: boolean) {
     $('#editor-area').addClass('mt-5');
     $('#code_editor').height('22rem');
     $('#code_output').height('22rem');
+  }
+}
+
+export function toggle_blur_code() {
+  // Switch the both icons from hiding / showing
+  $('.blur-toggle').toggle();
+
+  // Keep track of a element attribute "blurred" to indicate if blurred or not
+  if ($('#editor').attr('blurred') == 'true') {
+    $('#editor').css("filter", "");
+    $('#editor').css("-webkit-filter", "");
+    $('#editor').attr('blurred', 'false');
+  } else {
+    $('#editor').css("filter", "blur(3px)");
+    $('#editor').css("-webkit-filter", "blur(3px)");
+    $('#editor').attr('blurred', 'true');
   }
 }
 
