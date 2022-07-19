@@ -494,6 +494,16 @@ def routes(app, database, achievements):
         DATABASE.delete_adventure(adventure_id)
         return {}, 200
 
+    @app.route('/for-teachers/preview-adventure', methods=['POST'])
+    def parse_preview_adventure():
+        body = request.json
+        try:
+            code = body.get('code').format(**hedy_content.KEYWORDS.get(g.keyword_lang))
+        except:
+            code = gettext('something_went_wrong_keyword_parsing')
+        print(code)
+        return {'code': code}, 200
+
     @app.route('/for-teachers/create_adventure', methods=['POST'])
     @requires_login
     def create_adventure(user):
