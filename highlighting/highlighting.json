@@ -67,7 +67,7 @@
                         "text",
                         "keyword"
                     ],
-                    "next": "color"
+                    "next": "value"
                 }
             ],
             "value": [
@@ -95,39 +95,6 @@
                         "text"
                     ],
                     "next": "start"
-                }
-            ],
-            "color": [
-                {
-                    "regex": "(^| )(_)(?= |$)",
-                    "token": [
-                        "text",
-                        "invalid"
-                    ],
-                    "next": "color"
-                },
-                {
-                    "regex": "_\\?_",
-                    "token": "invalid",
-                    "next": "color"
-                },
-                {
-                    "regex": "#.*$",
-                    "token": "comment",
-                    "next": "start"
-                },
-                {
-                    "regex": "(^|$)",
-                    "token": [
-                        "text"
-                    ],
-                    "next": "start"
-                },
-                {
-                    "regex": "(__black__|__gray__|__white__|__green__|__blue__|__purple__|__brown__|__pink__|__red__|__orange__|__yellow__)",
-                    "token": [
-                        "keyword"
-                    ]
                 }
             ],
             "direction": [
@@ -235,6 +202,14 @@
                 },
                 {
                     "regex": "(^ *)(__turn__)",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
+                    "next": "value"
+                },
+                {
+                    "regex": "(^ *)(__color__)",
                     "token": [
                         "text",
                         "keyword"
@@ -362,6 +337,14 @@
                         "keyword"
                     ],
                     "next": "valRemove"
+                },
+                {
+                    "regex": "(^ *)(__color__)",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
+                    "next": "value"
                 }
             ],
             "value": [
@@ -650,6 +633,14 @@
                 },
                 {
                     "regex": "(^ *)(__forward__)",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
+                    "next": "valueSimple"
+                },
+                {
+                    "regex": "(^ *)(__color__)",
                     "token": [
                         "text",
                         "keyword"

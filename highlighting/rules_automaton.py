@@ -28,25 +28,9 @@ def rule_level1():
         },{
             'regex': START_LINE + K("color"),
             'token': ["text",'keyword'],
-            'next': 'color',
+            'next': 'value',
         }],
     "value" : [],
-    "color" : [{
-            'regex': "(" + \
-                    K("black",True)  + "|" +\
-                    K("gray",True)   + "|" +\
-                    K("white",True)  + "|" +\
-                    K("green",True)  + "|" +\
-                    K("blue",True)   + "|" +\
-                    K("purple",True) + "|" +\
-                    K("brown",True)  + "|" +\
-                    K("pink",True)   + "|" +\
-                    K("red",True)    + "|" +\
-                    K("orange",True) + "|" +\
-                    K("yellow",True) + \
-                ")",
-            'token': ["keyword"],
-        }],
     "direction" : [{
             'regex': "(" +\
                     K("right",True) + "|" +\
@@ -80,6 +64,10 @@ def rule_level2() :
             'next': 'value',
         },{
             'regex': START_LINE + K("turn"),
+            'token': ["text",'keyword'],
+            'next': 'value',
+        },{
+            'regex': START_LINE + K("color"),
             'token': ["text",'keyword'],
             'next': 'value',
         }],
@@ -119,6 +107,10 @@ def rule_level3():
         'regex': START_LINE + K("remove"),
         'token': ["text",'keyword'],
         'next': 'valRemove',
+    },{
+        'regex': START_LINE + K("color"),
+        'token': ["text",'keyword'],
+        'next': 'value',
     }],
     "value" : [{
         'regex': START_WORD + K("at") + SPACE + K("random") ,
@@ -176,6 +168,10 @@ def rule_level4():
     },{
         'regex': START_LINE + K("forward") ,
         'token': ['text','keyword'],
+        'next': 'valueSimple',
+    },{
+        'regex': START_LINE + K("color"),
+        'token': ["text",'keyword'],
         'next': 'valueSimple',
     },{
         'regex': START_LINE + K("add"),
