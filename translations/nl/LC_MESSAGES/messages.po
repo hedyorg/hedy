@@ -3,20 +3,20 @@
 # This file is distributed under the same license as the PROJECT project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-07-04 11:29+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: nl\n"
+"POT-Creation-Date: 2022-07-06 10:00+0200\n"
+"PO-Revision-Date: 2022-07-05 11:19+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: nl <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.13.1-dev\n"
 "Generated-By: Babel 2.10.1\n"
 
 #: app.py:417
@@ -43,7 +43,7 @@ msgstr "Hedy - Mijn programma's"
 #: app.py:694 app.py:704 app.py:708 app.py:723 app.py:1003 app.py:1550
 #: website/admin.py:17 website/admin.py:24 website/admin.py:92
 #: website/admin.py:111 website/admin.py:129 website/admin.py:136
-#: website/admin.py:144 website/auth.py:716 website/auth.py:743
+#: website/admin.py:144 website/auth.py:740 website/auth.py:767
 #: website/programs.py:210 website/statistics.py:100
 msgid "unauthorized"
 msgstr "Jij hebt geen rechten voor deze pagina"
@@ -341,9 +341,9 @@ msgstr ""
 msgid "invalid_tutorial_step"
 msgstr "Dit is geen geldige tutorial stap, probeer het opnieuw."
 
-#: app.py:1489 website/auth.py:278 website/auth.py:333 website/auth.py:469
-#: website/auth.py:494 website/auth.py:524 website/auth.py:637
-#: website/auth.py:675 website/auth.py:722 website/auth.py:749
+#: app.py:1489 website/auth.py:286 website/auth.py:341 website/auth.py:477
+#: website/auth.py:502 website/auth.py:535 website/auth.py:654
+#: website/auth.py:696 website/auth.py:746 website/auth.py:773
 #: website/quiz.py:43 website/quiz.py:69 website/teacher.py:88
 #: website/teacher.py:123 website/teacher.py:195 website/teacher.py:251
 #: website/teacher.py:298 website/teacher.py:339 website/teacher.py:377
@@ -530,95 +530,102 @@ msgstr ""
 "{line_number} in te vullen."
 
 #: content/error-messages.txt:23
+#, fuzzy
+msgid "Incomplete Repeat"
+msgstr ""
+"It looks like you forgot to use {command} with the repeat command you used "
+"on line {line_number}."
+
+#: content/error-messages.txt:24
 msgid "Unsupported String Value"
 msgstr "Tekst waarden kunnen geen {invalid_value} bevatten."
 
-#: content/error-messages.txt:24
+#: content/error-messages.txt:25
 msgid "ask_needs_var"
 msgstr ""
 "Vanaf level 2 hoort ask met een variabele ervoor. Bijv: naam is ask Hoe "
 "heet jij?"
 
-#: content/error-messages.txt:25
+#: content/error-messages.txt:26
 msgid "echo_out"
 msgstr ""
 "Vanaf level 2 heb je geen echo meer nodig! Je kunt een variabele "
 "gebruiken om iets te herhalen. Voorbeeld: naam is ask Hoe heet jij? print"
 " hallo naam"
 
-#: content/error-messages.txt:26
+#: content/error-messages.txt:27
 msgid "space"
 msgstr "een spatie"
 
-#: content/error-messages.txt:27
+#: content/error-messages.txt:28
 msgid "comma"
 msgstr "een komma"
 
-#: content/error-messages.txt:28
+#: content/error-messages.txt:29
 msgid "question mark"
 msgstr "een vraagteken"
 
-#: content/error-messages.txt:29
+#: content/error-messages.txt:30
 msgid "newline"
 msgstr "een enter"
 
-#: content/error-messages.txt:30
+#: content/error-messages.txt:31
 msgid "period"
 msgstr "een punt"
 
-#: content/error-messages.txt:31
+#: content/error-messages.txt:32
 msgid "exclamation mark"
 msgstr "een uitroepteken"
 
-#: content/error-messages.txt:32
+#: content/error-messages.txt:33
 msgid "dash"
 msgstr "een streepje"
 
-#: content/error-messages.txt:33
+#: content/error-messages.txt:34
 msgid "star"
 msgstr "een sterretje"
 
-#: content/error-messages.txt:34
+#: content/error-messages.txt:35
 msgid "single quotes"
 msgstr "een hoge komma"
 
-#: content/error-messages.txt:35
+#: content/error-messages.txt:36
 msgid "double quotes"
 msgstr "twee hoge komma's"
 
-#: content/error-messages.txt:36
+#: content/error-messages.txt:37
 msgid "slash"
 msgstr "een schuin streepje"
 
-#: content/error-messages.txt:37
+#: content/error-messages.txt:38
 msgid "string"
 msgstr "tekst"
 
-#: content/error-messages.txt:38
+#: content/error-messages.txt:39
 msgid "nested blocks"
 msgstr "een blok in een blok"
 
-#: content/error-messages.txt:39
+#: content/error-messages.txt:40
 msgid "or"
 msgstr "of"
 
-#: content/error-messages.txt:40
+#: content/error-messages.txt:41
 msgid "number"
 msgstr "een getal"
 
-#: content/error-messages.txt:41
+#: content/error-messages.txt:42
 msgid "integer"
 msgstr "een getal"
 
-#: content/error-messages.txt:42
+#: content/error-messages.txt:43
 msgid "float"
 msgstr "een getal"
 
-#: content/error-messages.txt:43
+#: content/error-messages.txt:44
 msgid "list"
 msgstr "een lijstje"
 
-#: content/error-messages.txt:44
+#: content/error-messages.txt:45
 msgid "input"
 msgstr "invoer van een ask"
 
@@ -1171,7 +1178,7 @@ msgstr ""
 "Welkom bij Hedy! Jouw account is omgezet naar een leerkrachtenaccount. Je"
 " kan nu klassen maken en er leerlingen in uitnodigen."
 
-#: templates/highscores.html:5 templates/incl-menubar.html:16
+#: templates/highscores.html:5 templates/incl-menubar.html:22
 msgid "highscores"
 msgstr "Highscores"
 
@@ -1184,7 +1191,9 @@ msgstr ""
 
 #: templates/highscores.html:14
 msgid "highscore_no_public_profile"
-msgstr "Jij hebt geen openbaar profiel en komt daarom niet voor in de highscores. Wil je er eentje maken?"
+msgstr ""
+"Jij hebt geen openbaar profiel en komt daarom niet voor in de highscores."
+" Wil je er eentje maken?"
 
 #: templates/highscores.html:17
 msgid "create_public_profile"
@@ -1304,40 +1313,40 @@ msgstr "Ontdekken"
 msgid "nav_learn_more"
 msgstr "Meer info"
 
-#: templates/incl-menubar.html:10 templates/public-page.html:56
+#: templates/incl-menubar.html:13 templates/public-page.html:56
 msgid "program_header"
 msgstr "Mijn programma's"
 
-#: templates/incl-menubar.html:17
+#: templates/incl-menubar.html:23
 msgid "my_achievements"
 msgstr "Mijn badges"
 
-#: templates/incl-menubar.html:18
+#: templates/incl-menubar.html:24
 msgid "my_account"
 msgstr "Mijn account"
 
-#: templates/incl-menubar.html:20
+#: templates/incl-menubar.html:26
 msgid "for_teachers"
 msgstr "Voor leerkrachten"
 
-#: templates/incl-menubar.html:22
+#: templates/incl-menubar.html:28
 msgid "logout"
 msgstr "Log uit"
 
-#: templates/incl-menubar.html:26 templates/login.html:19
+#: templates/incl-menubar.html:32 templates/login.html:19
 #: templates/signup.html:109
 msgid "login"
 msgstr "Inloggen"
 
-#: templates/incl-menubar.html:38
+#: templates/incl-menubar.html:44
 msgid "search"
 msgstr "Zoeken..."
 
-#: templates/incl-menubar.html:43
+#: templates/incl-menubar.html:49
 msgid "keyword_support"
 msgstr "Vertaalde commando's"
 
-#: templates/incl-menubar.html:51
+#: templates/incl-menubar.html:57
 msgid "non_keyword_support"
 msgstr "Vertaalde content"
 
@@ -1483,7 +1492,7 @@ msgstr "Probeer"
 msgid "login_long"
 msgstr "Inloggen op jouw account"
 
-#: templates/login.html:26 website/auth.py:291
+#: templates/login.html:26 website/auth.py:299
 msgid "no_account"
 msgstr "Nog geen account?"
 
@@ -1855,155 +1864,160 @@ msgstr "Gehaald door {percentage}% van de gebruikers"
 msgid "title_admin"
 msgstr "Hedy - Administrator pagina"
 
-#: website/auth.py:182 website/auth.py:195 website/auth.py:280
-#: website/auth.py:418 website/auth.py:423 website/auth.py:471
-#: website/auth.py:639 website/auth.py:648 website/auth.py:677
-#: website/auth.py:724 website/auth.py:731 website/auth.py:751
+#: website/auth.py:186 website/auth.py:200 website/auth.py:288
+#: website/auth.py:426 website/auth.py:431 website/auth.py:479
+#: website/auth.py:656 website/auth.py:665 website/auth.py:698
+#: website/auth.py:748 website/auth.py:755 website/auth.py:775
 #: website/teacher.py:300 website/teacher.py:341
 msgid "username_invalid"
 msgstr "Je gebruikersnaam is ongeldig."
 
-#: website/auth.py:184 website/auth.py:197
+#: website/auth.py:188 website/auth.py:202
 msgid "username_special"
 msgstr "Er mag geen `:` of `@` in je gebruikersnaam zitten."
 
-#: website/auth.py:186 website/auth.py:199
+#: website/auth.py:190 website/auth.py:204
 msgid "username_three"
 msgstr "Je gebruikersnaam moet minstens 3 tekens hebben."
 
-#: website/auth.py:188 website/auth.py:203 website/auth.py:282
-#: website/auth.py:473 website/auth.py:496 website/auth.py:508
-#: website/auth.py:681
+#: website/auth.py:192 website/auth.py:208 website/auth.py:290
+#: website/auth.py:481 website/auth.py:504 website/auth.py:516
+#: website/auth.py:702
 msgid "password_invalid"
 msgstr "Je wachtwoord is ongeldig."
 
-#: website/auth.py:190 website/auth.py:205
+#: website/auth.py:194 website/auth.py:210
 msgid "passwords_six"
 msgstr "Alle wachtwoorden moeten 6 of meer karakters zijn."
 
-#: website/auth.py:201 website/auth.py:535 website/auth.py:753
-#: website/auth.py:758
+#: website/auth.py:206 website/auth.py:546 website/auth.py:777
+#: website/auth.py:782
 msgid "email_invalid"
 msgstr "Vul een geldig e-mailadres in."
 
-#: website/auth.py:291
+#: website/auth.py:260 website/auth.py:526 website/auth.py:687
+#: website/auth.py:730 website/auth.py:799
+msgid "mail_error_change_processed"
+msgstr "Er ging iets mis met het sturen van de validatie mail, de veranderingen zijn wel succesvol doorgevoerd."
+
+#: website/auth.py:299
 msgid "invalid_username_password"
 msgstr "Ongeldige gebruikersnaam/wachtwoord combinatie."
 
-#: website/auth.py:342 website/auth.py:344
+#: website/auth.py:350 website/auth.py:352
 msgid "repeat_match_email"
 msgstr "De e-mailadressen zijn niet hetzelfde."
 
-#: website/auth.py:346 website/auth.py:498 website/auth.py:502
-#: website/auth.py:685
+#: website/auth.py:354 website/auth.py:506 website/auth.py:510
+#: website/auth.py:706
 msgid "repeat_match_password"
 msgstr "Het herhaalde wachtwoord is niet gelijk."
 
-#: website/auth.py:348 website/auth.py:526
+#: website/auth.py:356 website/auth.py:537
 msgid "language_invalid"
 msgstr "Dit is geen geldige taal, kies een taal vanuit de lijst."
 
-#: website/auth.py:350
+#: website/auth.py:358
 msgid "agree_invalid"
 msgstr "Je moet akkoord gaan met de privacyverklaring."
 
-#: website/auth.py:352 website/auth.py:529
+#: website/auth.py:360 website/auth.py:540
 msgid "keyword_language_invalid"
 msgstr "Dit is geen geldige commando taal (kies Engels of je eigen taal)."
 
-#: website/auth.py:357 website/auth.py:540
+#: website/auth.py:365 website/auth.py:551
 msgid "year_invalid"
 msgstr "Dit is geen geldig jaartal, die moet liggen tussen 1900 en {current_year}."
 
-#: website/auth.py:360 website/auth.py:543
+#: website/auth.py:368 website/auth.py:554
 msgid "gender_invalid"
 msgstr "Dit gender is niet geldig, kies uit (Meisje, Jongen, Anders)."
 
-#: website/auth.py:363 website/auth.py:546
+#: website/auth.py:371 website/auth.py:557
 msgid "country_invalid"
 msgstr "Dit is geen geldig land, kies er een vanuit de lijst."
 
-#: website/auth.py:365 website/auth.py:368 website/auth.py:548
-#: website/auth.py:551
+#: website/auth.py:373 website/auth.py:376 website/auth.py:559
+#: website/auth.py:562
 msgid "experience_invalid"
 msgstr "Dit is geen geldige programmeerervaring, kies uit (Ja, Nee)."
 
-#: website/auth.py:371 website/auth.py:554
+#: website/auth.py:379 website/auth.py:565
 msgid "programming_invalid"
 msgstr "Dit is geen geldige programmeertaal, selecteer van de opties."
 
-#: website/auth.py:374
+#: website/auth.py:382
 msgid "exists_username"
 msgstr "Deze gebruikersnaam is al in gebruik."
 
-#: website/auth.py:376 website/auth.py:562
+#: website/auth.py:384 website/auth.py:573
 msgid "exists_email"
 msgstr "Dit emailadres is al in gebruik."
 
-#: website/auth.py:416 website/auth.py:431 website/auth.py:679
-#: website/auth.py:689
+#: website/auth.py:424 website/auth.py:439 website/auth.py:700
+#: website/auth.py:710
 msgid "token_invalid"
 msgstr "Jouw token is ongeldig."
 
-#: website/auth.py:475 website/auth.py:500 website/auth.py:683
+#: website/auth.py:483 website/auth.py:508 website/auth.py:704
 msgid "password_six"
 msgstr "Je wachtwoord moet minstens 6 letters hebben."
 
-#: website/auth.py:478 website/auth.py:481
+#: website/auth.py:486 website/auth.py:489
 msgid "password_change_not_allowed"
 msgstr "Je hebt geen rechten op het wachtwoord van deze gebruiker te wijzigen."
 
-#: website/auth.py:486
+#: website/auth.py:494
 msgid "password_change_success"
 msgstr "Wachtwoord van jouw leerling is succesvol gewijzigd."
 
-#: website/auth.py:517
+#: website/auth.py:528
 msgid "password_updated"
 msgstr "Je wachtwoord is aangepast."
 
-#: website/auth.py:605
+#: website/auth.py:622
 msgid "profile_updated"
 msgstr "Je profiel is aangepast."
 
-#: website/auth.py:608
+#: website/auth.py:625
 msgid "profile_updated_reload"
 msgstr "Je profiel is aangepast, pagina wordt herladen."
 
-#: website/auth.py:668
+#: website/auth.py:689
 msgid "sent_password_recovery"
 msgstr ""
 "Je krijgt zo een mailtje met informatie over hoe je een nieuw wachtwoord "
 "kiest."
 
-#: website/auth.py:708
+#: website/auth.py:732
 msgid "password_resetted"
 msgstr "Je wachtwoord is gereset. Je wordt doorgestuurd naar de inlogpagina."
 
-#: website/auth.py:726
+#: website/auth.py:750
 msgid "teacher_invalid"
 msgstr "Jouw leraren waarde is ongeldig."
 
-#: website/auth.py:814
+#: website/auth.py:841
 msgid "mail_welcome_verify_body"
 msgstr ""
 "Jouw Hedy account is succesvol aangemaakt. Welkom!\n"
 " Klik op deze link om jouw e-mailadres te bevestigen: {link}"
 
-#: website/auth.py:816
+#: website/auth.py:843
 msgid "mail_change_password_body"
 msgstr ""
 "Jouw Hedy wachtwoord is veranderd. Als jij dit was, helemaal goed!\n"
 "Als jij jouw wachtwoord niet hebt veranderd, neem dan zo snel mogelijk "
 "contact met ons op door te reageren op deze mail."
 
-#: website/auth.py:818
+#: website/auth.py:845
 msgid "mail_recover_password_body"
 msgstr ""
 "Door te klikken op deze link kun je een nieuw Hedy wachtwoord instellen. "
 "Deze link is geldig voor <b>4</b> uur.\n"
 "Als jij geen nieuw wachtwoord wilt, negeer dan deze e-mail: {link}"
 
-#: website/auth.py:820
+#: website/auth.py:847
 msgid "mail_reset_password_body"
 msgstr ""
 "Jouw Hedy wachtwoord is ge-reset naar een nieuw wachtwoord. Als jij dit "
@@ -2011,7 +2025,7 @@ msgstr ""
 "Als jij jouw wachtwoord niet hebt veranderd, neem dan zo snel mogelijk "
 "contact met ons op door te reageren op deze mail."
 
-#: website/auth.py:822
+#: website/auth.py:849
 msgid "mail_welcome_teacher_body"
 msgstr ""
 "<strong>Welkom!</strong>\n"
@@ -2038,45 +2052,45 @@ msgstr ""
 "\n"
 "Blijf programmeren!"
 
-#: website/auth.py:828
+#: website/auth.py:855
 msgid "mail_welcome_verify_subject"
 msgstr "Welkom bij Hedy"
 
-#: website/auth.py:830
+#: website/auth.py:857
 msgid "mail_change_password_subject"
 msgstr "Jouw Hedy wachtwoord is veranderd"
 
-#: website/auth.py:832
+#: website/auth.py:859
 msgid "mail_recover_password_subject"
 msgstr "Reset jouw Hedy wachtwoord."
 
-#: website/auth.py:834
+#: website/auth.py:861
 msgid "mail_reset_password_subject"
 msgstr "Jouw Hedy wachtwood is ge-reset"
 
-#: website/auth.py:836
+#: website/auth.py:863
 msgid "mail_welcome_teacher_subject"
 msgstr "Jouw Hedy leerkrachten account is klaar"
 
-#: website/auth.py:840
+#: website/auth.py:867
 msgid "user"
 msgstr "gebruiker"
 
-#: website/auth.py:845
+#: website/auth.py:872
 msgid "mail_hello"
 msgstr "Hallo {username}!"
 
-#: website/auth.py:847
+#: website/auth.py:874
 msgid "mail_goodbye"
 msgstr ""
 "Dankjewel!\n"
 "Het Hedy team"
 
-#: website/auth.py:855
+#: website/auth.py:882
 msgid "copy_mail_link"
 msgstr "Kopieer en plak deze link in een andere tab:"
 
-#: website/auth.py:856
+#: website/auth.py:883
 msgid "link"
 msgstr "Link"
 
@@ -2289,4 +2303,3 @@ msgstr "Je hebt geen avonturen naam ingevuld!"
 
 #~ msgid "your_country"
 #~ msgstr "Jouw land"
-

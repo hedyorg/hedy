@@ -41,6 +41,18 @@ for lang, keywords in KEYWORDS.items():
     for keyword in ['if', 'for', 'repeat', 'while', 'else']:
         indent_keywords.append(keywords.get(keyword))
 
+# These are the preprocessor rules that we use to specify changes in the rules that
+# are expected to work across several rules
+# Example 
+# for<needs_colon> instead of defining the whole rule again.
+
+def needs_colon(rule):
+  pos = rule.find('_EOL (_SPACE command)')
+  return f'{rule[0:pos]} _COLON {rule[pos:]}'
+
+PREPROCESS_RULES = {
+    'needs_colon': needs_colon
+}
 
 class Command:
     print = 'print'
@@ -117,15 +129,15 @@ def promote_types(types, rules):
 # Commands per Hedy level which are used to suggest the closest command when kids make a mistake
 commands_per_level = {
     1 :['print', 'ask', 'echo', 'turn', 'forward', 'color'],
-    2 :['print', 'ask', 'is', 'turn', 'forward', 'sleep'],
-    3 :['ask', 'is', 'print', 'forward', 'turn', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from'],
-    4 :['ask', 'is', 'print', 'forward', 'turn', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from'],
-    5 :['ask', 'is', 'print', 'forward', 'turn', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else'],
-    6 :['ask', 'is', 'print', 'forward', 'turn', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else'],
-    7 :['ask', 'is', 'print', 'forward', 'turn', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'repeat', 'times'],
-    8 :['ask', 'is', 'print', 'forward', 'turn', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'repeat', 'times'],
-    9 :['ask', 'is', 'print', 'forward', 'turn', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'repeat', 'times'],
-    10 :['ask', 'is', 'print', 'forward', 'turn', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'repeat', 'times', 'for'],
+    2 :['print', 'ask', 'is', 'turn', 'forward', 'color', 'sleep'],
+    3 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from'],
+    4 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from'],
+    5 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else'],
+    6 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else'],
+    7 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'repeat', 'times'],
+    8 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'repeat', 'times'],
+    9 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'repeat', 'times'],
+    10 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'repeat', 'times', 'for'],
     11 :['ask', 'is', 'print', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'range', 'repeat'],
     12 :['ask', 'is', 'print', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'range', 'repeat'],
     13 :['ask', 'is', 'print', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'range', 'repeat', 'and', 'or'],
@@ -153,7 +165,8 @@ commands_and_types_per_level = {
     },
     Command.turn: {1: command_turn_literals,
                    2: [HedyType.integer, HedyType.input]},
-    Command.color: {1: command_make_color},
+    Command.color: {1: command_make_color,
+                    2: [command_make_color, HedyType.string, HedyType.input]},
     Command.forward: {1: [HedyType.integer, HedyType.input]},
     Command.sleep: {1: [HedyType.integer, HedyType.input]},
     Command.list_access: {1: [HedyType.list]},
@@ -233,7 +246,7 @@ def get_suggestions_for_language(lang, level):
     # if we allow multiple keyword languages:
     en_commands = get_list_keywords(commands_per_level[level], 'en')
     en_lang_commands = list(set(en_commands + lang_commands))
-            
+
     return en_lang_commands
 
 
@@ -507,11 +520,11 @@ class TypeValidator(Transformer):
                 raise
 
         return self.to_typed_tree(tree, HedyType.none)
-    
+
     def assign_list(self, tree):
         self.save_type_to_lookup(tree.children[0].children[0], HedyType.list)
         return self.to_typed_tree(tree, HedyType.list)
-        
+
     def list_access(self, tree):
         self.validate_args_type_allowed(Command.list_access, tree.children[0], tree.meta)
 
@@ -986,6 +999,13 @@ class IsValid(Filter):
         error = InvalidInfo('invalid repeat', arguments=[str(args[0])], line=meta.line, column=meta.column)
         return False, error, meta
 
+    def error_repeat_no_print(self, meta, args):
+        error = InvalidInfo('repeat missing print', arguments=[str(args[0])], line=meta.line, column=meta.column)
+        return False, error, meta
+
+    def error_repeat_no_times(self, meta, args):
+        error = InvalidInfo('repeat missing times', arguments=[str(args[0])], line=meta.line, column=meta.column)
+        return False, error, meta
     #other rules are inherited from Filter
 
 def valid_echo(ast):
@@ -1079,9 +1099,9 @@ class ConvertToPython(Transformer):
     def process_variable_for_fstring_padded(self, name):
         # used to transform variables in comparisons
         if self.is_variable(name):
-            return f"str({hash_var(name)}).zfill(100)"
+            return f"convert_numerals('{self.numerals_language}', {hash_var(name)}).zfill(100)"
         elif ConvertToPython.is_float(name):
-            return f"str({name}).zfill(100)"
+            return f"convert_numerals('{self.numerals_language}', {name}).zfill(100)"
         elif ConvertToPython.is_quoted(name):
             return f"{name}.zfill(100)"
         else:
@@ -1217,28 +1237,8 @@ class ConvertToPython_1(ConvertToPython):
             return "t.pencolor('black')"  # no arguments defaults to black ink
 
         arg = args[0].data
-        if arg == 'black':
-            return "t.pencolor('black')"
-        elif arg == 'blue':
-            return "t.pencolor('blue')"
-        elif arg == 'brown':
-            return "t.pencolor('brown')"
-        elif arg == 'gray':
-            return "t.pencolor('gray')"
-        elif arg == 'green':
-            return "t.pencolor('green')"
-        elif arg == 'orange':
-            return "t.pencolor('orange')"
-        elif arg == 'pink':
-            return "t.pencolor('pink')"
-        elif arg == 'purple':
-            return "t.pencolor('purple')"
-        elif arg == 'red':
-            return "t.pencolor('red')"
-        elif arg == 'white':
-            return "t.pencolor('white')"
-        elif arg == 'yellow':
-            return "t.pencolor('yellow')"
+        if arg in command_make_color:
+            return f"t.pencolor('{arg}')"
         else:
             # the TypeValidator should protect against reaching this line:
             raise exceptions.InvalidArgumentTypeException(command=Command.color, invalid_type='', invalid_argument=arg,
@@ -1265,7 +1265,7 @@ class ConvertToPython_1(ConvertToPython):
         return self.make_turtle_command(parameter, Command.forward, 'forward', True)
 
     def make_color(self, parameter):
-        return self.make_turtle_command(parameter, Command.color, 'color', False)
+        return self.make_turtle_color_command(parameter, Command.color, 'pencolor')
 
     def make_turtle_command(self, parameter, command, command_text, add_sleep):
         variable = self.get_fresh_var('trtl')
@@ -1280,6 +1280,13 @@ class ConvertToPython_1(ConvertToPython):
             return sleep_after(transpiled, False)
         return transpiled
 
+    def make_turtle_color_command(self, parameter, command, command_text):
+        variable = self.get_fresh_var('trtl')
+        return textwrap.dedent(f"""\
+            {variable} = f'{parameter}'
+            if {variable} not in {command_make_color}:
+              raise Exception(f'While running your program the command {style_closest_command(command)} received the value {style_closest_command('{' + variable + '}')} which is not allowed. Try using another color.')
+            t.{command_text}({variable})""")
 
 
 @hedy_transpiler(level=2)
@@ -1298,8 +1305,12 @@ class ConvertToPython_2(ConvertToPython_1):
         if len(args) == 0:
             return "t.pencolor('black')"
         arg = args[0]
-        if self.is_variable(arg):
-            return self.make_color(hash_var(arg))
+        if type(arg) != str:
+            arg = arg.data
+
+        arg = self.process_variable_for_fstring(arg)
+
+        return self.make_color(arg)
 
     def turn(self, args):
         if len(args) == 0:
@@ -1518,7 +1529,9 @@ class ConvertToPython_6(ConvertToPython_5):
         remaining_text = ' '.join(args[1:])
         arg1 = self.process_variable(remaining_text)
 
-        return f"str({arg0}) == str({arg1})"
+        # FH, 2022 this used to be str but convert_numerals in needed to accept non-latin numbers
+        # and works exactly as str for latin numbers (i.e. does nothing on str, makes 3 into '3')
+        return f"convert_numerals('{self.numerals_language}', {arg0}) == convert_numerals('{self.numerals_language}', {arg1})"
 
     def assign(self, args):
         parameter = args[0]
@@ -1533,7 +1546,7 @@ class ConvertToPython_6(ConvertToPython_5):
                 # if the assigned value is not a variable and contains single quotes, escape them
                 value = process_characters_needing_escape(value)
                 return parameter + " = '" + value + "'"
-    
+
     def process_token_or_tree(self, argument):
         if type(argument) is Tree:
             return f'{str(argument.children[0])}'
@@ -1828,7 +1841,7 @@ class ConvertToPython_18(ConvertToPython_17):
 
     def input_empty_brackets(self, args):
         return self.input(args)
-    
+
     def print_empty_brackets(self, args):
         return self.print(args)
 
@@ -1851,48 +1864,32 @@ def merge_grammars(grammar_text_1, grammar_text_2, level):
         override_found = False
         for line_2 in rules_grammar_2:
             if line_2 == '' or line_2[0] == '/':  # skip comments and empty lines:
-                continue
-            parts = line_2.split(':')
-            name_2, definition_2 = parts[0], ''.join(parts[1]) #get part before are after :
+                continue            
+            
+            needs_preprocessing = re.match(r'((\w|_)+)<((\w|_)+)>', line_2)
+            if needs_preprocessing:                
+                name_2 = f'{needs_preprocessing.group(1)}'                
+                processor = needs_preprocessing.group(3)
+            else:                
+                parts = line_2.split(':')
+                name_2, definition_2 = parts[0], ''.join(parts[1]) #get part before are after :
+
             if name_1 == name_2:
                 override_found = True
+                if needs_preprocessing:
+                    definition_2 = PREPROCESS_RULES[processor](definition_1)
+                    line_2_processed = f'{name_2}: {definition_2}'
+                else:
+                    line_2_processed = line_2
                 if definition_1.strip() == definition_2.strip():
                     warn_message = f"The rule {name_1} is duplicated on level {level}. Please check!"
                     warnings.warn(warn_message)
-                # Check if the rule is adding or substracting new rules                
-                has_add_op = definition_2.startswith('+=')
-                has_sub_op = has_add_op and '-=' in definition_2
-                has_last_op = has_add_op and '>' in definition_2
-                if has_sub_op:
-                    # Get the rules we need to substract
-                    part_list = definition_2.split('-=')
-                    add_list, sub_list =  (part_list[0], part_list[1]) if has_sub_op else (part_list[0], '')
-                    add_list = add_list[3:]  
-                    # Get the rules that need to be last
-                    sub_list = sub_list.split('>')  
-                    sub_list, last_list = (sub_list[0], sub_list[1]) if has_last_op  else (sub_list[0], '')
-                    sub_list = sub_list + '|' + last_list
-                    result_cmd_list = get_remaining_rules(definition_1, sub_list)
-                elif has_add_op:
-                     # Get the rules that need to be last
-                    part_list = definition_2.split('>')
-                    add_list, sub_list =  (part_list[0], part_list[1]) if has_last_op else (part_list[0], '')
-                    add_list = add_list[3:]
-                    last_list = sub_list
-                    result_cmd_list = get_remaining_rules(definition_1, sub_list)
-                else:
-                    result_cmd_list = definition_1
-
-                if has_last_op:
-                    new_rule = f"{name_1}: {result_cmd_list} | {add_list} | {last_list}"
-                elif has_add_op:
-                    new_rule = f"{name_1}: {result_cmd_list} | {add_list}"
-                else:
-                    new_rule = line_2
+                # Used to compute the rules that use the merge operators in the grammar
+                # namely +=, -= and >
+                new_rule = merge_rules_operator(definition_1, definition_2, name_1, line_2_processed)
                 #Already procesed so remove it
                 remaining_rules_grammar_2.remove(line_2)
                 break
-
         # new rule found? print that. nothing found? print org rule
         if override_found:
             merged_grammar.append(new_rule)
@@ -1907,10 +1904,43 @@ def merge_grammars(grammar_text_1, grammar_text_2, level):
     merged_grammar = sorted(merged_grammar)
     return '\n'.join(merged_grammar)
 
+def merge_rules_operator(prev_definition, new_definition, name, complete_line):
+    # Check if the rule is adding or substracting new rules                
+    has_add_op = new_definition.startswith('+=')
+    has_sub_op = has_add_op and '-=' in new_definition
+    has_last_op = has_add_op and '>' in new_definition
+    if has_sub_op:
+        # Get the rules we need to substract
+        part_list = new_definition.split('-=')
+        add_list, sub_list =  (part_list[0], part_list[1]) if has_sub_op else (part_list[0], '')
+        add_list = add_list[3:]  
+        # Get the rules that need to be last
+        sub_list = sub_list.split('>')  
+        sub_list, last_list = (sub_list[0], sub_list[1]) if has_last_op  else (sub_list[0], '')
+        sub_list = sub_list + '|' + last_list
+        result_cmd_list = get_remaining_rules(prev_definition, sub_list)
+    elif has_add_op:
+            # Get the rules that need to be last
+        part_list = new_definition.split('>')
+        add_list, sub_list =  (part_list[0], part_list[1]) if has_last_op else (part_list[0], '')
+        add_list = add_list[3:]
+        last_list = sub_list
+        result_cmd_list = get_remaining_rules(prev_definition, sub_list)
+    else:
+        result_cmd_list = prev_definition
+
+    if has_last_op:
+        new_rule = f"{name}: {result_cmd_list} | {add_list} | {last_list}"
+    elif has_add_op:
+        new_rule = f"{name}: {result_cmd_list} | {add_list}"
+    else:
+        new_rule = complete_line
+    return new_rule
+
 def get_remaining_rules(orig_def, sub_def):
-    orig_cmd_list     = [command.strip() for command in orig_def.split('|')]                    
-    unwanted_cmd_list = [command.strip() for command in sub_def.split('|')]                    
-    result_cmd_list   = [cmd for cmd in orig_cmd_list if cmd not in unwanted_cmd_list]                    
+    orig_cmd_list     = [command.strip() for command in orig_def.split('|')]
+    unwanted_cmd_list = [command.strip() for command in sub_def.split('|')]
+    result_cmd_list   = [cmd for cmd in orig_cmd_list if cmd not in unwanted_cmd_list]
     result_cmd_list   = ' | '.join(result_cmd_list) # turn the result list into a string
     return result_cmd_list
 
@@ -2218,6 +2248,10 @@ def is_program_valid(program_root, input_string, level, lang):
             raise exceptions.UnquotedEqualityCheck(line_number=line)
         elif invalid_info.error_type == 'invalid repeat':
             raise exceptions.MissingInnerCommandException(command='repeat', level=level, line_number=line)
+        elif invalid_info.error_type == 'repeat missing print':
+            raise exceptions.IncompleteRepeatException(command='print', level=level, line_number=line)
+        elif invalid_info.error_type == 'repeat missing times':
+            raise exceptions.IncompleteRepeatException(command='times', level=level, line_number=line)    
         elif invalid_info.error_type == 'print without quotes':
             # grammar rule is agnostic of line number so we can't easily return that here
             raise exceptions.UnquotedTextException(level=level)
@@ -2288,7 +2322,6 @@ def transpile_inner(input_string, level, lang="en"):
     input_string = process_input_string(input_string, level)
 
     program_root = parse_input(input_string, level, lang)
-    
     is_program_valid(program_root, input_string, level, lang)
 
     try:

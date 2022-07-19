@@ -1,7 +1,7 @@
 adventures:
     default:
         name: "Introduction"
-        description: "Level explanation"
+        description: "Vysvětlení ůrovně"
         default_save_name: "intro"
         levels:
             1:
@@ -19,7 +19,7 @@ adventures:
                 example_code: "```\n{print} Hello!\n{print} Welcome to Hedy!\n```\n"
                 example_code_2: "```\n{ask} What is your name?\n{echo} hello\n```\n"
                 story_text_2: "You can also ask for input and repeat it back with an `{echo}` command.\nTry the code to your left again.\n\nDon't know what to create? In the next tabs you will find ideas for programs to build.\n"
-                story_text_3: "Let's get started! Don't know what to create? In the next tabs you will find ideas for programs to build.\n"
+                story_text_3: "Nevíš kde začít? V záložkách najdeš různé nápady na programy které můžeš vytvořit.\n"
             2:
                 story_text: |-
                     Ve 2. úrovni se naučíme něco nového. Odteď můžeš pojmenovat slovo za pomoci `is`.
@@ -35,10 +35,10 @@ adventures:
                     `print` stále funguje jako v úrovni 1 a už nepotřebuješ `echo`.
                 start_code: print Ahoj světe!
                 example_code: "```\nname {is} Hedy\nage {is} 15\n{print} name is age years old\n```\n"
-                story_text_2: "`{print}` still works the same, but the `{ask}` command has changed. You need to use a variable in the `{ask}` command as well. It looks like this:\n"
-                example_code_2: "```\nanswer {is} {ask} What is your name?\n{print} Hello answer\n```\n"
-                story_text_3: "Another new command in this level is `{sleep}`, which pauses your program for a second. If you type a number behind the {sleep} command, the program pauses for that amount of seconds.\n"
-                example_code_3: "```\n{print} My favorite colour is...\n{sleep} 2\n{print} green!\n```\n"
+                story_text_2: "`{print}` funguje stále stejně, ale příkaz `{ask}` se změnil. I u příkazu `{ask}` musíš použít proměnnou. Bude to vypadat takhle:\n"
+                example_code_2: "```\njméno {is} {ask} Jak se jmenuješ?\n{print} Ahoj jméno\n```\n"
+                story_text_3: "Další nový příkaz této úrovně je `{sleep}`, který tvůj program na jednu vteřinu zastaví. Pokud za příkaz {sleep} napíšeš číslo, program se zstaví na právě tolik vteřin.\n"
+                example_code_3: "```\n{print} Moje oblíbená barva je...\n{sleep} 2\n{print} zelená!\n```\n"
             3:
                 story_text: |-
                     V úrovni 3 můžeš také vytvořit seznam. Počítač umí z tohoto seznamu vybrat náhodného člena, konkrétně pomocí příkazu `at random`.
@@ -50,7 +50,7 @@ adventures:
                     Všechny kódy úrovně 3 najdeš v levém panelu. Opět tady jsou i záložky s dalšími zadáními.
                 start_code: print Ahoj světe!
                 example_code: "```\nanimals {is} dog, cat, kangaroo\n{print} animals {at} {random}\n```\n"
-                story_text_2: You can also add items to the list with `{add}` and remove items with `{remove}`.
+                story_text_2: Také můžeš přidat položky do seznamu příkazem `{add}` a odstranit je příkazem `{remove}`.
                 example_code_2: "```\nanimals {is} dog, cat, kangaroo\n{add} penguin {to_list} animals\n{remove} cat {from} animals\n{print} animals {at} {random}\n```\n"
             4:
                 start_code: print 'Ahoj světe!'
@@ -68,7 +68,7 @@ adventures:
                     Příkazy najdeš opět vlevo a úkoly v záložkách.
                     Obtížnost zadání se stupňuje, proto je nejlepší začít s příběhem vlevo a pokračovat doprava, abys měl*a postupně větší výzvy.
                 example_code: "```\nprint 'You need to use quotation marks from now on!'\nanswer is ask 'What do we need to use from now on?'\nprint 'We need to use ' answer\n```\n"
-                story_text_2: "## Adventures are getting more and more difficult\nThe adventures are now getting more and more difficult in the successive tabs.\nSo it is best to start on the left with the story, and work to the right, in order to be challenged more and more.\n"
+                story_text_2: "## Dobrodružství začíná být čím dál tím těžší\nV každé další záložce na tebe čekají těžší a těžší ůkoly.\nNejlepší je začít s příběhem který je nalevo, a pokračovat napravo, pokud chceš větší výzvu.\n"
             5:
                 start_code: |-
                     jmeno is ask 'Jak se jmenuješ?'
@@ -89,10 +89,10 @@ adventures:
 
                      Také ve 4. úrovni jsou zadání v záložkách postupně obtížnější. Proto na nich pracuj zleva doprava.
                 example_code: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'\n```\n"
-                example_code_3: "```\npretty_colors {is} green, yellow\ncolor {is} {ask} 'What is your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!'\n{else} {print} 'meh'\n```\n"
-                story_text_3: "## Lists\nWhen we want to check if something is in a list, we can now use the `{in}` command.\nThis code prints pretty! if you choose green or yellow, and meh otherwise.\n"
-                story_text_2: "Sometimes code with an `{if}` gets really long and does not fit on the line well. <br> You may also divide the code over two lines, starting the second line at the `{else}` like this:\n"
-                example_code_2: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice'\n{else} {print} 'boo!'\n```\n"
+                example_code_3: "```\npěkné_barvy {is} zelená, žlutá\nbarva {is} {ask} 'Co je tvoje oblíbená barva?'\n{if} barva {in} pěkné_barvy {print} 'pěkné!'\n{else} {print} 'nic-moc'\n```\n"
+                story_text_3: "## Seznamy\nPokud chceš skontrolovat jestli se něco nachází v seznamu, můžeš na to použít příkaz `{in}`.\nTento program vypíše pěkné! pokud si vybereš barvy zelená anebo žlutá, a nic-moc pokud si vybereš jinačí.\n"
+                story_text_2: "Někdy je kód za příkazem `{if}` příliš dlouhý a nevejde se dobře na jeden řádek. <br> Proto lze takový kód rozdělit na více řádků, začínajíc druhý řádek s `{else}` takhle:\n"
+                example_code_2: "```\njméno {is} {ask} 'Jaké je tvé jméno?'\n{if} jméno {is} Hedy {print} 'pěkné'\n{else} {print} 'já mám hezčí!'\n```\n"
             6:
                 start_code: print '5 krát 5 je ' 5 * 5
                 story_text: |-
@@ -109,14 +109,14 @@ adventures:
                      print '5 krát 5 je ' 5 * 5
                      ```
                 example_code: "```\n{print} '5 plus 5 is ' 5 + 5\n{print} '5 minus 5 is ' 5 - 5\n{print} '5 {times} 5 is ' 5 * 5\n```\n"
-                story_text_2: "We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:\n"
-                example_code_2: "```\nname = Hedy\nanswer = 20 + 4\n```\n"
+                story_text_2: "Odteď uděláme změnu v ukládání čísel a slov v proměnných! Odteď můžeš používat `=` namísto  `{is}` když ukládáš například číslo nebo jméno v proměnné, tahle:\n"
+                example_code_2: "```\njméno = Hedy\nodpověď = 20 + 4\n```\n"
             7:
                 start_code: repeat 3 times print 'Hedy je zábavná!'
                 story_text: |-
                     `ask`, `print` a `if` fungují stejně jako na úrovni 5 a 6.
                     Úroveň 7 však přidává příkaz `repeat`, pomocí kterého lze řádek kódu provést vícekrát.
-                example_code: |-
+                example_code: |4-
 
                     ```
                     repeat 3 times print 'Hedy je zábavná!'
@@ -140,12 +140,12 @@ adventures:
                 example_code: "```\n{repeat} 5 {times}\n    {print} 'Hello everyone'\n    {print} 'This is all repeated 5 times'\n```\n"
             9:
                 start_code: |-
-                    repeat 3 times
-                        food = ask 'What do you want?'
-                        if food is 'pizza'
-                            print 'nice!'
-                        else
-                            print 'pizza is better'
+                    {repeat} 3 {times}
+                        jídlo = {ask} 'Co budeš chtít?'
+                        {if} jídlo {is} pizza
+                            {print} 'dobré!'
+                        {else}
+                            {print} 'pizza je lepší'
                 story_text: |
                     In this level you can not only use multiple lines with `if` and `repeat`, but you can also put them together!
                     In the example you see an `if` command within a `repeat` command. It is also allowed the other way around, and an `if` is also allowed in an `if` and a `repeat` in a `repeat`.
@@ -179,32 +179,22 @@ adventures:
                 start_code: |-
                     for pocitadlo in range 1 to 5
                         print pocitadlo
-                story_text: '`print` funguje stejně, ale místo`repeat` odteď budeme používat `for`! Teď můžeš napsat `for pocitadlo in range 1 to 5` a použít `pocitadlo` ve svém programu. Vyzkoušej si to a uvidíš, co se stane! Nezapomeň používat odsazení za příkazy `for` a `if` (To znamená začínat řádek čtyřmi mezerami).'
+                story_text: '`{print}`  funguje stejně, ale odteď budeme používat novou formu příkazu `{for}`! Teď můžeš napsat `{for} pocitadlo {in} {range} 1 {to} 5` a použít `pocitadlo` ve svém programu.
+
+                    Vyzkoušej si to a uvidíš, co se stane! Nezapomeň používat odsazení na řádcích za příkazy `{for}` a `{if}` (To znamená začínat řádek čtyřmi mezerami).'
                 example_code: "```\nfor counter in range 1 to 5\n    print counter\n```\n"
             12:
                 start_code: |-
                     print 'decimal numbers now need to use a dot'
                     print 2.5 + 2.5
-                story_text: |
-                    So far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that cmputers use the . for decimal numbers.
-
-                    For this level on you will also have to use quotation marks when storing a text with `is`:
-
-                    ```
-                    name = 'Hedy'
-                    print 'Hello ' name
-                    ```
-
-                    For numbers, you do not use quotation marks in the `is`:
-                    ```
-                    score = 25
-                    print 'You got ' score
-                    ```
+                story_text: |-
+                    ## Čísla a text
+                    Hedy doteď neumožňovala používat čísla s desetinami jako je 1.5, ale odteď už ano. Pozor, Hedy používá desetinnou tečku `.` namísto desetinné čárky.
                 example_code: "```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n"
-                story_text_2: "**All texts need to be in quotation marks**\nFor this level on you will also have to use quotation marks when storing a text with `=`:\n"
-                example_code_2: "```\nname = 'Hedy the Robot'\n{print} 'Hello ' name\n```\n"
-                story_text_3: "**All items in lists need quotation marks too**\nLists are texts, so they need quotation marks too. Mind that each single item on the list has quotation marks.\nThis allows you to save two words as 1 item on the list, for example 'Iron Man'.\n"
-                example_code_3: "```\nsuperheroes = 'Spiderman', 'Batman', 'Iron Man'\n{print} superheroes {at} {random}\n```\n"
+                story_text_2: "**Všechen text odteď musí být ohraničen uvozovkami**\nNa této úrovni také musíte použít uvozovky když ukládáte text do proměnné pomocí  `=`:\n"
+                example_code_2: "```\njméno = 'Hedy'\n{print} 'Ahoj ' jméno\n```\n"
+                story_text_3: "**Všechny položky seznamu taky potřebují uvozovky**\nProtože máme seznam slov, vět, nebo jiných textů, každá jedna položka potřebuje své vlastní uvozovky.\nTakto je jednoduché mít jako položku seznamu několik slov, například 'Pat a Mat'.\n"
+                example_code_3: "```\nsuperhrdinové = 'Spiderman', 'Batman', 'Iron Man'\n{print} superhrdinové {at} {random}\n```\n"
                 story_text_4: "**All text after `{if}` comparisons need quotation marks too**\n"
                 example_code_4: "```\nname = {ask} 'What is your name?'\n{if} name = 'Hedy the Robot'\n    {print} 'Hi there!'\n```\n"
                 story_text_5: "**Numbers don't need quotation marks**\nFor numbers, you do not use quotation marks in the `=`:\n"
@@ -393,7 +383,7 @@ adventures:
                 story_text_2: |
                     The command `{add}` can also come in handy in your story. For example
 
-                example_code_2: |
+                example_code_2: |4
 
                     {print} He hears a sound
                     animals {is} 🐿, 🦔, 🦇, 🦉

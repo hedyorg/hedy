@@ -1,6 +1,8 @@
-command:+= repeat | error_repeat_no_command -= error_print_no_quotes
+command:+= repeat | error_repeat_no_command | error_repeat_no_print | error_repeat_no_times -= error_print_no_quotes
 _if_less_command:+= repeat -= error_print_no_quotes
 
 // new commands
 repeat: _REPEAT (INT | var_access) _TIMES _SPACE command
 error_repeat_no_command: _REPEAT (INT | var_access) _TIMES _SPACE*
+error_repeat_no_print: _REPEAT (INT | var_access) _TIMES _print_argument _SPACE*
+error_repeat_no_times: _REPEAT (INT | var_access) command _SPACE*

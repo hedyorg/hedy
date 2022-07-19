@@ -17,7 +17,7 @@
 #   This category of keywords allows you to have keywords that can be preceded immediately
 #   by another word, but that are not followed by another word.
 LEVELS = {
-    4 :{
+    4 :{ # not used
         "SP_K_SP" : ["is","at","add","to_list","remove","from"],
         "K"       : [","],
         "SP_K"    : ["print","ask","sleep","forward","turn","random"],
