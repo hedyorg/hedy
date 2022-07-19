@@ -46,7 +46,6 @@ def rule_level1():
                     K("yellow",True) + \
                 ")",
             'token': ["keyword"],
-            'next': 'color',
         }],
     "direction" : [{
             'regex': "(" +\
@@ -54,7 +53,6 @@ def rule_level1():
                     K("left",True) +\
                 ")",
             'token': ["keyword"],
-            'next': 'direction',
         }]
     })
 
@@ -125,24 +123,106 @@ def rule_level3():
     "value" : [{
         'regex': START_WORD + K("at") + SPACE + K("random") ,
         'token': ['text','keyword','keyword','keyword'],
-        'next': 'value',
     },{
         'regex': START_WORD + K("at") ,
         'token': ['text','keyword'],
-        'next': 'value',
     },{
         'regex': "," ,
         'token': 'keyword',
-        'next': 'value',
     }],
     "valueExpr" : [{
         'regex': START_WORD + K("at") + SPACE + K("random") ,
         'token': ['text','keyword','keyword','keyword'],
-        'next': 'value',
     },{
         'regex': START_WORD + K("at") ,
         'token': ['text','keyword'],
+    }],
+    "valAdd"    : [{
+        'regex': START_WORD + K("to_list") ,
+        'token': ['text','keyword'],
+        'next': 'valueTo',
+    }],
+    "valueTo" : [],
+    "valRemove" : [{
+        'regex': START_WORD + K("from") ,
+        'token': ['text','keyword'],
+        'next': 'valueFrom',
+    }],
+    "valueFrom" : [],
+    })
+
+
+def rule_level4():
+    return add_extra_rule({"start" : [{
+        'regex': START_LINE + WORD + SPACE + K("is") + "( *)" + K("ask"),
+        'token': ["text",'text','text','keyword','text','keyword'],
+        'next': 'valueExpr',
+    },{
+        'regex': START_LINE + WORD + SPACE + K("is"),
+        'token': ["text",'text','text','keyword'],
         'next': 'value',
+    },{
+        'regex': START_LINE + K("print") ,
+        'token': ['text','keyword'],
+        'next': 'valueExpr',
+    },{
+        'regex': START_LINE + K("turn") ,
+        'token': ['text','keyword'],
+        'next': 'valueSimple',
+    },{
+        'regex': START_LINE + K("sleep") ,
+        'token': ['text','keyword'],
+        'next': 'valueSimple',
+    },{
+        'regex': START_LINE + K("forward") ,
+        'token': ['text','keyword'],
+        'next': 'valueSimple',
+    },{
+        'regex': START_LINE + K("add"),
+        'token': ["text",'keyword'],
+        'next': 'valAdd',
+    },{
+        'regex': START_LINE + K("remove"),
+        'token': ["text",'keyword'],
+        'next': 'valRemove',
+    }],
+    "value" : [{
+        'regex': START_WORD + K("at") + SPACE + K("random") ,
+        'token': ['text','keyword','keyword','keyword'],
+    },{
+        'regex': START_WORD + K("at") ,
+        'token': ['text','keyword'],
+    },{
+        'regex': "," ,
+        'token': 'keyword',
+    }],
+    "valueExpr" : [{
+        'regex': START_WORD + K("at") + SPACE + K("random") ,
+        'token': ['text','keyword','keyword','keyword'],
+    },{
+        'regex': START_WORD + K("at") ,
+        'token': ['text','keyword'],
+    },{
+        'regex': '\"[^\"]*\"',
+        'token': 'constant.character',
+    },{
+        'regex': "\'[^\']*\'",
+        'token': 'constant.character',
+    },{
+        'regex': '\"[^\"]*$',
+        'token': 'constant.character',
+        'next' : 'start'
+    },{
+        'regex': "\'[^\']*$",
+        'token': 'constant.character',
+        'next' : 'start'
+    }],
+    "valueSimple":[{
+        'regex': START_WORD + K("at") + SPACE + K("random") ,
+        'token': ['text','keyword','keyword','keyword'],
+    },{
+        'regex': START_WORD + K("at") ,
+        'token': ['text','keyword'],
     }],
     "valAdd"    : [{
         'regex': START_WORD + K("to_list") ,
