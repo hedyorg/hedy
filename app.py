@@ -1457,6 +1457,10 @@ def get_country(country):
     return COUNTRIES.get(country, "-")
 
 
+@app.template_global()
+def parse_keyword(keyword):
+    return hedy_content.KEYWORDS.get(g.keyword_lang).get(keyword)
+
 def make_lang_obj(lang):
     """Make a language object for a given language."""
     return {
