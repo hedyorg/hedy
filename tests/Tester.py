@@ -7,6 +7,7 @@ from contextlib import contextmanager
 import inspect
 import unittest
 import utils
+import random
 from hedy_content import ALL_KEYWORD_LANGUAGES, KEYWORDS
 
 
@@ -150,6 +151,48 @@ class HedyTester(unittest.TestCase):
       if output is not None:
         self.assertEqual(output, HedyTester.run_code(result))
         self.assertTrue(extra_check_function(result))
+
+  def random_tester(self,level, programs, max_lines=30, block_size=5, max_indent=3):
+    has_ask = False
+    program_result_hedy = []
+    program_length = 0
+    program_result_python = [] 
+    ident_stack = [block_size]
+    last_line_hedy = ''
+    # Keep looping while we have blocks to process and the program haven't reached the maximum lenght
+    # If the last line needs identation we loop until we add a line inside of it
+    while (ident_stack and program_length < max_lines) or hedy.needs_indentation(last_line_hedy):                
+      # the identation level is how many blocks are inside the stack
+      ident_level = len(ident_stack) - 1
+      program = random.choice(list(programs.values()))
+      program_hedy = program[0]
+      program_python = program[1]
+  
+      if not has_ask and program_hedy.startswith('echo'):
+        continue        
+      if program_hedy.startswith('ask'):
+        has_ask = True
+      
+      needs_indentation = hedy.needs_indentation(program_hedy)        
+      
+      if not needs_indentation or ident_level < max_indent:
+        program_result_hedy.append(' '*(ident_level)*2 + program_hedy)
+        last_line_hedy = program_hedy
+        program_length += last_line_hedy.count('\n') + 1
+        program_result_python.append(' '*(ident_level)*2 + program_python)
+        # The number of sub_blocks left to add in this block
+        ident_stack[-1] = ident_stack[-1] - 1
+        # if this is the last sub_block, but we have indentation, we dont pop yet to be able to compute the number of spaces
+        # correctly
+        if ident_stack[-1] <= 0 and not needs_indentation:
+          ident_stack.pop()
+          
+        if needs_indentation and ident_level < max_indent:
+          ident_stack.append(random.randint(1, block_size))
+          
+      result_python = '\n'.join(program_result_python)
+      result_hedy  = '\n'.join(program_result_hedy)
+      self.single_level_tester(code=result_hedy, expected=result_python, level=level)
 
   def assert_translated_code_equal(self, orignal, translation):
     # When we translate a program we lose information about the whitespaces of the original program.
