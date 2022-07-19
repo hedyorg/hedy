@@ -824,7 +824,11 @@ def index(level, program_id):
     for adventure in customizations.get('teacher_adventures', []):
         current_adventure = DATABASE.get_adventure(adventure)
         if current_adventure.get('level') == str(level):
-            current_adventure['content'] = current_adventure['content'].format(**hedy_content.KEYWORDS.get(g.keyword_lang))
+            try:
+                current_adventure['content'] = current_adventure['content'].format(**hedy_content.KEYWORDS.get(g.keyword_lang))
+            except:
+                # We don't want teacher being able to break the student UI -> pass this adventure
+                pass
             teacher_adventures.append(current_adventure)
 
     enforce_developers_mode = False
