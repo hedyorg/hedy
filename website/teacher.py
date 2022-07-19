@@ -422,8 +422,12 @@ def routes(app, database, achievements):
         if adventure['creator'] != user['username'] and not is_admin(user):
             return utils.error_page(error=403, ui_message=gettext('retrieve_adventure_error'))
 
+        print(adventure)
+
         # Add level to the <pre> tag to let syntax highlighting know which highlighting we need!
         adventure['content'] = adventure['content'].replace("<pre>", "<pre class='no-copy-button' level='" + str(adventure['level']) + "'>")
+        adventure['content'] = adventure['content'].format(**hedy_content.KEYWORDS.get(g.keyword_lang))
+
         return render_template('view-adventure.html', adventure=adventure,
                                page_title=gettext('title_view-adventure'), current_page='my-profile')
 
@@ -501,7 +505,6 @@ def routes(app, database, achievements):
             code = body.get('code').format(**hedy_content.KEYWORDS.get(g.keyword_lang))
         except:
             code = gettext('something_went_wrong_keyword_parsing'), 400
-        print(code)
         return {'code': code}, 200
 
     @app.route('/for-teachers/create_adventure', methods=['POST'])
