@@ -500,7 +500,7 @@ def routes(app, database, achievements):
         try:
             code = body.get('code').format(**hedy_content.KEYWORDS.get(g.keyword_lang))
         except:
-            code = gettext('something_went_wrong_keyword_parsing')
+            code = gettext('something_went_wrong_keyword_parsing'), 400
         print(code)
         return {'code': code}, 200
 
