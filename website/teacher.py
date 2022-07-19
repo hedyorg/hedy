@@ -472,12 +472,17 @@ def routes(app, database, achievements):
             if adventure['name'] == body['name'] and adventure['id'] != body['id']:
                 return gettext('adventure_duplicate'), 400
 
+        try:
+            content = body['content'].format(**hedy_content.KEYWORDS.get(g.keyword_lang))
+        except:
+            return gettext('something_went_wrong_keyword_parsing'), 400
+
         adventure = {
             'date': utils.timems(),
             'creator': user['username'],
             'name': body['name'],
             'level': body['level'],
-            'content': body['content'],
+            'content': content,
             'public': body['public']
         }
 
