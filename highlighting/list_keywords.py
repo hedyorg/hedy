@@ -18,43 +18,43 @@
 #   by another word, but that are not followed by another word.
 KEYWORDS = {
     4 :{ # not used
-        "SP_K_SP" : ["is","at","add","to_list","remove","from"],
+        "SP_K_SP" : ["is","at","add","to_list","remove","from","color"],
         "K"       : [","],
         "SP_K"    : ["print","ask","sleep","forward","turn","random"],
         "K_SP"    : [],
     },
     5 :{
-        "SP_K_SP" : ["is","at","add","to_list","remove","from","in","if","else"],
+        "SP_K_SP" : ["is","at","add","to_list","remove","from","in","if","else","color"],
         "K"       : [","],
         "SP_K"    : ["print","ask","sleep","forward","turn","random"],
         "K_SP"    : [],
     },
     6 :{
-        "SP_K_SP" : ["is","at","add","to_list","remove","from","in","if","else"],
+        "SP_K_SP" : ["is","at","add","to_list","remove","from","in","if","else","color"],
         "K"       : [",","-","=","/","\\*","\\+"],
         "SP_K"    : ["print","ask","sleep","forward","turn","random"],
         "K_SP"    : [],
     },
     7 :{
-        "SP_K_SP" : ["is","at","add","to_list","remove","from","in","if","else","repeat","times"],
+        "SP_K_SP" : ["is","at","add","to_list","remove","from","in","if","else","repeat","times","color"],
         "K"       : [",","-","=","/","\\*","\\+"],
         "SP_K"    : ["print","ask","sleep","forward","turn","random"],
         "K_SP"    : [],
     },
     8 :{
-        "SP_K_SP" : ["is","at","add","to_list","remove","from","in","if","repeat"],
+        "SP_K_SP" : ["is","at","add","to_list","remove","from","in","if","repeat","color"],
         "K"       : [",","-","=","/","\\*","\\+"],
         "SP_K"    : ["print","ask","sleep","forward","turn","random","else","times"],
         "K_SP"    : [],
     },
     9 :{
-        "SP_K_SP" : ["is","at","add","to_list","remove","from","in","if","repeat"],
+        "SP_K_SP" : ["is","at","add","to_list","remove","from","in","if","repeat","color"],
         "K"       : [",","-","=","/","\\*","\\+"],
         "SP_K"    : ["print","ask","sleep","forward","turn","random","else","times"],
         "K_SP"    : [],
     },
     10 :{
-        "SP_K_SP" : ["is","at","add","to_list","remove","from","in","if","repeat","for"],
+        "SP_K_SP" : ["is","at","add","to_list","remove","from","in","if","repeat","for","color"],
         "K"       : [",","-","=","/","\\*","\\+"],
         "SP_K"    : ["print","ask","sleep","forward","turn","random","else","times"],
         "K_SP"    : [],
