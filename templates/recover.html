@@ -3,7 +3,7 @@
 {% block main %}
 <div class="w-full mx-auto flex flex-col items-center gap-4">
     <div class="bg-white shadow-md rounded-lg rounded py-4">
-      <form onsubmit="event.preventDefault (); hedyApp.auth.submit ('recover')" class="flex flex-col items-center gap-2">
+      <form onsubmit="event.preventDefault (); hedyApp.auth.submit ('recover')" class="js-validated-form flex flex-col items-center gap-2">
         <h2>{{_('recover_password')}}</h2>
         <div class="w-full flex px-8 flex-row items-center justify-center gap-2">
             <label class="inline-block w-80" for="username">{{_('username')}} / {{_('email')}}</label>

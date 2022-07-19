@@ -7,6 +7,7 @@ class HighlighterTestAffectation(HighlightTester):
     @parameterized.expand([
         ("level2"),
         ("level3"),
+        ("level4"),
     ])
     def test_is(self, level):
         self.assert_highlighted_chr(
@@ -16,7 +17,6 @@ class HighlighterTestAffectation(HighlightTester):
 
 
     @parameterized.expand([
-        ("level4"),
         ("level5"),
         ("level6"),
         ("level7"),
@@ -36,6 +36,17 @@ class HighlighterTestAffectation(HighlightTester):
             "sword is 'lost'",
             "TTTTT KK SSSSSS",
             level=level, lang="en")
+
+
+    @parameterized.expand([
+        ("level4"),
+    ])
+    def test_is_string_unquote(self, level):
+        self.assert_highlighted_chr(
+            "sword is 'lost'",
+            "TTTTT KK TTTTTT",
+            level=level, lang="en")
+
 
 
 
