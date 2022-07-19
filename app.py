@@ -820,9 +820,11 @@ def index(level, program_id):
     commands = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
 
     teacher_adventures = []
+    # Todo: TB It would be nice to improve this by using level as a sort key
     for adventure in customizations.get('teacher_adventures', []):
         current_adventure = DATABASE.get_adventure(adventure)
         if current_adventure.get('level') == str(level):
+            current_adventure['content'] = current_adventure['content'].format(**hedy_content.KEYWORDS.get(g.keyword_lang))
             teacher_adventures.append(current_adventure)
 
     enforce_developers_mode = False
