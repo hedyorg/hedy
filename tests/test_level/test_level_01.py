@@ -2,7 +2,7 @@ import hedy
 import textwrap
 from hedy import Command
 from tests.Tester import HedyTester
-
+import random
 
 class TestsLevel1(HedyTester):
     level = 1
@@ -35,6 +35,20 @@ class TestsLevel1(HedyTester):
             expected_commands=expected_commands
         )
         self.assertEqual([output], hedy.all_print_arguments(code, self.level))
+
+    def test_random_tests(self): 
+        programs = {
+            'print': ["print Hallo welkom bij Hedy!", "print('Hallo welkom bij Hedy!')"],
+            'print_no_space': ["printHallo welkom bij Hedy!", "print('Hallo welkom bij Hedy!')"],
+            'print_commas': ["print one, two, three", "print('one, two, three')"],
+            'ask': ["ask wat is je lievelingskleur?", "answer = input('wat is je lievelingskleur?')"],
+            'echo': ["echo je lievelingskleur is", "print('je lievelingskleur is '+answer)"],
+            'forward': ["forward", "t.forward(50)\ntime.sleep(0.1)"],
+            'color': ["color", "t.pencolor('red')"],
+            'turn': ["turn", "t.right(90)"]
+        }
+        
+        self.random_tester(1, programs, max_lines=10)
 
     def test_print_no_space(self):
         code = "printHallo welkom bij Hedy!"
@@ -254,10 +268,10 @@ class TestsLevel1(HedyTester):
         self.single_level_tester(code=code, expected=expected)
 
     def test_ask_es(self):
-        code = "ask ask Cuál es tu color favorito?"
-        expected = "answer = input('ask Cuál es tu color favorito?')"
+        code = "preguntar ¿Cuál es tu color favorito?"
+        expected = "answer = input('¿Cuál es tu color favorito?')"
 
-        self.single_level_tester(code=code, expected=expected)
+        self.single_level_tester(code=code, expected=expected, lang='es')
 
     def test_ask_nl_code_transpiled_in_nl(self):
         code = "vraag Heb je er zin in?"

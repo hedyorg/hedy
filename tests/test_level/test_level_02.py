@@ -605,3 +605,28 @@ class TestsLevel2(HedyTester):
             code=code,
             exception=hedy.exceptions.IncompleteCommandException
         )
+    
+    def test_random(self):
+        programs = {
+            'print': ["print Hallo welkom bij Hedy!", "print(f'Hallo welkom bij Hedy!')"],
+            'print_double_quoted_text': ['print "Welcome to OceanView"',"print(f'\"Welcome to OceanView\"')"],
+            'print_text_with_inner_double_quote': ['print It says "Hedy"', """print(f'It says "Hedy"')"""],
+            'print_backslash': ["print Yes\\No", "print(f'Yes\\\\No')"],
+            'ask': ["kleur is ask wat is je lievelingskleur?","kleur = input('wat is je lievelingskleur'+'?')"],
+            'ask_single_quoted_text': ["name is ask 'Who's that'", """name = input('\\'Who\\'s that\\'')"""],
+            'ask_double_quoted_text' : ['var is ask "Welcome to OceanView"', "var = input('\"Welcome to OceanView\"')"],
+            'ask_text_with_inner_single_quote': ["var is ask Welcome to Hedy's game", """var = input('Welcome to Hedy\\'s game')"""],
+            'ask_with_comma': ['dieren is ask hond, kat, kangoeroe', "dieren = input('hond, kat, kangoeroe')"],
+            'forward_with_integer_variable': ['a is 50\nforward a', f"a = '50'\n{HedyTester.forward_transpiled('a')}"],
+            'turn_number': ["turn 180", HedyTester.turn_transpiled(180)],
+            'turn_negative_number': ["turn -180", HedyTester.turn_transpiled(-180)],
+            'turn_with_number_var': ["direction is 70\nturn direction", HedyTester.turn_transpiled('direction')],
+            'sleep': ["sleep", "time.sleep(1)"],
+            'sleep_with_default_number': ["sleep 1", HedyTester.sleep_command_transpiled('"1"')],
+            'sleep_with_number_variable': ["n is 2\nsleep n", f"n = '2'\n{HedyTester.sleep_command_transpiled('n')}"],
+            'assign': ["naam is Felienne", "naam = 'Felienne'"],
+            'assign_integer': ["naam is 14", "naam = '14'"],
+            'assign_text_to_hungarian_var': ["állatok is kutya\nprint állatok", "v79de0191e90551f058d466c5e8c267ff = 'kutya'\nprint(f'{v79de0191e90551f058d466c5e8c267ff}')"]
+        }
+
+        self.random_tester(2, programs, max_lines=15)
