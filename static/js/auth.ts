@@ -181,6 +181,30 @@ $('form#public_profile').submit(function(e) {
   });
 });
 
+export function markAsTeacher(checkbox: any, username: string, is_teacher: boolean) {
+  $(checkbox).prop('checked', false);
+  let text = "Are you sure you want to remove " + username + " as a teacher?";
+  if (is_teacher) {
+    text = "Are you sure you want to make " + username + " a teacher?";
+  }
+  modal.confirm (text, function () {
+    $.ajax({
+      type: 'POST',
+      url: '/admin/markAsTeacher',
+      data: JSON.stringify({
+        username: username,
+        is_teacher: is_teacher
+      }),
+      contentType: 'application/json; charset=utf-8'
+    }).done(function () {
+      $(checkbox).prop('checked', true);
+      modal.alert(['User', username, 'successfully', is_teacher ? 'marked' : 'unmarked', 'as teacher'].join(' '), 2000, false);
+    }).fail(function () {
+      modal.alert(['Error when', is_teacher ? 'marking' : 'unmarking', 'user', username, 'as teacher'].join(' '), 2000, false);
+    });
+  });
+}
+
 // *** Admin functionality ***
 
 export const auth = {
@@ -189,24 +213,7 @@ export const auth = {
     window.location.pathname = where;
   },
   markAsTeacher: function (checkbox: any, username: string, is_teacher: boolean) {
-    $(checkbox).prop('checked', false);
-    let text = "Are you sure you want to remove " + username + " as a teacher?";
-    if (is_teacher) {
-      text = "Are you sure you want to make " + username + " a teacher?";
-    }
-    modal.confirm (text, function () {
-      $.ajax({
-        type: 'POST',
-        url: '/admin/markAsTeacher',
-        data: JSON.stringify({username: username, is_teacher: is_teacher}),
-        contentType: 'application/json; charset=utf-8'
-      }).done(function () {
-        $(checkbox).prop('checked', true);
-        modal.alert(['User', username, 'successfully', is_teacher ? 'marked' : 'unmarked', 'as teacher'].join(' '), 2000, false);
-      }).fail(function () {
-        modal.alert(['Error when', is_teacher ? 'marking' : 'unmarking', 'user', username, 'as teacher'].join(' '), 2000, false);
-      });
-    });
+
   },
   changeUserEmail: function (username: string, email: string) {
     modal.prompt ('Please enter the corrected email', email, function (correctedEmail) {

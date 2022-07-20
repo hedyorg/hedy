@@ -3,7 +3,7 @@
 {% block main %}
 <div class="w-full mx-auto flex flex-col items-center gap-4">
     <div class="bg-white shadow-md rounded-lg rounded py-4">
-      <form class="js-validated-form" onsubmit="event.preventDefault (); hedyApp.auth.submit ('reset')">
+      <form id="reset">
         <h2>{{_('reset_password')}}</h2>
         <div class="w-full flex px-8 flex-row items-center justify-center">
             <label class="inline-block w-40">{{_('password')}}</label>

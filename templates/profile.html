@@ -19,52 +19,52 @@
              {% endif %}
            </div>
        {% endif %}
-       <h1 class="section-header" onclick="$ ('#public_profile').toggle()">{{_('public_profile')}}</h1>
-       <div id="public_profile" class="profile-section-body" {% if request.args.get('open') == "public-profile" %} style="display: inline;"{% endif %}>
-         <h2 class="profile-section-body-header">{{_('public_profile')}}</h2>
-        <div class="flex flex-row my-2 justify-center items-center">
-            <button class="green-btn {% if not public_settings %}hidden{% endif %}" onclick="window.open('/user/{{ username}}')" id="public_profile_redirect">{{_('visit_own_public_profile')}}</button>
-        </div>
-         <form class="js-validated-form flex flex-col gap-4" onsubmit="event.preventDefault (); hedyApp.auth.submit ('public_profile')">
-             <div class="flex flex-col">
-                 <h3 class="px-2 pt-0 pb-2 my-0 font-semibold">{{_('profile_picture')}}</h3>
-                 <input name="profile_picture" id="profile_picture" type=number class="hidden" required {% if public_settings.image %} value="{{ public_settings.image }}" {% else %} value="1"{% endif %}>
-                 <div class="flex flex-wrap justify-center gap-2 w-full border border-gray-400 rounded-lg p-4">
-                    {% for i in range(1, 13) %}
-                        <div class="w-32 h-32 rounded-lg relative profile_image {% if (public_settings.image and public_settings.image == i|string()) or (not public_settings.image and i == 1) %}border-2 border-blue-600{% endif %}" id="profile_image_{{ i }}" onclick="hedyApp.select_profile_image({{ i }});">
-                            <div class="relative h-full">
-                                <img src="{{static('/images/profile_images/' + i|string() + '.png')}}" class="absolute p-1" alt="{{_('profile_logo_alt')}}">
+       <h1 class="section-header" onclick="$ ('#public_profile_body').toggle()">{{_('public_profile')}}</h1>
+       <div id="public_profile_body" class="profile-section-body" {% if request.args.get('open') == "public-profile" %} style="display: inline;"{% endif %}>
+            <h2 class="profile-section-body-header">{{_('public_profile')}}</h2>
+            <div class="flex flex-row my-2 justify-center items-center">
+                <button class="green-btn {% if not public_settings %}hidden{% endif %}" onclick="window.open('/user/{{ username}}')" id="public_profile_redirect">{{_('visit_own_public_profile')}}</button>
+            </div>
+             <form id="public_profile" class="flex flex-col gap-4">
+                 <div class="flex flex-col">
+                     <h3 class="px-2 pt-0 pb-2 my-0 font-semibold">{{_('profile_picture')}}</h3>
+                     <input name="profile_picture" id="profile_picture" type=number class="hidden" required {% if public_settings.image %} value="{{ public_settings.image }}" {% else %} value="1"{% endif %}>
+                     <div class="flex flex-wrap justify-center gap-2 w-full border border-gray-400 rounded-lg p-4">
+                        {% for i in range(1, 13) %}
+                            <div class="w-32 h-32 rounded-lg relative profile_image {% if (public_settings.image and public_settings.image == i|string()) or (not public_settings.image and i == 1) %}border-2 border-blue-600{% endif %}" id="profile_image_{{ i }}" onclick="hedyApp.select_profile_image({{ i }});">
+                                <div class="relative h-full">
+                                    <img src="{{static('/images/profile_images/' + i|string() + '.png')}}" class="absolute p-1" alt="{{_('profile_logo_alt')}}">
+                                </div>
                             </div>
-                        </div>
-                    {% endfor %}
-                 </div>
-             </div>
-             <div class="flex flex-col">
-                 <h3 class="px-2 pt-0 pb-2 my-0 font-semibold">{{_('personal_text')}}</h3>
-                 <textarea class="block h-32 px-2 py-1 border border-gray-400 rounded-lg" id="personal_text" required maxlength="200" minlength="5" placeholder="{{_('your_personal_text')}}">{% if public_settings.personal_text %}{{ public_settings.personal_text }}{% endif %}</textarea>
-             </div>
-             {% if programs %}
-                 <div>
-                     <h3 class="px-2 pt-0 pb-2 my-0 font-semibold">{{_('favourite_program')}}</h3>
-                     <select id="favourite_program" class="block appearance-none w-full text-gray-700 px-4 py-1 rounded-lg">
-                        <option value="" selected disabled hidden>{{_('select')}}</option>
-                        {% for program in programs %}
-                            <option value="{{program.id}}" {% if public_settings.favourite_program and public_settings.favourite_program == program.id %} selected {% endif %}>{{program.name}}</option>
                         {% endfor %}
-                    </select>
+                     </div>
                  </div>
-             {% endif %}
-             <div class="flex flex-row gap-4 items-center border-gray-400 border p-4 rounded-lg">
-                <input type="checkbox" name="agree_terms" id="agree_terms" required class="" {% if public_settings %}checked{% endif %}>
-                <label for="agree_terms" class="cursor-pointer w-full">{{_('public_profile_info')}}</label>
-             </div>
-             <div class="flex flex-row">
-                <button type="submit" class="green-btn">{{_('update_public')}}</button>
-                {% if public_settings %}
-                    <button type="reset" class="ml-auto red-btn" onclick="event.preventDefault(); hedyApp.destroy_public('{{_('are_you_sure')}}');">{{_('delete_public')}}</button>
-                {% endif %}
-             </div>
-         </form>
+                 <div class="flex flex-col">
+                     <h3 class="px-2 pt-0 pb-2 my-0 font-semibold">{{_('personal_text')}}</h3>
+                     <textarea class="block h-32 px-2 py-1 border border-gray-400 rounded-lg" id="personal_text" required maxlength="200" minlength="5" placeholder="{{_('your_personal_text')}}">{% if public_settings.personal_text %}{{ public_settings.personal_text }}{% endif %}</textarea>
+                 </div>
+                 {% if programs %}
+                     <div>
+                         <h3 class="px-2 pt-0 pb-2 my-0 font-semibold">{{_('favourite_program')}}</h3>
+                         <select id="favourite_program" class="block appearance-none w-full text-gray-700 px-4 py-1 rounded-lg">
+                            <option value="" selected disabled hidden>{{_('select')}}</option>
+                            {% for program in programs %}
+                                <option value="{{program.id}}" {% if public_settings.favourite_program and public_settings.favourite_program == program.id %} selected {% endif %}>{{program.name}}</option>
+                            {% endfor %}
+                        </select>
+                     </div>
+                 {% endif %}
+                 <div class="flex flex-row gap-4 items-center border-gray-400 border p-4 rounded-lg">
+                    <input type="checkbox" name="agree_terms" id="agree_terms" required class="" {% if public_settings %}checked{% endif %}>
+                    <label for="agree_terms" class="cursor-pointer w-full">{{_('public_profile_info')}}</label>
+                 </div>
+                 <div class="flex flex-row">
+                    <button type="submit" class="green-btn">{{_('update_public')}}</button>
+                    {% if public_settings %}
+                        <button type="reset" class="ml-auto red-btn" onclick="event.preventDefault(); hedyApp.destroy_public('{{_('are_you_sure')}}');">{{_('delete_public')}}</button>
+                    {% endif %}
+                 </div>
+             </form>
        </div>
         <!-- If a user doesn't have an email it's a student created by a teacher -> not allowed to leave a class -->
        {% if user_classes and user_data['email'] %}
