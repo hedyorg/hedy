@@ -147,10 +147,6 @@ export const auth = {
       if (el.id) values[el.id as keyof UserForm] = (el as HTMLInputElement).value;
     });
 
-    if (op === 'login') {
-
-    }
-
     if (op === 'profile') {
       const payload: User = {
         email: values.email ? values.email : undefined,
