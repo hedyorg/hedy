@@ -280,14 +280,6 @@ export function getHighlighter(level: string) {
   return `ace/mode/level` + level;
 }
 
-function reloadOnExpiredSession () {
-   // If user is not logged in or session is not expired, return false.
-   if (! auth.profile || auth.profile.session_expires_at > Date.now ()) return false;
-   // Otherwise, reload the page to update the top bar.
-   location.reload ();
-   return true;
-}
-
 function clearErrors(editor: AceAjax.Editor) {
   editor.session.clearAnnotations();
   for (const marker in editor.session.getMarkers(false)) {
@@ -318,7 +310,6 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
       return modal.alert(disabled_prompt, 3000, true);
     } return;
   }
-  if (reloadOnExpiredSession ()) return;
 
   // We set the run limit to 1ms -> make sure that the previous programs stops (if there is any)
   Sk.execLimit = 1;
@@ -637,7 +628,6 @@ function storeProgram(level: number | [number, string], lang: string, name: stri
 }
 
 export function saveit(level: number | [number, string], lang: string, name: string, code: string, shared: boolean, cb?: (err: any, resp?: any) => void) {
-  if (reloadOnExpiredSession ()) return;
   try {
     $.ajax({
       type: 'POST',
