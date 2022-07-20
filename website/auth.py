@@ -493,6 +493,7 @@ def routes(app, database):
     @requires_login
     def change_password(user):
         body = request.json
+        print(body)
 
         if not isinstance(body, dict):
             return gettext('ajax_error'), 400
@@ -521,13 +522,12 @@ def routes(app, database):
             except:
                 return gettext('mail_error_change_processed'), 400
 
-        return gettext('password_updated'), 200
+        return jsonify({'message': gettext('password_updated')}), 200
 
     @app.route('/profile', methods=['POST'])
     @requires_login
     def update_profile(user):
         body = request.json
-        print(body)
         if not isinstance(body, dict):
             return gettext('ajax_error'), 400
         if not isinstance(body.get('language'), str) or body.get('language') not in ALL_LANGUAGES.keys():

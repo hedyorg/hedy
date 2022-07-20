@@ -125,7 +125,7 @@ $('form#change_password').submit(function(e) {
     data: convertFormJSON($(this)),
     contentType: 'application/json; charset=utf-8'
   }).done (function (response) {
-    modal.alert(response.responseText, 3000, false);
+    modal.alert(response.message, 3000, false);
     $('form#change_password').trigger('reset');
   }).fail (function (response) {
     modal.alert(response.responseText, 3000, true);

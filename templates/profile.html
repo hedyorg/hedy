@@ -144,19 +144,19 @@
        </div>
       <h1 id="password_toggle" class="section-header" onclick="$ ('#change-password-body').toggle()">{{_('change_password')}}</h1>
         <div class="profile-section-body" id="change-password-body">
-            <form id="change_password" onsubmit="event.preventDefault (); hedyApp.auth.submit ('change_password')">
+            <form id="change_password">
                 <h2 class="profile-section-body-header">{{_('change_password')}}</h2>
                 <div class="flex flex-row items-center mb-2">
                     <label for="old_password" class="inline-block w-72">{{_('current_password')}}</label>
-                    <input id="old_password" class="personal-input" minlength="6" type=password required>
+                    <input id="old_password" name="old_password" class="personal-input" minlength="6" type=password required>
                 </div>
                 <div class="flex flex-row items-center mb-2">
                     <label for="password" class="inline-block w-72">{{_('new_password')}}</label>
-                    <input id="password" class="personal-input" minlength="6" type=password required>
+                    <input id="password" name="password" class="personal-input" minlength="6" type=password required>
                 </div>
                 <div class="flex flex-row items-center mb-2">
                     <label for="password_repeat" class="inline-block w-72">{{_('repeat_new_password')}}</label>
-                    <input id="password_repeat" class="personal-input" minlength="6" type=password required>
+                    <input id="password_repeat" name="password_repeat" class="personal-input" minlength="6" type=password required>
                 </div>
                 <button type="submit" class="green-btn mt-2">{{_('change_password')}}</button>
             </form>
