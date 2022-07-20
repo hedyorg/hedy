@@ -94,7 +94,9 @@ export function destroy_public(confirmation: string) {
   });
 }
 
-$('#signup').submit(function() {
+$('#signup').submit(function(e) {
+  // Prevent the automatic reload -> we want to wait for server feedback on our AJAX call
+  e.preventDefault();
   console.log("Let's signup...");
   console.log(this);
 });
