@@ -2,48 +2,9 @@ import { modal } from './modal';
 import { join_class } from './teachers';
 import {saveitP, showAchievements} from './app';
 
-export interface Profile {
-  session_expires_at: number;
-}
-
+// We use this interface so we can create an empty dictionairy with the need for // @ts-ignore
 interface Dict<T> {
     [key: string]: T;
-}
-
-interface User {
-  username?: string;
-  email?: string;
-  mail_repeat?: string;
-  password?: string;
-  password_repeat?: string;
-  birth_year?: number;
-  language?: string,
-  keyword_language?: string,
-  country?: string;
-  gender?: string;
-  subscribe?: string;
-  agree_terms?: string;
-  agree_third_party?: string;
-  prog_experience?: 'yes' | 'no';
-  experience_languages?: string[];
-  is_teacher?: string;
-}
-
-interface UserForm {
-  username?: string;
-  email?: string;
-  token?: string;
-  password?: string;
-  birth_year?: string;
-  language?: string,
-  keyword_language?: string,
-  country?: string;
-  gender?: string;
-  subscribe?: string;
-  agree_terms?: string;
-  mail_repeat?: string;
-  password_repeat?: string;
-  old_password?: string;
 }
 
 function convertFormJSON(form: JQuery<HTMLElement>) {
@@ -133,6 +94,25 @@ $('form#login').submit(function(e) {
   });
 });
 
+$('form#profile').submit(function(e) {
+  e.preventDefault();
+  $.ajax ({
+    type: 'POST', url: '/profile',
+    data: convertFormJSON($(this)),
+    contentType: 'application/json; charset=utf-8'
+  }).done (function (response) {
+    if (response.reload) {
+      modal.alert(response.message, 2000, false);
+      setTimeout (function () {location.reload ()}, 2000);
+    } else {
+      modal.alert(response.message, 3000, false);
+    }
+  }).fail (function (response) {
+    modal.alert(response.responseText, 3000, true);
+  });
+});
+
+
 
 
 
@@ -142,37 +122,6 @@ export const auth = {
     window.location.pathname = where;
   },
   submit: function (op: string) {
-    const values: UserForm = {};
-    $ ('form.js-validated-form *').map (function (_k, el) {
-      if (el.id) values[el.id as keyof UserForm] = (el as HTMLInputElement).value;
-    });
-
-    if (op === 'profile') {
-      const payload: User = {
-        email: values.email ? values.email : undefined,
-        language: values.language,
-        keyword_language: values.keyword_language,
-        birth_year: values.birth_year ? parseInt(values.birth_year) : undefined,
-        country: values.country ? values.country : undefined,
-        gender: values.gender ? values.gender : undefined
-      };
-
-      $.ajax ({
-        type: 'POST', url: '/profile',
-        data: JSON.stringify (payload),
-        contentType: 'application/json; charset=utf-8'
-      }).done (function (response) {
-        if (response.reload) {
-          modal.alert(response.message, 2000, false);
-          setTimeout (function () {location.reload ()}, 2000);
-        } else {
-          modal.alert(response.message, 3000, false);
-        }
-      }).fail (function (response) {
-        modal.alert(response.responseText, 3000, true);
-      });
-    }
-
     if (op === 'change_password') {
       const payload = {
         old_password: values.old_password,

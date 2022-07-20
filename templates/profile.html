@@ -82,8 +82,8 @@
            </div>
        {% endif %}
        <h1 class="section-header" onclick="hedyApp.load_profile ('{{user_data['username']}}', '{{user_data['email']}}', '{{user_data['birth_year']}}', '{{user_data['gender']}}', '{{user_data['country']}}')">{{_('settings')}}</h1>
-       <div class="profile-section-body" id="profile">
-            <form class="js-validated-form" id="update_profile" onsubmit="event.preventDefault (); hedyApp.auth.submit ('profile')">
+       <div class="profile-section-body">
+            <form id="profile" onsubmit="event.preventDefault (); hedyApp.auth.submit ('profile')">
             <h2 class="profile-section-body-header">{{_('settings')}}</h2>
             <div class="flex flex-row items-center mb-2">
                 <label for="username" class="inline-block w-72">{{_('username')}}</label><strong id="username" class="inline-block w-1/2 px-2"></strong>
