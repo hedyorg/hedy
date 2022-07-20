@@ -1495,7 +1495,7 @@ def update_public_profile(user):
     if not isinstance(body, dict):
         return gettext('ajax_error'), 400
     # The images are given as a "picture id" from 1 till 12
-    if not isinstance(body.get('profile_picture'), str) or int(body.get('profile_picture'), 0) not in [range(1, 13)]:
+    if not isinstance(body.get('profile_picture'), str) or int(body.get('profile_picture'), 0) not in [*range(1, 13)]:
         return gettext('image_invalid'), 400
     if not isinstance(body.get('personal_text'), str):
         return gettext('personal_text_invalid'), 400
