@@ -1592,7 +1592,7 @@ export function toggle_blur_code() {
 }
 
 export function load_profile(username: string, mail: string, birth_year: number, gender: string, country: string) {
-  $('#profile').toggle();
+  $('#profile-change-body').toggle();
   if ($('#profile').is(":visible")) {
       $('#username').html(username);
       $('#email').val(mail);

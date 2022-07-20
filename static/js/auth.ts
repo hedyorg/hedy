@@ -112,6 +112,21 @@ $('form#profile').submit(function(e) {
   });
 });
 
+$('form#change_password').submit(function(e) {
+  e.preventDefault();
+  $.ajax ({
+    type: 'POST',
+    url: '/auth/change_password',
+    data: convertFormJSON($(this)),
+    contentType: 'application/json; charset=utf-8'
+  }).done (function (response) {
+    modal.alert(response.responseText, 3000, false);
+    $('form#change_password').trigger('reset');
+  }).fail (function (response) {
+    modal.alert(response.responseText, 3000, true);
+  });
+});
+
 
 
 
@@ -122,28 +137,6 @@ export const auth = {
     window.location.pathname = where;
   },
   submit: function (op: string) {
-    if (op === 'change_password') {
-      const payload = {
-        old_password: values.old_password,
-        password: values.password,
-        password_repeat: values.password_repeat
-      };
-
-      $.ajax ({
-        type: 'POST',
-        url: '/auth/change_password',
-        data: JSON.stringify (payload),
-        contentType: 'application/json; charset=utf-8'
-      }).done (function (response) {
-        modal.alert(response.responseText, 3000, false);
-        $ ('#old_password').val ('');
-        $ ('#password').val ('');
-        $ ('#password_repeat').val ('');
-      }).fail (function (response) {
-        modal.alert(response.responseText, 3000, true);
-      });
-    }
-
     if (op === 'recover') {
       const payload = {
         username: values.username
