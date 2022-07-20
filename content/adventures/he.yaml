@@ -358,7 +358,12 @@ adventures:
                 example_code: "```\n{print} 'Drawing figures'\nangle {is} 90\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n```\n"
                 start_code: "{print} 'Drawing figures'\nangle {is} 90\n{turn} angle\n{forward} 25"
             5:
-                start_code: "{print} 'Drawing Figures'\nfigure {is} {ask} 'Do you want a square or a triangle?'\n{if} figure {is} triangle angle {is} 120 {else} angle {is} 90\n{turn} angle\n{forward} 25"
+                start_code: |-
+                    {print} 'Drawing Figures'
+                    figure {is} {ask} 'Do you want a square or a triangle?'
+                    {if} figure {is} triangle angle {is} 120 {else} angle {is} 90
+                    {turn} angle
+                    {forward} 25
                 story_text: "## Let's draw\nIn level 5 you can make a choice with `{if}`. For example between different types of figures.\n"
                 example_code: "```\n{print} 'Drawing Figures'\nfigure {is} {ask} 'Do you want a square or a triangle?'\n{if} figure {is} triangle angle {is} 120\n{else} angle {is} 90\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n```\n"
             8:

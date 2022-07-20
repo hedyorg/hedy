@@ -424,6 +424,8 @@ def routes(app, database, achievements):
 
         # Add level to the <pre> tag to let syntax highlighting know which highlighting we need!
         adventure['content'] = adventure['content'].replace("<pre>", "<pre class='no-copy-button' level='" + str(adventure['level']) + "'>")
+        adventure['content'] = adventure['content'].format(**hedy_content.KEYWORDS.get(g.keyword_lang))
+
         return render_template('view-adventure.html', adventure=adventure,
                                page_title=gettext('title_view-adventure'), current_page='my-profile')
 
@@ -470,12 +472,17 @@ def routes(app, database, achievements):
             if adventure['name'] == body['name'] and adventure['id'] != body['id']:
                 return gettext('adventure_duplicate'), 400
 
+        try:
+            content = body['content'].format(**hedy_content.KEYWORDS.get(g.keyword_lang))
+        except:
+            return gettext('something_went_wrong_keyword_parsing'), 400
+
         adventure = {
             'date': utils.timems(),
             'creator': user['username'],
             'name': body['name'],
             'level': body['level'],
-            'content': body['content'],
+            'content': content,
             'public': body['public']
         }
 
@@ -493,6 +500,15 @@ def routes(app, database, achievements):
 
         DATABASE.delete_adventure(adventure_id)
         return {}, 200
+
+    @app.route('/for-teachers/preview-adventure', methods=['POST'])
+    def parse_preview_adventure():
+        body = request.json
+        try:
+            code = body.get('code').format(**hedy_content.KEYWORDS.get(g.keyword_lang))
+        except:
+            return gettext('something_went_wrong_keyword_parsing'), 400
+        return {'code': code}, 200
 
     @app.route('/for-teachers/create_adventure', methods=['POST'])
     @requires_login
