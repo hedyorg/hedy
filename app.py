@@ -1482,6 +1482,14 @@ def modify_query(**new_values):
 
     return '{}?{}'.format(request.path, url_encode(args))
 
+@app.template_global()
+def get_user_messages():
+    if not session.get('messages'):
+        print("Hello")
+        session['messages'] = 3
+    if session.get('messages') > 0:
+        return session.get('messages')
+    return None
 
 # We only store this @app.route here to enable the use of achievements -> might want to re-write this in the future
 @app.route('/auth/public_profile', methods=['POST'])
