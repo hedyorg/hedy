@@ -1485,8 +1485,8 @@ def modify_query(**new_values):
 @app.template_global()
 def get_user_messages():
     if not session.get('messages'):
-        print("Hello")
-        session['messages'] = 3
+        messages = DATABASE.get_username_invite(current_user()['username'])
+        session['messages'] = len(messages) if messages else 0
     if session.get('messages') > 0:
         return session.get('messages')
     return None
