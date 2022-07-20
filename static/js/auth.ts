@@ -50,6 +50,7 @@ function convertFormJSON(form: JQuery<HTMLElement>) {
   let result : Dict<any> = {};
   $.each($(form).serializeArray(), function() {
     if (result[this.name]) {
+      // If this value already exists it's most likely a check button: store all selected ones in an Array
       if ($.isArray(result[<string>this.name])) {
         result[this.name] = $.merge(result[this.name], Array(this.value));
       } else {
@@ -61,16 +62,6 @@ function convertFormJSON(form: JQuery<HTMLElement>) {
   });
   return JSON.stringify(result);
 }
-
-/*
-Todo TB: Completely re-write this to be more dependent on seperate functions and jQuery
-Current goal:
-- Re-write into separate functions such as logout(), destroy() and redirect()
-- Give all form submitting a dedicated function as well, such as login()
-- We should re-write the structure:
-- Instead of using the above fixed interface we should simplify this using a form.serialize()
-- As we already perform all validation on the back-end the front-end validation is redundant
- */
 
 function redirect(where: string) {
   where = '/' + where;
@@ -110,11 +101,8 @@ export function destroy_public(confirmation: string) {
   });
 }
 
-$('#signup').submit(function(e) {
-  // Prevent the automatic reload -> we want to wait for server feedback on our AJAX call
+$('form#signup').submit(function(e) {
   e.preventDefault();
-
-
   $.ajax ({
         type: 'POST',
         url: '/auth/signup',
@@ -127,6 +115,25 @@ $('#signup').submit(function(e) {
         modal.alert(response.responseText, 3000, true);
       });
 });
+
+$('form#login').submit(function(e) {
+  e.preventDefault();
+  $.ajax ({
+    type: 'POST',
+    url: '/auth/login',
+    data: convertFormJSON($(this)),
+    contentType: 'application/json; charset=utf-8'
+  }).done (function (response) {
+    if (response['first_time']) {
+      return afterLogin({"first_time": true});
+    }
+    return afterLogin({"admin": response['admin'] || false, "teacher": response['teacher']} || false);
+  }).fail (function (response) {
+    modal.alert(response.responseText, 3000, true);
+  });
+});
+
+
 
 
 export const auth = {
@@ -141,21 +148,7 @@ export const auth = {
     });
 
     if (op === 'login') {
-      $.ajax ({
-        type: 'POST',
-        url: '/auth/login',
-        data: JSON.stringify ({username: values.username, password: values.password}),
-        contentType: 'application/json; charset=utf-8'
-      }).done (function (response) {
-        // We set up a non-falsy profile to let `saveit` know that we're logged in. We put session_expires_at since we need it.
-        // This happens when a student account (without an mail address logs in for the first time
-        if (response['first_time']) {
-          return afterLogin({"first_time": true});
-        }
-        return afterLogin({"admin": response['admin'] || false, "teacher": response['teacher']} || false);
-      }).fail (function (response) {
-        modal.alert(response.responseText, 3000, true);
-      });
+
     }
 
     if (op === 'profile') {
