@@ -46,6 +46,18 @@ interface UserForm {
   old_password?: string;
 }
 
+// https://technotrampoline.com/articles/how-to-convert-form-data-to-json-with-jquery/
+function convertFormToJSON(form: HTMLElement) {
+  const array = $(form).serializeArray(); // Encodes the set of form elements as an array of names and values.
+  const json = {};
+  $.each(array, function () {
+    // @ts-ignore
+    json[this.name] = this.value || "";
+  });
+  return json;
+}
+
+
 /*
 Todo TB: Completely re-write this to be more dependent on seperate functions and jQuery
 Current goal:
@@ -101,7 +113,7 @@ $('#signup').submit(function(e) {
         type: 'POST',
         url: '/auth/signup',
         // This should do the magic to convert to a correct JSON object
-        data: JSON.stringify($(this).serialize()),
+        data: convertFormToJSON(this),
         contentType: 'application/json; charset=utf-8'
       }).done (function () {
         afterLogin({"first_time": true});
