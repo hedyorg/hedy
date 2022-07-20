@@ -70,6 +70,30 @@ export function logout() {
   });
 }
 
+// Todo TB: It might be nice to get a confirmation pop-up from the server instead with some secret key
+// As with the current flow one can destroy an account by "accidentally" making an empty POST to /auth/destroy
+export function destroy(confirmation: string) {
+  modal.confirm (confirmation, function () {
+    $.ajax ({
+      type: 'POST',
+      url: '/auth/destroy'
+    }).done (function () {
+      redirect('');
+    });
+  });
+}
+
+export function destroy_public(confirmation: string) {
+  modal.confirm (confirmation, function () {
+    $.ajax ({
+      type: 'POST',
+      url: '/auth/destroy_public'
+    }).done (function () {
+      auth.redirect ('my-profile');
+    });
+  });
+}
+
 export const auth = {
   profile: undefined as (Profile | undefined),
   reset: undefined as (Record<string, string> | undefined),
@@ -79,23 +103,6 @@ export const auth = {
   redirect: function (where: string) {
     where = '/' + where;
     window.location.pathname = where;
-  },
-  logout: function () {
-
-  },
-  destroy: function (confirmation: string) {
-    modal.confirm (confirmation, function () {
-      $.ajax ({type: 'POST', url: '/auth/destroy'}).done (function () {
-        auth.redirect ('');
-      });
-    });
-  },
-  destroy_public: function (confirmation: string) {
-    modal.confirm (confirmation, function () {
-      $.ajax ({type: 'POST', url: '/auth/destroy_public'}).done (function () {
-        auth.redirect ('my-profile');
-      });
-    });
   },
   submit: function (op: string) {
     const values: UserForm = {};
