@@ -47,11 +47,13 @@ interface UserForm {
 }
 
 function convertFormtoJSON(form: JQuery<HTMLElement>) {
-  const data = $(form).serializeArray();
-  $(data).each(function(k, v) {
-    console.log(k);
-    console.log(v);
+  var result = { };
+  $.each($(form).serializeArray(), function() {
+      // @ts-ignore
+    result[this.name] = this.value;
   });
+  console.log(result);
+  return result;
 }
 
 /*
