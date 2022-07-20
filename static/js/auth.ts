@@ -2,7 +2,8 @@ import { modal } from './modal';
 import { join_class } from './teachers';
 import {saveitP, showAchievements} from './app';
 
-// We use this interface so we can create an empty dictionairy with the need for // @ts-ignore
+// *** Utility functions ***
+
 interface Dict<T> {
     [key: string]: T;
 }
@@ -28,6 +29,8 @@ function redirect(where: string) {
   where = '/' + where;
   window.location.pathname = where;
 }
+
+// *** User POST without data ***
 
 export function logout() {
   $.ajax ({
@@ -61,6 +64,8 @@ export function destroy_public(confirmation: string) {
     });
   });
 }
+
+// *** User forms ***
 
 $('form#signup').submit(function(e) {
   e.preventDefault();
@@ -141,58 +146,47 @@ $('form#recover').submit(function(e) {
   });
 });
 
+$('form#reset').submit(function(e) {
+  e.preventDefault();
+  $.ajax ({
+    type: 'POST', url: '/auth/reset',
+    data: convertFormJSON($(this)),
+    contentType: 'application/json; charset=utf-8'
+  }).done (function (response) {
+    modal.alert(response.message, 2000, false);
+    $('form#reset').trigger('reset');
+    setTimeout(function (){
+      auth.redirect ('login');
+    }, 2000);
+  }).fail (function (response) {
+    modal.alert(response.responseText, 3000, true);
+  });
+});
+
+$('form#public_profile').submit(function(e) {
+  e.preventDefault();
+  $.ajax ({
+    type: 'POST',
+    url: '/auth/public_profile',
+    data: convertFormJSON($(this)),
+    contentType: 'application/json; charset=utf-8'
+  }).done (function (response) {
+    modal.alert(response.message, 3000, false);
+    if (response.achievement) {
+      showAchievements(response.achievement, false, "");
+    }
+    $('#public_profile_redirect').show();
+  }).fail (function (response) {
+    return modal.alert(response.responseText, 3000, true);
+  });
+});
+
+// *** Admin functionality ***
 
 export const auth = {
   redirect: function (where: string) {
     where = '/' + where;
     window.location.pathname = where;
-  },
-  submit: function (op: string) {
-    if (op === 'reset') {
-      const payload = {
-        username: values.username,
-        token: values.token,
-        password: values.password,
-        password_repeat: values.password_repeat
-      };
-
-      $.ajax ({
-        type: 'POST', url: '/auth/reset',
-        data: JSON.stringify (payload),
-        contentType: 'application/json; charset=utf-8'
-      }).done (function (response) {
-        modal.alert(response.message, 2000, false);
-        $('#password').val('');
-        $('#password_repeat').val('');
-        setTimeout(function (){
-          auth.redirect ('login');
-        }, 2000);
-      }).fail (function (response) {
-        modal.alert(response.responseText, 3000, true);
-      });
-    }
-
-    if (op === 'public_profile') {
-      const data = {
-        image: $('#profile_picture').val() ? $('#profile_picture').val():  undefined,
-        personal_text: $('#personal_text').val() ? $('#personal_text').val():  undefined,
-        favourite_program: $('#favourite_program').val() ? $('#favourite_program').val():  undefined
-      }
-      $.ajax ({
-        type: 'POST',
-        url: '/auth/public_profile',
-        data: JSON.stringify(data),
-        contentType: 'application/json; charset=utf-8'
-      }).done (function (response) {
-        modal.alert(response.message, 3000, false);
-        if (response.achievement) {
-          showAchievements(response.achievement, false, "");
-        }
-        $('#public_profile_redirect').show();
-      }).fail (function (response) {
-        return modal.alert(response.responseText, 3000, true);
-      });
-    }
   },
   markAsTeacher: function (checkbox: any, username: string, is_teacher: boolean) {
     $(checkbox).prop('checked', false);
