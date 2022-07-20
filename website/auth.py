@@ -677,7 +677,7 @@ def routes(app, database):
             except:
                 return gettext('mail_error_change_processed'), 400
 
-            return jsonify({'message':gettext('sent_password_recovery')}), 200
+            return jsonify({'message': gettext('sent_password_recovery')}), 200
 
     @app.route('/auth/reset', methods=['POST'])
     def reset():
@@ -720,7 +720,7 @@ def routes(app, database):
             except:
                 return gettext('mail_error_change_processed'), 400
 
-        return jsonify({'message':gettext('password_resetted')}), 200
+        return jsonify({'message': gettext('password_resetted')}), 200
 
     # *** ADMIN ROUTES ***
 
