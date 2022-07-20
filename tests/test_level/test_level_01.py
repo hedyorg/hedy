@@ -44,7 +44,7 @@ class TestsLevel1(HedyTester):
             'ask': ["ask wat is je lievelingskleur?", "answer = input('wat is je lievelingskleur?')"],
             'echo': ["echo je lievelingskleur is", "print('je lievelingskleur is '+answer)"],
             'forward': ["forward", "t.forward(50)\ntime.sleep(0.1)"],
-            'color': ["color", "t.pencolor('red')"],
+            'color': ["color", "t.pencolor('black')"],
             'turn': ["turn", "t.right(90)"]
         }
         

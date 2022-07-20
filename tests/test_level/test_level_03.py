@@ -393,6 +393,30 @@ class TestsLevel3(HedyTester):
             code=code,
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
+    
+    def test_random_tests(self):
+        programs = {
+            'print_list_random': ["dieren is Hond, Kat, Kangoeroe\nprint dieren at random", "dieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(f'{random.choice(dieren)}')"],
+            'print_list_access_index': ["dieren is Hond, Kat, Kangoeroe\nprint dieren at 1", "dieren = ['Hond', 'Kat', 'Kangoeroe']\nprint(f'{dieren[1-1]}')"],
+            'sleep_with_list_access': ["n is 1, 2, 3\nsleep n at 1", f"n = ['1', '2', '3']\n{HedyTester.sleep_command_transpiled('n[1-1]')}"],
+            'sleep_with_list_random': [f"n is 1, 2, 3\nsleep n at random", f"n = ['1', '2', '3']\n{HedyTester.sleep_command_transpiled('random.choice(n)')}"],
+            'assign_var_to_var': ["dier1 is hond\ndier2 is dier1", "dier1 = 'hond'\ndier2 = dier1"],
+            'assign_list': ["dieren is Hond, Kat, Kangoeroe", "dieren = ['Hond', 'Kat', 'Kangoeroe']"],
+            'assign_list_with_spaces': ["dieren is Hond , Kat , Kangoeroe", "dieren = ['Hond ', 'Kat ', 'Kangoeroe']"],
+            'assign_random_value': ["dieren is hond, kat, kangoeroe\ndier is dieren at random", "dieren = ['hond', 'kat', 'kangoeroe']\ndier = random.choice(dieren)"],
+            'assign_list_values_with_inner_single_quotes': ["taart is 'appeltaart, choladetaart, kwarktaart'", "taart = ['\\'appeltaart', 'choladetaart', 'kwarktaart\\'']"],
+            'assign_list_values_with_inner_double_quotes': ['taart is "appeltaart, choladetaart, kwarktaart"', "taart = ['\"appeltaart', 'choladetaart', 'kwarktaart\"']"],
+            'forward_with_list_access_random': ["directions is 10, 100, 360\nforward directions at random", f"directions = ['10', '100', '360']\n{HedyTester.forward_transpiled('random.choice(directions)')}"],
+            'turn_with_list_access_random': ["directions is 10, 100, 360\nturn directions at random", f"directions = ['10', '100', '360']\n{HedyTester.turn_transpiled('random.choice(directions)')}"],
+            'color_with_list_access_random': ["colors is red, green, blue\ncolor colors at random", f"colors = ['red', 'green', 'blue']\n{HedyTester.turtle_color_command_transpiled('{random.choice(colors)}')}"],
+            'add_text_to_list': ["dieren is koe, kiep\nadd muis to dieren", "dieren = ['koe', 'kiep']\ndieren.append('muis')"],
+            'add_text_with_inner_double_quote_to_list': ['dieren is koe, kiep\nadd mui"s to dieren', """dieren = ['koe', 'kiep']\ndieren.append('mui"s')"""],
+            'remove_text_from_list': ["dieren is koe, kiep\nremove kiep from dieren", "dieren = ['koe', 'kiep']\ntry:\n  dieren.remove('kiep')\nexcept:\n  pass"],
+            'remove_text_with_single_quote_from_list': ["dieren is koe, kiep's\nremove kiep's from dieren", "dieren = ['koe', 'kiep\\\'s']\ntry:\n  dieren.remove('kiep\\\'s')\nexcept:\n  pass"],
+            'add_ask_to_list': ["color is ask what is your favorite color?\ncolors is green, red, blue\nadd color to colors", "color = input('what is your favorite color'+'?')\ncolors = ['green', 'red', 'blue']\ncolors.append(color)"],
+            'remove_ask_from_list': ["colors is green, red, blue\ncolor is ask what color to remove?\nremove color from colors", "colors = ['green', 'red', 'blue']\ncolor = input('what color to remove'+'?')\ntry:\n  colors.remove(color)\nexcept:\n  pass"]
+        }
+        self.random_tester(3, programs, max_lines=15)
 
     #
     # add/remove tests
