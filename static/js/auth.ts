@@ -56,6 +56,20 @@ Current goal:
 - As we already perform all validation on the back-end the front-end validation is redundant
  */
 
+function redirect(where: string) {
+  where = '/' + where;
+  window.location.pathname = where;
+}
+
+export function logout() {
+  $.ajax ({
+    type: 'POST',
+    url: '/auth/logout'
+  }).done (function () {
+    redirect('login');
+  });
+}
+
 export const auth = {
   profile: undefined as (Profile | undefined),
   reset: undefined as (Record<string, string> | undefined),
@@ -67,9 +81,7 @@ export const auth = {
     window.location.pathname = where;
   },
   logout: function () {
-    $.ajax ({type: 'POST', url: '/auth/logout'}).done (function () {
-      auth.redirect ('login');
-    });
+
   },
   destroy: function (confirmation: string) {
     modal.confirm (confirmation, function () {
