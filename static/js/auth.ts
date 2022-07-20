@@ -94,6 +94,10 @@ export function destroy_public(confirmation: string) {
   });
 }
 
+$('#signup').submit(function() {
+  console.log("Let's signup...");
+  console.log(this);
+});
 
 
 export const auth = {
