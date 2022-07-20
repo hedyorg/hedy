@@ -46,6 +46,16 @@ interface UserForm {
   old_password?: string;
 }
 
+/*
+Todo TB: Completely re-write this to be more dependent on seperate functions and jQuery
+Current goal:
+- Re-write into separate functions such as logout(), destroy() and redirect()
+- Give all form submitting a dedicated function as well, such as login()
+- We should re-write the structure:
+- Instead of using the above fixed interface we should simplify this using a form.serialize()
+- As we already perform all validation on the back-end the front-end validation is redundant
+ */
+
 export const auth = {
   profile: undefined as (Profile | undefined),
   reset: undefined as (Record<string, string> | undefined),
