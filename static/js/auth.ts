@@ -310,11 +310,6 @@ $("#language").change(function () {
     }
 });
 
-$ ('#email, #mail_repeat').on ('cut copy paste', function (e) {
-   e.preventDefault ();
-   return false;
-});
-
 /**
  * After login:
  *
