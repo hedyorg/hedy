@@ -1,7 +1,6 @@
 import { modal } from './modal';
 import { join_class } from './teachers';
 import {saveitP, showAchievements} from './app';
-import {toJSON} from "yaml/util";
 
 export interface Profile {
   session_expires_at: number;
@@ -53,7 +52,7 @@ function convertFormJSON(form: JQuery<HTMLElement>) {
       // @ts-ignore
     result[this.name] = this.value;
   });
-  return toJSON(result);
+  return JSON.stringify(result);
 }
 
 /*
