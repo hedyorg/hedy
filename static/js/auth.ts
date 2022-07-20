@@ -97,8 +97,17 @@ export function destroy_public(confirmation: string) {
 $('#signup').submit(function(e) {
   // Prevent the automatic reload -> we want to wait for server feedback on our AJAX call
   e.preventDefault();
-  console.log("Let's signup...");
-  console.log(this);
+  $.ajax ({
+        type: 'POST',
+        url: '/auth/signup',
+        // This should do the magic to convert to a correct JSON object
+        data: JSON.stringify($(this).serialize()),
+        contentType: 'application/json; charset=utf-8'
+      }).done (function () {
+        afterLogin({"first_time": true});
+      }).fail (function (response) {
+        modal.alert(response.responseText, 3000, true);
+      });
 });
 
 
@@ -112,40 +121,6 @@ export const auth = {
     $ ('form.js-validated-form *').map (function (_k, el) {
       if (el.id) values[el.id as keyof UserForm] = (el as HTMLInputElement).value;
     });
-
-    if (op === 'signup') {
-      const payload: User = {
-        username: values.username,
-        email: values.email,
-        password: values.password,
-        password_repeat: values.password_repeat,
-        language: values.language,
-        keyword_language: values.keyword_language,
-        birth_year: values.birth_year ? parseInt(values.birth_year) : undefined,
-        country: values.country ? values.country : undefined,
-        gender: values.gender ? values.gender : undefined,
-        is_teacher: $('#is_teacher').prop('checked'),
-        subscribe: $('#subscribe').prop('checked'),
-        agree_terms: $('#agree_terms').prop('checked'),
-        agree_third_party: $('#agree_third_party').prop('checked'),
-        prog_experience: $('input[name=has_experience]:checked').val() as 'yes'|'no',
-        experience_languages: $('#languages').is(':visible')
-          ? $('input[name=languages]').filter(':checked').map((_, box) => $(box).val() as string).get()
-          : undefined,
-      };
-
-      $.ajax ({
-        type: 'POST',
-        url: '/auth/signup',
-        data: JSON.stringify (payload),
-        contentType: 'application/json; charset=utf-8'
-      }).done (function () {
-        // We set up a non-falsy profile to let `saveit` know that we're logged in. We put session_expires_at since we need it.
-        afterLogin({"first_time": true});
-      }).fail (function (response) {
-        modal.alert(response.responseText, 3000, true);
-      });
-    }
 
     if (op === 'login') {
       $.ajax ({
