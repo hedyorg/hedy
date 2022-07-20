@@ -54,7 +54,14 @@ function convertFormJSON(form: JQuery<HTMLElement>) {
     // @ts-ignore
     if (result[this.name]) {
       // @ts-ignore
-      result[this.name] = $.merge(Array(result[this.name]), Array(this.value));
+      if ($.isArray(result[this.name])) {
+        // @ts-ignore
+        result[this.name] = $.merge(result[this.name], Array(this.value));
+      } else {
+        // @ts-ignore
+        result[this.name] = $.merge(Array(result[this.name]), Array(this.value));
+      }
+
     } else {
       // @ts-ignore
       result[this.name] = this.value;
