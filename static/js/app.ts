@@ -2,8 +2,6 @@
 import './syntaxModesRules';
 
 import { modal, error, success } from './modal';
-import { auth } from './auth';
-
 export let theGlobalEditor: AceAjax.Editor;
 export let theModalEditor: AceAjax.Editor;
 

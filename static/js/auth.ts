@@ -60,7 +60,7 @@ export function destroy_public(confirmation: string) {
       type: 'POST',
       url: '/auth/destroy_public'
     }).done (function () {
-      auth.redirect ('my-profile');
+      redirect ('my-profile');
     });
   });
 }
@@ -156,7 +156,7 @@ $('form#reset').submit(function(e) {
     modal.alert(response.message, 2000, false);
     $('form#reset').trigger('reset');
     setTimeout(function (){
-      auth.redirect ('login');
+      redirect ('login');
     }, 2000);
   }).fail (function (response) {
     modal.alert(response.responseText, 3000, true);
@@ -180,6 +180,8 @@ $('form#public_profile').submit(function(e) {
     return modal.alert(response.responseText, 3000, true);
   });
 });
+
+// *** Admin functionality ***
 
 export function markAsTeacher(checkbox: any, username: string, is_teacher: boolean) {
   $(checkbox).prop('checked', false);
@@ -205,32 +207,23 @@ export function markAsTeacher(checkbox: any, username: string, is_teacher: boole
   });
 }
 
-// *** Admin functionality ***
-
-export const auth = {
-  redirect: function (where: string) {
-    where = '/' + where;
-    window.location.pathname = where;
-  },
-  markAsTeacher: function (checkbox: any, username: string, is_teacher: boolean) {
-
-  },
-  changeUserEmail: function (username: string, email: string) {
-    modal.prompt ('Please enter the corrected email', email, function (correctedEmail) {
-      if (correctedEmail === email) return;
-      $.ajax ({
-        type: 'POST',
-        url: '/admin/changeUserEmail',
-        data: JSON.stringify ({username: username, email: correctedEmail}),
-        contentType: 'application/json; charset=utf-8'
-      }).done (function () {
-        location.reload ();
-      }).fail (function () {
-        // Todo TB -> Remove hard-coded string
-        modal.alert (['Error when changing the email for user', username].join (' '), 2000, true);
-      });
+export function changeUserEmail(username: string, email: string) {
+  modal.prompt ('Please enter the corrected email', email, function (correctedEmail) {
+    if (correctedEmail === email) return;
+    $.ajax ({
+      type: 'POST',
+      url: '/admin/changeUserEmail',
+      data: JSON.stringify ({
+        username: username,
+        email: correctedEmail
+      }),
+      contentType: 'application/json; charset=utf-8'
+    }).done (function () {
+      location.reload ();
+    }).fail (function () {
+      modal.alert (['Error when changing the email for user', username].join (' '), 2000, true);
     });
-  },
+  });
 }
 
 // *** LOADERS ***
@@ -262,7 +255,7 @@ async function afterLogin(loginData: Dict<boolean>) {
   if (savedProgram) {
     await saveitP(savedProgram[0], savedProgram[1], savedProgram[2], savedProgram[3], savedProgram[4]);
     localStorage.removeItem('hedy-first-save');
-    return auth.redirect('programs');
+    return redirect('programs');
   }
 
   const joinClassString = localStorage.getItem('hedy-join');
@@ -272,26 +265,26 @@ async function afterLogin(loginData: Dict<boolean>) {
     return join_class(joinClass.id, joinClass.name);
   }
 
-  const redirect = getSavedRedirectPath();
-  if (redirect) {
-    return auth.redirect(redirect);
+  const savedPath = getSavedRedirectPath();
+  if (savedPath) {
+    return redirect(savedPath);
   }
 
   // If the user logs in for the first time -> redirect to the landing-page after signup
   if (loginData['first_time']) {
-    return auth.redirect('landing-page/1');
+    return redirect('landing-page/1');
   }
   // If the user is an admin -> re-direct to admin page after login
   if (loginData['admin']) {
-    return auth.redirect('admin');
+    return redirect('admin');
   }
 
   // If the user is a teacher -> re-direct to for-teachers page after login
   if (loginData['teacher']) {
-    return auth.redirect('for-teachers');
+    return redirect('for-teachers');
   }
   // Otherwise, redirect to the programs page
-  auth.redirect('landing-page');
+  redirect('landing-page');
 }
 
 function getSavedRedirectPath() {
