@@ -127,8 +127,19 @@ $('form#change_password').submit(function(e) {
   });
 });
 
-
-
+$('form#recover').submit(function(e) {
+  e.preventDefault();
+  $.ajax ({
+    type: 'POST', url: '/auth/recover',
+    data: convertFormJSON($(this)),
+    contentType: 'application/json; charset=utf-8'
+  }).done (function (response) {
+    modal.alert(response.message, 3000, false);
+    $('form#recover').trigger('reset');
+  }).fail (function (response) {
+    modal.alert(response.responseText, 3000, true);
+  });
+});
 
 
 export const auth = {
@@ -137,22 +148,6 @@ export const auth = {
     window.location.pathname = where;
   },
   submit: function (op: string) {
-    if (op === 'recover') {
-      const payload = {
-        username: values.username
-      };
-      $.ajax ({
-        type: 'POST', url: '/auth/recover',
-        data: JSON.stringify (payload),
-        contentType: 'application/json; charset=utf-8'
-      }).done (function (response) {
-        modal.alert(response.message, 3000, false);
-        $('#username').val('');
-      }).fail (function (response) {
-        modal.alert(response.responseText, 3000, true);
-      });
-    }
-
     if (op === 'reset') {
       const payload = {
         username: values.username,
