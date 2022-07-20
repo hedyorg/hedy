@@ -182,7 +182,8 @@ def routes(app, database, achievements):
 
         DATABASE.add_student_to_class(Class['id'], current_user()['username'])
         # We only want to remove the invite if the user joins the class with an actual pending invite
-        if DATABASE.get_username_invite(current_user()['username']).get('class_id') == body['id']:
+        invite = DATABASE.get_username_invite(current_user()['username'])
+        if invite and invite.get('class_id') == body['id']:
             DATABASE.remove_class_invite(current_user()['username'])
             # Also remove the pending message in this case
             session['messages'] = 0
