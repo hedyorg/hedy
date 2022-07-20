@@ -1,6 +1,7 @@
 import { modal } from './modal';
 import { join_class } from './teachers';
 import {saveitP, showAchievements} from './app';
+import {toJSON} from "yaml/util";
 
 export interface Profile {
   session_expires_at: number;
@@ -46,14 +47,13 @@ interface UserForm {
   old_password?: string;
 }
 
-function convertFormtoJSON(form: JQuery<HTMLElement>) {
-  var result = { };
+function convertFormJSON(form: JQuery<HTMLElement>) {
+  let result = {};
   $.each($(form).serializeArray(), function() {
       // @ts-ignore
     result[this.name] = this.value;
   });
-  console.log(result);
-  return result;
+  return toJSON(result);
 }
 
 /*
@@ -113,7 +113,7 @@ $('#signup').submit(function(e) {
         type: 'POST',
         url: '/auth/signup',
         // This should do the magic to convert to a correct JSON object
-        data: convertFormtoJSON($(this)),
+        data: convertFormJSON($(this)),
         contentType: 'application/json; charset=utf-8'
       }).done (function () {
         afterLogin({"first_time": true});
