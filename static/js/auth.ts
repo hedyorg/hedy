@@ -46,6 +46,14 @@ interface UserForm {
   old_password?: string;
 }
 
+function convertFormtoJSON(form: JQuery<HTMLElement>) {
+  const data = $(form).serializeArray();
+  $(data).each(function(k, v) {
+    console.log(k);
+    console.log(v);
+  });
+}
+
 /*
 Todo TB: Completely re-write this to be more dependent on seperate functions and jQuery
 Current goal:
@@ -97,17 +105,13 @@ export function destroy_public(confirmation: string) {
 $('#signup').submit(function(e) {
   // Prevent the automatic reload -> we want to wait for server feedback on our AJAX call
   e.preventDefault();
-  const values: UserForm = {};
-  $ (this).map (function (_k, el) {
-      if (el.id) values[el.id as keyof UserForm] = (el as HTMLInputElement).value;
-    });
-  console.log(values);
+
 
   $.ajax ({
         type: 'POST',
         url: '/auth/signup',
         // This should do the magic to convert to a correct JSON object
-        data: JSON.stringify($(this).serializeArray()),
+        data: convertFormtoJSON($(this)),
         contentType: 'application/json; charset=utf-8'
       }).done (function () {
         afterLogin({"first_time": true});
