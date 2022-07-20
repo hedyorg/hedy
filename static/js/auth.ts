@@ -46,7 +46,6 @@ interface UserForm {
   old_password?: string;
 }
 
-// Todo TB: We should find a way to implement this without the x amount of ts-ignore statements
 function convertFormJSON(form: JQuery<HTMLElement>) {
   let result : Dict<any> = {};
   $.each($(form).serializeArray(), function() {

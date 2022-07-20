@@ -336,7 +336,6 @@ def routes(app, database):
     @app.route('/auth/signup', methods=['POST'])
     def signup():
         body = request.json
-        print(body)
         # Validations, mandatory fields
         if not isinstance(body, dict):
             return gettext('ajax_error'), 400
