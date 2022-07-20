@@ -820,9 +820,15 @@ def index(level, program_id):
     commands = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
 
     teacher_adventures = []
+    # Todo: TB It would be nice to improve this by using level as a sort key
     for adventure in customizations.get('teacher_adventures', []):
         current_adventure = DATABASE.get_adventure(adventure)
         if current_adventure.get('level') == str(level):
+            try:
+                current_adventure['content'] = current_adventure['content'].format(**hedy_content.KEYWORDS.get(g.keyword_lang))
+            except:
+                # We don't want teacher being able to break the student UI -> pass this adventure
+                pass
             teacher_adventures.append(current_adventure)
 
     enforce_developers_mode = False
@@ -1456,6 +1462,10 @@ def keyword_languages_keys():
 def get_country(country):
     return COUNTRIES.get(country, "-")
 
+
+@app.template_global()
+def parse_keyword(keyword):
+    return hedy_content.KEYWORDS.get(g.keyword_lang).get(keyword)
 
 def make_lang_obj(lang):
     """Make a language object for a given language."""
