@@ -612,10 +612,10 @@ def routes(app, database):
         # We can use g.lang for this to reduce the db calls
         resp['reload'] = False
         if session['lang'] != body['language'] or session['keyword_lang'] != body['keyword_language']:
-            resp['message'] = gettext('profile_updated')
+            resp['message'] = gettext('profile_updated_reload')
             resp['reload'] = True
         else:
-            resp['message'] = gettext('profile_updated_reload')
+            resp['message'] = gettext('profile_updated')
 
         remember_current_user(DATABASE.user_by_username(user['username']))
         return jsonify(resp)
