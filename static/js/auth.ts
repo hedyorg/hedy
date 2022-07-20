@@ -101,8 +101,6 @@ $('form#login').submit(function(e) {
 
 $('form#profile').submit(function(e) {
   e.preventDefault();
-  console.log("Hier komen we!");
-  console.log(convertFormJSON($(this)));
   $.ajax ({
     type: 'POST', url: '/profile',
     data: convertFormJSON($(this)),

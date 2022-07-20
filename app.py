@@ -1483,17 +1483,19 @@ def modify_query(**new_values):
     return '{}?{}'.format(request.path, url_encode(args))
 
 
+# Todo TB: Re-write this somewhere sometimes following the line below
 # We only store this @app.route here to enable the use of achievements -> might want to re-write this in the future
 @app.route('/auth/public_profile', methods=['POST'])
 @requires_login
 def update_public_profile(user):
     body = request.json
+    print(body)
 
     # Validations
     if not isinstance(body, dict):
         return gettext('ajax_error'), 400
     # The images are given as a "picture id" from 1 till 12
-    if not isinstance(body.get('image'), str) or int(body.get('image'), 0) < 1 or int(body.get('image'), 0) > 12:
+    if not isinstance(body.get('profile_picture'), str) or int(body.get('profile_picture'), 0) not in [range(1, 13)]:
         return gettext('image_invalid'), 400
     if not isinstance(body.get('personal_text'), str):
         return gettext('personal_text_invalid'), 400
