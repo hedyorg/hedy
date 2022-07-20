@@ -551,7 +551,7 @@ def routes(app, database):
             except ValueError:
                 return gettext('year_invalid') + str(datetime.datetime.now().year), 400
         if 'gender' in body:
-            if body['gender'] != 'm' and body['gender'] != 'f' and body['gender'] != 'o':
+            if body['gender'] not in ["m", "f", "o"]:
                 return gettext('gender_invalid'), 400
         if 'country' in body and len(body.get('country')) > 0:
             if not body['country'] in COUNTRIES:
@@ -600,13 +600,11 @@ def routes(app, database):
                 updates[field] = body[field]
             else:
                 updates[field] = None
-
         if updates:
             DATABASE.update_user(username, updates)
 
         # Always make sure that the country stored on the public profile is identical to the profile one
         DATABASE.update_country_public_profile(username, body.get('country', None))
-
 
         # We want to check if the user choose a new language, if so -> reload
         # We can use g.lang for this to reduce the db calls
