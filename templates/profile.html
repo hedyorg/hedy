@@ -83,64 +83,64 @@
        {% endif %}
        <h1 class="section-header" onclick="hedyApp.load_profile ('{{user_data['username']}}', '{{user_data['email']}}', '{{user_data['birth_year']}}', '{{user_data['gender']}}', '{{user_data['country']}}')">{{_('settings')}}</h1>
        <div class="profile-section-body" id="profile-change-body">
-            <form id="profile">
-                <h2 class="profile-section-body-header">{{_('settings')}}</h2>
-                <div class="flex flex-row items-center mb-2">
-                    <label for="username" class="inline-block w-72">{{_('username')}}</label><strong id="username" class="inline-block w-1/2 px-2"></strong>
-                </div>
-                <div class="flex flex-row items-center mb-2">
-                    <label for="email" class="inline-block w-72">{{_('email')}}</label><input id="email" type="email" class="personal-input" {% if user_data['email'] %}required{% endif %}>
-                </div>
-                <div class="flex flex-row items-center mb-2">
-                    <label for="birth_year" class="inline-block w-72">{{_('birth_year')}}</label><input id="birth_year" class="personal-input" type="number">
-                </div>
-                <div class="flex flex-row items-center mb-2">
-                    <label for="language" class="inline-block w-72">{{_('preferred_language')}}</label>
-                    <select id="language" class="personal-input" required>
-                        <option value="{{ current_language().lang}}">{{current_language().sym}}</option>
-                        {% for language in other_languages() %}
-                            <option value="{{language.lang}}">{{language.sym}}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="flex flex-row items-center mb-2" id="keyword_lang_container"
-                     {% if user_data and 'language' in user_data and (user_data['language'] not in keyword_languages_keys() or user_data['language'] == "en") %}style="display: none;"{% endif %}>
-                    <label for="keyword_language" class="inline-block w-72">{{_('preferred_keyword_language')}}</label>
-                    <select id="keyword_language" class="personal-input" required>
-                        {% for language in keyword_languages() %}
-                            <option value="{{language.lang}}" id="{{language.lang}}_option" class="keyword_lang_option"
-                                    {% if language.lang != user_data['language'] and language.lang != "en" %}style="display: none;"{% endif %}
-                                    {% if user_data and 'keyword_language' in user_data %}
-                                        {% if user_data['keyword_language'] == language.lang %}selected{% endif %}
-                                    {% else %}
-                                        {% if language.lang == "en" %}selected{% endif %}
-                                    {% endif %}>{{language.sym}}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="flex flex-row items-center mb-2">
-                    <label for="gender" class="inline-block w-72">{{_('gender')}}</label>
-                    <select id="gender" class="personal-input">
-                      <option value="">{{_('select')}}</option>
-                      <option value="f">{{_('female')}}</option>
-                      <option value="m">{{_('male')}}</option>
-                      <option value="o">{{_('other')}}</option>
-                    </select>
-                </div>
-                <div class="flex flex-row items-center mb-2">
-                    <label for="country" class="inline-block w-72">{{_('country')}}</label>
-                    <select id="country" class="personal-input">
-                        <option value="">{{_('select')}}</option>
-                        {% for alpha, name in all_countries().items() %}
-                            <option value="{{ alpha }}">{{ name }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="mb-4">
-                    <button type="submit" class="green-btn mt-4">{{_('update_profile')}}</button>
-                </div>
-            </form>
-            <button class="red-btn" onclick="hedyApp.destroy('{{_('are_you_sure')}}')">{{_('destroy_profile')}}</button>
+        <form id="profile">
+            <h2 class="profile-section-body-header">{{_('settings')}}</h2>
+            <div class="flex flex-row items-center mb-2">
+                <label for="username" class="inline-block w-72">{{_('username')}}</label><strong id="username" class="inline-block w-1/2 px-2"></strong>
+            </div>
+            <div class="flex flex-row items-center mb-2">
+                <label for="email" class="inline-block w-72">{{_('email')}}</label><input id="email" name="email" type="email" class="personal-input" {% if user_data['email'] %}required{% endif %}>
+            </div>
+            <div class="flex flex-row items-center mb-2">
+                <label for="birth_year" class="inline-block w-72">{{_('birth_year')}}</label><input id="birth_year" name="birth_year" class="personal-input" type="number">
+            </div>
+            <div class="flex flex-row items-center mb-2">
+                <label for="language" class="inline-block w-72">{{_('preferred_language')}}</label>
+                <select id="language" name="language" class="personal-input" required>
+                    <option value="{{ current_language().lang}}">{{current_language().sym}}</option>
+                    {% for language in other_languages() %}
+                        <option value="{{language.lang}}">{{language.sym}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="flex flex-row items-center mb-2" id="keyword_lang_container"
+                 {% if user_data and 'language' in user_data and (user_data['language'] not in keyword_languages_keys() or user_data['language'] == "en") %}style="display: none;"{% endif %}>
+                <label for="keyword_language" class="inline-block w-72">{{_('preferred_keyword_language')}}</label>
+                <select id="keyword_language" name="keyword_language" class="personal-input" required>
+                    {% for language in keyword_languages() %}
+                        <option value="{{language.lang}}" id="{{language.lang}}_option" class="keyword_lang_option"
+                                {% if language.lang != user_data['language'] and language.lang != "en" %}style="display: none;"{% endif %}
+                                {% if user_data and 'keyword_language' in user_data %}
+                                    {% if user_data['keyword_language'] == language.lang %}selected{% endif %}
+                                {% else %}
+                                    {% if language.lang == "en" %}selected{% endif %}
+                                {% endif %}>{{language.sym}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="flex flex-row items-center mb-2">
+                <label for="gender" class="inline-block w-72">{{_('gender')}}</label>
+                <select id="gender" name="gender" class="personal-input">
+                  <option value="">{{_('select')}}</option>
+                  <option value="f">{{_('female')}}</option>
+                  <option value="m">{{_('male')}}</option>
+                  <option value="o">{{_('other')}}</option>
+                </select>
+            </div>
+            <div class="flex flex-row items-center mb-2">
+                <label for="country" class="inline-block w-72">{{_('country')}}</label>
+                <select id="country" name="country" class="personal-input">
+                    <option value="">{{_('select')}}</option>
+                    {% for alpha, name in all_countries().items() %}
+                        <option value="{{ alpha }}">{{ name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-4">
+                <button type="submit" class="green-btn mt-4">{{_('update_profile')}}</button>
+            </div>
+        </form>
+        <button class="red-btn" onclick="hedyApp.destroy('{{_('are_you_sure')}}')">{{_('destroy_profile')}}</button>
        </div>
       <h1 id="password_toggle" class="section-header" onclick="$ ('#change-password-body').toggle()">{{_('change_password')}}</h1>
         <div class="profile-section-body" id="change-password-body">

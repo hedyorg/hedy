@@ -527,6 +527,7 @@ def routes(app, database):
     @requires_login
     def update_profile(user):
         body = request.json
+        print(body)
         if not isinstance(body, dict):
             return gettext('ajax_error'), 400
         if not isinstance(body.get('language'), str) or body.get('language') not in ALL_LANGUAGES.keys():
@@ -543,22 +544,18 @@ def routes(app, database):
 
         # Validations, optional fields
         if 'birth_year' in body:
-            if not isinstance(body.get('birth_year'), int) or body['birth_year'] <= 1900 or body['birth_year'] > datetime.datetime.now().year:
+            try:
+                body['birth_year'] = int(body.get('birth_year'))
+                if body['birth_year'] <= 1900 or body['birth_year'] > datetime.datetime.now().year:
+                    return gettext('year_invalid') + str(datetime.datetime.now().year), 400
+            except ValueError:
                 return gettext('year_invalid') + str(datetime.datetime.now().year), 400
         if 'gender' in body:
             if body['gender'] != 'm' and body['gender'] != 'f' and body['gender'] != 'o':
                 return gettext('gender_invalid'), 400
-        if 'country' in body:
+        if 'country' in body and len(body.get('country')) > 0:
             if not body['country'] in COUNTRIES:
                 return gettext('country_invalid'), 400
-        if 'prog_experience' in body and body['prog_experience'] not in ['yes', 'no']:
-            return gettext('experience_invalid'), 400
-        if 'experience_languages' in body:
-            if not isinstance(body['experience_languages'], list):
-                return gettext('experience_invalid'), 400
-            for language in body['experience_languages']:
-                if language not in['scratch', 'other_block', 'python', 'other_text']:
-                    return gettext('programming_invalid'), 400
 
         resp = {}
         if 'email' in body:
