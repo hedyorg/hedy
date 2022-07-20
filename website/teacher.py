@@ -4,7 +4,7 @@ import hedy
 from website.auth import requires_login, is_teacher, is_admin, current_user, validate_student_signup_data, store_new_student_account
 import utils
 import uuid
-from flask import g, request, jsonify, redirect
+from flask import g, request, jsonify, redirect, session
 from flask_helpers import render_template
 import os
 import hedy_content
@@ -181,7 +181,12 @@ def routes(app, database, achievements):
             return gettext('join_prompt'), 403
 
         DATABASE.add_student_to_class(Class['id'], current_user()['username'])
-        DATABASE.remove_class_invite(current_user()['username'])
+        # We only want to remove the invite if the user joins the class with an actual pending invite
+        if DATABASE.get_username_invite(current_user()['username']).get('class_id') == body['id']:
+            DATABASE.remove_class_invite(current_user()['username'])
+            # Also remove the pending message in this case
+            session['messages'] = 0
+
         achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "epic_education")
         if achievement:
             return {'achievement': achievement}, 200
