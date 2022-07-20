@@ -1485,6 +1485,8 @@ def modify_query(**new_values):
 @app.template_global()
 def get_user_messages():
     if not session.get('messages'):
+        # Todo TB: In the future this should contain the class invites + other messages
+        # As the class invites are binary (you either have one or you have none, we can possibly simplify this)
         messages = DATABASE.get_username_invite(current_user()['username'])
         session['messages'] = len(messages) if messages else 0
     if session.get('messages') > 0:
