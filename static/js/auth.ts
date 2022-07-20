@@ -46,8 +46,6 @@ interface UserForm {
   old_password?: string;
 }
 
-// This function almost works, but overwrites already existing checkboxes
-// If we find the same value we should append to it in a list
 function convertFormJSON(form: JQuery<HTMLElement>) {
   let result = {};
   $.each($(form).serializeArray(), function() {
@@ -61,7 +59,6 @@ function convertFormJSON(form: JQuery<HTMLElement>) {
         // @ts-ignore
         result[this.name] = $.merge(Array(result[this.name]), Array(this.value));
       }
-
     } else {
       // @ts-ignore
       result[this.name] = this.value;
