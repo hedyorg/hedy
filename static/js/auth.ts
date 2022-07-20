@@ -48,20 +48,15 @@ interface UserForm {
 
 // Todo TB: We should find a way to implement this without the x amount of ts-ignore statements
 function convertFormJSON(form: JQuery<HTMLElement>) {
-  let result = {};
+  let result : Dict<any> = {};
   $.each($(form).serializeArray(), function() {
-    // @ts-ignore
     if (result[this.name]) {
-      // @ts-ignore
-      if ($.isArray(result[this.name])) {
-        // @ts-ignore
+      if ($.isArray(result[<string>this.name])) {
         result[this.name] = $.merge(result[this.name], Array(this.value));
       } else {
-        // @ts-ignore
         result[this.name] = $.merge(Array(result[this.name]), Array(this.value));
       }
     } else {
-      // @ts-ignore
       result[this.name] = this.value;
     }
   });
