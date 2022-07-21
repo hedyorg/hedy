@@ -547,9 +547,9 @@ def routes(app, database):
             try:
                 body['birth_year'] = int(body.get('birth_year'))
                 if body['birth_year'] <= 1900 or body['birth_year'] > datetime.datetime.now().year:
-                    return gettext('year_invalid').format({'current_year': str(datetime.datetime.now().year)}), 400
+                    return gettext('year_invalid').format(**{'current_year': str(datetime.datetime.now().year)}), 400
             except ValueError:
-                return gettext('year_invalid').format({'current_year': str(datetime.datetime.now().year)}), 400
+                return gettext('year_invalid').format(**{'current_year': str(datetime.datetime.now().year)}), 400
         if len(body.get('gender')) > 0:
             if body['gender'] not in ["m", "f", "o"]:
                 return gettext('gender_invalid'), 400
