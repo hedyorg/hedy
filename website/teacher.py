@@ -474,6 +474,12 @@ def routes(app, database, achievements):
         if not isinstance(body.get('public'), bool):
             return gettext('public_invalid'), 400
 
+        print(body.get('classes'))
+
+        # This is an optional field but should be a list if it exists
+        if body.get('classes') and not isinstance(body.get('classes'), list):
+            return gettext('classes_invalid'), 400
+
         if not is_teacher(user):
             return utils.error_page(error=403, ui_message=gettext('retrieve_adventure_error'))
         current_adventure = DATABASE.get_adventure(body['id'])
@@ -504,6 +510,8 @@ def routes(app, database, achievements):
         # Once the adventure is correctly stored we have to update all class customizations
         # This is once again an expensive operation, we have to retrieve all teacher customizations
         # Then check if something is changed with the current situation, if so -> update in database
+        for Class in body.get('classes', []):
+            print(Class)
 
         return {'success': gettext('adventure_updated')}, 200
 
