@@ -25,6 +25,7 @@ class TestsLevel16(HedyTester):
             expected=expected,
             extra_check_function=check_in_list
         )
+    
     def test_create_empty_list(self):
         code = "friends = []"
         expected = "friends = []"
@@ -33,6 +34,19 @@ class TestsLevel16(HedyTester):
             code=code,
             max_level=17,
             expected=expected
+        )
+    
+    def test_create_with_single_item(self):
+        code = "friends = ['Ashli']"
+        expected = "friends = ['Ashli']"
+
+        check_in_list = (lambda x: HedyTester.run_code(x) == 'Ashli')
+
+        self.multi_level_tester(
+            code=code,
+            max_level=17,
+            expected=expected,
+            extra_check_function=check_in_list
         )
     
     def test_add_to_empty_list(self):
