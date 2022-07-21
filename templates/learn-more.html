@@ -1,8 +1,8 @@
 {% extends "auth.html" %}
 
 {% block main %}
-<div class="w-full mx-auto flex flex-col items-center gap-4 mb-4">
-    <div class="bg-white shadow-md rounded-lg rounded py-4 px-0 md:px-4 lg:px-8">
+<div class="w-full mx-auto flex flex-col gap-4 mb-4">
+    <div class="bg-white shadow-md mx-auto rounded-lg rounded py-4 px-0 md:px-4 lg:px-8">
         <form class="flex flex-col gap-2" action="https://hedycode.us7.list-manage.com/subscribe/post?u=22a3ce4e09535f82f587a7118&amp;id=57f3b3c090" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
             <h2 class="my-0 text-center">{{_('mailing_title')}}</h2>
             <div class="signup-container">
@@ -33,6 +33,7 @@
             <a href="https://us7.campaign-archive.com/home/?u=22a3ce4e09535f82f587a7118&id=57f3b3c090" class="mx-2" target="_blank" title="View previous campaigns">{{_('previous_campaigns')}}</a>
         </form>
         <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='COUNTRY';ftypes[3]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
+    </div>
     <div id="learn_more_content" class="text-xl">
         {% for section in content['learn-more-sections'] %}
             <h2>{{ section['title'] }}</h2>
