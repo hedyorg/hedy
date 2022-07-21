@@ -185,7 +185,7 @@ function update_db_adventure(adventure_id: string) {
    const agree_public = $('#agree_public').prop('checked');
    // Get all checked checkboxes of the class 'customize_adventure_class_checkbox' and map their values
    // The values in this case are the class id's for which we need to update the class customizations
-   const classes = new Array();
+   let classes = new Array();
    $(".customize_adventure_class_checkbox:checked").each(function () {
      classes.push($(this).val());
    });
