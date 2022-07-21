@@ -55,11 +55,17 @@
             </div>
             {% if class_data %}
                 <div class="flex flex-col items-center">
-                    <h3>Do you want to add this adventure directly to one of your classes?</h3>
-                    <div></div>
-                    {% for class in class_data %}
-                        {{ class }}
-                    {% endfor %}
+                    <h3 class="text-center">Do you want to add this adventure directly to one of your classes?</h3>
+                    <div class="border-gray-500 border p-4 rounded-lg">
+                        <div class="flex flex-wrap items-center gap-4">
+                            {% for class in class_data %}
+                                <div class="flex flex-row items-center gap-2 justify-center">
+                                    <label>{{ class.name }}</label>
+                                    <input type="checkbox" value="{{class.id}}" {% if class.checked %}checked{% endif %}>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
                 </div>
             {% endif %}
         </form>
