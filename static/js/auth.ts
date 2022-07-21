@@ -19,6 +19,7 @@ function convertFormJSON(form: JQuery<HTMLElement>) {
         result[this.name] = $.merge(Array(result[this.name]), Array(this.value));
       }
     } else {
+      // Only add the current field to the JSON object if it actually contains a value
       if ((this.value)) {
         result[this.name] = this.value;
       }
