@@ -506,8 +506,13 @@ def routes(app, database, achievements):
         # Once the adventure is correctly stored we have to update all class customizations
         # This is once again an expensive operation, we have to retrieve all teacher customizations
         # Then check if something is changed with the current situation, if so -> update in database
-        for Class in body.get('classes', []):
-            print(Class)
+        Classes = DATABASE.get_teacher_classes(user['username'])
+        for Class in Classes:
+            # If so, the adventure should be in the class
+            if Class.get('id') in body.get('classes', []):
+                DATABASE.add_adventure_to_class_customizations(Class.get('id'), body.get('id'))
+            else:
+                DATABASE.remove_adventure_from_class_customizations(Class.get('id'), body.get('id'))
 
         return {'success': gettext('adventure_updated')}, 200
 

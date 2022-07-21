@@ -410,8 +410,16 @@ class Database:
         CUSTOMIZATIONS.delete({'id': class_id})
 
     def add_adventure_to_class_customizations(self, class_id, adventure_id):
+        customizations = self.get_class_customizations(class_id)
+        if not customizations:
+            customizations = {'id': class_id, 'teacher_adventures': [adventure_id]}
+        else:
+            if adventure_id not in customizations.get('teacher_adventures', []):
+                customizations['teacher_adventures'] = customizations.get('teacher_adventures', []).append(adventure_id)
+        CUSTOMIZATIONS.put(customizations)
+
+    def remove_adventure_from_class_customizations(self, class_id, adventure_id):
         pass
-        # We should write some magic here
 
     def update_class_customizations(self, customizations):
         CUSTOMIZATIONS.put(customizations)
