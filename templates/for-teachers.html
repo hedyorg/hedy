@@ -17,16 +17,20 @@
           <table class="table-auto w-full lg:w-3/4 border-separate space-y-6 border border-black rounded-lg">
             <thead class="bg-gray-200">
               <tr>
-                  <th class="px-4 py-2 w-3/4 text-left">{{_('name')}}</th>
+                  <th class="px-4 py-2 text-left">{{_('name')}}</th>
                   <!-- This is a bucket-fix to get the first letter capitalized, should find a long-term solution -->
                   <th class="px-4 py-2">{{_('students')[0]|upper}}{{_('students')[1:]}}</th>
+                  <th class="p-2">{{_('view')}}</th>
+                  <th class="p-2">{{_('remove')}}</th>
               </tr>
             </thead>
             <tbody>
               {% for class in teacher_classes %}
                 <tr>
-                  <td class="px-4 py-2"><a href="for-teachers/class/{{class.id}}">{{class.name|e}}</a></td>
+                  <td class="px-4 py-2">{{class.name|e}}</td>
                   <td class="text-center p-2">{{class.students|length}}</td>
+                  <td class="text-center p-2"><a href="for-teachers/class/{{class.id}}">{{_('view')}}</a></td>
+                  <td class="text-center p-2"><a href="#" onclick='hedyApp.delete_class("{{class.id}}", {{_('delete_class_prompt')|tojson}})'>🗑️</a></td>
                 </tr>
               {% endfor %}
             </tbody>
@@ -43,7 +47,7 @@
                   <th class="px-4 py-2 text-left">{{_('name')}}</th>
                   <th class="p-2">{{_('level')}}</th>
                   <th class="p-2 hidden sm:block">{{_('last_update')}}</th>
-                  <th class="p2">{{_('view')}}</th>
+                  <th class="p-2">{{_('view')}}</th>
                   <th class="p-2">{{_('edit')}}</th>
                   <th class="p-2">{{_('remove')}}</th>
               </tr>
