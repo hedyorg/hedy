@@ -473,7 +473,7 @@ def routes(app, database, achievements):
                 return gettext('adventure_duplicate'), 400
 
         try:
-            content = body['content'].format(**hedy_content.KEYWORDS.get(g.keyword_lang))
+            body['content'].format(**hedy_content.KEYWORDS.get(g.keyword_lang))
         except:
             return gettext('something_went_wrong_keyword_parsing'), 400
 
@@ -482,7 +482,7 @@ def routes(app, database, achievements):
             'creator': user['username'],
             'name': body['name'],
             'level': body['level'],
-            'content': content,
+            'content': body['content'],
             'public': body['public']
         }
 
