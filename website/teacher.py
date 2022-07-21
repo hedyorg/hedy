@@ -472,6 +472,8 @@ def routes(app, database, achievements):
             if adventure['name'] == body['name'] and adventure['id'] != body['id']:
                 return gettext('adventure_duplicate'), 400
 
+        # We want to make sure the adventure is valid and only contains correct placeholders
+        # Try to parse with our current language, if it fails -> return an error to the user
         try:
             body['content'].format(**hedy_content.KEYWORDS.get(g.keyword_lang))
         except:
