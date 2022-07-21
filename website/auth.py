@@ -542,17 +542,17 @@ def routes(app, database):
                 return gettext('email_invalid'), 400
 
         # Validations, optional fields
-        if len(body.get('birth_year', '')) > 0:
+        if 'birth_year' in body:
             try:
                 body['birth_year'] = int(body.get('birth_year'))
                 if body['birth_year'] <= 1900 or body['birth_year'] > datetime.datetime.now().year:
                     return gettext('year_invalid').format(**{'current_year': str(datetime.datetime.now().year)}), 400
             except ValueError:
                 return gettext('year_invalid').format(**{'current_year': str(datetime.datetime.now().year)}), 400
-        if len(body.get('gender', '')) > 0:
+        if 'gender' in body and len(str(body.get('gender'))) > 0:
             if body['gender'] not in ["m", "f", "o"]:
                 return gettext('gender_invalid'), 400
-        if len(body.get('country', '')) > 0:
+        if 'country' in body and len(str(body.get('country'))) > 0:
             if not body['country'] in COUNTRIES:
                 return gettext('country_invalid'), 400
 

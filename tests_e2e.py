@@ -598,7 +598,7 @@ class TestAuth(AuthHelper):
             [],
             {'email': 'foobar'},
             {'birth_year': 'a'},
-            {'birth_year': '20'},
+            {'birth_year': 20},
             {'gender': 0},
             {'gender': 'a'},
             {'language': True},
@@ -627,7 +627,7 @@ class TestAuth(AuthHelper):
 
         # WHEN submitting valid profile changes
         profile_changes = {
-           'birth_year': '1989',
+           'birth_year': 1989,
            'country': 'NL',
            'gender': 'o'
         }
