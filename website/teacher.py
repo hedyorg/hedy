@@ -446,7 +446,7 @@ def routes(app, database, achievements):
         for Class in Classes:
             temp = {'name': Class.get('name'), 'id': Class.get('id'), 'checked': False}
             customizations = DATABASE.get_class_customizations(Class.get('id'))
-            if customizations and Class.get('id') in customizations.get('teacher_adventures', []):
+            if customizations and adventure_id in customizations.get('teacher_adventures', []):
                 temp['checked'] = True
             class_data.append(temp)
 
