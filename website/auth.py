@@ -336,6 +336,7 @@ def routes(app, database):
     @app.route('/auth/signup', methods=['POST'])
     def signup():
         body = request.json
+        print(body)
         # Validations, mandatory fields
         if not isinstance(body, dict):
             return gettext('ajax_error'), 400
@@ -350,15 +351,19 @@ def routes(app, database):
             return gettext('repeat_match_password'), 400
         if not isinstance(body.get('language'), str) or body.get('language') not in ALL_LANGUAGES.keys():
             return gettext('language_invalid'), 400
-        if not isinstance(body.get('agree_terms'), bool) or not body.get('agree_terms'):
+        if not isinstance(body.get('agree_terms'), str) or not body.get('agree_terms'):
             return gettext('agree_invalid'), 400
         if not isinstance(body.get('keyword_language'), str) or body.get('keyword_language') not in ['en', body.get('language')]:
             return gettext('keyword_language_invalid'), 400
 
         # Validations, optional fields
         if 'birth_year' in body:
-            if not isinstance(body.get('birth_year'), int) or body['birth_year'] <= 1900 or body['birth_year'] > datetime.datetime.now().year:
-                return (gettext('year_invalid') + str(datetime.datetime.now().year)), 400
+            try:
+                body['birth_year'] = int(body.get('birth_year'))
+                if body['birth_year'] <= 1900 or body['birth_year'] > datetime.datetime.now().year:
+                    return gettext('year_invalid').format(**{'current_year': str(datetime.datetime.now().year)}), 400
+            except ValueError:
+                return gettext('year_invalid').format(**{'current_year': str(datetime.datetime.now().year)}), 400
         if 'gender' in body:
             if body['gender'] != 'm' and body['gender'] != 'f' and body['gender'] != 'o':
                 return gettext('gender_invalid'), 400
