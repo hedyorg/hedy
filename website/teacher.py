@@ -438,8 +438,21 @@ def routes(app, database, achievements):
         if not adventure or adventure['creator'] != user['username']:
             return utils.error_page(error=404, ui_message=gettext('no_such_adventure'))
 
+        # Now it gets a bit complex, we want to get the teacher classes as well as the customizations
+        # This is a quite expensive retrieval, but we should be fine as this page is not called often
+        # We only need the name, id and if it already has the adventure set as data to the front-end
+        Classes = DATABASE.get_teacher_classes(user['username'])
+        class_data = []
+        for Class in Classes:
+            temp = {'name': Class.get('name'), 'id': Class.get('id'), 'checked': False}
+            customizations = DATABASE.get_class_customizations(Class.get('id'))
+            if customizations and Class.get('id') in customizations.get('teacher_adventures', []):
+                temp['checked'] = True
+            class_data.append(temp)
+
         return render_template('customize-adventure.html', page_title=gettext('title_customize-adventure'),
-                               adventure=adventure, max_level=hedy.HEDY_MAX_LEVEL, current_page='my-profile')
+                               adventure=adventure, class_data=class_data,
+                               max_level=hedy.HEDY_MAX_LEVEL, current_page='my-profile')
 
     @app.route('/for-teachers/customize-adventure', methods=['POST'])
     @requires_login

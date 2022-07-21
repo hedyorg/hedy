@@ -286,7 +286,7 @@ class Database:
         """Return the classes with given id."""
         return CLASSES.get({'id': id})
 
-    def get_teacher_classes(self, username, students_to_list):
+    def get_teacher_classes(self, username, students_to_list=False):
         """Return all the classes belonging to a teacher."""
         classes = None
         if isinstance(storage, dynamo.AwsDynamoStorage):
@@ -408,6 +408,10 @@ class Database:
 
     def delete_class_customizations(self, class_id):
         CUSTOMIZATIONS.delete({'id': class_id})
+
+    def add_adventure_to_class_customizations(self, class_id, adventure_id):
+        pass
+        # We should write some magic here
 
     def update_class_customizations(self, customizations):
         CUSTOMIZATIONS.put(customizations)
