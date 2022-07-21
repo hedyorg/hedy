@@ -472,15 +472,39 @@ export function pushAchievement(achievement: string) {
   });
 }
 
+export function closeAchievement() {
+  $('#achievement_pop-up').hide();
+  if ($('#achievement_pop-up').attr('reload')) {
+    $('#achievement_pop-up').removeAttr('reload');
+    $('#achievement_pop-up').removeAttr('redirect');
+    return location.reload();
+  }
+  if ($('#achievement_pop-up').attr('redirect')) {
+    const redirect = <string>$('#achievement_pop-up').attr('redirect');
+    $('#achievement_pop-up').removeAttr('reload');
+    $('#achievement_pop-up').removeAttr('redirect');
+    return window.location.pathname = redirect;
+  }
+  // If for some reason both situation don't happen we still want to make sure the attributes are removed
+  $('#achievement_pop-up').removeAttr('reload');
+  $('#achievement_pop-up').removeAttr('redirect');
+}
+
 export function showAchievements(achievements: any[], reload: boolean, redirect: string) {
   fnAsync(achievements, 0);
   if (reload) {
+    $('#achievement_pop-up').attr('reload', 'true');
     setTimeout(function(){
+      $('#achievement_pop-up').removeAttr('reload');
+      $('#achievement_pop-up').removeAttr('redirect');
       location.reload();
      }, achievements.length * 6000);
   }
   if (redirect) {
+    $('#achievement_pop-up').attr('redirect', redirect);
     setTimeout(function(){
+      $('#achievement_pop-up').removeAttr('reload');
+      $('#achievement_pop-up').removeAttr('redirect');
       window.location.pathname = redirect;
      }, achievements.length * 6000);
   }
