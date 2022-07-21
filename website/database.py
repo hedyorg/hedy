@@ -422,7 +422,7 @@ class Database:
 
     def remove_adventure_from_class_customizations(self, class_id, adventure_id):
         customizations = self.get_class_customizations(class_id)
-        # If there are no customizations, leave as it is -> only perform an action if it is already stored
+        # If there are no customizations, leave as it is -> only perform an action if it is already stored on the class
         if not customizations:
             return None
         elif adventure_id in customizations.get('teacher_adventures', []):
