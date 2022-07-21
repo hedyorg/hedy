@@ -812,15 +812,15 @@ class TestAuth(AuthHelper):
             '',
             [],
             {},
-            {'profile_picture': 123456},
-            {'profile_picture': '123'},
-            {'profile_picture': '123', 'personal_text': 123},
-            {'profile_picture': '123', 'personal_text': 123},
-            {'profile_picture': '123', 'personal_text': 123, 'favourite_program': 123},
-            {'profile_picture': '123', 'personal_text': 'Welcome to my profile!', 'favourite_program': 123},
-            {'profile_picture': '5', 'personal_text': 'Welcome to my profile!', 'favourite_program': 123},
-            {'profile_picture': '5', 'personal_text': 'Welcome to my profile!', 'favourite_program': "abcdefghi"},
-            {'profile_picture': '5', 'personal_text': 'Welcome to my profile!', 'favourite_program': program_id},
+            {'image': 123456},
+            {'image': '123'},
+            {'image': '123', 'personal_text': 123},
+            {'image': '123', 'personal_text': 123},
+            {'image': '123', 'personal_text': 123, 'favourite_program': 123},
+            {'image': '123', 'personal_text': 'Welcome to my profile!', 'favourite_program': 123},
+            {'image': '5', 'personal_text': 'Welcome to my profile!', 'favourite_program': 123},
+            {'image': '5', 'personal_text': 'Welcome to my profile!', 'favourite_program': "abcdefghi"},
+            {'image': '5', 'personal_text': 'Welcome to my profile!', 'favourite_program': program_id},
         ]
         for invalid_body in invalid_bodies:
             # THEN receive an invalid response code from the server
@@ -830,7 +830,7 @@ class TestAuth(AuthHelper):
         # GIVEN a logged in user
         self.given_user_is_logged_in()
 
-        public_profile = {'profile_picture': '9', 'personal_text': 'welcome to my profile!'}
+        public_profile = {'image': '9', 'personal_text': 'welcome to my profile!'}
 
         # WHEN creating a new public profile
         # THEN receive an OK response code from the server
@@ -844,7 +844,7 @@ class TestAuth(AuthHelper):
         program = {'code': 'hello world', 'name': 'program 1', 'level': 1, 'shared': True}
         program_id = self.post_data('programs', program)['id']
 
-        public_profile = {'profile_picture': '9', 'personal_text': 'welcome to my profile!', 'favourite_program': program_id}
+        public_profile = {'image': '9', 'personal_text': 'welcome to my profile!', 'favourite_program': program_id}
 
         # WHEN creating a new public profile with favourite program
         # THEN receive an OK response code from the server
@@ -854,7 +854,7 @@ class TestAuth(AuthHelper):
         # GIVEN a logged in user
         self.given_user_is_logged_in()
 
-        public_profile = {'profile_picture': '9', 'personal_text': 'welcome to my profile!'}
+        public_profile = {'image': '9', 'personal_text': 'welcome to my profile!'}
 
         # WHEN creating a new public profile with favourite program
         # THEN receive an OK response code from the server
