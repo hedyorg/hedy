@@ -53,6 +53,15 @@
                     </div>
                 </div>
             </div>
+            {% if class_data %}
+                <div class="flex flex-col items-center">
+                    <h3>Do you want to add this adventure directly to one of your classes?</h3>
+                    <div></div>
+                    {% for class in class_data %}
+                        {{ class }}
+                    {% endfor %}
+                </div>
+            {% endif %}
         </form>
     </div>
     <div>
