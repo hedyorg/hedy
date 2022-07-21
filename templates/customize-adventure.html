@@ -54,12 +54,12 @@
                 </div>
             </div>
             {% if class_data %}
-                <div class="flex flex-col items-center">
-                    <h3 class="text-center">Do you want to add this adventure directly to one of your classes?</h3>
-                    <div class="border-gray-500 border p-4 rounded-lg">
-                        <div class="flex flex-wrap items-center gap-4">
+                <div class="flex flex-col md:flex-row items-center justify-end mt-2 gap-4">
+                    <h3 class="text-center"></h3>
+                    <div class="border-gray-500 border px-4 py-2 rounded-lg">
+                        <div class="flex flex-col items-center gap-2">
                             {% for class in class_data %}
-                                <div class="flex flex-row items-center gap-2 justify-center">
+                                <div class="flex w-full flex-row items-center gap-4 justify-between">
                                     <label>{{ class.name }}</label>
                                     <input class="customize_adventure_class_checkbox" type="checkbox" value="{{class.id}}" {% if class.checked %}checked{% endif %}>
                                 </div>
