@@ -1499,17 +1499,20 @@ def modify_query(**new_values):
 @requires_login
 def update_public_profile(user):
     body = request.json
-
+    print(body)
     # Validations
     if not isinstance(body, dict):
         return gettext('ajax_error'), 400
     # The images are given as a "picture id" from 1 till 12
-    if not isinstance(body.get('profile_picture'), str) or int(body.get('profile_picture'), 0) not in [*range(1, 13)]:
+    if not isinstance(body.get('image'), str) or int(body.get('image'), 0) not in [*range(1, 13)]:
         return gettext('image_invalid'), 400
     if not isinstance(body.get('personal_text'), str):
         return gettext('personal_text_invalid'), 400
     if 'favourite_program' in body and not isinstance(body.get('favourite_program'), str):
         return gettext('favourite_program_invalid'), 400
+
+    # Cast the profile_picture from a string to an integer (we've already ensured this is a valid number)
+    body['image'] = int(body['image'])
 
     # Verify that the set favourite program is actually from the user (and public)!
     if 'favourite_program' in body:
@@ -1521,11 +1524,9 @@ def update_public_profile(user):
     current_profile = DATABASE.get_public_profile_settings(user['username'])
     if current_profile:
         if current_profile.get('image') != body.get('image'):
-            achievement = ACHIEVEMENTS.add_single_achievement(
-                current_user()['username'], "fresh_look")
+            achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "fresh_look")
     else:
-        achievement = ACHIEVEMENTS.add_single_achievement(
-            current_user()['username'], "go_live")
+        achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "go_live")
     DATABASE.update_public_profile(user['username'], body)
     if achievement:
         # Todo TB -> Check if we require message or success on front-end
