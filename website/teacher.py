@@ -500,6 +500,11 @@ def routes(app, database, achievements):
         }
 
         DATABASE.update_adventure(body['id'], adventure)
+
+        # Once the adventure is correctly stored we have to update all class customizations
+        # This is once again an expensive operation, we have to retrieve all teacher customizations
+        # Then check if something is changed with the current situation, if so -> update in database
+
         return {'success': gettext('adventure_updated')}, 200
 
     @app.route('/for-teachers/customize-adventure/<adventure_id>', methods=['DELETE'])

@@ -61,7 +61,7 @@
                             {% for class in class_data %}
                                 <div class="flex flex-row items-center gap-2 justify-center">
                                     <label>{{ class.name }}</label>
-                                    <input type="checkbox" value="{{class.id}}" {% if class.checked %}checked{% endif %}>
+                                    <input class="customize_adventure_class_checkbox" type="checkbox" value="{{class.id}}" {% if class.checked %}checked{% endif %}>
                                 </div>
                             {% endfor %}
                         </div>
