@@ -493,7 +493,6 @@ def routes(app, database):
     @requires_login
     def change_password(user):
         body = request.json
-        print(body)
 
         if not isinstance(body, dict):
             return gettext('ajax_error'), 400

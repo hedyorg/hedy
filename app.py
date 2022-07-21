@@ -1499,7 +1499,6 @@ def modify_query(**new_values):
 @requires_login
 def update_public_profile(user):
     body = request.json
-    print(body)
 
     # Validations
     if not isinstance(body, dict):
