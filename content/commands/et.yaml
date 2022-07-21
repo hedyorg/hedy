@@ -22,16 +22,16 @@
     explanation: Anna ühele sõnale nimi kasutades `{is}` käsku. Sa võid nime ise valida.
     demo_code: "nimi {is} Hedy\n{print} tere nimi"
 -   name: '{ask}'
-    explanation: ask something with `{ask}`. Beware! You need to give the answer a name with `{is}`.
-    demo_code: "color {is} {ask} What is your favorite color?\n{print} color is your favorite!"
+    explanation: Küsi midagi kasutades `{ask}` käsku. Pea meeles! Sa pead vastuse andma kasutades `{is}` käsku.
+    demo_code: "värv {is} {ask} Mis on su lemmikvärv?\n{print} värv on su lemmik!"
 -   name: '{sleep}'
-    explanation: Let Hedy pause for a (couple of) second(s).
-    demo_code: "{print} Let me think for one second...\n{sleep}\n{print} Hmm.. I need 3 more seconds...\n{sleep} 3\n{print} Eureka! Ive got it!"
+    explanation: Lase Hedy'l mõni sekund oodata.
+    demo_code: "{print} Lase mul üks sekund mõelda...\n{sleep}\n{print} Hmm.. Mul läheb veel 3 sekundit aega...\n{sleep} 3\n{print} Eureka! Mul on see käes!"
 -   explanation: Give a number a name using `{is}`. You can choose the name yourself.
-    demo_code: "angle {is} 90\n{turn} angle\n{forward} 100"
+    demo_code: "nurk {is} 90\n{turn} nurk\n{forward} 100"
     name: '{is} kilpkonnaga'
 3:
--   name: choose_random
+-   name: Vali juhuslikult
     explanation: Vali juhuslik sõna rühmast `{at}` ja `{random}` käske kasutades.
     demo_code: "animals {is} dog, cat, kangaroo\n{print} animals {at} {random}"
 -   name: '{add}'
@@ -39,46 +39,46 @@
     demo_code: "animals {is} cow, cat\n{add} dog {to_list} animals"
 -   name: '{remove}'
     explanation: Eemalda üks element listist.
-    demo_code: "animals {is} cat, dog, cow\n{remove} dog {from} animals"
+    demo_code: "loomad {is} kass, koer, lehm\n{remove} koer {from} loomad"
 6:
 -   name: '{print}'
     explanation: print exactly using quotation marks
-    demo_code: "{print} '5 times 5 is ' 5 * 5"
--   demo_code: "answer = {ask} 'What is 10 plus 10?'\n{if} answer {is} 20 {print} 'Yes!' {else} {print} 'Oops'"
+    demo_code: "{print} '5 korda 5 on ' 5 * 5"
+-   demo_code: "vastus = {ask} 'Kui palju on 10 pluss 10?'\n{if} vastus {is} 20 {print} 'Õige!' {else} {print} 'Oih'"
     name: '{ask}'
     explanation: '{ask} for a calculation and check whether it is correct.'
--   name: '`{ask}` {and} `{if}` turtle'
-    explanation: '{ask} the user how many angles they want'
+-   name: '`{ask}` ja `{if}` kilpkonnaga'
+    explanation: 'Küsi kasutajalt mitut nurka ta tahab.'
     demo_code: "angles = {ask} 'How many angles?'\nangle = 360 / angles\n{forward} 50"
 7:
 -   name: '{print}'
     explanation: print exactly using quotation marks
     demo_code: "{print} 'Hello welcome to Hedy.'"
 -   name: '{ask}'
-    explanation: ask something with `{ask}`.
+    explanation: Küsi midagi kasutades `{ask}` käsku.
     demo_code: "color = {ask} 'What is your favorite color?'\n{print} color ' is your favorite!'"
 -   name: '{if}'
     explanation: Make a choice with `{if}`
     demo_code: "color = {ask} 'What is your favorite color?'\n{if} color {is} green {print} 'pretty!' {else} {print} 'meh'"
--   name: '{repeat} - turtle'
+-   name: '{repeat} kilpkonnaga'
     explanation: repeat a line of code with `{repeat}`.
     demo_code: '{repeat} 3 {times} {forward} 10'
 8:
 -   name: '{print}'
     explanation: print something. Remember to use a quotation mark for literal printing.
-    demo_code: "{print} '5 times 5 is ' 5 * 5"
+    demo_code: "{print} '5 korda 5 on ' 5 * 5"
 -   name: '{ask}'
     explanation: ask for the answer to a sum and check if it is correct. We can now print 2 lines.
     demo_code: "answer = {ask} 'What is 5 plus 5?'\n{if} answer {is} 10\n    {print} 'Well done!'\n    {print} 'Indeed, the answer was ' answer\nelse\n    {print} 'Oops!'\n    {print} 'The answer is 10'"
--   name: '`{repeat}` with turtle'
-    explanation: '{repeat} multiple lines'
+-   name: '{repeat} kilpkonnaga'
+    explanation: 'Korda mitut rida.'
     demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
 9:
--   name: '`{if}` with multiple lines'
+-   name: '{if} mitme reaga'
     demo_code: "answer = {ask} 'What is 20 plus 20?'\n{if} answer {is} 20\n    {print} 'Well done!!'\n    {print} 'The answer is indeed' answer\nelse\n    {print} 'Wrong'\n    {print} 'The answer is 20'"
     explanation: The answer of a sum of questions with '{ask}' and see if it is correct. Now we print out two lines.
--   name: '`{repeat}` and turtle'
-    explanation: '{repeat} multiple lines'
+-   name: '{repeat} kilpkonnaga'
+    explanation: 'Korda mitut rida.'
     demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
 10:
 -   name: '{print}'
@@ -137,22 +137,22 @@
     demo_code: "{print} 'Hello welcome to Hedy.'"
 -   name: '{is}'
     explanation: Give a name to some text and `{print}` without quotation marks
-    demo_code: "name {is} Hedy\n{print} 'my name is ' name"
+    demo_code: "nimi {is} Hedy\n{print} 'minu nimi on ' nimi"
 -   name: '{ask}'
-    explanation: ask something with `{ask}`.
+    explanation: Küsi midagi kasutades `{ask}` käsku.
     demo_code: "color {is} {ask} 'What is your favorite color?'\n{print} color ' is your favorite!'"
 5:
 -   name: '{print}'
     explanation: print exactly using quotation marks
     demo_code: "{print} 'Hello welcome to Hedy.'"
 -   name: '{ask}'
-    explanation: ask something with `{ask}`.
+    explanation: Küsi midagi kasutades `{ask}` käsku.
     demo_code: "color {is} {ask} 'What is your favorite color?'\n{print} color ' is your favorite!'"
 -   name: '{if}'
-    explanation: Make a choice with `{if}`
-    demo_code: "color {is} {ask} 'What is your favorite color?'\n{if} color {is} green {print} 'pretty!' {else} {print} 'meh'"
--   name: '{if} with turtle'
-    explanation: Make a choice with `{if}`
+    explanation: Vali midagi kasutades `{if}` käsku.
+    demo_code: "värv {is} {ask} 'Mis on su lemmikvärv?'\n{if} värv {is} roheline {print} 'ilus!' {else} {print} 'mhh'"
+-   name: '{if} kilpkonnaga'
+    explanation: Tee valik kasutades `{if}` käsku.
     demo_code: "answer {is} {ask} 'How far should I walk?'\n{if} answer {is} far {forward} 100 {else} {forward} 5"
 -   name: '{in}'
     explanation: Check elements with `{in}`
