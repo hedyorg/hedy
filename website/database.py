@@ -413,9 +413,11 @@ class Database:
         customizations = self.get_class_customizations(class_id)
         if not customizations:
             customizations = {'id': class_id, 'teacher_adventures': [adventure_id]}
+        elif adventure_id not in customizations.get('teacher_adventures', []):
+            customizations['teacher_adventures'] = customizations.get('teacher_adventures', []).append(adventure_id)
+        # If both cases don't return valid the adventure is already in the customizations -> save a PUT operation
         else:
-            if adventure_id not in customizations.get('teacher_adventures', []):
-                customizations['teacher_adventures'] = customizations.get('teacher_adventures', []).append(adventure_id)
+            return None
         CUSTOMIZATIONS.put(customizations)
 
     def remove_adventure_from_class_customizations(self, class_id, adventure_id):
