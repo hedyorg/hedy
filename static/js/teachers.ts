@@ -211,8 +211,7 @@ export function update_adventure(adventure_id: string, first_edit: boolean, prom
    }
 }
 
-export function preview_adventure() {
-    let content = DOMPurify.sanitize(<string>$('#custom_adventure_content').val());
+function show_preview(content: string) {
     const name = <string>$('#custom_adventure_name').val();
     const level = <string>$('#custom_adventure_level').val();
     let container = $('<div>');
@@ -232,6 +231,24 @@ export function preview_adventure() {
         const mode = getHighlighter(level);
         exampleEditor.session.setMode(mode);
     }
+}
+
+export function preview_adventure() {
+    let content = DOMPurify.sanitize(<string>$('#custom_adventure_content').val());
+    // We get the content, send it to the server to parse the keywords and then show dynamically
+    $.ajax({
+      type: 'POST',
+      url: '/for-teachers/preview-adventure',
+      data: JSON.stringify({
+          code: content
+      }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function (response) {
+        show_preview(response.code);
+    }).fail(function (err) {
+      modal.alert(err.responseText, 3000, true);
+    });
 }
 
 export function delete_adventure(adventure_id: string, prompt: string) {

@@ -1,4 +1,4 @@
-from list_keywords import KEYWORDS, NUMBERS
+from list_keywords import LEVELS
 from definition import *
 import re
 
@@ -34,13 +34,13 @@ def translate(keyword_lang, keywords_level):
 # so what is not in quotes is code,
 # and any keyword in the code can be colored independently
 # of what is around it, so we use a general function
-# This general function uses 2 constants KEYWORDS and NUMBERS
+# This general function uses LEVELS
 
 def rule_all(level):
 
 
     # get keyword by level
-    keyword_by_level = KEYWORDS[level]
+    data_level = LEVELS[level]
 
     list_rules = []
 
@@ -61,8 +61,8 @@ def rule_all(level):
 
 
     # Rules for numbers
-    if (NUMBERS[level]["number"]) :
-        if (NUMBERS[level]["number_with_decimal"]) :
+    if (data_level["number"]) :
+        if (data_level["number_with_decimal"]) :
             number_regex = '(' + DIGIT + '*\\.?' + DIGIT + '+)'
         else:
             number_regex = '(' + DIGIT + '+)'
@@ -70,14 +70,14 @@ def rule_all(level):
         list_rules.append({'regex': START_WORD + number_regex + END_WORD, 'token': ['text','variable'], 'next':'start'} )
 
         # Special case of an number directly followed by a number 
-        for command in keyword_by_level["SP_K"]: 
+        for command in data_level["SP_K"]: 
             list_rules.append({
                 'regex': START_WORD + K(command) + number_regex + END_WORD,
                 'token': ['text','keyword','variable'],
                 'next': 'start',
             })
 
-        for command in keyword_by_level["K"]:
+        for command in data_level["K"]:
             list_rules.append({
                 'regex': K(command) + number_regex + END_WORD,
                 'token': ['keyword','variable'],
@@ -87,7 +87,7 @@ def rule_all(level):
 
     # Rules for commands of SP_K_SP 
     # These are the keywords that must be "alone" so neither preceded nor followed directly by a word 
-    for command in keyword_by_level["SP_K_SP"]:
+    for command in data_level["SP_K_SP"]:
         list_rules.append({
             'regex': START_WORD + K(command) + END_WORD,
             'token': ["text","keyword"],
@@ -98,7 +98,7 @@ def rule_all(level):
     # Rules for commands of K 
     #  These are the keywords that are independent of the context (formerly the symbols
     # In particular, even if they are between 2 words, the syntax highlighting will select them
-    for command in keyword_by_level["K"]:
+    for command in data_level["K"]:
         list_rules.append({
             'regex': K(command),
             'token': ["keyword"],
@@ -108,7 +108,7 @@ def rule_all(level):
     # Rules for commands of SP_K 
     #  This category of keywords allows you to have keywords that are not preced
     # by another word, but that can be followed immediately by another word. (see the PR #2413)*/
-    for command in keyword_by_level["SP_K"]:
+    for command in data_level["SP_K"]:
         list_rules.append({
             'regex': START_WORD + K(command),
             'token': ["text","keyword"],
@@ -118,7 +118,7 @@ def rule_all(level):
     # Rules for commands of K_SP 
     #  This category of keywords allows you to have keywords that can be preceded immediate
     # by another word, but that are not followed by another word.*/
-    for command in keyword_by_level["K_SP"]:
+    for command in data_level["K_SP"]:
         list_rules.append({
             'regex': K(command) + END_WORD,
             'token': ["keyword"],
