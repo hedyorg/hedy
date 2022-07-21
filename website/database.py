@@ -410,19 +410,14 @@ class Database:
         CUSTOMIZATIONS.delete({'id': class_id})
 
     def add_adventure_to_class_customizations(self, class_id, adventure_id):
-        print(adventure_id)
         customizations = self.get_class_customizations(class_id)
-        print(customizations)
         if not customizations:
             customizations = {'id': class_id, 'teacher_adventures': [adventure_id]}
         elif adventure_id not in customizations.get('teacher_adventures', []):
             customizations['teacher_adventures'] = customizations.get('teacher_adventures', []) + [adventure_id]
-            print(customizations['teacher_adventures'])
         # If both cases don't return valid the adventure is already in the customizations -> save a PUT operation
         else:
             return None
-
-        print(customizations)
         CUSTOMIZATIONS.put(customizations)
 
     def remove_adventure_from_class_customizations(self, class_id, adventure_id):
@@ -431,9 +426,7 @@ class Database:
         if not customizations:
             return None
         elif adventure_id in customizations.get('teacher_adventures', []):
-            customizations['teacher_adventures'] = customizations.get('teacher_adventures').remove(adventure_id)
-            # Make sure we always keep any empty list, also when removing the last item
-            customizations['teacher_adventures'] = [] + [customizations['teacher_adventures']]
+            customizations['teacher_adventures'].remove(adventure_id)
             CUSTOMIZATIONS.put(customizations)
 
     def update_class_customizations(self, customizations):
