@@ -1499,7 +1499,7 @@ def modify_query(**new_values):
 @requires_login
 def update_public_profile(user):
     body = request.json
-    print(body)
+
     # Validations
     if not isinstance(body, dict):
         return gettext('ajax_error'), 400
@@ -1511,14 +1511,13 @@ def update_public_profile(user):
     if 'favourite_program' in body and not isinstance(body.get('favourite_program'), str):
         return gettext('favourite_program_invalid'), 400
 
-    # Cast the profile_picture from a string to an integer (we've already ensured this is a valid number)
-    body['image'] = int(body['image'])
-
     # Verify that the set favourite program is actually from the user (and public)!
     if 'favourite_program' in body:
         program = DATABASE.program_by_id(body.get('favourite_program'))
         if not program or program.get('username') != user['username'] or not program.get('public'):
             return gettext('favourite_program_invalid'), 400
+
+    print(body)
 
     achievement = None
     current_profile = DATABASE.get_public_profile_settings(user['username'])
