@@ -543,7 +543,6 @@ def routes(app, database):
 
         # Validations, optional fields
         if len(body.get('birth_year')) > 0:
-            print(body.get('birth_year'))
             try:
                 body['birth_year'] = int(body.get('birth_year'))
                 if body['birth_year'] <= 1900 or body['birth_year'] > datetime.datetime.now().year:

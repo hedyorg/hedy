@@ -1517,8 +1517,6 @@ def update_public_profile(user):
         if not program or program.get('username') != user['username'] or not program.get('public'):
             return gettext('favourite_program_invalid'), 400
 
-    print(body)
-
     achievement = None
     current_profile = DATABASE.get_public_profile_settings(user['username'])
     if current_profile:
