@@ -19,6 +19,10 @@
                 <input class="signup-input" minlength="6" id="password" name="password" type=password required>
             </div>
             <div class="signup-container">
+                <label class="signup-label" for="password_repeat">{{_('password_repeat')}}</label>
+                <input class="signup-input" minlength="6" id="password_repeat" name="password_repeat" type=password required>
+            </div>
+            <div class="signup-container">
                 <label class="signup-label" for="language">{{_('preferred_language')}}</label>
                 <select class="signup-input appearance-none" id="language" name="language" required>
                     <option value="" selected disabled hidden>{{_('select')}}</option>
