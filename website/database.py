@@ -421,7 +421,13 @@ class Database:
         CUSTOMIZATIONS.put(customizations)
 
     def remove_adventure_from_class_customizations(self, class_id, adventure_id):
-        pass
+        customizations = self.get_class_customizations(class_id)
+        # If there are no customizations, leave as it is -> only perform an action if it is already stored
+        if not customizations:
+            return None
+        elif adventure_id in customizations.get('teacher_adventures', []):
+            customizations['teacher_adventures'] = customizations.get('teacher_adventures').remove(adventure_id)
+            CUSTOMIZATIONS.put(customizations)
 
     def update_class_customizations(self, customizations):
         CUSTOMIZATIONS.put(customizations)
