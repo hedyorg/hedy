@@ -473,11 +473,7 @@ def routes(app, database, achievements):
             return gettext('adventure_length'), 400
         if not isinstance(body.get('public'), bool):
             return gettext('public_invalid'), 400
-
-        print(body.get('classes'))
-
-        # This is an optional field but should be a list if it exists
-        if body.get('classes') and not isinstance(body.get('classes'), list):
+        if not isinstance(body.get('classes'), list):
             return gettext('classes_invalid'), 400
 
         if not is_teacher(user):
