@@ -2,7 +2,7 @@ import hedy
 import exceptions
 import textwrap
 from tests.Tester import HedyTester
-
+from parameterized import parameterized
 class TestsLevel15(HedyTester):
   level = 15
 
@@ -32,6 +32,35 @@ class TestsLevel15(HedyTester):
       max_level=16,
       expected=expected,
       expected_commands=['is', 'while', 'ask', 'print']
+    )
+  
+  @parameterized.expand(['and', 'or'])
+  def test_while_and_or(self, op):
+    code = textwrap.dedent(f"""\
+      answer = 7
+      while answer > 5 {op} answer < 10
+        answer = ask 'What is 5 times 5?'
+      print 'A correct answer has been given'""")
+    
+    expected = textwrap.dedent(f"""\
+        answer = 7
+        while convert_numerals('Latin', answer).zfill(100)>convert_numerals('Latin', 5).zfill(100) {op} convert_numerals('Latin', answer).zfill(100)<convert_numerals('Latin', 10).zfill(100):
+          answer = input(f'''What is 5 times 5?''')
+          try:
+            answer = int(answer)
+          except ValueError:
+            try:
+              answer = float(answer)
+            except ValueError:
+              pass
+          time.sleep(0.1)
+        print(f'''A correct answer has been given''')""")
+
+    self.multi_level_tester(
+      code=code,
+      max_level=16,
+      expected=expected,
+      expected_commands=['is', 'while', op,'ask', 'print']
     )
 
   def test_while_fr_equals(self):
