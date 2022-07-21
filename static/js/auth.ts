@@ -19,7 +19,9 @@ function convertFormJSON(form: JQuery<HTMLElement>) {
         result[this.name] = $.merge(Array(result[this.name]), Array(this.value));
       }
     } else {
-      result[this.name] = this.value;
+      if ((this.value)) {
+        result[this.name] = this.value;
+      }
     }
   });
   return JSON.stringify(result);

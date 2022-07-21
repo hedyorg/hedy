@@ -549,10 +549,10 @@ def routes(app, database):
                     return gettext('year_invalid').format(**{'current_year': str(datetime.datetime.now().year)}), 400
             except ValueError:
                 return gettext('year_invalid').format(**{'current_year': str(datetime.datetime.now().year)}), 400
-        if 'gender' in body and len(str(body.get('gender'))) > 0:
+        if 'gender' in body:
             if body['gender'] not in ["m", "f", "o"]:
                 return gettext('gender_invalid'), 400
-        if 'country' in body and len(str(body.get('country'))) > 0:
+        if 'country' in body:
             if not body['country'] in COUNTRIES:
                 return gettext('country_invalid'), 400
 
