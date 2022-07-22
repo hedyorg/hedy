@@ -472,8 +472,10 @@ def routes(app, database, achievements):
             if adventure['name'] == body['name'] and adventure['id'] != body['id']:
                 return gettext('adventure_duplicate'), 400
 
+        # We want to make sure the adventure is valid and only contains correct placeholders
+        # Try to parse with our current language, if it fails -> return an error to the user
         try:
-            content = body['content'].format(**hedy_content.KEYWORDS.get(g.keyword_lang))
+            body['content'].format(**hedy_content.KEYWORDS.get(g.keyword_lang))
         except:
             return gettext('something_went_wrong_keyword_parsing'), 400
 
@@ -482,7 +484,7 @@ def routes(app, database, achievements):
             'creator': user['username'],
             'name': body['name'],
             'level': body['level'],
-            'content': content,
+            'content': body['content'],
             'public': body['public']
         }
 
