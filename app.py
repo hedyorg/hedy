@@ -1017,8 +1017,7 @@ def profile_page(user):
 
     profile = DATABASE.user_by_username(user['username'])
     programs = DATABASE.public_programs_for_user(user['username'])
-    public_profile_settings = DATABASE.get_public_profile_settings(current_user()[
-                                                                   'username'])
+    public_profile_settings = DATABASE.get_public_profile_settings(current_user()['username'])
 
     classes = []
     if profile.get('classes'):
@@ -1027,12 +1026,17 @@ def profile_page(user):
 
     invite = DATABASE.get_username_invite(user['username'])
     if invite:
+        # We have to keep this in mind as well, can simply be set to 1 for now
+        # But when adding more message structures we have to use a more sophisticated structure
+        session['messages'] = 1
         # If there is an invite: retrieve the class information
         class_info = DATABASE.get_class(invite.get('class_id', None))
         if class_info:
             invite['teacher'] = class_info.get('teacher')
             invite['class_name'] = class_info.get('name')
             invite['join_link'] = class_info.get('link')
+    else:
+        session['messages'] = 0
 
     return render_template('profile.html', page_title=gettext('title_my-profile'), programs=programs,
                            user_data=profile, invite_data=invite, public_settings=public_profile_settings,
@@ -1492,6 +1496,17 @@ def modify_query(**new_values):
 
     return '{}?{}'.format(request.path, url_encode(args))
 
+@app.template_global()
+def get_user_messages():
+    if not session.get('messages'):
+        # Todo TB: In the future this should contain the class invites + other messages
+        # As the class invites are binary (you either have one or you have none, we can possibly simplify this)
+        # Simply set it to 1 if we have an invite, otherwise keep at 0
+        invite = DATABASE.get_username_invite(current_user()['username'])
+        session['messages'] = 1 if invite else 0
+    if session.get('messages') > 0:
+        return session.get('messages')
+    return None
 
 # Todo TB: Re-write this somewhere sometimes following the line below
 # We only store this @app.route here to enable the use of achievements -> might want to re-write this in the future
