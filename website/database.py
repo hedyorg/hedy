@@ -286,7 +286,7 @@ class Database:
         """Return the classes with given id."""
         return CLASSES.get({'id': id})
 
-    def get_teacher_classes(self, username, students_to_list):
+    def get_teacher_classes(self, username, students_to_list=False):
         """Return all the classes belonging to a teacher."""
         classes = None
         if isinstance(storage, dynamo.AwsDynamoStorage):
@@ -408,6 +408,26 @@ class Database:
 
     def delete_class_customizations(self, class_id):
         CUSTOMIZATIONS.delete({'id': class_id})
+
+    def add_adventure_to_class_customizations(self, class_id, adventure_id):
+        customizations = self.get_class_customizations(class_id)
+        if not customizations:
+            customizations = {'id': class_id, 'teacher_adventures': [adventure_id]}
+        elif adventure_id not in customizations.get('teacher_adventures', []):
+            customizations['teacher_adventures'] = customizations.get('teacher_adventures', []) + [adventure_id]
+        # If both cases don't return valid the adventure is already in the customizations -> save a PUT operation
+        else:
+            return None
+        CUSTOMIZATIONS.put(customizations)
+
+    def remove_adventure_from_class_customizations(self, class_id, adventure_id):
+        customizations = self.get_class_customizations(class_id)
+        # If there are no customizations, leave as it is -> only perform an action if it is already stored on the class
+        if not customizations:
+            return None
+        elif adventure_id in customizations.get('teacher_adventures', []):
+            customizations['teacher_adventures'].remove(adventure_id)
+            CUSTOMIZATIONS.put(customizations)
 
     def update_class_customizations(self, customizations):
         CUSTOMIZATIONS.put(customizations)
