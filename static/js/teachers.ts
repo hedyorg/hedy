@@ -63,9 +63,9 @@ export function delete_class(id: string, prompt: string) {
       dataType: 'json'
     }).done(function(response) {
       if (response.achievement) {
-        showAchievements(response.achievement, false, '/for-teachers');
+        showAchievements(response.achievement, true, '');
       } else {
-        window.location.pathname = '/for-teachers';
+        location.reload();
       }
     }).fail(function(err) {
       modal.alert(err.responseText, 3000, true);
@@ -177,10 +177,18 @@ export function create_adventure(prompt: string) {
 }
 
 function update_db_adventure(adventure_id: string) {
+   // Todo TB: It would be nice if we improve this with the formToJSON() function once #3077 is merged
+
    const adventure_name = $('#custom_adventure_name').val();
    const level = $('#custom_adventure_level').val();
    const content = DOMPurify.sanitize(<string>$('#custom_adventure_content').val());
    const agree_public = $('#agree_public').prop('checked');
+   // Get all checked checkboxes of the class 'customize_adventure_class_checkbox' and map their values
+   // The values in this case are the class id's for which we need to update the class customizations
+   let classes = new Array();
+   $(".customize_adventure_class_checkbox:checked").each(function () {
+     classes.push($(this).val());
+   });
 
     $.ajax({
       type: 'POST',
@@ -190,6 +198,7 @@ function update_db_adventure(adventure_id: string) {
         name: adventure_name,
         level: level,
         content: content,
+        classes: classes,
         public: agree_public
       }),
       contentType: 'application/json',
@@ -211,8 +220,7 @@ export function update_adventure(adventure_id: string, first_edit: boolean, prom
    }
 }
 
-export function preview_adventure() {
-    let content = DOMPurify.sanitize(<string>$('#custom_adventure_content').val());
+function show_preview(content: string) {
     const name = <string>$('#custom_adventure_name').val();
     const level = <string>$('#custom_adventure_level').val();
     let container = $('<div>');
@@ -232,6 +240,24 @@ export function preview_adventure() {
         const mode = getHighlighter(level);
         exampleEditor.session.setMode(mode);
     }
+}
+
+export function preview_adventure() {
+    let content = DOMPurify.sanitize(<string>$('#custom_adventure_content').val());
+    // We get the content, send it to the server to parse the keywords and then show dynamically
+    $.ajax({
+      type: 'POST',
+      url: '/for-teachers/preview-adventure',
+      data: JSON.stringify({
+          code: content
+      }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function (response) {
+        show_preview(response.code);
+    }).fail(function (err) {
+      modal.alert(err.responseText, 3000, true);
+    });
 }
 
 export function delete_adventure(adventure_id: string, prompt: string) {

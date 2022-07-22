@@ -16,17 +16,17 @@
         <li class="dropdown relative z-20">
             <a class="menubar-btn {% if current_page == 'my-profile' %}active{% endif %} cursor-pointer" onclick="$('.dropdown-menu').slideToggle('medium');">
                 <span class="fas fa-fw fa-user"></span>
-                <span class="hidden lg:inline-block">{{username}}</span>
+                <span class="hidden lg:inline-block">{{username}} {% if get_user_messages() %} ({{ get_user_messages() }}){% endif %}</span>
             </a>
             <div class="dropdown-menu" style="display: none;">
                 <ul>
                     <li><a class="dropdown-item" href="/highscores"><span class="fas fa-trophy ltr:mr-4 rtl:ml-4"></span>{{_('highscores')}}</a></li>
                     <li><a class="dropdown-item" href="/my-achievements"><span class="fas fa-fw fa-list-alt ltr:mr-4 rtl:ml-4"></span>{{_('my_achievements')}}</a></li>
-                    <li><a class="dropdown-item" href="/my-profile"><span class="fas fa-user-cog ltr:mr-4 rtl:ml-4"></span>{{_('my_account')}}</a></li>
+                    <li><a class="dropdown-item" href="/my-profile"><span class="fas fa-user-cog ltr:mr-4 rtl:ml-4"></span>{{_('my_account')}} {% if get_user_messages() %} ({{ get_user_messages() }}){% endif %}</a></li>
                   {% if is_teacher %}
                       <li><a class="dropdown-item" href="/for-teachers"><span class="fas fa-chalkboard-teacher ltr:mr-4 rtl:ml-4"></span>{{_('for_teachers')}}</a></li>
                   {% endif %}
-                    <li><a class="dropdown-item" href="#" onclick="hedyApp.auth.logout ();event.preventDefault();"><span class="fas fa-fw fa-sign-out-alt ltr:mr-4 rtl:ml-4"></span>{{_('logout')}}</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="hedyApp.logout();"><span class="fas fa-fw fa-sign-out-alt ltr:mr-4 rtl:ml-4"></span>{{_('logout')}}</a></li>
                 </ul>
             </div>
         </li>
