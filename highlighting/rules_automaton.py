@@ -31,13 +31,6 @@ def rule_level1():
             'next': 'color',
         }],
     "value" : [],
-    "direction" : [{
-            'regex': "(" +\
-                    K("right",True) + "|" +\
-                    K("left",True) +\
-                ")",
-            'token': [TOKEN_CONSTANT],
-        }],
     "color": [{
             'regex': "(" +\
                     K("black",True) + "|" +\
@@ -51,6 +44,13 @@ def rule_level1():
                     K("red",True) + "|" +\
                     K("white",True) + "|" +\
                     K("yellow",True) +\
+                ")",
+            'token': [TOKEN_CONSTANT],
+        }],
+    "direction" : [{
+            'regex': "(" +\
+                    K("right",True) + "|" +\
+                    K("left",True) +\
                 ")",
             'token': [TOKEN_CONSTANT],
         }]
