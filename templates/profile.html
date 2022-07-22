@@ -148,14 +148,8 @@
             <form id="change_password">
                 <h2 class="profile-section-body-header">{{_('change_password')}}</h2>
                 <div class="flex flex-row items-center mb-2">
-                    <label for="old_password" class="inline-block w-72">{{_('current_password')}}</label>
-                    <div class="flex items-center justify-end">
-                        <input class="personal-input" minlength="6" id="old_password" name="old_password" type="password" required>
-                        <span class="inline z-10 absolute mx-2 text-sm text-gray-500" onclick="$('.blur-toggle').toggle();$('#old_password').attr('type',$('#old_password').attr('type')==='password'?'text':'password');">
-                            <i class="fas fa-eye-slash fa-lg cursor-pointer blur-toggle" aria-hidden="true"></i>
-                            <i class="fas fa-eye fa-lg cursor-pointer blur-toggle" style="display: none;" aria-hidden="true"></i>
-                        </span>
-                    </div>
+                    <label for="old_password" class="inline-block w-72">{{_('new_password')}}</label>
+                    <input id="old_password" name="old_password" class="personal-input" minlength="6" type=password required>
                 </div>
                 <div class="flex flex-row items-center mb-2">
                     <label for="password" class="inline-block w-72">{{_('new_password')}}</label>
