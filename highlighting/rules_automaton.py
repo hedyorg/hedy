@@ -31,19 +31,19 @@ def rule_level1():
             'next': 'color',
         }],
     "value" : [],
-    "color": [{
-            'regex': "(" +\
-                    K("black",True) + "|" +\
-                    K("blue",True) + "|" +\
-                    K("brown",True) + "|" +\
-                    K("gray",True) + "|" +\
-                    K("green",True) + "|" +\
-                    K("orange",True) + "|" +\
-                    K("pink",True) + "|" +\
+    "color" : [{
+            'regex': "(" + \
+                    K("black",True)  + "|" +\
+                    K("gray",True)   + "|" +\
+                    K("white",True)  + "|" +\
+                    K("green",True)  + "|" +\
+                    K("blue",True)   + "|" +\
                     K("purple",True) + "|" +\
-                    K("red",True) + "|" +\
-                    K("white",True) + "|" +\
-                    K("yellow",True) +\
+                    K("brown",True)  + "|" +\
+                    K("pink",True)   + "|" +\
+                    K("red",True)    + "|" +\
+                    K("orange",True) + "|" +\
+                    K("yellow",True) + \
                 ")",
             'token': [TOKEN_CONSTANT],
         }],
