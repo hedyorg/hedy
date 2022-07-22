@@ -438,8 +438,21 @@ def routes(app, database, achievements):
         if not adventure or adventure['creator'] != user['username']:
             return utils.error_page(error=404, ui_message=gettext('no_such_adventure'))
 
+        # Now it gets a bit complex, we want to get the teacher classes as well as the customizations
+        # This is a quite expensive retrieval, but we should be fine as this page is not called often
+        # We only need the name, id and if it already has the adventure set as data to the front-end
+        Classes = DATABASE.get_teacher_classes(user['username'])
+        class_data = []
+        for Class in Classes:
+            temp = {'name': Class.get('name'), 'id': Class.get('id'), 'checked': False}
+            customizations = DATABASE.get_class_customizations(Class.get('id'))
+            if customizations and adventure_id in customizations.get('teacher_adventures', []):
+                temp['checked'] = True
+            class_data.append(temp)
+
         return render_template('customize-adventure.html', page_title=gettext('title_customize-adventure'),
-                               adventure=adventure, max_level=hedy.HEDY_MAX_LEVEL, current_page='my-profile')
+                               adventure=adventure, class_data=class_data,
+                               max_level=hedy.HEDY_MAX_LEVEL, current_page='my-profile')
 
     @app.route('/for-teachers/customize-adventure', methods=['POST'])
     @requires_login
@@ -460,6 +473,8 @@ def routes(app, database, achievements):
             return gettext('adventure_length'), 400
         if not isinstance(body.get('public'), bool):
             return gettext('public_invalid'), 400
+        if not isinstance(body.get('classes'), list):
+            return gettext('classes_invalid'), 400
 
         if not is_teacher(user):
             return utils.error_page(error=403, ui_message=gettext('retrieve_adventure_error'))
@@ -489,6 +504,18 @@ def routes(app, database, achievements):
         }
 
         DATABASE.update_adventure(body['id'], adventure)
+
+        # Once the adventure is correctly stored we have to update all class customizations
+        # This is once again an expensive operation, we have to retrieve all teacher customizations
+        # Then check if something is changed with the current situation, if so -> update in database
+        Classes = DATABASE.get_teacher_classes(user['username'])
+        for Class in Classes:
+            # If so, the adventure should be in the class
+            if Class.get('id') in body.get('classes', []):
+                DATABASE.add_adventure_to_class_customizations(Class.get('id'), body.get('id'))
+            else:
+                DATABASE.remove_adventure_from_class_customizations(Class.get('id'), body.get('id'))
+
         return {'success': gettext('adventure_updated')}, 200
 
     @app.route('/for-teachers/customize-adventure/<adventure_id>', methods=['DELETE'])
