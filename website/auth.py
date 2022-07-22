@@ -350,15 +350,19 @@ def routes(app, database):
             return gettext('repeat_match_password'), 400
         if not isinstance(body.get('language'), str) or body.get('language') not in ALL_LANGUAGES.keys():
             return gettext('language_invalid'), 400
-        if not isinstance(body.get('agree_terms'), bool) or not body.get('agree_terms'):
+        if not isinstance(body.get('agree_terms'), str) or not body.get('agree_terms'):
             return gettext('agree_invalid'), 400
         if not isinstance(body.get('keyword_language'), str) or body.get('keyword_language') not in ['en', body.get('language')]:
             return gettext('keyword_language_invalid'), 400
 
         # Validations, optional fields
         if 'birth_year' in body:
-            if not isinstance(body.get('birth_year'), int) or body['birth_year'] <= 1900 or body['birth_year'] > datetime.datetime.now().year:
-                return (gettext('year_invalid') + str(datetime.datetime.now().year)), 400
+            try:
+                body['birth_year'] = int(body.get('birth_year'))
+                if body['birth_year'] <= 1900 or body['birth_year'] > datetime.datetime.now().year:
+                    return gettext('year_invalid').format(**{'current_year': str(datetime.datetime.now().year)}), 400
+            except ValueError:
+                return gettext('year_invalid').format(**{'current_year': str(datetime.datetime.now().year)}), 400
         if 'gender' in body:
             if body['gender'] != 'm' and body['gender'] != 'f' and body['gender'] != 'o':
                 return gettext('gender_invalid'), 400
@@ -521,7 +525,7 @@ def routes(app, database):
             except:
                 return gettext('mail_error_change_processed'), 400
 
-        return gettext('password_updated'), 200
+        return jsonify({'message': gettext('password_updated')}), 200
 
     @app.route('/profile', methods=['POST'])
     @requires_login
@@ -543,22 +547,18 @@ def routes(app, database):
 
         # Validations, optional fields
         if 'birth_year' in body:
-            if not isinstance(body.get('birth_year'), int) or body['birth_year'] <= 1900 or body['birth_year'] > datetime.datetime.now().year:
-                return gettext('year_invalid') + str(datetime.datetime.now().year), 400
+            try:
+                body['birth_year'] = int(body.get('birth_year'))
+                if body['birth_year'] <= 1900 or body['birth_year'] > datetime.datetime.now().year:
+                    return gettext('year_invalid').format(**{'current_year': str(datetime.datetime.now().year)}), 400
+            except ValueError:
+                return gettext('year_invalid').format(**{'current_year': str(datetime.datetime.now().year)}), 400
         if 'gender' in body:
-            if body['gender'] != 'm' and body['gender'] != 'f' and body['gender'] != 'o':
+            if body['gender'] not in ["m", "f", "o"]:
                 return gettext('gender_invalid'), 400
         if 'country' in body:
             if not body['country'] in COUNTRIES:
                 return gettext('country_invalid'), 400
-        if 'prog_experience' in body and body['prog_experience'] not in ['yes', 'no']:
-            return gettext('experience_invalid'), 400
-        if 'experience_languages' in body:
-            if not isinstance(body['experience_languages'], list):
-                return gettext('experience_invalid'), 400
-            for language in body['experience_languages']:
-                if language not in['scratch', 'other_block', 'python', 'other_text']:
-                    return gettext('programming_invalid'), 400
 
         resp = {}
         if 'email' in body:
@@ -603,22 +603,20 @@ def routes(app, database):
                 updates[field] = body[field]
             else:
                 updates[field] = None
-
         if updates:
             DATABASE.update_user(username, updates)
 
         # Always make sure that the country stored on the public profile is identical to the profile one
         DATABASE.update_country_public_profile(username, body.get('country', None))
 
-
         # We want to check if the user choose a new language, if so -> reload
         # We can use g.lang for this to reduce the db calls
         resp['reload'] = False
         if session['lang'] != body['language'] or session['keyword_lang'] != body['keyword_language']:
-            resp['message'] = gettext('profile_updated')
+            resp['message'] = gettext('profile_updated_reload')
             resp['reload'] = True
         else:
-            resp['message'] = gettext('profile_updated_reload')
+            resp['message'] = gettext('profile_updated')
 
         remember_current_user(DATABASE.user_by_username(user['username']))
         return jsonify(resp)
@@ -682,7 +680,7 @@ def routes(app, database):
             except:
                 return gettext('mail_error_change_processed'), 400
 
-            return jsonify({'message':gettext('sent_password_recovery')}), 200
+            return jsonify({'message': gettext('sent_password_recovery')}), 200
 
     @app.route('/auth/reset', methods=['POST'])
     def reset():
@@ -725,7 +723,7 @@ def routes(app, database):
             except:
                 return gettext('mail_error_change_processed'), 400
 
-        return jsonify({'message':gettext('password_resetted')}), 200
+        return jsonify({'message': gettext('password_resetted')}), 200
 
     # *** ADMIN ROUTES ***
 
