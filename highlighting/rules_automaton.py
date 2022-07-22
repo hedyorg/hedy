@@ -28,7 +28,7 @@ def rule_level1():
         },{
             'regex': START_LINE + K("color"),
             'token': ["text",'keyword'],
-            'next': 'value',
+            'next': 'color',
         }],
     "value" : [],
     "direction" : [{
@@ -37,7 +37,8 @@ def rule_level1():
                     K("left",True) +\
                 ")",
             'token': [TOKEN_CONSTANT],
-        },{
+        }],
+    "color": [{
             'regex': "(" +\
                     K("black",True) + "|" +\
                     K("blue",True) + "|" +\
