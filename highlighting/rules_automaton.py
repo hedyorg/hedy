@@ -55,17 +55,7 @@ def rule_level1():
             'token': [TOKEN_CONSTANT],
         }]
     })
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
 def rule_level2() :
     return add_extra_rule({
     "start" : [{
