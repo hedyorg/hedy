@@ -97,6 +97,39 @@
                     "next": "start"
                 }
             ],
+            "color": [
+                {
+                    "regex": "(^| )(_)(?= |$)",
+                    "token": [
+                        "text",
+                        "invalid"
+                    ],
+                    "next": "color"
+                },
+                {
+                    "regex": "_\\?_",
+                    "token": "invalid",
+                    "next": "color"
+                },
+                {
+                    "regex": "#.*$",
+                    "token": "comment",
+                    "next": "start"
+                },
+                {
+                    "regex": "(^|$)",
+                    "token": [
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(__black__|__gray__|__white__|__green__|__blue__|__purple__|__brown__|__pink__|__red__|__orange__|__yellow__)",
+                    "token": [
+                        "text"
+                    ]
+                }
+            ],
             "direction": [
                 {
                     "regex": "(^| )(_)(?= |$)",
@@ -125,39 +158,6 @@
                 },
                 {
                     "regex": "(__right__|__left__)",
-                    "token": [
-                        "text"
-                    ]
-                }
-            ],
-            "color": [
-                {
-                    "regex": "(^| )(_)(?= |$)",
-                    "token": [
-                        "text",
-                        "invalid"
-                    ],
-                    "next": "color"
-                },
-                {
-                    "regex": "_\\?_",
-                    "token": "invalid",
-                    "next": "color"
-                },
-                {
-                    "regex": "#.*$",
-                    "token": "comment",
-                    "next": "start"
-                },
-                {
-                    "regex": "(^|$)",
-                    "token": [
-                        "text"
-                    ],
-                    "next": "start"
-                },
-                {
-                    "regex": "(__black__|__blue__|__brown__|__gray__|__green__|__orange__|__pink__|__purple__|__red__|__white__|__yellow__)",
                     "token": [
                         "text"
                     ]
