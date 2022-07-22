@@ -42,7 +42,7 @@
                 <div class="flex flex-col w-full lg:w-1/2">
                     <h3 class="text-center mt-0 mb-4">{{ _('adventure') }}</h3>
                     <textarea id="custom_adventure_content" class="block appearance-none w-full h-96 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 rounded">{% if adventure.content|length > 0 %}{{ adventure.content }}{% else %}{{_('template_code')}}{% endif %}</textarea>
-                    <div class="my-2 flex flex-row items-center text-center border-red-500 border p-4 rounded-lg">
+                    <div class="my-2 flex flex-row items-center text-center border-gray-500 border p-4 rounded-lg">
                         <input type="checkbox" name="agree_public" id="agree_public" class="mr-4" {% if adventure.public %}checked{% endif %}>
                         <label for="agree_public" class="text-sm italic w-full">{{_('adventure_terms')}}</label>
                     </div>
