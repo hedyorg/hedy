@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-07-21 13:55+0200\n"
+"POT-Creation-Date: 2022-07-21 11:34+0200\n"
 "PO-Revision-Date: 2022-07-19 17:21+0000\n"
 "Last-Translator: Felienne Hermans <felienne@gmail.com>\n"
 "Language: nl\n"
@@ -64,7 +64,7 @@ msgid "level_not_class"
 msgstr "Je zit in een klas waar dit level nog niet beschikbaar is gemaakt"
 
 #: app.py:933 website/teacher.py:421 website/teacher.py:439
-#: website/teacher.py:483 website/teacher.py:526
+#: website/teacher.py:468 website/teacher.py:499
 msgid "no_such_adventure"
 msgstr "Dit avontuur bestaat niet!"
 
@@ -346,7 +346,7 @@ msgstr "Dit is geen geldige tutorial stap, probeer het opnieuw."
 #: website/quiz.py:43 website/quiz.py:69 website/teacher.py:88
 #: website/teacher.py:123 website/teacher.py:195 website/teacher.py:251
 #: website/teacher.py:298 website/teacher.py:339 website/teacher.py:377
-#: website/teacher.py:463 website/teacher.py:549
+#: website/teacher.py:450 website/teacher.py:522
 msgid "ajax_error"
 msgstr "Er is een fout opgetreden, probeer het nog eens."
 
@@ -680,11 +680,11 @@ msgstr "Hedy logo"
 msgid "back_to_class"
 msgstr "Ga terug naar klas"
 
-#: templates/class-overview.html:14 templates/for-teachers.html:35
+#: templates/class-overview.html:14 templates/for-teachers.html:39
 msgid "class_name_prompt"
 msgstr "Vul de naam in van de klas"
 
-#: templates/class-overview.html:20 templates/class-overview.html:71
+#: templates/class-overview.html:20 templates/class-overview.html:70
 #: templates/create-accounts.html:16 templates/highscores.html:37
 #: templates/login.html:10 templates/profile.html:89 templates/recover.html:9
 #: templates/signup.html:10
@@ -712,9 +712,9 @@ msgstr "Programma's"
 msgid "password"
 msgstr "Wachtwoord"
 
-#: templates/class-overview.html:26 templates/class-overview.html:74
-#: templates/customize-adventure.html:52 templates/for-teachers.html:46
-#: templates/for-teachers.html:56
+#: templates/class-overview.html:26 templates/class-overview.html:73
+#: templates/customize-adventure.html:52 templates/for-teachers.html:24
+#: templates/for-teachers.html:52
 msgid "remove"
 msgstr "Verwijder"
 
@@ -750,56 +750,48 @@ msgstr "Klas statistieken"
 msgid "class_logs"
 msgstr "Logs"
 
-#: templates/class-overview.html:52 templates/customize-adventure.html:74
+#: templates/class-overview.html:52 templates/customize-adventure.html:59
 msgid "back_to_teachers_page"
 msgstr "Terug naar lerarenpagina"
 
-#: templates/class-overview.html:53
-msgid "delete_class_prompt"
-msgstr "Weet je zeker dat je deze klas wilt verwijderen?"
-
-#: templates/class-overview.html:53
-msgid "delete_class"
-msgstr "Klas permanent verwijderen"
-
-#: templates/class-overview.html:57
+#: templates/class-overview.html:56
 #, fuzzy
 msgid "add_students_options"
 msgstr "Maak leerling accounts"
 
-#: templates/class-overview.html:59
+#: templates/class-overview.html:58
 msgid "copy_link_success"
 msgstr "Inschrijflink succesvol gekopieerd naar klembord"
 
-#: templates/class-overview.html:59
+#: templates/class-overview.html:58
 msgid "copy_join_link"
 msgstr "Kopieer inschrijflink"
 
-#: templates/class-overview.html:60
+#: templates/class-overview.html:59
 msgid "invite_prompt"
 msgstr "Vul een gebruikersnaam in"
 
-#: templates/class-overview.html:60
+#: templates/class-overview.html:59
 msgid "invite_by_username"
 msgstr "Uitnodigen met een gebruikersnaam"
 
-#: templates/class-overview.html:61 templates/create-accounts.html:45
+#: templates/class-overview.html:60 templates/create-accounts.html:45
 msgid "create_accounts"
 msgstr "Accounts aanmaken"
 
-#: templates/class-overview.html:66
+#: templates/class-overview.html:65
 msgid "pending_invites"
 msgstr "Openstaande uitnodigingen"
 
-#: templates/class-overview.html:72
+#: templates/class-overview.html:71
 msgid "invite_date"
 msgstr "Uitnodigingsdatum"
 
-#: templates/class-overview.html:73
+#: templates/class-overview.html:72
 msgid "expiration_date"
 msgstr "Vervaldatum"
 
-#: templates/class-overview.html:83 templates/profile.html:16
+#: templates/class-overview.html:82 templates/profile.html:16
 msgid "delete_invite_prompt"
 msgstr "Weet je zeker dat je deze uitnodiging wilt verwijderen?"
 
@@ -892,13 +884,13 @@ msgid "general_settings"
 msgstr "Algemene instellingen"
 
 #: templates/customize-adventure.html:12 templates/for-teachers.html:20
-#: templates/for-teachers.html:42
+#: templates/for-teachers.html:47
 msgid "name"
 msgstr "Naam"
 
 #: templates/customize-adventure.html:16 templates/customize-adventure.html:18
 #: templates/explore.html:28 templates/explore.html:57
-#: templates/explore.html:85 templates/for-teachers.html:43
+#: templates/explore.html:85 templates/for-teachers.html:48
 #: templates/programs.html:12 templates/programs.html:37
 #: templates/programs.html:45
 msgid "level"
@@ -962,13 +954,9 @@ msgstr "Voorbeeld"
 msgid "save"
 msgstr "Opslaan"
 
-#: templates/customize-adventure.html:52 templates/for-teachers.html:56
+#: templates/customize-adventure.html:52 templates/for-teachers.html:63
 msgid "delete_adventure_prompt"
 msgstr "Weet je zeker dat je dit avontuur wilt verwijderen?"
-
-#: templates/customize-adventure.html:58
-msgid "directly_add_adventure_to_classes"
-msgstr "Wil je dit avontuur gelijk toevoegen aan een van jouw klassen?"
 
 #: templates/customize-class.html:7
 msgid "customize_class_exp_1"
@@ -1152,31 +1140,40 @@ msgstr "Mijn klassen"
 msgid "students"
 msgstr "Leerlingen"
 
-#: templates/for-teachers.html:35
-msgid "create_class"
-msgstr "Maak een klas aan"
-
-#: templates/for-teachers.html:38
-msgid "my_adventures"
-msgstr "Mijn avonturen"
-
-#: templates/for-teachers.html:44
-msgid "last_update"
-msgstr "Laatste update"
-
-#: templates/for-teachers.html:45 templates/for-teachers.html:55
+#: templates/for-teachers.html:23 templates/for-teachers.html:32
+#: templates/for-teachers.html:50 templates/for-teachers.html:61
 msgid "view"
 msgstr "Bekijk"
 
-#: templates/for-teachers.html:62
+#: templates/for-teachers.html:33
+msgid "delete_class_prompt"
+msgstr "Weet je zeker dat je deze klas wilt verwijderen?"
+
+#: templates/for-teachers.html:39
+msgid "create_class"
+msgstr "Maak een klas aan"
+
+#: templates/for-teachers.html:42
+msgid "my_adventures"
+msgstr "Mijn avonturen"
+
+#: templates/for-teachers.html:49
+msgid "last_update"
+msgstr "Laatste update"
+
+#: templates/for-teachers.html:51
+msgid "edit"
+msgstr "Bewerk"
+
+#: templates/for-teachers.html:69
 msgid "adventure_prompt"
 msgstr "Geef je nieuwe avontuur een naam"
 
-#: templates/for-teachers.html:62 website/teacher.py:544
+#: templates/for-teachers.html:69 website/teacher.py:517
 msgid "create_adventure"
 msgstr "Maak nieuw avontuur"
 
-#: templates/for-teachers.html:120
+#: templates/for-teachers.html:127
 msgid "teacher_welcome"
 msgstr ""
 "Welkom bij Hedy! Jouw account is omgezet naar een leerkrachtenaccount. Je"
@@ -2132,7 +2129,7 @@ msgstr "Programma wordt niet meer gedeeld."
 msgid "favourite_success"
 msgstr "Je programma is ingesteld als favoriet."
 
-#: website/quiz.py:45 website/quiz.py:71 website/teacher.py:469
+#: website/quiz.py:45 website/quiz.py:71 website/teacher.py:456
 msgid "level_invalid"
 msgstr "Dit Hedy level is ongeldig."
 
@@ -2196,7 +2193,7 @@ msgstr "Je hebt geen klasnaam ingevuld!"
 msgid "class_name_duplicate"
 msgstr "Je hebt al een klas met deze naam."
 
-#: website/teacher.py:162 website/teacher.py:178 website/teacher.py:576
+#: website/teacher.py:162 website/teacher.py:178 website/teacher.py:549
 msgid "invalid_class_link"
 msgstr "Ongeldige klassenlink."
 
@@ -2249,7 +2246,7 @@ msgid "accounts_created"
 msgstr "Account succesvol aangemaakt."
 
 #: website/teacher.py:418 website/teacher.py:423 website/teacher.py:436
-#: website/teacher.py:480 website/teacher.py:523
+#: website/teacher.py:465 website/teacher.py:496
 msgid "retrieve_adventure_error"
 msgstr "Jij mag dit avontuur niet bekijken!"
 
@@ -2257,49 +2254,45 @@ msgstr "Jij mag dit avontuur niet bekijken!"
 msgid "title_view-adventure"
 msgstr "Hedy - Avontuur bekijken"
 
-#: website/teacher.py:453
+#: website/teacher.py:441
 msgid "title_customize-adventure"
 msgstr "Hedy - Avontuur personaliseren"
 
-#: website/teacher.py:465
+#: website/teacher.py:452
 msgid "adventure_id_invalid"
 msgstr "Dit avontuur id is ongeldig."
 
-#: website/teacher.py:467 website/teacher.py:551
+#: website/teacher.py:454 website/teacher.py:524
 msgid "adventure_name_invalid"
 msgstr "Deze avontuur naam is ongeldig."
 
-#: website/teacher.py:471
+#: website/teacher.py:458
 msgid "content_invalid"
 msgstr "Dit avontuur is ongeldig."
 
-#: website/teacher.py:473
+#: website/teacher.py:460
 msgid "adventure_length"
 msgstr "Jouw avontuur moet minimaal 20 karakters zijn."
 
-#: website/teacher.py:475
+#: website/teacher.py:462
 msgid "public_invalid"
 msgstr "Deze waarde voor het beschikbaar maken van je avontuur is ongeldig"
 
-#: website/teacher.py:477
-msgid "classes_invalid"
-msgstr ""
-
-#: website/teacher.py:488 website/teacher.py:558
+#: website/teacher.py:473 website/teacher.py:531
 msgid "adventure_duplicate"
 msgstr "Je hebt al een avontuur met deze naam."
 
-#: website/teacher.py:493 website/teacher.py:537
+#: website/teacher.py:478 website/teacher.py:510
 msgid "something_went_wrong_keyword_parsing"
 msgstr ""
 "Er zit een foutje in jouw avontuur, zijn alle commando's goed ingesloten "
 "met { }?"
 
-#: website/teacher.py:517
+#: website/teacher.py:490
 msgid "adventure_updated"
 msgstr "Jouw avontuur is bijgewerkt!"
 
-#: website/teacher.py:553
+#: website/teacher.py:526
 msgid "adventure_empty"
 msgstr "Je hebt geen avonturen naam ingevuld!"
 
@@ -2320,4 +2313,7 @@ msgstr "Je hebt geen avonturen naam ingevuld!"
 
 #~ msgid "hello_world_snippet"
 #~ msgstr "print Hallo wereld!"
+
+#~ msgid "delete_class"
+#~ msgstr "Klas permanent verwijderen"
 

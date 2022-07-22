@@ -63,9 +63,9 @@ export function delete_class(id: string, prompt: string) {
       dataType: 'json'
     }).done(function(response) {
       if (response.achievement) {
-        showAchievements(response.achievement, false, '/for-teachers');
+        showAchievements(response.achievement, true, '');
       } else {
-        window.location.pathname = '/for-teachers';
+        location.reload();
       }
     }).fail(function(err) {
       modal.alert(err.responseText, 3000, true);

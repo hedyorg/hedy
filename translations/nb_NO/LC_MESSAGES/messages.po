@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-21 13:55+0200\n"
+"POT-Creation-Date: 2022-07-21 11:34+0200\n"
 "PO-Revision-Date: 2022-07-06 09:05+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language: nb_NO\n"
@@ -60,7 +60,7 @@ msgid "level_not_class"
 msgstr "Klassen din har ikke tilgang til dette nivået enda"
 
 #: app.py:933 website/teacher.py:421 website/teacher.py:439
-#: website/teacher.py:483 website/teacher.py:526
+#: website/teacher.py:468 website/teacher.py:499
 msgid "no_such_adventure"
 msgstr "Dette eventyret eksisterer ikke!"
 
@@ -350,7 +350,7 @@ msgstr ""
 #: website/quiz.py:43 website/quiz.py:69 website/teacher.py:88
 #: website/teacher.py:123 website/teacher.py:195 website/teacher.py:251
 #: website/teacher.py:298 website/teacher.py:339 website/teacher.py:377
-#: website/teacher.py:463 website/teacher.py:549
+#: website/teacher.py:450 website/teacher.py:522
 msgid "ajax_error"
 msgstr "Det skjedde noe feil, vennligst prøv igjen."
 
@@ -684,11 +684,11 @@ msgstr "Hedy logo"
 msgid "back_to_class"
 msgstr "Gå tilbake til klassen"
 
-#: templates/class-overview.html:14 templates/for-teachers.html:35
+#: templates/class-overview.html:14 templates/for-teachers.html:39
 msgid "class_name_prompt"
 msgstr "Vennligst oppgi navnet på klassen"
 
-#: templates/class-overview.html:20 templates/class-overview.html:71
+#: templates/class-overview.html:20 templates/class-overview.html:70
 #: templates/create-accounts.html:16 templates/highscores.html:37
 #: templates/login.html:10 templates/profile.html:89 templates/recover.html:9
 #: templates/signup.html:10
@@ -716,9 +716,9 @@ msgstr "Program"
 msgid "password"
 msgstr "Passord"
 
-#: templates/class-overview.html:26 templates/class-overview.html:74
-#: templates/customize-adventure.html:52 templates/for-teachers.html:46
-#: templates/for-teachers.html:56
+#: templates/class-overview.html:26 templates/class-overview.html:73
+#: templates/customize-adventure.html:52 templates/for-teachers.html:24
+#: templates/for-teachers.html:52
 msgid "remove"
 msgstr "Fjern"
 
@@ -756,59 +756,51 @@ msgstr "Statistikk over klassen"
 msgid "class_logs"
 msgstr "Forrige innlogging"
 
-#: templates/class-overview.html:52 templates/customize-adventure.html:74
+#: templates/class-overview.html:52 templates/customize-adventure.html:59
 msgid "back_to_teachers_page"
 msgstr "Gå tilbake til lærersiden"
 
-#: templates/class-overview.html:53
-msgid "delete_class_prompt"
-msgstr "Er du sikker på at du vil slette klassen?"
-
-#: templates/class-overview.html:53
-msgid "delete_class"
-msgstr "Slett klassen for alltid"
-
-#: templates/class-overview.html:57
+#: templates/class-overview.html:56
 #, fuzzy
 msgid "add_students_options"
 msgstr "Opprett kontoer til elever"
 
-#: templates/class-overview.html:59
+#: templates/class-overview.html:58
 #, fuzzy
 msgid "copy_link_success"
 msgstr "Kopier lenken for å dele"
 
-#: templates/class-overview.html:59
+#: templates/class-overview.html:58
 #, fuzzy
 msgid "copy_join_link"
 msgstr "Please copy and paste this link into a new tab:"
 
-#: templates/class-overview.html:60
+#: templates/class-overview.html:59
 msgid "invite_prompt"
 msgstr "Oppgi et brukernavn"
 
-#: templates/class-overview.html:60
+#: templates/class-overview.html:59
 #, fuzzy
 msgid "invite_by_username"
 msgstr "Alle brukernavnene må være unike."
 
-#: templates/class-overview.html:61 templates/create-accounts.html:45
+#: templates/class-overview.html:60 templates/create-accounts.html:45
 msgid "create_accounts"
 msgstr "Opprett flere kontoer"
 
-#: templates/class-overview.html:66
+#: templates/class-overview.html:65
 msgid "pending_invites"
 msgstr "Ubesvarte invitasjoner"
 
-#: templates/class-overview.html:72
+#: templates/class-overview.html:71
 msgid "invite_date"
 msgstr "Invitasjonsdato"
 
-#: templates/class-overview.html:73
+#: templates/class-overview.html:72
 msgid "expiration_date"
 msgstr "Utløpsdato"
 
-#: templates/class-overview.html:83 templates/profile.html:16
+#: templates/class-overview.html:82 templates/profile.html:16
 msgid "delete_invite_prompt"
 msgstr "Er du sikker på at du vil fjerne denne klasseinvitasjonen?"
 
@@ -902,13 +894,13 @@ msgid "general_settings"
 msgstr "Generelle innstillinger"
 
 #: templates/customize-adventure.html:12 templates/for-teachers.html:20
-#: templates/for-teachers.html:42
+#: templates/for-teachers.html:47
 msgid "name"
 msgstr "Navn"
 
 #: templates/customize-adventure.html:16 templates/customize-adventure.html:18
 #: templates/explore.html:28 templates/explore.html:57
-#: templates/explore.html:85 templates/for-teachers.html:43
+#: templates/explore.html:85 templates/for-teachers.html:48
 #: templates/programs.html:12 templates/programs.html:37
 #: templates/programs.html:45
 msgid "level"
@@ -971,13 +963,9 @@ msgstr "Forhåndsvis"
 msgid "save"
 msgstr "Lagre"
 
-#: templates/customize-adventure.html:52 templates/for-teachers.html:56
+#: templates/customize-adventure.html:52 templates/for-teachers.html:63
 msgid "delete_adventure_prompt"
 msgstr "Er du sikker på at du vil fjerne dette eventyret?"
-
-#: templates/customize-adventure.html:58
-msgid "directly_add_adventure_to_classes"
-msgstr ""
 
 #: templates/customize-class.html:7
 msgid "customize_class_exp_1"
@@ -1168,31 +1156,40 @@ msgstr "Mine klasser"
 msgid "students"
 msgstr "elever"
 
-#: templates/for-teachers.html:35
-msgid "create_class"
-msgstr "Opprett en ny klasse"
-
-#: templates/for-teachers.html:38
-msgid "my_adventures"
-msgstr "Mine eventyr"
-
-#: templates/for-teachers.html:44
-msgid "last_update"
-msgstr "Sist oppdatert"
-
-#: templates/for-teachers.html:45 templates/for-teachers.html:55
+#: templates/for-teachers.html:23 templates/for-teachers.html:32
+#: templates/for-teachers.html:50 templates/for-teachers.html:61
 msgid "view"
 msgstr "Se"
 
-#: templates/for-teachers.html:62
+#: templates/for-teachers.html:33
+msgid "delete_class_prompt"
+msgstr "Er du sikker på at du vil slette klassen?"
+
+#: templates/for-teachers.html:39
+msgid "create_class"
+msgstr "Opprett en ny klasse"
+
+#: templates/for-teachers.html:42
+msgid "my_adventures"
+msgstr "Mine eventyr"
+
+#: templates/for-teachers.html:49
+msgid "last_update"
+msgstr "Sist oppdatert"
+
+#: templates/for-teachers.html:51
+msgid "edit"
+msgstr ""
+
+#: templates/for-teachers.html:69
 msgid "adventure_prompt"
 msgstr "Vennligst skriv inn navnet på eventyret"
 
-#: templates/for-teachers.html:62 website/teacher.py:544
+#: templates/for-teachers.html:69 website/teacher.py:517
 msgid "create_adventure"
 msgstr "Opprett eventyr"
 
-#: templates/for-teachers.html:120
+#: templates/for-teachers.html:127
 msgid "teacher_welcome"
 msgstr ""
 "Velkommen til Hedy! Du er nå den stolte eier av en lærerkonto som gir deg"
@@ -2193,7 +2190,7 @@ msgstr "Programmet er ikke lengre delt."
 msgid "favourite_success"
 msgstr "Programmet er nå ditt favorittprogram."
 
-#: website/quiz.py:45 website/quiz.py:71 website/teacher.py:469
+#: website/quiz.py:45 website/quiz.py:71 website/teacher.py:456
 msgid "level_invalid"
 msgstr "Dette Hedynivået er ugyldig."
 
@@ -2257,7 +2254,7 @@ msgstr "Du skrev ikke inn et klassenavn!"
 msgid "class_name_duplicate"
 msgstr "Du har allerede en klasse med dette navnet."
 
-#: website/teacher.py:162 website/teacher.py:178 website/teacher.py:576
+#: website/teacher.py:162 website/teacher.py:178 website/teacher.py:549
 msgid "invalid_class_link"
 msgstr "Ugyldig lenke for å bli med i klassen."
 
@@ -2310,7 +2307,7 @@ msgid "accounts_created"
 msgstr "Kontoene ble opprettet."
 
 #: website/teacher.py:418 website/teacher.py:423 website/teacher.py:436
-#: website/teacher.py:480 website/teacher.py:523
+#: website/teacher.py:465 website/teacher.py:496
 msgid "retrieve_adventure_error"
 msgstr "Du har ikke lov til å se dette eventyret!"
 
@@ -2318,47 +2315,43 @@ msgstr "Du har ikke lov til å se dette eventyret!"
 msgid "title_view-adventure"
 msgstr "Hedy - Se eventyr"
 
-#: website/teacher.py:453
+#: website/teacher.py:441
 msgid "title_customize-adventure"
 msgstr "Hedy - Tilpass eventyr"
 
-#: website/teacher.py:465
+#: website/teacher.py:452
 msgid "adventure_id_invalid"
 msgstr "Eventyr IDen er ugyldig."
 
-#: website/teacher.py:467 website/teacher.py:551
+#: website/teacher.py:454 website/teacher.py:524
 msgid "adventure_name_invalid"
 msgstr "Eventyrnavnet er ugyldig."
 
-#: website/teacher.py:471
+#: website/teacher.py:458
 msgid "content_invalid"
 msgstr "Eventyret er ugyldig."
 
-#: website/teacher.py:473
+#: website/teacher.py:460
 msgid "adventure_length"
 msgstr "Eventyret ditt må være minst 20 tegn."
 
-#: website/teacher.py:475
+#: website/teacher.py:462
 msgid "public_invalid"
 msgstr "Dette avtale valget er ugyldig"
 
-#: website/teacher.py:477
-msgid "classes_invalid"
-msgstr ""
-
-#: website/teacher.py:488 website/teacher.py:558
+#: website/teacher.py:473 website/teacher.py:531
 msgid "adventure_duplicate"
 msgstr "Du har allerede et eventyr med dette navnet."
 
-#: website/teacher.py:493 website/teacher.py:537
+#: website/teacher.py:478 website/teacher.py:510
 msgid "something_went_wrong_keyword_parsing"
 msgstr ""
 
-#: website/teacher.py:517
+#: website/teacher.py:490
 msgid "adventure_updated"
 msgstr "Eventyret har blitt oppdatert!"
 
-#: website/teacher.py:553
+#: website/teacher.py:526
 msgid "adventure_empty"
 msgstr "Du skrev ikke noe navn på eventyret!"
 
@@ -2537,4 +2530,7 @@ msgstr "Du skrev ikke noe navn på eventyret!"
 
 #~ msgid "hello_world_snippet"
 #~ msgstr "Skjul hjelpeark"
+
+#~ msgid "delete_class"
+#~ msgstr "Slett klassen for alltid"
 

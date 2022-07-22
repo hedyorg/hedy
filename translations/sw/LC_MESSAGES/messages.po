@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-21 13:55+0200\n"
+"POT-Creation-Date: 2022-07-21 11:34+0200\n"
 "PO-Revision-Date: 2022-07-06 09:05+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language: sw\n"
@@ -70,7 +70,7 @@ msgid "level_not_class"
 msgstr "You're in a class where this level has not been made available yet"
 
 #: app.py:933 website/teacher.py:421 website/teacher.py:439
-#: website/teacher.py:483 website/teacher.py:526
+#: website/teacher.py:468 website/teacher.py:499
 #, fuzzy
 msgid "no_such_adventure"
 msgstr "This adventure doesn't exist!"
@@ -373,7 +373,7 @@ msgstr ""
 #: website/quiz.py:43 website/quiz.py:69 website/teacher.py:88
 #: website/teacher.py:123 website/teacher.py:195 website/teacher.py:251
 #: website/teacher.py:298 website/teacher.py:339 website/teacher.py:377
-#: website/teacher.py:463 website/teacher.py:549
+#: website/teacher.py:450 website/teacher.py:522
 msgid "ajax_error"
 msgstr "Kulikuwa na hitilafu, tafadhali jaribu tena."
 
@@ -750,12 +750,12 @@ msgstr "Hedy logo"
 msgid "back_to_class"
 msgstr "Go back to class"
 
-#: templates/class-overview.html:14 templates/for-teachers.html:35
+#: templates/class-overview.html:14 templates/for-teachers.html:39
 #, fuzzy
 msgid "class_name_prompt"
 msgstr "Please enter the name of the class"
 
-#: templates/class-overview.html:20 templates/class-overview.html:71
+#: templates/class-overview.html:20 templates/class-overview.html:70
 #: templates/create-accounts.html:16 templates/highscores.html:37
 #: templates/login.html:10 templates/profile.html:89 templates/recover.html:9
 #: templates/signup.html:10
@@ -787,9 +787,9 @@ msgstr "Programs"
 msgid "password"
 msgstr "Nenosiri"
 
-#: templates/class-overview.html:26 templates/class-overview.html:74
-#: templates/customize-adventure.html:52 templates/for-teachers.html:46
-#: templates/for-teachers.html:56
+#: templates/class-overview.html:26 templates/class-overview.html:73
+#: templates/customize-adventure.html:52 templates/for-teachers.html:24
+#: templates/for-teachers.html:52
 #, fuzzy
 msgid "remove"
 msgstr "Remove"
@@ -834,67 +834,57 @@ msgstr "Show class statistics"
 msgid "class_logs"
 msgstr "Last login"
 
-#: templates/class-overview.html:52 templates/customize-adventure.html:74
+#: templates/class-overview.html:52 templates/customize-adventure.html:59
 #, fuzzy
 msgid "back_to_teachers_page"
 msgstr "Go back to teachers page"
 
-#: templates/class-overview.html:53
-#, fuzzy
-msgid "delete_class_prompt"
-msgstr "Are you sure you want to delete the class?"
-
-#: templates/class-overview.html:53
-#, fuzzy
-msgid "delete_class"
-msgstr "Delete class permanently"
-
-#: templates/class-overview.html:57
+#: templates/class-overview.html:56
 #, fuzzy
 msgid "add_students_options"
 msgstr "Create student accounts"
 
-#: templates/class-overview.html:59
+#: templates/class-overview.html:58
 #, fuzzy
 msgid "copy_link_success"
 msgstr "Copy link to share"
 
-#: templates/class-overview.html:59
+#: templates/class-overview.html:58
 #, fuzzy
 msgid "copy_join_link"
 msgstr "Please copy and paste this link into a new tab:"
 
-#: templates/class-overview.html:60
+#: templates/class-overview.html:59
 #, fuzzy
 msgid "invite_prompt"
 msgstr "Enter a username"
 
-#: templates/class-overview.html:60
+#: templates/class-overview.html:59
 #, fuzzy
 msgid "invite_by_username"
 msgstr "All usernames need to be unique."
 
-#: templates/class-overview.html:61 templates/create-accounts.html:45
+#: templates/class-overview.html:60 templates/create-accounts.html:45
 #, fuzzy
 msgid "create_accounts"
 msgstr "Create multiple accounts"
 
-#: templates/class-overview.html:66
+#: templates/class-overview.html:65
 #, fuzzy
 msgid "pending_invites"
 msgstr "Pending invites"
 
-#: templates/class-overview.html:72
+#: templates/class-overview.html:71
 #, fuzzy
 msgid "invite_date"
 msgstr "Invite date"
 
-#: templates/class-overview.html:73
+#: templates/class-overview.html:72
 #, fuzzy
 msgid "expiration_date"
 msgstr "Expiration date"
 
-#: templates/class-overview.html:83 templates/profile.html:16
+#: templates/class-overview.html:82 templates/profile.html:16
 #, fuzzy
 msgid "delete_invite_prompt"
 msgstr "Are you sure you want to remove this class invitation?"
@@ -1003,14 +993,14 @@ msgid "general_settings"
 msgstr "General settings"
 
 #: templates/customize-adventure.html:12 templates/for-teachers.html:20
-#: templates/for-teachers.html:42
+#: templates/for-teachers.html:47
 #, fuzzy
 msgid "name"
 msgstr "Name"
 
 #: templates/customize-adventure.html:16 templates/customize-adventure.html:18
 #: templates/explore.html:28 templates/explore.html:57
-#: templates/explore.html:85 templates/for-teachers.html:43
+#: templates/explore.html:85 templates/for-teachers.html:48
 #: templates/programs.html:12 templates/programs.html:37
 #: templates/programs.html:45
 msgid "level"
@@ -1081,14 +1071,10 @@ msgstr "Preview"
 msgid "save"
 msgstr "Save"
 
-#: templates/customize-adventure.html:52 templates/for-teachers.html:56
+#: templates/customize-adventure.html:52 templates/for-teachers.html:63
 #, fuzzy
 msgid "delete_adventure_prompt"
 msgstr "Are you sure you want to remove this adventure?"
-
-#: templates/customize-adventure.html:58
-msgid "directly_add_adventure_to_classes"
-msgstr ""
 
 #: templates/customize-class.html:7
 #, fuzzy
@@ -1290,37 +1276,47 @@ msgstr "My classes"
 msgid "students"
 msgstr "students"
 
-#: templates/for-teachers.html:35
-#, fuzzy
-msgid "create_class"
-msgstr "Create a new class"
-
-#: templates/for-teachers.html:38
-#, fuzzy
-msgid "my_adventures"
-msgstr "My adventures"
-
-#: templates/for-teachers.html:44
-#, fuzzy
-msgid "last_update"
-msgstr "Last update"
-
-#: templates/for-teachers.html:45 templates/for-teachers.html:55
+#: templates/for-teachers.html:23 templates/for-teachers.html:32
+#: templates/for-teachers.html:50 templates/for-teachers.html:61
 #, fuzzy
 msgid "view"
 msgstr "View"
 
-#: templates/for-teachers.html:62
+#: templates/for-teachers.html:33
+#, fuzzy
+msgid "delete_class_prompt"
+msgstr "Are you sure you want to delete the class?"
+
+#: templates/for-teachers.html:39
+#, fuzzy
+msgid "create_class"
+msgstr "Create a new class"
+
+#: templates/for-teachers.html:42
+#, fuzzy
+msgid "my_adventures"
+msgstr "My adventures"
+
+#: templates/for-teachers.html:49
+#, fuzzy
+msgid "last_update"
+msgstr "Last update"
+
+#: templates/for-teachers.html:51
+msgid "edit"
+msgstr ""
+
+#: templates/for-teachers.html:69
 #, fuzzy
 msgid "adventure_prompt"
 msgstr "Please enter the name of the adventure"
 
-#: templates/for-teachers.html:62 website/teacher.py:544
+#: templates/for-teachers.html:69 website/teacher.py:517
 #, fuzzy
 msgid "create_adventure"
 msgstr "Create adventure"
 
-#: templates/for-teachers.html:120
+#: templates/for-teachers.html:127
 #, fuzzy
 msgid "teacher_welcome"
 msgstr ""
@@ -2417,7 +2413,7 @@ msgstr "Program unshared successfully."
 msgid "favourite_success"
 msgstr "Your program is set as favourite."
 
-#: website/quiz.py:45 website/quiz.py:71 website/teacher.py:469
+#: website/quiz.py:45 website/quiz.py:71 website/teacher.py:456
 #, fuzzy
 msgid "level_invalid"
 msgstr "This Hedy level in invalid."
@@ -2490,7 +2486,7 @@ msgstr "You didn't enter a class name!"
 msgid "class_name_duplicate"
 msgstr "You already have a class with this name."
 
-#: website/teacher.py:162 website/teacher.py:178 website/teacher.py:576
+#: website/teacher.py:162 website/teacher.py:178 website/teacher.py:549
 #, fuzzy
 msgid "invalid_class_link"
 msgstr "Invalid link for joining the class."
@@ -2556,7 +2552,7 @@ msgid "accounts_created"
 msgstr "Accounts where successfully created."
 
 #: website/teacher.py:418 website/teacher.py:423 website/teacher.py:436
-#: website/teacher.py:480 website/teacher.py:523
+#: website/teacher.py:465 website/teacher.py:496
 #, fuzzy
 msgid "retrieve_adventure_error"
 msgstr "You're not allowed to view this adventure!"
@@ -2566,55 +2562,51 @@ msgstr "You're not allowed to view this adventure!"
 msgid "title_view-adventure"
 msgstr "Hedy - View adventure"
 
-#: website/teacher.py:453
+#: website/teacher.py:441
 #, fuzzy
 msgid "title_customize-adventure"
 msgstr "Hedy - Customize adventure"
 
-#: website/teacher.py:465
+#: website/teacher.py:452
 #, fuzzy
 msgid "adventure_id_invalid"
 msgstr "This adventure id is invalid."
 
-#: website/teacher.py:467 website/teacher.py:551
+#: website/teacher.py:454 website/teacher.py:524
 #, fuzzy
 msgid "adventure_name_invalid"
 msgstr "This adventure name is invalid."
 
-#: website/teacher.py:471
+#: website/teacher.py:458
 #, fuzzy
 msgid "content_invalid"
 msgstr "This adventure is invalid."
 
-#: website/teacher.py:473
+#: website/teacher.py:460
 #, fuzzy
 msgid "adventure_length"
 msgstr "Your adventure has to be at least 20 characters."
 
-#: website/teacher.py:475
+#: website/teacher.py:462
 #, fuzzy
 msgid "public_invalid"
 msgstr "This agreement selection is invalid"
 
-#: website/teacher.py:477
-msgid "classes_invalid"
-msgstr ""
-
-#: website/teacher.py:488 website/teacher.py:558
+#: website/teacher.py:473 website/teacher.py:531
 #, fuzzy
 msgid "adventure_duplicate"
 msgstr "You already have an adventure with this name."
 
-#: website/teacher.py:493 website/teacher.py:537
+#: website/teacher.py:478 website/teacher.py:510
 msgid "something_went_wrong_keyword_parsing"
 msgstr ""
 
-#: website/teacher.py:517
+#: website/teacher.py:490
 #, fuzzy
 msgid "adventure_updated"
 msgstr "The adventure has been updated!"
 
-#: website/teacher.py:553
+#: website/teacher.py:526
 #, fuzzy
 msgid "adventure_empty"
 msgstr "You didn't enter an adventure name!"
@@ -2794,4 +2786,7 @@ msgstr "You didn't enter an adventure name!"
 
 #~ msgid "hello_world_snippet"
 #~ msgstr "Hide cheatsheet"
+
+#~ msgid "delete_class"
+#~ msgstr "Delete class permanently"
 
