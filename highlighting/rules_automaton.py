@@ -36,10 +36,35 @@ def rule_level1():
                     K("right",True) + "|" +\
                     K("left",True) +\
                 ")",
-            'token': ["keyword"],
+            'token': [TOKEN_CONSTANT],
+        },{
+            'regex': "(" +\
+                    K("black",True) + "|" +\
+                    K("blue",True) + "|" +\
+                    K("brown",True) + "|" +\
+                    K("gray",True) + "|" +\
+                    K("green",True) + "|" +\
+                    K("orange",True) + "|" +\
+                    K("pink",True) + "|" +\
+                    K("purple",True) + "|" +\
+                    K("red",True) + "|" +\
+                    K("white",True) + "|" +\
+                    K("yellow",True) +\
+                ")",
+            'token': [TOKEN_CONSTANT],
         }]
     })
-
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 def rule_level2() :
     return add_extra_rule({
     "start" : [{
@@ -71,7 +96,22 @@ def rule_level2() :
             'token': ["text",'keyword'],
             'next': 'value',
         }],
-    "value" : []
+    "value" : [{
+            'regex': "(" +\
+                    K("black",True) + "|" +\
+                    K("blue",True) + "|" +\
+                    K("brown",True) + "|" +\
+                    K("gray",True) + "|" +\
+                    K("green",True) + "|" +\
+                    K("orange",True) + "|" +\
+                    K("pink",True) + "|" +\
+                    K("purple",True) + "|" +\
+                    K("red",True) + "|" +\
+                    K("white",True) + "|" +\
+                    K("yellow",True) +\
+                ")",
+            'token': [TOKEN_CONSTANT],
+        }]
     })
 
 def rule_level3():
@@ -121,6 +161,21 @@ def rule_level3():
     },{
         'regex': "," ,
         'token': 'keyword',
+    },{
+        'regex': "(" +\
+                K("black",True) + "|" +\
+                K("blue",True) + "|" +\
+                K("brown",True) + "|" +\
+                K("gray",True) + "|" +\
+                K("green",True) + "|" +\
+                K("orange",True) + "|" +\
+                K("pink",True) + "|" +\
+                K("purple",True) + "|" +\
+                K("red",True) + "|" +\
+                K("white",True) + "|" +\
+                K("yellow",True) +\
+            ")",
+        'token': [TOKEN_CONSTANT],
     }],
     "valueExpr" : [{
         'regex': START_WORD + K("at") + SPACE + K("random") ,
@@ -133,12 +188,42 @@ def rule_level3():
         'regex': START_WORD + K("to_list") ,
         'token': ['text','keyword'],
         'next': 'valueTo',
+    },{
+        'regex': "(" +\
+                K("black",True) + "|" +\
+                K("blue",True) + "|" +\
+                K("brown",True) + "|" +\
+                K("gray",True) + "|" +\
+                K("green",True) + "|" +\
+                K("orange",True) + "|" +\
+                K("pink",True) + "|" +\
+                K("purple",True) + "|" +\
+                K("red",True) + "|" +\
+                K("white",True) + "|" +\
+                K("yellow",True) +\
+            ")",
+        'token': [TOKEN_CONSTANT],
     }],
     "valueTo" : [],
     "valRemove" : [{
         'regex': START_WORD + K("from") ,
         'token': ['text','keyword'],
         'next': 'valueFrom',
+    },{
+        'regex': "(" +\
+                K("black",True) + "|" +\
+                K("blue",True) + "|" +\
+                K("brown",True) + "|" +\
+                K("gray",True) + "|" +\
+                K("green",True) + "|" +\
+                K("orange",True) + "|" +\
+                K("pink",True) + "|" +\
+                K("purple",True) + "|" +\
+                K("red",True) + "|" +\
+                K("white",True) + "|" +\
+                K("yellow",True) +\
+            ")",
+        'token': [TOKEN_CONSTANT],
     }],
     "valueFrom" : [],
     })
@@ -191,6 +276,21 @@ def rule_level4():
     },{
         'regex': "," ,
         'token': 'keyword',
+    },{
+        'regex': "(" +\
+                K("black",True) + "|" +\
+                K("blue",True) + "|" +\
+                K("brown",True) + "|" +\
+                K("gray",True) + "|" +\
+                K("green",True) + "|" +\
+                K("orange",True) + "|" +\
+                K("pink",True) + "|" +\
+                K("purple",True) + "|" +\
+                K("red",True) + "|" +\
+                K("white",True) + "|" +\
+                K("yellow",True) +\
+            ")",
+        'token': [TOKEN_CONSTANT],
     }],
     "valueExpr" : [{
         'regex': START_WORD + K("at") + SPACE + K("random") ,
@@ -219,17 +319,62 @@ def rule_level4():
     },{
         'regex': START_WORD + K("at") ,
         'token': ['text','keyword'],
+    },{
+        'regex': "(" +\
+                K("black",True) + "|" +\
+                K("blue",True) + "|" +\
+                K("brown",True) + "|" +\
+                K("gray",True) + "|" +\
+                K("green",True) + "|" +\
+                K("orange",True) + "|" +\
+                K("pink",True) + "|" +\
+                K("purple",True) + "|" +\
+                K("red",True) + "|" +\
+                K("white",True) + "|" +\
+                K("yellow",True) +\
+            ")",
+        'token': [TOKEN_CONSTANT],
     }],
     "valAdd"    : [{
         'regex': START_WORD + K("to_list") ,
         'token': ['text','keyword'],
         'next': 'valueTo',
+    },{
+        'regex': "(" +\
+                K("black",True) + "|" +\
+                K("blue",True) + "|" +\
+                K("brown",True) + "|" +\
+                K("gray",True) + "|" +\
+                K("green",True) + "|" +\
+                K("orange",True) + "|" +\
+                K("pink",True) + "|" +\
+                K("purple",True) + "|" +\
+                K("red",True) + "|" +\
+                K("white",True) + "|" +\
+                K("yellow",True) +\
+            ")",
+        'token': [TOKEN_CONSTANT],
     }],
     "valueTo" : [],
     "valRemove" : [{
         'regex': START_WORD + K("from") ,
         'token': ['text','keyword'],
         'next': 'valueFrom',
+    },{
+        'regex': "(" +\
+                K("black",True) + "|" +\
+                K("blue",True) + "|" +\
+                K("brown",True) + "|" +\
+                K("gray",True) + "|" +\
+                K("green",True) + "|" +\
+                K("orange",True) + "|" +\
+                K("pink",True) + "|" +\
+                K("purple",True) + "|" +\
+                K("red",True) + "|" +\
+                K("white",True) + "|" +\
+                K("yellow",True) +\
+            ")",
+        'token': [TOKEN_CONSTANT],
     }],
     "valueFrom" : [],
     })
