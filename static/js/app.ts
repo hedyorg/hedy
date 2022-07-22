@@ -516,34 +516,23 @@ function removeBulb(){
  *
  * 'row' and 'col' are 1-based.
  */
-function highlightAceError(editor: AceAjax.Editor, row: number, col?: number, length=1) {
-  // This adds a red cross in the left margin.
-  // Not sure what the "column" argument does here -- it doesn't seem
-  // to make a difference.
-  editor.session.setAnnotations([
-    {
-      row: row - 1,
-      column: (col ?? 1) - 1,
-      text: '',
-      type: 'error',
-    }
-  ]);
-
+function highlightAceError(editor: AceAjax.Editor, row: number, col?: number) {
+  // Set a marker on the error spot, either a fullLine or a text
+  // class defines the related css class for styling; which is fixed in styles.css with Tailwind
   if (col === undefined) {
-    // Higlight entire row
+    // If the is no column, highlight the whole row
     editor.session.addMarker(
       new ace.Range(row - 1, 1, row - 1, 2),
       "editor-error", "fullLine", false
     );
     return;
   }
+  // If we get here we know there is a column -> dynamically get the length of the error string
+  // As we assume the error is supposed to target a specific word we get row[column, whitespace].
+  const length = editor.session.getLine(row -1).slice(col-1).split(/(\s+)/)[0].length;
 
-  // Highlight span
-  editor.session.addMarker(
-    new ace.Range(
-      row - 1, col - 1,
-      row - 1, col - 1 + length,
-    ),
+  // If there is a column, only highlight the relevant text
+  editor.session.addMarker(new ace.Range(row - 1, col - 1, row - 1, col - 1 + length),
     "editor-error", "text", false
   );
 }
