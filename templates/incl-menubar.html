@@ -26,7 +26,7 @@
                   {% if is_teacher %}
                       <li><a class="dropdown-item" href="/for-teachers"><span class="fas fa-chalkboard-teacher ltr:mr-4 rtl:ml-4"></span>{{_('for_teachers')}}</a></li>
                   {% endif %}
-                    <li><a class="dropdown-item" href="#" onclick="hedyApp.auth.logout ();event.preventDefault();"><span class="fas fa-fw fa-sign-out-alt ltr:mr-4 rtl:ml-4"></span>{{_('logout')}}</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="hedyApp.logout();"><span class="fas fa-fw fa-sign-out-alt ltr:mr-4 rtl:ml-4"></span>{{_('logout')}}</a></li>
                 </ul>
             </div>
         </li>

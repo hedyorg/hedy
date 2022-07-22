@@ -24,16 +24,16 @@
                     <div class="border border-black rounded-lg p-4 text-sm">
                         {{_('adventure_exp_1')}}
                         <div class="flex flex-row my-2 items-center">
-                            <pre class="inline-block w-40">&lt;code&gt;print&lt;/code&gt;</pre>
+                            <pre class="inline-block w-64">&lt;code&gt;&#123;{{parse_keyword('print')}}&#125;&lt;/code&gt;</pre>
                             <b class="mx-4">&rarr;</b>
-                            <code class="text-base">print</code>
+                            <code class="text-base">{{parse_keyword('print')}}</code>
                         </div>
                         {{_('adventure_exp_2')}}
                         <div class="flex flex-row items-center">
-                            <pre class="inline-block w-40">&lt;pre&gt;<br>print Hello world!<br>&lt;/pre&gt;</pre>
+                            <pre class="inline-block w-64">&lt;pre&gt;<br>&#123;{{parse_keyword('print')}}&#125; {{_('hello_world')}}<br>&lt;/pre&gt;</pre>
                             <b class="mx-4">&rarr;</b>
                             <div class="turn-pre-into-ace w-64" style="white-space: pre-wrap;">
-                                <pre level="1" class="no-copy-button">{{_('hello_world_snippet')}}</pre>
+                                <pre level="1" class="no-copy-button">{{parse_keyword('print')}} {{_('hello_world')}}</pre>
                             </div>
                         </div>
                         {{_('adventure_exp_3')}}
@@ -42,16 +42,31 @@
                 <div class="flex flex-col w-full lg:w-1/2">
                     <h3 class="text-center mt-0 mb-4">{{ _('adventure') }}</h3>
                     <textarea id="custom_adventure_content" class="block appearance-none w-full h-96 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 rounded">{% if adventure.content|length > 0 %}{{ adventure.content }}{% else %}{{_('template_code')}}{% endif %}</textarea>
-                    <div class="my-2 flex flex-row items-center text-center border-red-500 border p-4 rounded-lg">
+                    <div class="mt-2 mb-0 flex flex-row items-center text-center border-gray-500 border p-4 rounded-lg">
                         <input type="checkbox" name="agree_public" id="agree_public" class="mr-4" {% if adventure.public %}checked{% endif %}>
                         <label for="agree_public" class="text-sm italic w-full">{{_('adventure_terms')}}</label>
                     </div>
-                    <div class="flex flex-row my-2">
-                        <button class="blue-btn" id="preview_adventure_button" onclick="hedyApp.preview_adventure();event.preventDefault();">{{_('preview')}}</button>
-                        <button type="submit" class="green-btn ltr:ml-auto rtl:mr-auto ltr:mr-2 rtl:m1-2">{{_('save')}}</button>
-                        <button type="reset" class="red-btn" onclick="hedyApp.delete_adventure('{{ adventure.id }}', '{{_('delete_adventure_prompt')}}')">{{_('remove')}}</button>
-                    </div>
+                    {% if class_data %}
+                        <div class="flex flex-col items-center">
+                            <h3 class="text-center">{{_('directly_add_adventure_to_classes')}}</h3>
+                            <div class="border-gray-500 border px-4 py-2 rounded-lg">
+                                <div class="flex flex-col items-center gap-2">
+                                    {% for class in class_data %}
+                                        <div class="flex w-full flex-row items-center gap-4 justify-between">
+                                            <label>{{ class.name }}</label>
+                                            <input class="customize_adventure_class_checkbox" type="checkbox" value="{{class.id}}" {% if class.checked %}checked{% endif %}>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
                 </div>
+            </div>
+            <div class="flex flex-row justify-end gap-2 my-4">
+                <button class="blue-btn" id="preview_adventure_button" onclick="hedyApp.preview_adventure();event.preventDefault();">{{_('preview')}}</button>
+                <button type="submit" class="green-btn">{{_('save')}}</button>
+                <button type="reset" class="red-btn" onclick="hedyApp.delete_adventure('{{ adventure.id }}', '{{_('delete_adventure_prompt')}}')">{{_('remove')}}</button>
             </div>
         </form>
     </div>
