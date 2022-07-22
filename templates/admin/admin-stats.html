@@ -1,13 +1,11 @@
 {% extends "auth.html" %}
 
-{% from "stats-shared.html" import insert_log_search, insert_accordion_tab %}
+{% from "stats-shared.html" import insert_accordion_tab %}
 
 {% block main %}
-<div class="flex flex-row mb-4 border-b">
+<div class="flex flex-row items-center justify-between pb-2 border-b">
     <h1>Statistics overview</h1>
-    <div class="ltr:ml-auto rtl:mr-auto">
-        <button type="reset" class="green-btn my-1 mx-2 text-white" onclick="window.open('/admin', '_self');">Return to admin page</button>
-    </div>
+    <button type="reset" class="green-btn" onclick="window.open('/admin', '_self');">Return to admin page</button>
 </div>
 <div class="px-8">
   <div class="inline-block medium text-2xl">Load data for: </div>
@@ -158,10 +156,6 @@
           </div>
         </div>
       </div>
-    {% endcall %}
-
-    {% call insert_accordion_tab('tab-multi-seven', 'Search program logs') %}
-        {{ insert_log_search() }}
     {% endcall %}
 
   </div>

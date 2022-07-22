@@ -1,11 +1,11 @@
 {% extends "auth.html" %}
 
 {% block main %}
-<div class="flex flex-row mb-4 border-b">
+<div class="flex flex-row items-center justify-between pb-2 border-b">
     <h1>Users overview</h1>
-    <div class="ltr:ml-auto rtl:mr-auto">
-        <button type="reset" class="green-btn my-1 mx-2 text-white" onclick="window.open('/admin', '_self');">Return to admin page</button>
-        <button type="reset" class="yellow-btn my-1 text-white" onclick="window.open('?filter=all', '_self');">View all users</button>
+    <div class="fle flex-row gap-2">
+        <button type="reset" class="green-btn" onclick="window.open('/admin', '_self');">Return to admin page</button>
+        <button type="reset" class="yellow-btn text-white" onclick="window.open('?filter=all', '_self');">View all users</button>
     </div>
 </div>
 <div class="w-full mt-4 mb-4" id="program_filter">
@@ -128,7 +128,7 @@
             <td class="country_cell">{{user.country}}</td>
             <td class="gender_cell">{{user.gender}}</td>
             <td class="experience_cell hidden">{{user.prog_experience}}</td>
-            <td class="teacher_cell text-center"><input type="checkbox" {% if user.is_teacher %}checked="checked"{% endif %} onclick="hedyApp.auth.markAsTeacher (this, '{{user.username}}', {% if user.is_teacher %}false{% else %}true{% endif %})"></td>
+            <td class="teacher_cell text-center"><input type="checkbox" {% if user.is_teacher %}checked="checked"{% endif %} onclick="hedyApp.markAsTeacher (this, '{{user.username}}', {% if user.is_teacher %}false{% else %}true{% endif %})"></td>
             <td class="verified_cell hidden">{{user.email_verified}}</td>
           </tr>
       {% endfor %}

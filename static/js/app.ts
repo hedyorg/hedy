@@ -2,8 +2,6 @@
 import './syntaxModesRules';
 
 import { modal, error, success } from './modal';
-import { auth } from './auth';
-
 export let theGlobalEditor: AceAjax.Editor;
 export let theModalEditor: AceAjax.Editor;
 
@@ -68,14 +66,20 @@ def convert_numerals(alphabet, number):
     return number
 `;
 
+// Close the dropdown menu if the user clicks outside of it
+$(document).on("click", function(event){
+    if(!$(event.target).closest(".dropdown").length){
+        $(".dropdown-menu").slideUp("medium");
+        $(".cheatsheet-menu").slideUp("medium");
+    }
+});
+
 (function() {
   // A bunch of code expects a global "State" object. Set it here if not
   // set yet.
   if (!window.State) {
     window.State = {};
   }
-
-
 
   // Set const value to determine the current page direction -> useful for ace editor settings
   const dir = $("body").attr("dir");
@@ -276,14 +280,6 @@ export function getHighlighter(level: string) {
   return `ace/mode/level` + level;
 }
 
-function reloadOnExpiredSession () {
-   // If user is not logged in or session is not expired, return false.
-   if (! auth.profile || auth.profile.session_expires_at > Date.now ()) return false;
-   // Otherwise, reload the page to update the top bar.
-   location.reload ();
-   return true;
-}
-
 function clearErrors(editor: AceAjax.Editor) {
   editor.session.clearAnnotations();
   for (const marker in editor.session.getMarkers(false)) {
@@ -314,7 +310,6 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
       return modal.alert(disabled_prompt, 3000, true);
     } return;
   }
-  if (reloadOnExpiredSession ()) return;
 
   // We set the run limit to 1ms -> make sure that the previous programs stops (if there is any)
   Sk.execLimit = 1;
@@ -633,7 +628,6 @@ function storeProgram(level: number | [number, string], lang: string, name: stri
 }
 
 export function saveit(level: number | [number, string], lang: string, name: string, code: string, shared: boolean, cb?: (err: any, resp?: any) => void) {
-  if (reloadOnExpiredSession ()) return;
   try {
     $.ajax({
       type: 'POST',
@@ -991,8 +985,7 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     $('#stopit').hide();
     $('#runit').show();
     if (hasTurtle) {
-      // Todo TB: Don't show button until we have the tkinter issue figured out on Heroku (29/06)
-      // $('#saveDST').show();
+      $('#saveDST').show();
     }
 
     // Check if the program was correct but the output window is empty: Return a warning
@@ -1240,7 +1233,10 @@ export function load_variables(variables: any) {
     const variableList = $('#variable-list');
     variableList.empty();
     for (const i in variables) {
-      variableList.append(`<li style=color:${variables[i][2]}>${variables[i][0]}: ${variables[i][1]}</li>`);
+      // Only append if the variable contains any data (and is not undefined)
+      if (variables[i][1]) {
+        variableList.append(`<li style=color:${variables[i][2]}>${variables[i][0]}: ${variables[i][1]}</li>`);
+      }
     }
     hide_if_no_variables();
   }
@@ -1548,8 +1544,10 @@ export function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean): Ac
 export function toggle_developers_mode(enforced: boolean) {
   if ($('#developers_toggle').is(":checked") || enforced) {
       $('#adventures-tab').hide();
+      $('#blur_toggle_container').show();
       pushAchievement("lets_focus");
   } else {
+      $('#blur_toggle_container').hide();
       $('#adventures-tab').show();
   }
 
@@ -1565,8 +1563,24 @@ export function toggle_developers_mode(enforced: boolean) {
   }
 }
 
+export function toggle_blur_code() {
+  // Switch the both icons from hiding / showing
+  $('.blur-toggle').toggle();
+
+  // Keep track of a element attribute "blurred" to indicate if blurred or not
+  if ($('#editor').attr('blurred') == 'true') {
+    $('#editor').css("filter", "");
+    $('#editor').css("-webkit-filter", "");
+    $('#editor').attr('blurred', 'false');
+  } else {
+    $('#editor').css("filter", "blur(3px)");
+    $('#editor').css("-webkit-filter", "blur(3px)");
+    $('#editor').attr('blurred', 'true');
+  }
+}
+
 export function load_profile(username: string, mail: string, birth_year: number, gender: string, country: string) {
-  $('#profile').toggle();
+  $('#profile-change-body').toggle();
   if ($('#profile').is(":visible")) {
       $('#username').html(username);
       $('#email').val(mail);
@@ -1630,7 +1644,7 @@ function update_view(selector_container: string, new_lang: string) {
 export function select_profile_image(image: number) {
   $('.profile_image').removeClass("border-2 border-blue-600");
   $('#profile_image_' + image).addClass("border-2 border-blue-600");
-  $('#profile_picture').val(image);
+  $('#image').val(image);
 }
 
 export function filter_programs() {

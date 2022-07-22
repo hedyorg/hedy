@@ -339,7 +339,7 @@ class HighlighterTestWebSite(HighlightTester):
     def test_2_12(self):
         self.assert_highlighted_chr_multi_line(
             "choice is _",
-            "TTTTTT KK T",
+            "TTTTTT KK I",
             "print I choose choice",
             "KKKKK TTTTTTTTTTTTTTT",
             level="level2", lang='en')
@@ -371,7 +371,7 @@ class HighlighterTestWebSite(HighlightTester):
     def test_2_14(self):
         self.assert_highlighted_chr(
             "monster1 is _",
-            "TTTTTTTT KK T",
+            "TTTTTTTT KK I",
             level="level2", lang='en')
 
 
@@ -413,7 +413,7 @@ class HighlighterTestWebSite(HighlightTester):
     def test_3_2(self):
         self.assert_highlighted_chr_multi_line(
             "animals is dog, cat, kangaroo",
-            "TTTTTTT KK TTTT TTTT TTTTTTTT",
+            "TTTTTTT KK TTTK TTTK TTTTTTTT",
             "print animals at random",
             "KKKKK TTTTTTT KK KKKKKK",
             level="level3", lang='en')
@@ -422,7 +422,7 @@ class HighlighterTestWebSite(HighlightTester):
     def test_3_3(self):
         self.assert_highlighted_chr_multi_line(
             "animals is dog, cat, kangaroo",
-            "TTTTTTT KK TTTT TTTT TTTTTTTT",
+            "TTTTTTT KK TTTK TTTK TTTTTTTT",
             "add penguin to animals",
             "KKK TTTTTTT KK TTTTTTT",
             "remove cat from animals",
@@ -442,7 +442,7 @@ class HighlighterTestWebSite(HighlightTester):
     def test_3_5(self):
         self.assert_highlighted_chr_multi_line(
             "animals is 🦔, 🐿, 🦉, 🦇",
-            "TTTTTTT KK TT TT TT T",
+            "TTTTTTT KK TK TK TK T",
             "print He now hears the sound of an animals at random",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT KK KKKKKK",
             level="level3", lang='en')
@@ -453,7 +453,7 @@ class HighlighterTestWebSite(HighlightTester):
             "print He hears a sound",
             "KKKKK TTTTTTTTTTTTTTTT",
             "animals is 🐿, 🦔, 🦇, 🦉",
-            "TTTTTTT KK TT TT TT T",
+            "TTTTTTT KK TK TK TK T",
             "animal is ask What do you think it is?",
             "TTTTTT KK KKK TTTTTTTTTTTTTTTTTTTTTTTT",
             "add animal to animals",
@@ -470,7 +470,7 @@ class HighlighterTestWebSite(HighlightTester):
             "print Inside were a bottle of water, a flashlight and a brick.",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT TTTTTTTTTTTTTTTTTTTTTTTTT",
             "bag is water, flashlight, brick",
-            "TTT KK TTTTTT TTTTTTTTTTT TTTTT",
+            "TTT KK TTTTTK TTTTTTTTTTK TTTTT",
             "dump is ask Which item should he dump?",
             "TTTT KK KKK TTTTTTTTTTTTTTTTTTTTTTTTTT",
             "remove dump from bag",
@@ -481,7 +481,7 @@ class HighlighterTestWebSite(HighlightTester):
     def test_3_8(self):
         self.assert_highlighted_chr_multi_line(
             "words is squawk, Hedy",
-            "TTTTT KK TTTTTTT TTTT",
+            "TTTTT KK TTTTTTK TTTT",
             "print Train your parrot!",
             "KKKKK TTTTTTTTTTTTTTTTTT",
             "new_word is ask Which word do you want to teach them?",
@@ -505,7 +505,7 @@ class HighlighterTestWebSite(HighlightTester):
     def test_3_10(self):
         self.assert_highlighted_chr_multi_line(
             "angles is 10, 50, 90, 150, 250",
-            "TTTTTT KK TTT TTT TTT TTTT TTT",
+            "TTTTTT KK TTK TTK TTK TTTK TTT",
             "turn angles at random",
             "KKKK TTTTTT KK KKKKKK",
             "forward 25",
@@ -523,7 +523,7 @@ class HighlighterTestWebSite(HighlightTester):
     def test_3_12(self):
         self.assert_highlighted_chr_multi_line(
             "people is mom, dad, Emma, Sophie",
-            "TTTTTT KK TTTT TTTT TTTTT TTTTTT",
+            "TTTTTT KK TTTK TTTK TTTTK TTTTTT",
             "print people at random",
             "KKKKK TTTTTT KK KKKKKK",
             level="level3", lang='en')
@@ -532,7 +532,7 @@ class HighlighterTestWebSite(HighlightTester):
     def test_3_13(self):
         self.assert_highlighted_chr_multi_line(
             "people is mom, dad, Emma, Sophie",
-            "TTTTTT KK TTTT TTTT TTTTT TTTTTT",
+            "TTTTTT KK TTTK TTTK TTTTK TTTTTT",
             "your_name is ask Who are you?",
             "TTTTTTTTT KK KKK TTTTTTTTTTTT",
             "remove your_name from people",
@@ -552,7 +552,7 @@ class HighlighterTestWebSite(HighlightTester):
     def test_3_15(self):
         self.assert_highlighted_chr_multi_line(
             "choices is 1, 2, 3, 4, 5, earthworm",
-            "TTTTTTT KK TT TT TT TT TT TTTTTTTTT",
+            "TTTTTTT KK TK TK TK TK TK TTTTTTTTT",
             "print choices at random",
             "KKKKK TTTTTTT KK KKKKKK",
             level="level3", lang='en')
@@ -568,7 +568,7 @@ class HighlighterTestWebSite(HighlightTester):
     def test_3_17(self):
         self.assert_highlighted_chr_multi_line(
             "choices is rock, paper, scissors",
-            "TTTTTTT KK TTTTT TTTTTT TTTTTTTT",
+            "TTTTTTT KK TTTTK TTTTTK TTTTTTTT",
             "print choices at random",
             "KKKKK TTTTTTT KK KKKKKK",
             level="level3", lang='en')
@@ -583,7 +583,7 @@ class HighlighterTestWebSite(HighlightTester):
             "print This is what you want to know: question",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
             "answers is yes, no, maybe",
-            "TTTTTTT KK TTTT TTT TTTTT",
+            "TTTTTTT KK TTTK TTK TTTTT",
             "print My crystal ball says...",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTT",
             "sleep 2",
@@ -598,7 +598,7 @@ class HighlighterTestWebSite(HighlightTester):
             "print Mystery milkshake",
             "KKKKK TTTTTTTTTTTTTTTTT",
             "flavors is strawberry, chocolate, vanilla",
-            "TTTTTTT KK TTTTTTTTTTT TTTTTTTTTT TTTTTTT",
+            "TTTTTTT KK TTTTTTTTTTK TTTTTTTTTK TTTTTTT",
             "allergies is ask Are you allergic to any falvors?",
             "TTTTTTTTT KK KKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
             "remove allergies from flavors",
@@ -615,15 +615,15 @@ class HighlighterTestWebSite(HighlightTester):
             "print The only restaurant that will randomly choose your meal and its price for you!",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
             "starters is salad, soup, carpaccio",
-            "TTTTTTTT KK TTTTTT TTTTT TTTTTTTTT",
+            "TTTTTTTT KK TTTTTK TTTTK TTTTTTTTT",
             "mains is pizza, brussels sprouts, spaghetti",
-            "TTTTT KK TTTTTT TTTTTTTTTTTTTTTTT TTTTTTTTT",
+            "TTTTT KK TTTTTK TTTTTTTTTTTTTTTTK TTTTTTTTT",
             "desserts is brownies, ice cream, french cheeses",
-            "TTTTTTTT KK TTTTTTTTT TTTTTTTTTT TTTTTTTTTTTTTT",
+            "TTTTTTTT KK TTTTTTTTK TTTTTTTTTK TTTTTTTTTTTTTT",
             "drinks is cola, beer, water",
-            "TTTTTT KK TTTTT TTTTT TTTTT",
+            "TTTTTT KK TTTTK TTTTK TTTTT",
             "prices is 1 dollar, 10 dollars, 100 dollars",
-            "TTTTTTTKKTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+            "TTTTTTTKKTTTTTTTTTKTTTTTTTTTTTKTTTTTTTTTTTT",
             "print You will start with: starters at random",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTT KK KKKKKK",
             "print Then we'll serve: mains at random",
@@ -650,7 +650,7 @@ class HighlighterTestWebSite(HighlightTester):
             "print You picked door ... choice",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTT",
             "monsters is a zombie, a vampire, NOTHING YOUVE ESCAPED",
-            "TTTTTTTT KK TTTTTTTTT TTTTTTTTTT TTTTTTTTTTTTTTTTTTTTT",
+            "TTTTTTTT KK TTTTTTTTK TTTTTTTTTK TTTTTTTTTTTTTTTTTTTTT",
             "print You see...",
             "KKKKK TTTTTTTTTT",
             "sleep",

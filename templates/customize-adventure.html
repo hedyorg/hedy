@@ -24,16 +24,16 @@
                     <div class="border border-black rounded-lg p-4 text-sm">
                         {{_('adventure_exp_1')}}
                         <div class="flex flex-row my-2 items-center">
-                            <pre class="inline-block w-40">&lt;code&gt;print&lt;/code&gt;</pre>
+                            <pre class="inline-block w-64">&lt;code&gt;&#123;{{parse_keyword('print')}}&#125;&lt;/code&gt;</pre>
                             <b class="mx-4">&rarr;</b>
-                            <code class="text-base">print</code>
+                            <code class="text-base">{{parse_keyword('print')}}</code>
                         </div>
                         {{_('adventure_exp_2')}}
                         <div class="flex flex-row items-center">
-                            <pre class="inline-block w-40">&lt;pre&gt;<br>print Hello world!<br>&lt;/pre&gt;</pre>
+                            <pre class="inline-block w-64">&lt;pre&gt;<br>&#123;{{parse_keyword('print')}}&#125; {{_('hello_world')}}<br>&lt;/pre&gt;</pre>
                             <b class="mx-4">&rarr;</b>
                             <div class="turn-pre-into-ace w-64" style="white-space: pre-wrap;">
-                                <pre level="1" class="no-copy-button">{{_('hello_world_snippet')}}</pre>
+                                <pre level="1" class="no-copy-button">{{parse_keyword('print')}} {{_('hello_world')}}</pre>
                             </div>
                         </div>
                         {{_('adventure_exp_3')}}
@@ -59,4 +59,20 @@
         <button class="blue-btn" onclick="window.open('/for-teachers', '_self');">{{_('back_to_teachers_page')}}</button>
     </div>
 </div>
+{% endblock %}
+<!-- Todo TB: At one point we should clean this up instead of copying all scripts each time -->
+{% block scripts %}
+  <script src="{{static('/vendor/ace.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
+  <script src="{{static('/vendor/ext-whitespace.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
+  <script src="{{static('/vendor/ext-rtl.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
+  <script src="/client_messages.js" type="text/javascript" crossorigin="anonymous"></script>
+  <script>
+    window.State = {};
+    window.State.lang = "{{ g.lang }}";
+    window.State.keyword_language = "{{ g.keyword_lang }}";
+  </script>
+  <script src="{{static('/js/appbundle.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+  <script src="{{static('/vendor/skulpt.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+  <script src="{{static('/vendor/skulpt-stdlib.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+  <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
 {% endblock %}

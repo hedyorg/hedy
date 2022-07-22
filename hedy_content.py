@@ -32,7 +32,7 @@ ALL_LANGUAGES = {}
 ALL_KEYWORD_LANGUAGES = {}
 
 # Todo TB -> We create this list manually, but it would be nice if we find a way to automate this as well
-NON_LATIN_LANGUAGES = ['ar', 'bg', 'bn', 'el', 'fa', 'hi', 'ru', 'zh_Hans']
+NON_LATIN_LANGUAGES = ['ar', 'bg', 'bn', 'el', 'fa', 'hi', 'he', 'ru', 'zh_Hans']
 
 ADVENTURE_ORDER = [
     'default',
@@ -56,6 +56,12 @@ ADVENTURE_ORDER = [
     'next',
     'end'
 ]
+
+RESEARCH = {}
+for paper in os.listdir('content/research'):
+    # An_approach_to_describing_the_semantics_of_Hedy_2022.pdf -> An approach to describing the semantics of Hedy
+    name = paper.replace("_", " ").split(".")[0]
+    RESEARCH[name] = paper
 
 # load all available languages in dict
 # list_translations of babel does about the same, but without territories.

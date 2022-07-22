@@ -21,7 +21,8 @@ from flask_babel import gettext
 from flask_babel import Babel
 from flask_compress import Compress
 from flask_helpers import render_template
-from flask import Flask, request, jsonify, session, abort, g, redirect, Response, make_response, Markup, send_file, after_this_request
+from flask import Flask, request, jsonify, session, abort, g, redirect, Response, make_response, Markup, send_file, \
+    after_this_request, send_from_directory
 from config import config
 from werkzeug.urls import url_encode
 from babel import Locale
@@ -819,9 +820,15 @@ def index(level, program_id):
     commands = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
 
     teacher_adventures = []
+    # Todo: TB It would be nice to improve this by using level as a sort key
     for adventure in customizations.get('teacher_adventures', []):
         current_adventure = DATABASE.get_adventure(adventure)
         if current_adventure.get('level') == str(level):
+            try:
+                current_adventure['content'] = current_adventure['content'].format(**hedy_content.KEYWORDS.get(g.keyword_lang))
+            except:
+                # We don't want teacher being able to break the student UI -> pass this adventure
+                pass
             teacher_adventures.append(current_adventure)
 
     enforce_developers_mode = False
@@ -1032,6 +1039,11 @@ def profile_page(user):
                            user_classes=classes, current_page='my-profile')
 
 
+@app.route('/research/<filename>', methods=['GET'])
+def get_research(filename):
+    return send_from_directory('content/research/', filename)
+
+
 @app.route('/<page>')
 def main_page(page):
     if page == 'favicon.ico':
@@ -1041,9 +1053,8 @@ def main_page(page):
         return achievements_page()
 
     if page == 'learn-more':
-        learn_more_translations = hedyweb.PageTranslations(
-            page).get_page_translations(g.lang)
-        return render_template('learn-more.html', page_title=gettext('title_learn-more'),
+        learn_more_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
+        return render_template('learn-more.html', papers=hedy_content.RESEARCH, page_title=gettext('title_learn-more'),
                                current_page='learn-more', content=learn_more_translations)
 
     if page == 'privacy':
@@ -1207,6 +1218,7 @@ def get_highscores_page(user, filter):
         return utils.error_page(error=404, ui_message=gettext('page_not_found'))
 
     user_data = DATABASE.user_by_username(user['username'])
+    public_profile = True if DATABASE.get_public_profile_settings(user['username']) else False
     classes = list(user_data.get('classes', set()))
     country = user_data.get('country')
     user_country = COUNTRIES.get(country)
@@ -1231,7 +1243,8 @@ def get_highscores_page(user, filter):
         highscore['country'] = highscore.get('country') if highscore.get('country') else "-"
         highscore['last_achievement'] = utils.delta_timestamp(highscore.get('last_achievement'))
     return render_template('highscores.html', highscores=highscores, has_country=True if country else False,
-                           filter=filter, user_country = user_country, in_class=True if classes else False)
+                           filter=filter, user_country=user_country, public_profile=public_profile,
+                           in_class=True if classes else False)
 
 
 @app.route('/change_language', methods=['POST'])
@@ -1450,6 +1463,10 @@ def get_country(country):
     return COUNTRIES.get(country, "-")
 
 
+@app.template_global()
+def parse_keyword(keyword):
+    return hedy_content.KEYWORDS.get(g.keyword_lang).get(keyword)
+
 def make_lang_obj(lang):
     """Make a language object for a given language."""
     return {
@@ -1476,6 +1493,7 @@ def modify_query(**new_values):
     return '{}?{}'.format(request.path, url_encode(args))
 
 
+# Todo TB: Re-write this somewhere sometimes following the line below
 # We only store this @app.route here to enable the use of achievements -> might want to re-write this in the future
 @app.route('/auth/public_profile', methods=['POST'])
 @requires_login
@@ -1486,7 +1504,7 @@ def update_public_profile(user):
     if not isinstance(body, dict):
         return gettext('ajax_error'), 400
     # The images are given as a "picture id" from 1 till 12
-    if not isinstance(body.get('image'), str) or int(body.get('image'), 0) < 1 or int(body.get('image'), 0) > 12:
+    if not isinstance(body.get('image'), str) or int(body.get('image'), 0) not in [*range(1, 13)]:
         return gettext('image_invalid'), 400
     if not isinstance(body.get('personal_text'), str):
         return gettext('personal_text_invalid'), 400
@@ -1503,11 +1521,9 @@ def update_public_profile(user):
     current_profile = DATABASE.get_public_profile_settings(user['username'])
     if current_profile:
         if current_profile.get('image') != body.get('image'):
-            achievement = ACHIEVEMENTS.add_single_achievement(
-                current_user()['username'], "fresh_look")
+            achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "fresh_look")
     else:
-        achievement = ACHIEVEMENTS.add_single_achievement(
-            current_user()['username'], "go_live")
+        achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "go_live")
     DATABASE.update_public_profile(user['username'], body)
     if achievement:
         # Todo TB -> Check if we require message or success on front-end

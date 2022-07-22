@@ -67,7 +67,7 @@ class HighlightTester(unittest.TestCase):
                                 if last_token == None, ignore the end state test
         """
         state_machine = self.get_state_machine(level, lang)
-        self.check(code, expected, state_machine, start_token, last_state)
+        self.check(code+"\n", expected+"\n", state_machine, start_token, last_state)
         self.checkInter(code, expected, state_machine, start_token)
 
 

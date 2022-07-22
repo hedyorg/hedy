@@ -1,7 +1,7 @@
 adventures:
     default:
         name: "Introduction"
-        description: "Level explanation"
+        description: "Explication du niveau"
         default_save_name: "intro"
         levels:
             1:
@@ -19,7 +19,7 @@ adventures:
                 example_code: "```\n{print} Bonjour !\n{print} Bienvenue sur Hedy !\n```\n"
                 story_text_2: "You can also ask for input and repeat it back with an `{echo}` command.\nTry the code to your left again.\n\nDon't know what to create? In the next tabs you will find ideas for programs to build.\n"
                 example_code_2: "```\n{ask} What is your name?\n{echo} hello\n```\n"
-                story_text_3: "Let's get started! Don't know what to create? In the next tabs you will find ideas for programs to build.\n"
+                story_text_3: "Allons-y ! Tu ne sais pas quoi créer ? Tu trouveras des idées de programmes à réaliser dans les onglets suivants.\n"
             2:
                 story_text: |
                     Au niveau 2, nous apprenons quelque chose de nouveau. Vous pouvez nommer un mot avec `{is}`.
@@ -34,11 +34,11 @@ adventures:
 
                     L'impression fonctionne toujours comme au niveau 1 et vous n'avez plus besoin d'une échographie.
                 start_code: "{print} bonjour le monde!"
-                story_text_2: "`{print}` still works the same, but the `{ask}` command has changed. You need to use a variable in the `{ask}` command as well. It looks like this:\n"
+                story_text_2: "`{print}` fonctionne toujours de la même manière, mais la commande `{ask}` a changé. Tu as besoin d’une variable pour stocker la réponse. Voici à quoi cela ressemble :\n"
                 example_code: "```\nname {is} Hedy\nage {is} 15\n{print} name is age years old\n```\n"
-                example_code_2: "```\nanswer {is} {ask} What is your name?\n{print} Hello answer\n```\n"
-                story_text_3: "Another new command in this level is `{sleep}`, which pauses your program for a second. If you type a number behind the {sleep} command, the program pauses for that amount of seconds.\n"
-                example_code_3: "```\n{print} My favorite colour is...\n{sleep} 2\n{print} green!\n```\n"
+                example_code_2: "```\nreponse {is} {ask} Comment t'appelles-tu ?\n{print} Salut reponse\n```\n"
+                story_text_3: "Une autre nouvelle commande de ce niveau est `{sleep}`, qui te permet de mettre le programme en pause pendant un certain temps. Lorsque tu tapes un chiffre après la commande {sleep}, le programme s’interrompt pendant ce nombre de secondes.\n"
+                example_code_3: "```\n{print} Ma couleur préférée est...\n{sleep} 2\n{print} le vert !\n```\n"
             3:
                 story_text: |
                     Au niveau 3, vous pouvez également faire une liste. Vous pouvez ensuite choisir n'importe quoi dans la liste. Vous faites cela avec `{at} {random}` (vous dites: et ren-dom).
@@ -51,7 +51,7 @@ adventures:
                     Vous trouverez tous les codes du niveau 3 dans la barre de gauche. Il existe également des onglets avec des affectations.
                 start_code: "{print} bonjour le monde!"
                 example_code: "```\nanimals {is} dog, cat, kangaroo\n{print} animals {at} {random}\n```\n"
-                story_text_2: You can also add items to the list with `{add}` and remove items with `{remove}`.
+                story_text_2: Dans ce niveau, tu peux aussi ajouter des éléments à une liste par la commande `{add}` et en supprimer avec la commande `{remove}`.
                 example_code_2: "```\nanimals {is} dog, cat, kangaroo\n{add} penguin {to_list} animals\n{remove} cat {from} animals\n{print} animals {at} {random}\n```\n"
             4:
                 start_code: "{print} 'Bonjour le monde'"
@@ -68,7 +68,7 @@ adventures:
                     ## Les affectations deviennent de plus en plus difficiles
                     Vous retrouverez les commandes sur la gauche et les affectations dans les onglets suivants. Les affectations deviennent de plus en plus difficiles dans les onglets successifs.
                     Il est donc préférable de commencer à gauche avec l'histoire, et de travailler à droite pour être de plus en plus contestée.
-                story_text_2: "## Adventures are getting more and more difficult\nThe adventures are now getting more and more difficult in the successive tabs.\nSo it is best to start on the left with the story, and work to the right, in order to be challenged more and more.\n"
+                story_text_2: "## Les aventures deviennent de plus en plus difficiles\nTu trouveras les commandes sur la gauche et les aventures dans les onglets suivants. D’onglet en onglet, les aventures sont maintenant de plus en plus difficiles.\nAlors commence par la gauche avec l’histoire et poursuit vers la droite pour être toujours plus mis au défi.\n"
                 example_code: "```\n{print} 'You need to use quotation marks from now on!'\nanswer {is} {ask} 'What do we need to use from now on?'\n{print} 'We need to use ' answer\n```\n"
             5:
                 start_code: |-
@@ -90,23 +90,23 @@ adventures:
 
                      Toujours au niveau 5, les affectations dans les onglets deviennent de plus en plus difficiles. Alors faites-les de gauche à droite.
                 example_code: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'\n```\n"
-                story_text_3: "## Lists\nWhen we want to check if something is in a list, we can now use the `{in}` command.\nThis code prints pretty! if you choose green or yellow, and meh otherwise.\n"
-                example_code_3: "```\npretty_colors {is} green, yellow\ncolor {is} {ask} 'What is your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!'\n{else} {print} 'meh'\n```\n"
-                story_text_2: "Sometimes code with an `{if}` gets really long and does not fit on the line well. <br> You may also divide the code over two lines, starting the second line at the `{else}` like this:\n"
-                example_code_2: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice'\n{else} {print} 'boo!'\n```\n"
+                story_text_3: "## Listes\nPour vérifier si quelque chose est dans une liste, tu peux maintenant utiliser la commande `{in}`.\nCe code renvoie `joli !` si tu choisis vert ou jaune, sinon il renvoie `mouais`.\n"
+                example_code_3: "```\njolies_couleurs {is} vert, jaune\ncouleur {is} {ask} 'Quelle est ta couleur favorite ?'\n{if} couleur {in} jolies_couleurs {print} 'joli !'\n{else} {print} 'mouais'\n```\n"
+                story_text_2: "Parfois, le code avec un `{if}` devient vraiment long et ne tient plus très bien dans la zone de texte. Tu peux alors le répartir sur deux lignes en commençant la seconde au `{else}`, comme ceci :\n"
+                example_code_2: "```\nnom {is} {ask} 'quel est ton nom ?'\n{if} nom {is} Hedy {print} 'chouette'\n{else} {print} 'oh là là !'\n```\n"
             6:
                 start_code: "{print} '5 fois 5 font ' 5 * 5"
                 story_text: |
                     ## 1 + 1
-                     In this level you learn something new: you can now also calculate.
+                     Dans ce niveau, vous apprenez quelque chose de nouveau : vous pouvez maintenant aussi calculer.
 
-                     The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.
+                     Le plus est facile, vous l'écrivez comme en mathématiques : `5 + 5` par exemple. Le moins fonctionne aussi très bien, c'est `5 - 5`.
 
-                     The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!
-                     That is why we multiply with the asterisk above 8: `5 * 5`. Read that as "5 times 5" that helps you remember it best.
+                     Le temps est un peu différent, car il n'y a pas de symbole de temps sur votre clavier. Cherchez, il n'y en a vraiment pas !
+                     C'est pourquoi nous multiplions avec l'astérisque au-dessus de 8 : `5 * 5`. Lisez cela comme "5 fois 5", cela vous aidera à mieux vous en souvenir.
                 example_code: "```\n{print} '5 plus 5 is ' 5 + 5\n{print} '5 minus 5 is ' 5 - 5\n{print} '5 {times} 5 is ' 5 * 5\n```\n"
-                story_text_2: "We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:\n"
-                example_code_2: "```\nname = Hedy\nanswer = 20 + 4\n```\n"
+                story_text_2: "Nous apportons également un changement dans le stockage d'un mot dans une variable ! Vous pouvez maintenant utiliser `=` au lieu de `{is}` lorsque nous stockons un nom ou un nombre dans une variable, comme ceci :\n"
+                example_code_2: "```\nnom = Hedy\nréponse = 20 + 4\n```\n"
             7:
                 start_code: "{repeat} 3 {times} {print} 'Hedy est amusant!'"
                 story_text: |
@@ -1462,13 +1462,13 @@ adventures:
                     ## Restaurant
                      In level 1 you can make your own virtual restaurant and take your guests' orders.
                 example_code: |
-                     ```
-                     {print} Welcome to Hedy's restaurant 🍟
-                     {ask} What would you like to order?
-                     {echo} So you would like to order
-                     {print} Thanks you for your order!
-                     {print} It's on its way!
-                     ```
+                    ```
+                    {print} Welcome to Hedy's restaurant 🍟
+                    {ask} What would you like to order?
+                    {echo} So you would like to order
+                    {print} Thanks you for your order!
+                    {print} It's on its way!
+                    ```
                 story_text_2: |
                     ## Challenge
                     Can you think of more lines to add to your restaurant code? For example, can you {ask} the guests what they'd like to drink, tell them the price, or wish them a pleasant meal?
@@ -1581,7 +1581,7 @@ adventures:
                     ## Restaurant
                     In this level you can use maths to calculate the total price of your customer's order, which can make your virtual restaurant more realistic.
 
-                example_code: |
+                example_code: |4
 
                     You can make a simple restaurant code, like this:
                     ```
@@ -1607,7 +1607,7 @@ adventures:
                     - give people a discount when they enter a (secret) couponcode?
                     - add a children's menu?
                     - think of other fun things to add?
-                example_code_2: |
+                example_code_2: |4
 
                     In this example there are three courses, which requires more code and more additions in calculating the price.
                     ```
@@ -1704,7 +1704,7 @@ adventures:
                         food = {ask} 'What would you like to eat as your ' course '?'
                         {print} food ' will be your ' course
                     ```
-                story_text_2: |
+                story_text_2: |4
 
                     Of course, you could also order for multiple people!
                 example_code_2: |
@@ -1833,7 +1833,7 @@ adventures:
                     ## Fortune Teller
                     In the previous levels you've created your first fortune telling machine, but Hedy couldn't really predict anything, only {echo}.
                     In this level you can use a variable and the `{at} {random}` command to really let Hedy choose an answer for you. Check out this code for instance:
-                example_code: |
+                example_code: |4
 
                     In this example the player can {ask} Hedy a yes-no question and Hedy will pick a random answer for you.
                     ```
@@ -2887,12 +2887,12 @@ adventures:
 
                     That's a lot of code for mainly the same words over and over again. Luckily in the next level has a solution with the `{repeat}` command, that allows you to repeat a line of code multiple times.
                 example_code: |
-                     ```
-                     {print} 'happy birthday to you'
-                     {print} 'happy birthday to you'
-                     {print} 'happy birthday dear Hedy'
-                     {print} 'happy birthday to you'
-                     ```
+                    ```
+                    {print} 'happy birthday to you'
+                    {print} 'happy birthday to you'
+                    {print} 'happy birthday dear Hedy'
+                    {print} 'happy birthday to you'
+                    ```
                 start_code: "{print} 'On to the next level!'"
             7:
                 story_text: |
