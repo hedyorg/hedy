@@ -87,13 +87,13 @@ def collect_snippets(path, filtered_language = None):
   return Hedy_snippets
 
 # use this to filter on 1 lang, zh_Hans for Chinese, nb_NO for Norwegian, pt_PT for Portuguese
-# Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/adventures', filtered_language='pt_PT')]
+filtered_language = 'nl'
 
-Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/adventures')]
+Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/adventures', filtered_language=filtered_language)]
 
-# level = 15
-# if level:
-#     Hedy_snippets = [(name, snippet) for (name, snippet) in Hedy_snippets if snippet.level == level]
+level = 1
+if level:
+    Hedy_snippets = [(name, snippet) for (name, snippet) in Hedy_snippets if snippet.level == level]
 
 Hedy_snippets = HedyTester.translate_keywords_in_snippets(Hedy_snippets)
 
