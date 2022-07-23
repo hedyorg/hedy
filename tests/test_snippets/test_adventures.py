@@ -12,6 +12,7 @@ from hedy_content import ALL_KEYWORD_LANGUAGES, KEYWORDS
 os.chdir(os.path.join(os.getcwd(), __file__.replace(os.path.basename(__file__), '')))
 
 unique_snippets_table = set()
+filtered_language = None
 
 def collect_snippets(path, filtered_language = None):
   Hedy_snippets = []
@@ -87,7 +88,7 @@ def collect_snippets(path, filtered_language = None):
   return Hedy_snippets
 
 # use this to filter on 1 lang, zh_Hans for Chinese, nb_NO for Norwegian, pt_PT for Portuguese
-filtered_language = 'nl'
+# filtered_language = 'nl'
 
 Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/adventures', filtered_language=filtered_language)]
 
