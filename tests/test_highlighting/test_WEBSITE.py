@@ -82,18 +82,18 @@ class HighlighterTestWebSite(HighlightTester):
             "forward 50",
             "KKKKKKK TT",
             "turn left",
-            "KKKK KKKK",
+            "KKKK TTTT",
             level="level1", lang='en')
 
 
     def test_1_10(self):
         self.assert_highlighted_chr_multi_line(
             "turn right",
-            "KKKK KKKKK",
+            "KKKK TTTTT",
             "forward 50",
             "KKKKKKK TT",
             "turn left",
-            "KKKK KKKK",
+            "KKKK TTTT",
             "forward 50",
             "KKKKKKK TT",
             level="level1", lang='en')

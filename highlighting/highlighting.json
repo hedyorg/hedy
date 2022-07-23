@@ -126,7 +126,7 @@
                 {
                     "regex": "(__black__|__gray__|__white__|__green__|__blue__|__purple__|__brown__|__pink__|__red__|__orange__|__yellow__)",
                     "token": [
-                        "keyword"
+                        "text"
                     ]
                 }
             ],
@@ -159,7 +159,7 @@
                 {
                     "regex": "(__right__|__left__)",
                     "token": [
-                        "keyword"
+                        "text"
                     ]
                 }
             ]
@@ -240,6 +240,14 @@
                         "keyword"
                     ],
                     "next": "value"
+                },
+                {
+                    "regex": "(^ *)(__color__)",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
+                    "next": "value"
                 }
             ],
             "value": [
@@ -267,6 +275,12 @@
                         "text"
                     ],
                     "next": "start"
+                },
+                {
+                    "regex": "(__black__|__blue__|__brown__|__gray__|__green__|__orange__|__pink__|__purple__|__red__|__white__|__yellow__)",
+                    "token": [
+                        "text"
+                    ]
                 }
             ]
         }
@@ -362,6 +376,14 @@
                         "keyword"
                     ],
                     "next": "valRemove"
+                },
+                {
+                    "regex": "(^ *)(__color__)",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
+                    "next": "value"
                 }
             ],
             "value": [
@@ -409,6 +431,12 @@
                 {
                     "regex": ",",
                     "token": "keyword"
+                },
+                {
+                    "regex": "(__black__|__blue__|__brown__|__gray__|__green__|__orange__|__pink__|__purple__|__red__|__white__|__yellow__)",
+                    "token": [
+                        "text"
+                    ]
                 }
             ],
             "valueExpr": [
@@ -487,6 +515,12 @@
                         "keyword"
                     ],
                     "next": "valueTo"
+                },
+                {
+                    "regex": "(__black__|__blue__|__brown__|__gray__|__green__|__orange__|__pink__|__purple__|__red__|__white__|__yellow__)",
+                    "token": [
+                        "text"
+                    ]
                 }
             ],
             "valueTo": [
@@ -549,6 +583,12 @@
                         "keyword"
                     ],
                     "next": "valueFrom"
+                },
+                {
+                    "regex": "(__black__|__blue__|__brown__|__gray__|__green__|__orange__|__pink__|__purple__|__red__|__white__|__yellow__)",
+                    "token": [
+                        "text"
+                    ]
                 }
             ],
             "valueFrom": [
@@ -657,6 +697,14 @@
                     "next": "valueSimple"
                 },
                 {
+                    "regex": "(^ *)(__color__)",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
+                    "next": "valueSimple"
+                },
+                {
                     "regex": "(^ *)(__add__)",
                     "token": [
                         "text",
@@ -718,6 +766,12 @@
                 {
                     "regex": ",",
                     "token": "keyword"
+                },
+                {
+                    "regex": "(__black__|__blue__|__brown__|__gray__|__green__|__orange__|__pink__|__purple__|__red__|__white__|__yellow__)",
+                    "token": [
+                        "text"
+                    ]
                 }
             ],
             "valueExpr": [
@@ -822,6 +876,12 @@
                         "text",
                         "keyword"
                     ]
+                },
+                {
+                    "regex": "(__black__|__blue__|__brown__|__gray__|__green__|__orange__|__pink__|__purple__|__red__|__white__|__yellow__)",
+                    "token": [
+                        "text"
+                    ]
                 }
             ],
             "valAdd": [
@@ -857,6 +917,12 @@
                         "keyword"
                     ],
                     "next": "valueTo"
+                },
+                {
+                    "regex": "(__black__|__blue__|__brown__|__gray__|__green__|__orange__|__pink__|__purple__|__red__|__white__|__yellow__)",
+                    "token": [
+                        "text"
+                    ]
                 }
             ],
             "valueTo": [
@@ -919,6 +985,12 @@
                         "keyword"
                     ],
                     "next": "valueFrom"
+                },
+                {
+                    "regex": "(__black__|__blue__|__brown__|__gray__|__green__|__orange__|__pink__|__purple__|__red__|__white__|__yellow__)",
+                    "token": [
+                        "text"
+                    ]
                 }
             ],
             "valueFrom": [
@@ -1065,6 +1137,14 @@
                     "next": "start"
                 },
                 {
+                    "regex": "(^| )(__color__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
+                    "next": "start"
+                },
+                {
                     "regex": "(,)",
                     "token": [
                         "keyword"
@@ -1116,6 +1196,94 @@
                     "token": [
                         "text",
                         "keyword"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__black__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__blue__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__brown__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__gray__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__green__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__orange__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__pink__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__purple__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__red__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__white__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__yellow__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
                     ],
                     "next": "start"
                 }
@@ -1347,6 +1515,14 @@
                     "next": "start"
                 },
                 {
+                    "regex": "(^| )(__color__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
+                    "next": "start"
+                },
+                {
                     "regex": "(,)",
                     "token": [
                         "keyword"
@@ -1433,6 +1609,94 @@
                     "token": [
                         "text",
                         "keyword"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__black__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__blue__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__brown__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__gray__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__green__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__orange__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__pink__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__purple__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__red__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__white__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__yellow__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
                     ],
                     "next": "start"
                 }
@@ -1680,6 +1944,14 @@
                     "next": "start"
                 },
                 {
+                    "regex": "(^| )(__color__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
+                    "next": "start"
+                },
+                {
                     "regex": "(,)",
                     "token": [
                         "keyword"
@@ -1766,6 +2038,94 @@
                     "token": [
                         "text",
                         "keyword"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__black__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__blue__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__brown__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__gray__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__green__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__orange__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__pink__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__purple__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__red__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__white__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__yellow__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
                     ],
                     "next": "start"
                 }
@@ -2015,6 +2375,14 @@
                     "next": "start"
                 },
                 {
+                    "regex": "(^| )(__color__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
+                    "next": "start"
+                },
+                {
                     "regex": "(,)",
                     "token": [
                         "keyword"
@@ -2117,6 +2485,94 @@
                     "token": [
                         "text",
                         "keyword"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__black__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__blue__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__brown__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__gray__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__green__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__orange__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__pink__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__purple__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__red__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__white__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__yellow__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
                     ],
                     "next": "start"
                 }
@@ -2366,6 +2822,14 @@
                     "next": "start"
                 },
                 {
+                    "regex": "(^| )(__color__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
+                    "next": "start"
+                },
+                {
                     "regex": "(,)",
                     "token": [
                         "keyword"
@@ -2468,6 +2932,94 @@
                     "token": [
                         "text",
                         "keyword"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__black__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__blue__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__brown__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__gray__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__green__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__orange__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__pink__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__purple__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__red__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__white__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__yellow__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
                     ],
                     "next": "start"
                 }
@@ -2725,6 +3277,14 @@
                     "next": "start"
                 },
                 {
+                    "regex": "(^| )(__color__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "keyword"
+                    ],
+                    "next": "start"
+                },
+                {
                     "regex": "(,)",
                     "token": [
                         "keyword"
@@ -2827,6 +3387,94 @@
                     "token": [
                         "text",
                         "keyword"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__black__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__blue__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__brown__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__gray__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__green__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__orange__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__pink__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__purple__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__red__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__white__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
+                    ],
+                    "next": "start"
+                },
+                {
+                    "regex": "(^| )(__yellow__)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
+                    "token": [
+                        "text",
+                        "text"
                     ],
                     "next": "start"
                 }
