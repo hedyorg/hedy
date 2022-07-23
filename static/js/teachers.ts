@@ -177,10 +177,18 @@ export function create_adventure(prompt: string) {
 }
 
 function update_db_adventure(adventure_id: string) {
+   // Todo TB: It would be nice if we improve this with the formToJSON() function once #3077 is merged
+
    const adventure_name = $('#custom_adventure_name').val();
    const level = $('#custom_adventure_level').val();
    const content = DOMPurify.sanitize(<string>$('#custom_adventure_content').val());
    const agree_public = $('#agree_public').prop('checked');
+   // Get all checked checkboxes of the class 'customize_adventure_class_checkbox' and map their values
+   // The values in this case are the class id's for which we need to update the class customizations
+   let classes = new Array();
+   $(".customize_adventure_class_checkbox:checked").each(function () {
+     classes.push($(this).val());
+   });
 
     $.ajax({
       type: 'POST',
@@ -190,6 +198,7 @@ function update_db_adventure(adventure_id: string) {
         name: adventure_name,
         level: level,
         content: content,
+        classes: classes,
         public: agree_public
       }),
       contentType: 'application/json',
