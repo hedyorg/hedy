@@ -63,6 +63,9 @@ TRANSLATE_WORD = [
 	"length"
 ]
 
+
+TOKEN_CONSTANT = "text"
+
 def K(word, withoutGroup = False):
 	if withoutGroup:
 		if word in TRANSLATE_WORD:
