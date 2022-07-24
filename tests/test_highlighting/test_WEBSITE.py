@@ -82,18 +82,18 @@ class HighlighterTestWebSite(HighlightTester):
             "forward 50",
             "KKKKKKK TT",
             "turn left",
-            "KKKK KKKK",
+            "KKKK TTTT",
             level="level1", lang='en')
 
 
     def test_1_10(self):
         self.assert_highlighted_chr_multi_line(
             "turn right",
-            "KKKK KKKKK",
+            "KKKK TTTTT",
             "forward 50",
             "KKKKKKK TT",
             "turn left",
-            "KKKK KKKK",
+            "KKKK TTTT",
             "forward 50",
             "KKKKKKK TT",
             level="level1", lang='en')
@@ -943,10 +943,10 @@ class HighlighterTestWebSite(HighlightTester):
         self.assert_highlighted_chr_multi_line(
             "pretty_colors is green, yellow",
             "TTTTTTTTTTTTT KK TTTTTK TTTTTT",
-            "color is ask 'What is your favorite color?'",
-            "TTTTT KK KKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            "if color in pretty_colors print 'pretty!'",
-            "KK TTTTT KK TTTTTTTTTTTTT KKKKK SSSSSSSSS",
+            "favorite_color is ask 'What is your favorite color?'",
+            "TTTTTTTTTTTTTT KK KKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
+            "if favorite_color in pretty_colors print 'pretty!'",
+            "KK TTTTTTTTTTTTTT KK TTTTTTTTTTTTT KKKKK SSSSSSSSS",
             "else print 'meh'",
             "KKKK KKKKK SSSSS",
             level="level5", lang='en')

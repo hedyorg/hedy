@@ -39,9 +39,9 @@
                             {% for i in range(1, max_level + 1) %}
                                 <td class="border-t border-gray-400">
                                     {% if i in levels %}<input class="adventure_level_{{ loop.index }} adventure_level_input cursor-pointer
-                                        {% if customizations and i not in customizations['levels'] %} hidden{% endif %}"
+                                        {% if customizations and customizations['levels'] and i not in customizations['levels'] %} hidden{% endif %}"
                                         adventure="{{ key }}" level="{{ i }}"
-                                        {% if (customizations and customizations['adventures'][key] and i in customizations['adventures'][key]) or (not customizations) %}
+                                        {% if (customizations and customizations['adventures'] and customizations['adventures'][key] and i in customizations['adventures'][key]) or (not customizations) %}
                                             checked
                                         {% endif %} type="checkbox">
                                     {% endif %}
