@@ -150,7 +150,7 @@ def rule_level3():
         'regex': START_WORD + K("at") ,
         'token': ['text','keyword'],
     },{
-        'regex': "," ,
+        'regex': ",|،",
         'token': 'keyword',
     },{
         'regex': "(" +\
@@ -265,7 +265,7 @@ def rule_level4():
         'regex': START_WORD + K("at") ,
         'token': ['text','keyword'],
     },{
-        'regex': "," ,
+        'regex': ",|،",
         'token': 'keyword',
     },{
         'regex': "(" +\

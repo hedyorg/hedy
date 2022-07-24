@@ -17,18 +17,9 @@
 #   This category of keywords allows you to have keywords that can be preceded immediately
 #   by another word, but that are not followed by another word.
 LEVELS = {
-    4 :{ # not used
-        "SP_K_SP" : ["is","at","add","to_list","remove","from","color"],
-        "K"       : [","],
-        "SP_K"    : ["print","ask","sleep","forward","turn","random"],
-        "K_SP"    : [],
-        "constant": ["black", "blue", "brown", "gray", "green", "orange", "pink", "purple", "red", "white", "yellow"],
-        "number"  : False,
-        "number_with_decimal": False,
-    },
     5 :{
         "SP_K_SP" : ["is","at","add","to_list","remove","from","in","if","else","color"],
-        "K"       : [","],
+        "K"       : [",", "،"],
         "SP_K"    : ["print","ask","sleep","forward","turn","random"],
         "K_SP"    : [],
         "constant": ["black", "blue", "brown", "gray", "green", "orange", "pink", "purple", "red", "white", "yellow"],
@@ -37,7 +28,7 @@ LEVELS = {
     },
     6 :{
         "SP_K_SP" : ["is","at","add","to_list","remove","from","in","if","else","color"],
-        "K"       : [",","-","=","/","\\*","\\+"],
+        "K"       : [",", "،","-","=","/","\\*","\\+"],
         "SP_K"    : ["print","ask","sleep","forward","turn","random"],
         "K_SP"    : [],
         "constant": ["black", "blue", "brown", "gray", "green", "orange", "pink", "purple", "red", "white", "yellow"],
@@ -46,7 +37,7 @@ LEVELS = {
     },
     7 :{
         "SP_K_SP" : ["is","at","add","to_list","remove","from","in","if","else","repeat","times","color"],
-        "K"       : [",","-","=","/","\\*","\\+"],
+        "K"       : [",", "،","-","=","/","\\*","\\+"],
         "SP_K"    : ["print","ask","sleep","forward","turn","random"],
         "K_SP"    : [],
         "constant": ["black", "blue", "brown", "gray", "green", "orange", "pink", "purple", "red", "white", "yellow"],
@@ -55,7 +46,7 @@ LEVELS = {
     },
     8 :{
         "SP_K_SP" : ["is","at","add","to_list","remove","from","in","if","repeat","color"],
-        "K"       : [",","-","=","/","\\*","\\+"],
+        "K"       : [",", "،","-","=","/","\\*","\\+"],
         "SP_K"    : ["print","ask","sleep","forward","turn","random","else","times"],
         "K_SP"    : [],
         "constant": ["black", "blue", "brown", "gray", "green", "orange", "pink", "purple", "red", "white", "yellow"],
@@ -64,7 +55,7 @@ LEVELS = {
     },
     9 :{
         "SP_K_SP" : ["is","at","add","to_list","remove","from","in","if","repeat","color"],
-        "K"       : [",","-","=","/","\\*","\\+"],
+        "K"       : [",", "،","-","=","/","\\*","\\+"],
         "SP_K"    : ["print","ask","sleep","forward","turn","random","else","times"],
         "K_SP"    : [],
         "constant": ["black", "blue", "brown", "gray", "green", "orange", "pink", "purple", "red", "white", "yellow"],
@@ -73,7 +64,7 @@ LEVELS = {
     },
     10 :{
         "SP_K_SP" : ["is","at","add","to_list","remove","from","in","if","repeat","for","color"],
-        "K"       : [",","-","=","/","\\*","\\+"],
+        "K"       : [",", "،","-","=","/","\\*","\\+"],
         "SP_K"    : ["print","ask","sleep","forward","turn","random","else","times"],
         "K_SP"    : [],
         "constant": ["black", "blue", "brown", "gray", "green", "orange", "pink", "purple", "red", "white", "yellow"],
@@ -82,7 +73,7 @@ LEVELS = {
     },
     11 :{
         "SP_K_SP" : ["is","at","add","to_list","remove","from","in","if","for","range","to","repeat"],
-        "K"       : [",","-","=","/","\\*","\\+"],
+        "K"       : [",", "،","-","=","/","\\*","\\+"],
         "SP_K"    : ["print","ask","sleep","random","else","times"],
         "K_SP"    : [],
         "constant": [],
@@ -91,7 +82,7 @@ LEVELS = {
     },
     12 :{
         "SP_K_SP" : ["is","at","add","to_list","remove","from","in","if","for","range","to","repeat"],
-        "K"       : [",","-","=","/","\\*","\\+"],
+        "K"       : [",", "،","-","=","/","\\*","\\+"],
         "SP_K"    : ["print","ask","sleep","random","else","times"],
         "K_SP"    : [],
         "constant": [],
@@ -100,7 +91,7 @@ LEVELS = {
     },
     13 :{
         "SP_K_SP" : ["is","at","add","to_list","remove","from","in","if","for","range","to","and","or","repeat"],
-        "K"       : [",","-","=","/","\\*","\\+"],
+        "K"       : [",", "،","-","=","/","\\*","\\+"],
         "SP_K"    : ["print","ask","sleep","random","else","times"],
         "K_SP"    : [],
         "constant": [],
@@ -109,7 +100,7 @@ LEVELS = {
     },
     14 :{
         "SP_K_SP" : ["is","at","add","to_list","remove","from","in","if","for","range","to","and","or","else","repeat"],
-        "K"       : [",","-","=","/","\\*","\\+","<",">","!"],
+        "K"       : [",", "،","-","=","/","\\*","\\+","<",">","!"],
         "SP_K"    : ["print","ask","sleep","random","times"],
         "K_SP"    : [],
         "constant": [],
@@ -118,7 +109,7 @@ LEVELS = {
     },
     15 :{
         "SP_K_SP" : ["is","at","add","to_list","remove","from","in","if","for","range","to","and","or","while","repeat"],
-        "K"       : [",","-","=","/","\\*","\\+","<",">","!"],
+        "K"       : [",", "،","-","=","/","\\*","\\+","<",">","!"],
         "SP_K"    : ["print","ask","sleep","random","else","times"],
         "K_SP"    : [],
         "constant": [],
@@ -127,7 +118,7 @@ LEVELS = {
     },
     16 :{
         "SP_K_SP" : ["is","at","add","to_list","remove","from","in","if","else","for","range","to","and","or","while","repeat"],
-        "K"       : [",","-","=","/","\\*","\\+","<",">","!","\\[","\\]"],
+        "K"       : [",", "،","-","=","/","\\*","\\+","<",">","!","\\[","\\]"],
         "SP_K"    : ["print","ask","sleep","random","times"],
         "K_SP"    : [],
         "constant": [],
@@ -136,7 +127,7 @@ LEVELS = {
     },
     17 :{
         "SP_K_SP" : ["is","at","add","to_list","remove","from","in","if","else","for","range","to","and","or","while","repeat"],
-        "K"       : [",","-","=","/","\\*","\\+","<",">","!","\\[","\\]",":"],
+        "K"       : [",", "،","-","=","/","\\*","\\+","<",">","!","\\[","\\]",":"],
         "SP_K"    : ["print","ask","sleep","random","times"],
         "K_SP"    : ["elif"],
         "constant": [],
@@ -145,7 +136,7 @@ LEVELS = {
     },
     18 :{
         "SP_K_SP" : ["is","at","add","to_list","remove","from","in","if","else","for","range","to","and","or","while","input","repeat"],
-        "K"       : [",","-","=","/","\\*","\\+","<",">","!","\\[","\\]",":","\\(","\\)"],
+        "K"       : [",", "،","-","=","/","\\*","\\+","<",">","!","\\[","\\]",":","\\(","\\)"],
         "SP_K"    : ["print","sleep","random","times"],
         "K_SP"    : ["elif"],
         "constant": [],
