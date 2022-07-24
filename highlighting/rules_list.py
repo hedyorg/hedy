@@ -1,3 +1,4 @@
+# coding=utf8
 from list_keywords import LEVELS
 from definition import *
 import re

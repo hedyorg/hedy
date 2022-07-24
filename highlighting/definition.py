@@ -1,3 +1,4 @@
+# coding=utf8
 # This file defines the special regexes
 
 # list of symbols recognized as characters (with non-Latin characters)

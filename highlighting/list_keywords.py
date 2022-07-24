@@ -1,3 +1,4 @@
+# coding=utf8
 
 # This variable lists all the keywords in each level, i.e. everything that should be displayed in red (of type `keyword`)
 # 

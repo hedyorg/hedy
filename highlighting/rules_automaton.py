@@ -1,3 +1,4 @@
+# coding=utf8
 from definition import *
 
 # In the first levels, the strings are not yet well defined,
