@@ -60,7 +60,8 @@ TRANSLATE_WORD = [
 	"input",
 	"or",
 	"while",
-	"length"
+	"length",
+	"comma"
 ]
 
 

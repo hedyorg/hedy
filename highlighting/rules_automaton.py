@@ -150,8 +150,8 @@ def rule_level3():
         'regex': START_WORD + K("at") ,
         'token': ['text','keyword'],
     },{
-        'regex': "," ,
-        'token': 'keyword',
+        'regex': K("comma") ,
+        'token': ['keyword'],
     },{
         'regex': "(" +\
                 K("black",True) + "|" +\
@@ -265,8 +265,8 @@ def rule_level4():
         'regex': START_WORD + K("at") ,
         'token': ['text','keyword'],
     },{
-        'regex': "," ,
-        'token': 'keyword',
+        'regex': K("comma") ,
+        'token': ['keyword'],
     },{
         'regex': "(" +\
                 K("black",True) + "|" +\
