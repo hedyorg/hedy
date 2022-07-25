@@ -18,7 +18,7 @@ END_WORD   = '(?![' + CHARACTER + '])'
 
 DIGIT = '[__DIGIT__]'
 
-TRANSLATE_WORD = [
+TRANSLATE_WORDS = [
 	"print",
 	"ask",
 	"echo",
@@ -66,15 +66,21 @@ TRANSLATE_WORD = [
 
 
 TOKEN_CONSTANT = "text"
+# 
+# 
+def translate(word, withoutGroup = False):
+	""" Function that allows to add tags around the keywords to be translated.
+		The "__" tags are added before and after only if the keyword belongs to the list.
 
-def K(word, withoutGroup = False):
+
+	"""
 	if withoutGroup:
-		if word in TRANSLATE_WORD:
+		if word in TRANSLATE_WORDS:
 			return "__"+word+"__"
 		else:
 			return word
 	else:
-		if word in TRANSLATE_WORD:
+		if word in TRANSLATE_WORDS:
 			return "(__"+word+"__)"
 		else:
 			return "(" + word + ")"
