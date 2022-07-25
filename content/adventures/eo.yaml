@@ -431,7 +431,7 @@ adventures:
                 story_text: "## Se... alie....\nEn Nivelo 5 estas io nova, la `{if}`! Per la `{if}`, oni povas elekti inter du malsamaj opcioj.\nLa jena kodo presos «bone», se vi tajpos «Hedy» kiel nomon, kaj «ba!», se vi tajpos ion alian.\n`{ask}` kaj `{print}` daŭre funkcias kiel en Nivelo 4.\n"
                 example_code: "```\nnomo {is} {ask} 'kio estas via nomo?'\n{if} nomo {is} Hedy {print} 'bone' {else} {print} 'ba!'\n```\n"
                 story_text_3: "## Listoj\nKiam oni volas kontroli, ĉu io estas en listo, oni nun povas uzi la komandon `{in}`.\nLa jena kodo presas «bela!», se oni elektas «verda» aŭ «flava», kaj «ba!» alie.\n"
-                example_code_3: "```\nbelaj_koloroj {is} verda, flava\nkoloro {is} {ask} 'Kio estas via plej ŝatata koloro?'\n{if} koloro {in} belaj_koloroj {print} 'bela!'\n{else} {print} 'ba!'\n```\n"
+                example_code_3: "```\nbelaj_koloroj {is} verda, flava\nŝatata_koloro {is} {ask} 'Kio estas via plej ŝatata koloro?'\n{if} ŝatata_koloro {in} belaj_koloroj {print} 'bela!'\n{else} {print} 'ba!'\n```\n"
                 story_text_2: "Kelkfoje kodo kun `{if}` estas tro longa por unu linio.<br>Oni ankaŭ povas dividi la kodon inter du linioj, komencante la duan linion ĉe la `{else}` jene:\n"
                 example_code_2: "```\nnomo {is} {ask} 'Kio estas via nomo?'\n{if} nomo {is} Hedy {print} 'bone'\n{else} {print} 'ba!'\n```\n"
             6:
@@ -446,7 +446,7 @@ adventures:
                 example_code: "```\n{repeat} 3 {times} {print} 'Hedy estas amuza!'\n```\n"
             8:
                 start_code: "{repeat} 5 {times}\n    {print} 'Saluton ĉiuj'\n    {print} 'Jen linio represota 5 fojojn'"
-                story_text: "## Deŝovado\n`{ask}` kaj `{print}` ankoraŭ funkcias kiel vi konas ilin. Sed `{if}` kaj `{repeat}` ŝanĝiĝis!\nVi nun povas ekzekuti grupojn de kodo kune, sed vi devos *deŝovi* la kodon.\nTio signifas meti kvar spacojn ĉe la komenco de la linio. Vi ankaŭ devos deŝovi kiam vi nur volas krei blokon de unu linio.\n"
+                story_text: "## Deŝovado\n`{ask}` kaj `{print}` ankoraŭ funkcias kiel vi konas ilin. Sed `{if}`, `{else}` kaj `{repeat}` ŝanĝiĝis!\nVi nun povas ekzekuti grupojn de kodo kune, sed vi devos *deŝovi* la kodon.\nTio signifas meti kvar spacojn ĉe la komenco de la linio. Vi ankaŭ devos deŝovi kiam vi nur volas krei blokon de unu linio.\n"
                 example_code: "```\n{repeat} 5 {times}\n    {print} 'Saluton ĉiuj'\n    {print} 'Jen ĉio ripetota 5 fojojn'\n```\n"
             9:
                 start_code: "{repeat} 3 {times}\n    manĝaĵo = {ask} 'Kion vi volas manĝi?'\n    {if} manĝaĵo {is} pico\n        {print} 'Bonege!'\n    {else}\n        {print} 'Pico estas preferinda.'"
@@ -554,7 +554,7 @@ adventures:
                 start_code: "{print} 'Al la sekva nivelo!'"
             11:
                 story_text: "## What's next?\nMaybe you have tried using decimal numbers in your restaurant adventure. If you did, you probably noticed that Hedy didn't understand them yet and always rounded off.\nFrom the next level on you can use decimal numbers.\n\nAnother cool feauture in the next level is that you can use mulitiple words in a variable.\nFor intance, you could already do this...\n"
-                example_code: "```\nnomo = {ask} 'Kiu estas via plej ŝatata programo?'\n{print} 'Mi amas spekti' nomo\n```\nSed vi ne povis uzi plurajn vortojn en variablo kiel la ĉi-suba ekzemplo. La ĉi-suba programo ankoraŭ ne funkcias en ĉi tiu nivelo!\n```\nprogramo = Spongabobo Kvadratpantalonulo\n{print} programo 'estas mia plej ŝatata programo!'\n```\nIru al la sekva nivelo por funkciigi ĉi tiun kodon!\n"
+                example_code: "```\nburger {is} 5\ndrink {is} 2\ntotal {is} burger + drink\n{print} 'You have ordered a burger and a drink'\n{print} 'That costs ' total ' dollars please'\n```\nThe code above works, because the burger is 5 dollars and the drink is 2 dollar. But if you charge 50 cents more, the program doesn't work anymore! Like the code below:\n```\nburger {is} 5.50\ndrink {is} 2.30\ntotal {is} burger + drink\n{print} 'You have ordered a burger and a drink'\n{print} 'That costs ' total ' dollars please'\n```\nGo to the next level to make this code work!\n"
                 start_code: "{print} 'Al la sekva nivelo!'"
             12:
                 story_text: "## What's next?\nIn the previous levels you learned how to put two `{if}`commands inside each other. This works fine, but it does give you very long and unhandy codes like this one:\n\nIn this system you have to give both the correct username and the correct password.\nIn the next level you will learn the `{and}` command that will make this code a ot shorter and more understandable!\nCheck it out!\n"
