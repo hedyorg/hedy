@@ -19,7 +19,7 @@ class HighlighterTestOverCol(HighlightTester):
         self.assert_highlighted_chr(
             "ask is lost",
             "TTT KK TTTT",
-            level=level, lang="en", intermediate_tests=False)
+            level=level, lang="en")
 
 
 
@@ -35,7 +35,7 @@ class HighlighterTestOverCol(HighlightTester):
         self.assert_highlighted_chr(
             "ask is 'lost'",
             "TTT KK SSSSSS",
-            level=level, lang="en", intermediate_tests=False)
+            level=level, lang="en")
 
 
     @parameterized.expand([
@@ -50,7 +50,7 @@ class HighlighterTestOverCol(HighlightTester):
         self.assert_highlighted_chr(
             "ask = lost",
             "TTT K TTTT",
-            level=level, lang="en", intermediate_tests=False)
+            level=level, lang="en")
 
     @parameterized.expand([
         ("level12"),
@@ -64,7 +64,7 @@ class HighlighterTestOverCol(HighlightTester):
         self.assert_highlighted_chr(
             "ask = 'lost'",
             "TTT K SSSSSS",
-            level=level, lang="en", intermediate_tests=False)
+            level=level, lang="en")
 
 
     @parameterized.expand([
@@ -75,7 +75,7 @@ class HighlighterTestOverCol(HighlightTester):
         self.assert_highlighted_chr(
             "print hello world! ask",
             "KKKKK TTTTTTTTTTTTTTTT",
-            level=level, lang="en", intermediate_tests=False)
+            level=level, lang="en")
 
 
     @parameterized.expand([
@@ -98,6 +98,6 @@ class HighlighterTestOverCol(HighlightTester):
         self.assert_highlighted_chr(
             "print 'hello world!' ask",
             "KKKKK SSSSSSSSSSSSSS TTT",
-            level=level, lang="en", intermediate_tests=False)
+            level=level, lang="en")
 
 
