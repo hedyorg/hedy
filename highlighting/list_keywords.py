@@ -1,3 +1,17 @@
+from definition import *
+
+#extra rules for ignore few cases 
+nothingBeforeIs = {
+    "regex": START_LINE + WORD + SPACE + K("is"),
+    "token": ["text","text","text","keyword"]
+}
+
+nothingBeforeEq = {
+    "regex": START_LINE + WORD + SPACE + "(=)",
+    "token": ["text","text","text","keyword"]
+}
+
+
 
 # This variable lists all the keywords in each level, i.e. everything that should be displayed in red (of type `keyword`)
 # 
@@ -16,6 +30,16 @@
 # - K_SP
 #   This category of keywords allows you to have keywords that can be preceded immediately
 #   by another word, but that are not followed by another word.
+#
+# - constant
+#   list of level constants (direction and colors) not used yet (highlighted in white)
+#
+# - number & number_with_decimal
+#   2 booleans to indicate if the level recognizes numbers, and if so, if it recognizes decimal numbers
+#
+# - extra_rules
+#   Some additional rules that will be added to reduce over highlighting
+
 LEVELS = {
     4 :{ # not used
         "SP_K_SP" : ["is","at","add","to_list","remove","from","color"],
@@ -25,6 +49,7 @@ LEVELS = {
         "constant": ["black", "blue", "brown", "gray", "green", "orange", "pink", "purple", "red", "white", "yellow"],
         "number"  : False,
         "number_with_decimal": False,
+        "extra_rules" : [nothingBeforeIs]
     },
     5 :{
         "SP_K_SP" : ["is","at","add","to_list","remove","from","in","if","else","color"],
@@ -34,6 +59,7 @@ LEVELS = {
         "constant": ["black", "blue", "brown", "gray", "green", "orange", "pink", "purple", "red", "white", "yellow"],
         "number"  : False,
         "number_with_decimal": False,
+        "extra_rules" : [nothingBeforeIs]
     },
     6 :{
         "SP_K_SP" : ["is","at","add","to_list","remove","from","in","if","else","color"],
@@ -43,6 +69,7 @@ LEVELS = {
         "constant": ["black", "blue", "brown", "gray", "green", "orange", "pink", "purple", "red", "white", "yellow"],
         "number"  : True,
         "number_with_decimal": False,
+        "extra_rules" : [nothingBeforeIs,nothingBeforeEq]
     },
     7 :{
         "SP_K_SP" : ["is","at","add","to_list","remove","from","in","if","else","repeat","times","color"],
@@ -52,6 +79,7 @@ LEVELS = {
         "constant": ["black", "blue", "brown", "gray", "green", "orange", "pink", "purple", "red", "white", "yellow"],
         "number"  : True,
         "number_with_decimal": False,
+        "extra_rules" : [nothingBeforeIs,nothingBeforeEq]
     },
     8 :{
         "SP_K_SP" : ["is","at","add","to_list","remove","from","in","if","repeat","color"],
@@ -61,6 +89,7 @@ LEVELS = {
         "constant": ["black", "blue", "brown", "gray", "green", "orange", "pink", "purple", "red", "white", "yellow"],
         "number"  : True,
         "number_with_decimal": False,
+        "extra_rules" : [nothingBeforeIs,nothingBeforeEq]
     },
     9 :{
         "SP_K_SP" : ["is","at","add","to_list","remove","from","in","if","repeat","color"],
@@ -70,6 +99,7 @@ LEVELS = {
         "constant": ["black", "blue", "brown", "gray", "green", "orange", "pink", "purple", "red", "white", "yellow"],
         "number"  : True,
         "number_with_decimal": False,
+        "extra_rules" : [nothingBeforeIs,nothingBeforeEq]
     },
     10 :{
         "SP_K_SP" : ["is","at","add","to_list","remove","from","in","if","repeat","for","color"],
@@ -79,6 +109,7 @@ LEVELS = {
         "constant": ["black", "blue", "brown", "gray", "green", "orange", "pink", "purple", "red", "white", "yellow"],
         "number"  : True,
         "number_with_decimal": False,
+        "extra_rules" : [nothingBeforeIs,nothingBeforeEq]
     },
     11 :{
         "SP_K_SP" : ["is","at","add","to_list","remove","from","in","if","for","range","to","repeat"],
@@ -88,6 +119,7 @@ LEVELS = {
         "constant": [],
         "number"  : True,
         "number_with_decimal": False,
+        "extra_rules" : [nothingBeforeIs,nothingBeforeEq]
     },
     12 :{
         "SP_K_SP" : ["is","at","add","to_list","remove","from","in","if","for","range","to","repeat"],
@@ -97,6 +129,7 @@ LEVELS = {
         "constant": [],
         "number"  : True,
         "number_with_decimal": True ,
+        "extra_rules" : [nothingBeforeIs,nothingBeforeEq]
     },
     13 :{
         "SP_K_SP" : ["is","at","add","to_list","remove","from","in","if","for","range","to","and","or","repeat"],
@@ -106,6 +139,7 @@ LEVELS = {
         "constant": [],
         "number"  : True,
         "number_with_decimal": True ,
+        "extra_rules" : [nothingBeforeIs,nothingBeforeEq]
     },
     14 :{
         "SP_K_SP" : ["is","at","add","to_list","remove","from","in","if","for","range","to","and","or","else","repeat"],
@@ -115,6 +149,7 @@ LEVELS = {
         "constant": [],
         "number"  : True,
         "number_with_decimal": True ,
+        "extra_rules" : [nothingBeforeIs,nothingBeforeEq]
     },
     15 :{
         "SP_K_SP" : ["is","at","add","to_list","remove","from","in","if","for","range","to","and","or","while","repeat"],
@@ -124,6 +159,7 @@ LEVELS = {
         "constant": [],
         "number"  : True,
         "number_with_decimal": True ,
+        "extra_rules" : [nothingBeforeIs,nothingBeforeEq]
     },
     16 :{
         "SP_K_SP" : ["is","at","add","to_list","remove","from","in","if","else","for","range","to","and","or","while","repeat"],
@@ -133,6 +169,7 @@ LEVELS = {
         "constant": [],
         "number"  : True,
         "number_with_decimal": True ,
+        "extra_rules" : [nothingBeforeIs,nothingBeforeEq]
     },
     17 :{
         "SP_K_SP" : ["is","at","add","to_list","remove","from","in","if","else","for","range","to","and","or","while","repeat"],
@@ -142,6 +179,7 @@ LEVELS = {
         "constant": [],
         "number"  : True,
         "number_with_decimal": True ,
+        "extra_rules" : [nothingBeforeIs,nothingBeforeEq]
     },
     18 :{
         "SP_K_SP" : ["is","at","add","to_list","remove","from","in","if","else","for","range","to","and","or","while","input","repeat"],
@@ -151,5 +189,6 @@ LEVELS = {
         "constant": [],
         "number"  : True,
         "number_with_decimal": True,
+        "extra_rules" : [nothingBeforeIs,nothingBeforeEq]
     },
 }
