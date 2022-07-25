@@ -180,8 +180,8 @@ os.chdir(os.path.dirname(__file__) +"/..")
 print("Generation of translations.....................", end="")
 language_keywords = get_translations(KEYWORDS_PATH, KEYWORDS_PATTERN)
 # Saving the rules in the corresponding file
-file_lang = open(OUTPUT_PATH_TRANSLATION, "w")
-file_lang.write(json.dumps(language_keywords, indent=4))
+file_lang = open(OUTPUT_PATH_TRANSLATION, "w",encoding='utf8')
+file_lang.write(json.dumps(language_keywords, indent=4,ensure_ascii=False))
 file_lang.close()
 print(" Done !")
 
@@ -195,8 +195,8 @@ levels = generate_rules()
 validate_ruleset(levels)
 
 # Saving the rules in the corresponding file
-file_syntax = open(OUTPUT_PATH_HIGHLIGHT,"w")
-file_syntax.write(json.dumps(levels,indent=4))
+file_syntax = open(OUTPUT_PATH_HIGHLIGHT,"w",encoding='utf8')
+file_syntax.write(json.dumps(levels,indent=4,ensure_ascii=False))
 file_syntax.close()
 
 print(" Done !")
