@@ -449,7 +449,7 @@ class LookupEntryCollector(visitors.Visitor):
         self.add_to_lookup(iterator, trimmed_tree)
 
     def for_loop(self, tree):
-        iterator = str(tree.children[0])
+        iterator = str(tree.children[0].children[0])
         # the tree is trimmed to skip contain the inner commands of the loop since
         # they are not needed to infer the type of the iterator variable
         trimmed_tree = Tree(tree.data, tree.children[0:3], tree.meta)
