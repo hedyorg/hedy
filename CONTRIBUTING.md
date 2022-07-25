@@ -9,7 +9,7 @@ First have a look at the open issues. [Good first issues](https://github.com/Fel
 
 **Project boards**
 
-The core team (currently consisting of [Felienne](https://github.com/Felienne), [boryanagoncharenko](https://github.com/boryanagoncharenko), [Jesus Pelay](https://github.com/jpelay) and [tibiba](https://github.com/tibiba)) keeps track of the issues they will work on in the future on the [Core Team Project Board](https://github.com/Felienne/hedy/projects/5). If there are issues on the Code team Board that you want to help out with, that is always welcome, the core team is kind of busy with many things :)! But do [reach out](mailto:hedy@felienne.com) to prevent us from working on the same thing.
+The core team (currently consisting of [Felienne](https://github.com/Felienne), [boryanagoncharenko](https://github.com/boryanagoncharenko), [Jesus Pelay](https://github.com/jpelay) and [tibiba](https://github.com/tibiba)) keeps track of the issues they will work on in the future on the [Core Team Project Board](https://github.com/Felienne/hedy/projects/5). If there are issues on the Code team Board that you want to help out with, that is always welcome, the core team is kind of busy with many things :)! But do [reach out](mailto:hello@hedy.org) to prevent us from working on the same thing.
 
 Other project boards are student projects that keep track of their own issues, these are typically not open for contributors to work on since we want the students to do their own projects :)
 
@@ -19,11 +19,11 @@ We also run a Discord channel to enable users and contributors to get in touch w
 
 **Discussions**
 
-The [Discussion board](https://github.com/Felienne/hedy/discussions) has ideas that are not yet detailed enough to be put into issue, like big new features or overhuals of the language or architecture. If you are interested in picking up such a large feature do [let us know](mailto:hedy@felienne.com) and read the corresponding discussion to see what has alrady been considered.
+The [Discussion board](https://github.com/Felienne/hedy/discussions) has ideas that are not yet detailed enough to be put into issue, like big new features or overhuals of the language or architecture. If you are interested in picking up such a large feature do [let us know](mailto:hello@hedy.org) and read the corresponding discussion to see what has alrady been considered.
 
 **For newcomers: No PR without an issue and no "issue + PR"**
 
-While we really love people to help out, we work and prioritize our work as a team and we have a lot of work still on our backlog. 'Random' pull requests can be overwhelming and not always helpful. If you want to help, please pick an open issue to work on. We have a few labeled "good first issue" to get started, or [reach out](mailto:hedy@felienne.com). We are always happy to jump on a call to chat about how you can help!!
+While we really love people to help out, we work and prioritize our work as a team and we have a lot of work still on our backlog. 'Random' pull requests can be overwhelming and not always helpful. If you want to help, please pick an open issue to work on. We have a few labeled "good first issue" to get started, or [reach out](mailto:hello@hedy.org). We are always happy to jump on a call to chat about how you can help!!
 
 Run Hedy code on your machine
 ------------
