@@ -66,3 +66,38 @@ class HighlighterTestOverCol(HighlightTester):
             "TTT K SSSSSS",
             level=level, lang="en", intermediate_tests=False)
 
+
+    @parameterized.expand([
+        ("level2"),
+        ("level3"),
+    ])
+    def test_print1(self, level):
+        self.assert_highlighted_chr(
+            "print hello world! ask",
+            "KKKKK TTTTTTTTTTTTTTTT",
+            level=level, lang="en", intermediate_tests=False)
+
+
+    @parameterized.expand([
+        ("level4"),
+        ("level5"),
+        ("level6"),
+        ("level7"),
+        ("level8"),
+        ("level9"),
+        ("level10"),
+        ("level11"),
+        ("level12"),
+        ("level13"),
+        ("level14"),
+        ("level15"),
+        ("level16"),
+        ("level17"),
+    ])
+    def test_print2(self, level):
+        self.assert_highlighted_chr(
+            "print 'hello world!' ask",
+            "KKKKK SSSSSSSSSSSSSS TTT",
+            level=level, lang="en", intermediate_tests=False)
+
+
