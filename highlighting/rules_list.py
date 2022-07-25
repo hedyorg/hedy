@@ -46,14 +46,14 @@ def rule_all(level):
         # Special case of an number directly followed by a number 
         for command in data_level["space_before"]: 
             list_rules.append({
-                'regex': START_WORD + translate(command) + number_regex + END_WORD,
+                'regex': START_WORD + get_translated_keyword(command) + number_regex + END_WORD,
                 'token': ['text','keyword','variable'],
                 'next': 'start',
             })
 
         for command in data_level["no_space"]:
             list_rules.append({
-                'regex': translate(command) + number_regex + END_WORD,
+                'regex': get_translated_keyword(command) + number_regex + END_WORD,
                 'token': ['keyword','variable'],
                 'next': 'start',
             })
@@ -63,7 +63,7 @@ def rule_all(level):
     # These are the keywords that must be "alone" so neither preceded nor followed directly by a word 
     for command in data_level["space_before_and_after"]:
         list_rules.append({
-            'regex': START_WORD + translate(command) + END_WORD,
+            'regex': START_WORD + get_translated_keyword(command) + END_WORD,
             'token': ["text","keyword"],
             'next': "start", 
         })
@@ -74,7 +74,7 @@ def rule_all(level):
     # In particular, even if they are between 2 words, the syntax highlighting will select them
     for command in data_level["no_space"]:
         list_rules.append({
-            'regex': translate(command),
+            'regex': get_translated_keyword(command),
             'token': ["keyword"],
             'next': "start", 
         })
@@ -84,7 +84,7 @@ def rule_all(level):
     # by another word, but that can be followed immediately by another word. (see the PR #2413)*/
     for command in data_level["space_before"]:
         list_rules.append({
-            'regex': START_WORD + translate(command),
+            'regex': START_WORD + get_translated_keyword(command),
             'token': ["text","keyword"],
             'next': "start", 
         })
@@ -94,7 +94,7 @@ def rule_all(level):
     # by another word, but that are not followed by another word.*/
     for command in data_level["space_after"]:
         list_rules.append({
-            'regex': translate(command) + END_WORD,
+            'regex': get_translated_keyword(command) + END_WORD,
             'token': ["keyword"],
             'next': "start", 
         })
@@ -102,7 +102,7 @@ def rule_all(level):
     # Rules for constants (colors, directions)
     for command in data_level['constant']:
         list_rules.append({
-            'regex': START_WORD + translate(command) + END_WORD,
+            'regex': START_WORD + get_translated_keyword(command) + END_WORD,
             'token': ["text",TOKEN_CONSTANT],
             'next': "start", 
         })

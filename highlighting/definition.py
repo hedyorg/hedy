@@ -66,9 +66,9 @@ TRANSLATE_WORDS = [
 
 
 TOKEN_CONSTANT = "text"
-# 
-# 
-def translate(word, withoutGroup = False):
+
+
+def get_translated_keyword(word, withoutGroup = False):
 	""" Function that allows to add tags around the keywords to be translated.
 		The "__" tags are added before and after only if the keyword belongs to the list.
 

@@ -6,51 +6,51 @@ from definition import *
 def rule_level1():
     return add_extra_rule({
     "start" : [{
-            'regex': START_LINE + translate("ask"),
+            'regex': START_LINE + get_translated_keyword("ask"),
             'token': ["text",'keyword'],
             'next': 'value',
         },{
-            'regex': START_LINE + translate("print"),
+            'regex': START_LINE + get_translated_keyword("print"),
             'token': ["text",'keyword'],
             'next': 'value',
         },{
-            'regex': START_LINE + translate("echo"),
+            'regex': START_LINE + get_translated_keyword("echo"),
             'token': ["text",'keyword'], 
             'next': 'value',
         },{
-            'regex': START_LINE + translate("forward"),
+            'regex': START_LINE + get_translated_keyword("forward"),
             'token': ["text",'keyword'],
             'next': 'value',
         },{
-            'regex': START_LINE + translate("turn"),
+            'regex': START_LINE + get_translated_keyword("turn"),
             'token': ["text",'keyword'],
             'next': 'direction',
         },{
-            'regex': START_LINE + translate("color"),
+            'regex': START_LINE + get_translated_keyword("color"),
             'token': ["text",'keyword'],
             'next': 'color',
         }],
     "value" : [],
     "color" : [{
             'regex': "(" + \
-                    translate("black",True)  + "|" +\
-                    translate("gray",True)   + "|" +\
-                    translate("white",True)  + "|" +\
-                    translate("green",True)  + "|" +\
-                    translate("blue",True)   + "|" +\
-                    translate("purple",True) + "|" +\
-                    translate("brown",True)  + "|" +\
-                    translate("pink",True)   + "|" +\
-                    translate("red",True)    + "|" +\
-                    translate("orange",True) + "|" +\
-                    translate("yellow",True) + \
+                    get_translated_keyword("black",True)  + "|" +\
+                    get_translated_keyword("gray",True)   + "|" +\
+                    get_translated_keyword("white",True)  + "|" +\
+                    get_translated_keyword("green",True)  + "|" +\
+                    get_translated_keyword("blue",True)   + "|" +\
+                    get_translated_keyword("purple",True) + "|" +\
+                    get_translated_keyword("brown",True)  + "|" +\
+                    get_translated_keyword("pink",True)   + "|" +\
+                    get_translated_keyword("red",True)    + "|" +\
+                    get_translated_keyword("orange",True) + "|" +\
+                    get_translated_keyword("yellow",True) + \
                 ")",
             'token': [TOKEN_CONSTANT],
         }],
     "direction" : [{
             'regex': "(" +\
-                    translate("right",True) + "|" +\
-                    translate("left",True) +\
+                    get_translated_keyword("right",True) + "|" +\
+                    get_translated_keyword("left",True) +\
                 ")",
             'token': [TOKEN_CONSTANT],
         }]
@@ -59,47 +59,47 @@ def rule_level1():
 def rule_level2() :
     return add_extra_rule({
     "start" : [{
-            'regex': START_LINE + translate("print"),
+            'regex': START_LINE + get_translated_keyword("print"),
             'token': ["text",'keyword'],
             'next': 'value',
         },{
-            'regex': START_LINE + WORD + SPACE + translate("is") + SPACE + translate("ask"),
+            'regex': START_LINE + WORD + SPACE + get_translated_keyword("is") + SPACE + get_translated_keyword("ask"),
             'token': ["text","text","text",'keyword',"text","keyword"],
             'next': 'value',
         },{
-            'regex': START_LINE + WORD + SPACE + translate("is"),
+            'regex': START_LINE + WORD + SPACE + get_translated_keyword("is"),
             'token': ["text","text","text",'keyword'],
             'next': 'value',
         },{
-            'regex': START_LINE + translate("sleep"),
+            'regex': START_LINE + get_translated_keyword("sleep"),
             'token': ["text",'keyword'],
             'next': 'value',
         },{
-            'regex': START_LINE + translate("forward"),
+            'regex': START_LINE + get_translated_keyword("forward"),
             'token': ["text",'keyword'],
             'next': 'value',
         },{
-            'regex': START_LINE + translate("turn"),
+            'regex': START_LINE + get_translated_keyword("turn"),
             'token': ["text",'keyword'],
             'next': 'value',
         },{
-            'regex': START_LINE + translate("color"),
+            'regex': START_LINE + get_translated_keyword("color"),
             'token': ["text",'keyword'],
             'next': 'value',
         }],
     "value" : [{
             'regex': "(" +\
-                    translate("black",True) + "|" +\
-                    translate("blue",True) + "|" +\
-                    translate("brown",True) + "|" +\
-                    translate("gray",True) + "|" +\
-                    translate("green",True) + "|" +\
-                    translate("orange",True) + "|" +\
-                    translate("pink",True) + "|" +\
-                    translate("purple",True) + "|" +\
-                    translate("red",True) + "|" +\
-                    translate("white",True) + "|" +\
-                    translate("yellow",True) +\
+                    get_translated_keyword("black",True) + "|" +\
+                    get_translated_keyword("blue",True) + "|" +\
+                    get_translated_keyword("brown",True) + "|" +\
+                    get_translated_keyword("gray",True) + "|" +\
+                    get_translated_keyword("green",True) + "|" +\
+                    get_translated_keyword("orange",True) + "|" +\
+                    get_translated_keyword("pink",True) + "|" +\
+                    get_translated_keyword("purple",True) + "|" +\
+                    get_translated_keyword("red",True) + "|" +\
+                    get_translated_keyword("white",True) + "|" +\
+                    get_translated_keyword("yellow",True) +\
                 ")",
             'token': [TOKEN_CONSTANT],
         }]
@@ -107,112 +107,112 @@ def rule_level2() :
 
 def rule_level3():
     return add_extra_rule({"start" : [{
-        'regex': START_LINE + WORD + SPACE + translate("is") + "( *)" + translate("ask"),
+        'regex': START_LINE + WORD + SPACE + get_translated_keyword("is") + "( *)" + get_translated_keyword("ask"),
         'token': ["text",'text','text','keyword','text','keyword'],
         'next': 'valueExpr',
     },{
-        'regex': START_LINE + WORD + SPACE + translate("is"),
+        'regex': START_LINE + WORD + SPACE + get_translated_keyword("is"),
         'token': ["text",'text','text','keyword'],
         'next': 'value',
     },{
-        'regex': START_LINE + translate("print") ,
+        'regex': START_LINE + get_translated_keyword("print") ,
         'token': ['text','keyword'],
         'next': 'valueExpr',
     },{
-        'regex': START_LINE + translate("turn") ,
+        'regex': START_LINE + get_translated_keyword("turn") ,
         'token': ['text','keyword'],
         'next': 'valueExpr',
     },{
-        'regex': START_LINE + translate("sleep") ,
+        'regex': START_LINE + get_translated_keyword("sleep") ,
         'token': ['text','keyword'],
         'next': 'valueExpr',
     },{
-        'regex': START_LINE + translate("forward") ,
+        'regex': START_LINE + get_translated_keyword("forward") ,
         'token': ['text','keyword'],
         'next': 'valueExpr',
     },{
-        'regex': START_LINE + translate("add"),
+        'regex': START_LINE + get_translated_keyword("add"),
         'token': ["text",'keyword'],
         'next': 'valAdd',
     },{
-        'regex': START_LINE + translate("remove"),
+        'regex': START_LINE + get_translated_keyword("remove"),
         'token': ["text",'keyword'],
         'next': 'valRemove',
     },{
-        'regex': START_LINE + translate("color"),
+        'regex': START_LINE + get_translated_keyword("color"),
         'token': ["text",'keyword'],
         'next': 'value',
     }],
     "value" : [{
-        'regex': START_WORD + translate("at") + SPACE + translate("random") ,
+        'regex': START_WORD + get_translated_keyword("at") + SPACE + get_translated_keyword("random") ,
         'token': ['text','keyword','keyword','keyword'],
     },{
-        'regex': START_WORD + translate("at") ,
+        'regex': START_WORD + get_translated_keyword("at") ,
         'token': ['text','keyword'],
     },{
-        'regex': translate("comma") ,
+        'regex': get_translated_keyword("comma") ,
         'token': ['keyword'],
     },{
         'regex': "(" +\
-                translate("black",True) + "|" +\
-                translate("blue",True) + "|" +\
-                translate("brown",True) + "|" +\
-                translate("gray",True) + "|" +\
-                translate("green",True) + "|" +\
-                translate("orange",True) + "|" +\
-                translate("pink",True) + "|" +\
-                translate("purple",True) + "|" +\
-                translate("red",True) + "|" +\
-                translate("white",True) + "|" +\
-                translate("yellow",True) +\
+                get_translated_keyword("black",True) + "|" +\
+                get_translated_keyword("blue",True) + "|" +\
+                get_translated_keyword("brown",True) + "|" +\
+                get_translated_keyword("gray",True) + "|" +\
+                get_translated_keyword("green",True) + "|" +\
+                get_translated_keyword("orange",True) + "|" +\
+                get_translated_keyword("pink",True) + "|" +\
+                get_translated_keyword("purple",True) + "|" +\
+                get_translated_keyword("red",True) + "|" +\
+                get_translated_keyword("white",True) + "|" +\
+                get_translated_keyword("yellow",True) +\
             ")",
         'token': [TOKEN_CONSTANT],
     }],
     "valueExpr" : [{
-        'regex': START_WORD + translate("at") + SPACE + translate("random") ,
+        'regex': START_WORD + get_translated_keyword("at") + SPACE + get_translated_keyword("random") ,
         'token': ['text','keyword','keyword','keyword'],
     },{
-        'regex': START_WORD + translate("at") ,
+        'regex': START_WORD + get_translated_keyword("at") ,
         'token': ['text','keyword'],
     }],
     "valAdd"    : [{
-        'regex': START_WORD + translate("to_list") ,
+        'regex': START_WORD + get_translated_keyword("to_list") ,
         'token': ['text','keyword'],
         'next': 'valueTo',
     },{
         'regex': "(" +\
-                translate("black",True) + "|" +\
-                translate("blue",True) + "|" +\
-                translate("brown",True) + "|" +\
-                translate("gray",True) + "|" +\
-                translate("green",True) + "|" +\
-                translate("orange",True) + "|" +\
-                translate("pink",True) + "|" +\
-                translate("purple",True) + "|" +\
-                translate("red",True) + "|" +\
-                translate("white",True) + "|" +\
-                translate("yellow",True) +\
+                get_translated_keyword("black",True) + "|" +\
+                get_translated_keyword("blue",True) + "|" +\
+                get_translated_keyword("brown",True) + "|" +\
+                get_translated_keyword("gray",True) + "|" +\
+                get_translated_keyword("green",True) + "|" +\
+                get_translated_keyword("orange",True) + "|" +\
+                get_translated_keyword("pink",True) + "|" +\
+                get_translated_keyword("purple",True) + "|" +\
+                get_translated_keyword("red",True) + "|" +\
+                get_translated_keyword("white",True) + "|" +\
+                get_translated_keyword("yellow",True) +\
             ")",
         'token': [TOKEN_CONSTANT],
     }],
     "valueTo" : [],
     "valRemove" : [{
-        'regex': START_WORD + translate("from") ,
+        'regex': START_WORD + get_translated_keyword("from") ,
         'token': ['text','keyword'],
         'next': 'valueFrom',
     },{
         'regex': "(" +\
-                translate("black",True) + "|" +\
-                translate("blue",True) + "|" +\
-                translate("brown",True) + "|" +\
-                translate("gray",True) + "|" +\
-                translate("green",True) + "|" +\
-                translate("orange",True) + "|" +\
-                translate("pink",True) + "|" +\
-                translate("purple",True) + "|" +\
-                translate("red",True) + "|" +\
-                translate("white",True) + "|" +\
-                translate("yellow",True) +\
+                get_translated_keyword("black",True) + "|" +\
+                get_translated_keyword("blue",True) + "|" +\
+                get_translated_keyword("brown",True) + "|" +\
+                get_translated_keyword("gray",True) + "|" +\
+                get_translated_keyword("green",True) + "|" +\
+                get_translated_keyword("orange",True) + "|" +\
+                get_translated_keyword("pink",True) + "|" +\
+                get_translated_keyword("purple",True) + "|" +\
+                get_translated_keyword("red",True) + "|" +\
+                get_translated_keyword("white",True) + "|" +\
+                get_translated_keyword("yellow",True) +\
             ")",
         'token': [TOKEN_CONSTANT],
     }],
@@ -222,72 +222,72 @@ def rule_level3():
 
 def rule_level4():
     return add_extra_rule({"start" : [{
-        'regex': START_LINE + WORD + SPACE + translate("is") + "( *)" + translate("ask"),
+        'regex': START_LINE + WORD + SPACE + get_translated_keyword("is") + "( *)" + get_translated_keyword("ask"),
         'token': ["text",'text','text','keyword','text','keyword'],
         'next': 'valueExpr',
     },{
-        'regex': START_LINE + WORD + SPACE + translate("is"),
+        'regex': START_LINE + WORD + SPACE + get_translated_keyword("is"),
         'token': ["text",'text','text','keyword'],
         'next': 'value',
     },{
-        'regex': START_LINE + translate("print") ,
+        'regex': START_LINE + get_translated_keyword("print") ,
         'token': ['text','keyword'],
         'next': 'valueExpr',
     },{
-        'regex': START_LINE + translate("turn") ,
+        'regex': START_LINE + get_translated_keyword("turn") ,
         'token': ['text','keyword'],
         'next': 'valueSimple',
     },{
-        'regex': START_LINE + translate("sleep") ,
+        'regex': START_LINE + get_translated_keyword("sleep") ,
         'token': ['text','keyword'],
         'next': 'valueSimple',
     },{
-        'regex': START_LINE + translate("forward") ,
+        'regex': START_LINE + get_translated_keyword("forward") ,
         'token': ['text','keyword'],
         'next': 'valueSimple',
     },{
-        'regex': START_LINE + translate("color"),
+        'regex': START_LINE + get_translated_keyword("color"),
         'token': ["text",'keyword'],
         'next': 'valueSimple',
     },{
-        'regex': START_LINE + translate("add"),
+        'regex': START_LINE + get_translated_keyword("add"),
         'token': ["text",'keyword'],
         'next': 'valAdd',
     },{
-        'regex': START_LINE + translate("remove"),
+        'regex': START_LINE + get_translated_keyword("remove"),
         'token': ["text",'keyword'],
         'next': 'valRemove',
     }],
     "value" : [{
-        'regex': START_WORD + translate("at") + SPACE + translate("random") ,
+        'regex': START_WORD + get_translated_keyword("at") + SPACE + get_translated_keyword("random") ,
         'token': ['text','keyword','keyword','keyword'],
     },{
-        'regex': START_WORD + translate("at") ,
+        'regex': START_WORD + get_translated_keyword("at") ,
         'token': ['text','keyword'],
     },{
-        'regex': translate("comma") ,
+        'regex': get_translated_keyword("comma") ,
         'token': ['keyword'],
     },{
         'regex': "(" +\
-                translate("black",True) + "|" +\
-                translate("blue",True) + "|" +\
-                translate("brown",True) + "|" +\
-                translate("gray",True) + "|" +\
-                translate("green",True) + "|" +\
-                translate("orange",True) + "|" +\
-                translate("pink",True) + "|" +\
-                translate("purple",True) + "|" +\
-                translate("red",True) + "|" +\
-                translate("white",True) + "|" +\
-                translate("yellow",True) +\
+                get_translated_keyword("black",True) + "|" +\
+                get_translated_keyword("blue",True) + "|" +\
+                get_translated_keyword("brown",True) + "|" +\
+                get_translated_keyword("gray",True) + "|" +\
+                get_translated_keyword("green",True) + "|" +\
+                get_translated_keyword("orange",True) + "|" +\
+                get_translated_keyword("pink",True) + "|" +\
+                get_translated_keyword("purple",True) + "|" +\
+                get_translated_keyword("red",True) + "|" +\
+                get_translated_keyword("white",True) + "|" +\
+                get_translated_keyword("yellow",True) +\
             ")",
         'token': [TOKEN_CONSTANT],
     }],
     "valueExpr" : [{
-        'regex': START_WORD + translate("at") + SPACE + translate("random") ,
+        'regex': START_WORD + get_translated_keyword("at") + SPACE + get_translated_keyword("random") ,
         'token': ['text','keyword','keyword','keyword'],
     },{
-        'regex': START_WORD + translate("at") ,
+        'regex': START_WORD + get_translated_keyword("at") ,
         'token': ['text','keyword'],
     },{
         'regex': '\"[^\"]*\"',
@@ -305,65 +305,65 @@ def rule_level4():
         'next' : 'start'
     }],
     "valueSimple":[{
-        'regex': START_WORD + translate("at") + SPACE + translate("random") ,
+        'regex': START_WORD + get_translated_keyword("at") + SPACE + get_translated_keyword("random") ,
         'token': ['text','keyword','keyword','keyword'],
     },{
-        'regex': START_WORD + translate("at") ,
+        'regex': START_WORD + get_translated_keyword("at") ,
         'token': ['text','keyword'],
     },{
         'regex': "(" +\
-                translate("black",True) + "|" +\
-                translate("blue",True) + "|" +\
-                translate("brown",True) + "|" +\
-                translate("gray",True) + "|" +\
-                translate("green",True) + "|" +\
-                translate("orange",True) + "|" +\
-                translate("pink",True) + "|" +\
-                translate("purple",True) + "|" +\
-                translate("red",True) + "|" +\
-                translate("white",True) + "|" +\
-                translate("yellow",True) +\
+                get_translated_keyword("black",True) + "|" +\
+                get_translated_keyword("blue",True) + "|" +\
+                get_translated_keyword("brown",True) + "|" +\
+                get_translated_keyword("gray",True) + "|" +\
+                get_translated_keyword("green",True) + "|" +\
+                get_translated_keyword("orange",True) + "|" +\
+                get_translated_keyword("pink",True) + "|" +\
+                get_translated_keyword("purple",True) + "|" +\
+                get_translated_keyword("red",True) + "|" +\
+                get_translated_keyword("white",True) + "|" +\
+                get_translated_keyword("yellow",True) +\
             ")",
         'token': [TOKEN_CONSTANT],
     }],
     "valAdd"    : [{
-        'regex': START_WORD + translate("to_list") ,
+        'regex': START_WORD + get_translated_keyword("to_list") ,
         'token': ['text','keyword'],
         'next': 'valueTo',
     },{
         'regex': "(" +\
-                translate("black",True) + "|" +\
-                translate("blue",True) + "|" +\
-                translate("brown",True) + "|" +\
-                translate("gray",True) + "|" +\
-                translate("green",True) + "|" +\
-                translate("orange",True) + "|" +\
-                translate("pink",True) + "|" +\
-                translate("purple",True) + "|" +\
-                translate("red",True) + "|" +\
-                translate("white",True) + "|" +\
-                translate("yellow",True) +\
+                get_translated_keyword("black",True) + "|" +\
+                get_translated_keyword("blue",True) + "|" +\
+                get_translated_keyword("brown",True) + "|" +\
+                get_translated_keyword("gray",True) + "|" +\
+                get_translated_keyword("green",True) + "|" +\
+                get_translated_keyword("orange",True) + "|" +\
+                get_translated_keyword("pink",True) + "|" +\
+                get_translated_keyword("purple",True) + "|" +\
+                get_translated_keyword("red",True) + "|" +\
+                get_translated_keyword("white",True) + "|" +\
+                get_translated_keyword("yellow",True) +\
             ")",
         'token': [TOKEN_CONSTANT],
     }],
     "valueTo" : [],
     "valRemove" : [{
-        'regex': START_WORD + translate("from") ,
+        'regex': START_WORD + get_translated_keyword("from") ,
         'token': ['text','keyword'],
         'next': 'valueFrom',
     },{
         'regex': "(" +\
-                translate("black",True) + "|" +\
-                translate("blue",True) + "|" +\
-                translate("brown",True) + "|" +\
-                translate("gray",True) + "|" +\
-                translate("green",True) + "|" +\
-                translate("orange",True) + "|" +\
-                translate("pink",True) + "|" +\
-                translate("purple",True) + "|" +\
-                translate("red",True) + "|" +\
-                translate("white",True) + "|" +\
-                translate("yellow",True) +\
+                get_translated_keyword("black",True) + "|" +\
+                get_translated_keyword("blue",True) + "|" +\
+                get_translated_keyword("brown",True) + "|" +\
+                get_translated_keyword("gray",True) + "|" +\
+                get_translated_keyword("green",True) + "|" +\
+                get_translated_keyword("orange",True) + "|" +\
+                get_translated_keyword("pink",True) + "|" +\
+                get_translated_keyword("purple",True) + "|" +\
+                get_translated_keyword("red",True) + "|" +\
+                get_translated_keyword("white",True) + "|" +\
+                get_translated_keyword("yellow",True) +\
             ")",
         'token': [TOKEN_CONSTANT],
     }],
