@@ -54,7 +54,7 @@ ABBREVIATION = {
 
 class HighlightTester(unittest.TestCase):
 
-    def assert_highlighted_chr(self, code, expected, level, lang="en", start_token="start", last_state="start"):
+    def assert_highlighted_chr(self, code, expected, level, lang="en", start_token="start", last_state="start", intermediate_tests=True):
         """Test if the code has the expected coloring on one line
 
         Arguments :
@@ -65,13 +65,16 @@ class HighlightTester(unittest.TestCase):
             - start_token : str, token for beginning of the highlighting
             - last_token : str, token for the end of the highlighting
                                 if last_token == None, ignore the end state test
+            - intermediate_tests : boolean, execution of tests on the consistency
+                                            of the input word by word or not
         """
         state_machine = self.get_state_machine(level, lang)
         self.check(code+"\n", expected+"\n", state_machine, start_token, last_state)
-        self.checkInter(code, expected, state_machine, start_token)
+        if intermediate_tests:
+            self.checkInter(code, expected, state_machine, start_token)
 
 
-    def assert_highlighted_chr_multi_line(self, *args, level, lang="en", start_token="start", last_state="start"):
+    def assert_highlighted_chr_multi_line(self, *args, level, lang="en", start_token="start", last_state="start", intermediate_tests=True):
         """Test if the code has the expected coloring on several lines
 
         Arguments :
@@ -85,6 +88,8 @@ class HighlightTester(unittest.TestCase):
             - start_token : str, token for beginning of the highlighting
             - last_token : str, token for the end of the highlighting
                                 if last_token == None, ignore the end state test
+            - intermediate_tests : boolean, execution of tests on the consistency
+                                            of the input word by word or not
         """
         if len(args)%2 != 0:
             raise RuntimeError(f'Pass an even number of strings to assert_highlighted_chr_multi_line (alternatingly code and highlighting). Got: {args}')
@@ -92,10 +97,10 @@ class HighlightTester(unittest.TestCase):
         code = '\n'.join(line for i, line in enumerate(args) if i%2 == 0)
         expected = '\n'.join(line for i, line in enumerate(args) if i%2 != 0)
 
-        self.assert_highlighted_chr(code, expected, level, lang, start_token, last_state)
+        self.assert_highlighted_chr(code, expected, level, lang, start_token, last_state, intermediate_tests)
 
 
-    def assert_highlighted(self, code_coloration, level, lang="en", start_token="start", last_state="start"):
+    def assert_highlighted(self, code_coloration, level, lang="en", start_token="start", last_state="start", intermediate_tests=True):
         """Test if the code has the expected coloring on one line
 
         Arguments :
@@ -105,12 +110,14 @@ class HighlightTester(unittest.TestCase):
             - start_token : str, token for beginning of the highlighting
             - last_token : str, token for the end of the highlighting
                                 if last_token == None, ignore the end state test
+            - intermediate_tests : boolean, execution of tests on the consistency
+                                            of the input word by word or not
         """
         code, expected = self.convert(code_coloration)
-        self.assert_highlighted_chr(code, expected, level, lang, start_token, last_state)
+        self.assert_highlighted_chr(code, expected, level, lang, start_token, last_state, intermediate_tests)
 
 
-    def assert_highlighted_multi_line(self, *args, level, lang="en", start_token="start", last_state="start"):
+    def assert_highlighted_multi_line(self, *args, level, lang="en", start_token="start", last_state="start", intermediate_tests=True):
         """Test if the code has the expected coloring on several lines
 
         Arguments :
@@ -120,10 +127,12 @@ class HighlightTester(unittest.TestCase):
             - start_token : str, token for beginning of the highlighting
             - last_token : str, token for the end of the highlighting
                                 if last_token == None, ignore the end state test
+            - intermediate_tests : boolean, execution of tests on the consistency
+                                            of the input word by word or not
         """
         code_coloration = "\n".join(args)
         code, expected = self.convert(code_coloration)
-        self.assert_highlighted_chr(code, expected, level, lang, start_token, last_state)
+        self.assert_highlighted_chr(code, expected, level, lang, start_token, last_state, intermediate_tests)
 
     def checkInter(self, code, expected, state_machine, start_token="start"):
         """Check the highlighting on the intermediate states
