@@ -454,7 +454,7 @@ class TestsLevel2(HedyTester):
         self.multi_level_tester(max_level=11, code=code, exception=hedy.exceptions.InvalidArgumentTypeException)
 
     #
-    # is tests
+    # assign tests
     #
 
     def test_assign_with_space_gives_invalid(self):
@@ -464,7 +464,6 @@ class TestsLevel2(HedyTester):
             code=code,
             exception=hedy.exceptions.InvalidSpaceException,
             max_level=7)
-
 
     def test_assign(self):
         code = "naam is Felienne"

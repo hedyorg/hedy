@@ -272,10 +272,11 @@ class TestsLevel4(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
-    def test_ask_bengali_var(self):
-        code = textwrap.dedent("""\
-        রং is ask 'আপনার প্রিয় রং কি?'
-        print রং ' is আপনার প্রিয'""")
+    @parameterized.expand(HedyTester.quotes)
+    def test_ask_bengali_var(self, q):
+        code = textwrap.dedent(f"""\
+        রং is ask {q}আপনার প্রিয় রং কি?{q}
+        print রং {q} is আপনার প্রিয{q}""")
 
         expected = textwrap.dedent("""\
         ve1760b6272d4c9f816e62af4882d874f = input(f'আপনার প্রিয় রং কি?')
@@ -341,7 +342,7 @@ class TestsLevel4(HedyTester):
         self.multi_level_tester(max_level=11, code=code, expected=expected)
 
     #
-    # is tests
+    # assign tests
     #
     def test_assign_print(self):
         code = textwrap.dedent("""\
