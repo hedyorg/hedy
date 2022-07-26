@@ -42,7 +42,8 @@ def rule_all(level):
     # get keyword by level
     data_level = LEVELS[level]
 
-    list_rules = []
+    # initialize with extra rules
+    list_rules = data_level["extra_rules"]
 
     # Rule for comments :
     list_rules.append( { 'regex': '#.*$', 'token': 'comment', 'next': 'start' } )
@@ -51,6 +52,7 @@ def rule_all(level):
     # complete
     list_rules.append( { 'regex': '\"[^\"]*\"', 'token': 'constant.character', 'next': 'start' } )
     list_rules.append( { 'regex': "\'[^\']*\'", 'token': 'constant.character', 'next': 'start' } )
+
     # incomplete
     list_rules.append( { 'regex': '\"[^\"]*$', 'token': 'constant.character', 'next': 'start' } )
     list_rules.append( { 'regex': "\'[^\']*$", 'token': 'constant.character', 'next': 'start' } )
@@ -122,6 +124,14 @@ def rule_all(level):
         list_rules.append({
             'regex': K(command) + END_WORD,
             'token': ["keyword"],
+            'next': "start", 
+        })
+
+    # Rules for constants (colors, directions)
+    for command in data_level['constant']:
+        list_rules.append({
+            'regex': START_WORD + K(command) + END_WORD,
+            'token': ["text",TOKEN_CONSTANT],
             'next': "start", 
         })
 

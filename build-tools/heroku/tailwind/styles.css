@@ -219,7 +219,7 @@ input[type=checkbox] {
   @apply appearance-none border border-gray-400 w-4 h-4;
 }
 
-#signup input:required, #signup select:required, #update_profile input:required, #change_password input:required {
+#signup input:required, #signup select:required, #profile input:required, #change_password input:required {
   @apply border border-red-400;
 }
 
@@ -307,8 +307,7 @@ p.close-dialog {
 }
 
 .editor-error {
-  @apply bg-red-600;
-  position: absolute;
+  @apply bg-red-500 absolute;
 }
 
 /* DOCS */
@@ -316,10 +315,6 @@ p.close-dialog {
 .expandable-docs-text h1 {
    margin-top: 30px;
    margin-bottom: 30px;
-}
-
-.touched {
-  @apply bg-green-200;
 }
 
 /* QUIZ */

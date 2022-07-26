@@ -15,7 +15,7 @@ config = {
         'invite_length': 60 * 24 * 7
     },
     'email': {
-        'sender': 'Hedy <hedy@felienne.com>',
+        'sender': 'Hedy <hello@hedy.org>',
         'region': 'eu-central-1',
     },
     # The bcrypt library's default is 12
