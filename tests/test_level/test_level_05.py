@@ -373,6 +373,20 @@ class TestsLevel5(HedyTester):
           print(f'minder leuk')""")
 
         self.single_level_tester(code=code, expected=expected)
+      
+    def test_if_with_negative_number(self):
+      code = textwrap.dedent("""\
+      antwoord is -10
+      if antwoord is -10 print 'Nice' else print 'Oh no'""")
+      
+      expected = textwrap.dedent("""\
+      antwoord = '-10'
+      if antwoord == '-10':
+        print(f'Nice')
+      else:
+        print(f'Oh no')""")
+      
+      self.single_level_tester(code=code, expected=expected, output='Nice')
 
     def test_if_equality_linebreak_print_linebreak_else_print(self):
         # line breaks after if-condition and before else are allowed

@@ -173,7 +173,19 @@ class TestsLevel12(HedyTester):
       max_level=17,
       expected=expected
     )
+  def test_print_add_negative_number(self):
+    code = textwrap.dedent("""\
+    n = -4 +3
+    print n""")
+    expected = textwrap.dedent("""\
+    n = -4 + 3
+    print(f'''{n}''')""")
 
+    self.multi_level_tester(
+      code=code,
+      max_level=17,
+      expected=expected
+    )
   # issue #745
   def test_print_list_gives_type_error(self):
     code = textwrap.dedent("""\
@@ -888,6 +900,18 @@ class TestsLevel12(HedyTester):
 
     self.single_level_tester(code=code, expected=expected)
 
+  def test_if_negative_number(self):
+    code = textwrap.dedent("""\
+    antwoord = -10
+    if antwoord is -10
+        print 'Nice'""")
+    
+    expected = textwrap.dedent("""\
+    antwoord = -10
+    if convert_numerals('Latin', antwoord) == convert_numerals('Latin', '-10'):
+      print(f'''Nice''')""")
+
+    self.multi_level_tester(code=code, expected=expected, output='Nice', max_level=16)
 
   #add/remove tests
   def test_add_to_list(self):
