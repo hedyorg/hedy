@@ -42,7 +42,8 @@ def rule_all(level):
     # get keyword by level
     data_level = LEVELS[level]
 
-    list_rules = []
+    # initialize with extra rules
+    list_rules = data_level["extra_rules"]
 
     # Rule for comments :
     list_rules.append( { 'regex': '#.*$', 'token': 'comment', 'next': 'start' } )
