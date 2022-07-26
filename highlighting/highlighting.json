@@ -1027,6 +1027,15 @@
         "rules": {
             "start": [
                 {
+                    "regex": "(^| )(__is__)( +)(__ask__)",
+                    "token": [
+                        "text",
+                        "keyword",
+                        "text",
+                        "keyword"
+                    ]
+                },
+                {
                     "regex": "#.*$",
                     "token": "comment",
                     "next": "start"
@@ -1153,14 +1162,6 @@
                 },
                 {
                     "regex": "(^| )(__print__)",
-                    "token": [
-                        "text",
-                        "keyword"
-                    ],
-                    "next": "start"
-                },
-                {
-                    "regex": "(^| )(__ask__)",
                     "token": [
                         "text",
                         "keyword"
@@ -1295,6 +1296,23 @@
         "rules": {
             "start": [
                 {
+                    "regex": "(^| )(__is__)( +)(__ask__)",
+                    "token": [
+                        "text",
+                        "keyword",
+                        "text",
+                        "keyword"
+                    ]
+                },
+                {
+                    "regex": "(=)( +)(__ask__)",
+                    "token": [
+                        "keyword",
+                        "text",
+                        "keyword"
+                    ]
+                },
+                {
                     "regex": "#.*$",
                     "token": "comment",
                     "next": "start"
@@ -1342,15 +1360,6 @@
                 },
                 {
                     "regex": "(^| )(__print__)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": [
-                        "text",
-                        "keyword",
-                        "variable"
-                    ],
-                    "next": "start"
-                },
-                {
-                    "regex": "(^| )(__ask__)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -1573,14 +1582,6 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__ask__)",
-                    "token": [
-                        "text",
-                        "keyword"
-                    ],
-                    "next": "start"
-                },
-                {
                     "regex": "(^| )(__sleep__)",
                     "token": [
                         "text",
@@ -1708,6 +1709,23 @@
         "rules": {
             "start": [
                 {
+                    "regex": "(^| )(__is__)( +)(__ask__)",
+                    "token": [
+                        "text",
+                        "keyword",
+                        "text",
+                        "keyword"
+                    ]
+                },
+                {
+                    "regex": "(=)( +)(__ask__)",
+                    "token": [
+                        "keyword",
+                        "text",
+                        "keyword"
+                    ]
+                },
+                {
                     "regex": "#.*$",
                     "token": "comment",
                     "next": "start"
@@ -1755,15 +1773,6 @@
                 },
                 {
                     "regex": "(^| )(__print__)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": [
-                        "text",
-                        "keyword",
-                        "variable"
-                    ],
-                    "next": "start"
-                },
-                {
-                    "regex": "(^| )(__ask__)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -2002,14 +2011,6 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__ask__)",
-                    "token": [
-                        "text",
-                        "keyword"
-                    ],
-                    "next": "start"
-                },
-                {
                     "regex": "(^| )(__sleep__)",
                     "token": [
                         "text",
@@ -2137,6 +2138,23 @@
         "rules": {
             "start": [
                 {
+                    "regex": "(^| )(__is__)( +)(__ask__)",
+                    "token": [
+                        "text",
+                        "keyword",
+                        "text",
+                        "keyword"
+                    ]
+                },
+                {
+                    "regex": "(=)( +)(__ask__)",
+                    "token": [
+                        "keyword",
+                        "text",
+                        "keyword"
+                    ]
+                },
+                {
                     "regex": "#.*$",
                     "token": "comment",
                     "next": "start"
@@ -2184,15 +2202,6 @@
                 },
                 {
                     "regex": "(^| )(__print__)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": [
-                        "text",
-                        "keyword",
-                        "variable"
-                    ],
-                    "next": "start"
-                },
-                {
-                    "regex": "(^| )(__ask__)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -2426,14 +2435,6 @@
                 },
                 {
                     "regex": "(^| )(__print__)",
-                    "token": [
-                        "text",
-                        "keyword"
-                    ],
-                    "next": "start"
-                },
-                {
-                    "regex": "(^| )(__ask__)",
                     "token": [
                         "text",
                         "keyword"
@@ -2584,6 +2585,23 @@
         "rules": {
             "start": [
                 {
+                    "regex": "(^| )(__is__)( +)(__ask__)",
+                    "token": [
+                        "text",
+                        "keyword",
+                        "text",
+                        "keyword"
+                    ]
+                },
+                {
+                    "regex": "(=)( +)(__ask__)",
+                    "token": [
+                        "keyword",
+                        "text",
+                        "keyword"
+                    ]
+                },
+                {
                     "regex": "#.*$",
                     "token": "comment",
                     "next": "start"
@@ -2631,15 +2649,6 @@
                 },
                 {
                     "regex": "(^| )(__print__)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": [
-                        "text",
-                        "keyword",
-                        "variable"
-                    ],
-                    "next": "start"
-                },
-                {
-                    "regex": "(^| )(__ask__)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -2880,14 +2889,6 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__ask__)",
-                    "token": [
-                        "text",
-                        "keyword"
-                    ],
-                    "next": "start"
-                },
-                {
                     "regex": "(^| )(__sleep__)",
                     "token": [
                         "text",
@@ -3031,6 +3032,23 @@
         "rules": {
             "start": [
                 {
+                    "regex": "(^| )(__is__)( +)(__ask__)",
+                    "token": [
+                        "text",
+                        "keyword",
+                        "text",
+                        "keyword"
+                    ]
+                },
+                {
+                    "regex": "(=)( +)(__ask__)",
+                    "token": [
+                        "keyword",
+                        "text",
+                        "keyword"
+                    ]
+                },
+                {
                     "regex": "#.*$",
                     "token": "comment",
                     "next": "start"
@@ -3078,15 +3096,6 @@
                 },
                 {
                     "regex": "(^| )(__print__)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": [
-                        "text",
-                        "keyword",
-                        "variable"
-                    ],
-                    "next": "start"
-                },
-                {
-                    "regex": "(^| )(__ask__)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -3335,14 +3344,6 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__ask__)",
-                    "token": [
-                        "text",
-                        "keyword"
-                    ],
-                    "next": "start"
-                },
-                {
                     "regex": "(^| )(__sleep__)",
                     "token": [
                         "text",
@@ -3486,6 +3487,23 @@
         "rules": {
             "start": [
                 {
+                    "regex": "(^| )(__is__)( +)(__ask__)",
+                    "token": [
+                        "text",
+                        "keyword",
+                        "text",
+                        "keyword"
+                    ]
+                },
+                {
+                    "regex": "(=)( +)(__ask__)",
+                    "token": [
+                        "keyword",
+                        "text",
+                        "keyword"
+                    ]
+                },
+                {
                     "regex": "#.*$",
                     "token": "comment",
                     "next": "start"
@@ -3533,15 +3551,6 @@
                 },
                 {
                     "regex": "(^| )(__print__)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": [
-                        "text",
-                        "keyword",
-                        "variable"
-                    ],
-                    "next": "start"
-                },
-                {
-                    "regex": "(^| )(__ask__)([__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -3780,14 +3789,6 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__ask__)",
-                    "token": [
-                        "text",
-                        "keyword"
-                    ],
-                    "next": "start"
-                },
-                {
                     "regex": "(^| )(__sleep__)",
                     "token": [
                         "text",
@@ -3826,6 +3827,23 @@
         "name": "level12",
         "rules": {
             "start": [
+                {
+                    "regex": "(^| )(__is__)( +)(__ask__)",
+                    "token": [
+                        "text",
+                        "keyword",
+                        "text",
+                        "keyword"
+                    ]
+                },
+                {
+                    "regex": "(=)( +)(__ask__)",
+                    "token": [
+                        "keyword",
+                        "text",
+                        "keyword"
+                    ]
+                },
                 {
                     "regex": "#.*$",
                     "token": "comment",
@@ -3874,15 +3892,6 @@
                 },
                 {
                     "regex": "(^| )(__print__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": [
-                        "text",
-                        "keyword",
-                        "variable"
-                    ],
-                    "next": "start"
-                },
-                {
-                    "regex": "(^| )(__ask__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -4121,14 +4130,6 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__ask__)",
-                    "token": [
-                        "text",
-                        "keyword"
-                    ],
-                    "next": "start"
-                },
-                {
                     "regex": "(^| )(__sleep__)",
                     "token": [
                         "text",
@@ -4167,6 +4168,23 @@
         "name": "level13",
         "rules": {
             "start": [
+                {
+                    "regex": "(^| )(__is__)( +)(__ask__)",
+                    "token": [
+                        "text",
+                        "keyword",
+                        "text",
+                        "keyword"
+                    ]
+                },
+                {
+                    "regex": "(=)( +)(__ask__)",
+                    "token": [
+                        "keyword",
+                        "text",
+                        "keyword"
+                    ]
+                },
                 {
                     "regex": "#.*$",
                     "token": "comment",
@@ -4215,15 +4233,6 @@
                 },
                 {
                     "regex": "(^| )(__print__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": [
-                        "text",
-                        "keyword",
-                        "variable"
-                    ],
-                    "next": "start"
-                },
-                {
-                    "regex": "(^| )(__ask__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -4478,14 +4487,6 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__ask__)",
-                    "token": [
-                        "text",
-                        "keyword"
-                    ],
-                    "next": "start"
-                },
-                {
                     "regex": "(^| )(__sleep__)",
                     "token": [
                         "text",
@@ -4524,6 +4525,23 @@
         "name": "level14",
         "rules": {
             "start": [
+                {
+                    "regex": "(^| )(__is__)( +)(__ask__)",
+                    "token": [
+                        "text",
+                        "keyword",
+                        "text",
+                        "keyword"
+                    ]
+                },
+                {
+                    "regex": "(=)( +)(__ask__)",
+                    "token": [
+                        "keyword",
+                        "text",
+                        "keyword"
+                    ]
+                },
                 {
                     "regex": "#.*$",
                     "token": "comment",
@@ -4572,15 +4590,6 @@
                 },
                 {
                     "regex": "(^| )(__print__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": [
-                        "text",
-                        "keyword",
-                        "variable"
-                    ],
-                    "next": "start"
-                },
-                {
-                    "regex": "(^| )(__ask__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -4879,14 +4888,6 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__ask__)",
-                    "token": [
-                        "text",
-                        "keyword"
-                    ],
-                    "next": "start"
-                },
-                {
                     "regex": "(^| )(__sleep__)",
                     "token": [
                         "text",
@@ -4917,6 +4918,23 @@
         "name": "level15",
         "rules": {
             "start": [
+                {
+                    "regex": "(^| )(__is__)( +)(__ask__)",
+                    "token": [
+                        "text",
+                        "keyword",
+                        "text",
+                        "keyword"
+                    ]
+                },
+                {
+                    "regex": "(=)( +)(__ask__)",
+                    "token": [
+                        "keyword",
+                        "text",
+                        "keyword"
+                    ]
+                },
                 {
                     "regex": "#.*$",
                     "token": "comment",
@@ -4965,15 +4983,6 @@
                 },
                 {
                     "regex": "(^| )(__print__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": [
-                        "text",
-                        "keyword",
-                        "variable"
-                    ],
-                    "next": "start"
-                },
-                {
-                    "regex": "(^| )(__ask__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -5281,14 +5290,6 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__ask__)",
-                    "token": [
-                        "text",
-                        "keyword"
-                    ],
-                    "next": "start"
-                },
-                {
                     "regex": "(^| )(__sleep__)",
                     "token": [
                         "text",
@@ -5327,6 +5328,23 @@
         "name": "level16",
         "rules": {
             "start": [
+                {
+                    "regex": "(^| )(__is__)( +)(__ask__)",
+                    "token": [
+                        "text",
+                        "keyword",
+                        "text",
+                        "keyword"
+                    ]
+                },
+                {
+                    "regex": "(=)( +)(__ask__)",
+                    "token": [
+                        "keyword",
+                        "text",
+                        "keyword"
+                    ]
+                },
                 {
                     "regex": "#.*$",
                     "token": "comment",
@@ -5375,15 +5393,6 @@
                 },
                 {
                     "regex": "(^| )(__print__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": [
-                        "text",
-                        "keyword",
-                        "variable"
-                    ],
-                    "next": "start"
-                },
-                {
-                    "regex": "(^| )(__ask__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -5720,14 +5729,6 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__ask__)",
-                    "token": [
-                        "text",
-                        "keyword"
-                    ],
-                    "next": "start"
-                },
-                {
                     "regex": "(^| )(__sleep__)",
                     "token": [
                         "text",
@@ -5758,6 +5759,23 @@
         "name": "level17",
         "rules": {
             "start": [
+                {
+                    "regex": "(^| )(__is__)( +)(__ask__)",
+                    "token": [
+                        "text",
+                        "keyword",
+                        "text",
+                        "keyword"
+                    ]
+                },
+                {
+                    "regex": "(=)( +)(__ask__)",
+                    "token": [
+                        "keyword",
+                        "text",
+                        "keyword"
+                    ]
+                },
                 {
                     "regex": "#.*$",
                     "token": "comment",
@@ -5806,15 +5824,6 @@
                 },
                 {
                     "regex": "(^| )(__print__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
-                    "token": [
-                        "text",
-                        "keyword",
-                        "variable"
-                    ],
-                    "next": "start"
-                },
-                {
-                    "regex": "(^| )(__ask__)([__DIGIT__]*\\.?[__DIGIT__]+)(?![0-9_A-Za-z\u00c0-\u00ff\u0621-\u064a])",
                     "token": [
                         "text",
                         "keyword",
@@ -6166,14 +6175,6 @@
                     "next": "start"
                 },
                 {
-                    "regex": "(^| )(__ask__)",
-                    "token": [
-                        "text",
-                        "keyword"
-                    ],
-                    "next": "start"
-                },
-                {
                     "regex": "(^| )(__sleep__)",
                     "token": [
                         "text",
@@ -6211,6 +6212,23 @@
         "name": "level18",
         "rules": {
             "start": [
+                {
+                    "regex": "(^| )(__is__)( +)(__ask__)",
+                    "token": [
+                        "text",
+                        "keyword",
+                        "text",
+                        "keyword"
+                    ]
+                },
+                {
+                    "regex": "(=)( +)(__ask__)",
+                    "token": [
+                        "keyword",
+                        "text",
+                        "keyword"
+                    ]
+                },
                 {
                     "regex": "#.*$",
                     "token": "comment",
