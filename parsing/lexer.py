@@ -6,6 +6,7 @@ from typing import Callable, Optional
 
 class HedyLexerTokenType(str, Enum):
     IDENTIFIER = 'IDENTIFIER'
+    NUMBER = 'NUMBER'
     SPACE = 'SPACE'
     PRINT = 'PRINT'
     EOL = 'EOL'
@@ -13,8 +14,20 @@ class HedyLexerTokenType(str, Enum):
 
 
 @dataclass
+class HedyLexerAlphabet:
+    def is_alpha(self, character: str):
+        return character.isalpha()
+
+    def is_alphanumeric(self, character: str):
+        return character.isalnum()
+
+    def is_numeric(self, character: str):
+        return character.isnumeric()
+
+
+@dataclass
 class HedyLexerConfig:
-    pass
+    alphabet: HedyLexerAlphabet
 
 
 @dataclass
@@ -40,7 +53,6 @@ class HedyLexerState:
         self.column_index = self.column_index + 1
 
     def newline(self):
-        self.next()
         self.column_index = 0
         self.line_number = self.line_number + 1
 
@@ -63,15 +75,18 @@ class HedyBaseLexer:
         self.state = self._state
 
     def _eol(self) -> bool:
-        return len(self.input) >= self.state.index
+        return self.accept('\n') or self.accept('\r\n')
+
+    def _eof(self) -> bool:
+        return len(self.input) <= self.state.index
 
     def current(self) -> Optional[str]:
-        if self._eol():
+        if self._eof():
             return None
         return self.input[self.state.index]
 
     def next(self) -> str:
-        self.state.next()
+        self.state.advance()
         return self.current()
 
     def peek(self) -> str:
@@ -86,8 +101,8 @@ class HedyBaseLexer:
         with self.peeking():
             if not predicate(self.current()):
                 return False
-            while predicate(self.current()):
-                self.state.next()
+            while not self._eof() and predicate(self.current()):
+                self.state.advance()
             self._store()
             return True
 
@@ -98,40 +113,80 @@ class HedyBaseLexer:
             for char in expected:
                 if char != self.current():
                     return False
-                self.state.next()
+                self.state.advance()
             self._store()
             return True
 
+    def maybe_number(self) -> Optional[HedyLexerToken]:
+        if not self.config.alphabet.is_numeric(self.current()):
+            return None
+        with self.peeking():
+            number = ""
+            while not self._eof() and self.config.alphabet.is_numeric(self.current()):
+                number = number + self.current()
+                self.state.advance()
+            if self.current() == '.':
+                number = number + self.current()
+                self.state.advance()
+            while not self._eof() and self.config.alphabet.is_numeric(self.current()):
+                number = number + self.current()
+                self.state.advance()
+            return self._create_token(number, HedyLexerTokenType.NUMBER)
 
     def maybe_identifier(self) -> Optional[HedyLexerToken]:
-
+        if not self.config.alphabet.is_alpha(self.current()):
+            return None
+        with self.peeking():
+            identifier = ""
+            while not self._eof() and self.config.alphabet.is_alphanumeric(self.current()):
+                identifier = identifier + self.current()
+                self.state.advance()
+            self._store()
+            return self._create_token(identifier, HedyLexerTokenType.IDENTIFIER)
 
     def _create_token(self, data: Optional[str], token_type: HedyLexerTokenType):
-        return HedyLexerToken(token_type, self.state.index, self.state.line_number, self.state.column_index, data)
+        offset = len(data) if data is not None else 0
+        return HedyLexerToken(
+            token_type,
+            self.state.index - offset,
+            self.state.line_number,
+            self.state.column_index - offset,
+            data
+        )
 
     def token(self) -> HedyLexerToken:
         if self._eol():
+            token = self._create_token(None, HedyLexerTokenType.EOL)
+            self.state.newline()
+            return token
+        if self._eof():
             return self._create_token(None, HedyLexerTokenType.EOF)
         for (keyword, token_type) in self.keywords.items():
             if self.accept(keyword):
                 return self._create_token(keyword, token_type)
 
-        maybe_identifier = self.maybe_identifier()
-        if maybe_identifier is not None:
-            return maybe_identifier
-
+        for lexeme in (self.maybe_identifier, self.maybe_number):
+            token = lexeme()
+            if token is not None:
+                return token
         raise
 
     @contextmanager
     def peeking(self):
         self._store()
         try:
-            yield self
+            yield self.state
         finally:
             self._recover()
 
     def register_keyword(self, keyword: str, token_type: HedyLexerTokenType):
         self.keywords[keyword] = token_type
+
+    @classmethod
+    def create_for_program(cls, program: str, alphabet: Optional[HedyLexerAlphabet] = None):
+        if alphabet is None:
+            alphabet = HedyLexerAlphabet()
+        return cls(program, HedyLexerConfig(alphabet))
 
 
 class HedyLevelOneLexer(HedyBaseLexer):
