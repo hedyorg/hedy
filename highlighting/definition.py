@@ -69,7 +69,7 @@ TOKEN_CONSTANT = "text"
 
 
 def get_translated_keyword(word, withoutGroup = False):
-	""" Function that allows to add tags around the keywords to be translated.
+	""" Function that allows to add double underscores around the keywords to be translated.
 		The "__" tags are added before and after only if the keyword belongs to the list.
 
 		- withoutGroup : bool, Add parentheses for make a group or not
