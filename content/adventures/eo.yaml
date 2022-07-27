@@ -497,7 +497,7 @@ adventures:
             17:
                 start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Jen mi venas!'"
                 story_text: "## `{elif}`\nNun ni iom ŝanĝos la deŝovon. Ĉiufoje kiam ni bezonas deŝovon, ni bezonas `:` ĉe la linio antaŭ la deŝovo.\n\nEn ĉi tiu nivelo vi povas ankaŭ uzi novan komandon: `{elif}`. `{elif}` estas mallongigo de {else} {if} kaj vi bezonas ĝin kiam vi volas fari 3 (aŭ pli!) opciojn.\nJen:"
-                example_code: "```\nprezoj = ['1 million dollars', 'an apple pie', 'nothing']\nvia_prezo = prezoj[{random}]\n{print} 'You win ' your_price\n{if} via_prezo == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} via_prezo == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
+                example_code: "```\nprezoj = ['1 million dollars', 'an apple pie', 'nothing']\nvia_prezo = prezoj[{random}]\n{print} 'You win ' via_prezo\n{if} via_prezo == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} via_prezo == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
             18:
                 start_code: "nomo = 'Hedy'\n{print}('Mia nomo estas ', nomo)"
                 story_text: "## La lasta nivelo!\nNi alvenis al vera Python-kodo! Tio signifas, ke ni devas uzi rondajn krampojn kun {print} kaj {range} de nun."
