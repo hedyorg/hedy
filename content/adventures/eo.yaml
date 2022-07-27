@@ -49,7 +49,7 @@ adventures:
                 start_code: "{print} 'Via rakonto ĉi tie!'"
             5:
                 story_text: "## Rakonto\nEn ĉi tiu nivelo vi povas programi malsamajn finaĵojn, kiuj faros vian rakonton eĉ pli amuza.\n\nPensu pri du finaĵoj por via rakonto, ekzemple:\n\n- La princino promenas tra la arbaro\n- Ŝi renkontas monstron\n\n- Feliĉa fino: Ŝi prenas sian glavon kaj la monstro rapide forkuras\n- Malbona Fino: La monstro manĝas la princinon\n\nVi ankaŭ povas certigi, ke nomo povas esti enigita denove. Tio funkcias same kiel en la antaŭaj niveloj. Vi povas kombini tion per `{if}`, kaj tiam vi jam faris tutan programon!\n"
-                example_code: "```\nnomo {is} {ask} 'Who is walking in the forest?'\n{print} nomo 'walks through the forest'\n{print} nomo 'renkontas monstron'\nfino {is} {ask} 'Would you like a good or a bad ending?'\n{if} fino {is} bona {print} nomo 'takes the sword and the monster quickly runs away'\n{else} {print} name 'estis manĝita de monstro'\n```\n"
+                example_code: "```\nnomo {is} {ask} 'Who is walking in the forest?'\n{print} nomo 'walks through the forest'\n{print} nomo 'renkontas monstron'\nfino {is} {ask} 'Would you like a good or a bad ending?'\n{if} fino {is} bona {print} nomo 'takes the sword and the monster quickly runs away'\n{else} {print} nomo 'estis manĝita de monstro'\n```\n"
                 start_code: "{print} 'Jen la komenco de via rakonto!'"
             7:
                 story_text: "## Rakonto\nEn rakonto, iu diras vortojn plurajn fojojn. Ekzemple, kiam iu vokas helpon aŭ kantas kanton.\nVi povas meti tiajn ripetojn en vian rakonton, en ĉi tiu nivelo per `{repeat}`.\n"
@@ -497,7 +497,7 @@ adventures:
             17:
                 start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Jen mi venas!'"
                 story_text: "## `{elif}`\nNun ni iom ŝanĝos la deŝovon. Ĉiufoje kiam ni bezonas deŝovon, ni bezonas `:` ĉe la linio antaŭ la deŝovo.\n\nEn ĉi tiu nivelo vi povas ankaŭ uzi novan komandon: `{elif}`. `{elif}` estas mallongigo de {else} {if} kaj vi bezonas ĝin kiam vi volas fari 3 (aŭ pli!) opciojn.\nJen:"
-                example_code: "```\nprezoj = ['1 million dollars', 'an apple pie', 'nothing']\nvia_prezo = prezoj[{random}]\n{print} 'You win ' your_price\n{if} via_prezo == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
+                example_code: "```\nprezoj = ['1 million dollars', 'an apple pie', 'nothing']\nvia_prezo = prezoj[{random}]\n{print} 'You win ' your_price\n{if} via_prezo == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} via_prezo == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
             18:
                 start_code: "nomo = 'Hedy'\n{print}('Mia nomo estas ', nomo)"
                 story_text: "## La lasta nivelo!\nNi alvenis al vera Python-kodo! Tio signifas, ke ni devas uzi rondajn krampojn kun {print} kaj {range} de nun."
