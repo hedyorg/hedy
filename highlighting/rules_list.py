@@ -2,33 +2,6 @@ from list_keywords import LEVELS
 from definition import *
 import re
 
-# transform "IF" in current language "if", "si", etc...
-def translate(keyword_lang, keywords_level):
-    if type(keywords_level) == str:
-        if keywords_level in keyword_lang:
-            trad = keyword_lang[keywords_level]
-        else:
-            trad = keywords_level
-
-        trad_compile = re.compile(trad)
-        if trad_compile.groups != 1 :
-            trad = "(" + trad + ")"
-        return trad
-
-    elif type(keywords_level) == list :
-        L = []
-        for sub in keywords_level:
-            L.append(translate(keyword_lang,sub))
-        return L
-    elif type(keywords_level) == dict:
-        D = {}
-        for key in keywords_level.keys():
-            D[key] = translate(keyword_lang,keywords_level[key])
-        return D
-
-
-
-
 
 # After the level 4
 # so what is not in quotes is code,
@@ -72,57 +45,57 @@ def rule_all(level):
         list_rules.append({'regex': START_WORD + number_regex + END_WORD, 'token': ['text','variable'], 'next':'start'} )
 
         # Special case of an number directly followed by a number 
-        for command in data_level["SP_K"]: 
+        for command in data_level["space_before"]: 
             list_rules.append({
-                'regex': START_WORD + K(command) + number_regex + END_WORD,
+                'regex': START_WORD + get_translated_keyword(command) + number_regex + END_WORD,
                 'token': ['text','keyword','variable'],
                 'next': 'start',
             })
 
-        for command in data_level["K"]:
+        for command in data_level["no_space"]:
             list_rules.append({
-                'regex': K(command) + number_regex + END_WORD,
+                'regex': get_translated_keyword(command) + number_regex + END_WORD,
                 'token': ['keyword','variable'],
                 'next': 'start',
             })
 
 
-    # Rules for commands of SP_K_SP 
+    # Rules for commands of space_before_and_after 
     # These are the keywords that must be "alone" so neither preceded nor followed directly by a word 
-    for command in data_level["SP_K_SP"]:
+    for command in data_level["space_before_and_after"]:
         list_rules.append({
-            'regex': START_WORD + K(command) + END_WORD,
+            'regex': START_WORD + get_translated_keyword(command) + END_WORD,
             'token': ["text","keyword"],
             'next': "start", 
         })
     
 
-    # Rules for commands of K 
+    # Rules for commands of no_space 
     #  These are the keywords that are independent of the context (formerly the symbols
     # In particular, even if they are between 2 words, the syntax highlighting will select them
-    for command in data_level["K"]:
+    for command in data_level["no_space"]:
         list_rules.append({
-            'regex': K(command),
+            'regex': get_translated_keyword(command),
             'token': ["keyword"],
             'next': "start", 
         })
 
-    # Rules for commands of SP_K 
+    # Rules for commands of space_before 
     #  This category of keywords allows you to have keywords that are not preced
     # by another word, but that can be followed immediately by another word. (see the PR #2413)*/
-    for command in data_level["SP_K"]:
+    for command in data_level["space_before"]:
         list_rules.append({
-            'regex': START_WORD + K(command),
+            'regex': START_WORD + get_translated_keyword(command),
             'token': ["text","keyword"],
             'next': "start", 
         })
 
-    # Rules for commands of K_SP 
+    # Rules for commands of space_after 
     #  This category of keywords allows you to have keywords that can be preceded immediate
     # by another word, but that are not followed by another word.*/
-    for command in data_level["K_SP"]:
+    for command in data_level["space_after"]:
         list_rules.append({
-            'regex': K(command) + END_WORD,
+            'regex': get_translated_keyword(command) + END_WORD,
             'token': ["keyword"],
             'next': "start", 
         })
@@ -130,7 +103,7 @@ def rule_all(level):
     # Rules for constants (colors, directions)
     for command in data_level['constant']:
         list_rules.append({
-            'regex': START_WORD + K(command) + END_WORD,
+            'regex': START_WORD + get_translated_keyword(command) + END_WORD,
             'token': ["text",TOKEN_CONSTANT],
             'next': "start", 
         })
