@@ -202,8 +202,8 @@ adventures:
                 story_text_3: "##  Input\nThe final change we will need to make to get Python code is changing `{ask}` into `{input}`."
                 example_code_3: "```\n{print}('My name is Hedy!')\nname = {input}('What is your name?')\n{print}('So your name is ', name)\n```\n"
         name: 소개
-        description: 앵무새
-        default_save_name: intro
+        description: Level explanation
+        default_save_name: 소개
     story:
         levels:
             9:
@@ -336,9 +336,9 @@ adventures:
                 story_text_2: "## Interaction\nAlso, we can now improve the program that draws different figures.\nCan you figure out how far the turtle has to turn here? Finish the code and you can draw any polygon you'd like!\n"
                 example_code_2: "```\nangles = {ask} 'How many angles should I draw?'\nangle = 360 / angles\n{repeat} angle {times}\n    {turn} _\n    {forward} _\n```\n"
                 start_code: angles = {ask} 'How many angles should I draw?'
-        name: Turtle
+        name: 거북이
         description: Make your own drawing
-        default_save_name: Turtle
+        default_save_name: 거북이
     dishes:
         levels:
             6:
@@ -410,8 +410,8 @@ adventures:
                 story_text: "## Rock, Paper, Scissors\nPlay until you beat the computer! But first, finish the example code...\n"
                 example_code: "```\nwon = 'no'\noptions = 'rock', 'paper', 'scissors'\n{while} won == 'no'\n    your_choice = {ask} 'What do you choose?'\n    computer_choice = options {at} {random}\n    {print} 'you chose ' your_choice\n    {print} 'the computer chose ' computer_choice\n    {if} computer_choice == your_choice\n        {print} 'Tie!'\n    {if} computer_choice == 'rock' {and} your_choice == 'scissors'\n        {print} 'You lose!'\n    {if} computer_choice == 'rock' {and} your_choice == 'paper'\n        {print} 'You win!'\n        won = 'yes'\n```\n"
                 start_code: '# place your code here'
-        name: Rock, paper, scissors
-        description: Make your own rock, paper, scissors game
+        name: 가위바위보
+        description: 가위바위보
         default_save_name: Rock
     calculator:
         default_save_name: Calculator
