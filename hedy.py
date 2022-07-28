@@ -1469,10 +1469,10 @@ class ConvertToPython_4(ConvertToPython_3):
 class ConvertToPython_5(ConvertToPython_4):
     def list_access_var(self, args):
         var = hash_var(args[0])
-        if args[2].data == 'random':
+        if isinstance(args[2], Tree):
             return var + ' = random.choice(' + args[1] + ')'
         else:
-            return var + ' = ' + args[1] + '[' + args[2].children[0] + '-1]'
+            return var + ' = ' + args[1] + '[' + args[2] + '-1]'
 
     def ifs(self, args):
         return f"""if {args[0]}:
