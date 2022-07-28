@@ -280,7 +280,7 @@ class TestsLevel11(HedyTester):
          for y in range 1 to 10
          print 'x*y'""")
 
-        self.single_level_tester(code, exception=hedy.exceptions.NoIndentationException)
+        self.multi_level_tester(code, exception=hedy.exceptions.NoIndentationException)
 
     # issue 1209
     def test_for_loop_dedented_nested_loop(self):
@@ -289,7 +289,7 @@ class TestsLevel11(HedyTester):
          for y in range 1 to 10
         print 'x*y'""")
 
-        self.single_level_tester(code, exception=hedy.exceptions.NoIndentationException)
+        self.multi_level_tester(code, exception=hedy.exceptions.NoIndentationException)
 
     # issue 1209
     def test_nested_for_loop_with_zigzag_body(self):
@@ -299,4 +299,4 @@ class TestsLevel11(HedyTester):
              print 'this number is'
             print x*y""")
 
-        self.single_level_tester(code, exception=hedy.exceptions.IndentationException)
+        self.multi_level_tester(code, exception=hedy.exceptions.IndentationException)
