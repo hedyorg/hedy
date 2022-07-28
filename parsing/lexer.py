@@ -31,11 +31,16 @@ class HedyLexerConfig:
 
 
 @dataclass
-class HedyLexerToken:
-    type: HedyLexerTokenType
+class HedyMarker:
     index: int
     line_number: int
     column_index: int
+
+
+@dataclass
+class HedyLexerToken:
+    type: HedyLexerTokenType
+    marker: HedyMarker
     data: Optional[str]
 
 
@@ -146,11 +151,10 @@ class HedyBaseLexer:
 
     def _create_token(self, data: Optional[str], token_type: HedyLexerTokenType):
         offset = len(data) if data is not None else 0
+        marker = HedyMarker(self.state.index - offset, self.state.line_number, self.state.column_index - offset)
         return HedyLexerToken(
             token_type,
-            self.state.index - offset,
-            self.state.line_number,
-            self.state.column_index - offset,
+            marker,
             data
         )
 
