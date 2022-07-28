@@ -276,7 +276,7 @@ class TestsLevel8(HedyTester):
         )
 
     #
-    # if else command
+    # if else tests
     #
     def test_if_else_no_indentation(self):
         code = textwrap.dedent("""\

@@ -136,7 +136,7 @@ class TestsLevel3(HedyTester):
         self.multi_level_tester(max_level=11, code=code, exception=hedy.exceptions.InvalidArgumentTypeException)
 
     #
-    # is tests
+    # assign tests
     #
     def test_assign_var_to_var(self):
         code = textwrap.dedent("""\
@@ -351,7 +351,7 @@ class TestsLevel3(HedyTester):
         )
 
     #
-    # turn tests
+    # color tests
     #
     def test_color_with_list_variable_gives_error(self):
         code = textwrap.dedent("""\
