@@ -28,5 +28,8 @@ jobs:
     - name: Install Nodejs dependencies
       run: |
         npm ci
+    - name: Run Deployment Script
+      run: |
+        ./build-tools/heroku/on-deploy.sh
     - name: Run validations
       run: build-tools/github/validate
