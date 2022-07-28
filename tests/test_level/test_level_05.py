@@ -612,6 +612,18 @@ class TestsLevel5(HedyTester):
 
         self.single_level_tester(code=code, expected=expected)
 
+    def test_list_access_index(self):
+      code = textwrap.dedent("""\
+      friends is Hedy, Lola, Frida
+      friend is friends at 2
+      print friend""")
+      
+      expected = textwrap.dedent("""\
+      friends = ['Hedy', 'Lola', 'Frida']
+      friend = friends[2-1]
+      print(f'{friend}')""")
+      
+      self.multi_level_tester(code=code, expected=expected, max_level=11)
     #
     # negative tests
     #

@@ -18,7 +18,7 @@ END_WORD   = '(?![' + CHARACTER + '])'
 
 DIGIT = '[__DIGIT__]'
 
-TRANSLATE_WORD = [
+TRANSLATE_WORDS = [
 	"print",
 	"ask",
 	"echo",
@@ -60,20 +60,27 @@ TRANSLATE_WORD = [
 	"input",
 	"or",
 	"while",
-	"length"
+	"length",
+	"comma"
 ]
 
 
 TOKEN_CONSTANT = "text"
 
-def K(word, withoutGroup = False):
+
+def get_translated_keyword(word, withoutGroup = False):
+	""" Function that allows to add double underscores around the keywords to be translated.
+		The "__" are added before and after only if the keyword belongs to the list.
+
+		- withoutGroup : bool, Add parentheses for make a group or not
+	"""
 	if withoutGroup:
-		if word in TRANSLATE_WORD:
+		if word in TRANSLATE_WORDS:
 			return "__"+word+"__"
 		else:
 			return word
 	else:
-		if word in TRANSLATE_WORD:
+		if word in TRANSLATE_WORDS:
 			return "(__"+word+"__)"
 		else:
 			return "(" + word + ")"

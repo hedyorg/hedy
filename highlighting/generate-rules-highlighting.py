@@ -6,7 +6,7 @@ import json
 # import rules from files
 from rules_automaton import *
 from rules_list import rule_all
-from definition import TRANSLATE_WORD
+from definition import TRANSLATE_WORDS
 
 # destinations of files containing syntax highlighting rules
 OUTPUT_PATH_HIGHLIGHT  = "highlighting/highlighting.json"
@@ -89,7 +89,7 @@ def get_yaml_content(file_name):
     return commandes
 
 
-def get_commands(language_code, keywords, keywords_ref, TRANSLATE_WORD):
+def get_commands(language_code, keywords, keywords_ref, translate_words):
     """Create keyword translations
 
     For each language, this function returns a dictionary
@@ -99,7 +99,7 @@ def get_commands(language_code, keywords, keywords_ref, TRANSLATE_WORD):
         - language_code : str, Language code (for execption creation)
         - keywords : str, The yaml content of the language you want to translate
         - keywords_ref : str, The content of the reference language yaml 
-        - TRANSLATE_WORD : str, List of keywords to be translated
+        - translate_words : str, List of keywords to be translated
 
     Returns a dict.
     """
@@ -107,7 +107,7 @@ def get_commands(language_code, keywords, keywords_ref, TRANSLATE_WORD):
     for keyword in sorted(keywords.keys()) :
         word = keywords[keyword]
 
-        if keyword in TRANSLATE_WORD:
+        if keyword in translate_words:
 
             # special case for arabic 'underscore'
             if language_code == "ar":
@@ -164,7 +164,7 @@ def get_translations(KEYWORDS_PATH, KEYWORDS_PATTERN):
     for language_code in sorted(tmp.keys()):
 
         # KEYWORDS 
-        result[language_code] = get_commands(language_code, tmp[language_code], reference, TRANSLATE_WORD)
+        result[language_code] = get_commands(language_code, tmp[language_code], reference, TRANSLATE_WORDS)
 
         # DIGITS
         result[language_code]["DIGIT"] = get_digits(tmp[language_code], reference)
@@ -180,8 +180,8 @@ os.chdir(os.path.dirname(__file__) +"/..")
 print("Generation of translations.....................", end="")
 language_keywords = get_translations(KEYWORDS_PATH, KEYWORDS_PATTERN)
 # Saving the rules in the corresponding file
-file_lang = open(OUTPUT_PATH_TRANSLATION, "w")
-file_lang.write(json.dumps(language_keywords, indent=4))
+file_lang = open(OUTPUT_PATH_TRANSLATION, "w",encoding='utf8')
+file_lang.write(json.dumps(language_keywords, indent=4,ensure_ascii=False))
 file_lang.close()
 print(" Done !")
 
@@ -195,8 +195,8 @@ levels = generate_rules()
 validate_ruleset(levels)
 
 # Saving the rules in the corresponding file
-file_syntax = open(OUTPUT_PATH_HIGHLIGHT,"w")
-file_syntax.write(json.dumps(levels,indent=4))
+file_syntax = open(OUTPUT_PATH_HIGHLIGHT,"w",encoding='utf8')
+file_syntax.write(json.dumps(levels,indent=4,ensure_ascii=False))
 file_syntax.close()
 
 print(" Done !")

@@ -177,7 +177,6 @@ class TestsLevel6(HedyTester):
 
         self.multi_level_tester(max_level=7, code=code, expected=expected, output='gelijkspel!')
 
-
     def test_equality_arabic(self):
         code = textwrap.dedent("""\
         nummer1 is ٢
@@ -611,7 +610,6 @@ class TestsLevel6(HedyTester):
         ('+', '+', '10'),
         ('-', '-', '6')
     ])
-
     def test_print_calc_with_vars_arabic(self, op, transpiled_op, output):
         code = textwrap.dedent(f"""\
             nummer is ٨
