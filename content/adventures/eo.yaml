@@ -180,8 +180,8 @@ adventures:
         description: Faru vian propran ludon de roko, papero kaj tondilo
         levels:
             1:
-                story_text: "## Roko, papero, tondilo\nEn nivelo 1 vi povas komenci per roko, papero, tondilo-ludo.\n\nPer `{ask}` vi povas fari elekton, kaj per `{echo}` vi povas ripeti tiun elekton.\n"
-                example_code: "```\n{print} kion vi elektas?\n{ask} elektu el roko, papero aŭ tondilo\n{echo} do via elekto estis:\n```\nAnstataŭ uzi vortojn, vi ankaŭ povus uzi emojis kompreneble: ✊✋✌\n"
+                story_text: "## Roko, papero, tondilo\nEn Nivelo 1, vi komencu per la ludo «roko, papero, tondilo».\n\nPer `{ask}` oni povas fari elekton, kaj per `{echo}` oni povas ripeti tiun elekton.\n"
+                example_code: "```\n{print} kion vi elektas?\n{ask} elektu el roko, papero aŭ tondilo\n{echo} do via elekto estis:\n```\nAnstataŭ vortoj, vi ankaŭ povus uzi vinjetosignojn kompreneble: ✊✋✌\n"
                 start_code: '{print} Bonvenon al ludo de roko, papero kaj tondilo!'
             2:
                 story_text: "## Roko, papero, tondilo\nEn ĉi tiu nivelo, vi povas praktiki uzi la variablojn, por ke vi povu fari la ludon de roko, papero kaj tondilo en la sekva nivelo!\n"
@@ -229,7 +229,7 @@ adventures:
                 example_code_2: "```\ntabeloj = 4, 5, 6, 8\nnombroj = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\ntabelo = tabeloj {at} {random}\nnombro = nombroj {at} {random}\nĝusta_respondo = tabelo * nombro\nrespondo = {ask} 'Kiom estas ' tabelo ' multiplikite per ' nombro '?'\n{if} respondo {is} ĝusta_respondo {print} 'Bone!'\n{else} {print} 'Malĝuste! La ĝusta respondo estas ' ĝusta_respondo\n```\n"
                 start_code: "{print} 'Bonvenon al kalkulilo!'"
             9:
-                story_text: "## Kalkulilo\nEn antaŭaj niveloj vi lernis kiel fari kalkulilon. En ĉi tiu nivelo, vi povas vastigi tiun kodon kaj transformi ĝin en malgrandan matematikan ludon. Jene…\n"
+                story_text: "## Kalkulilo\nEn antaŭaj niveloj, vi lernis kiel verki kalkulilon. En ĉi tiu nivelo, vi povas apliki tiun kodon por verki matematikan ludeton jene…\n"
                 example_code: "```\npoentaro = 0\n{repeat} 10 {times}\n    nombroj = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    nombro1 = nombroj {at} {random}\n    nombro2 = nombroj {at} {random}\n    ĝusta_respondo = nombro1 * nombro2\n    {print} 'Kiom estas ' nombro1 ' multiplikite per ' nombro2 '?'\n    respondo = {ask} 'Tajpu vian respondon ĉi tie…'\n    {print} 'Jen via respondo:' respondo\n    {if} respondo {is} ĝusta_respondo\n        poentaro = poentaro + 1\n{print} 'Bonege! Jen via poentaro: ' poentaro '/10!'\n```\n"
                 start_code: "{print} 'Bonvenon al kalkulilo!'"
             10:
@@ -279,7 +279,7 @@ adventures:
                 story_text: "## Restaurant\nIn this level you can use maths to calculate the total price of your customer's order, which can make your virtual restaurant more realistic.\n"
                 example_code: "\nVi povas verki simplan kodon por restoracio, jene:\n```\n{print} 'Bonvenon al restoracio Hedy'\n{print} 'Jen nia menuo:'\n{print} 'Jen niaj ĉefpladoj: pico, lasanjoj aŭ spagetoj'\nĉefplado = {ask} 'Kiun ĉefpladon vi deziras?'\nprezo = 0\n{if} ĉefplado {is} pico prezo = 10\n{if} ĉefplado {is} lasanjoj prezo = 12\n{if} ĉefplado {is} spagetoj prezo = 8\n{print} 'Vi mendis ' ĉefplado 'n'\n{print} 'La prezo estas ' prezo ' spesmiloj'\n{print} 'Dankon, ĝuu vian manĝon!'\n```\n"
                 story_text_2: "But you can also add many more things to your virtual restaurant, for example more courses.\n\n## Challenge\nYou can add many more things to your virtual restaurant. For example, can you...\n- {ask} how many people are coming and multiply the price by that amount?\n- add another course?\n- give people a discount when they enter a (secret) couponcode?\n- add a children's menu?\n- think of other fun things to add?\n"
-                example_code_2: "\nIn this example there are three courses, which requires more code and more additions in calculating the price.\n```\n{print} 'Bonvenon al Restoracio Hedy'\n{print} 'Jen nia menuo:'\n{print} 'Jen niaj entreoj: salato, supo aŭ krudaĵo'\n{print} 'Jen niaj ĉefpladoj: pico, lasanjoj aŭ spagetoj'\n{print} 'Jen niaj desertoj: brownie, glaciaĵo aŭ milkshake'\nentreo = {ask} 'Kiun entreon vi deziras?'\nĉefplado = {ask} 'Kiun ĉefpladon vi deziras?'\ndeserto = {ask} 'Kiun deserton vi deziras?'\nprezo = 0\n{if} entreo {is} supo prezo = prezo + 6 {else} prezo = prezo + 7\n{if} ĉefplado {is} pico prezo = prezo + 10\n{if} ĉefplado {is} lasanjoj prezo = prezo + 12\n{if} ĉefplado {is} spagetoj prezo = prezo + 8\n{if} deserto {is} brownie prezo = prezo + 7\n{if} deserto {is} glaciaĵo prezo = prezo + 5\n{if} deserto {is} milkshake prezo = prezo + 4\n{print} 'Vi mendis ' starter 'n , ' ĉefplado 'n kaj ' deserto 'n'\n{print} 'La totalo estas ' prezo ' spesmiloj'\n{print} 'Dankon, ĝuu vian manĝon!'\n```\n"
+                example_code_2: "\nEn ĉi tiu ekzemplo estas tri pladoj, kiuj postulas pli da kodo kaj pli da sumado por kalkuli la prezon.\n```\n{print} 'Bonvenon al Restoracio Hedy'\n{print} 'Jen nia menuo:'\n{print} 'Jen niaj entreoj: salato, supo aŭ krudaĵo'\n{print} 'Jen niaj ĉefpladoj: pico, lasanjoj aŭ spagetoj'\n{print} 'Jen niaj desertoj: kuko, glaciaĵo aŭ laktofrago'\nentreo = {ask} 'Kiun entreon vi deziras?'\nĉefplado = {ask} 'Kiun ĉefpladon vi deziras?'\ndeserto = {ask} 'Kiun deserton vi deziras?'\nprezo = 0\n{if} entreo {is} supo prezo = prezo + 6 {else} prezo = prezo + 7\n{if} ĉefplado {is} pico prezo = prezo + 10\n{if} ĉefplado {is} lasanjoj prezo = prezo + 12\n{if} ĉefplado {is} spagetoj prezo = prezo + 8\n{if} deserto {is} kuko prezo = prezo + 7\n{if} deserto {is} glaciaĵo prezo = prezo + 5\n{if} deserto {is} laktofrago prezo = prezo + 4\n{print} 'Vi mendis ' starter 'n , ' ĉefplado 'n kaj ' deserto 'n'\n{print} 'La totalo estas ' prezo ' spesmiloj'\n{print} 'Dankon, ĝuu vian manĝon!'\n```\n"
                 start_code: '# via kodo ĉi tie'
             7:
                 story_text: "## Restoracio\nEn ĉi tiu nivelo, vi lernis kiel uzi la komandon `{repeat}` por ripeti linion da kodo iomfoje.\nVi povas uzi tion en via restoracio por demandi (per la komando `{ask}`) plurajn homojn pri iliaj mendoj jene:\n"
@@ -524,7 +524,7 @@ adventures:
                 story_text: "## Kio sekvos?\nEn ĉi tiu nivelo vi lernis kio estas variablo kaj kiel vi povas uzi ĝin por fari viajn aventurojn pli interagaj.\nSed... tio ne estas la sola afero, kiun vi povas fari kun variabloj! Vi ankaŭ povas uzi variablojn por fari listojn.\nKaj vi eĉ povas lasi Hedy elekti hazardan vorton el listo, kio permesas vin fari realajn ludojn!\nRigardu rapide la sekvan nivelon!\n"
                 start_code: "{print} Al la sekva nivelo!"
             3:
-                story_text: "## Kio sekvos?\nEn ĉi tiu nivelo vi ekzercis kun variabloj, sed eble vi trovis ĉi tiun eraron.\n\nProvu ruli ĉi tiun kodon:\n```\nnomo {is} Sophie\n{print} Mia nomo estas nomo\n```\nKompreneble vi volis presi `Mia nomo estas Sophie` sed Hedy presas `Mia Sophie estas Sophie`.\nEn la sekva nivelo, ĉi tiu problemo estas riparita per citiloj.\n"
+                story_text: "## Kio sekvos?\nEn ĉi tiu nivelo, vi ekzercis vin pri variabloj, sed eble vi foje renkontis la jenan eraron.\n\nProvu ruli ĉi tiun kodon:\n```\nnomo {is} Sofio\n{print} Mia nomo estas nomo\n```\nKompreneble vi volis presi `Mia nomo estas Sofio`, sed Hedy presas `Mia Sofio estas Sofio`.\nEn la sekva nivelo, ĉi tiu problemo estos riparebla per citiloj.\n"
                 start_code: "{print} Al la sekva nivelo!"
             4:
                 story_text: "## Kio sekvos?\nEn la antaŭaj niveloj, vi jam lernis uzi `{at} {random}`{random}` kiu igis viajn ludojn malsamaj ĉiufoje kiam vi rulis la kodon.\nSed ĝi ne estas vere interaga, la ludanto ne havas ajnan influon sur kio okazas en la ludo.\n\nEn la sekva nivelo, vi lernos la komandon `{if}`, kiu ebligas al vi doni malsamajn respondojn en via programo. Tiel vi povas programi sekretan pasvorton por via komputilo ekzemple.\nDo ni prenu pinton!\n\n```\npasvorto {is} {ask} 'Kio estas la ĝusta pasvorto?'\n```\n"
@@ -655,7 +655,7 @@ adventures:
                 start_code: '# via kodo ĉi tie'
             5:
                 story_text: "## Fortune Teller\nIn this level you'll learn to (secretly) tip the odds in your favor, when using the fortune teller!\nBy using `{if}` and `{else}` you can make sure that you will always get a good fotune, while other people might not.\nCheck out this example to find out how.\n"
-                example_code: "```\n{print} 'Mi estas Hedy la aŭguristo!'\n{print} 'I can predict if youll win the lottery tomorrow!'\nhomo {is} {ask} 'Kio vi estas?'\n{if} homo {is} Hedy {print} 'You will definitely win!\U0001F929' {else} {print} 'Bad luck! Someone {else} will win!\U0001F62D'\n```\n"
+                example_code: "```\n{print} 'Mi estas Hedy la aŭguristo!'\n{print} 'Mi povas aŭguri, ĉu vi gajnos la loterion morgaŭ!'\nhomo {is} {ask} 'Kiu vi estas?'\n{if} homo {is} Hedy {print} 'Vi certe gajnos!\U0001F929' {else} {print} 'Misfortune, aliulo gajnos!\U0001F62D'\n```\n"
                 story_text_2: "## Hack the program\nReplace Hedy with your own name in the last line, and Hedy will always predict that you will win the lottery and others won't!\nOf course this might raise some suspicion with the other players... To avoid that, you can make sure that Hedy does give different answers every time you run the code.\nBut of course, still gives you a positive answer and the other players a negative one.\n"
                 example_code_2: "```\n{print} 'Mi estas Hedy la aŭguristo!'\n{print} 'I can predict {if} you will win the lottery tomorrow!'\nperson {is} {ask} 'Kiu vi estas?'\ngoodanswer {is} Hurray! You win!, You will definitely win!, We have a winner!\nbadanswer {is} Bad luck! Try again!, Another person will win, You lose!\n{if} person {is} Hedy {print} goodanswer {at} {random} {else} {print} badanswer {at} {random}\n```\n"
                 story_text_3: "## Challenges\nThis concept can be used to make may different programs, just be creative! For example you could create a machine that predicts that your favorite sports team will beat all the competitors!\nOr you could make  Snow White's magic mirror on the wall, to tell everyone you are the fairest of them all!\nLet your imagination do the work!\n"
@@ -680,7 +680,7 @@ adventures:
                 example_code_2: "```\ndomoj = Gryffindor, Slytherin, Hufflepuff, Ravenclaw\nstudfakoj = pocioj, defendo kontraŭ la mallumaj artoj, ĉarmoj, aliformiĝo\ntimoj = Voldemort, araneoj, malsukcesante vian OWL-teston\nnomoj = Harry, Ron, Hermione\n{for} nomo en nomoj\n    {print} nomo ' estas metita en ' domojn {at} {random}\n    {print} nomo ' estas bonega ĉe ' studfakoj {at} {random}\n    {print} nomo 'la plej granda timo estas ' timoj {at} {random}\n```\n"
                 start_code: '# via kodo ĉi tie'
             12:
-                story_text: "## Aŭguristo\nEn ĉi tiu nivelo vi povas fari viajn riĉaĵojn plurajn vortojn. Kiel en ĉi tiu ekzemplo malsupre:\n"
+                story_text: "## Aŭguristo\nEn ĉi tiu nivelo, vi povas montri plurvortajn aŭguraĵojn jene:\n"
                 example_code: "```\nfortunes = 'you will be rich', 'you will fall in love', 'you will slip on a banana peel'\n{print} 'I will take a look in my crystall ball for your future.'\n{print} 'I see... I see...'\n{sleep}\n{print} fortunes {at} {random}\n```\n"
                 start_code: '# via kodo ĉi tie'
     piggybank:
@@ -693,7 +693,7 @@ adventures:
                 example_code: "```\n{print} 'The digital piggy bank'\nwish = {ask} 'What would you like to buy?'\nprice = {ask} 'How much does that cost?'\nsaved = {ask} 'How much money have you saved already?'\nallowance = {ask} 'How much pocket money do you get per week?'\nto_save = price - saved\nweeks = to_save / allowance\n{print} 'You can buy a ' wish ' in ' weeks ' weeks.'\n```\n"
                 start_code: '# via kodo ĉi tie'
             14:
-                story_text: "## Piggybank\nIn this level you can let Hedy tell you {if} you have saved up enough money!\n"
+                story_text: "## Ŝparujo\nEn ĉi tiu nivelo, per la komando `{if}` de Hedy, vi povas kontroli, ĉu vi ŝparis sufiĉe da mono!\n"
                 example_code: "```\nmono = {ask} 'Kiom da mono vi ŝparis?'\nbezono = {ask} 'Kiom da mono vi bezonas?'\npoŝmono = {ask} 'Kiom da poŝmono vi ricevas ĉiusemajne?'\nŝparenda = bezono - mono\nsemajnoj = ŝparenda / poŝmono\n{if} bezono > mono\n    {print} 'Vi devas ŝpari iom pli!'\n    {print} 'Vi bezonos ' semajnoj ' pliajn semajnojn.'\n{else}\n    {print} 'Bonege! Vi havas sufiĉe'\n    {print} 'Ni ekbutikumu!'\n```\n"
                 start_code: '# via kodo ĉi tie'
     quizmaster:
