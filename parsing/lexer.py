@@ -5,12 +5,21 @@ from typing import Callable, Optional
 
 
 class HedyLexerTokenType(str, Enum):
+    ECHO = 'ECHO'
+    ASK = 'ASK'
+    IS = 'IS'
+    SLEEP = 'SLEEP'
     IDENTIFIER = 'IDENTIFIER'
     NUMBER = 'NUMBER'
     SPACE = 'SPACE'
     PRINT = 'PRINT'
     EOL = 'EOL'
     EOF = 'EOF'
+    RANDOM = 'RANDOM'
+    COMMA = 'COMMA'
+    ADD = 'ADD'
+    REMOVE = 'REMOVE'
+    TO = 'TO'
 
 
 @dataclass

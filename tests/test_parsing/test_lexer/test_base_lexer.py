@@ -2,7 +2,7 @@ import unittest
 
 from parameterized import parameterized
 
-from parsing.lexer import HedyBaseLexer, HedyLexerTokenType, HedyLexerToken
+from parsing.lexer import HedyBaseLexer, HedyLexerTokenType, HedyLexerToken, HedyMarker
 
 
 def create_lexer(program: str):
@@ -20,9 +20,7 @@ class TestBaseLexer(unittest.TestCase):
         lexer = create_lexer(number_string)
         self.assertEqual(HedyLexerToken(
             type=HedyLexerTokenType.NUMBER,
-            index=0,
-            line_number=0,
-            column_index=0,
+            marker=HedyMarker(index=0, line_number=0, column_index=0),
             data=number_string
         ), lexer.token())
         self.assertEqual(HedyLexerTokenType.EOF, lexer.token().type)
@@ -32,9 +30,7 @@ class TestBaseLexer(unittest.TestCase):
         lexer.register_keyword("print", HedyLexerTokenType.PRINT)
         self.assertEqual(HedyLexerToken(
             type=HedyLexerTokenType.PRINT,
-            index=0,
-            line_number=0,
-            column_index=0,
+            marker=HedyMarker(index=0, line_number=0, column_index=0),
             data="print"
         ), lexer.token())
         self.assertEqual(HedyLexerTokenType.EOF, lexer.token().type)
@@ -43,9 +39,7 @@ class TestBaseLexer(unittest.TestCase):
         lexer = create_lexer("hedy")
         self.assertEqual(HedyLexerToken(
             type=HedyLexerTokenType.IDENTIFIER,
-            index=0,
-            line_number=0,
-            column_index=0,
+            marker=HedyMarker(index=0, line_number=0, column_index=0),
             data="hedy"
         ), lexer.token())
         self.assertEqual(HedyLexerTokenType.EOF, lexer.token().type)
@@ -55,17 +49,13 @@ class TestBaseLexer(unittest.TestCase):
         lexer.register_keyword("print", HedyLexerTokenType.PRINT)
         self.assertEqual(HedyLexerToken(
             type=HedyLexerTokenType.PRINT,
-            index=0,
-            line_number=0,
-            column_index=0,
+            marker=HedyMarker(index=0, line_number=0, column_index=0),
             data="print"
         ), lexer.token())
         self.assertEqual(HedyLexerTokenType.EOL, lexer.token().type)
         self.assertEqual(HedyLexerToken(
             type=HedyLexerTokenType.PRINT,
-            index=len("print") + 1,
-            line_number=1,
-            column_index=0,
+            marker=HedyMarker(index=len("print") + 1, line_number=1, column_index=0),
             data="print"
         ), lexer.token())
         self.assertEqual(HedyLexerTokenType.EOF, lexer.token().type)
