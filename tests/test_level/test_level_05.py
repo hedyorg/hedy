@@ -510,8 +510,8 @@ class TestsLevel5(HedyTester):
         if নাম is হেডি print 'ভালো!' else print 'মন্দ'""")
 
         expected = textwrap.dedent("""\
-        veb9b5c786e8cde0910df4197f630ee75 = input(f'আপনার নাম কি?')
-        if veb9b5c786e8cde0910df4197f630ee75 == 'হেডি':
+        নাম = input(f'আপনার নাম কি?')
+        if নাম == 'হেডি':
           print(f'ভালো!')
         else:
           print(f'মন্দ')""")

@@ -279,8 +279,8 @@ class TestsLevel4(HedyTester):
         print রং {q} is আপনার প্রিয{q}""")
 
         expected = textwrap.dedent("""\
-        ve1760b6272d4c9f816e62af4882d874f = input(f'আপনার প্রিয় রং কি?')
-        print(f'{ve1760b6272d4c9f816e62af4882d874f} is আপনার প্রিয')""")
+        রং = input(f'আপনার প্রিয় রং কি?')
+        print(f'{রং} is আপনার প্রিয')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
@@ -466,16 +466,13 @@ class TestsLevel4(HedyTester):
     # combined tests
     #
     def test_assign_print_chinese(self):
-        hashed_var = hedy.hash_var("你世界")
-        self.assertEqual('v406b71a2caed270b782fe8a1f2d5741a', hashed_var)
-
         code = textwrap.dedent("""\
         你世界 is 你好世界
         print 你世界""")
 
         expected = textwrap.dedent("""\
-        v406b71a2caed270b782fe8a1f2d5741a = '你好世界'
-        print(f'{v406b71a2caed270b782fe8a1f2d5741a}')""")
+        你世界 = '你好世界'
+        print(f'{你世界}')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
