@@ -275,6 +275,20 @@ class TestsLevel8(HedyTester):
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
+    def test_if_with_negative_number(self):
+        code = textwrap.dedent("""\
+        antwoord = -10
+        if antwoord is -10
+            print 'Nice'""")
+        
+        expected = textwrap.dedent("""\
+        antwoord = '-10'
+        if convert_numerals('Latin', antwoord) == convert_numerals('Latin', '-10'):
+          print(f'Nice')""")
+
+        self.multi_level_tester(code=code, expected=expected, output='Nice', max_level=11)
+
+    
     #
     # if else tests
     #

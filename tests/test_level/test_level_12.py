@@ -857,6 +857,19 @@ class TestsLevel12(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=16)
 
+    def test_if_equality_negative_number(self):
+        code = textwrap.dedent("""\
+        antwoord = -10
+        if antwoord is -10
+            print 'Nice'""")
+
+        expected = textwrap.dedent("""\
+        antwoord = -10
+        if convert_numerals('Latin', antwoord) == convert_numerals('Latin', '-10'):
+          print(f'''Nice''')""")
+
+        self.multi_level_tester(code=code, expected=expected, output='Nice', max_level=16)
+
     def test_if_2_vars_equality_print(self):
         code = textwrap.dedent("""\
         jouwkeuze is 'schaar'
@@ -1379,6 +1392,16 @@ class TestsLevel12(HedyTester):
     def test_print_float_calc_with_string(self, op, transpiled_op):
         code = f"print 'het antwoord is ' 2.5 {op} 2.5"
         expected = f"print(f'''het antwoord is {{2.5 {transpiled_op} 2.5}}''')"
+
+        self.multi_level_tester(code=code, expected=expected, max_level=17)
+
+    def test_print_add_negative_number(self):
+        code = textwrap.dedent("""\
+        n = -4 +3
+        print n""")
+        expected = textwrap.dedent("""\
+        n = -4 + 3
+        print(f'''{n}''')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=17)
 

@@ -2,7 +2,7 @@
 assign: var (_IS| _EQUALS) (atom | expression)
 assign_list: var (_IS| _EQUALS) (text_in_quotes|NUMBER) (_COMMA (text_in_quotes|NUMBER))+
 
-?atom: NUMBER | var_access | text_in_quotes //unsupported numbers are gone, we can now allow floats with NUMBER
+?atom: NUMBER | _MINUS NUMBER | var_access | text_in_quotes //unsupported numbers are gone, we can now allow floats with NUMBER
 
 equality_check: (var_access | text_in_quotes | NUMBER) (_IS| _EQUALS) (var_access | text_in_quotes | NUMBER)
 
