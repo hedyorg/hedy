@@ -363,6 +363,9 @@ class ExtractAST(Transformer):
     def NUMBER(self, args):
         return Tree('number', [str(args)])
 
+    def POSITIVE_NUMBER(self, args):
+        return Tree('number', [str(args)])
+
     def NEGATIVE_NUMBER(self, args):
         return Tree('number', [str(args)])
 
@@ -846,6 +849,9 @@ class UsesTurtle(Transformer):
 
     def NUMBER(self, args):
         return False
+    
+    def POSITIVE_NUMBER(self, args):
+        return False
 
     def NEGATIVE_NUMBER(self, args):
         return False
@@ -913,6 +919,9 @@ class AllCommands(Transformer):
 
     def NUMBER(self, args):
         return []
+    
+    def POSITIVE_NUMBER(self, args):
+        return []
 
     def NEGATIVE_NUMBER(self, args):
         return []
@@ -950,6 +959,9 @@ class AllPrintArguments(Transformer):
         return []
 
     def NUMBER(self, args):
+        return []
+    
+    def POSITIVE_NUMBER(self, args):
         return []
 
     def NEGATIVE_NUMBER(self, args):
@@ -1200,7 +1212,8 @@ class ConvertToPython_1(ConvertToPython):
         return ''.join([str(c) for c in args])
 
     def integer(self, args):
-        return str(int(args[0]))
+        # remove whitespaces        
+        return str(int(args[0].replace(' ', '')))
 
     def number(self, args):
         return str(int(args[0]))
