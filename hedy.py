@@ -267,15 +267,7 @@ def hash_needed(var):
 
 def hash_var(var):
     var_name = var.name if type(var) is LookupEntry else var
-    if hash_needed(var):
-        # hash "illegal" var names
-        # being reserved keywords
-        # or non-latin vars to comply with Skulpt, which does not implement PEP3131 :(
-        # prepend with v for when hash starts with a number
-        hash_object = hashlib.md5(var_name.encode())
-        return "v" + hash_object.hexdigest()
-    else:
-        return var_name
+    return var_name
 
 def closest_command(invalid_command, known_commands, threshold=2):
     # closest_command() searches for a similar command (distance smaller than threshold)
