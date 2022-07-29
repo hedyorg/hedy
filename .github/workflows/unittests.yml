@@ -28,8 +28,8 @@ jobs:
     - name: Install Nodejs dependencies
       run: |
         npm ci
-    - name: Run Deployment Script
+    - name: Generate grammars files
       run: |
-        ./build-tools/heroku/on-deploy.sh
+        python ./content/yaml_to_lark_utils.py
     - name: Run validations
       run: build-tools/github/validate
