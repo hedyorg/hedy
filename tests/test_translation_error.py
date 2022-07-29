@@ -32,7 +32,3 @@ class TestsTranslationError(HedyTester):
     def test_translate_hedy_exception(self, exception, language):
         with app.test_request_context(headers={'Accept-Language': language}):
             translate_error(exception.error_code, exception.arguments)
-
-
-
-
