@@ -28,5 +28,8 @@ jobs:
     - name: Install Nodejs dependencies
       run: |
         npm ci
+    - name: Compiling Babel translations
+      run: |
+        pybabel compile -f -d translations
     - name: Run validations
       run: build-tools/github/validate
