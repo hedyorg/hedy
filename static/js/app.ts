@@ -172,6 +172,10 @@ $(document).on("click", function(event){
 
       // If prompt is shown and user enters text in the editor, hide the prompt.
       editor.on('change', function () {
+        if (window.State.disable_run) {
+          stopit();
+          editor.focus(); // Make sure the editor has focus, so we can continue typing
+        }
         if ($('#inline-modal').is (':visible')) $('#inline-modal').hide();
         window.State.disable_run = false;
         $ ('#runit').css('background-color', '');
@@ -396,7 +400,7 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
       });
     }).fail(function(xhr) {
       console.error(xhr);
-       https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState
+       // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState
       if (xhr.readyState < 4) {
         error.show(ErrorMessages['Connection_error'], ErrorMessages['CheckInternet']);
       } else {
@@ -918,14 +922,14 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
   let outputDiv = $('#output');
 
   //Saving the variable button because sk will overwrite the output div
-  const variableButton = $(outputDiv).find('#variable_button');
-  const variables = $(outputDiv).find('#variables');
+  const variableButton = outputDiv.find('#variable_button');
+  const variables = outputDiv.find('#variables');
   outputDiv.empty();
   outputDiv.append(variableButton);
   outputDiv.append(variables);
 
-  var storage = window.localStorage;
-  var debug = storage.getItem("debugLine")
+  const storage = window.localStorage;
+  let debug = storage.getItem("debugLine");
 
   Sk.pre = "output";
   const turtleConfig = (Sk.TurtleGraphics || (Sk.TurtleGraphics = {}));
@@ -939,8 +943,8 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
       turtleConfig.worldHeight = 300;
   }
   // Always set the width to output panel width -> match the UI
-  turtleConfig.width = $( '#output' ).width();
-  turtleConfig.worldWidth = $( '#output' ).width();
+  turtleConfig.width = outputDiv.width();
+  turtleConfig.worldWidth = outputDiv.width();
 
   if (!hasTurtle) {
     // There might still be a visible turtle panel. If the new program does not use the Turtle,
