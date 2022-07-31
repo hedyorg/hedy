@@ -294,6 +294,7 @@ function clearErrors(editor: AceAjax.Editor) {
 export function stopit() {
   // We bucket-fix stop the current program by setting the run limit to 1ms
   Sk.execLimit = 1;
+  clearTimeouts();
   $('#stopit').hide();
   $('#runit').show();
 
@@ -962,6 +963,7 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     read: builtinRead,
     inputfun: inputFromInlineModal,
     inputfunTakesPrompt: true,
+    setTimeout: timeout,
     __future__: Sk.python3,
     timeoutMsg: function () {
       // If the timeout is 1 this is due to us stopping the program: don't show "too long" warning
@@ -1945,3 +1947,25 @@ function addDebugClass(str: Element) {
 function removeDebugClass(str: Element) {
   return str.innerHTML.replace('<div class="debugLine">', '').replace('</div>', '');
 }
+
+// See https://github.com/skulpt/skulpt/pull/579#issue-156538278 for the JS version of this code
+// We support multiple timers, even though it's unlikely we would ever need them
+let timers: number[] = [];
+
+const timeout = (func: () => void, delay: number) => {
+  let id: number;
+  const wrapper = () => {
+    let idx = timers.indexOf(id);
+    if (idx > -1) {
+      timers.splice(idx, 1);
+    }
+    func();
+  };
+  id = setTimeout(wrapper, delay);
+  timers.push(id);
+};
+
+const clearTimeouts = () => {
+  timers.forEach(clearTimeout);
+  timers = [];
+};
