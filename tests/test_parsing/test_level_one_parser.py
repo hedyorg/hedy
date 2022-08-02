@@ -1,6 +1,6 @@
 import unittest
 
-from parsing import LevelOneHedyParser, HedyParserConfig, HedyBaseLexer, HedyProgram, HedyPrintStatement, HedyMarker, \
+from parsing import HedyLevelTwoParser, HedyParserConfig, HedyBaseLexer, HedyProgram, HedyPrintStatement, HedyMarker, \
     HedyStringComposition, HedyStringLiteral, HedyLexerTokenType, HedyAskStatement
 
 
@@ -10,7 +10,7 @@ def create_parser(program: str):
     lexer.register_keyword("print", HedyLexerTokenType.PRINT)
     lexer.register_keyword("ask", HedyLexerTokenType.ASK)
     lexer.register_keyword("?", HedyLexerTokenType.QUESTION_MARK)
-    return LevelOneHedyParser(lexer, HedyParserConfig())
+    return HedyLevelTwoParser(lexer, HedyParserConfig())
 
 
 class TestLevelOneParser(unittest.TestCase):

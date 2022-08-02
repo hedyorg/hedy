@@ -59,7 +59,7 @@ class HedyBaseParser:
         pass
 
 
-class LevelOneHedyParser(HedyBaseParser):
+class HedyLevelOneParser(HedyBaseParser):
     def program(self) -> HedyProgram:
         statements = []
         self.next_token()
@@ -99,7 +99,7 @@ class LevelOneHedyParser(HedyBaseParser):
             return None
         self.expect_one_or_more_whitespace()
         ask_question = self.parse_expression()
-        return HedyAskStatement(ask_token.marker, ask_question, None)
+        return HedyAskStatement(ask_token.marker, None, ask_question)
 
     def expect_one_or_more_whitespace(self):
         self.expect(HedyLexerTokenType.SPACE)
@@ -141,7 +141,7 @@ class LevelOneHedyParser(HedyBaseParser):
             return left
 
 
-class LevelTwoHedyParser(LevelOneHedyParser):
+class HedyLevelTwoParser(HedyLevelOneParser):
 
     def _statements(self) -> Tuple[Callable[[], Optional[HedyStatement]], ...]:
         return super()._statements() + (
@@ -157,7 +157,7 @@ class LevelTwoHedyParser(LevelOneHedyParser):
         self.expect(HedyLexerTokenType.IS)
         self.expect_one_or_more_whitespace()
         value = self.parse_expression()
-        return HedyIsStatement(identifier_token.marker, value, identifier_token.data)
+        return HedyIsStatement(identifier_token.marker, identifier_token.data, value)
 
     def parse_sleep_statement(self):
         sleep_token = self.accept(HedyLexerTokenType.SLEEP)
@@ -166,3 +166,23 @@ class LevelTwoHedyParser(LevelOneHedyParser):
         self.expect_one_or_more_whitespace()
         amount = self.parse_expression()
         return HedySleepStatement(sleep_token.marker, amount)
+
+
+class HedyLevelThreeParser(HedyLevelTwoParser):
+    pass
+
+
+class HedyLevelFourParser(HedyLevelThreeParser):
+    def parse_string_literal(self) -> Optional[HedyExpression]:
+        quote_token = self.accept(HedyLexerTokenType.QUOTE)
+        if not quote_token:
+            return None
+        literal = ""
+        while not self.accept(HedyLexerTokenType.QUOTE):
+            if self.accept(HedyLexerTokenType.EOL):
+                raise
+            if self.accept(HedyLexerTokenType.EOF):
+                raise
+            literal = literal + self.current_token.data
+            self.next_token()
+        return HedyStringLiteral(quote_token.marker, literal)

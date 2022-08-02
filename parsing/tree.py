@@ -90,8 +90,8 @@ class HedyPrintStatement(HedyStatement):
 
 @dataclass
 class HedyAskStatement(HedyStatement):
-    question_expression: HedyExpression
     variable_name: Optional[str]
+    question_expression: HedyExpression
 
     def visit(self, visitor: Visitor):
         return visitor.visit_ask_statement(self)
@@ -107,8 +107,8 @@ class HedyEchoStatement(HedyStatement):
 
 @dataclass
 class HedyIsStatement(HedyStatement):
-    value: HedyExpression
     variable_name: str
+    value: HedyExpression
 
     def visit(self, visitor: Visitor):
         return visitor.visit_is_statement(self)
