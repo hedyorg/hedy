@@ -513,17 +513,17 @@ class TestsLevel2(HedyTester):
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
     def test_assign_bengali_var(self):
-        hashed_var = hedy.hash_var("নাম")
+        var = hedy.escape_var("নাম")
         code = "নাম is হেডি"
-        expected = f"{hashed_var} = 'হেডি'"
+        expected = f"{var} = 'হেডি'"
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
-    # def test_assign_python_keyword(self):
-    #     code = "for is Hedy"
-    #     expected = "vd55669822f1a8cf72ec1911e462a54eb = 'Hedy'"
+    def test_assign_python_keyword(self):
+        code = "for is Hedy"
+        expected = "_for = 'Hedy'"
 
-    #     self.multi_level_tester(code=code, expected=expected, max_level=11)
+        self.multi_level_tester(code=code, expected=expected, max_level=11)
 
     #
     # markup tests

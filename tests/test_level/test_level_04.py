@@ -536,11 +536,6 @@ class TestsLevel4(HedyTester):
     #
     # assorti tests
     #
-    def test_detect_accented_chars(self):
-        self.assertEqual(True, hedy.hash_needed('éyyy'))
-        self.assertEqual(True, hedy.hash_needed('héyyy'))
-        self.assertEqual(False, hedy.hash_needed('heyyy'))
-
     @parameterized.expand(HedyTester.quotes)
     def test_meta_column_missing_closing_quote(self, q):
         code = textwrap.dedent(f"""\
