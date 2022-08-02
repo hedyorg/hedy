@@ -8,7 +8,7 @@ def create_parser(program: str):
     lexer = HedyBaseLexer.create_for_program(program)
     lexer.register_keyword(" ", HedyLexerTokenType.SPACE)
     lexer.register_keyword("print", HedyLexerTokenType.PRINT)
-    lexer.register_keyword("ask", HedyLexerTokenType.PRINT)
+    lexer.register_keyword("ask", HedyLexerTokenType.ASK)
     lexer.register_keyword("?", HedyLexerTokenType.QUESTION_MARK)
     return LevelOneHedyParser(lexer, HedyParserConfig())
 
@@ -18,21 +18,32 @@ class TestLevelOneParser(unittest.TestCase):
         parser = create_parser("ask hoe heet je?")
         self.assertEqual(HedyProgram(statements=(
             HedyAskStatement(
-                marker=HedyMarker(0, 0, 0),
-                variable_name=None,
+                marker=HedyMarker(index=0, line_number=0, column_index=0),
                 question_expression=HedyStringComposition(
-                    marker=HedyMarker(index=len("ask") + 1, column_index=len("ask") + 1, line_number=0),
+                    marker=HedyMarker(index=4, line_number=0, column_index=4),
                     left=HedyStringLiteral(
-                        marker=HedyMarker(index=len("print") + 1, column_index=len("print") + 1, line_number=0),
-                        string_literal="hallo"
+                        marker=HedyMarker(index=4, line_number=0, column_index=4),
+                        string_literal='hoe'
                     ),
-                    right=HedyStringLiteral(
-                        marker=HedyMarker(index=len("print hallo") + 1, column_index=len("print hallo") + 1,
-                                          line_number=0),
-                        string_literal="hedy"
+                    right=HedyStringComposition(
+                        marker=HedyMarker(index=8, line_number=0, column_index=8),
+                        left=HedyStringLiteral(
+                            marker=HedyMarker(index=8, line_number=0, column_index=8),
+                            string_literal='heet'
+                        ),
+                        right=HedyStringComposition(
+                            marker=HedyMarker(index=13, line_number=0, column_index=13),
+                            left=HedyStringLiteral(
+                                marker=HedyMarker(index=13, line_number=0, column_index=13),
+                                string_literal='je'),
+                            right=HedyStringLiteral(
+                                marker=HedyMarker(index=15, line_number=0, column_index=15),
+                                string_literal='?'
+                            )
+                        )
                     )
-                )
-            ),
+                ),
+                variable_name=None),
         )), parser.program())
 
     def test_print_statement(self):
@@ -47,7 +58,8 @@ class TestLevelOneParser(unittest.TestCase):
                         string_literal="hallo"
                     ),
                     right=HedyStringLiteral(
-                        marker=HedyMarker(index=len("print hallo") + 1, column_index=len("print hallo") + 1, line_number=0),
+                        marker=HedyMarker(index=len("print hallo") + 1, column_index=len("print hallo") + 1,
+                                          line_number=0),
                         string_literal="hedy"
                     )
                 )

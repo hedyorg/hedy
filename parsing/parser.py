@@ -64,9 +64,9 @@ class LevelOneHedyParser(HedyBaseParser):
         statements = []
         self.next_token()
         while self.current_token.type is not HedyLexerTokenType.EOF:
-            print_statement = self.parse_print_statement()
-            if print_statement:
-                statements.append(print_statement)
+            statement = self.parse_statement()
+            if statement:
+                statements.append(statement)
                 continue
             raise Exception(f"Unexpected token: {self.current_token}")
         return HedyProgram(tuple(statements))
@@ -133,6 +133,8 @@ class LevelOneHedyParser(HedyBaseParser):
         if left:
             while self.accept(HedyLexerTokenType.SPACE):
                 pass
+            if self.accept(HedyLexerTokenType.EOL) or self.accept(HedyLexerTokenType.EOF):
+                return left
             right = self.parse_expression()
             if right:
                 return HedyStringComposition(left.marker, left, right)
