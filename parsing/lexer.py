@@ -5,6 +5,7 @@ from typing import Callable, Optional
 
 
 class HedyLexerTokenType(str, Enum):
+    QUESTION_MARK = 'QUESTION_MARK'
     ECHO = 'ECHO'
     ASK = 'ASK'
     IS = 'IS'

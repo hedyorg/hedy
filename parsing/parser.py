@@ -28,6 +28,11 @@ class HedyBaseParser:
         self.next_token()
         return token
 
+    def accept_any(self) -> HedyLexerToken:
+        token = self.current_token
+        self.next_token()
+        return token
+
     def accept(self, token_type: HedyLexerTokenType) -> Optional[HedyLexerToken]:
         if self.current_token.type != token_type:
             return None
@@ -119,6 +124,9 @@ class LevelOneHedyParser(HedyBaseParser):
         number = self.accept(HedyLexerTokenType.NUMBER)
         if number:
             return HedyNumericalLiteral(number.marker, float(number.data))
+        token = self.accept_any()
+        if token:
+            return HedyStringLiteral(token.marker, token.data)
 
     def parse_string_composition(self) -> Optional[HedyExpression]:
         left = self.parse_literal()
