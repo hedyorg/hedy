@@ -16,7 +16,7 @@ def create_parser(program: str):
 class TestLevelOneParser(unittest.TestCase):
     def test_ask_statement(self):
         parser = create_parser("ask hoe heet je?")
-        self.assertEqual(HedyProgram(statements=(
+        self.assertEqual(HedyProgram(marker=HedyMarker.zero(), statements=(
             HedyAskStatement(
                 marker=HedyMarker(index=0, line_number=0, column_index=0),
                 question_expression=HedyStringComposition(
@@ -48,7 +48,7 @@ class TestLevelOneParser(unittest.TestCase):
 
     def test_print_statement(self):
         parser = create_parser("print hallo hedy")
-        self.assertEqual(HedyProgram(statements=(
+        self.assertEqual(HedyProgram(marker=HedyMarker.zero(), statements=(
             HedyPrintStatement(
                 marker=HedyMarker(0, 0, 0),
                 print_argument=HedyStringComposition(

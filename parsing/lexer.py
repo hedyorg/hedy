@@ -47,6 +47,10 @@ class HedyMarker:
     line_number: int
     column_index: int
 
+    @classmethod
+    def zero(cls):
+        return cls(0, 0, 0)
+
 
 @dataclass
 class HedyLexerToken:

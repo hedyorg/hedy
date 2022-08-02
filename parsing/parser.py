@@ -1,9 +1,10 @@
 from dataclasses import dataclass
 from typing import Optional, Callable, Tuple
 
-from parsing import HedyBaseLexer, HedyLexerToken, HedyLexerTokenType
+from parsing import HedyBaseLexer, HedyLexerToken, HedyLexerTokenType, HedyMarker
 from parsing.tree import HedyStringLiteral, HedyPrintStatement, HedyProgram, HedyExpression, HedyStringComposition, \
-    HedyAskStatement, HedyEchoStatement, HedyStatement, HedyIsStatement, HedyNumericalLiteral, HedySleepStatement
+    HedyAskStatement, HedyEchoStatement, HedyStatement, HedyIsStatement, HedyNumericalLiteral, HedySleepStatement, \
+    HedyVariableAccess, HedyListLiteral
 
 
 @dataclass
@@ -32,6 +33,9 @@ class HedyBaseParser:
         token = self.current_token
         self.next_token()
         return token
+
+    def peek(self, token_type: HedyLexerTokenType) -> bool:
+        return self.current_token.type == token_type
 
     def accept(self, token_type: HedyLexerTokenType) -> Optional[HedyLexerToken]:
         if self.current_token.type != token_type:
@@ -69,7 +73,7 @@ class HedyLevelOneParser(HedyBaseParser):
                 statements.append(statement)
                 continue
             raise Exception(f"Unexpected token: {self.current_token}")
-        return HedyProgram(tuple(statements))
+        return HedyProgram(marker=HedyMarker.zero(), statements=tuple(statements))
 
     def _statements(self) -> Tuple[Callable[[], Optional[HedyStatement]], ...]:
         return (
@@ -173,7 +177,24 @@ class HedyLevelThreeParser(HedyLevelTwoParser):
 
 
 class HedyLevelFourParser(HedyLevelThreeParser):
+    def parse_expression(self):
+        expression = self.parse_string_composition()
+        if self.peek(HedyLexerTokenType.COMMA):
+            list_values = [expression]
+            while self.accept(HedyLexerTokenType.COMMA):
+                list_values += self.parse_string_composition()
+            return HedyListLiteral(marker=expression.marker, values=tuple(list_values))
+        return expression
+
+    def parse_variable_access(self) -> Optional[HedyExpression]:
+        identifier_token = self.accept(HedyLexerTokenType.IDENTIFIER)
+        if identifier_token:
+            return HedyVariableAccess(marker=identifier_token.marker, variable_name=identifier_token.data)
+
     def parse_string_literal(self) -> Optional[HedyExpression]:
+        variable_access = self.parse_variable_access()
+        if variable_access:
+            return variable_access
         quote_token = self.accept(HedyLexerTokenType.QUOTE)
         if not quote_token:
             return None

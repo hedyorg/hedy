@@ -29,10 +29,14 @@ class Visitor:
     def visit_numerical_literal(self, numerical_literal: 'HedyNumericalLiteral'):
         pass
 
+    def visit_program(self, program: 'HedyProgram'):
+        pass
 
-@dataclass
-class HedyProgram:
-    statements: Tuple['HedyNode', ...]
+    def visit_variable_access(self, variable_access: 'HedyVariableAccess'):
+        pass
+
+    def visit_list_literal(self, list_literal: 'HedyListLiteral'):
+        pass
 
 
 @dataclass
@@ -41,6 +45,14 @@ class HedyNode:
 
     def visit(self, visitor: Visitor):
         raise NotImplementedError
+
+
+@dataclass
+class HedyProgram(HedyNode):
+    statements: Tuple['HedyNode', ...]
+
+    def visit(self, visitor: Visitor):
+        visitor.visit_program(self)
 
 
 @dataclass
@@ -70,6 +82,22 @@ class HedyStringLiteral(HedyExpression):
 
     def visit(self, visitor: Visitor):
         return visitor.visit_string_literal(self)
+
+
+@dataclass
+class HedyVariableAccess(HedyExpression):
+    variable_name: str
+
+    def visit(self, visitor: Visitor):
+        visitor.visit_variable_access(self)
+
+
+@dataclass
+class HedyListLiteral(HedyExpression):
+    values: Tuple[HedyExpression, ...]
+
+    def visit(self, visitor: Visitor):
+        visitor.visit_list_literal(self)
 
 
 @dataclass
