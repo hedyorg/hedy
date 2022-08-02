@@ -128,6 +128,8 @@ $(document).on("click", function(event){
       $('<button>').css({ fontFamily: 'sans-serif' }).addClass('green-btn').text(symbol).appendTo(buttonContainer).click(function() {
         theGlobalEditor?.setValue(exampleEditor.getValue() + '\n');
         update_view("main_editor_keyword_selector", <string>$(preview).attr('lang'));
+        stopit();
+        clearOutput();
       });
     }
     if($(preview).attr('level')){
@@ -303,6 +305,20 @@ export function stopit() {
   window.State.disable_run = false;
 }
 
+function clearOutput() {
+  const outputDiv = $('#output');
+  //Saving the variable button because sk will overwrite the output div
+  const variableButton = outputDiv.find('#variable_button');
+  const variables = outputDiv.find('#variables');
+  outputDiv.empty();
+
+  outputDiv.addClass("overflow-auto");
+  outputDiv.append(variableButton);
+  outputDiv.append(variables);
+  error.hide();
+  success.hide();
+}
+
 export function runit(level: string, lang: string, disabled_prompt: string, cb: () => void) {
   if (window.State.disable_run) {
     // If there is no message -> don't show a prompt
@@ -316,18 +332,7 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
   $('#runit').hide();
   $('#stopit').show();
   $('#saveDST').hide();
-
-  const outputDiv = $('#output');
-  //Saving the variable button because sk will overwrite the output div
-  const variableButton = $(outputDiv).find('#variable_button');
-  const variables = $(outputDiv).find('#variables');
-  outputDiv.empty();
-
-  outputDiv.addClass("overflow-auto");
-  outputDiv.append(variableButton);
-  outputDiv.append(variables);
-  error.hide();
-  success.hide();
+  clearOutput();
 
   try {
     level = level.toString();
