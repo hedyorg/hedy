@@ -1626,7 +1626,12 @@ class ConvertToPython_8_9(ConvertToPython_7):
         body = "\n".join(all_lines)
         body = sleep_after(body)
 
-        return f"for {var_name} in range(int({times})):\n{body}"
+        return f"""\
+try:
+  {times} = int({times})
+except Exception as e:
+  raise Exception(f'Runtime Type Error;integer;{times};{{{times}}}')
+for {var_name} in range(int({times})):\n{body}"""
 
     def ifs(self, args):
         args = [a for a in args if a != ""] # filter out in|dedent tokens

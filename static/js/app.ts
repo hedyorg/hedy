@@ -387,13 +387,7 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
         $('#runit').show();
         return;
       }
-      runPythonProgram(response.Code, response.has_turtle, response.has_sleep, response.Warning, cb).catch(function(err) {
-        // The err is null if we don't understand it -> don't show anything
-        if (err != null) {
-          error.show(ErrorMessages['Execute_error'], err.message);
-          reportClientError(level, code, err.message);
-        }
-      });
+      runPythonProgram(response.Code, level, response.has_turtle, response.has_sleep, response.Warning, cb)
     }).fail(function(xhr) {
       console.error(xhr);
        https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState
@@ -894,6 +888,16 @@ function reportClientError(level: string, code: string, client_error: string) {
   });
 }
 
+function translateClientError(error: string) {
+  return $.ajax({
+    type: 'GET',
+    url: '/translate_error',
+    data: {
+      error_code: error,
+    }
+  });
+}
+
 window.onerror = function reportClientException(message, source, line_number, column_number, error) {
 
   $.ajax({
@@ -913,7 +917,7 @@ window.onerror = function reportClientException(message, source, line_number, co
   });
 }
 
-function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep: boolean, hasWarnings: boolean, cb: () => void) {
+function runPythonProgram(this: any, code: string, level: string, hasTurtle: boolean, hasSleep: boolean, hasWarnings: boolean, cb: () => void) {
   // If we are in the Parsons problem -> use a different output
   let outputDiv = $('#output');
 
@@ -1017,11 +1021,14 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     }
     if (cb) cb ();
   }).catch(function(err) {
-    const errorMessage = errorMessageFromSkulptError(err) || null;
-    if (!errorMessage) {
-      throw null;
-    }
-    throw new Error(errorMessage);
+    const message = errorMessageFromSkulptError(err) || null;
+    if (message) {
+      reportClientError(level, code, message);
+      translateClientError(message)
+        .done(function(response: any) {
+            error.show(ErrorMessages['Execute_error'], response.error);
+        });
+      }
   });
 
   /**

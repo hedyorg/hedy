@@ -556,6 +556,20 @@ def translate_list(args):
     return ''.join(translated_args)
 
 
+def runtime_error_to_args(error):
+    parts = error.split(';')
+    if parts[0] == 'Runtime Type Error':
+        return parts[0], {'invalid_type': parts[1], 'variable': parts[2], 'invalid_value': parts[3]}
+    return 'something went wrong'
+
+
+@app.route('/translate_error', methods=['GET'])
+def translate_client_error():
+    code, args = runtime_error_to_args(request.args.get('error_code'))
+    translated = translate_error(code, args)
+    return jsonify({'error': translated})
+
+
 @app.route('/report_error', methods=['POST'])
 def report_error():
     post_body = request.json
