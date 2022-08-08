@@ -151,8 +151,8 @@ function cheatsheetStep() {
   $('#cheatsheet_container').show();
   $('#code_output').removeClass('z-40');
   $('#adventures').removeClass('z-40');
-  $('#cheatsheet_dropdown').addClass('z-40');
-  $('#cheatsheet_dropdown').show();
+  $('.cheatsheet-menu').addClass('z-40');
+  $('#cheatsheet-button').click();
 
   tutorialPopup(current_step);
 }
