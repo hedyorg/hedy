@@ -31,7 +31,7 @@
                   <td class="px-4 py-2">{{class.name|e}}</td>
                   <td class="text-center p-2">{{class.students|length}}</td>
                   <td class="text-center p-2"><a class="no-underline" href="for-teachers/class/{{class.id}}">{{_('view')}}</a></td>
-                  <td class="text-center p-2"><a class="no-underline cursor-pointer" onclick='hedyApp.duplicate_class()'>✂️📋</a></td>
+                  <td class="text-center p-2"><a class="no-underline cursor-pointer" onclick='hedyApp.duplicate_class("{{class.id}}", {{_('duplicate_class_prompt')|tojson}})')>✂️📋</a></td>
                   <td class="text-center p-2"><a class="no-underline cursor-pointer" onclick='hedyApp.delete_class("{{class.id}}", {{_('delete_class_prompt')|tojson}})'>🗑️</a></td>
                 </tr>
               {% endfor %}
