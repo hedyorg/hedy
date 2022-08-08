@@ -200,8 +200,8 @@ class TestsLevel18(HedyTester):
 
       expected = textwrap.dedent("""\
       step = 1 if 1 < 5 else -1
-      for v637d5dd1f16a4cc1d923588cb55ede49 in range(1, 5 + step, step):
-        print(f'''{v637d5dd1f16a4cc1d923588cb55ede49}''')
+      for دورة in range(1, 5 + step, step):
+        print(f'''{دورة}''')
         time.sleep(0.1)""")
 
       self.single_level_tester(

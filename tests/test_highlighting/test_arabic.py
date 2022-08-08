@@ -162,3 +162,28 @@ class HighlighterTestPrintArabic(HighlightTester):
             "KKK SSSSSSSSSSSSSSSSSSS NNNNNN K NNNNNN",
             level=level, lang='ar')
 
+    @parameterized.expand([
+        ("level3"),
+        ("level4"),
+        ("level5"),
+        ("level6"),
+        ("level7"),
+        ("level8"),
+        ("level9"),
+        ("level10"),
+        ("level11"),
+        ("level12"),
+        ("level13"),
+        ("level14"),
+        ("level15"),
+        ("level16"),
+        ("level17"),
+    ])
+    def test_print_comma(self, level):
+        self.assert_highlighted_chr(
+            'الحيوانات هو كلب، قطة، جمل',
+            "TTTTTTTTT KK TTTK TTTK TTT",
+            level=level, lang='ar')
+
+
+

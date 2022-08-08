@@ -116,6 +116,22 @@ class TestsLevel6(HedyTester):
             code=code,
             expected=expected
         )
+    
+    def test_assign_substract_negative_number(self):
+      
+      code = textwrap.dedent("""\
+      n = -3-4
+      print n""")
+      
+      expected = textwrap.dedent("""\
+      n = int(-3) - int(4)
+      print(f'{n}')""")
+
+      self.multi_level_tester(
+        max_level=11,
+        code=code,
+        expected=expected
+      )
 
     #
     # if tests
@@ -160,7 +176,6 @@ class TestsLevel6(HedyTester):
           print(f'gelijkspel!')""")
 
         self.multi_level_tester(max_level=7, code=code, expected=expected, output='gelijkspel!')
-
 
     def test_equality_arabic(self):
         code = textwrap.dedent("""\
@@ -347,6 +362,20 @@ class TestsLevel6(HedyTester):
           acu = int(acu) + int(5)""")
 
         self.multi_level_tester(max_level=7, code=code, expected=expected)
+      
+    def test_if_with_negative_number(self):
+      code = textwrap.dedent("""\
+      antwoord is -10
+      if antwoord is -10 print 'Nice' else print 'Oh no'""")
+      
+      expected = textwrap.dedent("""\
+      antwoord = '-10'
+      if convert_numerals('Latin', antwoord) == convert_numerals('Latin', '-10'):
+        print(f'Nice')
+      else:
+        print(f'Oh no')""")
+      
+      self.multi_level_tester(code=code, expected=expected, output='Nice', max_level=7)
 
     # Legal syntax:
     #
@@ -581,7 +610,6 @@ class TestsLevel6(HedyTester):
         ('+', '+', '10'),
         ('-', '-', '6')
     ])
-
     def test_print_calc_with_vars_arabic(self, op, transpiled_op, output):
         code = textwrap.dedent(f"""\
             nummer is ٨
@@ -818,3 +846,14 @@ class TestsLevel6(HedyTester):
                 print(f'5')""")
 
         self.multi_level_tester(max_level=6, code=code, expected=expected)
+
+    def test_negative_variable(self):
+      code = textwrap.dedent("""\
+        a = -3
+        b = a + 3
+        print b""")
+      expected = textwrap.dedent("""\
+        a = '-3'
+        b = int(a) + int(3)
+        print(f'{b}')""")
+      self.multi_level_tester(code=code, expected=expected, output='0', max_level=11)

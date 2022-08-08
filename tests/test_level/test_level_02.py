@@ -177,8 +177,8 @@ class TestsLevel2(HedyTester):
         print রং is আপনার প্রিয""")
 
         expected = textwrap.dedent("""\
-        ve1760b6272d4c9f816e62af4882d874f = input('আপনার প্রিয় রং কি'+'?')
-        print(f'{ve1760b6272d4c9f816e62af4882d874f} is আপনার প্রিয')""")
+        রং = input('আপনার প্রিয় রং কি'+'?')
+        print(f'{রং} is আপনার প্রিয')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=3)
 
@@ -257,8 +257,8 @@ class TestsLevel2(HedyTester):
         استدر الزاوية
         تقدم ١٠٠""")
         expected = textwrap.dedent("""\
-        v6123bda07174d1580194658be2060682 = '٩٠'
-        trtl = v6123bda07174d1580194658be2060682
+        الزاوية = '٩٠'
+        trtl = الزاوية
         try:
           trtl = int(trtl)
         except ValueError:
@@ -314,8 +314,8 @@ class TestsLevel2(HedyTester):
             ángulo is 90
             turn ángulo""")
         expected = HedyTester.dedent(
-            "vefd88f42b64136f16e8f305dd375a921 = '90'",
-            HedyTester.turn_transpiled('vefd88f42b64136f16e8f305dd375a921'))
+            "ángulo = '90'",
+            HedyTester.turn_transpiled('ángulo'))
 
         self.multi_level_tester(
             code=code,
@@ -454,7 +454,7 @@ class TestsLevel2(HedyTester):
         self.multi_level_tester(max_level=11, code=code, exception=hedy.exceptions.InvalidArgumentTypeException)
 
     #
-    # is tests
+    # assign tests
     #
 
     def test_assign_with_space_gives_invalid(self):
@@ -464,7 +464,6 @@ class TestsLevel2(HedyTester):
             code=code,
             exception=hedy.exceptions.InvalidSpaceException,
             max_level=7)
-
 
     def test_assign(self):
         code = "naam is Felienne"
@@ -508,21 +507,21 @@ class TestsLevel2(HedyTester):
         print állatok""")
 
         expected = textwrap.dedent("""\
-        v79de0191e90551f058d466c5e8c267ff = 'kutya'
-        print(f'{v79de0191e90551f058d466c5e8c267ff}')""")
+        állatok = 'kutya'
+        print(f'{állatok}')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
     def test_assign_bengali_var(self):
-        hashed_var = hedy.hash_var("নাম")
+        var = hedy.escape_var("নাম")
         code = "নাম is হেডি"
-        expected = f"{hashed_var} = 'হেডি'"
+        expected = f"{var} = 'হেডি'"
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
     def test_assign_python_keyword(self):
         code = "for is Hedy"
-        expected = "vd55669822f1a8cf72ec1911e462a54eb = 'Hedy'"
+        expected = "_for = 'Hedy'"
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
