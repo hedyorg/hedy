@@ -561,8 +561,8 @@ class TestsLevel8(HedyTester):
             print 'me wants a cookie!'""")
 
         expected = textwrap.dedent("""\
-        v79de0191e90551f058d466c5e8c267ff = '5'
-        for i in range(int(v79de0191e90551f058d466c5e8c267ff)):
+        állatok = '5'
+        for i in range(int(állatok)):
           print(f'me wants a cookie!')
           time.sleep(0.1)""")
 
