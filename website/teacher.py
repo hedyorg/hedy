@@ -187,6 +187,13 @@ def routes(app, database, achievements):
         }
 
         DATABASE.store_class(new_class)
+
+        # Get the customizations of the current class -> if they exist, update id and store again
+        customizations = DATABASE.get_class_customizations(body.get('id'))
+        if customizations:
+            customizations['id'] = class_id
+            DATABASE.update_class_customizations(customizations)
+
         return {}, 200
 
 
