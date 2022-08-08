@@ -164,7 +164,7 @@ function resetWindow() {
       switchToTab(hashFragment);
     }
   } else {
-    // If this is not the case: open the first tab we can find
+    // If this is not the case: open the first tab we find
     let tabname = $('.tab:first').attr('data-tab');
     if (tabname) {
       switchToTab(tabname);
