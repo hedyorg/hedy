@@ -137,7 +137,6 @@ function saveShareStep() {
   removeBorder("adventures");
   $('#code_content_container').removeClass('z-40');
   $('#level-header').addClass("z-40");
-  $('#cheatsheet_container').hide();
   addHighlightBorder("level-header");
 
   $('#save_program_button').removeAttr('onclick');
@@ -148,7 +147,6 @@ function saveShareStep() {
 }
 
 function cheatsheetStep() {
-  $('#cheatsheet_container').show();
   $('#code_output').removeClass('z-40');
   $('#adventures').removeClass('z-40');
   $('.cheatsheet-menu').addClass('z-40');
