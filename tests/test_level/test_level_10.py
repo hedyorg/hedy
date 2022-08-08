@@ -47,9 +47,9 @@ class TestsLevel10(HedyTester):
             print काउंटर""")
 
         expected = textwrap.dedent("""\
-        v920cc330837bbd206f02b0d9660af196 = ['hond', 'kat', 'papegaai']
-        for v7693a3e5c7a942bd47bf4b5af10576ac in v920cc330837bbd206f02b0d9660af196:
-          print(f'{v7693a3e5c7a942bd47bf4b5af10576ac}')
+        क = ['hond', 'kat', 'papegaai']
+        for काउंटर in क:
+          print(f'{काउंटर}')
           time.sleep(0.1)""")
 
         self.multi_level_tester(
