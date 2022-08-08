@@ -358,12 +358,9 @@ def routes(app, database):
 
         # Validations, optional fields
         if 'birth_year' in body:
-            try:
-                body['birth_year'] = int(body.get('birth_year'))
-                if body['birth_year'] <= 1900 or body['birth_year'] > datetime.datetime.now().year:
-                    return gettext('year_invalid').format(**{'current_year': str(datetime.datetime.now().year)}), 400
-            except ValueError:
-                return gettext('year_invalid').format(**{'current_year': str(datetime.datetime.now().year)}), 400
+            year = datetime.datetime.now().year
+            if not isinstance(body.get('birth_year'), int) or body['birth_year'] <= 1900 or body['birth_year'] > year:
+                return gettext('year_invalid').format(**{'current_year': str(year)}), 400
         if 'gender' in body:
             if body['gender'] != 'm' and body['gender'] != 'f' and body['gender'] != 'o':
                 return gettext('gender_invalid'), 400
@@ -548,12 +545,9 @@ def routes(app, database):
 
         # Validations, optional fields
         if 'birth_year' in body:
-            try:
-                body['birth_year'] = int(body.get('birth_year'))
-                if body['birth_year'] <= 1900 or body['birth_year'] > datetime.datetime.now().year:
-                    return gettext('year_invalid').format(**{'current_year': str(datetime.datetime.now().year)}), 400
-            except ValueError:
-                return gettext('year_invalid').format(**{'current_year': str(datetime.datetime.now().year)}), 400
+            year = datetime.datetime.now().year
+            if not isinstance(body.get('birth_year'), int) or body['birth_year'] <= 1900 or body['birth_year'] > year:
+                return gettext('year_invalid').format(**{'current_year': str(year)}), 400
         if 'gender' in body:
             if body['gender'] not in ["m", "f", "o"]:
                 return gettext('gender_invalid'), 400
