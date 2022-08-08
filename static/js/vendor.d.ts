@@ -28,6 +28,8 @@ declare const Sk: {
   },
 
   importMainWithBody(name: string, dumpJS: boolean, body: string, canSuspend: boolean): Suspension;
+
+  setTimeout?: (func: () => void, delay: number) => any;
 }
 
 // These are provided (or used) by Ace, IF Ace is included. The definitions might come from
