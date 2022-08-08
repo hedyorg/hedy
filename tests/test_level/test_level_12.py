@@ -425,7 +425,7 @@ class TestsLevel12(HedyTester):
     @parameterized.expand(HedyTester.quotes)
     def test_ask_bengali_var(self, q):
         code = f"""রং is ask {q}আপনার প্রিয় রং কি?{q}"""
-        expected = HedyTester.input_transpiled('ve1760b6272d4c9f816e62af4882d874f', 'আপনার প্রিয় রং কি?')
+        expected = HedyTester.input_transpiled('রং', 'আপনার প্রিয় রং কি?')
 
         self.multi_level_tester(code=code, expected=expected, max_level=17)
 
@@ -581,7 +581,7 @@ class TestsLevel12(HedyTester):
 
     def test_assign_list_with_dutch_comma_arabic_lang(self):
         code = "صديقي هو 'احمد', 'خالد', 'حسن'"
-        expected = "vbd60ecd50ef1238a3f6a563bcfb1d331 = ['احمد', 'خالد', 'حسن']"
+        expected = "صديقي = ['احمد', 'خالد', 'حسن']"
 
         self.multi_level_tester(
             code=code,
@@ -605,7 +605,7 @@ class TestsLevel12(HedyTester):
 
     def test_assign_list_with_arabic_comma(self):
         code = "صديقي هو 'احمد'، 'خالد'، 'حسن'"
-        expected = "vbd60ecd50ef1238a3f6a563bcfb1d331 = ['احمد', 'خالد', 'حسن']"
+        expected = "صديقي = ['احمد', 'خالد', 'حسن']"
 
         self.multi_level_tester(
             max_level=15,
@@ -644,20 +644,20 @@ class TestsLevel12(HedyTester):
 
     def test_assign_text_to_hungarian_var(self):
         code = "állatok is 'kutya'"
-        expected = "v79de0191e90551f058d466c5e8c267ff = 'kutya'"
+        expected = "állatok = 'kutya'"
 
         self.multi_level_tester(code=code, expected=expected)
 
     def test_assign_bengali_var(self):
-        hashed_var = hedy.hash_var("নাম")
+        var = hedy.escape_var("নাম")
         code = "নাম is 'হেডি'"
-        expected = f"{hashed_var} = 'হেডি'"
+        expected = f"{var} = 'হেডি'"
 
         self.multi_level_tester(code=code, expected=expected)
 
     def test_assign_python_keyword(self):
         code = "for is 'Hedy'"
-        expected = "vd55669822f1a8cf72ec1911e462a54eb = 'Hedy'"
+        expected = "_for = 'Hedy'"
 
         self.multi_level_tester(code=code, expected=expected)
 
@@ -764,8 +764,8 @@ class TestsLevel12(HedyTester):
 
         expected = textwrap.dedent("""\
         step = 1 if 1 < 5 else -1
-        for v637d5dd1f16a4cc1d923588cb55ede49 in range(1, 5 + step, step):
-          print(f'''{v637d5dd1f16a4cc1d923588cb55ede49}''')
+        for دورة in range(1, 5 + step, step):
+          print(f'''{دورة}''')
           time.sleep(0.1)""")
 
         self.multi_level_tester(
