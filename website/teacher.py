@@ -155,6 +155,41 @@ def routes(app, database, achievements):
             return {'achievement': achievement}, 200
         return {}, 200
 
+    @app.route('/duplicate_class', methods=['POST'])
+    @requires_login
+    def duplicate_class(user):
+        if not is_teacher(user):
+            return gettext('only_teacher_create_class'), 403
+
+        body = request.json
+        # Validations
+        if not isinstance(body, dict):
+            return gettext('ajax_error'), 400
+        if not isinstance(body.get('name'), str):
+            return gettext('class_name_invalid'), 400
+        if len(body.get('name')) < 1:
+            return gettext('class_name_empty'), 400
+
+        Class = DATABASE.get_class(body.get('id'))
+        if not Class or Class['teacher'] != user['username']:
+            return gettext('no_such_class'), 404
+
+        # All the class settings are still unique, we are only concerned with copying the customizations
+        # Shortly: Create a class like normal: concern with copying the customizations
+        class_id = uuid.uuid4().hex
+
+        new_class = {
+            'id': class_id,
+            'date': utils.timems(),
+            'teacher': user['username'],
+            'link': utils.random_id_generator(7),
+            'name': body.get('name')
+        }
+
+        DATABASE.store_class(new_class)
+        return {}, 200
+
+
     @app.route('/class/<class_id>/prejoin/<link>', methods=['GET'])
     def prejoin_class(class_id, link):
         Class = DATABASE.get_class(class_id)
