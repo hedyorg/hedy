@@ -83,6 +83,7 @@ function resetWindow() {
       $ ('#adventures-tab').css('min-height', '14em');
       $ ('#adventures-tab').css('max-height', '100%');
       $ ('#debug_container').hide();
+      return;
     } else {
       $ ('#editor').show();
       $ ('#level-header input').show ();
