@@ -86,15 +86,15 @@ class TestsLevel14(HedyTester):
     else
         print 'आप मुझसे बड़े हैं!'""")
     expected = textwrap.dedent(f"""\
-      v6cdeb9dc4e33aa47ac927755899137f2 = input(f'''आप कितने साल के हैं?''')
+      उम्र = input(f'''आप कितने साल के हैं?''')
       try:
-        v6cdeb9dc4e33aa47ac927755899137f2 = int(v6cdeb9dc4e33aa47ac927755899137f2)
+        उम्र = int(उम्र)
       except ValueError:
         try:
-          v6cdeb9dc4e33aa47ac927755899137f2 = float(v6cdeb9dc4e33aa47ac927755899137f2)
+          उम्र = float(उम्र)
         except ValueError:
           pass
-      if convert_numerals('Latin', v6cdeb9dc4e33aa47ac927755899137f2).zfill(100)>convert_numerals('Latin', 12).zfill(100):
+      if convert_numerals('Latin', उम्र).zfill(100)>convert_numerals('Latin', 12).zfill(100):
         print(f'''आप मुझसे छोटे हैं!''')
       else:
         print(f'''आप मुझसे बड़े हैं!''')""")

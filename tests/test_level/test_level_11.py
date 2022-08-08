@@ -135,8 +135,8 @@ class TestsLevel11(HedyTester):
 
         expected = textwrap.dedent("""\
         step = 1 if int(1) < int(5) else -1
-        for v7693a3e5c7a942bd47bf4b5af10576ac in range(int(1), int(5) + step, step):
-          print(f'{v7693a3e5c7a942bd47bf4b5af10576ac}')
+        for काउंटर in range(int(1), int(5) + step, step):
+          print(f'{काउंटर}')
           time.sleep(0.1)""")
 
         self.single_level_tester(
@@ -151,8 +151,8 @@ class TestsLevel11(HedyTester):
 
         expected = textwrap.dedent("""\
         step = 1 if int(1) < int(5) else -1
-        for v637d5dd1f16a4cc1d923588cb55ede49 in range(int(1), int(5) + step, step):
-          print(f'{v637d5dd1f16a4cc1d923588cb55ede49}')
+        for دورة in range(int(1), int(5) + step, step):
+          print(f'{دورة}')
           time.sleep(0.1)""")
 
         output = textwrap.dedent("""\
@@ -175,8 +175,8 @@ class TestsLevel11(HedyTester):
 
         expected = textwrap.dedent("""\
         step = 1 if int(1) < int(5) else -1
-        for v637d5dd1f16a4cc1d923588cb55ede49 in range(int(1), int(5) + step, step):
-          print(f'{convert_numerals("Arabic",v637d5dd1f16a4cc1d923588cb55ede49)}')
+        for دورة in range(int(1), int(5) + step, step):
+          print(f'{convert_numerals("Arabic",دورة)}')
           time.sleep(0.1)""")
 
         output = textwrap.dedent("""\

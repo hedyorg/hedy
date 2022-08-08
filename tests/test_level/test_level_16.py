@@ -148,9 +148,9 @@ class TestsLevel16(HedyTester):
         vrienden = ['Ahmed', 'Ben', 'Cayden']
         geluksgetallen = [15, 18, 6]
         step = 1 if 1 < 3 else -1
-        for v7dd7ec2093c0f55999a450adc7e4fe49 in range(1, 3 + step, step):
-          print(f'''het geluksgetal van {vrienden[v7dd7ec2093c0f55999a450adc7e4fe49-1]}''')
-          print(f'''is {geluksgetallen[v7dd7ec2093c0f55999a450adc7e4fe49-1]}''')
+        for म in range(1, 3 + step, step):
+          print(f'''het geluksgetal van {vrienden[म-1]}''')
+          print(f'''is {geluksgetallen[म-1]}''')
           time.sleep(0.1)""")
 
         self.single_level_tester(
