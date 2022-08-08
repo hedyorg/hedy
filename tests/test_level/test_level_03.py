@@ -163,8 +163,8 @@ class TestsLevel3(HedyTester):
         print állatok at random""")
 
         expected = textwrap.dedent("""\
-        v79de0191e90551f058d466c5e8c267ff = ['kutya', 'macska', 'kenguru']
-        print(f'{random.choice(v79de0191e90551f058d466c5e8c267ff)}')""")
+        állatok = ['kutya', 'macska', 'kenguru']
+        print(f'{random.choice(állatok)}')""")
 
         self.multi_level_tester(max_level=11, code=code, expected=expected)
 
@@ -196,7 +196,7 @@ class TestsLevel3(HedyTester):
 
     def test_assign_list_with_dutch_comma_arabic_lang(self):
         code = "صديقي هو احمد, خالد, حسن"
-        expected = "vbd60ecd50ef1238a3f6a563bcfb1d331 = ['احمد', 'خالد', 'حسن']"
+        expected = "صديقي = ['احمد', 'خالد', 'حسن']"
 
         self.multi_level_tester(
             max_level=11,
@@ -220,7 +220,7 @@ class TestsLevel3(HedyTester):
 
     def test_assign_list_with_arabic_comma(self):
         code = "صديقي هو احمد، خالد، حسن"
-        expected = "vbd60ecd50ef1238a3f6a563bcfb1d331 = ['احمد', 'خالد', 'حسن']"
+        expected = "صديقي = ['احمد', 'خالد', 'حسن']"
 
         self.multi_level_tester(
             max_level=11,

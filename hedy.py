@@ -249,33 +249,9 @@ def get_suggestions_for_language(lang, level):
 
     return en_lang_commands
 
-
-def hash_needed(var):
-    # this function now sometimes gets a str and sometimes - a LookupEntry
-    # not pretty but it will all be removed once we no longer need hashing (see issue #959) so ok for now
-
-    # some elements are not names but processed names, i.e. random.choice(dieren)
-    # they should not be hashed
-    # these are either of type assignment and operation or already processed and then contain ( or [
-    if (type(var) is LookupEntry and var.skip_hashing) or (isinstance(var, str) and ('[' in var or '(' in var)):
-        return False
-
+def escape_var(var):
     var_name = var.name if type(var) is LookupEntry else var
-
-    return var_name in reserved_words or character_skulpt_cannot_parse.search(var_name) is not None
-
-
-def hash_var(var):
-    var_name = var.name if type(var) is LookupEntry else var
-    if hash_needed(var):
-        # hash "illegal" var names
-        # being reserved keywords
-        # or non-latin vars to comply with Skulpt, which does not implement PEP3131 :(
-        # prepend with v for when hash starts with a number
-        hash_object = hashlib.md5(var_name.encode())
-        return "v" + hash_object.hexdigest()
-    else:
-        return var_name
+    return "_" + var_name if var_name in reserved_words else var_name
 
 def closest_command(invalid_command, known_commands, threshold=2):
     # closest_command() searches for a similar command (distance smaller than threshold)
@@ -430,8 +406,8 @@ class LookupEntryCollector(visitors.Visitor):
     # list access is added to the lookup table not because it must be escaped
     # for example we print(dieren[1]) not print('dieren[1]')
     def list_access(self, tree):
-        list_name = hash_var(tree.children[0].children[0])
-        position_name = hash_var(tree.children[1])
+        list_name = escape_var(tree.children[0].children[0])
+        position_name = escape_var(tree.children[1])
         if position_name == 'random':
             name = f'random.choice({list_name})'
         else:
@@ -460,7 +436,7 @@ class LookupEntryCollector(visitors.Visitor):
 
     def add_to_lookup(self, name, tree, skip_hashing=False):
         entry = LookupEntry(name, tree, skip_hashing)
-        hashed_name = hash_var(entry)
+        hashed_name = escape_var(entry)
         entry.name = hashed_name
         self.lookup.append(entry)
 
@@ -531,7 +507,7 @@ class TypeValidator(Transformer):
     def list_access(self, tree):
         self.validate_args_type_allowed(Command.list_access, tree.children[0], tree.meta)
 
-        list_name = hash_var(tree.children[0].children[0])
+        list_name = escape_var(tree.children[0].children[0])
         if tree.children[1] == 'random':
             name = f'random.choice({list_name})'
         else:
@@ -725,7 +701,7 @@ class TypeValidator(Transformer):
 
     def save_type_to_lookup(self, name, inferred_type):
         for entry in self.lookup:
-            if entry.name == hash_var(name):
+            if entry.name == escape_var(name):
                 entry.type_ = inferred_type
 
     # Usually, variable definitions are sequential and by the time we need the type of a lookup entry, it would already
@@ -737,7 +713,7 @@ class TypeValidator(Transformer):
     #  lookup entry is used to infer the type and continue the started validation. This approach might cause issues
     #  in case of cyclic references, e.g. b is b + 1. The flag `inferring` is used as a guard against these cases.
     def try_get_type_from_lookup(self, name):
-        matches = [entry for entry in self.lookup if entry.name == hash_var(name)]
+        matches = [entry for entry in self.lookup if entry.name == escape_var(name)]
         if matches:
             match = matches[0]
             if not match.type_:
@@ -1092,26 +1068,26 @@ class ConvertToPython(Transformer):
 
     def is_variable(self, name):
         all_names = [a.name for a in self.lookup]
-        return hash_var(name) in all_names
+        return escape_var(name) in all_names
 
     def process_variable(self, arg):
         # processes a variable by hashing and escaping when needed
         if self.is_variable(arg):
-            return hash_var(arg)
+            return escape_var(arg)
         if ConvertToPython.is_quoted(arg):
             arg = arg[1:-1]
         return f"'{process_characters_needing_escape(arg)}'"
 
     def process_variable_for_fstring(self, name):
         if self.is_variable(name):
-            return "{" + hash_var(name) + "}"
+            return "{" + escape_var(name) + "}"
         else:
             return process_characters_needing_escape(name)
 
     def process_variable_for_fstring_padded(self, name):
         # used to transform variables in comparisons
         if self.is_variable(name):
-            return f"convert_numerals('{self.numerals_language}', {hash_var(name)}).zfill(100)"
+            return f"convert_numerals('{self.numerals_language}', {escape_var(name)}).zfill(100)"
         elif ConvertToPython.is_float(name):
             return f"convert_numerals('{self.numerals_language}', {name}).zfill(100)"
         elif ConvertToPython.is_quoted(name):
@@ -1124,7 +1100,7 @@ class ConvertToPython(Transformer):
         for argument in args:
             if self.is_variable(argument):
                 # variables are placed in {} in the f string
-                argument_string += "{" + hash_var(argument) + "}"
+                argument_string += "{" + escape_var(argument) + "}"
             else:
                 # strings are written regularly
                 # however we no longer need the enclosing quotes in the f-string
@@ -1330,7 +1306,7 @@ class ConvertToPython_2(ConvertToPython_1):
             return "t.right(90)"  # no arguments defaults to a right turn
         arg = args[0]
         if self.is_variable(arg):
-            return self.make_turn(hash_var(arg))
+            return self.make_turn(escape_var(arg))
         if arg.lstrip("-").isnumeric():
             return self.make_turn(arg)
 
@@ -1339,10 +1315,10 @@ class ConvertToPython_2(ConvertToPython_1):
     def var(self, args):
         name = args[0]
         self.check_var_usage(args)
-        return hash_var(name)
+        return escape_var(name)
     def var_access(self, args):
         name = args[0]
-        return hash_var(name)
+        return escape_var(name)
     def print(self, args):
         argument_string = ""
         i = 0
@@ -1411,7 +1387,7 @@ class ConvertToPython_3(ConvertToPython_2):
         return f"{parameter} = [{', '.join(values)}]"
 
     def list_access(self, args):
-        args = [hash_var(a) for a in args]
+        args = [escape_var(a) for a in args]
 
         # check the arguments (except when they are random or numbers, that is not quoted nor a var but is allowed)
         self.check_var_usage(a for a in args if a != 'random' and not a.isnumeric())
@@ -1444,9 +1420,9 @@ class ConvertToPython_4(ConvertToPython_3):
     def process_variable_for_fstring(self, name):
         if self.is_variable(name):
             if self.numerals_language == "Latin":
-                converted = hash_var(name)
+                converted = escape_var(name)
             else:
-                converted = f'convert_numerals("{self.numerals_language}",{hash_var(name)})'
+                converted = f'convert_numerals("{self.numerals_language}",{escape_var(name)})'
             return "{" + converted + "}"
         else:
             if self.is_quoted(name):
@@ -1455,7 +1431,7 @@ class ConvertToPython_4(ConvertToPython_3):
 
     def var_access(self, args):
         name = args[0]
-        return hash_var(name)
+        return escape_var(name)
 
     def print_ask_args(self, args):
         args = self.check_var_usage(args)
@@ -1481,7 +1457,7 @@ class ConvertToPython_4(ConvertToPython_3):
 @hedy_transpiler(level=5)
 class ConvertToPython_5(ConvertToPython_4):
     def list_access_var(self, args):
-        var = hash_var(args[0])
+        var = escape_var(args[0])
         if isinstance(args[2], Tree):
             return var + ' = random.choice(' + args[1] + ')'
         else:
@@ -1644,10 +1620,10 @@ class ConvertToPython_8_9(ConvertToPython_7):
 
     def var_access(self, args):
         if len(args) == 1: #accessing a var
-            return hash_var(args[0])
+            return escape_var(args[0])
         else:
         # this is list_access
-            return hash_var(args[0]) + "[" + str(hash_var(args[1])) + "]" if type(args[1]) is not Tree else "random.choice(" + str(hash_var(args[0])) + ")"
+            return escape_var(args[0]) + "[" + str(escape_var(args[1])) + "]" if type(args[1]) is not Tree else "random.choice(" + str(escape_var(args[0])) + ")"
 
 @hedy_transpiler(level=10)
 class ConvertToPython_10(ConvertToPython_8_9):
@@ -1665,7 +1641,7 @@ class ConvertToPython_10(ConvertToPython_8_9):
 class ConvertToPython_11(ConvertToPython_10):
     def for_loop(self, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
-        iterator = hash_var(args[0])
+        iterator = escape_var(args[0])
         body = "\n".join([ConvertToPython.indent(x) for x in args[3:]])
         body = sleep_after(body)
         stepvar_name = self.get_fresh_var('step')
@@ -1767,7 +1743,7 @@ class ConvertToPython_12(ConvertToPython_11):
         name = args[0]
         self.check_var_usage(args)
         self.check_var_usage(args)
-        return hash_var(name)
+        return escape_var(name)
 
 @hedy_transpiler(level=13)
 class ConvertToPython_13(ConvertToPython_12):
