@@ -95,6 +95,8 @@ for lang in ALL_KEYWORD_LANGUAGES.keys():
             KEYWORDS[lang][k] = v.split('|')[0]
 
 
+NON_BABEL = ['tn']
+
 class Commands:
     # Want to parse the keywords only once, they can be cached -> perform this action on server start
     def __init__(self, language):
