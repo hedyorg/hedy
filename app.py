@@ -817,7 +817,7 @@ def index(level, program_id):
     if 'levels' in customizations and level not in available_levels:
         return utils.error_page(error=403, ui_message=gettext('level_not_class'))
 
-    commands = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
+    cheatsheet = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
 
     teacher_adventures = []
     # Todo: TB It would be nice to improve this by using level as a sort key
@@ -855,7 +855,7 @@ def index(level, program_id):
         quiz = False
 
     return hedyweb.render_code_editor_with_tabs(
-        commands=commands,
+        cheatsheet=cheatsheet,
         max_level=hedy.HEDY_MAX_LEVEL,
         level_number=level,
         version=version(),

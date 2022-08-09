@@ -49,7 +49,7 @@ class PageTranslations:
         return d
 
 
-def render_code_editor_with_tabs(commands, max_level, level_number, version, quiz, quiz_questions, loaded_program, adventures, parsons, parsons_exercises, customizations, hide_cheatsheet, enforce_developers_mode, teacher_adventures, adventure_name):
+def render_code_editor_with_tabs(cheatsheet, max_level, level_number, version, quiz, quiz_questions, loaded_program, adventures, parsons, parsons_exercises, customizations, hide_cheatsheet, enforce_developers_mode, teacher_adventures, adventure_name):
     arguments_dict = {}
 
     # Meta stuff
@@ -71,7 +71,7 @@ def render_code_editor_with_tabs(commands, max_level, level_number, version, qui
     arguments_dict['quiz'] = quiz
     arguments_dict['quiz_questions'] = quiz_questions
 
-    return render_template("code-page.html", **arguments_dict, commands=commands)
+    return render_template("code-page.html", **arguments_dict, cheatsheet=cheatsheet)
 
 
 def render_tutorial_mode(level, commands, adventures):
