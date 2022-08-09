@@ -175,6 +175,7 @@ def routes(app, database, achievements):
             return gettext('no_such_class'), 404
 
         # We use this extra call to verify if the class name doesn't already exist, if so it's a duplicate
+        # Todo TB: This is a duplicate function, might be nice to perform some clean-up to reduce these parts
         Classes = DATABASE.get_teacher_classes(user['username'], True)
         for Class in Classes:
             if Class['name'] == body.get('name'):
