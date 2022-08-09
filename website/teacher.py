@@ -134,7 +134,7 @@ def routes(app, database, achievements):
         Classes = DATABASE.get_teacher_classes(user['username'], True)
         for Class in Classes:
             if Class['name'] == body['name']:
-                return "duplicate", 200
+                return "duplicate", 200 # Todo TB: Will have to look into this, but not sure why we return a 200?
 
         DATABASE.update_class(class_id, body['name'])
         achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "on_second_thoughts")
@@ -173,6 +173,12 @@ def routes(app, database, achievements):
         Class = DATABASE.get_class(body.get('id'))
         if not Class or Class['teacher'] != user['username']:
             return gettext('no_such_class'), 404
+
+        # We use this extra call to verify if the class name doesn't already exist, if so it's a duplicate
+        Classes = DATABASE.get_teacher_classes(user['username'], True)
+        for Class in Classes:
+            if Class['name'] == body.get('name'):
+                return gettext('class_name_duplicate'), 400
 
         # All the class settings are still unique, we are only concerned with copying the customizations
         # Shortly: Create a class like normal: concern with copying the customizations
