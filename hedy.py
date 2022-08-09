@@ -349,9 +349,6 @@ class ExtractAST(Transformer):
     def var(self, meta, args):
         return Tree('var', [''.join([str(c) for c in args])], meta)
 
-    def punctuation(self, meta, args):
-        return Tree('punctuation', [''.join([str(c) for c in args])], meta)
-
     def list_access(self, meta, args):
         # FH, may 2022 I don't fully understand why we remove INT here and just plemp
         # the number in the tree. should be improved but that requires rewriting the further processing code too (TODO)
@@ -577,9 +574,6 @@ class TypeValidator(Transformer):
             type_ = HedyType.string
         return self.to_typed_tree(tree, type_)
 
-    def punctuation(self, tree):
-        return self.to_typed_tree(tree, HedyType.string)
-
     def text_in_quotes(self, tree):
         return self.to_typed_tree(tree.children[0], HedyType.string)
 
@@ -782,9 +776,6 @@ class Filter(Transformer):
 
     def random(self, meta, args):
         return True, 'random', meta
-
-    def punctuation(self, meta, args):
-        return True, ''.join([c for c in args]), meta
 
     def number(self, meta, args):
         return True, ''.join([c for c in args]), meta
@@ -1309,8 +1300,6 @@ class ConvertToPython_2(ConvertToPython_1):
         if arg.lstrip("-").isnumeric():
             return self.make_turn(arg)
 
-    def punctuation(self, args):
-        return ''.join([str(c) for c in args])
     def var(self, args):
         name = args[0]
         self.check_var_usage(args)
