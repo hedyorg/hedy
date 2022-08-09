@@ -1318,12 +1318,7 @@ class ConvertToPython_2(ConvertToPython_1):
                 args_new.append(self.process_variable_for_fstring(a))
             else:
                 res = regex.findall(r"[\p{Script=Bengali}\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}\p{Mn}\p{Mc}\p{Nd}\p{Pc}]+|[^\p{Script=Bengali}\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}]+", a)
-
-                # if nog nodig??
-                if res:
-                    args_new.append(''.join([self.process_variable_for_fstring(x) for x in res]))
-                else:
-                    args_new = args_new + [a]
+                args_new.append(''.join([self.process_variable_for_fstring(x) for x in res]))
 
         argument_string = ' '.join(args_new)
 
