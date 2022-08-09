@@ -137,7 +137,7 @@ class TestsLevel2(HedyTester):
     #
     def test_ask(self):
         code = "kleur is ask wat is je lievelingskleur?"
-        expected = "kleur = input('wat is je lievelingskleur'+'?')"
+        expected = "kleur = input('wat is je lievelingskleur?')"
 
         self.multi_level_tester(code=code, expected=expected, max_level=3)
 
@@ -178,7 +178,7 @@ class TestsLevel2(HedyTester):
 
     def test_ask_es(self):
         code = "color is ask ask Cuál es tu color favorito?"
-        expected = "color = input('ask Cuál es tu color favorito'+'?')"
+        expected = "color = input('ask Cuál es tu color favorito?')"
 
         self.multi_level_tester(code=code, expected=expected, max_level=3)
 
@@ -188,7 +188,7 @@ class TestsLevel2(HedyTester):
         print রং is আপনার প্রিয""")
 
         expected = textwrap.dedent("""\
-        রং = input('আপনার প্রিয় রং কি'+'?')
+        রং = input('আপনার প্রিয় রং কি?')
         print(f'{রং} is আপনার প্রিয')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=3)
@@ -574,7 +574,7 @@ class TestsLevel2(HedyTester):
             afstand is ask hoe ver dan?
             forward afstand""")
         expected = HedyTester.dedent(
-            "afstand = input('hoe ver dan'+'?')",
+            "afstand = input('hoe ver dan?')",
             HedyTester.forward_transpiled('afstand'))
 
         self.multi_level_tester(
@@ -592,7 +592,7 @@ class TestsLevel2(HedyTester):
 
         expected = HedyTester.dedent("""\
         print(f'Turtle race')
-        direction = input('Where to turn'+'?')""",
+        direction = input('Where to turn?')""",
                                      HedyTester.turn_transpiled('direction'))
 
         self.multi_level_tester(

@@ -12,7 +12,7 @@ import hedy_translation
 import utils
 from collections import namedtuple
 import hashlib
-import re
+import re, regex
 from dataclasses import dataclass, field
 import exceptions
 import program_repair
@@ -1322,22 +1322,16 @@ class ConvertToPython_2(ConvertToPython_1):
     def print(self, args):
         args_new = []
         for a in args:
-            args_new = args_new + re.findall(r"[\w'\"]+|[,.!?]", a)
-
-        argument_string = ""
-        i = 0
+            res = regex.findall(r"[\p{Script=Bengali}\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}]+|[^\p{Script=Bengali}\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}]+", a)
 
 
-        for argument in args_new:
-            # final argument and punctuation arguments do not have to be separated with a space, other do
-            if i == len(args_new)-1 or args_new[i+1] in self.punctuation_symbols:
-                space = ''
+            # if nog nodig??
+            if res:
+                args_new.append(''.join([self.process_variable_for_fstring(x) for x in res]))
             else:
-                space = " "
+                args_new = args_new + [a]
 
-            argument_string += self.process_variable_for_fstring(argument) + space
-
-            i = i + 1
+        argument_string = ' '.join(args_new)
 
         return f"print(f'{argument_string}')"
 
