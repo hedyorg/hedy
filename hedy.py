@@ -1319,18 +1319,22 @@ class ConvertToPython_2(ConvertToPython_1):
     def var_access(self, args):
         name = args[0]
         return escape_var(name)
+
     def print(self, args):
         args_new = []
         for a in args:
-            #TODO: Do we need to add this lib to the requirements file??
-            res = regex.findall(r"[\p{Script=Bengali}\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}]+|[^\p{Script=Bengali}\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}]+", a)
-
-
-            # if nog nodig??
-            if res:
-                args_new.append(''.join([self.process_variable_for_fstring(x) for x in res]))
+            # todo: how did this work before haha?
+            if "random.choice" in a or "[" in a:
+                args_new.append(self.process_variable_for_fstring(a))
             else:
-                args_new = args_new + [a]
+                # TODO: Do we need to add this lib to the requirements file??
+                res = regex.findall(r"[\p{Script=Bengali}\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}\p{Mn}\p{Mc}\p{Nd}\p{Pc}]+|[^\p{Script=Bengali}\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}]+", a)
+
+                # if nog nodig??
+                if res:
+                    args_new.append(''.join([self.process_variable_for_fstring(x) for x in res]))
+                else:
+                    args_new = args_new + [a]
 
         argument_string = ' '.join(args_new)
 
