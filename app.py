@@ -1466,6 +1466,13 @@ def keyword_languages_keys():
 def get_country(country):
     return COUNTRIES.get(country, "-")
 
+@app.template_global()
+# If the current user language supports localized keywords: return this value, else: english
+def get_syntax_language(lang):
+    if lang in ALL_KEYWORD_LANGUAGES.keys():
+        return lang
+    else:
+        return "en"
 
 @app.template_global()
 def parse_keyword(keyword):
