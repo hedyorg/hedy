@@ -1173,8 +1173,7 @@ class ConvertToPython(Transformer):
 @hedy_transpiler(level=1)
 class ConvertToPython_1(ConvertToPython):
 
-    def __init__(self, punctuation_symbols, lookup, numerals_language):
-        self.punctuation_symbols = punctuation_symbols
+    def __init__(self, lookup, numerals_language):
         self.numerals_language = numerals_language
         self.lookup = lookup
         __class__.level = 1
@@ -2306,8 +2305,6 @@ def create_lookup_table(abstract_syntax_tree, level, lang, input_string):
 def transpile_inner(input_string, level, lang="en"):
     check_program_size_is_valid(input_string)
 
-    punctuation_symbols = ['!', '?', '.']
-
     level = int(level)
     if level > HEDY_MAX_LEVEL:
         raise Exception(f'Levels over {HEDY_MAX_LEVEL} not implemented yet')
@@ -2337,7 +2334,7 @@ def transpile_inner(input_string, level, lang="en"):
             numerals_language = "Latin"
         # grab the right transpiler from the lookup
         convertToPython = TRANSPILER_LOOKUP[level]
-        python = convertToPython(punctuation_symbols, lookup_table, numerals_language).transform(abstract_syntax_tree)
+        python = convertToPython(lookup_table, numerals_language).transform(abstract_syntax_tree)
 
 
         has_turtle = UsesTurtle().transform(abstract_syntax_tree)
