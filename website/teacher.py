@@ -134,7 +134,7 @@ def routes(app, database, achievements):
         Classes = DATABASE.get_teacher_classes(user['username'], True)
         for Class in Classes:
             if Class['name'] == body['name']:
-                return "duplicate", 200
+                return "duplicate", 200 # Todo TB: Will have to look into this, but not sure why we return a 200?
 
         DATABASE.update_class(class_id, body['name'])
         achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "on_second_thoughts")
@@ -154,6 +154,55 @@ def routes(app, database, achievements):
         if achievement:
             return {'achievement': achievement}, 200
         return {}, 200
+
+    @app.route('/duplicate_class', methods=['POST'])
+    @requires_login
+    def duplicate_class(user):
+        if not is_teacher(user):
+            return gettext('only_teacher_create_class'), 403
+
+        body = request.json
+        # Validations
+        if not isinstance(body, dict):
+            return gettext('ajax_error'), 400
+        if not isinstance(body.get('name'), str):
+            return gettext('class_name_invalid'), 400
+        if len(body.get('name')) < 1:
+            return gettext('class_name_empty'), 400
+
+        Class = DATABASE.get_class(body.get('id'))
+        if not Class or Class['teacher'] != user['username']:
+            return gettext('no_such_class'), 404
+
+        # We use this extra call to verify if the class name doesn't already exist, if so it's a duplicate
+        # Todo TB: This is a duplicate function, might be nice to perform some clean-up to reduce these parts
+        Classes = DATABASE.get_teacher_classes(user['username'], True)
+        for Class in Classes:
+            if Class['name'] == body.get('name'):
+                return gettext('class_name_duplicate'), 400
+
+        # All the class settings are still unique, we are only concerned with copying the customizations
+        # Shortly: Create a class like normal: concern with copying the customizations
+        class_id = uuid.uuid4().hex
+
+        new_class = {
+            'id': class_id,
+            'date': utils.timems(),
+            'teacher': user['username'],
+            'link': utils.random_id_generator(7),
+            'name': body.get('name')
+        }
+
+        DATABASE.store_class(new_class)
+
+        # Get the customizations of the current class -> if they exist, update id and store again
+        customizations = DATABASE.get_class_customizations(body.get('id'))
+        if customizations:
+            customizations['id'] = class_id
+            DATABASE.update_class_customizations(customizations)
+
+        return {}, 200
+
 
     @app.route('/class/<class_id>/prejoin/<link>', methods=['GET'])
     def prejoin_class(class_id, link):

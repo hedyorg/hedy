@@ -54,6 +54,25 @@ export function rename_class(id: string, class_name_prompt: string) {
     });
 }
 
+export function duplicate_class(id: string, prompt: string) {
+    modal.prompt (prompt, '', function (class_name) {
+    $.ajax({
+      type: 'POST',
+      url: '/duplicate_class',
+      data: JSON.stringify({
+        id: id,
+        name: class_name
+      }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function() {
+      location.reload();
+    }).fail(function(err) {
+      return modal.alert(err.responseText, 3000, true);
+    });
+  });
+}
+
 export function delete_class(id: string, prompt: string) {
   modal.confirm (prompt, function () {
     $.ajax({
