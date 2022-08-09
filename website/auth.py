@@ -359,6 +359,7 @@ def routes(app, database):
         # Validations, optional fields
         if 'birth_year' in body:
             year = datetime.datetime.now().year
+            body['birth_year'] = int(body.get('birth_year'))
             if not isinstance(body.get('birth_year'), int) or body['birth_year'] <= 1900 or body['birth_year'] > year:
                 return gettext('year_invalid').format(**{'current_year': str(year)}), 400
         if 'gender' in body:
@@ -546,6 +547,7 @@ def routes(app, database):
         # Validations, optional fields
         if 'birth_year' in body:
             year = datetime.datetime.now().year
+            body['birth_year'] = int(body.get('birth_year'))
             if not isinstance(body.get('birth_year'), int) or body['birth_year'] <= 1900 or body['birth_year'] > year:
                 return gettext('year_invalid').format(**{'current_year': str(year)}), 400
         if 'gender' in body:
