@@ -1312,7 +1312,8 @@ class ConvertToPython_2(ConvertToPython_1):
     def print(self, args):
         args_new = []
         for a in args:
-            # todo: how did this work before haha?
+            # list access has been already rewritten since it occurs lower in the tree
+            # therefore we should not split it anymore and thread it as 1 variable:
             if "random.choice" in a or "[" in a:
                 args_new.append(self.process_variable_for_fstring(a))
             else:
