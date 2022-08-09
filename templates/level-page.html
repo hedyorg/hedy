@@ -46,27 +46,19 @@
               <table class="mx-4 my-2">
                 <thead>
                     <tr class="border-b border-gray-700">
-                        <td>English</td>
+                        <td>{{_('english')}}</td>
                         <td></td>
-                        <td>Nederlands</td>
+                        <td>{{ current_language().sym }}</td>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class="py-2 pr-8"><code>print</code></td>
-                        <td class="pr-8">⟷</td>
-                        <td><code>print</code></td>
-                    </tr>
-                    <tr>
-                        <td class="py-2"><code>ask</code></td>
-                        <td>⟷</td>
-                        <td><code>vraag</code></td>
-                    </tr>
-                    <tr>
-                        <td class="py-2"><code>echo</code></td>
-                        <td>⟷</td>
-                        <td><code>echo</code></td>
-                    </tr>
+                    {% for keyword in keywords %}
+                        <tr>
+                            <td class="py-2 pr-8"><code>English one</code></td>
+                            <td class="pr-8">⟷</td>
+                            <td><code>Translated one</code></td>
+                        </tr>
+                    {% endfor %}
                 </tbody>
               </table>
         </div>
