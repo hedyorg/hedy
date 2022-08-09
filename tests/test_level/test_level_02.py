@@ -85,7 +85,8 @@ class TestsLevel2(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, output=output, max_level=3)
 
-    def test_print_exclamation_mark(self):
+    def test_print_exclamation_mark_and_quote(self):
+        # test for issue 279
         code = "print hello world!'"
         expected = "print(f'hello world!\\'')"
         output = "hello world!\'"
