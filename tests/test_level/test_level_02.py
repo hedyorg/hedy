@@ -63,6 +63,21 @@ class TestsLevel2(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, output=output, max_level=3)
 
+    def test_print_var_with_comma(self):
+        #test for issue 2549
+        code = textwrap.dedent("""\
+        name is test
+        print name, heya!""")
+
+        expected = textwrap.dedent("""\
+        name = 'test'
+        print(f'{name}, heya!')""")
+
+        output = textwrap.dedent("""\
+        test, heya!""")
+
+        self.multi_level_tester(code=code, expected=expected, output=output, max_level=3)
+
     def test_print_single_quoted_text(self):
         code = "print 'Welcome to OceanView'"
         expected = "print(f'\\'Welcome to OceanView\\'')"
