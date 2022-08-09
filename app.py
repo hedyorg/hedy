@@ -1462,14 +1462,25 @@ def keyword_languages():
 def keyword_languages_keys():
     return [l for l in ALL_KEYWORD_LANGUAGES.keys()]
 
+
 @app.template_global()
 def get_country(country):
     return COUNTRIES.get(country, "-")
 
 
 @app.template_global()
+# If the current user language supports localized keywords: return this value, else: english
+def get_syntax_language(lang):
+    if lang in ALL_KEYWORD_LANGUAGES.keys():
+        return lang
+    else:
+        return "en"
+
+
+@app.template_global()
 def parse_keyword(keyword):
     return hedy_content.KEYWORDS.get(g.keyword_lang).get(keyword)
+
 
 def make_lang_obj(lang):
     """Make a language object for a given language."""
