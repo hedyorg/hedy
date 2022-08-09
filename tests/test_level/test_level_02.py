@@ -70,6 +70,17 @@ class TestsLevel2(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, output=output, max_level=3)
 
+    def test_print_exclamation_mark(self):
+        code = "print hello world!'"
+        expected = "print(f'hello world!\\'')"
+        output = "hello world!\'"
+
+        self.multi_level_tester\
+            (code=code,
+             expected=expected,
+             output=output,
+             max_level=3)
+
     def test_print_double_quoted_text(self):
         code = 'print "Welcome to OceanView"'
         expected = "print(f'\"Welcome to OceanView\"')"
@@ -543,7 +554,7 @@ class TestsLevel2(HedyTester):
         kleur is ask wat is je lievelingskleur?
         print kleur!""")
         expected = textwrap.dedent("""\
-        kleur = input('wat is je lievelingskleur'+'?')
+        kleur = input('wat is je lievelingskleur?')
         print(f'{kleur}!')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=3)

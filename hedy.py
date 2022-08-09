@@ -1320,12 +1320,17 @@ class ConvertToPython_2(ConvertToPython_1):
         name = args[0]
         return escape_var(name)
     def print(self, args):
+        args_new = []
+        for a in args:
+            args_new = args_new + re.findall(r"[\w'\"]+|[,.!?]", a)
+
         argument_string = ""
         i = 0
 
-        for argument in args:
+
+        for argument in args_new:
             # final argument and punctuation arguments do not have to be separated with a space, other do
-            if i == len(args)-1 or args[i+1] in self.punctuation_symbols:
+            if i == len(args_new)-1 or args_new[i+1] in self.punctuation_symbols:
                 space = ''
             else:
                 space = " "
