@@ -13,7 +13,7 @@
     <input type="submit" id="share_program_button" class="green-btn cursor-pointer" value="{{_('share_code_button')}}" onclick="hedyApp.saveit({{ level }}, '{{ g.lang }}', $ ('#program_name').val (), hedyApp.get_trimmed_code(), true);">
     {% if not hide_cheatsheet and cheatsheet %}
       <div class="dropdown relative">
-            <button class="green-btn font-semibold rounded inline-flex items-center gap-2" onclick="$('#cheatsheet_dropdown').slideToggle('medium');">
+            <button class="green-btn font-semibold rounded inline-flex items-center gap-2" onclick="$('.dropdown-menu').hide();$('#cheatsheet_dropdown').slideToggle('medium');">
                 <span>{{ "🤔" }}</span>
                 <svg class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/> </svg>
             </button>
@@ -36,7 +36,7 @@
   {% endif %}
   {% if get_syntax_language(g.lang) != "en" %}
     <div class="dropdown relative">
-        <button class="green-btn font-semibold rounded inline-flex items-center gap-2" onclick="$('#commands_dropdown').slideToggle('medium');">
+        <button class="green-btn font-semibold rounded inline-flex items-center gap-2" onclick="$('.dropdown-menu').hide();$('#commands_dropdown').slideToggle('medium');">
                 <span class="fa-solid fa-language"></span>
                 <svg class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/> </svg>
         </button>

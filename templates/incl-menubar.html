@@ -14,7 +14,7 @@
             </a>
         </li>
         <li class="dropdown relative z-20">
-            <a class="menubar-btn {% if current_page == 'my-profile' %}active{% endif %} cursor-pointer" onclick="$('#profile-dropdown').slideToggle('medium');">
+            <a class="menubar-btn {% if current_page == 'my-profile' %}active{% endif %} cursor-pointer" onclick="$('.dropdown-menu').hide();$('#profile-dropdown').slideToggle('medium');">
                 <span class="fas fa-fw fa-user"></span>
                 <span class="hidden lg:inline-block">{{username}} {% if get_user_messages() %} ({{ get_user_messages() }}){% endif %}</span>
             </a>
@@ -35,7 +35,7 @@
     {% endif %}
     {% if not username %}
       <li class="dropdown relative z-20 ltr:ml-auto rtl:mr-auto">
-          <a class="menubar-btn border-transparent cursor-pointer" onclick="$('#language-dropdown').slideToggle('medium');">
+          <a class="menubar-btn border-transparent cursor-pointer" onclick="$('.dropdown-menu').hide();$('#language-dropdown').slideToggle('medium');">
             <div class="flex flex-row gap-2 items-center">
                 <i class="fas fa-fw fa-globe"></i>
                 <span class="hidden lg:flex">{{ current_language().sym }}</span>

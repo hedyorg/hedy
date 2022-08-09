@@ -734,10 +734,12 @@ def tutorial_index():
     if not current_user()['username']:
         return redirect('/login')
     level = 1
-    commands = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
+    cheatsheet = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
+    commands = hedy.commands_per_level.get(level)
     adventures = load_adventures_per_level(level)
 
-    return hedyweb.render_tutorial_mode(level=level, commands=commands, adventures=adventures)
+    return hedyweb.render_tutorial_mode(level=level, cheatsheet=cheatsheet,
+                                        commands=commands, adventures=adventures)
 
 
 @app.route('/teacher-tutorial', methods=['GET'])
