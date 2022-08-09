@@ -24,8 +24,7 @@ def keywords_to_dict(lang="nl"):
     for k, v in command_combinations.items():
         if type(v) == str and "|" in v:
             # when we have several options, pick the first one as default
-            command_combinations[k] = v.split('|')[0]
-
+            command_combinations[k] = v.split('|')
 
     return command_combinations
 
@@ -64,8 +63,9 @@ def translate_keywords(input_string_, from_lang="en", to_lang="nl", level=1):
             if rule.keyword in keyword_dict_from and rule.keyword in keyword_dict_to:
                 lines = result.splitlines()
                 line = lines[rule.line-1]
-                replaced_line = replace_token_in_line(
-                    line, rule, keyword_dict_from[rule.keyword], keyword_dict_to[rule.keyword])
+                original = get_original_keyword(keyword_dict_from, rule.keyword, line)
+                target = get_target_keyword(keyword_dict_to, rule.keyword)
+                replaced_line = replace_token_in_line(line, rule, original, target)
                 result = replace_line(lines, rule.line-1, replaced_line)
 
         # For now the needed post processing is only removing the 'end-block's added during pre-processing
@@ -113,7 +113,21 @@ def find_keyword_in_rules(rules, keyword, start_line, end_line, start_column, en
                 return rule.value
     return None
 
+def get_original_keyword(keyword_dict, keyword, line):
+    if isinstance(keyword_dict[keyword], str):
+        original = keyword_dict[keyword]
+    else:
+        for keyword in keyword_dict[keyword]:
+            if keyword in line:
+                original = keyword
+    return original
 
+def get_target_keyword(keyword_dict, keyword):
+    if isinstance(keyword_dict[keyword], str):
+        target = keyword_dict[keyword]
+    else:
+        target = keyword_dict[keyword][0]
+    return target
 class Translator(Visitor):
     """The visitor finds tokens that must be translated and stores information about their exact position
        in the user input string and original value. The information is later used to replace the token in
