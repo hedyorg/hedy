@@ -12,7 +12,8 @@ import hedy_translation
 import utils
 from collections import namedtuple
 import hashlib
-import re, regex
+import re
+import regex
 from dataclasses import dataclass, field
 import exceptions
 import program_repair
@@ -1315,7 +1316,6 @@ class ConvertToPython_2(ConvertToPython_1):
             if "random.choice" in a or "[" in a:
                 args_new.append(self.process_variable_for_fstring(a))
             else:
-                # TODO: Do we need to add this lib to the requirements file??
                 res = regex.findall(r"[\p{Script=Bengali}\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}\p{Mn}\p{Mc}\p{Nd}\p{Pc}]+|[^\p{Script=Bengali}\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}]+", a)
 
                 # if nog nodig??
