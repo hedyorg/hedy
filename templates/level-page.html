@@ -52,11 +52,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for keyword in keywords %}
+                    {% for command in commands %}
                         <tr>
-                            <td class="py-2 pr-8"><code>English one</code></td>
+                            <td class="py-2 pr-8"><code>{{ command }}</code></td>
                             <td class="pr-8">⟷</td>
-                            <td><code>Translated one</code></td>
+                            <td><code>{{  translate_command(command) }}</code></td>
                         </tr>
                     {% endfor %}
                 </tbody>

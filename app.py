@@ -854,8 +854,11 @@ def index(level, program_id):
     if 'other_settings' in customizations and 'hide_quiz' in customizations['other_settings']:
         quiz = False
 
+    commands = hedy.commands_per_level.get(level)
+
     return hedyweb.render_code_editor_with_tabs(
         cheatsheet=cheatsheet,
+        commands=commands,
         max_level=hedy.HEDY_MAX_LEVEL,
         level_number=level,
         version=version(),
@@ -1409,6 +1412,10 @@ def other_keyword_language():
     if session.get('keyword_lang') and session['keyword_lang'] != "en":
         return make_keyword_lang_obj("en")
     return None
+
+@app.template_global()
+def translate_command(command):
+    return hedy_content.KEYWORDS[g.lang].get(command)
 
 
 @app.template_filter()
