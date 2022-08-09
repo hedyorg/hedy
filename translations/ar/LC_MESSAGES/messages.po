@@ -3,17 +3,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-08 11:47+0200\n"
+"POT-Creation-Date: 2022-07-30 22:52+0300\n"
 "PO-Revision-Date: 2022-07-23 18:09+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language: ar\n"
 "Language-Team: ar <LL@li.org>\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : "
-"n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.10.1\n"
+"Generated-By: Babel 2.9.1\n"
 
 #: app.py:418
 msgid "program_contains_error"
@@ -459,8 +459,8 @@ msgstr ""
 #: content/error-messages.txt:13
 msgid "Cyclic Var Definition"
 msgstr ""
-"يجب أن تضبط قيمة المتغير {name} قبل أن تستعمله على الجانب الأيسر من من "
-"الأمر هو."
+"يجب أن تضبط قيمة المتغير {variable} قبل أن تستعمله على الجانب الأيسر من "
+"من الأمر هو."
 
 #: content/error-messages.txt:14
 msgid "Lonely Echo"
@@ -672,7 +672,7 @@ msgstr "Hedy logo"
 msgid "back_to_class"
 msgstr "الرجوع الى صف"
 
-#: templates/class-overview.html:14 templates/for-teachers.html:41
+#: templates/class-overview.html:14 templates/for-teachers.html:39
 msgid "class_name_prompt"
 msgstr "أدخل اسم الصف رجاء"
 
@@ -705,8 +705,8 @@ msgid "password"
 msgstr "كلمة المرور"
 
 #: templates/class-overview.html:26 templates/class-overview.html:73
-#: templates/customize-adventure.html:69 templates/for-teachers.html:25
-#: templates/for-teachers.html:54
+#: templates/customize-adventure.html:69 templates/for-teachers.html:24
+#: templates/for-teachers.html:52
 msgid "remove"
 msgstr "ازالة"
 
@@ -881,13 +881,13 @@ msgid "general_settings"
 msgstr "اعدادات عامة"
 
 #: templates/customize-adventure.html:12 templates/for-teachers.html:20
-#: templates/for-teachers.html:49
+#: templates/for-teachers.html:47
 msgid "name"
 msgstr "الاسم"
 
 #: templates/customize-adventure.html:16 templates/customize-adventure.html:18
 #: templates/explore.html:28 templates/explore.html:57
-#: templates/explore.html:85 templates/for-teachers.html:50
+#: templates/explore.html:85 templates/for-teachers.html:48
 #: templates/programs.html:12 templates/programs.html:37
 #: templates/programs.html:45
 msgid "level"
@@ -954,7 +954,7 @@ msgstr "معاينة"
 msgid "save"
 msgstr "حفظ"
 
-#: templates/customize-adventure.html:69 templates/for-teachers.html:65
+#: templates/customize-adventure.html:69 templates/for-teachers.html:63
 msgid "delete_adventure_prompt"
 msgstr "هل أنت متأكد أنك تريد حذف هذه المغامرة؟"
 
@@ -1133,49 +1133,41 @@ msgstr "صفوفي"
 msgid "students"
 msgstr "تلاميذ"
 
-#: templates/for-teachers.html:23 templates/for-teachers.html:33
-#: templates/for-teachers.html:52 templates/for-teachers.html:63
+#: templates/for-teachers.html:23 templates/for-teachers.html:32
+#: templates/for-teachers.html:50 templates/for-teachers.html:61
 msgid "view"
 msgstr "عرض"
 
-#: templates/for-teachers.html:24
-msgid "duplicate"
-msgstr ""
-
-#: templates/for-teachers.html:34
-msgid "duplicate_class_prompt"
-msgstr ""
-
-#: templates/for-teachers.html:35
+#: templates/for-teachers.html:33
 msgid "delete_class_prompt"
 msgstr "هل أنت متأكد أنك تريدحذف الصف؟"
 
-#: templates/for-teachers.html:41
+#: templates/for-teachers.html:39
 msgid "create_class"
 msgstr "انشاء صف جديد"
 
-#: templates/for-teachers.html:44
+#: templates/for-teachers.html:42
 msgid "my_adventures"
 msgstr "مغامراتي"
 
-#: templates/for-teachers.html:51
+#: templates/for-teachers.html:49
 msgid "last_update"
 msgstr "اخر تحديث"
 
-#: templates/for-teachers.html:53
+#: templates/for-teachers.html:51
 #, fuzzy
 msgid "edit"
 msgstr "Edit"
 
-#: templates/for-teachers.html:71
+#: templates/for-teachers.html:69
 msgid "adventure_prompt"
 msgstr "الرجاء إدخال اسم المغامرة"
 
-#: templates/for-teachers.html:71 website/teacher.py:552
+#: templates/for-teachers.html:69 website/teacher.py:552
 msgid "create_adventure"
 msgstr "انشاء مغامرة"
 
-#: templates/for-teachers.html:129
+#: templates/for-teachers.html:127
 msgid "teacher_welcome"
 msgstr ""
 "مرحباً في هيدي! بكل فخر أنت الآن تمتلك حساباً كمعلم وذا يسمح لك بانشاء "
@@ -1942,7 +1934,7 @@ msgstr ""
 #: website/auth.py:364 website/auth.py:366 website/auth.py:554
 #: website/auth.py:556
 msgid "year_invalid"
-msgstr "الرجاء ادخال سنة بين ١٩٩٠ و {year}."
+msgstr "الرجاء ادخال سنة بين ١٩٩٠ و {current_year}."
 
 #: website/auth.py:369 website/auth.py:559
 msgid "gender_invalid"
