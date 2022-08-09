@@ -1415,7 +1415,10 @@ def other_keyword_language():
 
 @app.template_global()
 def translate_command(command):
-    return hedy_content.KEYWORDS[g.lang].get(command)
+    try:
+        return hedy_content.KEYWORDS[g.lang].get(command)
+    except:
+        return command
 
 
 @app.template_filter()
