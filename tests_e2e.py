@@ -1169,13 +1169,23 @@ class TestClasses(AuthHelper):
         # THEN the name of the class should be updated
         self.assertEqual(Class['name'], 'class2')
 
+    def test_copy_class(self):
+        # GIVEN a user with teacher permissions and a class
+        self.given_teacher_is_logged_in()
+        self.post_data('class', {'name': 'class1'})
+        Class = self.get_data('classes')[0]
+
+        # WHEN attempting to duplicate a class
+        # THEN receive an OK status code from the server
+        self.post_data('/duplicate_class', {'id': Class['id'], 'name': 'class2'})
+
     def test_join_class(self):
         # GIVEN a teacher
         self.given_teacher_is_logged_in()
 
         # GIVEN a class
         self.post_data('class', {'name': 'class1'})
-        Class = self.get_data('classes') [0]
+        Class = self.get_data('classes')[0]
 
         # WHEN attempting to join a class without being logged in
         # THEN receive a forbidden status code from the server
