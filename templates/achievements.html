@@ -38,7 +38,7 @@
                                         <img src="{{static('/images/check.png')}}" class="absolute w-3/4 mt-2 block" alt="{{_('achievements_check_icon_alt')}}">
                                     </div>
                                 </div>
-                                <div class="w-40 h-full opacity-0 hover:opacity-75 bg-black rounded-lg inset-0 absolute z-10 text-center text-white px-4 pt-10">
+                                <div class="w-40 h-full opacity-0 hover:opacity-100 hover:bg-black/75 rounded-lg inset-0 absolute z-10 text-center text-white px-4 pt-10">
                                     <p class="font-semibold">{{ translations[achievement].text }}</p>
                                 </div>
                                 <div class="text-center flex items-center justify-center h-16">
@@ -50,7 +50,7 @@
                                 <div class="flex items-center justify-center h-40">
                                     <img src="{{static('/images/achievement.png')}}" class="px-2" alt="{{_('achievements_logo_alt')}}">
                                 </div>
-                                <div class="w-40 h-full opacity-0 hover:opacity-75 bg-black rounded-lg inset-0 absolute z-10 text-center text-white px-4 pt-10">
+                                <div class="w-40 h-full opacity-0 hover:opacity-100 hover:bg-black/75 rounded-lg inset-0 absolute z-10 text-center text-white px-4 pt-10">
                                     <p class="font-semibold">{% if title == _('hidden') %}???{% else %}{{ translations[achievement].text }}{% endif %}</p>
                                 </div>
                                 <div class="text-center flex items-center justify-center h-16">
