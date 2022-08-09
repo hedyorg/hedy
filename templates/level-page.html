@@ -54,8 +54,8 @@
                 <tbody>
                     {% for command in commands %}
                         <tr>
-                            <td class="py-2 pr-8"><code>{{ command }}</code></td>
-                            <td class="pr-8">⟷</td>
+                            <td class="py-2 ltr:pr-8 rtl:pl-8"><code>{{ command }}</code></td>
+                            <td class="ltr:pr-8 rtl:pl-8">⟷</td>
                             <td><code>{{  translate_command(command) }}</code></td>
                         </tr>
                     {% endfor %}
