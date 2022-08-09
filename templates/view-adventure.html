@@ -17,7 +17,7 @@
   <script>
     window.State = {};
     window.State.lang = "{{ g.lang }}";
-    window.State.keyword_language = "{{ g.keyword_lang }}";
+    window.State.keyword_language = "{{ get_syntax_language(g.lang) }}";
   </script>
   <script src="{{static('/js/appbundle.js')}}" type="text/javascript" crossorigin="anonymous"></script>
   <script src="{{static('/vendor/skulpt.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
