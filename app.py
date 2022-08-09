@@ -140,7 +140,10 @@ logging.basicConfig(
 
 @babel.localeselector
 def get_locale():
-    return session.get("lang", request.accept_languages.best_match(ALL_LANGUAGES.keys(), 'en'))
+    print(babel.list_translations()[0].g)
+    if session.get("lang", "en") in babel.list_translations():
+        return session.get("lang", "en")
+    return "en"
 
 
 cdn.Cdn(app, os.getenv('CDN_PREFIX'), os.getenv('HEROKU_SLUG_COMMIT', 'dev'))
