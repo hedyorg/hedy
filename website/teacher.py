@@ -201,7 +201,9 @@ def routes(app, database, achievements):
             customizations['id'] = class_id
             DATABASE.update_class_customizations(customizations)
 
-        return {}, 200
+        achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "one_for_money")
+        if achievement:
+            return {'achievement': achievement}, 200
 
 
     @app.route('/class/<class_id>/prejoin/<link>', methods=['GET'])
