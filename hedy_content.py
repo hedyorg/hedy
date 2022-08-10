@@ -95,6 +95,9 @@ for lang in ALL_KEYWORD_LANGUAGES.keys():
             KEYWORDS[lang][k] = v.split('|')[0]
 
 
+# It would be nice if we created this list manually but couldn't find a way to retrieve this from Babel
+NON_BABEL = ['tn']
+
 class Commands:
     # Want to parse the keywords only once, they can be cached -> perform this action on server start
     def __init__(self, language):

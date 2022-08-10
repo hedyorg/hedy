@@ -14,7 +14,7 @@ from website.auth import current_user, login_user_from_token_cookie, requires_lo
 from website.yaml_file import YamlFile
 from website import querylog, aws_helpers, jsonbin, translating, ab_proxying, cdn, database, achievements
 import hedy_translation
-from hedy_content import COUNTRIES, ALL_LANGUAGES, ALL_KEYWORD_LANGUAGES, NON_LATIN_LANGUAGES
+from hedy_content import COUNTRIES, ALL_LANGUAGES, ALL_KEYWORD_LANGUAGES, NON_LATIN_LANGUAGES, NON_BABEL
 import hedyweb
 import hedy_content
 from flask_babel import gettext
@@ -140,6 +140,8 @@ logging.basicConfig(
 
 @babel.localeselector
 def get_locale():
+    if session.get("lang", request.accept_languages.best_match(ALL_LANGUAGES.keys(), 'en')) in NON_BABEL:
+        return "en"
     return session.get("lang", request.accept_languages.best_match(ALL_LANGUAGES.keys(), 'en'))
 
 
@@ -734,10 +736,12 @@ def tutorial_index():
     if not current_user()['username']:
         return redirect('/login')
     level = 1
-    commands = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
+    cheatsheet = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
+    commands = hedy.commands_per_level.get(level)
     adventures = load_adventures_per_level(level)
 
-    return hedyweb.render_tutorial_mode(level=level, commands=commands, adventures=adventures)
+    return hedyweb.render_tutorial_mode(level=level, cheatsheet=cheatsheet,
+                                        commands=commands, adventures=adventures)
 
 
 @app.route('/teacher-tutorial', methods=['GET'])
@@ -817,7 +821,7 @@ def index(level, program_id):
     if 'levels' in customizations and level not in available_levels:
         return utils.error_page(error=403, ui_message=gettext('level_not_class'))
 
-    commands = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
+    cheatsheet = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
 
     teacher_adventures = []
     # Todo: TB It would be nice to improve this by using level as a sort key
@@ -854,7 +858,10 @@ def index(level, program_id):
     if 'other_settings' in customizations and 'hide_quiz' in customizations['other_settings']:
         quiz = False
 
+    commands = hedy.commands_per_level.get(level)
+
     return hedyweb.render_code_editor_with_tabs(
+        cheatsheet=cheatsheet,
         commands=commands,
         max_level=hedy.HEDY_MAX_LEVEL,
         level_number=level,
@@ -1409,6 +1416,11 @@ def other_keyword_language():
     if session.get('keyword_lang') and session['keyword_lang'] != "en":
         return make_keyword_lang_obj("en")
     return None
+
+@app.template_global()
+def translate_command(command):
+    # Return the translated command found in KEYWORDS, if not found return the command itself
+    return hedy_content.KEYWORDS[g.lang].get(command, command)
 
 
 @app.template_filter()
