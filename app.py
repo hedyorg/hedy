@@ -804,17 +804,8 @@ def index(level, program_id):
         if 'adventure_name' in result:
             adventure_name = result['adventure_name']
 
-    # In the case that the user has a keyword supported non-english language: get these adventures as well
-    keyword_adventures = load_adventures_per_level(level, g.keyword_lang)
-    other_keyword_adventures = None
-
-    if g.lang in ALL_KEYWORD_LANGUAGES.keys():
-        if g.keyword_lang != g.lang:
-            other_keyword_adventures = adventures = load_adventures_per_level(level, g.lang)
-        elif g.keyword_lang != "en":
-            other_keyword_adventures = adventures = load_adventures_per_level(level, "en")
-
-    print(other_keyword_adventures)
+    # In case of a "forced keyword language" -> load that one, otherwise: load the one stored in the g object
+    adventures = load_adventures_per_level(level, g.keyword_lang)
 
     customizations = {}
     if current_user()['username']:
@@ -880,8 +871,7 @@ def index(level, program_id):
         version=version(),
         quiz=quiz,
         quiz_questions=quiz_questions,
-        keyword_adventures=keyword_adventures,
-        other_keyword_adventures=other_keyword_adventures,
+        adventures=adventures,
         parsons=parsons,
         parsons_exercises=parson_exercises,
         customizations=customizations,

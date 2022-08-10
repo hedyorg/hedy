@@ -1,7 +1,7 @@
       {# TABS #}
       <div id="adventures">
         <div class="flex flex-row overflow-x-scroll overflow-y-hidden mb-2 px-2 pt-2" id="adventures-buttons">
-            {% for adventure in keyword_adventures %}
+            {% for adventure in adventures %}
               {% if 'adventures' not in customizations or (customizations['adventures'][adventure.short_name] and level|int in customizations['adventures'][adventure.short_name]) %}
                 <div class="tab {% if loop.index == 1 %}tab-selected{% endif %} z-10 whitespace-nowrap flex items-center justify-center" tabindex="0" data-tab="{{adventure.short_name}}">
                     {{ adventure.name }}
@@ -31,7 +31,7 @@
         </div>
       {# PANES #}
       <div id="adventures-tab" class="w-full overflow-auto bg-white p-4 mb-8 shadow-md turn-pre-into-ace" style="max-height: 20em;">
-        {% for adventure in keyword_adventures %}
+        {% for adventure in adventures %}
           {% if 'adventures' not in customizations or customizations['adventures'][adventure.short_name] and level|int in customizations['adventures'][adventure.short_name]  %}
             <div data-tabtarget="{{adventure.short_name}}" {% if loop.index != 1 %}class="hidden"{% endif %}>
               <div class="flex flex-row">
