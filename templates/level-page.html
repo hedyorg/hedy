@@ -41,7 +41,7 @@
                 <svg class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/> </svg>
         </button>
         <div class="dropdown-level-menu dropdown-menu z-20 mt-2" id="commands_dropdown">
-              <h2 class="px-4 text-center">{{_('commands')}}</h2>
+              <h2 class="px-4 pt-2 text-center">{{_('commands')}}</h2>
               <!-- If the current language is non-english and supports keywords: show a two column table -->
               <table class="mx-4 my-2">
                 <thead>
@@ -50,7 +50,7 @@
                         <td class="px-8" id="keyword_toggle_container">
                             <label for="keyword_toggle" class="flex flex-row items-center justify-center cursor-pointer">
                                 <div class="relative flex w-full">
-                                    <input id="keyword_toggle" type="checkbox" onclick="hedyApp.toggle_keyword_language(false)" class="sr-only" />
+                                    <input id="keyword_toggle" type="checkbox" {% if g.keyword_lang != "en" %}checked{% endif %} onclick="hedyApp.toggle_keyword_language('{% if g.keyword_lang != "en" %}en{% else %}{{g.keyword_lang}}{% endif %}')" class="sr-only" />
                                     <div class="w-12 h-4 bg-gray-400 rounded-full shadow-inner"></div>
                                     <div class="toggle-circle absolute w-4 h-4 bg-blue-500 rounded-full shadow transition"></div>
                                 </div>
