@@ -1,6 +1,7 @@
 from flask_babel import gettext
 import hedy
-from website.auth import requires_login, current_user, is_admin
+from config import config
+from website.auth import requires_login, current_user, is_admin, send_email
 import utils
 import uuid
 from flask import g, request, jsonify
@@ -225,10 +226,23 @@ def routes(app, database, achievements):
         DATABASE.set_program_as_hedy_choice(body['id'], favourite)
         if favourite:
             return jsonify({'message': 'Program successfully set as a "Hedy choice" program.'}), 200
-        return jsonify({'message': 'Program sucessfully removed as a "Hedy choice" program.'}), 200
+        return jsonify({'message': 'Program successfully removed as a "Hedy choice" program.'}), 200
 
     @app.route('/programs/report', methods=['POST'])
-    def report_program():
+    @requires_login
+    def report_program(user):
         body = request.json
-        print(body)
+
+        # Make sure the program actually exists and is public
+        program = DATABASE.program_by_id(body.get('id'))
+        if not program or program.get('public') != 1:
+            return gettext('report_failure'), 400
+
+        # Todo: Built a dynamic link for the admin to remove the program
+        link = "123"
+
+        send_email(config['email']['sender'], "The following program is reported by " + user['username'], link,
+                   '<a href="' + link + '">Program link</a>')
+
+        return {'message': gettext('report_success')}, 200
 
