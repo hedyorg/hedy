@@ -1,6 +1,7 @@
 import copy
 import os
 from babel import Locale, languages
+
 from website.yaml_file import YamlFile
 import iso3166
 
@@ -33,6 +34,9 @@ ALL_KEYWORD_LANGUAGES = {}
 
 # Todo TB -> We create this list manually, but it would be nice if we find a way to automate this as well
 NON_LATIN_LANGUAGES = ['ar', 'bg', 'bn', 'el', 'fa', 'hi', 'he', 'ru', 'zh_Hans']
+
+# It would be nice if we created this list manually but couldn't find a way to retrieve this from Babel
+NON_BABEL = ['tn']
 
 ADVENTURE_ORDER = [
     'default',
@@ -72,6 +76,10 @@ if not os.path.isdir('translations'):
     ALL_KEYWORD_LANGUAGES['en'] = 'EN'
 
 for folder in os.listdir('translations'):
+    # we cant properly open non-supported langs like Tswana (tn)
+    # so we have to load en for those until Babel adds support
+    if folder in NON_BABEL:
+        folder = 'en'
     locale_dir = os.path.join('translations', folder, 'LC_MESSAGES')
     if not os.path.isdir(locale_dir):
         continue
@@ -95,8 +103,7 @@ for lang in ALL_KEYWORD_LANGUAGES.keys():
             KEYWORDS[lang][k] = v.split('|')[0]
 
 
-# It would be nice if we created this list manually but couldn't find a way to retrieve this from Babel
-NON_BABEL = ['tn']
+
 
 class Commands:
     # Want to parse the keywords only once, they can be cached -> perform this action on server start
