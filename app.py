@@ -805,7 +805,11 @@ def index(level, program_id):
             adventure_name = result['adventure_name']
 
     # In case of a "forced keyword language" -> load that one, otherwise: load the one stored in the g object
-    adventures = load_adventures_per_level(level, g.keyword_lang)
+    keyword_language = request.args.get('keyword_language', default=None, type=str)
+    if keyword_language:
+        adventures = load_adventures_per_level(level, keyword_language)
+    else:
+        adventures = load_adventures_per_level(level, g.keyword_lang)
 
     customizations = {}
     if current_user()['username']:
