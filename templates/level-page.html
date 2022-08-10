@@ -50,7 +50,7 @@
                         <td class="px-8" id="keyword_toggle_container">
                             <label for="keyword_toggle" class="flex flex-row items-center justify-center cursor-pointer">
                                 <div class="relative flex w-full">
-                                    <input id="keyword_toggle" type="checkbox" {% if g.keyword_lang != "en" %}checked{% endif %} onclick="hedyApp.toggle_keyword_language('{% if g.keyword_lang != "en" %}en{% else %}{{g.keyword_lang}}{% endif %}')" class="sr-only" />
+                                    <input id="keyword_toggle" type="checkbox" {% if g.keyword_lang != "en" %}checked{% endif %} onclick="hedyApp.toggle_keyword_language('{% if g.keyword_lang != "en" %}en{% else %}{{g.lang}}{% endif %}')" class="sr-only" />
                                     <div class="w-12 h-4 bg-gray-400 rounded-full shadow-inner"></div>
                                     <div class="toggle-circle absolute w-4 h-4 bg-blue-500 rounded-full shadow transition"></div>
                                 </div>
