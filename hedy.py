@@ -680,7 +680,22 @@ class TypeValidator(Transformer):
             if in_lookup:
                 return type_in_lookup
             else:
-                raise hedy.exceptions.UndefinedVarException(name=var_name)
+                # is there a variable that is mildly similar?
+                # if so, we probably meant that one
+
+                # we first check if the list of vars is empty since that is cheaper than stringdistancing.
+                if len(self.lookup) == 0:
+                    raise hedy.exceptions.UnquotedTextException(level=self.level)
+                else:
+                    # distance small enough?
+                    minimum_distance_allowed = 4
+                    for var in self.lookup:
+                        if calculate_minimum_distance(var.name, var_name) <= minimum_distance_allowed:
+                            raise hedy.exceptions.UndefinedVarException(name=var_name)
+
+                    # nothing found? fall back to UnquotedTextException
+                    raise hedy.exceptions.UnquotedTextException(level=self.level)
+
 
         # TypedTree with type 'None' and 'string' could be in the lookup because of the grammar definitions
         # If the tree has more than 1 child, then it is not a leaf node, so do not search in the lookup

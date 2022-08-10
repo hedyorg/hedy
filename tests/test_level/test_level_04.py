@@ -129,12 +129,42 @@ class TestsLevel4(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
-    def test_print_without_quotes_gives_error(self):
-        code = "print hedy 123"
-        self.single_level_tester(code, exception=hedy.exceptions.UnquotedTextException)
+    def test_print_without_quotes_gives_error_from_grammar(self):
+        # in some cases, there is no variable confusion since 'hedy 123' can't be a variable
+        # then we can immediately raise the no quoted exception
 
-    def test_print_text_without_quotes_gives_error(self):
+        code = "print hedy 123"
+
+        self.multi_level_tester(
+            code=code,
+            max_level=5,
+            exception=hedy.exceptions.UnquotedTextException
+        )
+
+    def test_print_without_quotes_gives_error_from_transpiler(self):
+        # in other cases, there might be two different problems
+        # is this unquoted? or did we forget an initialization of a variable?
+
+        # a quick analysis of the logs shows that in most cases quotes are forgotten
+        # so we will only raise var if there is a variable that is a bit similar (see next test)
+
         code = "print hallo wereld"
+
+        self.multi_level_tester(
+            code=code,
+            max_level=17,
+            exception=hedy.exceptions.UnquotedTextException,
+        )
+
+    def test_print_similar_var_gives_error(self):
+        # continuing: is this unquoted? or did we forget an initialization of a variable?
+
+        # a quick analysis of the logs shows that in most cases quotes are forgotten
+        # so we will only raise var if there is a variable that is a bit similar (see next test)
+
+        code = textwrap.dedent("""\
+            werld is ask 'tegen wie zeggen we hallo?'
+            print hallo wereld""")
 
         self.multi_level_tester(
             code=code,
