@@ -237,9 +237,7 @@ def routes(app, database, achievements):
         if not program or program.get('public') != 1:
             return gettext('report_failure'), 400
 
-        # Todo: Built a dynamic link for the admin to remove the program
-        link = email_base_url() + '/admin/programs/' + body.get('id')
-
+        link = email_base_url() + '/hedy/' + body.get('id') + '/view'
         send_email(config['email']['sender'], "The following program is reported by " + user['username'], link,
                    '<a href="' + link + '">Program link</a>')
 
