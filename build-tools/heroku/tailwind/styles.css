@@ -436,18 +436,19 @@ p.close-dialog {
 
 /* Developers mode toggle */
 .toggle-circle {
-  @apply ltr:left-1 rtl:right-1;
-  top: 0.2rem;
+  @apply ltr:left-0 rtl:right-0;
   transition: all 0.5s ease-in-out;
 }
 
 body[dir='rtl'] input:checked ~ .toggle-circle {
   transform: translateX(-100%);
-  @apply bg-green-400;
 }
 
 body[dir='ltr'] input:checked ~ .toggle-circle {
   transform: translateX(100%);
+}
+
+body[dir='ltr'] #developers_toggle_container input:checked ~ .toggle-circle {
   @apply bg-green-400;
 }
 
