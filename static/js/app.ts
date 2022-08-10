@@ -1587,6 +1587,10 @@ export function toggle_developers_mode(enforced: boolean) {
   }
 }
 
+export function toggle_keyword_language(lang: string) {
+  window.open('?keyword_language=' + lang, "_self");
+}
+
 export function toggle_blur_code() {
   // Switch the both icons from hiding / showing
   $('.blur-toggle').toggle();
