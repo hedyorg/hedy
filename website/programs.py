@@ -1,7 +1,7 @@
 from flask_babel import gettext
 import hedy
 from config import config
-from website.auth import requires_login, current_user, is_admin, send_email
+from website.auth import requires_login, current_user, is_admin, send_email, email_base_url
 import utils
 import uuid
 from flask import g, request, jsonify
@@ -238,7 +238,7 @@ def routes(app, database, achievements):
             return gettext('report_failure'), 400
 
         # Todo: Built a dynamic link for the admin to remove the program
-        link = "123"
+        link = email_base_url() + '/admin/programs/' + body.get('id')
 
         send_email(config['email']['sender'], "The following program is reported by " + user['username'], link,
                    '<a href="' + link + '">Program link</a>')

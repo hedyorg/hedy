@@ -161,3 +161,9 @@ def routes(app, database):
         return render_template('admin/admin-achievements.html', stats=stats,
                                total=total, page_title=gettext('title_admin'))
 
+    @app.route('/admin/programs/<program_id>', methods=['DELETE'])
+    @requires_login
+    def delete_reported_program(user, program_id):
+        print(user)
+        print(program_id)
+
