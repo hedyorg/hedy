@@ -1313,7 +1313,9 @@ class ConvertToPython_2(ConvertToPython_1):
         args_new = []
         for a in args:
             # list access has been already rewritten since it occurs lower in the tree
-            # therefore we should not split it anymore and thread it as 1 variable:
+            # so when we encounter it as a child of print it will not be a subtree, but
+            # transpiled code (for example: random.choice(dieren))
+            # therefore we should not process it anymore and thread it as a variable:
             if "random.choice" in a or "[" in a:
                 args_new.append(self.process_variable_for_fstring(a))
             else:
