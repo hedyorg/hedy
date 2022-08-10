@@ -867,7 +867,7 @@ export function report_program(prompt: string, id: string) {
   modal.confirm (prompt, function () {
     $.ajax({
       type: 'POST',
-      url: '/programs/set_hedy_choice',
+      url: '/programs/report',
       data: JSON.stringify({
         id: id,
     }),

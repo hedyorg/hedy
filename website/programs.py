@@ -226,3 +226,9 @@ def routes(app, database, achievements):
         if favourite:
             return jsonify({'message': 'Program successfully set as a "Hedy choice" program.'}), 200
         return jsonify({'message': 'Program sucessfully removed as a "Hedy choice" program.'}), 200
+
+    @app.route('/programs/report', methods=['POST'])
+    def report_program():
+        body = request.json
+        print(body)
+
