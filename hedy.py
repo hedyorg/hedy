@@ -581,6 +581,9 @@ class TypeValidator(Transformer):
     def var_access(self, tree):
         return self.to_typed_tree(tree, HedyType.string)
 
+    def var_access_print(self, tree):
+        return self.var_access(tree)
+
     def var(self, tree):
         return self.to_typed_tree(tree, HedyType.none)
 
@@ -675,6 +678,14 @@ class TypeValidator(Transformer):
         # The rule var_access is used in the grammars definitions only in places where a variable needs to be accessed.
         # So, if it cannot be found in the lookup table, then it is an undefined variable for sure.
         if tree.data == 'var_access':
+            var_name = tree.children[0]
+            in_lookup, type_in_lookup = self.try_get_type_from_lookup(var_name)
+            if in_lookup:
+                return type_in_lookup
+            else:
+                raise hedy.exceptions.UndefinedVarException(name=var_name)
+
+        if tree.data == 'var_access_print':
             var_name = tree.children[0]
             in_lookup, type_in_lookup = self.try_get_type_from_lookup(var_name)
             if in_lookup:
@@ -1099,8 +1110,6 @@ class ConvertToPython(Transformer):
             return f"convert_numerals('{self.numerals_language}', {name}).zfill(100)"
         elif ConvertToPython.is_quoted(name):
             return f"{name}.zfill(100)"
-        else:
-            raise hedy.exceptions.UndefinedVarException(name)
 
     def make_f_string(self, args):
         argument_string = ''
@@ -1324,6 +1333,9 @@ class ConvertToPython_2(ConvertToPython_1):
         name = args[0]
         return escape_var(name)
 
+    def var_access_print(self, args):
+        return self.var_access(args)
+
     def print(self, args):
         args_new = []
         for a in args:
@@ -1435,6 +1447,10 @@ class ConvertToPython_4(ConvertToPython_3):
             return name.replace("'", "\\'")  # at level 4 backslashes are escaped in preprocessing, so we escape only '
 
     def var_access(self, args):
+        name = args[0]
+        return escape_var(name)
+
+    def var_access_print(self, args):
         name = args[0]
         return escape_var(name)
 
@@ -1629,6 +1645,9 @@ class ConvertToPython_8_9(ConvertToPython_7):
         else:
         # this is list_access
             return escape_var(args[0]) + "[" + str(escape_var(args[1])) + "]" if type(args[1]) is not Tree else "random.choice(" + str(escape_var(args[0])) + ")"
+
+    def var_access_print(self, args):
+        return self.var_access(args)
 
 @hedy_transpiler(level=10)
 class ConvertToPython_10(ConvertToPython_8_9):
@@ -2314,6 +2333,7 @@ def transpile_inner(input_string, level, lang="en"):
     input_string = process_input_string(input_string, level)
 
     program_root = parse_input(input_string, level, lang)
+    is_program_valid(program_root, input_string, level, lang)
     is_program_valid(program_root, input_string, level, lang)
 
     try:
