@@ -27,7 +27,7 @@ def routes(app, database, achievements):
 
         result = DATABASE.program_by_id(body['id'])
 
-        if not result or result['username'] != user['username']:
+        if not result or (result['username'] != user['username'] and not is_admin(user)):
             return "", 404
         DATABASE.delete_program_by_id(body['id'])
         DATABASE.increase_user_program_count(user['username'], -1)
