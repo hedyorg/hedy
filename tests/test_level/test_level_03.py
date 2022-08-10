@@ -539,7 +539,7 @@ class TestsLevel3(HedyTester):
         print colors at random""")
 
         expected = textwrap.dedent("""\
-        color = input('what is your favorite color'+'?')
+        color = input('what is your favorite color?')
         colors = ['green', 'red', 'blue']
         colors.append(color)
         print(f'{random.choice(colors)}')""")
@@ -555,7 +555,7 @@ class TestsLevel3(HedyTester):
 
         expected = textwrap.dedent("""\
         colors = ['green', 'red', 'blue']
-        color = input('what color to remove'+'?')
+        color = input('what color to remove?')
         try:
           colors.remove(color)
         except:
