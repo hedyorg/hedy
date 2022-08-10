@@ -161,9 +161,25 @@ def routes(app, database):
         return render_template('admin/admin-achievements.html', stats=stats,
                                total=total, page_title=gettext('title_admin'))
 
+    @app.route('/admin/programs/<program_id>', methods=['GET'])
+    @requires_login
+    def view_reported_program(user, program_id):
+        print(user)
+        print(program_id)
+
+        #Also add a view to enable the admin to view the program before deleting
+
     @app.route('/admin/programs/<program_id>', methods=['DELETE'])
     @requires_login
     def delete_reported_program(user, program_id):
-        print(user)
-        print(program_id)
+        if not is_admin(user):
+            return utils.error_page(error=403, ui_message=gettext('unauthorized'))
+
+        program = DATABASE.program_by_id(program_id)
+        if program:
+            DATABASE.delete_program_by_id(program_id)
+            DATABASE.increase_user_program_count(program.get('username'), -1)
+            return {}, 200
+
+        return "", 400
 
