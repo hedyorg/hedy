@@ -58,9 +58,10 @@ textwithoutspaces: /([^\n #]+)/ -> text //anything can be parsed except for a ne
 // FH Sept 2021: More info on this variable format: https://www.unicode.org/reports/tr31/tr31-1.html
 // Exact grammar stolen from: https://lark-parser.readthedocs.io/en/latest/classes.html
 
-NAME: ID_START ID_CONTINUE*
-ID_START: /[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_]+/
-ID_CONTINUE: ID_START | /[\p{Mn}\p{Mc}\p{Nd}\p{Pc}·]+/
+NAME: LETTER_OR_UNDERSCORE LETTER_OR_NUMERAL*
+
+LETTER_OR_UNDERSCORE: /[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_]+/
+LETTER_OR_NUMERAL: LETTER_OR_UNDERSCORE | /[\p{Mn}\p{Mc}\p{Nd}\p{Pc}·]+/
 
 // Internal symbol added by the preprocess_blocks function to indicate the end of blocks
 _END_BLOCK: "end-block"
