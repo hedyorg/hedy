@@ -11,28 +11,58 @@
     <input id="program_name" type="text" class="border border-green-400 rounded p-2 px-3 w-1/2 h-4/5" value="{{ (loaded_program or {}).name or (_('level_title') + ' ' + level_nr)}}">
     <input type="submit" id="save_program_button" class="green-btn cursor-pointer" value="{{_('save_code_button')}}" onclick="hedyApp.saveit({{ level }}, '{{ g.lang }}', $ ('#program_name').val (), hedyApp.get_trimmed_code(), false);">
     <input type="submit" id="share_program_button" class="green-btn cursor-pointer" value="{{_('share_code_button')}}" onclick="hedyApp.saveit({{ level }}, '{{ g.lang }}', $ ('#program_name').val (), hedyApp.get_trimmed_code(), true);">
-    {% if not hide_cheatsheet and commands %}
+    {% if not hide_cheatsheet and cheatsheet %}
       <div class="dropdown relative">
-            <button class="green-btn font-semibold rounded inline-flex items-center" onclick="$('.cheatsheet-menu').slideToggle('medium');">
-                <span class="ltr:mr-1 rtl:ml-1">{{ "🤔" }}</span>
-                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/> </svg>
+            <button class="green-btn font-semibold rounded inline-flex items-center gap-2" onclick="$('.dropdown-menu').hide();$('#cheatsheet_dropdown').slideToggle('medium');">
+                <span>{{ "🤔" }}</span>
+                <svg class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/> </svg>
             </button>
-          <ul class="cheatsheet-menu z-20" id="cheatsheet_dropdown" style="display: none;">
-              {% for command in commands %}
-                <div class="justify-between my-2 {% if loop.index != commands|length %}shadow-md{% endif %} p-3 pl-4">
+          <div class="dropdown-level-menu dropdown-menu z-20 mt-2" id="cheatsheet_dropdown" style="display: none;">
+              {% for example in cheatsheet %}
+                <div class="justify-between my-2 {% if loop.index != cheatsheet|length %}shadow-md{% endif %} p-3 pl-4">
                   <div class="font-thin text-base flex-grow mb-1" tabindex=0>
-                    {{ command.explanation|commonmark }}
+                    {{ example.explanation|commonmark }}
                   </div>
                   <div class="flex">
                     <div class="font-thin text-sm flex-grow" tabindex=0>
                     </div>
                     <button class="btn block flex-none self-end ml-1" style="min-width:6em"
-                      onclick='hedyApp.tryPaletteCode({{command.demo_code|tojson}});'>{{_('try_button')}}</button>
+                      onclick='hedyApp.tryPaletteCode({{example.demo_code|tojson}});'>{{_('try_button')}}</button>
                   </div>
                 </div>
               {% endfor %}
-          </ul>
+          </div>
       </div>
+  {% endif %}
+  {% if get_syntax_language(g.lang) != "en" %}
+    <div class="dropdown relative">
+        <button class="green-btn font-semibold rounded inline-flex items-center gap-2" onclick="$('.dropdown-menu').hide();$('#commands_dropdown').slideToggle('medium');">
+                <span class="fa-solid fa-language"></span>
+                <svg class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/> </svg>
+        </button>
+        <div class="dropdown-level-menu dropdown-menu z-20 mt-2" id="commands_dropdown" style="display: none;">
+              <h2 class="px-4 text-center">{{_('commands')}}</h2>
+              <!-- If the current language is non-english and supports keywords: show a two column table -->
+              <table class="mx-4 my-2">
+                <thead>
+                    <tr class="border-b border-gray-700">
+                        <td>{{_('english')}}</td>
+                        <td></td>
+                        <td>{{ current_language().sym }}</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for command in commands %}
+                        <tr>
+                            <td class="py-2 ltr:pr-8 rtl:pl-8"><code>{{ command }}</code></td>
+                            <td class="ltr:pr-8 rtl:pl-8">⟷</td>
+                            <td><code>{{  translate_command(command) }}</code></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+              </table>
+        </div>
+    </div>
   {% endif %}
   </div>
 </div>
