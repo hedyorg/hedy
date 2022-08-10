@@ -47,11 +47,11 @@
                 <thead>
                     <tr class="border-b border-gray-700 text-center">
                         <td>{{_('english')}}</td>
-                        <td class="px-8">
+                        <td class="px-8" id="keyword_toggle_container">
                             <label for="keyword_toggle" class="flex flex-row items-center justify-center cursor-pointer">
                                 <div class="relative flex w-full">
                                     <input id="keyword_toggle" type="checkbox" onclick="hedyApp.toggle_keyword_language(false)" class="sr-only" />
-                                    <div class="w-8 h-4 bg-gray-400 rounded-full shadow-inner"></div>
+                                    <div class="w-12 h-4 bg-gray-400 rounded-full shadow-inner"></div>
                                     <div class="toggle-circle absolute w-4 h-4 bg-blue-500 rounded-full shadow transition"></div>
                                 </div>
                             </label>
