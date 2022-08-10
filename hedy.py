@@ -13,6 +13,7 @@ import utils
 from collections import namedtuple
 import hashlib
 import re
+import regex
 from dataclasses import dataclass, field
 import exceptions
 import program_repair
@@ -349,9 +350,6 @@ class ExtractAST(Transformer):
     def var(self, meta, args):
         return Tree('var', [''.join([str(c) for c in args])], meta)
 
-    def punctuation(self, meta, args):
-        return Tree('punctuation', [''.join([str(c) for c in args])], meta)
-
     def list_access(self, meta, args):
         # FH, may 2022 I don't fully understand why we remove INT here and just plemp
         # the number in the tree. should be improved but that requires rewriting the further processing code too (TODO)
@@ -577,9 +575,6 @@ class TypeValidator(Transformer):
             type_ = HedyType.string
         return self.to_typed_tree(tree, type_)
 
-    def punctuation(self, tree):
-        return self.to_typed_tree(tree, HedyType.string)
-
     def text_in_quotes(self, tree):
         return self.to_typed_tree(tree.children[0], HedyType.string)
 
@@ -782,9 +777,6 @@ class Filter(Transformer):
 
     def random(self, meta, args):
         return True, 'random', meta
-
-    def punctuation(self, meta, args):
-        return True, ''.join([c for c in args]), meta
 
     def number(self, meta, args):
         return True, ''.join([c for c in args]), meta
@@ -1173,8 +1165,7 @@ class ConvertToPython(Transformer):
 @hedy_transpiler(level=1)
 class ConvertToPython_1(ConvertToPython):
 
-    def __init__(self, punctuation_symbols, lookup, numerals_language):
-        self.punctuation_symbols = punctuation_symbols
+    def __init__(self, lookup, numerals_language):
         self.numerals_language = numerals_language
         self.lookup = lookup
         __class__.level = 1
@@ -1310,8 +1301,6 @@ class ConvertToPython_2(ConvertToPython_1):
         if arg.lstrip("-").isnumeric():
             return self.make_turn(arg)
 
-    def punctuation(self, args):
-        return ''.join([str(c) for c in args])
     def var(self, args):
         name = args[0]
         self.check_var_usage(args)
@@ -1319,20 +1308,21 @@ class ConvertToPython_2(ConvertToPython_1):
     def var_access(self, args):
         name = args[0]
         return escape_var(name)
+
     def print(self, args):
-        argument_string = ""
-        i = 0
-
-        for argument in args:
-            # final argument and punctuation arguments do not have to be separated with a space, other do
-            if i == len(args)-1 or args[i+1] in self.punctuation_symbols:
-                space = ''
+        args_new = []
+        for a in args:
+            # list access has been already rewritten since it occurs lower in the tree
+            # so when we encounter it as a child of print it will not be a subtree, but
+            # transpiled code (for example: random.choice(dieren))
+            # therefore we should not process it anymore and thread it as a variable:
+            if "random.choice" in a or "[" in a:
+                args_new.append(self.process_variable_for_fstring(a))
             else:
-                space = " "
+                res = regex.findall(r"[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}\p{Mn}\p{Mc}\p{Nd}\p{Pc}]+|[^\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}]+", a)
+                args_new.append(''.join([self.process_variable_for_fstring(x) for x in res]))
 
-            argument_string += self.process_variable_for_fstring(argument) + space
-
-            i = i + 1
+        argument_string = ' '.join(args_new)
 
         return f"print(f'{argument_string}')"
 
@@ -2302,8 +2292,6 @@ def create_lookup_table(abstract_syntax_tree, level, lang, input_string):
 def transpile_inner(input_string, level, lang="en"):
     check_program_size_is_valid(input_string)
 
-    punctuation_symbols = ['!', '?', '.']
-
     level = int(level)
     if level > HEDY_MAX_LEVEL:
         raise Exception(f'Levels over {HEDY_MAX_LEVEL} not implemented yet')
@@ -2333,7 +2321,7 @@ def transpile_inner(input_string, level, lang="en"):
             numerals_language = "Latin"
         # grab the right transpiler from the lookup
         convertToPython = TRANSPILER_LOOKUP[level]
-        python = convertToPython(punctuation_symbols, lookup_table, numerals_language).transform(abstract_syntax_tree)
+        python = convertToPython(lookup_table, numerals_language).transform(abstract_syntax_tree)
 
 
         has_turtle = UsesTurtle().transform(abstract_syntax_tree)
