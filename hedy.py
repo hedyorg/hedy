@@ -307,7 +307,6 @@ def calculate_minimum_distance(s1, s2):
 class InvalidInfo:
     error_type: str
     command: str = ''
-    unquotedtext: str = ''
     arguments: list = field(default_factory=list)
     line: int = 0
     column: int = 0
@@ -991,12 +990,12 @@ class IsValid(Filter):
             text = args[1][1]
         else:
             text = args[0][1]
-        return False, InvalidInfo("print without quotes", unquotedtext=text, line=args[0][2].line, column=args[0][2].column), meta
+        return False, InvalidInfo("print without quotes", arguments=[text], line=args[0][2].line, column=args[0][2].column), meta
 
     def error_invalid(self, meta, args):
         # TODO: this will not work for misspelling 'at', needs to be improved!
 
-        error = InvalidInfo('invalid command', args[0][1], [a[1] for a in args[1:]], meta.line, meta.column)
+        error = InvalidInfo('invalid command', command=args[0][1], arguments=[[a[1] for a in args[1:]]], line=meta.line, column=meta.column)
         return False, error, meta
 
     def error_unsupported_number(self, meta, args):
@@ -2272,8 +2271,9 @@ def is_program_valid(program_root, input_string, level, lang):
         elif invalid_info.error_type == 'repeat missing times':
             raise exceptions.IncompleteRepeatException(command='times', level=level, line_number=line)    
         elif invalid_info.error_type == 'print without quotes':
+            unquotedtext = invalid_info.arguments[0]
             # grammar rule is agnostic of line number so we can't easily return that here
-            raise exceptions.UnquotedTextException(level=level, unquotedtext=invalid_info.unquotedtext)
+            raise exceptions.UnquotedTextException(level=level, unquotedtext=unquotedtext)
         elif invalid_info.error_type == 'unsupported number':
             raise exceptions.UnsupportedFloatException(value=''.join(invalid_info.arguments))
         else:
@@ -2282,7 +2282,7 @@ def is_program_valid(program_root, input_string, level, lang):
 
             if closest == 'keyword':  # we couldn't find a suggestion
                 if invalid_command == Command.turn:
-                    arg = ''.join(invalid_info.arguments).strip()
+                    arg = invalid_info.arguments[0][0]
                     raise hedy.exceptions.InvalidArgumentException(command=invalid_info.command,
                                                                    allowed_types=get_allowed_types(Command.turn, level),
                                                                    invalid_argument=arg)
