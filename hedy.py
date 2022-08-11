@@ -586,6 +586,9 @@ class TypeValidator(Transformer):
     def var_access(self, tree):
         return self.to_typed_tree(tree, HedyType.string)
 
+    def var_access_print(self, tree):
+        return self.var_access(tree)
+
     def var(self, tree):
         return self.to_typed_tree(tree, HedyType.none)
 
@@ -686,6 +689,30 @@ class TypeValidator(Transformer):
                 return type_in_lookup
             else:
                 raise hedy.exceptions.UndefinedVarException(name=var_name)
+
+        if tree.data == 'var_access_print':
+            var_name = tree.children[0]
+            in_lookup, type_in_lookup = self.try_get_type_from_lookup(var_name)
+            if in_lookup:
+                return type_in_lookup
+            else:
+                # is there a variable that is mildly similar?
+                # if so, we probably meant that one
+
+                # we first check if the list of vars is empty since that is cheaper than stringdistancing.
+                # TODO: Can be removed since fall back handles that now
+                if len(self.lookup) == 0:
+                    raise hedy.exceptions.UnquotedTextException(level=self.level, unquotedtext=var_name)
+                else:
+                    # distance small enough?
+                    minimum_distance_allowed = 4
+                    for var_in_lookup in self.lookup:
+                        if calculate_minimum_distance(var_in_lookup.name, var_name) <= minimum_distance_allowed:
+                            raise hedy.exceptions.UndefinedVarException(name=var_name)
+
+                    # nothing found? fall back to UnquotedTextException
+                    raise hedy.exceptions.UnquotedTextException(level=self.level, unquotedtext=var_name)
+
 
         # TypedTree with type 'None' and 'string' could be in the lookup because of the grammar definitions
         # If the tree has more than 1 child, then it is not a leaf node, so do not search in the lookup
@@ -964,12 +991,16 @@ class IsValid(Filter):
 
     def error_print_nq(self, meta, args):
         # return error source to indicate what went wrong
-        return False, InvalidInfo("print without quotes", line=args[0][2].line, column=args[0][2].column), meta
+        if len(args) > 1:
+            text = args[1][1]
+        else:
+            text = args[0][1]
+        return False, InvalidInfo("print without quotes", arguments=[text], line=args[0][2].line, column=args[0][2].column), meta
 
     def error_invalid(self, meta, args):
         # TODO: this will not work for misspelling 'at', needs to be improved!
 
-        error = InvalidInfo('invalid command', args[0][1], [a[1] for a in args[1:]], meta.line, meta.column)
+        error = InvalidInfo('invalid command', command=args[0][1], arguments=[[a[1] for a in args[1:]]], line=meta.line, column=meta.column)
         return False, error, meta
 
     def error_unsupported_number(self, meta, args):
@@ -1100,8 +1131,6 @@ class ConvertToPython(Transformer):
             return f"convert_numerals('{self.numerals_language}', {name}).zfill(100)"
         elif ConvertToPython.is_quoted(name):
             return f"{name}.zfill(100)"
-        else:
-            raise hedy.exceptions.UndefinedVarException(name)
 
     def make_f_string(self, args):
         argument_string = ''
@@ -1326,6 +1355,10 @@ class ConvertToPython_2(ConvertToPython_1):
         name = args[0]
         return escape_var(name)
 
+
+    def var_access_print(self, args):
+        return self.var_access(args)
+
     def print(self, meta, args):
         args_new = []
         for a in args:
@@ -1438,6 +1471,10 @@ class ConvertToPython_4(ConvertToPython_3):
             return name.replace("'", "\\'")  # at level 4 backslashes are escaped in preprocessing, so we escape only '
 
     def var_access(self, meta, args):
+        name = args[0]
+        return escape_var(name)
+
+    def var_access_print(self, args):
         name = args[0]
         return escape_var(name)
 
@@ -1638,7 +1675,9 @@ class ConvertToPython_8_9(ConvertToPython_7):
         # this is list_access
             return escape_var(args[0]) + "[" + str(escape_var(args[1])) + "]" if type(args[1]) is not Tree else "random.choice(" + str(escape_var(args[0])) + ")"
 
-@v_args(meta=True)
+    def var_access_print(self, args):
+        return self.var_access(args)
+
 @hedy_transpiler(level=10)
 class ConvertToPython_10(ConvertToPython_8_9):
     def for_list(self, meta, args):
@@ -2264,8 +2303,9 @@ def is_program_valid(program_root, input_string, level, lang):
         elif invalid_info.error_type == 'repeat missing times':
             raise exceptions.IncompleteRepeatException(command='times', level=level, line_number=line)    
         elif invalid_info.error_type == 'print without quotes':
+            unquotedtext = invalid_info.arguments[0]
             # grammar rule is agnostic of line number so we can't easily return that here
-            raise exceptions.UnquotedTextException(level=level)
+            raise exceptions.UnquotedTextException(level=level, unquotedtext=unquotedtext)
         elif invalid_info.error_type == 'unsupported number':
             raise exceptions.UnsupportedFloatException(value=''.join(invalid_info.arguments))
         else:
@@ -2274,7 +2314,7 @@ def is_program_valid(program_root, input_string, level, lang):
 
             if closest == 'keyword':  # we couldn't find a suggestion
                 if invalid_command == Command.turn:
-                    arg = ''.join(invalid_info.arguments).strip()
+                    arg = invalid_info.arguments[0][0]
                     raise hedy.exceptions.InvalidArgumentException(command=invalid_info.command,
                                                                    allowed_types=get_allowed_types(Command.turn, level),
                                                                    invalid_argument=arg)
@@ -2331,7 +2371,10 @@ def transpile_inner(input_string, level, lang="en"):
     input_string = process_input_string(input_string, level)
 
     program_root = parse_input(input_string, level, lang)
+
+    # checks whether any error production nodes are present in the parse tree
     is_program_valid(program_root, input_string, level, lang)
+
 
     try:
         abstract_syntax_tree = ExtractAST().transform(program_root)
