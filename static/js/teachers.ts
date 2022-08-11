@@ -65,8 +65,12 @@ export function duplicate_class(id: string, prompt: string) {
       }),
       contentType: 'application/json',
       dataType: 'json'
-    }).done(function() {
-      location.reload();
+    }).done(function(response) {
+      if (response.achievement) {
+            showAchievements(response.achievement, true, "");
+          } else {
+            location.reload();
+          }
     }).fail(function(err) {
       return modal.alert(err.responseText, 3000, true);
     });
