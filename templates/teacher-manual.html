@@ -1,5 +1,55 @@
 {% extends "auth.html" %}
 
 {% block main %}
-
+<div class="" id="teacher_documentation">
+        <h2 class="text-center">{{ content['title'] }}</h2>
+        <div class="flex flex-wrap gap-2 justify-center pb-4 border-b">
+        {% for section in content['sections'] %}
+            <button class="green-btn p-4 section-button" id="button-{{loop.index}}" onclick="hedyApp.show_doc_section('{{loop.index}}')">{{section.title}}</button>
+        {% endfor %}
+        </div>
+        {% for section in content['sections'] %}
+            <div class="section hidden" id="section-{{loop.index}}">
+            {% if section.key != "common_mistakes" %}
+                {% for subsection in section['subsections'] %}
+                    <h4>{{ subsection.title }}</h4>
+                    <p>{{ subsection.text|commonmark }}</p>
+                {% endfor %}
+            {% else %}
+                <p>{{ section.intro|commonmark }}</p>
+                <div class="flex flex-wrap gap-2 justify-center">
+                    {% for level in section['levels'] %}
+                        <button class="green-btn p-4 common-mistakes-button" id="cm-button-{{loop.index}}" onclick="hedyApp.show_common_mistakes('{{loop.index}}')">Level {{ level.level }}</button>
+                    {% endfor %}
+                </div>
+                {% for level in section['levels'] %}
+                    <div class="common-mistakes-section hidden flex flex-col gap-4 mt-4" id="common_mistakes-{{loop.index}}">
+                        {% for mistake_section in level.sections %}
+                            <div>
+                                <h2>{{ mistake_section.title }}</h2>
+                                {% if mistake_section.example %} <!-- In this case we expect an error/solution combination -->
+                                    <p>{{ mistake_section.example.error_text|commonmark }}</p>
+                                    <div class="w-full lg:w-1/2 turn-pre-into-ace my-5">
+                                        <pre class="common-mistakes no-copy-button" level="{{ level.level }}" style="font-size: 0.95em;">{{ mistake_section.example.error_code }}</pre>
+                                    </div>
+                                    <p>{{ mistake_section.example.solution_text|commonmark }}</p>
+                                    <div class="w-full lg:w-1/2 turn-pre-into-ace my-5">
+                                        <pre class="common-mistakes no-copy-button" level="{{ level.level }}" style="font-size: 0.95em;">{{ mistake_section.example.solution_code }}</pre>
+                                    </div>
+                                {% else %}
+                                    <p>{{ mistake_section.text|commonmark }}</p>
+                                    {% if mistake_section.code %}
+                                         <div class="w-full lg:w-1/2 turn-pre-into-ace my-5">
+                                             <pre class="common-mistakes no-copy-button" level="{{ level.level }}" style="font-size: 0.95em;">{{ mistake_section.code }}</pre>
+                                         </div>
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}

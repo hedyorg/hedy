@@ -27,7 +27,6 @@ def routes(app, database, achievements):
         if not is_teacher(user):
             return utils.error_page(error=403, ui_message=gettext('not_teacher'))
 
-        page_translations = hedyweb.PageTranslations('for-teachers').get_page_translations(g.lang)
         welcome_teacher = session.get('welcome-teacher') or False
         session.pop('welcome-teacher', None)
 
@@ -43,14 +42,15 @@ def routes(app, database, achievements):
             )
 
         return render_template('for-teachers.html', current_page='my-profile', page_title=gettext('title_for-teacher'),
-                               content=page_translations, teacher_classes=teacher_classes,
+                               teacher_classes=teacher_classes,
                                teacher_adventures=adventures, welcome_teacher=welcome_teacher)
 
 
     @app.route('/for-teachers/manual', methods=['GET'])
     @requires_login
     def get_teacher_manual(user):
-        return render_template('teacher-manual.html')
+        page_translations = hedyweb.PageTranslations('for-teachers').get_page_translations(g.lang)
+        return render_template('teacher-manual.html', current_page='my-profile', content=page_translations)
 
 
     @app.route('/classes', methods=['GET'])
