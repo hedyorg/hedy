@@ -25,7 +25,8 @@
                     <li><a class="dropdown-item" href="/my-profile"><span class="fas fa-user-cog ltr:mr-4 rtl:ml-4"></span>{{_('my_account')}} {% if get_user_messages() %} ({{ get_user_messages() }}){% endif %}</a></li>
                   {% if is_teacher %}
                       <li><a class="dropdown-item" href="/for-teachers"><span class="fas fa-chalkboard-teacher ltr:mr-4 rtl:ml-4"></span>{{_('for_teachers')}}</a></li>
-                      <li><a class="dropdown-item text-sm" href="/for-teachers/manual"><span class="ltr:mr-4">-</span>{{_('teacher_manual')}}</a></li>
+                      <!-- Todo: Find a nice way to align the items without an icon with the text of the other menu items -->
+                      <li><a class="dropdown-item text-sm" href="/for-teachers/manual">{{_('teacher_manual')}}</a></li>
                   {% endif %}
                     <li><a class="dropdown-item" href="#" onclick="hedyApp.logout();"><span class="fas fa-fw fa-sign-out-alt ltr:mr-4 rtl:ml-4"></span>{{_('logout')}}</a></li>
                 </ul>
