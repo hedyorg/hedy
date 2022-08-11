@@ -2268,7 +2268,7 @@ def is_program_valid(program_root, input_string, level, lang):
             raise exceptions.IncompleteRepeatException(command='times', level=level, line_number=line)    
         elif invalid_info.error_type == 'print without quotes':
             # grammar rule is agnostic of line number so we can't easily return that here
-            raise exceptions.UnquotedTextException(level=level)
+            raise exceptions.UnquotedTextException(level=level, unquotedtext=unquotedtext)
         elif invalid_info.error_type == 'unsupported number':
             raise exceptions.UnsupportedFloatException(value=''.join(invalid_info.arguments))
         else:
@@ -2335,7 +2335,7 @@ def transpile_inner(input_string, level, lang="en"):
 
     program_root = parse_input(input_string, level, lang)
     is_program_valid(program_root, input_string, level, lang)
-    is_program_valid(program_root, input_string, level, lang)
+
 
     try:
         abstract_syntax_tree = ExtractAST().transform(program_root)
