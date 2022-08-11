@@ -307,6 +307,7 @@ def calculate_minimum_distance(s1, s2):
 class InvalidInfo:
     error_type: str
     command: str = ''
+    unquotedtext: str = ''
     arguments: list = field(default_factory=list)
     line: int = 0
     column: int = 0
@@ -986,7 +987,11 @@ class IsValid(Filter):
 
     def error_print_nq(self, meta, args):
         # return error source to indicate what went wrong
-        return False, InvalidInfo("print without quotes", line=args[0][2].line, column=args[0][2].column), meta
+        if len(args) > 1:
+            text = args[1][1]
+        else:
+            text = args[0][1]
+        return False, InvalidInfo("print without quotes", unquotedtext=text, line=args[0][2].line, column=args[0][2].column), meta
 
     def error_invalid(self, meta, args):
         # TODO: this will not work for misspelling 'at', needs to be improved!
@@ -2268,7 +2273,7 @@ def is_program_valid(program_root, input_string, level, lang):
             raise exceptions.IncompleteRepeatException(command='times', level=level, line_number=line)    
         elif invalid_info.error_type == 'print without quotes':
             # grammar rule is agnostic of line number so we can't easily return that here
-            raise exceptions.UnquotedTextException(level=level)
+            raise exceptions.UnquotedTextException(level=level, unquotedtext=invalid_info.unquotedtext)
         elif invalid_info.error_type == 'unsupported number':
             raise exceptions.UnsupportedFloatException(value=''.join(invalid_info.arguments))
         else:
