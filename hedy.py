@@ -703,7 +703,7 @@ class TypeValidator(Transformer):
                     minimum_distance_allowed = 4
                     for var_in_lookup in self.lookup:
                         if calculate_minimum_distance(var_in_lookup.name, var_name) <= minimum_distance_allowed:
-                            raise hedy.exceptions.UndefinedVarException(name=var_name, unquotedtext=var_name)
+                            raise hedy.exceptions.UndefinedVarException(name=var_name)
 
                     # nothing found? fall back to UnquotedTextException
                     raise hedy.exceptions.UnquotedTextException(level=self.level, unquotedtext=var_name)
@@ -2268,7 +2268,7 @@ def is_program_valid(program_root, input_string, level, lang):
             raise exceptions.IncompleteRepeatException(command='times', level=level, line_number=line)    
         elif invalid_info.error_type == 'print without quotes':
             # grammar rule is agnostic of line number so we can't easily return that here
-            raise exceptions.UnquotedTextException(level=level, unquotedtext=unquotedtext)
+            raise exceptions.UnquotedTextException(level=level)
         elif invalid_info.error_type == 'unsupported number':
             raise exceptions.UnsupportedFloatException(value=''.join(invalid_info.arguments))
         else:
