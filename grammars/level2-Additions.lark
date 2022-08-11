@@ -21,4 +21,5 @@ textwithoutspaces: /([^\n ]+)/ -> text
 text: /([^\n]+)/ -> text
 
 var: NAME // used for variable definitions, e.g. a = 1
-var_access: NAME // used for variable references, e.g. print a. It parses the same as var, but does not result in a lookup table entry
+var_access: NAME // used for variable references, e.g. for i in range. It parses the same as var, but does not result in a lookup table entry
+var_access_print: NAME // used for variable references in print statements, e.g. print a.  Parses the same as var_access but need to be processed differently in the tree for handling the varunquotedexception
