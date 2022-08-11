@@ -47,6 +47,12 @@ def routes(app, database, achievements):
                                teacher_adventures=adventures, welcome_teacher=welcome_teacher)
 
 
+    @app.route('/for-teachers/manual', methods=['GET'])
+    @requires_login
+    def get_teacher_manual(user):
+        return render_template('teacher-manual.html')
+
+
     @app.route('/classes', methods=['GET'])
     @requires_login
     def get_classes(user):
