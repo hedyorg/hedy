@@ -2339,6 +2339,8 @@ def transpile_inner(input_string, level, lang="en"):
     input_string = process_input_string(input_string, level)
 
     program_root = parse_input(input_string, level, lang)
+
+    # checks whether any error production nodes are present in the parse tree
     is_program_valid(program_root, input_string, level, lang)
 
 
