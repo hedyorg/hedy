@@ -156,6 +156,27 @@ class TestsLevel4(HedyTester):
             exception=hedy.exceptions.UnquotedTextException,
         )
 
+    def test_ask_without_quotes_gives_error_from_grammar(self):
+        # same as print for level 4
+        code = "pietje is ask hedy 123"
+
+        self.multi_level_tester(
+            code=code,
+            max_level=4,
+            exception=hedy.exceptions.UnquotedTextException
+        )
+
+    def test_ask_without_quotes_gives_error_from_transpiler(self):
+        # same as print
+        code = "antwoord is ask hallo wereld"
+
+        self.multi_level_tester(
+            code=code,
+            max_level=17,
+            exception=hedy.exceptions.UnquotedTextException,
+        )
+
+
     def test_print_similar_var_gives_error(self):
         # continuing: is this unquoted? or did we forget an initialization of a variable?
 
