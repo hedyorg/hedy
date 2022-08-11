@@ -70,6 +70,10 @@ class UnquotedEqualityCheck(HedyException):
              line_number=line_number)
         self.location = [line_number]
 
+class AccessBeforeAssign(HedyException):
+    def __init__(self, **arguments):
+        super().__init__('Access Before Assign', **arguments)
+
 class UndefinedVarException(HedyException):
     def __init__(self, name):
         super().__init__('Var Undefined',
