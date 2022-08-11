@@ -1842,19 +1842,19 @@ class ConvertToPython_17(ConvertToPython_16):
 @hedy_transpiler(level=18)
 class ConvertToPython_18(ConvertToPython_17):
     def input(self, meta, args):
-        return self.ask(args)
+        return self.ask(meta, args)
 
     def input_is(self, meta, args):
-        return self.input(args)
+        return self.input(meta, args)
 
     def input_equals(self, meta, args):
-        return self.input(args)
+        return self.input(meta, args)
 
     def input_empty_brackets(self, meta, args):
-        return self.input(args)
+        return self.input(meta, args)
 
     def print_empty_brackets(self, meta, args):
-        return self.print(args)
+        return self.print(meta,args)
 
 def merge_grammars(grammar_text_1, grammar_text_2, level):
     # this function takes two grammar files and merges them into one
