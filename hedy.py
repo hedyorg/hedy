@@ -1356,8 +1356,8 @@ class ConvertToPython_2(ConvertToPython_1):
         return escape_var(name)
 
 
-    def var_access_print(self, args):
-        return self.var_access(args)
+    def var_access_print(self, meta, args):
+        return self.var_access(meta, args)
 
     def print(self, meta, args):
         args_new = []
@@ -1474,7 +1474,7 @@ class ConvertToPython_4(ConvertToPython_3):
         name = args[0]
         return escape_var(name)
 
-    def var_access_print(self, args):
+    def var_access_print(self, meta, args):
         name = args[0]
         return escape_var(name)
 
@@ -1675,8 +1675,8 @@ class ConvertToPython_8_9(ConvertToPython_7):
         # this is list_access
             return escape_var(args[0]) + "[" + str(escape_var(args[1])) + "]" if type(args[1]) is not Tree else "random.choice(" + str(escape_var(args[0])) + ")"
 
-    def var_access_print(self, args):
-        return self.var_access(args)
+    def var_access_print(self, meta, args):
+        return self.var_access(meta, args)
 
 @hedy_transpiler(level=10)
 class ConvertToPython_10(ConvertToPython_8_9):
