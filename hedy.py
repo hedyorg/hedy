@@ -1772,7 +1772,7 @@ class ConvertToPython_13(ConvertToPython_12):
 @v_args(meta=True)
 @hedy_transpiler(level=14)
 class ConvertToPython_14(ConvertToPython_13):
-    def process_comparison(self, args, operator):
+    def process_comparison(self, meta, args, operator):
 
         # we are generating an fstring now
         arg0 = self.process_variable_for_fstring_padded(args[0])
@@ -1792,22 +1792,22 @@ class ConvertToPython_14(ConvertToPython_13):
             return f"{simple_comparison} and {args[2]}"
 
     def equality_check_dequals(self, meta, args):
-        return super().equality_check(args)
+        return super().equality_check(meta, args)
 
     def smaller(self, meta, args):
-        return self.process_comparison(args, "<")
+        return self.process_comparison(meta, args, "<")
 
     def bigger(self, meta, args):
-        return self.process_comparison(args, ">")
+        return self.process_comparison(meta, args, ">")
 
     def smaller_equal(self, meta, args):
-        return self.process_comparison(args, "<=")
+        return self.process_comparison(meta, args, "<=")
 
     def bigger_equal(self, meta, args):
-        return self.process_comparison(args, ">=")
+        return self.process_comparison(meta, args, ">=")
 
     def not_equal(self, meta, args):
-        return self.process_comparison(args, "!=")
+        return self.process_comparison(meta, args, "!=")
 
 @v_args(meta=True)
 @hedy_transpiler(level=15)
