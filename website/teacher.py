@@ -1,6 +1,7 @@
 import json
 from flask_babel import gettext
 import hedy
+import hedyweb
 from website.auth import requires_login, is_teacher, is_admin, current_user, validate_student_signup_data, store_new_student_account
 import utils
 import uuid
