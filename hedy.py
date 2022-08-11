@@ -695,17 +695,18 @@ class TypeValidator(Transformer):
                 # if so, we probably meant that one
 
                 # we first check if the list of vars is empty since that is cheaper than stringdistancing.
+                # TODO: Can be removed since fall back handles that now
                 if len(self.lookup) == 0:
-                    raise hedy.exceptions.UnquotedTextException(level=self.level)
+                    raise hedy.exceptions.UnquotedTextException(level=self.level, unquotedtext=var_name)
                 else:
                     # distance small enough?
                     minimum_distance_allowed = 4
-                    for var in self.lookup:
-                        if calculate_minimum_distance(var.name, var_name) <= minimum_distance_allowed:
-                            raise hedy.exceptions.UndefinedVarException(name=var_name)
+                    for var_in_lookup in self.lookup:
+                        if calculate_minimum_distance(var_in_lookup.name, var_name) <= minimum_distance_allowed:
+                            raise hedy.exceptions.UndefinedVarException(name=var_name, unquotedtext=var_name)
 
                     # nothing found? fall back to UnquotedTextException
-                    raise hedy.exceptions.UnquotedTextException(level=self.level)
+                    raise hedy.exceptions.UnquotedTextException(level=self.level, unquotedtext=var_name)
 
 
         # TypedTree with type 'None' and 'string' could be in the lookup because of the grammar definitions
