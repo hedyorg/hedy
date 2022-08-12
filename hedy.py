@@ -704,7 +704,7 @@ class TypeValidator(Transformer):
                 if len(self.lookup) == 0:
                     raise hedy.exceptions.UnquotedTextException(level=self.level, unquotedtext=var_name)
                 else:
-                    # distance small enough?
+                    # TODO: decide when this runs for a while whether this distance small enough!
                     minimum_distance_allowed = 4
                     for var_in_lookup in self.lookup:
                         if calculate_minimum_distance(var_in_lookup.name, var_name) <= minimum_distance_allowed:
@@ -1099,8 +1099,6 @@ class ConvertToPython(Transformer):
     # is no check on whether the var is defined
     def is_variable(self, variable_name, access_line_number=100):
         all_names = [a.name for a in self.lookup]
-        # TODO <= is a fix for random that needs a more elaborate solution!
-
         all_names_before_access_line = [a.name for a in self.lookup if a.linenumber <= access_line_number]
 
         if variable_name in all_names and not variable_name in all_names_before_access_line:
@@ -1109,9 +1107,9 @@ class ConvertToPython(Transformer):
 
         return escape_var(variable_name) in all_names_before_access_line
 
-    def process_variable(self, arg):
+    def process_variable(self, arg, access_line_number=100):
         # processes a variable by hashing and escaping when needed
-        if self.is_variable(arg):
+        if self.is_variable(arg, access_line_number):
             return escape_var(arg)
         if ConvertToPython.is_quoted(arg):
             arg = arg[1:-1]
@@ -1151,7 +1149,7 @@ class ConvertToPython(Transformer):
             name = '_' + name
         return name
 
-    def check_var_usage(self, args):
+    def check_var_usage(self, args, var_access_linenumber = 100):
         # this function checks whether arguments are valid
         # we can proceed if all arguments are either quoted OR all variables
 
@@ -1163,15 +1161,14 @@ class ConvertToPython(Transformer):
         args_to_process = [a for a in args if is_var_candidate(a)] #we do not check trees (calcs) they are always ok
 
         unquoted_args = [a for a in args_to_process if not ConvertToPython.is_quoted(a)]
-        unquoted_in_lookup = [self.is_variable(a) for a in unquoted_args]
+        unquoted_in_lookup = [self.is_variable(a, var_access_linenumber) for a in unquoted_args]
 
         if unquoted_in_lookup == [] or all(unquoted_in_lookup):
             # all good? return for further processing
             return args
         else:
+            # TODO: check whether this is really never raised??
             # return first name with issue
-            # note this is where issue #832 can be addressed by checking whether
-            # first_unquoted_var ius similar to something in the lookup list
             first_unquoted_var = unquoted_args[0]
             raise exceptions.UndefinedVarException(name=first_unquoted_var)
 
@@ -1348,11 +1345,11 @@ class ConvertToPython_2(ConvertToPython_1):
 
     def var(self, meta, args):
         name = args[0]
-        self.check_var_usage(args)
         return escape_var(name)
 
     def var_access(self, meta, args):
         name = args[0]
+        self.check_var_usage(args, meta.line)
         return escape_var(name)
 
 
@@ -1366,6 +1363,8 @@ class ConvertToPython_2(ConvertToPython_1):
             # so when we encounter it as a child of print it will not be a subtree, but
             # transpiled code (for example: random.choice(dieren))
             # therefore we should not process it anymore and thread it as a variable:
+            # we set the line number to 100 so there is never an issue with variable access before
+            # assignment (regular code will not work since random.choice(dieren) is never defined as var as such)
             if "random.choice" in a or "[" in a:
                 args_new.append(self.process_variable_for_fstring(a, meta.line))
             else:
@@ -1400,7 +1399,7 @@ class ConvertToPython_2(ConvertToPython_1):
             return parameter + " = " + value
         else:
             if self.is_variable(value):
-                value = self.process_variable(value)
+                value = self.process_variable(value, meta.line)
                 return parameter + " = " + value
             else:
                 # if the assigned value is not a variable and contains single quotes, escape them
@@ -1431,8 +1430,7 @@ class ConvertToPython_3(ConvertToPython_2):
         args = [escape_var(a) for a in args]
 
         # check the arguments (except when they are random or numbers, that is not quoted nor a var but is allowed)
-        self.check_var_usage(a for a in args if a != 'random' and not a.isnumeric())
-
+        self.check_var_usage([a for a in args if a != 'random' and not a.isnumeric()], meta.line)
 
         if args[1] == 'random':
             return 'random.choice(' + args[0] + ')'
@@ -1440,12 +1438,12 @@ class ConvertToPython_3(ConvertToPython_2):
             return args[0] + '[' + args[1] + '-1]'
 
     def add(self, meta, args):
-        value = self.process_variable(args[0])
+        value = self.process_variable(args[0], meta.line)
         list_var = args[1]
         return f"{list_var}.append({value})"
 
     def remove(self, meta, args):
-        value = self.process_variable(args[0])
+        value = self.process_variable(args[0], meta.line)
         list_var = args[1]
         return textwrap.dedent(f"""\
         try:
@@ -1479,7 +1477,7 @@ class ConvertToPython_4(ConvertToPython_3):
         return escape_var(name)
 
     def print_ask_args(self, meta, args):
-        args = self.check_var_usage(args)
+        args = self.check_var_usage(args, meta.line)
         result = ''
         for argument in args:
             argument = self.process_variable_for_fstring(argument)
@@ -1523,19 +1521,19 @@ else:
         return ' and '.join(args)
 
     def condition_spaces(self, meta, args):
-        arg0 = self.process_variable(args[0])
+        arg0 = self.process_variable(args[0], meta.line)
         arg1 = self.process_variable(' '.join(args[1:]))
         return f"{arg0} == {arg1}"
 
     def equality_check(self, meta, args):
-        arg0 = self.process_variable(args[0])
+        arg0 = self.process_variable(args[0], meta.line)
         arg1 = ' '.join([self.process_variable(a) for a in args[1:]])
         return f"{arg0} == {arg1}"
         #TODO, FH 2021: zelfde change moet ik ook nog ff maken voor equal. check in hogere levels
 
     def in_list_check(self, meta, args):
-        arg0 = self.process_variable(args[0])
-        arg1 = self.process_variable(args[1])
+        arg0 = self.process_variable(args[0], meta.line)
+        arg1 = self.process_variable(args[1], meta.line)
         return f"{arg0} in {arg1}"
 
 @v_args(meta=True)
@@ -1544,7 +1542,7 @@ class ConvertToPython_6(ConvertToPython_5):
 
     def print_ask_args(self, meta, args):
         # we only check non-Tree (= non calculation) arguments
-        self.check_var_usage(args)
+        self.check_var_usage(args, meta.line)
 
         #force all to be printed as strings (since there can not be int arguments)
         args_new = []
@@ -1561,9 +1559,9 @@ class ConvertToPython_6(ConvertToPython_5):
         return ''.join(args_new)
 
     def equality_check(self, meta, args):
-        arg0 = self.process_variable(args[0])
+        arg0 = self.process_variable(args[0], meta.line)
         remaining_text = ' '.join(args[1:])
-        arg1 = self.process_variable(remaining_text)
+        arg1 = self.process_variable(remaining_text, meta.line)
 
         # FH, 2022 this used to be str but convert_numerals in needed to accept non-latin numbers
         # and works exactly as str for latin numbers (i.e. does nothing on str, makes 3 into '3')
@@ -1576,7 +1574,7 @@ class ConvertToPython_6(ConvertToPython_5):
             return parameter + " = " + value.children[0]
         else:
             if self.is_variable(value):
-                value = self.process_variable(value)
+                value = self.process_variable(value, meta.line)
                 return parameter + " = " + value
             else:
                 # if the assigned value is not a variable and contains single quotes, escape them
@@ -1625,7 +1623,7 @@ def sleep_after(commands, indent=True):
 class ConvertToPython_7(ConvertToPython_6):
     def repeat(self, meta, args):
         var_name = self.get_fresh_var('i')
-        times = self.process_variable(args[0])
+        times = self.process_variable(args[0], meta.line)
         command = args[1]
         # in level 7, repeats can only have 1 line as their arguments
         command = sleep_after(command, False)
@@ -1646,7 +1644,7 @@ class ConvertToPython_8_9(ConvertToPython_7):
         # indent a boolean parameter?
 
         var_name = self.get_fresh_var('i')
-        times = self.process_variable(args[0])
+        times = self.process_variable(args[0], meta.line)
 
         all_lines = [ConvertToPython.indent(x) for x in args[1:]]
         body = "\n".join(all_lines)
@@ -1683,7 +1681,7 @@ class ConvertToPython_8_9(ConvertToPython_7):
 class ConvertToPython_10(ConvertToPython_8_9):
     def for_list(self, meta, args):
       args = [a for a in args if a != ""]  # filter out in|dedent tokens
-      times = self.process_variable(args[0])
+      times = self.process_variable(args[0], meta.line)
 
       body = "\n".join([ConvertToPython.indent(x) for x in args[2:]])
 
@@ -1782,7 +1780,7 @@ class ConvertToPython_12(ConvertToPython_11):
         # either a var or quoted, if it is not (and undefined var is raised)
         # the real issue is probably that the kid forgot quotes
         try:
-            self.check_var_usage([right_hand_side]) #check_var_usage expects a list of arguments so place this one in a list.
+            self.check_var_usage([right_hand_side], meta.line) #check_var_usage expects a list of arguments so place this one in a list.
         except exceptions.UndefinedVarException as E:
             # is the text a number? then no quotes are fine. if not, raise maar!
 
@@ -1797,8 +1795,7 @@ class ConvertToPython_12(ConvertToPython_11):
 
     def var(self, meta, args):
         name = args[0]
-        self.check_var_usage(args)
-        self.check_var_usage(args)
+        self.check_var_usage(args, meta.line)
         return escape_var(name)
 
 @v_args(meta=True)
