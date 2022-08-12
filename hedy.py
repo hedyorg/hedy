@@ -1678,6 +1678,7 @@ class ConvertToPython_8_9(ConvertToPython_7):
     def var_access_print(self, meta, args):
         return self.var_access(meta, args)
 
+@v_args(meta=True)
 @hedy_transpiler(level=10)
 class ConvertToPython_10(ConvertToPython_8_9):
     def for_list(self, meta, args):
