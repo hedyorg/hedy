@@ -77,6 +77,7 @@ function resetWindow() {
     if (tabName === 'parsons') {
       $ ('#level-header input').hide ();
       $ ('#editor').hide();
+      $ ('#editor-area').show ();
       loadParsonsExercise(<number>(window.State.level || 1), 1);
       $ ('#parsons_code_container').show();
       $ ('#adventures-tab').css('height', '');

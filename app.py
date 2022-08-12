@@ -887,9 +887,8 @@ def index(level, program_id):
 
 
 @app.route('/hedy/<id>/view', methods=['GET'])
-def view_program(id):
-
-    user = current_user()
+@requires_login
+def view_program(user, id):
     result = DATABASE.program_by_id(id)
 
     if not result:
