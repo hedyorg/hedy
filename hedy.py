@@ -1103,7 +1103,8 @@ class ConvertToPython(Transformer):
 
         if variable_name in all_names and not variable_name in all_names_before_access_line:
             # referenced before assignment!
-            raise hedy.exceptions.AccessBeforeAssign()
+            definition_line_number = [a.linenumber for a in self.lookup if a.name == variable_name][0]
+            raise hedy.exceptions.AccessBeforeAssign(name=variable_name, access_line_number=access_line_number, definition_line_number=definition_line_number)
 
         return escape_var(variable_name) in all_names_before_access_line
 
