@@ -9,14 +9,7 @@
                 <img src="{{static('/images/Hedy-logo.png')}}" class="w-64" alt="{{_('profile_logo_alt')}}">
             {% endif %}
         </div>
-        <div class="flex flex-col gap-2 w-full h-full">
-            {% if user_info.tags %}
-                <div class="flex flex-row mx-4">
-                    {% for tag in user_info.tags %}
-                        <div class="bg-green-500 text-white py-1 rounded-l-lg font-bold px-3">{{ tag }} ⊙</div>
-                    {% endfor %}
-                </div>
-            {% endif %}
+        <div class="flex flex-col gap-1 w-full h-full">
             <div class="w-full h-full bg-blue-200 flex flex-col rounded-lg border border-black">
                 <div class="flex flex-row items-center h-12 bg-blue-600 rounded-t-lg px-4 font-medium">
                     <div class="text-white tracking-wide text-4xl">{{ user_info.username }}</div>
@@ -53,7 +46,23 @@
                     </div>
                 {% endif %}
             </div>
-        </div>
+                {% if user_info.tags %}
+                    <div class="flex flex-row mx-4 gap-2 z-10">
+                        {% for tag in user_info.tags %}
+                            <!-- Todo TB: Might be nice to automate this a bit in the future (works fine for now) 08-22 -->
+                            {% if tag == "teacher" %}
+                                <div class="bg-green-500 text-white py-1 rounded-lg font-bold px-3">{{_('teacher')}} ⊙</div>
+                            {% elif tag == "certified_teacher" %}
+                                <div class="bg-red-500 text-white py-1 rounded-lg font-bold px-3">{{_('certified_teacher')}} ⊙</div>
+                            {% elif tag == "admin" %}
+                                <div class="bg-yellow-500 text-white py-1 rounded-lg font-bold px-3">{{_('admin')}} ⊙</div>
+                            {% elif tag == "distinguished_user" %}
+                                <div class="bg-indigo-500 text-white py-1 rounded-lg font-bold px-3">{{_('distinguished_user')}} ⊙</div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
         {% if last_achieved %}
         <div class="text-center rounded-lg bg-yellow-400 w-1/3 ml-4 mr-4 border border-black">
             <h3>{{_('last_achievement')}}</h3>
