@@ -239,9 +239,29 @@ export function edit_user_tags(username: string) {
     contentType: 'application/json; charset=utf-8'
   }).done(function (response) {
     console.log(response);
-  }).fail(function () {
-    modal.alert("Something went wrong...", 3000, true);
+    $('#modal-mask').show();
+    $('#tags_username').text(username);
+    $('.tags-input').prop('checked', false);
+    if (response.tags) {
+      console.log(response.tags);
+      if (jQuery.inArray("certified_teacher", response.tags) !== -1) {
+        $('#certified-tag-input').prop('checked', true);
+      }
+      if (jQuery.inArray("distinguished_user", response.tags) !== -1) {
+        $('#distinguished-tag-input').prop('checked', true);
+      }
+      if (jQuery.inArray("contributor", response.tags) !== -1) {
+        $('#contributor-tag-input').prop('checked', true);
+      }
+    }
+    $('#modal-tags').show();
+  }).fail(function (response) {
+    modal.alert(response.responseText, 3000, true);
   });
+}
+
+export function update_user_tags() {
+  console.log("To-do...");
 }
 
 // *** LOADERS ***

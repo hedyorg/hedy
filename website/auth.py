@@ -804,8 +804,10 @@ def routes(app, database):
             return utils.error_page(error=403, ui_message=gettext('unauthorized'))
 
         body = request.json
-        print(body)
-        return {}, 200
+        user = DATABASE.get_public_profile_settings(body['username'].strip().lower())
+        if not user:
+            return "User doesn't have a public profile", 400
+        return {'tags': user.get('tags', [])}, 200
 
     @app.route('/admin/updateUserTags', methods=['POST'])
     @requires_login

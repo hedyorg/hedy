@@ -1,6 +1,24 @@
 {% extends "auth.html" %}
 
 {% block main %}
+<div id="modal-tags" class="hidden fixed z-50 py-4 px-16 bg-blue-400 border-2 border-gray-400 rounded-lg text-lg text-center" style="top: 20%; left: 50%; transform: translate(-50%, -50%);">
+    <h2 class="text-white">Update the tags of <span id="tags_username"></span></h2>
+    <div id="tags_container" class="flex flex-row gap-2">
+        <div class="flex flex-col gap-2 items-center">
+            <div class="bg-red-500 text-white py-1 rounded-lg font-bold px-3">{{_('certified_teacher')}} ⊙</div>
+            <input type="checkbox" id="certified-tag-input" class="tags-input bg-white">
+        </div>
+        <div class="flex flex-col gap-2 items-center">
+            <div class="bg-indigo-500 text-white py-1 rounded-lg font-bold px-3">{{_('distinguished_user')}} ⊙</div>
+            <input type="checkbox" id="distinguished-tag-input" class="tags-input bg-white">
+        </div>
+        <div class="flex flex-col gap-2 items-center">
+            <div class="bg-pink-500 text-white py-1 rounded-lg font-bold px-3">{{_('contributor')}} ⊙</div>
+            <input type="checkbox" id="contributor-tag-input" class="tags-input bg-white">
+        </div>
+    </div>
+    <button class="green-btn mt-4" onclick="hedyApp.update_user_tags();">Update tags</button>
+</div>
 <div class="flex flex-row items-center justify-between pb-2 border-b">
     <h1>Users overview</h1>
     <div class="fle flex-row gap-2">
