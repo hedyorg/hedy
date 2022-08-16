@@ -1569,15 +1569,12 @@ def update_public_profile(user):
     else:
         achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "go_live")
 
-    # Todo TB: This is temporary to pass the e2e tests, fix! 08-22
-    data = copy.deepcopy(body)
-
-    if not data.get('tags'):
-        data['tags'] = []
+    if not current_profile.get('tags'):
+        body['tags'] = []
         if is_teacher(user):
-            data['tags'].append('teacher')
+            body['tags'] = ['teacher']
 
-    DATABASE.update_public_profile(user['username'], data)
+    DATABASE.update_public_profile(user['username'], body)
     if achievement:
         # Todo TB -> Check if we require message or success on front-end
         return {'message': gettext('public_profile_updated'), 'achievement': achievement}, 200
