@@ -277,7 +277,9 @@ export function update_user_tags() {
     }),
     contentType: 'application/json; charset=utf-8'
   }).done(function () {
-    modal.alert("", 3000, false);
+    $('#modal-mask').hide();
+    $('#modal-tags').hide();
+    modal.alert("Tags successfully updated", 3000, false);
   });
 }
 
