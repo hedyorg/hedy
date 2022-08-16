@@ -261,7 +261,24 @@ export function edit_user_tags(username: string) {
 }
 
 export function update_user_tags() {
-  console.log("To-do...");
+  const username = $('#tags_username').text();
+  const certified = $('#certified-tag-input').prop('checked');
+  const distinguished = $('#distinguished-tag-input').prop('checked');
+  const contributor = $('#contributor-tag-input').prop('checked');
+
+  $.ajax({
+    type: 'POST',
+    url: '/admin/updateUserTags',
+    data: JSON.stringify({
+      username: username,
+      certified: certified,
+      distinguished: distinguished,
+      contributor: contributor
+    }),
+    contentType: 'application/json; charset=utf-8'
+  }).done(function () {
+    modal.alert("", 3000, false);
+  });
 }
 
 // *** LOADERS ***
