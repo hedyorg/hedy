@@ -17,10 +17,10 @@
                 {% endfor %}
             {% else %}
                 <p>{{ section.intro|commonmark }}</p>
-                <div class="flex flex-col">
+                <div class="flex flex-col gap-4 mx-0 mb-4 lg:mx-16">
                     {% for level in section['levels'] %}
-                        <h2 class="section-header" onclick="hedyApp.show_common_mistakes('{{loop.index}}')">Level {{ level.level }}</h2>
-                        <div class="common-mistakes-section hidden flex flex-col" id="common_mistakes-{{loop.index}}">
+                        <h1 class="section-header" onclick="$('#common_mistakes-{{loop.index}}').slideToggle();">Level {{ level.level }}</h1>
+                        <div class="common-mistakes-section flex flex-col gap-4 mx-0 lg:mx-16" id="common_mistakes-{{loop.index}}">
                         {% for mistake_section in level.sections %}
                             <div>
                                 <h2>{{ mistake_section.title }}</h2>

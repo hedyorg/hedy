@@ -341,25 +341,6 @@ export function show_doc_section(section_key: string) {
    show_common_mistakes("-1");
 }
 
-export function show_common_mistakes(section_key: string) {
-    $(".common-mistakes-button").each(function(){
-       if ($(this).hasClass('blue-btn')) {
-           $(this).removeClass("blue-btn");
-           $(this).addClass("green-btn");
-       }
-   });
-   if ($ ('#common_mistakes-' + section_key).is (':visible')) {
-       $("#cm-button-" + section_key).removeClass("blue-btn");
-       $("#cm-button-" + section_key).addClass("green-btn");
-       $ ('.common-mistakes-section').hide ();
-   } else {
-     $("#cm-button-" + section_key).removeClass("green-btn");
-     $("#cm-button-" + section_key).addClass("blue-btn");
-     $('.common-mistakes-section').hide();
-     $('#common_mistakes-' + section_key).toggle();
-   }
-}
-
 //https://stackoverflow.com/questions/7196212/how-to-create-dictionary-and-add-key-value-pairs-dynamically?rq=1
 export function save_customizations(class_id: string) {
     let levels: (string | undefined)[] = [];
