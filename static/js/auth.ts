@@ -231,6 +231,9 @@ export function changeUserEmail(username: string, email: string) {
 
 export function edit_user_tags(username: string) {
   console.log(username);
+  // On clicking we should receive all the user current tags and display with checkboxes
+  // Then fix with an additional post
+  // Issue: We can't use the current modal template and have to create a new one
 }
 
 // *** LOADERS ***
