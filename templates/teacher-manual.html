@@ -5,11 +5,11 @@
         <h2 class="text-center">{{ content['title'] }}</h2>
         <div class="flex flex-wrap gap-2 justify-center pb-4 border-b">
         {% for section in content['sections'] %}
-            <button class="green-btn p-4 section-button" id="button-{{loop.index}}" onclick="hedyApp.show_doc_section('{{loop.index}}')">{{section.title}}</button>
+            <button class="{% if loop.index != 1 %}green-btn{% else %}blue-btn{% endif %} p-4 section-button" id="button-{{loop.index}}" onclick="hedyApp.show_doc_section('{{loop.index}}')">{{section.title}}</button>
         {% endfor %}
         </div>
         {% for section in content['sections'] %}
-            <div class="section hidden" id="section-{{loop.index}}">
+            <div class="section {% if loop.index != 1 %}hidden{% endif %}" id="section-{{loop.index}}">
             {% if section.key != "common_mistakes" %}
                 {% for subsection in section['subsections'] %}
                     <h4>{{ subsection.title }}</h4>
