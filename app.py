@@ -1572,7 +1572,9 @@ def update_public_profile(user):
     if not current_profile.get('tags'):
         body['tags'] = []
         if is_teacher(user):
-            body['tags'] = ['teacher']
+            body['tags'].append('teacher')
+        if is_admin(user):
+            body['tags'].append('admin')
 
     DATABASE.update_public_profile(user['username'], body)
     if achievement:
