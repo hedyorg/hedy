@@ -13,6 +13,7 @@ import utils
 from collections import namedtuple
 import hashlib
 import re
+import regex
 from dataclasses import dataclass, field
 import exceptions
 import program_repair
@@ -249,33 +250,9 @@ def get_suggestions_for_language(lang, level):
 
     return en_lang_commands
 
-
-def hash_needed(var):
-    # this function now sometimes gets a str and sometimes - a LookupEntry
-    # not pretty but it will all be removed once we no longer need hashing (see issue #959) so ok for now
-
-    # some elements are not names but processed names, i.e. random.choice(dieren)
-    # they should not be hashed
-    # these are either of type assignment and operation or already processed and then contain ( or [
-    if (type(var) is LookupEntry and var.skip_hashing) or (isinstance(var, str) and ('[' in var or '(' in var)):
-        return False
-
+def escape_var(var):
     var_name = var.name if type(var) is LookupEntry else var
-
-    return var_name in reserved_words or character_skulpt_cannot_parse.search(var_name) is not None
-
-
-def hash_var(var):
-    var_name = var.name if type(var) is LookupEntry else var
-    if hash_needed(var):
-        # hash "illegal" var names
-        # being reserved keywords
-        # or non-latin vars to comply with Skulpt, which does not implement PEP3131 :(
-        # prepend with v for when hash starts with a number
-        hash_object = hashlib.md5(var_name.encode())
-        return "v" + hash_object.hexdigest()
-    else:
-        return var_name
+    return "_" + var_name if var_name in reserved_words else var_name
 
 def closest_command(invalid_command, known_commands, threshold=2):
     # closest_command() searches for a similar command (distance smaller than threshold)
@@ -363,15 +340,15 @@ class ExtractAST(Transformer):
     def NUMBER(self, args):
         return Tree('number', [str(args)])
 
+    def POSITIVE_NUMBER(self, args):
+        return Tree('number', [str(args)])
+
     def NEGATIVE_NUMBER(self, args):
         return Tree('number', [str(args)])
 
     #level 2
     def var(self, meta, args):
         return Tree('var', [''.join([str(c) for c in args])], meta)
-
-    def punctuation(self, meta, args):
-        return Tree('punctuation', [''.join([str(c) for c in args])], meta)
 
     def list_access(self, meta, args):
         # FH, may 2022 I don't fully understand why we remove INT here and just plemp
@@ -427,8 +404,8 @@ class LookupEntryCollector(visitors.Visitor):
     # list access is added to the lookup table not because it must be escaped
     # for example we print(dieren[1]) not print('dieren[1]')
     def list_access(self, tree):
-        list_name = hash_var(tree.children[0].children[0])
-        position_name = hash_var(tree.children[1])
+        list_name = escape_var(tree.children[0].children[0])
+        position_name = escape_var(tree.children[1])
         if position_name == 'random':
             name = f'random.choice({list_name})'
         else:
@@ -449,7 +426,7 @@ class LookupEntryCollector(visitors.Visitor):
         self.add_to_lookup(iterator, trimmed_tree)
 
     def for_loop(self, tree):
-        iterator = str(tree.children[0])
+        iterator = str(tree.children[0].children[0])
         # the tree is trimmed to skip contain the inner commands of the loop since
         # they are not needed to infer the type of the iterator variable
         trimmed_tree = Tree(tree.data, tree.children[0:3], tree.meta)
@@ -457,7 +434,7 @@ class LookupEntryCollector(visitors.Visitor):
 
     def add_to_lookup(self, name, tree, skip_hashing=False):
         entry = LookupEntry(name, tree, skip_hashing)
-        hashed_name = hash_var(entry)
+        hashed_name = escape_var(entry)
         entry.name = hashed_name
         self.lookup.append(entry)
 
@@ -528,7 +505,7 @@ class TypeValidator(Transformer):
     def list_access(self, tree):
         self.validate_args_type_allowed(Command.list_access, tree.children[0], tree.meta)
 
-        list_name = hash_var(tree.children[0].children[0])
+        list_name = escape_var(tree.children[0].children[0])
         if tree.children[1] == 'random':
             name = f'random.choice({list_name})'
         else:
@@ -598,14 +575,14 @@ class TypeValidator(Transformer):
             type_ = HedyType.string
         return self.to_typed_tree(tree, type_)
 
-    def punctuation(self, tree):
-        return self.to_typed_tree(tree, HedyType.string)
-
     def text_in_quotes(self, tree):
         return self.to_typed_tree(tree.children[0], HedyType.string)
 
     def var_access(self, tree):
         return self.to_typed_tree(tree, HedyType.string)
+
+    def var_access_print(self, tree):
+        return self.var_access(tree)
 
     def var(self, tree):
         return self.to_typed_tree(tree, HedyType.none)
@@ -708,6 +685,30 @@ class TypeValidator(Transformer):
             else:
                 raise hedy.exceptions.UndefinedVarException(name=var_name)
 
+        if tree.data == 'var_access_print':
+            var_name = tree.children[0]
+            in_lookup, type_in_lookup = self.try_get_type_from_lookup(var_name)
+            if in_lookup:
+                return type_in_lookup
+            else:
+                # is there a variable that is mildly similar?
+                # if so, we probably meant that one
+
+                # we first check if the list of vars is empty since that is cheaper than stringdistancing.
+                # TODO: Can be removed since fall back handles that now
+                if len(self.lookup) == 0:
+                    raise hedy.exceptions.UnquotedTextException(level=self.level, unquotedtext=var_name)
+                else:
+                    # distance small enough?
+                    minimum_distance_allowed = 4
+                    for var_in_lookup in self.lookup:
+                        if calculate_minimum_distance(var_in_lookup.name, var_name) <= minimum_distance_allowed:
+                            raise hedy.exceptions.UndefinedVarException(name=var_name)
+
+                    # nothing found? fall back to UnquotedTextException
+                    raise hedy.exceptions.UnquotedTextException(level=self.level, unquotedtext=var_name)
+
+
         # TypedTree with type 'None' and 'string' could be in the lookup because of the grammar definitions
         # If the tree has more than 1 child, then it is not a leaf node, so do not search in the lookup
         if tree.type_ in [HedyType.none, HedyType.string] and len(tree.children) == 1:
@@ -722,7 +723,7 @@ class TypeValidator(Transformer):
 
     def save_type_to_lookup(self, name, inferred_type):
         for entry in self.lookup:
-            if entry.name == hash_var(name):
+            if entry.name == escape_var(name):
                 entry.type_ = inferred_type
 
     # Usually, variable definitions are sequential and by the time we need the type of a lookup entry, it would already
@@ -734,7 +735,7 @@ class TypeValidator(Transformer):
     #  lookup entry is used to infer the type and continue the started validation. This approach might cause issues
     #  in case of cyclic references, e.g. b is b + 1. The flag `inferring` is used as a guard against these cases.
     def try_get_type_from_lookup(self, name):
-        matches = [entry for entry in self.lookup if entry.name == hash_var(name)]
+        matches = [entry for entry in self.lookup if entry.name == escape_var(name)]
         if matches:
             match = matches[0]
             if not match.type_:
@@ -804,9 +805,6 @@ class Filter(Transformer):
     def random(self, meta, args):
         return True, 'random', meta
 
-    def punctuation(self, meta, args):
-        return True, ''.join([c for c in args]), meta
-
     def number(self, meta, args):
         return True, ''.join([c for c in args]), meta
 
@@ -845,6 +843,9 @@ class UsesTurtle(Transformer):
         return False
 
     def NUMBER(self, args):
+        return False
+    
+    def POSITIVE_NUMBER(self, args):
         return False
 
     def NEGATIVE_NUMBER(self, args):
@@ -913,6 +914,9 @@ class AllCommands(Transformer):
 
     def NUMBER(self, args):
         return []
+    
+    def POSITIVE_NUMBER(self, args):
+        return []
 
     def NEGATIVE_NUMBER(self, args):
         return []
@@ -951,6 +955,9 @@ class AllPrintArguments(Transformer):
 
     def NUMBER(self, args):
         return []
+    
+    def POSITIVE_NUMBER(self, args):
+        return []
 
     def NEGATIVE_NUMBER(self, args):
         return []
@@ -979,12 +986,16 @@ class IsValid(Filter):
 
     def error_print_nq(self, meta, args):
         # return error source to indicate what went wrong
-        return False, InvalidInfo("print without quotes", line=args[0][2].line, column=args[0][2].column), meta
+        if len(args) > 1:
+            text = args[1][1]
+        else:
+            text = args[0][1]
+        return False, InvalidInfo("print without quotes", arguments=[text], line=args[0][2].line, column=args[0][2].column), meta
 
     def error_invalid(self, meta, args):
         # TODO: this will not work for misspelling 'at', needs to be improved!
 
-        error = InvalidInfo('invalid command', args[0][1], [a[1] for a in args[1:]], meta.line, meta.column)
+        error = InvalidInfo('invalid command', command=args[0][1], arguments=[[a[1] for a in args[1:]]], line=meta.line, column=meta.column)
         return False, error, meta
 
     def error_unsupported_number(self, meta, args):
@@ -1080,39 +1091,37 @@ class ConvertToPython(Transformer):
 
     def is_variable(self, name):
         all_names = [a.name for a in self.lookup]
-        return hash_var(name) in all_names
+        return escape_var(name) in all_names
 
     def process_variable(self, arg):
         # processes a variable by hashing and escaping when needed
         if self.is_variable(arg):
-            return hash_var(arg)
+            return escape_var(arg)
         if ConvertToPython.is_quoted(arg):
             arg = arg[1:-1]
         return f"'{process_characters_needing_escape(arg)}'"
 
     def process_variable_for_fstring(self, name):
         if self.is_variable(name):
-            return "{" + hash_var(name) + "}"
+            return "{" + escape_var(name) + "}"
         else:
             return process_characters_needing_escape(name)
 
     def process_variable_for_fstring_padded(self, name):
         # used to transform variables in comparisons
         if self.is_variable(name):
-            return f"convert_numerals('{self.numerals_language}', {hash_var(name)}).zfill(100)"
+            return f"convert_numerals('{self.numerals_language}', {escape_var(name)}).zfill(100)"
         elif ConvertToPython.is_float(name):
             return f"convert_numerals('{self.numerals_language}', {name}).zfill(100)"
         elif ConvertToPython.is_quoted(name):
             return f"{name}.zfill(100)"
-        else:
-            raise hedy.exceptions.UndefinedVarException(name)
 
     def make_f_string(self, args):
         argument_string = ''
         for argument in args:
             if self.is_variable(argument):
                 # variables are placed in {} in the f string
-                argument_string += "{" + hash_var(argument) + "}"
+                argument_string += "{" + escape_var(argument) + "}"
             else:
                 # strings are written regularly
                 # however we no longer need the enclosing quotes in the f-string
@@ -1185,8 +1194,7 @@ class ConvertToPython(Transformer):
 @hedy_transpiler(level=1)
 class ConvertToPython_1(ConvertToPython):
 
-    def __init__(self, punctuation_symbols, lookup, numerals_language):
-        self.punctuation_symbols = punctuation_symbols
+    def __init__(self, lookup, numerals_language):
         self.numerals_language = numerals_language
         self.lookup = lookup
         __class__.level = 1
@@ -1200,7 +1208,8 @@ class ConvertToPython_1(ConvertToPython):
         return ''.join([str(c) for c in args])
 
     def integer(self, args):
-        return str(int(args[0]))
+        # remove whitespaces        
+        return str(int(args[0].replace(' ', '')))
 
     def number(self, args):
         return str(int(args[0]))
@@ -1317,33 +1326,35 @@ class ConvertToPython_2(ConvertToPython_1):
             return "t.right(90)"  # no arguments defaults to a right turn
         arg = args[0]
         if self.is_variable(arg):
-            return self.make_turn(hash_var(arg))
+            return self.make_turn(escape_var(arg))
         if arg.lstrip("-").isnumeric():
             return self.make_turn(arg)
 
-    def punctuation(self, args):
-        return ''.join([str(c) for c in args])
     def var(self, args):
         name = args[0]
         self.check_var_usage(args)
-        return hash_var(name)
+        return escape_var(name)
     def var_access(self, args):
         name = args[0]
-        return hash_var(name)
+        return escape_var(name)
+
+    def var_access_print(self, args):
+        return self.var_access(args)
+
     def print(self, args):
-        argument_string = ""
-        i = 0
-
-        for argument in args:
-            # final argument and punctuation arguments do not have to be separated with a space, other do
-            if i == len(args)-1 or args[i+1] in self.punctuation_symbols:
-                space = ''
+        args_new = []
+        for a in args:
+            # list access has been already rewritten since it occurs lower in the tree
+            # so when we encounter it as a child of print it will not be a subtree, but
+            # transpiled code (for example: random.choice(dieren))
+            # therefore we should not process it anymore and thread it as a variable:
+            if "random.choice" in a or "[" in a:
+                args_new.append(self.process_variable_for_fstring(a))
             else:
-                space = " "
+                res = regex.findall(r"[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}\p{Mn}\p{Mc}\p{Nd}\p{Pc}]+|[^\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}]+", a)
+                args_new.append(''.join([self.process_variable_for_fstring(x) for x in res]))
 
-            argument_string += self.process_variable_for_fstring(argument) + space
-
-            i = i + 1
+        argument_string = ' '.join(args_new)
 
         return f"print(f'{argument_string}')"
 
@@ -1398,7 +1409,7 @@ class ConvertToPython_3(ConvertToPython_2):
         return f"{parameter} = [{', '.join(values)}]"
 
     def list_access(self, args):
-        args = [hash_var(a) for a in args]
+        args = [escape_var(a) for a in args]
 
         # check the arguments (except when they are random or numbers, that is not quoted nor a var but is allowed)
         self.check_var_usage(a for a in args if a != 'random' and not a.isnumeric())
@@ -1431,9 +1442,9 @@ class ConvertToPython_4(ConvertToPython_3):
     def process_variable_for_fstring(self, name):
         if self.is_variable(name):
             if self.numerals_language == "Latin":
-                converted = hash_var(name)
+                converted = escape_var(name)
             else:
-                converted = f'convert_numerals("{self.numerals_language}",{hash_var(name)})'
+                converted = f'convert_numerals("{self.numerals_language}",{escape_var(name)})'
             return "{" + converted + "}"
         else:
             if self.is_quoted(name):
@@ -1442,7 +1453,11 @@ class ConvertToPython_4(ConvertToPython_3):
 
     def var_access(self, args):
         name = args[0]
-        return hash_var(name)
+        return escape_var(name)
+
+    def var_access_print(self, args):
+        name = args[0]
+        return escape_var(name)
 
     def print_ask_args(self, args):
         args = self.check_var_usage(args)
@@ -1468,11 +1483,11 @@ class ConvertToPython_4(ConvertToPython_3):
 @hedy_transpiler(level=5)
 class ConvertToPython_5(ConvertToPython_4):
     def list_access_var(self, args):
-        var = hash_var(args[0])
-        if args[2].data == 'random':
+        var = escape_var(args[0])
+        if isinstance(args[2], Tree):
             return var + ' = random.choice(' + args[1] + ')'
         else:
-            return var + ' = ' + args[1] + '[' + args[2].children[0] + '-1]'
+            return var + ' = ' + args[1] + '[' + args[2] + '-1]'
 
     def ifs(self, args):
         return f"""if {args[0]}:
@@ -1631,10 +1646,13 @@ class ConvertToPython_8_9(ConvertToPython_7):
 
     def var_access(self, args):
         if len(args) == 1: #accessing a var
-            return hash_var(args[0])
+            return escape_var(args[0])
         else:
         # this is list_access
-            return hash_var(args[0]) + "[" + str(hash_var(args[1])) + "]" if type(args[1]) is not Tree else "random.choice(" + str(hash_var(args[0])) + ")"
+            return escape_var(args[0]) + "[" + str(escape_var(args[1])) + "]" if type(args[1]) is not Tree else "random.choice(" + str(escape_var(args[0])) + ")"
+
+    def var_access_print(self, args):
+        return self.var_access(args)
 
 @hedy_transpiler(level=10)
 class ConvertToPython_10(ConvertToPython_8_9):
@@ -1652,7 +1670,7 @@ class ConvertToPython_10(ConvertToPython_8_9):
 class ConvertToPython_11(ConvertToPython_10):
     def for_loop(self, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
-        iterator = hash_var(args[0])
+        iterator = escape_var(args[0])
         body = "\n".join([ConvertToPython.indent(x) for x in args[3:]])
         body = sleep_after(body)
         stepvar_name = self.get_fresh_var('step')
@@ -1754,7 +1772,7 @@ class ConvertToPython_12(ConvertToPython_11):
         name = args[0]
         self.check_var_usage(args)
         self.check_var_usage(args)
-        return hash_var(name)
+        return escape_var(name)
 
 @hedy_transpiler(level=13)
 class ConvertToPython_13(ConvertToPython_12):
@@ -2253,8 +2271,9 @@ def is_program_valid(program_root, input_string, level, lang):
         elif invalid_info.error_type == 'repeat missing times':
             raise exceptions.IncompleteRepeatException(command='times', level=level, line_number=line)    
         elif invalid_info.error_type == 'print without quotes':
+            unquotedtext = invalid_info.arguments[0]
             # grammar rule is agnostic of line number so we can't easily return that here
-            raise exceptions.UnquotedTextException(level=level)
+            raise exceptions.UnquotedTextException(level=level, unquotedtext=unquotedtext)
         elif invalid_info.error_type == 'unsupported number':
             raise exceptions.UnsupportedFloatException(value=''.join(invalid_info.arguments))
         else:
@@ -2263,7 +2282,7 @@ def is_program_valid(program_root, input_string, level, lang):
 
             if closest == 'keyword':  # we couldn't find a suggestion
                 if invalid_command == Command.turn:
-                    arg = ''.join(invalid_info.arguments).strip()
+                    arg = invalid_info.arguments[0][0]
                     raise hedy.exceptions.InvalidArgumentException(command=invalid_info.command,
                                                                    allowed_types=get_allowed_types(Command.turn, level),
                                                                    invalid_argument=arg)
@@ -2313,8 +2332,6 @@ def create_lookup_table(abstract_syntax_tree, level, lang, input_string):
 def transpile_inner(input_string, level, lang="en"):
     check_program_size_is_valid(input_string)
 
-    punctuation_symbols = ['!', '?', '.']
-
     level = int(level)
     if level > HEDY_MAX_LEVEL:
         raise Exception(f'Levels over {HEDY_MAX_LEVEL} not implemented yet')
@@ -2322,7 +2339,10 @@ def transpile_inner(input_string, level, lang="en"):
     input_string = process_input_string(input_string, level)
 
     program_root = parse_input(input_string, level, lang)
+
+    # checks whether any error production nodes are present in the parse tree
     is_program_valid(program_root, input_string, level, lang)
+
 
     try:
         abstract_syntax_tree = ExtractAST().transform(program_root)
@@ -2344,7 +2364,7 @@ def transpile_inner(input_string, level, lang="en"):
             numerals_language = "Latin"
         # grab the right transpiler from the lookup
         convertToPython = TRANSPILER_LOOKUP[level]
-        python = convertToPython(punctuation_symbols, lookup_table, numerals_language).transform(abstract_syntax_tree)
+        python = convertToPython(lookup_table, numerals_language).transform(abstract_syntax_tree)
 
 
         has_turtle = UsesTurtle().transform(abstract_syntax_tree)

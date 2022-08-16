@@ -136,7 +136,7 @@ class TestsLevel3(HedyTester):
         self.multi_level_tester(max_level=11, code=code, exception=hedy.exceptions.InvalidArgumentTypeException)
 
     #
-    # is tests
+    # assign tests
     #
     def test_assign_var_to_var(self):
         code = textwrap.dedent("""\
@@ -163,8 +163,8 @@ class TestsLevel3(HedyTester):
         print állatok at random""")
 
         expected = textwrap.dedent("""\
-        v79de0191e90551f058d466c5e8c267ff = ['kutya', 'macska', 'kenguru']
-        print(f'{random.choice(v79de0191e90551f058d466c5e8c267ff)}')""")
+        állatok = ['kutya', 'macska', 'kenguru']
+        print(f'{random.choice(állatok)}')""")
 
         self.multi_level_tester(max_level=11, code=code, expected=expected)
 
@@ -196,7 +196,7 @@ class TestsLevel3(HedyTester):
 
     def test_assign_list_with_dutch_comma_arabic_lang(self):
         code = "صديقي هو احمد, خالد, حسن"
-        expected = "vbd60ecd50ef1238a3f6a563bcfb1d331 = ['احمد', 'خالد', 'حسن']"
+        expected = "صديقي = ['احمد', 'خالد', 'حسن']"
 
         self.multi_level_tester(
             max_level=11,
@@ -220,7 +220,7 @@ class TestsLevel3(HedyTester):
 
     def test_assign_list_with_arabic_comma(self):
         code = "صديقي هو احمد، خالد، حسن"
-        expected = "vbd60ecd50ef1238a3f6a563bcfb1d331 = ['احمد', 'خالد', 'حسن']"
+        expected = "صديقي = ['احمد', 'خالد', 'حسن']"
 
         self.multi_level_tester(
             max_level=11,
@@ -351,7 +351,7 @@ class TestsLevel3(HedyTester):
         )
 
     #
-    # turn tests
+    # color tests
     #
     def test_color_with_list_variable_gives_error(self):
         code = textwrap.dedent("""\
@@ -539,7 +539,7 @@ class TestsLevel3(HedyTester):
         print colors at random""")
 
         expected = textwrap.dedent("""\
-        color = input('what is your favorite color'+'?')
+        color = input('what is your favorite color?')
         colors = ['green', 'red', 'blue']
         colors.append(color)
         print(f'{random.choice(colors)}')""")
@@ -555,7 +555,7 @@ class TestsLevel3(HedyTester):
 
         expected = textwrap.dedent("""\
         colors = ['green', 'red', 'blue']
-        color = input('what color to remove'+'?')
+        color = input('what color to remove?')
         try:
           colors.remove(color)
         except:

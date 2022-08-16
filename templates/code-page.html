@@ -32,7 +32,7 @@
     window.State.lang = "{{ g.lang }}";
     window.State.level = "{{ level }}";
     window.State.level_title = "{{ _('level_title') }}";
-    window.State.keyword_language = "{{ g.keyword_lang }}";
+    window.State.keyword_language = "{{ get_syntax_language(g.lang) }}";
     window.State.adventure_name = "{{ adventure_name }}";
     // A copy of window.State.adventure_name but that we don't overwrite when changing tabs. Useful for loading/saving programs when changing tabs.
     window.State.adventure_name_onload = window.State.adventure_name;

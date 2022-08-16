@@ -129,12 +129,63 @@ class TestsLevel4(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
-    def test_print_without_quotes_gives_error(self):
-        code = "print hedy 123"
-        self.single_level_tester(code, exception=hedy.exceptions.UnquotedTextException)
+    def test_print_without_quotes_gives_error_from_grammar(self):
+        # in some cases, there is no variable confusion since 'hedy 123' can't be a variable
+        # then we can immediately raise the no quoted exception
 
-    def test_print_text_without_quotes_gives_error(self):
+        code = "print hedy 123"
+
+        self.multi_level_tester(
+            code=code,
+            max_level=5,
+            exception=hedy.exceptions.UnquotedTextException
+        )
+
+    def test_print_without_quotes_gives_error_from_transpiler(self):
+        # in other cases, there might be two different problems
+        # is this unquoted? or did we forget an initialization of a variable?
+
+        # a quick analysis of the logs shows that in most cases quotes are forgotten
+        # so we will only raise var if there is a variable that is a bit similar (see next test)
+
         code = "print hallo wereld"
+
+        self.multi_level_tester(
+            code=code,
+            max_level=17,
+            exception=hedy.exceptions.UnquotedTextException,
+        )
+
+    def test_ask_without_quotes_gives_error_from_grammar(self):
+        # same as print for level 4
+        code = "pietje is ask hedy 123"
+
+        self.multi_level_tester(
+            code=code,
+            max_level=4,
+            exception=hedy.exceptions.UnquotedTextException
+        )
+
+    def test_ask_without_quotes_gives_error_from_transpiler(self):
+        # same as print
+        code = "antwoord is ask hallo wereld"
+
+        self.multi_level_tester(
+            code=code,
+            max_level=17,
+            exception=hedy.exceptions.UnquotedTextException,
+        )
+
+
+    def test_print_similar_var_gives_error(self):
+        # continuing: is this unquoted? or did we forget an initialization of a variable?
+
+        # a quick analysis of the logs shows that in most cases quotes are forgotten
+        # so we will only raise var if there is a variable that is a bit similar (see next test)
+
+        code = textwrap.dedent("""\
+            werld is ask 'tegen wie zeggen we hallo?'
+            print hallo wereld""")
 
         self.multi_level_tester(
             code=code,
@@ -272,14 +323,15 @@ class TestsLevel4(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
-    def test_ask_bengali_var(self):
-        code = textwrap.dedent("""\
-        রং is ask 'আপনার প্রিয় রং কি?'
-        print রং ' is আপনার প্রিয'""")
+    @parameterized.expand(HedyTester.quotes)
+    def test_ask_bengali_var(self, q):
+        code = textwrap.dedent(f"""\
+        রং is ask {q}আপনার প্রিয় রং কি?{q}
+        print রং {q} is আপনার প্রিয{q}""")
 
         expected = textwrap.dedent("""\
-        ve1760b6272d4c9f816e62af4882d874f = input(f'আপনার প্রিয় রং কি?')
-        print(f'{ve1760b6272d4c9f816e62af4882d874f} is আপনার প্রিয')""")
+        রং = input(f'আপনার প্রিয় রং কি?')
+        print(f'{রং} is আপনার প্রিয')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
@@ -341,7 +393,7 @@ class TestsLevel4(HedyTester):
         self.multi_level_tester(max_level=11, code=code, expected=expected)
 
     #
-    # is tests
+    # assign tests
     #
     def test_assign_print(self):
         code = textwrap.dedent("""\
@@ -465,16 +517,13 @@ class TestsLevel4(HedyTester):
     # combined tests
     #
     def test_assign_print_chinese(self):
-        hashed_var = hedy.hash_var("你世界")
-        self.assertEqual('v406b71a2caed270b782fe8a1f2d5741a', hashed_var)
-
         code = textwrap.dedent("""\
         你世界 is 你好世界
         print 你世界""")
 
         expected = textwrap.dedent("""\
-        v406b71a2caed270b782fe8a1f2d5741a = '你好世界'
-        print(f'{v406b71a2caed270b782fe8a1f2d5741a}')""")
+        你世界 = '你好世界'
+        print(f'{你世界}')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
@@ -538,11 +587,6 @@ class TestsLevel4(HedyTester):
     #
     # assorti tests
     #
-    def test_detect_accented_chars(self):
-        self.assertEqual(True, hedy.hash_needed('éyyy'))
-        self.assertEqual(True, hedy.hash_needed('héyyy'))
-        self.assertEqual(False, hedy.hash_needed('heyyy'))
-
     @parameterized.expand(HedyTester.quotes)
     def test_meta_column_missing_closing_quote(self, q):
         code = textwrap.dedent(f"""\

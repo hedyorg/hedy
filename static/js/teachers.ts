@@ -54,6 +54,29 @@ export function rename_class(id: string, class_name_prompt: string) {
     });
 }
 
+export function duplicate_class(id: string, prompt: string) {
+    modal.prompt (prompt, '', function (class_name) {
+    $.ajax({
+      type: 'POST',
+      url: '/duplicate_class',
+      data: JSON.stringify({
+        id: id,
+        name: class_name
+      }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function(response) {
+      if (response.achievement) {
+            showAchievements(response.achievement, true, "");
+          } else {
+            location.reload();
+          }
+    }).fail(function(err) {
+      return modal.alert(err.responseText, 3000, true);
+    });
+  });
+}
+
 export function delete_class(id: string, prompt: string) {
   modal.confirm (prompt, function () {
     $.ajax({
@@ -63,9 +86,9 @@ export function delete_class(id: string, prompt: string) {
       dataType: 'json'
     }).done(function(response) {
       if (response.achievement) {
-        showAchievements(response.achievement, false, '/for-teachers');
+        showAchievements(response.achievement, true, '');
       } else {
-        window.location.pathname = '/for-teachers';
+        location.reload();
       }
     }).fail(function(err) {
       modal.alert(err.responseText, 3000, true);
@@ -177,10 +200,18 @@ export function create_adventure(prompt: string) {
 }
 
 function update_db_adventure(adventure_id: string) {
+   // Todo TB: It would be nice if we improve this with the formToJSON() function once #3077 is merged
+
    const adventure_name = $('#custom_adventure_name').val();
    const level = $('#custom_adventure_level').val();
    const content = DOMPurify.sanitize(<string>$('#custom_adventure_content').val());
    const agree_public = $('#agree_public').prop('checked');
+   // Get all checked checkboxes of the class 'customize_adventure_class_checkbox' and map their values
+   // The values in this case are the class id's for which we need to update the class customizations
+   let classes = new Array();
+   $(".customize_adventure_class_checkbox:checked").each(function () {
+     classes.push($(this).val());
+   });
 
     $.ajax({
       type: 'POST',
@@ -190,6 +221,7 @@ function update_db_adventure(adventure_id: string) {
         name: adventure_name,
         level: level,
         content: content,
+        classes: classes,
         public: agree_public
       }),
       contentType: 'application/json',

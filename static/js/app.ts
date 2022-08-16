@@ -128,6 +128,8 @@ $(document).on("click", function(event){
       $('<button>').css({ fontFamily: 'sans-serif' }).addClass('green-btn').text(symbol).appendTo(buttonContainer).click(function() {
         theGlobalEditor?.setValue(exampleEditor.getValue() + '\n');
         update_view("main_editor_keyword_selector", <string>$(preview).attr('lang'));
+        stopit();
+        clearOutput();
       });
     }
     if($(preview).attr('level')){
@@ -172,6 +174,10 @@ $(document).on("click", function(event){
 
       // If prompt is shown and user enters text in the editor, hide the prompt.
       editor.on('change', function () {
+        if (window.State.disable_run) {
+          stopit();
+          editor.focus(); // Make sure the editor has focus, so we can continue typing
+        }
         if ($('#inline-modal').is (':visible')) $('#inline-modal').hide();
         window.State.disable_run = false;
         $ ('#runit').css('background-color', '');
@@ -290,6 +296,7 @@ function clearErrors(editor: AceAjax.Editor) {
 export function stopit() {
   // We bucket-fix stop the current program by setting the run limit to 1ms
   Sk.execLimit = 1;
+  clearTimeouts();
   $('#stopit').hide();
   $('#runit').show();
 
@@ -301,6 +308,20 @@ export function stopit() {
   }
 
   window.State.disable_run = false;
+}
+
+function clearOutput() {
+  const outputDiv = $('#output');
+  //Saving the variable button because sk will overwrite the output div
+  const variableButton = outputDiv.find('#variable_button');
+  const variables = outputDiv.find('#variables');
+  outputDiv.empty();
+
+  outputDiv.addClass("overflow-auto");
+  outputDiv.append(variableButton);
+  outputDiv.append(variables);
+  error.hide();
+  success.hide();
 }
 
 export function runit(level: string, lang: string, disabled_prompt: string, cb: () => void) {
@@ -316,18 +337,7 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
   $('#runit').hide();
   $('#stopit').show();
   $('#saveDST').hide();
-
-  const outputDiv = $('#output');
-  //Saving the variable button because sk will overwrite the output div
-  const variableButton = $(outputDiv).find('#variable_button');
-  const variables = $(outputDiv).find('#variables');
-  outputDiv.empty();
-
-  outputDiv.addClass("overflow-auto");
-  outputDiv.append(variableButton);
-  outputDiv.append(variables);
-  error.hide();
-  success.hide();
+  clearOutput();
 
   try {
     level = level.toString();
@@ -396,7 +406,7 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
       });
     }).fail(function(xhr) {
       console.error(xhr);
-       https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState
+       // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState
       if (xhr.readyState < 4) {
         error.show(ErrorMessages['Connection_error'], ErrorMessages['CheckInternet']);
       } else {
@@ -461,15 +471,39 @@ export function pushAchievement(achievement: string) {
   });
 }
 
+export function closeAchievement() {
+  $('#achievement_pop-up').hide();
+  if ($('#achievement_pop-up').attr('reload')) {
+    $('#achievement_pop-up').removeAttr('reload');
+    $('#achievement_pop-up').removeAttr('redirect');
+    return location.reload();
+  }
+  if ($('#achievement_pop-up').attr('redirect')) {
+    const redirect = <string>$('#achievement_pop-up').attr('redirect');
+    $('#achievement_pop-up').removeAttr('reload');
+    $('#achievement_pop-up').removeAttr('redirect');
+    return window.location.pathname = redirect;
+  }
+  // If for some reason both situation don't happen we still want to make sure the attributes are removed
+  $('#achievement_pop-up').removeAttr('reload');
+  $('#achievement_pop-up').removeAttr('redirect');
+}
+
 export function showAchievements(achievements: any[], reload: boolean, redirect: string) {
   fnAsync(achievements, 0);
   if (reload) {
+    $('#achievement_pop-up').attr('reload', 'true');
     setTimeout(function(){
+      $('#achievement_pop-up').removeAttr('reload');
+      $('#achievement_pop-up').removeAttr('redirect');
       location.reload();
      }, achievements.length * 6000);
   }
   if (redirect) {
+    $('#achievement_pop-up').attr('redirect', redirect);
     setTimeout(function(){
+      $('#achievement_pop-up').removeAttr('reload');
+      $('#achievement_pop-up').removeAttr('redirect');
       window.location.pathname = redirect;
      }, achievements.length * 6000);
   }
@@ -516,34 +550,23 @@ function removeBulb(){
  *
  * 'row' and 'col' are 1-based.
  */
-function highlightAceError(editor: AceAjax.Editor, row: number, col?: number, length=1) {
-  // This adds a red cross in the left margin.
-  // Not sure what the "column" argument does here -- it doesn't seem
-  // to make a difference.
-  editor.session.setAnnotations([
-    {
-      row: row - 1,
-      column: (col ?? 1) - 1,
-      text: '',
-      type: 'error',
-    }
-  ]);
-
+function highlightAceError(editor: AceAjax.Editor, row: number, col?: number) {
+  // Set a marker on the error spot, either a fullLine or a text
+  // class defines the related css class for styling; which is fixed in styles.css with Tailwind
   if (col === undefined) {
-    // Higlight entire row
+    // If the is no column, highlight the whole row
     editor.session.addMarker(
       new ace.Range(row - 1, 1, row - 1, 2),
       "editor-error", "fullLine", false
     );
     return;
   }
+  // If we get here we know there is a column -> dynamically get the length of the error string
+  // As we assume the error is supposed to target a specific word we get row[column, whitespace].
+  const length = editor.session.getLine(row -1).slice(col-1).split(/(\s+)/)[0].length;
 
-  // Highlight span
-  editor.session.addMarker(
-    new ace.Range(
-      row - 1, col - 1,
-      row - 1, col - 1 + length,
-    ),
+  // If there is a column, only highlight the relevant text
+  editor.session.addMarker(new ace.Range(row - 1, col - 1, row - 1, col - 1 + length),
     "editor-error", "text", false
   );
 }
@@ -840,6 +863,24 @@ export function set_explore_favourite(id: string, favourite: number) {
   });
 }
 
+export function report_program(prompt: string, id: string) {
+  modal.confirm (prompt, function () {
+    $.ajax({
+      type: 'POST',
+      url: '/programs/report',
+      data: JSON.stringify({
+        id: id,
+    }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function(response) {
+        modal.alert(response.message, 3000, false);
+    }).fail(function(err) {
+        return modal.alert(err.responseText, 3000, true);
+    });
+  });
+}
+
 export function copy_to_clipboard (string: string, prompt: string) {
   // https://hackernoon.com/copying-text-to-clipboard-with-javascript-df4d4988697f
   var el = document.createElement ('textarea');
@@ -905,14 +946,14 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
   let outputDiv = $('#output');
 
   //Saving the variable button because sk will overwrite the output div
-  const variableButton = $(outputDiv).find('#variable_button');
-  const variables = $(outputDiv).find('#variables');
+  const variableButton = outputDiv.find('#variable_button');
+  const variables = outputDiv.find('#variables');
   outputDiv.empty();
   outputDiv.append(variableButton);
   outputDiv.append(variables);
 
-  var storage = window.localStorage;
-  var debug = storage.getItem("debugLine")
+  const storage = window.localStorage;
+  let debug = storage.getItem("debugLine");
 
   Sk.pre = "output";
   const turtleConfig = (Sk.TurtleGraphics || (Sk.TurtleGraphics = {}));
@@ -926,8 +967,8 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
       turtleConfig.worldHeight = 300;
   }
   // Always set the width to output panel width -> match the UI
-  turtleConfig.width = $( '#output' ).width();
-  turtleConfig.worldWidth = $( '#output' ).width();
+  turtleConfig.width = outputDiv.width();
+  turtleConfig.worldWidth = outputDiv.width();
 
   if (!hasTurtle) {
     // There might still be a visible turtle panel. If the new program does not use the Turtle,
@@ -945,6 +986,7 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     read: builtinRead,
     inputfun: inputFromInlineModal,
     inputfunTakesPrompt: true,
+    setTimeout: timeout,
     __future__: Sk.python3,
     timeoutMsg: function () {
       // If the timeout is 1 this is due to us stopping the program: don't show "too long" warning
@@ -1563,6 +1605,10 @@ export function toggle_developers_mode(enforced: boolean) {
   }
 }
 
+export function toggle_keyword_language(lang: string) {
+  window.open('?keyword_language=' + lang, "_self");
+}
+
 export function toggle_blur_code() {
   // Switch the both icons from hiding / showing
   $('.blur-toggle').toggle();
@@ -1928,3 +1974,25 @@ function addDebugClass(str: Element) {
 function removeDebugClass(str: Element) {
   return str.innerHTML.replace('<div class="debugLine">', '').replace('</div>', '');
 }
+
+// See https://github.com/skulpt/skulpt/pull/579#issue-156538278 for the JS version of this code
+// We support multiple timers, even though it's unlikely we would ever need them
+let timers: number[] = [];
+
+const timeout = (func: () => void, delay: number) => {
+  let id: number;
+  const wrapper = () => {
+    let idx = timers.indexOf(id);
+    if (idx > -1) {
+      timers.splice(idx, 1);
+    }
+    func();
+  };
+  id = setTimeout(wrapper, delay);
+  timers.push(id);
+};
+
+const clearTimeouts = () => {
+  timers.forEach(clearTimeout);
+  timers = [];
+};

@@ -77,12 +77,14 @@ function resetWindow() {
     if (tabName === 'parsons') {
       $ ('#level-header input').hide ();
       $ ('#editor').hide();
+      $ ('#editor-area').show ();
       loadParsonsExercise(<number>(window.State.level || 1), 1);
       $ ('#parsons_code_container').show();
       $ ('#adventures-tab').css('height', '');
       $ ('#adventures-tab').css('min-height', '14em');
       $ ('#adventures-tab').css('max-height', '100%');
       $ ('#debug_container').hide();
+      return;
     } else {
       $ ('#editor').show();
       $ ('#level-header input').show ();
@@ -162,6 +164,12 @@ function resetWindow() {
     const hashFragment = window.location.hash.replace(/^#/, '');
     if (hashFragment) {
       switchToTab(hashFragment);
+    }
+  } else {
+    // If this is not the case: open the first tab we find
+    let tabname = $('.tab:first').attr('data-tab');
+    if (tabname) {
+      switchToTab(tabname);
     }
   }
 });

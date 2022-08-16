@@ -114,6 +114,7 @@ def is_user_logged_in():
 # Remove the current info from the Flask session.
 def forget_current_user():
     session.pop('user', None)  # We are not interested in the value of the use key.
+    session.pop('messages', None)  # Delete messages counter for current user if existed
     session.pop('achieved', None)  # Delete session achievements if existing
     session.pop('keyword_lang', None)  # Delete session keyword language if existing
 
@@ -357,12 +358,13 @@ def routes(app, database):
 
         # Validations, optional fields
         if 'birth_year' in body:
+            year = datetime.datetime.now().year
             try:
                 body['birth_year'] = int(body.get('birth_year'))
-                if body['birth_year'] <= 1900 or body['birth_year'] > datetime.datetime.now().year:
-                    return gettext('year_invalid').format(**{'current_year': str(datetime.datetime.now().year)}), 400
             except ValueError:
-                return gettext('year_invalid').format(**{'current_year': str(datetime.datetime.now().year)}), 400
+                return gettext('year_invalid').format(**{'current_year': str(year)}), 400
+            if not isinstance(body.get('birth_year'), int) or body['birth_year'] <= 1900 or body['birth_year'] > year:
+                return gettext('year_invalid').format(**{'current_year': str(year)}), 400
         if 'gender' in body:
             if body['gender'] != 'm' and body['gender'] != 'f' and body['gender'] != 'o':
                 return gettext('gender_invalid'), 400
@@ -547,12 +549,13 @@ def routes(app, database):
 
         # Validations, optional fields
         if 'birth_year' in body:
+            year = datetime.datetime.now().year
             try:
                 body['birth_year'] = int(body.get('birth_year'))
-                if body['birth_year'] <= 1900 or body['birth_year'] > datetime.datetime.now().year:
-                    return gettext('year_invalid').format(**{'current_year': str(datetime.datetime.now().year)}), 400
             except ValueError:
-                return gettext('year_invalid').format(**{'current_year': str(datetime.datetime.now().year)}), 400
+                return gettext('year_invalid').format(**{'current_year': str(year)}), 400
+            if not isinstance(body.get('birth_year'), int) or body['birth_year'] <= 1900 or body['birth_year'] > year:
+                return gettext('year_invalid').format(**{'current_year': str(year)}), 400
         if 'gender' in body:
             if body['gender'] not in ["m", "f", "o"]:
                 return gettext('gender_invalid'), 400

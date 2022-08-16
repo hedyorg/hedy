@@ -28,5 +28,11 @@ jobs:
     - name: Install Nodejs dependencies
       run: |
         npm ci
+    - name: Generate grammar files
+      run: |
+        python ./content/yaml_to_lark_utils.py
+    - name: Compiling Babel translations
+      run: |
+        pybabel compile -f -d translations
     - name: Run validations
       run: build-tools/github/validate

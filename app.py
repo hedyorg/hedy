@@ -14,7 +14,7 @@ from website.auth import current_user, login_user_from_token_cookie, requires_lo
 from website.yaml_file import YamlFile
 from website import querylog, aws_helpers, jsonbin, translating, ab_proxying, cdn, database, achievements
 import hedy_translation
-from hedy_content import COUNTRIES, ALL_LANGUAGES, ALL_KEYWORD_LANGUAGES, NON_LATIN_LANGUAGES
+from hedy_content import COUNTRIES, ALL_LANGUAGES, ALL_KEYWORD_LANGUAGES, NON_LATIN_LANGUAGES, NON_BABEL
 import hedyweb
 import hedy_content
 from flask_babel import gettext
@@ -77,7 +77,8 @@ DATABASE = database.Database()
 PUBLIC_PROGRAMS = DATABASE.get_all_public_programs()
 
 
-def load_adventures_per_level(level):
+# Load the adventures, by default with the selected keyword language
+def load_adventures_per_level(level, keyword_lang):
     loaded_programs = {}
     # If user is logged in, we iterate their programs that belong to the current level. Out of these, we keep the latest created program for both the level mode(no adventure) and for each of the adventures.
     if current_user()['username']:
@@ -90,7 +91,7 @@ def load_adventures_per_level(level):
                 loaded_programs[program_key] = program
 
     all_adventures = []
-    adventures = ADVENTURES[g.lang].get_adventures(g.keyword_lang)
+    adventures = ADVENTURES[g.lang].get_adventures(keyword_lang)
 
     for short_name, adventure in adventures.items():
         if level not in adventure['levels']:
@@ -140,6 +141,8 @@ logging.basicConfig(
 
 @babel.localeselector
 def get_locale():
+    if session.get("lang", request.accept_languages.best_match(ALL_LANGUAGES.keys(), 'en')) in NON_BABEL:
+        return "en"
     return session.get("lang", request.accept_languages.best_match(ALL_LANGUAGES.keys(), 'en'))
 
 
@@ -734,10 +737,12 @@ def tutorial_index():
     if not current_user()['username']:
         return redirect('/login')
     level = 1
-    commands = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
-    adventures = load_adventures_per_level(level)
+    cheatsheet = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
+    commands = hedy.commands_per_level.get(level)
+    adventures = load_adventures_per_level(level, g.keyword_lang)
 
-    return hedyweb.render_tutorial_mode(level=level, commands=commands, adventures=adventures)
+    return hedyweb.render_tutorial_mode(level=level, cheatsheet=cheatsheet,
+                                        commands=commands, adventures=adventures)
 
 
 @app.route('/teacher-tutorial', methods=['GET'])
@@ -799,7 +804,13 @@ def index(level, program_id):
         if 'adventure_name' in result:
             adventure_name = result['adventure_name']
 
-    adventures = load_adventures_per_level(level)
+    # In case of a "forced keyword language" -> load that one, otherwise: load the one stored in the g object
+    keyword_language = request.args.get('keyword_language', default=None, type=str)
+    if keyword_language:
+        adventures = load_adventures_per_level(level, keyword_language)
+    else:
+        adventures = load_adventures_per_level(level, g.keyword_lang)
+
     customizations = {}
     if current_user()['username']:
         customizations = DATABASE.get_student_class_customizations(current_user()['username'])
@@ -817,7 +828,7 @@ def index(level, program_id):
     if 'levels' in customizations and level not in available_levels:
         return utils.error_page(error=403, ui_message=gettext('level_not_class'))
 
-    commands = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
+    cheatsheet = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
 
     teacher_adventures = []
     # Todo: TB It would be nice to improve this by using level as a sort key
@@ -854,7 +865,10 @@ def index(level, program_id):
     if 'other_settings' in customizations and 'hide_quiz' in customizations['other_settings']:
         quiz = False
 
+    commands = hedy.commands_per_level.get(level)
+
     return hedyweb.render_code_editor_with_tabs(
+        cheatsheet=cheatsheet,
         commands=commands,
         max_level=hedy.HEDY_MAX_LEVEL,
         level_number=level,
@@ -873,9 +887,8 @@ def index(level, program_id):
 
 
 @app.route('/hedy/<id>/view', methods=['GET'])
-def view_program(id):
-
-    user = current_user()
+@requires_login
+def view_program(user, id):
     result = DATABASE.program_by_id(id)
 
     if not result:
@@ -928,14 +941,14 @@ def get_specific_adventure(name, level):
         return utils.error_page(error=404, ui_message=gettext('no_such_level'))
 
     adventure = [x for x in load_adventures_per_level(
-        level) if x.get('short_name') == name]
+        level, g.keyword_lang) if x.get('short_name') == name]
     if not adventure:
         return utils.error_page(error=404, ui_message=gettext('no_such_adventure'))
 
     prev_level = level-1 if [x for x in load_adventures_per_level(
-        level-1) if x.get('short_name') == name] else False
+        level-1, g.keyword_lang) if x.get('short_name') == name] else False
     next_level = level+1 if [x for x in load_adventures_per_level(
-        level+1) if x.get('short_name') == name] else False
+        level+1, g.keyword_lang) if x.get('short_name') == name] else False
 
     return hedyweb.render_specific_adventure(level_number=level, adventure=adventure, version=version(),
                                              prev_level=prev_level, next_level=next_level)
@@ -1017,8 +1030,7 @@ def profile_page(user):
 
     profile = DATABASE.user_by_username(user['username'])
     programs = DATABASE.public_programs_for_user(user['username'])
-    public_profile_settings = DATABASE.get_public_profile_settings(current_user()[
-                                                                   'username'])
+    public_profile_settings = DATABASE.get_public_profile_settings(current_user()['username'])
 
     classes = []
     if profile.get('classes'):
@@ -1027,12 +1039,17 @@ def profile_page(user):
 
     invite = DATABASE.get_username_invite(user['username'])
     if invite:
+        # We have to keep this in mind as well, can simply be set to 1 for now
+        # But when adding more message structures we have to use a more sophisticated structure
+        session['messages'] = 1
         # If there is an invite: retrieve the class information
         class_info = DATABASE.get_class(invite.get('class_id', None))
         if class_info:
             invite['teacher'] = class_info.get('teacher')
             invite['class_name'] = class_info.get('name')
             invite['join_link'] = class_info.get('link')
+    else:
+        session['messages'] = 0
 
     return render_template('profile.html', page_title=gettext('title_my-profile'), programs=programs,
                            user_data=profile, invite_data=invite, public_settings=public_profile_settings,
@@ -1406,6 +1423,11 @@ def other_keyword_language():
         return make_keyword_lang_obj("en")
     return None
 
+@app.template_global()
+def translate_command(command):
+    # Return the translated command found in KEYWORDS, if not found return the command itself
+    return hedy_content.KEYWORDS[g.lang].get(command, command)
+
 
 @app.template_filter()
 def nl2br(x):
@@ -1458,14 +1480,25 @@ def keyword_languages():
 def keyword_languages_keys():
     return [l for l in ALL_KEYWORD_LANGUAGES.keys()]
 
+
 @app.template_global()
 def get_country(country):
     return COUNTRIES.get(country, "-")
 
 
 @app.template_global()
+# If the current user language supports localized keywords: return this value, else: english
+def get_syntax_language(lang):
+    if lang in ALL_KEYWORD_LANGUAGES.keys():
+        return lang
+    else:
+        return "en"
+
+
+@app.template_global()
 def parse_keyword(keyword):
     return hedy_content.KEYWORDS.get(g.keyword_lang).get(keyword)
+
 
 def make_lang_obj(lang):
     """Make a language object for a given language."""
@@ -1492,6 +1525,17 @@ def modify_query(**new_values):
 
     return '{}?{}'.format(request.path, url_encode(args))
 
+@app.template_global()
+def get_user_messages():
+    if not session.get('messages'):
+        # Todo TB: In the future this should contain the class invites + other messages
+        # As the class invites are binary (you either have one or you have none, we can possibly simplify this)
+        # Simply set it to 1 if we have an invite, otherwise keep at 0
+        invite = DATABASE.get_username_invite(current_user()['username'])
+        session['messages'] = 1 if invite else 0
+    if session.get('messages') > 0:
+        return session.get('messages')
+    return None
 
 # Todo TB: Re-write this somewhere sometimes following the line below
 # We only store this @app.route here to enable the use of achievements -> might want to re-write this in the future

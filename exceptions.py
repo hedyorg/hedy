@@ -160,8 +160,8 @@ class IncompleteCommandException(HedyException):
         self.location = [line_number]
 
 class UnquotedTextException(HedyException):
-    def __init__(self, level):
-        super().__init__('Unquoted Text', level=level)
+    def __init__(self, level, unquotedtext=None):
+        super().__init__('Unquoted Text', level=level, unquotedtext=unquotedtext)
 
 class UnquotedAssignTextException(HedyException):
     def __init__(self, text):

@@ -2,7 +2,7 @@ adventures:
     default:
         name: "Wprowadzenie"
         description: "Wyjaśnienie poziomu"
-        default_save_name: "intro"
+        default_save_name: "wstęp"
         levels:
             1:
                 start_code: '{print} witaj świecie!'
@@ -12,45 +12,45 @@ adventures:
                 story_text_3: "Zacznijmy! Nie wiesz co stworzyć? Na następnych zakładkach znajdziesz pomysły na programy do stworzenia.\n"
                 example_code_2: "```\n{ask} Jak masz na imię?\n{echo} Hej\n```\n"
             2:
-                story_text: "## Variables\nIn level 2 we learn two new commands: `{is}` and `{sleep}`.\nYou can name a word with `{is}`. This is called a variable. In this example we made a variable called name and a variable called age. You can use the word name anywhere in your code and it will be replaced by Hedy, like this:\n\nThis way you no longer need the `{echo}` command!\n"
-                example_code: "```\nname {is} Hedy\nage {is} 15\n{print} name is age years old\n```\n"
-                story_text_2: "`{print}` still works the same, but the `{ask}` command has changed. You need to use a variable in the `{ask}` command as well. It looks like this:\n"
-                example_code_2: "```\nanswer {is} {ask} What is your name?\n{print} Hello answer\n```\n"
-                story_text_3: "Another new command in this level is `{sleep}`, which pauses your program for a second. If you type a number behind the {sleep} command, the program pauses for that amount of seconds.\n"
-                example_code_3: "```\n{print} My favorite colour is...\n{sleep} 2\n{print} green!\n```\n"
-                start_code: '{print} hello world!'
+                story_text: "## Zmienne\nW poziomie 2 nauczymy się 2 nowych komend: `{is}` oraz `{sleep}`.\nMożesz nazwać słowo za pomocą `{is}`. Takie słowo nazywamy zmienną. W tym przykładzie stworzyliśmy zmienną nazwaną imię oraz zmienną nazwaną wiek. Możesz użyć słowa imię w dowolnym miejscu w swoim kodzie i zostanie ono zamienione przez Hedy w taki sposób:\n\nDzięki temu nie potrzebujesz już więcej komendy `{echo}`!\n"
+                example_code: "```\nimię {is} Hedy\nwiek {is} 15\n{print} imię ma wiek lat\n```\n"
+                story_text_2: "`{print}` wciąż działa tak samo, ale komenda `{ask}` zmieniła się. Musisz użyć zmiennej również w komendzie `{ask}`. Wygląda to tak:\n"
+                example_code_2: "```\nodpowiedź {is} {ask} Jak masz na imię?\n{print} Cześć odpowiedź\n```\n"
+                story_text_3: "Inną nową komendą w tym poziomie jest `{sleep}`, która zatrzymuje twój program na sekundę. Jeżeli wpiszesz numer za komendą {sleep}, program zatrzyma się na podaną liczbę sekund.\n"
+                example_code_3: "```\n{print} Moim ulubionym kolorem jest...\n{sleep} 2\n{print} zielony!\n```\n"
+                start_code: '{print} witaj świecie!'
             3:
-                story_text: "## Make a list!\nIn level 3 you can make a list. You can let the computer choose something random from the list. You do that with `{at} {random}`.\n"
-                example_code: "```\nanimals {is} dog, cat, kangaroo\n{print} animals {at} {random}\n```\n"
-                story_text_2: You can also add items to the list with `{add}` and remove items with `{remove}`.
-                example_code_2: "```\nanimals {is} dog, cat, kangaroo\n{add} penguin {to_list} animals\n{remove} cat {from} animals\n{print} animals {at} {random}\n```\n"
-                start_code: '{print} hello world!'
+                story_text: "## Stwórz listę!\nW poziomie 3 możesz stworzyć listę. Możesz pozwolić komputerowi wybrać coś losowo z tej listy. Możesz to zrobić za pomocą `{at} {random}`.\n"
+                example_code: "```\nzwierzęta {is} pies, kot, kangur\n{print} zwierzęta {at} {random}\n```\n"
+                story_text_2: Możesz również dodać elementy do listy za pomocą `{add}` lub usunąć elementy za pomocą `{remove}`.
+                example_code_2: "```\nzwierzęta {is} pies, kot, kangur\n{add} pingwin {to_list} zwierzęta\n{remove} kot {from} zwierzęta\n{print} zwierzęta {at} {random}\n```\n"
+                start_code: '{print} witaj świecie!'
             4:
-                start_code: "{print} 'Hello world'"
-                example_code: "```\nprint 'You need to use quotation marks from now on!'\nanswer is ask 'What do we need to use from now on?'\nprint 'We need to use ' answer\n```\n"
-                story_text: "## 'Quotation marks'\nIn level 4 `{ask}` and `{print}` have changed.\n\nYou must put text that you want to print between quotation marks.\n\nThis is useful, because now you can print all the words you want. Also the words you used to store something with `{is}`.\n\nMost programming languages also use quotation marks when printing, so we are also getting a step closer to real programming!\n"
-                story_text_2: "## Adventures are getting more and more difficult\nThe adventures are now getting more and more difficult in the successive tabs.\nSo it is best to start on the left with the story, and work to the right, in order to be challenged more and more.\n"
+                start_code: "{print} 'Witaj świecie'"
+                example_code: "```\n{print} 'Od teraz musisz używać cudzysłowów!'\nodpowiedź {is} {ask} 'Czego od teraz musimy używać?'\n{print} 'Musimy używać ' odpowiedź\n```\n"
+                story_text: "## 'Cuzdzysłowy'\nW poziomie 4 `{ask}` i `{print}` zmieniły się.\n\nMusisz umieścić w cudzysłowach tekst, który chcesz wyświetlić.\n\nJest to przydatne, ponieważ teraz możesz wyświetlić na ekranie wszystkie słowa, które chcesz. Również słowa, których użyłeś, aby przechować coś za pomocą `{is}`.\n\nWiększość języków programowania również używa cudzysłowów podczas wyświetlania tekstu, a więc jesteśmy o jeden krok bliżej prawdziwego programowania!\n"
+                story_text_2: "## Przygody stają się coraz trudniejsze\nOd teraz przygody w kolejnych zakładkach stają się coraz trudniejsze.\nNajlepiej zacząć od lewej strony i rozwiązywać je w prawą stronę tak, aby przechodzić do coraz trudniejszych wyzwań.\n"
             5:
-                start_code: "name {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'cool!' {else} {print} 'meh'"
-                story_text: "## If... else....\nIn level 5 there is something new, the `{if}`! With the `{if}` you can choose between two different options.\nThis code prints nice if you enter Hedy as a name, and boo! if you enter something else.\n`{ask}` {and} `{print}` still work like they did in level 4.\n"
-                example_code: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'\n```\n"
-                story_text_3: "## Lists\nWhen we want to check if something is in a list, we can now use the `{in}` command.\nThis code prints pretty! if you choose green or yellow, and meh otherwise.\n"
-                example_code_3: "```\npretty_colors {is} green, yellow\ncolor {is} {ask} 'What is your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!'\n{else} {print} 'meh'\n```\n"
-                story_text_2: "Sometimes code with an `{if}` gets really long and does not fit on the line well. <br> You may also divide the code over two lines, starting the second line at the `{else}` like this:\n"
-                example_code_2: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice'\n{else} {print} 'boo!'\n```\n"
+                start_code: "imię {is} {ask} 'Jak masz na imię?'\n{if} imię {is} Hedy {print} 'super!' {else} {print} 'eh'"
+                story_text: "## Jeżeli... w przeciwnym razie...\nW poziomie 5 pojawia się coś nowego `{if}`! Za pomocą `{if}` możesz wybrać pomiędzy dwoma opcjami.\nTen kod wyświetla „to miło”, jeśli wprowadzisz imię Hedy, w przeciwnym wypadku wyświetli „bu!”.\n`{ask}` i `{print}` działają w dalszym ciągu tak jak w poziomie 4.\n"
+                example_code: "```\nimię {is} {ask} 'jak masz na imię?'\n{if} imię {is} Hedy {print} 'to miło' {else} {print} 'bu!'\n```\n"
+                story_text_3: "## Listy\nJeśli chcemy sprawdzić czy coś znajduje się wewnątrz listy, możemy od teraz użyć komendy`{in}`.\nTen kod wyświetla „śliczny!” jeśli wy ierzesz zielony lub żółty, w przeciwnym razie wyświetli „eh”.\n"
+                example_code_3: "```\nładne_kolory {is} zielony, żółty\nkolor {is} {ask} 'Jaki jest twój ulubiony kolor?'\n{if} kolor {in} ładne_kolory {print} 'śliczny!'\n{else} {print} 'eh'\n```\n"
+                story_text_2: "Czasami kod z `{if}` robi się bardzo długi i nie mieści się w linii.<br> Możesz podzielić kod na dwie linie, zaczynając drugą linię od `{else}` w taki sposób:\n"
+                example_code_2: "```\nimię {is} {ask} 'jak masz na imię?'\n{if} imię {is} Hedy {print} 'to miło'\n{else} {print} 'bu!'\n```\n"
             6:
-                start_code: "{print} '5 times 5 is ' 5 * 5"
-                story_text: "## 1 + 1\n In this level you learn something new: you can now also calculate.\n\n The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.\n\n The {times} is a bit different, because there is no {times} symbol on your keyboard. Just search, there really isn't!\n That is why we multiply with the asterisk above 8: `5 * 5`. Read that as \"5 times 5\" that helps you remember it best.\n"
+                start_code: "{print} '5 razy 5 to' 5 * 5"
+                story_text: "## 1 + 1\n W tym poziomie nauczysz się czegoś nowego: od teraz możesz również liczyć.\n\n Dodawanie jest proste, możesz je zapisać tak jak w matematyce: na przykład `5 + 5`. Odejmowanie też jest proste, to po prostu `5 - 5`.\n\n Mnożenie jest trochę inne, ponieważ nie ma znaku {times} na twojej klawiaturze. Poszukaj, na prawdę to tam nie ma?\n Z tego powodu mnożymy za pomocą gwiazdki nad 8: `5 * 5`. Czytaj to jako „5 razy 5” pomoże ci to lepiej zapamiętać.\n"
                 example_code: "```\n{print} '5 plus 5 is ' 5 + 5\n{print} '5 minus 5 is ' 5 - 5\n{print} '5 {times} 5 is ' 5 * 5\n```\n"
-                story_text_2: "We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:\n"
-                example_code_2: "```\nname = Hedy\nanswer = 20 + 4\n```\n"
+                story_text_2: "Zrobiliśmy również zmianę w przypisywaniu słów do zmiennej! Od teraz możesz użyć `=` zamiast `{is}` kiedy przypisujesz nazwę lub liczbę do zmiennej, jak tutaj:\n"
+                example_code_2: "```\nimię = Hedy\nodpowiedź = 20 + 4\n```\n"
             7:
-                start_code: "{repeat} 3 {times} {print} 'Hedy is fun!'"
-                story_text: "## Level 7! Level 7!\nLevel 7 adds the `{repeat}` command. {repeat} can be used to execute one line of code multiple times.\n"
+                start_code: "{repeat} 3 {times} {print} 'Hedy to zabawa!'"
+                story_text: "## Poziom 7! Poziom 7!\nPoziom 7 dodaje komendę `{repeat}`. `{repeat}` może być użyte po to, aby tę samą linie kodu wykonać wiele razy.\n"
                 example_code: "```\n{repeat} 3 {times} {print} 'Hedy is fun!'\n```\n"
             8:
-                start_code: "{repeat} 5 {times}\n    {print} 'Hello folks'\n    {print} 'This will be printed 5 times'"
-                story_text: "## Indentation\n`{ask}` {and} `{print}` still work as you know them. But `{if}` {and} `{repeat}` have changed!\nYou can now execute groups of code together, but you will have to *indent* the code.\nThat means putting four spaces at the beginning of the line. You will also have to indent when you just want to create a block of one line.\n"
+                start_code: "{repeat} 5 {times}\n    {print} 'Siema ludziska'\n    {print} 'To zostanie wypisane 5 razy'"
+                story_text: "## Wcięcia\n`{ask}` i `{print}` wciąż działają tak jak je poznałeś do tej pory. Ale `{if}`, `{else}` i `{repeat}` zmieniły się!\nOd teraz możesz wywoływać grupę kodu jednocześnie, ale musisz wtedy *wciąć* kod.\nTo znaczy dodać cztery spacje na początku linii. Będziesz musiał również wciąć kod, kiedy będziesz chciał utworzyć blok złożony z tylko 1 linii.\n"
                 example_code: "```\n{repeat} 5 {times}\n    {print} 'Hello everyone'\n    {print} 'This is all repeated 5 times'\n```\n"
             9:
                 start_code: "{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    else\n        {print} 'pizza is better'"

@@ -180,7 +180,7 @@ code {
   @apply absolute overflow-hidden block rounded-lg border border-black bg-blue-400 ltr:right-0 rtl:left-0 ltr:mr-1 rtl:ml-1 w-max;
 }
 
-.cheatsheet-menu {
+.dropdown-level-menu {
   @apply absolute overflow-hidden block rounded-lg border border-black bg-green-400 ltr:right-0 rtl:left-0 ltr:mr-1 rtl:ml-1 w-max;
 }
 
@@ -307,8 +307,7 @@ p.close-dialog {
 }
 
 .editor-error {
-  @apply bg-red-600;
-  position: absolute;
+  @apply bg-red-500 absolute;
 }
 
 /* DOCS */
@@ -316,10 +315,6 @@ p.close-dialog {
 .expandable-docs-text h1 {
    margin-top: 30px;
    margin-bottom: 30px;
-}
-
-.touched {
-  @apply bg-green-200;
 }
 
 /* QUIZ */
@@ -441,17 +436,24 @@ p.close-dialog {
 
 /* Developers mode toggle */
 .toggle-circle {
-  @apply ltr:left-1 rtl:right-1;
-  top: 0.2rem;
+  @apply ltr:left-0 rtl:right-0;
   transition: all 0.5s ease-in-out;
 }
 
-body[dir='rtl'] input:checked ~ .toggle-circle {
+body[dir='rtl'] #keyword_toggle_container input:checked ~ .toggle-circle {
+  transform: translateX(-200%);
+}
+
+body[dir='ltr'] #keyword_toggle_container input:checked ~ .toggle-circle {
+  transform: translateX(200%);
+}
+
+body[dir='rtl'] #developers_toggle_container input:checked ~ .toggle-circle {
   transform: translateX(-100%);
   @apply bg-green-400;
 }
 
-body[dir='ltr'] input:checked ~ .toggle-circle {
+body[dir='ltr'] #developers_toggle_container input:checked ~ .toggle-circle {
   transform: translateX(100%);
   @apply bg-green-400;
 }

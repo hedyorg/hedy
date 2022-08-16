@@ -48,9 +48,8 @@
             <button class="green-btn" onclick="window.location.href = '/stats/class/{{class_info.id}}'">{{_('class_stats')}}</button>
             <button class="green-btn" onclick="window.location.href = '/logs/class/{{class_info.id}}'">{{_('class_logs')}}</button>
         </div>
-        <div class="flex flex-wrap justify-between">
+        <div class="flex ltr:ml-auto rtl:mr-auto">
             <button class="blue-btn" onclick="window.location.href = '/for-teachers'">{{_('back_to_teachers_page')}}</button>
-            <button class="red-btn" onclick='hedyApp.delete_class("{{class_info.id}}", {{_('delete_class_prompt')|tojson}})'>{{_('delete_class')}}</button>
         </div>
       </div>
       <div id="add_students_options" class="flex flex-col items-center border-t border-gray-500" style="display: none;">
