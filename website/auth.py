@@ -797,6 +797,25 @@ def routes(app, database):
 
         return {}, 200
 
+    @app.route('/admin/getUserTags', methods=['POST'])
+    @requires_login
+    def get_user_tags(user):
+        if not is_admin(user):
+            return utils.error_page(error=403, ui_message=gettext('unauthorized'))
+
+        body = request.json
+        print(body)
+        return {}, 200
+
+    @app.route('/admin/updateUserTags', methods=['POST'])
+    @requires_login
+    def update_user_tags(user):
+        if not is_admin(user):
+            return utils.error_page(error=403, ui_message=gettext('unauthorized'))
+
+        body = request.json
+        print(body)
+        return {}, 200
 
 # Turn off verbose logs from boto/SES, thanks to https://github.com/boto/boto3/issues/521
 import logging
