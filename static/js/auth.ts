@@ -229,6 +229,10 @@ export function changeUserEmail(username: string, email: string) {
   });
 }
 
+export function edit_user_tags(username: string) {
+  console.log(username);
+}
+
 // *** LOADERS ***
 
 $("#language").change(function () {

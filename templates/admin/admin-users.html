@@ -33,11 +33,11 @@
                         <div class="flex flex-row items-center">
                             <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" id="birth_year" name="birth_year"><label class="inline-block w-40" for="birth_year">Birth year</label>
                         </div>
-                    </div>
-                    <div class="flex flex-col">
                         <div class="flex flex-row items-center">
                             <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="language" name="language"><label class="inline-block w-40" for="language">Language</label>
                         </div>
+                    </div>
+                    <div class="flex flex-col">
                         <div class="flex flex-row items-center">
                             <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="country" name="keyword_language"><label class="inline-block w-40" for="keyword_language">Keyword language</label>
                         </div>
@@ -49,6 +49,9 @@
                         </div>
                         <div class="flex flex-row items-center">
                             <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" id="experience" name="experience"><label class="inline-block w-40" for="experience">Experience</label>
+                        </div>
+                        <div class="flex flex-row items-center">
+                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" id="tags" name="tags"><label class="inline-block w-40" for="tags">Tags</label>
                         </div>
                         <div class="flex flex-row items-center">
                             <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="teacher" name="teacher"><label class="inline-block w-40" for="teacher">Teacher</label>
@@ -110,6 +113,7 @@
           <td id="country_header">Country</td>
           <td id="gender_header">Gender</td>
           <td id="experience_header" class="hidden">Experience</td>
+          <td id="tags_header" class="text-center">Tags</td>
           <td id="teacher_header" class="text-center">Teacher</td>
           <td id="verified_header" class="hidden">Verified</td>
       </tr>
@@ -128,6 +132,7 @@
             <td class="country_cell">{{user.country}}</td>
             <td class="gender_cell">{{user.gender}}</td>
             <td class="experience_cell hidden">{{user.prog_experience}}</td>
+            <td class="tags_cell text-center cursor-pointer"><span onclick="hedyApp.edit_user_tags('{{user.username}}');">✏️</span></td>
             <td class="teacher_cell text-center"><input type="checkbox" {% if user.is_teacher %}checked="checked"{% endif %} onclick="hedyApp.markAsTeacher (this, '{{user.username}}', {% if user.is_teacher %}false{% else %}true{% endif %})"></td>
             <td class="verified_cell hidden">{{user.email_verified}}</td>
           </tr>
