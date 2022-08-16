@@ -320,6 +320,7 @@ export function change_password_student(username: string, enter_password: string
 }
 
 export function show_doc_section(section_key: string) {
+  // Todo TB: We can improve this code as it is quite cumbersome (08-22)
   $(".section-button").each(function(){
        if ($(this).hasClass('blue-btn')) {
            $(this).removeClass("blue-btn");
@@ -337,8 +338,6 @@ export function show_doc_section(section_key: string) {
      $ ('.common-mistakes-section').hide ();
      $('#section-' + section_key).toggle();
    }
-   // Loop-index -1 doesn't exist -> automatically hide all "common mistakes" sections
-   show_common_mistakes("-1");
 }
 
 //https://stackoverflow.com/questions/7196212/how-to-create-dictionary-and-add-key-value-pairs-dynamically?rq=1
