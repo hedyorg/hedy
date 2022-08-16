@@ -17,13 +17,10 @@
                 {% endfor %}
             {% else %}
                 <p>{{ section.intro|commonmark }}</p>
-                <div class="flex flex-wrap gap-2 justify-center">
+                <div class="flex flex-col">
                     {% for level in section['levels'] %}
-                        <button class="green-btn p-4 common-mistakes-button" id="cm-button-{{loop.index}}" onclick="hedyApp.show_common_mistakes('{{loop.index}}')">Level {{ level.level }}</button>
-                    {% endfor %}
-                </div>
-                {% for level in section['levels'] %}
-                    <div class="common-mistakes-section hidden flex flex-col gap-4 mt-4" id="common_mistakes-{{loop.index}}">
+                        <h2 class="section-header" onclick="hedyApp.show_common_mistakes('{{loop.index}}')">Level {{ level.level }}</h2>
+                        <div class="common-mistakes-section hidden flex flex-col" id="common_mistakes-{{loop.index}}">
                         {% for mistake_section in level.sections %}
                             <div>
                                 <h2>{{ mistake_section.title }}</h2>
@@ -46,8 +43,9 @@
                                 {% endif %}
                             </div>
                         {% endfor %}
-                    </div>
-                {% endfor %}
+                        </div>
+                    {% endfor %}
+                </div>
             {% endif %}
             </div>
         {% endfor %}
