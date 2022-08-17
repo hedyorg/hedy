@@ -1543,6 +1543,7 @@ def get_user_messages():
 @requires_login
 def update_public_profile(user):
     body = request.json
+    print(body)
 
     # Validations
     if not isinstance(body, dict):
@@ -1569,14 +1570,16 @@ def update_public_profile(user):
     else:
         achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "go_live")
 
+    # Make a deepcopy to keep the body object intact and pass e2e tests
+    data = copy.deepcopy(body)
     if not current_profile.get('tags'):
-        body['tags'] = []
+        data['tags'] = []
         if is_teacher(user):
-            body['tags'].append('teacher')
+            data['tags'].append('teacher')
         if is_admin(user):
-            body['tags'].append('admin')
+            data['tags'].append('admin')
 
-    DATABASE.update_public_profile(user['username'], body)
+    DATABASE.update_public_profile(user['username'], data)
     if achievement:
         # Todo TB -> Check if we require message or success on front-end
         return {'message': gettext('public_profile_updated'), 'achievement': achievement}, 200
