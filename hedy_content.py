@@ -380,12 +380,10 @@ class Tutorials:
 
         self.debug_mode = not os.getenv('NO_DEBUG_MODE')
 
-        # TODO: Keep this commented to temporary cache locally as well to simplify debugging -> remove when PR ready
-        #if not self.debug_mode:
-            # We always create one with english keywords
-        self.data["en"] = self.cache_tutorials("en")
-        if language in ALL_KEYWORD_LANGUAGES.keys():
-            self.data[language] = self.cache_tutorials(language)
+        if not self.debug_mode:
+            self.data["en"] = self.cache_tutorials("en")
+            if language in ALL_KEYWORD_LANGUAGES.keys():
+                self.data[language] = self.cache_tutorials(language)
 
     def cache_tutorials(self, language):
         tutorial_data = {}
@@ -394,7 +392,6 @@ class Tutorials:
             for index, data in steps.items():
                 steps[index]['text'] = data['text'].format(**KEYWORDS.get(language))
             tutorial_data[level] = steps
-        print(tutorial_data)
         return tutorial_data
 
     def get_tutorial_for_level(self, level, keyword_lang="en"):
