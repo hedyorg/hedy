@@ -122,6 +122,7 @@ def forget_current_user():
 
 def is_admin(user):
     # Get the value from the environment, use literal_eval to convert from string list to an actual list
+    # If the value is still a string we are looking at one admin -> verify if the string is identical
     admin_users = os.getenv('ADMIN_USERS')
     admin_users = ast.literal_eval(admin_users)
     if isinstance(admin_users, str):
