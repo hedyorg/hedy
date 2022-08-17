@@ -1292,6 +1292,9 @@ def translate_keywords():
 # TODO TB: Think about changing this to sending all steps to the front-end at once
 @app.route('/get_tutorial_step/<level>/<step>', methods=['GET'])
 def get_tutorial_translation(level, step):
+    # Keep this structure temporary until we decide on a nice code / parse structure
+    if step == "code_snippet":
+        return jsonify({'code': gettext('tutorial_code_snippet')}), 200
     try:
         step = int(step)
     except ValueError:
