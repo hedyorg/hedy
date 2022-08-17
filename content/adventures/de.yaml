@@ -12,19 +12,19 @@ adventures:
                     Probiere den Code selbst mit der grünen Schaltfläche 'Code ausführen' unter dem linken Programmierfeld aus.
 
                     Du kannst Text auf dem Bildschirm ausgeben lassen indem du den Befehl `{print}` verwendest.
-                start_code: "print Hallo Welt!"
+                start_code: "{print} Hallo Welt!"
                 example_code: "```\n{print} Hallo!\n{print} Willkommen bei Hedy!\n```\n"
-                story_text_2: "Du kannst auch nach Eingaben fragen und sie dir zurückgeben lassen, mit dem Befehl `{echo}`.\n"
+                story_text_2: "Du kannst auch mit `{ask}` nach Eingaben fragen und sie dir mit dem Befehl `{echo}`zurückgeben lassen.\n"
                 example_code_2: "```\n{ask} Wie heißt du?\n{echo} Hallo\n```\n"
                 story_text_3: "Lass uns loslegen! Weißt du nicht was du programmieren sollst? In den nächsten Tabs warten Ideen für Programme auf dich.\n"
             2:
                 story_text: |
                     ## Variablen
                     In Level 2 lernen wir zwei neue Befehle: `{is}`und `{sleep}`.
-                    Du kannst ein Wort mit `is` benennen. Das nennt man eine Variable. In diesem Beispiel machen wir eine Variable die sich Name nennt, und eine Variable die sich Alter nennt. Du kannst das Wort Name irgendwo in deinem Code verwenden und es wird dann durch Hedy ersetzt, und zwar so:
+                    Du kannst ein Wort mit `{is}` benennen. Das nennt man eine Variable. In diesem Beispiel haben wir eine Variable name und eine Variable alter erstellt. Du kannst das Wort name irgendwo in deinem Code verwenden und es wird dann durch Hedy ersetzt, und zwar so:
 
-                    Deswegen benötigst du den Befehl `echo` nicht mehr!
-                start_code: "print Hallo Welt!"
+                    Deswegen benötigst du den Befehl `{echo}` nicht mehr!
+                start_code: "{print} Hallo Welt!"
                 example_code: "```\nName {is} Hedy\nAlter {is} 15\n{print} Name ist Alter Jahre alt\n```\n"
                 story_text_2: "`{print}` funktioniert genauso wie vorher, aber der Befehl `{ask}` hat sich verändert. Du brauchst jetzt auch für den Befehl `{ask}` eine Variable. Das sieht so aus:\n"
                 example_code_2: "```\nAntwort {is} {ask} Wie heißt du?\n{print} Hallo Antwort\n```\n"
@@ -33,20 +33,20 @@ adventures:
             3:
                 story_text: |
                     ## Erstelle eine Liste!
-                    In Level 3 kannst Du eine Liste erstellen. Du kannst den Computer etwas zufällig aus der Liste auswählen lassen. Du machst dies mit `at random` (es bedeutet zufällig und man spricht es "ät rän-dum" aus).
-                start_code: "print Hallo Welt!"
+                    In Level 3 kannst Du eine Liste erstellen. Du kannst den Computer etwas zufällig aus der Liste auswählen lassen. Du machst dies mit `{at} {random}` (es bedeutet wörtlich übersetzt "an zufällig" und man spricht es "ät rän-dum" aus).
+                start_code: "{print} Hallo Welt!"
                 example_code: "```\nTiere {is} Hund, Katze, Känguru\n{print} Tiere {at} {random}\n```\n"
                 story_text_2: Du kannst auch Elemente der Liste mit `{add}` hinzufügen und Elemente mit`{remove}` entfernen.
                 example_code_2: "```\nTiere {is} Hund, Katze, Känguru\n{add} Pinguin {to_list} Tiere\n{remove} Katze {from} Tiere\n{print} Tiere {at} {random}\n```\n"
             4:
-                start_code: "print 'Hallo Welt'"
+                start_code: "{print} 'Hallo Welt'"
                 story_text: |
                     ## 'Anführungszeichen'
-                    In Level 4 haben sich `print` und `ask` geändert.
+                    In Level 4 haben sich `{print}` und `{ask}` geändert.
 
-                    Du musst Text, den du genau so mit `print` ausgeben möchtest, in Anführungszeichen setzen.
+                    Du musst Text, den du genau so mit ausgeben möchtest, in Anführungszeichen setzen.
 
-                    Das ist nützlich, denn nun kannst du alle Wörter ausgeben, die du möchtest. Auch die Wörter, mit denen du etwas mit `is` gespeichert hast.
+                    Das ist nützlich, denn nun kannst du alle Wörter ausgeben, die du möchtest. Auch die Wörter, mit denen du etwas mit `{is}` gespeichert hast.
 
                     Die meisten Programmiersprachen verwenden beim `print`-Befehl Anführungszeichen, sodass wir dem echten Programmieren einen Schritt näher kommen!
                 example_code: "```\nprint 'Ab jetzt musst du Anführungszeichen verwenden!'\nAntwort is ask 'Was müssen wir ab jetzt verwenden?'\nprint 'Wir müssen ' Antwort ' verwenden.'\n```\n"
@@ -1570,7 +1570,7 @@ adventures:
                         print food ' will be your ' course
                     ```
 
-                story_text_2: |
+                story_text_2: |4
 
                     Natürlich kannst auch für mehrere Personen bestellen!
 
@@ -1633,7 +1633,7 @@ adventures:
                     ## Restaurant
                     In diesem Level kannst du Mathe verwenden um den Gesamtpreis einer Bestellung auszurechnen. Da macht dein virtuelles Restaurant realistischer.
 
-                example_code: |
+                example_code: |4
 
                     You can make a simple restaurant code, like this:
                     ```
@@ -1993,7 +1993,7 @@ adventures:
                     In the previous levels you've created your first fortune telling machine, but Hedy couldn't really predict anything, only echo.
                     In this level you can use a variable and the `at random` command to really let Hedy choose an answer for you. Check out this code for instance:
 
-                example_code: |
+                example_code: |4
 
                     In diesem Beispiel kann die Spielerin Hedy eine Ja-Nein-Frage stellen und Hedy wird eine zufällige Antwort für dich aussuchen.
                     ```
