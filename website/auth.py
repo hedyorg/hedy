@@ -124,6 +124,8 @@ def is_admin(user):
     # Get the value from the environment, use literal_eval to convert from string list to an actual list
     admin_users = os.getenv('ADMIN_USERS')
     admin_users = ast.literal_eval(admin_users)
+    if isinstance(admin_users, str):
+        return user.get('username') == admin_users or user.get('email') == admin_users
     return user.get('username') in admin_users or user.get('email') in admin_users
 
 
