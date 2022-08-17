@@ -51,7 +51,7 @@ function runButtonStep() {
 function tryRunButtonStep() {
   $.ajax({
       type: 'GET',
-      url: '/get_tutorial_step/code_snippet/',
+      url: '/get_tutorial_step/intro/code_snippet/',
       dataType: 'json'
     }).done(function(response: any) {
        theGlobalEditor?.setValue(response.code);
@@ -314,17 +314,19 @@ function relocatePopup(x: number, y: number) {
 }
 
 function tutorialPopup(step: number) {
-  let route = "/get_tutorial_step/"
+  console.log(step);
+  let route = "/get_tutorial_step/intro/"
   if (!student) {
-    route = "/get_teacher_tutorial_step/"
+    route = "/get_tutorial_step/teacher/"
   }
   $.ajax({
     type: 'GET',
     url: route + step.toString(),
     dataType: 'json'
   }).done(function(response: any) {
-      $('#tutorial_title').text(response.translation[0]);
-      $('#tutorial_text').text(response.translation[1]);
+      console.log(response);
+      $('#tutorial_title').text(response.title);
+      $('#tutorial_text').text(response.text);
       $('#tutorial-pop-up').fadeIn(800);
   }).fail(function(response) {
     modal.alert(response.responseText, 3000, true);
@@ -337,7 +339,7 @@ export function startTutorial() {
   $('#variables_container').hide();
   theGlobalEditor?.setValue("");
 
-  current_step = 0;
+  current_step = 1;
   student = true;
   tutorialPopup(current_step);
 }

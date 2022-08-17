@@ -1292,18 +1292,13 @@ def translate_keywords():
 # TODO TB: Think about changing this to sending all steps to the front-end at once
 @app.route('/get_tutorial_step/<level>/<step>', methods=['GET'])
 def get_tutorial_translation(level, step):
-    # We also retrieve the example code snippet as a "tutorial step" to reduce the need of new code
-    if step == "code_snippet":
-        return jsonify({'code': gettext('tutorial_code_snippet')}), 200
     try:
         step = int(step)
     except ValueError:
         return gettext('invalid_tutorial_step'), 400
 
-    # Todo: At this point we want to get the step from the cached YAML instead through gettext
-    translation = TUTORIALS[g.lang].get_tutorial_for_level_step(level, step, g.keyword_lang)
-    print(translation)
-    return jsonify({'translation': translation}), 200
+    data = TUTORIALS[g.lang].get_tutorial_for_level_step(level, step, g.keyword_lang)
+    return jsonify(data), 200
 
 
 @app.route('/store_parsons_order', methods=['POST'])
