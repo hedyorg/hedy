@@ -1,3 +1,4 @@
+import ast
 import collections
 import os
 from flask_babel import gettext
@@ -120,8 +121,10 @@ def forget_current_user():
 
 
 def is_admin(user):
-    admin_user = os.getenv('ADMIN_USER')
-    return user.get('username') == admin_user or user.get('email') == admin_user
+    # Get the value from the environment, use literal_eval to convert from string list to an actual list
+    admin_users = os.getenv('ADMIN_USERS')
+    admin_users = ast.literal_eval(admin_users)
+    return user.get('username') in admin_users or user.get('email') in admin_users
 
 
 def is_teacher(user):
