@@ -1301,6 +1301,8 @@ def get_tutorial_translation(level, step):
         return gettext('invalid_tutorial_step'), 400
 
     data = TUTORIALS[g.lang].get_tutorial_for_level_step(level, step, g.keyword_lang)
+    if not data:
+        data = {'title': gettext('tutorial_title_not_found'), 'text': gettext('tutorial_message_not_found')}
     return jsonify(data), 200
 
 
