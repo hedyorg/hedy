@@ -314,7 +314,6 @@ function relocatePopup(x: number, y: number) {
 }
 
 function tutorialPopup(step: number) {
-  console.log(step);
   let route = "/get_tutorial_step/intro/"
   if (!student) {
     route = "/get_tutorial_step/teacher/"
@@ -324,7 +323,6 @@ function tutorialPopup(step: number) {
     url: route + step.toString(),
     dataType: 'json'
   }).done(function(response: any) {
-      console.log(response);
       $('#tutorial_title').text(response.title);
       $('#tutorial_text').text(response.text);
       $('#tutorial-pop-up').fadeIn(800);
@@ -346,7 +344,7 @@ export function startTutorial() {
 
 export function startTeacherTutorial() {
   $('#tutorial-mask').show();
-  current_step = 0;
+  current_step = 1;
   student = false;
   tutorialPopup(current_step);
 }
