@@ -392,8 +392,9 @@ class Tutorials:
         for level in copy.deepcopy(self.file):
             steps = copy.deepcopy(self.file).get(level).get('steps')
             for index, data in steps.items():
-                print(index)
+                steps[index]['text'] = data['text'].format(**KEYWORDS.get(language))
             tutorial_data[level] = steps
+        print(tutorial_data)
         return tutorial_data
 
     def get_tutorial_for_level(self, level, keyword_lang="en"):
