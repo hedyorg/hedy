@@ -390,9 +390,10 @@ class Tutorials:
     def cache_tutorials(self, language):
         tutorial_data = {}
         for level in copy.deepcopy(self.file):
-            print(level)
-            temp = ""
-            tutorial_data[level] = temp
+            steps = copy.deepcopy(self.file).get(level).get('steps')
+            for index, data in steps.items():
+                print(index)
+            tutorial_data[level] = steps
         return tutorial_data
 
     def get_tutorial_for_level(self, level, keyword_lang="en"):
