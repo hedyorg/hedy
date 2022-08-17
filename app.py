@@ -1339,6 +1339,7 @@ def teacher_tutorial_steps(step):
     return translation
 
 
+# TODO TB: Think about changing this to sending all steps to the front-end at once
 @app.route('/get_tutorial_step/<step>', methods=['GET'])
 def get_tutorial_translation(step):
     # We also retrieve the example code snippet as a "tutorial step" to reduce the need of new code
@@ -1349,6 +1350,7 @@ def get_tutorial_translation(step):
     except ValueError:
         return gettext('invalid_tutorial_step'), 400
 
+    # Todo: At this point we want to get the step from the cached YAML instead through gettext
     translation = tutorial_steps(step)
     return jsonify({'translation': translation}), 200
 
