@@ -168,7 +168,6 @@ function endTutorial() {
 }
 
 function callNextStep() {
-  current_step += 1;
   if (current_step == 1) {
     codeEditorStep();
   } else if (current_step == 2) {
@@ -214,6 +213,7 @@ function callNextStep() {
   } else {
     location.replace("/hedy");
   }
+  current_step += 1;
 }
 
 function classStep() {
