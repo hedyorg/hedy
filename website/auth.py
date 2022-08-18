@@ -128,7 +128,8 @@ def is_admin(user):
         admin_users = ast.literal_eval(admin_users)
         if isinstance(admin_users, str):
             return user.get('username') == admin_users or user.get('email') == admin_users
-    return admin_users or user.get('username') in admin_users or user.get('email') in admin_users
+        return user.get('username') in admin_users or user.get('email') in admin_users
+    return False
 
 
 def is_teacher(user):
