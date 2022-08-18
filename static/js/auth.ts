@@ -68,6 +68,21 @@ export function destroy_public(confirmation: string) {
   });
 }
 
+export function request_teacher_account(username: string) {
+  $.ajax ({
+      type: 'POST',
+      url: '/auth/request_teacher',
+      data: JSON.stringify({
+        username: username
+      }),
+    }).done (function (response) {
+      modal.alert(response.message, 2000, false);
+      setTimeout (function () {location.reload ()}, 2000);
+    }).fail (function (response) {
+      modal.alert(response.responseText, 3000, true);
+  });
+}
+
 // *** User forms ***
 
 $('form#signup').submit(function(e) {
