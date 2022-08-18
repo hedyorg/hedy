@@ -1,4 +1,5 @@
 # coding=utf-8
+import ast
 import copy
 
 from website import auth, parsons
@@ -1581,12 +1582,23 @@ def public_user_page(username):
     return utils.error_page(error=404, ui_message=gettext('user_not_private'))
 
 
+def valid_invite_code(code):
+    if not code:
+        return False
+    code = ast.literal_eval(code)
+    if isinstance(code, str):
+        return code == os.getenv('TEACHER_INVITE_CODE')
+    if isinstance(code, list):
+        return code in os.getenv('TEACHER_INVITE_CODE')
+    return False
+
 @app.route('/invite/<code>', methods=['GET'])
 def teacher_invitation(code):
     user = current_user()
 
-    if os.getenv('TEACHER_INVITE_CODE') != code:
+    if not valid_invite_code(code):
         return utils.error_page(error=404, ui_message=gettext('invalid_teacher_invitation_code'))
+
     if not user['username']:
         return render_template('teacher-invitation.html')
 
