@@ -40,8 +40,8 @@ sections:
     -   title: Programme speichern
         text: "Because you are now logged in, you'll see the blue banner with My profile and My programs.\nThese tabs exist for you students too. In My programs you can find all the codes that have been saved.\n\nYou can save your projects easily by giving your project a name in the white bar and pressing the green button Save Code.\n\nLet the programming fun begin!\n"
     -   title: Bevorzugte Sprache einstellen
-        text: "When students create profile they are supposed to choose a 'preferred language'. Hedy will always be loaded in this selected language.\nChanging this language can always be done later on by navigation to 'My account' and 'My personal settings' again.\nFrom December 2021 on setting a preferred language is obligatory for each Hedy account.\nWhen your account or the accounts of your students have being created earlier than this date you will receive a message that a preferred language is missing.\nDon't worry! Navigate to 'My profile' and set a language in your profile settings.\nUntil you set a language Hedy will be shown in your browser language and, when this language is not supported, in English.\n\n**For non-English speakers**\nNot only can you change the language of the adventures to your own language. You can also choose which language the keywords (for example 'print' or 'ask') should be in.\nThis way you can teach your students to code with English keywords, but you can also let them program in their own laguage. For example Dutch students can use the command 'vraag' instead of 'ask'.\n"
-    -   title: Storing programs
+        text: "Wenn Schüler ein Konto erstellen, sollen sie eine 'bevorzugte Sprache' auswählen. Hedy wird immer in dieser Sprache geladen werden.\nDiese Sprache kann später geändert werden in dem man zu 'Mein Konto' und dann zu 'Meine persönlichen Einstellungen' navigiert.\nAb Dezember 2021 ist die Einstellung einer bevorzugten Sprache für jedes Hedy Konto obligatorisch.\nWenn dein Konto oder das Konto von Schülern früher als dieses Datum erstellt wurde, erhält das entsprechende Konto eine Nachricht, dass die bevorzugte Sprache fehlt.\nKeine Sorge! Navigiere zu 'Mein Konto' und stelle eine Sprache in den Profil-Einstellungen ein.\nBis eine Sprache eingestellt wurde, wird Hedy in der Browser Sprache angezeigt, sofern sie unterstützt wird, ansonsten auf Englisch.\n\n**Für Nicht-Englischsprachige**\nDu kannst nicht nur die Sprache der Abenteuer auf deine eigene Sprache festlegen. Auch die Schlüsselwörter (wie z.B. 'print' oder 'ask') können in der eigenen Sprache angezeigt werden.\nSo kannst du deinen Schülern programmieren mit englischen Schlüsselwörter beibringen, du kannst sie aber auch in ihrer eigenen Sprache programmieren lassen. Zum Beispiel können Niederländische Schüler den Befehl 'vraag' anstatt 'ask' benutzen.\n"
+    -   title: Programme Speichern
         text: "Because you are now logged in, you'll see the blue banner with My profile and My programs.\nThese tabs exist for your students too. In My programs you can find all the codes that you've saved.\n\nYou can save your projects easily by giving your project a name in the white bar and pressing the green button Save Code.\nYou (and your students) can also share programs. These programs will be posted on our explore page, for everybody to see and use.\nIf you want to unshare your program, go to 'My programs' and click 'Unshare'.\n"
 -   title: "Unterricht mit Hedy"
     key: "unterricht"
@@ -476,31 +476,31 @@ sections:
                     else print 'Acces denied!'
                 solution_text: |
                     Pick a different name for your variable.
-                solution_code: |-
+                solution_code: |
                     secret_password is ask 'What is the password'
                     if secret_password is password print 'Access granted!'
                     else print 'Access denied!'
     -   level: '6'
         sections:
-        -   title: Students struggle with quotation marks
+        -   title: Schüler kämpfen mit Anführungszeichen
             example:
-                error_text: "Some students struggle with adding quotattion marks or not. If you add quotation marks, the output screen will literally show '5+5'.\n"
+                error_text: "Einige Schüler haben Probleme damit, Anführungszeichen hinzuzufügen oder nicht. Wenn du Anführungszeichen hinzufügst, wird auf dem Ausgabebildschirm buchstäblich \"5+5\" angezeigt.\n"
                 error_code: "print '5 + 5'\n"
-                solution_text: "In this code the output screen will print '10'.\n"
+                solution_text: "In diesem Code wird auf dem Ausgabebildschirm '10' angezeigt.\n"
                 solution_code: "print 5 + 5\n"
-        -   title: Students struggle with the concept of doing maths with a variable
+        -   title: Schüler haben Schwierigkeiten mit dem Konzept der Mathematik mit einer Variablen
             example:
-                error_text: "Some students will find it hard to do maths with variables. Try to show them very simple examples, like:\n"
-                error_code: "age = ask 'How old are you?'\nprint 'Next year you will be ' age + 1\n"
-                solution_text: "Or take it a step further like this.\n"
-                solution_code: "price = 0\nprint 'Welcome to our burger restaurant'\nburger = ask 'Would you like a burger?'\nif burger = yes price = price + 10\ndrink = ask 'Would you like a drink?'\nif drink = yes price = price + 4\nprint 'That will be ' price ' euros please'\n"
+                error_text: "Einigen Schülern fällt es schwer, mit Variablen zu rechnen. Versuchen Sie, ihnen sehr einfache Beispiele zu zeigen, wie z. B.:\n"
+                error_code: "age = ask 'Wie alt bist du?'\nprint 'Nächstes Jahr bist du ' age + 1\n"
+                solution_text: "Oder gehen Sie noch einen Schritt weiter, etwa so.\n"
+                solution_code: "Preis = 0\nprint 'Willkommen in unserem Burger-Restaurant'\nburger = ask 'Möchten Sie einen Burger?\nif burger = ja preis = preis + 10\ndrink = Frage 'Möchten Sie ein Getränk?\nif Getränk = ja Preis = Preis + 4\nprint 'Das macht dann ' Preis ' Euro bitte'\n"
     -   level: '7'
         sections:
-        -   title: Students forget one of the word of the repeat command, or they forget the print command
+        -   title: Die Schüler vergessen ein Wort des Wiederholungsbefehls oder sie vergessen den Druckbefehl
             example:
-                error_text: "Make sure that the students know to use both the full repeat command and the print command.\n"
-                error_code: "repeat 3 times 'For he`s a jolly good fellow'\nrepeat 3 print 'Which nobody can deny!'\n"
-                solution_text: "This is the correct code:\n"
+                error_text: "Vergewissern Sie sich, dass die Schüler sowohl den vollständigen Wiederholungsbefehl als auch den Druckbefehl verwenden können.\n"
+                error_code: "repeat 3 times 'Denn er ist ein toller Kerl'\nrepeat 3 times 'Das kann niemand leugnen!'\n"
+                solution_text: "Dies ist der richtige Code:\n"
                 solution_code: "repeat 3 times print 'For he`s a jolly good fellow'\nrepeat 3 times print 'Which nobody can deny!'\n"
         -   title: Students try to repeat multiple lines
             example:
