@@ -728,13 +728,6 @@ def routes(app, database):
     @app.route('/auth/request_teacher', methods=['GET'])
     @requires_login
     def request_teacher_account(user):
-        body = request.json
-        # Validations
-        if not isinstance(body, dict):
-            return gettext('ajax_error'), 400
-        if not isinstance(body.get('username'), str):
-            return gettext('username_invalid'), 400
-
         account = DATABASE.user_by_username(user['username'])
         if account.get('is_teacher'):
             return gettext('already_teacher'), 400
