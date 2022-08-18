@@ -68,13 +68,10 @@ export function destroy_public(confirmation: string) {
   });
 }
 
-export function request_teacher_account(username: string) {
+export function request_teacher_account() {
   $.ajax ({
-      type: 'POST',
-      url: '/auth/request_teacher',
-      data: JSON.stringify({
-        username: username
-      }),
+      type: 'GET',
+      url: '/auth/request_teacher'
     }).done (function (response) {
       modal.alert(response.message, 2000, false);
       setTimeout (function () {location.reload ()}, 2000);

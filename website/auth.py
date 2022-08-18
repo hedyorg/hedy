@@ -725,7 +725,7 @@ def routes(app, database):
 
         return jsonify({'message': gettext('password_resetted')}), 200
 
-    @app.route('/auth/request_teacher', methods=['POST'])
+    @app.route('/auth/request_teacher', methods=['GET'])
     @requires_login
     def request_teacher_account(user):
         body = request.json
@@ -735,14 +735,15 @@ def routes(app, database):
         if not isinstance(body.get('username'), str):
             return gettext('username_invalid'), 400
 
-        account = DATABASE.user_by_username(body['username'])
+        account = DATABASE.user_by_username(user['username'])
         if account.get('is_teacher'):
             return gettext('already_teacher'), 400
         if account.get('teacher_request'):
             return gettext('already_teacher_request'), 400
 
-        update_is_teacher(body['username'], 1)
-        return jsonify({'message': gettext('teacher_account_success')}), 200
+        update_is_teacher(user['username'], 1)
+        return jsonify({'message': gettext('teacher_account_success')}), 2000
+
 
 
     # *** ADMIN ROUTES ***

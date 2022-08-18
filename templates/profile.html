@@ -165,7 +165,7 @@
         {% if not is_teacher and not user_data['teacher_request'] %}
           <h1 id="teacher_toggle" class="section-header" onclick="$ ('#request-teacher-body').toggle()">{{_('request_teacher')}}</h1>
             <div class="profile-section-body text-center" id="request-teacher-body">
-                <button class="blue-btn" onclick="hedyApp.request_teacher_account('{{username}}');">{{_('request_teacher_account')}}</button>
+                <button class="blue-btn" onclick="hedyApp.request_teacher_account();">{{_('request_teacher_account')}}</button>
             </div>
         {% endif %}
    </div>
