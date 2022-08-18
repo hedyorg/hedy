@@ -211,10 +211,10 @@ adventures:
 
                     In diesem Level kannst du außerdem einen neuen Befehl benutzen: `{elif}`. `{elif}` ist eine Abkürzung für {else} {if} und du brauchst ihn wenn du drei (oder Mehr!) Optionen machen willst.
                     Probier es mal aus!
-                example_code: |-
+                example_code: |
                     ```
                     Preise = ['1 Million Euro', 'ein Apfelkuchen', 'nichts']
-                    dein_Preis = Preise[random]
+                    dein_Preis = Preise[{random}]
                     {print} 'Du gewinnst ' dein_Preis
                     {if} dein_Preis == '1 Million Euro' :
                         {print} 'Juhuu! Du bist reich!'
@@ -232,28 +232,27 @@ adventures:
                     Wir sind bei richtigem Python Code angekommen! Das bedeutet dass wir ab jetzt rund Klammern mit den Befehlen {print} und {range} benutzen müssen.
 
                 story_text_2: |-
-                    If you want to print more than one item, you need to separate them by commas.
+                    Wenn du mehr als ein Objekt mit dem print-Befehl ausgeben möchtest, musst du sie mit einem Komma trennen.
 
                 example_code_2: |
                     ```
-                    temperature = 25
-                    {print}('It is ', temperature, 'degrees outside')
+                    temperatur = 25
+                    {print}('Draußen sind es ', temperature, 'Grad')
                     ```
 
                 story_text_3: |-
-                    ##  Input
-                    The final change we will need to make to get Python code is changing `{ask}` into `{input}`.
+                    ## Eingabe
+                    Die letzte Änderung, die wir vornehmen müssen, um Python-Code zu erhalten, ist die Änderung von `{ask}` in `{input}`.
 
                 example_code_3: |
                     ```
-                    {print}('My name is Hedy!')
-                    name = {input}('What is your name?')
-                    {print}('So your name is ', name)
+                    {print}('Mein Name ist Hedy!')
+                    name = {input}('Wie heißt du?')
+                    {print}('Dein Name ist also ', name)
                     ```
-                example_code: |-
+                example_code: |
                     ```
-                    Name = 'Hedy'
-                    {print}('Ich heiße ', Name)
+                    {print}('Ich heiße Hedy!')
                     ```
     story:
         name: "Geschichte"
@@ -1660,7 +1659,8 @@ adventures:
                     - ein Kindermenü hinzufügen?
                     - dir noch weitere Ideen ausdenken?
 
-                example_code_2: |
+                example_code_2: |4
+
                     In diesem Beispiel gibt es ein Drei-Gänge-Menü, was mehr Code erfordert sowie ein paar Zusätze in der Preisberechnung.
                     ```
                     {print} 'Willkommen in Hedys Restaurant'
