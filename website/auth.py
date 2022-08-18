@@ -735,7 +735,7 @@ def routes(app, database):
             return gettext('already_teacher_request'), 400
 
         DATABASE.update_user(user['username'], {'request_teacher': True})
-        return jsonify({'message': gettext('teacher_account_success')}), 2000
+        return jsonify({'message': gettext('teacher_account_success')}), 200
 
     # *** ADMIN ROUTES ***
 
