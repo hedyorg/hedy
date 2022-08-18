@@ -55,7 +55,7 @@ def routes(app, database):
             data = pick(user, *fields)
             data['email_verified'] = not bool(data['verification_pending'])
             data['is_teacher'] = bool(data['is_teacher'])
-            data['teacher_request'] = bool(data['teacher_request'])
+            data['teacher_request'] = True if data['teacher_request'] else None
             data['created'] = utils.timestamp_to_date(data['created'])
             data['last_login'] = utils.timestamp_to_date(data['last_login']) if data.get('last_login') else None
             if category == "language":
