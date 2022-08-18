@@ -47,15 +47,15 @@ def routes(app, database):
         fields = [
             'username', 'email', 'birth_year', 'country',
             'gender', 'created', 'last_login', 'verification_pending',
-            'is_teacher', 'program_count', 'prog_experience', 'experience_languages', 'language', 'keyword_language'
+            'is_teacher', 'program_count', 'prog_experience', 'teacher_request',
+            'experience_languages', 'language', 'keyword_language'
         ]
-
-        print(category)
 
         for user in users:
             data = pick(user, *fields)
             data['email_verified'] = not bool(data['verification_pending'])
             data['is_teacher'] = bool(data['is_teacher'])
+            data['teacher_request'] = bool(data['teacher_request'])
             data['created'] = utils.timestamp_to_date(data['created'])
             data['last_login'] = utils.timestamp_to_date(data['last_login']) if data.get('last_login') else None
             if category == "language":
