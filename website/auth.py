@@ -122,8 +122,12 @@ def forget_current_user():
 
 def is_admin(user):
     # Get the value from the environment, use literal_eval to convert from string list to an actual list
-    admin_users = os.getenv('ADMIN_USERS')
-    admin_users = ast.literal_eval(admin_users)
+    admin_users = []
+    if os.getenv('ADMIN_USER'):
+        admin_users.append(os.getenv('ADMIN_USER'))
+    if os.getenv('ADMIN_USERS'):
+        admin_users.extend(os.getenv('ADMIN_USERS').split(','))
+
     return user.get('username') in admin_users or user.get('email') in admin_users
 
 
