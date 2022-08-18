@@ -325,6 +325,13 @@ class TestsLevel2(HedyTester):
             max_level=self.max_turtle_level,
         )
 
+    def test_access_before_assign_not_allowed(self):
+        code = textwrap.dedent("""\
+            print the name program
+            name is Hedy""")
+        with self.assertRaises(hedy.exceptions.AccessBeforeAssign) as context:
+            result = hedy.transpile(code, self.level)
+
     def test_turn_with_string_var_gives_type_error(self):
         code = textwrap.dedent("""\
             direction is ten

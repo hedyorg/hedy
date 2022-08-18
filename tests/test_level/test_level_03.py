@@ -531,6 +531,14 @@ class TestsLevel3(HedyTester):
             expected=expected
         )
 
+    def test_acess_before_assign_with_random(self):
+        code = textwrap.dedent("""\
+        print colors at random
+        colors is green, red, blue""")
+
+        with self.assertRaises(hedy.exceptions.AccessBeforeAssign) as context:
+            result = hedy.transpile(code, self.level)
+
     def test_add_ask_to_list(self):
         code = textwrap.dedent("""\
         color is ask what is your favorite color?
