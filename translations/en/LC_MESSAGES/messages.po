@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-08-18 14:47+0200\n"
+"POT-Creation-Date: 2022-08-18 15:06+0200\n"
 "PO-Revision-Date: 2022-07-03 15:50+0000\n"
 "Last-Translator: Mark Giesen <markgiesen@outlook.com>\n"
 "Language: en\n"
@@ -42,7 +42,7 @@ msgstr "Hedy - My programs"
 #: app.py:702 app.py:712 app.py:716 app.py:731 app.py:1027 app.py:1552
 #: website/admin.py:17 website/admin.py:24 website/admin.py:92
 #: website/admin.py:111 website/admin.py:130 website/admin.py:137
-#: website/admin.py:145 website/auth.py:734 website/auth.py:761
+#: website/admin.py:145 website/auth.py:746 website/auth.py:773
 #: website/programs.py:210 website/statistics.py:100
 msgid "unauthorized"
 msgstr "You don't have access rights for this page"
@@ -144,7 +144,7 @@ msgstr "You have received an invitation to join class"
 
 #: app.py:1493 website/auth.py:288 website/auth.py:343 website/auth.py:476
 #: website/auth.py:501 website/auth.py:534 website/auth.py:648
-#: website/auth.py:690 website/auth.py:740 website/auth.py:767
+#: website/auth.py:690 website/auth.py:752 website/auth.py:779
 #: website/quiz.py:43 website/quiz.py:69 website/teacher.py:88
 #: website/teacher.py:123 website/teacher.py:167 website/teacher.py:252
 #: website/teacher.py:308 website/teacher.py:355 website/teacher.py:396
@@ -1672,7 +1672,7 @@ msgstr "Hedy - Administrator page"
 #: website/auth.py:187 website/auth.py:201 website/auth.py:290
 #: website/auth.py:425 website/auth.py:430 website/auth.py:478
 #: website/auth.py:650 website/auth.py:659 website/auth.py:692
-#: website/auth.py:742 website/auth.py:749 website/auth.py:769
+#: website/auth.py:754 website/auth.py:761 website/auth.py:781
 #: website/teacher.py:357 website/teacher.py:398
 msgid "username_invalid"
 msgstr "Your username is invalid."
@@ -1695,13 +1695,13 @@ msgstr "Your password is invalid."
 msgid "passwords_six"
 msgstr "All passwords need to be six characters or longer."
 
-#: website/auth.py:207 website/auth.py:545 website/auth.py:771
-#: website/auth.py:776
+#: website/auth.py:207 website/auth.py:545 website/auth.py:783
+#: website/auth.py:788
 msgid "email_invalid"
 msgstr "Please enter a valid email."
 
 #: website/auth.py:262 website/auth.py:525 website/auth.py:681
-#: website/auth.py:724 website/auth.py:793
+#: website/auth.py:724 website/auth.py:805
 msgid "mail_error_change_processed"
 msgstr ""
 "Something went wrong when sending a validation mail, the changes are "
@@ -1800,31 +1800,43 @@ msgstr ""
 "Your password has been successfully reset. You are being redirected to "
 "the login page."
 
-#: website/auth.py:744
+#: website/auth.py:733
+msgid "already_teacher"
+msgstr "You already have a teacher account."
+
+#: website/auth.py:735
+msgid "already_teacher_request"
+msgstr "You already have a pending teacher request."
+
+#: website/auth.py:738
+msgid "teacher_account_success"
+msgstr "You successfully requested a teacher account."
+
+#: website/auth.py:756
 msgid "teacher_invalid"
 msgstr "Your teacher value is invalid."
 
-#: website/auth.py:835
+#: website/auth.py:847
 msgid "mail_welcome_verify_body"
 msgstr ""
 "Your Hedy account has been created successfully. Welcome!\n"
 "Please click on this link to verify your email address: {link}"
 
-#: website/auth.py:837
+#: website/auth.py:849
 msgid "mail_change_password_body"
 msgstr ""
 "Your Hedy password has been changed. If you did this, all is good.\n"
 "If you didn't change your password, please contact us immediately by "
 "replying to this email."
 
-#: website/auth.py:839
+#: website/auth.py:851
 msgid "mail_recover_password_body"
 msgstr ""
 "By clicking on this link, you can set a new Hedy password. This link is "
 "valid for <b>4</b> hours.\n"
 "If you haven't required a password reset, please ignore this email: {link}"
 
-#: website/auth.py:841
+#: website/auth.py:853
 msgid "mail_reset_password_body"
 msgstr ""
 "Your Hedy password has been reset to a new one. If you did this, all is "
@@ -1832,7 +1844,7 @@ msgstr ""
 "If you didn't change your password, please contact us immediately by "
 "replying to this email."
 
-#: website/auth.py:843
+#: website/auth.py:855
 msgid "mail_welcome_teacher_body"
 msgstr ""
 "<strong>Welcome!</strong>\n"
@@ -1859,45 +1871,45 @@ msgstr ""
 "\n"
 "Keep programming!"
 
-#: website/auth.py:849
+#: website/auth.py:861
 msgid "mail_welcome_verify_subject"
 msgstr "Welcome to Hedy"
 
-#: website/auth.py:851
+#: website/auth.py:863
 msgid "mail_change_password_subject"
 msgstr "Your Hedy password has been changed"
 
-#: website/auth.py:853
+#: website/auth.py:865
 msgid "mail_recover_password_subject"
 msgstr "Request a password reset."
 
-#: website/auth.py:855
+#: website/auth.py:867
 msgid "mail_reset_password_subject"
 msgstr "Your Hedy password has been reset"
 
-#: website/auth.py:857
+#: website/auth.py:869
 msgid "mail_welcome_teacher_subject"
 msgstr "Your Hedy teacher account is ready"
 
-#: website/auth.py:861
+#: website/auth.py:873
 msgid "user"
 msgstr "user"
 
-#: website/auth.py:866
+#: website/auth.py:878
 msgid "mail_hello"
 msgstr "Hi {username}!"
 
-#: website/auth.py:868
+#: website/auth.py:880
 msgid "mail_goodbye"
 msgstr ""
 "Thank you!\n"
 "The Hedy team"
 
-#: website/auth.py:876
+#: website/auth.py:888
 msgid "copy_mail_link"
 msgstr "Please copy and paste this link into a new tab:"
 
-#: website/auth.py:877
+#: website/auth.py:889
 msgid "link"
 msgstr "Link"
 

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-18 14:47+0200\n"
+"POT-Creation-Date: 2022-08-18 15:06+0200\n"
 "PO-Revision-Date: 2022-08-10 08:50+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language: ar\n"
@@ -39,7 +39,7 @@ msgstr "هيدي -برامجي"
 #: app.py:702 app.py:712 app.py:716 app.py:731 app.py:1027 app.py:1552
 #: website/admin.py:17 website/admin.py:24 website/admin.py:92
 #: website/admin.py:111 website/admin.py:130 website/admin.py:137
-#: website/admin.py:145 website/auth.py:734 website/auth.py:761
+#: website/admin.py:145 website/auth.py:746 website/auth.py:773
 #: website/programs.py:210 website/statistics.py:100
 msgid "unauthorized"
 msgstr "ليس لديك الصلاحيات اللازمة للوصول إلى هذه الصفحة"
@@ -142,7 +142,7 @@ msgstr "You have received an invitation to join class"
 
 #: app.py:1493 website/auth.py:288 website/auth.py:343 website/auth.py:476
 #: website/auth.py:501 website/auth.py:534 website/auth.py:648
-#: website/auth.py:690 website/auth.py:740 website/auth.py:767
+#: website/auth.py:690 website/auth.py:752 website/auth.py:779
 #: website/quiz.py:43 website/quiz.py:69 website/teacher.py:88
 #: website/teacher.py:123 website/teacher.py:167 website/teacher.py:252
 #: website/teacher.py:308 website/teacher.py:355 website/teacher.py:396
@@ -1705,7 +1705,7 @@ msgstr "هيدي - صفحة الإدارة"
 #: website/auth.py:187 website/auth.py:201 website/auth.py:290
 #: website/auth.py:425 website/auth.py:430 website/auth.py:478
 #: website/auth.py:650 website/auth.py:659 website/auth.py:692
-#: website/auth.py:742 website/auth.py:749 website/auth.py:769
+#: website/auth.py:754 website/auth.py:761 website/auth.py:781
 #: website/teacher.py:357 website/teacher.py:398
 msgid "username_invalid"
 msgstr "اسم المستخدم الخاص بك غير صالح."
@@ -1728,13 +1728,13 @@ msgstr "كلمة المرور الخاصة بك غير صالحة."
 msgid "passwords_six"
 msgstr "كلمة المرور يجب أن تتكون من ستة أحرف أو أكثر."
 
-#: website/auth.py:207 website/auth.py:545 website/auth.py:771
-#: website/auth.py:776
+#: website/auth.py:207 website/auth.py:545 website/auth.py:783
+#: website/auth.py:788
 msgid "email_invalid"
 msgstr "الرجاء ادخال بريد الكتروني صحيح."
 
 #: website/auth.py:262 website/auth.py:525 website/auth.py:681
-#: website/auth.py:724 website/auth.py:793
+#: website/auth.py:724 website/auth.py:805
 #, fuzzy
 msgid "mail_error_change_processed"
 msgstr ""
@@ -1834,17 +1834,29 @@ msgstr ""
 "تم إعادة ضبط كلمة المرور الخاصة بك بنجاح، سيتم إعادة تحويلك إلى صفحة "
 "تسجيل الدخول."
 
-#: website/auth.py:744
+#: website/auth.py:733
+msgid "already_teacher"
+msgstr ""
+
+#: website/auth.py:735
+msgid "already_teacher_request"
+msgstr ""
+
+#: website/auth.py:738
+msgid "teacher_account_success"
+msgstr ""
+
+#: website/auth.py:756
 msgid "teacher_invalid"
 msgstr "قيمة المعلم الخاصة بك غير صالحة."
 
-#: website/auth.py:835
+#: website/auth.py:847
 msgid "mail_welcome_verify_body"
 msgstr ""
 "تم انشاء حساب هيدي الخاص بك بنجاح. أهلاً بك!\n"
 "الرجاء الضغط على هذا الرابط للتحقق من بريدك الإلكتروني: {link}"
 
-#: website/auth.py:837
+#: website/auth.py:849
 msgid "mail_change_password_body"
 msgstr ""
 "تم تغيير كلمة مرور هيدي الخاصة بك. إذا كنت أنت من قام/طلب هذا ، فكل شيء "
@@ -1852,7 +1864,7 @@ msgstr ""
 "إذا لم تقم بطلب/بفعل تغيير كلمة المرور الخاصة بك ، فيرجى الاتصال بنا على "
 "الفور من خلال الرد على هذا البريد الإلكتروني."
 
-#: website/auth.py:839
+#: website/auth.py:851
 msgid "mail_recover_password_body"
 msgstr ""
 "من خلال الضغط على هذا الرابط ، يمكنك ضبط كلمة مرور جديدة لـهيدي. هذا "
@@ -1860,7 +1872,7 @@ msgstr ""
 "إذا لم تطلب إعادة ضبط كلمة المرور ، فيرجى تجاهل هذا البريد الإلكتروني: "
 "{link}"
 
-#: website/auth.py:841
+#: website/auth.py:853
 msgid "mail_reset_password_body"
 msgstr ""
 "تمت إعادة ضبط كلمة مرور هيدي الخاصة بك إلى كلمة مرور جديدة. إذا كنت أنت "
@@ -1868,7 +1880,7 @@ msgstr ""
 "إذا لم تقم بطلب/بفعل تغيير كلمة المرور الخاصة بك ، فيرجى الاتصال بنا على "
 "الفور من خلال الرد على هذا البريد الإلكتروني."
 
-#: website/auth.py:843
+#: website/auth.py:855
 msgid "mail_welcome_teacher_body"
 msgstr ""
 "<strong>مرحبًا!</strong>\n"
@@ -1894,45 +1906,45 @@ msgstr ""
 "\n"
 "استمر في البرمجة!"
 
-#: website/auth.py:849
+#: website/auth.py:861
 msgid "mail_welcome_verify_subject"
 msgstr "مرحباً بك في هيدي"
 
-#: website/auth.py:851
+#: website/auth.py:863
 msgid "mail_change_password_subject"
 msgstr "تم تغيير كلمة مرور هيدي الخاصة بك"
 
-#: website/auth.py:853
+#: website/auth.py:865
 msgid "mail_recover_password_subject"
 msgstr "طلب إعادة ضبط كلمة المرور."
 
-#: website/auth.py:855
+#: website/auth.py:867
 msgid "mail_reset_password_subject"
 msgstr "تم إعادة ضبط كلمة مرور هيدي الخاصة بك"
 
-#: website/auth.py:857
+#: website/auth.py:869
 msgid "mail_welcome_teacher_subject"
 msgstr "حساب هيدي الخاص بك كمعلم جاهز"
 
-#: website/auth.py:861
+#: website/auth.py:873
 msgid "user"
 msgstr "مستخدم"
 
-#: website/auth.py:866
+#: website/auth.py:878
 msgid "mail_hello"
 msgstr "مرحباً {username}!"
 
-#: website/auth.py:868
+#: website/auth.py:880
 msgid "mail_goodbye"
 msgstr ""
 "شكراً لك!\n"
 "فريق هيدي"
 
-#: website/auth.py:876
+#: website/auth.py:888
 msgid "copy_mail_link"
 msgstr "الرجاء نسخ هذا الرابط ولصقه في تبويبة جديدة:"
 
-#: website/auth.py:877
+#: website/auth.py:889
 msgid "link"
 msgstr "الرابط"
 

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-18 14:47+0200\n"
+"POT-Creation-Date: 2022-08-18 15:06+0200\n"
 "PO-Revision-Date: 2022-08-10 08:50+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language: nb_NO\n"
@@ -38,7 +38,7 @@ msgstr "Hedy - Mine programmer"
 #: app.py:702 app.py:712 app.py:716 app.py:731 app.py:1027 app.py:1552
 #: website/admin.py:17 website/admin.py:24 website/admin.py:92
 #: website/admin.py:111 website/admin.py:130 website/admin.py:137
-#: website/admin.py:145 website/auth.py:734 website/auth.py:761
+#: website/admin.py:145 website/auth.py:746 website/auth.py:773
 #: website/programs.py:210 website/statistics.py:100
 msgid "unauthorized"
 msgstr "Du har ikke rettigheter til å se denne siden"
@@ -140,7 +140,7 @@ msgstr "Du har mottatt en invitasjon til å bli med i en klasse"
 
 #: app.py:1493 website/auth.py:288 website/auth.py:343 website/auth.py:476
 #: website/auth.py:501 website/auth.py:534 website/auth.py:648
-#: website/auth.py:690 website/auth.py:740 website/auth.py:767
+#: website/auth.py:690 website/auth.py:752 website/auth.py:779
 #: website/quiz.py:43 website/quiz.py:69 website/teacher.py:88
 #: website/teacher.py:123 website/teacher.py:167 website/teacher.py:252
 #: website/teacher.py:308 website/teacher.py:355 website/teacher.py:396
@@ -1744,7 +1744,7 @@ msgstr "Hedy - Administrator side"
 #: website/auth.py:187 website/auth.py:201 website/auth.py:290
 #: website/auth.py:425 website/auth.py:430 website/auth.py:478
 #: website/auth.py:650 website/auth.py:659 website/auth.py:692
-#: website/auth.py:742 website/auth.py:749 website/auth.py:769
+#: website/auth.py:754 website/auth.py:761 website/auth.py:781
 #: website/teacher.py:357 website/teacher.py:398
 msgid "username_invalid"
 msgstr "Ditt brukernavn er ugylidig."
@@ -1767,13 +1767,13 @@ msgstr "Passordet ditt er ugyldig."
 msgid "passwords_six"
 msgstr "Alle passord må være *minst* seks tegn langt."
 
-#: website/auth.py:207 website/auth.py:545 website/auth.py:771
-#: website/auth.py:776
+#: website/auth.py:207 website/auth.py:545 website/auth.py:783
+#: website/auth.py:788
 msgid "email_invalid"
 msgstr "Vennligst fyll inn en gylid epost."
 
 #: website/auth.py:262 website/auth.py:525 website/auth.py:681
-#: website/auth.py:724 website/auth.py:793
+#: website/auth.py:724 website/auth.py:805
 #, fuzzy
 msgid "mail_error_change_processed"
 msgstr ""
@@ -1871,33 +1871,45 @@ msgstr ""
 msgid "password_resetted"
 msgstr "Passordet har blitt tilbakestilt. Du blir nå sendt til logg-inn siden."
 
-#: website/auth.py:744
+#: website/auth.py:733
+msgid "already_teacher"
+msgstr ""
+
+#: website/auth.py:735
+msgid "already_teacher_request"
+msgstr ""
+
+#: website/auth.py:738
+msgid "teacher_account_success"
+msgstr ""
+
+#: website/auth.py:756
 msgid "teacher_invalid"
 msgstr "Lærer-verdien din er ugyldig."
 
-#: website/auth.py:835
+#: website/auth.py:847
 #, fuzzy
 msgid "mail_welcome_verify_body"
 msgstr ""
 "Your Hedy account has been created successfully. Welcome!\n"
 "Please click on this link to verify your email address: {link}"
 
-#: website/auth.py:837
+#: website/auth.py:849
 #, fuzzy
 msgid "mail_change_password_body"
 msgstr "Endre passord"
 
-#: website/auth.py:839
+#: website/auth.py:851
 #, fuzzy
 msgid "mail_recover_password_body"
 msgstr "Be om at passordet tilbakestilles"
 
-#: website/auth.py:841
+#: website/auth.py:853
 #, fuzzy
 msgid "mail_reset_password_body"
 msgstr "Tilbakestill passord"
 
-#: website/auth.py:843
+#: website/auth.py:855
 #, fuzzy
 msgid "mail_welcome_teacher_body"
 msgstr ""
@@ -1921,54 +1933,54 @@ msgstr ""
 "email</a>.\n"
 "Keep programming!"
 
-#: website/auth.py:849
+#: website/auth.py:861
 #, fuzzy
 msgid "mail_welcome_verify_subject"
 msgstr "Welcome to Hedy"
 
-#: website/auth.py:851
+#: website/auth.py:863
 #, fuzzy
 msgid "mail_change_password_subject"
 msgstr "Endre passord"
 
-#: website/auth.py:853
+#: website/auth.py:865
 #, fuzzy
 msgid "mail_recover_password_subject"
 msgstr "Be om at passordet tilbakestilles"
 
-#: website/auth.py:855
+#: website/auth.py:867
 #, fuzzy
 msgid "mail_reset_password_subject"
 msgstr "Tilbakestill passord"
 
-#: website/auth.py:857
+#: website/auth.py:869
 #, fuzzy
 msgid "mail_welcome_teacher_subject"
 msgstr "Your Hedy teacher account is ready"
 
-#: website/auth.py:861
+#: website/auth.py:873
 #, fuzzy
 msgid "user"
 msgstr "Brukernavn"
 
-#: website/auth.py:866
+#: website/auth.py:878
 #, fuzzy
 msgid "mail_hello"
 msgstr "Hi {username}!"
 
-#: website/auth.py:868
+#: website/auth.py:880
 #, fuzzy
 msgid "mail_goodbye"
 msgstr ""
 "Thank you!\n"
 "The Hedy team"
 
-#: website/auth.py:876
+#: website/auth.py:888
 #, fuzzy
 msgid "copy_mail_link"
 msgstr "Please copy and paste this link into a new tab:"
 
-#: website/auth.py:877
+#: website/auth.py:889
 #, fuzzy
 msgid "link"
 msgstr "Logg inn"
