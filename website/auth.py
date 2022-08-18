@@ -133,7 +133,7 @@ def update_is_teacher(user, is_teacher_value=1):
     user_is_teacher = is_teacher(user)
     user_becomes_teacher = is_teacher_value and not user_is_teacher
 
-    DATABASE.update_user(user['username'], {'is_teacher': is_teacher_value})
+    DATABASE.update_user(user['username'], {'is_teacher': is_teacher_value, 'teacher_request': None})
 
     if user_becomes_teacher and not is_testing_request(request):
         try:
