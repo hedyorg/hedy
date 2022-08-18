@@ -133,7 +133,7 @@ def update_is_teacher(user, is_teacher_value=1):
     user_is_teacher = is_teacher(user)
     user_becomes_teacher = is_teacher_value and not user_is_teacher
 
-    DATABASE.update_user(user['username'], {'is_teacher': is_teacher_value})
+    DATABASE.update_user(user['username'], {'is_teacher': is_teacher_value, 'teacher_request': None})
 
     if user_becomes_teacher and not is_testing_request(request):
         try:
@@ -237,6 +237,7 @@ def store_new_account(account, email):
         'language': account['language'],
         'keyword_language': account['keyword_language'],
         'created': timems(),
+        'teacher_request': True if account.get('is_teacher') else None,
         'verification_pending': hashed_token,
         'last_login': timems()
     }
@@ -397,10 +398,6 @@ def routes(app, database):
                 send_email(config['email']['sender'], 'Subscription to Hedy newsletter on signup', user['email'],
                            '<p>' + user['email'] + '</p>')
 
-        # If someone wants to be a Teacher -> sent a mail to manually set it
-        if not is_testing_request(request) and 'is_teacher' in body and body['is_teacher'] is True:
-            send_email(config['email']['sender'], 'Request for teacher\'s interface on signup', user['email'],
-                       '<p>' + user['email'] + '</p>')
 
         # If someone agrees to the third party contacts -> sent a mail to manually write down
         if not is_testing_request(request) and 'agree_third_party' in body and body['agree_third_party'] is True:
