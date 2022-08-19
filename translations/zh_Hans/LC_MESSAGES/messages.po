@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-17 15:16+0200\n"
+"POT-Creation-Date: 2022-08-19 16:02+0200\n"
 "PO-Revision-Date: 2022-08-10 08:50+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language: zh_Hans\n"
@@ -38,7 +38,7 @@ msgstr "海迪 - 我的程序"
 #: app.py:702 app.py:712 app.py:716 app.py:731 app.py:1027 app.py:1552
 #: website/admin.py:17 website/admin.py:24 website/admin.py:92
 #: website/admin.py:111 website/admin.py:130 website/admin.py:137
-#: website/admin.py:145 website/auth.py:737 website/auth.py:764
+#: website/admin.py:145 website/auth.py:753 website/auth.py:780
 #: website/programs.py:210 website/statistics.py:100
 msgid "unauthorized"
 msgstr "你没有此页面的访问权限"
@@ -142,9 +142,9 @@ msgstr "无法找到该页面！"
 msgid "tutorial_message_not_found"
 msgstr "You have received an invitation to join class"
 
-#: app.py:1493 website/auth.py:287 website/auth.py:342 website/auth.py:479
-#: website/auth.py:504 website/auth.py:537 website/auth.py:651
-#: website/auth.py:693 website/auth.py:743 website/auth.py:770
+#: app.py:1493 website/auth.py:295 website/auth.py:350 website/auth.py:483
+#: website/auth.py:508 website/auth.py:541 website/auth.py:655
+#: website/auth.py:697 website/auth.py:759 website/auth.py:786
 #: website/quiz.py:43 website/quiz.py:69 website/teacher.py:88
 #: website/teacher.py:123 website/teacher.py:167 website/teacher.py:252
 #: website/teacher.py:308 website/teacher.py:355 website/teacher.py:396
@@ -178,15 +178,15 @@ msgstr "此用户不存在或没有公开个人资料"
 msgid "invalid_teacher_invitation_code"
 msgstr "教师邀请码无效。想要成为一名教师，请联系 hello@hedy.org。"
 
-#: utils.py:292
+#: utils.py:303
 msgid "default_404"
 msgstr "我们无法找到该页面..."
 
-#: utils.py:294
+#: utils.py:305
 msgid "default_403"
 msgstr "看起来您未获得授权..."
 
-#: utils.py:296
+#: utils.py:307
 msgid "default_500"
 msgstr "出问题了..."
 
@@ -1539,7 +1539,7 @@ msgstr "English"
 msgid "login_long"
 msgstr "Log in to your account"
 
-#: templates/login.html:21 website/auth.py:300
+#: templates/login.html:21 website/auth.py:308
 #, fuzzy
 msgid "no_account"
 msgstr "No account?"
@@ -1733,6 +1733,15 @@ msgstr "New password"
 msgid "repeat_new_password"
 msgstr "Repeat new password"
 
+#: templates/profile.html:166 templates/signup.html:123
+#, fuzzy
+msgid "request_teacher"
+msgstr "Would you like to apply for a teacher's account?"
+
+#: templates/profile.html:168
+msgid "request_teacher_account"
+msgstr ""
+
 #: templates/programs.html:7
 #, fuzzy
 msgid "recent"
@@ -1924,11 +1933,6 @@ msgstr "Another block language"
 msgid "other_text"
 msgstr "Another text language"
 
-#: templates/signup.html:123
-#, fuzzy
-msgid "request_teacher"
-msgstr "Would you like to apply for a teacher's account?"
-
 #: templates/signup.html:127
 #, fuzzy
 msgid "subscribe_newsletter"
@@ -1980,178 +1984,190 @@ msgstr "Achieved by {percentage}% of the users"
 msgid "title_admin"
 msgstr "Hedy - Administrator page"
 
-#: website/auth.py:187 website/auth.py:201 website/auth.py:289
-#: website/auth.py:428 website/auth.py:433 website/auth.py:481
-#: website/auth.py:653 website/auth.py:662 website/auth.py:695
-#: website/auth.py:745 website/auth.py:752 website/auth.py:772
+#: website/auth.py:194 website/auth.py:208 website/auth.py:297
+#: website/auth.py:432 website/auth.py:437 website/auth.py:485
+#: website/auth.py:657 website/auth.py:666 website/auth.py:699
+#: website/auth.py:761 website/auth.py:768 website/auth.py:788
 #: website/teacher.py:357 website/teacher.py:398
 #, fuzzy
 msgid "username_invalid"
 msgstr "Your username is invalid."
 
-#: website/auth.py:189 website/auth.py:203
+#: website/auth.py:196 website/auth.py:210
 #, fuzzy
 msgid "username_special"
 msgstr "Username cannot contain `:` or `@`."
 
-#: website/auth.py:191 website/auth.py:205
+#: website/auth.py:198 website/auth.py:212
 #, fuzzy
 msgid "username_three"
 msgstr "Username must contain at least three characters."
 
-#: website/auth.py:193 website/auth.py:209 website/auth.py:291
-#: website/auth.py:483 website/auth.py:506 website/auth.py:518
-#: website/auth.py:699
+#: website/auth.py:200 website/auth.py:216 website/auth.py:299
+#: website/auth.py:487 website/auth.py:510 website/auth.py:522
+#: website/auth.py:703
 #, fuzzy
 msgid "password_invalid"
 msgstr "Your password is invalid."
 
-#: website/auth.py:195 website/auth.py:211
+#: website/auth.py:202 website/auth.py:218
 #, fuzzy
 msgid "passwords_six"
 msgstr "All passwords need to be six characters or longer."
 
-#: website/auth.py:207 website/auth.py:548 website/auth.py:774
-#: website/auth.py:779
+#: website/auth.py:214 website/auth.py:552 website/auth.py:790
+#: website/auth.py:795
 #, fuzzy
 msgid "email_invalid"
 msgstr "Please enter a valid email."
 
-#: website/auth.py:261 website/auth.py:528 website/auth.py:684
-#: website/auth.py:727 website/auth.py:796
+#: website/auth.py:269 website/auth.py:532 website/auth.py:688
+#: website/auth.py:731 website/auth.py:812
 #, fuzzy
 msgid "mail_error_change_processed"
 msgstr ""
 "Something went wrong when sending a validation mail, the changes are "
 "still correctly processed."
 
-#: website/auth.py:300
+#: website/auth.py:308
 #, fuzzy
 msgid "invalid_username_password"
 msgstr "Invalid username/password."
 
-#: website/auth.py:351 website/auth.py:508 website/auth.py:512
-#: website/auth.py:703
+#: website/auth.py:359 website/auth.py:512 website/auth.py:516
+#: website/auth.py:707
 #, fuzzy
 msgid "repeat_match_password"
 msgstr "The repeated password does not match."
 
-#: website/auth.py:353 website/auth.py:539
+#: website/auth.py:361 website/auth.py:543
 #, fuzzy
 msgid "language_invalid"
 msgstr "Please select a valid language."
 
-#: website/auth.py:355
+#: website/auth.py:363
 #, fuzzy
 msgid "agree_invalid"
 msgstr "You have to agree with the privacy terms."
 
-#: website/auth.py:357 website/auth.py:542
+#: website/auth.py:365 website/auth.py:546
 #, fuzzy
 msgid "keyword_language_invalid"
 msgstr ""
 "Please select a valid keyword language (select English or your own "
 "language)."
 
-#: website/auth.py:365 website/auth.py:367 website/auth.py:556
-#: website/auth.py:558
+#: website/auth.py:373 website/auth.py:375 website/auth.py:560
+#: website/auth.py:562
 #, fuzzy
 msgid "year_invalid"
 msgstr "Please enter a year between 1900 and {current_year}."
 
-#: website/auth.py:370 website/auth.py:561
+#: website/auth.py:378 website/auth.py:565
 #, fuzzy
 msgid "gender_invalid"
 msgstr "Please select a valid gender, choose (Female, Male, Other)."
 
-#: website/auth.py:373 website/auth.py:564
+#: website/auth.py:381 website/auth.py:568
 #, fuzzy
 msgid "country_invalid"
 msgstr "Please select a valid country."
 
-#: website/auth.py:375 website/auth.py:378
+#: website/auth.py:383 website/auth.py:386
 #, fuzzy
 msgid "experience_invalid"
 msgstr "Please select a valid experience, choose (Yes, No)."
 
-#: website/auth.py:381
+#: website/auth.py:389
 #, fuzzy
 msgid "programming_invalid"
 msgstr "Please select a valid programming language."
 
-#: website/auth.py:384
+#: website/auth.py:392
 #, fuzzy
 msgid "exists_username"
 msgstr "That username is already in use."
 
-#: website/auth.py:386 website/auth.py:572
+#: website/auth.py:394 website/auth.py:576
 #, fuzzy
 msgid "exists_email"
 msgstr "That email is already in use."
 
-#: website/auth.py:426 website/auth.py:441 website/auth.py:697
-#: website/auth.py:707
+#: website/auth.py:430 website/auth.py:445 website/auth.py:701
+#: website/auth.py:711
 #, fuzzy
 msgid "token_invalid"
 msgstr "Your token is invalid."
 
-#: website/auth.py:485 website/auth.py:510 website/auth.py:701
+#: website/auth.py:489 website/auth.py:514 website/auth.py:705
 #, fuzzy
 msgid "password_six"
 msgstr "Your password must contain at least six characters."
 
-#: website/auth.py:488 website/auth.py:491
+#: website/auth.py:492 website/auth.py:495
 #, fuzzy
 msgid "password_change_not_allowed"
 msgstr "You're not allowed to change the password of this user."
 
-#: website/auth.py:496
+#: website/auth.py:500
 #, fuzzy
 msgid "password_change_success"
 msgstr "Password of your student is successfully changed."
 
-#: website/auth.py:530
+#: website/auth.py:534
 #, fuzzy
 msgid "password_updated"
 msgstr "Password updated."
 
-#: website/auth.py:619
+#: website/auth.py:623
 #, fuzzy
 msgid "profile_updated_reload"
 msgstr "Profile updated, page will be re-loaded."
 
-#: website/auth.py:622
+#: website/auth.py:626
 #, fuzzy
 msgid "profile_updated"
 msgstr "Profile updated."
 
-#: website/auth.py:686
+#: website/auth.py:690
 #, fuzzy
 msgid "sent_password_recovery"
 msgstr ""
 "You should soon receive an email with instructions on how to reset your "
 "password."
 
-#: website/auth.py:729
+#: website/auth.py:733
 #, fuzzy
 msgid "password_resetted"
 msgstr ""
 "Your password has been successfully reset. You are being redirected to "
 "the login page."
 
-#: website/auth.py:747
+#: website/auth.py:740
+msgid "already_teacher"
+msgstr ""
+
+#: website/auth.py:742
+msgid "already_teacher_request"
+msgstr ""
+
+#: website/auth.py:745
+msgid "teacher_account_success"
+msgstr ""
+
+#: website/auth.py:763
 #, fuzzy
 msgid "teacher_invalid"
 msgstr "Your teacher value is invalid."
 
-#: website/auth.py:838
+#: website/auth.py:854
 #, fuzzy
 msgid "mail_welcome_verify_body"
 msgstr ""
 "Your Hedy account has been created successfully. Welcome!\n"
 "Please click on this link to verify your email address: {link}"
 
-#: website/auth.py:840
+#: website/auth.py:856
 #, fuzzy
 msgid "mail_change_password_body"
 msgstr ""
@@ -2159,7 +2175,7 @@ msgstr ""
 "If you didn't change your password, please contact us immediately by "
 "replying to this email."
 
-#: website/auth.py:842
+#: website/auth.py:858
 #, fuzzy
 msgid "mail_recover_password_body"
 msgstr ""
@@ -2167,7 +2183,7 @@ msgstr ""
 "valid for <b>4</b> hours.\n"
 "If you haven't required a password reset, please ignore this email: {link}"
 
-#: website/auth.py:844
+#: website/auth.py:860
 #, fuzzy
 msgid "mail_reset_password_body"
 msgstr ""
@@ -2176,7 +2192,7 @@ msgstr ""
 "If you didn't change your password, please contact us immediately by "
 "replying to this email."
 
-#: website/auth.py:846
+#: website/auth.py:862
 #, fuzzy
 msgid "mail_welcome_teacher_body"
 msgstr ""
@@ -2204,50 +2220,50 @@ msgstr ""
 "\n"
 "Keep programming!"
 
-#: website/auth.py:852
+#: website/auth.py:868
 #, fuzzy
 msgid "mail_welcome_verify_subject"
 msgstr "Welcome to Hedy"
 
-#: website/auth.py:854
+#: website/auth.py:870
 #, fuzzy
 msgid "mail_change_password_subject"
 msgstr "Your Hedy password has been changed"
 
-#: website/auth.py:856
+#: website/auth.py:872
 #, fuzzy
 msgid "mail_recover_password_subject"
 msgstr "Request a password reset."
 
-#: website/auth.py:858
+#: website/auth.py:874
 #, fuzzy
 msgid "mail_reset_password_subject"
 msgstr "Your Hedy password has been reset"
 
-#: website/auth.py:860
+#: website/auth.py:876
 #, fuzzy
 msgid "mail_welcome_teacher_subject"
 msgstr "Your Hedy teacher account is ready"
 
-#: website/auth.py:864
+#: website/auth.py:880
 msgid "user"
 msgstr "用户"
 
-#: website/auth.py:869
+#: website/auth.py:885
 msgid "mail_hello"
 msgstr "你好 {username}！"
 
-#: website/auth.py:871
+#: website/auth.py:887
 msgid "mail_goodbye"
 msgstr ""
 "谢谢！\n"
 "海迪团队"
 
-#: website/auth.py:879
+#: website/auth.py:895
 msgid "copy_mail_link"
 msgstr "请复制并粘贴此链接到一个新的标签页："
 
-#: website/auth.py:880
+#: website/auth.py:896
 msgid "link"
 msgstr "链接"
 
@@ -2637,12 +2653,6 @@ msgstr "你没有输入一个探险活动的名字！"
 #~ msgid "current_password"
 #~ msgstr "Current password"
 
-#: content/error-messages.txt:9
-#, fuzzy
-msgid "Access Before Assign"
-msgstr ""
-"You tried to use the variable {name} on line {access_line_number}, but you "
-"set it on line {definition_line_number}. Set a variable before using it."
 #~ msgid "tutorial_start_title"
 #~ msgstr "Welcome to Hedy!"
 
@@ -2773,3 +2783,12 @@ msgstr ""
 
 #~ msgid "teacher_tutorial_end_message"
 #~ msgstr "You have received an invitation to join class"
+
+#~ msgid "Access Before Assign"
+#~ msgstr ""
+#~ "You tried to use the variable "
+#~ "{name} on line {access_line_number}, but "
+#~ "you set it on line "
+#~ "{definition_line_number}. Set a variable "
+#~ "before using it."
+
