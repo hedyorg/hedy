@@ -368,3 +368,42 @@ class Quizzes:
 class NoSuchQuiz:
     def get_quiz_data_for_level(self, level, keyword_lang):
         return {}
+
+
+class Tutorials:
+    # Want to parse the keywords only once, they can be cached -> perform this action on server start
+    def __init__(self, language):
+        self.language = language
+        # We can keep these cached, even in debug_mode: files are small and don't influence start-up time much
+        self.file = YamlFile.for_file(f'content/tutorials/{self.language}.yaml')
+        self.data = {}
+
+        self.debug_mode = not os.getenv('NO_DEBUG_MODE')
+
+        if not self.debug_mode:
+            self.data["en"] = self.cache_tutorials("en")
+            if language in ALL_KEYWORD_LANGUAGES.keys():
+                self.data[language] = self.cache_tutorials(language)
+
+    def cache_tutorials(self, language):
+        tutorial_data = {}
+        for level in copy.deepcopy(self.file):
+            steps = copy.deepcopy(self.file).get(level).get('steps')
+            for index, data in steps.items():
+                steps[index]['text'] = data['text'].format(**KEYWORDS.get(language))
+            tutorial_data[level] = steps
+        return tutorial_data
+
+    def get_tutorial_for_level(self, level, keyword_lang="en"):
+        if self.debug_mode and not self.data.get(keyword_lang, None):
+            self.data[keyword_lang] = self.cache_tutorials(keyword_lang)
+        return self.data.get(keyword_lang, {}).get(level, None)
+
+    def get_tutorial_for_level_step(self, level, step, keyword_lang="en"):
+        if self.debug_mode and not self.data.get(keyword_lang, None):
+            self.data[keyword_lang] = self.cache_tutorials(keyword_lang)
+        return self.data.get(keyword_lang, {}).get(level, {}).get(step, None)
+
+class NoSuchTutorial:
+    def get_tutorial_data_for_level(self, level, keyword_lang):
+        return {}
