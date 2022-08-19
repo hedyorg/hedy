@@ -1,3 +1,4 @@
+import ast
 import collections
 import os
 from flask_babel import gettext
@@ -120,8 +121,14 @@ def forget_current_user():
 
 
 def is_admin(user):
-    admin_user = os.getenv('ADMIN_USER')
-    return user.get('username') == admin_user or user.get('email') == admin_user
+    # Get the value from the environment, use literal_eval to convert from string list to an actual list
+    admin_users = []
+    if os.getenv('ADMIN_USER'):
+        admin_users.append(os.getenv('ADMIN_USER'))
+    if os.getenv('ADMIN_USERS'):
+        admin_users.extend(os.getenv('ADMIN_USERS').split(','))
+
+    return user.get('username') in admin_users or user.get('email') in admin_users
 
 
 def is_teacher(user):
@@ -700,7 +707,7 @@ def routes(app, database):
             return gettext('repeat_match_password'), 400
 
         token = DATABASE.get_token(body['token'])
-        if not token or body['token'] != token.get('id'):
+        if not token or body['token'] != token.get('id') or body['username'] != token.get('username'):
             return gettext('token_invalid'), 403
 
         hashed = hash(body['password'], make_salt())
