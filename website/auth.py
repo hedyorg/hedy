@@ -700,7 +700,7 @@ def routes(app, database):
             return gettext('repeat_match_password'), 400
 
         token = DATABASE.get_token(body['token'])
-        if not token or body['token'] != token.get('id'):
+        if not token or body['token'] != token.get('id') or body['username'] != token.get('username'):
             return gettext('token_invalid'), 403
 
         hashed = hash(body['password'], make_salt())
