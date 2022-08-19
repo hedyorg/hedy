@@ -76,9 +76,9 @@ adventures:
                 story_text_3: "## Listas\nQuando queremos verificar se algo está em uma lista, agora podemos usar o comando `{in}`.\nEste código imprime bonito! se você escolher verde ou amarelo, e não gostei caso contrário.\n"
                 example_code_3: |
                     ```
-                    cores_bonitas {is} amarelo, verde
-                    cor {is} {ask} 'Qual sua cor favorita?'
-                    {if} cor {in} cores_bonitas {print} 'bonita!'
+                    cores_bonitas {is} verde, amarelo
+                    cor_favorita {is} {ask} 'Qual sua cor favorita?'
+                    {if} cor_favorita {in} cores_bonitas {print} 'bonita!'
                     {else} {print} 'não gostei'
                     ```
                 story_text_2: "Às vezes, o código com um `{if}` fica muito longo e não se encaixa bem na linha. <br> Você também pode dividir o código em duas linhas, começando a segunda linha com `{else}` assim:\n"
