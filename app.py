@@ -69,6 +69,10 @@ QUIZZES = collections.defaultdict(hedy_content.NoSuchQuiz)
 for lang in ALL_LANGUAGES.keys():
     QUIZZES[lang] = hedy_content.Quizzes(lang)
 
+TUTORIALS = collections.defaultdict(hedy_content.NoSuchTutorial)
+for lang in ALL_LANGUAGES.keys():
+    TUTORIALS[lang] = hedy_content.Tutorials(lang)
+
 ACHIEVEMENTS_TRANSLATIONS = hedyweb.AchievementTranslations()
 ACHIEVEMENTS = achievements.Achievements()
 DATABASE = database.Database()
@@ -1285,63 +1289,10 @@ def translate_keywords():
         return gettext('translate_error'), 400
 
 
-def tutorial_steps(step):
-    if step == 0:
-        translation = [gettext('tutorial_start_title'), gettext('tutorial_start_message')]
-    elif step == 1:
-        translation = [gettext('tutorial_editor_title'), gettext('tutorial_editor_message')]
-    elif step == 2:
-        translation = [gettext('tutorial_output_title'), gettext('tutorial_output_message')]
-    elif step == 3:
-        translation = [gettext('tutorial_run_title'), gettext('tutorial_run_message')]
-    elif step == 4:
-        translation = [gettext('tutorial_tryit_title'), gettext('tutorial_tryit_message')]
-    elif step == 5:
-        translation = [gettext('tutorial_speakaloud_title'), gettext('tutorial_speakaloud_message')]
-    elif step == 6:
-        translation = [gettext('tutorial_speakaloud_run_title'), gettext('tutorial_speakaloud_run_message')]
-    elif step == 7:
-        translation = [gettext('tutorial_nextlevel_title'), gettext('tutorial_nextlevel_message')]
-    elif step == 8:
-        translation = [gettext('tutorial_leveldefault_title'), gettext('tutorial_leveldefault_message')]
-    elif step == 9:
-        translation = [gettext('tutorial_adventures_title'), gettext('tutorial_adventures_message')]
-    elif step == 10:
-        translation = [gettext('tutorial_quiz_title'), gettext('tutorial_quiz_message')]
-    elif step == 11:
-        translation = [gettext('tutorial_saveshare_title'), gettext('tutorial_saveshare_message')]
-    elif step == 12:
-        translation = [gettext('tutorial_cheatsheet_title'), gettext('tutorial_cheatsheet_message')]
-    elif step == 13:
-        translation = [gettext('tutorial_end_title'), gettext('tutorial_end_message')]
-    else:
-        translation = [gettext('tutorial_title_not_found'), gettext('tutorial_message_not_found')]
-    return translation
-
-
-def teacher_tutorial_steps(step):
-    if step == 0:
-        translation = [gettext('tutorial_start_title'), gettext('teacher_tutorial_start_message')]
-    elif step == 1:
-        translation = [gettext('tutorial_class_title'), gettext('tutorial_class_message')]
-    elif step == 2:
-        translation = [gettext('tutorial_customize_class_title'), gettext('tutorial_customize_class_message')]
-    elif step == 3:
-        translation = [gettext('tutorial_own_adventures_title'), gettext('tutorial_own_adventures_message')]
-    elif step == 4:
-        translation = [gettext('tutorial_accounts_title'), gettext('tutorial_accounts_message')]
-    elif step == 5:
-        translation = [gettext('tutorial_documentation_title'), gettext('tutorial_documentation_message')]
-    elif step == 6:
-        translation = [gettext('tutorial_end_title'), gettext('teacher_tutorial_end_message')]
-    else:
-        translation = [gettext('tutorial_title_not_found'), gettext('tutorial_message_not_found')]
-    return translation
-
-
-@app.route('/get_tutorial_step/<step>', methods=['GET'])
-def get_tutorial_translation(step):
-    # We also retrieve the example code snippet as a "tutorial step" to reduce the need of new code
+# TODO TB: Think about changing this to sending all steps to the front-end at once
+@app.route('/get_tutorial_step/<level>/<step>', methods=['GET'])
+def get_tutorial_translation(level, step):
+    # Keep this structure temporary until we decide on a nice code / parse structure
     if step == "code_snippet":
         return jsonify({'code': gettext('tutorial_code_snippet')}), 200
     try:
@@ -1349,18 +1300,11 @@ def get_tutorial_translation(step):
     except ValueError:
         return gettext('invalid_tutorial_step'), 400
 
-    translation = tutorial_steps(step)
-    return jsonify({'translation': translation}), 200
+    data = TUTORIALS[g.lang].get_tutorial_for_level_step(level, step, g.keyword_lang)
+    if not data:
+        data = {'title': gettext('tutorial_title_not_found'), 'text': gettext('tutorial_message_not_found')}
+    return jsonify(data), 200
 
-@app.route('/get_teacher_tutorial_step/<step>', methods=['GET'])
-def get_teacher_tutorial_translation(step):
-    try:
-        step = int(step)
-    except ValueError:
-        return gettext('invalid_tutorial_step'), 400
-
-    translation = teacher_tutorial_steps(step)
-    return jsonify({'translation': translation}), 200
 
 @app.route('/store_parsons_order', methods=['POST'])
 def store_parsons_order():
