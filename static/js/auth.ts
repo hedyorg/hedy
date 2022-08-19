@@ -202,8 +202,7 @@ export function markAsTeacher(checkbox: any, username: string, is_teacher: boole
       }),
       contentType: 'application/json; charset=utf-8'
     }).done(function () {
-      $(checkbox).prop('checked', true);
-      modal.alert(['User', username, 'successfully', is_teacher ? 'marked' : 'unmarked', 'as teacher'].join(' '), 2000, false);
+      location.reload();
     }).fail(function () {
       modal.alert(['Error when', is_teacher ? 'marking' : 'unmarking', 'user', username, 'as teacher'].join(' '), 2000, false);
     });

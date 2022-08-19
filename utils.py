@@ -254,10 +254,14 @@ def string_date_to_date(date):
     return datetime.datetime.strptime(date, "%Y-%m-%d")
 
 def timestamp_to_date(timestamp, short_format=False):
-    if short_format:
-        return datetime.datetime.fromtimestamp(int(str(timestamp)))
-    else:
-        return datetime.datetime.fromtimestamp(int(str(timestamp)[:-3]))
+    try:
+        if short_format:
+            return datetime.datetime.fromtimestamp(int(str(timestamp)))
+        else:
+            return datetime.datetime.fromtimestamp(int(str(timestamp)[:-3]))
+    except:
+        return None
+
 
 def delta_timestamp(date, short_format=False):
     if short_format:
