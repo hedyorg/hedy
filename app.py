@@ -1585,12 +1585,15 @@ def public_user_page(username):
 def valid_invite_code(code):
     if not code:
         return False
-    code = ast.literal_eval(code)
-    if isinstance(code, str):
-        return code == os.getenv('TEACHER_INVITE_CODE')
-    if isinstance(code, list):
-        return code in os.getenv('TEACHER_INVITE_CODE')
-    return False
+
+    # Get the value from the environment, use literal_eval to convert from string list to an actual list
+    valid_codes = []
+    if os.getenv('TEACHER_INVITE_CODE'):
+        valid_codes.append(os.getenv('TEACHER_INVITE_CODE'))
+    if os.getenv('TEACHER_INVITE_CODES'):
+        valid_codes.extend(os.getenv('TEACHER_INVITE_CODES').split(','))
+
+    return code in valid_codes
 
 @app.route('/invite/<code>', methods=['GET'])
 def teacher_invitation(code):
