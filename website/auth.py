@@ -732,6 +732,18 @@ def routes(app, database):
 
         return jsonify({'message': gettext('password_resetted')}), 200
 
+    @app.route('/auth/request_teacher', methods=['GET'])
+    @requires_login
+    def request_teacher_account(user):
+        account = DATABASE.user_by_username(user['username'])
+        if account.get('is_teacher'):
+            return gettext('already_teacher'), 400
+        if account.get('teacher_request'):
+            return gettext('already_teacher_request'), 400
+
+        DATABASE.update_user(user['username'], {'teacher_request': True})
+        return jsonify({'message': gettext('teacher_account_success')}), 200
+
     # *** ADMIN ROUTES ***
 
     @app.route('/admin/markAsTeacher', methods=['POST'])
