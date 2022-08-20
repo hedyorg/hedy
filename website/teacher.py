@@ -1,6 +1,7 @@
 import json
 from flask_babel import gettext
 import hedy
+import hedyweb
 from website.auth import requires_login, is_teacher, is_admin, current_user, validate_student_signup_data, store_new_student_account
 import utils
 import uuid
@@ -19,6 +20,38 @@ def routes(app, database, achievements):
     global ACHIEVEMENTS
     DATABASE = database
     ACHIEVEMENTS = achievements
+
+    @app.route('/for-teachers', methods=['GET'])
+    @requires_login
+    def for_teachers_page(user):
+        if not is_teacher(user):
+            return utils.error_page(error=403, ui_message=gettext('not_teacher'))
+
+        welcome_teacher = session.get('welcome-teacher') or False
+        session.pop('welcome-teacher', None)
+
+        teacher_classes = DATABASE.get_teacher_classes(current_user()['username'], True)
+        adventures = []
+        for adventure in DATABASE.get_teacher_adventures(current_user()['username']):
+            adventures.append(
+                {'id': adventure.get('id'),
+                 'name': adventure.get('name'),
+                 'date': utils.localized_date_format(adventure.get('date')),
+                 'level': adventure.get('level')
+                 }
+            )
+
+        return render_template('for-teachers.html', current_page='my-profile', page_title=gettext('title_for-teacher'),
+                               teacher_classes=teacher_classes,
+                               teacher_adventures=adventures, welcome_teacher=welcome_teacher)
+
+
+    @app.route('/for-teachers/manual', methods=['GET'])
+    @requires_login
+    def get_teacher_manual(user):
+        page_translations = hedyweb.PageTranslations('for-teachers').get_page_translations(g.lang)
+        return render_template('teacher-manual.html', current_page='my-profile', content=page_translations)
+
 
     @app.route('/classes', methods=['GET'])
     @requires_login
