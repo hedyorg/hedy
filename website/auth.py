@@ -1,3 +1,4 @@
+import ast
 import collections
 import os
 from flask_babel import gettext
@@ -120,8 +121,14 @@ def forget_current_user():
 
 
 def is_admin(user):
-    admin_user = os.getenv('ADMIN_USER')
-    return user.get('username') == admin_user or user.get('email') == admin_user
+    # Get the value from the environment, use literal_eval to convert from string list to an actual list
+    admin_users = []
+    if os.getenv('ADMIN_USER'):
+        admin_users.append(os.getenv('ADMIN_USER'))
+    if os.getenv('ADMIN_USERS'):
+        admin_users.extend(os.getenv('ADMIN_USERS').split(','))
+
+    return user.get('username') in admin_users or user.get('email') in admin_users
 
 
 def is_teacher(user):
@@ -133,7 +140,7 @@ def update_is_teacher(user, is_teacher_value=1):
     user_is_teacher = is_teacher(user)
     user_becomes_teacher = is_teacher_value and not user_is_teacher
 
-    DATABASE.update_user(user['username'], {'is_teacher': is_teacher_value})
+    DATABASE.update_user(user['username'], {'is_teacher': is_teacher_value, 'teacher_request': None})
 
     if user_becomes_teacher and not is_testing_request(request):
         try:
@@ -237,6 +244,7 @@ def store_new_account(account, email):
         'language': account['language'],
         'keyword_language': account['keyword_language'],
         'created': timems(),
+        'teacher_request': True if account.get('is_teacher') else None,
         'verification_pending': hashed_token,
         'last_login': timems()
     }
@@ -397,10 +405,6 @@ def routes(app, database):
                 send_email(config['email']['sender'], 'Subscription to Hedy newsletter on signup', user['email'],
                            '<p>' + user['email'] + '</p>')
 
-        # If someone wants to be a Teacher -> sent a mail to manually set it
-        if not is_testing_request(request) and 'is_teacher' in body and body['is_teacher'] is True:
-            send_email(config['email']['sender'], 'Request for teacher\'s interface on signup', user['email'],
-                       '<p>' + user['email'] + '</p>')
 
         # If someone agrees to the third party contacts -> sent a mail to manually write down
         if not is_testing_request(request) and 'agree_third_party' in body and body['agree_third_party'] is True:
@@ -703,7 +707,7 @@ def routes(app, database):
             return gettext('repeat_match_password'), 400
 
         token = DATABASE.get_token(body['token'])
-        if not token or body['token'] != token.get('id'):
+        if not token or body['token'] != token.get('id') or body['username'] != token.get('username'):
             return gettext('token_invalid'), 403
 
         hashed = hash(body['password'], make_salt())
@@ -797,6 +801,44 @@ def routes(app, database):
 
         return {}, 200
 
+    @app.route('/admin/getUserTags', methods=['POST'])
+    @requires_login
+    def get_user_tags(user):
+        if not is_admin(user):
+            return utils.error_page(error=403, ui_message=gettext('unauthorized'))
+
+        body = request.json
+        user = DATABASE.get_public_profile_settings(body['username'].strip().lower())
+        if not user:
+            return "User doesn't have a public profile", 400
+        return {'tags': user.get('tags', [])}, 200
+
+    @app.route('/admin/updateUserTags', methods=['POST'])
+    @requires_login
+    def update_user_tags(user):
+        if not is_admin(user):
+            return utils.error_page(error=403, ui_message=gettext('unauthorized'))
+
+        body = request.json
+        user = DATABASE.get_public_profile_settings(body['username'].strip().lower())
+        if not user:
+            return "User doesn't have a public profile", 400
+
+        tags = []
+        if "admin" in user.get('tags', []):
+            tags.append("admin")
+        if "teacher" in user.get('tags', []):
+            tags.append("teacher")
+        if body.get("certified"):
+            tags.append("certified_teacher")
+        if body.get("distinguished"):
+            tags.append("distinguished_user")
+        if body.get("contributor"):
+            tags.append("contributor")
+
+        user['tags'] = tags
+        DATABASE.update_public_profile(user['username'], user)
+        return {}, 200
 
 # Turn off verbose logs from boto/SES, thanks to https://github.com/boto/boto3/issues/521
 import logging

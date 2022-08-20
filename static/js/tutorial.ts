@@ -9,6 +9,7 @@ let student = true;
   $('#tutorial_next_button').off('click').on('click', () => {
     $('#tutorial-pop-up').hide();
     // If we are a student -> call the next student tutorial step, otherwise call the teacher step
+    current_step += 1;
     if (student) {
       return callNextStep();
     }
@@ -51,7 +52,7 @@ function runButtonStep() {
 function tryRunButtonStep() {
   $.ajax({
       type: 'GET',
-      url: '/get_tutorial_step/code_snippet/',
+      url: '/get_tutorial_step/intro/code_snippet/',
       dataType: 'json'
     }).done(function(response: any) {
        theGlobalEditor?.setValue(response.code);
@@ -168,32 +169,31 @@ function endTutorial() {
 }
 
 function callNextStep() {
-  current_step += 1;
-  if (current_step == 1) {
+  if (current_step == 2) {
     codeEditorStep();
-  } else if (current_step == 2) {
-    codeOutputStep();
   } else if (current_step == 3) {
-    runButtonStep();
+    codeOutputStep();
   } else if (current_step == 4) {
-    tryRunButtonStep();
+    runButtonStep();
   } else if (current_step == 5) {
-    speakAloudStep();
+    tryRunButtonStep();
   } else if (current_step == 6) {
-    runSpeakAloudStep();
+    speakAloudStep();
   } else if (current_step == 7) {
-    nextLevelStep();
+    runSpeakAloudStep();
   } else if (current_step == 8) {
-    levelDefaultStep();
+    nextLevelStep();
   } else if (current_step == 9) {
-    adventureTabsStep();
+    levelDefaultStep();
   } else if (current_step == 10) {
-    quizTabStep();
+    adventureTabsStep();
   } else if (current_step == 11) {
-    saveShareStep();
+    quizTabStep();
   } else if (current_step == 12) {
-    cheatsheetStep();
+    saveShareStep();
   } else if (current_step == 13) {
+    cheatsheetStep();
+  } else if (current_step == 14) {
     pushAchievement("well_begun_is_half_done");
     $('#achievement_pop-up').removeClass('z-10');
     $('#achievement_pop-up').addClass('z-50');
@@ -261,18 +261,17 @@ function teacherEndStep() {
 }
 
 function callTeacherNextStep() {
-  current_step += 1;
-  if (current_step == 1) {
+  if (current_step == 2) {
     classStep();
-  } else if (current_step == 2) {
-    customizeClassStep();
   } else if (current_step == 3) {
-    adventureStep();
+    customizeClassStep();
   } else if (current_step == 4) {
-    multipleAccountsStep();
+    adventureStep();
   } else if (current_step == 5) {
-    documentationStep();
+    multipleAccountsStep();
   } else if (current_step == 6) {
+    documentationStep();
+  } else if (current_step == 7) {
     pushAchievement("ring_the_bell");
     $('#achievement_pop-up').removeClass('z-10');
     $('#achievement_pop-up').addClass('z-50');
@@ -314,17 +313,17 @@ function relocatePopup(x: number, y: number) {
 }
 
 function tutorialPopup(step: number) {
-  let route = "/get_tutorial_step/"
+  let route = "/get_tutorial_step/intro/"
   if (!student) {
-    route = "/get_teacher_tutorial_step/"
+    route = "/get_tutorial_step/teacher0/"
   }
   $.ajax({
     type: 'GET',
     url: route + step.toString(),
     dataType: 'json'
   }).done(function(response: any) {
-      $('#tutorial_title').text(response.translation[0]);
-      $('#tutorial_text').text(response.translation[1]);
+      $('#tutorial_title').text(response.title);
+      $('#tutorial_text').text(response.text);
       $('#tutorial-pop-up').fadeIn(800);
   }).fail(function(response) {
     modal.alert(response.responseText, 3000, true);
@@ -337,14 +336,14 @@ export function startTutorial() {
   $('#variables_container').hide();
   theGlobalEditor?.setValue("");
 
-  current_step = 0;
+  current_step = 1;
   student = true;
   tutorialPopup(current_step);
 }
 
 export function startTeacherTutorial() {
   $('#tutorial-mask').show();
-  current_step = 0;
+  current_step = 1;
   student = false;
   tutorialPopup(current_step);
 }
