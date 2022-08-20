@@ -1512,6 +1512,15 @@ def update_public_profile(user):
             achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "fresh_look")
     else:
         achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "go_live")
+
+    # If there is no current profile or if it doesn't have the tags list -> check if the user is a teacher / admin
+    if not current_profile or not current_profile.get('tags'):
+        body['tags'] = []
+        if is_teacher(user):
+            body['tags'].append('teacher')
+        if is_admin(user):
+            body['tags'].append('admin')
+
     DATABASE.update_public_profile(user['username'], body)
     if achievement:
         # Todo TB -> Check if we require message or success on front-end
