@@ -732,6 +732,18 @@ def routes(app, database):
 
         return jsonify({'message': gettext('password_resetted')}), 200
 
+    @app.route('/auth/request_teacher', methods=['GET'])
+    @requires_login
+    def request_teacher_account(user):
+        account = DATABASE.user_by_username(user['username'])
+        if account.get('is_teacher'):
+            return gettext('already_teacher'), 400
+        if account.get('teacher_request'):
+            return gettext('already_teacher_request'), 400
+
+        DATABASE.update_user(user['username'], {'teacher_request': True})
+        return jsonify({'message': gettext('teacher_account_success')}), 200
+
     # *** ADMIN ROUTES ***
 
     @app.route('/admin/markAsTeacher', methods=['POST'])
@@ -801,6 +813,44 @@ def routes(app, database):
 
         return {}, 200
 
+    @app.route('/admin/getUserTags', methods=['POST'])
+    @requires_login
+    def get_user_tags(user):
+        if not is_admin(user):
+            return utils.error_page(error=403, ui_message=gettext('unauthorized'))
+
+        body = request.json
+        user = DATABASE.get_public_profile_settings(body['username'].strip().lower())
+        if not user:
+            return "User doesn't have a public profile", 400
+        return {'tags': user.get('tags', [])}, 200
+
+    @app.route('/admin/updateUserTags', methods=['POST'])
+    @requires_login
+    def update_user_tags(user):
+        if not is_admin(user):
+            return utils.error_page(error=403, ui_message=gettext('unauthorized'))
+
+        body = request.json
+        user = DATABASE.get_public_profile_settings(body['username'].strip().lower())
+        if not user:
+            return "User doesn't have a public profile", 400
+
+        tags = []
+        if "admin" in user.get('tags', []):
+            tags.append("admin")
+        if "teacher" in user.get('tags', []):
+            tags.append("teacher")
+        if body.get("certified"):
+            tags.append("certified_teacher")
+        if body.get("distinguished"):
+            tags.append("distinguished_user")
+        if body.get("contributor"):
+            tags.append("contributor")
+
+        user['tags'] = tags
+        DATABASE.update_public_profile(user['username'], user)
+        return {}, 200
 
 # Turn off verbose logs from boto/SES, thanks to https://github.com/boto/boto3/issues/521
 import logging

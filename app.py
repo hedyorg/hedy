@@ -1113,32 +1113,6 @@ def landing_page(user, first):
                            user_info=user_info, program=user_programs, achievements=user_achievements)
 
 
-@app.route('/for-teachers', methods=['GET'])
-@requires_login
-def for_teachers_page(user):
-    if not is_teacher(user):
-        return utils.error_page(error=403, ui_message=gettext('not_teacher'))
-
-    page_translations = hedyweb.PageTranslations('for-teachers').get_page_translations(g.lang)
-    welcome_teacher = session.get('welcome-teacher') or False
-    session.pop('welcome-teacher', None)
-
-    teacher_classes = DATABASE.get_teacher_classes(current_user()['username'], True)
-    adventures = []
-    for adventure in DATABASE.get_teacher_adventures(current_user()['username']):
-        adventures.append(
-          {'id': adventure.get('id'),
-           'name': adventure.get('name'),
-           'date': utils.localized_date_format(adventure.get('date')),
-           'level': adventure.get('level')
-           }
-        )
-
-    return render_template('for-teachers.html', current_page='my-profile', page_title=gettext('title_for-teacher'),
-                           content=page_translations, teacher_classes=teacher_classes,
-                           teacher_adventures=adventures, welcome_teacher=welcome_teacher)
-
-
 @app.route('/explore', methods=['GET'])
 def explore():
     if not current_user()['username']:
@@ -1512,6 +1486,15 @@ def update_public_profile(user):
             achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "fresh_look")
     else:
         achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "go_live")
+
+    # If there is no current profile or if it doesn't have the tags list -> check if the user is a teacher / admin
+    if not current_profile or not current_profile.get('tags'):
+        body['tags'] = []
+        if is_teacher(user):
+            body['tags'].append('teacher')
+        if is_admin(user):
+            body['tags'].append('admin')
+
     DATABASE.update_public_profile(user['username'], body)
     if achievement:
         # Todo TB -> Check if we require message or success on front-end

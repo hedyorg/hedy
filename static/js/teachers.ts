@@ -320,6 +320,7 @@ export function change_password_student(username: string, enter_password: string
 }
 
 export function show_doc_section(section_key: string) {
+  // Todo TB: We can improve this code as it is quite cumbersome (08-22)
   $(".section-button").each(function(){
        if ($(this).hasClass('blue-btn')) {
            $(this).removeClass("blue-btn");
@@ -336,27 +337,6 @@ export function show_doc_section(section_key: string) {
      $('.section').hide();
      $ ('.common-mistakes-section').hide ();
      $('#section-' + section_key).toggle();
-   }
-   // Loop-index -1 doesn't exist -> automatically hide all "common mistakes" sections
-   show_common_mistakes("-1");
-}
-
-export function show_common_mistakes(section_key: string) {
-    $(".common-mistakes-button").each(function(){
-       if ($(this).hasClass('blue-btn')) {
-           $(this).removeClass("blue-btn");
-           $(this).addClass("green-btn");
-       }
-   });
-   if ($ ('#common_mistakes-' + section_key).is (':visible')) {
-       $("#cm-button-" + section_key).removeClass("blue-btn");
-       $("#cm-button-" + section_key).addClass("green-btn");
-       $ ('.common-mistakes-section').hide ();
-   } else {
-     $("#cm-button-" + section_key).removeClass("green-btn");
-     $("#cm-button-" + section_key).addClass("blue-btn");
-     $('.common-mistakes-section').hide();
-     $('#common_mistakes-' + section_key).toggle();
    }
 }
 

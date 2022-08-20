@@ -68,6 +68,18 @@ export function destroy_public(confirmation: string) {
   });
 }
 
+export function request_teacher_account() {
+  $.ajax ({
+      type: 'GET',
+      url: '/auth/request_teacher'
+    }).done (function (response) {
+      modal.alert(response.message, 2000, false);
+      setTimeout (function () {location.reload ()}, 2000);
+    }).fail (function (response) {
+      modal.alert(response.responseText, 3000, true);
+  });
+}
+
 // *** User forms ***
 
 $('form#signup').submit(function(e) {
@@ -225,6 +237,60 @@ export function changeUserEmail(username: string, email: string) {
     }).fail (function () {
       modal.alert (['Error when changing the email for user', username].join (' '), 2000, true);
     });
+  });
+}
+
+export function edit_user_tags(username: string) {
+  $.ajax({
+    type: 'POST',
+    url: '/admin/getUserTags',
+    data: JSON.stringify({
+      username: username
+    }),
+    contentType: 'application/json; charset=utf-8'
+  }).done(function (response) {
+    console.log(response);
+    $('#modal-mask').show();
+    $('#tags_username').text(username);
+    $('.tags-input').prop('checked', false);
+    if (response.tags) {
+      console.log(response.tags);
+      if (jQuery.inArray("certified_teacher", response.tags) !== -1) {
+        $('#certified-tag-input').prop('checked', true);
+      }
+      if (jQuery.inArray("distinguished_user", response.tags) !== -1) {
+        $('#distinguished-tag-input').prop('checked', true);
+      }
+      if (jQuery.inArray("contributor", response.tags) !== -1) {
+        $('#contributor-tag-input').prop('checked', true);
+      }
+    }
+    $('#modal-tags').show();
+  }).fail(function (response) {
+    modal.alert(response.responseText, 3000, true);
+  });
+}
+
+export function update_user_tags() {
+  const username = $('#tags_username').text();
+  const certified = $('#certified-tag-input').prop('checked');
+  const distinguished = $('#distinguished-tag-input').prop('checked');
+  const contributor = $('#contributor-tag-input').prop('checked');
+
+  $.ajax({
+    type: 'POST',
+    url: '/admin/updateUserTags',
+    data: JSON.stringify({
+      username: username,
+      certified: certified,
+      distinguished: distinguished,
+      contributor: contributor
+    }),
+    contentType: 'application/json; charset=utf-8'
+  }).done(function () {
+    $('#modal-mask').hide();
+    $('#modal-tags').hide();
+    modal.alert("Tags successfully updated", 3000, false);
   });
 }
 
