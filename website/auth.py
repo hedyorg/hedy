@@ -801,6 +801,44 @@ def routes(app, database):
 
         return {}, 200
 
+    @app.route('/admin/getUserTags', methods=['POST'])
+    @requires_login
+    def get_user_tags(user):
+        if not is_admin(user):
+            return utils.error_page(error=403, ui_message=gettext('unauthorized'))
+
+        body = request.json
+        user = DATABASE.get_public_profile_settings(body['username'].strip().lower())
+        if not user:
+            return "User doesn't have a public profile", 400
+        return {'tags': user.get('tags', [])}, 200
+
+    @app.route('/admin/updateUserTags', methods=['POST'])
+    @requires_login
+    def update_user_tags(user):
+        if not is_admin(user):
+            return utils.error_page(error=403, ui_message=gettext('unauthorized'))
+
+        body = request.json
+        user = DATABASE.get_public_profile_settings(body['username'].strip().lower())
+        if not user:
+            return "User doesn't have a public profile", 400
+
+        tags = []
+        if "admin" in user.get('tags', []):
+            tags.append("admin")
+        if "teacher" in user.get('tags', []):
+            tags.append("teacher")
+        if body.get("certified"):
+            tags.append("certified_teacher")
+        if body.get("distinguished"):
+            tags.append("distinguished_user")
+        if body.get("contributor"):
+            tags.append("contributor")
+
+        user['tags'] = tags
+        DATABASE.update_public_profile(user['username'], user)
+        return {}, 200
 
 # Turn off verbose logs from boto/SES, thanks to https://github.com/boto/boto3/issues/521
 import logging
