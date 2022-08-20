@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-19 15:20+0200\n"
+"POT-Creation-Date: 2022-08-18 14:10+0200\n"
 "PO-Revision-Date: 2022-08-10 08:50+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language: el\n"
@@ -38,12 +38,11 @@ msgstr "Φαίνεται πως δεν είστε σ' αυτήν την τάξη
 msgid "title_programs"
 msgstr "Hedy - My programs"
 
-#: app.py:702 app.py:712 app.py:716 app.py:731 app.py:1027 app.py:1561
+#: app.py:702 app.py:712 app.py:716 app.py:731 app.py:1027 app.py:1552
 #: website/admin.py:17 website/admin.py:24 website/admin.py:92
 #: website/admin.py:111 website/admin.py:130 website/admin.py:137
-#: website/admin.py:145 website/auth.py:741 website/auth.py:768
-#: website/auth.py:808 website/auth.py:820 website/programs.py:210
-#: website/statistics.py:100
+#: website/admin.py:145 website/auth.py:734 website/auth.py:761
+#: website/programs.py:210 website/statistics.py:100
 #, fuzzy
 msgid "unauthorized"
 msgstr "You don't have access rights for this page"
@@ -155,9 +154,9 @@ msgstr "Δεν μπορούμε να βρούμε αυτήν τη σελίδα!"
 msgid "tutorial_message_not_found"
 msgstr "Έλαβες μια πρόσκληση για να συμμετάσχεις στην τάξη"
 
-#: app.py:1493 website/auth.py:295 website/auth.py:350 website/auth.py:483
-#: website/auth.py:508 website/auth.py:541 website/auth.py:655
-#: website/auth.py:697 website/auth.py:747 website/auth.py:774
+#: app.py:1493 website/auth.py:288 website/auth.py:343 website/auth.py:476
+#: website/auth.py:501 website/auth.py:534 website/auth.py:648
+#: website/auth.py:690 website/auth.py:740 website/auth.py:767
 #: website/quiz.py:43 website/quiz.py:69 website/teacher.py:88
 #: website/teacher.py:123 website/teacher.py:167 website/teacher.py:252
 #: website/teacher.py:308 website/teacher.py:355 website/teacher.py:396
@@ -177,15 +176,15 @@ msgstr "Το προσωπικό σου κείμενο δεν είναι έγκυ
 msgid "favourite_program_invalid"
 msgstr "Το αγαπημένο σου πρόγραμμα δεν είναι έγκυρο"
 
-#: app.py:1527 app.py:1528
+#: app.py:1518 app.py:1519
 msgid "public_profile_updated"
 msgstr "Το δημόσιο προφίλ έχει ενημερωθεί."
 
-#: app.py:1565 app.py:1590
+#: app.py:1556 app.py:1581
 msgid "user_not_private"
 msgstr "Αυτός ο χρήστης δεν υπάρχει ή δεν έχει δημόσιο προφίλ"
 
-#: app.py:1598
+#: app.py:1589
 msgid "invalid_teacher_invitation_code"
 msgstr ""
 "Ο κωδικός πρόσκλησης καθηγητή δεν είναι έγκυρος. Για να γίνετε καθηγητής,"
@@ -464,7 +463,6 @@ msgid "programs_submitted"
 msgstr "Υποβολές προγραμμάτων"
 
 #: templates/achievements.html:13 templates/achievements.html:26
-#: templates/public-page.html:18
 msgid "teacher"
 msgstr "Καθηγητής"
 
@@ -478,7 +476,7 @@ msgstr "Επιτεύγματα Hedy"
 
 #: templates/achievements.html:37 templates/achievements.html:51
 #: templates/landing-page.html:89 templates/layout.html:92
-#: templates/public-page.html:71
+#: templates/public-page.html:51
 #, fuzzy
 msgid "achievements_logo_alt"
 msgstr "επιτεύγματα"
@@ -510,7 +508,7 @@ msgstr "Παρακαλώ δώσε το όνομα της τάξης"
 
 #: templates/class-overview.html:20 templates/class-overview.html:70
 #: templates/create-accounts.html:16 templates/highscores.html:37
-#: templates/login.html:10 templates/profile.html:89 templates/recover.html:9
+#: templates/login.html:10 templates/profile.html:96 templates/recover.html:9
 #: templates/signup.html:10
 msgid "username"
 msgstr "Όνομα Χρήστη"
@@ -621,7 +619,7 @@ msgstr "Ημερομηνία πρόσκλησης"
 msgid "expiration_date"
 msgstr "Expiration date"
 
-#: templates/class-overview.html:82 templates/profile.html:16
+#: templates/class-overview.html:82 templates/profile.html:23
 msgid "delete_invite_prompt"
 msgstr "Είσαι βέβαιος ότι θέλεις να καταργήσεις αυτήν την πρόσκληση τάξης;"
 
@@ -638,7 +636,7 @@ msgstr "Error logo"
 msgid "goto_profile"
 msgstr "Πήγαινε στο προφίλ μου"
 
-#: templates/class-prejoin.html:15 templates/profile.html:13
+#: templates/class-prejoin.html:15 templates/profile.html:20
 msgid "prompt_join_class"
 msgstr "Θέλεις να συμμετάσχεις στην τάξη;"
 
@@ -648,7 +646,7 @@ msgstr ""
 "Πρέπει να έχεις λογαριασμό για να συμμετάσχεις σε μια τάξη. Θέλεις να "
 "συνδεθείς τώρα;"
 
-#: templates/class-prejoin.html:17 templates/profile.html:15
+#: templates/class-prejoin.html:17 templates/profile.html:22
 msgid "join_class"
 msgstr "Συμμετοχή σε τάξη"
 
@@ -885,8 +883,8 @@ msgid "select_own_adventures"
 msgstr "Επίλεξε τις δικές σου περιπέτειες"
 
 #: templates/customize-class.html:96 templates/customize-class.html:120
-#: templates/profile.html:50 templates/profile.html:125
-#: templates/profile.html:134 templates/signup.html:40 templates/signup.html:62
+#: templates/profile.html:57 templates/profile.html:132
+#: templates/profile.html:141 templates/signup.html:40 templates/signup.html:62
 #: templates/signup.html:71
 msgid "select"
 msgstr "Επίλεξε"
@@ -994,8 +992,8 @@ msgstr "Προβολή προγράμματος"
 msgid "report_program"
 msgstr ""
 
-#: templates/for-teachers.html:15 templates/profile.html:71
-#: templates/profile.html:73
+#: templates/for-teachers.html:15 templates/profile.html:78
+#: templates/profile.html:80
 msgid "my_classes"
 msgstr "Οι τάξεις μου"
 
@@ -1091,7 +1089,7 @@ msgid "your_class"
 msgstr "Οι τάξεις μου"
 
 #: templates/highscores.html:38 templates/landing-page.html:52
-#: templates/public-page.html:35
+#: templates/public-page.html:16
 msgid "achievements"
 msgstr "επιτεύγματα"
 
@@ -1101,7 +1099,7 @@ msgid "country_title"
 msgstr "Please select a valid country."
 
 #: templates/highscores.html:40 templates/landing-page.html:88
-#: templates/public-page.html:70
+#: templates/public-page.html:50
 msgid "last_achievement"
 msgstr "Πρόσφατο επίτευγμα"
 
@@ -1216,7 +1214,7 @@ msgstr "Εξερεύνηση"
 msgid "nav_learn_more"
 msgstr "Μάθε περισσότερα"
 
-#: templates/incl-menubar.html:13 templates/public-page.html:76
+#: templates/incl-menubar.html:13 templates/public-page.html:56
 msgid "program_header"
 msgstr "Τα προγράμματά μου"
 
@@ -1312,7 +1310,7 @@ msgid "your_account"
 msgstr "Ακόμα χωρίς λογαριασμό;"
 
 #: templates/landing-page.html:43 templates/landing-page.html:45
-#: templates/profile.html:36 templates/public-page.html:7
+#: templates/profile.html:43 templates/public-page.html:7
 #: templates/public-page.html:9
 #, fuzzy
 msgid "profile_logo_alt"
@@ -1324,17 +1322,17 @@ msgid "no_public_profile"
 msgstr "Δημόσιο προφίλ"
 
 #: templates/landing-page.html:66 templates/landing-page.html:68
-#: templates/public-page.html:47 templates/public-page.html:49
+#: templates/public-page.html:28 templates/public-page.html:30
 msgid "amount_created"
 msgstr "προγράμματα που δημιουργήθηκαν"
 
 #: templates/landing-page.html:72 templates/landing-page.html:74
-#: templates/public-page.html:53 templates/public-page.html:55
+#: templates/public-page.html:34 templates/public-page.html:36
 msgid "amount_saved"
 msgstr "αποθηκευμένα προγράμματα"
 
 #: templates/landing-page.html:78 templates/landing-page.html:80
-#: templates/public-page.html:59 templates/public-page.html:61
+#: templates/public-page.html:40 templates/public-page.html:42
 msgid "amount_submitted"
 msgstr "υποβληθέντα προγράμματα"
 
@@ -1364,7 +1362,7 @@ msgstr "Κέρδισες ένα επίτευγμα!"
 msgid "mailing_title"
 msgstr "Εγγραφή για Hedy newsletter"
 
-#: templates/learn-more.html:9 templates/profile.html:92
+#: templates/learn-more.html:9 templates/profile.html:99
 #: templates/recover.html:9 templates/signup.html:14
 msgid "email"
 msgstr "Email"
@@ -1377,7 +1375,7 @@ msgstr "Μικρό Όνομα"
 msgid "lastname"
 msgstr "Επίθετο"
 
-#: templates/learn-more.html:21 templates/profile.html:132
+#: templates/learn-more.html:21 templates/profile.html:139
 #: templates/signup.html:69
 msgid "country"
 msgstr "Χώρα"
@@ -1425,7 +1423,7 @@ msgstr "English"
 msgid "login_long"
 msgstr "Συνδέσου στο λογαριασμό σου"
 
-#: templates/login.html:21 website/auth.py:308
+#: templates/login.html:21 website/auth.py:301
 msgid "no_account"
 msgstr "Ακόμα χωρίς λογαριασμό;"
 
@@ -1459,128 +1457,132 @@ msgstr "Exercise"
 msgid "what_should_my_code_do"
 msgstr "What should my code do?"
 
-#: templates/profile.html:4
+#: templates/profile.html:7
+msgid "teacher_account_request"
+msgstr ""
+
+#: templates/profile.html:11
 msgid "account_overview"
 msgstr "Σύνοψη λογαριασμού"
 
-#: templates/profile.html:7 templates/profile.html:9
+#: templates/profile.html:14 templates/profile.html:16
 msgid "my_messages"
 msgstr "Τα μηνύματά μου"
 
-#: templates/profile.html:12
+#: templates/profile.html:19
 msgid "invite_message"
 msgstr "Έλαβες μια πρόσκληση για να συμμετάσχεις στην τάξη"
 
-#: templates/profile.html:13
+#: templates/profile.html:20
 msgid "sent_by"
 msgstr "Αυτή η πρόσκληση εστάλη από"
 
-#: templates/profile.html:16
+#: templates/profile.html:23
 msgid "delete_invite"
 msgstr "Διαγραφή πρόσκλησης"
 
-#: templates/profile.html:22 templates/profile.html:24
+#: templates/profile.html:29 templates/profile.html:31
 msgid "public_profile"
 msgstr "Δημόσιο προφίλ"
 
-#: templates/profile.html:26
+#: templates/profile.html:33
 #, fuzzy
 msgid "visit_own_public_profile"
 msgstr "Δημόσιο προφίλ"
 
-#: templates/profile.html:30
+#: templates/profile.html:37
 msgid "profile_picture"
 msgstr "Εικόνα προφίλ"
 
-#: templates/profile.html:43
+#: templates/profile.html:50
 msgid "personal_text"
 msgstr "Προσωπικό κείμενο"
 
-#: templates/profile.html:44
+#: templates/profile.html:51
 msgid "your_personal_text"
 msgstr "Το προσωπικό σου κείμενο..."
 
-#: templates/profile.html:48
+#: templates/profile.html:55
 msgid "favourite_program"
 msgstr "Αγαπημένο πρόγραμμα"
 
-#: templates/profile.html:59
+#: templates/profile.html:66
 msgid "public_profile_info"
 msgstr ""
 "Επιλέγοντας αυτό το πλαίσιο κάνω το προφίλ μου ορατό σε όλους. Πρόσεξε να"
 " μην κοινοποιείς προσωπικές πληροφορίες όπως το όνομα ή τη διεύθυνση του "
 "σπιτιού σου, γιατί θα μπορούν να τα δουν όλοι!"
 
-#: templates/profile.html:62
+#: templates/profile.html:69
 msgid "update_public"
 msgstr "Ενημέρωση δημόσιου προφίλ"
 
-#: templates/profile.html:64 templates/profile.html:144
+#: templates/profile.html:71 templates/profile.html:151
 msgid "are_you_sure"
 msgstr "Είσαι σίγουρος/η; Δεν μπορείς να αναιρέσεις αυτήν την ενέργεια."
 
-#: templates/profile.html:64
+#: templates/profile.html:71
 msgid "delete_public"
 msgstr "Διαγραφή δημόσιου προφίλ"
 
-#: templates/profile.html:78
+#: templates/profile.html:85
 msgid "self_removal_prompt"
 msgstr "Είστε βέβαιος/α ότι θέλεις να αποχωρήσεις από αυτήν την τάξη;"
 
-#: templates/profile.html:78
+#: templates/profile.html:85
 msgid "leave_class"
 msgstr "Έξοδος από την τάξη"
 
-#: templates/profile.html:84 templates/profile.html:87
+#: templates/profile.html:91 templates/profile.html:94
 msgid "settings"
 msgstr "Οι προσωπικές μου ρυθμίσεις"
 
-#: templates/profile.html:95 templates/signup.html:56
+#: templates/profile.html:102 templates/signup.html:56
 msgid "birth_year"
 msgstr "Έτος γέννησης"
 
-#: templates/profile.html:99 templates/signup.html:38
+#: templates/profile.html:106 templates/signup.html:38
 msgid "preferred_language"
 msgstr "Προτιμώμενη γλώσσα"
 
-#: templates/profile.html:109 templates/signup.html:48
+#: templates/profile.html:116 templates/signup.html:48
 msgid "preferred_keyword_language"
 msgstr "Προτιμώμενη γλώσσα για τα keywords"
 
-#: templates/profile.html:123 templates/signup.html:60
+#: templates/profile.html:130 templates/signup.html:60
 msgid "gender"
 msgstr "Φύλο"
 
-#: templates/profile.html:126 templates/signup.html:63
+#: templates/profile.html:133 templates/signup.html:63
 msgid "female"
 msgstr "Γυναίκα"
 
-#: templates/profile.html:127 templates/signup.html:64
+#: templates/profile.html:134 templates/signup.html:64
 msgid "male"
 msgstr "Άνδρας"
 
-#: templates/profile.html:128 templates/signup.html:65
+#: templates/profile.html:135 templates/signup.html:65
 msgid "other"
 msgstr "Άλλο"
 
-#: templates/profile.html:141
+#: templates/profile.html:148
 msgid "update_profile"
 msgstr "Ενημέρωση προφίλ"
 
-#: templates/profile.html:144
+#: templates/profile.html:151
 msgid "destroy_profile"
 msgstr "Μόνιμη διαγραφή λογαριασμού"
 
-#: templates/profile.html:146 templates/profile.html:149
-#: templates/profile.html:162
+#: templates/profile.html:153 templates/profile.html:156
+#: templates/profile.html:169
 msgid "change_password"
 msgstr "Άλλαξε συνθηματικό"
 
-#: templates/profile.html:151 templates/profile.html:155
+#: templates/profile.html:158 templates/profile.html:162
 msgid "new_password"
 msgstr "Νέο συνθηματικό"
 
-#: templates/profile.html:159
+#: templates/profile.html:166
 msgid "repeat_new_password"
 msgstr "Επανάλαβε το νέο συνθηματικό"
 
@@ -1646,23 +1648,7 @@ msgstr "Δεν έχεις προγράμματα ακόμα."
 msgid "write_first_program"
 msgstr "Γράψε το πρώτο σου πρόγραμμα!"
 
-#: templates/admin/admin-users.html:14 templates/public-page.html:20
-msgid "certified_teacher"
-msgstr ""
-
-#: templates/public-page.html:22
-msgid "admin"
-msgstr ""
-
-#: templates/admin/admin-users.html:18 templates/public-page.html:24
-msgid "distinguished_user"
-msgstr ""
-
-#: templates/admin/admin-users.html:22 templates/public-page.html:26
-msgid "contributor"
-msgstr ""
-
-#: templates/public-page.html:105
+#: templates/public-page.html:85
 msgid "no_shared_programs"
 msgstr "δεν έχει κοινά προγράμματα..."
 
@@ -1809,166 +1795,166 @@ msgstr "Achieved by {percentage}% of the users"
 msgid "title_admin"
 msgstr "Hedy - Administrator page"
 
-#: website/auth.py:194 website/auth.py:208 website/auth.py:297
-#: website/auth.py:432 website/auth.py:437 website/auth.py:485
-#: website/auth.py:657 website/auth.py:666 website/auth.py:699
-#: website/auth.py:749 website/auth.py:756 website/auth.py:776
+#: website/auth.py:187 website/auth.py:201 website/auth.py:290
+#: website/auth.py:425 website/auth.py:430 website/auth.py:478
+#: website/auth.py:650 website/auth.py:659 website/auth.py:692
+#: website/auth.py:742 website/auth.py:749 website/auth.py:769
 #: website/teacher.py:357 website/teacher.py:398
 msgid "username_invalid"
 msgstr "Το όνομα χρήστη δεν είναι έγκυρο"
 
-#: website/auth.py:196 website/auth.py:210
+#: website/auth.py:189 website/auth.py:203
 msgid "username_special"
 msgstr "To όνομα χρήστη δεν μπορεί να περιέχει `:` ή `@`."
 
-#: website/auth.py:198 website/auth.py:212
+#: website/auth.py:191 website/auth.py:205
 msgid "username_three"
 msgstr "Το όνομα χρήστη πρέπει να περιέχει τουλάχιστον τρείς χαρακτήρες."
 
-#: website/auth.py:200 website/auth.py:216 website/auth.py:299
-#: website/auth.py:487 website/auth.py:510 website/auth.py:522
-#: website/auth.py:703
+#: website/auth.py:193 website/auth.py:209 website/auth.py:292
+#: website/auth.py:480 website/auth.py:503 website/auth.py:515
+#: website/auth.py:696
 msgid "password_invalid"
 msgstr "Το συνθηματικό σου δεν είναι έγκυρο"
 
-#: website/auth.py:202 website/auth.py:218
+#: website/auth.py:195 website/auth.py:211
 msgid "passwords_six"
 msgstr "Όλα τα συνθηματικά πρέπει να έχουν 6 χαρακτήρες ή περισσότερους."
 
-#: website/auth.py:214 website/auth.py:552 website/auth.py:778
-#: website/auth.py:783
+#: website/auth.py:207 website/auth.py:545 website/auth.py:771
+#: website/auth.py:776
 msgid "email_invalid"
 msgstr "Παρακαλώ να εισάγεις ένα έγκυρο email."
 
-#: website/auth.py:269 website/auth.py:532 website/auth.py:688
-#: website/auth.py:731 website/auth.py:800
+#: website/auth.py:262 website/auth.py:525 website/auth.py:681
+#: website/auth.py:724 website/auth.py:793
 #, fuzzy
 msgid "mail_error_change_processed"
 msgstr ""
 "Something went wrong when sending a validation mail, the changes are "
 "still correctly processed."
 
-#: website/auth.py:308
+#: website/auth.py:301
 msgid "invalid_username_password"
 msgstr "Μη έγκυρο όνομα χρήστη/συνθηματικό."
 
-#: website/auth.py:359 website/auth.py:512 website/auth.py:516
-#: website/auth.py:707
+#: website/auth.py:352 website/auth.py:505 website/auth.py:509
+#: website/auth.py:700
 msgid "repeat_match_password"
 msgstr "Το συνθηματικό που επανέλαβες δεν ταιριάζει."
 
-#: website/auth.py:361 website/auth.py:543
+#: website/auth.py:354 website/auth.py:536
 msgid "language_invalid"
 msgstr "Παρακαλώ διάλεξε μια έγκυρη γλώσσα"
 
-#: website/auth.py:363
+#: website/auth.py:356
 msgid "agree_invalid"
 msgstr "Πρέπει να συμφωνήσεις με το απόρρητο και τους όρους"
 
-#: website/auth.py:365 website/auth.py:546
+#: website/auth.py:358 website/auth.py:539
 msgid "keyword_language_invalid"
 msgstr ""
 "Επίλεξε μια έγκυρη γλώσσα λέξεων-κλειδιών (επιλέξτε Αγγλικά ή τη δική σας"
 " γλώσσα)"
 
-#: website/auth.py:373 website/auth.py:375 website/auth.py:560
-#: website/auth.py:562
+#: website/auth.py:366 website/auth.py:368 website/auth.py:553
+#: website/auth.py:555
 msgid "year_invalid"
 msgstr "Παρακαλώ να εισάγεις ένα έτος ανάμεσα στο 1900 και {current_year}"
 
-#: website/auth.py:378 website/auth.py:565
+#: website/auth.py:371 website/auth.py:558
 msgid "gender_invalid"
 msgstr "Παρακαλώ διάλεξε ένα έγκυρο φύλο, επίλεξε (Γυναίκα, Άνδρας, Άλλο)"
 
-#: website/auth.py:381 website/auth.py:568
+#: website/auth.py:374 website/auth.py:561
 #, fuzzy
 msgid "country_invalid"
 msgstr "Please select a valid country."
 
-#: website/auth.py:383 website/auth.py:386
+#: website/auth.py:376 website/auth.py:379
 msgid "experience_invalid"
 msgstr "Παρακαλώ διάλεξε μια έγκυρη εμπειρία, επίλεξε (Ναι, Όχι)"
 
-#: website/auth.py:389
+#: website/auth.py:382
 msgid "programming_invalid"
 msgstr "Παρακαλώ διάλεξε μια έγκυρη γλώσσα προγραμματισμού"
 
-#: website/auth.py:392
+#: website/auth.py:385
 msgid "exists_username"
 msgstr "Αυτό το όνομα χρήστη χρησιμοποιείται ήδη."
 
-#: website/auth.py:394 website/auth.py:576
+#: website/auth.py:387 website/auth.py:569
 msgid "exists_email"
 msgstr "Αυτό το email χρησιμοποιείται ήδη."
 
-#: website/auth.py:430 website/auth.py:445 website/auth.py:701
-#: website/auth.py:711
+#: website/auth.py:423 website/auth.py:438 website/auth.py:694
+#: website/auth.py:704
 msgid "token_invalid"
 msgstr "Το διακριτικό σου δεν είναι έγκυρο"
 
-#: website/auth.py:489 website/auth.py:514 website/auth.py:705
+#: website/auth.py:482 website/auth.py:507 website/auth.py:698
 msgid "password_six"
 msgstr "Το συνθηματικό πρέπει να περιέχει τουλάχιστον έξι χαρακτήρες."
 
-#: website/auth.py:492 website/auth.py:495
+#: website/auth.py:485 website/auth.py:488
 msgid "password_change_not_allowed"
 msgstr "Δεν επιτρέπεται να αλλάξεις το συνθηματικό αυτού του χρήστη"
 
-#: website/auth.py:500
+#: website/auth.py:493
 msgid "password_change_success"
 msgstr "Το συνθηματικό του μαθητή σου άλλαξε με επιτυχία"
 
-#: website/auth.py:534
+#: website/auth.py:527
 msgid "password_updated"
 msgstr "Το συνθηματικό ενημερώθηκε."
 
-#: website/auth.py:623
+#: website/auth.py:616
 msgid "profile_updated_reload"
 msgstr "Το προφίλ ενημερώθηκε, η σελίδα θα ανανεωθεί."
 
-#: website/auth.py:626
+#: website/auth.py:619
 msgid "profile_updated"
 msgstr "Το προφίλ ενημερώθηκε."
 
-#: website/auth.py:690
+#: website/auth.py:683
 msgid "sent_password_recovery"
 msgstr ""
 "Σύντομα θα λάβεις ένα email με οδηγίες για το πώς να επαναφέρεις το "
 "συνθηματικό σου."
 
-#: website/auth.py:733
+#: website/auth.py:726
 msgid "password_resetted"
 msgstr ""
 "Έγινε επιτυχής επαναφορά του συνθηματικού σου. Θα ανακατευθυνθείς στη "
 "σελίδα σύνδεσης."
 
-#: website/auth.py:751
+#: website/auth.py:744
 msgid "teacher_invalid"
 msgstr "Η βαθμίδα καθηγητή δεν είναι έγκυρη"
 
-#: website/auth.py:880
+#: website/auth.py:835
 #, fuzzy
 msgid "mail_welcome_verify_body"
 msgstr ""
 "Your Hedy account has been created successfully. Welcome!\n"
 "Please click on this link to verify your email address: {link}"
 
-#: website/auth.py:882
+#: website/auth.py:837
 #, fuzzy
 msgid "mail_change_password_body"
 msgstr "Άλλαξε συνθηματικό"
 
-#: website/auth.py:884
+#: website/auth.py:839
 #, fuzzy
 msgid "mail_recover_password_body"
 msgstr "Ζήτησε επαναφορά συνθηματικού"
 
-#: website/auth.py:886
+#: website/auth.py:841
 #, fuzzy
 msgid "mail_reset_password_body"
 msgstr "Επαναφορά συνθηματικού"
 
-#: website/auth.py:888
+#: website/auth.py:843
 #, fuzzy
 msgid "mail_welcome_teacher_body"
 msgstr ""
@@ -1992,54 +1978,54 @@ msgstr ""
 "email</a>.\n"
 "Keep programming!"
 
-#: website/auth.py:894
+#: website/auth.py:849
 #, fuzzy
 msgid "mail_welcome_verify_subject"
 msgstr "Welcome to Hedy"
 
-#: website/auth.py:896
+#: website/auth.py:851
 #, fuzzy
 msgid "mail_change_password_subject"
 msgstr "Άλλαξε συνθηματικό"
 
-#: website/auth.py:898
+#: website/auth.py:853
 #, fuzzy
 msgid "mail_recover_password_subject"
 msgstr "Ζήτησε επαναφορά συνθηματικού"
 
-#: website/auth.py:900
+#: website/auth.py:855
 #, fuzzy
 msgid "mail_reset_password_subject"
 msgstr "Επαναφορά συνθηματικού"
 
-#: website/auth.py:902
+#: website/auth.py:857
 #, fuzzy
 msgid "mail_welcome_teacher_subject"
 msgstr "Your Hedy teacher account is ready"
 
-#: website/auth.py:906
+#: website/auth.py:861
 #, fuzzy
 msgid "user"
 msgstr "Όνομα Χρήστη"
 
-#: website/auth.py:911
+#: website/auth.py:866
 #, fuzzy
 msgid "mail_hello"
 msgstr "Hi {username}!"
 
-#: website/auth.py:913
+#: website/auth.py:868
 #, fuzzy
 msgid "mail_goodbye"
 msgstr ""
 "Thank you!\n"
 "The Hedy team"
 
-#: website/auth.py:921
+#: website/auth.py:876
 #, fuzzy
 msgid "copy_mail_link"
 msgstr "Please copy and paste this link into a new tab:"
 
-#: website/auth.py:922
+#: website/auth.py:877
 #, fuzzy
 msgid "link"
 msgstr "Σύνδεση"
@@ -2465,6 +2451,12 @@ msgstr "Δεν έδωσες όνομα περιπέτειας!"
 #~ msgid "current_password"
 #~ msgstr "Τρέχον συνθηματικό"
 
+#: content/error-messages.txt:9
+#, fuzzy
+msgid "Access Before Assign"
+msgstr ""
+"You tried to use the variable {name} on line {access_line_number}, but you "
+"set it on line {definition_line_number}. Set a variable before using it."
 #~ msgid "tutorial_start_title"
 #~ msgstr "Welcome to Hedy!"
 
@@ -2595,12 +2587,3 @@ msgstr "Δεν έδωσες όνομα περιπέτειας!"
 
 #~ msgid "teacher_tutorial_end_message"
 #~ msgstr "Έλαβες μια πρόσκληση για να συμμετάσχεις στην τάξη"
-
-#~ msgid "Access Before Assign"
-#~ msgstr ""
-#~ "You tried to use the variable "
-#~ "{name} on line {access_line_number}, but "
-#~ "you set it on line "
-#~ "{definition_line_number}. Set a variable "
-#~ "before using it."
-
