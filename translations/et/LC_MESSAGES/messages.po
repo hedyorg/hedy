@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-08-17 15:16+0200\n"
+"POT-Creation-Date: 2022-08-18 14:10+0200\n"
 "PO-Revision-Date: 2022-08-10 08:50+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language: et\n"
@@ -42,7 +42,7 @@ msgstr "Hedy - Minu programmid"
 #: app.py:702 app.py:712 app.py:716 app.py:731 app.py:1027 app.py:1552
 #: website/admin.py:17 website/admin.py:24 website/admin.py:92
 #: website/admin.py:111 website/admin.py:130 website/admin.py:137
-#: website/admin.py:145 website/auth.py:737 website/auth.py:764
+#: website/admin.py:145 website/auth.py:734 website/auth.py:761
 #: website/programs.py:210 website/statistics.py:100
 msgid "unauthorized"
 msgstr "Sul ei ole õigust seda lehte vaadata"
@@ -144,9 +144,9 @@ msgstr "We couldn't find that page!"
 msgid "tutorial_message_not_found"
 msgstr ""
 
-#: app.py:1493 website/auth.py:287 website/auth.py:342 website/auth.py:479
-#: website/auth.py:504 website/auth.py:537 website/auth.py:651
-#: website/auth.py:693 website/auth.py:743 website/auth.py:770
+#: app.py:1493 website/auth.py:288 website/auth.py:343 website/auth.py:476
+#: website/auth.py:501 website/auth.py:534 website/auth.py:648
+#: website/auth.py:690 website/auth.py:740 website/auth.py:767
 #: website/quiz.py:43 website/quiz.py:69 website/teacher.py:88
 #: website/teacher.py:123 website/teacher.py:167 website/teacher.py:252
 #: website/teacher.py:308 website/teacher.py:355 website/teacher.py:396
@@ -187,17 +187,17 @@ msgstr ""
 "The teacher invitation code is invalid. To become a teacher, reach out to"
 " hello@hedy.org."
 
-#: utils.py:292
+#: utils.py:303
 #, fuzzy
 msgid "default_404"
 msgstr "We could not find that page..."
 
-#: utils.py:294
+#: utils.py:305
 #, fuzzy
 msgid "default_403"
 msgstr "Looks like you aren't authorized..."
 
-#: utils.py:296
+#: utils.py:307
 #, fuzzy
 msgid "default_500"
 msgstr "Something went wrong..."
@@ -549,7 +549,7 @@ msgstr "Please enter the name of the class"
 
 #: templates/class-overview.html:20 templates/class-overview.html:70
 #: templates/create-accounts.html:16 templates/highscores.html:37
-#: templates/login.html:10 templates/profile.html:89 templates/recover.html:9
+#: templates/login.html:10 templates/profile.html:96 templates/recover.html:9
 #: templates/signup.html:10
 #, fuzzy
 msgid "username"
@@ -677,7 +677,7 @@ msgstr "Invite date"
 msgid "expiration_date"
 msgstr "Expiration date"
 
-#: templates/class-overview.html:82 templates/profile.html:16
+#: templates/class-overview.html:82 templates/profile.html:23
 #, fuzzy
 msgid "delete_invite_prompt"
 msgstr "Are you sure you want to remove this class invitation?"
@@ -697,7 +697,7 @@ msgstr "Error logo"
 msgid "goto_profile"
 msgstr "Go to my profile"
 
-#: templates/class-prejoin.html:15 templates/profile.html:13
+#: templates/class-prejoin.html:15 templates/profile.html:20
 #, fuzzy
 msgid "prompt_join_class"
 msgstr "Do you want to join this class?"
@@ -707,7 +707,7 @@ msgstr "Do you want to join this class?"
 msgid "join_prompt"
 msgstr "You need to have an account to join a class. Would you like to login now?"
 
-#: templates/class-prejoin.html:17 templates/profile.html:15
+#: templates/class-prejoin.html:17 templates/profile.html:22
 #, fuzzy
 msgid "join_class"
 msgstr "Join class"
@@ -964,8 +964,8 @@ msgid "select_own_adventures"
 msgstr "Select own adventures"
 
 #: templates/customize-class.html:96 templates/customize-class.html:120
-#: templates/profile.html:50 templates/profile.html:125
-#: templates/profile.html:134 templates/signup.html:40 templates/signup.html:62
+#: templates/profile.html:57 templates/profile.html:132
+#: templates/profile.html:141 templates/signup.html:40 templates/signup.html:62
 #: templates/signup.html:71
 #, fuzzy
 msgid "select"
@@ -1080,8 +1080,8 @@ msgstr "View program"
 msgid "report_program"
 msgstr ""
 
-#: templates/for-teachers.html:15 templates/profile.html:71
-#: templates/profile.html:73
+#: templates/for-teachers.html:15 templates/profile.html:78
+#: templates/profile.html:80
 #, fuzzy
 msgid "my_classes"
 msgstr "My classes"
@@ -1341,6 +1341,10 @@ msgstr "My account"
 msgid "for_teachers"
 msgstr "Õpetajatele"
 
+#: templates/incl-menubar.html:28
+msgid "teacher_manual"
+msgstr ""
+
 #: templates/incl-menubar.html:29
 #, fuzzy
 msgid "logout"
@@ -1416,7 +1420,7 @@ msgid "your_account"
 msgstr "Your profile"
 
 #: templates/landing-page.html:43 templates/landing-page.html:45
-#: templates/profile.html:36 templates/public-page.html:7
+#: templates/profile.html:43 templates/public-page.html:7
 #: templates/public-page.html:9
 #, fuzzy
 msgid "profile_logo_alt"
@@ -1476,7 +1480,7 @@ msgstr "You've earned an achievement!"
 msgid "mailing_title"
 msgstr "Subscribe to the Hedy newsletter"
 
-#: templates/learn-more.html:9 templates/profile.html:92
+#: templates/learn-more.html:9 templates/profile.html:99
 #: templates/recover.html:9 templates/signup.html:14
 #, fuzzy
 msgid "email"
@@ -1492,7 +1496,7 @@ msgstr "First Name"
 msgid "lastname"
 msgstr "Last Name"
 
-#: templates/learn-more.html:21 templates/profile.html:132
+#: templates/learn-more.html:21 templates/profile.html:139
 #: templates/signup.html:69
 #, fuzzy
 msgid "country"
@@ -1548,7 +1552,7 @@ msgstr "English"
 msgid "login_long"
 msgstr "Log in to your account"
 
-#: templates/login.html:21 website/auth.py:300
+#: templates/login.html:21 website/auth.py:301
 #, fuzzy
 msgid "no_account"
 msgstr "No account?"
@@ -1588,62 +1592,66 @@ msgstr "Exercise"
 msgid "what_should_my_code_do"
 msgstr "What should my code do?"
 
-#: templates/profile.html:4
+#: templates/profile.html:7
+msgid "teacher_account_request"
+msgstr ""
+
+#: templates/profile.html:11
 #, fuzzy
 msgid "account_overview"
 msgstr "Account overview"
 
-#: templates/profile.html:7 templates/profile.html:9
+#: templates/profile.html:14 templates/profile.html:16
 #, fuzzy
 msgid "my_messages"
 msgstr "My messages"
 
-#: templates/profile.html:12
+#: templates/profile.html:19
 #, fuzzy
 msgid "invite_message"
 msgstr "You have received an invitation to join class"
 
-#: templates/profile.html:13
+#: templates/profile.html:20
 #, fuzzy
 msgid "sent_by"
 msgstr "This invitation is sent by"
 
-#: templates/profile.html:16
+#: templates/profile.html:23
 #, fuzzy
 msgid "delete_invite"
 msgstr "Delete invitation"
 
-#: templates/profile.html:22 templates/profile.html:24
+#: templates/profile.html:29 templates/profile.html:31
 #, fuzzy
 msgid "public_profile"
 msgstr "Public profile"
 
-#: templates/profile.html:26
+#: templates/profile.html:33
 #, fuzzy
 msgid "visit_own_public_profile"
 msgstr "You don't have a public profile text yet..."
 
-#: templates/profile.html:30
+#: templates/profile.html:37
 #, fuzzy
 msgid "profile_picture"
 msgstr "Profile picture"
 
-#: templates/profile.html:43
+#: templates/profile.html:50
 #, fuzzy
 msgid "personal_text"
 msgstr "Personal text"
 
-#: templates/profile.html:44
+#: templates/profile.html:51
 #, fuzzy
 msgid "your_personal_text"
 msgstr "Your personal text..."
 
-#: templates/profile.html:48
+#: templates/profile.html:55
 #, fuzzy
 msgid "favourite_program"
 msgstr "Favourite program"
 
-#: templates/profile.html:59
+#: templates/profile.html:66
 #, fuzzy
 msgid "public_profile_info"
 msgstr ""
@@ -1651,93 +1659,93 @@ msgstr ""
 "not to share personal information like your name or home address, because"
 " everyone will be able to see it!"
 
-#: templates/profile.html:62
+#: templates/profile.html:69
 #, fuzzy
 msgid "update_public"
 msgstr "Update public profile"
 
-#: templates/profile.html:64 templates/profile.html:144
+#: templates/profile.html:71 templates/profile.html:151
 #, fuzzy
 msgid "are_you_sure"
 msgstr "Are you sure? You cannot revert this action."
 
-#: templates/profile.html:64
+#: templates/profile.html:71
 #, fuzzy
 msgid "delete_public"
 msgstr "Delete public profile"
 
-#: templates/profile.html:78
+#: templates/profile.html:85
 #, fuzzy
 msgid "self_removal_prompt"
 msgstr "Are you sure you want to leave this class?"
 
-#: templates/profile.html:78
+#: templates/profile.html:85
 #, fuzzy
 msgid "leave_class"
 msgstr "Leave class"
 
-#: templates/profile.html:84 templates/profile.html:87
+#: templates/profile.html:91 templates/profile.html:94
 #, fuzzy
 msgid "settings"
 msgstr "My personal settings"
 
-#: templates/profile.html:95 templates/signup.html:56
+#: templates/profile.html:102 templates/signup.html:56
 #, fuzzy
 msgid "birth_year"
 msgstr "Birth year"
 
-#: templates/profile.html:99 templates/signup.html:38
+#: templates/profile.html:106 templates/signup.html:38
 #, fuzzy
 msgid "preferred_language"
 msgstr "Preferred language"
 
-#: templates/profile.html:109 templates/signup.html:48
+#: templates/profile.html:116 templates/signup.html:48
 #, fuzzy
 msgid "preferred_keyword_language"
 msgstr "Preferred keyword language"
 
-#: templates/profile.html:123 templates/signup.html:60
+#: templates/profile.html:130 templates/signup.html:60
 #, fuzzy
 msgid "gender"
 msgstr "Gender"
 
-#: templates/profile.html:126 templates/signup.html:63
+#: templates/profile.html:133 templates/signup.html:63
 #, fuzzy
 msgid "female"
 msgstr "Female"
 
-#: templates/profile.html:127 templates/signup.html:64
+#: templates/profile.html:134 templates/signup.html:64
 #, fuzzy
 msgid "male"
 msgstr "Male"
 
-#: templates/profile.html:128 templates/signup.html:65
+#: templates/profile.html:135 templates/signup.html:65
 #, fuzzy
 msgid "other"
 msgstr "Other"
 
-#: templates/profile.html:141
+#: templates/profile.html:148
 #, fuzzy
 msgid "update_profile"
 msgstr "Update profile"
 
-#: templates/profile.html:144
+#: templates/profile.html:151
 #, fuzzy
 msgid "destroy_profile"
 msgstr "Delete profile"
 
-#: templates/profile.html:146 templates/profile.html:149
-#: templates/profile.html:162
+#: templates/profile.html:153 templates/profile.html:156
+#: templates/profile.html:169
 #, fuzzy
 msgid "change_password"
 msgstr "Change password"
 
-#: templates/profile.html:151 templates/profile.html:155
+#: templates/profile.html:158 templates/profile.html:162
 #, fuzzy
 msgid "new_password"
 msgstr "New password"
 
-#: templates/profile.html:159
+#: templates/profile.html:166
 #, fuzzy
 msgid "repeat_new_password"
 msgstr "Repeat new password"
@@ -1821,6 +1829,23 @@ msgstr "Write your first program!"
 #, fuzzy
 msgid "no_shared_programs"
 msgstr "has no shared programs..."
+
+#: templates/public-page.html:85
+#: templates/admin/admin-users.html:14 templates/public-page.html:20
+msgid "certified_teacher"
+msgstr ""
+
+#: templates/public-page.html:22
+msgid "admin"
+msgstr ""
+
+#: templates/admin/admin-users.html:18 templates/public-page.html:24
+msgid "distinguished_user"
+msgstr ""
+
+#: templates/admin/admin-users.html:22 templates/public-page.html:26
+msgid "contributor"
+msgstr ""
 
 #: templates/quiz.html:4
 #, fuzzy
@@ -1988,10 +2013,10 @@ msgstr "Achieved by {percentage}% of the users"
 msgid "title_admin"
 msgstr "Hedy - Administrator page"
 
-#: website/auth.py:187 website/auth.py:201 website/auth.py:289
-#: website/auth.py:428 website/auth.py:433 website/auth.py:481
-#: website/auth.py:653 website/auth.py:662 website/auth.py:695
-#: website/auth.py:745 website/auth.py:752 website/auth.py:772
+#: website/auth.py:187 website/auth.py:201 website/auth.py:290
+#: website/auth.py:425 website/auth.py:430 website/auth.py:478
+#: website/auth.py:650 website/auth.py:659 website/auth.py:692
+#: website/auth.py:742 website/auth.py:749 website/auth.py:769
 #: website/teacher.py:357 website/teacher.py:398
 #, fuzzy
 msgid "username_invalid"
@@ -2007,9 +2032,9 @@ msgstr "Username cannot contain `:` or `@`."
 msgid "username_three"
 msgstr "Username must contain at least three characters."
 
-#: website/auth.py:193 website/auth.py:209 website/auth.py:291
-#: website/auth.py:483 website/auth.py:506 website/auth.py:518
-#: website/auth.py:699
+#: website/auth.py:193 website/auth.py:209 website/auth.py:292
+#: website/auth.py:480 website/auth.py:503 website/auth.py:515
+#: website/auth.py:696
 #, fuzzy
 msgid "password_invalid"
 msgstr "Your password is invalid."
@@ -2019,147 +2044,159 @@ msgstr "Your password is invalid."
 msgid "passwords_six"
 msgstr "All passwords need to be six characters or longer."
 
-#: website/auth.py:207 website/auth.py:548 website/auth.py:774
-#: website/auth.py:779
+#: website/auth.py:207 website/auth.py:545 website/auth.py:771
+#: website/auth.py:776
 #, fuzzy
 msgid "email_invalid"
 msgstr "Please enter a valid email."
 
-#: website/auth.py:261 website/auth.py:528 website/auth.py:684
-#: website/auth.py:727 website/auth.py:796
+#: website/auth.py:262 website/auth.py:525 website/auth.py:681
+#: website/auth.py:724 website/auth.py:793
 #, fuzzy
 msgid "mail_error_change_processed"
 msgstr ""
 "Something went wrong when sending a validation mail, the changes are "
 "still correctly processed."
 
-#: website/auth.py:300
+#: website/auth.py:301
 #, fuzzy
 msgid "invalid_username_password"
 msgstr "Invalid username/password."
 
-#: website/auth.py:351 website/auth.py:508 website/auth.py:512
-#: website/auth.py:703
+#: website/auth.py:352 website/auth.py:505 website/auth.py:509
+#: website/auth.py:700
 #, fuzzy
 msgid "repeat_match_password"
 msgstr "The repeated password does not match."
 
-#: website/auth.py:353 website/auth.py:539
+#: website/auth.py:354 website/auth.py:536
 #, fuzzy
 msgid "language_invalid"
 msgstr "Please select a valid language."
 
-#: website/auth.py:355
+#: website/auth.py:356
 #, fuzzy
 msgid "agree_invalid"
 msgstr "You have to agree with the privacy terms."
 
-#: website/auth.py:357 website/auth.py:542
+#: website/auth.py:358 website/auth.py:539
 #, fuzzy
 msgid "keyword_language_invalid"
 msgstr ""
 "Please select a valid keyword language (select English or your own "
 "language)."
 
-#: website/auth.py:365 website/auth.py:367 website/auth.py:556
-#: website/auth.py:558
+#: website/auth.py:366 website/auth.py:368 website/auth.py:553
+#: website/auth.py:555
 #, fuzzy
 msgid "year_invalid"
 msgstr "Please enter a year between 1900 and {current_year}."
 
-#: website/auth.py:370 website/auth.py:561
+#: website/auth.py:371 website/auth.py:558
 #, fuzzy
 msgid "gender_invalid"
 msgstr "Please select a valid gender, choose (Female, Male, Other)."
 
-#: website/auth.py:373 website/auth.py:564
+#: website/auth.py:374 website/auth.py:561
 #, fuzzy
 msgid "country_invalid"
 msgstr "Please select a valid country."
 
-#: website/auth.py:375 website/auth.py:378
+#: website/auth.py:376 website/auth.py:379
 #, fuzzy
 msgid "experience_invalid"
 msgstr "Please select a valid experience, choose (Yes, No)."
 
-#: website/auth.py:381
+#: website/auth.py:382
 #, fuzzy
 msgid "programming_invalid"
 msgstr "Please select a valid programming language."
 
-#: website/auth.py:384
+#: website/auth.py:385
 #, fuzzy
 msgid "exists_username"
 msgstr "That username is already in use."
 
-#: website/auth.py:386 website/auth.py:572
+#: website/auth.py:387 website/auth.py:569
 #, fuzzy
 msgid "exists_email"
 msgstr "That email is already in use."
 
-#: website/auth.py:426 website/auth.py:441 website/auth.py:697
-#: website/auth.py:707
+#: website/auth.py:423 website/auth.py:438 website/auth.py:694
+#: website/auth.py:704
 #, fuzzy
 msgid "token_invalid"
 msgstr "Your token is invalid."
 
-#: website/auth.py:485 website/auth.py:510 website/auth.py:701
+#: website/auth.py:482 website/auth.py:507 website/auth.py:698
 #, fuzzy
 msgid "password_six"
 msgstr "Your password must contain at least six characters."
 
-#: website/auth.py:488 website/auth.py:491
+#: website/auth.py:485 website/auth.py:488
 #, fuzzy
 msgid "password_change_not_allowed"
 msgstr "You're not allowed to change the password of this user."
 
-#: website/auth.py:496
+#: website/auth.py:493
 #, fuzzy
 msgid "password_change_success"
 msgstr "Password of your student is successfully changed."
 
-#: website/auth.py:530
+#: website/auth.py:527
 #, fuzzy
 msgid "password_updated"
 msgstr "Password updated."
 
-#: website/auth.py:619
+#: website/auth.py:616
 #, fuzzy
 msgid "profile_updated_reload"
 msgstr "Profile updated, page will be re-loaded."
 
-#: website/auth.py:622
+#: website/auth.py:619
 #, fuzzy
 msgid "profile_updated"
 msgstr "Profile updated."
 
-#: website/auth.py:686
+#: website/auth.py:683
 #, fuzzy
 msgid "sent_password_recovery"
 msgstr ""
 "You should soon receive an email with instructions on how to reset your "
 "password."
 
-#: website/auth.py:729
+#: website/auth.py:726
 #, fuzzy
 msgid "password_resetted"
 msgstr ""
 "Your password has been successfully reset. You are being redirected to "
 "the login page."
 
-#: website/auth.py:747
+#: website/auth.py:733
+msgid "already_teacher"
+msgstr ""
+
+#: website/auth.py:735
+msgid "already_teacher_request"
+msgstr ""
+
+#: website/auth.py:738
+msgid "teacher_account_success"
+msgstr ""
+
+#: website/auth.py:744
 #, fuzzy
 msgid "teacher_invalid"
 msgstr "Your teacher value is invalid."
 
-#: website/auth.py:838
+#: website/auth.py:835
 #, fuzzy
 msgid "mail_welcome_verify_body"
 msgstr ""
 "Your Hedy account has been created successfully. Welcome!\n"
 "Please click on this link to verify your email address: {link}"
 
-#: website/auth.py:840
+#: website/auth.py:837
 #, fuzzy
 msgid "mail_change_password_body"
 msgstr ""
@@ -2167,7 +2204,7 @@ msgstr ""
 "If you didn't change your password, please contact us immediately by "
 "replying to this email."
 
-#: website/auth.py:842
+#: website/auth.py:839
 #, fuzzy
 msgid "mail_recover_password_body"
 msgstr ""
@@ -2175,7 +2212,7 @@ msgstr ""
 "valid for <b>4</b> hours.\n"
 "If you haven't required a password reset, please ignore this email: {link}"
 
-#: website/auth.py:844
+#: website/auth.py:841
 #, fuzzy
 msgid "mail_reset_password_body"
 msgstr ""
@@ -2184,7 +2221,7 @@ msgstr ""
 "If you didn't change your password, please contact us immediately by "
 "replying to this email."
 
-#: website/auth.py:846
+#: website/auth.py:843
 #, fuzzy
 msgid "mail_welcome_teacher_body"
 msgstr ""
@@ -2212,53 +2249,53 @@ msgstr ""
 "\n"
 "Keep programming!"
 
-#: website/auth.py:852
+#: website/auth.py:849
 #, fuzzy
 msgid "mail_welcome_verify_subject"
 msgstr "Welcome to Hedy"
 
-#: website/auth.py:854
+#: website/auth.py:851
 #, fuzzy
 msgid "mail_change_password_subject"
 msgstr "Your Hedy password has been changed"
 
-#: website/auth.py:856
+#: website/auth.py:853
 #, fuzzy
 msgid "mail_recover_password_subject"
 msgstr "Request a password reset."
 
-#: website/auth.py:858
+#: website/auth.py:855
 msgid "mail_reset_password_subject"
 msgstr "Sinu Hedy salasõna on lähtestatud"
 
-#: website/auth.py:860
+#: website/auth.py:857
 #, fuzzy
 msgid "mail_welcome_teacher_subject"
 msgstr "Your Hedy teacher account is ready"
 
-#: website/auth.py:864
+#: website/auth.py:861
 #, fuzzy
 msgid "user"
 msgstr "user"
 
-#: website/auth.py:869
+#: website/auth.py:866
 #, fuzzy
 msgid "mail_hello"
 msgstr "Hi {username}!"
 
-#: website/auth.py:871
+#: website/auth.py:868
 #, fuzzy
 msgid "mail_goodbye"
 msgstr ""
 "Thank you!\n"
 "The Hedy team"
 
-#: website/auth.py:879
+#: website/auth.py:876
 #, fuzzy
 msgid "copy_mail_link"
 msgstr "Please copy and paste this link into a new tab:"
 
-#: website/auth.py:880
+#: website/auth.py:877
 #, fuzzy
 msgid "link"
 msgstr "Link"
@@ -2558,6 +2595,12 @@ msgstr "You didn't enter an adventure name!"
 #~ msgid "current_password"
 #~ msgstr "Current password"
 
+#: content/error-messages.txt:9
+#, fuzzy
+msgid "Access Before Assign"
+msgstr ""
+"You tried to use the variable {name} on line {access_line_number}, but you "
+"set it on line {definition_line_number}. Set a variable before using it."
 #~ msgid "tutorial_start_title"
 #~ msgstr "Tere tulemast Hedy juurde!"
 
@@ -2732,4 +2775,3 @@ msgstr "You didn't enter an adventure name!"
 
 #~ msgid "teacher_tutorial_end_message"
 #~ msgstr "Click on 'next step' to get started as a Hedy teacher!"
-
