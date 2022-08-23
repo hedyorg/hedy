@@ -175,14 +175,25 @@ adventures:
                         {print} 'Dit wordt allemaal 5 keer herhaald'
                 story_text: |
                     ## Inspringen
-                    Je kunt vanaf dit level meerdere regels samen herhalen met het `{repeat}` commando. Dan moet je de regels die herhaald worden wel *inspringen*,
-                    dat betekent dat ze moeten beginnen met vier spaties.
-                    Ook als je maar één regel wilt herhalen moet je inspringen!
+                    `{ask}` en `{print}` werken nog steeds zoals je gewend bent. Maar bij  `{if}`, `{else}` en `{repeat}` is er iets veranderd!
+                    Je kunt vanaf dit level meerdere regels samen uitvoeren. Daarvoor moet je deze regels *inspringen*, dat betekent dat ze moeten beginnen met vier spaties.
+                    Ook als je maar één regel in een `{if}`, `{else}` of `{repeat}` wil zetten, moet je inspringen!
                 example_code: |
+                    Zo werkt het `{repeat}` commando vanaf nu:
                     ```
                     {repeat} 5 {times}
                         {print} 'Hallo allemaal'
                         {print} 'Dit wordt allemaal 5 keer herhaald'
+                    ```
+                    Dit is hoe `{if}` en `{else}` vanaf nu werken:
+                    ```
+                    naam {is} {ask} 'Hoe heet je?'
+                    {if} naam {is} Hedy
+                        {print} 'Welkom, Hedy'
+                        {print} 'Je kan nu spelen op je computer!'
+                    {else}
+                        {print} 'INDRINGER!'
+                        {print} 'Je kunt deze computer niet gebruiken!'
                     ```
             9:
                 start_code: |-
@@ -320,7 +331,7 @@ adventures:
                     Als je wil kijken of een getal kleiner of even groot is dan een ander getal, kun je `<=` gebruiken. Bijvoorbeeld `leeftijd <= 11`.
                     De `>` kijkt of iets groter is dan het tweede getal. Bijvoorbeeld met `punten > 10` kun je kijken of `punten` groter is dan 10.
                     Als je wil kijken of een getal groter of even groot is als een ander getal, kun je `>=` gebruiken. Bijvoorbeeld `punten >= 11`.
-                    Je gebruikt de vergelijkingen in de `{if}`, zo:
+                    Je gebruikt de vergelijkingen in de `{if}` zo:
                 example_code: |
                     ```
                     leeftijd = {ask} 'Hoe oud ben jij?'
@@ -328,7 +339,7 @@ adventures:
                             {print} 'Dan ben je jonger dan ik!'
                     ```
                 story_text_2: |
-                    Als je iets precies wilt vergelijken, mag je dat nu doen met twee {is}jes. Zo doen de meeste programmeertalen dat:
+                    Als je iets precies wilt vergelijken, mag je dat nu doen met twee isgelijktekentjes. Zo doen de meeste programmeertalen dat:
                 example_code_2: |
                     ```
                     name = {ask} 'Hoe heet jij?'
@@ -382,10 +393,10 @@ adventures:
                         {print} i
                     {print} 'Wie niet weg is, is gezien'
                 story_text: |-
-                    ## Elif
+                    ## {elif}
                     Nu veranderen we nog een klein stukje dat te maken heeft met het inspringen. Elke keer dat we gaan inspringen moeten we een `:` bij de regel ervoor zetten.
 
-                    Daarnaast kun je in dit level een nieuw commando gebruiken `{elif}`. `{elif}` is de afkorting van {else} en {if} en zorgt ervoor dat je 3 (of meer!) opties kunt maken.
+                    Daarnaast kun je in dit level een nieuw commando gebruiken: `{elif}`. `{elif}` is de afkorting van {else} en {if} en zorgt ervoor dat je 3 (of meer!) opties kunt maken.
                     Kijk maar!
                 example_code: "```\nprijzen = ['1 miljoen euro', 'een appeltaart', 'niets']\njouw_prijs = prijzen[{random}]\n{print} 'Je wint ' jouw_prijs\n{if} jouw_prijs == '1 miljoen euro' :\n    {print} 'Joepie, je bent rijk!'\n{elif} jouw_prijs == 'een appeltaart' :\n    {print} 'Lekker, een appeltaart!'\n{else}:\n    {print} 'Veel geluk de volgende keer..'\n```\n"
             18:
@@ -549,7 +560,6 @@ adventures:
                     ## Verhaal
                     In dit level kun je {if} commando's in andere {if} commando's stoppen. Hierdoor krijg je nog meer mogelijkheden om je verhaal echt interactief te maken!
                 example_code: |
-                    ## Voorbeeld Simpele Hedy Code
                     ```
                     {print} 'Robin loopt door de stad'
                     locatie = {ask} 'Gaat Robin een winkel in of gaat ze naar huis?'
@@ -788,7 +798,6 @@ adventures:
                     ## Zing een liedje!
                     Nu kun je meerdere regels herhalen, wat heel fijn is in liedjes!
                 example_code: |
-                    ## Cowboy Billie Boem
                     ```
                     {repeat} 3 {times}
                         dier = {ask} 'Welk dier kies je?'
@@ -1843,7 +1852,10 @@ adventures:
             4:
                 story_text: |
                     ## Restaurant
+                    In dit level moet je aanhalingstekens gebruiken bij het `{print}` commando. 
                     Lukt het jou om aanhalingstekens toe te voegen aan je restaurantcode?
+
+                    Let op! In vorige levels was het toegestaan om enkele aanhalingstekens (`'`) te gebruiken in de tekst, maar vanaf dit level zal Hedy denken dat dat aanhalingstekens zijn, waardoor je code niet werkt. Dus in plaats van `{print} Hedy's pizza is de lekkerste`, moet je nu typen: `{print} 'De pizza van Hedy is de lekkerste'`.
                 start_code: "# Schrijf jouw code hier"
                 example_code: |
                     ```
@@ -2101,8 +2113,9 @@ adventures:
             1:
                 story_text: |
                     ## Spookhuis
-                    in dit avontuur leer je een echte spookhuis game maken, waarbij de spelers moeten ontsnappen uit jouw spookhuis door je juiste deur te kiezen.
+                    In dit avontuur leer je een echte spookhuis game maken, waarbij de spelers moeten ontsnappen uit jouw spookhuis door je juiste deur te kiezen.
                     Als je de goede deur kiest overleef je het, maar anders...
+
                     In level 1 beginnen we ons spookhuisspel door een spannend verhaal te verzinnen en de speler te vragen welk monster ze tegenkomen in het spookhuis.
 
                     ## Uitdaging
@@ -2490,7 +2503,7 @@ adventures:
 
                 start_code: "{print} Op naar het volgende level!"
                 example_code: "```\n{print} Welkom bij restaurant Hedy\n{ask} Wat wilt u eten?\n{echo} Dus dit wilt u eten\n{ask} Wat wilt u drinken\n{echo} Dus dit wilt u drinken\n```\n"
-                story_text_2: "Als de speler hamburger en cola invult, kun je nog niet zeggen `dus u wilt een hamburger en cola`, maar je moet daar twee losse zinnen van maken.\nDaarnaast echoot Hedy alleen woorden aan het einde van de zin. Dus je kunt in level 1 niet zeggen 'Je hamburger komt eraan!'\n\nDat verandert in level 2. In level 2 leer je namelijk werken met variabelen waardoor je Hedy heel veel verschillende stukjes informatie kunt laten onthouden en ze overal in de zin te printen.\nJe leert dan ook het `{at} {random}` commando, daarmee kun je spelletjes maken.\nNeem snel een kijkje!\n"
+                story_text_2: "Als de speler hamburger en cola invult, kun je nog niet zeggen \"dus u wilt een hamburger en cola\", maar je moet daar twee losse zinnen van maken.\nDaarnaast echoot Hedy alleen woorden aan het einde van de zin. Dus je kunt in level 1 niet zeggen \"Je hamburger komt eraan!\"\n\nDat verandert in level 2. In level 2 leer je namelijk werken met variabelen waardoor je Hedy heel veel verschillende stukjes informatie kunt laten onthouden en ze overal in de zin te printen.\nJe leert in level 2 ook het `{at} {random}` commando, daarmee kun je spelletjes maken.\nNeem snel een kijkje!\n"
             2:
                 story_text: |
                     ## Vooruitblik
@@ -2631,20 +2644,23 @@ adventures:
                     ## Vooruitblik
                     Misschien heb je in je restaurant opdracht wel eens geprobeerd om prijzen te maken met kommagetallen. Helaas was dit niet toegestaan.
                     Vanaf het volgende level kun je wel kommagetallen gebruiken!
-
-                    Daarnaast mag je meerdere woorden opslaan in een variabele door aanhalingstekens te gebruiken. 
-                    Kijk maar, in dit level kun je bij deze code wel SpongeBob SquarePants invullen...
                 example_code: |
                     ```
-                    naam = {ask} 'Hoe heet je favoriete tekenfilmfiguur?'
-                    {print} 'Ik kijk ook graag naar ' naam
+                    hamburger {is} 5
+                    drinken {is} 2
+                    totaal {is} hamburger + drinken
+                    print 'Je hebt een hamburger en drinken besteld.'
+                    print 'Dat kost ' totaal ' euro.'
                     ```
-                    Maar je kunt hem nog niet instellen als variabele. Kijk maar naar deze code. Die werkt op dit level nog niet!
+                    De code hierboven werkt, want de hamburger kost 5 euro en het drinken kost 2 euro. Maar als je 50 cent meer rekent, werkt het programma niet meer! Kijk maar in de code hieronder:
                     ```
-                    programma = SpongeBob SquarePants
-                    {print} 'Ik kijk graag naar ' programma
+                    hamburger {is} 5.50
+                    drinken {is} 2.30
+                    totaal {is} hamburger + drinken
+                    print 'Je hebt een hamburger en drinken besteld.'
+                    print 'Dat kost ' totaal ' euro.'
                     ```
-                    Ga naar het volgende level om dit programma wel te laten werken!
+                    In het volgende level ga je leren hoe je kan zorgen dat deze code wél werkt!
                 start_code: "{print} 'Op naar het volgende level!'"
             12:
                 story_text: |
@@ -2754,12 +2770,12 @@ adventures:
         name: Boter Kaas en Eieren
         levels:
             14:
-                story_text: "## Boter Kaas en Eieren\nIn de vorige levels heb je het spel boeter kaas en eieren kunnen maken. Nu heb je het = teken, het == teken en het != teken geleerd. \nJe kunt deze kennis toepassen in het Boter Kaas en Eieren spel op deze manier:\n"
+                story_text: "## Boter, kaas en eieren\nIn de vorige levels heb je het spel \"boter, kaas en eieren\" kunnen maken. Nu heb je het = teken, het == teken en het != teken geleerd. \nJe kunt deze kennis toepassen in het \"boter, kaas en eieren\" spel op deze manier:\n"
                 start_code: '## Schrijf jouw code hier'
                 example_code: "```\nteken = 'x'\nopen_plekken = 1, 2, 3, 4, 5, 6, 7, 8, 9\nspel = 'aan'\nplek_1 = '.'\nplek_2 = '.'\nplek_3 = '.'\nplek_4 = '.'\nplek_5 = '.'\nplek_6 = '.'\nplek_7 = '.'\nplek_8 = '.'\nplek_9 = '.'\n{print} 'BOTER KAAS EN EIEREN!'\n{print} plek_1 plek_2 plek_3\n{print} plek_4 plek_5 plek_6\n{print} plek_7 plek_8 plek_9\n{print} ' '\n{for} i {in} {range} 1 {to} 9\n    {if} spel != 'uit'\n        keuze = {ask} 'Speler ' teken ', Welke plek kies jij?'\n        {if} keuze {in} open_plekken\n            {remove} keuze {from} open_plekken\n            {if} keuze == 1\n                plek_1 = teken\n            {if} keuze == 2\n                plek_2 = teken\n            {if} keuze == 3\n                plek_3 = teken\n            {if} keuze == 4\n                plek_4 = teken\n            {if} keuze == 5\n                plek_5 = teken\n            {if} keuze == 6\n                plek_6 = teken\n            {if} keuze == 7\n                plek_7 = teken\n            {if} keuze == 8\n                plek_8 = teken\n            {if} keuze == 9\n                plek_9 = teken\n        {else}\n            {print} 'Die plek was al bezet!'\n        {print} plek_1 plek_2 plek_3\n        {print} plek_4 plek_5 plek_6\n        {print} plek_7 plek_8 plek_9\n        {print} ' '\n        winnaar = {ask} 'Heb je gewonnen?'\n        {if} winnaar == 'ja'\n            {print} 'Goed gedaan, speler ' teken '!'\n            spel = 'uit'\n        {else}\n            {if} teken == 'x'\n                teken = 'o'\n            {else}\n                teken = 'x'\n```\n"
             15:
                 start_code: '## schrijf jouw code hier'
-                story_text: "## Boter Kaas en Eieren\nIn dit level kun je jouw spel nog meer verbeteren door gebruik te maken van de {while} lus. Met deze lus kun je de twee regels `{if} game != 'over'` en `{for} i {in} {range} 1 to 9`  combineren tot een simpele regel.\nKijk maar:\n"
+                story_text: "## Boter, kaas en eieren\nIn dit level kun je jouw spel nog meer verbeteren door gebruik te maken van de {while} lus. Met deze lus kun je de twee regels `{if} game != 'over'` en `{for} i {in} {range} 1 to 9`  combineren tot één simpele regel.\n\nKijk maar:\n"
                 example_code: "```\nteken = 'x'\nopen_plekken = 1, 2, 3, 4, 5, 6, 7, 8, 9\nspel = 'aan'\nplek_1 = '.'\nplek_2 = '.'\nplek_3 = '.'\nplek_4 = '.'\nplek_5 = '.'\nplek_6 = '.'\nplek_7 = '.'\nplek_8 = '.'\nplek_9 = '.'\n{print} 'BOTER KAAS EN EIEREN!'\n{print} plek_1 plek_2 plek_3\n{print} plek_4 plek_5 plek_6\n{print} plek_7 plek_8 plek_9\n{print} ' '\n{while} spel != 'uit'\n    keuze = {ask} 'Speler ' teken ', welke plek kies jij?'\n    {if} keuze {in} open_plekken\n        {remove} keuze {from} open_plekken\n        {if} keuze == 1\n            plek_1 = teken\n        {if} keuze == 2\n            plek_2 = teken\n        {if} keuze == 3\n            plek_3 = teken\n        {if} keuze == 4\n            plek_4 = teken\n        {if} keuze == 5\n            plek_5 = teken\n        {if} keuze == 6\n            plek_6 = teken\n        {if} keuze == 7\n            plek_7 = teken\n        {if} keuze == 8\n            plek_8 = teken\n        {if} keuze == 9\n            plek_9 = teken\n    {else}\n        {print} 'Die plek was al bezet'\n    {print} plek_1 plek_2 plek_3\n    {print} plek_4 plek_5 plek_6\n    {print} plek_7 plek_8 plek_9\n    {print} ' '\n    winnaar = {ask} 'Heb je gewonnen'\n    {if} winnaar == 'ja'\n        {print} 'Goed gedaan, speler' teken '!'\n        spel = 'uit'\n    {else}\n        {if} teken == 'x'\n            teken = 'o'\n        {else}\n            teken = 'x'\n```\n"
             17:
                 start_code: '## schrijf jouw code hier'
