@@ -65,14 +65,14 @@ def routes(app, database, achievements):
     def get_class(user, class_id):
 
         if not is_teacher(user) and not is_admin(user):
-            return utils.error_page(error=403, ui_message=gettext('retrieve_class_error'))
+            return utils.error_page(error=403, ui_message=gettext('no_access_to_classes'))
 
         Class = DATABASE.get_class(class_id)
         if not Class:
             return utils.error_page(error=404, ui_message=gettext('no_such_class'))
 
         if not(is_admin(user) or Class['teacher'] == user['username']):
-            return utils.error_page(error=403, ui_message=gettext('retrieve_class_error'))
+            return utils.error_page(error=403, ui_message=gettext('no_access_to_this_class'))
         students = []
 
         for student_username in Class.get('students', []):
