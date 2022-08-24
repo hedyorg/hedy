@@ -1,4 +1,5 @@
 # coding=utf-8
+import ast
 import copy
 
 from website import auth, parsons
@@ -68,6 +69,10 @@ for lang in ALL_LANGUAGES.keys():
 QUIZZES = collections.defaultdict(hedy_content.NoSuchQuiz)
 for lang in ALL_LANGUAGES.keys():
     QUIZZES[lang] = hedy_content.Quizzes(lang)
+
+TUTORIALS = collections.defaultdict(hedy_content.NoSuchTutorial)
+for lang in ALL_LANGUAGES.keys():
+    TUTORIALS[lang] = hedy_content.Tutorials(lang)
 
 ACHIEVEMENTS_TRANSLATIONS = hedyweb.AchievementTranslations()
 ACHIEVEMENTS = achievements.Achievements()
@@ -1109,32 +1114,6 @@ def landing_page(user, first):
                            user_info=user_info, program=user_programs, achievements=user_achievements)
 
 
-@app.route('/for-teachers', methods=['GET'])
-@requires_login
-def for_teachers_page(user):
-    if not is_teacher(user):
-        return utils.error_page(error=403, ui_message=gettext('not_teacher'))
-
-    page_translations = hedyweb.PageTranslations('for-teachers').get_page_translations(g.lang)
-    welcome_teacher = session.get('welcome-teacher') or False
-    session.pop('welcome-teacher', None)
-
-    teacher_classes = DATABASE.get_teacher_classes(current_user()['username'], True)
-    adventures = []
-    for adventure in DATABASE.get_teacher_adventures(current_user()['username']):
-        adventures.append(
-          {'id': adventure.get('id'),
-           'name': adventure.get('name'),
-           'date': utils.localized_date_format(adventure.get('date')),
-           'level': adventure.get('level')
-           }
-        )
-
-    return render_template('for-teachers.html', current_page='my-profile', page_title=gettext('title_for-teacher'),
-                           content=page_translations, teacher_classes=teacher_classes,
-                           teacher_adventures=adventures, welcome_teacher=welcome_teacher)
-
-
 @app.route('/explore', methods=['GET'])
 def explore():
     if not current_user()['username']:
@@ -1285,63 +1264,10 @@ def translate_keywords():
         return gettext('translate_error'), 400
 
 
-def tutorial_steps(step):
-    if step == 0:
-        translation = [gettext('tutorial_start_title'), gettext('tutorial_start_message')]
-    elif step == 1:
-        translation = [gettext('tutorial_editor_title'), gettext('tutorial_editor_message')]
-    elif step == 2:
-        translation = [gettext('tutorial_output_title'), gettext('tutorial_output_message')]
-    elif step == 3:
-        translation = [gettext('tutorial_run_title'), gettext('tutorial_run_message')]
-    elif step == 4:
-        translation = [gettext('tutorial_tryit_title'), gettext('tutorial_tryit_message')]
-    elif step == 5:
-        translation = [gettext('tutorial_speakaloud_title'), gettext('tutorial_speakaloud_message')]
-    elif step == 6:
-        translation = [gettext('tutorial_speakaloud_run_title'), gettext('tutorial_speakaloud_run_message')]
-    elif step == 7:
-        translation = [gettext('tutorial_nextlevel_title'), gettext('tutorial_nextlevel_message')]
-    elif step == 8:
-        translation = [gettext('tutorial_leveldefault_title'), gettext('tutorial_leveldefault_message')]
-    elif step == 9:
-        translation = [gettext('tutorial_adventures_title'), gettext('tutorial_adventures_message')]
-    elif step == 10:
-        translation = [gettext('tutorial_quiz_title'), gettext('tutorial_quiz_message')]
-    elif step == 11:
-        translation = [gettext('tutorial_saveshare_title'), gettext('tutorial_saveshare_message')]
-    elif step == 12:
-        translation = [gettext('tutorial_cheatsheet_title'), gettext('tutorial_cheatsheet_message')]
-    elif step == 13:
-        translation = [gettext('tutorial_end_title'), gettext('tutorial_end_message')]
-    else:
-        translation = [gettext('tutorial_title_not_found'), gettext('tutorial_message_not_found')]
-    return translation
-
-
-def teacher_tutorial_steps(step):
-    if step == 0:
-        translation = [gettext('tutorial_start_title'), gettext('teacher_tutorial_start_message')]
-    elif step == 1:
-        translation = [gettext('tutorial_class_title'), gettext('tutorial_class_message')]
-    elif step == 2:
-        translation = [gettext('tutorial_customize_class_title'), gettext('tutorial_customize_class_message')]
-    elif step == 3:
-        translation = [gettext('tutorial_own_adventures_title'), gettext('tutorial_own_adventures_message')]
-    elif step == 4:
-        translation = [gettext('tutorial_accounts_title'), gettext('tutorial_accounts_message')]
-    elif step == 5:
-        translation = [gettext('tutorial_documentation_title'), gettext('tutorial_documentation_message')]
-    elif step == 6:
-        translation = [gettext('tutorial_end_title'), gettext('teacher_tutorial_end_message')]
-    else:
-        translation = [gettext('tutorial_title_not_found'), gettext('tutorial_message_not_found')]
-    return translation
-
-
-@app.route('/get_tutorial_step/<step>', methods=['GET'])
-def get_tutorial_translation(step):
-    # We also retrieve the example code snippet as a "tutorial step" to reduce the need of new code
+# TODO TB: Think about changing this to sending all steps to the front-end at once
+@app.route('/get_tutorial_step/<level>/<step>', methods=['GET'])
+def get_tutorial_translation(level, step):
+    # Keep this structure temporary until we decide on a nice code / parse structure
     if step == "code_snippet":
         return jsonify({'code': gettext('tutorial_code_snippet')}), 200
     try:
@@ -1349,18 +1275,11 @@ def get_tutorial_translation(step):
     except ValueError:
         return gettext('invalid_tutorial_step'), 400
 
-    translation = tutorial_steps(step)
-    return jsonify({'translation': translation}), 200
+    data = TUTORIALS[g.lang].get_tutorial_for_level_step(level, step, g.keyword_lang)
+    if not data:
+        data = {'title': gettext('tutorial_title_not_found'), 'text': gettext('tutorial_message_not_found')}
+    return jsonify(data), 200
 
-@app.route('/get_teacher_tutorial_step/<step>', methods=['GET'])
-def get_teacher_tutorial_translation(step):
-    try:
-        step = int(step)
-    except ValueError:
-        return gettext('invalid_tutorial_step'), 400
-
-    translation = teacher_tutorial_steps(step)
-    return jsonify({'translation': translation}), 200
 
 @app.route('/store_parsons_order', methods=['POST'])
 def store_parsons_order():
@@ -1568,6 +1487,15 @@ def update_public_profile(user):
             achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "fresh_look")
     else:
         achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "go_live")
+
+    # If there is no current profile or if it doesn't have the tags list -> check if the user is a teacher / admin
+    if not current_profile or not current_profile.get('tags'):
+        body['tags'] = []
+        if is_teacher(user):
+            body['tags'].append('teacher')
+        if is_admin(user):
+            body['tags'].append('admin')
+
     DATABASE.update_public_profile(user['username'], body)
     if achievement:
         # Todo TB -> Check if we require message or success on front-end
@@ -1637,12 +1565,26 @@ def public_user_page(username):
     return utils.error_page(error=404, ui_message=gettext('user_not_private'))
 
 
+def valid_invite_code(code):
+    if not code:
+        return False
+
+    # Get the value from the environment, use literal_eval to convert from string list to an actual list
+    valid_codes = []
+    if os.getenv('TEACHER_INVITE_CODE'):
+        valid_codes.append(os.getenv('TEACHER_INVITE_CODE'))
+    if os.getenv('TEACHER_INVITE_CODES'):
+        valid_codes.extend(os.getenv('TEACHER_INVITE_CODES').split(','))
+
+    return code in valid_codes
+
 @app.route('/invite/<code>', methods=['GET'])
 def teacher_invitation(code):
     user = current_user()
 
-    if os.getenv('TEACHER_INVITE_CODE') != code:
+    if not valid_invite_code(code):
         return utils.error_page(error=404, ui_message=gettext('invalid_teacher_invitation_code'))
+
     if not user['username']:
         return render_template('teacher-invitation.html')
 

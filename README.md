@@ -4,7 +4,7 @@ Hedy is a gradual programming language aimed at teaching programming and teachin
 
 ![image](https://user-images.githubusercontent.com/38155424/156551654-fe6ae62e-e52a-444f-abdb-d776fe8dd7b7.png)
 
-The latest version of Hedy can be found at [hedycode.com](https://hedycode.com).
+The latest version of Hedy can be found at [hedy.org](https://hedy.org).
 
 What's next?
 ------------
