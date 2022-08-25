@@ -1488,6 +1488,9 @@ def update_public_profile(user):
     else:
         achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "go_live")
 
+    # Make sure the session value for the profile image is up-to-date
+    session['profile_image'] = body.get('image')
+
     # If there is no current profile or if it doesn't have the tags list -> check if the user is a teacher / admin
     if not current_profile or not current_profile.get('tags'):
         body['tags'] = []
