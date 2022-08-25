@@ -319,6 +319,11 @@ def routes(app, database):
         else:
             DATABASE.record_login(user['username'])
 
+        # Check if the user has a public profile, if so -> retrieve the profile image
+        public_profile = DATABASE.get_public_profile_settings(user['username'])
+        if public_profile:
+            session['profile_image'] = public_profile.get('image', 1)
+
         # Make an empty response to make sure we have one
         resp = make_response()
 
