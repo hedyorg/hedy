@@ -136,9 +136,13 @@
 -   name: "{ask}"
     explanation: "Meerdere regels samen herhalen"
     demo_code: |-
-        {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
+        antwoord = {ask} 'Hoeveel is 5 plus 5?'
+        {if} antwoord {is} 10
+            {print} 'Goed gedaan!'
+            {print} 'Het antwoord is inderdaad ' antwoord
+        {else}
+            {print} 'Oeps!'
+            {print} 'Het antwoord is 10'
 -   name: '`{repeat}` with turtle'
     explanation: '{repeat} meerdere lijnen'
     demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
