@@ -89,6 +89,7 @@
             <div class="w-full p-2 mx-4">
                 <h2 class="px-8 pb-2">Filtering options</h2>
                 <select id="admin_filter_category" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded mr-4">
+                    <option value="username" {% if filter and filter == "username" %} selected {% endif %}>Username</option>
                     <option value="created" {% if filter and filter == "created" %} selected {% endif %}>Created</option>
                     <option value="last_login" {% if filter and filter == "last_login" %} selected {% endif %}>Last login</option>
                     <option value="email" {% if filter and filter == "email" %} selected {% endif %}>E-mail</option>
@@ -96,7 +97,7 @@
                     <option value="keyword_language" {% if filter and filter == "keyword_language" %} selected {% endif %}>Keyword language</option>
                 </select>
                 <div class="flex flex-row items-center">
-                    <input placeholder="Enter a substring..." id="email_filter_input" type="text" {% if filter == "email" %} value="{{ email_filter }}" {% endif %} class="filter_input inline-block appearance-none w-full h-16 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded my-2 ltr:mr-2 rtl:ml-2" {% if filter != "email" %}style="display: none;"{% endif %}>
+                    <input placeholder="Enter a substring..." id="email_filter_input" type="text" {% if filter == "email" or filter == "username" %} value="{{ text_filter }}" {% endif %} class="filter_input inline-block appearance-none w-full h-16 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded my-2 ltr:mr-2 rtl:ml-2" {% if filter != "email" %}style="display: none;"{% endif %}>
                     <select id="language_filter_input" class="filter_input inline-block appearance-none w-full h-16 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded my-2 ltr:mr-2 rtl:ml-2" {% if filter != "language" %}style="display: none;"{% endif %}>
                         <option value="{{ current_language().lang }}"{% if language_filter and language_filter == current_language().lang %} selected {% endif %}>{{ current_language().sym }}</option>
                         {% for lang in other_languages() %}
