@@ -1,17 +1,17 @@
-
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-25 13:30+0200\n"
-"PO-Revision-Date: 2022-08-20 12:53+0000\n"
+"POT-Creation-Date: 2022-08-25 10:29+0200\n"
+"PO-Revision-Date: 2022-08-25 09:56+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language: fr\n"
 "Language-Team: fr <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.14-dev\n"
 "Generated-By: Babel 2.10.1\n"
 
 msgid "program_contains_error"
@@ -92,8 +92,9 @@ msgstr ""
 "print Hello world !\n"
 "print J'apprends Hedy avec le tutoriel !"
 
+#, fuzzy
 msgid "invalid_tutorial_step"
-msgstr ""
+msgstr "Invalid tutorial step"
 
 msgid "tutorial_title_not_found"
 msgstr "Nous n’avons pas pu trouver cette page !"
@@ -168,11 +169,18 @@ msgstr "Lorsque tu veux vérifier si une variable correspond à plusieurs mots, 
 msgid "Var Undefined"
 msgstr "Tu as essayé d’utiliser la variable {name}, mais tu ne l’as pas définie. Ou bien tu essayais d’utiliser le mot {name}, mais tu as oublié les guillemets."
 
-msgid "Access Before Assign"
-msgstr ""
+
 
 msgid "Cyclic Var Definition"
 msgstr "Le nom {variable} doit être défini avant que tu puisses l’utiliser à droite de la commande `is`."
+
+msgid "Access Before Assign"
+msgstr ""
+"You tried to use the variable "
+"{name} on line {access_line_number}, but "
+"you set it on line "
+"{definition_line_number}. Set a variable "
+"before using it."
 
 #, fuzzy
 msgid "Lonely Echo"
@@ -726,8 +734,9 @@ msgstr "Creator"
 msgid "view_program"
 msgstr "View program"
 
+#, fuzzy
 msgid "report_program"
-msgstr ""
+msgstr "Are you sure you want to report this program?"
 
 #, fuzzy
 msgid "my_classes"
@@ -1235,8 +1244,9 @@ msgstr "Delete profile"
 msgid "change_password"
 msgstr "Change password"
 
+#, fuzzy
 msgid "current_password"
-msgstr ""
+msgstr "Current password"
 
 #, fuzzy
 msgid "new_password"
@@ -1250,18 +1260,13 @@ msgstr "Repeat new password"
 msgid "request_teacher"
 msgstr "Would you like to apply for a teacher's account?"
 
+#, fuzzy
 msgid "request_teacher_account"
-msgstr ""
+msgstr "Request teacher account"
 
 #, fuzzy
 msgid "recent"
 msgstr "My recent programs"
-
-msgid "all"
-msgstr ""
-
-msgid "submitted"
-msgstr ""
 
 #, fuzzy
 msgid "submitted_header"
@@ -1710,18 +1715,21 @@ msgstr "Program unshared successfully."
 msgid "favourite_success"
 msgstr "Your program is set as favourite."
 
+#, fuzzy
 msgid "report_failure"
-msgstr ""
+msgstr "This program does not exist or is not public"
 
+#, fuzzy
 msgid "report_success"
-msgstr ""
+msgstr "This program has been reported"
 
 #, fuzzy
 msgid "level_invalid"
 msgstr "This Hedy level in invalid."
 
+#, fuzzy
 msgid "question_doesnt_exist"
-msgstr ""
+msgstr "This question does not exist"
 
 #, fuzzy
 msgid "question_invalid"
@@ -1731,8 +1739,9 @@ msgstr "Your token is invalid."
 msgid "answer_invalid"
 msgstr "Your password is invalid."
 
+#, fuzzy
 msgid "too_many_attempts"
-msgstr ""
+msgstr "Too many attempts"
 
 #, fuzzy
 msgid "retrieve_class_error"
@@ -2140,4 +2149,3 @@ msgstr "You didn't enter an adventure name!"
 
 #~ msgid "teacher_tutorial_end_message"
 #~ msgstr "Cliquez sur 'l'étape suivante' pour commencer comme un professeur d'Hedy !"
-
