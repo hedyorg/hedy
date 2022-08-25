@@ -1703,10 +1703,11 @@ export function filter_programs() {
 export function filter_user_programs(username: string, own_request?: boolean) {
   const level = $('#user_program_page_level').val();
   const adventure = $('#user_program_page_adventure').val();
+  const filter = $('input[name="submitted"]:checked').val();
   if (own_request) {
-    window.open('?level=' + level + "&adventure=" + adventure, "_self");
+    window.open('?level=' + level + "&adventure=" + adventure + "&filter=" + filter, "_self");
   } else {
-    window.open('?user=' + username + '&level=' + level + "&adventure=" + adventure, "_self");
+    window.open('?user=' + username + '&level=' + level + "&adventure=" + adventure + "&filter=" + filter, "_self");
   }
 }
 
