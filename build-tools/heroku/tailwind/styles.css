@@ -160,16 +160,20 @@ code {
   @apply bg-blue-400 border-blue-500;
 }
 
-.menubar-btn {
-  @apply block text-white text-base lg:text-xl no-underline font-slab font-semibold border-b-4 border-blue-500 tracking-wide py-3 px-2 lg:px-4;
+.menubar-item {
+  @apply items-center h-full cursor-pointer block border-b-4 border-blue-500 tracking-wide;
 }
 
-.menubar-btn:hover {
+.menubar-item:hover {
   @apply bg-blue-600 border-blue-600;
 }
 
-.menubar-btn.active {
+.menubar-item.active {
   @apply border-white !important;
+}
+
+.menubar-text {
+  @apply flex items-center h-full text-white text-base lg:text-xl no-underline font-slab font-semibold px-2 lg:px-4;
 }
 
 #output, #quiz_question_output_container {
