@@ -11,15 +11,25 @@
             <select id="user_program_page_level" class="block appearance-none w-1/3 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded">
                 <option disabled selected value="">{{_('level')}}</option>
                 {% for i in range(1, (max_level + 1)) %}
-                    <option value="{{ i }}" {% if filtered_level and i|string == filtered_level %}selected{% endif %}>{{ i }}</option>
+                    <option value="{{ i }}" {% if request.args.get('level') == i|string %}selected{% endif %}>{{ i }}</option>
                 {% endfor %}
             </select>
             <select id="user_program_page_adventure" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded">
                 <option disabled selected value="">{{ _('adventure') }}</option>
                 {% for adventure_key, name in adventure_names.items() %}
-                    <option value="{{ adventure_key }}" {% if filtered_adventure and adventure_key == filtered_adventure %}selected{% endif %}>{{ name }}</option>
+                    <option value="{{ adventure_key }}" {% if request.args.get('adventure') == adventure_key %}selected{% endif %}>{{ name }}</option>
                 {% endfor %}
             </select>
+            <div class="flex flex-col mx-2">
+                <div class="flex flex-row items-center gap-2">
+                    <input type="radio" name="submitted" value="all" {% if request.args.get('filter') != "submitted" %}checked{% endif %}>
+                    <label for="all">{{_('all')}}</label>
+                </div>
+                <div class="flex flex-row items-center gap-2">
+                    <input type="radio" name="submitted" value="submitted" {% if request.args.get('filter') == "submitted" %}checked{% endif %}>
+                    <label for="submitted">{{_('submitted')}}</label>
+                </div>
+            </div>
             <button type="reset" class="red-btn" onclick="window.open('/programs{% if from_user %}?user={{ from_user }}{% endif %}', '_self');">{{_('reset_view')}}</button>
             <button type="submit" class="green-btn">{{_('search_button')}}</button>
         </div>
