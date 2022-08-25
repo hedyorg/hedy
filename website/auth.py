@@ -118,6 +118,7 @@ def forget_current_user():
     session.pop('messages', None)  # Delete messages counter for current user if existed
     session.pop('achieved', None)  # Delete session achievements if existing
     session.pop('keyword_lang', None)  # Delete session keyword language if existing
+    session.pop('profile_image', None)  # Delete profile image id if existing
 
 
 def is_admin(user):
@@ -319,6 +320,11 @@ def routes(app, database):
         else:
             DATABASE.record_login(user['username'])
 
+        # Check if the user has a public profile, if so -> retrieve the profile image
+        public_profile = DATABASE.get_public_profile_settings(user['username'])
+        if public_profile:
+            session['profile_image'] = public_profile.get('image', 1)
+
         # Make an empty response to make sure we have one
         resp = make_response()
 
@@ -473,6 +479,7 @@ def routes(app, database):
     @requires_login
     def destroy_public(user):
         DATABASE.forget_public_profile(user['username'])
+        session.pop('profile_image', None)  # Delete profile image id if existing
         return '', 200
 
     @app.route('/auth/change_student_password', methods=['POST'])

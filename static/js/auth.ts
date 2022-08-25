@@ -186,11 +186,15 @@ $('form#public_profile').submit(function(e) {
     data: convertFormJSON($(this)),
     contentType: 'application/json; charset=utf-8'
   }).done (function (response) {
-    modal.alert(response.message, 3000, false);
+    modal.alert(response.message, 2000, false);
     if (response.achievement) {
-      showAchievements(response.achievement, false, "");
+      showAchievements(response.achievement, true, "");
+    } else {
+      setTimeout(function () {
+        location.reload()
+      }, 2000);
     }
-    $('#public_profile_redirect').show();
+
   }).fail (function (response) {
     return modal.alert(response.responseText, 3000, true);
   });
