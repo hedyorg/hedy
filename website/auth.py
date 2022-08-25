@@ -479,6 +479,7 @@ def routes(app, database):
     @requires_login
     def destroy_public(user):
         DATABASE.forget_public_profile(user['username'])
+        session.pop('profile_image', None)  # Delete profile image id if existing
         return '', 200
 
     @app.route('/auth/change_student_password', methods=['POST'])
