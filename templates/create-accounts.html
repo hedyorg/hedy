@@ -46,6 +46,7 @@
         <div class="flex flex-row mt-4">
             <button class="green-btn" onclick="window.open('/for-teachers/class/{{ current_class.id }}', '_self');">{{_('back_to_class')}}</button>
             <div class="ltr:ml-auto flex flex-row gap-2">
+                <button class="yellow-btn text-white" onclick="hedyApp.generate_passwords();">{{_('generate_passwords')}}</button>
                 <button type="reset" class="red-btn" onclick="window.open('/for-teachers/create-accounts', '_self');">
                     {{_('reset_view')}}</button>
                 <button type="submit" class="blue-btn px-4">{{_('create_accounts')}}</button>
