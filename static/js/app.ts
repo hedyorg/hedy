@@ -1712,7 +1712,7 @@ export function filter_user_programs(username: string, own_request?: boolean) {
 
 export function filter_admin() {
   const filter = $('#admin_filter_category').val();
-  if (filter == "email") {
+  if (filter == "email" || filter == "username") {
     const substring = $('#email_filter_input').val();
     window.open('?filter=' + filter + "&substring=" + substring, "_self");
   } else if (filter == "language") {

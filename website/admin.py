@@ -64,6 +64,9 @@ def routes(app, database):
             if category == "keyword_language":
                 if keyword_language != data['keyword_language']:
                     continue
+            if category == "username":
+                if substring and substring not in data.get('username'):
+                    continue
             if category == "email":
                 if not data.get('email') or (substring and substring not in data.get('email')):
                     continue
@@ -82,7 +85,7 @@ def routes(app, database):
             userdata.append(data)
 
         return render_template('admin/admin-users.html', users=userdata, page_title=gettext('title_admin'),
-                               filter=category, start_date=start_date, end_date=end_date, email_filter=substring,
+                               filter=category, start_date=start_date, end_date=end_date, text_filter=substring,
                                language_filter=language, keyword_language_filter=keyword_language)
 
     @app.route('/admin/classes', methods=['GET'])
