@@ -675,7 +675,6 @@ def programs_page(user):
         result = DATABASE.programs_for_user(from_user or username)
 
     programs = []
-    now = timems()
     for item in result:
         # If we filter on the submitted programs -> skip the onces that are not submitted
         if filter == "submitted" and not item.get('submitted'):
