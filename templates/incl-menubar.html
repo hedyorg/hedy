@@ -15,16 +15,13 @@
             </a>
         </li>
         <li class="menubar-item dropdown relative z-20{% if current_page == 'my-profile' %} active{% endif %}">
-            <a class="menubar-text cursor-pointer" onclick="$('.dropdown-menu').hide();$('#profile-dropdown').slideToggle('medium');">
+            <a class="menubar-text gap-2 cursor-pointer" onclick="$('.dropdown-menu').hide();$('#profile-dropdown').slideToggle('medium');">
                 {% if session.profile_image %}
-                    <div class="flex flex-row h-full items-center gap-2">
-                        <img src="{{static('/images/profile_images/' + session.profile_image + '.png')}}" class="h-10 lg:h-12">
-                        <span class="hidden lg:inline-block">{{username}} {% if get_user_messages() %} ({{ get_user_messages() }}){% endif %}</span>
-                    </div>
+                    <img src="{{static('/images/profile_images/' + session.profile_image + '.png')}}" class="h-10 lg:h-12">
                 {% else %}
                     <span class="fas fa-fw fa-user"></span>
-                    <span class="hidden lg:inline-block">{{username}} {% if get_user_messages() %} ({{ get_user_messages() }}){% endif %}</span>
                 {% endif %}
+                <span class="hidden lg:inline-block">{{username}} {% if get_user_messages() %} ({{ get_user_messages() }}){% endif %}</span>
             </a>
             <div class="dropdown-menu" id="profile-dropdown" style="display: none;">
                 <ul>
