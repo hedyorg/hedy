@@ -1,17 +1,17 @@
-
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-24 17:27+0200\n"
-"PO-Revision-Date: 2022-08-20 12:53+0000\n"
+"POT-Creation-Date: 2022-08-25 10:29+0200\n"
+"PO-Revision-Date: 2022-08-25 09:56+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language: hi\n"
 "Language-Team: hi <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"Language: hi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.14-dev\n"
 "Generated-By: Babel 2.10.1\n"
 
 #, fuzzy
@@ -109,8 +109,9 @@ msgstr "Something went wrong while translating the code. Try running the code to
 msgid "tutorial_code_snippet"
 msgstr "Hide cheatsheet"
 
+#, fuzzy
 msgid "invalid_tutorial_step"
-msgstr ""
+msgstr "Invalid tutorial step"
 
 #, fuzzy
 msgid "tutorial_title_not_found"
@@ -187,11 +188,18 @@ msgstr "If you want to check if a variable is equal to multiple words, the words
 msgid "Var Undefined"
 msgstr "आपने वेरिएबल {name} का उपयोग करने का प्रयास किया, लेकिन आपने इसे सेट नहीं किया। यह भी संभव है कि आप {name} शब्द का उपयोग करने की कोशिश कर रहे थे लेकिन उद्धरण चिह्नों को भूल गए।"
 
-msgid "Access Before Assign"
-msgstr ""
+
 
 msgid "Cyclic Var Definition"
 msgstr "नाम {variable} को is कमांड के दाईं ओर उपयोग करने से पहले सेट करने की आवश्यकता है"
+
+msgid "Access Before Assign"
+msgstr ""
+"You tried to use the variable "
+"{name} on line {access_line_number}, but "
+"you set it on line "
+"{definition_line_number}. Set a variable "
+"before using it."
 
 msgid "Lonely Echo"
 msgstr "आपने ask से पहले एक echo का उपयोग किया, या बिना ask के एक echo का उपयोग किया। पहले इनपुट के लिए ask, फिर echo का उपयोग करें।"
@@ -673,8 +681,9 @@ msgstr "बनाने वाला"
 msgid "view_program"
 msgstr "प्रोग्राम देखें"
 
+#, fuzzy
 msgid "report_program"
-msgstr ""
+msgstr "Are you sure you want to report this program?"
 
 msgid "my_classes"
 msgstr "मेरी कक्षाएँ"
@@ -1111,6 +1120,10 @@ msgstr "खाता स्थायी रूप से हटाएं"
 msgid "change_password"
 msgstr "सांकेतिक शब्द बदलें"
 
+#, fuzzy
+msgid "current_password"
+msgstr "Current password"
+
 msgid "new_password"
 msgstr "नया सांकेतिक शब्द"
 
@@ -1120,8 +1133,9 @@ msgstr "नया सांकेतिक शब्द दोहराएं"
 msgid "request_teacher"
 msgstr "मैं एक शिक्षक हूं और मैं एक शिक्षक के खाते के लिए आवेदन करना चाहता/चाहती हूं"
 
+#, fuzzy
 msgid "request_teacher_account"
-msgstr ""
+msgstr "Request teacher account"
 
 msgid "recent"
 msgstr "मेरे हाल के प्रोग्राम्स"
@@ -1493,17 +1507,20 @@ msgstr "प्रोग्राम सफलतापूर्वक साझ�
 msgid "favourite_success"
 msgstr "आपका प्रोग्राम पसंदीदा के रूप में सेट है"
 
+#, fuzzy
 msgid "report_failure"
-msgstr ""
+msgstr "This program does not exist or is not public"
 
+#, fuzzy
 msgid "report_success"
-msgstr ""
+msgstr "This program has been reported"
 
 msgid "level_invalid"
 msgstr "यह हेडी स्तर अमान्य है"
 
+#, fuzzy
 msgid "question_doesnt_exist"
-msgstr ""
+msgstr "This question does not exist"
 
 #, fuzzy
 msgid "question_invalid"
@@ -1513,8 +1530,9 @@ msgstr "आपका टोकन अमान्य है"
 msgid "answer_invalid"
 msgstr "आपका पासवर्ड अमान्य है"
 
+#, fuzzy
 msgid "too_many_attempts"
-msgstr ""
+msgstr "Too many attempts"
 
 msgid "retrieve_class_error"
 msgstr "केवल शिक्षक ही कक्षाएं पुनः प्राप्त कर सकते हैं"
@@ -1921,4 +1939,3 @@ msgstr "आपने एक adventure नाम दर्ज नहीं कि
 
 #~ msgid "teacher_tutorial_end_message"
 #~ msgstr "आपको कक्षा में शामिल होने का निमंत्रण मिला है"
-

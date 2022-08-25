@@ -1,17 +1,17 @@
-
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-24 17:27+0200\n"
-"PO-Revision-Date: 2022-08-20 12:53+0000\n"
+"POT-Creation-Date: 2022-08-25 10:29+0200\n"
+"PO-Revision-Date: 2022-08-25 09:56+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language: nb_NO\n"
 "Language-Team: nb_NO <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Language: nb_NO\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.14-dev\n"
 "Generated-By: Babel 2.10.1\n"
 
 msgid "program_contains_error"
@@ -91,8 +91,9 @@ msgstr "Noe gikk galt når vi prøvde å oversette koden. Prøv å kjøre koden 
 msgid "tutorial_code_snippet"
 msgstr "Skjul hjelpeark"
 
+#, fuzzy
 msgid "invalid_tutorial_step"
-msgstr ""
+msgstr "Invalid tutorial step"
 
 #, fuzzy
 msgid "tutorial_title_not_found"
@@ -168,11 +169,18 @@ msgstr "Hvis du har lyst til å sjekke om en variabel er lik flere ord, må orde
 msgid "Var Undefined"
 msgstr "Du prøvde å bruke variabelen {name}, men den finnes ikke. Det kan også være at du prøvde å bruke ordet {name} men at du glemte apostrof-tegnene."
 
-msgid "Access Before Assign"
-msgstr ""
+
 
 msgid "Cyclic Var Definition"
 msgstr "Variabelen {variable} må opprettes og gis en verdi før du kan bruke den på høyre siden av hvis-kommandoen"
+
+msgid "Access Before Assign"
+msgstr ""
+"You tried to use the variable "
+"{name} on line {access_line_number}, but "
+"you set it on line "
+"{definition_line_number}. Set a variable "
+"before using it."
 
 msgid "Lonely Echo"
 msgstr "Du brukte ekko før spør-kommandoen, eller ekko uten å bruke spør-kommandoen. Først må du spørre om inndata, så kan du bruke ekko."
@@ -629,8 +637,9 @@ msgstr "Skaper"
 msgid "view_program"
 msgstr "Se program"
 
+#, fuzzy
 msgid "report_program"
-msgstr ""
+msgstr "Are you sure you want to report this program?"
 
 msgid "my_classes"
 msgstr "Mine klasser"
@@ -1051,6 +1060,10 @@ msgstr "Slett profil"
 msgid "change_password"
 msgstr "Endre passord"
 
+#, fuzzy
+msgid "current_password"
+msgstr "Current password"
+
 msgid "new_password"
 msgstr "Nytt passord"
 
@@ -1060,8 +1073,9 @@ msgstr "Gjenta nytt passord"
 msgid "request_teacher"
 msgstr "Vil du søke om lærerkonto?"
 
+#, fuzzy
 msgid "request_teacher_account"
-msgstr ""
+msgstr "Request teacher account"
 
 msgid "recent"
 msgstr "Mine siste programmer"
@@ -1425,17 +1439,20 @@ msgstr "Programmet er ikke lengre delt."
 msgid "favourite_success"
 msgstr "Programmet er nå ditt favorittprogram."
 
+#, fuzzy
 msgid "report_failure"
-msgstr ""
+msgstr "This program does not exist or is not public"
 
+#, fuzzy
 msgid "report_success"
-msgstr ""
+msgstr "This program has been reported"
 
 msgid "level_invalid"
 msgstr "Dette Hedynivået er ugyldig."
 
+#, fuzzy
 msgid "question_doesnt_exist"
-msgstr ""
+msgstr "This question does not exist"
 
 #, fuzzy
 msgid "question_invalid"
@@ -1445,8 +1462,9 @@ msgstr "Ugylig token."
 msgid "answer_invalid"
 msgstr "Passordet ditt er ugyldig."
 
+#, fuzzy
 msgid "too_many_attempts"
-msgstr ""
+msgstr "Too many attempts"
 
 msgid "retrieve_class_error"
 msgstr "Kun lærere kan hente info om klasser"
@@ -1834,4 +1852,3 @@ msgstr "Du skrev ikke noe navn på eventyret!"
 
 #~ msgid "teacher_tutorial_end_message"
 #~ msgstr "Du har mottatt en invitasjon til å bli med i en klasse"
-
