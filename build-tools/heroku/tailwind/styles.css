@@ -219,8 +219,12 @@ ol {
 }
 
 /* AUTH */
-input[type=checkbox] {
+input[type=checkbox], input[type=radio] {
   @apply appearance-none border border-gray-400 w-4 h-4;
+}
+
+input[type=radio] {
+  @apply rounded-full;
 }
 
 #signup input:required, #signup select:required, #profile input:required, #change_password input:required {
@@ -232,7 +236,7 @@ input:required:valid, select:required:valid {
   @apply border-green-400 !important;
 }
 
-input[type=checkbox]:checked {
+input[type=checkbox]:checked, input[type=radio]:checked {
   @apply bg-green-400 border-green-600;
 }
 
