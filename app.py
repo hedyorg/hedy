@@ -1485,6 +1485,7 @@ def update_public_profile(user):
     if current_profile:
         if current_profile.get('image') != body.get('image'):
             achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "fresh_look")
+            session['profile_image'] = body.get('image')
     else:
         achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "go_live")
 
