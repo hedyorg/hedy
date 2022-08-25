@@ -64,6 +64,9 @@ def routes(app, database):
             if category == "keyword_language":
                 if keyword_language != data['keyword_language']:
                     continue
+            if category == "username":
+                if substring and substring not in data.get('username'):
+                    continue
             if category == "email":
                 if not data.get('email') or (substring and substring not in data.get('email')):
                     continue
