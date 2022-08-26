@@ -1,6 +1,21 @@
 import {modal} from ".././modal";
 import {pushAchievement, runit, theGlobalEditor} from ".././app";
 
+/*
+Todo: Completely re-structure the tutorial structure
+Suggested code structure:
+- Use the tutorial.ts file for the general code such as:
+  - Highlighting code
+  - Step retrieval code
+  - Error handling
+- For each step create a dedicated .ts file:
+  - Intro
+  - Teacher
+  - Each level
+- Dynamically check if there is a corresponding file
+- If not, don't show any tutorial -> redirect to /hedy/<level>
+ */
+
 let current_step = 0;
 let student = true;
 
