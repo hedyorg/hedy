@@ -205,7 +205,9 @@ def routes(app, database, achievements):
         if not Class or user['username'] not in Class.get('teachers'):
             return gettext('no_such_class'), 404
 
-        # Verify that the user we want to add exists and is a teacher
+        # Verify that the user we want to add exists, is a teacher but not already one of this class
+        if body.get('username') in Class.get('teachers'):
+            return gettext('user_already_teacher_class'), 400
         user = DATABASE.user_by_username(body.get('username'))
         if not user:
             return gettext("user_not_existing"), 400
