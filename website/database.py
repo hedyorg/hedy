@@ -302,13 +302,13 @@ class Database:
         else:
             classes = []
             for Class in CLASSES.get_many({'teacher': username}, reverse=True):
-                classes.append (Class.copy())
+                classes.append(Class.copy())
         if students_to_list:
             for Class in classes:
-                if not 'students' in Class:
-                    Class ['students'] = []
+                if 'students' not in Class:
+                    Class['students'] = []
                 else:
-                    Class ['students'] = list (Class ['students'])
+                    Class['students'] = list(Class['students'])
         return classes
 
     def get_teacher_students(self, username):
