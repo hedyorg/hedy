@@ -143,7 +143,7 @@ def update_is_teacher(user, is_teacher_value=1):
 
     DATABASE.update_user(user['username'], {'is_teacher': is_teacher_value, 'teacher_request': None})
 
-    if user_becomes_teacher and not is_testing_request(request):
+    if user_becomes_teacher and not is_testing_request(request) and user.get('email'):
         try:
             send_email_template(template='welcome_teacher', email=user['email'], username=user['username'])
         except:
