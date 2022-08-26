@@ -63,7 +63,7 @@ def routes(app, database, achievements):
     @app.route('/for-teachers/class/<class_id>', methods=['GET'])
     @requires_login
     def get_class(user, class_id):
-        app.logger.info('This is info output')
+        app.logger.info('This is info output') # Todo TB: What is the purpose of this logging?
         if not is_teacher(user):
             return utils.error_page_403(error=403, ui_message=gettext('retrieve_class_error'))
         Class = DATABASE.get_class(class_id)
