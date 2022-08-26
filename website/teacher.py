@@ -179,7 +179,7 @@ def routes(app, database, achievements):
     @requires_login
     def delete_class(user, class_id):
         Class = DATABASE.get_class(class_id)
-        if not Class or Class['teacher'] != user['username']:
+        if not Class or user['username'] not in Class.get('teachers'):
             return gettext('no_such_class'), 404
 
         DATABASE.delete_class(Class)
@@ -235,7 +235,7 @@ def routes(app, database, achievements):
             return gettext('class_name_empty'), 400
 
         Class = DATABASE.get_class(body.get('id'))
-        if not Class or Class['teacher'] != user['username']:
+        if not Class or user['username'] not in Class.get('teachers'):
             return gettext('no_such_class'), 404
 
         # We use this extra call to verify if the class name doesn't already exist, if so it's a duplicate

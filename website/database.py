@@ -289,9 +289,9 @@ class Database:
     def get_teacher_classes(self, username, students_to_list=False):
         """Return all the classes belonging to a teacher."""
         classes = []
-        class_ids = USERS.get({'username': username}).get('teacher_classes')
-        for id in class_ids:
+        for id in USERS.get({'username': username}).get('teacher_classes', []):
             classes.append(self.get_class(id))
+
         if students_to_list:
             for Class in classes:
                 if 'students' not in Class:
