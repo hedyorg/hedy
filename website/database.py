@@ -380,7 +380,7 @@ class Database:
 
         # Remove class id from teacher list of classes
         for teacher in Class.get('teachers'):
-            USERS.update({'username': teacher}, {'classes': dynamo.DynamoRemoveFromStringSet(Class.get('id'))})
+            USERS.update({'username': teacher}, {'teacher_classes': dynamo.DynamoRemoveFromStringSet(Class.get('id'))})
 
         CUSTOMIZATIONS.del_many({'id': Class['id']})
         INVITATIONS.del_many({'class_id': Class['id']})
