@@ -213,7 +213,7 @@ class Database:
             self.remove_student_from_class(class_id, username)
 
         # Delete classes owned by the user
-        for Class in self.get_teacher_classes():
+        for Class in self.get_teacher_classes(username):
             self.delete_class(Class)
 
     def all_users(self, filtering=False):
