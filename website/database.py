@@ -295,7 +295,7 @@ class Database:
         classes = []
         for id in USERS.get({'username': username}).get('teacher_classes', []):
             # We can't seriliaze sets -> convert to a list just to be sure
-            Class = self.get_class(id)
+            Class = self.get_class(id).copy()
             Class['teachers'] = list(Class.get('teachers'))
             Class['students'] = list(Class.get('students', {}))
             classes.append(Class)
