@@ -214,8 +214,7 @@ def routes(app, database, achievements):
 
         # If we get here everything is validated -> add user as teacher to the class
         DATABASE.add_teacher_class(Class.get('id'), body.get('username'))
-
-
+        return {}, 200
 
 
 
