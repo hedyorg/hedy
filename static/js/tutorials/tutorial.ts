@@ -1,5 +1,5 @@
-import {modal} from "./modal";
-import {pushAchievement, runit, theGlobalEditor} from "./app";
+import {modal} from ".././modal";
+import {pushAchievement, runit, theGlobalEditor} from ".././app";
 
 let current_step = 0;
 let student = true;
