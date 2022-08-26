@@ -294,7 +294,7 @@ class Database:
         """Return all the classes belonging to a teacher."""
         classes = []
         for id in USERS.get({'username': username}).get('teacher_classes', []):
-            # The e2e tests call this function to get all classes as a JSON, as we can't JSON a set: parse!
+            # The e2e tests call this function to get all classes as a JSON, as we can't serialize a set: parse!
             if is_testing_request(request):
                 Class = self.get_class(id)
                 Class['teachers'] = list(Class.get('teachers'))
