@@ -14,7 +14,7 @@ CLASSES = dynamo.Table(storage, 'classes', 'id', indexed_fields=[dynamo.IndexKey
 classes = CLASSES.scan()
 teacher_classes = {}
 
-# For each class -> change "teacher string" into "teachers set"
+# For each class -> change the "teacher string" into a "teachers set"
 for Class in classes:
     CLASSES.update({'id': Class.get('id')}, {'teacher': None, 'teachers': {Class.get('teacher')}})
     if not teacher_classes.get(Class.get('teacher')):
