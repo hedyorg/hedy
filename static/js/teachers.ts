@@ -553,8 +553,10 @@ export function add_teacher(prompt: string, class_id: string) {
             contentType: 'application/json',
             dataType: 'json'
         }).done(function (response) {
-            modal.alert(response.message, 3000, false);
-            // Would be nice to re-load the page at this spot
+            modal.alert(response.message, 2000, false);
+            setTimeout(function () {
+                location.reload()
+            }, 2000);
         }).fail(function (err) {
             modal.alert(err.responseText, 3000, true);
         });
