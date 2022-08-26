@@ -201,7 +201,7 @@ class Database:
 
     def forget_user(self, username):
         """Forget the given user."""
-        classes = USERS.get({'username': username}).get ('classes') or []
+        classes = USERS.get({'username': username}).get('classes') or []
         USERS.delete({'username': username})
         INVITATIONS.delete({'username': username})
         # The recover password token may exist, so we delete it
@@ -210,11 +210,11 @@ class Database:
 
         # Remove user from classes of which they are a student
         for class_id in classes:
-            self.remove_student_from_class (class_id, username)
+            self.remove_student_from_class(class_id, username)
 
         # Delete classes owned by the user
-        for Class in self.get_teacher_classes (username, False):
-            self.delete_class (Class)
+        for Class in self.get_teacher_classes(username, False):
+            self.delete_class(Class)
 
     def all_users(self, filtering=False):
         """Return all users."""
@@ -296,14 +296,14 @@ class Database:
         for id in USERS.get({'username': username}).get('teacher_classes', []):
             # The e2e tests call this function to get all classes as a JSON, as we can't serialize a set: parse!
             if is_testing_request(request):
-                Class = self.get_class(id)
+                Class = self.get_class(id).copy()
                 Class['teachers'] = list(Class.get('teachers'))
                 classes.append(Class)
             else:
                 classes.append(self.get_class(id))
 
         if students_to_list:
-            for Class in classes:
+            for Class in classes.copy():
                 if 'students' not in Class:
                     Class['students'] = []
                 else:
@@ -382,12 +382,12 @@ class Database:
 
     def remove_student_from_class(self, class_id, student_id):
         """Removes a student from a class."""
-        CLASSES.update ({'id': class_id}, {'students': dynamo.DynamoRemoveFromStringSet (student_id)})
-        USERS.update({'username': student_id}, {'classes': dynamo.DynamoRemoveFromStringSet (class_id)})
+        CLASSES.update({'id': class_id}, {'students': dynamo.DynamoRemoveFromStringSet(student_id)})
+        USERS.update({'username': student_id}, {'classes': dynamo.DynamoRemoveFromStringSet(class_id)})
 
     def delete_class(self, Class):
-        for student_id in Class.get ('students', []):
-            Database.remove_student_from_class (self, Class['id'], student_id)
+        for student_id in Class.get('students', []):
+            Database.remove_student_from_class(self, Class['id'], student_id)
 
         # Remove class id from teacher list of classes
         for teacher in Class.get('teachers'):
