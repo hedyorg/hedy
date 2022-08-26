@@ -1,3 +1,5 @@
+import os
+
 from utils import timems, times
 from datetime import date
 from . import dynamo
@@ -290,7 +292,13 @@ class Database:
         """Return all the classes belonging to a teacher."""
         classes = []
         for id in USERS.get({'username': username}).get('teacher_classes', []):
-            classes.append(self.get_class(id))
+            # The e2e tests call this function to get all classes as a JSON, as we can't JSON a set: parse!
+            if not os.getenv('NO_DEBUG_MODE'):
+                Class = self.get_class(id)
+                Class['teachers'] = list(Class.get('teachers'))
+                classes.append(Class)
+            else:
+                classes.append(self.get_class(id))
 
         if students_to_list:
             for Class in classes:

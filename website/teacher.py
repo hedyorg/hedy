@@ -58,7 +58,7 @@ def routes(app, database, achievements):
     def get_classes(user):
         if not is_teacher(user):
             return utils.error_page_403(error=403, ui_message=gettext('retrieve_class_error'))
-        return jsonify (DATABASE.get_teacher_classes(user['username'], True))
+        return jsonify(DATABASE.get_teacher_classes(user['username'], True))
 
     @app.route('/for-teachers/class/<class_id>', methods=['GET'])
     @requires_login

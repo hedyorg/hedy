@@ -1129,7 +1129,7 @@ class TestClasses(AuthHelper):
         # GIVEN a user with teacher permissions and a class
         self.given_teacher_is_logged_in()
         self.post_data('class', {'name': 'class1'})
-        Class = self.get_data('classes') [0]
+        Class = self.get_data('classes')[0]
 
         # WHEN attempting to update a class with no cookie
         # THEN receive a forbidden status code from the server
