@@ -58,7 +58,7 @@
                         {% else %}
                             <div class="flex flex-col gap-4 items-center">
                                 <div class="text-center">{{_('no_public_profile')}}</div>
-                                <button class="green-btn">{{_('create_question')}}</button>
+                                <button class="green-btn" onclick="window.open('/my-profile?open=public-profile')">{{_('create_question')}}</button>
                             </div>
                         {% endif %}
                     </div>
