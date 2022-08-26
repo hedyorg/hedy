@@ -133,7 +133,7 @@ def routes(app, database, achievements):
         Class = {
             'id': uuid.uuid4().hex,
             'date': utils.timems(),
-            'teacher': user['username'],
+            'teachers': {user['username']},  # Make a set of teachers -> we don't know how many it will be in the future
             'link': utils.random_id_generator(7),
             'name': body['name']
         }
@@ -252,7 +252,7 @@ def routes(app, database, achievements):
         new_class = {
             'id': class_id,
             'date': utils.timems(),
-            'teacher': user['username'],
+            'teachers': {user['username']},  # Make a set of teachers -> we don't know how many it will be in the future
             'link': utils.random_id_generator(7),
             'name': body.get('name')
         }
@@ -329,7 +329,7 @@ def routes(app, database, achievements):
         if not is_teacher(user):
             return utils.error_page(error=403, ui_message=gettext('retrieve_class_error'))
         Class = DATABASE.get_class(class_id)
-        if not Class or Class['teacher'] != user['username']:
+        if not Class or user['username'] not in Class['teachers']:
             return utils.error_page(error=404, ui_message=gettext('no_such_class'))
 
         if hedy_content.Adventures(g.lang).has_adventures():
