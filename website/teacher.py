@@ -159,11 +159,12 @@ def routes(app, database, achievements):
         if len(body.get('name')) < 1:
             return gettext('class_name_empty'), 400
 
-        Class = DATABASE.get_class (class_id)
+        Class = DATABASE.get_class(class_id)
         if not Class or user['username'] not in Class.get('teachers'):
             return gettext('no_such_class'), 404
 
         # We use this extra call to verify if the class name doesn't already exist, if so it's a duplicate
+        # Todo TB: What do we do if a teacher renames a class but the other teacher already has a class with this name?
         Classes = DATABASE.get_teacher_classes(user['username'])
         for Class in Classes:
             if Class['name'] == body['name']:
