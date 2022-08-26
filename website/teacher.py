@@ -364,7 +364,7 @@ def routes(app, database, achievements):
         if not is_teacher(user):
             return utils.error_page(error=403, ui_message=gettext('retrieve_class_error'))
         Class = DATABASE.get_class(class_id)
-        if not Class or Class['teacher'] != user['username']:
+        if not Class or user['username'] not in Class.get('teachers'):
             return utils.error_page(error=404, ui_message=gettext('no_such_class'))
 
         body = request.json
