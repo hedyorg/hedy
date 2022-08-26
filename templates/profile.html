@@ -17,7 +17,7 @@
              {% if invite_data %}
                  <div>
                      {{_('invite_message')}} "<span class="font-bold italic">{{ invite_data['class_name'] }}</span>".<br>
-                     {{_('sent_by')}} "<span class="font-bold italic">{{ invite_data['teacher'] }}</span>". {{_('prompt_join_class')}}
+                     {{_('sent_by')}} "<span class="font-bold italic">{% for teacher in invite_data['teachers'] %} {{ teacher }}{% if loop.index < class_info.teachers|length %}, {% endif %}{% endfor %}</span>". {{_('prompt_join_class')}}
                      <div class="flex flex-row mt-4">
                             <button type="reset" class="green-btn" onclick="window.open('/hedy/l/{{ invite_data['join_link'] }}', '_self');">{{_('join_class')}}</button>
                             <button type="submit" class="red-btn mx-4 px-4" onclick="hedyApp.remove_student_invite('{{user_data['username']}}', '{{invite_data['class_id']}}', '{{_('delete_invite_prompt')}}')">{{_('delete_invite')}}</button>

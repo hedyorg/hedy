@@ -716,7 +716,7 @@ def query_logs():
             return utils.error_page(error=403, ui_message=gettext('unauthorized'))
 
         class_ = DATABASE.get_class(class_id)
-        if not class_ or class_['teacher'] != user['username'] or username_filter not in class_.get('students', []):
+        if not class_ or user['username'] not in class_.get('teachers') or username_filter not in class_.get('students', []):
             return utils.error_page(error=403, ui_message=gettext('unauthorized'))
 
     (exec_id, status) = log_fetcher.query(body)
@@ -1053,7 +1053,7 @@ def profile_page(user):
         # If there is an invite: retrieve the class information
         class_info = DATABASE.get_class(invite.get('class_id', None))
         if class_info:
-            invite['teacher'] = class_info.get('teacher')
+            invite['teachers'] = class_info.get('teachers')
             invite['class_name'] = class_info.get('name')
             invite['join_link'] = class_info.get('link')
     else:
