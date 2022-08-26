@@ -201,20 +201,23 @@ class Database:
 
     def forget_user(self, username):
         """Forget the given user."""
-        classes = USERS.get({'username': username}).get('classes') or []
-        USERS.delete({'username': username})
-        INVITATIONS.delete({'username': username})
-        # The recover password token may exist, so we delete it
-        TOKENS.delete({'id': username})
-        PROGRAMS.del_many({'username': username})
 
         # Remove user from classes of which they are a student
+        classes = USERS.get({'username': username}).get('classes') or []
         for class_id in classes:
             self.remove_student_from_class(class_id, username)
 
         # Delete classes owned by the user
         for Class in self.get_teacher_classes(username):
             self.delete_class(Class)
+
+        USERS.delete({'username': username})
+        INVITATIONS.delete({'username': username})
+        # The recover password token may exist, so we delete it
+        TOKENS.delete({'id': username})
+        PROGRAMS.del_many({'username': username})
+
+
 
     def all_users(self, filtering=False):
         """Return all users."""
