@@ -1,17 +1,17 @@
+
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-25 10:29+0200\n"
+"POT-Creation-Date: 2022-08-26 12:29+0200\n"
 "PO-Revision-Date: 2022-08-25 09:56+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: de <LL@li.org>\n"
 "Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.14-dev\n"
 "Generated-By: Babel 2.10.1\n"
 
 #, fuzzy
@@ -202,17 +202,11 @@ msgstr "If you want to check if a variable is equal to multiple words, the words
 msgid "Var Undefined"
 msgstr "Du hast versucht {name} auszugeben, aber du hast es nicht angelegt."
 
-
+msgid "Access Before Assign"
+msgstr "You tried to use the variable {name} on line {access_line_number}, but you set it on line {definition_line_number}. Set a variable before using it."
 
 msgid "Cyclic Var Definition"
 msgstr "Der Name {variable} muss gesetzt werden bevor du ihn auf der rechten Seite eines Befehls verwenden kannst."
-
-msgid "Access Before Assign"
-msgstr "You tried to use the variable "
-"{name} on line {access_line_number}, but "
-"you set it on line "
-"{definition_line_number}. Set a variable "
-"before using it."
 
 msgid "Lonely Echo"
 msgstr "Du hast ein echo vor einem ask verwendet, oder ein echo ohne ask. Benutze zuerst ein ask um eine Eingabe zu bekommen, danach echo."
@@ -407,6 +401,12 @@ msgstr "Soll der/die Schüler*in aus der Klasse entfernt werden?"
 #, fuzzy
 msgid "add_students"
 msgstr "Schüler*innen"
+
+msgid "add_teacher_prompt"
+msgstr ""
+
+msgid "add_teacher"
+msgstr ""
 
 msgid "customize_class"
 msgstr "Passe eine Klasse an"
@@ -1199,6 +1199,12 @@ msgstr "Request teacher account"
 msgid "recent"
 msgstr "Zuletzt verwendete Programme"
 
+msgid "all"
+msgstr ""
+
+msgid "submitted"
+msgstr ""
+
 msgid "submitted_header"
 msgstr "Das ist ein bereits versendetes Programm und kann nicht mehr geändert werden."
 
@@ -1649,6 +1655,15 @@ msgstr "Du hast keinen Namen für die Klasse eingegeben!"
 msgid "class_name_duplicate"
 msgstr "Du hast bereits eine Klasse mit diesem Namen!"
 
+msgid "user_not_existing"
+msgstr ""
+
+msgid "user_not_teacher"
+msgstr ""
+
+msgid "teacher_added"
+msgstr ""
+
 #, fuzzy
 msgid "invalid_class_link"
 msgstr "Invalid link for joining the class."
@@ -1672,10 +1687,6 @@ msgstr "Class successfully customized."
 #, fuzzy
 msgid "username_empty"
 msgstr "You didn't enter an username!"
-
-#, fuzzy
-msgid "student_not_existing"
-msgstr "This username doesn't exist."
 
 #, fuzzy
 msgid "student_already_in_class"
@@ -2034,3 +2045,13 @@ msgstr "You didn't enter an adventure name!"
 
 #~ msgid "teacher_tutorial_end_message"
 #~ msgstr "You have received an invitation to join class"
+
+#~ msgid "student_not_existing"
+#~ msgstr "This username doesn't exist."
+
+#~ msgid "User doesn't exist"
+#~ msgstr ""
+
+#~ msgid "User isn't a teacher"
+#~ msgstr ""
+

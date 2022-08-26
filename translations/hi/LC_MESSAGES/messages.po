@@ -1,17 +1,17 @@
+
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-25 10:29+0200\n"
+"POT-Creation-Date: 2022-08-26 12:29+0200\n"
 "PO-Revision-Date: 2022-08-25 09:56+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: hi <LL@li.org>\n"
 "Language: hi\n"
+"Language-Team: hi <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.14-dev\n"
 "Generated-By: Babel 2.10.1\n"
 
 #, fuzzy
@@ -188,18 +188,11 @@ msgstr "If you want to check if a variable is equal to multiple words, the words
 msgid "Var Undefined"
 msgstr "आपने वेरिएबल {name} का उपयोग करने का प्रयास किया, लेकिन आपने इसे सेट नहीं किया। यह भी संभव है कि आप {name} शब्द का उपयोग करने की कोशिश कर रहे थे लेकिन उद्धरण चिह्नों को भूल गए।"
 
-
+msgid "Access Before Assign"
+msgstr "You tried to use the variable {name} on line {access_line_number}, but you set it on line {definition_line_number}. Set a variable before using it."
 
 msgid "Cyclic Var Definition"
 msgstr "नाम {variable} को is कमांड के दाईं ओर उपयोग करने से पहले सेट करने की आवश्यकता है"
-
-msgid "Access Before Assign"
-msgstr ""
-"You tried to use the variable "
-"{name} on line {access_line_number}, but "
-"you set it on line "
-"{definition_line_number}. Set a variable "
-"before using it."
 
 msgid "Lonely Echo"
 msgstr "आपने ask से पहले एक echo का उपयोग किया, या बिना ask के एक echo का उपयोग किया। पहले इनपुट के लिए ask, फिर echo का उपयोग करें।"
@@ -386,6 +379,12 @@ msgstr "क्या आप वाकई छात्र को कक्षा 
 #, fuzzy
 msgid "add_students"
 msgstr "छात्र"
+
+msgid "add_teacher_prompt"
+msgstr ""
+
+msgid "add_teacher"
+msgstr ""
 
 msgid "customize_class"
 msgstr "कक्षा को अनुकूलित करें"
@@ -1140,6 +1139,12 @@ msgstr "Request teacher account"
 msgid "recent"
 msgstr "मेरे हाल के प्रोग्राम्स"
 
+msgid "all"
+msgstr ""
+
+msgid "submitted"
+msgstr ""
+
 msgid "submitted_header"
 msgstr "यह एक प्रस्तुत किया गया प्रोग्राम है और इसे बदला नहीं जा सकता"
 
@@ -1566,6 +1571,15 @@ msgstr "आपने कक्षा का नाम नहीं डाला!
 msgid "class_name_duplicate"
 msgstr "आपके पास पहले से ही इस नाम की एक कक्षा है!"
 
+msgid "user_not_existing"
+msgstr ""
+
+msgid "user_not_teacher"
+msgstr ""
+
+msgid "teacher_added"
+msgstr ""
+
 msgid "invalid_class_link"
 msgstr "कक्षा में शामिल होने के लिए अमान्य लिंक|"
 
@@ -1585,9 +1599,6 @@ msgstr "कक्षा को सफलतापूर्वक अनुकू
 
 msgid "username_empty"
 msgstr "आपने उपयोगकर्ता नाम दर्ज नहीं किया!"
-
-msgid "student_not_existing"
-msgstr "यह उपयोगकर्ता नाम मौजूद नहीं है"
 
 msgid "student_already_in_class"
 msgstr "यह छात्र पहले से ही आपकी कक्षा में है"
@@ -1939,3 +1950,13 @@ msgstr "आपने एक adventure नाम दर्ज नहीं कि
 
 #~ msgid "teacher_tutorial_end_message"
 #~ msgstr "आपको कक्षा में शामिल होने का निमंत्रण मिला है"
+
+#~ msgid "student_not_existing"
+#~ msgstr "यह उपयोगकर्ता नाम मौजूद नहीं है"
+
+#~ msgid "User doesn't exist"
+#~ msgstr ""
+
+#~ msgid "User isn't a teacher"
+#~ msgstr ""
+

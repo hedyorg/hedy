@@ -208,13 +208,13 @@ def routes(app, database, achievements):
         # Verify that the user we want to add exists and is a teacher
         user = DATABASE.user_by_username(body.get('username'))
         if not user:
-            return gettext("User doesn't exist"), 400
-        if not user.get('is_teacher'):
-            return gettext("User isn't a teacher"), 400
+            return gettext("user_not_existing"), 400
+        if not user.get('is_teacher', 0) == 1:
+            return gettext("user_not_teacher"), 400
 
         # If we get here everything is validated -> add user as teacher to the class
         DATABASE.add_teacher_class(Class.get('id'), body.get('username'))
-        return {}, 200
+        return jsonify({'message': gettext('teacher_added')}), 200
 
 
 
@@ -434,7 +434,7 @@ def routes(app, database, achievements):
 
         user = DATABASE.user_by_username(username)
         if not user:
-            return gettext('student_not_existing'), 400
+            return gettext('user_not_existing'), 400
         if 'students' in Class and user['username'] in Class['students']:
             return gettext('student_already_in_class'), 400
         if DATABASE.get_username_invite(user['username']):

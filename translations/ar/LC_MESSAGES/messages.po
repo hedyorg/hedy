@@ -1,18 +1,17 @@
+
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-25 10:29+0200\n"
+"POT-Creation-Date: 2022-08-26 12:29+0200\n"
 "PO-Revision-Date: 2022-08-25 09:56+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: ar <LL@li.org>\n"
 "Language: ar\n"
+"Language-Team: ar <LL@li.org>\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
-"&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Weblate 4.14-dev\n"
 "Generated-By: Babel 2.10.1\n"
 
 msgid "program_contains_error"
@@ -171,17 +170,11 @@ msgstr "اذا كنت تريد فحص ما اذا كان المتغير مساو
 msgid "Var Undefined"
 msgstr "لقد قمت باستعمال المتغير {name} لكنك لم تقم بضبط قيمته ابتداء. من الممكن أيضاً أنك كنت تريد استعمال الكلمة {name} ولكن نسيت وضع علامات الاقتباس."
 
-
+msgid "Access Before Assign"
+msgstr "You tried to use the variable {name} on line {access_line_number}, but you set it on line {definition_line_number}. Set a variable before using it."
 
 msgid "Cyclic Var Definition"
 msgstr "يجب أن تضبط قيمة المتغير {variable} قبل أن تستعمله على الجانب الأيسر من من الأمر هو."
-
-msgid "Access Before Assign"
-msgstr "You tried to use the variable "
-"{name} on line {access_line_number}, but "
-"you set it on line "
-"{definition_line_number}. Set a variable "
-"before using it."
 
 msgid "Lonely Echo"
 msgstr "لقد استعملت الأمر ردد قبل الأمر اسأل، أو استعملت الأمر ردد بدون استعمال الأمر اسأل. قم باستعمال الأمر اسأل للحصول على اجابة أولاً ثم استعمل الأمر ردد."
@@ -358,6 +351,12 @@ msgstr "هل أنت متأكد أنك تريد ازالة التلميذ من ا
 #, fuzzy
 msgid "add_students"
 msgstr "تلاميذ"
+
+msgid "add_teacher_prompt"
+msgstr ""
+
+msgid "add_teacher"
+msgstr ""
 
 msgid "customize_class"
 msgstr "تخصيص الصف"
@@ -1052,6 +1051,12 @@ msgstr "Request teacher account"
 msgid "recent"
 msgstr "برامجي الأخيرة"
 
+msgid "all"
+msgstr ""
+
+msgid "submitted"
+msgstr ""
+
 msgid "submitted_header"
 msgstr "هذا برنامج تسليمه ولا يمكن نعديله."
 
@@ -1458,6 +1463,15 @@ msgstr "لم تدخل اسم الصف!"
 msgid "class_name_duplicate"
 msgstr "لديك بالفعل صف بهذا الإسم."
 
+msgid "user_not_existing"
+msgstr ""
+
+msgid "user_not_teacher"
+msgstr ""
+
+msgid "teacher_added"
+msgstr ""
+
 msgid "invalid_class_link"
 msgstr "رابط الانضمام للصف غير صالح."
 
@@ -1475,9 +1489,6 @@ msgstr "تم انشاء التخصيصات للصف بنجاح."
 
 msgid "username_empty"
 msgstr "لم تدخل اسم المستخدم!"
-
-msgid "student_not_existing"
-msgstr "اسم المستخدم غير موجود."
 
 msgid "student_already_in_class"
 msgstr "هذا التلميذ بالفعل موجود في الصف الخاص بك."
@@ -1819,3 +1830,13 @@ msgstr "لم تدخل اسم المغامرة!"
 
 #~ msgid "teacher_tutorial_end_message"
 #~ msgstr "اضغط على \"الخطوة التالية\" لتبدأ كمعلم أو معلمة في هيدي!"
+
+#~ msgid "student_not_existing"
+#~ msgstr "اسم المستخدم غير موجود."
+
+#~ msgid "User doesn't exist"
+#~ msgstr ""
+
+#~ msgid "User isn't a teacher"
+#~ msgstr ""
+
