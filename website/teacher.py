@@ -188,6 +188,37 @@ def routes(app, database, achievements):
             return {'achievement': achievement}, 200
         return {}, 200
 
+    @app.route('/for-teachers/class/add-teacher', methods=['POST'])
+    @requires_login
+    def add_teacher_class(user):
+        body = request.json
+        # Validations
+        if not isinstance(body, dict):
+            return gettext('ajax_error'), 400
+        if not isinstance(body.get('id'), str):
+            return gettext('class_name_invalid'), 400
+        if not isinstance(body.get('username'), str):
+            return gettext('username_invalid'), 400
+
+        # Validate that the current user is owner of the class
+        Class = DATABASE.get_class(body.get('id'))
+        if not Class or Class['teacher'] != user['username']:
+            return gettext('no_such_class'), 404
+
+        # Verify that the user we want to add exists and is a teacher
+        user = DATABASE.user_by_username(body.get('username'))
+        if not user:
+            return gettext("User doesn't exist"), 400
+        if not user.get('is_teacher'):
+            return gettext("User isn't a teacher"), 400
+
+        # If we get here everything is validated -> add user as teacher to the class
+        # TODO TB: Do we want a similar approach with invitations or simply add the teacher? (08-22)
+
+
+
+
+
     @app.route('/duplicate_class', methods=['POST'])
     @requires_login
     def duplicate_class(user):

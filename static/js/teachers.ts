@@ -545,7 +545,7 @@ export function add_teacher(prompt: string, class_id: string) {
     modal.prompt (prompt, '', function (teacher_name) {
         $.ajax({
             type: 'POST',
-            url: '/for-teachers/add-teacher',
+            url: '/for-teachers/class/add-teacher',
             data: JSON.stringify({
                 id: class_id,
                 username: teacher_name
