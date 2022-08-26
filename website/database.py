@@ -296,9 +296,9 @@ class Database:
     def get_teacher_classes(self, username):
         """Return all the classes belonging to a teacher."""
         classes = []
-        for id in USERS.get({'username': username}).get('teacher_classes', []):
-            # We can't seriliaze sets -> convert to a list just to be sure
-            Class = self.get_class(id).copy()
+        for class_id in USERS.get({'username': username}).get('teacher_classes', []):
+            # We can't serialize sets -> convert to a list just to be sure
+            Class = self.get_class(class_id).copy()
             Class['teachers'] = list(Class.get('teachers'))
             Class['students'] = list(Class.get('students', {}))
             classes.append(Class)
@@ -307,11 +307,10 @@ class Database:
     def get_teacher_students(self, username):
         """Return all the students belonging to a teacher."""
         students = []
-        classes = CLASSES.get_many({'teacher': username}, reverse=True)
-        for Class in classes:
-            for student in Class.get ('students', []):
+        for class_id in USERS.get({'username': username}).get('teacher_classes', []):
+            for student in self.get_class(class_id).get('students', []):
                 if student not in students:
-                    students.append (student)
+                    students.append(student)
         return students
 
     def get_adventure(self, adventure_id):
