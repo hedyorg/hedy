@@ -361,10 +361,10 @@ class Database:
 
         return classes
 
-    def store_class(self, Class, teacher_id):
+    def store_class(self, Class):
         """Store a class."""
         CLASSES.create(Class)
-        USERS.update({'username': teacher_id}, {'teacher_classes': dynamo.DynamoAddToStringSet(Class.get('id'))})
+        USERS.update({'username': Class.get('teacher')}, {'teacher_classes': dynamo.DynamoAddToStringSet(Class.get('id'))})
 
     def update_class(self, id, name):
         """Updates a class."""
@@ -386,12 +386,16 @@ class Database:
 
     def delete_class(self, Class):
         for student_id in Class.get ('students', []):
-            Database.remove_student_from_class (self, Class ['id'], student_id)
+            Database.remove_student_from_class (self, Class['id'], student_id)
+        # Remove class id from teacher list of classes
+
+        USERS.update({'username': Class.get('teacher')}, {'classes': dynamo.DynamoRemoveFromStringSet(Class.get('id'))})
 
         CUSTOMIZATIONS.del_many({'id': Class['id']})
         INVITATIONS.del_many({'class_id': Class['id']})
         CUSTOMIZATIONS.delete({'id': Class['id']})
         CLASSES.delete({'id': Class['id']})
+
 
     def resolve_class_link(self, link_id):
         return CLASSES.get({'link': link_id})
