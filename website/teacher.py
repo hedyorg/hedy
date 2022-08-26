@@ -30,7 +30,7 @@ def routes(app, database, achievements):
         welcome_teacher = session.get('welcome-teacher') or False
         session.pop('welcome-teacher', None)
 
-        teacher_classes = DATABASE.get_teacher_classes(current_user()['username'], True)
+        teacher_classes = DATABASE.get_teacher_classes(current_user()['username'])
         adventures = []
         for adventure in DATABASE.get_teacher_adventures(current_user()['username']):
             adventures.append(
@@ -58,7 +58,7 @@ def routes(app, database, achievements):
     def get_classes(user):
         if not is_teacher(user):
             return utils.error_page_403(error=403, ui_message=gettext('retrieve_class_error'))
-        return jsonify(DATABASE.get_teacher_classes(user['username'], True))
+        return jsonify(DATABASE.get_teacher_classes(user['username']))
 
     @app.route('/for-teachers/class/<class_id>', methods=['GET'])
     @requires_login
@@ -125,7 +125,7 @@ def routes(app, database, achievements):
             return gettext('class_name_empty'), 400
 
         # We use this extra call to verify if the class name doesn't already exist, if so it's a duplicate
-        Classes = DATABASE.get_teacher_classes(user['username'], True)
+        Classes = DATABASE.get_teacher_classes(user['username'])
         for Class in Classes:
             if Class['name'] == body['name']:
                 return gettext('class_name_duplicate'), 200
@@ -164,7 +164,7 @@ def routes(app, database, achievements):
             return gettext('no_such_class'), 404
 
         # We use this extra call to verify if the class name doesn't already exist, if so it's a duplicate
-        Classes = DATABASE.get_teacher_classes(user['username'], True)
+        Classes = DATABASE.get_teacher_classes(user['username'])
         for Class in Classes:
             if Class['name'] == body['name']:
                 return "duplicate", 200  # Todo TB: Will have to look into this, but not sure why we return a 200?
@@ -241,7 +241,7 @@ def routes(app, database, achievements):
 
         # We use this extra call to verify if the class name doesn't already exist, if so it's a duplicate
         # Todo TB: This is a duplicate function, might be nice to perform some clean-up to reduce these parts
-        Classes = DATABASE.get_teacher_classes(user['username'], True)
+        Classes = DATABASE.get_teacher_classes(user['username'])
         for Class in Classes:
             if Class['name'] == body.get('name'):
                 return gettext('class_name_duplicate'), 400
@@ -515,7 +515,7 @@ def routes(app, database, achievements):
             usernames.append(account.get('username').strip().lower())
 
         # Validation for duplicates in the db
-        classes = DATABASE.get_teacher_classes(user['username'], False)
+        classes = DATABASE.get_teacher_classes(user['username'])
         for account in body.get('accounts', []):
             if account.get('class') and account['class'] not in [i.get('name') for i in classes]:
                 return "not your class", 404

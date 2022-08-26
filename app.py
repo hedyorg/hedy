@@ -759,7 +759,7 @@ def teacher_tutorial(user):
     if not is_teacher(user):
         return utils.error_page(error=403, ui_message=gettext('not_teacher'))
 
-    teacher_classes = DATABASE.get_teacher_classes(current_user()['username'], True)
+    teacher_classes = DATABASE.get_teacher_classes(current_user()['username'])
     adventures = []
     for adventure in DATABASE.get_teacher_adventures(current_user()['username']):
         adventures.append(

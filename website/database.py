@@ -213,7 +213,7 @@ class Database:
             self.remove_student_from_class(class_id, username)
 
         # Delete classes owned by the user
-        for Class in self.get_teacher_classes(username, False):
+        for Class in self.get_teacher_classes():
             self.delete_class(Class)
 
     def all_users(self, filtering=False):
@@ -290,24 +290,15 @@ class Database:
         """Return the classes with given id."""
         return CLASSES.get({'id': id})
 
-    def get_teacher_classes(self, username, students_to_list=False):
+    def get_teacher_classes(self, username):
         """Return all the classes belonging to a teacher."""
         classes = []
         for id in USERS.get({'username': username}).get('teacher_classes', []):
-            # The e2e tests call this function to get all classes as a JSON, as we can't serialize a set: parse!
-            if is_testing_request(request):
-                Class = self.get_class(id).copy()
-                Class['teachers'] = list(Class.get('teachers'))
-                classes.append(Class)
-            else:
-                classes.append(self.get_class(id))
-
-        if students_to_list:
-            for Class in classes.copy():
-                if 'students' not in Class:
-                    Class['students'] = []
-                else:
-                    Class['students'] = list(Class['students'])
+            # We can't seriliaze sets -> convert to a list just to be sure
+            Class = self.get_class(id)
+            Class['teachers'] = list(Class.get('teachers'))
+            Class['students'] = list(Class.get('students'))
+            classes.append(Class)
         return classes
 
     def get_teacher_students(self, username):
@@ -327,7 +318,7 @@ class Database:
         # If we delete an adventure -> also delete is from possible class customizations
         teacher = self.get_adventure(adventure_id).get('creator', '')
         ADVENTURES.delete({'id': adventure_id})
-        for Class in self.get_teacher_classes(teacher, True):
+        for Class in self.get_teacher_classes(teacher):
             customizations = self.get_class_customizations(Class.get('id'))
             if customizations and adventure_id in customizations.get('teacher_adventures',[]):
                 customizations['teacher_adventures'].remove(adventure_id)
