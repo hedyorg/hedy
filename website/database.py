@@ -369,6 +369,10 @@ class Database:
         """Updates a class."""
         CLASSES.update({'id': id}, {'name': name})
 
+    def add_teacher_class(self, class_id, username):
+        """Add teacher to a class"""
+        CLASSES.update({'id': class_id}, {'teachers': dynamo.DynamoAddToStringSet(username)})
+
     def add_student_to_class(self, class_id, student_id):
         """Adds a student to a class."""
         CLASSES.update ({'id': class_id}, {'students': dynamo.DynamoAddToStringSet (student_id)})
