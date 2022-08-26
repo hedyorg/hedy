@@ -107,7 +107,7 @@ def routes(app, database, achievements):
                                 page_title=gettext('title_class-overview'),
                                 achievement=achievement, invites=invites,
                                 class_info={'students': students, 'link': os.getenv('BASE_URL') + '/hedy/l/' + Class['link'],
-                                            'name': Class['name'], 'id': Class['id']})
+                                            'name': Class['name'], 'id': Class['id'], 'teachers': Class['teachers']})
 
     @app.route('/class', methods=['POST'])
     @requires_login
