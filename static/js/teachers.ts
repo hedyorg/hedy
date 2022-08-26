@@ -541,6 +541,26 @@ export function create_accounts(prompt: string) {
     });
 }
 
+export function add_teacher(prompt: string, class_id: string) {
+    modal.prompt (prompt, '', function (teacher_name) {
+        $.ajax({
+            type: 'POST',
+            url: '/for-teachers/add-teacher',
+            data: JSON.stringify({
+                id: class_id,
+                username: teacher_name
+            }),
+            contentType: 'application/json',
+            dataType: 'json'
+        }).done(function (response) {
+            modal.alert(response.message, 3000, false);
+            // Would be nice to re-load the page at this spot
+        }).fail(function (err) {
+            modal.alert(err.responseText, 3000, true);
+        });
+    });
+}
+
 function download_login_credentials(accounts: any) {
     // https://stackoverflow.com/questions/14964035/how-to-export-javascript-array-info-to-csv-on-client-side
     let csvContent = "data:text/csv;charset=utf-8,";
