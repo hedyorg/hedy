@@ -1111,7 +1111,7 @@ class TestClasses(AuthHelper):
         self.assertEqual(Class['name'], 'class1')
         self.assertIsInstance(Class['students'], list)
         self.assertEqual(len(Class['students']), 0)
-        self.assertEqual(Class['teacher'], self.username)
+        self.assertEqual(Class['teachers'][0], self.username)
 
         # WHEN retrieving the class
         # THEN receive an OK response code from the server
