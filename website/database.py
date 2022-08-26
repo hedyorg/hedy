@@ -1,6 +1,8 @@
 import os
 
-from utils import timems, times
+from flask import request
+
+from utils import timems, times, is_testing_request
 from datetime import date
 from . import dynamo
 import functools
@@ -293,7 +295,7 @@ class Database:
         classes = []
         for id in USERS.get({'username': username}).get('teacher_classes', []):
             # The e2e tests call this function to get all classes as a JSON, as we can't JSON a set: parse!
-            if not os.getenv('NO_DEBUG_MODE'):
+            if is_testing_request(request):
                 Class = self.get_class(id)
                 Class['teachers'] = list(Class.get('teachers'))
                 classes.append(Class)
