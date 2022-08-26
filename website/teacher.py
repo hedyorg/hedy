@@ -160,7 +160,7 @@ def routes(app, database, achievements):
             return gettext('class_name_empty'), 400
 
         Class = DATABASE.get_class (class_id)
-        if not Class or Class['teacher'] != user['username']:
+        if not Class or user['username'] not in Class.get('teachers'):
             return gettext('no_such_class'), 404
 
         # We use this extra call to verify if the class name doesn't already exist, if so it's a duplicate
@@ -313,7 +313,7 @@ def routes(app, database, achievements):
     @requires_login
     def leave_class(user, class_id, student_id):
         Class = DATABASE.get_class(class_id)
-        if not Class or (Class['teacher'] != user['username'] and student_id != user['username']):
+        if not Class or (user['username'] not in Class.get('teachers') and student_id != user['username']):
             return gettext('ajax_error'), 400
 
         DATABASE.remove_student_from_class(Class['id'], student_id)
@@ -352,7 +352,7 @@ def routes(app, database, achievements):
         if not is_teacher(user):
             return utils.error_page(error=403, ui_message=gettext('retrieve_class_error'))
         Class = DATABASE.get_class(class_id)
-        if not Class or Class['teacher'] != user['username']:
+        if not Class or user['username'] not in Class.get('teachers'):
             return utils.error_page(error=404, ui_message=gettext('no_such_class'))
 
         DATABASE.delete_class_customizations(class_id)
@@ -431,7 +431,7 @@ def routes(app, database, achievements):
         if not is_teacher(user):
             return utils.error_page(error=403, ui_message=gettext('retrieve_class_error'))
         Class = DATABASE.get_class(class_id)
-        if not Class or Class['teacher'] != user['username']:
+        if not Class or user['username'] not in Class.get('teachers'):
             return utils.error_page(error=404, ui_message=gettext('no_such_class'))
 
         user = DATABASE.user_by_username(username)
@@ -470,7 +470,7 @@ def routes(app, database, achievements):
         if not is_teacher(user) and username != user.get('username'):
             return utils.error_page(error=403, ui_message=gettext('retrieve_class_error'))
         Class = DATABASE.get_class(class_id)
-        if not Class or (Class['teacher'] != user['username'] and username != user.get('username')):
+        if not Class or (user['username'] not in Class.get('teachers') and username != user.get('username')):
             return utils.error_page(error=404, ui_message=gettext('no_such_class'))
 
         DATABASE.remove_class_invite(username)
@@ -482,7 +482,7 @@ def routes(app, database, achievements):
         if not is_teacher(user):
             return utils.error_page(error=403, ui_message=gettext('not_teacher'))
         current_class = DATABASE.get_class(class_id)
-        if not current_class or current_class.get('teacher') != user.get('username'):
+        if not current_class or user['username'] not in current_class.get('teachers'):
             return utils.error_page(error=403, ui_message=gettext('no_such_class'))
 
         return render_template('create-accounts.html', current_class = current_class)
