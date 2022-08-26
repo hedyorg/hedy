@@ -334,7 +334,7 @@ function relocatePopup(x: number, y: number) {
 function tutorialPopup(step: number) {
   let route = "/get_tutorial_step/intro/"
   if (!student) {
-    route = "/get_tutorial_step/teacher0/"
+    route = "/get_tutorial_step/teacher/"
   }
   $.ajax({
     type: 'GET',
