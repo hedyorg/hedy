@@ -126,11 +126,17 @@ function adventureTabsStep() {
       $(this).click();
     }
   });
-
   tutorialPopup(current_step);
 }
 
 function quizTabStep() {
+  $('#adventures-buttons').children().each(function() {
+    if ($(this).attr('data-tab') == "quiz") {
+      // Set to false, prevent "are you sure you want to switch without saving" pop-up
+      window.State.unsaved_changes = false;
+      $(this).click();
+    }
+  });
   tutorialPopup(current_step);
 }
 
