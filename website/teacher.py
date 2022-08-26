@@ -138,7 +138,7 @@ def routes(app, database, achievements):
             'name': body['name']
         }
 
-        DATABASE.store_class(Class)
+        DATABASE.store_class(Class, user['username'])
         achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "ready_set_education")
         if achievement:
             return {'id': Class['id'], 'achievement': achievement}, 200
@@ -257,7 +257,7 @@ def routes(app, database, achievements):
             'name': body.get('name')
         }
 
-        DATABASE.store_class(new_class)
+        DATABASE.store_class(new_class, user['username'])
 
         # Get the customizations of the current class -> if they exist, update id and store again
         customizations = DATABASE.get_class_customizations(body.get('id'))

@@ -361,9 +361,10 @@ class Database:
 
         return classes
 
-    def store_class(self, Class):
+    def store_class(self, Class, teacher_id):
         """Store a class."""
         CLASSES.create(Class)
+        USERS.update({'username': teacher_id}, {'teacher_classes': dynamo.DynamoAddToStringSet(Class.get('id'))})
 
     def update_class(self, id, name):
         """Updates a class."""
