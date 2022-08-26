@@ -3,7 +3,7 @@ export * from './app';
 export * from './auth';
 export * from './statistics';
 export * from './logs';
-export * from './tutorial';
+export * from './tutorials/tutorial';
 export * from './quiz';
 export * from './parsons';
 import './syntaxModesRules';
