@@ -1099,7 +1099,7 @@ class TestClasses(AuthHelper):
         # GIVEN a class already saved
         # WHEN retrieving the list of classes
         class_list = self.get_data('classes')
-        # THEN receive a body containing an list with one element
+        # THEN receive a body containing a list with one element
         self.assertEqual(len(class_list), 1)
 
         # THEN validate the fields of the class
