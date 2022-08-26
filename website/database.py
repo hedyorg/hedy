@@ -297,7 +297,7 @@ class Database:
             # We can't seriliaze sets -> convert to a list just to be sure
             Class = self.get_class(id)
             Class['teachers'] = list(Class.get('teachers'))
-            Class['students'] = list(Class.get('students'))
+            Class['students'] = list(Class.get('students', {}))
             classes.append(Class)
         return classes
 
