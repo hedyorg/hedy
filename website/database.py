@@ -288,21 +288,10 @@ class Database:
 
     def get_teacher_classes(self, username, students_to_list=False):
         """Return all the classes belonging to a teacher."""
-        classes = None
-        if isinstance(storage, dynamo.AwsDynamoStorage):
-            classes = CLASSES.get_many({'teacher': username}, reverse=True)
-
-        # If we're using the in-memory database, we need to make a shallow copy
-        # of the classes before changing the `students` key from a set to list,
-        # otherwise the field will remain a list later and that will break the
-        # set methods.
-        #
-        # FIXME: I don't understand what the above comment is saying, but I'm
-        # skeptical that it's accurate.
-        else:
-            classes = []
-            for Class in CLASSES.get_many({'teacher': username}, reverse=True):
-                classes.append(Class.copy())
+        classes = []
+        class_ids = USERS.get({'username': username}).get('teacher_classes')
+        for id in class_ids:
+            classes.append(self.get_class(id))
         if students_to_list:
             for Class in classes:
                 if 'students' not in Class:
