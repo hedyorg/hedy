@@ -1,13 +1,13 @@
 {% extends "auth.html" %}
 
 {% block main %}
-<div class="flex flex-row items-center justify-between pb-2 border-b">
+<div class="flex flex-row items-center justify-between border-b">
     <h1>Achievements overview</h1>
     <button type="reset" class="green-btn" onclick="window.open('/admin', '_self');">Return to admin page</button>
 </div>
 <h4 class="text-center">Total amount of users with achievements: {{ total }}</h4>
 <div class="program w-3/4 mx-auto border-solid border-2 border-orange-400 rounded p-4">
-  <table class="table-auto mb-4 w-full text-sm">
+  <table class="table-auto w-full text-sm">
     <thead>
       <tr class="font-bold text-left">
           <td id="name_header">Achievement name</td>
