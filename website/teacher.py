@@ -167,7 +167,7 @@ def routes(app, database, achievements):
         Classes = DATABASE.get_teacher_classes(user['username'], True)
         for Class in Classes:
             if Class['name'] == body['name']:
-                return "duplicate", 200 # Todo TB: Will have to look into this, but not sure why we return a 200?
+                return "duplicate", 200  # Todo TB: Will have to look into this, but not sure why we return a 200?
 
         DATABASE.update_class(class_id, body['name'])
         achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "on_second_thoughts")
