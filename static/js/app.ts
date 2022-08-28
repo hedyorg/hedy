@@ -1757,14 +1757,9 @@ if ($("#editor").length) {
 }
 
 /**
- * Identify lines with breakpoints
+ * Render markers for all lines that have breakpoints
  *
- * We cannot use the 'Marker' functionality for this, since we need
- * to style the text itself (strikethrough) and markers are rendered
- * on a layer BEHIND the actual text.
- *
- * Instead, we manipulate the HTML elements that make up the Ace editor
- * directly (divs with 'ace_line' classes)
+ * (Breakpoints mean "disabled lines" in Hedy).
  */
 function updateBreakpointVisuals(editor: AceAjax.Editor) {
   const breakpoints = getBreakpoints(editor);
