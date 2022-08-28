@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-08-25 13:30+0200\n"
+"POT-Creation-Date: 2022-08-26 19:12+0200\n"
 "PO-Revision-Date: 2022-07-03 15:50+0000\n"
 "Last-Translator: Mark Giesen <markgiesen@outlook.com>\n"
 "Language: en\n"
@@ -172,23 +172,11 @@ msgstr "If you want to check if a variable is equal to multiple words, the words
 msgid "Var Undefined"
 msgstr "You tried to use the variable {name}, but you didn't set it. It is also possible that you were trying to use the word {name} but forgot quotation marks."
 
+msgid "Access Before Assign"
+msgstr "You tried to use the variable {name} on line {access_line_number}, but you set it on line {definition_line_number}. Set a variable before using it."
+
 msgid "Cyclic Var Definition"
 msgstr "The name {variable} needs to be set before you can use it on the right-hand side of the is command."
-
-#: content/error-messages.txt:13
-msgid "Cyclic Var Definition"
-msgstr ""
-"The name {variable} needs to be set before you can use it on the right-"
-"hand side of the `is` command."
-
-msgid "Access Before Assign"
-msgstr ""
-"You tried to use the variable "
-"{name} on line {access_line_number}, but "
-"you set it on line "
-"{definition_line_number}. Set a variable "
-"before using it."
-
 
 msgid "Lonely Echo"
 msgstr "You used an echo before an ask, or an echo without an ask. First ask for input, then echo."
@@ -816,6 +804,9 @@ msgstr "Profile icon."
 
 msgid "no_public_profile"
 msgstr "You don't have a public profile text yet..."
+
+msgid "create_question"
+msgstr "Do you want to create one?"
 
 msgid "amount_created"
 msgstr "programs created"
