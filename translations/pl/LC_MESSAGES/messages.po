@@ -1,3 +1,4 @@
+
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
@@ -5,15 +6,16 @@ msgstr ""
 "POT-Creation-Date: 2022-08-25 10:29+0200\n"
 "PO-Revision-Date: 2022-08-28 13:15+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: pl <LL@li.org>\n"
 "Language: pl\n"
+"Language-Team: pl <LL@li.org>\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 4.14.1-dev\n"
-"Generated-By: Babel 2.10.1\n"
+
 
 #, fuzzy
 msgid "program_contains_error"
@@ -196,17 +198,15 @@ msgstr "If you want to check if a variable is equal to multiple words, the words
 msgid "Var Undefined"
 msgstr "You tried to use the variable {name}, but you did not set it. It is also possible that you were trying to use the word {name} but forgot quotation marks."
 
+msgid "Access Before Assign"
+msgstr "You tried to use the variable {name} on line {access_line_number}, but you set it on line {definition_line_number}. Set a variable before using it."
+
 #, fuzzy
 msgid "Cyclic Var Definition"
 msgstr "The name {variable} needs to be set before you can use it on the right-hand side of the is command"
 
 msgid "Access Before Assign"
-msgstr ""
-"You tried to use the variable "
-"{name} on line {access_line_number}, but "
-"you set it on line "
-"{definition_line_number}. Set a variable "
-"before using it."
+msgstr "You tried to use the variable {name} on line {access_line_number}, but you set it on line {definition_line_number}. Set a variable before using it."
 
 #, fuzzy
 msgid "Lonely Echo"
@@ -964,6 +964,9 @@ msgstr "Profil został zaktualizowany."
 msgid "no_public_profile"
 msgstr "Profil publiczny"
 
+msgid "create_question"
+msgstr ""
+
 msgid "amount_created"
 msgstr "utworzonych programów"
 
@@ -1189,6 +1192,12 @@ msgstr "Request teacher account"
 #, fuzzy
 msgid "recent"
 msgstr "My recent programs"
+
+msgid "all"
+msgstr ""
+
+msgid "submitted"
+msgstr ""
 
 #, fuzzy
 msgid "submitted_header"
