@@ -10,24 +10,24 @@ adventures:
                 story_text_3: "Alustame! Ei tea, mida luua? Järgmistelt vahekaartidelt leiad ideid programmide loomiseks.\n"
                 example_code_2: "```\n{ask} What is your name?\n{echo} hello\n```\n"
             2:
-                story_text: "## Variables\nIn level 2 we learn two new commands: `{is}` and `{sleep}`.\nYou can name a word with `{is}`. This is called a variable. In this example we made a variable called name and a variable called age. You can use the word name anywhere in your code and it will be replaced by Hedy, like this:\n\nThis way you no longer need the `{echo}` command!\n"
+                story_text: "## Muutujad\nTeisel tasemel õpime kahte uut käsku: `{is}` ja `{sleep}`.\n`{is}` käsuga saad sa mingile sõnale nime anda. Seda nime nimetatakse muutujaks. Siin näites me tegime muutuja nimega nimi ja muutuja nimega vanus. Igal pool kus sa nüüd oma koodis sõna nimi kasutad, asendatakse see Hedy'ga. Niimoodi:\n\nNüüd sul ei lähe enam vaja `{echo}` käsku!\n"
                 example_code: "```\nname {is} Hedy\nage {is} 15\n{print} name is age years old\n```\n"
-                story_text_2: "`{print}` still works the same, but the `{ask}` command has changed. You need to use a variable in the `{ask}` command as well. It looks like this:\n"
-                example_code_2: "```\nanswer {is} {ask} What is your name?\n{print} Hello answer\n```\n"
-                story_text_3: "Another new command in this level is `{sleep}`, which pauses your program for a second. If you type a number behind the {sleep} command, the program pauses for that amount of seconds.\n"
-                example_code_3: "```\n{print} My favorite colour is...\n{sleep} 2\n{print} green!\n```\n"
-                start_code: '{print} hello world!'
+                story_text_2: "`{print}` töötab ikka samat moodi, aga `{ask}` käsk on muutunud. Sa pead `{ask}` käsus ka muutujat kasutama. See näeb niimoodi välja:\n"
+                example_code_2: "```\nvastus {is} {ask} Mis su nimi on?\n{print} Hello vastus\n```\n"
+                story_text_3: "Järgmine uus käsk sellel tasemel on `{sleep}`. Sellega saab programmi mõneks ajaks peatada. Kui sa {sleep} käsu taha numbri paned, siis programm peatub niimitmeks sekundiks.\n"
+                example_code_3: "```\n{print} Minu lemmikvärv on...\n{sleep} 2\n{print} roheline!\n```\n"
+                start_code: '{print} tere maailm!'
             3:
-                story_text: "## Make a list!\nIn level 3 you can make a list. You can let the computer choose something random from the list. You do that with `{at} {random}`.\n"
-                start_code: '{print} hello world!'
+                story_text: "## Koosta list!\nKolmandal tasemel saad sa listi koostada. Sa saad lasta arvutil juhusliku elemendi listist välja valida. Seda saad sa teha kasutades `{at} {random}`.\n"
+                start_code: '{print} tere maailm!'
                 example_code: "```\nanimals {is} dog, cat, kangaroo\n{print} animals {at} {random}\n```\n"
-                story_text_2: You can also add items to the list with `{add}` and remove items with `{remove}`.
+                story_text_2: Sa saad ka listi elemente juurde lisada kasutades `{add}` käsku ja elemente eemaldada kasutades `{remove}` käsku.
                 example_code_2: "```\nanimals {is} dog, cat, kangaroo\n{add} penguin {to_list} animals\n{remove} cat {from} animals\n{print} animals {at} {random}\n```\n"
             4:
-                start_code: "{print} 'Hello world'"
-                story_text: "## 'Quotation marks'\nIn level 4 `{ask}` and `{print}` have changed.\n\nYou must put text that you want to print between quotation marks.\n\nThis is useful, because now you can print all the words you want. Also the words you used to store something with `{is}`.\n\nMost programming languages also use quotation marks when printing, so we are also getting a step closer to real programming!\n"
+                start_code: "{print} 'Tere maailm'"
+                story_text: "## 'Ülakomad'\nNeljandal tasemel muutuvad käsud `{ask}` ja `{print}`.\n\nTeksti, mille sa tahad ekraanile kirjutada, pead sa panema ülakomade vahele.\n\nSee on kasulik, kuna nüüd sa saad igasugust teksti ekraanile kirjutada. Näiteks nagu sõnu, mida sa kasutad muutujanimena `{is}` käsus.\n\nEnamik programmeerimiskeeli kasutab kas ülakomasid või jutumärke teksti edasiandmiseks, nii et me oleme juba samm lähemal päris programmeerimise juurde!\n"
                 example_code: "```\n{print} 'You need to use quotation marks from now on!'\nanswer {is} {ask} 'What do we need to use from now on?'\n{print} 'We need to use ' answer\n```\n"
-                story_text_2: "## Adventures are getting more and more difficult\nThe adventures are now getting more and more difficult in the successive tabs.\nSo it is best to start on the left with the story, and work to the right, in order to be challenged more and more.\n"
+                story_text_2: "## Ülesanded muutuvad aina raskemaks\nThe adventures are now getting more and more difficult in the successive tabs.\nSo it is best to start on the left with the story, and work to the right, in order to be challenged more and more.\n"
             5:
                 start_code: "name {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'cool!' {else} {print} 'meh'"
                 story_text: "## If... else....\nIn level 5 there is something new, the `{if}`! With the `{if}` you can choose between two different options.\nThis code prints nice if you enter Hedy as a name, and boo! if you enter something else.\n`{ask}` and `{print}` still work like they did in level 4.\n"
