@@ -2,8 +2,11 @@
 import './syntaxModesRules';
 
 import { modal, error, success } from './modal';
+import { Markers } from './markers';
+
 export let theGlobalEditor: AceAjax.Editor;
 export let theModalEditor: AceAjax.Editor;
+let markers: Markers;
 
 const turtle_prefix =
 `# coding=utf8
@@ -148,6 +151,7 @@ $(document).on("click", function(event){
     var editor = turnIntoAceEditor($editor.get(0)!, $editor.data('readonly'));
     theGlobalEditor = editor;
     error.setEditor(editor);
+    markers = new Markers(theGlobalEditor);
 
     window.Range = ace.require('ace/range').Range // get reference to ace/range
 
@@ -185,7 +189,7 @@ $(document).on("click", function(event){
 
         clearErrors(editor);
         //removing the debugging state when loading in the editor
-      stopDebug();
+        stopDebug();
       });
     }
 
@@ -287,10 +291,10 @@ export function getHighlighter(level: string) {
 }
 
 function clearErrors(editor: AceAjax.Editor) {
+  // Not sure if we use annotations everywhere, but this was
+  // here already.
   editor.session.clearAnnotations();
-  for (const marker in editor.session.getMarkers(false)) {
-    editor.session.removeMarker(marker as any);
-  }
+  markers.clearErrors();
 }
 
 export function stopit() {
@@ -536,39 +540,6 @@ function showAchievement(achievement: any[]){
 function removeBulb(){
     const repair_button = $('#repair_button');
     repair_button.hide();
-}
-
-/**
- * Mark an error location in the ace editor
- *
- * The error occurs at the given row, and optionally has a column and
- * and a length.
- *
- * If 'col' is not given, the entire line will be highlighted red. Otherwise
- * the character at 'col' will be highlighted, optionally extending for
- * 'length' characters.
- *
- * 'row' and 'col' are 1-based.
- */
-function highlightAceError(editor: AceAjax.Editor, row: number, col?: number) {
-  // Set a marker on the error spot, either a fullLine or a text
-  // class defines the related css class for styling; which is fixed in styles.css with Tailwind
-  if (col === undefined) {
-    // If the is no column, highlight the whole row
-    editor.session.addMarker(
-      new ace.Range(row - 1, 1, row - 1, 2),
-      "editor-error", "fullLine", false
-    );
-    return;
-  }
-  // If we get here we know there is a column -> dynamically get the length of the error string
-  // As we assume the error is supposed to target a specific word we get row[column, whitespace].
-  const length = editor.session.getLine(row -1).slice(col-1).split(/(\s+)/)[0].length;
-
-  // If there is a column, only highlight the relevant text
-  editor.session.addMarker(new ace.Range(row - 1, col - 1, row - 1, col - 1 + length),
-    "editor-error", "text", false
-  );
 }
 
 /**
@@ -1393,21 +1364,22 @@ export function get_trimmed_code() {
   // Remove whitespace at the end of every line
 
   // ignore the lines with a breakpoint in it.
-  let breakpoints = editor.session.getBreakpoints();
+  const breakpoints = getBreakpoints(editor);
   let code = theGlobalEditor.getValue();
-  var storage = window.localStorage;
-  var debugLines = storage.getItem('debugLine');
+  const storage = window.localStorage;
+  const debugLines = storage.getItem('debugLine');
+
   if (code) {
     let lines = code.split('\n');
     if(debugLines != null){
       lines = lines.slice(0, parseInt(debugLines) + 1);
     }
     for (let i = 0; i < lines.length; i++) {
-      if (breakpoints[i] == 'ace_breakpoint') {
+      if (breakpoints[i] == BP_DISABLED_LINE) {
         lines[i] = '';
       }
-      code = lines.join('\n');
     }
+    code = lines.join('\n');
   }
 
   // regex for any number of whitespace \s*
@@ -1729,71 +1701,85 @@ export function filter_admin() {
   }
 }
 
+/**
+ * Add types for the gutter event
+ */
+interface GutterMouseDownEvent {
+  readonly domEvent: MouseEvent;
+  readonly clientX: number;
+  readonly clientY: number;
+  readonly editor: AceAjax.Editor;
+
+  getDocumentPosition(): AceAjax.Position;
+  stop(): void;
+}
+
+/**
+ * The '@types/ace' package has the type of breakpoints incorrect
+ *
+ * It's actually a map of number-to-class. Class is usually 'ace_breakpoint'
+ * but can be something you pick yourself.
+ */
+function getBreakpoints(editor: AceAjax.Editor): Breakpoints {
+  return editor.session.getBreakpoints() as unknown as Breakpoints;
+}
+
+type Breakpoints = Record<number, string>;
+
+/**
+ * The 'ace_breakpoint' style has been overridden to show a sleeping emoji in the gutter
+ */
+const BP_DISABLED_LINE = 'ace_breakpoint';
+
 if ($("#editor").length) {
-  var editor = ace.edit("editor");
-  editor.on("guttermousedown", function (e: any) {
-    var editorContainer = document.getElementById("editor");
-    var textContainer = editorContainer?.getElementsByClassName("ace_text-layer")[0];
-    var lines = textContainer?.getElementsByClassName("ace_line");
-    var target = e.domEvent.target;
+  var editor: AceAjax.Editor = ace.edit("editor");
+  editor.on("guttermousedown", function (e: GutterMouseDownEvent) {
+    const target = e.domEvent.target as HTMLElement;
 
-    if (lines) {
-      if (target.className.indexOf("ace_gutter-cell") == -1)
-        return;
+    // Not actually the gutter
+    if (target.className.indexOf("ace_gutter-cell") == -1)
+      return;
 
-      if (e.clientX > 25 + target.getBoundingClientRect().left)
-        return;
+    if (e.clientX > 25 + target.getBoundingClientRect().left)
+      return;
 
-      var breakpoints = e.editor.session.getBreakpoints(row, 0);
-      var row = e.getDocumentPosition().row;
-      if (typeof breakpoints[row] === typeof undefined && row != e.editor.getLastVisibleRow() + 1) {
-        e.editor.session.setBreakpoint(row);
-        row = getCorrectVisibleRow(row, e.editor);
-        lines[row].innerHTML = addDisabledClass(lines[row]);
-        e.stop();
-      } else {
-        e.editor.session.clearBreakpoint(row);
-        // calculating the correct line to edit
-        row = getCorrectVisibleRow(row, e.editor);
-        lines[row].innerHTML = removeDisabledClass(lines[row]);
-        e.stop();
-      }
+    const breakpoints = getBreakpoints(e.editor);
+    let row = e.getDocumentPosition().row;
+    if (breakpoints[row] === undefined && row !== e.editor.getLastVisibleRow() + 1) {
+      e.editor.session.setBreakpoint(row, BP_DISABLED_LINE);
+    } else {
+      e.editor.session.clearBreakpoint(row);
     }
+    e.stop();
   });
 
-  editor.renderer.on("afterRender", function () {
-    var breakpoints = editor.session.getBreakpoints();
-    adjustLines(breakpoints);
-    setDebugLine()
+  // 'as any' cast because the Ace types don't know about the 'afterRender' event
+  (editor.renderer as any).on('afterRender', () => {
+    setDebugLine();
   });
+
+  editor.session.on('changeBreakpoint', () => updateBreakpointVisuals(editor));
 }
 
-function getCorrectVisibleRow(row: number, editor: any) {
-  var firstVisibleRow = editor.getFirstVisibleRow();
-  return row - firstVisibleRow;
-}
+/**
+ * Identify lines with breakpoints
+ *
+ * We cannot use the 'Marker' functionality for this, since we need
+ * to style the text itself (strikethrough) and markers are rendered
+ * on a layer BEHIND the actual text.
+ *
+ * Instead, we manipulate the HTML elements that make up the Ace editor
+ * directly (divs with 'ace_line' classes)
+ */
+function updateBreakpointVisuals(editor: AceAjax.Editor) {
+  const breakpoints = getBreakpoints(editor);
 
-function adjustLines(disabledRow: []) {
-  // We have to specify the correct editor here
-  var editorContainer = document.getElementById("editor");
-  var textContainer = editorContainer?.getElementsByClassName("ace_text-layer")[0];
-  var lines = textContainer?.getElementsByClassName("ace_line");
-  var firstVisibleRow = editor.getFirstVisibleRow();
-  var lastVisibleRow = editor.getLastVisibleRow();
+  const disabledLines = Object.entries(breakpoints)
+    .filter(([_, bpClass]) => bpClass === BP_DISABLED_LINE)
+    .map(([line, _]) => line)
+    .map(x => parseInt(x, 10));
 
-  if (lines) {
-    var arr = disabledRow.slice(firstVisibleRow, lastVisibleRow + 1);
-
-    for (var i = 0; i < arr.length; i++) {
-      if (arr[i] == 'ace_breakpoint') {
-        var currentLine = lines[i];
-        currentLine.innerHTML = addDisabledClass(currentLine);
-      } else {
-        var currentLine = lines[i];
-        currentLine.innerHTML = removeDisabledClass(currentLine);
-      }
-    }
-  }
+  markers.strikethroughLines(disabledLines);
 }
 
 function debugRun() {
@@ -1900,6 +1886,7 @@ export function incrementDebugLine() {
   }
   setDebugLine();
 
+  console.log('incrementDebugLine');
   var lengthOfEntireEditor = theGlobalEditor.getValue().split("\n").filter(e => e).length;
   var debugLine = storage.getItem("debugLine");
   if (debugLine != null) {
@@ -1952,17 +1939,6 @@ function setDebugLine(reset: Boolean = false) {
       }
     }
   }
-}
-
-function addDisabledClass(str: Element) {
-  if (!str.children[0]?.innerHTML?.includes("ace-disabled")) {
-    return '<div class="ace-disabled">' + str.innerHTML + '</div>';
-  }
-  return str.innerHTML;
-}
-
-function removeDisabledClass(str: Element) {
-  return str.innerHTML.replace('<div class="ace-disabled">', '').replace('</div>', '');
 }
 
 function addDebugClass(str: Element) {
