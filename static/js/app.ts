@@ -1753,11 +1753,6 @@ if ($("#editor").length) {
     e.stop();
   });
 
-  // 'as any' cast because the Ace types don't know about the 'afterRender' event
-  (editor.renderer as any).on('afterRender', () => {
-    setDebugLine();
-  });
-
   editor.session.on('changeBreakpoint', () => updateBreakpointVisuals(editor));
 }
 
@@ -1806,29 +1801,19 @@ export function startDebug() {
     resetButton.show();
 
     incrementDebugLine();
-    debugRun();
   }
 }
 
 export function resetDebug() {
   if (step_debugger === true) {
     var storage = window.localStorage;
-    var debugLine = storage.getItem("debugLine");
     var continueButton = $("#debug_continue");
     continueButton.show();
 
-    if (debugLine == null) {
-      storage.setItem("debugLine", "0");
-      clearDebugVariables();
-      setDebugLine(true);
-      debugRun();
-      return;
-    } else {
-      storage.setItem("debugLine", "0");
-      clearDebugVariables();
-      setDebugLine(true);
-      debugRun();
-    }
+    storage.setItem("debugLine", "0");
+    clearDebugVariables();
+    markCurrentDebuggerLine();
+    debugRun();
   }
 }
 
@@ -1847,17 +1832,10 @@ export function stopDebug() {
     resetButton.hide();
 
     var storage = window.localStorage;
-    var debugLine = storage.getItem("debugLine");
+    storage.removeItem("debugLine");
 
     clearDebugVariables();
-
-    if (debugLine == null) {
-      setDebugLine(true);
-      return;
-    } else {
-      storage.removeItem("debugLine");
-      setDebugLine(true);
-    }
+    markCurrentDebuggerLine();
   }
 }
 
@@ -1875,81 +1853,34 @@ function clearDebugVariables() {
 export function incrementDebugLine() {
   var storage = window.localStorage;
   var debugLine = storage.getItem("debugLine");
-  if (debugLine == null) {
-    storage.setItem("debugLine", "0");
-    setDebugLine();
-    return;
-  } else {
-    var debugLineInt = parseInt(debugLine);
-    debugLineInt++;
-    storage.setItem("debugLine", debugLineInt.toString());
-  }
-  setDebugLine();
 
-  console.log('incrementDebugLine');
+  const nextDebugLine = debugLine == null
+    ? 0
+    : parseInt(debugLine, 10) + 1;
+
+  storage.setItem("debugLine", nextDebugLine.toString());
+  markCurrentDebuggerLine();
+
   var lengthOfEntireEditor = theGlobalEditor.getValue().split("\n").filter(e => e).length;
-  var debugLine = storage.getItem("debugLine");
+  if (nextDebugLine < lengthOfEntireEditor) {
+    debugRun();
+  } else {
+    stopDebug();
+  }
+}
+
+function markCurrentDebuggerLine() {
+  if (!step_debugger) { return; }
+
+  const storage = window.localStorage;
+  var debugLine = storage?.getItem("debugLine");
+
   if (debugLine != null) {
-    var currentLine = parseInt(debugLine);
-    if (currentLine <= lengthOfEntireEditor) {
-      debugRun();
-    }
+    var debugLineNumber = parseInt(debugLine, 10);
+    markers.setDebuggerCurrentLine(debugLineNumber);
+  } else {
+    markers.setDebuggerCurrentLine(undefined);
   }
-}
-
-function setDebugLine(reset: Boolean = false) {
-  if (step_debugger === true) {
-    var storage = window.localStorage;
-
-    var editorContainer = document.getElementById("editor");
-    var textContainer = editorContainer?.getElementsByClassName("ace_text-layer")[0];
-    var lines = textContainer?.getElementsByClassName("ace_line");
-    var firstVisibleRow = editor.getFirstVisibleRow();
-    var lastVisibleRow = editor.getLastVisibleRow();
-    var lengthOfEntireEditor = theGlobalEditor.getValue().split("\n").filter(e => e).length;
-    var indexArray = []
-    for (var x = firstVisibleRow; x <= lastVisibleRow; x++) {
-      indexArray.push(x);
-    }
-
-    if (lines) {
-      var debugLine = storage.getItem("debugLine");
-      if (debugLine != null) {
-        var debugLineNumber = parseInt(debugLine);
-        for (var i = 0; i < indexArray.length; i++) {
-          if (indexArray[i] == debugLineNumber) {
-            lines[i].innerHTML = addDebugClass(lines[i]);
-          } else {
-            lines[i].innerHTML = removeDebugClass(lines[i]);
-          }
-          if (debugLineNumber == lengthOfEntireEditor) {
-            stopDebug();
-            var continueButton = $("#debug_continue");
-            continueButton.hide();
-            return;
-          }
-        }
-      }
-      if (reset) {
-        for (var i = 0; i < indexArray.length; i++) {
-          lines[i].innerHTML = removeDebugClass(lines[i]);
-        }
-        //force resetting the rendering of the ace editor to remove the highlighted line
-        editor.resize(true);
-      }
-    }
-  }
-}
-
-function addDebugClass(str: Element) {
-  if (!str.children[0]?.innerHTML?.includes("debugLine")) {
-    return '<div class="debugLine">' + str.innerHTML + '</div>';
-  }
-  return str.innerHTML;
-}
-
-function removeDebugClass(str: Element) {
-  return str.innerHTML.replace('<div class="debugLine">', '').replace('</div>', '');
 }
 
 // See https://github.com/skulpt/skulpt/pull/579#issue-156538278 for the JS version of this code

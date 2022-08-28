@@ -10,6 +10,8 @@ export class Markers {
   // Map line numbers to markers
   private strikeMarkers = new Map<number, number>();
 
+  private currentLineMarker?: MarkerLocation;
+
   constructor(private readonly editor: AceAjax.Editor) {
   }
 
@@ -56,6 +58,27 @@ export class Markers {
   }
 
   /**
+   * Set the current line in the debugger
+   */
+  public setDebuggerCurrentLine(line: number | undefined) {
+    if (this.currentLineMarker?.line === line) {
+      return;
+    }
+
+    if (this.currentLineMarker) {
+      this.removeMarker(this.currentLineMarker.id);
+    }
+
+    if (line === undefined) {
+      this.currentLineMarker = undefined;
+      return;
+    }
+
+    const id = this.addMarker(new ace.Range(line, 0, line, 999), 'debugger-current-line', 'fullLine');
+    this.currentLineMarker = { line, id };
+  }
+
+  /**
    * Mark the given set of lines as currently struck through
    */
   public strikethroughLines(lines: number[]) {
@@ -97,4 +120,9 @@ export class Markers {
       .filter(([_, k]) => k === klass)
       .map(([id, _]) => id);
   }
+}
+
+interface MarkerLocation {
+  readonly line: number;
+  readonly id: number;
 }
