@@ -110,7 +110,7 @@ adventures:
                 story_text: "## Ni desegnu\nVi ankaŭ povas uzi Hedy por desegni. Kombinante turnojn kaj liniojn, vi povas fari kvadraton aŭ ŝtuparon!\n\nPer `{forward}` oni desegnas linion antaŭen. La nombro malantaŭ ĝi determinas kiom longe la testudo marŝos. `{turn} {right}` turnas la testudon kvaronturnon horloĝdirekte; `{turn} {left}`{left}` turnas la testudon kontraŭhorloĝe.\nSe vi volas iri malantaŭen, uzu la komandon `{forward}` kun negativa nombro. Do ekzemple, `{forward} -100`\n\nJen la komenco de eta ŝtuparo. Ĉu vi povas igi ĝin havi 5 ŝtupojn?\n"
                 example_code: "```\n{forward} 50\n{turn} {right}\n{forward} 50\n{turn} {left}\n{forward} 50\n```\n"
                 start_code: "{forward} 50\n{turn} {left}"
-                story_text_2: "## Koloroj\nVi ankaŭ povas ŝanĝi la koloron de la linioj per la komando `{color}`. Rigardu la ekzemplon.\nVi ankaŭ povas uzi la komandon `{color} {white}`{white}` por fari 'nevideblajn' liniojn. Vi povus uzi ĉi tiujn blankajn liniojn por movi la testudon ie ajn en la ekrano antaŭ ol vi komencas desegni.\n"
+                story_text_2: "## Koloroj\nOni ankaŭ povas ŝanĝi la koloron de la linioj per la komando `{color}`. Rigardu la ekzemplon.\nOni ankaŭ povas uzi la komandon `{color} {white}` por desegni nevideblajn liniojn. Oni povas uzi tiajn blankajn liniojn por movi la testudon ien en la ekrano antaŭ ol oni komencas desegni.\n"
                 example_code_2: "```\n{color} {white}\n{forward} -80\n{color} {green}\n{forward} 50\n{color} {yellow}\n{forward} 50\n{color} {red}\n{forward} 50\n```\n"
             3:
                 story_text: "## Serĉante testudon\nEn ĉi tiu nivelo vi povas uzi `{at} {random}`{random}` kun la desegna testudo. Hazarda elekto igas la testudon marŝi per malsama vojo ĉiufoje.\nUzu `{at} {random}`{random}` por elekti valoron el listo. Vi povas kopii kaj alglui liniojn 2 kaj 3 por krei pli longan hazardan vojon.\n"
@@ -283,7 +283,7 @@ adventures:
                 start_code: '# via kodo ĉi tie'
             7:
                 story_text: "## Restoracio\nEn ĉi tiu nivelo, vi lernis kiel uzi la komandon `{repeat}` por ripeti linion da kodo iomfoje.\nVi povas uzi tion en via restoracio por demandi (per la komando `{ask}`) plurajn homojn pri iliaj mendoj jene:\n"
-                example_code: "```\n{print} 'Bonvenon al Restoracio Hedy!'\nhomoj = {ask} 'How many people are joining us today?'\n{repeat} homoj {times} food = {ask} 'What would you like to eat?'\n{print} 'Dankon pro via mendo! Its coming right up!'\n```\n"
+                example_code: "```\n{print} 'Bonvenon al Restoracio Hedy!'\nhomoj = {ask} 'Kiom da homoj manĝas ĉe ni hodiaŭ?'\n{repeat} homoj {times} manĝaĵo = {ask} 'Kion vi volas manĝi?'\n{print} 'Dankon pro via mendo! La manĝaĵo baldaŭ venos!'\n```\n"
                 start_code: '# via kodo ĉi tie'
             8:
                 story_text: "## Restoracio\nEn ĉi tiu nivelo, vi povas plu ellabori vian virtualan restoracion ripetante plurajn liniojn da kodo. Jen:\n"
@@ -458,7 +458,7 @@ adventures:
                 example_code: "```\nbestoj {is} hundo, kato, fiŝo\n{for} besto {in} bestoj\n  {print} 'Mi amas ' besto 'n'\n```\n"
             11:
                 start_code: "{for} nombro {in} {range} 1 {to} 5\n    {print} nombro"
-                story_text: "## Iteracio!\n`{print}` funkcias same sed ni aldonas novan formon de la `{for}`. Vi nun povas skribi `{for} counter {in} {range} 1 {to} 5` kaj uzi `counter` en via programo.\nProvu ĝin por vidi kio okazas! Memoru uzi deŝovon post la deklaroj `{for}` kaj `{if}` (Tio signifas komenci frazon per kvar spacoj)"
+                story_text: "## Iteracio!\n`{print}` funkcias same, sed ni ebligis novan formon de `{for}`. Oni nun povas uzi `{for} numero {in} {range} 1 {to} 5` kaj uzi `numero` en via programo.\nProvu ĝin por vidi kio okazos! Ne forgesu deŝovon post la deklaroj `{for}` kaj `{if}`. (Tio signifas komenci linion per kvar spacoj.)"
                 example_code: "```\n{for} nombro {in} {range} 1 {to} 5\n    {print} nombro\n```\n"
             12:
                 start_code: "{print} 'Decimalaj nombroj nun postulas punkton (ne komon)'\n{print} 2.5 + 2.5"
@@ -543,18 +543,18 @@ adventures:
                 start_code: "{print} 'Al la sekva nivelo!'"
             8:
                 story_text: "## What's next?\nGreat job! You've reached the end of another level! In this level you've learned to use multiple lines of code in an {if} or {repeat} command. But you can't yet combine the two...\nGood news! In the next level you will be allowed to put an {if} inside an {if}, or inside a {repeat} command.\n"
-                example_code: "```\nanswer = {ask} 'Would you like to go to the next level?'\n{if} answer {is} yes\n    {print} 'Great! You can use the {repeat} commando in the {if} command!'\n    {print} 'Hooray!'\n    {print} 'Hooray!'\n    {print} 'Hooray!'\n{else}\n    {print} 'Okay, you can stay here for a little longer!'\n```\n"
+                example_code: "```\nrespondo = {ask} 'Ĉu vi volas iri al la sekva nivelo?'\n{if} respondo {is} jes\n    {print} 'Bonege! Vi povas uzi la komandon {repeat} en la komando {if}!'\n    {print} 'Hura!'\n    {print} 'Hura!'\n    {print} 'Hura!'\n{else}\n    {print} 'Bone, vi povas resti ĉi tie iom pli longe!'\n```\n"
                 start_code: "{print} 'Al la sekva nivelo!'"
             9:
-                story_text: "## Kio sekvos?\nVi fartas bonege! En ĉi tiu nivelo ni ankoraŭ alfrontas malgrandan problemon. Vi lernis ripeti liniojn, sed kio se vi volus iomete ŝanĝi la linion.\nEkzemple se vi volas kanti la kanton «Se vi estas feliĉa kaj vi scias ĝin». Ĝi aspektus jene:\n\nSe vi ankaŭ dezirus la sekvan verson 'stumu viajn piedojn', kaj la sekvan, kaj la sekvan, vi devus tute ŝanĝi la kodon.\nEn la sekva nivelo vi lernos la komandon `{for}`, kiu ebligas al vi fari liston de agoj kaj ripeti la kodon per alia ago ĉiufoje!\nBonvolu rigardi!\n"
+                story_text: "## Kio sekvos?\nVi fartas bonege! En ĉi tiu nivelo ni ankoraŭ alfrontas malgrandan problemon. Vi lernis ripeti liniojn, sed kio se vi volus iomete ŝanĝi la linion.\nEkzemple se vi volas kanti la kanton «Se vi estas feliĉa kaj vi scias ĝin». Ĝi aspektus jene:<!--{if}-->\n\nSe vi ankaŭ dezirus la sekvan verson 'stumu viajn piedojn', kaj la sekvan, kaj la sekvan, vi devus tute ŝanĝi la kodon.\nEn la sekva nivelo vi lernos la komandon `{for}`, kiu ebligas al vi fari liston de agoj kaj ripeti la kodon per alia ago ĉiufoje!\nBonvolu rigardi!\n"
                 example_code: "```\n{repeat} 2 {times}\n    {print} '{if} youre happy and you know it clap your hands'\n{print} '{if} youre happy and you know it and you really want to show it'\n{print} '{if} youre happy and you know it clap your hands'\n```\n"
                 start_code: "{print} 'Al la sekva nivelo!'"
             10:
                 story_text: "## What's next?\nYou have reached the end of this level, you're doing great! You are about to go to the next level. In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.\nIn Python there is no `{repeat}` command, but there is a command that works like {repeat}. Are you curious to find out how to say `{repeat}` in Python language? Quickly go on to find out!\n"
                 start_code: "{print} 'Al la sekva nivelo!'"
             11:
-                story_text: "## What's next?\nMaybe you have tried using decimal numbers in your restaurant adventure. If you did, you probably noticed that Hedy didn't understand them yet and always rounded off.\nFrom the next level on you can use decimal numbers.\n\nAnother cool feauture in the next level is that you can use mulitiple words in a variable.\nFor intance, you could already do this...\n"
-                example_code: "```\nhamburgero {is} 5\ntrinkaĵo {is} 2\ntotalo {is} hamburgero + trinkaĵo\n{print} 'You have ordered a burger and a drink'\n{print} 'La totalo estas ' totalo ' spesmiloj'\n```\nThe code above works, because the burger is 5 dollars and the drink is 2 dollar. But if you charge 50 cents more, the program doesn't work anymore! Like the code below:\n```\nhamburgero {is} 5.50\ntrinkaĵo {is} 2.30\ntotalo {is} hamburgero + trinkaĵo\n{print} 'You have ordered a burger and a drink'\n{print} 'La totalo estas ' totalo ' spesmiloj'\n```\nGo to the next level to make this code work!\n"
+                story_text: "## Kio sekvos?\nEble vi provis uzi decimalajn frakciojn en via restoracio-aventuro. Se jes, vi verŝajne rimarkis, ke Hedy ankoraŭ ne komprenis tiajn nombrojn kaj ĉiam rondigis ilin.\nEkde la sekva nivelo, oni povas uzi decimalajn frakciojn.\n"
+                example_code: "```\nhamburgero {is} 5\ntrinkaĵo {is} 2\ntotalo {is} hamburgero + trinkaĵo\n{print} 'Vi mendis hamburgeron kaj trinkaĵon'\n{print} 'La totalo estas ' totalo ' spesmiloj'\n```\nLa ĉi-supra kodo funkcias, ĉar la hamburgero estas 5 spesmiloj kaj la trinkaĵo estas 2 dolaroj. Sed se vi ŝargus duonon da spesmilo pli, la programo ne plu funkcius, jen:\n```\nhamburgero {is} 5.50\ntrinkaĵo {is} 2.30\ntotalo {is} hamburgero + trinkaĵo\n{print} 'Vi mendis hamburgeron kaj trinkaĵon'\n{print} 'La totalo estas ' totalo ' spesmiloj'\n```\nEk al la sekva nivelo por ke ĉi tiu kodo funkciu!\n"
                 start_code: "{print} 'Al la sekva nivelo!'"
             12:
                 story_text: "## What's next?\nIn the previous levels you learned how to put two `{if}`commands inside each other. This works fine, but it does give you very long and unhandy codes like this one:\n\nIn this system you have to give both the correct username and the correct password.\nIn the next level you will learn the `{and}` command that will make this code a ot shorter and more understandable!\nCheck it out!\n"

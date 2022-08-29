@@ -3,7 +3,7 @@
 {% block main %}
 <div>
     <div id="landing_page_text" class="mt-4 px-4 text-center">
-        <h2 class="text-4xl">{% if first_time %}{{_('welcome')}}{% else %}{{_('welcome_back')}}{% endif %} {{ user }}!</h2>
+        <h2 class="text-4xl">{% if first_time %}{{_('welcome')}}{% else %}{{_('welcome_back')}}{% endif %} {{user[0]|upper}}{{user[1:]}}!</h2>
     </div>
     <div class="mt-8 mx-auto flex flex-wrap lg:flex-nowrap justify-center gap-8">
         {% if is_teacher %}
@@ -47,7 +47,7 @@
                 </div>
                 <div class="w-full h-full bg-blue-200 flex flex-col rounded-lg border border-black">
                     <div class="flex flex-row items-center h-12 bg-blue-600 rounded-t-lg px-4 font-medium">
-                        <div class="text-white tracking-wide text-4xl">{{ user }}</div>
+                        <div class="text-white tracking-wide text-4xl">{{user[0]|upper}}{{user[1:]}}</div>
                         {% if achievements['achieved'] %}
                             <div class="text-white text-xl ml-auto">{{ achievements['achieved']|length }} {{_('achievements')}}</div>
                         {% endif %}

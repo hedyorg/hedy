@@ -43,7 +43,7 @@
             {% for highscore in highscores %}
                 <tr>
                     <td class="font-bold border-r border-gray-500 text-center">{{ highscore.ranking }}.</td>
-                    <td class="px-2"><a href="/user/{{highscore.username}}">{{highscore.username}}</a></td>
+                    <td class="px-2"><a href="/user/{{highscore.username}}">{{highscore.username[0]|upper}}{{highscore.username[1:]}}</a></td>
                     <td class="px-2">{{highscore.achievements}}</td>
                     <td class="px-2">{{get_country(highscore.country)}}</td>
                     <td class="px-2">{{_('ago')|replace("{timestamp}", highscore.last_achievement)}}</td>
