@@ -1,3 +1,6 @@
+// All these functions are general and easy to use within all tutorial .ts files
+// Most important is the tutorialPopup() function that retrieves the actual step from the server
+
 import {modal} from "../modal";
 
 export function addHighlightBorder(element_id: string) {
