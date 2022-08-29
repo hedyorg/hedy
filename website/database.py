@@ -616,7 +616,9 @@ class Database:
         else:
             messages = self.get_non_teacher_messages()
         read_messages = [message.get('id') for message in self.get_user_interactions(username)]
-        # Todo TB: Filter the messages we have already redd
+        # Todo TB: Filter the messages we have already read
+        # Let's differentiate between two types of: read and deleted
+        # When read the user is still able to view the message, when delete the message is hidden
         return messages
 
     def mark_as_read(self):
