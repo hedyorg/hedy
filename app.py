@@ -748,9 +748,10 @@ def tutorial_index():
     cheatsheet = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
     commands = hedy.commands_per_level.get(level)
     adventures = load_adventures_per_level(level, g.keyword_lang)
+    parsons = len(PARSONS[g.lang].get_parsons_data_for_level(level))
 
-    return hedyweb.render_tutorial_mode(level=level, cheatsheet=cheatsheet,
-                                        commands=commands, adventures=adventures)
+    return hedyweb.render_tutorial_mode(level=level, cheatsheet=cheatsheet, commands=commands,
+                                        adventures=adventures, parsons_exercises=parsons)
 
 
 @app.route('/teacher-tutorial', methods=['GET'])
