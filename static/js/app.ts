@@ -1730,6 +1730,7 @@ export function filter_admin() {
 }
 
 export function store_message() {
+  const title = $('#message_title').val();
   const message = $('#message_textarea').val();
   const teachers = $('input[name="receivers"]:checked').val();
 
@@ -1738,6 +1739,7 @@ export function store_message() {
       type: 'POST',
       url: '/admin/store_message',
       data: JSON.stringify({
+        title: title,
         message: message,
         teachers: teachers
     }),

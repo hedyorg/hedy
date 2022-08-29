@@ -170,7 +170,7 @@ def routes(app, database):
         if not is_admin(user):
             return utils.error_page(error=403, ui_message=gettext('unauthorized'))
 
-        messages = DATABASE.get_all_messages() or ["test", "panda"]
+        messages = DATABASE.get_all_messages()
 
         return render_template('admin/admin-messages.html', messages=messages, page_title=gettext('title_admin'))
 
@@ -184,6 +184,8 @@ def routes(app, database):
         body = request.json
         if not isinstance(body, dict):
             return "The send body is invalid", 400
+        if not isinstance(body.get('title'), str):
+            return "The title is not a string", 400
         if not isinstance(body.get('message'), str):
             return "The message is not a string", 400
         if not isinstance(body.get('teachers'), str):
@@ -191,13 +193,12 @@ def routes(app, database):
 
         message = {
             'id': utils.random_id_generator(8),
+            'title': body.get('title'),
             'message': body.get('message'),
             'teachers': True if body.get('teachers') == "teachers" else False,
             'timestamp': utils.times()
         }
 
-        print(message)
+        DATABASE.store_message(message)
 
-        #DATABASE.store_message(message)
-
-        return "Not ready yet...", 400
+        return {}, 200
