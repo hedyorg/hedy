@@ -10,20 +10,35 @@
    {% endif %}
    <h2 class="mx-4 lg:mx-16 px-2 mb-4">{{_('account_overview')}}</h2>
    <div class="flex flex-col gap-4 mx-4 lg:mx-16">
-       {% if invite_data %}
+       {% if session['messages'] > 0 %}
            <h1 class="section-header" onclick="$ ('#messages').toggle()">{{_('my_messages')}}</h1>
            <div id="messages" class="profile-section-body">
              <h2 class="profile-section-body-header">{{_('my_messages')}}</h2>
-             {% if invite_data %}
-                 <div>
-                     {{_('invite_message')}} "<span class="font-bold italic">{{ invite_data['class_name'] }}</span>".<br>
-                     {{_('sent_by')}} "<span class="font-bold italic">{{ invite_data['teacher'] }}</span>". {{_('prompt_join_class')}}
-                     <div class="flex flex-row mt-4">
-                            <button type="reset" class="green-btn" onclick="window.open('/hedy/l/{{ invite_data['join_link'] }}', '_self');">{{_('join_class')}}</button>
-                            <button type="submit" class="red-btn mx-4 px-4" onclick="hedyApp.remove_student_invite('{{user_data['username']}}', '{{invite_data['class_id']}}', '{{_('delete_invite_prompt')}}')">{{_('delete_invite')}}</button>
-                    </div>
-                 </div>
-             {% endif %}
+             <div class="flex flex-col gap-4">
+                 {% if invite_data %}
+                     <div class="w-full border border-gray-500 rounded-lg px-4 py-2">
+                         <h3 class="mt-0">{{_('class_invitation')}}</h3>
+                         {{_('invite_message')}} "<span class="font-bold italic">{{ invite_data['class_name'] }}</span>".<br>
+                         {{_('sent_by')}} "<span class="font-bold italic">{{ invite_data['teacher'] }}</span>". {{_('prompt_join_class')}}
+                         <div class="flex flex-row mt-4">
+                                <button type="reset" class="green-btn" onclick="window.open('/hedy/l/{{ invite_data['join_link'] }}', '_self');">{{_('join_class')}}</button>
+                                <button type="submit" class="red-btn mx-4 px-4" onclick="hedyApp.remove_student_invite('{{user_data['username']}}', '{{invite_data['class_id']}}', '{{_('delete_invite_prompt')}}')">{{_('delete_invite')}}</button>
+                        </div>
+                     </div>
+                 {% endif %}
+                 {% if messages %}
+                     {% for message in messages %}
+                         <div class="w-full border {% if message.read %}border-gray-300{% else %}border-gray-500{% endif %} rounded-lg px-4 py-2">
+                             <h3 class="mt-0">{{ message.title }}</h3>
+                             <div>{{ message.message }}</div>
+                             <div class="flex flex-row w-full gap-2 mt-4">
+                                <button class="yellow-btn text-white">Mark as read</button>
+                                <button class="green-btn">Delete</button>
+                             </div>
+                         </div>
+                     {% endfor %}
+                 {% endif %}
+             </div>
            </div>
        {% endif %}
        <h1 class="section-header" onclick="$ ('#public_profile_body').toggle()">{{_('public_profile')}}</h1>
