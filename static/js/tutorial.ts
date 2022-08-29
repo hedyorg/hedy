@@ -126,11 +126,28 @@ function adventureTabsStep() {
       $(this).click();
     }
   });
+  tutorialPopup(current_step);
+}
 
+function parsonsTabStep() {
+  $('#adventures-buttons').children().each(function() {
+    if ($(this).attr('data-tab') == "parsons") {
+      // Set to false, prevent "are you sure you want to switch without saving" pop-up
+      window.State.unsaved_changes = false;
+      $(this).click();
+    }
+  });
   tutorialPopup(current_step);
 }
 
 function quizTabStep() {
+  $('#adventures-buttons').children().each(function() {
+    if ($(this).attr('data-tab') == "quiz") {
+      // Set to false, prevent "are you sure you want to switch without saving" pop-up
+      window.State.unsaved_changes = false;
+      $(this).click();
+    }
+  });
   tutorialPopup(current_step);
 }
 
@@ -188,12 +205,14 @@ function callNextStep() {
   } else if (current_step == 10) {
     adventureTabsStep();
   } else if (current_step == 11) {
-    quizTabStep();
+    parsonsTabStep();
   } else if (current_step == 12) {
-    saveShareStep();
+    quizTabStep();
   } else if (current_step == 13) {
-    cheatsheetStep();
+    saveShareStep();
   } else if (current_step == 14) {
+    cheatsheetStep();
+  } else if (current_step == 15) {
     pushAchievement("well_begun_is_half_done");
     $('#achievement_pop-up').removeClass('z-10');
     $('#achievement_pop-up').addClass('z-50');
@@ -315,7 +334,7 @@ function relocatePopup(x: number, y: number) {
 function tutorialPopup(step: number) {
   let route = "/get_tutorial_step/intro/"
   if (!student) {
-    route = "/get_tutorial_step/teacher0/"
+    route = "/get_tutorial_step/teacher/"
   }
   $.ajax({
     type: 'GET',

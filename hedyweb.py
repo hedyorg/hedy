@@ -75,7 +75,7 @@ def render_code_editor_with_tabs(cheatsheet, commands, max_level, level_number, 
     return render_template("code-page.html", **arguments_dict, cheatsheet=cheatsheet)
 
 
-def render_tutorial_mode(level, cheatsheet, commands, adventures):
+def render_tutorial_mode(level, cheatsheet, commands, adventures, parsons_exercises):
     arguments_dict = {}
 
     arguments_dict['tutorial'] = True
@@ -85,6 +85,8 @@ def render_tutorial_mode(level, cheatsheet, commands, adventures):
     arguments_dict['adventures'] = adventures
     arguments_dict['commands'] = commands
     arguments_dict['quiz'] = True
+    arguments_dict['parsons'] = True if parsons_exercises else False
+    arguments_dict['parsons_exercises'] = parsons_exercises
 
     return render_template("code-page.html", **arguments_dict, cheatsheet=cheatsheet)
 
