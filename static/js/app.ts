@@ -1012,8 +1012,8 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
         // Also on a level < 7 (as we don't support loops yet), a timeout is redundant -> just set one for 5 minutes
         return (3000000);
       }
-      // Set a time-out of either 20 seconds (when turtle / sleep) or 5 seconds when not
-      return ((hasTurtle || hasSleep) ? 20000 : 5000);
+      // Set a time-out of either 20 seconds when having a sleep and 5 seconds when not
+      return ((hasSleep) ? 20000 : 5000);
     }) ()
   });
 
