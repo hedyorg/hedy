@@ -602,7 +602,7 @@ class Database:
         MESSAGES.put(data)
 
     def get_all_messages(self):
-        return MESSAGES.scan()
+        return MESSAGES.scan() or []
 
     def get_non_teacher_messages(self):
         return MESSAGES.get_many({'teachers': False}, reverse=True)

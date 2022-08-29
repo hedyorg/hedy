@@ -37,12 +37,21 @@
 </div>
 <!-- Display all already existing messages -->
 {% if messages %}
-    <div>
-        <h3>Messages</h3>
+    <div class="mt-2">
+        <h2 class="mx-2">Messages</h2>
         <div class="flex flex-col w-full gap-4">
             {% for message in messages %}
                 <div class="w-full border border-gray-500 rounded-lg px-4 py-4">
-                    {{message}}
+                    <div class="flex flex-row gap-4">
+                        <h3 class="mt-0 mx-4">{{ message.title }}</h3><span>Sent: {{_('ago')|replace("{timestamp}", message.age)}}</span>
+                    </div>
+                    <div class="flex flex-row gap-4">
+                        <div class="bg-white border-gray-500 rounded-lg px-4 py-4 w-full">
+                            {{ message.message }}
+                        </div>
+                        <div class="flex flex-col justify-end">
+                            <button class="red-btn" onclick="hedyApp.delete_message('{{ message.id }}');">Delete</button>
+                        </div>
                 </div>
             {% endfor %}
         </div>

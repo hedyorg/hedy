@@ -1753,6 +1753,24 @@ export function store_message() {
   });
 }
 
+export function delete_message(id: string) {
+  modal.confirm("Are you sure you want to delete this message?", function() {
+    $.ajax({
+      type: 'POST',
+      url: '/admin/delete_message',
+      data: JSON.stringify({
+        id: id
+    }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function () {
+        location.reload();
+    }).fail(function (err) {
+        modal.alert(err.responseText, 3000, true);
+    });
+  });
+}
+
 if ($("#editor").length) {
   var editor = ace.edit("editor");
   editor.on("guttermousedown", function (e: any) {
