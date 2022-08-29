@@ -1730,13 +1730,16 @@ export function filter_admin() {
 }
 
 export function store_message() {
-  const message = $('#message_textarea').val('');
+  const message = $('#message_textarea').val();
+  const teachers = $('input[name="receivers"]:checked').val();
+
   modal.confirm("Are you sure you want to send this message?", function() {
     $.ajax({
       type: 'POST',
       url: '/admin/store_message',
       data: JSON.stringify({
-        message: message
+        message: message,
+        teachers: teachers
     }),
       contentType: 'application/json',
       dataType: 'json'

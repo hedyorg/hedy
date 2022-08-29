@@ -180,7 +180,24 @@ def routes(app, database):
         if not is_admin(user):
             return utils.error_page(error=403, ui_message=gettext('unauthorized'))
 
+        #validations
         body = request.json
-        print(body)
+        if not isinstance(body, dict):
+            return "The send body is invalid", 400
+        if not isinstance(body.get('message'), str):
+            return "The message is not a string", 400
+        if not isinstance(body.get('teachers'), str):
+            return "Select the receivers", 400
+
+        message = {
+            'id': utils.random_id_generator(8),
+            'message': body.get('message'),
+            'teachers': True if body.get('teachers') == "teachers" else False,
+            'timestamp': utils.times()
+        }
+
+        print(message)
+
+        #DATABASE.store_message(message)
 
         return "Not ready yet...", 400
