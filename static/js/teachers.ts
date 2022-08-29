@@ -493,6 +493,19 @@ export function add_account_placeholder() {
     row.appendTo("#account_rows_container");
 }
 
+export function generate_passwords() {
+    $('.account_row').each(function () {
+        if ($(this).is(':visible')) {
+            $(this).find(':input').each(function () {
+                if ($(this).attr('id') == "password") {
+                    const random_password = generateRandomString(6);
+                    $(this).val(random_password);
+                }
+            });
+        }
+    });
+}
+
 export function create_accounts(prompt: string) {
     modal.confirm (prompt, function () {
         $('#account_rows_container').find(':input').each(function () {
@@ -569,4 +582,14 @@ export function copy_join_link(link: string, success: string) {
     document.execCommand("copy");
     document.body.removeChild(sampleTextarea);
     modal.alert(success, 3000, false);
+}
+
+// https://onlinewebtutorblog.com/how-to-generate-random-string-in-jquery-javascript/
+function generateRandomString(length: number) {
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    for (var i = 0; i < length; i++) {
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+    return text;
 }
