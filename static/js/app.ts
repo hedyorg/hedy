@@ -1734,7 +1734,7 @@ export function store_message() {
   modal.confirm("Are you sure you want to send this message?", function() {
     $.ajax({
       type: 'POST',
-      url: '/admin/send_message',
+      url: '/admin/store_message',
       data: JSON.stringify({
         message: message
     }),
