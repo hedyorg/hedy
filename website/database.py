@@ -598,7 +598,6 @@ class Database:
         cal = d.isocalendar()
         return f'{cal[0]}-{cal[1]:02d}'
 
-
     def add_message(self, data):
         MESSAGES.put(data)
 
@@ -608,5 +607,5 @@ class Database:
     def get_non_teacher_messages(self):
         return MESSAGES.get_many({'teacher_message': False}, reverse=True)
 
-    def get_interacted_messages(self, username):
+    def get_user_interactions(self, username):
         return INTERACTIONS.get_many({'username': username})
