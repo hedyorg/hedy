@@ -1046,6 +1046,8 @@ def profile_page(user):
         for class_id in profile.get('classes'):
             classes.append(DATABASE.get_class(class_id))
 
+    messages = DATABASE.get_unread_messages(user['username'], teacher=is_teacher(user))
+
     invite = DATABASE.get_username_invite(user['username'])
     if invite:
         # If there is an invite: retrieve the class information
@@ -1055,9 +1057,12 @@ def profile_page(user):
             invite['class_name'] = class_info.get('name')
             invite['join_link'] = class_info.get('link')
 
+    # Update the messages in the session
+    session['messages'] = len(messages) + (1 if invite else 0)
+
     return render_template('profile.html', page_title=gettext('title_my-profile'), programs=programs,
                            user_data=profile, invite_data=invite, public_settings=public_profile_settings,
-                           user_classes=classes, current_page='my-profile')
+                           user_classes=classes, messages=messages, current_page='my-profile')
 
 
 @app.route('/research/<filename>', methods=['GET'])

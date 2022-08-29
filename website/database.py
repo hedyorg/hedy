@@ -611,14 +611,12 @@ class Database:
         return MESSAGES.get_many({'teachers': False})
 
     def get_unread_messages(self, username, teacher=False):
-        print("Hier komen we!")
-        print(teacher)
         if teacher:
             messages = self.get_all_messages()
         else:
             messages = self.get_non_teacher_messages()
         read_messages = [message.get('id') for message in self.get_user_interactions(username)]
-        print(messages)
+        # Todo TB: Filter the messages we have already redd
         return messages
 
     def mark_as_read(self):
