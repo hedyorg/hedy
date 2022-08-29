@@ -165,7 +165,7 @@ def requires_admin(f):
     @wraps(f)
     def inner(*args, **kws):
         if not is_user_logged_in() or not is_admin(current_user()):
-            return utils.error_page(error=403)
+            return utils.error_page(error=403, ui_message=gettext('unauthorized'))
         return f(current_user(), *args, **kws)
 
     return inner

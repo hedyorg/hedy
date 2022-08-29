@@ -1,7 +1,7 @@
 from flask_babel import gettext
 import hedyweb
 from website import statistics
-from website.auth import requires_login, current_user, is_admin, pick
+from website.auth import requires_login, current_user, is_admin, pick, requires_admin
 import utils
 from flask import request
 from flask_helpers import render_template
@@ -140,13 +140,9 @@ def routes(app, database):
             return utils.error_page(error=403, ui_message=gettext('unauthorized'))
         return render_template('admin/admin-logs.html', page_title=gettext('title_admin'))
 
-
     @app.route('/admin/achievements', methods=['GET'])
-    @requires_login
-    def get_admin_achievements_page(user):
-        if not is_admin(user):
-            return utils.error_page(error=403, ui_message=gettext('unauthorized'))
-
+    @requires_admin
+    def get_admin_achievements_page():
         stats = {}
         achievements = hedyweb.AchievementTranslations().get_translations("en").get("achievements")
         for achievement in achievements.keys():
