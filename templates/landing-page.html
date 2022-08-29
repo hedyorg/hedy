@@ -1,7 +1,7 @@
 {% extends "auth.html" %}
 
 {% block main %}
-<div class="px-8">
+<div>
     <div id="landing_page_text" class="mt-4 px-4 text-center">
         <h2 class="text-4xl">{% if first_time %}{{_('welcome')}}{% else %}{{_('welcome_back')}}{% endif %} {{ user }}!</h2>
     </div>
