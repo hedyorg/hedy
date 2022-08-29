@@ -18,11 +18,8 @@ def routes(app, database):
         return render_template('admin/admin.html', page_title=gettext('title_admin'))
 
     @app.route('/admin/users', methods=['GET'])
-    @requires_login
+    @requires_admin
     def get_admin_users_page(user):
-        if not is_admin(user):
-            return utils.error_page(error=403, ui_message=gettext('unauthorized'))
-
         category = request.args.get('filter', default=None, type=str)
         category = None if category == "null" else category
 
@@ -89,11 +86,8 @@ def routes(app, database):
                                language_filter=language, keyword_language_filter=keyword_language)
 
     @app.route('/admin/classes', methods=['GET'])
-    @requires_login
+    @requires_admin
     def get_admin_classes_page(user):
-        if not is_admin(user):
-            return utils.error_page(error=403, ui_message=gettext('unauthorized'))
-
         classes = [{
             "name": Class.get('name'),
             "teacher": Class.get('teacher'),
@@ -108,11 +102,8 @@ def routes(app, database):
         return render_template('admin/admin-classes.html', classes=classes, page_title=gettext('title_admin'))
 
     @app.route('/admin/adventures', methods=['GET'])
-    @requires_login
+    @requires_admin
     def get_admin_adventures_page(user):
-        if not is_admin(user):
-            return utils.error_page(error=403, ui_message=gettext('unauthorized'))
-
         all_adventures = sorted(DATABASE.all_adventures(), key=lambda d: d.get('date', 0), reverse=True)
         adventures = [{
             "id": adventure.get('id'),
@@ -127,22 +118,18 @@ def routes(app, database):
         return render_template('admin/admin-adventures.html', adventures=adventures, page_title=gettext('title_admin'))
 
     @app.route('/admin/stats', methods=['GET'])
-    @requires_login
+    @requires_admin
     def get_admin_stats_page(user):
-        if not is_admin(user):
-            return utils.error_page(error=403, ui_message=gettext('unauthorized'))
         return render_template('admin/admin-stats.html', page_title=gettext('title_admin'))
 
     @app.route('/admin/logs', methods=['GET'])
-    @requires_login
+    @requires_admin
     def get_admin_logs_page(user):
-        if not is_admin(user):
-            return utils.error_page(error=403, ui_message=gettext('unauthorized'))
         return render_template('admin/admin-logs.html', page_title=gettext('title_admin'))
 
     @app.route('/admin/achievements', methods=['GET'])
     @requires_admin
-    def get_admin_achievements_page():
+    def get_admin_achievements_page(user):
         stats = {}
         achievements = hedyweb.AchievementTranslations().get_translations("en").get("achievements")
         for achievement in achievements.keys():
