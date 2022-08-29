@@ -1,14 +1,14 @@
 import {modal} from "../modal";
 
-function addHighlightBorder(element_id: string) {
+export function addHighlightBorder(element_id: string) {
   $('#' + element_id).addClass('border-2 rounded-lg border-red-500');
 }
 
-function removeBorder(element_id: string) {
+export function removeBorder(element_id: string) {
   $('#' + element_id).removeClass('border-2 border-red-500');
 }
 
-function relocatePopup(x: number, y: number) {
+export function relocatePopup(x: number, y: number) {
   $('#tutorial-pop-up').css({'top': '20%', 'left': '50%'});
   if (x && y) {
     let left = x.toString() + "%"
@@ -18,9 +18,7 @@ function relocatePopup(x: number, y: number) {
 
 }
 
-// We should keep this code right here -> the rest should move to dedicated files!
-
-function tutorialPopup(step: number) {
+export function tutorialPopup(current_level: string, step: number) {
   let route = "/get_tutorial_step/" + current_level + "/"
   $.ajax({
     type: 'GET',

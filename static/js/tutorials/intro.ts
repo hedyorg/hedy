@@ -1,153 +1,234 @@
-import {runit, theGlobalEditor} from "../app";
+import {pushAchievement, runit, theGlobalEditor} from "../app";
 import "./utils";
+import {addHighlightBorder, relocatePopup, removeBorder, tutorialPopup} from "./utils";
 
-    function codeEditorStep() {
-      $('#editor').addClass("z-40");
-      addHighlightBorder("editor");
+let current_step = 0;
 
-      relocatePopup(65, 30);
-      theGlobalEditor?.setValue("print ___");
-      tutorialPopup(current_step);
-    }
+export function startIntro() {
+    current_step = 1;
+    $('#adventures').hide();
+    $('#variables_container').hide();
+    theGlobalEditor?.setValue("");
 
-    function codeOutputStep() {
-      removeBorder("editor");
-      $('#code_output').addClass("z-40");
-      addHighlightBorder("code_output");
+    tutorialPopup("intor", current_step);
+}
 
-      runit ("1", "en", "", function () {
-        $ ('#output').focus ();
-      });
+export function callNextIntroStep() {
+  if (current_step == 2) {
+    codeEditorStep();
+  } else if (current_step == 3) {
+    codeOutputStep();
+  } else if (current_step == 4) {
+    runButtonStep();
+  } else if (current_step == 5) {
+    tryRunButtonStep();
+  } else if (current_step == 6) {
+    speakAloudStep();
+  } else if (current_step == 7) {
+    runSpeakAloudStep();
+  } else if (current_step == 8) {
+    nextLevelStep();
+  } else if (current_step == 9) {
+    levelDefaultStep();
+  } else if (current_step == 10) {
+    adventureTabsStep();
+  } else if (current_step == 11) {
+    parsonsTabStep();
+  } else if (current_step == 12) {
+    quizTabStep();
+  } else if (current_step == 13) {
+    saveShareStep();
+  } else if (current_step == 14) {
+    cheatsheetStep();
+  } else if (current_step == 15) {
+    pushAchievement("well_begun_is_half_done");
+    $('#achievement_pop-up').removeClass('z-10');
+    $('#achievement_pop-up').addClass('z-50');
+    // If the achievement pop-up is visible -> wait with the next function call
+    setTimeout(function(){
+      if ($('#achievement_pop-up').is(':visible')) {
+        setTimeout(function() {
+          endTutorial();
+          $('#achievement_pop-up').removeClass('z-50');
+          $('#achievement_pop-up').addClass('z-10');
+        }, 5000);
+      } else {
+        endTutorial();
+        $('#achievement_pop-up').removeClass('z-50');
+        $('#achievement_pop-up').addClass('z-10');
+      }
+    }, 500);
+  } else {
+    location.replace("/hedy");
+  }
+}
 
-      relocatePopup(35, 30);
-      tutorialPopup(current_step);
-    }
+function codeEditorStep() {
+  $('#editor').addClass("z-40");
+  addHighlightBorder("editor");
 
-    function runButtonStep() {
-      removeBorder("code_output");
-      $('#code_related_buttons').show();
-      $('#runButtonContainer').addClass("z-40");
-      addHighlightBorder("runButtonContainer");
+  relocatePopup(65, 30);
+  theGlobalEditor?.setValue("print ___");
+  tutorialPopup("intro", current_step);
+}
 
-      relocatePopup(50, 30);
-      tutorialPopup(current_step);
-    }
+function codeOutputStep() {
+  removeBorder("editor");
+  $('#code_output').addClass("z-40");
+  addHighlightBorder("code_output");
 
-    function tryRunButtonStep() {
-      $.ajax({
-          type: 'GET',
-          url: '/get_tutorial_step/intro/code_snippet/',
-          dataType: 'json'
-        }).done(function(response: any) {
-           theGlobalEditor?.setValue(response.code);
-        }).fail(function() {
-           theGlobalEditor?.setValue("print Hello world!\nprint I'm learning Hedy with the tutorial!");
-        });
+  runit ("1", "en", "", function () {
+    $ ('#output').focus ();
+  });
 
-      relocatePopup(50, 70);
-      tutorialPopup(current_step);
-    }
+  relocatePopup(35, 30);
+  tutorialPopup("intro", current_step);
+}
 
-    function speakAloudStep() {
-      removeBorder("runButtonContainer");
-      $('#editor').removeClass('z-40');
-      $('#code_output').removeClass('z-40');
-      $('#runButtonContainer').removeClass('z-40');
+function runButtonStep() {
+  removeBorder("code_output");
+  $('#code_related_buttons').show();
+  $('#runButtonContainer').addClass("z-40");
+  addHighlightBorder("runButtonContainer");
 
-      $('#speak_container').addClass('z-40 bg-white relative');
+  relocatePopup(50, 30);
+  tutorialPopup("intro", current_step);
+}
 
-      addHighlightBorder("speak_container");
+function tryRunButtonStep() {
+  $.ajax({
+      type: 'GET',
+      url: '/get_tutorial_step/intro/code_snippet/',
+      dataType: 'json'
+    }).done(function(response: any) {
+       theGlobalEditor?.setValue(response.code);
+    }).fail(function() {
+       theGlobalEditor?.setValue("print Hello world!\nprint I'm learning Hedy with the tutorial!");
+    });
 
-      relocatePopup(50, 30);
-      tutorialPopup(current_step);
-    }
+  relocatePopup(50, 70);
+  tutorialPopup("intro", current_step);
+}
 
-    function runSpeakAloudStep() {
-      $('#editor').addClass('z-40');
-      $('#code_output').addClass('z-40');
-      $('#runButtonContainer').addClass('z-40');
+function speakAloudStep() {
+  removeBorder("runButtonContainer");
+  $('#editor').removeClass('z-40');
+  $('#code_output').removeClass('z-40');
+  $('#runButtonContainer').removeClass('z-40');
 
-      relocatePopup(50, 70);
-      tutorialPopup(current_step);
-    }
+  $('#speak_container').addClass('z-40 bg-white relative');
 
-    function nextLevelStep() {
-      removeBorder("speak_container");
-      $('#editor').removeClass('z-40');
-      $('#code_output').removeClass('z-40');
-      $('#runButtonContainer').removeClass('z-40');
-      $('#speak_container').removeClass('z-40 bg-white relative');
+  addHighlightBorder("speak_container");
 
-      $('#next_level_button').addClass("z-40");
-      $('#next_level_button').removeAttr('onclick');
-      addHighlightBorder("next_level_button");
+  relocatePopup(50, 30);
+  tutorialPopup("intro", current_step);
+}
 
-      relocatePopup(50, 30);
-      tutorialPopup(current_step);
-    }
+function runSpeakAloudStep() {
+  $('#editor').addClass('z-40');
+  $('#code_output').addClass('z-40');
+  $('#runButtonContainer').addClass('z-40');
 
-    function levelDefaultStep() {
-      removeBorder("next_level_button");
-      $('#next_level_button').removeClass('z-40');
+  relocatePopup(50, 70);
+  tutorialPopup("intro", current_step);
+}
 
-      $('#code_content_container').addClass('z-40');
-      $('#adventures').addClass('z-40 bg-gray-100');
-      $('#adventures').show();
+function nextLevelStep() {
+  removeBorder("speak_container");
+  $('#editor').removeClass('z-40');
+  $('#code_output').removeClass('z-40');
+  $('#runButtonContainer').removeClass('z-40');
+  $('#speak_container').removeClass('z-40 bg-white relative');
 
+  $('#next_level_button').addClass("z-40");
+  $('#next_level_button').removeAttr('onclick');
+  addHighlightBorder("next_level_button");
+
+  relocatePopup(50, 30);
+  tutorialPopup("intro", current_step);
+}
+
+function levelDefaultStep() {
+  removeBorder("next_level_button");
+  $('#next_level_button').removeClass('z-40');
+
+  $('#code_content_container').addClass('z-40');
+  $('#adventures').addClass('z-40 bg-gray-100');
+  $('#adventures').show();
+
+  // Set to false, prevent "are you sure you want to switch without saving" pop-up
+  window.State.unsaved_changes = false;
+
+  addHighlightBorder("adventures");
+  relocatePopup(50, 40);
+  tutorialPopup("intro", current_step);
+}
+
+function adventureTabsStep() {
+  $('#adventures-buttons').children().each(function() {
+    if ($(this).attr('data-tab') == "story") {
       // Set to false, prevent "are you sure you want to switch without saving" pop-up
       window.State.unsaved_changes = false;
-
-      addHighlightBorder("adventures");
-      relocatePopup(50, 40);
-      tutorialPopup(current_step);
+      $(this).click();
     }
+  });
 
-    function adventureTabsStep() {
-      $('#adventures-buttons').children().each(function() {
-        if ($(this).attr('data-tab') == "story") {
-          // Set to false, prevent "are you sure you want to switch without saving" pop-up
-          window.State.unsaved_changes = false;
-          $(this).click();
-        }
-      });
+  tutorialPopup("intro", current_step);
+}
 
-      tutorialPopup(current_step);
+function parsonsTabStep() {
+  $('#adventures-buttons').children().each(function() {
+    if ($(this).attr('data-tab') == "parsons") {
+      // Set to false, prevent "are you sure you want to switch without saving" pop-up
+      window.State.unsaved_changes = false;
+      $(this).click();
     }
+  });
+  tutorialPopup("intro", current_step);
+}
 
-    function quizTabStep() {
-      tutorialPopup(current_step);
+function quizTabStep() {
+  $('#adventures-buttons').children().each(function() {
+    if ($(this).attr('data-tab') == "quiz") {
+      // Set to false, prevent "are you sure you want to switch without saving" pop-up
+      window.State.unsaved_changes = false;
+      $(this).click();
     }
+  });
+  tutorialPopup("intro", current_step);
+}
 
-    function saveShareStep() {
-      removeBorder("adventures");
-      $('#code_content_container').removeClass('z-40');
-      $('#level-header').addClass("z-40");
-      $('#cheatsheet_container').hide();
-      addHighlightBorder("level-header");
+function saveShareStep() {
+  removeBorder("adventures");
+  $('#code_content_container').removeClass('z-40');
+  $('#level-header').addClass("z-40");
+  $('#cheatsheet_container').hide();
+  addHighlightBorder("level-header");
 
-      $('#save_program_button').removeAttr('onclick');
-      $('#share_program_button').removeAttr('onclick');
+  $('#save_program_button').removeAttr('onclick');
+  $('#share_program_button').removeAttr('onclick');
 
-      relocatePopup(50, 30);
-      tutorialPopup(current_step);
-    }
+  relocatePopup(50, 30);
+  tutorialPopup("intro", current_step);
+}
 
-    function cheatsheetStep() {
-      $('#cheatsheet_container').show();
-      $('#code_output').removeClass('z-40');
-      $('#adventures').removeClass('z-40');
-      $('#cheatsheet_dropdown').addClass('z-40');
-      $('#cheatsheet_dropdown').show();
+function cheatsheetStep() {
+  $('#cheatsheet_container').show();
+  $('#code_output').removeClass('z-40');
+  $('#adventures').removeClass('z-40');
+  $('#cheatsheet_dropdown').addClass('z-40');
+  $('#cheatsheet_dropdown').show();
 
-      tutorialPopup(current_step);
-    }
+  tutorialPopup("intro", current_step);
+}
 
-    function endTutorial() {
-      removeBorder("level-header");
-      $('#level-header').removeClass('z-40');
-      $('#cheatsheet_dropdown').removeClass('z-40');
-      $('#cheatsheet_dropdown').hide();
+function endTutorial() {
+  removeBorder("level-header");
+  $('#level-header').removeClass('z-40');
+  $('#cheatsheet_dropdown').removeClass('z-40');
+  $('#cheatsheet_dropdown').hide();
 
-      relocatePopup(50, 15);
-      tutorialPopup(current_step);
-    }
+  relocatePopup(50, 15);
+  tutorialPopup("intro", current_step);
+}
+
