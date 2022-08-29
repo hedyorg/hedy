@@ -161,6 +161,16 @@ def requires_login(f):
     return inner
 
 
+def requires_admin(f):
+    @wraps(f)
+    def inner(*args, **kws):
+        if not is_user_logged_in() or not is_admin(current_user()):
+            return utils.error_page(error=403)
+        return f(current_user(), *args, **kws)
+
+    return inner
+
+
 def login_user_from_token_cookie():
     """Use the long-term token cookie in the user's request to try and look them up, if not already logged in."""
     if is_user_logged_in():
