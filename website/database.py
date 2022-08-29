@@ -597,3 +597,16 @@ class Database:
     def to_year_week(self, d):
         cal = d.isocalendar()
         return f'{cal[0]}-{cal[1]:02d}'
+
+
+    def add_message(self, data):
+        MESSAGES.put(data)
+
+    def get_all_messages(self):
+        return MESSAGES.scan()
+
+    def get_non_teacher_messages(self):
+        return MESSAGES.get_many({'teacher_message': False}, reverse=True)
+
+    def get_interacted_messages(self, username):
+        return INTERACTIONS.get_many({'username': username})
