@@ -174,7 +174,7 @@ def routes(app, database):
 
         return render_template('admin/admin-messages.html', messages=messages, page_title=gettext('title_admin'))
 
-    @requires_login('/admin/store_message', methods=['POST'])
+    @app.route('/admin/store_message', methods=['POST'])
     @requires_login
     def store_new_message(user):
         if not is_admin(user):
