@@ -25,14 +25,14 @@
     </div>
     <button class="green-btn mt-4" onclick="hedyApp.update_user_tags();">Update tags</button>
 </div>
-<div class="flex flex-row items-center justify-between pb-2 border-b">
+<div class="flex flex-row items-center justify-between border-b">
     <h1>Users overview</h1>
     <div class="fle flex-row gap-2">
         <button type="reset" class="green-btn" onclick="window.open('/admin', '_self');">Return to admin page</button>
         <button type="reset" class="yellow-btn text-white" onclick="window.open('?filter=all', '_self');">View all users</button>
     </div>
 </div>
-<div class="w-full mt-4 mb-4" id="program_filter">
+<div class="w-full mt-4" id="program_filter">
     <form onsubmit="event.preventDefault (); hedyApp.filter_admin();">
         <div class="px-4 w-full flex flex-row border border-gray-400 py-2 rounded-lg">
             <div class="p-2 ltr:mr-4 rtl:ml-4">
@@ -124,7 +124,7 @@
 </div>
 <h4 class="text-center">Total amount of shown users: {{ users|length }}</h4>
 <div class="program w-full border-solid border-2 border-orange-400 rounded p-4">
-  <table class="table-auto mb-4 w-full text-sm">
+  <table class="table-auto w-full text-sm">
     <thead>
       <tr class="font-bold text-left">
           <td id="username_header">Username</td>

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-08-25 10:29+0200\n"
-"PO-Revision-Date: 2022-08-25 09:56+0000\n"
+"PO-Revision-Date: 2022-08-28 13:54+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: ar <LL@li.org>\n"
 "Language: ar\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Weblate 4.14-dev\n"
+"X-Generator: Weblate 4.14.1-dev\n"
 "Generated-By: Babel 2.10.1\n"
 
 msgid "program_contains_error"
@@ -171,17 +171,11 @@ msgstr "اذا كنت تريد فحص ما اذا كان المتغير مساو
 msgid "Var Undefined"
 msgstr "لقد قمت باستعمال المتغير {name} لكنك لم تقم بضبط قيمته ابتداء. من الممكن أيضاً أنك كنت تريد استعمال الكلمة {name} ولكن نسيت وضع علامات الاقتباس."
 
-
+msgid "Access Before Assign"
+msgstr "You tried to use the variable {name} on line {access_line_number}, but you set it on line {definition_line_number}. Set a variable before using it."
 
 msgid "Cyclic Var Definition"
 msgstr "يجب أن تضبط قيمة المتغير {variable} قبل أن تستعمله على الجانب الأيسر من من الأمر هو."
-
-msgid "Access Before Assign"
-msgstr "You tried to use the variable "
-"{name} on line {access_line_number}, but "
-"you set it on line "
-"{definition_line_number}. Set a variable "
-"before using it."
 
 msgid "Lonely Echo"
 msgstr "لقد استعملت الأمر ردد قبل الأمر اسأل، أو استعملت الأمر ردد بدون استعمال الأمر اسأل. قم باستعمال الأمر اسأل للحصول على اجابة أولاً ثم استعمل الأمر ردد."
@@ -846,6 +840,10 @@ msgstr "تم تحديث الملف الشخصي."
 msgid "no_public_profile"
 msgstr "ليس لديك نص ملف شخصي عام حتى الآن ..."
 
+#, fuzzy
+msgid "create_question"
+msgstr "Do you want to create one?"
+
 msgid "amount_created"
 msgstr "البرامج المنشأة"
 
@@ -1051,6 +1049,12 @@ msgstr "Request teacher account"
 
 msgid "recent"
 msgstr "برامجي الأخيرة"
+
+msgid "all"
+msgstr ""
+
+msgid "submitted"
+msgstr ""
 
 msgid "submitted_header"
 msgstr "هذا برنامج تسليمه ولا يمكن نعديله."
@@ -1538,284 +1542,13 @@ msgstr "تم تحديث المغامرة!"
 msgid "adventure_empty"
 msgstr "لم تدخل اسم المغامرة!"
 
-#~ msgid "set_preferred_lang"
-#~ msgstr "Hedy now supports preferred user languages. You can set one for your profile in \"My profile\""
+#, fuzzy
+msgid "all"
+msgstr "All"
 
-#~ msgid "statistics"
-#~ msgstr "My statistics"
+msgid "class"
+msgstr ""
 
-#~ msgid "Empty Program"
-#~ msgstr "You created an empty program. Type Hedy code in the left field and try again"
+msgid "generate_passwords"
+msgstr ""
 
-#~ msgid "level_not_translated"
-#~ msgstr "This level is not translated in your language (yet)"
-
-#~ msgid "unique_emails"
-#~ msgstr "All mail addresses need to be unique."
-
-#~ msgid "emails_exist"
-#~ msgstr "One or more mail addresses is already in use."
-
-#~ msgid "intro_text_landing_page"
-#~ msgstr "Welcome to the wonderful world of Hedy! Here you can learn to program in small steps, without unnecessary complicated stuff. We start easy at level 1, and slowly build towards bigger and more complex programs! Choose one of the options below to get started"
-
-#~ msgid "general_text_landing_page"
-#~ msgstr "Start with level 1 explanations"
-
-#~ msgid "start_programming"
-#~ msgstr "Start programming"
-
-#~ msgid "create_class_text"
-#~ msgstr "Group your students into classes and change the content for each class."
-
-#~ msgid "read_docs_text"
-#~ msgstr "Visit our teacher's manual for lesson plans and common mistakes by students."
-
-#~ msgid "read_docs"
-#~ msgstr "Learn more about Hedy"
-
-#~ msgid "story_text"
-#~ msgstr "Make your own story"
-
-#~ msgid "turtle_text"
-#~ msgstr "Make a drawing with code"
-
-#~ msgid "welcome"
-#~ msgstr "Welcome"
-
-#~ msgid "landing_page_intro"
-#~ msgstr "مرحباً بك في عالم هيدي المدهش!"
-
-#~ msgid "landing_page_teacher"
-#~ msgstr "اذا لم تستخدم هيدي من قبل فإننا ننصحك البدء بالدليل التوجيهي للمعلمين."
-
-#~ msgid "landing_page_student"
-#~ msgstr "اذا لم تستخدم هيدي من قبل فإننا ننصحك البدء بالدليل التوجيهي."
-
-#~ msgid "teacher_tutorial_start_title"
-#~ msgstr "Hide cheatsheet"
-
-#~ msgid "not_user"
-#~ msgstr "لم تقم بتسجيل الدخول على ما يبدو!"
-
-#~ msgid "welcome_landing_page"
-#~ msgstr "مرحباً في هيدي!"
-
-#~ msgid "welcome_back_landing_page"
-#~ msgstr "مرحباً في هيدي!"
-
-#~ msgid "directly_start_programming"
-#~ msgstr "ابدأ البرمجة مباشرة"
-
-#~ msgid "tutorial_code_output"
-#~ msgstr "Hide cheatsheet"
-
-#~ msgid "end"
-#~ msgstr "انهاء"
-
-#~ msgid "quiz_description"
-#~ msgstr "هذه نهاية المستويات كافة! قم بعمل الفحص السريع الآن لتختبر معرفتك."
-
-#~ msgid "go_to_quiz"
-#~ msgstr "الذهاب الى الفحص السريع"
-
-#~ msgid "go_to_level"
-#~ msgstr "الذهاب إلى المستوى"
-
-#~ msgid "results_quiz"
-#~ msgstr "نتيجة الفحص السريع"
-
-#~ msgid "correct"
-#~ msgstr "اجابة صحيحة"
-
-#~ msgid "incorrect"
-#~ msgstr "إجابة خاطئة"
-
-#~ msgid "attempt"
-#~ msgstr "محاولة"
-
-#~ msgid "go_to_answer"
-#~ msgstr "الذهاب إلى الإجابة"
-
-#~ msgid "minutes"
-#~ msgstr "دقائق"
-
-#~ msgid "hours"
-#~ msgstr "ساعات"
-
-#~ msgid "days"
-#~ msgstr "أيام"
-
-#~ msgid "ago"
-#~ msgstr "{time} مضت"
-
-#~ msgid "visible_columns"
-#~ msgstr "خانات مرئية"
-
-#~ msgid "latest_shared_program"
-#~ msgstr "اخر برنامج تم مشاركته"
-
-#~ msgid "remove_student"
-#~ msgstr "ازالة تلميذ"
-
-#~ msgid "rename_class"
-#~ msgstr "اعادة تسمية الصف"
-
-#~ msgid "remove_invite"
-#~ msgstr "حذف الدعوة"
-
-#~ msgid "class_link"
-#~ msgstr "رابط الإنضمام الى الصف"
-
-#~ msgid "invite_student"
-#~ msgstr "دعوة تلميذ"
-
-#~ msgid "start_parsons"
-#~ msgstr "ابدأ البرمجة"
-
-#~ msgid "go_to_first_exercise"
-#~ msgstr "الذهاب الى السؤال ١"
-
-#~ msgid "select_class"
-#~ msgstr "اختر الصف"
-
-#~ msgid "your_country"
-#~ msgstr "ملفك الشخصي"
-
-#~ msgid "public_profile_visit"
-#~ msgstr "يمكنك زيارة ملفك العام! اضغط"
-
-#~ msgid "public_profile_link"
-#~ msgstr "هنا"
-
-#~ msgid "email_repeat"
-#~ msgstr "اعادة البريد اإلكتروني"
-
-#~ msgid "repeat_match_email"
-#~ msgstr "البريد الإلكتروني المكرر لا يتطابق."
-
-#~ msgid "hello_world_snippet"
-#~ msgstr "قول مرحباً أيها العالم!"
-
-#~ msgid "current_password"
-#~ msgstr "كلمة المرور الحالية"
-
-#~ msgid "tutorial_start_title"
-#~ msgstr "مرحباً في هيدي!"
-
-#~ msgid "tutorial_start_message"
-#~ msgstr "في هذا الدليل التوجيهي نشرح كل مزايا هيدي خطوة بخطوة."
-
-#~ msgid "tutorial_editor_title"
-#~ msgstr "محرر الكود"
-
-#~ msgid "tutorial_editor_message"
-#~ msgstr "في هذه النافذة يتم كتابة البرنامج/الكود. حاول كتابة شيء ما في مكان الفراغات!"
-
-#~ msgid "tutorial_output_title"
-#~ msgstr "نافذة النتائج"
-
-#~ msgid "tutorial_output_message"
-#~ msgstr "تظهر هنا نتيجة البرنامج الذي تقوم بتنفيذه، لقد صنعت هذا بنفسك!"
-
-#~ msgid "tutorial_run_title"
-#~ msgstr "زر التشغيل"
-
-#~ msgid "tutorial_run_message"
-#~ msgstr "عند الضغط على هذا الزر يتم تشغيل البرنامج! هلّا نجرب القيام بذلك في الخطوة التالية؟"
-
-#~ msgid "tutorial_tryit_title"
-#~ msgstr "فلنجرب ذلك!"
-
-#~ msgid "tutorial_tryit_message"
-#~ msgstr "شغل البرنامج، واضغط على \"الخطوة التالية\" بعد الانتهاء."
-
-#~ msgid "tutorial_speakaloud_title"
-#~ msgstr "النهاية!"
-
-#~ msgid "tutorial_speakaloud_message"
-#~ msgstr "اضغط على \"الخطوة التالية\" لتبدأ فعلياً البرمجة مع هيدي!"
-
-#~ msgid "tutorial_speakaloud_run_title"
-#~ msgstr "النهاية!"
-
-#~ msgid "tutorial_speakaloud_run_message"
-#~ msgstr "اضغط على \"الخطوة التالية\" لتبدأ فعلياً البرمجة مع هيدي!"
-
-#~ msgid "tutorial_nextlevel_title"
-#~ msgstr "إلى المستوى التالي"
-
-#~ msgid "tutorial_nextlevel_message"
-#~ msgstr "عندما تعتقد أنك استوعبت كل شيء وتمرنت بما فيه الكفاية يمكنك الإنتقال إلى المستوى التالي. اذا وُجدَ مستوى سابق أيضا ستجد أيضاً زراً آخر لترجع إلى المستوى السابق."
-
-#~ msgid "tutorial_leveldefault_title"
-#~ msgstr "شرح المستوى"
-
-#~ msgid "tutorial_leveldefault_message"
-#~ msgstr "علامة التبويب الأولى تحتوي دائماً على شرح المستوى. في كل مستوى سيتم شرح الأوامر الجديدة هنا."
-
-#~ msgid "tutorial_adventures_title"
-#~ msgstr "المغامرات"
-
-#~ msgid "tutorial_adventures_message"
-#~ msgstr "علامات التبويب الأخرى تحتوي على مغامرات تستطيع أن تبرمجها في كل مستوى. المغامرات تنتقل من السهل الى الصعب."
-
-#~ msgid "tutorial_quiz_title"
-#~ msgstr "الفحص السريع"
-
-#~ msgid "tutorial_quiz_message"
-#~ msgstr "في نهاية كل مستوى يمكنك القيام بالفحص السريع. بهذه الطريقة يمكنك أن تتحقق اذا ما كنت ملمّاً بكل المفاهيم."
-
-#~ msgid "tutorial_saveshare_title"
-#~ msgstr "الحفظ والمشاركة"
-
-#~ msgid "tutorial_saveshare_message"
-#~ msgstr "يمكنك حفظ كل البرامج التي تنشأها ومشاركتها مع المستخدمين الآخرين ل هيدي."
-
-#~ msgid "tutorial_cheatsheet_title"
-#~ msgstr "ورقة الغش"
-
-#~ msgid "tutorial_cheatsheet_message"
-#~ msgstr "اذا نسيت أمراً برمجياً يمكنك دوماً استعمال ورقة الغش. هناك ستجد قائمة بكل الأوامر البرمجية التي يمكن استعمالها في المستوى الحالي."
-
-#~ msgid "tutorial_end_title"
-#~ msgstr "النهاية!"
-
-#~ msgid "tutorial_end_message"
-#~ msgstr "اضغط على \"الخطوة التالية\" لتبدأ فعلياً البرمجة مع هيدي!"
-
-#~ msgid "teacher_tutorial_start_message"
-#~ msgstr "You have received an invitation to join class"
-
-#~ msgid "tutorial_class_title"
-#~ msgstr "Hide cheatsheet"
-
-#~ msgid "tutorial_class_message"
-#~ msgstr "كمعلم أو معلمة يمكنك انشاء صفوف ودعوة التلاميذ أو جعلهم ينضمون الى الصف من خلال رابط. يمكنك معاينة البرامج التي ينشأها التلاميذ بالاضافة الى احصائيات عن نشاط كل تلاميذك."
-
-#~ msgid "tutorial_customize_class_title"
-#~ msgstr "تخصيص الصفوف"
-
-#~ msgid "tutorial_customize_class_message"
-#~ msgstr "يمكنك القيام بتخصيصات معينة للصفوف من خلال اخفاء مستويات و/أو مغامرات معينة بالاضافة إلى تفعيلهم في تاريخ محدد تلقائياً."
-
-#~ msgid "tutorial_own_adventures_title"
-#~ msgstr "انشاء مغامرات"
-
-#~ msgid "tutorial_own_adventures_message"
-#~ msgstr "يمكنك انشاء مغامراتك الخاصة بك واستخدامها كمهمات لتلاميذك. يمكنك انشاؤهم هنا وتخصيصهم لصفوف معينة من خلال خاصية تخصيص الصفوف."
-
-#~ msgid "tutorial_accounts_title"
-#~ msgstr "انشاء حسابات"
-
-#~ msgid "tutorial_accounts_message"
-#~ msgstr "يمكنك انشاء عدة حسابات في المرة الواحدة، عليك فقط تزويد اسم المستخدم وكلمة المرور. يمكنك أيضاً أن تضيف هذا الحسابات إلى واحد من صفوفك بشكل مباشر."
-
-#~ msgid "tutorial_documentation_title"
-#~ msgstr "توثيق هيدي"
-
-#~ msgid "tutorial_documentation_message"
-#~ msgstr "Customize adventure"
-
-#~ msgid "teacher_tutorial_end_message"
-#~ msgstr "اضغط على \"الخطوة التالية\" لتبدأ كمعلم أو معلمة في هيدي!"
