@@ -1,3 +1,4 @@
+import utils
 from utils import timems, times
 from datetime import date
 from . import dynamo
@@ -615,23 +616,53 @@ class Database:
             messages = self.get_all_messages()
         else:
             messages = self.get_non_teacher_messages()
-        read_messages = [message.get('id') for message in self.get_user_interactions(username)]
-        # Todo TB: Filter the messages we have already read
-        # Let's differentiate between two types of: read and deleted
-        # When read the user is still able to view the message, when delete the message is hidden
-        return messages
+        read_messages = [message.get('message_id') for message in self.get_user_interactions(username)]
+        new_messages = []
+        for message in messages:
+            if message.get('id') in read_messages:
+                continue
+            new_messages.append(message)
+        return new_messages
 
     def mark_as_read(self, username, message_id):
-        # Check if the user has already had interaction with this message
-        # If so, retrieve id -> update and mark as read / unread
-        # Otherwise, create a new item and mark as well
-        return None
+        interactions = INTERACTIONS.get_many({'username': username})
+        interaction_id = None
+        for interaction in interactions:
+            if interaction.get('message_id') == message_id:
+                interaction_id = interaction.get('id')
+                break
+        if interaction_id:
+            INTERACTIONS.update({'id': interaction_id}, {'read': True})
+        else:
+            interaction = {
+                'id': utils.random_id_generator(8),
+                'message_id': message_id,
+                'username': username,
+                'timestamp': timems(),
+                'read': True,
+                'deleted': False
+            }
+            INTERACTIONS.put(interaction)
 
     def mark_as_deleted(self, username, message_id):
-        # Check if the user has already had interaction with this message
-        # If so, retrieve id -> update and mark as deleted
-        # Otherwise, create a new item and mark as well
-        return None
+        interactions = INTERACTIONS.get_many({'username': username})
+        interaction_id = None
+        for interaction in interactions:
+            if interaction.get('message_id') == message_id:
+                interaction_id = interaction.get('id')
+                break
+        if interaction_id:
+            INTERACTIONS.update({'id': interaction_id}, {'deleted': True})
+        else:
+            interaction = {
+                'id': utils.random_id_generator(8),
+                'message_id': message_id,
+                'username': username,
+                'timestamp': timems(),
+                'read': True,
+                'deleted': True
+            }
+            INTERACTIONS.put(interaction)
 
     def get_user_interactions(self, username):
         return INTERACTIONS.get_many({'username': username})
