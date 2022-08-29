@@ -602,6 +602,9 @@ class Database:
     def store_message(self, data):
         MESSAGES.put(data)
 
+    def get_message(self, id):
+        return MESSAGES.get({'id': id})
+
     def delete_message(self, id):
         MESSAGES.delete({'id': id})
 
@@ -624,45 +627,8 @@ class Database:
             new_messages.append(message)
         return new_messages
 
-    def mark_as_read(self, username, message_id):
-        interactions = INTERACTIONS.get_many({'username': username})
-        interaction_id = None
-        for interaction in interactions:
-            if interaction.get('message_id') == message_id:
-                interaction_id = interaction.get('id')
-                break
-        if interaction_id:
-            INTERACTIONS.update({'id': interaction_id}, {'read': True})
-        else:
-            interaction = {
-                'id': utils.random_id_generator(8),
-                'message_id': message_id,
-                'username': username,
-                'timestamp': timems(),
-                'read': True,
-                'deleted': False
-            }
-            INTERACTIONS.put(interaction)
-
-    def mark_as_deleted(self, username, message_id):
-        interactions = INTERACTIONS.get_many({'username': username})
-        interaction_id = None
-        for interaction in interactions:
-            if interaction.get('message_id') == message_id:
-                interaction_id = interaction.get('id')
-                break
-        if interaction_id:
-            INTERACTIONS.update({'id': interaction_id}, {'deleted': True})
-        else:
-            interaction = {
-                'id': utils.random_id_generator(8),
-                'message_id': message_id,
-                'username': username,
-                'timestamp': timems(),
-                'read': True,
-                'deleted': True
-            }
-            INTERACTIONS.put(interaction)
+    def mark_as_read(self, data):
+        INTERACTIONS.put(data)
 
     def get_user_interactions(self, username):
         return INTERACTIONS.get_many({'username': username})

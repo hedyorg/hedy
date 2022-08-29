@@ -757,6 +757,30 @@ def routes(app, database):
         DATABASE.update_user(user['username'], {'teacher_request': True})
         return jsonify({'message': gettext('teacher_account_success')}), 200
 
+
+    @app.route('/auth/mark_message_read', methods=['POST'])
+    @requires_login
+    def mark_message_as_read(user):
+        body = request.json
+        # Validations
+        if not isinstance(body, dict):
+            return gettext('ajax_error'), 400
+        if not isinstance(body.get('id'), str):
+            return gettext('invalid_message'), 400
+
+        message = DATABASE.get_message(body.get('id'))
+        if not message:
+            return gettext('invalid_message'), 400
+
+        interaction = {
+            'id': utils.random_id_generator(8),
+            'message_id': body.get('id'),
+            'username': user['username'],
+            'timestamp': times()
+        }
+        DATABASE.mark_as_read(interaction)
+        return {}, 200
+
     # *** ADMIN ROUTES ***
 
     @app.route('/admin/markAsTeacher', methods=['POST'])
