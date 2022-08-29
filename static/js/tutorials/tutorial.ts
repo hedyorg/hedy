@@ -1,7 +1,5 @@
-import "./utils";
-import "./intro";
 import {callNextIntroStep, startIntro} from "./intro";
-import {callTeacherNextStep} from "./teacher";
+import {callTeacherNextStep, startTeacher} from "./teacher";
 
 let current_level = "";
 
@@ -21,16 +19,19 @@ let current_level = "";
 
 export function startIntroTutorial() {
   $('#tutorial-mask').show();
+  current_level = "intro";
   startIntro();
 }
 
-export function startLevelTutorial() {
+export function startLevelTutorial(level: string) {
   $('#tutorial-mask').show();
+  current_level = level;
   //startLevel(level);
 }
 
 export function startTeacherTutorial() {
   $('#tutorial-mask').show();
-  //startTeacher();
+  current_level = "teacher";
+  startTeacher();
 }
 

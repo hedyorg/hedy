@@ -1,19 +1,20 @@
 import {pushAchievement, runit, theGlobalEditor} from "../app";
-import "./utils";
 import {addHighlightBorder, relocatePopup, removeBorder, tutorialPopup} from "./utils";
 
 let current_step = 0;
 
 export function startIntro() {
-    current_step = 1;
-    $('#adventures').hide();
-    $('#variables_container').hide();
-    theGlobalEditor?.setValue("");
+  current_step = 1;
+  $('#adventures').hide();
+  $('#variables_container').hide();
+  theGlobalEditor?.setValue("");
 
-    tutorialPopup("intor", current_step);
+  tutorialPopup("intro", current_step);
 }
 
 export function callNextIntroStep() {
+  current_step += 1;
+
   if (current_step == 2) {
     codeEditorStep();
   } else if (current_step == 3) {
