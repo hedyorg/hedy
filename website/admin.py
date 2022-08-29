@@ -164,3 +164,13 @@ def routes(app, database):
         return render_template('admin/admin-achievements.html', stats=stats,
                                total=total, page_title=gettext('title_admin'))
 
+    @app.route('/admin/messages', methods=['GET'])
+    @requires_login
+    def get_admin_messages(user):
+        if not is_admin(user):
+            return utils.error_page(error=403, ui_message=gettext('unauthorized'))
+
+        # Retrieve all messages here and display nicely
+        messages = None
+
+        return render_template('admin/admin-messages.html', messages=messages, page_title=gettext('title_admin'))

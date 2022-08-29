@@ -1,5 +1,15 @@
 {% extends "auth.html" %}
 
 {% block main %}
-<div>TEST</div>
+<div class="flex flex-row items-center justify-between border-b">
+    <h1>Messages overview</h1>
+    <button type="reset" class="green-btn" onclick="window.open('/admin', '_self');">Return to admin page</button>
+</div>
+<div>
+{% if messages %}
+    {% for message in messages %}
+        <!-- Create a div: delete, alter, add message -->
+    {% endfor %}
+{% endif %}
+</div>
 {% endblock %}
