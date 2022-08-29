@@ -20,7 +20,7 @@ PARSONS = dynamo.Table(storage, 'parsons', partition_key='id')
 
 # These tables are related to user-interaction content
 INVITATIONS = dynamo.Table(storage, 'class_invitations', partition_key='username', indexed_fields=[dynamo.IndexKey('class_id')])
-MESSAGES = dynamo.Table(storage, 'messages', partition_key='id', indexed_fields=[dynamo.IndexKey('teachers')])
+MESSAGES = dynamo.Table(storage, 'messages', partition_key='id', indexed_fields=[dynamo.IndexKey('receivers')])
 INTERACTIONS = dynamo.Table(storage, 'message_interactions', partition_key='id', indexed_fields=[dynamo.IndexKey('username')])
 
 # Information on quizzes. We will update this record in-place as the user completes
@@ -612,7 +612,7 @@ class Database:
         return MESSAGES.scan() or []
 
     def get_non_teacher_messages(self):
-        return MESSAGES.get_many({'teachers': False})
+        return MESSAGES.get_many({'receivers': 'all'})
 
     def get_unread_messages(self, username, teacher=False):
         if teacher:

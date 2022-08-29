@@ -202,7 +202,7 @@ def routes(app, database):
             'id': utils.random_id_generator(8),
             'title': body.get('title'),
             'message': body.get('message'),
-            'teachers': True if body.get('teachers') == "teachers" else False,
+            'receivers': "teachers" if body.get('teachers') == "teachers" else "all",
             'timestamp': utils.times()
         }
 

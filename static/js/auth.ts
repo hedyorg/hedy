@@ -298,6 +298,21 @@ export function update_user_tags() {
   });
 }
 
+export function mark_message_as_read(id: string) {
+  $.ajax({
+    type: 'POST',
+    url: '/auth/mark_message_read',
+    data: JSON.stringify({
+      id: id
+    }),
+    contentType: 'application/json; charset=utf-8'
+  }).done(function () {
+    location.reload();
+  }).fail(function (response) {
+    modal.alert(response.responseText, 3000, true);
+  });
+}
+
 // *** LOADERS ***
 
 $("#language").change(function () {
