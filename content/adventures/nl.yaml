@@ -240,7 +240,7 @@ adventures:
                 story_text: |-
                     ## Lussen!
                     We gaan nu een extra vorm van de `{for}` toevoegen! Je mag ook `{for} i {in} {range} 1 {to} 5` typen in plaats van `{repeat} 5 {times}`. Het leuke is dat je die variabele `i` ook in je programma kan gebruiken! 
-                    Je moet nog steeds alle regels die herhaald worden inspringen (dat betekent dat ze moeten beginnen met vier spaties)
+                    Je moet nog steeds alle regels die na `{for}` en `{if}` komen, inspringen. Dat betekent dat ze moeten beginnen met vier spaties.
                 example_code: |
                     ```
                     {for} teller {in} {range} 1 {to} 5
@@ -374,8 +374,8 @@ adventures:
                     fruit = ['appel', 'banaan', 'kers']
                     {print} fruit
                 story_text: |-
-                    ## Steeds meer als echte code
-                    We zijn aangekomen bij de laatste paar Hedy levels. We komen dus steeds dichter bij echte Python codes.
+                    ## Steeds meer als echte code!
+                    We zijn aangekomen bij de laatste paar Hedy levels. We komen dus steeds dichter bij echte Python code.
                     In dit level gaan we leren hoe je lijsten maakt op de Pythonmanier. Dat werkt met vierkante haakjes zetten om lijstjes, dat zijn deze: `[` en `]`.
                     Als we woorden in de lijst willen zetten, moeten we om de woorden ook enkele aanhalingstekens zetten. Bij getallen hoeft dat niet.
                     We kunnen in dit level ook met een getal plekken in lijstjes aanwijzen.
@@ -487,7 +487,7 @@ adventures:
                     ## Verhaal
                     Misschien heb je gezien dat in het vorige level nog wel een foutje zit.
                     Heb je toevallig geprobeerd om een zin te maken waarin het woord naam zat? Bijv. `{print} mijn naam {is} naam`.
-                    Dat werkte niet goed! Dan krijg je: mijn Henk {is} Henk. Dat kun je in level 4 oplossen.
+                    Dat werkte niet goed! Dan krijg je: `mijn Henk {is} Henk`. Dat kun je in level 4 oplossen.
                     Daarvoor moet je wel aanhalingstekens gebruiken bij alles dat je gaat printen.
                 example_code: |
                     ```
@@ -558,7 +558,7 @@ adventures:
             9:
                 story_text: |
                     ## Verhaal
-                    In dit level kun je {if} commando's in andere {if} commando's stoppen. Hierdoor krijg je nog meer mogelijkheden om je verhaal echt interactief te maken!
+                    In dit level kun je `{if}`, `{repeat}` en `{for}` commando's in andere `{if}`, `{repeat}` en `{for}` commando's stoppen. Hierdoor krijg je nog meer mogelijkheden om je verhaal echt interactief te maken!
                 example_code: |
                     ```
                     {print} 'Robin loopt door de stad'
@@ -626,7 +626,7 @@ adventures:
             12:
                 story_text: |-
                     ## Verhaal
-                    In dit level kun je meerdere woorden opslaan in een variabele. Hierdoor kun je je hoofdpersoon bijvoorbeeld een voor- en achternaam geven.
+                    In dit level kun je aanhalingstekens gebruiken, zodat je meerdere woorden kan opslaan in een variabele. Hierdoor kun je je hoofdpersoon bijvoorbeeld een voor- en achternaam geven.
                 example_code: |
                     ```
                     naam = 'De Koningin van Engeland'
@@ -784,7 +784,7 @@ adventures:
                     Baby Shark tututudutudu <br>
                     Baby Shark
 
-                    Dit liedje kan jij met een {repeat} veel korter maken! Lukt het jou om de code af te maken?
+                    Dit liedje kan jij met een `{repeat}` veel korter maken! Lukt het jou om de code af te maken?
                 example_code: |
                     ```
                     {repeat} _ _ {print} 'Baby Shark tututudutudu'
@@ -1510,7 +1510,7 @@ adventures:
                         {print} 'Jouw antwoord is ' antwoord
                         {if} antwoord {is} goede_antwoord
                             score = score +1
-                    {print} 'Je score is ' score
+                    {print} 'Je score is ' score ' van 10!'
                     ```
                 start_code: "{print} 'Welkom bij de rekenmachine!'"
             10:
@@ -1577,13 +1577,13 @@ adventures:
                         getallen = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
                         getal1 = getallen {at} {random}
                         getal2 = getallen {at} {random}
-                        goedeantwoord = getal1 * getal2
+                        goede_antwoord = getal1 * getal2
                         antwoord = 0
-                        {while} antwoord != goedeantwoord
+                        {while} antwoord != goede_antwoord
                             {print} 'Hoeveel is ' getal1 ' keer ' getal2 '?'
                             antwoord = {ask} 'Vul hier het antwoord in:'
                             {print} 'Jouw antwoord is ' antwoord
-                        {print} 'Goedzo!'
+                        {print} 'Goed zo!'
                     {print} 'Je hebt gewonnen!'
                     ```
                 start_code: "# Schrijf jouw code hier"
@@ -1713,11 +1713,11 @@ adventures:
                     ```
                 story_text_2: |
                     ## Uitdaging
-                    Zoals je ziet worden de vragen niet geprint in dit voorbeeld. Dat komt omdat de variabele 'vraag' 3x veranderd wordt.
+                    Zoals je ziet worden de vragen niet geprint in dit voorbeeld. Dat komt omdat de variabele `vraag` 3 keer veranderd wordt.
                     Elke keer als een speler een nieuw antwoord geeft, wordt de variabele namelijk overschreven, waardoor het vorige antwoord verloren gaat.
                     Dit betekent dat je dus niet alle vragen kunt printen op deze manier.
 
-                    Als je 3 verschillende variabelen gebruikt, in plaats van eentje (bijvoorbeeld vraag1, vraag2 en vraag3), kun je dit probleem oplossen en de vragen wel printen.
+                    Als je 3 verschillende variabelen gebruikt, in plaats van eentje (bijvoorbeeld `vraag_1`, `vraag_2` en `vraag_3`), kun je dit probleem oplossen en de vragen wel printen.
                     Dit betekent wel dat je het {repeat} commando alleen bij de antwoorden kunt gebruiken en alle vragen apart moet stellen.
                     Lukt het jou dit te maken?
 
@@ -1968,10 +1968,8 @@ adventures:
                     {print} 'Dat wordt dan ' prijs ' euro!'
                     ```
                 story_text_2: |
-                    ## Toevoegingen met `{if}`
-                    Je kunt natuurlijk ook zorgen dat er vervolgvragen komen.
-                    Als men bijvoorbeeld een patatje bestelt, kun je vragen welke saus ze daarbij willen. Of je kunt vragen of ze cola light willen of normale cola.
-                    En zo kun je vast zelf nog veel meer vragen bedenken!
+                    ## Uitdaging
+                    Natuurlijk kan je de code uitbreiden met meer dingen op het menu, vragen of ze drinken willen, toetjes, enzovoort. Voeg zoveel dingen toe aan het menu als je wil!
                 start_code: "{print} 'Welkom bij McHedy!'"
             9:
                 story_text: |
@@ -2082,7 +2080,7 @@ adventures:
                     {print} 'Dat wordt dan ' prijs ' euro'
                     ```
                 story_text_2: |
-                    In deze code wordt het `{or}` commando toegevoegd.
+                    We gebruiken `{or}` om te zien of één van de twee dingen waar is.
                 example_code_2: |
                     ```
                     drinken = {ask} 'Wat wil je drinken?'
@@ -2451,14 +2449,14 @@ adventures:
                 start_code: "# Schrijf jouw code hier"
     secret:
         name: "Geheim agent"
-        description: "Maak je eigen spy code"
-        default_save_name: "Agent"
+        description: "Maak je eigen spionnencode"
+        default_save_name: "Geheim agent"
         levels:
             12:
                 start_code: '# Schrijf jouw code hier'
                 story_text: |
                     ## Maak een geheime code als een geheim agent
-                    In dit avontuur kun je jouw eigen geheim agent code maken. Maak een bericht dat alleen de juiste agent kan oncijferen.
+                    In dit avontuur kun je jouw eigen geheim agent code maken. Maak een bericht dat alleen de juiste agent kan ontcijferen.
                     Als je vijand probeert de code te kraken krijgen ze valse informatie om hun tijd te verspillen.
                 example_code: |
                     ```
@@ -2580,7 +2578,6 @@ adventures:
                     {print} 'in de gloria'
                     {print} 'in de gloria'
                     ```
-                    Dit is een erg lange code voor maar 2 zinnetjes... In het volgende level leer je gelukkig het `{repeat}` commando, waardoor je regels code kunt herhalen.
                 start_code: "{print} 'Op naar het volgende level!'"
             7:
                 story_text: |
@@ -2593,7 +2590,7 @@ adventures:
                     In het volgende level wordt dat mogelijk gemaakt door stukjes code bij elkaar een groepje te maken, door ze te beginnen met een aantal spaties. Zo'n groepje regels kun je dan in één keer herhalen met {repeat}.
                 example_code: |
                     ```
-                    {repeat} 5 {times} {print} 'vanaf het volgende level kun je meerdere regels code in een keer herhalen!'
+                    {repeat} 5 {times} {print} 'Vanaf het volgende level kun je meerdere regels code in een keer herhalen!'
                     ```
                 start_code: "{print} 'Op naar het volgende level!'"
             8:
@@ -2606,12 +2603,12 @@ adventures:
                     ```
                     antwoord = {ask} 'Heb je zin om naar het volgende level te gaan?'
                     {if} antwoord {is} ja
-                        {print} 'Straks kan ik hier het {repeat} commando gebruiken!'
+                        {print} 'Straks kan ik hier het {repeat} commando gebruiken binnen het {if} commando!'
                         {print} 'Hoera!'
                         {print} 'Hoera!'
                         {print} 'Hoera!'
                     {if} antwoord {is} nee
-                        {print} 'blijf dan maar lekker hier'
+                        {print} 'Blijf dan maar lekker hier!'
                     ```
                 start_code: "{print} 'Op naar het volgende level!'"
             9:
@@ -2688,8 +2685,8 @@ adventures:
                     Je ziet dat regel 5 ontzettend onhandig is, omdat alle mogelijke opties van 1 tot 5 apart benoemd moeten worden.
                 example_code: |
                     ```
-                    eerste_cijfer = {ask} 'Wat had je voor je eerste toets?'
-                    tweede_cijfer = {ask} 'Wat had je voor je tweede toets?'
+                    eerste_cijfer = {ask} 'Welk cijfer had je voor je eerste toets?'
+                    tweede_cijfer = {ask} 'Welk cijfer had je voor je tweede toets?'
                     samen {is} eerste_cijfer + tweede_cijfer
                     gemiddelde_cijfer {is} samen / 2
                     {if} gemiddelde_cijfer = 1 {or} gemiddelde_cijfer = 2 {or} gemiddelde_cijfer = 3 {or} gemiddelde_cijfer = 4 {or} gemiddelde_cijfer = 5
@@ -2709,7 +2706,7 @@ adventures:
                     spel {is} 'aan'
                     {for} i {in} {range} 1 {to} 100
                         {if} spel {is} 'aan'
-                            antwoord = {ask} 'Wil je door spelen?'
+                            antwoord = {ask} 'Wil je doorspelen?'
                             {if} antwoord {is} 'nee'
                                 spel {is} 'uit'
                             {if} antwoord {is} 'ja'
