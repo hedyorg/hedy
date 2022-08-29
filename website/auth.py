@@ -325,6 +325,12 @@ def routes(app, database):
         if public_profile:
             session['profile_image'] = public_profile.get('image', 1)
 
+        # Check for messages
+        messages = DATABASE.get_unread_messages(user['username'], teacher=user.get('is_teacher'))
+        invite = DATABASE.get_username_invite(user['username'])
+
+        session['messages'] = len(messages) + (1 if invite else 0)
+
         # Make an empty response to make sure we have one
         resp = make_response()
 
