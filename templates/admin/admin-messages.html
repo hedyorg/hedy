@@ -6,10 +6,41 @@
     <button type="reset" class="green-btn" onclick="window.open('/admin', '_self');">Return to admin page</button>
 </div>
 <div>
-{% if messages %}
-    {% for message in messages %}
-        <!-- Create a div: delete, alter, add message -->
-    {% endfor %}
-{% endif %}
+    <h3 class="text-center">Send a message</h3>
+    <div class="w-full border border-gray-500 rounded-lg px-4 py-4">
+        <div class="flex flex-row gap-4">
+            <textarea id="message_textarea" class="block appearance-none w-full h-64 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 rounded" placeholder="Type your message..."></textarea>
+            <div class="flex flex-col justify-between">
+                <div class="items-center">
+                    <h3 class="text-center mt-0">Receivers</h3>
+                    <div class="flex flex-col mx-2">
+                        <div class="flex flex-row items-center gap-2">
+                            <input type="radio" name="receivers" value="teachers" checked>
+                            <label for="teachers">Teachers</label>
+                        </div>
+                        <div class="flex flex-row items-center gap-2">
+                            <input type="radio" name="receivers" value="all">
+                            <label for="all">Everybody</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-2">
+                    <button class="yellow-btn text-white" onclick="$('#message_textarea').val('');">Reset</button>
+                    <button class="green-btn">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<!-- Display all already existing messages -->
+{% if messages %}
+    <div>
+        <h3>Messages</h3>
+        <div class="w-full border border-gray-500 rounded-lg px-4 py-4">
+            {% for message in messages %}
+                {{message}}
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}
 {% endblock %}

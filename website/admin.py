@@ -170,7 +170,6 @@ def routes(app, database):
         if not is_admin(user):
             return utils.error_page(error=403, ui_message=gettext('unauthorized'))
 
-        # Retrieve all messages here and display nicely
-        messages = None
+        messages = DATABASE.get_all_messages() or ["test", "panda"]
 
         return render_template('admin/admin-messages.html', messages=messages, page_title=gettext('title_admin'))
