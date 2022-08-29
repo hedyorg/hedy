@@ -1004,12 +1004,16 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     // So: a very large limit in these levels, keep the limit on other onces.
     execLimit: (function () {
       const level = Number(window.State.level) || 0;
+      if (hasTurtle) {
+        // We don't want a timeout when using the turtle -> just set one for 10 minutes
+        return (6000000);
+      }
       if (level < 7) {
-        // Set a non-realistic time-out of 5 minutes
+        // Also on a level < 7 (as we don't support loops yet), a timeout is redundant -> just set one for 5 minutes
         return (3000000);
       }
-      // Set a time-out of either 20 seconds (when turtle / sleep) or 5 seconds when not
-      return ((hasTurtle || hasSleep) ? 20000 : 5000);
+      // Set a time-out of either 20 seconds when having a sleep and 5 seconds when not
+      return ((hasSleep) ? 20000 : 5000);
     }) ()
   });
 
