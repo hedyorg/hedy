@@ -664,6 +664,8 @@ def programs_page(user):
 
     level = request.args.get('level', default=None, type=str)
     adventure = request.args.get('adventure', default=None, type=str)
+    filter = request.args.get('filter', default=None, type=str)
+
     level = None if level == "null" else level
     adventure = None if adventure == "null" else adventure
 
@@ -673,8 +675,10 @@ def programs_page(user):
         result = DATABASE.programs_for_user(from_user or username)
 
     programs = []
-    now = timems()
     for item in result:
+        # If we filter on the submitted programs -> skip the onces that are not submitted
+        if filter == "submitted" and not item.get('submitted'):
+            continue
         date = utils.delta_timestamp(item['date'])
         # This way we only keep the first 4 lines to show as preview to the user
         code = "\n".join(item['code'].split("\n")[:4])
@@ -691,8 +695,7 @@ def programs_page(user):
         )
 
     return render_template('programs.html', programs=programs, page_title=gettext('title_programs'),
-                           current_page='programs', from_user=from_user, filtered_level=level,
-                           filtered_adventure=adventure, adventure_names=adventures_names,
+                           current_page='programs', from_user=from_user, adventure_names=adventures_names,
                            public_profile=public_profile, max_level=hedy.HEDY_MAX_LEVEL)
 
 
@@ -1487,6 +1490,9 @@ def update_public_profile(user):
             achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "fresh_look")
     else:
         achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "go_live")
+
+    # Make sure the session value for the profile image is up-to-date
+    session['profile_image'] = body.get('image')
 
     # If there is no current profile or if it doesn't have the tags list -> check if the user is a teacher / admin
     if not current_profile or not current_profile.get('tags'):
