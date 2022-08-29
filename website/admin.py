@@ -207,5 +207,20 @@ def routes(app, database):
         }
 
         DATABASE.store_message(message)
+        return {}, 200
 
+    @app.route('/admin/delete_message', methods=['POST'])
+    @requires_login
+    def delete_message(user):
+        if not is_admin(user):
+            return utils.error_page(error=403, ui_message=gettext('unauthorized'))
+
+        # validations
+        body = request.json
+        if not isinstance(body, dict):
+            return "The send body is invalid", 400
+        if not isinstance(body.get('id'), str):
+            return "The id is not a string", 400
+
+        DATABASE.delete_message(body.get('id'))
         return {}, 200

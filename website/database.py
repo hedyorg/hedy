@@ -601,11 +601,17 @@ class Database:
     def store_message(self, data):
         MESSAGES.put(data)
 
+    def delete_message(self, id):
+        MESSAGES.delete({'id': id})
+
     def get_all_messages(self):
         return MESSAGES.scan() or []
 
     def get_non_teacher_messages(self):
         return MESSAGES.get_many({'teachers': False}, reverse=True)
+
+    def mark_as_read(self):
+        return None
 
     def get_user_interactions(self, username):
         return INTERACTIONS.get_many({'username': username})
