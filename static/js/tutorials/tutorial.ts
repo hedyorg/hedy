@@ -38,7 +38,7 @@ function codeEditorStep() {
 
   relocatePopup(65, 30);
   theGlobalEditor?.setValue("print ___");
-  tutorialPopup(current_step);
+  tutorialPopup("intro", current_step);
 }
 
 function codeOutputStep() {
@@ -51,7 +51,7 @@ function codeOutputStep() {
   });
 
   relocatePopup(35, 30);
-  tutorialPopup(current_step);
+  tutorialPopup("intro", current_step);
 }
 
 function runButtonStep() {
@@ -61,7 +61,7 @@ function runButtonStep() {
   addHighlightBorder("runButtonContainer");
 
   relocatePopup(50, 30);
-  tutorialPopup(current_step);
+  tutorialPopup("intro", current_step);
 }
 
 function tryRunButtonStep() {
@@ -76,7 +76,7 @@ function tryRunButtonStep() {
     });
 
   relocatePopup(50, 70);
-  tutorialPopup(current_step);
+  tutorialPopup("intro", current_step);
 }
 
 function speakAloudStep() {
@@ -90,7 +90,7 @@ function speakAloudStep() {
   addHighlightBorder("speak_container");
 
   relocatePopup(50, 30);
-  tutorialPopup(current_step);
+  tutorialPopup("intro", current_step);
 }
 
 function runSpeakAloudStep() {
@@ -99,7 +99,7 @@ function runSpeakAloudStep() {
   $('#runButtonContainer').addClass('z-40');
 
   relocatePopup(50, 70);
-  tutorialPopup(current_step);
+  tutorialPopup("intro", current_step);
 }
 
 function nextLevelStep() {
@@ -114,7 +114,7 @@ function nextLevelStep() {
   addHighlightBorder("next_level_button");
 
   relocatePopup(50, 30);
-  tutorialPopup(current_step);
+  tutorialPopup("intro", current_step);
 }
 
 function levelDefaultStep() {
@@ -130,7 +130,7 @@ function levelDefaultStep() {
 
   addHighlightBorder("adventures");
   relocatePopup(50, 40);
-  tutorialPopup(current_step);
+  tutorialPopup("intro", current_step);
 }
 
 function adventureTabsStep() {
@@ -142,11 +142,11 @@ function adventureTabsStep() {
     }
   });
 
-  tutorialPopup(current_step);
+  tutorialPopup("intro", current_step);
 }
 
 function quizTabStep() {
-  tutorialPopup(current_step);
+  tutorialPopup("intro", current_step);
 }
 
 function saveShareStep() {
@@ -160,7 +160,7 @@ function saveShareStep() {
   $('#share_program_button').removeAttr('onclick');
 
   relocatePopup(50, 30);
-  tutorialPopup(current_step);
+  tutorialPopup("intro", current_step);
 }
 
 function cheatsheetStep() {
@@ -170,7 +170,7 @@ function cheatsheetStep() {
   $('#cheatsheet_dropdown').addClass('z-40');
   $('#cheatsheet_dropdown').show();
 
-  tutorialPopup(current_step);
+  tutorialPopup("intro", current_step);
 }
 
 function endTutorial() {
@@ -180,7 +180,7 @@ function endTutorial() {
   $('#cheatsheet_dropdown').hide();
 
   relocatePopup(50, 15);
-  tutorialPopup(current_step);
+  tutorialPopup("intro", current_step);
 }
 
 function callNextStep() {
@@ -237,11 +237,11 @@ function classStep() {
   addHighlightBorder("teacher_classes");
 
   relocatePopup(50, 40);
-  tutorialPopup(current_step);
+  tutorialPopup("teacher", current_step);
 }
 
 function customizeClassStep() {
-  tutorialPopup(current_step);
+  tutorialPopup("teacher", current_step);
 }
 
 function adventureStep() {
@@ -250,7 +250,7 @@ function adventureStep() {
   addHighlightBorder("teacher_adventures");
 
   relocatePopup(50, 70);
-  tutorialPopup(current_step);
+  tutorialPopup("teacher", current_step);
 }
 
 function multipleAccountsStep() {
@@ -259,7 +259,7 @@ function multipleAccountsStep() {
   addHighlightBorder("teacher_accounts");
 
   relocatePopup(50, 20);
-  tutorialPopup(current_step);
+  tutorialPopup("teacher", current_step);
 }
 
 function documentationStep() {
@@ -267,12 +267,12 @@ function documentationStep() {
   removeBorder("teacher_accounts");
   addHighlightBorder("teacher_documentation")
 
-  tutorialPopup(current_step);
+  tutorialPopup("teacher", current_step);
 }
 
 function teacherEndStep() {
   removeBorder("teacher_documentation");
-  tutorialPopup(current_step);
+  tutorialPopup("teacher", current_step);
 }
 
 function callTeacherNextStep() {
@@ -327,11 +327,8 @@ function relocatePopup(x: number, y: number) {
 
 }
 
-function tutorialPopup(step: number) {
-  let route = "/get_tutorial_step/intro/"
-  if (!student) {
-    route = "/get_tutorial_step/teacher0/"
-  }
+function tutorialPopup(level: string, step: number) {
+  let route = "/get_tutorial_step/" + level + "/"
   $.ajax({
     type: 'GET',
     url: route + step.toString(),
@@ -353,13 +350,13 @@ export function startTutorial() {
 
   current_step = 1;
   student = true;
-  tutorialPopup(current_step);
+  tutorialPopup("intro", current_step);
 }
 
 export function startTeacherTutorial() {
   $('#tutorial-mask').show();
   current_step = 1;
   student = false;
-  tutorialPopup(current_step);
+  tutorialPopup("teacher", current_step);
 }
 
