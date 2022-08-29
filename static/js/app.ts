@@ -1729,6 +1729,25 @@ export function filter_admin() {
   }
 }
 
+export function store_message() {
+  const message = $('#message_textarea').val('');
+  modal.confirm("Are you sure you want to send this message?", function() {
+    $.ajax({
+      type: 'POST',
+      url: '/admin/send_message',
+      data: JSON.stringify({
+        message: message
+    }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function () {
+        location.reload();
+    }).fail(function (err) {
+        modal.alert(err.responseText, 3000, true);
+    });
+  });
+}
+
 if ($("#editor").length) {
   var editor = ace.edit("editor");
   editor.on("guttermousedown", function (e: any) {
