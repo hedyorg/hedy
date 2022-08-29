@@ -19,7 +19,7 @@ PARSONS = dynamo.Table(storage, 'parsons', partition_key='id')
 
 # These tables are related to user-interaction content
 INVITATIONS = dynamo.Table(storage, 'class_invitations', partition_key='username', indexed_fields=[dynamo.IndexKey('class_id')])
-MESSAGES = dynamo.Table(storage, 'messages', partition_key='id')
+MESSAGES = dynamo.Table(storage, 'messages', partition_key='id', indexed_fields=[dynamo.IndexKey('teacher_message')])
 INTERACTIONS = dynamo.Table(storage, 'message_interactions', partition_key='username')
 
 # Information on quizzes. We will update this record in-place as the user completes
