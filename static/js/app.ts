@@ -1311,7 +1311,7 @@ function store_parsons_attempt(order: Array<string>, correct: boolean) {
     contentType: 'application/json',
     dataType: 'json'
   }).done(function() {
-      // Let's do nothing: saving is not a user relevant action -> no feedback required
+    // Let's do nothing: saving is not a user relevant action -> no feedback required
     }).fail(function(xhr) {
       console.error(xhr);
     });
