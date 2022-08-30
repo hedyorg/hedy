@@ -155,17 +155,19 @@
                     </table>
                 </div>
             </div>
-            <div class="flex flex-col gap-2">
-                <div class="flex flex-row ml-auto gap-2">
-                    <button class="yellow-btn text-white" onclick="hedyApp.modal.confirm('{{_('reset_adventure_prompt')}}', function(){$('.adventure_level_input').prop('checked', false);$('.teacher_adventures_checkbox').prop('checked', false);});">{{_('reset_adventures')}}</button>
-                    <button class="blue-btn" onclick="hedyApp.save_customizations('{{class_info.id}}')">{{_('save')}}</button>
+            {% if not (is_admin and class_info.teacher != username) %}
+                <div class="flex flex-col gap-2">
+                    <div class="flex flex-row ml-auto gap-2">
+                        <button class="yellow-btn text-white" onclick="hedyApp.modal.confirm('{{_('reset_adventure_prompt')}}', function(){$('.adventure_level_input').prop('checked', false);$('.teacher_adventures_checkbox').prop('checked', false);});">{{_('reset_adventures')}}</button>
+                        <button class="blue-btn" onclick="hedyApp.save_customizations('{{class_info.id}}')">{{_('save')}}</button>
+                    </div>
+                    <div class="flex flex-row ml-auto gap-2">
+                        <button class="red-btn {% if not customizations %}hidden{% endif %}" id="remove_customizations_button" onclick='hedyApp.remove_customizations("{{class_info.id}}", {{_('remove_customizations_prompt')|tojson}})'>
+                        {{_('remove_customization')}}</button>
+                        <button class="green-btn" onclick=validate_changes()>{{_('back_to_class')}}</button>
+                    </div>
                 </div>
-                <div class="flex flex-row ml-auto gap-2">
-                    <button class="red-btn {% if not customizations %}hidden{% endif %}" id="remove_customizations_button" onclick='hedyApp.remove_customizations("{{class_info.id}}", {{_('remove_customizations_prompt')|tojson}})'>
-                    {{_('remove_customization')}}</button>
-                    <button class="green-btn" onclick=validate_changes()>{{_('back_to_class')}}</button>
-                </div>
-            </div>
+            {% endif %}
         </div>
     </div>
 </div>

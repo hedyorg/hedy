@@ -296,10 +296,10 @@ def routes(app, database, achievements):
     @app.route('/for-teachers/customize-class/<class_id>', methods=['GET'])
     @requires_login
     def get_class_info(user, class_id):
-        if not is_teacher(user):
+        if not is_teacher(user) and not is_admin(user):
             return utils.error_page(error=403, ui_message=gettext('retrieve_class_error'))
         Class = DATABASE.get_class(class_id)
-        if not Class or Class['teacher'] != user['username']:
+        if not Class or (Class['teacher'] != user['username'] and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext('no_such_class'))
 
         if hedy_content.Adventures(g.lang).has_adventures():
