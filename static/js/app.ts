@@ -348,6 +348,7 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
     var editor = theGlobalEditor;
     var code = "";
     if ($('#parsons_container').is(":visible")) {
+      window.State.unsaved_changes = false; // We don't want to throw this pop-up
       code = get_parsons_code();
       // We return no code if all lines are empty or there is a mistake -> clear errors and do nothing
       if (!code) {
@@ -1310,7 +1311,6 @@ function store_parsons_attempt(order: Array<string>, correct: boolean) {
     contentType: 'application/json',
     dataType: 'json'
   }).done(function() {
-    window.State.unsaved_changes = false;
       // Let's do nothing: saving is not a user relevant action -> no feedback required
     }).fail(function(xhr) {
       console.error(xhr);
