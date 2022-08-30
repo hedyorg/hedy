@@ -397,11 +397,15 @@ class Tutorials:
     def get_tutorial_for_level(self, level, keyword_lang="en"):
         if self.debug_mode and not self.data.get(keyword_lang, None):
             self.data[keyword_lang] = self.cache_tutorials(keyword_lang)
+        if level not in ["intro", "teacher"]:
+            level = int(level)
         return self.data.get(keyword_lang, {}).get(level, None)
 
     def get_tutorial_for_level_step(self, level, step, keyword_lang="en"):
         if self.debug_mode and not self.data.get(keyword_lang, None):
             self.data[keyword_lang] = self.cache_tutorials(keyword_lang)
+        if level not in ["intro", "teacher"]:
+            level = int(level)
         return self.data.get(keyword_lang, {}).get(level, {}).get(step, None)
 
 class NoSuchTutorial:
