@@ -79,7 +79,7 @@ def render_code_editor_with_tabs(cheatsheet, commands, max_level, level_number, 
 def render_tutorial_mode(level, cheatsheet, commands, adventures, parsons_exercises):
     arguments_dict = {}
 
-    arguments_dict['tutorial'] = True
+    arguments_dict['intro_tutorial'] = True
     arguments_dict['next_level'] = 2
     arguments_dict['level_nr'] = str(level)
     arguments_dict['level'] = str(level)

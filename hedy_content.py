@@ -405,5 +405,5 @@ class Tutorials:
         return self.data.get(keyword_lang, {}).get(level, {}).get(step, None)
 
 class NoSuchTutorial:
-    def get_tutorial_data_for_level(self, level, keyword_lang):
+    def get_tutorial_for_level(self, level, keyword_lang):
         return {}

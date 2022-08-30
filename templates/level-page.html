@@ -11,6 +11,9 @@
     <input id="program_name" type="text" class="border border-green-400 rounded p-2 px-3 w-1/2 h-4/5" value="{{ (loaded_program or {}).name or (_('level_title') + ' ' + level_nr)}}">
     <input type="submit" id="save_program_button" class="green-btn cursor-pointer" value="{{_('save_code_button')}}" onclick="hedyApp.saveit({{ level }}, '{{ g.lang }}', $ ('#program_name').val (), hedyApp.get_trimmed_code(), false);">
     <input type="submit" id="share_program_button" class="green-btn cursor-pointer" value="{{_('share_code_button')}}" onclick="hedyApp.saveit({{ level }}, '{{ g.lang }}', $ ('#program_name').val (), hedyApp.get_trimmed_code(), true);">
+    {% if tutorial %}
+        HALLO
+    {% endif %}
     {% if not hide_cheatsheet and cheatsheet %}
       <div class="dropdown relative">
             <button class="green-btn font-semibold rounded inline-flex items-center gap-2" onclick="$('.dropdown-menu').hide();$('#cheatsheet_dropdown').slideToggle('medium');">
