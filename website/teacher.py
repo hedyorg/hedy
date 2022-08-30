@@ -64,10 +64,11 @@ def routes(app, database, achievements):
     @requires_login
     def get_class(user, class_id):
         app.logger.info('This is info output')
-        if not is_teacher(user):
+        if not is_teacher(user) and not is_admin(user):
             return utils.error_page_403(error=403, ui_message=gettext('retrieve_class_error'))
         Class = DATABASE.get_class(class_id)
-        if not Class or Class['teacher'] != user['username']:
+        print(Class)
+        if not Class or (Class['teacher'] != user['username'] and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext('no_such_class'))
         students = []
 
