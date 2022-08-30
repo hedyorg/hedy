@@ -791,11 +791,8 @@ def routes(app, database):
         return '', 200
 
     @app.route('/admin/changeUserEmail', methods=['POST'])
+    @requires_admin
     def change_user_email():
-        user = current_user()
-        if not is_admin(user):
-            return utils.error_page(error=403, ui_message=gettext('unauthorized'))
-
         body = request.json
 
         # Validations
@@ -831,11 +828,8 @@ def routes(app, database):
         return {}, 200
 
     @app.route('/admin/getUserTags', methods=['POST'])
-    @requires_login
+    @requires_admin
     def get_user_tags(user):
-        if not is_admin(user):
-            return utils.error_page(error=403, ui_message=gettext('unauthorized'))
-
         body = request.json
         user = DATABASE.get_public_profile_settings(body['username'].strip().lower())
         if not user:
@@ -843,11 +837,8 @@ def routes(app, database):
         return {'tags': user.get('tags', [])}, 200
 
     @app.route('/admin/updateUserTags', methods=['POST'])
-    @requires_login
+    @requires_admin
     def update_user_tags(user):
-        if not is_admin(user):
-            return utils.error_page(error=403, ui_message=gettext('unauthorized'))
-
         body = request.json
         user = DATABASE.get_public_profile_settings(body['username'].strip().lower())
         if not user:

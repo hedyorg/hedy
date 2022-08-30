@@ -13,6 +13,7 @@ def routes(app, database):
 
     @app.route('/admin', methods=['GET'])
     def get_admin_page():
+        # Todo TB: Why do we check for the testing_request here? (09-22)
         if not utils.is_testing_request(request) and not is_admin(current_user()):
             return utils.error_page(error=403, ui_message=gettext('unauthorized'))
         return render_template('admin/admin.html', page_title=gettext('title_admin'))
