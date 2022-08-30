@@ -318,6 +318,26 @@ p.close-dialog {
   @apply bg-red-500 absolute;
 }
 
+/**
+ * Will be used to strikethrough a line without actual text, so we need to fake it
+ * with a horizontal line that's a bit offset from the top.
+ */
+.disabled-line {
+  @apply absolute;
+  border-top: solid 1px white;
+  margin-top: 0.6em;
+  border-radius: 0px !important;
+}
+
+/**
+ * Will be used to indicate current line in debugger
+ */
+.debugger-current-line {
+    @apply absolute;
+    background: #2D6099;
+    z-index: 20
+}
+
 /* DOCS */
 
 .expandable-docs-text h1 {

@@ -30,7 +30,7 @@
             {% endif %}
             <div class="w-full h-full bg-blue-200 flex flex-col rounded-lg border border-black">
                 <div class="flex flex-row items-center h-12 bg-blue-600 rounded-t-lg px-4 font-medium">
-                    <div class="text-white tracking-wide text-4xl">{{ user_info.username }}</div>
+                    <div class="text-white tracking-wide text-4xl">{{user_info.username[0]|upper}}{{user_info.username[1:]}}</div>
                     {% if user_achievements['achieved'] %}
                         <div class="text-white text-xl ml-auto">{{ user_achievements['achieved']|length }} {{_('achievements')}}</div>
                     {% endif %}
