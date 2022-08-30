@@ -1,7 +1,7 @@
 from flask_babel import gettext
 import hedy
 from config import config
-from website.auth import requires_login, current_user, is_admin, send_email, email_base_url
+from website.auth import requires_login, current_user, is_admin, send_email, email_base_url, requires_admin
 import utils
 import uuid
 from flask import g, request, jsonify
@@ -204,10 +204,8 @@ def routes(app, database, achievements):
             return "You can't set a favourite program without a public profile", 400
 
     @app.route('/programs/set_hedy_choice', methods=['POST'])
-    @requires_login
+    @requires_admin
     def set_hedy_choice(user):
-        if not is_admin(user):
-            return utils.error_page(error=403, ui_message=gettext('unauthorized'))
         body = request.json
         if not isinstance(body, dict):
             return 'body must be an object', 400

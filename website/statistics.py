@@ -6,7 +6,7 @@ from flask_babel import gettext
 
 from flask_helpers import render_template
 from website import querylog
-from website.auth import requires_login, is_admin, is_teacher
+from website.auth import requires_login, is_admin, is_teacher, requires_admin
 
 import utils
 
@@ -91,13 +91,10 @@ def routes(app, db):
         return jsonify(response)
 
     @app.route('/program-stats', methods=['GET'])
-    @requires_login
+    @requires_admin
     def get_program_stats(user):
         start_date = request.args.get('start', default=None, type=str)
         end_date = request.args.get('end', default=None, type=str)
-
-        if not is_admin(user):
-            return utils.error_page(error=403, ui_message=gettext('unauthorized'))
 
         ids = [e.value for e in UserType]
         program_runs_data = DATABASE.get_program_stats(ids, start_date, end_date)
