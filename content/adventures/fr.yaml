@@ -124,10 +124,22 @@ adventures:
                     Tu peux maintenant exécuter des groupes de commandes ensemble, mais tu dois indenter ces commandes.
                     Cela veut dire que tu dois mettre 4 espaces au début des lignes. Tu devras aussi indenter même si tu veux créer un bloc d'une seule ligne.
                 example_code: |
+                    Voici comment la commande `{repeat}` fonctionne maintenant :
                     ```
                     {repeat} 5 {times}
                         {print} 'Bonjour les amis'
                         {print} 'Ceci sera affiché 5 fois'
+                    ```
+                    Voici comment les commandes `{if}` et `{else}` fonctionnent maintenant :
+
+                    ```
+                    nom {is} {ask} 'Quel est ton prénom ?'
+                    {if} nom {is} Hedy
+                        {print} 'Bonjour Hedy'
+                        {print} 'Tu peux jouer sur ton ordinateur !'
+                    {else}
+                        {print} 'IMPOSTEUR !'
+                        {print} 'Tu ne peux pas utiliser cet ordinateur !'
                     ```
             9:
                 start_code: |-
