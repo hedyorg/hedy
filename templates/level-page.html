@@ -12,7 +12,7 @@
     <input type="submit" id="save_program_button" class="green-btn cursor-pointer" value="{{_('save_code_button')}}" onclick="hedyApp.saveit({{ level }}, '{{ g.lang }}', $ ('#program_name').val (), hedyApp.get_trimmed_code(), false);">
     <input type="submit" id="share_program_button" class="green-btn cursor-pointer" value="{{_('share_code_button')}}" onclick="hedyApp.saveit({{ level }}, '{{ g.lang }}', $ ('#program_name').val (), hedyApp.get_trimmed_code(), true);">
     {% if tutorial %}
-        <button class="green-btn" onclick="hedyApp.startLevelTutorial('{{level_nr}}')"></button>
+        <button class="green-btn" onclick="hedyApp.startLevelTutorial('{{level_nr}}')">{{_('tutorial')}}</button>
     {% endif %}
     {% if not hide_cheatsheet and cheatsheet %}
       <div class="dropdown relative">
