@@ -5,6 +5,7 @@ import functools
 import operator
 
 
+
 storage = dynamo.AwsDynamoStorage.from_env() or dynamo.MemoryStorage('dev_database.json')
 
 USERS = dynamo.Table(storage, 'users', 'username', indexed_fields=[dynamo.IndexKey('email')])
@@ -17,6 +18,19 @@ CUSTOMIZATIONS = dynamo.Table(storage, 'class_customizations', partition_key='id
 ACHIEVEMENTS = dynamo.Table(storage, 'achievements', partition_key='username')
 PUBLIC_PROFILES = dynamo.Table(storage, 'public_profiles', partition_key='username')
 PARSONS = dynamo.Table(storage, 'parsons', 'id')
+
+
+# We use the epoch field to make an index on the users table, sorted by a different
+# sort key. In our case, we want to sort by 'created', so that we can make an ordered
+# list of users.
+#
+# We add an 'epoch' field so that we can make an index of (PK: epoch, SK: created).
+# It doesn't matter what the 'epoch' field is, it just needs to have a predictable value
+# that we know so we can query on it again.
+# Once the users table starts to hit 10GB, we need to increase this number to make sure
+# the new users to to separate partition, and at that point we need to query both
+# partitions in the index (but that will most likely not happen any time soon...)
+CURRENT_USER_EPOCH = 1
 
 # Information on quizzes. We will update this record in-place as the user completes
 # more of the quiz. The database is formatted like this:
@@ -177,6 +191,7 @@ class Database:
 
     def store_user(self, user):
         """Store a user in the database."""
+        user['epoch'] = CURRENT_USER_EPOCH
         USERS.create(user)
 
     def record_login(self, username, new_password_hash=None):
