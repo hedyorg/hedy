@@ -12,6 +12,7 @@
       <tr class="font-bold">
           <td id="classname_header">Class name</td>
           <td id="teacher_header">Teacher</td>
+          <td id="created_header">Created</td>
           <td id="students_header">Students</td>
           <td id="runs_week_header">Runs this week</td>
           <td id="error_percentage_week_header">Error percentage this week</td>
@@ -26,6 +27,7 @@
           <tr>
             <td class="classname_cell">{{class.name}}</td>
             <td class="teacher_cell">{{class.teacher}}</td>
+            <td class="created_cell">{{class.created}}</td>
             <td class="students_cell">{{class.students}}</td>
             <td class="runs_week_cell">{{class.stats.week.runs}}</td>
             <td class="error_percentage_week_cell">{% if class.stats.week.runs > 0 %}{{(class.stats.week.fails / class.stats.week.runs * 100)|round(2)}}{% else %}0.00{% endif %}%</td>
