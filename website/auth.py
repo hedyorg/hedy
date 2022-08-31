@@ -622,6 +622,11 @@ def routes(app, database):
                 updates[field] = body[field]
             else:
                 updates[field] = None
+        if body.get('agree_third_party'):
+            updates['third_party'] = True
+        else:
+            updates['third_party'] = None
+
         if updates:
             DATABASE.update_user(username, updates)
 
@@ -646,8 +651,12 @@ def routes(app, database):
         # The user object we got from 'requires_login' is not fully hydrated yet. Look up the database user.
         user = DATABASE.user_by_username(user['username'])
 
-        output = {'username': user['username'], 'email': user['email'], 'language': user.get('language', 'en')}
-        for field in ['birth_year', 'country', 'gender', 'prog_experience', 'experience_languages']:
+        output = {
+            'username': user['username'],
+            'email': user['email'],
+            'language': user.get('language', 'en')
+        }
+        for field in ['birth_year', 'country', 'gender', 'prog_experience', 'experience_languages', 'third_party']:
             if field in user:
                 output[field] = user[field]
         if 'verification_pending' in user:
