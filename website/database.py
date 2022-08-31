@@ -222,7 +222,8 @@ class Database:
         return users[:200]
 
     def get_all_public_programs(self):
-        return PROGRAMS.get_many({'public': 1}, sort_key='date', reverse=True)
+        programs = PROGRAMS.get_many({'public': 1}, sort_key='date', reverse=True)
+        return [x for x in programs if not x.get('submitted', False)]
 
     def get_highscores(self, username, filter, filter_value=None):
         profiles = []
