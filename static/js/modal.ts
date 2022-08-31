@@ -159,6 +159,8 @@ class Modal {
 
       const value = $('#modal-prompt-input').val();
       if (typeof value === 'string') {
+        // Always empty the value on success
+        $('#modal-prompt-input').val('');
         confirmCb(value);
       }
     });
