@@ -256,6 +256,7 @@ def store_new_account(account, email):
         'keyword_language': account['keyword_language'],
         'created': timems(),
         'teacher_request': True if account.get('is_teacher') else None,
+        'third_party': True if account.get('agree_third_party') else None,
         'verification_pending': hashed_token,
         'last_login': timems()
     }
@@ -420,12 +421,6 @@ def routes(app, database):
             else:
                 send_email(config['email']['sender'], 'Subscription to Hedy newsletter on signup', user['email'],
                            '<p>' + user['email'] + '</p>')
-
-
-        # If someone agrees to the third party contacts -> sent a mail to manually write down
-        if not is_testing_request(request) and 'agree_third_party' in body and body['agree_third_party'] is True:
-            send_email(config['email']['sender'], 'Agreement to Third party offers on signup', user['email'],
-                       '<p>' + user['email'] + '</p>')
 
         # We automatically login the user
         cookie = make_salt()
