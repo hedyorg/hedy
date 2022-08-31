@@ -117,8 +117,9 @@ class Database:
         return programs
 
     def public_programs_for_user(self, username):
+        # Only return programs that are public but not submitted
         programs = PROGRAMS.get_many({'username': username}, reverse=True)
-        return [p for p in programs if p.get('public') == 1]
+        return [p for p in programs if p.get('public') == 1 and not p.get('submitted', False)]
 
     def program_by_id(self, id):
         """Get program by ID.
