@@ -92,6 +92,7 @@ def routes(app, database):
         classes = [{
             "name": Class.get('name'),
             "teacher": Class.get('teacher'),
+            "created": utils.localized_date_format(Class.get('date')),
             "students": len(Class.get('students')) if 'students' in Class else 0,
             "stats": statistics.get_general_class_stats(Class.get('students', [])),
             "id": Class.get('id')
