@@ -159,7 +159,7 @@ class Modal {
 
       const value = $('#modal-prompt-input').val();
       if (typeof value === 'string') {
-        // Always empty the value on success
+        // Always empty the value on success -> otherwise this value is shown on new prompt (without a page reload)
         $('#modal-prompt-input').val('');
         confirmCb(value);
       }
