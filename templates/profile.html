@@ -1,6 +1,6 @@
 {% extends "auth.html" %}
 
-{% block body %}
+{% block main %}
    {% if user_data['teacher_request'] %}
         <div class="flex items-center justify-center w-full h-10 bg-yellow-500 text-white font-bold">
             <div>
@@ -88,19 +88,19 @@
                 </div>
            </div>
        {% endif %}
-       <h1 class="section-header" onclick="hedyApp.load_profile ('{{user_data['username']}}', '{{user_data['email']}}', '{{user_data['birth_year']}}', '{{user_data['gender']}}', '{{user_data['country']}}')">{{_('settings')}}</h1>
+       <h1 class="section-header" onclick="$('#profile-change-body').toggle();">{{_('settings')}}</h1>
        <div class="profile-section-body" id="profile-change-body">
         <form id="profile">
             <h2 class="profile-section-body-header">{{_('settings')}}</h2>
             <div class="flex flex-row items-center mb-2">
-                <label for="username" class="inline-block w-72">{{_('username')}}</label><strong id="username" class="inline-block w-1/2 px-2"></strong>
+                <label for="username" class="inline-block w-72">{{_('username')}}</label><strong id="username" class="inline-block w-1/2 px-2">{{user_data['username']}}</strong>
             </div>
             <div class="flex flex-row items-center mb-2">
-                <label for="email" class="inline-block w-72">{{_('email')}}</label><input id="email" name="email" type="email" class="personal-input" {% if user_data['email'] %}required{% endif %}>
+                <label for="email" class="inline-block w-72">{{_('email')}}</label><input id="email" name="email" type="email" class="personal-input" value="{{user_data['email']}}" {% if user_data['email'] %}required{% endif %}>
             </div>
             <div class="flex flex-row items-center mb-2">
                 <label for="birth_year" class="inline-block w-72">{{_('birth_year')}}</label>
-                <input id="birth_year" name="birth_year" class="personal-input" type="number">
+                <input id="birth_year" name="birth_year" class="personal-input" type="number" value="{{user_data['birth_year']}}">
             </div>
             <div class="flex flex-row items-center mb-2">
                 <label for="language" class="inline-block w-72">{{_('preferred_language')}}</label>
@@ -129,10 +129,10 @@
             <div class="flex flex-row items-center mb-2">
                 <label for="gender" class="inline-block w-72">{{_('gender')}}</label>
                 <select id="gender" name="gender" class="personal-input">
-                  <option value="">{{_('select')}}</option>
-                  <option value="f">{{_('female')}}</option>
-                  <option value="m">{{_('male')}}</option>
-                  <option value="o">{{_('other')}}</option>
+                  <option value=""}>{{_('select')}}</option>
+                  <option value="f" {% if user_data['gender'] == "f" %}selected{% endif %}>{{_('female')}}</option>
+                  <option value="m" {% if user_data['gender'] == "m" %}selected{% endif %}>{{_('male')}}</option>
+                  <option value="o" {% if user_data['gender'] == "o" %}selected{% endif %}>{{_('other')}}</option>
                 </select>
             </div>
             <div class="flex flex-row items-center mb-2">
@@ -140,7 +140,7 @@
                 <select id="country" name="country" class="personal-input">
                     <option value="">{{_('select')}}</option>
                     {% for alpha, name in all_countries().items() %}
-                        <option value="{{ alpha }}">{{ name }}</option>
+                        <option value="{{ alpha }}" {% if alpha == user_data['country'] %}selected{% endif %}>{{ name }}</option>
                     {% endfor %}
                 </select>
             </div>
