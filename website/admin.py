@@ -1,7 +1,7 @@
 from flask_babel import gettext
 import hedyweb
 from website import statistics
-from website.auth import requires_login, current_user, is_admin, pick
+from website.auth import requires_login, current_user, is_admin, pick, requires_admin
 import utils
 from flask import request
 from flask_helpers import render_template
@@ -13,16 +13,14 @@ def routes(app, database):
 
     @app.route('/admin', methods=['GET'])
     def get_admin_page():
+        # Todo TB: Why do we check for the testing_request here? (09-22)
         if not utils.is_testing_request(request) and not is_admin(current_user()):
             return utils.error_page(error=403, ui_message=gettext('unauthorized'))
         return render_template('admin/admin.html', page_title=gettext('title_admin'))
 
     @app.route('/admin/users', methods=['GET'])
-    @requires_login
+    @requires_admin
     def get_admin_users_page(user):
-        if not is_admin(user):
-            return utils.error_page(error=403, ui_message=gettext('unauthorized'))
-
         category = request.args.get('filter', default=None, type=str)
         category = None if category == "null" else category
 
@@ -89,14 +87,12 @@ def routes(app, database):
                                language_filter=language, keyword_language_filter=keyword_language)
 
     @app.route('/admin/classes', methods=['GET'])
-    @requires_login
+    @requires_admin
     def get_admin_classes_page(user):
-        if not is_admin(user):
-            return utils.error_page(error=403, ui_message=gettext('unauthorized'))
-
         classes = [{
             "name": Class.get('name'),
             "teacher": Class.get('teacher'),
+            "created": utils.localized_date_format(Class.get('date')),
             "students": len(Class.get('students')) if 'students' in Class else 0,
             "stats": statistics.get_general_class_stats(Class.get('students', [])),
             "id": Class.get('id')
@@ -108,11 +104,8 @@ def routes(app, database):
         return render_template('admin/admin-classes.html', classes=classes, page_title=gettext('title_admin'))
 
     @app.route('/admin/adventures', methods=['GET'])
-    @requires_login
+    @requires_admin
     def get_admin_adventures_page(user):
-        if not is_admin(user):
-            return utils.error_page(error=403, ui_message=gettext('unauthorized'))
-
         all_adventures = sorted(DATABASE.all_adventures(), key=lambda d: d.get('date', 0), reverse=True)
         adventures = [{
             "id": adventure.get('id'),
@@ -127,26 +120,18 @@ def routes(app, database):
         return render_template('admin/admin-adventures.html', adventures=adventures, page_title=gettext('title_admin'))
 
     @app.route('/admin/stats', methods=['GET'])
-    @requires_login
+    @requires_admin
     def get_admin_stats_page(user):
-        if not is_admin(user):
-            return utils.error_page(error=403, ui_message=gettext('unauthorized'))
         return render_template('admin/admin-stats.html', page_title=gettext('title_admin'))
 
     @app.route('/admin/logs', methods=['GET'])
-    @requires_login
+    @requires_admin
     def get_admin_logs_page(user):
-        if not is_admin(user):
-            return utils.error_page(error=403, ui_message=gettext('unauthorized'))
         return render_template('admin/admin-logs.html', page_title=gettext('title_admin'))
 
-
     @app.route('/admin/achievements', methods=['GET'])
-    @requires_login
+    @requires_admin
     def get_admin_achievements_page(user):
-        if not is_admin(user):
-            return utils.error_page(error=403, ui_message=gettext('unauthorized'))
-
         stats = {}
         achievements = hedyweb.AchievementTranslations().get_translations("en").get("achievements")
         for achievement in achievements.keys():

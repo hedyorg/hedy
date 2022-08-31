@@ -200,6 +200,13 @@ function quizTabStep() {
 }
 
 function saveShareStep() {
+  // We should go back to the intro tab to make sure the save/share option is shown
+  $('#adventures-buttons').children().each(function() {
+    if ($(this).attr('data-tab') == "default") {
+      window.State.unsaved_changes = false;
+      $(this).click();
+    }
+  });
   removeBorder("adventures");
   $('#code_content_container').removeClass('z-40');
   $('#level-header').addClass("z-40");
