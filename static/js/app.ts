@@ -1602,17 +1602,6 @@ export function toggle_blur_code() {
   }
 }
 
-export function load_profile(username: string, mail: string, birth_year: number, gender: string, country: string) {
-  $('#profile-change-body').toggle();
-  if ($('#profile').is(":visible")) {
-      $('#username').html(username);
-      $('#email').val(mail);
-      $('#birth_year').val(birth_year);
-      $('#gender').val(gender);
-      $('#country').val(country);
-  }
-}
-
 export function change_language(lang: string) {
   $.ajax({
     type: 'POST',
