@@ -19,6 +19,7 @@ export function startLevel1() {
 }
 
 export function callNextStepLevel1() {
-  // Do something
-
+  console.log("Laat me druit!")
+  location.replace("/hedy");
+  console.log("Ben ik er al uit?")
 }
