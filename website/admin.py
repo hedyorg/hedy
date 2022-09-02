@@ -46,7 +46,7 @@ def routes(app, database):
             'username', 'email', 'birth_year', 'country',
             'gender', 'created', 'last_login', 'verification_pending',
             'is_teacher', 'program_count', 'prog_experience', 'teacher_request',
-            'experience_languages', 'language', 'keyword_language'
+            'experience_languages', 'language', 'keyword_language', 'third_party'
         ]
 
         for user in users:
@@ -54,6 +54,7 @@ def routes(app, database):
             data['email_verified'] = not bool(data['verification_pending'])
             data['is_teacher'] = bool(data['is_teacher'])
             data['teacher_request'] = True if data['teacher_request'] else None
+            data['third_party'] = True if data['third_party'] else None
             data['created'] = utils.timestamp_to_date(data['created'])
             data['last_login'] = utils.timestamp_to_date(data['last_login']) if data.get('last_login') else None
             if category == "language":
@@ -92,6 +93,7 @@ def routes(app, database):
         classes = [{
             "name": Class.get('name'),
             "teacher": Class.get('teacher'),
+            "created": utils.localized_date_format(Class.get('date')),
             "students": len(Class.get('students')) if 'students' in Class else 0,
             "stats": statistics.get_general_class_stats(Class.get('students', [])),
             "id": Class.get('id')

@@ -348,6 +348,7 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
     var editor = theGlobalEditor;
     var code = "";
     if ($('#parsons_container').is(":visible")) {
+      window.State.unsaved_changes = false; // We don't want to throw this pop-up
       code = get_parsons_code();
       // We return no code if all lines are empty or there is a mistake -> clear errors and do nothing
       if (!code) {
@@ -1310,7 +1311,7 @@ function store_parsons_attempt(order: Array<string>, correct: boolean) {
     contentType: 'application/json',
     dataType: 'json'
   }).done(function() {
-      // Let's do nothing: saving is not a user relevant action -> no feedback required
+    // Let's do nothing: saving is not a user relevant action -> no feedback required
     }).fail(function(xhr) {
       console.error(xhr);
     });
@@ -1598,17 +1599,6 @@ export function toggle_blur_code() {
     $('#editor').css("filter", "blur(3px)");
     $('#editor').css("-webkit-filter", "blur(3px)");
     $('#editor').attr('blurred', 'true');
-  }
-}
-
-export function load_profile(username: string, mail: string, birth_year: number, gender: string, country: string) {
-  $('#profile-change-body').toggle();
-  if ($('#profile').is(":visible")) {
-      $('#username').html(username);
-      $('#email').val(mail);
-      $('#birth_year').val(birth_year);
-      $('#gender').val(gender);
-      $('#country').val(country);
   }
 }
 
