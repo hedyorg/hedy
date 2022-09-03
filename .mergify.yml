@@ -8,10 +8,10 @@ pull_request_rules:
       merge:
         method: merge
         
-  - name: automatic update for PR marked as “Ready“
+  - name: automatic update for PR marked as “Keep-updated“
     conditions:
       - -conflict # skip PRs with conflicts
       - -draft # filter-out GH draft PRs
-      - label="Ready"
+      - label="Keep-updated"
     actions:
       update:
