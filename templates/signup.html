@@ -45,7 +45,7 @@
                 </select>
             </div>
             <div class="signup-container" style="display: none;" id="keyword_lang_container">
-                 <label class="signup-label" for="keyword_language">{{_('preferred_keyword_language')}}</label>
+                <label class="signup-label" for="keyword_language">{{_('preferred_keyword_language')}}</label>
                 <select class="signup-input appearance-none" id="keyword_language" name="keyword_language" required>
                      {% for language in keyword_languages() %}
                          <option value="{{language.lang}}" id="{{language.lang}}_option" class="keyword_lang_option" {% if language.lang == "en" %}selected{% endif %}>{{language.sym}}</option>
@@ -75,43 +75,43 @@
                 </select>
             </div>
             <div class="signup-container">
-              <label class="signup-label" for="has_experience">{{_('programming_experience')}}</label>
+              <label class="signup-label" for="prog_experience">{{_('programming_experience')}}</label>
                 <ul class="signup-input" style="margin-top: -0.3em;">
                   <li class="flex flex-row items-center">
-                      <input type="radio" name="has_experience" value="yes" onclick="$ ('#languages').show ()" class="ltr:mr-2 rtl:ml-2">
-                      <label for="has_experience"> {{_('yes')}}</label>
+                      <input type="radio" name="prog_experience" value="yes" onclick="$('#languages').show ()" class="ltr:mr-2 rtl:ml-2">
+                      <label for="prog_experience"> {{_('yes')}}</label>
                   </li>
                   <li class="flex flex-row items-center">
-                      <input type="radio" name="has_experience" value="no" onclick="$ ('#languages').hide ()" class="ltr:mr-2 rtl:ml-2">
-                      <label  for="has_experience"> {{_('no')}}</label>
+                      <input type="radio" name="prog_experience" value="no" onclick="$('#languages').hide ()" class="ltr:mr-2 rtl:ml-2">
+                      <label  for="prog_experience"> {{_('no')}}</label>
                   </li>
               </ul>
             </div>
             <div class="border border-gray-400 rounded-lg mx-4 px-4 md:px-8 flex flex-row items-center justify-between gap-2 py-2" style="display: none;" id="languages">
                 <!-- For some reason the Tailwind 'hidden' class messes up the layout, therefore we "brute"-style it within the element -->
-              <label class="signup-label" for="languages">{{_('languages')}}</label>
+              <label class="signup-label" for="experience_languages">{{_('languages')}}</label>
                 <ul class="mt-0">
                 <li class="flex">
                     <div class="flex flex-row items-center gap-2">
-                        <input type="checkbox" name="languages" value="scratch">
+                        <input type="checkbox" name="experience_languages" value="scratch">
                         <label style>Scratch</label>
                     </div>
                 </li>
                 <li class="flex">
                     <div class="flex flex-row items-center gap-2">
-                        <input type="checkbox" name="languages" value="other_block">
+                        <input type="checkbox" name="experience_languages" value="other_block">
                         <label>{{_('other_block')}}</label>
                     </div>
                 </li>
                 <li class="flex">
                     <div class="flex flex-row items-center gap-2">
-                        <input type="checkbox" name="languages" value="python">
+                        <input type="checkbox" name="experience_languages" value="python">
                         <label>Python</label>
                     </div>
                 </li>
                 <li class="flex">
                     <div class="flex flex-row items-center gap-2">
-                        <input type="checkbox" name="languages" value="other_text">
+                        <input type="checkbox" name="experience_languages" value="other_text">
                         <label>{{_('other_text')}}</label>
                     </div>
                 </li>
