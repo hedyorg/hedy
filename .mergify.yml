@@ -3,10 +3,10 @@ pull_request_rules:
     conditions:
         - and:
           - "#approved-reviews-by>=1"
-          - "check-success=Unit tests / build"
+          - "check-success=build"
     actions:
       merge:
-        method: merge
+        method: squash
         
   - name: automatic update for PR marked as “Keep-updated“
     conditions:
