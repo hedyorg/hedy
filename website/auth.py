@@ -796,7 +796,7 @@ def routes(app, database):
 
     @app.route('/admin/changeUserEmail', methods=['POST'])
     @requires_admin
-    def change_user_email():
+    def change_user_email(user):
         body = request.json
 
         # Validations
