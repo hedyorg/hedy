@@ -83,6 +83,9 @@
                         <div class="flex flex-row items-center">
                             <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" id="verified" name="verified"><label class="inline-block w-40" for="verified">Verified</label>
                         </div>
+                        <div class="flex flex-row items-center">
+                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" id="third_party" name="third_party"><label class="inline-block w-40" for="third_party">Third Party</label>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -140,7 +143,7 @@
           <td id="experience_header" class="hidden">Experience</td>
           <td id="tags_header" class="text-center">Tags</td>
           <td id="teacher_header" class="text-center">Teacher</td>
-          <td id="third_party_header" class="text-center">Third Party?</td>
+          <td id="third_party_header" class="hidden" class="text-center">Third Party</td>
           <td id="verified_header" class="hidden">Verified</td>
       </tr>
     </thead>
@@ -164,7 +167,7 @@
             {% else %}
                 <td class="teacher_cell text-center"><input type="checkbox" {% if user.is_teacher %}checked="checked"{% endif %} onclick="hedyApp.markAsTeacher (this, '{{user.username}}', {% if user.is_teacher %}false{% else %}true{% endif %})"></td>
             {% endif %}<td class="verified_cell hidden">{{user.email_verified}}</td>
-            <td class="third_party_cell text-center"><input type="checkbox" {% if user.third_party %}checked="checked"{% endif %} ></td>
+            <td class="third_party_cell hidden text-center"><input type="checkbox" {% if user.third_party %}checked="checked"{% endif %} ></td>
           </tr>
       {% endfor %}
     </tbody>
