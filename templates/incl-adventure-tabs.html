@@ -10,7 +10,7 @@
             {% endfor %}
             <!-- Add the tab for the parsons problem (if it exists) -->
             {% if parsons %}
-                <div class="tab special_tab z-10 whitespace-nowrap flex items-center justify-center" tabindex="0" data-tab="parsons">
+                <div class="tab z-10 whitespace-nowrap flex items-center justify-center" tabindex="0" data-tab="parsons">
                     {{_('parsons_title')}}
                 </div>
             {% endif %}
@@ -21,7 +21,7 @@
             {% endfor %}
             <!-- Add the tab for the quiz -->
             {% if quiz %}
-                <div class="tab special_tab z-10 whitespace-nowrap flex items-center justify-center" tabindex="0" data-tab="quiz">
+                <div class="tab z-10 whitespace-nowrap flex items-center justify-center" tabindex="0" data-tab="quiz">
                         {{_('quiz_tab')}}
                 </div>
             {% endif %}
