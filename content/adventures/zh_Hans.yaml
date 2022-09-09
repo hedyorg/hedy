@@ -1,7 +1,7 @@
 adventures:
     default:
         name: "Introduction"
-        description: "Level explanation"
+        description: "关卡说明"
         default_save_name: "intro"
         levels:
             1:
@@ -17,7 +17,7 @@ adventures:
                 example_code: "```\n{print} Hello!\n{print} Welcome to Hedy!\n```\n"
                 story_text_2: "您还可以使用 `{ask}` 请求输入问题，然后使用 `{echo}` 命令重复问题。\n"
                 example_code_2: "```\n{ask} What is your name?\n{echo} hello\n```\n"
-                story_text_3: "Let's get started! Don't know what to create? In the next tabs you will find ideas for programs to build.\n"
+                story_text_3: "那么开始吧！ 不知道该创作些什么？您在下面的选项卡中将找到要构建的程序的想法。\n"
             2:
                 story_text: |
                     ## 变量
@@ -28,16 +28,16 @@ adventures:
                 start_code: "{print} 你好世界!"
                 example_code: "```\nname {is} Hedy\nage {is} 15\n{print} name is age years old\n```\n"
                 example_code_2: "```\nanswer {is} {ask} What is your name?\n{print} Hello answer\n```\n"
-                story_text_2: "`{print}` still works the same, but the `{ask}` command has changed. You need to use a variable in the `{ask}` command as well. It looks like this:\n"
-                story_text_3: "Another new command in this level is `{sleep}`, which pauses your program for a second. If you type a number behind the {sleep} command, the program pauses for that amount of seconds.\n"
-                example_code_3: "```\n{print} My favorite colour is...\n{sleep} 2\n{print} green!\n```\n"
+                story_text_2: "`{print}` 仍然可以正常工作，但 `{ask}` 命令已更改。 您还需要在 `{ask}` 命令中使用变量。 它看起来像这样：\n"
+                story_text_3: "这个关卡的另一个新命令是`{sleep}`，它会暂停你的程序。 如果您在 {sleep} 命令后面键入一个数字，程序会暂停该秒数。\n"
+                example_code_3: "```\n{print} 我最喜欢的颜色是...\n{sleep} 2\n{print} 绿色！\n```\n"
             3:
                 story_text: |
                     ## 创建一个列表！
                     在第3级你也可以创建一个列表。你可以让计算机从列表中随机选择一些项目。您可以使用 `{at} {random}` 执行此操作。
                 start_code: "{print} 你好世界!"
                 example_code: "```\nanimals {is} dog, cat, kangaroo\n{print} animals {at} {random}\n```\n"
-                story_text_2: You can also add items to the list with `{add}` and remove items with `{remove}`.
+                story_text_2: 您还可以使用 `{add}` 将项目添加到列表中，并使用 `{remove}` 删除项目。
                 example_code_2: "```\nanimals {is} dog, cat, kangaroo\n{add} penguin {to_list} animals\n{remove} cat {from} animals\n{print} animals {at} {random}\n```\n"
             4:
                 start_code: "{print} '你好世界'"
@@ -51,19 +51,19 @@ adventures:
 
                      大多数编程语言在打印时也使用引号，所以我们也距离真正的编程更近了一步!
                 example_code: "```\n{print} '从现在开始你们需要使用引号！'\n答案 {is} {ask} '从现在开始我们需要使用什么？'\n{print} '我们需要使用 ' 答案\n```\n"
-                story_text_2: "## Adventures are getting more and more difficult\nThe adventures are now getting more and more difficult in the successive tabs.\nSo it is best to start on the left with the story, and work to the right, in order to be challenged more and more.\n"
+                story_text_2: "##冒险越来越难了\n在接下来的标签中，冒险现在变得越来越困难。\n所以最好从左边的故事开始，向右进行，这样才能得到越来越多的挑战。\n"
             5:
                 start_code: |-
                     name {is} {ask} '你的名字是什么?'
                     {if} name {is} 海迪 {print} '酷!' {else} {print} '呵呵'
                 story_text: |
                     ＃＃ 如果（那么）......否则.....
-                    在第 5 级有新的东西，`{if}`！使用 `{if}`，你可以在两个不同的选项之间进行选择。
-                    如果您输入海迪作为名字那么此代码运行后会打印出“很好”这个词！如果您输入其他内容那么此代码运行后会打印出“嘘”这个词。
-                    `{ask}` 和 `{print}` 的使用方法和在第 4 级中一样。
+                    `{if}`是第五关卡的新东西！使用 `{if}`，你可以在两个不同的选项之间进行选择。
+                    如果您输入海迪作为名字，那么此代码会打印出“nice!” 如果您输入其他内容，那么此代码会打印出“boo!”这个词。
+                    `{ask}` 和 `{print}` 的使用方法和在第 4 关卡中一样。
                 example_code_2: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice'\n{else} {print} 'boo!'\n```\n"
                 example_code: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'\n```\n"
-                story_text_3: "## Lists\nWhen we want to check if something is in a list, we can now use the `{in}` command.\nThis code prints pretty! if you choose green or yellow, and meh otherwise.\n"
+                story_text_3: "## 列表\n我们现在可以使用 `{in}` 命令去检查某个东西是否在列表中。\n这段代码打印得很漂亮！ 如果您选择绿色或黄色，则不然。\n"
                 example_code_3: "```\npretty_colors {is} green, yellow\ncolor {is} {ask} 'What is your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!'\n{else} {print} 'meh'\n```\n"
                 story_text_2: "Sometimes code with an `{if}` gets really long and does not fit on the line well. <br> You may also divide the code over two lines, starting the second line at the `{else}` like this:\n"
             6:

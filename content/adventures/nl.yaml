@@ -1718,10 +1718,10 @@ adventures:
                     Dit betekent dat je dus niet alle vragen kunt printen op deze manier.
 
                     Als je 3 verschillende variabelen gebruikt, in plaats van eentje (bijvoorbeeld `vraag_1`, `vraag_2` en `vraag_3`), kun je dit probleem oplossen en de vragen wel printen.
-                    Dit betekent wel dat je het {repeat} commando alleen bij de antwoorden kunt gebruiken en alle vragen apart moet stellen.
+                    Dit betekent wel dat je het `{repeat}` commando alleen bij de antwoorden kunt gebruiken en alle vragen apart moet stellen.
                     Lukt het jou dit te maken?
 
-                    In het volgende level verandert de opmaak van het {repeat}-commando, waardoor dit probleem verdwijnt!
+                    In het volgende level verandert de opmaak van het `{repeat}`-commando, waardoor dit probleem verdwijnt!
                 start_code: "# Schrijf jouw code hier"
             8:
                 story_text: |
@@ -1964,10 +1964,8 @@ adventures:
                     {repeat} mensen {times}
                         eten = {ask} 'Wat wilt u eten?'
                         {print} eten
-                        drinken = {ask} 'Wat wilt u drinken?'
-                        {print} drinken
-                    prijs = 4 * mensen
-                    {print} 'Dat wordt dan ' prijs ' euro!'
+                    {print} 'Bedankt voor uw bestelling.'
+                    {print} 'Eet smakelijk!'
                     ```
                 story_text_2: |
                     ## Uitdaging
@@ -2248,8 +2246,8 @@ adventures:
             11:
                 story_text: |
                     ## Spookhuis
-                    In dit level kun je de speler gemakkelijk vertellen in welke kamer hij zit, door de variabele i te gebruiken.
-                    Let op: Deze code is bijna gelijk aan die in het vorige level. Er zit een aanpassing op regel 5, waar het repeatcommando is vervangen door `{for} i in {range} 1 {to} 3`.
+                    In dit level kun je de speler gemakkelijk vertellen in welke kamer hij zit, door de variabele `i` te gebruiken.
+                    Let op: Deze code is bijna gelijk aan die in het vorige level. Er zit een aanpassing op regel 5, waar het `{repeat}` commando is vervangen door `{for} i in {range} 1 {to} 3`.
                     Daarnaast is regel 8 toegevoegd, waardoor de speler nu ziet in welke kamer hij zit.
                 example_code: |
                     ```
@@ -2279,7 +2277,7 @@ adventures:
             14:
                 story_text: |
                     ## Spookhuis
-                    In dit level gebruik je < en > om levens toe te voegen aan je spel.
+                    In dit level gebruik je `<` en `>` om levens toe te voegen aan je spel.
                 example_code: |
                     ```
                     {print} 'Ontsnap uit het spookhuis'
@@ -2570,7 +2568,7 @@ adventures:
                     Super! Je bent bij het einde van dit level, dus je hebt inmiddels goed geoefend met `{if}` en `{else}`.
 
                     Je hebt misschien gemerkt dat je codes steeds maar langer worden. Als je bijvoorbeeld een zin meerdere keren wil herhalen, nemen die allemaal een aparte regel in.
-                    Bijvoorbeeld als je lang zal ze leven wil coderen...
+                    Bijvoorbeeld als je "lang zal ze leven" wil coderen... Gelukkig leren we in het volgende level het `{repeat}` commando, dat zorgt dat je een regel code meerdere keren kunt herhalen.
                 example_code: |
                     ```
                     {print} 'lang zal ze leven'
@@ -2584,9 +2582,9 @@ adventures:
             7:
                 story_text: |
                     ## Vooruitblik
-                    In dit heb je met `{repeat}` al geleerd hoe je één regel code kunt herhalen.
+                    In dit level heb je met `{repeat}` al geleerd hoe je één regel code kunt herhalen.
 
-                    Maar soms is het wel fijn als je niet maar een regel kunt herhalen maar een heel stukje code.
+                    Soms is het wel fijn als je niet maar één regel kunt herhalen, maar meerdere regels.
                     Want nu moest je wel een hoop knippen en plakken in sommige programma's.
 
                     In het volgende level wordt dat mogelijk gemaakt door stukjes code bij elkaar een groepje te maken, door ze te beginnen met een aantal spaties. Zo'n groepje regels kun je dan in één keer herhalen met {repeat}.
@@ -2664,9 +2662,9 @@ adventures:
             12:
                 story_text: |
                     ## Vooruitblik
-                    In de afgelopen levels kon je meerdere {if}-commando's in elkaar stoppen. Hierdoor kon je bijvoorbeeld dit beveiligingssysteem programmeren.
+                    In de afgelopen levels kon je meerdere `{if}`-commando's in elkaar stoppen. Hierdoor kon je bijvoorbeeld dit beveiligingssysteem programmeren.
                     In dit systeem moeten de gebruikersnaam én het wachtwoord goed zijn, maar het zorgt wel voor een lange, onhandige code..
-                    In het volgende level leer je hoe dit veel gemakkelijker kan!
+                    In het volgende level leer je hoe dit veel gemakkelijker kan van het `{and}` commando!
                 example_code: |
                     ```
                     gebruikersnaam {is} {ask} 'Wat is je gebruikersnaam?'
@@ -2752,7 +2750,7 @@ adventures:
                     {else}
                         {print} 'Bah...'
                     ```
-                story_text_2: In deze code zou het fijn zijn als je 2x een `{else}` kon toevoegen, want misschien vindt je broccoli wel oké en alleen spruitjes 'bah'. In het volgende level kun je meerdere opties toevoegen met het nieuwe commando {elif}!
+                story_text_2: In deze code zou het fijn zijn als je twee keer een `{else}` kon toevoegen, want misschien vindt je broccoli wel oké en alleen spruitjes 'bah'. In het volgende level kun je meerdere opties toevoegen met het nieuwe commando `{elif}`!
                 start_code: "{print} 'Op naar het volgende level!'"
             17:
                 story_text: |
