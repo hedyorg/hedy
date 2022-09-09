@@ -207,7 +207,8 @@ def is_heroku():
 
 
 def version():
-    """Get the version from the Heroku environment variables."""
+
+    # """Get the version from the Heroku environment variables."""
     if not is_heroku():
         return 'DEV'
 
@@ -215,7 +216,7 @@ def version():
     the_date = datetime.date.fromisoformat(vrz[:10]) if vrz else datetime.date.today()
 
     commit = os.getenv('HEROKU_SLUG_COMMIT', '????')[0:6]
-    return the_date.strftime('%b %d') + f'({commit})'
+    return the_date.strftime('%Y %b %d') + f'({commit})'
 
 def valid_email(s):
     return bool(re.match(r'^(([a-zA-Z0-9_+\.\-]+)@([\da-zA-Z\.\-]+)\.([a-zA-Z\.]{2,6})\s*)$', s))
