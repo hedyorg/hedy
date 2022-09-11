@@ -126,13 +126,8 @@ def forget_current_user():
 def is_admin(user):
     """Whether the given user (object) is an admin.
 
-    For real environments, check the configuration in environment variables
-    $ADMIN_USER and $ADMIN_USERS. Locally, every user is an admin.
+    Shecks the configuration in environment variables $ADMIN_USER and $ADMIN_USERS.
     """
-    # Get the value from the environment, use literal_eval to convert from string list to an actual list
-    if is_debug_mode():
-        return True
-
     admin_users = []
     if os.getenv('ADMIN_USER'):
         admin_users.append(os.getenv('ADMIN_USER'))
