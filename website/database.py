@@ -8,7 +8,7 @@ import operator
 
 storage = dynamo.AwsDynamoStorage.from_env() or dynamo.MemoryStorage('dev_database.json')
 
-USERS = dynamo.Table(storage, 'users', 'username', indexed_fields=[dynamo.IndexKey('email')])
+USERS = dynamo.Table(storage, 'users', 'username', indexed_fields=[dynamo.IndexKey('email'), dynamo.IndexKey('epoch', 'created')])
 TOKENS = dynamo.Table(storage, 'tokens', 'id', indexed_fields=[dynamo.IndexKey(v) for v in ['id', 'username']])
 PROGRAMS = dynamo.Table(storage, 'programs', 'id', indexed_fields=[dynamo.IndexKey(v) for v in ['username', 'public', 'hedy_choice']])
 CLASSES = dynamo.Table(storage, 'classes', 'id', indexed_fields=[dynamo.IndexKey(v) for v in ['teacher', 'link']])
@@ -228,17 +228,35 @@ class Database:
         for Class in self.get_teacher_classes (username, False):
             self.delete_class (Class)
 
-    def all_users(self, filtering=False):
-        """Return all users."""
-        # If we have some filtering -> return all possible users, otherwise return last 200
-        users = list(USERS.scan())
-        users.sort(key=lambda user: user.get('created', 0), reverse=True)
-        if filtering:
-            return users
-        return users[:200]
+    def all_users(self, page_token=None):
+        """Return a page from the users table.
+
+        There may be more users to retrieve. If so, the returned page object
+        will have a 'next_page_token' attribute to continue retrieval.
+
+        The pagination token will be of the form '<epoch>:<pagination_token>'
+        """
+        epoch, pagination_token = page_token.split(':', maxsplit=1) if page_token is not None else (CURRENT_USER_EPOCH, None)
+        epoch = int(epoch)
+
+        page = USERS.get_many(dict(epoch=epoch), pagination_token=pagination_token, reverse=True)
+
+        # If we are not currently at epoch > 1 and there are no more records in the current
+        # epoch, also include the first page of the next epoch.
+        if not page.next_page_token and epoch > 1:
+            epoch -= 1
+            next_epoch_page = USERS.get_many(dict(epoch=epoch), reverse=True)
+
+            # Build a new result page with both sets of records, ending with the next "next page" token
+            page = dynamo.ResultPage(list(page) + list(next_epoch_page), next_epoch_page.next_page_token)
+
+        # Prepend the epoch to the next pagination token
+        if page.next_page_token:
+            page.next_page_token = f'{epoch}:{page.next_page_token}'
+        return page
 
     def get_all_public_programs(self):
-        programs = PROGRAMS.get_many({'public': 1}, sort_key='date', reverse=True)
+        programs = PROGRAMS.get_many({'public': 1}, reverse=True)
         return [x for x in programs if not x.get('submitted', False)]
 
     def get_highscores(self, username, filter, filter_value=None):
@@ -291,10 +309,10 @@ class Database:
 
 
     def get_all_hedy_choices(self):
-        return PROGRAMS.get_many({'hedy_choice': 1}, sort_key='date', reverse=True)
+        return PROGRAMS.get_many({'hedy_choice': 1}, reverse=True)
 
     def get_hedy_choices(self):
-        return PROGRAMS.get_many({'hedy_choice': 1}, sort_key='date', limit=4, reverse=True)
+        return PROGRAMS.get_many({'hedy_choice': 1}, limit=4, reverse=True)
 
     def set_program_as_hedy_choice(self, id, favourite):
         PROGRAMS.update({'id': id}, {'hedy_choice': 1 if favourite else None})
