@@ -1678,21 +1678,34 @@ export function filter_user_programs(username: string, own_request?: boolean) {
 }
 
 export function filter_admin() {
+  const params: Record<string, any> = {};
+
   const filter = $('#admin_filter_category').val();
-  if (filter == "email" || filter == "username") {
-    const substring = $('#email_filter_input').val();
-    window.open('?filter=' + filter + "&substring=" + substring, "_self");
-  } else if (filter == "language") {
-    const lang = $('#language_filter_input').val();
-    window.open('?filter=' + filter + "&language=" + lang, "_self");
-  } else if (filter == "keyword_language") {
-    const keyword_lang = $('#keyword_language_filter_input').val();
-    window.open('?filter=' + filter + "&keyword_language=" + keyword_lang, "_self");
-  } else {
-    const start_date = $('#admin_start_date').val();
-    const end_date = $('#admin_end_date').val();
-    window.open('?filter=' + filter + "&start=" + start_date + "&end=" + end_date, "_self");
+  params['filter'] = filter;
+
+  if ($('#hidden-page-input').val()) {
+    params['page'] = $('#hidden-page-input').val();
   }
+
+  switch (filter) {
+    case 'email':
+    case 'username':
+      params['substring'] = $('#email_filter_input').val();
+      break;
+    case 'language':
+      params['language'] = $('#language_filter_input').val();
+      break;
+    case 'keyword_language':
+      params['keyword_language'] = $('#keyword_language_filter_input').val();
+      break;
+    default:
+      params['start'] = $('#admin_start_date').val();
+      params['end'] = $('#admin_end_date').val();
+      break;
+  }
+
+  const queryString = Object.entries(params).map(([k, v]) => k + '=' + encodeURIComponent(v)).join('&');
+  window.open('?' + queryString, '_self');
 }
 
 /**
