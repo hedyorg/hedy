@@ -53,6 +53,27 @@ class TestsLevel3(HedyTester):
             extra_check_function=check_in_list
         )
 
+    def test_print_list_dutch_name_random(self):
+        code = textwrap.dedent("""\
+        vraaga is Hond, Kat, Kangoeroe
+        print vraaga at random""")
+
+        expected = textwrap.dedent("""\
+        vraaga = ['Hond', 'Kat', 'Kangoeroe']
+        print(f'{random.choice(vraaga)}')""")
+
+        # check if result is in the expected list
+        check_in_list = (lambda x: HedyTester.run_code(x) in ['Hond', 'Kat', 'Kangoeroe'])
+
+        self.multi_level_tester(
+            max_level=11,
+            code=code,
+            lang='nl',
+            translate=False,
+            expected=expected,
+            extra_check_function=check_in_list
+        )
+
     def test_print_list_access_index(self):
         code = textwrap.dedent("""\
         dieren is Hond, Kat, Kangoeroe
