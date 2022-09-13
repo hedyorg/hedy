@@ -601,7 +601,7 @@ class Database:
         start_week = self.to_year_week(self.parse_date(start, date(2022, 1, 1)))
         end_week = self.to_year_week(self.parse_date(end, date.today()))
 
-        data = [QUIZ_STATS.get_many({'id': i, 'week': dynamo.Between(start_week, end_week)}, sort_key='week') for i in ids]
+        data = [QUIZ_STATS.get_many({'id': i, 'week': dynamo.Between(start_week, end_week)}) for i in ids]
         return functools.reduce(operator.iconcat, data, [])
 
     def add_program_stats(self, id, level, exception):
@@ -619,7 +619,7 @@ class Database:
         start_week = self.to_year_week(self.parse_date(start, date(2022, 1, 1)))
         end_week = self.to_year_week(self.parse_date(end, date.today()))
 
-        data = [PROGRAM_STATS.get_many({'id': i, 'week': dynamo.Between(start_week, end_week)}, sort_key='week') for i in ids]
+        data = [PROGRAM_STATS.get_many({'id': i, 'week': dynamo.Between(start_week, end_week)}) for i in ids]
         return functools.reduce(operator.iconcat, data, [])
 
     def parse_date(self, d, default):
