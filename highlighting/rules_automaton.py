@@ -147,7 +147,7 @@ def rule_level3():
         'regex': START_WORD + get_translated_keyword("at") + SPACE + get_translated_keyword("random") ,
         'token': ['text','keyword','keyword','keyword'],
     },{
-        'regex': START_WORD + get_translated_keyword("at") ,
+        'regex': START_WORD + get_translated_keyword("at") + END_WORD,
         'token': ['text','keyword'],
     },{
         'regex': get_translated_keyword("comma") ,
@@ -172,7 +172,7 @@ def rule_level3():
         'regex': START_WORD + get_translated_keyword("at") + SPACE + get_translated_keyword("random") ,
         'token': ['text','keyword','keyword','keyword'],
     },{
-        'regex': START_WORD + get_translated_keyword("at") ,
+        'regex': START_WORD + get_translated_keyword("at") + END_WORD,
         'token': ['text','keyword'],
     }],
     "valAdd"    : [{
@@ -262,7 +262,7 @@ def rule_level4():
         'regex': START_WORD + get_translated_keyword("at") + SPACE + get_translated_keyword("random") ,
         'token': ['text','keyword','keyword','keyword'],
     },{
-        'regex': START_WORD + get_translated_keyword("at") ,
+        'regex': START_WORD + get_translated_keyword("at") + END_WORD,
         'token': ['text','keyword'],
     },{
         'regex': get_translated_keyword("comma") ,
@@ -287,7 +287,7 @@ def rule_level4():
         'regex': START_WORD + get_translated_keyword("at") + SPACE + get_translated_keyword("random") ,
         'token': ['text','keyword','keyword','keyword'],
     },{
-        'regex': START_WORD + get_translated_keyword("at") ,
+        'regex': START_WORD + get_translated_keyword("at") + END_WORD,
         'token': ['text','keyword'],
     },{
         'regex': '\"[^\"]*\"',
@@ -308,7 +308,7 @@ def rule_level4():
         'regex': START_WORD + get_translated_keyword("at") + SPACE + get_translated_keyword("random") ,
         'token': ['text','keyword','keyword','keyword'],
     },{
-        'regex': START_WORD + get_translated_keyword("at") ,
+        'regex': START_WORD + get_translated_keyword("at") + END_WORD,
         'token': ['text','keyword'],
     },{
         'regex': "(" +\
