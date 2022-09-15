@@ -613,34 +613,34 @@ levels:
         10:
             question_text: "Wat moet er op de streepjes komen te staan?"
             code: |-
-                uitlaters {is} papa, mama, Sam, Petra
-                uitlater_gisteren {is} {ask} Wie heeft gisteren de honden uitgelaten?
-                {print} uitlater_gisteren hoeft vandaag dan niet nog een keer!
+                keuzes {is} papa, mama, Sam, Petra
+                keuze_gisteren {is} {ask} Wie heeft gisteren de honden uitgelaten?
+                {print} keuze_gisteren hoeft vandaag dan niet nog een keer!
                 _?_
-                {print} uitlaters {at} {random} is vandaag aan de beurt om de honden uit te laten!
+                {print} keuzes {at} {random} is vandaag aan de beurt om de honden uit te laten!
             mp_choice_options:
             -   option: |
                     ```
-                    {remove} uitlater_gisteren {from} uitlaters"
+                    {remove} keuze_gisteren {from} keuzes"
                     ```
                 feedback: "Super!"
             -   option: |
                     ```
-                    {remove} uitlater_gisteren {to} uitlaters
+                    {remove} keuze_gisteren {to} keuzes
                     ```
                 feedback: "`{remove}` hoort bij `{from}` en `{add}` bij `{to_list}`"
             -   option: |
                     ```
-                    {remove} uitlaters {from} gisteren
+                    {remove} keuzes {from} gisteren
                     ```
                 feedback: "gisteren is geen variabele"
             -   option: |
                     ```
-                    {add} uitlater_gisteren {to_list} uitlaters
+                    {add} keuze_gisteren {to_list} keuzes
                     ```
                 feedback: "Hierdoor verhoog je de kans dat degene die gisteren de hond heeft uitgelaten het vandaag weer moet doen. Dat is oneerlijk!"
             correct_answer: "A"
-            hint: "De uitlater van gisteren moet verwijderd worden uit het rijtje"
+            hint: "De persoon die gisteren gekozen is moet verwijderd worden uit het rijtje"
             question_score: '10'
 
     4:
@@ -713,30 +713,30 @@ levels:
             hint: "Je hebt vanaf level 4 aanhalingstekens nodig als je een tekst wil printen."
             question_score: '10'
         5:
-            question_text: "Wat moet er veranderd worden aan regel 2 om een willekeurige optie te printen?"
+            question_text: "Wat moet er veranderd worden aan regel 2 om een willekeurige keuze te printen?"
             code: |-
-                opties {is} steen, papier, schaar
-                {print} 'opties {at} {random}'
+                keuzes {is} steen, papier, schaar
+                {print} 'keuzes {at} {random}'
             mp_choice_options:
             -   option: |
                     ```
-                    '{print} opties {at} {random}'
+                    '{print} keuzes {at} {random}'
                     ```
                 feedback: "Een aanhalingsteken moet nooit voor het `{print}` commando."
             -   option: |
                     ```
-                    {print} 'opties' {at} {random}
+                    {print} 'keuzes' {at} {random}
                     ```
-                feedback: "Opties is een variabele. Je wil niet letterlijk het woord opties printen."
+                feedback: "Keuzes is een variabele. Je wil niet letterlijk het woord keuzes printen."
             -   option: |
                     ```
-                    {print} opties {at} {random}
+                    {print} keuzes {at} {random}
                     ```
                 feedback: "Heel goed"
             -   option: "Niets, de code is goed!"
                 feedback: "Kijk goed! Er zit wel een fout in!"
             correct_answer: "C"
-            hint: "Je wil niet dat er letterlijk 'opties {at} {random}' geprint wordt, je wil dat Hedy 'steen' 'papier' of 'schaar' {print}."
+            hint: "Je wil niet dat er letterlijk 'keuzes {at} {random}' geprint wordt, je wil dat Hedy 'steen' 'papier' of 'schaar' {print}."
             question_score: '10'
         6:
             question_text: "Wat zou een goede tweede regel zijn na deze eerste regel?"
