@@ -29,7 +29,7 @@ adventures:
                 example_code: "```\nbestoj = birdo, ŝafo, rano, anaso, infaneto\n{print} 'bruna urso'\n{print} 'bruna urso'\n{print} 'Kion vi vidas?'\n{for} besto {in} bestoj\n    {print} 'Mi vidas ' besto 'n rigardantan min'\n    {print} besto\n    {print} besto\n    {print} 'Kion vi vidas?'\n{print} 'Mi vidas ĉiujn bestojn, kiuj rigardas min!'\n```\n"
             15:
                 start_code: '# via kodo ĉi tie'
-                story_text: "## Story\nUsing the `{while}` loop can make your stories more interesting. For example, you can use `{while} game {is} 'on'` so you can play until the game is over.\nOr you can use `{while} sword {is} 'lost'` so the player can't continu the game until they have found something.\n"
+                story_text: "## Rakonto\nUzante la buklon `{while}`, oni povas igi siajn rakontojn pli interesaj. Ekzemple, oni povas uzi `{while} ludo {is} 'daŭranta'` por ke oni povu ludi ĝis la ludo finiĝos.\nAŭ oni povas uzi `{while} glavo {is} 'perdita'` por ke la ludanto ne povu daŭrigi sen trovi ion.\n"
                 example_code: "```\nŝlosilo = 'perdita'\n{print} 'Vi staras en via ĝardeno, kaj vi perdis vian ŝlosilon.'\n{print} 'Kie vi volas serĉi ĝin?'\n{print} 'Vi povas elekti unu el: arbo, florbedo, roko, poŝtkesto'\n{while} ŝlosilo == 'perdita'\n    loko = {ask} 'Kie vi volas serĉi ĝin?'\n    {if} loko == 'florbedo'\n        {print} 'Jen ĝi troviĝas!'\n        ŝlosilo = 'trovita'\n    {else}\n        {print} 'Ne, ĝi ne estas ĉe la ' loko\n{print} 'Nun vi povas eniri la domon!'\n```\n"
             2:
                 story_text: "## Rakonto\nEn nivelo 2 vi povas fari vian rakonton pli amuza. La nomo de via ĉeffiguro nun povas esti ie ajn en la frazo.\n\nVi ja devas programi iom krome por tio. Vi devas nun nomi vian ĉeffiguron unue.\n\nVi tiam povas meti tiun nomon ie ajn en frazon.\n"
@@ -44,7 +44,7 @@ adventures:
                 example_code_3: "```\n{print} Lia tornistro fariĝis tro peza.\n{print} Ene estis botelo da akvo, lanterno kaj briko.\nsako {is} akvo, lanterno, briko\nforĵetoto {is} {ask} Kiun li forĵetu?\n{remove} forĵetoto {from} sako\n```\n"
                 start_code: '{print} Via rakonto'
             4:
-                story_text: "## Story\nYou may have noticed that there is still a problem in the previous levels. Did you try to print a sentence that contained the word name?\nYou can solve that in this level. You must use quotation marks for everything that you are going to print.\n"
+                story_text: "## Rakonto\nVi eble rimarkis, ke ankoraŭ ekzistas problemo en la antaŭaj niveloj. Ĉu vi provis presi frazon, kiu enhavis la vorton nomon?\nVi povas solvi tion en ĉi tiu nivelo. Vi devas uzi citilojn por ĉio, kion vi presigos.\n"
                 example_code: "```\nnomo {is} Hanso\n{print} 'La nomo de la ĉefrolulo estas' nomo\n{print} nomo 'nun promenas en la arbaro'\n{print} nomo 'estas iom timigita'\nbestoj {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} 'Li aŭdas la sonon de' bestoj {at} {random}\n{print} nomo 'timas, ke ĉi tiu arbaro estas hantita'\n```\n"
                 start_code: "{print} 'Via rakonto ĉi tie!'"
             5:
@@ -69,10 +69,10 @@ adventures:
         levels:
             10:
                 start_code: '# via kodo ĉi tie'
-                story_text: "## Songs\nIn this level you can easily make the childrens' song 'Five little monkeys'. Can you make the last chorus?\nYou can also make the whole baby shark song (including all the other sharks in the family) in only 6 lines!\nOr you can make Old McDonald with all the different animals.\n"
+                story_text: "## Kantoj\nEn ĉi tiu nivelo vi povas facile fari la infanan kanton \"Kvin simietoj\". Ĉu vi povas fari la lastan koruson?\nVi ankaŭ povas fari la tutan beban ŝarkan kanton (inkluzive de ĉiuj aliaj ŝarkoj en la familio) en nur 6 linioj!\nAŭ vi povas fari Old McDonald kun ĉiuj malsamaj bestoj.\n"
                 example_code: "## 5 simietoj saltantaj sur la lito\n```\nsimioj = 5, 4, 3, 2\n{for} simio {in} simioj\n    {print} simio ' simietoj saltantaj sur la lito'\n    {print} 'Oni defalis kaj vundis sian kapon'\n    {print} 'Panjo vokis la kuraciston, kiu diris:'\n    {print} 'SIMIOJ NE SALTU SUR LA LITO!'\n```\n\n## Ŝarkido\n```\nŝarkoj = ŝarkido, panjo, paĉjo, avinjo, avĉjo\n{for} ŝarko {in} ŝarkoj\n    {print} ŝarko 'tututututudu'\n    {print} ŝarko 'tututututudu'\n    {print} ŝarko 'tututututudu'\n    {print} ŝarko\n```\n## Maljuna McDonald\n```\nbestoj = porko, hundo, bovo\n{for} besto {in} bestoj\n    {if} besto {is} porko\n        sono = grunt\n    {if} besto {is} hundo\n        sono = boj\n    {if} besto {is} bovo\n        sono = muĝ\n    {print} 'Maljuna McDonald havis bienon'\n    {print} 'I Aj I Aj O!'\n    {print} 'kaj en la bieno estis ' besto\n    {print} 'I Aj I Aj O!'\n    {print} 'kun ' sono sono ' ĉi tie'\n    {print} 'kaj ' sono sono ' tie'\n    {print} 'jen ' sono\n    {print} 'aliloke ' sono\n    {print} 'ĉie ' sono sono\n```\n"
             6:
-                story_text: "## Songs\nSongs often contain a lot of repetition. Sometimes the repetition is also based on counting.\nFor example, in the well-known song 'Bottles of beer'. You can program that song with a little math.\n"
+                story_text: "## Kantoj\nKantoj ofte enhavas multe da ripetado. Foje la ripeto ankaŭ baziĝas sur kalkulado.\nEkzemple, en la konata kanto 'Boteloj da biero'. Vi povas programi tiun kanton per iom da matematiko.\n"
                 example_code: "```\nnombro = 99\n{print} nombro ' boteloj da biero sur la muro'\n{print} nombro ' boteloj da biero'\n{print} 'Prenu unu, ĝuu ĝin kune'\nnombro = nombro - 1\n{print} nombro ' boteloj da biero sur la muro'\n```\n\nVi nun povas ripeti liniojn 2 ĝis 9 tiom da fojoj, kiom vi volas, kopiante la liniojn.\n"
                 start_code: "{print} 'Ŝarkido'"
             7:
@@ -80,7 +80,7 @@ adventures:
                 example_code: "```\n{repeat} _ _ {print} 'Ŝarkido tututudutudu'\n{print} 'Ŝarkido'\n```\n\nPost Ŝarkido, vi povas programi aliajn kantojn. Ekzistas multaj kantoj enhavantaj ripetaĵojn.\n"
                 start_code: "{print} 'Ŝarkido'"
             8:
-                story_text: "## Songs\nIn a previous level you've programmed the song 'Bottles of beer'. You made one verse and then had to copy the verses 99 times. In level 7 you can repeat the song 99 times, just by adding one simple line!\n"
+                story_text: "## Kantoj\nEn antaŭa nivelo vi programis la kanton 'Boteloj da biero'. Vi faris unu verson kaj tiam devis kopii la versojn 99 fojojn. En la nivelo 7 vi povas ripeti la kanton 99 fojojn, nur aldonante unu simplan linion!\n"
                 example_code: "```\nnombro = 99\n{repeat} 99 {times}\n    {print} nombro ' boteloj da biero sur la muro'\n    {print} nombro ' boteloj da biero'\n    {print} 'Prenu unu, ĝuu ĝin kune'\n    nombro = nombro - 1\n    {print} nombro ' boteloj da biero sur la muro'\n```\n"
                 start_code: '# via kodo ĉi tie'
             11:
@@ -89,10 +89,10 @@ adventures:
                 start_code: '# via kodo ĉi tie'
             12:
                 story_text: "## Kantu!\nEn ĉi tiu kanto, oni povas eĉ pli facile programi «se vi estas feliĉa kaj vi scias ĝin, frapu la manojn», ĉar oni povas meti ĉiujn agojn en unu variablon jene:<!--{if}-->\n"
-                example_code: "```\nagoj = 'clap your hands', 'stomp your feet', 'shout Hurray!'\n{for} ago {in} agoj\n    {for} i {in} {range} 1 {to} 2\n        {print} 'if youre happy and you know it'\n        {print} ago\n    {print} 'if youre happy and you know it and you really want to show it'\n    {print} 'if youre happy and you know it'\n    {print} ago\n```\n"
+                example_code: "```\nagoj = 'frapu manojn', 'frapu piedojn', 'kriu «hura!»'\n{for} ago {in} agoj\n    {for} mi {in} {range} 1 {to} 2\n        {print} 'se vi feliĉas kaj scias tion'\n        {print} ago\n    {print} 'se vi feliĉas kaj scias tion kaj vi volas montri tion'\n    {print} 'se vi feliĉas kaj scias tion'\n    {print} ago\n```\n"
                 start_code: '# via kodo ĉi tie'
             16:
-                story_text: "## Sing a song!\nIn this level, you can program a song like OldMacDonald even more quickly. You can connect the right animal to the right sound by simply putting them in the same place in the list.\nThe Drunken Sailor is also quickly made in this level. You only need 8 lines for the entire song, check it out!\n"
+                story_text: "## Kantu kanton!\nEn ĉi tiu nivelo, vi povas programi kanton kiel OldMacDonald eĉ pli rapide. Vi povas konekti la ĝustan beston al la ĝusta sono simple metante ilin en la sama loko en la listo.\nLa Ebria Maristo ankaŭ estas rapide farita en ĉi tiu nivelo. Vi nur bezonas 8 liniojn por la tuta kanto, kontrolu ĝin!\n"
                 example_code: "## Maljuna MacDonald\n```\nbestoj = ['porko', 'hundo', 'bovo']\nsonoj = ['oink', 'woof', 'muĝ']\n{for} i {in} {range} 1 {to} 3\n    besto = bestoj[i]\n    sono = sonoj[i]\n    {print} 'Old McDonald had a farm'\n    {print} 'E I E I O!'\n    {print} 'and on that farm he had a ' besto\n    {print} 'E I E I O!'\n    {print} 'with a ' sono sono ' here'\n    {print} 'and a ' sono sono ' there'\n    {print} 'here a ' sono\n    {print} 'there a ' sono\n    {print} 'everywhere a ' sono sono\n```\n\n## Drunken Sailor\n```\nlinioj = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} linio {in} linioj\n    {for} i {in} {range} 1 {to} 3\n        {print} linio\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
                 start_code: '# via kodo ĉi tie'
         name: Kantu!
@@ -145,7 +145,7 @@ adventures:
         levels:
             3:
                 start_code: '{print} Kiu lavos la telerojn?'
-                story_text: "## Lavado\nĈu vi ĉiam malkonsentas hejme pri kiu hodiaŭ devus lavi la telerojn aŭ ŝanĝi la rubujon?\nTiam vi povas lasi la komputilon elekti tre juste. Vi povas programi tion en ĉi tiu nivelo!\nVi unue faru liston de la membroj de via familio. Poste elektu el la listo per `{at} {random}`.\n"
+                story_text: "## Lavado\nĈu vi ĉiam malkonsentas hejme pri kiu hodiaŭ devos lavi la telerojn aŭ malplenigi la rubujon?\nDo vi povas lasi la komputilon elekti tre juste. Vi povas programi tion en ĉi tiu nivelo!\nVi unue faru liston de la familianoj. Poste elektu el la listo per `{at} {random}`.\n"
                 example_code: "```\nhomoj {is} panjo, paĉjo, Emilio, Sofio\n{print} homoj {at} {random}\n```\n"
                 story_text_2: "## Kodumu la programon pri telerlavado!\nĈu vi ne emas prepari la telerojn mem? Haki la programon por forigi vian nomon de la listo.\n"
                 example_code_2: "```\nhomoj {is} panjo, paĉjo, Emilio, Sofio\nvia_nomo {is} {ask} Kiu vi estas?\n{remove} via_nomo {from} homoj\n{print} homoj {at} {random} lavos la telerojn\n```\n"
@@ -450,7 +450,7 @@ adventures:
                 example_code: "Jen kiel la komando `{repeat}` funkcias nun:\n```\n{repeat} 5 {times}\n    {print} 'Saluton ĉiuj'\n    {print} 'Jen ĉio ripetota 5 fojojn'\n```\nJen kiel la komandoj `{if}` kaj `{else}` funkcias nun:\n\n```\nnomo {is} {ask} 'Kio estas via nomo?'\n{if} nomo {is} Hedy\n    {print} 'Bonvenon Hedy'\n    {print} 'Vi povas ludi per via komputilo!'\n{else}\n    {print} 'ENTRUDULO!'\n    {print} 'Vi ne rajtas uzi ĉi tiun komputilon!'\n```\n"
             9:
                 start_code: "{repeat} 3 {times}\n    manĝaĵo = {ask} 'Kion vi volas manĝi?'\n    {if} manĝaĵo {is} pico\n        {print} 'Bonege!'\n    {else}\n        {print} 'Pico estas preferinda.'"
-                story_text: "## Ĉiuj kune nun!\nEn ĉi tiu nivelo vi povas ne nur uzi plurajn liniojn kun `{if}` kaj `{repeat}`, sed vi ankaŭ povas kunmeti ilin!\nEn la ekzemplo vi vidas ordonon `{if}` ene de komando `{repeat}`. Ĝi ankaŭ estas permesita inverse, kaj ankaŭ `{if}` estas permesita en `{if}` kaj `{repeat}` en `{repeat}`.\nProvu ĝin!\n"
+                story_text: "## Ĉio kune nun!\nEn ĉi tiu nivelo, oni povas ne nur uzi plurajn liniojn kun `{if}` kaj `{repeat}`, sed oni ankaŭ povas kunmeti ilin!\nLa jena ekzemplo enhavas `{if}`-blokon ene de `{repeat}`-bloko. La mala ordo estas ankaŭ permesata, kaj ankaŭ `{if}` ene de `{if}` kaj `{repeat}` ene de `{repeat}`.\nProvu tion!\n"
                 example_code: "```\n{repeat} 3 {times}\n    manĝaĵo = {ask} 'Kion vi volas manĝi?'\n    {if} manĝaĵo {is} pico\n        {print} 'bone!'\n    {else}\n        {print} 'vi preferu picon'\n```\n"
             10:
                 start_code: "bestoj {is} hundo, kato, fiŝo\n{for} besto {in} bestoj\n  {print} 'Mi amas ' besto 'n'"
@@ -547,7 +547,7 @@ adventures:
                 start_code: "{print} 'Al la sekva nivelo!'"
             9:
                 story_text: "## Kio sekvos?\nVi fartas bonege! En ĉi tiu nivelo ni ankoraŭ alfrontas malgrandan problemon. Vi lernis ripeti liniojn, sed kio se vi volus iomete ŝanĝi la linion.\nEkzemple se vi volas kanti la kanton «Se vi estas feliĉa kaj vi scias ĝin». Ĝi aspektus jene:<!--{if}-->\n\nSe vi ankaŭ dezirus la sekvan verson 'stumu viajn piedojn', kaj la sekvan, kaj la sekvan, vi devus tute ŝanĝi la kodon.\nEn la sekva nivelo vi lernos la komandon `{for}`, kiu ebligas al vi fari liston de agoj kaj ripeti la kodon per alia ago ĉiufoje!\nBonvolu rigardi!\n"
-                example_code: "```\n{repeat} 2 {times}\n    {print} '{if} youre happy and you know it clap your hands'\n{print} '{if} youre happy and you know it and you really want to show it'\n{print} '{if} youre happy and you know it clap your hands'\n```\n"
+                example_code: "```\n{repeat} 2 {times}\n    {print} 'Se vi feliĉas kaj scias tion, frapu manojn'\n{print} 'Se vi feliĉas kaj scias tion, kaj vi volas montri tion'\n{print} 'Se vi feliĉas kaj scias tion, frapu manojn'\n```\n"
                 start_code: "{print} 'Al la sekva nivelo!'"
             10:
                 story_text: "## What's next?\nYou have reached the end of this level, you're doing great! You are about to go to the next level. In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.\nIn Python there is no `{repeat}` command, but there is a command that works like {repeat}. Are you curious to find out how to say `{repeat}` in Python language? Quickly go on to find out!\n"
