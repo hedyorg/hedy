@@ -78,11 +78,11 @@ levels:
             -   option: "`{ask}` in regel 2 is fout gespeld, het moet `aks` zijn."
                 feedback: "{ask} is goed gespeld."
             -   option: "`{echo}` is geen commando in level 1."
-                feedback: "{echo} is goed, er is een ander foutje"
+                feedback: "`{echo}` is goed, er is een ander foutje"
             -   option: "Niets! De code is goed!"
                 feedback: "Er zit een foutje in, kijk goed!"
             correct_answer: "A"
-            hint: "Er mist een commando in het begin van de code"
+            hint: "Er mist een commando aan het begin van de code"
             question_score: '10'
         5:
             question_text: "Welk commando mist in regel 2?"
@@ -99,12 +99,12 @@ levels:
                     ```
                     ego
                     ```
-                feedback: "ego is geen commando, probeer het nog eens..."
+                feedback: "Hedy is geen commando, probeer het nog eens..."
             -   option: |
                     ```
                     ask
                     ```
-                feedback: "Met {ask} kun je een vraag stellen..."
+                feedback: "Met `{ask}` kun je een vraag stellen..."
             -   option: |
                     ```
                     {echo}
@@ -128,9 +128,9 @@ levels:
             -   option: "Regel 3 moet beginnen met `{print}` in plaats van `{echo}`."
                 feedback: "`{echo}` is goed! Kijk naar de spelling van de commando's."
             -   option: "In regel 4 is `{print}` verkeerd gespeld."
-                feedback: "Er zit ergens anders een spelfout"
+                feedback: "Nee, er zit ergens anders een fout"
             correct_answer: "B"
-            hint: "Kijk goed naar de spelling van de commando's"
+            hint: "Kijk goed naar de spelling van de `{print}` commando's."
             question_score: '10'
         7:
             question_text: "Wat is er mis met deze code?"
@@ -277,7 +277,7 @@ levels:
             -   option: "Het bevriest je scherm, zodat je niet verder kunt"
                 feedback: "Gelukkig niet!"
             -   option: "Het zorgt ervoor dat je code even pauzeert en dan weer verder gaat"
-                feedback: "Super"
+                feedback: "Super!"
             -   option: "Het maakt je programma langzamer"
                 feedback: "Gelukkig niet!"
             correct_answer: "C"
