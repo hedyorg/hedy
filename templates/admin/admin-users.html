@@ -33,7 +33,7 @@
     </div>
 </div>
 <div class="w-full mt-4" id="program_filter">
-    <form onsubmit="event.preventDefault (); hedyApp.filter_admin();">
+    <form id="filterform" onsubmit="event.preventDefault (); hedyApp.filter_admin();">
         <div class="px-4 w-full flex flex-row border border-gray-400 py-2 rounded-lg">
             <div class="p-2 ltr:mr-4 rtl:ml-4">
                 <h2 class="px-8">Visible attributes</h2>
@@ -123,6 +123,8 @@
                 </div>
             </div>
         </div>
+
+        <input id="hidden-page-input" type="hidden" name="page" value="">
     </form>
 </div>
 <h4 class="text-center">Total amount of shown users: {{ users|length }}</h4>
@@ -172,6 +174,9 @@
       {% endfor %}
     </tbody>
   </table>
+  {% if next_page_token %}
+  <button id="next_page_btn" data-page_token="{{next_page_token}}" class="green-btn mt-4">Next page »</button>
+  {% endif %}
 </div>
 <script>
     $(document).ready(function() {
@@ -197,6 +202,14 @@
            } else {
                $('#date_filter_input').show();
            }
+        });
+
+        $('#next_page_btn').click(function() {
+            // Copy the token into the hidden input field, then submit the form
+            var token = $('#next_page_btn').data('page_token');
+            console.log(token);
+            $('#hidden-page-input').attr('value', token);
+            $('#filterform').submit();
         });
     });
 </script>

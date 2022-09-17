@@ -36,10 +36,9 @@ def routes(app, database):
         language = None if language == "null" else language
         keyword_language = None if keyword_language == "null" else keyword_language
 
-        if category:
-            users = DATABASE.all_users(True)
-        else:
-            users = DATABASE.all_users(False)
+        pagination_token = request.args.get('page', default=None, type=str)
+
+        users = DATABASE.all_users(pagination_token)
 
         userdata = []
         fields = [
@@ -85,7 +84,8 @@ def routes(app, database):
 
         return render_template('admin/admin-users.html', users=userdata, page_title=gettext('title_admin'),
                                filter=category, start_date=start_date, end_date=end_date, text_filter=substring,
-                               language_filter=language, keyword_language_filter=keyword_language)
+                               language_filter=language, keyword_language_filter=keyword_language,
+                               next_page_token=users.next_page_token)
 
     @app.route('/admin/classes', methods=['GET'])
     @requires_admin
