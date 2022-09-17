@@ -176,7 +176,7 @@ def rule_level3():
         'token': ['text','keyword'],
     }],
     "valAdd"    : [{
-        'regex': START_WORD + get_translated_keyword("to_list") ,
+        'regex': START_WORD + get_translated_keyword("to_list") + END_WORD ,
         'token': ['text','keyword'],
         'next': 'valueTo',
     },{
@@ -197,7 +197,7 @@ def rule_level3():
     }],
     "valueTo" : [],
     "valRemove" : [{
-        'regex': START_WORD + get_translated_keyword("from") ,
+        'regex': START_WORD + get_translated_keyword("from") + END_WORD ,
         'token': ['text','keyword'],
         'next': 'valueFrom',
     },{
@@ -327,7 +327,7 @@ def rule_level4():
         'token': [TOKEN_CONSTANT],
     }],
     "valAdd"    : [{
-        'regex': START_WORD + get_translated_keyword("to_list") ,
+        'regex': START_WORD + get_translated_keyword("to_list") + END_WORD ,
         'token': ['text','keyword'],
         'next': 'valueTo',
     },{
@@ -348,7 +348,7 @@ def rule_level4():
     }],
     "valueTo" : [],
     "valRemove" : [{
-        'regex': START_WORD + get_translated_keyword("from") ,
+        'regex': START_WORD + get_translated_keyword("from") + END_WORD ,
         'token': ['text','keyword'],
         'next': 'valueFrom',
     },{
