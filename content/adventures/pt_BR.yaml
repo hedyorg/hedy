@@ -118,14 +118,26 @@ adventures:
                         {print} 'Isso vai ser impresso 5 vezes'
                 story_text: |
                     ## Indentação
-                    Os comandos `{ask}` e `{print}` ainda funcionam da mesma forma. Mas `{if}` e `{repeat}` mudaram!
+                    Os comandos `{ask}` e `{print}` ainda funcionam da mesma forma. Mas `{if}`, `{else}` e `{repeat}` mudaram!
                     Você agora pode executar grupos de códigos juntos, mas você terá que *indentar* o código.
                     Isso significa colocar quatro espaços no começo da linha. O mesmo vale para quando você queira criar um bloco só com um linha.
                 example_code: |
+                    Veja como o comando `{repeat}` funciona agora:
                     ```
                     {repeat} 5 {times}
                         {print} 'Olá pessoal'
                         {print} 'Isso vai ser impresso 5 vezes'
+                    ```
+                    Veja como os comandos `{if}` e `{else}` funcionam agora:
+
+                    ```
+                    nome {is} {ask} 'Qual o seu nome?'
+                    {if} nome {is} Hedy
+                        {print} 'Bem-vinda Hedy'
+                        {print} 'Você pode jogar no seu computador!'
+                    {else}
+                        {print} 'INVASOR!'
+                        {print} 'Você não pode usar esse computador
                     ```
             9:
                 start_code: |-
@@ -333,7 +345,7 @@ adventures:
                 start_code: "{print} 'Sua história será impressa aqui!'"
             15:
                 story_text: "## História\nUsar o laço `{while}` pode tornar suas histórias mais interessantes. Por exemplo, você pode usar `{while} jogo {is} 'ligado'` para poder jogar até que o jogo termine.\nOu você pode usar `{while} espada {is} 'perdida'` para que o jogador não possa continuar o jogo até encontrar algo.\n"
-                example_code: "```\nchaves = 'perdidas'\n{print} 'Você está no seu jardim e perdeu suas chaves.'\n{print} 'Onde você quer procurá-las?'\n{print} 'Você pode escolher: árvore, canteiro de flores, pedra, caixa postal'\n{enquanto} chaves == 'perdidas'\n     local = {ask} 'Onde você quer procurar?'\n     {if} local == 'canteiro de flores'\n         {print} 'Aqui estão elas!'\n         chaves = 'encontradas'\n     {else}\n         {print} 'Não, elas não estão no ' local\n{print} 'Agora você pode entrar na casa!'\n```\n"
+                example_code: "```\nchaves = 'perdidas'\n{print} 'Você está no seu jardim e perdeu suas chaves.'\n{print} 'Onde você quer procurá-las?'\n{print} 'Você pode escolher: árvore, canteiro de flores, pedra, caixa postal'\n{while} chaves == 'perdidas'\n     local = {ask} 'Onde você quer procurar?'\n     {if} local == 'canteiro de flores'\n         {print} 'Aqui estão elas!'\n         chaves = 'encontradas'\n     {else}\n         {print} 'Não, elas não estão no ' local\n{print} 'Agora você pode entrar na casa!'\n```\n"
                 start_code: '# coloque o seu código aqui'
             13:
                 story_text: "## História\nUsando os comandos `{and}` e `{or}`, você pode encurtar suas histórias. Por exemplo, confira a história do dragão.\n"
@@ -442,7 +454,7 @@ adventures:
     dishes:
         levels:
             6:
-                story_text: "## Dishwashing\nHow often is everyone going to do the dishes? Is that fair? You can count it in this level.\n"
+                story_text: "## Lava-louças\nQuantas vezes todo mundo vai lavar a louça? Isso é justo? Você pode contá-lo neste nível.\n"
                 example_code: "\n```\npeople = mom, dad, Emma, Sophie\nemma_washes = 0\ndishwasher = people {at} {random}\n{print} 'The dishwasher is' dishwasher\n{if} dishwasher {is} Emma emma_washes = emma_washes + 1\n{print} 'Emma will do the dishes this week' emma_washes 'times'\n```\n\nNow you can copy lines 3 to 5 a few times (e.g. 7 times for a whole week) to calculate for a whole week again.\nDo you make the code for the whole week?\n"
                 example_code_2: "```\npeople = mom, dad, Emma, Sophie\ndishwasher = people {at} {random}\n{print} 'Monday the dishes are done by: ' dishwasher\n{remove} dishwasher {from} people\ndishwasher = people {at} {random}\n{print} 'Tuesday the dishes are done by: ' dishwasher\n{remove} dishwasher {from} people\ndishwasher = people {at} {random}\n```\n"
                 start_code: "{print} 'Who does the dishes?'"
@@ -473,7 +485,7 @@ adventures:
         description: Use o computador para ver quem lava os pratos (Comece no nível 2)
         default_save_name: Pratos
     dice:
-        name: Dice
+        name: Dado
         levels:
             6:
                 story_text: "## Dice\nYou can also make an Earthworm die again in this, but now you can also calculate how many points have been rolled.\nYou may know that the worm counts 5 points for Earthworms. Now after a roll you can immediately calculate how many points you have thrown.\nThis is the code to calculate points for one die:\n"
@@ -505,7 +517,7 @@ adventures:
                 example_code: "\n```\noptions = 1, 2, 3, 4, 5, 6\n{print} 'Throw 6 as fast as you can!'\nthrown = 0\ntries = 0\n{while} thrown != 6\n    thrown = options {at} {random}\n    {print} 'You threw ' thrown\n    tries = tries + 1\n{print} 'Yes! You have thrown 6 in ' tries ' tries.'\n```\n"
                 start_code: '# coloque o seu código aqui'
         description: Make your own dice
-        default_save_name: Dice
+        default_save_name: Dado
     rock:
         levels:
             5:
@@ -544,9 +556,9 @@ adventures:
                 story_text: "## Rock, paper, scissors\nWith the `{and}` command you can shorten your rock, paper, scissors code! Check out the example code below and try to finish it.\n"
                 example_code: "\n```\noptions = 'rock', 'paper', 'scissors'\nyour_choice = {ask} 'What do you choose?'\ncomputer_choice = options {at} {random}\n{print} 'You choose ' your_choice\n{print} 'The computer chooses ' computer_choice\n{if} computer_choice {is} your_choice\n    {print} 'Tie'\n{if} computer_choice {is} 'rock' {and} your_choice {is} 'paper'\n    {print} 'You win!'\n{if} computer_choice {is} 'rock' {and} your_choice {is} 'scissors'\n    {print} 'The computer wins!'\n```\n"
                 start_code: '# coloque o seu código aqui'
-        name: Rock, paper, scissors
+        name: Pedra, papel, tesoura
         description: Make your own rock, paper, scissors game
-        default_save_name: Rock
+        default_save_name: Pedra
     calculator:
         levels:
             12:
@@ -575,9 +587,9 @@ adventures:
                 story_text: "## Calculator\nYou can add the `{while}` loop to the calculator game you've learned to make in a previous level.\nThis makes sure the player can't continue to the next question {if} they answer incorrectly.\n"
                 example_code: "\n```\nscore = 0\n{for} i {in} {range} 0 {to} 9\n    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    number1 = numbers {at} {random}\n    number2 = numbers {at} {random}\n    correct = number1 * number2\n    answer = 0\n    {while} answer != correct\n        {print} 'How much is ' number1 ' times ' number2 '?'\n        answer = {ask} 'Fill in your answer:'\n        {print} 'Your answer is ' answer\n    {print} 'Good job!'\n{print} 'You win!'\n```\n"
                 start_code: '# coloque o seu código aqui'
-        name: Calculator
+        name: Calculadora
         description: Create a calculator
-        default_save_name: Calculator
+        default_save_name: Calculadora
     restaurant:
         name: Restaurant
         levels:
@@ -700,7 +712,7 @@ adventures:
         name: Fortune teller
         default_save_name: Fortune Teller
     haunted:
-        name: Haunted House
+        name: Casa mal-assombrada
         levels:
             1:
                 example_code: "```\n{print} Como eu cheguei aqui?\n{print} Lembro-me de meu amigo me dizendo para entrar na antiga mansão...\n{print} e de repente tudo ficou preto.\n{print} Mas como eu acabei no chão...?\n{print} Minha cabeça dói como se eu tivesse sido atingido por um taco de beisebol!\n{print} Que som é esse?\n{print} Oh não! Eu sinto que não estou sozinho nesta casa!\n{print} Eu preciso sair daqui!\n{print} Há 3 portas na minha frente..\n{ask} Qual porta devo escolher?\n{echo} eu escolho a porta\n{print} ...?\n```\n"
@@ -708,7 +720,7 @@ adventures:
                 story_text: "## Casa mal-assombrada\nNesta aventura você está trabalhando para fazer um jogo no qual você tem que escapar de uma casa mal-assombrada escolhendo a porta correta.\nSe você escolher a porta certa, você sobreviverá, mas senão um monstro terrível pode...\n\nNo nível 1 começamos nosso jogo de casa mal-assombrada inventando uma história assustadora e perguntando ao jogador que monstro ele verá na casa mal-assombrada.\n"
                 story_text_2: "## Desafio\nVocê pode terminar a história assustadora? Ou inventar sua própria história de casa mal-assombrada?\n"
             2:
-                start_code: monster1 {is} _
+                start_code: monstro1 {is} _
                 story_text: "## Haunted House\nIn this haunted house you can choose your monsters with emojis. Of course you could also use words.\n\n```\nmonster1 {is} \U0001F47B\nmonster2 {is} \U0001F921\nmonster3 {is} \U0001F476\n{print} You enter the haunted house.\n{print} Suddenly you see a monster1\n{print} You run into the other room, but a monster2 is waiting there for you!\n{print} Oh no! Quickly get to the kitchen.\n{print} But as you enter monster3 attacks you!\n```\n"
                 example_code: "```\nmonster_1 {is} \U0001F47B\nmonster_2 {is} \U0001F921\nmonster_3 {is} \U0001F476\n{print} You enter the haunted house.\n{print} Suddenly you see a monster_1\n{print} You run into the other room, but a monster_2 is waiting there for you!\n{print} Oh no! Quickly get to the kitchen.\n{print} But as you enter monster_3 attacks you!\n```\n"
             14:
@@ -741,7 +753,7 @@ adventures:
                 start_code: '# coloque o seu código aqui'
                 example_code: "```\n{print} _Escape from the haunted house!_\n{print} _There are 3 doors in front of you..._\nchoice {is} {ask} _Which door do you choose?_\n{print} _You picked door ..._ choice\nmonsters {is} a zombie, a vampire, NOTHING YOUVE ESCAPED\n{print} _You see..._\n{sleep}\n{print} monsters {at} {random}\n ```\n"
         description: escape from the haunted house
-        default_save_name: Haunted House
+        default_save_name: Casa mal-assombrada
     piggybank:
         name: Piggy Bank
         description: Count your pocketmoney!
@@ -798,7 +810,7 @@ adventures:
                 story_text: "## What's next?\nIn the next level you will learn a real Python way to use `{print}`.\n"
                 start_code: "{print} 'Lets go to the next level!'"
             18:
-                start_code: "{print} ('Great job!!!')"
+                start_code: "{print} ('Bom trabalho!!!')"
                 story_text: "## What's next?\nCongratulations! You have reached the last level of Hedy! But no worries, we are working very hard to create more levels and new adventures. So please come back later to check out the newest levels!\n"
             1:
                 story_text: "## O que vem por aí?\nParabéns! Você chegou ao final do nível 1. Espero que você já tenha feito alguns códigos incríveis, mas a Hedy tem muito mais para descobrir.\n\nNo primeiro nível você deve ter notado que o comando `{echo}` pode salvar apenas um pouco de informação por vez.\nPor exemplo, na aventura do restaurante, você poderia usar {echo} para mostrar o que o cliente queria comer, ou o que ele queria beber, mas não ambos em uma frase.\n"
@@ -838,7 +850,7 @@ adventures:
         description: What's Next?
         default_save_name: next
     language:
-        name: "Language"
+        name: "Língua"
         description: "Practice words in a foreign language"
         default_save_name: "Language"
         levels:
@@ -909,7 +921,7 @@ adventures:
                 story_text: "## Tic Tac Toe\nIn this adventure you can program a game of Tic Tac Toe. You can play with two people. Taking turns, you pick a number of the spot (1 - 9) you want to put your sign (x or o) on.\nThe first player that gets 3 in a row (horizontally, vertically or diagonally) wins!\nHave fun!\n"
                 example_code: "```\nsign = 'x'\nopen_spots = 1, 2, 3, 4, 5, 6, 7, 8, 9\ngame = 'on'\nspot_1 = '.'\nspot_2 = '.'\nspot_3 = '.'\nspot_4 = '.'\nspot_5 = '.'\nspot_6 = '.'\nspot_7 = '.'\nspot_8 = '.'\nspot_9 = '.'\n{print} 'TIC TAC TOE!'\n{print} spot_1 spot_2 spot_3\n{print} spot_4 spot_5 spot_6\n{print} spot_7 spot_8 spot_9\n{print} ' '\n{for} i {in} {range} 1 {to} 9\n    {if} game {is} 'on'\n        choice = {ask} 'Player ' sign ', which spot?'\n        {if} choice {in} open_spots\n            {remove} choice {from} open_spots\n            {if} choice {is} 1\n                spot_1 = sign\n            {if} choice {is} 2\n                spot_2 = sign\n            {if} choice {is} 3\n                spot_3 = sign\n            {if} choice {is} 4\n                spot_4 = sign\n            {if} choice {is} 5\n                spot_5 = sign\n            {if} choice {is} 6\n                spot_6 = sign\n            {if} choice {is} 7\n                spot_7 = sign\n            {if} choice {is} 8\n                spot_8 = sign\n            {if} choice {is} 9\n                spot_9 = sign\n        {else}\n            {print} 'That spot was already taken'\n        {print} spot_1 spot_2 spot_3\n        {print} spot_4 spot_5 spot_6\n        {print} spot_7 spot_8 spot_9\n        {print} ' '\n        winner = {ask} 'Did you win?'\n        {if} winner {is} 'yes'\n            {print} 'Good job, player ' sign '!'\n            game = 'over'\n        {else}\n            {if} sign {is} 'x'\n                sign = 'o'\n            {else}\n                sign = 'x'\n```\n"
                 start_code: '## coloque o seu código aqui'
-        name: Tic Tac Toe
+        name: Jogo da velha
         description: Play a game of Tic Tac Toe!
         default_save_name: Tic
     blackjack:
