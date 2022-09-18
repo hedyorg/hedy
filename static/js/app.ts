@@ -363,6 +363,11 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
       }
     } else {
       code = get_trimmed_code();
+      if (code.length == 0) {
+        clearErrors(editor);
+        stopit();
+        return;
+      }
     }
 
     clearErrors(editor);
