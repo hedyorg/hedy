@@ -996,11 +996,25 @@ def default_landing_page():
     return main_page('start')
 
 
-@app.route('/signup', methods=['GET'])
-def signup_page():
+@app.route('/signup-role-selection', methods=['GET'])
+def signup_role_selection():
     if current_user()['username']:
         return redirect('/my-profile')
-    return render_template('signup.html', page_title=gettext('title_signup'), current_page='login')
+    return render_template('signup-role-selection.html', page_title=gettext('title_signup'), current_page='login')
+
+
+@app.route('/signup-student', methods=['GET'])
+def signup_page_student():
+    if current_user()['username']:
+        return redirect('/my-profile')
+    return render_template('signup-student.html', page_title=gettext('title_signup'), current_page='login')
+
+
+@app.route('/signup-teacher', methods=['GET'])
+def signup_page_teacher():
+    if current_user()['username']:
+        return redirect('/my-profile')
+    return render_template('signup-teacher.html', page_title=gettext('title_signup'), current_page='login')
 
 
 @app.route('/login', methods=['GET'])
