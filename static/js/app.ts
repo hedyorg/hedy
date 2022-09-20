@@ -1903,7 +1903,7 @@ const timeout = (func: () => void, delay: number) => {
     }
     func();
   };
-  id = setTimeout(wrapper, delay);
+  id = window.setTimeout(wrapper, delay);
   timers.push(id);
 };
 
