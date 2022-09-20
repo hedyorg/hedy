@@ -76,16 +76,18 @@
             </div>
             <div class="signup-container">
               <label class="signup-label" for="prog_experience">{{_('programming_experience')}}</label>
-                <ul class="signup-input" style="margin-top: -0.3em;">
-                  <li class="flex flex-row items-center">
-                      <input type="radio" name="prog_experience" value="yes" onclick="$('#languages').show ()" class="ltr:mr-2 rtl:ml-2">
-                      <label for="prog_experience"> {{_('yes')}}</label>
-                  </li>
-                  <li class="flex flex-row items-center">
-                      <input type="radio" name="prog_experience" value="no" onclick="$('#languages').hide ()" class="ltr:mr-2 rtl:ml-2">
-                      <label  for="prog_experience"> {{_('no')}}</label>
-                  </li>
-              </ul>
+                <ul class="signup-input" style="margin-top: -0.3em">
+                    <div class="flex flex-row">
+                        <li class="flex flex-row items-center mr-5">
+                            <input type="radio" name="prog_experience" value="yes" onclick="$('#languages').show ()" class="ltr:mr-2 rtl:ml-2">
+                            <label for="prog_experience"> {{_('yes')}}</label>
+                        </li>
+                        <li class="flex flex-row items-center">
+                            <input type="radio" name="prog_experience" value="no" onclick="$('#languages').hide ()" class="ltr:mr-2 rtl:ml-2">
+                            <label  for="prog_experience"> {{_('no')}}</label>
+                        </li>
+                    </div>
+                </ul>
             </div>
             <div class="border border-gray-400 rounded-lg mx-4 px-4 md:px-8 flex flex-row items-center justify-between gap-2 py-2" style="display: none;" id="languages">
                 <!-- For some reason the Tailwind 'hidden' class messes up the layout, therefore we "brute"-style it within the element -->
