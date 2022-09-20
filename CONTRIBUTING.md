@@ -48,7 +48,6 @@ Or if you're on windows in a powershell window with py launcher installed:
 
 To install the front-end test framework, execute the following commands:
 ```bash
-$ cd /your/project/path
 $ npm install cypress --save-dev
 ```
 
@@ -67,7 +66,6 @@ To run the unit tests:
 To run the front-end tests:
 
 ```bash
-$ cd /your/project/path
 $ npx cypress open
 ```
 
