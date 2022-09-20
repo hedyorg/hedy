@@ -71,7 +71,7 @@ $ cd tests
 $ npx cypress open
 ```
 
-You will see the Cypress Launchpad in which you can choose to open the End2End testing panel. Afterwards you are able to run all the tests configured in the test suite, as well as adding your own according to [the documentation of Cypress](https://docs.cypress.io/guides/end-to-end-testing/writing-your-first-end-to-end-test).
+You will see the Cypress Launchpad in which you should choose to open the End2End testing panel. Afterwards you are able to run all the tests configured in the test suite, as well as adding your own according to [the documentation of Cypress](https://docs.cypress.io/guides/end-to-end-testing/writing-your-first-end-to-end-test).
 
 
 ## Working on the web front-end in TypeScript/JavaScript
