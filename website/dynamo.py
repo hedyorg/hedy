@@ -89,7 +89,7 @@ class Table:
         self.indexed_fields = indexed_fields or []
 
     @querylog.timed_as('db_get')
-    def get(self, key, sort_key=None):
+    def get(self, key):
         """Gets an item by key from the database.
 
         The key must be a dict with a single entry which references the
@@ -106,13 +106,11 @@ class Table:
         assert False
 
     @querylog.timed_as('db_get_many')
-    def get_many(self, key, sort_key=None, reverse=False, limit=None, pagination_token=None):
+    def get_many(self, key, reverse=False, limit=None, pagination_token=None):
         """Gets a list of items by key from the database.
 
         The key must be a dict with a single entry which references the
         partition key or an index key.
-
-        sort_key is a string - the name of the sort_key
 
         `get_many` reads up to 1MB of data from the database, or a maximum of `limit`
         records, whichever one is hit first.
@@ -769,13 +767,13 @@ def validate_only_sort_key(conds, sort_key):
 def encode_page_token(x):
     """Encode a compound key page token (dict) to a string."""
     if x is None: return None
-    return base64.b64encode(json.dumps(x).encode('utf-8'))
+    return base64.urlsafe_b64encode(json.dumps(x).encode('utf-8')).decode('ascii')
 
 
 def decode_page_token(x):
     """Decode string page token to compound key (dict)."""
     if x is None: return None
-    return json.loads(base64.b64decode(x).decode('utf-8'))
+    return json.loads(base64.urlsafe_b64decode(x.encode('ascii')).decode('utf-8'))
 
 
 def notnone(**kwargs):

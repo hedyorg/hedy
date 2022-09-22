@@ -348,6 +348,7 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
     var editor = theGlobalEditor;
     var code = "";
     if ($('#parsons_container').is(":visible")) {
+      window.State.unsaved_changes = false; // We don't want to throw this pop-up
       code = get_parsons_code();
       // We return no code if all lines are empty or there is a mistake -> clear errors and do nothing
       if (!code) {
@@ -362,6 +363,11 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
       }
     } else {
       code = get_trimmed_code();
+      if (code.length == 0) {
+        clearErrors(editor);
+        stopit();
+        return;
+      }
     }
 
     clearErrors(editor);
@@ -1310,7 +1316,7 @@ function store_parsons_attempt(order: Array<string>, correct: boolean) {
     contentType: 'application/json',
     dataType: 'json'
   }).done(function() {
-      // Let's do nothing: saving is not a user relevant action -> no feedback required
+    // Let's do nothing: saving is not a user relevant action -> no feedback required
     }).fail(function(xhr) {
       console.error(xhr);
     });
@@ -1601,17 +1607,6 @@ export function toggle_blur_code() {
   }
 }
 
-export function load_profile(username: string, mail: string, birth_year: number, gender: string, country: string) {
-  $('#profile-change-body').toggle();
-  if ($('#profile').is(":visible")) {
-      $('#username').html(username);
-      $('#email').val(mail);
-      $('#birth_year').val(birth_year);
-      $('#gender').val(gender);
-      $('#country').val(country);
-  }
-}
-
 export function change_language(lang: string) {
   $.ajax({
     type: 'POST',
@@ -1688,21 +1683,34 @@ export function filter_user_programs(username: string, own_request?: boolean) {
 }
 
 export function filter_admin() {
+  const params: Record<string, any> = {};
+
   const filter = $('#admin_filter_category').val();
-  if (filter == "email" || filter == "username") {
-    const substring = $('#email_filter_input').val();
-    window.open('?filter=' + filter + "&substring=" + substring, "_self");
-  } else if (filter == "language") {
-    const lang = $('#language_filter_input').val();
-    window.open('?filter=' + filter + "&language=" + lang, "_self");
-  } else if (filter == "keyword_language") {
-    const keyword_lang = $('#keyword_language_filter_input').val();
-    window.open('?filter=' + filter + "&keyword_language=" + keyword_lang, "_self");
-  } else {
-    const start_date = $('#admin_start_date').val();
-    const end_date = $('#admin_end_date').val();
-    window.open('?filter=' + filter + "&start=" + start_date + "&end=" + end_date, "_self");
+  params['filter'] = filter;
+
+  if ($('#hidden-page-input').val()) {
+    params['page'] = $('#hidden-page-input').val();
   }
+
+  switch (filter) {
+    case 'email':
+    case 'username':
+      params['substring'] = $('#email_filter_input').val();
+      break;
+    case 'language':
+      params['language'] = $('#language_filter_input').val();
+      break;
+    case 'keyword_language':
+      params['keyword_language'] = $('#keyword_language_filter_input').val();
+      break;
+    default:
+      params['start'] = $('#admin_start_date').val();
+      params['end'] = $('#admin_end_date').val();
+      break;
+  }
+
+  const queryString = Object.entries(params).map(([k, v]) => k + '=' + encodeURIComponent(v)).join('&');
+  window.open('?' + queryString, '_self');
 }
 
 /**
@@ -1895,7 +1903,7 @@ const timeout = (func: () => void, delay: number) => {
     }
     func();
   };
-  id = setTimeout(wrapper, delay);
+  id = window.setTimeout(wrapper, delay);
   timers.push(id);
 };
 

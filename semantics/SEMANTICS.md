@@ -1,7 +1,8 @@
 # Semantics
 
-This page gives an informal overview of the semantics of Hedy. Because Hedy code is transpiled into Python, we define the semantics of an Hedy program in terms of the semantics of the resulting Python code, or, 
-in case of an error, the resulting HedyException.
+This page gives an informal overview of the semantics of Hedy. Because Hedy code is transpiled into Python, we define the semantics of an Hedy program in terms of the semantics of the resulting Python code, or, in case of an error, the resulting HedyException.
+
+A more formal description can be found in [Julia's thesis](https://hedy.org/research/An_approach_to_describing_the_semantics_of_Hedy_2022.pdf).
 
 ## Level 1
 

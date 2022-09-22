@@ -64,10 +64,10 @@ def routes(app, database, achievements):
     @requires_login
     def get_class(user, class_id):
         app.logger.info('This is info output')
-        if not is_teacher(user):
+        if not is_teacher(user) and not is_admin(user):
             return utils.error_page_403(error=403, ui_message=gettext('retrieve_class_error'))
         Class = DATABASE.get_class(class_id)
-        if not Class or Class['teacher'] != user['username']:
+        if not Class or (Class['teacher'] != user['username'] and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext('no_such_class'))
         students = []
 
@@ -107,7 +107,7 @@ def routes(app, database, achievements):
                                 page_title=gettext('title_class-overview'),
                                 achievement=achievement, invites=invites,
                                 class_info={'students': students, 'link': os.getenv('BASE_URL') + '/hedy/l/' + Class['link'],
-                                            'name': Class['name'], 'id': Class['id']})
+                                            'teacher': Class['teacher'], 'name': Class['name'], 'id': Class['id']})
 
     @app.route('/class', methods=['POST'])
     @requires_login
@@ -295,10 +295,10 @@ def routes(app, database, achievements):
     @app.route('/for-teachers/customize-class/<class_id>', methods=['GET'])
     @requires_login
     def get_class_info(user, class_id):
-        if not is_teacher(user):
+        if not is_teacher(user) and not is_admin(user):
             return utils.error_page(error=403, ui_message=gettext('retrieve_class_error'))
         Class = DATABASE.get_class(class_id)
-        if not Class or Class['teacher'] != user['username']:
+        if not Class or (Class['teacher'] != user['username'] and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext('no_such_class'))
 
         if hedy_content.Adventures(g.lang).has_adventures():
