@@ -998,7 +998,7 @@ def default_landing_page():
 
 
 @app.route('/signup', methods=['GET'])
-def signup_role_selection():
+def signup_page():
     if current_user()['username']:
         return redirect('/my-profile')
     return render_template('signup.html', page_title=gettext('title_signup'), current_page='login')
