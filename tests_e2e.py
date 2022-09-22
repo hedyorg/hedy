@@ -218,8 +218,6 @@ class TestPages(AuthHelper):
         # WHEN attempting to get the signup flow
         # THEN receive an OK response code from the server
         self.get_data('/signup')
-        self.get_data('/signup/student')
-        self.get_data('/signup/teacher')
 
     def test_get_recover_page(self):
         # WHEN attempting to get the signup page
