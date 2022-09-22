@@ -3,14 +3,14 @@
 {% 
     set roles = {
         _('student'): {
-            'name': _('student'),
             'title': _('create_student_account'),
-            'subtitle': _('create_student_account_explanation'),
-            'image': '/images/profile_images/1.png'
+            'subtitle': _('create_account_explanation'),
+            'image': '/images/profile_images/1.png',
         },
         _('teacher'): {
             'title': _('create_teacher_account'),
-            'subtitle': _('create_teacher_account_explanation'),
+            'subtitle': _('create_account_explanation'),
+            'explanation': _('create_teacher_account_explanation'),
             'image': '/images/profile_images/3.png'
         }
     }
@@ -37,11 +37,13 @@
             </div>
         </div>
 
-
         {% for role_name, role in roles.items() %}
         <form id="signup_{{role_name}}" class="js-validated-form flex flex-col gap-2" style="display: none;">
             <h2 class="my-0 text-center">{{ role['title'] }}</h2>
-            <h4 class="text-blue-500 mt-0 mb-2 text-center">{{ role['subtitle'] }}</h4>
+            <h4 class="text-blue-500 mt-0 mb-0 text-center">{{ role['subtitle'] }}</h4>
+            {% if 'explanation' in role %}
+            <p class="m-auto mt-0 mb-2 max-w-md text-center ">{{ role['explanation'] }}</p>
+            {% endif %}
             <div class="signup-container">
                 <label class="signup-label" for="username">{{_('username')}}</label>
                 <input class="signup-input" minlength="3" id="username" name="username" required>
