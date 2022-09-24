@@ -389,7 +389,7 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
     }).done(function(response: any) {
       console.log('Response', response);
       if (response.Warning && $('#editor').is(":visible")) {
-        storeFixedCode(response, level);
+        //storeFixedCode(response, level);
         error.showWarning(ErrorMessages['Transpile_warning'], response.Warning);
       }
       if (response.achievements) {
@@ -398,7 +398,7 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
       if (response.Error) {
         error.show(ErrorMessages['Transpile_error'], response.Error);
         if (response.Location && response.Location[0] != "?") {
-          storeFixedCode(response, level);
+          //storeFixedCode(response, level);
           // Location can be either [row, col] or just [row].
           // @ts-ignore
           highlightAceError(editor, response.Location[0], response.Location[1]);
@@ -448,22 +448,21 @@ export function saveDST() {
   });
 }
 
-function storeFixedCode(response: any, level: string) {
-  if (response.FixedCode) {
-    sessionStorage.setItem ("fixed_level_{lvl}__code".replace("{lvl}", level), response.FixedCode);
-    showBulb(level);
-  }
-}
+// function storeFixedCode(response: any, level: string) {
+//   if (response.FixedCode) {
+//     sessionStorage.setItem ("fixed_level_{lvl}__code".replace("{lvl}", level), response.FixedCode);
+//     showBulb(level);
+//   }
+// }
 
-function showBulb(level: string){
-  const parsedlevel = parseInt(level)
-  if(parsedlevel <= 2){
-    const repair_button = $('#repair_button');
-    repair_button.show();
-    repair_button.attr('onclick', 'hedyApp.modalStepOne(' + parsedlevel + ');event.preventDefault();');
-  }
-
-}
+// function showBulb(level: string){
+//   const parsedlevel = parseInt(level)
+//   if(parsedlevel <= 2){
+//     const repair_button = $('#repair_button');
+//     repair_button.show();
+//     repair_button.attr('onclick', 'hedyApp.modalStepOne(' + parsedlevel + ');event.preventDefault();');
+//   }
+//}
 
 export function pushAchievement(achievement: string) {
   $.ajax({
@@ -1903,7 +1902,7 @@ const timeout = (func: () => void, delay: number) => {
     }
     func();
   };
-  id = setTimeout(wrapper, delay);
+  id = window.setTimeout(wrapper, delay);
   timers.push(id);
 };
 

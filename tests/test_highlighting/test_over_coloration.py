@@ -101,3 +101,82 @@ class HighlighterTestOverCol(HighlightTester):
             level=level, lang="en")
 
 
+    @parameterized.expand([
+        ("level3"),
+        ("level4"),
+        ("level5"),
+        ("level6"),
+        ("level7"),
+        ("level8"),
+        ("level9"),
+        ("level10"),
+        ("level11"),
+        ("level12"),
+        ("level13"),
+        ("level14"),
+        ("level15"),
+        ("level16"),
+        ("level17"),
+    ])
+    def test_at_prefix(self, level):
+        self.assert_highlighted_chr(
+            "print atoptis at random",
+            "KKKKK TTTTTTT KK KKKKKK",
+            level=level, lang='en')
+
+
+    @parameterized.expand([
+        ("level3"),
+        ("level4"),
+        ("level5"),
+        ("level6"),
+        ("level7"),
+        ("level8"),
+        ("level9"),
+        ("level10"),
+        ("level11"),
+        ("level12"),
+        ("level13"),
+        ("level14"),
+        ("level15"),
+        ("level16"),
+        ("level17"),
+    ])
+    def test_at_prefix_nl(self, level):
+        self.assert_highlighted_chr(
+            "print optis at random",
+            "KKKKK TTTTT KK KKKKKK",
+            level=level, lang='nl')
+
+
+    @parameterized.expand([
+        ("level3"),
+        ("level4"),
+    ])
+    def test_from_prefix(self, level):
+        self.assert_highlighted_chr(
+            "remove fromyour_name from people",
+            "KKKKKK TTTTTTTTTTTTT KKKK TTTTTT",
+            level=level, lang='en')
+
+
+    @parameterized.expand([
+        ("level3"),
+        ("level4"),
+    ])
+    def test_from_prefix_nl(self, level):
+        self.assert_highlighted_chr(
+            "remove uitfromyour_name from people",
+            "KKKKKK TTTTTTTTTTTTTTTT KKKK TTTTTT",
+            level=level, lang='nl')
+
+    @parameterized.expand([
+        ("level3"),
+        ("level4"),
+    ])
+    def test_to_prefix(self, level):
+        self.assert_highlighted_chr(
+            "add toanimal to animals",
+            "KKK TTTTTTTT KK TTTTTTT",
+            level=level, lang='en')
+
