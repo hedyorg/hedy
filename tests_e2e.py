@@ -872,7 +872,7 @@ class TestProgram(AuthHelper):
 
         # WHEN retrieving own programs but without sending a cookie
         # THEN receive a forbidden response code from the server
-        self.get_data('programs_list', expect_http_code=403, no_cookie=True)
+        self.get_data('programs/list', expect_http_code=403, no_cookie=True)
 
     def test_get_programs(self):
         # GIVEN a logged in user
@@ -880,7 +880,7 @@ class TestProgram(AuthHelper):
 
         # WHEN retrieving own programs sending a cookie
         # THEN receive an OK response code from the server
-        body = self.get_data('programs_list')
+        body = self.get_data('programs/list')
 
         # THEN verify that the server sent a body that is an object of the shape `{programs:[...]}`.
         self.assertIsInstance(body, dict)
@@ -927,7 +927,7 @@ class TestProgram(AuthHelper):
         self.assertIsInstance(program['name'], str)
 
         # WHEN retrieving programs after saving a program
-        saved_programs = self.get_data('programs_list')['programs']
+        saved_programs = self.get_data('programs/list')['programs']
         print(saved_programs)
 
         # THEN verify that the program we just saved is in the list
@@ -978,7 +978,7 @@ class TestProgram(AuthHelper):
         # THEN receive an OK response code from the server
         self.post_data('programs/share', {'id': program_id, 'public': True,})
 
-        saved_programs = self.get_data('programs_list')['programs']
+        saved_programs = self.get_data('programs/list')['programs']
         for program in saved_programs:
             if program['id'] != program_id:
                 continue
@@ -1002,7 +1002,7 @@ class TestProgram(AuthHelper):
         # THEN receive an OK response code from the server
         self.post_data('programs/share', {'id': program_id, 'public': False})
 
-        saved_programs = self.get_data('programs_list')['programs']
+        saved_programs = self.get_data('programs/list')['programs']
         for program in saved_programs:
             if program['id'] != program_id:
                 continue
@@ -1036,7 +1036,7 @@ class TestProgram(AuthHelper):
         # THEN receive an OK response code from the server
         headers = self.post_data('programs/delete/', {'id': program_id}, return_headers=True)
 
-        saved_programs = self.get_data('programs_list')['programs']
+        saved_programs = self.get_data('programs/list')['programs']
         for program in saved_programs:
             # THEN the program should not be any longer in the list of programs
             self.assertNotEqual(program['id'], program_id)
