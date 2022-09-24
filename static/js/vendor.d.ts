@@ -12,6 +12,7 @@ declare const Sk: {
   };
   execStart: date;
   execLimit: number;
+  globals: Record<string, Variable>;
 
   builtinFiles?: {
     files: Record<string, string>;
@@ -30,6 +31,11 @@ declare const Sk: {
   importMainWithBody(name: string, dumpJS: boolean, body: string, canSuspend: boolean): Suspension;
 
   setTimeout?: (func: () => void, delay: number) => any;
+}
+
+interface Variable {
+  readonly v: unknown;
+  readonly tp$name: string;
 }
 
 // These are provided (or used) by Ace, IF Ace is included. The definitions might come from
@@ -59,5 +65,9 @@ declare class JSConfetti {
         canvas: HTMLElement
     });
 
-    public addConfetti(): void;
+    public addConfetti(options?: {
+      readonly emojis: string[] | string[][]; // Probably not correct but it's what it is right now
+      readonly emojiSize: number;
+      readonly confettiNumber: number;
+    }): void;
 }
