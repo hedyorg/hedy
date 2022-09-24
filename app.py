@@ -177,14 +177,12 @@ def initialize_session():
       that cookie (copy the user info into the session for efficient access
       later on).
     """
+    # Set the database object on the global object (auth.py needs it)
+    g.db = DATABASE
+
     # Invoke session_id() for its side effect
     utils.session_id()
     login_user_from_token_cookie()
-
-@app.before_request
-def database_on_global():
-    """Set 'g.db' object, used by the auth routines."""
-    g.db = DATABASE
 
 if os.getenv('IS_PRODUCTION'):
     @app.before_request

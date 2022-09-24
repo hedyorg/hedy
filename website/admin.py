@@ -42,7 +42,7 @@ class AdminModule(WebsiteModule):
 
         pagination_token = request.args.get('page', default=None, type=str)
 
-        users = g.db.all_users(pagination_token)
+        users = self.db.all_users(pagination_token)
 
         userdata = []
         fields = [
@@ -101,7 +101,7 @@ class AdminModule(WebsiteModule):
             "students": len(Class.get('students')) if 'students' in Class else 0,
             "stats": statistics.get_general_class_stats(Class.get('students', [])),
             "id": Class.get('id')
-        } for Class in g.db.all_classes()]
+        } for Class in self.db.all_classes()]
 
         classes = sorted(classes, key=lambda d: d.get('stats').get('week').get('runs'), reverse=True)
 
@@ -110,7 +110,7 @@ class AdminModule(WebsiteModule):
     @route('/adventures', methods=['GET'])
     @requires_admin
     def get_admin_adventures_page(self, user):
-        all_adventures = sorted(g.db.all_adventures(), key=lambda d: d.get('date', 0), reverse=True)
+        all_adventures = sorted(self.db.all_adventures(), key=lambda d: d.get('date', 0), reverse=True)
         adventures = [{
             "id": adventure.get('id'),
             "creator": adventure.get('creator'),
@@ -144,7 +144,7 @@ class AdminModule(WebsiteModule):
             stats[achievement]["description"] = achievements.get(achievement).get("text")
             stats[achievement]["count"] = 0
 
-        user_achievements = g.db.get_all_achievements()
+        user_achievements = self.db.get_all_achievements()
         total = len(user_achievements)
         for user in user_achievements:
             for achieved in user.get("achieved", []):
@@ -170,7 +170,7 @@ class AdminModule(WebsiteModule):
         if not isinstance(body.get('is_teacher'), bool):
             return gettext('teacher_invalid'), 400
 
-        user = g.db.user_by_username(body['username'].strip().lower())
+        user = self.db.user_by_username(body['username'].strip().lower())
 
         if not user:
             return gettext('username_invalid'), 400
@@ -194,7 +194,7 @@ class AdminModule(WebsiteModule):
         if not isinstance(body.get('email'), str) or not utils.valid_email(body['email']):
             return gettext('email_invalid'), 400
 
-        user = g.db.user_by_username(body['username'].strip().lower())
+        user = self.db.user_by_username(body['username'].strip().lower())
 
         if not user:
             return gettext('email_invalid'), 400
@@ -203,7 +203,7 @@ class AdminModule(WebsiteModule):
         hashed_token = hash(token, make_salt())
 
         # We assume that this email is not in use by any other users. In other words, we trust the admin to enter a valid, not yet used email address.
-        g.db.update_user(user['username'], {'email': body['email'], 'verification_pending': hashed_token})
+        self.db.update_user(user['username'], {'email': body['email'], 'verification_pending': hashed_token})
 
         # If this is an e2e test, we return the email verification token directly instead of emailing it.
         if utils.is_testing_request(request):
@@ -222,7 +222,7 @@ class AdminModule(WebsiteModule):
     @requires_admin
     def get_user_tags(self, user):
         body = request.json
-        user = g.db.get_public_profile_settings(body['username'].strip().lower())
+        user = self.db.get_public_profile_settings(body['username'].strip().lower())
         if not user:
             return "User doesn't have a public profile", 400
         return {'tags': user.get('tags', [])}, 200
@@ -231,7 +231,7 @@ class AdminModule(WebsiteModule):
     @requires_admin
     def update_user_tags(self, user):
         body = request.json
-        user = g.db.get_public_profile_settings(body['username'].strip().lower())
+        user = self.db.get_public_profile_settings(body['username'].strip().lower())
         if not user:
             return "User doesn't have a public profile", 400
 
@@ -248,7 +248,7 @@ class AdminModule(WebsiteModule):
             tags.append("contributor")
 
         user['tags'] = tags
-        g.db.update_public_profile(user['username'], user)
+        self.db.update_public_profile(user['username'], user)
         return {}, 200
 
 

@@ -141,21 +141,41 @@ def is_teacher(user):
 
 # Thanks to https://stackoverflow.com/a/34499643
 def requires_login(f):
+    """Decoractor to indicate that a particular route requires the user to be logged in.
+
+    If the user is not logged in, an error page will be shown. If they are, the
+    function is executed as normal with the user information passed to it.
+
+    The function MUST take an argument named 'user', which will contain the
+    minimal user object from the session (containing 'username', 'email' and
+    'is_teacher').
+
+    Example:
+
+        @app.route('/bla', method=['GET'])
+        @requires_login
+        def show_bla(user):
+            pass
+    """
     @wraps(f)
     def inner(*args, **kws):
         if not is_user_logged_in():
             return utils.error_page(error=403)
-        return f(current_user(), *args, **kws)
+        return f(*args, user=current_user(), **kws)
 
     return inner
 
 
 def requires_admin(f):
+    """Similar to 'requires_login', but also tests that the user is an admin.
+
+    The decorated function MUST declare an argument named 'user'.
+    """
     @wraps(f)
     def inner(*args, **kws):
         if not is_user_logged_in() or not is_admin(current_user()):
             return utils.error_page(error=403, ui_message=gettext('unauthorized'))
-        return f(current_user(), *args, **kws)
+        return f(*args, user=current_user(), **kws)
 
     return inner
 
