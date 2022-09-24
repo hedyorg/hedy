@@ -11,7 +11,7 @@ from .website_module import WebsiteModule, route
 
 class AdminModule(WebsiteModule):
     def __init__(self, db: Database):
-        super().__init__('admin', __name__, url_prefix='admin')
+        super().__init__('admin', __name__, url_prefix='/admin')
 
         self.db = db
 
