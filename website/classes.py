@@ -159,7 +159,7 @@ class MiscClassPages(WebsiteModule):
 
     def __init__(self, db: Database, achievements: Achievements):
         # Note: explicitly no 'url_prefix'
-        super().__init__(self, 'miscclass', __name__)
+        super().__init__('miscclass', __name__)
         self.db = db
         self.achievements = achievements
 
