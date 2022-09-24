@@ -28,6 +28,7 @@ RESET_LENGTH = config['session']['reset_length'] * 60
 env = os.getenv('HEROKU_APP_NAME')
 
 MAILCHIMP_API_URL = None
+MAILCHIMP_API_HEADERS = {}
 if os.getenv('MAILCHIMP_API_KEY') and os.getenv('MAILCHIMP_AUDIENCE_ID'):
     # The domain in the path is the server name, which is contained in the Mailchimp API key
     MAILCHIMP_API_URL = 'https://' + os.getenv('MAILCHIMP_API_KEY').split('-')[
