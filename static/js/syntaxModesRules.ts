@@ -1,4 +1,4 @@
-import * as REGEX from '../../highlighting/highlighting.json'; 
+import REGEX from '../../highlighting/highlighting.json';
 
 // A bunch of code expects a global "State" object. Set it here if not
 // set yet.
@@ -10,7 +10,7 @@ if (!window.State) {
 function convert(o:(object|undefined)) {
   if (typeof o === 'object') {
     let tmp:Map<string, object> = new Map(Object.entries(o));
-    
+
     let ret:Map<string, (undefined|object)> = new Map();
 
     tmp.forEach((value, key) => {
@@ -30,7 +30,7 @@ function convertReg(oldReg:string, TRAD:Map<string,string> ) {
   TRAD.forEach((value,key) => {
     key = key;
     var reg = new RegExp('__' + key + '__','g');
-    newReg = newReg.replace(reg, value); 
+    newReg = newReg.replace(reg, value);
   });
 
   return newReg;
@@ -39,7 +39,7 @@ function convertReg(oldReg:string, TRAD:Map<string,string> ) {
 
 
 // import traduction
-import TRADUCTION_IMPORT from '../../highlighting/highlighting-trad.json'; 
+import TRADUCTION_IMPORT from '../../highlighting/highlighting-trad.json';
 let TRADUCTIONS = convert(TRADUCTION_IMPORT) as Map<string, Map<string,string>>;
 
 var lang = window.State.keyword_language as string;
@@ -53,26 +53,13 @@ var TRADUCTION = TRADUCTIONS.get(lang) as Map<string,string> ;
 // translate regex
 var data = JSON.stringify(REGEX);
 var data_tr = convertReg(data,TRADUCTION);
-var REGEX_tr = JSON.parse(data_tr);
-
-
-
-// Convert to the right format
-var LEVELS = [];
-for (let key in REGEX_tr) {
-  if (key != "default") {
-    LEVELS.push(REGEX_tr[key]);
-  }
-}
-
-
+var LEVELS = JSON.parse(data_tr);
 
 
 // Only do this work if the 'define' function is actually available at runtime.
 // If not, this script got included on a page that didn't include the Ace
 // editor. No point in continuing if that is the case.
 if ((window as any).define) {
-
   // Define the modes based on the level definitions above
   for (const level of LEVELS) {
     // This is a local definition of the file 'ace/mode/level1.js', etc.
