@@ -161,6 +161,9 @@ def requires_login(f):
     def inner(*args, **kws):
         if not is_user_logged_in():
             return utils.error_page(error=403)
+        # The reason we pass by keyword argument is to make this
+        # work logically both for free-floating functions as well
+        # as [unbound] class methods.
         return f(*args, user=current_user(), **kws)
 
     return inner
