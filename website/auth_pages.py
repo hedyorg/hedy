@@ -1,6 +1,6 @@
 from flask_babel import gettext
 from hedy_content import COUNTRIES, ALL_LANGUAGES
-from website.auth import MAILCHIMP_API_URL, RESET_LENGTH, SESSION_LENGTH, TOKEN_COOKIE_NAME, check_password, create_recover_link, create_verify_link, forget_current_user, is_admin, is_teacher, mailchimp_subscribe_user, make_salt, prepare_user_db, remember_current_user, requires_login, send_email, send_email_template, validate_signup_data
+from website.auth import MAILCHIMP_API_URL, RESET_LENGTH, SESSION_LENGTH, TOKEN_COOKIE_NAME, check_password, create_recover_link, create_verify_link, forget_current_user, is_admin, is_teacher, mailchimp_subscribe_user, make_salt, prepare_user_db, remember_current_user, requires_login, send_email, send_email_template, validate_signup_data, password_hash
 from flask import request, session, make_response, jsonify, redirect
 from utils import times, timems, extract_bcrypt_rounds, is_testing_request, is_heroku
 import datetime
@@ -37,7 +37,7 @@ class AuthModule(WebsiteModule):
         # If the number of bcrypt rounds has changed, create a new hash.
         new_hash = None
         if config['bcrypt_rounds'] != extract_bcrypt_rounds(user['password']):
-            new_hash = hash(body['password'], make_salt())
+            new_hash = password_hash(body['password'], make_salt())
 
         cookie = make_salt()
         self.db.store_token({'id': cookie, 'username': user['username'], 'ttl': times() + SESSION_LENGTH})
@@ -221,7 +221,7 @@ class AuthModule(WebsiteModule):
         if body['username'] not in students:
             return gettext("password_change_not_allowed"), 400
 
-        hashed = hash(body['password'], make_salt())
+        hashed = password_hash(body['password'], make_salt())
         self.db.update_user(body['username'], {'password': hashed})
 
         return {'success': gettext("password_change_success")}, 200
@@ -248,7 +248,7 @@ class AuthModule(WebsiteModule):
         if not check_password(body['old_password'], user['password']):
             return gettext('password_invalid'), 403
 
-        hashed = hash(body['password'], make_salt())
+        hashed = password_hash(body['password'], make_salt())
 
         self.db.update_user(user['username'], {'password': hashed})
         # We are not updating the user in the Flask session, because we should not rely on the password in anyway.
@@ -323,7 +323,7 @@ class AuthModule(WebsiteModule):
         if not token or body['token'] != token.get('id') or body['username'] != token.get('username'):
             return gettext('token_invalid'), 403
 
-        hashed = hash(body['password'], make_salt())
+        hashed = password_hash(body['password'], make_salt())
         self.db.update_user(body['username'], {'password': hashed})
         user = self.db.user_by_username(body['username'])
 

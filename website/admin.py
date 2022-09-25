@@ -2,7 +2,7 @@ from flask_babel import gettext
 from flask import request, g
 import hedyweb
 from website import statistics
-from website.auth import create_verify_link, current_user, is_admin, is_teacher, make_salt, pick, requires_admin, send_email_template
+from website.auth import create_verify_link, current_user, is_admin, is_teacher, make_salt, password_hash, pick, requires_admin, send_email_template, password_hash
 from .database import Database
 import utils
 from flask_helpers import render_template
@@ -200,7 +200,7 @@ class AdminModule(WebsiteModule):
             return gettext('email_invalid'), 400
 
         token = make_salt()
-        hashed_token = hash(token, make_salt())
+        hashed_token = password_hash(token, make_salt())
 
         # We assume that this email is not in use by any other users. In other words, we trust the admin to enter a valid, not yet used email address.
         self.db.update_user(user['username'], {'email': body['email'], 'verification_pending': hashed_token})

@@ -3,7 +3,7 @@ import hashlib
 import requests
 from flask_babel import gettext
 from hedy_content import COUNTRIES, ALL_LANGUAGES, ALL_KEYWORD_LANGUAGES
-from website.auth import MAILCHIMP_API_HEADERS, MAILCHIMP_API_URL, SESSION_LENGTH, create_verify_link, mailchimp_subscribe_user, make_salt, remember_current_user, requires_login, send_email_template
+from website.auth import MAILCHIMP_API_HEADERS, MAILCHIMP_API_URL, SESSION_LENGTH, create_verify_link, mailchimp_subscribe_user, make_salt, remember_current_user, requires_login, send_email_template, password_hash
 from flask import request, session, jsonify
 from utils import timems, is_testing_request, valid_email
 from .database import Database
@@ -56,7 +56,7 @@ class ProfileModule(WebsiteModule):
                 if exists:
                     return gettext('exists_email'), 403
                 token = make_salt()
-                hashed_token = hash(token, make_salt())
+                hashed_token = password_hash(token, make_salt())
                 self.db.update_user(user['username'], {'email': email, 'verification_pending': hashed_token})
                 # If this is an e2e test, we return the email verification token directly instead of emailing it.
                 if is_testing_request(request):

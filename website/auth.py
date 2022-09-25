@@ -63,7 +63,7 @@ def make_salt():
 
 
 @querylog.timed
-def hash(password, salt):
+def password_hash(password, salt):
     return bcrypt.hashpw(bytes(password, 'utf-8'), bytes(salt, 'utf-8')).decode('utf-8')
 
 
@@ -330,10 +330,10 @@ def store_new_student_account(db, account, teacher_username):
     return user
 
 def prepare_user_db(username, password):
-    hashed = hash(password, make_salt())
+    hashed = password_hash(password, make_salt())
 
     token = make_salt()
-    hashed_token = hash(token, make_salt())
+    hashed_token = password_hash(token, make_salt())
     username = username.strip().lower()
 
     return username, hashed, hashed_token

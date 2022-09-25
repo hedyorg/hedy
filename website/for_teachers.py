@@ -19,7 +19,7 @@ class ForTeachersModule(WebsiteModule):
         self.db = db
         self.achievements = achievements
 
-    @route('/for-teachers', methods=['GET'])
+    @route('/', methods=['GET'])
     @requires_login
     def for_teachers_page(self, user):
         if not is_teacher(user):
@@ -44,13 +44,13 @@ class ForTeachersModule(WebsiteModule):
                                teacher_adventures=adventures, welcome_teacher=welcome_teacher)
 
 
-    @route('/for-teachers/manual', methods=['GET'])
+    @route('/manual', methods=['GET'])
     @requires_login
     def get_teacher_manual(self, user):
         page_translations = hedyweb.PageTranslations('for-teachers').get_page_translations(g.lang)
         return render_template('teacher-manual.html', current_page='my-profile', content=page_translations)
 
-    @route('/for-teachers/class/<class_id>', methods=['GET'])
+    @route('/class/<class_id>', methods=['GET'])
     @requires_login
     def get_class(self, user, class_id):
         if not is_teacher(user) and not is_admin(user):
@@ -98,7 +98,7 @@ class ForTeachersModule(WebsiteModule):
                                 class_info={'students': students, 'link': os.getenv('BASE_URL') + '/hedy/l/' + Class['link'],
                                             'teacher': Class['teacher'], 'name': Class['name'], 'id': Class['id']})
 
-    @route('/for-teachers/customize-class/<class_id>', methods=['GET'])
+    @route('/customize-class/<class_id>', methods=['GET'])
     @requires_login
     def get_class_info(self, user, class_id):
         if not is_teacher(user) and not is_admin(user):
@@ -120,7 +120,7 @@ class ForTeachersModule(WebsiteModule):
                                adventures=adventures, teacher_adventures=teacher_adventures,
                                customizations=customizations, current_page='my-profile')
 
-    @route('/for-teachers/customize-class/<class_id>', methods=['DELETE'])
+    @route('/customize-class/<class_id>', methods=['DELETE'])
     @requires_login
     def delete_customizations(self, user, class_id):
         if not is_teacher(user):
@@ -132,7 +132,7 @@ class ForTeachersModule(WebsiteModule):
         self.db.delete_class_customizations(class_id)
         return {'success': gettext('customization_deleted')}, 200
 
-    @route('/for-teachers/customize-class/<class_id>', methods=['POST'])
+    @route('/customize-class/<class_id>', methods=['POST'])
     @requires_login
     def update_customizations(self, user, class_id):
         if not is_teacher(user):
@@ -185,7 +185,7 @@ class ForTeachersModule(WebsiteModule):
         self.db.update_class_customizations(customizations)
         return {'success': gettext('class_customize_success')}, 200
 
-    @route('/for-teachers/create-accounts/<class_id>', methods=['GET'])
+    @route('/create-accounts/<class_id>', methods=['GET'])
     @requires_login
     def create_accounts(self, user, class_id):
         if not is_teacher(user):
@@ -196,7 +196,7 @@ class ForTeachersModule(WebsiteModule):
 
         return render_template('create-accounts.html', current_class = current_class)
 
-    @route('/for-teachers/create-accounts', methods=['POST'])
+    @route('/create-accounts', methods=['POST'])
     @requires_login
     def store_accounts(self, user):
         if not is_teacher(user):
@@ -242,7 +242,7 @@ class ForTeachersModule(WebsiteModule):
                 self.db.add_student_to_class(class_id, account.get('username').strip().lower())
         return {'success': gettext('accounts_created')}, 200
 
-    @route('/for-teachers/customize-adventure/view/<adventure_id>', methods=['GET'])
+    @route('/customize-adventure/view/<adventure_id>', methods=['GET'])
     @requires_login
     def view_adventure(self, user, adventure_id):
         if not is_teacher(user) and not is_admin(user):
@@ -260,7 +260,7 @@ class ForTeachersModule(WebsiteModule):
         return render_template('view-adventure.html', adventure=adventure,
                                page_title=gettext('title_view-adventure'), current_page='my-profile')
 
-    @route('/for-teachers/customize-adventure/<adventure_id>', methods=['GET'])
+    @route('/customize-adventure/<adventure_id>', methods=['GET'])
     @requires_login
     def get_adventure_info(self, user, adventure_id):
         if not is_teacher(user):
@@ -285,7 +285,7 @@ class ForTeachersModule(WebsiteModule):
                                adventure=adventure, class_data=class_data,
                                max_level=hedy.HEDY_MAX_LEVEL, current_page='my-profile')
 
-    @route('/for-teachers/customize-adventure', methods=['POST'])
+    @route('/customize-adventure', methods=['POST'])
     @requires_login
     def update_adventure(self, user):
         body = request.json
@@ -349,7 +349,7 @@ class ForTeachersModule(WebsiteModule):
 
         return {'success': gettext('adventure_updated')}, 200
 
-    @route('/for-teachers/customize-adventure/<adventure_id>', methods=['DELETE'])
+    @route('/customize-adventure/<adventure_id>', methods=['DELETE'])
     @requires_login
     def delete_adventure(self, user, adventure_id):
         if not is_teacher(user):
@@ -361,7 +361,7 @@ class ForTeachersModule(WebsiteModule):
         self.db.delete_adventure(adventure_id)
         return {}, 200
 
-    @route('/for-teachers/preview-adventure', methods=['POST'])
+    @route('/preview-adventure', methods=['POST'])
     def parse_preview_adventure(self):
         body = request.json
         try:
@@ -370,7 +370,7 @@ class ForTeachersModule(WebsiteModule):
             return gettext('something_went_wrong_keyword_parsing'), 400
         return {'code': code}, 200
 
-    @route('/for-teachers/create_adventure', methods=['POST'])
+    @route('/create_adventure', methods=['POST'])
     @requires_login
     def create_adventure(self, user):
         if not is_teacher(user):

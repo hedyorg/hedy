@@ -174,7 +174,7 @@ class AuthHelper(unittest.TestCase):
 
         method = 'put' if put_data else 'post'
         response = request(method, path, body=body, cookies=cookies)
-        self.assertEqual(response['code'], expect_http_code, f'While {method}ing {body} to {path} (user: {self.username})')
+        self.assertEqual(response['code'], expect_http_code, f'While {method}ing {body} to {path} (user: {self.username}). Response: {response["body"]}')
 
         return response['headers'] if return_headers else response['body']
 
@@ -192,7 +192,7 @@ class AuthHelper(unittest.TestCase):
         cookies = self.user_cookies[self.username] if self.username and not no_cookie else None
         response = request('get', path, body='', cookies=cookies)
 
-        self.assertEqual(response['code'], expect_http_code, f'While reading {path} (user: {self.username})')
+        self.assertEqual(response['code'], expect_http_code, f'While reading {path} (user: {self.username}). Response: {response["body"]}')
 
         return response['headers'] if return_headers else response['body']
 

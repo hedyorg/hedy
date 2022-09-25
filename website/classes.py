@@ -20,7 +20,7 @@ class ClassModule(WebsiteModule):
         self.db = db
         self.achievements = achievements
 
-    @route('/class', methods=['POST'])
+    @route('/', methods=['POST'])
     @requires_login
     def create_class(self, user):
         if not is_teacher(user):
@@ -55,7 +55,7 @@ class ClassModule(WebsiteModule):
             return {'id': Class['id'], 'achievement': achievement}, 200
         return {'id': Class['id']}, 200
 
-    @route('/class/<class_id>', methods=['PUT'])
+    @route('/<class_id>', methods=['PUT'])
     @requires_login
     def update_class(self, user, class_id):
         if not is_teacher(user):
@@ -86,7 +86,7 @@ class ClassModule(WebsiteModule):
             return {'achievement': achievement}, 200
         return {}, 200
 
-    @route('/class/<class_id>', methods=['DELETE'])
+    @route('/<class_id>', methods=['DELETE'])
     @requires_login
     def delete_class(self, user, class_id):
         Class = self.db.get_class(class_id)
@@ -99,7 +99,7 @@ class ClassModule(WebsiteModule):
             return {'achievement': achievement}, 200
         return {}, 200
 
-    @route('/class/<class_id>/prejoin/<link>', methods=['GET'])
+    @route('/<class_id>/prejoin/<link>', methods=['GET'])
     def prejoin_class(self, class_id, link):
         Class = self.db.get_class(class_id)
         if not Class or Class['link'] != link:
@@ -112,7 +112,7 @@ class ClassModule(WebsiteModule):
         return render_template('class-prejoin.html', joined=False, page_title=gettext('title_join-class'),
                                current_page='my-profile', class_info={'id': Class ['id'], 'name': Class ['name']})
 
-    @route('/class/join', methods=['POST'])
+    @route('/join', methods=['POST'])
     def join_class(self):
         body = request.json
         Class = None
@@ -137,7 +137,7 @@ class ClassModule(WebsiteModule):
             return {'achievement': achievement}, 200
         return {}, 200
 
-    @route('/class/<class_id>/student/<student_id>', methods=['DELETE'])
+    @route('/<class_id>/student/<student_id>', methods=['DELETE'])
     @requires_login
     def leave_class(self, user, class_id, student_id):
         Class = self.db.get_class(class_id)

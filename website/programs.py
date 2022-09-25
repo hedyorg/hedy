@@ -63,7 +63,7 @@ class ProgramsModule(WebsiteModule):
                 return jsonify({'duplicate': True, 'message': gettext('overwrite_warning')})
         return jsonify({'duplicate': False})
 
-    @route('/programs', methods=['POST'])
+    @route('/', methods=['POST'])
     @requires_login
     def save_program(self, user):
         body = request.json
