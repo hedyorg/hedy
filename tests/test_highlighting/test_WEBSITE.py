@@ -1,14 +1,9 @@
 from tests.Highlighter import HighlightTester
 
+
 class HighlighterTestWebSite(HighlightTester):
-
-
     def test_1_1(self):
-        self.assert_highlighted_chr(
-            "print hello world!",
-            "KKKKK TTTTTTTTTTTT",
-            level="level1", lang='en')
-
+        self.assert_highlighted_chr("print hello world!", "KKKKK TTTTTTTTTTTT", level="level1", lang="en")
 
     def test_1_2(self):
         self.assert_highlighted_chr_multi_line(
@@ -16,31 +11,24 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK TTTTTT",
             "print Welcome to Hedy!",
             "KKKKK TTTTTTTTTTTTTTTT",
-            level="level1", lang='en')
-
+            level="level1",
+            lang="en",
+        )
 
     def test_1_3(self):
         self.assert_highlighted_chr_multi_line(
-            "ask What is your name?",
-            "KKK TTTTTTTTTTTTTTTTTT",
-            "echo hello",
-            "KKKK TTTTT",
-            level="level1", lang='en')
-
+            "ask What is your name?", "KKK TTTTTTTTTTTTTTTTTT", "echo hello", "KKKK TTTTT", level="level1", lang="en"
+        )
 
     def test_1_4(self):
         self.assert_highlighted_chr(
-            "print Your story starts here",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTT",
-            level="level1", lang='en')
-
+            "print Your story starts here", "KKKKK TTTTTTTTTTTTTTTTTTTTTT", level="level1", lang="en"
+        )
 
     def test_1_5(self):
         self.assert_highlighted_chr(
-            "ask who is the star in your story?",
-            "KKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            level="level1", lang='en')
-
+            "ask who is the star in your story?", "KKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT", level="level1", lang="en"
+        )
 
     def test_1_6(self):
         self.assert_highlighted_chr_multi_line(
@@ -54,15 +42,12 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
             "print He's afraid this is a haunted forest",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            level="level1", lang='en')
-
+            level="level1",
+            lang="en",
+        )
 
     def test_1_7(self):
-        self.assert_highlighted_chr(
-            "print Im Hedy the parrot",
-            "KKKKK TTTTTTTTTTTTTTTTTT",
-            level="level1", lang='en')
-
+        self.assert_highlighted_chr("print Im Hedy the parrot", "KKKKK TTTTTTTTTTTTTTTTTT", level="level1", lang="en")
 
     def test_1_8(self):
         self.assert_highlighted_chr_multi_line(
@@ -74,17 +59,14 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKK",
             "echo",
             "KKKK",
-            level="level1", lang='en')
-
+            level="level1",
+            lang="en",
+        )
 
     def test_1_9(self):
         self.assert_highlighted_chr_multi_line(
-            "forward 50",
-            "KKKKKKK TT",
-            "turn left",
-            "KKKK TTTT",
-            level="level1", lang='en')
-
+            "forward 50", "KKKKKKK TT", "turn left", "KKKK TTTT", level="level1", lang="en"
+        )
 
     def test_1_10(self):
         self.assert_highlighted_chr_multi_line(
@@ -96,15 +78,17 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKK TTTT",
             "forward 50",
             "KKKKKKK TT",
-            level="level1", lang='en')
-
+            level="level1",
+            lang="en",
+        )
 
     def test_1_11(self):
         self.assert_highlighted_chr(
             "print Welcome to your own rock scissors paper!",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            level="level1", lang='en')
-
+            level="level1",
+            lang="en",
+        )
 
     def test_1_12(self):
         self.assert_highlighted_chr_multi_line(
@@ -114,15 +98,12 @@ class HighlighterTestWebSite(HighlightTester):
             "KKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
             "echo so your choice was:",
             "KKKK TTTTTTTTTTTTTTTTTTT",
-            level="level1", lang='en')
-
+            level="level1",
+            lang="en",
+        )
 
     def test_1_13(self):
-        self.assert_highlighted_chr(
-            "# place your code here",
-            "CCCCCCCCCCCCCCCCCCCCCC",
-            level="level1", lang='en')
-
+        self.assert_highlighted_chr("# place your code here", "CCCCCCCCCCCCCCCCCCCCCC", level="level1", lang="en")
 
     def test_1_14(self):
         self.assert_highlighted_chr_multi_line(
@@ -136,8 +117,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK TTTTTTTTTTTTTTTTT",
             "echo Your name is",
             "KKKK TTTTTTTTTTTT",
-            level="level1", lang='en')
-
+            level="level1",
+            lang="en",
+        )
 
     def test_1_15(self):
         self.assert_highlighted_chr_multi_line(
@@ -151,15 +133,12 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTT",
             "print It's on its way!",
             "KKKKK TTTTTTTTTTTTTTTT",
-            level="level1", lang='en')
-
+            level="level1",
+            lang="en",
+        )
 
     def test_1_16(self):
-        self.assert_highlighted_chr(
-            "print How did I get here?",
-            "KKKKK TTTTTTTTTTTTTTTTTTT",
-            level="level1", lang='en')
-
+        self.assert_highlighted_chr("print How did I get here?", "KKKKK TTTTTTTTTTTTTTTTTTT", level="level1", lang="en")
 
     def test_1_17(self):
         self.assert_highlighted_chr_multi_line(
@@ -187,15 +166,12 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKK TTTTTTTTTTTTT",
             "print ...?",
             "KKKKK TTTT",
-            level="level1", lang='en')
-
+            level="level1",
+            lang="en",
+        )
 
     def test_1_18(self):
-        self.assert_highlighted_chr(
-            "print Let's go!",
-            "KKKKK TTTTTTTTT",
-            level="level1", lang='en')
-
+        self.assert_highlighted_chr("print Let's go!", "KKKKK TTTTTTTTT", level="level1", lang="en")
 
     def test_1_19(self):
         self.assert_highlighted_chr_multi_line(
@@ -209,14 +185,12 @@ class HighlighterTestWebSite(HighlightTester):
             "KKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
             "echo So you want ",
             "KKKK TTTTTTTTTTTT",
-            level="level1", lang='en')
+            level="level1",
+            lang="en",
+        )
 
     def test_2_1(self):
-        self.assert_highlighted_chr(
-            "print hello world!",
-            "KKKKK TTTTTTTTTTTT",
-            level="level2", lang='en')
-
+        self.assert_highlighted_chr("print hello world!", "KKKKK TTTTTTTTTTTT", level="level2", lang="en")
 
     def test_2_2(self):
         self.assert_highlighted_chr_multi_line(
@@ -226,8 +200,9 @@ class HighlighterTestWebSite(HighlightTester):
             "TTT KK TT",
             "print name is age years old",
             "KKKKK TTTTTTTTTTTTTTTTTTTTT",
-            level="level2", lang='en')
-
+            level="level2",
+            lang="en",
+        )
 
     def test_2_3(self):
         self.assert_highlighted_chr_multi_line(
@@ -235,8 +210,9 @@ class HighlighterTestWebSite(HighlightTester):
             "TTTTTT KK KKK TTTTTTTTTTTTTTTTTT",
             "print Hello answer",
             "KKKKK TTTTTTTTTTTT",
-            level="level2", lang='en')
-
+            level="level2",
+            lang="en",
+        )
 
     def test_2_4(self):
         self.assert_highlighted_chr_multi_line(
@@ -246,15 +222,12 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK T",
             "print green!",
             "KKKKK TTTTTT",
-            level="level2", lang='en')
-
+            level="level2",
+            lang="en",
+        )
 
     def test_2_5(self):
-        self.assert_highlighted_chr(
-            "print Your story",
-            "KKKKK TTTTTTTTTT",
-            level="level2", lang='en')
-
+        self.assert_highlighted_chr("print Your story", "KKKKK TTTTTTTTTT", level="level2", lang="en")
 
     def test_2_6(self):
         self.assert_highlighted_chr_multi_line(
@@ -270,15 +243,12 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK",
             "print name is afraid this is a haunted forest",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            level="level2", lang='en')
-
+            level="level2",
+            lang="en",
+        )
 
     def test_2_7(self):
-        self.assert_highlighted_chr(
-            "print Im Hedy the parrot!",
-            "KKKKK TTTTTTTTTTTTTTTTTTT",
-            level="level2", lang='en')
-
+        self.assert_highlighted_chr("print Im Hedy the parrot!", "KKKKK TTTTTTTTTTTTTTTTTTT", level="level2", lang="en")
 
     def test_2_8(self):
         self.assert_highlighted_chr_multi_line(
@@ -296,8 +266,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK",
             "print name",
             "KKKKK TTTT",
-            level="level2", lang='en')
-
+            level="level2",
+            lang="en",
+        )
 
     def test_2_9(self):
         self.assert_highlighted_chr_multi_line(
@@ -309,8 +280,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKK TTTT",
             "forward 25",
             "KKKKKKK TT",
-            level="level2", lang='en')
-
+            level="level2",
+            lang="en",
+        )
 
     def test_2_10(self):
         self.assert_highlighted_chr_multi_line(
@@ -326,24 +298,17 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKK TTTTT",
             "forward 25",
             "KKKKKKK TT",
-            level="level2", lang='en')
-
+            level="level2",
+            lang="en",
+        )
 
     def test_2_11(self):
-        self.assert_highlighted_chr(
-            "# place your code here",
-            "CCCCCCCCCCCCCCCCCCCCCC",
-            level="level2", lang='en')
-
+        self.assert_highlighted_chr("# place your code here", "CCCCCCCCCCCCCCCCCCCCCC", level="level2", lang="en")
 
     def test_2_12(self):
         self.assert_highlighted_chr_multi_line(
-            "choice is _",
-            "TTTTTT KK I",
-            "print I choose choice",
-            "KKKKK TTTTTTTTTTTTTTT",
-            level="level2", lang='en')
-
+            "choice is _", "TTTTTT KK I", "print I choose choice", "KKKKK TTTTTTTTTTTTTTT", level="level2", lang="en"
+        )
 
     def test_2_13(self):
         self.assert_highlighted_chr_multi_line(
@@ -365,15 +330,12 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTT",
             "print Your food and drinks will be right there!",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            level="level2", lang='en')
-
+            level="level2",
+            lang="en",
+        )
 
     def test_2_14(self):
-        self.assert_highlighted_chr(
-            "monster1 is _",
-            "TTTTTTTT KK I",
-            level="level2", lang='en')
-
+        self.assert_highlighted_chr("monster1 is _", "TTTTTTTT KK I", level="level2", lang="en")
 
     def test_2_15(self):
         self.assert_highlighted_chr_multi_line(
@@ -393,22 +355,17 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
             "print But as you enter monster_3 attacks you!",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            level="level2", lang='en')
-
+            level="level2",
+            lang="en",
+        )
 
     def test_2_16(self):
         self.assert_highlighted_chr(
-            "print Let's go to the next level!",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            level="level2", lang='en')
-
+            "print Let's go to the next level!", "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTT", level="level2", lang="en"
+        )
 
     def test_3_1(self):
-        self.assert_highlighted_chr_multi_line(
-            "print hello world!",
-            "KKKKK TTTTTTTTTTTT",
-            level="level3", lang='en')
-
+        self.assert_highlighted_chr_multi_line("print hello world!", "KKKKK TTTTTTTTTTTT", level="level3", lang="en")
 
     def test_3_2(self):
         self.assert_highlighted_chr_multi_line(
@@ -416,8 +373,9 @@ class HighlighterTestWebSite(HighlightTester):
             "TTTTTTT KK TTTK TTTK TTTTTTTT",
             "print animals at random",
             "KKKKK TTTTTTT KK KKKKKK",
-            level="level3", lang='en')
-
+            level="level3",
+            lang="en",
+        )
 
     def test_3_3(self):
         self.assert_highlighted_chr_multi_line(
@@ -429,15 +387,12 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKKK TTT KKKK TTTTTTT",
             "print animals at random",
             "KKKKK TTTTTTT KK KKKKKK",
-            level="level3", lang='en')
-
+            level="level3",
+            lang="en",
+        )
 
     def test_3_4(self):
-        self.assert_highlighted_chr_multi_line(
-            "print Your story",
-            "KKKKK TTTTTTTTTT",
-            level="level3", lang='en')
-
+        self.assert_highlighted_chr_multi_line("print Your story", "KKKKK TTTTTTTTTT", level="level3", lang="en")
 
     def test_3_5(self):
         self.assert_highlighted_chr_multi_line(
@@ -445,8 +400,9 @@ class HighlighterTestWebSite(HighlightTester):
             "TTTTTTT KK TK TK TK T",
             "print He now hears the sound of an animals at random",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT KK KKKKKK",
-            level="level3", lang='en')
-
+            level="level3",
+            lang="en",
+        )
 
     def test_3_6(self):
         self.assert_highlighted_chr_multi_line(
@@ -460,8 +416,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KKK TTTTTT KK TTTTTTT",
             "print it was a animals at random",
             "KKKKK TTTTTTTTTTTTTTTT KK KKKKKK",
-            level="level3", lang='en')
-
+            level="level3",
+            lang="en",
+        )
 
     def test_3_7(self):
         self.assert_highlighted_chr_multi_line(
@@ -475,8 +432,9 @@ class HighlighterTestWebSite(HighlightTester):
             "TTTT KK KKK TTTTTTTTTTTTTTTTTTTTTTTTTT",
             "remove dump from bag",
             "KKKKKK TTTT KKKK TTT",
-            level="level3", lang='en')
-
+            level="level3",
+            lang="en",
+        )
 
     def test_3_8(self):
         self.assert_highlighted_chr_multi_line(
@@ -492,15 +450,14 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK TTTTTTTTTTTTTTTTTTTTTT",
             "print 🦜 words at random",
             "KKKKK TTTTTTT KK KKKKKK",
-            level="level3", lang='en')
-
+            level="level3",
+            lang="en",
+        )
 
     def test_3_9(self):
         self.assert_highlighted_chr_multi_line(
-            "# place your code here",
-            "CCCCCCCCCCCCCCCCCCCCCC",
-            level="level3", lang='en')
-
+            "# place your code here", "CCCCCCCCCCCCCCCCCCCCCC", level="level3", lang="en"
+        )
 
     def test_3_10(self):
         self.assert_highlighted_chr_multi_line(
@@ -510,15 +467,14 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKK TTTTTT KK KKKKKK",
             "forward 25",
             "KKKKKKK TT",
-            level="level3", lang='en')
-
+            level="level3",
+            lang="en",
+        )
 
     def test_3_11(self):
         self.assert_highlighted_chr_multi_line(
-            "print Who does the dishes?",
-            "KKKKK TTTTTTTTTTTTTTTTTTTT",
-            level="level3", lang='en')
-
+            "print Who does the dishes?", "KKKKK TTTTTTTTTTTTTTTTTTTT", level="level3", lang="en"
+        )
 
     def test_3_12(self):
         self.assert_highlighted_chr_multi_line(
@@ -526,8 +482,9 @@ class HighlighterTestWebSite(HighlightTester):
             "TTTTTT KK TTTK TTTK TTTTK TTTTTT",
             "print people at random",
             "KKKKK TTTTTT KK KKKKKK",
-            level="level3", lang='en')
-
+            level="level3",
+            lang="en",
+        )
 
     def test_3_13(self):
         self.assert_highlighted_chr_multi_line(
@@ -539,15 +496,17 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKKK TTTTTTTTT KKKK TTTTTT",
             "print people at random does the dishes",
             "KKKKK TTTTTT KK KKKKKK TTTTTTTTTTTTTTT",
-            level="level3", lang='en')
-
+            level="level3",
+            lang="en",
+        )
 
     def test_3_14(self):
         self.assert_highlighted_chr_multi_line(
             "print What will the die indicate this time?",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            level="level3", lang='en')
-
+            level="level3",
+            lang="en",
+        )
 
     def test_3_15(self):
         self.assert_highlighted_chr_multi_line(
@@ -555,15 +514,17 @@ class HighlighterTestWebSite(HighlightTester):
             "TTTTTTT KK TK TK TK TK TK TTTTTTTTT",
             "print choices at random",
             "KKKKK TTTTTTT KK KKKKKK",
-            level="level3", lang='en')
-
+            level="level3",
+            lang="en",
+        )
 
     def test_3_16(self):
         self.assert_highlighted_chr_multi_line(
             "print Welcome to your own rock scissors paper!",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            level="level3", lang='en')
-
+            level="level3",
+            lang="en",
+        )
 
     def test_3_17(self):
         self.assert_highlighted_chr_multi_line(
@@ -571,8 +532,9 @@ class HighlighterTestWebSite(HighlightTester):
             "TTTTTTT KK TTTTK TTTTTK TTTTTTTT",
             "print choices at random",
             "KKKKK TTTTTTT KK KKKKKK",
-            level="level3", lang='en')
-
+            level="level3",
+            lang="en",
+        )
 
     def test_3_18(self):
         self.assert_highlighted_chr_multi_line(
@@ -590,8 +552,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK T",
             "print answers at random",
             "KKKKK TTTTTTT KK KKKKKK",
-            level="level3", lang='en')
-
+            level="level3",
+            lang="en",
+        )
 
     def test_3_19(self):
         self.assert_highlighted_chr_multi_line(
@@ -605,8 +568,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKKK TTTTTTTTT KKKK TTTTTTT",
             "print You get a flavors at random milkshake",
             "KKKKK TTTTTTTTTTTTTTTTT KK KKKKKK TTTTTTTTT",
-            level="level3", lang='en')
-
+            level="level3",
+            lang="en",
+        )
 
     def test_3_20(self):
         self.assert_highlighted_chr_multi_line(
@@ -636,8 +600,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK TTTTTTTTTTTTTTTTTTTT KK KKKKKK",
             "print Thank you and enjoy your meal!",
             "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            level="level3", lang='en')
-
+            level="level3",
+            lang="en",
+        )
 
     def test_3_21(self):
         self.assert_highlighted_chr_multi_line(
@@ -657,8 +622,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK",
             "print monsters at random",
             "KKKKK TTTTTTTT KK KKKKKK",
-            level="level3", lang='en')
-
+            level="level3",
+            lang="en",
+        )
 
     def test_3_22(self):
         self.assert_highlighted_chr_multi_line(
@@ -666,22 +632,17 @@ class HighlighterTestWebSite(HighlightTester):
             "TTTT KK TTTTTT",
             "print My name is name",
             "KKKKK TTTTTTTTTTTTTTT",
-            level="level3", lang='en')
-
+            level="level3",
+            lang="en",
+        )
 
     def test_3_23(self):
         self.assert_highlighted_chr(
-            "print Let's go to the next level!",
-            "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTT",
-            level="level3", lang='en')
-
+            "print Let's go to the next level!", "KKKKK TTTTTTTTTTTTTTTTTTTTTTTTTTT", level="level3", lang="en"
+        )
 
     def test_4_1(self):
-        self.assert_highlighted_chr_multi_line(
-            "print 'Hello world'",
-            "KKKKK SSSSSSSSSSSSS",
-            level="level4", lang='en')
-
+        self.assert_highlighted_chr_multi_line("print 'Hello world'", "KKKKK SSSSSSSSSSSSS", level="level4", lang="en")
 
     def test_4_2(self):
         self.assert_highlighted_chr_multi_line(
@@ -691,15 +652,17 @@ class HighlighterTestWebSite(HighlightTester):
             "TTTTTT KK KKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             "print 'We need to use ' answer",
             "KKKKK SSSSSSSSSSSSSSSSS TTTTTT",
-            level="level4", lang='en')
-
+            level="level4",
+            lang="en",
+        )
 
     def test_4_3(self):
         self.assert_highlighted_chr_multi_line(
             "print 'Your story will be printed here!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level4", lang='en')
-
+            level="level4",
+            lang="en",
+        )
 
     def test_4_4(self):
         self.assert_highlighted_chr_multi_line(
@@ -717,8 +680,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSS TTTTTTT KK KKKKKK",
             "print name 'is afraid this is a haunted forest'",
             "KKKKK TTTT SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level4", lang='en')
-
+            level="level4",
+            lang="en",
+        )
 
     def test_4_5(self):
         self.assert_highlighted_chr_multi_line(
@@ -730,8 +694,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKK TTTTT",
             "forward 25",
             "KKKKKKK TT",
-            level="level4", lang='en')
-
+            level="level4",
+            lang="en",
+        )
 
     def test_4_6(self):
         self.assert_highlighted_chr_multi_line(
@@ -747,15 +712,14 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKK TTTTT",
             "forward 25",
             "KKKKKKK TT",
-            level="level4", lang='en')
-
+            level="level4",
+            lang="en",
+        )
 
     def test_4_7(self):
         self.assert_highlighted_chr_multi_line(
-            "print 'Who does the dishes?'",
-            "KKKKK SSSSSSSSSSSSSSSSSSSSSS",
-            level="level4", lang='en')
-
+            "print 'Who does the dishes?'", "KKKKK SSSSSSSSSSSSSSSSSSSSSS", level="level4", lang="en"
+        )
 
     def test_4_8(self):
         self.assert_highlighted_chr_multi_line(
@@ -767,8 +731,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK",
             "print people at _",
             "KKKKK TTTTTT KK I",
-            level="level4", lang='en')
-
+            level="level4",
+            lang="en",
+        )
 
     def test_4_9(self):
         self.assert_highlighted_chr_multi_line(
@@ -780,15 +745,17 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK",
             "print people at random",
             "KKKKK TTTTTT KK KKKKKK",
-            level="level4", lang='en')
-
+            level="level4",
+            lang="en",
+        )
 
     def test_4_10(self):
         self.assert_highlighted_chr_multi_line(
             "print 'What will the die indicate this time?'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level4", lang='en')
-
+            level="level4",
+            lang="en",
+        )
 
     def test_4_11(self):
         self.assert_highlighted_chr_multi_line(
@@ -798,8 +765,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK I TTTTTTTTT I",
             "print _ _ _ # here you have to program the choice",
             "KKKKK I I I CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC",
-            level="level4", lang='en')
-
+            level="level4",
+            lang="en",
+        )
 
     def test_4_12(self):
         self.assert_highlighted_chr_multi_line(
@@ -809,15 +777,17 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK SSSSSSSSSSSSS",
             "print choices at random # here you have to program the choice",
             "KKKKK TTTTTTT KK KKKKKK CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC",
-            level="level4", lang='en')
-
+            level="level4",
+            lang="en",
+        )
 
     def test_4_13(self):
         self.assert_highlighted_chr_multi_line(
             "print 'Welcome to your own rock scissors paper!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level4", lang='en')
-
+            level="level4",
+            lang="en",
+        )
 
     def test_4_14(self):
         self.assert_highlighted_chr_multi_line(
@@ -825,8 +795,9 @@ class HighlighterTestWebSite(HighlightTester):
             "TTTTTTT KK TTTTK TTTTTK TTTTTTTT",
             "print _ The computer chose: _ _ at _",
             "KKKKK I TTTTTTTTTTTTTTTTTTT I I KK I",
-            level="level4", lang='en')
-
+            level="level4",
+            lang="en",
+        )
 
     def test_4_15(self):
         self.assert_highlighted_chr_multi_line(
@@ -834,15 +805,14 @@ class HighlighterTestWebSite(HighlightTester):
             "TTTTTTT KK TTTTK TTTTTK TTTTTTTT",
             "print ' The computer chose: ' choices at random",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSS TTTTTTT KK KKKKKK",
-            level="level4", lang='en')
-
+            level="level4",
+            lang="en",
+        )
 
     def test_4_16(self):
         self.assert_highlighted_chr_multi_line(
-            "# place your code here",
-            "CCCCCCCCCCCCCCCCCCCCCC",
-            level="level4", lang='en')
-
+            "# place your code here", "CCCCCCCCCCCCCCCCCCCCCC", level="level4", lang="en"
+        )
 
     def test_4_17(self):
         self.assert_highlighted_chr_multi_line(
@@ -860,8 +830,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK T",
             "print answers at random",
             "KKKKK TTTTTTT KK KKKKKK",
-            level="level4", lang='en')
-
+            level="level4",
+            lang="en",
+        )
 
     def test_4_18(self):
         self.assert_highlighted_chr_multi_line(
@@ -883,8 +854,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSS",
             "print 'Your ' food ' and ' drinks ' will be right there!'",
             "KKKKK SSSSSSS TTTT SSSSSSS TTTTTT SSSSSSSSSSSSSSSSSSSSSSS",
-            level="level4", lang='en')
-
+            level="level4",
+            lang="en",
+        )
 
     def test_4_19(self):
         self.assert_highlighted_chr_multi_line(
@@ -904,22 +876,22 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK",
             "print monsters at random",
             "KKKKK TTTTTTTT KK KKKKKK",
-            level="level4", lang='en')
-
+            level="level4",
+            lang="en",
+        )
 
     def test_4_20(self):
         self.assert_highlighted_chr_multi_line(
-            "print 'Lets go to the next level!'",
-            "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level4", lang='en')
-
+            "print 'Lets go to the next level!'", "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSS", level="level4", lang="en"
+        )
 
     def test_4_21(self):
         self.assert_highlighted_chr_multi_line(
             "password is ask 'What is the correct password?'",
             "TTTTTTTT KK KKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level4", lang='en')
-
+            level="level4",
+            lang="en",
+        )
 
     def test_5_1(self):
         self.assert_highlighted_chr_multi_line(
@@ -927,8 +899,9 @@ class HighlighterTestWebSite(HighlightTester):
             "TTTT KK KKK SSSSSSSSSSSSSSSSSSSS",
             "if name is Hedy print 'cool!' else print 'meh'",
             "KK TTTT KK TTTT KKKKK SSSSSSS KKKK KKKKK SSSSS",
-            level="level5", lang='en')
-
+            level="level5",
+            lang="en",
+        )
 
     def test_5_2(self):
         self.assert_highlighted_chr_multi_line(
@@ -936,8 +909,9 @@ class HighlighterTestWebSite(HighlightTester):
             "TTTT KK KKK SSSSSSSSSSSSSSSSSSSS",
             "if name is Hedy print 'nice' else print 'boo!'",
             "KK TTTT KK TTTT KKKKK SSSSSS KKKK KKKKK SSSSSS",
-            level="level5", lang='en')
-
+            level="level5",
+            lang="en",
+        )
 
     def test_5_3(self):
         self.assert_highlighted_chr_multi_line(
@@ -949,8 +923,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KK TTTTTTTTTTTTTT KK TTTTTTTTTTTTT KKKKK SSSSSSSSS",
             "else print 'meh'",
             "KKKK KKKKK SSSSS",
-            level="level5", lang='en')
-
+            level="level5",
+            lang="en",
+        )
 
     def test_5_4(self):
         self.assert_highlighted_chr_multi_line(
@@ -960,8 +935,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KK TTTT KK TTTT KKKKK SSSSSS",
             "else print 'boo!'",
             "KKKK KKKKK SSSSSS",
-            level="level5", lang='en')
-
+            level="level5",
+            lang="en",
+        )
 
     def test_5_5(self):
         self.assert_highlighted_chr_multi_line(
@@ -977,15 +953,14 @@ class HighlighterTestWebSite(HighlightTester):
             "KK TTT KK TTTT KKKKK TTTT SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             "else print 'The monster eats' name",
             "KKKK KKKKK SSSSSSSSSSSSSSSSSS TTTT",
-            level="level5", lang='en')
-
+            level="level5",
+            lang="en",
+        )
 
     def test_5_6(self):
         self.assert_highlighted_chr(
-            "print 'Here your story will start!'",
-            "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level5", lang='en')
-
+            "print 'Here your story will start!'", "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSS", level="level5", lang="en"
+        )
 
     def test_5_7(self):
         self.assert_highlighted_chr_multi_line(
@@ -1007,15 +982,12 @@ class HighlighterTestWebSite(HighlightTester):
             "KK TTTTTTTTT KK TTTTTTTT KKKKK SSSSSSSSSSSSSSSSSSSSSS",
             "else print '🧒 No, Hedy! Say ' new_word",
             "KKKK KKKKK SSSSSSSSSSSSSSSSSS TTTTTTTT",
-            level="level5", lang='en')
-
+            level="level5",
+            lang="en",
+        )
 
     def test_5_8(self):
-        self.assert_highlighted_chr(
-            "# place your code here",
-            "CCCCCCCCCCCCCCCCCCCCCC",
-            level="level5", lang='en')
-
+        self.assert_highlighted_chr("# place your code here", "CCCCCCCCCCCCCCCCCCCCCC", level="level5", lang="en")
 
     def test_5_9(self):
         self.assert_highlighted_chr_multi_line(
@@ -1043,8 +1015,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKK TTTTT",
             "forward 25",
             "KKKKKKK TT",
-            level="level5", lang='en')
-
+            level="level5",
+            lang="en",
+        )
 
     def test_5_10(self):
         self.assert_highlighted_chr_multi_line(
@@ -1058,14 +1031,14 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKK TTTTT",
             "forward 25",
             "KKKKKKK TT",
-            level="level5", lang='en')
+            level="level5",
+            lang="en",
+        )
 
     def test_5_12(self):
         self.assert_highlighted_chr(
-            "print 'Who does the dishes?'",
-            "KKKKK SSSSSSSSSSSSSSSSSSSSSS",
-            level="level5", lang='en')
-
+            "print 'Who does the dishes?'", "KKKKK SSSSSSSSSSSSSSSSSSSSSS", level="level5", lang="en"
+        )
 
     def test_5_13(self):
         self.assert_highlighted_chr_multi_line(
@@ -1077,15 +1050,17 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK SSSSSSSSSS I SSSSSSSS",
             "if _ is earthworm print 'You can stop throwing.' _ print 'You have to hear it again!'",
             "KK I KK TTTTTTTTT KKKKK SSSSSSSSSSSSSSSSSSSSSSSS I KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level5", lang='en')
-
+            level="level5",
+            lang="en",
+        )
 
     def test_5_14(self):
         self.assert_highlighted_chr(
             "print 'What will the die indicate this time?'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level5", lang='en')
-
+            level="level5",
+            lang="en",
+        )
 
     def test_5_15(self):
         self.assert_highlighted_chr_multi_line(
@@ -1101,15 +1076,17 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK SSSSSSSSSSSSSSSSS I",
             "if _ is _ print 'tie!' else print 'no tie'",
             "KK I KK I KKKKK SSSSSS KKKK KKKKK SSSSSSSS",
-            level="level5", lang='en')
-
+            level="level5",
+            lang="en",
+        )
 
     def test_5_16(self):
         self.assert_highlighted_chr(
             "print 'Welcome to your own rock scissors paper!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level5", lang='en')
-
+            level="level5",
+            lang="en",
+        )
 
     def test_5_17(self):
         self.assert_highlighted_chr_multi_line(
@@ -1139,8 +1116,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KK TTTTTTTT KK TT KKKKK SSSSSSSSSSS KKKK KKKKK SSSSSS TTTTTTTT",
             "print 'Thank you for your order and enjoy your meal!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level5", lang='en')
-
+            level="level5",
+            lang="en",
+        )
 
     def test_5_18(self):
         self.assert_highlighted_chr_multi_line(
@@ -1152,8 +1130,9 @@ class HighlighterTestWebSite(HighlightTester):
             "TTTTTT KK KKK SSSSSSSSSSSSSS",
             "if person is Hedy print 'You will definitely win!🤩' else print 'Bad luck! Someone else will win!😭'",
             "KK TTTTTT KK TTTT KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSS KKKK KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level5", lang='en')
-
+            level="level5",
+            lang="en",
+        )
 
     def test_5_19(self):
         self.assert_highlighted_chr_multi_line(
@@ -1169,8 +1148,9 @@ class HighlighterTestWebSite(HighlightTester):
             "TTTTTTTTT KK TTTTTTTTTTTTTTTTTTTTK TTTTTTTTTTTTTTTTTTTTTTTK TTTTTTTTT",
             "if person is Hedy print goodanswer at random else print badanswer at random",
             "KK TTTTTT KK TTTT KKKKK TTTTTTTTTT KK KKKKKK KKKK KKKKK TTTTTTTTT KK KKKKKK",
-            level="level5", lang='en')
-
+            level="level5",
+            lang="en",
+        )
 
     def test_5_20(self):
         self.assert_highlighted_chr_multi_line(
@@ -1194,8 +1174,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KK TTTTTTTTTTT KK TTTTTTTTTTTT KKKKK SSSSSSSSSSSSSSSSSSSSSSS",
             "else print 'Oh no! You are being eaten by a...' monsters at random",
             "KKKK KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS TTTTTTTT KK KKKKKK",
-            level="level5", lang='en')
-
+            level="level5",
+            lang="en",
+        )
 
     def test_5_21(self):
         self.assert_highlighted_chr_multi_line(
@@ -1213,8 +1194,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KK TTTT KK TTTTTTTTTT KKKKK SSSSSSSS",
             "else print 'No, frog is grenouille'",
             "KKKK KKKKK SSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level5", lang='en')
-
+            level="level5",
+            lang="en",
+        )
 
     def test_5_22(self):
         self.assert_highlighted_chr_multi_line(
@@ -1236,21 +1218,19 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK SSSSSSSSSSSSSSS TTTTT SSSSSSSSSSSSSSSSSSSS TTTTT SSSSSSSSS",
             "print 'The drinks are free in this level because Hedy cant calculate the price yet...'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level5", lang='en')
-
+            level="level5",
+            lang="en",
+        )
 
     def test_5_23(self):
         self.assert_highlighted_chr(
-            "print 'On to the next level!'",
-            "KKKKK SSSSSSSSSSSSSSSSSSSSSSS",
-            level="level5", lang='en')
+            "print 'On to the next level!'", "KKKKK SSSSSSSSSSSSSSSSSSSSSSS", level="level5", lang="en"
+        )
 
     def test_6_1(self):
         self.assert_highlighted_chr(
-            "print '5 times 5 is ' 5 * 5",
-            "KKKKK SSSSSSSSSSSSSSS N K N",
-            level="level6", lang='en')
-
+            "print '5 times 5 is ' 5 * 5", "KKKKK SSSSSSSSSSSSSSS N K N", level="level6", lang="en"
+        )
 
     def test_6_2(self):
         self.assert_highlighted_chr_multi_line(
@@ -1260,17 +1240,14 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK SSSSSSSSSSSSSSS N K N",
             "print '5 times 5 is ' 5 * 5",
             "KKKKK SSSSSSSSSSSSSSS N K N",
-            level="level6", lang='en')
-
+            level="level6",
+            lang="en",
+        )
 
     def test_6_3(self):
         self.assert_highlighted_chr_multi_line(
-            "name = Hedy",
-            "TTTT K TTTT",
-            "answer = 20 + 4",
-            "TTTTTT K NN K N",
-            level="level6", lang='en')
-
+            "name = Hedy", "TTTT K TTTT", "answer = 20 + 4", "TTTTTT K NN K N", level="level6", lang="en"
+        )
 
     def test_6_4(self):
         self.assert_highlighted_chr_multi_line(
@@ -1286,15 +1263,12 @@ class HighlighterTestWebSite(HighlightTester):
             "TTTTT K TTTTT K N",
             "print verse ' bottles of beer on the wall'",
             "KKKKK TTTTT SSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level6", lang='en')
-
+            level="level6",
+            lang="en",
+        )
 
     def test_6_5(self):
-        self.assert_highlighted_chr(
-            "print 'Baby shark'",
-            "KKKKK SSSSSSSSSSSS",
-            level="level6", lang='en')
-
+        self.assert_highlighted_chr("print 'Baby shark'", "KKKKK SSSSSSSSSSSS", level="level6", lang="en")
 
     def test_6_6(self):
         self.assert_highlighted_chr_multi_line(
@@ -1326,15 +1300,12 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKKKK NN",
             "turn angle",
             "KKKK TTTTT",
-            level="level6", lang='en')
-
+            level="level6",
+            lang="en",
+        )
 
     def test_6_7(self):
-        self.assert_highlighted_chr(
-            "print 'Drawing figures'",
-            "KKKKK SSSSSSSSSSSSSSSSS",
-            level="level6", lang='en')
-
+        self.assert_highlighted_chr("print 'Drawing figures'", "KKKKK SSSSSSSSSSSSSSSSS", level="level6", lang="en")
 
     def test_6_8(self):
         self.assert_highlighted_chr_multi_line(
@@ -1350,8 +1321,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KK TTTTTTTTTT KK TTTT TTTTTTTTTTT K TTTTTTTTTTT K N",
             "print 'Emma will do the dishes this week' emma_washes 'times'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS TTTTTTTTTTT SSSSSSS",
-            level="level6", lang='en')
-
+            level="level6",
+            lang="en",
+        )
 
     def test_6_9(self):
         self.assert_highlighted_chr_multi_line(
@@ -1371,15 +1343,14 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKKK TTTTTTTTTT KKKK TTTTTT",
             "dishwasher = people at random",
             "TTTTTTTTTT K TTTTTT KK KKKKKK",
-            level="level6", lang='en')
-
+            level="level6",
+            lang="en",
+        )
 
     def test_6_10(self):
         self.assert_highlighted_chr(
-            "print 'Who does the dishes?'",
-            "KKKKK SSSSSSSSSSSSSSSSSSSSSS",
-            level="level6", lang='en')
-
+            "print 'Who does the dishes?'", "KKKKK SSSSSSSSSSSSSSSSSSSSSS", level="level6", lang="en"
+        )
 
     def test_6_11(self):
         self.assert_highlighted_chr_multi_line(
@@ -1395,15 +1366,17 @@ class HighlighterTestWebSite(HighlightTester):
             "KK TTTTT KK TTTTTTTTT TTTTTT K TTTTTT K N KKKK TTTTTT K TTTTTT K TTTTT",
             "print 'those are' points ' point'",
             "KKKKK SSSSSSSSSSS TTTTTT SSSSSSSS",
-            level="level6", lang='en')
-
+            level="level6",
+            lang="en",
+        )
 
     def test_6_12(self):
         self.assert_highlighted_chr(
             "print 'What will the die indicate this time?'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level6", lang='en')
-
+            level="level6",
+            lang="en",
+        )
 
     def test_6_13(self):
         self.assert_highlighted_chr_multi_line(
@@ -1415,8 +1388,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KK TTTTTT KK TTTTTTTTTTTTTT KKKKK SSSSSSSSSSS",
             "else print 'Wrong! It was ' correct_answer",
             "KKKK KKKKK SSSSSSSSSSSSSSSS TTTTTTTTTTTTTT",
-            level="level6", lang='en')
-
+            level="level6",
+            lang="en",
+        )
 
     def test_6_14(self):
         self.assert_highlighted_chr_multi_line(
@@ -1436,15 +1410,14 @@ class HighlighterTestWebSite(HighlightTester):
             "KK TTTTTT KK TTTTTTTTTTTTTT KKKKK SSSSSS",
             "else print 'mistake! it was ' correct_answer",
             "KKKK KKKKK SSSSSSSSSSSSSSSSSS TTTTTTTTTTTTTT",
-            level="level6", lang='en')
-
+            level="level6",
+            lang="en",
+        )
 
     def test_6_15(self):
         self.assert_highlighted_chr(
-            "print 'Welcome to this calculator!'",
-            "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level6", lang='en')
-
+            "print 'Welcome to this calculator!'", "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSS", level="level6", lang="en"
+        )
 
     def test_6_16(self):
         self.assert_highlighted_chr_multi_line(
@@ -1470,8 +1443,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK SSSSSSSSSSSSSSS TTTTT SSSSSSSSSSSSSSSSSS",
             "print 'Thank you, enjoy your meal!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level6", lang='en')
-
+            level="level6",
+            lang="en",
+        )
 
     def test_6_17(self):
         self.assert_highlighted_chr_multi_line(
@@ -1513,15 +1487,12 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK SSSSSSSSSSSSSSS TTTTT SSSSSSSSSSSSSSSSSS",
             "print 'Thank you, enjoy your meal!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level6", lang='en')
-
+            level="level6",
+            lang="en",
+        )
 
     def test_6_18(self):
-        self.assert_highlighted_chr(
-            "# place your code here",
-            "CCCCCCCCCCCCCCCCCCCCCC",
-            level="level6", lang='en')
-
+        self.assert_highlighted_chr("# place your code here", "CCCCCCCCCCCCCCCCCCCCCC", level="level6", lang="en")
 
     def test_6_19(self):
         self.assert_highlighted_chr_multi_line(
@@ -1561,8 +1532,9 @@ class HighlighterTestWebSite(HighlightTester):
             "TTTTTT K TTTTTT K TTTTTTTT",
             "print 'You are ' result ' percent smart.'",
             "KKKKK SSSSSSSSSS TTTTTT SSSSSSSSSSSSSSSSS",
-            level="level6", lang='en')
-
+            level="level6",
+            lang="en",
+        )
 
     def test_6_20(self):
         self.assert_highlighted_chr_multi_line(
@@ -1574,23 +1546,19 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSS",
             "print 'happy birthday to you'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSS",
-            level="level6", lang='en')
-
+            level="level6",
+            lang="en",
+        )
 
     def test_6_21(self):
         self.assert_highlighted_chr(
-            "print 'On to the next level!'",
-            "KKKKK SSSSSSSSSSSSSSSSSSSSSSS",
-            level="level6", lang='en')
-
-
+            "print 'On to the next level!'", "KKKKK SSSSSSSSSSSSSSSSSSSSSSS", level="level6", lang="en"
+        )
 
     def test_7_1(self):
         self.assert_highlighted_chr(
-            "repeat 3 times print 'Hedy is fun!'",
-            "KKKKKK N KKKKK KKKKK SSSSSSSSSSSSSS",
-            level="level7", lang='en')
-
+            "repeat 3 times print 'Hedy is fun!'", "KKKKKK N KKKKK KKKKK SSSSSSSSSSSSSS", level="level7", lang="en"
+        )
 
     def test_7_2(self):
         self.assert_highlighted_chr_multi_line(
@@ -1600,15 +1568,14 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKKK N KKKKK KKKKK SSSSSSS",
             "print 'Why is nobody helping me?'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level7", lang='en')
-
+            level="level7",
+            lang="en",
+        )
 
     def test_7_3(self):
         self.assert_highlighted_chr(
-            "repeat 5 times print 'Help!'",
-            "KKKKKK N KKKKK KKKKK SSSSSSS",
-            level="level7", lang='en')
-
+            "repeat 5 times print 'Help!'", "KKKKKK N KKKKK KKKKK SSSSSSS", level="level7", lang="en"
+        )
 
     def test_7_4(self):
         self.assert_highlighted_chr_multi_line(
@@ -1616,15 +1583,12 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKKK I I KKKKK SSSSSSSSSSSSSSSSSSSSSSSSS",
             "print 'Baby Shark'",
             "KKKKK SSSSSSSSSSSS",
-            level="level7", lang='en')
-
+            level="level7",
+            lang="en",
+        )
 
     def test_7_5(self):
-        self.assert_highlighted_chr(
-            "print 'Baby Shark'",
-            "KKKKK SSSSSSSSSSSS",
-            level="level7", lang='en')
-
+        self.assert_highlighted_chr("print 'Baby Shark'", "KKKKK SSSSSSSSSSSS", level="level7", lang="en")
 
     def test_7_6(self):
         self.assert_highlighted_chr_multi_line(
@@ -1632,8 +1596,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK SSSSSSSSSSSSSS",
             "repeat 3 times forward 10",
             "KKKKKK N KKKKK KKKKKKK NN",
-            level="level7", lang='en')
-
+            level="level7",
+            lang="en",
+        )
 
     def test_7_7(self):
         self.assert_highlighted_chr_multi_line(
@@ -1641,15 +1606,14 @@ class HighlighterTestWebSite(HighlightTester):
             "TTTTTT K TTTK TTTK TTTTK TTTTTT",
             "repeat _ _ print 'the dishwasher is' _",
             "KKKKKK I I KKKKK SSSSSSSSSSSSSSSSSSS I",
-            level="level7", lang='en')
-
+            level="level7",
+            lang="en",
+        )
 
     def test_7_8(self):
         self.assert_highlighted_chr(
-            "print 'Who does the dishes?'",
-            "KKKKK SSSSSSSSSSSSSSSSSSSSSS",
-            level="level7", lang='en')
-
+            "print 'Who does the dishes?'", "KKKKK SSSSSSSSSSSSSSSSSSSSSS", level="level7", lang="en"
+        )
 
     def test_7_9(self):
         self.assert_highlighted_chr_multi_line(
@@ -1657,15 +1621,17 @@ class HighlighterTestWebSite(HighlightTester):
             "TTTTTTT K NK NK NK NK NK TTTTTTTTT",
             "repeat _ _ print _ _ _",
             "KKKKKK I I KKKKK I I I",
-            level="level7", lang='en')
-
+            level="level7",
+            lang="en",
+        )
 
     def test_7_10(self):
         self.assert_highlighted_chr(
             "print 'What will the die indicate this time?'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level7", lang='en')
-
+            level="level7",
+            lang="en",
+        )
 
     def test_7_11(self):
         self.assert_highlighted_chr_multi_line(
@@ -1677,15 +1643,12 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKKK TTTTTT KKKKK TTTT K KKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             "print 'Thanks for your order! Its coming right up!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level7", lang='en')
-
+            level="level7",
+            lang="en",
+        )
 
     def test_7_12(self):
-        self.assert_highlighted_chr(
-            "# place your code here",
-            "CCCCCCCCCCCCCCCCCCCCCC",
-            level="level7", lang='en')
-
+        self.assert_highlighted_chr("# place your code here", "CCCCCCCCCCCCCCCCCCCCCC", level="level7", lang="en")
 
     def test_7_13(self):
         self.assert_highlighted_chr_multi_line(
@@ -1699,22 +1662,22 @@ class HighlighterTestWebSite(HighlightTester):
             "TTTTTT K TTTK TTK TTTTT",
             "repeat 3 times print 'My crystal ball says... ' answer at random",
             "KKKKKK N KKKKK KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSS TTTTTT KK KKKKKK",
-            level="level7", lang='en')
-
+            level="level7",
+            lang="en",
+        )
 
     def test_7_14(self):
         self.assert_highlighted_chr(
             "repeat 5 times print 'In the next level you can repeat multiple lines of code at once!'",
             "KKKKKK N KKKKK KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level7", lang='en')
-
+            level="level7",
+            lang="en",
+        )
 
     def test_7_15(self):
         self.assert_highlighted_chr(
-            "print 'Lets go to the next level!'",
-            "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level7", lang='en')
-
+            "print 'Lets go to the next level!'", "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSS", level="level7", lang="en"
+        )
 
     def test_8_1(self):
         self.assert_highlighted_chr_multi_line(
@@ -1724,8 +1687,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK SSSSSSSSSSSSS",
             "print 'This will be printed 5 times'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level8", lang='en')
-
+            level="level8",
+            lang="en",
+        )
 
     def test_8_2(self):
         self.assert_highlighted_chr_multi_line(
@@ -1735,8 +1699,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK SSSSSSSSSSSSSSSS",
             "print 'This is all repeated 5 times'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level8", lang='en')
-
+            level="level8",
+            lang="en",
+        )
 
     def test_8_3(self):
         self.assert_highlighted_chr_multi_line(
@@ -1762,15 +1727,12 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             "print 'The T-rex closes in and eats him in one big bite!🦖'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level8", lang='en')
-
+            level="level8",
+            lang="en",
+        )
 
     def test_8_4(self):
-        self.assert_highlighted_chr(
-            "# place your code here",
-            "CCCCCCCCCCCCCCCCCCCCCC",
-            level="level8", lang='en')
-
+        self.assert_highlighted_chr("# place your code here", "CCCCCCCCCCCCCCCCCCCCCC", level="level8", lang="en")
 
     def test_8_5(self):
         self.assert_highlighted_chr_multi_line(
@@ -1788,8 +1750,9 @@ class HighlighterTestWebSite(HighlightTester):
             "TTTTT K TTTTT K N",
             "print verse ' bottles of beer on the wall'",
             "KKKKK TTTTT SSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level8", lang='en')
-
+            level="level8",
+            lang="en",
+        )
 
     def test_8_6(self):
         self.assert_highlighted_chr_multi_line(
@@ -1801,8 +1764,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKK TTTTT",
             "forward 50",
             "KKKKKKK NN",
-            level="level8", lang='en')
-
+            level="level8",
+            lang="en",
+        )
 
     def test_8_7(self):
         self.assert_highlighted_chr_multi_line(
@@ -1816,15 +1780,17 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKK I",
             "forward _",
             "KKKKKKK I",
-            level="level8", lang='en')
-
+            level="level8",
+            lang="en",
+        )
 
     def test_8_8(self):
         self.assert_highlighted_chr(
             "hoeken = ask 'How many angles should I draw?'",
             "TTTTTT K KKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level8", lang='en')
-
+            level="level8",
+            lang="en",
+        )
 
     def test_8_9(self):
         self.assert_highlighted_chr_multi_line(
@@ -1844,8 +1810,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSS",
             "print 'Enjoy your meal!'",
             "KKKKK SSSSSSSSSSSSSSSSSS",
-            level="level8", lang='en')
-
+            level="level8",
+            lang="en",
+        )
 
     def test_8_10(self):
         self.assert_highlighted_chr_multi_line(
@@ -1865,8 +1832,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK",
             "print 'My crystal ball says...' answers at random",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSS TTTTTTT KK KKKKKK",
-            level="level8", lang='en')
-
+            level="level8",
+            lang="en",
+        )
 
     def test_8_11(self):
         self.assert_highlighted_chr_multi_line(
@@ -1886,16 +1854,14 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKK",
             "print 'Okay, you can stay here for a little longer!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level8", lang='en')
-
+            level="level8",
+            lang="en",
+        )
 
     def test_8_12(self):
         self.assert_highlighted_chr(
-            "print 'Lets go to the next level!'",
-            "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level8", lang='en')
-
-
+            "print 'Lets go to the next level!'", "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSS", level="level8", lang="en"
+        )
 
     def test_9_1(self):
         self.assert_highlighted_chr_multi_line(
@@ -1911,8 +1877,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKK",
             "print 'pizza is better'",
             "KKKKK SSSSSSSSSSSSSSSSS",
-            level="level9", lang='en')
-
+            level="level9",
+            lang="en",
+        )
 
     def test_9_2(self):
         self.assert_highlighted_chr_multi_line(
@@ -1940,8 +1907,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKK",
             "print 'Robin goes home'",
             "KKKKK SSSSSSSSSSSSSSSSS",
-            level="level9", lang='en')
-
+            level="level9",
+            lang="en",
+        )
 
     def test_9_3(self):
         self.assert_highlighted_chr_multi_line(
@@ -1995,15 +1963,12 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             "print 'She walks back'",
             "KKKKK SSSSSSSSSSSSSSSS",
-            level="level9", lang='en')
-
+            level="level9",
+            lang="en",
+        )
 
     def test_9_4(self):
-        self.assert_highlighted_chr(
-            "# place your code here",
-            "CCCCCCCCCCCCCCCCCCCCCC",
-            level="level9", lang='en')
-
+        self.assert_highlighted_chr("# place your code here", "CCCCCCCCCCCCCCCCCCCCCC", level="level9", lang="en")
 
     def test_9_5(self):
         self.assert_highlighted_chr_multi_line(
@@ -2033,8 +1998,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK SSSSSSSSSSS",
             "# finish this code",
             "CCCCCCCCCCCCCCCCCC",
-            level="level9", lang='en')
-
+            level="level9",
+            lang="en",
+        )
 
     def test_9_6(self):
         self.assert_highlighted_chr_multi_line(
@@ -2062,15 +2028,14 @@ class HighlighterTestWebSite(HighlightTester):
             "TTTTT K TTTTT K N",
             "print 'Great job! Your score is... ' score ' out of 10!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSS TTTTT SSSSSSSSSSSSS",
-            level="level9", lang='en')
-
+            level="level9",
+            lang="en",
+        )
 
     def test_9_7(self):
         self.assert_highlighted_chr(
-            "print 'Welcome to this calculator!'",
-            "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level9", lang='en')
-
+            "print 'Welcome to this calculator!'", "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSS", level="level9", lang="en"
+        )
 
     def test_9_8(self):
         self.assert_highlighted_chr_multi_line(
@@ -2112,8 +2077,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK SSSSSSSSSSSSSSS TTTTT SSSSSSSSS",
             "print 'Enjoy your meal!'",
             "KKKKK SSSSSSSSSSSSSSSSSS",
-            level="level9", lang='en')
-
+            level="level9",
+            lang="en",
+        )
 
     def test_9_9(self):
         self.assert_highlighted_chr_multi_line(
@@ -2153,15 +2119,17 @@ class HighlighterTestWebSite(HighlightTester):
             "KK TTTTTT KK TTTTT",
             "print 'Great! You survived!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSS",
-            level="level9", lang='en')
-
+            level="level9",
+            lang="en",
+        )
 
     def test_9_10(self):
         self.assert_highlighted_chr(
             "print 'Escape from the haunted house!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level9", lang='en')
-
+            level="level9",
+            lang="en",
+        )
 
     def test_9_11(self):
         self.assert_highlighted_chr_multi_line(
@@ -2173,15 +2141,14 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             "print 'if youre happy and you know it clap your hands'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level9", lang='en')
-
+            level="level9",
+            lang="en",
+        )
 
     def test_9_12(self):
         self.assert_highlighted_chr(
-            "print 'Lets go to the next level!'",
-            "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level9", lang='en')
-
+            "print 'Lets go to the next level!'", "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSS", level="level9", lang="en"
+        )
 
     def test_10_1(self):
         self.assert_highlighted_chr_multi_line(
@@ -2191,8 +2158,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KKK TTTTTT KK TTTTTTT",
             "print 'I love ' animal",
             "KKKKK SSSSSSSSS TTTTTT",
-            level="level10", lang='en')
-
+            level="level10",
+            lang="en",
+        )
 
     def test_10_2(self):
         self.assert_highlighted_chr_multi_line(
@@ -2216,15 +2184,12 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK SSSSSSSSSSSSSSSSSS",
             "print 'I see all the animals looking at me!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level10", lang='en')
-
+            level="level10",
+            lang="en",
+        )
 
     def test_10_3(self):
-        self.assert_highlighted_chr(
-            "# place your code here",
-            "CCCCCCCCCCCCCCCCCCCCCC",
-            level="level10", lang='en')
-
+        self.assert_highlighted_chr("# place your code here", "CCCCCCCCCCCCCCCCCCCCCC", level="level10", lang="en")
 
     def test_10_4(self):
         self.assert_highlighted_chr_multi_line(
@@ -2286,8 +2251,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK SSSSSSSSSS TTTTT",
             "print 'everywhere a ' sound sound",
             "KKKKK SSSSSSSSSSSSSSS TTTTT TTTTT",
-            level="level10", lang='en')
-
+            level="level10",
+            lang="en",
+        )
 
     def test_10_5(self):
         self.assert_highlighted_chr_multi_line(
@@ -2299,8 +2265,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KKK TTT KK TTTT",
             "print names at random ' does the dishes on ' day",
             "KKKKK TTTTT KK KKKKKK SSSSSSSSSSSSSSSSSSSSSS TTT",
-            level="level10", lang='en')
-
+            level="level10",
+            lang="en",
+        )
 
     def test_10_6(self):
         self.assert_highlighted_chr_multi_line(
@@ -2314,8 +2281,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK TTTTTT SSSSSSSSSS TTTTTTT KK KKKKKK",
             "sleep",
             "KKKKK",
-            level="level10", lang='en')
-
+            level="level10",
+            lang="en",
+        )
 
     def test_10_7(self):
         self.assert_highlighted_chr_multi_line(
@@ -2327,8 +2295,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KKK TTTTTT KK TTTTTTT",
             "print player ' chooses ' choices at random",
             "KKKKK TTTTTT SSSSSSSSSSS TTTTTTT KK KKKKKK",
-            level="level10", lang='en')
-
+            level="level10",
+            lang="en",
+        )
 
     def test_10_8(self):
         self.assert_highlighted_chr_multi_line(
@@ -2350,8 +2319,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKK",
             "print 'Thats wrong. The right answer is ' correct",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS TTTTTTT",
-            level="level10", lang='en')
-
+            level="level10",
+            lang="en",
+        )
 
     def test_10_9(self):
         self.assert_highlighted_chr_multi_line(
@@ -2363,8 +2333,9 @@ class HighlighterTestWebSite(HighlightTester):
             "TTTT K KKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS TTTTTT SSS",
             "print food ' will be your ' course",
             "KKKKK TTTT SSSSSSSSSSSSSSSS TTTTTT",
-            level="level10", lang='en')
-
+            level="level10",
+            lang="en",
+        )
 
     def test_10_10(self):
         self.assert_highlighted_chr_multi_line(
@@ -2380,15 +2351,17 @@ class HighlighterTestWebSite(HighlightTester):
             "TTTT K KKK TTTT SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS TTTTTT SSS",
             "print name ' orders ' food ' as their ' course",
             "KKKKK TTTT SSSSSSSSSS TTTT SSSSSSSSSSSS TTTTTT",
-            level="level10", lang='en')
-
+            level="level10",
+            lang="en",
+        )
 
     def test_10_11(self):
         self.assert_highlighted_chr(
             "courses = appetizer, main course, dessert",
             "TTTTTTT K TTTTTTTTTK TTTTTTTTTTTK TTTTTTT",
-            level="level10", lang='en')
-
+            level="level10",
+            lang="en",
+        )
 
     def test_10_12(self):
         self.assert_highlighted_chr_multi_line(
@@ -2410,8 +2383,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK TTTT SSSSSSSSSSSSSS TTTT KK KKKKKK SSSSSSSSSSSSSSSS",
             "sleep",
             "KKKKK",
-            level="level10", lang='en')
-
+            level="level10",
+            lang="en",
+        )
 
     def test_10_13(self):
         self.assert_highlighted_chr_multi_line(
@@ -2431,25 +2405,24 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK TTTT SSSSSSSSSSSSSSS TTTTTTTT KK KKKKKK",
             "print name 's greatest fear is ' fears at random",
             "KKKKK TTTT SSSSSSSSSSSSSSSSSSSSS TTTTT KK KKKKKK",
-            level="level10", lang='en')
-
+            level="level10",
+            lang="en",
+        )
 
     def test_10_14(self):
         self.assert_highlighted_chr(
-            "print 'Lets go to the next level!'",
-            "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level10", lang='en')
+            "print 'Lets go to the next level!'", "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSS", level="level10", lang="en"
+        )
 
-
-    
     def test_11_1(self):
         self.assert_highlighted_chr_multi_line(
             "for counter in range 1 to 5",
             "KKK TTTTTTT KK KKKKK N KK N",
             "print counter",
             "KKKKK TTTTTTT",
-            level="level11", lang='en')
-
+            level="level11",
+            lang="en",
+        )
 
     def test_11_2(self):
         self.assert_highlighted_chr_multi_line(
@@ -2469,15 +2442,12 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKK",
             "print 'NO MORE MONKEYS JUMPING ON THE BED!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level11", lang='en')
-
+            level="level11",
+            lang="en",
+        )
 
     def test_11_3(self):
-        self.assert_highlighted_chr(
-            "# place your code here",
-            "CCCCCCCCCCCCCCCCCCCCCC",
-            level="level11", lang='en')
-
+        self.assert_highlighted_chr("# place your code here", "CCCCCCCCCCCCCCCCCCCCCC", level="level11", lang="en")
 
     def test_11_4(self):
         self.assert_highlighted_chr_multi_line(
@@ -2507,8 +2477,9 @@ class HighlighterTestWebSite(HighlightTester):
             "TTTTT K N K TTTTTT",
             "print 'That will be ' price ' dollars, please!'",
             "KKKKK SSSSSSSSSSSSSSS TTTTT SSSSSSSSSSSSSSSSSSS",
-            level="level11", lang='en')
-
+            level="level11",
+            lang="en",
+        )
 
     def test_11_5(self):
         self.assert_highlighted_chr_multi_line(
@@ -2550,15 +2521,17 @@ class HighlighterTestWebSite(HighlightTester):
             "KK TTTTTT KK TTTTT",
             "print 'Great! You survived!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSS",
-            level="level11", lang='en')
-
+            level="level11",
+            lang="en",
+        )
 
     def test_11_6(self):
         self.assert_highlighted_chr(
             "print 'Escape from the haunted house!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level11", lang='en')
-
+            level="level11",
+            lang="en",
+        )
 
     def test_11_7(self):
         self.assert_highlighted_chr_multi_line(
@@ -2570,24 +2543,24 @@ class HighlighterTestWebSite(HighlightTester):
             "TTTT K TTTTTTTTTTTTTTTTTTTTT",
             "print show 'is my favorite show!'",
             "KKKKK TTTT SSSSSSSSSSSSSSSSSSSSSS",
-            level="level11", lang='en')
-
+            level="level11",
+            lang="en",
+        )
 
     def test_11_8(self):
         self.assert_highlighted_chr(
-            "print 'Lets go to the next level!'",
-            "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level11", lang='en')
+            "print 'Lets go to the next level!'", "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSS", level="level11", lang="en"
+        )
 
-    
     def test_12_1(self):
         self.assert_highlighted_chr_multi_line(
             "print 'decimal numbers now need to use a dot'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             "print 2.5 + 2.5",
             "KKKKK NNN K NNN",
-            level="level12", lang='en')
-
+            level="level12",
+            lang="en",
+        )
 
     def test_12_2(self):
         self.assert_highlighted_chr_multi_line(
@@ -2595,8 +2568,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             "print 2.5 + 2.5",
             "KKKKK NNN K NNN",
-            level="level12", lang='en')
-
+            level="level12",
+            lang="en",
+        )
 
     def test_12_3(self):
         self.assert_highlighted_chr_multi_line(
@@ -2604,8 +2578,9 @@ class HighlighterTestWebSite(HighlightTester):
             "TTTT K SSSSSSSSSSSSSSSS",
             "print 'Hello ' name",
             "KKKKK SSSSSSSS TTTT",
-            level="level12", lang='en')
-
+            level="level12",
+            lang="en",
+        )
 
     def test_12_4(self):
         self.assert_highlighted_chr_multi_line(
@@ -2613,8 +2588,9 @@ class HighlighterTestWebSite(HighlightTester):
             "TTTTTTTTTTT K SSSSSSSSSSSK SSSSSSSSK SSSSSSSSSS",
             "print superheroes at random",
             "KKKKK TTTTTTTTTTT KK KKKKKK",
-            level="level12", lang='en')
-
+            level="level12",
+            lang="en",
+        )
 
     def test_12_5(self):
         self.assert_highlighted_chr_multi_line(
@@ -2624,17 +2600,14 @@ class HighlighterTestWebSite(HighlightTester):
             "KK TTTT K SSSSSSSSSSSSSSSS",
             "print 'Hi there!'",
             "KKKKK SSSSSSSSSSS",
-            level="level12", lang='en')
-
+            level="level12",
+            lang="en",
+        )
 
     def test_12_6(self):
         self.assert_highlighted_chr_multi_line(
-            "score = 25",
-            "TTTTT K NN",
-            "print 'You got ' score",
-            "KKKKK SSSSSSSSSS TTTTT",
-            level="level12", lang='en')
-
+            "score = 25", "TTTTT K NN", "print 'You got ' score", "KKKKK SSSSSSSSSS TTTTT", level="level12", lang="en"
+        )
 
     def test_12_7(self):
         self.assert_highlighted_chr_multi_line(
@@ -2644,8 +2617,9 @@ class HighlighterTestWebSite(HighlightTester):
             "T K SSSSSSSS",
             "print a + b",
             "KKKKK T K T",
-            level="level12", lang='en')
-
+            level="level12",
+            lang="en",
+        )
 
     def test_12_8(self):
         self.assert_highlighted_chr_multi_line(
@@ -2653,15 +2627,12 @@ class HighlighterTestWebSite(HighlightTester):
             "TTTT K SSSSSSSSSSSSSSSSSSSSSS",
             "print name ' was eating a piece of cake, when suddenly...'",
             "KKKKK TTTT SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level12", lang='en')
-
+            level="level12",
+            lang="en",
+        )
 
     def test_12_9(self):
-        self.assert_highlighted_chr(
-            "# place your code here",
-            "CCCCCCCCCCCCCCCCCCCCCC",
-            level="level12", lang='en')
-
+        self.assert_highlighted_chr("# place your code here", "CCCCCCCCCCCCCCCCCCCCCC", level="level12", lang="en")
 
     def test_12_10(self):
         self.assert_highlighted_chr_multi_line(
@@ -2681,8 +2652,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             "print action",
             "KKKKK TTTTTT",
-            level="level12", lang='en')
-
+            level="level12",
+            lang="en",
+        )
 
     def test_12_11(self):
         self.assert_highlighted_chr_multi_line(
@@ -2694,8 +2666,9 @@ class HighlighterTestWebSite(HighlightTester):
             "TTTTTT K TTTTTTT K TTTTTTT",
             "print number1 ' plus ' number2 ' is ' answer",
             "KKKKK TTTTTTT SSSSSSSS TTTTTTT SSSSSS TTTTTT",
-            level="level12", lang='en')
-
+            level="level12",
+            lang="en",
+        )
 
     def test_12_12(self):
         self.assert_highlighted_chr_multi_line(
@@ -2723,8 +2696,9 @@ class HighlighterTestWebSite(HighlightTester):
             "TTTTT K TTTTT K NNNN",
             "print 'That will be ' price ' dollar, please'",
             "KKKKK SSSSSSSSSSSSSSS TTTTT SSSSSSSSSSSSSSSSS",
-            level="level12", lang='en')
-
+            level="level12",
+            lang="en",
+        )
 
     def test_12_13(self):
         self.assert_highlighted_chr_multi_line(
@@ -2738,8 +2712,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK",
             "print fortunes at random",
             "KKKKK TTTTTTTT KK KKKKKK",
-            level="level12", lang='en')
-
+            level="level12",
+            lang="en",
+        )
 
     def test_12_14(self):
         self.assert_highlighted_chr_multi_line(
@@ -2759,8 +2734,9 @@ class HighlighterTestWebSite(HighlightTester):
             "TTTTT K TTTTTTT K TTTTTTTTT",
             "print 'You can buy a ' wish ' in ' weeks ' weeks.'",
             "KKKKK SSSSSSSSSSSSSSSS TTTT SSSSSS TTTTT SSSSSSSSS",
-            level="level12", lang='en')
-
+            level="level12",
+            lang="en",
+        )
 
     def test_12_15(self):
         self.assert_highlighted_chr_multi_line(
@@ -2786,15 +2762,12 @@ class HighlighterTestWebSite(HighlightTester):
             "T KK SSSSSSSSSSSSSSSS",
             "print a + b",
             "KKKKK T K T",
-            level="level12", lang='en')
-
+            level="level12",
+            lang="en",
+        )
 
     def test_12_16(self):
-        self.assert_highlighted_chr(
-            "## place your code here",
-            "CCCCCCCCCCCCCCCCCCCCCCC",
-            level="level12", lang='en')
-
+        self.assert_highlighted_chr("## place your code here", "CCCCCCCCCCCCCCCCCCCCCCC", level="level12", lang="en")
 
     def test_12_17(self):
         self.assert_highlighted_chr_multi_line(
@@ -2816,15 +2789,14 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKK",
             "print 'Access denied!'",
             "KKKKK SSSSSSSSSSSSSSSS",
-            level="level12", lang='en')
-
+            level="level12",
+            lang="en",
+        )
 
     def test_12_18(self):
         self.assert_highlighted_chr(
-            "print 'Lets go to the next level!'",
-            "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level12", lang='en')
-
+            "print 'Lets go to the next level!'", "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSS", level="level12", lang="en"
+        )
 
     def test_13_1(self):
         self.assert_highlighted_chr_multi_line(
@@ -2836,8 +2808,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KK TTTT KK SSSSSS KKK TTT KK N",
             "print 'You are the real Hedy!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level13", lang='en')
-
+            level="level13",
+            lang="en",
+        )
 
     def test_13_2(self):
         self.assert_highlighted_chr_multi_line(
@@ -2887,15 +2860,12 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             "sword = 'found'",
             "TTTTT K SSSSSSS",
-            level="level13", lang='en')
-
+            level="level13",
+            lang="en",
+        )
 
     def test_13_3(self):
-        self.assert_highlighted_chr(
-            "# place your code here",
-            "CCCCCCCCCCCCCCCCCCCCCC",
-            level="level13", lang='en')
-
+        self.assert_highlighted_chr("# place your code here", "CCCCCCCCCCCCCCCCCCCCCC", level="level13", lang="en")
 
     def test_13_4(self):
         self.assert_highlighted_chr_multi_line(
@@ -2921,8 +2891,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KK TTTTTTTTTTTTTTT KK SSSSSS KKK TTTTTTTTTTT KK SSSSSSSSSS",
             "print 'The computer wins!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSS",
-            level="level13", lang='en')
-
+            level="level13",
+            lang="en",
+        )
 
     def test_13_5(self):
         self.assert_highlighted_chr_multi_line(
@@ -2940,8 +2911,9 @@ class HighlighterTestWebSite(HighlightTester):
             "TTTTT K TTTTT K N",
             "print 'That will be ' price ' dollars'",
             "KKKKK SSSSSSSSSSSSSSS TTTTT SSSSSSSSSS",
-            level="level13", lang='en')
-
+            level="level13",
+            lang="en",
+        )
 
     def test_13_6(self):
         self.assert_highlighted_chr_multi_line(
@@ -2951,8 +2923,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KK TTTTTT KK SSSSSSS KK TTTTTT KK SSSSSSS",
             "print 'Thats a healthy choice'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level13", lang='en')
-
+            level="level13",
+            lang="en",
+        )
 
     def test_13_7(self):
         self.assert_highlighted_chr_multi_line(
@@ -2968,15 +2941,12 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKK",
             "print 'Go to the trainstation at 10.00'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level13", lang='en')
-
+            level="level13",
+            lang="en",
+        )
 
     def test_13_8(self):
-        self.assert_highlighted_chr(
-            "## place your code here",
-            "CCCCCCCCCCCCCCCCCCCCCCC",
-            level="level13", lang='en')
-
+        self.assert_highlighted_chr("## place your code here", "CCCCCCCCCCCCCCCCCCCCCCC", level="level13", lang="en")
 
     def test_13_9(self):
         self.assert_highlighted_chr_multi_line(
@@ -2996,15 +2966,14 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKK",
             "print 'Great! You have passed the subject!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level13", lang='en')
-
+            level="level13",
+            lang="en",
+        )
 
     def test_13_10(self):
         self.assert_highlighted_chr(
-            "print 'Lets go to the next level!'",
-            "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level13", lang='en')
-
+            "print 'Lets go to the next level!'", "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSS", level="level13", lang="en"
+        )
 
     def test_14_1(self):
         self.assert_highlighted_chr_multi_line(
@@ -3018,8 +2987,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKK",
             "print 'You are older than me!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level14", lang='en')
-
+            level="level14",
+            lang="en",
+        )
 
     def test_14_2(self):
         self.assert_highlighted_chr_multi_line(
@@ -3029,8 +2999,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KK TTT K NN",
             "print 'You are older than I am!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level14", lang='en')
-
+            level="level14",
+            lang="en",
+        )
 
     def test_14_3(self):
         self.assert_highlighted_chr_multi_line(
@@ -3040,8 +3011,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KK TTTT KK SSSSSS",
             "print 'You are coo!'",
             "KKKKK SSSSSSSSSSSSSS",
-            level="level14", lang='en')
-
+            level="level14",
+            lang="en",
+        )
 
     def test_14_4(self):
         self.assert_highlighted_chr_multi_line(
@@ -3051,8 +3023,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KK TTTT KK SSSSSS",
             "print 'You are not Hedy'",
             "KKKKK SSSSSSSSSSSSSSSSSS",
-            level="level14", lang='en')
-
+            level="level14",
+            lang="en",
+        )
 
     def test_14_5(self):
         self.assert_highlighted_chr_multi_line(
@@ -3084,15 +3057,12 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK SSSSSSSSSS",
             "game = 'over'",
             "TTTT K SSSSSS",
-            level="level14", lang='en')
-
+            level="level14",
+            lang="en",
+        )
 
     def test_14_6(self):
-        self.assert_highlighted_chr(
-            "# place your code here",
-            "CCCCCCCCCCCCCCCCCCCCCC",
-            level="level14", lang='en')
-
+        self.assert_highlighted_chr("# place your code here", "CCCCCCCCCCCCCCCCCCCCCC", level="level14", lang="en")
 
     def test_14_7(self):
         self.assert_highlighted_chr_multi_line(
@@ -3136,8 +3106,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKK",
             "print 'GAME OVER'",
             "KKKKK SSSSSSSSSSS",
-            level="level14", lang='en')
-
+            level="level14",
+            lang="en",
+        )
 
     def test_14_8(self):
         self.assert_highlighted_chr_multi_line(
@@ -3163,8 +3134,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSS",
             "print 'Lets go shopping!'",
             "KKKKK SSSSSSSSSSSSSSSSSSS",
-            level="level14", lang='en')
-
+            level="level14",
+            lang="en",
+        )
 
     def test_14_9(self):
         self.assert_highlighted_chr_multi_line(
@@ -3202,8 +3174,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KK TTTTTTTT K TTTTTTTT",
             "print 'You belong to the B club'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level14", lang='en')
-
+            level="level14",
+            lang="en",
+        )
 
     def test_14_10(self):
         self.assert_highlighted_chr_multi_line(
@@ -3223,15 +3196,14 @@ class HighlighterTestWebSite(HighlightTester):
             "KK TTTTTT KK SSSSS",
             "print 'Ok we will continue'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSS",
-            level="level14", lang='en')
-
+            level="level14",
+            lang="en",
+        )
 
     def test_14_11(self):
         self.assert_highlighted_chr(
-            "print 'Lets go to the next level!'",
-            "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level14", lang='en')
-
+            "print 'Lets go to the next level!'", "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSS", level="level14", lang="en"
+        )
 
     def test_15_1(self):
         self.assert_highlighted_chr_multi_line(
@@ -3243,8 +3215,9 @@ class HighlighterTestWebSite(HighlightTester):
             "TTTTTT K KKK SSSSSSSSSSSSSSSSSSSS",
             "print 'A correct answer has been given'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level15", lang='en')
-
+            level="level15",
+            lang="en",
+        )
 
     def test_15_2(self):
         self.assert_highlighted_chr_multi_line(
@@ -3272,15 +3245,12 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSS TTTTTTTT",
             "print 'Now you can enter the house!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level15", lang='en')
-
+            level="level15",
+            lang="en",
+        )
 
     def test_15_3(self):
-        self.assert_highlighted_chr(
-            "# place your code here",
-            "CCCCCCCCCCCCCCCCCCCCCC",
-            level="level15", lang='en')
-
+        self.assert_highlighted_chr("# place your code here", "CCCCCCCCCCCCCCCCCCCCCC", level="level15", lang="en")
 
     def test_15_4(self):
         self.assert_highlighted_chr_multi_line(
@@ -3302,8 +3272,9 @@ class HighlighterTestWebSite(HighlightTester):
             "TTTTT K TTTTT K N",
             "print 'Yes! You have thrown 6 in ' tries ' tries.'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSS TTTTT SSSSSSSSS",
-            level="level15", lang='en')
-
+            level="level15",
+            lang="en",
+        )
 
     def test_15_5(self):
         self.assert_highlighted_chr_multi_line(
@@ -3335,8 +3306,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK SSSSSSSSSS",
             "won = 'yes'",
             "TTT K SSSSS",
-            level="level15", lang='en')
-
+            level="level15",
+            lang="en",
+        )
 
     def test_15_6(self):
         self.assert_highlighted_chr_multi_line(
@@ -3366,8 +3338,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK SSSSSSSSSSS",
             "print 'You win!'",
             "KKKKK SSSSSSSSSS",
-            level="level15", lang='en')
-
+            level="level15",
+            lang="en",
+        )
 
     def test_15_7(self):
         self.assert_highlighted_chr_multi_line(
@@ -3385,8 +3358,9 @@ class HighlighterTestWebSite(HighlightTester):
             "TTTT K KKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
             "print 'Thank you!'",
             "KKKKK SSSSSSSSSSSS",
-            level="level15", lang='en')
-
+            level="level15",
+            lang="en",
+        )
 
     def test_15_8(self):
         self.assert_highlighted_chr_multi_line(
@@ -3408,15 +3382,14 @@ class HighlighterTestWebSite(HighlightTester):
             "KKK TTTTT KK TTTTTT",
             "print 'A ' animal ' says ' sound",
             "KKKKK SSSS TTTTTT SSSSSSSS TTTTT",
-            level="level15", lang='en')
-
+            level="level15",
+            lang="en",
+        )
 
     def test_15_9(self):
         self.assert_highlighted_chr(
-            "print 'Lets go to the next level!'",
-            "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level15", lang='en')
-
+            "print 'Lets go to the next level!'", "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSS", level="level15", lang="en"
+        )
 
     def test_16_1(self):
         self.assert_highlighted_chr_multi_line(
@@ -3424,8 +3397,9 @@ class HighlighterTestWebSite(HighlightTester):
             "TTTTT K KSSSSSSSK SSSSSSSSK SSSSSSSSK",
             "print fruit",
             "KKKKK TTTTT",
-            level="level16", lang='en')
-
+            level="level16",
+            lang="en",
+        )
 
     def test_16_2(self):
         self.assert_highlighted_chr_multi_line(
@@ -3439,8 +3413,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK SSSSSSSSSSSSSSSSSSSSSS TTTTTTTKTK",
             "print 'is ' lucky_numbers[i]",
             "KKKKK SSSSS TTTTTTTTTTTTTKTK",
-            level="level16", lang='en')
-
+            level="level16",
+            lang="en",
+        )
 
     def test_16_3(self):
         self.assert_highlighted_chr_multi_line(
@@ -3488,15 +3463,12 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSS",
             "print 'early in the morning'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSS",
-            level="level16", lang='en')
-
+            level="level16",
+            lang="en",
+        )
 
     def test_16_4(self):
-        self.assert_highlighted_chr(
-            "# place your code here",
-            "CCCCCCCCCCCCCCCCCCCCCC",
-            level="level16", lang='en')
-
+        self.assert_highlighted_chr("# place your code here", "CCCCCCCCCCCCCCCCCCCCCC", level="level16", lang="en")
 
     def test_16_5(self):
         self.assert_highlighted_chr_multi_line(
@@ -3548,8 +3520,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK TTTTTTTTKTK",
             "print 'GAME OVER'",
             "KKKKK SSSSSSSSSSS",
-            level="level16", lang='en')
-
+            level="level16",
+            lang="en",
+        )
 
     def test_16_6(self):
         self.assert_highlighted_chr_multi_line(
@@ -3577,8 +3550,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK SSSSSSSSS TTTTTTTTTTTTKTK SSSSSSSSS TTTTTTTTTTTKTK",
             "print 'You gave ' score ' correct answers.'",
             "KKKKK SSSSSSSSSSS TTTTT SSSSSSSSSSSSSSSSSSS",
-            level="level16", lang='en')
-
+            level="level16",
+            lang="en",
+        )
 
     def test_16_7(self):
         self.assert_highlighted_chr_multi_line(
@@ -3596,15 +3570,14 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKK",
             "print 'Yikes...'",
             "KKKKK SSSSSSSSSS",
-            level="level16", lang='en')
-
+            level="level16",
+            lang="en",
+        )
 
     def test_16_8(self):
         self.assert_highlighted_chr(
-            "print 'Lets go to the next level!'",
-            "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level16", lang='en')
-
+            "print 'Lets go to the next level!'", "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSS", level="level16", lang="en"
+        )
 
     def test_17_1(self):
         self.assert_highlighted_chr_multi_line(
@@ -3614,8 +3587,9 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK T",
             "print 'Ready or not, here I come!'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level17", lang='en')
-
+            level="level17",
+            lang="en",
+        )
 
     def test_17_2(self):
         self.assert_highlighted_chr_multi_line(
@@ -3637,14 +3611,14 @@ class HighlighterTestWebSite(HighlightTester):
             "KKKKK",
             "print 'Better luck next time..'",
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level17", lang='en')
-
+            level="level17",
+            lang="en",
+        )
 
     def test_17_3(self):
         self.assert_highlighted_chr(
-            "print 'Lets go to the next level!'",
-            "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-            level="level17", lang='en')
+            "print 'Lets go to the next level!'", "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSS", level="level17", lang="en"
+        )
 
     def test_18_1(self):
         self.assert_highlighted_chr_multi_line(
@@ -3652,8 +3626,9 @@ class HighlighterTestWebSite(HighlightTester):
             "TTTT K SSSSSS",
             "print('My name is ', naam)",
             "KKKKKKSSSSSSSSSSSSSK TTTTK",
-            level="level18", lang='en')
-
+            level="level18",
+            lang="en",
+        )
 
     def test_18_2(self):
         self.assert_highlighted_chr_multi_line(
@@ -3663,13 +3638,9 @@ class HighlighterTestWebSite(HighlightTester):
             "TTTT K SSSSSS",
             "print('my name is ', name)",
             "KKKKKKSSSSSSSSSSSSSK TTTTK",
-            level="level18", lang='en')
-
+            level="level18",
+            lang="en",
+        )
 
     def test_18_3(self):
-        self.assert_highlighted_chr(
-            "print ('Great job!!!')",
-            "KKKKK KSSSSSSSSSSSSSSK",
-            level="level18", lang='en')
-
-
+        self.assert_highlighted_chr("print ('Great job!!!')", "KKKKK KSSSSSSSSSSSSSSK", level="level18", lang="en")

@@ -14,10 +14,10 @@ def routes(app, database, achievements, parsons):
     ACHIEVEMENTS = achievements
     PARSONS = parsons
 
-    @app.route('/parsons/get-exercise/<int:level>/<int:exercise>', methods=['GET'])
+    @app.route("/parsons/get-exercise/<int:level>/<int:exercise>", methods=["GET"])
     def get_parsons_exercise(level, exercise):
         if exercise > PARSONS[g.lang].get_highest_exercise_level(level) or exercise < 1:
-            return gettext('exercise_doesnt_exist'), 400
+            return gettext("exercise_doesnt_exist"), 400
 
         exercise = PARSONS[g.lang].get_parsons_data_for_level_exercise(level, exercise, g.keyword_lang)
         return jsonify(exercise), 200

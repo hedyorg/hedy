@@ -6,7 +6,7 @@ from parameterized import parameterized
 
 class TestsLevel4(HedyTester):
     level = 4
-    '''
+    """
     Tests should be ordered as follows:
      * commands in the order of hedy.py e.g. for level 1: ['print', 'ask', 'echo', 'turn', 'forward']
      * combined tests
@@ -17,7 +17,7 @@ class TestsLevel4(HedyTester):
      * single keyword positive tests are just keyword or keyword_special_case
      * multi keyword positive tests are keyword1_keywords_2
      * negative tests should be situation_gives_exception
-    '''
+    """
 
     #
     # print tests
@@ -26,63 +26,41 @@ class TestsLevel4(HedyTester):
         code = "print 'hallo wereld!'"
         expected = "print(f'hallo wereld!')"
 
-        self.multi_level_tester(
-            code=code,
-            max_level=11,
-            expected=expected)
+        self.multi_level_tester(code=code, max_level=11, expected=expected)
 
     def test_print_double_quoted_text(self):
         code = 'print "hallo wereld!"'
         expected = "print(f'hallo wereld!')"
 
-        self.multi_level_tester(
-            code=code,
-            max_level=11,
-            expected=expected)
+        self.multi_level_tester(code=code, max_level=11, expected=expected)
 
     def test_print_single_quoted_text_with_inner_double_quote(self):
         code = """print 'quote is "'"""
         expected = """print(f'quote is "')"""
 
-        self.multi_level_tester(
-            code=code,
-            max_level=11,
-            expected=expected)
+        self.multi_level_tester(code=code, max_level=11, expected=expected)
 
     def test_print_double_quoted_text_with_inner_single_quote(self):
         code = '''print "It's me"'''
         expected = """print(f'It\\'s me')"""
 
-        self.multi_level_tester(
-            code=code,
-            max_level=11,
-            expected=expected)
+        self.multi_level_tester(code=code, max_level=11, expected=expected)
 
     def test_print_with_space_gives_invalid(self):
         code = " print 'Hallo welkom bij Hedy!'"
 
-        self.multi_level_tester(
-            code=code,
-            exception=hedy.exceptions.InvalidSpaceException,
-            max_level=7)
+        self.multi_level_tester(code=code, exception=hedy.exceptions.InvalidSpaceException, max_level=7)
 
     def test_print_no_space(self):
         code = "print'hallo wereld!'"
         expected = "print(f'hallo wereld!')"
 
-        self.multi_level_tester(
-            code=code,
-            max_level=11,
-            expected=expected)
+        self.multi_level_tester(code=code, max_level=11, expected=expected)
 
     def test_print_comma(self):
         code = "print 'Hi, I am Hedy'"
         expected = "print(f'Hi, I am Hedy')"
-        self.multi_level_tester(
-            code=code,
-            max_level=11,
-            expected=expected
-        )
+        self.multi_level_tester(code=code, max_level=11, expected=expected)
 
     def test_print_slash(self):
         code = "print 'Yes/No'"
@@ -95,33 +73,18 @@ class TestsLevel4(HedyTester):
         expected = "print(f'Yes\\\\No')"
         output = "Yes\\No"
 
-        self.multi_level_tester(
-            code=code,
-            expected=expected,
-            output=output,
-            max_level=11,
-            translate=True
-        )
+        self.multi_level_tester(code=code, expected=expected, output=output, max_level=11, translate=True)
 
     def test_print_with_backslash_at_end(self):
         code = "print 'Welcome to \\'"
         expected = "print(f'Welcome to \\\\')"
-        self.multi_level_tester(
-            code=code,
-            max_level=11,
-            expected=expected,
-            translate=True
-        )
+        self.multi_level_tester(code=code, max_level=11, expected=expected, translate=True)
 
     def test_print_with_spaces(self):
         code = "print        'hallo!'"
         expected = "print(f'hallo!')"
 
-        self.multi_level_tester(
-            code=code,
-            max_level=11,
-            expected=expected
-        )
+        self.multi_level_tester(code=code, max_level=11, expected=expected)
 
     def test_print_asterisk(self):
         code = "print '*Jouw* favoriet is dus kleur'"
@@ -135,11 +98,7 @@ class TestsLevel4(HedyTester):
 
         code = "print hedy 123"
 
-        self.multi_level_tester(
-            code=code,
-            max_level=5,
-            exception=hedy.exceptions.UnquotedTextException
-        )
+        self.multi_level_tester(code=code, max_level=5, exception=hedy.exceptions.UnquotedTextException)
 
     def test_print_without_quotes_gives_error_from_transpiler(self):
         # in other cases, there might be two different problems
@@ -160,11 +119,7 @@ class TestsLevel4(HedyTester):
         # same as print for level 4
         code = "pietje is ask hedy 123"
 
-        self.multi_level_tester(
-            code=code,
-            max_level=4,
-            exception=hedy.exceptions.UnquotedTextException
-        )
+        self.multi_level_tester(code=code, max_level=4, exception=hedy.exceptions.UnquotedTextException)
 
     def test_ask_without_quotes_gives_error_from_transpiler(self):
         # same as print
@@ -176,16 +131,17 @@ class TestsLevel4(HedyTester):
             exception=hedy.exceptions.UnquotedTextException,
         )
 
-
     def test_print_similar_var_gives_error(self):
         # continuing: is this unquoted? or did we forget an initialization of a variable?
 
         # a quick analysis of the logs shows that in most cases quotes are forgotten
         # so we will only raise var if there is a variable that is a bit similar (see next test)
 
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
             werld is ask 'tegen wie zeggen we hallo?'
-            print hallo wereld""")
+            print hallo wereld"""
+        )
 
         self.multi_level_tester(
             code=code,
@@ -196,62 +152,58 @@ class TestsLevel4(HedyTester):
     @parameterized.expand(HedyTester.quotes)
     def test_print_without_opening_quote_gives_error(self, q):
         code = f"print hedy 123{q}"
-        self.multi_level_tester(
-            code,
-            max_level=6,
-            exception=hedy.exceptions.UnquotedTextException
-        )
+        self.multi_level_tester(code, max_level=6, exception=hedy.exceptions.UnquotedTextException)
 
     @parameterized.expand(HedyTester.quotes)
     def test_print_without_closing_quote_gives_error(self, q):
         code = f"print {q}hedy 123"
-        self.multi_level_tester(
-            code,
-            max_level=6,
-            exception=hedy.exceptions.UnquotedTextException
-        )
+        self.multi_level_tester(code, max_level=6, exception=hedy.exceptions.UnquotedTextException)
 
     def test_print_single_quoted_text_var(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
         naam is 'Hedy'
-        print 'ik heet ' naam""")
-
-        expected = textwrap.dedent("""\
-        naam = '\\'Hedy\\''
-        print(f'ik heet {naam}')""")
-
-        self.multi_level_tester(
-            max_level=11,
-            code=code,
-            expected=expected
+        print 'ik heet ' naam"""
         )
+
+        expected = textwrap.dedent(
+            """\
+        naam = '\\'Hedy\\''
+        print(f'ik heet {naam}')"""
+        )
+
+        self.multi_level_tester(max_level=11, code=code, expected=expected)
 
     def test_print_double_quoted_text_var(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
         naam is "Hedy"
-        print 'ik heet ' naam""")
-
-        expected = textwrap.dedent("""\
-        naam = '"Hedy"'
-        print(f'ik heet {naam}')""")
-
-        self.multi_level_tester(
-            max_level=11,
-            code=code,
-            expected=expected
+        print 'ik heet ' naam"""
         )
+
+        expected = textwrap.dedent(
+            """\
+        naam = '"Hedy"'
+        print(f'ik heet {naam}')"""
+        )
+
+        self.multi_level_tester(max_level=11, code=code, expected=expected)
 
     # issue 1795
     def test_print_quoted_var_reference(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
         naam is 'Daan'
         woord1 is zomerkamp
-        print 'naam' ' is naar het' 'woord1'""")
+        print 'naam' ' is naar het' 'woord1'"""
+        )
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(
+            """\
         naam = '\\'Daan\\''
         woord1 = 'zomerkamp'
-        print(f'naam is naar hetwoord1')""")
+        print(f'naam is naar hetwoord1')"""
+        )
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
@@ -278,7 +230,7 @@ class TestsLevel4(HedyTester):
 
     def test_ask_double_quoted_text_with_inner_single_quote(self):
         code = f'''details is ask "say 'no'"'''
-        expected = '''details = input(f'say \\'no\\'')'''
+        expected = """details = input(f'say \\'no\\'')"""
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
@@ -306,13 +258,17 @@ class TestsLevel4(HedyTester):
         self.single_level_tester(code, exception=hedy.exceptions.UnquotedTextException)
 
     def test_ask_with_comma(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
         dieren is ask 'hond, kat, kangoeroe'
-        print dieren""")
+        print dieren"""
+        )
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(
+            """\
         dieren = input(f'hond, kat, kangoeroe')
-        print(f'{dieren}')""")
+        print(f'{dieren}')"""
+        )
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
@@ -325,57 +281,77 @@ class TestsLevel4(HedyTester):
 
     @parameterized.expand(HedyTester.quotes)
     def test_ask_bengali_var(self, q):
-        code = textwrap.dedent(f"""\
+        code = textwrap.dedent(
+            f"""\
         রং is ask {q}আপনার প্রিয় রং কি?{q}
-        print রং {q} is আপনার প্রিয{q}""")
+        print রং {q} is আপনার প্রিয{q}"""
+        )
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(
+            """\
         রং = input(f'আপনার প্রিয় রং কি?')
-        print(f'{রং} is আপনার প্রিয')""")
+        print(f'{রং} is আপনার প্রিয')"""
+        )
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
     def test_ask_list_random(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
         colors is orange, blue, green
-        favorite is ask 'Is your fav color ' colors at random""")
+        favorite is ask 'Is your fav color ' colors at random"""
+        )
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(
+            """\
         colors = ['orange', 'blue', 'green']
-        favorite = input(f'Is your fav color {random.choice(colors)}')""")
+        favorite = input(f'Is your fav color {random.choice(colors)}')"""
+        )
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
     def test_ask_list_access_index(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
         colors is orange, blue, green
-        favorite is ask 'Is your fav color ' colors at 1""")
+        favorite is ask 'Is your fav color ' colors at 1"""
+        )
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(
+            """\
         colors = ['orange', 'blue', 'green']
-        favorite = input(f'Is your fav color {colors[1-1]}')""")
+        favorite = input(f'Is your fav color {colors[1-1]}')"""
+        )
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
     def test_ask_string_var(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
         color is orange
-        favorite is ask 'Is your fav color ' color""")
+        favorite is ask 'Is your fav color ' color"""
+        )
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(
+            """\
         color = 'orange'
-        favorite = input(f'Is your fav color {color}')""")
+        favorite = input(f'Is your fav color {color}')"""
+        )
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
     def test_ask_integer_var(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
         number is 10
-        favorite is ask 'Is your fav number' number""")
+        favorite is ask 'Is your fav number' number"""
+        )
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(
+            """\
         number = '10'
-        favorite = input(f'Is your fav number{number}')""")
+        favorite = input(f'Is your fav number{number}')"""
+        )
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
@@ -383,12 +359,12 @@ class TestsLevel4(HedyTester):
     # sleep tests
     #
     def test_sleep_with_input_variable(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
             n is ask "how long"
-            sleep n""")
-        expected = HedyTester.dedent(
-            "n = input(f'how long')",
-            HedyTester.sleep_command_transpiled("n"))
+            sleep n"""
+        )
+        expected = HedyTester.dedent("n = input(f'how long')", HedyTester.sleep_command_transpiled("n"))
 
         self.multi_level_tester(max_level=11, code=code, expected=expected)
 
@@ -396,24 +372,32 @@ class TestsLevel4(HedyTester):
     # assign tests
     #
     def test_assign_print(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
         naam is Hedy
-        print 'ik heet' naam""")
+        print 'ik heet' naam"""
+        )
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(
+            """\
         naam = 'Hedy'
-        print(f'ik heet{naam}')""")
+        print(f'ik heet{naam}')"""
+        )
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
     def test_assign_underscore(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
         voor_naam is Hedy
-        print 'ik heet ' voor_naam""")
+        print 'ik heet ' voor_naam"""
+        )
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(
+            """\
         voor_naam = 'Hedy'
-        print(f'ik heet {voor_naam}')""")
+        print(f'ik heet {voor_naam}')"""
+        )
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
@@ -424,46 +408,62 @@ class TestsLevel4(HedyTester):
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
     def test_assign_list_values_with_inner_single_quotes(self):
-        code = textwrap.dedent(f"""\
+        code = textwrap.dedent(
+            f"""\
           taart is 'appeltaart, choladetaart, kwarktaart'
-          print 'we bakken een ' taart at random""")
+          print 'we bakken een ' taart at random"""
+        )
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(
+            """\
           taart = ['\\'appeltaart', 'choladetaart', 'kwarktaart\\'']
-          print(f'we bakken een {random.choice(taart)}')""")
+          print(f'we bakken een {random.choice(taart)}')"""
+        )
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
     def test_assign_list_values_with_inner_double_quotes(self):
-        code = textwrap.dedent(f"""\
+        code = textwrap.dedent(
+            f"""\
           taart is "appeltaart, choladetaart, kwarktaart"
-          print 'we bakken een ' taart at random""")
+          print 'we bakken een ' taart at random"""
+        )
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(
+            """\
           taart = ['"appeltaart', 'choladetaart', 'kwarktaart"']
-          print(f'we bakken een {random.choice(taart)}')""")
+          print(f'we bakken een {random.choice(taart)}')"""
+        )
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
     def test_assign_list_with_single_quoted_values(self):
-        code = textwrap.dedent(f"""\
+        code = textwrap.dedent(
+            f"""\
         taart is 'appeltaart', 'choladetaart', 'kwarktaart'
-        print 'we bakken een' taart at random""")
+        print 'we bakken een' taart at random"""
+        )
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(
+            """\
         taart = ['\\'appeltaart\\'', '\\'choladetaart\\'', '\\'kwarktaart\\'']
-        print(f'we bakken een{random.choice(taart)}')""")
+        print(f'we bakken een{random.choice(taart)}')"""
+        )
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
     def test_assign_list_with_double_quoted_values(self):
-        code = textwrap.dedent(f"""\
+        code = textwrap.dedent(
+            f"""\
         taart is "appeltaart, choladetaart, kwarktaart"
-        print 'we bakken een' taart at random""")
+        print 'we bakken een' taart at random"""
+        )
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(
+            """\
         taart = ['"appeltaart', 'choladetaart', 'kwarktaart"']
-        print(f'we bakken een{random.choice(taart)}')""")
+        print(f'we bakken een{random.choice(taart)}')"""
+        )
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
@@ -481,35 +481,43 @@ class TestsLevel4(HedyTester):
     # add/remove tests
     #
     def test_add_ask_to_list(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
         color is ask 'what is your favorite color?'
         colors is green, red, blue
         add color to colors
-        print colors at random""")
+        print colors at random"""
+        )
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(
+            """\
         color = input(f'what is your favorite color?')
         colors = ['green', 'red', 'blue']
         colors.append(color)
-        print(f'{random.choice(colors)}')""")
+        print(f'{random.choice(colors)}')"""
+        )
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
     def test_remove_ask_from_list(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
         colors is green, red, blue
         color is ask 'what color to remove?'
         remove color from colors
-        print colors at random""")
+        print colors at random"""
+        )
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(
+            """\
         colors = ['green', 'red', 'blue']
         color = input(f'what color to remove?')
         try:
           colors.remove(color)
         except:
           pass
-        print(f'{random.choice(colors)}')""")
+        print(f'{random.choice(colors)}')"""
+        )
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
@@ -517,61 +525,62 @@ class TestsLevel4(HedyTester):
     # combined tests
     #
     def test_assign_print_chinese(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
         你世界 is 你好世界
-        print 你世界""")
+        print 你世界"""
+        )
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(
+            """\
         你世界 = '你好世界'
-        print(f'{你世界}')""")
+        print(f'{你世界}')"""
+        )
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
     def test_ask_forward(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
         afstand is ask 'hoe ver dan?'
-        forward afstand""")
+        forward afstand"""
+        )
 
-        expected = HedyTester.dedent(
-            "afstand = input(f'hoe ver dan?')",
-            HedyTester.forward_transpiled('afstand'))
+        expected = HedyTester.dedent("afstand = input(f'hoe ver dan?')", HedyTester.forward_transpiled("afstand"))
 
         self.multi_level_tester(
-            max_level=self.max_turtle_level,
-            code=code,
-            expected=expected,
-            extra_check_function=self.is_turtle()
+            max_level=self.max_turtle_level, code=code, expected=expected, extra_check_function=self.is_turtle()
         )
 
     #
     # negative tests
     #
     def test_var_undefined_error_message(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
         naam is Hedy
-        print 'ik heet ' name""")
-
-        self.multi_level_tester(
-            code=code,
-            max_level=11,
-            exception=hedy.exceptions.UndefinedVarException
+        print 'ik heet ' name"""
         )
+
+        self.multi_level_tester(code=code, max_level=11, exception=hedy.exceptions.UndefinedVarException)
 
     # issue 375
     def test_program_gives_hedy_parse_exception(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
         is Foobar
-        print welcome""")
+        print welcome"""
+        )
 
         self.multi_level_tester(
             code=code,
             max_level=11,
             exception=hedy.exceptions.ParseException,
-            extra_check_function=lambda c: c.exception.error_location[0] == 1 and c.exception.error_location[1] == 1
+            extra_check_function=lambda c: c.exception.error_location[0] == 1 and c.exception.error_location[1] == 1,
         )
 
     def test_quoted_text_gives_error(self):
-        code = 'competitie die gaan we winnen'
+        code = "competitie die gaan we winnen"
 
         self.multi_level_tester(code=code, exception=hedy.exceptions.MissingCommandException)
 
@@ -581,7 +590,7 @@ class TestsLevel4(HedyTester):
         self.multi_level_tester(
             code=code,
             exception=hedy.exceptions.ParseException,
-            extra_check_function=lambda c: c.exception.fixed_code == "print 'Hello'"
+            extra_check_function=lambda c: c.exception.fixed_code == "print 'Hello'",
         )
 
     #
@@ -589,9 +598,11 @@ class TestsLevel4(HedyTester):
     #
     @parameterized.expand(HedyTester.quotes)
     def test_meta_column_missing_closing_quote(self, q):
-        code = textwrap.dedent(f"""\
+        code = textwrap.dedent(
+            f"""\
         print {q}Hello{q}
-        print {q}World""")
+        print {q}World"""
+        )
 
         line, column = self.codeToInvalidInfo(code)
 
@@ -600,9 +611,11 @@ class TestsLevel4(HedyTester):
 
     @parameterized.expand(HedyTester.quotes)
     def test_meta_column_missing_opening_quote(self, q):
-        code = textwrap.dedent(f"""\
+        code = textwrap.dedent(
+            f"""\
         print {q}Hello{q}
-        print World{q}""")
+        print World{q}"""
+        )
 
         line, column = self.codeToInvalidInfo(code)
 

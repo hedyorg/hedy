@@ -13,8 +13,8 @@ import textwrap
 
 class TestsTranslationLevel6(HedyTester):
     level = 6
-    keywords_from = hedy_translation.keywords_to_dict('en')
-    keywords_to = hedy_translation.keywords_to_dict('nl')
+    keywords_from = hedy_translation.keywords_to_dict("en")
+    keywords_to = hedy_translation.keywords_to_dict("nl")
 
     def test_multiplication(self):
         code = "vermenigvuldiging is 3 * 8"
@@ -46,9 +46,9 @@ class TestsTranslationLevel6(HedyTester):
         result = hedy_translation.translate_keywords(code, from_lang="nl", to_lang="en", level=self.level)
         expected = "angle = 360 / angles"
         self.assertEqual(expected, result)
-    
+
     def test_translate_back_is(self):
-        code ="breuk is 13 / 4"
+        code = "breuk is 13 / 4"
 
         result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
         result = hedy_translation.translate_keywords(result, from_lang="nl", to_lang="en", level=self.level)
@@ -80,7 +80,7 @@ class TestsTranslationLevel6(HedyTester):
         expected = "nombre is ask '¿Cual es tu nombre?'"
 
         self.assertEqual(expected, result)
-    
+
     def test_assign_list_is_spanish_english(self):
         code = "lenguajes es Hedy, Python, C"
 
@@ -91,42 +91,52 @@ class TestsTranslationLevel6(HedyTester):
         self.assertEqual(result, expected)
 
     def test_assign_list_var_spanish_english(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
         lenguajes es Hedy, Python, C
-        a = lenguajes en 0""")
+        a = lenguajes en 0"""
+        )
 
         result = hedy_translation.translate_keywords(code, from_lang="es", to_lang="en", level=self.level)
 
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(
+            """\
         lenguajes is Hedy, Python, C
-        a = lenguajes at 0""")
+        a = lenguajes at 0"""
+        )
 
         self.assertEqual(result, expected)
 
-    @parameterized.expand([('en', '='), ('es', '=')])
+    @parameterized.expand([("en", "="), ("es", "=")])
     def test_equality_type_error_translates_command(self, lang, is_):
-        code = textwrap.dedent(f"""\
+        code = textwrap.dedent(
+            f"""\
             letters is a, b, c
-            if letters {is_} '10' print 'wrong!'""")
-
-        self.multi_level_tester(
-            lang=lang,
-            code=code,
-            max_level=7,
-            exception=hedy.exceptions.InvalidArgumentTypeException,
-            extra_check_function=self.exception_command(is_)
+            if letters {is_} '10' print 'wrong!'"""
         )
 
-    @parameterized.expand([('en', '+'), ('es', '+'), ('en', '-'), ('es', '-'), ('en', '*'), ('es', '*'), ('en', '/'), ('es', '/')])
+        self.multi_level_tester(
+            lang=lang,
+            code=code,
+            max_level=7,
+            exception=hedy.exceptions.InvalidArgumentTypeException,
+            extra_check_function=self.exception_command(is_),
+        )
+
+    @parameterized.expand(
+        [("en", "+"), ("es", "+"), ("en", "-"), ("es", "-"), ("en", "*"), ("es", "*"), ("en", "/"), ("es", "/")]
+    )
     def test_expression_type_error_uses_arith_operator(self, lang, operator):
-        code = textwrap.dedent(f"""\
+        code = textwrap.dedent(
+            f"""\
             a is test
-            print a {operator} 2""")
+            print a {operator} 2"""
+        )
 
         self.multi_level_tester(
             lang=lang,
             code=code,
             max_level=7,
             exception=hedy.exceptions.InvalidArgumentTypeException,
-            extra_check_function=self.exception_command(operator)
+            extra_check_function=self.exception_command(operator),
         )

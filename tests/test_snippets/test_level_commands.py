@@ -8,13 +8,14 @@ from parameterized import parameterized
 from hedy_content import ALL_KEYWORD_LANGUAGES
 
 # Set the current directory to the root Hedy folder
-os.chdir(os.path.join(os.getcwd(), __file__.replace(os.path.basename(__file__), '')))
+os.chdir(os.path.join(os.getcwd(), __file__.replace(os.path.basename(__file__), "")))
 
 unique_snippets_table = set()
 
+
 def collect_snippets(path):
     Hedy_snippets = []
-    files = [f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f)) and f.endswith('.yaml')]
+    files = [f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f)) and f.endswith(".yaml")]
     for file in files:
         lang = file.split(".")[0]
         file = os.path.join(path, file)
@@ -23,28 +24,34 @@ def collect_snippets(path):
         for level in yaml:
             level_number = int(level)
             if level_number > hedy.HEDY_MAX_LEVEL:
-                print('content above max level!')
+                print("content above max level!")
             else:
                 try:
                     # commands.k.demo_code
                     for k, command in enumerate(yaml[level]):
                         # test only unique snippets
-                        if hash(command['demo_code']) in unique_snippets_table:
+                        if hash(command["demo_code"]) in unique_snippets_table:
                             continue
                         else:
-                            unique_snippets_table.add(hash(command['demo_code']))
-                        command_text_short = command['name'] if 'name' in command.keys() else command['explanation'][0:10]
+                            unique_snippets_table.add(hash(command["demo_code"]))
+                        command_text_short = (
+                            command["name"] if "name" in command.keys() else command["explanation"][0:10]
+                        )
                         Hedy_snippets.append(
-                            Snippet(filename=file, level=level, field_name='command ' + command_text_short + ' demo_code',
-                                    code=command['demo_code']))
+                            Snippet(
+                                filename=file,
+                                level=level,
+                                field_name="command " + command_text_short + " demo_code",
+                                code=command["demo_code"],
+                            )
+                        )
                 except:
-                    print(f'Problem reading commands yaml for {lang} level {level}')
-
+                    print(f"Problem reading commands yaml for {lang} level {level}")
 
     return Hedy_snippets
 
 
-Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/commands')]
+Hedy_snippets = [(s.name, s) for s in collect_snippets(path="../../content/commands")]
 Hedy_snippets = HedyTester.translate_keywords_in_snippets(Hedy_snippets)
 
 # lang = 'ar' #useful if you want to test just 1 language
@@ -53,15 +60,9 @@ Hedy_snippets = HedyTester.translate_keywords_in_snippets(Hedy_snippets)
 
 
 class TestsCommandPrograms(unittest.TestCase):
-
     @parameterized.expand(Hedy_snippets)
     def test_defaults(self, name, snippet):
         if snippet is not None:
             print(snippet.code)
             result = HedyTester.validate_Hedy_code(snippet)
             self.assertTrue(result)
-
-
-
-
-

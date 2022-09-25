@@ -13,16 +13,18 @@ from flask_babel import gettext, format_date, format_datetime, format_timedelta
 from ruamel import yaml
 from website import querylog
 import commonmark
+
 commonmark_parser = commonmark.Parser()
 commonmark_renderer = commonmark.HtmlRenderer()
 from bs4 import BeautifulSoup
 from flask_helpers import render_template
 from flask import g, session, request
 
-IS_WINDOWS = os.name == 'nt'
+IS_WINDOWS = os.name == "nt"
 
 # Define code that will be used if some turtle command is present
-TURTLE_PREFIX_CODE = textwrap.dedent("""\
+TURTLE_PREFIX_CODE = textwrap.dedent(
+    """\
     # coding=utf8
     import random, time, turtle
     t = turtle.Turtle()
@@ -32,12 +34,14 @@ TURTLE_PREFIX_CODE = textwrap.dedent("""\
     t.pendown()
     t.speed(3)
     t.showturtle()
- """)
+ """
+)
 
 # Preamble that will be used for non-Turtle programs
 # numerals list generated from: https://replit.com/@mevrHermans/multilangnumerals
 
-NORMAL_PREFIX_CODE = textwrap.dedent("""\
+NORMAL_PREFIX_CODE = textwrap.dedent(
+    """\
     # coding=utf8
     import random, time
     global int_saver
@@ -82,28 +86,33 @@ NORMAL_PREFIX_CODE = textwrap.dedent("""\
             return ''.join(all_numerals_converted)
         else:
             return number
-        """)
+        """
+)
+
 
 class Timer:
-  """A quick and dirty timer."""
-  def __init__(self, name):
-    self.name = name
+    """A quick and dirty timer."""
 
-  def __enter__(self):
-    self.start = time.time()
+    def __init__(self, name):
+        self.name = name
 
-  def __exit__(self, type, value, tb):
-    delta = time.time() - self.start
-    print(f'{self.name}: {delta}s')
+    def __enter__(self):
+        self.start = time.time()
+
+    def __exit__(self, type, value, tb):
+        delta = time.time() - self.start
+        print(f"{self.name}: {delta}s")
 
 
 def timer(fn):
-  """Decoractor for fn."""
-  @functools.wraps(fn)
-  def wrapper(*args, **kwargs):
-    with Timer(fn.__name__):
-      return fn(*args, **kwargs)
-  return wrapper
+    """Decoractor for fn."""
+
+    @functools.wraps(fn)
+    def wrapper(*args, **kwargs):
+        with Timer(fn.__name__):
+            return fn(*args, **kwargs)
+
+    return wrapper
 
 
 def timems():
@@ -115,6 +124,7 @@ def timems():
     """
     return int(round(time.time() * 1000))
 
+
 def times():
     """Return the UNIX timestamp in seconds.
 
@@ -123,9 +133,8 @@ def times():
     return int(round(time.time()))
 
 
-
-
 DEBUG_MODE = False
+
 
 def is_debug_mode():
     """Return whether or not we're in debug mode.
@@ -144,7 +153,7 @@ def set_debug_mode(debug_mode):
 def load_yaml_rt(filename):
     """Load YAML with the round trip loader."""
     try:
-        with open(filename, 'r', encoding='utf-8') as f:
+        with open(filename, "r", encoding="utf-8") as f:
             return yaml.round_trip_load(f, preserve_quotes=True)
     except IOError:
         return {}
@@ -154,15 +163,18 @@ def dump_yaml_rt(data):
     """Dump round-tripped YAML."""
     return yaml.round_trip_dump(data, indent=4, width=999)
 
-def slash_join(*args):
-    ret =[]
-    for arg in args:
-        if not arg: continue
 
-        if ret and not ret[-1].endswith('/'):
-            ret.append('/')
-        ret.append(arg.lstrip('/') if ret else arg)
-    return ''.join(ret)
+def slash_join(*args):
+    ret = []
+    for arg in args:
+        if not arg:
+            continue
+
+        if ret and not ret[-1].endswith("/"):
+            ret.append("/")
+        ret.append(arg.lstrip("/") if ret else arg)
+    return "".join(ret)
+
 
 def is_testing_request(request):
     """Whether the current request is a test request.
@@ -172,20 +184,22 @@ def is_testing_request(request):
 
     Test requests are only allowed on non-Heroku instances.
     """
-    return not is_heroku() and bool('X-Testing' in request.headers and request.headers['X-Testing'])
+    return not is_heroku() and bool("X-Testing" in request.headers and request.headers["X-Testing"])
+
 
 def extract_bcrypt_rounds(hash):
-    return int(re.match(r'\$2b\$\d+', hash)[0].replace('$2b$', ''))
+    return int(re.match(r"\$2b\$\d+", hash)[0].replace("$2b$", ""))
+
 
 def isoformat(timestamp):
     """Turn a timestamp into an ISO formatted string."""
     dt = datetime.datetime.utcfromtimestamp(timestamp)
-    return dt.isoformat() + 'Z'
+    return dt.isoformat() + "Z"
 
 
 def is_production():
     """Whether we are serving production traffic."""
-    return os.getenv('IS_PRODUCTION', '') != ''
+    return os.getenv("IS_PRODUCTION", "") != ""
 
 
 def is_heroku():
@@ -203,27 +217,28 @@ def is_heroku():
       to optimize for developer productivity.
 
     """
-    return os.getenv('DYNO', '') != ''
+    return os.getenv("DYNO", "") != ""
 
 
 def version():
 
     # """Get the version from the Heroku environment variables."""
     if not is_heroku():
-        return 'DEV'
+        return "DEV"
 
-    vrz = os.getenv('HEROKU_RELEASE_CREATED_AT')
+    vrz = os.getenv("HEROKU_RELEASE_CREATED_AT")
     the_date = datetime.date.fromisoformat(vrz[:10]) if vrz else datetime.date.today()
 
-    commit = os.getenv('HEROKU_SLUG_COMMIT', '????')[0:6]
-    return the_date.strftime('%Y %b %d') + f'({commit})'
+    commit = os.getenv("HEROKU_SLUG_COMMIT", "????")[0:6]
+    return the_date.strftime("%Y %b %d") + f"({commit})"
+
 
 def valid_email(s):
-    return bool(re.match(r'^(([a-zA-Z0-9_+\.\-]+)@([\da-zA-Z\.\-]+)\.([a-zA-Z\.]{2,6})\s*)$', s))
+    return bool(re.match(r"^(([a-zA-Z0-9_+\.\-]+)@([\da-zA-Z\.\-]+)\.([a-zA-Z\.]{2,6})\s*)$", s))
 
 
 @contextlib.contextmanager
-def atomic_write_file(filename, mode='wb'):
+def atomic_write_file(filename, mode="wb"):
     """Write to a filename atomically.
 
     First write to a unique tempfile, then rename the tempfile into
@@ -236,7 +251,7 @@ def atomic_write_file(filename, mode='wb'):
     on Windows. We now just swallow the exception, someone else already wrote the file?)
     """
 
-    tmp_file = f'{filename}.{os.getpid()}'
+    tmp_file = f"{filename}.{os.getpid()}"
     with open(tmp_file, mode) as f:
         yield f
 
@@ -245,14 +260,17 @@ def atomic_write_file(filename, mode='wb'):
     except IOError:
         pass
 
+
 # This function takes a date in milliseconds from the Unix epoch and transforms it into a printable date
 # It operates by converting the date to a string, removing its last 3 digits, converting it back to an int
 # and then invoking the `isoformat` date function on it
 def mstoisostring(date):
     return datetime.datetime.fromtimestamp(int(str(date)[:-3])).isoformat()
 
+
 def string_date_to_date(date):
     return datetime.datetime.strptime(date, "%Y-%m-%d")
+
 
 def timestamp_to_date(timestamp, short_format=False):
     try:
@@ -271,8 +289,10 @@ def delta_timestamp(date, short_format=False):
         delta = datetime.datetime.now() - datetime.datetime.fromtimestamp(int(str(date)[:-3]))
     return format_timedelta(delta)
 
+
 def stoisostring(date):
     return datetime.datetime.fromtimestamp(date)
+
 
 def localized_date_format(date, short_format=False):
     # Improve the date by using the Flask Babel library and return timestamp as expected by language
@@ -280,41 +300,53 @@ def localized_date_format(date, short_format=False):
         timestamp = datetime.datetime.fromtimestamp(int(str(date)))
     else:
         timestamp = datetime.datetime.fromtimestamp(int(str(date)[:-3]))
-    return format_date(timestamp, format='medium') + " " + format_datetime(timestamp, "H:mm")
+    return format_date(timestamp, format="medium") + " " + format_datetime(timestamp, "H:mm")
+
 
 def datetotimeordate(date):
     print(date)
     return date.replace("T", " ")
 
+
 # https://stackoverflow.com/a/2257449
 def random_id_generator(size=6, chars=string.ascii_uppercase + string.ascii_lowercase + string.digits):
-    return ''.join(random.choice(chars) for _ in range(size))
+    return "".join(random.choice(chars) for _ in range(size))
+
 
 # This function takes a Markdown string and returns a list with each of the HTML elements obtained
 # by rendering the Markdown into HTML.
 def markdown_to_html_tags(markdown):
     _html = commonmark_renderer.render(commonmark_parser.parse(markdown))
-    soup = BeautifulSoup(_html, 'html.parser')
+    soup = BeautifulSoup(_html, "html.parser")
     return soup.find_all()
 
 
 def error_page(error=404, page_error=None, ui_message=None, menu=True, iframe=None):
     if error not in [403, 404, 500]:
         error = 404
-    default = gettext('default_404')
+    default = gettext("default_404")
     if error == 403:
-        default = gettext('default_403')
+        default = gettext("default_403")
     elif error == 500:
-        default = gettext('default_500')
-    return render_template("error-page.html", menu=menu, error=error, iframe=iframe,
-                           page_error=page_error or ui_message or '', default=default), error
+        default = gettext("default_500")
+    return (
+        render_template(
+            "error-page.html",
+            menu=menu,
+            error=error,
+            iframe=iframe,
+            page_error=page_error or ui_message or "",
+            default=default,
+        ),
+        error,
+    )
 
 
 def session_id():
     """Returns or sets the current session ID."""
-    if 'session_id' not in session:
-        if os.getenv('IS_TEST_ENV') and 'X-session_id' in request.headers:
-            session['session_id'] = request.headers['X-session_id']
+    if "session_id" not in session:
+        if os.getenv("IS_TEST_ENV") and "X-session_id" in request.headers:
+            session["session_id"] = request.headers["X-session_id"]
         else:
-            session['session_id'] = uuid.uuid4().hex
-    return session['session_id']
+            session["session_id"] = uuid.uuid4().hex
+    return session["session_id"]

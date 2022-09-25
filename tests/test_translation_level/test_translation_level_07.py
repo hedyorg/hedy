@@ -14,8 +14,8 @@ from tests.Tester import HedyTester
 
 class TestsTranslationLevel7(HedyTester):
     level = 7
-    keywords_from = hedy_translation.keywords_to_dict('en')
-    keywords_to = hedy_translation.keywords_to_dict('nl')
+    keywords_from = hedy_translation.keywords_to_dict("en")
+    keywords_to = hedy_translation.keywords_to_dict("nl")
 
     def test_repeat_english_dutch(self):
         code = "repeat 3 times print 'Hedy is fun!'"
@@ -57,18 +57,19 @@ class TestsTranslationLevel7(HedyTester):
 
         self.assertEqual(code, result)
 
-    @parameterized.expand([('en', 'repeat', 'times'),
-                           ('es', 'repetir', 'veces'),
-                           ('es', 'repetir', 'times'),
-                           ('es', 'repeat', 'veces')])
+    @parameterized.expand(
+        [("en", "repeat", "times"), ("es", "repetir", "veces"), ("es", "repetir", "times"), ("es", "repeat", "veces")]
+    )
     def test_repeat_type_error_translates_command(self, lang, repeat, times):
-        code = textwrap.dedent(f"""\
+        code = textwrap.dedent(
+            f"""\
             a is 1, 2, 3
-            {repeat} a {times} print 'n'""")
+            {repeat} a {times} print 'n'"""
+        )
 
         self.single_level_tester(
             lang=lang,
             code=code,
             exception=hedy.exceptions.InvalidArgumentTypeException,
-            extra_check_function=self.exception_command(f'{repeat} {times}')
+            extra_check_function=self.exception_command(f"{repeat} {times}"),
         )

@@ -1,25 +1,27 @@
 from parameterized import parameterized
+
 # from test_level_01 import HedyTester
 from tests.Tester import HedyTester
 import hedy_translation
 import hedy
 
-    # tests should be ordered as follows:
-    # * Translation from English to Dutch
-    # * Translation from Dutch to English
-    # * Translation to several languages
-    # * Error handling
+# tests should be ordered as follows:
+# * Translation from English to Dutch
+# * Translation from Dutch to English
+# * Translation to several languages
+# * Error handling
+
 
 class TestsTranslationLevel1(HedyTester):
     level = 1
-    keywords_from = hedy_translation.keywords_to_dict('en')
-    keywords_to = hedy_translation.keywords_to_dict('nl')
+    keywords_from = hedy_translation.keywords_to_dict("en")
+    keywords_to = hedy_translation.keywords_to_dict("nl")
 
     def test_print_english_dutch(self):
-        code = 'print Hallo welkom bij Hedy!'
+        code = "print Hallo welkom bij Hedy!"
 
         result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
-        expected = 'print Hallo welkom bij Hedy!'
+        expected = "print Hallo welkom bij Hedy!"
 
         self.assertEqual(expected, result)
 
@@ -40,10 +42,10 @@ class TestsTranslationLevel1(HedyTester):
         self.assertEqual(expected, result)
 
     def test_ask_echo_english_dutch(self):
-        code = 'print Hallo welkom bij Hedy\'\'\nvraag hoe heet je\necho'
+        code = "print Hallo welkom bij Hedy''\nvraag hoe heet je\necho"
 
         result = hedy_translation.translate_keywords(code, from_lang="nl", to_lang="en", level=self.level)
-        expected = 'print Hallo welkom bij Hedy\'\'\nask hoe heet je\necho'
+        expected = "print Hallo welkom bij Hedy''\nask hoe heet je\necho"
 
         self.assertEqual(expected, result)
 
@@ -54,7 +56,6 @@ class TestsTranslationLevel1(HedyTester):
         expected = "print print ask echo"
 
         self.assertEqual(expected, result)
-
 
     def test_forward_english_dutch(self):
         code = "forward 50"
@@ -72,16 +73,13 @@ class TestsTranslationLevel1(HedyTester):
 
         self.assertEqual(expected, result)
 
-
-
     def test_print_dutch_english(self):
-        code = 'print Hallo welkom bij Hedy!'
+        code = "print Hallo welkom bij Hedy!"
 
         result = hedy_translation.translate_keywords(code, from_lang="nl", to_lang="en", level=self.level)
-        expected = 'print Hallo welkom bij Hedy!'
+        expected = "print Hallo welkom bij Hedy!"
 
         self.assertEqual(expected, result)
-
 
     def test_ask_dutch_english(self):
         code = "vraag Hallo welkom bij Hedy!\nvraag veel plezier"
@@ -100,10 +98,10 @@ class TestsTranslationLevel1(HedyTester):
         self.assertEqual(expected, result)
 
     def test_ask_echo_dutch_english(self):
-        code = 'vraag Hallo welkom bij Hedy!\necho hoi'
+        code = "vraag Hallo welkom bij Hedy!\necho hoi"
 
         result = hedy_translation.translate_keywords(code, from_lang="nl", to_lang="en", level=self.level)
-        expected = 'ask Hallo welkom bij Hedy!\necho hoi'
+        expected = "ask Hallo welkom bij Hedy!\necho hoi"
 
         self.assertEqual(expected, result)
 
@@ -132,14 +130,12 @@ class TestsTranslationLevel1(HedyTester):
         self.assertEqual(expected, result)
 
     def test_translate_back(self):
-        code = 'print Hallo welkom bij Hedy\nask hoe heet je\necho'
+        code = "print Hallo welkom bij Hedy\nask hoe heet je\necho"
 
         result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
         result = hedy_translation.translate_keywords(result, from_lang="nl", to_lang="en", level=self.level)
 
         self.assertEqual(code, result)
-
-
 
     def test_invalid(self):
         code = "hallo"
@@ -166,14 +162,14 @@ class TestsTranslationLevel1(HedyTester):
 
         self.assertEqual(expected, result)
 
-    @parameterized.expand([('en', 'forward'), ('es', 'adelante')])
+    @parameterized.expand([("en", "forward"), ("es", "adelante")])
     def test_forward_type_error_translates_command(self, lang, forward):
-        code = f'{forward} text'
+        code = f"{forward} text"
 
         self.multi_level_tester(
             lang=lang,
             code=code,
             max_level=self.max_turtle_level,
             exception=hedy.exceptions.InvalidArgumentTypeException,
-            extra_check_function=self.exception_command(forward)
+            extra_check_function=self.exception_command(forward),
         )

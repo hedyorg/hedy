@@ -23,25 +23,33 @@ class TestsTranslationLevel16(HedyTester):
         self.assertEqual(expected, result)
 
     def test_access_list_english_dutch(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
         fruit = ['appel', 'banaan', 'kers']
-        print fruit[2]""")
+        print fruit[2]"""
+        )
 
         result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(
+            """\
         fruit = ['appel', 'banaan', 'kers']
-        print fruit[2]""")
+        print fruit[2]"""
+        )
 
         self.assertEqual(expected, result)
 
     def test_access_list_random_dutch_english(self):
-        code = textwrap.dedent("""\
+        code = textwrap.dedent(
+            """\
         fruit = ['appel', 'banaan', 'kers']
-        print fruit[willekeurig]""")
+        print fruit[willekeurig]"""
+        )
 
         result = hedy_translation.translate_keywords(code, from_lang="nl", to_lang="en", level=self.level)
-        expected = textwrap.dedent("""\
+        expected = textwrap.dedent(
+            """\
         fruit = ['appel', 'banaan', 'kers']
-        print fruit[random]""")
+        print fruit[random]"""
+        )
 
         self.assertEqual(expected, result)

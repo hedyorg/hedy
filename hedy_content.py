@@ -33,36 +33,36 @@ ALL_LANGUAGES = {}
 ALL_KEYWORD_LANGUAGES = {}
 
 # Todo TB -> We create this list manually, but it would be nice if we find a way to automate this as well
-NON_LATIN_LANGUAGES = ['ar', 'bg', 'bn', 'el', 'fa', 'hi', 'he', 'ru', 'zh_Hans']
+NON_LATIN_LANGUAGES = ["ar", "bg", "bn", "el", "fa", "hi", "he", "ru", "zh_Hans"]
 
 # It would be nice if we created this list manually but couldn't find a way to retrieve this from Babel
-NON_BABEL = ['tn']
+NON_BABEL = ["tn"]
 
 ADVENTURE_ORDER = [
-    'default',
-    'story',
-    'parrot',
-    'songs',
-    'turtle',
-    'dishes',
-    'dice',
-    'rock',
-    'calculator',
-    'fortune',
-    'restaurant',
-    'haunted',
-    'piggybank',
-    'quizmaster',
-    'language',
-    'secret',
-    'tic',
-    'blackjack',
-    'next',
-    'end'
+    "default",
+    "story",
+    "parrot",
+    "songs",
+    "turtle",
+    "dishes",
+    "dice",
+    "rock",
+    "calculator",
+    "fortune",
+    "restaurant",
+    "haunted",
+    "piggybank",
+    "quizmaster",
+    "language",
+    "secret",
+    "tic",
+    "blackjack",
+    "next",
+    "end",
 ]
 
 RESEARCH = {}
-for paper in os.listdir('content/research'):
+for paper in os.listdir("content/research"):
     # An_approach_to_describing_the_semantics_of_Hedy_2022.pdf -> An approach to describing the semantics of Hedy
     name = paper.replace("_", " ").split(".")[0]
     RESEARCH[name] = paper
@@ -70,39 +70,37 @@ for paper in os.listdir('content/research'):
 # load all available languages in dict
 # list_translations of babel does about the same, but without territories.
 languages = {}
-if not os.path.isdir('translations'):
+if not os.path.isdir("translations"):
     # should not be possible, but if it's moved someday, EN would still be working.
-    ALL_LANGUAGES['en'] = 'English'
-    ALL_KEYWORD_LANGUAGES['en'] = 'EN'
+    ALL_LANGUAGES["en"] = "English"
+    ALL_KEYWORD_LANGUAGES["en"] = "EN"
 
-for folder in os.listdir('translations'):
+for folder in os.listdir("translations"):
     # we cant properly open non-supported langs like Tswana (tn)
     # so we have to load en for those until Babel adds support
     if folder in NON_BABEL:
-        folder = 'en'
-    locale_dir = os.path.join('translations', folder, 'LC_MESSAGES')
+        folder = "en"
+    locale_dir = os.path.join("translations", folder, "LC_MESSAGES")
     if not os.path.isdir(locale_dir):
         continue
 
-    if filter(lambda x: x.endswith('.mo'), os.listdir(locale_dir)):
+    if filter(lambda x: x.endswith(".mo"), os.listdir(locale_dir)):
         locale = Locale.parse(folder)
         languages[folder] = locale.display_name.title()
 
 for l in sorted(languages):
     ALL_LANGUAGES[l] = languages[l]
-    if os.path.exists('./grammars/keywords-' + l + '.lark'):
+    if os.path.exists("./grammars/keywords-" + l + ".lark"):
         ALL_KEYWORD_LANGUAGES[l] = l[0:2].upper()  # first two characters
 
 # Load and cache all keyword yamls
 KEYWORDS = {}
 for lang in ALL_KEYWORD_LANGUAGES.keys():
-    KEYWORDS[lang] = dict(YamlFile.for_file(f'content/keywords/{lang}.yaml'))
+    KEYWORDS[lang] = dict(YamlFile.for_file(f"content/keywords/{lang}.yaml"))
     for k, v in KEYWORDS[lang].items():
         if type(v) == str and "|" in v:
             # when we have several options, pick the first one as default
-            KEYWORDS[lang][k] = v.split('|')[0]
-
-
+            KEYWORDS[lang][k] = v.split("|")[0]
 
 
 class Commands:
@@ -110,13 +108,13 @@ class Commands:
     def __init__(self, language):
         self.language = language
         # We can keep these cached, even in debug_mode: files are small and don't influence start-up time much
-        self.file = YamlFile.for_file(f'content/commands/{self.language}.yaml')
+        self.file = YamlFile.for_file(f"content/commands/{self.language}.yaml")
         self.data = {}
 
         # For some reason the is_debug_mode() function is not (yet) ready when we call this code
         # So we call the NO_DEBUG_MODE directly from the environment
         # Todo TB -> Fix that the is_debug_mode() function is ready before server start
-        self.debug_mode = not os.getenv('NO_DEBUG_MODE')
+        self.debug_mode = not os.getenv("NO_DEBUG_MODE")
 
         if not self.debug_mode:
             # We always create one with english keywords
@@ -155,6 +153,7 @@ class NoSuchCommand:
     def get_commands_for_level(self, level, keyword_lang):
         return {}
 
+
 class Adventures:
     def __init__(self, language):
         self.language = language
@@ -164,11 +163,10 @@ class Adventures:
         # For some reason the is_debug_mode() function is not (yet) ready when we call this code
         # So we call the NO_DEBUG_MODE directly from the environment
         # Todo TB -> Fix that the is_debug_mode() function is ready before server start
-        self.debug_mode = not os.getenv('NO_DEBUG_MODE')
+        self.debug_mode = not os.getenv("NO_DEBUG_MODE")
 
         if not self.debug_mode:
-            self.file = YamlFile.for_file(
-                f'content/adventures/{self.language}.yaml').get('adventures')
+            self.file = YamlFile.for_file(f"content/adventures/{self.language}.yaml").get("adventures")
             # We always create one with english keywords
             self.data["en"] = self.cache_adventure_keywords("en")
             if language in ALL_KEYWORD_LANGUAGES.keys():
@@ -179,15 +177,15 @@ class Adventures:
         sorted_adventures = {}
         for adventure_index in ADVENTURE_ORDER:
             if self.file.get(adventure_index, None):
-                sorted_adventures[adventure_index] = (self.file.get(adventure_index))
+                sorted_adventures[adventure_index] = self.file.get(adventure_index)
         self.file = sorted_adventures
         keyword_data = {}
         for short_name, adventure in self.file.items():
             parsed_adventure = copy.deepcopy(adventure)
-            for level in adventure.get('levels'):
-                for k, v in adventure.get('levels').get(level).items():
+            for level in adventure.get("levels"):
+                for k, v in adventure.get("levels").get(level).items():
                     try:
-                        parsed_adventure.get('levels').get(level)[k] = v.format(**KEYWORDS.get(language))
+                        parsed_adventure.get("levels").get(level)[k] = v.format(**KEYWORDS.get(language))
                     except IndexError:
                         print("There is an issue due to an empty placeholder in the following line:")
                         print(v)
@@ -202,12 +200,11 @@ class Adventures:
     def get_adventure_keyname_name_levels(self):
         if self.debug_mode and not self.data.get("en", None):
             if not self.file:
-                self.file = YamlFile.for_file(
-                    f'content/adventures/{self.language}.yaml').get('adventures')
+                self.file = YamlFile.for_file(f"content/adventures/{self.language}.yaml").get("adventures")
             self.data["en"] = self.cache_adventure_keywords("en")
         adventures_dict = {}
         for adventure in self.data["en"].items():
-            adventures_dict[adventure[0]] = {adventure[1]['name']: list(adventure[1]['levels'].keys())}
+            adventures_dict[adventure[0]] = {adventure[1]["name"]: list(adventure[1]["levels"].keys())}
         return adventures_dict
 
     # Todo TB -> We can also cache this; why not?
@@ -215,36 +212,33 @@ class Adventures:
     def get_adventure_names(self):
         if self.debug_mode and not self.data.get("en", None):
             if not self.file:
-                self.file = YamlFile.for_file(
-                    f'content/adventures/{self.language}.yaml').get('adventures')
+                self.file = YamlFile.for_file(f"content/adventures/{self.language}.yaml").get("adventures")
             self.data["en"] = self.cache_adventure_keywords("en")
         adventures_dict = {}
         for adventure in self.data["en"].items():
-            adventures_dict[adventure[0]] = adventure[1]['name']
+            adventures_dict[adventure[0]] = adventure[1]["name"]
         return adventures_dict
 
     def get_adventures(self, keyword_lang="en"):
         if self.debug_mode and not self.data.get(keyword_lang, None):
             if not self.file:
-                self.file = YamlFile.for_file(
-                    f'content/adventures/{self.language}.yaml').get('adventures')
-            self.data[keyword_lang] = self.cache_adventure_keywords(
-                keyword_lang)
+                self.file = YamlFile.for_file(f"content/adventures/{self.language}.yaml").get("adventures")
+            self.data[keyword_lang] = self.cache_adventure_keywords(keyword_lang)
         return self.data.get(keyword_lang)
 
     def has_adventures(self):
         if self.debug_mode and not self.data.get("en", None):
             if not self.file:
-                self.file = YamlFile.for_file(
-                    f'content/adventures/{self.language}.yaml').get('adventures')
+                self.file = YamlFile.for_file(f"content/adventures/{self.language}.yaml").get("adventures")
             self.data["en"] = self.cache_adventure_keywords("en")
-        return True if self.data.get("en") else False     
-      
+        return True if self.data.get("en") else False
+
+
 # Todo TB -> We don't need these anymore as we guarantee with Weblate that each language file is there
 class NoSuchAdventure:
-  def get_adventure(self):
-    return {}
-  
+    def get_adventure(self):
+        return {}
+
 
 class ParsonsProblem:
     def __init__(self, language):
@@ -252,10 +246,10 @@ class ParsonsProblem:
         self.file = {}
         self.data = {}
 
-        self.debug_mode = not os.getenv('NO_DEBUG_MODE')
+        self.debug_mode = not os.getenv("NO_DEBUG_MODE")
 
         if not self.debug_mode:
-            self.file = YamlFile.for_file(f'content/parsons/{self.language}.yaml').get('levels')
+            self.file = YamlFile.for_file(f"content/parsons/{self.language}.yaml").get("levels")
             # We always create one with english keywords
             self.data["en"] = self.cache_parsons_keywords("en")
             if language in ALL_KEYWORD_LANGUAGES.keys():
@@ -266,9 +260,9 @@ class ParsonsProblem:
         for level in copy.deepcopy(self.file):
             exercises = copy.deepcopy(self.file.get(level))
             for number, exercise in exercises.items():
-                for k, v in exercise.get('code_lines').items():
+                for k, v in exercise.get("code_lines").items():
                     try:
-                        exercises.get(number).get('code_lines')[k] = v.format(**KEYWORDS.get(language))
+                        exercises.get(number).get("code_lines")[k] = v.format(**KEYWORDS.get(language))
                     except IndexError:
                         print("There is an issue due to an empty placeholder in the following line:")
                         print(v)
@@ -281,21 +275,21 @@ class ParsonsProblem:
     def get_highest_exercise_level(self, level):
         if self.debug_mode and not self.data.get("en", None):
             if not self.file:
-                self.file = YamlFile.for_file(f'content/parsons/{self.language}.yaml').get('levels')
+                self.file = YamlFile.for_file(f"content/parsons/{self.language}.yaml").get("levels")
             self.data["en"] = self.cache_parsons_keywords("en")
         return len(self.data["en"].get(level, {}))
 
     def get_parsons_data_for_level(self, level, keyword_lang="en"):
         if self.debug_mode and not self.data.get(keyword_lang, None):
             if not self.file:
-                self.file = YamlFile.for_file(f'content/parsons/{self.language}.yaml').get('levels')
+                self.file = YamlFile.for_file(f"content/parsons/{self.language}.yaml").get("levels")
             self.data[keyword_lang] = self.cache_parsons_keywords(keyword_lang)
         return self.data.get(keyword_lang, {}).get(level, None)
 
     def get_parsons_data_for_level_exercise(self, level, excercise, keyword_lang="en"):
         if self.debug_mode and not self.data.get(keyword_lang, None):
             if not self.file:
-                self.file = YamlFile.for_file(f'content/parsons/{self.language}.yaml').get('levels')
+                self.file = YamlFile.for_file(f"content/parsons/{self.language}.yaml").get("levels")
             self.data[keyword_lang] = self.cache_parsons_keywords(keyword_lang)
         return self.data.get(keyword_lang, {}).get(level, {}).get(excercise, None)
 
@@ -309,10 +303,10 @@ class Quizzes:
         # For some reason the is_debug_mode() function is not (yet) ready when we call this code
         # So we call the NO_DEBUG_MODE directly from the environment
         # Todo TB -> Fix that the is_debug_mode() function is ready before server start
-        self.debug_mode = not os.getenv('NO_DEBUG_MODE')
+        self.debug_mode = not os.getenv("NO_DEBUG_MODE")
 
         if not self.debug_mode:
-            self.file = YamlFile.for_file(f'content/quizzes/{self.language}.yaml').to_dict()
+            self.file = YamlFile.for_file(f"content/quizzes/{self.language}.yaml").to_dict()
             self.data["en"] = self.cache_quiz_keywords("en")
             if language in ALL_KEYWORD_LANGUAGES.keys():
                 self.data[language] = self.cache_quiz_keywords(language)
@@ -340,7 +334,7 @@ class Quizzes:
     def get_highest_question_level(self, level):
         if self.debug_mode and not self.data.get("en", None):
             if not self.file:
-                self.file = YamlFile.for_file(f'content/quizzes/{self.language}.yaml').get('levels')
+                self.file = YamlFile.for_file(f"content/quizzes/{self.language}.yaml").get("levels")
             self.data["en"] = self.cache_quiz_keywords("en")
         return len(self.data["en"].get(level, {}))
 
@@ -350,7 +344,7 @@ class Quizzes:
 
         if self.debug_mode and not self.data.get(keyword_lang, None):
             if not self.file:
-                self.file = YamlFile.for_file(f'content/quizzes/{self.language}.yaml').get('levels')
+                self.file = YamlFile.for_file(f"content/quizzes/{self.language}.yaml").get("levels")
             self.data[keyword_lang] = self.cache_quiz_keywords(keyword_lang)
         return self.data.get(keyword_lang, {}).get(level, None)
 
@@ -360,7 +354,7 @@ class Quizzes:
 
         if self.debug_mode and not self.data.get(keyword_lang, None):
             if not self.file:
-                self.file = YamlFile.for_file(f'content/quizzes/{self.language}.yaml').get('levels')
+                self.file = YamlFile.for_file(f"content/quizzes/{self.language}.yaml").get("levels")
             self.data[keyword_lang] = self.cache_quiz_keywords(keyword_lang)
         return self.data.get(keyword_lang, {}).get(level, {}).get(question, None)
 
@@ -375,10 +369,10 @@ class Tutorials:
     def __init__(self, language):
         self.language = language
         # We can keep these cached, even in debug_mode: files are small and don't influence start-up time much
-        self.file = YamlFile.for_file(f'content/tutorials/{self.language}.yaml')
+        self.file = YamlFile.for_file(f"content/tutorials/{self.language}.yaml")
         self.data = {}
 
-        self.debug_mode = not os.getenv('NO_DEBUG_MODE')
+        self.debug_mode = not os.getenv("NO_DEBUG_MODE")
 
         if not self.debug_mode:
             self.data["en"] = self.cache_tutorials("en")
@@ -388,9 +382,9 @@ class Tutorials:
     def cache_tutorials(self, language):
         tutorial_data = {}
         for level in copy.deepcopy(self.file):
-            steps = copy.deepcopy(self.file).get(level).get('steps')
+            steps = copy.deepcopy(self.file).get(level).get("steps")
             for index, data in steps.items():
-                steps[index]['text'] = data['text'].format(**KEYWORDS.get(language))
+                steps[index]["text"] = data["text"].format(**KEYWORDS.get(language))
             tutorial_data[level] = steps
         return tutorial_data
 
@@ -403,6 +397,7 @@ class Tutorials:
         if self.debug_mode and not self.data.get(keyword_lang, None):
             self.data[keyword_lang] = self.cache_tutorials(keyword_lang)
         return self.data.get(keyword_lang, {}).get(level, {}).get(step, None)
+
 
 class NoSuchTutorial:
     def get_tutorial_data_for_level(self, level, keyword_lang):

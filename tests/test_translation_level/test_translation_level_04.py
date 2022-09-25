@@ -5,11 +5,12 @@ from parameterized import parameterized
 from tests.Tester import HedyTester
 import hedy_translation
 
-    # tests should be ordered as follows:
-    # * Translation from English to Dutch
-    # * Translation from Dutch to English
-    # * Translation to several languages
-    # * Error handling
+# tests should be ordered as follows:
+# * Translation from English to Dutch
+# * Translation from Dutch to English
+# * Translation to several languages
+# * Error handling
+
 
 class TestsTranslationLevel4(HedyTester):
     level = 4
@@ -62,7 +63,6 @@ class TestsTranslationLevel4(HedyTester):
 
         self.assertEqual(expected, result)
 
-
     def test_print_nl_en(self):
         code = "print 'Hello welcome to Hedy.'"
 
@@ -87,16 +87,18 @@ class TestsTranslationLevel4(HedyTester):
 
         self.assertEqual(expected, result)
 
-    @parameterized.expand([('en', 'ask'), ('es', 'preguntar'), ('es', 'ask')])
+    @parameterized.expand([("en", "ask"), ("es", "preguntar"), ("es", "ask")])
     def test_ask_type_error_translates_command(self, lang, ask):
-        code = textwrap.dedent(f"""\
+        code = textwrap.dedent(
+            f"""\
             colors is orange, blue, green
-            favorite is {ask} 'Is your fav color' colors""")
+            favorite is {ask} 'Is your fav color' colors"""
+        )
 
         self.multi_level_tester(
             lang=lang,
             code=code,
             max_level=11,
             exception=hedy.exceptions.InvalidArgumentTypeException,
-            extra_check_function=self.exception_command(ask)
+            extra_check_function=self.exception_command(ask),
         )
