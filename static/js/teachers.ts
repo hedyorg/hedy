@@ -54,6 +54,29 @@ export function rename_class(id: string, class_name_prompt: string) {
     });
 }
 
+export function duplicate_class(id: string, prompt: string) {
+    modal.prompt (prompt, '', function (class_name) {
+    $.ajax({
+      type: 'POST',
+      url: '/duplicate_class',
+      data: JSON.stringify({
+        id: id,
+        name: class_name
+      }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function(response) {
+      if (response.achievement) {
+            showAchievements(response.achievement, true, "");
+          } else {
+            location.reload();
+          }
+    }).fail(function(err) {
+      return modal.alert(err.responseText, 3000, true);
+    });
+  });
+}
+
 export function delete_class(id: string, prompt: string) {
   modal.confirm (prompt, function () {
     $.ajax({
@@ -63,9 +86,9 @@ export function delete_class(id: string, prompt: string) {
       dataType: 'json'
     }).done(function(response) {
       if (response.achievement) {
-        showAchievements(response.achievement, false, '/for-teachers');
+        showAchievements(response.achievement, true, '');
       } else {
-        window.location.pathname = '/for-teachers';
+        location.reload();
       }
     }).fail(function(err) {
       modal.alert(err.responseText, 3000, true);
@@ -177,10 +200,18 @@ export function create_adventure(prompt: string) {
 }
 
 function update_db_adventure(adventure_id: string) {
+   // Todo TB: It would be nice if we improve this with the formToJSON() function once #3077 is merged
+
    const adventure_name = $('#custom_adventure_name').val();
    const level = $('#custom_adventure_level').val();
    const content = DOMPurify.sanitize(<string>$('#custom_adventure_content').val());
    const agree_public = $('#agree_public').prop('checked');
+   // Get all checked checkboxes of the class 'customize_adventure_class_checkbox' and map their values
+   // The values in this case are the class id's for which we need to update the class customizations
+   let classes = new Array();
+   $(".customize_adventure_class_checkbox:checked").each(function () {
+     classes.push($(this).val());
+   });
 
     $.ajax({
       type: 'POST',
@@ -190,6 +221,7 @@ function update_db_adventure(adventure_id: string) {
         name: adventure_name,
         level: level,
         content: content,
+        classes: classes,
         public: agree_public
       }),
       contentType: 'application/json',
@@ -288,6 +320,7 @@ export function change_password_student(username: string, enter_password: string
 }
 
 export function show_doc_section(section_key: string) {
+  // Todo TB: We can improve this code as it is quite cumbersome (08-22)
   $(".section-button").each(function(){
        if ($(this).hasClass('blue-btn')) {
            $(this).removeClass("blue-btn");
@@ -305,27 +338,6 @@ export function show_doc_section(section_key: string) {
      $ ('.common-mistakes-section').hide ();
      $('#section-' + section_key).toggle();
    }
-   // Loop-index -1 doesn't exist -> automatically hide all "common mistakes" sections
-   show_common_mistakes("-1");
-}
-
-export function show_common_mistakes(section_key: string) {
-    $(".common-mistakes-button").each(function(){
-       if ($(this).hasClass('blue-btn')) {
-           $(this).removeClass("blue-btn");
-           $(this).addClass("green-btn");
-       }
-   });
-   if ($ ('#common_mistakes-' + section_key).is (':visible')) {
-       $("#cm-button-" + section_key).removeClass("blue-btn");
-       $("#cm-button-" + section_key).addClass("green-btn");
-       $ ('.common-mistakes-section').hide ();
-   } else {
-     $("#cm-button-" + section_key).removeClass("green-btn");
-     $("#cm-button-" + section_key).addClass("blue-btn");
-     $('.common-mistakes-section').hide();
-     $('#common_mistakes-' + section_key).toggle();
-   }
 }
 
 //https://stackoverflow.com/questions/7196212/how-to-create-dictionary-and-add-key-value-pairs-dynamically?rq=1
@@ -336,19 +348,16 @@ export function save_customizations(class_id: string) {
             levels.push(<string>$(this).val());
         }
     });
-    let adventures = {};
+    let adventures: Record<string, string[]> = {};
     $('.adventure_keys').each(function() {
-        const name = <string>$(this).attr('adventure');
-        // @ts-ignore
+        const name = <string>$(this).attr('adventure') as string;
         adventures[name] = [];
     });
     $('.adventure_level_input').each(function() {
         const name = <string>$(this).attr('adventure');
-        // @ts-ignore
         let current_list = adventures[name];
         if ($(this).prop("checked")) {
             current_list.push(<string>$(this).attr('level'));
-            // @ts-ignore
             adventures[name] = current_list;
         }
     });
@@ -364,12 +373,11 @@ export function save_customizations(class_id: string) {
             other_settings.push(<string>$(this).attr('id'));
         }
     });
-    let opening_dates = {};
+    let opening_dates: Record<string, string> = {};
     $('.opening_date_container').each(function() {
         if ($(this).is(":visible")) {
             $(this).find(':input').each(function () {
-                // @ts-ignore
-                opening_dates[<string>$(this).attr('level')] = $(this).val();
+                opening_dates[$(this).attr('level') as string] = $(this).val() as string;
             });
         }
     });
@@ -481,6 +489,19 @@ export function add_account_placeholder() {
     row.appendTo("#account_rows_container");
 }
 
+export function generate_passwords() {
+    $('.account_row').each(function () {
+        if ($(this).is(':visible')) {
+            $(this).find(':input').each(function () {
+                if ($(this).attr('id') == "password") {
+                    const random_password = generateRandomString(6);
+                    $(this).val(random_password);
+                }
+            });
+        }
+    });
+}
+
 export function create_accounts(prompt: string) {
     modal.confirm (prompt, function () {
         $('#account_rows_container').find(':input').each(function () {
@@ -489,10 +510,9 @@ export function create_accounts(prompt: string) {
         let accounts: {}[] = [];
         $('.account_row').each(function () {
             if ($(this).is(':visible')) { //We want to skip the hidden first "copy" row
-                let account = {};
+                let account: Record<string, string> = {};
                 $(this).find(':input').each(function () {
-                    // @ts-ignore -> Not sure why TypeScript has issues, this should be valid
-                    account[$(this).attr("name")] = $(this).val();
+                    account[$(this).attr("name") as string] = $(this).val() as string;
                 });
                 accounts.push(account);
             }
@@ -557,4 +577,14 @@ export function copy_join_link(link: string, success: string) {
     document.execCommand("copy");
     document.body.removeChild(sampleTextarea);
     modal.alert(success, 3000, false);
+}
+
+// https://onlinewebtutorblog.com/how-to-generate-random-string-in-jquery-javascript/
+function generateRandomString(length: number) {
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    for (var i = 0; i < length; i++) {
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+    return text;
 }

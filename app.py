@@ -1,4 +1,5 @@
 # coding=utf-8
+import ast
 import copy
 
 from website import auth, parsons
@@ -14,7 +15,7 @@ from website.auth import current_user, login_user_from_token_cookie, requires_lo
 from website.yaml_file import YamlFile
 from website import querylog, aws_helpers, jsonbin, translating, ab_proxying, cdn, database, achievements
 import hedy_translation
-from hedy_content import COUNTRIES, ALL_LANGUAGES, ALL_KEYWORD_LANGUAGES, NON_LATIN_LANGUAGES
+from hedy_content import COUNTRIES, ALL_LANGUAGES, ALL_KEYWORD_LANGUAGES, NON_LATIN_LANGUAGES, NON_BABEL
 import hedyweb
 import hedy_content
 from flask_babel import gettext
@@ -69,6 +70,10 @@ QUIZZES = collections.defaultdict(hedy_content.NoSuchQuiz)
 for lang in ALL_LANGUAGES.keys():
     QUIZZES[lang] = hedy_content.Quizzes(lang)
 
+TUTORIALS = collections.defaultdict(hedy_content.NoSuchTutorial)
+for lang in ALL_LANGUAGES.keys():
+    TUTORIALS[lang] = hedy_content.Tutorials(lang)
+
 ACHIEVEMENTS_TRANSLATIONS = hedyweb.AchievementTranslations()
 ACHIEVEMENTS = achievements.Achievements()
 DATABASE = database.Database()
@@ -77,7 +82,8 @@ DATABASE = database.Database()
 PUBLIC_PROGRAMS = DATABASE.get_all_public_programs()
 
 
-def load_adventures_per_level(level):
+# Load the adventures, by default with the selected keyword language
+def load_adventures_per_level(level, keyword_lang):
     loaded_programs = {}
     # If user is logged in, we iterate their programs that belong to the current level. Out of these, we keep the latest created program for both the level mode(no adventure) and for each of the adventures.
     if current_user()['username']:
@@ -90,7 +96,7 @@ def load_adventures_per_level(level):
                 loaded_programs[program_key] = program
 
     all_adventures = []
-    adventures = ADVENTURES[g.lang].get_adventures(g.keyword_lang)
+    adventures = ADVENTURES[g.lang].get_adventures(keyword_lang)
 
     for short_name, adventure in adventures.items():
         if level not in adventure['levels']:
@@ -140,6 +146,8 @@ logging.basicConfig(
 
 @babel.localeselector
 def get_locale():
+    if session.get("lang", request.accept_languages.best_match(ALL_LANGUAGES.keys(), 'en')) in NON_BABEL:
+        return "en"
     return session.get("lang", request.accept_languages.best_match(ALL_LANGUAGES.keys(), 'en'))
 
 
@@ -656,6 +664,8 @@ def programs_page(user):
 
     level = request.args.get('level', default=None, type=str)
     adventure = request.args.get('adventure', default=None, type=str)
+    filter = request.args.get('filter', default=None, type=str)
+
     level = None if level == "null" else level
     adventure = None if adventure == "null" else adventure
 
@@ -665,8 +675,10 @@ def programs_page(user):
         result = DATABASE.programs_for_user(from_user or username)
 
     programs = []
-    now = timems()
     for item in result:
+        # If we filter on the submitted programs -> skip the onces that are not submitted
+        if filter == "submitted" and not item.get('submitted'):
+            continue
         date = utils.delta_timestamp(item['date'])
         # This way we only keep the first 4 lines to show as preview to the user
         code = "\n".join(item['code'].split("\n")[:4])
@@ -683,8 +695,7 @@ def programs_page(user):
         )
 
     return render_template('programs.html', programs=programs, page_title=gettext('title_programs'),
-                           current_page='programs', from_user=from_user, filtered_level=level,
-                           filtered_adventure=adventure, adventure_names=adventures_names,
+                           current_page='programs', from_user=from_user, adventure_names=adventures_names,
                            public_profile=public_profile, max_level=hedy.HEDY_MAX_LEVEL)
 
 
@@ -734,10 +745,13 @@ def tutorial_index():
     if not current_user()['username']:
         return redirect('/login')
     level = 1
-    commands = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
-    adventures = load_adventures_per_level(level)
+    cheatsheet = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
+    commands = hedy.commands_per_level.get(level)
+    adventures = load_adventures_per_level(level, g.keyword_lang)
+    parsons = len(PARSONS[g.lang].get_parsons_data_for_level(level))
 
-    return hedyweb.render_tutorial_mode(level=level, commands=commands, adventures=adventures)
+    return hedyweb.render_tutorial_mode(level=level, cheatsheet=cheatsheet, commands=commands,
+                                        adventures=adventures, parsons_exercises=parsons)
 
 
 @app.route('/teacher-tutorial', methods=['GET'])
@@ -799,7 +813,13 @@ def index(level, program_id):
         if 'adventure_name' in result:
             adventure_name = result['adventure_name']
 
-    adventures = load_adventures_per_level(level)
+    # In case of a "forced keyword language" -> load that one, otherwise: load the one stored in the g object
+    keyword_language = request.args.get('keyword_language', default=None, type=str)
+    if keyword_language:
+        adventures = load_adventures_per_level(level, keyword_language)
+    else:
+        adventures = load_adventures_per_level(level, g.keyword_lang)
+
     customizations = {}
     if current_user()['username']:
         customizations = DATABASE.get_student_class_customizations(current_user()['username'])
@@ -817,7 +837,7 @@ def index(level, program_id):
     if 'levels' in customizations and level not in available_levels:
         return utils.error_page(error=403, ui_message=gettext('level_not_class'))
 
-    commands = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
+    cheatsheet = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
 
     teacher_adventures = []
     # Todo: TB It would be nice to improve this by using level as a sort key
@@ -854,7 +874,10 @@ def index(level, program_id):
     if 'other_settings' in customizations and 'hide_quiz' in customizations['other_settings']:
         quiz = False
 
+    commands = hedy.commands_per_level.get(level)
+
     return hedyweb.render_code_editor_with_tabs(
+        cheatsheet=cheatsheet,
         commands=commands,
         max_level=hedy.HEDY_MAX_LEVEL,
         level_number=level,
@@ -873,9 +896,8 @@ def index(level, program_id):
 
 
 @app.route('/hedy/<id>/view', methods=['GET'])
-def view_program(id):
-
-    user = current_user()
+@requires_login
+def view_program(user, id):
     result = DATABASE.program_by_id(id)
 
     if not result:
@@ -928,14 +950,14 @@ def get_specific_adventure(name, level):
         return utils.error_page(error=404, ui_message=gettext('no_such_level'))
 
     adventure = [x for x in load_adventures_per_level(
-        level) if x.get('short_name') == name]
+        level, g.keyword_lang) if x.get('short_name') == name]
     if not adventure:
         return utils.error_page(error=404, ui_message=gettext('no_such_adventure'))
 
     prev_level = level-1 if [x for x in load_adventures_per_level(
-        level-1) if x.get('short_name') == name] else False
+        level-1, g.keyword_lang) if x.get('short_name') == name] else False
     next_level = level+1 if [x for x in load_adventures_per_level(
-        level+1) if x.get('short_name') == name] else False
+        level+1, g.keyword_lang) if x.get('short_name') == name] else False
 
     return hedyweb.render_specific_adventure(level_number=level, adventure=adventure, version=version(),
                                              prev_level=prev_level, next_level=next_level)
@@ -1017,8 +1039,7 @@ def profile_page(user):
 
     profile = DATABASE.user_by_username(user['username'])
     programs = DATABASE.public_programs_for_user(user['username'])
-    public_profile_settings = DATABASE.get_public_profile_settings(current_user()[
-                                                                   'username'])
+    public_profile_settings = DATABASE.get_public_profile_settings(current_user()['username'])
 
     classes = []
     if profile.get('classes'):
@@ -1027,12 +1048,17 @@ def profile_page(user):
 
     invite = DATABASE.get_username_invite(user['username'])
     if invite:
+        # We have to keep this in mind as well, can simply be set to 1 for now
+        # But when adding more message structures we have to use a more sophisticated structure
+        session['messages'] = 1
         # If there is an invite: retrieve the class information
         class_info = DATABASE.get_class(invite.get('class_id', None))
         if class_info:
             invite['teacher'] = class_info.get('teacher')
             invite['class_name'] = class_info.get('name')
             invite['join_link'] = class_info.get('link')
+    else:
+        session['messages'] = 0
 
     return render_template('profile.html', page_title=gettext('title_my-profile'), programs=programs,
                            user_data=profile, invite_data=invite, public_settings=public_profile_settings,
@@ -1056,6 +1082,11 @@ def main_page(page):
         learn_more_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
         return render_template('learn-more.html', papers=hedy_content.RESEARCH, page_title=gettext('title_learn-more'),
                                current_page='learn-more', content=learn_more_translations)
+
+    if page == 'join':
+        join_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
+        return render_template('join.html', page_title=gettext('title_learn-more'),
+                               current_page='join', content=join_translations)
 
     if page == 'privacy':
         privacy_translations = hedyweb.PageTranslations(
@@ -1090,32 +1121,6 @@ def landing_page(user, first):
     return render_template('landing-page.html', first_time=True if first else False,
                            page_title=gettext('title_landing-page'), user=user['username'],
                            user_info=user_info, program=user_programs, achievements=user_achievements)
-
-
-@app.route('/for-teachers', methods=['GET'])
-@requires_login
-def for_teachers_page(user):
-    if not is_teacher(user):
-        return utils.error_page(error=403, ui_message=gettext('not_teacher'))
-
-    page_translations = hedyweb.PageTranslations('for-teachers').get_page_translations(g.lang)
-    welcome_teacher = session.get('welcome-teacher') or False
-    session.pop('welcome-teacher', None)
-
-    teacher_classes = DATABASE.get_teacher_classes(current_user()['username'], True)
-    adventures = []
-    for adventure in DATABASE.get_teacher_adventures(current_user()['username']):
-        adventures.append(
-          {'id': adventure.get('id'),
-           'name': adventure.get('name'),
-           'date': utils.localized_date_format(adventure.get('date')),
-           'level': adventure.get('level')
-           }
-        )
-
-    return render_template('for-teachers.html', current_page='my-profile', page_title=gettext('title_for-teacher'),
-                           content=page_translations, teacher_classes=teacher_classes,
-                           teacher_adventures=adventures, welcome_teacher=welcome_teacher)
 
 
 @app.route('/explore', methods=['GET'])
@@ -1268,63 +1273,10 @@ def translate_keywords():
         return gettext('translate_error'), 400
 
 
-def tutorial_steps(step):
-    if step == 0:
-        translation = [gettext('tutorial_start_title'), gettext('tutorial_start_message')]
-    elif step == 1:
-        translation = [gettext('tutorial_editor_title'), gettext('tutorial_editor_message')]
-    elif step == 2:
-        translation = [gettext('tutorial_output_title'), gettext('tutorial_output_message')]
-    elif step == 3:
-        translation = [gettext('tutorial_run_title'), gettext('tutorial_run_message')]
-    elif step == 4:
-        translation = [gettext('tutorial_tryit_title'), gettext('tutorial_tryit_message')]
-    elif step == 5:
-        translation = [gettext('tutorial_speakaloud_title'), gettext('tutorial_speakaloud_message')]
-    elif step == 6:
-        translation = [gettext('tutorial_speakaloud_run_title'), gettext('tutorial_speakaloud_run_message')]
-    elif step == 7:
-        translation = [gettext('tutorial_nextlevel_title'), gettext('tutorial_nextlevel_message')]
-    elif step == 8:
-        translation = [gettext('tutorial_leveldefault_title'), gettext('tutorial_leveldefault_message')]
-    elif step == 9:
-        translation = [gettext('tutorial_adventures_title'), gettext('tutorial_adventures_message')]
-    elif step == 10:
-        translation = [gettext('tutorial_quiz_title'), gettext('tutorial_quiz_message')]
-    elif step == 11:
-        translation = [gettext('tutorial_saveshare_title'), gettext('tutorial_saveshare_message')]
-    elif step == 12:
-        translation = [gettext('tutorial_cheatsheet_title'), gettext('tutorial_cheatsheet_message')]
-    elif step == 13:
-        translation = [gettext('tutorial_end_title'), gettext('tutorial_end_message')]
-    else:
-        translation = [gettext('tutorial_title_not_found'), gettext('tutorial_message_not_found')]
-    return translation
-
-
-def teacher_tutorial_steps(step):
-    if step == 0:
-        translation = [gettext('tutorial_start_title'), gettext('teacher_tutorial_start_message')]
-    elif step == 1:
-        translation = [gettext('tutorial_class_title'), gettext('tutorial_class_message')]
-    elif step == 2:
-        translation = [gettext('tutorial_customize_class_title'), gettext('tutorial_customize_class_message')]
-    elif step == 3:
-        translation = [gettext('tutorial_own_adventures_title'), gettext('tutorial_own_adventures_message')]
-    elif step == 4:
-        translation = [gettext('tutorial_accounts_title'), gettext('tutorial_accounts_message')]
-    elif step == 5:
-        translation = [gettext('tutorial_documentation_title'), gettext('tutorial_documentation_message')]
-    elif step == 6:
-        translation = [gettext('tutorial_end_title'), gettext('teacher_tutorial_end_message')]
-    else:
-        translation = [gettext('tutorial_title_not_found'), gettext('tutorial_message_not_found')]
-    return translation
-
-
-@app.route('/get_tutorial_step/<step>', methods=['GET'])
-def get_tutorial_translation(step):
-    # We also retrieve the example code snippet as a "tutorial step" to reduce the need of new code
+# TODO TB: Think about changing this to sending all steps to the front-end at once
+@app.route('/get_tutorial_step/<level>/<step>', methods=['GET'])
+def get_tutorial_translation(level, step):
+    # Keep this structure temporary until we decide on a nice code / parse structure
     if step == "code_snippet":
         return jsonify({'code': gettext('tutorial_code_snippet')}), 200
     try:
@@ -1332,18 +1284,11 @@ def get_tutorial_translation(step):
     except ValueError:
         return gettext('invalid_tutorial_step'), 400
 
-    translation = tutorial_steps(step)
-    return jsonify({'translation': translation}), 200
+    data = TUTORIALS[g.lang].get_tutorial_for_level_step(level, step, g.keyword_lang)
+    if not data:
+        data = {'title': gettext('tutorial_title_not_found'), 'text': gettext('tutorial_message_not_found')}
+    return jsonify(data), 200
 
-@app.route('/get_teacher_tutorial_step/<step>', methods=['GET'])
-def get_teacher_tutorial_translation(step):
-    try:
-        step = int(step)
-    except ValueError:
-        return gettext('invalid_tutorial_step'), 400
-
-    translation = teacher_tutorial_steps(step)
-    return jsonify({'translation': translation}), 200
 
 @app.route('/store_parsons_order', methods=['POST'])
 def store_parsons_order():
@@ -1406,6 +1351,11 @@ def other_keyword_language():
         return make_keyword_lang_obj("en")
     return None
 
+@app.template_global()
+def translate_command(command):
+    # Return the translated command found in KEYWORDS, if not found return the command itself
+    return hedy_content.KEYWORDS[g.lang].get(command, command)
+
 
 @app.template_filter()
 def nl2br(x):
@@ -1458,14 +1408,25 @@ def keyword_languages():
 def keyword_languages_keys():
     return [l for l in ALL_KEYWORD_LANGUAGES.keys()]
 
+
 @app.template_global()
 def get_country(country):
     return COUNTRIES.get(country, "-")
 
 
 @app.template_global()
+# If the current user language supports localized keywords: return this value, else: english
+def get_syntax_language(lang):
+    if lang in ALL_KEYWORD_LANGUAGES.keys():
+        return lang
+    else:
+        return "en"
+
+
+@app.template_global()
 def parse_keyword(keyword):
     return hedy_content.KEYWORDS.get(g.keyword_lang).get(keyword)
+
 
 def make_lang_obj(lang):
     """Make a language object for a given language."""
@@ -1492,6 +1453,17 @@ def modify_query(**new_values):
 
     return '{}?{}'.format(request.path, url_encode(args))
 
+@app.template_global()
+def get_user_messages():
+    if not session.get('messages'):
+        # Todo TB: In the future this should contain the class invites + other messages
+        # As the class invites are binary (you either have one or you have none, we can possibly simplify this)
+        # Simply set it to 1 if we have an invite, otherwise keep at 0
+        invite = DATABASE.get_username_invite(current_user()['username'])
+        session['messages'] = 1 if invite else 0
+    if session.get('messages') > 0:
+        return session.get('messages')
+    return None
 
 # Todo TB: Re-write this somewhere sometimes following the line below
 # We only store this @app.route here to enable the use of achievements -> might want to re-write this in the future
@@ -1524,6 +1496,18 @@ def update_public_profile(user):
             achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "fresh_look")
     else:
         achievement = ACHIEVEMENTS.add_single_achievement(current_user()['username'], "go_live")
+
+    # Make sure the session value for the profile image is up-to-date
+    session['profile_image'] = body.get('image')
+
+    # If there is no current profile or if it doesn't have the tags list -> check if the user is a teacher / admin
+    if not current_profile or not current_profile.get('tags'):
+        body['tags'] = []
+        if is_teacher(user):
+            body['tags'].append('teacher')
+        if is_admin(user):
+            body['tags'].append('admin')
+
     DATABASE.update_public_profile(user['username'], body)
     if achievement:
         # Todo TB -> Check if we require message or success on front-end
@@ -1593,12 +1577,26 @@ def public_user_page(username):
     return utils.error_page(error=404, ui_message=gettext('user_not_private'))
 
 
+def valid_invite_code(code):
+    if not code:
+        return False
+
+    # Get the value from the environment, use literal_eval to convert from string list to an actual list
+    valid_codes = []
+    if os.getenv('TEACHER_INVITE_CODE'):
+        valid_codes.append(os.getenv('TEACHER_INVITE_CODE'))
+    if os.getenv('TEACHER_INVITE_CODES'):
+        valid_codes.extend(os.getenv('TEACHER_INVITE_CODES').split(','))
+
+    return code in valid_codes
+
 @app.route('/invite/<code>', methods=['GET'])
 def teacher_invitation(code):
     user = current_user()
 
-    if os.getenv('TEACHER_INVITE_CODE') != code:
+    if not valid_invite_code(code):
         return utils.error_page(error=404, ui_message=gettext('invalid_teacher_invitation_code'))
+
     if not user['username']:
         return render_template('teacher-invitation.html')
 

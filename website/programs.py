@@ -1,6 +1,7 @@
 from flask_babel import gettext
 import hedy
-from website.auth import requires_login, current_user, is_admin
+from config import config
+from website.auth import requires_login, current_user, is_admin, send_email, email_base_url, requires_admin
 import utils
 import uuid
 from flask import g, request, jsonify
@@ -26,15 +27,14 @@ def routes(app, database, achievements):
 
         result = DATABASE.program_by_id(body['id'])
 
-        if not result or result['username'] != user['username']:
+        if not result or (result['username'] != user['username'] and not is_admin(user)):
             return "", 404
         DATABASE.delete_program_by_id(body['id'])
         DATABASE.increase_user_program_count(user['username'], -1)
 
         # This only happens in the situation were a user deletes their favourite program -> Delete from public profile
         public_profile = DATABASE.get_public_profile_settings(current_user()['username'])
-        if public_profile and 'favourite_program' in public_profile and public_profile['favourite_program'] == body[
-            'id']:
+        if public_profile and 'favourite_program' in public_profile and public_profile['favourite_program'] == body['id']:
             DATABASE.set_favourite_program(user['username'], None)
 
         achievement = ACHIEVEMENTS.add_single_achievement(user['username'], "do_you_have_copy")
@@ -204,10 +204,8 @@ def routes(app, database, achievements):
             return "You can't set a favourite program without a public profile", 400
 
     @app.route('/programs/set_hedy_choice', methods=['POST'])
-    @requires_login
+    @requires_admin
     def set_hedy_choice(user):
-        if not is_admin(user):
-            return utils.error_page(error=403, ui_message=gettext('unauthorized'))
         body = request.json
         if not isinstance(body, dict):
             return 'body must be an object', 400
@@ -225,4 +223,21 @@ def routes(app, database, achievements):
         DATABASE.set_program_as_hedy_choice(body['id'], favourite)
         if favourite:
             return jsonify({'message': 'Program successfully set as a "Hedy choice" program.'}), 200
-        return jsonify({'message': 'Program sucessfully removed as a "Hedy choice" program.'}), 200
+        return jsonify({'message': 'Program successfully removed as a "Hedy choice" program.'}), 200
+
+    @app.route('/programs/report', methods=['POST'])
+    @requires_login
+    def report_program(user):
+        body = request.json
+
+        # Make sure the program actually exists and is public
+        program = DATABASE.program_by_id(body.get('id'))
+        if not program or program.get('public') != 1:
+            return gettext('report_failure'), 400
+
+        link = email_base_url() + '/hedy/' + body.get('id') + '/view'
+        send_email(config['email']['sender'], "The following program is reported by " + user['username'], link,
+                   '<a href="' + link + '">Program link</a>')
+
+        return {'message': gettext('report_success')}, 200
+

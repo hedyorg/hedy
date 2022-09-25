@@ -56,8 +56,10 @@ function resetWindow() {
       adventures [adventure.short_name] = adventure;
     });
 
-    // @ts-ignore
-    document.getElementById("repair_button").style.visibility = "hidden";
+    const btn = document.getElementById("repair_button");
+    if (btn) {
+      btn.style.visibility = "hidden";
+    }
     resetWindow();
 
     if (tabName === 'quiz') {
@@ -77,12 +79,14 @@ function resetWindow() {
     if (tabName === 'parsons') {
       $ ('#level-header input').hide ();
       $ ('#editor').hide();
+      $ ('#editor-area').show ();
       loadParsonsExercise(<number>(window.State.level || 1), 1);
       $ ('#parsons_code_container').show();
       $ ('#adventures-tab').css('height', '');
       $ ('#adventures-tab').css('min-height', '14em');
       $ ('#adventures-tab').css('max-height', '100%');
       $ ('#debug_container').hide();
+      return;
     } else {
       $ ('#editor').show();
       $ ('#level-header input').show ();
@@ -91,7 +95,7 @@ function resetWindow() {
       $ ('#adventures-tab').css('max-height', '20em');
     }
 
-    
+
     // Make sure that the adventure tab is hidden when switching and developer's mode is toggled on
     if ($('#developers_toggle').is(":checked")) {
       $('#adventures-tab').hide();
@@ -162,6 +166,12 @@ function resetWindow() {
     const hashFragment = window.location.hash.replace(/^#/, '');
     if (hashFragment) {
       switchToTab(hashFragment);
+    }
+  } else {
+    // If this is not the case: open the first tab we find
+    let tabname = $('.tab:first').attr('data-tab');
+    if (tabname) {
+      switchToTab(tabname);
     }
   }
 });

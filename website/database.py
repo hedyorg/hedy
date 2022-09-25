@@ -5,9 +5,10 @@ import functools
 import operator
 
 
+
 storage = dynamo.AwsDynamoStorage.from_env() or dynamo.MemoryStorage('dev_database.json')
 
-USERS = dynamo.Table(storage, 'users', 'username', indexed_fields=[dynamo.IndexKey('email')])
+USERS = dynamo.Table(storage, 'users', 'username', indexed_fields=[dynamo.IndexKey('email'), dynamo.IndexKey('epoch', 'created')])
 TOKENS = dynamo.Table(storage, 'tokens', 'id', indexed_fields=[dynamo.IndexKey(v) for v in ['id', 'username']])
 PROGRAMS = dynamo.Table(storage, 'programs', 'id', indexed_fields=[dynamo.IndexKey(v) for v in ['username', 'public', 'hedy_choice']])
 CLASSES = dynamo.Table(storage, 'classes', 'id', indexed_fields=[dynamo.IndexKey(v) for v in ['teacher', 'link']])
@@ -17,6 +18,19 @@ CUSTOMIZATIONS = dynamo.Table(storage, 'class_customizations', partition_key='id
 ACHIEVEMENTS = dynamo.Table(storage, 'achievements', partition_key='username')
 PUBLIC_PROFILES = dynamo.Table(storage, 'public_profiles', partition_key='username')
 PARSONS = dynamo.Table(storage, 'parsons', 'id')
+
+
+# We use the epoch field to make an index on the users table, sorted by a different
+# sort key. In our case, we want to sort by 'created', so that we can make an ordered
+# list of users.
+#
+# We add an 'epoch' field so that we can make an index of (PK: epoch, SK: created).
+# It doesn't matter what the 'epoch' field is, it just needs to have a predictable value
+# that we know so we can query on it again.
+# Once the users table starts to hit 10GB, we need to increase this number to make sure
+# the new users to to separate partition, and at that point we need to query both
+# partitions in the index (but that will most likely not happen any time soon...)
+CURRENT_USER_EPOCH = 1
 
 # Information on quizzes. We will update this record in-place as the user completes
 # more of the quiz. The database is formatted like this:
@@ -117,8 +131,9 @@ class Database:
         return programs
 
     def public_programs_for_user(self, username):
+        # Only return programs that are public but not submitted
         programs = PROGRAMS.get_many({'username': username}, reverse=True)
-        return [p for p in programs if p.get('public') == 1]
+        return [p for p in programs if p.get('public') == 1 and not p.get('submitted', False)]
 
     def program_by_id(self, id):
         """Get program by ID.
@@ -177,6 +192,7 @@ class Database:
 
     def store_user(self, user):
         """Store a user in the database."""
+        user['epoch'] = CURRENT_USER_EPOCH
         USERS.create(user)
 
     def record_login(self, username, new_password_hash=None):
@@ -212,17 +228,38 @@ class Database:
         for Class in self.get_teacher_classes (username, False):
             self.delete_class (Class)
 
-    def all_users(self, filtering=False):
-        """Return all users."""
-        # If we have some filtering -> return all possible users, otherwise return last 200
-        users = list(USERS.scan())
-        users.sort(key=lambda user: user.get('created', 0), reverse=True)
-        if filtering:
-            return users
-        return users[:200]
+    def all_users(self, page_token=None):
+        """Return a page from the users table.
+
+        There may be more users to retrieve. If so, the returned page object
+        will have a 'next_page_token' attribute to continue retrieval.
+
+        The pagination token will be of the form '<epoch>:<pagination_token>'
+        """
+        limit = 500
+
+        epoch, pagination_token = page_token.split(':', maxsplit=1) if page_token is not None else (CURRENT_USER_EPOCH, None)
+        epoch = int(epoch)
+
+        page = USERS.get_many(dict(epoch=epoch), pagination_token=pagination_token, limit=limit, reverse=True)
+
+        # If we are not currently at epoch > 1 and there are no more records in the current
+        # epoch, also include the first page of the next epoch.
+        if not page.next_page_token and epoch > 1:
+            epoch -= 1
+            next_epoch_page = USERS.get_many(dict(epoch=epoch), reverse=True, limit=limit)
+
+            # Build a new result page with both sets of records, ending with the next "next page" token
+            page = dynamo.ResultPage(list(page) + list(next_epoch_page), next_epoch_page.next_page_token)
+
+        # Prepend the epoch to the next pagination token
+        if page.next_page_token:
+            page.next_page_token = f'{epoch}:{page.next_page_token}'
+        return page
 
     def get_all_public_programs(self):
-        return PROGRAMS.get_many({'public': 1}, sort_key='date', reverse=True)
+        programs = PROGRAMS.get_many({'public': 1}, reverse=True)
+        return [x for x in programs if not x.get('submitted', False)]
 
     def get_highscores(self, username, filter, filter_value=None):
         profiles = []
@@ -274,10 +311,10 @@ class Database:
 
 
     def get_all_hedy_choices(self):
-        return PROGRAMS.get_many({'hedy_choice': 1}, sort_key='date', reverse=True)
+        return PROGRAMS.get_many({'hedy_choice': 1}, reverse=True)
 
     def get_hedy_choices(self):
-        return PROGRAMS.get_many({'hedy_choice': 1}, sort_key='date', limit=4, reverse=True)
+        return PROGRAMS.get_many({'hedy_choice': 1}, limit=4, reverse=True)
 
     def set_program_as_hedy_choice(self, id, favourite):
         PROGRAMS.update({'id': id}, {'hedy_choice': 1 if favourite else None})
@@ -286,7 +323,7 @@ class Database:
         """Return the classes with given id."""
         return CLASSES.get({'id': id})
 
-    def get_teacher_classes(self, username, students_to_list):
+    def get_teacher_classes(self, username, students_to_list=False):
         """Return all the classes belonging to a teacher."""
         classes = None
         if isinstance(storage, dynamo.AwsDynamoStorage):
@@ -408,6 +445,26 @@ class Database:
 
     def delete_class_customizations(self, class_id):
         CUSTOMIZATIONS.delete({'id': class_id})
+
+    def add_adventure_to_class_customizations(self, class_id, adventure_id):
+        customizations = self.get_class_customizations(class_id)
+        if not customizations:
+            customizations = {'id': class_id, 'teacher_adventures': [adventure_id]}
+        elif adventure_id not in customizations.get('teacher_adventures', []):
+            customizations['teacher_adventures'] = customizations.get('teacher_adventures', []) + [adventure_id]
+        # If both cases don't return valid the adventure is already in the customizations -> save a PUT operation
+        else:
+            return None
+        CUSTOMIZATIONS.put(customizations)
+
+    def remove_adventure_from_class_customizations(self, class_id, adventure_id):
+        customizations = self.get_class_customizations(class_id)
+        # If there are no customizations, leave as it is -> only perform an action if it is already stored on the class
+        if not customizations:
+            return None
+        elif adventure_id in customizations.get('teacher_adventures', []):
+            customizations['teacher_adventures'].remove(adventure_id)
+            CUSTOMIZATIONS.put(customizations)
 
     def update_class_customizations(self, customizations):
         CUSTOMIZATIONS.put(customizations)
@@ -546,7 +603,7 @@ class Database:
         start_week = self.to_year_week(self.parse_date(start, date(2022, 1, 1)))
         end_week = self.to_year_week(self.parse_date(end, date.today()))
 
-        data = [QUIZ_STATS.get_many({'id': i, 'week': dynamo.Between(start_week, end_week)}, sort_key='week') for i in ids]
+        data = [QUIZ_STATS.get_many({'id': i, 'week': dynamo.Between(start_week, end_week)}) for i in ids]
         return functools.reduce(operator.iconcat, data, [])
 
     def add_program_stats(self, id, level, exception):
@@ -564,7 +621,7 @@ class Database:
         start_week = self.to_year_week(self.parse_date(start, date(2022, 1, 1)))
         end_week = self.to_year_week(self.parse_date(end, date.today()))
 
-        data = [PROGRAM_STATS.get_many({'id': i, 'week': dynamo.Between(start_week, end_week)}, sort_key='week') for i in ids]
+        data = [PROGRAM_STATS.get_many({'id': i, 'week': dynamo.Between(start_week, end_week)}) for i in ids]
         return functools.reduce(operator.iconcat, data, [])
 
     def parse_date(self, d, default):

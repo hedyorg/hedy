@@ -1,15 +1,39 @@
 {% extends "auth.html" %}
 
 {% block main %}
-<div class="flex flex-row items-center justify-between pb-2 border-b">
+<div id="modal-tags" class="hidden fixed z-50 py-4 px-16 bg-blue-400 border-2 border-gray-400 rounded-lg text-lg text-center" style="top: 20%; left: 50%; transform: translate(-50%, -50%);">
+    <div class="absolute top-2 right-2" onclick="$('#modal-tags').hide();$('#modal-mask').hide();">
+        <svg class="fill-current h-12 w-12 ml-auto text-white cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+            <title>Close</title>
+            <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/>
+        </svg>
+    </div>
+    <div class="text-white font-bold text-2xl mt-2 mb-4">Update the tags of <span id="tags_username"></span></div>
+    <div id="tags_container" class="flex flex-row w-full gap-4">
+        <div class="flex flex-col gap-2 items-center">
+            <div class="bg-red-500 text-white py-1 rounded-lg font-bold px-3">{{_('certified_teacher')}} ⊙</div>
+            <input type="checkbox" id="certified-tag-input" class="tags-input bg-white">
+        </div>
+        <div class="flex flex-col gap-2 items-center">
+            <div class="bg-indigo-500 text-white py-1 rounded-lg font-bold px-3">{{_('distinguished_user')}} ⊙</div>
+            <input type="checkbox" id="distinguished-tag-input" class="tags-input bg-white">
+        </div>
+        <div class="flex flex-col gap-2 items-center">
+            <div class="bg-pink-500 text-white py-1 rounded-lg font-bold px-3">{{_('contributor')}} ⊙</div>
+            <input type="checkbox" id="contributor-tag-input" class="tags-input bg-white">
+        </div>
+    </div>
+    <button class="green-btn mt-4" onclick="hedyApp.update_user_tags();">Update tags</button>
+</div>
+<div class="flex flex-row items-center justify-between border-b">
     <h1>Users overview</h1>
     <div class="fle flex-row gap-2">
         <button type="reset" class="green-btn" onclick="window.open('/admin', '_self');">Return to admin page</button>
         <button type="reset" class="yellow-btn text-white" onclick="window.open('?filter=all', '_self');">View all users</button>
     </div>
 </div>
-<div class="w-full mt-4 mb-4" id="program_filter">
-    <form onsubmit="event.preventDefault (); hedyApp.filter_admin();">
+<div class="w-full mt-4" id="program_filter">
+    <form id="filterform" onsubmit="event.preventDefault (); hedyApp.filter_admin();">
         <div class="px-4 w-full flex flex-row border border-gray-400 py-2 rounded-lg">
             <div class="p-2 ltr:mr-4 rtl:ml-4">
                 <h2 class="px-8">Visible attributes</h2>
@@ -19,42 +43,48 @@
                             <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="username" name="username"><label class="inline-block w-40" for="username">Username</label>
                         </div>
                         <div class="flex flex-row items-center">
-                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="count" name="count"><label class="inline-block w-40" for="count">Programs</label>
+                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" id="count" name="count"><label class="inline-block w-40" for="count">Programs</label>
                         </div>
                         <div class="flex flex-row items-center">
                             <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="email" name="email"><label class="inline-block w-40" for="email">Email</label>
                         </div>
                         <div class="flex flex-row items-center">
-                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="created" name="created"><label class="inline-block w-40" for="created">Created</label>
+                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" id="created" name="created"><label class="inline-block w-40" for="created">Created</label>
                         </div>
                         <div class="flex flex-row items-center">
                             <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="last_login" name="last_login"><label class="inline-block w-40" for="last_login">Last login</label>
                         </div>
                         <div class="flex flex-row items-center">
-                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" id="birth_year" name="birth_year"><label class="inline-block w-40" for="birth_year">Birth year</label>
+                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="birth_year" name="birth_year"><label class="inline-block w-40" for="birth_year">Birth year</label>
+                        </div>
+                        <div class="flex flex-row items-center">
+                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="language" name="language"><label class="inline-block w-40" for="language">Language</label>
                         </div>
                     </div>
                     <div class="flex flex-col">
                         <div class="flex flex-row items-center">
-                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="language" name="language"><label class="inline-block w-40" for="language">Language</label>
-                        </div>
-                        <div class="flex flex-row items-center">
-                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="country" name="keyword_language"><label class="inline-block w-40" for="keyword_language">Keyword language</label>
+                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="keyword_language" name="keyword_language"><label class="inline-block w-40" for="keyword_language">Keyword language</label>
                         </div>
                         <div class="flex flex-row items-center">
                             <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="country" name="country"><label class="inline-block w-40" for="country">Country</label>
                         </div>
                         <div class="flex flex-row items-center">
-                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="gender" name="gender"><label class="inline-block w-40" for="gender">Gender</label>
+                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" id="gender" name="gender"><label class="inline-block w-40" for="gender">Gender</label>
                         </div>
                         <div class="flex flex-row items-center">
                             <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" id="experience" name="experience"><label class="inline-block w-40" for="experience">Experience</label>
+                        </div>
+                        <div class="flex flex-row items-center">
+                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="tags" name="tags"><label class="inline-block w-40" for="tags">Tags</label>
                         </div>
                         <div class="flex flex-row items-center">
                             <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" checked id="teacher" name="teacher"><label class="inline-block w-40" for="teacher">Teacher</label>
                         </div>
                         <div class="flex flex-row items-center">
                             <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" id="verified" name="verified"><label class="inline-block w-40" for="verified">Verified</label>
+                        </div>
+                        <div class="flex flex-row items-center">
+                            <input class="attribute inline-block ltr:ml-0 ltr:mr-3 rtl:mr-0 rtl:ml-3" type="checkbox" id="third_party" name="third_party"><label class="inline-block w-40" for="third_party">Third Party</label>
                         </div>
                     </div>
                 </div>
@@ -64,12 +94,13 @@
                 <select id="admin_filter_category" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded mr-4">
                     <option value="created" {% if filter and filter == "created" %} selected {% endif %}>Created</option>
                     <option value="last_login" {% if filter and filter == "last_login" %} selected {% endif %}>Last login</option>
+                    <option value="username" {% if filter and filter == "username" %} selected {% endif %}>Username</option>
                     <option value="email" {% if filter and filter == "email" %} selected {% endif %}>E-mail</option>
                     <option value="language" {% if filter and filter == "language" %} selected {% endif %}>Language</option>
                     <option value="keyword_language" {% if filter and filter == "keyword_language" %} selected {% endif %}>Keyword language</option>
                 </select>
                 <div class="flex flex-row items-center">
-                    <input placeholder="Enter a substring..." id="email_filter_input" type="text" {% if filter == "email" %} value="{{ email_filter }}" {% endif %} class="filter_input inline-block appearance-none w-full h-16 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded my-2 ltr:mr-2 rtl:ml-2" {% if filter != "email" %}style="display: none;"{% endif %}>
+                    <input placeholder="Enter a substring..." id="email_filter_input" type="text" {% if filter == "email" or filter == "username" %} value="{{ text_filter }}" {% endif %} class="filter_input inline-block appearance-none w-full h-16 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded my-2 ltr:mr-2 rtl:ml-2" {% if filter != "email" and filter != "username" %}style="display: none;"{% endif %}>
                     <select id="language_filter_input" class="filter_input inline-block appearance-none w-full h-16 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded my-2 ltr:mr-2 rtl:ml-2" {% if filter != "language" %}style="display: none;"{% endif %}>
                         <option value="{{ current_language().lang }}"{% if language_filter and language_filter == current_language().lang %} selected {% endif %}>{{ current_language().sym }}</option>
                         {% for lang in other_languages() %}
@@ -92,25 +123,29 @@
                 </div>
             </div>
         </div>
+
+        <input id="hidden-page-input" type="hidden" name="page" value="">
     </form>
 </div>
 <h4 class="text-center">Total amount of shown users: {{ users|length }}</h4>
 <div class="program w-full border-solid border-2 border-orange-400 rounded p-4">
-  <table class="table-auto mb-4 w-full text-sm">
+  <table class="table-auto w-full text-sm">
     <thead>
       <tr class="font-bold text-left">
           <td id="username_header">Username</td>
-          <td id="count_header">Programs</td>
+          <td id="count_header" class="hidden">Programs</td>
           <td id="email_header">Email</td>
-          <td id="created_header">Created</td>
+          <td id="created_header" class="hidden">Created</td>
           <td id="last_login_header">Last login</td>
-          <td id="birth_year_header" class="hidden">Birth year</td>
+          <td id="birth_year_header">Birth year</td>
           <td id="language_header">Language</td>
           <td id="keyword_language_header">Keyword lang</td>
           <td id="country_header">Country</td>
-          <td id="gender_header">Gender</td>
+          <td id="gender_header" class="hidden">Gender</td>
           <td id="experience_header" class="hidden">Experience</td>
+          <td id="tags_header" class="text-center">Tags</td>
           <td id="teacher_header" class="text-center">Teacher</td>
+          <td id="third_party_header" class="hidden" class="text-center">Third Party</td>
           <td id="verified_header" class="hidden">Verified</td>
       </tr>
     </thead>
@@ -118,22 +153,30 @@
       {% for user in users %}
           <tr>
             <td class="username_cell cursor-pointer"><a class="no-underline" onclick="window.open('/programs?user={{ user.username }}', '_blank');">{% if user.username|length > 18 %}{{user.username[:15] + "..."}}{% else %}{{user.username}}{% endif %}</a></td>
-            <td class="count_cell">{{user.program_count or 0}}</td>
-            <td class="email_cell cursor-pointer"><a class="no-underline" onclick="hedyApp.auth.changeUserEmail ('{{user.username}}', '{{user.email}}')">{% if user.email and user.email|length > 30 %}{{user.email[:27] + "..."}}{% else %}{{user.email}}{% endif %}</a></td>
-            <td class="created_cell">{{user.created}}</td>
+            <td class="count_cell hidden">{{user.program_count or 0}}</td>
+            <td class="email_cell cursor-pointer"><a class="no-underline" onclick="hedyApp.changeUserEmail ('{{user.username}}', '{{user.email}}')">{% if user.email and user.email|length > 30 %}{{user.email[:27] + "..."}}{% else %}{{user.email}}{% endif %}</a></td>
+            <td class="created_cell hidden">{{user.created}}</td>
             <td class="last_login_cell">{{user.last_login}}</td>
-            <td class="birth_year_cell hidden">{{user.birth_year}}</td>
+            <td class="birth_year_cell">{{user.birth_year}}</td>
             <td class="language_cell">{{user.language}}</td>
             <td class="keyword_language_cell">{{user.keyword_language}}</td>
             <td class="country_cell">{{user.country}}</td>
-            <td class="gender_cell">{{user.gender}}</td>
+            <td class="gender_cell hidden">{{user.gender}}</td>
             <td class="experience_cell hidden">{{user.prog_experience}}</td>
-            <td class="teacher_cell text-center"><input type="checkbox" {% if user.is_teacher %}checked="checked"{% endif %} onclick="hedyApp.markAsTeacher (this, '{{user.username}}', {% if user.is_teacher %}false{% else %}true{% endif %})"></td>
-            <td class="verified_cell hidden">{{user.email_verified}}</td>
+            <td class="tags_cell text-center cursor-pointer"><span onclick="hedyApp.edit_user_tags('{{user.username}}');">✏️</span></td>
+            {% if user.teacher_request %}
+                <td class="teacher_cell text-center"><span class="fa-solid fa-circle-question cursor-pointer" onclick="hedyApp.markAsTeacher (this, '{{user.username}}', true)"></span></td>
+            {% else %}
+                <td class="teacher_cell text-center"><input type="checkbox" {% if user.is_teacher %}checked="checked"{% endif %} onclick="hedyApp.markAsTeacher (this, '{{user.username}}', {% if user.is_teacher %}false{% else %}true{% endif %})"></td>
+            {% endif %}<td class="verified_cell hidden">{{user.email_verified}}</td>
+            <td class="third_party_cell hidden text-center"><input type="checkbox" {% if user.third_party %}checked="checked"{% endif %} ></td>
           </tr>
       {% endfor %}
     </tbody>
   </table>
+  {% if next_page_token %}
+  <button id="next_page_btn" data-page_token="{{next_page_token}}" class="green-btn mt-4">Next page »</button>
+  {% endif %}
 </div>
 <script>
     $(document).ready(function() {
@@ -147,9 +190,10 @@
                 $('.' + attribute + '_cell').show();
             }
         });
+        // Todo TB: Not sure why I wrote this code here instead of in a .ts file -> re-structure this someday (08-22)
         $('#admin_filter_category').change(function() {
            $('.filter_input').hide();
-           if ($('#admin_filter_category').val() == "email") {
+           if ($('#admin_filter_category').val() == "email" || $('#admin_filter_category').val() == "username") {
                $('#email_filter_input').show();
            } else if ($('#admin_filter_category').val() == "language") {
                $('#language_filter_input').show();
@@ -158,6 +202,14 @@
            } else {
                $('#date_filter_input').show();
            }
+        });
+
+        $('#next_page_btn').click(function() {
+            // Copy the token into the hidden input field, then submit the form
+            var token = $('#next_page_btn').data('page_token');
+            console.log(token);
+            $('#hidden-page-input').attr('value', token);
+            $('#filterform').submit();
         });
     });
 </script>

@@ -26,10 +26,12 @@ class Snippet:
 class HedyTester(unittest.TestCase):
   level = None
   max_turtle_level = 10
+  equality_comparison_with_is = ['is', '=']
   equality_comparison_commands = ['==', '=']
   number_comparison_commands = ['>', '>=', '<', '<=']
   comparison_commands = number_comparison_commands + ['!=']
   arithmetic_operations = ['+', '-', '*', '/']
+  arithmetic_transpiled_operators = [('*', '*'), ('/', '//'), ('+', '+'), ('-', '-')]
   quotes = ["'", '"']
 
   @staticmethod
@@ -273,6 +275,26 @@ class HedyTester(unittest.TestCase):
       if trtl not in ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']:
         raise Exception(f'While running your program the command <span class="command-highlighted">color</span> received the value <span class="command-highlighted">{{trtl}}</span> which is not allowed. Try using another color.')
       t.pencolor(trtl)""")
+
+  @staticmethod
+  def input_transpiled(var_name, text):
+    return textwrap.dedent(f"""\
+    {var_name} = input(f'''{text}''')
+    try:
+      {var_name} = int({var_name})
+    except ValueError:
+      try:
+        {var_name} = float({var_name})
+      except ValueError:
+        pass""")
+
+  @staticmethod
+  def remove_transpiled(list_name, value):
+    return textwrap.dedent(f"""\
+      try:
+        {list_name}.remove({value})
+      except:
+        pass""")
 
   # Used to overcome indentation issues when the above code is inserted
   # in test cases which use different indentation style (e.g. 2 or 4 spaces)

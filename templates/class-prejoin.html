@@ -1,7 +1,7 @@
 {% extends "auth.html" %}
 
 {% block main %}
-<div class="px-8">
+<div>
    {% if joined %}
         <div class="flex flex-col w-full items-center">
             <h1>{{_('class_already_joined')}} <i>"{{class_info.name}}"</i></h1>

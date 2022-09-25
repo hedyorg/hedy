@@ -11,7 +11,7 @@
         _('programs_submitted'): ['deadline_daredevil_I', 'deadline_daredevil_II', 'deadline_daredevil_III']
      },
      _('teacher'): {
-        '': ['ring_the_bell', 'ready_set_education', 'end_of_semester', 'on_second_thoughts', 'my_class_my_rules', 'detention', 'full_house']
+        '': ['ring_the_bell', 'ready_set_education', 'end_of_semester', 'on_second_thoughts', 'one_for_money', 'my_class_my_rules', 'detention', 'full_house']
      },
      _('hidden'): {
         '': ['hedy-ious', 'talk-talk-talk', 'hedy_hacking', 'hedy_honor', 'programming_panic', 'watch_out']
@@ -20,7 +20,7 @@
 %}
 
 {% block main %}
-    <h2 class="mx-0 lg:mx-16 px-2 mb-4">{{_('hedy_achievements')}}</h2>
+    <h2 class="mx-0 lg:mx-16 px-2">{{_('hedy_achievements')}}</h2>
     <div class="flex flex-col gap-4 mx-0 lg:mx-16">
         {% for title, subcategory in achievements.items() %}
             {% if title != _('teacher') or is_teacher %}
@@ -38,7 +38,7 @@
                                         <img src="{{static('/images/check.png')}}" class="absolute w-3/4 mt-2 block" alt="{{_('achievements_check_icon_alt')}}">
                                     </div>
                                 </div>
-                                <div class="w-40 h-full opacity-0 hover:opacity-75 bg-black rounded-lg inset-0 absolute z-10 text-center text-white px-4 pt-10">
+                                <div class="w-40 h-full opacity-0 hover:opacity-100 hover:bg-black/75 rounded-lg inset-0 absolute z-10 text-center text-white px-4 pt-10">
                                     <p class="font-semibold">{{ translations[achievement].text }}</p>
                                 </div>
                                 <div class="text-center flex items-center justify-center h-16">
@@ -50,7 +50,7 @@
                                 <div class="flex items-center justify-center h-40">
                                     <img src="{{static('/images/achievement.png')}}" class="px-2" alt="{{_('achievements_logo_alt')}}">
                                 </div>
-                                <div class="w-40 h-full opacity-0 hover:opacity-75 bg-black rounded-lg inset-0 absolute z-10 text-center text-white px-4 pt-10">
+                                <div class="w-40 h-full opacity-0 hover:opacity-100 hover:bg-black/75 rounded-lg inset-0 absolute z-10 text-center text-white px-4 pt-10">
                                     <p class="font-semibold">{% if title == _('hidden') %}???{% else %}{{ translations[achievement].text }}{% endif %}</p>
                                 </div>
                                 <div class="text-center flex items-center justify-center h-16">

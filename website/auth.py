@@ -1,3 +1,4 @@
+import ast
 import collections
 import os
 from flask_babel import gettext
@@ -101,6 +102,8 @@ def current_user():
         username = user['username']
         if username:
             db_user = DATABASE.user_by_username(username)
+            if not db_user:
+                raise RuntimeError(f'Cannot find current user in db anymore: {username}')
             remember_current_user(db_user)
 
     return user
@@ -114,13 +117,24 @@ def is_user_logged_in():
 # Remove the current info from the Flask session.
 def forget_current_user():
     session.pop('user', None)  # We are not interested in the value of the use key.
+    session.pop('messages', None)  # Delete messages counter for current user if existed
     session.pop('achieved', None)  # Delete session achievements if existing
     session.pop('keyword_lang', None)  # Delete session keyword language if existing
+    session.pop('profile_image', None)  # Delete profile image id if existing
 
 
 def is_admin(user):
-    admin_user = os.getenv('ADMIN_USER')
-    return user.get('username') == admin_user or user.get('email') == admin_user
+    """Whether the given user (object) is an admin.
+
+    Shecks the configuration in environment variables $ADMIN_USER and $ADMIN_USERS.
+    """
+    admin_users = []
+    if os.getenv('ADMIN_USER'):
+        admin_users.append(os.getenv('ADMIN_USER'))
+    if os.getenv('ADMIN_USERS'):
+        admin_users.extend(os.getenv('ADMIN_USERS').split(','))
+
+    return user.get('username') in admin_users or user.get('email') in admin_users
 
 
 def is_teacher(user):
@@ -132,7 +146,7 @@ def update_is_teacher(user, is_teacher_value=1):
     user_is_teacher = is_teacher(user)
     user_becomes_teacher = is_teacher_value and not user_is_teacher
 
-    DATABASE.update_user(user['username'], {'is_teacher': is_teacher_value})
+    DATABASE.update_user(user['username'], {'is_teacher': is_teacher_value, 'teacher_request': None})
 
     if user_becomes_teacher and not is_testing_request(request):
         try:
@@ -147,6 +161,16 @@ def requires_login(f):
     def inner(*args, **kws):
         if not is_user_logged_in():
             return utils.error_page(error=403)
+        return f(current_user(), *args, **kws)
+
+    return inner
+
+
+def requires_admin(f):
+    @wraps(f)
+    def inner(*args, **kws):
+        if not is_user_logged_in() or not is_admin(current_user()):
+            return utils.error_page(error=403, ui_message=gettext('unauthorized'))
         return f(current_user(), *args, **kws)
 
     return inner
@@ -236,6 +260,8 @@ def store_new_account(account, email):
         'language': account['language'],
         'keyword_language': account['keyword_language'],
         'created': timems(),
+        'teacher_request': True if account.get('is_teacher') else None,
+        'third_party': True if account.get('agree_third_party') else None,
         'verification_pending': hashed_token,
         'last_login': timems()
     }
@@ -310,6 +336,11 @@ def routes(app, database):
         else:
             DATABASE.record_login(user['username'])
 
+        # Check if the user has a public profile, if so -> retrieve the profile image
+        public_profile = DATABASE.get_public_profile_settings(user['username'])
+        if public_profile:
+            session['profile_image'] = public_profile.get('image', 1)
+
         # Make an empty response to make sure we have one
         resp = make_response()
 
@@ -357,12 +388,13 @@ def routes(app, database):
 
         # Validations, optional fields
         if 'birth_year' in body:
+            year = datetime.datetime.now().year
             try:
                 body['birth_year'] = int(body.get('birth_year'))
-                if body['birth_year'] <= 1900 or body['birth_year'] > datetime.datetime.now().year:
-                    return gettext('year_invalid').format(**{'current_year': str(datetime.datetime.now().year)}), 400
             except ValueError:
-                return gettext('year_invalid').format(**{'current_year': str(datetime.datetime.now().year)}), 400
+                return gettext('year_invalid').format(**{'current_year': str(year)}), 400
+            if not isinstance(body.get('birth_year'), int) or body['birth_year'] <= 1900 or body['birth_year'] > year:
+                return gettext('year_invalid').format(**{'current_year': str(year)}), 400
         if 'gender' in body:
             if body['gender'] != 'm' and body['gender'] != 'f' and body['gender'] != 'o':
                 return gettext('gender_invalid'), 400
@@ -372,10 +404,12 @@ def routes(app, database):
         if 'prog_experience' in body and body['prog_experience'] not in ['yes', 'no']:
             return gettext('experience_invalid'), 400
         if 'experience_languages' in body:
+            if isinstance(body['experience_languages'], str):
+                body['experience_languages'] = [body['experience_languages']]
             if not isinstance(body['experience_languages'], list):
                 return gettext('experience_invalid'), 400
             for language in body['experience_languages']:
-                if language not in['scratch', 'other_block', 'python', 'other_text']:
+                if language not in ['scratch', 'other_block', 'python', 'other_text']:
                     return gettext('programming_invalid'), 400
 
         if DATABASE.user_by_username(body['username'].strip().lower()):
@@ -394,16 +428,6 @@ def routes(app, database):
             else:
                 send_email(config['email']['sender'], 'Subscription to Hedy newsletter on signup', user['email'],
                            '<p>' + user['email'] + '</p>')
-
-        # If someone wants to be a Teacher -> sent a mail to manually set it
-        if not is_testing_request(request) and 'is_teacher' in body and body['is_teacher'] is True:
-            send_email(config['email']['sender'], 'Request for teacher\'s interface on signup', user['email'],
-                       '<p>' + user['email'] + '</p>')
-
-        # If someone agrees to the third party contacts -> sent a mail to manually write down
-        if not is_testing_request(request) and 'agree_third_party' in body and body['agree_third_party'] is True:
-            send_email(config['email']['sender'], 'Agreement to Third party offers on signup', user['email'],
-                       '<p>' + user['email'] + '</p>')
 
         # We automatically login the user
         cookie = make_salt()
@@ -467,6 +491,7 @@ def routes(app, database):
     @requires_login
     def destroy_public(user):
         DATABASE.forget_public_profile(user['username'])
+        session.pop('profile_image', None)  # Delete profile image id if existing
         return '', 200
 
     @app.route('/auth/change_student_password', methods=['POST'])
@@ -547,12 +572,13 @@ def routes(app, database):
 
         # Validations, optional fields
         if 'birth_year' in body:
+            year = datetime.datetime.now().year
             try:
                 body['birth_year'] = int(body.get('birth_year'))
-                if body['birth_year'] <= 1900 or body['birth_year'] > datetime.datetime.now().year:
-                    return gettext('year_invalid').format(**{'current_year': str(datetime.datetime.now().year)}), 400
             except ValueError:
-                return gettext('year_invalid').format(**{'current_year': str(datetime.datetime.now().year)}), 400
+                return gettext('year_invalid').format(**{'current_year': str(year)}), 400
+            if not isinstance(body.get('birth_year'), int) or body['birth_year'] <= 1900 or body['birth_year'] > year:
+                return gettext('year_invalid').format(**{'current_year': str(year)}), 400
         if 'gender' in body:
             if body['gender'] not in ["m", "f", "o"]:
                 return gettext('gender_invalid'), 400
@@ -603,6 +629,11 @@ def routes(app, database):
                 updates[field] = body[field]
             else:
                 updates[field] = None
+        if body.get('agree_third_party'):
+            updates['third_party'] = True
+        else:
+            updates['third_party'] = None
+
         if updates:
             DATABASE.update_user(username, updates)
 
@@ -627,8 +658,12 @@ def routes(app, database):
         # The user object we got from 'requires_login' is not fully hydrated yet. Look up the database user.
         user = DATABASE.user_by_username(user['username'])
 
-        output = {'username': user['username'], 'email': user['email'], 'language': user.get('language', 'en')}
-        for field in ['birth_year', 'country', 'gender', 'prog_experience', 'experience_languages']:
+        output = {
+            'username': user['username'],
+            'email': user['email'],
+            'language': user.get('language', 'en')
+        }
+        for field in ['birth_year', 'country', 'gender', 'prog_experience', 'experience_languages', 'third_party']:
             if field in user:
                 output[field] = user[field]
         if 'verification_pending' in user:
@@ -700,7 +735,7 @@ def routes(app, database):
             return gettext('repeat_match_password'), 400
 
         token = DATABASE.get_token(body['token'])
-        if not token or body['token'] != token.get('id'):
+        if not token or body['token'] != token.get('id') or body['username'] != token.get('username'):
             return gettext('token_invalid'), 403
 
         hashed = hash(body['password'], make_salt())
@@ -724,6 +759,18 @@ def routes(app, database):
                 return gettext('mail_error_change_processed'), 400
 
         return jsonify({'message': gettext('password_resetted')}), 200
+
+    @app.route('/auth/request_teacher', methods=['GET'])
+    @requires_login
+    def request_teacher_account(user):
+        account = DATABASE.user_by_username(user['username'])
+        if account.get('is_teacher'):
+            return gettext('already_teacher'), 400
+        if account.get('teacher_request'):
+            return gettext('already_teacher_request'), 400
+
+        DATABASE.update_user(user['username'], {'teacher_request': True})
+        return jsonify({'message': gettext('teacher_account_success')}), 200
 
     # *** ADMIN ROUTES ***
 
@@ -755,11 +802,8 @@ def routes(app, database):
         return '', 200
 
     @app.route('/admin/changeUserEmail', methods=['POST'])
-    def change_user_email():
-        user = current_user()
-        if not is_admin(user):
-            return utils.error_page(error=403, ui_message=gettext('unauthorized'))
-
+    @requires_admin
+    def change_user_email(user):
         body = request.json
 
         # Validations
@@ -794,6 +838,38 @@ def routes(app, database):
 
         return {}, 200
 
+    @app.route('/admin/getUserTags', methods=['POST'])
+    @requires_admin
+    def get_user_tags(user):
+        body = request.json
+        user = DATABASE.get_public_profile_settings(body['username'].strip().lower())
+        if not user:
+            return "User doesn't have a public profile", 400
+        return {'tags': user.get('tags', [])}, 200
+
+    @app.route('/admin/updateUserTags', methods=['POST'])
+    @requires_admin
+    def update_user_tags(user):
+        body = request.json
+        user = DATABASE.get_public_profile_settings(body['username'].strip().lower())
+        if not user:
+            return "User doesn't have a public profile", 400
+
+        tags = []
+        if "admin" in user.get('tags', []):
+            tags.append("admin")
+        if "teacher" in user.get('tags', []):
+            tags.append("teacher")
+        if body.get("certified"):
+            tags.append("certified_teacher")
+        if body.get("distinguished"):
+            tags.append("distinguished_user")
+        if body.get("contributor"):
+            tags.append("contributor")
+
+        user['tags'] = tags
+        DATABASE.update_public_profile(user['username'], user)
+        return {}, 200
 
 # Turn off verbose logs from boto/SES, thanks to https://github.com/boto/boto3/issues/521
 import logging

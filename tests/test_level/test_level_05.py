@@ -373,6 +373,20 @@ class TestsLevel5(HedyTester):
           print(f'minder leuk')""")
 
         self.single_level_tester(code=code, expected=expected)
+      
+    def test_if_with_negative_number(self):
+      code = textwrap.dedent("""\
+      antwoord is -10
+      if antwoord is -10 print 'Nice' else print 'Oh no'""")
+      
+      expected = textwrap.dedent("""\
+      antwoord = '-10'
+      if antwoord == '-10':
+        print(f'Nice')
+      else:
+        print(f'Oh no')""")
+      
+      self.single_level_tester(code=code, expected=expected, output='Nice')
 
     def test_if_equality_linebreak_print_linebreak_else_print(self):
         # line breaks after if-condition and before else are allowed
@@ -496,8 +510,8 @@ class TestsLevel5(HedyTester):
         if নাম is হেডি print 'ভালো!' else print 'মন্দ'""")
 
         expected = textwrap.dedent("""\
-        veb9b5c786e8cde0910df4197f630ee75 = input(f'আপনার নাম কি?')
-        if veb9b5c786e8cde0910df4197f630ee75 == 'হেডি':
+        নাম = input(f'আপনার নাম কি?')
+        if নাম == 'হেডি':
           print(f'ভালো!')
         else:
           print(f'মন্দ')""")
@@ -598,6 +612,18 @@ class TestsLevel5(HedyTester):
 
         self.single_level_tester(code=code, expected=expected)
 
+    def test_list_access_index(self):
+      code = textwrap.dedent("""\
+      friends is Hedy, Lola, Frida
+      friend is friends at 2
+      print friend""")
+      
+      expected = textwrap.dedent("""\
+      friends = ['Hedy', 'Lola', 'Frida']
+      friend = friends[2-1]
+      print(f'{friend}')""")
+      
+      self.multi_level_tester(code=code, expected=expected, max_level=11)
     #
     # negative tests
     #

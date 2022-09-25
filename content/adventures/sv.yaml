@@ -23,16 +23,16 @@ adventures:
                 example_code: "```\n{print} '5 plus 5 är ' 5 + 5\n{print} '5 minus 5 är ' 5 - 5\n{print} '5 gånger 5 är ' 5 * 5\n```\n"
                 story_text_2: "Vi ändrar också på hur man sparar någonting i en variabel! Nu kan du använda `=` istället för `{is}` när du sparar ett namn eller ett nummer i en variabel. Så här:\n"
             7:
-                start_code: "{repeat} 3 {times} {print} 'Hedy is fun!'"
-                story_text: "## Level 7! Level 7!\nLevel 7 adds the `{repeat}` command.  `{repeat}` can be used to execute one line of code multiple times.\n"
-                example_code: "```\n{repeat} 3 {times} {print} 'Hedy is fun!'\n```\n"
+                start_code: "{repeat} 3 {times} {print} 'Hedy är roligt!'"
+                story_text: "## Nivå 7! Nivå 7!\nNivå 7 lägger till `{repeat}` kommandot.  `{repeat}` kan användas för att köra en kodrad flera gånger.\n"
+                example_code: "```\n{repeat} 3 {times} {print} 'Hedy är roligt!'\n```\n"
             8:
-                start_code: "{repeat} 5 {times}\n    {print} 'Hello folks'\n    {print} 'This will be printed 5 times'"
-                story_text: "## Indentation\n`{ask}` and `{print}` still work as you know them. But `{if}` and `{repeat}` have changed!\nYou can now execute groups of code together, but you will have to *indent* the code.\nThat means putting four spaces at the beginning of the line. You will also have to indent when you just want to create a block of one line.\n"
-                example_code: "```\n{repeat} 5 {times}\n    {print} 'Hello everyone'\n    {print} 'This is all repeated 5 times'\n```\n"
+                start_code: "{repeat} 5 {times}\n    {print} 'Hej allihopa'\n    {print} 'Det här kommer att skrivas 5 gånger'"
+                story_text: "## Indentering\n`{ask}` och `{print}` fungerar som vanligt. Men `{if}` och `{repeat}` har ändrats!\nDu kan nu köra delar av koden tillsammans i ett block, men du kommer att behöva *indentera* koden.\nDet betyder att du skriver fyra mellanslag i början av raden. Du behöver även indentera om du skapar ett block av kod som bara innehåller en rad.\n"
+                example_code: "Så här fungerar `{repeat}`-kommandot nu:\n```\n{repeat} 5 {times}\n    {print} 'Hej allihop'\n    {print} 'Allt det här kommer att repeteras 5 gånger'\n```\nSå här fungerar `{if}` och `{else}` nu:\n\n```\nnamn {is} {ask} 'Vad heter du?'\n{if} namn {is} Hedy\n    {print} 'Välkommen Hedy'\n    {print} 'Du kan spela på din dator!'\n{else}\n    {print} 'INKRÄKTARE!'\n    {print} 'Du får inte använda den här datorn!'\n```\n"
             11:
                 example_code: "```\n{for} counter {in} {range} 1 {to} 5\n    {print} counter\n```\n"
-                start_code: "{for} counter {in} {range} 1 {to} 5\n    {print} counter"
+                start_code: "{for} räknare {in} {range} 1 {to} 5\n    {print} räknare"
                 story_text: "## Loops!\n`{print}` works just the same but we add a new form of the `{for}`. You can now write `{for} counter {in} {range} 1 {to} 5` and use `counter` in your program.\nTry it out to see what happens! Remember to use indentations after the `{for}` and `{if}` statements (That means starting a sentence with four spaces)"
             12:
                 start_code: "{print} 'decimal numbers now need to use a dot'\n{print} 2.5 + 2.5"
@@ -78,7 +78,7 @@ adventures:
                 story_text: "## If... else....\nPå nivå 5 kommer någonting nytt, `{if}`-kommandot! Med `{if}` kan du välja mellan två olika möjligheter.\nDen här koden skriver trevligt om du svarar att du heter Hedy och buu! om du svarar någonting annat.\n`{ask}` och `{print}` fungerar precis som de gjorde på nivå 4.\n"
                 example_code: "```\nnamn {is} {ask} 'Vad heter du?'\n{if} namn {is} Hedy {print} 'trevligt' {else} {print} 'buu!'\n```\n"
                 story_text_3: "## Listor\nNär vi vill kontrollera om någonting finns i en lista så kan vi använda `{in}`-kommandot.\nDen här koden skriver snyggt! om du väljer grön eller gul och meh om du väljer någonting annat.\n"
-                example_code_3: "```\nsnygga_färger {is} grön, gul\nfärg {is} {ask} 'Vad är din favoritfärg?'\n{if} färg {in} snygga_färger {print} 'snyggt!'\n{else} {print} 'meh'\n```\n"
+                example_code_3: "```\nsnygga_färger {is} grön, gul\nfavorit_färg {is} {ask} 'Vad är din favoritfärg?'\n{if} favorit_färg {in} snygga_färger {print} 'snyggt!'\n{else} {print} 'meh'\n```\n"
                 story_text_2: "Ibland blir kod där du använder `{if}` riktigt lång och passar inte in på raden så bra.<br>Du kan också dela upp koden på två rader där den andra raden börjar med `{else}` så här:\n"
                 example_code_2: "```\nnamn {is} {ask} 'Vad heter du?'\n{if} namn {is} Hedy {print} 'trevligt'\n{else} {print} 'buu!'\n```\n"
             3:
@@ -88,13 +88,13 @@ adventures:
                 example_code_2: "```\ndjur {is} hund, katt, känguru\n{add} pingvin {to_list} djur\n{remove} katt {from} djur\n{print} djur {at} {random}\n```\n"
                 start_code: '{print} hej världen!'
             9:
-                start_code: "{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    {else}\n        {print} 'pizza is better'"
-                story_text: "## All together now!\nIn this level you can not only use multiple lines with `{if}` and `{repeat}`, but you can also put them together!\nIn the example you see an `{if}` command within a `{repeat}` command. It is also allowed the other way around, and an `{if}` is also allowed in an `{if}` and a `{repeat}` in a `{repeat}`.\nGive it a try!\n"
-                example_code: "```\n{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    {else}\n        {print} 'pizza is better'\n```\n"
+                start_code: "{repeat} 3 {times}\n    mat = {ask} 'Vad vill du äta?'\n    {if} mat {is} pizza\n        {print} 'gott!'\n    {else}\n        {print} 'pizza är godare'"
+                story_text: "## Allt på en gång!\nPå den här nivån kan du inte bara använda multipla (flera) rader med `{if}` och `{repeat}`, utan du kan också sätta ihop dem!\nI exemplet kan du se ett `{if}`-kommando med ett `{repeat}`-kommando i. Det är också tillåtet att göra tvärtom. Ett `{if}` är också tillåtet i ett `{if}` och ett `{repeat}` i ett `{repeat}`.\nTesta lite!\n"
+                example_code: "```\n{repeat} 3 {times}\n    mat = {ask} 'Vad vill du äta?'\n    {if} mat {is} pizza\n        {print} 'härligt!'\n    {else}\n        {print} 'pizza är godare'\n```\n"
             10:
-                start_code: "animals {is} dog, cat, blobfish\n{for} animal {in} animals\n  {print} 'I love ' animal"
-                story_text: "## For each item in my list...\nIn this level we learn a new code called `{for}`. With `{for}` you can make a list and use all elements.\n`{for}` creates a block, like `{repeat}` and `{if}` so all lines in the block need to start with spaces."
-                example_code: "```\nanimals {is} dog, cat, blobfish\n{for} animal {in} animals\n  {print} 'I love ' animal\n```\n"
+                start_code: "alla_djur {is} hund, katt, blobfish\n{for} djur {in} alla_djur\n  {print} 'Jag älskar ' djur"
+                story_text: "## För varje sak i min lista...\nPå den här nivån lär vi oss kommandot `{for}`. Med `{for}` kan du göra en lista och använda alla dess element.\n`{for}` skapar ett block, som `{repeat}` och `{if}` så alla rader i blocket måste indenteras och börja med mellanslag."
+                example_code: "```\nalla_djur {is} hund, katt, blobfish\n{for} djur {in} alla_djur\n  {print} 'Jag älskar ' djur\n```\n"
             17:
                 example_code: "```\nprices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
                 start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'"

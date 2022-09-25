@@ -1169,13 +1169,23 @@ class TestClasses(AuthHelper):
         # THEN the name of the class should be updated
         self.assertEqual(Class['name'], 'class2')
 
+    def test_copy_class(self):
+        # GIVEN a user with teacher permissions and a class
+        self.given_teacher_is_logged_in()
+        self.post_data('class', {'name': 'class1'})
+        Class = self.get_data('classes')[0]
+
+        # WHEN attempting to duplicate a class
+        # THEN receive an OK status code from the server
+        self.post_data('/duplicate_class', {'id': Class['id'], 'name': 'class2'})
+
     def test_join_class(self):
         # GIVEN a teacher
         self.given_teacher_is_logged_in()
 
         # GIVEN a class
         self.post_data('class', {'name': 'class1'})
-        Class = self.get_data('classes') [0]
+        Class = self.get_data('classes')[0]
 
         # WHEN attempting to join a class without being logged in
         # THEN receive a forbidden status code from the server
@@ -1440,10 +1450,11 @@ class TestCustomAdventures(AuthHelper):
             {'id': 123},
             {'id': 123, 'name': 123},
             {'id': '123', 'name': 123},
-            {'id': '123', 'name': 123, 'level': 5},
-            {'id': '123', 'name': 123, 'level': 5, 'content': 123},
-            {'id': adventure_id, 'name': 'panda', 'level': '5', 'content': 'too short!'},
-            {'id': adventure_id, 'name': 'panda', 'level': '5', 'content': 'This is just long enough!', 'public': 'panda'},
+            {'id': '123', 'name': 123, 'classes': []},
+            {'id': '123', 'name': 123, 'classes': [], 'level': 5},
+            {'id': '123', 'name': 123, 'classes': [], 'level': 5, 'content': 123},
+            {'id': adventure_id, 'name': 'panda', 'classes': [], 'level': '5', 'content': 'too short!'},
+            {'id': adventure_id, 'name': 'panda', 'classes': [], 'level': '5', 'content': 'This is just long enough!', 'public': 'panda'},
         ]
 
         # THEN receive a 400 error from the server
@@ -1452,7 +1463,7 @@ class TestCustomAdventures(AuthHelper):
 
         # WHEN attempting to update a non-existing adventure
         # THEN receive a 404 error from the server
-        body = {'id': '123', 'name': 'panda', 'level': '5', 'content': 'This is just long enough!', 'public': True}
+        body = {'id': '123', 'name': 'panda', 'classes': [], 'level': '5', 'content': 'This is just long enough!', 'public': True}
         self.post_data('for-teachers/customize-adventure', body, expect_http_code=404)
 
     def test_valid_update_adventure(self):
@@ -1465,7 +1476,33 @@ class TestCustomAdventures(AuthHelper):
 
         # WHEN attempting to update an adventure with a valid body
         # THEN receive an OK response from the server
-        body = {'id': adventure_id, 'name': 'test_adventure', 'level': '5', 'content': 'This is just long enough!', 'public': True}
+        body = {'id': adventure_id, 'name': 'test_adventure', 'classes': [], 'level': '5', 'content': 'This is just long enough!', 'public': True}
+        self.post_data('for-teachers/customize-adventure', body, expect_http_code=200)
+
+    def test_valid_update_adventure_with_class(self):
+        # GIVEN a new teacher
+        self.given_fresh_teacher_is_logged_in()
+
+        # WHEN attempting to create a valid adventure
+        # THEN receive an OK response from the server
+        adventure_id = self.post_data('for-teachers/create_adventure', {'name': 'test_adventure'}, expect_http_code=200).get("id")
+
+        # WHEN attempting to create a valid adventure
+        # THEN receive an OK response from the server AND retrieve the class_id
+        self.post_data('class', {'name': 'class1'})
+        class_id = self.get_data('classes')[0].get('id')
+
+        # WHEN attempting to update an adventure with a valid body
+        # THEN receive an OK response from the server
+        body = {
+            'id': adventure_id,
+            'name': 'test_adventure',
+            'classes': [class_id],
+            'level': '5',
+            'content': 'This is just long enough!',
+            'public': True
+        }
+
         self.post_data('for-teachers/customize-adventure', body, expect_http_code=200)
 
     def test_destroy_adventure(self):

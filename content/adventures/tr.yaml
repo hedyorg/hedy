@@ -1,7 +1,7 @@
 adventures:
     default:
         name: "Introduction"
-        description: "Level explanation"
+        description: "Seviye açıklaması"
         default_save_name: "intro"
         levels:
             1:
@@ -10,7 +10,7 @@ adventures:
                 story_text_2: "Ayrıca kullanıcıdan girdi isteyebilir ve bir `{echo}` komutuyla bunu ekrana yazdırabilirsiniz.\nSolunuzdaki kodu tekrar deneyebilirsiniz.\n\nNe yapmanız gerektiğini bilmiyor musunuz? Sonraki sekmelerde, farklı programlar için fikirler bulacaksınız.\n"
                 example_code_2: "```\n{ask} Adın ne?\n{echo} merhaba\n```\n"
                 start_code: '{print} merhaba dünya!'
-                story_text_3: "Let's get started! Don't know what to create? In the next tabs you will find ideas for programs to build.\n"
+                story_text_3: "Hadi başlayalım! Ne oluşturacağını bilmiyor musun? Sonraki sekmelerde oluşturabileceğin programlar için fikirler bulabilirsin.\n"
             2:
                 story_text: |
                     ## Variables
@@ -26,21 +26,21 @@ adventures:
                     {print} name is age years old
                     ```
                 story_text_2: |
-                    `{print}` still works the same, but the `{ask}` command has changed. You need to use a variable in the `{ask}` command as well. It looks like this:
+                    `{print}` hâlâ aynı çalışıyor, ama  `{ask}` komutu değişti.  `{ask}` komutunda da bir değişken kullanman gerekiyor. Bu da şu şekilde görünüyor:
                 example_code_2: |
                     ```
-                    answer {is} {ask} What is your name?
-                    {print} Hello answer
+                    yanıt {is} {ask} Adın ne ?
+                    {print} Merhaba yanıt
                     ```
                 story_text_3: |
-                    Another new command in this level is `{sleep}`, which pauses your program for a second. If you type a number behind the {sleep} command, the program pauses for that amount of seconds.
+                    Bu seviyedeki diğer yeni komutumuz ise `{sleep}`, programınızı bir saniyeliğine duraklatır. {sleep} komutunun arkasına bir sayı yazarsanız, program yazdığınız sayı kadar saniye duraklar.
                 example_code_3: |
                     ```
-                    {print} My favorite colour is...
+                    {print} Benim favori rengim...
                     {sleep} 2
-                    {print} green!
+                    {print} yeşil!
                     ```
-                start_code: "{print} hello world!"
+                start_code: "{print} Merhaba Dünya!"
             3:
                 story_text: |
                     ## Make a list!

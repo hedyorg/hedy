@@ -275,8 +275,22 @@ class TestsLevel8(HedyTester):
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
+    def test_if_with_negative_number(self):
+        code = textwrap.dedent("""\
+        antwoord = -10
+        if antwoord is -10
+            print 'Nice'""")
+        
+        expected = textwrap.dedent("""\
+        antwoord = '-10'
+        if convert_numerals('Latin', antwoord) == convert_numerals('Latin', '-10'):
+          print(f'Nice')""")
+
+        self.multi_level_tester(code=code, expected=expected, output='Nice', max_level=11)
+
+    
     #
-    # if else command
+    # if else tests
     #
     def test_if_else_no_indentation(self):
         code = textwrap.dedent("""\
@@ -304,6 +318,22 @@ class TestsLevel8(HedyTester):
           print(f'leuk')
         else:
           print(f'minder leuk')""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=11)
+
+    def test_if_equality_assign_else_assign(self):
+        code = textwrap.dedent("""\
+        a is 5
+        if a is 1
+            x is 2
+        else
+            x is 222""")
+        expected = textwrap.dedent("""\
+        a = '5'
+        if convert_numerals('Latin', a) == convert_numerals('Latin', '1'):
+          x = '2'
+        else:
+          x = '222'""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
@@ -375,6 +405,27 @@ class TestsLevel8(HedyTester):
           print(f'nice!')
         else:
           print(f'pizza is better')""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=11)
+
+    def test_if_else_with_multiple_lines(self):
+        code = textwrap.dedent("""\
+        antwoord is ask 'Hoeveel is 10 plus 10?'
+        if antwoord is 20
+            print 'Goedzo!'
+            print 'Het antwoord was inderdaad ' antwoord
+        else
+            print 'Foutje'
+            print 'Het antwoord moest zijn ' antwoord""")
+
+        expected = textwrap.dedent("""\
+        antwoord = input(f'Hoeveel is 10 plus 10?')
+        if convert_numerals('Latin', antwoord) == convert_numerals('Latin', '20'):
+          print(f'Goedzo!')
+          print(f'Het antwoord was inderdaad {antwoord}')
+        else:
+          print(f'Foutje')
+          print(f'Het antwoord moest zijn {antwoord}')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
@@ -510,8 +561,8 @@ class TestsLevel8(HedyTester):
             print 'me wants a cookie!'""")
 
         expected = textwrap.dedent("""\
-        v79de0191e90551f058d466c5e8c267ff = '5'
-        for i in range(int(v79de0191e90551f058d466c5e8c267ff)):
+        állatok = '5'
+        for i in range(int(állatok)):
           print(f'me wants a cookie!')
           time.sleep(0.1)""")
 

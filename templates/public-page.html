@@ -9,41 +9,61 @@
                 <img src="{{static('/images/Hedy-logo.png')}}" class="w-64" alt="{{_('profile_logo_alt')}}">
             {% endif %}
         </div>
-        <div class="w-full h-full bg-blue-200 flex flex-col rounded-lg border border-black">
-            <div class="flex flex-row items-center h-12 bg-blue-600 rounded-t-lg px-4 font-medium">
-                <div class="text-white tracking-wide text-4xl">{{ user_info.username }}</div>
-                {% if user_achievements['achieved'] %}
-                    <div class="text-white text-xl ml-auto">{{ user_achievements['achieved']|length }} {{_('achievements')}}</div>
+        <div class="flex flex-col gap-1 w-full h-full">
+            {% if user_info.tags %}
+                <div class="flex flex-row mx-2 gap-2">
+                    {% for tag in user_info.tags %}
+                        <!-- Todo TB: Might be nice to automate this a bit in the future (works fine for now) 08-22 -->
+                        {% if tag == "teacher" %}
+                            <div class="bg-green-500 text-white py-1 rounded-lg font-bold px-3">{{_('teacher')}} ⊙</div>
+                        {% elif tag == "certified_teacher" %}
+                            <div class="bg-red-500 text-white py-1 rounded-lg font-bold px-3">{{_('certified_teacher')}} ⊙</div>
+                        {% elif tag == "admin" %}
+                            <div class="bg-yellow-500 text-white py-1 rounded-lg font-bold px-3">{{_('admin')}} ⊙</div>
+                        {% elif tag == "distinguished_user" %}
+                            <div class="bg-indigo-500 text-white py-1 rounded-lg font-bold px-3">{{_('distinguished_user')}} ⊙</div>
+                        {% elif tag == "contributor" %}
+                            <div class="bg-pink-500 text-white py-1 rounded-lg font-bold px-3">{{_('contributor')}} ⊙</div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <div class="w-full h-full bg-blue-200 flex flex-col rounded-lg border border-black">
+                <div class="flex flex-row items-center h-12 bg-blue-600 rounded-t-lg px-4 font-medium">
+                    <div class="text-white tracking-wide text-4xl">{{user_info.username[0]|upper}}{{user_info.username[1:]}}</div>
+                    {% if user_achievements['achieved'] %}
+                        <div class="text-white text-xl ml-auto">{{ user_achievements['achieved']|length }} {{_('achievements')}}</div>
+                    {% endif %}
+                </div>
+                {% if user_info.personal_text %}
+                    <div class="my-auto px-16 text-xl italic" rel="noreferrer">
+                        {{ user_info.personal_text }}
+                    </div>
+                {% endif %}
+                {% if achievements %}
+                    <div class="mt-auto">
+                        <div class="font-semibold bg-blue-600 pb-2 pt-2 text-white flex flex-row justify-center rounded-b-lg">
+                            {% if user_achievements.run_programs %}
+                                <div>{{ user_achievements.run_programs }} {{_('amount_created')}}</div>
+                            {% else %}
+                                <div>0 {{_('amount_created')}}</div>
+                            {% endif %}
+                            <div class="mx-2">|</div>
+                            {% if user_achievements.saved_programs %}
+                                <div>{{ user_achievements.saved_programs }} {{_('amount_saved')}}</div>
+                            {% else %}
+                                <div>0 {{_('amount_saved')}}</div>
+                            {% endif %}
+                            <div class="mx-2">|</div>
+                            {% if user_achievements.submitted_programs %}
+                                <div>{{ user_achievements.submitted_programs }} {{_('amount_submitted')}}</div>
+                            {% else %}
+                                <div>0 {{_('amount_submitted')}}</div>
+                            {% endif %}
+                        </div>
+                    </div>
                 {% endif %}
             </div>
-            {% if user_info.personal_text %}
-                <div class="my-auto px-16 text-xl italic" rel="noreferrer">
-                    {{ user_info.personal_text }}
-                </div>
-            {% endif %}
-            {% if achievements %}
-                <div class="mt-auto">
-                    <div class="font-semibold bg-blue-600 pb-2 pt-2 text-white flex flex-row justify-center rounded-b-lg">
-                        {% if user_achievements.run_programs %}
-                            <div>{{ user_achievements.run_programs }} {{_('amount_created')}}</div>
-                        {% else %}
-                            <div>0 {{_('amount_created')}}</div>
-                        {% endif %}
-                        <div class="mx-2">|</div>
-                        {% if user_achievements.saved_programs %}
-                            <div>{{ user_achievements.saved_programs }} {{_('amount_saved')}}</div>
-                        {% else %}
-                            <div>0 {{_('amount_saved')}}</div>
-                        {% endif %}
-                        <div class="mx-2">|</div>
-                        {% if user_achievements.submitted_programs %}
-                            <div>{{ user_achievements.submitted_programs }} {{_('amount_submitted')}}</div>
-                        {% else %}
-                            <div>0 {{_('amount_submitted')}}</div>
-                        {% endif %}
-                    </div>
-                </div>
-            {% endif %}
         </div>
         {% if last_achieved %}
         <div class="text-center rounded-lg bg-yellow-400 w-1/3 ml-4 mr-4 border border-black">

@@ -3,15 +3,15 @@ pull_request_rules:
     conditions:
         - and:
           - "#approved-reviews-by>=1"
-          - "check-success=Unit tests / build"
+          - "check-success=build"
     actions:
       merge:
-        method: merge
+        method: squash
         
-  - name: automatic update for PR marked as “Ready“
+  - name: automatic update for PR marked as “Keep-updated“
     conditions:
       - -conflict # skip PRs with conflicts
       - -draft # filter-out GH draft PRs
-      - label="Ready"
+      - label="Keep-updated"
     actions:
       update:
