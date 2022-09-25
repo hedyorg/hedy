@@ -14,14 +14,14 @@ Always link the number of the issue or of the discussion that your pr concerns.
 
 **How to test**
 
-* If this is a UI change: _describe how to run your code to see it in action. See this https://github.com/Felienne/hedy/pull/880#issue-1016304308 for an example_
-* If this is a language change: _add a few tests showing the difference_
+- If this is a UI change: _describe how to run your code to see it in action. See this https://github.com/Felienne/hedy/pull/880#issue-1016304308 for an example_
+- If this is a language change: _add a few tests showing the difference_
 
 **Checklist**
-Done? Check if you have it all in place using this list:*
-  
+Done? Check if you have it all in place using this list:\*
+
 - [ ] Describes changes in the format above (present tense)
-- [ ] Links to an existing issue or discussion 
+- [ ] Links to an existing issue or discussion
 - [ ] Has a "How to test" section
 
 If you're unsure about any of these, don't hesitate to ask. We're here to help!

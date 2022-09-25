@@ -2,101 +2,231 @@
 <html lang="{{ g.lang }}" class="notranslate" translate="no">
   <head>
     <title>{% if page_title %}{{page_title}}{% else %}Hedy{% endif %}</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&display=swap">
-    <link rel="stylesheet" href="{{static('/css/generated.css')}}">
-    <link rel="stylesheet" href="{{static('/css/additional.css')}}">
-    <link rel="shortcut icon" type="image/png" href="{{static('/images/Hedy-logo.png')}}"/>
-    <link rel="stylesheet" href="{{static('/vendor/gh-fork-ribbon.min.css')}}"/>
-    <link rel="stylesheet" href="{{static('/fontawesome/css/all.min.css')}}"/>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&display=swap"
+    />
+    <link rel="stylesheet" href="{{static('/css/generated.css')}}" />
+    <link rel="stylesheet" href="{{static('/css/additional.css')}}" />
+    <link
+      rel="shortcut icon"
+      type="image/png"
+      href="{{static('/images/Hedy-logo.png')}}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{static('/vendor/gh-fork-ribbon.min.css')}}"
+    />
+    <link rel="stylesheet" href="{{static('/fontawesome/css/all.min.css')}}" />
   </head>
   <body id="main_container" class="bg-gray-400" dir="{{ g.dir }}">
     {% if tutorial %}
-      <div id="tutorial-mask" class="hidden fixed bg-black z-30 w-full h-full opacity-50"></div>
+    <div
+      id="tutorial-mask"
+      class="hidden fixed bg-black z-30 w-full h-full opacity-50"
+    ></div>
     {% endif %}
     <noscript>Hedy requires Javascript to be enabled in your browser.</noscript>
-    <div id="modal-mask" class="hidden fixed bg-black z-50 w-full h-full opacity-75"></div>
-    <div id="modal-content" class="hidden fixed z-50 p-12 px-16 bg-blue-400 border-2 border-gray-400 rounded-lg text-lg text-center" style="top: 40%; left: 50%; transform: translate(-50%, -50%);">
-       <div id="modal-confirm" class="hidden">
-          <div id="modal-confirm-text" class="text-white mb-8 text-xl"></div>
-          <div class="ltr:ml-auto rtl:mr-auto ltr:mr-auto rtl:ml-auto mt-4 flex flex-row justify-center">
-            <button id="modal-yes-button" class="green-btn block m-4 w-40 pb-4 pt-4">{{_('yes')}}</button>
-            <button id="modal-no-button" class="red-btn block m-4 w-40 pb-4 pt-4">{{_('no')}}</button>
-          </div>
-       </div>
-       <div id="modal-prompt" class="hidden">
-          <div id="modal-prompt-text" class="text-white mb-8 text-xl"></div>
-          <div class="ltr:ml-auto rtl:mr-auto ltr:mr-auto rtl:ml-auto">
-            <input id="modal-prompt-input" type="text" class="border border-green-400 rounded p-2 px-3 w-4/5 mt-1">
-            <div class="mt-4 flex flex-row justify-center">
-                <button id="modal-ok-button" class="green-btn block m-4 w-40 pb-4 pt-4">{{_('ok')}}</button>
-                <button id="modal-cancel-button" class="red-btn block m-4 w-40 pb-4 pt-4">{{_('cancel')}}</button>
-            </div>
-          </div>
-       </div>
-       <div id="modal-copy" class="hidden">
-           <div class="absolute top-2 right-2">
-              <svg class="fill-current h-12 w-12 ml-auto text-white cursor-pointer" id="modal-copy-close-button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-              <title>Close</title>
-              <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/>
-          </svg></div>
-          <div id="modal-copy-title" class="text-white mb-8 text-xl hidden"></div>
-          <div id="modal-copy-text" class="text-white mb-8 text-xl"></div>
-          <div id="modal-copy-buttons" class="ltr:ml-auto rtl:mr-auto ltr:mr-auto rtl:ml-auto mt-4 flex flex-row justify-center">
-            <button id="modal-copy-button" class="green-btn block m-4 w-40 pb-4 pt-4">{{_('copy_link_to_share')}}</button>
-          </div>
-       </div>
-       <div id="modal-repair" class="hidden">
-          <div class="absolute top-2 right-2">
-              <svg class="fill-current h-12 w-12 ml-auto text-white cursor-pointer" id="modal-repair-button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-              <title>Close</title>
-              <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/>
-          </svg></div>
-          <div id="modal-repair-title" class="text-white mb-8 text-xl hidden"></div>
-          <div id="modal-repair-text" class="text-white mb-8 text-xl"></div>
-       </div>
-        <div id="modal-preview" class="hidden">
-          <div class="absolute top-2 right-2">
-              <svg class="fill-current h-8 w-8 text-white cursor-pointer" id="modal-preview-button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-              <title>Close</title>
-              <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/>
-          </svg></div>
-          <div id="modal-preview-title" class="text-black mb-4 text-2xl"></div>
-          <div id="modal-preview-content"></div>
-       </div>
-    </div>
-    <div id="modal-alert" class="z-50 fixed hidden" role="alert" style="top: 10%; left: 50%; transform: translate(-50%, -50%);">
-        <div id="modal_alert_container" class="mx-auto text-center bg-green-100 border-green-400 text-green-700 border rounded px-4 py-3">
-            <span id="modal_alert_title" class="block sm:inline"></span>
-            <span id="modal_alert_text" class="block sm:inline"></span>
-            <svg class="fill-current h-6 w-6 text-green-500 block sm:inline" id="modal-alert-button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
+    <div
+      id="modal-mask"
+      class="hidden fixed bg-black z-50 w-full h-full opacity-75"
+    ></div>
+    <div
+      id="modal-content"
+      class="hidden fixed z-50 p-12 px-16 bg-blue-400 border-2 border-gray-400 rounded-lg text-lg text-center"
+      style="top: 40%; left: 50%; transform: translate(-50%, -50%)"
+    >
+      <div id="modal-confirm" class="hidden">
+        <div id="modal-confirm-text" class="text-white mb-8 text-xl"></div>
+        <div
+          class="ltr:ml-auto rtl:mr-auto ltr:mr-auto rtl:ml-auto mt-4 flex flex-row justify-center"
+        >
+          <button
+            id="modal-yes-button"
+            class="green-btn block m-4 w-40 pb-4 pt-4"
+          >
+            {{_('yes')}}
+          </button>
+          <button id="modal-no-button" class="red-btn block m-4 w-40 pb-4 pt-4">
+            {{_('no')}}
+          </button>
         </div>
-    </div>
-    <div class="lg:container mx-auto bg-gray-100 min-h-screen shadow-md flex flex-col">
-      {% if menu != False %}
-        {% include "incl-menubar.html" %}
-      {% endif %}
-      {# Can't reindent this as it may contain preformatted code blocks whose indentation is important. #}
-      {% block body %}{% endblock %}
-
-      <canvas id="confetti" style="width: 60vw;" class="hidden"></canvas>
-    </div>
-    <div id="achievement_pop-up" class="z-10 fixed hidden" style="width: 500px; top: 40%; left: 50%; transform: translate(-50%, -50%);">
-        <div class="absolute top-2 right-2 cursor-pointer" onclick="hedyApp.closeAchievement();">
-            <svg class="fill-current h-8 w-8 text-white" id="modal-repair-button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+      </div>
+      <div id="modal-prompt" class="hidden">
+        <div id="modal-prompt-text" class="text-white mb-8 text-xl"></div>
+        <div class="ltr:ml-auto rtl:mr-auto ltr:mr-auto rtl:ml-auto">
+          <input
+            id="modal-prompt-input"
+            type="text"
+            class="border border-green-400 rounded p-2 px-3 w-4/5 mt-1"
+          />
+          <div class="mt-4 flex flex-row justify-center">
+            <button
+              id="modal-ok-button"
+              class="green-btn block m-4 w-40 pb-4 pt-4"
+            >
+              {{_('ok')}}
+            </button>
+            <button
+              id="modal-cancel-button"
+              class="red-btn block m-4 w-40 pb-4 pt-4"
+            >
+              {{_('cancel')}}
+            </button>
+          </div>
+        </div>
+      </div>
+      <div id="modal-copy" class="hidden">
+        <div class="absolute top-2 right-2">
+          <svg
+            class="fill-current h-12 w-12 ml-auto text-white cursor-pointer"
+            id="modal-copy-close-button"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+          >
             <title>Close</title>
-            <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/>
-            </svg>
+            <path
+              d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"
+            />
+          </svg>
         </div>
-        <div class="bg-blue-600 border-2 border-black rounded-lg px-8 pt-0 pb-4 text-center">
-            <h3 class="text-white">{{_('achievement_earned')}}</h3>
-            <img id="achievement_reached_image" src="{{static('/images/achievement.png')}}" class="h-32 mx-auto" alt="{{_('achievements_logo_alt')}}">
-            <h4 class="text-white italic" id="achievement_reached_title"></h4>
-            <p id="achievement_reached_text"></p>
-            <p id="achievement_reached_statics" class="text-white italic"></p>
+        <div id="modal-copy-title" class="text-white mb-8 text-xl hidden"></div>
+        <div id="modal-copy-text" class="text-white mb-8 text-xl"></div>
+        <div
+          id="modal-copy-buttons"
+          class="ltr:ml-auto rtl:mr-auto ltr:mr-auto rtl:ml-auto mt-4 flex flex-row justify-center"
+        >
+          <button
+            id="modal-copy-button"
+            class="green-btn block m-4 w-40 pb-4 pt-4"
+          >
+            {{_('copy_link_to_share')}}
+          </button>
         </div>
+      </div>
+      <div id="modal-repair" class="hidden">
+        <div class="absolute top-2 right-2">
+          <svg
+            class="fill-current h-12 w-12 ml-auto text-white cursor-pointer"
+            id="modal-repair-button"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+          >
+            <title>Close</title>
+            <path
+              d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"
+            />
+          </svg>
+        </div>
+        <div
+          id="modal-repair-title"
+          class="text-white mb-8 text-xl hidden"
+        ></div>
+        <div id="modal-repair-text" class="text-white mb-8 text-xl"></div>
+      </div>
+      <div id="modal-preview" class="hidden">
+        <div class="absolute top-2 right-2">
+          <svg
+            class="fill-current h-8 w-8 text-white cursor-pointer"
+            id="modal-preview-button"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+          >
+            <title>Close</title>
+            <path
+              d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"
+            />
+          </svg>
+        </div>
+        <div id="modal-preview-title" class="text-black mb-4 text-2xl"></div>
+        <div id="modal-preview-content"></div>
+      </div>
     </div>
-    <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
-    <script src="{{static('/vendor/js-confetti.browser.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+    <div
+      id="modal-alert"
+      class="z-50 fixed hidden"
+      role="alert"
+      style="top: 10%; left: 50%; transform: translate(-50%, -50%)"
+    >
+      <div
+        id="modal_alert_container"
+        class="mx-auto text-center bg-green-100 border-green-400 text-green-700 border rounded px-4 py-3"
+      >
+        <span id="modal_alert_title" class="block sm:inline"></span>
+        <span id="modal_alert_text" class="block sm:inline"></span>
+        <svg
+          class="fill-current h-6 w-6 text-green-500 block sm:inline"
+          id="modal-alert-button"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+        >
+          <title>Close</title>
+          <path
+            d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"
+          />
+        </svg>
+      </div>
+    </div>
+    <div
+      class="lg:container mx-auto bg-gray-100 min-h-screen shadow-md flex flex-col"
+    >
+      {% if menu != False %} {% include "incl-menubar.html" %} {% endif %} {#
+      Can't reindent this as it may contain preformatted code blocks whose
+      indentation is important. #} {% block body %}{% endblock %}
+
+      <canvas id="confetti" style="width: 60vw" class="hidden"></canvas>
+    </div>
+    <div
+      id="achievement_pop-up"
+      class="z-10 fixed hidden"
+      style="
+        width: 500px;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      "
+    >
+      <div
+        class="absolute top-2 right-2 cursor-pointer"
+        onclick="hedyApp.closeAchievement();"
+      >
+        <svg
+          class="fill-current h-8 w-8 text-white"
+          id="modal-repair-button"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+        >
+          <title>Close</title>
+          <path
+            d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"
+          />
+        </svg>
+      </div>
+      <div
+        class="bg-blue-600 border-2 border-black rounded-lg px-8 pt-0 pb-4 text-center"
+      >
+        <h3 class="text-white">{{_('achievement_earned')}}</h3>
+        <img
+          id="achievement_reached_image"
+          src="{{static('/images/achievement.png')}}"
+          class="h-32 mx-auto"
+          alt="{{_('achievements_logo_alt')}}"
+        />
+        <h4 class="text-white italic" id="achievement_reached_title"></h4>
+        <p id="achievement_reached_text"></p>
+        <p id="achievement_reached_statics" class="text-white italic"></p>
+      </div>
+    </div>
+    <script
+      src="{{static('/vendor/jquery.min.js')}}"
+      type="text/javascript"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="{{static('/vendor/js-confetti.browser.js')}}"
+      type="text/javascript"
+      crossorigin="anonymous"
+    ></script>
     {% filter indent(width=2) %}{% block scripts %}{% endblock %}{% endfilter %}
   </body>
 </html>

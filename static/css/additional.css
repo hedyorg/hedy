@@ -28,7 +28,7 @@ input:checked ~ .dot {
   background-color: #48bb78;
 }
 
-#confetti{
+#confetti {
   width: 100%;
   position: absolute;
   height: auto;
@@ -36,13 +36,13 @@ input:checked ~ .dot {
   left: 30%;
 }
 
-#repair_button:hover{
-  content: url('../images/Hedylightbulb_2.svg');
+#repair_button:hover {
+  content: url("../images/Hedylightbulb_2.svg");
 }
 
 /*Media Queries*/
 @media only screen and (max-width: 1280px) {
-  #repair_button{
+  #repair_button {
     margin-left: 12rem !important;
   }
 }
@@ -52,79 +52,79 @@ https://github.com/ajaxorg/ace/issues/1104
 Force the gutter to be smaller, looks better from 1-999 lines (probably all of our programs)
 */
 #editor .ace_gutter {
-    width: 32px !important;
-    position: absolute;
+  width: 32px !important;
+  position: absolute;
 }
 
-body[dir='ltr'] #editor .ace_gutter {
-    margin-right: auto;
-    left: 0;
+body[dir="ltr"] #editor .ace_gutter {
+  margin-right: auto;
+  left: 0;
 }
 
-body[dir='rtl'] #editor .ace_gutter {
-    margin-left: auto;
-    right: 0;
+body[dir="rtl"] #editor .ace_gutter {
+  margin-left: auto;
+  right: 0;
 }
 
-body[dir='ltr'] #editor .ace_scroller {
-    left: 32px !important;
-    right: 0px !important;
+body[dir="ltr"] #editor .ace_scroller {
+  left: 32px !important;
+  right: 0px !important;
 }
 
-body[dir='rtl'] #editor .ace_scroller {
-    left: 0px !important;
-    right: 32px !important;
+body[dir="rtl"] #editor .ace_scroller {
+  left: 0px !important;
+  right: 32px !important;
 }
 
 #editor .ace_layer .ace_gutter-layer {
-    width: 32px !important;
+  width: 32px !important;
 }
 
 #editor .ace_gutter-layer > * {
-    margin-left: 2px;
-    margin-right: 0px;
-    padding-left: 2px;
-    padding-right: 0px;
-    text-align: left;
+  margin-left: 2px;
+  margin-right: 0px;
+  padding-left: 2px;
+  padding-right: 0px;
+  text-align: left;
 }
 
-body[dir='rtl'] #editor .ace_gutter-layer {
-    margin-left: 0px;
-    margin-right: 2px;
-    padding-left: 0px;
-    padding-right: 2px;
-    text-align: right;
+body[dir="rtl"] #editor .ace_gutter-layer {
+  margin-left: 0px;
+  margin-right: 2px;
+  padding-left: 0px;
+  padding-right: 2px;
+  text-align: right;
 }
 
 #runit:disabled {
-    background-color: #A0B4A8;
-    border-color: #6BC196;
+  background-color: #a0b4a8;
+  border-color: #6bc196;
 }
 
 .ace_gutter-cell.ace_breakpoint {
-    visibility: hidden;
+  visibility: hidden;
 }
 
 .ace_gutter-cell.ace_breakpoint::after {
-    visibility: visible;
-    border-radius: 14px 14px 14px 14px;
-    width: 21px;
-    content: "😴";
-    z-index: 3;
-    position: absolute;
-    left: 0;
+  visibility: visible;
+  border-radius: 14px 14px 14px 14px;
+  width: 21px;
+  content: "😴";
+  z-index: 3;
+  position: absolute;
+  left: 0;
 }
 
 .ace_layer.ace_gutter-layer.ace_folding-enabled {
-    width: 36px !important;
+  width: 36px !important;
 }
 
 .ace-disabled {
-    text-decoration: line-through;
+  text-decoration: line-through;
 }
 
 .debugLine {
-    position: absolute;
-    background: #2D6099;
-    z-index: 20
+  position: absolute;
+  background: #2d6099;
+  z-index: 20;
 }

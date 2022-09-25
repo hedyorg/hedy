@@ -1,26 +1,64 @@
-{% extends "auth.html" %}
-
-{% block main %}
+{% extends "auth.html" %} {% block main %}
 <div>
-    <div class="w-3/4 mx-auto">
-        <h2 class="px-4">{{_('adventure')}}: {{adventure.name}}</h2>
-        <div class="mt-4 border-gray-400 border-2 rounded-lg p-4 turn-pre-into-ace" style="white-space: pre-wrap;">{{ adventure.content|commonmark }}</div>
+  <div class="w-3/4 mx-auto">
+    <h2 class="px-4">{{_('adventure')}}: {{adventure.name}}</h2>
+    <div
+      class="mt-4 border-gray-400 border-2 rounded-lg p-4 turn-pre-into-ace"
+      style="white-space: pre-wrap"
+    >
+      {{ adventure.content|commonmark }}
     </div>
+  </div>
 </div>
 {% endblock %}
 <!-- Todo TB: At one point we should clean this up instead of copying all scripts each time -->
 {% block scripts %}
-  <script src="{{static('/vendor/ace.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
-  <script src="{{static('/vendor/ext-whitespace.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
-  <script src="{{static('/vendor/ext-rtl.js')}}" type="text/javascript" charset="utf-8" crossorigin="anonymous"></script>
-  <script src="/client_messages.js" type="text/javascript" crossorigin="anonymous"></script>
-  <script>
-    window.State = {};
-    window.State.lang = "{{ g.lang }}";
-    window.State.keyword_language = "{{ get_syntax_language(g.lang) }}";
-  </script>
-  <script src="{{static('/js/appbundle.js')}}" type="text/javascript" crossorigin="anonymous"></script>
-  <script src="{{static('/vendor/skulpt.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
-  <script src="{{static('/vendor/skulpt-stdlib.js')}}" type="text/javascript" crossorigin="anonymous"></script>
-  <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+<script
+  src="{{static('/vendor/ace.js')}}"
+  type="text/javascript"
+  charset="utf-8"
+  crossorigin="anonymous"
+></script>
+<script
+  src="{{static('/vendor/ext-whitespace.js')}}"
+  type="text/javascript"
+  charset="utf-8"
+  crossorigin="anonymous"
+></script>
+<script
+  src="{{static('/vendor/ext-rtl.js')}}"
+  type="text/javascript"
+  charset="utf-8"
+  crossorigin="anonymous"
+></script>
+<script
+  src="/client_messages.js"
+  type="text/javascript"
+  crossorigin="anonymous"
+></script>
+<script>
+  window.State = {};
+  window.State.lang = "{{ g.lang }}";
+  window.State.keyword_language = "{{ get_syntax_language(g.lang) }}";
+</script>
+<script
+  src="{{static('/js/appbundle.js')}}"
+  type="text/javascript"
+  crossorigin="anonymous"
+></script>
+<script
+  src="{{static('/vendor/skulpt.min.js')}}"
+  type="text/javascript"
+  crossorigin="anonymous"
+></script>
+<script
+  src="{{static('/vendor/skulpt-stdlib.js')}}"
+  type="text/javascript"
+  crossorigin="anonymous"
+></script>
+<script
+  src="{{static('/vendor/jquery.min.js')}}"
+  type="text/javascript"
+  crossorigin="anonymous"
+></script>
 {% endblock %}

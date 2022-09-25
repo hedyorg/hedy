@@ -8,7 +8,7 @@ html {
 }
 
 .font-slab {
-  font-family: 'Zilla Slab', serif;
+  font-family: "Zilla Slab", serif;
 }
 
 h1 {
@@ -28,7 +28,10 @@ h4 {
 }
 
 /* TB: Why do we have this? It makes it (a lot) harder to style these element within the templates... */
-* + p, * + ul, * + ol, * + pre {
+* + p,
+* + ul,
+* + ol,
+* + pre {
   @apply mt-4;
 }
 
@@ -87,7 +90,8 @@ strong {
   @apply text-xl text-gray-800 leading-normal;
 }
 
-.markdown li + li, .markdown li > p + p {
+.markdown li + li,
+.markdown li > p + p {
   @apply my-2;
 }
 .markdown strong {
@@ -102,7 +106,9 @@ h2 {
   @apply leading-tight text-2xl mb-2 mt-10;
 }
 
-h2:first-child { margin-top: 0; }
+h2:first-child {
+  margin-top: 0;
+}
 
 h3 {
   @apply font-slab font-bold text-blue-700 italic;
@@ -113,7 +119,8 @@ h4 {
   @apply mt-4 mb-2;
 }
 
-pre, code {
+pre,
+code {
 }
 
 .markdown code {
@@ -176,8 +183,10 @@ code {
   @apply flex items-center h-full text-white text-base lg:text-xl no-underline font-slab font-semibold px-2 lg:px-4;
 }
 
-#output, #quiz_question_output_container {
-  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+#output,
+#quiz_question_output_container {
+  font-family: "Monaco", "Menlo", "Ubuntu Mono", "Consolas", "source-code-pro",
+    monospace;
 }
 
 .dropdown-menu {
@@ -193,15 +202,15 @@ code {
 }
 
 .text-shadow {
-  text-shadow: 0 2px 4px rgba(0,0,0,0.10);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .text-shadow-md {
-  text-shadow: 0 4px 8px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.08);
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.08);
 }
 
 .text-shadow-lg {
-  text-shadow: 0 15px 30px rgba(0,0,0,0.11), 0 5px 15px rgba(0,0,0,0.08);
+  text-shadow: 0 15px 30px rgba(0, 0, 0, 0.11), 0 5px 15px rgba(0, 0, 0, 0.08);
 }
 
 .text-shadow-none {
@@ -211,36 +220,43 @@ code {
 /* Lists */
 
 ul {
-    list-style: disc outside none;
+  list-style: disc outside none;
 }
 
 ol {
-    list-style: decimal outside none;
+  list-style: decimal outside none;
 }
 
 /* AUTH */
-input[type=checkbox], input[type=radio] {
+input[type="checkbox"],
+input[type="radio"] {
   @apply appearance-none border border-gray-400 w-4 h-4;
 }
 
-input[type=radio] {
+input[type="radio"] {
   @apply rounded-full;
 }
 
-#signup input:required, #signup select:required, #profile input:required, #change_password input:required {
+#signup input:required,
+#signup select:required,
+#profile input:required,
+#change_password input:required {
   @apply border border-red-400;
 }
 
 /* Make this !important to it over-writes the red required border when valid */
-input:required:valid, select:required:valid {
+input:required:valid,
+select:required:valid {
   @apply border-green-400 !important;
 }
 
-input[type=checkbox]:checked, input[type=radio]:checked {
+input[type="checkbox"]:checked,
+input[type="radio"]:checked {
   @apply bg-green-400 border-green-600;
 }
 
-input, select {
+input,
+select {
   @apply border border-gray-400;
 }
 
@@ -255,18 +271,18 @@ table.users td {
 
 /* Keep the class name the same to prevent complex restructuring -> the RTL version is actually left-hand-shadow */
 /* https://stackoverflow.com/questions/17572619/how-to-create-a-inset-box-shadow-only-on-one-side */
-body[dir='ltr'] .right-hand-shadow {
-  box-shadow: inset -7px 0 9px -7px rgba(0,0,0,0.4);
+body[dir="ltr"] .right-hand-shadow {
+  box-shadow: inset -7px 0 9px -7px rgba(0, 0, 0, 0.4);
 }
 
-body[dir='rtl'] .right-hand-shadow {
-  box-shadow: inset 7px 0 9px -7px rgba(0,0,0,0.4);
+body[dir="rtl"] .right-hand-shadow {
+  box-shadow: inset 7px 0 9px -7px rgba(0, 0, 0, 0.4);
 }
 
 .tab {
   @apply py-2 px-1 mt-2 bg-gray-100 rounded-t-lg border-t-8 border-gray-300 text-sm cursor-pointer;
   box-shadow:
-    /* bottom */ inset 0px -4px 4px -1px rgba(0,0,0,0.1);
+    /* bottom */ inset 0px -4px 4px -1px rgba(0, 0, 0, 0.1);
 }
 
 .teacher_tab {
@@ -291,8 +307,8 @@ body[dir='rtl'] .right-hand-shadow {
 
 .tab + .tab {
   box-shadow:
-    /* bottom */ inset 0px -4px 4px -1px rgba(0,0,0,0.1),
-    /* left */ inset 4px 0px 4px -1px rgba(0,0,0,0.1);
+    /* bottom */ inset 0px -4px 4px -1px rgba(0, 0, 0, 0.1),
+    /* left */ inset 4px 0px 4px -1px rgba(0, 0, 0, 0.1);
 }
 
 .tab-selected {
@@ -302,16 +318,17 @@ body[dir='rtl'] .right-hand-shadow {
 
 /* EDITOR WARNINGS & ERRORS */
 
-div#errorbox, div#warningbox {
-   position: relative;
+div#errorbox,
+div#warningbox {
+  position: relative;
 }
 
 p.close-dialog {
-   @apply ltr:right-[5px] rtl:left-[5px];
-   font-weight: bold;
-   position: absolute;
-   top: 5px;
-   cursor: pointer;
+  @apply ltr:right-[5px] rtl:left-[5px];
+  font-weight: bold;
+  position: absolute;
+  top: 5px;
+  cursor: pointer;
 }
 
 .editor-error {
@@ -334,16 +351,16 @@ p.close-dialog {
  * Will be used to indicate current line in debugger
  */
 .debugger-current-line {
-    @apply absolute;
-    background: #2D6099;
-    z-index: 20
+  @apply absolute;
+  background: #2d6099;
+  z-index: 20;
 }
 
 /* DOCS */
 
 .expandable-docs-text h1 {
-   margin-top: 30px;
-   margin-bottom: 30px;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 /* QUIZ */
@@ -354,7 +371,6 @@ p.close-dialog {
   -o-transform-origin: 0 0;
   -webkit-transform-origin: 0 0;
 }
-
 
 /* Stats */
 .stats-period-toggle.active {
@@ -377,16 +393,16 @@ p.close-dialog {
 .stats-legend-color-box {
   width: 45px;
   height: 12px;
-  display:inline-block;
+  display: inline-block;
   margin-right: 5px;
 }
 
 /* Tab content - closed */
 .accordion .accordion-tab input ~ .tab-content {
   max-height: 0;
-  -webkit-transition: max-height .35s;
-  -o-transition: max-height .35s;
-  transition: max-height .35s;
+  -webkit-transition: max-height 0.35s;
+  -o-transition: max-height 0.35s;
+  transition: max-height 0.35s;
 }
 
 /* Accordion icon */
@@ -400,9 +416,9 @@ p.close-dialog {
   font-size: 1.25rem;
   font-weight: bolder;
   text-align: center;
-  -webkit-transition: all .35s;
-  -o-transition: all .35s;
-  transition: all .35s;
+  -webkit-transition: all 0.35s;
+  -o-transition: all 0.35s;
+  transition: all 0.35s;
 }
 
 /* Tab content - open */
@@ -411,14 +427,14 @@ p.close-dialog {
 }
 
 /* Accordion icon formatting - closed */
-.accordion .accordion-tab input[type=checkbox] + label::before {
+.accordion .accordion-tab input[type="checkbox"] + label::before {
   @apply ltr:right-[5px] rtl:left-[5px];
   content: ">";
   transform: rotate(90deg);
 }
 
 /* Accordion icon formatting - open */
-.accordion .accordion-tab input[type=checkbox]:checked + label::before {
+.accordion .accordion-tab input[type="checkbox"]:checked + label::before {
   transform: rotate(270deg);
 }
 
@@ -458,7 +474,6 @@ p.close-dialog {
   @apply inline-block w-48;
 }
 
-
 .signup-input {
   @apply inline-block w-64 md:w-80 lg:w-96 px-2 py-1 rounded-lg border-gray-400;
 }
@@ -469,20 +484,20 @@ p.close-dialog {
   transition: all 0.5s ease-in-out;
 }
 
-body[dir='rtl'] #keyword_toggle_container input:checked ~ .toggle-circle {
+body[dir="rtl"] #keyword_toggle_container input:checked ~ .toggle-circle {
   transform: translateX(-200%);
 }
 
-body[dir='ltr'] #keyword_toggle_container input:checked ~ .toggle-circle {
+body[dir="ltr"] #keyword_toggle_container input:checked ~ .toggle-circle {
   transform: translateX(200%);
 }
 
-body[dir='rtl'] #developers_toggle_container input:checked ~ .toggle-circle {
+body[dir="rtl"] #developers_toggle_container input:checked ~ .toggle-circle {
   transform: translateX(-100%);
   @apply bg-green-400;
 }
 
-body[dir='ltr'] #developers_toggle_container input:checked ~ .toggle-circle {
+body[dir="ltr"] #developers_toggle_container input:checked ~ .toggle-circle {
   transform: translateX(100%);
   @apply bg-green-400;
 }
@@ -498,8 +513,8 @@ input:checked ~ .toggle-path {
 
 /* Not really nice, but we have to use the !important attribute to overwrite the current style */
 .incorrect-option {
-    background-color: rgba(234, 55, 55, 0.6) !important;
-    border: 5px #c21919 dashed!important;
+  background-color: rgba(234, 55, 55, 0.6) !important;
+  border: 5px #c21919 dashed !important;
 }
 
 /* Also not really nice, but with the relic quiz code still an improvement */
@@ -515,7 +530,7 @@ input:checked ~ .toggle-path {
   min-width: 80px;
   min-height: 40px;
   color: rgb(236, 236, 236);
-  background-color:#4299e1;
+  background-color: #4299e1;
   border-color: #1267a6;
   position: absolute;
   right: 10px;

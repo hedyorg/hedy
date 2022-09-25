@@ -2,9 +2,8 @@
 name: Content issue
 about: Tell us about an issue with content to make Hedy better!
 title: "[CONTENT]"
-labels: ''
-assignees: ''
-
+labels: ""
+assignees: ""
 ---
 
 **Describe the issue**
@@ -15,4 +14,3 @@ Make a picture or screenshot to show the issue. Tip! You can make a screenshot a
 
 **Expected text**
 What should we write instead?
-

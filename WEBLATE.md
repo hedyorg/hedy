@@ -36,4 +36,3 @@ Now with `git merge weblate/main` you can merge the Weblate commits into the cur
 **Push the fixed branch**
 
 Now push newbranchname and Weblate is happy again again, because it will see that all its commits are in the repo.
- 

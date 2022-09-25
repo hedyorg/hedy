@@ -56,7 +56,6 @@ interface State {
    */
   readonly default_program_name?: string;
 
-
   disable_run?: boolean;
 
   unsaved_changes?: boolean;

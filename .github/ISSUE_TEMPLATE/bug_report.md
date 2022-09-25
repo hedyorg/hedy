@@ -2,9 +2,8 @@
 name: Bug report
 about: Tell us about a bug to make Hedy better!
 title: "[BUG]"
-labels: ''
-assignees: ''
-
+labels: ""
+assignees: ""
 ---
 
 **Describe the bug**
@@ -21,5 +20,6 @@ A clear and concise description of what you expected to happen.
 
 **What machine and browser you were using (optional)**
 If the issue concerns things in the website, let us know:
+
 - What computer you are using (Windows, Mac, Linux?)
 - What browser you were using (Chrome, Edge, Safari)

@@ -1,5 +1,4 @@
-Levels
-------
+## Levels
 
 In its current form, Hedy consists of 18 different levels. The levels loosely
 follow the lesson series [**Python in de klas**](http://pythonindeklas.nl/)
@@ -14,20 +13,22 @@ followed by arbitrary text. Furthermore students can ask for
 input of the user using the keyword `ask`. Here we decided to use
 the keyword `ask` rather than `input` because it is more aligned
 with what the role of the keyword is in the code than with what it
-*does*. Input of a user can be repeated with `echo`, so very simple
+_does_. Input of a user can be repeated with `echo`, so very simple
 programs can be created in which a user is asked for a name or a
 favorite animal, fulfilling Design Goal 6.
 
 ### Level 2: (Singular) variables with is
 
-At the second level, variables are added to the syntax. Defining a variable is done with the word `is` rather than the equals symbol fulfilling Design Goal 3 and Design Goal 4. 
+At the second level, variables are added to the syntax. Defining a variable is done with the word `is` rather than the equals symbol fulfilling Design Goal 3 and Design Goal 4.
 
 ### Level 3: Lists with is
+
 In level 3 we add the option to create lists and retrieve elements, including random elements from lists with `at`. Adding lists and especially adding the option to select a
 random item from a list allows for the creation of more interesting programs such as a guessing game or a story with random elements, which is an assignment from [**Python in de klas**](http://pythonindeklas.nl/) ("Python in the classroom"), or a customized dice.
 Level 3 also allows learners to add and remove lists elements with a textual syntax: `add animal to animals`.
 
 ### Level 4: Quotation marks and types
+
 In Level 3 the first syntactic element is introduced: the use of quotation marks to distinguish between strings and text. In teaching novices we have seen that this distinction can be confusing for a long time, so offering it early might help to draw attention to the fact that
 computers need information about the types of variables. This level is thus an interesting combination of explaining syntax and explaining
 programming concepts, which underlines their interdependency. The variable syntax using `is` remains unchanged, meaning that learners
@@ -61,7 +62,7 @@ first simplest form, according to Design Goal 2, we opt to use
 initial form, like the if the syntax is placed on one line:\
 `repeat 5 times print `
 
-### Level 8: Code blocks with one level of nesting 
+### Level 8: Code blocks with one level of nesting
 
 After Level 7, there is a clear need to 'move on', since the body of a loop
 (and also that of an `if`) can only consist of one line, which limits the
@@ -78,17 +79,17 @@ repeat 5 times
   print 'I am repeated 5 times'
 ```
 
-### Level 9: Code blocks with multiple levels of nesting 
+### Level 9: Code blocks with multiple levels of nesting
 
 To allow for enough interleaving of concepts (Design Goal 5), we defer
 the introduction of syntax concepts for now, and focus on more conceptual
 additions: the nesting of blocks. We know indentation is a hard concept
 for students to learn, so this warrants its own level (Design Goal 3).
 
-### Level 10: For syntax looping over list 
+### Level 10: For syntax looping over list
 
 In level 10, learners the `for` syntax to loop over the values in a list with `for animal in animals`.
-This allows the customization of stories, drawing and songs. 
+This allows the customization of stories, drawing and songs.
 
 ### Level 11: For syntax with in range
 
@@ -111,7 +112,7 @@ In level 13, Learners learn about `and` and `or` in `if` statements.
 
 ### Level 14: Smaller and bigger
 
-In level 14, Learners learn about `<(=)` and `>(=)` in preparation for while loops. 
+In level 14, Learners learn about `<(=)` and `>(=)` in preparation for while loops.
 
 ### Level 15: While loops
 
@@ -124,7 +125,7 @@ value has already been available technically since level 2, but there was no exp
 
 ### Level 17: Learning elif and the colon
 
-To make the step to full Python, learners will need to use the colon to denote the beginning of a block, in both loops and conditionals. 
+To make the step to full Python, learners will need to use the colon to denote the beginning of a block, in both loops and conditionals.
 Because blocks are already known and practiced over several levels, we can teach learners to use a colon before every indentation.
 
 This level also introduces `elif` to allow for more exciting programs, since just adding a colon does not really create engagement.
@@ -133,9 +134,8 @@ This level also introduces `elif` to allow for more exciting programs, since jus
 
 Level 18 adds round brackets in `print` and `range` and changes `ask` to `input`. As per Design Goal 4, these are added as late as possible.
 
+## Additional features
 
-Additional features
-------
 ### Comments
 
 All levels allow for the use of comments, and it is up the the teachers to explain their different uses.

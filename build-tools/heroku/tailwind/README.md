@@ -1,5 +1,4 @@
-Tailwind for Hedy
-=================
+# Tailwind for Hedy
 
 This directory contains the sources for Tailwind. Normally we'd include this in
 our build process, but our build process is minimal and Python-based, and we

@@ -1,12 +1,10 @@
-Translating Hedy
-================
+# Translating Hedy
 
 Hedy is now (partly) available in العربية, বাংলা, Български, Čeština, Deutsch, Ελληνικά, English, Español, Esperanto, Français, Frysk, हिन्दी, Indonesia, Italiano, Kiswahili, Magyar, 中文 (简体), Nederlands, Norsk Bokmål, فارسی, Polski, Português (Brasil and Portugal), Русский and Türkçe; but we'd love to support more languages and complete the ones we have!
 
 Text that is not yet translated will be shown in English.
 
-Help Hedy with translations (easy, no programming needed!)
-----------------------------------------------------------
+## Help Hedy with translations (easy, no programming needed!)
 
 The easiest way to translate Hedy is by using the translation website of Weblate. You can find it [here](https://hosted.weblate.org/projects/hedy).
 
@@ -57,15 +55,11 @@ You see more strings on the same page for faster translation, but less helpfull 
 
 One important thing to notice is the **grayed pieces of tekst**. This is computer code and should not be translated! There are two versions: keywords between {}, this is in real code that we need to be able to run. Translating these wil make our software fail. The other version is also between {}, but with extra `` around them. This is to highlight this code within text. It wil not make our software fail, but will make the program harder to use. So both of these should be handled with care.
 
-
-
 If you run into any problems, let us know, so we can address them here for future translators. You can reach us at [hello@hedy.org](mailto:hello@hedy.org), or you can join our [Discord #translators channel](https://discord.gg/N7XXDtcNRY)
 
-Fixing Weblate issues
-================
+# Fixing Weblate issues
 
 Sometimes Weblate gets in a conflict state because of changes in our repo as well as in their. This is how to fix that on the command line:
-
 
 1. Gather all commits from weblate by adding an extra remote to my local github like this:
 
@@ -79,6 +73,6 @@ This enables us to contact the weblate repo.
 
 4. With `git merge weblate/main` the Weblate commits are merged into our current branch. This can lead to merge conflicts (it will, cause why otherwise would you be going to all this trouble) that you will have to manually fix in your editor.
 
-5. Push the branch `weblatefixes` (or your own name) and make a PR. 
+5. Push the branch `weblatefixes` (or your own name) and make a PR.
 
 6. Mention me on GitHub or Slack. I am the only one that can merge them correctly (they require a merge commit, not a squash merge!) so ping me to accept the PR.

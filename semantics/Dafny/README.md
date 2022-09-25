@@ -2,7 +2,7 @@
 
 hedy1.cs is the C# file hedy1.dfy compiles to, etc.
 
-hedy1.dfy, hedy2.dfy, hedy3.dfy, hedy4.dfy and hedy5.dfy contain the semantics of Hedy level 1, 2, 3, 4 and 5 respectively, I think it is now complete and without errors. 
+hedy1.dfy, hedy2.dfy, hedy3.dfy, hedy4.dfy and hedy5.dfy contain the semantics of Hedy level 1, 2, 3, 4 and 5 respectively, I think it is now complete and without errors.
 
 hedy4.dfy contains the semantics of Hedy level 4. It is exactly the same as the code for level 3, except for the method substStr, this method works a little bit different here, because of syntactic changes in Hedy. The semantics does not change from level 3 to 4.
 

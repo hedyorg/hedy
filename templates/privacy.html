@@ -1,7 +1,3 @@
-{% extends "auth.html" %}
-
-{% block body %}
-<div class="px-8 py-12">
-    {{ content.terms|commonmark }}
-</div>
+{% extends "auth.html" %} {% block body %}
+<div class="px-8 py-12">{{ content.terms|commonmark }}</div>
 {% endblock %}

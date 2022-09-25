@@ -1,351 +1,351 @@
 1:
--   name: '{print}'
-    explanation: 'Napisz coś za pomocą `{print}`.'
-    demo_code: '{print} Hej, witaj w Hedy!'
--   name: '{ask}'
+  - name: "{print}"
+    explanation: "Napisz coś za pomocą `{print}`."
+    demo_code: "{print} Hej, witaj w Hedy!"
+  - name: "{ask}"
     explanation: Zadaj pytanie za pomocą `{ask}`.
-    demo_code: '{ask} Jaki jest twój ulubiony kolor?'
--   name: '{echo}'
+    demo_code: "{ask} Jaki jest twój ulubiony kolor?"
+  - name: "{echo}"
     explanation: Powtórz coś za pomocą `{echo}`.
     demo_code: "{ask} Jaki jest twój ulubiony kolor?\n{echo} więc twoim ulubionym kolorem jest"
--   name: '{print} emotikony'
+  - name: "{print} emotikony"
     explanation: Wyświetl emotikony za pomocą `{print}`
-    demo_code: '{print} 🙋 🌍 ❗'
--   name: '{forward}'
+    demo_code: "{print} 🙋 🌍 ❗"
+  - name: "{forward}"
     explanation: Narysuj linię za pomocą `{forward}`.
-    demo_code: '{forward} 100'
--   name: '{turn}'
+    demo_code: "{forward} 100"
+  - name: "{turn}"
     explanation: Odwróć żółwia za pomocą `{turn}`
     demo_code: "{forward} 25\n{turn} {left}\n{forward} 25\n{turn} {right}"
 2:
--   name: "{is}"
+  - name: "{is}"
     explanation: "Nadaj nazwę wartość za pomocą `{is}`. Nazwę możesz wybrać samodzielnie."
     demo_code: |-
-        imię {is} Hedy
-        {print} witaj imię
--   name: "{ask}"
+      imię {is} Hedy
+      {print} witaj imię
+  - name: "{ask}"
     explanation: "Zadaj pytanie za pomocą `{ask}`. Uważaj! Musisz nadać nazwę odpowiedzi używając `{is}`."
     demo_code: |-
-        kolor {is} {ask} Jaki jest twój ulubiony kolor?
-        {print} kolor jest twoim ulubionym kolorem!
--   name: "{sleep}"
+      kolor {is} {ask} Jaki jest twój ulubiony kolor?
+      {print} kolor jest twoim ulubionym kolorem!
+  - name: "{sleep}"
     explanation: "Let Hedy pause for a (couple of) second(s)."
     demo_code: |-
-        {print} Daj mi pomyśleć przez 1 sekundę..
-        {sleep}
-        {print} Hmm.. Potrzebuję jeszcze 3 sekundy...
-        {sleep} 3
-        {print} Eureka! Wymyśliłem!
--   explanation: "Nadaj nazwę liczbie za pomocą `{is}`. Nazwę możesz wybrać samodzielnie."
+      {print} Daj mi pomyśleć przez 1 sekundę..
+      {sleep}
+      {print} Hmm.. Potrzebuję jeszcze 3 sekundy...
+      {sleep} 3
+      {print} Eureka! Wymyśliłem!
+  - explanation: "Nadaj nazwę liczbie za pomocą `{is}`. Nazwę możesz wybrać samodzielnie."
     demo_code: |-
-        kąt {is} 90
-        {turn} kąt
-        {forward} 100
+      kąt {is} 90
+      {turn} kąt
+      {forward} 100
     name: is - turtle
 3:
--   name: choose_random
+  - name: choose_random
     explanation: Choose a random word from a group with `{at}` and `{random}`
     demo_code: |-
-        animals {is} dog, cat, kangaroo
-        {print} animals {at} {random}
--   name: "{add}"
+      animals {is} dog, cat, kangaroo
+      {print} animals {at} {random}
+  - name: "{add}"
     explanation: "add an item to a list"
     demo_code: |-
-        animals {is} cow, cat
-        {add} dog {to_list} animals
--   name: "{remove}"
+      animals {is} cow, cat
+      {add} dog {to_list} animals
+  - name: "{remove}"
     explanation: "remove an item from a list"
     demo_code: |-
-        animals {is} cat, dog, cow
-        {remove} dog {from} animals
+      animals {is} cat, dog, cow
+      {remove} dog {from} animals
 4:
--   name: "{print}"
+  - name: "{print}"
     explanation: "print exactly using quotation marks"
     demo_code: "{print} 'Hello welcome to Hedy.'"
--   name: "{is}"
+  - name: "{is}"
     explanation: "Give a name to some text and `{print}` without quotation marks"
     demo_code: |-
-        name {is} Hedy
-        {print} 'my name is ' name
--   name: "{ask}"
+      name {is} Hedy
+      {print} 'my name is ' name
+  - name: "{ask}"
     explanation: "ask something with `{ask}`."
     demo_code: |-
-        color {is} {ask} 'What is your favorite color?'
-        {print} color ' is your favorite!'
+      color {is} {ask} 'What is your favorite color?'
+      {print} color ' is your favorite!'
 5:
--   name: "{print}"
+  - name: "{print}"
     explanation: "print exactly using quotation marks"
     demo_code: "{print} 'Hello welcome to Hedy.'"
--   name: "{ask}"
+  - name: "{ask}"
     explanation: "ask something with `{ask}`."
     demo_code: |-
-        color {is} {ask} 'What is your favorite color?'
-        {print} color ' {is} your favorite!'
--   name: "{if}"
+      color {is} {ask} 'What is your favorite color?'
+      {print} color ' {is} your favorite!'
+  - name: "{if}"
     explanation: "Make a choice with `{if}`"
     demo_code: |-
-        color {is} {ask} 'What is your favorite color?'
-        {if} color {is} green {print} 'pretty!' {else} {print} 'meh'
--   name: "{if} with turtle"
+      color {is} {ask} 'What is your favorite color?'
+      {if} color {is} green {print} 'pretty!' {else} {print} 'meh'
+  - name: "{if} with turtle"
     explanation: "Make a choice with `{if}`"
     demo_code: |-
-        answer {is} {ask} 'How far should I walk?'
-        {if} answer {is} far {forward} 100 {else} {forward} 5
--   name: "{in}"
+      answer {is} {ask} 'How far should I walk?'
+      {if} answer {is} far {forward} 100 {else} {forward} 5
+  - name: "{in}"
     explanation: "Check elements with `{in}`"
     demo_code: |-
-        pretty_colors {is} green, yellow
-        color {is} {ask} 'What {is} your favorite color?'
-        {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'
+      pretty_colors {is} green, yellow
+      color {is} {ask} 'What {is} your favorite color?'
+      {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'
 6:
--   name: "{print}"
+  - name: "{print}"
     explanation: "print exactly using quotation marks"
     demo_code: "{print} '5 times 5 is ' 5 * 5"
--   name: "{ask}"
+  - name: "{ask}"
     explanation: "{ask} for a calculation and check whether it is correct."
     demo_code: |-
-        answer = {ask} 'What is 10 plus 10?'
-        {if} answer {is} 20 {print} 'Yes!' {else} {print} 'Oops'
--   name: "`{ask}` {and} `{if}` turtle"
+      answer = {ask} 'What is 10 plus 10?'
+      {if} answer {is} 20 {print} 'Yes!' {else} {print} 'Oops'
+  - name: "`{ask}` {and} `{if}` turtle"
     explanation: "{ask} the user how many angles they want"
     demo_code: |-
-        angles = {ask} 'How many angles?'
-        angle = 360 / angles
-        {forward} 50
+      angles = {ask} 'How many angles?'
+      angle = 360 / angles
+      {forward} 50
 7:
--   name: "{print}"
+  - name: "{print}"
     explanation: "print exactly using quotation marks"
     demo_code: "{print} 'Hello welcome to Hedy.'"
--   name: "{ask}"
+  - name: "{ask}"
     explanation: "ask something with `{ask}`."
     demo_code: |-
-        color = {ask} 'What is your favorite color?'
-        {print} color ' is your favorite!'
--   name: "{if}"
+      color = {ask} 'What is your favorite color?'
+      {print} color ' is your favorite!'
+  - name: "{if}"
     explanation: "Make a choice with `{if}`"
     demo_code: |-
-        color = {ask} 'What is your favorite color?'
-        {if} color {is} green {print} 'pretty!' {else} {print} 'meh'
--   name: "{repeat} - turtle"
+      color = {ask} 'What is your favorite color?'
+      {if} color {is} green {print} 'pretty!' {else} {print} 'meh'
+  - name: "{repeat} - turtle"
     explanation: "repeat a line of code with `{repeat}`."
     demo_code: |-
-        {repeat} 3 {times} {forward} 10
+      {repeat} 3 {times} {forward} 10
 8:
--   name: "{print}"
+  - name: "{print}"
     explanation: "print something. Remember to use a quotation mark for literal printing."
     demo_code: "{print} '5 times 5 is ' 5 * 5"
--   name: "{ask}"
+  - name: "{ask}"
     explanation: "ask for the answer to a sum and check if it is correct. We can now print 2 lines."
     demo_code: |-
-        answer = {ask} 'What is 5 plus 5?'
-        {if} answer {is} 10
-            {print} 'Well done!'
-            {print} 'Indeed, the answer was ' answer
-        else
-            {print} 'Oops!'
-            {print} 'The answer is 10'
--   name: "`{repeat}` with turtle"
+      answer = {ask} 'What is 5 plus 5?'
+      {if} answer {is} 10
+          {print} 'Well done!'
+          {print} 'Indeed, the answer was ' answer
+      else
+          {print} 'Oops!'
+          {print} 'The answer is 10'
+  - name: "`{repeat}` with turtle"
     explanation: "{repeat} multiple lines"
     demo_code: |-
-        {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
+      {repeat} 4 {times}
+          {turn} 90
+          {forward} 50
 9:
--   name: "`{if}` with multiple lines"
+  - name: "`{if}` with multiple lines"
     explanation: "The answer of a sum of questions with '{ask}' and see if it is correct. Now we print out two lines."
     demo_code: |-
-        answer = {ask} 'What is 20 plus 20?'
-        {if} answer {is} 20
-            {print} 'Well done!!'
-            {print} 'The answer is indeed' answer
-        else
-            {print} 'Wrong'
-            {print} 'The answer is 20'
--   name: "`{repeat}` and turtle"
+      answer = {ask} 'What is 20 plus 20?'
+      {if} answer {is} 20
+          {print} 'Well done!!'
+          {print} 'The answer is indeed' answer
+      else
+          {print} 'Wrong'
+          {print} 'The answer is 20'
+  - name: "`{repeat}` and turtle"
     explanation: "{repeat} multiple lines"
     demo_code: |-
-        {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
+      {repeat} 4 {times}
+          {turn} 90
+          {forward} 50
 10:
--   name: "{print}"
+  - name: "{print}"
     explanation: "print something. Remember to use a quotation mark for literal printing."
     demo_code: "{print} '5 times 5 is ' 5 * 5"
--   name: "{for} with a list"
+  - name: "{for} with a list"
     explanation: "print all things in a list "
     demo_code: |-
-        animals {is} dog, cat, blobfish
-        {for} animal {in} animals
-          {print} 'I love ' animal
+      animals {is} dog, cat, blobfish
+      {for} animal {in} animals
+        {print} 'I love ' animal
 11:
--   name: "{for} loop"
+  - name: "{for} loop"
     explanation: "We can use `{for}` with a {range}"
     demo_code: |-
-        {for} counter {in} {range} 1 {to} 5
-            {print} counter
--   name: "{ask}"
+      {for} counter {in} {range} 1 {to} 5
+          {print} counter
+  - name: "{ask}"
     explanation: "ask for the answer to a sum and check if it is correct. We can now print 2 lines."
     demo_code: |-
-        answer = {ask} 'What is 5 plus 5?'
-        {if} answer {is} 10
-            {print} 'Well done!'
-            {print} 'Indeed, the answer was ' answer
-        else
-            {print} 'Oops!'
-            {print} 'The answer is 10'
+      answer = {ask} 'What is 5 plus 5?'
+      {if} answer {is} 10
+          {print} 'Well done!'
+          {print} 'Indeed, the answer was ' answer
+      else
+          {print} 'Oops!'
+          {print} 'The answer is 10'
 12:
--   name: "float directly"
+  - name: "float directly"
     explanation: "Decimal numbers"
     demo_code: |
-        {print} 'Calculate away!'
-        {print} 'Two and a half plus two and a half is...'
-        {print} 2.5 + 2.5
--   name: "assign text"
+      {print} 'Calculate away!'
+      {print} 'Two and a half plus two and a half is...'
+      {print} 2.5 + 2.5
+  - name: "assign text"
     explanation: "Text with quotation marks after ="
     demo_code: |
-        name = 'Hedy the Robot'
-        {print} 'Hello ' name
--   name: "quotes after {if} comparison"
+      name = 'Hedy the Robot'
+      {print} 'Hello ' name
+  - name: "quotes after {if} comparison"
     explanation: "Text with quotation marks after {if}"
     demo_code: |
-        name = {ask} 'Who are you?'
-        {if} name = 'Hedy'
-            {print} 'Hi there!'
--   name: "quotes in list"
+      name = {ask} 'Who are you?'
+      {if} name = 'Hedy'
+          {print} 'Hi there!'
+  - name: "quotes in list"
     explanation: "A list with quotation marks"
     demo_code: |
-        superheroes = 'Iron Man', 'Batman', 'Superman'
-        {print} superheroes {at} {random}
+      superheroes = 'Iron Man', 'Batman', 'Superman'
+      {print} superheroes {at} {random}
 13:
--   name: "{and}"
+  - name: "{and}"
     explanation: "Two parts both need to be correct"
     demo_code: |-
-        answer1 = {ask} 'What is 3+2?'
-        answer2 = {ask} 'What is 2+2?'
-        {if} answer1 {is} 5 {and} answer2 {is} 4
-            {print} 'Both answers are correct!'
-        else
-            {print} 'At least one answer is wrong!'
--   name: "{or}"
+      answer1 = {ask} 'What is 3+2?'
+      answer2 = {ask} 'What is 2+2?'
+      {if} answer1 {is} 5 {and} answer2 {is} 4
+          {print} 'Both answers are correct!'
+      else
+          {print} 'At least one answer is wrong!'
+  - name: "{or}"
     explanation: "At least 1 of the two parts need to be correct. If both are correct, it is also fine."
     demo_code: |-
-        answer1 = {ask} 'What is 3+2?'
-        answer2 = {ask} 'What is 2+2?'
-        {if} answer1 {is} 5 {or} answer2 {is} 4
-            {print} 'At least one answer is correct!'
-        else
-            {print} 'Both answers are wrong!'
+      answer1 = {ask} 'What is 3+2?'
+      answer2 = {ask} 'What is 2+2?'
+      {if} answer1 {is} 5 {or} answer2 {is} 4
+          {print} 'At least one answer is correct!'
+      else
+          {print} 'Both answers are wrong!'
 14:
--   name: "Smaller"
+  - name: "Smaller"
     explanation: "We use the `<` to check if the first number is smaller than the second number."
     demo_code: |-
-        age = {ask} 'How old are you?'
-        {if} age < 13
-            {print} 'You are younger than me!'
--   name: "Bigger"
+      age = {ask} 'How old are you?'
+      {if} age < 13
+          {print} 'You are younger than me!'
+  - name: "Bigger"
     explanation: "We use the `>` to check if the first number is bigger than the second number."
     demo_code: |-
-        age = {ask} 'How old are you?'
-        {if} age > 13
-            {print} 'You are older than me!'
--   name: "Equal"
+      age = {ask} 'How old are you?'
+      {if} age > 13
+          {print} 'You are older than me!'
+  - name: "Equal"
     explanation: "We use the `==` to check if two things are the same."
     demo_code: |-
-        answer = {ask} 'What is 5 * 5?'
-        {if} answer == 25
-            {print} 'That {is} correct!'
--   name: "Not equal"
+      answer = {ask} 'What is 5 * 5?'
+      {if} answer == 25
+          {print} 'That {is} correct!'
+  - name: "Not equal"
     explanation: "We use the `!=` to check if two things are not the same. "
     demo_code: |-
-        answer = {ask} 'What is 5 * 5?'
-        {if} answer != 25
-            {print} 'That is not correct!'
+      answer = {ask} 'What is 5 * 5?'
+      {if} answer != 25
+          {print} 'That is not correct!'
 
--   name: "Smaller {or} equal"
+  - name: "Smaller {or} equal"
     explanation: "We use the `<=` to check if the first number is smaller than or equal to the second number."
     demo_code: |-
-        age = {ask} 'How old are you?'
-        {if} age <= 12
-            {print} 'You are younger than me!'
+      age = {ask} 'How old are you?'
+      {if} age <= 12
+          {print} 'You are younger than me!'
 
--   name: "Bigger or equal"
+  - name: "Bigger or equal"
     explanation: "We use the `>=` to check if the first number is bigger than or equal to the second number."
     demo_code: |-
-        age = {ask} 'How old are you?'
-        {if} age >= 14
-            {print} 'You are older than me!'
+      age = {ask} 'How old are you?'
+      {if} age >= 14
+          {print} 'You are older than me!'
 15:
--   name: "{while}"
+  - name: "{while}"
     explanation: "We can use the `{while}` loop with not equal"
     demo_code: |-
-        answer = 0
-        {while} answer != 25
-            answer = {ask} 'What is 5 times 5?'
-        {print} 'A correct answer has been given'
--   name: "Smaller {while}"
+      answer = 0
+      {while} answer != 25
+          answer = {ask} 'What is 5 times 5?'
+      {print} 'A correct answer has been given'
+  - name: "Smaller {while}"
     explanation: "We can also use the `{while}` loop with `<` and `>`. "
     demo_code: |-
-        count = 1
-        {while} count < 3
-            {print} 'We do this ' 3 - count ' more times'
-            count = count + 1
-        {print} 'We are done'
+      count = 1
+      {while} count < 3
+          {print} 'We do this ' 3 - count ' more times'
+          count = count + 1
+      {print} 'We are done'
 16:
--   name: "square brackets"
+  - name: "square brackets"
     explanation: "Lists with square brackets"
     demo_code: |-
-        fruit = ['apple', 'banana', 'cherry']
-        {print} fruit
--   name: "Get an item from a list"
+      fruit = ['apple', 'banana', 'cherry']
+      {print} fruit
+  - name: "Get an item from a list"
     explanation: "To get an item from a list we use [number] so fruit[1] means, get the first fruit from the list!"
     demo_code: |-
-        fruit = ['banana', 'apple', 'cherry']
-        firstfruit = fruit[1]
-        {print} firstfruit
--   name: "Get a random item from a list"
+      fruit = ['banana', 'apple', 'cherry']
+      firstfruit = fruit[1]
+      {print} firstfruit
+  - name: "Get a random item from a list"
     explanation: "To get a random item from a list we use [random] so fruit[random] means, get a random fruit from the list!"
     demo_code: |-
-        fruit = ['banana', 'apple', 'cherry']
-        random_fruit = fruit[random]
-        {print} random_fruit
+      fruit = ['banana', 'apple', 'cherry']
+      random_fruit = fruit[random]
+      {print} random_fruit
 17:
--   name: "{elif}"
+  - name: "{elif}"
     explanation: "`{elif}`."
     demo_code: |-
-        a = 2
-        {if} a == 1:
-            {print} 'a is 1'
-        {elif} a == 2:
-            {print} 'a is 2'
-        {else}:
-            {print} 'a is not 1 or 2'
--   name: "{print}"
+      a = 2
+      {if} a == 1:
+          {print} 'a is 1'
+      {elif} a == 2:
+          {print} 'a is 2'
+      {else}:
+          {print} 'a is not 1 or 2'
+  - name: "{print}"
     explanation: "When we use a `{for}`, we need to put a `:` behind the `{for}` statement!"
     demo_code: |-
-        {for} i {in} {range} 1 {to} 12:
-            {print} i
-        {print} 'Ready or not, here I come!'
--   name: "{if}"
+      {for} i {in} {range} 1 {to} 12:
+          {print} i
+      {print} 'Ready or not, here I come!'
+  - name: "{if}"
     explanation: "We need to do the same with all of our `{if}` statements"
     demo_code: |-
-        colour = {ask} 'What is your favorite color?'
-        {if} colour == 'green':
-            {print} 'Your favorite colour is green'
-        {else}:
-            {print} 'Your favorite colour is not green'
+      colour = {ask} 'What is your favorite color?'
+      {if} colour == 'green':
+          {print} 'Your favorite colour is green'
+      {else}:
+          {print} 'Your favorite colour is not green'
 18:
--   name: "{print}"
+  - name: "{print}"
     explanation: "With `{print}` you need to use parentheses"
     demo_code: |-
-        {print}('hi!')
--   name: "{print} with var"
+      {print}('hi!')
+  - name: "{print} with var"
     explanation: "With `{print}` you need to use parentheses and commas if you {print} more items"
     demo_code: |-
-        name = 'Hedy'
-        {print}('my name is ', name)
--   name: '{print} with var'
+      name = 'Hedy'
+      {print}('my name is ', name)
+  - name: "{print} with var"
     explanation: With `{print}` you need to use parentheses and commas if you {print} more items
     demo_code: "name = 'Hedy'\n{print}('my name is ', name)"
--   name: ask something with {input}
+  - name: ask something with {input}
     explanation: Use `{input}` instead of `{ask}` to ask something
     demo_code: "name = {input}('What is your name?')\n{print}('So your name is ', name)"

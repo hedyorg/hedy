@@ -12,8 +12,7 @@ export class Markers {
 
   private currentLineMarker?: MarkerLocation;
 
-  constructor(private readonly editor: AceAjax.Editor) {
-  }
+  constructor(private readonly editor: AceAjax.Editor) {}
 
   /**
    * Mark an error location in the ace editor
@@ -34,17 +33,23 @@ export class Markers {
       // If the is no column, highlight the whole row
       this.addMarker(
         new ace.Range(row - 1, 1, row - 1, 2),
-        "editor-error", "fullLine"
+        "editor-error",
+        "fullLine",
       );
       return;
     }
     // If we get here we know there is a column -> dynamically get the length of the error string
     // As we assume the error is supposed to target a specific word we get row[column, whitespace].
-    const length = this.editor.session.getLine(row -1).slice(col-1).split(/(\s+)/)[0].length;
+    const length = this.editor.session
+      .getLine(row - 1)
+      .slice(col - 1)
+      .split(/(\s+)/)[0].length;
 
     // If there is a column, only highlight the relevant text
-    this.addMarker(new ace.Range(row - 1, col - 1, row - 1, col - 1 + length),
-      "editor-error", "text"
+    this.addMarker(
+      new ace.Range(row - 1, col - 1, row - 1, col - 1 + length),
+      "editor-error",
+      "text",
     );
   }
 
@@ -52,7 +57,7 @@ export class Markers {
    * Remove all error markers
    */
   public clearErrors() {
-    for (const marker of this.findMarkers('editor-error')) {
+    for (const marker of this.findMarkers("editor-error")) {
       this.removeMarker(marker);
     }
   }
@@ -74,7 +79,11 @@ export class Markers {
       return;
     }
 
-    const id = this.addMarker(new ace.Range(line, 0, line, 999), 'debugger-current-line', 'fullLine');
+    const id = this.addMarker(
+      new ace.Range(line, 0, line, 999),
+      "debugger-current-line",
+      "fullLine",
+    );
     this.currentLineMarker = { line, id };
   }
 
@@ -85,18 +94,23 @@ export class Markers {
     const struckLines = new Set(lines);
 
     // First remove all markers that are no longer in the target set
-    const noLongerStruck = Array.from(this.strikeMarkers.entries())
-      .filter(([line, _]) => !struckLines.has(line))
+    const noLongerStruck = Array.from(this.strikeMarkers.entries()).filter(
+      ([line, _]) => !struckLines.has(line),
+    );
     for (const [line, id] of noLongerStruck) {
       this.removeMarker(id);
       this.strikeMarkers.delete(line);
     }
 
     // Then add markers for lines need to be struck
-    const newlyStruck = lines
-      .filter(line => !this.strikeMarkers.has(line));
+    const newlyStruck = lines.filter((line) => !this.strikeMarkers.has(line));
     for (const line of newlyStruck) {
-      const id = this.addMarker(new ace.Range(line, 0, line, 999), 'disabled-line', 'text', true);
+      const id = this.addMarker(
+        new ace.Range(line, 0, line, 999),
+        "disabled-line",
+        "text",
+        true,
+      );
       this.strikeMarkers.set(line, id);
     }
   }
@@ -104,7 +118,12 @@ export class Markers {
   /**
    * Add a marker and remember the class
    */
-  private addMarker(range: AceAjax.Range, klass: string, scope: 'text' | 'line' | 'fullLine', inFront = false) {
+  private addMarker(
+    range: AceAjax.Range,
+    klass: string,
+    scope: "text" | "line" | "fullLine",
+    inFront = false,
+  ) {
     const id = this.editor.session.addMarker(range, klass, scope, inFront);
     this.markerClasses.set(id, klass);
     return id;

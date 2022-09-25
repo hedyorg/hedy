@@ -2,9 +2,8 @@
 name: Idea for the Hedy language
 about: Suggest an idea for the Hedy language
 title: "[Language idea]"
-labels: ''
-assignees: ''
-
+labels: ""
+assignees: ""
 ---
 
 **Language idea incl level**

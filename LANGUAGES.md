@@ -23,7 +23,7 @@ For example, when having your keyword language set to `nl` (Dutch) the following
 ```
 print Hello World!
 ask How are you doing?
-echo So you are doing 
+echo So you are doing
 ```
 
 #### Dutch keywords
@@ -31,7 +31,7 @@ echo So you are doing
 ```
 print Hello World!
 vraag How are you doing?
-herhaal So you are doing 
+herhaal So you are doing
 ```
 
 Lastly, when a non-English language is set as the keyword language a _language switcher_ is shown on the code editor.

@@ -11,9 +11,7 @@
       }
     }
   },
-  "required": [
-    "levels"
-  ],
+  "required": ["levels"],
   "Level": {
     "type": "object",
     "additionalProperties": {
@@ -28,12 +26,9 @@
       },
       "code_lines": {
         "type": "object"
+      },
+      "required": ["story", "code_lines"]
     },
-    "required": [
-      "story",
-      "code_lines"
-    ]
-  },
     "additionalProperties": false
   }
 }

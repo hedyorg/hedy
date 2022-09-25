@@ -1,22 +1,39 @@
-{% extends "auth.html" %}
-
-{% block main %}
+{% extends "auth.html" %} {% block main %}
 <div class="w-full mx-auto flex flex-col items-center gap-4">
-    <div class="bg-white shadow-md rounded-lg rounded py-4">
-      <form id="reset" class="flex flex-col items-center gap-2">
-        <h2>{{_('reset_password')}}</h2>
-        <div class="w-full flex px-8 flex-row items-center justify-center gap-2">
-            <label class="inline-block w-80">{{_('password')}}</label>
-            <input class="inline-block w-full px-2 py-1 rounded-lg border-gray-400" id="password" name="password" minlength="6" type=password required>
-        </div>
-        <div class="w-full flex px-8 flex-row items-center justify-center gap-2">
-            <label class="inline-block w-80">{{_('password_repeat')}}</label>
-            <input class="inline-block w-full px-2 py-1 rounded-lg border-gray-400" id="password_repeat" name="password_repeat" minlength="6" type=password required>
-        </div>
-        <input type="hidden" id="username" name="username" value="{{ reset_username }}">
-        <input type="hidden" id="token" name="token" value="{{ reset_token }}">
-        <button type="submit" class="green-btn">{{_('reset_password')}}</button>
-      </form>
-    </div>
+  <div class="bg-white shadow-md rounded-lg rounded py-4">
+    <form id="reset" class="flex flex-col items-center gap-2">
+      <h2>{{_('reset_password')}}</h2>
+      <div class="w-full flex px-8 flex-row items-center justify-center gap-2">
+        <label class="inline-block w-80">{{_('password')}}</label>
+        <input
+          class="inline-block w-full px-2 py-1 rounded-lg border-gray-400"
+          id="password"
+          name="password"
+          minlength="6"
+          type="password"
+          required
+        />
+      </div>
+      <div class="w-full flex px-8 flex-row items-center justify-center gap-2">
+        <label class="inline-block w-80">{{_('password_repeat')}}</label>
+        <input
+          class="inline-block w-full px-2 py-1 rounded-lg border-gray-400"
+          id="password_repeat"
+          name="password_repeat"
+          minlength="6"
+          type="password"
+          required
+        />
+      </div>
+      <input
+        type="hidden"
+        id="username"
+        name="username"
+        value="{{ reset_username }}"
+      />
+      <input type="hidden" id="token" name="token" value="{{ reset_token }}" />
+      <button type="submit" class="green-btn">{{_('reset_password')}}</button>
+    </form>
+  </div>
 </div>
 {% endblock %}

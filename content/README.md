@@ -1,5 +1,4 @@
-Course Data Structure
-=====================
+# Course Data Structure
 
 ```
 course/{coursename}/{language}.yaml         <-- course definition

@@ -7,18 +7,17 @@
 // To start the tutorial for a specific level, for example level 1
 // Call "startLevelTutorial(<level>)" on from a template, the rest should be handled automatically
 
-import {tutorialPopup} from "./utils";
+import { tutorialPopup } from "./utils";
 
 let current_step = 0;
 
 export function startLevel1() {
   current_step = 1;
-  $('#adventures').hide();
+  $("#adventures").hide();
 
   tutorialPopup("1", current_step);
 }
 
 export function callNextStepLevel1() {
   // Do something
-
 }

@@ -41,7 +41,6 @@ Level 1 supports:
 </tbody>
 </table>
 
-
 #### Correct Programs
 
 <table>
@@ -86,7 +85,6 @@ Level 1 supports:
   </tr>
 </tbody>
 </table>
-
 
 #### Incorrect Programs
 
@@ -166,8 +164,7 @@ Level 2 supports:
 </tbody>
 </table>
 
-* \* From this level on, we have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
-
+- \* From this level on, we have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
 
 #### Correct Programs
 
@@ -225,7 +222,6 @@ Level 2 supports:
   </tr>
 </tbody>
 </table>
-
 
 #### Incorrect Programs
 
@@ -321,8 +317,7 @@ Level 3 supports:
 </tbody>
 </table>
 
-* \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
-
+- \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
 
 #### Correct Programs
 
@@ -396,7 +391,6 @@ Level 3 supports:
   </tr>
 </tbody>
 </table>
-
 
 #### Incorrect Programs
 
@@ -508,9 +502,7 @@ Level 4 supports:
 </tbody>
 </table>
 
-* \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
-
-
+- \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
 
 #### Correct Programs
 
@@ -576,7 +568,6 @@ Level 4 supports:
   </tr>
 </tbody>
 </table>
-
 
 #### Incorrect Programs
 
@@ -708,8 +699,7 @@ Level 5 supports:
 </tbody>
 </table>
 
-* \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
-
+- \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
 
 #### Correct Programs
 
@@ -788,7 +778,6 @@ Level 5 supports:
 </tbody>
 </table>
 
-
 #### Incorrect Programs
 
 <table>
@@ -862,7 +851,6 @@ Level 5 supports:
 </tbody>
 </table>
 
-
 ## Level 6
 
 ### Commands and types
@@ -928,8 +916,7 @@ Level 6 supports:
 </tbody>
 </table>
 
-* \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
-
+- \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
 
 #### Correct Programs
 
@@ -1027,7 +1014,6 @@ Level 6 supports:
   </tr>
 </tbody>
 </table>
-
 
 #### Incorrect Programs
 
@@ -1183,9 +1169,7 @@ Level 7 supports:
 </tbody>
 </table>
 
-* \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
-
-
+- \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
 
 #### Correct Programs
 
@@ -1292,7 +1276,6 @@ Level 7 supports:
 </tbody>
 </table>
 
-
 #### Incorrect Programs
 
 <table>
@@ -1378,7 +1361,6 @@ Level 7 supports:
 </tbody>
 </table>
 
-
 ## Level 8
 
 ### Commands
@@ -1448,8 +1430,7 @@ Level 8 supports:
 </tbody>
 </table>
 
-* \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
-
+- \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
 
 #### Correct Programs
 
@@ -1555,7 +1536,6 @@ Level 8 supports:
   </tr>
 </tbody>
 </table>
-
 
 #### Incorrect Programs
 
@@ -1646,7 +1626,6 @@ Level 8 supports:
 </tbody>
 </table>
 
-
 ## Level 9
 
 ### Commands and types
@@ -1716,9 +1695,7 @@ Level 9 supports:
 </tbody>
 </table>
 
-* \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
-
-
+- \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
 
 #### Correct Programs
 
@@ -1824,7 +1801,6 @@ Level 9 supports:
   </tr>
 </tbody>
 </table>
-
 
 #### Incorrect Programs
 
@@ -1988,8 +1964,7 @@ Level 10 supports:
 </tbody>
 </table>
 
-* \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
-
+- \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
 
 #### Correct Programs
 
@@ -2100,7 +2075,6 @@ Level 10 supports:
 </tbody>
 </table>
 
-
 #### Incorrect Programs
 
 <table>
@@ -2190,7 +2164,6 @@ Level 10 supports:
 </tbody>
 </table>
 
-
 ## Level 11
 
 ### Commands and types
@@ -2252,8 +2225,7 @@ Level 11 supports:
 </tbody>
 </table>
 
-* \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
-
+- \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
 
 #### Correct Programs
 
@@ -2335,7 +2307,6 @@ Level 11 supports:
 </tr>
 </tbody>
 </table>
-
 
 #### Incorrect Programs
 
@@ -2475,8 +2446,7 @@ Level 12 supports:
 </tbody>
 </table>
 
-* \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
-
+- \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
 
 #### Correct Programs
 
@@ -2571,7 +2541,6 @@ Level 12 supports:
 </tbody>
 </table>
 
-
 #### Incorrect Programs
 
 <table>
@@ -2645,7 +2614,6 @@ Level 12 supports:
 </tbody>
 </table>
 
-
 ## Level 13
 
 ### Commands and types
@@ -2715,8 +2683,7 @@ Level 13 supports:
 </tbody>
 </table>
 
-* \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
-
+- \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
 
 #### Correct Programs
 
@@ -2815,7 +2782,6 @@ Level 13 supports:
 </tbody>
 </table>
 
-
 #### Incorrect Programs
 
 <table>
@@ -2888,7 +2854,6 @@ Level 13 supports:
   </tr>
 </tbody>
 </table>
-
 
 ## Level 14
 
@@ -2983,9 +2948,9 @@ Level 14 supports:
 </tbody>
 </table>
 
-* \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
+- \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
 
-* \*\* All comparisons need to have the same type on both sides of the command. (Except when the input type is used.)
+- \*\* All comparisons need to have the same type on both sides of the command. (Except when the input type is used.)
 
 #### Correct Programs
 
@@ -3088,7 +3053,6 @@ Level 14 supports:
 </tbody>
 </table>
 
-
 #### Incorrect Programs
 
 <table>
@@ -3165,7 +3129,6 @@ Level 14 supports:
   </tr>
 </tbody>
 </table>
-
 
 ## Level 15
 
@@ -3264,9 +3227,9 @@ Level 15 supports:
 </tbody>
 </table>
 
-* \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
+- \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
 
-* \*\* All comparisons need to have the same type on both sides of the command. (Except when the input type is used.)
+- \*\* All comparisons need to have the same type on both sides of the command. (Except when the input type is used.)
 
 #### Correct Programs
 
@@ -3372,7 +3335,6 @@ Level 15 supports:
   </tr>
 </tbody>
 </table>
-
 
 #### Incorrect Programs
 
@@ -3548,8 +3510,8 @@ Level 16 supports:
 </tbody>
 </table>
 
-* \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
-* \*\* All comparisons need to have the same type on both sides of the command. (Except when the input type is used.)
+- \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
+- \*\* All comparisons need to have the same type on both sides of the command. (Except when the input type is used.)
 
 #### Correct Programs
 
@@ -3655,7 +3617,6 @@ Level 16 supports:
   </tr>
 </tbody>
 </table>
-
 
 #### Incorrect Programs
 
@@ -3843,9 +3804,9 @@ Level 17 supports:
 </tbody>
 </table>
 
-* \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
-* \*\* All comparisons need to have the same type on both sides of the command. (Except when the input type is used.)
-* \*\*\* There has to be an `if` (with a boolean), before `elif` (with a boolean), but then, multiple times `elif` is possible. After that, using an `else` is optional.
+- \* We have to use `ask` in combination with `is`, so we get `<variablename> is ask <outputquestion>`. This way, the answer of the user will be stored in a variable.
+- \*\* All comparisons need to have the same type on both sides of the command. (Except when the input type is used.)
+- \*\*\* There has to be an `if` (with a boolean), before `elif` (with a boolean), but then, multiple times `elif` is possible. After that, using an `else` is optional.
 
 #### Correct Programs
 
@@ -3955,7 +3916,6 @@ Level 17 supports:
   </tr>
 </tbody>
 </table>
-
 
 #### Incorrect Programs
 
