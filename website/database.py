@@ -236,16 +236,18 @@ class Database:
 
         The pagination token will be of the form '<epoch>:<pagination_token>'
         """
+        limit = 500
+
         epoch, pagination_token = page_token.split(':', maxsplit=1) if page_token is not None else (CURRENT_USER_EPOCH, None)
         epoch = int(epoch)
 
-        page = USERS.get_many(dict(epoch=epoch), pagination_token=pagination_token, reverse=True)
+        page = USERS.get_many(dict(epoch=epoch), pagination_token=pagination_token, limit=limit, reverse=True)
 
         # If we are not currently at epoch > 1 and there are no more records in the current
         # epoch, also include the first page of the next epoch.
         if not page.next_page_token and epoch > 1:
             epoch -= 1
-            next_epoch_page = USERS.get_many(dict(epoch=epoch), reverse=True)
+            next_epoch_page = USERS.get_many(dict(epoch=epoch), reverse=True, limit=limit)
 
             # Build a new result page with both sets of records, ending with the next "next page" token
             page = dynamo.ResultPage(list(page) + list(next_epoch_page), next_epoch_page.next_page_token)

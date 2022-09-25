@@ -1,7 +1,7 @@
 adventures:
     default:
-        name: "Introduction"
-        description: "Level explanation"
+        name: "Начало"
+        description: "Обяснение"
         default_save_name: "intro"
         levels:
             1:
@@ -154,7 +154,6 @@ adventures:
                     **Decimal numbers**
                     So far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the `.` for decimal numbers.
                 example_code: |
-
                     ```
                     {print} 'Two and a half plus two and a half is...'
                     {print} 2.5 + 2.5
@@ -233,7 +232,6 @@ adventures:
                     If you want to check if the first number is bigger or equal to the second, you can use `>=`, for example `points >= 11`.
                     You use these comparisons in an `{if}`, like this:
                 example_code: |
-
                     ```
                     age = {ask} 'How old are you?'
                     {if} age > 12
@@ -268,7 +266,7 @@ adventures:
 
                     In the example code, we continue until a correct answer has been given.
                     If the correct answer is never given, the loop never ends!
-                example_code: |
+                example_code: |4
 
                     ```
                     answer = 0
@@ -284,7 +282,7 @@ adventures:
                     ## More and more like real code!
                     We are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels.
                     You can use the square brackets as well to point out a place in the lists.
-                example_code: |
+                example_code: |4
 
                     ```
                     friends = ['Ahmed', 'Ben', 'Cayden']
@@ -304,7 +302,7 @@ adventures:
 
                     In this level you can also use a new command: `{elif}`. `{elif}` is short for {else} {if} and you need it when you want to make 3 (or more!) options.
                     Check it out!
-                example_code: |
+                example_code: |4
 
                     ```
                     prices = ['1 million dollars', 'an apple pie', 'nothing']
@@ -325,7 +323,7 @@ adventures:
                     ## The last level!
                     We arrived at real Python code! That means we need to use parentheses with {print} and {range} from now on.
 
-                example_code: |
+                example_code: |4
 
                     ```
                     {print}('my name is Hedy!')
@@ -386,7 +384,7 @@ adventures:
 
                     За тази цел ти ще напишеш малко повече код. Ха!
 
-                example_code: |
+                example_code: |4
 
                     ```
                     name is ask Как се нарича главаната героиня?
@@ -478,7 +476,7 @@ adventures:
                     ```
                 story_text_3: |
                     This is an example of the `{remove}` command in your story
-                example_code_3: |
+                example_code_3: |4
 
 
                     ```
@@ -530,7 +528,7 @@ adventures:
                     ## Songs
                     Songs often contain a lot of repetition. Sometimes the repetition is also based on counting.
                     For example, in the well-known song 'Bottles of beer'. You can program that song with a little math.
-                example_code: |
+                example_code: |4
 
 
                     ```
@@ -555,7 +553,7 @@ adventures:
                     Baby Shark
 
                     You can make this song much shorter with a `{repeat}`! Can you finish the code?
-                example_code: |
+                example_code: |4
 
 
                     ```
@@ -569,7 +567,7 @@ adventures:
                 story_text: |
                     ## Songs
                     In a previous level you've programmed the song 'Bottles of beer'. You made one verse and then had to copy the verses 99 times. In level 7 you can repeat the song 99 times, just by adding one simple line!
-                example_code: |
+                example_code: |4
 
 
                     ```
@@ -650,7 +648,7 @@ adventures:
                 story_text: |
                     ## Sing a song!
                     In this song we can make it even easier to program '{if} you're happy and you know it, clap your hands'. Because we can put all of the actions in a variable, check it out:
-                example_code: |
+                example_code: |4
 
 
                     ```
@@ -739,7 +737,7 @@ adventures:
                     Ползвай 90 градуса, за да завиеш 1/4 (една четвърт). Едно пълно завъртане е равно на 360 градуса.
                     Представи си как би могла да "нарисуваш" фигура от свързани линии с програмиране? Може би триъгълник? Кръг?
 
-                example_code: |
+                example_code: |4
 
                     ```
                     print "Рисуване на фигура"
@@ -881,7 +879,7 @@ adventures:
                     Ползвай `at random` в комбинация с променлива с повече стойности, не само една.
                     Ползвай примера отдолу и увеличи листа с още стойности, освен 10, 50, 90, 150, 250.
 
-                example_code: |
+                example_code: |4
 
                     ```
                     ъгли is 10, 50, 90, 150, 250
@@ -1347,7 +1345,7 @@ adventures:
                     In this level you can use nesting to make your restaurant more realistic and more fun!
                     For example you would {ask} for sauce {if} somebody orders fries, but you wouldn't {if} someone orders pizza!
                     Check out the example, and try this at your own virtual restaurant!
-                example_code: |
+                example_code: |4
 
 
                     ```
@@ -1376,7 +1374,7 @@ adventures:
                 story_text: |
                     ## Restaurant
                     In this level you'll learn how to easily {ask} your guests' orders in a short code.
-                example_code: |
+                example_code: |4
 
 
                     ```
@@ -1385,7 +1383,7 @@ adventures:
                         food = {ask} 'What would you like to eat as your ' course '?'
                         {print} food ' will be your ' course
                     ```
-                story_text_2: |
+                story_text_2: |4
 
 
                     Of course, you could also order for multiple people!
@@ -1403,7 +1401,7 @@ adventures:
                 story_text: |
                     ## Restaurant
                     We can use the `{for} i {in} {range} 1 {to} 5` to {print} the orders from multiple customers in an orderly manner.
-                example_code: |
+                example_code: |4
 
 
                     ```
@@ -1426,7 +1424,7 @@ adventures:
                 story_text: |
                     ## Restaurant
                     From this level on you can use decimal numbers to make you menu more realistic.
-                example_code: |
+                example_code: |4
 
 
                     ```
@@ -1450,7 +1448,7 @@ adventures:
                     In this level we can use the new commands to upgrade our restaurant.
                     We use `{and}` to see {if} two things are both the case.
 
-                example_code: |
+                example_code: |4
 
                     ```
                     price = 10
@@ -1464,7 +1462,7 @@ adventures:
                 story_text_2: |
                     We use `{or}` to see {if} one our of two things is the case.
 
-                example_code_2: |
+                example_code_2: |4
 
                     ```
                     drinks = {ask} 'What would you like to drink?'
@@ -1477,7 +1475,7 @@ adventures:
                     ## Restaurant
                     With the `{while}` you can make sure your costumers can keep adding orders until they are done.
 
-                example_code: |
+                example_code: |4
 
 
                     ```
@@ -1551,7 +1549,7 @@ adventures:
                     If you pick the right door you'll survive, but {if} not a terrible monster might...
 
                     In level 1 we start our haunted house game by making up a scary story and {ask} the player what monster they'll see in the haunted house.
-                example_code: |
+                example_code: |4
 
 
 
@@ -1577,7 +1575,7 @@ adventures:
                 story_text: |
                     ## Haunted House
                     In this haunted house you can choose your monsters with emojis. Of course you could also use words.
-                example_code: |
+                example_code: |4
 
                     ```
                     monster_1 {is} 👻
@@ -1596,7 +1594,7 @@ adventures:
                     In the previous levels you've made an introduction to your haunted house game, but as you might have noticed the story would always have a dreadful end.
                     In this level you can make your story more interactive by changing the outcome of the game; sometimes you'll get eaten, sometimes you'll escape!
                     Let Hedy decide randomly!
-                example_code: |
+                example_code: |4
 
                     ```
                     {print} Escape from the haunted house!
@@ -1641,7 +1639,7 @@ adventures:
                     Up until this level the haunted house game always asked the player to choose a door, but as you might have noticed, they didn't really have to answer correctly.
                     If the player filled in a completely random answer, the game would still work and the player might even win (despite not picking a door).
                     In this level you can only win the game by picking the same door Hedy picked randomly.
-                example_code: |
+                example_code: |4
 
 
                     ```
@@ -1666,7 +1664,7 @@ adventures:
                     ## Challenge
                     Now it's very hard to win this game, can you make it easier to win?
                     For example by only having 1 wrong door and 2 correct doors instead of 1 correct door and 2 wrong ones?
-                example_code: |
+                example_code: |4
 
 
                     ```
@@ -1694,7 +1692,7 @@ adventures:
                 story_text: |
                     ## Haunted House
                     In this level we've changed the repeat command and we've added a line to our haunted house that tells the player in which room they are.
-                example_code: |
+                example_code: |4
 
 
                     ```
@@ -1723,7 +1721,7 @@ adventures:
                 story_text: |
                     ## Haunted House
                     In this level you can use the `<` and `>` symbol to introduce lives to your game.
-                example_code: |
+                example_code: |4
 
 
                     ```
@@ -1755,7 +1753,7 @@ adventures:
                     This haunted house game uses the connection between the lists you can use in this level.
                     For example: all the properties that belong to the zombie are first in all the lists, witch second and vampire third.
                     Check out the code!
-                example_code: |
+                example_code: |4
 
 
                     ```
@@ -1889,7 +1887,7 @@ adventures:
                 story_text: |
                     ## Learn a new language
                     Make your own program to practice your vocabulary in a new language.
-                example_code: |
+                example_code: |4
 
                     ```
                     {print} 'Learn French!'
@@ -1906,7 +1904,7 @@ adventures:
                     ## Learn a new language
                     Make your own program to practice your vocabulary in a new language.
 
-                example_code: |
+                example_code: |4
 
                     ```
                     french_words = ['bonjour', 'ordinateur', 'pomme de terre']
