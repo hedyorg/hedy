@@ -19,7 +19,7 @@ adventures:
                 example_code: "```\n{print} Hallo!\n{print} Selamat datang di Hedy!\n```\n"
                 story_text_2: "You can also ask for input and repeat it back with an `{echo}` command.\nTry the code to your left again.\n\nDon't know what to create? In the next tabs you will find ideas for programs to build.\n"
                 example_code_2: "```\n{ask} What is your name?\n{echo} hello\n```\n"
-                story_text_3: "Let's get started! Don't know what to create? In the next tabs you will find ideas for programs to build.\n"
+                story_text_3: "Mari kita mulai! Tidak tahu apa yang harus dibuat? Di tab berikutnya anda akan menemukan ide untuk membuat program.\n"
             2:
                 story_text: |-
                     Pada level 2, kita belajar hal baru. Kamu dapat menamai sebuah kata dengan `is`.
@@ -35,10 +35,10 @@ adventures:
 
                 start_code: print halo dunia!
                 example_code: "```\nname {is} Hedy\nage {is} 15\n{print} name is age years old\n```\n"
-                story_text_2: "`{print}` still works the same, but the `{ask}` command has changed. You need to use a variable in the `{ask}` command as well. It looks like this:\n"
-                example_code_2: "```\nanswer {is} {ask} What is your name?\n{print} Hello answer\n```\n"
-                story_text_3: "Another new command in this level is `{sleep}`, which pauses your program for a second. If you type a number behind the {sleep} command, the program pauses for that amount of seconds.\n"
-                example_code_3: "```\n{print} My favorite colour is...\n{sleep} 2\n{print} green!\n```\n"
+                story_text_2: "`{print}` masih berfungsi sama, tetapi `{ask}` perintah telah berubah. Anda juga perlu menggunakan variabel dalam `{ask}` perintah. Terlihat seperti ini:\n"
+                example_code_2: "```\njawab {is} {ask} Siapa namamu?\n{print} Halo jawab\n```\n"
+                story_text_3: "Perintah baru lainnya di level ini adalah `{sleep}`, yang menghentikan sementara program anda beberapa detik. Jika Anda mengetikkan angka di belakang {sleep} perintah, program akan berhenti sejenak selama beberapa detik.\n"
+                example_code_3: "```\n{print} Warna favorit saya adalah...\n{sleep} 2\n{print} hijau!\n```\n"
             3:
                 story_text: |-
                     Pada level 3 kamu juga dapat membuat list. Kamu dapat meminta komputer memilih sesuatu secara acak dari list tersebut. Kamu dapat melakukan itu dengan `at random`.
@@ -51,7 +51,7 @@ adventures:
                     Kamu bisa menemukan semua kode contoh level 3 pada bagian kiri. Ada juga diberikan latihan pada tab-tab diatas.
                 start_code: print halo dunia!
                 example_code: "```\nanimals {is} dog, cat, kangaroo\n{print} animals {at} {random}\n```\n"
-                story_text_2: You can also add items to the list with `{add}` and remove items with `{remove}`.
+                story_text_2: Anda juga dapat menambahkan item ke daftar dengan `{add}` dan menghapus item dengan `{remove}`.
                 example_code_2: "```\nanimals {is} dog, cat, kangaroo\n{add} penguin {to_list} animals\n{remove} cat {from} animals\n{print} animals {at} {random}\n```\n"
             4:
                 start_code: print 'Halo dunia'
@@ -68,7 +68,7 @@ adventures:
                     Kamu akan menemukan semua perintah di bagian kiri lagi dan tugas-tugas di tab-tab yang disediakan. Tugas-tugas tersebut sekarang akan menjadi lebih kompleks semakin ke kanan tabnya.
                     Jadi adalah baik untuk memulai dari tab tugas paling kiri, dan mengerjakannya satu per satu ke kanan, supaya tantangan yang diberikan setara dengan kemampuan kamu.
                 example_code: "```\nprint 'You need to use quotation marks from now on!'\nanswer is ask 'What do we need to use from now on?'\nprint 'We need to use ' answer\n```\n"
-                story_text_2: "## Adventures are getting more and more difficult\nThe adventures are now getting more and more difficult in the successive tabs.\nSo it is best to start on the left with the story, and work to the right, in order to be challenged more and more.\n"
+                story_text_2: "## Petualangan semakin sulit\nPetualangan sekarang semakin sulit di tab yang berurutan.\nJadi yang terbaik adalah memulai dari kiri dengan cerita, dan bekerja ke kanan, untuk ditantang lebih dan lebih.\n"
             5:
                 start_code: |-
                     nama is ask 'siapa nama kamu?'
@@ -99,9 +99,9 @@ adventures:
                     Pada level 5, tugas-tugas yang ada pada tab-tab terlampir akan menjadi makin kompleks semakin posisi tabnya ke kanan. Jadi, pastikan untuk mengerjakan mulai dari kiri ke kanan.
                 example_code_2: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice'\n{else} {print} 'boo!'\n```\n"
                 example_code: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'\n```\n"
-                story_text_3: "## Lists\nWhen we want to check if something is in a list, we can now use the `{in}` command.\nThis code prints pretty! if you choose green or yellow, and meh otherwise.\n"
-                example_code_3: "```\npretty_colors {is} green, yellow\ncolor {is} {ask} 'What is your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!'\n{else} {print} 'meh'\n```\n"
-                story_text_2: "Sometimes code with an `{if}` gets really long and does not fit on the line well. <br> You may also divide the code over two lines, starting the second line at the `{else}` like this:\n"
+                story_text_3: "## Daftar\nSaat kita ingin memeriksa apakah ada sesuatu dalam daftar, kita sekarang dapat menggunakan `{in}` perintah.\nKode ini dicetak cantik! jika anda memilih hijau atau kuning, dan sebaliknya.\n"
+                example_code_3: "```\npretty_colors {is} hijau, kuning\nfavorite_color {is} {ask} 'Apa warna favoritmu?'\n{if} favorite_color {in} pretty_colors {print} 'cantik!'\n{else} {print} 'meh'\n```\n"
+                story_text_2: "Terkadang kode dengan `{if}` menjadi sangat panjang dan tidak sesuai dengan baris. <br> Anda juga dapat membagi kode menjadi dua baris, mulai baris kedua di `{else}` seperti ini:\n"
             6:
                 start_code: print '5 kali 5 adalah ' 5 * 5
                 story_text: |-
@@ -121,7 +121,7 @@ adventures:
                     print '5 kali 5 adalah ' 5 * 5
                     ```
                 example_code: "```\n{print} '5 plus 5 is ' 5 + 5\n{print} '5 minus 5 is ' 5 - 5\n{print} '5 {times} 5 is ' 5 * 5\n```\n"
-                story_text_2: "We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:\n"
+                story_text_2: "Kami juga membuat perubahan dalam menyimpan kata dalam variabel! Anda sekarang dapat menggunakan `=` alih-alih `{is}` saat kami menyimpan nama atau nomor dalam variabel, seperti ini:\n"
                 example_code_2: "```\nname = Hedy\nanswer = 20 + 4\n```\n"
             7:
                 start_code: repeat 3 times print 'Hedy itu menyenangkan!'
