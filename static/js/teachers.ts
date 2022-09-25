@@ -348,19 +348,16 @@ export function save_customizations(class_id: string) {
             levels.push(<string>$(this).val());
         }
     });
-    let adventures = {};
+    let adventures: Record<string, string[]> = {};
     $('.adventure_keys').each(function() {
-        const name = <string>$(this).attr('adventure');
-        // @ts-ignore
+        const name = <string>$(this).attr('adventure') as string;
         adventures[name] = [];
     });
     $('.adventure_level_input').each(function() {
         const name = <string>$(this).attr('adventure');
-        // @ts-ignore
         let current_list = adventures[name];
         if ($(this).prop("checked")) {
             current_list.push(<string>$(this).attr('level'));
-            // @ts-ignore
             adventures[name] = current_list;
         }
     });
@@ -376,12 +373,11 @@ export function save_customizations(class_id: string) {
             other_settings.push(<string>$(this).attr('id'));
         }
     });
-    let opening_dates = {};
+    let opening_dates: Record<string, string> = {};
     $('.opening_date_container').each(function() {
         if ($(this).is(":visible")) {
             $(this).find(':input').each(function () {
-                // @ts-ignore
-                opening_dates[<string>$(this).attr('level')] = $(this).val();
+                opening_dates[$(this).attr('level') as string] = $(this).val() as string;
             });
         }
     });
@@ -514,10 +510,9 @@ export function create_accounts(prompt: string) {
         let accounts: {}[] = [];
         $('.account_row').each(function () {
             if ($(this).is(':visible')) { //We want to skip the hidden first "copy" row
-                let account = {};
+                let account: Record<string, string> = {};
                 $(this).find(':input').each(function () {
-                    // @ts-ignore -> Not sure why TypeScript has issues, this should be valid
-                    account[$(this).attr("name")] = $(this).val();
+                    account[$(this).attr("name") as string] = $(this).val() as string;
                 });
                 accounts.push(account);
             }

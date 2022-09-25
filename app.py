@@ -1083,6 +1083,11 @@ def main_page(page):
         return render_template('learn-more.html', papers=hedy_content.RESEARCH, page_title=gettext('title_learn-more'),
                                current_page='learn-more', content=learn_more_translations)
 
+    if page == 'join':
+        join_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
+        return render_template('join.html', page_title=gettext('title_learn-more'),
+                               current_page='join', content=join_translations)
+
     if page == 'privacy':
         privacy_translations = hedyweb.PageTranslations(
             page).get_page_translations(g.lang)

@@ -316,6 +316,7 @@ p.close-dialog {
 
 .editor-error {
   @apply bg-red-500 absolute;
+  z-index: 10; /* Show higher than the active line (which has z-index 2) */
 }
 
 /**
