@@ -512,12 +512,34 @@ class TestsLevel6(HedyTester):
     #
     # arithmetic expressions tests
     #
-    def test_print_calc(self):
+    def test_print_multiplication(self):
         code = "print 5 * 5"
         expected = "print(f'{int(5) * int(5)}')"
         output = '25'
 
         self.multi_level_tester(max_level=11, code=code, expected=expected, output=output)
+
+    def test_print_addition(self):
+        code = "print 5 + 5"
+        expected = "print(f'{int(5) + int(5)}')"
+        output = '10'
+
+        self.multi_level_tester(max_level=11, code=code, expected=expected, output=output)
+
+    def test_print_subtraction_without_text(self):
+        code = "print 5 - 5"
+        expected = "print(f'{int(5) - int(5)}')"
+        output = '0'
+
+        self.multi_level_tester(max_level=11, code=code, expected=expected, output=output)
+
+    def test_print_subtraction_with_text(self):
+        code = "print 'And the winner is ' 5 - 5"
+        expected = "print(f'And the winner is {int(5) - int(5)}')"
+        output = 'And the winner is 0'
+
+        self.multi_level_tester(max_level=11, code=code, expected=expected, output=output)
+
 
     def test_print_nested_calcs(self):
         code = "print 5 * 5 * 5"
