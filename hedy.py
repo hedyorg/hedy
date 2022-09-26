@@ -1557,6 +1557,16 @@ class ConvertToPython_6(ConvertToPython_5):
             else:
                 args_new.append(self.process_variable_for_fstring(a))
 
+        for i in range(1,len(args_new)):
+            a = args_new[i]
+            if a[0] == '-': #a separate minus, can it be merged into the previous number?
+                previous_a = args_new[i-1]
+                if previous_a.isnumeric():
+                    args_new.remove(a)
+                    args_new.remove(previous_a)
+                    args_new.append(str(eval(previous_a+a)))
+
+
         return ''.join(args_new)
 
     def equality_check(self, meta, args):

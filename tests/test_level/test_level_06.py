@@ -535,10 +535,16 @@ class TestsLevel6(HedyTester):
 
     def test_print_subtraction_with_text(self):
         code = "print 'And the winner is ' 5 - 5"
-        expected = "print(f'And the winner is {int(5) - int(5)}')"
+        expected_1 = "print(f'And the winner is {int(5) - int(5)}')"
+        expected_2 = "print(f'And the winner is 0')"
         output = 'And the winner is 0'
 
-        self.multi_level_tester(max_level=11, code=code, expected=expected, output=output)
+        for level in range(self.level, 12):
+            print(f"passed for level {level}")
+            result = hedy.transpile(code, level, 'en')
+            self.assertIn(result.code, [expected_1, expected_2])
+            self.assertEqual(output, HedyTester.run_code(result))
+
 
 
     def test_print_nested_calcs(self):
