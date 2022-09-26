@@ -512,12 +512,40 @@ class TestsLevel6(HedyTester):
     #
     # arithmetic expressions tests
     #
-    def test_print_calc(self):
+    def test_print_multiplication(self):
         code = "print 5 * 5"
         expected = "print(f'{int(5) * int(5)}')"
         output = '25'
 
         self.multi_level_tester(max_level=11, code=code, expected=expected, output=output)
+
+    def test_print_addition(self):
+        code = "print 5 + 5"
+        expected = "print(f'{int(5) + int(5)}')"
+        output = '10'
+
+        self.multi_level_tester(max_level=11, code=code, expected=expected, output=output)
+
+    def test_print_subtraction_without_text(self):
+        code = "print 5 - 5"
+        expected = "print(f'{int(5) - int(5)}')"
+        output = '0'
+
+        self.multi_level_tester(max_level=11, code=code, expected=expected, output=output)
+
+    def test_print_subtraction_with_text(self):
+        code = "print 'And the winner is ' 5 - 5"
+        expected_1 = "print(f'And the winner is {int(5) - int(5)}')"
+        expected_2 = "print(f'And the winner is 0')"
+        output = 'And the winner is 0'
+
+        for level in range(self.level, 12):
+            print(f"passed for level {level}")
+            result = hedy.transpile(code, level, 'en')
+            self.assertIn(result.code, [expected_1, expected_2])
+            self.assertEqual(output, HedyTester.run_code(result))
+
+
 
     def test_print_nested_calcs(self):
         code = "print 5 * 5 * 5"
