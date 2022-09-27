@@ -327,8 +327,7 @@ class TestsLevel1(HedyTester):
         self.multi_level_tester(
             code=code,
             expected=expected,
-            extra_check_function=self.is_turtle(),
-            max_level=self.max_turtle_level
+            extra_check_function=self.is_turtle()
         )
 
     def test_forward_arabic_numeral(self):
@@ -338,8 +337,7 @@ class TestsLevel1(HedyTester):
         self.multi_level_tester(
             code=code,
             expected=expected,
-            extra_check_function=self.is_turtle(),
-            max_level=self.max_turtle_level
+            extra_check_function=self.is_turtle()
         )
 
     def test_forward_hindi_numeral(self):
@@ -349,8 +347,7 @@ class TestsLevel1(HedyTester):
         self.multi_level_tester(
             code=code,
             expected=expected,
-            extra_check_function=self.is_turtle(),
-            max_level=self.max_turtle_level
+            extra_check_function=self.is_turtle()
         )
 
     def test_forward_without_argument(self):
@@ -362,8 +359,7 @@ class TestsLevel1(HedyTester):
         self.multi_level_tester(
             code=code,
             expected=expected,
-            extra_check_function=self.is_turtle(),
-            max_level=self.max_turtle_level
+            extra_check_function=self.is_turtle()
         )
 
     def test_forward_with_text_gives_type_error(self):
@@ -371,8 +367,7 @@ class TestsLevel1(HedyTester):
 
         self.multi_level_tester(
             code=code,
-            exception=hedy.exceptions.InvalidArgumentTypeException,
-            max_level=self.max_turtle_level
+            exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
     def test_multiple_forward_without_arguments(self):
@@ -388,7 +383,6 @@ class TestsLevel1(HedyTester):
         self.multi_level_tester(
             code=code,
             expected=expected,
-            max_level=self.max_turtle_level,
             extra_check_function=self.is_turtle()
         )
 
@@ -402,7 +396,7 @@ class TestsLevel1(HedyTester):
             code=code,
             expected=expected,
             extra_check_function=self.is_turtle(),
-            max_level=self.max_turtle_level)
+            max_level=10)
 
     def test_one_color_red(self):
         code = "color red"
@@ -435,8 +429,7 @@ class TestsLevel1(HedyTester):
         self.multi_level_tester(
             code=code,
             expected=expected,
-            extra_check_function=self.is_turtle(),
-            max_level=self.max_turtle_level
+            extra_check_function=self.is_turtle()
         )
 
     def test_turn_right(self):
@@ -528,7 +521,6 @@ class TestsLevel1(HedyTester):
             HedyTester.forward_transpiled(100))
 
         self.multi_level_tester(
-            max_level=self.max_turtle_level,
             code=code,
             expected=expected,
             extra_check_function=self.is_turtle(),

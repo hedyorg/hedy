@@ -24,7 +24,6 @@ class Snippet:
 
 class HedyTester(unittest.TestCase):
   level = None
-  max_turtle_level = hedy.HEDY_MAX_LEVEL
   equality_comparison_with_is = ['is', '=']
   equality_comparison_commands = ['==', '=']
   number_comparison_commands = ['>', '>=', '<', '<=']
