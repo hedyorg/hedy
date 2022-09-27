@@ -297,7 +297,6 @@ class TestsLevel12(HedyTester):
             code=code,
             expected=expected,
             extra_check_function=self.is_turtle(),
-            max_level=18,
         )
 
     def test_forward_with_string_variable_gives_type_error(self):
@@ -308,7 +307,6 @@ class TestsLevel12(HedyTester):
         self.multi_level_tester(
             code=code,
             exception=hedy.exceptions.InvalidArgumentTypeException,
-            max_level=18,
         )
 
     def test_forward_with_list_access_random(self):
