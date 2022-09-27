@@ -1023,6 +1023,7 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     if (!hasWarnings) {
       if (debug == null) {
         showSuccesMessage();
+        showBlurButton();
       }
     }
     if (cb) cb ();
@@ -1455,6 +1456,9 @@ function showSuccesMessage(){
   var allsuccessmessages = ErrorMessages['Transpile_success'];
   var randomnum: number = Math.floor(Math.random() * allsuccessmessages.length);
   success.show(allsuccessmessages[randomnum]);
+}
+function showBlurButton() {
+  $('#blur_toggle_container').show();
 }
 function createModal(level:number ){
   let editor = "<div id='modal-editor' data-lskey=\"level_{level}__code\" class=\"w-full flex-1 text-lg rounded\" style='height:200px; width:50vw;'></div>".replace("{level}", level.toString());
