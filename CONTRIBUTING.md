@@ -46,6 +46,12 @@ Or if you're on windows in a powershell window with py launcher installed:
 (.env)> pip install -r requirements.txt
 ```
 
+To install the front-end test framework, execute the following commands:
+```bash
+$ cd tests
+$ npm install cypress --save-dev
+```
+
 If you want to run the website version locally, run:
 ```bash
 (.env)$ python app.py
@@ -57,6 +63,16 @@ To run the unit tests:
 ```bash
 (.env)$ python -m pytest
 ```
+
+To run the front-end tests:
+
+```bash
+$ cd tests
+$ npx cypress open
+```
+
+You will see the Cypress Launchpad in which you should choose to open the End2End testing panel. Afterwards you are able to run all the tests configured in the test suite, as well as adding your own according to [the documentation of Cypress](https://docs.cypress.io/guides/end-to-end-testing/writing-your-first-end-to-end-test).
+
 
 ## Working on the web front-end in TypeScript/JavaScript
 Part of the code base of Hedy is written in Python, which runs on the server.
