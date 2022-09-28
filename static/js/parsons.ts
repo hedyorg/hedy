@@ -1,6 +1,11 @@
 import {modal} from "./modal";
 import {stopit} from "./app";
 
+interface ParsonsExercise {
+    readonly story: number;
+    readonly code_lines: Record<string, string>;
+}
+
 (function() {
         // We might not need this -> is there something we want to load on page load?
     }
@@ -12,7 +17,7 @@ export function loadParsonsExercise(level: number, exercise: number) {
       type: 'GET',
       url: '/parsons/get-exercise/' + level + '/' + exercise,
       dataType: 'json'
-    }).done(function(response: any) {
+    }).done(function(response: ParsonsExercise) {
         $('#parsons_container').show();
         $('#next_parson_button').attr('current_exercise', exercise);
         resetView();
@@ -43,14 +48,14 @@ function updateHeader(exercise: number) {
     $('#parsons_header_' + exercise).addClass('current');
 }
 
-function showExercise(response: any) {
+function showExercise(response: ParsonsExercise) {
     let code_lines = shuffle_code_lines(response.code_lines);
     let counter = 0;
     // Hide all containers, show the onces relevant dynamically
     $('.parsons_start_line_container').hide();
     $('.parsons_goal_line_container').hide();
 
-    $.each(code_lines, function(key: string, valueObj: string) {
+    for (const [key, valueObj] of Object.entries(code_lines)) {
         counter += 1;
         // Temp output to console to make sure TypeScript compiles
         ace.edit('start_parsons_' + counter).session.setValue(valueObj.replace(/\n+$/, ''), -1);
@@ -60,7 +65,7 @@ function showExercise(response: any) {
 
         $('#parsons_start_line_container_' + counter).show();
         $('#parsons_goal_line_container_' + counter).show();
-    });
+    }
     $('#parsons_explanation_story').text(response.story);
 }
 
@@ -79,13 +84,24 @@ export function loadNextExercise() {
 }
 
 // https://stackoverflow.com/questions/26503595/javascript-shuffling-object-properties-with-their-values
-function shuffle_code_lines(code_lines: object) {
-    let shuffled = {};
+function shuffle_code_lines<A>(code_lines: Record<string, A>): Record<string, A> {
+    let shuffled: Record<string, A> = {};
     let keys = Object.keys(code_lines);
-    keys.sort(function() {return Math.random() - 0.5;});
-    keys.forEach(function(k) {
-        // @ts-ignore
+    fisherYatesShuffle(keys);
+    for (const k of keys) {
         shuffled[k] = code_lines[k];
-    });
+    }
     return shuffled;
+}
+
+/**
+ * Shuffle an array in-place
+ */
+function fisherYatesShuffle<A>(xs: A[]) {
+    for (let i = xs.length - 1; i <= 1; i++) {
+        const j = Math.floor(Math.random() * i);
+        const h = xs[j];
+        xs[j] = xs[i];
+        xs[i] = h;
+    }
 }

@@ -62,7 +62,7 @@ adventures:
             3:
                 story_text: |
                     ## Maak een lijstje!
-                    In level 3 kan je ook een lijstje maken. Uit de lijst kun je dan iets willekeurigs kiezen. Dat doe je met `{at} {random}` (je zegt: et ren-dom).
+                    In level 3 kan je ook een lijstje maken. Uit de lijst kun je dan iets willekeurigs kiezen. Dat doe je met `{at} {random}`.
 
                 example_code: |
                     ```
@@ -1346,7 +1346,9 @@ adventures:
             3:
                 story_text: |
                     ## Steen, papier, schaar
-                    In dit level kunnen we lijstjes invoeren en daar dingen uit kiezen. Je maakt eerst een lijstje met `{is}`. Daarna kan je de computer met `{at} {random}` (je zegt et ren-dom) iets uit de lijst laten kiezen.
+
+                    In dit level kunnen we lijstjes invoeren en daar dingen uit kiezen. 
+                    Je maakt eerst een lijstje met `{is}`. Daarna kan je de computer met `{at} {random}` iets uit de lijst laten kiezen.
                     Zo kun je de computer laten kiezen uit steen, papier en schaar.
                 example_code: |
                     ```
@@ -2115,9 +2117,6 @@ adventures:
                     Als je de goede deur kiest overleef je het, maar anders...
 
                     In level 1 beginnen we ons spookhuisspel door een spannend verhaal te verzinnen en de speler te vragen welk monster ze tegenkomen in het spookhuis.
-
-                    ## Uitdaging
-                    Kun jij het spannende verhaal afmaken? Of je eigen spannende(re) intro bedenken?
                 example_code: |
                     ```
                     {print} Hoe ben ik hier terechtgekomen?
@@ -2501,7 +2500,11 @@ adventures:
 
                 start_code: "{print} Op naar het volgende level!"
                 example_code: "```\n{print} Welkom bij restaurant Hedy\n{ask} Wat wilt u eten?\n{echo} Dus dit wilt u eten\n{ask} Wat wilt u drinken\n{echo} Dus dit wilt u drinken\n```\n"
-                story_text_2: "Als de speler hamburger en cola invult, kun je nog niet zeggen \"dus u wilt een hamburger en cola\", maar je moet daar twee losse zinnen van maken.\nDaarnaast echoot Hedy alleen woorden aan het einde van de zin. Dus je kunt in level 1 niet zeggen \"Je hamburger komt eraan!\"\n\nDat verandert in level 2. In level 2 leer je namelijk werken met variabelen waardoor je Hedy heel veel verschillende stukjes informatie kunt laten onthouden en ze overal in de zin te printen.\nJe leert in level 2 ook het `{at} {random}` commando, daarmee kun je spelletjes maken.\nNeem snel een kijkje!\n"
+                story_text_2: |
+                    Als de speler hamburger en cola invult, kun je nog niet zeggen \"dus u wilt een hamburger en cola\", maar je moet daar twee losse zinnen van maken.
+                    Daarnaast echoot Hedy alleen woorden aan het einde van de zin. Dus je kunt in level 1 niet zeggen \"Je hamburger komt eraan!\"
+
+                    Dat verandert in level 2. In level 2 leer je namelijk werken met variabelen waardoor je Hedy heel veel verschillende stukjes informatie kunt laten onthouden en ze overal in de zin te printen.
             2:
                 story_text: |
                     ## Vooruitblik

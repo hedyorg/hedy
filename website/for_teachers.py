@@ -116,9 +116,12 @@ class ForTeachersModule(WebsiteModule):
         customizations = self.db.get_class_customizations(class_id)
 
         return render_template('customize-class.html', page_title=gettext('title_customize-class'),
-                               class_info={'name': Class['name'], 'id': Class['id']}, max_level=hedy.HEDY_MAX_LEVEL,
-                               adventures=adventures, teacher_adventures=teacher_adventures,
-                               customizations=customizations, current_page='my-profile')
+                               class_info={'name': Class['name'], 'id': Class['id'], 'teacher': Class['teacher']},
+                               max_level=hedy.HEDY_MAX_LEVEL,
+                               adventures=adventures,
+                               teacher_adventures=teacher_adventures,
+                               customizations=customizations,
+                               current_page='my-profile')
 
     @route('/customize-class/<class_id>', methods=['DELETE'])
     @requires_login

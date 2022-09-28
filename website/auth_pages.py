@@ -114,10 +114,12 @@ class AuthModule(WebsiteModule):
         if 'prog_experience' in body and body['prog_experience'] not in ['yes', 'no']:
             return gettext('experience_invalid'), 400
         if 'experience_languages' in body:
+            if isinstance(body['experience_languages'], str):
+                body['experience_languages'] = [body['experience_languages']]
             if not isinstance(body['experience_languages'], list):
                 return gettext('experience_invalid'), 400
             for language in body['experience_languages']:
-                if language not in['scratch', 'other_block', 'python', 'other_text']:
+                if language not in ['scratch', 'other_block', 'python', 'other_text']:
                     return gettext('programming_invalid'), 400
 
         if self.db.user_by_username(body['username'].strip().lower()):
