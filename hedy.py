@@ -139,14 +139,14 @@ commands_per_level = {
     8 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'repeat', 'times'],
     9 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'repeat', 'times'],
     10 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'repeat', 'times', 'for'],
-    11 :['ask', 'is', 'print', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'range', 'repeat'],
-    12 :['ask', 'is', 'print', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'range', 'repeat'],
-    13 :['ask', 'is', 'print', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'range', 'repeat', 'and', 'or'],
-    14 :['ask', 'is', 'print', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'range', 'repeat', 'and', 'or'],
-    15 :['ask', 'is', 'print', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'range', 'repeat', 'and', 'or', 'while'],
-    16 :['ask', 'is', 'print', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'range', 'repeat', 'and', 'or', 'while'],
-    17 :['ask', 'is', 'print', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'range', 'repeat', 'and', 'or', 'while', 'elif'],
-    18 :['is', 'print', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'range', 'repeat', 'and', 'or', 'while', 'elif', 'input'],
+    11 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'range', 'repeat'],
+    12 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'range', 'repeat'],
+    13 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'range', 'repeat', 'and', 'or'],
+    14 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'range', 'repeat', 'and', 'or'],
+    15 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'range', 'repeat', 'and', 'or', 'while'],
+    16 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'range', 'repeat', 'and', 'or', 'while'],
+    17 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'range', 'repeat', 'and', 'or', 'while', 'elif'],
+    18 :['is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'range', 'repeat', 'and', 'or', 'while', 'elif', 'input'],
 }
 
 command_turn_literals = ['right', 'left']
@@ -1556,6 +1556,16 @@ class ConvertToPython_6(ConvertToPython_5):
                     args_new.append("{" + converted + "}")
             else:
                 args_new.append(self.process_variable_for_fstring(a))
+
+        for i in range(1,len(args_new)):
+            a = args_new[i]
+            if a[0] == '-': #a separate minus, can it be merged into the previous number?
+                previous_a = args_new[i-1]
+                if previous_a.isnumeric():
+                    args_new.remove(a)
+                    args_new.remove(previous_a)
+                    args_new.append(str(eval(previous_a+a)))
+
 
         return ''.join(args_new)
 
