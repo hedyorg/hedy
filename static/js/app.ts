@@ -150,6 +150,7 @@ $(document).on("click", function(event){
     // We expose the editor globally so it's available to other functions for resizing
     var editor = turnIntoAceEditor($editor.get(0)!, $editor.data('readonly'));
     theGlobalEditor = editor;
+    theGlobalEditor.setShowPrintMargin(false);
     error.setEditor(editor);
     markers = new Markers(theGlobalEditor);
 
