@@ -156,13 +156,13 @@ adventures:
                 story_text: |-
                     ## Und... oder...?
                     Wir werden jetzt `{and}` und `{or}` lernen! Wenn du zwei Angaben überprüfen willst, musst du nicht zwei `{if}` verwenden, sondern kannst `{and}` und `{or}` benutzen. Wenn du `{and}` verwendest, müssen beide Angaben, also links und rechts vom `{and}`, wahr sein. Du kannst auch `{or}` verwenden. Dann muss nur eine der beiden Aussage wahr sein.
-                example_code: "``` \nName = {ask} 'Wie heißt du?' \nAlter = {ask} 'Wie alt bist du?' \n{if} Name {is} 'Hedy' {and} Alter {is} 2 \n    {print} 'Du bist die echte Hedy!' \n```\n"
+                example_code: "``` \nName = {ask} 'Wie heißt du?'\nAlter = {ask} 'Wie alt bist du?'\n{if} Name {is} 'Hedy' {and} Alter {is} 2\n    {print} 'Du bist die echte Hedy!'\n```\n"
             14:
                 start_code: |-
-                    alter = {ask} 'Wie alt bist du?' 
-                    {if} alter < 13 
-                        {print} 'Du bist jünger als ich!' 
-                    {else} 
+                    alter = {ask} 'Wie alt bist du?'
+                    {if} alter < 13
+                        {print} 'Du bist jünger als ich!'
+                    {else}
                         {print} 'Du bist älter als ich!'
                 story_text: |
                     ## Groß, größer, am größten!
