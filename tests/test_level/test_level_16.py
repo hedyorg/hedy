@@ -407,3 +407,84 @@ class TestsLevel16(HedyTester):
                 b = 1""")
 
         self.single_level_tester(code, exception=exceptions.InvalidTypeCombinationException)
+
+    def test_color_with_list_variable_gives_error(self):
+        code = textwrap.dedent("""\
+        c = ['red', 'green', 'blue']
+        color c""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.InvalidArgumentTypeException
+        )
+
+    def test_color_with_list_access_random(self):
+        code = textwrap.dedent("""\
+        colors = ['red', 'green', 'blue']
+        color colors[random]""")
+
+        expected = HedyTester.dedent("""\
+        colors = ['red', 'green', 'blue']""",
+        HedyTester.turtle_color_command_transpiled('{random.choice(colors)}'))
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            extra_check_function=self.is_turtle(),
+        )
+
+    #
+    # forward tests
+    #
+    def test_forward_with_list_variable_gives_error(self):
+        code = textwrap.dedent("""\
+        a = [1, 2, 3]
+        forward a""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.InvalidArgumentTypeException
+        )
+
+    def test_forward_with_list_access_random(self):
+        code = textwrap.dedent("""\
+        directions = [10, 100, 360]
+        forward directions[random]""")
+
+        expected = HedyTester.dedent("""\
+        directions = [10, 100, 360]""",
+        HedyTester.forward_transpiled('random.choice(directions)'))
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            extra_check_function=self.is_turtle(),
+        )
+
+    #
+    # turn tests
+    #
+    def test_turn_with_list_variable_gives_error(self):
+        code = textwrap.dedent("""\
+        a = [45, 90, 180]
+        turn a""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.InvalidArgumentTypeException
+        )
+
+    def test_turn_with_list_access_random(self):
+        code = textwrap.dedent("""\
+        directions = [10, 100, 360]
+        turn directions[random]""")
+
+        expected = HedyTester.dedent("""\
+        directions = [10, 100, 360]""",
+        HedyTester.turn_transpiled('random.choice(directions)'))
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            extra_check_function=self.is_turtle(),
+        )
