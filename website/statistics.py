@@ -9,6 +9,7 @@ from website import querylog
 from website.auth import requires_login, is_admin, is_teacher, requires_admin
 
 import utils
+from .website_module import WebsiteModule, route
 
 DATABASE = None
 
@@ -26,13 +27,13 @@ class UserType(Enum):
     STUDENT = "@all-students"
 
 
-def routes(app, db):
-    global DATABASE
-    DATABASE = db
+class StatisticsModule(WebsiteModule):
+    def __init__(self):
+        super().__init__("stats", __name__)
 
-    @app.route("/stats/class/<class_id>", methods=["GET"])
+    @route("/stats/class/<class_id>", methods=["GET"])
     @requires_login
-    def render_class_stats(user, class_id):
+    def render_class_stats(self, user, class_id):
         if not is_teacher(user) and not is_admin(user):
             return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
 
@@ -48,9 +49,9 @@ def routes(app, db):
             page_title=gettext("title_class statistics"),
         )
 
-    @app.route("/logs/class/<class_id>", methods=["GET"])
+    @route("/logs/class/<class_id>", methods=["GET"])
     @requires_login
-    def render_class_logs(user, class_id):
+    def render_class_logs(self, user, class_id):
         if not is_teacher(user) and not is_admin(user):
             return utils.error_page(error=403, ui_message=gettext("retrieve_class_error"))
 
@@ -66,9 +67,9 @@ def routes(app, db):
             page_title=gettext("title_class logs"),
         )
 
-    @app.route("/class-stats/<class_id>", methods=["GET"])
+    @route("/class-stats/<class_id>", methods=["GET"])
     @requires_login
-    def get_class_stats(user, class_id):
+    def get_class_stats(self, user, class_id):
         start_date = request.args.get("start", default=None, type=str)
         end_date = request.args.get("end", default=None, type=str)
 
@@ -92,15 +93,20 @@ def routes(app, db):
                 "per_week": _to_response(per_week_data, "week", lambda e: f"L{e['level']}"),
             },
             "students": {
-                "per_level": _to_response(per_level_per_student, "level", lambda e: e["id"], _to_response_level_name),
+                "per_level": _to_response(
+                    per_level_per_student,
+                    "level",
+                    lambda e: e["id"],
+                    _to_response_level_name,
+                ),
                 "per_week": _to_response(per_week_per_student, "week", lambda e: e["id"]),
             },
         }
         return jsonify(response)
 
-    @app.route("/program-stats", methods=["GET"])
+    @route("/program-stats", methods=["GET"])
     @requires_admin
-    def get_program_stats(user):
+    def get_program_stats(self, user):
         start_date = request.args.get("start", default=None, type=str)
         end_date = request.args.get("end", default=None, type=str)
 
@@ -138,7 +144,13 @@ def add(username, action):
 
 def _to_response_per_level(data):
     data.sort(key=lambda el: el["level"])
-    return [{"level": f"L{entry['level']}", "data": _data_to_response_per_level(entry["data"])} for entry in data]
+    return [
+        {
+            "level": f"L{entry['level']}",
+            "data": _data_to_response_per_level(entry["data"]),
+        }
+        for entry in data
+    ]
 
 
 def _data_to_response_per_level(data):
@@ -154,7 +166,12 @@ def _data_to_response_per_level(data):
     _add_value_to_result(res, "student_runs", data["student_runs"], is_counter=True)
     _add_value_to_result(res, "user_type_unknown_runs", data["user_type_unknown_runs"], is_counter=True)
 
-    _add_value_to_result(res, "abandoned_quizzes", data["total_attempts"] - data["completed_attempts"], is_counter=True)
+    _add_value_to_result(
+        res,
+        "abandoned_quizzes",
+        data["total_attempts"] - data["completed_attempts"],
+        is_counter=True,
+    )
     _add_value_to_result(res, "completed_quizzes", data["completed_attempts"], is_counter=True)
 
     min_, max_, avg_ = _score_metrics(data["scores"])
@@ -180,17 +197,38 @@ def _to_response(data, values_field, series_selector, values_map=None):
             res[values] = {}
 
         d = e["data"]
-        _add_dict_to_result(res[values], "successful_runs", series, d["successful_runs"], is_counter=True)
+        _add_dict_to_result(
+            res[values],
+            "successful_runs",
+            series,
+            d["successful_runs"],
+            is_counter=True,
+        )
         _add_dict_to_result(res[values], "failed_runs", series, d["failed_runs"], is_counter=True)
         _add_dict_to_result(
-            res[values], "abandoned_quizzes", series, d["total_attempts"] - d["completed_attempts"], is_counter=True
+            res[values],
+            "abandoned_quizzes",
+            series,
+            d["total_attempts"] - d["completed_attempts"],
+            is_counter=True,
         )
-        _add_dict_to_result(res[values], "completed_quizzes", series, d["completed_attempts"], is_counter=True)
+        _add_dict_to_result(
+            res[values],
+            "completed_quizzes",
+            series,
+            d["completed_attempts"],
+            is_counter=True,
+        )
 
         _add_value_to_result(res[values], "anonymous_runs", d["anonymous_runs"], is_counter=True)
         _add_value_to_result(res[values], "logged_runs", d["logged_runs"], is_counter=True)
         _add_value_to_result(res[values], "student_runs", d["student_runs"], is_counter=True)
-        _add_value_to_result(res[values], "user_type_unknown_runs", d["user_type_unknown_runs"], is_counter=True)
+        _add_value_to_result(
+            res[values],
+            "user_type_unknown_runs",
+            d["user_type_unknown_runs"],
+            is_counter=True,
+        )
 
         min_, max_, avg_ = _score_metrics(d["scores"])
         _add_dict_to_result(res[values], "quiz_score_min", series, min_)

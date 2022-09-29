@@ -1,10 +1,15 @@
 import json
+from typing import Dict
 import uuid
+from flask import g, request, session, jsonify
 from flask_babel import gettext
+from hedy_content import Quizzes
 from website import statistics
+from .achievements import Achievements
 from website.auth import current_user
+from .database import Database
 import utils
-from flask import request, g, session, jsonify
+from .website_module import WebsiteModule, route
 
 MAX_ATTEMPTS = 2
 
@@ -13,17 +18,15 @@ ANSWER_PARSER = {1: "A", 2: "B", 3: "C", 4: "D", 5: "E", 6: "F"}
 REVERSE_ANSWER_PARSER = {"A": 1, "B": 2, "C": 3, "D": 4, "E": 5, "F": 6}
 
 
-def routes(app, database, achievements, quizzes):
-    global DATABASE
-    global ACHIEVEMENTS
-    global QUIZZES
+class QuizModule(WebsiteModule):
+    def __init__(self, db: Database, achievements: Achievements, quizzes: Dict[str, Quizzes]):
+        super().__init__("quiz", __name__, url_prefix="/quiz")
+        self.db = db
+        self.achievements = achievements
+        self.quizzes = quizzes
 
-    DATABASE = database
-    ACHIEVEMENTS = achievements
-    QUIZZES = quizzes
-
-    @app.route("/quiz/initialize_user", methods=["POST"])
-    def initialize_user():
+    @route("/initialize_user", methods=["POST"])
+    def initialize_user(self):
         body = request.json
         if not isinstance(body, dict):
             return gettext("ajax_error"), 400
@@ -35,21 +38,24 @@ def routes(app, database, achievements, quizzes):
         session["total_score"] = 0
         session["correctly_answered_questions_numbers"] = []
 
-        statistics.add(current_user()["username"], lambda id_: DATABASE.add_quiz_started(id_, body.get("level")))
+        statistics.add(
+            current_user()["username"],
+            lambda id_: self.db.add_quiz_started(id_, body.get("level")),
+        )
 
         return jsonify({}), 200
 
-    @app.route("/quiz/get-question/<int:level>/<int:question>", methods=["GET"])
-    def get_quiz_question(level, question):
+    @route("/get-question/<int:level>/<int:question>", methods=["GET"])
+    def get_quiz_question(self, level, question):
         session["attempt"] = 0
-        if question > QUIZZES[g.lang].get_highest_question_level(level) or question < 1:
+        if question > self.quizzes[g.lang].get_highest_question_level(level) or question < 1:
             return gettext("question_doesnt_exist"), 400
 
-        question = QUIZZES[g.lang].get_quiz_data_for_level_question(level, question, g.keyword_lang)
+        question = self.quizzes[g.lang].get_quiz_data_for_level_question(level, question, g.keyword_lang)
         return jsonify(question), 200
 
-    @app.route("/quiz/submit_answer/", methods=["POST"])
-    def submit_answer():
+    @route("/submit_answer/", methods=["POST"])
+    def submit_answer(self):
         body = request.json
         if not isinstance(body, dict):
             return gettext("ajax_error"), 400
@@ -68,15 +74,15 @@ def routes(app, database, achievements, quizzes):
         if session.get("attempt") > MAX_ATTEMPTS:
             return gettext("too_many_attempts"), 400
 
-        if question_number > QUIZZES[g.lang].get_highest_question_level(level) or question_number < 1:
+        if question_number > self.quizzes[g.lang].get_highest_question_level(level) or question_number < 1:
             return gettext("question_doesnt_exist"), 400
 
-        question = QUIZZES[g.lang].get_quiz_data_for_level_question(level, question_number, g.keyword_lang)
+        question = self.quizzes[g.lang].get_quiz_data_for_level_question(level, question_number, g.keyword_lang)
         is_correct = True if question["correct_answer"] == ANSWER_PARSER.get(body.get("answer")) else False
 
         username = current_user()["username"] or f"anonymous:{utils.session_id()}"
         answer = ANSWER_PARSER.get((body.get("answer")))
-        DATABASE.record_quiz_answer(
+        self.db.record_quiz_answer(
             session["quiz-attempt-id"],
             username=username,
             level=level,
@@ -93,8 +99,10 @@ def routes(app, database, achievements, quizzes):
                 REVERSE_ANSWER_PARSER.get(question.get("correct_answer")) - 1
             ].get("option"),
             "feedback": question.get("mp_choice_options")[body.get("answer") - 1].get("feedback"),
-            "max_question": QUIZZES[g.lang].get_highest_question_level(level),
-            "next_question": True if question_number < QUIZZES[g.lang].get_highest_question_level(level) else False,
+            "max_question": self.quizzes[g.lang].get_highest_question_level(level),
+            "next_question": True
+            if question_number < self.quizzes[g.lang].get_highest_question_level(level)
+            else False,
         }
 
         if is_correct:
@@ -109,10 +117,10 @@ def routes(app, database, achievements, quizzes):
 
         return jsonify(response), 200
 
-    @app.route("/quiz/get_results/<level>", methods=["GET"])
-    def get_results(level):
+    @route("/get_results/<level>", methods=["GET"])
+    def get_results(self, level):
         level = int(level)
-        questions = QUIZZES[g.lang].get_quiz_data_for_level(level, g.keyword_lang)
+        questions = self.quizzes[g.lang].get_quiz_data_for_level(level, g.keyword_lang)
 
         achievement = None
         total_score = round(session.get("total_score", 0) / max_score(questions) * 100)
@@ -122,13 +130,13 @@ def routes(app, database, achievements, quizzes):
 
         username = current_user()["username"]
         if username:
-            statistics.add(username, lambda id_: DATABASE.add_quiz_finished(id_, level, total_score))
-            achievement = ACHIEVEMENTS.add_single_achievement(username, "next_question")
+            statistics.add(username, lambda id_: self.db.add_quiz_finished(id_, level, total_score))
+            achievement = self.achievements.add_single_achievement(username, "next_question")
             if total_score == max_score(questions):
                 if achievement:
-                    achievement.append(ACHIEVEMENTS.add_single_achievement(username, "quiz_master")[0])
+                    achievement.append(self.achievements.add_single_achievement(username, "quiz_master")[0])
                 else:
-                    achievement = ACHIEVEMENTS.add_single_achievement(username, "quiz_master")
+                    achievement = self.achievements.add_single_achievement(username, "quiz_master")
             if achievement:
                 response["achievement"] = json.dumps(achievement)
 

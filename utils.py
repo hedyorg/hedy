@@ -11,14 +11,13 @@ import uuid
 
 from flask_babel import gettext, format_date, format_datetime, format_timedelta
 from ruamel import yaml
-from website import querylog
 import commonmark
 
 commonmark_parser = commonmark.Parser()
 commonmark_renderer = commonmark.HtmlRenderer()
 from bs4 import BeautifulSoup
 from flask_helpers import render_template
-from flask import g, session, request
+from flask import session, request
 
 IS_WINDOWS = os.name == "nt"
 
