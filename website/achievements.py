@@ -5,13 +5,13 @@ from hedyweb import AchievementTranslations
 from website.auth import requires_login, current_user
 from flask import request, jsonify, session
 import hedy
+from .website_module import WebsiteModule, route
 
 
 class Achievements:
-
-    def __init__(self):
-        self.DATABASE = database.Database()
-        self.TRANSLATIONS = AchievementTranslations()
+    def __init__(self, db: database.Database, translations: AchievementTranslations):
+        self.DATABASE = db
+        self.TRANSLATIONS = translations
         self.all_commands = self.get_all_commands()
         self.total_users = 0
         self.statistics = self.get_global_statistics()
@@ -70,20 +70,6 @@ class Achievements:
                 session['submitted_programs'] = achievements_data['submitted_programs']
             else:
                 session['submitted_programs'] = 0
-
-    def routes(self, app, database):
-        global DATABASE
-        DATABASE = database
-
-        @app.route('/achievements', methods=['POST'])
-        @requires_login
-        def push_new_achievement(user):
-            body = request.json
-            if "achievement" in body:
-                self.initialize_user_data_if_necessary()
-                if body['achievement'] not in session['achieved'] and body['achievement'] in self.TRANSLATIONS.get_translations(session['lang']).get('achievements'):
-                    return jsonify({"achievements": self.verify_pushed_achievement(user.get('username'), body['achievement'])})
-            return jsonify({})
 
     def increase_count(self, category):
         self.initialize_user_data_if_necessary()
@@ -253,4 +239,17 @@ class Achievements:
             session['identical_consecutive_errors'] = 0
 
 
+class AchievementsModule(WebsiteModule):
+    def __init__(self, achievements: Achievements):
+        super().__init__('achievements', __name__, url_prefix='/achievements')
+        self.achievements = achievements
 
+    @route('/achievements', methods=['POST'])
+    @requires_login
+    def push_new_achievement(self, user):
+        body = request.json
+        if "achievement" in body:
+            self.achievements.initialize_user_data_if_necessary()
+            if body['achievement'] not in session['achieved'] and body['achievement'] in self.achievements.TRANSLATIONS.get_translations(session['lang']).get('achievements'):
+                return jsonify({"achievements": self.achievements.verify_pushed_achievement(user.get('username'), body['achievement'])})
+        return jsonify({})
