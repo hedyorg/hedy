@@ -1,8 +1,8 @@
 <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
-<div id="editor-area" class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5">
+<div id="editor-area" class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5 overflow-visible">
     <!-- Row 1: editor, output pane -->
-    <div class="ltr:pr-4 border border-red-500">
-    <div class="flex flex-col order-1 relative overflow-visible" id="code_editor" style="min-height: 22rem;">
+    <div class="border border-red-500 overflow-visible bg-transparent">
+    <div class="flex flex-col order-1 relative w-full" id="code_editor" style="min-height: 22rem;">
       <!-- language selector overlay -->
       {% if other_keyword_language() and (not customizations or 'hide_keyword_switcher' not in customizations['other_settings']) and not editor_readonly %}
           <div id="main_editor_keyword_selector">
