@@ -34,7 +34,7 @@
           </div>
       </div>
   {% endif %}
-  {% if get_syntax_language(g.lang) != "en" %}
+  {% if get_syntax_language(g.lang) != "en" and (not customizations or 'hide_keyword_switcher' not in customizations['other_settings']) %}
     <div class="dropdown relative">
         <button class="green-btn font-semibold rounded inline-flex items-center gap-2" onclick="$('.dropdown-menu').hide();$('#commands_dropdown').slideToggle('medium');">
                 <span class="fa-solid fa-language"></span>
