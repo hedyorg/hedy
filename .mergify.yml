@@ -7,6 +7,9 @@ pull_request_rules:
     actions:
       merge:
         method: squash
+        commit_message_template: |-
+          {{ title }} (#{{number}})
+          {{ body }} 
         
   - name: automatic update for PR marked as “Keep-updated“
     conditions:
