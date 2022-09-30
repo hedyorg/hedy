@@ -346,8 +346,6 @@ class Quizzes:
         return len(self.data["en"].get(level, {}))
 
     def get_quiz_data_for_level(self, level, keyword_lang="en"):
-        # We want to keep the keyword language as english until the questions are adjusted for dynamic keywords
-        keyword_lang = "en"
 
         if self.debug_mode and not self.data.get(keyword_lang, None):
             if not self.file:
