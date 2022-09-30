@@ -7,18 +7,27 @@
 // To start the tutorial for a specific level, for example level 1
 // Call "startLevelTutorial(<level>)" on from a template, the rest should be handled automatically
 
-import {tutorialPopup} from "./utils";
+import {theGlobalEditor} from "../app";
+import {tutorialPopup, relocatePopup} from "./utils";
 
 let current_step = 0;
 
 export function startLevel1() {
   current_step = 1;
-  $('#adventures').hide();
 
   tutorialPopup("1", current_step);
 }
 
 export function callNextStepLevel1() {
-  // Do something
+  current_step += 1;
+
+  if (current_step == 2) {
+    theGlobalEditor?.setValue("print Hello world!");
+    relocatePopup(50, 70);
+    tutorialPopup("1", 2);
+
+  } else if (current_step == 3) {
+    location.replace("/hedy");
+  }
 
 }
