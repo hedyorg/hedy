@@ -11,13 +11,12 @@ import uuid
 
 from flask_babel import gettext, format_date, format_datetime, format_timedelta
 from ruamel import yaml
-from website import querylog
 import commonmark
 commonmark_parser = commonmark.Parser()
 commonmark_renderer = commonmark.HtmlRenderer()
 from bs4 import BeautifulSoup
 from flask_helpers import render_template
-from flask import g, session, request
+from flask import session, request
 
 IS_WINDOWS = os.name == 'nt'
 
@@ -49,7 +48,7 @@ NORMAL_PREFIX_CODE = textwrap.dedent("""\
             latin_numerals = ''.join([numerals_dict.get(letter, letter) for letter in s])
             return int_saver(latin_numerals)
         return(int_saver(s))
-        
+
     def convert_numerals(alphabet, number):
         numerals_dict_return = {
             'Latin': ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
@@ -75,7 +74,7 @@ NORMAL_PREFIX_CODE = textwrap.dedent("""\
             'Urdu': ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹']
         }
 
-        number = str(number)    
+        number = str(number)
         if number.isnumeric():
             numerals_list = numerals_dict_return[alphabet]
             all_numerals_converted = [numerals_list[int(digit)] for digit in number]
@@ -165,7 +164,14 @@ def slash_join(*args):
     return ''.join(ret)
 
 def is_testing_request(request):
-    return bool('X-Testing' in request.headers and request.headers['X-Testing'])
+    """Whether the current request is a test request.
+
+    Test requests are performed by the e2e tests and have special privileges
+    to do things other requests cannot do.
+
+    Test requests are only allowed on non-Heroku instances.
+    """
+    return not is_heroku() and bool('X-Testing' in request.headers and request.headers['X-Testing'])
 
 def extract_bcrypt_rounds(hash):
     return int(re.match(r'\$2b\$\d+', hash)[0].replace('$2b$', ''))
@@ -200,7 +206,8 @@ def is_heroku():
 
 
 def version():
-    """Get the version from the Heroku environment variables."""
+
+    # """Get the version from the Heroku environment variables."""
     if not is_heroku():
         return 'DEV'
 
@@ -208,7 +215,7 @@ def version():
     the_date = datetime.date.fromisoformat(vrz[:10]) if vrz else datetime.date.today()
 
     commit = os.getenv('HEROKU_SLUG_COMMIT', '????')[0:6]
-    return the_date.strftime('%b %d') + f'({commit})'
+    return the_date.strftime('%Y %b %d') + f'({commit})'
 
 def valid_email(s):
     return bool(re.match(r'^(([a-zA-Z0-9_+\.\-]+)@([\da-zA-Z\.\-]+)\.([a-zA-Z\.]{2,6})\s*)$', s))
@@ -236,7 +243,7 @@ def atomic_write_file(filename, mode='wb'):
         os.rename(tmp_file, filename)
     except IOError:
         pass
-        
+
 # This function takes a date in milliseconds from the Unix epoch and transforms it into a printable date
 # It operates by converting the date to a string, removing its last 3 digits, converting it back to an int
 # and then invoking the `isoformat` date function on it
@@ -247,10 +254,14 @@ def string_date_to_date(date):
     return datetime.datetime.strptime(date, "%Y-%m-%d")
 
 def timestamp_to_date(timestamp, short_format=False):
-    if short_format:
-        return datetime.datetime.fromtimestamp(int(str(timestamp)))
-    else:
-        return datetime.datetime.fromtimestamp(int(str(timestamp)[:-3]))
+    try:
+        if short_format:
+            return datetime.datetime.fromtimestamp(int(str(timestamp)))
+        else:
+            return datetime.datetime.fromtimestamp(int(str(timestamp)[:-3]))
+    except:
+        return None
+
 
 def delta_timestamp(date, short_format=False):
     if short_format:

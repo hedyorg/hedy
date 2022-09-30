@@ -1458,10 +1458,10 @@ levels:
             code: |-
                 Batman was flying through Gotham.
                 When suddenly he heard someone screaming...
-                Help !
-                Help !
-                Help !
-                Please help me !"
+                Help!
+                Help!
+                Help!
+                Please help me!"
             mp_choice_options:
             -   option: |
                     ```
@@ -1491,8 +1491,8 @@ levels:
                     ```
                     {print} 'Batman was flying through Gotham.'
                     {print} 'When suddenly he heard someone screaming...'
-                    {repeat} 3 {times} {print} 'Help !'
-                    {print} 'Please help me !'
+                    {repeat} 3 {times} {print} 'Help!'
+                    {print} 'Please help me!'
                     ```
                 feedback: "Perfect"
             question_score: '10'
@@ -1632,7 +1632,7 @@ levels:
                     The children went:
                     Yay!
                     Were going on holiday!
-                feedback: "Mind the `{repeat}` command !"
+                feedback: "Mind the `{repeat}` command!"
             -   option: |
                     The children went:
                     Yay!
@@ -1730,7 +1730,7 @@ levels:
             -   option: "Nothing this code is correct!"
                 feedback: "Something is wrong!."
             -   option: "You're not allowed to use an `{if}` command after an `{ask}` command."
-                feedback: "You are!."
+                feedback: "You are!"
             -   option: "You don't have to use indentation twice. Only in the first `{if}` command."
                 feedback: "You always have to use indentation."
             -   option: "The indentation is wrong in the first `{if}` command."
@@ -1743,42 +1743,42 @@ levels:
             mp_choice_options:
             -   option: |
                     ```
-                    {if} answer is right
-                       {print} You are...
-                          sleep
-                              {print} right!
+                    {if} answer {is} 32
+                       {print} 'You are...'
+                          {sleep}
+                              {print} 'right!'
                           {else}
-                              {print} You are wrong!
+                              {print} 'You are wrong!'
                     ```
                 feedback: "You are wrong!"
             -   option: |
                     ```
-                    {if} answer is right
-                    {print} You are...
-                    sleep
-                    {print} right!
+                    {if} answer {is} 32
+                    {print} 'You are...'
+                    {sleep}
+                    {print} 'right!'
                     {else}
-                    {print} You are wrong!
+                    {print} 'You are wrong!'
                     ```
                 feedback: "You are wrong!"
             -   option: |
                     ```
-                    {if} answer is right
-                        {print} You are...
-                        sleep
-                        {print} right!
+                    {if} answer {is} 32
+                        {print} 'You are...'
+                        {sleep}
+                        {print} 'right!'
                     {else}
-                        {print} You are wrong!
+                        {print} 'You are wrong!'
                     ```
                 feedback: "You are... right!"
             -   option: |
                     ```
-                    {if} answer is right
-                        {print} You are...
-                        sleep
-                    {print} right!
+                    {if} answer {is} 32
+                        {print} 'You are...'
+                        {sleep}
+                    {print} 'right!'
                     {else}
-                        {print} You are wrong!
+                        {print} 'You are wrong!'
                     ```
                 feedback: "You are wrong!"
             correct_answer: "C"
@@ -1788,7 +1788,7 @@ levels:
             question_text: "What line(s) in this code should start with 4 spaces?"
             code: |-
                 1 music = {ask} 'What is your favorite music genre?'
-                2 {if} music is rock
+                2 {if} music {is} rock
                 3 {print} '🤘'
                 4 {else}
                 5 {print} '👎'
@@ -1807,9 +1807,9 @@ levels:
         10:
             question_text: "Which statement is true?"
             code: |-
-                1 level = {ask} 'What level are you on?"
+                1 level = {ask} 'What level are you on?'
                 2 {if} level {is} 8
-                3 {print} Great job!
+                3 {print} 'Great job!'
             mp_choice_options:
             -   option: "All lines should start with 4 spaces"
                 feedback: "That's not true"
@@ -1863,7 +1863,7 @@ levels:
                 feedback: "That's not it!"
             -   option: "The computer will explode in 5... 4... 3... 2... 1..."
                 feedback: "That's not it!"
-            -   option: "Good job ! \n Good job! \n You can use the computer!"
+            -   option: "Good job! \n Good job! \n You can use the computer!"
                 feedback: "That's not it!"
             -   option: "Good job! \n You can use the computer! \n Good job! \n You can use the computer!"
                 feedback: "Correct!"

@@ -3,7 +3,7 @@
     <!-- Row 1: editor, output pane -->
     <div class="flex flex-col order-1 relative" id="code_editor" style="min-height: 22rem;">
       <!-- language selector overlay -->
-      {% if other_keyword_language() and (not customizations or 'hide_keyword_switcher' not in customizations['other_settings']) and not editor_readonly %}
+      {% if is_admin and other_keyword_language() %}
           <div id="main_editor_keyword_selector">
               <div class="dropdown inline-block ltr:right-0 rtl:left-0 absolute z-10 mx-2 mt-2 mb-0 text-white" lang="{{ current_keyword_language().lang }}">
                   <button class="inline-flex items-center text-xl px-2 bg-blue-600 rounded-lg" type="button" onclick="$('.language-switcher-menu').slideToggle('medium');">
@@ -28,7 +28,7 @@
           </div>
         {% endif %}
         <div style="display: none;" id="blur_toggle_container">
-            <span class="inline-block bottom-0 ltr:right-0 rtl:left-0 z-10 absolute my-2 mx-2 text-white" onclick="hedyApp.toggle_blur_code();">
+            <span class="inline-block bottom-0 ltr:right-0 rtl:left-0 z-10 absolute mb-4 mx-2 text-white" onclick="hedyApp.toggle_blur_code();">
                 <i class="fas fa-eye-slash fa-lg cursor-pointer blur-toggle" aria-hidden="true"></i>
                 <i class="fas fa-eye fa-lg cursor-pointer blur-toggle" style="display: none;" aria-hidden="true"></i>
             </span>
@@ -150,6 +150,9 @@
             <button onclick="window.location = '/hedy/{{level}}/{{program_id}}'" class="blue-btn ltr:ml-4 rtl:mr-4">{{_('edit_code_button')}}</button>
         {% else %}
             <img src="/images/Hedylightbulb_1.svg" onclick="hedyApp.modalStepOne()" class="hidden h-28 -mt-2" id="repair_button" alt="{{_('repair_program_logo_alt')}}">
+        {% endif %}
+        {% if editor_readonly and is_admin %}
+                <button onclick="hedyApp.delete_program('{{ program_id }}', {{ 0 }}, '{{_('delete_confirm')}}')" class="red-btn">{{_('delete')}}</button>
         {% endif %}
       </div>
       <div id="speak_container" class="hidden mt-4 flex flex-row items-center w-max overflow-visible">

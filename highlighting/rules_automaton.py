@@ -147,7 +147,7 @@ def rule_level3():
         'regex': START_WORD + get_translated_keyword("at") + SPACE + get_translated_keyword("random") ,
         'token': ['text','keyword','keyword','keyword'],
     },{
-        'regex': START_WORD + get_translated_keyword("at") ,
+        'regex': START_WORD + get_translated_keyword("at") + END_WORD,
         'token': ['text','keyword'],
     },{
         'regex': get_translated_keyword("comma") ,
@@ -172,11 +172,11 @@ def rule_level3():
         'regex': START_WORD + get_translated_keyword("at") + SPACE + get_translated_keyword("random") ,
         'token': ['text','keyword','keyword','keyword'],
     },{
-        'regex': START_WORD + get_translated_keyword("at") ,
+        'regex': START_WORD + get_translated_keyword("at") + END_WORD,
         'token': ['text','keyword'],
     }],
     "valAdd"    : [{
-        'regex': START_WORD + get_translated_keyword("to_list") ,
+        'regex': START_WORD + get_translated_keyword("to_list") + END_WORD ,
         'token': ['text','keyword'],
         'next': 'valueTo',
     },{
@@ -197,7 +197,7 @@ def rule_level3():
     }],
     "valueTo" : [],
     "valRemove" : [{
-        'regex': START_WORD + get_translated_keyword("from") ,
+        'regex': START_WORD + get_translated_keyword("from") + END_WORD ,
         'token': ['text','keyword'],
         'next': 'valueFrom',
     },{
@@ -262,7 +262,7 @@ def rule_level4():
         'regex': START_WORD + get_translated_keyword("at") + SPACE + get_translated_keyword("random") ,
         'token': ['text','keyword','keyword','keyword'],
     },{
-        'regex': START_WORD + get_translated_keyword("at") ,
+        'regex': START_WORD + get_translated_keyword("at") + END_WORD,
         'token': ['text','keyword'],
     },{
         'regex': get_translated_keyword("comma") ,
@@ -287,7 +287,7 @@ def rule_level4():
         'regex': START_WORD + get_translated_keyword("at") + SPACE + get_translated_keyword("random") ,
         'token': ['text','keyword','keyword','keyword'],
     },{
-        'regex': START_WORD + get_translated_keyword("at") ,
+        'regex': START_WORD + get_translated_keyword("at") + END_WORD,
         'token': ['text','keyword'],
     },{
         'regex': '\"[^\"]*\"',
@@ -308,7 +308,7 @@ def rule_level4():
         'regex': START_WORD + get_translated_keyword("at") + SPACE + get_translated_keyword("random") ,
         'token': ['text','keyword','keyword','keyword'],
     },{
-        'regex': START_WORD + get_translated_keyword("at") ,
+        'regex': START_WORD + get_translated_keyword("at") + END_WORD,
         'token': ['text','keyword'],
     },{
         'regex': "(" +\
@@ -327,7 +327,7 @@ def rule_level4():
         'token': [TOKEN_CONSTANT],
     }],
     "valAdd"    : [{
-        'regex': START_WORD + get_translated_keyword("to_list") ,
+        'regex': START_WORD + get_translated_keyword("to_list") + END_WORD ,
         'token': ['text','keyword'],
         'next': 'valueTo',
     },{
@@ -348,7 +348,7 @@ def rule_level4():
     }],
     "valueTo" : [],
     "valRemove" : [{
-        'regex': START_WORD + get_translated_keyword("from") ,
+        'regex': START_WORD + get_translated_keyword("from") + END_WORD ,
         'token': ['text','keyword'],
         'next': 'valueFrom',
     },{

@@ -1,5 +1,5 @@
-_print_argument: (_SPACE | quoted_text | list_access | print_expression)*
-?print_expression: INT | var_access | error_unsupported_number | expression
+_print_argument: (_SPACE | quoted_text | list_access | expression | print_expression)*
+?print_expression: var_access_print | error_unsupported_number | INT
 
 // redefining it entirely since it has many order-depending rules
 command: print | turtle | add | remove | sleep | error_print_no_quotes | ifelse | ifs | ask | list_access_var | assign | assign_list | error_invalid_space

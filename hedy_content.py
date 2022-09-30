@@ -1,6 +1,7 @@
 import copy
 import os
 from babel import Locale, languages
+
 from website.yaml_file import YamlFile
 import iso3166
 
@@ -34,19 +35,22 @@ ALL_KEYWORD_LANGUAGES = {}
 # Todo TB -> We create this list manually, but it would be nice if we find a way to automate this as well
 NON_LATIN_LANGUAGES = ['ar', 'bg', 'bn', 'el', 'fa', 'hi', 'he', 'ru', 'zh_Hans']
 
+# It would be nice if we created this list manually but couldn't find a way to retrieve this from Babel
+NON_BABEL = ['tn']
+
 ADVENTURE_ORDER = [
     'default',
-    'story',
     'parrot',
+    'fortune',
+    'haunted',
+    'restaurant',
+    'story',
     'songs',
     'turtle',
     'dishes',
     'dice',
     'rock',
     'calculator',
-    'fortune',
-    'restaurant',
-    'haunted',
     'piggybank',
     'quizmaster',
     'language',
@@ -72,6 +76,10 @@ if not os.path.isdir('translations'):
     ALL_KEYWORD_LANGUAGES['en'] = 'EN'
 
 for folder in os.listdir('translations'):
+    # we cant properly open non-supported langs like Tswana (tn)
+    # so we have to load en for those until Babel adds support
+    if folder in NON_BABEL:
+        folder = 'en'
     locale_dir = os.path.join('translations', folder, 'LC_MESSAGES')
     if not os.path.isdir(locale_dir):
         continue
@@ -93,6 +101,8 @@ for lang in ALL_KEYWORD_LANGUAGES.keys():
         if type(v) == str and "|" in v:
             # when we have several options, pick the first one as default
             KEYWORDS[lang][k] = v.split('|')[0]
+
+
 
 
 class Commands:
@@ -171,6 +181,7 @@ class Adventures:
             if self.file.get(adventure_index, None):
                 sorted_adventures[adventure_index] = (self.file.get(adventure_index))
         self.file = sorted_adventures
+
         keyword_data = {}
         for short_name, adventure in self.file.items():
             parsed_adventure = copy.deepcopy(adventure)
@@ -335,8 +346,6 @@ class Quizzes:
         return len(self.data["en"].get(level, {}))
 
     def get_quiz_data_for_level(self, level, keyword_lang="en"):
-        # We want to keep the keyword language as english until the questions are adjusted for dynamic keywords
-        keyword_lang = "en"
 
         if self.debug_mode and not self.data.get(keyword_lang, None):
             if not self.file:
@@ -345,9 +354,6 @@ class Quizzes:
         return self.data.get(keyword_lang, {}).get(level, None)
 
     def get_quiz_data_for_level_question(self, level, question, keyword_lang="en"):
-        # We want to keep the keyword language as english until the questions are adjusted for dynamic keywords
-        keyword_lang = "en"
-
         if self.debug_mode and not self.data.get(keyword_lang, None):
             if not self.file:
                 self.file = YamlFile.for_file(f'content/quizzes/{self.language}.yaml').get('levels')
@@ -357,4 +363,47 @@ class Quizzes:
 
 class NoSuchQuiz:
     def get_quiz_data_for_level(self, level, keyword_lang):
+        return {}
+
+
+class Tutorials:
+    # Want to parse the keywords only once, they can be cached -> perform this action on server start
+    def __init__(self, language):
+        self.language = language
+        # We can keep these cached, even in debug_mode: files are small and don't influence start-up time much
+        self.file = YamlFile.for_file(f'content/tutorials/{self.language}.yaml')
+        self.data = {}
+
+        self.debug_mode = not os.getenv('NO_DEBUG_MODE')
+
+        if not self.debug_mode:
+            self.data["en"] = self.cache_tutorials("en")
+            if language in ALL_KEYWORD_LANGUAGES.keys():
+                self.data[language] = self.cache_tutorials(language)
+
+    def cache_tutorials(self, language):
+        tutorial_data = {}
+        for level in copy.deepcopy(self.file):
+            steps = copy.deepcopy(self.file).get(level).get('steps')
+            for index, data in steps.items():
+                steps[index]['text'] = data['text'].format(**KEYWORDS.get(language))
+            tutorial_data[level] = steps
+        return tutorial_data
+
+    def get_tutorial_for_level(self, level, keyword_lang="en"):
+        if self.debug_mode and not self.data.get(keyword_lang, None):
+            self.data[keyword_lang] = self.cache_tutorials(keyword_lang)
+        if level not in ["intro", "teacher"]:
+            level = int(level)
+        return self.data.get(keyword_lang, {}).get(level, None)
+
+    def get_tutorial_for_level_step(self, level, step, keyword_lang="en"):
+        if self.debug_mode and not self.data.get(keyword_lang, None):
+            self.data[keyword_lang] = self.cache_tutorials(keyword_lang)
+        if level not in ["intro", "teacher"]:
+            level = int(level)
+        return self.data.get(keyword_lang, {}).get(level, {}).get(step, None)
+
+class NoSuchTutorial:
+    def get_tutorial_for_level(self, level, keyword_lang):
         return {}

@@ -46,6 +46,12 @@ Or if you're on windows in a powershell window with py launcher installed:
 (.env)> pip install -r requirements.txt
 ```
 
+To install the front-end test framework, execute the following commands:
+```bash
+$ cd tests
+$ npm install cypress --save-dev
+```
+
 If you want to run the website version locally, run:
 ```bash
 (.env)$ python app.py
@@ -57,6 +63,16 @@ To run the unit tests:
 ```bash
 (.env)$ python -m pytest
 ```
+
+To run the front-end tests:
+
+```bash
+$ cd tests
+$ npx cypress open
+```
+
+You will see the Cypress Launchpad in which you should choose to open the End2End testing panel. Afterwards you are able to run all the tests configured in the test suite, as well as adding your own according to [the documentation of Cypress](https://docs.cypress.io/guides/end-to-end-testing/writing-your-first-end-to-end-test).
+
 
 ## Working on the web front-end in TypeScript/JavaScript
 Part of the code base of Hedy is written in Python, which runs on the server.
@@ -108,25 +124,36 @@ But please, try to use the Tailwind classes as much as possible as these are opt
 Also, please refrain from using inline CSS styling, as this makes the templates hard to read, maintain and alter.
 
 ## Working with translations
+
 For our multilingual web structure we use a combination of YAML files and Babel to deliver language-dependent content.
-The adventures, level-defaults, mail-templates, achievements and quizzes are all stored using YAML files.
+The content you see in the tabs, mail-templates, achievements, puzzles and quizzes are all stored using YAML files.
 All our front-end UI strings, error messages and other "small" translations are stored using Babel.
 To help translating any of these, please follow the explanation in TRANSLATING.md.
 
-However, when adding new content or implementing a feature that requires new translations you need to manually add these translation keys.
-When adding YAML related translations please add these to the corresponding YAML file in the ```/coursedata``` folder.
-Make sure that you comform to the already existing YAML structure.  As English is the fallback language, the translation should always be available in the english YAML file.
-Feel free to manually add the translation to as many languages as you know, but don't worry: otherwise these will be translated by other contributors through Weblate.
+If you see placeholders with underscores one the website instead of proper texts, like this:
 
-When adding new Babel related translation the implementation is a bit more complex, but don't worry! It should al work fine with the following steps:
+![image](https://user-images.githubusercontent.com/1003685/187742388-27fe3f28-5692-4f42-be0e-93bb9c1131be.png)
+
+That means you will have to run pybabel once:
+
+`pybabel compile -f -d translations`
+
+## Adding new translation keys
+
+When adding new content or implementing a feature that requires new translations you need to manually add these translation keys.
+
+When adding YAML translations please add these to the corresponding YAML file in the ```/content``` folder.
+Make sure that you comform to the already existing YAML structure.  As English is the fallback language, the translation should always be available in the English YAML file. Feel free to manually add the translation to as many languages as you know, but don't worry: otherwise these will be translated by other contributors through Weblate.
+
+When adding new Babel translations the implementation is a bit more complex, but don't worry! It should al work fine with the following steps:
 1. First we add the translation "placeholder" to either the front-end or back-end
     * When on the front-end (in a .html template) we do this like this: ```{{ _('test') }}```
     * Notice that the ```{{ }}``` characters are Jinja2 template placeholders for variables
     * When on the back-end we do this like this: ```gettext('test')```
-2. Next we run the following command to let Babel search for keys:
-    * ```pybabel extract -F babel.cfg -o messages.pot .```
+2. Next we run the following command to let Babel search for keys. We do not want line numbers since those will lead to lots of Weblate merge conflicts:
+    * ```pybabel extract -F babel.cfg -o messages.pot . --no-location```
 3. We now have to add the found keys to all translation files, with the following command:
-    * ```pybabel update -i messages.pot -d translations -N```
+    * ```pybabel update -i messages.pot -d translations -N  --no-wrap```
 4. All keys will be automatically stored in the /translations folder
 5. Search for the .po files for the languages you know and find the empty msgstr for your added key(s)
 6. Add your translations there, the other translation will hopefully be quickly picked up by other translators
@@ -196,38 +223,5 @@ Pre-release environment
 
 When you have your PR accepted into `main`, that version will be deployed on [hedy-alpha.herokuapp.com](https://hedy-alpha.herokuapp.com).
 
-We do periodic deploys of `main` to the [production version](https://hedycode.com) of Hedy.
+We do periodic deploys of `main` to the [production version](https://hedy.org) of Hedy.
 
-Editing YAML files with validation
-----------------------------------
-
-If you need to edit the YAML files that make up the Hedy adventure mode,
-you can have them validated as-you-type against our JSON schemas.
-
-This does require some manual configuration in your IDE, which we can
-unfortunately not do automatically for you. What you need to do depends
-on which IDE you are using. Here are the IDEs we know about:
-
-### Visual Studio Code
-
-* Install the Vistual Studio Code [YAML plugin](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml)
-* After installing the plugin, press **F1**, and type **Preferences: Open Worspace Settings (JSON)**.
-* Add the following `yaml.schemas` key to the JSON file that shows up:
-
-```json
-{
-  // ...
-  "yaml.schemas": {
-    "content/adventures/adventures.schema.json": "adventures/*.yaml"
-  }
-}
-```
-
-### IntelliJ (PyCharm/WebStorm/...)
-
-* Open **Preferences**
-* Navigate to **Languages & Frameworks → Schemas and DTDs → JSON Schema Mappings**.
-* Click the **+** to add a new schema.
-  * Behind **Schema file or URL**, click the browse button and navigate to the `<your Hedy checkout>/content/adventures/adventures.schema.json` file.
-  * Click the **+** at the bottom, select **Directory**. In the new line that appears, paste `content/adventures`.
-* Click **OK** to close the window.

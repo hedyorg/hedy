@@ -160,16 +160,20 @@ code {
   @apply bg-blue-400 border-blue-500;
 }
 
-.menubar-btn {
-  @apply block text-white text-base lg:text-xl no-underline font-slab font-semibold border-b-4 border-blue-500 tracking-wide py-3 px-2 lg:px-4;
+.menubar-item {
+  @apply items-center h-full cursor-pointer block border-b-4 border-blue-500 tracking-wide;
 }
 
-.menubar-btn:hover {
+.menubar-item:hover {
   @apply bg-blue-600 border-blue-600;
 }
 
-.menubar-btn.active {
+.menubar-item.active {
   @apply border-white !important;
+}
+
+.menubar-text {
+  @apply flex items-center h-full text-white text-base lg:text-xl no-underline font-slab font-semibold px-2 lg:px-4;
 }
 
 #output, #quiz_question_output_container {
@@ -180,7 +184,7 @@ code {
   @apply absolute overflow-hidden block rounded-lg border border-black bg-blue-400 ltr:right-0 rtl:left-0 ltr:mr-1 rtl:ml-1 w-max;
 }
 
-.cheatsheet-menu {
+.dropdown-level-menu {
   @apply absolute overflow-hidden block rounded-lg border border-black bg-green-400 ltr:right-0 rtl:left-0 ltr:mr-1 rtl:ml-1 w-max;
 }
 
@@ -215,8 +219,12 @@ ol {
 }
 
 /* AUTH */
-input[type=checkbox] {
+input[type=checkbox], input[type=radio] {
   @apply appearance-none border border-gray-400 w-4 h-4;
+}
+
+input[type=radio] {
+  @apply rounded-full;
 }
 
 #signup input:required, #signup select:required, #profile input:required, #change_password input:required {
@@ -228,7 +236,7 @@ input:required:valid, select:required:valid {
   @apply border-green-400 !important;
 }
 
-input[type=checkbox]:checked {
+input[type=checkbox]:checked, input[type=radio]:checked {
   @apply bg-green-400 border-green-600;
 }
 
@@ -308,6 +316,27 @@ p.close-dialog {
 
 .editor-error {
   @apply bg-red-500 absolute;
+  z-index: 10; /* Show higher than the active line (which has z-index 2) */
+}
+
+/**
+ * Will be used to strikethrough a line without actual text, so we need to fake it
+ * with a horizontal line that's a bit offset from the top.
+ */
+.disabled-line {
+  @apply absolute;
+  border-top: solid 1px white;
+  margin-top: 0.6em;
+  border-radius: 0px !important;
+}
+
+/**
+ * Will be used to indicate current line in debugger
+ */
+.debugger-current-line {
+    @apply absolute;
+    background: #2D6099;
+    z-index: 20
 }
 
 /* DOCS */
@@ -436,17 +465,24 @@ p.close-dialog {
 
 /* Developers mode toggle */
 .toggle-circle {
-  @apply ltr:left-1 rtl:right-1;
-  top: 0.2rem;
+  @apply ltr:left-0 rtl:right-0;
   transition: all 0.5s ease-in-out;
 }
 
-body[dir='rtl'] input:checked ~ .toggle-circle {
+body[dir='rtl'] #keyword_toggle_container input:checked ~ .toggle-circle {
+  transform: translateX(-200%);
+}
+
+body[dir='ltr'] #keyword_toggle_container input:checked ~ .toggle-circle {
+  transform: translateX(200%);
+}
+
+body[dir='rtl'] #developers_toggle_container input:checked ~ .toggle-circle {
   transform: translateX(-100%);
   @apply bg-green-400;
 }
 
-body[dir='ltr'] input:checked ~ .toggle-circle {
+body[dir='ltr'] #developers_toggle_container input:checked ~ .toggle-circle {
   transform: translateX(100%);
   @apply bg-green-400;
 }

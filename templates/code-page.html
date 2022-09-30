@@ -1,6 +1,6 @@
 {% extends "level-page.html" %}
 {% block levelbody %}
-{% if tutorial %}
+{% if intro_tutorial or tutorial %}
 <div id="tutorial-pop-up" class="z-50 fixed hidden" style="width: 500px; top: 20%; left: 50%; transform: translate(-50%, -50%);">
       <div class="bg-blue-500 border border-black rounded-lg px-8 py-4 text-center">
           <h2 id="tutorial_title" class="text-white"></h2>
@@ -48,10 +48,11 @@
   <script src="{{static('/vendor/skulpt-stdlib.js')}}" type="text/javascript" crossorigin="anonymous"></script>
   <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
   <!-- If we are in tutorial mode -> hide most features, slowly release them -->
-  {% if tutorial %}
+  <!-- We only do this for the general tutorial, the level tutorials are loaded on a button click -->
+  {% if intro_tutorial %}
     <script>
       $(document).ready(function() {
-        hedyApp.startTutorial();
+        hedyApp.startIntroTutorial();
       });
     </script>
   {% endif %}

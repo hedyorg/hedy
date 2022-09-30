@@ -30,7 +30,7 @@ class AchievementTranslations:
 class PageTranslations:
     def __init__(self, page):
         self.data = {}
-        if page in ['start', 'learn-more', 'for-teachers']:
+        if page in ['start', 'join', 'learn-more', 'for-teachers']:
             translations = glob.glob('content/pages/*.yaml')
         else:
             translations = glob.glob('content/pages/' + page + '/*.yaml')
@@ -49,7 +49,7 @@ class PageTranslations:
         return d
 
 
-def render_code_editor_with_tabs(commands, max_level, level_number, version, quiz, quiz_questions, loaded_program, adventures, parsons, parsons_exercises, customizations, hide_cheatsheet, enforce_developers_mode, teacher_adventures, adventure_name):
+def render_code_editor_with_tabs(cheatsheet, commands, max_level, level_number, version, quiz, quiz_questions, loaded_program, adventures, parsons, parsons_exercises, tutorial, customizations, hide_cheatsheet, enforce_developers_mode, teacher_adventures, adventure_name):
     arguments_dict = {}
 
     # Meta stuff
@@ -64,27 +64,32 @@ def render_code_editor_with_tabs(commands, max_level, level_number, version, qui
     arguments_dict['teacher_adventures'] = teacher_adventures
     arguments_dict['loaded_program'] = loaded_program
     arguments_dict['adventures'] = adventures
+    arguments_dict['commands'] = commands
     arguments_dict['parsons'] = parsons
     arguments_dict['parsons_exercises'] = parsons_exercises
+    arguments_dict['tutorial'] = tutorial
     arguments_dict['adventure_name'] = adventure_name
     arguments_dict['latest'] = version
     arguments_dict['quiz'] = quiz
     arguments_dict['quiz_questions'] = quiz_questions
 
-    return render_template("code-page.html", **arguments_dict, commands=commands)
+    return render_template("code-page.html", **arguments_dict, cheatsheet=cheatsheet)
 
 
-def render_tutorial_mode(level, commands, adventures):
+def render_tutorial_mode(level, cheatsheet, commands, adventures, parsons_exercises):
     arguments_dict = {}
 
-    arguments_dict['tutorial'] = True
+    arguments_dict['intro_tutorial'] = True
     arguments_dict['next_level'] = 2
     arguments_dict['level_nr'] = str(level)
     arguments_dict['level'] = str(level)
     arguments_dict['adventures'] = adventures
+    arguments_dict['commands'] = commands
     arguments_dict['quiz'] = True
+    arguments_dict['parsons'] = True if parsons_exercises else False
+    arguments_dict['parsons_exercises'] = parsons_exercises
 
-    return render_template("code-page.html", **arguments_dict, commands=commands)
+    return render_template("code-page.html", **arguments_dict, cheatsheet=cheatsheet)
 
 def render_specific_adventure(level_number, adventure, version, prev_level, next_level):
     arguments_dict = {}

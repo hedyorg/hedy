@@ -1,61 +1,61 @@
 1:
--   name: "print"
-    explanation: "Gib etwas mit `print` aus."
-    demo_code: "print Hallo willkommen bei Hedy!"
--   name: "ask"
-    explanation: "Frage etwas mit `ask`."
-    demo_code: "ask Was ist deine Lieblingsfarbe?"
--   name: "echo"
-    explanation: "Wiederhole etwas mit `echo`."
+-   name: "{print}"
+    explanation: "Gib etwas mit `{print}` aus."
+    demo_code: "{print} Hallo willkommen bei Hedy!"
+-   name: "{ask}"
+    explanation: "Frage etwas mit `{ask}`."
+    demo_code: "{ask} Was ist deine Lieblingsfarbe?"
+-   name: "{echo}"
+    explanation: "Wiederhole etwas mit `{echo}`."
     demo_code: |-
-        ask Was ist deine Lieblingsfarbe?
-        echo Also deine Lieblingsfarbe ist
--   name: forward
-    explanation: Gebe ein emoji mit `{print}`aus
-    demo_code: forward 100
--   name: turn
-    explanation: Zeichne eine Linie mit `forward`.
+        {ask} Was ist deine Lieblingsfarbe? 
+        {echo} Also deine Lieblingsfarbe ist
+-   name: '{print} emojis'
+    explanation: Gebe ein emoji mit `{print}`aus.
+    demo_code: '{print} 🙋 🌍 ❗'
+-   name: '{forward}'
+    explanation: Zeichne eine Linie mit `{forward}`.
     demo_code: |-
         {forward} 100
 -   demo_code: "{forward} 25\n{turn} {left}\n{forward} 25\n{turn} {right}"
-    explanation: Drehe die Schildkröte mit `{turn}`
+    explanation: Drehe die Schildkröte mit `{turn}`.
     name: '{turn}'
 2:
--   name: "is"
-    explanation: "Gib einem Wort einen Namen mit `is`, den du in deinem Programm wiederverwenden kannst."
+-   name: "{is}"
+    explanation: "Gib einem Wort einen Namen mit `{is}`, den du in deinem Programm wiederverwenden kannst. Du kannst Namen selber wählen."
     demo_code: |-
-        name is Hedy
-        print Willkommen name
--   name: "ask"
-    explanation: "Frage etwas mit `ask`. Aber pass auf! Du musst der Antwort einen Namen mit `is` geben."
+        name {is} Hedy 
+        {print} Willkommen name
+-   name: "{ask}"
+    explanation: "Frage etwas mit `{ask}`. Aber pass auf! Du musst der Antwort einen Namen mit `{is}` geben."
     demo_code: |-
-        Farbe is ask Was ist deine Lieblingsfarbe?
-        print Du magst am liebsten Farbe !
--   name: sleep
-    explanation: Lass Hedy für ein paar Sekunden pausieren.
+        Farbe {is} {ask} Was ist deine Lieblingsfarbe? 
+        {print} Du magst am liebsten Farbe !
+-   name: '{sleep}'
+    explanation: '`{sleep}` lässt Hedy für ein paar Sekunden pausieren.'
     demo_code: |-
-        print Lass mich einen Moment nachdenken...
-        sleep
-        print Hmm.. Ich brauche noch 3 Sekunden mehr...
-        sleep 3
-        print Eureka! Jetzt hab ich's!
--   explanation: Vergib einen Namen an eine Zahl mit `is`. Du kannst den Namen selbst wählen.
+        {print} Lass mich einen Moment nachdenken...
+        {sleep}
+        {print} Hmm.. Ich brauche noch 3 Sekunden mehr...
+        {sleep} 3
+        {print} Eureka! Jetzt hab ich's!
+-   explanation: Vergib einen Namen an eine Zahl mit `{is}`. Du kannst den Namen selbst wählen.
     demo_code: |-
-        winkel is 90
-        turn winkel
-        forward 100
-    name: is - Schildkröte
+        winkel {is} 90
+        {turn} winkel
+        {forward} 100
+    name: '{is} - Schildkröte'
 3:
 -   name: "wähle_zufällig"
-    explanation: "Wähle mit `at` und `random` zufällig ein Wort aus einer Gruppe aus"
+    explanation: "Wähle mit `{at}` und `{random}` zufällig ein Wort aus einer Gruppe aus"
     demo_code: |-
-        tiere is Hund, Katze, Känguru
-        print tiere at random
--   name: Add
-    explanation: Füge ein Ding zu einer Liste hinzu.
+        tiere {is} Hund, Katze, Känguru 
+        {print} tiere {at} {random}
+-   name: '{add}'
+    explanation: '`{add}` fügt ein Ding zu einer `{to_list}`-Liste hinzu.'
     demo_code: |-
-        tiere is Kuh, Katze
-        add Hund to tiere
+        tiere {is} Kuh, Katze 
+        {add} Hund {to_list} tiere
 -   name: Remove
     explanation: Entferne ein Ding aus einer Liste
     demo_code: |-
@@ -326,9 +326,9 @@
 -   name: '{print} mit einer Variable'
     explanation: Mit `{print}`musst du runde Klammern verwenden, und Kommas falls du mehrere Elemente ausgeben möchtest
     demo_code: "Name = 'Hedy'\n{print}('Ich heiße ', Name)"
--   name: '{print} with var'
-    explanation: With `{print}` you need to use parentheses and commas if you {print} more items
-    demo_code: "name = 'Hedy'\n{print}('my name is ', name)"
--   demo_code: "name = {input}('What is your name?')\n{print}('So your name is ', name)"
-    name: ask something with {input}
-    explanation: Use `{input}` instead of `{ask}` to ask something
+-   name: '{print} mit Variable'
+    explanation: Mit `{print}` musst du Klammern und Kommas benutzen, wenn du mehrere Elemente ausgeben möchtest.
+    demo_code: "name = 'Hedy'\n{print}('Ich heiße ', name)"
+-   demo_code: "name = {input}('Wie heißt du?')\n{print}('Du heißt also ', name)"
+    name: Benutze {input} um nach etwas zu fragen
+    explanation: Benutze `{input}` anstatt von `{ask}` um etwas zu fragen.

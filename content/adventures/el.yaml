@@ -17,7 +17,7 @@ adventures:
                 example_code: "```\n{print} Γεια!\n{print} Καλώς ήρθες στη Hedy!\n```\n"
                 story_text_2: "Μπορείς επίσης να ζητήσεις δεδομένα εισόδου και  να τα επαναλάβεις με μια εντολή  `{echo}`.\nΔοκίμασε τον κώδικα στα αριστερά σου πάλι. \n\nΔεν ξέρεις τι δημιούργησες;  Στις επόμενες καρτέλες θα βρεις ιδέες για προγράμματα προς κατασκευή.\n"
                 example_code_2: "```\n{ask} Ποιο είναι το όνομά σου;\n{echo} γεια\n```\n"
-                story_text_3: "Let's get started! Don't know what to create? In the next tabs you will find ideas for programs to build.\n"
+                story_text_3: "Ας ξεκινήσουμε! Δεν ξέρετε τι να δημιουργήσετε; Στις επόμενες καρτέλες θα βρείτε ιδέες για προγράμματα να φτιάξετε.\n"
             2:
                 story_text: |
                     Στο επίπεδο 2 θα μάθουμε κάτι καινούριο. Μπορείς να ορίσεις μια λέξη με την `is`.  Μπορείς να χρησιμοποιήσεις τη λέξη οπουδήποτε στον κώδικά σου και θα αντικατασταθεί από την Hedy, ως εξής:
@@ -33,7 +33,7 @@ adventures:
                     name {is} Χέντι
                     {print} Γεια name
                     ```
-                story_text_2: "`{print}` still works the same, but the `{ask}` command has changed. You need to use a variable in the `{ask}` command as well. It looks like this:\n"
+                story_text_2: "`{print}` εξακολουθεί να λειτουργεί ως είχε, αλλά `{ask}` εντολή έχει αλλάξει. Χρειάζεται να χρησιμοποιήσετε μία μεταβλητή στην εντολή  `{ask}` . Φαίνεται ως εξής:\n"
                 example_code_2: |-
                     ```
                     answer {is} {ask} Ποιο είναι το όνομά σου;
@@ -999,7 +999,7 @@ adventures:
                     print Το φαγητό και τα ποτά σας θα είναι έτοιμα αμέσως!
                     ```
             3:
-                story_text: |4
+                story_text: |
                     ## Τυχαίο Εστιάτοριο
                     Δυσκολεύεσαι να αποφασίσεις τί θέλεις να φάς για δείπνο. Μπορείς να αφήσεις τη Hedy να επιλέξει για σένα!
                     Απλά πρόσθεσε λίστες από τα αγαπημένα (ή λιγότερα αγαπημένα) γεύματα σου και η Hedy μπορεί να επιλέξει το δείπνο.
@@ -1391,9 +1391,9 @@ adventures:
                 story_text: "## What's next?\nIn this level you've learned what a variable is and how you can use it to make your adventures more interactive.\nBut... that's not the only thing you can do with variables! You can also use variables to make lists.\nAnd you can even let Hedy pick a random word out of a list, which allows you to make real games!\nTake a quick look at the next level!\n"
             1:
                 start_code: "{print} Let's go!"
-                story_text: "## What's next?\nCongratulations! You've reached the end of level 1. Hopefully you've already made some awesome codes, but Hedy has a lot more to discover. \n\nIn the first level you might've notice that the `{echo}` command can only save one bit of information at a time. \nFor example in the restaurant adventure, you could {echo} what the costumer wanted to eat, or what they wanted to drink, but not both in one sentence. \n\n```\n{print} Welcome at Hedy's\n{ask} What would you like to eat?\n{echo} So you want \n{ask} what would you like to drink?\n{echo} So you want \n```\nIf the player types a hamburger and coke, you can't say `so you would like a hamburger and coke`, but you have to make two separate line. \nAlso, the `{echo}` command only echoes the word at the end of the sentence. So you can't say `your hamburger is coming right up!`.\n\nThat changes in level 2. In level 2 you'll learn to work with variables, that allow you to save multiple pieces of information and print them in any place you want.\nBesides, you'll learn how to work with the `{at} {random}` command, that you can use to make games. \nSo let's go to the next level!\n"
+                story_text: "## What's next?\nCongratulations! You've reached the end of level 1. Hopefully you've already made some awesome codes, but Hedy has a lot more to discover. \n\nIn the first level you might've notice that the `{echo}` command can only save one bit of information at a time. \nFor example in the restaurant adventure, you could {echo} what the costumer wanted to eat, or what they wanted to drink, but not both in one sentence. \n\n```\n{print} Welcome at Hedy's\n{ask} What would you like to eat?\n{echo} So you want \n{ask} what would you like to drink?\n{echo} So you want \n```\nIf the player types a hamburger and coke, you can't say `so you would like a hamburger and coke`, but you have to make two separate line. \nAlso, the `{echo}` command only echoes the word at the end of the sentence. So you can't say `your hamburger is coming right up!`.\n\nThat changes in level 2. In level 2 you'll learn to work with variables, that allow you to save multiple pieces of information and print them in any place you want.\nSo let's go to the next level!\n"
                 example_code: "```\n{print} Welcome at Hedy's\n{ask} What would you like to eat?\n{echo} So you want \n{ask} what would you like to drink?\n{echo} So you want \n```\n"
-                story_text_2: "If the player types a hamburger and coke, you can't say `so you would like a hamburger and coke`, but you have to make two separate line. \nAlso, the `{echo}` command only echoes the word at the end of the sentence. So you can't say `your hamburger is coming right up!`.\n\nThat changes in level 2. In level 2 you'll learn to work with variables, that allow you to save multiple pieces of information and print them in any place you want.\nBesides, you'll learn how to work with the `{at} {random}` command, that you can use to make games. \nSo let's go to the next level!\n"
+                story_text_2: "If the player types a hamburger and coke, you can't say `so you would like a hamburger and coke`, but you have to make two separate line. \nAlso, the `{echo}` command only echoes the word at the end of the sentence. So you can't say `your hamburger is coming right up!`.\n\nThat changes in level 2. In level 2 you'll learn to work with variables, that allow you to save multiple pieces of information and print them in any place you want.\nSo let's go to the next level!\n"
             9:
                 story_text: "## What's next?\nYou're doing great! In this level we still face a small problem. You have learned to repeat lines, but what {if} you'd want to slightly change the line.\nFor example {if} you want to sing the song '{if} you're happy and you knwo it'\n\nIt would look like this:\n```\n{repeat} 2 {times}\n    {print} '{if} youre happy and you know it clap your hands'\n{print} '{if} youre happy and you know it and you really want to show it'\n{print} '{if} youre happy and you know it clap your hands'\n```\n\nIf you'd also want the next verse 'stomp your feet', and the next one, and the next one, you'd have to change the code completely.\nIn the next level you'll learn the `{for}` command, which allows you to make a list of actions and repeat the code with another action each time!\nPlease take a look!\n"
                 start_code: "{print} 'Lets go to the next level!'"

@@ -299,7 +299,7 @@ class TestsLevel3(HedyTester):
         forward a""")
 
         self.multi_level_tester(
-            max_level=self.max_turtle_level,
+            max_level=15,
             code=code,
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
@@ -314,7 +314,7 @@ class TestsLevel3(HedyTester):
         HedyTester.forward_transpiled('random.choice(directions)'))
 
         self.multi_level_tester(
-            max_level=self.max_turtle_level,
+            max_level=11,
             code=code,
             expected=expected,
             extra_check_function=self.is_turtle(),
@@ -329,7 +329,7 @@ class TestsLevel3(HedyTester):
         turn a""")
 
         self.multi_level_tester(
-            max_level=self.max_turtle_level,
+            max_level=15,
             code=code,
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
@@ -344,7 +344,7 @@ class TestsLevel3(HedyTester):
         HedyTester.turn_transpiled('random.choice(directions)'))
 
         self.multi_level_tester(
-            max_level=self.max_turtle_level,
+            max_level=11,
             code=code,
             expected=expected,
             extra_check_function=self.is_turtle(),
@@ -359,7 +359,7 @@ class TestsLevel3(HedyTester):
         color c""")
 
         self.multi_level_tester(
-            max_level=self.max_turtle_level,
+            max_level=10,
             code=code,
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
@@ -374,7 +374,7 @@ class TestsLevel3(HedyTester):
         HedyTester.turtle_color_command_transpiled('{random.choice(colors)}'))
 
         self.multi_level_tester(
-            max_level=self.max_turtle_level,
+            max_level=10,
             code=code,
             expected=expected,
             extra_check_function=self.is_turtle(),
@@ -531,6 +531,14 @@ class TestsLevel3(HedyTester):
             expected=expected
         )
 
+    def test_acess_before_assign_with_random(self):
+        code = textwrap.dedent("""\
+        print colors at random
+        colors is green, red, blue""")
+
+        with self.assertRaises(hedy.exceptions.AccessBeforeAssign) as context:
+            result = hedy.transpile(code, self.level)
+
     def test_add_ask_to_list(self):
         code = textwrap.dedent("""\
         color is ask what is your favorite color?
@@ -539,7 +547,7 @@ class TestsLevel3(HedyTester):
         print colors at random""")
 
         expected = textwrap.dedent("""\
-        color = input('what is your favorite color'+'?')
+        color = input('what is your favorite color?')
         colors = ['green', 'red', 'blue']
         colors.append(color)
         print(f'{random.choice(colors)}')""")
@@ -555,7 +563,7 @@ class TestsLevel3(HedyTester):
 
         expected = textwrap.dedent("""\
         colors = ['green', 'red', 'blue']
-        color = input('what color to remove'+'?')
+        color = input('what color to remove?')
         try:
           colors.remove(color)
         except:

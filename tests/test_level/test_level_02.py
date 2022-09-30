@@ -63,12 +63,39 @@ class TestsLevel2(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, output=output, max_level=3)
 
+    def test_print_var_with_comma(self):
+        #test for issue 2549
+        code = textwrap.dedent("""\
+        name is test
+        print name, heya!""")
+
+        expected = textwrap.dedent("""\
+        name = 'test'
+        print(f'{name}, heya!')""")
+
+        output = textwrap.dedent("""\
+        test, heya!""")
+
+        self.multi_level_tester(code=code, expected=expected, output=output, max_level=3)
+
     def test_print_single_quoted_text(self):
         code = "print 'Welcome to OceanView'"
         expected = "print(f'\\'Welcome to OceanView\\'')"
         output = "'Welcome to OceanView'"
 
         self.multi_level_tester(code=code, expected=expected, output=output, max_level=3)
+
+    def test_print_exclamation_mark_and_quote(self):
+        # test for issue 279
+        code = "print hello world!'"
+        expected = "print(f'hello world!\\'')"
+        output = "hello world!\'"
+
+        self.multi_level_tester\
+            (code=code,
+             expected=expected,
+             output=output,
+             max_level=3)
 
     def test_print_double_quoted_text(self):
         code = 'print "Welcome to OceanView"'
@@ -126,7 +153,7 @@ class TestsLevel2(HedyTester):
     #
     def test_ask(self):
         code = "kleur is ask wat is je lievelingskleur?"
-        expected = "kleur = input('wat is je lievelingskleur'+'?')"
+        expected = "kleur = input('wat is je lievelingskleur?')"
 
         self.multi_level_tester(code=code, expected=expected, max_level=3)
 
@@ -167,7 +194,7 @@ class TestsLevel2(HedyTester):
 
     def test_ask_es(self):
         code = "color is ask ask Cuál es tu color favorito?"
-        expected = "color = input('ask Cuál es tu color favorito'+'?')"
+        expected = "color = input('ask Cuál es tu color favorito?')"
 
         self.multi_level_tester(code=code, expected=expected, max_level=3)
 
@@ -177,7 +204,7 @@ class TestsLevel2(HedyTester):
         print রং is আপনার প্রিয""")
 
         expected = textwrap.dedent("""\
-        রং = input('আপনার প্রিয় রং কি'+'?')
+        রং = input('আপনার প্রিয় রং কি?')
         print(f'{রং} is আপনার প্রিয')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=3)
@@ -197,7 +224,7 @@ class TestsLevel2(HedyTester):
             code=code,
             expected=expected,
             extra_check_function=self.is_turtle(),
-            max_level=self.max_turtle_level,
+            max_level=11,
         )
 
     def test_forward_with_string_variable_gives_type_error(self):
@@ -208,7 +235,7 @@ class TestsLevel2(HedyTester):
         self.multi_level_tester(
             code=code,
             exception=hedy.exceptions.InvalidArgumentTypeException,
-            max_level=self.max_turtle_level,
+            max_level=11,
         )
 
     #
@@ -221,8 +248,7 @@ class TestsLevel2(HedyTester):
         self.multi_level_tester(
             code=code,
             expected=expected,
-            extra_check_function=self.is_turtle(),
-            max_level=self.max_turtle_level,
+            extra_check_function=self.is_turtle()
         )
 
     def test_turn_negative_number(self):
@@ -232,8 +258,7 @@ class TestsLevel2(HedyTester):
         self.multi_level_tester(
             code=code,
             expected=expected,
-            extra_check_function=self.is_turtle(),
-            max_level=self.max_turtle_level,
+            extra_check_function=self.is_turtle()
         )
 
     def test_turn_with_number_var(self):
@@ -248,7 +273,7 @@ class TestsLevel2(HedyTester):
             code=code,
             expected=expected,
             extra_check_function=self.is_turtle(),
-            max_level=self.max_turtle_level,
+            max_level=11
         )
 
     def test_turn_with_non_latin_number_var(self):
@@ -277,7 +302,7 @@ class TestsLevel2(HedyTester):
             lang='ar',
             expected=expected,
             extra_check_function=self.is_turtle(),
-            max_level=self.max_turtle_level,
+            max_level=11,
         )
 
     def test_one_turn_with_text_gives_type_error(self):
@@ -285,8 +310,7 @@ class TestsLevel2(HedyTester):
 
         self.multi_level_tester(
             code=code,
-            exception=hedy.exceptions.InvalidArgumentTypeException,
-            max_level=self.max_turtle_level,
+            exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
     @parameterized.expand(['left', 'right'])
@@ -295,8 +319,15 @@ class TestsLevel2(HedyTester):
         self.multi_level_tester(
             code=code,
             exception=hedy.exceptions.InvalidArgumentTypeException,
-            max_level=self.max_turtle_level,
+            max_level=11
         )
+
+    def test_access_before_assign_not_allowed(self):
+        code = textwrap.dedent("""\
+            print the name program
+            name is Hedy""")
+        with self.assertRaises(hedy.exceptions.AccessBeforeAssign) as context:
+            result = hedy.transpile(code, self.level)
 
     def test_turn_with_string_var_gives_type_error(self):
         code = textwrap.dedent("""\
@@ -306,7 +337,7 @@ class TestsLevel2(HedyTester):
         self.multi_level_tester(
             code=code,
             exception=hedy.exceptions.InvalidArgumentTypeException,
-            max_level=self.max_turtle_level,
+            max_level=11,
         )
 
     def test_turn_with_non_ascii_var(self):
@@ -322,7 +353,7 @@ class TestsLevel2(HedyTester):
             expected=expected,
             extra_check_function=self.is_turtle(),
             expected_commands=['is', 'turn'],
-            max_level=self.max_turtle_level,
+            max_level=11,
         )
 
     # issue #792
@@ -331,7 +362,7 @@ class TestsLevel2(HedyTester):
         self.multi_level_tester(
             code=code,
             exception=hedy.exceptions.InvalidArgumentException,
-            max_level=self.max_turtle_level,
+            max_level=11,
         )
 
     # color tests
@@ -343,7 +374,7 @@ class TestsLevel2(HedyTester):
             code=code,
             expected=expected,
             extra_check_function=self.is_turtle(),
-            max_level=self.max_turtle_level
+            max_level=10
         )
 
     def test_color_with_var(self):
@@ -359,7 +390,7 @@ class TestsLevel2(HedyTester):
             code=code,
             expected=expected,
             extra_check_function=self.is_turtle(),
-            max_level=self.max_turtle_level
+            max_level=10
         )
 
     def test_color_translated(self):
@@ -371,7 +402,7 @@ class TestsLevel2(HedyTester):
             expected=expected,
             extra_check_function=self.is_turtle(),
             lang='nl',
-            max_level=self.max_turtle_level
+            max_level=10
         )
 
     def test_color_with_number_gives_type_error(self):
@@ -379,7 +410,7 @@ class TestsLevel2(HedyTester):
         self.multi_level_tester(
             code=code,
             exception=hedy.exceptions.InvalidArgumentTypeException,
-            max_level=self.max_turtle_level,
+            max_level=10,
         )
 
     #
@@ -543,7 +574,7 @@ class TestsLevel2(HedyTester):
         kleur is ask wat is je lievelingskleur?
         print kleur!""")
         expected = textwrap.dedent("""\
-        kleur = input('wat is je lievelingskleur'+'?')
+        kleur = input('wat is je lievelingskleur?')
         print(f'{kleur}!')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=3)
@@ -563,7 +594,7 @@ class TestsLevel2(HedyTester):
             afstand is ask hoe ver dan?
             forward afstand""")
         expected = HedyTester.dedent(
-            "afstand = input('hoe ver dan'+'?')",
+            "afstand = input('hoe ver dan?')",
             HedyTester.forward_transpiled('afstand'))
 
         self.multi_level_tester(
@@ -581,7 +612,7 @@ class TestsLevel2(HedyTester):
 
         expected = HedyTester.dedent("""\
         print(f'Turtle race')
-        direction = input('Where to turn'+'?')""",
+        direction = input('Where to turn?')""",
                                      HedyTester.turn_transpiled('direction'))
 
         self.multi_level_tester(

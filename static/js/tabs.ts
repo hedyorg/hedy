@@ -56,8 +56,10 @@ function resetWindow() {
       adventures [adventure.short_name] = adventure;
     });
 
-    // @ts-ignore
-    document.getElementById("repair_button").style.visibility = "hidden";
+    const btn = document.getElementById("repair_button");
+    if (btn) {
+      btn.style.visibility = "hidden";
+    }
     resetWindow();
 
     if (tabName === 'quiz') {
@@ -77,6 +79,7 @@ function resetWindow() {
     if (tabName === 'parsons') {
       $ ('#level-header input').hide ();
       $ ('#editor').hide();
+      $ ('#editor-area').show ();
       loadParsonsExercise(<number>(window.State.level || 1), 1);
       $ ('#parsons_code_container').show();
       $ ('#adventures-tab').css('height', '');
@@ -92,7 +95,7 @@ function resetWindow() {
       $ ('#adventures-tab').css('max-height', '20em');
     }
 
-    
+
     // Make sure that the adventure tab is hidden when switching and developer's mode is toggled on
     if ($('#developers_toggle').is(":checked")) {
       $('#adventures-tab').hide();
