@@ -848,17 +848,21 @@ def index(level, program_id):
             quiz_stats = DATABASE.get_quiz_stats([current_user()['username']])
             if level > 1:
                 scores = [x.get('scores', []) for x in quiz_stats if x.get('level') == level - 1]
-                max_score = max([score for week_scores in scores for score in week_scores])
+                scores = [score for week_scores in scores for score in week_scores]
+                max_score = 0 if len(scores) < 1 else max(scores)
                 if max_score < threshold:
                     return utils.error_page(error=403, ui_message=gettext('quiz_threshold_not_reached'))
 
             # We also have to check if the next level should be removed from the available_levels
             if level < hedy.HEDY_MAX_LEVEL:
                 scores = [x.get('scores', []) for x in quiz_stats if x.get('level') == level]
-                max_score = max([score for week_scores in scores for score in week_scores])
+                scores = [score for week_scores in scores for score in week_scores]
+                max_score = 0 if len(scores) < 1 else max(scores)
                 if max_score < threshold:
-                    available_levels.remove(level + 1)
+                    for i in range(level, hedy.HEDY_MAX_LEVEL):
+                        available_levels.remove(i + 1)
 
+    print(available_levels)
     cheatsheet = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
 
     teacher_adventures = []
