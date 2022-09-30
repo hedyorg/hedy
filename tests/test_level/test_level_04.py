@@ -537,7 +537,7 @@ class TestsLevel4(HedyTester):
             HedyTester.forward_transpiled('afstand'))
 
         self.multi_level_tester(
-            max_level=self.max_turtle_level,
+            max_level=11,
             code=code,
             expected=expected,
             extra_check_function=self.is_turtle()

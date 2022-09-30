@@ -40,17 +40,17 @@ NON_BABEL = ['tn']
 
 ADVENTURE_ORDER = [
     'default',
-    'story',
     'parrot',
+    'fortune',
+    'haunted',
+    'restaurant',
+    'story',
     'songs',
     'turtle',
     'dishes',
     'dice',
     'rock',
     'calculator',
-    'fortune',
-    'restaurant',
-    'haunted',
     'piggybank',
     'quizmaster',
     'language',
@@ -181,6 +181,7 @@ class Adventures:
             if self.file.get(adventure_index, None):
                 sorted_adventures[adventure_index] = (self.file.get(adventure_index))
         self.file = sorted_adventures
+
         keyword_data = {}
         for short_name, adventure in self.file.items():
             parsed_adventure = copy.deepcopy(adventure)

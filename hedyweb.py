@@ -30,7 +30,7 @@ class AchievementTranslations:
 class PageTranslations:
     def __init__(self, page):
         self.data = {}
-        if page in ['start', 'learn-more', 'for-teachers']:
+        if page in ['start', 'join', 'learn-more', 'for-teachers']:
             translations = glob.glob('content/pages/*.yaml')
         else:
             translations = glob.glob('content/pages/' + page + '/*.yaml')

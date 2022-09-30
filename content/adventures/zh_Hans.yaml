@@ -27,7 +27,7 @@ adventures:
                     这样，你就不再需要`{echo}`命令了!
                 start_code: "{print} 你好世界!"
                 example_code: "```\nname {is} Hedy\nage {is} 15\n{print} name is age years old\n```\n"
-                example_code_2: "```\nanswer {is} {ask} What is your name?\n{print} Hello answer\n```\n"
+                example_code_2: "```\n回答 {is} {ask} 你叫什么名字？\n{print} 你好答案\n```\n"
                 story_text_2: "`{print}` 仍然可以正常工作，但 `{ask}` 命令已更改。 您还需要在 `{ask}` 命令中使用变量。 它看起来像这样：\n"
                 story_text_3: "这个关卡的另一个新命令是`{sleep}`，它会暂停你的程序。 如果您在 {sleep} 命令后面键入一个数字，程序会暂停该秒数。\n"
                 example_code_3: "```\n{print} 我最喜欢的颜色是...\n{sleep} 2\n{print} 绿色！\n```\n"
@@ -61,11 +61,11 @@ adventures:
                     `{if}`是第五关卡的新东西！使用 `{if}`，你可以在两个不同的选项之间进行选择。
                     如果您输入海迪作为名字，那么此代码会打印出“nice!” 如果您输入其他内容，那么此代码会打印出“boo!”这个词。
                     `{ask}` 和 `{print}` 的使用方法和在第 4 关卡中一样。
-                example_code_2: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice'\n{else} {print} 'boo!'\n```\n"
+                example_code_2: "```\n名字 {is} {ask} '你叫什么名字？'\n{if} 名字 {is} Hedy {print} 'nice'\n{else} {print} 'boo!'\n```\n"
                 example_code: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'\n```\n"
                 story_text_3: "## 列表\n我们现在可以使用 `{in}` 命令去检查某个东西是否在列表中。\n这段代码打印得很漂亮！ 如果您选择绿色或黄色，则不然。\n"
-                example_code_3: "```\npretty_colors {is} green, yellow\ncolor {is} {ask} 'What is your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!'\n{else} {print} 'meh'\n```\n"
-                story_text_2: "Sometimes code with an `{if}` gets really long and does not fit on the line well. <br> You may also divide the code over two lines, starting the second line at the `{else}` like this:\n"
+                example_code_3: "```\npretty_colors {is} 绿色，黄色\ncolor {is} {ask} '你最喜欢的颜色是什么？'\n{if} color {in} pretty_colors {print} 'pretty!'\n{else} {print} 'meh'\n```\n"
+                story_text_2: "有`{if}`的代码中有些时候会很长，一行代码放不下。 <br> 你可以把代码分成两行，像这样以`{else}`开始第二行：\n"
             6:
                 start_code: "{print}'5乘以5等于 5 * 5'"
                 story_text: |
@@ -1328,7 +1328,7 @@ adventures:
                 start_code: "{print} Let's go!"
                 story_text: "## 下一步是什么？\n恭喜！你已经到达了第1级的终点。希望你已经编写了一些很棒的代码，但是关于海迪还有很多东西值得探索。\n\n在第一个级别中，您可能已经注意到 `{echo}` 命令一次只能保存一个信息位。\n例如，在餐厅探险活动中，你可以{echo}消费者想吃什么，或者想喝什么，但不能用一句话同时重复这两个问题。\n"
                 example_code: "```\n{print} Welcome at Hedy's\n{ask} What would you like to eat?\n{echo} So you want \n{ask} what would you like to drink?\n{echo} So you want \n```\n"
-                story_text_2: "If the player types a hamburger and coke, you can't say `so you would like a hamburger and coke`, but you have to make two separate line. \nAlso, the `{echo}` command only echoes the word at the end of the sentence. So you can't say `your hamburger is coming right up!`.\n\nThat changes in level 2. In level 2 you'll learn to work with variables, that allow you to save multiple pieces of information and print them in any place you want.\nBesides, you'll learn how to work with the `{at} {random}` command, that you can use to make games. \nSo let's go to the next level!\n"
+                story_text_2: "If the player types a hamburger and coke, you can't say `so you would like a hamburger and coke`, but you have to make two separate line. \nAlso, the `{echo}` command only echoes the word at the end of the sentence. So you can't say `your hamburger is coming right up!`.\n\nThat changes in level 2. In level 2 you'll learn to work with variables, that allow you to save multiple pieces of information and print them in any place you want.\nSo let's go to the next level!\n"
             2:
                 start_code: "{print} Let's go to the next level!"
                 story_text: "## What's next?\nIn this level you've learned what a variable is and how you can use it to make your adventures more interactive.\nBut... that's not the only thing you can do with variables! You can also use variables to make lists.\nAnd you can even let Hedy pick a random word out of a list, which allows you to make real games!\nTake a quick look at the next level!\n"

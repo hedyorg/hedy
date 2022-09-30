@@ -1,28 +1,23 @@
 # coding=utf-8
-import ast
 import copy
 
-from website import auth, parsons
-from website import statistics
-from website import quiz
-from website import admin
-from website import teacher
-from website import programs
+from website import (
+    auth_pages, classes, profile, parsons, statistics, quiz, admin, for_teachers, programs,
+)
 import utils
 from utils import timems, load_yaml_rt, dump_yaml_rt, version, is_debug_mode
 from website.log_fetcher import log_fetcher
-from website.auth import current_user, login_user_from_token_cookie, requires_login, is_admin, is_teacher, update_is_teacher
+from website.auth import current_user, login_user_from_token_cookie, requires_login, is_admin, is_teacher
 from website.yaml_file import YamlFile
 from website import querylog, aws_helpers, jsonbin, translating, ab_proxying, cdn, database, achievements
 import hedy_translation
 from hedy_content import COUNTRIES, ALL_LANGUAGES, ALL_KEYWORD_LANGUAGES, NON_LATIN_LANGUAGES, NON_BABEL
 import hedyweb
 import hedy_content
-from flask_babel import gettext
-from flask_babel import Babel
+from flask_babel import gettext, Babel
 from flask_compress import Compress
 from flask_helpers import render_template
-from flask import Flask, request, jsonify, session, abort, g, redirect, Response, make_response, Markup, send_file, \
+from flask import Flask, g, request, jsonify, session, abort, redirect, Response, make_response, Markup, send_file, \
     after_this_request, send_from_directory
 from config import config
 from werkzeug.urls import url_encode
@@ -75,8 +70,8 @@ for lang in ALL_LANGUAGES.keys():
     TUTORIALS[lang] = hedy_content.Tutorials(lang)
 
 ACHIEVEMENTS_TRANSLATIONS = hedyweb.AchievementTranslations()
-ACHIEVEMENTS = achievements.Achievements()
 DATABASE = database.Database()
+ACHIEVEMENTS = achievements.Achievements(DATABASE, ACHIEVEMENTS_TRANSLATIONS)
 
 # We retrieve these once on server-start: Would be nice to automate this somewhere in the future (06/22)
 PUBLIC_PROGRAMS = DATABASE.get_all_public_programs()
@@ -182,10 +177,12 @@ def initialize_session():
       that cookie (copy the user info into the session for efficient access
       later on).
     """
+    # Set the database object on the global object (auth.py needs it)
+    g.db = DATABASE
+
     # Invoke session_id() for its side effect
     utils.session_id()
     login_user_from_token_cookie()
-
 
 if os.getenv('IS_PRODUCTION'):
     @app.before_request
@@ -1086,6 +1083,11 @@ def main_page(page):
         return render_template('learn-more.html', papers=hedy_content.RESEARCH, page_title=gettext('title_learn-more'),
                                current_page='learn-more', content=learn_more_translations)
 
+    if page == 'join':
+        join_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
+        return render_template('join.html', page_title=gettext('title_learn-more'),
+                               current_page='join', content=join_translations)
+
     if page == 'privacy':
         privacy_translations = hedyweb.PageTranslations(
             page).get_page_translations(g.lang)
@@ -1598,7 +1600,7 @@ def teacher_invitation(code):
     if not user['username']:
         return render_template('teacher-invitation.html')
 
-    update_is_teacher(user)
+    admin.update_is_teacher(DATABASE, user)
     # When visiting this link we update the current user to a teacher -> also update user in session
     session.get('user')['is_teacher'] = True
 
@@ -1606,42 +1608,19 @@ def teacher_invitation(code):
     url = request.url.replace(f'/invite/{code}', '/for-teachers')
     return redirect(url)
 
-# *** AUTH ***
-
-
-auth.routes(app, DATABASE)
-
-# *** PROGRAMS BACKEND ***
-
-programs.routes(app, DATABASE, ACHIEVEMENTS)
-
-# *** TEACHER BACKEND ***
-
-teacher.routes(app, DATABASE, ACHIEVEMENTS)
-
-# *** ADMIN BACKEND ***
-
-admin.routes(app, DATABASE)
-
-# *** ACHIEVEMENTS BACKEND ***
-
-ACHIEVEMENTS.routes(app, DATABASE)
-
-# *** QUIZ BACKEND ***
-
-quiz.routes(app, DATABASE, ACHIEVEMENTS, QUIZZES)
-
-# *** PARSONS BACKEND ***
-
-parsons.routes(app, DATABASE, ACHIEVEMENTS, PARSONS)
-
-
-# *** STATISTICS ***
-
-statistics.routes(app, DATABASE)
+app.register_blueprint(auth_pages.AuthModule(DATABASE))
+app.register_blueprint(profile.ProfileModule(DATABASE))
+app.register_blueprint(programs.ProgramsModule(DATABASE, ACHIEVEMENTS))
+app.register_blueprint(for_teachers.ForTeachersModule(DATABASE, ACHIEVEMENTS))
+app.register_blueprint(classes.ClassModule(DATABASE, ACHIEVEMENTS))
+app.register_blueprint(classes.MiscClassPages(DATABASE, ACHIEVEMENTS))
+app.register_blueprint(admin.AdminModule(DATABASE))
+app.register_blueprint(achievements.AchievementsModule(ACHIEVEMENTS))
+app.register_blueprint(quiz.QuizModule(DATABASE, ACHIEVEMENTS, QUIZZES))
+app.register_blueprint(parsons.ParsonsModule(PARSONS))
+app.register_blueprint(statistics.StatisticsModule())
 
 # *** START SERVER ***
-
 
 def on_server_start():
     """Called just before the server is started, both in developer mode and on Heroku.

@@ -150,6 +150,7 @@ $(document).on("click", function(event){
     // We expose the editor globally so it's available to other functions for resizing
     var editor = turnIntoAceEditor($editor.get(0)!, $editor.data('readonly'));
     theGlobalEditor = editor;
+    theGlobalEditor.setShowPrintMargin(false);
     error.setEditor(editor);
     markers = new Markers(theGlobalEditor);
 
@@ -363,6 +364,11 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
       }
     } else {
       code = get_trimmed_code();
+      if (code.length == 0) {
+        clearErrors(editor);
+        stopit();
+        return;
+      }
     }
 
     clearErrors(editor);
@@ -384,7 +390,7 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
     }).done(function(response: any) {
       console.log('Response', response);
       if (response.Warning && $('#editor').is(":visible")) {
-        storeFixedCode(response, level);
+        //storeFixedCode(response, level);
         error.showWarning(ErrorMessages['Transpile_warning'], response.Warning);
       }
       if (response.achievements) {
@@ -393,10 +399,9 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
       if (response.Error) {
         error.show(ErrorMessages['Transpile_error'], response.Error);
         if (response.Location && response.Location[0] != "?") {
-          storeFixedCode(response, level);
+          //storeFixedCode(response, level);
           // Location can be either [row, col] or just [row].
-          // @ts-ignore
-          highlightAceError(editor, response.Location[0], response.Location[1]);
+          markers.highlightAceError(response.Location[0], response.Location[1]);
         }
         $('#stopit').hide();
         $('#runit').show();
@@ -443,22 +448,21 @@ export function saveDST() {
   });
 }
 
-function storeFixedCode(response: any, level: string) {
-  if (response.FixedCode) {
-    sessionStorage.setItem ("fixed_level_{lvl}__code".replace("{lvl}", level), response.FixedCode);
-    showBulb(level);
-  }
-}
+// function storeFixedCode(response: any, level: string) {
+//   if (response.FixedCode) {
+//     sessionStorage.setItem ("fixed_level_{lvl}__code".replace("{lvl}", level), response.FixedCode);
+//     showBulb(level);
+//   }
+// }
 
-function showBulb(level: string){
-  const parsedlevel = parseInt(level)
-  if(parsedlevel <= 2){
-    const repair_button = $('#repair_button');
-    repair_button.show();
-    repair_button.attr('onclick', 'hedyApp.modalStepOne(' + parsedlevel + ');event.preventDefault();');
-  }
-
-}
+// function showBulb(level: string){
+//   const parsedlevel = parseInt(level)
+//   if(parsedlevel <= 2){
+//     const repair_button = $('#repair_button');
+//     repair_button.show();
+//     repair_button.attr('onclick', 'hedyApp.modalStepOne(' + parsedlevel + ');event.preventDefault();');
+//   }
+//}
 
 export function pushAchievement(achievement: string) {
   $.ajax({
@@ -997,7 +1001,6 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     }
    ).then(function(_mod) {
     console.log('Program executed');
-    //@ts-ignore
     const pythonVariables = Sk.globals;
     load_variables(pythonVariables);
     $('#stopit').hide();
@@ -1246,7 +1249,6 @@ export function show_variables() {
 
 export function load_variables(variables: any) {
   if (variable_view === true) {
-    //@ts-ignore
     variables = clean_variables(variables);
     const variableList = $('#variable-list');
     variableList.empty();
@@ -1263,9 +1265,9 @@ export function load_variables(variables: any) {
 // Color-coding string, numbers, booleans and lists
 // This will be cool to use in the future!
 // Just change the colors to use it
-function special_style_for_variable(variable: any){
+function special_style_for_variable(variable: Variable) {
   let result = '';
-  let parsedVariable = parseInt(variable.v);
+  let parsedVariable = parseInt(variable.v as string);
   if (typeof parsedVariable == 'number' && !isNaN(parsedVariable)){
      result =  "#ffffff";
    }
@@ -1282,20 +1284,17 @@ function special_style_for_variable(variable: any){
 }
 
 //hiding certain variables from the list unwanted for users
-// @ts-ignore
-function clean_variables(variables: any) {
-  if (variable_view === true) {
-    const new_variables = [];
-    const unwanted_variables = ["random", "time", "int_saver", "int_$rw$", "turtle", "t"];
-    for (const variable in variables) {
-      if (!variable.includes('__') && !unwanted_variables.includes(variable)) {
-        let extraStyle = special_style_for_variable(variables[variable]);
-        let newTuple = [variable, variables[variable].v, extraStyle];
-        new_variables.push(newTuple);
-      }
+function clean_variables(variables: Record<string, Variable>) {
+  const new_variables = [];
+  const unwanted_variables = ["random", "time", "int_saver", "int_$rw$", "turtle", "t"];
+  for (const variable in variables) {
+    if (!variable.includes('__') && !unwanted_variables.includes(variable)) {
+      let extraStyle = special_style_for_variable(variables[variable]);
+      let newTuple = [variable, variables[variable].v, extraStyle];
+      new_variables.push(newTuple);
     }
-    return new_variables;
   }
+  return new_variables;
 }
 
 function store_parsons_attempt(order: Array<string>, correct: boolean) {
@@ -1407,15 +1406,13 @@ export function confetti_cannon(){
     if(customLevels.includes(currentAdventure!)){
       let currentAdventureConfetti = getConfettiForAdventure(currentAdventure?? '');
 
-      // @ts-ignore
       jsConfetti.addConfetti({
         emojis: currentAdventureConfetti,
         emojiSize: 45,
         confettiNumber: 100,
       });
     }
-
-    else{
+    else {
       jsConfetti.addConfetti();
     }
 
@@ -1678,21 +1675,34 @@ export function filter_user_programs(username: string, own_request?: boolean) {
 }
 
 export function filter_admin() {
+  const params: Record<string, any> = {};
+
   const filter = $('#admin_filter_category').val();
-  if (filter == "email" || filter == "username") {
-    const substring = $('#email_filter_input').val();
-    window.open('?filter=' + filter + "&substring=" + substring, "_self");
-  } else if (filter == "language") {
-    const lang = $('#language_filter_input').val();
-    window.open('?filter=' + filter + "&language=" + lang, "_self");
-  } else if (filter == "keyword_language") {
-    const keyword_lang = $('#keyword_language_filter_input').val();
-    window.open('?filter=' + filter + "&keyword_language=" + keyword_lang, "_self");
-  } else {
-    const start_date = $('#admin_start_date').val();
-    const end_date = $('#admin_end_date').val();
-    window.open('?filter=' + filter + "&start=" + start_date + "&end=" + end_date, "_self");
+  params['filter'] = filter;
+
+  if ($('#hidden-page-input').val()) {
+    params['page'] = $('#hidden-page-input').val();
   }
+
+  switch (filter) {
+    case 'email':
+    case 'username':
+      params['substring'] = $('#email_filter_input').val();
+      break;
+    case 'language':
+      params['language'] = $('#language_filter_input').val();
+      break;
+    case 'keyword_language':
+      params['keyword_language'] = $('#keyword_language_filter_input').val();
+      break;
+    default:
+      params['start'] = $('#admin_start_date').val();
+      params['end'] = $('#admin_end_date').val();
+      break;
+  }
+
+  const queryString = Object.entries(params).map(([k, v]) => k + '=' + encodeURIComponent(v)).join('&');
+  window.open('?' + queryString, '_self');
 }
 
 /**
@@ -1885,7 +1895,7 @@ const timeout = (func: () => void, delay: number) => {
     }
     func();
   };
-  id = setTimeout(wrapper, delay);
+  id = window.setTimeout(wrapper, delay);
   timers.push(id);
 };
 
