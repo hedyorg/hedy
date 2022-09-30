@@ -145,6 +145,8 @@ class ForTeachersModule(WebsiteModule):
             return utils.error_page(error=404, ui_message=gettext('no_such_class'))
 
         body = request.json
+        print(body)
+        return '', 400
         # Validations
         if not isinstance(body, dict):
             return gettext('ajax_error'), 400

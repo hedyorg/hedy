@@ -6,7 +6,7 @@
     <div>
         {{ _('customize_class_exp_1')|commonmark }}
         <div class="border border-gray-400 w-full lg:w-3/4 rounded-lg px-2 py-1 my-2">
-            <ol>
+            <ol class="list-inside">
                 <li>{{_('customize_class_step_1')}}</li>
                 <li>{{_('customize_class_step_2')}}</li>
                 <li>{{_('customize_class_step_3')}}</li>
@@ -106,6 +106,27 @@
                                     </td>
                                 </tr>
                             {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="flex flex-col">
+                <h3 class="px-4">{{_('unlock_thresholds')}}</h3>
+                <div class="border border-gray-400 py-2 px-4 rounded-lg">
+                    <table class="table-auto text-center w-full customize_threshold_settings">
+                        <thead>
+                            <tr>
+                                <th class="w-64 text-left border-r border-gray-400">{{_('option')}}</th>
+                                <th class="w-40">{{_('value')}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-left border-t border-r border-gray-400">{{_('quiz_score')}}</td>
+                                <td class="border-t border-gray-400 px-4 pt-2">
+                                    <input class="threshold_settings_value appearance-none rounded-lg w-full px-2" id="quiz_threshold" {% if "quiz_threshold" in customizations['level_thresholds'] %}value="{{ customizations['level_thresholds']['quiz_threshold'] }}"{% endif %} min="1" max="100" placeholder="e.g. 75 ({{_('percentage')}})" type="number">
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
