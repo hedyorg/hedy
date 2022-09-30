@@ -10,8 +10,8 @@ from .website_module import WebsiteModule, route
 
 class Achievements:
     def __init__(self, db: database.Database, translations: AchievementTranslations):
-        self.DATABASE = db
-        self.TRANSLATIONS = translations
+        self.db = db
+        self.translations = translations
         self.all_commands = self.get_all_commands()
         self.total_users = 0
         self.statistics = self.get_global_statistics()
@@ -27,9 +27,9 @@ class Achievements:
         return commands - redundant_commands
 
     def get_global_statistics(self):
-        all_achievements = self.DATABASE.get_all_achievements()
+        all_achievements = self.db.get_all_achievements()
         statistics = {}
-        for achievement in self.TRANSLATIONS.get_translations("en").get("achievements").keys():
+        for achievement in self.translations.get_translations("en").get("achievements").keys():
             statistics[achievement] = 0
 
         self.total_users = len(all_achievements)
@@ -40,7 +40,7 @@ class Achievements:
 
     def initialize_user_data_if_necessary(self):
         if 'achieved' not in session:
-            achievements_data = self.DATABASE.progress_by_username(current_user()['username'])
+            achievements_data = self.db.progress_by_username(current_user()['username'])
             session['new_achieved'] = []
             session['new_commands'] = []
             session['previous_code'] = None
@@ -82,7 +82,7 @@ class Achievements:
 
     def add_single_achievement(self, username, achievement):
         self.initialize_user_data_if_necessary()
-        if achievement not in session['achieved'] and achievement in self.TRANSLATIONS.get_translations(session['lang']).get("achievements"):
+        if achievement not in session['achieved'] and achievement in self.translations.get_translations(session['lang']).get("achievements"):
             return self.verify_pushed_achievement(username, achievement)
         else:
             return None
@@ -100,10 +100,10 @@ class Achievements:
                 session['commands'].append(command)
             session['new_commands'] = []
             # Only update commands to database if we used new onces
-            self.DATABASE.add_commands_to_username(username, session['commands'])
+            self.db.add_commands_to_username(username, session['commands'])
 
         if len(session['new_achieved']) > 0:
-            if self.DATABASE.add_achievements_to_username(username, session['new_achieved']):
+            if self.db.add_achievements_to_username(username, session['new_achieved']):
                 self.total_users += 1
             for achievement in session['new_achieved']:
                 self.statistics[achievement] += 1
@@ -117,7 +117,7 @@ class Achievements:
         if adventure and 'adventure_is_worthwhile' not in session['achieved']:
             session['new_achieved'].append("adventure_is_worthwhile")
         if len(session['new_achieved']) > 0:
-            if self.DATABASE.add_achievements_to_username(username, session['new_achieved']):
+            if self.db.add_achievements_to_username(username, session['new_achieved']):
                 self.total_users += 1
             for achievement in session['new_achieved']:
                 self.statistics[achievement] += 1
@@ -130,7 +130,7 @@ class Achievements:
         self.check_programs_submitted()
 
         if len(session['new_achieved']) > 0:
-            if self.DATABASE.add_achievements_to_username(username, session['new_achieved']):
+            if self.db.add_achievements_to_username(username, session['new_achieved']):
                 self.total_users += 1
             for achievement in session['new_achieved']:
                 self.statistics[achievement] += 1
@@ -141,7 +141,7 @@ class Achievements:
     def verify_pushed_achievement(self, username, achievement):
         self.initialize_user_data_if_necessary()
         session['new_achieved'] = [achievement]
-        if self.DATABASE.add_achievement_to_username(username, achievement):
+        if self.db.add_achievement_to_username(username, achievement):
             self.total_users += 1
         session['achieved'].append(achievement)
         self.statistics[achievement] += 1
@@ -149,7 +149,7 @@ class Achievements:
 
     def get_earned_achievements(self):
         self.initialize_user_data_if_necessary()
-        translations = self.TRANSLATIONS.get_translations(session['lang']).get('achievements')
+        translations = self.translations.get_translations(session['lang']).get('achievements')
         translated_achievements = []
         for achievement in session['new_achieved']:
             percentage = round(((self.statistics[achievement] / self.total_users) * 100), 2)
@@ -250,6 +250,6 @@ class AchievementsModule(WebsiteModule):
         body = request.json
         if "achievement" in body:
             self.achievements.initialize_user_data_if_necessary()
-            if body['achievement'] not in session['achieved'] and body['achievement'] in self.achievements.TRANSLATIONS.get_translations(session['lang']).get('achievements'):
+            if body['achievement'] not in session['achieved'] and body['achievement'] in self.achievements.translations.get_translations(session['lang']).get('achievements'):
                 return jsonify({"achievements": self.achievements.verify_pushed_achievement(user.get('username'), body['achievement'])})
         return jsonify({})
