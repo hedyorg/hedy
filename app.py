@@ -477,7 +477,8 @@ def prepare_dst_file():
         """)
     lines = transpiled_code.code.split("\n")
     threader += "  " + "\n  ".join(lines)
-    threader += "\n" + 't.save("dst_files/' + filename + '.dst")'
+    # threader += "\n" + 't.save("dst_files/' + filename + '.dst")'
+    threader += "\n" + 't.save("dst_files/' + filename + '.png")'
     if not os.path.isdir('dst_files'):
         os.makedirs('dst_files')
     exec(threader)
@@ -487,17 +488,17 @@ def prepare_dst_file():
 
 # this is a route for testing purposes
 @app.route("/download_dst/<filename>", methods=['GET'])
-def download_dst_file(filename):
+def download_dst_file(filename, extension = "png"):
     # https://stackoverflow.com/questions/24612366/delete-an-uploaded-file-after-downloading-it-from-flask
     @after_this_request
     def remove_file(response):
         try:
-            os.remove("dst_files/" + filename + ".dst")
+            os.remove("dst_files/" + filename + "." + extension)
         except:
-            print("Error removing the generated .dst file!")
+            print(f"Error removing the generated {extension} file!")
         return response
     # Once the file is downloaded -> remove it
-    return send_file("dst_files/" + filename + ".dst", as_attachment=True)
+    return send_file("dst_files/" + filename + "." + extension, as_attachment=True)
 
 
 def transpile_add_stats(code, level, lang_):
