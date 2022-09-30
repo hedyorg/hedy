@@ -124,7 +124,7 @@
                             <tr>
                                 <td class="text-left border-t border-r border-gray-400">{{_('quiz_score')}}</td>
                                 <td class="border-t border-gray-400 px-4 pt-2">
-                                    <input class="threshold_settings_value appearance-none rounded-lg w-full px-2" id="quiz_threshold" {% if "quiz_threshold" in customizations['level_thresholds'] %}value="{{ customizations['level_thresholds']['quiz_threshold'] }}"{% endif %} min="1" max="100" placeholder="e.g. 75 ({{_('percentage')}})" type="number">
+                                    <input class="threshold_settings_value appearance-none rounded-lg w-full px-2" id="quiz" {% if "quiz" in customizations['level_thresholds'] %}value="{{ customizations['level_thresholds']['quiz'] }}"{% endif %} min="1" max="100" placeholder="e.g. 75 ({{_('percentage')}})" type="number">
                                 </td>
                             </tr>
                         </tbody>

@@ -181,7 +181,7 @@ class ForTeachersModule(WebsiteModule):
         level_thresholds = {}
         for name, value in body.get('level_thresholds').items():
             # We only manually check for the quiz threshold, if we add more -> generalize this code
-            if name == 'quiz_threshold':
+            if name == 'quiz':
                 try:
                     value = int(value)
                 except:
