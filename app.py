@@ -836,7 +836,7 @@ def index(level, program_id):
 
     # At this point we can have the following scenario:
     # - The level is allowed and available
-    # - But, if there is a quiz threshold we have to check again if the user has reacher it
+    # - But, if there is a quiz threshold we have to check again if the user has reaches it
 
     if 'level_thresholds' in customizations:
         if 'quiz' in customizations.get('level_thresholds'):
