@@ -9,6 +9,7 @@ from website import querylog
 from website.auth import requires_login, is_admin, is_teacher, requires_admin
 
 import utils
+from .website_module import WebsiteModule, route
 
 DATABASE = None
 
@@ -26,13 +27,13 @@ class UserType(Enum):
     STUDENT = '@all-students'
 
 
-def routes(app, db):
-    global DATABASE
-    DATABASE = db
+class StatisticsModule(WebsiteModule):
+    def __init__(self):
+        super().__init__('stats', __name__)
 
-    @app.route('/stats/class/<class_id>', methods=['GET'])
+    @route('/stats/class/<class_id>', methods=['GET'])
     @requires_login
-    def render_class_stats(user, class_id):
+    def render_class_stats(self, user, class_id):
         if not is_teacher(user) and not is_admin(user):
             return utils.error_page(error=403, ui_message=gettext('retrieve_class_error'))
 
@@ -44,9 +45,9 @@ def routes(app, db):
         return render_template('class-stats.html', class_info={'id': class_id, 'students': students},
                                current_page='my-profile', page_title=gettext('title_class statistics'))
 
-    @app.route('/logs/class/<class_id>', methods=['GET'])
+    @route('/logs/class/<class_id>', methods=['GET'])
     @requires_login
-    def render_class_logs(user, class_id):
+    def render_class_logs(self, user, class_id):
         if not is_teacher(user) and not is_admin(user):
             return utils.error_page(error=403, ui_message=gettext('retrieve_class_error'))
 
@@ -58,9 +59,9 @@ def routes(app, db):
         return render_template('class-logs.html', class_info={'id': class_id, 'students': students},
                                current_page='my-profile', page_title=gettext('title_class logs'))
 
-    @app.route('/class-stats/<class_id>', methods=['GET'])
+    @route('/class-stats/<class_id>', methods=['GET'])
     @requires_login
-    def get_class_stats(user, class_id):
+    def get_class_stats(self, user, class_id):
         start_date = request.args.get('start', default=None, type=str)
         end_date = request.args.get('end', default=None, type=str)
 
@@ -90,9 +91,9 @@ def routes(app, db):
         }
         return jsonify(response)
 
-    @app.route('/program-stats', methods=['GET'])
+    @route('/program-stats', methods=['GET'])
     @requires_admin
-    def get_program_stats(user):
+    def get_program_stats(self, user):
         start_date = request.args.get('start', default=None, type=str)
         end_date = request.args.get('end', default=None, type=str)
 

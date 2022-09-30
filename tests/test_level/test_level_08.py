@@ -482,7 +482,6 @@ class TestsLevel8(HedyTester):
             (HedyTester.forward_transpiled(100), '  '))
 
         self.multi_level_tester(
-            max_level=self.max_turtle_level,
             code=code,
             expected=expected,
             extra_check_function=self.is_turtle()

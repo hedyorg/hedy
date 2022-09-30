@@ -57,12 +57,12 @@ adventures:
                     if name is Hedy print 'Toll!' else print 'Blöd'
                 story_text: |
                     ## Falls... sonst...
-                    In Level 5 gibt es etwas neues, nämlich das `if`! Mit `if` kannst du zwischen zwei verschiedenen Möglichkeiten wählen.
-                    Dieser Code gibt 'Toll!' aus, wenn du Hedy als Namen eingibst, und 'Blöd!', wenn du etwas anderes eingibst.
-                    `ask` und `print` funktionieren immer noch wie in Level 4.
+                    In Level 5 gibt es etwas neues, nämlich das `{if}`! Mit `{if}` kannst du zwischen zwei verschiedenen Möglichkeiten wählen. 
+                    Dieser Code gibt 'Toll!' aus, wenn du Hedy als Namen eingibst, und 'Blöd!', wenn du etwas anderes eingibst. 
+                    `{ask}` und `{print}` funktionieren immer noch wie in Level 4.
                 example_code: "```\nName {is} {ask} 'Wie heißt du?'\n{if} Name {is} Hedy {print} 'Schön' {else} {print} 'Buh!'\n```\n"
                 story_text_3: "## Lists\nWenn wir überprüfen möchten ob etwas in einer Liste ist, können wir das mit dem Befehl `{in}` machen.\nDieser Code gibt schön! aus wenn du grün oder gelb auswählst, und na ja wenn du dich für eine andere Farbe entscheidest.\n"
-                example_code_3: "```\nschöne_Farben {is} grün, gelb\nFarbe {is} {ask} 'Was ist deine Lieblingsfarbe?'\n{if} Farbe {in} schöne_Farben {print} 'schön!'\n{else} {print} 'na ja'\n```\n"
+                example_code_3: "``` \nschöne_Farben {is} grün, gelb \nFarbe {is} {ask} 'Was ist deine Lieblingsfarbe?' \n{if} Farbe {in} schöne_Farben {print} 'schön!' \n{else} {print} 'na ja' \n```\n"
                 story_text_2: "Machmal wir Code mit einem`{if}`ziemlich lang und passt nicht gut in eine Zeile. <br> Du kannst den Code auch auf zwei Teilen aufteilen, beginnend mit der zweiten Zeile beim `{else}` Befehl, und zwar so:\n"
                 example_code_2: "```\nName {is} {ask} 'Wie heißt du?'\n{if} Name {is} Hedy {print} 'Schön'\n{else} {print} 'Buh!'\n```\n"
             6:
@@ -90,23 +90,23 @@ adventures:
                         print 'Hello Leute'
                         print 'Das wird 5 mal ausgegeben'
                 story_text: |
-                    ## Die Einrückung
-                    `ask` und `print` funktionieren immer noch wie du es gewohnt bist. Aber `if` und `repeat` haben sich verändert!
-                    Du kannst jetzt Befehlsgruppen zusammen ausführen, aber du musst den Code dafür *einrücken*.
+                    ## Die Einrückung 
+                    `{ask}` und `{print}` funktionieren immer noch wie du es gewohnt bist. Aber `{if}`,`{else}` und `{repeat}` haben sich verändert! 
+                    Du kannst jetzt Befehlsgruppen zusammen ausführen, aber du musst den Code dafür *einrücken*. 
                     Das bedeutet dass du die Befehlszeilen mit vier Leerzeichen beginnen musst. Das gilt auch, wenn du einen Block mit nur einer Zeile schreiben möchtest.
                 example_code: "```\n{repeat} 5 {times}\n    {print} 'Hallo zusammen'\n    {print} 'Das hier wird fünf Mal wiederholt'\n```\n"
             9:
                 start_code: |-
-                    repeat 3 times
-                        Essen = ask 'Was möchtest du gern?'
-                        if Essen is 'Pizza'
-                            print 'Gut!'
-                        else
-                            print 'Pizza ist besser'
+                    {repeat} 3 {times}
+                        Essen = {ask} 'Was möchtest du gern?'
+                        {if} Essen {is} 'Pizza'
+                            {print} 'Gut!'
+                        {else}
+                            {print} 'Pizza ist besser'
                 story_text: |
                     ## Jetzt alles auf einmal!
-                    In diesem Level kannst du nicht nur mehrere Zeilen mit `if` und `repeat` verwenden, du kannst sie auch kombinieren!
-                    Im Beispiel siehst du einen `if` Befehl innerhalb eines `repeat` Befehls. Es ist auch anders herum erlaubt. Und ebenso ist `if` innerhalb eines anderen `if` Befehls erlaubt, genau wie `repeat` in einem anderen `repeat` Befehl.
+                    In diesem Level kannst du nicht nur mehrere Zeilen mit `{if}` und `{repeat}` verwenden, du kannst sie auch kombinieren! 
+                    Im Beispiel siehst du einen `{if}` Befehl innerhalb eines `{repeat}` Befehls. Es ist auch anders herum erlaubt. Und ebenso ist `{if}` innerhalb eines anderen `{if}` Befehls erlaubt, genau wie `{repeat}` in einem anderen `{repeat}` Befehl. 
                     Versuch es mal!
                 example_code: "```\n{repeat} 3 {times}\n    Essen = {ask} 'Was würden Sie gerne essen?'\n    {if} Essen {is} Pizza\n        {print} 'Schön!'\n    else\n        {print} 'Pizza ist leckerer'\n```\n"
             10:
@@ -114,27 +114,27 @@ adventures:
                     animals is dog, cat, blobfish
                     for animal in animals
                       print 'I love ' animal
-                story_text: |
-                    ## Für jedes Element in meiner Liste...
-                    In diesem Level lernen wir den neuen Befehl `for`. Mit `for` kannst du eine Liste machen und alle ihre Elemente verwenden.
-                    `for` erstellt einen Block, so wie `repeat` und `if`, daher müssen alle Zeilen in dem Block mit Leerzeichen beginnen.
+                story_text: |-
+                    ## Für jedes Element in meiner Liste... 
+                    In diesem Level lernen wir den neuen Befehl `{for}`. Mit `{for}` kannst du eine Liste machen und alle ihre Elemente verwenden. 
+                    `{for}` erstellt einen Block, so wie `{repeat}` und `{if}`, daher müssen alle Zeilen in dem Block mit Leerzeichen beginnen.
                 example_code: "```\nTiere {is} Hund, Katze, Kugelfisch\n{for} Tier {in} Tiere\n  {print} 'Ich mag ' Tier\n```\n"
             11:
                 start_code: |-
                     for Zähler in range 1 to 5
                         print Zähler
-                story_text: |
-                    ## Schleifen!
-                    `print` funktioniert exakt genauso, aber wir verwenden jetzt die neue Form des Befehls `for`. Du kannst jetzt `{for} Zähler {in} {range} 1 {to} 5` schreiben und `Zähler` in deinem Programm verwenden.
-                    Probier es mal aus, und schau was passiert! Denke daran, Einrückungen nach den `for`- und `if`-Anweisungen zu verwenden (Das bedeutet, einen Satz mit vier Leerzeichen zu beginnen).
+                story_text: |-
+                    ## Schleifen! 
+                    `{print}` funktioniert exakt genauso, aber wir verwenden jetzt die neue Form des Befehls `{for}`. Du kannst jetzt `{for} Zähler {in} {range} 1 {to} 5` schreiben und `Zähler` in deinem Programm verwenden. 
+                    Probier es mal aus, und schau was passiert! Denke daran, Einrückungen nach den `{for}`- und `{if}`-Anweisungen zu verwenden (Das bedeutet, einen Satz mit vier Leerzeichen zu beginnen).
                 example_code: "```\nfor Zähler in range 1 to 5\n    print Zähler\n```\n"
             12:
                 start_code: |-
                     print 'decimal numbers now need to use a dot'
                     print 2.5 + 2.5
-                story_text: |
-                    ## Zahlen und Texte
-                    **Dezimalzahlen**
+                story_text: |-
+                    ## Zahlen und Texte 
+                    **Dezimalzahlen** 
                     Bis jetzt konntest du mit Hedy keine Dezimalzahlen (das sind Kommazahlen) wie 1.5 verwenden, aber jetzt geht das. Denke daran, dass Computer anstatt des Kommas einen Punkt ('.') verwenden.
                 example_code: "```\n{print} 'Zweieinhalb plus zweieinhalb macht...'\n{print} 2.5 + 2.5\n```\n"
                 story_text_2: "**Jeder Text muss zwischen Anführungszeichen stehen**\nAb diesem Level musst du auch Anführungszeichen verwenden wenn du Text mit einem `=` abspeicherst:\n"
@@ -145,25 +145,25 @@ adventures:
                 example_code_4: "```\nName = {ask} 'Wie heißt du?'\n{if} Name = 'Hedy der Roboter'\n    {print} 'Hallo!'\n```\n"
                 story_text_5: "**Zahlen brauchen keine Anführungszeichen**\nFür Zahlen verwendest du keine Anführungszeichen mit dem `=`:\n"
                 example_code_5: "```\nPunkte = 25\n{print} 'Du hast ' score\n```\n"
-                story_text_6: "**Mathe in Worten** \nIn diesem Level ist es auch erlaubt das + Zeichen mit Texten zu benutzen. Zum Beispiel:\n"
-                example_code_6: "```\na = 'Hallo '\nb = 'Welt!'\nprint a + b\n```\n"
+                story_text_6: "**Mathe in Worten**  \nIn diesem Level ist es auch erlaubt das + Zeichen mit Texten zu benutzen. Zum Beispiel:"
+                example_code_6: "``` \na = 'Hallo ' \nb = 'Welt!' \n{print} a + b \n```\n"
             13:
                 start_code: |-
                     Name = ask 'Wie heißt Du?'
                     Alter = ask 'Wie alt bist Du?'
                     if Name is 'Hedy' and Alter is 2
                         print 'Du bist die echte Hedy!'
-                story_text: |
+                story_text: |-
                     ## Und... oder...?
                     Wir werden jetzt `{and}` und `{or}` lernen! Wenn du zwei Angaben überprüfen willst, musst du nicht zwei `{if}` verwenden, sondern kannst `{and}` und `{or}` benutzen. Wenn du `{and}` verwendest, müssen beide Angaben, also links und rechts vom `{and}`, wahr sein. Du kannst auch `{or}` verwenden. Dann muss nur eine der beiden Aussage wahr sein.
-                example_code: "```\nName = ask 'Wie heißt du?'\nAlter = ask 'Wie alt bist du?'\nif Name is 'Hedy' and Alter is 2\n    print 'Du bist die echte Hedy!'\n```\n"
+                example_code: "``` \nName = {ask} 'Wie heißt du?'\nAlter = {ask} 'Wie alt bist du?'\n{if} Name {is} 'Hedy' {and} Alter {is} 2\n    {print} 'Du bist die echte Hedy!'\n```\n"
             14:
                 start_code: |-
-                    alter = ask 'Wie alt bist du?'
-                    if alter < 13
-                        print 'Du bist jünger als ich!'
-                    else
-                        print 'Du bist älter als ich!'
+                    alter = {ask} 'Wie alt bist du?'
+                    {if} alter < 13
+                        {print} 'Du bist jünger als ich!'
+                    {else}
+                        {print} 'Du bist älter als ich!'
                 story_text: |
                     ## Groß, größer, am größten!
                     Wir lernen weitere neue Elemente kennen! Du kennst sie vielleicht schon aus der Mathematik, das `<` und das `>` Zeichen.
@@ -2394,7 +2394,7 @@ adventures:
 
                     Das ist eine Menge Code, dafür das eigentlich nur die Gleichen Wörter immer wieder kommen. Zum Glück gibt es im nächsten Level eine Lösung dafür, den `repeat` Befehl, der es dir erlaubt eine Zeile Code mehrmals zu wiederholen.
                 start_code: "print 'On to the next level!'"
-                example_code: " ```\n {print} 'Zum Geburtstag viel Glück'\n {print} 'Zum Geburtstag viel Glück'\n {print} 'Zum Geburtstag liebe Hedy'\n {print} 'Zum Geburtstag viel Glück'\n ```\n"
+                example_code: "```\n {print} 'Zum Geburtstag viel Glück'\n {print} 'Zum Geburtstag viel Glück'\n {print} 'Zum Geburtstag liebe Hedy'\n {print} 'Zum Geburtstag viel Glück'\n```\n"
             7:
                 story_text: |
                     ## Was kommt als Nächstes?
