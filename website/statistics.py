@@ -29,6 +29,7 @@ class UserType(Enum):
 class StatisticsModule(WebsiteModule):
     def __init__(self, db: Database):
         super().__init__('stats', __name__)
+        self.db = db
 
     @route('/stats/class/<class_id>', methods=['GET'])
     @requires_login
