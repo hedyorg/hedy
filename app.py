@@ -834,6 +834,22 @@ def index(level, program_id):
     if 'levels' in customizations and level not in available_levels:
         return utils.error_page(error=403, ui_message=gettext('level_not_class'))
 
+    # At this point we can have the following scenario:
+    # - The level is allowed and available
+    # - But, if there is a quiz threshold we have to check again if the user has reacher it
+
+    if 'level_thresholds' in customizations:
+        if 'quiz' in customizations.get('level_thresholds'):
+            # Temporary store the threshold
+            threshold = customizations.get('level_thresholds').get('quiz')
+            # Get the max quiz score of the user in the previous level
+            # A bit out-of-scope, but we want to disable the next level button directly after finishing the quiz
+            # Todo: How can we fix this without a re-load?
+            quiz_stats = DATABASE.get_quiz_stats([current_user()['username']])
+            scores = [x.get('scores', []) for x in quiz_stats if x.get('level') == level]
+            max_score = max([element for innerList in scores for element in innerList])
+            print(max_score)
+
     cheatsheet = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
 
     teacher_adventures = []
