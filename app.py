@@ -859,7 +859,6 @@ def index(level, program_id):
                 if max_score < threshold:
                     available_levels.remove(level + 1)
 
-
     cheatsheet = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
 
     teacher_adventures = []
