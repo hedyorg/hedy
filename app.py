@@ -847,8 +847,9 @@ def index(level, program_id):
             # Todo: How can we fix this without a re-load?
             quiz_stats = DATABASE.get_quiz_stats([current_user()['username']])
             scores = [x.get('scores', []) for x in quiz_stats if x.get('level') == level]
-            max_score = max([element for innerList in scores for element in innerList])
-            print(max_score)
+            max_score = max([score for week_scores in scores for score in week_scores])
+            if max_score < threshold:
+                return utils.error_page(error=403, ui_message=gettext('quiz_threshold_not_reached'))
 
     cheatsheet = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
 
