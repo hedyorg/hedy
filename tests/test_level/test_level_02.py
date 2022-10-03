@@ -278,7 +278,7 @@ class TestsLevel2(HedyTester):
 
     def test_turn_with_non_latin_number_var(self):
         code = textwrap.dedent("""\
-        الزاوية هي ٩٠
+        الزاوية هو ٩٠
         استدر الزاوية
         تقدم ١٠٠""")
         expected = textwrap.dedent("""\
