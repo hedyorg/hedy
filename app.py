@@ -858,6 +858,8 @@ def index(level, program_id):
 
     parsons = True if PARSONS[g.lang].get_parsons_data_for_level(level) else False
     quiz = True if QUIZZES[g.lang].get_quiz_data_for_level(level) else False
+    tutorial = True if TUTORIALS[g.lang].get_tutorial_for_level(level) else False
+
     quiz_questions = 0
     parson_exercises = 0
 
@@ -884,6 +886,7 @@ def index(level, program_id):
         adventures=adventures,
         parsons=parsons,
         parsons_exercises=parson_exercises,
+        tutorial=tutorial,
         customizations=customizations,
         hide_cheatsheet=hide_cheatsheet,
         enforce_developers_mode=enforce_developers_mode,
@@ -1615,7 +1618,7 @@ app.register_blueprint(admin.AdminModule(DATABASE))
 app.register_blueprint(achievements.AchievementsModule(ACHIEVEMENTS))
 app.register_blueprint(quiz.QuizModule(DATABASE, ACHIEVEMENTS, QUIZZES))
 app.register_blueprint(parsons.ParsonsModule(PARSONS))
-app.register_blueprint(statistics.StatisticsModule())
+app.register_blueprint(statistics.StatisticsModule(DATABASE))
 
 # *** START SERVER ***
 
