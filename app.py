@@ -31,6 +31,7 @@ import collections
 import datetime
 import sys
 import textwrap
+import zipfile
 
 # Todo TB: This can introduce a possible app breaking bug when switching to Python 4 -> e.g. Python 4.0.1 is invalid
 if (sys.version_info.major < 3 or sys.version_info.minor < 7):
@@ -485,29 +486,32 @@ def prepare_dst_file():
 
     # stolen from: https://stackoverflow.com/questions/28568687/send-with-multiple-csvs-using-flask
 
-    import zipfile #DONT forget to add this to requirements.txt!!!
-    zipf = zipfile.ZipFile(f'dst_files/{filename}.zip', 'w', zipfile.ZIP_DEFLATED)
+    zip_file = zipfile.ZipFile(f'dst_files/{filename}.zip', 'w', zipfile.ZIP_DEFLATED)
     for root, dirs, files in os.walk('dst_files/'):
-        for file in [x for x in files if x[len(filename):] == filename]:
-            zipf.write('dst_files/'+file)
-    zipf.close()
-
+        # only zip files for this request, and exclude the zip file itself:
+        for file in [x for x in files if x[:len(filename)] == filename and x[-3:] != 'zip']:
+            zip_file.write('dst_files/'+file)
+    zip_file.close()
 
     return jsonify({'filename': filename}), 200
 
 
 # this is a route for testing purposes
 @app.route("/download_dst/<filename>", methods=['GET'])
-def download_dst_file(filename, extension = "zip"):
+def download_dst_file(filename, extension="zip"):
     # https://stackoverflow.com/questions/24612366/delete-an-uploaded-file-after-downloading-it-from-flask
+
+    # Once the file is downloaded -> remove it
     @after_this_request
     def remove_file(response):
         try:
-            os.remove("dst_files/" + filename + "." + extension)
+            os.remove("dst_files/" + filename + ".zip")
+            os.remove("dst_files/" + filename + ".dst")
+            os.remove("dst_files/" + filename + ".png")
         except:
-            print(f"Error removing the generated {extension} file!")
+            print(f"Error removing one of the generated files!")
         return response
-    # Once the file is downloaded -> remove it
+
     return send_file("dst_files/" + filename + "." + extension, as_attachment=True)
 
 
