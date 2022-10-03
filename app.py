@@ -505,6 +505,7 @@ def download_dst_file(filename, extension="zip"):
     @after_this_request
     def remove_file(response):
         try:
+            # rename DST folder to something more generic (machine files?)
             os.remove("dst_files/" + filename + ".zip")
             os.remove("dst_files/" + filename + ".dst")
             os.remove("dst_files/" + filename + ".png")
