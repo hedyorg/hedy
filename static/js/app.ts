@@ -341,7 +341,7 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
   Sk.execLimit = 1;
   $('#runit').hide();
   $('#stopit').show();
-  $('#saveDST').hide();
+  $('#saveFiles').hide();
   clearOutput();
 
   try {
@@ -429,10 +429,10 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
   }
 }
 
-export function saveDST() {
+export function saveMachineFiles() {
   $.ajax({
     type: 'POST',
-    url: '/generate_dst',
+    url: '/generate_machine_files',
     data: JSON.stringify({
       level: window.State.level,
       code: get_trimmed_code(),
@@ -443,7 +443,7 @@ export function saveDST() {
     }).done(function(response: any) {
       if (response.filename) {
         // Download the file
-        window.location.replace('/download_dst/' + response.filename);
+        window.location.replace('/download_machine_files/' + response.filename);
       }
   });
 }
@@ -1006,7 +1006,7 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
     $('#stopit').hide();
     $('#runit').show();
     if (hasTurtle) {
-      $('#saveDST').show();
+      $('#saveFiles').show();
     }
 
     // Check if the program was correct but the output window is empty: Return a warning
