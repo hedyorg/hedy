@@ -22,23 +22,23 @@ def keywords_to_dict(lang="nl"):
         command_combinations = yaml.safe_load(stream)
 
     for k, v in command_combinations.items():
-        if type(v) == str and "|" in v:
-            # when we have several options, pick the first one as default
-            command_combinations[k] = v.split('|')
+        command_combinations[k] = v.split('|')
 
     return command_combinations
 
+def keywords_to_dict_single_choice(lang):
+    command_combinations = keywords_to_dict(lang)
+    return {k : v[0] for (k, v) in command_combinations.items()}
 
 def all_keywords_to_dict():
     """Return a dictionary where each value is a list of the translations of that keyword (key). Used for testing"""
     keyword_dict = {}
     for lang in hedy_content.ALL_KEYWORD_LANGUAGES:
-        commands = keywords_to_dict(lang)
+        commands = keywords_to_dict_single_choice(lang)
         keyword_dict[lang] = commands
 
     all_translations = {k: [v.get(k,k) for v in keyword_dict.values()] for k in keyword_dict['en']}
     return all_translations
-
 
 def translate_keywords(input_string_, from_lang="en", to_lang="nl", level=1):
     """"Return code with keywords translated to language of choice in level of choice"""
@@ -114,20 +114,20 @@ def find_keyword_in_rules(rules, keyword, start_line, end_line, start_column, en
     return None
 
 def get_original_keyword(keyword_dict, keyword, line):
-    if isinstance(keyword_dict[keyword], str):
-        original = keyword_dict[keyword]
-    else:
-        for keyword in keyword_dict[keyword]:
-            if keyword in line:
-                original = keyword
-    return original
+    found = False
+    for word in keyword_dict[keyword]:
+        if word in line:            
+            original = word
+            found = True
+    # If we can't find the keyword, it means that it isn't part of the valid keywords for this language
+    # so return original instead
+    if found:
+        return original
+    else:        
+        return keyword
 
 def get_target_keyword(keyword_dict, keyword):
-    if isinstance(keyword_dict[keyword], str):
-        target = keyword_dict[keyword]
-    else:
-        target = keyword_dict[keyword][0]
-    return target
+    return keyword_dict[keyword][0]
 class Translator(Visitor):
     """The visitor finds tokens that must be translated and stores information about their exact position
        in the user input string and original value. The information is later used to replace the token in
