@@ -495,8 +495,6 @@ def prepare_files():
 
     return jsonify({'filename': filename}), 200
 
-
-# this is a route for testing purposes
 @app.route("/download_machine_files/<filename>", methods=['GET'])
 def download_machine_file(filename, extension="zip"):
     # https://stackoverflow.com/questions/24612366/delete-an-uploaded-file-after-downloading-it-from-flask
