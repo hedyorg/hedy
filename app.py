@@ -477,18 +477,28 @@ def prepare_dst_file():
         """)
     lines = transpiled_code.code.split("\n")
     threader += "  " + "\n  ".join(lines)
-    # threader += "\n" + 't.save("dst_files/' + filename + '.dst")'
+    threader += "\n" + 't.save("dst_files/' + filename + '.dst")'
     threader += "\n" + 't.save("dst_files/' + filename + '.png")'
     if not os.path.isdir('dst_files'):
         os.makedirs('dst_files')
     exec(threader)
+
+    # stolen from: https://stackoverflow.com/questions/28568687/send-with-multiple-csvs-using-flask
+
+    import zipfile #DONT forget to add this to requirements.txt!!!
+    zipf = zipfile.ZipFile(f'dst_files/{filename}.zip', 'w', zipfile.ZIP_DEFLATED)
+    for root, dirs, files in os.walk('dst_files/'):
+        for file in [x for x in files if x[len(filename):] == filename]:
+            zipf.write('dst_files/'+file)
+    zipf.close()
+
 
     return jsonify({'filename': filename}), 200
 
 
 # this is a route for testing purposes
 @app.route("/download_dst/<filename>", methods=['GET'])
-def download_dst_file(filename, extension = "png"):
+def download_dst_file(filename, extension = "zip"):
     # https://stackoverflow.com/questions/24612366/delete-an-uploaded-file-after-downloading-it-from-flask
     @after_this_request
     def remove_file(response):
