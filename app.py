@@ -1619,7 +1619,7 @@ app.register_blueprint(admin.AdminModule(DATABASE))
 app.register_blueprint(achievements.AchievementsModule(ACHIEVEMENTS))
 app.register_blueprint(quiz.QuizModule(DATABASE, ACHIEVEMENTS, QUIZZES))
 app.register_blueprint(parsons.ParsonsModule(PARSONS))
-app.register_blueprint(statistics.StatisticsModule())
+app.register_blueprint(statistics.StatisticsModule(DATABASE))
 
 # *** START SERVER ***
 

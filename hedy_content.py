@@ -62,9 +62,10 @@ ADVENTURE_ORDER = [
 ]
 
 RESEARCH = {}
-for paper in os.listdir('content/research'):
-    # An_approach_to_describing_the_semantics_of_Hedy_2022.pdf -> An approach to describing the semantics of Hedy
+for paper in sorted(os.listdir('content/research'), key = lambda x: int(x.split("_")[-1][:-4]), reverse = True):
+    # An_approach_to_describing_the_semantics_of_Hedy_2022.pdf -> 2022, An approach to describing the semantics of Hedy
     name = paper.replace("_", " ").split(".")[0]
+    name = name[-4:] + ", " + name[:-5]
     RESEARCH[name] = paper
 
 # load all available languages in dict
@@ -346,8 +347,6 @@ class Quizzes:
         return len(self.data["en"].get(level, {}))
 
     def get_quiz_data_for_level(self, level, keyword_lang="en"):
-        # We want to keep the keyword language as english until the questions are adjusted for dynamic keywords
-        keyword_lang = "en"
 
         if self.debug_mode and not self.data.get(keyword_lang, None):
             if not self.file:
@@ -356,9 +355,6 @@ class Quizzes:
         return self.data.get(keyword_lang, {}).get(level, None)
 
     def get_quiz_data_for_level_question(self, level, question, keyword_lang="en"):
-        # We want to keep the keyword language as english until the questions are adjusted for dynamic keywords
-        keyword_lang = "en"
-
         if self.debug_mode and not self.data.get(keyword_lang, None):
             if not self.file:
                 self.file = YamlFile.for_file(f'content/quizzes/{self.language}.yaml').get('levels')
