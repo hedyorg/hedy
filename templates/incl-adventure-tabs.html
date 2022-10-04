@@ -48,12 +48,12 @@
               </div>
             {% for story in adventure.extra_stories %}
                 <div class="lg:flex lg:flex-row border-t-2">
-                    <div class="p-2 ltr:mr-2 rtl:ml-2">
+                    <div class="lg:w-1/2 w-full p-2 ltr:mr-2 rtl:ml-2">
                       {{ story.text|commonmark }}
                   </div>
                   {% if story.example_code %}
                       <div class="border"></div>
-                      <div class="p-2 ltr:ml-2 rtl:mr-2">
+                      <div class="lg:w-1/2 w-full p-2 ltr:ml-2 rtl:mr-2">
                           <h2>{{_('example_code_header')}}</h2>
                           {{ story.example_code|commonmark }}
                       </div>
