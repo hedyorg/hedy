@@ -143,7 +143,6 @@ class QuizModule(WebsiteModule):
             if achievement:
                 response['achievement'] = json.dumps(achievement)
 
-        print(response)
         return jsonify(response), 200
 
 
