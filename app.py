@@ -476,6 +476,10 @@ def prepare_dst_file():
         with t.running_stitch(stitch_length=20):
         """)
     lines = transpiled_code.code.split("\n")
+
+    # remove all sleeps for speeed, and remove all colors for compatibility:
+    lines = [x for x in lines if (not "time.sleep" in x) and (not "t.pencolor" in x)]
+
     threader += "  " + "\n  ".join(lines)
     threader += "\n" + 't.save("dst_files/' + filename + '.dst")'
     if not os.path.isdir('dst_files'):
