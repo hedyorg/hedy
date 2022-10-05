@@ -27,7 +27,7 @@
               </div>
           </div>
         {% endif %}
-        <div style="display: none;" id="blur_toggle_container">
+        <div style="{{ 'display:none;' if not blur_button_available }}" id="blur_toggle_container">
             <span class="inline-block bottom-0 ltr:right-0 rtl:left-0 z-10 absolute mb-4 mx-2 text-white" onclick="hedyApp.toggle_blur_code();">
                 <i class="fas fa-eye-slash fa-lg cursor-pointer blur-toggle" aria-hidden="true"></i>
                 <i class="fas fa-eye fa-lg cursor-pointer blur-toggle" style="display: none;" aria-hidden="true"></i>
