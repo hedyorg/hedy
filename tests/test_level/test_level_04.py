@@ -84,6 +84,22 @@ class TestsLevel4(HedyTester):
             expected=expected
         )
 
+
+
+    def test_print_comma_with_var(self):
+        code = textwrap.dedent("""\
+        text is 'Hi, I am Hedy'
+        print text
+        """)
+        expected = textwrap.dedent("""\
+        text = '\\'Hi, I am Hedy\\''
+        print(f'{text}')""")
+        self.multi_level_tester(
+            code=code,
+            max_level=11,
+            expected=expected
+        )
+
     def test_print_slash(self):
         code = "print 'Yes/No'"
         expected = "print(f'Yes/No')"

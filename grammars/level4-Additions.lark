@@ -1,6 +1,7 @@
 // redefining it entirely since it has many order-depending rules (e.g ask_no_quotes should be after ask and before assign)
-command: print | ask | turtle | assign_list | add | remove | sleep | error_ask_no_quotes| assign | error_invalid_space | error_print_no_quotes | error_invalid
+command: print | ask | turtle | add | remove | sleep | error_ask_no_quotes | assign | assign_list | error_invalid_space | error_print_no_quotes | error_invalid
 
+assign: var _IS (list_access | quoted_text | text) -> assign
 print: _PRINT (_print_argument)? -> print
 error_print_no_quotes: _PRINT text -> error_print_nq
 ask: var _IS _ASK (_print_argument)?
