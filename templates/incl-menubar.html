@@ -1,7 +1,7 @@
 <nav aria-label="Website" class="bg-blue-500 ltr:pl-4 rtl:pr-4 h-14 lg:h-16">
     {% block menu %}
     <ul class="h-full list-none flex flex-row items-center">
-        <li><a href="/"><img class="h-10 lg:h-12 ltr:mr-2 rtl:ml-2" src="{{static('/images/Hedy-logo.png')}}" alt="{{_('hedy_logo_alt')}}"></a></li>
+        <li class="ltr:mr-2 rtl:ml-2"><a href="/" class="inline-block w-10 lg:w-12"><img src="{{static('/images/Hedy-logo.png')}}" alt="{{_('hedy_logo_alt')}}"></a></li>
         <li class="hidden lg:flex menubar-item{% if current_page == 'start' %} active{% endif %}"><a class="menubar-text" href="/">{{_('nav_start')}}</a>
         </li>
         <li class="menubar-item{% if current_page == 'hedy' %} active{% endif %}"><a class="menubar-text" href="/hedy">{{_('nav_hedy')}}</a></li>
