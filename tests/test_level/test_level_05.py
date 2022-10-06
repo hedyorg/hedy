@@ -538,6 +538,59 @@ class TestsLevel5(HedyTester):
 
         self.single_level_tester(code=code, expected=expected)
 
+    def test_onno_3372(self):
+        code = textwrap.dedent("""\
+        antw is ask 'wat kies jij'
+        if antw is schaar print 'gelijk spel!'
+        print 'test'""")
+
+        expected = textwrap.dedent("""\
+        antw = input(f'wat kies jij')
+        if antw == 'schaar':
+          print(f'gelijk spel!')
+        else:
+          print(f'')""")
+
+        self.multi_level_tester(code=code,
+                                expected=expected,
+                                max_level=11)
+
+    def test_restaurant_example(self):
+        code = textwrap.dedent("""\
+        print 'Welkom bij McHedy'
+        eten is ask 'Wat wilt u eten?'
+        if eten is friet saus is ask 'Welke saus wilt u bij de friet?'
+        if eten is pizza topping is ask 'Welke topping wilt u op de pizza?'
+        print eten""")
+
+        expected = textwrap.dedent("""\
+        print(f'Welkom bij McHedy')
+        eten = input(f'Wat wilt u eten?')
+        if eten == 'friet':
+          saus = input(f'Welke saus wilt u bij de friet?')
+        else:
+          print(f'')
+        if eten == 'pizza':
+          topping = input(f'Welke topping wilt u op de pizza?')
+        else:
+          print(f'')""")
+
+        self.multi_level_tester(code=code,
+                                expected=expected,
+                                max_level=11)
+
+    def test_onno_3372_else(self):
+        code = textwrap.dedent("""\
+        antw is ask 'wat kies jij'
+        if antw is schaar print 'gelijk spel!' else print ''
+        print 'test'""")
+
+        expected = ''
+
+        self.multi_level_tester(code=code,
+                                expected=expected,
+                                max_level=11)
+
     def test_consecutive_if_and_if_else_statements(self):
         code = textwrap.dedent("""\
         naam is ask 'hoe heet jij?'
@@ -554,7 +607,9 @@ class TestsLevel5(HedyTester):
         else:
           print(f'minder leuk!')""")
 
-        self.single_level_tester(code=code, expected=expected)
+        self.multi_level_tester(code=code,
+                                expected=expected,
+                                max_level=7)
 
     def test_consecutive_if_else_statements(self):
         code = textwrap.dedent("""\
