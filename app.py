@@ -862,11 +862,12 @@ def index(level, program_id):
                 scores = [x.get('scores', []) for x in quiz_stats if x.get('level') == level]
                 scores = [score for week_scores in scores for score in week_scores]
                 max_score = 0 if len(scores) < 1 else max(scores)
+                # We don't have the score yet for the next level -> remove all upcoming levels from 'available_levels'
                 if max_score < threshold:
-                    for i in range(level, hedy.HEDY_MAX_LEVEL):
-                        if i in available_levels:
-                            available_levels.remove(i + 1)
+                    available_levels = available_levels[:available_levels.index(level)+1]
 
+    # Add the available levels to the customizations dict -> simplify implementation on the front-end
+    customizations['available_levels'] = available_levels or range(1, hedy.HEDY_MAX_LEVEL+1)
     cheatsheet = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
 
     teacher_adventures = []
