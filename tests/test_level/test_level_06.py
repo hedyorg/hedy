@@ -826,7 +826,7 @@ class TestsLevel6(HedyTester):
         if name in names:
           print(f'nice!')""")
 
-        self.multi_level_tester(max_level=7, code=code, expected=expected)
+        self.multi_level_tester(max_level=7, code=code, expected=expected, translate=False)
 
     def test_consecutive_if_and_if_else_statements(self):
         code = textwrap.dedent("""\
@@ -846,7 +846,7 @@ class TestsLevel6(HedyTester):
         else:
           print(f'minder leuk!')""")
 
-        self.multi_level_tester(max_level=7, code=code, expected=expected)
+        self.multi_level_tester(max_level=7, code=code, expected=expected, translate=False)
 
     def test_consecutive_if_else_statements(self):
         code = textwrap.dedent("""\
