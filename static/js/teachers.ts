@@ -402,6 +402,9 @@ export function save_customizations(class_id: string) {
       contentType: 'application/json',
       dataType: 'json'
     }).done(function (response) {
+      if (response.achievement) {
+          showAchievements(response.achievement, false, "");
+      }
       modal.alert(response.success, 3000, false);
       window.State.unsaved_changes = false;
       $('#remove_customizations_button').removeClass('hidden');
