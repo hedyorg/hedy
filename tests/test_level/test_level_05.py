@@ -576,7 +576,7 @@ class TestsLevel5(HedyTester):
         if eten == 'pizza':
           topping = input(f'Welke topping wilt u op de pizza?')
         else:
-            _ = 'x'
+          _ = 'x'
         print(f'{eten}')""")
 
         self.single_level_tester(code=code,
@@ -594,7 +594,7 @@ class TestsLevel5(HedyTester):
         if antw == 'schaar':
           print(f'gelijk spel!')
         else:
-          _ = 'x'
+          print(f'')
         print(f'test')""")
 
         self.single_level_tester(code=code,
