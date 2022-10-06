@@ -843,14 +843,14 @@ def index(level, program_id):
 
     # At this point we can have the following scenario:
     # - The level is allowed and available
-    # - But, if there is a quiz threshold we have to check again if the user has reaches it
+    # - But, if there is a quiz threshold we have to check again if the user has reached it
 
     if 'level_thresholds' in customizations:
         if 'quiz' in customizations.get('level_thresholds'):
             # Temporary store the threshold
             threshold = customizations.get('level_thresholds').get('quiz')
             # Get the max quiz score of the user in the previous level
-            # A bit out-of-scope, but we want to disable the next level button directly after finishing the quiz
+            # A bit out-of-scope, but we want to enable the next level button directly after finishing the quiz
             # Todo: How can we fix this without a re-load?
             quiz_stats = DATABASE.get_quiz_stats([current_user()['username']])
             if level > 1:
