@@ -821,6 +821,8 @@ class TestsLevel6(HedyTester):
         name = input(f'What is a name you like?')
         if convert_numerals('Latin', name) == convert_numerals('Latin', 'Hedy'):
           print(f'nice!')
+        else:
+          _ = 'x'
         if name in names:
           print(f'nice!')""")
 
@@ -837,6 +839,8 @@ class TestsLevel6(HedyTester):
         naam = input(f'hoe heet jij?')
         if convert_numerals('Latin', naam) == convert_numerals('Latin', 'Hedy'):
           print(f'leuk')
+        else:
+          _ = 'x'
         if convert_numerals('Latin', naam) == convert_numerals('Latin', 'Python'):
           print(f'ook leuk')
         else:

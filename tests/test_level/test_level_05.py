@@ -533,10 +533,12 @@ class TestsLevel5(HedyTester):
         name = input(f'What is a name you like?')
         if name == 'Hedy':
           print(f'nice!')
+        else:
+          _ = 'x'
         if name in names:
           print(f'nice!')""")
 
-        self.single_level_tester(code=code, expected=expected)
+        self.single_level_tester(code=code, expected=expected, translate=False)
 
     def test_onno_3372(self):
         code = textwrap.dedent("""\
@@ -549,11 +551,12 @@ class TestsLevel5(HedyTester):
         if antw == 'schaar':
           print(f'gelijk spel!')
         else:
-          print(f'')""")
+          _ = 'x'
+        print(f'test')""")
 
-        self.multi_level_tester(code=code,
+        self.single_level_tester(code=code,
                                 expected=expected,
-                                max_level=11)
+                                translate=False)
 
     def test_restaurant_example(self):
         code = textwrap.dedent("""\
@@ -569,15 +572,16 @@ class TestsLevel5(HedyTester):
         if eten == 'friet':
           saus = input(f'Welke saus wilt u bij de friet?')
         else:
-          print(f'')
+          _ = 'x'
         if eten == 'pizza':
           topping = input(f'Welke topping wilt u op de pizza?')
         else:
-          print(f'')""")
+            _ = 'x'
+        print(f'{eten}')""")
 
-        self.multi_level_tester(code=code,
+        self.single_level_tester(code=code,
                                 expected=expected,
-                                max_level=11)
+                                translate=False)
 
     def test_onno_3372_else(self):
         code = textwrap.dedent("""\
@@ -585,11 +589,17 @@ class TestsLevel5(HedyTester):
         if antw is schaar print 'gelijk spel!' else print ''
         print 'test'""")
 
-        expected = ''
+        expected = textwrap.dedent("""\
+        antw = input(f'wat kies jij')
+        if antw == 'schaar':
+          print(f'gelijk spel!')
+        else:
+          _ = 'x'
+        print(f'test')""")
 
-        self.multi_level_tester(code=code,
+        self.single_level_tester(code=code,
                                 expected=expected,
-                                max_level=11)
+                                translate=False)
 
     def test_consecutive_if_and_if_else_statements(self):
         code = textwrap.dedent("""\
@@ -602,14 +612,16 @@ class TestsLevel5(HedyTester):
         naam = input(f'hoe heet jij?')
         if naam == 'Hedy':
           print(f'leuk')
+        else:
+          _ = 'x'
         if naam == 'Python':
           print(f'ook leuk')
         else:
           print(f'minder leuk!')""")
 
-        self.multi_level_tester(code=code,
+        self.single_level_tester(code=code,
                                 expected=expected,
-                                max_level=7)
+                                translate=False)
 
     def test_consecutive_if_else_statements(self):
         code = textwrap.dedent("""\
@@ -630,7 +642,7 @@ class TestsLevel5(HedyTester):
         else:
           print(f'meh')""")
 
-        self.single_level_tester(code=code, expected=expected)
+        self.single_level_tester(code=code, expected=expected, translate=False)
 
     def test_turn_if_forward(self):
         code = textwrap.dedent("""\

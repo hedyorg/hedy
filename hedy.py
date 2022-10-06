@@ -2211,6 +2211,27 @@ def preprocess_blocks(code, level):
         processed_code.append('end-block')
     return "\n".join(processed_code)
 
+def preprocess_ifs(code):
+    processed_code = []
+    lines = code.split("\n")
+    for i in range(len(lines)-1):
+        line = lines[i]
+        # todo convert to all languages!!
+        if "if" in line and (not ("else" in line)):
+            # is this line just a condition and no other keyword (because that is no problem)
+            if "print" in line or "ask" in line or "forward" in line or "turn" in line: # and this should also (TODO) check for a second is cause that too is problematic.
+
+                # a second command, but also no else in this line -> check next line!
+                next_line = lines[i+1]
+                if not next_line[0:4] == 'else':
+                    # no else in next line?
+                    # add a nop (like 'Pass' but we just insert a meaningless assign)
+                    line = line + " else _ is x"
+
+        processed_code.append(line)
+    processed_code.append(lines[-1]) #always add the last line (if it has if and no else that is no problem)
+    return "\n".join(processed_code)
+
 def contains_blanks(code):
     return (" _ " in code) or (" _\n" in code)
 
@@ -2230,6 +2251,10 @@ def process_input_string(input_string, level, escape_backslashes=True):
 
     if escape_backslashes and level >= 4:
         result = result.replace("\\", "\\\\")
+
+    # In levels 5 to 8 we do not allow if without else, we add an empty print to make it possible in the parser
+    if level >= 5 and level <= 8:
+        result = preprocess_ifs(result)
 
     # In level 8 we add indent-dedent blocks to the code before parsing
     if level >= hedy.LEVEL_STARTING_INDENTATION:
