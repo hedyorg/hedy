@@ -864,9 +864,9 @@ def index(level, program_id):
                 max_score = 0 if len(scores) < 1 else max(scores)
                 if max_score < threshold:
                     for i in range(level, hedy.HEDY_MAX_LEVEL):
-                        available_levels.remove(i + 1)
+                        if i in available_levels:
+                            available_levels.remove(i + 1)
 
-    print(available_levels)
     cheatsheet = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
 
     teacher_adventures = []
