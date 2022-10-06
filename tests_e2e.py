@@ -1329,20 +1329,20 @@ class TestCustomizeClasses(AuthHelper):
         class_id = self.get_data('classes')[0].get('id')
 
         valid_bodies = [
-            {'levels': [], 'adventures': {}, 'opening_dates': {}, 'teacher_adventures': [], 'other_settings': []},
-            {'levels': ['1'], 'adventures': {'story': ['1']}, 'opening_dates': {'1': '2022-03-16'}, 'teacher_adventures': [], 'other_settings': []},
+            {'levels': [], 'adventures': {}, 'opening_dates': {}, 'teacher_adventures': [], 'other_settings': [], 'level_thresholds': {}},
+            {'levels': ['1'], 'adventures': {'story': ['1']}, 'opening_dates': {'1': '2022-03-16'}, 'teacher_adventures': [], 'other_settings': [], 'level_thresholds': {}},
             {'levels': ['1', '2', '3'], 'opening_dates': {'1': '', '2': '', '3': ''},
              'adventures': {'story': [], 'parrot': [], 'songs': [], 'turtle': [], 'dishes': [], 'dice': [], 'rock': [],
                             'calculator': [], 'restaurant': [], 'fortune': [], 'haunted': [], 'piggybank': [],
                             'quizmaster': [], 'language': [], 'next': [], 'end': []}, 'teacher_adventures': [],
-             'other_settings': []},
+             'other_settings': [], 'level_thresholds': {}},
             {'levels': ['1', '2', '3'], 'opening_dates': {'1': '', '2': '', '3': ''},
              'adventures': {'story': ['1', '2', '3'], 'parrot': ['1', '2', '3'], 'songs': [], 'turtle': ['1', '2', '3'],
                             'dishes': ['3'], 'dice': ['3'], 'rock': ['1', '2', '3'], 'calculator': [],
                             'restaurant': ['1', '2', '3'], 'fortune': ['1', '3'], 'haunted': ['1', '2', '3'],
                             'piggybank': [], 'quizmaster': [], 'language': [], 'next': ['1', '2', '3'],
                             'end': ['1', '2', '3']}, 'teacher_adventures': [],
-             'other_settings': ['developers_mode', 'hide_cheatsheet']}
+             'other_settings': ['developers_mode', 'hide_cheatsheet'], 'level_thresholds': {}},
         ]
 
         for valid_body in valid_bodies:
@@ -1362,7 +1362,7 @@ class TestCustomizeClasses(AuthHelper):
 
         # WHEN creating class customizations
         # THEN receive an OK response code with the server
-        body = {'levels': [], 'adventures': {}, 'opening_dates': {}, 'teacher_adventures': [], 'other_settings': []}
+        body = {'levels': [], 'adventures': {}, 'opening_dates': {}, 'teacher_adventures': [], 'other_settings': [], 'level_thresholds': {}}
         self.post_data('for-teachers/customize-class/' + class_id, body, expect_http_code=200)
 
         # WHEN deleting class customizations
