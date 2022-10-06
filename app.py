@@ -821,6 +821,9 @@ def index(level, program_id):
     else:
         adventures = load_adventures_per_level(level, g.keyword_lang)
 
+    # Initially all levels are available -> strip those for which conditions are not met or not available yet
+    available_levels = list(range(1, hedy.HEDY_MAX_LEVEL + 1))
+
     customizations = {}
     if current_user()['username']:
         customizations = DATABASE.get_student_class_customizations(current_user()['username'])
@@ -867,7 +870,7 @@ def index(level, program_id):
                     available_levels = available_levels[:available_levels.index(level)+1]
 
     # Add the available levels to the customizations dict -> simplify implementation on the front-end
-    customizations['available_levels'] = available_levels or range(1, hedy.HEDY_MAX_LEVEL+1)
+    customizations['available_levels'] = available_levels
     cheatsheet = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
 
     teacher_adventures = []
