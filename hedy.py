@@ -2216,17 +2216,16 @@ def preprocess_ifs(code):
     lines = code.split("\n")
     for i in range(len(lines)-1):
         line = lines[i]
+        next_line = lines[i + 1]
         # todo convert to all languages!!
-        if "if" in line and (not ("else" in line)):
+        if line[0:2] == "if" and (not next_line[0:4] == 'else') and (not ("else" in line)):
             # is this line just a condition and no other keyword (because that is no problem)
             if "print" in line or "ask" in line or "forward" in line or "turn" in line: # and this should also (TODO) check for a second is cause that too is problematic.
-
                 # a second command, but also no else in this line -> check next line!
-                next_line = lines[i+1]
-                if not next_line[0:4] == 'else':
-                    # no else in next line?
-                    # add a nop (like 'Pass' but we just insert a meaningless assign)
-                    line = line + " else _ is x"
+                
+                # no else in next line?
+                # add a nop (like 'Pass' but we just insert a meaningless assign)
+                line = line + " else _ is x"
 
         processed_code.append(line)
     processed_code.append(lines[-1]) #always add the last line (if it has if and no else that is no problem)
