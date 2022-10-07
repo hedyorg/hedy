@@ -1,31 +1,31 @@
 1:
--   explanation: "用`{print}`可以打印一些东西。"
+-   explanation: "用`{print}`打印一些东西。"
     demo_code: "{print} 你好欢迎来到海迪!"
     name: '{print}'
 -   explanation: "用`{ask}`提出问题。"
     demo_code: "{ask} 你最喜欢的颜色是什么？"
     name: '{ask}'
--   explanation: "用`{echo}`可以重复执行某一任务。"
+-   explanation: "用`{echo}`重复执行某一任务。"
     demo_code: |-
         {ask} 你最喜欢的颜色是什么？
         {echo} 所以你最喜欢的颜色是
     name: '{echo}'
 -   name: '{print} 表情符号'
-    explanation: 用 `{print}`打印一个表情符号
+    explanation: 用 `{print}`打印一个表情符号。
     demo_code: '{print} 🙋 🌍 ❗'
 -   name: '{forward}'
     explanation: 用 `{forward}`画一条线。
     demo_code: '{forward} 100'
 -   demo_code: "{forward} 25\n{turn} {left}\n{forward} 25\n{turn} {right}"
     name: '{turn}'
-    explanation: 用`{turn}`旋转海龟绘图
+    explanation: 用`{turn}`旋转乌龟绘图。
 2:
 -   explanation: "用`{is}`来给一个词命名以便在程序中使用这个词。你可以自己选择这个名字。"
     demo_code: |-
         名字 {is} 海迪
         {print} 欢迎名字
     name: '{is}'
--   explanation: "用`{ask}` 提出问题。 注意! 现在你需要用 '{is}' 给问题的答案命名。"
+-   explanation: "用`{ask}` 提出问题。 注意！ 现在你需要用`{is}` 给答案命名。"
     demo_code: |-
         颜色 {is} {ask} 你最喜欢的颜色是什么？
         {print} 颜色是我最喜欢的颜色！
@@ -34,25 +34,25 @@
     explanation: 让海迪（Hedy）暂停几秒钟。
     demo_code: "{print} 让我考虑一秒钟......\n{sleep}\n{print} 嗯，我还需要3秒钟.....\n{sleep} 3\n{print} 找到了！我找到了！"
 -   demo_code: "角度 {is} 90\n{turn} 角度\n{forward} 100"
-    name: 是 - 海龟绘图
+    name: '`{is}`海龟绘图'
     explanation: 用 `{is}`给一个数字命名。 你可以自己选择这个名字。
 3:
--   explanation: "用`at` and `random`可以从一组词汇中随机选择一个词"
+-   explanation: "用`{at}` and `{random}`可以从一组词汇中随机选择一个词。"
     demo_code: |-
         动物 {is} 狗，猫，袋鼠
         {print} 动物 {at} {random}
-    name: 选择_随机
+    name: 选择随机
 -   name: '{add}'
-    explanation: 将一个项目添加到一个列表中
+    explanation: 将一个项目添加到一个列表中。
     demo_code: "动物 {is} 奶牛，猫\n{add} 狗 {to_list} 动物"
 -   demo_code: "动物 {is} 猫，狗，奶牛\n{remove} 狗 {from} 动物"
     name: '{remove}'
-    explanation: 从一个列表中移除一个项目
+    explanation: 从一个列表中移除一个项目。
 4:
--   explanation: "打印的内容要用单引号标注清楚"
+-   explanation: "打印的内容要用单引号标注清楚。"
     demo_code: "{print} '你好欢迎来到海迪。'"
     name: '{print}'
--   explanation: "给一段文本命名并不带单引号`{print}`出这段文本"
+-   explanation: "给一段文本命名，并不带引号`{print}`出这段文本。"
     demo_code: |-
         名字 {is} 海迪
         {print} '我的名字是 ' 名字
@@ -63,7 +63,7 @@
         {print} 颜色'是你最喜欢的颜色！'
     name: '{ask}'
 5:
--   explanation: "打印的内容要用单引号标注清楚"
+-   explanation: "打印的内容要用引号标注清楚。"
     demo_code: "{print} '你好欢迎来到海迪。'"
     name: '{print}'
 -   explanation: "用`{ask}`提出问题。"
@@ -71,19 +71,19 @@
         颜色 {is} {ask} '你最喜欢的颜色是什么？'
         {print} 颜色'是你最喜欢的颜色！'
     name: '{ask}'
--   explanation: "用`{if}`条件语句进行选择"
+-   explanation: "用`{if}`条件语句进行选择。"
     demo_code: |-
         颜色 {is} {ask} '你最喜欢的颜色是什么？'
         {if} 颜色 {is} 绿色 {print} '漂亮！' {else} {print} '呵呵'
     name: '{if}'
 -   name: '{if} 条件语句与海龟绘图'
-    explanation: 用`{if}`条件语句进行选择
+    explanation: 用`{if}`条件语句进行选择。
     demo_code: "答案 {is} {ask} '我应该走多远？'\n{if} 答案 {is} 距离远至 {forward} 100 {else} {forward} 5"
 -   name: '{in}'
-    explanation: 用 `{in}`检查元素
+    explanation: 用 `{in}`检查元素。
     demo_code: "漂亮_颜色 {is} 绿色，黄色\n颜色 {is} {ask} '什么 {is} 你最喜欢的颜色？'\n{if} 颜色 {in} 漂亮_颜色 {print} '漂亮！' {else} {print} '呵呵'"
 6:
--   explanation: "打印的内容要用单引号标注清楚"
+-   explanation: "打印的内容要用引号标注清楚。"
     demo_code: "{print} '5乘以5等于 5 * 5'"
     name: '{print}'
 -   explanation: "用{ask} 提问计算题的答案然后检查答案是否正确。"

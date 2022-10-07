@@ -69,6 +69,14 @@ class TestsLevel12(HedyTester):
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
+
+    def test_print_subtraction_with_text(self):
+        code = "print 'And the winner is ' 5 - 5"
+        expected = "print(f'''And the winner is {5 - 5}''')"
+        output = 'And the winner is 0'
+
+        self.multi_level_tester(max_level=17, code=code, expected=expected, output=output)
+
     def test_print_list_random(self):
         code = textwrap.dedent("""\
             numbers is 1, 2, 4
@@ -281,6 +289,158 @@ class TestsLevel12(HedyTester):
             print(f'''{var + 5}''')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=17)
+
+    #
+    # forward tests
+    #
+    def test_forward_with_integer_variable(self):
+        code = textwrap.dedent("""\
+            a is 50
+            forward a""")
+        expected = HedyTester.dedent(
+            "a = 50",
+            HedyTester.forward_transpiled('a'))
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            extra_check_function=self.is_turtle(),
+        )
+
+    def test_forward_with_string_variable_gives_type_error(self):
+        code = textwrap.dedent("""\
+            a is "ten"
+            forward a""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.InvalidArgumentTypeException,
+        )
+
+    def test_forward_with_list_access_random(self):
+        code = textwrap.dedent("""\
+        directions is 10, 100, 360
+        forward directions at random""")
+
+        expected = HedyTester.dedent("""\
+        directions = [10, 100, 360]""",
+        HedyTester.forward_transpiled('random.choice(directions)'))
+
+        self.multi_level_tester(
+            max_level=15,
+            code=code,
+            expected=expected,
+            extra_check_function=self.is_turtle(),
+        )
+
+    #
+    # turn
+    #
+    def test_turn_with_number_var(self):
+        code = textwrap.dedent("""\
+            direction is 70
+            turn direction""")
+        expected = HedyTester.dedent(
+            "direction = 70",
+            HedyTester.turn_transpiled('direction'))
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            extra_check_function=self.is_turtle()
+        )
+
+    def test_turn_with_non_latin_number_var(self):
+        code = textwrap.dedent("""\
+        الزاوية هو ٩٠
+        استدر الزاوية
+        تقدم ١٠٠""")
+        expected = textwrap.dedent("""\
+        الزاوية = 90
+        trtl = الزاوية
+        try:
+          trtl = int(trtl)
+        except ValueError:
+          raise Exception(f'While running your program the command <span class="command-highlighted">turn</span> received the value <span class="command-highlighted">{trtl}</span> which is not allowed. Try changing the value to a number.')
+        t.right(min(600, trtl) if trtl > 0 else max(-600, trtl))
+        trtl = 100
+        try:
+          trtl = int(trtl)
+        except ValueError:
+          raise Exception(f'While running your program the command <span class="command-highlighted">forward</span> received the value <span class="command-highlighted">{trtl}</span> which is not allowed. Try changing the value to a number.')
+        t.forward(min(600, trtl) if trtl > 0 else max(-600, trtl))
+        time.sleep(0.1)""")
+
+        self.multi_level_tester(
+            code=code,
+            lang='ar',
+            expected=expected,
+            extra_check_function=self.is_turtle()
+        )
+
+    def test_turn_with_string_var_gives_type_error(self):
+        code = textwrap.dedent("""\
+            direction is 'ten'
+            turn direction""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.InvalidArgumentTypeException,
+        )
+
+    def test_turn_with_non_ascii_var(self):
+        code = textwrap.dedent("""\
+            ángulo is 90
+            turn ángulo""")
+        expected = HedyTester.dedent(
+            "ángulo = 90",
+            HedyTester.turn_transpiled('ángulo'))
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            extra_check_function=self.is_turtle(),
+            expected_commands=['is', 'turn']
+        )
+
+    def test_turn_with_list_access_random(self):
+        code = textwrap.dedent("""\
+        directions is 10, 100, 360
+        turn directions at random""")
+
+        expected = HedyTester.dedent("""\
+        directions = [10, 100, 360]""",
+        HedyTester.turn_transpiled('random.choice(directions)'))
+
+        self.multi_level_tester(
+            max_level=15,
+            code=code,
+            expected=expected,
+            extra_check_function=self.is_turtle(),
+        )
+
+    def test_ask_forward(self):
+        code = textwrap.dedent("""\
+        afstand is ask 'hoe ver dan?'
+        forward afstand""")
+
+        expected = HedyTester.dedent("""\
+            afstand = input(f'''hoe ver dan?''')
+            try:
+              afstand = int(afstand)
+            except ValueError:
+              try:
+                afstand = float(afstand)
+              except ValueError:
+                pass""",
+            HedyTester.forward_transpiled('afstand'))
+
+        self.multi_level_tester(
+            max_level=17,
+            code=code,
+            expected=expected,
+            extra_check_function=self.is_turtle()
+        )
 
     #
     # ask tests

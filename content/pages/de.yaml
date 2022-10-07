@@ -30,10 +30,12 @@ sections:
         text: |
             Hedy ist webbasiert, d.h. es funktioniert auf jedem Gerät mit einem Browser (Chrome, Firefox, Edge usw.), so dass Laptops, ChromeBuhks, Tablets und sogar Smartphones geeignet sind, um Hedy zu verwenden.
             Sie müssen nichts herunterladen, bevor Sie mit Hedy arbeiten, gehen Sie einfach auf die Website und schon können Sie loslegen!
+    -   title: Die Hedy Community
+        text: "All Hedy teachers, programmers and other fans are welcome to join our [Discord server](https://discord.gg/8yY7dEme9r). This is the ideal place to chat about Hedy: we have channels where you can show your cool projects and lessons, channels to report bugs, and channels to chat with other teachers and with the Hedy team.\n"
 -   title: "Vorbereitungen"
     key: "vorbereitungen"
     subsections:
-    -   title: "Programme speichern"
+    -   title: "Klasse Anlegen"
         text: |
             Sobald Sie eingeloggt sind, sehen Sie das blaue Banner mit "Mein Profil" und "Meine Programme".
             In "Meine Programme" finden Sie alle Programme, die Sie gespeichert haben.
@@ -57,7 +59,7 @@ sections:
         text: |
             You can start your lessons by activating your students' prior knowledge: What do they already know about the subject, what did they learn in the previous lesson and which mistakes did they make that they've now learned from?
             This way all the previously learned commands and frequently made mistakes are fresh in your students' memories, when you strat introducing the new lesson.
-    -   title: "Introduction of new concepts and commands"
+    -   title: "Einführung in neue Konzepte und Befehle"
         text: |
             The new concepts and commands can be very hard for some students to fully understand.
             That's why it's of importance to model the proper use of the new commands to your students.
@@ -77,7 +79,7 @@ sections:
             To test whether your students have picked up all the new info in the level, you can let them make the quiz.
             The quiz contains 10 multiple choice questions about the new concepts and command to that level.
             Not every level has a quiz yet, as we are still building the quizzes.
-    -   title: "Evaluation"
+    -   title: "Auswertung"
         text: |
             Round up your lesson by having a brief evaluation. What did the students learn? Which hardships did they come across?
             How did they learn from their mistakes? And of course: What did they create?
@@ -91,25 +93,25 @@ sections:
     levels:
     -   level: '1'
         sections:
-        -   title: "Students forget to type commandos"
+        -   title: "Schüler vergessen Befehle einzugeben"
             example:
                 error_text: |
-                    For example they type a sentence without using print.
+                    Beispielsweise schreiben sie einen Satz ohne den print Befehl.
                 error_code: |
-                    Hedy can't print this
+                    Hedy kann das nicht ausgeben
                 solution_text: |
-                    Teach your students to always start a line of code with a command.
+                    Lehre deinen Schülern eine Zeile immer mit einem Befehl zu starten.
                 solution_code: |
                     print Hedy can print this!
-        -   title: "Students use capitals when typing commands"
+        -   title: "Schüler schreiben Befehle in Großbuchstaben"
             example:
                 error_text: |
-                    Commands won't work if they are in capitals.
+                    Befehle funktionieren nicht mit Großbuchstaben.
                 error_code: |
-                    Ask Why does my code fail?
-                    Print Because I'm using capitals.
+                    Frage warum schlägt mein Code fehl? 
+                    Print Weil Ich Großbuchstaben benutze.
                 solution_text: |
-                    Remove the capitals.
+                    Entferne die Großbuchstaben.
                 solution_code: |
                     ask Why does my code work now?
                     print Because I removed the capitals!
@@ -710,7 +712,6 @@ learn-more-sections:
 -   title: "Gefällt dir Hedy?"
     text: |
         Wir hören gerne von dir!
-
         [Klick hier, um uns eine Nachricht zu senden](mailto:hello@hedy.org "Über Hedy")
 -   title: "Einen Fehler gefunden?"
     text: |
@@ -727,9 +728,6 @@ learn-more-sections:
         Möchtest du mehr über Hedy erfahren? Schau dir diesen Vortrag an, den Felienne auf der European Code Week 2020 gehalten hat (dieses Video ist nur auf Englisch verfügbar):
 
         <iframe width="560" height="315" class="mx-auto mt-4" src="https://www.youtube.com/embed/R2U9MEowYag?wmode=opaque" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
--   title: "Forschungsarbeit über Hedy"
-    text: |
-        Möchtest du noch mehr erfahren? Lies die [Forschungsarbeit](https://www.felienne.com/wp-content/uploads/2020/07/Hedy_paper_website_draft.pdf) über Hedys Design.
 start-sections:
 -   title: "Was ist eine mitwachsende Programmiersprache?"
     text: |
@@ -761,3 +759,11 @@ start-sections:
 -   title: "Muss ich etwas installieren?"
     text: |-
         Nein. Hedy funktioniert im Browser, also in dem Programm, mit dem du diese Seite ansiehst. Wahrscheinlich Chrome oder Edge oder Firefox. Hedy funktioniert auch auf dem Handy oder Tablet.
+join-sections:
+-   text: "# There are three ways in which you can support Hedy!\n"
+-   title: Improving the language
+    text: "The gradual and multi-lingual nature of Hedy create a lot of interesting technical challenges.\nFind those issues on [Github](https://github.com/Felienne/hedy/issues?q=is%3Aopen+is%3Aissue+label%3Alanguage).\n"
+-   title: Translating Hedy
+    text: "Not a programmer? No problem! Another way to support Hedy is by [translating keywords, error messages, adventures are other content](https://github.com/Felienne/hedy/blob/main/TRANSLATING.md)\n\nThis is the current status, help us complete a language, or add a new one!\n<a href=\"https://hosted.weblate.org/engage/hedy/\">\n<img src=\"https://hosted.weblate.org/widgets/hedy/-/multi-auto.svg\" alt=\"Translation status\" /></a>\n"
+-   title: Help teachers get started
+    text: "Hedy is designed to support teachers in providing programming lessons in class. We have specific teacher features like the option to create a class, customize it and see how your students are doing.\nIf you like Hedy, you can reach out to schools that you know to help teachers get started! We can help you find schools or teachers via [Discord](https://discord.gg/8yY7dEme9r).\n"

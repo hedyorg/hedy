@@ -1,28 +1,23 @@
 # coding=utf-8
-import ast
 import copy
 
-from website import auth, parsons
-from website import statistics
-from website import quiz
-from website import admin
-from website import teacher
-from website import programs
+from website import (
+    auth_pages, classes, profile, parsons, statistics, quiz, admin, for_teachers, programs,
+)
 import utils
 from utils import timems, load_yaml_rt, dump_yaml_rt, version, is_debug_mode
 from website.log_fetcher import log_fetcher
-from website.auth import current_user, login_user_from_token_cookie, requires_login, is_admin, is_teacher, update_is_teacher
+from website.auth import current_user, login_user_from_token_cookie, requires_login, is_admin, is_teacher
 from website.yaml_file import YamlFile
 from website import querylog, aws_helpers, jsonbin, translating, ab_proxying, cdn, database, achievements
 import hedy_translation
 from hedy_content import COUNTRIES, ALL_LANGUAGES, ALL_KEYWORD_LANGUAGES, NON_LATIN_LANGUAGES, NON_BABEL
 import hedyweb
 import hedy_content
-from flask_babel import gettext
-from flask_babel import Babel
+from flask_babel import gettext, Babel
 from flask_compress import Compress
 from flask_helpers import render_template
-from flask import Flask, request, jsonify, session, abort, g, redirect, Response, make_response, Markup, send_file, \
+from flask import Flask, g, request, jsonify, session, abort, redirect, Response, make_response, Markup, send_file, \
     after_this_request, send_from_directory
 from config import config
 from werkzeug.urls import url_encode
@@ -75,8 +70,8 @@ for lang in ALL_LANGUAGES.keys():
     TUTORIALS[lang] = hedy_content.Tutorials(lang)
 
 ACHIEVEMENTS_TRANSLATIONS = hedyweb.AchievementTranslations()
-ACHIEVEMENTS = achievements.Achievements()
 DATABASE = database.Database()
+ACHIEVEMENTS = achievements.Achievements(DATABASE, ACHIEVEMENTS_TRANSLATIONS)
 
 # We retrieve these once on server-start: Would be nice to automate this somewhere in the future (06/22)
 PUBLIC_PROGRAMS = DATABASE.get_all_public_programs()
@@ -182,10 +177,12 @@ def initialize_session():
       that cookie (copy the user info into the session for efficient access
       later on).
     """
+    # Set the database object on the global object (auth.py needs it)
+    g.db = DATABASE
+
     # Invoke session_id() for its side effect
     utils.session_id()
     login_user_from_token_cookie()
-
 
 if os.getenv('IS_PRODUCTION'):
     @app.before_request
@@ -480,6 +477,10 @@ def prepare_dst_file():
         with t.running_stitch(stitch_length=20):
         """)
     lines = transpiled_code.code.split("\n")
+
+    # remove all sleeps for speeed, and remove all colors for compatibility:
+    lines = [x for x in lines if (not "time.sleep" in x) and (not "t.pencolor" in x)]
+
     threader += "  " + "\n  ".join(lines)
     threader += "\n" + 't.save("dst_files/' + filename + '.dst")'
     if not os.path.isdir('dst_files'):
@@ -821,6 +822,9 @@ def index(level, program_id):
     else:
         adventures = load_adventures_per_level(level, g.keyword_lang)
 
+    # Initially all levels are available -> strip those for which conditions are not met or not available yet
+    available_levels = list(range(1, hedy.HEDY_MAX_LEVEL + 1))
+
     customizations = {}
     if current_user()['username']:
         customizations = DATABASE.get_student_class_customizations(current_user()['username'])
@@ -838,6 +842,36 @@ def index(level, program_id):
     if 'levels' in customizations and level not in available_levels:
         return utils.error_page(error=403, ui_message=gettext('level_not_class'))
 
+    # At this point we can have the following scenario:
+    # - The level is allowed and available
+    # - But, if there is a quiz threshold we have to check again if the user has reached it
+
+    if 'level_thresholds' in customizations:
+        if 'quiz' in customizations.get('level_thresholds'):
+            # Temporary store the threshold
+            threshold = customizations.get('level_thresholds').get('quiz')
+            # Get the max quiz score of the user in the previous level
+            # A bit out-of-scope, but we want to enable the next level button directly after finishing the quiz
+            # Todo: How can we fix this without a re-load?
+            quiz_stats = DATABASE.get_quiz_stats([current_user()['username']])
+            if level > 1:
+                scores = [x.get('scores', []) for x in quiz_stats if x.get('level') == level - 1]
+                scores = [score for week_scores in scores for score in week_scores]
+                max_score = 0 if len(scores) < 1 else max(scores)
+                if max_score < threshold:
+                    return utils.error_page(error=403, ui_message=gettext('quiz_threshold_not_reached'))
+
+            # We also have to check if the next level should be removed from the available_levels
+            if level < hedy.HEDY_MAX_LEVEL:
+                scores = [x.get('scores', []) for x in quiz_stats if x.get('level') == level]
+                scores = [score for week_scores in scores for score in week_scores]
+                max_score = 0 if len(scores) < 1 else max(scores)
+                # We don't have the score yet for the next level -> remove all upcoming levels from 'available_levels'
+                if max_score < threshold:
+                    available_levels = available_levels[:available_levels.index(level)+1]
+
+    # Add the available levels to the customizations dict -> simplify implementation on the front-end
+    customizations['available_levels'] = available_levels
     cheatsheet = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
 
     teacher_adventures = []
@@ -862,6 +896,8 @@ def index(level, program_id):
 
     parsons = True if PARSONS[g.lang].get_parsons_data_for_level(level) else False
     quiz = True if QUIZZES[g.lang].get_quiz_data_for_level(level) else False
+    tutorial = True if TUTORIALS[g.lang].get_tutorial_for_level(level) else False
+
     quiz_questions = 0
     parson_exercises = 0
 
@@ -888,6 +924,7 @@ def index(level, program_id):
         adventures=adventures,
         parsons=parsons,
         parsons_exercises=parson_exercises,
+        tutorial=tutorial,
         customizations=customizations,
         hide_cheatsheet=hide_cheatsheet,
         enforce_developers_mode=enforce_developers_mode,
@@ -939,7 +976,7 @@ def view_program(user, id):
     # Everything below this line has nothing to do with this page and it's silly
     # that every page needs to put in so much effort to re-set it
 
-    return render_template("view-program-page.html", **arguments_dict)
+    return render_template("view-program-page.html", blur_button_available = True, **arguments_dict)
 
 
 @app.route('/adventure/<name>', methods=['GET'], defaults={'level': 1})
@@ -1083,6 +1120,11 @@ def main_page(page):
         learn_more_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
         return render_template('learn-more.html', papers=hedy_content.RESEARCH, page_title=gettext('title_learn-more'),
                                current_page='learn-more', content=learn_more_translations)
+
+    if page == 'join':
+        join_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
+        return render_template('join.html', page_title=gettext('title_learn-more'),
+                               current_page='join', content=join_translations)
 
     if page == 'privacy':
         privacy_translations = hedyweb.PageTranslations(
@@ -1602,7 +1644,7 @@ def teacher_invitation(code):
     if not user['username']:
         return render_template('teacher-invitation.html')
 
-    update_is_teacher(user)
+    admin.update_is_teacher(DATABASE, user)
     # When visiting this link we update the current user to a teacher -> also update user in session
     session.get('user')['is_teacher'] = True
 
@@ -1610,42 +1652,19 @@ def teacher_invitation(code):
     url = request.url.replace(f'/invite/{code}', '/for-teachers')
     return redirect(url)
 
-# *** AUTH ***
-
-
-auth.routes(app, DATABASE)
-
-# *** PROGRAMS BACKEND ***
-
-programs.routes(app, DATABASE, ACHIEVEMENTS)
-
-# *** TEACHER BACKEND ***
-
-teacher.routes(app, DATABASE, ACHIEVEMENTS)
-
-# *** ADMIN BACKEND ***
-
-admin.routes(app, DATABASE)
-
-# *** ACHIEVEMENTS BACKEND ***
-
-ACHIEVEMENTS.routes(app, DATABASE)
-
-# *** QUIZ BACKEND ***
-
-quiz.routes(app, DATABASE, ACHIEVEMENTS, QUIZZES)
-
-# *** PARSONS BACKEND ***
-
-parsons.routes(app, DATABASE, ACHIEVEMENTS, PARSONS)
-
-
-# *** STATISTICS ***
-
-statistics.routes(app, DATABASE)
+app.register_blueprint(auth_pages.AuthModule(DATABASE))
+app.register_blueprint(profile.ProfileModule(DATABASE))
+app.register_blueprint(programs.ProgramsModule(DATABASE, ACHIEVEMENTS))
+app.register_blueprint(for_teachers.ForTeachersModule(DATABASE, ACHIEVEMENTS))
+app.register_blueprint(classes.ClassModule(DATABASE, ACHIEVEMENTS))
+app.register_blueprint(classes.MiscClassPages(DATABASE, ACHIEVEMENTS))
+app.register_blueprint(admin.AdminModule(DATABASE))
+app.register_blueprint(achievements.AchievementsModule(ACHIEVEMENTS))
+app.register_blueprint(quiz.QuizModule(DATABASE, ACHIEVEMENTS, QUIZZES))
+app.register_blueprint(parsons.ParsonsModule(PARSONS))
+app.register_blueprint(statistics.StatisticsModule(DATABASE))
 
 # *** START SERVER ***
-
 
 def on_server_start():
     """Called just before the server is started, both in developer mode and on Heroku.

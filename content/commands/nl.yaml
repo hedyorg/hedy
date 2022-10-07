@@ -35,7 +35,7 @@
         kleur {is} {ask} Wat is je lievelingskleur?
         {print} kleur is je lievelingskleur!
 -   name: "{sleep}"
-    explanation: "Laat Hedy voor een (paar) seconde(n) pauzeren."
+    explanation: "`{sleep}` laat Hedy voor een (paar) seconde(n) pauzeren."
     demo_code: |-
         {print} Laat me even een seconde nadenken...
         {sleep}
@@ -55,12 +55,12 @@
         dieren {is} hond, kat, kangoeroe
         {print} dieren {at} {random}
 -   name: "{add}"
-    explanation: "Voeg iets toe aan een lijst."
+    explanation: "`{add}` iets `{to_list}` een lijst."
     demo_code: |-
         dieren {is} kat, koe
         {add} hond {to_list} dieren
 -   name: "{remove}"
-    explanation: "Verwijder iets van een lijst."
+    explanation: "`{remove}` iets `{from}` een lijst."
     demo_code: |-
         dieren {is} hond, kat, koe
         {remove} hond {from} dieren
@@ -262,7 +262,7 @@
             {print} 'Dan ben je ouder dan ik!'
 15:
 -   name: "{while}"
-    explanation: "We kunnen dus een `{while}` loop gebruiken met `{!=}`."
+    explanation: "We kunnen dus een `{while}` loop gebruiken met `!=`."
     demo_code: |-
         antwoord = 0
         {while} antwoord != 25

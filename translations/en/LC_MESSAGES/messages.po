@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-09-20 20:53+0200\n"
+"POT-Creation-Date: 2022-10-06 11:26+0200\n"
 "PO-Revision-Date: 2022-07-03 15:50+0000\n"
 "Last-Translator: Mark Giesen <markgiesen@outlook.com>\n"
 "Language: en\n"
@@ -16,7 +16,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.10.3\n"
+"Generated-By: Babel 2.10.1\n"
 
 msgid "program_contains_error"
 msgstr "This program contains an error, are you sure you want to share it?"
@@ -47,6 +47,9 @@ msgstr "No such Hedy program!"
 
 msgid "level_not_class"
 msgstr "This level has not been made available in your class yet"
+
+msgid "quiz_threshold_not_reached"
+msgstr "Quiz threshold not reached to unlock this level"
 
 msgid "no_such_adventure"
 msgstr "This adventure doesn't exist!"
@@ -100,11 +103,10 @@ msgid "invalid_tutorial_step"
 msgstr "Invalid tutorial step"
 
 msgid "tutorial_title_not_found"
-msgstr "We couldn't find that page!"
+msgstr "Tutorial step not found"
 
-#, fuzzy
 msgid "tutorial_message_not_found"
-msgstr "You have received an invitation to join class"
+msgstr "We couldn't find the requested tutorial step..."
 
 msgid "ajax_error"
 msgstr "There was an error, please try again."
@@ -547,11 +549,23 @@ msgstr "Select own adventures"
 msgid "select"
 msgstr "Select"
 
-msgid "other_settings"
-msgstr "Other settings"
+msgid "unlock_thresholds"
+msgstr "Unlock level thresholds"
 
 msgid "option"
 msgstr "Option"
+
+msgid "value"
+msgstr "Value"
+
+msgid "quiz_score"
+msgstr "Quiz score"
+
+msgid "percentage"
+msgstr "percentage"
+
+msgid "other_settings"
+msgstr "Other settings"
 
 msgid "mandatory_mode"
 msgstr "Mandatory developer's mode"
@@ -614,7 +628,7 @@ msgid "my_classes"
 msgstr "My classes"
 
 msgid "students"
-msgstr "Students"
+msgstr "students"
 
 msgid "view"
 msgstr "View"
@@ -680,7 +694,7 @@ msgid "parsons_title"
 msgstr "Puzzle"
 
 msgid "quiz_tab"
-msgstr "End quiz"
+msgstr "Quiz"
 
 msgid "specific_adventure_mode"
 msgstr "You're currently in adventure '{adventure}', click on 'Hedy' to view all adventures."
@@ -870,6 +884,9 @@ msgstr "Save code"
 
 msgid "share_code_button"
 msgstr "Save & share code"
+
+msgid "tutorial"
+msgstr "Tutorial"
 
 msgid "try_button"
 msgstr "Try"
@@ -1129,20 +1146,8 @@ msgstr "Reset password"
 msgid "password_repeat"
 msgstr "Repeat password"
 
-msgid "signup_student_or_teacher"
-msgstr "Are you a student or a teacher?"
-
-msgid "student"
-msgstr "Student"
-
-msgid "already_account"
-msgstr "Already have an account?"
-
-msgid "create_student_account"
-msgstr "Create an account"
-
-msgid "create_student_account_explanation"
-msgstr ""
+msgid "create_account_explanation"
+msgstr "Having your own account allows you to save your programs."
 
 msgid "programming_experience"
 msgstr "Do you have programming experience?"
@@ -1165,11 +1170,8 @@ msgstr "I agree to the"
 msgid "privacy_terms"
 msgstr "privacy terms"
 
-msgid "create_teacher_account"
-msgstr "Create a teacher account"
-
-msgid "create_teacher_account_explanation"
-msgstr "When you apply for a teacher's account, we will manually verify it before the features are unlocked. This can take a few days. Once your account is approved, you will be able to create classes, invite your students to join them, and make the class all yours with your own lesson plans. You will also be able to customize the class: open and close levels, enable the quizzes and cheatsheets"
+msgid "already_account"
+msgstr "Already have an account?"
 
 msgid "teacher_invitation_require_login"
 msgstr "To set up your profile as a teacher, we will need you to log in. If you don't have an account, please create one."
@@ -1186,6 +1188,15 @@ msgstr "Hedy - Administrator page"
 msgid "username_invalid"
 msgstr "Your username is invalid."
 
+msgid "teacher_invalid"
+msgstr "Your teacher value is invalid."
+
+msgid "email_invalid"
+msgstr "Please enter a valid email."
+
+msgid "mail_error_change_processed"
+msgstr "Something went wrong when sending a validation mail, the changes are still correctly processed."
+
 msgid "username_special"
 msgstr "Username cannot contain `:` or `@`."
 
@@ -1197,87 +1208,6 @@ msgstr "Your password is invalid."
 
 msgid "passwords_six"
 msgstr "All passwords need to be six characters or longer."
-
-msgid "email_invalid"
-msgstr "Please enter a valid email."
-
-msgid "mail_error_change_processed"
-msgstr "Something went wrong when sending a validation mail, the changes are still correctly processed."
-
-msgid "invalid_username_password"
-msgstr "Invalid username/password."
-
-msgid "repeat_match_password"
-msgstr "The repeated password does not match."
-
-msgid "language_invalid"
-msgstr "Please select a valid language."
-
-msgid "agree_invalid"
-msgstr "You have to agree with the privacy terms."
-
-msgid "keyword_language_invalid"
-msgstr "Please select a valid keyword language (select English or your own language)."
-
-msgid "year_invalid"
-msgstr "Please enter a year between 1900 and {current_year}."
-
-msgid "gender_invalid"
-msgstr "Please select a valid gender, choose (Female, Male, Other)."
-
-msgid "country_invalid"
-msgstr "Please select a valid country."
-
-msgid "experience_invalid"
-msgstr "Please select a valid experience, choose (Yes, No)."
-
-msgid "programming_invalid"
-msgstr "Please select a valid programming language."
-
-msgid "exists_username"
-msgstr "That username is already in use."
-
-msgid "exists_email"
-msgstr "That email is already in use."
-
-msgid "token_invalid"
-msgstr "Your token is invalid."
-
-msgid "password_six"
-msgstr "Your password must contain at least six characters."
-
-msgid "password_change_not_allowed"
-msgstr "You're not allowed to change the password of this user."
-
-msgid "password_change_success"
-msgstr "Password of your student is successfully changed."
-
-msgid "password_updated"
-msgstr "Password updated."
-
-msgid "profile_updated_reload"
-msgstr "Profile updated, page will be re-loaded."
-
-msgid "profile_updated"
-msgstr "Profile updated."
-
-msgid "sent_password_recovery"
-msgstr "You should soon receive an email with instructions on how to reset your password."
-
-msgid "password_resetted"
-msgstr "Your password has been successfully reset. You are being redirected to the login page."
-
-msgid "already_teacher"
-msgstr "You already have a teacher account."
-
-msgid "already_teacher_request"
-msgstr "You already have a pending teacher request."
-
-msgid "teacher_account_success"
-msgstr "You successfully requested a teacher account."
-
-msgid "teacher_invalid"
-msgstr "Your teacher value is invalid."
 
 msgid "mail_welcome_verify_body"
 msgstr ""
@@ -1352,8 +1282,182 @@ msgstr "Please copy and paste this link into a new tab:"
 msgid "link"
 msgstr "Link"
 
+msgid "invalid_username_password"
+msgstr "Invalid username/password."
+
+msgid "repeat_match_password"
+msgstr "The repeated password does not match."
+
+msgid "language_invalid"
+msgstr "Please select a valid language."
+
+msgid "agree_invalid"
+msgstr "You have to agree with the privacy terms."
+
+msgid "keyword_language_invalid"
+msgstr "Please select a valid keyword language (select English or your own language)."
+
+msgid "year_invalid"
+msgstr "Please enter a year between 1900 and {current_year}."
+
+msgid "gender_invalid"
+msgstr "Please select a valid gender, choose (Female, Male, Other)."
+
+msgid "country_invalid"
+msgstr "Please select a valid country."
+
+msgid "experience_invalid"
+msgstr "Please select a valid experience, choose (Yes, No)."
+
+msgid "programming_invalid"
+msgstr "Please select a valid programming language."
+
+msgid "exists_username"
+msgstr "That username is already in use."
+
+msgid "exists_email"
+msgstr "That email is already in use."
+
+msgid "token_invalid"
+msgstr "Your token is invalid."
+
+msgid "password_six"
+msgstr "Your password must contain at least six characters."
+
+msgid "password_change_not_allowed"
+msgstr "You're not allowed to change the password of this user."
+
+msgid "password_change_success"
+msgstr "Password of your student is successfully changed."
+
+msgid "password_updated"
+msgstr "Password updated."
+
+msgid "sent_password_recovery"
+msgstr "You should soon receive an email with instructions on how to reset your password."
+
+msgid "password_resetted"
+msgstr "Your password has been successfully reset. You are being redirected to the login page."
+
+msgid "already_teacher"
+msgstr "You already have a teacher account."
+
+msgid "already_teacher_request"
+msgstr "You already have a pending teacher request."
+
+msgid "teacher_account_success"
+msgstr "You successfully requested a teacher account."
+
+msgid "only_teacher_create_class"
+msgstr "Only teachers are allowed to create classes!"
+
+msgid "class_name_invalid"
+msgstr "This class name is invalid."
+
+msgid "class_name_empty"
+msgstr "You didn't enter a class name!"
+
+msgid "class_name_duplicate"
+msgstr "You already have a class with this name."
+
+msgid "no_such_class"
+msgstr "No such Hedy class."
+
+msgid "invalid_class_link"
+msgstr "Invalid link for joining the class."
+
+msgid "title_join-class"
+msgstr "Hedy - Join class"
+
+msgid "retrieve_class_error"
+msgstr "Only teachers can retrieve classes"
+
+msgid "username_empty"
+msgstr "You didn't enter an username!"
+
+msgid "student_not_existing"
+msgstr "This username doesn't exist."
+
+msgid "student_already_in_class"
+msgstr "This student is already in your class."
+
+msgid "student_already_invite"
+msgstr "This student already has a pending invitation."
+
+msgid "title_class-overview"
+msgstr "Hedy - Class overview"
+
+msgid "title_customize-class"
+msgstr "Hedy - Customize class"
+
+msgid "customization_deleted"
+msgstr "Customizations successfully deleted."
+
+msgid "class_customize_success"
+msgstr "Class successfully customized."
+
+msgid "no_accounts"
+msgstr "There are no accounts to create."
+
+msgid "unique_usernames"
+msgstr "All usernames need to be unique."
+
+msgid "usernames_exist"
+msgstr "One or more usernames is already in use."
+
+msgid "accounts_created"
+msgstr "Accounts where successfully created."
+
+msgid "retrieve_adventure_error"
+msgstr "You're not allowed to view this adventure!"
+
+msgid "title_view-adventure"
+msgstr "Hedy - View adventure"
+
+msgid "title_customize-adventure"
+msgstr "Hedy - Customize adventure"
+
+msgid "adventure_id_invalid"
+msgstr "This adventure id is invalid."
+
+msgid "adventure_name_invalid"
+msgstr "This adventure name is invalid."
+
+msgid "level_invalid"
+msgstr "This Hedy level in invalid."
+
+msgid "content_invalid"
+msgstr "This adventure is invalid."
+
+msgid "adventure_length"
+msgstr "Your adventure has to be at least 20 characters."
+
+msgid "public_invalid"
+msgstr "This agreement selection is invalid"
+
+msgid "classes_invalid"
+msgstr "The list of selected classes is invalid"
+
+msgid "adventure_duplicate"
+msgstr "You already have an adventure with this name."
+
+msgid "something_went_wrong_keyword_parsing"
+msgstr "There is a mistake in your adventure, are all keywords correctly surrounded with { }?"
+
+msgid "adventure_updated"
+msgstr "The adventure has been updated!"
+
+msgid "adventure_empty"
+msgstr "You didn't enter an adventure name!"
+
 msgid "exercise_doesnt_exist"
 msgstr "This exercise doesn't exist"
+
+msgid "profile_updated_reload"
+msgstr "Profile updated, page will be re-loaded."
+
+msgid "profile_updated"
+msgstr "Profile updated."
 
 msgid "delete_success"
 msgstr "Program deleted successfully."
@@ -1385,9 +1489,6 @@ msgstr "This program does not exist or is not public"
 msgid "report_success"
 msgstr "This program has been reported"
 
-msgid "level_invalid"
-msgstr "This Hedy level in invalid."
-
 msgid "question_doesnt_exist"
 msgstr "This question does not exist"
 
@@ -1402,115 +1503,10 @@ msgstr "Your password is invalid."
 msgid "too_many_attempts"
 msgstr "Too many attempts"
 
-msgid "retrieve_class_error"
-msgstr "Only teachers can retrieve classes"
-
-msgid "no_such_class"
-msgstr "No such Hedy class."
-
 msgid "title_class statistics"
 msgstr "My statistics"
 
 #, fuzzy
 msgid "title_class logs"
 msgstr "Programs"
-
-msgid "title_class-overview"
-msgstr "Hedy - Class overview"
-
-msgid "only_teacher_create_class"
-msgstr "Only teachers are allowed to create classes!"
-
-msgid "class_name_invalid"
-msgstr "This class name is invalid."
-
-msgid "class_name_empty"
-msgstr "You didn't enter a class name!"
-
-msgid "class_name_duplicate"
-msgstr "You already have a class with this name."
-
-msgid "invalid_class_link"
-msgstr "Invalid link for joining the class."
-
-msgid "title_join-class"
-msgstr "Hedy - Join class"
-
-msgid "title_customize-class"
-msgstr "Hedy - Customize class"
-
-msgid "customization_deleted"
-msgstr "Customizations successfully deleted."
-
-msgid "class_customize_success"
-msgstr "Class successfully customized."
-
-msgid "username_empty"
-msgstr "You didn't enter an username!"
-
-msgid "student_not_existing"
-msgstr "This username doesn't exist."
-
-msgid "student_already_in_class"
-msgstr "This student is already in your class."
-
-msgid "student_already_invite"
-msgstr "This student already has a pending invitation."
-
-msgid "no_accounts"
-msgstr "There are no accounts to create."
-
-msgid "unique_usernames"
-msgstr "All usernames need to be unique."
-
-msgid "usernames_exist"
-msgstr "One or more usernames is already in use."
-
-msgid "accounts_created"
-msgstr "Accounts where successfully created."
-
-msgid "retrieve_adventure_error"
-msgstr "You're not allowed to view this adventure!"
-
-msgid "title_view-adventure"
-msgstr "Hedy - View adventure"
-
-msgid "title_customize-adventure"
-msgstr "Hedy - Customize adventure"
-
-msgid "adventure_id_invalid"
-msgstr "This adventure id is invalid."
-
-msgid "adventure_name_invalid"
-msgstr "This adventure name is invalid."
-
-msgid "content_invalid"
-msgstr "This adventure is invalid."
-
-msgid "adventure_length"
-msgstr "Your adventure has to be at least 20 characters."
-
-msgid "public_invalid"
-msgstr "This agreement selection is invalid"
-
-msgid "classes_invalid"
-msgstr "The list of selected classes is invalid"
-
-msgid "adventure_duplicate"
-msgstr "You already have an adventure with this name."
-
-msgid "something_went_wrong_keyword_parsing"
-msgstr "There is a mistake in your adventure, are all keywords correctly surrounded with { }?"
-
-msgid "adventure_updated"
-msgstr "The adventure has been updated!"
-
-msgid "adventure_empty"
-msgstr "You didn't enter an adventure name!"
-
-msgid "teachers"
-msgstr "Teachers"
-
-msgid "create_account_explanation"
-msgstr "You can save your own programs with an account."
 

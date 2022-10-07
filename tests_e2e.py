@@ -177,7 +177,7 @@ class AuthHelper(unittest.TestCase):
 
         method = 'put' if put_data else 'post'
         response = request(method, path, body=body, cookies=cookies)
-        self.assertEqual(response['code'], expect_http_code, f'While {method}ing {body} to {path} (user: {self.username})')
+        self.assertEqual(response['code'], expect_http_code, f'While {method}ing {body} to {path} (user: {self.username}). Response: {response["body"]}')
 
         return response['headers'] if return_headers else response['body']
 
@@ -195,7 +195,7 @@ class AuthHelper(unittest.TestCase):
         cookies = self.user_cookies[self.username] if self.username and not no_cookie else None
         response = request('get', path, body='', cookies=cookies)
 
-        self.assertEqual(response['code'], expect_http_code, f'While reading {path} (user: {self.username})')
+        self.assertEqual(response['code'], expect_http_code, f'While reading {path} (user: {self.username}). Response: {response["body"]}')
 
         return response['headers'] if return_headers else response['body']
 
@@ -878,7 +878,7 @@ class TestProgram(AuthHelper):
 
         # WHEN retrieving own programs but without sending a cookie
         # THEN receive a forbidden response code from the server
-        self.get_data('programs_list', expect_http_code=403, no_cookie=True)
+        self.get_data('programs/list', expect_http_code=403, no_cookie=True)
 
     def test_get_programs(self):
         # GIVEN a logged in user
@@ -886,7 +886,7 @@ class TestProgram(AuthHelper):
 
         # WHEN retrieving own programs sending a cookie
         # THEN receive an OK response code from the server
-        body = self.get_data('programs_list')
+        body = self.get_data('programs/list')
 
         # THEN verify that the server sent a body that is an object of the shape `{programs:[...]}`.
         self.assertIsInstance(body, dict)
@@ -933,7 +933,7 @@ class TestProgram(AuthHelper):
         self.assertIsInstance(program['name'], str)
 
         # WHEN retrieving programs after saving a program
-        saved_programs = self.get_data('programs_list')['programs']
+        saved_programs = self.get_data('programs/list')['programs']
         print(saved_programs)
 
         # THEN verify that the program we just saved is in the list
@@ -984,7 +984,7 @@ class TestProgram(AuthHelper):
         # THEN receive an OK response code from the server
         self.post_data('programs/share', {'id': program_id, 'public': True, })
 
-        saved_programs = self.get_data('programs_list')['programs']
+        saved_programs = self.get_data('programs/list')['programs']
         for program in saved_programs:
             if program['id'] != program_id:
                 continue
@@ -1008,7 +1008,7 @@ class TestProgram(AuthHelper):
         # THEN receive an OK response code from the server
         self.post_data('programs/share', {'id': program_id, 'public': False})
 
-        saved_programs = self.get_data('programs_list')['programs']
+        saved_programs = self.get_data('programs/list')['programs']
         for program in saved_programs:
             if program['id'] != program_id:
                 continue
@@ -1042,7 +1042,7 @@ class TestProgram(AuthHelper):
         # THEN receive an OK response code from the server
         headers = self.post_data('programs/delete/', {'id': program_id}, return_headers=True)
 
-        saved_programs = self.get_data('programs_list')['programs']
+        saved_programs = self.get_data('programs/list')['programs']
         for program in saved_programs:
             # THEN the program should not be any longer in the list of programs
             self.assertNotEqual(program['id'], program_id)
@@ -1335,20 +1335,20 @@ class TestCustomizeClasses(AuthHelper):
         class_id = self.get_data('classes')[0].get('id')
 
         valid_bodies = [
-            {'levels': [], 'adventures': {}, 'opening_dates': {}, 'teacher_adventures': [], 'other_settings': []},
-            {'levels': ['1'], 'adventures': {'story': ['1']}, 'opening_dates': {'1': '2022-03-16'}, 'teacher_adventures': [], 'other_settings': []},
+            {'levels': [], 'adventures': {}, 'opening_dates': {}, 'teacher_adventures': [], 'other_settings': [], 'level_thresholds': {}},
+            {'levels': ['1'], 'adventures': {'story': ['1']}, 'opening_dates': {'1': '2022-03-16'}, 'teacher_adventures': [], 'other_settings': [], 'level_thresholds': {}},
             {'levels': ['1', '2', '3'], 'opening_dates': {'1': '', '2': '', '3': ''},
              'adventures': {'story': [], 'parrot': [], 'songs': [], 'turtle': [], 'dishes': [], 'dice': [], 'rock': [],
                             'calculator': [], 'restaurant': [], 'fortune': [], 'haunted': [], 'piggybank': [],
                             'quizmaster': [], 'language': [], 'next': [], 'end': []}, 'teacher_adventures': [],
-             'other_settings': []},
+             'other_settings': [], 'level_thresholds': {}},
             {'levels': ['1', '2', '3'], 'opening_dates': {'1': '', '2': '', '3': ''},
              'adventures': {'story': ['1', '2', '3'], 'parrot': ['1', '2', '3'], 'songs': [], 'turtle': ['1', '2', '3'],
                             'dishes': ['3'], 'dice': ['3'], 'rock': ['1', '2', '3'], 'calculator': [],
                             'restaurant': ['1', '2', '3'], 'fortune': ['1', '3'], 'haunted': ['1', '2', '3'],
                             'piggybank': [], 'quizmaster': [], 'language': [], 'next': ['1', '2', '3'],
                             'end': ['1', '2', '3']}, 'teacher_adventures': [],
-             'other_settings': ['developers_mode', 'hide_cheatsheet']}
+             'other_settings': ['developers_mode', 'hide_cheatsheet'], 'level_thresholds': {}},
         ]
 
         for valid_body in valid_bodies:
@@ -1368,7 +1368,7 @@ class TestCustomizeClasses(AuthHelper):
 
         # WHEN creating class customizations
         # THEN receive an OK response code with the server
-        body = {'levels': [], 'adventures': {}, 'opening_dates': {}, 'teacher_adventures': [], 'other_settings': []}
+        body = {'levels': [], 'adventures': {}, 'opening_dates': {}, 'teacher_adventures': [], 'other_settings': [], 'level_thresholds': {}}
         self.post_data('for-teachers/customize-class/' + class_id, body, expect_http_code=200)
 
         # WHEN deleting class customizations

@@ -9,8 +9,8 @@ from website import querylog
 from website.auth import requires_login, is_admin, is_teacher, requires_admin
 
 import utils
-
-DATABASE = None
+from .database import Database
+from .website_module import WebsiteModule, route
 
 """The Key tuple is used to aggregate the raw data by level, time or username."""
 Key = namedtuple('Key', ['name', 'class_'])
@@ -26,17 +26,18 @@ class UserType(Enum):
     STUDENT = '@all-students'
 
 
-def routes(app, db):
-    global DATABASE
-    DATABASE = db
+class StatisticsModule(WebsiteModule):
+    def __init__(self, db: Database):
+        super().__init__('stats', __name__)
+        self.db = db
 
-    @app.route('/stats/class/<class_id>', methods=['GET'])
+    @route('/stats/class/<class_id>', methods=['GET'])
     @requires_login
-    def render_class_stats(user, class_id):
+    def render_class_stats(self, user, class_id):
         if not is_teacher(user) and not is_admin(user):
             return utils.error_page(error=403, ui_message=gettext('retrieve_class_error'))
 
-        class_ = DATABASE.get_class(class_id)
+        class_ = self.db.get_class(class_id)
         if not class_ or (class_['teacher'] != user['username'] and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext('no_such_class'))
 
@@ -44,13 +45,13 @@ def routes(app, db):
         return render_template('class-stats.html', class_info={'id': class_id, 'students': students},
                                current_page='my-profile', page_title=gettext('title_class statistics'))
 
-    @app.route('/logs/class/<class_id>', methods=['GET'])
+    @route('/logs/class/<class_id>', methods=['GET'])
     @requires_login
-    def render_class_logs(user, class_id):
+    def render_class_logs(self, user, class_id):
         if not is_teacher(user) and not is_admin(user):
             return utils.error_page(error=403, ui_message=gettext('retrieve_class_error'))
 
-        class_ = DATABASE.get_class(class_id)
+        class_ = self.db.get_class(class_id)
         if not class_ or (class_['teacher'] != user['username'] and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext('no_such_class'))
 
@@ -58,19 +59,19 @@ def routes(app, db):
         return render_template('class-logs.html', class_info={'id': class_id, 'students': students},
                                current_page='my-profile', page_title=gettext('title_class logs'))
 
-    @app.route('/class-stats/<class_id>', methods=['GET'])
+    @route('/class-stats/<class_id>', methods=['GET'])
     @requires_login
-    def get_class_stats(user, class_id):
+    def get_class_stats(self, user, class_id):
         start_date = request.args.get('start', default=None, type=str)
         end_date = request.args.get('end', default=None, type=str)
 
-        cls = DATABASE.get_class(class_id)
+        cls = self.db.get_class(class_id)
         students = cls.get('students', [])
         if not cls or not students or (cls['teacher'] != user['username'] and not is_admin(user)):
             return 'No such class or class empty', 403
 
-        program_data = DATABASE.get_program_stats(students, start_date, end_date)
-        quiz_data = DATABASE.get_quiz_stats(students, start_date, end_date)
+        program_data = self.db.get_program_stats(students, start_date, end_date)
+        quiz_data = self.db.get_quiz_stats(students, start_date, end_date)
         data = program_data + quiz_data
 
         per_level_data = _aggregate_for_keys(data, [level_key])
@@ -90,15 +91,15 @@ def routes(app, db):
         }
         return jsonify(response)
 
-    @app.route('/program-stats', methods=['GET'])
+    @route('/program-stats', methods=['GET'])
     @requires_admin
-    def get_program_stats(user):
+    def get_program_stats(self, user):
         start_date = request.args.get('start', default=None, type=str)
         end_date = request.args.get('end', default=None, type=str)
 
         ids = [e.value for e in UserType]
-        program_runs_data = DATABASE.get_program_stats(ids, start_date, end_date)
-        quiz_data = DATABASE.get_quiz_stats(ids, start_date, end_date)
+        program_runs_data = self.db.get_program_stats(ids, start_date, end_date)
+        quiz_data = self.db.get_quiz_stats(ids, start_date, end_date)
         data = program_runs_data + quiz_data
 
         per_level_data = _aggregate_for_keys(data, [level_key])
@@ -120,7 +121,8 @@ def add(username, action):
         all_id = UserType.ANONYMOUS
         if username:
             action(username)
-            is_student = DATABASE.get_student_classes_ids(username) != []
+            # g.db instead of self.db since this function is not on a class
+            is_student = g.db.get_student_classes_ids(username) != []
             all_id = UserType.STUDENT if is_student else UserType.LOGGED
         action(all_id.value)
     except Exception as ex:
@@ -326,8 +328,9 @@ def _calc_error_rate(fail, success):
 
 
 def get_general_class_stats(students):
-    current_week = DATABASE.to_year_week(date.today())
-    data = DATABASE.get_program_stats(students, None, None)
+    # g.db instead of self.db since this function is not on a class
+    current_week = g.db.to_year_week(date.today())
+    data = g.db.get_program_stats(students, None, None)
     successes = 0
     errors = 0
     weekly_successes = 0

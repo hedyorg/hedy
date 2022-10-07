@@ -5,6 +5,8 @@ name: Automatically update JavaScript bundle
 on:
   push:
     branches: [ main ]
+  pull_request_target:
+    branches: [ main ]
 
 jobs:
   update_javascript:
@@ -23,7 +25,7 @@ jobs:
         npm ci
 
     - name: Compile TypeScript to JavaScript
-      run: build-tools/heroku/generate-typescript
+      run: build-tools/heroku/generate-grammars-and-js
 
     - name: Commit changed files
       uses: stefanzweifel/git-auto-commit-action@v2.3.0
