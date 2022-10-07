@@ -225,3 +225,16 @@ When you have your PR accepted into `main`, that version will be deployed on [he
 
 We do periodic deploys of `main` to the [production version](https://hedy.org) of Hedy.
 
+Accessing logs 
+-----------------------
+
+We store programs for logging purposes on s3. If you want to access the logs, you can use this command (if you have AWS access, mainly this is a note to self for Felienne!):
+
+`aws s3 sync s3://hedy-parse-logs/hedy-beta/ .`
+
+Likely you will have to first set your AWS credentials using:
+
+`aws configure`
+
+You can fetch these credentials here: https://console.aws.amazon.com/iam/home?#security_credential
+
