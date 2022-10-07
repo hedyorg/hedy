@@ -34,10 +34,11 @@
         {% if not is_teacher == None %}
         <form id="signup_form" class="js-validated-form flex flex-col gap-2">
             <h2 class="my-0 text-center">{{ _('create_teacher_account') if is_teacher else _('create_student_account') }}</h2>
-            <h4 class="text-blue-500 mt-0 mb-0 text-center">{{_('create_account_explanation')}} </h4>
 
             {% if is_teacher %}
-            <p class="m-auto mt-0 mb-2 max-w-md text-center">{{_('create_teacher_account_explanation')}} </p>
+            <h4 class="text-blue-500 mt-0 mb-0 text-center">{{_('create_teacher_account_explanation')}} </h4>
+            {% else %}
+            <h4 class="text-blue-500 mt-0 mb-0 text-center">{{_('create_student_account_explanation')}} </h4>
             {% endif %}
 
             <div class="signup-container">
@@ -169,8 +170,12 @@
                 </div>
             </div>
             <div class="flex flex-row items-center justify-center px-4 md:px-8 gap-4">
+
+            {% if is_teacher %}
                 <input type="checkbox" id="agree_third_party" name="agree_third_party">
                 <label class="w-96 text-center" for="agree_third_party">{{_('agree_third_party')}}</label>
+            {% endif %}
+
             </div>
             <div class="flex">
                 <button type="submit" class="green-btn mx-auto">{{_('create_account')}}</button>
