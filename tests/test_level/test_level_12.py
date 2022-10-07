@@ -443,6 +443,30 @@ class TestsLevel12(HedyTester):
         )
 
     #
+    # Test comment
+    #
+    def test_print_comment(self):
+        code = "print 'Hallo welkom bij Hedy!' # This is a comment"
+        expected = "print(f'''Hallo welkom bij Hedy!''')"
+        output = 'Hallo welkom bij Hedy!'
+
+        self.multi_level_tester(
+            max_level=17,
+            code=code,
+            expected=expected,
+            output=output
+        )
+
+    def test_assign_comment(self):
+        code = 'test = "Welkom bij Hedy" # This is a comment'
+        expected = "test = 'Welkom bij Hedy'"
+        self.multi_level_tester(
+            max_level=18,
+            code=code,
+            expected=expected
+        )
+
+    #
     # ask tests
     #
     def test_ask_number_answer(self):
