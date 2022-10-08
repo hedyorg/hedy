@@ -133,7 +133,8 @@ class AuthModule(WebsiteModule):
         if not is_testing_request(request) and 'subscribe' in body and body['subscribe'] is True:
             # If we have a Mailchimp API key, we use it to add the subscriber through the API
             if MAILCHIMP_API_URL:
-                mailchimp_subscribe_user(user['email'])
+                role = 'teacher' if body['is_teacher'] is True else 'student'
+                mailchimp_subscribe_user(user['email'], body['country'], role)
             # Otherwise, we send an email to notify about the subscription to the main email address
             else:
                 send_email(config['email']['sender'], 'Subscription to Hedy newsletter on signup', user['email'],
