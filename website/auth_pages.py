@@ -130,7 +130,7 @@ class AuthModule(WebsiteModule):
         # We receive the pre-processed user and response package from the function
         user, resp = self.store_new_account(body, body['email'].strip().lower())
 
-        if not is_testing_request(request) and 'subscribe' in body and body['subscribe'] is True:
+        if not is_testing_request(request) and 'subscribe' in body:
             # If we have a Mailchimp API key, we use it to add the subscriber through the API
             if MAILCHIMP_API_URL:
                 role = 'teacher' if body['is_teacher'] is True else 'student'
