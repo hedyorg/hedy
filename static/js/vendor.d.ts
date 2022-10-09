@@ -13,6 +13,9 @@ declare const Sk: {
   execStart: date;
   execLimit: number;
   globals: Record<string, Variable>;
+  main_canvas: HTMLCanvasElement;
+  builtin;
+  abstr;
 
   builtinFiles?: {
     files: Record<string, string>;
