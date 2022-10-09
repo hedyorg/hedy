@@ -938,7 +938,7 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
   outputDiv.append(variables);
 
   const storage = window.localStorage;
-  let skulptExternalLibraries = {};
+  let skulptExternalLibraries:{[index: string]:any} = {};
   let debug = storage.getItem("debugLine");
 
   Sk.pre = "output";
@@ -1221,38 +1221,40 @@ function initCanvas4PyGame() {
 
     let div1 = document.createElement("div");
 
-    currentTarget.appendChild(div1);
-    $(div1).addClass("modal");
-    $(div1).css("text-align", "center");
+    if (currentTarget !== null) {
+      currentTarget.appendChild(div1);
+      $(div1).addClass("modal");
+      $(div1).css("text-align", "center");
 
-    let div2 = document.createElement("div");
-    $(div2).addClass("modal-dialog modal-lg");
-    $(div2).css("display", "inline-block");
-    $(div2).width(self.width + 42);
-    $(div2).attr("role", "document");
-    div1.appendChild(div2);
+      let div2 = document.createElement("div");
+      $(div2).addClass("modal-dialog modal-lg");
+      $(div2).css("display", "inline-block");
+      $(div2).width(self.width + 42);
+      $(div2).attr("role", "document");
+      div1.appendChild(div2);
 
-    let div3 = document.createElement("div");
-    $(div3).addClass("modal-content");
-    div2.appendChild(div3);
+      let div3 = document.createElement("div");
+      $(div3).addClass("modal-content");
+      div2.appendChild(div3);
 
-    let div4 = document.createElement("div");
-    $(div4).addClass("modal-header d-flex justify-content-between");
-    let div5 = document.createElement("div");
-    $(div5).addClass("modal-body");
-    let div6 = document.createElement("div");
-    $(div6).addClass("modal-footer");
-    let div7 = document.createElement("div");
-    $(div7).addClass("col-md-8");
-    let div8 = document.createElement("div");
-    $(div8).addClass("col-md-4");
+      let div4 = document.createElement("div");
+      $(div4).addClass("modal-header d-flex justify-content-between");
+      let div5 = document.createElement("div");
+      $(div5).addClass("modal-body");
+      let div6 = document.createElement("div");
+      $(div6).addClass("modal-footer");
+      let div7 = document.createElement("div");
+      $(div7).addClass("col-md-8");
+      let div8 = document.createElement("div");
+      $(div8).addClass("col-md-4");
 
-    div3.appendChild(div4);
-    div3.appendChild(div5);
-    div3.appendChild(div6);
+      div3.appendChild(div4);
+      div3.appendChild(div5);
+      div3.appendChild(div6);
 
-    Sk.main_canvas.style.border = "none";
-    div5.appendChild(Sk.main_canvas);
+      Sk.main_canvas.style.border = "none";
+      div5.appendChild(Sk.main_canvas);
+    }
 }
 
 function initSkulpt4Pygame() {
