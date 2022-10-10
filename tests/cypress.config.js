@@ -8,6 +8,7 @@ module.exports = defineConfig({
     },
   },
   env: {
-    base_url: "localhost:8080"
+    base_url: "localhost:8080",
+    hedy_url: "localhost:8080/hedy"
   }
 });
