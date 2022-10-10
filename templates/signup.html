@@ -158,7 +158,7 @@
             <div class="border border-gray-400 rounded-lg mx-4 px-4 md:px-8 flex flex-col gap-1 py-2">
                 <div class="flex flex-row justify-between items-center hidden">
                     <label for="is_teacher">{{_('request_teacher')}}</label>
-                    <input type="checkbox" id="is_teacher" name="is_teacher" {{ "checked" if is_teacher else "" }}>
+                    <input type="checkbox" id="is_teacher" name="is_teacher" {% if is_teacher %}checked{% endif %}>
                 </div>
                 <div class="flex flex-row justify-between items-center">
                     <label for="subscribe">{{_('subscribe_newsletter')}}</label>
