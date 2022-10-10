@@ -31,7 +31,7 @@
         </div>
         {% endif %}
 
-        {% if not is_teacher == None %}
+        {% else %}
         <form id="signup" class="js-validated-form flex flex-col gap-2">
             <h2 class="my-0 text-center">{{ _('create_teacher_account') if is_teacher else _('create_student_account') }}</h2>
 
