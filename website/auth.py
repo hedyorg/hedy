@@ -317,6 +317,7 @@ def send_email_template(template, email, link=None, username=gettext('user')):
 
 # By default, emails are sent in the locale of the logged-in user.
 # This function is to be used if the email needs to be sent in another locale.
+# For example when an action by a logged in admin (like oking a teacher's account) triggers an email
 def send_localized_email_template(locale, template, email, link=None, username=None):
     with force_locale(locale):
         if username is None:
