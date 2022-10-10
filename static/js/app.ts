@@ -973,7 +973,7 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
   if (hasPygame){
     skulptExternalLibraries = {
       './pygame.js': {
-        path: "/vendor/pygame_4_skulpt/__init__.js",
+        path: "/vendor/pygame_4_skulpt/init.js",
       },
       './display.js': {
         path: "/vendor/pygame_4_skulpt/display.js",
