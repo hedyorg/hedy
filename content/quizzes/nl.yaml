@@ -1584,10 +1584,6 @@ levels:
             question_score: '10'
         6:
             question_text: "Welke code hoort bij deze uitvoer?"
-            code: |
-              Welkom bij restaurant Hedy
-              Hamburger
-              Frietjes
             mp_choice_options:
             -   option: |
                     {print} 'Welkom bij restaurant Hedy'
@@ -1642,83 +1638,83 @@ levels:
         8:
             question_text: "In welke code wordt er goed ingesprongen?"
             mp_choice_options:
-              - option: |
-                  ```
-                  {if} antwoord {is} 32
-                     {print} 'Je hebt het...'
+            -   option: |
+                    ```
+                    {if} antwoord {is} 32
+                       {print} 'Je hebt het...'
+                          {sleep}
+                              {print} 'goed!'
+                          {else}
+                              {print} 'Je hebt het fout!'
+                    ```
+                feedback: "Je hebt het fout!"
+            -   option: |
+                    ```
+                    {if} antwoord {is} 32
+                    {print} 'Je hebt het...'
+                    {sleep}
+                    {print} 'goed!'
+                    {else}
+                    {print} 'Je hebt het fout!'
+                    ```
+                feedback: "Je hebt het fout!"
+            -   option: |
+                    ```
+                    {if} antwoord {is} 32
+                        {print} 'Je hebt het...'
                         {sleep}
-                            {print} 'goed!'
-                        {else}
-                            {print} 'Je hebt het fout!'
-                  ```
-                feedback: "Je hebt het fout!"
-              - option: |
-                  ```
-                  {if} antwoord {is} 32
-                  {print} 'Je hebt het...'
-                  {sleep}
-                  {print} 'goed!'
-                  {else}
-                  {print} 'Je hebt het fout!'
-                  ```
-                feedback: "Je hebt het fout!"
-              - option: |
-                  ```
-                  {if} antwoord {is} 32
-                      {print} 'Je hebt het...'
-                      {sleep}
-                      {print} 'goed!'
-                  {else}
-                      {print} 'Je hebt het fout!'
-                  ```
+                        {print} 'goed!'
+                    {else}
+                        {print} 'Je hebt het fout!'
+                    ```
                 feedback: "Je hebt het... goed!"
-              - option: |
-                  ```
-                  {if} antwoord {is} 32
-                      {print} 'Je hebt het...'
-                      {sleep}
-                  {print} 'goed!'
-                  {else}
-                      {print} 'Je hebt het fout!'
-                  ```
+            -   option: |
+                    ```
+                    {if} antwoord {is} 32
+                        {print} 'Je hebt het...'
+                        {sleep}
+                    {print} 'goed!'
+                    {else}
+                        {print} 'Je hebt het fout!'
+                    ```
                 feedback: "You are wrong!"
             correct_answer: "C"
             hint: "What should happen if the person is right? And what else?"
             question_score: '10'
         9:
-          question_text: "Bij welke regel in deze code moet worden ingesprongen?"
-          code: |-
-            1 muziek = {ask} 'Welk genre muziek vind jij leuk?'
-            2 {if} muziek {is} rock
-            3 {print} '🤘'
-            4 {else}
-            5 {print} '👎'
-          mp_choice_options:
-            - option: "Regel 2 en 4"
-              feedback: "De regels na een `{if}` en `{else}` commando moeten beginnen met 4 spaties"
-            - option: "Alleen regel 3"
-              feedback: "Niet alleen regel 3"
-            - option: "Regel 3, 4 en 5"
-              feedback: "Regel 4 niet"
-            - option: "Regel 3 en 5"
-              feedback: "Great job!"
-          correct_answer: "D"
-          hint: "De regels na een `{if}` en `{else}` commando moeten beginnen met 4 spaties."
-          question_score: '10'
+            question_text: "Bij welke regel in deze code moet worden ingesprongen?"
+            code: |-
+                1 muziek = {ask} 'Welk genre muziek vind jij leuk?'
+                2 {if} muziek {is} rock
+                3 {print} '🤘'
+                4 {else}
+                5 {print} '👎'
+            mp_choice_options:
+            -   option: "Regel 2 en 4"
+                feedback: "De regels na een `{if}` en `{else}` commando moeten beginnen met 4 spaties"
+            -   option: "Alleen regel 3"
+                feedback: "Niet alleen regel 3"
+            -   option: "Regel 3, 4 en 5"
+                feedback: "Regel 4 niet"
+            -   option: "Regel 3 en 5"
+                feedback: "Great job!"
+            correct_answer: "D"
+            hint: "De regels na een `{if}` en `{else}` commando moeten beginnen met 4 spaties."
+            question_score: '10'
         10:
             question_text: "Wat is waar?"
             code: |-
-              1 level = {ask} 'Op welk level ben je?'
-              2 {if} level {is} 8
-              3 {print} 'Super!'
+                1 level = {ask} 'Op welk level ben je?'
+                2 {if} level {is} 8
+                3 {print} 'Super!'
             mp_choice_options:
-              - option: "Alle regels moeten beginnen met 4 spaties"
+            -   option: "Alle regels moeten beginnen met 4 spaties"
                 feedback: "Dat is niet waar"
-              - option: "Regel 2 en 4 moeten beginnen met 4 spaties"
+            -   option: "Regel 2 en 4 moeten beginnen met 4 spaties"
                 feedback: "Dat is niet waar"
-              - option: "Regel 2 moet beginnen met 4 spaties"
+            -   option: "Regel 2 moet beginnen met 4 spaties"
                 feedback: "Dat is niet waar"
-              - option: "Regel 3 moeten beginnen met 4 spaties"
+            -   option: "Regel 3 moeten beginnen met 4 spaties"
                 feedback: "Dat klopt!"
             correct_answer: "D"
             hint: "Slechts één regel begint met 4 spaties. Maar welke...?"
