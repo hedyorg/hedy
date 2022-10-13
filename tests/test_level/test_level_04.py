@@ -256,6 +256,30 @@ class TestsLevel4(HedyTester):
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
     #
+    # Test comment
+    #
+    def test_print_comment(self):
+        code = "print 'Hallo welkom bij Hedy!' # This is a comment"
+        expected = "print(f'Hallo welkom bij Hedy!')"
+        output = 'Hallo welkom bij Hedy!'
+
+        self.multi_level_tester(
+            max_level=11,
+            code=code,
+            expected=expected,
+            output=output
+        )
+
+    def test_assign_comment(self):
+        code = 'test is "Welkom bij Hedy" # This is a comment'
+        expected = 'test = \'"Welkom bij Hedy" \''
+        self.multi_level_tester(
+            max_level=11,
+            code=code,
+            expected=expected
+        )
+
+    #
     # ask tests
     #
     def test_ask_single_quoted_text(self):
@@ -537,7 +561,7 @@ class TestsLevel4(HedyTester):
             HedyTester.forward_transpiled('afstand'))
 
         self.multi_level_tester(
-            max_level=self.max_turtle_level,
+            max_level=11,
             code=code,
             expected=expected,
             extra_check_function=self.is_turtle()

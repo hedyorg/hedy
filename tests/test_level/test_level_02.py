@@ -1,5 +1,6 @@
 import hedy
 import textwrap
+from hedy import Command
 from parameterized import parameterized
 from tests.Tester import HedyTester
 
@@ -149,6 +150,31 @@ class TestsLevel2(HedyTester):
         self.multi_level_tester(code=code, expected=expected, max_level=3)
 
     #
+    # Test comment
+    #
+    def test_print_comment(self):
+        code = "print Hallo welkom bij Hedy! # This is a comment"
+        expected = "print(f'Hallo welkom bij Hedy!')"
+        output = 'Hallo welkom bij Hedy!'
+
+        self.multi_level_tester(
+            max_level=3,
+            code=code,
+            expected=expected,
+            output=output,
+            expected_commands=[Command.print]
+        )
+
+    def test_assign_comment(self):
+        code = "test is Welkom bij Hedy # This is a comment"
+        expected = "test = 'Welkom bij Hedy '"
+        self.multi_level_tester(
+            max_level=3,
+            code=code,
+            expected=expected
+        )
+
+    #
     # ask tests
     #
     def test_ask(self):
@@ -224,7 +250,7 @@ class TestsLevel2(HedyTester):
             code=code,
             expected=expected,
             extra_check_function=self.is_turtle(),
-            max_level=self.max_turtle_level,
+            max_level=11,
         )
 
     def test_forward_with_string_variable_gives_type_error(self):
@@ -235,7 +261,7 @@ class TestsLevel2(HedyTester):
         self.multi_level_tester(
             code=code,
             exception=hedy.exceptions.InvalidArgumentTypeException,
-            max_level=self.max_turtle_level,
+            max_level=11,
         )
 
     #
@@ -248,8 +274,7 @@ class TestsLevel2(HedyTester):
         self.multi_level_tester(
             code=code,
             expected=expected,
-            extra_check_function=self.is_turtle(),
-            max_level=self.max_turtle_level,
+            extra_check_function=self.is_turtle()
         )
 
     def test_turn_negative_number(self):
@@ -259,8 +284,7 @@ class TestsLevel2(HedyTester):
         self.multi_level_tester(
             code=code,
             expected=expected,
-            extra_check_function=self.is_turtle(),
-            max_level=self.max_turtle_level,
+            extra_check_function=self.is_turtle()
         )
 
     def test_turn_with_number_var(self):
@@ -275,12 +299,12 @@ class TestsLevel2(HedyTester):
             code=code,
             expected=expected,
             extra_check_function=self.is_turtle(),
-            max_level=self.max_turtle_level,
+            max_level=11
         )
 
     def test_turn_with_non_latin_number_var(self):
         code = textwrap.dedent("""\
-        الزاوية هي ٩٠
+        الزاوية هو ٩٠
         استدر الزاوية
         تقدم ١٠٠""")
         expected = textwrap.dedent("""\
@@ -304,7 +328,7 @@ class TestsLevel2(HedyTester):
             lang='ar',
             expected=expected,
             extra_check_function=self.is_turtle(),
-            max_level=self.max_turtle_level,
+            max_level=11,
         )
 
     def test_one_turn_with_text_gives_type_error(self):
@@ -312,8 +336,7 @@ class TestsLevel2(HedyTester):
 
         self.multi_level_tester(
             code=code,
-            exception=hedy.exceptions.InvalidArgumentTypeException,
-            max_level=self.max_turtle_level,
+            exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
     @parameterized.expand(['left', 'right'])
@@ -322,7 +345,7 @@ class TestsLevel2(HedyTester):
         self.multi_level_tester(
             code=code,
             exception=hedy.exceptions.InvalidArgumentTypeException,
-            max_level=self.max_turtle_level,
+            max_level=11
         )
 
     def test_access_before_assign_not_allowed(self):
@@ -340,7 +363,7 @@ class TestsLevel2(HedyTester):
         self.multi_level_tester(
             code=code,
             exception=hedy.exceptions.InvalidArgumentTypeException,
-            max_level=self.max_turtle_level,
+            max_level=11,
         )
 
     def test_turn_with_non_ascii_var(self):
@@ -356,7 +379,7 @@ class TestsLevel2(HedyTester):
             expected=expected,
             extra_check_function=self.is_turtle(),
             expected_commands=['is', 'turn'],
-            max_level=self.max_turtle_level,
+            max_level=11,
         )
 
     # issue #792
@@ -365,7 +388,7 @@ class TestsLevel2(HedyTester):
         self.multi_level_tester(
             code=code,
             exception=hedy.exceptions.InvalidArgumentException,
-            max_level=self.max_turtle_level,
+            max_level=11,
         )
 
     # color tests
@@ -377,7 +400,7 @@ class TestsLevel2(HedyTester):
             code=code,
             expected=expected,
             extra_check_function=self.is_turtle(),
-            max_level=self.max_turtle_level
+            max_level=10
         )
 
     def test_color_with_var(self):
@@ -393,7 +416,7 @@ class TestsLevel2(HedyTester):
             code=code,
             expected=expected,
             extra_check_function=self.is_turtle(),
-            max_level=self.max_turtle_level
+            max_level=10
         )
 
     def test_color_translated(self):
@@ -405,7 +428,7 @@ class TestsLevel2(HedyTester):
             expected=expected,
             extra_check_function=self.is_turtle(),
             lang='nl',
-            max_level=self.max_turtle_level
+            max_level=10
         )
 
     def test_color_with_number_gives_type_error(self):
@@ -413,7 +436,7 @@ class TestsLevel2(HedyTester):
         self.multi_level_tester(
             code=code,
             exception=hedy.exceptions.InvalidArgumentTypeException,
-            max_level=self.max_turtle_level,
+            max_level=10,
         )
 
     #

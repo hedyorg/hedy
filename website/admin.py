@@ -2,7 +2,7 @@ from flask_babel import gettext
 from flask import request, g
 import hedyweb
 from website import statistics
-from website.auth import create_verify_link, current_user, is_admin, is_teacher, make_salt, password_hash, pick, requires_admin, send_email_template, password_hash
+from website.auth import create_verify_link, current_user, is_admin, is_teacher, make_salt, password_hash, pick, requires_admin, send_localized_email_template, password_hash
 from .database import Database
 import utils
 from flask_helpers import render_template
@@ -20,7 +20,7 @@ class AdminModule(WebsiteModule):
         # Todo TB: Why do we check for the testing_request here? (09-22)
         if not utils.is_testing_request(request) and not is_admin(current_user()):
             return utils.error_page(error=403, ui_message=gettext('unauthorized'))
-        return render_template('admin/admin.html', page_title=gettext('title_admin'))
+        return render_template('admin/admin.html', page_title=gettext('title_admin'), current_page='admin')
 
     @route('/users', methods=['GET'])
     @requires_admin
@@ -89,7 +89,7 @@ class AdminModule(WebsiteModule):
         return render_template('admin/admin-users.html', users=userdata, page_title=gettext('title_admin'),
                                 filter=category, start_date=start_date, end_date=end_date, text_filter=substring,
                                 language_filter=language, keyword_language_filter=keyword_language,
-                                next_page_token=users.next_page_token)
+                                next_page_token=users.next_page_token, current_page='admin')
 
     @route('/classes', methods=['GET'])
     @requires_admin
@@ -120,18 +120,18 @@ class AdminModule(WebsiteModule):
             "date": utils.localized_date_format(adventure.get('date'))
         } for adventure in all_adventures]
 
-
-        return render_template('admin/admin-adventures.html', adventures=adventures, page_title=gettext('title_admin'))
+        return render_template('admin/admin-adventures.html', adventures=adventures,
+                               page_title=gettext('title_admin'), current_page='admin')
 
     @route('/stats', methods=['GET'])
     @requires_admin
     def get_admin_stats_page(self, user):
-        return render_template('admin/admin-stats.html', page_title=gettext('title_admin'))
+        return render_template('admin/admin-stats.html', page_title=gettext('title_admin'), current_page='admin')
 
     @route('/logs', methods=['GET'])
     @requires_admin
     def get_admin_logs_page(self, user):
-        return render_template('admin/admin-logs.html', page_title=gettext('title_admin'))
+        return render_template('admin/admin-logs.html', page_title=gettext('title_admin'), current_page='admin')
 
     @route('/achievements', methods=['GET'])
     @requires_admin
@@ -150,9 +150,8 @@ class AdminModule(WebsiteModule):
             for achieved in user.get("achieved", []):
                 stats[achieved]["count"] += 1
 
-        return render_template('admin/admin-achievements.html', stats=stats,
+        return render_template('admin/admin-achievements.html', stats=stats, current_page='admin',
                                 total=total, page_title=gettext('title_admin'))
-
 
     @route('/markAsTeacher', methods=['POST'])
     def mark_as_teacher(self):
@@ -210,9 +209,9 @@ class AdminModule(WebsiteModule):
             resp = {'username': user['username'], 'token': hashed_token}
         else:
             try:
-                send_email_template(template='welcome_verify', email=body['email'],
-                                    link=create_verify_link(user['username'], hashed_token),
-                                    username=user['username'])
+                send_localized_email_template(locale=user['language'], template='welcome_verify', email=body['email'],
+                                              link=create_verify_link(user['username'], hashed_token),
+                                              username=user['username'])
             except:
                 return gettext('mail_error_change_processed'), 400
 
@@ -260,7 +259,7 @@ def update_is_teacher(db: Database, user, is_teacher_value=1):
 
     if user_becomes_teacher and not utils.is_testing_request(request):
         try:
-            send_email_template(template='welcome_teacher', email=user['email'], username=user['username'])
+            send_localized_email_template(locale=user['language'], template='welcome_teacher', email=user['email'], username=user['username'])
         except:
             print(f"An error occurred when sending a welcome teacher mail to {user['email']}, changes still processed")
 

@@ -17,7 +17,7 @@ If there are too many changes, Weblate might not be able to resolve them automat
 
 **Gather the commits from weblate by adding an extra remote to your local repo**
 
-`git remote add weblate https://hosted.weblate.org/git/hedy/web-texts/`
+`git remote add weblate https://hosted.weblate.org/git/hedy/adventures/`
 
 This enables us to contact the weblate repo.
 
@@ -36,4 +36,14 @@ Now with `git merge weblate/main` you can merge the Weblate commits into the cur
 **Push the fixed branch**
 
 Now push newbranchname and Weblate is happy again again, because it will see that all its commits are in the repo.
- 
+
+# Investigating double keys
+
+Sometimes Weblate gets angry because we accidentally repeat a certain key. Since Babel does not care about that, we only see this when we have merged into main and Weblate is updated. Maybe there is a setting that can fix that but for now, this little bash magic will also tell you where the problem lies:
+
+For the po files:
+`for x in */LC_MESSAGES/messages.po;do echo $x ; sort $x | uniq -c | grep "2 msgid"; done`
+
+For `messages.pot`:  
+`sort messages.pot | uniq -c | grep "2 msgid"`
+

@@ -1,17 +1,18 @@
+
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-25 10:29+0200\n"
-"PO-Revision-Date: 2022-08-29 07:56+0000\n"
+"POT-Creation-Date: 2022-10-13 13:47+0200\n"
+"PO-Revision-Date: 2022-10-06 18:47+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: nb_NO <LL@li.org>\n"
 "Language: nb_NO\n"
+"Language-Team: nb_NO <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=n != 1\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.14.1-dev\n"
+"Generated-By: Babel 2.9.1\n"
 
 msgid "program_contains_error"
 msgstr "Dette programmet inneholder en feil, er du sikker på at du vil dele det?"
@@ -42,6 +43,10 @@ msgstr "Dette Hedy programmet fins ikke!"
 
 msgid "level_not_class"
 msgstr "Klassen din har ikke tilgang til dette nivået enda"
+
+#, fuzzy
+msgid "quiz_threshold_not_reached"
+msgstr "Quiz threshold not reached to unlock this level"
 
 msgid "no_such_adventure"
 msgstr "Dette eventyret eksisterer ikke!"
@@ -438,6 +443,10 @@ msgid "create_accounts_prompt"
 msgstr "Er du sikker på at du vil opprette disse kontoene?"
 
 #, fuzzy
+msgid "class"
+msgstr "Class"
+
+#, fuzzy
 msgid "download_login_credentials"
 msgstr ""
 
@@ -446,6 +455,10 @@ msgstr "Ja"
 
 msgid "no"
 msgstr "Nei"
+
+#, fuzzy
+msgid "generate_passwords"
+msgstr "Generate passwords"
 
 msgid "reset_view"
 msgstr "Tilbakestill"
@@ -563,11 +576,27 @@ msgstr "Velg egne eventyr"
 msgid "select"
 msgstr "Velg"
 
-msgid "other_settings"
-msgstr "Andre innstillinger"
+#, fuzzy
+msgid "unlock_thresholds"
+msgstr "Unlock level thresholds"
 
 msgid "option"
 msgstr "Valg"
+
+#, fuzzy
+msgid "value"
+msgstr "Value"
+
+#, fuzzy
+msgid "quiz_score"
+msgstr "Quiz score"
+
+#, fuzzy
+msgid "percentage"
+msgstr "percentage"
+
+msgid "other_settings"
+msgstr "Andre innstillinger"
 
 msgid "mandatory_mode"
 msgstr "Obligatorisk utviklermodus"
@@ -716,9 +745,6 @@ msgstr "Hedy"
 #, fuzzy
 msgid "quiz_tab"
 msgstr "Quiz"
-
-msgid "specific_adventure_mode"
-msgstr "Du er for øyeblikket i eventyret '{adventure}', trykk på 'Hedy' for å se alle eventyr."
 
 msgid "example_code_header"
 msgstr "Eksempel Hedykode"
@@ -927,6 +953,10 @@ msgstr "Lagre kode"
 msgid "share_code_button"
 msgstr "Lagre og del koden"
 
+#, fuzzy
+msgid "tutorial"
+msgstr "Tutorial"
+
 msgid "try_button"
 msgstr "Prøv"
 
@@ -1047,6 +1077,9 @@ msgstr "Gutt"
 msgid "other"
 msgstr "Annet"
 
+msgid "agree_third_party"
+msgstr "Jeg godkjenner å bli kontaktet av partnere av Leiden Universitet med markedsføring (valgfritt)"
+
 msgid "update_profile"
 msgstr "Oppdater profil"
 
@@ -1076,9 +1109,11 @@ msgstr "Request teacher account"
 msgid "recent"
 msgstr "Mine siste programmer"
 
+#, fuzzy
 msgid "all"
 msgstr ""
 
+#, fuzzy
 msgid "submitted"
 msgstr ""
 
@@ -1197,8 +1232,26 @@ msgstr "Tilbakestill passord"
 msgid "password_repeat"
 msgstr "Gjenta passord"
 
-msgid "create_account_explanation"
-msgstr "Med en egen konto kan du lagre programmene dine."
+msgid "signup_student_or_teacher"
+msgstr ""
+
+msgid "student_signup_header"
+msgstr ""
+
+msgid "teacher_signup_header"
+msgstr ""
+
+msgid "create_teacher_account"
+msgstr ""
+
+msgid "create_student_account"
+msgstr ""
+
+msgid "create_teacher_account_explanation"
+msgstr ""
+
+msgid "create_student_account_explanation"
+msgstr ""
 
 msgid "programming_experience"
 msgstr "Har du programmeringserfaring?"
@@ -1221,9 +1274,6 @@ msgstr "Jeg godkjenner"
 msgid "privacy_terms"
 msgstr "personvernsvilkårene"
 
-msgid "agree_third_party"
-msgstr "Jeg godkjenner å bli kontaktet av partnere av Leiden Universitet med markedsføring (valgfritt)"
-
 msgid "already_account"
 msgstr "Har du allerede en konto?"
 
@@ -1243,6 +1293,16 @@ msgstr "Hedy - Administrator side"
 msgid "username_invalid"
 msgstr "Ditt brukernavn er ugylidig."
 
+msgid "teacher_invalid"
+msgstr "Lærer-verdien din er ugyldig."
+
+msgid "email_invalid"
+msgstr "Vennligst fyll inn en gylid epost."
+
+#, fuzzy
+msgid "mail_error_change_processed"
+msgstr "Something went wrong when sending a validation mail, the changes are still correctly processed."
+
 msgid "username_special"
 msgstr "Brukernavnet kan ikke inneholde `:` eller `@`."
 
@@ -1254,91 +1314,6 @@ msgstr "Passordet ditt er ugyldig."
 
 msgid "passwords_six"
 msgstr "Alle passord må være *minst* seks tegn langt."
-
-msgid "email_invalid"
-msgstr "Vennligst fyll inn en gylid epost."
-
-#, fuzzy
-msgid "mail_error_change_processed"
-msgstr "Something went wrong when sending a validation mail, the changes are still correctly processed."
-
-msgid "invalid_username_password"
-msgstr "Ugyldig brukernavn/passord."
-
-msgid "repeat_match_password"
-msgstr "Passordene du fylte inn er ikke like."
-
-msgid "language_invalid"
-msgstr "Vennligst velg et gylid språk."
-
-msgid "agree_invalid"
-msgstr "Du må godkjenne personvernsvilkårene."
-
-msgid "keyword_language_invalid"
-msgstr "Vennligst velg et gyldig språk for nøkkelord (velg ditt eget språk eller engelsk)."
-
-msgid "year_invalid"
-msgstr "Vennligst fyll inn et år mellom 1900 og {current_year}."
-
-msgid "gender_invalid"
-msgstr "Vennligst velg et gyldig kjønn (jente, gutt, annet)."
-
-msgid "country_invalid"
-msgstr "Vennligst velg et gyldig land."
-
-msgid "experience_invalid"
-msgstr "Vennligst velg svar på spørsmål om programmeringserfaring (Ja/Nei)."
-
-msgid "programming_invalid"
-msgstr "Vennligst velg et gyldig programmeringsspråk."
-
-msgid "exists_username"
-msgstr "Brukernavn er allerede i bruk."
-
-msgid "exists_email"
-msgstr "Eposten er allerede i bruk."
-
-msgid "token_invalid"
-msgstr "Ugylig token."
-
-msgid "password_six"
-msgstr "Passordet ditt må inneholde minst seks tegn."
-
-msgid "password_change_not_allowed"
-msgstr "Du har ikke lov til å endre passordet til denne brukeren."
-
-msgid "password_change_success"
-msgstr "Passordet til eleven din ble endret."
-
-msgid "password_updated"
-msgstr "Passord oppdatert."
-
-msgid "profile_updated_reload"
-msgstr "Profil oppdatert, siden lastes på nytt."
-
-msgid "profile_updated"
-msgstr "Profil oppdatert."
-
-msgid "sent_password_recovery"
-msgstr "Du vil snart motta en epost med instruksjoner om hvordan du tilbakestiller passordet ditt."
-
-msgid "password_resetted"
-msgstr "Passordet har blitt tilbakestilt. Du blir nå sendt til logg-inn siden."
-
-#, fuzzy
-msgid "already_teacher"
-msgstr "You already have a teacher account."
-
-#, fuzzy
-msgid "already_teacher_request"
-msgstr "You already have a pending teacher request."
-
-#, fuzzy
-msgid "teacher_account_success"
-msgstr "You successfully requested a teacher account."
-
-msgid "teacher_invalid"
-msgstr "Lærer-verdien din er ugyldig."
 
 #, fuzzy
 msgid "mail_welcome_verify_body"
@@ -1413,9 +1388,188 @@ msgstr "Please copy and paste this link into a new tab:"
 msgid "link"
 msgstr "Logg inn"
 
+msgid "invalid_username_password"
+msgstr "Ugyldig brukernavn/passord."
+
+msgid "repeat_match_password"
+msgstr "Passordene du fylte inn er ikke like."
+
+msgid "language_invalid"
+msgstr "Vennligst velg et gylid språk."
+
+msgid "agree_invalid"
+msgstr "Du må godkjenne personvernsvilkårene."
+
+msgid "keyword_language_invalid"
+msgstr "Vennligst velg et gyldig språk for nøkkelord (velg ditt eget språk eller engelsk)."
+
+msgid "year_invalid"
+msgstr "Vennligst fyll inn et år mellom 1900 og {current_year}."
+
+msgid "gender_invalid"
+msgstr "Vennligst velg et gyldig kjønn (jente, gutt, annet)."
+
+msgid "country_invalid"
+msgstr "Vennligst velg et gyldig land."
+
+msgid "experience_invalid"
+msgstr "Vennligst velg svar på spørsmål om programmeringserfaring (Ja/Nei)."
+
+msgid "programming_invalid"
+msgstr "Vennligst velg et gyldig programmeringsspråk."
+
+msgid "exists_username"
+msgstr "Brukernavn er allerede i bruk."
+
+msgid "exists_email"
+msgstr "Eposten er allerede i bruk."
+
+msgid "token_invalid"
+msgstr "Ugylig token."
+
+msgid "password_six"
+msgstr "Passordet ditt må inneholde minst seks tegn."
+
+msgid "password_change_not_allowed"
+msgstr "Du har ikke lov til å endre passordet til denne brukeren."
+
+msgid "password_change_success"
+msgstr "Passordet til eleven din ble endret."
+
+msgid "password_updated"
+msgstr "Passord oppdatert."
+
+msgid "sent_password_recovery"
+msgstr "Du vil snart motta en epost med instruksjoner om hvordan du tilbakestiller passordet ditt."
+
+msgid "password_resetted"
+msgstr "Passordet har blitt tilbakestilt. Du blir nå sendt til logg-inn siden."
+
+#, fuzzy
+msgid "already_teacher"
+msgstr "You already have a teacher account."
+
+#, fuzzy
+msgid "already_teacher_request"
+msgstr "You already have a pending teacher request."
+
+#, fuzzy
+msgid "teacher_account_success"
+msgstr "You successfully requested a teacher account."
+
+msgid "only_teacher_create_class"
+msgstr "Kun lærere kan opprette klasser!"
+
+msgid "class_name_invalid"
+msgstr "Klassenavnet er ugyldig."
+
+msgid "class_name_empty"
+msgstr "Du skrev ikke inn et klassenavn!"
+
+msgid "class_name_duplicate"
+msgstr "Du har allerede en klasse med dette navnet."
+
+msgid "no_such_class"
+msgstr "Denne Hedy-klassen fins ikke"
+
+msgid "invalid_class_link"
+msgstr "Ugyldig lenke for å bli med i klassen."
+
+msgid "title_join-class"
+msgstr "Hedy - Bli med i klassen"
+
+msgid "retrieve_class_error"
+msgstr "Kun lærere kan hente info om klasser"
+
+msgid "username_empty"
+msgstr "Du skrev ikke inn et brukernavn!"
+
+msgid "student_not_existing"
+msgstr "Dette brukernavnet eksisterer ikke."
+
+msgid "student_already_in_class"
+msgstr "Denne eleven er allerede del av klassen din."
+
+msgid "student_already_invite"
+msgstr "Denne eleven har allerede fått en invitasjon. Har de glemt å svare?"
+
+msgid "title_class-overview"
+msgstr "Hedy - Klasseoversikt"
+
+msgid "title_customize-class"
+msgstr "Hedy - Tilpass klasse"
+
+msgid "customization_deleted"
+msgstr "Tilpassningene ble slettet."
+
+msgid "class_customize_success"
+msgstr "Tilpassningene ble lagret."
+
+msgid "no_accounts"
+msgstr "Det er ingen oppgitte kontoer å opprette."
+
+msgid "unique_usernames"
+msgstr "Alle brukernavnene må være unike."
+
+msgid "usernames_exist"
+msgstr "Et eller flere brukernavn er allerede i bruk."
+
+msgid "accounts_created"
+msgstr "Kontoene ble opprettet."
+
+msgid "retrieve_adventure_error"
+msgstr "Du har ikke lov til å se dette eventyret!"
+
+msgid "title_view-adventure"
+msgstr "Hedy - Se eventyr"
+
+msgid "title_customize-adventure"
+msgstr "Hedy - Tilpass eventyr"
+
+msgid "adventure_id_invalid"
+msgstr "Eventyr IDen er ugyldig."
+
+msgid "adventure_name_invalid"
+msgstr "Eventyrnavnet er ugyldig."
+
+msgid "level_invalid"
+msgstr "Dette Hedynivået er ugyldig."
+
+msgid "content_invalid"
+msgstr "Eventyret er ugyldig."
+
+msgid "adventure_length"
+msgstr "Eventyret ditt må være minst 20 tegn."
+
+msgid "public_invalid"
+msgstr "Dette avtale valget er ugyldig"
+
+#, fuzzy
+msgid "classes_invalid"
+msgstr "The list of selected classes is invalid"
+
+msgid "adventure_duplicate"
+msgstr "Du har allerede et eventyr med dette navnet."
+
+#, fuzzy
+msgid "something_went_wrong_keyword_parsing"
+msgstr ""
+
+msgid "adventure_updated"
+msgstr "Eventyret har blitt oppdatert!"
+
+msgid "adventure_empty"
+msgstr "Du skrev ikke noe navn på eventyret!"
+
 #, fuzzy
 msgid "exercise_doesnt_exist"
 msgstr "This exercise doesn't exist"
+
+msgid "profile_updated_reload"
+msgstr "Profil oppdatert, siden lastes på nytt."
+
+msgid "profile_updated"
+msgstr "Profil oppdatert."
 
 msgid "delete_success"
 msgstr "Programmet ble slettet."
@@ -1449,9 +1603,6 @@ msgstr "This program does not exist or is not public"
 msgid "report_success"
 msgstr "This program has been reported"
 
-msgid "level_invalid"
-msgstr "Dette Hedynivået er ugyldig."
-
 #, fuzzy
 msgid "question_doesnt_exist"
 msgstr "This question does not exist"
@@ -1468,12 +1619,6 @@ msgstr "Passordet ditt er ugyldig."
 msgid "too_many_attempts"
 msgstr "Too many attempts"
 
-msgid "retrieve_class_error"
-msgstr "Kun lærere kan hente info om klasser"
-
-msgid "no_such_class"
-msgstr "Denne Hedy-klassen fins ikke"
-
 msgid "title_class statistics"
 msgstr "Min statistikk"
 
@@ -1481,113 +1626,6 @@ msgstr "Min statistikk"
 msgid "title_class logs"
 msgstr "Hedy - Bli med i klassen"
 
-msgid "title_class-overview"
-msgstr "Hedy - Klasseoversikt"
+#~ msgid "create_account_explanation"
+#~ msgstr "Med en egen konto kan du lagre programmene dine."
 
-msgid "only_teacher_create_class"
-msgstr "Kun lærere kan opprette klasser!"
-
-msgid "class_name_invalid"
-msgstr "Klassenavnet er ugyldig."
-
-msgid "class_name_empty"
-msgstr "Du skrev ikke inn et klassenavn!"
-
-msgid "class_name_duplicate"
-msgstr "Du har allerede en klasse med dette navnet."
-
-msgid "invalid_class_link"
-msgstr "Ugyldig lenke for å bli med i klassen."
-
-msgid "title_join-class"
-msgstr "Hedy - Bli med i klassen"
-
-msgid "title_customize-class"
-msgstr "Hedy - Tilpass klasse"
-
-msgid "customization_deleted"
-msgstr "Tilpassningene ble slettet."
-
-msgid "class_customize_success"
-msgstr "Tilpassningene ble lagret."
-
-msgid "username_empty"
-msgstr "Du skrev ikke inn et brukernavn!"
-
-msgid "student_not_existing"
-msgstr "Dette brukernavnet eksisterer ikke."
-
-msgid "student_already_in_class"
-msgstr "Denne eleven er allerede del av klassen din."
-
-msgid "student_already_invite"
-msgstr "Denne eleven har allerede fått en invitasjon. Har de glemt å svare?"
-
-msgid "no_accounts"
-msgstr "Det er ingen oppgitte kontoer å opprette."
-
-msgid "unique_usernames"
-msgstr "Alle brukernavnene må være unike."
-
-msgid "usernames_exist"
-msgstr "Et eller flere brukernavn er allerede i bruk."
-
-msgid "accounts_created"
-msgstr "Kontoene ble opprettet."
-
-msgid "retrieve_adventure_error"
-msgstr "Du har ikke lov til å se dette eventyret!"
-
-msgid "title_view-adventure"
-msgstr "Hedy - Se eventyr"
-
-msgid "title_customize-adventure"
-msgstr "Hedy - Tilpass eventyr"
-
-msgid "adventure_id_invalid"
-msgstr "Eventyr IDen er ugyldig."
-
-msgid "adventure_name_invalid"
-msgstr "Eventyrnavnet er ugyldig."
-
-msgid "content_invalid"
-msgstr "Eventyret er ugyldig."
-
-msgid "adventure_length"
-msgstr "Eventyret ditt må være minst 20 tegn."
-
-msgid "public_invalid"
-msgstr "Dette avtale valget er ugyldig"
-
-#, fuzzy
-msgid "classes_invalid"
-msgstr "The list of selected classes is invalid"
-
-msgid "adventure_duplicate"
-msgstr "Du har allerede et eventyr med dette navnet."
-
-#, fuzzy
-msgid "something_went_wrong_keyword_parsing"
-msgstr ""
-
-msgid "adventure_updated"
-msgstr "Eventyret har blitt oppdatert!"
-
-msgid "adventure_empty"
-msgstr "Du skrev ikke noe navn på eventyret!"
-
-#, fuzzy
-msgid "all"
-msgstr "All"
-
-#, fuzzy
-msgid "submitted"
-msgstr "Submitted"
-
-#, fuzzy
-msgid "class"
-msgstr "Class"
-
-#, fuzzy
-msgid "generate_passwords"
-msgstr "Generate passwords"

@@ -12,6 +12,7 @@ const turtle_prefix =
 `# coding=utf8
 import random, time, turtle
 t = turtle.Turtle()
+t.shape("turtle")
 t.hideturtle()
 t.penup()
 t.left(90)
@@ -150,6 +151,7 @@ $(document).on("click", function(event){
     // We expose the editor globally so it's available to other functions for resizing
     var editor = turnIntoAceEditor($editor.get(0)!, $editor.data('readonly'));
     theGlobalEditor = editor;
+    theGlobalEditor.setShowPrintMargin(false);
     error.setEditor(editor);
     markers = new Markers(theGlobalEditor);
 
@@ -1447,6 +1449,7 @@ function showSuccesMessage(){
   var randomnum: number = Math.floor(Math.random() * allsuccessmessages.length);
   success.show(allsuccessmessages[randomnum]);
 }
+
 function createModal(level:number ){
   let editor = "<div id='modal-editor' data-lskey=\"level_{level}__code\" class=\"w-full flex-1 text-lg rounded\" style='height:200px; width:50vw;'></div>".replace("{level}", level.toString());
   let title = ErrorMessages['Program_repair'];

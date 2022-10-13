@@ -299,7 +299,7 @@ class TestsLevel3(HedyTester):
         forward a""")
 
         self.multi_level_tester(
-            max_level=self.max_turtle_level,
+            max_level=15,
             code=code,
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
@@ -314,7 +314,7 @@ class TestsLevel3(HedyTester):
         HedyTester.forward_transpiled('random.choice(directions)'))
 
         self.multi_level_tester(
-            max_level=self.max_turtle_level,
+            max_level=11,
             code=code,
             expected=expected,
             extra_check_function=self.is_turtle(),
@@ -329,7 +329,7 @@ class TestsLevel3(HedyTester):
         turn a""")
 
         self.multi_level_tester(
-            max_level=self.max_turtle_level,
+            max_level=15,
             code=code,
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
@@ -344,7 +344,7 @@ class TestsLevel3(HedyTester):
         HedyTester.turn_transpiled('random.choice(directions)'))
 
         self.multi_level_tester(
-            max_level=self.max_turtle_level,
+            max_level=11,
             code=code,
             expected=expected,
             extra_check_function=self.is_turtle(),
@@ -359,7 +359,7 @@ class TestsLevel3(HedyTester):
         color c""")
 
         self.multi_level_tester(
-            max_level=self.max_turtle_level,
+            max_level=10,
             code=code,
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
@@ -374,7 +374,7 @@ class TestsLevel3(HedyTester):
         HedyTester.turtle_color_command_transpiled('{random.choice(colors)}'))
 
         self.multi_level_tester(
-            max_level=self.max_turtle_level,
+            max_level=10,
             code=code,
             expected=expected,
             extra_check_function=self.is_turtle(),

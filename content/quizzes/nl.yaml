@@ -1615,93 +1615,109 @@ levels:
         7:
             question_text: "Wat is er mis met deze code?"
             code: |-
-                {repeat} 3 {times}
-                   eten {is} {ask} 'Wat wilt u bestellen?'
-                   {if} eten {is} friet
-                       saus {is} {ask} 'Welke saus wilt u daarbij?'
-                       {print} 'Een friet met ' saus
-                   {if} eten {is} pizza
-                       topping {is} {ask} 'Wat wilt u op uw pizza?'
-                       {print} 'Een pizza met ' topping
+                eten {is} {ask} 'Wat wilt u bestellen?'
+                {if} eten {is} friet
+                saus {is} {ask} 'Welke saus wilt u daarbij?'
+                    {print} 'Een friet met ' saus
+                {if} eten {is} pizza
+                    topping {is} {ask} 'Wat wilt u op uw pizza?'
+                    {print} 'Een pizza met ' topping
                 {print} 'Bedankt voor uw bestelling'
             mp_choice_options:
             -   option: "Niks! De code klopt!"
-                feedback: "Correct! Dit is een goede code."
-            -   option: "Je kunt geen `{if}` commando gebruiken, als je al een `{repeat}` hebt gebruikt."
+                feedback: "Er zit een foutje in."
+            -   option: "Je kunt geen `{if}` commando gebruiken, als je al een `{if}` hebt gebruikt."
                 feedback: "Dat mag wel."
-            -   option: "Onder het `{if}` commando hoef je niet meer in te springen als je dat al hebt gedaan voor het `{repeat}` commando."
+            -   option: "Onder het `{if}` commando hoef je niet meer in te springen als je dat al hebt gedaan voor een ander `{if}` commando."
                 feedback: "Je moet altijd inspringen na een `{if}` commando."
-            -   option: "Als je patat bestelt, vraagt Hedy nog steeds wat je op je pizza wilt, omdat er niet goed is ingesprongen."
-                feedback: "Het inspringen is wel goed gedaan."
-            correct_answer: "A"
+            -   option: "Er niet goed ingesprongen na het eerste `{if}` commando."
+                feedback: "Goed gezien!"
+            correct_answer: "D"
             hint: "Het inspringen klopt overal."
             question_score: '10'
         8:
-            question_text: "Wat `{print}` Hedy als je het goede wachtwoord 'Hedy' intypt?"
+            question_text: "In welke code wordt er goed ingesprongen?"
             mp_choice_options:
-            -   option: "Goed gedaan! \n Goed gedaan!"
-                feedback: "Niets!"
-            -   option: "De computer ontploft in 5... 4... 3... 2... 1..."
-                feedback: "Niets!"
-            -   option: "Goed gedaan! \n Goed gedaan! \n Je mag computeren"
-                feedback: "Niets!"
-            -   option: "Goed gedaan! \n Je mag computeren! \n Goed gedaan! \n Je mag computeren"
-                feedback: "Correct!"
-            correct_answer: "D"
-            hint: "Alles onder de `{repeat}` wordt 2 keer herhaald"
+            -   option: |
+                    ```
+                    {if} antwoord {is} 32
+                       {print} 'Je hebt het...'
+                          {sleep}
+                              {print} 'goed!'
+                          {else}
+                              {print} 'Je hebt het fout!'
+                    ```
+                feedback: "Je hebt het fout!"
+            -   option: |
+                    ```
+                    {if} antwoord {is} 32
+                    {print} 'Je hebt het...'
+                    {sleep}
+                    {print} 'goed!'
+                    {else}
+                    {print} 'Je hebt het fout!'
+                    ```
+                feedback: "Je hebt het fout!"
+            -   option: |
+                    ```
+                    {if} antwoord {is} 32
+                        {print} 'Je hebt het...'
+                        {sleep}
+                        {print} 'goed!'
+                    {else}
+                        {print} 'Je hebt het fout!'
+                    ```
+                feedback: "Je hebt het... goed!"
+            -   option: |
+                    ```
+                    {if} antwoord {is} 32
+                        {print} 'Je hebt het...'
+                        {sleep}
+                    {print} 'goed!'
+                    {else}
+                        {print} 'Je hebt het fout!'
+                    ```
+                feedback: "You are wrong!"
+            correct_answer: "C"
+            hint: "What should happen if the person is right? And what else?"
             question_score: '10'
         9:
-            question_text: "Wat moet je in dit spel kiezen om een miljoen te winnen?"
+            question_text: "Bij welke regel in deze code moet worden ingesprongen?"
             code: |-
-                {print} 'Kies je juiste koffer en win een prijs!'
-                koffer {is} {ask} 'Welke koffer kies je? 1 of 2?'
-                {if} koffer {is} 1
-                     actie {is} {ask} 'Wil je de koffer verkopen of openen?'
-                         {if} actie {is} verkopen
-                             {print} 'Je verkoopt je koffer en krijgt 10 euro'
-                         {if} actie {is} openen
-                             {print} 'Je maakt de koffer open en wint een appeltaart'
-                {if} koffer {is} 2
-                     verkoop {is} {ask} 'wil je de koffer verkopen of openen?
-                         {if} actie {is} verkopen
-                             {print} 'Je verkoopt je koffer en krijgt 500 euro'
-                         {if} actie {is} openen
-                             {print} 'Je maakt de koffer open en wint een miljoen!'
+                1 muziek = {ask} 'Welk genre muziek vind jij leuk?'
+                2 {if} muziek {is} rock
+                3 {print} '🤘'
+                4 {else}
+                5 {print} '👎'
             mp_choice_options:
-            -   option: "koffer 1, verkopen"
-                feedback: "Helaas, geen miljoen voor jou..."
-            -   option: "koffer 1, openen"
-                feedback: "Helaas, geen miljoen voor jou..."
-            -   option: "koffer 2, verkopen"
-                feedback: "Helaas, geen miljoen voor jou..."
-            -   option: "koffer 2, openen"
-                feedback: "Geweldig! Je wint het miljoen!"
+            -   option: "Regel 2 en 4"
+                feedback: "De regels na een `{if}` en `{else}` commando moeten beginnen met 4 spaties"
+            -   option: "Alleen regel 3"
+                feedback: "Niet alleen regel 3"
+            -   option: "Regel 3, 4 en 5"
+                feedback: "Regel 4 niet"
+            -   option: "Regel 3 en 5"
+                feedback: "Great job!"
             correct_answer: "D"
-            hint: "De regels na de `{if}` en `{else}` commando's moeten beginnen met 4 spaties'."
+            hint: "De regels na een `{if}` en `{else}` commando moeten beginnen met 4 spaties."
             question_score: '10'
         10:
             question_text: "Wat is waar?"
             code: |-
-                naam {is} {ask} 'Hoe heet je?'
-                schoenmaat {is} {ask} 'Welke schoenmaat heb je?'
-                {if} schoenmaat {is} 38
-                    {if} naam {is} Assepoester
-                        {print} 'Naar jou was ik op zoek!'
-                    {else}
-                        {print} 'Jou zoek ik niet!'
-                {else}
-                    {print} 'Helaas, ik zoek weer verder'
+                1 level = {ask} 'Op welk level ben je?'
+                2 {if} level {is} 8
+                3 {print} 'Super!'
             mp_choice_options:
-            -   option: "Doornroosje met schoenmaat 38 krijgt de uitvoer: 'Helaas, ik zoek weer verder.'"
-                feedback: "Nee, ze krijgt 'Naar jou zoek ik niet'"
-            -   option: "Assepoester met schoenmaat 40 krijgt de uitvoer: 'Naar jou was ik op zoek!'"
-                feedback: "Nee, ze krijgt 'Helaas, ik zoek weer verder'"
-            -   option: "Doornroosje met schoenmaat 40 krijgt de uitvoer: 'Helaas, ik zoek weer verder'"
+            -   option: "Alle regels moeten beginnen met 4 spaties"
+                feedback: "Dat is niet waar"
+            -   option: "Regel 2 en 4 moeten beginnen met 4 spaties"
+                feedback: "Dat is niet waar"
+            -   option: "Regel 2 moet beginnen met 4 spaties"
+                feedback: "Dat is niet waar"
+            -   option: "Regel 3 moeten beginnen met 4 spaties"
                 feedback: "Dat klopt!"
-            -   option: "Assepoester met schoenmaat 40 krijgt de uitvoer: 'Naar jou was ik op zoek!'"
-                feedback: "Nee, ze krijgt 'Helaas, ik zoek weer verder'"
-            correct_answer: "C"
-            hint: "Als je niet schoenmaat 38 hebt, krijg je 'Helaas, ik zoek weer verder' ongeacht je naam."
+            correct_answer: "D"
+            hint: "Slechts één regel begint met 4 spaties. Maar welke...?"
             question_score: '10'
     11:
         1:
