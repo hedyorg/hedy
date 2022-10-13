@@ -208,7 +208,7 @@ docker run -it --rm -p 8080:8080 hedy
 
 ## Testing Teacher facing features locally
 
-For some things like making classes you need a teacher's account and you ight want to test that locally. To do so, you have to first make an account, this works offline without issues. Then you have to run Hedy with the environment variable ADMIN_USER set to your username, f.e. ADMIN_USER=Pete. It works a bit differently in each IDE, this is whta it looks like for PyCharm:
+For some things like making classes you need a teacher's account and you might want to test that locally. To do so, you have to first make an account, this works offline without issues. Then you have to run Hedy with the environment variable ADMIN_USER set to your username, f.e. ADMIN_USER=Pete. It works a bit differently in each IDE, this is whta it looks like for PyCharm:
 
 ![image](https://user-images.githubusercontent.com/1003685/152981667-0ab1f273-c668-429d-8ac4-9dd554f9bab3.png)
 
