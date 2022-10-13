@@ -459,6 +459,7 @@ def parse_tutorial(user):
     except:
         return "error", 400
 
+
 @app.route("/generate_dst", methods=['POST'])
 def prepare_dst_file():
     body = request.json
@@ -1353,6 +1354,7 @@ def store_parsons_order():
     DATABASE.store_parsons(attempt)
     return jsonify({}), 200
 
+
 @app.route('/client_messages.js', methods=['GET'])
 def client_messages():
     # Not really nice, but we don't call this often as it is cached
@@ -1387,6 +1389,7 @@ def other_keyword_language():
     if session.get('keyword_lang') and session['keyword_lang'] != "en":
         return make_keyword_lang_obj("en")
     return None
+
 
 @app.template_global()
 def translate_command(command):
@@ -1490,6 +1493,7 @@ def modify_query(**new_values):
 
     return '{}?{}'.format(request.path, url_encode(args))
 
+
 @app.template_global()
 def get_user_messages():
     if not session.get('messages'):
@@ -1504,6 +1508,8 @@ def get_user_messages():
 
 # Todo TB: Re-write this somewhere sometimes following the line below
 # We only store this @app.route here to enable the use of achievements -> might want to re-write this in the future
+
+
 @app.route('/auth/public_profile', methods=['POST'])
 @requires_login
 def update_public_profile(user):
@@ -1626,6 +1632,7 @@ def valid_invite_code(code):
         valid_codes.extend(os.getenv('TEACHER_INVITE_CODES').split(','))
 
     return code in valid_codes
+
 
 @app.route('/invite/<code>', methods=['GET'])
 def teacher_invitation(code):
