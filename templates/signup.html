@@ -29,15 +29,13 @@
             </div>
         </div>
     {% else %}
-        <form id="signup" class="js-validated-form flex flex-col gap-2">
+        <form id="signup" class="bg-white shadow-md rounded-lg rounded py-4 px-4 flex flex-col gap-2">
             <h2 class="my-0 text-center">{{ _('create_teacher_account') if is_teacher else _('create_student_account') }}</h2>
-
             {% if is_teacher %}
-            <h4 class="text-blue-500 mt-0 mb-0 text-center">{{_('create_teacher_account_explanation')}} </h4>
+                <h4 class="text-blue-500 mt-0 mb-0 text-center">{{_('create_teacher_account_explanation')}}</h4>
             {% else %}
-            <h4 class="text-blue-500 mt-0 mb-0 text-center">{{_('create_student_account_explanation')}} </h4>
+                <h4 class="text-blue-500 mt-0 mb-0 text-center">{{_('create_student_account_explanation')}}</h4>
             {% endif %}
-
             <div class="signup-container">
                 <label class="signup-label" for="username">{{_('username')}}</label>
                 <input class="signup-input" minlength="3" id="username" name="username" required>
