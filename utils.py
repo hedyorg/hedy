@@ -25,6 +25,7 @@ TURTLE_PREFIX_CODE = textwrap.dedent("""\
     # coding=utf8
     import random, time, turtle
     t = turtle.Turtle()
+    t.shape("turtle")
     t.hideturtle()
     t.penup()
     t.left(90)
