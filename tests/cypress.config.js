@@ -10,5 +10,6 @@ module.exports = defineConfig({
   },
   env: {
     login_page: '/login'
+    hedy_page: '/hedy'
   }
 });
