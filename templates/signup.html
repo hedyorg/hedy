@@ -29,153 +29,155 @@
             </div>
         </div>
     {% else %}
-        <form id="signup" class="bg-white shadow-md rounded-lg rounded py-4 px-4 flex flex-col gap-2">
-            <h2 class="my-0 text-center">{{ _('create_teacher_account') if is_teacher else _('create_student_account') }}</h2>
-            {% if is_teacher %}
-                <h4 class="text-blue-500 mt-0 mb-0 text-center">{{_('create_teacher_account_explanation')}}</h4>
-            {% else %}
-                <h4 class="text-blue-500 mt-0 mb-0 text-center">{{_('create_student_account_explanation')}}</h4>
-            {% endif %}
-            <div class="signup-container">
-                <label class="signup-label" for="username">{{_('username')}}</label>
-                <input class="signup-input" minlength="3" id="username" name="username" required>
-            </div>
-            <div class="signup-container">
-                <label class="signup-label" for="email">{{_('email')}}</label>
-                <input class="signup-input" id="email" name="email" type="email" required>
-            </div>
-            <div class="signup-container">
-                <label class="signup-label" for="password">{{_('password')}}</label>
-                <div class="flex ml-auto items-center justify-end">
-                    <input class="signup-input" minlength="6" id="password" name="password" type="password" required>
-                    <span class="inline z-10 absolute mx-2 text-sm text-gray-500" onclick="$('.blur-toggle').toggle();$('#password').attr('type',$('#password').attr('type')==='password'?'text':'password');">
-                        <i class="fas fa-eye-slash fa-lg cursor-pointer blur-toggle" aria-hidden="true"></i>
-                        <i class="fas fa-eye fa-lg cursor-pointer blur-toggle" style="display: none;" aria-hidden="true"></i>
-                    </span>
+        <div class="bg-white shadow-md mx-auto rounded-lg rounded py-4 px-0 md:px-4 lg:px-8">
+            <form id="signup" class="flex flex-col gap-2">
+                <h2 class="my-0 text-center">{{ _('create_teacher_account') if is_teacher else _('create_student_account') }}</h2>
+                {% if is_teacher %}
+                    <h4 class="text-blue-500 mt-0 mb-0 text-center">{{_('create_teacher_account_explanation')}}</h4>
+                {% else %}
+                    <h4 class="text-blue-500 mt-0 mb-0 text-center">{{_('create_student_account_explanation')}}</h4>
+                {% endif %}
+                <div class="signup-container">
+                    <label class="signup-label" for="username">{{_('username')}}</label>
+                    <input class="signup-input" minlength="3" id="username" name="username" required>
                 </div>
-            </div>
-            <div class="signup-container">
-                <label class="signup-label" for="password_repeat">{{_('password_repeat')}}</label>
-                <div class="flex ml-auto items-center justify-end">
-                    <input class="signup-input" minlength="6" id="password_repeat" name="password_repeat" type="password" required>
-                    <span class="inline z-10 absolute mx-2 text-sm text-gray-500" onclick="$('.blur-toggle2').toggle();$('#password_repeat').attr('type',$('#password_repeat').attr('type')==='password'?'text':'password');">
-                        <i class="fas fa-eye-slash fa-lg cursor-pointer blur-toggle2" aria-hidden="true"></i>
-                        <i class="fas fa-eye fa-lg cursor-pointer blur-toggle2" style="display: none;" aria-hidden="true"></i>
-                    </span>
+                <div class="signup-container">
+                    <label class="signup-label" for="email">{{_('email')}}</label>
+                    <input class="signup-input" id="email" name="email" type="email" required>
                 </div>
-            </div>
-            <div class="signup-container">
-                <label class="signup-label" for="language">{{_('preferred_language')}}</label>
-                <select class="signup-input appearance-none" id="language" name="language" required>
-                    <option value="" selected disabled hidden>{{_('select')}}</option>
-                    <option value="{{ current_language().lang}}">{{current_language().sym}}</option>
-                    {% for language in other_languages() %}
-                    <option value="{{language.lang}}">{{language.sym}}</option>
-                    {% endfor %}
-                </select>
-            </div>
-            <div class="signup-container" style="display: none;" id="keyword_lang_container">
-                <label class="signup-label" for="keyword_language">{{_('preferred_keyword_language')}}</label>
-                <select class="signup-input appearance-none" id="keyword_language" name="keyword_language" required>
-                    {% for language in keyword_languages() %}
-                    <option value="{{language.lang}}" id="{{language.lang}}_option" class="keyword_lang_option" {% if language.lang=="en" %}selected{% endif %}>{{language.sym}}</option>
-                    {% endfor %}
-                </select>
-            </div>
-            <div class="signup-container">
-                <label class="signup-label" for="birth_year">{{_('birth_year')}}</label>
-                <input class="signup-input appearance-none" id="birth_year" min="1900" max="2022" name="birth_year" placeholder="1995" type="number">
-            </div>
-            <div class="signup-container">
-                <label class="signup-label" for="gender">{{_('gender')}}</label>
-                <select class="signup-input appearance-none" id="gender" name="gender">
-                    <option value="" selected disabled hidden>{{_('select')}}</option>
-                    <option value="f">{{_('female')}}</option>
-                    <option value="m">{{_('male')}}</option>
-                    <option value="o">{{_('other')}}</option>
-                </select>
-            </div>
-            <div class="signup-container">
-                <label class="signup-label" for="country">{{_('country')}}</label>
-                <select class="signup-input appearance-none" id="country" name="country">
-                    <option value="" selected disabled hidden>{{_('select')}}</option>
-                    {% for alpha, name in all_countries().items() %}
-                    <option value="{{ alpha }}">{{ name }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-            <div class="signup-container">
-                <label class="signup-label" for="prog_experience">{{_('programming_experience')}}</label>
-                <ul class="signup-input" style="margin-top: -0.3em">
-                    <div class="flex flex-row">
-                        <li class="flex flex-row items-center mr-5">
-                            <input type="radio" name="prog_experience" value="yes" onclick="$('#languages').show()" class="ltr:mr-2 rtl:ml-2">
-                            <label for="prog_experience"> {{_('yes')}}</label>
-                        </li>
-                        <li class="flex flex-row items-center">
-                            <input type="radio" name="prog_experience" value="no" onclick="$('#languages').hide()" class="ltr:mr-2 rtl:ml-2">
-                            <label for="prog_experience"> {{_('no')}}</label>
-                        </li>
+                <div class="signup-container">
+                    <label class="signup-label" for="password">{{_('password')}}</label>
+                    <div class="flex ml-auto items-center justify-end">
+                        <input class="signup-input" minlength="6" id="password" name="password" type="password" required>
+                        <span class="inline z-10 absolute mx-2 text-sm text-gray-500" onclick="$('.blur-toggle').toggle();$('#password').attr('type',$('#password').attr('type')==='password'?'text':'password');">
+                            <i class="fas fa-eye-slash fa-lg cursor-pointer blur-toggle" aria-hidden="true"></i>
+                            <i class="fas fa-eye fa-lg cursor-pointer blur-toggle" style="display: none;" aria-hidden="true"></i>
+                        </span>
                     </div>
-                </ul>
-            </div>
-            <div class="border border-gray-400 rounded-lg mx-4 px-4 md:px-8 flex flex-row items-center justify-between gap-2 py-2" style="display: none;" id="languages">
-                <!-- For some reason the Tailwind 'hidden' class messes up the layout, therefore we "brute"-style it within the element -->
-                <label class="signup-label" for="experience_languages">{{_('languages')}}</label>
-                <ul class="mt-0">
-                    <li class="flex">
-                        <div class="flex flex-row items-center gap-2">
-                            <input type="checkbox" name="experience_languages" value="scratch">
-                            <label style>Scratch</label>
-                        </div>
-                    </li>
-                    <li class="flex">
-                        <div class="flex flex-row items-center gap-2">
-                            <input type="checkbox" name="experience_languages" value="other_block">
-                            <label>{{_('other_block')}}</label>
-                        </div>
-                    </li>
-                    <li class="flex">
-                        <div class="flex flex-row items-center gap-2">
-                            <input type="checkbox" name="experience_languages" value="python">
-                            <label>Python</label>
-                        </div>
-                    </li>
-                    <li class="flex">
-                        <div class="flex flex-row items-center gap-2">
-                            <input type="checkbox" name="experience_languages" value="other_text">
-                            <label>{{_('other_text')}}</label>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <!-- The extra check options -->
-            <div class="border border-gray-400 rounded-lg mx-4 px-4 md:px-8 flex flex-col gap-1 py-2">
-                <div class="flex flex-row justify-between items-center hidden">
-                    <label for="is_teacher">{{_('request_teacher')}}</label>
-                    <input type="checkbox" id="is_teacher" name="is_teacher" {% if is_teacher %}checked{% endif %}>
                 </div>
-                <div class="flex flex-row justify-between items-center">
-                    <label for="subscribe">{{_('subscribe_newsletter')}}</label>
-                    <input type="checkbox" id="subscribe" name="subscribe">
+                <div class="signup-container">
+                    <label class="signup-label" for="password_repeat">{{_('password_repeat')}}</label>
+                    <div class="flex ml-auto items-center justify-end">
+                        <input class="signup-input" minlength="6" id="password_repeat" name="password_repeat" type="password" required>
+                        <span class="inline z-10 absolute mx-2 text-sm text-gray-500" onclick="$('.blur-toggle2').toggle();$('#password_repeat').attr('type',$('#password_repeat').attr('type')==='password'?'text':'password');">
+                            <i class="fas fa-eye-slash fa-lg cursor-pointer blur-toggle2" aria-hidden="true"></i>
+                            <i class="fas fa-eye fa-lg cursor-pointer blur-toggle2" style="display: none;" aria-hidden="true"></i>
+                        </span>
+                    </div>
                 </div>
-                <div class="flex flex-row justify-between items-center">
-                    <label for="agree_terms">{{_('agree_with')}} <a href="/privacy" target="_blank">{{_('privacy_terms')}}</a></label>
-                    <input type="checkbox" id="agree_terms" name="agree_terms" required>
+                <div class="signup-container">
+                    <label class="signup-label" for="language">{{_('preferred_language')}}</label>
+                    <select class="signup-input appearance-none" id="language" name="language" required>
+                        <option value="" selected disabled hidden>{{_('select')}}</option>
+                        <option value="{{ current_language().lang}}">{{current_language().sym}}</option>
+                        {% for language in other_languages() %}
+                        <option value="{{language.lang}}">{{language.sym}}</option>
+                        {% endfor %}
+                    </select>
                 </div>
-            </div>
-            <div class="flex flex-row items-center justify-center px-4 md:px-8 gap-4">
+                <div class="signup-container" style="display: none;" id="keyword_lang_container">
+                    <label class="signup-label" for="keyword_language">{{_('preferred_keyword_language')}}</label>
+                    <select class="signup-input appearance-none" id="keyword_language" name="keyword_language" required>
+                        {% for language in keyword_languages() %}
+                        <option value="{{language.lang}}" id="{{language.lang}}_option" class="keyword_lang_option" {% if language.lang=="en" %}selected{% endif %}>{{language.sym}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="signup-container">
+                    <label class="signup-label" for="birth_year">{{_('birth_year')}}</label>
+                    <input class="signup-input appearance-none" id="birth_year" min="1900" max="2022" name="birth_year" placeholder="1995" type="number">
+                </div>
+                <div class="signup-container">
+                    <label class="signup-label" for="gender">{{_('gender')}}</label>
+                    <select class="signup-input appearance-none" id="gender" name="gender">
+                        <option value="" selected disabled hidden>{{_('select')}}</option>
+                        <option value="f">{{_('female')}}</option>
+                        <option value="m">{{_('male')}}</option>
+                        <option value="o">{{_('other')}}</option>
+                    </select>
+                </div>
+                <div class="signup-container">
+                    <label class="signup-label" for="country">{{_('country')}}</label>
+                    <select class="signup-input appearance-none" id="country" name="country">
+                        <option value="" selected disabled hidden>{{_('select')}}</option>
+                        {% for alpha, name in all_countries().items() %}
+                        <option value="{{ alpha }}">{{ name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="signup-container">
+                    <label class="signup-label" for="prog_experience">{{_('programming_experience')}}</label>
+                    <ul class="signup-input" style="margin-top: -0.3em">
+                        <div class="flex flex-row">
+                            <li class="flex flex-row items-center mr-5">
+                                <input type="radio" name="prog_experience" value="yes" onclick="$('#languages').show()" class="ltr:mr-2 rtl:ml-2">
+                                <label for="prog_experience"> {{_('yes')}}</label>
+                            </li>
+                            <li class="flex flex-row items-center">
+                                <input type="radio" name="prog_experience" value="no" onclick="$('#languages').hide()" class="ltr:mr-2 rtl:ml-2">
+                                <label for="prog_experience"> {{_('no')}}</label>
+                            </li>
+                        </div>
+                    </ul>
+                </div>
+                <div class="border border-gray-400 rounded-lg mx-4 px-4 md:px-8 flex flex-row items-center justify-between gap-2 py-2" style="display: none;" id="languages">
+                    <!-- For some reason the Tailwind 'hidden' class messes up the layout, therefore we "brute"-style it within the element -->
+                    <label class="signup-label" for="experience_languages">{{_('languages')}}</label>
+                    <ul class="mt-0">
+                        <li class="flex">
+                            <div class="flex flex-row items-center gap-2">
+                                <input type="checkbox" name="experience_languages" value="scratch">
+                                <label style>Scratch</label>
+                            </div>
+                        </li>
+                        <li class="flex">
+                            <div class="flex flex-row items-center gap-2">
+                                <input type="checkbox" name="experience_languages" value="other_block">
+                                <label>{{_('other_block')}}</label>
+                            </div>
+                        </li>
+                        <li class="flex">
+                            <div class="flex flex-row items-center gap-2">
+                                <input type="checkbox" name="experience_languages" value="python">
+                                <label>Python</label>
+                            </div>
+                        </li>
+                        <li class="flex">
+                            <div class="flex flex-row items-center gap-2">
+                                <input type="checkbox" name="experience_languages" value="other_text">
+                                <label>{{_('other_text')}}</label>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- The extra check options -->
+                <div class="border border-gray-400 rounded-lg mx-4 px-4 md:px-8 flex flex-col gap-1 py-2">
+                    <div class="flex flex-row justify-between items-center hidden">
+                        <label for="is_teacher">{{_('request_teacher')}}</label>
+                        <input type="checkbox" id="is_teacher" name="is_teacher" {% if is_teacher %}checked{% endif %}>
+                    </div>
+                    <div class="flex flex-row justify-between items-center">
+                        <label for="subscribe">{{_('subscribe_newsletter')}}</label>
+                        <input type="checkbox" id="subscribe" name="subscribe">
+                    </div>
+                    <div class="flex flex-row justify-between items-center">
+                        <label for="agree_terms">{{_('agree_with')}} <a href="/privacy" target="_blank">{{_('privacy_terms')}}</a></label>
+                        <input type="checkbox" id="agree_terms" name="agree_terms" required>
+                    </div>
+                </div>
+                <div class="flex flex-row items-center justify-center px-4 md:px-8 gap-4">
 
-            {% if is_teacher %}
-                <input type="checkbox" id="agree_third_party" name="agree_third_party">
-                <label class="w-96 text-center" for="agree_third_party">{{_('agree_third_party')}}</label>
-            {% endif %}
+                {% if is_teacher %}
+                    <input type="checkbox" id="agree_third_party" name="agree_third_party">
+                    <label class="w-96 text-center" for="agree_third_party">{{_('agree_third_party')}}</label>
+                {% endif %}
 
-            </div>
-            <div class="flex">
-                <button type="submit" class="green-btn mx-auto">{{_('create_account')}}</button>
-            </div>
-        </form>
+                </div>
+                <div class="flex">
+                    <button type="submit" class="green-btn mx-auto">{{_('create_account')}}</button>
+                </div>
+            </form>
+        </div>
     {% endif %}
 
     <form onsubmit="event.preventDefault (); window.location.href='/login'" class="flex flex-row gap-4 items-center">
