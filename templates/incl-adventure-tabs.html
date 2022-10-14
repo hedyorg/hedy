@@ -25,9 +25,6 @@
                         {{_('quiz_tab')}}
                 </div>
             {% endif %}
-            {% if specific_adventure %}
-                <h2 class="z-10 my-0 ml-auto pt-8 text-red-500 text-base">{{ _('specific_adventure_mode')|replace("{adventure}", adventures[0].name) }}</h2>
-            {% endif %}
         </div>
       {# PANES #}
       <div id="adventures-tab" class="w-full overflow-auto bg-white p-4 mb-8 shadow-md turn-pre-into-ace" style="max-height: 20em;">
