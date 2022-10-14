@@ -36,9 +36,8 @@ if os.getenv('MAILCHIMP_API_KEY') and os.getenv('MAILCHIMP_AUDIENCE_ID'):
     MAILCHIMP_API_HEADERS = {'Content-Type': 'application/json',
                              'Authorization': 'apikey ' + os.getenv('MAILCHIMP_API_KEY')}
 
-
-def mailchimp_subscribe_user(email):
-    request_body = {'email_address': email, 'status': 'subscribed'}
+def mailchimp_subscribe_user(email, country, role):
+    request_body = {'email_address': email, 'status': 'subscribed', 'tags': [country, role]}
     r = requests.post(MAILCHIMP_API_URL + '/members', headers=MAILCHIMP_API_HEADERS, data=json.dumps(request_body))
 
     subscription_error = None
