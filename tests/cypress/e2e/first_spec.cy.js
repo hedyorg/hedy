@@ -1,5 +1,8 @@
-describe('empty spec', () => {
+import {loginForAdmin, loginForTeacher} from './tools/login/login.js'
+
+describe('Is able to see classes', () => {
   it('passes', () => {
-    cy.visit(Cypress.env('base_url'))
+    loginForTeacher();
+    // cy.visit(Cypress.env('base_url'))
   })
 })
