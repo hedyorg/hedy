@@ -285,4 +285,18 @@ class TestsLevel18(HedyTester):
       self.multi_level_tester(
         code="name is input",
         exception=hedy.exceptions.IncompleteCommandException
-      )   
+      )
+
+    #
+    # Test comment
+    #
+    def test_print_comment(self):
+        code = "print('Hallo welkom bij Hedy!') # This is a comment"
+        expected = "print(f'''Hallo welkom bij Hedy!''')"
+        output = 'Hallo welkom bij Hedy!'
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            output=output
+        )
