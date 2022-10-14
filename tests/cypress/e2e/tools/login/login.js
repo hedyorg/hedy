@@ -1,3 +1,5 @@
+import { goToHome } from "../navigation/nav";
+
 export function loginForAdmin() {
     cy.visit(Cypress.env('base_url'));
     cy.get(':nth-child(6) > .menubar-text').click();
@@ -28,7 +30,7 @@ export function loginForAdmin() {
 }
 
 export function loginForTeacher() {
-    cy.visit(Cypress.env('base_url'));
+    goToHome();
     
     cy.get(':nth-child(6) > .menubar-text').click();
     cy.get('#username').type("teacher_user");
@@ -90,10 +92,7 @@ export function logout()
 
 }
 
-export function goToRegister()
-{
-    cy.visit(Cypress.env('base_url') + "/signup");
-}
+
 
 
 

@@ -6,5 +6,6 @@ describe('Is able to see teacher page', () => {
     cy.location().then((loc) => {
       expect(loc.pathname).to.equal('/for-teachers');
     })
+    
   })
 })
