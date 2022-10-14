@@ -10,7 +10,7 @@ RUN apt install -y curl && curl -fsSL https://deb.nodesource.com/setup_lts.x | b
 
 WORKDIR /app
 
-COPY . .
+#COPY . .
 
 EXPOSE 8080
 
