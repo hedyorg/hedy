@@ -27,7 +27,7 @@
               </div>
           </div>
         {% endif %}
-        <div style="display: none;" id="blur_toggle_container">
+        <div style="{{ 'display:none;' if not blur_button_available }}" id="blur_toggle_container">
             <span class="inline-block bottom-0 ltr:right-0 rtl:left-0 z-10 absolute mb-4 mx-2 text-white" onclick="hedyApp.toggle_blur_code();">
                 <i class="fas fa-eye-slash fa-lg cursor-pointer blur-toggle" aria-hidden="true"></i>
                 <i class="fas fa-eye fa-lg cursor-pointer blur-toggle" style="display: none;" aria-hidden="true"></i>
@@ -165,11 +165,25 @@
     <div class="order-5">
       {% if not specific_adventure %}
           <div class="flex {% if prev_level %}justify-between{% else %}justify-end{%endif%}">
-            {% if prev_level and (not customizations or customizations['levels']|length == 0 or prev_level in customizations['levels']) %}
+            {% if prev_level and (not customizations or prev_level in customizations['available_levels']) %}
               <button class="green-btn" onclick="hedyApp.prompt_unsaved (function () {window.location = '{{ hedy_link(prev_level, 1) }}'})">{{_('regress_button')|replace("{level}", prev_level)}}</button>
+            {% elif prev_level and not (not customizations or prev_level in customizations['available_levels']) %}
+                <div class="relative">
+                    <button class="green-btn absolute inset-0" disabled>{{_('regress_button')|replace("{level}", prev_level)}}</button>
+                    <div class="opacity-0 hover:opacity-100 duration-300 absolute inset-0 z-10 flex justify-center items-center">
+                        <!-- Todo: This structure is the starting point for adding an overlay hover text -->
+                    </div>
+                </div>
             {% endif %}
-            {% if next_level and (not customizations or customizations['levels']|length == 0 or next_level in customizations['levels']) %}
+            {% if next_level and (not customizations or next_level in customizations['available_levels']) %}
                 <button class="green-btn ltr:ml-1 rtl:mr-1" id="next_level_button" onclick="hedyApp.prompt_unsaved (function () {window.location = '{{ hedy_link(next_level, 1) }}'})">{{_('advance_button')|replace("{level}", next_level)}}</button>
+            {% elif next_level and not (not customizations or next_level in customizations['available_levels']) %}
+                <div class="relative">
+                    <button class="green-btn ltr:ml-1 rtl:mr-1" id="next_level_button" disabled>{{_('advance_button')|replace("{level}", next_level)}}</button>
+                    <div class="opacity-0 hover:opacity-100 duration-300 absolute inset-0 z-10 flex justify-center items-center">
+                        <!-- Todo: This structure is the starting point for adding an overlay hover text -->
+                    </div>
+                </div>
             {% endif %}
           </div>
       {% else %}

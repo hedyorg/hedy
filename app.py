@@ -477,6 +477,10 @@ def prepare_dst_file():
         with t.running_stitch(stitch_length=20):
         """)
     lines = transpiled_code.code.split("\n")
+
+    # remove all sleeps for speeed, and remove all colors for compatibility:
+    lines = [x for x in lines if (not "time.sleep" in x) and (not "t.pencolor" in x)]
+
     threader += "  " + "\n  ".join(lines)
     threader += "\n" + 't.save("dst_files/' + filename + '.dst")'
     if not os.path.isdir('dst_files'):
@@ -819,6 +823,9 @@ def index(level, program_id):
     else:
         adventures = load_adventures_per_level(level, g.keyword_lang)
 
+    # Initially all levels are available -> strip those for which conditions are not met or not available yet
+    available_levels = list(range(1, hedy.HEDY_MAX_LEVEL + 1))
+
     customizations = {}
     if current_user()['username']:
         customizations = DATABASE.get_student_class_customizations(current_user()['username'])
@@ -836,6 +843,36 @@ def index(level, program_id):
     if 'levels' in customizations and level not in available_levels:
         return utils.error_page(error=403, ui_message=gettext('level_not_class'))
 
+    # At this point we can have the following scenario:
+    # - The level is allowed and available
+    # - But, if there is a quiz threshold we have to check again if the user has reached it
+
+    if 'level_thresholds' in customizations:
+        if 'quiz' in customizations.get('level_thresholds'):
+            # Temporary store the threshold
+            threshold = customizations.get('level_thresholds').get('quiz')
+            # Get the max quiz score of the user in the previous level
+            # A bit out-of-scope, but we want to enable the next level button directly after finishing the quiz
+            # Todo: How can we fix this without a re-load?
+            quiz_stats = DATABASE.get_quiz_stats([current_user()['username']])
+            if level > 1:
+                scores = [x.get('scores', []) for x in quiz_stats if x.get('level') == level - 1]
+                scores = [score for week_scores in scores for score in week_scores]
+                max_score = 0 if len(scores) < 1 else max(scores)
+                if max_score < threshold:
+                    return utils.error_page(error=403, ui_message=gettext('quiz_threshold_not_reached'))
+
+            # We also have to check if the next level should be removed from the available_levels
+            if level < hedy.HEDY_MAX_LEVEL:
+                scores = [x.get('scores', []) for x in quiz_stats if x.get('level') == level]
+                scores = [score for week_scores in scores for score in week_scores]
+                max_score = 0 if len(scores) < 1 else max(scores)
+                # We don't have the score yet for the next level -> remove all upcoming levels from 'available_levels'
+                if max_score < threshold:
+                    available_levels = available_levels[:available_levels.index(level)+1]
+
+    # Add the available levels to the customizations dict -> simplify implementation on the front-end
+    customizations['available_levels'] = available_levels
     cheatsheet = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
 
     teacher_adventures = []
@@ -940,7 +977,7 @@ def view_program(user, id):
     # Everything below this line has nothing to do with this page and it's silly
     # that every page needs to put in so much effort to re-set it
 
-    return render_template("view-program-page.html", **arguments_dict)
+    return render_template("view-program-page.html", blur_button_available = True, **arguments_dict)
 
 
 @app.route('/adventure/<name>', methods=['GET'], defaults={'level': 1})
