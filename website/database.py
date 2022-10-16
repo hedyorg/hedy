@@ -631,6 +631,6 @@ class Database:
         cal = d.isocalendar()
         return f'{cal[0]}-{cal[1]:02d}'
 
-    def test(self):
-        idk = QUIZ_STATS.get_many({'id': 'test'})
-        return idk
+    def get_username_role(self, username):
+        role = 'teacher' if USERS.get({'username': username}).get('teacher_request') is True else 'student'
+        return role
