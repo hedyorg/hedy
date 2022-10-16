@@ -1002,7 +1002,9 @@ def get_certificate_page(username):
     
     number_achievements = len(achievements)
     congrats_message = gettext('congrats_message').format(**{'username': username})
-    return render_template("certificate.html", count_programs=count_programs, quiz_score=quiz_score, longest_program=longest_program, number_achievements=number_achievements, congrats_message=congrats_message)
+    return render_template("certificate.html", count_programs=count_programs, quiz_score=quiz_score, 
+                            longest_program=longest_program, number_achievements=number_achievements, 
+                            congrats_message=congrats_message)
 
 def get_highest_quiz_score(username):
     max = 0
