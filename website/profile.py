@@ -51,6 +51,7 @@ class ProfileModule(WebsiteModule):
         resp = {}
         if 'email' in body:
             email = body['email'].strip().lower()
+            old_user_email = user.get('email')
             if email != user.get('email'):
                 exists = self.db.user_by_email(email)
                 if exists:
@@ -76,12 +77,13 @@ class ProfileModule(WebsiteModule):
                 if not is_testing_request(request) and MAILCHIMP_API_URL:
                     # We hash the email with md5 to avoid emails with unescaped characters triggering errors
                     request_path = MAILCHIMP_API_URL + '/members/' + hashlib.md5(
-                        user['email'].encode('utf-8')).hexdigest()
+                        old_user_email.encode('utf-8')).hexdigest()
                     r = requests.get(request_path, headers=MAILCHIMP_API_HEADERS)
                     # If user is subscribed, we remove the old email from the list and add the new one
                     if r.status_code == 200:
                         r = requests.delete(request_path, headers=MAILCHIMP_API_HEADERS)
-                        mailchimp_subscribe_user(email)
+                        role = self.db.get_username_role(user['username'])
+                        mailchimp_subscribe_user(email, body['country'], role)
 
         username = user['username']
 
