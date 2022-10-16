@@ -1,5 +1,6 @@
 # coding=utf-8
 import copy
+from multiprocessing.dummy import active_children
 
 from website import (
     auth_pages, classes, profile, parsons, statistics, quiz, admin, for_teachers, programs,
@@ -504,12 +505,13 @@ def transpile_add_stats(code, level, lang_):
     username = current_user()['username'] or None
     try:
         result = hedy.transpile(code, level, lang_)
+        number_of_lines = code.count('\n')
         statistics.add(
-            username, lambda id_: DATABASE.add_program_stats(id_, level, None))
+            username, lambda id_: DATABASE.add_program_stats(id_, level, number_of_lines,None))
         return result
     except Exception as ex:
         statistics.add(username, lambda id_: DATABASE.add_program_stats(
-            id_, level, get_class_name(ex)))
+            id_, level, number_of_lines, get_class_name(ex)))
         raise
 
 
@@ -977,6 +979,48 @@ def get_cheatsheet_page(level):
 
     return render_template("cheatsheet.html", commands=commands, level=level)
 
+@app.route('/certificate/<username>', methods=['GET'])
+def get_certificate_page(username):
+    if not current_user()['username']:
+        return utils.error_page(error=403, ui_message=gettext('unauthorized'))
+    username = username.lower()
+    user = DATABASE.user_by_username(username)
+    if not user:
+        return utils.error_page(error=403, ui_message=gettext('user_inexistent'))
+    progress_data = DATABASE.progress_by_username(username)   
+    if progress_data is None:
+        return utils.error_page(error=404, ui_message=gettext('no_certificate'))
+    achievements = progress_data.get('achieved', None)
+    if achievements is None or 'hedy_certificate' not in achievements:
+        return utils.error_page(error=404, ui_message=gettext('no_certificate'))
+    if 'run_programs' in progress_data:
+        count_programs = progress_data['run_programs']
+    else:
+        count_programs = 0
+    quiz_score = get_highest_quiz_score(username)
+    longest_program = get_longest_program(username)
+    
+    number_achievements = len(achievements)
+    congrats_message = gettext('congrats_message').format(**{'username': username})
+    return render_template("certificate.html", count_programs=count_programs, quiz_score=quiz_score, longest_program=longest_program, number_achievements=number_achievements, congrats_message=congrats_message)
+
+def get_highest_quiz_score(username):
+    max = 0
+    quizzes = DATABASE.get_quiz_stats([username])
+    for quiz in quizzes:
+        if 'scores' in quiz:
+            for score in quiz['scores']:
+                if score > max:
+                    max = score
+    return max
+
+def get_longest_program(username):
+    programs = DATABASE.get_program_stats([username])
+    highest = 0
+    for program in programs:
+        if 'number_of_lines' in program:
+            highest = max(highest, program['number_of_lines'])
+    return highest
 
 @app.errorhandler(404)
 def not_found(exception):
@@ -1565,7 +1609,7 @@ def public_user_page(username):
         last_achieved = None
         if user_achievements.get('achieved'):
             last_achieved = user_achievements['achieved'][-1]
-
+        certificate_message = gettext('see_certificate').format(**{'username': username})
         # Todo: TB -> In the near future: add achievement for user visiting their own profile
 
         return render_template('public-page.html', user_info=user_public_info,
@@ -1573,7 +1617,8 @@ def public_user_page(username):
                                favourite_program=favourite_program,
                                programs=user_programs,
                                last_achieved=last_achieved,
-                               user_achievements=user_achievements)
+                               user_achievements=user_achievements,
+                               certificate_message=certificate_message)
     return utils.error_page(error=404, ui_message=gettext('user_not_private'))
 
 
