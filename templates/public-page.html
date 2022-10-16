@@ -10,7 +10,7 @@
                     <img src="{{static('/images/Hedy-logo.png')}}" class="w-64" alt="{{_('profile_logo_alt')}}">
                 {% endif %}
                 {% if user_achievements['achieved'] and 'hedy_certificate' in user_achievements['achieved'] %}
-                    <button class="green-btn text-white px-10 py-4" onclick="window.location={{'\'/certificate/'~username~'\''}}">
+                    <button class="green-btn text-white px-10 py-4" onclick="window.location={{'\'/certificate/'~user_info.username~'\''}}">
                         {{ certificate_message }}
                     </button>
                 {% endif %}
