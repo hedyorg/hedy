@@ -146,6 +146,16 @@
         <div class="p-8 border-4 border-yellow-600 rounded-full h-24 w-24 flex items-center bg-yellow-300 justify-center">
             <p class="text-yellow-600 font-bold text-4xl text-center font-slab" id="quiz_end_score"></p>
         </div>
+        {% if not next_level and username %} <!-- Only show certificate at last level-->    
+        <div>
+            <p class="text-3xl font-bold tracking-wide text-blue-900 text-center justify-center font-slab" id="question_feedback_text_container">Congragulations! You have completed Hedy!</p> 
+            <div class="container flex flex-col py-4 px-4 items-center justify-center">
+                <button class="green-btn text-white px-8 py-4" onclick="window.location={{'\'/certificate/'~username~'\''}}">
+                        {{ _('get_certificate') }}
+                </button>
+            </div>
+        </div>                
+        {% endif %}
     </div>
     {% if next_level %}
         <div class="flex py-4 px-4 bg-green-300 justify-between border-t-8 border-green-600">
