@@ -87,6 +87,7 @@ function showAnswers(options: any, level: number, question: number) {
     $('.option-block').hide();
     $('.option-block').removeClass('incorrect-option');
     for (let i = 1; i < options.length+1; ++i) {
+        console.log("test...");
         if (options[i-1].option.includes("```")) {
             $('#answer_text_' + i).hide();
             let editor = ace.edit('answer_code_' + i);
