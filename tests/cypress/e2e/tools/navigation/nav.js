@@ -25,4 +25,9 @@ export function goToRegister()
     return goToPage('/signup?teacher=false');
 }
 
+export function goToLogin()
+{
+    return goToPage("/login");
+}
+
 export default {goToPage, goToRegister}
