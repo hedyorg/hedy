@@ -22,7 +22,7 @@ export function goToHome()
 
 export function goToRegister()
 {
-    return goToPage('/signup');
+    return goToPage('/signup?teacher=false');
 }
 
 export default {goToPage, goToRegister}
