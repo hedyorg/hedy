@@ -58,18 +58,20 @@ class QuizModule(WebsiteModule):
 
     @route('/get-question/<int:level>/<int:question>', methods=['GET'])
     def get_quiz_question(self, level, question):
+
         session['attempt'] = 0
         if question > self.quizzes[g.lang].get_highest_question_level(level) or question < 1:
             return gettext('question_doesnt_exist'), 400
 
-        # If we have the preview parameter -> render the template with the requested question
-        if request.args.get('preview'):
-            return render_template('preview-quiz.html',preview=True, level=level, question=question)
-
         question = self.quizzes[g.lang].get_quiz_data_for_level_question(level, question, g.keyword_lang)
-
-
         return jsonify(question), 200
+
+    @route('/preview-question/<int:level>/<int:question>', methods=['GET'])
+    def preview_quiz_question(self, level, question):
+        if question > self.quizzes[g.lang].get_highest_question_level(level) or question < 1:
+            return gettext('question_doesnt_exist'), 400
+
+        return render_template('preview-quiz.html', preview=True, level=level, question=question)
 
     @route('/submit_answer/', methods=["POST"])
     def submit_answer(self):

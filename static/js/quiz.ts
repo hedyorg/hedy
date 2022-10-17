@@ -89,13 +89,16 @@ function showAnswers(options: any, level: number, question: number) {
     for (let i = 1; i < options.length+1; ++i) {
         console.log("test...");
         if (options[i-1].option.includes("```")) {
+            console.log("Er is een code antwoord!");
             $('#answer_text_' + i).hide();
             let editor = ace.edit('answer_code_' + i);
+            console.log(editor);
             // This does look like magic: It removes all backticks and the resting newlines
             editor.setValue($.trim(options[i-1].option.replace(new RegExp('```', 'g'),"")));
             editor.clearSelection(); // Make sure the ace editor is not selected
             editor.renderer.$cursorLayer.element.style.display = "none"; // Also remove the cursor
             $('#answer_code_' + i).show();
+            console.log("Why isn;t this visible?!");
             // We have to "click" the editor as for some reason the code is always selected?
             $('#answer_code_' + i).click();
         } else {
