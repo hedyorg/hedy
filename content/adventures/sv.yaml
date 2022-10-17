@@ -28,7 +28,7 @@ adventures:
                 example_code: "```\n{repeat} 3 {times} {print} 'Hedy är roligt!'\n```\n"
             8:
                 start_code: "{repeat} 5 {times}\n    {print} 'Hej allihopa'\n    {print} 'Det här kommer att skrivas 5 gånger'"
-                story_text: "## Indentering\n`{ask}` och `{print}` fungerar som vanligt. Men `{if}` och `{repeat}` har ändrats!\nDu kan nu köra delar av koden tillsammans i ett block, men du kommer att behöva *indentera* koden.\nDet betyder att du skriver fyra mellanslag i början av raden. Du behöver även indentera om du skapar ett block av kod som bara innehåller en rad.\n"
+                story_text: "## Indentering\n`{ask}` och `{print}` fungerar som vanligt. Men `{if}`, `{else}` och `{repeat}` har ändrats!\nDu kan nu köra delar av koden tillsammans i ett block, men du kommer att behöva *indentera* koden.\nDet betyder att du skriver fyra mellanslag i början av raden. Du behöver även indentera om du skapar ett block av kod som bara innehåller en rad.\n"
                 example_code: "Så här fungerar `{repeat}`-kommandot nu:\n```\n{repeat} 5 {times}\n    {print} 'Hej allihop'\n    {print} 'Allt det här kommer att repeteras 5 gånger'\n```\nSå här fungerar `{if}` och `{else}` nu:\n\n```\nnamn {is} {ask} 'Vad heter du?'\n{if} namn {is} Hedy\n    {print} 'Välkommen Hedy'\n    {print} 'Du kan spela på din dator!'\n{else}\n    {print} 'INKRÄKTARE!'\n    {print} 'Du får inte använda den här datorn!'\n```\n"
             11:
                 example_code: "```\n{for} counter {in} {range} 1 {to} 5\n    {print} counter\n```\n"
