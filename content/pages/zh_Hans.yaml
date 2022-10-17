@@ -119,144 +119,144 @@ sections:
         sections:
         -   title: 学生们尝试打印整个列表
             example:
-                error_text: "无法打印列表。您只能用随机地命令打印列表中的一个项目。\n"
+                error_text: "无法打印列表。您只能用随机选择的命令打印列表中的一个项目。\n"
                 error_code: "食品是苹果，牛奶，巧克力\n打印食品\n"
-                solution_text: "要打印所有食品的列表，您只需将它们放在打印命令之后即可。否则，您可以使用随机地命令打印列表中的一个项目。\n"
-                solution_code: "打印苹果，牛奶，巧克力\n\n或\n\n食品是苹果，牛奶，巧克力\n打印食品随机地\n"
+                solution_text: "要打印所有食品的列表，您只需将它们放在打印命令之后即可。否则，您可以使用随机选择的命令打印列表中的一个项目。\n"
+                solution_code: "打印苹果，牛奶，巧克力\n\n或\n\n食品是苹果，牛奶，巧克力\n打印随机选择的食品\n"
         -   title: 学生使用变量或列表的名称作为常规文本
             example:
                 error_text: "此问题可能也发生在级别 2 中。现在，列表也可能发生这种情况。\n"
-                error_code: "名字是Hedy\n打印 嗨，我的名字是名字\n\n或\n\n动物是犀牛，蜜蜂，天鹅\n打印最好的动物是...动物随机地\n"
+                error_code: "名字是Hedy\n打印 嗨，我的名字是名字\n\n或\n\n动物是犀牛，蜜蜂，天鹅\n打印最好的动物是...随机选择的动物\n"
                 solution_text: "不要在常规文本中使用变量或列表的名称并打印。在第 4 级中，这个问题是用引号解决的。\n"
-                solution_code: "名字是Hedy\n打印 嗨，我的名字\n\n或\n\n动物们是犀牛，蜜蜂，天鹅\n打印 最好的动物是...动物们随机地\n"
-        -   title: 学生随机忘记
+                solution_code: "名字是Hedy\n打印 嗨，我的名字\n\n或\n\n动物们是犀牛，蜜蜂，天鹅\n打印 最好的动物是...随机选择的动物们\n"
+        -   title: 学生随机地忘记
             example:
                 error_text: "如例所示\n"
                 error_code: "鸟类是麻雀，海鸥，知更鸟\n随机地打印鸟类\n"
-                solution_text: "This problem is solved by adding the word at.\n"
-                solution_code: "birds is sparrow, seagull, robin\nprint birds at random\n"
-        -   title: 学生在使用随机选择命令时忘记了使用打印命令
+                solution_text: "这个问题可以通过添加单词 at 来解决。\n"
+                solution_code: "鸟类是麻雀，海鸥，知更鸟\n随机地打印鸟类\n"
+        -   title: 学生在使用随机地命令时忘记了使用打印命令
             example:
-                error_text: "Or they will sometimes put at random at the beginning of the line.\n"
-                error_code: "fruit is apple, cherry, banana\nfruit at random\n"
-                solution_text: "Emphasize to your students that you always need a print to print text.\n"
-                solution_code: "fruit is apple, cherry, banana\nprint fruit at random\n"
-        -   title: Students forget to use commas in their lists
+                error_text: "或者他们有时会把随机地放置在一行的开头。\n"
+                error_code: "水果是苹果、樱桃、香蕉\n随机选择的水果\n"
+                solution_text: "向您的学生强调始终需要用打印命令才能打印文本。\n"
+                solution_code: "水果是苹果、樱桃、香蕉\n随机地打印水果\n"
+        -   title: 学生忘记在列表中使用逗号
             example:
-                error_text: "In a list items are seperated with a comma.\n"
-                error_code: "pizzas is funghi tonno quattro stagioni\nprint pizzas at random\n"
-                solution_text: "After each item on your list, there should be a comma\n"
-                solution_code: "pizzas is funghi, tonno, quattro stagioni\nprint pizzas at random\n"
+                error_text: "在列表中，项目之间用逗号隔开。\n"
+                error_code: "披萨是蘑菇披萨金枪鱼披萨四季披萨\n随机地打印披萨\n"
+                solution_text: "在列表上的每个项目之后都应该有一个逗号\n"
+                solution_code: "披萨是蘑菇披萨, 金枪鱼披萨, 四季披萨\n随机地打印披萨\n"
         -   title: 学生尝试在没有列表的情况下使用随机地命令
             example:
                 error_text: "例如\n"
-                error_code: "俱乐部是曼联\n随机地打印俱乐部\n"
-                solution_text: "Hedy can't print anything at random, because there is no list to choose from.\n"
-                solution_code: "clubs is Manchester United, Bayrn Munchen, FC Barcelona\nprint clubs at random\n"
-        -   title: 'Students try to use add/remove without a list '
+                error_code: "俱乐部是曼联\n打印随机选择的俱乐部\n"
+                solution_text: "Hedy 不能随机地打印任何东西，因为没有可供选择的列表。\n"
+                solution_code: "俱乐部是曼联、拜仁慕尼黑、巴塞罗那\n打印随机选择的俱乐部\n"
+        -   title: '学生尝试在没有列表的情况下使用添加/删除功能 '
             example:
-                error_text: "In the example below 'names' is not a list, but a variable. You cannot add anything to it.\n"
-                error_code: "names is Jake\nyour_name is ask Who are you?\nadd your_name to names\nprint names at random\n"
-                solution_text: "There has to be a list first, so you have to add a second name to turn names into a list, for example Amy. If you don't want amy on your list, you can use remove to remove it after.\n"
-                solution_code: "names is Jake, Amy\nyour_name is ask Who are you?\nadd your_name to names\nprint names at random\n"
+                error_text: "在下面的示例中，“名字”不是一个列表，而是一个变量。您不能向其添加任何内容。\n"
+                error_code: "名字是杰克\n你的_名字问你是谁？\n向名字添加你的_名字\n随机地打印名字\n"
+                solution_text: "首先必须有一个列表，因此您必须添加第二个名字才能将名字转换为列表，例如艾米。如果您不希望艾米在您的列表中，则可以使用“删除”将其删除。\n"
+                solution_code: "名字是杰克，艾米\n你的_名字是询问你是谁？\n将 你的_名字添加到名字中\n随机地打印名字\n"
         -   example:
-                error_code: "adventures is story, parrot, dice\nchoice is Which adventure do you like best?\nadd choice\nremove dice\nprint I love adventures at random\n"
-                error_text: "Without to/from the add/remove command won't work.\n"
-                solution_text: "Hedy has to know which list the item should be added to/removed from.\n"
-                solution_code: "adventures is story, parrot, dice\nchoice is Which adventure do you like best?\nadd choice to adventures\nremove dice from adventures\nprint I love adventures at random\n"
-            title: 学生们忘记了在添加/删除中使用到/从
+                error_code: "冒险是故事、鹦鹉、骰子\n选择是 你最喜欢哪个冒险活动？\n添加选择\n移除骰子\n打印我爱随机选择的冒险活动\n"
+                error_text: "没有 到/从，添加/删除命令将不起作用。\n"
+                solution_text: "Hedy必须知道这个项目应该被添加到哪个列表中/从哪个列表中删除。\n"
+                solution_code: "冒险活动是故事、鹦鹉、骰子\n选择是 你最喜欢哪个冒险活动？\n在冒险活动中添加选择\n从冒险活动中删除骰子\n打印我爱随机选择的冒险活动\n"
+            title: 学生们忘记了在添加/删除命令中使用到/从
     -   level: '4'
         sections:
-        -   title: Students forget to use quotation marks on both sides of the text
+        -   title: 学生忘记在文本的两边使用引号
             example:
-                error_text: "In this level print and ask need a set of quotation marks. One before of the text and one after.\n"
-                error_code: "print Hello\nmood is ask 'How are you?\n"
-                solution_text: "Add the correct quotation marks.\n"
-                solution_code: "print 'Hello'\nmood is ask 'How are you?'\n"
-        -   title: Students use the wrong quotation marks
+                error_text: "在这个级别打印和询问需要一组引号。一个在文本之前，一个在文本之后。\n"
+                error_code: "打印你好\n心情是询问'你好吗？\n"
+                solution_text: "添加正确的引号。\n"
+                solution_code: "打印'你好'。\n心情是询问'你好吗？'\n"
+        -   title: 学生使用错误的引号
             example:
-                error_text: "It is important to start your lesson by checking if the students know how to type a quotation mark properly. ELse they might use the \"double quotes\" or the `skewed one`.\n"
-                error_code: "print `Welcome to the restaurant`\nfood is ask \"What would you like to order?\"\n"
-                solution_text: "These are the correct quotation marks:\n"
-                solution_code: "print 'Welcome to the restaurant'\nfood is ask 'What would you like to order?'\n"
-        -   title: Students use an apostrophe in their text
+                error_text: "重要的是，在开始上课时要检查学生是否知道如何正确地键入引号。否则，他们可能会使用 \"双引号 \"或斜的引号`。\n"
+                error_code: "print `欢迎来到本餐厅`。\n食物是询问 \"你想点什么？\"\n"
+                solution_text: "这些是正确的引号：\n"
+                solution_code: "打印 '欢迎来到本餐厅'\n食物是问'你想点什么？'\n"
+        -   title: 学生在文本中使用撇号
             example:
-                error_text: "From this level on apostrophes are not allowed. They are often used in English when thyping contractions like you're, don't or what's.\n"
-                error_code: "print 'You're not allowed to type this'\n"
-                solution_text: "You can choose to use the wrong grammar and just leave the apostrophe out. Or you could use the ` as an apostrophe.\n"
-                solution_code: "print 'Youre allowed to type this'\nprint 'And you`re able to do this'\n"
+                error_text: "从这一级开始，不允许使用撇号。它们在英语中经常被用于缩略语，如you're, don't或what's。\n"
+                error_code: "打印'不允许键入此内容'\n"
+                solution_text: "你可以选择使用错误的语法，直接不使用撇号。或者你可以把`作为一个撇号来使用。\n"
+                solution_code: "打印'允许键入此内容'\n打印'并且您可以执行此操作'\n"
     -   sections:
-        -   title: Students forget to use print in an if command
+        -   title: 学生忘记在如果命令中使用打印
             example:
-                error_text: "After students use if or else they forget to use a second command like print or ask.\n"
-                error_code: "if name is Hedy 'Great!'\nelse 'Hedy is better!'\n"
-                solution_text: "Add the print command to fix it.\n"
-                solution_code: "if name is Hedy print 'Great!'\nelse print 'Hedy is better!'\n"
-        -   title: Students might use two different names for the same variable
+                error_text: "在学生使用“如果”或“否则”后，他们忘记使用第二个命令，如打印或询问。\n"
+                error_code: "如果名字是Hedy '太好了！'\n否则'Hedy更好！'\n"
+                solution_text: "添加打印命令以修复它。\n"
+                solution_code: "如果名字是 Hedy 打印 'Great!'\nelse 打印 'Hedy 更好！'\n"
+        -   title: 学生可能对同一个变量使用两个不同的名称
             example:
-                error_text: "In this example the student has used 'horse' and 'name' for the same variables.\n"
-                error_code: "horse is ask 'What is your horse called?'\nif name is Bonfire print 'cool'\nelse print 'less cool!'\n"
-                solution_text: "Always check wheter the variable has the same name throughout the code. Slight differences can be hard to spot (for example plurals) but they will interfere with the code.\n"
-                solution_code: "horse is ask 'What is your horse called'\nif horse is Bonfire print 'cool!'\nelse print 'less cool!'\n"
+                error_text: "在这个例子中，学生用'马'和'名字'来表示同一个变量。\n"
+                error_code: "马是询问'你的马叫什么？'\n如果名字是 篝火 打印 '酷'\n否则打印'不太酷！'\n"
+                solution_text: "始终检查变量在整个代码中是否具有相同的名字。微小的差异可能很难发现（例如复数），但它们会干扰代码。\n"
+                solution_code: "马是询问'你的马叫什么？'\n如果名字是 篝火 打印 '酷'\n否则打印'不太酷！'\n"
         -   title: 学生们仍然忘记了两边的引号
             example:
-                error_text: "If commandos can get very long and students tend to forget to use quotes.\n"
-                error_code: "if name is Hedy print fun\nelse print 'meh!\n"
-                solution_text: "Always use 2 quotes in a print command.\n"
-                solution_code: "if name is Hedy print 'fun'\nelse print 'meh!'\n"
+                error_text: "使用'如果'命令的代码可能会变得很长，学生往往会忘记使用引号。\n"
+                error_code: "如果名字是Hedy，则打印 好玩\n否则打印 '嗯!\n"
+                solution_text: "在打印命令中始终使用两个引号。\n"
+                solution_code: "如果名字是 Hedy 打印 '好玩'\n否则打印'嗯！'\n"
         -   title: 学生在变量名两边使用引号
             example:
-                error_text: "In this level there are no quotes around variable names.\n"
-                error_code: "if 'name' is 'Hedy' print 'fun'\nelse print 'meh!'\n"
-                solution_text: "Remove the quotes to get the code to work.\n"
-                solution_code: "if name is Hedy print 'fun'\nelse print 'meh!\n"
+                error_text: "在此级别中，变量名称两边没有引号。\n"
+                error_code: "如果 '名字' 是 'Hedy' 打印 '好玩'\n否则打印'嗯！'\n"
+                solution_text: "删除引号以使代码正常工作。\n"
+                solution_code: "如果名字是 Hedy 打印 '好玩'\n否则打印'嗯！\n"
         -   title: 学生使用包含两个单词的长变量名
             example:
-                error_text: "A variable should be named with one word. You could use an underscore to connect two words. That counts as one.\n"
-                error_code: "chosen door is ask 'Which door do you pick?'\n"
-                solution_text: "Add an underscore.\n"
-                solution_code: "chosen_door is ask 'which door do you pick?'\n"
-        -   title: Students want multiple answers to be correct
+                error_text: "一个变量应该用一个词来命名。你可以用下划线来连接两个词。这样也可以算作一个词。\n"
+                error_code: "选择的门是询问'你选哪个门？'\n"
+                solution_text: "添加一个下划线。\n"
+                solution_code: "选择_门是询问'你选哪个门？\n"
+        -   title: 学生希望多个答案都是正确的
             example:
-                error_text: "For example this student Hedy to tell all his friends that they are funny, but other classmates would be told that they are not.\n"
-                error_code: "if name is Jesse, David, Souf print 'You are funny' else print 'You are not funny'\n"
-                solution_text: "You could use the `in` command for that. It is explained in a higher level, but it does already work in level 5.\nAnother solution is to use multiple if commands and no else command. The disadvantage is that it won't tell the other classmates that they are not funny.\n"
-                solution_code: "friends is Jesse, David, Souf\nname is ask 'Who are you?'\nif name in friends print 'You are funny'\nelse print 'You are not funny'\n\nor\n\nname is ask 'Who are you?'\nif naam is Jesse print 'You are funny'\nif naam is David print 'You are funny'\nif naam is Souf print 'You are funny'\n"
-        -   title: The students make the variable name the same as the value in the if statement
+                error_text: "例如这个学生Hedy告诉他所有的朋友，他们很有趣，但其他同学会被告知他们不有趣。\n"
+                error_code: "如果名字是杰西，大卫，苏夫打印'你很有趣', 否则打印'你不好笑'\n"
+                solution_text: "你可以使用`in`命令来实现。这在更高的级别上有解释，但它在第5级上确实已经工作了。\n另一个解决方案是使用多个'如果'命令，没有'否则'命令。缺点是它不会告诉其他同学他们并不有趣。\n"
+                solution_code: "朋友们是杰西、大卫、苏夫\n名字是询问'你是谁？'\n如果名字在朋友中, 那么打印'你很有趣'\n否则就打印'你不好笑'\n\n或\n\n名字是询问'你是谁？'\n如果名字是杰西那么则打印'你很有趣'\n如果姓名是大卫那么打印'你很有趣'\n如果姓名是苏夫那么打印'你很有趣'\n"
+        -   title: 学生们使变量名与'如果'语句中的值相同
             example:
-                error_text: "In the example below the password is 'password'. This will result in it always being correct.\n"
-                error_code: "password is ask 'What is the password?'\nif password is password print 'Access granted'\nelse print 'Acces denied!'\n"
+                error_text: "在下面的例子中，密码是 'password'. 这将导致它始终是正确的.\n"
+                error_code: "密码是询问 '密码是什么?'\n如果密码是密码，打印'允许进入'\n否则打印'拒绝访问！'\n"
                 solution_text: "为你的变量选一个不同的名字。\n"
-                solution_code: "secret_password is ask '密码是什么'\nif secret_password is password print '授予访问权限！'\nelse print '访问被拒绝！'\n"
+                solution_code: "保密_密码是询问 '密码是什么'\n如果 保密_密码 是密码 打印'授予访问权限！'\n否则打印 '访问被拒绝！'\n"
         level: '5'
     -   level: '6'
         sections:
-        -   title: Students struggle with quotation marks
+        -   title: 学生在引号中挣扎
             example:
-                error_code: "print '5 + 5'\n"
-                error_text: "Some students struggle with adding quotattion marks or not. If you add quotation marks, the output screen will literally show '5+5'.\n"
-                solution_text: "In this code the output screen will print '10'.\n"
-                solution_code: "print 5 + 5\n"
+                error_code: "打印 '5 + 5'\n"
+                error_text: "有些学生在添加引号或不添加引号时很纠结。如果你加了引号，输出屏幕上就会真的显示'5+5'。\n"
+                solution_text: "在这段代码中，输出屏幕将打印'10'。\n"
+                solution_code: "打印 5 + 5\n"
         -   example:
-                solution_code: "price = 0\nprint 'Welcome to our burger restaurant'\nburger = ask 'Would you like a burger?'\nif burger = yes price = price + 10\ndrink = ask 'Would you like a drink?'\nif drink = yes price = price + 4\nprint 'That will be ' price ' euros please'\n"
-                error_text: "Some students will find it hard to do maths with variables. Try to show them very simple examples, like:\n"
-                error_code: "age = ask 'How old are you?'\nprint 'Next year you will be ' age + 1\n"
-                solution_text: "Or take it a step further like this.\n"
-            title: Students struggle with the concept of doing maths with a variable
+                solution_code: "价格=0\n打印 '欢迎来到我们的汉堡店' \n汉堡 = 询问 '你想吃汉堡吗？'\n如果汉堡 =是 价格 = 价格 + 10\n饮料 = 询问 '你想喝饮料吗？'\n如果饮料 = 是 价格 = 价格 + 4\n打印 '那将是 ' 价格 ' 欧元\n"
+                error_text: "有些学生会发现很难用变量做数学。尝试向他们展示非常简单的示例，例如：\n"
+                error_code: "年龄=询问'你现在多大了？'\n打印'明年你的年龄是'年龄+ 1\n"
+                solution_text: "或者像这样更进一步。\n"
+            title: 学生们对用变量做数学这个概念感到困惑
     -   level: '7'
         sections:
         -   example:
-                error_text: "Make sure that the students know to use both the full repeat command and the print command.\n"
-                solution_text: "This is the correct code:\n"
-                solution_code: "repeat 3 times print 'For he`s a jolly good fellow'\nrepeat 3 times print 'Which nobody can deny!'\n"
-                error_code: "repeat 3 times 'For he`s a jolly good fellow'\nrepeat 3 print 'Which nobody can deny!'\n"
-            title: Students forget one of the word of the repeat command, or they forget the print command
+                error_text: "确保学生知道同时使用完整的重复命令和打印命令。\n"
+                solution_text: "这是正确的代码：\n"
+                solution_code: "重复3次 打印 '因为他是一个快乐的好伙伴'\n重复3次 打印 '没有人可以否认！'\n"
+                error_code: "重复3次'因为他是一个快乐的好人'\n重复 3 打印'没有人可以否认！'\n"
+            title: 学生们忘记了重复命令中的一个词，或者他们忘记了打印命令。
         -   example:
                 error_text: "In this level you can only repeat one line of code multiple times. In this code the student wanted to print 3 different drinks, but it won't work. It will ask the question 3 times and only print the last answer.\n"
                 solution_code: "drink = ask 'What would you like to drink?'\nprint drink\ndrink = ask 'What would you like to drink?'\nprint drink\ndrink = ask 'What would you like to drink?'\nprint drink\n"
                 error_code: "repeat 3 times drink = ask 'What would you like to drink?'\nprint drink\n"
                 solution_text: "You should go to the next level to be able to repeat multiple lines. So on this level you'll have to print everything seperately.\n"
-            title: Students try to repeat multiple lines
+            title: 学生尝试重复多行
         -   title: Students make programs that take too long to run
             example:
                 error_text: "In this level it's very easy to make long codes. The students aren't allowed to make programs that take to long to load (to save our servers).\n"
