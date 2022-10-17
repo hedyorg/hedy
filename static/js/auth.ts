@@ -223,7 +223,7 @@ export function markAsTeacher(checkbox: any, username: string, is_teacher: boole
       modal.alert(['Error when', is_teacher ? 'marking' : 'unmarking', 'user', username, 'as teacher'].join(' '), 2000, false);
     });
   }, function () {
-    // If there is a pending request and we get here -> no confirmation on the modal so decline the request
+    // If there is a pending request and we decline the modal -> remove the teacher request
     if (pending_request) {
       $.ajax({
         type: 'POST',

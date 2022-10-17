@@ -124,6 +124,7 @@ class Modal {
     if (timeoutMs) this._timeout = setTimeout(() => this.hide(), timeoutMs);
   }
 
+  // The declineCb is optional, mainly due to being relic code: add if needed otherwise leave empty on call
   public confirm(message: string, confirmCb: () => void, declineCb: () => void = function(){}) {
     this.hide();
     $('#modal-confirm-text').text(message);
