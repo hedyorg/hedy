@@ -208,7 +208,7 @@ export function markAsTeacher(checkbox: any, username: string, is_teacher: boole
   if (is_teacher) {
     text = "Are you sure you want to make " + username + " a teacher?";
   }
-  return modal.confirm (text, function () {
+  modal.confirm (text, function () {
     $.ajax({
       type: 'POST',
       url: '/admin/markAsTeacher',
