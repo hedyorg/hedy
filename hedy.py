@@ -1022,6 +1022,11 @@ class IsValid(Filter):
     def error_repeat_no_times(self, meta, args):
         error = InvalidInfo('repeat missing times', arguments=[str(args[0])], line=meta.line, column=meta.column)
         return False, error, meta
+
+    def error_text_no_print(self, meta, args):
+        error = InvalidInfo('lonely text', arguments=[str(args[0])], line=meta.line, column=meta.column)
+        return False, error, meta
+
     #other rules are inherited from Filter
 
 def valid_echo(ast):
@@ -2307,6 +2312,8 @@ def is_program_valid(program_root, input_string, level, lang):
             raise exceptions.UnquotedTextException(level=level, unquotedtext=unquotedtext)
         elif invalid_info.error_type == 'unsupported number':
             raise exceptions.UnsupportedFloatException(value=''.join(invalid_info.arguments))
+        elif invalid_info.error_type == 'lonely text':
+            raise exceptions.LonelyTextException(level=level, line_number=line)
         else:
             invalid_command = invalid_info.command
             closest = closest_command(invalid_command, get_suggestions_for_language(lang, level))

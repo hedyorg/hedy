@@ -155,6 +155,12 @@ class IncompleteRepeatException(HedyException):
             level=level,
             line_number=line_number)
 
+class LonelyTextException(HedyException):
+    def __init__(self, level, line_number):
+        super().__init__('Lonely Text',
+            level=level,
+            line_number=line_number)
+
 class IncompleteCommandException(HedyException):
     def __init__(self, incomplete_command, level, line_number):
         super().__init__('Incomplete',
