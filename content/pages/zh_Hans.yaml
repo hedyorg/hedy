@@ -100,24 +100,24 @@ sections:
         -   title: 学生在打印命令中使用变量名作为单词
             example:
                 error_text: "在下面的例子中，单词'name'被用作一个变量，但也是一个普通文本。这段代码的输出将是'Hi my Hedy is Hedy'。\n"
-                error_code: "name is Hedy\nprint Hi my name is name\n"
-                solution_text: "So don't use a word you want to use in the text as a variable name. In level 4 this is solved with quotation marks.\n"
-                solution_code: "name is Hedy\nprint Hi I'm name\n"
-        -   title: Students use long variable names containing two words.
+                error_code: "名字是Hedy\n打印 嗨，我的名字是名字\n"
+                solution_text: "所以不要用你想在文本中使用的词作为变量名。在第 4 级中，这个问题是用引号解决的。\n"
+                solution_code: "名字是Hedy\n打印 嗨，我是名字\n"
+        -   title: 学生们使用包含两个单词的长变量名。
             example:
-                error_text: "A variable should be named with one word. You could use an underscore to connect two words. That counts as one.\n"
-                error_code: "chosen door is ask Which door do you pick?\n"
-                solution_text: "Add an underscore.\n"
-                solution_code: "chosen_door is ask which door do you pick?\n"
-        -   title: Students might use two different names for the same variable
+                error_text: "一个变量应该用一个词来命名。你可以用下划线来连接两个词。这样也可以算作一个词。\n"
+                error_code: "选择门是询问你选择哪个门？\n"
+                solution_text: "添加一个下划线。\n"
+                solution_code: "选择_门是询问你选择哪个门？\n"
+        -   title: 学生们可能对同一个变量使用两个不同的名称
             example:
-                error_text: "In this example the student has used 'horse' and 'name' for the same variables.\n"
-                error_code: "horse is ask What is your horse called?\nprint Your horse is called name\n"
-                solution_text: "Always check wheter the variable has the same name throughout the code. Slight differences can be hard to spot (for example plurals) but they will interfere with the code.\n"
-                solution_code: "name is ask What is your horse called?\nprint Your horse is called name\n"
+                error_text: "在这个例子中，学生用'马'和'名字'来表示同一个变量。\n"
+                error_code: "马是询问你的马叫什么？\n打印你的马叫名字\n"
+                solution_text: "始终检查变量在整个代码中是否具有相同的名称。微小的差异可能很难发现（例如复数），但它们会干扰代码。\n"
+                solution_code: "名字是问你的马叫什么？\n打印你的马叫名字\n"
     -   level: '3'
         sections:
-        -   title: Students try to print whole lists
+        -   title: 学生们尝试打印整个列表
             example:
                 error_text: "A list can't be printed. You can only print one item from the list with at random.\n"
                 error_code: "groceries is apples, milk, chocolate\nprint groceries\n"
