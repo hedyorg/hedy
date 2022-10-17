@@ -202,13 +202,13 @@ $('form#public_profile').submit(function(e) {
 
 // *** Admin functionality ***
 
-export function markAsTeacher(checkbox: any, username: string, is_teacher: boolean) {
+export function markAsTeacher(checkbox: any, username: string, is_teacher: boolean, pending_request: boolean) {
   $(checkbox).prop('checked', false);
   let text = "Are you sure you want to remove " + username + " as a teacher?";
   if (is_teacher) {
     text = "Are you sure you want to make " + username + " a teacher?";
   }
-  modal.confirm (text, function () {
+  return modal.confirm (text, function () {
     $.ajax({
       type: 'POST',
       url: '/admin/markAsTeacher',
@@ -223,6 +223,20 @@ export function markAsTeacher(checkbox: any, username: string, is_teacher: boole
       modal.alert(['Error when', is_teacher ? 'marking' : 'unmarking', 'user', username, 'as teacher'].join(' '), 2000, false);
     });
   });
+  // If there is a pending request and we get here -> no confirmation on the modal so decline the request
+  if (pending_request) {
+    $.ajax({
+      type: 'POST',
+      url: '/admin/markAsTeacher',
+      data: JSON.stringify({
+        username: username,
+        is_teacher: false
+      }),
+      contentType: 'application/json; charset=utf-8'
+    }).done(function () {
+      location.reload();
+    });
+  }
 }
 
 export function changeUserEmail(username: string, email: string) {
