@@ -630,3 +630,7 @@ class Database:
     def to_year_week(self, d):
         cal = d.isocalendar()
         return f'{cal[0]}-{cal[1]:02d}'
+
+    def get_username_role(self, username):
+        role = 'teacher' if USERS.get({'username': username}).get('teacher_request') is True else 'student'
+        return role
