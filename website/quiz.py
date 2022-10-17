@@ -58,7 +58,6 @@ class QuizModule(WebsiteModule):
 
     @route('/get-question/<int:level>/<int:question>', methods=['GET'])
     def get_quiz_question(self, level, question):
-
         session['attempt'] = 0
         if question > self.quizzes[g.lang].get_highest_question_level(level) or question < 1:
             return gettext('question_doesnt_exist'), 400
