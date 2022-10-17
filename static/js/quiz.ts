@@ -25,13 +25,13 @@ export function startQuiz(level: number) {
       contentType: 'application/json',
       dataType: 'json'
     }).done(function() {
-        loadQuestQuestion(level, 1);
+        loadQuizQuestion(level, 1);
     }).fail(function(err) {
        modal.alert(err.responseText, 3000, true);
     });
 }
 
-export function loadQuestQuestion(level: number, question: number) {
+export function loadQuizQuestion(level: number, question: number) {
     // If we get the request from the feedback page -> always hide the feedback container
     $('#quiz_feedback_container').hide();
 
@@ -185,7 +185,7 @@ function showFeedback(response: any, question: string, correct: boolean) {
 
     if (response.next_question) {
         $('#next_question_number_container').text(parseInt(question) + 1);
-        $('#next_question_button').attr('onclick', "hedyApp.loadQuestQuestion(" + response.level + "," + (parseInt(question) + 1) + ");");
+        $('#next_question_button').attr('onclick', "hedyApp.loadQuizQuestion(" + response.level + "," + (parseInt(question) + 1) + ");");
         $('#next_question_button').show();
     } else {
         $('#next_question_button').hide();
