@@ -3,8 +3,6 @@ import { goToTeachersPage } from "../navigation/nav";
 
 export function createClass()
 {
-    goToTeachersPage();
-
     // Click 'Create new class' button
     cy.get('#teacher_classes > .green-btn').click();
 
