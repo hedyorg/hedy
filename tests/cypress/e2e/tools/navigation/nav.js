@@ -25,4 +25,9 @@ export function goToLogin()
     return goToPage("/login");
 }
 
+export function goToTeachersPage()
+{
+    return goToPage('/for-teachers');
+}
+
 export default {goToPage, goToRegister}
