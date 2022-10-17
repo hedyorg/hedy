@@ -21,6 +21,14 @@ t.speed(3)
 t.showturtle()
 `;
 
+const pygame_prefix =
+`# coding=utf8
+import pygame
+pygame.init()
+canvas = pygame.display.set_mode((711,300))
+canvas.fill(pygame.Color(247, 250, 252, 255))
+`;
+
 const normal_prefix =
 `# coding=utf8
 import random, time
@@ -375,6 +383,7 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
     clearErrors(editor);
     removeBulb();
     console.log('Original program:\n', code);
+
     $.ajax({
       type: 'POST',
       url: '/parse',
@@ -408,7 +417,7 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
         $('#runit').show();
         return;
       }
-      runPythonProgram(response.Code, response.has_turtle, response.has_sleep, response.Warning, cb).catch(function(err) {
+      runPythonProgram(response.Code, response.has_turtle, response.has_pygame, response.has_sleep, response.Warning, cb).catch(function(err) {
         // The err is null if we don't understand it -> don't show anything
         if (err != null) {
           error.show(ErrorMessages['Execute_error'], err.message);
@@ -918,7 +927,7 @@ window.onerror = function reportClientException(message, source, line_number, co
   });
 }
 
-function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep: boolean, hasWarnings: boolean, cb: () => void) {
+export function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasPygame: boolean, hasSleep: boolean, hasWarnings: boolean, cb: () => void) {
   // If we are in the Parsons problem -> use a different output
   let outputDiv = $('#output');
 
@@ -930,12 +939,13 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
   outputDiv.append(variables);
 
   const storage = window.localStorage;
+  let skulptExternalLibraries:{[index: string]:any} = {};
   let debug = storage.getItem("debugLine");
 
   Sk.pre = "output";
   const turtleConfig = (Sk.TurtleGraphics || (Sk.TurtleGraphics = {}));
   turtleConfig.target = 'turtlecanvas';
-  // If the adventures are not shown -> increase height of turtleConfig
+  // If the adventures are not shown  -> increase height of turtleConfig
   if ($('#adventures-tab').is(":hidden")) {
       turtleConfig.height = 600;
       turtleConfig.worldHeight = 600;
@@ -947,7 +957,7 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
   turtleConfig.width = outputDiv.width();
   turtleConfig.worldWidth = outputDiv.width();
 
-  if (!hasTurtle) {
+  if (!hasTurtle && !hasPygame) {
     // There might still be a visible turtle panel. If the new program does not use the Turtle,
     // remove it (by clearing the '#turtlecanvas' div)
     $('#turtlecanvas').empty();
@@ -955,7 +965,56 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
   } else {
     // Otherwise make sure that it is shown as it might be hidden from a previous code execution.
     $('#turtlecanvas').show();
+  }
+
+  if (hasTurtle) {
     code = normal_prefix + turtle_prefix + code
+  }
+
+  if (hasPygame){
+    skulptExternalLibraries = {
+      './pygame.js': {
+        path: "/vendor/pygame_4_skulpt/init.js",
+      },
+      './display.js': {
+        path: "/vendor/pygame_4_skulpt/display.js",
+      },
+      './draw.js': {
+        path: "/vendor/pygame_4_skulpt/draw.js",
+      },
+      './event.js': {
+        path: "/vendor/pygame_4_skulpt/event.js",
+      },
+      './font.js': {
+        path: "/vendor/pygame_4_skulpt/font.js",
+      },
+      './image.js': {
+        path: "/vendor/pygame_4_skulpt/image.js",
+      },
+      './key.js': {
+        path: "/vendor/pygame_4_skulpt/key.js",
+      },
+      './mouse.js': {
+        path: "/vendor/pygame_4_skulpt/mouse.js",
+      },
+      './transform.js': {
+        path: "/vendor/pygame_4_skulpt/transform.js",
+      },
+      './locals.js': {
+        path: "/vendor/pygame_4_skulpt/locals.js",
+      },
+      'src/lib/time.js': {
+        path: "/vendor/pygame_4_skulpt/time.js",
+      },
+      './version.js': {
+        path: "/vendor/pygame_4_skulpt/version.js",
+      },
+    };
+
+    code = pygame_prefix + normal_prefix + code
+
+    initSkulpt4Pygame();
+    initCanvas4PyGame();
   }
 
   Sk.configure({
@@ -1062,6 +1121,26 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
   }
 
   function builtinRead(x: string) {
+    if (x in skulptExternalLibraries) {
+      const tmpPath = skulptExternalLibraries[x]["path"];
+      if (x === "./pygame.js") {
+        return Sk.misceval.promiseToSuspension(
+          fetch(tmpPath)
+              .then(r => r.text()))
+
+      } else {
+        let request = new XMLHttpRequest();
+        request.open("GET", tmpPath, false);
+        request.send();
+
+        if (request.status !== 200) {
+          return void 0
+        }
+
+        return request.responseText
+      }
+    }
+
     if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
         throw "File not found: '" + x + "'";
     return Sk.builtinFiles["files"][x];
@@ -1118,6 +1197,85 @@ function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasSleep:
       });
     }
   }
+}
+
+function resetTurtleTarget() {
+    if (Sk.TurtleGraphics !== undefined) {
+
+      let selector = Sk.TurtleGraphics.target;
+      let target = typeof selector === "string" ? document.getElementById(selector) : selector;
+      if (target !== null && target !== undefined){
+        // clear canvas container
+        while (target.firstChild) {
+          target.removeChild(target.firstChild);
+        }
+        return target;
+      }
+
+    }
+
+    return null;
+}
+
+function initCanvas4PyGame() {
+    let currentTarget = resetTurtleTarget();
+
+    let div1 = document.createElement("div");
+
+    if (currentTarget !== null) {
+      currentTarget.appendChild(div1);
+      $(div1).addClass("modal");
+      $(div1).css("text-align", "center");
+
+      let div2 = document.createElement("div");
+      $(div2).addClass("modal-dialog modal-lg");
+      $(div2).css("display", "inline-block");
+      $(div2).width(self.width + 42);
+      $(div2).attr("role", "document");
+      div1.appendChild(div2);
+
+      let div3 = document.createElement("div");
+      $(div3).addClass("modal-content");
+      div2.appendChild(div3);
+
+      let div4 = document.createElement("div");
+      $(div4).addClass("modal-header d-flex justify-content-between");
+      let div5 = document.createElement("div");
+      $(div5).addClass("modal-body");
+      let div6 = document.createElement("div");
+      $(div6).addClass("modal-footer");
+      let div7 = document.createElement("div");
+      $(div7).addClass("col-md-8");
+      let div8 = document.createElement("div");
+      $(div8).addClass("col-md-4");
+
+      div3.appendChild(div4);
+      div3.appendChild(div5);
+      div3.appendChild(div6);
+
+      Sk.main_canvas.style.border = "none";
+      div5.appendChild(Sk.main_canvas);
+    }
+}
+
+function initSkulpt4Pygame() {
+    const killWhileAndForBool = true;
+    Sk.main_canvas = document.createElement("canvas");
+    Sk.builtin.KeyboardInterrupt = function (_:any) {
+        let o;
+        if (!(this instanceof Sk.builtin.KeyboardInterrupt)) {
+            o = Object.create(Sk.builtin.KeyboardInterrupt.prototype);
+            o.constructor.apply(o, arguments);
+            return o;
+        }
+        Sk.builtin.BaseException.apply(this, arguments);
+    };
+    Sk.abstr.setUpInheritance("KeyboardInterrupt", Sk.builtin.KeyboardInterrupt, Sk.builtin.BaseException);
+    Sk.configure({
+        killableWhile: killWhileAndForBool,
+        killableFor: killWhileAndForBool,
+        __future__: Sk.python3,
+    });
 }
 
 function speak(text: string) {

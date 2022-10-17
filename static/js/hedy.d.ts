@@ -68,7 +68,7 @@ interface State {
 
 declare interface Window {
   State: State;
-
+  width: int;
   editor?: AceAjax.Editor;
 }
 

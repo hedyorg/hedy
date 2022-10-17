@@ -2,14 +2,9 @@ export function goToPage(page)
 {
     if (typeof page === 'string' || page instanceof String)
     {
-        let url = Cypress.env('base_url');
-        if(url != "")
+        if(page != "")
         {
-            cy.visit(url + page);
-        }
-        else
-        {
-            cy.visit('http://localhost:8080' + page);
+            cy.visit(page);
         }
         
     }
@@ -28,6 +23,11 @@ export function goToRegister()
 export function goToLogin()
 {
     return goToPage("/login");
+}
+
+export function goToTeachersPage()
+{
+    return goToPage('/for-teachers');
 }
 
 export default {goToPage, goToRegister}
