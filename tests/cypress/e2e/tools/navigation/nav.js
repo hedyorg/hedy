@@ -2,14 +2,9 @@ export function goToPage(page)
 {
     if (typeof page === 'string' || page instanceof String)
     {
-        let url = Cypress.env('base_url');
-        if(url != "")
+        if(page != "")
         {
-            cy.visit(url + page);
-        }
-        else
-        {
-            cy.visit('http://localhost:8080' + page);
+            cy.visit(page);
         }
         
     }
