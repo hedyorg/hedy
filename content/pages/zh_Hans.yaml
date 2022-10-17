@@ -119,20 +119,20 @@ sections:
         sections:
         -   title: 学生们尝试打印整个列表
             example:
-                error_text: "A list can't be printed. You can only print one item from the list with at random.\n"
-                error_code: "groceries is apples, milk, chocolate\nprint groceries\n"
-                solution_text: "To print a list of all the groceries, you simply need to put them after a print command. Else you can use the list to print one item with at random.\n"
-                solution_code: "print apples, milk, chocolate\n\nor\n\ngroceries is apples, milk, chocolate\nprint groceries at random\n"
+                error_text: "无法打印列表。您只能用随机地命令打印列表中的一个项目。\n"
+                error_code: "食品是苹果，牛奶，巧克力\n打印食品\n"
+                solution_text: "要打印所有食品的列表，您只需将它们放在打印命令之后即可。否则，您可以使用随机地命令打印列表中的一个项目。\n"
+                solution_code: "打印苹果，牛奶，巧克力\n\n或\n\n食品是苹果，牛奶，巧克力\n打印食品随机地\n"
         -   title: 学生使用变量或列表的名称作为常规文本
             example:
-                error_text: "This problem probably occured in level 2 as well. Now it can happen with lists too.\n"
-                error_code: "name is Hedy\nprint Hi my name is name\n\nor\n\nanimal is rhino, bee, swan\nprint The best animal is... animal at random\n"
-                solution_text: "Don;t use the names of variables or lists in regular text to print. In level 4 this problem is solves with quotation marks.\n"
-                solution_code: "name is Hedy\nprint Hi I'm name\n\nor\n\nanimals is rhino, bee, swan\nprint The best animal is... animals at random\n"
-        -   title: Students forget at in at random
+                error_text: "此问题可能也发生在级别 2 中。现在，列表也可能发生这种情况。\n"
+                error_code: "名字是Hedy\n打印 嗨，我的名字是名字\n\n或\n\n动物是犀牛，蜜蜂，天鹅\n打印最好的动物是...动物随机地\n"
+                solution_text: "不要在常规文本中使用变量或列表的名称并打印。在第 4 级中，这个问题是用引号解决的。\n"
+                solution_code: "名字是Hedy\n打印 嗨，我的名字\n\n或\n\n动物们是犀牛，蜜蜂，天鹅\n打印 最好的动物是...动物们随机地\n"
+        -   title: 学生随机忘记
             example:
-                error_text: "Like in the example\n"
-                error_code: "birds is sparrow, seagull, robin\nprint birds random\n"
+                error_text: "如例所示\n"
+                error_code: "鸟类是麻雀，海鸥，知更鸟\n随机地打印鸟类\n"
                 solution_text: "This problem is solved by adding the word at.\n"
                 solution_code: "birds is sparrow, seagull, robin\nprint birds at random\n"
         -   title: 学生在使用随机选择命令时忘记了使用打印命令
@@ -147,10 +147,10 @@ sections:
                 error_code: "pizzas is funghi tonno quattro stagioni\nprint pizzas at random\n"
                 solution_text: "After each item on your list, there should be a comma\n"
                 solution_code: "pizzas is funghi, tonno, quattro stagioni\nprint pizzas at random\n"
-        -   title: 学生尝试在没有列表的情况下使用随机选择命令
+        -   title: 学生尝试在没有列表的情况下使用随机地命令
             example:
-                error_text: "For example\n"
-                error_code: "clubs is Manchester United\nprint clubs at random\n"
+                error_text: "例如\n"
+                error_code: "俱乐部是曼联\n随机地打印俱乐部\n"
                 solution_text: "Hedy can't print anything at random, because there is no list to choose from.\n"
                 solution_code: "clubs is Manchester United, Bayrn Munchen, FC Barcelona\nprint clubs at random\n"
         -   title: 'Students try to use add/remove without a list '
