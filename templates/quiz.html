@@ -16,7 +16,7 @@
         </div>
     </div>
 {% endif %}
-<div id="quiz_container" class="{% if not preview %}hidden{% endif %}">
+<div id="quiz_container" class="hidden">
     <div class="flex flex-row items-center justify-around gap-2">
         {%  if quiz_questions %}
             {% for i in range(1, quiz_questions + 1)%}
