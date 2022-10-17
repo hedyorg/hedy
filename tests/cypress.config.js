@@ -12,6 +12,7 @@ module.exports = defineConfig({
   env: {
     base_url: 'http://localhost:8080',
     login_page: '/login',
-    hedy_page: '/hedy'
+    hedy_page: '/hedy',
+    stats_class_page: '/stats/class'
   }
 });
