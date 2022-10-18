@@ -79,13 +79,13 @@ levels:
                 feedback: "我们故意把“I'm”写错成“Im”，因为海迪现在还无法理解撇号。"
             -   option: "`{echo}`不是一个命令。"
                 feedback: "`{echo}`是一个命令。错的是别的地方。"
-            -   option: "Nothing! This is a perfect code!"
-                feedback: "Wrong, look carefully!"
+            -   option: "没有错！这代码很完美！"
+                feedback: "错了，仔细看！"
             correct_answer: "A"
-            hint: "Line 1 doesn't seem right"
+            hint: "第一行看上去不对"
             question_score: '10'
         5:
-            question_text: "Which command is missing in line 2?"
+            question_text: "第二行缺少了哪个命令？"
             code: |-
                 {ask} 你最喜欢的宠物是什么？
                 _?_ 所以你最喜欢的宠物是...
@@ -94,46 +94,46 @@ levels:
                     ```
                     {print}
                     ```
-                feedback: "No, you would like the answer to be repeated back to you."
+                feedback: "不，你想要的是复述你的回答。"
             -   option: |
                     ```
                     Hedy
                     ```
-                feedback: "Hedy isn't a command."
+                feedback: "“海迪”不是一个命令。"
             -   option: |
                     ```
                     {ask}
                     ```
-                feedback: "With `{ask}` you can ask a question."
+                feedback: "你可以用`{ask}`提出一个问题。"
             -   option: |
                     ```
                     {echo}
                     ```
                 feedback: "Right on!"
             correct_answer: "D"
-            hint: "You want to see the answer at the end of line 2..."
+            hint: "你想要在第二行的最后看到回答……"
             question_score: '10'
         6:
-            question_text: "What's wrong with this code?"
+            question_text: "这段代码哪里错了？"
             code: |-
-                {print} Hi im Hedy!
-                {print} Which football team do you support?
-                {echo} You support...
-                {print} Cool! Me too!
+                {print} 你好，我是海迪！
+                {print} 你支持哪支足球队？
+                {echo} 你支持……
+                {print} 酷！我也一样！
             mp_choice_options:
             -   option: "In line 1 `{print}` should be replaced with `{ask}`."
-                feedback: "`{print}` in line 1 is correct."
+                feedback: "第一行的`{print}`是正确的。"
             -   option: "In line 2, `{print}` should be replaced with `{ask}`."
-                feedback: "Great! You paid attention!"
-            -   option: "Line 3 has to begin with `{print}` instead of `{echo}`."
-                feedback: "`{echo}` is correct."
-            -   option: "In line 4, `{print}` is spelled wrong."
+                feedback: "很好！你注意到了！"
+            -   option: "第三行必须以`{print}`，而不是`{echo}`开头。"
+                feedback: "`{echo}`是正确的。"
+            -   option: "第四行的`{print}`写错了。"
                 feedback: "不，其他地方有错误"
             correct_answer: "B"
-            hint: "Check the `{print}` commands."
+            hint: "检查`{print}`命令。"
             question_score: '10'
         7:
-            question_text: "What's wrong with this code?"
+            question_text: "这段代码哪里错了？"
             code: |-
                 {print} 欢迎来到海迪餐厅！
                 {ask} 你想吃什么？
@@ -141,9 +141,9 @@ levels:
                 {print} 马上就来！好好享受！
             mp_choice_options:
             -   option: "In line 1 `{print}` needs to be replaced with `{ask}`"
-                feedback: "Are you sure something is wrong?"
+                feedback: "你确定有哪里错误吗？"
             -   option: "In line 1 `{print}` needs to be replaced with `{echo}`"
-                feedback: "Are you sure something's wrong?"
+                feedback: "你确定有哪里错误吗？"
             -   option: "In line 3 `{echo}` needs to be replaced with `{print}`"
                 feedback: "Are you sure something is wrong?"
             -   option: "Nothing! This is a perfect code!"
