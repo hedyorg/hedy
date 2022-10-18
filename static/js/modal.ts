@@ -124,7 +124,8 @@ class Modal {
     if (timeoutMs) this._timeout = setTimeout(() => this.hide(), timeoutMs);
   }
 
-  public confirm(message: string, confirmCb: () => void) {
+  // The declineCb is optional, mainly for relic code support: add if needed otherwise leave empty on call
+  public confirm(message: string, confirmCb: () => void, declineCb: () => void = function(){}) {
     this.hide();
     $('#modal-confirm-text').text(message);
     this.show();
@@ -138,6 +139,10 @@ class Modal {
     $('#modal-yes-button').off('click').on('click', () => {
       this.hide();
       confirmCb();
+    });
+    $('#modal-no-button').off('click').on('click', () => {
+      this.hide();
+      declineCb();
     });
   }
 
