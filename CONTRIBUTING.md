@@ -203,7 +203,7 @@ docker build -t hedy .
 and then:
 
 ```bash
-docker run -it --rm -p 8080:8080 hedy
+docker run -it --rm -p 8080:8080 --mount type=bind,source="$(pwd)",target=/app hedy
 ```
 
 ## Testing Teacher facing features locally
