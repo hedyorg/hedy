@@ -151,14 +151,14 @@
             </div>
         </div>
         {% if not next_level and username %} <!-- Only show certificate at last level-->    
-        <div>
-            <p class="text-3xl font-bold tracking-wide text-blue-900 text-center justify-center font-slab" id="question_feedback_text_container">Congragulations! You have completed Hedy!</p> 
-            <div class="container flex flex-col py-4 px-4 items-center justify-center">
-                <button class="green-btn text-white px-8 py-4" onclick="window.location={{'\'/certificate/'~username~'\''}}">
-                        {{ _('get_certificate') }}
-                </button>
+            <div>
+                <p class="text-3xl font-bold tracking-wide text-blue-900 text-center justify-center font-slab" id="question_feedback_text_container">Congragulations! You have completed Hedy!</p> 
+                <div class="container flex flex-col py-4 px-4 items-center justify-center">
+                    <button class="green-btn text-white px-8 py-4" onclick="window.location={{'\'/certificate/'~username~'\''}}">
+                            {{ _('get_certificate') }}
+                    </button>
+                </div>
             </div>
-        </div>
         {% endif %}      
         {% if next_level %}
             <div class="flex py-4 px-4 bg-green-300 justify-between border-t-8 border-green-600">
