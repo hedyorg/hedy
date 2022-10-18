@@ -252,25 +252,25 @@ sections:
                 error_code: "重复3次'因为他是一个快乐的好人'\n重复 3 打印'没有人可以否认！'\n"
             title: 学生们忘记了重复命令中的一个词，或者他们忘记了打印命令。
         -   example:
-                error_text: "In this level you can only repeat one line of code multiple times. In this code the student wanted to print 3 different drinks, but it won't work. It will ask the question 3 times and only print the last answer.\n"
-                solution_code: "drink = ask 'What would you like to drink?'\nprint drink\ndrink = ask 'What would you like to drink?'\nprint drink\ndrink = ask 'What would you like to drink?'\nprint drink\n"
-                error_code: "repeat 3 times drink = ask 'What would you like to drink?'\nprint drink\n"
-                solution_text: "You should go to the next level to be able to repeat multiple lines. So on this level you'll have to print everything seperately.\n"
+                error_text: "在此级别中，您只能多次重复一行代码。在这段代码中，学生想打印3种不同的饮料，但它不起作用。它会问这个问题3次，只打印最后一个答案。\n"
+                solution_code: "饮料 = 询问‘你想喝什么？’\n打印饮料\n饮料 = 询问‘你想喝什么？’\n打印饮料\n饮料 =询问‘你想喝什么？’\n打印饮料\n"
+                error_code: "重复3次 饮料 = 询问‘你想喝什么？’\n打印饮料\n"
+                solution_text: "您应该进入下一个级别，以便能够重复多行。因此，在这个级别上，您必须单独打印所有内容。\n"
             title: 学生尝试重复多行
-        -   title: Students make programs that take too long to run
+        -   title: 学生编写的程序运行时间过长
             example:
-                error_text: "In this level it's very easy to make long codes. The students aren't allowed to make programs that take to long to load (to save our servers).\n"
-                error_code: "repeat 100 times print 'How many times can I repeat this?'\n"
-                solution_text: "Make sure the codes aren't too long\n"
-                solution_code: "repeat 20 times print 'This is enough'\n"
+                error_text: "在这个级别中，编写长代码非常容易。不允许学生编写需要很长时间才能加载的程序（以保护我们的服务器）。\n"
+                error_code: "重复100次打印‘我可以重复多少次？’\n"
+                solution_text: "确保代码不会太长\n"
+                solution_code: "重复20次打印‘这就足够了’\n"
     -   level: '8'
         sections:
-        -   title: Students use the indentation wrong
+        -   title: 学生用错了缩进
             example:
-                error_text: "Indentation is a new concept in this level, that is hard to use for some students. Make sure they practise some simple codes before making a whole program with it.\n"
-                error_code: "repeat 3 times\nprint 'hello'\n"
-                solution_text: "This is the correct code:\n"
-                solution_code: "repeat 3 times\n    print 'hello'\n"
+                error_text: "缩进是这个级别的一个新概念，对于一些学生来说很难使用。确保他们在使用它编写整个程序之前先练习编写一些简单的代码。\n"
+                error_code: "重复 3 次\n打印'你好'\n"
+                solution_text: "这是正确的代码：\n"
+                solution_code: "重复 3 次\n    打印'你好'\n"
         -   example:
                 error_code: "repeat 3 times\n    drink = ask 'What would you like to drink?'\nprint drink\n"
                 solution_text: "In the correct code the third line starts with indentation too. This way it belongs to the repeat block and therefore it will be repeated 3 times.\nShowing your students these differences can help them understand why we need indentation to make our programs work.\n"
