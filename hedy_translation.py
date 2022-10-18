@@ -116,14 +116,14 @@ def find_keyword_in_rules(rules, keyword, start_line, end_line, start_column, en
 def get_original_keyword(keyword_dict, keyword, line):
     found = False
     for word in keyword_dict[keyword]:
-        if word in line:            
+        if word in line:
             original = word
             found = True
     # If we can't find the keyword, it means that it isn't part of the valid keywords for this language
     # so return original instead
     if found:
         return original
-    else:        
+    else:
         return keyword
 
 def get_target_keyword(keyword_dict, keyword):
@@ -263,6 +263,9 @@ class Translator(Visitor):
     def input_empty_brackets(self, tree):
         self.add_rule('_IS', 'is', tree)
         self.add_rule('_INPUT', 'input', tree)
+
+    def pressed(self, tree):
+        self.add_rule('_PRESSED', 'pressed', tree)
 
     def add_rule(self, token_name, token_keyword, tree):
         token = self.get_keyword_token(token_name, tree)

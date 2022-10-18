@@ -379,6 +379,7 @@ def parse():
                 exception = ex
         try:
             response['Code'] = transpile_result.code
+            response['has_pygame'] = True
             if transpile_result.has_turtle:
                 response['has_turtle'] = True
         except Exception as E:
@@ -510,6 +511,7 @@ def transpile_add_stats(code, level, lang_):
         result = hedy.transpile(code, level, lang_)
         statistics.add(
             username, lambda id_: DATABASE.add_program_stats(id_, level, None))
+        print(result)
         return result
     except Exception as ex:
         statistics.add(username, lambda id_: DATABASE.add_program_stats(

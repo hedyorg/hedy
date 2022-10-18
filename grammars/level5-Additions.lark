@@ -3,7 +3,7 @@ _empty_program: (_EOL | _SPACE)*
 _non_empty_program: _EOL* (command | error_invalid) _SPACE* (_EOL+ command _SPACE*)* _EOL* //lines may end on spaces and might be separated by many newlines
 
 //placing assign after print means print is will print 'is' and print is Felienne will print 'is Felienne'
-command:+= ifelse | ifs | list_access_var -= error_invalid | error_ask_no_quotes > assign
+command:+= ifpressed | ifelse | ifs | list_access_var -= error_invalid | error_ask_no_quotes > assign
 _if_less_command: print | ask | turtle | assign_list | add | remove | sleep | error_print_no_quotes | list_access_var | assign
 
 // error_invalid is moved from to command to program, so that command rules have priority over error_invalid
@@ -17,7 +17,8 @@ assign: var _IS textwithspaces
 error_print_no_quotes: _PRINT (textwithoutspaces | list_access | var_access) (_SPACE (textwithoutspaces | list_access | var_access))*  -> error_print_nq
 
 // new commands for level 5
-_if_clause: _IF (condition (_SPACE+ _EOL* | _SPACE* _EOL+) | condition_spaces _SPACE* _EOL+ | error_condition | keypress_character _SPACE* _IS _SPACE* _PRESSED) _if_less_command
+ifpressed: _IF (keypress_character _IS _PRESSED | quoted_keypress_character _IS _PRESSED) _SPACE* _if_less_command
+_if_clause: _IF (condition (_SPACE+ _EOL* | _SPACE* _EOL+) | condition_spaces _SPACE* _EOL+ | error_condition) _if_less_command
 error_condition: condition_spaces _SPACE
 ifelse: _if_clause (_SPACE+ _EOL* | _SPACE* _EOL+) _ELSE (_SPACE+ _EOL* | _SPACE* _EOL+) _if_less_command
 ifs: _if_clause // 'if' is a reserved word in Python, hence the name of the rule is 'ifs'
@@ -31,7 +32,9 @@ in_list_check: textwithoutspaces _IN var_access
 
 nospace: /[^\n, ]/
 
-keypress_character: /[a-zA-Z]/
+keypress_character: /[a-zA-Z]/ -> text
+quoted_keypress_character: (/'[a-zA-Z]'/ | /"[a-zA-Z]"/) -> text
+
 
 textwithspaces: /(?:[^#\n،,， ]| (?!else|başka|अन्यथा|否则|senão|ellers|alie|иначе|altrimenti|anders|inaczej|sinon|sino|אחרת|وإلا))+/ -> text //anything can be parsed except for a newline and a comma for list separators
 //a space is allowed, but it may not be followed by an else. The part " (?!else))" means space not followed by (negative look ahead) else
@@ -42,4 +45,3 @@ textwithoutspaces: /(?:[^#\n،,， *+\-\/eiиasbअ否אو]|א(?!חרת )|و(?!�
 
 
 //
-
