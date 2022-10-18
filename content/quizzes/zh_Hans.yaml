@@ -67,18 +67,18 @@ levels:
             hint: "你可以用`{ask}`命令提问"
             question_score: '10'
         4:
-            question_text: "What is wrong with this code?"
+            question_text: "这段代码哪里错了？"
             code: |-
                 Hi Im Hedy!
                 {ask} Who are you?
                 {echo} Hi...
             mp_choice_options:
-            -   option: "`{print}` in line 1 is missing."
-                feedback: "Correct!"
-            -   option: "Im in line 1 is spelled wrong."
-                feedback: "Im is spelled wrong on purpose; Hedy doesn't understand the apostrophes yet."
-            -   option: "`{echo}` isn't a command."
-                feedback: "`{echo}` is a command, there's another mistake."
+            -   option: "第一行缺少了`{print}`。"
+                feedback: "正确！"
+            -   option: "第一行的“Im”的写法在英语中是错误的。"
+                feedback: "我们故意把“I'm”写错成“Im”，因为海迪现在还无法理解撇号。"
+            -   option: "`{echo}`不是一个命令。"
+                feedback: "`{echo}`是一个命令。错的是别的地方。"
             -   option: "Nothing! This is a perfect code!"
                 feedback: "Wrong, look carefully!"
             correct_answer: "A"
