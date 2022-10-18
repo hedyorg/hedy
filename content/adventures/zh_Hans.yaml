@@ -203,22 +203,22 @@ adventures:
                     {for} i {in} {range} 1 {to} 10:
                         {print} i
                     {print} '无论你是否准备好了，我都会来的!'
-                story_text: "## 否则如果\n现在我们将对缩进进行一些改变. 每当我们需要用缩进时, 我们都需要在缩进前的那一行使用冒号`:` .\n\n在此级别中，你还可以使用新命令：`{elif}`。 `{elif}` 是 {else} {if} 的缩写，当您想要在3 个（或更多！）选项中做出选择的时候需要用到它。\n看看吧！"
+                story_text: "## 否则如果\n现在我们将对缩进进行一些改变。每当我们需要用缩进时，我们都需要在缩进前的那一行使用冒号`:` 。\n\n在此级别中，你还可以使用新命令：`{elif}`。 `{elif}` 是 {else} {if} 的缩写，当您想要在3 个（或更多！）选项中做出选择的时候需要用到它。\n看看吧！"
                 example_code: "```\nprices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
             18:
-                start_code: "naam = 'Hedy'\n{print}('My name is ', naam)"
+                start_code: "名字 = '海迪'\n{print}('我的名字是', 名字)"
                 story_text: "##最后一级！\n我们到达了真正的 Python 代码！这意味着从现在开始我们需要在 {print} 和 {range} 后使用括号。"
                 example_code: "```\n{print}('my name is Hedy!')\n```\n"
-                story_text_2: If you want to print more than one item, you need to separate them by commas.
-                example_code_2: "```\ntemperature = 25\n{print}('Is is ', temperature, 'degrees outside')\n```\n"
-                story_text_3: "##  Input\nThe final change we will need to make to get Python code is changing `{ask}` into `{input}`."
-                example_code_3: "```\n{print}('My name is Hedy!')\nname = {input}('What is your name?')\n{print}('So your name is ', name)\n```\n"
+                story_text_2: 如果你想打印多个东西，你需要用逗号把它们分开。
+                example_code_2: "```\n温度 = 25\n{print}('外面是', 温度, '度')\n```\n"
+                story_text_3: "##  输入\n我们获得Python代码前的最后一步，是把`{ask}`换成`{input}`。"
+                example_code_3: "```\n{print}('我叫海迪！')\nname = {input}('你叫什么？')\n{print}('那么你叫', name)\n```\n"
     story:
         levels:
             2:
-                start_code: '{print} Your story'
+                start_code: '{print} 你的故事'
                 story_text: "## Story\nIn level 2 you can make your story more fun. Your main character's name can now be anywhere in the sentence.\n\nYou do have to program a little bit extra for that. You must now name your main character first.\n\nYou can then put that name anywhere in a sentence.\n"
-                example_code: "```\n名字 {is} {ask} 主角的名字是什么？\n{print} 名字现在要去森林里散步了\n{print} 名字有点害怕\n{print} 突然，他听到到处都有疯狂的声音...\n{sleep}\n{print} 名字害怕这个森林里面闹鬼\n```"
+                example_code: "```\n名字 {is} {ask} 主角的名字是什么？\n{print} 名字 现在要去森林里散步了\n{print} 名字 有点害怕\n{print} 突然，他听到一个疯狂的声音……\n{sleep}\n{print} 名字 害怕这个森林里面闹鬼\n```"
             7:
                 start_code: "{repeat} 5 {times} {print} 'Help!'"
                 story_text: "## Story\nIn a story, someone says words several times. For example, when someone calls for help or sings a song.\nYou can put such repetitions in your story, in this level with `{repeat}`.\n"
@@ -266,7 +266,7 @@ adventures:
             1:
                 story_text: "## 创作故事动画\n在第1级中你可以自己添加角色创作一个有不同主角的故事动画。。\n\n在第一行，使用`{ask}`，问谁是故事的主角。\n\n在这第一行之后，如果需要打印这个句子，就用`{print}`开始这个句子。\n如果你想让你的主角的名字出现在句子的末尾，你可以用`{echo}`。\n"
                 example_code: "```\n{ask} 这个故事的主人公是（谁）\n{print}主人公现在要到森林里去散步\n{echo} 他有点害怕，\n{print} 他听到到处都有疯狂的声音\n{print} 他害怕这是一片闹鬼的森林\n```\n"
-                start_code: '{print} Your story starts here'
+                start_code: '{print} 你的故事从这里开始'
             10:
                 story_text: "## Story\nIn this level you can use the {for} command in your story. In this way you could easily program the children's book 'brown bear, brown bear, what do you see'.\n"
                 example_code: "```\nanimals = red bird, black sheep, green frog, yellow duck, little child\n{print} 'brown bear'\n{print} 'brown bear'\n{print} 'What do you see?'\n{for} animal {in} animals\n    {print} 'I see a ' animal ' looking at me'\n    {print} animal\n    {print} animal\n    {print} 'What do you see?'\n{print} 'I see all the animals looking at me!'\n```\n"
@@ -293,9 +293,9 @@ adventures:
                 story_text: "## Story\nUsing the `{while}` loop can make your stories more interesting. For example, you can use `{while} game {is} 'on'` so you can play until the game is over.\nOr you can use `{while} sword {is} 'lost'` so the player can't continu the game until they have found something.\n"
                 example_code: "```\n钥匙 = '丢失'\n{print} '你站在你的花园里，你的钥匙丢了。'\n{print} '你想去哪里找它们？'\n{print} '你可以选择：树、花坛、石头、邮筒'\n{while} 钥匙 == '丢失'\n    位置 = {ask} '你想去哪里找？'\n    {if} 位置 == '花坛'\n        {print} '它们在这里！'\n        钥匙 = '找到'\n    {else}\n        {print} '没有，他们不在'位置\n{print} '现在你可以进入房子了！'\n```\n"
                 start_code: '# place your code here'
-        name: Story
-        description: Story
-        default_save_name: Story
+        name: 故事
+        description: 故事
+        default_save_name: 故事
     songs:
         levels:
             8:
