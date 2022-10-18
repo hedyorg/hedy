@@ -1,1 +1,62 @@
-{}
+adventures:
+    parrot:
+        levels:
+            2:
+                story_text: "## Parrot\nCreate your own online pet parrot that will copy you!\n"
+                example_code: "```\n{print} Im Hedy the parrot\nname {is} {ask} whats your name?\n{print} name\n{sleep}\n{print} squawk\n{sleep}\n{print} name\n```\n"
+                start_code: '{print} Im Hedy the parrot!'
+            3:
+                story_text: "## Parrot\nTeach your parrot a new word with `{add}`.\n"
+                example_code: "```\nwords {is} squawk, Hedy\n{print} Train your parrot!\nnew_word {is} {ask} Which word do you want to teach them?\n{add} new_word {to_list} words\n{print} \U0001F9D2 Say new_word , Hedy!\n{print} \U0001F99C words {at} {random}\n```\n"
+                start_code: '# place your code here'
+            5:
+                story_text: "## Parrot\nReward your parrot if it says the correct word!\n"
+                example_code: "```\nwords {is} squawk, Hedy\n{print} 'Train your parrot!'\nnew_word {is} {ask} 'Which word do you want to teach them?'\n{add} new_word {to_list} words\nsaid_word {is} words {at} {random}\n{print} '\U0001F9D2 Say ' new_word ', Hedy!'\n{print} '\U0001F99C ' said_word\n{if} said_word {is} new_word {print} '\U0001F9D2 Great job, Hedy! \U0001F36A'\n{else} {print} '\U0001F9D2 No, Hedy! Say ' new_word\n```\n"
+                start_code: '# place your code here'
+    songs:
+        default_save_name: Song
+        levels:
+            6:
+                story_text: "## Songs\nSongs often contain a lot of repetition. Sometimes the repetition is also based on counting.\nFor example, in the well-known song 'Bottles of beer'. You can program that song with a little math.\n"
+        name: Sing a song!
+        description: Print a song
+    turtle:
+        description: Make your own drawing
+        default_save_name: Turtle
+        levels:
+            1:
+                story_text: "## Let's draw\nYou can also use Hedy to draw. By combining turns and lines, you can make a square or stairs!\n\nUsing `{forward}` you draw a line forwards. The number behind it determines how far the turtle will walk. `{turn} {right}` turns a quarter turn in clockwise direction, `{turn} {left}` turns counter clockwise.\nIf you want to go backwards, you use the `{forward}` command but with a negative number. So for example `{forward} -100`\n\nThis is the start of a little staircase. Can you make it have 5 steps?\n"
+                example_code: "```\n{forward} 50\n{turn} {right}\n{forward} 50\n{turn} {left}\n{forward} 50\n```\n"
+    dishes:
+        name: Dishes?
+        description: Use the computer to see who does the dishes (Start at level 2)
+        default_save_name: Dishes
+    default:
+        levels:
+            7:
+                story_text: "## Level 7! Level 7!\nLevel 7 adds the `{repeat}` command.  `{repeat}` can be used to execute one line of code multiple times.\n"
+                example_code: "```\n{repeat} 3 {times} {print} 'Hedy is fun!'\n```\n"
+            8:
+                start_code: "{repeat} 5 {times}\n    {print} 'Hello folks'\n    {print} 'This will be printed 5 times'"
+            13:
+                example_code: "```\nname = {ask} 'what is your name?'\nage = {ask} 'what is your age?'\n{if} name {is} 'Hedy' {and} age {is} 2\n    {print} 'You are the real Hedy!'\n```\n"
+            14:
+                start_code: "age = {ask} 'How old are you?'\n{if} age < 13\n    {print} 'You are younger than me!'\n{else}\n    {print} 'You are older than me!'"
+            1:
+                story_text: "## Welcome to Hedy!\nIn Level 1 you can use the commands `{print}`, `{ask}` and `{echo}`.\nType your code in the programming field. Or press the green button in the example code block, and the code will be typed for you!\nTry the code yourself with the green 'Run code' button under the programming field.\n\nYou can print text to the screen using the `{print}` command.\n"
+                example_code: "```\n{print} Hello!\n{print} Welcome to Hedy!\n```\n"
+                story_text_2: "You can also ask for input with `{ask}` and repeat it back with an `{echo}` command.\n"
+                story_text_3: "Let's get started! Don't know what to create? In the next tabs you will find ideas for programs to build.\n"
+                example_code_2: "```\n{ask} What is your name?\n{echo} hello\n```\n"
+                start_code: '{print} hello world!'
+        name: Introduction
+        description: Level explanation
+        default_save_name: intro
+    rock:
+        levels:
+            1:
+                start_code: '{print} Welcome to your own rock scissors paper!'
+            2:
+                story_text: "## Rock, paper, scissors\nIn this level you can practise using the variables, so that you can make the rock, paper, scissors game in the next level!\n"
+                example_code: "```\nchoice {is} _\n{print} I choose choice\n```\n"
+                start_code: '# place your code here'
