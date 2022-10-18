@@ -95,7 +95,7 @@ adventures:
                     `{ask}` 和 `{print}`  的使用方法依旧保持不变。但是 `{if}`，`{else}` 条件语句和 `{repeat}` 循环语句已经改变了！
                     你现在可以执行一组代码，但你必须使用*缩进*。
                     缩进的意思是在每一行代码开头空四格。即使你的代码块只包括一行代码，你也必须缩进。
-                example_code: "```\n{repeat} 5 {times}\n    {print} 'Hello everyone'\n    {print} 'This is all repeated 5 times'\n```\n"
+                example_code: "`{repeat}`命令现在是这样用的：\n```\n{repeat} 5 {times}\n    {print} '大家好'\n    {print} '这些都会重复5遍'\n```\n\n`{if}`和`{else}`命令现在是这样用的：\n```\n名字 {is} {ask} '你叫什么？'\n{if} 名字 {is} 海迪\n    {print} '你好海迪'\n    {print} '你可以玩你的电脑了！'\n{else}\n    {print} '私闯民宅！'\n    {print} '你不能使用这台电脑！'\n```\n"
             9:
                 start_code: |-
                     {repeat} 3 {times}
@@ -116,9 +116,9 @@ adventures:
                     {for} animal {in} 动物
                       {print} '我爱 ' animal
                 story_text: |-
-                    ## 设置我的列表中的每个项目...
-                    在这个级别中，我们学习了一个名为`{for}`的新代码。使用 `{for}`，您可以创建一个列表并使用所有元素。
-                    `{for}` 创建一个块，如 `{repeat}` 和 `{if}`，因此块中的所有行都需要以空格开头。
+                    ## 对我的列表中的每一样东西……
+                    在这一关中，我们要学习一个名为`{for}`的命令。你可以通过 `{for}` 一个列表，并使用其中所有元素。
+                    同 `{repeat}` 和 `{if}` 一样，`{for}` 会创建一个块，所以块中的每一行都需要以空格开头。
                 example_code: "```\nanimals {is} dog, cat, blobfish\n{for} animal {in} animals\n  {print} 'I love ' animal\n```\n"
             11:
                 start_code: |-
@@ -127,17 +127,17 @@ adventures:
                 story_text: "## 循环！\n`{print}` 的使用方法照旧不变但是我们增加了`{for}`的新形式。 你现在可以在你的程序中编写`{for} counter {in} {range} 1 {to} 5` 和使用 `counter`了。\n试试吧，看看会发生什么！ 记住在`{for}` and `{if}` 语句后使用缩进(这意味着以四个空格开始一个句子)"
                 example_code: "```\n{for} 计数器 {in} {range} 1 {to} 5\n    {print} 计数器\n```\n"
             12:
-                start_code: "{print} 'decimal numbers now need to use a dot'\n{print} 2.5 + 2.5"
+                start_code: "{print} '十进制数字现在需要加上小数点'\n{print} 2.5 + 2.5"
                 story_text: "## 数字和文本\n**十进制数**\n到目前为止，海迪不允许出现1.5这样的小数，但现在我们允许了。请注意，计算机使用`.`来表示小数点。"
-                example_code_5: "```\nscore = 25\n{print} 'You got ' score\n```\n"
+                example_code_5: "```\n分数 = 25\n{print} '你得了' 分数\n```\n"
                 example_code: "```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n"
-                story_text_2: "**All texts need to be in quotation marks**\nFor this level on you will also have to use quotation marks when storing a text with `=`:\n"
-                example_code_2: "```\nname = 'Hedy the Robot'\n{print} 'Hello ' name\n```\n"
+                story_text_2: "**所有文本都要放在引号之间**\n这一关，在用 `=` 储存文本时，你需要使用引号：\n"
+                example_code_2: "```\n名字 = '海迪机器人'\n{print} '你好，' 名字\n```\n"
                 story_text_3: "**All items in lists need quotation marks too**\nLists are texts, so they need quotation marks too. Mind that each single item on the list has quotation marks.\nThis allows you to save two words as 1 item on the list, for example 'Iron Man'.\n"
-                example_code_3: "```\nsuperheroes = 'Spiderman', 'Batman', 'Iron Man'\n{print} superheroes {at} {random}\n```\n"
-                story_text_4: "**All text after `{if}` comparisons need quotation marks too**\n"
-                example_code_4: "```\nname = {ask} 'What is your name?'\n{if} name = 'Hedy the Robot'\n    {print} 'Hi there!'\n```\n"
-                story_text_5: "**Numbers don't need quotation marks**\nFor numbers, you do not use quotation marks in the `=`:\n"
+                example_code_3: "```\n超级英雄 = '蜘蛛侠', '蝙蝠侠', '钢铁侠'\n{print} 超级英雄 {at} {random}\n```\n"
+                story_text_4: "**在`{if}`中比较的所有文本也都需要引号**\n"
+                example_code_4: "```\n名字 = {ask} '你叫什么？'\n{if} 名字 = '海迪机器人'\n    {print} '你好啊！'\n```\n"
+                story_text_5: "**数字不需要引号**\n对于数字，你不需要在`=`中加上引号：\n"
                 story_text_6: "**数学与文本**\n在此级别中，还允许将 + 号与文本一起使用。例如："
                 example_code_6: "```\na = '你好 '\nb = '世界！'\n{print} a + b\n```\n"
             13:
@@ -146,7 +146,7 @@ adventures:
                     年龄 = {ask} '你的年龄是多少？ '
                     {if} 名字 {is} '海迪' {and} 年龄 {is} 2
                         {print} '你才是真正的海迪！'
-                story_text: "## 并且...或...？\n我们将要学习 `{and}` 和 `{or}` ！如果你想判断两个语句，你不需要使用两个如果语句，但可以使用`{and}`和`{or}`。如果你要用`{and}`那么`{and}`的左边和右边的两个语句都需要为真。我们也可以使用`{or}`那么`{or}`的左边和右边的两个语句中只需要有一个语句是正确的。"
+                story_text: "## 且…或…？\n我们将要学习 `{and}` 和 `{or}` ！如果你想判断两个语句，你不需要使用两个`{if}`语句，而是可以使用`{and}`和`{or}`。如果你用了`{and}`，那么`{and}`左右两边的语句都需要为真。我们也可以使用`{or}`，`{or}`左右两边的语句中只需要有一个是正确的。"
                 #16:
                 #    start_code: |-
                 #        # 这是一个要问几个数学问题的程序
@@ -173,17 +173,17 @@ adventures:
                 example_code: "```\n名字 = {ask} '你叫什么名字?'\n年龄 = {ask} '你的年龄是多少？ '\n{if} 名字 {is} '海迪' {and} 年龄 {is} 2\n    {print} '你才是真正的海迪！'\n```\n"
             14:
                 start_code: |-
-                    年龄 = {ask} '你今年几岁了?'
+                    年龄 = {ask} '你今年几岁了？'
                     {if} 年龄 < 13
-                        {print} '你比我年纪小!'
-                    else
-                        {print} '你比我年纪大!'
+                        {print} '你比我年纪小！'
+                    {else}
+                        {print} '你比我年纪大！'
                 story_text: "## 大，比较大，最大！\n我们将要学习更多新的内容! 你可能在数学课上已经学过这些内容了, 那就是小于号 `<` 和大于号 `>`。\n小于号 `<` 用来判断第一个数字是否小于第二个数字, 比如 年龄 `<` 12 判断是否年龄小于12。\n如果你想判断第一个数字是否小于或等于第二个数字，你可以使用`<=`，例如年龄`<=` 11。\n大于号`>` 用来判断第一个数字是否大于第二个数字, 比如 点数 `>`10判断是否点数大于10。\n如果你想判断第一个数字是否大于或等于第二个数字，你可以使用 `>=`, 例如 点数 `>=`= 11。\n你可以在一个`{if}`条件语句中使用这些比较运算符号，如下所示：\n"
                 example_code: "```\nage = {ask} 'How old are you?'\n{if} age > 12\n    {print} 'You are older than I am!'\n```\n"
-                story_text_2: "From this level on, if you want to compare exactly, you can use two equal signs. This is what most programming languages do:\n"
-                example_code_2: "```\nname = {ask} 'What is your name?'\n{if} name == 'Hedy'\n    {print} 'You are coo!'\n```\n"
-                story_text_3: "You can also compare if something is *not* equal to something else using `!=` like this:\n"
-                example_code_3: "```\nname = {ask} 'What is your name?'\n{if} name != 'Hedy'\n    {print} 'You are not Hedy'\n```\n"
+                story_text_2: "从这一关开始，如果你想精确比较，你需要写两个等号。大部分编程语言都是这样的：\n"
+                example_code_2: "```\n名字 = {ask} '你叫什么？'\n{if} 名字 == '海迪'\n    {print} '你很酷！'\n```\n"
+                story_text_3: "你也可以像这样，用 `!=`比较两个东西是否*不*相等：\n"
+                example_code_3: "```\n名字 = {ask} '你叫什么？'\n{if} 名字 != '海迪'\n    {print} '你不是海迪'\n```\n"
             15:
                 start_code: |-
                     答案 = 0
