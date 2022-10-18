@@ -1,58 +1,58 @@
 levels:
     1:
         1:
-            question_text: "What's this programming language called?"
+            question_text: "这门编程语言叫什么？"
             mp_choice_options:
             -   option: "Hedy"
-                feedback: "Good job!"
+                feedback: "做得好！"
             -   option: "Heddy"
-                feedback: "Not this one!"
+                feedback: "不是这个！"
             -   option: "Haydie"
-                feedback: "Not this one!"
+                feedback: "不是这个！"
             -   option: "Heidi"
-                feedback: "Not this one!"
+                feedback: "不是这个！"
             correct_answer: "A"
-            hint: "It's named after Hedy Lamarr."
+            hint: "它得名于Hedy Lamarr。"
             question_score: '10'
         2:
-            question_text: "Which command makes text appear?"
+            question_text: "哪个命令可以用来打印文字？"
             mp_choice_options:
             -   option: |
                     ```
                     {echo}
                     ```
-                feedback: "`{echo}` repeats a given answer."
+                feedback: "`{echo}` 会复述你给出回答。"
             -   option: |
                     ```
                     {print}
-                     ```
-                feedback: "Correct!"
+                    ```
+                feedback: "正确！"
             -   option: |
                     ```
-                    hello
+                    你好
                     ```
-                feedback: "Hello isn't a command."
+                feedback: "“你好”不是一个命令。"
             -   option: |
                     ```
                     {ask}
                     ```
-                feedback: "With `{ask}`, you can ask a question."
+                feedback: "你可以使用 `{ask}` 来提问。"
             correct_answer: "B"
-            hint: "_?_ Hello world!"
+            hint: "_?_ 你好世界！"
             question_score: '10'
         3:
-            question_text: "How do you ask what someone's favorite color is?"
+            question_text: "如何询问某个人最喜欢的颜色是什么？"
             mp_choice_options:
             -   option: |
                     ```
-                    {print} What is your favorite color?
+                    {print} 你最喜欢的颜色是什么？
                     ```
-                feedback: "`{print}` prints text, but it doesn't ask questions."
+                feedback: "`{print}`能打印出文字，但是不能用来提问。"
             -   option: |
                     ```
-                    {ask} {print} What is your favorite color?
+                    {ask} {print} 你最喜欢的颜色是什么？
                     ```
-                feedback: "You only need one command, not two."
+                feedback: "你只需要一个命令，不需要两个。"
             -   option: |
                     ```
                     {ask} What is your favorite color?
