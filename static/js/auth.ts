@@ -202,7 +202,7 @@ $('form#public_profile').submit(function(e) {
 
 // *** Admin functionality ***
 
-export function markAsTeacher(checkbox: any, username: string, is_teacher: boolean) {
+export function markAsTeacher(checkbox: any, username: string, is_teacher: boolean, pending_request: boolean) {
   $(checkbox).prop('checked', false);
   let text = "Are you sure you want to remove " + username + " as a teacher?";
   if (is_teacher) {
@@ -222,6 +222,21 @@ export function markAsTeacher(checkbox: any, username: string, is_teacher: boole
     }).fail(function () {
       modal.alert(['Error when', is_teacher ? 'marking' : 'unmarking', 'user', username, 'as teacher'].join(' '), 2000, false);
     });
+  }, function () {
+    // If there is a pending request, we decline the modal -> remove the teacher request
+    if (pending_request) {
+      $.ajax({
+        type: 'POST',
+        url: '/admin/markAsTeacher',
+        data: JSON.stringify({
+          username: username,
+          is_teacher: false
+        }),
+        contentType: 'application/json; charset=utf-8'
+      }).done(function () {
+        location.reload();
+      });
+    }
   });
 }
 
