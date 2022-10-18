@@ -1,4 +1,4 @@
-import {loginForAdmin, loginForTeacher} from '../tools/login/login.js'
+import {loginForTeacher} from '../../tools/login/login.js'
 
 describe('Is able to see teacher page', () => {
   it('Passes', () => {
@@ -7,8 +7,5 @@ describe('Is able to see teacher page', () => {
     cy.location().then((loc) => {
       expect(loc.pathname).to.equal('/for-teachers');
     });
-
-     
-    
   })
 })
