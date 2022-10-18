@@ -77,8 +77,8 @@ adventures:
                      乘法运算有点不同，因为键盘上面没有乘法符号。你可以找一下, 确实没有！
                      这就是为什么我们要把数字8上面的星号当做乘法符号： `5 * 5`。读作5乘以5，你会很容易记住它。
                 example_code: "```\n{print} '5加5是 ' 5 + 5\n{print} '5减去5是' 5 - 5\n{print} '5乘以5是' 5 * 5\n```\n"
-                story_text_2: "We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:\n"
-                example_code_2: "```\nname = Hedy\nanswer = 20 + 4\n```\n"
+                story_text_2: "我们还改变了在变量中存储词语的方式！现在，要在变量中保存名字或者数字时，你可以用`=`代替`{is}`，像这样：\n"
+                example_code_2: "```\n名字 = 海迪\n答案 = 20 + 4\n```\n"
             7:
                 start_code: "{repeat} 3 {times} {print} '海迪很好玩！'"
                 story_text: |
@@ -92,9 +92,9 @@ adventures:
                         {print} '这句话将被打印5次'
                 story_text: |
                     ## 缩进
-                    `{ask}` 和 `{print}`  的使用方法依旧保持不变。但是 `{if}` 条件语句和 `{repeat}` 循环语句已经改变了！
+                    `{ask}` 和 `{print}`  的使用方法依旧保持不变。但是 `{if}`，`{else}` 条件语句和 `{repeat}` 循环语句已经改变了！
                     你现在可以执行一组代码，但你必须使用*缩进*。
-                    这意味着必须首行缩进四个空格。当你想要创建只有一行的代码块的时候这一点也适用。
+                    缩进的意思是在每一行代码开头空四格。即使你的代码块只包括一行代码，你也必须缩进。
                 example_code: "```\n{repeat} 5 {times}\n    {print} 'Hello everyone'\n    {print} 'This is all repeated 5 times'\n```\n"
             9:
                 start_code: |-
