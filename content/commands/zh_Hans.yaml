@@ -86,19 +86,19 @@
 -   explanation: "打印的内容要用引号标注清楚。"
     demo_code: "{print} '5乘以5等于 5 * 5'"
     name: '{print}'
--   explanation: "用{ask} 提问计算题的答案然后检查答案是否正确。"
+-   explanation: "用 {ask} 询问计算题的答案，并检查答案是否正确。"
     demo_code: |-
         答案 = {ask} '10加10等于几?'
         {if} 答案 {is} 20 {print} '做得好!' {else} {print} '糟糕,算错啦'
     name: '{ask}'
--   name: "`{ask}` {and} `{if}` 海龟绘图"
-    explanation: "{ask} 使用者想要多少度"
+-   name: "海龟绘图的`{ask}`和`{if}`"
+    explanation: "询问使用者想要多少度。"
     demo_code: |-
         角度 = {ask} '多少度？'
         度 = 360 / 角度
         {forward} 50
 7:
--   explanation: "打印的内容要用单引号标注清楚"
+-   explanation: "打印的内容要用单引号标注清楚。"
     demo_code: "{print} '你好欢迎来到海迪。'"
     name: '{print}'
 -   explanation: "用`{ask}`提出问题。"
@@ -106,7 +106,7 @@
         颜色 = {ask} '你最喜欢的颜色是什么?'
         {print} 颜色 '是我最喜欢的颜色！'
     name: '{ask}'
--   explanation: "用`{if}`条件语句进行选择"
+-   explanation: "用`{if}`条件语句进行选择。"
     demo_code: |-
         颜色 = {ask} '你最喜欢的颜色是什么?'
         {if} 颜色 {is} 绿色 {print} '漂亮!' {else} {print} '呵呵'
