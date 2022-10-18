@@ -475,15 +475,17 @@ export function saveDST() {
 //}
 
 export function pushAchievement(achievement: string) {
+  console.log("We get here!");
   $.ajax({
     type: 'POST',
-    url: '/achievements',
+    url: '/achievements/push-achievement',
     data: JSON.stringify({
       achievement: achievement
     }),
     contentType: 'application/json',
     dataType: 'json'
     }).done(function(response: any) {
+      console.log("And here?!");
       if (response.achievements) {
         showAchievements(response.achievements, false, "");
       }
@@ -1071,6 +1073,7 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
 
     // Check if the program was correct but the output window is empty: Return a warning
     if ($('#output').is(':empty') && $('#turtlecanvas').is(':empty')) {
+      console.log("We get here...");
       if(debug == null){
         pushAchievement("error_or_empty");
         error.showWarning(ErrorMessages['Transpile_warning'], ErrorMessages['Empty_output']);
