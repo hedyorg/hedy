@@ -25,40 +25,40 @@
     explanation: Küsi midagi kasutades `{ask}` käsku. Pea meeles! Sa pead vastuse andma kasutades `{is}` käsku.
     demo_code: "värv {is} {ask} Mis on su lemmikvärv?\n{print} värv on su lemmik!"
 -   name: '{sleep}'
-    explanation: Lase Hedy'l mõni sekund oodata.
-    demo_code: "{print} Lase mul üks sekund mõelda...\n{sleep}\n{print} Hmm.. Mul läheb veel 3 sekundit aega...\n{sleep} 3\n{print} Eureka! Mul on see käes!"
--   explanation: Give a number a name using `{is}`. You can choose the name yourself.
+    explanation: "`{sleep}` Lase Hedy'l mõni sekund oodata."
+    demo_code: "{print} Lase mul üks sekund mõelda...\n{sleep}\n{print} Hmm.. Mul läheb veel 3 sekundit aega...\n{sleep} 3\n{print} Eureka! Sain hakkama!"
+-   explanation: Anna arvule nimi võtmesõnaga `{is}`. Nime võid ise valida.
     demo_code: "nurk {is} 90\n{turn} nurk\n{forward} 100"
     name: '{is} kilpkonnaga'
 3:
 -   name: Vali juhuslikult
     explanation: Vali juhuslik sõna rühmast `{at}` ja `{random}` käske kasutades.
-    demo_code: "animals {is} dog, cat, kangaroo\n{print} animals {at} {random}"
+    demo_code: "loomad {is} koer, kass, känguru\n{print} loomad {at} {random}"
 -   name: '{add}'
-    explanation: Lisa üks element listi.
-    demo_code: "animals {is} cow, cat\n{add} dog {to_list} animals"
+    explanation: '`{add}` midagi `{to_list}`.'
+    demo_code: "loomad {is} lehm, kass\n{add} koer {to_list} loomad"
 -   name: '{remove}'
-    explanation: Eemalda üks element listist.
+    explanation: "`{remove}' an item `{from}."
     demo_code: "loomad {is} kass, koer, lehm\n{remove} koer {from} loomad"
 6:
 -   name: '{print}'
-    explanation: print exactly using quotation marks
+    explanation: Prindi täpselt, kasutades jutumärke.
     demo_code: "{print} '5 korda 5 on ' 5 * 5"
 -   demo_code: "vastus = {ask} 'Kui palju on 10 pluss 10?'\n{if} vastus {is} 20 {print} 'Õige!' {else} {print} 'Oih'"
     name: '{ask}'
-    explanation: '{ask} for a calculation and check whether it is correct.'
--   name: '`{ask}` ja `{if}` kilpkonnaga'
+    explanation: 'Küsi tehte vastus ja kontrolli, kas see on õige.'
+-   name: '{ask} ja {if} kilpkonnaga'
     explanation: 'Küsi kasutajalt mitut nurka ta tahab.'
     demo_code: "angles = {ask} 'How many angles?'\nangle = 360 / angles\n{forward} 50"
 7:
 -   name: '{print}'
-    explanation: print exactly using quotation marks
+    explanation: prindi täpselt, kasutades jutumärke.
     demo_code: "{print} 'Hello welcome to Hedy.'"
 -   name: '{ask}'
     explanation: Küsi midagi kasutades `{ask}` käsku.
     demo_code: "color = {ask} 'What is your favorite color?'\n{print} color ' is your favorite!'"
 -   name: '{if}'
-    explanation: Make a choice with `{if}`
+    explanation: Make a choice with `{if}`.
     demo_code: "color = {ask} 'What is your favorite color?'\n{if} color {is} green {print} 'pretty!' {else} {print} 'meh'"
 -   name: '{repeat} kilpkonnaga'
     explanation: repeat a line of code with `{repeat}`.
@@ -69,13 +69,13 @@
     demo_code: "{print} '5 korda 5 on ' 5 * 5"
 -   name: '{ask}'
     explanation: ask for the answer to a sum and check if it is correct. We can now print 2 lines.
-    demo_code: "answer = {ask} 'What is 5 plus 5?'\n{if} answer {is} 10\n    {print} 'Well done!'\n    {print} 'Indeed, the answer was ' answer\nelse\n    {print} 'Oops!'\n    {print} 'The answer is 10'"
+    demo_code: "vastus = {ask} 'Mis on 5 pluss 5?'\n{if} vastus {is} 10\n    {print} 'Tubli!'\n    {print} 'Vastus on tõepoolest ' vastus\n{else}\n    {print} 'Oi!'\n    {print} 'Õige vastus on 10'"
 -   name: '{repeat} kilpkonnaga'
     explanation: 'Korda mitut rida.'
     demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
 9:
 -   name: '{if} mitme reaga'
-    demo_code: "answer = {ask} 'What is 20 plus 20?'\n{if} answer {is} 20\n    {print} 'Well done!!'\n    {print} 'The answer is indeed' answer\nelse\n    {print} 'Wrong'\n    {print} 'The answer is 20'"
+    demo_code: "vastus = {ask} 'Mis on 20 pluss 20?'\n{if} vastus {is} 20\n    {print} 'Tubli!!'\n    {print} 'Vastus on tõepoolest' answer\n{else}\n    {print} 'Vale'\n    {print} 'Õige vastus on 20'"
     explanation: The answer of a sum of questions with '{ask}' and see if it is correct. Now we print out two lines.
 -   name: '{repeat} kilpkonnaga'
     explanation: 'Korda mitut rida.'
@@ -85,10 +85,10 @@
     explanation: print something. Remember to use a quotation mark for literal printing.
     demo_code: "{print} '5 times 5 is ' 5 * 5"
 -   name: '{for} with a list'
-    explanation: 'print all things in a list '
+    explanation: 'Prindi kõik nimistus sisalduv.'
     demo_code: "animals {is} dog, cat, blobfish\n{for} animal {in} animals\n  {print} 'I love ' animal"
 11:
--   explanation: We can use `{for}` with a {range}
+-   explanation: '`{for}` saab kasutada koos `{range}`-ga.'
     name: '{for} loop'
     demo_code: "{for} counter {in} {range} 1 {to} 5\n    {print} counter"
 -   demo_code: "answer = {ask} 'What is 5 plus 5?'\n{if} answer {is} 10\n    {print} 'Well done!'\n    {print} 'Indeed, the answer was ' answer\nelse\n    {print} 'Oops!'\n    {print} 'The answer is 10'"
@@ -96,15 +96,15 @@
     explanation: ask for the answer to a sum and check if it is correct. We can now print 2 lines.
 12:
 -   name: float directly
-    explanation: Decimal numbers
+    explanation: Kümnendarvud.
     demo_code: "{print} 'Calculate away!'\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n"
 -   name: assign text
-    explanation: Text with quotation marks after =
+    explanation: '`=`-le järgnev jutumärkidega tekst'
     demo_code: "name = 'Hedy the Robot'\n{print} 'Hello ' name\n"
 -   name: quotes after {if} comparison
-    explanation: Text with quotation marks after {if}
+    explanation: '`{if}`-le järgnev jutumärkidega tekst .'
     demo_code: "name = {ask} 'Who are you?'\n{if} name = 'Hedy'\n    {print} 'Hi there!'\n"
--   explanation: A list with quotation marks
+-   explanation: Jutumärkidega nimistu.
     demo_code: "superheroes = 'Iron Man', 'Batman', 'Superman'\n{print} superheroes {at} {random}\n"
     name: quotes in list
 13:
@@ -119,11 +119,11 @@
     explanation: We can use the `{while}` loop with not equal
     demo_code: "answer = 0\n{while} answer != 25\n    answer = {ask} 'What is 5 times 5?'\n{print} 'A correct answer has been given'"
 -   name: Smaller {while}
-    explanation: 'We can also use the `{while}` loop with `<` and `>`. '
+    explanation: '`{while}` tsüklit saab kasutada ka võrdlustehetega `<` ja `>`.'
     demo_code: "count = 1\n{while} count < 3\n    {print} 'We do this ' 3 - count ' more times'\n    count = count + 1\n{print} 'We are done'"
 17:
 -   name: '{elif}'
-    explanation: '`{elif}`.'
+    explanation: '`{elif}`'
     demo_code: "a = 2\n{if} a == 1:\n    {print} 'a is 1'\n{elif} a == 2:\n    {print} 'a is 2'\n{else}:\n    {print} 'a is not 1 or 2'"
 -   demo_code: "{for} i {in} {range} 1 {to} 12:\n    {print} i\n{print} 'Ready or not, here I come!'"
     name: '{print}'
@@ -133,30 +133,30 @@
     demo_code: "colour = {ask} 'What is your favorite color?'\n{if} colour == 'green':\n    {print} 'Your favorite colour is green'\n{else}:\n    {print} 'Your favorite colour is not green'"
 4:
 -   name: '{print}'
-    explanation: print exactly using quotation marks
-    demo_code: "{print} 'Hello welcome to Hedy.'"
+    explanation: Täpselt printimiseks kasuta jutumärke.
+    demo_code: "{print} 'Teretulemast Hedy juurde.'"
 -   name: '{is}'
-    explanation: Give a name to some text and `{print}` without quotation marks
+    explanation: Anna tekstile nimi ja `{print}` ilma jutumärkideta.
     demo_code: "nimi {is} Hedy\n{print} 'minu nimi on ' nimi"
 -   name: '{ask}'
     explanation: Küsi midagi kasutades `{ask}` käsku.
-    demo_code: "color {is} {ask} 'What is your favorite color?'\n{print} color ' is your favorite!'"
+    demo_code: "värv {is} {ask} 'Mis on su lemmikvärv?'\n{print} värv ' on su lemmik!'"
 5:
 -   name: '{print}'
-    explanation: print exactly using quotation marks
-    demo_code: "{print} 'Hello welcome to Hedy.'"
+    explanation: Prindi täpselt, kasutades jutumärke.
+    demo_code: "{print} 'Teretulemast Hedy juurde.'"
 -   name: '{ask}'
     explanation: Küsi midagi kasutades `{ask}` käsku.
-    demo_code: "color {is} {ask} 'What is your favorite color?'\n{print} color ' is your favorite!'"
+    demo_code: "värv {is} {ask} 'Mis on su lemmikvärv?'\n{print} color ' on su lemmik!'"
 -   name: '{if}'
     explanation: Vali midagi kasutades `{if}` käsku.
     demo_code: "värv {is} {ask} 'Mis on su lemmikvärv?'\n{if} värv {is} roheline {print} 'ilus!' {else} {print} 'mhh'"
 -   name: '{if} kilpkonnaga'
     explanation: Tee valik kasutades `{if}` käsku.
-    demo_code: "answer {is} {ask} 'How far should I walk?'\n{if} answer {is} far {forward} 100 {else} {forward} 5"
+    demo_code: "vastus {is} {ask} 'Kui kaugele peaksin jalutama?'\n{if} vastus {is} kaugele {forward} 100 {else} {forward} 5"
 -   name: '{in}'
-    explanation: Check elements with `{in}`
-    demo_code: "pretty_colors {is} green, yellow\ncolor {is} {ask} 'What {is} your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
+    explanation: Kontrolli elemente, kasutades võtmesõna `{in}`.
+    demo_code: "ilusad_värvid {is} roheline, kollane\nvärv {is} {ask} 'Mis on su lemmikvärv?'\n{if} värv {in} ilusad_värvid {print} 'ilus!' {else} {print} 'pähh'"
 14:
 -   name: Smaller
     explanation: We use the `<` to check if the first number is smaller than the second number.
@@ -168,7 +168,7 @@
     explanation: We use the `==` to check if two things are the same.
     demo_code: "answer = {ask} 'What is 5 * 5?'\n{if} answer == 25\n    {print} 'That {is} correct!'"
 -   name: Not equal
-    explanation: 'We use the `!=` to check if two things are not the same. '
+    explanation: 'Kontrollimaks, et kaks asja on erinevad, kasuta `!=`.'
     demo_code: "answer = {ask} 'What is 5 * 5?'\n{if} answer != 25\n    {print} 'That is not correct!'"
 -   name: Smaller {or} equal
     explanation: We use the `<=` to check if the first number is smaller than or equal to the second number.
@@ -178,7 +178,7 @@
     explanation: We use the `>=` to check if the first number is bigger than or equal to the second number.
 16:
 -   name: square brackets
-    explanation: Lists with square brackets
+    explanation: Kantsulgudega nimistud.
     demo_code: "fruit = ['apple', 'banana', 'cherry']\n{print} fruit"
 -   name: Get an item from a list
     explanation: To get an item from a list we use [number] so fruit[1] means, get the first fruit from the list!
@@ -189,9 +189,9 @@
 18:
 -   demo_code: "{print}('hi!')"
     name: '{print}'
-    explanation: After `{print}` you need to use parentheses
+    explanation: '`{print}` järel on vaja kasutade sulge.'
 -   name: '{range}'
-    explanation: After `{range}` you need to use parentheses
+    explanation: '`{range}` järel on vaja kasutada sulge.'
     demo_code: "{for} i {in} {range} (1,10):\n    {print}('Hello, times ', i)"
 -   name: '{print} with var'
     explanation: With `{print}` you need to use parentheses and commas if you {print} more items
