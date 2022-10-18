@@ -2,17 +2,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-25 10:29+0200\n"
-"PO-Revision-Date: 2022-09-15 08:20+0000\n"
-"Last-Translator: Indy L <leclercq.indy@gmail.com>\n"
+"POT-Creation-Date: 2022-10-13 13:47+0200\n"
+"PO-Revision-Date: 2022-10-13 13:42+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: fr <LL@li.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.14.1-dev\n"
-"Generated-By: Babel 2.10.1\n"
+"X-Generator: Weblate 4.15-dev\n"
+"Generated-By: Babel 2.9.1\n"
 
 msgid "program_contains_error"
 msgstr "Ce programme contient une erreur, êtes-vous certain de vouloir le partager ?"
@@ -43,6 +43,10 @@ msgstr "Pas de tel programme Hedy !"
 
 msgid "level_not_class"
 msgstr "Ce niveau n’a pas encore été rendu disponible dans votre classe"
+
+#, fuzzy
+msgid "quiz_threshold_not_reached"
+msgstr "Quiz threshold not reached to unlock this level"
 
 msgid "no_such_adventure"
 msgstr "Cette aventure n’existe pas !"
@@ -494,6 +498,10 @@ msgid "create_accounts_prompt"
 msgstr "Are you sure you want to create these accounts?"
 
 #, fuzzy
+msgid "class"
+msgstr "Class"
+
+#, fuzzy
 msgid "download_login_credentials"
 msgstr ""
 
@@ -504,6 +512,10 @@ msgstr "Yes"
 #, fuzzy
 msgid "no"
 msgstr "No"
+
+#, fuzzy
+msgid "generate_passwords"
+msgstr "Generate passwords"
 
 #, fuzzy
 msgid "reset_view"
@@ -647,12 +659,28 @@ msgid "select"
 msgstr "Select"
 
 #, fuzzy
-msgid "other_settings"
-msgstr "Other settings"
+msgid "unlock_thresholds"
+msgstr "Unlock level thresholds"
 
 #, fuzzy
 msgid "option"
 msgstr "Option"
+
+#, fuzzy
+msgid "value"
+msgstr "Value"
+
+#, fuzzy
+msgid "quiz_score"
+msgstr "Quiz score"
+
+#, fuzzy
+msgid "percentage"
+msgstr "percentage"
+
+#, fuzzy
+msgid "other_settings"
+msgstr "Other settings"
 
 #, fuzzy
 msgid "mandatory_mode"
@@ -824,10 +852,6 @@ msgstr "Hedy"
 #, fuzzy
 msgid "quiz_tab"
 msgstr "Quiz"
-
-#, fuzzy
-msgid "specific_adventure_mode"
-msgstr "You're currently in adventure '{adventure}', click on 'Hedy' to view all adventures."
 
 msgid "example_code_header"
 msgstr "Exemple de code Hedy"
@@ -1077,6 +1101,10 @@ msgid "share_code_button"
 msgstr "Save & share code"
 
 #, fuzzy
+msgid "tutorial"
+msgstr "Tutorial"
+
+#, fuzzy
 msgid "try_button"
 msgstr "Try"
 
@@ -1229,6 +1257,10 @@ msgid "other"
 msgstr "Other"
 
 #, fuzzy
+msgid "agree_third_party"
+msgstr "I consent to being contacted by partners of Leiden University with sales opportunities (optional)"
+
+#, fuzzy
 msgid "update_profile"
 msgstr "Update profile"
 
@@ -1264,9 +1296,11 @@ msgstr "Request teacher account"
 msgid "recent"
 msgstr "My recent programs"
 
+#, fuzzy
 msgid "all"
-msgstr ""
+msgstr "All"
 
+#, fuzzy
 msgid "submitted"
 msgstr ""
 
@@ -1415,8 +1449,34 @@ msgid "password_repeat"
 msgstr "Repeat password"
 
 #, fuzzy
-msgid "create_account_explanation"
-msgstr "Having your own account allows you to save your programs."
+msgid "signup_student_or_teacher"
+msgstr "Are you a student or a teacher?"
+
+#, fuzzy
+msgid "student_signup_header"
+msgstr "Student"
+
+#, fuzzy
+msgid "teacher_signup_header"
+msgstr "Teacher"
+
+#, fuzzy
+msgid "create_teacher_account"
+msgstr "Create a teacher account"
+
+#, fuzzy
+msgid "create_student_account"
+msgstr "Create an account"
+
+#, fuzzy
+msgid "create_teacher_account_explanation"
+msgstr ""
+"With a teacher account, you can save your programs and see the results of "
+"your students."
+
+#, fuzzy
+msgid "create_student_account_explanation"
+msgstr "You can save your own programs with an account."
 
 #, fuzzy
 msgid "programming_experience"
@@ -1447,10 +1507,6 @@ msgid "privacy_terms"
 msgstr "privacy terms"
 
 #, fuzzy
-msgid "agree_third_party"
-msgstr "I consent to being contacted by partners of Leiden University with sales opportunities (optional)"
-
-#, fuzzy
 msgid "already_account"
 msgstr "Already have an account?"
 
@@ -1474,6 +1530,17 @@ msgstr "Hedy - Administrator page"
 msgid "username_invalid"
 msgstr "Your username is invalid."
 
+msgid "teacher_invalid"
+msgstr "La valeur du paramètre enseignant n'est pas valable."
+
+#, fuzzy
+msgid "email_invalid"
+msgstr "Please enter a valid email."
+
+#, fuzzy
+msgid "mail_error_change_processed"
+msgstr "Something went wrong when sending a validation mail, the changes are still correctly processed."
+
 #, fuzzy
 msgid "username_special"
 msgstr "Username cannot contain `:` or `@`."
@@ -1490,13 +1557,85 @@ msgstr "Your password is invalid."
 msgid "passwords_six"
 msgstr "All passwords need to be six characters or longer."
 
-#, fuzzy
-msgid "email_invalid"
-msgstr "Please enter a valid email."
+msgid "mail_welcome_verify_body"
+msgstr ""
+"Votre compte Hedy a été crée avec succès. Bienvenue!\n"
+"Veuillez cliquer sur ce lien pour vérifier votre address mail: {link}"
+
+msgid "mail_change_password_body"
+msgstr ""
+"Votre password Hedy a été modifié. Si cette modification vient de vous, tout va bien.\n"
+"Si vous n'avez pas modifié votre mot de passe, veuillez nous contacter immédiatement en répondant à ce mail."
+
+msgid "mail_recover_password_body"
+msgstr ""
+"En cliquant ce lien, vous pouvez modifier votre mot de passe Hedy. Ce lien est valable <b>4</b> heures.\n"
+"Si vous n'avez pas demandé une modification du mot de passe, veuillez ignorer ce mail: {link}"
 
 #, fuzzy
-msgid "mail_error_change_processed"
-msgstr "Something went wrong when sending a validation mail, the changes are still correctly processed."
+msgid "mail_reset_password_body"
+msgstr ""
+"Your Hedy password has been reset to a new one. If you did this, all is good.\n"
+"If you didn't change your password, please contact us immediately by replying to this email."
+
+#, fuzzy
+msgid "mail_welcome_teacher_body"
+msgstr ""
+"<strong>Welcome!</strong>\n"
+"Congratulations on your brand new Hedy teachers account. Welcome to the world wide community of Hedy teachers!\n"
+"\n"
+"<strong>What teachers accounts can do</strong>\n"
+"With your teacher account, you have the option to create classes. Your students can than join your classes and you can see their progress. Classes are made and managed though the for <a href=\"https://hedycode.com/for-teachers\">teachers page</a>.\n"
+"\n"
+"<strong>How to share ideas</strong>\n"
+"If you are using Hedy in class, you probably have ideas for improvements! You can share those ideas with us on the <a href=\"https://github.com/Felienne/hedy/discussions/categories/ideas\">Ideas Discussion</a>.\n"
+"\n"
+"<strong>How to ask for help</strong>\n"
+"If anything is unclear, you can post in the <a href=\"https://github.com/Felienne/hedy/discussions/categories/q-a\">Q&A discussion</a>, or <a href=\"mailto: hello@hedy.org\">send us an email</a>.\n"
+"\n"
+"Keep programming!"
+
+#, fuzzy
+msgid "mail_welcome_verify_subject"
+msgstr "Welcome to Hedy"
+
+#, fuzzy
+msgid "mail_change_password_subject"
+msgstr "Your Hedy password has been changed"
+
+#, fuzzy
+msgid "mail_recover_password_subject"
+msgstr "Request a password reset."
+
+#, fuzzy
+msgid "mail_reset_password_subject"
+msgstr "Your Hedy password has been reset"
+
+#, fuzzy
+msgid "mail_welcome_teacher_subject"
+msgstr "Your Hedy teacher account is ready"
+
+#, fuzzy
+msgid "user"
+msgstr "user"
+
+#, fuzzy
+msgid "mail_hello"
+msgstr "Hi {username}!"
+
+#, fuzzy
+msgid "mail_goodbye"
+msgstr ""
+"Thank you!\n"
+"The Hedy team"
+
+#, fuzzy
+msgid "copy_mail_link"
+msgstr "Please copy and paste this link into a new tab:"
+
+#, fuzzy
+msgid "link"
+msgstr "Link"
 
 #, fuzzy
 msgid "invalid_username_password"
@@ -1565,21 +1704,11 @@ msgstr "Password of your student is successfully changed."
 msgid "password_updated"
 msgstr "Mot de passe mis à jour."
 
-msgid "profile_updated_reload"
-msgstr "Le profil a été mis a jour, la page sera rechargée."
-
-msgid "profile_updated"
-msgstr "Profil mis à jour."
-
 msgid "sent_password_recovery"
-msgstr ""
-"Tu devrais bientôt recevoir un email avec des instructions pour "
-"réinitialiser ton mot de passe."
+msgstr "Tu devrais bientôt recevoir un email avec des instructions pour réinitialiser ton mot de passe."
 
 msgid "password_resetted"
-msgstr ""
-"Ton mot de passe a été réinitialisé avec succès. Tu vas être redirigé vers "
-"la page de connexion."
+msgstr "Ton mot de passe a été réinitialisé avec succès. Tu vas être redirigé vers la page de connexion."
 
 msgid "already_teacher"
 msgstr "Vous avez déjà un compte enseignant."
@@ -1590,96 +1719,151 @@ msgstr "Vous avez déjà une demande de compte enseignant en cours."
 msgid "teacher_account_success"
 msgstr "Votre compte enseignant a été activé avec succès."
 
-msgid "teacher_invalid"
-msgstr "La valeur du paramètre enseignant n'est pas valable."
+#, fuzzy
+msgid "only_teacher_create_class"
+msgstr "Only teachers are allowed to create classes!"
 
-msgid "mail_welcome_verify_body"
+#, fuzzy
+msgid "class_name_invalid"
+msgstr "This class name is invalid."
+
+#, fuzzy
+msgid "class_name_empty"
+msgstr "You didn't enter a class name!"
+
+#, fuzzy
+msgid "class_name_duplicate"
+msgstr "You already have a class with this name."
+
+#, fuzzy
+msgid "no_such_class"
+msgstr "No such Hedy class."
+
+#, fuzzy
+msgid "invalid_class_link"
+msgstr "Invalid link for joining the class."
+
+#, fuzzy
+msgid "title_join-class"
+msgstr "Hedy - Join class"
+
+#, fuzzy
+msgid "retrieve_class_error"
+msgstr "Only teachers can retrieve classes"
+
+#, fuzzy
+msgid "username_empty"
+msgstr "You didn't enter an username!"
+
+#, fuzzy
+msgid "student_not_existing"
+msgstr "This username doesn't exist."
+
+#, fuzzy
+msgid "student_already_in_class"
+msgstr "This student is already in your class."
+
+#, fuzzy
+msgid "student_already_invite"
+msgstr "This student already has a pending invitation."
+
+#, fuzzy
+msgid "title_class-overview"
+msgstr "Hedy - Class overview"
+
+#, fuzzy
+msgid "title_customize-class"
+msgstr "Hedy - Customize class"
+
+#, fuzzy
+msgid "customization_deleted"
+msgstr "Customizations successfully deleted."
+
+#, fuzzy
+msgid "class_customize_success"
+msgstr "Class successfully customized."
+
+#, fuzzy
+msgid "no_accounts"
+msgstr "There are no accounts to create."
+
+#, fuzzy
+msgid "unique_usernames"
+msgstr "All usernames need to be unique."
+
+#, fuzzy
+msgid "usernames_exist"
+msgstr "One or more usernames is already in use."
+
+#, fuzzy
+msgid "accounts_created"
+msgstr "Accounts where successfully created."
+
+#, fuzzy
+msgid "retrieve_adventure_error"
+msgstr "You're not allowed to view this adventure!"
+
+#, fuzzy
+msgid "title_view-adventure"
+msgstr "Hedy - View adventure"
+
+#, fuzzy
+msgid "title_customize-adventure"
+msgstr "Hedy - Customize adventure"
+
+#, fuzzy
+msgid "adventure_id_invalid"
+msgstr "This adventure id is invalid."
+
+#, fuzzy
+msgid "adventure_name_invalid"
+msgstr "This adventure name is invalid."
+
+#, fuzzy
+msgid "level_invalid"
+msgstr "This Hedy level in invalid."
+
+#, fuzzy
+msgid "content_invalid"
+msgstr "This adventure is invalid."
+
+#, fuzzy
+msgid "adventure_length"
+msgstr "Your adventure has to be at least 20 characters."
+
+#, fuzzy
+msgid "public_invalid"
+msgstr "This agreement selection is invalid"
+
+#, fuzzy
+msgid "classes_invalid"
+msgstr "The list of selected classes is invalid"
+
+#, fuzzy
+msgid "adventure_duplicate"
+msgstr "You already have an adventure with this name."
+
+#, fuzzy
+msgid "something_went_wrong_keyword_parsing"
 msgstr ""
-"Votre compte Hedy a été crée avec succès. Bienvenue!\n"
-"Veuillez cliquer sur ce lien pour vérifier votre address mail: {link}"
-
-msgid "mail_change_password_body"
-msgstr ""
-"Votre password Hedy a été modifié. Si cette modification vient de vous, tout "
-"va bien.\n"
-"Si vous n'avez pas modifié votre mot de passe, veuillez nous contacter "
-"immédiatement en répondant à ce mail."
-
-msgid "mail_recover_password_body"
-msgstr ""
-"En cliquant ce lien, vous pouvez modifier votre mot de passe Hedy. Ce lien "
-"est valable <b>4</b> heures.\n"
-"Si vous n'avez pas demandé une modification du mot de passe, veuillez "
-"ignorer ce mail: {link}"
 
 #, fuzzy
-msgid "mail_reset_password_body"
-msgstr ""
-"Your Hedy password has been reset to a new one. If you did this, all is good.\n"
-"If you didn't change your password, please contact us immediately by replying to this email."
+msgid "adventure_updated"
+msgstr "The adventure has been updated!"
 
 #, fuzzy
-msgid "mail_welcome_teacher_body"
-msgstr ""
-"<strong>Welcome!</strong>\n"
-"Congratulations on your brand new Hedy teachers account. Welcome to the world wide community of Hedy teachers!\n"
-"\n"
-"<strong>What teachers accounts can do</strong>\n"
-"With your teacher account, you have the option to create classes. Your students can than join your classes and you can see their progress. Classes are made and managed though the for <a href=\"https://hedycode.com/for-teachers\">teachers page</a>.\n"
-"\n"
-"<strong>How to share ideas</strong>\n"
-"If you are using Hedy in class, you probably have ideas for improvements! You can share those ideas with us on the <a href=\"https://github.com/Felienne/hedy/discussions/categories/ideas\">Ideas Discussion</a>.\n"
-"\n"
-"<strong>How to ask for help</strong>\n"
-"If anything is unclear, you can post in the <a href=\"https://github.com/Felienne/hedy/discussions/categories/q-a\">Q&A discussion</a>, or <a href=\"mailto: hello@hedy.org\">send us an email</a>.\n"
-"\n"
-"Keep programming!"
-
-#, fuzzy
-msgid "mail_welcome_verify_subject"
-msgstr "Welcome to Hedy"
-
-#, fuzzy
-msgid "mail_change_password_subject"
-msgstr "Your Hedy password has been changed"
-
-#, fuzzy
-msgid "mail_recover_password_subject"
-msgstr "Request a password reset."
-
-#, fuzzy
-msgid "mail_reset_password_subject"
-msgstr "Your Hedy password has been reset"
-
-#, fuzzy
-msgid "mail_welcome_teacher_subject"
-msgstr "Your Hedy teacher account is ready"
-
-#, fuzzy
-msgid "user"
-msgstr "user"
-
-#, fuzzy
-msgid "mail_hello"
-msgstr "Hi {username}!"
-
-#, fuzzy
-msgid "mail_goodbye"
-msgstr ""
-"Thank you!\n"
-"The Hedy team"
-
-#, fuzzy
-msgid "copy_mail_link"
-msgstr "Please copy and paste this link into a new tab:"
-
-#, fuzzy
-msgid "link"
-msgstr "Link"
+msgid "adventure_empty"
+msgstr "You didn't enter an adventure name!"
 
 #, fuzzy
 msgid "exercise_doesnt_exist"
 msgstr "This exercise doesn't exist"
+
+msgid "profile_updated_reload"
+msgstr "Le profil a été mis a jour, la page sera rechargée."
+
+msgid "profile_updated"
+msgstr "Profil mis à jour."
 
 #, fuzzy
 msgid "delete_success"
@@ -1722,10 +1906,6 @@ msgid "report_success"
 msgstr "This program has been reported"
 
 #, fuzzy
-msgid "level_invalid"
-msgstr "This Hedy level in invalid."
-
-#, fuzzy
 msgid "question_doesnt_exist"
 msgstr "This question does not exist"
 
@@ -1742,14 +1922,6 @@ msgid "too_many_attempts"
 msgstr "Too many attempts"
 
 #, fuzzy
-msgid "retrieve_class_error"
-msgstr "Only teachers can retrieve classes"
-
-#, fuzzy
-msgid "no_such_class"
-msgstr "No such Hedy class."
-
-#, fuzzy
 msgid "title_class statistics"
 msgstr "My statistics"
 
@@ -1757,141 +1929,5 @@ msgstr "My statistics"
 msgid "title_class logs"
 msgstr "Hedy - Join class"
 
-#, fuzzy
-msgid "title_class-overview"
-msgstr "Hedy - Class overview"
-
-#, fuzzy
-msgid "only_teacher_create_class"
-msgstr "Only teachers are allowed to create classes!"
-
-#, fuzzy
-msgid "class_name_invalid"
-msgstr "This class name is invalid."
-
-#, fuzzy
-msgid "class_name_empty"
-msgstr "You didn't enter a class name!"
-
-#, fuzzy
-msgid "class_name_duplicate"
-msgstr "You already have a class with this name."
-
-#, fuzzy
-msgid "invalid_class_link"
-msgstr "Invalid link for joining the class."
-
-#, fuzzy
-msgid "title_join-class"
-msgstr "Hedy - Join class"
-
-#, fuzzy
-msgid "title_customize-class"
-msgstr "Hedy - Customize class"
-
-#, fuzzy
-msgid "customization_deleted"
-msgstr "Customizations successfully deleted."
-
-#, fuzzy
-msgid "class_customize_success"
-msgstr "Class successfully customized."
-
-#, fuzzy
-msgid "username_empty"
-msgstr "You didn't enter an username!"
-
-#, fuzzy
-msgid "student_not_existing"
-msgstr "This username doesn't exist."
-
-#, fuzzy
-msgid "student_already_in_class"
-msgstr "This student is already in your class."
-
-#, fuzzy
-msgid "student_already_invite"
-msgstr "This student already has a pending invitation."
-
-#, fuzzy
-msgid "no_accounts"
-msgstr "There are no accounts to create."
-
-#, fuzzy
-msgid "unique_usernames"
-msgstr "All usernames need to be unique."
-
-#, fuzzy
-msgid "usernames_exist"
-msgstr "One or more usernames is already in use."
-
-#, fuzzy
-msgid "accounts_created"
-msgstr "Accounts where successfully created."
-
-#, fuzzy
-msgid "retrieve_adventure_error"
-msgstr "You're not allowed to view this adventure!"
-
-#, fuzzy
-msgid "title_view-adventure"
-msgstr "Hedy - View adventure"
-
-#, fuzzy
-msgid "title_customize-adventure"
-msgstr "Hedy - Customize adventure"
-
-#, fuzzy
-msgid "adventure_id_invalid"
-msgstr "This adventure id is invalid."
-
-#, fuzzy
-msgid "adventure_name_invalid"
-msgstr "This adventure name is invalid."
-
-#, fuzzy
-msgid "content_invalid"
-msgstr "This adventure is invalid."
-
-#, fuzzy
-msgid "adventure_length"
-msgstr "Your adventure has to be at least 20 characters."
-
-#, fuzzy
-msgid "public_invalid"
-msgstr "This agreement selection is invalid"
-
-#, fuzzy
-msgid "classes_invalid"
-msgstr "The list of selected classes is invalid"
-
-#, fuzzy
-msgid "adventure_duplicate"
-msgstr "You already have an adventure with this name."
-
-#, fuzzy
-msgid "something_went_wrong_keyword_parsing"
-msgstr ""
-
-#, fuzzy
-msgid "adventure_updated"
-msgstr "The adventure has been updated!"
-
-#, fuzzy
-msgid "adventure_empty"
-msgstr "You didn't enter an adventure name!"
-
-msgid "all"
-msgstr "All"
-
-#, fuzzy
-msgid "submitted"
-msgstr "Submitted"
-
-#, fuzzy
-msgid "class"
-msgstr "Class"
-
-#, fuzzy
-msgid "generate_passwords"
-msgstr "Generate passwords"
+#~ msgid "create_account_explanation"
+#~ msgstr "Having your own account allows you to save your programs."

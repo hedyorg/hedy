@@ -139,14 +139,14 @@ commands_per_level = {
     8 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'repeat', 'times'],
     9 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'repeat', 'times'],
     10 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'repeat', 'times', 'for'],
-    11 :['ask', 'is', 'print', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'range', 'repeat'],
-    12 :['ask', 'is', 'print', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'range', 'repeat'],
-    13 :['ask', 'is', 'print', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'range', 'repeat', 'and', 'or'],
-    14 :['ask', 'is', 'print', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'range', 'repeat', 'and', 'or'],
-    15 :['ask', 'is', 'print', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'range', 'repeat', 'and', 'or', 'while'],
-    16 :['ask', 'is', 'print', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'range', 'repeat', 'and', 'or', 'while'],
-    17 :['ask', 'is', 'print', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'range', 'repeat', 'and', 'or', 'while', 'elif'],
-    18 :['is', 'print', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'range', 'repeat', 'and', 'or', 'while', 'elif', 'input'],
+    11 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'range', 'repeat'],
+    12 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'range', 'repeat'],
+    13 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'range', 'repeat', 'and', 'or'],
+    14 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'range', 'repeat', 'and', 'or'],
+    15 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'range', 'repeat', 'and', 'or', 'while'],
+    16 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'range', 'repeat', 'and', 'or', 'while'],
+    17 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'range', 'repeat', 'and', 'or', 'while', 'elif'],
+    18 :['is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'range', 'repeat', 'and', 'or', 'while', 'elif', 'input'],
 }
 
 command_turn_literals = ['right', 'left']
@@ -1557,16 +1557,6 @@ class ConvertToPython_6(ConvertToPython_5):
             else:
                 args_new.append(self.process_variable_for_fstring(a))
 
-        for i in range(1,len(args_new)):
-            a = args_new[i]
-            if a[0] == '-': #a separate minus, can it be merged into the previous number?
-                previous_a = args_new[i-1]
-                if previous_a.isnumeric():
-                    args_new.remove(a)
-                    args_new.remove(previous_a)
-                    args_new.append(str(eval(previous_a+a)))
-
-
         return ''.join(args_new)
 
     def equality_check(self, meta, args):
@@ -2221,6 +2211,26 @@ def preprocess_blocks(code, level):
         processed_code.append('end-block')
     return "\n".join(processed_code)
 
+def preprocess_ifs(code):
+    processed_code = []
+    lines = code.split("\n")
+    for i in range(len(lines)-1):
+        line = lines[i]
+        next_line = lines[i + 1]
+        # todo convert to all languages!!
+        if line[0:2] == "if" and (not next_line[0:4] == 'else') and (not ("else" in line)):
+            # is this line just a condition and no other keyword (because that is no problem)
+            if "print" in line or "ask" in line or "forward" in line or "turn" in line: # and this should also (TODO) check for a second is cause that too is problematic.
+                # a second command, but also no else in this line -> check next line!
+                
+                # no else in next line?
+                # add a nop (like 'Pass' but we just insert a meaningless assign)
+                line = line + " else _ is x"
+
+        processed_code.append(line)
+    processed_code.append(lines[-1]) #always add the last line (if it has if and no else that is no problem)
+    return "\n".join(processed_code)
+
 def contains_blanks(code):
     return (" _ " in code) or (" _\n" in code)
 
@@ -2240,6 +2250,10 @@ def process_input_string(input_string, level, escape_backslashes=True):
 
     if escape_backslashes and level >= 4:
         result = result.replace("\\", "\\\\")
+
+    # In levels 5 to 8 we do not allow if without else, we add an empty print to make it possible in the parser
+    if level >= 5 and level <= 8:
+        result = preprocess_ifs(result)
 
     # In level 8 we add indent-dedent blocks to the code before parsing
     if level >= hedy.LEVEL_STARTING_INDENTATION:

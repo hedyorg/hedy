@@ -373,6 +373,13 @@ export function save_customizations(class_id: string) {
             other_settings.push(<string>$(this).attr('id'));
         }
     });
+    let level_thresholds: Record<string, string> = {};
+    $('.threshold_settings_value').each(function() {
+        if ($(this).val() != '') {
+            level_thresholds[$(this).attr('id') as string] = $(this).val() as string;
+        }
+    });
+
     let opening_dates: Record<string, string> = {};
     $('.opening_date_container').each(function() {
         if ($(this).is(":visible")) {
@@ -389,11 +396,15 @@ export function save_customizations(class_id: string) {
           opening_dates: opening_dates,
           adventures: adventures,
           teacher_adventures: teacher_adventures,
-          other_settings: other_settings
+          other_settings: other_settings,
+          level_thresholds: level_thresholds
       }),
       contentType: 'application/json',
       dataType: 'json'
     }).done(function (response) {
+      if (response.achievement) {
+          showAchievements(response.achievement, false, "");
+      }
       modal.alert(response.success, 3000, false);
       window.State.unsaved_changes = false;
       $('#remove_customizations_button').removeClass('hidden');

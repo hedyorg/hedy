@@ -15,22 +15,22 @@
     explanation: imprime un emoji con `{print}`
 -   name: '{forward}'
     demo_code: '{forward} 100'
-    explanation: Draw a line with `{forward}`.
--   explanation: Gira a la tortuga con `{turn}`
+    explanation: Dibujar una línea con `{forward}`.
+-   explanation: Gire la tortuga de dibujo con `{turn}`.
     name: '{turn}'
-    demo_code: "{forward} 25\n{turn} left\n{forward} 25\n{turn} right"
+    demo_code: "{forward} 25\n{turn} {left}\n{forward} 25\n{turn} {right}"
 2:
 -   name: "{is}"
-    explanation: "Dar un nombre a una palabra para usar en el programa con `{is}`."
+    explanation: "Asigne un nombre a una palabra para usar en el programa con `{is}`. Puedes elegir el nombre tú mismo."
     demo_code: |-
         nombre {is} Hedy
         {print} Bienvenido nombre
 -   name: "{ask}"
-    explanation: "Preguntar algo con `{ask}`. ¡Atención! Necesitas darle un nombre a la respuesta con `{is}`"
+    explanation: "Preguntar algo con `{ask}`. ¡Atención! Necesitas darle un nombre a la respuesta con `{is}`."
     demo_code: |-
         color {is} {ask} ¿Cuál es tu color favorito?
-        {print} El color es tú favorito
--   explanation: Permite pausar a Hedy por un (par de) segundo(s).
+        {print} El color es tú favorito!
+-   explanation: '`{sleep}` Permite a Hedy tomar una pausa por un (par de) segundo(s).'
     name: '{sleep}'
     demo_code: "{print} Déjame pensar por un segundo...\n{sleep}\n{print} Hmm.. Necesito 3 segundos más...\n{sleep} 3\n{print} ¡Eureka! ¡Lo tengo!"
 -   name: is - turtle

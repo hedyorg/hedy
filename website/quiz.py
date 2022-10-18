@@ -1,7 +1,7 @@
 import json
 from typing import Dict
 import uuid
-from flask import g, request, session, jsonify
+from flask import g, request, session, jsonify, render_template
 from flask_babel import gettext
 from hedy_content import Quizzes
 from website import statistics
@@ -64,6 +64,13 @@ class QuizModule(WebsiteModule):
 
         question = self.quizzes[g.lang].get_quiz_data_for_level_question(level, question, g.keyword_lang)
         return jsonify(question), 200
+
+    @route('/preview-question/<int:level>/<int:question>', methods=['GET'])
+    def preview_quiz_question(self, level, question):
+        if question > self.quizzes[g.lang].get_highest_question_level(level) or question < 1:
+            return gettext('question_doesnt_exist'), 400
+
+        return render_template('preview-quiz.html', preview=True, level=level, question=question)
 
     @route('/submit_answer/', methods=["POST"])
     def submit_answer(self):
