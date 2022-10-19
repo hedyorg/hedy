@@ -15,18 +15,18 @@ levels:
             hint: "It's named after Hedy Lamarr."
             question_score: '10'
         2:
-            question_text: "Which command makes text appear?"
+            question_text: "Welcher Befehl lässt Text erscheinen?"
             mp_choice_options:
             -   option: |
                     ```
                     {echo}
                     ```
-                feedback: "`{echo}` repeats a given answer."
+                feedback: "`{echo}` wiederholt eine gegebene Antwort."
             -   option: |
                     ```
                     {print}
                      ```
-                feedback: "Correct!"
+                feedback: "Richtig!"
             -   option: |
                     ```
                     hello
@@ -36,53 +36,53 @@ levels:
                     ```
                     {ask}
                     ```
-                feedback: "With `{ask}`, you can ask a question."
+                feedback: "Mit `{ask}` kannst du eine Frage stellen."
             correct_answer: "B"
             hint: "_?_ Hello world!"
             question_score: '10'
         3:
-            question_text: "How do you ask what someone's favorite color is?"
+            question_text: "Wie fragst du, was jemandes Lieblingsfarbe ist?"
             mp_choice_options:
             -   option: |
                     ```
-                    {print} What is your favorite color?
+                    {print} Was ist deine Lieblingsfarbe?
                     ```
-                feedback: "`{print}` prints text, but it doesn't ask questions."
+                feedback: "`{print}` gibt Text aus, aber es stellt keine Fragen."
             -   option: |
                     ```
-                    {ask} {print} What is your favorite color?
+                    {ask} {print} Was ist deine Lieblingsfarbe?
                     ```
-                feedback: "You only need one command, not two."
+                feedback: "Du brauchst nur einen Befehl, nicht zwei."
             -   option: |
                     ```
-                    {ask} What is your favorite color?
+                    {ask} Was ist deine Lieblingsfarbe?
                     ```
                 feedback: "Great!"
             -   option: |
                     ```
-                    {echo} What is your favorite color?
+                    {echo} Was ist deine Lieblingsfarbe?
                     ```
                 feedback: "`{echo}` repeats your answer back to you."
             correct_answer: "C"
-            hint: "You can {ask} something with the {ask} command"
+            hint: "Mit dem `{ask}`-Befehl kann du etwas fragen."
             question_score: '10'
         4:
-            question_text: "What is wrong with this code?"
+            question_text: "Was ist falsch an diesem Code?"
             code: |-
-                Hi Im Hedy!
-                {ask} Who are you?
-                {echo} Hi...
+                Hallo, ich bin Hedy!
+                {ask} Wer bist du?
+                {echo} Hallo…
             mp_choice_options:
-            -   option: "`{print}` in line 1 is missing."
-                feedback: "Correct!"
+            -   option: "`{print}` fehlt in Zeile 1."
+                feedback: "Richtig!"
             -   option: "Im in line 1 is spelled wrong."
                 feedback: "Im is spelled wrong on purpose; Hedy doesn't understand the apostrophes yet."
-            -   option: "`{echo}` isn't a command."
-                feedback: "`{echo}` is a command, there's another mistake."
-            -   option: "Nothing! This is a perfect code!"
-                feedback: "Wrong, look carefully!"
+            -   option: "`{echo}` ist kein Befehl."
+                feedback: "`{echo}` ist ein Befehl, es gibt noch einen weiteren Fehler."
+            -   option: "Nichts! Der Code ist perfekt!"
+                feedback: "Falsch, schau nochmal genau hin!"
             correct_answer: "A"
-            hint: "Line 1 doesn't seem right"
+            hint: "Zeile 1 sieht nicht ganz richtig aus"
             question_score: '10'
         5:
             question_text: "Which command is missing in line 2?"
