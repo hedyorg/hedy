@@ -37,7 +37,7 @@ jobs:
     - shell: pwsh
       id: check_file_changed
       run: |
-        $diff = git diff --name-only HEAD^ HEAD
+        $diff = git diff --name-only
         $SourceDiff = $diff | Where-Object { $_ -match '^docs/' -or $_ -match '^grammars/' }
         $HasDiff = $SourceDiff.Length -gt 0
         Write-Host "::set-output name=docs_changed::$HasDiff"
