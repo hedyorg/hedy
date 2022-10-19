@@ -34,8 +34,6 @@ jobs:
     - name: Compiling Babel translations
       run: |
         pybabel compile -f -d translations
-
-    # Now we are ready for some magic: Only run the code checking tests if there are changes in related files
     - shell: pwsh
         # Give an id to the step, so we can reference it later
         id: check_file_changed
