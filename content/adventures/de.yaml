@@ -50,7 +50,7 @@ adventures:
 
                     Die meisten Programmiersprachen verwenden beim `print`-Befehl Anführungszeichen, sodass wir dem echten Programmieren einen Schritt näher kommen!
                 example_code: "```\nprint 'Ab jetzt musst du Anführungszeichen verwenden!'\nAntwort is ask 'Was müssen wir ab jetzt verwenden?'\nprint 'Wir müssen ' Antwort ' verwenden.'\n```\n"
-                story_text_2: "## Abenteuer werden immer schwieriger\nDie Abenteuer werden jetzt immer schwieriger in den nächsten Tabs.\nDeswegen ist es am Besten wenn du dich mit der Geschichte von links nach rechts vorarbeitest, um immer mehr herausgefordert zu werden.\n"
+                story_text_2: "## Abenteuer werden immer schwieriger\nDie Abenteuer werden jetzt immer schwieriger in den nächsten Tabs.\nDeswegen ist es am Besten wenn du dich von links nach rechts vorarbeitest, um immer mehr herausgefordert zu werden.\n"
             5:
                 start_code: |-
                     name is ask 'Wie heisst du?'
@@ -94,7 +94,7 @@ adventures:
                     `{ask}` und `{print}` funktionieren immer noch wie du es gewohnt bist. Aber `{if}`,`{else}` und `{repeat}` haben sich verändert! 
                     Du kannst jetzt Befehlsgruppen zusammen ausführen, aber du musst den Code dafür *einrücken*. 
                     Das bedeutet dass du die Befehlszeilen mit vier Leerzeichen beginnen musst. Das gilt auch, wenn du einen Block mit nur einer Zeile schreiben möchtest.
-                example_code: "```\n{repeat} 5 {times}\n    {print} 'Hallo zusammen'\n    {print} 'Das hier wird fünf Mal wiederholt'\n```\n"
+                example_code: "Der `{repeat}` Befehl funktioniert jetzt so:\n```\n{repeat} 5 {times}\n    {print} 'Hallo zusammen'\n    {print} 'Das hier wird fünf Mal wiederholt'\n```\nDie Befehle `{if}` und `{else}` funktionieren jetzt so:\n\n```\nname 8{is} 9{ask} 'Wie heißt du?'\n0{if} name {is} Hedy\n    {print} 'Willkommen Hedy'\n    {print} 'Du kannst an deinem Computer spielen'\n{else}\n    {print} 'EINDRINGLING!'\n    {print} 'Du darfst diesen Rechner nicht benutzen!'\n```\n"
             9:
                 start_code: |-
                     {repeat} 3 {times}
@@ -167,7 +167,7 @@ adventures:
                 story_text: |
                     ## Groß, größer, am größten!
                     Wir lernen weitere neue Elemente kennen! Du kennst sie vielleicht schon aus der Mathematik, das `<` und das `>` Zeichen.
-                    Das `<` prüft, ob die erste Zahl kleiner ist als die zweite, so überprüft `Alter < 12` zum Beispiel ob `Alter` kleiner als 12 ist.
+                    Das `<` prüft, ob die erste Zahl kleiner ist als die zweite, so überprüft `Alter < 12` zum Beispiel, ob `Alter` kleiner als 12 ist.
                     Wenn du überprüfen willst, ob die erste Zahl kleiner oder gleich der zweiten ist, kannst du `<=`verwenden, zum Beispiel `Alter <= 11`.
                     Das `>` prüft, ob die erste Zahl größer als die zweite ist, so überprüft `Punkte > 10` zum Beispiel ob `Punkte` größer als 10 ist.
                     Wenn du überprüfen willst, ob die erste Zahl größer oder gleich der zweiten ist, kannst du `>=`verwenden, also zum Beispiel `Punkte >= 11`.
@@ -180,10 +180,10 @@ adventures:
             15:
                 start_code: |-
                     antwort = 0
-                    while antwort != 25
-                        antwort = ask 'Wieviel ist 5 mal 5?'
-                        print 'Das ist die richtge Antwort!'
-                story_text: |
+                    {while} antwort != 25
+                        antwort = {ask} 'Wieviel ist 5 mal 5?'
+                        {print} 'Das ist die richtge Antwort!'
+                story_text: |-
                     ## Mehr Schleifen!
                     Wir lernen eine neue Schleife kennen, die `{while}`-Schleife! Wir setzen die Schleife so lange fort, wie die Aussage wahr ist!
                     Also vergiss nicht den Wert innerhalb der Schleife zu ändern.
@@ -194,18 +194,18 @@ adventures:
             16:
                 start_code: |-
                     früchte = ['Apfel', 'Banane', 'Kirsche']
-                    print früchte
-                story_text: |
+                    {print} früchte
+                story_text: |-
                     ## Wir kommen dem richtigem Code immer näher!
                     Wir setzen jetzt eckige Klammern um Listen, so wie das in Python gemacht wird! Außerdem müssen wir jetzt einfache Anführungszeichen `'` um jedes Element einer Liste setzen, wie wir es in den vorherigen Leveln gelernt haben.
                     Du kannst die eckigen Klammern auch verwenden um eine Stelle in der Liste zu benennen.
                 example_code: "```\nFreunde = ['Ahmed', 'Ben', 'Clemens']\nGlückszahlen = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'Die Glückszahl von ' Freunde[i]\n    {print} 'ist ' Glückszahlen[i]\n```\n"
             17:
                 start_code: |-
-                    for i in range 1 to 10:
-                        print i
-                    print 'Bereit oder nicht, hier komme ich!'
-                story_text: |
+                    {for} i {in} {range} 1 {to} 10:
+                        {print} i
+                    {print} 'Bereit oder nicht, hier komme ich!'
+                story_text: |-
                     ## Elif
                     Jetzt werden wir ein wenig an der Einrückung ändern. Jedes Mal, wenn wir eine Einrückung benötigen, brauchen wir `:` in der Zeile vor der Einrückung.
 
@@ -279,7 +279,7 @@ adventures:
                     print Er / Sie befürchtet, dass es in diesem Wald spukt.
                     ```
 
-                start_code: "{print} Deine Geschichte beginnt genau hier."
+                start_code: "{print} Deine Geschichte beginnt hier"
             2:
                 story_text: |
                     ## Schreibe eine Geschichte
@@ -300,7 +300,7 @@ adventures:
                     ```
                 start_code: "{print} Deine Geschichte beginnt genau hier."
             12:
-                story_text: |
+                story_text: |-
                     ## Geschichte
                     In diesem Level kannst Du die Anführungszeichen nutzen, um mehrere Wörter in einer Variable zu speichern.
 
@@ -336,8 +336,8 @@ adventures:
                     ## Geschichte
                     In diesem Level nutzt Du Verschachtelungen, um `if`-, `repeat`- oder `for`-Befehle in anderen `if`-, `repeat`- oder `for`-Befehlen zu verwenden. Das eröffnet Dir viele Möglichkeiten und hilft Dir, Deine Geschichte richtig interaktiv werden zu lassen.
                 start_code: "# setze hier deinen Code hin"
-                example_code: "## Beispiel Hedy-Code\n```\n{print} 'Robin läuft durch die Innenstadt.'\nOrt = {ask} 'Geht Robin in ein Geschäft oder nach Hause?'\n{if} Ort {is} Geschäft\n    {print} 'Sie betritt ein Geschäft.'\n    {print} 'Robin sieht ein Buch, das spanned wirkt.'\n    Buch = {ask} 'Kauft Robin das Buch?'\n    {if} Buch {is} ja\n        {print} 'Robin kauft das Buch und geht nach Hause.'\n    {else}\n        {print} 'Robin verlässt das Geschäft und geht nach Hause.'\n{else}\n    {print} 'Robin geht nach Hause.'\n```\n"
-                story_text_2: "Das obige Beispiel ist recht simpel, denn mit Verschachtelungen kannst Du richtig aufwendigen Code schreiben und aus Deiner Geschichte ein richtiges Spiel machen. Sieh Dir einmal dieses Beispiel an!\n"
+                example_code: "```\n{print} 'Robin läuft durch die Innenstadt.'\nOrt = {ask} 'Geht Robin in ein Geschäft oder nach Hause?'\n{if} Ort {is} Geschäft\n    {print} 'Sie betritt ein Geschäft.'\n    {print} 'Robin sieht ein Buch, das spanned wirkt.'\n    Buch = {ask} 'Kauft Robin das Buch?'\n    {if} Buch {is} ja\n        {print} 'Robin kauft das Buch und geht nach Hause.'\n    {else}\n        {print} 'Robin verlässt das Geschäft und geht nach Hause.'\n{else}\n    {print} 'Robin geht nach Hause.'\n```\n"
+                story_text_2: "Das obige Beispiel ist recht simpel, doch mit verschachtelten {if} kannst Du richtig aufwendigen Code schreiben und aus Deiner Geschichte ein richtiges Spiel machen. Sieh Dir einmal dieses Beispiel an!"
                 example_code_2: "## Ausgebauter Code\n```\nSchwert = verloren\nSpiel = läuft\n{print} 'Unsere Heldin läuft durch den Wald.'\n{print} 'Der Weg gabelt sich.'\n{repeat} 2 {times}\n    {if} Spiel {is} läuft\n        Weg = {ask} 'In welche Richtung soll sie gehen?'\n        {if} Weg {is} links\n            {if} Schwert {is} gefunden\n                {print} 'Unsere Heldin trifft auf einen Drachen!'\n                {print} 'Zum Glück hat unsere Heldin ein Schwert um die Bestie zu besiegen!'\n                Spiel = vorbei\n            {else}\n                {print} 'Unsere Heldin findet einen Drachen, hat aber keine Waffe!'\n                {print} 'Unsere Heldin wird vom Drachen geschlagen...'\n                {print} 'Versuch es nochmal.'\n                Spiel = vorbei\n        {if} Weg {is} rechts\n            {if} Schwert {is} verloren\n                {print} 'Unsere Heldin findet ein Schwert.'\n                {print} 'Das könnte sich noch als nützlich erweisen.'\n                Schwert = gefunden\n            {else}\n                {print} 'Du hast das Schwert schon gefunden. Hier gibt es nichts weiter zu entdecken.'\n                {print} 'Sie läuft zurück'\n```\n"
             8:
                 story_text: |
@@ -579,17 +579,15 @@ adventures:
                     Jetzt machen wir es uns richtig einfach und programmieren 'Wenn Du glücklich bist, dann klatsche in die Hand'. Alles, was wir tun möchten, wenn wir glücklich sind, speichern wir in einer Variablen. Sieh es Dir an:
 
                 example_code: |
-                    ## Wenn Du glücklich bist dann klatsche in die Hand
-
                     ```
                     Aktionen = 'klatsche in die Hand', 'stampfe mit dem Fuß', 'ruf Hurra'
-                    for Aktion in Aktionen
-                        for i in range 1 to 2
-                            print 'Wenn Du glücklich bist'
-                            print Aktion
-                        print 'Zeig mir, wenn du bei mir bist, wie dir so zumute ist.'
-                        print 'Wenn Du glücklich bist'
-                        print Aktion
+                    {for} Aktion {in} Aktionen
+                        {for} i {in} {range} 1 {to} 2
+                            {print} 'Wenn Du glücklich bist'
+                            {print} Aktion
+                        {print} 'Zeig mir, wenn du bei mir bist, wie dir so zumute ist.'
+                        {print} 'Wenn Du glücklich bist'
+                        {print} Aktion
                     ```
                 start_code: "# setze hier deinen Code hin"
             11:
@@ -776,9 +774,9 @@ adventures:
             1:
                 story_text: |
                     ## Lass uns zeichnen
-                    Du kannst mit Hedy auch malen. Indem Du Drehungen und Linien kombinierst, kannst Du ein Quadrat oder eine Treppe zeichnen.
+                    Du kannst mit Hedy auch zeichnen. Indem Du Drehungen und Linien kombinierst, kannst Du ein Quadrat oder eine Treppe zeichnen.
 
-                    Mit `forward` ziehst Du eine Linie vorwärts. Die Zahl dahinter legt fest, wie weit die Schildkröte wandert. Mit `turn right` ("drehe Dich nach rechts") macht sie eine Viertelumdrehung im Uhrzeigersinn, mit `turn left` ("drehe Dich nach links") entgegen dem Uhrzeigersinn.
+                    Mit `{forward}` ziehst Du eine Linie vorwärts. Die Zahl dahinter legt fest, wie weit die Schildkröte wandert. Mit ``{turn} {right}` ("drehe Dich nach rechts") macht sie eine Viertelumdrehung im Uhrzeigersinn, mit `{turn} {left}` ("drehe Dich nach links") entgegen dem Uhrzeigersinn. Wenn du zurück laufen möchtest, benutzt du den `{forward}`-Befehl mit einer negativen Zahl., wie zum Beispiel `{forward}-100`.
 
                     Das ist der Anfang einer kleinen Treppe. Kannst Du sie so zeichnen, dass sie 5 Stufen hat?
 
@@ -794,16 +792,12 @@ adventures:
                 start_code: |-
                     forward 50
                     turn left
-                story_text_2: "## Colors\nYou can also change the color of the lines with the command `{color}`. Check out the example.\nYou can also use the command `{color} {white}` to make 'invisible' lines. You could use these white lines to move the turtle anywhere in the screen before you start drawing.\n"
+                story_text_2: "## Farben\nDu kannst auch die Linienfarbe mit dem Befehl `{color}` ändern. Sieh dir das Beispiel an.\nDu kannst auch den Befehl `{color} {white}` benutzen, um Linien unsichtbar‘ zu machen. Du könntest diese weißen Linien dazu benutzen, die Schildkröte überallhin zu bewegen, bevor du zu zeichnen beginnst.\n"
                 example_code_2: "```\n{color} {white}\n{forward} -80\n{color} {green}\n{forward} 50\n{color} {yellow}\n{forward} 50\n{color} {red}\n{forward} 50\n```\n"
             2:
                 story_text: |
                     ## Schildkröte
-                    In Level 1 kann sich die Schildkröte nur nach links und rechts drehen. Das ist etwas langweilig!
-                    In Level 2 kann sie ihre Nase in alle Richtungen strecken.
-
-                    Nutze 90, um wieder eine Vierteldrehung zu machen. Diese Angabe ist in Grad (°). Eine volle Drehung um sich selbst sind 360° (360 Grad).
-                    Kannst Du mit diesem Code eine bestimmte Form zeichnen? Ein Dreieck zum Beispiel, oder einen Kreis?
+                    In diesen level kann du Variablen nutzen, um die Schildkröte interaktiv zu machen. Du kannst zum Beispiel die Spieler fragen, wie viele Schritte die Schildkröte machen soll.
 
                 example_code: |
                     ```
@@ -814,13 +808,13 @@ adventures:
                     turn Winkel
                     forward 25
                     ```
-                start_code: |
-                    print Schildkrötenrennen!
-                    Winkel is 90
-                    turn Winkel
-                    forward 25
-                story_text_2: "Also, in level 1 the turtle could only turn left or right. That is a bit boring!\nIn level 2 he can point his nose in all directions.\n\nUse 90 to turn a quarter. We call this degrees. A full turn is 360 degrees.\nCan you make a figure with this code? Maybe a triangle or a circle?\n"
-                example_code_2: "```\n{print} Drawing figures\nangle {is} 90\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n```\n"
+                start_code: |-
+                    {print} Schildkrötenrennen!
+                    Winkel {is} 90
+                    {turn} Winkel
+                    {forward} 25
+                story_text_2: "In Level 1 konnte sich die Schildkröte außerdem nur nach links oder rechts drehen. Das ist ein bisschen langweilig!\nIn level 2 kann sie ihr Nase in alle Richtungen strecken..\n\nBenutze 90 für eine Vierteldrehung. Dies wird Grad genannt. Eine komplette Drehung sind 360 Grad.\nKannst du mit diesem Code eine Figur erstellen? Vielleicht einen Kreis oder ein Dreieck?\n"
+                example_code_2: "```\n{print} Figuren werden gezeichnet\nwinkel {is} 90\n{turn} winkel\n{forward} 25\n{turn} winkel\n{forward} 25\n```\n"
             3:
                 story_text: |
                     ## Suchende Schildkröte

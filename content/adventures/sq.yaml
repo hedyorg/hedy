@@ -261,13 +261,13 @@ adventures:
     default:
         levels:
             5:
-                start_code: "name {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'cool!' {else} {print} 'meh'"
-                story_text: "## If... else....\nIn level 5 there is something new, the `{if}`! With the `{if}` you can choose between two different options.\nThis code prints nice if you enter Hedy as a name, and boo! if you enter something else.\n`{ask}` and `{print}` still work like they did in level 4.\n"
-                example_code: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'\n```\n"
-                story_text_3: "## Lists\nWhen we want to check if something is in a list, we can now use the `{in}` command.\nThis code prints pretty! if you choose green or yellow, and meh otherwise.\n"
-                example_code_3: "```\npretty_colors {is} green, yellow\nfavorite_color {is} {ask} 'What is your favorite color?'\n{if} favorite_color {in} pretty_colors {print} 'pretty!'\n{else} {print} 'meh'\n```\n"
-                story_text_2: "Sometimes code with an `{if}` gets really long and does not fit on the line well. <br> You may also divide the code over two lines, starting the second line at the `{else}` like this:\n"
-                example_code_2: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice'\n{else} {print} 'boo!'\n```\n"
+                start_code: "emri {is} {ask} 'si e ke emrin?'\n{if} emri {is} Hedy {print} 'mirë!' {else} {print} 'meh'"
+                story_text: "## If... else.... (nëse... përndryshe...)\nNë nivel 5 kemi diçka të re, `{if}` komanda! Me `{if}` komandën ju mund të zgjidhni një nga dy opsione .\nKy kodi printon Hedy si emër, dhe boo! nëse shkruani diçka tjetër.\n`{ask}` dhe `{print}` komandat punojnë si në nivelin 4.\n"
+                example_code: "```\nemri {is} {ask} 'si e keni emrin?'\n{if} emri {is} Hedy {print} 'mirë' {else} {print} 'boo!'\n```\n"
+                story_text_3: "## Listat\nKur duam ta shohim nëse diçka është në listë, ne mund ta përdorim komandën `{in}`.\nKy kod printon bukur! nëse zgjidhni gjelbër ose verdhë, përndryshe meh.\n"
+                example_code_3: "```\nnjgjyrat_e_bukura {is} gjelbër, verdhë\nnjgjyrat_e_preferuara {is} {ask} 'Cila është ngjyra juaj e preferuar?'\n{if} njgjyrat_e_preferuara {in} njgjyrat_e_bukura {print} 'bukur!'\n{else} {print} 'meh'\n```\n"
+                story_text_2: "Nganjëherë kodi në komandën `{if}` bëhet shumë i gjatë dhe nuk e nxen rreshti. <br> Ju gjithashtu mund ta ndani kodin në dy rreshta, duke filluar rreshtin e dytë te komanda `{else}` ja kështu:\n"
+                example_code_2: "```\nemri {is} {ask} 'Si e ke emrin?'\n{if} emri {is} Hedy {print} 'bukur'\n{else} {print} 'boo!'\n```\n"
             18:
                 example_code_3: "```\n{print}('My name is Hedy!')\nname = {input}('What is your name?')\n{print}('So your name is ', name)\n```\n"
                 start_code: "name = 'Hedy'\n{print}('My name is ', name)"
@@ -277,65 +277,65 @@ adventures:
                 example_code_2: "```\ntemperature = 25\n{print}('It is ', temperature, 'degrees outside')\n```\n"
                 story_text_3: "##  Input\nThe final change we will need to make to get Python code is changing `{ask}` into `{input}`."
             1:
-                story_text: "## Welcome to Hedy!\nIn Level 1 you can use the commands `{print}`, `{ask}` and `{echo}`.\nType your code in the programming field. Or press the green button in the example code block, and the code will be typed for you!\nTry the code yourself with the green 'Run code' button under the programming field.\n\nYou can print text to the screen using the `{print}` command.\n"
-                example_code: "```\n{print} Hello!\n{print} Welcome to Hedy!\n```\n"
-                story_text_2: "You can also ask for input with `{ask}` and repeat it back with an `{echo}` command.\n"
-                story_text_3: "Let's get started! Don't know what to create? In the next tabs you will find ideas for programs to build.\n"
-                example_code_2: "```\n{ask} What is your name?\n{echo} hello\n```\n"
-                start_code: '{print} hello world!'
+                story_text: "## Mirë se vini ne Hedy!\nNë level 1 mund ti përdorni komandat `{print}`, `{ask}` dhe `{echo}`.\nShkruani kodin në fushën e programimit. Ose shtypeni butonin e gjelbër në bllokun që tregon shembull, dhe kodi do të shkruhet për ju!\nProvojeni kodin tuaj duke shtypur butonin 'Ekzekuto kodin' ndër fushën e programimit.\n\nMund të printoni tekst në ekran duke përdorur komandën `{print}`.\n"
+                example_code: "```\n{print} Përshëndetje!\n{print} Mirë se vini në Hedy!\n```\n"
+                story_text_2: "Gjithashtu mund të kërkoni të dhëna me komandën `{ask}` dhe përsëriteni me komandën `{echo}`.\n"
+                story_text_3: "Le të fillojmë! Nuk dini çfarë të krijoni? Në skedat tjera ju do të gjeni ideja për të ndërtuar një program.\n"
+                example_code_2: "```\n{ask} Si e keni emrin?\n{echo} përshëndetje\n```\n"
+                start_code: '{print} përshëndetje botë!'
             2:
-                story_text: "## Variables\nIn level 2 we learn two new commands: `{is}` and `{sleep}`.\nYou can name a word with `{is}`. This is called a variable. In this example we made a variable called name and a variable called age. You can use the word name anywhere in your code and it will be replaced by Hedy, like this:\n\nThis way you no longer need the `{echo}` command!\n"
-                example_code: "```\nname {is} Hedy\nage {is} 15\n{print} name is age years old\n```\n"
-                story_text_2: "`{print}` still works the same, but the `{ask}` command has changed. You need to use a variable in the `{ask}` command as well. It looks like this:\n"
-                example_code_2: "```\nanswer {is} {ask} What is your name?\n{print} Hello answer\n```\n"
-                story_text_3: "Another new command in this level is `{sleep}`, which pauses your program for a second. If you type a number behind the {sleep} command, the program pauses for that amount of seconds.\n"
-                example_code_3: "```\n{print} My favorite colour is...\n{sleep} 2\n{print} green!\n```\n"
-                start_code: '{print} hello world!'
+                story_text: "## Variablat\nNë level 2 do të mësojmë komandat: `{is}` dhe `{sleep}`.\nMund që një fjale ti jepni një emër me komandën `{is}`. Kjo quhet një variabël. Në këtë shembull ne e krijuam një variabël 'emri' edhe një tjetër 'mosha'. Mund ta përdorni fjalën 'emri' kudo në kod dhe do të zëvendësohet me Hedy, si kështu:\n\nNë këtë mënyrë nuk të keni nevojë për komandën `{echo}`!\n"
+                example_code: "```\nemri {is} Hedy\nmosha {is} 15\n{print} emri është mosha vjeç\n```\n"
+                story_text_2: "`{print}` punon ende njëlloj, por `{ask}` komanda ka ndryshuar. Ju duhet ta përdorni një variabël në komandën `{ask}` gjithashtu. Duket si kjo:\n"
+                example_code_2: "```\npërgjigja {is} {ask} Çfarë është emri yt?\n{print} Përshëndetje përgjigja\n```\n"
+                story_text_3: "Një komandë tjetër është `{sleep}`, që e ndalon programim për një sekondë. Nëse shkruani një numër pas komandës {sleep}, programi ndalon për aq sekonda sa e keni shkruar.\n"
+                example_code_3: "```\n{print} Ngjyra ima e preferuar është...\n{sleep} 2\n{print} gjelbër!\n```\n"
+                start_code: '{print} përshëndetje botë!'
             3:
-                story_text: "## Make a list!\nIn level 3 you can make a list. You can let the computer choose something random from the list. You do that with `{at} {random}`.\n"
-                example_code: "```\nanimals {is} dog, cat, kangaroo\n{print} animals {at} {random}\n```\n"
-                story_text_2: You can also add items to the list with `{add}` and remove items with `{remove}`.
-                example_code_2: "```\nanimals {is} dog, cat, kangaroo\n{add} penguin {to_list} animals\n{remove} cat {from} animals\n{print} animals {at} {random}\n```\n"
-                start_code: '{print} hello world!'
+                story_text: "## Krijoni një listë!\nNë level 3 ju mund të bëni një listë. Ju mund ta lejoni kompjuterin të zgjedhë një rastësisht. Ju mund ta bëni këtë me `{at} {random}`.\n"
+                example_code: "```\nkafshët {is} qeni, maca, kanguri\n{print} kafshët {at} {random}\n```\n"
+                story_text_2: Gjithashtu mund të shtoni artikull me komandën `{add}` dhe të fshini artikuj me komandën `{remove}`.
+                example_code_2: "```\nkafshët {is} qeni, maca, kanguri\n{add} pinguin {to_list} kafshët\n{remove} maca {from} kafshët\n{print} kafshët {at} {random}\n```\n"
+                start_code: '{print} përshëndetje botë!'
             4:
-                start_code: "{print} 'Hello world'"
-                story_text: "## 'Quotation marks'\nIn level 4 `{ask}` and `{print}` have changed.\n\nYou must put text that you want to print between quotation marks.\n\nThis is useful, because now you can print all the words you want. Also the words you used to store something with `{is}`.\n\nMost programming languages also use quotation marks when printing, so we are also getting a step closer to real programming!\n"
-                example_code: "```\n{print} 'You need to use quotation marks from now on!'\nanswer {is} {ask} 'What do we need to use from now on?'\n{print} 'We need to use ' answer\n```\n"
-                story_text_2: "## Adventures are getting more and more difficult\nThe adventures are now getting more and more difficult in the successive tabs.\nSo it is best to start on the left and work to the right, in order to be challenged more and more.\n"
+                start_code: "{print} 'Përshëndetje botë'"
+                story_text: "## 'Thonjëzat'\nNë nivelin 4 `{ask}` dhe `{print}` komandat kanë ndryshuar.\n\nJu duhet ta vendoni tekstin që doni ta printoni në thonjëza.\n\nKjo është e dobishme, sepse tani mund të printoni të gjitha fjalët që doni. Gjithashtu edhe fjalët që dikur i ruajtët me komandën `{is}`.\n\nShumica e gjuhëve programore përdorin thonjëza kur printojnë, kështu që ne jemi një hap më afër programimit real!\n"
+                example_code: "```\n{print} 'Ju duhet të përdorni thonjëya prej tash e tutje!'\npërgjigja {is} {ask} 'Çfarë duhet të përdorim prej tani e tutje?'\n{print} 'Ne duhet të përdorim ' përgjigja\n```\n"
+                story_text_2: "## Aventurat po bëhen më shumë të vështira \nAventurat po bëhen shumë e më shumë të vështira në skedarët e ardhshëm.\nKështu që është më mirë të filloni nga e majta dhe shkoni në të djathtë, me qëllim që të sfidoheni shumë e më shumë.\n"
             6:
-                start_code: "{print} '5 times 5 is ' 5 * 5"
-                story_text: "## 1 + 1\n In this level you learn something new: you can now also calculate.\n\n The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.\n\n The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!\n That is why we multiply with the asterisk above 8: `5 * 5`. Read that as \"5 times 5\" that helps you remember it best.\n"
-                example_code: "```\n{print} '5 plus 5 is ' 5 + 5\n{print} '5 minus 5 is ' 5 - 5\n{print} '5 times 5 is ' 5 * 5\n```\n"
-                story_text_2: "We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:\n"
-                example_code_2: "```\nname = Hedy\nanswer = 20 + 4\n```\n"
+                start_code: "{print} '5 herë 5 është ' 5 * 5"
+                story_text: "## 1 + 1\n Në këtë nivel ju do të mësoni diçka të re: ju tash mund të kalkuloni.\n\n Plusi është i lehtë, mund ta shkruani si në matematik: për shembull `5 + 5`. Gjithashtu punon edhe minusi, është `5 - 5`.\n\n Shumëzimi është pak më ndryshe, sepse nuk keni shumëzim në tastierë. Kërkojeni, sigurisht nuk është!\n Kjo është përse ne shumëzojmë me yll që gjendet tek numri 8 lartë në tastierë: (mbajeni shtypur shift, pastaj shtypni numrin 8) `5 * 5`. Lexoni at si \"5 herë 5\" kjo do ju ndihmojë që ta mbani mend.\n"
+                example_code: "```\n{print} '5 plus 5 është ' 5 + 5\n{print} '5 minus 5 është ' 5 - 5\n{print} '5 herë 5 është ' 5 * 5\n```\n"
+                story_text_2: "Ne gjithashtu mund të bëjmë ndryshime në ruajtjen e fjalës në variabël! Ju tani mund të përdorni `=` në vend të `{is}` kur ruajmë një fjalë apo numër në variabël, si kështu:\n"
+                example_code_2: "```\nemri = Hedy\npërgjigja = 20 + 4\n```\n"
             7:
-                start_code: "{repeat} 3 {times} {print} 'Hedy is fun!'"
-                story_text: "## Level 7! Level 7!\nLevel 7 adds the `{repeat}` command.  `{repeat}` can be used to execute one line of code multiple times.\n"
-                example_code: "```\n{repeat} 3 {times} {print} 'Hedy is fun!'\n```\n"
+                start_code: "{repeat} 3 {times} {print} 'Hedy është qejf!'"
+                story_text: "## Level 7! Level 7!\nNiveli 7 shton komandën `{repeat}`.  `{repeat}` komanda mund të përdoret që të ekzekutoni rreshtin e kodit disa herë.\n"
+                example_code: "```\n{repeat} 3 {times} {print} 'Hedy është qejf!'\n```\n"
             8:
-                start_code: "{repeat} 5 {times}\n    {print} 'Hello folks'\n    {print} 'This will be printed 5 times'"
-                story_text: "## Indentation\n`{ask}` and `{print}` still work as you know them. But `{if}`, `{else}` and `{repeat}` have changed!\nYou can now execute groups of code together, but you will have to *indent* the code.\nThat means putting four spaces at the beginning of the line. You will also have to indent when you just want to create a block of one line.\n"
-                example_code: "This is how the `{repeat}` command works now:\n```\n{repeat} 5 {times}\n    {print} 'Hello everyone'\n    {print} 'This is all repeated 5 times'\n```\nThis is how the `{if}` and `{else}` command work now:\n\n```\nname {is} {ask} 'What is your name?'\n{if} name {is} Hedy\n    {print} 'Welcome Hedy'\n    {print} 'You can play on your computer!'\n{else}\n    {print} 'INTRUDER!'\n    {print} 'You cannot use this computer!'\n```\n"
+                start_code: "{repeat} 5 {times}\n    {print} 'Përshëndetje njerëz'\n    {print} 'Kjo do të printohet 5 herë'"
+                story_text: "## Dhëmbëzimi\n`{ask}` dhe `{print}` punojnë siç i mbani mend. Por `{if}`, `{else}` dhe `{repeat}` kanë ndryshuar!\nTani mund të ekzekutoni grup kodi së bashku, por do të duhet që para kodin të lëni hapësira.\nKjo do të thotë të vendosni 4 hapësira në fillim të rreshtit. Gjithashtu mund të lëni hapësira para kodit kur doni të krijoni një grup me një rresht.\n"
+                example_code: "Kjo është si komanda `{repeat}` punon tani:\n```\n{repeat} 5 {times}\n    {print} 'Përshëndetje të gjithë'\n    {print} 'Kjo e gjitha përsëritet 5 herë'\n```\nKjo është si tani komanda `{if}` dhe `{else}` punojnë tani:\n\n```\nemri {is} {ask} 'Si e ke emrin?'\n{if} emri {is} Hedy\n    {print} 'Mirë se erdhët Hady'\n    {print} 'Ju mund të luani në kompjuterin tuaj!'\n{else}\n    {print} 'HAJDUT!'\n    {print} 'Nuk mund ta përdorni këtë kompjuter!'\n```\n"
             9:
-                start_code: "{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    {else}\n        {print} 'pizza is better'"
-                story_text: "## All together now!\nIn this level you can not only use multiple lines with `{if}` and `{repeat}`, but you can also put them together!\nIn the example you see an `{if}` command within a `{repeat}` command. It is also allowed the other way around, and an `{if}` is also allowed in an `{if}` and a `{repeat}` in a `{repeat}`.\nGive it a try!\n"
-                example_code: "```\n{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    {else}\n        {print} 'pizza is better'\n```\n"
+                start_code: "{repeat} 3 {times}\n    ushqimi = {ask} 'Çfarë doni?'\n    {if} ushqimi {is} pica\n        {print} 'bukur!'\n    {else}\n        {print} 'pica është më mirë'"
+                story_text: "## Të gjithë së bashku tani!\nNë këtë nivel jo veçse mund të përdorni shumë rreshta me komandat `{if}` dhe `{repeat}`, por mund ti vendoseni së bashku!\nNë shembullin që shikoni komanda `{if}` është brenda komandës `{repeat}`. Gjithashtu mund edhe e kundërta, një komandë `{if}` lejohet brenda komandës tjetër `{if}` dhe komanda `{repeat}` brenda një tjetër `{repeat}`.\nGive it a try!\n"
+                example_code: "```\n{repeat} 3 {times}\n    ushqimi= {ask} 'Çfarë doni?'\n    {if} ushqimi {is} pica\n        {print} 'bukur!'\n    {else}\n        {print} 'pica është më mirë'\n```\n"
             10:
-                start_code: "animals {is} dog, cat, blobfish\n{for} animal {in} animals\n  {print} 'I love ' animal"
-                story_text: "## For each item in my list...\nIn this level we learn a new code called `{for}`. With `{for}` you can make a list and use all elements.\n`{for}` creates a block, like `{repeat}` and `{if}` so all lines in the block need to start with spaces."
-                example_code: "```\nanimals {is} dog, cat, blobfish\n{for} animal {in} animals\n  {print} 'I love ' animal\n```\n"
+                start_code: "kafshët {is} qeni, maca, peshku\n{for} kafsha {in} kafshët\n  {print} 'Un e dua' kafsha"
+                story_text: "## Për secilin artikull në listë...\nNë këtë nivel do mësojmë për komandë të re që quhet `{for}`. Me komandën`{for}` mund të bëni një listë dhe ti përdoreni të gjitha elementet.\n`{for}` krijon një bllok, si në `{repeat}` dhe `{if}` kështu që të gjitha rreshtat në bllok duhet të fillojnë me hapësira."
+                example_code: "```\nkafshët {is} qeni, maca, peshku\n{for} kafsha {in} kafshët\n  {print} 'Un e dua ' kafsha\n```\n"
             11:
-                start_code: "{for} counter {in} {range} 1 {to} 5\n    {print} counter"
-                story_text: "## Loops!\n`{print}` works just the same but we add a new form of the `{for}`. You can now write `{for} counter {in} {range} 1 {to} 5` and use `counter` in your program.\nTry it out to see what happens! Remember to use indentations after the `{for}` and `{if}` statements (That means starting a sentence with four spaces)"
-                example_code: "```\n{for} counter {in} {range} 1 {to} 5\n    {print} counter\n```\n"
+                start_code: "{for} numëruesi {in} {range} 1 {to} 5\n    {print} numëruesi"
+                story_text: "## Përsëritja e bllokut të kodit!\n`{print}` punon njëlloj por ne shtojmë një mënyrë të re të komandës `{for}`. Tani mund të shkruani `{for} counter {in} {range} 1 {to} 5` dhe përdorni `counter` in your program.\nProvojeni dhe shiheni çfarë ndodhën! Mbani mend hapësirat para rreshtave nën komandat `{for}` dhe `{if}` (Kjo do të thotë të shkruani 4 hapësira, pastaj kodin)"
+                example_code: "```\n{for} numërues {in} {range} 1 {to} 5\n    {print} numërues\n```\n"
             12:
-                start_code: "{print} 'decimal numbers now need to use a dot'\n{print} 2.5 + 2.5"
-                story_text: "## Numbers and texts\n**Decimal numbers**\nSo far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the `.` for decimal numbers."
-                example_code: "```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n"
-                story_text_2: "**All texts need to be in quotation marks**\nFor this level on you will also have to use quotation marks when storing a text with `=`:\n"
-                example_code_2: "```\nname = 'Hedy the Robot'\n{print} 'Hello ' name\n```\n"
-                story_text_3: "**All items in lists need quotation marks too**\nLists are texts, so they need quotation marks too. Mind that each single item on the list has quotation marks.\nThis allows you to save two words as 1 item on the list, for example 'Iron Man'.\n"
-                example_code_3: "```\nsuperheroes = 'Spiderman', 'Batman', 'Iron Man'\n{print} superheroes {at} {random}\n```\n"
+                start_code: "{print} 'numrat decimal duhet të kenë pika'\n{print} 2.5 + 2.5"
+                story_text: "## Numrat dhe tekstet\n**Numrat decimal**\nDeri tani, Hedy nuk lejoji numrat decimal si 1.5, por tani ne e lejojmë këtë. Mbani mend se kompjuterët e përdorin `.` për numra decimal."
+                example_code: "```\n{print} 'Dy e gjysmë plus dy e gjysme është...'\n{print} 2.5 + 2.5\n```\n"
+                story_text_2: "**Të gjitha tekstet duhet të jenë në thonjëza**\nPër këtë nivel ju do të duhet të përdorni thonjëza kur e ruani një tekst me `=`:\n"
+                example_code_2: "```\nemri = 'Hedy robiti'\n{print} 'Përshëndetje' emri\n```\n"
+                story_text_3: "**Të gjitha artikujt në listë duhet të kenë thonjëza**\nListat janë tekste, kështu që edhe këto duhet të kenë thonjëza. Shikoni se secili artikull në listë ka thonjëza.\nKjo u lejon juve të ruani dy fjalë si një artikull në listë, si për shembull 'Njeriu i hekurt'.\n"
+                example_code_3: "```\nsuperhero = 'Spiderman', 'Batman', 'Njeriu i hekurt'\n{print} superhero {at} {random}\n```\n"
                 story_text_4: "**All text after `{if}` comparisons need quotation marks too**\n"
                 example_code_4: "```\nname = {ask} 'What is your name?'\n{if} name = 'Hedy the Robot'\n    {print} 'Hi there!'\n```\n"
                 story_text_5: "**Numbers don't need quotation marks**\nFor numbers, you do not use quotation marks in the `=`:\n"
@@ -366,9 +366,9 @@ adventures:
                 start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'"
                 story_text: "## Elif\nNow we are going to change indentation a little bit. Every time that we need an indentation, we need `:` at the line before the indentation.\n\nIn this level you can also use a new command: `{elif}`. `{elif}` is short for {else} {if} and you need it when you want to make 3 (or more!) options.\nCheck it out!"
                 example_code: "```\nprices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
-        name: Hyrje
-        description: Level explanation
-        default_save_name: intro
+        name: Prezantim
+        description: Shpjegim i niveleve
+        default_save_name: Hyrje
     dishes:
         name: Dishes?
         description: Use the computer to see who does the dishes (Start at level 2)
