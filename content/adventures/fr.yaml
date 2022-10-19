@@ -178,14 +178,14 @@ adventures:
                 example_code: "```\nanswer = 0\n{while} answer != 25\n    answer = {ask} 'Que vaut 5 fois 5?'\n{print} 'Une réponse correcte a été donné'\n```\n"
             16:
                 start_code: "fruit = ['apple', 'banana', 'cherry']\n{print} fruit"
-                story_text: "## De plus en plus comme du vrai code !\nNous allons faire un liste à la manière de Python, avec des crochets autour des listes ! On garde aussi les guillemets autour de chaque items comme nous l'avons appris aux niveaux précédents.\nTu peux utiliser des crochets aussi pour sélectionner une place dans les listes."
+                story_text: "## De plus en plus comme du vrai code!\nNous allons faire un liste à la manière de Python, avec des crochets autour des listes! On garde aussi les guillemets autour de chaque items comme nous l'avons appris aux niveaux précédents.\nTu peux utiliser des crochets aussi pour sélectionner une place dans les listes."
                 example_code: "```\nfriends = ['Ahmed', 'Ben', 'Cayden']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'the lucky number of ' friends[i]\n    {print} 'is ' lucky_numbers[i]\n```\n"
             17:
                 start_code: |-
-                    {for} i {in} {range} 1 {to} 10 :
+                    {for} i {in} {range} 1 {to} 10:
                         {print} i
-                    {print} 'Cache toi ou je te verrai !'
-                story_text: "## Elif\nMaintenant on change encore une petit chose concernant l'indentation. Chaque fois que nous indentons, il faut ajouter un `:` à la fin de la ligne précédente.\n\nDans ce niveau, on peut utiliser une nouvelle commande : `{elif}`. `{elif}` est la contraction de {else} {if} et tu en as besoin quand tu veux 3 options (ou plus) .\nEssaie-le !"
+                    {print} 'Cache toi ou je te verrai!'
+                story_text: "## Elif\nMaintenant on change encore une petit chose concernant l'indentation. Chaque fois que nous indentons, il faut ajouter un `:` à la fin de la ligne précédente.\n\nDans ce niveau, on peut utiliser une nouvelle commande: `{elif}`. `{elif}` est la contraction de {else} {if} et tu en as besoin quand tu veux 3 options (ou plus).\nEssaie-le !"
                 example_code: "```\nprices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
             18:
                 start_code: |-

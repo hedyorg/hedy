@@ -94,7 +94,7 @@ adventures:
                     `{ask}` und `{print}` funktionieren immer noch wie du es gewohnt bist. Aber `{if}`,`{else}` und `{repeat}` haben sich verändert! 
                     Du kannst jetzt Befehlsgruppen zusammen ausführen, aber du musst den Code dafür *einrücken*. 
                     Das bedeutet dass du die Befehlszeilen mit vier Leerzeichen beginnen musst. Das gilt auch, wenn du einen Block mit nur einer Zeile schreiben möchtest.
-                example_code: "Der `{repeat}` Befehl funktioniert jetzt so:\n```\n{repeat} 5 {times}\n    {print} 'Hallo zusammen'\n    {print} 'Das hier wird fünf Mal wiederholt'\n```\nDie Befehle `{if}` und `{else}` funktionieren jetzt so:\n\n```\nname 8{is} 9{ask} 'Wie heißt du?'\n0{if} name {is} Hedy\n    {print} 'Willkommen Hedy'\n    {print} 'Du kannst an deinem Computer spielen'\n{else}\n    {print} 'EINDRINGLING!'\n    {print} 'Du darfst diesen Rechner nicht benutzen!'\n```\n"
+                example_code: "Der `{repeat}` Befehl funktioniert jetzt so:\n```\n{repeat} 5 {times}\n    {print} 'Hallo zusammen'\n    {print} 'Das hier wird fünf Mal wiederholt'\n```\nDie Befehle `{if}` und `{else}` funktionieren jetzt so:\n\n```\nname {is} {ask} 'Wie heißt du?'\n{if} name {is} Hedy\n    {print} 'Willkommen Hedy'\n    {print} 'Du kannst an deinem Computer spielen'\n{else}\n    {print} 'EINDRINGLING!'\n    {print} 'Du darfst diesen Rechner nicht benutzen!'\n```\n"
             9:
                 start_code: |-
                     {repeat} 3 {times}

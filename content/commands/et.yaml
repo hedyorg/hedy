@@ -75,7 +75,7 @@
     demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
 9:
 -   name: '{if} mitme reaga'
-    demo_code: "vastus = {ask} 'Mis on 20 pluss 20?'\n{if} vastus {is} 20\n    {print} 'Tubli!!'\n    {print} 'Vastus on tõepoolest' answer\n{else}\n    {print} 'Vale'\n    {print} 'Õige vastus on 20'"
+    demo_code: "vastus = {ask} 'Mis on 20 pluss 20?'\n{if} vastus {is} 20\n    {print} 'Tubli!!'\n    {print} 'Vastus on tõepoolest' vastus\n{else}\n    {print} 'Vale'\n    {print} 'Õige vastus on 20'"
     explanation: The answer of a sum of questions with '{ask}' and see if it is correct. Now we print out two lines.
 -   name: '{repeat} kilpkonnaga'
     explanation: 'Korda mitut rida.'
@@ -147,7 +147,7 @@
     demo_code: "{print} 'Teretulemast Hedy juurde.'"
 -   name: '{ask}'
     explanation: Küsi midagi kasutades `{ask}` käsku.
-    demo_code: "värv {is} {ask} 'Mis on su lemmikvärv?'\n{print} color ' on su lemmik!'"
+    demo_code: "värv {is} {ask} 'Mis on su lemmikvärv?'\n{print} värv ' on su lemmik!'"
 -   name: '{if}'
     explanation: Vali midagi kasutades `{if}` käsku.
     demo_code: "värv {is} {ask} 'Mis on su lemmikvärv?'\n{if} värv {is} roheline {print} 'ilus!' {else} {print} 'mhh'"
