@@ -17,6 +17,15 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: Get changed files
+      id: changed-files
+      uses: tj-actions/changed-files@v32
+
+    - name: List all changed files
+      run: |
+        for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+          echo "$file was changed"
+        done
     - name: Set up Python 3.9
       uses: actions/setup-python@v1
       with:
