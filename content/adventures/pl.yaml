@@ -57,7 +57,7 @@ adventures:
                 story_text: "## Teraz wszystko razem!\nNa tym poziomie możesz używać nie tylko wielu linii z poleceniem `{if}` oraz `{repeat}`, ale możesz używać ich łącznie!\nW tym przykładzie możesz zobaczyć polecenie `{if}` wewnątrz pętli/polecenia `{repeat}`. Można też odwrotnie. Dodatkowo polecenie `{if}` jest dozwolone w innym poleceniu `{if}`. Możesz też wykorzystać pętle/polecenie `{repeat}` w innej pętli/poleceniu `{repeat}`.\nSpróbuj samemu!\n"
                 example_code: "```\n{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    else\n        {print} 'pizza is better'\n```\n"
             10:
-                start_code: "zwierzęta {is} pies, kot, chomik\n{for} zwierzę {in} zwierzęta\n  {print} 'Moim ulubionym zwierzakiem jest zwierzę"
+                start_code: "zwierzęta {is} pies, kot, chomik\n{for} zwierzę {in} zwierzęta\n  {print} 'Moim ulubionym zwierzakiem jest zwierzę'"
                 story_text: "## For each item in my list...\nW tym poziomie nauczysz się nowego polecenia/pętli `{for}`. Z poleceniem/pętlą `{for}` możesz tworzyć listy i możesz używać wszystkich elementów listy.\n`{for}` tworzy blok kodu, jak `{repeat}` i `{if}` więc wszystkie linie w bloku muszą być *wcięte* a więc zaczynać się spacjami."
                 example_code: "```\nanimals {is} dog, cat, blobfish\n{for} animal {in} animals\n  {print} 'I love ' animal\n```\n"
             11:
