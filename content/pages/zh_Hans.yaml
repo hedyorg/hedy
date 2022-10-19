@@ -253,16 +253,16 @@ sections:
             title: 学生们忘记了重复命令中的一个词，或者他们忘记了打印命令。
         -   example:
                 error_text: "在此级别中，您只能多次重复一行代码。在这段代码中，学生想打印3种不同的饮料，但它不起作用。它会问这个问题3次，只打印最后一个答案。\n"
-                solution_code: "饮料 = 询问‘你想喝什么？’\n打印饮料\n饮料 = 询问‘你想喝什么？’\n打印饮料\n饮料 =询问‘你想喝什么？’\n打印饮料\n"
-                error_code: "重复3次 饮料 = 询问‘你想喝什么？’\n打印饮料\n"
+                solution_code: "饮料 = 询问'你想喝什么？'\n打印饮料\n饮料 = 询问'你想喝什么？'\n打印饮料\n饮料 =询问'你想喝什么？'\n打印饮料\n"
+                error_code: "重复3次 饮料 = 询问'你想喝什么？'\n打印饮料\n"
                 solution_text: "您应该进入下一个级别，以便能够重复多行。因此，在这个级别上，您必须单独打印所有内容。\n"
             title: 学生尝试重复多行
         -   title: 学生编写的程序运行时间过长
             example:
                 error_text: "在这个级别中，编写长代码非常容易。不允许学生编写需要很长时间才能加载的程序（以保护我们的服务器）。\n"
-                error_code: "重复100次打印‘我可以重复多少次？’\n"
+                error_code: "重复100次打印'我可以重复多少次？'\n"
                 solution_text: "确保代码不会太长\n"
-                solution_code: "重复20次打印‘这就足够了’\n"
+                solution_code: "重复20次打印'这就足够了'\n"
     -   level: '8'
         sections:
         -   title: 学生用错了缩进
@@ -272,68 +272,68 @@ sections:
                 solution_text: "这是正确的代码：\n"
                 solution_code: "重复 3 次\n    打印'你好'\n"
         -   example:
-                error_code: "repeat 3 times\n    drink = ask 'What would you like to drink?'\nprint drink\n"
+                error_code: "重复3次\n    饮料 = 询问'你想喝什么？'\n打印饮料\n"
                 solution_text: "In the correct code the third line starts with indentation too. This way it belongs to the repeat block and therefore it will be repeated 3 times.\nShowing your students these differences can help them understand why we need indentation to make our programs work.\n"
-                solution_code: "repeat 3 times\n    drink = ask 'What would you like to drink?'\n    print drink\n"
-                error_text: "For instance, in the code below the student wanted to take the drinks order of 3 people. But insted the program asked 3 times, but only wrote down one order.\n"
-            title: Students only repeat 1 line when they wanted to repeat multiple lines
+                solution_code: "重复3次\n    饮料 = 询问'你想喝什么？'\n    打印饮料\n"
+                error_text: "例如，在下面的这段代码中，学生想知道3个人各自点了哪种饮料。但这段代码只问了1次，而不是3次。\n"
+            title: 当学生想重复多行时，他们只需要重复1行就行了
         -   example:
-                solution_code: "birthday = ask 'Is it you birthday?'\nif birthday = yes\n    print 'Hip Hip Hooray!'\n    print 'Hip Hip Hooray!'\n    print 'Hip Hip Hooray!'\n"
-                error_text: "In this level students aren't allowed yet to put if statements inside other if statements or inside repeat loops.\nIn the next level this is allowed.\n"
-                error_code: "birthday = ask 'Is it you birthday?'\nif birthday = yes\n    repeat 3 times\n        print 'Hip Hip Hooray!'\n"
-                solution_text: "This is the correct code for this level:\n"
-            title: Students want to nest if statements, or put if statements inside a loop
-        -   title: Students make programs that take too long to run
+                solution_code: "生日 = 询问 '是你的生日吗？'\n如果生日=是\n        打印'嗨，嗨，祝贺！'\n        打印'嗨，嗨，祝贺！'\n        打印'嗨，嗨，祝贺！'\n"
+                error_text: "在这个级别中，学生还不允许将如果语句放在其他如果语句中或重复循环中。\n在下一级中，这是被允许的。\n"
+                error_code: "生日 = 询问 '是你的生日吗？'\n如果生日=是\n    重复3次\n        打印'嗨，嗨，祝贺！'\n"
+                solution_text: "这是该级别的正确代码。\n"
+            title: 学生想要嵌套如果语句，或者把如果语句放在一个循环中
+        -   title: 学生编写的程序运行时间过长
             example:
-                error_text: "In this level it's very easy to make long codes. The students aren't allowed to make programs that take to long to load (to save our servers).\n"
-                error_code: "repeat 100 times\n    print 'How many times can I repeat this?'\n"
-                solution_text: "Make sure the codes aren't too long\n"
-                solution_code: "repeat 20 times\n    print 'This is enough'\n"
+                error_text: "在这个级别中，编写长代码非常容易。不允许学生编写需要很长时间才能加载的程序（以保护我们的服务器）。\n"
+                error_code: "重复100次\n    print '我可以重复多少次？'\n"
+                solution_text: "确保代码不会太长\n"
+                solution_code: "重复 20 次\n    打印'这就足够了'\n"
         -   example:
-                solution_text: "You can fix this mistake by adding quotation marks. This way the computer knows that the second password in `if password is 'password'` is a string value (so normal text) and not the variable name.\n"
-                solution_code: "password is ask 'What is the password?'\nif password is 'password'\n    print 'You can come in'\nelse\n    print 'You are not allowed'\n"
-                error_text: "We have seen this mistake by some of our students. They make a password for their computer, but they make the password 'password'.\nIn line 2 the computer is asked to check wheter the variable password is the same as the variable password, so itself. Which means the answer is alway yes.\nSo with this code the answer will always be 'You can come in' no matter what the player fills in.\n"
-                error_code: "password is ask 'What is the password?'\nif password is password\n    print 'You can come in'\nelse\n    print 'You are not allowed'\n"
-            title: Students use the if command to check if the variable value is the same as the variable name
+                solution_text: "你可以通过添加引号来解决这个错误。这样计算机就知道 \"如果密码是 '密码'\"中的第二个密码是一个字符串值（所以是普通文本），而不是变量名。\n"
+                solution_code: "密码是询问'密码是什么？'\n如果密码是'密码'\n    打印'你可以进来'\n 否则\n    打印'您不许进来'\n"
+                error_text: "我们已经看到一些学生犯了这个错误。他们为自己的计算机设置了一个密码，但他们把密码设为 “密码”。\n在第2行，计算机被要求检查变量密码是否与变量密码相同，所以自己和自己是相同的。这意味着答案永远是“是”。\n所以用这段代码，无论玩家填写什么，答案永远是'你可以进来'。\n"
+                error_code: "密码是询问'密码是什么？'\n如果密码是密码\n    打印'你可以进来'\n否则\n    打印'您不许进来'\n"
+            title: 学生使用if（如果）命令检查变量值是否与变量名相同
     -   level: '9'
         sections:
-        -   title: Students make mistakes with indentation
+        -   title: 学生使用缩进时出错
             example:
-                error_text: "The hardest part about this level is getting the indentation right. Students love nesting if statements, sometimes even inside other nested if statements. Keeping track of indentation can get pretty tough.\n"
-                error_code: "print 'Robin is walking downtown'\nlocation = ask 'Is Robin going into a shop, or does she go home?'\nif location is shop\n    print 'She enters the shop.'\n    print 'Robin sees an interesting looking book'\n    book = ask 'Does Robin buy the book?'\n        if book is yes\nprint 'Robin buys the book and goes home'\nelse\n    print 'Robin leaves the shop and goes home'\nelse\n    print 'Robin goes home'\n"
-                solution_text: "This is the correct code. Try to keep track of all the different constructions when putting if statements inside other if statements.\n"
-                solution_code: "print 'Robin is walking downtown'\nlocation = ask 'Is Robin going into a shop, or does she go home?'\nif location is shop\n    print 'She enters the shop.'\n    print 'Robin sees an interesting looking book'\n    book = ask 'Does Robin buy the book?'\n    if book is yes\n        print 'Robin buys the book and goes home'\n    else\n        print 'Robin leaves the shop and goes home'\nelse\n    print 'Robin goes home'\n"
+                error_text: "这个级别最困难的部分是正确的使用缩进。学生喜欢嵌套if（如果）语句，有时甚至在其他嵌套if（如果）语句中。追踪缩进可能会变得非常困难。\n"
+                error_code: "打印'罗宾在市中心散步'\n位置 = 询问'Robin 是去商店还是回家？'\n如果位置是商店\n    打印print '她进了商店。'\n    打印 '罗宾看到一本有趣的书'\n    书 = 询问'Robin 买书了吗？'\n        如果书是是\n打印 '罗宾买了书，然后回家了'\n否则\n    打印'罗宾离开商店回家了'\n否则\n    打印'罗宾回家'\n"
+                solution_text: "这就是正确的代码。当把if（如果）语句放在其他if（如果）语句中时，请尝试追踪所有不同的结构。\n"
+                solution_code: "打印'罗宾正在市中心散步'\n位置 = 询问'罗宾是要进商店，还是要回家？'\n如果位置是商店\n    打印'她进入了商店。'\n    打印'罗宾看到一本看起来很有趣的书'\n    书 = 询问 '罗宾买了这本书吗？'\n    如果书是是\n        打印'罗宾买了这本书，然后回家了'\n    否则\n        打印'罗宾离开商店回家了' 。\n否则\n    打印'罗宾回家了'\n"
     -   sections:
         -   example:
-                error_code: "animals is dog, cat, blobfish\nfor animal in animals\n  print 'I love ' animals\n"
-                solution_text: "The word animals in the last line should be changed into animal.\n"
-                solution_code: "animals is dog, cat, blobfish\nfor animal in animals\n  print 'I love ' animal\n"
-                error_text: "We often see that students try to print the list (in the example animals) instead of the items of the list.\n"
-            title: Students so not use the for command correctly
-        -   title: Students forget the indentation
+                error_code: "动物们是狗，猫，水滴鱼\n取动物们中的动物\n  打印'我爱'动物们\n"
+                solution_text: "最后一行中的“动物们”一词应改为“动物”。\n"
+                solution_code: "动物们是狗，猫，水滴鱼\n取动物们中的动物\n  打印'我爱'动物\n"
+                error_text: "我们经常看到学生尝试打印列表（在示例中的动物们）而不是列表中的项目。\n"
+            title: 学生不能正确使用for（取）命令
+        -   title: 学生们忘记缩进了
             example:
-                error_text: "Students tend to forget to use indentation after a for command.\n"
-                error_code: "animals is dog, cat, blobfish\nfor animal in animals\nprint 'I love ' animals\n"
-                solution_text: "You should use indentation after a for command.\n"
-                solution_code: "animals is dog, cat, blobfish\nfor animal in animals\n  print 'I love ' animal\n"
+                error_text: "学生们经常忘记在for（取）命令后使用缩进。\n"
+                error_code: "动物们是狗，猫，水滴鱼\n取动物们中的动物\n打印'我爱'动物\n"
+                solution_text: "你应该在for（取）命令后使用缩进。\n"
+                solution_code: "动物们是狗，猫，水滴鱼\n取动物们中的动物\n  打印'我爱'动物\n"
         level: '10'
     -   level: '11'
         sections:
-        -   title: Students forget to use indentation
+        -   title: 学生忘记使用缩进
             example:
-                error_text: "Make sure that the students use indentation.\n"
-                error_code: "for i in range 1 to 5\nprint i\n"
-                solution_text: "This is the correct code:\n"
-                solution_code: "for i in range 1 to 5\n    print i\n"
-        -   title: Students don't understand the i
+                error_text: "确保学生使用缩进。\n"
+                error_code: "取 i 在 1 到 5 的范围内\n打印i\n"
+                solution_text: "这就是正确的代码。\n"
+                solution_code: "取 i，在 1 到 5的范围内\n    打印 i\n"
+        -   title: 学生们不理解i的意思
             example:
-                error_text: "Some students don't understand that i is a variable. i is chosen, because it is used in Python programming, but you could just as easily use a different variable name.\nFor example, this code:\n"
-                error_code: "for i in range 1 to 5\nprint i\n"
-                solution_text: "Could just as well be replaced with this code. It works the same.\n"
-                solution_code: "for banana in range 1 to 5\n    print banana\n"
+                error_text: "有些学生不理解i是一个变量。之所以选择i，是因为在Python编程中经常使用它，但你也可以很容易地使用不同的变量名。\n例如，这段代码：\n"
+                error_code: "取 i 在 1 到 5 的范围内\n打印i\n"
+                solution_text: "也可以用这段代码来代替。它的作用是一样的。\n"
+                solution_code: "取香蕉在 1 到 5 的范围内\n    打印香蕉\n"
     -   level: '12'
         sections:
-        -   title: Students forget quotation marks
+        -   title: 学生们忘记引号了
             example:
                 error_text: "Students need more quotation marks now than in the previous levels. In this example quotation marks were forgotten in the list and in the if command.\n"
                 solution_text: "This is the correct code:\n"
