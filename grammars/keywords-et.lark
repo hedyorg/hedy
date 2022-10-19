@@ -1,0 +1,42 @@
+_PRINT: ("prindi" | "print") _SPACE?
+_ASK: ("küsi" | "ask") _SPACE?
+_ECHO: ("peegelda" | "echo") _SPACE?
+_FORWARD: ("edasi" | "forward") _SPACE?
+_TURN: ("pööra" | "turn") _SPACE?
+left: ("vasakule" | "left") _SPACE?
+right: ("paremale" | "right") _SPACE?
+black: ("must" | "black") _SPACE?
+blue: ("sinine" | "blue") _SPACE?
+brown: ("pruun" | "brown") _SPACE?
+gray: ("hall" | "gray") _SPACE?
+green: ("roheline" | "green") _SPACE?
+orange: ("oranž" | "orange") _SPACE?
+pink: ("roosa" | "pink") _SPACE?
+purple: ("lilla" | "purple") _SPACE?
+red: ("punane" | "red") _SPACE?
+white: ("valge" | "white") _SPACE?
+yellow: ("kollane" | "yellow") _SPACE?
+_IS: _SPACE ("on" | "is") _SPACE
+_SLEEP: ("oota" | "sleep") _SPACE?
+_ADD_LIST: ("lisa" | "add") _SPACE
+_TO_LIST: _SPACE ("nimistusse" | "to") _SPACE
+_REMOVE: ("kustuta" | "remove") _SPACE
+_FROM: _SPACE ("nimistust" | "from") _SPACE
+_AT: _SPACE ("peal" | "at") _SPACE
+random: ("juhuslik" | "random") _SPACE?
+_IN: _SPACE ("sees" | "in") _SPACE
+_IF: ("kui" | "if") _SPACE
+_ELSE: "muidu" | "else"
+_AND: _SPACE ("ja" | "and") _SPACE
+_REPEAT: ("korda" | "repeat") _SPACE
+_TIMES: _SPACE ("korda" | "times")
+_FOR: ("jaoks" | "for") _SPACE
+_RANGE: ("vahemik" | "range") _SPACE?
+_TO: _SPACE ("kuni" | "to") _SPACE
+_STEP: "sammuga" | "step"
+_ELIF: _SPACE? ("muidukui" | "elif") _SPACE
+_INPUT: ("sisesta" | "input")
+_OR: _SPACE ("või" | "or") _SPACE
+_WHILE: ("senikui" | "while") _SPACE
+_LENGTH: "pikkus" | "length"
+_COLOR : ("värv" | "color") _SPACE?
