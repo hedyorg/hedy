@@ -1,5 +1,5 @@
 1:
--   explanation: vypiš něco pomocí `{print}`.
+-   explanation: Vypiš něco pomocí `{print}`.
     demo_code: '{print} Vítej v Hedy!'
     name: '{print}'
 -   explanation: Zeptej se na něco pomocí `{ask}`.
@@ -10,75 +10,75 @@
         {ask} Jaká je tvoje nejoblíbenější barva?
         {echo}  Tvoje nejoblíbenější barva tedy je
     name: '{echo}'
--   name: '{print} emojis'
-    explanation: print an emoji with `{print}`
+-   name: '{print} emoji'
+    explanation: Vypiš emoji pomocí `{print}`
     demo_code: '{print} 🙋 🌍 ❗'
--   explanation: Draw a line with `{forward}`.
+-   explanation: Nakresli čáru pomocí `{forward}`.
     demo_code: '{forward} 100'
     name: '{forward}'
 -   demo_code: "{forward} 25\n{turn} left\n{forward} 25\n{turn} right"
     name: '{turn}'
-    explanation: turn the drawing turtle with `{turn}`
+    explanation: Otoč želvu pomocí `{turn}`
 2:
 -   explanation: Pojmenuj slovo pomocí `is` pro další použití v kódu.
     demo_code: |-
         jmeno {is} Hedy
         {print} Vítej jmeno
     name: '{is}'
--   explanation: Zeptej se na něco příkazem `{ask}. Pozor! Musíš odpověď pojmenovat pomocí `{is}`.
+-   explanation: Zeptej se na něco příkazem `{ask}`. Pozor! Musíš odpověď pojmenovat pomocí `{is}`.
     demo_code: |-
         barva {is} {ask} Jaká je tvá oblíbená barva?
         {print} barva je tvá oblíbená!
     name: '{ask}'
 -   name: '{sleep}'
-    explanation: Hedy se na nějakou chvíli pozastaví (v sekundách).
+    explanation: '`{sleep}` Hedy se na nějakou chvíli pozastaví (v sekundách).'
     demo_code: "{print} Nech mě chvíli přemýšlet...\n{sleep}\n{print} Hmm... potřebuji ještě alespoň tři sekundy...\n{sleep} 3\n{print} Heuréka! Mám to!"
--   name: je - želva
+-   name: '{is} želva'
     demo_code: "uhel {is} 90\n{turn} uhel\n{forward} 100"
     explanation: Pojmenujte číslo pomocí `{is}`. Jméno si můžete vybrat sami.
 3:
--   explanation: Vybere náhodné slovo ze seznamu s užitím `{at}` a `{random}`
+-   explanation: Vybere náhodné slovo ze seznamu s užitím `{at}` a `{random}`.
     demo_code: |-
         zvire {is} pes, kocka, klokan
         {print} zvire {at} {random}
-    name: choose_random
+    name: Zvol náhodné
 -   name: '{add}'
-    explanation: přidá položku do seznamu
+    explanation: '`{add}` přidá položku do `{to_list}` seznamu.'
     demo_code: "zvirata {is} kráva, kočka\n{add} pes {to_list} zvirata"
 -   name: '{remove}'
-    explanation: odebere položku ze seznamu
-    demo_code: "animals {is} cat, dog, cow\n{remove} dog {from} animals"
+    explanation: "`{remove}' an item ` odebere položku `{from}` (ze) seznamu"
+    demo_code: "zvířata {is} kočka, pes, kráva\n{remove} pes {from} zvířata"
 4:
 -   explanation: Vypiš text s jednoduchými uvozovkami.
     demo_code: print 'Ahoj, vítej v Hedy!'
     name: '{print}'
--   explanation: Pojmenuj nějaké slovo a vypiš jej pomocí `print` bez uvozovek.
+-   explanation: Pojmenuj nějaké slovo a vypiš jej pomocí `{print}` bez uvozovek.
     demo_code: |-
         jmeno is Hedy
         print 'Jmenuji se ' jmeno
     name: '{is}'
--   explanation: Zeptej se na něco pomocí `ask`.
+-   explanation: Zeptej se na něco pomocí `{ask}`.
     demo_code: |-
         barva is ask 'Jaká je tvoje nejoblíbenější barva?'
         print barva ' je tvoje nejoblíbenější barva.'
     name: '{ask}'
 5:
--   explanation: Připomeň si `print` s uvozovkami.
+-   explanation: Vypisujte přesně pomocí uvozovek.
     demo_code: print 'Ahoj, vítej v Hedy!'
     name: '{print}'
--   explanation: Zopakuj si příkaz `ask`.
+-   explanation: Zeptejte se na něco pomocí `{ask}`.
     demo_code: |-
-        barva is ask 'Jaká je tvoje nejoblíbenější barva?'
-        print barva ' je tvoje nejoblíbenější barva.'
+        barva {is} {ask} 'Jaká je tvoje nejoblíbenější barva?'
+        {print} barva ' je tvoje nejoblíbenější barva.'
     name: '{ask}'
--   explanation: Rozhodni se pomocí `if`.
+-   explanation: Rozhodni se pomocí `{if}`.
     demo_code: |-
         barva is ask 'Jaká je tvoje nejoblíbenější barva?'
         if barva is růžová print 'Moje taky!' else print 'Fuj'
     name: '{if}'
--   demo_code: "answer {is} {ask} 'How far should I walk?'\n{if} answer {is} far {forward} 100 {else} {forward} 5"
-    name: '{if} with turtle'
-    explanation: Make a choice with `{if}`
+-   demo_code: "Odpověď {is} {ask} 'Jak daleko mám jít?'\n{if} odpověď {is} daleko {forward} 100 {else} {forward} 5"
+    name: '{if} želva'
+    explanation: Make a choice with `{if}`.
 -   name: '{in}'
     demo_code: "pretty_colors {is} green, yellow\ncolor {is} {ask} 'What {is} your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
     explanation: Check elements with `{in}`
