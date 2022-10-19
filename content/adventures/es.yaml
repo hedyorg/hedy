@@ -19,7 +19,7 @@ adventures:
                 example_code: "```\n{print} Hola!\n{print} Bienvenido a Hedy!\n```\n"
                 story_text_2: "También puedes solicitar  entrada y repetirla usando el comando`{echo}`.\nPrueba el código a tu izquierda de nuevo.\n\n¿No sabes qué crear? En las siguientes pestañas vas a encontrar ideas de programas para construir.\n"
                 example_code_2: "```\n{ask} ¿Cuál es tu nombre?\n{echo} hola\n```\n"
-                story_text_3: "Let's get started! Don't know what to create? In the next tabs you will find ideas for programs to build.\n"
+                story_text_3: "¡Empezemos! ¿No sabes que crear? En las siguientes pestañas encontrarás ideas sobre programas que puedes construir.\n"
             2:
                 story_text: |
                     En el nivel 2 aprendemos algo nuevo. Puedes nombrar una palabra con `{is}`.
@@ -39,7 +39,7 @@ adventures:
 
                     `{print}` sigue funcionando como en el nivel 1, así que ya no necesitas usar `{echo}`.
                 start_code: "{print} hola mundo!"
-                example_code: "```\nname {is} Hedy\nage {is} 15\n{print} name is age years old\n```\n"
+                example_code: "```\nnombre {is} Hedy\nedad {is} 15\n{print} nombre tiene edad años\n```\n"
                 story_text_2: "El comando `{print}` sigue funcionando igual, pero el comando `{ask}` ha cambiado. Ahora hay que utilizar una variable en el comando `{ask}`. Algo como esto:\n"
                 example_code_2: "```\nrespuesta {is} {ask} ¿Cuál es tu nombre?\n{print} Hola respuesta\n```\n"
                 story_text_3: "Otro comando nuevo en este nivel es `{sleep}`, que pausa el programa durante un segundo. Si escribes un número detrás del comando {sleep}, el programa se detiene durante esa cantidad de segundos.\n"
@@ -50,7 +50,7 @@ adventures:
                 start_code: "{print} hola mundo!"
                 story_text_2: También puedes añadir elementos a una lista con `{add}` y quitar elementos con `{remove}`.
                 example_code_2: "```\nanimales {is} perro, gato, canguro\n{add} pingüino {to_list} animales\n{remove} gato {from} animales\n{print} animales {at} {random}\n```\n"
-                example_code: "```\nanimals {is} dog, cat, kangaroo\n{print} animals {at} {random}\n```\n"
+                example_code: "```\nanimales {is} perro, gato, canguro \n{print} animales {at} {random}\n```\n"
             4:
                 story_text: |
                     En el nivel 4 `{ask}` y `{print}` funcionan diferente.
@@ -65,7 +65,7 @@ adventures:
                     Encontrarás de nuevo los comandos a la izquierda y las tareas en las siguientes pestañas. Las tareas serán cada vez más difíciles.
                     Así que lo mejor es empezar por la izquierda con la historia y continuar hacia la derecha para que los desafíos sean cada vez mayores.
                 start_code: "{print} 'Hola mundo'"
-                example_code: "```\nprint 'You need to use quotation marks from now on!'\nanswer is ask 'What do we need to use from now on?'\nprint 'We need to use ' answer\n```\n"
+                example_code: "```\n{print} '¡Necesitas usar comillas de ahora en adelante!'\nrespuesta {is} {ask} '¿Que necesitamos usar de ahora en adelante?'\n{print} ' Necesitamos usar ' respuesta \n```\n"
                 story_text_2: "## Las aventuras son cada vez más difíciles\nLas aventuras son cada vez más difíciles en las sucesivas pestañas.\nAsí que es mejor empezar por la izquierda, y seguir hacia la derecha, para que los retos sean cada vez mayores.\n"
             5:
                 start_code: |-
@@ -89,7 +89,7 @@ adventures:
                      También en el nivel 5, las tareas en las pestañas se vuelven cada vez más difíciles. Así que hazlas de izquierda a derecha.
                 example_code_2: "```\nnombre {is} {ask} '¿Cuál es tu nombre?'\n{if} nombre {is} Hedy {print} 'bien'\n{else} {print} '¡buuu!'\n```\n"
                 story_text_3: "## Listas\nCuando queremos comprobar si algo está en una lista, podemos usar el comando `{in}`.\nEste código imprime ¡bonito! si se elige el verde o el amarillo, y meh en caso contrario.\n"
-                example_code: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'\n```\n"
+                example_code: "```\nnombre {is} {ask} '¿Cuál es tu nombre?'\n{if} nombre {is} Hedy {print} 'bien' {else} {print} 'buu'\n```\n"
                 example_code_3: "```\ncolores_bonitos {is} verde, amarillo\ncolor {is} {ask} '¿Cuál es tu color favorito?'\n{if} color {in} colores_bonitos {print} ''¡bonito!'\n{else} {print} 'meh'\n```\n"
                 story_text_2: "A veces el código con un `{if}` se hace muy largo y no cabe bien en la línea. <br> También puedes dividir el código en dos líneas, empezando la segunda línea en el `{else}` así:\n"
             6:
@@ -108,7 +108,7 @@ adventures:
                      {print} '5 menos 5 es ' 5 - 5
                      {print} '5 multiplicado por 5 es ' 5 * 5
                      ```
-                example_code: "```\n{print} '5 plus 5 is ' 5 + 5\n{print} '5 minus 5 is ' 5 - 5\n{print} '5 {times} 5 is ' 5 * 5\n```\n"
+                example_code: "```\n{print} '5 más 5 es ' 5 + 5\n{print} '5 menos 5 es ' 5 - 5\n{print} '5 veces 5 es ' 5 * 5\n```\n"
                 story_text_2: "¡También cambiamos cómo se guarda una palabra en una variable! Ahora se puede utilizar `=` en lugar de `{is}` cuando guardamos un nombre o un número en una variable, así:\n"
                 example_code_2: "```\nnombre = Hedy\nrespuesta = 20 + 4\n```\n"
             7:
