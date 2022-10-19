@@ -209,13 +209,13 @@ adventures:
                 start_code: '{print} שלום עולם!'
             4:
                 start_code: "{print} 'שלום עולם'"
-                story_text: "## 'Quotation marks'\nIn level 4 `{ask}` and `{print}` have changed.\n\nYou must put text that you want to print between quotation marks.\n\nThis is useful, because now you can print all the words you want. Also the words you used to store something with `{is}`.\n\nMost programming languages also use quotation marks when printing, so we are also getting a step closer to real programming!\n"
-                example_code: "```\n{print} 'You need to use quotation marks from now on!'\nanswer {is} {ask} 'What do we need to use from now on?'\n{print} 'We need to use ' answer\n```\n"
-                story_text_2: "## Adventures are getting more and more difficult\nThe adventures are now getting more and more difficult in the successive tabs.\nSo it is best to start on the left with the story, and work to the right, in order to be challenged more and more.\n"
+                story_text: "# 'מֵירְכָאוֹת'\nבשלב 4 `{ask}` ו`{print}` השתנו.\n\nעליך להקיף את הטקסט שברצונך להדפיס במירכאות.\n\nזה שימושי, כי ככה אפשר להדפיס את כל המילים שנרצה. גם מילים שאיחסנו בהן משהו עם `{is}`.\n\nרוב שפות התכנות משתמשות במירכאות כאשר מדפיסים, אז אנחנו מתקרבים בעוד צעד לתכנות אמיתי!\n"
+                example_code: "```\n{print} 'מעכשיו עליך להשתמש במירכאות!'\nתשובה {is} {ask} 'במה עלינו להשתמש מעכשיו?'\n{print} 'עלינו להשתמש ב ' תשובה\n```\n"
+                story_text_2: "## ההרפתקות הופכות מאתגרות יותר ויותר\nההרפתקות הופכות מאתגרות יותר בלשוניות העוקבות.\nלכן מומלץ להתחיל מצד ימין ולתהקדם לצד שמאל, לפי הסדר, בשביל לאתגר את עצמכם יותר.\n"
             5:
-                start_code: "name {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'cool!' {else} {print} 'meh'"
-                story_text: "## If... else....\nIn level 5 there is something new, the `{if}`! With the `{if}` you can choose between two different options.\nThis code prints nice if you enter Hedy as a name, and boo! if you enter something else.\n`{ask}` and `{print}` still work like they did in level 4.\n"
-                example_code: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'\n```\n"
+                start_code: "שם {is} {ask} 'מה שמך?'\n{if} שם {is} הדי {print} 'קול!' {else} {print} 'שיהיה'"
+                story_text: "## אם... אחרת...\nבשלב 5 מתווסף משהו חדש, ה `{if}`! עם `{if}` ביכולתנו לבחור בין שתי אפשרויות.\nהקוד הבא ידפיס נחמד אם תכניסו הדי כשם, או בוז! או תכניסו משהו אחר.\n`{ask}` ו `{print}` ממשיכות לעבוד כמו בשלב 4.\n"
+                example_code: "```\nשם {is} {ask} 'מה שמך?'\n{if} שם {is} הדי {print} 'נחמד' {else} {print} 'בוז!'\n```\n"
                 story_text_3: "## Lists\nWhen we want to check if something is in a list, we can now use the `{in}` command.\nThis code prints pretty! if you choose green or yellow, and meh otherwise.\n"
                 example_code_3: "```\npretty_colors {is} green, yellow\ncolor {is} {ask} 'What is your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!'\n{else} {print} 'meh'\n```\n"
                 story_text_2: "Sometimes code with an `{if}` gets really long and does not fit on the line well. <br> You may also divide the code over two lines, starting the second line at the `{else}` like this:\n"
