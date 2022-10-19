@@ -1412,3 +1412,226 @@ levels:
         6:
             question_text: How many times does the word Hello appear on your screen when you run the code?
             code: "{for} i {in} {range} 0 {to} 2\n    {print} 'Hello'"
+            mp_choice_options:
+            -   option: 1 time
+                feedback: No
+            -   option: 2 times
+                feedback: No
+            -   option: 3 times
+                feedback: That's right!
+            -   option: Never
+                feedback: No
+            correct_answer: C
+            hint: 0 also counts. So 0,1,2 that's 3 times.
+            question_score: '10'
+        7:
+            correct_answer: C
+            question_text: What should be on the place of the question mark?
+            code: "{print} 'Welcome to Hedys diner'\npeople is {ask} 'How many people will be eating here tonight?'\n_?_\n    food is {ask} 'What would you like to order?'\n    {print} food"
+            mp_choice_options:
+            -   option: "```\n{for} i {in} {range} 0 {to} 3\n```\n"
+                feedback: There's not always 3 people
+            -   option: "```\n{for} i {in} {range} 1 {to} guests\n```\n"
+                feedback: The variable is not named guests
+            -   option: "```\n{for} i {in} {range} 1 {to} people\n```\n"
+                feedback: Great!
+            -   option: "```\n{for} i {in} {range} 0 {to} people\n```\n"
+                feedback: That's one order too many!
+            hint: Use the variable 'people'
+            question_score: '10'
+        8:
+            mp_choice_options:
+            -   option: "23\n24\n25"
+                feedback: The numbers don't appear. It doesn't say `{print}` i.
+            -   option: 23 hi 24 hi 25 hi
+                feedback: The numbers don't appear. It doesn't say `{print}` i
+            -   option: "hi\nhi\nhi"
+                feedback: Correct
+            -   option: The word 'hi' will appear 25 times in a row.
+                feedback: No it will only appear 3 times.
+            question_text: What will be the output from this code?
+            code: "{for} i {in} {range} 23 {to} 25\n    {print} 'hi'"
+            correct_answer: C
+            hint: It doesn't say `{print}` i
+            question_score: '10'
+        9:
+            question_text: How many times does Hedy chant Hip Hip Hooray?
+            code: "age = {ask} 'How old are you?'\n{for} i {in} {range} 1 {to} age\n    {print} 'Hip Hip Hoorray!'"
+            mp_choice_options:
+            -   option: 1 time
+                feedback: Try again
+            -   option: 2 times
+                feedback: Try again
+            -   option: Never
+                feedback: Try again
+            -   option: That depends on how old you are
+                feedback: That's right!
+            correct_answer: D
+            hint: '`{for}` i `{in}` `{range}` 1 `{to}` age'
+            question_score: '10'
+        10:
+            question_text: Which code belongs to this output?
+            output: "Baby shark tututudutudu\nBaby shark tututudutudu\nBaby shark tututudutudu\nBaby shark"
+            mp_choice_options:
+            -   option: "```\n{for} i {in} {range} 1 {to} 3\n    {print} Baby shark tututudutudu\n    {print} Baby shark\n```\n"
+                feedback: Mind the indention
+            -   option: "```\n{for} i {in} {range} 1 {to} 3\n    {print} Baby shark tututudutudu\n{print} Baby shark\n```\n"
+                feedback: That's right!
+            -   option: "```\n{for} i {in} {range} 0 {to} 3\n    {print} Baby shark tututudutudu\n{print} Baby shark\n```\n"
+                feedback: '`{range}` 0 `{to}` 3 is 4 times.'
+            -   option: "```\n{for} i {in} {range} 0 {to} 3\n    {print} Baby shark tututudutudu\n    {print} Baby shark\n```\n"
+                feedback: '`{range}` 0 `{to}` 3 is 4 times.'
+            correct_answer: B
+            hint: Mind the indention
+            question_score: '10'
+    10:
+        1:
+            mp_choice_options:
+            -   option: "```\n{for} each compliment\n```\n"
+                feedback: That's not it
+            -   option: "```\n{for} compliment {in} compliments\n```\n"
+                feedback: You deserve all those compliments!
+            -   feedback: That's not it
+                option: "```\n{if} compliment {in} compliments\n```\n"
+            -   option: "```\n{for} compliments {in} compliment\n```\n"
+                feedback: Almost there!
+            correct_answer: B
+            question_text: What do we need to fill in on the `_?_` if we want to print each compliment?
+            code: "compliments = perfect, great job, amazing\n_?_\n    {print} compliment"
+            hint: '`{for}` each compliment in the lists of compliments...'
+            question_score: '10'
+        8:
+            correct_answer: B
+            question_text: What should be on the _?_ in this code that decides which color shirt you get?
+            code: "names = Donna, Tommy, Ben\ncolors = blue, red, purple\n{for} name {in} names\n    {print} _?_"
+            mp_choice_options:
+            -   option: "```\n'name gets a color shirt'\n```\n"
+                feedback: That's not it!
+            -   option: "```\nname 'gets a ' colors {at} {random} ' shirt'\n```\n"
+                feedback: Great job! This was a hard one!
+            -   option: "```\nnames 'gets a ' color {at} {random} ' shirt'\n```\n"
+                feedback: You want each name printed. So the first word should not be names but...
+            -   option: "```\n'people gets a colors shirt'\n```\n"
+                feedback: There is no variable named people..
+            hint: Mind the quotation marks and the names of the variables
+            question_score: '10'
+        9:
+            mp_choice_options:
+            -   option: Timon, what would you like to eat as your appetizer?
+                feedback: Perfect!
+            -   option: Onno, what would you like to eat as your appetizer?
+                feedback: Timon is first on the list!
+            -   option: Timon, what would you like to eat as your dessert?
+                feedback: Appetizers are first in the list
+            -   option: You don't know that. Hedy will choose `{at} {random}`.
+                feedback: There is no `{at} {random}` in this code...
+            question_text: What is the first question Hedy will `{ask}` you when you run the program?
+            code: "courses = appetizer, main course, dessert\nnames = Timon, Onno\n{for} name in names\n    {for} course {in} courses\n        food = {ask} name ', what would you like to eat as your ' course '?'\n        {print} name ' orders ' food ' as their ' course"
+            correct_answer: A
+            hint: The first options from both lists are chosen.
+            question_score: '10'
+        2:
+            question_text: Which output is correct?
+            code: "meals = pizza, pasta, pancakes\n{for} meal {in} meals\n    {print} 'I love ' meal"
+            mp_choice_options:
+            -   option: I love pizza
+                feedback: Line 2 says `{for}` each meal in the list of meals. So each meal is printed.
+            -   option: I love pasta
+                feedback: Line 2 says `{for}` each meal in the list of meals. So each meal is printed.
+            -   option: I love pancakes
+                feedback: Line 2 says `{for}` each meal in the list of meals. So each meal is printed.
+            -   option: "I love pizza\nI love pasta\nI love pancakes"
+                feedback: Great!
+            correct_answer: D
+            hint: Line 2 says for each meal in the list of meals. So each meal is printed.
+            question_score: '10'
+        3:
+            question_text: Which output is correct?
+            code: "animals = dogs, cats, hamsters, chickens\n{for} animal {in} animals\n    {print} animal ' are lovely pets'"
+            mp_choice_options:
+            -   option: dogs are lovely pets
+                feedback: Line 2 says {for} each animal in the list of animals. So each animal is {print}ed.
+            -   option: dogs, cats, hamsters, chickens are lovely pets
+                feedback: Each animal gets their own line in the output.
+            -   option: "dogs are lovely pets\ncats are lovely pets\nhamsters are lovely pets\nchickens are lovely pets"
+                feedback: Great!
+            -   option: You don't know yet. Because it chooses one of the animals {at} {random}.
+                feedback: Line 2 says {for} each animal in the list of animals. So each animal is {print}ed.
+            correct_answer: C
+            hint: Line 2 says {for} each animal in the list of animals. So each animal is printed
+            question_score: '10'
+        4:
+            question_text: What's wrong with this code?
+            code: "groceries = apples, bread, milk\n{for} item {in} groceries\n    {print} 'We need ' groceries"
+            mp_choice_options:
+            -   option: Line 2 needs to start with 4 spaces as indentation
+                feedback: No it doesn't. Only line 3 needs indentation, which it has.
+            -   option: Line 3 does not need to start with 4 spaces as indentation
+                feedback: Line 2 is a `{for}`command so line 3 does need to start with an indent.
+            -   option: Line 3 should say item instead of groceries
+                feedback: Good job!
+            -   option: Line 2 should say groceries instead of item
+                feedback: No it does not.
+            correct_answer: C
+            hint: Line 2 says `{for}` each item in the list of groceries
+            question_score: '10'
+        5:
+            question_text: What word should be on the _?_ with these digital dice?
+            code: "{print} 'Welcome to the digital dice!'\nplayers = Ann, John, Jesse\nchoices = 1, 2, 3, 4, 5, 6\n{for} player {in} players\n    {print} player ' throws ' _?_ {at} {random}"
+            mp_choice_options:
+            -   option: players
+                feedback: It would say 'Ann throws Jesse', instead of 'Ann throws 6'.
+            -   option: choices
+                feedback: That's right!
+            -   option: choice
+                feedback: You are very close. But you need Hedy to pick from the list called 'choices' not 'choice'...
+            -   option: dice
+                feedback: Look at the names of the variables.
+            correct_answer: B
+            hint: Hedy needs to pick a number `{at} {random}`
+            question_score: '10'
+        6:
+            question_text: Which of the answers below is a possible outcome when you run the code?
+            code: "choices = rock, paper, scissors\nplayers = Kelly, Meredith\n{for} player {in} players\n    {print} player ' chooses ' choices {at} {random}"
+            mp_choice_options:
+            -   option: Kelly chooses rock
+                feedback: Meredith wants to play too!
+            -   option: "Meredith chooses scissors\nKelly chooses rock"
+                feedback: So close! But Kelly is first in the list, so she goes first
+            -   option: Meredith chooses paper
+                feedback: Kelly wants to play too!
+            -   option: "Kelly chooses paper\nMeredith chooses scissors"
+                feedback: Amazing!
+            correct_answer: D
+            hint: Each player will pick an option. The player that's first on the list will go first.
+            question_score: '10'
+        7:
+            question_text: What line should be on the _?_ in this code that decides what these people will have for dinner?
+            code: "names = Ron, Leslie, April, Andy\nfood = pasta, fries, salad\n_?_\n    {print} name ' has to eat ' food {at} {random} ' for dinner'"
+            mp_choice_options:
+            -   option: "```\n{for} name {in} names\n```\n"
+                feedback: You are on fire!
+            -   option: "```\n{for} names {in} name\n```\n"
+                feedback: No it should be for each name in the list nameS, so the other way around
+            -   option: "```\n{for} food {in} food\n```\n"
+                feedback: Each name should be told what they will have for dinner.
+            -   option: "```\n{for} name {in} food\n```\n"
+                feedback: Each name should be told what they will have for dinner.
+            correct_answer: A
+            hint: Each name should be told what they will have for dinner.
+            question_score: '10'
+        10:
+            question_text: What is true about this code?
+            code: "prices = 1 million dollars, car, sandwich\nnames = Bob, Patrick, Sandy, Larry\n{for} price {in} prices\n    {print} 'The ' price 'is won by ' names {at} {random}"
+            mp_choice_options:
+            -   option: Everybody will always win a price.
+                feedback: That is not true, you could end up without a price.
+            -   option: All the prices always go to one single person.
+                feedback: That is not true. All the prices are given away, but to random people
+            -   option: Larry will never win a price
+                feedback: That is not true. Larry has the same odds as the others
+            -   option: Someone might win with two prices
+                feedback: You get it!
+            correct_answer: D
+            hint: Try to imagine the output of this code.
+            question_score: '10'
