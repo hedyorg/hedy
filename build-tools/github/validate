@@ -9,6 +9,8 @@ $scriptdir/validate-python
 $scriptdir/validate-typescript
 $scriptdir/validate-yaml
 if [[ "${1:-}" == "--all" ]]; then
+  $scriptdir/validate-tests --all
+else
   $scriptdir/validate-tests
 fi
 $scriptdir/validate-e2e

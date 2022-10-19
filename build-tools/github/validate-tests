@@ -10,4 +10,8 @@ python content/yaml_to_lark_utils.py
 echo "------> Python unit tests"
 
 # This is expected to run from the repo root
-python -m pytest
+if [[ "${1:-}" == "--all" ]]; then
+  python -m pytest
+else
+  python -m pytest # Add some excluding argument here?
+fi
