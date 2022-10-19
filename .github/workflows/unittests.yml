@@ -35,17 +35,17 @@ jobs:
       run: |
         pybabel compile -f -d translations
     - shell: pwsh
-        id: check_file_changed
-        run: |
-          $diff = git diff --name-only HEAD^ HEAD
-          $SourceDiff = $diff | Where-Object { $_ -match '^docs/' -or $_ -match '^grammars/' }
-          $HasDiff = $SourceDiff.Length -gt 0
-          
-          # Set the output named "docs_changed"
-          Write-Host "::set-output name=docs_changed::$HasDiff"
+      id: check_file_changed
+      run: |
+        $diff = git diff --name-only HEAD^ HEAD
+        $SourceDiff = $diff | Where-Object { $_ -match '^docs/' -or $_ -match '^grammars/' }
+        $HasDiff = $SourceDiff.Length -gt 0
+        
+        # Set the output named "docs_changed"
+        Write-Host "::set-output name=docs_changed::$HasDiff"
     - shell: pwsh
-        if: steps.check_file_changed.outputs.docs_changed == 'True'
-        run: build-tools/github/validate --all
+      if: steps.check_file_changed.outputs.docs_changed == 'True'
+      run: build-tools/github/validate --all
     - shell: pwsh
-        if: steps.check_file_changed.outputs.docs_changed != 'True'
-        run: build-tools/github/validate
+      if: steps.check_file_changed.outputs.docs_changed != 'True'
+      run: build-tools/github/validate
