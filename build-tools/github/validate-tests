@@ -13,5 +13,5 @@ echo "------> Python unit tests"
 if [[ "${1:-}" == "--all" ]]; then
   python -m pytest
 else
-  python -m pytest --ignore=tests
+  python -m pytest --ignore=tests/test_highlighting --ignore=tests/test_level --ignore=tests/test_snippets --ignore=tests/test_translation_level
 fi
