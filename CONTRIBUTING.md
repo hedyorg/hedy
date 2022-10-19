@@ -130,7 +130,7 @@ Also, please refrain from using inline CSS styling, as this makes the templates 
 For our multilingual web structure we use a combination of YAML files and Babel to deliver language-dependent content.
 The content you see in the tabs, mail-templates, achievements, puzzles and quizzes are all stored using YAML files.
 All our front-end UI strings, error messages and other "small" translations are stored using Babel.
-To help translating any of these, please follow the explanation in TRANSLATING.md.
+To help translating any of these, please follow the explanation in [TRANSLATING.md](./TRANSLATING.md).
 
 If you see placeholders with underscores one the website instead of proper texts, like this:
 
