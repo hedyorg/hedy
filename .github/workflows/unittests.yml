@@ -35,7 +35,6 @@ jobs:
       run: |
         pybabel compile -f -d translations
     - shell: pwsh
-        # Give an id to the step, so we can reference it later
         id: check_file_changed
         run: |
           $diff = git diff --name-only HEAD^ HEAD
