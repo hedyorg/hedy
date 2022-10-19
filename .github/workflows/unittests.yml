@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Set up Python 3.9
       uses: actions/setup-python@v1
       with:
@@ -40,8 +40,6 @@ jobs:
         $diff = git diff --name-only HEAD^ HEAD
         $SourceDiff = $diff | Where-Object { $_ -match '^docs/' -or $_ -match '^grammars/' }
         $HasDiff = $SourceDiff.Length -gt 0
-        
-        # Set the output named "docs_changed"
         Write-Host "::set-output name=docs_changed::$HasDiff"
     - shell: pwsh
       if: steps.check_file_changed.outputs.docs_changed == 'True'
