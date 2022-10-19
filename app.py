@@ -1048,8 +1048,7 @@ def get_highest_quiz_score(username):
     max = 0
     quizzes = DATABASE.get_quiz_stats([username])
     for quiz in quizzes:
-        if 'scores' in quiz:
-            for score in quiz['scores']:
+        for score in quiz.get('scores', []):
                 if score > max:
                     max = score
     return max
