@@ -42,7 +42,7 @@ jobs:
           # Diff HEAD with the previous commit
           $diff = git diff --name-only HEAD^ HEAD
           
-          # Check if a file under content/ or under grammars
+          # Check if a file under content/ or under grammars/
           $SourceDiff = $diff | Where-Object { $_ -match '^docs/' -or $_ -match '^grammars/' }
           $HasDiff = $SourceDiff.Length -gt 0
           
