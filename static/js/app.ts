@@ -477,7 +477,7 @@ export function saveMachineFiles() {
 export function pushAchievement(achievement: string) {
   $.ajax({
     type: 'POST',
-    url: '/achievements',
+    url: '/achievements/push-achievement',
     data: JSON.stringify({
       achievement: achievement
     }),
@@ -1070,14 +1070,13 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
     }
 
     // Check if the program was correct but the output window is empty: Return a warning
-    if (window.State.programsInExecution === 1 && $('#output').is(':empty') && $('#turtlecanvas').is(':empty')) {
+    if ($('#output').is(':empty') && $('#turtlecanvas').is(':empty')) {
       if(debug == null){
         pushAchievement("error_or_empty");
         error.showWarning(ErrorMessages['Transpile_warning'], ErrorMessages['Empty_output']);
       }
       return;
     }
-    window.State.programsInExecution--;
     if (!hasWarnings) {
       if (debug == null) {
         showSuccesMessage();
@@ -1113,9 +1112,6 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
   // output functions are configurable.  This one just appends some text
   // to a pre element.
   function outf(text: string) {
-    // If there's more than one program being executed at a time, we ignore it.
-    // This happens when a program requiring user input is suspended when the user changes the code.
-    if (window.State.programsInExecution > 1) return;
     addToOutput(text, 'white');
     speak(text)
   }
