@@ -56,7 +56,9 @@ If you want to run the website version locally, run:
 ```bash
 (.env)$ python app.py
 ```
-Your local Hedy version should be available on address `http://0.0.0.0:8080/`. It appears that on some Windows machines this address does not work, make sure the server is still running and try visiting the website on `http://localhost:8080/`.
+Your local Hedy version should be available on address `http://0.0.0.0:8080/`. It appears that on some Windows machines this address does not work, make sure the server is still running and try visiting the website on `http://localhost:8080/`. 
+
+Additionally, some pages are known to give a type error about string concatenation. This can be fixed by creating an environment variable for the "BASE_URL" and setting it to `http://localhost:8080/`.
 
 To run the unit tests:
 
@@ -203,12 +205,12 @@ docker build -t hedy .
 and then:
 
 ```bash
-docker run -it --rm -p 8080:8080 hedy
+docker run -it --rm -p 8080:8080 --mount type=bind,source="$(pwd)",target=/app hedy
 ```
 
 ## Testing Teacher facing features locally
 
-For some things like making classes you need a teacher's account and you ight want to test that locally. To do so, you have to first make an account, this works offline without issues. Then you have to run Hedy with the environment variable ADMIN_USER set to your username, f.e. ADMIN_USER=Pete. It works a bit differently in each IDE, this is whta it looks like for PyCharm:
+For some things like making classes you need a teacher's account and you might want to test that locally. To do so, you have to first make an account, this works offline without issues. Then you have to run Hedy with the environment variable ADMIN_USER set to your username, f.e. ADMIN_USER=Pete. It works a bit differently in each IDE, this is whta it looks like for PyCharm:
 
 ![image](https://user-images.githubusercontent.com/1003685/152981667-0ab1f273-c668-429d-8ac4-9dd554f9bab3.png)
 
@@ -224,4 +226,17 @@ Pre-release environment
 When you have your PR accepted into `main`, that version will be deployed on [hedy-alpha.herokuapp.com](https://hedy-alpha.herokuapp.com).
 
 We do periodic deploys of `main` to the [production version](https://hedy.org) of Hedy.
+
+Accessing logs 
+-----------------------
+
+We store programs for logging purposes on s3. If you want to access the logs, you can use this command (if you have AWS access, mainly this is a note to self for Felienne!):
+
+`aws s3 sync s3://hedy-parse-logs/hedy-beta/ .`
+
+Likely you will have to first set your AWS credentials using:
+
+`aws configure`
+
+You can fetch these credentials here: https://console.aws.amazon.com/iam/home?#security_credential
 

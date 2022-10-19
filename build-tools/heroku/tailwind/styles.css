@@ -51,7 +51,11 @@ strong {
   @apply bg-green-500 text-white border-green-700;
 }
 
-.green-btn:hover {
+.green-btn:disabled, .green-btn[disabled] {
+  @apply bg-gray-500 border-gray-700;
+}
+
+.green-btn:hover:enabled {
   @apply bg-green-400 border-green-500;
 }
 
@@ -315,7 +319,7 @@ p.close-dialog {
 }
 
 .editor-error {
-  @apply bg-red-500 absolute;
+  @apply bg-blue-500/70 border-red-500 border-b-2 border-t-2 absolute;
   z-index: 10; /* Show higher than the active line (which has z-index 2) */
 }
 

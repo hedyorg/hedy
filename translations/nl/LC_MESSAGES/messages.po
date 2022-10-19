@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-09-27 12:02+0300\n"
+"POT-Creation-Date: 2022-10-13 13:47+0200\n"
 "PO-Revision-Date: 2022-07-19 17:21+0000\n"
 "Last-Translator: Felienne Hermans <felienne@gmail.com>\n"
 "Language: nl\n"
@@ -47,6 +47,9 @@ msgstr "Dit programma bestaat niet!"
 
 msgid "level_not_class"
 msgstr "Je zit in een klas waar dit level nog niet beschikbaar is gemaakt"
+
+msgid "quiz_threshold_not_reached"
+msgstr "Minimale quiz score niet gehaald om dit level vrij te spelen"
 
 msgid "no_such_adventure"
 msgstr "Dit avontuur bestaat niet!"
@@ -550,11 +553,23 @@ msgstr "Eigen avonturen selecteren"
 msgid "select"
 msgstr "Kies"
 
-msgid "other_settings"
-msgstr "Andere instellingen"
+msgid "unlock_thresholds"
+msgstr "Ongrendel level scores"
 
 msgid "option"
 msgstr "Optie"
+
+msgid "value"
+msgstr "Waarde"
+
+msgid "quiz_score"
+msgstr "Quiz score"
+
+msgid "percentage"
+msgstr "procent"
+
+msgid "other_settings"
+msgstr "Andere instellingen"
 
 msgid "mandatory_mode"
 msgstr "Verplichte programmeursmodus"
@@ -684,9 +699,6 @@ msgstr "Slepen"
 
 msgid "quiz_tab"
 msgstr "Quiz"
-
-msgid "specific_adventure_mode"
-msgstr "Je zit nu in het avontuur \"{adventure}\", klik bovenin op \"Hedy\" voor alle avonturen."
 
 msgid "example_code_header"
 msgstr "Hedy voorbeeldcode"
@@ -873,6 +885,9 @@ msgstr "Code opslaan"
 
 msgid "share_code_button"
 msgstr "Code opslaan & delen"
+
+msgid "tutorial"
+msgstr "Tutorial"
 
 msgid "try_button"
 msgstr "Probeer"
@@ -1133,8 +1148,26 @@ msgstr "Reset je wachtwoord"
 msgid "password_repeat"
 msgstr "Herhaal je wachtwoord"
 
-msgid "create_account_explanation"
-msgstr "Met een account kun jij jouw programma's opslaan."
+msgid "signup_student_or_teacher"
+msgstr "Ben je een leerling of een leerkracht?"
+
+msgid "student_signup_header"
+msgstr "Leerling"
+
+msgid "teacher_signup_header"
+msgstr "Leerkracht"
+
+msgid "create_teacher_account"
+msgstr "Maak een leraren account"
+
+msgid "create_student_account"
+msgstr "Maak een account"
+
+msgid "create_teacher_account_explanation"
+msgstr "Met een leerkrachtenaccount kun jij programma's opslaan en resultaten van leerlingen inzien."
+
+msgid "create_student_account_explanation"
+msgstr "Met een account kun je programma's opslaan."
 
 msgid "programming_experience"
 msgstr "Heb jij al eerder geprogrammeerd?"
@@ -1175,6 +1208,15 @@ msgstr "Hedy - Administrator pagina"
 msgid "username_invalid"
 msgstr "Je gebruikersnaam is ongeldig."
 
+msgid "teacher_invalid"
+msgstr "Jouw leraren waarde is ongeldig."
+
+msgid "email_invalid"
+msgstr "Vul een geldig e-mailadres in."
+
+msgid "mail_error_change_processed"
+msgstr "Er ging iets mis met het sturen van de validatie mail, de veranderingen zijn wel succesvol doorgevoerd."
+
 msgid "username_special"
 msgstr "Er mag geen `:` of `@` in je gebruikersnaam zitten."
 
@@ -1186,87 +1228,6 @@ msgstr "Je wachtwoord is ongeldig."
 
 msgid "passwords_six"
 msgstr "Alle wachtwoorden moeten 6 of meer karakters zijn."
-
-msgid "email_invalid"
-msgstr "Vul een geldig e-mailadres in."
-
-msgid "mail_error_change_processed"
-msgstr "Er ging iets mis met het sturen van de validatie mail, de veranderingen zijn wel succesvol doorgevoerd."
-
-msgid "invalid_username_password"
-msgstr "Ongeldige gebruikersnaam/wachtwoord combinatie."
-
-msgid "repeat_match_password"
-msgstr "Het herhaalde wachtwoord is niet gelijk."
-
-msgid "language_invalid"
-msgstr "Dit is geen geldige taal, kies een taal vanuit de lijst."
-
-msgid "agree_invalid"
-msgstr "Je moet akkoord gaan met de privacyverklaring."
-
-msgid "keyword_language_invalid"
-msgstr "Dit is geen geldige commando taal (kies Engels of je eigen taal)."
-
-msgid "year_invalid"
-msgstr "Dit is geen geldig jaartal, die moet liggen tussen 1900 en {current_year}."
-
-msgid "gender_invalid"
-msgstr "Dit gender is niet geldig, kies uit (Meisje, Jongen, Anders)."
-
-msgid "country_invalid"
-msgstr "Dit is geen geldig land, kies er een vanuit de lijst."
-
-msgid "experience_invalid"
-msgstr "Dit is geen geldige programmeerervaring, kies uit (Ja, Nee)."
-
-msgid "programming_invalid"
-msgstr "Dit is geen geldige programmeertaal, selecteer van de opties."
-
-msgid "exists_username"
-msgstr "Deze gebruikersnaam is al in gebruik."
-
-msgid "exists_email"
-msgstr "Dit emailadres is al in gebruik."
-
-msgid "token_invalid"
-msgstr "Jouw token is ongeldig."
-
-msgid "password_six"
-msgstr "Je wachtwoord moet minstens 6 letters hebben."
-
-msgid "password_change_not_allowed"
-msgstr "Je hebt geen rechten op het wachtwoord van deze gebruiker te wijzigen."
-
-msgid "password_change_success"
-msgstr "Wachtwoord van jouw leerling is succesvol gewijzigd."
-
-msgid "password_updated"
-msgstr "Je wachtwoord is aangepast."
-
-msgid "profile_updated_reload"
-msgstr "Je profiel is aangepast, pagina wordt herladen."
-
-msgid "profile_updated"
-msgstr "Je profiel is aangepast."
-
-msgid "sent_password_recovery"
-msgstr "Je krijgt zo een mailtje met informatie over hoe je een nieuw wachtwoord kiest."
-
-msgid "password_resetted"
-msgstr "Je wachtwoord is gereset. Je wordt doorgestuurd naar de inlogpagina."
-
-msgid "already_teacher"
-msgstr "Je hebt al een lerarenaccount."
-
-msgid "already_teacher_request"
-msgstr "Je hebt al een lerarenaccount aangevraagd."
-
-msgid "teacher_account_success"
-msgstr "Jouw lerarenaccount is succesvol aangevraagd."
-
-msgid "teacher_invalid"
-msgstr "Jouw leraren waarde is ongeldig."
 
 msgid "mail_welcome_verify_body"
 msgstr ""
@@ -1339,8 +1300,182 @@ msgstr "Kopieer en plak deze link in een andere tab:"
 msgid "link"
 msgstr "Link"
 
+msgid "invalid_username_password"
+msgstr "Ongeldige gebruikersnaam/wachtwoord combinatie."
+
+msgid "repeat_match_password"
+msgstr "Het herhaalde wachtwoord is niet gelijk."
+
+msgid "language_invalid"
+msgstr "Dit is geen geldige taal, kies een taal vanuit de lijst."
+
+msgid "agree_invalid"
+msgstr "Je moet akkoord gaan met de privacyverklaring."
+
+msgid "keyword_language_invalid"
+msgstr "Dit is geen geldige commando taal (kies Engels of je eigen taal)."
+
+msgid "year_invalid"
+msgstr "Dit is geen geldig jaartal, die moet liggen tussen 1900 en {current_year}."
+
+msgid "gender_invalid"
+msgstr "Dit gender is niet geldig, kies uit (Meisje, Jongen, Anders)."
+
+msgid "country_invalid"
+msgstr "Dit is geen geldig land, kies er een vanuit de lijst."
+
+msgid "experience_invalid"
+msgstr "Dit is geen geldige programmeerervaring, kies uit (Ja, Nee)."
+
+msgid "programming_invalid"
+msgstr "Dit is geen geldige programmeertaal, selecteer van de opties."
+
+msgid "exists_username"
+msgstr "Deze gebruikersnaam is al in gebruik."
+
+msgid "exists_email"
+msgstr "Dit emailadres is al in gebruik."
+
+msgid "token_invalid"
+msgstr "Jouw token is ongeldig."
+
+msgid "password_six"
+msgstr "Je wachtwoord moet minstens 6 letters hebben."
+
+msgid "password_change_not_allowed"
+msgstr "Je hebt geen rechten op het wachtwoord van deze gebruiker te wijzigen."
+
+msgid "password_change_success"
+msgstr "Wachtwoord van jouw leerling is succesvol gewijzigd."
+
+msgid "password_updated"
+msgstr "Je wachtwoord is aangepast."
+
+msgid "sent_password_recovery"
+msgstr "Je krijgt zo een mailtje met informatie over hoe je een nieuw wachtwoord kiest."
+
+msgid "password_resetted"
+msgstr "Je wachtwoord is gereset. Je wordt doorgestuurd naar de inlogpagina."
+
+msgid "already_teacher"
+msgstr "Je hebt al een lerarenaccount."
+
+msgid "already_teacher_request"
+msgstr "Je hebt al een lerarenaccount aangevraagd."
+
+msgid "teacher_account_success"
+msgstr "Jouw lerarenaccount is succesvol aangevraagd."
+
+msgid "only_teacher_create_class"
+msgstr "Alleen leerkrachten mogen klassen maken!"
+
+msgid "class_name_invalid"
+msgstr "Deze klasnaam is ongeldig."
+
+msgid "class_name_empty"
+msgstr "Je hebt geen klasnaam ingevuld!"
+
+msgid "class_name_duplicate"
+msgstr "Je hebt al een klas met deze naam."
+
+msgid "no_such_class"
+msgstr "Deze klas bestaat niet."
+
+msgid "invalid_class_link"
+msgstr "Ongeldige klassenlink."
+
+msgid "title_join-class"
+msgstr "Hedy - Inschrijven voor klas"
+
+msgid "retrieve_class_error"
+msgstr "Alleen leerkrachten mogen klassen openen"
+
+msgid "username_empty"
+msgstr "Je hebt geen gebruikersnaam ingevuld!"
+
+msgid "student_not_existing"
+msgstr "Deze gebruikersnaam bestaat niet."
+
+msgid "student_already_in_class"
+msgstr "Deze leerling zit al in jouw klas."
+
+msgid "student_already_invite"
+msgstr "Deze leerling heeft al een openstaande uitnodiging."
+
+msgid "title_class-overview"
+msgstr "Hedy - Klas overzicht"
+
+msgid "title_customize-class"
+msgstr "Hedy - Klas personaliseren"
+
+msgid "customization_deleted"
+msgstr "Personalisatie succesvol verwijderd."
+
+msgid "class_customize_success"
+msgstr "Klas succesvol gepersonaliseerd."
+
+msgid "no_accounts"
+msgstr "Er zijn geen accounts om aan te maken."
+
+msgid "unique_usernames"
+msgstr "Alle gebruikersnamen moeten uniek zijn."
+
+msgid "usernames_exist"
+msgstr "Een of meerdere gebruikersnamen is al in gebruik."
+
+msgid "accounts_created"
+msgstr "Account succesvol aangemaakt."
+
+msgid "retrieve_adventure_error"
+msgstr "Jij mag dit avontuur niet bekijken!"
+
+msgid "title_view-adventure"
+msgstr "Hedy - Avontuur bekijken"
+
+msgid "title_customize-adventure"
+msgstr "Hedy - Avontuur personaliseren"
+
+msgid "adventure_id_invalid"
+msgstr "Dit avontuur id is ongeldig."
+
+msgid "adventure_name_invalid"
+msgstr "Deze avontuur naam is ongeldig."
+
+msgid "level_invalid"
+msgstr "Dit Hedy level is ongeldig."
+
+msgid "content_invalid"
+msgstr "Dit avontuur is ongeldig."
+
+msgid "adventure_length"
+msgstr "Jouw avontuur moet minimaal 20 karakters zijn."
+
+msgid "public_invalid"
+msgstr "Deze waarde voor het beschikbaar maken van je avontuur is ongeldig"
+
+msgid "classes_invalid"
+msgstr "De lijst van gekozen klassen is niet geldig"
+
+msgid "adventure_duplicate"
+msgstr "Je hebt al een avontuur met deze naam."
+
+msgid "something_went_wrong_keyword_parsing"
+msgstr "Er zit een foutje in jouw avontuur, zijn alle commando's goed ingesloten met { }?"
+
+msgid "adventure_updated"
+msgstr "Jouw avontuur is bijgewerkt!"
+
+msgid "adventure_empty"
+msgstr "Je hebt geen naam voor je avontuur ingevuld!"
+
 msgid "exercise_doesnt_exist"
 msgstr "Deze opdracht bestaat niet"
+
+msgid "profile_updated_reload"
+msgstr "Je profiel is aangepast, pagina wordt herladen."
+
+msgid "profile_updated"
+msgstr "Je profiel is aangepast."
 
 msgid "delete_success"
 msgstr "Je programma is verwijderd."
@@ -1372,9 +1507,6 @@ msgstr "Dit programma bestaat niet, of is niet publiek"
 msgid "report_success"
 msgstr "Dit programma is gerapporteerd"
 
-msgid "level_invalid"
-msgstr "Dit Hedy level is ongeldig."
-
 msgid "question_doesnt_exist"
 msgstr "Deze vraag bestaat niet"
 
@@ -1389,12 +1521,6 @@ msgstr "Je wachtwoord is ongeldig."
 msgid "too_many_attempts"
 msgstr "Te veel pogingen"
 
-msgid "retrieve_class_error"
-msgstr "Alleen leerkrachten mogen klassen openen"
-
-msgid "no_such_class"
-msgstr "Deze klas bestaat niet."
-
 msgid "title_class statistics"
 msgstr "Mijn statistieken"
 
@@ -1402,96 +1528,6 @@ msgstr "Mijn statistieken"
 msgid "title_class logs"
 msgstr "Hedy - Inschrijven voor klas"
 
-msgid "title_class-overview"
-msgstr "Hedy - Klas overzicht"
-
-msgid "only_teacher_create_class"
-msgstr "Alleen leerkrachten mogen klassen maken!"
-
-msgid "class_name_invalid"
-msgstr "Deze klasnaam is ongeldig."
-
-msgid "class_name_empty"
-msgstr "Je hebt geen klasnaam ingevuld!"
-
-msgid "class_name_duplicate"
-msgstr "Je hebt al een klas met deze naam."
-
-msgid "invalid_class_link"
-msgstr "Ongeldige klassenlink."
-
-msgid "title_join-class"
-msgstr "Hedy - Inschrijven voor klas"
-
-msgid "title_customize-class"
-msgstr "Hedy - Klas personaliseren"
-
-msgid "customization_deleted"
-msgstr "Personalisatie succesvol verwijderd."
-
-msgid "class_customize_success"
-msgstr "Klas succesvol gepersonaliseerd."
-
-msgid "username_empty"
-msgstr "Je hebt geen gebruikersnaam ingevuld!"
-
-msgid "student_not_existing"
-msgstr "Deze gebruikersnaam bestaat niet."
-
-msgid "student_already_in_class"
-msgstr "Deze leerling zit al in jouw klas."
-
-msgid "student_already_invite"
-msgstr "Deze leerling heeft al een openstaande uitnodiging."
-
-msgid "no_accounts"
-msgstr "Er zijn geen accounts om aan te maken."
-
-msgid "unique_usernames"
-msgstr "Alle gebruikersnamen moeten uniek zijn."
-
-msgid "usernames_exist"
-msgstr "Een of meerdere gebruikersnamen is al in gebruik."
-
-msgid "accounts_created"
-msgstr "Account succesvol aangemaakt."
-
-msgid "retrieve_adventure_error"
-msgstr "Jij mag dit avontuur niet bekijken!"
-
-msgid "title_view-adventure"
-msgstr "Hedy - Avontuur bekijken"
-
-msgid "title_customize-adventure"
-msgstr "Hedy - Avontuur personaliseren"
-
-msgid "adventure_id_invalid"
-msgstr "Dit avontuur id is ongeldig."
-
-msgid "adventure_name_invalid"
-msgstr "Deze avontuur naam is ongeldig."
-
-msgid "content_invalid"
-msgstr "Dit avontuur is ongeldig."
-
-msgid "adventure_length"
-msgstr "Jouw avontuur moet minimaal 20 karakters zijn."
-
-msgid "public_invalid"
-msgstr "Deze waarde voor het beschikbaar maken van je avontuur is ongeldig"
-
-msgid "classes_invalid"
-msgstr "De lijst van gekozen klassen is niet geldig"
-
-msgid "adventure_duplicate"
-msgstr "Je hebt al een avontuur met deze naam."
-
-msgid "something_went_wrong_keyword_parsing"
-msgstr "Er zit een foutje in jouw avontuur, zijn alle commando's goed ingesloten met { }?"
-
-msgid "adventure_updated"
-msgstr "Jouw avontuur is bijgewerkt!"
-
-msgid "adventure_empty"
-msgstr "Je hebt geen naam voor je avontuur ingevuld!"
+#~ msgid "student"
+#~ msgstr "Leerling"
 

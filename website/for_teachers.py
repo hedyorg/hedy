@@ -158,6 +158,8 @@ class ForTeachersModule(WebsiteModule):
             return 'Other settings must be a list', 400
         if not isinstance(body.get('opening_dates'), dict):
             return 'Opening dates must be a dict', 400
+        if not isinstance(body.get('level_thresholds'), dict):
+            return 'Level thresholds must be a dict', 400
 
         # Values are always strings from the front-end -> convert to numbers
         levels = [int(i) for i in body['levels']]
@@ -176,13 +178,26 @@ class ForTeachersModule(WebsiteModule):
         for name, adventure_levels in body['adventures'].items():
             adventures[name] = [int(i) for i in adventure_levels]
 
+        level_thresholds = {}
+        for name, value in body.get('level_thresholds').items():
+            # We only manually check for the quiz threshold, if we add more -> generalize this code
+            if name == 'quiz':
+                try:
+                    value = int(value)
+                except:
+                    return 'Quiz threshold value is invalid', 400
+                if value < 0 or value > 100:
+                    return 'Quiz threshold value is invalid', 400
+            level_thresholds[name] = value
+
         customizations = {
             'id': class_id,
             'levels': levels,
             'opening_dates': opening_dates,
             'adventures': adventures,
             'teacher_adventures': body['teacher_adventures'],
-            'other_settings': body['other_settings']
+            'other_settings': body['other_settings'],
+            'level_thresholds': level_thresholds
         }
 
         self.db.update_class_customizations(customizations)

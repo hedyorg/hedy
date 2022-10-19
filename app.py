@@ -834,6 +834,9 @@ def index(level, program_id):
     else:
         adventures = load_adventures_per_level(level, g.keyword_lang)
 
+    # Initially all levels are available -> strip those for which conditions are not met or not available yet
+    available_levels = list(range(1, hedy.HEDY_MAX_LEVEL + 1))
+
     customizations = {}
     if current_user()['username']:
         customizations = DATABASE.get_student_class_customizations(current_user()['username'])
@@ -851,6 +854,36 @@ def index(level, program_id):
     if 'levels' in customizations and level not in available_levels:
         return utils.error_page(error=403, ui_message=gettext('level_not_class'))
 
+    # At this point we can have the following scenario:
+    # - The level is allowed and available
+    # - But, if there is a quiz threshold we have to check again if the user has reached it
+
+    if 'level_thresholds' in customizations:
+        if 'quiz' in customizations.get('level_thresholds'):
+            # Temporary store the threshold
+            threshold = customizations.get('level_thresholds').get('quiz')
+            # Get the max quiz score of the user in the previous level
+            # A bit out-of-scope, but we want to enable the next level button directly after finishing the quiz
+            # Todo: How can we fix this without a re-load?
+            quiz_stats = DATABASE.get_quiz_stats([current_user()['username']])
+            if level > 1:
+                scores = [x.get('scores', []) for x in quiz_stats if x.get('level') == level - 1]
+                scores = [score for week_scores in scores for score in week_scores]
+                max_score = 0 if len(scores) < 1 else max(scores)
+                if max_score < threshold:
+                    return utils.error_page(error=403, ui_message=gettext('quiz_threshold_not_reached'))
+
+            # We also have to check if the next level should be removed from the available_levels
+            if level < hedy.HEDY_MAX_LEVEL:
+                scores = [x.get('scores', []) for x in quiz_stats if x.get('level') == level]
+                scores = [score for week_scores in scores for score in week_scores]
+                max_score = 0 if len(scores) < 1 else max(scores)
+                # We don't have the score yet for the next level -> remove all upcoming levels from 'available_levels'
+                if max_score < threshold:
+                    available_levels = available_levels[:available_levels.index(level)+1]
+
+    # Add the available levels to the customizations dict -> simplify implementation on the front-end
+    customizations['available_levels'] = available_levels
     cheatsheet = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
 
     teacher_adventures = []
@@ -1333,6 +1366,7 @@ def store_parsons_order():
     DATABASE.store_parsons(attempt)
     return jsonify({}), 200
 
+
 @app.route('/client_messages.js', methods=['GET'])
 def client_messages():
     # Not really nice, but we don't call this often as it is cached
@@ -1367,6 +1401,7 @@ def other_keyword_language():
     if session.get('keyword_lang') and session['keyword_lang'] != "en":
         return make_keyword_lang_obj("en")
     return None
+
 
 @app.template_global()
 def translate_command(command):
@@ -1470,6 +1505,7 @@ def modify_query(**new_values):
 
     return '{}?{}'.format(request.path, url_encode(args))
 
+
 @app.template_global()
 def get_user_messages():
     if not session.get('messages'):
@@ -1484,6 +1520,8 @@ def get_user_messages():
 
 # Todo TB: Re-write this somewhere sometimes following the line below
 # We only store this @app.route here to enable the use of achievements -> might want to re-write this in the future
+
+
 @app.route('/auth/public_profile', methods=['POST'])
 @requires_login
 def update_public_profile(user):
@@ -1606,6 +1644,7 @@ def valid_invite_code(code):
         valid_codes.extend(os.getenv('TEACHER_INVITE_CODES').split(','))
 
     return code in valid_codes
+
 
 @app.route('/invite/<code>', methods=['GET'])
 def teacher_invitation(code):

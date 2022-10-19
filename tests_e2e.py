@@ -20,16 +20,18 @@ from hedy import HEDY_MAX_LEVEL
 from hedy_content import ALL_LANGUAGES
 
 HOST = os.getenv('ENDPOINT', 'http://localhost:' + str(CONFIG['port']) + '/')
-if not HOST.endswith('/'): HOST += '/'
+if not HOST.endswith('/'):
+    HOST += '/'
 
 # This dict has global scope and holds all created users and their still current sessions (as cookies), for convenient reuse wherever needed
 USERS = {}
 
 # *** HELPERS ***
 
+
 def request(method, path, headers={}, body='', cookies=None):
 
-    if method not in['get', 'post', 'put', 'delete']:
+    if method not in ['get', 'post', 'put', 'delete']:
         raise Exception('request - Invalid method: ' + str(method))
 
     # We pass the X-Testing header to let the server know that this is a request coming from an E2E test, thus no transactional emails should be sent.
@@ -52,13 +54,13 @@ def request(method, path, headers={}, body='', cookies=None):
 
     if response.history and response.history[0]:
         # This code branch will be executed if there is a redirect
-        ret['code']    = response.history[0].status_code
+        ret['code'] = response.history[0].status_code
         ret['headers'] = response.history[0].headers
         if getattr(response.history[0], '_content'):
             # We can assume that bodies returned from redirected responses are always plain text, since no JSON endpoint in the server is reachable through a redirect.
             ret['body'] = getattr(response.history[0], '_content').decode('utf-8')
     else:
-        ret['code']    = response.status_code
+        ret['code'] = response.status_code
         ret['headers'] = response.headers
         if 'Content-Type' in response.headers and response.headers['Content-Type'] == 'application/json':
             ret['body'] = response.json()
@@ -66,6 +68,7 @@ def request(method, path, headers={}, body='', cookies=None):
             ret['body'] = response.text
 
     return ret
+
 
 class AuthHelper(unittest.TestCase):
     def setUp(self):
@@ -204,14 +207,15 @@ class AuthHelper(unittest.TestCase):
 
 # *** TESTS ***
 
+
 class TestPages(AuthHelper):
     def test_get_login_page(self):
         # WHEN attempting to get the login page
         # THEN receive an OK response code from the server
         self.get_data('/login')
 
-    def test_get_signup_page(self):
-        # WHEN attempting to get the signup page
+    def test_get_signup_pages(self):
+        # WHEN attempting to get the signup flow
         # THEN receive an OK response code from the server
         self.get_data('/signup')
 
@@ -335,6 +339,7 @@ class TestPages(AuthHelper):
                         self.get_data(page + "/" + str(i))
                 self.get_data(page)
 
+
 class TestSessionVariables(AuthHelper):
     def test_get_session_variables(self):
         # WHEN getting session variables from the main environment
@@ -365,6 +370,7 @@ class TestSessionVariables(AuthHelper):
         # THEN the body should have a session with a session_id that is still the same and a `test_session` field as well
         self.assertEqual(body['session']['session_id'], session['id'])
         self.assertEqual(body['session']['test_session'], test_body['session']['session_id'])
+
 
 class TestAuth(AuthHelper):
     def test_invalid_signups(self):
@@ -627,9 +633,9 @@ class TestAuth(AuthHelper):
 
         # WHEN submitting valid profile changes
         profile_changes = {
-           'birth_year': 1989,
-           'country': 'NL',
-           'gender': 'o'
+            'birth_year': 1989,
+            'country': 'NL',
+            'gender': 'o'
         }
 
         body = {
@@ -896,7 +902,7 @@ class TestProgram(AuthHelper):
             [],
             {},
             {'code': 1},
-            {'code':['1']},
+            {'code': ['1']},
             {'code': 'hello world'},
             {'code': 'hello world', 'name': 1},
             {'code': 'hello world', 'name': 'program 1'},
@@ -948,7 +954,7 @@ class TestProgram(AuthHelper):
             [],
             {},
             {'code': 1},
-            {'code':['1']},
+            {'code': ['1']},
             {'code': 'hello world'},
             {'code': 'hello world', 'name': 1},
             {'code': 'hello world', 'name': 'program 1'},
@@ -976,7 +982,7 @@ class TestProgram(AuthHelper):
 
         # WHEN making a program public
         # THEN receive an OK response code from the server
-        self.post_data('programs/share', {'id': program_id, 'public': True,})
+        self.post_data('programs/share', {'id': program_id, 'public': True, })
 
         saved_programs = self.get_data('programs/list')['programs']
         for program in saved_programs:
@@ -1129,7 +1135,7 @@ class TestClasses(AuthHelper):
         # GIVEN a user with teacher permissions and a class
         self.given_teacher_is_logged_in()
         self.post_data('class', {'name': 'class1'})
-        Class = self.get_data('classes') [0]
+        Class = self.get_data('classes')[0]
 
         # WHEN attempting to update a class with no cookie
         # THEN receive a forbidden status code from the server
@@ -1156,7 +1162,7 @@ class TestClasses(AuthHelper):
         # GIVEN a user with teacher permissions and a class
         self.given_teacher_is_logged_in()
         self.post_data('class', {'name': 'class1'})
-        Class = self.get_data('classes') [0]
+        Class = self.get_data('classes')[0]
 
         # WHEN attempting to update a class
         # THEN receive an OK status code from the server
@@ -1221,7 +1227,7 @@ class TestClasses(AuthHelper):
         teacher = self.user
         # GIVEN a class
         self.post_data('class', {'name': 'class1'})
-        Class = self.get_data('classes') [0]
+        Class = self.get_data('classes')[0]
 
         # GIVEN a student (user without teacher permissions) that has joined the class
         self.given_fresh_user_is_logged_in()
@@ -1251,7 +1257,7 @@ class TestClasses(AuthHelper):
         teacher = self.user
         # GIVEN a class
         self.post_data('class', {'name': 'class1'})
-        Class = self.get_data('classes') [0]
+        Class = self.get_data('classes')[0]
 
         # GIVEN a student (user without teacher permissions) that has joined the class and has a public program
         self.given_fresh_user_is_logged_in()
@@ -1329,20 +1335,20 @@ class TestCustomizeClasses(AuthHelper):
         class_id = self.get_data('classes')[0].get('id')
 
         valid_bodies = [
-            {'levels': [], 'adventures': {}, 'opening_dates': {}, 'teacher_adventures': [], 'other_settings': []},
-            {'levels': ['1'], 'adventures': {'story': ['1']}, 'opening_dates': {'1': '2022-03-16'}, 'teacher_adventures': [], 'other_settings': []},
+            {'levels': [], 'adventures': {}, 'opening_dates': {}, 'teacher_adventures': [], 'other_settings': [], 'level_thresholds': {}},
+            {'levels': ['1'], 'adventures': {'story': ['1']}, 'opening_dates': {'1': '2022-03-16'}, 'teacher_adventures': [], 'other_settings': [], 'level_thresholds': {}},
             {'levels': ['1', '2', '3'], 'opening_dates': {'1': '', '2': '', '3': ''},
              'adventures': {'story': [], 'parrot': [], 'songs': [], 'turtle': [], 'dishes': [], 'dice': [], 'rock': [],
                             'calculator': [], 'restaurant': [], 'fortune': [], 'haunted': [], 'piggybank': [],
                             'quizmaster': [], 'language': [], 'next': [], 'end': []}, 'teacher_adventures': [],
-             'other_settings': []},
+             'other_settings': [], 'level_thresholds': {}},
             {'levels': ['1', '2', '3'], 'opening_dates': {'1': '', '2': '', '3': ''},
              'adventures': {'story': ['1', '2', '3'], 'parrot': ['1', '2', '3'], 'songs': [], 'turtle': ['1', '2', '3'],
                             'dishes': ['3'], 'dice': ['3'], 'rock': ['1', '2', '3'], 'calculator': [],
                             'restaurant': ['1', '2', '3'], 'fortune': ['1', '3'], 'haunted': ['1', '2', '3'],
                             'piggybank': [], 'quizmaster': [], 'language': [], 'next': ['1', '2', '3'],
                             'end': ['1', '2', '3']}, 'teacher_adventures': [],
-             'other_settings': ['developers_mode', 'hide_cheatsheet']}
+             'other_settings': ['developers_mode', 'hide_cheatsheet'], 'level_thresholds': {}},
         ]
 
         for valid_body in valid_bodies:
@@ -1362,7 +1368,7 @@ class TestCustomizeClasses(AuthHelper):
 
         # WHEN creating class customizations
         # THEN receive an OK response code with the server
-        body = {'levels': [], 'adventures': {}, 'opening_dates': {}, 'teacher_adventures': [], 'other_settings': []}
+        body = {'levels': [], 'adventures': {}, 'opening_dates': {}, 'teacher_adventures': [], 'other_settings': [], 'level_thresholds': {}}
         self.post_data('for-teachers/customize-class/' + class_id, body, expect_http_code=200)
 
         # WHEN deleting class customizations
@@ -1563,7 +1569,8 @@ class TestMultipleAccounts(AuthHelper):
 
 # *** CLEANUP OF USERS CREATED DURING THE TESTS ***
 
-def tearDownModule ():
+
+def tearDownModule():
     auth_helper = AuthHelper()
     auth_helper.setUp()
     for username in USERS.copy():
