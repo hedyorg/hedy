@@ -107,10 +107,10 @@
         odpowiedź = {ask} 'Ile to 10 plus 10?'
         {if} odpowiedź {is} 20 {print} 'Tak!' {else} {print} 'Ups'
 -   name: "{ask} oraz {if} z żółwiem"
-    explanation: "Zapytaj użytkownika jak dużo kątów potrzebuje."
+    explanation: "Zapytaj użytkownika jak dużo boków potrzebuje."
     demo_code: |-
-        kąty = {ask} 'Ile kątów?'
-        kąt = 360 / kąty
+        boki= {ask} 'Ile boków?'
+        kąt = 360 / boki
         {forward} 50
 7:
 -   name: "{print}"
@@ -303,7 +303,7 @@
         pierwszyowoc = owoc[1]
         {print} pierwszyowoc
 -   name: "Weź losowy element z listy"
-    explanation: "To get a random item from a list we use [random] so fruit[random] means, get a random fruit from the list!"
+    explanation: "Aby wziąć losowy element z listy używamy [random] a więc owoc[random] znaczy, weź losowy owoc z listy!"
     demo_code: |-
         owoc = ['banan', 'jabłko', 'wiśnia']
         losowy_owoc = owoc[random]
@@ -343,7 +343,7 @@
     demo_code: |-
         {for} i {in} {range} (1,10):
             {print}('Witaj, razy ', i)
--   name: '{print} with var'
+-   name: '{print} z argumentami'
     explanation: Korzystając z `{print}` użyj nawiasów i przycinków jeśli chcesz wypisać więcej elementów.
     demo_code: "imię = 'Hedy'\n{print}('moje imię to  ', imię)"
 -   name: zapytaj o coś wykorzystując {input}
