@@ -3,7 +3,7 @@ adventures:
         levels:
             1:
                 example_code_2: "```\n{ask} Vad heter du?\n{echo} Hej\n```\n"
-                start_code: '{print}hej världen!'
+                start_code: '{print} hej världen!'
                 story_text: "## Välkommen till Hedy!\nPå nivå 1 kan du använda kommandona `{print}`, `{ask}` och `{echo}`.\nSkriv din kod i programmeringsrutan eller tryck på den gröna knappen i exempelrutan så skrivs koden åt dig!\nProva koden själv genom att trycka på den gröna knappen märkt 'Kör koden' under programmeringsrutan.\n\nDu kan skriva text på skärmen genom att använda `{print}` kommandot.\n"
                 example_code: "```\n{print} Hej!\n{print} Välkommen till Hedy!\n```\n"
                 story_text_2: "Du kan också be om en inmatning med `{ask}` och skriva ut det igen med ett `{echo}`-kommando.\n"
@@ -16,8 +16,27 @@ adventures:
                 story_text_3: "Ett annat nytt kommando på den här nivån är `{sleep}`, vilket pausar programmet i en sekund. Om du skriver en siffra bakom {sleep}-kommandot så pausar programmet i så många sekunder.\n"
                 example_code_3: "```\n{print} Min favoritfärg är...\n{sleep} 2\n{print} grön!\n```\n"
                 start_code: '{print} hej världen!'
+            3:
+                story_text: "## Gör en lista!\nPå nivå 3 kan du göra en lista. Du kan låta datorn välja någonting slumpvalt ur den listan. Det gör du med `{at} {random}`.\n"
+                example_code: "```\ndjur {is} hund, katt, känguru\n{print} djur {at} {random}\n```\n"
+                story_text_2: Du kan också lägga till saker till listan med `{add}` och ta bort dem med `{remove}`.
+                example_code_2: "```\ndjur {is} hund, katt, känguru\n{add} pingvin {to_list} djur\n{remove} katt {from} djur\n{print} djur {at} {random}\n```\n"
+                start_code: '{print} hej världen!'
+            4:
+                story_text: "## 'Citattecken'\nPå nivå 4 ändras hur du änvänder `{ask}` och `{print}`.\n\nDu måste nu skriva text som du vill skriva ut på skärmen mellan citattecken.\n\nDet är användbart därför att du nu kan skriva ut alla ord, även de ord som du använt som variabler för att lagra någonting med `{is}`.\n\nDe flesta programmeringsspråk använder sig av citattecken när någonting ska skrivas ut, så vi tar också ett steg närmare riktig programmering!\n"
+                example_code: "```\n{print} 'Du måste använda citattecken från och med nu!'\nsvar {is} {ask} 'Vad måste vi använda från och med nu?'\n{print} 'Vi måste använda ' svar\n```\n"
+                story_text_2: "## Äventyren blir svårare och svårare\nÄventyren blir svårare och svårare i de följande flikarna.\nDärför är det bäst att börja till vänster och jobba sig till höger för att utmaningen ska bli större och större.\n"
+                start_code: "{print} 'Hej världen'"
+            5:
+                start_code: "namn {is} {ask} Vad heter du?'\n{if} namn {is} Hedy {print} 'cool!' {else} {print} 'meh'"
+                story_text: "## If... else....\nPå nivå 5 kommer någonting nytt, `{if}`-kommandot! Med `{if}` kan du välja mellan två olika möjligheter.\nDen här koden skriver trevligt om du svarar att du heter Hedy och buu! om du svarar någonting annat.\n`{ask}` och `{print}` fungerar precis som de gjorde på nivå 4.\n"
+                example_code: "```\nnamn {is} {ask} 'Vad heter du?'\n{if} namn {is} Hedy {print} 'trevligt' {else} {print} 'buu!'\n```\n"
+                story_text_3: "## Listor\nNär vi vill kontrollera om någonting finns i en lista så kan vi använda `{in}`-kommandot.\nDen här koden skriver snyggt! om du väljer grön eller gul och meh om du väljer någonting annat.\n"
+                example_code_3: "```\nsnygga_färger {is} grön, gul\nfavorit_färg {is} {ask} 'Vad är din favoritfärg?'\n{if} favorit_färg {in} snygga_färger {print} 'snyggt!'\n{else} {print} 'meh'\n```\n"
+                story_text_2: "Ibland blir kod där du använder `{if}` riktigt lång och passar inte in på raden så bra.<br>Du kan också dela upp koden på två rader där den andra raden börjar med `{else}` så här:\n"
+                example_code_2: "```\nnamn {is} {ask} 'Vad heter du?'\n{if} namn {is} Hedy {print} 'trevligt'\n{else} {print} 'buu!'\n```\n"
             6:
-                story_text: "## 1 + 1\n På den här nivån lär du dig någonting nytt: du kan nu räkna.\n\n Plus är enkelt, du skriver det som i matteboken: `5 + 5` till exempel. Minus fungerar också bra, du skriver `5 - 5`.\n\n Mulitplikation (gånger) är lite annorlunda för det finns inget gångertecken på ditt tangentbord. Leta så får du se! \nDärför använder vi stjärnan som finns om du håller ned skift och trycker på tangenten till höger om 'ä': `5 * 5`. Läs det som \"5 gånger 5\", det hjälper dig minnas det bäst.\n"
+                story_text: "## 1 + 1\n På den här nivån lär du dig någonting nytt: du kan nu räkna.\n\n Plus är enkelt, du skriver det som i matteboken: `5 + 5` till exempel. Minus fungerar också bra, du skriver `5 - 5`.\n\n Multiplikation (gånger) är lite annorlunda för det finns inget gångertecken på ditt tangentbord. Leta så får du se! \nDärför använder vi stjärnan som finns om du håller ned skift och trycker på tangenten till höger om 'ä': `5 * 5`. Läs det som \"5 gånger 5\", det hjälper dig minnas det bäst.\n"
                 example_code_2: "```\nnamn = Hedy\nsvar = 20 + 4\n```\n"
                 start_code: "{print} '5 gånger 5 är ' 5 * 5"
                 example_code: "```\n{print} '5 plus 5 är ' 5 + 5\n{print} '5 minus 5 är ' 5 - 5\n{print} '5 gånger 5 är ' 5 * 5\n```\n"
@@ -30,10 +49,18 @@ adventures:
                 start_code: "{repeat} 5 {times}\n    {print} 'Hej allihopa'\n    {print} 'Det här kommer att skrivas 5 gånger'"
                 story_text: "## Indentering\n`{ask}` och `{print}` fungerar som vanligt. Men `{if}`, `{else}` och `{repeat}` har ändrats!\nDu kan nu köra delar av koden tillsammans i ett block, men du kommer att behöva *indentera* koden.\nDet betyder att du skriver fyra mellanslag i början av raden. Du behöver även indentera om du skapar ett block av kod som bara innehåller en rad.\n"
                 example_code: "Så här fungerar `{repeat}`-kommandot nu:\n```\n{repeat} 5 {times}\n    {print} 'Hej allihop'\n    {print} 'Allt det här kommer att repeteras 5 gånger'\n```\nSå här fungerar `{if}` och `{else}` nu:\n\n```\nnamn {is} {ask} 'Vad heter du?'\n{if} namn {is} Hedy\n    {print} 'Välkommen Hedy'\n    {print} 'Du kan spela på din dator!'\n{else}\n    {print} 'INKRÄKTARE!'\n    {print} 'Du får inte använda den här datorn!'\n```\n"
+            9:
+                start_code: "{repeat} 3 {times}\n    mat = {ask} 'Vad vill du äta?'\n    {if} mat {is} pizza\n        {print} 'gott!'\n    {else}\n        {print} 'pizza är godare'"
+                story_text: "## Allt på en gång!\nPå den här nivån kan du inte bara använda multipla (flera) rader med `{if}` och `{repeat}`, utan du kan också sätta ihop dem!\nI exemplet kan du se ett `{if}`-kommando med ett `{repeat}`-kommando i. Det är också tillåtet att göra tvärtom. Ett `{if}` är också tillåtet i ett `{if}` och ett `{repeat}` i ett `{repeat}`.\nTesta lite!\n"
+                example_code: "```\n{repeat} 3 {times}\n    mat = {ask} 'Vad vill du äta?'\n    {if} mat {is} pizza\n        {print} 'härligt!'\n    {else}\n        {print} 'pizza är godare'\n```\n"
+            10:
+                start_code: "alla_djur {is} hund, katt, blobfish\n{for} djur {in} alla_djur\n  {print} 'Jag älskar ' djur"
+                story_text: "## För varje sak i min lista...\nPå den här nivån lär vi oss kommandot `{for}`. Med `{for}` kan du göra en lista och använda alla dess element.\n`{for}` skapar ett block, som `{repeat}` och `{if}` så alla rader i blocket måste indenteras och börja med mellanslag."
+                example_code: "```\nalla_djur {is} hund, katt, blobfish\n{for} djur {in} alla_djur\n  {print} 'Jag älskar ' djur\n```\n"
             11:
-                example_code: "```\n{for} counter {in} {range} 1 {to} 5\n    {print} counter\n```\n"
+                example_code: "```\n{for} räknare {in} {range} 1 {to} 5\n    {print} räknare\n```\n"
                 start_code: "{for} räknare {in} {range} 1 {to} 5\n    {print} räknare"
-                story_text: "## Loops!\n`{print}` works just the same but we add a new form of the `{for}`. You can now write `{for} counter {in} {range} 1 {to} 5` and use `counter` in your program.\nTry it out to see what happens! Remember to use indentations after the `{for}` and `{if}` statements (That means starting a sentence with four spaces)"
+                story_text: "## Loopar!\n`{print}` fungerar precis som förut men vi lägger till en ny variant av `{for}`. Du kan nu skriva `{for} räknare {in} {range} 1 {to} 5` och använda `räknare` i ditt program.\nTesta och se vad som händer! Kom ihåg att använda indentering efter `{for}`- och `{if}`-kommandona. (Det betyder att raderna börjar med fyra mellanslag.)"
             12:
                 start_code: "{print} 'decimal numbers now need to use a dot'\n{print} 2.5 + 2.5"
                 story_text: "## Numbers and texts\n**Decimal numbers**\nSo far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the `.` for decimal numbers."
@@ -68,33 +95,6 @@ adventures:
                 start_code: "fruit = ['apple', 'banana', 'cherry']\n{print} fruit"
                 story_text: "## More and more like real code!\nWe are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels.\nYou can use the square brackets as well to point out a place in the lists."
                 example_code: "```\nfriends = ['Ahmed', 'Ben', 'Cayden']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'the lucky number of ' friends[i]\n    {print} 'is ' lucky_numbers[i]\n```\n"
-            4:
-                story_text: "## 'Citattecken'\nPå nivå 4 ändras hur du änvänder `{ask}` och `{print}`.\n\nDu måste nu skriva text som du vill skriva ut på skärmen mellan citattecken.\n\nDet är användbart därför att du nu kan skriva ut alla ord, även de ord som du använt som variabler för att lagra någonting med `{is}`.\n\nDe flesta programmeringsspråk använder sig av citattecken när någonting ska skrivas ut, så vi tar också ett steg närmare riktig programmering!\n"
-                example_code: "```\n{print} 'Du måste använda citattecken från och med nu!'\nsvar {is} {ask} 'Vad måste vi använda från och med nu?'\n{print} 'Vi måste använda ' svar\n```\n"
-                story_text_2: "## Äventyren blir svårare och svårare\nÄventyren blir svårare och svårare i de följande flikarna.\nDärför är det bäst att börja till vänster och jobba sig till höger för att utmaningen ska bli större och större.\n"
-                start_code: "{print} 'Hej världen'"
-            5:
-                start_code: "namn {is} {ask} Vad heter du?'\n{if} namn {is} Hedy {print} 'cool!' {else} {print} 'meh'"
-                story_text: "## If... else....\nPå nivå 5 kommer någonting nytt, `{if}`-kommandot! Med `{if}` kan du välja mellan två olika möjligheter.\nDen här koden skriver trevligt om du svarar att du heter Hedy och buu! om du svarar någonting annat.\n`{ask}` och `{print}` fungerar precis som de gjorde på nivå 4.\n"
-                example_code: "```\nnamn {is} {ask} 'Vad heter du?'\n{if} namn {is} Hedy {print} 'trevligt' {else} {print} 'buu!'\n```\n"
-                story_text_3: "## Listor\nNär vi vill kontrollera om någonting finns i en lista så kan vi använda `{in}`-kommandot.\nDen här koden skriver snyggt! om du väljer grön eller gul och meh om du väljer någonting annat.\n"
-                example_code_3: "```\nsnygga_färger {is} grön, gul\nfavorit_färg {is} {ask} 'Vad är din favoritfärg?'\n{if} favorit_färg {in} snygga_färger {print} 'snyggt!'\n{else} {print} 'meh'\n```\n"
-                story_text_2: "Ibland blir kod där du använder `{if}` riktigt lång och passar inte in på raden så bra.<br>Du kan också dela upp koden på två rader där den andra raden börjar med `{else}` så här:\n"
-                example_code_2: "```\nnamn {is} {ask} 'Vad heter du?'\n{if} namn {is} Hedy {print} 'trevligt'\n{else} {print} 'buu!'\n```\n"
-            3:
-                story_text: "## Gör en lista!\nPå nivå 3 kan du göra en lista. Du kan låta datorn välja någonting slumpvalt ur den listan. Det gör du med `{at} {random}`.\n"
-                example_code: "```\ndjur {is} hund, katt, känguru\n{print} djur {at} {random}\n```\n"
-                story_text_2: Du kan också lägga till saker till listan med `{add}` och ta bort dem med `{remove}`.
-                example_code_2: "```\ndjur {is} hund, katt, känguru\n{add} pingvin {to_list} djur\n{remove} katt {from} djur\n{print} djur {at} {random}\n```\n"
-                start_code: '{print} hej världen!'
-            9:
-                start_code: "{repeat} 3 {times}\n    mat = {ask} 'Vad vill du äta?'\n    {if} mat {is} pizza\n        {print} 'gott!'\n    {else}\n        {print} 'pizza är godare'"
-                story_text: "## Allt på en gång!\nPå den här nivån kan du inte bara använda multipla (flera) rader med `{if}` och `{repeat}`, utan du kan också sätta ihop dem!\nI exemplet kan du se ett `{if}`-kommando med ett `{repeat}`-kommando i. Det är också tillåtet att göra tvärtom. Ett `{if}` är också tillåtet i ett `{if}` och ett `{repeat}` i ett `{repeat}`.\nTesta lite!\n"
-                example_code: "```\n{repeat} 3 {times}\n    mat = {ask} 'Vad vill du äta?'\n    {if} mat {is} pizza\n        {print} 'härligt!'\n    {else}\n        {print} 'pizza är godare'\n```\n"
-            10:
-                start_code: "alla_djur {is} hund, katt, blobfish\n{for} djur {in} alla_djur\n  {print} 'Jag älskar ' djur"
-                story_text: "## För varje sak i min lista...\nPå den här nivån lär vi oss kommandot `{for}`. Med `{for}` kan du göra en lista och använda alla dess element.\n`{for}` skapar ett block, som `{repeat}` och `{if}` så alla rader i blocket måste indenteras och börja med mellanslag."
-                example_code: "```\nalla_djur {is} hund, katt, blobfish\n{for} djur {in} alla_djur\n  {print} 'Jag älskar ' djur\n```\n"
             17:
                 example_code: "```\nprices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
                 start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'"
