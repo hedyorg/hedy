@@ -237,13 +237,13 @@ class AuthModule(WebsiteModule):
 
         if not isinstance(body, dict):
             return gettext('ajax_error'), 400
-        if not isinstance(body.get('old_password'), str) or not isinstance(body.get('password'), str):
+        if not isinstance(body.get('old_password'), str) or not isinstance(body.get('new-password'), str):
             return gettext('password_invalid'), 400
         if not isinstance(body.get( 'password_repeat'), str):
             return gettext('repeat_match_password'), 400
-        if len(body['password']) < 6:
+        if len(body['new-password']) < 6:
             return gettext('password_six'), 400
-        if body['password'] != body['password_repeat']:
+        if body['new-password'] != body['password_repeat']:
             return gettext('repeat_match_password'), 400
 
         # The user object we got from 'requires_login' doesn't have the password, so look that up in the database
@@ -252,7 +252,7 @@ class AuthModule(WebsiteModule):
         if not check_password(body['old_password'], user['password']):
             return gettext('password_invalid'), 403
 
-        hashed = password_hash(body['password'], make_salt())
+        hashed = password_hash(body['new-password'], make_salt())
 
         self.db.update_user(user['username'], {'password': hashed})
         # We are not updating the user in the Flask session, because we should not rely on the password in anyway.
