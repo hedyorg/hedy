@@ -32,8 +32,8 @@
     demo_code: "זווית {is} 90\n{turn} זווית\n{forward} 100"
 6:
 -   name: '{print}'
-    explanation: Print exactly using quotation marks.
-    demo_code: "{print} '5 times 5 is ' 5 * 5"
+    explanation: הדפיסו את הטקסט בדיוק עם מירכאות.
+    demo_code: "{print} '5 פעמים 5 זה ' 5 * 5"
 -   demo_code: "answer = {ask} 'What is 10 plus 10?'\n{if} answer {is} 20 {print} 'Yes!' {else} {print} 'Oops'"
     name: '{ask}'
     explanation: Ask for a calculation and check whether it is correct.
@@ -82,36 +82,36 @@
     explanation: בחרו באקראי מילה מתוך קבוצה באמצעות `{at}` ו `{random}`.
     demo_code: "חיות {is} כלב, חתול, קנגרו\n{print} חיות {at} {random}"
 -   name: '{add}'
-    explanation: '{add} פריט {to_list} רשימה.'
+    explanation: '`{add}` פריט `{to_list}` רשימה.'
     demo_code: "חיות {is} פרה, חתול\n{add} כלב {to_list} חיות"
 -   name: '{remove}'
     explanation: '`{remove}` פריט `{from}` רשימה.'
     demo_code: "חיות {is} חתול, כלב, פרה\n{remove} כלב {from} חיות"
 4:
 -   name: '{print}'
-    explanation: Print exactly using quotation marks.
-    demo_code: "{print} 'Hello welcome to Hedy.'"
+    explanation: הדפיסו את הטקסט המדויק על ידי שימוש במירכאות.
+    demo_code: "{print} 'ברוכים.ות הבאים.ות להֶדִי.'"
 -   name: '{is}'
-    explanation: Give a name to some text and `{print}` without quotation marks.
-    demo_code: "name {is} Hedy\n{print} 'my name is ' name"
+    explanation: תנו שם לטקסט ו`{print}` בלי מירכאות.
+    demo_code: "שמי {is} הֶדִי\n{print} 'שמי הוא ' שמי"
 -   name: '{ask}'
-    explanation: Ask something with `{ask}`.
-    demo_code: "color {is} {ask} 'What is your favorite color?'\n{print} color ' is your favorite!'"
+    explanation: שאלו משהו עם `{ask}`.
+    demo_code: "צבע {is} {ask} 'מה הצבע האהוב עליך?'\n{print} צבע ' הוא הצבע האהוב עליך!'"
 5:
 -   name: '{print}'
-    explanation: Print exactly using quotation marks.
-    demo_code: "{print} 'Hello welcome to Hedy.'"
+    explanation: הדפיסו את הטקסט בדיוק עם מירכאות.
+    demo_code: "{print} 'ברוכים.ות הבאים.ות להֶדִי.'"
 -   name: '{ask}'
-    explanation: Ask something with `{ask}`.
-    demo_code: "color {is} {ask} 'What is your favorite color?'\n{print} color ' is your favorite!'"
+    explanation: שאלו משהו עם `{ask}`.
+    demo_code: "צבע {is} {ask} 'מה הצבע האהוב עליך?'\n{print} צבע ' הוא הצבע האהוב עליך!'"
 -   name: '{if}'
-    explanation: Make a choice with `{if}`.
-    demo_code: "color {is} {ask} 'What is your favorite color?'\n{if} color {is} green {print} 'pretty!' {else} {print} 'meh'"
--   name: '{if} with turtle'
-    explanation: Make a choice with `{if}`.
-    demo_code: "answer {is} {ask} 'How far should I walk?'\n{if} answer {is} far {forward} 100 {else} {forward} 5"
+    explanation: בצעו בחירה באמצעות `{if}`.
+    demo_code: "צבע {is} {ask} 'מה הצבע האהוב עליך?'\n{if} צבע {is} ירוק {print} 'יפה!' {else} {print} 'טוב, נו.'"
+-   name: '{if} עם צב'
+    explanation: בצעו בחירה באמצעות `{if}`.
+    demo_code: "תשובה {is} {ask} 'כמה רחוק ללכת?'\n{if} תשובה {is} רחוק {forward} 100 {else} {forward} 5"
 -   name: '{in}'
-    explanation: Check elements with `{in}`.
+    explanation: בדוק פריטים באמצעות `{in}`.
     demo_code: "pretty_colors {is} green, yellow\ncolor {is} {ask} 'What {is} your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
 7:
 -   name: '{print}'
