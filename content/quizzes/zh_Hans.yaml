@@ -1,91 +1,91 @@
 levels:
     1:
         1:
-            question_text: "What's this programming language called?"
+            question_text: "这门编程语言叫什么？"
             mp_choice_options:
             -   option: "Hedy"
-                feedback: "Good job!"
+                feedback: "做得好！"
             -   option: "Heddy"
-                feedback: "Not this one!"
+                feedback: "不是这个！"
             -   option: "Haydie"
-                feedback: "Not this one!"
+                feedback: "不是这个！"
             -   option: "Heidi"
-                feedback: "Not this one!"
+                feedback: "不是这个！"
             correct_answer: "A"
-            hint: "It's named after Hedy Lamarr."
+            hint: "它得名于Hedy Lamarr。"
             question_score: '10'
         2:
-            question_text: "Which command makes text appear?"
+            question_text: "哪个命令可以用来打印文字？"
             mp_choice_options:
             -   option: |
                     ```
                     {echo}
                     ```
-                feedback: "`{echo}` repeats a given answer."
+                feedback: "`{echo}` 会复述你给出回答。"
             -   option: |
                     ```
                     {print}
-                     ```
-                feedback: "Correct!"
+                    ```
+                feedback: "正确！"
             -   option: |
                     ```
-                    hello
+                    你好
                     ```
-                feedback: "Hello isn't a command."
+                feedback: "“你好”不是一个命令。"
             -   option: |
                     ```
                     {ask}
                     ```
-                feedback: "With `{ask}`, you can ask a question."
+                feedback: "你可以使用 `{ask}` 来提问。"
             correct_answer: "B"
-            hint: "_?_ Hello world!"
+            hint: "_?_ 你好世界！"
             question_score: '10'
         3:
-            question_text: "How do you ask what someone's favorite color is?"
+            question_text: "如何询问某个人最喜欢的颜色是什么？"
             mp_choice_options:
             -   option: |
                     ```
-                    {print} What is your favorite color?
+                    {print} 你最喜欢的颜色是什么？
                     ```
-                feedback: "`{print}` prints text, but it doesn't ask questions."
+                feedback: "`{print}`能打印出文字，但是不能用来提问。"
             -   option: |
                     ```
-                    {ask} {print} What is your favorite color?
+                    {ask} {print} 你最喜欢的颜色是什么？
                     ```
-                feedback: "You only need one command, not two."
+                feedback: "你只需要一个命令，不需要两个。"
             -   option: |
                     ```
-                    {ask} What is your favorite color?
+                    {ask} 你最喜欢的颜色是什么？
                     ```
                 feedback: "Great!"
             -   option: |
                     ```
-                    {echo} What is your favorite color?
+                    {echo} 你最喜欢的颜色是什么？
                     ```
-                feedback: "`{echo}` repeats your answer back to you."
+                feedback: "`{echo}` 会对你复述你的回答。"
             correct_answer: "C"
-            hint: "You can {ask} something with the {ask} command"
+            hint: "你可以用`{ask}`命令提问"
             question_score: '10'
         4:
-            question_text: "What is wrong with this code?"
+            question_text: "这段代码哪里错了？"
             code: |-
                 Hi Im Hedy!
                 {ask} Who are you?
                 {echo} Hi...
             mp_choice_options:
-            -   option: "`{print}` in line 1 is missing."
-                feedback: "Correct!"
-            -   option: "Im in line 1 is spelled wrong."
-                feedback: "Im is spelled wrong on purpose; Hedy doesn't understand the apostrophes yet."
-            -   option: "`{echo}` isn't a command."
-                feedback: "`{echo}` is a command, there's another mistake."
-            -   option: "Nothing! This is a perfect code!"
-                feedback: "Wrong, look carefully!"
+            -   option: "第一行缺少了`{print}`。"
+                feedback: "正确！"
+            -   option: "第一行的“Im”的写法在英语中是错误的。"
+                feedback: "我们故意把“I'm”写错成“Im”，因为海迪现在还无法理解撇号。"
+            -   option: "`{echo}`不是一个命令。"
+                feedback: "`{echo}`是一个命令。错的是别的地方。"
+            -   option: "没有错！这代码很完美！"
+                feedback: "错了，仔细看！"
             correct_answer: "A"
-            hint: "Line 1 doesn't seem right"
+            hint: "第一行看上去不对"
             question_score: '10'
         5:
-            question_text: "Which command is missing in line 2?"
+            question_text: "第二行缺少了哪个命令？"
             code: |-
                 {ask} 你最喜欢的宠物是什么？
                 _?_ 所以你最喜欢的宠物是...
@@ -94,46 +94,46 @@ levels:
                     ```
                     {print}
                     ```
-                feedback: "No, you would like the answer to be repeated back to you."
+                feedback: "不，你想要的是复述你的回答。"
             -   option: |
                     ```
                     Hedy
                     ```
-                feedback: "Hedy isn't a command."
+                feedback: "“海迪”不是一个命令。"
             -   option: |
                     ```
                     {ask}
                     ```
-                feedback: "With `{ask}` you can ask a question."
+                feedback: "你可以用`{ask}`提出一个问题。"
             -   option: |
                     ```
                     {echo}
                     ```
                 feedback: "Right on!"
             correct_answer: "D"
-            hint: "You want to see the answer at the end of line 2..."
+            hint: "你想要在第二行的最后看到回答……"
             question_score: '10'
         6:
-            question_text: "What's wrong with this code?"
+            question_text: "这段代码哪里错了？"
             code: |-
-                {print} Hi im Hedy!
-                {print} Which football team do you support?
-                {echo} You support...
-                {print} Cool! Me too!
+                {print} 你好，我是海迪！
+                {print} 你支持哪支足球队？
+                {echo} 你支持……
+                {print} 酷！我也一样！
             mp_choice_options:
             -   option: "In line 1 `{print}` should be replaced with `{ask}`."
-                feedback: "`{print}` in line 1 is correct."
+                feedback: "第一行的`{print}`是正确的。"
             -   option: "In line 2, `{print}` should be replaced with `{ask}`."
-                feedback: "Great! You paid attention!"
-            -   option: "Line 3 has to begin with `{print}` instead of `{echo}`."
-                feedback: "`{echo}` is correct."
-            -   option: "In line 4, `{print}` is spelled wrong."
+                feedback: "很好！你注意到了！"
+            -   option: "第三行必须以`{print}`，而不是`{echo}`开头。"
+                feedback: "`{echo}`是正确的。"
+            -   option: "第四行的`{print}`写错了。"
                 feedback: "不，其他地方有错误"
             correct_answer: "B"
-            hint: "Check the `{print}` commands."
+            hint: "检查`{print}`命令。"
             question_score: '10'
         7:
-            question_text: "What's wrong with this code?"
+            question_text: "这段代码哪里错了？"
             code: |-
                 {print} 欢迎来到海迪餐厅！
                 {ask} 你想吃什么？
@@ -141,9 +141,9 @@ levels:
                 {print} 马上就来！好好享受！
             mp_choice_options:
             -   option: "In line 1 `{print}` needs to be replaced with `{ask}`"
-                feedback: "Are you sure something is wrong?"
+                feedback: "你确定有哪里错误吗？"
             -   option: "In line 1 `{print}` needs to be replaced with `{echo}`"
-                feedback: "Are you sure something's wrong?"
+                feedback: "你确定有哪里错误吗？"
             -   option: "In line 3 `{echo}` needs to be replaced with `{print}`"
                 feedback: "Are you sure something is wrong?"
             -   option: "Nothing! This is a perfect code!"
@@ -156,7 +156,7 @@ levels:
             mp_choice_options:
             -   option: "You can use it to `{ask}` a question."
                 feedback: "That's what `{ask}` is for!"
-            -   option: "You can use it to `{print}` text."
+            -   option: "你可以用它打印文本。"
                 feedback: "That's what `{print}` is for!"
             -   option: "You can use it to repeat an answer."
                 feedback: "Good job!"
@@ -890,7 +890,7 @@ levels:
                     ```
                 feedback: "这就对了!"
             correct_answer: "D"
-            hint: "哪一个与 {if} 命令一起使用？"
+            hint: "哪一个与`{if}`命令一起使用？"
             question_score: '10'
         2:
             question_text: "What appears in your output screen when you type in the name Hedy?"
@@ -1416,7 +1416,7 @@ levels:
             hint: "Mind the `{repeat}` command."
             question_score: '10'
         8:
-            question_text: "Welke Hedy code hoort bij dit resultaat"
+            question_text: "哪个海迪代码会输出这个？"
             code: "Here comes the sun\nDo do do do\nHere comes the sun\nAnd I say\nIts alright"
             mp_choice_options:
             -   option: |
@@ -1470,7 +1470,7 @@ levels:
                     {print} 'Help !'
                     {repeat} 3 {times} {print} 'Please help me !'
                     ```
-                feedback: "Je herhaalt de verkeerde regel"
+                feedback: "你重复的行不正确。"
             -   option: |
                     ```
                     {print} 'Batman was flying through Gotham.'
@@ -1478,7 +1478,7 @@ levels:
                     {repeat} 3 {times} 'Help !'
                     {print} 'Please help me !'
                     ```
-                feedback: "Het commando `{print}` mist op regel 3"
+                feedback: "第三行缺少了`{print}`命令。"
             -   option: |
                     ```
                     {print} Batman was flying through Gotham.
@@ -1545,13 +1545,13 @@ levels:
                     {print} 'Hello'
                     {print} 'Im Hedy!'
             mp_choice_options:
-            -   option: "Hello \n Im Hedy!"
+            -   option: "你好\n我是海迪！\n"
                 feedback: "Everything is printed twice."
-            -   option: "Hello \n Hello \n Im Hedy"
+            -   option: "你好\n你好\n我是海迪\n"
                 feedback: "The second line is repeated twice as well."
-            -   option: "Hello \n Im Hedy! \n Hello \n Im Hedy!"
+            -   option: "你好\n我是海迪！\n你好\n我是海迪！\n"
                 feedback: "Super!"
-            -   option: "Hello \n Hello \n Im Hedy! \n Im Hedy!"
+            -   option: "你好\n你好\n我是海迪！\n我是海迪！\n"
                 feedback: "Everything is printed twice"
             correct_answer: "C"
             hint: "Both lines are repeated twice."
@@ -1580,13 +1580,13 @@ levels:
                     {print} 'Baby shark tututudutudu'
                 {print} 'Baby shark'
             mp_choice_options:
-            -   option: "Baby shark tututudutudu \n Baby shark"
+            -   option: "Baby shark tututudutudu\nBaby shark\n"
                 feedback: "Mind the `{repeat}` command!"
-            -   option: "Baby shark tututudutudu \n Baby shark \n Baby shark tututudutudu \n Baby shark \n Baby shark tututudutudu \n Baby shark"
+            -   option: "Baby shark tututudutudu\nBaby shark\nBaby shark tututudutudu\nBaby shark\nBaby shark tututudutudu\nBaby shark\n"
                 feedback: "The last line has no indentation, so it's not repeated."
-            -   option: "Baby shark tututudutudu \n Baby shark tututudutudu \n Baby shark tututudutudu \n Baby shark"
+            -   option: "Baby shark tututudutudu\nBaby shark tututudutudu\nBaby shark tututudutudu\nBaby shark\n"
                 feedback: "Right!"
-            -   option: "Baby shark tututudutudu \n Baby shark \n Baby shark \n Baby shark"
+            -   option: "Baby shark tututudutudu\nBaby shark\nBaby shark\nBaby shark\n"
                 feedback: "What is being repeated and what isn't."
             correct_answer: "C"
             hint: "What is being repeated and what is not?."
@@ -1667,27 +1667,27 @@ levels:
             question_score: '10'
             output: "Welcome to restaurant Hedy\nPizza\nHamburger"
         7:
-            question_text: "What is wrong with this code?"
+            question_text: "这段代码哪里错了？"
             code: |-
-                eten = {ask} 'What would you like to eat?'
-                {if} food {is} fries
-                sauce = {ask} 'What sauce would you like?'
-                    {print} 'One fries with ' sauce
-                {if} food {is} pizza
-                    topping = {ask} 'What topping would you like?'
-                    {print} 'One pizza with ' topping
-                {print} 'That you for your order'
+                食物 = {ask} '你想吃什么？'
+                {if} 食物 {is} 薯条
+                酱汁 = {ask} '你想要什么酱？'
+                    {print} '一份薯条配' 酱汁
+                {if} 食物 {is} 披萨
+                    配料 = {ask} '你想要什么配料？'
+                    {print} '一份披萨配' 配料
+                {print} '这些是你点的'
             mp_choice_options:
-            -   option: "Nothing this code is correct!"
-                feedback: "Something is wrong!."
-            -   option: "You're not allowed to use an `{if}` command after an `{ask}` command."
-                feedback: "You are!."
-            -   option: "You don't have to use indentation twice. Only in the first `{if}` command."
-                feedback: "You always have to use indentation."
-            -   option: "The indentation is wrong in the first `{if}` command."
-                feedback: "That's right."
+            -   option: "没有错。这段代码是正确的！"
+                feedback: "有地方错了！"
+            -   option: "`{ask}`命令后面不能用`{if}`命令。"
+                feedback: "可以用！"
+            -   option: "不需要缩进两次。只有第一个`{if}`命令需要缩进。"
+                feedback: "每一行都要缩进。"
+            -   option: "第一个`{if}`命令的缩进错了。"
+                feedback: "是的。"
             correct_answer: "D"
-            hint: "Take a careful look at the indentation."
+            hint: "注意观察缩进。"
             question_score: '10'
         8:
             question_text: "In which of the codes is the indentation done right?"
