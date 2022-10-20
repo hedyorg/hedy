@@ -350,7 +350,7 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
   Sk.execLimit = 1;
   $('#runit').hide();
   $('#stopit').show();
-  $('#saveDST').hide();
+  $('#saveFiles').hide();
   clearOutput();
 
   try {
@@ -439,10 +439,10 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
   }
 }
 
-export function saveDST() {
+export function saveMachineFiles() {
   $.ajax({
     type: 'POST',
-    url: '/generate_dst',
+    url: '/generate_machine_files',
     data: JSON.stringify({
       level: window.State.level,
       code: get_trimmed_code(),
@@ -453,7 +453,7 @@ export function saveDST() {
     }).done(function(response: any) {
       if (response.filename) {
         // Download the file
-        window.location.replace('/download_dst/' + response.filename);
+        window.location.replace('/download_machine_files/' + response.filename);
       }
   });
 }
@@ -477,7 +477,7 @@ export function saveDST() {
 export function pushAchievement(achievement: string) {
   $.ajax({
     type: 'POST',
-    url: '/achievements',
+    url: '/achievements/push-achievement',
     data: JSON.stringify({
       achievement: achievement
     }),
@@ -1066,18 +1066,17 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
     $('#stopit').hide();
     $('#runit').show();
     if (hasTurtle) {
-      $('#saveDST').show();
+      $('#saveFiles').show();
     }
 
     // Check if the program was correct but the output window is empty: Return a warning
-    if (window.State.programsInExecution === 1 && $('#output').is(':empty') && $('#turtlecanvas').is(':empty')) {
+    if ($('#output').is(':empty') && $('#turtlecanvas').is(':empty')) {
       if(debug == null){
         pushAchievement("error_or_empty");
         error.showWarning(ErrorMessages['Transpile_warning'], ErrorMessages['Empty_output']);
       }
       return;
     }
-    window.State.programsInExecution--;
     if (!hasWarnings) {
       if (debug == null) {
         showSuccesMessage();
@@ -1113,9 +1112,6 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
   // output functions are configurable.  This one just appends some text
   // to a pre element.
   function outf(text: string) {
-    // If there's more than one program being executed at a time, we ignore it.
-    // This happens when a program requiring user input is suspended when the user changes the code.
-    if (window.State.programsInExecution > 1) return;
     addToOutput(text, 'white');
     speak(text)
   }

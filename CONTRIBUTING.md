@@ -56,7 +56,9 @@ If you want to run the website version locally, run:
 ```bash
 (.env)$ python app.py
 ```
-Your local Hedy version should be available on address `http://0.0.0.0:8080/`. It appears that on some Windows machines this address does not work, make sure the server is still running and try visiting the website on `http://localhost:8080/`.
+Your local Hedy version should be available on address `http://0.0.0.0:8080/`. It appears that on some Windows machines this address does not work, make sure the server is still running and try visiting the website on `http://localhost:8080/`. 
+
+Additionally, some pages are known to give a type error about string concatenation. This can be fixed by creating an environment variable for the "BASE_URL" and setting it to `http://localhost:8080/`.
 
 To run the unit tests:
 
@@ -128,7 +130,7 @@ Also, please refrain from using inline CSS styling, as this makes the templates 
 For our multilingual web structure we use a combination of YAML files and Babel to deliver language-dependent content.
 The content you see in the tabs, mail-templates, achievements, puzzles and quizzes are all stored using YAML files.
 All our front-end UI strings, error messages and other "small" translations are stored using Babel.
-To help translating any of these, please follow the explanation in TRANSLATING.md.
+To help translating any of these, please follow the explanation in [TRANSLATING.md](./TRANSLATING.md).
 
 If you see placeholders with underscores one the website instead of proper texts, like this:
 
@@ -203,7 +205,7 @@ docker build -t hedy .
 and then:
 
 ```bash
-docker run -it --rm -p 8080:8080 hedy
+docker run -it --rm -p 8080:8080 --mount type=bind,source="$(pwd)",target=/app hedy
 ```
 
 ## Testing Teacher facing features locally
