@@ -12,22 +12,27 @@ export function goToPage(page)
 
 export function goToHome()
 {
-    return goToPage('/#');
+    return goToPage('/');
 }
 
-export function goToRegister()
+export function goToRegisterStudent()
 {
-    return goToPage('/signup?teacher=false');
+    return goToPage(Cypress.env('register_student_page'));
+}
+
+export function goToRegisterTeacher()
+{
+    return goToPage(Cypress.env('register_teacher_page'));
 }
 
 export function goToLogin()
 {
-    return goToPage("/login");
+    return goToPage(Cypress.env('login_page'));
 }
 
 export function goToTeachersPage()
 {
-    return goToPage('/for-teachers');
+    return goToPage(Cypress.env('teachers_page'));
 }
 
-export default {goToPage, goToRegister}
+export default {goToPage}

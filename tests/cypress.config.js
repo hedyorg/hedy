@@ -10,8 +10,12 @@ module.exports = defineConfig({
     },
   },
   env: {
+    landing_page: '/landing-page',
     login_page: '/login',
     hedy_page: '/hedy',
-    stats_class_page: '/stats/class'
+    stats_class_page: '/stats/class',
+    teachers_page: '/for-teachers',
+    register_student_page: '/signup?teacher=false',
+    register_teacher_page: '/signup?teacher=true'
   }
 });
