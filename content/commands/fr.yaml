@@ -288,18 +288,18 @@
     explanation: "Utilisant un `{for}` sur plusieurs lignes, il te faut un `:` à la fin"
     demo_code: |-
         a = 2
-        {if} a == 1 :
+        {if} a == 1:
             {print} 'a est 1'
-        {elif} a == 2 :
+        {elif} a == 2:
             {print} 'a est 2'
-        {else} :
+        {else}:
             {print} 'a n est pas 1 ou 2'
 -   name: "`{if}` avec `:`"
     explanation: "Quand nous utilisons un  `{for}`, nous devons mettre un  `:` derrière l'affirmation du  `{for}` !"
     demo_code: |-
-        {for} i {in} {range} 1 {to} 12 :
+        {for} i {in} {range} 1 {to} 12:
             {print} i
-        {print} 'Cache toi, j'arrive !'
+        {print} 'Cache toi, j'arrive!'
 -   name: "(Optionnel) `{elif}`"
     explanation: "Nous devons faire de même avec toutes nos `{if}` déclarations."
     demo_code: |-
