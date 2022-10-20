@@ -32,8 +32,8 @@
     demo_code: "זווית {is} 90\n{turn} זווית\n{forward} 100"
 6:
 -   name: '{print}'
-    explanation: Print exactly using quotation marks.
-    demo_code: "{print} '5 times 5 is ' 5 * 5"
+    explanation: הדפיסו את הטקסט בדיוק עם מירכאות.
+    demo_code: "{print} '5 פעמים 5 זה ' 5 * 5"
 -   demo_code: "answer = {ask} 'What is 10 plus 10?'\n{if} answer {is} 20 {print} 'Yes!' {else} {print} 'Oops'"
     name: '{ask}'
     explanation: Ask for a calculation and check whether it is correct.
@@ -109,9 +109,9 @@
     demo_code: "צבע {is} {ask} 'מה הצבע האהוב עליך?'\n{if} צבע {is} ירוק {print} 'יפה!' {else} {print} 'טוב, נו.'"
 -   name: '{if} עם צב'
     explanation: בצעו בחירה באמצעות `{if}`.
-    demo_code: "answer {is} {ask} 'How far should I walk?'\n{if} answer {is} far {forward} 100 {else} {forward} 5"
+    demo_code: "תשובה {is} {ask} 'כמה רחוק ללכת?'\n{if} תשובה {is} רחוק {forward} 100 {else} {forward} 5"
 -   name: '{in}'
-    explanation: Check elements with `{in}`.
+    explanation: בדוק פריטים באמצעות `{in}`.
     demo_code: "pretty_colors {is} green, yellow\ncolor {is} {ask} 'What {is} your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
 7:
 -   name: '{print}'
