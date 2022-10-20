@@ -156,7 +156,7 @@ levels:
             mp_choice_options:
             -   option: "You can use it to `{ask}` a question."
                 feedback: "That's what `{ask}` is for!"
-            -   option: "You can use it to `{print}` text."
+            -   option: "你可以用它打印文本。"
                 feedback: "That's what `{print}` is for!"
             -   option: "You can use it to repeat an answer."
                 feedback: "Good job!"
@@ -556,7 +556,7 @@ levels:
         7:
             question_text: "What does the `{add}` command do?"
             code: |-
-                books {is} Harry Potter, de Hobbit, Green eggs and Ham
+                books {is} Harry Potter, The Hobbit, Green Eggs and Ham
                 your_book {is} {ask} What is your favorite book?
                 {add} your_book {to} books
                 {print} books {at} {random}
@@ -890,7 +890,7 @@ levels:
                     ```
                 feedback: "这就对了!"
             correct_answer: "D"
-            hint: "哪一个与 {if} 命令一起使用？"
+            hint: "哪一个与`{if}`命令一起使用？"
             question_score: '10'
         2:
             question_text: "What appears in your output screen when you type in the name Hedy?"
@@ -1416,7 +1416,7 @@ levels:
             hint: "Mind the `{repeat}` command."
             question_score: '10'
         8:
-            question_text: "Welke Hedy code hoort bij dit resultaat"
+            question_text: "哪个海迪代码会输出这个？"
             code: "Here comes the sun\nDo do do do\nHere comes the sun\nAnd I say\nIts alright"
             mp_choice_options:
             -   option: |
@@ -1470,7 +1470,7 @@ levels:
                     {print} 'Help !'
                     {repeat} 3 {times} {print} 'Please help me !'
                     ```
-                feedback: "Je herhaalt de verkeerde regel"
+                feedback: "你重复的行不正确。"
             -   option: |
                     ```
                     {print} 'Batman was flying through Gotham.'
@@ -1478,7 +1478,7 @@ levels:
                     {repeat} 3 {times} 'Help !'
                     {print} 'Please help me !'
                     ```
-                feedback: "Het commando `{print}` mist op regel 3"
+                feedback: "第三行缺少了`{print}`命令。"
             -   option: |
                     ```
                     {print} Batman was flying through Gotham.
@@ -1545,13 +1545,13 @@ levels:
                     {print} 'Hello'
                     {print} 'Im Hedy!'
             mp_choice_options:
-            -   option: "Hello \n Im Hedy!"
+            -   option: "你好\n我是海迪！\n"
                 feedback: "Everything is printed twice."
-            -   option: "Hello \n Hello \n Im Hedy"
+            -   option: "你好\n你好\n我是海迪\n"
                 feedback: "The second line is repeated twice as well."
-            -   option: "Hello \n Im Hedy! \n Hello \n Im Hedy!"
+            -   option: "你好\n我是海迪！\n你好\n我是海迪！\n"
                 feedback: "Super!"
-            -   option: "Hello \n Hello \n Im Hedy! \n Im Hedy!"
+            -   option: "你好\n你好\n我是海迪！\n我是海迪！\n"
                 feedback: "Everything is printed twice"
             correct_answer: "C"
             hint: "Both lines are repeated twice."
@@ -1580,13 +1580,13 @@ levels:
                     {print} 'Baby shark tututudutudu'
                 {print} 'Baby shark'
             mp_choice_options:
-            -   option: "Baby shark tututudutudu \n Baby shark"
+            -   option: "Baby shark tututudutudu\nBaby shark\n"
                 feedback: "Mind the `{repeat}` command!"
-            -   option: "Baby shark tututudutudu \n Baby shark \n Baby shark tututudutudu \n Baby shark \n Baby shark tututudutudu \n Baby shark"
+            -   option: "Baby shark tututudutudu\nBaby shark\nBaby shark tututudutudu\nBaby shark\nBaby shark tututudutudu\nBaby shark\n"
                 feedback: "The last line has no indentation, so it's not repeated."
-            -   option: "Baby shark tututudutudu \n Baby shark tututudutudu \n Baby shark tututudutudu \n Baby shark"
+            -   option: "Baby shark tututudutudu\nBaby shark tututudutudu\nBaby shark tututudutudu\nBaby shark\n"
                 feedback: "Right!"
-            -   option: "Baby shark tututudutudu \n Baby shark \n Baby shark \n Baby shark"
+            -   option: "Baby shark tututudutudu\nBaby shark\nBaby shark\nBaby shark\n"
                 feedback: "What is being repeated and what isn't."
             correct_answer: "C"
             hint: "What is being repeated and what is not?."
@@ -1667,27 +1667,27 @@ levels:
             question_score: '10'
             output: "Welcome to restaurant Hedy\nPizza\nHamburger"
         7:
-            question_text: "What is wrong with this code?"
+            question_text: "这段代码哪里错了？"
             code: |-
-                eten = {ask} 'What would you like to eat?'
-                {if} food {is} fries
-                sauce = {ask} 'What sauce would you like?'
-                    {print} 'One fries with ' sauce
-                {if} food {is} pizza
-                    topping = {ask} 'What topping would you like?'
-                    {print} 'One pizza with ' topping
-                {print} 'That you for your order'
+                食物 = {ask} '你想吃什么？'
+                {if} 食物 {is} 薯条
+                酱汁 = {ask} '你想要什么酱？'
+                    {print} '一份薯条配' 酱汁
+                {if} 食物 {is} 披萨
+                    配料 = {ask} '你想要什么配料？'
+                    {print} '一份披萨配' 配料
+                {print} '这些是你点的'
             mp_choice_options:
-            -   option: "Nothing this code is correct!"
-                feedback: "Something is wrong!."
-            -   option: "You're not allowed to use an `{if}` command after an `{ask}` command."
-                feedback: "You are!."
-            -   option: "You don't have to use indentation twice. Only in the first `{if}` command."
-                feedback: "You always have to use indentation."
-            -   option: "The indentation is wrong in the first `{if}` command."
-                feedback: "That's right."
+            -   option: "没有错。这段代码是正确的！"
+                feedback: "有地方错了！"
+            -   option: "`{ask}`命令后面不能用`{if}`命令。"
+                feedback: "可以用！"
+            -   option: "不需要缩进两次。只有第一个`{if}`命令需要缩进。"
+                feedback: "每一行都要缩进。"
+            -   option: "第一个`{if}`命令的缩进错了。"
+                feedback: "是的。"
             correct_answer: "D"
-            hint: "Take a careful look at the indentation."
+            hint: "注意观察缩进。"
             question_score: '10'
         8:
             question_text: "In which of the codes is the indentation done right?"

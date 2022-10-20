@@ -154,18 +154,17 @@
     explanation: "print something. Remember to use a quotation mark for literal printing."
     demo_code: "{print} '5 times 5 is ' 5 * 5"
 -   name: "{for} with a list"
-    explanation: "print all things in a list "
+    explanation: "Affiche tout les éléments d'un liste."
     demo_code: |-
         animals {is} dog, cat, blobfish
         {for} animal {in} animals
           {print} 'I love ' animal
 11:
--   name: " nouveau `{repeat}`"
-    explanation: " `{for}` au lieu de `{repeat}`"
-    demo_code: |
-        {for} i {in} {range} 1 {to_list} 11
-            {print} i
-        {print} ' Cache toi ou je te verrai !'
+-   name: "la boucle {for}"
+    explanation: "On peut utiliser `{for}` avec un `{range}`."
+    demo_code: |-
+        {for} counter {in} {range} 1 {to} 5
+            {print} counter
 -   name: '{ask}'
     explanation: ask for the answer to a sum and check if it is correct. We can now print 2 lines.
     demo_code: "answer = {ask} 'What is 5 plus 5?'\n{if} answer {is} 10\n    {print} 'Well done!'\n    {print} 'Indeed, the answer was ' answer\nelse\n    {print} 'Oops!'\n    {print} 'The answer is 10'"
@@ -231,7 +230,7 @@
         {if} answer == 25
             {print} 'That {is} correct!'
 -   name: "Not equal"
-    explanation: "We use the `!=` to check if two things are not the same. "
+    explanation: "Nous utilisons  `!=` pour verifier que deux choses sont différentes."
     demo_code: |-
         answer = {ask} 'What is 5 * 5?'
         {if} answer != 25
@@ -259,7 +258,7 @@
             answer = {ask} 'What is 5 times 5?'
         {print} 'A correct answer has been given'
 -   name: "Smaller {while}"
-    explanation: "We can also use the `{while}` loop with `<` and `>`. "
+    explanation: "Nous pouvons aussi utiliser une boucle  `{while}` avec `<` et `>`."
     demo_code: |-
         count = 1
         {while} count < 3
@@ -288,27 +287,27 @@
 -   name: "`{for}` avec `:`"
     explanation: "Utilisant un `{for}` sur plusieurs lignes, il te faut un `:` à la fin"
     demo_code: |-
-        {for} i {in} {range} 1 {to_list} 10:
-            {print} i
-        {print} ' Cache toi ou je te verrai !.'
--   name: "`{if}` avec `:`"
-    explanation: "Nous faisons de la même manière avec tous nos commandes `{if}`."
-    demo_code: |-
-        couleur = {ask} 'Quelle couleur préfères-tu ?'
-        {if} couleur {is} 'vert':
-            {print} 'Tu as choisi le vert.'
+        a = 2
+        {if} a == 1:
+            {print} 'a est 1'
+        {elif} a == 2:
+            {print} 'a est 2'
         {else}:
-            {print} 'Tu as choisi un autre couleur que le vert.'
+            {print} 'a n est pas 1 ou 2'
+-   name: "`{if}` avec `:`"
+    explanation: "Quand nous utilisons un  `{for}`, nous devons mettre un  `:` derrière l'affirmation du  `{for}` !"
+    demo_code: |-
+        {for} i {in} {range} 1 {to} 12:
+            {print} i
+        {print} "Cache toi, j'arrive!"
 -   name: "(Optionnel) `{elif}`"
     explanation: "Nous devons faire de même avec toutes nos `{if}` déclarations."
     demo_code: |-
-        a = 2
-        {if} a {is} 1:
-            {print} 'a est égal à 1'
-        {elif} a {is} 2:
-            {print} 'a est égal à 2'
+        couleur = {ask} 'Quel est ta couleur favorite ?'
+        {if} couleur == 'vert':
+            {print} 'ta couleur préféré est le vert'
         {else}:
-            {print} 'a est ni 1 ni 2'
+            {print} 'ta couleur préféré n est pas le vert'
 18:
 -   name: "{print}"
     explanation: "With `{print}` you need to use parentheses"
@@ -319,7 +318,7 @@
     demo_code: |-
         name = 'Hedy'
         {print}('my name is ', name)
--   name: '{print} with var'
+-   name: '{print} avec var'
     explanation: With `{print}` you need to use parentheses and commas if you {print} more items
     demo_code: "name = 'Hedy'\n{print}('my name is ', name)"
 -   name: ask something with {input}

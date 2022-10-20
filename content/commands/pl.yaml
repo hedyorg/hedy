@@ -9,13 +9,13 @@
     explanation: Powtórz coś za pomocą `{echo}`.
     demo_code: "{ask} Jaki jest twój ulubiony kolor?\n{echo} więc twoim ulubionym kolorem jest"
 -   name: '{print} emotikony'
-    explanation: Wyświetl emotikony za pomocą `{print}`
+    explanation: Wyświetl emotikony za pomocą `{print}`.
     demo_code: '{print} 🙋 🌍 ❗'
 -   name: '{forward}'
     explanation: Narysuj linię za pomocą `{forward}`.
     demo_code: '{forward} 100'
 -   name: '{turn}'
-    explanation: Odwróć żółwia za pomocą `{turn}`
+    explanation: Odwróć żółwia za pomocą `{turn}`.
     demo_code: "{forward} 25\n{turn} {left}\n{forward} 25\n{turn} {right}"
 2:
 -   name: "{is}"
@@ -29,7 +29,7 @@
         kolor {is} {ask} Jaki jest twój ulubiony kolor?
         {print} kolor jest twoim ulubionym kolorem!
 -   name: "{sleep}"
-    explanation: "Let Hedy pause for a (couple of) second(s)."
+    explanation: "`{sleep}` pozwól Hedy zatrzymać się na (kilka) sekund."
     demo_code: |-
         {print} Daj mi pomyśleć przez 1 sekundę..
         {sleep}
@@ -41,311 +41,311 @@
         kąt {is} 90
         {turn} kąt
         {forward} 100
-    name: is - turtle
+    name: '{is} z żółwiem'
 3:
--   name: choose_random
-    explanation: Choose a random word from a group with `{at}` and `{random}`
+-   name: Wybierz losowy
+    explanation: Wybierz losowe słowo z grupy za pomocą `{at}` oraz `{random}`.
     demo_code: |-
-        animals {is} dog, cat, kangaroo
-        {print} animals {at} {random}
+        zwierzęta {is} pies, kot, kangur
+        {print} zwierzęta {at} {random}
 -   name: "{add}"
-    explanation: "add an item to a list"
+    explanation: "`{add}` element `{to_list}` listy."
     demo_code: |-
-        animals {is} cow, cat
-        {add} dog {to_list} animals
+        zwierzęta {is} krowa, kot
+        {add} pies {to_list} zwierzęta
 -   name: "{remove}"
-    explanation: "remove an item from a list"
+    explanation: "`{remove}` element `{from}`listy."
     demo_code: |-
-        animals {is} cat, dog, cow
-        {remove} dog {from} animals
+        zwierzęta {is} kot, pies, krowa
+        {remove} pies {from} zwierzęta
 4:
 -   name: "{print}"
-    explanation: "print exactly using quotation marks"
-    demo_code: "{print} 'Hello welcome to Hedy.'"
+    explanation: "Napisz dokładnie używając apostrofów."
+    demo_code: "{print} 'Witaj w Hedy.'"
 -   name: "{is}"
-    explanation: "Give a name to some text and `{print}` without quotation marks"
+    explanation: "Nadaj taką samą nazwę jakiemuś tekstowi i `{print}` bez apostrofów."
     demo_code: |-
-        name {is} Hedy
-        {print} 'my name is ' name
+        imię {is} Hedy 
+        {print} 'moje imię to ' imię
 -   name: "{ask}"
-    explanation: "ask something with `{ask}`."
+    explanation: "Zapytaj o coś używając `{ask}`."
     demo_code: |-
-        color {is} {ask} 'What is your favorite color?'
-        {print} color ' is your favorite!'
+        kolor {is} {ask} 'Jaki jest twój ulubiony kolor?'
+        {print} kolor ' jest twoim ulubionym!'
 5:
 -   name: "{print}"
-    explanation: "print exactly using quotation marks"
-    demo_code: "{print} 'Hello welcome to Hedy.'"
+    explanation: "Napisz dokładnie używając apostrofów."
+    demo_code: "{print} 'Witaj w Hedy.'"
 -   name: "{ask}"
-    explanation: "ask something with `{ask}`."
+    explanation: "Zadaj pytanie używając `{ask}`."
     demo_code: |-
-        color {is} {ask} 'What is your favorite color?'
-        {print} color ' {is} your favorite!'
+        kolor {is} {ask} 'Jaki jest twój ulubiony kolor?'
+        {print} kolor ' jest twoim ulubionym!'
 -   name: "{if}"
-    explanation: "Make a choice with `{if}`"
+    explanation: "Podejmij decyzję używając `{if}`."
     demo_code: |-
-        color {is} {ask} 'What is your favorite color?'
-        {if} color {is} green {print} 'pretty!' {else} {print} 'meh'
--   name: "{if} with turtle"
-    explanation: "Make a choice with `{if}`"
+        kolor {is} {ask} 'Jaki jest twój ulubiony kolor?'
+        {if} kolor {is} zielony {print} 'ładny!' {else} {print} 'meh'
+-   name: "{if} z żółwiem"
+    explanation: "Podejmij decyzję używając `{if}`."
     demo_code: |-
-        answer {is} {ask} 'How far should I walk?'
-        {if} answer {is} far {forward} 100 {else} {forward} 5
+        odpowiedź {is} {ask} 'Jak daleko powinienem iść?'
+        {if} odpowiedź {is} daleko {forward} 100 {else} {forward} 5
 -   name: "{in}"
-    explanation: "Check elements with `{in}`"
+    explanation: "Sprawdź elementy za pomocą `{in}`."
     demo_code: |-
-        pretty_colors {is} green, yellow
-        color {is} {ask} 'What {is} your favorite color?'
-        {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'
+        ładne_kolory {is} zielony, żółty
+        kolor {is} {ask} 'Jaki {is} twój ulubiony kolor?'
+        {if} kolor {in} ładne_kolory {print} 'ładny!' {else} {print} 'meh'
 6:
 -   name: "{print}"
-    explanation: "print exactly using quotation marks"
-    demo_code: "{print} '5 times 5 is ' 5 * 5"
+    explanation: "Napisz dokładnie używając apostrofów."
+    demo_code: "{print} '5 razy 5 to ' 5 * 5"
 -   name: "{ask}"
-    explanation: "{ask} for a calculation and check whether it is correct."
+    explanation: "Zapytaj o obliczenia, i sprawdź czy są poprawne."
     demo_code: |-
-        answer = {ask} 'What is 10 plus 10?'
-        {if} answer {is} 20 {print} 'Yes!' {else} {print} 'Oops'
--   name: "`{ask}` {and} `{if}` turtle"
-    explanation: "{ask} the user how many angles they want"
+        odpowiedź = {ask} 'Ile to 10 plus 10?'
+        {if} odpowiedź {is} 20 {print} 'Tak!' {else} {print} 'Ups'
+-   name: "{ask} oraz {if} z żółwiem"
+    explanation: "Zapytaj użytkownika jak dużo boków potrzebuje."
     demo_code: |-
-        angles = {ask} 'How many angles?'
-        angle = 360 / angles
+        boki= {ask} 'Ile boków?'
+        kąt = 360 / boki
         {forward} 50
 7:
 -   name: "{print}"
-    explanation: "print exactly using quotation marks"
-    demo_code: "{print} 'Hello welcome to Hedy.'"
+    explanation: "Napisz dokładnie używając apostrofów."
+    demo_code: "{print} 'Witaj w Hedy.'"
 -   name: "{ask}"
-    explanation: "ask something with `{ask}`."
+    explanation: "Zapytaj o coś wykorzystując `{ask}`."
     demo_code: |-
-        color = {ask} 'What is your favorite color?'
-        {print} color ' is your favorite!'
+        kolor = {ask} 'Jaki jest twój ulubiony kolor?'
+        {print} kolor ' jest twoim ulubionym!'
 -   name: "{if}"
-    explanation: "Make a choice with `{if}`"
+    explanation: "Podejmij decyzję używając `{if}`."
     demo_code: |-
-        color = {ask} 'What is your favorite color?'
-        {if} color {is} green {print} 'pretty!' {else} {print} 'meh'
--   name: "{repeat} - turtle"
-    explanation: "repeat a line of code with `{repeat}`."
+        kolor = {ask} 'Jaki jest twój ulubiony kolor?'
+        {if} kolor {is} zielony {print} 'ładny!' {else} {print} 'meh'
+-   name: "{repeat} używając żółwia"
+    explanation: "Powtórz linię kodu używając `{repeat}`."
     demo_code: |-
         {repeat} 3 {times} {forward} 10
 8:
 -   name: "{print}"
-    explanation: "print something. Remember to use a quotation mark for literal printing."
-    demo_code: "{print} '5 times 5 is ' 5 * 5"
+    explanation: "Napisz coś. Pamiętaj, aby użyć apostrofów przy dosłownym wypisywaniu."
+    demo_code: "{print} '5 razy 5 to ' 5 * 5"
 -   name: "{ask}"
-    explanation: "ask for the answer to a sum and check if it is correct. We can now print 2 lines."
+    explanation: "Zapytaj się o rozwiązanie dodawania i sprawdź czy jest poprawne. Teraz możemy wypisać dwie linie."
     demo_code: |-
-        answer = {ask} 'What is 5 plus 5?'
-        {if} answer {is} 10
-            {print} 'Well done!'
-            {print} 'Indeed, the answer was ' answer
-        else
-            {print} 'Oops!'
-            {print} 'The answer is 10'
--   name: "`{repeat}` with turtle"
-    explanation: "{repeat} multiple lines"
+        odpowiedź = {ask} 'Ile to 5 plus 5?'
+        {if} odpowiedź {is} 10
+            {print} 'Dobra odpowiedź!'
+            {print} 'Rzeczywiście, odpowiedź to ' odpowiedź
+        {else}
+            {print} 'Ups!'
+            {print} 'Odpowiedź to 10'
+-   name: "{repeat} z żółwiem"
+    explanation: "Powtórz wiele linii."
     demo_code: |-
         {repeat} 4 {times}
             {turn} 90
             {forward} 50
 9:
--   name: "`{if}` with multiple lines"
-    explanation: "The answer of a sum of questions with '{ask}' and see if it is correct. Now we print out two lines."
+-   name: "{if} z wieloma liniami"
+    explanation: "Odpowiedź sumy pytań za pomocą `{ask}` i sprawdź czy są poprawne. Teraz drukujemy dwie linie."
     demo_code: |-
-        answer = {ask} 'What is 20 plus 20?'
-        {if} answer {is} 20
-            {print} 'Well done!!'
-            {print} 'The answer is indeed' answer
-        else
-            {print} 'Wrong'
-            {print} 'The answer is 20'
--   name: "`{repeat}` and turtle"
-    explanation: "{repeat} multiple lines"
+        pytanie = {ask} 'Ile to 10 plus 10?'
+        {if} odpowiedź {is} 20
+            {print} 'Bardzo dobrze!!'
+            {print} 'Odpowiedź to rzeczywiście' pytanie
+        {else}
+            {print} 'Źle'
+            {print} 'Poprawna odpowiedź to 20'
+-   name: "{repeat} z żółwiem"
+    explanation: "Powtórz wiele linii."
     demo_code: |-
         {repeat} 4 {times}
             {turn} 90
             {forward} 50
 10:
 -   name: "{print}"
-    explanation: "print something. Remember to use a quotation mark for literal printing."
-    demo_code: "{print} '5 times 5 is ' 5 * 5"
--   name: "{for} with a list"
-    explanation: "print all things in a list "
+    explanation: "Napisz coś. Pamiętaj aby użyć apostrofów do dosłownego wypisywania."
+    demo_code: "{print} '5 razy 5 to ' 5 * 5"
+-   name: "{for} z listą"
+    explanation: "Wypisz wszystkie elementy listy."
     demo_code: |-
-        animals {is} dog, cat, blobfish
-        {for} animal {in} animals
-          {print} 'I love ' animal
+        zwierzęta {is} pies, kot, rozdymka
+        {for} zwierze {in} zwierzęta
+          {print} 'Kocham ' zwierze
 11:
--   name: "{for} loop"
-    explanation: "We can use `{for}` with a {range}"
+-   name: "pętla {for}"
+    explanation: "Możemy użyć `{for}` razem z `{range}`."
     demo_code: |-
-        {for} counter {in} {range} 1 {to} 5
-            {print} counter
+        {for} licznik {in} {range} 1 {to} 5
+            {print} licznik
 -   name: "{ask}"
-    explanation: "ask for the answer to a sum and check if it is correct. We can now print 2 lines."
+    explanation: "Zapytaj o wynik dodawania i sprawdź czy jest poprawny. Teraz możemy wypisać dwie linie."
     demo_code: |-
-        answer = {ask} 'What is 5 plus 5?'
-        {if} answer {is} 10
-            {print} 'Well done!'
-            {print} 'Indeed, the answer was ' answer
-        else
-            {print} 'Oops!'
-            {print} 'The answer is 10'
+        odpowiedź = {ask} 'Ile to 5 plus 5?'
+        {if} odpowiedź {is} 10
+            {print} 'Bardzo dobrze!'
+            {print} 'Rzeczywiście, odpowiedź to ' odpowiedź
+        {else}
+            {print} 'Ups!'
+            {print} 'Poprawna odpowiedź to 10'
 12:
 -   name: "float directly"
-    explanation: "Decimal numbers"
+    explanation: "Liczby dziesiętne."
     demo_code: |
-        {print} 'Calculate away!'
-        {print} 'Two and a half plus two and a half is...'
+        {print} 'Wykalkuluj!'
+        {print} 'Dwa i pół plus dwa i pół to...'
         {print} 2.5 + 2.5
 -   name: "assign text"
-    explanation: "Text with quotation marks after ="
+    explanation: "Tekst z apostrofami po `=`"
     demo_code: |
-        name = 'Hedy the Robot'
-        {print} 'Hello ' name
--   name: "quotes after {if} comparison"
-    explanation: "Text with quotation marks after {if}"
+        imię = 'Robot Hedy'
+        {print} 'Witaj ' imię
+-   name: "nawiasy po porównaniu {if}"
+    explanation: "Tekst z apostrofami po `{if}`."
     demo_code: |
-        name = {ask} 'Who are you?'
-        {if} name = 'Hedy'
-            {print} 'Hi there!'
--   name: "quotes in list"
-    explanation: "A list with quotation marks"
+        imię = {ask} 'Kim jesteś?'
+        {if} imię = 'Hedy'
+            {print} 'Witaj!'
+-   name: "apostrofy w liście"
+    explanation: "Lista wykorzystująca apostrofy."
     demo_code: |
-        superheroes = 'Iron Man', 'Batman', 'Superman'
-        {print} superheroes {at} {random}
+        superbohaterowie = 'Iron Man', 'Batman', 'Superman'
+        {print} superbohaterowie {at} {random}
 13:
 -   name: "{and}"
-    explanation: "Two parts both need to be correct"
+    explanation: "Oby dwie części muszą być poprawne."
     demo_code: |-
-        answer1 = {ask} 'What is 3+2?'
-        answer2 = {ask} 'What is 2+2?'
-        {if} answer1 {is} 5 {and} answer2 {is} 4
-            {print} 'Both answers are correct!'
-        else
-            {print} 'At least one answer is wrong!'
+        odpowiedź1 = {ask} 'ile to 3+2?'
+        odpowiedź2 = {ask} 'Ile to 2+2?'
+        {if} odpowiedź1 {is} 5 {and} odpowiedź2 {is} 4
+            {print} 'Obydwie odpowiedzi są poprawne!'
+        {else}
+            {print} 'Co najmniej jedna odpowiedź nie jest poprawna!'
 -   name: "{or}"
-    explanation: "At least 1 of the two parts need to be correct. If both are correct, it is also fine."
+    explanation: "Co najmniej jedna z dwóch części muszą być poprawne. Jeśli oby dwie są, to też w porządku."
     demo_code: |-
-        answer1 = {ask} 'What is 3+2?'
-        answer2 = {ask} 'What is 2+2?'
-        {if} answer1 {is} 5 {or} answer2 {is} 4
-            {print} 'At least one answer is correct!'
-        else
-            {print} 'Both answers are wrong!'
+        odpowiedź1 = {ask} 'Ile to 3+2?'
+        odpowiedź2 = {ask} 'Ile to 2+2?'
+        {if} odpowiedź1 {is} 5 {or} odpowiedź2 {is} 4
+            {print} 'Co najmniej jedna odpowiedź jest prawidłowa!'
+        {else}
+            {print} 'Oby dwie odpowiedzi są błędne!'
 14:
--   name: "Smaller"
-    explanation: "We use the `<` to check if the first number is smaller than the second number."
+-   name: "Mniejszy"
+    explanation: "Używamy `<` aby sprawdzić czy pierwsza liczba jest mniejsza od drugiej liczby."
     demo_code: |-
-        age = {ask} 'How old are you?'
-        {if} age < 13
-            {print} 'You are younger than me!'
--   name: "Bigger"
-    explanation: "We use the `>` to check if the first number is bigger than the second number."
+        wiek = {ask} 'Ile masz lat?'
+        {if} wiek < 13
+            {print} 'Jesteś młodszy ode mnie!'
+-   name: "Większy"
+    explanation: "Używamy `>` aby sprawdzić czy pierwsza liczba jest większa od drugiej."
     demo_code: |-
-        age = {ask} 'How old are you?'
-        {if} age > 13
-            {print} 'You are older than me!'
--   name: "Equal"
-    explanation: "We use the `==` to check if two things are the same."
+        wiek = {ask} 'Ile masz lat?'
+        {if} wiek > 13
+            {print} 'Jesteś starszy ode mnie!'
+-   name: "Równy"
+    explanation: "Używamy `==` aby sprawdzić czy dwie rzeczy są takie same."
     demo_code: |-
-        answer = {ask} 'What is 5 * 5?'
-        {if} answer == 25
-            {print} 'That {is} correct!'
--   name: "Not equal"
-    explanation: "We use the `!=` to check if two things are not the same. "
+        odpowiedź = {ask} 'Ile to 5 * 5?'
+        {if} odpowiedź == 25
+            {print} 'To jest poprawna odpowiedź!'
+-   name: "Nierówne"
+    explanation: "Używamy `!=` aby sprawdzić, czy dwie rzeczy są inne."
     demo_code: |-
-        answer = {ask} 'What is 5 * 5?'
-        {if} answer != 25
-            {print} 'That is not correct!'
+        odpowiedź = {ask} 'Ile to 5 * 5?'
+        {if} odpowiedź != 25
+            {print} 'To nie jest poprawna odpowiedź!'
 
--   name: "Smaller {or} equal"
-    explanation: "We use the `<=` to check if the first number is smaller than or equal to the second number."
+-   name: "Mniejszy lub równy"
+    explanation: "Używamy `<=` aby sprawdzić czy pierwsza liczba jest większa lub równa drugiej liczbie."
     demo_code: |-
-        age = {ask} 'How old are you?'
-        {if} age <= 12
-            {print} 'You are younger than me!'
+        wiek = {ask} 'Ile masz lat?'
+        {if} wiek <= 12
+            {print} 'Jesteś młodszy ode mnie!'
 
--   name: "Bigger or equal"
-    explanation: "We use the `>=` to check if the first number is bigger than or equal to the second number."
+-   name: "Większy lub równy"
+    explanation: "Używamy `>=` aby sprawdzić czy pierwsza liczba jest większa lub równa drugiej liczbie."
     demo_code: |-
-        age = {ask} 'How old are you?'
-        {if} age >= 14
-            {print} 'You are older than me!'
+        wiek = {ask} 'Ile masz lat?'
+        {if} wiek >= 14
+            {print} 'Jesteś starszy ode mnie!'
 15:
 -   name: "{while}"
-    explanation: "We can use the `{while}` loop with not equal"
+    explanation: "Możemy użyć pętli `{while}` z nierównością."
     demo_code: |-
-        answer = 0
-        {while} answer != 25
-            answer = {ask} 'What is 5 times 5?'
-        {print} 'A correct answer has been given'
--   name: "Smaller {while}"
-    explanation: "We can also use the `{while}` loop with `<` and `>`. "
+        odpowiedź = 0
+        {while} odpowiedź != 25
+            odpowiedź = {ask} 'ile to 5 razy 5?'
+        {print} 'Udzielono poprawnej odpowiedzi'
+-   name: "Mniejszy {while}"
+    explanation: "Możemy też użyć pętli `{while}` razem z `<` oraz `>`."
     demo_code: |-
-        count = 1
-        {while} count < 3
-            {print} 'We do this ' 3 - count ' more times'
-            count = count + 1
-        {print} 'We are done'
+        licznik = 1
+        {while} licznik < 3
+            {print} 'Robimy to jeszcze' 3 - licznik ' razy'
+            licznik = licznik + 1
+        {print} 'Zrobione'
 16:
--   name: "square brackets"
-    explanation: "Lists with square brackets"
+-   name: "nawiasy kwadratowe"
+    explanation: "Lista z nawiasami kwadratowymi."
     demo_code: |-
-        fruit = ['apple', 'banana', 'cherry']
-        {print} fruit
--   name: "Get an item from a list"
-    explanation: "To get an item from a list we use [number] so fruit[1] means, get the first fruit from the list!"
+        owoc = ['jabłko', 'banan', 'wiśnia']
+        {print} owoc
+-   name: "Weź element z listy"
+    explanation: "Aby wziąć element z listy używamy [number], więc owoc[1] oznacza wzięcie pierwszego owocu z listy!"
     demo_code: |-
-        fruit = ['banana', 'apple', 'cherry']
-        firstfruit = fruit[1]
-        {print} firstfruit
--   name: "Get a random item from a list"
-    explanation: "To get a random item from a list we use [random] so fruit[random] means, get a random fruit from the list!"
+        owoc = ['banan', 'jabłko', 'wiśnia']
+        pierwszyowoc = owoc[1]
+        {print} pierwszyowoc
+-   name: "Weź losowy element z listy"
+    explanation: "Aby wziąć losowy element z listy używamy [random] a więc owoc[random] znaczy, weź losowy owoc z listy!"
     demo_code: |-
-        fruit = ['banana', 'apple', 'cherry']
-        random_fruit = fruit[random]
-        {print} random_fruit
+        owoc = ['banan', 'jabłko', 'wiśnia']
+        losowy_owoc = owoc[random]
+        {print} losowy_owoc
 17:
 -   name: "{elif}"
-    explanation: "`{elif}`."
+    explanation: "`{elif}`"
     demo_code: |-
         a = 2
         {if} a == 1:
-            {print} 'a is 1'
+            {print} 'a wynosi 1'
         {elif} a == 2:
-            {print} 'a is 2'
+            {print} 'a wynosi 2'
         {else}:
-            {print} 'a is not 1 or 2'
+            {print} 'a nie wynosi ani 1 ani 2'
 -   name: "{print}"
-    explanation: "When we use a `{for}`, we need to put a `:` behind the `{for}` statement!"
+    explanation: "Kiedy używamy `{for}`, musimy postawić `:` za zdaniem `{for}`!"
     demo_code: |-
         {for} i {in} {range} 1 {to} 12:
             {print} i
-        {print} 'Ready or not, here I come!'
+        {print} 'Gotowi czy nie, nadchodzę!'
 -   name: "{if}"
-    explanation: "We need to do the same with all of our `{if}` statements"
+    explanation: "Musimy zrobić to samo ze wszystkimi wykorzystaniami `{if}`."
     demo_code: |-
-        colour = {ask} 'What is your favorite color?'
-        {if} colour == 'green':
-            {print} 'Your favorite colour is green'
+        kolor = {ask} 'Jaki jest twój ulubiony kolor?'
+        {if} kolor == 'zielony':
+            {print} 'Twój ulubiony kolor to zielony'
         {else}:
-            {print} 'Your favorite colour is not green'
+            {print} 'Twój ulubiony kolor to nie zielony'
 18:
 -   name: "{print}"
-    explanation: "With `{print}` you need to use parentheses"
+    explanation: "Po `{print}` musisz użyć nawiasów."
     demo_code: |-
-        {print}('hi!')
--   name: "{print} with var"
-    explanation: "With `{print}` you need to use parentheses and commas if you {print} more items"
+        {print}('Cześć!')
+-   name: "{range}"
+    explanation: "Po `{range}` musisz użyć nawiasów."
     demo_code: |-
-        name = 'Hedy'
-        {print}('my name is ', name)
--   name: '{print} with var'
-    explanation: With `{print}` you need to use parentheses and commas if you {print} more items
-    demo_code: "name = 'Hedy'\n{print}('my name is ', name)"
--   name: ask something with {input}
-    explanation: Use `{input}` instead of `{ask}` to ask something
-    demo_code: "name = {input}('What is your name?')\n{print}('So your name is ', name)"
+        {for} i {in} {range} (1,10):
+            {print}('Witaj, razy ', i)
+-   name: '{print} z argumentami'
+    explanation: Korzystając z `{print}` użyj nawiasów i przycinków jeśli chcesz wypisać więcej elementów.
+    demo_code: "imię = 'Hedy'\n{print}('moje imię to  ', imię)"
+-   name: zapytaj o coś wykorzystując {input}
+    explanation: Użyj `{input}` zamiast `{ask}` aby się o coś zapytać.
+    demo_code: "imię = {input}('Jak masz na imię?')\n{print}('Więc nazywasz się ', imię)"
