@@ -66,7 +66,7 @@
     explanation: "Nadaj taką samą nazwę jakiemuś tekstowi i `{print}` bez apostrofów."
     demo_code: |-
         imię {is} Hedy 
-        {print} 'moje imię to ' name
+        {print} 'moje imię to ' imię
 -   name: "{ask}"
     explanation: "Zapytaj o coś używając `{ask}`."
     demo_code: |-
@@ -157,7 +157,7 @@
         pytanie = {ask} 'Ile to 10 plus 10?'
         {if} odpowiedź {is} 20
             {print} 'Bardzo dobrze!!'
-            {print} 'Odpowiedź to rzeczywiście' answer
+            {print} 'Odpowiedź to rzeczywiście' pytanie
         {else}
             {print} 'Źle'
             {print} 'Poprawna odpowiedź to 20'
@@ -174,8 +174,8 @@
 -   name: "{for} z listą"
     explanation: "Wypisz wszystkie elementy listy."
     demo_code: |-
-        zwierzęta {is} pies, kot, rozdymka 
-        {for} zwierze {in} zwierzęta 
+        zwierzęta {is} pies, kot, rozdymka
+        {for} zwierze {in} zwierzęta
           {print} 'Kocham ' zwierze
 11:
 -   name: "pętla {for}"
@@ -189,7 +189,7 @@
         odpowiedź = {ask} 'Ile to 5 plus 5?'
         {if} odpowiedź {is} 10
             {print} 'Bardzo dobrze!'
-            {print} 'Rzeczywiście, odpowiedź to ' answer
+            {print} 'Rzeczywiście, odpowiedź to ' odpowiedź
         {else}
             {print} 'Ups!'
             {print} 'Poprawna odpowiedź to 10'
@@ -230,7 +230,7 @@
     explanation: "Co najmniej jedna z dwóch części muszą być poprawne. Jeśli oby dwie są, to też w porządku."
     demo_code: |-
         odpowiedź1 = {ask} 'Ile to 3+2?'
-        odpoweidź2 = {ask} 'Ile to 2+2?'
+        odpowiedź2 = {ask} 'Ile to 2+2?'
         {if} odpowiedź1 {is} 5 {or} odpowiedź2 {is} 4
             {print} 'Co najmniej jedna odpowiedź jest prawidłowa!'
         {else}
@@ -240,7 +240,7 @@
     explanation: "Używamy `<` aby sprawdzić czy pierwsza liczba jest mniejsza od drugiej liczby."
     demo_code: |-
         wiek = {ask} 'Ile masz lat?'
-        {if} age < 13
+        {if} wiek < 13
             {print} 'Jesteś młodszy ode mnie!'
 -   name: "Większy"
     explanation: "Używamy `>` aby sprawdzić czy pierwsza liczba jest większa od drugiej."
