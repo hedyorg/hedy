@@ -2911,64 +2911,102 @@ levels:
             question_score: '10'
     13:
         1:
-            question_text:
-            code:
+            question_text: "Which code should be filled in at the ??? ?"
+            code: |-
+              ```
+              name = ask 'What is your name?'
+              song = ask 'Whould you like to hear a song?'
+              birthday = ask 'Is today your birthday?'
+              ???
+                print 'Happy Birthday to you!'
+                print 'Happy Birthday to you!'
+                print 'Happy Birthday. dear ' name
+                print 'Happy Birthday to you!'
+              ```
             mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
+            -   option: |-
+                  ```
+                  if birthday and song = 'yes'
+                  ```
+                feedback: "Almost there"
+            -   option: |-
+                  ```
+                  if birthday = 'yes' and name = 'Hedy'
+                  ```
+                feedback: "Hedy only sings for you if you like to hear a song"
+            -   option: |-
+                  ```
+                  if song = 'yes' and birthday = 'yes'
+                  ```
+                feedback: "Super!"
+            -   option: |-
+                  ```
+                  if song = 'yes' or birthday = 'yes'
+                  ```
+                feedback: "Hedy only sings if both answers are yes"
+            correct_answer: "C"
+            hint: "Hedy sings if you want to hear a song and it's you birthday"
             question_score: '10'
         2:
-            question_text:
-            code:
+            question_text: "Which command is missing in the code at the place of the ??? ?"
+            code: |-
+              ```
+              menu = 'cheese', 'sausage rolls', 'cookies'
+              diet = ask 'Do you have any dietary restrictions?'
+              if diet = 'vegan' ??? diet = 'halal'
+                remove 'sausage rolls' from menu
             mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
+            -   option: "and"
+                feedback: "You don't have to be vegan ànd muslim"
+            -   option: "or"
+                feedback: "Great thinking!"
+            -   option: " + "
+                feedback: "No"
+            -   option: "print"
+                feedback: "No"
+            correct_answer: "B"
+            hint: "Neither vegans nor muslims can eat sausage rolls."
             question_score: '10'
         3:
-            question_text:
-            code:
+            question_text: "Which output is given to a member without a discount code?"
+            code: |-
+              ```
+              member = ask 'Do you have a membership card?'
+              discount = ask 'Do you have a discount code?'
+              if member = 'yes' or discount = 'yes'
+                print 'You get a free apple pie!'
+              else
+                print 'That will be 5 dollars please'
+
             mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
+            -   option: "You get a free pie!"
+                feedback: "Great job!"
+            -   option: "That will be 5 dollars please"
+                feedback: "That is not true"
+            -   option: "This code won't work, so there is no output"
+                feedback: "There is nothing wrong with the code"
+            -   option: "There is no way of knowing"
+                feedback: "There is! Read the question carefully"
+            correct_answer: "A"
+            hint: "Mind the command 'or' in line 3"
             question_score: '10'
         4:
-            question_text:
+            question_text: "Which line of code should follow this line in rock-paper-scissors game?"
             code:
+              ```
+              if computer_choice is 'rock' and your_choice is 'paper'
+              ```
             mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
+            -   option: "print 'you win'"
+                feedback: "You win!"
+            -   option: "print 'you lose'"
+                feedback: "You lose!"
+            -   option: "print 'tie'"
+                feedback: "It's only a tie if both choices are the same"
+            -   option: "print 'try again'"
+                feedback: "Try again!"
+            correct_answer: "A"
+            hint: "Paper beats rock"
             question_score: '10'
         5:
             question_text:
