@@ -1,7 +1,7 @@
 1:
 -   name: '{print}'
     explanation: הדפיסו משהו עם `{print}`.
-    demo_code: '{print} שלום וברוכים.ות הבאים.ות להדי!'
+    demo_code: '{print} שלום וברוכים.ות הבאים.ות להֶדִי!'
 -   name: '{ask}'
     explanation: שאלו משהו עם `{ask}`.
     demo_code: '{ask} מה הצבע האהוב עליך?'
@@ -9,27 +9,27 @@
     explanation: חזרו על משהו באמצעות `{echo}`.
     demo_code: "{ask} מה הצבע האהוב עליך?\n{echo} אז הצבע האהוב עליך הוא"
 -   name: '{print} אמוג׳י'
-    explanation: Print an emoji with `{print}`.
+    explanation: הדפיסו אמוג'י עם `{print}`.
     demo_code: '{print} 🙋 🌍 ❗'
 -   name: '{forward}'
-    explanation: Draw a line with `{forward}`.
+    explanation: ציירו קו עם `{forward}`.
     demo_code: '{forward} 100'
 -   name: '{turn}'
-    explanation: Turn the drawing turtle with `{turn}`.
+    explanation: הורו לצב לפנות עם `{turn}`.
     demo_code: "{forward} 25\n{turn} {left}\n{forward} 25\n{turn} {right}"
 2:
 -   name: '{is}'
-    explanation: Give a word a name to use in the program using `{is}`. You can choose the name yourself.
-    demo_code: "name {is} Hedy\n{print} welcome name"
+    explanation: תנו למילה שם לשימוש בתוכנה באמצעות `{is}`. בחרו איזה שם שתרצו.
+    demo_code: "שם {is} הֶדִי\n{print} ברוכה הבאה שם"
 -   name: '{ask}'
-    explanation: Ask something with `{ask}`. Beware! You need to give the answer a name with `{is}`.
-    demo_code: "color {is} {ask} What is your favorite color?\n{print} color is your favorite!"
+    explanation: שאלו משהו באמצעות `{ask}`. שימו לב! עליכם.ן להשיב עם שם באמצעות `{is}`.
+    demo_code: "צבע {is} {ask} מה הצבע האהוב עליך?\n{print} צבע הוא הצבע האהוב עליך!"
 -   name: '{sleep}'
-    explanation: Let Hedy pause for a (couple of) second(s).
-    demo_code: "{print} Let me think for one second...\n{sleep}\n{print} Hmm.. I need 3 more seconds...\n{sleep} 3\n{print} Eureka! Ive got it!"
--   name: '{is} with turtle'
-    explanation: Give a number a name using `{is}`. You can choose the name yourself.
-    demo_code: "angle {is} 90\n{turn} angle\n{forward} 100"
+    explanation: '`{sleep}` נותן להֶדִי לעצור למספר שניות.'
+    demo_code: "{print} תנו לי שנייה לחשוב...\n{sleep}\n{print} הממ.. אני צריכה עוד 3 שניות...\n{sleep} 3\n{print} אאוריקה! הצלחתי!"
+-   name: '{is} עם צב'
+    explanation: תנו למספר שם באמצעות `{is}`. בחרו איזה שם שתרצו.
+    demo_code: "זווית {is} 90\n{turn} זווית\n{forward} 100"
 6:
 -   name: '{print}'
     explanation: Print exactly using quotation marks.
@@ -78,15 +78,15 @@
     explanation: We can also use the `{while}` loop with `<` and `>`.
     demo_code: "count = 1\n{while} count < 3\n    {print} 'We do this ' 3 - count ' more times'\n    count = count + 1\n{print} 'We are done'"
 3:
--   name: Choose random
-    explanation: Choose a random word from a group with `{at}` and `{random}`.
-    demo_code: "animals {is} dog, cat, kangaroo\n{print} animals {at} {random}"
+-   name: בחר באקראי
+    explanation: בחרו באקראי מילה מתוך קבוצה באמצעות `{at}` ו `{random}`.
+    demo_code: "חיות {is} כלב, חתול, קנגרו\n{print} חיות {at} {random}"
 -   name: '{add}'
-    explanation: Add an item to a list.
-    demo_code: "animals {is} cow, cat\n{add} dog {to_list} animals"
+    explanation: '{add} פריט {to_list} רשימה.'
+    demo_code: "חיות {is} פרה, חתול\n{add} כלב {to_list} חיות"
 -   name: '{remove}'
-    explanation: Remove an item from a list.
-    demo_code: "animals {is} cat, dog, cow\n{remove} dog {from} animals"
+    explanation: '`{remove}` פריט `{from}` רשימה.'
+    demo_code: "חיות {is} חתול, כלב, פרה\n{remove} כלב {from} חיות"
 4:
 -   name: '{print}'
     explanation: Print exactly using quotation marks.
