@@ -32,6 +32,7 @@ import collections
 import datetime
 import sys
 import textwrap
+import zipfile
 
 # Todo TB: This can introduce a possible app breaking bug when switching to Python 4 -> e.g. Python 4.0.1 is invalid
 if (sys.version_info.major < 3 or sys.version_info.minor < 7):
@@ -460,9 +461,8 @@ def parse_tutorial(user):
     except:
         return "error", 400
 
-
-@app.route("/generate_dst", methods=['POST'])
-def prepare_dst_file():
+@app.route("/generate_machine_files", methods=['POST'])
+def prepare_files():
     body = request.json
     # Prepare the file -> return the "secret" filename as response
     transpiled_code = hedy.transpile(body.get("code"), body.get("level"), body.get("lang"))
@@ -483,27 +483,39 @@ def prepare_dst_file():
     lines = [x for x in lines if (not "time.sleep" in x) and (not "t.pencolor" in x)]
 
     threader += "  " + "\n  ".join(lines)
-    threader += "\n" + 't.save("dst_files/' + filename + '.dst")'
-    if not os.path.isdir('dst_files'):
-        os.makedirs('dst_files')
+    threader += "\n" + 't.save("machine_files/' + filename + '.dst")'
+    threader += "\n" + 't.save("machine_files/' + filename + '.png")'
+    if not os.path.isdir('machine_files'):
+        os.makedirs('machine_files')
     exec(threader)
+
+    # stolen from: https://stackoverflow.com/questions/28568687/send-with-multiple-csvs-using-flask
+
+    zip_file = zipfile.ZipFile(f'machine_files/{filename}.zip', 'w', zipfile.ZIP_DEFLATED)
+    for root, dirs, files in os.walk('machine_files/'):
+        # only zip files for this request, and exclude the zip file itself:
+        for file in [x for x in files if x[:len(filename)] == filename and x[-3:] != 'zip']:
+            zip_file.write('machine_files/'+file)
+    zip_file.close()
 
     return jsonify({'filename': filename}), 200
 
-
-# this is a route for testing purposes
-@app.route("/download_dst/<filename>", methods=['GET'])
-def download_dst_file(filename):
+@app.route("/download_machine_files/<filename>", methods=['GET'])
+def download_machine_file(filename, extension="zip"):
     # https://stackoverflow.com/questions/24612366/delete-an-uploaded-file-after-downloading-it-from-flask
+
+    # Once the file is downloaded -> remove it
     @after_this_request
     def remove_file(response):
         try:
-            os.remove("dst_files/" + filename + ".dst")
+            os.remove("machine_files/" + filename + ".zip")
+            os.remove("machine_files/" + filename + ".dst")
+            os.remove("machine_files/" + filename + ".png")
         except:
-            print("Error removing the generated .dst file!")
+            print(f"Error removing one of the generated files!")
         return response
-    # Once the file is downloaded -> remove it
-    return send_file("dst_files/" + filename + ".dst", as_attachment=True)
+
+    return send_file("machine_files/" + filename + "." + extension, as_attachment=True)
 
 
 def transpile_add_stats(code, level, lang_):
