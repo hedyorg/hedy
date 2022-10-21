@@ -671,26 +671,26 @@ adventures:
                 example_code: "```\nsign = 'x'\nopen_spots = [1, 2, 3, 4, 5, 6, 7, 8, 9]\ngame = 'on'\nspot_1 = '.'\nspot_2 = '.'\nspot_3 = '.'\nspot_4 = '.'\nspot_5 = '.'\nspot_6 = '.'\nspot_7 = '.'\nspot_8 = '.'\nspot_9 = '.'\n{print} 'TIC TAC TOE!'\n{print} spot_1 spot_2 spot_3\n{print} spot_4 spot_5 spot_6\n{print} spot_7 spot_8 spot_9\n{print} ' '\n{while} game != 'over':\n    choice = {ask} 'Player ' sign ', which spot?'\n    {if} choice {in} open_spots:\n        {remove} choice {from} open_spots\n        {if} choice == 1:\n            spot_1 = sign\n        {if} choice == 2:\n            spot_2 = sign\n        {if} choice == 3:\n            spot_3 = sign\n        {if} choice == 4:\n            spot_4 = sign\n        {if} choice == 5:\n            spot_5 = sign\n        {if} choice == 6:\n            spot_6 = sign\n        {if} choice == 7:\n            spot_7 = sign\n        {if} choice == 8:\n            spot_8 = sign\n        {if} choice == 9:\n            spot_9 = sign\n    {else}:\n        {print} 'That spot was already taken'\n    {print} spot_1 spot_2 spot_3\n    {print} spot_4 spot_5 spot_6\n    {print} spot_7 spot_8 spot_9\n    {print} ' '\n    {if} spot_1 == spot_2 {and} spot_2 == spot_3 {and} spot_1 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_4 == spot_5 {and} spot_5 == spot_6 {and} spot_4 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_7 == spot_8 {and} spot_8 == spot_9 {and} spot_7 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_1 == spot_4 {and} spot_4 == spot_7 {and} spot_1 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_2 == spot_5 {and} spot_5 == spot_8 {and} spot_2 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_3 == spot_6 {and} spot_6 == spot_9 {and} spot_3 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_1 == spot_5 {and} spot_5 == spot_9 {and} spot_1 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_3 == spot_5 {and} spot_5 == spot_7 {and} spot_3 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {else}:\n        {if} sign == 'x':\n            sign = 'o'\n        {else}:\n            sign = 'x'\n```\n"
                 start_code: '## place your code here'
     parrot:
-        name: Parrot
-        description: Create your own online pet parrot that will copy you!
-        default_save_name: Parrot
+        name: תוכי
+        description: צרו לעצמכם.ן תוכי מחמד שיחקה אתכם.ן!
+        default_save_name: תוכי
         levels:
             3:
-                story_text: "## Parrot\nTeach your parrot a new word with `{add}`.\n"
-                example_code: "```\nwords {is} squawk, Hedy\n{print} Train your parrot!\nnew_word {is} {ask} Which word do you want to teach them?\n{add} new_word {to_list} words\n{print} \U0001F9D2 Say new_word , Hedy!\n{print} \U0001F99C words {at} {random}\n```\n"
+                story_text: "## תוכי\nלמדו את התוכי שלכם.ן מילה חדשה עם `{add}`.\n"
+                example_code: "```\nמילים {is} סקוואק, הֶדִי\n{print} אלפו את התוכי שלכם.ן!\nמילה_חדשה {is} {ask} איזו מילה תרצו ללמד את התוכי?\n{add} מילה_חדשה {to_list} מילים\n{print} \U0001F9D2 אמרי מילה_חדשה, הֶדִי!\n{print} \U0001F99C מילים {at} {random}\n```\n"
                 start_code: '# place your code here'
             5:
-                story_text: "## Parrot\nReward your parrot {if} it says the correct word!\n"
-                example_code: "```\nwords {is} squawk, Hedy\n{print} 'Train your parrot!'\nnew_word {is} {ask} 'Which word do you want to teach them?'\n{add} new_word {to_list} words\nsaid_word {is} words {at} {random}\n{print} '\U0001F9D2 Say ' new_word ', Hedy!'\n{print} '\U0001F99C ' said_word\n{if} said_word {is} new_word {print} '\U0001F9D2 Great job, Hedy! \U0001F36A'\n{else} {print} '\U0001F9D2 No, Hedy! Say ' new_word\n```\n"
+                story_text: "## תוכי\nתנו פרס לתוכי שלכם אם הוא אומר את המילה הנכונה!\n"
+                example_code: "```\nמילים {is} סקוואק, הֶדִי\n{print} 'אלפו את התוכי!'\nמילה_חדשה {is} {ask} 'איזו מילה נלמד את התוכי?'\n{add} מילה_חדשה {to_list} מילים\nמילה_שנאמרה {is} מילים {at} {random}\n{print} '\U0001F9D2 תגידי ' מילה_חדשה ', הֶדִי!'\n{print} '\U0001F99C ' מילה_שנאמרה\n{if} מילה_שנאמרה {is} מילה_חדשה {print} '\U0001F9D2עבודה טובה, הֶדִי! \U0001F36A'\n{else} {print} '\U0001F9D2 לא, הֶדִי! תגידי ' מילה_חדשה\n```\n"
                 start_code: '# place your code here'
             1:
-                story_text: "## Parrot\nCreate your own online pet parrot that will copy you!\n"
-                example_code: "```\n{print} Im Hedy the parrot\n{ask} whats your name?\n{echo}\n{echo}\n```\n"
-                start_code: '{print} Im Hedy the parrot'
+                story_text: "## תוכי\nצרו תוכי מחמד שיחקה אתכם.ן!\n"
+                example_code: "```\n{print} אני הֶדִי התוכי\n{ask} מה שמך?\n{echo}\n{echo}\n```\n"
+                start_code: '{print} אני הֶדִי התוכי'
             2:
-                story_text: "## Parrot\nCreate your own online pet parrot that will copy you!\n"
-                example_code: "```\n{print} Im Hedy the parrot\nname {is} {ask} whats your name?\n{print} name\n{sleep}\n{print} squawk\n{sleep}\n{print} name\n```\n"
-                start_code: '{print} Im Hedy the parrot!'
+                story_text: "## תוכי\nצרו תוכי מחמד שיחקה אתכם.ן!\n"
+                example_code: "```\n{print} אני הֶדִי התוכי\nשם {is} {ask} מה שמך?\n{print} שם\n{sleep}\n{print} סקוואק!\n{sleep}\n{print} שם\n```\n"
+                start_code: '{print} אני הֶדִי התוכי!'
     dice:
         name: Dice
         description: Make your own dice
