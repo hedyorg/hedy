@@ -34,42 +34,42 @@
 -   name: '{print}'
     explanation: הדפיסו את הטקסט בדיוק עם מירכאות.
     demo_code: "{print} '5 פעמים 5 זה ' 5 * 5"
--   demo_code: "answer = {ask} 'What is 10 plus 10?'\n{if} answer {is} 20 {print} 'Yes!' {else} {print} 'Oops'"
+-   demo_code: "תשובה = {ask} 'כמה זה 10 ועוד 10?'\n{if} תשובה {is} 20 {print} 'נכון!' {else} {print} 'אופס!'"
     name: '{ask}'
-    explanation: Ask for a calculation and check whether it is correct.
--   demo_code: "angles = {ask} 'How many angles?'\nangle = 360 / angles\n{forward} 50"
-    name: '{ask} and {if} with turtle'
-    explanation: Ask the user how many angles they want.
+    explanation: בקשו תוצאה של חישוב ואז בידקו אם הוא נכון.
+-   demo_code: "זוויות = {ask} 'כמה זוויות?'\nזווית = 360 / זוויות\n{forward} 50"
+    name: '{ask} ו {if} עם צב'
+    explanation: שאלו את המשתמש כמה זוויות הם.ן רוצים.ות.
 8:
 -   name: '{print}'
-    explanation: Print something. Remember to use a quotation mark for literal printing.
-    demo_code: "{print} '5 times 5 is ' 5 * 5"
+    explanation: הדפיסו משהו. זיכרו להשתמש במירכאות בשביל להדפיס מילולית.
+    demo_code: "{print} '5 פעמים 5 זה ' 5 * 5"
 -   name: '{ask}'
-    explanation: Ask for the answer to a sum and check if it is correct. We can now print 2 lines.
-    demo_code: "answer = {ask} 'What is 5 plus 5?'\n{if} answer {is} 10\n    {print} 'Well done!'\n    {print} 'Indeed, the answer was ' answer\n{else}\n    {print} 'Oops!'\n    {print} 'The answer is 10'"
--   name: '{repeat} with turtle'
-    explanation: Repeat multiple lines.
+    explanation: בקשו את התשובה לתרגיל חיבור ובדקו אם היא נכונה. עכשיו אנחנו יכולים להדפיס שתי שורות.
+    demo_code: "תשובה = {ask} 'כמה זה 5 ועוד 5?'\n{if} תשובה {is} 10\n    {print} 'כל הכבוד!'\n    {print} 'בהחלט, התשובה היא ' תשובה\n{else}\n    {print} 'אופס!'\n    {print} 'התשובה היא 10'"
+-   name: '{repeat} עם הצב'
+    explanation: חזרו על מספר שורות.
     demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
 10:
--   demo_code: "{print} '5 times 5 is ' 5 * 5"
+-   demo_code: "{print} '5 פעמים 5 זה ' 5 * 5"
     name: '{print}'
-    explanation: Print something. Remember to use a quotation mark for literal printing.
--   name: '{for} with a list'
-    explanation: Print all things in a list.
-    demo_code: "animals {is} dog, cat, blobfish\n{for} animal {in} animals\n  {print} 'I love ' animal"
+    explanation: הדפיסו משהו. זיכרו להשתמש במירכאות בשביל להדפיס מילולית.
+-   name: '{for} עם רשימה'
+    explanation: מדפיס את כל האיברים ברשימה.
+    demo_code: "חיות {is} כלב, חתול, דינוזאור\n{for} חיה {in} חיות\n    {print} 'אני אוהב ' חיה"
 12:
 -   name: float directly
-    explanation: Decimal numbers.
-    demo_code: "{print} 'Calculate away!'\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n"
--   explanation: Text with quotation marks after `=`
-    name: assign text
-    demo_code: "name = 'Hedy the Robot'\n{print} 'Hello ' name\n"
--   name: quotes after {if} comparison
-    explanation: Text with quotation marks after `{if}`.
-    demo_code: "name = {ask} 'Who are you?'\n{if} name = 'Hedy'\n    {print} 'Hi there!'\n"
--   name: quotes in list
-    explanation: A list with quotation marks.
-    demo_code: "superheroes = 'Iron Man', 'Batman', 'Superman'\n{print} superheroes {at} {random}\n"
+    explanation: מספרים עשרוניים.
+    demo_code: "{print} 'יאללה חישובים!'\n{print} 'שתיים וחצי ועוד שתיים וחצי זה...'\n{print} 2.5 + 2.5\n"
+-   explanation: טקסט במירכאות אחרי `=`
+    name: הצב טקסט
+    demo_code: "שם = 'הֶדִי הרובוטית'\n{print} 'שלום ' שם\n"
+-   name: מירכאות אחרי בדיקה עם {if}
+    explanation: טקסט במירכאות אחרי `{if}`.
+    demo_code: "שם = {ask} 'מה שמך?'\n{if} שם = 'הדי'\n    {print} 'שלום!'\n"
+-   name: מירכאות ברשימה
+    explanation: רשימה עם מירכאות.
+    demo_code: "גיבורי_על = 'איירון-מן', 'באטמן', 'סופרמן'\n{print} גיבורי_על {at} {random}\n"
 15:
 -   name: '{while}'
     explanation: We can use the `{while}` loop with not equal.
@@ -112,37 +112,37 @@
     demo_code: "תשובה {is} {ask} 'כמה רחוק ללכת?'\n{if} תשובה {is} רחוק {forward} 100 {else} {forward} 5"
 -   name: '{in}'
     explanation: בדוק פריטים באמצעות `{in}`.
-    demo_code: "pretty_colors {is} green, yellow\ncolor {is} {ask} 'What {is} your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
+    demo_code: "צבעים_יפים {is} ירוק, צהוב\nצבע {is} {ask} 'מה {is} הצבע האהוב עליך?'\n{if} צבע {in} צבעים_יפים {print} 'יפה!' {else} {print} 'טוב נו...'"
 7:
 -   name: '{print}'
-    explanation: Print exactly using quotation marks.
-    demo_code: "{print} 'Hello welcome to Hedy.'"
+    explanation: הדפיסו בדיוק באמצעות במירכאות.
+    demo_code: "{print} 'ברוכים.ות הבאים.ות להֶדִי.'"
 -   name: '{ask}'
-    explanation: Ask something with `{ask}`.
-    demo_code: "color = {ask} 'What is your favorite color?'\n{print} color ' is your favorite!'"
+    explanation: שאלו משהו עם `{ask}`.
+    demo_code: "צבע = {ask} 'מה הצבע האהוב עליך?'\n{print} צבע 'הוא הצבע האהוב עליך!'"
 -   name: '{if}'
-    explanation: Make a choice with `{if}`.
-    demo_code: "color = {ask} 'What is your favorite color?'\n{if} color {is} green {print} 'pretty!' {else} {print} 'meh'"
--   name: '{repeat} with turtle'
-    explanation: Repeat a line of code with `{repeat}`.
+    explanation: בצעו בחירה באמצעות `{if}`.
+    demo_code: "צבע = {ask} 'מה הצבע האהוב עליך?'\n{if} צבע {is} ירוק {print} 'יפה!' {else} {print} 'טוב נו...'"
+-   name: '{repeat} עם הצב'
+    explanation: חזרו על שורה של קוד עם `{repeat}`.
     demo_code: '{repeat} 3 {times} {forward} 10'
 9:
--   name: '{if} with multiple lines'
-    explanation: The answer of a sum of questions with `{ask}` and see if it is correct. Now we print out two lines.
-    demo_code: "answer = {ask} 'What is 10 plus 10?'\n{if} answer {is} 20\n    {print} 'Well done!!'\n    {print} 'The answer is indeed' answer\n{else}\n    {print} 'Wrong'\n    {print} 'The answer is 20'"
--   name: '{repeat} with turtle'
-    explanation: Repeat multiple lines.
+-   name: '{if} עם מספר שורות'
+    explanation: קבלו את התשובה למספר שאלות עם `{ask}` ובדקו שהיא נכונה. עכשיו ביכולתנו להדפיס מספר שורות.
+    demo_code: "תשובה = {ask} 'כמה זה 10 ועוד 10?'\n{if} תשובה {is} 20\n    {print} 'כל הכבוד!'\n    {print} 'התשובה היא באמת ' תשובה\n{else}\n    {print} 'טעות.'\n    {print} 'התשובה היא 20'"
+-   name: '{repeat} עם הצב'
+    explanation: חזרו על מספר שורות.
     demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
 11:
--   name: '{for} loop'
-    explanation: We can use `{for}` with a `{range}`.
-    demo_code: "{for} counter {in} {range} 1 {to} 5\n    {print} counter"
+-   name: 'לולאת {for}'
+    explanation: ביכולתנו להשתמש ב`{for}` יחד עם `{range}`.
+    demo_code: "{for} מונה {in} {range} 1 {to} 5\n    {print} מונה"
 -   name: '{ask}'
-    explanation: Ask for the answer to a sum and check if it is correct. We can now print 2 lines.
-    demo_code: "answer = {ask} 'What is 5 plus 5?'\n{if} answer {is} 10\n    {print} 'Well done!'\n    {print} 'Indeed, the answer was ' answer\n{else}\n    {print} 'Oops!'\n    {print} 'The answer is 10'"
+    explanation: בקשו את התשובה לתרגיל חיבור ובדקו אם היא נכונה. עכשיו אנחנו יכולים להדפיס שתי שורות.
+    demo_code: "תשובה = {ask} 'כמה זה 5 ועוד 5?'\n{if} תשובה {is} 10\n    {print} 'כל הכבוד!'\n    {print} 'בהחלט, התשובה היא ' תשובה\n{else}\n    {print} 'אופס!'\n    {print} 'התשובה היא 10'"
 13:
 -   name: '{and}'
-    explanation: Two parts both need to be correct.
+    explanation: על שני החלקים להיות נכונים.
     demo_code: "answer1 = {ask} 'What is 3+2?'\nanswer2 = {ask} 'What is 2+2?'\n{if} answer1 {is} 5 {and} answer2 {is} 4\n    {print} 'Both answers are correct!'\n{else}\n    {print} 'At least one answer is wrong!'"
 -   name: '{or}'
     explanation: At least 1 of the two parts need to be correct. If both are correct, it is also fine.
