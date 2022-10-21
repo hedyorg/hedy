@@ -146,7 +146,7 @@ adventures:
                     年龄 = {ask} '你的年龄是多少？ '
                     {if} 名字 {is} '海迪' {and} 年龄 {is} 2
                         {print} '你才是真正的海迪！'
-                story_text: "## 且…或…？\n我们将要学习 `{and}` 和 `{or}` ！如果你想判断两个语句，你不需要使用两个`{if}`语句，而是可以使用`{and}`和`{or}`。如果你用了`{and}`，那么`{and}`左右两边的语句都需要为真。我们也可以使用`{or}`，`{or}`左右两边的语句中只需要有一个是正确的。"
+                story_text: "## 且…或…？ \n我们将要学习 `{and}` 和 `{or}` ！如果你想判断两个语句，你不需要使用两个{if}语句，而是可以使用`{and}`和`{or}`。如果你用了`{and}`，那么`{and}`左右两边的语句都需要为真。我们也可以使用`{or}`，`{or}`左右两边的语句中只需要有一个是正确的。"
                 #16:
                 #    start_code: |-
                 #        # 这是一个要问几个数学问题的程序
@@ -208,7 +208,7 @@ adventures:
             18:
                 start_code: "名字 = '海迪'\n{print}('我的名字是', 名字)"
                 story_text: "##最后一级！\n我们到达了真正的 Python 代码！这意味着从现在开始我们需要在 {print} 和 {range} 后使用括号。"
-                example_code: "```\n{print}('my name is Hedy!')\n```\n"
+                example_code: "```\n{print}('你好！')\n{for} i 在 {range}(1, 10) 内：\n    {print}('这是行'，i)\n```\n"
                 story_text_2: 如果你想打印多个东西，你需要用逗号把它们分开。
                 example_code_2: "```\n温度 = 25\n{print}('外面是', 温度, '度')\n```\n"
                 story_text_3: "##  输入\n我们获得Python代码前的最后一步，是把`{ask}`换成`{input}`。"
@@ -1354,20 +1354,20 @@ adventures:
                 start_code: "{print} 'Lets go to the next level!'"
                 story_text: "## What's next?\nYou have reached the end of this level, you're doing great! You are about to go to the next level. In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.\nIn Python there is no `{repeat}` command, but there is a command that works like {repeat}. Are you curious to find out how to say `{repeat}` in Python language? Quickly go on to find out!\n"
             11:
-                story_text: "## What's next?\nMaybe you have tried using decimal numbers in your restaurant adventure. If you did, you probably noticed that Hedy didn't understand them yet and always rounded off.\nFrom the next level on you can use decimal numbers.\n\nAnother cool feauture in the next level is that you can use mulitiple words in a variable.\nFor intance, you could already do this...\n```\nname = {ask} 'Who is your favorite cartoon character?'\n{print} 'I love watching ' name\n```\nBut you couldn't use multiple words in a variable like the example below. This program does not work yet in this level!\n```\nshow = SpongeBob SquarePants\n{print} show 'is my favorite show!'\n```\nGo to the next level to make this code work!\n"
+                story_text: "##下一步是什么？\n也许你已经在你的餐厅冒险活动中尝试使用小数。如果你这样做了，你可能注意到Hedy还不理解它们，总是把它们四舍五入。\n从下一级开始，你就可以使用小数啦。\n"
                 start_code: "{print} 'Lets go to the next level!'"
-                example_code: "```\nname = {ask} 'Who is your favorite cartoon character?'\n{print} 'I love watching ' name\n```\nBut you couldn't use multiple words in a variable like the example below. This program does not work yet in this level!\n```\nshow = SpongeBob SquarePants\n{print} show 'is my favorite show!'\n```\nGo to the next level to make this code work!\n"
+                example_code: "```\n汉堡是5\n饮料是2\n总计是汉堡+饮料\n打印 '你已经点了一个汉堡和一杯饮料'\n打印 '你一共花了 ' 总计 ' 元' 。\n```\n上面的代码有效，因为汉堡是5美元，饮料是2美元。但是，如果你多收50美分，程序就不能再工作了!就像下面的代码。\n```\n汉堡是5.50美元\n饮料是2.30美元\n总计是汉堡+饮料\n打印 '你已经点了一个汉堡和一杯饮料'\n打印 '你一共花了 ' total ' 元' 。\n```\n进入下一级，让这段代码发挥作用!\n"
             13:
                 start_code: "{print} 'Lets go to the next level!'"
-                story_text: "## What's next?\nWith the program below you can calulate {if} you've passed a subject at school (so, a grade of six or higher).\nYou can see this code is extremely inefficient, du to the very long code in line 5.\nAll the different grades from 1 to 5 had to be programmed seperately. Lucky for you, in the next level you'll learn how to do this without this extremely long code!\n```\nfirst_grade = {ask} 'What score did you get on your first test?'\nsecond_grade = {ask} 'What score did you get on your second test?'\nadded {is} first_grade + second_grade\nmean_grade {is} added / 2\n{if} mean_grade = 1 {or} mean_grade = 2 {or} mean_grade = 3 {or} mean_grade = 4 {or} mean_grade = 5\n    {print} 'Oh no! You have failed the subject...'\n{else}\n    {print} 'Great! You have passed the subject!'\n```\n"
+                story_text: "## 下一步是什么？ \n通过下面的程序，你可以计算出{if} （是否）你已经通过了学校的一个科目（所以，六级或以上）。 \n你可以看到这段代码的效率非常低，因为第5行的代码非常长。 \n所有从1到5的不同等级都必须单独编程。幸运的是，在下一级中，你将学习如何在没有这段很长的代码的情况下做到这一点！\n"
                 example_code: "```\nfirst_grade = {ask} 'What score did you get on your first test?'\nsecond_grade = {ask} 'What score did you get on your second test?'\nadded {is} first_grade + second_grade\nmean_grade {is} added / 2\n{if} mean_grade = 1 {or} mean_grade = 2 {or} mean_grade = 3 {or} mean_grade = 4 {or} mean_grade = 5\n    {print} 'Oh no! You have failed the subject...'\n{else}\n    {print} 'Great! You have passed the subject!'\n```\n"
             14:
                 start_code: "{print} 'Lets go to the next level!'"
-                story_text: "## What's next?\nIn this game below a code has been made to make sure the player can play on as long as he/she wants...\nBut the code is ineffective and way too long. Also, what {if} the player wants to play 101 games instead of 100?\nYou can't play to infinity?\nIn the next level you will learn a command that makes all of this a lot easier!\n```\ngame {is} 'on'\n{for} i {in} {range} 1 {to} 100\n    {if} game {is} 'on'\n        answer = {ask} 'Do you want to continue?'\n        {if} answer {is} 'no'\n            game {is} 'over'\n        {if} answer {is} 'yes'\n            {print} 'Ok we will continue'\n```\n"
+                story_text: "## 下一步是什么？\n在下面这个游戏中，已经有了一个代码，以确保玩家可以玩下去，只要他/她想...\n但这个代码是无效的，而且太长了。另外，{if} 玩家想玩101场而不是100场那会怎样？ \n你能玩无限场吗？ \n在下一级中，你将学习一个命令，使这一切变得更容易!\n"
                 example_code: "```\ngame {is} 'on'\n{for} i {in} {range} 1 {to} 100\n    {if} game {is} 'on'\n        answer = {ask} 'Do you want to continue?'\n        {if} answer {is} 'no'\n            game {is} 'over'\n        {if} answer {is} 'yes'\n            {print} 'Ok we will continue'\n```\n"
             15:
                 start_code: "{print} 'Lets go to the next level!'"
-                story_text: "## What's next?\nIn the next level we will grow a bit more towards real Python code. thon code. You will also learn how to match two lists together.\nThis way you can program a code in which the correct animal is matched to the right sound.\nBecause the two codes below... Are obviously nonsense!\n```\nanimals = 'chicken', 'horse', 'cow'\nsounds = 'cluck', 'neigh', 'moo'\n{for} animal {in} animals\n    {print} 'A ' animal ' says ' sounds {at} {random}\n```\nYou could also try to make it work this way, but....\n```\nanimals = 'chicken', 'horse', 'cow'\nsounds = 'cluck', 'neigh', 'moo'\n{for} animal {in} animals\n    {for} sound {in} sounds\n        {print} 'A ' animal ' says ' sound\n```\n"
+                story_text: "## 下一步是什么？\n在下一级中，我们将向真正的Python代码前进。你还将学习如何找到两个列表项匹配在一起。\n这样你就可以编写一个代码，其中正确的动物被匹配到正确的声音。\n因为下面的两个代码...显然是无稽之谈!\n"
                 example_code: "```\nanimals = 'chicken', 'horse', 'cow'\nsounds = 'cluck', 'neigh', 'moo'\n{for} animal {in} animals\n    {print} 'A ' animal ' says ' sounds {at} {random}\n```\nYou could also try to make it work this way, but....\n```\nanimals = 'chicken', 'horse', 'cow'\nsounds = 'cluck', 'neigh', 'moo'\n{for} animal {in} animals\n    {for} sound {in} sounds\n        {print} 'A ' animal ' says ' sound\n```\n"
             16:
                 start_code: "{print} 'Lets go to the next level!'"
@@ -1383,12 +1383,12 @@ adventures:
                 start_code: "{print} 'Lets go to the next level!'"
                 example_code: "```\n{repeat} 5 {times} {print} 'In the next level you can repeat multiple lines of code at once!'\n```\n"
             12:
-                story_text: "## What's next?\nIn the previous levels you learned how to put two `{if}`commands inside each other. This works fine, but it does give you very long and unhandy codes like this one:\n```\nusername {is} {ask} 'What is your username?'\npassword {is} {ask} 'What is your password?'\n{if} username {is} 'Hedy'\n    {if} password {is} 'secret'\n        {print} 'Welcome Hedy!'\n    {else}\n        {print} 'Access denied'\n{else}\n    {print} 'Access denied!'\n```\nIn this system you have to give both the correct username and the correct password.\nIn the next level you will learn the `{and}` command that will make this code a ot shorter and more understandable!\nCheck it out!\n"
+                story_text: "## 下一步是什么？ \n在前面的级别中，你学会了如何将两个`{if}`命令互相嵌套。这很好用，但它确实让你编写了非常长的、不方便的代码，比如这个： \n\n在这个系统中，你必须同时给出正确的用户名和正确的密码。 \n在下一关中，你将学习`{and}` 命令，这将使这段代码变得更短，更容易理解! \n来看看吧!\n"
                 start_code: "{print} 'Lets go to the next level!'"
                 example_code: "```\nusername {is} {ask} 'What is your username?'\npassword {is} {ask} 'What is your password?'\n{if} username {is} 'Hedy'\n    {if} password {is} 'secret'\n        {print} 'Welcome Hedy!'\n    {else}\n        {print} 'Access denied'\n{else}\n    {print} 'Access denied!'\n```\n"
             18:
                 start_code: "{print} ('Great job!!!')"
-                story_text: "## What's next?\nCongratulations! You have reached the last level of Hedy! But no worries, we are working very hard to create more levels and new adventures. So please come back later to check out the newest levels!\n"
+                story_text: "## 下一步是什么？ \n恭喜你！你已经到达了Hedy的最后一级。你在这里创建的代码可以被复制到真正的Python环境中，比如replit或PyCharm，你可以在那里继续学习！ \n但是请注意，Python只能读取英文命令，所以如果你一直在使用其他语言，你现在需要切换到英文。\n"
             17:
                 story_text: "## What's next?\nIn the next level you will learn a real Python way to use `{print}`.\n"
                 start_code: "{print} 'Lets go to the next level!'"
