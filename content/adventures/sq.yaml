@@ -28,8 +28,8 @@ adventures:
                 example_code: "```\nshpata = 'humbur'\nloja = 'ndezur'\n{print} 'Heroi ynë është duke ecur nëpër pyll'\n{print} 'Rruga ndahet në dy pjesë'\n{for} i {in} {range} 0 {to} 2\n    {if} loja {is} 'ndezur'\n        rruga = {ask} 'Cilën rrugë duhet ajo ta zgjedhë?'\n        {if} rruga {is} 'majtë' {and} shpata {is} 'gjetur'\n            {print} 'Heroi ynë përballet me një dragon!'\n            {print} 'Fatmirësisht heroi ynë ka një shpatë për ta mposhtur dragonin!'\n            loja = 'mbaruar'\n        {if} rruga {is} 'majtë' {and} shpata {is} 'humbur'\n            {print} 'Heroi ynë përballet me në dragon, por ajo nuk ka shpatë!'\n            {print} 'Heroi ynë mposhtet nga dragoi...'\n            {print} 'Provoni prapë'\n            loja = 'mbaruar'\n        {if} rruga {is} 'djathë' {and} shpata {is} 'gjetur'\n            {print} 'Ju veçse kei gjetur shpatën. Nu ka mbetur gjë tjetër këtu.'\n            {print} 'Ajo ecën mbrapa'\n        {if} rruga {is} 'djathtë' {and} shpata {is} 'humbur'\n            {print} 'Heroi ynë gjen një shpatë'\n            {print} 'Kjo mund të jetë e dobishme'\n            shpata = 'gjetur'\n```\n"
                 start_code: '# Vendoseni kodin tuaj këtu'
             15:
-                story_text: "## Story\nUsing the `{while}` loop can make your stories more interesting. For example, you can use `{while} game {is} 'on'` so you can play until the game is over.\nOr you can use `{while} sword {is} 'lost'` so the player can't continu the game until they have found something.\n"
-                example_code: "```\nkeys = 'lost'\n{print} 'You are standing in your garden and you have lost your keys.'\n{print} 'Where do you want to look for them?'\n{print} 'You can choose: tree, flowerbed, rock, postbox'\n{while} keys == 'lost'\n    location = {ask} 'Where do you want to look?'\n    {if} location == 'flowerbed'\n        {print} 'Here they are!'\n        keys = 'found'\n    {else}\n        {print} 'Nope they are not at the ' location\n{print} 'Now you can enter the house!'\n```\n"
+                story_text: "## Tregim\nDuke përdorur komandën `{while}` mund ta bëni tregimin më interesante. Për shembull, ju mund të përdorni `{while} game {is} 'on'` kështu që ju mund të luani derisa loja të mbarojë.\nOse ju mund të përdorni `{while} sword {is} 'lost'` kështu që lojtari nuk mund të vazhdojë lojën pa mos e gjetur shpatën.\n"
+                example_code: "```\nçelsat = 'humbur'\n{print} 'Ti je duke qëndruar në kopsht dhe i ke humbur çelsat.'\n{print} 'Ku doni që të kërkoni për ato?'\n{print} 'Ju mund të zgjidhni: dru, lule, gur, kuti'\n{while} çelsat == 'humbur'\n    vendi = {ask} 'Ku doni që të kërkoni?'\n    {if} vendi == 'lule'\n        {print} 'Ja ku janë!'\n        çelsat = 'gjetur'\n    {else}\n        {print} 'Jo, nuk janë në' vendi\n{print} 'Tani mund të hyni në shtëpi!'\n```\n"
                 start_code: '# Vendoseni kodin tuaj këtu'
             3:
                 start_code: '{print} Tregimi juaj'
@@ -162,75 +162,75 @@ adventures:
                 start_code: '# place your code here'
         name: Restaurant
     parrot:
-        name: Parrot
-        description: Create your own online pet parrot that will copy you!
-        default_save_name: Parrot
+        name: Papagalli
+        description: Krijo papagallin tënd online që do të ju kopjojë!
+        default_save_name: Papagalli
         levels:
             1:
-                story_text: "## Parrot\nCreate your own online pet parrot that will copy you!\n"
-                example_code: "```\n{print} Im Hedy the parrot\n{ask} whats your name?\n{echo}\n{echo}\n```\n"
-                start_code: '{print} Im Hedy the parrot'
+                story_text: "## Papagalli\nKrijo papagallin tuaj online që do të ju kopjojë!\n"
+                example_code: "```\n{print} Jam Hedy papagalli\n{ask} Si e keni emrin?\n{echo}\n{echo}\n```\n"
+                start_code: '{print} Jam Hedy papagalli'
             2:
-                story_text: "## Parrot\nCreate your own online pet parrot that will copy you!\n"
-                example_code: "```\n{print} Im Hedy the parrot\nname {is} {ask} whats your name?\n{print} name\n{sleep}\n{print} squawk\n{sleep}\n{print} name\n```\n"
-                start_code: '{print} Im Hedy the parrot!'
+                story_text: "## Papagalli\nKrijo papagallin tuaj online që do të ju kopjojë!\n"
+                example_code: "```\n{print} Jam Hedy papagalli\nemri {is} {ask} Si është emri juaj?\n{print} emri\n{sleep}\n{print} kuak\n{sleep}\n{print} emri\n```\n"
+                start_code: '{print} Jam Hedy papagalli!'
             3:
-                story_text: "## Parrot\nTeach your parrot a new word with `{add}`.\n"
-                example_code: "```\nwords {is} squawk, Hedy\n{print} Train your parrot!\nnew_word {is} {ask} Which word do you want to teach them?\n{add} new_word {to_list} words\n{print} \U0001F9D2 Say new_word , Hedy!\n{print} \U0001F99C words {at} {random}\n```\n"
-                start_code: '# place your code here'
+                story_text: "## Papagalli\nMëso papagallin tënd fjalë të re me komandën `{add}`.\n"
+                example_code: "```\nfjalët {is} kuak, Hedy\n{print} Mëso papagallin tënd!\nfjala_re {is} {ask} Cilën fjalë doni ti ja mësoni?\n{add} fjala_re {to_list} fajlët\n{print} \U0001F9D2 Thuaj fjala_re , Hedy!\n{print} \U0001F99C fjalët {at} {random}\n```\n"
+                start_code: '# Vendoseni kodin tuaj këtu'
             5:
-                story_text: "## Parrot\nReward your parrot if it says the correct word!\n"
-                example_code: "```\nwords {is} squawk, Hedy\n{print} 'Train your parrot!'\nnew_word {is} {ask} 'Which word do you want to teach them?'\n{add} new_word {to_list} words\nsaid_word {is} words {at} {random}\n{print} '\U0001F9D2 Say ' new_word ', Hedy!'\n{print} '\U0001F99C ' said_word\n{if} said_word {is} new_word {print} '\U0001F9D2 Great job, Hedy! \U0001F36A'\n{else} {print} '\U0001F9D2 No, Hedy! Say ' new_word\n```\n"
-                start_code: '# place your code here'
+                story_text: "## Papagalli\nShpërbleni papagallin tuaj nëse thot një fjalë të saktë!\n"
+                example_code: "```\nfjalët {is} kuak, Hedy\n{print} 'Mëso papagallin tënd!'\nfjala_re {is} {ask} 'Cilën fjalë doni ti ja mësoni?'\n{add} fjala_re {to_list} fjalët\nfjala_thënë {is} fjalët {at} {random}\n{print} '\U0001F9D2 Thuaj ' fjala_re ', Hedy!'\n{print} '\U0001F99C ' fjala_thënë\n{if} fjala_thënë {is} fjala_re {print} '\U0001F9D2 Punë e mrekullueshme, Hedy! \U0001F36A'\n{else} {print} '\U0001F9D2 Jo, Hedy! Thuaj ' fjala_re\n```\n"
+                start_code: '# Vendoseni kodin tuaj këtu'
     songs:
-        name: Sing a song!
-        description: Print a song
-        default_save_name: Song
+        name: Këndo një këngë!
+        description: Printo një këngë
+        default_save_name: Këngë
         levels:
             6:
-                story_text: "## Songs\nSongs often contain a lot of repetition. Sometimes the repetition is also based on counting.\nFor example, in the well-known song 'Bottles of beer'. You can program that song with a little math.\n"
-                example_code: "```\nverse = 99\n{print} verse ' bottles of beer on the wall'\n{print} verse ' bottles of beer'\n{print} 'Take one down, pass it around'\nverse = verse - 1\n{print} verse ' bottles of beer on the wall'\n```\n\nYou can now repeat lines 2 to 9 as many times as you want by copying the lines.\n"
-                start_code: "{print} 'Baby shark'"
+                story_text: "## Këngët\nKëngët shpesh herë kanë shumë përsëritje. Ndonjëherë përsëritja është e bazuar në numërim.\nPër shembull, në këngën e njohur 'Shishe birre'. Ju mund ta programoni këngën me pak matematik.\n"
+                example_code: "```\nvargu = 99\n{print} vargu ' shishe birre në mur'\n{print} vargu ' shishe birre'\n{print} 'Hiqe njërën, kaloje përreth'\nvargu = vargu - 1\n{print} vargu ' shishe birre në mur'\n```\n\nTani ju mund të përsëritni rreshtat 2 deri 9 sa herë që doni duke kopjuar rreshtat.\n"
+                start_code: "{print} 'Peshkaqeni i vogël'"
             7:
-                story_text: "## Songs\nSongs often contain a lot of repetition. For example... Baby Shark! If you sing it, you keep singing the same thing:\n\nBaby Shark tututudutudu <br>\nBaby Shark tututudutudu <br>\nBaby Shark tututudutudu <br>\nBaby Shark\n\nYou can make this song much shorter with a `{repeat}`! Can you finish the code?\n"
-                example_code: "```\n{repeat} _ _ {print} 'Baby Shark tututudutudu'\n{print} 'Baby Shark'\n```\n\nAfter Baby Shark you can of course also program other songs. There are many songs with repetition.\n"
-                start_code: "{print} 'Baby Shark'"
+                story_text: "## Këngët\nKëngët shpesh herë kanë përsëritje. Për shembull... Peshkaqeni i vogël! Nëse e këndoni, ju vazhdoni të këndoni të njëjtën gjë:\n\nPeshkaqeni i vogël tututudutudu <br>\nPeshkaqeni i vogël tututudutudu <br>\nPeshkaqeni i vogël tututudutudu <br>\nPeshkaqeni i vogël\n\nJu mund ta bëni këtë këngë më të shkurtë me komdanën `{repeat}`! A mund ta përfundoni kodin?\n"
+                example_code: "```\n{repeat} _ _ {print} 'Peshkaqeni i vogël tututudutudu'\n{print} 'Pëshkaqeni i vogël'\n```\n\nPas Peshkani i vogël, ju mund të programi këngë të tjera. Ka shumë këngë me përsëritje.\n"
+                start_code: "{print} 'Peshkaqeni i vogël'"
             8:
-                story_text: "## Songs\nIn a previous level you've programmed the song 'Bottles of beer'. You made one verse and then had to copy the verses 99 times. In level 7 you can repeat the song 99 times, just by adding one simple line!\n"
-                example_code: "```\nverse = 99\n{repeat} 99 {times}\n    {print} verse ' bottles of beer on the wall'\n    {print} verse ' bottles of beer'\n    {print} 'Take one down, pass it around'\n    verse = verse - 1\n    {print} verse ' bottles of beer on the wall'\n```\n"
+                story_text: "## Këngë\nNë nivelin e mëparshëm, ju e keni programuar këngën 'Shishe birre'. Ju e bëtë një varg dhe u deshtë që të kopjoni vargun 99 herë. Në nivelin 7 ju mund të përsëritni këngën 99 herë, vetëm duke shtuar një rresht kodi!\n"
+                example_code: "```\nvargu = 99\n{repeat} 99 {times}\n    {print} vargu ' shishe birre në mur'\n    {print} vargu ' shishe birre'\n    {print} 'Hiqeni njërën, kaloje përreth'\n    vargu = vargu - 1\n    {print} vargu ' shishe birre në murr'\n```\n"
                 start_code: '# Vendoseni kodin tuaj këtu'
             10:
-                story_text: "## Songs\nIn this level you can easily make the childrens' song 'Five little monkeys'. Can you make the last chorus?\nYou can also make the whole baby shark song (including all the other sharks in the family) in only 6 lines!\nOr you can make Old McDonald with all the different animals.\n"
-                example_code: "## 5 Little Monkeys Jumping on the bed\n```\nmonkeys = 5, 4, 3, 2\n{for} monkey {in} monkeys\n    {print} monkey ' little monkeys jumping on the bed'\n    {print} 'One fell off and bumped his head'\n    {print} 'Mama called the doctor and the doctor said'\n    {print} 'NO MORE MONKEYS JUMPING ON THE BED!'\n```\n\n## Baby Shark\n```\nsharks = baby, mommy, daddy, grandma, grandpa\n{for} shark {in} sharks\n    {print} shark 'tututututudu'\n    {print} shark 'tututututudu'\n    {print} shark 'tututututudu'\n    {print} shark\n```\n## Old McDonald\n```\nanimals = pig, dog, cow\n{for} animal {in} animals\n    {if} animal {is} pig\n        sound = oink\n    {if} animal {is} dog\n        sound = woof\n    {if} animal {is} cow\n        sound = moo\n    {print} 'Old McDonald had a farm'\n    {print} 'E I E I O!'\n    {print} 'and on that farm he had a ' animal\n    {print} 'E I E I O!'\n    {print} 'with a ' sound sound ' here'\n    {print} 'and a ' sound sound ' there'\n    {print} 'here a ' sound\n    {print} 'there a ' sound\n    {print} 'everywhere a ' sound sound\n```\n"
-                start_code: '# place your code here'
+                story_text: "## Këngë\nNë këtë nivel ju mund thjeshtë të bëni këngën për fëmijë ' këngën 'Pesë fëmijët majmun'. A mund ta bëni korin e fundit?\nJu mund ta bëni të gjithë këngën e Peshkaqenit të vogël (duke përmbajtur të gjithë peshkaqenët në familje) në vetëm 6 rreshta!\nOse ju mund ta bëni Mek Donald i vjetër me të gjitha kafshët e ndryshme.\n"
+                example_code: "## 5 majmunët e vogël duke kërcyer në shtrat\n```\nmajmunët = 5, 4, 3, 2\n{for} majmuni {in} majmunët\n    {print} majmuni ' majmunët e vogël duke kërcyer në shtrat'\n    {print} 'Njëri rra dhe vrau kokën'\n    {print} 'Nëna e thëriti doktorin dhe doktori tha'\n    {print} 'Jo më majmunët të kërcojnë në shtrat!'\n```\n\n## Peshkaqeni i vogël\n```\npeshkaqenët = i vogli, nëna , babai, gjyshja, gjyshi\n{for} peshkaqeni {in} peshkaqenët\n    {print} peshkaqeni 'tututututudu'\n    {print} peshkaqeni 'tututututudu'\n    {print} peshkaqeni 'tututututudu'\n    {print} peshkaqeni\n```\n## Mek Donald i vjetër\n```\nkafshët = derri, qeni, lopa\n{for} kafsha {in} kafshët\n    {if} kafsha {is} derri\n        zëri = oink\n    {if} kafsha {is} qeni\n        zëri = auf\n    {if} kafsha {is} lopa\n        zëri = muuuu\n    {print} 'Mek Donald i vjetër kishte një fermë'\n    {print} 'I A I A O!'\n    {print} 'dhe në këtë fermë ai kishte një ' kafshë\n    {print} 'I A I A O!'\n    {print} 'me një ' zëri zëri ' këtu'\n    {print} 'dhe një ' zëri zëri' atje'\n    {print} 'këtu një ' zëri\n    {print} 'atje një ' zëri\n    {print} 'gjithkund një ' zëri zëri\n```\n"
+                start_code: '# Vendoseni kodin tuaj këtu'
             11:
-                story_text: "## Songs\nIn this level you can use the `{for} i {in} {range}` command to make songs that use counting.\n"
-                example_code: "## 5 little monkeys\n```\n{for} i {in} {range} 5 {to} 1\n    {print} i ' little monkeys jumping on the bed'\n    {print} 'One fell off and bumped his head'\n    {print} 'Mama called the doctor and the doctor said'\n    {if} i {is} 1\n        {print} 'PUT THOSE MONKEYS RIGHT TO BED!'\n    {else}\n        {print} 'NO MORE MONKEYS JUMPING ON THE BED!'\n```\n"
+                story_text: "## Këngët\nNë këtë nivel ju mund të përdorni komandën `{for} i {in} {range}` të bëni muzika që përdorin numërim.\n"
+                example_code: "## 5 majmunët e vogël\n```\n{for} i {in} {range} 5 {to} 1\n    {print} i 'majmunët e vogël kërcejnë në shtrat'\n    {print} 'Njëri rra dhe vrau kokën'\n    {print} 'Nëna thërriti doktorin dhe doktori tha'\n    {if} i {is} 1\n        {print} 'Vendoseni këto majmunë drejt në shtrat!'\n    {else}\n        {print} 'Jo më majmunët të kërcejnë në shtrat'\n```\n"
                 start_code: '# Vendoseni kodin tuaj këtu'
             12:
-                story_text: "## Sing a song!\nIn this song we can make it even easier to program '{if} you're happy and you know it, clap your hands'. Because we can put all of the actions in a variable, check it out:\n"
-                example_code: "```\nactions = 'clap your hands', 'stomp your feet', 'shout Hurray!'\n{for} action {in} actions\n    {for} i {in} {range} 1 {to} 2\n        {print} 'if youre happy and you know it'\n        {print} action\n    {print} 'if youre happy and you know it and you really want to show it'\n    {print} 'if youre happy and you know it'\n    {print} action\n```\n"
-                start_code: '# place your code here'
+                story_text: "## Këndo një këngë!\nNë këtë këngë ne mund ta bëjmë ende më të lehtë të programojmë '{if} jeni të lumtur dhe e dini, duartrokitni'. Sepse mund ti vendosim të gjitha veprimet në një variabël, shiheni:\n"
+                example_code: "```\nveprimet = 'duartrokitni', 'sheklni me këmbët tuaja', 'thirrni URAA!'\n{for} veprim {in} veprimet\n    {for} i {in} {range} 1 {to} 2\n        {print} 'Nëse jeni të lumtur dhe e dini'\n        {print} veprim\n    {print} 'Nëse jeni të lumtur dhe e dini dhe vërtet doni ta tregoni'\n    {print} 'Nëse jeni të lumtur dhe e dini'\n    {print} veprim\n```\n"
+                start_code: '# Vendoseni kodin tuaj këtu'
             16:
-                story_text: "## Sing a song!\nIn this level, you can program a song like OldMacDonald even more quickly. You can connect the right animal to the right sound by simply putting them in the same place in the list.\nThe Drunken Sailor is also quickly made in this level. You only need 8 lines for the entire song, check it out!\n"
-                example_code: "## Old MacDonald\n```\nanimals = ['pig', 'dog', 'cow']\nsounds = ['oink', 'woof', 'moo']\n{for} i {in} {range} 1 {to} 3\n    animal = animals[i]\n    sound = sounds[i]\n    {print} 'Old McDonald had a farm'\n    {print} 'E I E I O!'\n    {print} 'and on that farm he had a ' animal\n    {print} 'E I E I O!'\n    {print} 'with a ' sound sound ' here'\n    {print} 'and a ' sound sound ' there'\n    {print} 'here a ' sound\n    {print} 'there a ' sound\n    {print} 'everywhere a ' sound sound\n```\n\n## Drunken Sailor\n```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines\n    {for} i {in} {range} 1 {to} 3\n        {print} line\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
-                start_code: '# place your code here'
+                story_text: "## Këndo një këngë!\nNë këtë nivel, ju mund ta programoni një këngë si Mek Donald i vjetër edhe më shpejtë. Ju mund ta lidhni kafshën e saktë me zërin e saktë thjeshtë duke i vënë me një vend në listë.\nMarinari i dehur gjithashtu mund të bëhet shpejtë. Ju duhet vetëm 8 rreshta për të gjithë këngën, shiheni!\n"
+                example_code: "## Mek Donald i vjetër\n```\nkafshët = ['derri', 'qeni', 'lopa']\nzërat = ['oink', 'auf', 'muuu']\n{for} i {in} {range} 1 {to} 3\n    kafsha = kafshët[i]\n    zëri = zërat[i]\n    {print} 'Mek Donald i vjetër kishte një fermë'\n    {print} 'I A I A O!'\n    {print} 'dhe në këtë fermë ai kishtë një ' kafsha\n    {print} 'E I E I O!'\n    {print} 'me një ' zëri zëri ' këtu'\n    {print} 'dhe një ' zëri zëri ' atje'\n    {print} 'këtu një ' zëri\n    {print} 'atje një ' zëri\n    {print} 'gjithkund një ' zëri zëri\n```\n\n## Marinari i dehur\n```\nrreshtat = ['Çfarë duhet të bëjmë me marinarin e dehur', 'Rruajeni barkun e tij me brisk të ndryshkur', 'futeni në një varg derisa të jetë esëll']\n{for} rreshti {in} rreshtat\n    {for} i {in} {range} 1 {to} 3\n        {print} rreshti\n    {print} 'herët në mëngjes'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'Eheei dhe ja ku ngritet'\n    {print} 'herët në mëngjes'\n```\n"
+                start_code: '# Vendoseni kodin tuaj këtu'
     turtle:
         description: Make your own drawing
-        default_save_name: Turtle
+        default_save_name: Breshka
         levels:
             1:
-                story_text: "## Let's draw\nYou can also use Hedy to draw. By combining turns and lines, you can make a square or stairs!\n\nUsing `{forward}` you draw a line forwards. The number behind it determines how far the turtle will walk. `{turn} {right}` turns a quarter turn in clockwise direction, `{turn} {left}` turns counter clockwise.\nIf you want to go backwards, you use the `{forward}` command but with a negative number. So for example `{forward} -100`\n\nThis is the start of a little staircase. Can you make it have 5 steps?\n"
+                story_text: "## Le të vizatojmë\nJu mund ta përdorni Hedy për të vizatuar. Duke bashkangjitur kthesa dhe vija, Ju mund të bëni një katror apo shkallë!\n\nDuke përdorur komandën `{forward}` ju vizatoni një vijë përpara. Numri pas komandës përcakton sa larg do të ecë breshka. `{turn} {right}` kthen një çerek drejt akrepave të orës, `{turn} {left}` kthen kundër akrepave të orës.\nNëse do të shkosh mbrapa, duhet ta përdorni komandën `{forward}` por me numër negativ. Si për shembull `{forward} -100`\n\nKy është fillimi e një shkalle të vogël. A mund ta bëni të ketë 5 hapa?\n"
                 example_code: "```\n{forward} 50\n{turn} {right}\n{forward} 50\n{turn} {left}\n{forward} 50\n```\n"
-                story_text_2: "## Colors\nYou can also change the color of the lines with the command `{color}`. Check out the example.\nYou can also use the command `{color} {white}` to make 'invisible' lines. You could use these white lines to move the turtle anywhere in the screen before you start drawing.\n"
+                story_text_2: "## Ngjyrat\nGjithashtu mund të ndryshojmë ngjyrat e rreshtave me komandën`{color}`. Shiheni shembullin.\nGjithashtu mund të përdorni komandën `{color} {white}` që të bëni rreshta të 'padukshëm'. Ju mund ti përdorni këto rreshta të bardhë që të lëvizni breshkën gjithkund në ekran para se të filloni të vizatoni.\n"
                 example_code_2: "```\n{color} {white}\n{forward} -80\n{color} {green}\n{forward} 50\n{color} {yellow}\n{forward} 50\n{color} {red}\n{forward} 50\n```\n"
                 start_code: "{forward} 50\n{turn} {left}"
             2:
-                story_text: "## Turtle\nIn this level you can use variables to make the turtle interactive. For example you can ask the player how many steps the turtle must make.\n"
-                example_code: "```\nanswer {is} {ask} How many steps should the turtle make?\n{forward} answer\n```\n"
-                story_text_2: "Also, in level 1 the turtle could only turn left or right. That is a bit boring!\nIn level 2 he can point his nose in all directions.\n\nUse 90 to turn a quarter. We call this degrees. A full turn is 360 degrees.\nCan you make a figure with this code? Maybe a triangle or a circle?\n"
-                example_code_2: "```\n{print} Drawing figures\nangle {is} 90\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n```\n"
-                start_code: "{print} Turtle race!\nangle {is} 90\n{turn} angle\n{forward} 25"
+                story_text: "## Breshka\nNë këtë nivel ju mund të përdorni variabla që të bëni breshkën interaktive. Si për shembull mund ta pyetni lojtarin sa hapa duhet që të bëje breshka.\n"
+                example_code: "```\nrezultati {is} {ask} Sa hapa duhet të bëje breshka?\n{forward} rezultati\n```\n"
+                story_text_2: "Gjithashtu në nivelin 1, breshka mund që të shkonte vetëm majtas apo djathtas. Ajo është pak e mërzitshme!\nNë nivelin e 2 ajo mund të tregoje një drejtin me hundën e saj në të gjitha anët.\n\nPërdor 90 që të kthehet një çerek. Ne i thuam kësaj shkallë. Një kthesë e plot është 360 shkallë.\nA mund të vizatoni një figurë me këtë kod? Ndoshta një trekëndësh apo rreth?\n"
+                example_code_2: "```\n{print} Duke vizatuar figura\nkëndi {is} 90\n{turn} këndi\n{forward} 25\n{turn} këndi\n{forward} 25\n```\n"
+                start_code: "{print} Garë breshkash!\nkëndi {is} 90\n{turn} këndi\n{forward} 25"
             3:
                 story_text: "## Searching turtle\nIn this level you can use use `{at} {random}` with the drawing turtle. A random choice makes the turtle walk a different path each time.\nUse `{at} {random}` to choose a value from a list. You can copy and paste lines 2 and 3 to create a longer random path.\n"
                 example_code: "```\nangles {is} 10, 50, 90, 150, 250\n{turn} angles {at} {random}\n{forward} 25\n```\n"
