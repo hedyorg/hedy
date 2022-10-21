@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-10-13 13:47+0200\n"
-"PO-Revision-Date: 2022-10-20 18:52+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2022-10-21 18:27+0000\n"
+"Last-Translator: Mateusz Zmuda <mati.zmudzio@gmail.com>\n"
 "Language-Team: pl <LL@li.org>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
@@ -122,9 +122,8 @@ msgstr "Invalid tutorial step"
 msgid "tutorial_title_not_found"
 msgstr "Nie możemy odnaleźć tej strony!"
 
-#, fuzzy
 msgid "tutorial_message_not_found"
-msgstr "You have received an invitation to join class"
+msgstr "Nie mogliśmy znaleźć oczekiwanego punktu poradnika..."
 
 msgid "ajax_error"
 msgstr "Wystąpił błąd, proszę spróbować ponownie."
@@ -216,11 +215,14 @@ msgid "Var Undefined"
 msgstr "You tried to use the variable {name}, but you did not set it. It is also possible that you were trying to use the word {name} but forgot quotation marks."
 
 msgid "Access Before Assign"
-msgstr "You tried to use the variable {name} on line {access_line_number}, but you set it on line {definition_line_number}. Set a variable before using it."
+msgstr ""
+"Próbowano użyć zmiennej {name} na linii {access_line_number}, ale stworzoną "
+"ją na linii {definition_line_number}. Stwórz zmienną przed jej użyciem."
 
-#, fuzzy
 msgid "Cyclic Var Definition"
-msgstr "The name {variable} needs to be set before you can use it on the right-hand side of the is command"
+msgstr ""
+"Zmienna {variable} musi zostać ustawiona zanim będzie można użyć jej po "
+"prawej stronie tej komendy."
 
 #, fuzzy
 msgid "Lonely Echo"
@@ -482,9 +484,8 @@ msgstr "Please copy and paste this link into a new tab:"
 msgid "invite_prompt"
 msgstr "Wprowadź nazwę użytkownika"
 
-#, fuzzy
 msgid "invite_by_username"
-msgstr "Wszystkie nazwy użytkowników muszą być unikalne."
+msgstr "Zaproś za pomocą nazwy użytkownika"
 
 msgid "create_accounts"
 msgstr "Utwórz wiele kont"
@@ -666,9 +667,13 @@ msgstr "Customize class"
 msgid "customize_class_step_8"
 msgstr "Wybierz \"Zapisz\" -> I gotowe!"
 
-#, fuzzy
 msgid "customize_class_exp_2"
-msgstr "Customize class"
+msgstr ""
+"Zawsze możesz zmienić te ustawienia później. Przykładowo, możesz udostępnić "
+"określone przygody lub poziomy podczas nauczania w klasie. W ten sposób "
+"możesz łatwo określić poziom i przygody, nad którymi będą pracować Twoi "
+"uczniowie. Jeśli chcesz, aby wszystko było dostępne dla swojej klasy, po "
+"prostu usuń całkowicie usunąć całe dostosowanie."
 
 msgid "select_adventures"
 msgstr "Wybierz przygody"
@@ -832,9 +837,12 @@ msgstr "Welcome to Hedy! Your are now the proud owner of a teachers account whic
 msgid "highscores"
 msgstr "Wynik"
 
-#, fuzzy
 msgid "highscore_explanation"
-msgstr "On this page you can look through programs created by other Hedy users. You can filter on both a Hedy level and adventure. Click on \"View program\" to open a program and run it. Programs with a red header contain a mistake. You can still open the program, but running it will result in an error. You can of course try to fix it! If the creator has a public profile you can click their username to visit their profile. There you will find all their shared programs and much more!"
+msgstr ""
+"Na tej stronie możesz zobaczyć aktualne najlepsze wyniki w oparciu o ilość "
+"zebranych osiągnięć. Zobacz ranking dla wszystkich użytkowników, swojego "
+"kraju lub klasy. Kliknij nazwę użytkownika, aby wyświetlić jego profil "
+"publiczny."
 
 #, fuzzy
 msgid "highscore_no_public_profile"
@@ -855,9 +863,8 @@ msgstr "Moje klasy"
 msgid "achievements"
 msgstr "osiągnięcia"
 
-#, fuzzy
 msgid "country_title"
-msgstr "Please select a valid country."
+msgstr "Państwo"
 
 msgid "last_achievement"
 msgstr "Ostatnie zdobyte osiągnięcie"
@@ -888,9 +895,8 @@ msgstr "Wprowadź swoją odpowiedź tutaj..."
 msgid "enter"
 msgstr "Enter"
 
-#, fuzzy
 msgid "already_program_running"
-msgstr "Start programming"
+msgstr "Jakiś program właśnie się wykonuje, najpierw go zakończ"
 
 msgid "run_code_button"
 msgstr "Uruchom kod"
@@ -975,13 +981,11 @@ msgstr "Translated keywords"
 msgid "non_keyword_support"
 msgstr "Translated content"
 
-#, fuzzy
 msgid "welcome"
-msgstr "Welcome to Hedy! Your are now the proud owner of a teachers account which allows you to create classes and invite students."
+msgstr "Witaj"
 
-#, fuzzy
 msgid "welcome_back"
-msgstr "Welcome to Hedy! Your are now the proud owner of a teachers account which allows you to create classes and invite students."
+msgstr "Witaj spowrotem"
 
 #, fuzzy
 msgid "teacher_tutorial_logo_alt"
@@ -1019,9 +1023,8 @@ msgstr "Nie masz konta?"
 msgid "profile_logo_alt"
 msgstr "Profil został zaktualizowany."
 
-#, fuzzy
 msgid "no_public_profile"
-msgstr "Profil publiczny"
+msgstr "Nie masz jeszcze opisu profilu publicznego..."
 
 #, fuzzy
 msgid "create_question"
@@ -1514,18 +1517,24 @@ msgstr ""
 "Your Hedy account has been created successfully. Welcome!\n"
 "Please click on this link to verify your email address: {link}"
 
-#, fuzzy
 msgid "mail_change_password_body"
-msgstr "Zmień hasło"
+msgstr ""
+"Twoje hasło Hedy zostało zmienione. Jeśli to zrobiłeś, wszystko jest w "
+"porządku.\n"
+"Jeśli nie zmieniłeś hasła, natychmiast skontaktuj się z nami, odpowiadając "
+"na tę wiadomość e-mail."
 
 msgid "mail_recover_password_body"
 msgstr ""
 "Klikając ten link, możesz ustawić nowe hasło Hedy. Ten link jest ważny przez <b>4</b> godziny.\n"
 "Jeśli nie wymagałeś resetowania hasła, zignoruj ten e-mail: {link}"
 
-#, fuzzy
 msgid "mail_reset_password_body"
-msgstr "Reset password"
+msgstr ""
+"Twoje hasło Hedy zostało zresetowane do nowego. Jeśli to zrobiłeś, wszystko "
+"jest w porządku.\n"
+"Jeśli nie zmieniłeś hasła, natychmiast skontaktuj się z nami, odpowiadając "
+"na tę wiadomość e-mail."
 
 msgid "mail_welcome_teacher_body"
 msgstr ""
@@ -1556,9 +1565,8 @@ msgstr "Welcome to Hedy"
 msgid "mail_change_password_subject"
 msgstr "Zmień hasło"
 
-#, fuzzy
 msgid "mail_recover_password_subject"
-msgstr "Request a password reset"
+msgstr "Poproś o zresetowanie hasła"
 
 #, fuzzy
 msgid "mail_reset_password_subject"
@@ -1683,9 +1691,8 @@ msgstr "You didn't enter a class name!"
 msgid "class_name_duplicate"
 msgstr "You already have a class with this name."
 
-#, fuzzy
 msgid "no_such_class"
-msgstr "No such Hedy class"
+msgstr "Nie istnieje taka klasa Hedy."
 
 #, fuzzy
 msgid "invalid_class_link"
