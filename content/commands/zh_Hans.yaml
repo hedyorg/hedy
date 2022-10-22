@@ -169,13 +169,13 @@
     name: '{ask}'
     explanation: 使用ask提问加法运算的答案然后检查答案是否正确。我们现在可以打印两行代码了。
 12:
--   name: "直接漂浮"
+-   name: "直接浮点数"
     explanation: "十进制数字。"
     demo_code: |
         {print} '计算出来！'
         {print} '两个半加上两个半是……'
         {print} 2.5 + 2.5
--   name: "指定文本"
+-   name: "文本赋值"
     explanation: "`=`后带引号的文本"
     demo_code: |
         名字 = '海迪机器人'
@@ -266,9 +266,9 @@
 -   name: "从一个列表中随机选择元素"
     explanation: "我们用[random] 从一个列表中随机选择元素，因此fruit[random]的意思是从列表fruit中随机选择一个水果!"
     demo_code: |-
-        fruit = ['香蕉', '苹果', '樱桃']
-        random_fruit = fruit[random]
-        {print} random_fruit
+        水果 = ['香蕉', '苹果', '樱桃']
+        随机水果 = 水果[{random}]
+        {print} 随机水果
 17:
 -   explanation: "`{elif}`"
     demo_code: |-
