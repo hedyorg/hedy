@@ -1,44 +1,44 @@
 adventures:
     default:
-        name: "Introduction"
+        name: "介绍"
         description: "关卡说明"
-        default_save_name: "intro"
+        default_save_name: "介绍"
         levels:
             1:
                 story_text: |
                     ## 欢迎来到海迪！
-                    在第1级学习内容中你可以使用命令`{print}`, `{ask}` 和 `{echo}`。
-                    在编程栏里面输入你的代码。或者按下代码范例框里面的绿色按钮, 代码就会为你打出来!
-                    使用左边编程栏下的绿色 “运行代码” 按钮, 你可以尝试运行你的代码。
+                    在第1关，你可以使用命令`{print}`、`{ask}`和`{echo}`。
+                    在编程栏里面输入你的代码。或者按下代码范例框里面的绿色按钮，它会为你输入代码!
+                    你可以用左边编程栏下方绿色的 “运行程序” 按钮测试你的代码。
 
                     你可以使用`{print}`命令将文本打印到屏幕上。
 
-                start_code: "{print} 你好世界!"
-                example_code: "```\n{print} Hello!\n{print} Welcome to Hedy!\n```\n"
-                story_text_2: "您还可以使用 `{ask}` 请求输入问题，然后使用 `{echo}` 命令重复问题。\n"
-                example_code_2: "```\n{ask} What is your name?\n{echo} hello\n```\n"
-                story_text_3: "那么开始吧！ 不知道该创作些什么？您在下面的选项卡中将找到要构建的程序的想法。\n"
+                start_code: "{print} 你好，世界！"
+                example_code: "```\n{print} 你好！\n{print} 欢迎来到海迪！\n```\n"
+                story_text_2: "你还可以使用`{ask}`要求输入内容，然后使用`{echo}`命令复述输入的内容。\n"
+                example_code_2: "```\n{ask} 你叫什么？\n{echo} 你好，\n```\n"
+                story_text_3: "那么开始吧！ 不知道该做些什么？你可以下面的标签页中找到要构建的程序的灵感。\n"
             2:
                 story_text: |
                     ## 变量
                     在第2级中，我们学习了两个新的命令：`{is}`和`{sleep}`。
-                    你可以用`{is}`命名一个词。这被称为一个变量。在这个例子中，我们定义了一个变量“名字”和另外一个变量“年龄”。你可以在代码中的任何地方使用“名字”这个词，它将被“海迪”替换，就像这样：
+                    你可以用`{is}`命名一个词，这叫变量。在这个例子中，我们定义了一个变量“名字”和另外一个变量“年龄”。你可以在代码中的任何地方使用“名字”这个词，它将被“海迪”替换，就像这样：
 
                     这样，你就不再需要`{echo}`命令了!
                 start_code: "{print} 你好世界!"
-                example_code: "```\nname {is} Hedy\nage {is} 15\n{print} name is age years old\n```\n"
+                example_code: "```\n名字 {is} 海迪\n年龄 {is} 15\n{print} 名字 今年 年龄 岁\n```\n"
                 example_code_2: "```\n回答 {is} {ask} 你叫什么名字？\n{print} 你好，回答\n```\n"
                 story_text_2: "`{print}` 仍然可以正常工作，但 `{ask}` 命令已更改。 您还需要在 `{ask}` 命令中使用变量。 它看起来像这样：\n"
-                story_text_3: "这个关卡的另一个新命令是`{sleep}`，它会暂停你的程序。 如果您在 {sleep} 命令后面键入一个数字，程序会暂停该秒数。\n"
+                story_text_3: "这个关卡的另一个新命令是`{sleep}`，它会暂停你的程序一秒钟。 如果您在 {sleep} 命令后面键入一个数字，程序会暂停该秒数。\n"
                 example_code_3: "```\n{print} 我最喜欢的颜色是...\n{sleep} 2\n{print} 绿色！\n```\n"
             3:
                 story_text: |
                     ## 创建一个列表！
                     在第3级你也可以创建一个列表。你可以让计算机从列表中随机选择一些项目。您可以使用 `{at} {random}` 执行此操作。
                 start_code: "{print} 你好世界!"
-                example_code: "```\nanimals {is} dog, cat, kangaroo\n{print} animals {at} {random}\n```\n"
+                example_code: "```\n动物们 {is} 狗，猫，袋鼠\n{print} 动物们 {at} {random}\n```\n"
                 story_text_2: 您还可以使用 `{add}` 将项目添加到列表中，并使用 `{remove}` 删除项目。
-                example_code_2: "```\nanimals {is} dog, cat, kangaroo\n{add} penguin {to_list} animals\n{remove} cat {from} animals\n{print} animals {at} {random}\n```\n"
+                example_code_2: "```\n动物们 {is} 狗，猫，袋鼠\n{add} 企鹅 {to_list} 动物们\n{remove} 猫 {from} 动物们\n{print} 动物们 {at} {random}\n```\n"
             4:
                 start_code: "{print} '你好世界'"
                 story_text: |
@@ -51,7 +51,7 @@ adventures:
 
                      大多数编程语言在打印时也使用引号，所以我们也距离真正的编程更近了一步!
                 example_code: "```\n{print} '从现在开始你们需要使用引号！'\n答案 {is} {ask} '从现在开始我们需要使用什么？'\n{print} '我们需要使用 ' 答案\n```\n"
-                story_text_2: "##冒险越来越难了\n在接下来的标签中，冒险现在变得越来越困难。\n所以最好从左边开始，向右进行，这样才能得到越来越多的挑战。\n"
+                story_text_2: "## 冒险越来越难了\n在接下来的标签中，冒险现在变得越来越困难。\n所以最好从左边开始，向右进行，这样才能得到越来越多的挑战。\n"
             5:
                 start_code: |-
                     name {is} {ask} '你的名字是什么?'
@@ -62,21 +62,21 @@ adventures:
                     如果您输入海迪作为名字，那么此代码会打印出“nice!” 如果您输入其他内容，那么此代码会打印出“boo!”这个词。
                     `{ask}` 和 `{print}` 的使用方法和在第 4 关卡中一样。
                 example_code_2: "```\n名字 {is} {ask} '你叫什么名字？'\n{if} 名字 {is} Hedy {print} 'nice'\n{else} {print} 'boo!'\n```\n"
-                example_code: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'\n```\n"
-                story_text_3: "## 列表\n我们现在可以使用 `{in}` 命令去检查某个东西是否在列表中。\n这段代码打印得很漂亮！ 如果您选择绿色或黄色，则不然。\n"
+                example_code: "```\n名字 {is} {ask} '你叫什么名字？'\n{if} 名字 {is} Hedy {print} 'nice' {else} {print} 'boo!'\n```\n"
+                story_text_3: "## 列表\n我们现在可以使用 `{in}` 命令去检查某个东西是否在列表中。\n如果你选择绿色或黄色，这段代码会打印“好看”，否则则会说“哦”。\n"
                 example_code_3: "```\n好看的颜色 {is} 绿色，黄色\n颜色 {is} {ask} '你最喜欢的颜色是什么？'\n{if} 颜色 {in} 好看的颜色 {print} '好看！'\n{else} {print} '哦'\n```\n"
                 story_text_2: "有`{if}`的代码中有些时候会很长，一行代码放不下。 <br> 你可以把代码分成两行，像这样以`{else}`开始第二行：\n"
             6:
                 start_code: "{print}'5乘以5等于 5 * 5'"
                 story_text: |
                     ## 1 + 1
-                     这一级学习内容里面增加了一些新的内容：现在你可以计算啦。
+                     这一级我们会学到一些新内容：现在你可以做计算啦。
 
-                     加法运算很简单，和你在数学课上学的加法运算的知识很类似，例如''5加5记做 `5 + 5`。减法运算也很简单，例如'5减5'记做 `5 - 5`。
+                     加法运算很简单，和数学公式里一样，比如`5 + 5`。减法运算也一样，就是`5 - 5`。
 
-                     乘法运算有点不同，因为键盘上面没有乘法符号。你可以找一下, 确实没有！
-                     这就是为什么我们要把数字8上面的星号当做乘法符号： `5 * 5`。读作5乘以5，你会很容易记住它。
-                example_code: "```\n{print} '5加5是 ' 5 + 5\n{print} '5减去5是' 5 - 5\n{print} '5乘以5是' 5 * 5\n```\n"
+                     乘法运算有点不同，因为键盘上面没有乘法符号。你可以找一下，真的没有！
+                     所以我们用数字8上面的星号表示乘法： `5 * 5`。把它读作“5乘5”会有利于你记住它。
+                example_code: "```\n{print} '5 加 5 是 ' 5 + 5\n{print} '5 减 5 是 ' 5 - 5\n{print} '5 乘 5 是 ' 5 * 5\n```\n"
                 story_text_2: "我们还改变了在变量中存储词语的方式！现在，要在变量中保存名字或者数字时，你可以用`=`代替`{is}`，像这样：\n"
                 example_code_2: "```\n名字 = 海迪\n答案 = 20 + 4\n```\n"
             7:
