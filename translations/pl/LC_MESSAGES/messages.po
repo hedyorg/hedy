@@ -1,18 +1,18 @@
+
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-10-13 13:47+0200\n"
-"PO-Revision-Date: 2022-10-13 13:42+0000\n"
+"PO-Revision-Date: 2022-10-20 14:02+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: pl <LL@li.org>\n"
 "Language: pl\n"
+"Language-Team: pl <LL@li.org>\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
-"|| n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.15-dev\n"
 "Generated-By: Babel 2.9.1\n"
 
 #, fuzzy
@@ -53,6 +53,18 @@ msgstr "Quiz threshold not reached to unlock this level"
 
 msgid "no_such_adventure"
 msgstr "Ta przygoda nie istnieje!"
+
+#, fuzzy
+msgid "user_inexistent"
+msgstr "This user doesn't exist"
+
+#, fuzzy
+msgid "no_certificate"
+msgstr "This user hasn't earned the Hedy Certificate of Completion"
+
+#, fuzzy
+msgid "congrats_message"
+msgstr "Congratulations, {username}, you have completed Hedy!"
 
 msgid "page_not_found"
 msgstr "Nie możemy odnaleźć tej strony!"
@@ -136,6 +148,9 @@ msgstr "Public profile updated."
 #, fuzzy
 msgid "user_not_private"
 msgstr "This user doesn't exist or doesn't have a public profile"
+
+msgid "see_certificate"
+msgstr ""
 
 #, fuzzy
 msgid "invalid_teacher_invitation_code"
@@ -251,6 +266,9 @@ msgstr "It looks like you forgot to use {command} with the repeat command you us
 msgid "Unsupported String Value"
 msgstr "Text values cannot contain {invalid_value}."
 
+msgid "Lonely Text"
+msgstr ""
+
 #, fuzzy
 msgid "ask_needs_var"
 msgstr "Starting in level 2, ask needs to be used with a variable. Example: name is ask What are you called?"
@@ -356,12 +374,35 @@ msgid "achievements_check_icon_alt"
 msgstr "You've earned an achievement!"
 
 #, fuzzy
-msgid "cheatsheet_title"
-msgstr "Hide cheatsheet"
+msgid "certificate"
+msgstr "Certificate of Completion"
 
 #, fuzzy
 msgid "hedy_logo_alt"
 msgstr "Hedy logo"
+
+#, fuzzy
+msgid "fun_statistics_msg"
+msgstr "Here are some fun statistics!"
+
+msgid "number_programs"
+msgstr "Liczba programów"
+
+#, fuzzy
+msgid "quiz_score"
+msgstr ""
+
+#, fuzzy
+msgid "longest_program"
+msgstr "Longest program"
+
+#, fuzzy
+msgid "number_achievements"
+msgstr "Number of achievements"
+
+#, fuzzy
+msgid "cheatsheet_title"
+msgstr "Hide cheatsheet"
 
 msgid "back_to_class"
 msgstr "Powróć do klasy"
@@ -379,9 +420,6 @@ msgstr "Last login"
 
 msgid "highest_level_reached"
 msgstr "Najwyższy osiągnięty poziom"
-
-msgid "number_programs"
-msgstr "Liczba programów"
 
 msgid "programs"
 msgstr "Programy"
@@ -591,9 +629,8 @@ msgstr "Zapisz"
 msgid "delete_adventure_prompt"
 msgstr "Are you sure you want to remove this adventure?"
 
-#, fuzzy
 msgid "customize_class_exp_1"
-msgstr "Customize class"
+msgstr "Cześć! Na tej stronie możesz dostosować swoją klasę. Wybierając poziomy i przygody, możesz wybrać to, co może zobaczyć Twój uczeń. Możesz także dodawać własne przygody do poziomów. Wszystkie poziomy i domyślne przygody zostaną wybrane domyślnie. <b>Uwaga:</b> Nie każda przygoda jest dostępna na każdym poziomie! Dostosuj ustawienia w następujący sposób:"
 
 #, fuzzy
 msgid "customize_class_step_1"
@@ -662,9 +699,8 @@ msgstr "Opcja"
 msgid "value"
 msgstr "Value"
 
-#, fuzzy
-msgid "quiz_score"
-msgstr "Quiz score"
+msgid "highest_quiz_score"
+msgstr ""
 
 #, fuzzy
 msgid "percentage"
@@ -1278,6 +1314,10 @@ msgid "write_first_program"
 msgstr "Napisz swój pierwszy program!"
 
 #, fuzzy
+msgid "see_certificate"
+msgstr "See {username} certificate!"
+
+#, fuzzy
 msgid "certified_teacher"
 msgstr "Certified teacher"
 
@@ -1343,6 +1383,10 @@ msgid "score"
 msgstr "Wynik"
 
 #, fuzzy
+msgid "get_certificate"
+msgstr "Get your certificate!"
+
+#, fuzzy
 msgid "recover_password"
 msgstr "Request a password reset"
 
@@ -1379,9 +1423,7 @@ msgstr "Create an account"
 
 #, fuzzy
 msgid "create_teacher_account_explanation"
-msgstr ""
-"With a teacher account, you can save your programs and see the results of "
-"your students."
+msgstr "With a teacher account, you can save your programs and see the results of your students."
 
 #, fuzzy
 msgid "create_student_account_explanation"
@@ -1472,26 +1514,35 @@ msgstr ""
 msgid "mail_change_password_body"
 msgstr "Zmień hasło"
 
-#, fuzzy
 msgid "mail_recover_password_body"
-msgstr "Request a password reset"
+msgstr ""
+"Klikając ten link, możesz ustawić nowe hasło Hedy. Ten link jest ważny przez <b>4</b> godziny.\n"
+"Jeśli nie wymagałeś resetowania hasła, zignoruj ten e-mail: {link}"
 
 #, fuzzy
 msgid "mail_reset_password_body"
 msgstr "Reset password"
 
-#, fuzzy
 msgid "mail_welcome_teacher_body"
 msgstr ""
-"<strong>Welcome!</strong>\n"
-"Congratulations on your brand new Hedy teachers account. Welcome to the world wide community of Hedy teachers!\n"
-"<strong>What teachers accounts can do</strong>\n"
-"With your teacher account, you have the option to create classes. Your students can than join your classes and you can see their progress. Classes are made and managed though the for <a href=\"https://hedycode.com/for-teachers\">teachers page</a>.\n"
-"<strong>How to share ideas</strong>\n"
-"If you are using Hedy in class, you probably have ideas for improvements! You can share those ideas with us on the <a href=\"https://github.com/Felienne/hedy/discussions/categories/ideas\">Ideas Discussion</a>.\n"
-"<strong>How to ask for help</strong>\n"
-"If anything is unclear, you can post in the <a href=\"https://github.com/Felienne/hedy/discussions/categories/q-a\">Q&A discussion</a>, or <a href=\"mailto: hello@hedy.org\">send us an email</a>.\n"
-"Keep programming!"
+"<strong>Witaj!</strong>\n"
+"Gratulujemy założenia nowego konta nauczyciela Hedy. Witamy w światowej społeczności nauczycieli Hedy!\n"
+"\n"
+"<strong>Co mogą robić nauczyciele</strong>\n"
+"Konto nauczyciela daje nowe możliwości.\n"
+"\n"
+"1. Dodatkowe wyjaśnienia są dostępne w <a href=\"https://hedy.org/for-teachers/manual\">poradniku nauczyciela</a>.\n"
+"2. Za pomocą konta nauczyciela masz możliwość tworzenia zajęć. Twoi uczniowie mogą dołączyć do twoich zajęć, a ty możesz zobaczyć ich postępy. Zajęcia są prowadzone i zarządzane przez <a href=\"https://hedycode.com/for-teachers\">stronę nauczyciela</a>.\n"
+"3. Masz możliwość pełnego dostosowania swoich zajęć - możesz odblokowywać i zablokowywać poziomy, włączać i wyłączać przygody oraz tworzyć własne przygody!\n"
+"\n"
+"<strong>Dołącz do naszej społeczności online!</strong>\n"
+"Zapraszamy wszystkich nauczycieli, programistów i innych fanów Hedy do dołączenia do naszego <a href=\"https://discord.gg/8yY7dEme9r\">serwera Discord</a>. To idealne miejsce do rozmowy o Hedy: mamy kanały, na których możesz pokazać swoje fajne projekty i lekcje, kanały do zgłaszania błędów oraz kanały do czatowania z innymi nauczycielami i zespołem Hedy.\n"
+"\n"
+"<strong>Jak pytać o pomoc </strong>\n"
+"Jeśli coś jest niejasne, daj nam znać na DIscord, lub <a href=\"mailto: hello@hedy.org\">wyślij nam maila</a>.\n"
+"\n"
+"<strong>Jak zgłaszać błędy</strong>\n"
+"W Discordzie mamy kanał do zgłaszania błędów o nazwie #bugs. To idealne miejsce, aby poinformować nas o problemach, z którymi się spotykasz. Jeśli wiesz, jak korzystać z GitHub, możesz tam otworzyć <a href=\"https://github.com/Felienne/hedy/issues/new?assignees=&labels=&template=bug_report.md&title=%5BBUG%5D\">issue</a>.\n"
 
 #, fuzzy
 msgid "mail_welcome_verify_subject"
@@ -1814,3 +1865,4 @@ msgstr "Hedy - Dołącz do klasy"
 
 #~ msgid "create_account_explanation"
 #~ msgstr "Posiadanie swojego własnego konta pozwala ci na zapisanie swoich programów."
+

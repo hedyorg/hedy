@@ -606,10 +606,10 @@ class Database:
         data = [QUIZ_STATS.get_many({'id': i, 'week': dynamo.Between(start_week, end_week)}) for i in ids]
         return functools.reduce(operator.iconcat, data, [])
 
-    def add_program_stats(self, id, level, exception):
+    def add_program_stats(self, id, level, number_of_lines, exception):
         key = {"id#level": f'{id}#{level}', 'week': self.to_year_week(date.today())}
 
-        add_attributes = {'id': id, 'level': level}
+        add_attributes = {'id': id, 'level': level, 'number_of_lines': number_of_lines}
         if exception:
             add_attributes[exception] = dynamo.DynamoIncrement()
         else:

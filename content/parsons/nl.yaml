@@ -12,12 +12,12 @@ levels:
                 C: "{echo} Dus u wilt"
                 D: "{print} De bestelling wordt klaargezet!"
         2:
-            story: "You're at the DJ Booth requesting a song. Create a program that asks if you are ready to party and then asks which song you would like to hear.\n"
+            story: "You're at the DJ Booth requesting a song. Create a program that asks if you are ready to party and then asks which song you would like to hear."
             code_lines:
-                A: "{print} This is DJ Hedy\n"
-                B: "{ask} Are you ready to party?\n"
-                C: "{ask} What song would you like to hear?\n"
-                D: "{echo} Great choice! I love\n"
+                A: "{print} This is DJ Hedy"
+                B: "{ask} Are you ready to party?"
+                C: "{ask} What song would you like to hear?"
+                D: "{echo} Great choice! I love"
     2:
         1:
             story: |
@@ -29,12 +29,12 @@ levels:
                 C: "{print} We gaan kijken naar film"
                 D: "{print} Heel veel plezier!"
         2:
-            story: "This is the webshop of a toy store. Create a program where costumers can add an item to their shopping cart.\n"
+            story: "This is the webshop of a toy store. Create a program where costumers can add an item to their shopping cart."
             code_lines:
-                A: "{print} Welcome to our toystore\n"
-                B: "toy is {ask} What would you like to buy?\n"
-                C: "{print} The toy is added to your shopping cart.\n"
-                D: "{print} Thank you for shopping with us!\n"
+                A: "{print} Welcome to our toystore"
+                B: "toy is {ask} What would you like to buy?"
+                C: "{print} The toy is added to your shopping cart."
+                D: "{print} Thank you for shopping with us!"
     3:
         1:
             story: |
@@ -50,12 +50,12 @@ levels:
                 D: "{sleep} 2"
                 E: "{print} het wordt afdelingen {at} {random}"
         2:
-            story: "Create a program that chooses a random meal for you. Make a list of food and a list of toppings and let the program decide what you'll have!\n"
+            story: "Create a program that chooses a random meal for you. Make a list of food and a list of toppings and let the program decide what you'll have!"
             code_lines:
                 A: "food {is} pizza, icecream, salad, sandwich"
                 B: "toppings {is} chocolate, cheese, tuna, sprinkles"
                 C: "{print} Your random meal for today is..."
-                D: "sleep 2\n"
+                D: "sleep 2"
                 E: "{print} food at random with toppings at random"
     4:
         1:
@@ -69,7 +69,7 @@ levels:
                 C: "{sleep}"
                 D: "{print} pokemons {at} {random}"
         2:
-            story: "Create a lottery that lets you choose an extra price that you might win.\n"
+            story: "Create a lottery that lets you choose an extra price that you might win."
             code_lines:
                 A: "prices {is} car, hamster, million euros"
                 B: "price {is} {ask} 'What would you like to win?'"
@@ -87,12 +87,12 @@ levels:
                 D: "{else} {print} 'Wat jammer dat jouw favoriete film niet in het lijstje staat, we voegen hem toe aan de lijst!'"
                 E: "{add} film {to_list} favoriete_film"
         2:
-            story: "Create a maths game.\n"
+            story: "Create a maths game."
             code_lines:
-                A: "{print} 'Solve this problem'\n"
-                B: "answer {is} {ask} '88 - 16 = ?'\n"
-                C: "{if} answer {is} 72 {print} 'Correct!'\n"
-                D: "{else} print 'Wrong! The answer was 72'\n"
+                A: "{print} 'Solve this problem'"
+                B: "answer {is} {ask} '88 - 16 = ?'"
+                C: "{if} answer {is} 72 {print} 'Correct!'"
+                D: "{else} print 'Wrong! The answer was 72'"
     6:
         1:
             story: |
@@ -107,7 +107,7 @@ levels:
                 D: "{print} 'In hondenjaren ben jij ' hond_leeftijd ' jaar oud.'"
                 E: "{print} 'In kattenjaren ben jij ' kat_leeftijd ' jaar oud.'"
         2:
-            story: "Create a program that helps you calculate how many cakes you should buy for your birthday party.\n"
+            story: "Create a program that helps you calculate how many cakes you should buy for your birthday party."
             code_lines:
                 A: "{print} 'It is your birthday!'"
                 B: "people = {ask} 'How many people do you want to give a slice of cake?'"
@@ -128,12 +128,12 @@ levels:
                 F: "{remove} speler2 {from} spelers"
                 G: "{print} 'De winnaar speelt tegen ' spelers {at} {random}"
         2:
-            story: "Create the song 'The wheels on the bus go round and round'\n"
+            story: "Create the song 'The wheels on the bus go round and round'"
             code_lines:
-                A: "{print} 'the wheels on the bus go'\n"
-                B: "{repeat} 3 {times} {print} 'round and round'\n"
-                C: "{print} 'the wheels of the bus go round and round'\n"
-                D: "{print} 'all through the town '\n"
+                A: "{print} 'the wheels on the bus go'"
+                B: "{repeat} 3 {times} {print} 'round and round'"
+                C: "{print} 'the wheels of the bus go round and round'"
+                D: "{print} 'all through the town '"
     8:
         1:
             story: |
