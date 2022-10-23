@@ -486,8 +486,8 @@ adventures:
                 start_code: '{print} Historyjka zaczyna się tutaj'
             2:
                 story_text: "## Historyjka\nNa poziomie 2. Twoja historyjka może być znacznie zabawniejsza. Imię głównego bohatera może pojawić się w dowolnym miejscu w zdaniu.\n\nTrzeba będzie napisać nieco więcej kodu . Musisz zapytać o imię głównego bohatera zanim będziesz mógł wykorzystać je w zdaniu.\n\nPotem będziesz mógł użyć imienia w dowolnym miejscu w zdaniu.\n"
-                example_code: "\n```\nname {is} {ask} What is the name of the main character?\n{print} name is now going to run in the woods\n{print} name is a bit scared\n{print} Suddenly he hears a crazy noise...\n{sleep}\n{print} name is afraid this is a haunted forest\n```\n"
-                start_code: '{print} Your story'
+                example_code: "```\nimię {is} {ask} Jak nazywa się główny bohater?\n{print} imię biega teraz po lesie\n{print} imię trochę się boi\n{print} Nagle imię usłyszał dziwny dźwięk...\n{sleep}\n{print} imię obawia się, że las może być nawiedzony\n```"
+                start_code: '{print} Twoja historyjka'
             12:
                 story_text: "## Story\nIn this level you can use the quotation marks to save multiple words in a variable.\n"
                 example_code: "\n```\nname = 'The Queen of England'\n{print} name ' was eating a piece of cake, when suddenly...'\n```\n"
@@ -515,10 +515,10 @@ adventures:
                 example_code: "```\nname {is} Hans\n{print} 'The name of the main character is' name\n{print} name 'is now going to walk in the woods'\n{print} name 'is a bit scared'\nanimals {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} 'He hears the sound of an' animals {at} {random}\n{print} name 'is afraid this is a haunted forest'\n```\n"
                 start_code: "{print} 'Your story will be printed here!'"
             3:
-                story_text: "## Story\nIn level 3 you can make your story more fun. You can use randomness for any monster, animal or other obstacle, like this:\n"
-                example_code: "```\nanimals {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} He now hears the sound of an animals {at} {random}\n```\n"
-                story_text_2: "The command `{add}` can also come in handy in your story.\n"
-                example_code_2: "```\n{print} He hears a sound\nanimals {is} \U0001F43F, \U0001F994, \U0001F987, \U0001F989\nanimal {is} {ask} What do you think it is?\n{add} animal {to_list} animals\n{print} it was a animals {at} {random}\n```\n"
+                story_text: "## Historyjka\nNa poziomie 3. Twoja historyjka może być jeszcze zabawniejsza. Możesz wybrać losowo potwora, zwierzę oraz inne utrudnienia, tak jak w przykładzie:\n"
+                example_code: "```\nzwierzęta {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} Teraz słyszy odgłos zwierzęta {at} {random}\n```\n"
+                story_text_2: "Komenda `{add}` może się przydać w historyjce.\n"
+                example_code_2: "```\n{print} On słyszy odgłos\nzwierzęta {is} \U0001F43F, \U0001F994, \U0001F987, \U0001F989\nzwierzę {is} {ask} Co to było?\n{add} zwierzę {to_list} zwierzęta\n{print} To był odgłos zwierzęta {at} {random}\n```\n"
                 story_text_3: "This is an example of the `{remove}` command in your story\n"
                 example_code_3: "```\n{print} His backpack got way too heavy.\n{print} Inside were a bottle of water, a flashlight and a brick.\nbag {is} water, flashlight, brick\ndump {is} {ask} Which item should he dump?\n{remove} dump {from} bag\n```\n"
                 start_code: '{print} Your story'
