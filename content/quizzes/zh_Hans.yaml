@@ -154,7 +154,7 @@ levels:
         8:
             question_text: "如何使用`{echo}`命令？"
             mp_choice_options:
-            -   option: "你可以用它来`{ask}`。"
+            -   option: "你可以用它来`{ask}` 一个问题。"
                 feedback: "这是`{ask}`的作用！"
             -   option: "你可以用它打印文本。"
                 feedback: "这是`{print}`的作用！"
@@ -385,7 +385,7 @@ levels:
             -   option: "第2行应该是：`{print}` 我 喜欢 动物"
                 feedback: "“某动物”是变量名"
             -   option: "第2行应该是：`{sleep}` 我 喜欢 动物"
-                feedback: "Sleep is not used to `{print}` text"
+                feedback: "Sleep 并非用来 `{print}` 文字"
             correct_answer: "B"
             hint: "你需要`{print}`“我 喜欢 狗”"
             question_score: '10'
@@ -422,18 +422,18 @@ levels:
             question_score: '10'
     3:
         1:
-            question_text: "What command do you use to let Hedy pick something arbitrarily?"
+            question_text: "你需要使用哪一个指令才能让海迪随机选择东西呢?"
             mp_choice_options:
             -   option: |
                     ```
                     {print}
                     ```
-                feedback: "`{print}` is used to print text"
+                feedback: "`{print}` 用来打印文字"
             -   option: |
                     ```
                     {ask}
                     ```
-                feedback: "`{ask}` is used to ask a question"
+                feedback: "`{ask}` 用来问一个问题"
             -   option: |
                     ```
                     {is}
@@ -443,32 +443,32 @@ levels:
                     ```
                     {at} {random}
                     ```
-                feedback: "Correct!"
+                feedback: "正确!"
             correct_answer: "D"
-            hint: "Arbitrarily means without a plan or randomly."
+            hint: "Arbitrarily 表示没有计划的，随机性的."
             question_score: '10'
         2:
-            question_text: "What's wrong with this code?"
+            question_text: "这个程序有什么问题呢?"
             code: |-
-                animals {is} dog cat cow
-                {print} animals {at} {random}
+                动物 {is} 狗 猫 牛
+                {print} 动物 {at} {random}
             mp_choice_options:
-            -   option: "You need commas in line 1: dog, cat, cow."
-                feedback: "Good job!"
-            -   option: "Line 1 needs to start with `{print}`."
-                feedback: "No, you don't need `{print}`"
-            -   option: "Line 2 needs to say 'animal' instead of 'animals'',"
+            -   option: "你需要在第一行加入逗号: 狗, 猫, 牛."
+                feedback: "干的好!"
+            -   option: "第一行需要以 `{print}`为开头."
+                feedback: "不，你不许要`{print}`"
+            -   option: "第二行需要放 'animal', 而非 'animals'',"
                 feedback: "animals is correct."
-            -   option: "`{at} {random}` is spelled incorrectly"
-                feedback: "`{at} {random}` is the correct spelling"
+            -   option: "`{at} {random}` 的拼法不正确"
+                feedback: "`{at} {random}` 是正确的拼法"
             correct_answer: "A"
-            hint: "There's something wrong in line 1"
+            hint: "第一行似乎有什么问题"
             question_score: '10'
         3:
-            question_text: "What's wrong in line 2 of this code?"
+            question_text: "你该如何修复第二行的问题呢?"
             code: |-
-                options {is} rock, paper, scissors
-                {print} rock, paper, scissors {at} {random}
+                选项 {is} 石头, 布, 剪刀
+                {print} 石头, 布, 剪刀 {at} {random}
             mp_choice_options:
             -   option: |
                     ```
@@ -477,18 +477,18 @@ levels:
                 feedback: "You're almost there. The order of the words isn't right yet."
             -   option: |
                     ```
-                    {print} rock {at} {random}
+                    {print} 石头 {at} {random}
                     ```
-                feedback: "you don't always want the Hedy to {print} rock, sometimes you want scissors or paper."
+                feedback: "你或许不想要海迪每一次都 {print} 石头, 有时候你或许想要剪刀或布."
             -   option: |
                     ```
                     {print} options {at} {random}
                     ```
-                feedback: "Very good!"
-            -   option: "Nothing, the code is correct!"
-                feedback: "Look carefully for the mistake"
+                feedback: "非常棒!"
+            -   option: "没事，这个代码是正确的!"
+                feedback: "小心注意任何失误"
             correct_answer: "C"
-            hint: "The variable (the list) is called options."
+            hint: "变数 (the list) 称作选项."
             question_score: '10'
         4:
             question_text: "为了打印一个随机价格，第2行应该怎么改？"
@@ -510,14 +510,14 @@ levels:
                     ```
                     {print} {at} {random} price
                     ```
-                feedback: "`{at} {random}` is placed behind the variable."
-            -   option: "Nothing, this code is alright."
-                feedback: "Look carefully for the mistake you missed!"
+                feedback: "`{at} {random}` 放在了变数后."
+            -   option: "没事， 这代码没问题."
+                feedback: "注意任何你错过的失误!"
             correct_answer: "B"
-            hint: "The variable name is prices"
+            hint: "变数的名字是价格"
             question_score: '10'
         5:
-            question_text: "What is wrong in this code?"
+            question_text: "这代码有什么问题呢?"
             code: |-
                 question {is} {ask} What do you want to know?
                 {print} question
@@ -530,7 +530,7 @@ levels:
                 feedback: "不，这并没有错。"
             -   option: "Line 2 needs to say answers `{at} {random}` `{is}` yes, no, maybe"
                 feedback: "不，这并没有错。"
-            -   option: "Nothing, this code is perfect"
+            -   option: "没事， 这个代码很完美"
                 feedback: "That's right!"
             correct_answer: "D"
             hint: "Does this code even have a mistake?"
