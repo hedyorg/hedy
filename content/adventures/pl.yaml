@@ -101,7 +101,7 @@ adventures:
             17:
                 start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'"
                 story_text: "Now we are going to change indentation a little bit. Every time that we need an indentation, we need `:` at the line before the indentation.\n\nIn this level you can also use a new command: `{elif}`. `{elif}` is short for {else} {if} and you need it when you you want to make 3 (or more!) options.\nCheck it out!"
-                example_code: "```\nprices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
+                example_code: "```\nnagrody = ['milion złotch', 'szarlotkę', 'nic']\ntwoja_nagraoda = nagrody[{random}]\n{print} 'Wygrywasz ' twoja_nagraoda\n{if} twoja_nagraoda == 'milion złotch' :\n    {print} 'O tak! Jesteś bogaty!'\n{elif} twoja_nagraoda == 'szarlotkę' :\n    {print} 'Pyszna szarlotka!'\n{else}:\n    {print} 'Powodzenia następnym razem ...'\n```\n"
             18:
                 start_code: |-
                     naam = 'Hedy'
@@ -112,16 +112,18 @@ adventures:
 
                 example_code: |
                     ```
-                    {print}('my name is Hedy!')
+                    {print}('Witaj!')
+                    {for} i in {range}(1, 10):
+                        {print}('To jest linijka numer ', i, '.')
                     ```
 
                 story_text_2: |-
-                    If you want to print more than one item, you need to separate them by commas.
+                    Jeżeli chcesz wypisać kilka rzeczy w jednej linii to oddziel je przecinkami.
 
                 example_code_2: |
                     ```
-                    temperature = 25
-                    {print}('It is ', temperature, 'degrees outside')
+                    temperatura = 25
+                    {print}('Na zewnątrz jest ', temperatura, ' stopni')
                     ```
 
                 story_text_3: |-
@@ -481,9 +483,9 @@ adventures:
                 story_text: "## Make a story\nIn level 1 you can make a story with a different main character that you enter yourself.\n\nIn the first line, use `{ask}` and ask who the main character in your story will be.\nAfter that first line, start with `{print}` {if} the sentence needs to be printed.\nYou use `{echo}` {if} you want your main character to be at the end of the sentence.\n"
 
                 example_code: "\n```\n{ask} The main character of this story is\n{print} The main character is now going to walk in the forest\n{echo} He's a bit scared,\n{print} He hears crazy noises everywhere\n{print} He's afraid this is a haunted forest\n```\n"
-                start_code: '{print} Your story starts here'
+                start_code: '{print} Historyjka zaczyna się tutaj'
             2:
-                story_text: "## Story\nIn level 2 you can make your story more fun. Your main character's name can now be anywhere in the sentence.\n\nYou do have to program a little bit extra for that. You must now name your main character first.\n\nYou can then put that name anywhere in a sentence.\n"
+                story_text: "## Historyjka\nNa poziomie 2. Twoja historyjka może być znacznie zabawniejsza. Imię głównego bohatera może pojawić się w dowolnym miejscu w zdaniu.\n\nTrzeba będzie napisać nieco więcej kodu . Musisz zapytać o imię głównego bohatera zanim będziesz mógł wykorzystać je w zdaniu.\n\nPotem będziesz mógł użyć imienia w dowolnym miejscu w zdaniu.\n"
                 example_code: "\n```\nname {is} {ask} What is the name of the main character?\n{print} name is now going to run in the woods\n{print} name is a bit scared\n{print} Suddenly he hears a crazy noise...\n{sleep}\n{print} name is afraid this is a haunted forest\n```\n"
                 start_code: '{print} Your story'
             12:
@@ -528,9 +530,9 @@ adventures:
                 story_text: "## Story\nBy using the `{and}` and `{or}` commands, you can shorten your stories. For example, check out the dragon story.\n"
                 example_code: "```\nsword = 'lost'\ngame = 'on'\n{print} 'Our hero is walking through the forest'\n{print} 'The path splits two ways'\n{for} i {in} {range} 0 {to} 2\n    {if} game {is} 'on'\n        path = {ask} 'Which path should she choose?'\n        {if} path {is} 'left' {and} sword {is} 'found'\n            {print} 'Our hero comes across a dragon!'\n            {print} 'Luckily our hero has a sword to defeat the beast!'\n            game = 'over'\n        {if} path {is} 'left' {and} sword {is} 'lost'\n            {print} 'Our hero finds a dragon, but she doesnt have any weapons!'\n            {print} 'Our hero is beaten by the dragon...'\n            {print} 'Try again'\n            game = 'over'\n        {if} path {is} 'right' {and} sword {is} 'found'\n            {print} 'You have already found the sword. There is nothing left here.'\n            {print} 'She walks back'\n        {if} path {is} 'right' {and} sword {is} 'lost'\n            {print} 'Our hero finds a sword'\n            {print} 'This could come in very handy'\n            sword = 'found'\n```\n"
                 start_code: '# place your code here'
-        name: Story
-        description: Story
-        default_save_name: Story
+        name: Historyjka
+        description: Stwórz krótką historyjkę
+        default_save_name: Historyjka
     parrot:
         name: Parrot
         description: Create your own online pet parrot that will copy you!
