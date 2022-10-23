@@ -133,7 +133,7 @@ adventures:
                 example_code: "```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n"
                 story_text_2: "**所有文本都要放在引号之间**\n这一关，在用 `=` 储存文本时，你需要使用引号：\n"
                 example_code_2: "```\n名字 = '海迪机器人'\n{print} '你好，' 名字\n```\n"
-                story_text_3: "**All items in lists need quotation marks too**\nLists are texts, so they need quotation marks too. Mind that each single item on the list has quotation marks.\nThis allows you to save two words as 1 item on the list, for example 'Iron Man'.\n"
+                story_text_3: "**列表里的东西也需要引号**\n列表里的也是文本，所以他们也要引号。注意列表里的每一项都要加引号。\n这样就能把两个词保存为一项，比如 '你好，世界'。\n"
                 example_code_3: "```\n超级英雄 = '蜘蛛侠', '蝙蝠侠', '钢铁侠'\n{print} 超级英雄 {at} {random}\n```\n"
                 story_text_4: "**在`{if}`中比较的所有文本也都需要引号**\n"
                 example_code_4: "```\n名字 = {ask} '你叫什么？'\n{if} 名字 = '海迪机器人'\n    {print} '你好啊！'\n```\n"
@@ -217,20 +217,20 @@ adventures:
         levels:
             2:
                 start_code: '{print} 你的故事'
-                story_text: "## Story\nIn level 2 you can make your story more fun. Your main character's name can now be anywhere in the sentence.\n\nYou do have to program a little bit extra for that. You must now name your main character first.\n\nYou can then put that name anywhere in a sentence.\n"
+                story_text: "## 故事\n在第2关，你可以让你的故事更有趣些。你的主人公的名字可以放在句子里的任何位置了。\n\n为此你确实需要多写一点代码。你需要先给主人公一个名字。\n\n然后就可以把名字放在句子里的任何位置。\n"
                 example_code: "```\n名字 {is} {ask} 主角的名字是什么？\n{print} 名字 现在要去森林里散步了\n{print} 名字 有点害怕\n{print} 突然，他听到一个疯狂的声音……\n{sleep}\n{print} 名字 害怕这个森林里面闹鬼\n```"
             7:
-                start_code: "{repeat} 5 {times} {print} 'Help!'"
-                story_text: "## Story\nIn a story, someone says words several times. For example, when someone calls for help or sings a song.\nYou can put such repetitions in your story, in this level with `{repeat}`.\n"
-                example_code: "```\n{print} 'The prince kept calling for help'\n{repeat} 5 {times} {print} 'Help!'\n{print} 'Why is nobody helping me?'\n```\n"
+                start_code: "{repeat} 5 {times} {print} '救命！'"
+                story_text: "## 故事\n在故事里，有人会重复同一个词好几次。比如有人在呼救或者唱歌。\n在这一关，你可以通过`{repeat}`在故事中加入这种重复。\n"
+                example_code: "```\n{print} '王子不断地呼救'\n{repeat} 5 {times} {print} '救命啊！'\n{print} '为什么没有人来救我？'\n```\n"
             5:
-                start_code: "{print} 'Here your story will start!'"
-                story_text: "## Story\nIn this level you can program different endings, which will make your story even more fun.\n\nThink of two endings for your story, for example:\n\n- The princess is walking through the forest\n- She runs into a monster\n\n- Happy ending: She takes her sword and the monster quickly runs away\n- Bad Ending: The monster eats the princess\n\nYou can also ensure that a name can be entered again. That works just like in the previous levels. You can combine that with an `{if}`, and then you have already made a whole program!\n"
-                example_code: "```\nname {is} {ask} Who is walking in the forest?\n{print} name 'walks through the forest'\n{print} name 'encounter a monster'\nend {is} {ask} Would you like a good or a bad ending?\n{if} end {is} good {print} name 'takes the sword and the monster quickly runs away'\n{else} {print} 'The monster eats' name\n```\n"
+                start_code: "{print} '你的故事从这里开始！'"
+                story_text: "## 故事\n在这一关，你可以写出多种结局，这会让你的故事更有趣。\n\n设想你的故事有两种结局，比如：\n\n- 公主徒步穿过森林\n- 她遇上了怪物\n\n- 好结局：她拔出剑，怪物立即逃跑了\n- 坏结局：怪物把公主吃掉了\n\n和之前几关一样，你仍然可以输入变量。你只要将输入和`{if}`结合起来使用，就能完成整个程序了！\n"
+                example_code: "```\n名字 {is} {ask} 谁在森林里行走？\n{print} 名字 '走在森林里'\n{print} 名字 '遇到了一头怪物'\n结局 {is} {ask} '你想看好结局还是坏结局？'\n{if} 结局 {is} 好 {print} 名字 '拔出了剑，怪物立即逃跑了'\n{else} {print} '怪物吃掉了' 名字\n```\n"
             3:
                 story_text: |
-                    ## Story
-                    In level 3 you can make your story more fun. You can use randomness for any monster, animal or other obstacle, like this:
+                    ## 故事
+                    在第3关，你可以让你的故事更有趣些。你可以随机选择怪物、动物或者其它障碍，比如：
 
                 example_code: |
                     ```
@@ -238,61 +238,61 @@ adventures:
                     {print} 他现在听到了一个动物们的声音 {at} {random}
                     ```
                 story_text_2: |
-                    The command `{add}` can also come in handy in your story. For example
+                    你的故事也用得上`{add}`命令。
 
                 example_code_2: |
                     ```
                     {print} 他听到一个声音
                     动物们 {is} 🐿，🦔，🦇，🦉
-                    动物 {is} {ask} 你觉得它是什么？
-                    {add} 动物 {to_list} 动物们
-                    {print} 那是动物们 {at} {random}
+                    某动物 {is} {ask} 你觉得它是什么？
+                    {add} 某动物 {to_list} 动物们
+                    {print} 它 是 动物们 {at} {random}
                     ```
                 story_text_3: |
-                    This is an example of the `{remove}` command in your story
+                    这是一个在故事里使用`{remove}`命令的例子
                 example_code_3: |
                     ```
-                    {print} His backpack got way too heavy.
-                    {print} Inside were a bottle of water, a flashlight and a brick.
-                    bag {is} water, flashlight, brick
-                    dump {is} {ask} Which item should he dump?
-                    {remove} dump {from} bag
+                    {print} 他的背包太重了。
+                    {print} 包里有一瓶水，一个手电筒和一块砖。
+                    包 {is} 水, 手电筒, 砖
+                    扔掉的 {is} {ask} 他应该扔掉哪个东西？
+                    {remove} 扔掉的 {from} 包
                     ```
-                start_code: "{print} Your story"
+                start_code: "{print} 你的故事"
             13:
-                story_text: "## Story\nBy using the `{and}` and `{or}` commands, you can shorten your stories. For example, check out the dragon story.\n"
-                example_code: "```\nsword = 'lost'\ngame = 'on'\n{print} 'Our hero is walking through the forest'\n{print} 'The path splits two ways'\n{for} i {in} {range} 0 {to} 2\n    {if} game {is} 'on'\n        path = {ask} 'Which path should she choose?'\n        {if} path {is} 'left' {and} sword {is} 'found'\n            {print} 'Our hero comes across a dragon!'\n            {print} 'Luckily our hero has a sword to defeat the beast!'\n            game = 'over'\n        {if} path {is} 'left' {and} sword {is} 'lost'\n            {print} 'Our hero finds a dragon, but she doesnt have any weapons!'\n            {print} 'Our hero is beaten by the dragon...'\n            {print} 'Try again'\n            game = 'over'\n        {if} path {is} 'right' {and} sword {is} 'found'\n            {print} 'You have already found the sword. There is nothing left here.'\n            {print} 'She walks back'\n        {if} path {is} 'right' {and} sword {is} 'lost'\n            {print} 'Our hero finds a sword'\n            {print} 'This could come in very handy'\n            sword = 'found'\n```\n"
-                start_code: '# place your code here'
+                story_text: "## 故事\n通过使用`{and}`和`{or}`命令，你可以把故事写得更短。比如这个龙的故事。\n"
+                example_code: "```\n剑 = '丢失'\n游戏 = '进行中'\n{print} '我们的英雄走在森林中'\n{print} '遇到了两条岔路'\n{for} i {in} {range} 0 {to} 2\n    {if} 游戏 {is} '进行中'\n        路 = {ask} '她选了哪条路？'\n        {if} 路 {is} '左' {and} 剑 {is} '找到'\n            {print} '我们的英雄遇上了一条龙！'\n            {print} '幸运的是她带着剑，可以消灭这个怪兽！'\n            游戏 = '结束'\n        {if} 路 {is} '左' {and} 剑 {is} '丢失'\n            {print} '我们的英雄找到了一条龙，但是她手里没有武器！'\n            {print} '我们的英雄被龙打败了……'\n            {print} '再试一次'\n            游戏 = '结束'\n        {if} 路 {is} '右' {and} 剑 {is} '找到'\n            {print} '你已经找打了剑。这里什么都没有。'\n            {print} '她走了回去'\n        {if} 路 {is} '右' {and} 剑 {is} '丢失'\n            {print} '我们的英雄找到了一把剑'\n            {print} '它可能派上大用场'\n            剑 = '找到'\n```\n"
+                start_code: '# 在这里写你的代码'
             1:
                 story_text: "## 创作故事动画\n在第1级中你可以自己添加角色创作一个有不同主角的故事动画。。\n\n在第一行，使用`{ask}`，问谁是故事的主角。\n\n在这第一行之后，如果需要打印这个句子，就用`{print}`开始这个句子。\n如果你想让你的主角的名字出现在句子的末尾，你可以用`{echo}`。\n"
                 example_code: "```\n{ask} 这个故事的主人公是（谁）\n{print}主人公现在要到森林里去散步\n{echo} 他有点害怕，\n{print} 他听到到处都有疯狂的声音\n{print} 他害怕这是一片闹鬼的森林\n```\n"
                 start_code: '{print} 你的故事从这里开始'
             10:
-                story_text: "## Story\nIn this level you can use the {for} command in your story. In this way you could easily program the children's book 'brown bear, brown bear, what do you see'.\n"
-                example_code: "```\nanimals = red bird, black sheep, green frog, yellow duck, little child\n{print} 'brown bear'\n{print} 'brown bear'\n{print} 'What do you see?'\n{for} animal {in} animals\n    {print} 'I see a ' animal ' looking at me'\n    {print} animal\n    {print} animal\n    {print} 'What do you see?'\n{print} 'I see all the animals looking at me!'\n```\n"
-                start_code: '# place your code here'
+                story_text: "## 故事\n在这一关，你可以在你的故事里使用 {for} 命令。这样很容易就能写出儿童书里的“棕熊，棕熊，你看到了什么”的故事。\n"
+                example_code: "```\n动物们 = 红鸟, 黑羊, 绿蛙, 黄鸭, 小孩\n{print} '棕熊'\n{print} '棕熊'\n{print} '你看到了什么？'\n{for} 动物 {in} 动物们\n    {print} '我看到' 动物 '在看我'\n    {print} 动物\n    {print} 动物\n    {print} '你看到了什么？'\n{print} '我看到所有动物都在看我！'\n```\n"
+                start_code: '# 在这里写你的代码'
             12:
                 story_text: "## 故事\n在此级别中，您可以使用引号将多个单词保存在一个变量中。"
                 example_code: "```\n名字 = '英国女王'\n{print} 名字'正在吃一块蛋糕，突然......'\n```\n"
-                start_code: '# place your code here'
+                start_code: '# 在这里写你的代码'
             9:
-                story_text: "## Story\nIn this level you can use nesting to put {if}, {repeat} or {for} commands inside other {if}, {repeat} or {for} commands. This gives you many options and really helps you to make your story interactive.\n"
-                example_code: "```\n{print} 'Robin is walking downtown'\nlocation = {ask} 'Is Robin going into a shop, or does she go home?'\n{if} location {is} shop\n    {print} 'She enters the shop.'\n    {print} 'Robin sees an interesting looking book'\n    book = {ask} 'Does Robin buy the book?'\n    {if} book {is} yes\n        {print} 'Robin buys the book and goes home'\n    {else}\n        {print} 'Robin leaves the shop and goes home'\n{else}\n    {print} 'Robin goes home'\n```\n"
+                story_text: "## 故事\n在这一关，你可以通过嵌套，在一个 {if}、{repeat} 或 {for} 命令里包含其它 {if}, {repeat} or {for} 命令。这让你有了很多选择，极大地提高了故事地互动性。\n"
+                example_code: "```\n{print} '罗宾来到了市区'\n地点 = {ask} '罗宾是要去商店还是回家？'\n{if} 地点 {is} 商店\n    {print} '她走进了商店。'\n    {print} '罗宾发现了一本有趣的书'\n    书 = {ask} '罗宾买了这本书吗？'\n    {if} 书 {is} 是\n        {print} '罗宾买了这本书，回家了'\n    {else}\n        {print} '罗宾离开商店，回家了'\n{else}\n    {print} '罗宾回了家'\n```\n"
                 story_text_2: "上面的示例非常简单，但是通过嵌套 {if}，您可以真正完善您的代码并将您的故事变成一个真正的游戏。看看这个例子！"
-                example_code_2: "## Elaborate code\n```\nsword = lost\ngame = on\n{print} 'Our hero is walking through the forest'\n{print} 'The path splits two ways'\n{repeat} 2 {times}\n    {if} game {is} on\n        path = {ask} 'Which path should she choose?'\n        {if} path {is} left\n            {if} sword {is} found\n                {print} 'Our hero comes across a dragon!'\n                {print} 'Luckily our hero has a sword to defeat the beast!'\n                game = over\n            {else}\n                {print} 'Our hero finds a dragon, but she doesnt have any weapons!'\n                {print} 'Our hero is beaten by the dragon...'\n                {print} 'Try again'\n                game = over\n        {if} path {is} right\n            {if} sword {is} lost\n                {print} 'Our hero finds a sword'\n                {print} 'This could come in very handy'\n                sword = found\n            {else}\n                {print} 'You have already found the sword. There is nothing left here.'\n                {print} 'She walks back'\n```\n"
-                start_code: '# place your code here'
+                example_code_2: "## Elaborate code\n```\n剑 = 丢失\n游戏 = 进行中\n{print} '我们的英雄走在森林中'\n{print} '遇到了两条岔路'\n{repeat} 2 {times}\n    {if} 游戏 {is} 进行中\n        路 = {ask} '她选了哪条路？'\n        {if} 路 {is} 左\n            {if} 剑 {is} 找到\n                {print} '我们的英雄遇上了一条龙！'\n                {print} '幸运的是她带着剑，可以消灭这个怪兽！'\n                游戏 = 结束\n            {else}\n                {print} '我们的英雄找到了一条龙，但是她手里没有武器！'\n                {print} '我们的英雄被龙打败了……'\n                {print} '再试一次'\n                游戏 = 结束\n        {if} 路 {is} 右\n            {if} 剑 {is} 丢失\n                {print} '我们的英雄找到了一把剑'\n                {print} '它可能派上大用场'\n                剑 = 找到\n            {else}\n                {print} '你已经找打了剑。这里什么都没有。'\n                {print} '她走了回去'\n```\n"
+                start_code: '# 在这里写你的代码'
             8:
-                story_text: "## Story\nIn this level you can use multiple lines in your {if} commands, this way you can upgrade your happy or sad ending!\n"
-                example_code: "```\n{print} 'OH NO! The T-rex is closing in!'\nend = {ask} 'Do you want a happy or a sad ending?'\n{if} end {is} happy\n    {print} 'Just in time Richard jumps back into the time machine!'\n    {print} 'Michael types in the code and...'\n    {print} '\U0001F4A5ZAP!\U0001F4A5'\n    {print} 'They are back in their garage'\n{else}\n    {print} 'Michael yells COME ON RICHARD! RUN FASTER!'\n    {print} 'But Richard is too slow...'\n    {print} 'The T-rex closes in and eats him in one big bite!\U0001F996'\n```\n"
-                start_code: '# place your code here'
+                story_text: "## 故事\n在这一关，你可以在{if}命令里使用多行代码，这样就能升级你的好结局和坏结局了！\n"
+                example_code: "```\n{print} '哦，不！霸王龙来了！'\n结局 = {ask} '你想要好结局还是坏结局？'\n{if} 结局 {is} 好\n    {print} '理查德在千钧一发之际跳回了时光机里！'\n    {print} '迈克尔输入了指令，然后……'\n    {print} '\U0001F4A5刷！\U0001F4A5'\n    {print} '他们回到了他们的车库'\n{else}\n    {print} '迈克尔大喊：理查德快回来！跑快点！'\n    {print} '但是理查德太慢了……'\n    {print} '霸王龙追上来，一口把他吞了！\U0001F996'\n```\n"
+                start_code: '# 在这里写你的代码'
             4:
-                story_text: "## Story\nYou may have noticed that there is still a problem in the previous levels. Did you try to print a sentence that contained the word name?\nYou can solve that in this level. You must use quotation marks for everything that you are going to print.\n"
-                example_code: "```\nname {is} Hans\n{print} 'The name of the main character is' name\n{print} name 'is now going to walk in the woods'\n{print} name 'is a bit scared'\nanimals {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} 'He hears the sound of an' animals {at} {random}\n{print} name 'is afraid this is a haunted forest'\n```\n"
-                start_code: "{print} 'Your story will be printed here!'"
+                story_text: "## 故事\n你可能注意到了，在之前的关卡里还有个问题。你有没有试过打印“名字”这个词？\n在这一关里你可以解决这个问题。你必须给所有要打印的东西加上引号。\n"
+                example_code: "```\n名字 {is} 汉斯\n{print} '主人公 的 名字 是' 名字\n{print} 名字 '正准备 走进 树林'\n{print} 名字 '有点害怕'\n动物们 {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} '他听到了一个' 动物们 {at} {random} 的声音\n{print} 名字 '担心 这片森林 闹鬼'\n```\n"
+                start_code: "{print} '你的故事会打印在这里！'"
             15:
-                story_text: "## Story\nUsing the `{while}` loop can make your stories more interesting. For example, you can use `{while} game {is} 'on'` so you can play until the game is over.\nOr you can use `{while} sword {is} 'lost'` so the player can't continu the game until they have found something.\n"
+                story_text: "## 故事\n运用`{while}`循环能让你的故事更有趣。比如，用`{while} 游戏 {is} '进行中'`可以让游戏一直进行到结束为止。\n或者用`{while} 剑 {is} '丢失'`来要求玩家必须先找到剑，才能继续游戏。\n"
                 example_code: "```\n钥匙 = '丢失'\n{print} '你站在你的花园里，你的钥匙丢了。'\n{print} '你想去哪里找它们？'\n{print} '你可以选择：树、花坛、石头、邮筒'\n{while} 钥匙 == '丢失'\n    位置 = {ask} '你想去哪里找？'\n    {if} 位置 == '花坛'\n        {print} '它们在这里！'\n        钥匙 = '找到'\n    {else}\n        {print} '没有，他们不在'位置\n{print} '现在你可以进入房子了！'\n```\n"
-                start_code: '# place your code here'
+                start_code: '# 在这里写你的代码'
         name: 故事
         description: 故事
         default_save_name: 故事
