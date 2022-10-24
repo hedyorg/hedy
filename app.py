@@ -565,16 +565,17 @@ def translate_error(code, arguments):
 
         if k in arguments_that_require_highlighting:
             if k in arguments_that_require_translation:
-                nl_keywords = hedy_translation.keywords_to_dict('nl')
-                local_keyword = hedy_translation.get_target_keyword(nl_keywords,v)
-                arguments[k] = hedy.style_closest_command(local_keyword)
+                local_lang = current_keyword_language()["lang"]
+                local_keyword = hedy_translation.translate_keyword(v, local_lang)
+                arguments[k] = hedy.style_command(local_keyword)
             else:
-                arguments[k] = hedy.style_closest_command(v)
-
-
+                arguments[k] = hedy.style_command(v)
 
 
     return error_template.format(**arguments)
+
+
+
 
 def translate_list(args):
     translated_args = [gettext('' + str(a)) for a in args]
