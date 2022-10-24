@@ -1,7 +1,7 @@
 1:
 -   name: "{print}"
     explanation: "Mostrar algo con `{print}`."
-    demo_code: "{print} Hola bienvenido a Hedy!"
+    demo_code: "{print} ¡Hola bienvenido a Hedy!"
 -   name: "{ask}"
     explanation: "Preguntar algo con `{ask}`."
     demo_code: "{ask} ¿Cuál es tu color favorito?"
@@ -12,48 +12,48 @@
         {echo} entonces tu color favorito es
 -   demo_code: '{print} 🙋 🌍 ❗'
     name: '{print} emojis'
-    explanation: imprime un emoji con `{print}`
+    explanation: imprime un emoji con `{print}`.
 -   name: '{forward}'
     demo_code: '{forward} 100'
-    explanation: Draw a line with `{forward}`.
--   explanation: Gira a la tortuga con `{turn}`
+    explanation: Dibujar una línea con `{forward}`.
+-   explanation: Gire la tortuga de dibujo con `{turn}`.
     name: '{turn}'
-    demo_code: "{forward} 25\n{turn} left\n{forward} 25\n{turn} right"
+    demo_code: "{forward} 25\n{turn} {left}\n{forward} 25\n{turn} {right}"
 2:
 -   name: "{is}"
-    explanation: "Dar un nombre a una palabra para usar en el programa con `{is}`."
+    explanation: "Asigne un nombre a una palabra para usar en el programa con `{is}`. Puedes elegir el nombre tú mismo."
     demo_code: |-
         nombre {is} Hedy
         {print} Bienvenido nombre
 -   name: "{ask}"
-    explanation: "Preguntar algo con `{ask}`. ¡Atención! Necesitas darle un nombre a la respuesta con `{is}`"
+    explanation: "Preguntar algo con `{ask}`. ¡Atención! Necesitas darle un nombre a la respuesta con `{is}`."
     demo_code: |-
         color {is} {ask} ¿Cuál es tu color favorito?
-        {print} El color es tú favorito
--   explanation: Permite pausar a Hedy por un (par de) segundo(s).
+        {print} El color es tú favorito!
+-   explanation: '`{sleep}` Permite a Hedy tomar una pausa por un (par de) segundo(s).'
     name: '{sleep}'
     demo_code: "{print} Déjame pensar por un segundo...\n{sleep}\n{print} Hmm.. Necesito 3 segundos más...\n{sleep} 3\n{print} ¡Eureka! ¡Lo tengo!"
--   name: is - turtle
+-   name: '{is}  con tortuga'
     demo_code: "ángulo {is} 90\n{turn} ángulo\n{forward} 100"
     explanation: Dale un nombre a un número usando `{is}`. Puedes escoger el nombre tú misme.
 3:
--   name: "choose_random"
+-   name: "Elige al azar"
     explanation: "Seleccionar una palabra aleatoria de un grupo usando `{at}` y `{random}`."
     demo_code: |-
         animales {is} perro, gato, canguro
         {print} animales {at} {random}
--   demo_code: "animals {is} cow, cat\n{add} dog {to_list} animals"
-    explanation: add an item to a list
+-   demo_code: "animales {is} vaca, gato\n{add} perro {to_list} animales"
+    explanation: '`{add}` un elemento `{to_list}` una lista.'
     name: '{add}'
 -   name: '{remove}'
-    explanation: remove an item from a list
-    demo_code: "animals {is} cat, dog, cow\n{remove} dog {from} animals"
+    explanation: '`{remove}` un elemento `{from}` una lista.'
+    demo_code: "animales {is} gato, perro, vaca\n{remove} perro {from} animales"
 4:
 -   name: "{print}"
-    explanation: "Para mostrar un texto literal con el comando `{print}` debes usar las comillas simples."
+    explanation: "Mostrar literalmente usando comillas."
     demo_code: "{print} 'Hola bienvenido a Hedy.'"
 -   name: "{is}"
-    explanation: "Dar un nombre al texto y mostrar sin comillas simples."
+    explanation: "Dar un nombre al texto e `{print}` sin comillas simples."
     demo_code: |-
         nombre {is} Hedy
         {print} 'Mi nombre es ' nombre
@@ -64,15 +64,15 @@
         {print} 'Tu color favorito es ' color
 5:
 -   name: "{print}"
-    explanation: "Mostrar un texto literal con el comando `{print}`."
+    explanation: "Mostrar un texto literal usando comillas."
     demo_code: "{print} 'Hola bienvenido a Hedy.'"
 -   name: "{ask}"
     explanation: "Preguntar algo con `{ask}`."
     demo_code: |-
-        color {is} {ask} ¿Cuál es tu color favorito?
+        color {is} {ask} '¿Cuál es tu color favorito?'
         {print} 'Tu color favorito es ' color
 -   name: "{if}"
-    explanation: "Elegir una opción con `{if}`"
+    explanation: "Elegir una opción con `{if}`."
     demo_code: |-
         color {is} {ask} '¿Cuál es tu color favorito?'
         {if} color {is} verde {print} 'qué bonito!' {else} {print} 'no es tan bonito'

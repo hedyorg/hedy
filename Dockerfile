@@ -6,6 +6,8 @@ COPY requirements.txt /tmp/requirements.txt
 
 RUN pip3 install --no-cache-dir -r /tmp/requirements.txt
 
+RUN apt install -y curl && curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - && apt-get install -y nodejs
+
 WORKDIR /app
 
 COPY . .

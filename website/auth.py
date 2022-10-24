@@ -8,7 +8,7 @@ from functools import wraps
 import boto3
 from botocore.exceptions import ClientError as email_error, NoCredentialsError
 from flask import g, request, session
-from flask_babel import gettext
+from flask_babel import gettext, force_locale
 import requests
 
 import utils
@@ -36,9 +36,8 @@ if os.getenv('MAILCHIMP_API_KEY') and os.getenv('MAILCHIMP_AUDIENCE_ID'):
     MAILCHIMP_API_HEADERS = {'Content-Type': 'application/json',
                              'Authorization': 'apikey ' + os.getenv('MAILCHIMP_API_KEY')}
 
-
-def mailchimp_subscribe_user(email):
-    request_body = {'email_address': email, 'status': 'subscribed'}
+def mailchimp_subscribe_user(email, country, role):
+    request_body = {'email_address': email, 'status': 'subscribed', 'tags': [country, role]}
     r = requests.post(MAILCHIMP_API_URL + '/members', headers=MAILCHIMP_API_HEADERS, data=json.dumps(request_body))
 
     subscription_error = None
@@ -313,6 +312,18 @@ def send_email_template(template, email, link=None, username=gettext('user')):
         body_html = body_html.format(link='<a href="' + link + '">{link}</a>').format(link=gettext('link'))
 
     send_email(email, subject, body_plain, body_html)
+
+
+# By default, emails are sent in the locale of the logged-in user.
+# This function is to be used if the email needs to be sent in another locale.
+# For example when an action by a logged in admin (like oking a teacher's account) triggers an email
+def send_localized_email_template(locale, template, email, link=None, username=None):
+    with force_locale(locale):
+        if username is None:
+            # We want to use the correct locale for this text
+            username = gettext('user')
+        send_email_template(template, email, link, username)
+
 
 def store_new_student_account(db, account, teacher_username):
     username, hashed, hashed_token = prepare_user_db(account['username'], account['password'])

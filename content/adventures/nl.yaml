@@ -95,7 +95,7 @@ adventures:
                 story_text_2: |
                     ## Opdrachten worden steeds moeilijker
                     Je vindt de commando's weer links, en opdrachten in de volgende tabjes. De opdrachten worden in de opeenvolgende tabjes nu steeds iets moeilijker.
-                    Begin dus links met het verhaal, en werk zo door om steeds meer uitgedaagd te worden.
+                    Begin dus links en werk zo door naar rechts om steeds meer uitgedaagd te worden.
                 example_code: |
                     ```
                     {print} 'Vanaf nu gebruiken we aanhalingstekens!'
@@ -406,10 +406,15 @@ adventures:
                 story_text: |-
                     ## Het laatste level!
                     We zijn aangekomen bij echte Python code! Dat betekent wel dat we vanaf nu ronde haakjes moeten gebruiken bij {print} en bij {range}.
-                example_code: "```\n{print}('mijn naam is Hedy!')\n```\n"
-                story_text_2: Als je meer dan één tekst wilt printen, moet je die scheiden met komma's.
+                example_code: |
+                    ```
+                    {print}('Hallo!')
+                    {for} i in {range}(1, 10):
+                        {print}('Dit is regel ', i)
+                    ```
+                story_text_2: Als je meer dan één tekst wilt printen, moeten er komma's tussen.
                 example_code_2: "```\ntemperatuur = 25\n{print}('Het is ', temperatuur, 'graden buiten')\n```\n"
-                story_text_3: "##  Input\nDe laatste aanpassing die we moeten maken om echte Python code te krijgen is het vervangen van `{ask}` door `{input}`."
+                story_text_3: "##  Input\nDe laatste aanpassing die we moeten maken om echte Python code te krijgen is `{ask}` veranderen in `{input}`."
                 example_code_3: "```\n{print}('Mijn naam is Hedy!')\nnaam = {input}('Hoe heet jij?')\n{print}('Jij heet dus ', naam)\n```\n"
     story:
         name: "Verhaal"
@@ -2764,7 +2769,7 @@ adventures:
             18:
                 story_text: |
                     ## Vooruitblik
-                    Gefeliciteerd! Je hebt het laatste level van Hedy behaald! Maar niet getreurd, we zijn druk bezig om nog meer levels en avonturen te bouwen. Dus kom vooral later nog eens een kijkje nemen of er al nieuwe levels zijn!
+                    Gefeliciteerd! Je hebt het laatste level van Hedy behaald! De code van level 18 kan je gebruiken in Python-omgevingen zoals replit of PyCharm en daar verder gaan met leren programmeren. Maar Python kan alleen met Engels codes werken, dus geen Nederlandse.
                 start_code: "{print} ('Goed gedaan!')"
     tic:
         name: Boter Kaas en Eieren

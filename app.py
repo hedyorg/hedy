@@ -1,5 +1,6 @@
 # coding=utf-8
 import copy
+from multiprocessing.dummy import active_children
 
 from website import (
     auth_pages, classes, profile, parsons, statistics, quiz, admin, for_teachers, programs,
@@ -31,6 +32,7 @@ import collections
 import datetime
 import sys
 import textwrap
+import zipfile
 
 # Todo TB: This can introduce a possible app breaking bug when switching to Python 4 -> e.g. Python 4.0.1 is invalid
 if (sys.version_info.major < 3 or sys.version_info.minor < 7):
@@ -464,8 +466,8 @@ def parse_tutorial(user):
     except:
         return "error", 400
 
-@app.route("/generate_dst", methods=['POST'])
-def prepare_dst_file():
+@app.route("/generate_machine_files", methods=['POST'])
+def prepare_files():
     body = request.json
     # Prepare the file -> return the "secret" filename as response
     transpiled_code = hedy.transpile(body.get("code"), body.get("level"), body.get("lang"))
@@ -486,40 +488,53 @@ def prepare_dst_file():
     lines = [x for x in lines if (not "time.sleep" in x) and (not "t.pencolor" in x)]
 
     threader += "  " + "\n  ".join(lines)
-    threader += "\n" + 't.save("dst_files/' + filename + '.dst")'
-    if not os.path.isdir('dst_files'):
-        os.makedirs('dst_files')
+    threader += "\n" + 't.save("machine_files/' + filename + '.dst")'
+    threader += "\n" + 't.save("machine_files/' + filename + '.png")'
+    if not os.path.isdir('machine_files'):
+        os.makedirs('machine_files')
     exec(threader)
+
+    # stolen from: https://stackoverflow.com/questions/28568687/send-with-multiple-csvs-using-flask
+
+    zip_file = zipfile.ZipFile(f'machine_files/{filename}.zip', 'w', zipfile.ZIP_DEFLATED)
+    for root, dirs, files in os.walk('machine_files/'):
+        # only zip files for this request, and exclude the zip file itself:
+        for file in [x for x in files if x[:len(filename)] == filename and x[-3:] != 'zip']:
+            zip_file.write('machine_files/'+file)
+    zip_file.close()
 
     return jsonify({'filename': filename}), 200
 
-
-# this is a route for testing purposes
-@app.route("/download_dst/<filename>", methods=['GET'])
-def download_dst_file(filename):
+@app.route("/download_machine_files/<filename>", methods=['GET'])
+def download_machine_file(filename, extension="zip"):
     # https://stackoverflow.com/questions/24612366/delete-an-uploaded-file-after-downloading-it-from-flask
+
+    # Once the file is downloaded -> remove it
     @after_this_request
     def remove_file(response):
         try:
-            os.remove("dst_files/" + filename + ".dst")
+            os.remove("machine_files/" + filename + ".zip")
+            os.remove("machine_files/" + filename + ".dst")
+            os.remove("machine_files/" + filename + ".png")
         except:
-            print("Error removing the generated .dst file!")
+            print(f"Error removing one of the generated files!")
         return response
-    # Once the file is downloaded -> remove it
-    return send_file("dst_files/" + filename + ".dst", as_attachment=True)
+
+    return send_file("machine_files/" + filename + "." + extension, as_attachment=True)
 
 
 def transpile_add_stats(code, level, lang_):
     username = current_user()['username'] or None
     try:
         result = hedy.transpile(code, level, lang_)
+        number_of_lines = code.count('\n')
         statistics.add(
-            username, lambda id_: DATABASE.add_program_stats(id_, level, None))
+            username, lambda id_: DATABASE.add_program_stats(id_, level, number_of_lines,None))
         print(result)
         return result
     except Exception as ex:
         statistics.add(username, lambda id_: DATABASE.add_program_stats(
-            id_, level, get_class_name(ex)))
+            id_, level, number_of_lines, get_class_name(ex)))
         raise
 
 
@@ -1020,6 +1035,49 @@ def get_cheatsheet_page(level):
 
     return render_template("cheatsheet.html", commands=commands, level=level)
 
+@app.route('/certificate/<username>', methods=['GET'])
+def get_certificate_page(username):
+    if not current_user()['username']:
+        return utils.error_page(error=403, ui_message=gettext('unauthorized'))
+    username = username.lower()
+    user = DATABASE.user_by_username(username)
+    if not user:
+        return utils.error_page(error=403, ui_message=gettext('user_inexistent'))
+    progress_data = DATABASE.progress_by_username(username)
+    if progress_data is None:
+        return utils.error_page(error=404, ui_message=gettext('no_certificate'))
+    achievements = progress_data.get('achieved', None)
+    if achievements is None or 'hedy_certificate' not in achievements:
+        return utils.error_page(error=404, ui_message=gettext('no_certificate'))
+    if 'run_programs' in progress_data:
+        count_programs = progress_data['run_programs']
+    else:
+        count_programs = 0
+    quiz_score = get_highest_quiz_score(username)
+    longest_program = get_longest_program(username)
+
+    number_achievements = len(achievements)
+    congrats_message = gettext('congrats_message').format(**{'username': username})
+    return render_template("certificate.html", count_programs=count_programs, quiz_score=quiz_score,
+                            longest_program=longest_program, number_achievements=number_achievements,
+                            congrats_message=congrats_message)
+
+def get_highest_quiz_score(username):
+    max = 0
+    quizzes = DATABASE.get_quiz_stats([username])
+    for quiz in quizzes:
+        for score in quiz.get('scores', []):
+                if score > max:
+                    max = score
+    return max
+
+def get_longest_program(username):
+    programs = DATABASE.get_program_stats([username])
+    highest = 0
+    for program in programs:
+        if 'number_of_lines' in program:
+            highest = max(highest, program['number_of_lines'])
+    return highest
 
 @app.errorhandler(404)
 def not_found(exception):
@@ -1359,6 +1417,7 @@ def store_parsons_order():
     DATABASE.store_parsons(attempt)
     return jsonify({}), 200
 
+
 @app.route('/client_messages.js', methods=['GET'])
 def client_messages():
     # Not really nice, but we don't call this often as it is cached
@@ -1393,6 +1452,7 @@ def other_keyword_language():
     if session.get('keyword_lang') and session['keyword_lang'] != "en":
         return make_keyword_lang_obj("en")
     return None
+
 
 @app.template_global()
 def translate_command(command):
@@ -1496,6 +1556,7 @@ def modify_query(**new_values):
 
     return '{}?{}'.format(request.path, url_encode(args))
 
+
 @app.template_global()
 def get_user_messages():
     if not session.get('messages'):
@@ -1510,6 +1571,8 @@ def get_user_messages():
 
 # Todo TB: Re-write this somewhere sometimes following the line below
 # We only store this @app.route here to enable the use of achievements -> might want to re-write this in the future
+
+
 @app.route('/auth/public_profile', methods=['POST'])
 @requires_login
 def update_public_profile(user):
@@ -1608,7 +1671,7 @@ def public_user_page(username):
         last_achieved = None
         if user_achievements.get('achieved'):
             last_achieved = user_achievements['achieved'][-1]
-
+        certificate_message = gettext('see_certificate').format(**{'username': username})
         # Todo: TB -> In the near future: add achievement for user visiting their own profile
 
         return render_template('public-page.html', user_info=user_public_info,
@@ -1616,7 +1679,8 @@ def public_user_page(username):
                                favourite_program=favourite_program,
                                programs=user_programs,
                                last_achieved=last_achieved,
-                               user_achievements=user_achievements)
+                               user_achievements=user_achievements,
+                               certificate_message=certificate_message)
     return utils.error_page(error=404, ui_message=gettext('user_not_private'))
 
 
@@ -1632,6 +1696,7 @@ def valid_invite_code(code):
         valid_codes.extend(os.getenv('TEACHER_INVITE_CODES').split(','))
 
     return code in valid_codes
+
 
 @app.route('/invite/<code>', methods=['GET'])
 def teacher_invitation(code):

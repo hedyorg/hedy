@@ -2,7 +2,7 @@ from flask_babel import gettext
 from flask import request, g
 import hedyweb
 from website import statistics
-from website.auth import create_verify_link, current_user, is_admin, is_teacher, make_salt, password_hash, pick, requires_admin, send_email_template, password_hash
+from website.auth import create_verify_link, current_user, is_admin, is_teacher, make_salt, password_hash, pick, requires_admin, send_localized_email_template, password_hash
 from .database import Database
 import utils
 from flask_helpers import render_template
@@ -209,9 +209,9 @@ class AdminModule(WebsiteModule):
             resp = {'username': user['username'], 'token': hashed_token}
         else:
             try:
-                send_email_template(template='welcome_verify', email=body['email'],
-                                    link=create_verify_link(user['username'], hashed_token),
-                                    username=user['username'])
+                send_localized_email_template(locale=user['language'], template='welcome_verify', email=body['email'],
+                                              link=create_verify_link(user['username'], hashed_token),
+                                              username=user['username'])
             except:
                 return gettext('mail_error_change_processed'), 400
 
@@ -259,7 +259,7 @@ def update_is_teacher(db: Database, user, is_teacher_value=1):
 
     if user_becomes_teacher and not utils.is_testing_request(request):
         try:
-            send_email_template(template='welcome_teacher', email=user['email'], username=user['username'])
+            send_localized_email_template(locale=user['language'], template='welcome_teacher', email=user['email'], username=user['username'])
         except:
             print(f"An error occurred when sending a welcome teacher mail to {user['email']}, changes still processed")
 

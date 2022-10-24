@@ -1,7 +1,7 @@
 import json
 from typing import Dict
 import uuid
-from flask import g, request, session, jsonify
+from flask import g, request, session, jsonify, render_template
 from flask_babel import gettext
 from hedy_content import Quizzes
 from website import statistics
@@ -10,7 +10,7 @@ from website.auth import current_user
 from .database import Database
 import utils
 from .website_module import WebsiteModule, route
-
+from hedy import HEDY_MAX_LEVEL
 MAX_ATTEMPTS = 2
 
 ANSWER_PARSER = {
@@ -64,6 +64,13 @@ class QuizModule(WebsiteModule):
 
         question = self.quizzes[g.lang].get_quiz_data_for_level_question(level, question, g.keyword_lang)
         return jsonify(question), 200
+
+    @route('/preview-question/<int:level>/<int:question>', methods=['GET'])
+    def preview_quiz_question(self, level, question):
+        if question > self.quizzes[g.lang].get_highest_question_level(level) or question < 1:
+            return gettext('question_doesnt_exist'), 400
+
+        return render_template('preview-quiz.html', preview=True, level=level, question=question)
 
     @route('/submit_answer/', methods=["POST"])
     def submit_answer(self):
@@ -140,10 +147,14 @@ class QuizModule(WebsiteModule):
                     achievement.append(self.achievements.add_single_achievement(username, "quiz_master")[0])
                 else:
                     achievement = self.achievements.add_single_achievement(username, "quiz_master")
+            if level == HEDY_MAX_LEVEL:
+                if achievement:
+                    achievement.append(self.achievements.add_single_achievement(username, "hedy_certificate")[0])
+                else:
+                    achievement = self.achievements.add_single_achievement(username, "hedy_certificate")
             if achievement:
                 response['achievement'] = json.dumps(achievement)
 
-        print(response)
         return jsonify(response), 200
 
 
