@@ -375,8 +375,7 @@ def parse():
                 transpile_result = ex.fixed_result
                 exception = ex
             except hedy.exceptions.UnquotedEqualityCheck as ex:
-                response['Error'] = translate_error(
-                    ex.error_code, ex.arguments)
+                response['Error'] = translate_error(ex.error_code, ex.arguments)
                 response['Location'] = ex.error_location
                 exception = ex
         try:
@@ -547,16 +546,23 @@ def hedy_error_to_response(ex):
 
 def translate_error(code, arguments):
     arguments_that_require_translation = ['allowed_types', 'invalid_type', 'invalid_type_2', 'character_found',
-                                          'concept', 'tip', 'command']
+                                          'concept', 'tip', 'command', 'print', 'ask', 'echo']
     arguments_that_require_highlighting = ['command', 'guessed_command', 'invalid_argument', 'invalid_argument_2',
-                                           'variable', 'invalid_value']
+                                           'variable', 'invalid_value', 'print', 'ask', 'echo', 'is']
 
     # Todo TB -> We have to find a more delicate way to fix this: returns some gettext() errors
     error_template = gettext('' + str(code))
 
+    # TODO if we have a tip key, we need to first fetch that text and then also bring it here,
+    # so text *in* the tip an be translated/highlighted
+
+    # adds keywords to the dictionary so they can be translated if they occur in the error text
+    arguments["print"] = "print"
+    arguments["ask"] = "ask"
+    arguments["echo"] = "echo"
+
     # some arguments like allowed types or characters need to be translated in the error message
     for k, v in arguments.items():
-
         if k in arguments_that_require_translation:
             if isinstance(v, list):
                 arguments[k] = translate_list(v)
@@ -570,6 +576,8 @@ def translate_error(code, arguments):
                 arguments[k] = hedy.style_command(local_keyword)
             else:
                 arguments[k] = hedy.style_command(v)
+
+
 
 
     return error_template.format(**arguments)
