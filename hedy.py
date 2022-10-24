@@ -1693,6 +1693,23 @@ class ConvertToPython_8_9(ConvertToPython_7):
 
         return "if " + args[0] + ":\n" + "\n".join(all_lines)
 
+    def ifpressed(self, met, args):
+        # TODO: Implement better solution than pygame.K_{args[0]}
+        args = [a for a in args if a != ""] # filter out in|dedent tokens
+        all_lines = [x + '\n' for x in args[1:]]
+
+        return f"""end = False
+canvas.fill(pygame.Color(247, 250, 252, 255))
+while not end:
+    pygame.display.update()
+    event = pygame.event.wait()
+    if event.type == pygame.KEYDOWN:
+        if event.key == pygame.K_{args[0]}:
+            end = True
+            """ + "            ".join(all_lines) + """
+pygame.display.update()
+pygame.quit()"""
+
     def elses(self, meta, args):
         args = [a for a in args if a != ""] # filter out in|dedent tokens
 
