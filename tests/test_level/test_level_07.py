@@ -27,7 +27,7 @@ class TestsLevel7(HedyTester):
 
         expected = HedyTester.dedent(
             "for i in range(int('3')):",
-            (HedyTester.forward_transpiled(100), '  '))
+            (HedyTester.forward_transpiled(100, self.level), '  '))
 
         self.single_level_tester(code=code, expected=expected, extra_check_function=self.is_turtle())
 
