@@ -210,77 +210,87 @@ adventures:
                     Most megtanuljuk az `{and}` és `{or}` kifejezések használatát! Ha két állítást szeretnél ellenőrizni, akkor nem kell kettő {if} parancsot használnod, használhatod az `{and}` és `{or}` parancsokat. Ha az `{and}` parancsot használod, akkor az `{and}` bal és jobb oldalán mindkét állításnak igaznak kell lennie. `{or}` esetén csak egy állításnak kell helyesnek lennie.
                 example_code: "```\nnév = {ask} \"Hogy hívnak?\"\nkor = {ask} \"Hány éves vagy?\"\n{if} név {is} \"Hedy\" {and} kor {is} 2\n    {print} \"Te vagy az igazi Hedy!\"\n```\n"
             14:
-                start_code: |
-                    kor = ask 'Hány éves vagy?'
-                    if kor < 13
-                     print 'Fiatalabb vagy nálam!'
-                    else
-                     print 'Idősebb vagy nálam!'
+                start_code: |-
+                    kor = {ask} "Hány éves vagy?"
+                    {if} kor < 13
+                        {print} "Fiatalabb vagy nálam!"
+                    {else}
+                        {print} "Idősebb vagy nálam!"
                 story_text: |
-                    További új elemeket fogunk megtanulni! Lehet, hogy már a matematikából ismered
-                    ezeket a jeleket, a `<` és a `>`. A `<` ellenőrzi, hogy az első szám kisebb-e, mint a
-                    második, például `4 < 5`. A `>` ellenőrzi, hogy az első szám nagyobb-e, mint a
-                    második, például `6 > 5`.
-                story_text_2: "From this level on, if you want to compare exactly, you can use two equal signs. This is what most programming languages do:\n"
-                example_code_2: "```\nname = {ask} 'What is your name?'\n{if} name == 'Hedy'\n    {print} 'You are coo!'\n```\n"
-                example_code: "```\nage = {ask} 'How old are you?'\n{if} age > 12\n    {print} 'You are older than I am!'\n```\n"
-                story_text_3: "You can also compare if something is *not* equal to something else using `!=` like this:\n"
-                example_code_3: "```\nname = {ask} 'What is your name?'\n{if} name != 'Hedy'\n    {print} 'You are not Hedy'\n```\n"
+                    ## Nagy, Nagyobb, Legnagyobb!
+                    További új elemeket fogunk megtanulni! Lehet, hogy már a matematikából ismered ezeket a jeleket, a `<` és a `>`.
+                    A `<` ellenőrzi, hogy az első szám kisebb-e, mint a második, például kor `<` 12 megmondja, hogy a kor kisebb-e, mint 12.
+                    Ha arra vagy kíváncsi, hogy az első szám kisebb vagy egyenlő-e a másodikkal, a `<=` jelet használd, például kor `<=` 11.
+                    A `>` ellenőrzi, hogy az első szám nagyobb-e, mint a második, például pontszám `>` 10 megmondja, hogy a pontszám nagyobb-e, mint 10.
+                    Ha arra vagy kíváncsi, hogy az első szám nagyobb vagy egyenlő-e a másodikkal, a `>=` jelet használd, például pontszám `<=` 11.
+                    Ezeket az összehasonlításokat `{if}` parancsok után használhatod, így:
+                story_text_2: "Ettől a szinttől kezdve, ha pontos egyezést akarsz vizsgálni, két egyenlőségjelet használj! A legtöbb programnyelv is így működik:\n"
+                example_code_2: "```\nnév = {ask} \"Hogy hívnak?\"\n{if} név == \"Hedy\"\n    {print} \"Klassz!\"\n```\n"
+                example_code: "```\nkor = {ask} \"Hány éves vagy?\"\n{if} kor > 12\n    {print} \"Idősebb vagy nálam!\"\n```\n"
+                story_text_3: "Azt a kérdést is kifejezheted, hogy két dolog *nem* egyenlő-e egymással a `!=` jellel, így:\n"
+                example_code_3: "```\nnév = {ask} \"Hogy hívnak?\"\n{if} név != \"Hedy\"\n    {print} \"Te nem Hedy vagy\"\n```\n"
             15:
                 start_code: |-
-                    valasz = 0
-                    while valasz != 25
-                      valasz = ask 'Mennyi 5-ször 5?'
-                    print 'A helyes válasz megadásra került'
-                story_text: |
-                    Tanulni fogunk egy új ciklust, a `while` ciklust! Addig folytatjuk a ciklust, amíg az állítás
-                    igaz / érvényes! Tehát a példakódnál addig folytatjuk, amíg meg nem adják a helyes
-                    választ. Ha soha nem adják meg a helyes választ, akkor a ciklus soha nem ér véget!
-                example_code: "```\nanswer = 0\nwhile answer != 25\n    answer = ask 'What is 5 times 5?'\nprint 'A correct answer has been given'\n```\n"
+                    válasz = 0
+                    {while} válasz != 25
+                        válasz = {ask} "Mennyi 5-ször 5?"
+                    {print} "Ez a helyes válasz"
+                story_text: |-
+                    ## Még több ciklus!
+                    Tanulni fogunk egy új ciklust, az `{while}` ciklust! Addig folytatjuk a ciklust, amíg az állítás igaz!
+                    Szóval ne felejtsd el módosítani a ciklusban szereplő értéket!
+
+                    A példakódban addig megyünk, amíg meg nem kapjuk a helyes választ.
+                    Ha soha nem kapjuk meg a megoldást, akkor a ciklus soha nem ér véget!
+                example_code: "```\nválasz = 0\n{while} válasz != 25\n    válasz = {ask} \"Mennyi 5-ször 5?\"\n{print} \"Ez a helyes válasz\"\n```\n"
             16:
                 start_code: |-
-                    gyumolcs = ['alma', 'banán', 'cseresznye']
-                    print gyumolcs
-                story_text: "Listáknál szögletes zárójelet fogunk használni! A lista egyes elemeit aposztrófok (') közé tesszük. "
-                example_code: "```\nfriends = ['Ahmed', 'Ben', 'Cayden']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'the lucky number of ' friends[i]\n    {print} 'is ' lucky_numbers[i]\n```\n"
+                    gyümölcs = ['alma', 'banán', 'cseresznye']
+                    {print} gyümölcs
+                story_text: "## Közelebb és közelebb az igazi programozás!\nListákat fogunk készíteni Python módra, szögletes zárójelekkel! Megtartjuk az idézőjeleket az elemek körül, ahogy az előző szinteken tanultuk, és az egész listát szögletes zárójelek közé foglaljuk.\nA szögletes zárójeleket arra is használhatod, hogy kiválaszd a lista elemét egy adott helyen."
+                example_code: "```\nbarátok = [\"Aladár\", \"Blöki\", \"MZ/X\"]\nszerencsés_számok = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} barátok[i] \" szerencsés száma\"\n    {print} \"egyenlő \" szerencsés_számok[i]\n```\n"
             17:
                 start_code: |-
-                    for i in range 1 to 10:
-                        print i
-                    print 'Aki bújt, aki nem, megyek!'
-                story_text: "Most egy kicsit meg fogjuk változtatni a behúzást. Minden alkalommal, amikor behúzást használunk, az előző sor végére`:` jelet teszünk."
-                example_code: "```\nprices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
+                    {for} i {in} {range} 1 {to} 10:
+                        {print} i
+                    {print} "Aki bújt, aki nem, megyek!"
+                story_text: "# Egyébként-ha\nMost egy kicsit meg fogjuk változtatni a behúzást. Minden alkalommal, amikor behúzást használunk, az előző sor végére`:` jelet teszünk.\n\nEzen a szinten egy új parancsot is használhatsz: `{elif}`. Az `{elif}` az {else} {if} rövidítése, és szükséged lesz rá, ha 3 (vagy több!) alternatívát szeretnél használni.\nPróbáld ki!"
+                example_code: "```\nárak = [\"1 milliárd forint\", \"egy almás pite\", \"semmi\"]\nsorsolt_ár = árak[{random}]\n{print} \"Nyereményed \" sorsolt_ár\n{if} sorsolt_ár == \"1 milliárd forint\":\n    {print} \"Éljen! Gazdag vagy!\"\n{elif} sorsolt_ár == \"egy almás pite\":\n    {print} \"Szuper! Almás pite!\"\n{else}:\n    {print} \"Több szerencsét legközelebb...\"\n```\n"
             18:
                 start_code: |-
-                    naam = 'Hedy'
-                    {print}('My name is ', naam)
+                    név = "Hedy"
+                    {print}("A nevem ", név)
                 story_text: |-
-                    ## The last level!
-                    We arrived at real Python code! That means we need to use parentheses with {print} and {range} from now on.
+                    ## Az utolsó szint!
+                    Elértünk az igazi Python kódhoz! Ez azt jelenti, hogy zárójeleket kell használnunk a {print} és {range} esetében.
 
                 example_code: |
                     ```
-                    {print}('my name is Hedy!')
+                    {print}("Helló!")
+                    {for} i {in} {range}(1, 10):
+                        {print}("Ez a(z) ", i, ". sor")
                     ```
 
                 story_text_2: |-
-                    If you want to print more than one item, you need to separate them by commas.
+                    Ha egynél több dolgot szeretnél kiírni, vesszővel kell elválasztanod őket egymástól.
 
                 example_code_2: |
                     ```
-                    temperature = 25
-                    {print}('It is ', temperature, 'degrees outside')
+                    hőmérséklet = 25
+                    {print}("Ma ", hőmérséklet, " fok lesz odakint")
                     ```
 
                 story_text_3: |-
-                    ##  Input
-                    The final change we will need to make to get Python code is changing `{ask}` into `{input}`.
+                    ## Bemenet
+                    Az utolsó változtatás, hogy Python kódot írjunk az a `{ask}` lecserélése `{input}` parancsra.
+
+                    A Python angol kulcsszavakat használ. Ha eddig nem tetted, állítsd a parancsokat angolra, és tanulmányozd a Python által használt parancsokat!
 
                 example_code_3: |
                     ```
-                    {print}('My name is Hedy!')
-                    name = {input}('What is your name?')
-                    {print}('So your name is ', name)
+                    {print}("A nevem Hedy!")
+                    név = {input}("Téged hogy hívnak?")
+                    {print}("Szóval a te neved ", név)
                     ```
 
     story:
