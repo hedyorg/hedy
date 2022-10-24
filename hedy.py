@@ -2476,7 +2476,6 @@ def transpile_inner(input_string, level, lang="en"):
             numerals_language = "Latin"
         # grab the right transpiler from the lookup
         convertToPython = TRANSPILER_LOOKUP[level]
-        print(abstract_syntax_tree)
         python = convertToPython(lookup_table, numerals_language).transform(abstract_syntax_tree)
 
 
