@@ -547,7 +547,7 @@ def hedy_error_to_response(ex):
 
 def translate_error(code, arguments):
     arguments_that_require_translation = ['allowed_types', 'invalid_type', 'invalid_type_2', 'character_found',
-                                          'concept', 'tip']
+                                          'concept', 'tip', 'command']
     arguments_that_require_highlighting = ['command', 'guessed_command', 'invalid_argument', 'invalid_argument_2',
                                            'variable', 'invalid_value']
 
@@ -556,8 +556,6 @@ def translate_error(code, arguments):
 
     # some arguments like allowed types or characters need to be translated in the error message
     for k, v in arguments.items():
-        if k in arguments_that_require_highlighting:
-            arguments[k] = hedy.style_closest_command(v)
 
         if k in arguments_that_require_translation:
             if isinstance(v, list):
@@ -565,8 +563,18 @@ def translate_error(code, arguments):
             else:
                 arguments[k] = gettext('' + str(v))
 
-    return error_template.format(**arguments)
+        if k in arguments_that_require_highlighting:
+            if k in arguments_that_require_translation:
+                nl_keywords = hedy_translation.keywords_to_dict('nl')
+                local_keyword = hedy_translation.get_target_keyword(nl_keywords,v)
+                arguments[k] = hedy.style_closest_command(local_keyword)
+            else:
+                arguments[k] = hedy.style_closest_command(v)
 
+
+
+
+    return error_template.format(**arguments)
 
 def translate_list(args):
     translated_args = [gettext('' + str(a)) for a in args]
