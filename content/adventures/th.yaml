@@ -152,11 +152,11 @@ adventures:
                 story_text_3: "You can also compare if something is *not* equal to something else using `!=` like this:\n"
                 example_code_3: "```\nname = {ask} 'What is your name?'\n{if} name != 'Hedy'\n    {print} 'You are not Hedy'\n```\n"
             1:
-                story_text: "## Welcome to Hedy!\nIn Level 1 you can use the commands `{print}`, `{ask}` and `{echo}`.\nType your code in the programming field. Or press the green button in the example code block, and the code will be typed for you!\nTry the code yourself with the green 'Run code' button under the programming field.\n\nYou can print text to the screen using the `{print}` command.\n"
-                example_code: "```\n{print} Hello!\n{print} Welcome to Hedy!\n```\n"
-                story_text_2: "You can also ask for input with `{ask}` and repeat it back with an `{echo}` command.\n"
-                story_text_3: "Let's get started! Don't know what to create? In the next tabs you will find ideas for programs to build.\n"
-                example_code_2: "```\n{ask} What is your name?\n{echo} hello\n```\n"
+                story_text: "## ยินดีต้อนรับสู่ Hedy!\nในเลเวลที่ 1 นี้ คุณสามารถใช้คำสั่ง `{print}`, `{ask}` and `{echo}`.\nพิมพ์โค้ดในกล่องข้อความ หรือกดปุ่มสีเขียวในตัวอย่างโค้ด แล้วโค้ดตัวอย่างจะปรากฏในกล่องข้อความโดยที่คุณไม่ต้องพิมพ์\nลองสั่งให้โค้ดทำงานด้วยปุ่ม 'Run code' ใต้กล้องข้อความ\n\nคุณสามารถแสดงข้อความบนหน้าจอด้วยคำสั่ง `{print}`\n"
+                example_code: "```\n{print} สวัสดี!\n{print} ยินดีต้อนรับสู่ Hedy!\n```\n"
+                story_text_2: "คุณสามารถถามให้ผู้ใช้กรอกข้อมูลนำเข้าด้วยคำสั่ง `{ask}` และแสดงผลข้อมูลนำเข้าด้วยคำสั่ง `{echo}`\n"
+                story_text_3: "มาเริ่มกันเถอะ! ถ้าคุณไม่แน่ใจว่าจะเริ่มเขียนอะไร เรามีตัวอย่างสำหรับสิ่งที่คุณสามารถสร้างสรรค์ได้ในแท็บถัดไป\n"
+                example_code_2: "```\n{ask} คุณชื่ออะไร?\n{echo} สวัสดี\n```\n"
                 start_code: '{print} hello world!'
             12:
                 example_code_5: "```\nscore = 25\n{print} 'You got ' score\n```\n"
@@ -179,7 +179,7 @@ adventures:
                 story_text: "## 1 + 1\n In this level you learn something new: you can now also calculate.\n\n The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.\n\n The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!\n That is why we multiply with the asterisk above 8: `5 * 5`. Read that as \"5 times 5\" that helps you remember it best.\n"
                 example_code: "```\n{print} '5 plus 5 is ' 5 + 5\n{print} '5 minus 5 is ' 5 - 5\n{print} '5 times 5 is ' 5 * 5\n```\n"
             2:
-                story_text: "## Variables\nIn level 2 we learn two new commands: `{is}` and `{sleep}`.\nYou can name a word with `{is}`. This is called a variable. In this example we made a variable called name and a variable called age. You can use the word name anywhere in your code and it will be replaced by Hedy, like this:\n\nThis way you no longer need the `{echo}` command!\n"
+                story_text: "## ตัวแปล\nในเลเวล 2 เราจะเรียนคำสั่งใหม่สองคำสั่งคือ `{is}` และ `{sleep}`.\nYou can name a word with `{is}`. This is called a variable. In this example we made a variable called name and a variable called age. You can use the word name anywhere in your code and it will be replaced by Hedy, like this:\n\nThis way you no longer need the `{echo}` command!\n"
                 example_code: "```\nname {is} Hedy\nage {is} 15\n{print} name is age years old\n```\n"
                 story_text_2: "`{print}` still works the same, but the `{ask}` command has changed. You need to use a variable in the `{ask}` command as well. It looks like this:\n"
                 example_code_2: "```\nanswer {is} {ask} What is your name?\n{print} Hello answer\n```\n"
@@ -237,8 +237,8 @@ adventures:
                 example_code_2: "```\ntemperature = 25\n{print}('It is ', temperature, 'degrees outside')\n```\n"
                 story_text_3: "##  Input\nThe final change we will need to make to get Python code is changing `{ask}` into `{input}`."
                 example_code_3: "```\n{print}('My name is Hedy!')\nname = {input}('What is your name?')\n{print}('So your name is ', name)\n```\n"
-        name: Introduction
-        description: Level explanation
+        name: คำนำ
+        description: คำอธิบายของระดับ
         default_save_name: intro
     rock:
         levels:
