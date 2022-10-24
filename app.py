@@ -379,9 +379,13 @@ def parse():
                 exception = ex
         try:
             response['Code'] = transpile_result.code
-            response['has_pygame'] = True
+
+            if transpile_result.has_pygame:
+                response['has_pygame'] = True
+
             if transpile_result.has_turtle:
                 response['has_turtle'] = True
+
         except Exception as E:
             pass
         try:

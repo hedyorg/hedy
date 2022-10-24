@@ -858,6 +858,21 @@ class UsesTurtle(Transformer):
     def NEGATIVE_NUMBER(self, args):
         return False
 
+
+class UsesPyGame(Transformer):
+    def __default__(self, args, children, meta):
+        if len(children) == 0:  # no children? you are a leaf that is not Pressed, so you are no PyGame command
+            return False
+        else:
+            if all(type(c) == bool for c in children):
+                return any(children) # children? if any is true there is a Pygame leaf
+            else:
+                return False # some nodes like text and punctuation have text children (their letters) these are not pygames
+
+    def ifpressed(self, args):
+        return True
+
+
 class AllCommands(Transformer):
     def __init__(self, level):
         self.level = level
@@ -2088,7 +2103,7 @@ def get_parser(level, lang="en", keep_all_tokens=False):
     PARSER_CACHE[key] = ret
     return ret
 
-ParseResult = namedtuple('ParseResult', ['code', 'has_turtle'])
+ParseResult = namedtuple('ParseResult', ['code', 'has_turtle', 'has_pygame'])
 
 def transpile(input_string, level, lang="en"):
     transpile_result = transpile_inner(input_string, level, lang)
@@ -2418,7 +2433,9 @@ def transpile_inner(input_string, level, lang="en"):
 
 
         has_turtle = UsesTurtle().transform(abstract_syntax_tree)
-        return ParseResult(python, has_turtle)
+        has_pygame = UsesPyGame().transform(abstract_syntax_tree)
+
+        return ParseResult(python, has_turtle, has_pygame)
     except VisitError as E:
         # Exceptions raised inside visitors are wrapped inside VisitError. Unwrap it if it is a
         # HedyException to show the intended error message.
