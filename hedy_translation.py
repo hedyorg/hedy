@@ -57,6 +57,12 @@ def translate_keyword_to_en(keyword, lang="en"):
             return k
     return keyword
 
+def get_target_keyword(keyword_dict, keyword):
+    if keyword in keyword_dict.keys():
+        return keyword_dict[keyword][0]
+    else:
+        return keyword
+
 def translate_keywords(input_string_, from_lang="en", to_lang="nl", level=1):
     """"Return code with keywords translated to language of choice in level of choice"""
     try:
@@ -81,11 +87,7 @@ def translate_keywords(input_string_, from_lang="en", to_lang="nl", level=1):
                 lines = result.splitlines()
                 line = lines[rule.line-1]
                 original = get_original_keyword(keyword_dict_from, rule.keyword, line)
-                if rule.keyword in keyword_dict_to.keys():
-                    result1 = keyword_dict_to[rule.keyword][0]
-            else:
-                result1 = rule.keyword
-                target = result1
+                target = get_target_keyword(keyword_dict_to, rule.keyword)
                 replaced_line = replace_token_in_line(line, rule, original, target)
                 result = replace_line(lines, rule.line-1, replaced_line)
 
@@ -96,6 +98,7 @@ def translate_keywords(input_string_, from_lang="en", to_lang="nl", level=1):
         return result
     except:
         return input_string_
+
 
 
 def replace_line(lines, index, line):
