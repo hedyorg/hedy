@@ -166,10 +166,14 @@ commands_and_types_per_level = {
         16: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.list]
     },
     Command.turn: {1: command_turn_literals,
-                   2: [HedyType.integer, HedyType.input]},
+                   2: [HedyType.integer, HedyType.input],
+                   12: [HedyType.integer, HedyType.input, HedyType.float]
+    },
     Command.color: {1: command_make_color,
                     2: [command_make_color, HedyType.string, HedyType.input]},
-    Command.forward: {1: [HedyType.integer, HedyType.input]},
+    Command.forward: {1: [HedyType.integer, HedyType.input],
+                      12: [HedyType.integer, HedyType.input, HedyType.float]
+    },
     Command.sleep: {1: [HedyType.integer, HedyType.input]},
     Command.list_access: {1: [HedyType.list]},
     Command.in_list: {1: [HedyType.list]},
@@ -1652,6 +1656,26 @@ class ConvertToPython_6(ConvertToPython_5):
     def division(self, meta, args):
         return self.process_calculation(args, '//')
 
+    def turn(self, meta, args):
+        if len(args) == 0:
+            return "t.right(90)"  # no arguments defaults to a right turn
+        arg = args[0]
+        if self.is_variable(arg):
+            return self.make_turn(escape_var(arg))
+        if isinstance(arg, Tree):
+            return self.make_turn(arg.children[0])        
+        return self.make_turn(int(arg))
+    
+    def forward(self, meta, args):        
+        if len(args) == 0:
+            return sleep_after('t.forward(50)', False)
+        arg = args[0]
+        if self.is_variable(arg):
+            return self.make_forward(escape_var(arg))
+        if isinstance(arg, Tree):
+            return self.make_forward(arg.children[0])
+        return self.make_forward(int(args[0]))
+
 def sleep_after(commands, indent=True):
     lines = commands.split()
     if lines[-1] == "time.sleep(0.1)": #we don't sleep double so skip if final line is a sleep already
@@ -1679,7 +1703,7 @@ class ConvertToPython_7(ConvertToPython_6):
 class ConvertToPython_8_9(ConvertToPython_7):
 
     def command(self, meta, args):
-        return "".join(args)
+            return "".join(args)
 
     def repeat(self, meta, args):
         # todo fh, may 2022, could be merged with 7 if we make
@@ -1779,7 +1803,7 @@ class ConvertToPython_12(ConvertToPython_11):
             if all(all_int):
                 return ''.join(args)
             else:
-                # int succeeds but does nto return the same? these are non-latin numbers
+                # int succeeds but does not return the same? these are non-latin numbers
                 # and need to be casted
                 return ''.join([str(int(x)) for x in args])
         except Exception as E:
@@ -1859,6 +1883,39 @@ class ConvertToPython_12(ConvertToPython_11):
         name = args[0]
         self.check_var_usage(args, meta.line)
         return escape_var(name)
+    
+    def turn(self, meta, args):
+        if len(args) == 0:
+            return "t.right(90)"  # no arguments defaults to a right turn
+        arg = args[0]
+        if self.is_variable(arg):
+            return self.make_turn(escape_var(arg))
+        if isinstance(arg, Tree):
+            return self.make_turn(arg.children[0])        
+        return self.make_turn(float(arg))
+    
+    def forward(self, meta, args):        
+        if len(args) == 0:
+            return sleep_after('t.forward(50)', False)
+        arg = args[0]
+        if self.is_variable(arg):
+            return self.make_forward(escape_var(arg))
+        if isinstance(arg, Tree):
+            return self.make_forward(arg.children[0])
+        return self.make_forward(float(args[0]))
+
+    def make_turtle_command(self, parameter, command, command_text, add_sleep):
+        variable = self.get_fresh_var('trtl')
+        transpiled = textwrap.dedent(f"""\
+            {variable} = {parameter}
+            try:
+              {variable} = float({variable})
+            except ValueError:
+              raise Exception(f'While running your program the command {style_command(command)} received the value {style_command('{'+variable+'}')} which is not allowed. Try changing the value to a number.')
+            t.{command_text}(min(600, {variable}) if {variable} > 0 else max(-600, {variable}))""")
+        if add_sleep:
+            return sleep_after(transpiled, False)
+        return transpiled
 
 @v_args(meta=True)
 @hedy_transpiler(level=13)
