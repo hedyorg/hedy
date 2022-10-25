@@ -208,7 +208,7 @@ adventures:
             18:
                 start_code: "名字 = '海迪'\n{print}('我的名字是', 名字)"
                 story_text: "##最后一级！\n我们到达了真正的 Python 代码！这意味着从现在开始我们需要在 {print} 和 {range} 后使用括号。"
-                example_code: "```\n{print}('你好！')\n{for} i 在 {range}(1, 10) 内：\n    {print}('这是行'，i)\n```\n"
+                example_code: "```\n{print}('你好！')\n{for} i {in} {range}(1, 10):\n    {print}('这是行'，i)\n```\n"
                 story_text_2: 如果你想打印多个东西，你需要用逗号把它们分开。
                 example_code_2: "```\n温度 = 25\n{print}('外面是', 温度, '度')\n```\n"
                 story_text_3: "##  输入\n我们获得Python代码前的最后一步，是把`{ask}`换成`{input}`。"
@@ -287,7 +287,7 @@ adventures:
                 start_code: '# 在这里写你的代码'
             4:
                 story_text: "## 故事\n你可能注意到了，在之前的关卡里还有个问题。你有没有试过打印“名字”这个词？\n在这一关里你可以解决这个问题。你必须给所有要打印的东西加上引号。\n"
-                example_code: "```\n名字 {is} 汉斯\n{print} '主人公 的 名字 是' 名字\n{print} 名字 '正准备 走进 树林'\n{print} 名字 '有点害怕'\n动物们 {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} '他听到了一个' 动物们 {at} {random} 的声音\n{print} 名字 '担心 这片森林 闹鬼'\n```\n"
+                example_code: "```\n名字 {is} 汉斯\n{print} '主人公 的 名字 是' 名字\n{print} 名字 '正准备 走进 树林'\n{print} 名字 '有点害怕'\n动物们 {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} '他听到了一个' 动物们 {at} {random} '的声音'\n{print} 名字 '担心 这片森林 闹鬼'\n```\n"
                 start_code: "{print} '你的故事会打印在这里！'"
             15:
                 story_text: "## 故事\n运用`{while}`循环能让你的故事更有趣。比如，用`{while} 游戏 {is} '进行中'`可以让游戏一直进行到结束为止。\n或者用`{while} 剑 {is} '丢失'`来要求玩家必须先找到剑，才能继续游戏。\n"

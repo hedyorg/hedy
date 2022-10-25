@@ -359,13 +359,13 @@ adventures:
                 story_text: "## Më shumë kushte me përsëritje!\nNe do të mësojmë një tjetër kusht me përsëritje, `{while}` komanda! Ne e përsëritim bllokun e kodit derisa deklarata është e vërtetë.\nKështu që mos harroni ta ndërroni vlerën në kushtin e dhënë.\n\nNë shembullin e dhënë, ne vazhdojmë derisa të jepet një përgjigje e saktë.\nNëse nuk jepet përgjigje e saktë, atëherë përsëritja nuk mbaron!"
                 example_code: "```\nrezultati= 0\n{while} rezultati != 25\n    rezultati = {ask} 'Sa bëjnë 5 herë 5?'\n{print} 'Është dhënë përgjigje e saktë'\n```\n"
             16:
-                start_code: "fruta = ['molla', 'banane, 'qershi']\n{print} fruta"
+                start_code: "fruta = ['molla', 'banane', 'qershi']\n{print} fruta"
                 story_text: "## Shumë e më shumë si kod i vërtetë!\nNe do ta bëjmë një listë si në Python, me kllapa katrore para dhe pas listës! Ne gjithashtu i mbajmë thonjëzat në secilin artikull siç e kemi mësuar në nivelet e mëparshme.\nMund të përdorni kllapa katrore që të treguar një vend në listë."
                 example_code: "```\nshokët = ['Agoni', 'Beni', 'Arsimi']\nnumrat_me_fat = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'numri me fatë i ' shokët[i]\n    {print} 'është ' numrat_me_fat[i]\n```\n"
             17:
                 start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Gati apo jo, ja ku vi!'"
                 story_text: "## Elif\nTani do të ndryshojmë mënyrën e hapësirave para kodit. Çdoherë kur do na duhet hapësirë para kodit, neve na duhet `:` tek rreshti para hapësirës.\n\nNë këtë nivel gjithashtu mund të përdorni: `{elif}`. `{elif}` është shkurt për {else} {if} dhe ju duhet kur doni të kontrolloni 3 apo më shumë opsione.\nShiheni!"
-                example_code: "```\nçmimet = ['1 million lek', 'petë molle', 'asgjë']\nçmimi_yt = çmimet[{random}]\n{print} 'Ju fitoni' çmimi_yt\n{if} çmimi_yt == '1 million lek' :\n    {print} 'Po! Ju jeni të pasur!'\n{elif} çmimi yt == 'petë molle' :\n    {print} 'Bukur! Një petë molle!'\n{else}:\n    {print} 'Fat të mirë herën tjetër.'\n```\n"
+                example_code: "```\nçmimet = ['1 million lek', 'petë molle', 'asgjë']\nçmimi_yt = çmimet[{random}]\n{print} 'Ju fitoni' çmimi_yt\n{if} çmimi_yt == '1 million lek' :\n    {print} 'Po! Ju jeni të pasur!'\n{elif} çmimi_yt == 'petë molle' :\n    {print} 'Bukur! Një petë molle!'\n{else}:\n    {print} 'Fat të mirë herën tjetër.'\n```\n"
         name: Prezantim
         description: Shpjegim i niveleve
         default_save_name: Hyrje
