@@ -1,5 +1,5 @@
 // Queue interface for the frontend
-Sk.insertEvent = function (eventName) {
+Sk.insertPyGameEvent = function (eventName) {
     var e = [];
     switch (eventName) {
         case "left":

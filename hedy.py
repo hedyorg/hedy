@@ -1567,6 +1567,9 @@ canvas.fill(pygame.Color(247, 250, 252, 255))
 while not end:
     pygame.display.update()
     event = pygame.event.wait()
+    if event.type == pygame.QUIT:
+        pygame.quit()
+        break
     if event.type == pygame.KEYDOWN:
         if event.key == pygame.K_{args[0]}:
             end = True
@@ -1708,6 +1711,9 @@ canvas.fill(pygame.Color(247, 250, 252, 255))
 while not end:
     pygame.display.update()
     event = pygame.event.wait()
+    if event.type == pygame.QUIT:
+        pygame.quit()
+        break
     if event.type == pygame.KEYDOWN:
         if event.key == pygame.K_{args[0]}:
             end = True

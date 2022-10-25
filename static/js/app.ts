@@ -308,17 +308,29 @@ function clearErrors(editor: AceAjax.Editor) {
 }
 
 export function stopit() {
-  // We bucket-fix stop the current program by setting the run limit to 1ms
-  Sk.execLimit = 1;
-  clearTimeouts();
-  $('#stopit').hide();
-  $('#runit').show();
+  // check if running PyGame
+  let runningPyGame = $('#runit').attr('running-pygame');
 
-  // This gets a bit complex: if we do have some input modal waiting, fake submit it and hide it
-  // This way the Promise is no longer "waiting" and can no longer mess with our next program
-  if ($('#inline-modal').is(":visible")) {
-    $('#inline-modal form').submit();
-    $('#inline-modal').hide();
+  if (runningPyGame === "true") {
+      // when running pygame, raise the pygame quit event
+      Sk.insertPyGameEvent("quit");
+      $('#runit').removeAttr('running-pygame');
+  }
+  else
+  {
+      // We bucket-fix stop the current program by setting the run limit to 1ms
+      Sk.insertPyGameEvent("quit");
+      Sk.execLimit = 1;
+      clearTimeouts();
+      $('#stopit').hide();
+      $('#runit').show();
+
+      // This gets a bit complex: if we do have some input modal waiting, fake submit it and hide it
+      // This way the Promise is no longer "waiting" and can no longer mess with our next program
+      if ($('#inline-modal').is(":visible")) {
+        $('#inline-modal form').submit();
+        $('#inline-modal').hide();
+      }
   }
 
   window.State.disable_run = false;
@@ -1015,6 +1027,8 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
 
     initSkulpt4Pygame();
     initCanvas4PyGame();
+
+    $('#runit').attr("running-pygame", "true");
   }
 
   Sk.configure({
@@ -1040,8 +1054,8 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
     // So: a very large limit in these levels, keep the limit on other onces.
     execLimit: (function () {
       const level = Number(window.State.level) || 0;
-      if (hasTurtle) {
-        // We don't want a timeout when using the turtle -> just set one for 10 minutes
+      if (hasTurtle || hasPygame) {
+        // We don't want a timeout when using the turtle or pygame -> just set one for 10 minutes
         return (6000000);
       }
       if (level < 7) {
