@@ -1,3 +1,4 @@
+from audioop import maxpp
 import hedy
 import textwrap
 from hedy import Command
@@ -322,32 +323,35 @@ class TestsLevel1(HedyTester):
     #
     def test_forward(self):
         code = "forward 50"
-        expected = HedyTester.dedent(HedyTester.forward_transpiled(50))
+        expected = HedyTester.dedent(HedyTester.forward_transpiled(50, self.level))
 
         self.multi_level_tester(
             code=code,
             expected=expected,
-            extra_check_function=self.is_turtle()
+            extra_check_function=self.is_turtle(),
+            max_level=11
         )
 
     def test_forward_arabic_numeral(self):
         code = "forward ١١١١١١١"
-        expected = HedyTester.forward_transpiled(1111111)
+        expected = HedyTester.forward_transpiled(1111111, self.level)
 
         self.multi_level_tester(
             code=code,
             expected=expected,
-            extra_check_function=self.is_turtle()
+            extra_check_function=self.is_turtle(),
+            max_level=11
         )
 
     def test_forward_hindi_numeral(self):
         code = "forward ५५५"
-        expected = HedyTester.forward_transpiled(555)
+        expected = HedyTester.forward_transpiled(555, self.level)
 
         self.multi_level_tester(
             code=code,
             expected=expected,
-            extra_check_function=self.is_turtle()
+            extra_check_function=self.is_turtle(),
+            max_level=11
         )
 
     def test_forward_without_argument(self):
@@ -359,7 +363,8 @@ class TestsLevel1(HedyTester):
         self.multi_level_tester(
             code=code,
             expected=expected,
-            extra_check_function=self.is_turtle()
+            extra_check_function=self.is_turtle(),
+            max_level=11
         )
 
     def test_forward_with_text_gives_type_error(self):
@@ -516,15 +521,16 @@ class TestsLevel1(HedyTester):
             forward 100""")
 
         expected = HedyTester.dedent(
-            HedyTester.forward_transpiled(50),
+            HedyTester.forward_transpiled(50, self.level),
             't.right(90)',
-            HedyTester.forward_transpiled(100))
+            HedyTester.forward_transpiled(100, self.level))
 
         self.multi_level_tester(
             code=code,
             expected=expected,
             extra_check_function=self.is_turtle(),
-            expected_commands=[Command.forward, Command.turn, Command.forward]
+            expected_commands=[Command.forward, Command.turn, Command.forward],
+            max_level=11
         )
 
     #

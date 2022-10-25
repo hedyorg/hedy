@@ -299,7 +299,7 @@ class TestsLevel12(HedyTester):
             forward a""")
         expected = HedyTester.dedent(
             "a = 50",
-            HedyTester.forward_transpiled('a'))
+            HedyTester.forward_transpiled('a', self.level))
 
         self.multi_level_tester(
             code=code,
@@ -324,7 +324,7 @@ class TestsLevel12(HedyTester):
 
         expected = HedyTester.dedent("""\
         directions = [10, 100, 360]""",
-        HedyTester.forward_transpiled('random.choice(directions)'))
+        HedyTester.forward_transpiled('random.choice(directions)', self.level))
 
         self.multi_level_tester(
             max_level=15,
@@ -342,7 +342,7 @@ class TestsLevel12(HedyTester):
             turn direction""")
         expected = HedyTester.dedent(
             "direction = 70",
-            HedyTester.turn_transpiled('direction'))
+            HedyTester.turn_transpiled('direction', self.level))
 
         self.multi_level_tester(
             code=code,
@@ -350,26 +350,17 @@ class TestsLevel12(HedyTester):
             extra_check_function=self.is_turtle()
         )
 
-    def test_turn_with_non_latin_number_var(self):
+    def test_turn_with_non_latin_float_number_var(self):
         code = textwrap.dedent("""\
-        الزاوية هو ٩٠
-        استدر الزاوية
-        تقدم ١٠٠""")
-        expected = textwrap.dedent("""\
-        الزاوية = 90
-        trtl = الزاوية
-        try:
-          trtl = int(trtl)
-        except ValueError:
-          raise Exception(f'While running your program the command <span class="command-highlighted">turn</span> received the value <span class="command-highlighted">{trtl}</span> which is not allowed. Try changing the value to a number.')
-        t.right(min(600, trtl) if trtl > 0 else max(-600, trtl))
-        trtl = 100
-        try:
-          trtl = int(trtl)
-        except ValueError:
-          raise Exception(f'While running your program the command <span class="command-highlighted">forward</span> received the value <span class="command-highlighted">{trtl}</span> which is not allowed. Try changing the value to a number.')
-        t.forward(min(600, trtl) if trtl > 0 else max(-600, trtl))
-        time.sleep(0.1)""")
+            الزاوية هو ٩.٠
+            استدر الزاوية
+            تقدم ١٠.١٠""")
+        
+        expected = HedyTester.dedent(
+            "الزاوية = 9.0",
+            HedyTester.turn_transpiled("الزاوية", self.level),
+            HedyTester.forward_transpiled("10.1", self.level)
+        )
 
         self.multi_level_tester(
             code=code,
@@ -377,6 +368,21 @@ class TestsLevel12(HedyTester):
             expected=expected,
             extra_check_function=self.is_turtle()
         )
+    
+    def test_turtle_with_expression(self):
+
+        code = textwrap.dedent("""\
+            num = 10.6
+            turn num + 10.5
+            forward 10.5 + num""")
+            
+        expected = HedyTester.dedent(
+            "num = 10.6",
+            HedyTester.turn_transpiled('num + 10.5', self.level),
+            HedyTester.forward_transpiled('10.5 + num', self.level)
+        )
+
+        self.multi_level_tester(code=code, expected=expected)
 
     def test_turn_with_string_var_gives_type_error(self):
         code = textwrap.dedent("""\
@@ -394,7 +400,7 @@ class TestsLevel12(HedyTester):
             turn ángulo""")
         expected = HedyTester.dedent(
             "ángulo = 90",
-            HedyTester.turn_transpiled('ángulo'))
+            HedyTester.turn_transpiled('ángulo', self.level))
 
         self.multi_level_tester(
             code=code,
@@ -410,7 +416,7 @@ class TestsLevel12(HedyTester):
 
         expected = HedyTester.dedent("""\
         directions = [10, 100, 360]""",
-        HedyTester.turn_transpiled('random.choice(directions)'))
+        HedyTester.turn_transpiled('random.choice(directions)', self.level))
 
         self.multi_level_tester(
             max_level=15,
@@ -433,7 +439,7 @@ class TestsLevel12(HedyTester):
                 afstand = float(afstand)
               except ValueError:
                 pass""",
-            HedyTester.forward_transpiled('afstand'))
+            HedyTester.forward_transpiled('afstand', self.level))
 
         self.multi_level_tester(
             max_level=17,

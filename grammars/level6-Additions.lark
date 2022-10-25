@@ -18,6 +18,8 @@ assign: var (_IS | _EQUALS) expression | var ( _IS  | _EQUALS) textwithoutspaces
 
 sleep: _SLEEP (INT | list_access | var_access | expression)?
 
+turtle: _FORWARD ((NUMBER | list_access | textwithoutspaces | expression))? -> forward | _TURN ((NUMBER | list_access | textwithoutspaces | expression))? -> turn | _COLOR ((black | blue | brown | gray | green | orange | pink | purple | red | white | yellow | list_access | textwithoutspaces))? -> color
+
 ?expression: simple_expression | expression _MULTIPLY atom -> multiplication | expression _DIVIDE atom -> division | expression _PLUS atom -> addition | expression _MINUS atom -> subtraction
 ?simple_expression: atom _MULTIPLY atom -> multiplication | atom _DIVIDE atom -> division | atom _PLUS atom -> addition | atom _MINUS atom -> subtraction
 
