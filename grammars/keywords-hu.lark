@@ -1,43 +1,43 @@
-_PRINT: ("print" | "print") _SPACE?
-_ASK: ("ask" | "ask") _SPACE?
-_ECHO: ("echo" | "echo") _SPACE?
-_FORWARD: ("forward" | "forward") _SPACE?
-_TURN: ("turn" | "turn") _SPACE?
-left: ("left" | "left") _SPACE?
-right: ("right" | "right") _SPACE?
-black: ("black" | "black") _SPACE?
-blue: ("blue" | "blue") _SPACE?
-brown: ("brown" | "brown") _SPACE?
-gray: ("gray" | "gray") _SPACE?
-green: ("green" | "green") _SPACE?
-orange: ("orange" | "orange") _SPACE?
+_PRINT: ("kiír" | "print") _SPACE?
+_ASK: ("kérdez" | "ask") _SPACE?
+_ECHO: ("utánoz" | "echo") _SPACE?
+_FORWARD: ("előre" | "forward") _SPACE?
+_TURN: ("fordul" | "turn") _SPACE?
+left: ("balra" | "left") _SPACE?
+right: ("jobbra" | "right") _SPACE?
+black: ("fekete" | "black") _SPACE?
+blue: ("kék" | "blue") _SPACE?
+brown: ("barna" | "brown") _SPACE?
+gray: ("szürke" | "gray") _SPACE?
+green: ("zöld" | "green") _SPACE?
+orange: ("narancs" | "orange") _SPACE?
 pink: ("pink" | "pink") _SPACE?
-purple: ("purple" | "purple") _SPACE?
-red: ("red" | "red") _SPACE?
-white: ("white" | "white") _SPACE?
-yellow: ("yellow" | "yellow") _SPACE?
-_IS: _SPACE ("is" | "is") _SPACE
-_SLEEP: ("sleep" | "sleep") _SPACE?
-_ADD_LIST: ("add" | "add") _SPACE
-_TO_LIST: _SPACE ("to" | "to") _SPACE
-_REMOVE: ("remove" | "remove") _SPACE
-_FROM: _SPACE ("from" | "from") _SPACE
-_AT: _SPACE ("at" | "at") _SPACE
+purple: ("lila" | "purple") _SPACE?
+red: ("piros" | "red") _SPACE?
+white: ("fehér" | "white") _SPACE?
+yellow: ("sárga" | "yellow") _SPACE?
+_IS: _SPACE ("egyenlő" | "is") _SPACE
+_SLEEP: ("szundi" | "sleep") _SPACE?
+_ADD_LIST: ("beszúr" | "add") _SPACE
+_TO_LIST: _SPACE ("ebbe" | "to") _SPACE
+_REMOVE: ("kivesz" | "remove") _SPACE
+_FROM: _SPACE ("ebből" | "from") _SPACE
+_AT: _SPACE ("listából" | "at") _SPACE
 random: ("random" | "random") _SPACE?
-_IN: _SPACE ("in" | "in") _SPACE
-_IF: ("if" | "if") _SPACE
-_ELSE: "else" | "else"
-_AND: _SPACE ("and" | "and") _SPACE
-_REPEAT: ("repeat" | "repeat") _SPACE
-_TIMES: _SPACE ("times" | "times")
-_FOR: ("for" | "for") _SPACE
-_RANGE: ("range" | "range") _SPACE?
-_TO: _SPACE ("to" | "to") _SPACE
-_STEP: "step" | "step"
-_ELIF: _SPACE? ("elif" | "elif") _SPACE
-_INPUT: ("input" | "input")
-_OR: _SPACE ("or" | "or") _SPACE
-_WHILE: ("while" | "while") _SPACE
-_LENGTH: "length" | "length"
-_COLOR : ("color" | "color") _SPACE?
+_IN: _SPACE ("eleme" | "in") _SPACE
+_IF: ("ha" | "if") _SPACE
+_ELSE: "egyébként" | "else"
+_AND: _SPACE ("és" | "and") _SPACE
+_REPEAT: ("ismételd" | "repeat") _SPACE
+_TIMES: _SPACE ("alkalommal" | "times")
+_FOR: ("minden" | "for") _SPACE
+_RANGE: ("szakasz" | "range") _SPACE?
+_TO: _SPACE ("től" | "to") _SPACE
+_STEP: "lépésenként" | "step"
+_ELIF: _SPACE? ("egybk-ha" | "elif") _SPACE
+_INPUT: ("bekér" | "input")
+_OR: _SPACE ("vagy" | "or") _SPACE
+_WHILE: ("amíg" | "while") _SPACE
+_LENGTH: "hossz" | "length"
+_COLOR : ("szín" | "color") _SPACE?
 _PRESSED: ("pressed" | "pressed") _SPACE?
