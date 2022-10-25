@@ -147,7 +147,6 @@ def get_original_keyword(keyword_dict, keyword, line):
     else:        
         return keyword
 
-
 class Translator(Visitor):
     """The visitor finds tokens that must be translated and stores information about their exact position
        in the user input string and original value. The information is later used to replace the token in

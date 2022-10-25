@@ -358,14 +358,15 @@ def parse():
                        session_id=utils.session_id(), username=username)
 
     try:
+        keyword_lang = current_keyword_language()["lang"]
         with querylog.log_time('transpile'):
             try:
                 transpile_result = transpile_add_stats(code, level, lang)
                 if username and not body.get('tutorial'):
                     DATABASE.increase_user_run_count(username)
                     ACHIEVEMENTS.increase_count("run")
-            except hedy.exceptions.FtfyException as ex:
-                translated_error = translate_error(ex.error_code, ex.arguments)
+            except hedy.exceptions.WarningException as ex:
+                translated_error = translate_error(ex.error_code, ex.arguments, keyword_lang)
                 if type(ex) is hedy.exceptions.InvalidSpaceException:
                     response['Warning'] = translated_error
                 else:
@@ -375,8 +376,7 @@ def parse():
                 transpile_result = ex.fixed_result
                 exception = ex
             except hedy.exceptions.UnquotedEqualityCheck as ex:
-                response['Error'] = translate_error(
-                    ex.error_code, ex.arguments)
+                response['Error'] = translate_error(ex.error_code, ex.arguments, keyword_lang)
                 response['Location'] = ex.error_location
                 exception = ex
         try:
@@ -539,33 +539,57 @@ def get_class_name(i):
 
 
 def hedy_error_to_response(ex):
+    keyword_lang = current_keyword_language()["lang"]
     return {
-        "Error": translate_error(ex.error_code, ex.arguments),
+        "Error": translate_error(ex.error_code, ex.arguments, keyword_lang),
         "Location": ex.error_location
     }
 
 
-def translate_error(code, arguments):
+def translate_error(code, arguments, keyword_lang):
     arguments_that_require_translation = ['allowed_types', 'invalid_type', 'invalid_type_2', 'character_found',
-                                          'concept', 'tip']
+                                          'concept', 'tip', 'command', 'print', 'ask', 'echo', 'is', 'repeat']
     arguments_that_require_highlighting = ['command', 'guessed_command', 'invalid_argument', 'invalid_argument_2',
-                                           'variable', 'invalid_value']
+                                           'variable', 'invalid_value', 'print', 'ask', 'echo', 'is', 'repeat']
 
     # Todo TB -> We have to find a more delicate way to fix this: returns some gettext() errors
     error_template = gettext('' + str(code))
 
+    # Fetch tip if it exists and merge into template, since it can also contain placeholders
+    # that need to be translated/highlighted
+
+    if 'tip' in arguments:
+        error_template = error_template.replace("{tip}", gettext('' + str(arguments['tip'])))
+        #TODO, FH Oct 2022 -> Could we do this with a format even though we don't have all fields?
+
+    # adds keywords to the dictionary so they can be translated if they occur in the error text
+
+    # FH Oct 2022: this could be optimized by only adding them when they occur in the text (either with string matching or with a list
+    # of placeholders for each error
+    arguments["print"] = "print"
+    arguments["ask"] = "ask"
+    arguments["echo"] = "echo"
+    arguments["repeat"] = "repeat"
+    arguments["is"] = "is"
+
     # some arguments like allowed types or characters need to be translated in the error message
     for k, v in arguments.items():
-        if k in arguments_that_require_highlighting:
-            arguments[k] = hedy.style_closest_command(v)
-
         if k in arguments_that_require_translation:
             if isinstance(v, list):
                 arguments[k] = translate_list(v)
             else:
                 arguments[k] = gettext('' + str(v))
 
+        if k in arguments_that_require_highlighting:
+            if k in arguments_that_require_translation:
+                local_keyword = hedy_translation.translate_keyword(v, keyword_lang)
+                arguments[k] = hedy.style_command(local_keyword)
+            else:
+                arguments[k] = hedy.style_command(v)
+
     return error_template.format(**arguments)
+
+
 
 
 def translate_list(args):
