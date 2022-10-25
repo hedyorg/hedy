@@ -416,16 +416,16 @@ adventures:
             4:
                 story_text: "## Zare\nNë këtë nivel ne mund ta bëjmë që fjalia të ketë vlerën e zarit, me thonjëza sigurisht.\nKëtë herë shembulli i dhënë nuk është i plotësuar. A mund ta përfundoni kodin?\n"
                 example_code: "```\nzgjedhjet {is} 1, 2, 3, 4, 5, kërmilli\n{print} _ ju gjuajtët _\n{print} _ _ _ <- këtu duhet ta programoni zgjedhjen\n```\n"
-                start_code: "{print} 'Çfarë do të tregojë zari këtë herë"
+                start_code: "{print} 'Çfarë do të tregojë zari këtë herë'"
             5:
                 story_text: "## Dice\nYou can also make a die again in this level using the `{if}`.\nComplete the sample code so that the code says \"You can stop throwing\" once you have thrown an earthworm.\n\nBut maybe you want to recreate a die from a completely different game. That's fine too! Then make up your own reaction. Eg 'yes' for 6 and 'pity' for something {else}.\n"
                 example_code: "```\nchoices {is} 1, 2, 3, 4, 5, earthworm\nthrow {is} _\n{print} 'you have' _ 'thrown'\n{if} _ {is} earthworm {print} 'You can stop throwing.' _ {print} 'You have to hear it again!'\n```\n"
-                start_code: "{print} 'Çfarë do të tregojë zari këtë herë"
+                start_code: "{print} 'Çfarë do të tregojë zari këtë herë'"
             6:
                 story_text: "## Dice\nYou can also make an Earthworm die again in this, but now you can also calculate how many points have been rolled.\nYou may know that the worm counts 5 points for Earthworms. Now after a roll you can immediately calculate how many points you have thrown.\nThis is the code to calculate points for one die:\n"
                 example_code: "```\nchoices = 1, 2, 3, 4, 5, earthworm\npoints = 0\nthrow = choices {at} {random}\n{print} 'you threw' throw\n{if} throw {is} earthworm points = points + 5 {else} points = points + throw\n{print} 'those are' points ' point'\n```\nCan you make the code so that you get the total score for 8 dice? To do that, you have to cut and paste some lines of the code.\n"
                 example_code_2: "## Looking forward\n\nDid you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!\n"
-                start_code: "{print} 'Çfarë do të tregojë zari këtë herë"
+                start_code: "{print} 'Çfarë do të tregojë zari këtë herë'"
             10:
                 story_text: "## Dice\nIs everybody taking too long throwing the dice? In this level you can let Hedy throw all the dice at once!\n"
                 example_code: "```\nplayers = Ann, John, Jesse\nchoices = 1, 2, 3, 4, 5, 6\n{for} player {in} players\n    {print} player ' throws ' choices {at} {random}\n    {sleep}\n```\n"
