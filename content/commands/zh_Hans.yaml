@@ -189,8 +189,8 @@
 -   name: "列表中的引号"
     explanation: "带引号的列表。"
     demo_code: |
-        超级英雄们 = '钢铁侠',，'蝙蝠侠',，'超人'
-        {print} 超级英雄们{at} {random}
+        超级英雄们 = '钢铁侠', '蝙蝠侠', '超人'
+        {print} 超级英雄们 {at} {random}
 13:
 -   name: "{and}"
     explanation: "左边和右边的两个语句都必须是正确的。"
@@ -228,7 +228,7 @@
     demo_code: "回答 = {ask} '5 * 5 等于几？'\n{if} 回答 == 25\n    {print} '回答正确！'"
 -   name: 不等于
     explanation: '我们用`!=`来检查两样东西是否不同。'
-    demo_code: "答案 = {ask} '什么是 5 * 5？'\n{if} 答案 ！= 25\n    {print}'这不对！'"
+    demo_code: "答案 = {ask} '什么是 5 * 5？'\n{if} 答案 != 25\n    {print} '这不对！'"
 -   demo_code: "年龄 = {ask} '你几岁了？'\n{if} 年龄 <= 12\n    {print}'你比我小！'"
     explanation: 我们使用 `<=` 来检查第一个数字是否小于或等于第二个数字。
     name: 小于等于
@@ -273,11 +273,11 @@
 -   explanation: "`{elif}`"
     demo_code: |-
         a = 2
-        {if} a == 1：
+        {if} a == 1:
             {print}'a 是 1'
-        {elif} a == 2：
+        {elif} a == 2:
             {print}'a 是 2'
-        {else}：
+        {else}:
             {print}'a 不是 1 或 2'
     name: '{elif}'
 -   explanation: "当我们使用一个 `{for}`循环语句的时候, 我们需要 在 `{for}` 后面加上一个冒号 `:` !"
@@ -306,7 +306,7 @@
             {print}('你好，次数', i)
 -   name: '{print} 与变量'
     explanation: 使用 `{print}`，如果打印更多项目，则需要使用小括号和逗号。
-    demo_code: "名字 ='Hedy'\n{print}（'我的名字是'，名字）"
+    demo_code: "名字 ='Hedy'\n{print}('我的名字是'，名字)"
 -   name: 用 {input} 提问
     explanation: 用`{input}`代替`{ask}`来提问。
     demo_code: "名字 = {input}('你叫什么名字？')\n{print}('所以你的名字是'，名字)"
