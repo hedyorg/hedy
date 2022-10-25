@@ -1855,7 +1855,7 @@ class ConvertToPython_12(ConvertToPython_11):
             try:
               {variable} = float({variable})
             except ValueError:
-              raise Exception(f'While running your program the command {style_closest_command(command)} received the value {style_closest_command('{'+variable+'}')} which is not allowed. Try changing the value to a number.')
+              raise Exception(f'While running your program the command {style_command(command)} received the value {style_command('{'+variable+'}')} which is not allowed. Try changing the value to a number.')
             t.{command_text}(min(600, {variable}) if {variable} > 0 else max(-600, {variable}))""")
         if add_sleep:
             return sleep_after(transpiled, False)
