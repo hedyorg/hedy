@@ -216,7 +216,7 @@ adventures:
                 example_code: "## Mek Donald i vjetër\n```\nkafshët = ['derri', 'qeni', 'lopa']\nzërat = ['oink', 'auf', 'muuu']\n{for} i {in} {range} 1 {to} 3\n    kafsha = kafshët[i]\n    zëri = zërat[i]\n    {print} 'Mek Donald i vjetër kishte një fermë'\n    {print} 'I A I A O!'\n    {print} 'dhe në këtë fermë ai kishtë një ' kafsha\n    {print} 'E I E I O!'\n    {print} 'me një ' zëri zëri ' këtu'\n    {print} 'dhe një ' zëri zëri ' atje'\n    {print} 'këtu një ' zëri\n    {print} 'atje një ' zëri\n    {print} 'gjithkund një ' zëri zëri\n```\n\n## Marinari i dehur\n```\nrreshtat = ['Çfarë duhet të bëjmë me marinarin e dehur', 'Rruajeni barkun e tij me brisk të ndryshkur', 'futeni në një varg derisa të jetë esëll']\n{for} rreshti {in} rreshtat\n    {for} i {in} {range} 1 {to} 3\n        {print} rreshti\n    {print} 'herët në mëngjes'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'Eheei dhe ja ku ngritet'\n    {print} 'herët në mëngjes'\n```\n"
                 start_code: '# Vendoseni kodin tuaj këtu'
     turtle:
-        description: Make your own drawing
+        description: Bëje vizatimin tënd
         default_save_name: Breshka
         levels:
             1:
@@ -232,32 +232,32 @@ adventures:
                 example_code_2: "```\n{print} Duke vizatuar figura\nkëndi {is} 90\n{turn} këndi\n{forward} 25\n{turn} këndi\n{forward} 25\n```\n"
                 start_code: "{print} Garë breshkash!\nkëndi {is} 90\n{turn} këndi\n{forward} 25"
             3:
-                story_text: "## Searching turtle\nIn this level you can use use `{at} {random}` with the drawing turtle. A random choice makes the turtle walk a different path each time.\nUse `{at} {random}` to choose a value from a list. You can copy and paste lines 2 and 3 to create a longer random path.\n"
-                example_code: "```\nangles {is} 10, 50, 90, 150, 250\n{turn} angles {at} {random}\n{forward} 25\n```\n"
-                start_code: "angles {is} 10, 50, 90, 150, 250\n{turn} angles {at} {random}\n{forward} 25"
+                story_text: "## Duke kërkuar breshkën\nNë këtë nivel ju mund të përdorni komandën `{at} {random}` me vizatimin e breshkës. Një zgjedhje random e bën breshkën të ecë rrugë të ndryshme çdo herë.\nPërdorni `{at} {random}` për të zgjedhur një vlerë nga një listë. Ju mund të bëni kopjoni rreshtat 2 dhe 3 për të krijuar një rrugë më të gjatë random.\n"
+                example_code: "```\nkënde {is} 10, 50, 90, 150, 250\n{turn} kënde {at} {random}\n{forward} 25\n```\n"
+                start_code: "kënde {is} 10, 50, 90, 150, 250\n{turn} kënde {at} {random}\n{forward} 25"
             4:
-                story_text: "## Let's draw\nIn level 4 you have to use quotation marks with `{print}` and `{ask}`. Also when drawing!\n"
-                example_code: "```\n{print} 'Drawing figures'\nangle {is} 90\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n```\n"
-                start_code: "{print} 'Drawing figures'\nangle {is} 90\n{turn} angle\n{forward} 25"
+                story_text: "## Le të vizatojmë\nNë nivelin 4 do duhet të përdorni thonjëza me komandën `{print}` dh `{ask}`. Gjithashtu duke vizatuar!\n"
+                example_code: "```\n{print} 'Duke vizatuar figura'\nkëndi {is} 90\n{turn} këndi\n{forward} 25\n{turn} këndi\n{forward} 25\n```\n"
+                start_code: "{print} 'Duke vizatuar figura'\nkëndi {is} 90\n{turn} këndi\n{forward} 25"
             5:
-                story_text: "## Let's draw\nIn level 5 you can make a choice with `{if}`. For example between different types of figures.\n"
-                example_code: "```\n{print} 'Drawing Figures'\nfigure {is} {ask} 'Do you want a square or a triangle?'\n{if} figure {is} triangle angle {is} 120\n{else} angle {is} 90\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n```\n"
-                start_code: "{print} 'Drawing Figures'\nfigure {is} {ask} 'Do you want a square or a triangle?'\n{if} figure {is} triangle angle {is} 120 {else} angle {is} 90\n{turn} angle\n{forward} 25"
+                story_text: "## Le të vizatojmë\nNë nivelin 5 ju mund të bëni një zgjidhje me komandën `{if}`. Si për shembull ndërmjet dy lloje të figurave.\n"
+                example_code: "```\n{print} 'Duke vizatuar figura'\nfigura {is} {ask} 'A doni një katror apo një trekëndësh?'\n{if} figura {is} trekëndësh këndi {is} 120\n{else} këndi {is} 90\n{turn} këndi\n{forward} 25\n{turn} këndi\n{forward} 25\n{turn} këndi\n{forward} 25\n{turn} këndi\n{forward} 25\n```\n"
+                start_code: "{print} 'Duke vizatuar figura'\nfigura {is} {ask} 'A doni një katror apo një trekëndësh?'\n{if} figura {is} trekëndësh këndi {is} 120 {else} këndi {is} 90\n{turn} këndi\n{forward} 25"
             6:
-                story_text: "## Let's draw\nIn this level you can use calculations to draw different figures.\nYou may have learned in school that turning a full circle is 360 degrees. If not, now you know!\nThat's why you also use 90 degrees for a square. 360 divided by 4 is 90.\nNow that we can do math with Hedy, we can draw all the figures we want!\n"
-                example_code: "```\nangles = {ask} 'How many angles do you want?'\nangle = 360 / angles\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n```\n"
-                start_code: "{print} 'Drawing figures'"
+                story_text: "## Le të vizatojmë\nNë këtë nivel mund të përdorni kalkulime për të vizatuar figura të ndryshme.\nMund të keni mësuar në shkollë se nëse ktheni komplet rreth ,është 360 shkalle. Nëse jo, tani e dini!\nPër këtë shkak përdorni 90 shkallë për një katror. 360 pjesëtuar me 4 është 90.\nTani mund të bëjmë matematikë me Hady, mund të vizatojmë të gjithë figurat që duam!\n"
+                example_code: "```\nkëndet = {ask} 'Sa kënde doni?'\nkëndi = 360 / këndet\n{forward} 50\n{turn} këndi\n{forward} 50\n{turn} këndi\n{forward} 50\n{turn} këndi\n{forward} 50\n{turn} këndi\n{forward} 50\n{turn} këndi\n{forward} 50\n{turn} këndi\n```\n"
+                start_code: "{print} 'Duke vizatuar figura'"
             7:
-                story_text: "## Let's draw\nIn this level you can repeat one line of code with `{repeat}`.\n"
-                example_code: "```\n{print} 'Draw figures'\n{repeat} 3 {times} {forward} 10\n```\n"
-                start_code: "{print} 'Draw figures'\n{repeat} 3 {times} {forward} 10"
+                story_text: "## Le të vizatojmë\nNë këtë nivel mund të përsërisni një rresht kodi me komandën `{repeat}`.\n"
+                example_code: "```\n{print} 'Vizato figura'\n{repeat} 3 {times} {forward} 10\n```\n"
+                start_code: "{print} 'Vizato figura'\n{repeat} 3 {times} {forward} 10"
             8:
-                story_text: "## Let's draw\nNow that we can repeat several lines, we can make figures more easily.\nWe only have to set the angle once and then use that variable in the `{repeat}`.\n"
-                example_code: "```\nangle = 90\n{repeat} 10 {times}\n    {turn} angle\n    {forward} 50\n```\n"
-                story_text_2: "## Interaction\nAlso, we can now improve the program that draws different figures.\nCan you figure out how far the turtle has to turn here? Finish the code and you can draw any polygon you'd like!\n"
-                example_code_2: "```\nangles = {ask} 'How many angles should I draw?'\nangle = 360 / angles\n{repeat} angle {times}\n    {turn} _\n    {forward} _\n```\n"
-                start_code: angles = {ask} 'How many angles should I draw?'
-        name: Turtle
+                story_text: "## Le të vizatojmë\nTani që mund të përsërisim shumë rreshta, mund të bëjmë figura më lehtë.\nDuhet vetëm të vendosim këndin një herë, pastaj mund ta përdorim at variabël në komandën `{repeat}`.\n"
+                example_code: "```\nkëndi = 90\n{repeat} 10 {times}\n    {turn} këndi\n    {forward} 50\n```\n"
+                story_text_2: "## Ndërveprim\nGjithashtu, mund ta përmirësojmë programin që vizaton figura.\nA mund ta kuptoni sa herë duhet që breshka të kthehet këtu? Përfundojeni kodin dhe pastaj mund të vizatoni çdo poligon që dëshironi!\n"
+                example_code_2: "```\nkëndet = {ask} 'Sa kënde duhet të vizatoj?'\nkëndi = 360 / këndet\n{repeat} këndi {times}\n    {turn} _\n    {forward} _\n```\n"
+                start_code: këndet = {ask} 'Sa kënde duhet të vizatoj?'
+        name: Breshka
     default:
         levels:
             5:
@@ -370,62 +370,62 @@ adventures:
         description: Shpjegim i niveleve
         default_save_name: Hyrje
     dishes:
-        name: Dishes?
-        description: Use the computer to see who does the dishes (Start at level 2)
-        default_save_name: Dishes
+        name: Enët?
+        description: Përdorni kompjuterin ta shihni kur i lanë enët (Fillo në nivelin 2)
+        default_save_name: Enët
         levels:
             3:
-                story_text: "## Dishwashing\nDo you always disagree at home about who should wash the dishes or change the litter box today?\nThen you can let the computer choose very fairly. You can program that in this level!\nYou first make a list of the members of your family. Then choose '{at} {random}' from the list.\n"
-                example_code: "```\npeople {is} mom, dad, Emma, Sophie\n{print} people {at} {random}\n```\n"
-                story_text_2: "## Hack the dishwashing program!\nDon't feel like doing the dishes yourself? Hack the program to remove your name from the list.\n"
-                example_code_2: "```\npeople {is} mom, dad, Emma, Sophie\nyour_name {is} {ask} Who are you?\n{remove} your_name {from} people\n{print} people {at} {random} does the dishes\n```\n"
-                start_code: '{print} Who does the dishes?'
+                story_text: "## Larja e enëve\nA nuk jeni dakord në shtëpi se kush ti lajë enët apo kush ta ndryshojë kutinë e mbeturinave?\nPastaj mund ta lëni kompjuterin të zgjedhë në mënyrë të drejtë. Mund ta programoni në këtë nivel!\nE bëni një listë me pjesëtarët e familjes. Pastaj zgjidhni '{at} {random}' nga lista.\n"
+                example_code: "```\nnjerëzit {is} nëna, babi, Erza, Sara\n{print} njerëzit {at} {random}\n```\n"
+                story_text_2: "## Bëni me hile me programin e larjeve të enëve!\nA nuk doni që ti lani enët? Ndryshoni programin që të hiqni emrin tuaj nga lista.\n"
+                example_code_2: "```\nnjerëzit {is} nëna, babi, Erza, Sara\nemri_juaj {is} {ask} Kush jeni ju?\n{remove} emri_juaj {from} njerëzit\n{print} njerëzit {at} {random} i lanë enët\n```\n"
+                start_code: '{print} Kush i lanë enët?'
             4:
-                story_text: "## Dishwashing\nWith quotation marks you can make your dishwashing planning more beautiful.\nThis time the sample code is not quite complete.\n\nCan you complete the code by filling the blanks? Every blank must be replaced with one word of symbol.\n\nTip: Don't forget the quotation marks!\n"
-                example_code: "```\npeople {is} mom, dad, Emma, Sophie\n{print} _ the dishes are done by _\n{sleep}\n{print} people {at} _\n```\n"
-                start_code: "{print} 'Who does the dishes?'"
+                story_text: "## Larja e enëve\nMe thonjëza mund ta bëni planin e larjeve të enëve më të bukur.\nKëtë herë shembulli nuk është i plotësuar.\n\nA mund ta plotësoni kodin? Çdo boshllëk duhet të zëvendësohet me një fjalë apo simbol.\n\nKëshillë: Mos harroni thonjëzat!\n"
+                example_code: "```\nnjerëzit {is} nëna, babi, Erza, Sara\n{print} _ enët janë larë nga _\n{sleep}\n{print} njerëzit {at} _\n```\n"
+                start_code: "{print} 'Kush i lanë enët?'"
             5:
-                story_text: "## Dishwashing\nWith the `{if}` you can now have more fun with choice in the program. You can have your program respond to the choice that the computer has made.\n\nCan you finish the code so that it prints 'too bad' when it is your turn and otherwise 'yes!'?\nDon't forget the quotes!\n"
-                example_code: "```\npeople {is} mom, dad, Emma, Sophie\ndishwasher {is} people {at} {random}\n{if} dishwasher {is} Sophie {print} _ too bad I have to do the dishes _ {else} {print} 'luckily no dishes because' _ 'is already washing up'\n```\n"
-                start_code: "{print} 'Who does the dishes?'"
+                story_text: "## Larja e enëve\nMe komandën `{if}` ju tani mund të argëtoheni më shumë me zgjedhje në program. Ju tani mund ta keni programim që i përgjigjet zgjedhjes së bërë nga kompjuteri.\n\nA mund ta përfundoni kodin i cili printon 'shumë keq' kur është radha e juaj ndërsa në të kundërt 'po!'?\nMos harroni thonjëzat!\n"
+                example_code: "```\nnjerëzit {is} nëna, babi, Erza, Sara\nlarësiEnëve {is} njerëzit {at} {random}\n{if} larësiEnëve {is} Sara {print} _ shumë keq un e kam ti lajë enët _ {else} {print} 'fatmirësisht nuk ka enë sepse ' _ ' është veçse duke i larë'\n```\n"
+                start_code: "{print} 'Kush i lanë enët?'"
             6:
-                story_text: "## Dishwashing\nHow often is everyone going to do the dishes? Is that fair? You can count it in this level.\n"
-                example_code: "```\npeople = mom, dad, Emma, Sophie\nemma_washes = 0\ndishwasher = people {at} {random}\n{print} 'The dishwasher is' dishwasher\n{if} dishwasher {is} Emma emma_washes = emma_washes + 1\n{print} 'Emma will do the dishes this week' emma_washes 'times'\n```\n\nNow you can copy lines 3 to 5 a few times (e.g. 7 times for a whole week) to calculate for a whole week again.\nDo you make the code for the whole week?\n"
-                story_text_2: "## Make it fair\nIf you are extremely unlucky the previous program might choose you to to the dishes for the whole week! That's not fair!\nTo create a fairer system you can use the `{remove}` command to remove the chosen person from the list. This way you don't have to do the dishes again untill everybody has had a turn.\n\nMonday and tuesday are ready for you! Can you add the rest of the week?\nAnd... can you come up with a solution for when your list is empty?\n"
-                example_code_2: "```\npeople = mom, dad, Emma, Sophie\ndishwasher = people {at} {random}\n{print} 'Monday the dishes are done by: ' dishwasher\n{remove} dishwasher {from} people\ndishwasher = people {at} {random}\n{print} 'Tuesday the dishes are done by: ' dishwasher\n{remove} dishwasher {from} people\ndishwasher = people {at} {random}\n```\n"
-                start_code: "{print} 'Who does the dishes?'"
+                story_text: "## Larja e enëve\nSa shpesh duhet që secili ti lajë enët? A është e drejtë? Mund të numëroni në këtë nivel.\n"
+                example_code: "```\nnjerëzit = nëna, babi, Erza, Sara\nerza_lanë = 0\nlarësi_enëve = njerëzit {at} {random}\n{print} 'Larësi i enëve është' larësi_enëve\n{if} larësi_enëve {is} Erza erza_lanë = erza_lanë + 1\n{print} 'Erza do ti lajë enët këtë javë' erza_lanë 'herë'\n```\n\nTani kund të kopjoni rreshtat 3 deri 5 disa herë (p.sh. 7 herë për të gjithë javën) për të kalkuluar për të gjithë javën.\nA e bëni kodin për të gjithë javën?\n"
+                story_text_2: "## Bëjeni të drejtë\nNëse jeni shumë pafat, programi mund të ju zgjedhë juve ti lani enët për të gjithë javën! Nuk është e drejtë!\nPër të krijuar një sistem të drejtë, mund ta përdorni komandën `{remove}` për të hequr njeriun e zgjedhur nga lista. Kështu që nuk keni që ti lani enët derisa dikush tjetër ti kishte larë.\n\nE hëna dhe e marta janë gati për ju! A mund ti shtoni ditët e mbetura të javës?\nDhe... A mund të gjeni një zgjidhje kur lista është bosh?\n"
+                example_code_2: "```\nnjerëzit = nëna, babi, Erza, Sara\nlarësi_enëve = njerëzit {at} {random}\n{print} 'Të hënën enët janë larë nga: ' larësi_enëve\n{remove} larësi_enëve {from} njerëzit\nlarësi_enëve = njerëzit {at} {random}\n{print} 'Të martën enët janë larë nga: ' larësi_enëve\n{remove} larësi_enëve {from} njerëzit\nlarësi_enëve = njerëzit {at} {random}\n```\n"
+                start_code: "{print} 'Kush i lanë enët?'"
             7:
-                start_code: "{print} 'Who does the dishes?'"
-                story_text: "## Dishwashing\nWith the `{repeat}` you can repeat pieces of code. You can use this to calculate who will be washing dishes for the entire week.\n"
-                example_code: "```\npeople = mom, dad, Emma, Sophie\n{repeat} _ _ {print} 'the dishwasher is' _\n```\n"
+                start_code: "{print} 'Kush i lanë enët?'"
+                story_text: "## Larja e enëve\nMe komandën `{repeat}` mund të përsëritni pjesë nga kodi. Mund ta përdorni që të kalkuloni kush do ti lajë enët për të gjithë javën.\n"
+                example_code: "```\nnjerëzit = nëna, babi, Erza, Sara\n{repeat} _ _ {print} 'larësi i enëve është' _\n```\n"
             10:
-                story_text: "## Dishwashing\nIn this level you could make an even better dish washing shedule.\n"
-                example_code: "```\ndays = Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday\nnames = mom, dad, Emma, Sophie\n{for} day {in} days\n    {print} names {at} {random} ' does the dishes on ' day\n```\n"
-                start_code: '# place your code here'
+                story_text: "## Larja e enëve\nNë këtë nivel, ju mund të bëni një orar më të mirë të larjes së enëve.\n"
+                example_code: "```\nditët = E hënë, E martë, E mërkurë, E enjte, E premte, E shtunë, E diel\nemrat = nëna, babi, Erza, Sara\n{for} dita {in} ditët\n    {print} emrat {at} {random} ' i lanë enët në ditën e ' dita\n```\n"
+                start_code: '# Vendoseni kodin tuaj këtu'
     dice:
-        name: Dice
+        name: Zare
         levels:
             7:
-                start_code: "{print} 'What will the die indicate this time?'"
+                start_code: "{print} 'Çfarë do të tregojë zari këtë herë"
                 story_text: "## Dice\nYou can also make a die again in level 5. With the `{repeat}` code you can easily roll a whole hand of dice.\nTry to finish the sample code! The dashes should contain multiple commands and characters.\n\nBut maybe you want to make a completely different die. Of course you can!\n"
                 example_code: "```\nchoices = 1, 2, 3, 4, 5, earthworm\n{repeat} _ _ {print} _ _ _\n```\n"
             3:
-                story_text: "## Dice\nIn this level we can choose from a list. With that we can let the computer choose one side of the die.\nTake a look at the games you have in your closet at home.\nAre there games with a (special) die? You can also copy it with this code.\nFor example, the dice of the game Earthworms with the numbers 1 to 5 and an earthworm on it.\n\n![Die of earthworms with 1 to 5 and an earthworm on it](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)\n"
-                example_code: "```\nchoices {is} 1, 2, 3, 4, 5, earthworm\n{print} choices {at} {random}\n```\n"
-                start_code: '{print} What will the die indicate this time?'
+                story_text: "## Zare\nNë këtë nivel mund të zgjedhim nga një listë. Me këtë mund ta lëmë që kompjuteri të zgjedhë një anë nga zari.\nShikoni tek lojërat që keni në dollap në shtëpinë tuaj.\nA janë këto loja me një zar (special)? Gjithashtu mund ta kopjoni me këtë kod.\nSi për shembull, the dice of the game Earthworms with the numbers 1 to 5 and an earthworm on it.\n\n![Kërmilli i tokës me 1 deri 5 dhe me një kërmill mbi të](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)\n"
+                example_code: "```\nzgjedhjet {is} 1, 2, 3, 4, 5, kërmilli\n{print} zgjedhjet {at} {random}\n```\n"
+                start_code: '{print} Çfarë do të tregojë zari këtë herë?'
             4:
-                story_text: "## Dice\nIn this level we can make sentences with the die value in the sentence, with quotes of course.\nThis time the sample code is not quite complete. Can you finish the code?\n"
-                example_code: "```\nchoices {is} 1, 2, 3, 4, 5, earthworm\n{print} _ you threw _\n{print} _ _ _ <- here you have to program the choice\n```\n"
-                start_code: "{print} 'What will the die indicate this time?'"
+                story_text: "## Zare\nNë këtë nivel ne mund ta bëjmë që fjalia të ketë vlerën e zarit, me thonjëza sigurisht.\nKëtë herë shembulli i dhënë nuk është i plotësuar. A mund ta përfundoni kodin?\n"
+                example_code: "```\nzgjedhjet {is} 1, 2, 3, 4, 5, kërmilli\n{print} _ ju gjuajtët _\n{print} _ _ _ <- këtu duhet ta programoni zgjedhjen\n```\n"
+                start_code: "{print} 'Çfarë do të tregojë zari këtë herë"
             5:
                 story_text: "## Dice\nYou can also make a die again in this level using the `{if}`.\nComplete the sample code so that the code says \"You can stop throwing\" once you have thrown an earthworm.\n\nBut maybe you want to recreate a die from a completely different game. That's fine too! Then make up your own reaction. Eg 'yes' for 6 and 'pity' for something {else}.\n"
                 example_code: "```\nchoices {is} 1, 2, 3, 4, 5, earthworm\nthrow {is} _\n{print} 'you have' _ 'thrown'\n{if} _ {is} earthworm {print} 'You can stop throwing.' _ {print} 'You have to hear it again!'\n```\n"
-                start_code: "{print} 'What will the die indicate this time?'"
+                start_code: "{print} 'Çfarë do të tregojë zari këtë herë"
             6:
                 story_text: "## Dice\nYou can also make an Earthworm die again in this, but now you can also calculate how many points have been rolled.\nYou may know that the worm counts 5 points for Earthworms. Now after a roll you can immediately calculate how many points you have thrown.\nThis is the code to calculate points for one die:\n"
                 example_code: "```\nchoices = 1, 2, 3, 4, 5, earthworm\npoints = 0\nthrow = choices {at} {random}\n{print} 'you threw' throw\n{if} throw {is} earthworm points = points + 5 {else} points = points + throw\n{print} 'those are' points ' point'\n```\nCan you make the code so that you get the total score for 8 dice? To do that, you have to cut and paste some lines of the code.\n"
                 example_code_2: "## Looking forward\n\nDid you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!\n"
-                start_code: "{print} 'What will the die indicate this time?'"
+                start_code: "{print} 'Çfarë do të tregojë zari këtë herë"
             10:
                 story_text: "## Dice\nIs everybody taking too long throwing the dice? In this level you can let Hedy throw all the dice at once!\n"
                 example_code: "```\nplayers = Ann, John, Jesse\nchoices = 1, 2, 3, 4, 5, 6\n{for} player {in} players\n    {print} player ' throws ' choices {at} {random}\n    {sleep}\n```\n"
@@ -434,8 +434,8 @@ adventures:
                 story_text: "## Dice\nIn this game you have to throw 6 in as little tries as possible.\n"
                 example_code: "```\noptions = 1, 2, 3, 4, 5, 6\n{print} 'Throw 6 as fast as you can!'\nthrown = 0\ntries = 0\n{while} thrown != 6\n    thrown = options {at} {random}\n    {print} 'You threw ' thrown\n    tries = tries + 1\n{print} 'Yes! You have thrown 6 in ' tries ' tries.'\n```\n"
                 start_code: '# place your code here'
-        description: Make your own dice
-        default_save_name: Dice
+        description: Bëjeni zarin tuaj
+        default_save_name: Zare
     rock:
         name: Rock, paper, scissors
         levels:
