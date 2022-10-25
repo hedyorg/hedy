@@ -244,7 +244,7 @@ class TestsLevel2(HedyTester):
             forward a""")
         expected = HedyTester.dedent(
             "a = '50'",
-            HedyTester.forward_transpiled('a'))
+            HedyTester.forward_transpiled('a', self.level))
 
         self.multi_level_tester(
             code=code,
@@ -269,22 +269,24 @@ class TestsLevel2(HedyTester):
     #
     def test_turn_number(self):
         code = "turn 180"
-        expected = HedyTester.turn_transpiled(180)
+        expected = HedyTester.turn_transpiled(180, self.level)
 
         self.multi_level_tester(
             code=code,
             expected=expected,
-            extra_check_function=self.is_turtle()
+            extra_check_function=self.is_turtle(),
+            max_level=11
         )
 
     def test_turn_negative_number(self):
         code = "turn -180"
-        expected = HedyTester.turn_transpiled(-180)
+        expected = HedyTester.turn_transpiled(-180, self.level)
 
         self.multi_level_tester(
             code=code,
             expected=expected,
-            extra_check_function=self.is_turtle()
+            extra_check_function=self.is_turtle(),
+            max_level=11
         )
 
     def test_turn_with_number_var(self):
@@ -293,7 +295,7 @@ class TestsLevel2(HedyTester):
             turn direction""")
         expected = HedyTester.dedent(
             "direction = '70'",
-            HedyTester.turn_transpiled('direction'))
+            HedyTester.turn_transpiled('direction', self.level))
 
         self.multi_level_tester(
             code=code,
@@ -372,7 +374,7 @@ class TestsLevel2(HedyTester):
             turn ángulo""")
         expected = HedyTester.dedent(
             "ángulo = '90'",
-            HedyTester.turn_transpiled('ángulo'))
+            HedyTester.turn_transpiled('ángulo', self.level))
 
         self.multi_level_tester(
             code=code,
@@ -621,7 +623,7 @@ class TestsLevel2(HedyTester):
             forward afstand""")
         expected = HedyTester.dedent(
             "afstand = input('hoe ver dan?')",
-            HedyTester.forward_transpiled('afstand'))
+            HedyTester.forward_transpiled('afstand', self.level))
 
         self.multi_level_tester(
             code=code,
@@ -639,7 +641,7 @@ class TestsLevel2(HedyTester):
         expected = HedyTester.dedent("""\
         print(f'Turtle race')
         direction = input('Where to turn?')""",
-                                     HedyTester.turn_transpiled('direction'))
+                                     HedyTester.turn_transpiled('direction', self.level))
 
         self.multi_level_tester(
             code=code,
