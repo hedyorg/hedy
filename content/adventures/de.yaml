@@ -1,6 +1,6 @@
 adventures:
     default:
-        name: "Introduction"
+        name: "Einführung"
         description: "Erklärung des Levels"
         default_save_name: "intro"
         levels:
@@ -252,7 +252,9 @@ adventures:
                     ```
                 example_code: |
                     ```
-                    {print}('Ich heiße Hedy!')
+                    {print}('Hallo!')
+                    {for} i in {range}(1, 10):
+                        {print}('This ist Zeile ', i)
                     ```
     story:
         name: "Geschichte"
@@ -271,8 +273,8 @@ adventures:
 
                 example_code: |
                     ```
-                    {ask} Der Name der Hauptfigur lautet:
-                    {print} Die Hauptfigur läuft nun durch einen dunklen Wald.
+                    {ask} Der Name der Hauptfigur lautet: 
+                    {print} Die Hauptfigur läuft nun durch einen dunklen Wald. 
                     {print} Überall sind seltsame Geräusche zu hören.
                     {echo} Da rief doch jemand seinen / ihren Namen: 
                     {print} Es ist schon sehr gruselig hier.
@@ -411,7 +413,7 @@ adventures:
                     {print} Name ' läuft nun in den Wald hinein.'
                     {print} Name ' fürchtet sich ein wenig.'
                     Tiere {is} Wildschwein, Eichhörnchen, Gürteltier
-                    {print} 'Da hört er plötzlich ein ' Tiere at random '.'
+                    {print} 'Da hört er plötzlich ein ' Tiere {at} {random} '.'
                     {print} Name ' erschrickt. Es spukt in diesem Wald.'
                     ```
                 start_code: "{print} 'Deine Geschichte wird hier gedruckt!'"
@@ -449,23 +451,23 @@ adventures:
             15:
                 story_text: |
                     ## Geschichte
-                    Mit der `while`-Schleife kannst Du Deine Geschichten noch interessanter gestalten. So kannst Du zum Beispiel mit `while Spiel is 'läuft'` Dein Spiel so lange laufen lassen, bis es tatsächlich vorbei ist.
-                    Oder Du lässt die Spieler mit `while Schwert is 'verloren'` so lange weiter suchen, bis sie etwas finden.
+                    Mit der `{while}`-Schleife kannst Du Deine Geschichten noch interessanter gestalten. So kannst Du zum Beispiel mit `{while} Spiel {is} 'läuft'` Dein Spiel so lange laufen lassen, bis es tatsächlich vorbei ist.
+                    Oder Du lässt die Spieler mit `{while} Schwert {is} 'verloren'` so lange weiter suchen, bis sie etwas finden.
 
                 example_code: |
                     ```
                     Schlüssel = 'verloren'
-                    print 'Du stehst in Deinem Garten, hast jedoch Deine Schlüssel verloren.'
-                    print 'Wo willst Du nach ihnen suchen?'
-                    print 'Wähle zwischen: Baum, Blumenbeet, Stein, Briefkasten'
-                    while Schlüssel == 'verloren'
-                        Ort = ask 'Wo willst Du suchen?'
-                        if Ort == 'Blumenbeet'
-                            print 'Ah, hier sind sie!'
+                    {print} 'Du stehst in Deinem Garten, hast jedoch Deine Schlüssel verloren.'
+                    {print} 'Wo willst Du nach ihnen suchen?'
+                    {print} 'Wähle zwischen: Baum, Blumenbeet, Stein, Briefkasten'
+                    {while} Schlüssel == 'verloren'
+                        Ort = {ask} 'Wo willst Du suchen?'
+                        {if} Ort == 'Blumenbeet'
+                            {print} 'Ah, hier sind sie!'
                             Schlüssel = 'gefunden'
-                        else
-                            print 'Nope, sie sind nicht beim ' Ort '.'
-                    print 'Jetzt kannst Du ins Haus!'
+                        {else}
+                            {print} 'Nope, sie sind nicht beim ' Ort '.'
+                    {print} 'Jetzt kannst Du ins Haus!'
                     ```
                 start_code: "# setze hier deinen Code hin"
             13:
@@ -477,27 +479,26 @@ adventures:
                     ```
                     Schwert = 'verloren'
                     Spiel = 'an'
-                    print 'Unsere Heldin läuft durch den Wald.'
-                    print 'Der Weg gabelt sich.'
-                    for i in range 0 to 2
-                        if Spiel is 'an'
-                            Pfad = ask 'In welche Richtung soll sie gehen?'
-                            if Pfad is 'links' and Schwert is 'gefunden'
-                                print 'Unsere Heldin begegnet einem Drachen!'
-                                print 'Zum Glück hat sie ein Schwert, um das Ungetüm zu besiegen!'
+                    {print} 'Unsere Heldin läuft durch den Wald.'
+                    {print} 'Der Weg gabelt sich.'
+                    {for} i {in} {range} 0 {to} 2
+                        {if} Spiel {is} 'an'
+                            Pfad = {ask} 'In welche Richtung soll sie gehen?'
+                            if Pfad {is} 'links' and Schwert {is} 'gefunden'
+                                {print} 'Unsere Heldin begegnet einem Drachen!'
+                                {print} 'Zum Glück hat sie ein Schwert, um das Ungetüm zu besiegen!'
                                 Spiel = 'aus'
-                            if Pfad is 'links' and Schwert is 'verloren'
-                                print 'Unsere Heldin begegnet einem Drachen, sie hat jedoch keine Waffe!'
-                                print 'Sie wird vom Drachen besiegt...'
-                                print 'Versuche es noch einmal.'
+                            if Pfad {is} 'links' {and} Schwert {is} 'verloren'
+                                {print} 'Unsere Heldin begegnet einem Drachen, sie hat jedoch keine Waffe!'
+                                {print} 'Sie wird vom Drachen besiegt...'
+                                {print} 'Versuche es noch einmal.'
                                 Spiel = 'aus'
-                            if Pfad is 'rechts' and Schwert is 'gefunden'
-                                print 'Das Schwert hast Du bereits gefunden.'
-                                print 'Hier gibt es nichts weiter zu entdecken.'
-                                print 'Sie geht zurück.'
-                            if Pfad is 'rechts' and Schwert is 'verloren'
-                                print 'Unsere Heldin findet ein Schwert.'
-                                print 'Das könnte sich noch als nützlich erweisen.'
+                            if Pfad {is} 'rechts' {and} Schwert {is} 'gefunden'
+                                {print} 'Das Schwert hast Du bereits gefunden. Hier gibt es nichts weiter zu entdecken.'
+                                {print} 'Sie geht zurück.'
+                            if Pfad {is} 'rechts' {and} Schwert {is} 'verloren'
+                                {print} 'Unsere Heldin findet ein Schwert.'
+                                {print} 'Das könnte sich noch als nützlich erweisen.'
                                 Schwert = 'gefunden'
                     ```
                 start_code: "# setze hier deinen Code hin"
@@ -513,10 +514,10 @@ adventures:
 
                 example_code: |
                     ```
-                    print Ich bin Hedy der Papagei!
-                    ask Wie lautet Dein Name?
-                    echo
-                    echo
+                    {print} Ich bin Hedy der Papagei!
+                    {ask} Wie lautet Dein Name?
+                    {echo}
+                    {echo}
                     ```
                 start_code: "{print} Ich bin Hedy der Papagei"
             2:
@@ -526,28 +527,28 @@ adventures:
 
                 example_code: |
                     ```
-                    print Ich bin Hedy der Papagei.
-                    Name is ask Wie lautet Dein Name?
-                    print Name
-                    sleep
-                    print Aaaaaak
-                    sleep
-                    print Name
+                    {print} Ich bin Hedy der Papagei.
+                    Name {is} {ask} Wie lautet Dein Name?
+                    {print} Name
+                    {sleep}
+                    {print} Aaaaaak
+                    {sleep}
+                    {print} Name
                     ```
-                start_code: "print Ich bin Hedy der Papagei!"
+                start_code: "{print} Ich bin Hedy der Papagei!"
             3:
                 story_text: |
                     ## Papagei
-                    Bringe Deinem Papageien mit dem Befehl `add` neue Wörter bei.
+                    Bringe Deinem Papageien mit dem Befehl `{add}` neue Wörter bei.
 
                 example_code: |
                     ```
-                    Wörter is Aaaaaaak, Hedy
-                    print Bring Deinem Papageien etwas bei!
-                    Neues_Wort is ask Welches Wort willst Du ihm beibringen?
-                    add Neues_Wort to Wörter
-                    print 🧒 Sag Neues_Wort , Hedy!
-                    print 🦜 Wörter at random
+                    Wörter {is} Aaaaaaak, Hedy
+                    {print} Bring Deinem Papageien etwas bei!
+                    Neues_Wort {is} {ask} Welches Wort willst Du ihm beibringen?
+                    {add} Neues_Wort {to_list} Wörter
+                    {print} 🧒 Sag Neues_Wort , Hedy!
+                    {print} 🦜 Wörter {at} {random}
                     ```
                 start_code: "# setze hier deinen Code hin"
             5:
@@ -558,14 +559,14 @@ adventures:
                 example_code: |
                     ```
                     Wörter is Aaaaaaak, Hedy
-                    print 'Bring Deinem Papageien etwas bei!'
-                    Neues_Wort is ask 'Welches Wort willst Du ihm beibringen?'
-                    add Neues_Wort to Wörter
-                    gesagtes_Wort is Wörter at random
-                    print '🧒 Sag ' Neues_Wort ', Hedy!'
-                    print '🦜 ' gesagtes_Wort
-                    if gesagtes_Wort is Neues_Wort print '🧒 Gut gemacht, Hedy! 🍪'
-                    else print '🧒 Nein, Hedy! Sag ' Neues_Wort '!'
+                    {print} 'Bring Deinem Papageien etwas bei!'
+                    Neues_Wort {is} {ask} 'Welches Wort willst Du ihm beibringen?'
+                    {add} Neues_Wort {to_list} Wörter
+                    gesagtes_Wort {is} Wörter {at} {random}
+                    {print} '🧒 Sag ' Neues_Wort ', Hedy!'
+                    {print} '🦜 ' gesagtes_Wort
+                    {if} gesagtes_Wort is Neues_Wort {print} '🧒 Gut gemacht, Hedy! 🍪'
+                    {else} {print} '🧒 Nein, Hedy! Sag ' Neues_Wort '!'
                     ```
                 start_code: "# setze hier deinen Code hin"
     songs:
@@ -664,35 +665,35 @@ adventures:
                 example_code: |
                     ```
                     Strophe = 99
-                    repeat 99 times
-                        print Strophe ' Flaschen Bier an der Wand,'
-                        print Strophe ' Flaschen Bier.'
-                        print 'Nimm eine runter, reich sie herum,'
+                    {repeat} 99 {times}
+                        {print} Strophe ' Flaschen Bier an der Wand,'
+                        {print} Strophe ' Flaschen Bier.'
+                        {print} 'Nimm eine runter, reich sie herum,'
                         Strophe = Strophe - 1
-                        print Strophe ' Flaschen Bier an der Wand.'
+                        {print} Strophe ' Flaschen Bier an der Wand.'
                     ```
                 start_code: "# setze hier deinen Code hin"
             7:
                 story_text: |
                     ## Lieder
-                    In Liedern wiederholt sich oft einiges. So auch im Lied "Baby Shark"! Wenn Du es singst, singst Du eigentlich immer das gleiche:
+                    In Liedern wiederholt sich oft einiges. So auch im Lied "Baby Hai"! Wenn Du es singst, singst Du eigentlich immer das gleiche:
 
-                    Baby Shark tututudutudu <br>
-                    Baby Shark tututudutudu <br>
-                    Baby Shark tututudutudu <br>
-                    Baby Shark
+                    Baby Hai tututudutudu <br>
+                    Baby Hai tututudutudu <br>
+                    Baby Hai tututudutudu <br>
+                    Baby Hai 
 
-                    Baby Shark bedeutet übrigens Baby-Hai. Mit dem Befehl `repeat` kannst Du den Song abkürzen. Kannst Du den Code vervollständigen?
+                    Mit dem Befehl `{repeat}` kannst Du den Song abkürzen. Kannst Du den Code vervollständigen?
 
                 example_code: |
                     ```
-                    repeat _ _ print 'Baby Shark tututudutudu'
-                    print 'Baby Shark'
+                    {repeat} _ _ {print} 'Baby Hai tututudutudu'
+                    {print} 'Baby Shark'
                     ```
 
                     Du kannst natürlich auch andere Lieder programmieren. In vielen Liedern wiederholt sich etwas. Fällt Dir eins ein?
 
-                start_code: "print 'Baby Shark'"
+                start_code: "{print} 'Baby Hai'"
             6:
                 story_text: |
                     ## Lieder
@@ -712,7 +713,7 @@ adventures:
                     Du kannst jetzt die Zeilen 2 bis 6 so oft wiederholen, wie Du möchtest.
                     Dazu kopierst Du sie und fügst sie am Ende wieder ein.
 
-                start_code: "print 'Baby Shark'"
+                start_code: "{print} 'Baby Hai'"
             16:
                 story_text: |
                     ## Lieder
