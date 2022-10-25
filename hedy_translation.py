@@ -40,6 +40,13 @@ def all_keywords_to_dict():
     all_translations = {k: [v.get(k,k) for v in keyword_dict.values()] for k in keyword_dict['en']}
     return all_translations
 
+def translate_keyword(keyword, lang="en"):
+    #translated the keyword to a local lang
+    local_keywords = keywords_to_dict(lang)
+    local_keyword = get_target_keyword(local_keywords, keyword)
+    return local_keyword
+
+
 def translate_keywords(input_string_, from_lang="en", to_lang="nl", level=1):
     """"Return code with keywords translated to language of choice in level of choice"""
     try:
@@ -127,7 +134,11 @@ def get_original_keyword(keyword_dict, keyword, line):
         return keyword
 
 def get_target_keyword(keyword_dict, keyword):
-    return keyword_dict[keyword][0]
+    if keyword in keyword_dict.keys():
+        return keyword_dict[keyword][0]
+    else:
+        return keyword
+
 class Translator(Visitor):
     """The visitor finds tokens that must be translated and stores information about their exact position
        in the user input string and original value. The information is later used to replace the token in
