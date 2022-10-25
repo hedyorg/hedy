@@ -16,7 +16,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
     - name: Set up Python 3.9
       uses: actions/setup-python@v1
       with:
@@ -34,5 +36,21 @@ jobs:
     - name: Compiling Babel translations
       run: |
         pybabel compile -f -d translations
-    - name: Run validations
-      run: build-tools/github/validate
+    - name: Check for changed files in grammar related directories
+      shell: pwsh
+      id: check_file_changed
+      run: |
+        $diff = git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.sha }}
+        $SourceDiff = $diff | Where-Object { $_ -match '^content/' -or $_ -match '^grammars/' -or $_ -match '^highlighting/' }
+        $HasDiff = $SourceDiff.Length -gt 0
+        Write-Host "::set-output name=docs_changed::$HasDiff"
+    - name: Run all tests
+      shell: pwsh
+      if: steps.check_file_changed.outputs.docs_changed == 'True'
+      run: |
+        build-tools/github/validate --all
+    - name: Run non-code related tests
+      shell: pwsh
+      if: steps.check_file_changed.outputs.docs_changed != 'True'
+      run: |
+        build-tools/github/validate
