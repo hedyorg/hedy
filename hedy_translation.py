@@ -134,7 +134,10 @@ def get_original_keyword(keyword_dict, keyword, line):
         return keyword
 
 def get_target_keyword(keyword_dict, keyword):
-    return keyword_dict[keyword][0]
+    if keyword in keyword_dict.keys():
+        return keyword_dict[keyword][0]
+    else:
+        return keyword
 
 class Translator(Visitor):
     """The visitor finds tokens that must be translated and stores information about their exact position
