@@ -38,7 +38,7 @@
     explanation: '`{add}` midagi `{to_list}`.'
     demo_code: "loomad {is} lehm, kass\n{add} koer {to_list} loomad"
 -   name: '{remove}'
-    explanation: "`{remove}' an item `{from}."
+    explanation: "`{remove}` `{from}`."
     demo_code: "loomad {is} kass, koer, lehm\n{remove} koer {from} loomad"
 6:
 -   name: '{print}'
@@ -49,26 +49,26 @@
     explanation: 'Küsi tehte vastus ja kontrolli, kas see on õige.'
 -   name: '{ask} ja {if} kilpkonnaga'
     explanation: 'Küsi kasutajalt mitut nurka ta tahab.'
-    demo_code: "angles = {ask} 'How many angles?'\nangle = 360 / angles\n{forward} 50"
+    demo_code: "nurki = {ask} 'Mitu nurka?'\nnurk = 360 / nurki\n{forward} 50"
 7:
 -   name: '{print}'
     explanation: prindi täpselt, kasutades jutumärke.
-    demo_code: "{print} 'Hello welcome to Hedy.'"
+    demo_code: "{print} 'Teretulemast Hedy juurde.'"
 -   name: '{ask}'
     explanation: Küsi midagi kasutades `{ask}` käsku.
-    demo_code: "color = {ask} 'What is your favorite color?'\n{print} color ' is your favorite!'"
+    demo_code: "värv = {ask} 'Mis on su lemmikvärv?'\n{print} värv ' on su lemmik!'"
 -   name: '{if}'
     explanation: Make a choice with `{if}`.
-    demo_code: "color = {ask} 'What is your favorite color?'\n{if} color {is} green {print} 'pretty!' {else} {print} 'meh'"
+    demo_code: "värv = {ask} 'Mis on su lemmikvärv?'\n{if} värv {is} roheline {print} 'ilus!' {else} {print} 'pähh'"
 -   name: '{repeat} kilpkonnaga'
-    explanation: repeat a line of code with `{repeat}`.
+    explanation: Korda koodirida kasutades sõna `{repeat}`.
     demo_code: '{repeat} 3 {times} {forward} 10'
 8:
 -   name: '{print}'
-    explanation: print something. Remember to use a quotation mark for literal printing.
+    explanation: Prindi midagi. Pea meeles, et sõna-sõnalt täpseks printimiseks on vaja jutumärke.
     demo_code: "{print} '5 korda 5 on ' 5 * 5"
 -   name: '{ask}'
-    explanation: ask for the answer to a sum and check if it is correct. We can now print 2 lines.
+    explanation: Palu sisestada tehte vastus ja kontrolli, kas sisestatud vastus on õige. Nüüd on võimalik printida 2 rida.
     demo_code: "vastus = {ask} 'Mis on 5 pluss 5?'\n{if} vastus {is} 10\n    {print} 'Tubli!'\n    {print} 'Vastus on tõepoolest ' vastus\n{else}\n    {print} 'Oi!'\n    {print} 'Õige vastus on 10'"
 -   name: '{repeat} kilpkonnaga'
     explanation: 'Korda mitut rida.'
@@ -76,21 +76,21 @@
 9:
 -   name: '{if} mitme reaga'
     demo_code: "vastus = {ask} 'Mis on 20 pluss 20?'\n{if} vastus {is} 20\n    {print} 'Tubli!!'\n    {print} 'Vastus on tõepoolest' vastus\n{else}\n    {print} 'Vale'\n    {print} 'Õige vastus on 20'"
-    explanation: The answer of a sum of questions with '{ask}' and see if it is correct. Now we print out two lines.
+    explanation: The answer of a sum of questions with `{ask}` and see if it is correct. Now we print out two lines.
 -   name: '{repeat} kilpkonnaga'
     explanation: 'Korda mitut rida.'
     demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
 10:
 -   name: '{print}'
-    explanation: print something. Remember to use a quotation mark for literal printing.
-    demo_code: "{print} '5 times 5 is ' 5 * 5"
--   name: '{for} with a list'
+    explanation: Prindi midagi. Pea meeles, et sõna-sõnalt täpseks printimiseks on vaja jutumärke.
+    demo_code: "{print} '5 korda 5 on ' 5 * 5"
+-   name: '{for} koos nimistuga'
     explanation: 'Prindi kõik nimistus sisalduv.'
-    demo_code: "animals {is} dog, cat, blobfish\n{for} animal {in} animals\n  {print} 'I love ' animal"
+    demo_code: "loomad {is} koer, kass, kala\n{for} loom {in} loomad\n  {print} 'Mulle meeldib ' loom"
 11:
 -   explanation: '`{for}` saab kasutada koos `{range}`-ga.'
-    name: '{for} loop'
-    demo_code: "{for} counter {in} {range} 1 {to} 5\n    {print} counter"
+    name: '{for} tsükkel'
+    demo_code: "{for} loendur {in} {range} 1 {to} 5\n    {print} loendur"
 -   demo_code: "answer = {ask} 'What is 5 plus 5?'\n{if} answer {is} 10\n    {print} 'Well done!'\n    {print} 'Indeed, the answer was ' answer\nelse\n    {print} 'Oops!'\n    {print} 'The answer is 10'"
     name: '{ask}'
     explanation: ask for the answer to a sum and check if it is correct. We can now print 2 lines.

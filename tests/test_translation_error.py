@@ -31,4 +31,4 @@ class TestsTranslationError(HedyTester):
     @parameterized.expand(exception_language_input(), name_func=custom_name_func)
     def test_translate_hedy_exception(self, exception, language):
         with app.test_request_context(headers={'Accept-Language': language}):
-            translate_error(exception.error_code, exception.arguments)
+            translate_error(exception.error_code, exception.arguments, language)

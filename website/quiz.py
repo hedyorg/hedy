@@ -10,7 +10,7 @@ from website.auth import current_user
 from .database import Database
 import utils
 from .website_module import WebsiteModule, route
-
+from hedy import HEDY_MAX_LEVEL
 MAX_ATTEMPTS = 2
 
 ANSWER_PARSER = {
@@ -147,10 +147,14 @@ class QuizModule(WebsiteModule):
                     achievement.append(self.achievements.add_single_achievement(username, "quiz_master")[0])
                 else:
                     achievement = self.achievements.add_single_achievement(username, "quiz_master")
+            if level == HEDY_MAX_LEVEL:
+                if achievement:
+                    achievement.append(self.achievements.add_single_achievement(username, "hedy_certificate")[0])
+                else:
+                    achievement = self.achievements.add_single_achievement(username, "hedy_certificate")
             if achievement:
                 response['achievement'] = json.dumps(achievement)
 
-        print(response)
         return jsonify(response), 200
 
 
