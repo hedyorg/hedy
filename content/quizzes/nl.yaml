@@ -465,7 +465,7 @@ levels:
             hint: "De fout zit in regel 1"
             question_score: '10'
         3:
-            question_text: "Wat klopt er niet aan regel 2 van deze code?"
+            question_text: "Hoe los je de fout in regel 2 op?"
             code: |-
                 opties {is} steen, papier, schaar
                 {print} steen, papier, schaar {at} {random}
@@ -556,7 +556,7 @@ levels:
         7:
             question_text: "Wat doet het `{add}` commando?"
             code: |-
-                boeken {is} Harry Potter, de Hobbit, Pluk van de Petteflet
+                boeken {is} Harry Potter, De Hobbit, Pluk van de Petteflet
                 jouw_boek {is} {ask} Wat is jouw favoriete boek?
                 {add} jouw_boek {to_list} boeken
                 {print} boeken {at} {random}
@@ -1967,6 +1967,49 @@ levels:
             output: "Baby shark tututudutudu\nBaby shark tututudutudu\nBaby shark tututudutudu\nBaby shark"
     10:
         1:
+            question_text: "Welke uitvoer is correct?"
+            code: |-
+                maaltijd = pizza, pasta, pannenkoek
+                {for} maaltijd {in} maaltijden
+                    {print} 'Ik hou van ' maaltijd
+            mp_choice_options:
+            -   option: "Ik hou van pizza"
+                feedback: "Regel 2 zegt `{for}` maaltijd `{in}` maaltijden. Dus elke maaltijd in de lijst wordt geprint."
+            -   option: "Ik hou van pasta"
+                feedback: "Regel 2 zegt `{for}` maaltijd `{in}` maaltijden. Dus elke maaltijd in de lijst wordt geprint."
+            -   option: "Ik hou van pannenkoek"
+                feedback: "Regel 2 zegt `{for}` maaltijd `{in}` maaltijden. Dus elke maaltijd in de lijst wordt geprint.."
+            -   option: |-
+                    Ik hou van pizza
+                    Ik hou van pasta
+                    Ik hou van pannenkoek
+                feedback: "Super!"
+            correct_answer: "D"
+            hint: "Regel 2 zegt `{for}` maaltijd `{in}` maaltijden. Dus elke maaltijd in de lijst wordt geprint."
+            question_score: '10'
+        2:
+            question_text: "Welke output klopt?"
+            code: |-
+                dieren = honden, katten, hamsters, kippen
+                {for} dier {in} dieren
+                    {print} dier ' zijn superleuke huisdieren'
+            mp_choice_options:
+            -   option: "honden zijn superleuke huisdieren"
+                feedback: "Regel 2 zegt dat elk dier in de lijst dieren geprint wordt. Dus elk dier komt aan bod."
+            -   option: "honden, katten, hamsters, kippen zijn superleuke huisdieren"
+                feedback: "Elk dier krijgt zijn eigen regeltje."
+            -   option: |-
+                    honden zijn superleuke huisdieren
+                    katten zijn superleuke huisdieren
+                    hamsters zijn superleuke huisdieren
+                    kippen zijn superleuke huisdieren
+                feedback: "Goedzo!"
+            -   option: "Dat weet je nog niet. Hedy kiest een dier at random."
+                feedback: "Regel 2 zegt dat elk dier in de lijst dieren geprint wordt. Dus elk dier komt aan bod."
+            correct_answer: "C"
+            hint: "Regel 2 zegt dat elk dier in de lijst dieren geprint wordt. Dus elk dier komt aan bod."
+            question_score: '10'
+        3:
             question_text: "Wat moet er op _?_ komen te staan?"
             code: |-
                 complimentjes = super, goedzo, top
@@ -1995,49 +2038,6 @@ levels:
                 feedback: "Helaas!"
             correct_answer: "B"
             hint: "Voor elk compliment in de lijst complimentjes"
-            question_score: '10'
-        2:
-            question_text: "Welke uitvoer is correct?"
-            code: |-
-                maaltijd = pizza, pasta, pannenkoek
-                {for} maaltijd {in} maaltijden
-                    {print} 'Ik hou van ' maaltijd
-            mp_choice_options:
-            -   option: "Ik hou van pizza"
-                feedback: "Regel 2 zegt `{for}` maaltijd `{in}` maaltijden. Dus elke maaltijd in de lijst wordt geprint."
-            -   option: "Ik hou van pasta"
-                feedback: "Regel 2 zegt `{for}` maaltijd `{in}` maaltijden. Dus elke maaltijd in de lijst wordt geprint."
-            -   option: "I hou van pannenkoek"
-                feedback: "Regel 2 zegt `{for}` maaltijd `{in}` maaltijden. Dus elke maaltijd in de lijst wordt geprint.."
-            -   option: |-
-                    Ik hou van pizza
-                    Ik hou van pasta
-                    Ik hou van pannenkoek
-                feedback: "Super!"
-            correct_answer: "D"
-            hint: "Regel 2 zegt `{for}` maaltijd `{in}` maaltijden. Dus elke maaltijd in de lijst wordt geprint."
-            question_score: '10'
-        3:
-            question_text: "Welke output klopt?"
-            code: |-
-                dieren = honden, katten, hamsters, kippen
-                {for} dier {in} dieren
-                    {print} dier ' zijn superleuke huisdieren'
-            mp_choice_options:
-            -   option: "honden zijn superleuke huisdieren"
-                feedback: "Regel 2 zegt dat elk dier in de lijst dieren geprint wordt. Dus elk dier komt aan bod."
-            -   option: "honden, katten, hamsters, kippen zijn superleuke huisdieren"
-                feedback: "Elk dier krijgt zijn eigen regeltje."
-            -   option: |-
-                    honden zijn superleuke huisdieren
-                    katten zijn superleuke huisdieren
-                    hamsters zijn superleuke huisdieren
-                    kippen zijn superleuke huisdieren
-                feedback: "Goedzo!"
-            -   option: "Dat weet je nog niet. Hedy kiest een dier at random."
-                feedback: "Regel 2 zegt dat elk dier in de lijst dieren geprint wordt. Dus elk dier komt aan bod."
-            correct_answer: "C"
-            hint: "Regel 2 zegt dat elk dier in de lijst dieren geprint wordt. Dus elk dier komt aan bod."
             question_score: '10'
         4:
             question_text: "Wat is er mis met deze code?"
@@ -2108,7 +2108,7 @@ levels:
                 namen = Ron, Leslie, April, Andy
                 eten = pasta, friet, salade
                 _?_
-                    {print} naam ' eet vanavond ' food {at} {random}
+                    {print} naam ' eet vanavond ' eten {at} {random}
             mp_choice_options:
             -   option: |
                     ```
@@ -2134,7 +2134,7 @@ levels:
             hint: "Elke naam moet weten wat hij/zij vanavond eet."
             question_score: '10'
         8:
-            question_text: "Wat moet er op _?_ staan bij deze code die bepaalt wat voor kleur short je draagt?"
+            question_text: "Wat moet er op _?_ staan bij deze code die bepaalt wat voor kleur shirt je draagt?"
             code: |-
                 namen = Donna, Tommy, Ben
                 kleuren = blauw, rood, geel

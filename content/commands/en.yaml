@@ -60,7 +60,7 @@
         animals {is} cow, cat
         {add} dog {to_list} animals
 -   name: "{remove}"
-    explanation: "`{remove}' an item `{from}` a list."
+    explanation: "`{remove}` an item `{from}` a list."
     demo_code: |-
         animals {is} cat, dog, cow
         {remove} dog {from} animals
@@ -312,7 +312,7 @@
     explanation: "To get a random item from a list we use [random] so fruit[random] means, get a random fruit from the list!"
     demo_code: |-
         fruit = ['banana', 'apple', 'cherry']
-        random_fruit = fruit[random]
+        random_fruit = fruit[{random}]
         {print} random_fruit
 17:
 -   name: "{elif}"

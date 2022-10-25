@@ -244,7 +244,7 @@ class AchievementsModule(WebsiteModule):
         super().__init__('achievements', __name__, url_prefix='/achievements')
         self.achievements = achievements
 
-    @route('/achievements', methods=['POST'])
+    @route('/push-achievement', methods=['POST'])
     @requires_login
     def push_new_achievement(self, user):
         body = request.json

@@ -30,7 +30,7 @@ class HedyException(Exception):
             return [self.arguments['line_number']]
         return None
 
-class FtfyException(HedyException):
+class WarningException(HedyException):
     """Fixed That For You warning/exception.
 
     Not really a failure case: instead it represents a warning to
@@ -44,7 +44,7 @@ class FtfyException(HedyException):
         self.fixed_code = fixed_code
         self.fixed_result = fixed_result
 
-class InvalidSpaceException(FtfyException):
+class InvalidSpaceException(WarningException):
     def __init__(self, level, line_number, fixed_code, fixed_result):
         super().__init__('Invalid Space',
             level=level,
@@ -124,7 +124,7 @@ class InputTooBigException(HedyException):
             lines_of_code=lines_of_code,
             max_lines=max_lines)
 
-class InvalidCommandException(FtfyException):
+class InvalidCommandException(WarningException):
     def __init__(self, level, invalid_command, guessed_command, line_number, fixed_code, fixed_result):
         super().__init__('Invalid',
             invalid_command=invalid_command,
@@ -152,6 +152,12 @@ class IncompleteRepeatException(HedyException):
     def __init__(self, command, level, line_number):
         super().__init__('Incomplete Repeat',
             command=command,
+            level=level,
+            line_number=line_number)
+
+class LonelyTextException(HedyException):
+    def __init__(self, level, line_number):
+        super().__init__('Lonely Text',
             level=level,
             line_number=line_number)
 

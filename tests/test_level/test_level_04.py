@@ -608,6 +608,13 @@ class TestsLevel4(HedyTester):
             extra_check_function=lambda c: c.exception.fixed_code == "print 'Hello'"
         )
 
+    def test_lonely_text(self):
+        code = "'Hello'"
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.LonelyTextException
+        )
+
     #
     # assorti tests
     #

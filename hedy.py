@@ -275,7 +275,7 @@ def closest_command(invalid_command, known_commands, threshold=2):
     return min_command
 
 
-def style_closest_command(command):
+def style_command(command):
     return f'<span class="command-highlighted">{command}</span>'
 
 def closest_command_with_min_distance(invalid_command, commands, threshold):
@@ -1026,6 +1026,11 @@ class IsValid(Filter):
     def error_repeat_no_times(self, meta, args):
         error = InvalidInfo('repeat missing times', arguments=[str(args[0])], line=meta.line, column=meta.column)
         return False, error, meta
+
+    def error_text_no_print(self, meta, args):
+        error = InvalidInfo('lonely text', arguments=[str(args[0])], line=meta.line, column=meta.column)
+        return False, error, meta
+
     #other rules are inherited from Filter
 
 def valid_echo(ast):
@@ -1301,7 +1306,7 @@ class ConvertToPython_1(ConvertToPython):
             try:
               {variable} = int({variable})
             except ValueError:
-              raise Exception(f'While running your program the command {style_closest_command(command)} received the value {style_closest_command('{'+variable+'}')} which is not allowed. Try changing the value to a number.')
+              raise Exception(f'While running your program the command {style_command(command)} received the value {style_command('{' + variable + '}')} which is not allowed. Try changing the value to a number.')
             t.{command_text}(min(600, {variable}) if {variable} > 0 else max(-600, {variable}))""")
         if add_sleep:
             return sleep_after(transpiled, False)
@@ -1312,7 +1317,7 @@ class ConvertToPython_1(ConvertToPython):
         return textwrap.dedent(f"""\
             {variable} = f'{parameter}'
             if {variable} not in {command_make_color}:
-              raise Exception(f'While running your program the command {style_closest_command(command)} received the value {style_closest_command('{' + variable + '}')} which is not allowed. Try using another color.')
+              raise Exception(f'While running your program the command {style_command(command)} received the value {style_command('{' + variable + '}')} which is not allowed. Try using another color.')
             t.{command_text}({variable})""")
 
 @v_args(meta=True)
@@ -1420,7 +1425,7 @@ class ConvertToPython_2(ConvertToPython_1):
                 try:
                   time.sleep(int({value}))
                 except ValueError:
-                  raise Exception(f'While running your program the command {style_closest_command(Command.sleep)} received the value {style_closest_command('{' + value + '}')} which is not allowed. Try changing the value to a number.')""")
+                  raise Exception(f'While running your program the command {style_command(Command.sleep)} received the value {style_command('{' + value + '}')} which is not allowed. Try changing the value to a number.')""")
 
 
 @v_args(meta=True)
@@ -2388,6 +2393,8 @@ def is_program_valid(program_root, input_string, level, lang):
             raise exceptions.UnquotedTextException(level=level, unquotedtext=unquotedtext)
         elif invalid_info.error_type == 'unsupported number':
             raise exceptions.UnsupportedFloatException(value=''.join(invalid_info.arguments))
+        elif invalid_info.error_type == 'lonely text':
+            raise exceptions.LonelyTextException(level=level, line_number=line)
         else:
             invalid_command = invalid_info.command
             closest = closest_command(invalid_command, get_suggestions_for_language(lang, level))

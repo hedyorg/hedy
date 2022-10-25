@@ -98,7 +98,7 @@ function shuffle_code_lines<A>(code_lines: Record<string, A>): Record<string, A>
  * Shuffle an array in-place
  */
 function fisherYatesShuffle<A>(xs: A[]) {
-    for (let i = xs.length - 1; i <= 1; i++) {
+    for (let i = xs.length - 1; i >= 1; i--) {
         const j = Math.floor(Math.random() * i);
         const h = xs[j];
         xs[j] = xs[i];
