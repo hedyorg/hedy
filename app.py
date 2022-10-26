@@ -1,5 +1,6 @@
 # coding=utf-8
 import copy
+from itertools import count
 from multiprocessing.dummy import active_children
 
 from website import (
@@ -730,8 +731,9 @@ def programs_page(user):
              'name': item['name'],
              'adventure_name': item.get('adventure_name'),
              'submitted': item.get('submitted'),
-             'public': item.get('public')
-             }
+             'public': item.get('public'),
+             'number_lines': code.count('\n') + 1
+            }
         )
 
     return render_template('programs.html', programs=programs, page_title=gettext('title_programs'),
@@ -1273,6 +1275,7 @@ def explore():
     else:
         programs = PUBLIC_PROGRAMS[:48]
 
+    print(programs)
     filtered_programs = []
     for program in programs:
         # If program does not have an error value set -> parse it and set value
@@ -1305,7 +1308,8 @@ def explore():
             'error': program['error'],
             'hedy_choice': True if program.get('hedy_choice') == 1 else False,
             'public_user': True if public_profile else None,
-            'code': "\n".join(code.split("\n")[:4])
+            'code': "\n".join(code.split("\n")[:4]),
+            'number_lines': code.count('\n') + 1
         })
 
     favourite_programs = DATABASE.get_hedy_choices()
@@ -1318,7 +1322,8 @@ def explore():
             'id': program['id'],
             'hedy_choice': True,
             'public_user': True if public_profile else None,
-            'code': "\n".join(program['code'].split("\n")[:4])
+            'code': "\n".join(program['code'].split("\n")[:4]),
+            'number_lines': code.count('\n') + 1
         })
 
     adventures_names = hedy_content.Adventures(session['lang']).get_adventure_names()
