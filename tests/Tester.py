@@ -119,8 +119,6 @@ class HedyTester(unittest.TestCase):
     if exception is not None:
       with self.assertRaises(exception) as context:
         result = hedy.transpile(code, level, lang)
-        print('++++++++++++++++++')
-        print(result)
       if extra_check_function is not None:
         self.assertTrue(extra_check_function(context))
 

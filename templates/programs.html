@@ -45,7 +45,8 @@
                 <tr class="text-left">
                     <th class="w-64 text-blue-600">{{_('title')}}</th>
                     <th class="w-24 text-blue-600">{{_('level')}}</th>
-                    <th class="w-52 text-blue-600">{{_('adventure')}}</th>
+                    <th class="w-32 text-blue-600">{{_('adventure')}}</th>
+                    <th class="w-64 text-blue-600">{{_('number_lines')}}</th>
                     <th class="text-blue-600">{{_('last_edited')}}</th>
                 </tr>
             </thead>
@@ -58,6 +59,7 @@
                     {% else %}
                         <td>-</td>
                     {% endif %}
+                    <td>{{ program.number_lines }}</td>
                     <td>{{_('ago')|replace("{timestamp}", program.date)}}</td>
                 </tr>
             </tbody>
