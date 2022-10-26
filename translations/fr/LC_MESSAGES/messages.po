@@ -1,18 +1,18 @@
+
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-13 13:47+0200\n"
+"POT-Creation-Date: 2022-10-25 20:54-0400\n"
 "PO-Revision-Date: 2022-10-23 16:03+0000\n"
 "Last-Translator: Maxime Lapointe <hunter_spawn@hotmail.com>\n"
-"Language-Team: fr <LL@li.org>\n"
 "Language: fr\n"
+"Language-Team: fr <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.14.2-dev\n"
-"Generated-By: Babel 2.9.1\n"
+"Generated-By: Babel 2.10.3\n"
 
 msgid "program_contains_error"
 msgstr "Ce programme contient une erreur, êtes-vous certain de vouloir le partager ?"
@@ -131,7 +131,9 @@ msgstr "Profil public mis à jour."
 msgid "user_not_private"
 msgstr "Cet utilisateur n’existe pas ou n’a pas de profil public"
 
-
+#, fuzzy
+msgid "see_certificate"
+msgstr "See {username} certificate!"
 
 msgid "invalid_teacher_invitation_code"
 msgstr "Le code d’invitation d’enseignant n’est pas valide. Pour devenir enseignant, veuillez contacter hello@hedy.org."
@@ -188,9 +190,7 @@ msgid "Cyclic Var Definition"
 msgstr "Le nom {variable} doit être défini avant que tu puisses l’utiliser à droite de la commande `is`."
 
 msgid "Lonely Echo"
-msgstr ""
-"Tu as utilisé `echo` avant `ask`, ou bien `echo` sans `ask`. Il faut d’abord "
-"utiliser `ask` pour demander, puis `echo`."
+msgstr "Tu as utilisé `echo` avant `ask`, ou bien `echo` sans `ask`. Il faut d’abord utiliser `ask` pour demander, puis `echo`."
 
 msgid "Too Big"
 msgstr "Waouh ! Ton programme a un nombre impressionnant de lignes de code : {lines_of_code} lignes ! Mais Hedy ne peut traiter que {max_lines} lignes à ce niveau. Rends ton programme plus court et ressaie."
@@ -200,52 +200,34 @@ msgid "Invalid Argument Type"
 msgstr "Tu ne peux utiliser {command} avec {invalid_argument} car c’est {invalid_type}. Essaie de modifier {invalid_argument} en {allowed_types}."
 
 msgid "Invalid Argument"
-msgstr ""
-"Tu ne peux pas utiliser la commande {command} avec {invalid_argument}. "
-"Essaye de remplacer {invalid_argument} par {allowed_types}."
+msgstr "Tu ne peux pas utiliser la commande {command} avec {invalid_argument}. Essaye de remplacer {invalid_argument} par {allowed_types}."
 
 msgid "Invalid Type Combination"
-msgstr ""
-"Tu ne peux pas utiliser {invalid_argument} et {invalid_argument_2} avec "
-"{command} car l'un est {invalid_type} et l'autre est {invalid_type_2}. "
-"Essaye de changer {invalid_argument} en {invalid_type_2} ou "
-"{invalid_argument_2} en {invalid_type}."
+msgstr "Tu ne peux pas utiliser {invalid_argument} et {invalid_argument_2} avec {command} car l'un est {invalid_type} et l'autre est {invalid_type_2}. Essaye de changer {invalid_argument} en {invalid_type_2} ou {invalid_argument_2} en {invalid_type}."
 
 msgid "Unsupported Float"
-msgstr ""
-"Les nombres non-entiers ne sont pas encore disponible, mais ils le seront "
-"dans quelques niveaux. Pour l'instant, change {value} en un entier."
+msgstr "Les nombres non-entiers ne sont pas encore disponible, mais ils le seront dans quelques niveaux. Pour l'instant, change {value} en un entier."
 
 msgid "Locked Language Feature"
 msgstr "Tu utilises {concept} ! C'est génial mais {concept} n'est pas encore débloqué ! Ça sera débloqué dans les niveaux suivants."
 
 msgid "Missing Command"
-msgstr ""
-"Il semble que vous avez oublié d'utiliser une commande à la ligne "
-"{line_number}."
+msgstr "Il semble que vous avez oublié d'utiliser une commande à la ligne {line_number}."
 
 msgid "Missing Inner Command"
-msgstr ""
-"Il semble que tu as oublié d'utiliser une commande avec la déclaration "
-"{command} que tu as utilisé à la ligne {line_number}."
+msgstr "Il semble que tu as oublié d'utiliser une commande avec la déclaration {command} que tu as utilisé à la ligne {line_number}."
 
 msgid "Incomplete Repeat"
-msgstr ""
-"Il semble que tu as oublié d'utiliser {command} avec la commande repeat qui "
-"est à la ligne {line_number}."
+msgstr "Il semble que tu as oublié d'utiliser {command} avec la commande repeat qui est à la ligne {line_number}."
 
 msgid "Unsupported String Value"
 msgstr "Les valeurs textes ne peuvent pas contenir {invalid_value}."
 
 msgid "Lonely Text"
-msgstr ""
-"Il semble que tu as oublié de mettre une commande avec le texte de la ligne "
-"{line_number}"
+msgstr "Il semble que tu as oublié de mettre une commande avec le texte de la ligne {line_number}"
 
 msgid "ask_needs_var"
-msgstr ""
-"À partir du niveau 2, {ask} doit être utilisé avec une variable. Exemple : "
-"nom {is} {ask} Quel est ton nom ?"
+msgstr "À partir du niveau 2, {ask} doit être utilisé avec une variable. Exemple : nom {is} {ask} Quel est ton nom ?"
 
 msgid "echo_out"
 msgstr "À partir du niveau 2 echo n'est plus nécessaire. Tu peux répéter un réponse avec ask et print maintenant. Exemple : nom is ask Quel est ton nom ? print hello nom"
@@ -351,8 +333,8 @@ msgid "number_programs"
 msgstr "Nombre de programmes exécutés"
 
 #, fuzzy
-msgid "quiz_score"
-msgstr ""
+msgid "highest_quiz_score"
+msgstr "Highest quiz score"
 
 msgid "longest_program"
 msgstr "Programme le plus long"
@@ -477,15 +459,7 @@ msgid "create_multiple_accounts"
 msgstr "Créer plusieurs comptes"
 
 msgid "accounts_intro"
-msgstr ""
-"Sur cette page, vous pouvez créer des comptes pour plusieurs étudiants à la "
-"dois. Il est aussi possible de les ajouter directement à l'une de vos "
-"classes. En appuyant sur le + vert en bas à droite de la page, vous pouvez "
-"ajouter des rangées de plus. Vous pouvez effacer une rangée en appuyant sur "
-"a croix rouge qui correpsond. Assurez-vous qu'aucune rangée ne soit vide "
-"quand vous appuyez sur \"Créer plusieurs comptes\". Gardez en tête que "
-"chaque nom d'utilisateur et courriel doit être unique et que le mot de passe "
-"doit être <b>au moins</b> 6 caractères de long."
+msgstr "Sur cette page, vous pouvez créer des comptes pour plusieurs étudiants à la dois. Il est aussi possible de les ajouter directement à l'une de vos classes. En appuyant sur le + vert en bas à droite de la page, vous pouvez ajouter des rangées de plus. Vous pouvez effacer une rangée en appuyant sur a croix rouge qui correpsond. Assurez-vous qu'aucune rangée ne soit vide quand vous appuyez sur \"Créer plusieurs comptes\". Gardez en tête que chaque nom d'utilisateur et courriel doit être unique et que le mot de passe doit être <b>au moins</b> 6 caractères de long."
 
 msgid "create_accounts_prompt"
 msgstr "Es-tu sur de vouloir créer ces comptes ?"
@@ -528,9 +502,7 @@ msgid "adventure_exp_1"
 msgstr "Tape l'aventure de ton choix sur le coté droit. Après avoir créer ton aventure, tu peux l'enregistrer dans une des tes classes dans le menu \"customizations\". Si ti veux inclure une commande dans cette aventure, utilise un code anchor comme cela s'il te plait :"
 
 msgid "adventure_exp_2"
-msgstr ""
-"Si tu veux montrer des bouts de code, par exemple pour donner un gabarit ou "
-"un exemple de code à tes élèves, utilise des ancres comme ceci :"
+msgstr "Si tu veux montrer des bouts de code, par exemple pour donner un gabarit ou un exemple de code à tes élèves, utilise des ancres comme ceci :"
 
 msgid "hello_world"
 msgstr "Hello world !"
@@ -555,9 +527,7 @@ msgstr ""
 "</pre>"
 
 msgid "adventure_terms"
-msgstr ""
-"J'accepte que mon aventure puisse être rendue disponible publiquement sur "
-"Hedy."
+msgstr "J'accepte que mon aventure puisse être rendue disponible publiquement sur Hedy."
 
 msgid "directly_add_adventure_to_classes"
 msgstr "Veux-tu ajouter cette aventure directement dans une de tes classes ?"
@@ -575,13 +545,10 @@ msgid "customize_class_exp_1"
 msgstr "Salut ! Sur cette page, tu peux customiser ta classe. En sélectionnant les niveaux et les aventures, tu peux choisir ce que tes élèves peuvent voir. Tu peux aussi ajouter tes propres aventures originales à des niveaux. Tous les niveaux et aventures par défaut seront sélectionnés par défaut. <b>Attention:</b> Toutes les aventure ne sont pas forcément disponible pour tous les niveaux ! Configure tes préférences de la manière suivante :"
 
 msgid "customize_class_step_1"
-msgstr ""
-"Choisi les niveaux pour ta class en appuyant sur les \"boutons de niveaux\""
+msgstr "Choisi les niveaux pour ta class en appuyant sur les \"boutons de niveaux\""
 
 msgid "customize_class_step_2"
-msgstr ""
-"Des \"boites à cochées\" vont apparaître pour les aventures disponibles pour "
-"les niveaux choisis"
+msgstr "Des \"boites à cochées\" vont apparaître pour les aventures disponibles pour les niveaux choisis"
 
 #, fuzzy
 msgid "customize_class_step_3"
@@ -595,9 +562,7 @@ msgid "customize_class_step_5"
 msgstr "Ajouter des aventures personnelles"
 
 msgid "customize_class_step_6"
-msgstr ""
-"Choisissez une date d'ouverture pour chaque niveau (vous pouvez aussi le "
-"laisser vide)"
+msgstr "Choisissez une date d'ouverture pour chaque niveau (vous pouvez aussi le laisser vide)"
 
 #, fuzzy
 msgid "customize_class_step_7"
@@ -607,13 +572,7 @@ msgid "customize_class_step_8"
 msgstr "Choisis \"Save\" -> C'est fait !"
 
 msgid "customize_class_exp_2"
-msgstr ""
-"Vous pouvez toujours changer ces configurations plus tard. Par exemple, vous "
-"pouvez rendre disponible certaines aventures ou certains niveaux pendant que "
-"vous enseignez une classe. De cette façon, c'est facile pour vous de "
-"déterminer sur quel niveaux et aventures vos élèves vont travailler. Si vous "
-"voulez rendre tout disponible pour votre classe, c'est plus facile de "
-"retirer toute la personnalisation."
+msgstr "Vous pouvez toujours changer ces configurations plus tard. Par exemple, vous pouvez rendre disponible certaines aventures ou certains niveaux pendant que vous enseignez une classe. De cette façon, c'est facile pour vous de déterminer sur quel niveaux et aventures vos élèves vont travailler. Si vous voulez rendre tout disponible pour votre classe, c'est plus facile de retirer toute la personnalisation."
 
 msgid "select_adventures"
 msgstr "Choisissez les aventures"
@@ -649,8 +608,8 @@ msgid "value"
 msgstr "Value"
 
 #, fuzzy
-msgid "highest_quiz_score"
-msgstr "Highest quiz score"
+msgid "quiz_score"
+msgstr ""
 
 msgid "percentage"
 msgstr "pourcentage"
@@ -723,6 +682,9 @@ msgstr "View program"
 
 msgid "report_program"
 msgstr "Es-tu sur de vouloir signaler ce programme ?"
+
+msgid "number_lines"
+msgstr ""
 
 msgid "my_classes"
 msgstr "Mes classes"
@@ -1305,10 +1267,6 @@ msgid "write_first_program"
 msgstr "Write your first program!"
 
 #, fuzzy
-msgid "see_certificate"
-msgstr "See {username} certificate!"
-
-#, fuzzy
 msgid "certified_teacher"
 msgstr "Certified teacher"
 
@@ -1880,3 +1838,4 @@ msgstr "Hedy - Join class"
 
 #~ msgid "create_account_explanation"
 #~ msgstr "Having your own account allows you to save your programs."
+
