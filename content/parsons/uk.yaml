@@ -54,27 +54,27 @@ levels:
                 F: "{print} 'Ready or not here I come!'"
     1:
         1:
-            story: "You're a customer at bakery Hedy.\nYou want into the bakery and are welcomed by the baker.\nHe asks what type of pie you want to order.\nNext, your order is being prepared.\n"
+            story: "Ви покупець пекарні Hedy.\nВи хочете в пекарню, і пекар вас радо зустрічає.\nВін запитує, який тип пирога ви хочете замовити.\nДалі ваше замовлення готується.\n"
             code_lines:
-                A: '{print} Welcome to bakery Hedy!'
-                C: '{echo} So you want'
-                D: '{print} Your order is being prepared!'
-                B: '{ask} What type of pie do you want to order?'
+                A: '{print} Ласкаво просимо в пекарню Hedy!'
+                C: '{echo} Отже, ви хочете'
+                D: '{print} Ваше замовлення готується!'
+                B: '{ask} Який тип пирога ви хочете замовити?'
         2:
-            story: "You're at the DJ Booth requesting a song. Create a program that asks if you are ready to party and then asks which song you would like to hear.\n"
+            story: "Ви біля ді-джейської столу та питаєте поставити пісню. Створіть програму, яка запитає, чи готові ви до вечірки, а потім запитає, яку пісню ви б хотіли почути.\n"
             code_lines:
-                A: '{print} This is DJ Hedy'
-                B: '{ask} Are you ready to party?'
-                C: '{ask} What song would you like to hear?'
-                D: '{echo} Great choice! I love'
+                A: '{print} Це DJ Hedy'
+                B: '{ask} Ви готові до вечірки?'
+                C: '{ask} Яку пісню ви б хотіли почути?'
+                D: '{echo} Чудовий вибір! Мені подобається'
     2:
         1:
-            story: "You and your friends are going to watch some Netflix.\nShow which movie you're about to watch and wish the viewers lot of fun!\n"
+            story: "Ви та ваші друзі збираєтеся переглянути Netflix.\nПокажи, який фільм ти збираєшся дивитися, і побажай глядачам веселощів!\n"
             code_lines:
-                A: '{print} It is time for an evening of Netflix'
+                A: '{print} Настав час для вечора Netflix'
                 B: film {is} Sonic the Hedgehog 2
-                C: "{print} We're going to film"
-                D: '{print} Have lot of fun!'
+                C: "{print} Ми будемо знімати"
+                D: '{print} Гарного вам задоволення!'
         2:
             story: "This is the webshop of a toy store. Create a program where costumers can add an item to their shopping cart.\n"
             code_lines:
