@@ -173,7 +173,7 @@ sections:
                 error_code: "打印你好\n心情是询问'你好吗？\n"
                 solution_text: "添加正确的引号。\n"
                 solution_code: "打印'你好'。\n心情是询问'你好吗？'\n"
-        -   title: 学生使用错误的引号
+        -   title: 学生使用了错误的引号
             example:
                 error_text: "重要的是，在开始上课时要检查学生是否知道如何正确地键入引号。否则，他们可能会使用 \"双引号 \"或斜的引号`。\n"
                 error_code: "print `欢迎来到本餐厅`。\n食物是询问 \"你想点什么？\"\n"
@@ -273,7 +273,7 @@ sections:
                 solution_code: "重复 3 次\n    打印'你好'\n"
         -   example:
                 error_code: "重复3次\n    饮料 = 询问'你想喝什么？'\n打印饮料\n"
-                solution_text: "In the correct code the third line starts with indentation too. This way it belongs to the repeat block and therefore it will be repeated 3 times.\nShowing your students these differences can help them understand why we need indentation to make our programs work.\n"
+                solution_text: "在正确的代码里第三行有行首空格.  这么一来它也属于“重复格”， 因此被重复3次.\n向学生们展示这些差别能帮助他们理解为何在运行代码时，需要行首空格.\n"
                 solution_code: "重复3次\n    饮料 = 询问'你想喝什么？'\n    打印饮料\n"
                 error_text: "例如，在下面的这段代码中，学生想知道3个人各自点了哪种饮料。但这段代码只问了1次，而不是3次。\n"
             title: 当学生想重复多行时，他们只需要重复1行就行了
@@ -319,7 +319,7 @@ sections:
         level: '10'
     -   level: '11'
         sections:
-        -   title: 学生忘记使用缩进
+        -   title: 学生忘记使用行首空格
             example:
                 error_text: "确保学生使用缩进。\n"
                 error_code: "取 i 在 1 到 5 的范围内\n打印i\n"
@@ -341,24 +341,24 @@ sections:
                 solution_code: "超级英雄们 = '蜘蛛侠'、'蝙蝠侠'、'钢铁侠'\n超级英雄=随机的超级英雄们\n如果超级英雄 = '蝙蝠侠'\n    打印'我是蝙蝠侠！'\n"
         -   title: 学生在他们想要用于计算的数字上使用引号
             example:
-                error_text: "You can use quotation marks on numbers, but only if you want the computer to think of them as text. This means you can't do calculations with the number.\nIn the example below, you can't do maths with the number 25, because it's in quotation marks.\n"
-                error_code: "分数 = '25'\n答案是 问 '你要加一分吗?'\n如果 答案 是 '是'\n    分数 = 分数 + 1\n    打印分数\n"
+                error_text: "如果你想让电脑把数字识别成文字，你也能把他们放在引号里.  这也代表了你无法使用这些数字来进行计算.\n在以下的例子里， 你无法使用数字25进行计算， 因为它在引号里.\n"
+                error_code: "分数 = '25'\n答案是 问 '你要多一分吗?'\n如果 答案 是 '是'\n    分数 = 分数 + 1\n    打印分数\n"
                 solution_text: "这是正确的代码:\n"
-                solution_code: "分数 = '25'\n答案是 问 '你要加一分吗?'\n如果 答案 是 '是'\n    分数 = 分数 + 1\n    打印分数\n"
+                solution_code: "分数 = '25'\n答案是 问 '你要多一分吗?'\n如果 答案 是 '是'\n    分数 = 分数 + 1\n    打印分数\n"
         -   example:
-                error_text: "Decimal numbers can be used from this level on, but you can't use commas.\n"
-                error_code: "print 2,5 + 2,5\n"
-                solution_text: "This is the correct code:\n"
-                solution_code: "print 2.5 + 2.5\n"
-            title: Students use commas instead of periods in decimal numbers
+                error_text: "从这个级别开始你能使用十位数，但不能使用逗号.\n"
+                error_code: "打印 2,5 + 2,5\n"
+                solution_text: "这是正确的代码:\n"
+                solution_code: "打印 2.5 + 2.5\n"
+            title: 学生在十位数里使用了逗号而非句号
     -   level: '13'
         sections:
         -   example:
                 solution_code: "game is ask 'Do you want to play a game?'\ntime is ask 'Do you have time to play?'\nif game is 'yes' and time is 'yes'\n    print 'Lets play!'\n"
-                error_text: "Both commands might appear similar, but their functions are very different.\n"
+                error_text: "两个指令虽然可能看起来类似，然而它们拥有不同的功能.\n"
                 error_code: "game is ask 'Do you want to play a game?'\ntime is ask 'Do you have time to play?'\nif game is 'yes' or time is 'yes'\n    print 'Lets play!'\n"
                 solution_text: "In this case, the person should answer yes on both questions, so you should use `and`.\n"
-            title: Students confuse `and` with `or`
+            title: 学生搞混了 `和` 与 `或`
     -   level: '14'
         sections:
         -   title: Students confuse the < and > signs
