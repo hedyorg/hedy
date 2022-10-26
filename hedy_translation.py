@@ -49,7 +49,12 @@ def translate_keyword_from_en(keyword, lang="en"):
         local_keyword = keyword
     return local_keyword
 
-def translate_keyword_to_en(keyword, lang="en"):
+def is_turn(keyword):
+    turns = all_keywords_to_dict()["turn"]
+    return keyword in turns
+
+
+def translate_keyword_to_en(keyword, lang):
     #translated the keyword to from a local lang
     original_keywords = keywords_to_dict(lang)
     for k, v in original_keywords.items():
