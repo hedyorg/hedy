@@ -517,6 +517,8 @@ export function create_accounts(prompt: string) {
     modal.confirm (prompt, function () {
         $('#account_rows_container').find(':input').each(function () {
             $(this).removeClass('border-2 border-red-500');
+            // Not really nice, but this removes the need for re-styling (a lot!)
+            $(this).removeAttr('required');
         });
         let accounts: {}[] = [];
         $('.account_row').each(function () {
