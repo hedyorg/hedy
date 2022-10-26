@@ -1,1 +1,65 @@
-{}
+levels:
+    6:
+        8:
+            mp_choice_options:
+            -   option: There shouldn't be quotation marks in line 2
+                feedback: No, there should be!
+            -   feedback: Correct!
+                option: The variable is called correct answer, but a variable's name can only be 1 word. So it should be correct_answer
+            -   option: The `{if}` and `{else}` commands should be in the same line.
+                feedback: No, that's not true.
+            -   option: The variable in line 2 can't be called answer, because it is too similar to the variable correct answer.
+                feedback: Variable names can be similar, but they can't be 2 words...
+            correct_answer: B
+            question_text: Why is this code incorrect?
+            code: "correct answer = 3*12\nanswer = {ask} 'What is 3 times 12?'\n{if} answer {is} correct answer {print} 'Good job!'\n{else} {print} 'No... It was ' correct answer"
+            question_score: '10'
+            hint: Inspect what the variables are called.
+        7:
+            code: "{print} 'Welcome at Hedys diner'\nfood = {ask} 'What would you like to eat?'\nprice = 0\n{if} food {is} hamburger price = price + 15\n{if} food {is} fries price = price + 6\ndrinks is {ask} 'What would you like to drink?'\n{if} drinks {is} coke price = price + 3\n{if} drinks {is} water price = price + 1\n{print} price ' dollars please'"
+            mp_choice_options:
+            -   option: It could have been `price = 3` just as well.
+                feedback: No, that's not true. Hedy needs to add 3 dollars to the total.
+            -   option: Because Hedy doesn't understand `price = 3`.
+                feedback: Hedy would understand, but it wouldn't be right.
+            -   option: Because Hedy would otherwise forget about the previous order. The price would be 3 dollars in total.
+                feedback: That's right!
+            -   option: Because the price is 0 dollars to begin with.
+                feedback: That's true, but not the reason
+            correct_answer: C
+            hint: The price shouldn't be 3, but 3 dollars more than it already was
+            question_score: '10'
+        9:
+            question_text: Imagine you love football a 10, you've eaten 2 bananas and have washed your hands 3 times today. How smart does the silly fortune teller think you are?
+            code: "{print} 'Im Hedy the silly fortune teller'\n{print} 'I will predict how smart you are!'\nfootball = {ask} 'On a scale of 0 to 10 how much do you love football?'\nbananas = {ask} 'How many bananas have you eaten this week?'\nhygiene = {ask} 'How many times did you wash your hands today??'\nresult = bananas + hygiene\nresult = result * football\n{print} 'You are ' result 'percent smart.'"
+            mp_choice_options:
+            -   option: 10%
+                feedback: (2 bananas + 3 hygiene) * 10 football = 5*10 =?
+            -   option: 32%
+                feedback: (2 bananas + 3 hygiene) * 10 football = 5*10 =?
+            -   option: 50%
+                feedback: Super! You are 100 percent smart!
+            -   option: 100%
+                feedback: (2 bananas + 3 hygiene) * 10 football = 5*10 =?
+            correct_answer: C
+            hint: (2 bananas + 3 hygiene) * 10 football = 5*10 =?
+            question_score: '10'
+        10:
+            question_text: Which statement is true?
+    9:
+        1:
+            mp_choice_options:
+            -   feedback: That's right!.
+                option: Nothing this code is correct!
+            -   option: You're not allowed to use an `{if}` command after an `{ask}` command.
+                feedback: You are!.
+            -   option: You don't have to use indentation twice.
+                feedback: You always have to use indentation.
+            -   feedback: It not, though.
+                option: The indentation is wrong in the last `{if}` command.
+            correct_answer: A
+            code: "{repeat} 3 {times}\n   eten = {ask} 'What would you like to eat?'\n   {if} food {is} fries\n       sauce = {ask} 'What sauce would you like?'\n       {print} 'One fries with ' sauce\n   {if} food {is} pizza\n       topping = {ask} 'What topping would you like?'\n       {print} 'One pizza with ' topping\n{print} 'That you for your order'"
+            hint: all the indentation is done correctly.
+            question_score: '10'
+        2:
+            question_text: What will be printed after entering the correct password?
