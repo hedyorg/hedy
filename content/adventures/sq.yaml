@@ -75,7 +75,7 @@ adventures:
                 story_text_2: "## Numrat e rastësishëm\nJu gjithashtu mund ta leni që kompjuteri të bëjë mbledhje të rastësishme në vetvete duke përdorur random komandën.\nKjo është si ju mund të zgjidhni një numër tabelash që të praktikoni, dhe nga ajo gjithmonë e keni një shumë të ndryshme:\n"
                 example_code_2: "```\ntabelat = 4, 5, 6, 8\nnumrat = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\ntabela = tabelat {at} {random}\nnumri = numrat {at} {random}\nzgjedhja_saktë = tabela * numri\npërgjigja = {ask} 'Sa bëjnë ' tabela' herë' numri '?'\n{if} përgjigja {is} përgjigja_saktë {print} 'saktë'\n{else} {print} 'Gabim! ishte ' përgjigja_saktë\n```\n"
             9:
-                story_text: "## Calculator\nIn previous levels you've learned how to make a calculator, in this level you can expand that code and make it into a little maths game. Like this...\n"
+                story_text: "## Kalkulatori\nNë nivelet e mëparshme keni mësuar si të bëni një kalkulator, në këtë nivel mund ta zmadhoni kodin dhe ta shndërroni në lojë matematikore. Si kështu...\n"
                 example_code: "```\nscore = 0\n{repeat} 10 {times}\n    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    number1 = numbers {at} {random}\n    number2 = numbers {at} {random}\n    correct_answer = number1 * number2\n    {print} 'What is ' number1 ' times ' number2 '?'\n    answer = {ask} 'Type your answer here...'\n    {print} 'Your answer is' answer\n    {if} answer {is} correct_answer\n        score = score + 1\n{print} 'Great job! Your score is... ' score ' out of 10!'\n```\n"
                 start_code: "{print} 'Welcome to this calculator!'"
             10:
