@@ -583,7 +583,7 @@ def translate_error(code, arguments, keyword_lang):
 
         if k in arguments_that_require_highlighting:
             if k in arguments_that_require_translation:
-                local_keyword = hedy_translation.translate_keyword(v, keyword_lang)
+                local_keyword = hedy_translation.translate_keyword_from_en(v, keyword_lang)
                 arguments[k] = hedy.style_command(local_keyword)
             else:
                 arguments[k] = hedy.style_command(v)
