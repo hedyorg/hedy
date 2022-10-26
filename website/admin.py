@@ -230,7 +230,7 @@ class AdminModule(WebsiteModule):
     @requires_admin
     def update_user_tags(self, user):
         body = request.json
-        user = self.db.get_public_profile_settings(body['username'].strip().lower())
+        db_user = self.db.get_public_profile_settings(body['username'].strip().lower())
         if not user:
             return "User doesn't have a public profile", 400
 
@@ -247,10 +247,10 @@ class AdminModule(WebsiteModule):
             tags.append("contributor")
 
         # We have to pop the username otherwise Dynamo gets mad -> we want alter a value that is also the index key
-        user.pop('username')
-        user['tags'] = tags
+        db_user.pop('username')
+        db_user['tags'] = tags
 
-        self.db.update_public_profile(user['username'], user)
+        self.db.update_public_profile(user['username'], db_user)
         return {}, 200
 
 
