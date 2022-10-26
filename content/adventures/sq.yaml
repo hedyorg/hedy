@@ -70,8 +70,8 @@ adventures:
                 start_code: '# Vendoseni kodin tuaj këtu'
             6:
                 start_code: "{print} 'Welcome to this calculator!'"
-                story_text: "## Calculator\nNow that you can calculate, you can also create a program to practice maths calculations. You can make up the calculations yourself, for example:\n"
-                example_code: "```\ncorrect_answer = 11 * 27\nanswer = {ask} 'How much is 11 times 27?'\n{if} answer {is} correct_answer {print} 'good job!'\n{else} {print} 'Wrong! It was ' correct_answer\n```\n"
+                story_text: "## Kalkulatori\nTani që mund të kalkuloni, ju gjithashtu mund të bëni një program që të ushtroni kalkulimet matematikore. You can make up the calculations yourself, for example:\n"
+                example_code: "```\npërgjigja_saktë = 11 * 27\npërgjigja = {ask} 'Sa bëjnë 11 herë 27?'\n{if} përgjigja {is} përgjigja_saktë {print} 'punë e mirë!'\n{else} {print} 'Gabim! ishte ' përgjigja_saktë\n```\n"
                 story_text_2: "## Random numbers\nYou can also let the computer do random sums on its own using random.\nThis is how you choose a number of tables to practice, and from that you always get a different sum:\n"
                 example_code_2: "```\ntables = 4, 5, 6, 8\nnumbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\ntable = tables {at} {random}\nnumber = numbers {at} {random}\ncorrect_answer = table * number\nanswer = {ask} 'how much is ' table ' times ' number '?'\n{if} answer {is} correct_answer {print} 'okay'\n{else} {print} 'mistake! it was ' correct_answer\n```\n"
             9:
@@ -86,9 +86,9 @@ adventures:
                 story_text: "## Calculator\nNow you can make a calculator that works for decimal numbers.\n"
                 example_code: "```\nnumber1 = {ask} 'What is the first number?'\nnumber2 = {ask} 'What is the second number?'\nanswer = number1 + number2\n{print} number1 ' plus ' number2 ' is ' answer\n```\n"
                 start_code: '# Vendoseni kodin tuaj këtu'
-        name: Calculator
-        description: Create a calculator
-        default_save_name: Calculator
+        name: Kalkulatori
+        description: Krijoni një kalkulator
+        default_save_name: Kalkulatori
     restaurant:
         description: Create your own virtual restaurant
         default_save_name: Restaurant
@@ -442,11 +442,11 @@ adventures:
             5:
                 start_code: "{print} 'Mirë se erdhët në lojën tuaj gur, letër, gërshërë!'"
                 story_text: "## Gur, letër, gërshërë\nNë këtë nivel mund ta përcaktoni kush fitoi.\nPër këtë ju duhet komanda `{if}`.\n\nRruani zgjedhjen tuaj me emrin zgjedhja dhe zgjedhjen e kompjuterit me emrin zgjedhja_kompjuterit.\nPastaj mund të përdorni komandën `{if}` të shikoni {if} (nëse) janë të njëjta apo të ndryshme.\nA do ta përfundoni kodin?\n"
-                example_code: "```\noptions {is} rock, paper, scissors\ncomputer_choice {is} _\nchoice {is} {ask} 'What do you choose?'\n{print} 'you chose ' _\n{print} 'computer chose ' _\n{if} _ {is} _ {print} 'tie!' {else} {print} 'no tie'\n```\n\nFill in the correct code on the blanks to see {if} it is a draw.\n"
+                example_code: "```\nopsionet {is} gur, letër, gërshërë\nzgjedhja_kompjuterit {is} _\nzgjedhja {is} {ask} 'Çfarë zgjidhni?'\n{print} 'Ju zgjodhët ' _\n{print} 'Kompjuteri zgjodhi ' _\n{if} _ {is} _ {print} 'barazim!' {else} {print} 'ska barazim'\n```\n\nMbusheni boshllëqet {if} (nëse) është barazim.\n"
             9:
-                start_code: '# place your code here'
-                story_text: "## Rock, paper, scissors\nIn this level you can program the whole rock, paper, scissors game by nesting the {if}-commands. Can you finish the code?\n"
-                example_code: "```\nchoices {is} rock, paper, scissors\nyour_choice {is} {ask} 'What do you choose?'\n{print} 'You choose ' your_choice\ncomputer_choice {is} choices {at} {random}\n{print} 'The computer chooses ' computer_choice\n{if} computer_choice {is} your_choice\n    {print} 'Tie'\n{if} computer_choice {is} rock\n    {if} your_choice {is} paper\n        {print} 'You win!'\n    {if} your_choice {is} scissors\n        {print} 'You lose!'\n# finish this code\n```\n"
+                start_code: '# Vendoseni kodin tuaj këtu'
+                story_text: "## Gur, letër, gërshërë\nNë këtë nivel mund ta programi gjithë lojën gur, letër, gërshërë duke përdorur komandën {if} një mbi një. A mund ta përfundoni kodin?\n"
+                example_code: "```\nzgjedhjet {is} gur, letër, gërshërë\nzgjedhja_juaj {is} {ask} 'Çfarë zgjidhni?'\n{print} 'Ju zgjodhët ' zgjedhja_juaj\nzgjedhja_kompjuterit {is} zgjedhjet {at} {random}\n{print} 'Kompjuteri zgjodhi ' zgjedhja_kompjuterit\n{if} zgjedhja_kompjuterit {is} zgjedhja_juaj\n    {print} 'Barazim'\n{if} zgjedhja_kompjuterit {is} gur\n    {if} zgjedhja_juaj {is} letër\n        {print} 'Ju fitoni!'\n    {if} zgjedhja_juaj {is} gërshërë\n        {print} 'Ju humbët!'\n# përfundoni kodin\n```\n"
             1:
                 story_text: "## Gur, letër, gërshërë\nNë nivelin 1, ju mund të filloni me lojën gur, letër, gërshërë.\n\nMe komandën `{ask}` ju mund të bëni një zgjidhje, dhe me komandën `{echo}` ju mund ta përsëritni atë zgjidhje.\n"
                 example_code: "```\n{print} çfarë zgjidhni?\n{ask} zgjidhni gur, letër apo gërshërë\n{echo} zgjidhja e juaj ishte:\n```\nNë vend që të përdorni fjalë, ju mund gjithashtu të përdorni emoji (ikona): ✊✋✌\n"
@@ -464,17 +464,17 @@ adventures:
                 example_code: "```\nzgjedhjet {is} gur, letër, gërshërë\n{print} _ Kompjuteri zgjodhi: _ _ {at} _\n```\n"
                 start_code: "{print} 'Mirë se erdhët në lojën tuaj gur, letër, gërshërë!'"
             10:
-                story_text: "## Rock, Paper, Scissors\nFeeling too lazy to play the game yourself? Let Hedy play it for you!\n"
-                example_code: "```\nchoices = rock, paper, scissors\nplayers = Marleen, Michael\n{for} player {in} players\n     {print} player ' chooses ' choices {at} {random}\n```\n"
+                story_text: "## Gur, letër, gërshërë\nJu mërzitet që të luani lojën vetë? Lëreni Hedy të luajë për ju!\n"
+                example_code: "```\nzgjedhjet = gur, letër, gërshërë\nlojtarët = Besarti, Agnesa\n{for} lojtari {in} lojtarët\n     {print} lojtari ' ka zgjedhur ' zgjedhjet {at} {random}\n```\n"
                 start_code: '# Vendoseni kodin tuaj këtu'
             13:
-                story_text: "## Rock, paper, scissors\nWith the `{and}` command you can shorten your rock, paper, scissors code! Check out the example code below and try to finish it.\n"
-                example_code: "```\noptions = 'rock', 'paper', 'scissors'\nyour_choice = {ask} 'What do you choose?'\ncomputer_choice = options {at} {random}\n{print} 'You choose ' your_choice\n{print} 'The computer chooses ' computer_choice\n{if} computer_choice {is} your_choice\n    {print} 'Tie'\n{if} computer_choice {is} 'rock' {and} your_choice {is} 'paper'\n    {print} 'You win!'\n{if} computer_choice {is} 'rock' {and} your_choice {is} 'scissors'\n    {print} 'The computer wins!'\n```\n"
-                start_code: '# place your code here'
+                story_text: "## Gur, letër, gërshërë\nMe komandën `{and}` mund ta shkurtoni kodin tuaj për gur, letër, gërshërë! Shikoni shembullin më poshtë dhe tentoni ta përfundoni.\n"
+                example_code: "```\nopsionet = 'gur', 'letër', 'gërshërë'\nzgjedhja_juaj = {ask} 'Çfarë zgjidhni?'\nzgjedhja_kompjuterit = opsionet {at} {random}\n{print} 'Ju keni zgjedhur ' zgjedhja_juaj\n{print} 'Kompjuteri ka zgjedhur ' zgjedhja_kompjuterit\n{if} zgjedhja_kompjuterit {is} zgjedhja_juaj\n    {print} 'Barazim'\n{if} zgjedhja_kompjuterit {is} 'gur' {and} zgjedhja_juaj {is} 'letër'\n    {print} 'Ju fitoni!'\n{if} zgjedhja_kompjuterit {is} 'gur' {and} zgjedhja_juaj {is} 'gërshërë'\n    {print} 'Kompjuteri fiton!'\n```\n"
+                start_code: '# Vendoseni kodin tuaj këtu'
             15:
-                story_text: "## Rock, Paper, Scissors\nPlay until you beat the computer! But first, finish the example code...\n"
-                example_code: "```\nwon = 'no'\noptions = 'rock', 'paper', 'scissors'\n{while} won == 'no'\n    your_choice = {ask} 'What do you choose?'\n    computer_choice = options {at} {random}\n    {print} 'you chose ' your_choice\n    {print} 'the computer chose ' computer_choice\n    {if} computer_choice == your_choice\n        {print} 'Tie!'\n    {if} computer_choice == 'rock' {and} your_choice == 'scissors'\n        {print} 'You lose!'\n    {if} computer_choice == 'rock' {and} your_choice == 'paper'\n        {print} 'You win!'\n        won = 'yes'\n```\n"
-                start_code: '# place your code here'
+                story_text: "## Gur, letër, gërshërë\nLuani derisa ta fitoni kompjuterin! Por fillimisht, përfundoni shembullin e dhënë...\n"
+                example_code: "```\nfituat = 'jo'\nopsionet = 'gur', 'letër', 'gërshërë'\n{while} fituat == 'jo'\n    zgjedhja_juaj = {ask} 'Çfarë zgjidhni?'\n    zgjedhja_kompjuterit = opsionet {at} {random}\n    {print} 'Ju zgjodhët ' zgjedhja_juaj\n    {print} 'Kompjuteri zgjodhi ' zgjedhja_kompjuterit\n    {if} zgjedhja_kompjuterit == zgjedhja_juaj\n        {print} 'Barazim!'\n    {if} zgjedhja_kompjuterit == 'gur' {and} zgjedhja_juaj == 'gërshërë'\n        {print} 'Ju humbët!'\n    {if} zgjedhja_kompjuterit == 'gur' {and} zgjedhja_juaj == 'letër'\n        {print} 'Ju fitoni!'\n        fituat = 'po'\n```\n"
+                start_code: '# Vendoseni kodin tuaj këtu'
         description: Bëjeni lojën tuaj me gur, letër, gërshërë
         default_save_name: Gur
     fortune:
