@@ -246,7 +246,7 @@ class AdminModule(WebsiteModule):
         if body.get("contributor"):
             tags.append("contributor")
 
-        # We have to pop the username otherwise Dynamo gets mad -> we want alter a value that is also the index key
+        # We have to pop the username otherwise Dynamo gets mad -> we can't update a value that is also the index key
         db_user.pop('username')
         db_user['tags'] = tags
 
