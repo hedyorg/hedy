@@ -407,8 +407,8 @@ adventures:
         levels:
             7:
                 start_code: "{print} 'Çfarë do të tregojë zari këtë herë'"
-                story_text: "## Dice\nYou can also make a die again in level 5. With the `{repeat}` code you can easily roll a whole hand of dice.\nTry to finish the sample code! The dashes should contain multiple commands and characters.\n\nBut maybe you want to make a completely different die. Of course you can!\n"
-                example_code: "```\nchoices = 1, 2, 3, 4, 5, earthworm\n{repeat} _ _ {print} _ _ _\n```\n"
+                story_text: "## Zare\nJu mund përsëri ta bëni një zare në nivelin 5. Me komandën `{repeat}` ju mund lehtë të hidhni një dorë me zare.\nTentoni ta përfundoni kodin e dhënë si shembull! Vijat duhet të kenë disa komanda dhe shkronja.\n\nNdoshta doni të bëni një zare komplet tjetër. Sigurisht që mundeni!\n"
+                example_code: "```\nzgjedhjet = 1, 2, 3, 4, 5, krimi_tokes\n{repeat} _ _ {print} _ _ _\n```\n"
             3:
                 story_text: "## Zare\nNë këtë nivel mund të zgjedhim nga një listë. Me këtë mund ta lëmë që kompjuteri të zgjedhë një anë nga zari.\nShikoni tek lojërat që keni në dollap në shtëpinë tuaj.\nA janë këto loja me një zar (special)? Gjithashtu mund ta kopjoni me këtë kod.\nSi për shembull, the dice of the game Earthworms with the numbers 1 to 5 and an earthworm on it.\n\n![Kërmilli i tokës me 1 deri 5 dhe me një kërmill mbi të](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)\n"
                 example_code: "```\nzgjedhjet {is} 1, 2, 3, 4, 5, kërmilli\n{print} zgjedhjet {at} {random}\n```\n"
@@ -422,47 +422,47 @@ adventures:
                 example_code: "```\nzgjedhjet {is} 1, 2, 3, 4, 5, krimb_toke\nhidhe {is} _\n{print} 'ti ke hedhur' _\n{if} _ {is} krimb_toke {print} 'Mund të ndaloni së hedhuri.' _ {print} 'Duhet ta hidhni përsëri!'\n```\n"
                 start_code: "{print} 'Çfarë do të tregojë zari këtë herë'"
             6:
-                story_text: "## Dice\nYou can also make an Earthworm die again in this, but now you can also calculate how many points have been rolled.\nYou may know that the worm counts 5 points for Earthworms. Now after a roll you can immediately calculate how many points you have thrown.\nThis is the code to calculate points for one die:\n"
-                example_code: "```\nchoices = 1, 2, 3, 4, 5, earthworm\npoints = 0\nthrow = choices {at} {random}\n{print} 'you threw' throw\n{if} throw {is} earthworm points = points + 5 {else} points = points + throw\n{print} 'those are' points ' point'\n```\nCan you make the code so that you get the total score for 8 dice? To do that, you have to cut and paste some lines of the code.\n"
-                example_code_2: "## Looking forward\n\nDid you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!\n"
+                story_text: "## Zare\nMund përsëri të bëni zarin e krimbit të tokës, por tani gjithashtu mund ta kalkuloni sa pikë keni hedhur.\nJu mund ta dini që krimbi njihet si 5 pikë. Pas një të hedhuri, ju mund menjëherë ta kalkuloni sa pikë keni hedhur.\nKy është kodi që kalkulon pikët për një zar:\n"
+                example_code: "```\nzgjedhjet = 1, 2, 3, 4, 5, krimi_tokes\npikët = 0\nhedhja = zgjedhjet {at} {random}\n{print} 'ju keni hedhur' hedhja\n{if} hedhja {is} krimi_tokes pikët = pikët+ 5 {else} pikët= pikët + hedhja\n{print} 'këto janë' pikët ' pikë'\n```\nA mund ta bëni kodin që të marrësh pikët totale për 8 zare? Për ta bërë këtë, duhet të bëni kopje disa rreshta nga kodi.\n"
+                example_code_2: "## Duke shikuar përpara\n\nA mundët që të kalkuloni pikët për 8 zare? U desh të kopjoni shumë apo? Ne do ta bëjmë më të lehtë në nivelin 7!\n"
                 start_code: "{print} 'Çfarë do të tregojë zari këtë herë'"
             10:
-                story_text: "## Dice\nIs everybody taking too long throwing the dice? In this level you can let Hedy throw all the dice at once!\n"
-                example_code: "```\nplayers = Ann, John, Jesse\nchoices = 1, 2, 3, 4, 5, 6\n{for} player {in} players\n    {print} player ' throws ' choices {at} {random}\n    {sleep}\n```\n"
-                start_code: '# place your code here'
+                story_text: "## Zare\nA është secilit duke i marrë shumë kohë hedhja e zareve? Në këtë nivel ju mund ta bëni që Hedy ti hedhë të gjitha zaret në të njëjtën kohë!\n"
+                example_code: "```\nlojtarët = Ana, Jetoni, Agimi\nzgjedhjet = 1, 2, 3, 4, 5, 6\n{for} lojtari {in} lojtarët\n    {print} lojtari ' ka hedhur' zgjedhjet {at} {random}\n    {sleep}\n```\n"
+                start_code: '# Vendoseni kodin tuaj këtu'
             15:
-                story_text: "## Dice\nIn this game you have to throw 6 in as little tries as possible.\n"
-                example_code: "```\noptions = 1, 2, 3, 4, 5, 6\n{print} 'Throw 6 as fast as you can!'\nthrown = 0\ntries = 0\n{while} thrown != 6\n    thrown = options {at} {random}\n    {print} 'You threw ' thrown\n    tries = tries + 1\n{print} 'Yes! You have thrown 6 in ' tries ' tries.'\n```\n"
-                start_code: '# place your code here'
+                story_text: "## Zare\nNë këtë lojë duhet që të hidhni 6 me sa më pak përpjekje.\n"
+                example_code: "```\nopsionet = 1, 2, 3, 4, 5, 6\n{print} 'Hidhni 6 sa më shpejtë të mundeni!'\nhedhja = 0\npërpjekje = 0\n{while} hedhja != 6\n    hedhja = opsionet {at} {random}\n    {print} 'Ju keni hedhur ' hedhja\n    përpjekje = përpjekje + 1\n{print} 'Po! Ju keni hedhur 6 në ' përpjekje ' përpjekje.'\n```\n"
+                start_code: '# Vendoseni kodin tuaj këtu'
         description: Bëjeni zarin tuaj
         default_save_name: Zare
     rock:
-        name: Rock, paper, scissors
+        name: Gur, letër, gërshërë
         levels:
             5:
-                start_code: "{print} 'Welcome to your own rock scissors paper!'"
-                story_text: "## Rock, paper, scissors\nIn this level we can determine who won.\nFor that you need the new `{if}` code.\n\nSave your choice with the name of choice and the choice of computer as computer choice.\nThen you can use `{if}` to see {if} they are the same or different.\nWill you finish the code?\n"
+                start_code: "{print} 'Mirë se erdhët në lojën tuaj gur, letër, gërshërë!'"
+                story_text: "## Gur, letër, gërshërë\nNë këtë nivel mund ta përcaktoni kush fitoi.\nPër këtë ju duhet komanda `{if}`.\n\nRruani zgjedhjen tuaj me emrin zgjedhja dhe zgjedhjen e kompjuterit me emrin zgjedhja_kompjuterit.\nPastaj mund të përdorni komandën `{if}` të shikoni {if} (nëse) janë të njëjta apo të ndryshme.\nA do ta përfundoni kodin?\n"
                 example_code: "```\noptions {is} rock, paper, scissors\ncomputer_choice {is} _\nchoice {is} {ask} 'What do you choose?'\n{print} 'you chose ' _\n{print} 'computer chose ' _\n{if} _ {is} _ {print} 'tie!' {else} {print} 'no tie'\n```\n\nFill in the correct code on the blanks to see {if} it is a draw.\n"
             9:
                 start_code: '# place your code here'
                 story_text: "## Rock, paper, scissors\nIn this level you can program the whole rock, paper, scissors game by nesting the {if}-commands. Can you finish the code?\n"
                 example_code: "```\nchoices {is} rock, paper, scissors\nyour_choice {is} {ask} 'What do you choose?'\n{print} 'You choose ' your_choice\ncomputer_choice {is} choices {at} {random}\n{print} 'The computer chooses ' computer_choice\n{if} computer_choice {is} your_choice\n    {print} 'Tie'\n{if} computer_choice {is} rock\n    {if} your_choice {is} paper\n        {print} 'You win!'\n    {if} your_choice {is} scissors\n        {print} 'You lose!'\n# finish this code\n```\n"
             1:
-                story_text: "## Rock, paper, scissors\nIn level 1 you can start with a rock, paper, scissors  game.\n\nWith `{ask}` you can make a choice, and with `{echo}` you can repeat that choice.\n"
-                example_code: "```\n{print} what do you choose?\n{ask} choose from rock, paper or scissors\n{echo} so your choice was:\n```\nInstead of using words, you could also use emojis of course: ✊✋✌\n"
-                start_code: '{print} Welcome to your own rock scissors paper!'
+                story_text: "## Gur, letër, gërshërë\nNë nivelin 1, ju mund të filloni me lojën gur, letër, gërshërë.\n\nMe komandën `{ask}` ju mund të bëni një zgjidhje, dhe me komandën `{echo}` ju mund ta përsëritni atë zgjidhje.\n"
+                example_code: "```\n{print} çfarë zgjidhni?\n{ask} zgjidhni gur, letër apo gërshërë\n{echo} zgjidhja e juaj ishte:\n```\nNë vend që të përdorni fjalë, ju mund gjithashtu të përdorni emoji (ikona): ✊✋✌\n"
+                start_code: '{print} Mirë se erdhët në lojën tuaj gur, letër, gërshërë!'
             2:
-                story_text: "## Rock, paper, scissors\nIn this level you can practise using the variables, so that you can make the rock, paper, scissors game in the next level!\n"
-                example_code: "```\nchoice {is} _\n{print} I choose choice\n```\n"
-                start_code: '# place your code here'
+                story_text: "## Gur, letër, gërshërë\nNë këtë nivel mund ti praktikoni variablat, kështu që mund ta bëni lojën gur, letër, gërshërë në nivelin tjetër!\n"
+                example_code: "```\nzgjedhja {is} _\n{print} Unë zgjedh zgjedhja\n```\n"
+                start_code: '# Vendoseni kodin tuaj këtu'
             3:
-                story_text: "## Rock, paper, scissors\n\nIn this level we can enter lists and choose things from them.\nYou first make a list with `{is}`. Then you can let the computer choose something from the list with `{at} {random}`.\nFor example, you can let the computer pick from rock, paper and scissors.\n"
-                example_code: "```\nchoices {is} rock, paper, scissors\n{print} choices {at} {random}\n```\n"
-                start_code: '{print} Welcome to your own rock scissors paper!'
+                story_text: "## Gur, letër, gërshërë\n\nNë këtë nivel mund të futni një listë and të zgjidhni nga ajo.\nNë fillim e bëni një listë me komandën `{is}`. Dhe pastaj mund ta bëni që kompjuteri za zgjedhë një nga lista me komandën `{at} {random}`.\nSi për shembull, ju mund ta bëni që kompjuteri të zgjedhë gur, letër, gërshërë.\n"
+                example_code: "```\nzgjedhjet {is} gur, letër, gërshërë\n{print} zgjedhjet {at} {random}\n```\n"
+                start_code: '{print} Mirë se erdhët në lojën tuaj gur, letër, gërshërë!'
             4:
-                story_text: "## Rock, paper, scissors\nIn this level we can further program rock, paper, scissors. But {if} you want to add text, you have to use quotation marks here too.\nDo you complete the code by entering the correct commands or characters on the underscores?\n"
-                example_code: "```\nchoices {is} rock, paper, scissors\n{print} _ The computer chose: _ _ {at} _\n```\n"
-                start_code: "{print} 'Welcome to your own rock scissors paper!'"
+                story_text: "## Gur, letër, gërshërë\nNë këtë nivel mund të programoni më shumë lojën gur, letër, gërshërë. Por {if} (nëse) doni të shtoni tekst, duhet të shtoni thonjëzat gjithashtu.\nA e përfundoni kodin duke shtuar komandat e sakta ose shkronjat në vizat e poshtme?\n"
+                example_code: "```\nzgjedhjet {is} gur, letër, gërshërë\n{print} _ Kompjuteri zgjodhi: _ _ {at} _\n```\n"
+                start_code: "{print} 'Mirë se erdhët në lojën tuaj gur, letër, gërshërë!'"
             10:
                 story_text: "## Rock, Paper, Scissors\nFeeling too lazy to play the game yourself? Let Hedy play it for you!\n"
                 example_code: "```\nchoices = rock, paper, scissors\nplayers = Marleen, Michael\n{for} player {in} players\n     {print} player ' chooses ' choices {at} {random}\n```\n"
@@ -475,8 +475,8 @@ adventures:
                 story_text: "## Rock, Paper, Scissors\nPlay until you beat the computer! But first, finish the example code...\n"
                 example_code: "```\nwon = 'no'\noptions = 'rock', 'paper', 'scissors'\n{while} won == 'no'\n    your_choice = {ask} 'What do you choose?'\n    computer_choice = options {at} {random}\n    {print} 'you chose ' your_choice\n    {print} 'the computer chose ' computer_choice\n    {if} computer_choice == your_choice\n        {print} 'Tie!'\n    {if} computer_choice == 'rock' {and} your_choice == 'scissors'\n        {print} 'You lose!'\n    {if} computer_choice == 'rock' {and} your_choice == 'paper'\n        {print} 'You win!'\n        won = 'yes'\n```\n"
                 start_code: '# place your code here'
-        description: Make your own rock, paper, scissors game
-        default_save_name: Rock
+        description: Bëjeni lojën tuaj me gur, letër, gërshërë
+        default_save_name: Gur
     fortune:
         levels:
             3:
