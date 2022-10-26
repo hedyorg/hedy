@@ -1,7 +1,7 @@
 # This file defines the special regexes
 
 # list of symbols recognized as characters (with non-Latin characters)
-CHARACTER = '0-9_A-Za-zÀ-ÿء-ي'
+CHARACTER = '0-9_A-Za-zÀ-ÿء-يא-ת'
 
 # definition of word
 WORD      = '([' + CHARACTER + "]+)"
