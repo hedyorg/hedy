@@ -246,7 +246,10 @@ class AdminModule(WebsiteModule):
         if body.get("contributor"):
             tags.append("contributor")
 
+        # We have to pop the username otherwise Dynamo gets mad -> we want alter a value that is also the index key
+        user.pop('username')
         user['tags'] = tags
+
         self.db.update_public_profile(user['username'], user)
         return {}, 200
 
