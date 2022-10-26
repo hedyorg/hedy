@@ -521,9 +521,9 @@ def download_machine_file(filename, extension="zip"):
 
 def transpile_add_stats(code, level, lang_):
     username = current_user()['username'] or None
+    number_of_lines = code.count('\n')
     try:
         result = hedy.transpile(code, level, lang_)
-        number_of_lines = code.count('\n')
         statistics.add(
             username, lambda id_: DATABASE.add_program_stats(id_, level, number_of_lines,None))
         return result
