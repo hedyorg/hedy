@@ -732,7 +732,7 @@ def programs_page(user):
              'adventure_name': item.get('adventure_name'),
              'submitted': item.get('submitted'),
              'public': item.get('public'),
-             'number_lines': code.count('\n') + 1
+             'number_lines': item['code'].count('\n') + 1
             }
         )
 
@@ -1275,7 +1275,6 @@ def explore():
     else:
         programs = PUBLIC_PROGRAMS[:48]
 
-    print(programs)
     filtered_programs = []
     for program in programs:
         # If program does not have an error value set -> parse it and set value
