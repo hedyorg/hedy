@@ -419,7 +419,7 @@ adventures:
                 start_code: "{print} 'Çfarë do të tregojë zari këtë herë'"
             5:
                 story_text: "## Zare\nMund ta bëni prapë zarin në këtë nivel me komandën `{if}`.\nPërfundojeni shembullin e dhënë që kodi të thotë \"Ju mund të ndaloni së hedhuri\" sapo të keni hedhur një krimb toke.\n\nNdoshta doni që të rikrijoni një zare nga një lojë tjetër. Është në rregull! Atëherë bëni reagimin tuaj. Shembull 'po' për numrin 6 dhe 'me keqardhje' për diçka tjetër {else}.\n"
-                example_code: "```\nchoices {is} 1, 2, 3, 4, 5, earthworm\nthrow {is} _\n{print} 'you have' _ 'thrown'\n{if} _ {is} earthworm {print} 'You can stop throwing.' _ {print} 'You have to hear it again!'\n```\n"
+                example_code: "```\nzgjedhjet {is} 1, 2, 3, 4, 5, krimb_toke\nhidhe {is} _\n{print} 'ti ke hedhur' _\n{if} _ {is} krimb_toke {print} 'Mund të ndaloni së hedhuri.' _ {print} 'Duhet ta hidhni përsëri!'\n```\n"
                 start_code: "{print} 'Çfarë do të tregojë zari këtë herë'"
             6:
                 story_text: "## Dice\nYou can also make an Earthworm die again in this, but now you can also calculate how many points have been rolled.\nYou may know that the worm counts 5 points for Earthworms. Now after a roll you can immediately calculate how many points you have thrown.\nThis is the code to calculate points for one die:\n"
