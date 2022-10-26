@@ -516,6 +516,7 @@ export function generate_passwords() {
 export function create_accounts(prompt: string) {
     modal.confirm (prompt, function () {
         $('#account_rows_container').find(':input').each(function () {
+            $(this).removeClass('border-2 border-red-500');
             // Not really nice, but this removes the need for re-styling (a lot!)
             $(this).removeAttr('required');
         });
@@ -542,7 +543,7 @@ export function create_accounts(prompt: string) {
                 modal.alert(response.error, 3000, true);
                 $('#account_rows_container').find(':input').each(function () {
                     if ($(this).val() == response.value) {
-                        $(this).addClass('border-red-500');
+                        $(this).addClass('border-2 border-red-500');
                     }
                 });
                 return;
