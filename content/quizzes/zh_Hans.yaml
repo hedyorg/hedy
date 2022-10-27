@@ -1551,7 +1551,7 @@ levels:
                 feedback: "The second line is repeated twice as well."
             -   option: "你好\n我是海迪！\n你好\n我是海迪！\n"
                 feedback: "Super!"
-            -   option: "你好\n你好\n我是海迪！\n我是海迪！\n"
+            -   option: "你好 \n你好 \n我是Hedy! \n我是Hedy！\"\n"
                 feedback: "Everything is printed twice"
             correct_answer: "C"
             hint: "Both lines are repeated twice."
@@ -1599,13 +1599,13 @@ levels:
                     {print} 'Yay!'
                     {print} 'Were going on holiday!'
             mp_choice_options:
-            -   option: "The children went: \n Yay! \n Were going on holiday!"
+            -   option: "孩子们去了： \n耶！ \n要去度假了！\n"
                 feedback: "Mind the `{repeat}` command !"
-            -   option: "The children went: \n Yay! \n Were going on holiday! \n Yay! \n Were going on holiday!"
+            -   option: "孩子们去了： \n耶! \n我们要去度假了! \n耶! \n我们要去度假了!\n"
                 feedback: "Correct!"
-            -   option: "The children went: \n Yay! \n Yay! \n Were going on holiday! \n Were going on holiday!"
+            -   option: "孩子们去了： \n耶！ \n耶！ \n我们要去度假了！ \n我们要去度假了！\n"
                 feedback: "This order is incorrect."
-            -   option: "The children went: \n Yay! \n Yay! \n Were going on holiday!"
+            -   option: "孩子们去了：\n耶！ \n耶！  \n我们要去度假了!\n"
                 feedback: "The last line is repeated too."
             correct_answer: "B"
             hint: "The block under the `{repeat}` command is repeated twice."
@@ -1694,12 +1694,12 @@ levels:
             mp_choice_options:
             -   option: |
                     ```
-                    {if} answer is right
-                       {print} You are...
-                          sleep
-                              {print} right!
+                    {if} 答案{is} 32
+                       {print} '你是......'
+                          {sleep}
+                              {print} '对！'
                           {else}
-                              {print} You are wrong!
+                              {print} '你错了！'
                     ```
                 feedback: "You are wrong!"
             -   option: |
