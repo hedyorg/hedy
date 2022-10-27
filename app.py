@@ -1,5 +1,6 @@
 # coding=utf-8
 import copy
+from itertools import count
 from multiprocessing.dummy import active_children
 
 from website import (
@@ -520,9 +521,9 @@ def download_machine_file(filename, extension="zip"):
 
 def transpile_add_stats(code, level, lang_):
     username = current_user()['username'] or None
+    number_of_lines = code.count('\n')
     try:
         result = hedy.transpile(code, level, lang_)
-        number_of_lines = code.count('\n')
         statistics.add(
             username, lambda id_: DATABASE.add_program_stats(id_, level, number_of_lines,None))
         return result
@@ -582,7 +583,7 @@ def translate_error(code, arguments, keyword_lang):
 
         if k in arguments_that_require_highlighting:
             if k in arguments_that_require_translation:
-                local_keyword = hedy_translation.translate_keyword(v, keyword_lang)
+                local_keyword = hedy_translation.translate_keyword_from_en(v, keyword_lang)
                 arguments[k] = hedy.style_command(local_keyword)
             else:
                 arguments[k] = hedy.style_command(v)
@@ -730,8 +731,9 @@ def programs_page(user):
              'name': item['name'],
              'adventure_name': item.get('adventure_name'),
              'submitted': item.get('submitted'),
-             'public': item.get('public')
-             }
+             'public': item.get('public'),
+             'number_lines': item['code'].count('\n') + 1
+            }
         )
 
     return render_template('programs.html', programs=programs, page_title=gettext('title_programs'),
@@ -1305,7 +1307,8 @@ def explore():
             'error': program['error'],
             'hedy_choice': True if program.get('hedy_choice') == 1 else False,
             'public_user': True if public_profile else None,
-            'code': "\n".join(code.split("\n")[:4])
+            'code': "\n".join(code.split("\n")[:4]),
+            'number_lines': code.count('\n') + 1
         })
 
     favourite_programs = DATABASE.get_hedy_choices()
@@ -1318,7 +1321,8 @@ def explore():
             'id': program['id'],
             'hedy_choice': True,
             'public_user': True if public_profile else None,
-            'code': "\n".join(program['code'].split("\n")[:4])
+            'code': "\n".join(program['code'].split("\n")[:4]),
+            'number_lines': code.count('\n') + 1
         })
 
     adventures_names = hedy_content.Adventures(session['lang']).get_adventure_names()
