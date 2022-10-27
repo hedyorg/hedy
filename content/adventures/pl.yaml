@@ -562,12 +562,12 @@ adventures:
             1:
                 story_text: "## Narysujmy coś\nMożesz wykorzystać Hedy także do rysowania.  Rysując linie i obracając żółwia, możesz narysować kwadrat lub gwiazdę!\n\nPisząć `{forward}` możesz narysować linie. Liczba zaraz po komendzie mówi o tym ile ma przejść żółw rysując linie..`{turn} {right}` obraca żołwia o ćwierć obrotu w prawo (zgodnie z ruchem wskazówek zegara), `{turn} {left}` obraca w lewo (przeciwnie do ruchu wskazówek zegara).\nJeśli chcesz przesunąć żółwia do tył, możesz wykorzystać komendę `{forward}` ale z ujemną liczba. Na przykład `{forward} -100`\n\nTo jest początek schodków. Możesz sprawić aby miały 5 stopni?\n"
                 example_code: "```\n{forward} 50\n{turn} {right}\n{forward} 50\n{turn} {left}\n{forward} 50\n```\n"
-                start_code: "{forward} 50\n{turn} left"
+                start_code: "{forward} 50\n{turn} {left}"
                 story_text_2: "## Kolory\nMożesz zmieniać kolory linie za pomocą polecenia `{color}`. Zobacz przykład.\nMożesz także uczynić linie niewidzialną za pomoca polecenia  `{color} {white}`. Możesz wykorzystać rysowanie białej linia do przesunięcia żółwia dokądkolwiek chcesz, zanim rozpoczniesz rysowanie.\n"
                 example_code_2: "```\n{color} {white}\n{forward} -80\n{color} {green}\n{forward} 50\n{color} {yellow}\n{forward} 50\n{color} {red}\n{forward} 50\n```\n"
             2:
-                story_text: "## Turtle\nIn level 1 the turtle could only turn left or right. That is a bit boring!\nIn level 2 he can point his nose in all directions.\n\nUse 90 to turn a quarter. We call this degrees. A full turn is 360 degrees.\nCan you make a figure with this code? Maybe a triangle or a circle?\n"
-                example_code: "\n```\n{print} Drawing figures\nangle {is} 90\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n```\n"
+                story_text: "## Żółw\nNa tym poziomie możesz używać zmiennych aby uczynić żółwia interaktywnym. Na przykład możesz zapytać użytkownika ile kroków ma zrobić twój żółw.\n"
+                example_code: "```\nkroki {is} {ask} Ile kroków ma wykonać żółw?\n{forward} kroki\n```\n"
                 start_code: "{print} Turtle race!\nhoek {is} 90\n{turn} hoek\n{forward} 25\n"
                 story_text_2: "Also, in level 1 the turtle could only turn left or right. That is a bit boring!\nIn level 2 he can point his nose in all directions.\n\nUse 90 to turn a quarter. We call this degrees. A full turn is 360 degrees.\nCan you make a figure with this code? Maybe a triangle or a circle?\n"
                 example_code_2: "```\n{print} Drawing figures\nangle {is} 90\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n```\n"
