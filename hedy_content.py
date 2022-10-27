@@ -1,9 +1,11 @@
 import copy
 import os
+import iso3166
+
 from babel import Locale, languages
 
 from website.yaml_file import YamlFile
-import iso3166
+from logger import hedy_content_logger
 
 # Define and load all countries
 COUNTRIES = {k: v.name for k, v in iso3166.countries_by_alpha2.items()}
@@ -20,10 +22,10 @@ for country in COUNTRIES.keys():
             break
         try:
             value = language + "_" + country
-            l = Locale.parse(value)
-            country_name = l.get_territory_name(value)
+            loc = Locale.parse(value)
+            country_name = loc.get_territory_name(value)
             found = True
-        except:
+        except Exception:
             pass
     if country_name:
         COUNTRIES[country] = country_name
@@ -32,10 +34,12 @@ for country in COUNTRIES.keys():
 ALL_LANGUAGES = {}
 ALL_KEYWORD_LANGUAGES = {}
 
-# Todo TB -> We create this list manually, but it would be nice if we find a way to automate this as well
+# Todo TB -> We create this list manually, but it would be nice
+#  if we find a way to automate this as well
 NON_LATIN_LANGUAGES = ['ar', 'bg', 'bn', 'el', 'fa', 'hi', 'he', 'ru', 'zh_Hans']
 
-# It would be nice if we created this list manually but couldn't find a way to retrieve this from Babel
+# It would be nice if we created this list manually but couldn't find a way
+# to retrieve this from Babel
 NON_BABEL = ['tn']
 
 ADVENTURE_ORDER = [
@@ -62,8 +66,10 @@ ADVENTURE_ORDER = [
 ]
 
 RESEARCH = {}
-for paper in sorted(os.listdir('content/research'), key=lambda x: int(x.split("_")[-1][:-4]), reverse=True):
-    # An_approach_to_describing_the_semantics_of_Hedy_2022.pdf -> 2022, An approach to describing the semantics of Hedy
+for paper in sorted(os.listdir('content/research'), key=lambda x: int(x.split("_")[-1][:-4]),
+                    reverse=True):
+    # An_approach_to_describing_the_semantics_of_Hedy_2022.pdf ->
+    # 2022, An approach to describing the semantics of Hedy
     name = paper.replace("_", " ").split(".")[0]
     name = name[-4:] + ". " + name[:-5]
     RESEARCH[name] = paper
@@ -89,10 +95,10 @@ for folder in os.listdir('translations'):
         locale = Locale.parse(folder)
         languages[folder] = locale.display_name.title()
 
-for l in sorted(languages):
-    ALL_LANGUAGES[l] = languages[l]
-    if os.path.exists('./grammars/keywords-' + l + '.lark'):
-        ALL_KEYWORD_LANGUAGES[l] = l[0:2].upper()  # first two characters
+for _lang in sorted(languages):
+    ALL_LANGUAGES[_lang] = languages[_lang]
+    if os.path.exists('./grammars/keywords-' + _lang + '.lark'):
+        ALL_KEYWORD_LANGUAGES[_lang] = _lang[0:2].upper()  # first two characters
 
 # Load and cache all keyword yamls
 KEYWORDS = {}
@@ -104,13 +110,13 @@ for lang in ALL_KEYWORD_LANGUAGES.keys():
             KEYWORDS[lang][k] = v.split('|')[0]
 
 
-
-
 class Commands:
-    # Want to parse the keywords only once, they can be cached -> perform this action on server start
+    # Want to parse the keywords only once, they can be cached
+    # -> perform this action on server start
     def __init__(self, language):
         self.language = language
-        # We can keep these cached, even in debug_mode: files are small and don't influence start-up time much
+        # We can keep these cached, even in debug_mode:
+        # files are small and don't influence start-up time much
         self.file = YamlFile.for_file(f'content/commands/{self.language}.yaml')
         self.data = {}
 
@@ -135,11 +141,11 @@ class Commands:
                     try:
                         command[k] = v.format(**KEYWORDS.get(language))
                     except IndexError:
-                        print("There is an issue due to an empty placeholder in the following line:")
-                        print(v)
+                        hedy_content_logger.error(
+                            f"There is an issue due to an empty placeholder in line: {v}")
                     except KeyError:
-                        print("There is an issue due to a non-existing key in the following line:")
-                        print(v)
+                        hedy_content_logger(
+                            f"There is an issue due to a non-existing key in line: {v}")
             keyword_data[level] = commands
         return keyword_data
 
@@ -149,12 +155,14 @@ class Commands:
         return self.data.get(keyword_lang, {}).get(int(level), None)
 
 
-# Todo TB -> We don't need these anymore as we guarantee with Weblate that each language file is there
+# Todo TB -> We don't need these anymore as we guarantee with
+#  Weblate that each language file is there
 
 
 class NoSuchCommand:
     def get_commands_for_level(self, level, keyword_lang):
         return {}
+
 
 class Adventures:
     def __init__(self, language):
@@ -176,7 +184,8 @@ class Adventures:
                 self.data[language] = self.cache_adventure_keywords(language)
 
     def cache_adventure_keywords(self, language):
-        # Sort the adventure to a fixed structure to make sure they are structured the same for each language
+        # Sort the adventure to a fixed structure to make sure
+        # they are structured the same for each language
         sorted_adventures = {}
         for adventure_index in ADVENTURE_ORDER:
             if self.file.get(adventure_index, None):
@@ -189,13 +198,14 @@ class Adventures:
             for level in adventure.get('levels'):
                 for k, v in adventure.get('levels').get(level).items():
                     try:
-                        parsed_adventure.get('levels').get(level)[k] = v.format(**KEYWORDS.get(language))
+                        parsed_adventure.get('levels').get(level)[k] = \
+                            v.format(**KEYWORDS.get(language))
                     except IndexError:
-                        print("There is an issue due to an empty placeholder in the following line:")
-                        print(v)
+                        hedy_content_logger.error(
+                            f"There is an issue due to an empty placeholder in line: {v}")
                     except KeyError:
-                        print("There is an issue due to a non-existing key in the following line:")
-                        print(v)
+                        hedy_content_logger.error(
+                            f"There is an issue due to a non-existing key in line: {v}")
             keyword_data[short_name] = parsed_adventure
         return keyword_data
 
@@ -209,7 +219,8 @@ class Adventures:
             self.data["en"] = self.cache_adventure_keywords("en")
         adventures_dict = {}
         for adventure in self.data["en"].items():
-            adventures_dict[adventure[0]] = {adventure[1]['name']: list(adventure[1]['levels'].keys())}
+            adventures_dict[adventure[0]] = \
+                {adventure[1]['name']: list(adventure[1]['levels'].keys())}
         return adventures_dict
 
     # Todo TB -> We can also cache this; why not?
@@ -240,13 +251,15 @@ class Adventures:
                 self.file = YamlFile.for_file(
                     f'content/adventures/{self.language}.yaml').get('adventures')
             self.data["en"] = self.cache_adventure_keywords("en")
-        return True if self.data.get("en") else False     
-      
-# Todo TB -> We don't need these anymore as we guarantee with Weblate that each language file is there
+        return True if self.data.get("en") else False
+
+
+# Todo TB -> We don't need these anymore as we guarantee with
+#  Weblate that each language file is there
 class NoSuchAdventure:
-  def get_adventure(self):
-    return {}
-  
+    def get_adventure(self):
+        return {}
+
 
 class ParsonsProblem:
     def __init__(self, language):
@@ -270,13 +283,14 @@ class ParsonsProblem:
             for number, exercise in exercises.items():
                 for k, v in exercise.get('code_lines').items():
                     try:
-                        exercises.get(number).get('code_lines')[k] = v.format(**KEYWORDS.get(language))
+                        exercises.get(number).get('code_lines')[k] = \
+                            v.format(**KEYWORDS.get(language))
                     except IndexError:
-                        print("There is an issue due to an empty placeholder in the following line:")
-                        print(v)
+                        hedy_content_logger.error(
+                            f"There is an issue due to an empty placeholder in line: {v}")
                     except KeyError:
-                        print("There is an issue due to a non-existing key in the following line:")
-                        print(v)
+                        hedy_content_logger.error(
+                            f"There is an issue due to a non-existing key in line: {v}")
             keyword_data[level] = exercises
         return keyword_data
 
@@ -368,10 +382,12 @@ class NoSuchQuiz:
 
 
 class Tutorials:
-    # Want to parse the keywords only once, they can be cached -> perform this action on server start
+    # Want to parse the keywords only once, they can be cached
+    # -> perform this action on server start
     def __init__(self, language):
         self.language = language
-        # We can keep these cached, even in debug_mode: files are small and don't influence start-up time much
+        # We can keep these cached, even in debug_mode:
+        # files are small and don't influence start-up time much
         self.file = YamlFile.for_file(f'content/tutorials/{self.language}.yaml')
         self.data = {}
 
@@ -404,6 +420,7 @@ class Tutorials:
         if level not in ["intro", "teacher"]:
             level = int(level)
         return self.data.get(keyword_lang, {}).get(level, {}).get(step, None)
+
 
 class NoSuchTutorial:
     def get_tutorial_for_level(self, level, keyword_lang):
