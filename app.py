@@ -94,7 +94,7 @@ def load_adventures_per_level(level, keyword_lang):
                 loaded_programs[program_key] = program
 
     all_adventures = []
-    adventures = ADVENTURES[g.lang].get_adventures(keyword_lang)
+    adventures = ADVENTURES[keyword_lang].get_adventures(keyword_lang)
 
     for short_name, adventure in adventures.items():
         if level not in adventure['levels']:
@@ -1022,20 +1022,21 @@ def view_program(user, id):
 @app.route('/adventure/<name>', methods=['GET'], defaults={'level': 1})
 @app.route('/adventure/<name>/<level>', methods=['GET'])
 def get_specific_adventure(name, level):
+    language = request.args.get("keyword_language", g.keyword_lang)
     try:
         level = int(level)
-    except:
+    except Exception:
         return utils.error_page(error=404, ui_message=gettext('no_such_level'))
 
     adventure = [x for x in load_adventures_per_level(
-        level, g.keyword_lang) if x.get('short_name') == name]
+        level, language) if x.get('short_name') == name]
     if not adventure:
         return utils.error_page(error=404, ui_message=gettext('no_such_adventure'))
 
     prev_level = level-1 if [x for x in load_adventures_per_level(
-        level-1, g.keyword_lang) if x.get('short_name') == name] else False
+        level-1, language) if x.get('short_name') == name] else False
     next_level = level+1 if [x for x in load_adventures_per_level(
-        level+1, g.keyword_lang) if x.get('short_name') == name] else False
+        level+1, language) if x.get('short_name') == name] else False
 
     return hedyweb.render_specific_adventure(level_number=level, adventure=adventure, version=version(),
                                              prev_level=prev_level, next_level=next_level)
