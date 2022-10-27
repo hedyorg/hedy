@@ -144,7 +144,7 @@ class Commands:
                         hedy_content_logger.error(
                             f"There is an issue due to an empty placeholder in line: {v}")
                     except KeyError:
-                        hedy_content_logger(
+                        hedy_content_logger.error(
                             f"There is an issue due to a non-existing key in line: {v}")
             keyword_data[level] = commands
         return keyword_data
