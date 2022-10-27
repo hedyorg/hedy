@@ -1,11 +1,13 @@
 import collections
 import glob
 import json
-import logging
 import os
 import threading
 import time
 import traceback
+
+from logger import log_queue_logger as logger
+
 
 class LogQueue:
     """A queue of records that still need to be written out.
@@ -41,7 +43,7 @@ class LogQueue:
         bucket = div_clip(time.time(), self.batch_window_s)
 
         if self.do_print:
-            logging.debug(repr(data))
+            logger.debug(repr(data))
 
         with self.mutex:
             self.records_queue[bucket].append(data)
@@ -104,7 +106,8 @@ class LogQueue:
                 pass
 
     def transmit_now(self, max_time=None):
-        """(Try to) transmit all pending records with recording timestamps smaller than the given time now."""
+        """(Try to) transmit all pending records with recording timestamps
+        smaller than the given time now."""
         with self.mutex:
             keys = list(self.records_queue.keys())
         keys.sort()
@@ -122,7 +125,7 @@ class LogQueue:
             success = self._save_records(bucket_ts, bucket_records)
 
             # Only remove them from the queue if sending didn't fail
-            if success != False:
+            if success is not False:
                 with self.mutex:
                     del self.records_queue[bucket_ts]
 
@@ -131,10 +134,11 @@ class LogQueue:
             return self.transmitter(timestamp, records)
         else:
             count = len(records)
-            logging.warn(f'No querylog transmitter configured, {count} records dropped')
+            logger.warn(f'No querylog transmitter configured, {count} records dropped')
 
     def _write_thread(self):
-        """Background thread which will wake up every batch_window_s seconds to emit records from the queue."""
+        """Background thread which will wake up every batch_window_s seconds
+        to emit records from the queue."""
         next_wake = div_clip(time.time(), self.batch_window_s) + self.batch_window_s
         while True:
             try:
@@ -144,7 +148,7 @@ class LogQueue:
                 # Once woken, see what buckets we have left to push (all buckets
                 # with numbers lower than next_wake)
                 self.transmit_now(next_wake)
-            except Exception as e:
+            except Exception:
                 traceback.print_exc()
             next_wake += self.batch_window_s
 
@@ -152,4 +156,3 @@ class LogQueue:
 def div_clip(x, y):
     """Return the highest value < x that's a multiple of y."""
     return int(x // y) * y
-
