@@ -6,11 +6,14 @@ Architecture
 
 The global idea of Hedy is that we transpile Hedy code to Python code by adding syntactic elements when they are missing. In the code base, this works in steps:
 
-1. Hedy code is parsed based on the relevant grammar, creating an AST. This is done using the open source Lark parser.
-2. Validity of the code is checked with the IsValid() function
-3. If the code is valid, it is transformed into Python with the relevant function.
+1. Hedy code is sent via HTTP POST from the browser to the server
+2. The server parses the student's code based on the relevant grammar, creating an AST. This is done using the open source Lark parser.
+3. Validity of the code is checked with the IsValid() function
+4. If the code is valid, it is transformed into Python with the relevant function.
+5. The generated Python code is returned to the browser as a response from the POST
+6. The browser interprets and runs the Python code using [Skulpt](http://skulpt.org/)
 
-This logic all resides in hedy.py.
+The logic for steps 2-5 all resides in hedy.py.
 
 Transpiling
 ------------
