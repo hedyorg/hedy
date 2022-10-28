@@ -1860,6 +1860,9 @@ class ConvertToPython_12(ConvertToPython_11):
         if add_sleep:
             return sleep_after(transpiled, False)
         return transpiled
+    
+    def division(self, meta, args):
+        return self.process_calculation(args, '/')
 
 @v_args(meta=True)
 @hedy_transpiler(level=13)
