@@ -1765,8 +1765,17 @@ export function change_language(lang: string) {
     contentType: 'application/json',
     dataType: 'json'
   }).done(function(response: any) {
-      if (response.succes){
-        location.reload();
+      if (response.succes){        
+        // Check if keyword_language is set to change it to the new chosen language
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        if (urlParams.get('keyword_language') !== null) {
+          urlParams.set('keyword_language', lang);          
+          console.log(urlParams.toString());
+          window.location.search = urlParams.toString();          
+        } else {
+          location.reload();
+        }        
       }
     }).fail(function(xhr) {
       console.error(xhr);
@@ -1786,6 +1795,7 @@ export function change_keyword_language(start_lang: string, new_lang: string) {
     contentType: 'application/json',
     dataType: 'json'
   }).done(function (response: any) {
+    console.log("were here");
     if (response.success) {
       ace.edit('editor').setValue(response.code);
       $('#editor').attr('lang', new_lang);
