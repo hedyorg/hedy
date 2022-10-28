@@ -1679,7 +1679,7 @@ levels:
                 {print} '这些是你点的'
             mp_choice_options:
             -   option: "没有错。这段代码是正确的！"
-                feedback: "有地方错了！"
+                feedback: "有地方错了！。"
             -   option: "`{ask}`命令后面不能用`{if}`命令。"
                 feedback: "可以用！"
             -   option: "不需要缩进两次。只有第一个`{if}`命令需要缩进。"
@@ -1704,32 +1704,32 @@ levels:
                 feedback: "You are wrong!"
             -   option: |
                     ```
-                    {if} answer is right
-                    {print} You are...
-                    sleep
-                    {print} right!
+                    {if} 答案{is} 32
+                    {print} '你是......'
+                    {sleep}
+                    {print} '对！'
                     {else}
-                    {print} You are wrong!
+                    {print} '你错了！'
                     ```
                 feedback: "You are wrong!"
             -   option: |
                     ```
-                    {if} answer is right
-                        {print} You are...
-                        sleep
-                        {print} right!
+                    {if} 答案{is} 32
+                        {print} '你是......'
+                        {sleep}
+                        {print} '对！'
                     {else}
-                        {print} You are wrong!
+                        {print} '你错了！'
                     ```
                 feedback: "You are... right!"
             -   option: |
                     ```
-                    {if} answer is right
-                        {print} You are...
-                        sleep
-                    {print} right!
+                    {if} 答案{is} 32
+                        {print} '你是......'
+                        {sleep}
+                    {print} '对！'
                     {else}
-                        {print} You are wrong!
+                        {print} '你错了！'
                     ```
                 feedback: "You are wrong!"
             correct_answer: "C"
@@ -1738,11 +1738,11 @@ levels:
         9:
             question_text: "What line(s) in this code should start with 4 spaces?"
             code: |-
-                1 music = {ask} 'What is your favorite music genre?'
-                2 {if} music is rock
-                3 {print} '🤘'
-                4 {else}
-                5 {print} '👎'
+                1 音乐 = {ask} '你最喜欢的音乐类型是什么？'
+                2{if} 音乐{is} 摇滚
+                3{print} '🤘'
+                4{else}
+                5{print} '👎'
             mp_choice_options:
             -   option: "Line 2 and 4"
                 feedback: "The lines after the `{if}` and `{else}` command should start with 4 spaces"
@@ -1758,9 +1758,9 @@ levels:
         10:
             question_text: "Which statement is true?"
             code: |-
-                1 level = {ask} 'What level are you on?"
-                2 {if} level {is} 8
-                3 {print} Great job!
+                1 级别 ={ask} '你学到哪一级了？'
+                2 {if} 级别{is} 8
+                3 {print} '干得好！'
             mp_choice_options:
             -   option: "All lines should start with 4 spaces"
                 feedback: "That's not true"
