@@ -1770,8 +1770,7 @@ export function change_language(lang: string) {
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
         if (urlParams.get('keyword_language') !== null) {
-          urlParams.set('keyword_language', lang);          
-          console.log(urlParams.toString());
+          urlParams.set('keyword_language', 'en');
           window.location.search = urlParams.toString();          
         } else {
           location.reload();
