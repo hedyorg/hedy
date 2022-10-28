@@ -1794,7 +1794,6 @@ export function change_keyword_language(start_lang: string, new_lang: string) {
     contentType: 'application/json',
     dataType: 'json'
   }).done(function (response: any) {
-    console.log("were here");
     if (response.success) {
       ace.edit('editor').setValue(response.code);
       $('#editor').attr('lang', new_lang);
