@@ -5,6 +5,8 @@ from babel import Locale, languages
 from website.yaml_file import YamlFile
 import iso3166
 
+from logger import hedy_content_logger
+
 # Define and load all countries
 COUNTRIES = {k: v.name for k, v in iso3166.countries_by_alpha2.items()}
 # Iterate through all found country abbreviations
@@ -135,11 +137,11 @@ class Commands:
                     try:
                         command[k] = v.format(**KEYWORDS.get(language))
                     except IndexError:
-                        print("There is an issue due to an empty placeholder in the following line:")
-                        print(v)
+                        hedy_content_logger.error(
+                            f"There is an issue due to an empty placeholder in line: {v}")
                     except KeyError:
-                        print("There is an issue due to a non-existing key in the following line:")
-                        print(v)
+                        hedy_content_logger.error(
+                            f"There is an issue due to a non-existing key in line: {v}")
             keyword_data[level] = commands
         return keyword_data
 
@@ -191,11 +193,11 @@ class Adventures:
                     try:
                         parsed_adventure.get('levels').get(level)[k] = v.format(**KEYWORDS.get(language))
                     except IndexError:
-                        print("There is an issue due to an empty placeholder in the following line:")
-                        print(v)
+                        hedy_content_logger.error(
+                            f"There is an issue due to an empty placeholder in line: {v}")
                     except KeyError:
-                        print("There is an issue due to a non-existing key in the following line:")
-                        print(v)
+                        hedy_content_logger.error(
+                            f"There is an issue due to a non-existing key in line: {v}")
             keyword_data[short_name] = parsed_adventure
         return keyword_data
 
@@ -272,11 +274,11 @@ class ParsonsProblem:
                     try:
                         exercises.get(number).get('code_lines')[k] = v.format(**KEYWORDS.get(language))
                     except IndexError:
-                        print("There is an issue due to an empty placeholder in the following line:")
-                        print(v)
+                        hedy_content_logger.error(
+                            f"There is an issue due to an empty placeholder in line: {v}")
                     except KeyError:
-                        print("There is an issue due to a non-existing key in the following line:")
-                        print(v)
+                        hedy_content_logger.error(
+                            f"There is an issue due to a non-existing key in line: {v}")
             keyword_data[level] = exercises
         return keyword_data
 
