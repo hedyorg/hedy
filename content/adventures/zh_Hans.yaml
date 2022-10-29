@@ -308,7 +308,7 @@ adventures:
                 start_code: "{print} '鲨鱼宝宝'"
             12:
                 story_text: "## 唱一首歌吧!\n在这首歌中，我们可以使编程变得更加容易 '{if} 你很快乐，你意识到了，拍拍你的手'。因为我们可以把所有的动作放在一个变量中，看看吧。\n"
-                example_code: "```\n一组动作 = 拍拍手, 跺跺脚, 喊万岁!\n{for} 动作 {in} 一组动作\n    {for} i {in} {range} 1 {to} 2\n        {print} '如果你很高兴，你意识到它。'\n        {print} 动作\n    {print} '如果你很高兴，你意识到它，你真的想表现出来'\n    {print} '如果你快乐并意识到它'\n    {print} 动作\n```\n"
+                example_code: "```\n一组动作 = '拍拍手', '跺跺脚', '喊万岁!'\n{for} 动作 {in} 一组动作\n    {for} i {in} {range} 1 {to} 2\n        {print} '如果你很高兴，你意识到它。'\n        {print} 动作\n    {print} '如果你很高兴，你意识到它，你真的想表现出来'\n    {print} '如果你快乐并意识到它'\n    {print} 动作\n```\n"
                 start_code: '# 把你的代码放在这里'
             11:
                 story_text: "## 歌曲\n在这一级，你可以使用`{for} i {in} {range}`命令使用计数来创作歌曲。\n"
