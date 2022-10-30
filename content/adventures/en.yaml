@@ -425,7 +425,7 @@ adventures:
                 example_code: |
                     ```
                     {print}('Hello!')
-                    {for} i in {range}(1, 10):
+                    {for} i {in} {range}(1, 10):
                         {print}('This is line ', i)
                     ```
 
@@ -435,11 +435,11 @@ adventures:
                 example_code_2: |
                     ```
                     temperature = 25
-                    {print}('It is ', temperature, 'degrees outside')
+                    {print}('It is ', temperature, ' degrees outside')
                     ```
 
                 story_text_3: |-
-                    ##  Input
+                    ## Input
                     The final change we will need to make to get Python code is changing `{ask}` into `{input}`.
 
                 example_code_3: |
@@ -598,7 +598,7 @@ adventures:
             9:
                 story_text: |
                     ## Story
-                    In this level you can use nesting to put {if}, {repeat} or {for} commands inside other {if}, {repeat} or {for} commands. This gives you many options and really helps you to make your story interactive.
+                    In this level you can use nesting to put `{if}`, `{repeat}` or `{for}` commands inside other `{if}`, `{repeat}` or `{for}` commands. This gives you many options and really helps you to make your story interactive.
                 example_code: |
                     ```
                     {print} 'Robin is walking downtown'
@@ -810,7 +810,7 @@ adventures:
                     {print} verse ' bottles of beer on the wall'
                     ```
 
-                    You can now repeat lines 2 to 9 as many times as you want by copying the lines.
+                    You can now repeat lines 2 to 6 as many times as you want by copying the lines.
                 start_code: "{print} 'Baby shark'"
             7:
                 story_text: |

@@ -1,12 +1,26 @@
 pull_request_rules:
-  - name: Automatic merge on approval
+  - name: Automatic squash merge on approval for non-Weblate PRs
     conditions:
         - and:
           - "#approved-reviews-by>=1"
           - "check-success=build"
+          - "-author=weblate"
     actions:
       merge:
         method: squash
+        commit_message_template: |-
+          {{ title }} (#{{number}})
+          {{ body }} 
+
+  - name: Automatic regular merge for Weblate PRs
+    conditions:
+        - and:
+          - "#approved-reviews-by>=1"
+          - "check-success=build"
+          - "author=weblate"
+    actions:
+      merge:
+        method: merge
         commit_message_template: |-
           {{ title }} (#{{number}})
           {{ body }} 
