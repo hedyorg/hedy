@@ -2456,7 +2456,8 @@ def is_program_valid(program_root, input_string, level, lang):
             closest = closest_command(invalid_command, get_suggestions_for_language(lang, level))
 
             if closest == 'keyword':  # we couldn't find a suggestion
-                if invalid_command == Command.turn:
+                invalid_command_en = hedy_translation.translate_keyword_to_en(invalid_command, lang)
+                if invalid_command_en == Command.turn:
                     arg = invalid_info.arguments[0][0]
                     raise hedy.exceptions.InvalidArgumentException(command=invalid_info.command,
                                                                    allowed_types=get_allowed_types(Command.turn, level),

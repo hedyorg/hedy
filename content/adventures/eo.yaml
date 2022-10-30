@@ -73,7 +73,7 @@ adventures:
                 example_code: "## 5 simietoj saltantaj sur la lito\n```\nsimioj = 5, 4, 3, 2\n{for} simio {in} simioj\n    {print} simio ' simietoj saltantaj sur la lito'\n    {print} 'Oni defalis kaj vundis sian kapon'\n    {print} 'Panjo vokis la kuraciston, kiu diris:'\n    {print} 'SIMIOJ NE SALTU SUR LA LITO!'\n```\n\n## Ŝarkido\n```\nŝarkoj = ŝarkido, panjo, paĉjo, avinjo, avĉjo\n{for} ŝarko {in} ŝarkoj\n    {print} ŝarko 'tututututudu'\n    {print} ŝarko 'tututututudu'\n    {print} ŝarko 'tututututudu'\n    {print} ŝarko\n```\n## Maljuna McDonald\n```\nbestoj = porko, hundo, bovo\n{for} besto {in} bestoj\n    {if} besto {is} porko\n        sono = grunt\n    {if} besto {is} hundo\n        sono = boj\n    {if} besto {is} bovo\n        sono = muĝ\n    {print} 'Maljuna McDonald havis bienon'\n    {print} 'I Aj I Aj O!'\n    {print} 'kaj en la bieno estis ' besto\n    {print} 'I Aj I Aj O!'\n    {print} 'kun ' sono sono ' ĉi tie'\n    {print} 'kaj ' sono sono ' tie'\n    {print} 'jen ' sono\n    {print} 'aliloke ' sono\n    {print} 'ĉie ' sono sono\n```\n"
             6:
                 story_text: "## Kantoj\nKantoj ofte enhavas multe da ripetado. Foje la ripeto ankaŭ baziĝas sur kalkulado.\nEkzemple, en la konata kanto 'Boteloj da biero'. Vi povas programi tiun kanton per iom da matematiko.\n"
-                example_code: "```\nnombro = 99\n{print} nombro ' boteloj da biero sur la muro'\n{print} nombro ' boteloj da biero'\n{print} 'Prenu unu, ĝuu ĝin kune'\nnombro = nombro - 1\n{print} nombro ' boteloj da biero sur la muro'\n```\n\nVi nun povas ripeti liniojn 2 ĝis 9 tiom da fojoj, kiom vi volas, kopiante la liniojn.\n"
+                example_code: "```\nnombro = 99\n{print} nombro ' boteloj da biero sur la muro'\n{print} nombro ' boteloj da biero'\n{print} 'Prenu unu, ĝuu ĝin kune'\nnombro = nombro - 1\n{print} nombro ' boteloj da biero sur la muro'\n```\n\nVi nun povas ripeti liniojn 2 ĝis 6 tiom da fojoj, kiom vi volas, kopiante la liniojn.\n"
                 start_code: "{print} 'Ŝarkido'"
             7:
                 story_text: "## Kantoj\nKantoj ofte enhavas multe da ripetaĵojn. Ekzemple… Ŝarkido! Se vi kantas ĝin, vi ripete kantas la samajn vortojn:\n\nŜarkido tututudutudu <br>\nŜarkido tututudutudu <br>\nŜarkido tututudutudu <br>\nŜarkido\n\nVi povas malplilongigi la kanton per `{repeat}`! Ĉu vi povas kompletigi la kodon?\n"
@@ -501,10 +501,10 @@ adventures:
             18:
                 start_code: "nomo = 'Hedy'\n{print}('Mia nomo estas ', nomo)"
                 story_text: "## La lasta nivelo!\nNi alvenis al vera Python-kodo! Tio signifas, ke ni devas uzi rondajn krampojn kun {print} kaj {range} de nun."
-                example_code: "```\n{print}('mia nomo estas Hedy!')\n```\n"
+                example_code: "```\n{print}('Saluton!')\n{for} i {in} {range}(1, 10):\n    {print}('Jen linio n-ro ', i)\n```\n"
                 story_text_2: Se oni volas presi pli ol unu eron, oni devas apartigi ilin per komoj.
-                example_code_2: "```\ntemperaturo = 25\n{print}('Nun estas ', temperature, 'gradoj ekstere')\n```\n"
-                story_text_3: "##  Enigo\nLa fina ŝanĝo, kiun ni devos fari por havi Python-kodon, estas ŝanĝi `{ask}` al `{input}`."
+                example_code_2: "```\ntemperaturo = 25\n{print}('Nun estas ', temperature, ' gradoj ekstere')\n```\n"
+                story_text_3: "## Enigo\nLa fina ŝanĝo, kiun ni devos fari por havi Python-kodon, estas ŝanĝi `{ask}` al `{input}`."
                 example_code_3: "```\n{print}('Mia nomo estas Hedy!')\nnomo = {input}('Kio estas via nomo?')\n{print}('Do via nomo estas ', nomo)\n```\n"
     next:
         levels:
@@ -518,7 +518,7 @@ adventures:
             1:
                 story_text: "## Kio sekvos?\nGratulon! Vi atingis la finon de Nivelo 1. Espereble vi jam faris kelkajn mirindajn kodojn, sed Hedy havas multe pli por malkovri.\n\nEn la unua nivelo vi eble rimarkos, ke la komando `{echo}` povas konservi nur unu peceton da informo samtempe.\nEkzemple en la restoracio aventuro, vi povus {echo} kion la kostumanto volis manĝi, aŭ kion ili volis trinki, sed ne ambaŭ en unu frazo.\n"
                 example_code: "```\n{print} Bonvenon al Restoracio Hedy\n{ask} Kion vi volas manĝi?\n{echo} Do vi volas manĝi \n{ask} Kion vi volas trinki?\n{echo} Do vi volas trinki \n```\n"
-                story_text_2: "Se la ludanto tajpas hamburgeron kaj kolaon, oni ne povas diri \"do vi ŝatus hamburgeron kaj kolaon\", sed vi devas fari du apartajn liniojn.\nAnkaŭ la komando `{echo}` nur eĥas la vorton fine de la frazo. Do vi ne povas diri \"via hamburgero tuj venas!\".\n\nTio ŝanĝiĝas en la nivelo 2. En la nivelo 2 vi lernos labori kun variabloj, kiuj ebligas al vi konservi plurajn informojn kaj presi ilin en ajna loko, kiun vi volas.\nKrome, vi lernos kiel labori per la komando `{at} {random}`{random}`, kiun vi povas uzi por fari ludojn.\nDo ni iru al la sekva nivelo!\n"
+                story_text_2: "Se la ludanto tajpas hamburgeron kaj kolaon, oni ne povas diri \"do vi ŝatus hamburgeron kaj kolaon\", sed vi devas fari du apartajn liniojn.\nAnkaŭ la komando `{echo}` nur eĥas la vorton fine de la frazo. Do vi ne povas diri \"via hamburgero tuj venas!\".\n\nTio ŝanĝiĝas en la nivelo 2. En la nivelo 2 vi lernos labori kun variabloj, kiuj ebligas al vi konservi plurajn informojn kaj presi ilin en ajna loko, kiun vi volas.\nDo ni iru al la sekva nivelo!\n"
                 start_code: "{print} Ek!"
             2:
                 story_text: "## Kio sekvos?\nEn ĉi tiu nivelo vi lernis kio estas variablo kaj kiel vi povas uzi ĝin por fari viajn aventurojn pli interagaj.\nSed... tio ne estas la sola afero, kiun vi povas fari kun variabloj! Vi ankaŭ povas uzi variablojn por fari listojn.\nKaj vi eĉ povas lasi Hedy elekti hazardan vorton el listo, kio permesas vin fari realajn ludojn!\nRigardu rapide la sekvan nivelon!\n"
