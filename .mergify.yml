@@ -1,20 +1,39 @@
+# Using a Merge queue makes Mergify automatically keep the PR 
+# up-to-date with 'main', one PR at a time.
+queue_rules:
+  - name: default_queue
+    conditions:
+        - "check-success=build"
+
 pull_request_rules:
-  - name: Automatic merge on approval
+  - name: Automatic squash merge on approval for non-Weblate PRs
     conditions:
         - and:
           - "#approved-reviews-by>=1"
           - "check-success=build"
+          - "-author=weblate"
     actions:
-      merge:
+      comment:
+        message: Thank you for contributing! Your pull request is now going on the merge train (choo choo! Do not click update from main anymore, and be sure to [allow changes to be pushed to your fork](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/allowing-changes-to-a-pull-request-branch-created-from-a-fork)).
+      queue:
+        name: default_queue
         method: squash
         commit_message_template: |-
           {{ title }} (#{{number}})
           {{ body }} 
-        
-  - name: automatic update for PR marked as “Keep-updated“
+
+  - name: Automatic regular merge for Weblate PRs
     conditions:
-      - -conflict # skip PRs with conflicts
-      - -draft # filter-out GH draft PRs
-      - label="Keep-updated"
+        - and:
+          - "#approved-reviews-by>=1"
+          - "check-success=build"
+          - "author=weblate"
     actions:
-      update:
+      comment:
+        message: Thanks Weblate! This pull request is going to be merged automatically.
+      queue:
+        name: default_queue
+        method: merge
+        commit_message_template: |-
+          {{ title }} (#{{number}})
+          {{ body }} 
