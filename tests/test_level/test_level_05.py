@@ -655,9 +655,9 @@ class TestsLevel5(HedyTester):
             """\
             angle = ['90', '180', '270']
             direction = random.choice(angle)""",
-            HedyTester.turn_transpiled('direction'),
+            HedyTester.turn_transpiled('direction', self.level),
             "if direction == '180':",
-            (HedyTester.forward_transpiled(100), '  '))
+            (HedyTester.forward_transpiled(100, self.level), '  '))
 
         self.single_level_tester(code=code, expected=expected)
 
@@ -673,9 +673,9 @@ class TestsLevel5(HedyTester):
             angle = ['90', '180', '270']
             direction = random.choice(angle)
             if direction == '180':""",
-            (HedyTester.forward_transpiled('direction'), '  '),
+            (HedyTester.forward_transpiled('direction', self.level), '  '),
             "else:",
-            (HedyTester.turn_transpiled('direction'), '  '))
+            (HedyTester.turn_transpiled('direction', self.level), '  '))
 
         self.single_level_tester(code=code, expected=expected)
 

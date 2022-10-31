@@ -465,7 +465,7 @@ levels:
             hint: "There's something wrong in line 1"
             question_score: '10'
         3:
-            question_text: "What's wrong in line 2 of this code?"
+            question_text: "How do you fix the mistake in line 2?"
             code: |-
                 options {is} rock, paper, scissors
                 {print} rock, paper, scissors {at} {random}
@@ -556,7 +556,7 @@ levels:
         7:
             question_text: "What does the `{add}` command do?"
             code: |-
-                books {is} Harry Potter, de Hobbit, Green eggs and Ham
+                books {is} Harry Potter, The Hobbit, Green Eggs and Ham
                 your_book {is} {ask} What is your favorite book?
                 {add} your_book {to} books
                 {print} books {at} {random}
@@ -595,7 +595,7 @@ levels:
             question_text: "What's wrong with this code?"
             code: |-
                 colors {is} blue, purple, green
-                chosen_color {is} {ask} Which haircolor wouldn't your like to have?
+                chosen_color {is} {ask} Which hair color wouldn't you like to have?
                 {remove} chosen_color {from} colors
                 {print} I will dye my hair color {at} {random}
             mp_choice_options:

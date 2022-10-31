@@ -31,10 +31,10 @@
         {print} 颜色是我最喜欢的颜色！
     name: '{ask}'
 -   name: '{sleep}'
-    explanation: 让海迪（Hedy）暂停几秒钟。
+    explanation: '`{sleep}` 会让海迪暂停几秒钟。'
     demo_code: "{print} 让我考虑一秒钟......\n{sleep}\n{print} 嗯，我还需要3秒钟.....\n{sleep} 3\n{print} 找到了！我找到了！"
 -   demo_code: "角度 {is} 90\n{turn} 角度\n{forward} 100"
-    name: '`{is}`海龟绘图'
+    name: '海龟绘图与 {is}'
     explanation: 用 `{is}`给一个数字命名。 你可以自己选择这个名字。
 3:
 -   explanation: "用`{at}` and `{random}`可以从一组词汇中随机选择一个词。"
@@ -43,11 +43,11 @@
         {print} 动物 {at} {random}
     name: 选择随机
 -   name: '{add}'
-    explanation: 将一个项目添加到一个列表中。
+    explanation: 将一样东西`{add}`到`{to_list}`列表中。
     demo_code: "动物 {is} 奶牛，猫\n{add} 狗 {to_list} 动物"
 -   demo_code: "动物 {is} 猫，狗，奶牛\n{remove} 狗 {from} 动物"
     name: '{remove}'
-    explanation: 从一个列表中移除一个项目。
+    explanation: '`{remove}` 一个项目 `{from}` 一个列表。'
 4:
 -   explanation: "打印的内容要用单引号标注清楚。"
     demo_code: "{print} '你好欢迎来到海迪。'"
@@ -86,19 +86,19 @@
 -   explanation: "打印的内容要用引号标注清楚。"
     demo_code: "{print} '5乘以5等于 5 * 5'"
     name: '{print}'
--   explanation: "用{ask} 提问计算题的答案然后检查答案是否正确。"
+-   explanation: "询问计算题的答案，并检查答案是否正确。"
     demo_code: |-
         答案 = {ask} '10加10等于几?'
         {if} 答案 {is} 20 {print} '做得好!' {else} {print} '糟糕,算错啦'
     name: '{ask}'
--   name: "`{ask}` {and} `{if}` 海龟绘图"
-    explanation: "{ask} 使用者想要多少度"
+-   name: "海龟绘图的 {ask} 和 {if}"
+    explanation: "询问使用者想要多少度。"
     demo_code: |-
         角度 = {ask} '多少度？'
         度 = 360 / 角度
         {forward} 50
 7:
--   explanation: "打印的内容要用单引号标注清楚"
+-   explanation: "打印的内容要用单引号标注清楚。"
     demo_code: "{print} '你好欢迎来到海迪。'"
     name: '{print}'
 -   explanation: "用`{ask}`提出问题。"
@@ -106,145 +106,145 @@
         颜色 = {ask} '你最喜欢的颜色是什么?'
         {print} 颜色 '是我最喜欢的颜色！'
     name: '{ask}'
--   explanation: "用`{if}`条件语句进行选择"
+-   explanation: "用`{if}`条件语句进行选择。"
     demo_code: |-
         颜色 = {ask} '你最喜欢的颜色是什么?'
         {if} 颜色 {is} 绿色 {print} '漂亮!' {else} {print} '呵呵'
     name: '{if}'
--   explanation: "用`{repeat}`重复一行编码."
+-   explanation: "用`{repeat}`重复一行代码。"
     demo_code: |-
         {repeat} 3 {times} {forward} 10
-    name: '{repeat} - 海龟绘图'
+    name: '海龟绘图与 {repeat}'
 8:
 -   explanation: "打印一些内容。 记得在打印内容的前后两边都用单引号标注清楚。"
     demo_code: "{print} '5乘以5等于 5 * 5'"
     name: '{print}'
 -   explanation: "使用ask提问加法运算的答案然后检查答案是否正确。我们现在可以打印两行代码了。"
     demo_code: |-
-        答案 = {ask} '5加5等于几?'
+        答案 = {ask} '5加5等于几？'
         {if} 答案 {is} 10
-            {print} '做得好!'
-            {print} '的确, 答案就是 ' 答案
+            {print} '做得好！'
+            {print} '的确，答案就是' 答案
         {else}
-            {print} '糟糕!'
-            {print} '答案就是 10'
+            {print} '糟糕！'
+            {print} '答案是10'
     name: '{ask}'
--   name: '`{repeat}` 和海龟绘图'
-    explanation: '{repeat} 多行'
+-   name: '{repeat} 和海龟绘图'
+    explanation: '重复多行。'
     demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
 9:
--   name: "'{if}' 条件语句和多行"
-    explanation: "使用'{ask}'提问加法运算的答案然后检查答案是否正确。我们现在可以打印两行代码了。"
+-   name: "{if} 条件语句和多行"
+    explanation: "使用`{ask}`提问加法运算的答案然后检查答案是否正确。我们现在可以打印两行代码了。"
     demo_code: |-
-        answer = ask 'What is 20 plus 20?'
-        if answer is 20
-            print 'Well done!!'
-            print 'The answer is indeed' answer
-        else
-            print 'Wrong'
-            print 'The answer is 20'
--   name: "`repeat` and turtle"
-    explanation: "Repeat multiple lines"
+        回答 = {ask} '10加10等于几？'
+        {if} 回答 {is} 20
+            {print} '做得好！'
+            {print} '答案确实是' 回答
+        {else}
+            {print} '错'
+            {print} '答案是20'
+-   name: "海龟绘图与 {repeat}"
+    explanation: "重复多行。"
     demo_code: |-
-        repeat 4 times
-            turn 90
-            forward 50
+        {repeat} 4 {times}
+            {turn} 90
+            {forward} 50
 10:
 -   name: "{print}"
     explanation: "打印一些内容。 记得在打印内容的前后两边都用单引号标注清楚。"
     demo_code: "{print} '5乘以5等于 5 * 5'"
 -   name: "{for} 循环语句和一个列表"
-    explanation: "打印一个列表中的所有内容 "
+    explanation: "打印一个列表中的所有内容。"
     demo_code: |-
         动物 {is} 狗，猫，泡泡鱼
         {for} 动 {in} 动物
           {print} '我爱 ' 动
 11:
--   explanation: "我们用 `{for}` 和一个 {range}"
+-   explanation: "我们用 `{for}` 和一个 `{range}`。"
     demo_code: |-
         {for} 计数器变量循环范围 {in} {range} 1 {to} 5
             {print} 计数器变量循环范围
     name: '{for} 循环'
--   demo_code: "答案 = {ask} '5加5等于几?'\n{if} 答案 {is} 10\n    {print} '做得好!'\n    {print} '的确, 答案就是 ' 答案\n{else}\n    {print} '糟糕!'\n    {print} '答案就是 10'"
+-   demo_code: "答案 = {ask} '5加5等于几？'\n{if} 答案 {is} 10\n    {print} '做得好！'\n    {print} '的确，答案就是' 答案\n{else}\n    {print} '糟糕！'\n    {print} '答案是10'"
     name: '{ask}'
     explanation: 使用ask提问加法运算的答案然后检查答案是否正确。我们现在可以打印两行代码了。
 12:
--   name: "float directly"
-    explanation: "Decimal numbers"
+-   name: "直接浮点数"
+    explanation: "十进制数字。"
     demo_code: |
-        {print} 'Calculate away!'
-        {print} 'Two and a half plus two and a half is...'
+        {print} '计算出来！'
+        {print} '两个半加上两个半是……'
         {print} 2.5 + 2.5
--   name: "assign text"
-    explanation: "Text with quotation marks after ="
+-   name: "文本赋值"
+    explanation: "`=`后带引号的文本"
     demo_code: |
-        name = 'Hedy the Robot'
-        {print} 'Hello ' name
--   name: "quotes after {if} comparison"
-    explanation: "Text with quotation marks after {if}"
+        名字 = '海迪机器人'
+        {print} '你好，' 名字
+-   name: "{if} 比较后的引号"
+    explanation: "`{if}`之后的带引号文本。"
     demo_code: |
-        name = {ask} 'Who are you?'
-        {if} name = 'Hedy'
-            {print} 'Hi there!'
--   name: "quotes in list"
-    explanation: "A list with quotation marks"
+        名字 = {ask} '你是谁？'
+        {if} 名字 = 'Hedy'
+            {print} '嗨，你好！'
+-   name: "列表中的引号"
+    explanation: "带引号的列表。"
     demo_code: |
-        superheroes = 'Iron Man', 'Batman', 'Superman'
-        {print} superheroes {at} {random}
+        超级英雄们 = '钢铁侠', '蝙蝠侠', '超人'
+        {print} 超级英雄们 {at} {random}
 13:
--   name: "And(且)"
-    explanation: "左边和右边的两个语句都必须是正确的"
+-   name: "{and}"
+    explanation: "左边和右边的两个语句都必须是正确的。"
     demo_code: |-
-        answer1 = ask '3+2等于几?'
-        answer2 = ask '2+2等于几?'
-        if answer1 is 5 and answer2 is 4
-            print '这两个答案都正确!'
-        else
-            print '至少有一个答案是错的!'
--   name: "Or(或)"
+        答案1 = {ask} '3+2等于几？'
+        答案2 = {ask} '2+2等于几？'
+        {if} 答案1 {is} 5 {and} 答案2 {is} 4
+            {print} '这两个答案都正确！'
+        {else}
+            {print} '至少有一个答案是错的！'
+-   name: "{or}"
     explanation: "左右两边两个语句中, 至少有一个是正确的，如果两个都是正确的，也是可以的."
     demo_code: |-
-        answer1 = ask '3+2等于几?'
-        answer2 = ask '2+2等于几?'
-        if answer1 is 5 or answer2 is 4
-            print '至少有一个答案是正确的!'
-        else
-            print '这两个答案都是错的!'
+        答案1 = {ask} '3+2等于几？'
+        答案2 = {ask} '2+2等于几？'
+        {if} 答案1 {is} 5 {or} 答案2 {is} 4
+            {print} '至少有一个答案是正确的！'
+        {else}
+            {print} '这两个答案都是错的！'
 14:
 -   name: "Smaller 小于"
     explanation: "我们用小于号 `<` 用来判断第一个数字是否小于第二个数字."
     demo_code: |-
-        age = ask '你今年几岁了?'
-        if age < 13
-            print '你比我年纪小!'
+        age = {ask} '你今年几岁了？'
+        {if} age < 13
+            {print} '你比我年纪小！'
 -   name: "Bigger 大于"
     explanation: "我们用大于号`>` 用来判断第一个数字是否大于第二个数字."
     demo_code: |-
-        age = ask '你今年几岁了?'
-        if age > 13
-            print '你比我年纪大!'
--   name: Equal
+        age = {ask} '你今年几岁了？'
+        {if} age > 13
+            {print} '你比我年纪大！'
+-   name: 等于
     explanation: We use the `==` to check if two things are the same.
-    demo_code: "answer = {ask} 'What is 5 * 5?'\n{if} answer == 25\n    {print} 'That {is} correct!'"
--   name: Not equal
-    explanation: 'We use the `!=` to check if two things are not the same. '
-    demo_code: "answer = {ask} 'What is 5 * 5?'\n{if} answer != 25\n    {print} 'That is not correct!'"
--   demo_code: "age = {ask} 'How old are you?'\n{if} age <= 12\n    {print} 'You are younger than me!'"
-    explanation: We use the `<=` to check if the first number is smaller than or equal to the second number.
-    name: Smaller {or} equal
--   name: Bigger or equal
-    explanation: We use the `>=` to check if the first number is bigger than or equal to the second number.
-    demo_code: "age = {ask} 'How old are you?'\n{if} age >= 14\n    {print} 'You are older than me!'"
+    demo_code: "回答 = {ask} '5 * 5 等于几？'\n{if} 回答 == 25\n    {print} '回答正确！'"
+-   name: 不等于
+    explanation: '我们用`!=`来检查两样东西是否不同。'
+    demo_code: "答案 = {ask} '什么是 5 * 5？'\n{if} 答案 != 25\n    {print} '这不对！'"
+-   demo_code: "年龄 = {ask} '你几岁了？'\n{if} 年龄 <= 12\n    {print}'你比我小！'"
+    explanation: 我们使用 `<=` 来检查第一个数字是否小于或等于第二个数字。
+    name: 小于等于
+-   name: 大于或等于
+    explanation: 我们使用 `>=` 来检查第一个数字是否大于或等于第二个数字。
+    demo_code: "年龄 = {ask} '你几岁了？'\n{if} 年龄 >= 14\n    {print}'你比我大！'"
 15:
 -   name: "{while}循环语句"
-    explanation: "我们可以使用 `{while}` 循环和不等于"
+    explanation: "我们可以在 `{while}` 循环中使用不等于。"
     demo_code: |-
         答案 = 0
         {while} 答案 != 25
             答案 = {ask} '5乘以5等于几?'
         {print} '已经给出了正确答案'
 -   name: "小于 {while}"
-    explanation: "我们也可以将`{while}` 循环语句和小于号 `<` 和大于号 `>`一起使用. "
+    explanation: "我们也可以将`{while}` 循环语句和小于号 `<` 及大于号 `>`一起使用。"
     demo_code: |-
         计数 = 1
         {while} 计数 < 3
@@ -252,7 +252,7 @@
             计数 = 计数 + 1
         {print} '我们完成啦'
 16:
--   explanation: "把列表的内容用中括号括起来"
+-   explanation: "把列表的内容用中括号括起来。"
     demo_code: |-
         水果 = ['苹果', '香蕉', '樱桃']
         {print} 水果
@@ -262,23 +262,23 @@
     demo_code: |-
         fruit = ['香蕉', '苹果', '樱桃']
         firstfruit = fruit[1]
-        print firstfruit
+        {print} firstfruit
 -   name: "从一个列表中随机选择元素"
     explanation: "我们用[random] 从一个列表中随机选择元素，因此fruit[random]的意思是从列表fruit中随机选择一个水果!"
     demo_code: |-
-        fruit = ['香蕉', '苹果', '樱桃']
-        random_fruit = fruit[random]
-        print random_fruit
+        水果 = ['香蕉', '苹果', '樱桃']
+        随机水果 = 水果[{random}]
+        {print} 随机水果
 17:
--   explanation: "`{elif}`."
+-   explanation: "`{elif}`"
     demo_code: |-
         a = 2
         {if} a == 1:
-            {print} 'a 等于 1'
+            {print}'a 是 1'
         {elif} a == 2:
-            {print} 'a 等于 2'
+            {print}'a 是 2'
         {else}:
-            {print} 'a 既不等于1也不等于2'
+            {print}'a 不是 1 或 2'
     name: '{elif}'
 -   explanation: "当我们使用一个 `{for}`循环语句的时候, 我们需要 在 `{for}` 后面加上一个冒号 `:` !"
     demo_code: |-
@@ -286,7 +286,7 @@
             {print} i
         {print} '无论是否准备好，我都会来的!'
     name: '{print}'
--   explanation: "我们需要对所有的'{if}'条件语句做同样的处理"
+-   explanation: "我们需要对所有的`{if}`条件语句做同样的处理。"
     demo_code: |-
         颜色 = {ask} '你最喜欢的颜色是什么？'
         {if} 颜色 == '绿色':
@@ -296,17 +296,17 @@
     name: '{if}'
 18:
 -   name: "{print}"
-    explanation: "With `{print}` you need to use parentheses"
+    explanation: "你需要在`{print}`后面加上括号。"
     demo_code: |-
         {print}('hi!')
--   name: "{print} with var"
-    explanation: "With `{print}` you need to use parentheses and commas if you {print} more items"
+-   name: "{range}"
+    explanation: "你需要在`{range}`后面加上括号。"
     demo_code: |-
-        name = 'Hedy'
-        {print}('my name is ', name)
--   name: '{print} with var'
-    explanation: With `{print}` you need to use parentheses and commas if you {print} more items
-    demo_code: "name = 'Hedy'\n{print}('my name is ', name)"
--   name: ask something with {input}
-    explanation: Use `{input}` instead of `{ask}` to ask something
-    demo_code: "name = {input}('What is your name?')\n{print}('So your name is ', name)"
+        {for} i {in} {range} (1,10):
+            {print}('你好，次数', i)
+-   name: '{print} 与变量'
+    explanation: 使用 `{print}`，如果打印更多项目，则需要使用小括号和逗号。
+    demo_code: "名字 ='Hedy'\n{print}('我的名字是'，名字)"
+-   name: 用 {input} 提问
+    explanation: 用`{input}`代替`{ask}`来提问。
+    demo_code: "名字 = {input}('你叫什么名字？')\n{print}('所以你的名字是'，名字)"

@@ -16,28 +16,29 @@ sections:
             Les élèves (et les professeurs !) n'ont pas besoin d'expérience de programmation avant de commencer avec Hedy.
     -   title: "Comment fonctionne Hedy ?"
         text: |
-            Vous trouverez ici une [vidéo d'introduction] (https://www.youtube.com/watch?v=CvButplmN64) sur Hedy, dans laquelle Felienne explique les premières bases.
+            Hedy est séparé en plusieurs niveaux, chacun permettant d'apprendre de nouvelles commandes. Chaque niveau comprends une variété d'aventures pour pratiquer ces nouvelles commandes.
+            En tant que professeur, vous décidez des aventures disponibles à vos élèves. Feront-ils un restaurant, une calculatrice ou une maison hantée, ce niveau-ci ? À chaque niveau, les aventures sont classé par ordre de difficulté croissante, de la plus simple à la plus difficile.
+            Vos élèves ont relèveront ainsi continuellement de nouveaux défis. Les aventures peuvent être effectuées par les élèves par eux-même, ou vous pouvez les effectuer en groupe devant la classe. 
+
+            Les aventures incluent du code exemple, pour que les professeurs moins technologiquement habiles puissent aussi tiliser Hedy !
+            Bien sûr, Hedy est aussi pour les professeurs créatifs qui adorent créer leur propres aventures et plan d'études !
+
+            Après avoir programmé toutes les aventures d'un certain niveau, vos élèves peuvent tester leurs connaissance dans un quiz.
+            Vous pouvez suivre le progrès et le travail de vos étudiant depuis la page Classe.
     -   title: "L'enseignement avec Hedy"
         text: |
-            Hedy est divisé en niveaux, et dans chacun des niveaux, des nouvelles commandes sont rajoutées. Chaque niveau contient une variété d'exercices pour pratiquer les commandes nouvellement apprises.
-            Les exercices peuvent être faits par les élèves individuellement, ou vous pouvez les utiliser dans des cours classiques. Les plans de cours pour chaque niveau sont inclus dans ce manuel de l'enseignant.
-            Les plans de leçon et les exercices sont expliqués étape par étape, pour s'assurer que les enseignants moins informés numériquement puissent être aussi en mesure d'utiliser Hedy !
-            Bien sûr, Hedy s'adresse aussi aux enseignants créatifs qui aiment faire leurs propres plans de cours et exercices !
+            Hedy est basé sur le web, cela signifie qu'il peut fonctionner sur n'importe quel objet avec un navigateur internet (Firefox, Google Chrome, Edge, etc) donc les portables, les chromebooks, les tablettes et même les smartphones fonctionnent avec Hedy.
+            Il n'y a pas besoin de télécharger quoi que ce soit pour faire marcher Hedy, il faut juste aller sur le site web et c'est parti !
     -   title: "Appareils"
         text: |
-            Hedy est basé sur une application web, ce qui signifie qu'il fonctionne sur n'importe quel appareil avec un navigateur (Google Chrome, Firefox, Edge etc), donc les ordinateurs portables, les chromebooks, les tablettes et même les smartphones sont adaptés pour utiliser Hedy.
-            Il n'y a pas besoin de télécharger quoi que ce soit avant de travailler avec Hedy, il suffit d'aller sur le site web et vous êtes prêt !
+            Tous les enseignants Hedy, programmeurs et autres fans sont les bienvenus sur notre [server Discord](https ://discord.gg/8yY7dEme9r). C'est l'endroit idéal pour chatter à propos d'Hedy : nos avons des channels où vous pouvez montrer vos projets cools et vos lessons, des channels pour remonter les bugs et des channels pour chatter avec d'autres enseignants et l'équipe Hedy.
     key: intro
 -   title: "Préparatifs"
     subsections:
     -   title: "Réglage de la langue"
         text: |
-            Quand les élèves créent le profil ils sont censés choisir une 'langue préférée'. Hedy sera toujours chargé dans cette langue sélectionnée.
-            Le changement de cette langue peut toujours être fait plus tard par la navigation à 'Mon profil' et 'Mon profil' encore.
-            À partir de décembre 2021, le choix d'une langue préférée est obligatoire pour chaque compte d'Hedy.
-            Quand votre compte ou les comptes de vos élèves ont été créés avant cette date, vous recevrez un message qu'une langue préférée est manquante.
-            Ne vous inquiétez pas ! Naviguez à 'Mon profil' et définissez une langue dans les paramètres de votre profil.
-            Jusqu'à ce que vous définissez une langue, Hedy sera montré dans la langue de votre navigateur et, quand cette langue n'est pas soutenue, en anglais.
+            Comme enseignant, tu peux créer une classe pour tes élèves. Dans cette classe, tu peux voir les comptes des élèves et leurs programmes et tu peux suivre leurs progrès. 
+            Tu peux aussi personaliser ta classe et choisir quelles aventures sont disponibles pour eux. De cette manière, tes étudiants ne seront pas submergé par la quantité d'aventures et de niveaux et ils pourront se concentrer sur les aventures que tu veux qu'ils pratiquent.
     -   title: "Sauvegarde des programmes"
         text: |
             Comme vous êtes maintenant connecté, vous verrez la bannière bleue avec Mon profil et Mes programmes.
@@ -117,8 +118,8 @@ sections:
                 solution_text: |
                     Enlevez les majuscules.
                 solution_code: |
-                    {ask} Why does my code work now?
-                    {print} Because I removed the capitals!
+                    {ask} Pourquoi mon code marche-t-il ?
+                    {print} Parce que j'ai enlevé les majuscules !
         -   title: "Students use echo without ask"
             example:
                 error_text: |
@@ -250,7 +251,7 @@ sections:
 
                     groceries is apples, milk, chocolate
                     print groceries at random
-        -   title: "Students use the name of a variable or list as regular text."
+        -   title: "Le élèves utilises le nom de la variable ou d'une liste comme du texte normal"
             example:
                 error_text: |
                     This problem probably occured in level 2 as well. Now it can happen with lists too.
@@ -284,7 +285,7 @@ sections:
                 solution_code: |
                     birds is sparrow, seagull, robin
                     print birds at random
-        -   title: "Students forget to use the print command when also using the at random command."
+        -   title: "Les élèves oublient d'utiliser la commande print alors qu'ils utilisent la commande at random"
             example:
                 error_text: |
                     Or they will sometimes put at random at the beginning of the line.
@@ -308,7 +309,7 @@ sections:
                 solution_code: |
                     pizzas is funghi, tonno, quattro stagioni
                     print pizzas at random
-        -   title: "Students try to use at random without a list."
+        -   title: "Les élèves essaient d'utiliser at random sans une liste"
             example:
                 error_text: |
                     For example
@@ -336,7 +337,7 @@ sections:
                     your_name is ask Who are you?
                     add your_name to names
                     print names at random
-        -   title: "Students forget to use to/from in add/remove."
+        -   title: "Les élèves oublient d'utiliser to/from dans add/remove"
             example:
                 error_text: |
                     Without to/from the add/remove command won't work.
@@ -419,7 +420,7 @@ sections:
                     horse is ask 'What is your horse called'
                     if horse is Bonfire print 'cool!'
                     else print 'less cool!'
-        -   title: "Students still forget the quotes on both sides."
+        -   title: "Les élèves oublient encore les guillemets des deux côtés"
             example:
                 error_text: |
                     If commandos can get very long and students tend to forget to use quotes.
@@ -431,7 +432,7 @@ sections:
                 solution_code: |
                     if name is Hedy print 'fun'
                     else print 'meh!'
-        -   title: "Students use quotes around variable names."
+        -   title: "Les élèves utilisent des guillemets autour des noms de variables"
             example:
                 error_text: |
                     In this level there are no quotes around variable names.
@@ -443,7 +444,7 @@ sections:
                 solution_code: |
                     if name is Hedy print 'fun'
                     else print 'meh!
-        -   title: "Students use long variable names containing two words."
+        -   title: "Les élèves utilisent des noms de variable longs contenant 2 mots"
             example:
                 error_text: |
                     A variable should be named with one word. You could use an underscore to connect two words. That counts as one.
@@ -715,9 +716,8 @@ sections:
 learn-more-sections:
 -   title: "Appréciez vous Hedy ?"
     text: |
-        Nous aimerions en apprendre plus sur votre expérience!
-
-        [Cliquez ici pour nous envoyer un message](mailto:hello@hedy.org "Hedy")
+        Nous aimerions en apprendre plus sur votre expérience !
+        [Cliquez ici pour nous envoyer un message](mailto :hello@hedy.org "About Hedy")
 -   title: "Vous avez trouvé une erreur ?"
     text: |
         [Remontez-la sur GitHub](https://github.com/Felienne/hedy/issues/new/choose)
@@ -732,23 +732,20 @@ learn-more-sections:
 start-sections:
 -   title: "Qu’est-ce qu’un langage de programmation progressif ?"
     text: |
-        Apprendre à programmer peut être difficile. Non pas que programmer est difficile en soit ! Mais il y a
-        beaucoup de règles à mémoriser, comme quand on apprend le français. De la même manière que quand on apprend à
-        lire ou à écrire, tu auras besoin de beaucoup d’entraînement pour apprendre à programmer.
+        Apprendre à programmer peut être difficile. Non pas que programmer *est* difficile en soit ! Mais il y a beaucoup de règles à mémoriser, comme quand on apprend le français. 
+        De la même manière que quand on apprend à lire ou à écrire, tu auras besoin de beaucoup d’entraînement pour apprendre à programmer.
 
-        Aujourd'hui, tu peux lire ce texte facilement. Mais te souviens-tu de quand tu as appris à lire ? Au début ça
-        te prenait un peu de temps de lire syllabe par syllabe ! C’est vrai pour la programmation aussi : ça peut être
-        difficile au début, mais ça devient de plus en plus facile !
+        Aujourd'hui, tu peux lire ce texte facilement. Mais te souviens-tu de quand tu as appris à lire ? Au début ça te prenait un peu de temps de lire syllabe par syllabe ! 
+        C’est vrai pour la programmation aussi : ça peut être difficile au début, mais ça devient de plus en plus facile !
 
-        Le bon côté de Hedy, c’est qu’il est *progressif*. Ça veut dire que tu ne dois pas apprendre toutes les règles
-        en même temps. Les premiers niveaux n’ont que quelques règles, ce qui te permet de t’y habituer tranquillement.
-        À chaque nouveau niveau, nous introduisons de nouvelles règles, nous ajoutons de nouvelles commandes à celle
-        que tu as déjà apprises. Ces commandes sont des instructions pour l’ordinateur.
+        Le bon côté de Hedy, c’est qu’il est *progressif*. Ça veut dire que tu ne dois pas apprendre toutes les règles en même temps. 
+        Les premiers niveaux n’ont que quelques règles, ce qui te permet de t’y habituer tranquillement.
+        À chaque nouveau niveau, nous introduisons de nouvelles règles, nous ajoutons de nouvelles commandes à celle que tu as déjà apprises. Ces commandes sont des instructions pour l’ordinateur.
 -   title: "Pourquoi Hedy est progressif ?"
     text: |
         Felienne, la créatrice de Hedy, explique dans cette vidéo (en anglais) pourquoi Hedy est progressif.
 
-        <iframe width="560" height="315" class="mx-auto mt-4" src="https://www.youtube.com/embed/EdqT313rM40" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe width="560" height="315" class="mx-auto mt-4" src="https ://www.youtube.com/embed/EdqT313rM40" frameborder="0" allow="accelerometer ; autoplay ; encrypted-media ; gyroscope ; picture-in-picture" allowfullscreen></iframe>
 -   title: "À qui est destiné Hedy ?"
     text: |
         Hedy est destiné à tous les enfants qui veulent apprendre à programmer ! Il suffit de savoir lire le français.
@@ -757,13 +754,12 @@ start-sections:
         Non, ce n'est pas nécessaire. Cependant, si tu as déjà programmé avec Scratch ou Python, certaines commandes te seront familières.
 -   title: "Hedy est-il gratuit ?"
     text: |
-        Oui ! L’Université de Leiden aux Pays-Bas nous permet de le partager gratuitement. Hedy est aussi 'Open
+        Oui ! L’Université de Leiden aux Pays-Bas nous permet de le partager gratuitement. Hedy est aussi 'Open
         source', ce qui signifie que n’importe qui sachant programmer peut nous aider à améliorer Hedy.
-        Si vous aimez Hedy, nous aimerions un [don](https://www.steunleiden.nl/project/hedy?locale=en)!
+        Si vous aimez Hedy, nous aimerions un [don](https ://www.steunleiden.nl/project/hedy ?locale=en) !
 -   title: "Que dois-je installer ?"
     text: |-
-        Rien. Hedy fonctionne dans le navigateur avec lequel tu lis cette page. Probablement Chrome, Edge, ou Firefox.
-        Hedy fonctionne aussi sur ton smartphone ou ta tablette.
+        Rien. Hedy fonctionne dans le navigateur avec lequel tu lis cette page. Probablement Chrome, Edge, ou Firefox. Hedy fonctionne aussi sur ton smartphone ou ta tablette.
 join-sections:
 -   text: "# There are three ways in which you can support Hedy!\n"
 -   title: Improving the language

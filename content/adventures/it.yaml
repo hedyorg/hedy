@@ -15,7 +15,7 @@ adventures:
                     Prova tu stesso il codice con il pulsante verde 'Esegui il codice' sotto il campo di programmazione a sinistra.
 
                     Non sai cosa programmare? Nelle schede successive trovi alcune idee su cosa costruire.
-                start_code: "print ciao mondo!"
+                start_code: "{print} ciao mondo!"
                 example_code: "```\n{print} Hello!\n{print} Welcome to Hedy!\n```\n"
                 example_code_2: "```\n{ask} What is your name?\n{echo} hello\n```\n"
                 story_text_2: "You can also ask for input and repeat it back with an `{echo}` command.\nTry the code to your left again.\n\nDon't know what to create? In the next tabs you will find ideas for programs to build.\n"
@@ -30,7 +30,7 @@ adventures:
 
                     `print` funziona ancora come nel livello 1 e non è più necessaria `echo`.
 
-                start_code: "print ciao mondo!"
+                start_code: "{print} ciao mondo!"
                 example_code: "```\nname {is} Hedy\nage {is} 15\n{print} name is age years old\n```\n"
                 story_text_2: "`{print}` still works the same, but the `{ask}` command has changed. You need to use a variable in the `{ask}` command as well. It looks like this:\n"
                 example_code_2: "```\nanswer {is} {ask} What is your name?\n{print} Hello answer\n```\n"
@@ -41,15 +41,15 @@ adventures:
                     Nel livello 3 puoi anche fare una lista. Puoi quindi scegliere qualsiasi cosa dall'elenco. Lo fai con `at random` (dici: et ren-dom).
 
                     Troverai tutti i codici di livello 3 nella barra di sinistra. Ci sono anche schede con compiti.
-                start_code: "print ciao mondo!"
+                start_code: "{print} ciao mondo!"
                 story_text_2: You can also add items to the list with `{add}` and remove items with `{remove}`.
-                example_code: |-
+                example_code: |
                     ```
-                    animali is cane, gatto, canguro
-                    print animali at random
+                    animali {is} cane, gatto, canguro
+                    {print} animali {at} {random}
                 example_code_2: "```\nanimals {is} dog, cat, kangaroo\n{add} penguin {to_list} animals\n{remove} cat {from} animals\n{print} animals {at} {random}\n```\n"
             4:
-                start_code: "print 'Ciao mondo'"
+                start_code: "{print} 'Ciao mondo'"
                 story_text: |
                     `print` e `ask` cambiano al livello 4.
 
@@ -66,8 +66,8 @@ adventures:
                 story_text_2: "## Adventures are getting more and more difficult\nThe adventures are now getting more and more difficult in the successive tabs.\nSo it is best to start on the left with the story, and work to the right, in order to be challenged more and more.\n"
             5:
                 start_code: |-
-                    nome is ask 'Come ti chiami?'
-                    if nome is Hedy print 'che bello!' else print 'mah'
+                    nome  {is} {ask} 'Come ti chiami?'
+                    {if} nome {is} Hedy {print} 'che bello!' {else} {print} 'mah'
                 story_text: |
                     `ask` e` print` funzionano ancora come nel livello 5.
 
@@ -80,12 +80,12 @@ adventures:
                      Anche a livello 4, gli incarichi nelle schede diventano sempre più difficili. Quindi fallo da sinistra a destra.
                 example_code_3: "```\npretty_colors {is} green, yellow\ncolor {is} {ask} 'What is your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!'\n{else} {print} 'meh'\n```\n"
                 story_text_2: "Sometimes code with an `{if}` gets really long and does not fit on the line well. <br> You may also divide the code over two lines, starting the second line at the `{else}` like this:\n"
-                example_code: |-
+                example_code: |
                     ```
-                    nome is ask 'come ti chiami?'
-                    if nome is Hedy print 'carino' else print 'meno divertente!'
+                    nome {is} {ask} 'come ti chiami?'
+                    {if} nome {is} Hedy {print} 'carino' {else} {print} 'meno divertente!'
                     ```
-                story_text_3: "## Lists\nWhen we want to check if something is in a list, we can now use the `{in}` command.\nThis code prints pretty! if you choose green or yellow, and meh otherwise.\n"
+                story_text_3: "## Liste\nQuando vogliamo controllare se qualcosa è in una lista, ora possiamo usare il comando `{in}` .\nQuesto codice stampa carino! se scegli il verde o il giallo, e mah altrimenti.\n"
                 example_code_2: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice'\n{else} {print} 'boo!'\n```\n"
             6:
                 start_code: "print '5 per 5 è ' 5 * 5"
@@ -118,7 +118,7 @@ adventures:
                     ```
             8:
                 start_code: |-
-                    {repeat} 5 times
+                    {repeat} 5 {times}
                         {print} 'Ciao a tutti'
                         {print} 'Questo sarà scritto 5 volte'
                 story_text: |
@@ -383,9 +383,9 @@ adventures:
                     ```
 
     story:
-        name: "Story"
-        description: "Story"
-        default_save_name: "Story"
+        name: "Storia"
+        description: "Storia"
+        default_save_name: "Storia"
         levels:
             1:
                 story_text: |
@@ -469,7 +469,7 @@ adventures:
                     {print} 'He hears the sound of an' animals {at} {random}
                     {print} name 'is afraid this is a haunted forest'
                     ```
-                start_code: "{print} 'Your story will be printed here!'"
+                start_code: "{print} 'La tua storia verrà stampata qui!'"
             5:
                 story_text: |
                     ## Story
@@ -527,7 +527,7 @@ adventures:
                         {print} 'But Richard is too slow...'
                         {print} 'The T-rex closes in and eats him in one big bite!🦖'
                     ```
-                start_code: "# place your code here"
+                start_code: "# scrivi il tuo codice qui"
             9:
                 story_text: |
                     ## Story
@@ -578,7 +578,7 @@ adventures:
                                     {print} 'You have already found the sword. There is nothing left here.'
                                     {print} 'She walks back'
                     ```
-                start_code: "# place your code here"
+                start_code: "# scrivi il tuo codice qui"
             10:
                 story_text: |
                     ## Story
@@ -597,7 +597,7 @@ adventures:
                         {print} 'What do you see?'
                     {print} 'I see all the animals looking at me!'
                     ```
-                start_code: "# place your code here"
+                start_code: "# scrivi il tuo codice qui"
             12:
                 story_text: |-
                     ## Story
@@ -607,7 +607,7 @@ adventures:
                     name = 'The Queen of England'
                     {print} name ' was eating a piece of cake, when suddenly...'
                     ```
-                start_code: "# place your code here"
+                start_code: "# scrivi il tuo codice qui"
             13:
                 story_text: |
                     ## Story
@@ -638,7 +638,7 @@ adventures:
                                 {print} 'This could come in very handy'
                                 sword = 'found'
                     ```
-                start_code: "# place your code here"
+                start_code: "# scrivi il tuo codice qui"
             15:
                 story_text: |
                     ## Story
@@ -659,11 +659,11 @@ adventures:
                             {print} 'Nope they are not at the ' location
                     {print} 'Now you can enter the house!'
                     ```
-                start_code: "# place your code here"
+                start_code: "# scrivi il tuo codice qui"
     parrot:
-        name: "Parrot"
+        name: "Pappagallo"
         description: "Create your own online pet parrot that will copy you!"
-        default_save_name: "Parrot"
+        default_save_name: "Pappagallo"
         levels:
             1:
                 story_text: |
@@ -705,7 +705,7 @@ adventures:
                     {print} 🧒 Say new_word , Hedy!
                     {print} 🦜 words {at} {random}
                     ```
-                start_code: "# place your code here"
+                start_code: "# scrivi il tuo codice qui"
             5:
                 story_text: |
                     ## Parrot
@@ -722,9 +722,9 @@ adventures:
                     {if} said_word {is} new_word {print} '🧒 Great job, Hedy! 🍪'
                     {else} {print} '🧒 No, Hedy! Say ' new_word
                     ```
-                start_code: "# place your code here"
+                start_code: "# scrivi il tuo codice qui"
     songs:
-        name: "Sing a song!"
+        name: "Canta una canzone!"
         description: "Print a song"
         default_save_name: "Song"
         levels:
@@ -858,7 +858,7 @@ adventures:
                         {print} 'if youre happy and you know it'
                         {print} action
                     ```
-                start_code: "# place your code here"
+                start_code: "# scrivi il tuo codice qui"
             16:
                 story_text: |
                     ## Sing a song!
@@ -898,7 +898,7 @@ adventures:
     turtle:
         name: "Turtle"
         description: "Make your own drawing"
-        default_save_name: "Turtle"
+        default_save_name: "Tartaruga"
         levels:
             1:
                 story_text: |
@@ -1092,9 +1092,9 @@ adventures:
                 start_code: |-
                     angles = {ask} 'How many angles should I draw?'
     dishes:
-        name: "Dishes?"
+        name: "Piatti?"
         description: "Use the computer to see who does the dishes (Start at level 2)"
-        default_save_name: "Dishes"
+        default_save_name: "Piatti"
         levels:
             3:
                 story_text: |
@@ -1134,7 +1134,7 @@ adventures:
                     {sleep}
                     {print} people {at} _
                     ```
-                start_code: "{print} 'Who does the dishes?'"
+                start_code: "{print} 'Chi lava i piatti?'"
             5:
                 story_text: |
                     ## Dishwashing
@@ -1205,7 +1205,7 @@ adventures:
                     {for} day {in} days
                         {print} names {at} {random} ' does the dishes on ' day
                     ```
-                start_code: "# place your code here"
+                start_code: "# scrivi il tuo codice qui"
     dice:
         name: "Dice"
         description: "Make your own dice"
@@ -1237,7 +1237,7 @@ adventures:
                     {print} _ you threw _
                     {print} _ _ _ <- here you have to program the choice
                     ```
-                start_code: "{print} 'What will the die indicate this time?'"
+                start_code: "{print} 'Che cosa indicherà il dado questa volta?'"
             5:
                 story_text: |
                     ## Dice
@@ -1299,7 +1299,7 @@ adventures:
                         {print} player ' throws ' choices {at} {random}
                         {sleep}
                     ```
-                start_code: "# place your code here"
+                start_code: "# scrivi il tuo codice qui"
             15:
                 story_text: |
                     ## Dice
@@ -1318,7 +1318,7 @@ adventures:
                     ```
                 start_code: "# place your code here"
     rock:
-        name: "Rock, paper, scissors"
+        name: "Sasso, carta, forbice"
         description: "Make your own rock, paper, scissors game"
         default_save_name: "Rock"
         levels:
@@ -1473,8 +1473,8 @@ adventures:
                 start_code: "# place your code here"
     calculator:
         name: "Calculator"
-        description: "Create a calculator"
-        default_save_name: "Calculator"
+        description: "Crea una calcolatrice"
+        default_save_name: "Calcolatrice"
         levels:
             6:
                 story_text: |
@@ -1575,7 +1575,7 @@ adventures:
                                 {print} 'You win!'
                                 game = 'over'
                     ```
-                start_code: "# place your code here"
+                start_code: "# scrivi il tuo codice qui"
             15:
                 story_text: |
                     ## Calculator
@@ -1597,11 +1597,11 @@ adventures:
                         {print} 'Good job!'
                     {print} 'You win!'
                     ```
-                start_code: "# place your code here"
+                start_code: "# scrivi il tuo codice qui"
     restaurant:
         name: "Restaurant"
-        description: "Create your own virtual restaurant"
-        default_save_name: "Restaurant"
+        description: "Crea il tuo ristorante virtuale"
+        default_save_name: "Ristorante"
         levels:
             1:
                 story_text: |
@@ -1694,7 +1694,7 @@ adventures:
                     {print} 'Thank you for your order.'
                     {print} 'Your ' food ' and ' drinks ' will be right there!'
                     ```
-                start_code: "# place your code here"
+                start_code: "# scrivi il tuo codice qui"
             5:
                 story_text: |
                     ## Restaurant
@@ -1777,7 +1777,7 @@ adventures:
                     {print} 'That will be ' price ' dollars, please'
                     {print} 'Thank you, enjoy your meal!'
                     ```
-                start_code: "# place your code here"
+                start_code: "# scrivi il tuo codice qui"
             7:
                 story_text: |
                     ## Restaurant
@@ -1883,11 +1883,11 @@ adventures:
                     price = 4 * people
                     {print} 'That will be ' price ' dollars, please!'
                     ```
-                start_code: "# place your code here"
+                start_code: "# scrivi il tuo codice qui"
             12:
                 story_text: |
-                    ## Restaurant
-                    From this level on you can use decimal numbers to make you menu more realistic.
+                    ## Ristorante
+                    Da questo livello in poi puoi usare i numeri decimali per rendere il tuo menu più realistico.
                 example_code: |
                     ```
                     price = 0
@@ -1903,7 +1903,7 @@ adventures:
                         price = price + 2.35
                     {print} 'That will be ' price ' dollar, please'
                     ```
-                start_code: "# place your code here"
+                start_code: "# scrivi il tuo codice qui"
             13:
                 story_text: |
                     ## Restaurant
@@ -1929,7 +1929,7 @@ adventures:
                     {if} drinks {is} 'water' {or} drinks {is} 'juice'
                         {print} 'Thats a healthy choice'
                     ```
-                start_code: "# place your code here"
+                start_code: "# scrivi il tuo codice qui"
             15:
                 story_text: |
                     ## Restaurant
@@ -1945,9 +1945,9 @@ adventures:
                         more = {ask} 'Would you like to order anything {else}?'
                     {print} 'Thank you!'
                     ```
-                start_code: "# place your code here"
+                start_code: "# scrivi il tuo codice qui"
     fortune:
-        name: "Fortune teller"
+        name: "Indovino"
         description: "Let Hedy predict the future"
         default_save_name: "Fortune Teller"
         levels:
@@ -1994,7 +1994,7 @@ adventures:
                 story_text_2: |
                     ## Challenges
                     Now, Hedy can only answer yes, no or maybe. Can you give Hedy more answer options, like 'definitely' or '{ask} again'.
-                start_code: "# place your code here"
+                start_code: "# scrivi il tuo codice qui"
             4:
                 story_text: |
                     ## Fortune Teller
@@ -2016,7 +2016,7 @@ adventures:
                     {sleep} 2
                     {print} answers {at} {random}
                     ```
-                start_code: "# place your code here"
+                start_code: "# scrivi il tuo codice qui"
             5:
                 story_text: |
                     ## Fortune Teller
@@ -2050,7 +2050,7 @@ adventures:
                     Or you could make  Snow White's magic mirror on the wall, to tell everyone you are the fairest of them all!
                     Let your imagination do the work!
 
-                start_code: "# place your code here"
+                start_code: "# scrivi il tuo codice qui"
             6:
                 story_text: |
                     ## Fortune Teller
@@ -2084,7 +2084,7 @@ adventures:
                     result = result * football
                     {print} 'You are ' result ' percent smart.'
                     ```
-                start_code: "# place your code here"
+                start_code: "# scrivi il tuo codice qui"
             7:
                 story_text: |
                     ## Fortune Teller
@@ -2108,7 +2108,7 @@ adventures:
                     Can you do it?
 
                     In the upcoming levels the layout of {repeat} command will change, which enables you to repeat multiple lines at once.
-                start_code: "# place your code here"
+                start_code: "# scrivi il tuo codice qui"
             8:
                 story_text: |
                     ## Fortune Teller
@@ -2126,7 +2126,7 @@ adventures:
                        {sleep}
                        {print} 'My crystal ball says...' answers {at} {random}
                     ```
-                start_code: "# place your code here"
+                start_code: "# scrivi il tuo codice qui"
             10:
                 story_text: |
                     ## Fortune Teller
@@ -2170,9 +2170,9 @@ adventures:
                     ```
                 start_code: "# place your code here"
     haunted:
-        name: "Haunted House"
-        description: "Escape from the haunted house"
-        default_save_name: "Haunted House"
+        name: "Casa stregata"
+        description: "Scappa dalla casa stregata"
+        default_save_name: "Casa stregata"
         levels:
             1:
                 story_text: |
@@ -2241,7 +2241,7 @@ adventures:
                     ## Change the game into a tv gameshow!
                     Lastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!
                     Can you do it?
-                start_code: "# place your code here"
+                start_code: "# scrivi il tuo codice qui"
             4:
                 story_text: |
                     ## Haunted house
@@ -2259,7 +2259,7 @@ adventures:
                     {print} monsters {at} {random}
                      ```
 
-                start_code: "# place your code here"
+                start_code: "# scrivi il tuo codice qui"
             5:
                 story_text: |
                     ## Haunted House
@@ -2280,7 +2280,7 @@ adventures:
                     {else} {print} 'Oh no! You are being eaten by a...' monsters {at} {random}
                     ```
 
-                start_code: "# place your code here"
+                start_code: "# scrivi il tuo codice qui"
             9:
                 story_text: |
                     ## Haunted House
@@ -2337,7 +2337,7 @@ adventures:
                     {if} player {is} alive
                         {print} 'Great! You survived!'
                     ```
-                start_code: "{print} 'Escape from the haunted house!'"
+                start_code: "{print} 'Scappa dalla casa stregata!'"
             14:
                 story_text: |
                     ## Haunted House
@@ -2365,7 +2365,7 @@ adventures:
                         {else}
                             {print} 'GAME OVER'
                     ```
-                start_code: "# place your code here"
+                start_code: "# scrivi il tuo codice qui"
             16:
                 story_text: |
                     ## Haunted House Game
@@ -2399,7 +2399,7 @@ adventures:
                         {print} bad_fate[i]
                         {print} 'GAME OVER'
                     ```
-                start_code: "# place your code here"
+                start_code: "# scrivi il tuo codice qui"
     piggybank:
         name: "Piggy Bank"
         description: "Count your pocketmoney!"
@@ -2420,7 +2420,7 @@ adventures:
                     weeks = to_save / allowance
                     {print} 'You can buy a ' wish ' in ' weeks ' weeks.'
                     ```
-                start_code: "# place your code here"
+                start_code: "# scrivi il tuo codice qui"
             14:
                 story_text: |
                     ## Piggybank
@@ -2439,10 +2439,10 @@ adventures:
                         {print} 'Great! You have enough'
                         {print} 'Lets go shopping!'
                     ```
-                start_code: "# place your code here"
+                start_code: "# scrivi il tuo codice qui"
     quizmaster:
         name: "Quizmaster"
-        description: "Make your own quiz!"
+        description: "Crea il tuo quiz!"
         default_save_name: "Quizmaster"
         levels:
             14:
@@ -2470,9 +2470,9 @@ adventures:
                     {if} points_b > points_a
                         {print} 'You belong to the B club'
                     ```
-                start_code: "# place your code here"
+                start_code: "# scrivi il tuo codice qui"
     language:
-        name: "Language"
+        name: "Lingua"
         description: "Practice words in a foreign language"
         default_save_name: "Language"
         levels:
@@ -2651,10 +2651,10 @@ adventures:
                     {elif} points > dealer_points {and} points < 21:
                         {print} 'You win!'
                     ```
-                start_code: "# place your code here"
+                start_code: "# scrivi il tuo codice qui"
     tic:
-        name: "Tic Tac Toe"
-        description: "Play a game of Tic Tac Toe!"
+        name: "Tris"
+        description: "Gioca a una partita di tris!"
         default_save_name: "Tic"
         levels:
             13:
@@ -2720,7 +2720,7 @@ adventures:
                                 {else}
                                     sign = 'x'
                     ```
-                start_code: "## place your code here"
+                start_code: "## scrivi il tuo codice qui"
             14:
                 story_text: |
                     ## Tic Tac Toe
@@ -2847,7 +2847,7 @@ adventures:
                             {else}
                                 sign = 'x'
                     ```
-                start_code: "## place your code here"
+                start_code: "## scrivi il tuo codice qui"
             17:
                 story_text: |
                     ## Tic Tac Toe
@@ -2937,7 +2937,7 @@ adventures:
                                 sign = 'x'
                     ```
 
-                start_code: "## place your code here"
+                start_code: "## scrivi il tuo codice qui"
     next:
         name: "What's next?"
         description: "What's Next?"

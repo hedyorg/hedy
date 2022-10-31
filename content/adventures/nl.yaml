@@ -1,7 +1,7 @@
 adventures:
     default:
         name: "Introductie"
-        description: "Leveluitleg"
+        description: "Level uitleg"
         default_save_name: "intro"
         levels:
             1:
@@ -20,8 +20,7 @@ adventures:
                     {print} Welkom bij Hedy!
                     ```
                 story_text_2: |
-                    Je kunt ook een vraag stellen met`{ask}` en het antwoord laten herhalen met `{echo}`.
-                    Weet je niet wat wil wilt maken? In de volgende tabjes staan opdrachten om te proberen.
+                    Je kunt ook een vraag stellen met `{ask}` en het antwoord laten herhalen met `{echo}`.
                 example_code_2: |
                     ```
                     {ask} Hoe heet je?
@@ -109,7 +108,7 @@ adventures:
                     {if} naam {is} Hedy {print} 'leuk' {else} {print} 'minder leuk!'
                 story_text: |
                     ## Als... Anders...
-                    In level 5 is er iets nieuws, de `{if}`! If is Engels voor als. Met de `{if}` kun je een keuze maken tussen twee verschillende opties.
+                    In level 5 is er iets nieuws, de `{if}`! Met de `{if}` kun je een keuze maken tussen twee verschillende opties.
                     Deze code print leuk als je Hedy als naam invoert, en minder leuk als je iets anders invoert.
                     `{ask}` en `{print}` werken nog zoals in level 4.
                 example_code: |
@@ -406,10 +405,15 @@ adventures:
                 story_text: |-
                     ## Het laatste level!
                     We zijn aangekomen bij echte Python code! Dat betekent wel dat we vanaf nu ronde haakjes moeten gebruiken bij {print} en bij {range}.
-                example_code: "```\n{print}('mijn naam is Hedy!')\n```\n"
-                story_text_2: Als je meer dan één tekst wilt printen, moet je die scheiden met komma's.
+                example_code: |
+                    ```
+                    {print}('Hallo!')
+                    {for} i in {range}(1, 10):
+                        {print}('Dit is regel ', i)
+                    ```
+                story_text_2: Als je meer dan één tekst wilt printen, moeten er komma's tussen.
                 example_code_2: "```\ntemperatuur = 25\n{print}('Het is ', temperatuur, 'graden buiten')\n```\n"
-                story_text_3: "##  Input\nDe laatste aanpassing die we moeten maken om echte Python code te krijgen is het vervangen van `{ask}` door `{input}`."
+                story_text_3: "##  Input\nDe laatste aanpassing die we moeten maken om echte Python code te krijgen is `{ask}` veranderen in `{input}`."
                 example_code_3: "```\n{print}('Mijn naam is Hedy!')\nnaam = {input}('Hoe heet jij?')\n{print}('Jij heet dus ', naam)\n```\n"
     story:
         name: "Verhaal"
@@ -970,7 +974,7 @@ adventures:
             3:
                 story_text: |
                     ## Zoekende schildpad
-                    Ook bij je teken-schildpad kun je `{at}{random}` gebruiken! Dan loopt hij steeds een ander pad.
+                    Ook bij je teken-schildpad kun je `{at} {random}` gebruiken! Dan loopt hij steeds een ander pad.
                     Kies met `{at} {random}` een hoek uit een lijstje. Als je regels 2 en 3 een paar keer herhaalt, krijg je een langere tekening.
 
                 example_code: |
@@ -1879,7 +1883,7 @@ adventures:
                     ```
                 story_text_2: |
                     ## Uitdaging
-                    Kan je nog meer vragen verzinnen die je aan de klanten kunt stellen, die afhangen van het antwoord dat ze op de vorige vraag gaven? Hierbij maak je natuurlijk gebruik van het `{if}` commando.
+                    Kun je nog meer verzinnen dat je met `{ask}` aan de klanten kunt stellen, wat afhangt van het antwoord dat ze op de vorige vraag gaven? Hierbij maak je natuurlijk gebruik van het `{if}` commando.
                 start_code: "# Schrijf jouw code hier"
             6:
                 story_text: |
@@ -2764,7 +2768,7 @@ adventures:
             18:
                 story_text: |
                     ## Vooruitblik
-                    Gefeliciteerd! Je hebt het laatste level van Hedy behaald! Maar niet getreurd, we zijn druk bezig om nog meer levels en avonturen te bouwen. Dus kom vooral later nog eens een kijkje nemen of er al nieuwe levels zijn!
+                    Gefeliciteerd! Je hebt het laatste level van Hedy behaald! De code van level 18 kan je gebruiken in Python-omgevingen zoals replit of PyCharm en daar verder gaan met leren programmeren. Maar Python kan alleen met Engels codes werken, dus geen Nederlandse.
                 start_code: "{print} ('Goed gedaan!')"
     tic:
         name: Boter Kaas en Eieren

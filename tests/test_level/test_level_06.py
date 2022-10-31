@@ -1,3 +1,4 @@
+from cmath import exp
 import hedy
 import textwrap
 from parameterized import parameterized
@@ -888,3 +889,28 @@ class TestsLevel6(HedyTester):
         b = int(a) + int(3)
         print(f'{b}')""")
       self.multi_level_tester(code=code, expected=expected, output='0', max_level=11)
+
+    def test_turtle_with_expression(self):
+      self.maxDiff = None
+      code = textwrap.dedent("""\
+        num = 10
+        turn num + 10
+        forward 10 + num""")
+
+      expected = textwrap.dedent("""\
+        num = '10'
+        trtl = int(num) + int(10)
+        try:
+          trtl = int(trtl)
+        except ValueError:
+          raise Exception(f'While running your program the command <span class=\"command-highlighted\">turn</span> received the value <span class=\"command-highlighted\">{trtl}</span> which is not allowed. Try changing the value to a number.')
+        t.right(min(600, trtl) if trtl > 0 else max(-600, trtl))
+        trtl = int(10) + int(num)
+        try:
+          trtl = int(trtl)
+        except ValueError:
+          raise Exception(f'While running your program the command <span class=\"command-highlighted\">forward</span> received the value <span class=\"command-highlighted\">{trtl}</span> which is not allowed. Try changing the value to a number.')
+        t.forward(min(600, trtl) if trtl > 0 else max(-600, trtl))
+        time.sleep(0.1)""")
+
+      self.multi_level_tester(code=code, expected=expected, max_level=11)

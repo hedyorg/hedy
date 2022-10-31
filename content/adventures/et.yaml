@@ -27,13 +27,13 @@ adventures:
                 start_code: "{print} 'Tere maailm'"
                 story_text: "## 'Ülakomad'\nNeljandal tasemel muutuvad käsud `{ask}` ja `{print}`.\n\nTeksti, mille sa tahad ekraanile kirjutada, pead sa panema ülakomade vahele.\n\nSee on kasulik, kuna nüüd sa saad igasugust teksti ekraanile kirjutada. Näiteks nagu sõnu, mida sa kasutad muutujanimena `{is}` käsus.\n\nEnamik programmeerimiskeeli kasutab kas ülakomasid või jutumärke teksti edasiandmiseks, nii et me oleme juba samm lähemal päris programmeerimise juurde!\n"
                 example_code: "```\n{print} 'You need to use quotation marks from now on!'\nanswer {is} {ask} 'What do we need to use from now on?'\n{print} 'We need to use ' answer\n```\n"
-                story_text_2: "## Ülesanded muutuvad aina raskemaks\nThe adventures are now getting more and more difficult in the successive tabs.\nSo it is best to start on the left with the story, and work to the right, in order to be challenged more and more.\n"
+                story_text_2: "## Seiklused muutuvad aina raskemaks\nJärgmistel sakkidel muutuvad seiklused aina raskemaks.\nSeega on parem looga algust teha vasakul, liikudes edasi paremale, võttes vastu raskemaid väljakutseid.\n"
             5:
                 start_code: "nimi {is} {ask} 'Mis su nimi on?'\n{if} nimi {is} Hedy {print} 'lahe!' {else} {print} 'mhh'"
-                story_text: "## If... else....\nIn level 5 there is something new, the `{if}`! With the `{if}` you can choose between two different options.\nThis code prints nice if you enter Hedy as a name, and boo! if you enter something else.\n`{ask}` and `{print}` still work like they did in level 4.\n"
+                story_text: "## Kui... muidu....\n5. tasemel leiame midagi uut: `{if}`! `{if}` abil saad valida kahe vóimaluse vahel.\nSee kood prindib kena, kui sisestad nimeks Hedy ja boo! kui sisestad midagi muud.\n`{ask}` ja `{print}` töötavad ikka samamoodi nagu 4. tasemel.\n"
                 example_code: "```\nnimi {is} {ask} 'Mis su nimi on?'\n{if} nimi {is} Hedy {print} 'lahe' {else} {print} 'buu!'\n```\n"
-                story_text_3: "## Lists\nWhen we want to check if something is in a list, we can now use the `{in}` command.\nThis code prints pretty! if you choose green or yellow, and meh otherwise.\n"
-                example_code_3: "```\npretty_colors {is} green, yellow\ncolor {is} {ask} 'What is your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!'\n{else} {print} 'meh'\n```\n"
+                story_text_3: "## Nimistud\nKui soovime kontrollida, kas nimistu sisaldab midagi, siis nüüd on meil võimalik selleks kasutada `{in}` käsku.\nSee kood prindib ilus! kui valid rohelise või kollase ja pähh, kui valid midagi muud.\n"
+                example_code_3: "```\nilusad_värvid {is} roheline, kollane\nvärv {is} {ask} 'Mis on su lemmikvärv?'\n{if} värv {in} ilusad_värvid {print} 'ilus!'\n{else} {print} 'pähh'\n```\n"
                 story_text_2: "Sometimes code with an `{if}` gets really long and does not fit on the line well. <br> You may also divide the code over two lines, starting the second line at the `{else}` like this:\n"
                 example_code_2: "```\nnimi {is} {ask} 'Mis su nimi on?'\n{if} nimi {is} Hedy {print} 'lahe'\n{else} {print} 'buu!'\n```\n"
             6:
@@ -56,7 +56,7 @@ adventures:
                 story_text: "## Great, Greater, Greatest!\nWe are going to learn more new items. You might know them already from mathematics, the `<` and `>`.\nThe `<` checks if the first number is smaller than the second, for example `age < 12` checks if `age` {is} smaller than 12.\nIf you want to check if the first number is smaller or equal to the second, you can use `<=`, for example `age <= 11`.\nThe `>` checks if the first number is bigger than the second, for example `points > 10` checks if `points` is larger than 10.\nIf you want to check if the first number is bigger or equal to the second, you can use `>=`, for example `points >= 11`.\nYou use these comparisons in an `{if}`, like this:\n"
             18:
                 start_code: "naam = 'Hedy'\n{print}('My name is ', naam)"
-                example_code: "```\n{print}('my name is Hedy!')\n```\n"
+                example_code: "```\n{print}('Tere!')\n{for} i in {range}(1, 10):\n    {print}('See rida on ', i)\n```\n"
                 story_text: "## The last level!\nWe arrived at real Python code! That means we need to use parentheses with {print} and {range} from now on."
                 story_text_2: If you want to print more than one item, you need to separate them by commas.
                 example_code_2: "```\ntemperature = 25\n{print}('It is ', temperature, 'degrees outside')\n```\n"
@@ -141,7 +141,7 @@ adventures:
             1:
                 start_code: '{print} Your story starts here'
                 story_text: "## Make a story\nIn level 1 you can make a story with a different main character that you enter yourself.\n\nAs the first line, use this code:\n\n```\n{ask} who is the star in your story?\n```\n\nAfter that first line, start with `{print}` if the sentence needs to be printed.\nYou use `{echo}` if you want your main character to be at the end of the sentence.\n"
-                example_code: "\n```\n{ask} The main character of this story is\n{print} The main character is now going to walk in the forest\n{echo} He's a bit scared,\n{print} He hears crazy noises everywhere\n{print} He's afraid this is a haunted forest\n```\n"
+                example_code: "```\n{ask} Selle loo peategelane on\n{print} Peategelane jalutab metsa\n{echo} Ta kardab natuke,\n{print} Ta kuuleb hirmsaid hääli igal pool\n{print} Ta kardab, et selles metsas kummitab\n```\n"
             2:
                 story_text: "## Story\nIn level 2 you can make your story more fun. Your main character's name can now be anywhere in the sentence.\n\nYou do have to program a little bit extra for that. You must now name your main character first.\n\nYou can then put that name anywhere in a sentence.\n"
                 start_code: '{print} Your story'
@@ -219,7 +219,7 @@ adventures:
                 start_code: "{print} Turtle race!\nhoek {is} 90\n{turn} hoek\n{forward} 25"
             3:
                 story_text: "## Searching turtle\nIn this level you can use use `{at} {random}` with the drawing turtle. A random choice makes the turtle walk a different path each time.\nUse `{at} {random}` to choose a value from a list. You can copy and paste lines 2 and 3 to create a longer random path.\n"
-                example_code: "\n```\nangles {is} 10, 50, 90, 150, 250\n{turn} angles {at} {random}\n{forward} 25\n```\n"
+                example_code: "```\nnurgad {is} 10, 50, 90, 150, 250\n{turn} nurgad {at} {random}\n{forward} 25\n```\n"
                 start_code: "angles {is} 10, 50, 90, 150, 250\n{turn} angles {at} {random}\n{forward} 25"
             4:
                 story_text: "## Let's draw\nIn level 4 you have to use quotation marks with `{print}` and `{ask}`. Also when drawing!\n"
@@ -704,7 +704,7 @@ adventures:
                 example_code: "```\nwords {is} squawk, Hedy\n{print} Train your parrot!\nnew_word {is} {ask} Which word do you want to teach them?\n{add} new_word {to_list} words\n{print} \U0001F9D2 Say new_word , Hedy!\n{print} \U0001F99C words {at} {random}\n```\n"
                 start_code: '# place your code here'
             5:
-                story_text: "## Parrot\nReward your parrot {if} it says the correct word!\n"
+                story_text: "## Papagoi\nPremeeri oma papagoid, {if} ta ütleb õige sõna!\n"
                 example_code: "```\nwords {is} squawk, Hedy\n{print} 'Train your parrot!'\nnew_word {is} {ask} 'Which word do you want to teach them?'\n{add} new_word {to_list} words\nsaid_word {is} words {at} {random}\n{print} '\U0001F9D2 Say ' new_word ', Hedy!'\n{print} '\U0001F99C ' said_word\n{if} said_word {is} new_word {print} '\U0001F9D2 Great job, Hedy! \U0001F36A'\n{else} {print} '\U0001F9D2 No, Hedy! Say ' new_word\n```\n"
                 start_code: '# place your code here'
     language:

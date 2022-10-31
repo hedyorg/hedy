@@ -139,53 +139,53 @@ adventures:
         default_save_name: הקדמה
         levels:
             6:
-                start_code: "{print} '5 times 5 is ' 5 * 5"
-                example_code: "```\n{print} '5 plus 5 is ' 5 + 5\n{print} '5 minus 5 is ' 5 - 5\n{print} '5 times 5 is ' 5 * 5\n```\n"
-                example_code_2: "```\nname = Hedy\nanswer = 20 + 4\n```\n"
-                story_text: "## 1 + 1\n In this level you learn something new: you can now also calculate.\n\n The plus is easy, you write it like with math: `5 + 5` for example. The minus also works fine, it is `5 - 5`.\n\n The times is a bit different, because there is no times symbol on your keyboard. Just search, there really isn't!\n That is why we multiply with the asterisk above 8: `5 * 5`. Read that as \"5 times 5\" that helps you remember it best.\n"
-                story_text_2: "We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:\n"
+                start_code: "{print} '5 כפול 5 שווה ' 5 * 5"
+                example_code: "```\n{print} '5 ועוד 5 שווה ' 5 + 5\n{print} '5 פחות 5 שווה ' 5 - 5\n{print} '5 כפול 5 שווה ' 5 * 5\n```\n"
+                example_code_2: "```\nשם = הדי\nפתרון = 20 + 4\n```\n"
+                story_text: "## 1 + 1\n בשלב הזה נלמד דבר חדש: מעכשיו תוכלו לבצע חישובים מתמטיים.\n\n חיבור הוא עניין פשוט, כותבים אותו כמו במתמטיקה: `5 + 5` לדוגמה. גם החיסור עובד כרגיל: `5 - 5`.\n\n כפל עובד קצת אחרת, כי המקלדת לא מכילה סימן של כפל. בדקו בעצמכם, הוא באמת לא נמצא שם!\n לכן מסמנים כפל עם הכוכבית שנמצאת מעל הספרה 8: `5 * 5`. כדי לזכור את זה, קראו את החישוב הזה בתור \"5 כפול 5\".\n"
+                story_text_2: "שינינו גם את הדרך שבה שומרים מילה במשתנה! מעכשיו תוכלו להשתמש בסימן `=` במקום `{is}` כשתשמרו שם או מספר בתור משתנה. זה נראה ככה:\n"
             8:
-                story_text: "## Indentation\n`{ask}` and `{print}` still work as you know them. But `{if}` and `{repeat}` have changed!\nYou can now execute groups of code together, but you will have to *indent* the code.\nThat means putting four spaces at the beginning of the line. You will also have to indent when you just want to create a block of one line.\n"
-                start_code: "{repeat} 5 {times}\n    {print} 'Hello folks'\n    {print} 'This will be printed 5 times'"
-                example_code: "```\n{repeat} 5 {times}\n    {print} 'Hello everyone'\n    {print} 'This is all repeated 5 times'\n```\n"
+                story_text: "## הזחה\n`{ask}` ו-`{print}` נשארות אותו הדבר. אבל `{if}`, `{else}` ו-`{repeat}` השתנו!\nמעכשיו תוכלו להריץ כמה שורות קוד ביחד, אבל תצטרכו *להזיח* אותן.\nכלומר, לשים ארבעה רווחים בתחילת כל שורה. תצטרכו להשתמש בהזחה גם כשתרצו להריץ בלוק קוד שמכיל רק שורה אחת.\n"
+                start_code: "{repeat} 5 {times}\n    {print} 'שלום חברים'\n    {print} 'השורה הזו תודפס 5 פעמים'"
+                example_code: "ככה הפקודה `{repeat}` עובדת עכשיו:\n```\n{repeat} 5 {times}\n    {print} 'שלום לכולם'\n    {print} 'כל זה יחזור על עצמו 5 פעמים'\n```\nככה הפקודות `{if}` ו-`{else}` עובדות עכשיו:\n\n```\nשם {is} {ask} 'איך קוראים לך?'\n{if} שם {is} הדי\n    {print} 'ברוכה הבאה הדי'\n    {print} 'את יכולה לשחק במחשב שלך!'\n{else}\n    {print} 'פולש!'\n    {print} 'אסור לך להשתמש במחשב הזה!'\n```\n"
             9:
-                example_code: "```\n{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    {else}\n        {print} 'pizza is better'\n```\n"
-                start_code: "{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    {else}\n        {print} 'pizza is better'"
-                story_text: "## All together now!\nIn this level you can not only use multiple lines with `{if}` and `{repeat}`, but you can also put them together!\nIn the example you see an `{if}` command within a `{repeat}` command. It is also allowed the other way around, and an `{if}` is also allowed in an `{if}` and a `{repeat}` in a `{repeat}`.\nGive it a try!\n"
+                example_code: "```\n{repeat} 3 {times}\n    אוכל = {ask} 'מה את רוצה לאכול?'\n    {if} אוכל {is} פיצה\n        {print} 'יופי!'\n    {else}\n        {print} 'עדיף פיצה'\n```\n"
+                start_code: "{repeat} 3 {times}\n    אוכל = {ask} 'מה את רוצה לאכול?'\n    {if} אוכל {is} פיצה\n        {print} 'יופי!'\n    {else}\n        {print} 'עדיף פיצה'"
+                story_text: "## עכשיו הכול ביחד!\nבשלב הזה, לא רק שאתם יכולים לשים כמה שורות קוד בתוך `{if}` ו-`{repeat}`, אתם יכולים גם להשתמש בהם ביחד!\nבדוגמה הזו אפשר לראות פקודת `{if}` בתוך פקודת `{repeat}`. מותר גם לעשות את ההפך, או לשים פקודת `{if}` בתוך `{if}` ו-`{repeat}` בתוך `{repeat}`.\nנסו להשתמש בזה!\n"
             10:
-                start_code: "animals {is} dog, cat, blobfish\n{for} animal {in} animals\n  {print} 'I love ' animal"
-                story_text: "## For each item in my list...\nIn this level we learn a new code called `{for}`. With `{for}` you can make a list and use all elements.\n`{for}` creates a block, like `{repeat}` and `{if}` so all lines in the block need to start with spaces."
-                example_code: "```\nanimals {is} dog, cat, blobfish\n{for} animal {in} animals\n  {print} 'I love ' animal\n```\n"
+                start_code: "חיות {is} כלב, חתול, אבו-נפחא\n{for} חיה {in} חיות\n  {print} 'אני אוהבת ' חיה"
+                story_text: "## לכל איבר ברשימה שלי...\nבשלב הזה נלמד פקודה חדשה שנקראת `{for}`. בעזרת `{for}`, תוכלו ליצור רשימה ולהשתמש בכל האיברים שלה.\n`{for}` יוצרת בלוק, כמו `{repeat}` ו-`{if}`, אז כל השורות בבלוק צריכות להתחיל ברווחים."
+                example_code: "```\nחיות {is} כלב, חתול, אבו-נפחא\n{for} חיה {in} חיות\n  {print} 'אני אוהבת ' חיה\n```\n"
             11:
-                start_code: "{for} counter {in} {range} 1 {to} 5\n    {print} counter"
-                story_text: "## Loops!\n`{print}` works just the same but we add a new form of the `{for}`. You can now write `{for} counter {in} {range} 1 {to} 5` and use `counter` in your program.\nTry it out to see what happens! Remember to use indentations after the `{for}` and `{if}` statements (That means starting a sentence with four spaces)"
-                example_code: "```\n{for} counter {in} {range} 1 {to} 5\n    {print} counter\n```\n"
+                start_code: "{for} מספר {in} {range} 1 {to} 5\n    {print} מספר"
+                story_text: "## לולאות!\n`{print}` נשאר אותו הדבר, אבל הוספנו סוג חדש של `{for}`. מעכשיו תוכלו לכתוב `{for} counter {in} {range} 1 {to} 5` ולהשתמש ב-`counter` בקוד שלכם.\nנסו את זה ותראו מה קורה! זכרו להשתמש בהזחה אחרי הפקודות `{for}` ו-`{if}` (כלומר, להתחיל כל שורה עם ארבעה רווחים)"
+                example_code: "```\n{for} מספר {in} {range} 1 {to} 5\n    {print} מספר\n```\n"
             12:
-                example_code_5: "```\nscore = 25\n{print} 'You got ' score\n```\n"
-                start_code: "{print} 'decimal numbers now need to use a dot'\n{print} 2.5 + 2.5"
+                example_code_5: "```\nניקוד = 25\n{print} 'יש לך ' ניקוד ' נקודות'\n```\n"
+                start_code: "{print} 'מעכשיו צריך להשתמש בנקודה כדי לכתוב שברים עשרוניים'\n{print} 2.5 + 2.5"
                 story_text: "## Numbers and texts\n**Decimal numbers**\nSo far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the `.` for decimal numbers."
-                example_code: "```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n"
+                example_code: "```\n{print} 'שתיים וחצי ועוד שתיים וחצי שווה...'\n{print} 2.5 + 2.5\n```\n"
                 story_text_2: "**All texts need to be in quotation marks**\nFor this level on you will also have to use quotation marks when storing a text with `=`:\n"
-                example_code_2: "```\nname = 'Hedy the Robot'\n{print} 'Hello ' name\n```\n"
-                story_text_3: "**All items in lists need quotation marks too**\nLists are texts, so they need quotation marks too. Mind that each single item on the list has quotation marks.\nThis allows you to save two words as 1 item on the list, for example 'Iron Man'.\n"
-                example_code_3: "```\nsuperheroes = 'Spiderman', 'Batman', 'Iron Man'\n{print} superheroes {at} {random}\n```\n"
-                story_text_4: "**All text after `{if}` comparisons need quotation marks too**\n"
-                example_code_4: "```\nname = {ask} 'What is your name?'\n{if} name = 'Hedy the Robot'\n    {print} 'Hi there!'\n```\n"
-                story_text_5: "**Numbers don't need quotation marks**\nFor numbers, you do not use quotation marks in the `=`:\n"
-                story_text_6: "**Maths with words** \nIn this level it is also allowed to use the + sign with texts. For example:"
-                example_code_6: "```\na = 'Hello '\nb = 'world!'\n{print} a + b\n```\n"
+                example_code_2: "```\nשם = 'הדי הרובוטית'\n{print} 'שלום ' שם\n```\n"
+                story_text_3: "**גם איברים של רשימות צריך להקיף במירכאות**\nרשימות מורכבות מטקסטים, אז צריך מירכאות גם בשבילן. שימו לב שכל איבר של רשימה צריך להיות מוקף במירכאות.\nככה נוכל ליצור איבר אחד שמורכב משתי מילים או יותר, לדוגמה 'איירון מן'.\n"
+                example_code_3: "```\nגיברים = 'ספיידרמן', 'באטמן', 'איירון מן'\n{print} גיבורים {at} {random}\n```\n"
+                story_text_4: "**גם טקסטים שמופיעים בבדיקות שוויון של הפקודה `{if}`, דורשים מירכאות**\n"
+                example_code_4: "```\nשם = {ask} 'איך קוראים לך?'\n{if} שם = 'הדי הרובוטית'\n    {print} 'שלום לך!'\n```\n"
+                story_text_5: "**לא צריך מירכאות מסביב למספרים**\nכשמשווים מספרים עם `=`, לא צריך להקיף אותם במירכאות:\n"
+                story_text_6: "**חשבון עם מילים** \nבשלב הזה מותר גם להשתמש בסימן + עם טקסטים. לדוגמה:"
+                example_code_6: "```\nא = 'שלום '\nב = 'עולם!'\n{print} א + ב\n```\n"
             14:
-                example_code_3: "```\nname = {ask} 'What is your name?'\n{if} name != 'Hedy'\n    {print} 'You are not Hedy'\n```\n"
+                example_code_3: "```\nשם = {ask} 'איך קוראים לך?'\n{if} שם != 'הדי'\n    {print} 'את לא הדי'\n```\n"
                 story_text: "## Great, Greater, Greatest!\nWe are going to learn more new items. You might know them already from mathematics, the `<` and `>`.\nThe `<` checks if the first number is smaller than the second, for example age `<` 12 checks if age is smaller than 12.\nIf you want to check if the first number is smaller or equal to the second, you can use `<=`, for example age `<=` 11.\nThe `>` checks if the first number is bigger than the second, for example points `>` 10 checks if points is larger than 10.\nIf you want to check if the first number is bigger or equal to the second, you can use `>=`, for example points `>=` 11.\nYou use these comparisons in an `{if}`, like this:\n"
-                start_code: "age = {ask} 'How old are you?'\n{if} age < 13\n    {print} 'You are younger than me!'\n{else}\n    {print} 'You are older than me!'"
-                story_text_2: "From this level on, if you want to compare exactly, you can use two equal signs. This is what most programming languages do:\n"
-                example_code: "```\nage = {ask} 'How old are you?'\n{if} age > 12\n    {print} 'You are older than I am!'\n```\n"
-                example_code_2: "```\nname = {ask} 'What is your name?'\n{if} name == 'Hedy'\n    {print} 'You are cool!'\n```\n"
-                story_text_3: "You can also compare if something is *not* equal to something else using `!=` like this:\n"
+                start_code: "גיל = {ask} 'בן כמה אתה?'\n{if} גיל < 13\n    {print} 'אתה יותר צעיר ממני!'\n{else}\n    {print} 'אתה יותר מבוגר ממני!'"
+                story_text_2: "מהשלב הזה, כשתרצו לבדוק אם שני דברים שווים אחד לשני, תוכלו להשתמש בשני סימני שוויון. זה מה שעושים ברוב שפות התכנות.\n"
+                example_code: "```\nגיל = {ask} 'בת כמה את?'\n{if} גיל > 12\n    {print} 'את יותר מבוגרת ממני!'\n```\n"
+                example_code_2: "```\nשם = {ask} 'איך קוראים לך?'\n{if} שם == 'הדי'\n    {print} 'את מגניבה!'\n```\n"
+                story_text_3: "תוכלו גם לבדוק אם שני דברים *לא* שווים זה לזה, בעזרת הסימן `!=`. לדוגמה:\n"
             16:
-                start_code: "fruit = ['apple', 'banana', 'cherry']\n{print} fruit"
-                story_text: "## More and more like real code!\nWe are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels.\nYou can use the square brackets as well to point out a place in the lists."
-                example_code: "```\nfriends = ['Ahmed', 'Ben', 'Cayden']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'the lucky number of ' friends[i]\n    {print} 'is ' lucky_numbers[i]\n```\n"
+                start_code: "פירות = ['תפוח', 'בננה', 'דובדבן']\n{print} פירות"
+                story_text: "## מתקרבים יותר ויותר לקוד אמיתי!\nמעכשיו ניצור רשימות כמו ב-Python, עם סוגריים מרובעים מסביב לרשימה! נמשיך גם להקיף כל איבר במירכאות, כמו בשלבים הקודמים.\nתוכלו להשתמש בסוגריים מרובעים גם כדי לבחור איבר במקום מסוים ברשימה."
+                example_code: "```\nחברים = ['אחמד', 'בן', 'קיידן']\nמספרי_מזל = [15, 18, 6]\n{for} א {in} {range} 1 {to} 3\n    {print} 'מספר המזל של ' חברים[א]\n    {print} 'הוא ' מספרי_מזל[א]\n```\n"
             1:
                 story_text: "## ברוכים הבאים להֶדִי!\nבשלב 1 תוכלו להשתמש בפקודות `{print}`, `{ask}` ו-`{echo}`.\nהקלידו את הקוד שלכם בשדה התכנות. או לחצו על הכפתור הירוק בבלוק הקוד לדוגמה, והקוד יוקלד עבורכם!\nנסו את הקוד בעצמכם בעזרת הכפתור הירוק 'הרץ קוד' מתחת לשדה התכנות.\n\nתוכלו להדפיס טקסט למסך בעזרת הפקודה `{print}`.\n"
                 example_code: "```\n{print} שלום!\n{print} ברוכים הבאים להֶדִי!\n```\n"
@@ -203,35 +203,35 @@ adventures:
                 start_code: '{print} שלום עולם!'
             3:
                 story_text: "## יצירת רשימה!\nבשלב 3 תוכלו ליצור רשימה. תוכלו לתת למחשב לבחור משהו באופן אקראי מתוך הרשימה. ניתן לעשות זאת בעזרת הפקודה `{at} {random}`.\n"
-                example_code: "```\nחיות {is} כלב, חתול, קנגרו\n{print} חיות {at} {random}\n```\n"
+                example_code: "```\nחיות {is} כלב, חתול, קנגורו\n{print} חיות {at} {random}\n```\n"
                 story_text_2: תוכלו גם להוסיף פריטים לרשימה בעזרת `{add}` ולהסיר פריטים בעזרת `{remove}`.
-                example_code_2: "```\nחיות {is} כלב, חתול, קנגרו\n{add} פינגווין {to_list} חיות\n{remove} חתול {from} חיות\n{print} חיות {at} {random}\n```\n"
+                example_code_2: "```\nחיות {is} כלב, חתול, קנגורו\n{add} פינגווין {to_list} חיות\n{remove} חתול {from} חיות\n{print} חיות {at} {random}\n```\n"
                 start_code: '{print} שלום עולם!'
             4:
                 start_code: "{print} 'שלום עולם'"
-                story_text: "## 'Quotation marks'\nIn level 4 `{ask}` and `{print}` have changed.\n\nYou must put text that you want to print between quotation marks.\n\nThis is useful, because now you can print all the words you want. Also the words you used to store something with `{is}`.\n\nMost programming languages also use quotation marks when printing, so we are also getting a step closer to real programming!\n"
-                example_code: "```\n{print} 'You need to use quotation marks from now on!'\nanswer {is} {ask} 'What do we need to use from now on?'\n{print} 'We need to use ' answer\n```\n"
-                story_text_2: "## Adventures are getting more and more difficult\nThe adventures are now getting more and more difficult in the successive tabs.\nSo it is best to start on the left with the story, and work to the right, in order to be challenged more and more.\n"
+                story_text: "# 'מֵירְכָאוֹת'\nבשלב 4 `{ask}` ו`{print}` השתנו.\n\nעליך להקיף את הטקסט שברצונך להדפיס במירכאות.\n\nזה שימושי, כי ככה אפשר להדפיס את כל המילים שנרצה. גם מילים שאיחסנו בהן משהו עם `{is}`.\n\nרוב שפות התכנות משתמשות במירכאות כאשר מדפיסים, אז אנחנו מתקרבים בעוד צעד לתכנות אמיתי!\n"
+                example_code: "```\n{print} 'מעכשיו עליך להשתמש במירכאות!'\nתשובה {is} {ask} 'במה עלינו להשתמש מעכשיו?'\n{print} 'עלינו להשתמש ב ' תשובה\n```\n"
+                story_text_2: "## ההרפתקות הופכות מאתגרות יותר ויותר\nההרפתקות הופכות מאתגרות יותר בלשוניות העוקבות.\nלכן מומלץ להתחיל מצד ימין ולתהקדם לצד שמאל, לפי הסדר, בשביל לאתגר את עצמכם יותר.\n"
             5:
-                start_code: "name {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'cool!' {else} {print} 'meh'"
-                story_text: "## If... else....\nIn level 5 there is something new, the `{if}`! With the `{if}` you can choose between two different options.\nThis code prints nice if you enter Hedy as a name, and boo! if you enter something else.\n`{ask}` and `{print}` still work like they did in level 4.\n"
-                example_code: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'\n```\n"
-                story_text_3: "## Lists\nWhen we want to check if something is in a list, we can now use the `{in}` command.\nThis code prints pretty! if you choose green or yellow, and meh otherwise.\n"
-                example_code_3: "```\npretty_colors {is} green, yellow\ncolor {is} {ask} 'What is your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!'\n{else} {print} 'meh'\n```\n"
-                story_text_2: "Sometimes code with an `{if}` gets really long and does not fit on the line well. <br> You may also divide the code over two lines, starting the second line at the `{else}` like this:\n"
-                example_code_2: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice'\n{else} {print} 'boo!'\n```\n"
+                start_code: "שם {is} {ask} 'מה שמך?'\n{if} שם {is} הדי {print} 'קול!' {else} {print} 'שיהיה'"
+                story_text: "## אם... אחרת...\nבשלב 5 מתווסף משהו חדש, ה `{if}`! עם `{if}` ביכולתנו לבחור בין שתי אפשרויות.\nהקוד הבא ידפיס נחמד אם תכניסו הדי כשם, או בוז! או תכניסו משהו אחר.\n`{ask}` ו `{print}` ממשיכות לעבוד כמו בשלב 4.\n"
+                example_code: "```\nשם {is} {ask} 'מה שמך?'\n{if} שם {is} הדי {print} 'נחמד' {else} {print} 'בוז!'\n```\n"
+                story_text_3: "## רשימות\nכשנרצה לבדוק או משהו נמצא ברשימה, נוכל להשתמש בפקודה `{in}`.\nאם תבחרו ירוק או צהוב, הקוד הזה ידפיס \"יפה!\". אחרת הוא ידפיס \"ככה ככה\".\n"
+                example_code_3: "```\nצבעים_יפים {is} ירוק, צהוב\nצבע_אהוב {is} {ask} 'מה הצבע האהוב עליך?'\n{if} צבע_אהוב {in} צבעים_יפים {print} 'יפה!'\n{else} {print} 'שיהיה'\n```\n"
+                story_text_2: "לפעמים, קוד עם פקודות `{if}` נהיה ארוך מדי לשורה אחת. <br> אם זה קורה, אפשר לרדת שורה לפני הפקודה `{else}`, וככה לחלק את השורה לשתיים. לדוגמה:\n"
+                example_code_2: "```\nשם {is} {ask} 'איך קוראים לך?'\n{if} שם {is} הדי {print} 'נחמד'\n{else} {print} 'בוז!'\n```\n"
             7:
-                start_code: "{repeat} 3 {times} {print} 'Hedy is fun!'"
-                story_text: "## Level 7! Level 7!\nLevel 7 adds the `{repeat}` command.  `{repeat}` can be used to execute one line of code multiple times.\n"
-                example_code: "```\n{repeat} 3 {times} {print} 'Hedy is fun!'\n```\n"
+                start_code: "{repeat} 3 {times} {print} 'איזה כיף בהדי!'"
+                story_text: "## שלב 7! שלב 7!\nשלב 7 מוסיף את הפקודה `{repeat}`. תוכלו להשתמש ב-`{repeat}` כדי להריץ את אותה שורת קוד כמה פעמים.\n"
+                example_code: "```\n{repeat} 3 {times} {print} 'איזה כיף בהדי!'\n```\n"
             13:
-                start_code: "name = {ask} 'what is your name?'\nage = {ask} 'what is your age?'\n{if} name {is} 'Hedy' {and} age {is} 2\n    {print} 'You are the real Hedy!'"
-                story_text: "## And... Or..?\nWe are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two {if}'s but can use `{and}` and `{or}`. If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct."
-                example_code: "```\nname = {ask} 'what is your name?'\nage = {ask} 'what is your age?'\n{if} name {is} 'Hedy' {and} age {is} 2\n    {print} 'You are the real Hedy!'\n```\n"
+                start_code: "שם = {ask} 'איך קוראים לך?'\nגיל = {ask} 'בת כמה את?'\n{if} שם {is} 'הדי' {and} גיל {is} 2\n    {print} 'את הדי האמיתית!'"
+                story_text: "## וגם... או...?\nהגיע המן ללמוד על `{and}` ו-`{or}`! כדי לבדוק שני ביטויים, כבר אין צורך להשתמש בשתי פקודות {if}. אפשר להשתמש ב-`{and}` ו-`{or}`. כשמשתמשים ב-`{and}`, הביטויים משני צידי ה-`{and}` צריכים להיות נכונים. כשמשתמשים ב-`{or}`, מספיק שאחד מהם יהיה נכון."
+                example_code: "```\nשם = {ask} 'איך קוראים לך?'\nגיל = {ask} 'בת כמה את?'\n{if} שם {is} 'הדי' {and} גיל {is} 2\n    {print} 'את הדי האמיתית!'\n```\n"
             15:
-                story_text: "## More loops!\nWe are going to learn a new loop, the `{while}` loop! We continue the loop as long as the statement is true.\nSo don't forget to change the value in the loop.\n\nIn the example code, we continue until a correct answer has been given.\nIf the correct answer is never given, the loop never ends!"
-                start_code: "answer = 0\n{while} answer != 25\n    answer = {ask} 'What is 5 times 5?'\n{print} 'A correct answer has been given'"
-                example_code: "```\nanswer = 0\n{while} answer != 25\n    answer = {ask} 'What is 5 times 5?'\n{print} 'A correct answer has been given'\n```\n"
+                story_text: "## עוד לולאות!\nעכשיו נלמד סוג חדש של לולאה, לולאת `{while}`! הלולאה ממשיכה לחזור על עצמה, כל עוד הביטוי נכון.\nאז אל תשכחו לשנות אותו בתוך הלולאה.\n\nבדוגמה הבאה, אנחנו ממשיכים עד שנקבל את התשובה הנכונה.\nאם התשובה הנכונה אף פעם לא מתקבלת, הלולאה אף פעם לא תיגמר!"
+                start_code: "תשובה = 0\n{while} תשובה != 25\n    תשובה = {ask} 'כמה זה 5 כפול 5?'\n{print} 'זו התשובה הנכונה'"
+                example_code: "```\nתשובה = 0\n{while} תשובה != 25\n    תשובה = {ask} 'כמה זה 5 כפול 5?'\n{print} 'זו התשובה הנכונה'\n```\n"
             17:
                 start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'"
                 story_text: "## Elif\nNow we are going to change indentation a little bit. Every time that we need an indentation, we need `:` at the line before the indentation.\n\nIn this level you can also use a new command: `{elif}`. `{elif}` is short for {else} {if} and you need it when you want to make 3 (or more!) options.\nCheck it out!"
@@ -671,26 +671,26 @@ adventures:
                 example_code: "```\nsign = 'x'\nopen_spots = [1, 2, 3, 4, 5, 6, 7, 8, 9]\ngame = 'on'\nspot_1 = '.'\nspot_2 = '.'\nspot_3 = '.'\nspot_4 = '.'\nspot_5 = '.'\nspot_6 = '.'\nspot_7 = '.'\nspot_8 = '.'\nspot_9 = '.'\n{print} 'TIC TAC TOE!'\n{print} spot_1 spot_2 spot_3\n{print} spot_4 spot_5 spot_6\n{print} spot_7 spot_8 spot_9\n{print} ' '\n{while} game != 'over':\n    choice = {ask} 'Player ' sign ', which spot?'\n    {if} choice {in} open_spots:\n        {remove} choice {from} open_spots\n        {if} choice == 1:\n            spot_1 = sign\n        {if} choice == 2:\n            spot_2 = sign\n        {if} choice == 3:\n            spot_3 = sign\n        {if} choice == 4:\n            spot_4 = sign\n        {if} choice == 5:\n            spot_5 = sign\n        {if} choice == 6:\n            spot_6 = sign\n        {if} choice == 7:\n            spot_7 = sign\n        {if} choice == 8:\n            spot_8 = sign\n        {if} choice == 9:\n            spot_9 = sign\n    {else}:\n        {print} 'That spot was already taken'\n    {print} spot_1 spot_2 spot_3\n    {print} spot_4 spot_5 spot_6\n    {print} spot_7 spot_8 spot_9\n    {print} ' '\n    {if} spot_1 == spot_2 {and} spot_2 == spot_3 {and} spot_1 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_4 == spot_5 {and} spot_5 == spot_6 {and} spot_4 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_7 == spot_8 {and} spot_8 == spot_9 {and} spot_7 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_1 == spot_4 {and} spot_4 == spot_7 {and} spot_1 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_2 == spot_5 {and} spot_5 == spot_8 {and} spot_2 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_3 == spot_6 {and} spot_6 == spot_9 {and} spot_3 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_1 == spot_5 {and} spot_5 == spot_9 {and} spot_1 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_3 == spot_5 {and} spot_5 == spot_7 {and} spot_3 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {else}:\n        {if} sign == 'x':\n            sign = 'o'\n        {else}:\n            sign = 'x'\n```\n"
                 start_code: '## place your code here'
     parrot:
-        name: Parrot
-        description: Create your own online pet parrot that will copy you!
-        default_save_name: Parrot
+        name: תוכי
+        description: צרו לעצמכם.ן תוכי מחמד שיחקה אתכם.ן!
+        default_save_name: תוכי
         levels:
             3:
-                story_text: "## Parrot\nTeach your parrot a new word with `{add}`.\n"
-                example_code: "```\nwords {is} squawk, Hedy\n{print} Train your parrot!\nnew_word {is} {ask} Which word do you want to teach them?\n{add} new_word {to_list} words\n{print} \U0001F9D2 Say new_word , Hedy!\n{print} \U0001F99C words {at} {random}\n```\n"
+                story_text: "## תוכי\nלמדו את התוכי שלכם.ן מילה חדשה עם `{add}`.\n"
+                example_code: "```\nמילים {is} סקוואק, הֶדִי\n{print} אלפו את התוכי שלכם.ן!\nמילה_חדשה {is} {ask} איזו מילה תרצו ללמד את התוכי?\n{add} מילה_חדשה {to_list} מילים\n{print} \U0001F9D2 אמרי מילה_חדשה, הֶדִי!\n{print} \U0001F99C מילים {at} {random}\n```\n"
                 start_code: '# place your code here'
             5:
-                story_text: "## Parrot\nReward your parrot {if} it says the correct word!\n"
-                example_code: "```\nwords {is} squawk, Hedy\n{print} 'Train your parrot!'\nnew_word {is} {ask} 'Which word do you want to teach them?'\n{add} new_word {to_list} words\nsaid_word {is} words {at} {random}\n{print} '\U0001F9D2 Say ' new_word ', Hedy!'\n{print} '\U0001F99C ' said_word\n{if} said_word {is} new_word {print} '\U0001F9D2 Great job, Hedy! \U0001F36A'\n{else} {print} '\U0001F9D2 No, Hedy! Say ' new_word\n```\n"
+                story_text: "## תוכי\nתנו פרס לתוכי שלכם אם הוא אומר את המילה הנכונה!\n"
+                example_code: "```\nמילים {is} סקוואק, הֶדִי\n{print} 'אלפו את התוכי!'\nמילה_חדשה {is} {ask} 'איזו מילה נלמד את התוכי?'\n{add} מילה_חדשה {to_list} מילים\nמילה_שנאמרה {is} מילים {at} {random}\n{print} '\U0001F9D2 תגידי ' מילה_חדשה ', הֶדִי!'\n{print} '\U0001F99C ' מילה_שנאמרה\n{if} מילה_שנאמרה {is} מילה_חדשה {print} '\U0001F9D2עבודה טובה, הֶדִי! \U0001F36A'\n{else} {print} '\U0001F9D2 לא, הֶדִי! תגידי ' מילה_חדשה\n```\n"
                 start_code: '# place your code here'
             1:
-                story_text: "## Parrot\nCreate your own online pet parrot that will copy you!\n"
-                example_code: "```\n{print} Im Hedy the parrot\n{ask} whats your name?\n{echo}\n{echo}\n```\n"
-                start_code: '{print} Im Hedy the parrot'
+                story_text: "## תוכי\nצרו תוכי מחמד שיחקה אתכם.ן!\n"
+                example_code: "```\n{print} אני הֶדִי התוכי\n{ask} מה שמך?\n{echo}\n{echo}\n```\n"
+                start_code: '{print} אני הֶדִי התוכי'
             2:
-                story_text: "## Parrot\nCreate your own online pet parrot that will copy you!\n"
-                example_code: "```\n{print} Im Hedy the parrot\nname {is} {ask} whats your name?\n{print} name\n{sleep}\n{print} squawk\n{sleep}\n{print} name\n```\n"
-                start_code: '{print} Im Hedy the parrot!'
+                story_text: "## תוכי\nצרו תוכי מחמד שיחקה אתכם.ן!\n"
+                example_code: "```\n{print} אני הֶדִי התוכי\nשם {is} {ask} מה שמך?\n{print} שם\n{sleep}\n{print} סקוואק!\n{sleep}\n{print} שם\n```\n"
+                start_code: '{print} אני הֶדִי התוכי!'
     dice:
         name: Dice
         description: Make your own dice
