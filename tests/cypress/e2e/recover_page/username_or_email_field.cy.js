@@ -1,12 +1,11 @@
-import {goToLogin} from '../tools/navigation/nav.js'
+import {goToRecover} from '../tools/navigation/nav.js'
 
-describe('Username field test', () => {
+describe('Password field test', () => {
   it('passes', () => {
-    goToLogin();
+    goToRecover();
 
-    // Tests username field interaction
+    // Tests password field interaction
     cy.get('#username')
-      .get('#username')
       .should('be.visible')
       .should('be.empty')
       .type('some_username\"!#@\'( )*$%\'123\"')

@@ -12,6 +12,7 @@ module.exports = defineConfig({
   env: {
     landing_page: '/landing-page',
     login_page: '/login',
+    recover_page: '/recover',
     hedy_page: '/hedy',
     stats_class_page: '/stats/class',
     teachers_page: '/for-teachers',

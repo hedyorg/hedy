@@ -30,6 +30,11 @@ export function goToLogin()
     return goToPage(Cypress.env('login_page'));
 }
 
+export function goToRecover()
+{
+    return goToPage(Cypress.env('recover_page'));
+}
+
 export function goToTeachersPage()
 {
     return goToPage(Cypress.env('teachers_page'));

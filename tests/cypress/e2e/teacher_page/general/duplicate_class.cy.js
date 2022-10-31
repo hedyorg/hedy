@@ -16,8 +16,5 @@ describe('Is able to click on duplicate class', () => {
     cy.get('#modal-ok-button').click();
 
     goToTeachersPage();
-
-
-    
   })
 })
