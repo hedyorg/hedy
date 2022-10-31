@@ -6,7 +6,8 @@ describe('Is able to go back to teacher page', () => {
     loginForTeacher();
     cy.wait(500);
     createClass();
-    cy.get(':nth-child(1) > :nth-child(3) > .no-underline').click();
+    cy.get(":nth-child(1) > :nth-child(3) > .no-underline").click();
+    cy.get("cy.get(':nth-child(1) > .green-btn')").click();
      
     
   })
