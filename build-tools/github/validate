@@ -8,7 +8,11 @@ scriptdir=$(cd $(dirname $0) && pwd)
 $scriptdir/validate-python
 $scriptdir/validate-typescript
 $scriptdir/validate-yaml
-$scriptdir/validate-tests
+if [[ "${1:-}" == "--all" ]]; then
+  $scriptdir/validate-tests --all
+else
+  $scriptdir/validate-tests
+fi
 $scriptdir/validate-e2e
 
 echo "Everything is great! 🍰"

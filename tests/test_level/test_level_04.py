@@ -558,7 +558,7 @@ class TestsLevel4(HedyTester):
 
         expected = HedyTester.dedent(
             "afstand = input(f'hoe ver dan?')",
-            HedyTester.forward_transpiled('afstand'))
+            HedyTester.forward_transpiled('afstand', self.level))
 
         self.multi_level_tester(
             max_level=11,
@@ -606,6 +606,13 @@ class TestsLevel4(HedyTester):
             code=code,
             exception=hedy.exceptions.ParseException,
             extra_check_function=lambda c: c.exception.fixed_code == "print 'Hello'"
+        )
+
+    def test_lonely_text(self):
+        code = "'Hello'"
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.LonelyTextException
         )
 
     #

@@ -1445,11 +1445,16 @@ function clean_variables(variables: Record<string, Variable>) {
   for (const variable in variables) {
     if (!variable.includes('__') && !unwanted_variables.includes(variable)) {
       let extraStyle = special_style_for_variable(variables[variable]);
-      let newTuple = [variable, variables[variable].v, extraStyle];
+      let name = unfixReserved(variable);
+      let newTuple = [name, variables[variable].v, extraStyle];
       new_variables.push(newTuple);
     }
   }
   return new_variables;
+}
+
+function unfixReserved(name: string) {
+  return name.replace(/_\$rw\$$/, "");
 }
 
 function store_parsons_attempt(order: Array<string>, correct: boolean) {
@@ -1765,8 +1770,16 @@ export function change_language(lang: string) {
     contentType: 'application/json',
     dataType: 'json'
   }).done(function(response: any) {
-      if (response.succes){
-        location.reload();
+      if (response.succes){        
+        // Check if keyword_language is set to change it to English
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        if (urlParams.get('keyword_language') !== null) {
+          urlParams.set('keyword_language', 'en');
+          window.location.search = urlParams.toString();          
+        } else {
+          location.reload();
+        }        
       }
     }).fail(function(xhr) {
       console.error(xhr);

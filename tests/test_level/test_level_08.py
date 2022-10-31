@@ -479,12 +479,13 @@ class TestsLevel8(HedyTester):
 
         expected = HedyTester.dedent(
             "for i in range(int('3')):",
-            (HedyTester.forward_transpiled(100), '  '))
+            (HedyTester.forward_transpiled(100, self.level), '  '))
 
         self.multi_level_tester(
             code=code,
             expected=expected,
-            extra_check_function=self.is_turtle()
+            extra_check_function=self.is_turtle(),
+            max_level=11
         )
 
     def test_repeat_print(self):

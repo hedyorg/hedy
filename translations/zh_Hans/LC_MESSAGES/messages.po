@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-10-13 13:47+0200\n"
-"PO-Revision-Date: 2022-10-20 06:50+0000\n"
-"Last-Translator: ls1955 <xxlsxx1955@gmail.com>\n"
+"PO-Revision-Date: 2022-10-27 23:50+0000\n"
+"Last-Translator: Grace666-code <jiaxh2005@163.com>\n"
 "Language-Team: zh_Hans <LL@li.org>\n"
 "Language: zh_Hans\n"
 "MIME-Version: 1.0\n"
@@ -51,13 +51,13 @@ msgid "no_such_adventure"
 msgstr "这个探险不存在！"
 
 msgid "user_inexistent"
-msgstr ""
+msgstr "此用户不存在"
 
 msgid "no_certificate"
-msgstr ""
+msgstr "此用户尚未获得 Hedy 结业证书"
 
 msgid "congrats_message"
-msgstr ""
+msgstr "恭喜你，{username}，你已经完成了Hedy!"
 
 msgid "page_not_found"
 msgstr "无法找到该页面！"
@@ -107,7 +107,7 @@ msgstr ""
 
 #, fuzzy
 msgid "invalid_tutorial_step"
-msgstr "无效的教程步骤"
+msgstr "无效的教学环节"
 
 msgid "tutorial_title_not_found"
 msgstr "未找到此教程步骤"
@@ -123,7 +123,7 @@ msgstr "你选择的图像是无效的。"
 
 #, fuzzy
 msgid "personal_text_invalid"
-msgstr "你的个人文档是无效的。"
+msgstr "你的个人文本是无效的。"
 
 msgid "favourite_program_invalid"
 msgstr "你选择的最喜欢的程序是无效的。"
@@ -192,9 +192,8 @@ msgstr ""
 msgid "Unquoted Assignment"
 msgstr "从这一关开始，你需要在 `is`右边的文本两边加上引号。你忘了给 text 加。"
 
-#, fuzzy
 msgid "Unquoted Equality Check"
-msgstr "如果你想检查一个变量的内容是否是一些词，那就需要用引号包裹这些词！"
+msgstr "如果你想检查一个变量的内容是否是一些词，那就需要用引号将这些词括起来！"
 
 msgid "Var Undefined"
 msgstr ""
@@ -206,9 +205,9 @@ msgstr ""
 "你试图在第{access_line_number}行使用变量{name}，但你在第"
 "{definition_line_number}行才设置了它。使用变量前要先设置。"
 
-#, fuzzy
 msgid "Cyclic Var Definition"
-msgstr "如果你想在命令的右侧使用变量 {variable}，你需要先设置这个变量。"
+msgstr ""
+"如果你想在是（is）命令的右侧使用变量 {variable}，你需要先给这个变量赋值。"
 
 msgid "Lonely Echo"
 msgstr ""
@@ -254,12 +253,15 @@ msgstr "看上去你忘了在第{line_number}行给{command}用重复命令了�
 msgid "Unsupported String Value"
 msgstr "文本值不能包含{invalid_value}。"
 
+msgid "Lonely Text"
+msgstr "看来你忘记在第{line_number}行的文字里使用指令"
+
 msgid "ask_needs_var"
-msgstr "从第2关起，`{ask}`需要和变量共同使用。比如：名字`{is} {ask}`你叫什么？"
+msgstr "从第2关开始，`{ask}`需要和变量共同使用。例子：名字`{is} {ask}`你叫什么？"
 
 msgid "echo_out"
 msgstr ""
-"从第二关起，你不再需要`{echo}`。你可以用`{ask}`和`{print}`来复述答案。比如："
+"从第二级起，你不再需要`{echo}`。你可以用`{ask}`和`{print}`来复述答案。比如："
 "名字 `{is} {ask}` 你叫什么？`{print}` 你好，名字"
 
 msgid "space"
@@ -346,35 +348,35 @@ msgstr "成就图标"
 msgid "achievements_check_icon_alt"
 msgstr "成就打勾图标"
 
+#, fuzzy
 msgid "certificate"
-msgstr ""
+msgstr "完成之证"
 
 msgid "hedy_logo_alt"
 msgstr "海迪标志"
 
+#, fuzzy
 msgid "fun_statistics_msg"
-msgstr ""
+msgstr "这儿有一些有趣的统计数据!"
+
+msgid "number_programs"
+msgstr "运行了的程序数量"
 
 #, fuzzy
-msgid "number_programs"
-msgstr "Number of programs"
-
 msgid "quiz_score"
-msgstr ""
+msgstr "Quiz score"
 
 msgid "longest_program"
-msgstr ""
+msgstr "最长的程序"
 
 msgid "number_achievements"
-msgstr ""
+msgstr "成就数"
 
-#, fuzzy
 msgid "cheatsheet_title"
-msgstr "Cheatsheet"
+msgstr "小抄"
 
-#, fuzzy
 msgid "back_to_class"
-msgstr "返回班级"
+msgstr "回到课室"
 
 msgid "class_name_prompt"
 msgstr "请输入新班级的名称"
@@ -388,27 +390,21 @@ msgstr "上次登录"
 msgid "highest_level_reached"
 msgstr "达到的最高等级"
 
-#, fuzzy
-msgid "number_programs"
-msgstr "程序数量"
-
 msgid "programs"
 msgstr "程序"
 
 msgid "password"
 msgstr "密码"
 
-#, fuzzy
 msgid "remove"
-msgstr "Remove"
+msgstr "移除"
 
-#, fuzzy
 msgid "page"
-msgstr "page"
+msgstr "页面"
 
 #, fuzzy
 msgid "enter_password"
-msgstr "Enter a new password for"
+msgstr "输入新的密码"
 
 msgid "password_change_prompt"
 msgstr "你确定要更改此密码吗？"
@@ -419,13 +415,11 @@ msgstr "你确定要将这名学生移出班级吗？"
 msgid "add_students"
 msgstr "添加学生"
 
-#, fuzzy
 msgid "customize_class"
-msgstr "Customize class"
+msgstr "定制课室"
 
-#, fuzzy
 msgid "class_stats"
-msgstr "Class statistics"
+msgstr "班级统计数据"
 
 msgid "class_logs"
 msgstr "日志"
@@ -435,18 +429,17 @@ msgstr "返回教师页面"
 
 #, fuzzy
 msgid "add_students_options"
-msgstr "Create student accounts"
+msgstr "加入学生选项"
 
 #, fuzzy
 msgid "copy_link_success"
-msgstr "Copy link to share"
+msgstr "成功把邀请链接复制到剪贴板"
 
 msgid "copy_join_link"
 msgstr "复制链接"
 
-#, fuzzy
 msgid "invite_prompt"
-msgstr "Enter a username"
+msgstr "输入一个用户名"
 
 msgid "invite_by_username"
 msgstr "按用户名邀请"
@@ -456,15 +449,13 @@ msgstr "创建多个账户"
 
 #, fuzzy
 msgid "pending_invites"
-msgstr "Pending invites"
+msgstr "等待邀请"
 
-#, fuzzy
 msgid "invite_date"
-msgstr "Invite date"
+msgstr "邀请日期"
 
-#, fuzzy
 msgid "expiration_date"
-msgstr "Expiration date"
+msgstr "过期日期"
 
 #, fuzzy
 msgid "delete_invite_prompt"
@@ -710,9 +701,8 @@ msgstr "Option"
 msgid "value"
 msgstr "Value"
 
-#, fuzzy
-msgid "quiz_score"
-msgstr "Quiz score"
+msgid "highest_quiz_score"
+msgstr "最高测验分"
 
 #, fuzzy
 msgid "percentage"
@@ -981,11 +971,11 @@ msgid "search"
 msgstr "搜寻..."
 
 msgid "keyword_support"
-msgstr "翻译关键字"
+msgstr "翻译关键词"
 
 #, fuzzy
 msgid "non_keyword_support"
-msgstr "Translated content"
+msgstr "翻译的内容"
 
 msgid "welcome"
 msgstr "欢迎"
@@ -993,106 +983,85 @@ msgstr "欢迎"
 msgid "welcome_back"
 msgstr "欢迎回来"
 
-#, fuzzy
 msgid "teacher_tutorial_logo_alt"
-msgstr "You have received an invitation to join class"
+msgstr "教师教程图标"
 
+#, fuzzy
 msgid "start_teacher_tutorial"
 msgstr "开始教师教程"
 
-#, fuzzy
 msgid "hedy_tutorial_logo_alt"
-msgstr "Start hedy tutorial"
+msgstr "Hedy 教程的图标"
 
-#, fuzzy
 msgid "start_hedy_tutorial"
-msgstr "Start hedy tutorial"
+msgstr "开始 Hedy 教程"
 
-#, fuzzy
 msgid "start_programming_logo_alt"
-msgstr "Directly start programming"
+msgstr "开始编程图标"
 
-#, fuzzy
 msgid "start_programming"
-msgstr "Directly start programming"
+msgstr "开始编程"
 
-#, fuzzy
 msgid "explore_programs_logo_alt"
-msgstr "Explore programs"
+msgstr "浏览程序图标"
 
 msgid "your_account"
 msgstr "你的个人档案"
 
-#, fuzzy
 msgid "profile_logo_alt"
-msgstr "Profile updated."
+msgstr "个人档案图标。"
 
 msgid "no_public_profile"
-msgstr "你还没有公开的档案内容……"
+msgstr "你还没有公开的个人档案……"
 
-#, fuzzy
 msgid "create_question"
-msgstr "Do you want to create one?"
+msgstr "你想创建一个吗？"
 
-#, fuzzy
 msgid "amount_created"
-msgstr "programs created"
+msgstr "程序已创建"
 
-#, fuzzy
 msgid "amount_saved"
-msgstr "programs saved"
+msgstr "程序已保存"
 
-#, fuzzy
 msgid "amount_submitted"
-msgstr "programs submitted"
+msgstr "程序已提交"
 
-#, fuzzy
 msgid "your_last_program"
-msgstr "Favourite program"
+msgstr "您上次保存的程序"
 
-#, fuzzy
 msgid "ok"
-msgstr "OK"
+msgstr "好的"
 
-#, fuzzy
 msgid "cancel"
-msgstr "Cancel"
+msgstr "取消"
 
-#, fuzzy
 msgid "copy_link_to_share"
-msgstr "Copy link to share"
+msgstr "复制链接以分享"
 
 #, fuzzy
 msgid "achievement_earned"
-msgstr "You've earned an achievement!"
+msgstr "你已经赢得了一项成就!"
 
-#, fuzzy
 msgid "mailing_title"
-msgstr "Subscribe to the Hedy newsletter"
+msgstr "订阅Hedy新闻通讯"
 
-#, fuzzy
 msgid "email"
-msgstr "Email"
+msgstr "电子邮件"
 
-#, fuzzy
 msgid "surname"
-msgstr "First Name"
+msgstr "名"
 
-#, fuzzy
 msgid "lastname"
-msgstr "Last Name"
+msgstr "姓"
 
-#, fuzzy
 msgid "country"
-msgstr "Country"
+msgstr "国家"
 
-#, fuzzy
 msgid "subscribe"
-msgstr "Subscribe"
+msgstr "订阅"
 
-#, fuzzy
 msgid "required_field"
-msgstr "Fields marked with an * are required"
+msgstr "标有 星号* 的为必填项"
 
 #, fuzzy
 msgid "previous_campaigns"
@@ -1100,558 +1069,448 @@ msgstr "View previous campaigns"
 
 #, fuzzy
 msgid "step_title"
-msgstr "Assignment"
+msgstr "任务"
 
-#, fuzzy
 msgid "save_code_button"
-msgstr "Save code"
+msgstr "保存代码"
 
-#, fuzzy
 msgid "share_code_button"
-msgstr "Save & share code"
+msgstr "保存和分享代码"
 
-#, fuzzy
 msgid "tutorial"
-msgstr "Tutorial"
+msgstr "教程"
 
-#, fuzzy
 msgid "try_button"
-msgstr "Try"
+msgstr "尝试"
 
-#, fuzzy
 msgid "commands"
-msgstr "Commands"
+msgstr "命令"
 
-#, fuzzy
 msgid "english"
-msgstr "English"
+msgstr "英语"
 
-#, fuzzy
 msgid "login_long"
-msgstr "Log in to your account"
+msgstr "登录到您的账户"
 
-#, fuzzy
 msgid "no_account"
-msgstr "No account?"
+msgstr "还没有账户？"
 
-#, fuzzy
 msgid "create_account"
-msgstr "Create account"
+msgstr "创建账户"
 
-#, fuzzy
 msgid "forgot_password"
-msgstr "Forgot your password?"
+msgstr "忘记密码了吗？"
 
-#, fuzzy
 msgid "main_title"
 msgstr "Hedy"
 
-#, fuzzy
 msgid "main_subtitle"
-msgstr "A gradual programming language"
+msgstr "一种渐进式的编程语言"
 
-#, fuzzy
 msgid "try_it"
-msgstr "Try it"
+msgstr "试试看"
 
-#, fuzzy
 msgid "exercise"
-msgstr "Exercise"
+msgstr "练习"
 
-#, fuzzy
 msgid "what_should_my_code_do"
-msgstr "What should my code do?"
+msgstr "我的代码能做什么？"
 
-#, fuzzy
 msgid "teacher_account_request"
-msgstr "You have a pending teacher account request"
+msgstr "您有一个待处理的教师账户申请"
 
-#, fuzzy
 msgid "account_overview"
-msgstr "Account overview"
+msgstr "账户概览"
 
-#, fuzzy
 msgid "my_messages"
-msgstr "My messages"
+msgstr "我的信息"
 
-#, fuzzy
 msgid "invite_message"
-msgstr "You have received an invitation to join class"
+msgstr "你已经收到了加入班级的邀请"
 
-#, fuzzy
 msgid "sent_by"
-msgstr "This invitation is sent by"
+msgstr "本邀请函由以下单位发出"
 
-#, fuzzy
 msgid "delete_invite"
-msgstr "Delete invitation"
+msgstr "删除邀请"
 
-#, fuzzy
 msgid "public_profile"
-msgstr "Public profile"
+msgstr "公开个人资料"
 
-#, fuzzy
 msgid "visit_own_public_profile"
-msgstr "Public profile"
+msgstr "访问你自己的个人资料"
 
-#, fuzzy
 msgid "profile_picture"
-msgstr "Profile picture"
+msgstr "个人资料图片"
 
 #, fuzzy
 msgid "personal_text"
-msgstr "Personal text"
+msgstr "个人文本"
 
 #, fuzzy
 msgid "your_personal_text"
-msgstr "Your personal text..."
+msgstr "你的个人文本..."
 
-#, fuzzy
 msgid "favourite_program"
-msgstr "Favourite program"
+msgstr "最喜欢的程序"
 
-#, fuzzy
 msgid "public_profile_info"
 msgstr ""
-"By selecting this box I make my profile visible for everyone. Be careful not "
-"to share personal information like your name or home address, because "
-"everyone will be able to see it!"
+"通过选择此框，我使我的个人资料对所有人可见。请注意不要分享你的姓名或家庭住址"
+"等个人信息，因为每个人都能看到这些信息！"
 
-#, fuzzy
 msgid "update_public"
-msgstr "Update public profile"
+msgstr "更新公开的个人资料"
 
-#, fuzzy
 msgid "are_you_sure"
-msgstr "Are you sure? You cannot revert this action."
+msgstr "你确定吗？ 你无法撤销此操作。"
 
-#, fuzzy
 msgid "delete_public"
-msgstr "Delete public profile"
+msgstr "删除公开的个人资料"
 
-#, fuzzy
 msgid "self_removal_prompt"
-msgstr "Are you sure you want to leave this class?"
+msgstr "你确定你要退出这个班级吗？"
 
-#, fuzzy
 msgid "leave_class"
-msgstr "Leave class"
+msgstr "退出班级"
 
-#, fuzzy
 msgid "settings"
-msgstr "My personal settings"
+msgstr "我的个人设置"
 
-#, fuzzy
 msgid "birth_year"
-msgstr "Birth year"
+msgstr "出生年份"
 
-#, fuzzy
 msgid "preferred_language"
-msgstr "Preferred language"
+msgstr "首选语言"
 
-#, fuzzy
 msgid "preferred_keyword_language"
-msgstr "Preferred keyword language"
+msgstr "首选关键字语言"
 
-#, fuzzy
 msgid "gender"
-msgstr "Gender"
+msgstr "性别"
 
-#, fuzzy
 msgid "female"
-msgstr "Female"
+msgstr "女"
 
-#, fuzzy
 msgid "male"
-msgstr "Male"
+msgstr "男"
 
-#, fuzzy
 msgid "other"
-msgstr "Other"
+msgstr "其他"
 
-#, fuzzy
 msgid "agree_third_party"
-msgstr ""
-"I consent to being contacted by partners of Leiden University with sales "
-"opportunities (optional)"
+msgstr "我允许莱顿大学的合作伙伴与我联系（可选）"
 
-#, fuzzy
 msgid "update_profile"
-msgstr "Update profile"
+msgstr "更新个人资料"
 
-#, fuzzy
 msgid "destroy_profile"
-msgstr "Delete profile"
+msgstr "删除个人资料"
 
 msgid "change_password"
-msgstr "修改密码"
+msgstr "更改密码"
 
-#, fuzzy
 msgid "current_password"
-msgstr "Current password"
+msgstr "当前密码"
 
-#, fuzzy
 msgid "new_password"
-msgstr "New password"
+msgstr "新密码"
 
-#, fuzzy
 msgid "repeat_new_password"
-msgstr "Repeat new password"
+msgstr "重复新密码"
 
-#, fuzzy
 msgid "request_teacher"
-msgstr "Would you like to apply for a teacher's account?"
+msgstr "你想申请教师账户吗？"
 
-#, fuzzy
 msgid "request_teacher_account"
-msgstr "Request teacher account"
+msgstr "申请教师账户"
 
 #, fuzzy
 msgid "recent"
-msgstr "My recent programs"
+msgstr "我最近的程序"
 
-#, fuzzy
 msgid "all"
-msgstr "All"
+msgstr "全部"
 
-#, fuzzy
 msgid "submitted"
-msgstr "Submitted"
+msgstr "已提交"
 
-#, fuzzy
 msgid "submitted_header"
-msgstr "This is a submitted program and can't be altered."
+msgstr "这是一个已提交的程序，无法更改。"
 
-#, fuzzy
 msgid "title"
-msgstr "Title"
+msgstr "标题"
 
 #, fuzzy
 msgid "last_edited"
-msgstr "Last edited"
+msgstr "最后编辑"
 
-#, fuzzy
 msgid "favourite_confirm"
-msgstr "Are you sure you want to set this program as your favourite?"
+msgstr "你确定要将此程序设置为你最喜爱的程序吗？"
 
-#, fuzzy
 msgid "open"
-msgstr "Open"
+msgstr "打开"
 
-#, fuzzy
 msgid "copy_clipboard"
-msgstr "Successfully copied to clipboard"
+msgstr "已成功复制到剪贴板"
 
 #, fuzzy
 msgid "unshare_confirm"
-msgstr "Are you sure you want to make the program private?"
+msgstr "是否确实要将此程序设为私享？"
 
 #, fuzzy
 msgid "unshare"
-msgstr "Unshare"
+msgstr "不分享"
 
-#, fuzzy
 msgid "submit_warning"
-msgstr "Are you sure you want to submit this program?"
+msgstr "是否确实要提交此程序？"
 
-#, fuzzy
 msgid "submit_program"
-msgstr "Submit"
+msgstr "提交"
 
 #, fuzzy
 msgid "share_confirm"
-msgstr "Are you sure you want to make the program public?"
+msgstr "是否确实要公开该程序？"
 
 #, fuzzy
 msgid "share"
-msgstr "Share"
+msgstr "分享"
 
-#, fuzzy
 msgid "no_programs"
-msgstr "You have no programs yet."
+msgstr "您还没有程序。"
 
-#, fuzzy
 msgid "write_first_program"
-msgstr "Write your first program!"
+msgstr "编写你的第一个程序!"
 
 msgid "see_certificate"
-msgstr ""
+msgstr "查看 {username} 的证书！"
 
 #, fuzzy
 msgid "certified_teacher"
-msgstr "Certified teacher"
+msgstr "认证的教师"
 
-#, fuzzy
 msgid "admin"
-msgstr "Admin"
+msgstr "管理员"
 
 #, fuzzy
 msgid "distinguished_user"
-msgstr "Distinguished user"
+msgstr "杰出的用户"
 
 #, fuzzy
 msgid "contributor"
-msgstr "Contributor"
+msgstr "贡献者"
 
-#, fuzzy
 msgid "no_shared_programs"
-msgstr "has no shared programs..."
+msgstr "没有共享程序..."
 
 #, fuzzy
 msgid "quiz_logo_alt"
-msgstr "Quiz logo"
+msgstr "测验标志"
 
-#, fuzzy
 msgid "start_quiz"
-msgstr "Start quiz"
+msgstr "开始测验"
 
-#, fuzzy
 msgid "go_to_first_question"
-msgstr "Go to question 1"
+msgstr "转到问题 1"
 
-#, fuzzy
 msgid "question"
-msgstr "Question"
+msgstr "问题"
 
-#, fuzzy
 msgid "hint"
-msgstr "Hint?"
+msgstr "提示？"
 
-#, fuzzy
 msgid "submit_answer"
-msgstr "Answer question"
+msgstr "回答问题"
 
-#, fuzzy
 msgid "feedback_success"
-msgstr "Good!"
+msgstr "赞！"
 
-#, fuzzy
 msgid "feedback_failure"
-msgstr "Wrong!"
+msgstr "错了!"
 
-#, fuzzy
 msgid "correct_answer"
-msgstr "The correct answer is"
+msgstr "正确答案是"
 
-#, fuzzy
 msgid "go_to_question"
-msgstr "Go to question"
+msgstr "转到问题"
 
 #, fuzzy
 msgid "go_to_quiz_result"
-msgstr "Go to quiz result"
+msgstr "转到测验结果"
 
-#, fuzzy
 msgid "end_quiz"
-msgstr "Quiz end"
+msgstr "测验结束"
 
 #, fuzzy
 msgid "score"
-msgstr "Score"
+msgstr "得分"
 
 msgid "get_certificate"
-msgstr ""
+msgstr "获取你的证书!"
 
-#, fuzzy
 msgid "recover_password"
-msgstr "Request a password reset"
+msgstr "要求重置密码"
 
-#, fuzzy
 msgid "send_password_recovery"
-msgstr "Send me a password recovery link"
+msgstr "向我发送密码恢复链接"
 
-#, fuzzy
 msgid "reset_password"
-msgstr "Reset password"
+msgstr "重置密码"
 
-#, fuzzy
 msgid "password_repeat"
-msgstr "Repeat password"
+msgstr "重复输入密码"
 
-#, fuzzy
 msgid "signup_student_or_teacher"
-msgstr "Are you a student or a teacher?"
+msgstr "你是学生还是老师？"
 
-#, fuzzy
 msgid "student_signup_header"
-msgstr "Student"
+msgstr "学生"
 
-#, fuzzy
 msgid "teacher_signup_header"
-msgstr "Teacher"
+msgstr "教师"
 
-#, fuzzy
 msgid "create_teacher_account"
-msgstr "Create a teacher account"
+msgstr "创建一个教师账户"
 
-#, fuzzy
 msgid "create_student_account"
-msgstr "Create an account"
+msgstr "创建一个账户"
 
-#, fuzzy
 msgid "create_teacher_account_explanation"
-msgstr ""
-"With a teacher account, you can save your programs and see the results of "
-"your students."
+msgstr "使用教师帐户，你可以保存自己的程序并查看学生的学习结果。"
 
-#, fuzzy
 msgid "create_student_account_explanation"
-msgstr "You can save your own programs with an account."
+msgstr "你可以使用帐户保存自己的程序。"
 
-#, fuzzy
 msgid "programming_experience"
-msgstr "Do you have programming experience?"
+msgstr "你有编程经验吗？"
 
-#, fuzzy
 msgid "languages"
-msgstr "Which of these programming languages have you used before?"
+msgstr "您以前使用过以下哪种编程语言？"
 
-#, fuzzy
 msgid "other_block"
-msgstr "Another block language"
+msgstr "另一种模块语言"
 
-#, fuzzy
 msgid "other_text"
-msgstr "Another text language"
+msgstr "另一种文本语言"
 
-#, fuzzy
 msgid "subscribe_newsletter"
-msgstr "Subscribe to the newsletter"
+msgstr "订阅通讯"
 
-#, fuzzy
 msgid "agree_with"
-msgstr "I agree to the"
+msgstr "我同意"
 
-#, fuzzy
 msgid "privacy_terms"
-msgstr "privacy terms"
+msgstr "隐私条款"
 
-#, fuzzy
 msgid "already_account"
-msgstr "Already have an account?"
+msgstr "是否已经有账户?"
 
-#, fuzzy
 msgid "teacher_invitation_require_login"
 msgstr ""
-"To set up your profile as a teacher, we will need you to log in. If you "
-"don't have an account, please create one."
+"要将您的个人资料设置为教师，我们需要您登录。如果您没有帐户，请创建一个。"
 
 #, fuzzy
 msgid "by"
-msgstr "by"
+msgstr "由"
 
 #, fuzzy
 msgid "percentage_achieved"
-msgstr "Achieved by {percentage}% of the users"
+msgstr "由{percentage}%的用户实现的"
 
-#, fuzzy
 msgid "title_admin"
-msgstr "Hedy - Administrator page"
+msgstr "Hedy - 管理员页面"
 
-#, fuzzy
 msgid "username_invalid"
-msgstr "Your username is invalid."
+msgstr "你的用户名无效。"
 
-#, fuzzy
 msgid "teacher_invalid"
-msgstr "Your teacher value is invalid."
+msgstr "你的教师值无效。"
 
 #, fuzzy
 msgid "email_invalid"
-msgstr "Please enter a valid email."
+msgstr "请输入一个有效的电子邮件。"
 
-#, fuzzy
 msgid "mail_error_change_processed"
-msgstr ""
-"Something went wrong when sending a validation mail, the changes are still "
-"correctly processed."
+msgstr "发送验证邮件时出现问题，正在处理中。"
 
-#, fuzzy
 msgid "username_special"
-msgstr "Username cannot contain `:` or `@`."
+msgstr "用户名不能包含`:`或`@`。"
 
-#, fuzzy
 msgid "username_three"
-msgstr "Username must contain at least three characters."
+msgstr "用户名必须至少包含三个字符。"
 
-#, fuzzy
 msgid "password_invalid"
-msgstr "Your password is invalid."
+msgstr "你的密码无效。"
 
-#, fuzzy
 msgid "passwords_six"
-msgstr "All passwords need to be six characters or longer."
+msgstr "所有的密码都至少需要六个字符或更长。"
 
-#, fuzzy
 msgid "mail_welcome_verify_body"
 msgstr ""
-"Your Hedy account has been created successfully. Welcome!\n"
-"Please click on this link to verify your email address: {link}"
+"您的Hedy账户已成功创建。欢迎你！\n"
+"请点击此链接以验证您的电子邮件地址：{link}"
 
-#, fuzzy
 msgid "mail_change_password_body"
 msgstr ""
-"Your Hedy password has been changed. If you did this, all is good.\n"
-"If you didn't change your password, please contact us immediately by "
-"replying to this email."
+"您的Hedy密码已被更改。如果是你改的那就没事。\n"
+"如果你并没有修改密码，请立即回复本邮件与我们联系。"
 
-#, fuzzy
 msgid "mail_recover_password_body"
 msgstr ""
-"By clicking on this link, you can set a new Hedy password. This link is "
-"valid for <b>4</b> hours.\n"
-"If you haven't required a password reset, please ignore this email: {link}"
+"通过单击此链接，您可以设置新的Hedy密码。此链接的有效期为 <b>4</b> 小时。\n"
+"如果您不需要重置密码，请忽略此电子邮件：{link}"
 
-#, fuzzy
 msgid "mail_reset_password_body"
 msgstr ""
-"Your Hedy password has been reset to a new one. If you did this, all is "
-"good.\n"
-"If you didn't change your password, please contact us immediately by "
-"replying to this email."
+"您的Hedy密码已被重置为新密码。如果是你改的那就没事。\n"
+"如果你并没有修改密码，请立即回复本邮件与我们联系。"
 
-#, fuzzy
 msgid "mail_welcome_teacher_body"
 msgstr ""
-"<strong>欢迎!</strong>\n"
-"恭喜你全新的海迪老师帐号。 欢迎来到遍布全世界的海迪教师社区！\n"
+"<strong>欢迎！</strong>。 \n"
+"恭喜您拥有全新的Hedy教师账户。欢迎来到世界范围内的Hedy教师社区! \n"
 "\n"
-"<strong>老师帐号能做什么</strong>\n"
-"你能使用老师帐号以创建课室。 "
-"你的学生将能加入你的课室，而你也能观看他们的进度。 使用 <a href=\"https"
-"://hedycode.com/for-teachers\">老师专页</a>以创建， 管理教室。\n"
+"<strong>教师账户可以做什么？ \n"
+"现在为你解锁许多额外的选项。 \n"
 "\n"
-"<strong>如何分享想法</strong>\n"
-"如果你在课堂使用海迪，你或许有能改进海迪的意见！你能在<a href=\"https"
-"://github.com/Felienne/hedy/discussions/categories/ideas\">想法 "
-"论坛</a>与我们分享那些想法。\n"
+"1.额外的解释可在<a href=\"https://hedy.org/for-teachers/manual\">teacher's "
+"manual</a>中找到。 \n"
+"2.您可以通过您的教师帐户创建您的班级。您的学生将能加入您的班级，您也可以看到"
+"他们的进度。班级是通过<a href=\"https://hedycode.com/for-teachers\">teachers "
+"page</a>创建和管理的。 \n"
+"3.您可以完全自定义您的班级，例如，您可以打开和关闭不同级别，启用或禁用冒险活"
+"动，以及编写您自己的冒险活动！ \n"
 "\n"
-"<strong>如何寻求帮助</strong>\n"
-"如果有任何不明白的事项， 你能发布在 <a href=\"https://github.com/Felienne/"
-"hedy/discussions/categories/q-a\">Q&A 论坛</a>, 或者 <a href=\"mailto: "
-"hello@hedy.org\">向我们发送一份邮件</a>。\n"
+"<strong>加入我们的在线社区！</strong> \n"
+"欢迎所有Hedy老师、程序员和其他爱好者加入我们的社区<a href=\"https://discord."
+"gg/8yY7dEme9r\">Discord server</a>。这是谈论Hedy的理想场所：我们有一些频道，"
+"你可以展示你很酷的项目和课程，有一些频道可以报告错误，还有一些频道可以与其他"
+"教师和Hedy团队聊天。 \n"
 "\n"
-"请继续编程！\n"
+"<strong>如何求助</strong>？ \n"
+"如果有什么不清楚的地方，你可以在Discord上告诉我们，或者在这里给我们发邮件<a "
+"href=\"mailto: hello@hedy.org\">send us an email</a>。 \n"
+"\n"
+"<strong>如何报告错误</strong>\n"
+"在 Discord 中，我们有一个报告错误的频道，叫做 #bugs。这是让我们了解您所遇到的"
+"问题的最佳场所。如果您知道如何使用GitHub，您可以在那里创建一个<a href="
+"\"https://github.com/Felienne/hedy/issues/new?"
+"assignees=&labels=&template=bug_report.md&title=%5BBUG%5D\">issue</a>。\n"
 
-#, fuzzy
 msgid "mail_welcome_verify_subject"
-msgstr "Welcome to Hedy"
+msgstr "欢迎来到Hedy"
 
-#, fuzzy
 msgid "mail_change_password_subject"
-msgstr "Your Hedy password has been changed"
+msgstr "您的Hedy密码已被更改"
 
-#, fuzzy
 msgid "mail_recover_password_subject"
-msgstr "Request a password reset."
+msgstr "请求重置密码。"
 
-#, fuzzy
 msgid "mail_reset_password_subject"
-msgstr "Your Hedy password has been reset"
+msgstr "你的Hedy密码已被重置"
 
-#, fuzzy
 msgid "mail_welcome_teacher_subject"
-msgstr "Your Hedy teacher account is ready"
+msgstr "您的 Hedy 教师帐户已准备就绪"
 
 msgid "user"
 msgstr "用户"
@@ -1661,8 +1520,8 @@ msgstr "你好 {username}！"
 
 msgid "mail_goodbye"
 msgstr ""
-"谢谢！\n"
-"海迪团队"
+"继续编程!\n"
+"Hedy团队"
 
 msgid "copy_mail_link"
 msgstr "请复制并粘贴此链接到一个新的标签页："
@@ -1670,101 +1529,77 @@ msgstr "请复制并粘贴此链接到一个新的标签页："
 msgid "link"
 msgstr "链接"
 
-#, fuzzy
 msgid "invalid_username_password"
-msgstr "Invalid username/password."
+msgstr "无效的用户名/密码。"
 
-#, fuzzy
 msgid "repeat_match_password"
-msgstr "The repeated password does not match."
+msgstr "再次输入的密码和第一次输入的密码不一致。"
 
-#, fuzzy
 msgid "language_invalid"
-msgstr "Please select a valid language."
+msgstr "请选择有效的语言。"
 
-#, fuzzy
 msgid "agree_invalid"
-msgstr "You have to agree with the privacy terms."
+msgstr "你必须同意隐私条款。"
 
-#, fuzzy
 msgid "keyword_language_invalid"
-msgstr ""
-"Please select a valid keyword language (select English or your own language)."
+msgstr "请选择有效的关键词语言（选择英语或你自己的语言）。"
 
-#, fuzzy
 msgid "year_invalid"
-msgstr "Please enter a year between 1900 and {current_year}."
+msgstr "请输入介于 1900 和 {current_year} 之间的年份。"
 
-#, fuzzy
 msgid "gender_invalid"
-msgstr "Please select a valid gender, choose (Female, Male, Other)."
+msgstr "请选择有效的性别，选择（女性、男性、其他）。"
 
 #, fuzzy
 msgid "country_invalid"
-msgstr "Please select a valid country."
+msgstr "请选择有效的国家。"
 
 #, fuzzy
 msgid "experience_invalid"
-msgstr "Please select a valid experience, choose (Yes, No)."
+msgstr "请选择有效的经验，选择（是，否）。"
 
-#, fuzzy
 msgid "programming_invalid"
-msgstr "Please select a valid programming language."
+msgstr "请选择有效的编程语言。"
 
-#, fuzzy
 msgid "exists_username"
-msgstr "That username is already in use."
+msgstr "此用户名已被使用。"
 
-#, fuzzy
 msgid "exists_email"
-msgstr "That email is already in use."
+msgstr "此电子邮件已被使用。"
 
 #, fuzzy
 msgid "token_invalid"
-msgstr "Your token is invalid."
+msgstr "你的令牌无效。"
 
-#, fuzzy
 msgid "password_six"
-msgstr "Your password must contain at least six characters."
+msgstr "你的密码必须至少包含六个字符。"
 
-#, fuzzy
 msgid "password_change_not_allowed"
-msgstr "You're not allowed to change the password of this user."
+msgstr "您无权更改此用户的密码。"
 
-#, fuzzy
 msgid "password_change_success"
-msgstr "Password of your student is successfully changed."
+msgstr "学生的密码已成功更改。"
 
-#, fuzzy
 msgid "password_updated"
-msgstr "Password updated."
+msgstr "密码已更新。"
 
-#, fuzzy
 msgid "sent_password_recovery"
-msgstr ""
-"You should soon receive an email with instructions on how to reset your "
-"password."
+msgstr "你很快就会收到一封电子邮件，说明如何重置你的密码。"
 
-#, fuzzy
 msgid "password_resetted"
-msgstr ""
-"Your password has been successfully reset. You are being redirected to the "
-"login page."
+msgstr "你的密码已成功重置。你将被重定向到登录页面。"
 
-#, fuzzy
 msgid "already_teacher"
-msgstr "You already have a teacher account."
+msgstr "你已经有了一个教师账户。"
 
-#, fuzzy
 msgid "already_teacher_request"
-msgstr "You already have a pending teacher request."
+msgstr "你已经有一个待处理的教师请求。"
 
-#, fuzzy
 msgid "teacher_account_success"
-msgstr "You successfully requested a teacher account."
+msgstr "你成功地申请了一个教师账户。"
 
 msgid "only_teacher_create_class"
-msgstr "只有教师才能开班！"
+msgstr "只有老师才可以创建班级!"
 
 msgid "class_name_invalid"
 msgstr "此班级名称无效。"
@@ -1944,6 +1779,10 @@ msgstr "我的统计数据"
 #, fuzzy
 msgid "title_class logs"
 msgstr "海迪 - 加入班级"
+
+#, fuzzy
+msgid "number_lines"
+msgstr "Number of lines"
 
 #~ msgid "create_account_explanation"
 #~ msgstr "Having your own account allows you to save your programs."
