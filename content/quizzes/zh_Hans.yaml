@@ -5,14 +5,14 @@ levels:
             mp_choice_options:
             -   option: "Hedy"
                 feedback: "做得好！"
-            -   option: "Heddy"
+            -   option: "海迪"
                 feedback: "不是这个！"
             -   option: "Haydie"
                 feedback: "不是这个！"
             -   option: "Heidi"
                 feedback: "不是这个！"
             correct_answer: "A"
-            hint: "它得名于Hedy Lamarr。"
+            hint: "它得名于海蒂拉玛。"
             question_score: '10'
         2:
             question_text: "哪个命令可以用来打印文字？"
@@ -1551,7 +1551,7 @@ levels:
                 feedback: "The second line is repeated twice as well."
             -   option: "你好\n我是海迪！\n你好\n我是海迪！\n"
                 feedback: "Super!"
-            -   option: "你好\n你好\n我是海迪！\n我是海迪！\n"
+            -   option: "你好 \n你好 \n我是Hedy! \n我是Hedy！\"\n"
                 feedback: "Everything is printed twice"
             correct_answer: "C"
             hint: "Both lines are repeated twice."
@@ -1599,13 +1599,13 @@ levels:
                     {print} 'Yay!'
                     {print} 'Were going on holiday!'
             mp_choice_options:
-            -   option: "The children went: \n Yay! \n Were going on holiday!"
+            -   option: "孩子们去了： \n耶！ \n要去度假了！\n"
                 feedback: "Mind the `{repeat}` command !"
-            -   option: "The children went: \n Yay! \n Were going on holiday! \n Yay! \n Were going on holiday!"
+            -   option: "孩子们去了： \n耶! \n我们要去度假了! \n耶! \n我们要去度假了!\n"
                 feedback: "Correct!"
-            -   option: "The children went: \n Yay! \n Yay! \n Were going on holiday! \n Were going on holiday!"
+            -   option: "孩子们去了： \n耶！ \n耶！ \n我们要去度假了！ \n我们要去度假了！\n"
                 feedback: "This order is incorrect."
-            -   option: "The children went: \n Yay! \n Yay! \n Were going on holiday!"
+            -   option: "孩子们去了：\n耶！ \n耶！  \n我们要去度假了!\n"
                 feedback: "The last line is repeated too."
             correct_answer: "B"
             hint: "The block under the `{repeat}` command is repeated twice."
@@ -1679,7 +1679,7 @@ levels:
                 {print} '这些是你点的'
             mp_choice_options:
             -   option: "没有错。这段代码是正确的！"
-                feedback: "有地方错了！"
+                feedback: "有地方错了！。"
             -   option: "`{ask}`命令后面不能用`{if}`命令。"
                 feedback: "可以用！"
             -   option: "不需要缩进两次。只有第一个`{if}`命令需要缩进。"
@@ -1694,42 +1694,42 @@ levels:
             mp_choice_options:
             -   option: |
                     ```
-                    {if} answer is right
-                       {print} You are...
-                          sleep
-                              {print} right!
+                    {if} 答案{is} 32
+                       {print} '你是......'
+                          {sleep}
+                              {print} '对！'
                           {else}
-                              {print} You are wrong!
+                              {print} '你错了！'
                     ```
                 feedback: "You are wrong!"
             -   option: |
                     ```
-                    {if} answer is right
-                    {print} You are...
-                    sleep
-                    {print} right!
+                    {if} 答案{is} 32
+                    {print} '你是......'
+                    {sleep}
+                    {print} '对！'
                     {else}
-                    {print} You are wrong!
+                    {print} '你错了！'
                     ```
                 feedback: "You are wrong!"
             -   option: |
                     ```
-                    {if} answer is right
-                        {print} You are...
-                        sleep
-                        {print} right!
+                    {if} 答案{is} 32
+                        {print} '你是......'
+                        {sleep}
+                        {print} '对！'
                     {else}
-                        {print} You are wrong!
+                        {print} '你错了！'
                     ```
                 feedback: "You are... right!"
             -   option: |
                     ```
-                    {if} answer is right
-                        {print} You are...
-                        sleep
-                    {print} right!
+                    {if} 答案{is} 32
+                        {print} '你是......'
+                        {sleep}
+                    {print} '对！'
                     {else}
-                        {print} You are wrong!
+                        {print} '你错了！'
                     ```
                 feedback: "You are wrong!"
             correct_answer: "C"
@@ -1738,11 +1738,11 @@ levels:
         9:
             question_text: "What line(s) in this code should start with 4 spaces?"
             code: |-
-                1 music = {ask} 'What is your favorite music genre?'
-                2 {if} music is rock
-                3 {print} '🤘'
-                4 {else}
-                5 {print} '👎'
+                1 音乐 = {ask} '你最喜欢的音乐类型是什么？'
+                2{if} 音乐{is} 摇滚
+                3{print} '🤘'
+                4{else}
+                5{print} '👎'
             mp_choice_options:
             -   option: "Line 2 and 4"
                 feedback: "The lines after the `{if}` and `{else}` command should start with 4 spaces"
@@ -1758,9 +1758,9 @@ levels:
         10:
             question_text: "Which statement is true?"
             code: |-
-                1 level = {ask} 'What level are you on?"
-                2 {if} level {is} 8
-                3 {print} Great job!
+                1 级别 ={ask} '你学到哪一级了？'
+                2 {if} 级别{is} 8
+                3 {print} '干得好！'
             mp_choice_options:
             -   option: "All lines should start with 4 spaces"
                 feedback: "That's not true"
