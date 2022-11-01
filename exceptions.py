@@ -78,9 +78,10 @@ class AccessBeforeAssign(HedyException):
                          definition_line_number=definition_line_number)
 
 class UndefinedVarException(HedyException):
-    def __init__(self, name):
+    def __init__(self, name, line_number):
         super().__init__('Var Undefined',
-            name=name)
+            name=name,
+            line_number = line_number)
 
 class CyclicVariableDefinitionException(HedyException):
     def __init__(self, variable):
