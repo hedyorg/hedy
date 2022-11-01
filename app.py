@@ -13,7 +13,7 @@ from website.auth import current_user, login_user_from_token_cookie, requires_lo
 from website.yaml_file import YamlFile
 from website import querylog, aws_helpers, jsonbin, translating, ab_proxying, cdn, database, achievements
 import hedy_translation
-from hedy_content import COUNTRIES, ALL_LANGUAGES, ALL_KEYWORD_LANGUAGES, NON_LATIN_LANGUAGES, NON_BABEL
+from hedy_content import ADVENTURE_ORDER_PER_LEVEL, COUNTRIES, ALL_LANGUAGES, ALL_KEYWORD_LANGUAGES, NON_LATIN_LANGUAGES, NON_BABEL
 import hedyweb
 import hedy_content
 from flask_babel import gettext, Babel
@@ -861,7 +861,12 @@ def index(level, program_id):
         adventures = load_adventures_per_level(level, keyword_language)
     else:
         adventures = load_adventures_per_level(level, g.keyword_lang)
-
+    
+    # Sort the adventures based on the ordering defined
+    adventures_order = ADVENTURE_ORDER_PER_LEVEL[level]
+    index_map = {v: i for i, v in enumerate(adventures_order)}
+    adventures = sorted(adventures, key = lambda pair: index_map.get(pair['short_name'], len(adventures_order)))
+    
     # Initially all levels are available -> strip those for which conditions are not met or not available yet
     available_levels = list(range(1, hedy.HEDY_MAX_LEVEL + 1))
 
