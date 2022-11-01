@@ -5,8 +5,9 @@ import os
 import threading
 import time
 import traceback
+import logging
 
-from logger import log_queue_logger as logger
+logger = logging.getLogger(__name__)
 
 
 class LogQueue:
@@ -134,7 +135,7 @@ class LogQueue:
             return self.transmitter(timestamp, records)
         else:
             count = len(records)
-            logger.warn(f'No querylog transmitter configured, {count} records dropped')
+            logger.warning(f'No querylog transmitter configured, {count} records dropped')
 
     def _write_thread(self):
         """Background thread which will wake up every batch_window_s seconds

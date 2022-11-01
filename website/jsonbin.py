@@ -3,10 +3,12 @@ import os
 import json
 import queue
 import requests
+import logging
 
 from . import log_queue
 from . import aws_helpers
-from logger import jsonbin_logger as logger
+
+logger = logging.getLogger(__name__)
 
 
 class JsonBinLogger:
