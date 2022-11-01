@@ -1,3 +1,4 @@
+from math import exp
 import hedy
 import textwrap
 from parameterized import parameterized
@@ -34,6 +35,18 @@ class TestsLevel12(HedyTester):
             code=code,
             max_level=17,
             expected=expected
+        )
+
+    def test_print_division_float(self):
+        code = "print 3 / 2"
+        expected = "print(f'''{3 / 2}''')"
+        output = "1.5"
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            max_level=17,
+            output=output
         )
 
     def test_print_literal_strings(self):
@@ -1544,7 +1557,7 @@ class TestsLevel12(HedyTester):
     #
     @parameterized.expand([
         ('*', '*', '12'),
-        ('/', '//', '3'),
+        ('/', '/', '3.0'),
         ('+', '+', '8'),
         ('-', '-', '4')])
     def test_int_calc(self, op, transpiled_op, output):
@@ -1555,7 +1568,7 @@ class TestsLevel12(HedyTester):
 
     @parameterized.expand([
         ('*', '*', '100'),
-        ('/', '//', '1'),
+        ('/', '/', '1.0'),
         ('+', '+', '17'),
         ('-', '-', '3')])
     def test_nested_int_calc(self, op, transpiled_op, output):
@@ -1564,24 +1577,24 @@ class TestsLevel12(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, output=output, max_level=17)
 
-    @parameterized.expand(HedyTester.arithmetic_transpiled_operators)
-    def test_float_calc(self, op, transpiled_op):
+    @parameterized.expand(HedyTester.arithmetic_operations)
+    def test_float_calc(self, op):
         code = f"print 2.5 {op} 2.5"
-        expected = f"print(f'''{{2.5 {transpiled_op} 2.5}}''')"
+        expected = f"print(f'''{{2.5 {op} 2.5}}''')"
 
         self.multi_level_tester(code=code, expected=expected, max_level=17)
 
-    @parameterized.expand(HedyTester.arithmetic_transpiled_operators)
-    def test_float_calc_arabic(self, op, transpiled_op):
+    @parameterized.expand(HedyTester.arithmetic_operations)
+    def test_float_calc_arabic(self, op):
         code = f"print ١.٥ {op} ١.٥"
-        expected = f"print(f'''{{1.5 {transpiled_op} 1.5}}''')"
+        expected = f"print(f'''{{1.5 {op} 1.5}}''')"
 
         self.multi_level_tester(code=code, expected=expected, max_level=17)
 
-    @parameterized.expand(HedyTester.arithmetic_transpiled_operators)
-    def test_print_float_calc_with_string(self, op, transpiled_op):
+    @parameterized.expand(HedyTester.arithmetic_operations)
+    def test_print_float_calc_with_string(self, op):
         code = f"print 'het antwoord is ' 2.5 {op} 2.5"
-        expected = f"print(f'''het antwoord is {{2.5 {transpiled_op} 2.5}}''')"
+        expected = f"print(f'''het antwoord is {{2.5 {op} 2.5}}''')"
 
         self.multi_level_tester(code=code, expected=expected, max_level=17)
 
@@ -1595,8 +1608,8 @@ class TestsLevel12(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=17)
 
-    @parameterized.expand(HedyTester.arithmetic_transpiled_operators)
-    def test_float_calc_with_var(self, op, transpiled_op):
+    @parameterized.expand(HedyTester.arithmetic_operations)
+    def test_float_calc_with_var(self, op):
         code = textwrap.dedent(f"""\
         getal1 is 5
         getal2 is 4.3
@@ -1604,12 +1617,12 @@ class TestsLevel12(HedyTester):
         expected = textwrap.dedent(f"""\
         getal1 = 5
         getal2 = 4.3
-        print(f'''dat is dan: {{getal1 {transpiled_op} getal2}}''')""")
+        print(f'''dat is dan: {{getal1 {op} getal2}}''')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=17)
 
-    @parameterized.expand(HedyTester.arithmetic_transpiled_operators)
-    def test_int_calc_with_var(self, op, transpiled_op):
+    @parameterized.expand(HedyTester.arithmetic_operations)
+    def test_int_calc_with_var(self, op):
         code = textwrap.dedent(f"""\
         a is 1
         b is 2
@@ -1617,7 +1630,7 @@ class TestsLevel12(HedyTester):
         expected = textwrap.dedent(f"""\
         a = 1
         b = 2
-        c = a {transpiled_op} b""")
+        c = a {op} b""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=17)
 
