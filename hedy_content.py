@@ -38,7 +38,7 @@ NON_LATIN_LANGUAGES = ['ar', 'bg', 'bn', 'el', 'fa', 'hi', 'he', 'ru', 'zh_Hans'
 # It would be nice if we created this list manually but couldn't find a way to retrieve this from Babel
 NON_BABEL = ['tn']
 
-ADVENTURE_ORDER = [
+ADVENTURE_NAMES = [
     'default',
     'parrot',
     'fortune',
@@ -60,6 +60,203 @@ ADVENTURE_ORDER = [
     'next',
     'end'
 ]
+
+ADVENTURE_ORDER_PER_LEVEL = {
+    1: [
+        'default',
+        'parrot',
+        'fortune',
+        'haunted',
+        'restaurant',
+        'story',        
+        'turtle',        
+        'rock',
+        'next',
+        'end'
+    ],
+    2: [
+        'default',
+        'parrot',
+        'haunted',
+        'restaurant',
+        'story',
+        'turtle',
+        'rock',  
+        'next',
+        'end'
+    ],
+    3: [
+        'default',
+        'parrot',
+        'fortune',
+        'haunted',
+        'restaurant',
+        'story',
+        'turtle',
+        'dishes',
+        'dice',
+        'rock',
+        'next',
+        'end'
+    ],
+    4: [
+        'default',
+        'fortune',
+        'haunted',
+        'restaurant',
+        'story',
+        'turtle',
+        'dishes',
+        'dice',
+        'rock',
+        'next',
+        'end'
+    ],
+    5: [
+        'default',
+        'parrot',
+        'fortune',
+        'haunted',
+        'restaurant',
+        'story',
+        'turtle',
+        'dishes',
+        'dice',
+        'rock',
+        'language',
+        'next',
+        'end'
+    ],
+    6: [
+        'default',
+        'fortune',
+        'restaurant',
+        'songs',
+        'turtle',
+        'dishes',
+        'dice',
+        'calculator',
+        'next',
+        'end'
+    ],
+    7: [
+        'default',
+        'fortune',
+        'restaurant',
+        'story',
+        'songs',
+        'turtle',
+        'dishes',
+        'dice',
+        'next',
+        'end'
+    ],
+    8: [
+        'default',  
+        'fortune',
+        'haunted',
+        'restaurant',
+        'story',
+        'songs',
+        'turtle',
+        'next',
+        'end'
+    ],
+    9: [
+        'default',
+        'haunted',
+        'restaurant',
+        'story',  
+        'rock',
+        'calculator',
+        'next',
+        'end'
+    ],
+    10: [
+        'default',
+        'fortune',
+        'restaurant',
+        'story',
+        'songs',
+        'dishes',
+        'dice',
+        'rock',
+        'calculator',  
+        'next',
+        'end'
+    ],
+    11: [
+        'default',
+        'haunted',
+        'restaurant',
+        'songs',  
+        'next',
+        'end'
+    ],
+    12: [
+        'default',
+        'fortune',
+        'restaurant',
+        'story',
+        'songs',    
+        'calculator',
+        'piggybank',  
+        'secret',
+        'next',
+        'end'
+    ],
+    13: [
+        'default',  
+        'restaurant',
+        'story',
+        'rock',
+        'secret',
+        'tic',
+        'next',
+        'end'
+    ],
+    14: [
+        'default',
+        'haunted',
+        'calculator',
+        'piggybank',
+        'quizmaster',
+        'tic',
+        'next',
+        'end'
+    ],
+    15: [
+        'default',
+        'restaurant',
+        'story',
+        'dice',
+        'rock',
+        'calculator',
+        'tic',
+        'next',
+        'end'
+    ],
+    16: [
+        'default',
+        'haunted',
+        'songs',
+        'language',
+        'next',
+        'end'
+    ],
+    17: [
+        'default',
+        'tic',
+        'blackjack',
+        'next',
+        'end'
+    ],
+    18: [
+        'default',
+        'next',
+        'end'
+    ]
+}
 
 RESEARCH = {}
 for paper in sorted(os.listdir('content/research'), key=lambda x: int(x.split("_")[-1][:-4]), reverse=True):
@@ -178,7 +375,7 @@ class Adventures:
     def cache_adventure_keywords(self, language):
         # Sort the adventure to a fixed structure to make sure they are structured the same for each language
         sorted_adventures = {}
-        for adventure_index in ADVENTURE_ORDER:
+        for adventure_index in ADVENTURE_NAMES:
             if self.file.get(adventure_index, None):
                 sorted_adventures[adventure_index] = (self.file.get(adventure_index))
         self.file = sorted_adventures
