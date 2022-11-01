@@ -83,7 +83,7 @@ adventures:
                 example_code: "```\nimię = {ask} 'Jak masz na imię?'\nwiek = {ask} 'Ile masz lat?'\n{if} imię {is} 'Hedy' {and} wiek {is} 2\n    {print} 'Naprawdę jesteś Hedy!'\n```\n"
                 story_text: "## I... Lub..?\nNauczysz się teraz o `{and}` i `{or}`! Jeśli chcesz sprawdzić dwa wyrażenia, nie musisz używać dwóch poleceń {if}, w zamian możesz użyć `{and}` i `{or}`. Jeśli użyjesz `{and}`, oba wyrażenia, przed i po `{and}` muszą być prawdziwie. Można też użyć `{or}`. W takim przypadku wystarczy że jedno z wyrażeń będzie prawdziwe."
             14:
-                start_code: "wiek = {ask} 'Ile masz lat?'\n{if} wiek < 13\n    {print} 'Jesteś młodszy niż ja!'\nelse\n    {print} 'Jesteś starszy niż ja!'"
+                start_code: "wiek = {ask} 'Ile masz lat?'\n{if} wiek < 13\n    {print} 'Jesteś młodszy niż ja!'\n{else}\n    {print} 'Jesteś starszy niż ja!'"
                 story_text: "## Great, Greater, Greatest!\nWe are going to learn more new items. You might know them already from mathematics, the `<` and `>`.\nThe `<` checks if the first number is smaller than the second, for example `age < 12` checks if `age` {is} smaller than 12.\nIf you want to check if the first number is smaller or equal to the second, you can use `<=`, for example `age <= 11`.\nThe `>` checks if the first number is bigger than the second, for example `points > 10` checks if `points` is larger than 10.\nIf you want to check if the first number is bigger or equal to the second, you can use `>=`, for example `points >= 11`.\nYou use these comparisons in an `{if}`, like this:\n"
                 example_code: "```\nage = {ask} 'How old are you?'\n{if} age > 12\n    {print} 'You are older than I am!'\n```\n"
                 story_text_2: "From this level on, if you want to compare exactly, you can use two equal signs. This is what most programming languages do:\n"
@@ -138,9 +138,9 @@ adventures:
                     ```
 
     songs:
-        name: Sing a song!
-        description: Print a song
-        default_save_name: Song
+        name: Zaśpiewaj piosenkę!
+        description: Wyświetl piosenkę
+        default_save_name: Piosenka
         levels:
             12:
                 story_text: "## Sing a song!\nIn this song we can make it even easier to program '{if} you're happy and you know it, clap your hands'. Because we can put all of the actions in a variable, check it out:\n"
@@ -238,12 +238,12 @@ adventures:
         description: Make your own dice
         default_save_name: Dice
     rock:
-        default_save_name: Rock
+        default_save_name: Kamień
         levels:
             1:
-                story_text: "## Rock, paper, scissors\nIn level 1 you can start with a rock, paper, scissors  game.\n\nWith `{ask}` you can make a choice, and with `{echo}` you can repeat that choice.\n"
-                example_code: "\n```\n{print} what do you choose?\n{ask} choose {from} rock, paper or scissors\n{echo} so your choice was:\n```\nInstead of using words, you could also use emojis of course: ✊✋✌\n"
-                start_code: '{print} Welcome to your own rock scissors paper!'
+                story_text: "##  Papier, kamień, nożyce\nNa poziomie 1 możesz zacząć tworzyć grę papier, kamień, nożyce.\n\nZa pomocą  `{ask}` możesz zapytać a za pomocą `{echo}` możesz powtórzyć co zostało wybrane.\n"
+                example_code: "```\n{print} Co wybierasz?\n{ask} wybierz: papier, kamień lub nożyce\n{echo} a więc wybrałeś:\n```\nZamiast używać słów, możesz spróbować z emotkami: ✊✋✌\n"
+                start_code: '{print} Witaj w twojej własnej grze papier, kamień, nożyce!'
             10:
                 story_text: "## Rock, Paper, Scissors\nFeeling too lazy to play the game yourself? Let Hedy play it for you!\n"
                 example_code: "```\nchoices = rock, paper, scissors\nplayers = Marleen, Michael\n{for} player {in} players\n     {print} player ' chooses ' choices {at} {random}\n```\n"
@@ -322,8 +322,8 @@ adventures:
                 story_text: "## Restaurant\nWith the `{while}` you can make sure your costumers can keep adding orders until they are done.\n"
                 example_code: "```\n{print} 'Welcome at McHedy'\nmore = 'yes'\n{while} more == 'yes'\n    order = {ask} 'What would you like to order?'\n    {print} order\n    more = {ask} 'Would you like to order anything {else}?'\n{print} 'Thank you!'\n```\n"
             1:
-                story_text: "## Restaurant\n In level 1 you can make your own virtual restaurant and take your guests' orders.\n"
-                example_code: "  ```\n {print} Welcome to Hedy's restaurant \U0001F35F\n {ask} What would you like to order?\n {echo} So you would like to order\n {print} Thanks you for your order!\n {print} It's on its way!\n ```\n"
+                story_text: "## Restauracja\n Na poziomie 1 możesz stworzyć swoją własną wirtualną restaurację i przyjmować zamówienia gości.\n"
+                example_code: "``` \n{print} Witaj w restauracji Hedy \U0001F35F\n{ask} Co chcesz zamówić?\n{echo} A więc chcesz zamówić\n{print} Dziękuje za zamówienie!\n{print} Zaraz podamy!\n```\n"
                 story_text_2: "## Challenge\nCan you think of more lines to add to your restaurant code? For example, can you {ask} the guests what they'd like to drink, tell them the price, or wish them a pleasant meal?\n"
                 start_code: '# place your code here'
             2:
@@ -378,9 +378,9 @@ adventures:
                 story_text_2: "We use `{or}` to see {if} one our of two things is the case.\n"
                 example_code_2: "```\ndrinks = {ask} 'What would you like to drink?'\n{if} drinks {is} 'water' {or} drinks {is} 'juice'\n    {print} 'Thats a healthy choice'\n```\n"
                 start_code: '# place your code here'
-        name: Restaurant
-        description: Create your own virtual restaurant
-        default_save_name: Restaurant
+        name: Restauracja
+        description: Stwórz swoją własną wirtualną restaurację
+        default_save_name: Restauracja
     fortune:
         levels:
             8:
@@ -427,9 +427,9 @@ adventures:
                 example_code: "In this example the player can {ask} Hedy a yes-no question and Hedy will pick a random answer for you.\n```\n{print} I’m Hedy the fortune teller!\nquestion {is} {ask} What do you want to know?\n{print} This is what you want to know: question\nanswers {is} yes, no, maybe\n{print} My crystal ball says...\n{sleep} 2\n{print} answers {at} {random}\n```\n"
                 story_text_2: "## Challenges\nNow, Hedy can only answer yes, no or maybe. Can you give Hedy more answer options, like 'definitely' or '{ask} again'.\n"
                 start_code: '# place your code here'
-        name: Fortune teller
-        description: Let Hedy predict the future
-        default_save_name: Fortune Teller
+        name: Wróżka
+        description: Niech Hedy przewidzi przyszłość
+        default_save_name: Wróżka
     haunted:
         levels:
             11:
@@ -482,7 +482,7 @@ adventures:
             1:
                 story_text: "## Stwórz historyjkę\nNa poziomie  1 możesz stworzyć historię z różnymi postaciami które stworzysz samodzielnie..\n\nW pierwszej linii, użyj `{ask}` i zapytaj kto będzie głównym bohaterem twojej historii.\nKolejne linie zacznij od `{print}` jeżeli chcesz wyświetlić tekst.\nUżyj  `{echo}` jeżeli chcesz aby imię twojego bohatera znalazło się na końcu wypowiedzi.\n"
 
-                example_code: "```\n{ask} Głównym bohaterem historii jest\n{print} Głowny bohater idzie przez las\n{echo} Jest troszkę przestraszony,\n{print} Wszędzie słyszy jakieś dziwnie odgłosy\n{print} Obawia się że to jest nawiedzony las\n```\n"
+                example_code: "```\n{ask} Głównym bohaterem historii jest\n{print} Główny bohater idzie przez las\n{echo} Jest troszkę przestraszony,\n{print} Wszędzie słyszy jakieś dziwnie odgłosy\n{print} Obawia się że to jest nawiedzony las\n```\n"
                 start_code: '{print} Historyjka zaczyna się tutaj'
             2:
                 story_text: "## Historyjka\nNa poziomie 2. Twoja historyjka może być znacznie zabawniejsza. Imię głównego bohatera może pojawić się w dowolnym miejscu w zdaniu.\n\nTrzeba będzie napisać nieco więcej kodu . Musisz zapytać o imię głównego bohatera zanim będziesz mógł wykorzystać je w zdaniu.\n\nPotem będziesz mógł użyć imienia w dowolnym miejscu w zdaniu.\n"
@@ -534,13 +534,13 @@ adventures:
         description: Stwórz krótką historyjkę
         default_save_name: Historyjka
     parrot:
-        name: Parrot
-        description: Create your own online pet parrot that will copy you!
-        default_save_name: Parrot
+        name: Papuga
+        description: Stwórz swoja własną cyfrową papugę która powtórzy wszystko co powiesz!
+        default_save_name: Papuga
         levels:
             1:
-                story_text: "## Parrot\nCreate your own online pet parrot that will copy you!\n"
-                example_code: "```\n{print} Im Hedy the parrot\n{ask} whats your name?\n{echo}\n{echo}\n```\n"
+                story_text: "## Papuga\nStwórz swoją własną cyfrową papugę która powtórzy wszystko co powiesz!\n"
+                example_code: "```\n{print} Jestem papuga Hedy\n{ask} Jak masz na imię?\n{echo}\n{echo}\n```\n"
                 start_code: '{print} Jestem papuga Hedy'
             2:
                 story_text: "## Papuga\nStwórz swoją własną cyfrową papugę, która będzie po tobie powtarzać cokolwiek powiesz!\n"
@@ -555,19 +555,19 @@ adventures:
                 example_code: "```\nwords {is} squawk, Hedy\n{print} 'Train your parrot!'\nnew_word {is} {ask} 'Which word do you want to teach them?'\n{add} new_word {to_list} words\nsaid_word {is} words {at} {random}\n{print} '\U0001F9D2 Say ' new_word ', Hedy!'\n{print} '\U0001F99C ' said_word\n{if} said_word {is} new_word {print} '\U0001F9D2 Great job, Hedy! \U0001F36A'\n{else} {print} '\U0001F9D2 No, Hedy! Say ' new_word\n```\n"
                 start_code: '# place your code here'
     turtle:
-        name: Turtle
-        description: Make your own drawing
-        default_save_name: turtle
+        name: Żółw
+        description: Stwórz swoje własne obrazki
+        default_save_name: Żółw
         levels:
             1:
-                story_text: "## Let's draw\nYou can also use Hedy to draw. By combining turns and lines, you can make a square or stairs!\n\nUsing `{forward}` you draw a line forwards. The number behind it determines how far the turtle will walk. `{turn} right` turns a quarter turn in clockwise direction, `{turn} left` turns counter clockwise.\n\nThis is the start of a little staircase. Can you make it have 5 steps?\n"
-                example_code: "```\n{turn} right\n{forward} 50\n{turn} left\n{forward} 50\n```\n"
-                start_code: "{forward} 50\n{turn} left"
-                story_text_2: "## Colors\nYou can also change the color of the lines with the command `{color}`. Check out the example.\nYou can also use the command `{color} {white}` to make 'invisible' lines. You could use these white lines to move the turtle anywhere in the screen before you start drawing.\n"
+                story_text: "## Narysujmy coś\nMożesz wykorzystać Hedy także do rysowania.  Rysując linie i obracając żółwia, możesz narysować kwadrat lub gwiazdę!\n\nPisząć `{forward}` możesz narysować linie. Liczba zaraz po komendzie mówi o tym ile ma przejść żółw rysując linie..`{turn} {right}` obraca żołwia o ćwierć obrotu w prawo (zgodnie z ruchem wskazówek zegara), `{turn} {left}` obraca w lewo (przeciwnie do ruchu wskazówek zegara).\nJeśli chcesz przesunąć żółwia do tył, możesz wykorzystać komendę `{forward}` ale z ujemną liczba. Na przykład `{forward} -100`\n\nTo jest początek schodków. Możesz sprawić aby miały 5 stopni?\n"
+                example_code: "```\n{forward} 50\n{turn} {right}\n{forward} 50\n{turn} {left}\n{forward} 50\n```\n"
+                start_code: "{forward} 50\n{turn} {left}"
+                story_text_2: "## Kolory\nMożesz zmieniać kolory linie za pomocą polecenia `{color}`. Zobacz przykład.\nMożesz także uczynić linie niewidzialną za pomoca polecenia  `{color} {white}`. Możesz wykorzystać rysowanie białej linia do przesunięcia żółwia dokądkolwiek chcesz, zanim rozpoczniesz rysowanie.\n"
                 example_code_2: "```\n{color} {white}\n{forward} -80\n{color} {green}\n{forward} 50\n{color} {yellow}\n{forward} 50\n{color} {red}\n{forward} 50\n```\n"
             2:
-                story_text: "## Turtle\nIn level 1 the turtle could only turn left or right. That is a bit boring!\nIn level 2 he can point his nose in all directions.\n\nUse 90 to turn a quarter. We call this degrees. A full turn is 360 degrees.\nCan you make a figure with this code? Maybe a triangle or a circle?\n"
-                example_code: "\n```\n{print} Drawing figures\nangle {is} 90\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n```\n"
+                story_text: "## Żółw\nNa tym poziomie możesz używać zmiennych aby uczynić żółwia interaktywnym. Na przykład możesz zapytać użytkownika ile kroków ma zrobić twój żółw.\n"
+                example_code: "```\nkroki {is} {ask} Ile kroków ma wykonać żółw?\n{forward} kroki\n```\n"
                 start_code: "{print} Turtle race!\nhoek {is} 90\n{turn} hoek\n{forward} 25\n"
                 story_text_2: "Also, in level 1 the turtle could only turn left or right. That is a bit boring!\nIn level 2 he can point his nose in all directions.\n\nUse 90 to turn a quarter. We call this degrees. A full turn is 360 degrees.\nCan you make a figure with this code? Maybe a triangle or a circle?\n"
                 example_code_2: "```\n{print} Drawing figures\nangle {is} 90\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n```\n"

@@ -18,12 +18,12 @@ levels:
             question_text: "Quelle commande fait apparaître du texte ?"
             mp_choice_options:
             -   option: "```\n{echo}\n```\n"
-                feedback: "{echo} répète une réponse donnée."
-            -   option: "```{print}```"
+                feedback: "`{echo}` répète une réponse donnée."
+            -   option: "```\n{print}\n```\n"
                 feedback: "Correct !"
             -   option: "```\nBonjour\n```\n"
                 feedback: "Bonjour n'est pas une commande."
-            -   option: "ask"
+            -   option: "```\n{ask}\n```\n"
                 feedback: "Avec `{ask}`, tu peux poser une question."
             correct_answer: "B"
             hint: "_?_ Bonjour le monde!"
@@ -31,16 +31,16 @@ levels:
         3:
             question_text: "Comment demander à quelqu'un quelle est sa couleur préférée ?"
             mp_choice_options:
-            -   option: "print Quelle est ta couleur préférée ?"
+            -   option: "```\n{print} Quelle est ta couleur favorite ?\n```\n"
                 feedback: "`{print}` affiche du texte, mais il ne pose pas de questions."
-            -   option: "ask print Quelle est ta couleur préférée ?"
+            -   option: "```\n{ask} {print} Quelle est ta couleur préférée ?\n```\n"
                 feedback: "Tu n'as besoin que d'une commande, pas de deux."
-            -   option: "ask Quelle est ta couleur préférée ?"
+            -   option: "```\n{ask} Quelle est ta couleur préférée ?\n```\n"
                 feedback: "Parfait !"
-            -   option: "echo Quelle est ta couleur préférée ?"
+            -   option: "```\n{echo} Quelle est ta couleur préférée ?\n```\n"
                 feedback: "`{echo}` te répète la réponse que tu as donnée."
             correct_answer: "C"
-            hint: "Tu peux demander quelque chose avec la commande `{ask}`."
+            hint: "Tu peux demander quelque chose avec la commande `{ask}`"
             question_score: '10'
         4:
             question_text: "Quel est le problème avec ce code ?"
@@ -49,30 +49,30 @@ levels:
                 {ask} Qui est tu ?
                 {echo} Bonjour...
             mp_choice_options:
-            -   option: "Il manque la commande `print` à la ligne 1."
+            -   option: "Il manque la commande `{print}` à la ligne 1."
                 feedback: "C'est ça !"
             -   option: "La ligne 1 est mal orthographiée."
                 feedback: "mappelle est mal orthographié volontairement ; Hedy ne comprend pas encore les apostrophes."
-            -   option: "`echo` n'est pas une commande."
-                feedback: "`echo` est une commande, ce n'est pas cela l'erreur."
+            -   option: "`{echo}` n'est pas une commande."
+                feedback: "`{echo}` est une commande, ce n'est pas cela l'erreur."
             -   option: "Rien ! C'est un code parfait !"
                 feedback: "Faux. Regarde bien !"
             correct_answer: "A"
-            hint: "La ligne 1 ne semble pas correcte."
+            hint: "La ligne 1 ne semble pas correcte"
             question_score: '10'
         5:
             question_text: "Quelle commande manque à la ligne 2 ?"
             code: |-
-                ask Quel est ton animal préféré ?
+                {ask} Quel est ton animal préféré ?
                 _?_ Donc ton animal préféré est...
             mp_choice_options:
-            -   option: "print"
+            -   option: "```\n{print}\n```\n"
                 feedback: "Non, tu veux que la réponse te soit répétée."
-            -   option: "ekko"
-                feedback: "`ekko` n'est pas une commande."
-            -   option: "ask"
-                feedback: "Avec `ask`, tu peux poser une question."
-            -   option: "echo"
+            -   option: "```\nHedy\n```\n"
+                feedback: "Hedy n'est pas une commande."
+            -   option: "```\n{ask}\n```\n"
+                feedback: "Avec `{ask}`, tu peux poser une question."
+            -   option: "```\n{echo}\n```\n"
                 feedback: "C'est ça !"
             correct_answer: "D"
             hint: "Tu veux voir la réponse à la fin de la ligne 2..."
@@ -80,35 +80,35 @@ levels:
         6:
             question_text: "Quel est le problème avec ce code ?"
             code: |-
-                print je mappelle Hedy
-                aks Quel sport prefere tu ?
-                echo Tu prefere...
-                print Cool ! Moi aussi !
+                {print} je mappelle Hedy
+                {print} Quel sport prefere tu ?
+                {echo} Tu preferes...
+                {print} Cool ! Moi aussi !
             mp_choice_options:
-            -   option: "À la ligne 1, `print` doit être remplacé par `ask`."
-                feedback: "L'affichage de la ligne 1 est correcte ; faites attention à l'orthographe des mots."
-            -   option: "À la ligne 2, `ask` est mal écrit."
+            -   option: "À la ligne 1, `{print}` doit être remplacé par `{ask}`."
+                feedback: "Le `{print}` dans la ligne 1 est correct."
+            -   option: "À la ligne 2, `{print}`  doit être remplacé par `{ask}`."
                 feedback: "Super ! Tu as été attentif !"
-            -   option: "La ligne 3 doit commencer par `print` au lieu de `echo`."
-                feedback: "Echo est la bonne commande ; vérifie l'orthographe des commandes."
-            -   option: "À la ligne 4, `print` est mal orthographié."
-                feedback: "Non, mais il y a une faute d'orthographe quelque part ailleurs..."
+            -   option: "La ligne 3 doit commencer par `{print}` au lieu de `{echo}`."
+                feedback: "`{echo}` est correct."
+            -   option: "À la ligne 4, `{print}` est mal orthographié."
+                feedback: "Non, il y a une faute d'orthographe quelque part ailleurs"
             correct_answer: "B"
-            hint: "Vérifie la façon dont les commandes sont écrites."
+            hint: "Vérifie les commandes `{print}`."
             question_score: '10'
         7:
             question_text: "Quel est le problème avec ce code ?"
             code: |-
-                print Bienvenue au restaurant dHedy !
-                ask Que veux-tu manger ?
-                echo Donc tu veux commander ...
-                print Tout de suite !
+                {print} Bienvenue au restaurant d Hedy !
+                {ask} Que veux-tu manger ?
+                {echo} Donc tu veux commander ...
+                {print} Tout de suite !
             mp_choice_options:
-            -   option: "À la ligne 1, `print` doit être remplacé par `ask`."
+            -   option: "À la ligne 1, `{print}` doit être remplacé par `{ask}`"
                 feedback: "Tu es sûr que c'est un problème ?"
-            -   option: "À la ligne 1 `print` doit être remplacé par `echo`"
+            -   option: "À la ligne 1 `{print}` doit être remplacé par `{echo}`"
                 feedback: "Tu es sûr que quelque chose ne va pas ?"
-            -   option: "À la ligne 3, il faut remplacer `echo` par `print`."
+            -   option: "À la ligne 3, il faut remplacer `{echo}` par `{print}`"
                 feedback: "Tu es sûr que c'est un problème ?"
             -   option: "Rien ! C'est un code parfait !"
                 feedback: "Exact !"
@@ -116,43 +116,43 @@ levels:
             hint: "Vérifie le code ligne par ligne"
             question_score: '10'
         8:
-            question_text: "À quoi sert la commande `echo` ?"
+            question_text: "Comment utiliser la commande `{echo}` ?"
             mp_choice_options:
-            -   option: "On peut l'utiliser pour poser une question."
-                feedback: "Tu as confondu avec la commande `ask` !"
+            -   option: "On peut utiliser `{ask}` pour poser une question."
+                feedback: "C'est ce que fait la commande `{ask}`!"
             -   option: "Tu peux l'utiliser pour afficher du texte."
-                feedback: "Tu as confondu avec la commande `print` !"
+                feedback: "C'est ce que fait la commande `{print}` !"
             -   option: "Tu peux l'utiliser pour répéter une réponse."
                 feedback: "Bon travail !"
             -   option: "Tu peux l'utiliser pour faire disparaître du texte."
                 feedback: "Ce n'est pas correct..."
             correct_answer: "C"
-            hint: "`echo` est utilisé après une commande `ask`."
+            hint: "`{echo}` est utilisé après une commande `{ask}`."
             question_score: '10'
         9:
             question_text: "Quel est le problème avec ce code ?"
             code: |-
-                print Bonjour !
-                print Comment vas-tu ?
-                echo Alors tu vas bien...
+                {print} Bonjour !
+                {print} Comment vas-tu ?
+                {echo} Alors tu vas ...
             mp_choice_options:
-            -   option: "Le `print` à la ligne 1 devrait être `ask`"
-                feedback: "Non, il faut bien un `print` ici !"
-            -   option: "Le `print` à la ligne 2 devrait être `ask`"
+            -   option: "Le `{print}` à la ligne 1 devrait être `{ask}`"
+                feedback: "Non, il faut bien un `{print}` ici . Où est posée la question ?"
+            -   option: "Le `{print}` à la ligne 2 devrait être `{ask}`"
                 feedback: "Super !"
-            -   option: "`echo` à la ligne 3 devrait être `ask`"
-                feedback: "Non, il faut bien un `echo` ici !"
+            -   option: "`{echo}` à la ligne 3 devrait être `{ask}`"
+                feedback: "Non, il faut bien un `{echo}` ici ! Où est posée la question ?"
             -   option: "Rien. C'est un code parfait !"
                 feedback: "Regarde plus attentivement..."
             correct_answer: "B"
-            hint: "`ask` te permet de poser une question"
+            hint: "`{ask}` te permet de poser une question"
             question_score: '10'
         10:
             question_text: "Es-tu prêt pour le niveau 2 ?"
             mp_choice_options:
             -   option: "Oui !"
                 feedback: "Super ! Passons au niveau suivant !"
-            -   option: "Non !"
+            -   option: "Non"
                 feedback: "Quel dommage... Tu peux t'entraîner un peu plus au niveau 1 !"
             correct_answer: "A"
             hint: "Allons-y !"
@@ -161,36 +161,36 @@ levels:
         1:
             question_text: "Quelle est la phrase vraie ?"
             mp_choice_options:
-            -   option: "Au niveau 2, la commande `print` n'existe plus."
-                feedback: "`print` fonctionne encore"
-            -   option: "Au niveau 2, la commande `ask` n'existe plus."
-                feedback: "`ask` fonctionne encore"
-            -   option: "Au niveau 2, la commande `echo` n'existe plus."
-                feedback: "Bien !"
-            -   option: "Au niveau 2, toutes les commandes du niveau 1 fonctionnent toujours."
-                feedback: "Non, il y a une des commandes qui n'existe plus !"
+            -   option: "Au niveau 2, la commande `{print}` n'existe plus"
+                feedback: "`{print}` fonctionne encore"
+            -   option: "Au niveau 2, la commande `{ask}` n'existe plus"
+                feedback: "`{ask}` fonctionne encore"
+            -   option: "Au niveau 2, la commande `{echo}` n'existe plus"
+                feedback: "Bien"
+            -   option: "Au niveau 2, toutes les commandes du niveau 1 fonctionnent encore"
+                feedback: "Non, il y a une des commandes qui n'existe plus."
             correct_answer: "C"
-            hint: "`print` et `ask` existent toujours."
+            hint: "`{print}` et `{ask}` existent encore."
             question_score: '10'
         2:
             question_text: "Quel code est correct ?"
             mp_choice_options:
-            -   option: "nom is ask Quel est ton nom ?"
+            -   option: "```\nname {is} {ask} Quel est ton nom ?\n```\n"
                 feedback: "Super !"
-            -   option: "ask is nom Quel est ton nom ?"
+            -   option: "```\n{ask} {is} name Quel est ton nom ?\n```\n"
                 feedback: "Les mots sont justes, l'ordre ne l'est pas !"
-            -   option: "ask Quel est ton nom ?"
+            -   option: "```\n{ask} Quel est ton nom ?\n```\n"
                 feedback: "Cela a fonctionné au niveau 1, mais au niveau 2 et plus, cela fonctionne différemment."
-            -   option: "ask Quel est ton nom ? is nom"
+            -   option: "```\n{ask} Quel est ton nom ? {is} nom\n```\n"
                 feedback: "Les mots sont justes, l'ordre ne l'est pas !"
             correct_answer: "A"
-            hint: "ask ne fonctionne pas comme au niveau 1"
+            hint: "`{ask}` ne fonctionne pas comme au niveau 1"
             question_score: '10'
         3:
             question_text: "Qu'est-ce qui apparaît sur ton écran de sortie lorsque tu lances ce code ?"
             code: |-
-                nom is Marion
-                print nom va au marché et elle achète une pomme.
+                nom {is} Marion
+                {print} nom va au marché et elle achète une pomme.
             mp_choice_options:
             -   option: "nom va au marché et elle achète une pomme."
                 feedback: "Le mot nom est remplacé par Marion"
@@ -201,28 +201,28 @@ levels:
             -   option: "Marion va au marché et Marion achète une pomme."
                 feedback: "'elle' n'est pas remplacée par le nom"
             correct_answer: "C"
-            hint: "Le mot 'nom' est remplacé par 'Marion'."
+            hint: "Le mot nom est remplacé par 'Marion'"
             question_score: '10'
         4:
             question_text: "Que verras-tu sur l'écran de sortie lorsque tu lances ce code ?"
             code: |-
-                nom is Hedy
-                print Salut mon nom est nom !
+                nom {is} Hedy
+                {print} Salut mon nom est nom !
             mp_choice_options:
-            -   option: "Salut mon nom est nom !"
+            -   option: "Salut mon nom est nom"
                 feedback: "La variable nom est remplacé par Hedy"
-            -   option: "Salut mon nom est Hedy !"
+            -   option: "Salut mon nom est Hedy"
                 feedback: "La variable nom est remplacé par Hedy"
-            -   option: "Salut mon Hedy est nom !"
+            -   option: "Salut mon Hedy est nom"
                 feedback: "La variable nom est remplacé par Hedy"
-            -   option: "Salut mon Hedy est Hedy !"
+            -   option: "Salut mon Hedy est Hedy"
                 feedback: "Correct, ce problème sera corrigé dans le niveau 3 !"
             correct_answer: "D"
-            hint: "Le mot 'nom' est remplacé par 'Hedy' aux deux endroits."
+            hint: "Le mot 'nom' est remplacé par 'Hedy' aux deux endroits"
             question_score: '10'
         5:
-            question_text: "Que se passe-t-il lorsque tu utilises la commande `sleep` ?"
-            code: "sleep"
+            question_text: "Que se passe-t-il lorsque tu utilises la commande `{sleep}` ?"
+            code: "{sleep}"
             mp_choice_options:
             -   option: "Il ralentit ton ordinateur"
                 feedback: "Heureusement, non !"
@@ -230,25 +230,25 @@ levels:
                 feedback: "Heureusement, non !"
             -   option: "Votre programme se met en pause pendant une seconde puis continue"
                 feedback: "C'est vrai !"
-            -   option: "On le met à la fin pour qu'Hedy sache que ton programme est terminé."
-                feedback: "Non, ce serait inutile à la fin de ton code."
+            -   option: "On le met à la fin pour qu'Hedy sache que ton programme est terminé"
+                feedback: "Non, ce serait inutile à la fin de ton code"
             correct_answer: "C"
-            hint: "L'ordinateur attend une seconde à la commande de sommeil."
+            hint: "L'ordinateur attend une seconde à la commande `{sleep}`"
             question_score: '10'
         6:
             question_text: "Qu'est-ce qui doit figurer sur les lignes ?"
             code: |-
-                print Et le prix du meilleur langage de programmation revient à...
+                {print} Et le prix du meilleur langage de programmation revient à...
                 _?_
-                print Hedy !
+                {print} Hedy !
             mp_choice_options:
-            -   option: "sleep"
+            -   option: "```\n{sleep}\n```\n"
                 feedback: "Parfait !"
-            -   option: "echo"
+            -   option: "```\n{echo}\n```\n"
                 feedback: "Il n'y a rien à répéter ici"
-            -   option: "print"
-                feedback: "Il n'y a pas de texte à afficher à cet endroit"
-            -   option: "ask"
+            -   option: "```\n{print}\n```\n"
+                feedback: "Il n'y a pas de texte à afficher avec `{print}` à cet endroit"
+            -   option: "```\n{ask}\n```\n"
                 feedback: "Il n'y a pas de question ici"
             correct_answer: "A"
             hint: "Pause pour un effet dramatique..."
@@ -256,18 +256,18 @@ levels:
         7:
             question_text: "Quelle commande doit être utilisée sur la ligne 2 ?"
             code: |-
-                print Je vais exploser dans 3 secondes !
+                {print} Je vais exploser dans 3 secondes !
                 _?_
-                print BOOM!
+                {print} BOOM !
             mp_choice_options:
-            -   option: "print 3"
-                feedback: "Tu n'as pas besoin de print"
-            -   option: "sleep 3"
+            -   option: "```\n{print} 3\n```\n"
+                feedback: "Tu n'as pas besoin de `{print}`"
+            -   option: "```\n{sleep} 3\n```\n"
                 feedback: "Parfait !"
-            -   option: "sleep"
-                feedback: "De cette façon, la bombe explosera dans une seconde."
-            -   option: "sleep sleep sleep"
-                feedback: "C'est plus simple avec le chiffre 3."
+            -   option: "```\n{sleep}\n```\n"
+                feedback: "De cette façon, la bombe explosera dans une seconde"
+            -   option: "```\n{sleep} {sleep} {sleep}\n```\n"
+                feedback: "C'est plus simple avec le chiffre 3"
             correct_answer: "B"
             hint: "Tu veux que l'ordinateur attende 3 secondes"
             question_score: '10'
@@ -295,7 +295,7 @@ levels:
                 print Jaime les animaux
             mp_choice_options:
             -   option: "La ligne 1 devrait dire : chiens is animal"
-                feedback: "Le nom de la variable est animaux."
+                feedback: "Le nom de la variable est animaux"
             -   option: "La ligne 1 devrait dire : animaux is chiens"
                 feedback: "Bien !"
             -   option: "La ligne 2 devrait dire : print Jaime les animals"
@@ -303,7 +303,7 @@ levels:
             -   option: "La ligne 2 devrait dire : sleep Jaime les animaux"
                 feedback: "sleep n'est pas utilisé pour afficher du texte"
             correct_answer: "B"
-            hint: "Tu veux afficher 'Jaime les chiens'."
+            hint: "Tu veux afficher 'J aime les chiens'"
             question_score: '10'
         10:
             question_text: "Quelle commande doit être utilisée sur la ligne 1 ?"
@@ -349,10 +349,10 @@ levels:
                 feedback: "Bon travail !"
             -   option: "La ligne 1 doit commencer par print."
                 feedback: "Non, tu n'as pas besoin de print"
-            -   option: "À la ligne 2, il faut dire 'animal' au lieu de 'animaux'."
+            -   option: "À la ligne 2, il faut dire 'animal' au lieu de 'animaux',"
                 feedback: "animaux is correct."
             -   option: "at random est mal écrit, il devrait être à ramdon"
-                feedback: "at random est l'orthographe correcte."
+                feedback: "`{at} {random}` est l'orthographe correcte"
             correct_answer: "A"
             hint: "Il y a un problème à la ligne 1"
             question_score: '10'
@@ -400,9 +400,9 @@ levels:
             mp_choice_options:
             -   option: "La ligne 1 doit dire `print` au lieu de `ask`"
                 feedback: "Non, ce n'est pas faux..."
-            -   option: "La ligne 2 doit dire `ask` au lieu de `print`."
+            -   option: "La ligne 2 doit dire `{ask}` au lieu de `{print}`"
                 feedback: "Non, ce n'est pas faux..."
-            -   option: "La ligne 2 doit indiquer que les réponses au hasard sont oui, non, peut-être."
+            -   option: "La ligne 2 doit indiquer que les réponses au hasard sont oui, non, peut-être"
                 feedback: "Non, ce n'est pas faux..."
             -   option: "Rien, ce code est parfait"
                 feedback: "C'est bien ça !"
@@ -416,12 +416,12 @@ levels:
                 réponse are oui, non, peut-être
                 print réponse at random
             mp_choice_options:
-            -   option: "La ligne 2 doit être 'question' au lieu de 'réponse'."
-                feedback: "Non, ce n'est pas ça."
+            -   option: "La ligne 2 doit être 'question' au lieu de 'réponse'"
+                feedback: "Non, ce n'est pas ça"
             -   option: "La ligne 2 doit être is au lieu de are"
                 feedback: "Correct !"
-            -   option: "La ligne 3 doit être 'réponses' au lieu de 'réponse'."
-                feedback: "Non, la variable s'appelle bien 'réponse'."
+            -   option: "La ligne 3 doit être 'réponses' au lieu de 'réponse'"
+                feedback: "Non, la variable s'appelle bien 'réponse'"
             -   option: "Rien ! Ce code est génial !"
                 feedback: "En fait, la ligne 2 comporte une erreur."
             correct_answer: "B"
@@ -498,15 +498,15 @@ levels:
             -   option: "`at random` ne fonctionne plus au niveau 4"
                 feedback: "`at random` fonctionne encore !"
             -   option: "`at random` a besoin de guillemets"
-                feedback: "Pas seulement !"
+                feedback: "Non mais deux commandes le font."
             correct_answer: "A"
-            hint: "Au niveau 4, il y a plusieurs commandes qui ont besoin de guillemets"
+            hint: "Au niveau 4, il y deux commandes qui ont besoin de guillemets."
             question_score: '10'
         2:
             question_text: "Quel code utilise les guillemets corrects ?"
             mp_choice_options:
             -   option: "print `Salut !`"
-                feedback: "Le guillemet n'est pas le bon !"
+                feedback: "Le guillemet n'est pas le bon."
             -   option: "print 'Salut !'"
                 feedback: "Correct !"
             -   option: "print \"Salut !\""
@@ -522,7 +522,7 @@ levels:
             -   option: "print Salut, je suis Hedy"
                 feedback: "Il manque quelque chose !"
             -   option: "print 'Salut, je suis Hedy"
-                feedback: "Il faut des guillemets des 2 cotés !"
+                feedback: "Il faut des guillemets des 2 cotés des mots que tu veux imprimer."
             -   option: "'print Salut, je suis Hedy'"
                 feedback: "Il faut des guillemets des 2 cotés !"
             -   option: "print 'Salut, je suis Hedy'"
@@ -537,7 +537,7 @@ levels:
                 feedback: "Les guillemets ne doivent pas entourer la commande elle-même."
             -   option: "Tu dois mettre des guillemets autour des mots que tu veux afficher."
                 feedback: "Super !"
-            -   option: "Tu n'as pas besoin de guillemets lorsque tu utilise la commande `ask`."
+            -   option: "Tu n'as pas besoin de guillemets lorsque tu utilise la commande `{ask}`"
                 feedback: "Tu es sûr ?"
             -   option: "Tu peux choisir toi-même d'utiliser ou non des guillemets."
                 feedback: "Malheureusement, Hedy est plus strict que ça."
@@ -557,7 +557,7 @@ levels:
             -   option: "print options at random"
                 feedback: "Super !"
             -   option: "Rien, le code fonctionne !"
-                feedback: "Regarde mieux !"
+                feedback: "Regarde mieux. Il y a une erreur."
             correct_answer: "C"
             hint: "Tu ne veux pas qu'Hedy affiche littéralement 'options at random', tu veux que cela affiche 'pierre' ou 'feuille' ou 'ciseaux'."
             question_score: '10'
@@ -569,13 +569,13 @@ levels:
             -   option: "print 'Tu gagnes...' prix at random"
                 feedback: "Super ! Tu l'as eu !"
             -   option: "print Tu gagnes... 'prix at random'"
-                feedback: "Hedy va afficher 'prix at random'."
+                feedback: "Hedy va afficher 'prix {at} {random}'."
             -   option: "print Tu gagnes... prix at random"
                 feedback: "Il faut des guillemets !"
             -   option: "print 'Tu gagnes... prix at random'"
-                feedback: "Hedy va afficher 'Tu gagnes... prix at random'."
+                feedback: "Hedy va afficher 'Prix {at} {random}''"
             correct_answer: "A"
-            hint: "Réfléchis bien à l'emplacement des guillemets"
+            hint: "Réfléchissez bien à ce qui est  variable et doit être en dehors des guillemets et quels sont les mots normaux qui devraient être à l'intérieur."
             question_score: '10'
         7:
             question_text: "Quel est le problème avec ce code ?"
@@ -605,11 +605,11 @@ levels:
             -   option: "print Donc tu choisis la porte porte"
                 feedback: "Il faut des guillemets"
             -   option: "print 'Donc tu choisis la 'porte porte"
-                feedback: "Si le joueur choisit la porte 3, Hedy dira 'Donc tu choisis 3 3'."
+                feedback: "Si le joueur choisit la porte 3, Hedy dira 'Donc tu choisis 3 3"
             -   option: "print 'Donc tu choisis la porte' porte"
                 feedback: "Super !"
             -   option: "print 'Donc tu choisis la porte porte'"
-                feedback: "Hedy affichera 'Donc tu choisis la porte de la porte'."
+                feedback: "Hedy affichera 'Donc tu choisis la porte porte"
             correct_answer: "C"
             hint: "Le deuxième mot 'porte' devrait être remplacé par le numéro, le premier devrait toujours être le mot 'porte'..."
             question_score: '10'
@@ -641,7 +641,7 @@ levels:
                 feedback: "Une liste n'a pas besoin de guillemets"
             -   option: "Les guillemets manquent à la ligne 2"
                 feedback: "Correct"
-            -   option: "Les guillemets sont absents aux lignes 2 et 3."
+            -   option: "Les guillemets sont absents aux lignes 2 et 3"
                 feedback: "La ligne 3 n'a pas besoin de guillemets, car elle n'est pas affichée littéralement."
             -   option: "Rien, ce code n'a pas d'erreurs"
                 feedback: "Tu en as loupé une !"
@@ -1362,10 +1362,10 @@ levels:
         10:
             question_text: "Quel est le code qui à fait cet affichage !"
             code: |-
-                blablablabla
-                blablablabla
-                blablablabla
-                blabliblo
+                les_prix = Le million de dollars,La voiture,Le sandwich
+                noms = Bob, Patrick, Sandy, Larry
+                {for} prix {in} les_prix
+                    {print} prix 'a été gagné par' noms {at} {random}
             mp_choice_options:
             -   option: "for i in range 1 to 3\n    print blablablabla\n    print blabliblo"
                 feedback: "Hélas non !"
