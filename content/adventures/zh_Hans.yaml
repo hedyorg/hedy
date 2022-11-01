@@ -57,12 +57,12 @@ adventures:
                     name {is} {ask} '你的名字是什么?'
                     {if} name {is} 海迪 {print} '酷!' {else} {print} '呵呵'
                 story_text: |
-                    ＃＃ 如果（那么）......否则.....
-                    `{if}`是第五关卡的新东西！使用 `{if}`，你可以在两个不同的选项之间进行选择。
-                    如果您输入海迪作为名字，那么此代码会打印出“nice!” 如果您输入其他内容，那么此代码会打印出“boo!”这个词。
-                    `{ask}` 和 `{print}` 的使用方法和在第 4 关卡中一样。
+                    ## 如果（那么）......否则.....
+                    `{if}`是第五级别的新东西！使用 `{if}`，你可以在两个不同的选项之间进行选择。
+                    如果您输入海迪作为名字，那么此代码会打印出“赞！” 如果您输入其他内容，那么此代码会打印出“嘁！”这个词。
+                    `{ask}` 和 `{print}` 的使用方法和在第 4 级中一样。
                 example_code_2: "```\n名字 {is} {ask} '你叫什么名字？'\n{if} 名字 {is} Hedy {print} 'nice'\n{else} {print} 'boo!'\n```\n"
-                example_code: "```\n名字 {is} {ask} '你叫什么名字？'\n{if} 名字 {is} Hedy {print} 'nice' {else} {print} 'boo!'\n```\n"
+                example_code: "```\n名字 {is} {ask} '你叫什么名字？'\n{if} 名字 {is} Hedy {print} '赞' {else} {print} '嘁!'\n```\n"
                 story_text_3: "## 列表\n我们现在可以使用 `{in}` 命令去检查某个东西是否在列表中。\n如果你选择绿色或黄色，这段代码会打印“好看”，否则则会说“哦”。\n"
                 example_code_3: "```\n好看的颜色 {is} 绿色，黄色\n颜色 {is} {ask} '你最喜欢的颜色是什么？'\n{if} 颜色 {in} 好看的颜色 {print} '好看！'\n{else} {print} '哦'\n```\n"
                 story_text_2: "有`{if}`的代码中有些时候会很长，一行代码放不下。 <br> 你可以把代码分成两行，像这样以`{else}`开始第二行：\n"
@@ -83,7 +83,7 @@ adventures:
                 start_code: "{repeat} 3 {times} {print} '海迪很好玩！'"
                 story_text: |
                     ## 第7级！第7级！
-                    在第7级的学习内容里面增加了`{repeat}` 循环命令。 `{repeat}` 循环语句可以用来多次执行一段代码。
+                    在第7级的学习内容里面增加了`{repeat}` 循环命令。   `{repeat}` 循环语句可以用来多次执行一段代码。
                 example_code: "```\n{repeat} 3 {times} {print} '海迪很好玩！'\n```\n"
             8:
                 start_code: |-
@@ -207,11 +207,11 @@ adventures:
                 example_code: "```\nprices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
             18:
                 start_code: "名字 = '海迪'\n{print}('我的名字是', 名字)"
-                story_text: "##最后一级！\n我们到达了真正的 Python 代码！这意味着从现在开始我们需要在 {print} 和 {range} 后使用括号。"
+                story_text: "## 最后一级！\n我们到达了真正的 Python 代码！这意味着从现在开始我们需要在 {print} 和 {range} 后使用括号。"
                 example_code: "```\n{print}('你好！')\n{for} i {in} {range}(1, 10):\n    {print}('这是行'，i)\n```\n"
                 story_text_2: 如果你想打印多个东西，你需要用逗号把它们分开。
                 example_code_2: "```\n温度 = 25\n{print}('外面是', 温度, '度')\n```\n"
-                story_text_3: "##  输入\n我们获得Python代码前的最后一步，是把`{ask}`换成`{input}`。"
+                story_text_3: "## 输入\n我们获得Python代码前的最后一步，是把`{ask}`换成`{input}`。"
                 example_code_3: "```\n{print}('我叫海迪！')\nname = {input}('你叫什么？')\n{print}('那么你叫', name)\n```\n"
     story:
         levels:
@@ -269,14 +269,14 @@ adventures:
                 start_code: '{print} 你的故事从这里开始'
             10:
                 story_text: "## 故事\n在这一关，你可以在你的故事里使用 {for} 命令。这样很容易就能写出儿童书里的“棕熊，棕熊，你看到了什么”的故事。\n"
-                example_code: "```\n动物们 = 红鸟, 黑羊, 绿蛙, 黄鸭, 小孩\n{print} '棕熊'\n{print} '棕熊'\n{print} '你看到了什么？'\n{for} 动物 {in} 动物们\n    {print} '我看到' 动物 '在看我'\n    {print} 动物\n    {print} 动物\n    {print} '你看到了什么？'\n{print} '我看到所有动物都在看我！'\n```\n"
+                example_code: "```\n动物们 = 红鸟, 黑羊, 绿蛙, 黄鸭, 小孩\n{print} '棕熊'\n{print} '棕熊'\n{print} '你看到了什么？'\n{for} 动物 {in} 动物们\n    {print} '我看到' 动物 '在看我'\n    {print} 动物\n    {print} 动物\n    {print} '你看到了什么？'\n{print} '我看到所有动物们都在看我！'\n```\n"
                 start_code: '# 在这里写你的代码'
             12:
                 story_text: "## 故事\n在此级别中，您可以使用引号将多个单词保存在一个变量中。"
                 example_code: "```\n名字 = '英国女王'\n{print} 名字'正在吃一块蛋糕，突然......'\n```\n"
                 start_code: '# 在这里写你的代码'
             9:
-                story_text: "## 故事\n在这一关，你可以通过嵌套，在一个 {if}、{repeat} 或 {for} 命令里包含其它 {if}, {repeat} or {for} 命令。这让你有了很多选择，极大地提高了故事地互动性。\n"
+                story_text: "## 故事\n在这一级，你可以通过嵌套，在一个 `{if}`，`{repeat}` 或 `{for}`命令里包含其它 `{if}`，`{repeat}`或`{for}` 命令。这让你有了很多选择，极大地提高了故事地互动性。\n"
                 example_code: "```\n{print} '罗宾来到了市区'\n地点 = {ask} '罗宾是要去商店还是回家？'\n{if} 地点 {is} 商店\n    {print} '她走进了商店。'\n    {print} '罗宾发现了一本有趣的书'\n    书 = {ask} '罗宾买了这本书吗？'\n    {if} 书 {is} 是\n        {print} '罗宾买了这本书，回家了'\n    {else}\n        {print} '罗宾离开商店，回家了'\n{else}\n    {print} '罗宾回了家'\n```\n"
                 story_text_2: "上面的示例非常简单，但是通过嵌套 {if}，您可以真正完善您的代码并将您的故事变成一个真正的游戏。看看这个例子！"
                 example_code_2: "## Elaborate code\n```\n剑 = 丢失\n游戏 = 进行中\n{print} '我们的英雄走在森林中'\n{print} '遇到了两条岔路'\n{repeat} 2 {times}\n    {if} 游戏 {is} 进行中\n        路 = {ask} '她选了哪条路？'\n        {if} 路 {is} 左\n            {if} 剑 {is} 找到\n                {print} '我们的英雄遇上了一条龙！'\n                {print} '幸运的是她带着剑，可以消灭这个怪兽！'\n                游戏 = 结束\n            {else}\n                {print} '我们的英雄找到了一条龙，但是她手里没有武器！'\n                {print} '我们的英雄被龙打败了……'\n                {print} '再试一次'\n                游戏 = 结束\n        {if} 路 {is} 右\n            {if} 剑 {is} 丢失\n                {print} '我们的英雄找到了一把剑'\n                {print} '它可能派上大用场'\n                剑 = 找到\n            {else}\n                {print} '你已经找打了剑。这里什么都没有。'\n                {print} '她走了回去'\n```\n"
@@ -290,7 +290,7 @@ adventures:
                 example_code: "```\n名字 {is} 汉斯\n{print} '主人公 的 名字 是' 名字\n{print} 名字 '正准备 走进 树林'\n{print} 名字 '有点害怕'\n动物们 {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} '他听到了一个' 动物们 {at} {random} '的声音'\n{print} 名字 '担心 这片森林 闹鬼'\n```\n"
                 start_code: "{print} '你的故事会打印在这里！'"
             15:
-                story_text: "## 故事\n运用`{while}`循环能让你的故事更有趣。比如，用`{while} 游戏 {is} '进行中'`可以让游戏一直进行到结束为止。\n或者用`{while} 剑 {is} '丢失'`来要求玩家必须先找到剑，才能继续游戏。\n"
+                story_text: "## 故事\n运用`{while}`循环能让你的故事更有趣。比如，用`{while} game {is} 'on'``可以让游戏一直进行到结束为止。\n或者用{is}`{while} sword {is} 'lost'`来要求玩家必须先找到剑，才能继续游戏。\n"
                 example_code: "```\n钥匙 = '丢失'\n{print} '你站在你的花园里，你的钥匙丢了。'\n{print} '你想去哪里找它们？'\n{print} '你可以选择：树、花坛、石头、邮筒'\n{while} 钥匙 == '丢失'\n    位置 = {ask} '你想去哪里找？'\n    {if} 位置 == '花坛'\n        {print} '它们在这里！'\n        钥匙 = '找到'\n    {else}\n        {print} '没有，他们不在'位置\n{print} '现在你可以进入房子了！'\n```\n"
                 start_code: '# 在这里写你的代码'
         name: 故事
@@ -304,28 +304,28 @@ adventures:
                 start_code: '# 在这里写你的代码'
             6:
                 story_text: "## 歌曲\n歌曲中通常包含大量重复。有时重复是基于计数的。\n比如那首著名的“99瓶啤酒”（北美民谣）。你可以用一点数学知识编程出这首歌。\n"
-                example_code: "```\n段 = 99\n{print} 段 '瓶啤酒在墙上'\n{print} 段 '瓶啤酒'\n{print} '取下一瓶传下去'\n段 = 段 - 1\n{print} 段 '瓶啤酒在墙上'\n```\n\n你可以通过反复复制粘贴来重复第2行到第9行。\n"
-                start_code: "{print} 'Baby shark'"
+                example_code: "```\n瓶 = 99\n{print} 瓶 '瓶啤酒在墙上'\n{print} 瓶 '瓶啤酒'\n{print} '取下一瓶传下去'\n瓶 = 瓶 - 1\n{print} 瓶 '瓶啤酒在墙上'\n```\n\n你可以通过反复复制粘贴来重复第2行到第6行。\n"
+                start_code: "{print} '鲨鱼宝宝'"
             12:
-                story_text: "## Sing a song!\nIn this song we can make it even easier to program '{if} you're happy and you know it, clap your hands'. Because we can put all of the actions in a variable, check it out:\n"
-                example_code: "```\nactions = 'clap your hands', 'stomp your feet', 'shout Hurray!'\n{for} action {in} actions\n    {for} i {in} {range} 1 {to} 2\n        {print} 'if youre happy and you know it'\n        {print} action\n    {print} 'if youre happy and you know it and you really want to show it'\n    {print} 'if youre happy and you know it'\n    {print} action\n```\n"
-                start_code: '# place your code here'
+                story_text: "## 唱一首歌吧!\n在这首歌中，我们可以使编程变得更加容易 '{if} 你很快乐，你意识到了，拍拍你的手'。因为我们可以把所有的动作放在一个变量中，看看吧。\n"
+                example_code: "```\n一组动作 = '拍拍手', '跺跺脚', '喊万岁!'\n{for} 动作 {in} 一组动作\n    {for} i {in} {range} 1 {to} 2\n        {print} '如果你很高兴，你意识到它。'\n        {print} 动作\n    {print} '如果你很高兴，你意识到它，你真的想表现出来'\n    {print} '如果你快乐并意识到它'\n    {print} 动作\n```\n"
+                start_code: '# 把你的代码放在这里'
             11:
-                story_text: "## Songs\nIn this level you can use the `{for} i {in} {range}` command to make songs that use counting.\n"
-                example_code: "## 5 little monkeys\n```\n{for} i {in} {range} 5 {to} 1\n    {print} i ' little monkeys jumping on the bed'\n    {print} 'One fell off and bumped his head'\n    {print} 'Mama called the doctor and the doctor said'\n    {if} i {is} 1\n        {print} 'PUT THOSE MONKEYS RIGHT TO BED!'\n    {else}\n        {print} 'NO MORE MONKEYS JUMPING ON THE BED!'\n```\n"
-                start_code: '# place your code here'
+                story_text: "## 歌曲\n在这一级，你可以使用`{for} i {in} {range}`命令使用计数来创作歌曲。\n"
+                example_code: "## 5只小猴子们\n```\n{for} i{in} {range} 5{to} 1\n    {print} i ' 小猴子们在床上跳来跳去的'。\n    {print} '有一只掉下来，撞到了头'\n    {print} '妈妈叫来了医生，医生说\n    {if} i{is} 1\n        {print} '把这些猴子们直接放到床上去！'\n    {else}\n        {print} '不再有猴子们在床上跳来跳去了！'\n```\n"
+                start_code: '# 把你的代码放在这里'
             10:
-                story_text: "## Songs\nIn this level you can easily make the childrens' song 'Five little monkeys'. Can you make the last chorus?\nYou can also make the whole baby shark song (including all the other sharks in the family) in only 6 lines!\nOr you can make Old McDonald with all the different animals.\n"
-                example_code: "## 5 Little Monkeys Jumping on the bed\n```\nmonkeys = 5, 4, 3, 2\n{for} monkey {in} monkeys\n    {print} monkey ' little monkeys jumping on the bed'\n    {print} 'One fell off and bumped his head'\n    {print} 'Mama called the doctor and the doctor said'\n    {print} 'NO MORE MONKEYS JUMPING ON THE BED!'\n```\n\n## Baby Shark\n```\nsharks = baby, mommy, daddy, grandma, grandpa\n{for} shark {in} sharks\n    {print} shark 'tututututudu'\n    {print} shark 'tututututudu'\n    {print} shark 'tututututudu'\n    {print} shark\n```\n## Old McDonald\n```\nanimals = pig, dog, cow\n{for} animal {in} animals\n    {if} animal {is} pig\n        sound = oink\n    {if} animal {is} dog\n        sound = woof\n    {if} animal {is} cow\n        sound = moo\n    {print} 'Old McDonald had a farm'\n    {print} 'E I E I O!'\n    {print} 'and on that farm he had a ' animal\n    {print} 'E I E I O!'\n    {print} 'with a ' sound sound ' here'\n    {print} 'and a ' sound sound ' there'\n    {print} 'here a ' sound\n    {print} 'there a ' sound\n    {print} 'everywhere a ' sound sound\n```\n"
+                story_text: "## 歌曲\n在这一级中，你可以轻松地制作儿童歌曲《五只小猴子》。你能完成最后的合唱吗？\n你也可以只用6行就完成整首鲨鱼宝宝的歌曲（包括鲨鱼家族中所有其他种类的鲨鱼）！\n或者你可以用所有不同的动物制作《老麦当劳》。\n"
+                example_code: "## 5只小猴子们在床上跳来跳去\n```\n猴子们=5, 4, 3, 2\n{for} 猴子{in} 猴子们\n    {print} 猴子 ' 小猴子们在床上跳来跳去\n    {print} '有一只掉下来，撞到了头'\n    {print} '妈妈打电话给医生，医生说\n    {print} '不能再有猴子们在床上跳了！'\n```\n\n## 鲨鱼宝宝\n```\n鲨鱼们=宝宝，妈妈，爸爸，奶奶，爷爷\n{for} 鲨鱼{in} 鲨鱼们\n    {print} 鲨鱼 \"tutututudu\n    {print} 鲨鱼 \"tutututudu\n    {print} 鲨鱼 \"tutututudu\n    {print} 鲨鱼\n```\n## 老麦当劳\n```\n动物们=猪、狗、牛\n{for} 动物{in} 动物们\n    {if} 动物{is} 猪\n        声音 = 哼哼\n    {if} 动物{is} 狗\n        声音 = 汪汪\n    {if} 动物{is} 牛\n        声音 = 哞\n    {print} '老麦当劳有一个农场\n    {print} '咦啊咦啊欧！'\n    {print} '在那个农场里，他有一只' 动物\n    {print} '咦啊咦啊欧！'\n    {print} '这里有一个'声音'的声音\n    {print} '和一个'声音的声音'那里\n    {print} '这里有一个'声音\n    {print} '那里有一个'声音\n    {print} '到处都是一个'声音\n```\n"
                 start_code: '# 在这里写你的代码'
             7:
-                story_text: "## Songs\nSongs often contain a lot of repetition. For example... Baby Shark! If you sing it, you keep singing the same thing:\n\nBaby Shark tututudutudu <br>\nBaby Shark tututudutudu <br>\nBaby Shark tututudutudu <br>\nBaby Shark\n\nYou can make this song much shorter with a `{repeat}`! Can you finish the code?\n"
+                story_text: "## 歌曲\n歌曲经常包含大量的重复。例如...鲨鱼宝宝!如果你唱这首歌，其实你就是一直在唱同一句歌词。\n\n鲨鱼宝宝 tututudutudu <br>\n鲨鱼宝宝tututududu <br>\n鲨鱼宝宝tututududu <br>\n鲨鱼宝宝\n\n你可以用`{repeat}` ，让这首歌变得更短!你能完成这个代码吗？\n"
                 example_code: "```\n{repeat} _ _ {print} 'Baby Shark tututudutudu'\n{print} 'Baby Shark'\n```\n\nAfter Baby Shark you can of course also program other songs. There are many songs with repetition.\n"
-                start_code: "{print} 'Baby Shark'"
+                start_code: "{print} '鲨鱼宝宝'"
             16:
-                story_text: "##唱一首歌!\n在这一级中，你可以更快速地编排一首像《老麦当劳》这样的歌曲。你可以把正确的动物和正确的声音联系起来，只要把它们放在列表的同一位置。\n《醉酒的水手》在这一级别也能很快制作完成。你只需要8行就可以完成整首歌，看看吧!\n"
-                start_code: '# place your code here'
-                example_code: "## Old MacDonald\n```\nanimals = ['pig', 'dog', 'cow']\nsounds = ['oink', 'woof', 'moo']\n{for} i {in} {range} 1 {to} 3\n    animal = animals[i]\n    sound = sounds[i]\n    {print} 'Old McDonald had a farm'\n    {print} 'E I E I O!'\n    {print} 'and on that farm he had a ' animal\n    {print} 'E I E I O!'\n    {print} 'with a ' sound sound ' here'\n    {print} 'and a ' sound sound ' there'\n    {print} 'here a ' sound\n    {print} 'there a ' sound\n    {print} 'everywhere a ' sound sound\n```\n\n## Drunken Sailor\n```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines\n    {for} i {in} {range} 1 {to} 3\n        {print} line\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
+                story_text: "## 唱一首歌!\n在这一级中，你可以更快速地编排一首像《老麦当劳》这样的歌曲。你可以把正确的动物和正确的声音联系起来，只要把它们放在列表的同一位置。\n《醉酒的水手》在这一级别也能很快制作完成。你只需要8行就可以完成整首歌，看看吧!\n"
+                start_code: '# 把你的代码放在这里'
+                example_code: "## 老麦当劳\n```\n动物们 = ['猪', '狗', '牛']\n一组声音 = ['哼哼', '汪汪', '哞'] 。\n{for} i{in} {range} 1{to} 3\n    动物 = 动物们[i]\n    声音 = 一组声音[i］\n    {print} '老麦当劳有一个农场'\n    {print} '咦啊咦啊欧！'\n    {print} '在那个农场里，他有一个' 动物\n    {print} '咦啊咦啊欧！'\n    {print} '这里有一个'声音'的声音\n    {print} '和一个'声音的声音'那里\n    {print} '这里有一个'声音\n    {print} '那里有一个'声音\n    {print} '到处都是一个'声音声音\n```\n\n## 醉酒的水手\n```\n一组句子 = ['我们该如何对待醉酒的水手', '用生锈的剃须刀刮光他的胡子', '把他放在大船上直到他清醒']\n{for} 句子{in} 一组句子\n    {for} i{in} {range} 1{to} 3\n        {print} 句子\n    {print} '一大清早'。\n    {for} i {in} {range} 1{to} 3\n        {print} '头昏脑涨的睁开眼'\n    {print} '一大清早'\n```\n"
         name: 唱支歌！
         description: 打印一首歌
         default_save_name: 歌
@@ -335,25 +335,25 @@ adventures:
                 story_text: "## 海龟\n在这一级，你可以使用变量来使海龟互动。例如，你可以问玩家海龟必须走多少步。\n"
                 start_code: "{print} 海龟赛跑！\n角度 {is} 90\n{turn} 角度\n{forward} 25"
                 example_code: "```\n答案 {is} {ask} 海龟应该走多少步？\n{forward}答案\n```\n"
-                example_code_2: "```\n{print} Drawing figures\nangle {is} 90\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n```\n"
-                story_text_2: "Also, in level 1 the turtle could only turn left or right. That is a bit boring!\nIn level 2 he can point his nose in all directions.\n\nUse 90 to turn a quarter. We call this degrees. A full turn is 360 degrees.\nCan you make a figure with this code? Maybe a triangle or a circle?\n"
+                example_code_2: "```\n{print} 正在画图\n角度 {is} 90\n{turn} 角度\n{forward} 25\n{turn} 角度\n{forward} 25\n```\n"
+                story_text_2: "此外，在第1级，海龟只能左转或右转。这有点无聊！\n在第2级，它可以转向任何方向。\n\n用90来转1/4圈。我们管这个叫角度。完整转一圈是360度。\n你能用这段代码来画一个图案吗？比如三角形或者圆形？\n"
             1:
                 story_text: "## 让我们来画画\n你也可以用海迪来画画。通过结合旋转和画线，你可以画出一个正方形或楼梯!\n\n使用`{forward}`你可以向前画一条线。它后面的数字决定了海龟会走多远。`{turn} {right}`是顺时针转四分之一圈，`{turn} {left}`是逆时针转。\n如果你想向后退，你可以使用`{forward}`命令，但要用一个负数。因此，比如说`{forward} -100`\n\n让我们开始画一个小楼梯。你能使它有5个台阶吗？\n"
                 example_code: "```\n{forward} 50\n{turn} {right}\n{forward} 50\n{turn} {left}\n{forward} 50\n```\n"
                 start_code: "{forward} 50\n{turn} {left}"
                 example_code_2: "```\n{color} {white}\n{forward} -80\n{color} {green}\n{forward} 50\n{color} {yellow}\n{forward} 50\n{color} {red}\n{forward} 50\n```\n"
-                story_text_2: "## Colors\nYou can also change the color of the lines with the command `{color}`. Check out the example.\nYou can also use the command `{color} {white}` to make 'invisible' lines. You could use these white lines to move the turtle anywhere in the screen before you start drawing.\n"
+                story_text_2: "## 颜色\n你也可以用命令`{color}` ，改变线条的颜色。请看这个例子。\n你还可以用命令`{color} {white}` 来制作 \"看不见的 \"线条。你可以用这些白色的线在开始绘图前将乌龟移到屏幕的任何地方。\n"
             3:
                 story_text: "## 寻找海龟\n在这个级别中，您可以将 `{at} {random}` 与海龟绘图一起使用。使用随机选择使乌龟每次走不同的路径。\n使用 `{at} {random}` 从列表中选择一个值。您可以复制并粘贴第 2 行和第 3 行以创建更长的随机路径。\n"
                 example_code: "```\n角度 {is} 10, 50, 90, 150, 250\n{turn} 角度 {at} {random}\n{forward} 25\n```\n"
                 start_code: "角度 {is} 10, 50, 90, 150, 250\n{turn} 角度 {at} {random}\n{forward} 25"
             4:
-                story_text: "## Let's draw\nIn level 4 you have to use quotation marks with `{print}` and `{ask}`. Also when drawing!\n"
-                example_code: "```\n{print} 'Drawing figures'\nangle {is} 90\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n```\n"
+                story_text: "## 让我们来画画\n在第4级，你必须在`{print}`和`{ask}`语句中使用引号。在画画时也一样！\n"
+                example_code: "```\n{print} '正在画图'\n角度 {is} 90\n{turn} 角度\n{forward} 25\n{turn} 角度\n{forward} 25\n```\n"
                 start_code: "{print} '绘图'\n角度 {is} 90\n{turn} 角度\n{forward} 25"
             5:
-                story_text: "## Let's draw\nIn level 5 you can make a choice with `{if}`. For example between different types of figures.\n"
-                example_code: "```\n{print} 'Drawing Figures'\nfigure {is} {ask} 'Do you want a square or a triangle?'\n{if} figure {is} triangle angle {is} 120\n{else} angle {is} 90\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n```\n"
+                story_text: "## 让我们来画画\n在第5级，你可以用`{if}`来做出选择。比如选择不同类型的图案。\n"
+                example_code: "```\n{print} '正在画图'\n图案 {is} {ask} '你想要正方形还是三角形？'\n{if} 图案 {is} 三角形 角度 {is} 120\n{else} 角度 {is} 90\n{turn} 角度\n{forward} 25\n{turn} 角度\n{forward} 25\n{turn} 角度\n{forward} 25\n{turn} 角度\n{forward} 25\n```\n"
                 start_code: |-
                     {print} '绘图'
                     图 {is} {ask} '你想要一个正方形还是三角形？'
@@ -361,136 +361,136 @@ adventures:
                     {turn} 角度
                     {forward} 25
             8:
-                story_text: "## Let's draw\nNow that we can repeat several lines, we can make figures more easily.\nWe only have to set the angle once and then use that variable in the `{repeat}`.\n"
-                example_code: "```\nangle = 90\n{repeat} 10 {times}\n    {turn} angle\n    {forward} 50\n```\n"
-                example_code_2: "```\nangles = {ask} 'How many angles should I draw?'\nangle = 360 / angles\n{repeat} angle {times}\n    {turn} _\n    {forward} _\n```\n"
-                story_text_2: "## Interaction\nAlso, we can now improve the program that draws different figures.\nCan you figure out how far the turtle has to turn here? Finish the code and you can draw any polygon you'd like!\n"
-                start_code: "angles = {ask} '我应该画多少个角？ '"
+                story_text: "## 让我们来画画\n现在我们能重复多行了，可以更容易地画图。\n我们只需要设置一下角度，然后在`{repeat}`中使用这个变量。\n"
+                example_code: "```\n角度 = 90\n{repeat} 10 {times}\n    {turn} 角度\n    {forward} 50\n```\n"
+                example_code_2: "```\n边 = {ask} '你想要几边形？'\n角度 = 360 / 边\n{repeat} 角度 {times}\n    {turn} _\n    {forward} _\n```\n"
+                story_text_2: "## 交互\n另外，我们现在还可以改进之前的能画不同图案的程序。\n你能看出这里海龟需要转多少度吗？完成这段代码，你就能画出任何你想要的多边形！\n"
+                start_code: "边 = {ask} '我应该画几边形？'"
             7:
-                story_text: "## Let's draw\nIn this level you can repeat one line of code with `{repeat}`.\n"
-                example_code: "```\n{print} 'Draw figures'\n{repeat} 3 {times} {forward} 10\n```\n"
+                story_text: "## 让我们来画画\n在这一级，你可以用`{repeat}`重复一行代码。\n"
+                example_code: "```\n{print} '绘图'\n{repeat} 3 {times} {forward} 10\n```\n"
                 start_code: "{print} '绘图'\n{repeat} 3 {times} {forward} 10"
             6:
-                story_text: "## Let's draw\nIn this level you can use calculations to draw different figures.\nYou may have learned in school that turning a full circle is 360 degrees. If not, now you know!\nThat's why you also use 90 degrees for a square. 360 divided by 4 is 90.\nNow that we can do math with Hedy, we can draw all the figures we want!\n"
-                example_code: "```\nangles = {ask} 'How many angles do you want?'\nangle = 360 / angles\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n```\n"
+                story_text: "## 让我们来画画\n在这一级，你可以使用算术来绘制不同的图案。\n你可能在学校里学过，旋转一圈是360度。如果没学过，那你现在知道了！\n这就是为什么你可以用90度来画方形。360除以4是90。\n现在我们可以用海迪做数学，我们就能画出所有想要的图案！\n"
+                example_code: "```\n边 = {ask} '你想要画几边形？'\n角度 = 360 / 边\n{forward} 50\n{turn} 角度\n{forward} 50\n{turn} 角度\n{forward} 50\n{turn} 角度\n{forward} 50\n{turn} 角度\n{forward} 50\n{turn} 角度\n{forward} 50\n{turn} 角度\n```\n"
                 start_code: "{print} '绘图'"
-        name: Turtle
-        description: Make your own drawing
+        name: 海龟
+        description: 创作自己的绘画作品
         default_save_name: turtle
     dishes:
         levels:
             5:
-                start_code: "{print} 'Who does the dishes?'"
-                story_text: "## Dishwashing\nWith the `{if}` you can now have more fun with choice in the program. You can have your program respond to the choice that the computer has made.\n\nCan you finish the code so that it prints 'too bad' when it is your turn and otherwise 'yes!'?\nDon't forget the quotes!\n"
-                example_code: "```\npeople {is} mom, dad, Emma, Sophie\ndishwasher {is} people {at} {random}\n{if} dishwasher {is} Sophie {print} _ too bad I have to do the dishes _ {else} {print} 'luckily no dishes because' _ 'is already washing up'\n```\n"
+                start_code: "{print} '谁负责洗碗？'"
+                story_text: "## 洗碗\n你可以用`{if}`给程序加入选项，来让它更有趣。你可以让你的程序对电脑做出的选择进行回应。\n\n你能不能完成这段代码，让它在选中你的时候打印“太糟了”，其它情况下打印“好！”？\n别忘了引号！\n"
+                example_code: "```\n人们 {is} 妈妈, 爸爸, 艾玛, 索菲\n洗碗的 {is} 人们 {at} {random}\n{if} 洗碗的 {is} 索菲 {print} _ 太糟了，轮到我洗碗 _ {else} {print} '运气真好，' _ '把碗洗了'\n```\n"
             10:
-                story_text: "## Dishwashing\nIn this level you could make an even better dish washing shedule.\n"
-                example_code: "```\ndays = Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday\nnames = mom, dad, Emma, Sophie\n{for} day {in} days\n    {print} names {at} {random} ' does the dishes on ' day\n```\n"
-                start_code: '# place your code here'
+                story_text: "## 洗碗\n在这一级，你可以制作一个更好的洗碗时间表。\n"
+                example_code: "```\n日期列表 = 周一, 周二, 周三, 周四, 周五, 周六, 周日\n人们 = 妈妈, 爸爸, 艾玛, 索菲\n{for} 日期 {in} 日期列表\n    {print} 人们 {at} {random} '负责在' 日期 '洗碗'\n```\n"
+                start_code: '# 在这里写你的代码'
             7:
-                example_code: "```\npeople = mom, dad, Emma, Sophie\n{repeat} _ _ {print} 'the dishwasher is' _\n```\n"
-                start_code: "{print} 'Who does the dishes?'"
-                story_text: "## Dishwashing\nWith the `{repeat}` you can repeat pieces of code. You can use this to calculate who will be washing dishes for the entire week.\n"
+                example_code: "```\n人们 = 妈妈, 爸爸, 艾玛, 索菲\n{repeat} _ _ {print} '洗碗的是' _\n```\n"
+                start_code: "{print} '谁负责洗碗？'"
+                story_text: "## 洗碗\n你可以用`{repeat}`重复一段代码。你可以以此来计算一周里谁负责洗碗。\n"
             6:
-                story_text: "## Dishwashing\nHow often is everyone going to do the dishes? Is that fair? You can count it in this level.\n"
-                story_text_2: "## Make it fair\nIf you are extremely unlucky the previous program might choose you to to the dishes for the whole week! That's not fair!\nTo create a fairer system you can use the `{remove}` command to remove the chosen person from the list. This way you don't have to do the dishes again untill everybody has had a turn.\n\nMonday and tuesday are ready for you! Can you add the rest of the week?\nAnd... can you come up with a solution for when your list is empty?\n"
-                example_code: "```\npeople = mom, dad, Emma, Sophie\nemma_washes = 0\ndishwasher = people {at} {random}\n{print} 'The dishwasher is' dishwasher\n{if} dishwasher {is} Emma emma_washes = emma_washes + 1\n{print} 'Emma will do the dishes this week' emma_washes 'times'\n```\n\nNow you can copy lines 3 to 5 a few times (e.g. 7 times for a whole week) to calculate for a whole week again.\nDo you make the code for the whole week?\n"
-                example_code_2: "```\npeople = mom, dad, Emma, Sophie\ndishwasher = people {at} {random}\n{print} 'Monday the dishes are done by: ' dishwasher\n{remove} dishwasher {from} people\ndishwasher = people {at} {random}\n{print} 'Tuesday the dishes are done by: ' dishwasher\n{remove} dishwasher {from} people\ndishwasher = people {at} {random}\n```\n"
-                start_code: "{print} 'Who does the dishes?'"
+                story_text: "## 洗碗\n每个人洗了多少次碗？是否公平？在这一级你可以进行统计。\n"
+                story_text_2: "## 让它公平\n如果你运气特别差，上一个程序可能每天都选你去洗碗！这不公平！\n为了创造一个更公平的系统，你可以用`{remove}`命令把选中的人从列表中移除。这样除非所有人都被轮到过一次，不然你不用再洗碗。\n\n周一和周二已经帮你写好了！你能把这周剩下的加上吗？\n另外……当列表里空了的时候，你有办法解决吗？\n"
+                example_code: "```\n人们 = 妈妈, 爸爸, 艾玛, 索菲\n艾玛洗碗 = 0\n洗碗的 = 人们 {at} {random}\n{print} '洗碗的人是' 洗碗的\n{if} 洗碗的 {is} 艾玛 艾玛洗碗 = 艾玛洗碗 + 1\n{print} '艾玛这周要洗' 艾玛洗碗 '次碗'\n```\n\n现在你需要将第3到第5行复制几次（比如，复制7次表示一周）来计算一整周。\n你能写出一整周用的代码吗？\n"
+                example_code_2: "```\n人们 = 妈妈, 爸爸, 艾玛, 索菲\n洗碗的 = 人们 {at} {random}\n{print} '周一洗碗的是：' 洗碗的\n{remove} 洗碗的 {from} 人们\n洗碗的 = 人们 {at} {random}\n{print} '周二洗碗的是：' 洗碗的\n{remove} 洗碗的 {from} 人们菲\n洗碗的 = 人们 {at} {random}\n```\n"
+                start_code: "{print} '谁负责洗碗？'"
             4:
-                story_text: "## Dishwashing\nWith quotation marks you can make your dishwashing planning more beautiful.\nThis time the sample code is not quite complete.\n\nCan you complete the code by filling the blanks? Every blank must be replaced with one word of symbol.\n\nTip: Don't forget the quotation marks!\n"
-                example_code: "```\npeople {is} mom, dad, Emma, Sophie\n{print} _ the dishes are done by _\n{sleep}\n{print} people {at} _\n```\n"
-                start_code: "{print} 'Who does the dishes?'"
+                story_text: "## 洗碗\n通过使用引号，你可以让你的洗碗计划更好看。\n这次的示例代码没有全部完成。\n\n你能否填上空白处，补全这段代码？每个空白处都必须填一个词或符号。\n\n提示：别忘了引号！\n"
+                example_code: "```\n人们 {is} 妈妈, 爸爸, 艾玛, 索菲\n{print} _ 洗碗的人是 _\n{sleep}\n{print} 人们 {at} _\n```\n"
+                start_code: "{print} '谁负责洗碗？'"
             3:
-                story_text: "## Dishwashing\nDo you always disagree at home about who should wash the dishes or change the litter box today?\nThen you can let the computer choose very fairly. You can program that in this level!\nYou first make a list of the members of your family. Then choose '{at} {random}' from the list.\n"
+                story_text: "## 洗碗\n你家里是不是总是争论让谁来洗碗或者倒垃圾？\n那么你可以让电脑来做出公平的决定。你在这一级可以写出这个程序！\n先列出你的家庭成员列表。然后用“{at} {random}”从列表中选择。\n"
                 example_code: "```\n人们 {is} 妈妈， 爸爸， 艾玛， 苏菲\n{print} 人们 {at} {random}\n```\n"
-                start_code: '{print} Who does the dishes?'
-                story_text_2: "## Hack the dishwashing program!\nDon't feel like doing the dishes yourself? Hack the program to remove your name from the list.\n"
-                example_code_2: "```\npeople {is} mom, dad, Emma, Sophie\nyour_name {is} {ask} Who are you?\n{remove} your_name {from} people\n{print} people {at} {random} does the dishes\n```\n"
-        name: Dishes?
-        description: Use the computer to see who does the dishes (Start at level 2)
-        default_save_name: Dishes
+                start_code: '{print} 谁负责洗碗？'
+                story_text_2: "## 破解洗碗程序！\n不想洗碗？破解洗碗程序，把你的名字从列表里去掉。\n"
+                example_code_2: "```\n人们 {is} 妈妈，爸爸，艾玛，索菲\n你的名字 {is} {ask} 你是谁？\n{remove} 你的名字 {from} 人们\n{print} 人们 {at} {random} 负责洗碗\n```\n"
+        name: 洗碗？
+        description: 用电脑决定谁来洗碗（从第2级开始）
+        default_save_name: 洗碗
     rock:
         levels:
             5:
-                start_code: "{print} 'Welcome to your own rock scissors paper!'"
-                story_text: "## Rock, paper, scissors\nIn this level we can determine who won.\nFor that you need the new `{if}` code.\n\nSave your choice with the name of choice and the choice of computer as computer choice.\nThen you can use `{if}` to see {if} they are the same or different.\nWill you finish the code?\n"
-                example_code: "```\noptions {is} rock, paper, scissors\ncomputer_choice {is} _\nchoice {is} {ask} What do you choose?\n{print} 'you chose ' _\n{print} 'computer chose ' _\n{if} _ {is} _ {print} 'tie!' {else} {print} 'no tie'\n```\n\nFill in the correct code on the blanks to see {if} it is a draw.\n"
+                start_code: "{print} '欢迎来到属于你自己的石头剪刀布！'"
+                story_text: "## 石头剪刀布\n在这一级，我们可以判定谁赢了。\n为此你需要使用新的`{if}`命令。\n\n将你的选择保存下来，并把电脑的选择也保存下来。\n然后你用`{if}`来判断他们是否相同。\n你能完成这段代码吗？\n"
+                example_code: "```\n选项 {is} 石头，剪刀，布\n电脑选择 {is} _\n你选择 {is} {ask} 你选什么？\n{print} '你选了' _\n{print} '电脑选了' _\n{if} _ {is} _ {print} '平局！' {else} {print} '不是平局'\n```\n\n在空白处填上正确的代码，来判断是否是平局。\n"
             4:
-                example_code: "```\nchoices {is} rock, paper, scissors\n{print} _ The computer chose: _ _ {at} _\n```\n"
-                start_code: "{print} 'Welcome to your own rock scissors paper!'"
-                story_text: "## Rock, paper, scissors\nIn this level we can further program rock, paper, scissors. But {if} you want to add text, you have to use quotation marks here too.\nDo you complete the code by entering the correct commands or characters on the underscores?\n"
+                example_code: "```\n选择 {is} 石头，剪刀，布\n{print} _ 电脑选择了：_ _ {at} _\n```\n"
+                start_code: "{print} '欢迎来到属于你自己的石头剪刀布！'"
+                story_text: "## 石头剪刀布\n在这一级，我们可以进一步对石头剪刀布编程。但是如果你想要添加文字，你同样需要使用引号。\n你能不能在划线处填入正确的命令，补全代码？\n"
             1:
-                story_text: "## Rock, paper, scissors\nIn level 1 you can start with a rock, paper, scissors  game.\n\nWith `{ask}` you can make a choice, and with `{echo}` you can repeat that choice.\n"
-                example_code: "```\n{print}你选哪一个？\n{ask} 从石头、剪刀和布中选一个\n{echo}所以你选的是：\n```\n当然，你也可以不使用文字，而是使用表情符号：✊✋✌\n"
-                start_code: '{print} Welcome to your own rock scissors paper!'
+                story_text: "## 石头剪刀布\n在第1级，你可以开始一个石头剪刀布游戏。\n\n你可以用`{ask}`做出选择，然后用`{echo}`复述这个选择。\n"
+                example_code: "```\n{print} 你选哪一个？\n{ask} 从石头、剪刀和布中选一个\n{echo} 所以你选的是：\n```\n当然，你也可以不使用文字，而是使用表情符号：✊✋✌\n"
+                start_code: '{print} 欢迎来到属于你自己的石头剪刀布！'
             9:
-                example_code: "```\n选择 {is} 石头、剪刀、布\n你的_选择 {is} {ask} '你选择了什么？'\n{print} '你选择了' 你的_选择\n计算机_选择 {is} 选择 {at} {random}\n{print} '计算机选择了 ' 计算机_选择\n{if} 计算机_选择 {is} 你的_选择\n    {print} '平手'\n{if} 计算机_选择 {is} 石头\n    {if} 你的_选择 {is}布\n        {print} '你赢了！'\n   {if} 你的_选择 {is} 剪刀\n        {print} '你输了！'\n# 完成了这段代码\n```\n"
-                story_text: "## Rock, paper, scissors\nIn this level you can program the whole rock, paper, scissors game by nesting the {if}-commands. Can you finish the code?\n"
-                start_code: '# place your code here'
+                example_code: "```\n选项 {is} 石头，剪刀，布\n你选择 {is} {ask} '你选择什么？'\n{print} '你选择了' 你选择\n计算机选择 {is} 选项 {at} {random}\n{print} '计算机选择了' 计算机选择\n{if} 计算机选择 {is} 你选择\n    {print} '平手'\n{if} 计算机选择 {is} 石头\n    {if} 你选择 {is}布\n        {print} '你赢了！'\n   {if} 你选择 {is} 剪刀\n        {print} '你输了！'\n# 完成这段代码\n```\n"
+                story_text: "## 石头剪刀布\n在这一级，你可以用嵌套的{if}命令来编程石头剪刀布。你能完成这段代码吗？\n"
+                start_code: '# 在这里写你的代码'
             10:
-                story_text: "## Rock, Paper, Scissors\nFeeling too lazy to play the game yourself? Let Hedy play it for you!\n"
-                example_code: "```\nchoices = rock, paper, scissors\nplayers = Marleen, Michael\n{for} player {in} players\n     {print} player ' chooses ' choices {at} {random}\n```\n"
-                start_code: '# place your code here'
+                story_text: "## 石头剪刀布\n有没有感觉懒得玩这个游戏？让海迪替你玩！\n"
+                example_code: "```\n选项 = 石头，剪刀，布\n玩家们 = 马琳，迈克尔\n{for} 玩家 {in} 玩家们\n     {print} 玩家 '选择' 选项 {at} {random}\n```\n"
+                start_code: '# 在这里写你的代码'
             3:
-                story_text: "## Rock, paper, scissors\n\nIn this level we can enter lists and choose things from them.\nYou first make a list with `{is}`. Then you can let the computer choose something from the list with `{at} {random}`.\nFor example, you can let the computer pick from rock, paper and scissors.\n"
-                start_code: '{print} Welcome to your own rock scissors paper!'
-                example_code: "```\n选择 {is} 石头、剪刀、布\n{print}选择 {at} {random}\n```\n"
+                story_text: "## 石头剪刀布\n\n在这一级，我们可以输入列表并从列表中选择。\n你要先用`{is}`制作一个列表。然后你可以用`{at} {random}`让电脑从列表里选一个。\n例如，你可以让电脑选择石头、剪刀或布。\n"
+                start_code: '{print} 欢迎来到属于你自己的石头剪刀布！'
+                example_code: "```\n选择 {is} 石头，剪刀，布\n{print} 选择 {at} {random}\n```\n"
             2:
-                story_text: "## Rock, paper, scissors\nIn this level you can practise using the variables, so that you can make the rock, paper, scissors game in the next level!\n"
-                example_code: "```\nchoice {is} _\n{print} I choose choice\n```\n"
-                start_code: '# place your code here'
+                story_text: "## 石头剪刀布\n在这一级，你可以练习使用变量，这样你就能在下一级中完成石头剪刀布游戏！\n"
+                example_code: "```\n选择 {is} _\n{print} 我选择 选择\n```\n"
+                start_code: '# 在这里写你的代码'
             15:
-                story_text: "## Rock, Paper, Scissors\nPlay until you beat the computer! But first, finish the example code...\n"
+                story_text: "## 石头剪刀布\n玩到你打败电脑为止！但首先，你要补全示例代码……\n"
                 example_code: "```\n赢 = '否'\n选项 = '石头', '剪刀', '布'\n{while} 赢 == '否'\n    你的_选择 = {ask} '你选择了什么？'\n    计算机_选择 = 选项 {at} {random}\n    {print} '你选择了 ' 你的_选择\n    {print} '计算机选择了' 计算机_选择\n    {if} 计算机_选择 == 你的_选择\n        {print} '平手！'\n    {if} 计算机_选择 == '石头' {and} 你的_选择 == '剪刀'\n        {print} '你输了！'\n    {if} 计算机_选择 == '石头' {and} 你的_选择 == '布'\n        {print} '你赢了！'\n        赢 = '是'\n```\n"
-                start_code: '# place your code here'
+                start_code: '# 在这里写你的代码'
             13:
-                story_text: "## Rock, paper, scissors\nWith the `{and}` command you can shorten your rock, paper, scissors code! Check out the example code below and try to finish it.\n"
-                example_code: "```\noptions = 'rock', 'paper', 'scissors'\nyour_choice = {ask} 'What do you choose?'\ncomputer_choice = options {at} {random}\n{print} 'You choose ' your_choice\n{print} 'The computer chooses ' computer_choice\n{if} computer_choice {is} your_choice\n    {print} 'Tie'\n{if} computer_choice {is} 'rock' {and} your_choice {is} 'paper'\n    {print} 'You win!'\n{if} computer_choice {is} 'rock' {and} your_choice {is} 'scissors'\n    {print} 'The computer wins!'\n```\n"
-                start_code: '# place your code here'
-        description: Make your own rock, paper, scissors game
-        name: Rock, paper, scissors
-        default_save_name: Rock
+                story_text: "## 石头剪刀布\n你可以用`{and}`命令缩短你的石头剪刀布代码！阅读下面的示例代码，并尝试完成它。\n"
+                example_code: "```\n选项 = '石头', '剪刀', '布'\n你选 = {ask} '你选什么？'\n电脑选 = 选项 {at} {random}\n{print} '你选了' 你选\n{print} '电脑选了' 电脑选\n{if} 电脑选 {is} 你选\n    {print} '平局'\n{if} 电脑选 {is} '石头' {and} 你选 {is} '布'\n    {print} '你赢了！'\n{if} 电脑选 {is} '石头' {and} 你选 {is} '剪刀'\n    {print} '电脑赢了！'\n```\n"
+                start_code: '# 在这里写你的代码'
+        description: 制作你自己的石头剪刀布游戏
+        name: 石头剪刀布
+        default_save_name: 石头
     calculator:
-        name: Calculator
+        name: 计算器
         levels:
             14:
                 example_code: "```\n{print} '猜猜哪个数字'\n数字们 = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n数字 = 数字们 {at} {random}\n游戏 = '开始'\n{for} i {in} {range} 1 {to} 10\n    {if} 游戏 == '开始'\n        猜测 = {ask} '你认为是哪一个数字?'\n        {if} 猜测 > 数字\n            {print} '低一点！ '\n        {if} 猜测 < 数字\n            {print} '更高！'\n        {if} 猜测 == 数字r\n            {print} '你赢了！ '\n            game = '结束'\n```\n"
-                story_text: "## Guess which number\nIn this level you can programm the game 'Guess which number'\n"
-                start_code: '# place your code here'
+                story_text: "## 猜数 \n在这关中你可以编写一个“猜数”游戏\n"
+                start_code: '# 在这里写你的代码'
             12:
-                story_text: "## Calculator\nNow you can make a calculator that works for decimal numbers.\n"
+                story_text: "## 计算器\n现在您可以编写一个用于小数计算的计算器。\n"
                 example_code: "```\n数字1 = {ask} '第一个数字是几？'\n数字2 = {ask} '第二个数字是几？'\n答案 = 数字1 + 数字2\n{print} 数字1 ' 加 ' 数字2 '等于 ' 答案\n```\n"
-                start_code: '# place your code here'
+                start_code: '# 在这里写你的代码'
             10:
-                story_text: "## Calculator\nThis calculator game helps you practise your tables of multiplication!\nIf you add more numbers to the list, you can practise all the multiplications.\n"
+                story_text: "## 计算器 \n这个计算器游戏帮助您练习你的乘法口诀表！ \n如果您添加更多数到这个列表，你可以练习到所有的乘法。\n"
                 example_code: "```\nnumbers = 1, 2, 3\n{for} number1 {in} numbers\n    {for} number2 {in} numbers\n        answer = {ask} 'How much is ' number2 ' times ' number1 '?'\n        correct = number1 * number2\n        {if} answer {is} correct\n            {print} 'Great job!'\n        {else}\n            {print} 'Thats wrong. The right answer is ' correct\n```\n"
-                start_code: '# place your code here'
+                start_code: '# 在这里写你的代码'
             9:
-                story_text: "## Calculator\nIn previous levels you've learned how to make a calculator, in this level you can expand that code and make it into a little maths game. Like this...\n"
+                story_text: "## 计算器 \n在前面的级别中您已经学会如何编写一个计算器，在这个等级里你可以扩写这些代码并把它写成一个小小的数学游戏，就像这样...\n"
                 example_code: "```\nscore = 0\n{repeat} 10 {times}\n    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    number1 = numbers {at} {random}\n    number2 = numbers {at} {random}\n    correct_answer = number1 * number2\n    {print} 'What is ' number1 ' times ' number2 '?'\n    answer = {ask} 'Type your answer here...'\n    {print} 'Your answer is' answer\n    {if} answer {is} correct_answer\n        score = score + 1\n{print} 'Great job! Your score is... ' score ' out of 10!'\n```\n"
-                start_code: "{print} 'Welcome to this calculator!'"
+                start_code: "{print} '欢迎来到这个计算器!'"
             6:
-                story_text: "## Calculator\nNow that you can calculate, you can also create a program to practice maths calculations. You can make up the calculations yourself, for example:\n"
+                story_text: "## 计算器 \n现在你可以计算了，你也可以创建一个程序来练习数学计算。你可以自己编造一个计算题，例如：\n"
                 example_code: "```\ncorrect_answer = 11 * 27\nanswer = {ask} 'How much is 11 times 27?'\n{if} answer {is} correct_answer {print} 'good job!'\n{else} {print} 'Wrong! It was ' correct_answer\n```\n"
-                story_text_2: "## Random numbers\nYou can also let the computer do random sums on its own using random.\nThis is how you choose a number of tables to practice, and from that you always get a different sum:\n"
+                story_text_2: "## 随机数 \n您也可以让计算机自己用随机函数做一个随机求和。 \n这就是您选择多个表格进行练习的方式，而且您将总是得到一个不一样的和：\n"
                 example_code_2: "```\ntables = 4, 5, 6, 8\nnumbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\ntable = tables {at} {random}\nnumber = numbers {at} {random}\ncorrect_answer = table * number\nanswer = {ask} 'how much is ' table ' times ' number '?'\n{if} answer {is} correct_answer {print} 'okay'\n{else} {print} 'mistake! it was ' correct_answer\n```\n"
-                start_code: "{print} 'Welcome to this calculator!'"
+                start_code: "{print} '欢迎来到这个计算器!'"
             15:
-                story_text: "## Calculator\nYou can add the `{while}` loop to the calculator game you've learned to make in a previous level.\nThis makes sure the player can't continue to the next question {if} they answer incorrectly.\n"
+                story_text: "## 计算器 \n您可以添加 `{while}` 循环到您已经在上一关中学过的计算器游戏中去。 \n这可以确保{if}玩家在没有回答正确的情况下不会进行下一个问题。\n"
                 example_code: "```\nscore = 0\n{for} i {in} {range} 0 {to} 9\n    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    number1 = numbers {at} {random}\n    number2 = numbers {at} {random}\n    correct = number1 * number2\n    answer = 0\n    {while} answer != correct\n        {print} 'How much is ' number1 ' times ' number2 '?'\n        answer = {ask} 'Fill in your answer:'\n        {print} 'Your answer is ' answer\n    {print} 'Good job!'\n{print} 'You win!'\n```\n"
-                start_code: '# place your code here'
-        description: Create a calculator
-        default_save_name: Calculator
+                start_code: '# 在这里写你的代码'
+        description: 创建一个计算器
+        default_save_name: 计算器
     restaurant:
         name: "Restaurant"
-        description: "Create your own virtual restaurant"
+        description: "创建你自己的虚拟餐厅"
         default_save_name: "Restaurant"
         levels:
             1:
                 story_text: |
-                    ## Restaurant
-                     In level 1 you can make your own virtual restaurant and take your guests' orders.
+                    ## 餐厅 
+                    在第一关中您可以编写一个你自己的虚拟餐厅并接受客人的点单。
                 example_code: |
                     ```
                     {print} Welcome to Hedy's restaurant 🍟
@@ -500,9 +500,9 @@ adventures:
                     {print} It's on its way!
                     ```
                 story_text_2: |
-                    ## Challenge
-                    Can you think of more lines to add to your restaurant code? For example, can you {ask} the guests what they'd like to drink, tell them the price, or wish them a pleasant meal?
-                start_code: "# place your code here"
+                    ## 挑战 
+                    你可以想出更多行代码添加到你的餐厅的代码里吗？例如，你可以{ask}客人他们想要喝些什么，告诉他们价格，或者祝他们用餐愉快？
+                start_code: "# 在这里写你的代码"
             2:
                 story_text: |
                     ## Restaurant
@@ -602,8 +602,8 @@ adventures:
                     {print} 'Thank you for your order and enjoy your meal!'
                     ```
                 story_text_2: |
-                    ## Challenge
-                    Can you think of more questions to {ask} the customers when they are ordering, and make up different responses to their answers by using the {if} command?
+                    ## 挑战
+                    你能想出更多的问题，在顾客点餐时`{ask}` ，并通过使用`{if}` 命令对他们不同的应答做出合适的答复吗？
 
                 start_code: "# place your code here"
             6:
@@ -1312,7 +1312,7 @@ adventures:
         default_save_name: language
         levels:
             5:
-                story_text: "##学习新的语言\n编写你自己的程序来练习新语言的词汇。\n"
+                story_text: "## 学习新的语言\n编写你自己的程序来练习新语言的词汇。\n"
                 start_code: '# place your code here'
                 example_code: "```\n{print} 'Learn French!'\ncat {is} {ask} '\U0001F431'\n{if} cat {is} chat {print} 'Terrific!'\n{else} {print} 'No, cat is chat'\nfrog {is} {ask} '\U0001F438'\n{if} frog {is} grenouille {print} 'Super!'\n{else} {print} 'No, frog is grenouille'\n```\n"
             16:
@@ -1354,7 +1354,7 @@ adventures:
                 start_code: "{print} 'Lets go to the next level!'"
                 story_text: "## What's next?\nYou have reached the end of this level, you're doing great! You are about to go to the next level. In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.\nIn Python there is no `{repeat}` command, but there is a command that works like {repeat}. Are you curious to find out how to say `{repeat}` in Python language? Quickly go on to find out!\n"
             11:
-                story_text: "##下一步是什么？\n也许你已经在你的餐厅冒险活动中尝试使用小数。如果你这样做了，你可能注意到Hedy还不理解它们，总是把它们四舍五入。\n从下一级开始，你就可以使用小数啦。\n"
+                story_text: "## 接下来是什么？\n也许你已经在你的餐厅冒险活动中尝试使用小数。如果你这样做了，你可能注意到Hedy还不理解它们，总是把它们四舍五入。\n从下一级开始，你就可以使用小数啦。\n"
                 start_code: "{print} 'Lets go to the next level!'"
                 example_code: "```\n汉堡是5\n饮料是2\n总计是汉堡+饮料\n打印 '你已经点了一个汉堡和一杯饮料'\n打印 '你一共花了 ' 总计 ' 元' 。\n```\n上面的代码有效，因为汉堡是5美元，饮料是2美元。但是，如果你多收50美分，程序就不能再工作了!就像下面的代码。\n```\n汉堡是5.50美元\n饮料是2.30美元\n总计是汉堡+饮料\n打印 '你已经点了一个汉堡和一杯饮料'\n打印 '你一共花了 ' total ' 元' 。\n```\n进入下一级，让这段代码发挥作用!\n"
             13:
@@ -1377,9 +1377,9 @@ adventures:
             6:
                 story_text: "## 下一步是什么？\n 干得好！你已经到达了这个级别的终点，这意味着你已经练习了`{if}`和`{else}`命令。你可能已经注意到你编写的代码越来越长。\n 例如，{if}您想要编写“祝你生日快乐”这首歌的程序。\n\n这是一遍又一遍地为大致相同的句子编写大量的代码。幸运的是，在下一个级别中，可以用`{repeat}`命令的解决这个问题，它允许您多次重复一行代码。\n"
                 start_code: "{print} 'On to the next level!'"
-                example_code: "```\n{print} '祝你生日快乐'\n{print} '祝你生日快乐'\n{print} '祝亲爱的海迪生日快乐'\n{print} '祝你生日快乐'\n```\n"
+                example_code: "```\n{print} '祝你生日快乐'\n{print} '祝你生日快乐'\n{print} '祝亲爱的Hedy生日快乐'\n{print} '祝你生日快乐'\n```\n"
             7:
-                story_text: "##接下来是什么？\n现在你已经学会了如何重复一行代码。这很方便，但这并不总是足够。有时你想一次重复多行代码。\n在下一级，允许你将几行代码组成一组，并一次性重复这一组代码！\n"
+                story_text: "## 接下来是什么？\n现在你已经学会了如何重复一行代码。这很方便，但这并不总是足够。有时你想一次重复多行代码。\n在下一级，允许你将几行代码组成一组，并一次性重复这一组代码！\n"
                 start_code: "{print} 'Lets go to the next level!'"
                 example_code: "```\n{repeat} 5 {times} {print} 'In the next level you can repeat multiple lines of code at once!'\n```\n"
             12:
@@ -1414,39 +1414,39 @@ adventures:
                 example_code: "```\n单词表 {is} 叽叽喳喳, 海迪\n{print} '训练你的鹦鹉！'\n新单词 {is} {ask} '你想让他们学哪个词？'\n{add} 新单词 {to_list} 单词表\n说了 {is} 单词表 {at} {random}\n{print} '\U0001F9D2 海迪，说' 新单词 '！'\n{print} '\U0001F99C ' 说了\n{if} 说了 {is} 新单词 {print} '\U0001F9D2 干得好！海迪！\U0001F36A'\n{else} {print} '\U0001F9D2 不对，海迪！说' 新单词\n```\n"
                 start_code: '# 在这里写你的代码'
     dice:
-        name: Dice
-        description: Make your own dice
-        default_save_name: Dice
+        name: 骰子
+        description: 制作你自己的骰子
+        default_save_name: 骰子
         levels:
             7:
-                example_code: "```\nchoices = 1, 2, 3, 4, 5, earthworm\n{repeat} _ _ {print} _ _ _\n```\n"
-                story_text: "## Dice\nYou can also make a die again in level 5. With the `{repeat}` code you can easily roll a whole hand of dice.\nTry to finish the sample code! The dashes should contain multiple commands and characters.\n\nBut maybe you want to make a completely different die. Of course you can!\n"
-                start_code: "{print} 'What will the die indicate this time?'"
+                example_code: "```\n选项 = 1, 2, 3, 4, 5, 蚯蚓\n{repeat} _ _ {print} _ _ _\n```\n"
+                story_text: "## 骰子\n在第5级，你又可以做一个骰子。通过运用`{repeat}`命令，你可以轻松投出一大把骰子。\n试着补全示例代码！划线部分应该包含多个命令或字符。\n\n但可能你想做一个完全不同的骰子。这当然可以！\n"
+                start_code: "{print} '骰子这次会投出什么？'"
             10:
-                story_text: "## Dice\nIs everybody taking too long throwing the dice? In this level you can let Hedy throw all the dice at once!\n"
-                example_code: "```\nplayers = Ann, John, Jesse\nchoices = 1, 2, 3, 4, 5, 6\n{for} player {in} players\n    {print} player ' throws ' choices {at} {random}\n    {sleep}\n```\n"
-                start_code: '# place your code here'
+                story_text: "## 骰子\n大家投骰子是不是要花太长时间？在这一级，你可以让海迪一次投出所有骰子！\n"
+                example_code: "```\n玩家们 = 安, 约翰, 杰西\n选项 = 1, 2, 3, 4, 5, 6\n{for} 玩家 {in} 玩家们\n    {print} 玩家 '投出了' 选项 {at} {random}\n    {sleep}\n```\n"
+                start_code: '# 在这里写你的代码'
             6:
-                story_text: "## Dice\nYou can also make an Earthworm die again in this, but now you can also calculate how many points have been rolled.\nYou may know that the worm counts 5 points for Earthworms. Now after a roll you can immediately calculate how many points you have thrown.\nThis is the code to calculate points for one die:\n"
-                example_code: "```\nchoices = 1, 2, 3, 4, 5, earthworm\npoints = 0\nthrow = choices {at} {random}\n{print} 'you threw' throw\n{if} throw {is} earthworm points = points + 5 {else} points = points + throw\n{print} 'those are' points ' point'\n```\nCan you make the code so that you get the total score for 8 dice? To do that, you have to cut and paste some lines of the code.\n"
-                example_code_2: "## Looking forward\n\nDid you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!\n"
-                start_code: "{print} 'What will the die indicate this time?'"
+                story_text: "## 骰子\n你这次可以再做一个蚯蚓骰子，但是这次你可以计算你总共投了多少点数。\n你可能知道，投出蚯蚓算5点。现在每一轮过后你都能立即算出你投了多少点。\n这段代码会对一个骰子统计点数：\n"
+                example_code: "```\n选项 = 1, 2, 3, 4, 5, 蚯蚓\n点数 = 0\n投 = 选项 {at} {random}\n{print} '你投出了' 投\n{if} 投 {is} 蚯蚓 点数 = 点数 + 5 {else} 点数 = 点数 + 投\n{print} '现在是' points '点'\n```\n你能修改这段代码，让它统计8个骰子的总分吗？为此，你必须复制粘贴代码里的某几行。\n"
+                example_code_2: "## 向前看\n\n你计算出8个骰子的点数了吗？这需要大量复制粘贴，对吗？在第7级，我们会让它更简单！\n"
+                start_code: "{print} '骰子这次会投出什么？'"
             5:
-                example_code: "```\nchoices {is} 1, 2, 3, 4, 5, earthworm\nthrow {is} _\n{print} 'you have' _ 'thrown'\n{if} _ {is} earthworm {print} 'You can stop throwing.' _ {print} 'You have to hear it again!'\n```\n"
-                story_text: "## Dice\nYou can also make a die again in this level using the `{if}`.\nComplete the sample code so that the code says \"You can stop throwing\" once you have thrown an earthworm.\n\nBut maybe you want to recreate a die from a completely different game. That's fine too! Then make up your own reaction. Eg 'yes' for 6 and 'pity' for something {else}.\n"
-                start_code: "{print} 'What will the die indicate this time?'"
+                example_code: "```\n选项 {is} 1, 2, 3, 4, 5, 蚯蚓\n投 {is} _\n{print} '你投出了' _\n{if} _ {is} 蚯蚓 {print} '你不用再投了' _ {print} '你需要再来一次！'\n```\n"
+                story_text: "## 骰子\n在这一级，你可以用`{if}`再制作一个骰子。\n补全示例代码，让它在你投出蚯蚓的时候说“你不用再投了”。\n\n不过也许你想要重新搞一个别的游戏里的完全不同的骰子。那也没关系！你只要做出对应的回应，比如在投出6的时候说“好”，在{else}中说“遗憾”。\n"
+                start_code: "{print} '骰子这次会投出什么？'"
             4:
-                story_text: "## Dice\nIn this level we can make sentences with the die value in the sentence, with quotes of course.\nThis time the sample code is not quite complete. Can you finish the code?\n"
-                example_code: "```\nchoices {is} 1, 2, 3, 4, 5, earthworm\n{print} _ you threw _\n{print} _ _ _ <- here you have to program the choice\n```\n"
-                start_code: "{print} 'What will the die indicate this time?'"
+                story_text: "## 骰子\n在这一级，我们可以用骰子的点数来造句，当然要用引号。\n这次的示例代码没有全部完成。你能把代码补全吗？\n"
+                example_code: "```\n选项 {is} 1, 2, 3, 4, 5, 蚯蚓\n{print} _ 你投出了 _\n{print} _ _ _ <- 你需要在这里写出选项\n```\n"
+                start_code: "{print} '骰子这次会投出什么？'"
             3:
-                example_code: "```\nchoices {is} 1, 2, 3, 4, 5, earthworm\n{print} choices {at} {random}\n```\n"
-                start_code: '{print} What will the die indicate this time?'
-                story_text: "## Dice\nIn this level we can choose from a list. With that we can let the computer choose one side of the die.\nTake a look at the games you have in your closet at home.\nAre there games with a (special) die? You can also copy it with this code.\nFor example, the dice of the game Earthworms with the numbers 1 to 5 and an earthworm on it.\n\n![Die of earthworms with 1 to 5 and an earthworm on it](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)\n"
+                example_code: "```\n选项 {is} 1, 2, 3, 4, 5, 蚯蚓\n{print} 选项 {at} {random}\n```\n"
+                start_code: '{print} 骰子这次会投出什么？'
+                story_text: "## 骰子\n在这一级我们可以从列表中选择。通过这种方式，我们能让电脑选择骰子哪一面朝上。\n看看你家里柜子里的游戏。\n有没有用骰子玩的游戏？你也可以用这段代码来复制它。\n比如，蚯蚓游戏用的骰子上印着1到5和一条蚯蚓。\n\n![蚯蚓游戏的骰子，有1到5和一条蚯蚓](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)\n"
             15:
-                story_text: "## Dice\nIn this game you have to throw 6 in as little tries as possible.\n"
-                example_code: "```\noptions = 1, 2, 3, 4, 5, 6\n{print} 'Throw 6 as fast as you can!'\nthrown = 0\ntries = 0\n{while} thrown != 6\n    thrown = options {at} {random}\n    {print} 'You threw ' thrown\n    tries = tries + 1\n{print} 'Yes! You have thrown 6 in ' tries ' tries.'\n```\n"
-                start_code: '# place your code here'
+                story_text: "## 骰子\n在这个游戏里，你需要用尽可能少的次数投出6。\n"
+                example_code: "```\n选项 = 1, 2, 3, 4, 5, 6\n{print} '用最快的速度投出6！'\n投 = 0\n次数 = 0\n{while} 投 != 6\n    投 = 选项 {at} {random}\n    {print} '你投了' 投\n    次数 = 次数 + 1\n{print} '很好！你在' 次数 '次里投出了6！'\n```\n"
+                start_code: '# 在这里写你的代码'
     secret:
         name: SuperSpy
         description: Make your own spy code
