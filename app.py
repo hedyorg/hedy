@@ -2,7 +2,9 @@
 import copy
 from itertools import count
 from multiprocessing.dummy import active_children
-
+from logging_config import LOGGING_CONFIG
+from logging.config import dictConfig as logConfig
+logConfig(LOGGING_CONFIG)
 from website import (
     auth_pages, classes, profile, parsons, statistics, quiz, admin, for_teachers, programs,
 )
@@ -34,6 +36,8 @@ import datetime
 import sys
 import textwrap
 import zipfile
+
+logger = logging.getLogger(__name__)
 
 # Todo TB: This can introduce a possible app breaking bug when switching to Python 4 -> e.g. Python 4.0.1 is invalid
 if (sys.version_info.major < 3 or sys.version_info.minor < 7):
@@ -133,13 +137,6 @@ def load_adventures_per_level(level, keyword_lang):
         current_adventure['extra_stories'] = extra_stories
         all_adventures.append(current_adventure)
     return all_adventures
-
-
-logging.basicConfig(
-    level=logging.DEBUG,
-    format='[%(asctime)s] %(levelname)-8s: %(message)s')
-
-# Return the session language, if not: return best match
 
 
 @babel.localeselector
@@ -274,7 +271,7 @@ def setup_language():
 
 
 if utils.is_heroku() and not os.getenv('HEROKU_RELEASE_CREATED_AT'):
-    logging.warning(
+    logger.warning(
         'Cannot determine release; enable Dyno metadata by running "heroku labs:enable runtime-dyno-metadata -a <APP_NAME>"')
 
 
@@ -1777,7 +1774,7 @@ if __name__ == '__main__':
     is_in_debugger = sys.gettrace() is not None
 
     on_server_start()
-
+    logger.debug(f'app starting in debug mode')
     # Threaded option enables multiple instances for multiple user access support
     app.run(threaded=True, debug=not is_in_debugger,
             port=config['port'], host="0.0.0.0")
