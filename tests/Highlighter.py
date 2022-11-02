@@ -207,10 +207,11 @@ class HighlightTester(unittest.TestCase):
 
         Returns a state machine.
         """
-        root_dir = os.path.dirname(__file__) +"/.."
+        root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
+        trad_file = os.path.normpath(root_dir+'/highlighting/highlighting-trad.json')
         
         # get traduction
-        with open(f'{root_dir}/highlighting/highlighting-trad.json') as file_regex_trad:
+        with open(trad_file, 'r', encoding='utf-8') as file_regex_trad:
             data_regex_trad = json.load(file_regex_trad)
     
         if lang not in data_regex_trad.keys():
@@ -219,7 +220,8 @@ class HighlightTester(unittest.TestCase):
         regex_trad = data_regex_trad[lang]
 
         # get state_machine
-        with open(f'{root_dir}/highlighting/highlighting.json') as file_regex:
+        sm_file = os.path.normpath(root_dir+'/highlighting/highlighting.json')
+        with open(sm_file, 'r', encoding='utf-8') as file_regex:
             data_regex = json.load(file_regex)
 
         # apply translation of keywords

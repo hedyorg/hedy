@@ -227,23 +227,19 @@ def atomic_write_file(filename, mode='wb'):
     """Write to a filename atomically.
 
     First write to a unique tempfile, then rename the tempfile into
-    place. Use as a context manager:
+    place. Use replace instead of rename to make it atomic on windows as well. 
+    Use as a context manager:
 
         with atomic_write_file('file.txt') as f:
             f.write('hello')
-
-    THIS WON'T WORK ON WINDOWS -- atomic file renames don't overwrite
-    on Windows. We now just swallow the exception, someone else already wrote the file?)
     """
 
     tmp_file = f'{filename}.{os.getpid()}'
     with open(tmp_file, mode) as f:
         yield f
+    
+    os.replace(tmp_file, filename)
 
-    try:
-        os.rename(tmp_file, filename)
-    except IOError:
-        pass
 
 # This function takes a date in milliseconds from the Unix epoch and transforms it into a printable date
 # It operates by converting the date to a string, removing its last 3 digits, converting it back to an int
