@@ -984,17 +984,18 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
   turtleConfig.width = outputDiv.width();
   turtleConfig.worldWidth = outputDiv.width();
 
+  let code_prefix = normal_prefix;
+
   if (!hasTurtle && !hasPygame) {
     // There might still be a visible turtle panel. If the new program does not use the Turtle,
     // remove it (by clearing the '#turtlecanvas' div)
     $('#turtlecanvas').empty();
-  } else {
-    // Otherwise make sure that it is shown as it might be hidden from a previous code execution.
-    $('#turtlecanvas').show();
   }
 
-  let code_prefix = normal_prefix;
-  if (hasTurtle) code_prefix += turtle_prefix;
+  if (hasTurtle) {
+    code_prefix += turtle_prefix;
+    $('#turtlecanvas').show();
+  }
 
   if (hasPygame){
     skulptExternalLibraries = {
@@ -1252,6 +1253,7 @@ function initCanvas4PyGame() {
       currentTarget.appendChild(div1);
       $(div1).addClass("modal");
       $(div1).css("text-align", "center");
+      $(div1).css("display", "none");
 
       let div2 = document.createElement("div");
       $(div2).addClass("modal-dialog modal-lg");
@@ -1279,7 +1281,8 @@ function initCanvas4PyGame() {
       div3.appendChild(div5);
       div3.appendChild(div6);
 
-      Sk.main_canvas.style.border = "none";
+      $(Sk.main_canvas).css("border", "none");
+      $(Sk.main_canvas).css("display", "none");
       div5.appendChild(Sk.main_canvas);
     }
 }
