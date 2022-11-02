@@ -827,16 +827,13 @@ class Filter(Transformer):
 
 
 class UsesTurtle(Transformer):
-    # returns true if Forward or Turn are in the tree, false otherwise
     def __default__(self, args, children, meta):
-        if len(children) == 0:  # no children? you are a leaf that is not Turn or Forward, so you are no Turtle command
+        if len(children) == 0:  # no children? you are a leaf that is not Pressed, so you are no PyGame command
             return False
         else:
-            if all(type(c) == bool for c in children):
-                return any(children) # children? if any is true there is a Turtle leaf
-            else:
-                return False # some nodes like text and punctuation have text children (their letters) these are not turtles
+            return any(type(c) == bool and c is True for c in children)
 
+    # returns true if Forward or Turn are in the tree, false otherwise
     def forward(self, args):
         return True
 
@@ -868,12 +865,12 @@ class UsesPyGame(Transformer):
         if len(children) == 0:  # no children? you are a leaf that is not Pressed, so you are no PyGame command
             return False
         else:
-            if all(type(c) == bool for c in children):
-                return any(children) # children? if any is true there is a Pygame leaf
-            else:
-                return False # some nodes like text and punctuation have text children (their letters) these are not pygames
+            return any(type(c) == bool and c is True for c in children)
 
     def ifpressed(self, args):
+        return True
+
+    def ifpressed_else(self, args):
         return True
 
 
@@ -1225,9 +1222,9 @@ class ConvertToPython(Transformer):
         return 'random.choice' in s
 
     @staticmethod
-    def indent(s):
+    def indent(s, spaces_amount = 2):
         lines = s.split('\n')
-        return '\n'.join(['  ' + l for l in lines])
+        return '\n'.join([' '*spaces_amount + l for l in lines])
 
 
 @v_args(meta=True)
@@ -1563,24 +1560,22 @@ else:
         arg1 = self.process_variable(args[1], meta.line)
         return f"{arg0} in {arg1}"
 
-    def ifpressed(self, met,args):
-        # TODO: Implement better solution than pygame.K_{args[0]}
-        return f"""end = False
-
-canvas.fill(pygame.Color(247, 250, 252, 255))
-while not end:
-    pygame.display.update()
-    event = pygame.event.wait()
-    if event.type == pygame.QUIT:
-        pygame.quit()
-        break
-    if event.type == pygame.KEYDOWN:
+    def ifpressed(self, met, args):
+        return f"""
         if event.key == pygame.K_{args[0]}:
-            end = True
-            {args[1]}
-pygame.display.update()
-pygame.quit()"""
+{ConvertToPython.indent(args[1], 12)}
+            pygame_end = True
+"""
 
+    def ifpressed_else(self, met, args):
+        return f"""
+        if event.key == pygame.K_{args[0]}:
+{ConvertToPython.indent(args[1], 12)}
+            pygame_end = True
+        else:
+{ConvertToPython.indent(args[2], 12)}
+            pygame_end = True
+"""
 
 @v_args(meta=True)
 @hedy_transpiler(level=6)
@@ -1719,38 +1714,47 @@ class ConvertToPython_8_9(ConvertToPython_7):
         return f"for {var_name} in range(int({times})):\n{body}"
 
     def ifs(self, meta, args):
-        args = [a for a in args if a != ""] # filter out in|dedent tokens
-
         all_lines = [ConvertToPython.indent(x) for x in args[1:]]
-
         return "if " + args[0] + ":\n" + "\n".join(all_lines)
 
     def ifpressed(self, met, args):
-        # TODO: Implement better solution than pygame.K_{args[0]}
         args = [a for a in args if a != ""] # filter out in|dedent tokens
-        all_lines = [x + '\n' for x in args[1:]]
 
-        return f"""end = False
-canvas.fill(pygame.Color(247, 250, 252, 255))
-while not end:
-    pygame.display.update()
-    event = pygame.event.wait()
-    if event.type == pygame.QUIT:
-        pygame.quit()
-        break
-    if event.type == pygame.KEYDOWN:
+        all_lines = '\n'.join([x for x in args[1:]])
+        all_lines = ConvertToPython.indent(all_lines, 12)
+
+        return f"""
         if event.key == pygame.K_{args[0]}:
-            end = True
-            """ + "            ".join(all_lines) + """
-pygame.display.update()
-pygame.quit()"""
+{all_lines}
+            pygame_end = True
+"""
+
+    def ifpressed_else(self, met, args):
+        args = [a for a in args if a != ""]  # filter out in|dedent tokens
+
+        all_lines = '\n'.join([x for x in args[1:]])
+        all_lines = ConvertToPython.indent(all_lines, 12)
+
+        return f"""
+        if event.key == pygame.K_{args[0]}:
+{all_lines}
+"""
 
     def elses(self, meta, args):
         args = [a for a in args if a != ""] # filter out in|dedent tokens
-
         all_lines = [ConvertToPython.indent(x) for x in args]
 
         return "\nelse:\n" + "\n".join(all_lines)
+
+    def ifpressed_elses(self, meta, args):
+        args = [a for a in args if a != ""] # filter out in|dedent tokens
+        args += ["\npygame_end = True\n"]
+
+        all_lines = "\n".join(
+            [ConvertToPython.indent(x, 8) for x in args]
+        )
+
+        return all_lines
 
     def var_access(self, meta, args):
         if len(args) == 1: #accessing a var
@@ -2338,7 +2342,14 @@ def preprocess_ifs(code):
         # todo convert to all languages!!
         if line[0:2] == "if" and (not next_line[0:4] == 'else') and (not ("else" in line)):
             # is this line just a condition and no other keyword (because that is no problem)
-            if "print" in line or "ask" in line or "forward" in line or "turn" in line: # and this should also (TODO) check for a second is cause that too is problematic.
+            if (
+                "pressed" not in line and (
+                "print" in line or
+                "ask" in line or
+                "forward" in line or
+                "turn" in line
+                )
+            ): # and this should also (TODO) check for a second is cause that too is problematic.
                 # a second command, but also no else in this line -> check next line!
                 
                 # no else in next line?
@@ -2540,7 +2551,6 @@ def transpile_inner(input_string, level, lang="en"):
         # grab the right transpiler from the lookup
         convertToPython = TRANSPILER_LOOKUP[level]
         python = convertToPython(lookup_table, numerals_language).transform(abstract_syntax_tree)
-
 
         has_turtle = UsesTurtle().transform(abstract_syntax_tree)
         has_pygame = UsesPyGame().transform(abstract_syntax_tree)
