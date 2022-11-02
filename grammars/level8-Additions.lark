@@ -1,4 +1,4 @@
-command:+= ifpressed | ifs elses?
+command:+= ifpressed ifpressed_elses? | ifs elses?
 
 repeat: _REPEAT (INT | var_access) _TIMES _SPACE? _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK
 
@@ -9,7 +9,9 @@ equality_check: (textwithoutspaces | NUMBER) (_IS | _EQUALS) (textwithoutspaces 
 
 // from level 8 on ifpressed is implemented slightly differently
 ifpressed: _IF SMALL_LETTER_OR_NUMERAL _IS _PRESSED _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK
+ifpressed_else: _IF SMALL_LETTER_OR_NUMERAL _IS _PRESSED _EOL (_SPACE command) (_EOL _SPACE command)* _EOL (_SPACE)* _ELSE (_SPACE)* _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK
 // from level 8 on if is implemented slightly differently
+ifpressed_elses: elses
 elses: _EOL (_SPACE)* _ELSE (_SPACE)* _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK
 //'if' cannot be used in Python, hence the name of the rule is 'ifs'
 ifs: _IF condition _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK
