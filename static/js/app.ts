@@ -27,6 +27,22 @@ import pygame
 pygame.init()
 canvas = pygame.display.set_mode((711,300))
 canvas.fill(pygame.Color(247, 250, 252, 255))
+
+pygame_end = False
+
+while not pygame_end:
+    pygame.display.update()
+    event = pygame.event.wait()
+    if event.type == pygame.QUIT:
+        pygame.quit()
+        break
+    if event.type == pygame.KEYDOWN:
+`;
+
+const pygame_suffix =
+`# coding=utf8
+pygame.display.update()
+pygame.quit()
 `;
 
 const normal_prefix =
@@ -319,7 +335,6 @@ export function stopit() {
   else
   {
       // We bucket-fix stop the current program by setting the run limit to 1ms
-      Sk.insertPyGameEvent("quit");
       Sk.execLimit = 1;
       clearTimeouts();
       $('#stopit').hide();
@@ -973,15 +988,13 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
     // There might still be a visible turtle panel. If the new program does not use the Turtle,
     // remove it (by clearing the '#turtlecanvas' div)
     $('#turtlecanvas').empty();
-    code = normal_prefix + code
   } else {
     // Otherwise make sure that it is shown as it might be hidden from a previous code execution.
     $('#turtlecanvas').show();
   }
 
-  if (hasTurtle) {
-    code = normal_prefix + turtle_prefix + code
-  }
+  let code_prefix = normal_prefix;
+  if (hasTurtle) code_prefix += turtle_prefix;
 
   if (hasPygame){
     skulptExternalLibraries = {
@@ -1015,7 +1028,7 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
       './locals.js': {
         path: "/vendor/pygame_4_skulpt/locals.js",
       },
-      'src/lib/time.js': {
+      './time.js': {
         path: "/vendor/pygame_4_skulpt/time.js",
       },
       './version.js': {
@@ -1023,13 +1036,16 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
       },
     };
 
-    code = pygame_prefix + normal_prefix + code
+    code_prefix += pygame_prefix;
 
     initSkulpt4Pygame();
     initCanvas4PyGame();
 
     $('#runit').attr("running-pygame", "true");
   }
+
+  code = code_prefix + code;
+  if (hasPygame) code += pygame_suffix;
 
   Sk.configure({
     output: outf,
