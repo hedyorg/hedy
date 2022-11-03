@@ -372,7 +372,7 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
         }
       }
     } else {
-      code = get_active_code();
+      code = get_active_and_trimmed_code();
       if (code.length == 0) {
         clearErrors(editor);
         stopit();
@@ -445,7 +445,7 @@ export function saveMachineFiles() {
     url: '/generate_machine_files',
     data: JSON.stringify({
       level: window.State.level,
-      code: get_active_code(),
+      code: get_active_and_trimmed_code(),
       lang: window.State.lang,
     }),
     contentType: 'application/json',
@@ -1515,7 +1515,16 @@ function get_parsons_code() {
     return code.replace(/ +$/mg, '');
 }
 
-export function get_active_code() {
+export function get_active_and_trimmed_code() {
+
+  try {
+    // This module may or may not exist, so let's be extra careful here.
+    const whitespace = ace.require("ace/ext/whitespace");
+    whitespace.trimTrailingSpace(theGlobalEditor.session, true);
+  } catch (e) {
+    console.error(e);
+  }
+
   // ignore the lines with a breakpoint in it.
   const breakpoints = getBreakpoints(editor);
   let code = theGlobalEditor.getValue();
