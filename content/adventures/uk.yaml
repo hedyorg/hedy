@@ -10,7 +10,7 @@ adventures:
                 story_text_3: "Давайте почнемо! Не знаєте, як саме це робити? У наступних вкладках ви знайдете варіанти прикладів.\n"
                 example_code_2: "```\n{ask} Як вас звати??\n{echo} Привіт.\n```\n"
             2:
-                story_text: "## Змінні\nНа 2-му рівні ми вивчимо дві нові команди: `{is}` та `{sleep}`.\nВи можете назвати слово за допомогою `{is}`. Це називається змінною. У цьому прикладі ми створили змінну з назвою name і змінну з назвою age. Ви можете використовувати слово name в будь-якому місці вашого коду, і воно буде замінено на Hedy, ось так:\n\nТаким чином, вам більше не потрібна команда `{ехо}}!\n"
+                story_text: "## Змінні\nНа 2-му рівні ми вивчимо дві нові команди: `{is}` та `{sleep}`.\nВи можете назвати слово за допомогою `{is}`. Це називається змінною. У цьому прикладі ми створили змінну з назвою name і змінну з назвою age. Ви можете використовувати слово name в будь-якому місці вашого коду, і воно буде замінено на Hedy, ось так:\n\nТаким чином, вам більше не потрібна команда `{echo}`\n"
                 example_code: "```\nname {is} Hedy\nage {is} 15\n{print} name is age years old\n```\n"
                 story_text_2: "Команда `{print}` працює так само, але змінилася команда `{ask}`. У команді `{ask}` також потрібно використовувати змінну. Виглядає це наступним чином:\n"
                 example_code_2: "```\nanswer {is} {ask} Як Вас звати??\n{print} Привіт answer!\n```\n"
@@ -58,7 +58,7 @@ adventures:
                 start_code: "fruit = ['apple', 'banana', 'cherry']\n{print} fruit"
                 story_text: "## Все більше схоже на справжній код!\nМи будемо складати списки у стилі Python, з квадратними дужками навколо списків! Ми також зберігаємо лапки навколо кожного елемента, як ми вже навчилися на попередніх рівнях.\nВи також можете використовувати квадратні дужки, щоб вказати місце в списках."
             3:
-                story_text: "Створіть список!\nНа рівні 3 ви можете скласти список. Ви можете дозволити комп'ютеру вибрати щось випадкове зі списку. Для цього використовується команда `{at} {random}`.\n"
+                story_text: "## Створіть список!\nНа рівні 3 ви можете скласти список. Ви можете дозволити комп'ютеру вибрати щось випадкове зі списку. Для цього використовується команда `{at} {random}`.\n"
                 example_code: "```\nanimals {is} dog, cat, kangaroo\n{print} animals {at} {random}\n```\n"
                 story_text_2: Ви також можете додавати елементи до списку за допомогою команди `{add}` і видаляти їх за допомогою команди `{remove}`.
                 example_code_2: "```\nanimals {is} dog, cat, kangaroo\n{add} penguin {to_list} animals\n{remove} cat {from} animals\n{print} animals {at} {random}\n```\n"
@@ -103,7 +103,7 @@ adventures:
             18:
                 start_code: "name = 'Hedy'\n{print}('My name is ', name)"
                 story_text: "## The last level!\nWe arrived at real Python code! That means we need to use parentheses with {print} and {range} from now on."
-                example_code: "```\n{print}('Hello!')\n{for} i in {range}(1, 10):\n    {print}('This is line ', i)\n```\n"
+                example_code: "```\n{print}('Hello!')\n{for} i {in} {range}(1, 10):\n    {print}('This is line ', i)\n```\n"
                 story_text_2: If you want to print more than one item, you need to separate them by commas.
                 example_code_2: "```\ntemperature = 25\n{print}('It is ', temperature, 'degrees outside')\n```\n"
                 story_text_3: "##  Input\nThe final change we will need to make to get Python code is changing `{ask}` into `{input}`."
@@ -146,7 +146,7 @@ adventures:
                 example_code: "```\n{print} 'OH NO! The T-rex is closing in!'\nend = {ask} 'Do you want a happy or a sad ending?'\n{if} end {is} happy\n    {print} 'Just in time Richard jumps back into the time machine!'\n    {print} 'Michael types in the code and...'\n    {print} '\U0001F4A5ZAP!\U0001F4A5'\n    {print} 'They are back in their garage'\n{else}\n    {print} 'Michael yells COME ON RICHARD! RUN FASTER!'\n    {print} 'But Richard is too slow...'\n    {print} 'The T-rex closes in and eats him in one big bite!\U0001F996'\n```\n"
                 start_code: '# place your code here'
             9:
-                story_text: "## Story\nIn this level you can use nesting to put {if}, {repeat} or {for} commands inside other {if}, {repeat} or {for} commands. This gives you many options and really helps you to make your story interactive.\n"
+                story_text: "## Story\nIn this level you can use nesting to put `{if}`, `{repeat}` or `{for}` commands inside other `{if}`, `{repeat}` or `{for}` commands. This gives you many options and really helps you to make your story interactive.\n"
                 example_code: "```\n{print} 'Robin is walking downtown'\nlocation = {ask} 'Is Robin going into a shop, or does she go home?'\n{if} location {is} shop\n    {print} 'She enters the shop.'\n    {print} 'Robin sees an interesting looking book'\n    book = {ask} 'Does Robin buy the book?'\n    {if} book {is} yes\n        {print} 'Robin buys the book and goes home'\n    {else}\n        {print} 'Robin leaves the shop and goes home'\n{else}\n    {print} 'Robin goes home'\n```\n"
                 story_text_2: The example above is pretty straightforward, but by nesting {if} you can really elaborate your code and turn your story into a real game. Check out this example!
                 example_code_2: "## Elaborate code\n```\nsword = lost\ngame = on\n{print} 'Our hero is walking through the forest'\n{print} 'The path splits two ways'\n{repeat} 2 {times}\n    {if} game {is} on\n        path = {ask} 'Which path should she choose?'\n        {if} path {is} left\n            {if} sword {is} found\n                {print} 'Our hero comes across a dragon!'\n                {print} 'Luckily our hero has a sword to defeat the beast!'\n                game = over\n            {else}\n                {print} 'Our hero finds a dragon, but she doesnt have any weapons!'\n                {print} 'Our hero is beaten by the dragon...'\n                {print} 'Try again'\n                game = over\n        {if} path {is} right\n            {if} sword {is} lost\n                {print} 'Our hero finds a sword'\n                {print} 'This could come in very handy'\n                sword = found\n            {else}\n                {print} 'You have already found the sword. There is nothing left here.'\n                {print} 'She walks back'\n```\n"
