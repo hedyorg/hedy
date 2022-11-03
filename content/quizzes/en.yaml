@@ -2992,7 +2992,7 @@ levels:
             question_score: '10'
         4:
             question_text: "Which line of code should follow this line in rock-paper-scissors game?"
-            code:
+            code: |-
               ```
               if computer_choice is 'rock' and your_choice is 'paper'
               ```
@@ -3009,851 +3009,187 @@ levels:
             hint: "Paper beats rock"
             question_score: '10'
         5:
-            question_text:
-            code:
+            question_text: "Which statement is true about this code?"
+            code: |-
+              ```
+              if name = 'Cinderella' and shoesize = '38'
+                  print 'You are my one true love!'
+              ```
             mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
+            -   option: "Every person with shoesize 38 is this prince's one true love"
+                feedback: "The prince is a little more picky than that!"
+            -   option: "Every person named Cinderella is this prince's one true love"
+                feedback: "The prince is a little more picky than that!"
+            -   option: "Every person that is named Cinderella and has shoesize 38 is this prince's one true love"
+                feedback: "Fantastic!"
+            -   option: "Every person that's not named Cinderella and does not have shoesize 38 is this prince's one true love"
+                feedback: "The prince is a little more picky than that!"
+            correct_answer: "C"
+            hint: "Both statements have to be true"
             question_score: '10'
         6:
-            question_text:
-            code:
+            question_text: "Which statement about this code is true?"
+            code: |-
+              ```
+              print 'Let me guess which family member you are!'
+              glasses = ask 'Do you wear glasses?'
+              female = ask 'Are you female?'
+              if glasses = 'yes' and female = 'yes'
+                print 'You must be Sophie!'
+              if glasses = 'no' and female = 'yes'
+                print 'You must be Marleen!'
+              if glasses = 'yes' and female = 'no'
+                print 'You must be Wouter!'
+              if glasses = 'no' and female = 'no'
+                print 'You must be Michael!'
+              ```
             mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
+            -   option: "Michael is a boy with glasses"
+                feedback: "Try again"
+            -   option: "Marleen is a girl with glasses"
+                feedback: "Try again"
+            -   option: "Wouter is a boy without glasses"
+                feedback: "Try again"
+            -   option: "Sophie is a girl with glasses"
+                feedback: "Great job!"
+            correct_answer: "D"
+            hint: "Take a good look! Or do you need glasses?"
             question_score: '10'
         7:
-            question_text:
-            code:
+            question_text: "Which statement is false?"
+            code: |-
+              ```
+              print 'Thank you for helping me take care of my pets'
+              print 'Here is a program to help feed them'
+              animal is ask 'What kind of animal are they?'
+              color is ask 'What colour are they?'
+              if animal is 'cat' and color = 'grey'
+                print 'That is Abby. She eats 3 scoops of cat nibbles'
+              if animal is 'cat' and color = 'orange'
+                print 'That is Milo. He eats 4 scoops of cat nibbles'
+              if animal is 'bird' or color is 'black'
+                print 'I fed them this moring! They do not need more food today'
+              if animal is 'hamster' and color is 'brown'
+                print 'You can feed them a piece of carrot'
+              ```
             mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
+            -   option: "The grey cat is called Abby"
+                feedback: "This is true!"
+            -   option: "Milo the orange cat eats 4 scoops of cat nibbles"
+                feedback: "This is true"
+            -   option: "The black hamster needs to be fed a piece of carrot"
+                feedback: "Great job!"
+            -   option: "The yellow bird was fed this morning"
+                feedback: "This is true"
+            correct_answer: "C"
+            hint: "Read the last 4 lines carefully"
             question_score: '10'
         8:
-            question_text:
-            code:
+            question_text: "What output do you get if you order popcorn but no drink?"
+            code: |-
+              ```
+              print 'Welcome to the movie theater'
+              popcorn = ask 'Would you like some popcorn?'
+              drink = ask 'Would you like a drink?'
+              if popcorn = 'yes' and drink = 'yes'
+                print 'That will be 8 dollars please'
+              if popcorn = 'no' and drink = 'yes'
+               print 'That will be 3 dollars please'
+              if popcorn = 'yes' and drink = 'no'
+                print 'That will be 5 dollars please'
+              if popcorn = 'no' and drink = 'no'
+                print 'Ok'
+              print 'Enjoy the movie'
+              ```
             mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
+            -   option: |-
+                  ```
+                  Welcome to the movie theater
+                  That will be 8 dollars please
+                  Enjoy the movie
+                  ```
+                feedback: "You have paid too much!"
+            -   option: |-
+                  ```
+                  Welcome to the movie theater
+                  That will be 5 dollars please
+                  Enjoy the movie
+                  ```
+                feedback: "Amazing!"
+            -   option: |-
+                  ```
+                  Welcome to the movie theater
+                  That will be 3 dollars please
+                  Enjoy the movie
+                  ```
+                feedback: "That's not enough money!"
+            -   option: |-
+                  ```
+                  Welcome to the movie theater
+                  Ok
+                  Enjoy the movie
+                  ```
+                feedback: "You have to pay for your popcorn!"
+            correct_answer: "B"
+            hint: "Popcorn = yes and drink = no"
             question_score: '10'
         9:
-            question_text:
-            code:
+            question_text: "What is wrong with this code?"
+            code: |-
+              ```
+              1 chocolate = ask 'Would you like chocolate sauce on your icecream?'
+              2 sprinkles = ask 'Would you like sprinkles on your icecream?'
+              3 if chocolate and sprinkles = 'yes'
+              4   print 'Icrecream with chocolate sauce and sprinkles, coming up!'
+              5 if chocolate = 'yes' and sprinkles = 'no'
+              6   print 'Icecream with chocolate sauce, coming up!'
+              7 if chocolate = 'no' and sprinkles = 'yes'
+              8   print 'Icecream with sprinkles, coming up'
+              9 if chocolate = 'no' and sprinkles = 'no'
+              10  print 'Just plain icecream, coming up!'
+              ```
             mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
+            -   option: "line 3 should be: if chocolate = 'yes' and sprinkles is 'no'"
+                feedback: "Correct!"
+            -   option: "line 3 should be: if chocolate = 'no' and sprinkles is 'no'"
+                feedback: "This is not what I ordered!"
+            -   option: "line 5 should be: if chocolate = 'yes' and sprinkles is 'yes'"
+                feedback: "This is not what I ordered!"
+            -   option: "line 7 should be: if chocolate = 'yes' and sprinkles is 'no'"
+                feedback: "This is not what I ordered!"
+            correct_answer: "A"
+            hint: "There is a mistake in line 3"
             question_score: '10'
         10:
-            question_text:
-            code:
+            question_text: "Which command needs to be in lien 8 at the place of the ??? ?"
+            code: |-
+              ```
+              print 'Welcome to the product finder of this supermarkt'
+              item is ask 'What product are you looking for?'
+              bakery = 'bread', 'buns', muffins'
+              drinks = 'soda', 'water', 'lemonade'
+              snacks = 'chips', 'nuts', 'dips'
+              frozen = 'fries', 'icecream', 'pizza'
+              fruit = 'bananas', 'apples', 'oranges'
+              if item in snacks ??? item in drinks
+                print 'This item is in aile 3'
+              if item in bakery or frozen
+                print 'This item in in the back of the store'
+              if item in fruit
+                print 'The fruit is sold near the register'
+              ```
             mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
+            -   option: "and"
+                feedback: "An item can never be in both the list of snacks and the list of drinks"
+            -   option: "or"
+                feedback: "Great job!"
+            -   option: "in"
+                feedback: "No"
+            -   option: "if"
+                feedback: "No"
+            correct_answer: "B"
+            hint: "The item is either in the list of snacks, or in the list of drinks"
             question_score: '10'
-    14:
-        1:
-            question_text:
-            code:
-            mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
-            question_score: '10'
-        2:
-            question_text:
-            code:
-            mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
-            question_score: '10'
-        3:
-            question_text:
-            code:
-            mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
-            question_score: '10'
-        4:
-            question_text:
-            code:
-            mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
-            question_score: '10'
-        5:
-            question_text:
-            code:
-            mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
-            question_score: '10'
-        6:
-            question_text:
-            code:
-            mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
-            question_score: '10'
-        7:
-            question_text:
-            code:
-            mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
-            question_score: '10'
-        8:
-            question_text:
-            code:
-            mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
-            question_score: '10'
-        9:
-            question_text:
-            code:
-            mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
-            question_score: '10'
-        10:
-            question_text:
-            code:
-            mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
-            question_score: '10'
-    15:
-        1:
-            question_text:
-            code:
-            mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
-            question_score: '10'
-        2:
-            question_text:
-            code:
-            mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
-            question_score: '10'
-        3:
-            question_text:
-            code:
-            mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
-            question_score: '10'
-        4:
-            question_text:
-            code:
-            mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
-            question_score: '10'
-        5:
-            question_text:
-            code:
-            mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
-            question_score: '10'
-        6:
-            question_text:
-            code:
-            mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
-            question_score: '10'
-        7:
-            question_text:
-            code:
-            mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
-            question_score: '10'
-        8:
-            question_text:
-            code:
-            mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
-            question_score: '10'
-        9:
-            question_text:
-            code:
-            mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
-            question_score: '10'
-        10:
-            question_text:
-            code:
-            mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
-            question_score: '10'
-    16:
-        1:
-            question_text:
-            code:
-            mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
-            question_score: '10'
-        2:
-            question_text:
-            code:
-            mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
-            question_score: '10'
-        3:
-            question_text:
-            code:
-            mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
-            question_score: '10'
-        4:
-            question_text:
-            code:
-            mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
-            question_score: '10'
-        5:
-            question_text:
-            code:
-            mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
-            question_score: '10'
-        6:
-            question_text:
-            code:
-            mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
-            question_score: '10'
-        7:
-            question_text:
-            code:
-            mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
-            question_score: '10'
-        8:
-            question_text:
-            code:
-            mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
-            question_score: '10'
-        9:
-            question_text:
-            code:
-            mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
-            question_score: '10'
-        10:
-            question_text:
-            code:
-            mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
-            question_score: '10'
-    17:
-        1:
-            question_text:
-            code:
-            mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
-            question_score: '10'
-        2:
-            question_text:
-            code:
-            mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
-            question_score: '10'
-        3:
-            question_text:
-            code:
-            mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
-            question_score: '10'
-        4:
-            question_text:
-            code:
-            mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
-            question_score: '10'
-        5:
-            question_text:
-            code:
-            mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
-            question_score: '10'
-        6:
-            question_text:
-            code:
-            mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
-            question_score: '10'
-        7:
-            question_text:
-            code:
-            mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
-            question_score: '10'
-        8:
-            question_text:
-            code:
-            mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
-            question_score: '10'
-        9:
-            question_text:
-            code:
-            mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
-            question_score: '10'
-        10:
-            question_text:
-            code:
-            mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
-            question_score: '10'
-    18:
-        1:
-            question_text:
-            code:
-            mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
-            question_score: '10'
-        2:
-            question_text:
-            code:
-            mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
-            question_score: '10'
-        3:
-            question_text:
-            code:
-            mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
-            question_score: '10'
-        4:
-            question_text:
-            code:
-            mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
-            question_score: '10'
-        5:
-            question_text:
-            code:
-            mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
-            question_score: '10'
-        6:
-            question_text:
-            code:
-            mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
-            question_score: '10'
-        7:
-            question_text:
-            code:
-            mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
-            question_score: '10'
-        8:
-            question_text:
-            code:
-            mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
-            question_score: '10'
-        9:
-            question_text:
-            code:
-            mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
-            question_score: '10'
-        10:
-            question_text:
-            code:
-            mp_choice_options:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            -   option: |
-                feedback:
-            correct_answer:
-            hint:
-            question_score: '10'
-
 
 
 # Empty format for a question to use later
