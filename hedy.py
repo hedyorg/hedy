@@ -1262,6 +1262,9 @@ class ConvertToPython_1(ConvertToPython):
     def comment(self, meta, args):
         return f"#{''.join(args)}"
 
+    def empty_line(self, meta, args):
+        return ''
+
     def forward(self, meta, args):
         if len(args) == 0:
             return sleep_after('t.forward(50)', False)

@@ -28,7 +28,7 @@ _DIVIDE: _SPACE? "/" _SPACE?
 
 start: program
 program: _EOL* (command _EOL+)* command?
-command: print | ask | echo | turtle | error_invalid_space | error_invalid
+command: print | ask | echo | turtle | error_invalid_space | error_invalid | empty_line
 
 print: _PRINT (text)?
 ask: _ASK (text)?
@@ -36,6 +36,7 @@ echo: _ECHO (text)?
 turtle: _FORWARD ((NUMBER | text))? -> forward | _TURN ((left | right ))? -> turn | _COLOR ((black | blue | brown | gray | green | orange | pink | purple | red | white | yellow | text))? -> color
 error_invalid_space: _SPACE any
 error_invalid: textwithoutspaces text?
+empty_line: _SPACE
 
 any: /.+/ -> text
 
