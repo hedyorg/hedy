@@ -2242,35 +2242,6 @@ levels:
             hint: "There is something wrong with the indention"
             question_score: '10'
         6:
-            question_text: "What word should be at the place of the question mark?"
-            code: |-
-                {for} i {in} _?_ 1 {to} 10
-                    {print} i
-            mp_choice_options:
-            -   option: |
-                    ```
-                    counter
-                    ```
-                feedback: "No"
-            -   option: |
-                    ```
-                    {range}
-                    ```
-                feedback: "Correct"
-            -   option: |
-                    ```
-                    {if}
-                    ```
-                feedback: "No"
-            -   option: |
-                    ```
-                    {for}
-                    ```
-                feedback: "No"
-            correct_answer: "B"
-            hint: "What did you learn in this level?"
-            question_score: '10'
-        7:
             question_text: "How many times does the word Hello appear on your screen when you run the code?"
             code: |-
                 {for} i {in} {range} 0 {to} 2
@@ -2287,7 +2258,7 @@ levels:
             correct_answer: "C"
             hint: "0 also counts. So 0,1,2 that's 3 times."
             question_score: '10'
-        8:
+        7:
             question_text: "What should be on the place of the question mark?"
             code: |-
                 {print} 'Welcome to Hedys diner'
@@ -2319,7 +2290,7 @@ levels:
             correct_answer: "C"
             hint: "Use the variable 'people'"
             question_score: '10'
-        9:
+        8:
             question_text: "What will be the output from this code?"
             code: |-
                 {for} i {in} {range} 23 {to} 25
@@ -2336,7 +2307,7 @@ levels:
             correct_answer: "C"
             hint: "It doesn't say `{print}` i"
             question_score: '10'
-        10:
+        9:
             question_text: "How many times does Hedy chant Hip Hip Hooray?"
             code: |-
                 age = {ask} 'How old are you?'
@@ -2354,7 +2325,7 @@ levels:
             correct_answer: "D"
             hint: "`{for}` i `{in}` `{range}` 1 `{to}` age"
             question_score: '10'
-        11:
+        10:
             question_text: "Which code belongs to this output?"
             output: |-
                 Baby shark tututudutudu
