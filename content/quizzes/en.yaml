@@ -2819,12 +2819,12 @@ levels:
                   grapes
                   cookies
                   ```
-                feedback: "Almost there, but look at the order of snacks in the list'
+                feedback: "Almost there, but look at the order of snacks in the list"
             correct_answer: "A"
             hint: "What item is removed from the list when you answer 'vegan'?"
             question_score: '10'
         8:
-            question_text: Which code was used to create this output?'
+            question_text: "Which code was used to create this output?"
             code: |-
               ```
               3.5
@@ -2834,28 +2834,28 @@ levels:
                   ```
                   print '7 / 2'
                   ```
-                feedback:
+                feedback: "No"
             -   option: |-
                   ```
                   print 7 / 2
                   ```
-                feedback:
+                feedback: "That is right!"
             -   option: |-
                   ```
                   print 7 : 2
                   ```
-                feedback:
+                feedback: "No"
             -   option: |-
                   ```
                   print 7 * 2
                   ```
-                feedback:
-            correct_answer:
-            hint:
+                feedback: "No"
+            correct_answer: "B"
+            hint: "7 devided by 2 is 3.5"
             question_score: '10'
         9:
             question_text: "Which code should be filled in in line 1?"
-            code:
+            code: |-
               ```
               ???
               print 'You won ' prices at random '!'
@@ -2955,9 +2955,10 @@ levels:
               diet = ask 'Do you have any dietary restrictions?'
               if diet = 'vegan' ??? diet = 'halal'
                 remove 'sausage rolls' from menu
+              ```
             mp_choice_options:
             -   option: "and"
-                feedback: "You don't have to be vegan ànd muslim"
+                feedback: "You don't have to be vegan and muslim"
             -   option: "or"
                 feedback: "Great thinking!"
             -   option: " + "
@@ -2977,7 +2978,7 @@ levels:
                 print 'You get a free apple pie!'
               else
                 print 'That will be 5 dollars please'
-
+              ```
             mp_choice_options:
             -   option: "You get a free pie!"
                 feedback: "Great job!"
@@ -3012,17 +3013,17 @@ levels:
             question_text: "Which statement is true about this code?"
             code: |-
               ```
-              if name = 'Cinderella' and shoesize = '38'
+              if name = 'Cinderella' and shoe_size = '38'
                   print 'You are my one true love!'
               ```
             mp_choice_options:
-            -   option: "Every person with shoesize 38 is this prince's one true love"
+            -   option: "Every person with shoe size 38 is this prince's one true love"
                 feedback: "The prince is a little more picky than that!"
             -   option: "Every person named Cinderella is this prince's one true love"
                 feedback: "The prince is a little more picky than that!"
-            -   option: "Every person that is named Cinderella and has shoesize 38 is this prince's one true love"
+            -   option: "Every person that is named Cinderella and has shoe size 38 is this prince's one true love"
                 feedback: "Fantastic!"
-            -   option: "Every person that's not named Cinderella and does not have shoesize 38 is this prince's one true love"
+            -   option: "Every person that's not named Cinderella and does not have shoe size 38 is this prince's one true love"
                 feedback: "The prince is a little more picky than that!"
             correct_answer: "C"
             hint: "Both statements have to be true"
@@ -3131,7 +3132,7 @@ levels:
                   ```
                 feedback: "You have to pay for your popcorn!"
             correct_answer: "B"
-            hint: "Popcorn = yes and drink = no"
+            hint: "popcorn = yes and drink = no"
             question_score: '10'
         9:
             question_text: "What is wrong with this code?"
@@ -3149,13 +3150,13 @@ levels:
               10  print 'Just plain icecream, coming up!'
               ```
             mp_choice_options:
-            -   option: "line 3 should be: if chocolate = 'yes' and sprinkles is 'no'"
+            -   option: "Line 3 should be: if chocolate = 'yes' and sprinkles is 'no'"
                 feedback: "Correct!"
-            -   option: "line 3 should be: if chocolate = 'no' and sprinkles is 'no'"
+            -   option: "Line 3 should be: if chocolate = 'no' and sprinkles is 'no'"
                 feedback: "This is not what I ordered!"
-            -   option: "line 5 should be: if chocolate = 'yes' and sprinkles is 'yes'"
+            -   option: "Line 5 should be: if chocolate = 'yes' and sprinkles is 'yes'"
                 feedback: "This is not what I ordered!"
-            -   option: "line 7 should be: if chocolate = 'yes' and sprinkles is 'no'"
+            -   option: "Line 7 should be: if chocolate = 'yes' and sprinkles is 'no'"
                 feedback: "This is not what I ordered!"
             correct_answer: "A"
             hint: "There is a mistake in line 3"
