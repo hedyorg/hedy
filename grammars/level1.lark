@@ -43,7 +43,7 @@ any: /.+/ -> text
 COMMENT: _HASH /([^\n]+)/
 %ignore COMMENT
 
-_EOL: "\r"?"\n"
+_EOL: "\r"?"\n"+
 
 NEGATIVE_NUMBER: _MINUS /[\p{Nl}\p{Nd}\p{No}]+/ ("." /[\p{Nl}\p{Nd}\p{No}]+/)?
 POSITIVE_NUMBER: /[\p{Nl}\p{Nd}\p{No}]+/ ("." /[\p{Nl}\p{Nd}\p{No}]+/)?
