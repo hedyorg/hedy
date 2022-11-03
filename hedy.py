@@ -2226,6 +2226,7 @@ def preprocess_blocks(code, level):
 
         # ignore whitespace-only lines
         if leading_spaces == len(line):
+            processed_code.append(line)
             continue
 
         #calculate nuber of indents if possible
