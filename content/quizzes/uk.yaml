@@ -597,60 +597,60 @@ levels:
     1:
         1:
             mp_choice_options:
-            -   feedback: Good job!
+            -   feedback: Молодець!
                 option: Hedy
-            -   feedback: Not this one!
+            -   feedback: Невірно!
                 option: Heddy
             -   option: Haydie
-                feedback: Not this one!
+                feedback: Невірно!
             -   option: Heidi
-                feedback: Not this one!
+                feedback: Невірно!
             correct_answer: A
-            hint: It's named after Hedy Lamarr.
+            hint: Він названий на честь Хеді Ламарр.
             question_score: '10'
-            question_text: What's this programming language called?
+            question_text: Як називається ця мова програмування?
         3:
             mp_choice_options:
-            -   option: "```\n{print} What is your favorite color?\n```\n"
-                feedback: "`{print}` prints text, but it doesn't ask questions."
-            -   option: "```\n{ask} {print} What is your favorite color?\n```\n"
-                feedback: You only need one command, not two.
-            -   option: "```\n{ask} What is your favorite color?\n```\n"
-                feedback: Great!
-            -   option: "```\n{echo} What is your favorite color?\n```\n"
+            -   option: "```\n{print} Який ваш улюблений колір?\n```\n"
+                feedback: "`{print}` виводить текст, але не ставить запитань."
+            -   option: "```\n{ask} {print} Який ваш улюблений колір?\n```\n"
+                feedback: Потрібна лише одна команда, а не дві.
+            -   option: "```\n{ask} Який ваш улюблений колір?\n```\n"
+                feedback: Чудово!
+            -   option: "```\n{echo} Який ваш улюблений колір?\n```\n"
                 feedback: '`{echo}` repeats your answer back to you.'
-            question_text: How do you ask what someone's favorite color is?
+            question_text: Як запитати, який у людини улюблений колір?
             correct_answer: C
-            hint: You can ask something with the `{ask}` command
+            hint: Запитати щось можна за допомогою команди `{ask}`
             question_score: '10'
         4:
             mp_choice_options:
-            -   feedback: Correct!
-                option: '`{print}` in line 1 is missing.'
+            -   feedback: Саме так!
+                option: 'У рядку 1 відсутній `{print}`.'
             -   option: Im in line 1 is spelled wrong.
                 feedback: Im is spelled wrong on purpose; Hedy doesn't understand the apostrophes yet.
-            -   option: "`{echo}` isn't a command."
-                feedback: "`{echo}` is a command, there's another mistake."
-            -   option: Nothing! This is a perfect code!
-                feedback: Wrong, look carefully!
+            -   option: "`{echo}` це не команда."
+                feedback: "`{echo}` - це команда, тут ще одна помилка."
+            -   option: Нічого! Це ідеальний код!
+                feedback: Не так, дивись уважно!
             correct_answer: A
-            question_text: What is wrong with this code?
-            code: "Hi Im Hedy!\n{ask} Who are you?\n{echo} Hi..."
-            hint: Line 1 doesn't seem right
+            question_text: Що не так з цим кодом?
+            code: "Привіт, я Хеді!\n{ask} Хто ти?\n{echo} Привіт..."
+            hint: Рядок 1 виглядає неправильним
             question_score: '10'
         5:
             correct_answer: D
-            question_text: Which command is missing in line 2?
-            code: "{ask} What is your favorite pet?\n_?_ So your favorite pet is..."
+            question_text: Яку команду пропущено в рядку 2?
+            code: "{ask} Яка ваша улюблена домашня тварина?\n_?_ Отже, ваш улюблений вихованець - це..."
             mp_choice_options:
             -   option: "```\n{print}\n```\n"
                 feedback: No, you would like the answer to be repeated back to you.
             -   option: "```\nHedy\n```\n"
-                feedback: Hedy isn't a command.
+                feedback: Hedy - це не команда.
             -   option: "```\n{ask}\n```\n"
-                feedback: With `{ask}` you can ask a question.
+                feedback: За допомогою `{ask}` ви можете поставити запитання.
             -   option: "```\n{echo}\n```\n"
-                feedback: Right on!
+                feedback: Так!
             hint: You want to see the answer at the end of line 2...
             question_score: '10'
         6:
@@ -669,16 +669,16 @@ levels:
             hint: Check the `{print}` commands.
             question_score: '10'
         2:
-            question_text: Which command makes text appear?
+            question_text: Яка команда викликає появу тексту?
             mp_choice_options:
             -   option: "```\n{echo}\n```\n"
-                feedback: '`{echo}` repeats a given answer.'
+                feedback: '`{echo}` повторює задану відповідь.'
             -   option: "```\n{print}\n```\n"
-                feedback: Correct!
+                feedback: Саме так!
             -   option: "```\nhello\n```\n"
-                feedback: Hello isn't a command.
+                feedback: Привіт - це не команда.
             -   option: "```\n{ask}\n```\n"
-                feedback: With `{ask}`, you can ask a question.
+                feedback: За допомогою `{ask}` ви можете поставити запитання.
             correct_answer: B
             hint: _?_ Hello world!
             question_score: '10'
