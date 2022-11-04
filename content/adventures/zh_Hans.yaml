@@ -472,7 +472,7 @@ adventures:
                 start_code: "{print} '欢迎来到这个计算器!'"
             6:
                 story_text: "## 计算器 \n现在你可以计算了，你也可以创建一个程序来练习数学计算。你可以自己编造一个计算题，例如：\n"
-                example_code: "```\ncorrect_answer = 11 * 27\nanswer = {ask} 'How much is 11 times 27?'\n{if} answer {is} correct_answer {print} 'good job!'\n{else} {print} 'Wrong! It was ' correct_answer\n```\n"
+                example_code: "```\n正确答案 = 11 * 27\n答案 = {ask} '11乘以27是多少？'\n{if} 答案 {is} 正确答案 {print} '做得好！'\n{else} {print} '错了！是' 正确答案\n```\n"
                 story_text_2: "## 随机数 \n您也可以让计算机自己用随机函数做一个随机求和。 \n这就是您选择多个表格进行练习的方式，而且您将总是得到一个不一样的和：\n"
                 example_code_2: "```\ntables = 4, 5, 6, 8\nnumbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\ntable = tables {at} {random}\nnumber = numbers {at} {random}\ncorrect_answer = table * number\nanswer = {ask} 'how much is ' table ' times ' number '?'\n{if} answer {is} correct_answer {print} 'okay'\n{else} {print} 'mistake! it was ' correct_answer\n```\n"
                 start_code: "{print} '欢迎来到这个计算器!'"
