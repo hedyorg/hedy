@@ -418,7 +418,7 @@ class TestsLevel8(HedyTester):
         else:
           print(f'pizza is better')""")
 
-        self.multi_level_tester(code=code, expected=expected, max_level=11)
+        self.multi_level_tester(code=code, expected=expected, max_level=11, translate=False)
 
     def test_if_empty_middle_line_with_whitespace_else_print(self):
         code = textwrap.dedent("""\
