@@ -17,7 +17,7 @@ levels:
         4:
             mp_choice_options:
             -   option: '`{print}` in line 1 is missing.'
-                feedback: Correct!
+                feedback: Korrekt!
             -   option: Im in line 1 is spelled wrong.
                 feedback: Im is spelled wrong on purpose; Hedy doesn't understand the apostrophes yet.
             -   option: "`{echo}` isn't a command."
@@ -39,7 +39,7 @@ levels:
             -   option: In line 3 `{echo}` needs to be replaced with `{print}`
                 feedback: Are you sure something is wrong?
             -   option: Nothing! This is a perfect code!
-                feedback: Correct!
+                feedback: Korrekt!
             hint: Check the code line by line
             question_score: '10'
             question_text: What's wrong with this code?
@@ -54,7 +54,7 @@ levels:
             -   option: You can use it to repeat an answer.
                 feedback: Good job!
             -   option: You can use it to make text disappear.
-                feedback: That's not right...
+                feedback: Det är inte rätt...
             correct_answer: C
             hint: '`{echo}` is used after an `{ask}` command.'
             question_score: '10'
@@ -299,7 +299,7 @@ levels:
             -   option: "```\n{is}\n```\n"
                 feedback: '`{is}` is used to make a list'
             -   option: "```\n{at} {random}\n```\n"
-                feedback: Correct!
+                feedback: Korrekt!
             question_text: What command do you use to let Hedy pick something arbitrarily?
             correct_answer: D
             hint: Arbitrarily means without a plan or randomly.
@@ -326,7 +326,7 @@ levels:
             -   option: The `{add}` command adds a random book to a list
                 feedback: It doesn't. It adds your answer to the list!
             -   option: The `{add}` command adds your favorite book to the list
-                feedback: Correct!
+                feedback: Korrekt!
             -   option: The `{add}` command prints your favorite book.
                 feedback: No, it adds your favorite book to the list
             question_score: '10'
@@ -431,7 +431,7 @@ levels:
             -   option: Line 2 needs to say question instead of answers
                 feedback: No that's not right
             -   option: Line 2 needs the `{is}` command
-                feedback: Correct
+                feedback: Korrekt
             -   option: Line 3 needs to say answer instead of answers
                 feedback: No the variable's called answers
             -   option: Nothing! This code is great!
@@ -520,7 +520,7 @@ levels:
             code: "question {is} {ask} What do you want to know?\nanswers {is} yes, no, maybe\n{print} answers {at} {random}"
             mp_choice_options:
             -   option: Quotation marks are missing in line 1
-                feedback: Correct!
+                feedback: Korrekt!
             -   option: Quotation marks are missing in line 2
                 feedback: A variable doesn't need quotes
             -   option: Quotation marks are missing in line 3
@@ -562,7 +562,7 @@ levels:
             -   option: Quotation marks are missing in line 1
                 feedback: A list doesn't need quotation marks
             -   option: Quotation marks are missing in line 2
-                feedback: Correct
+                feedback: Korrekt
             -   option: Quotation marks are missing in both line 2 and 3
                 feedback: Line 3 doesn't need quotation marks because it's not printed literally
             -   option: Nothing, this code has no mistakes
@@ -578,7 +578,7 @@ levels:
             -   option: "```\n{print} `hello`\n```\n"
                 feedback: This quotation mark is skewed, you need a straight one.
             -   option: "```\n{print} 'hello'\n```\n"
-                feedback: Correct
+                feedback: Korrekt
             -   feedback: There are no quotation marks here!.
                 option: "```\n{print} hello\n```\n"
             -   option: "```\n{print} ,hello,\n```\n"
@@ -604,7 +604,7 @@ levels:
             question_score: '10'
         4:
             mp_choice_options:
-            -   option: Correct
+            -   option: Korrekt
                 feedback: That's printed if the correct answer is given, not the wrong one...
             -   option: SECRET
                 feedback: That's not the right answer
@@ -681,7 +681,7 @@ levels:
             question_text: What is the right password?
             code: "password {is} {ask} 'What is the password?'\n{if} password {is} SECRET {print} 'Correct!'\n{else} {print} 'ALARM! INTRUDER!'"
             mp_choice_options:
-            -   option: Correct!
+            -   option: Korrekt!
                 feedback: This is printed when you type in the correct password
             -   option: SECRET
                 feedback: That's right!'
@@ -807,7 +807,7 @@ levels:
             -   option: '*'
                 feedback: That's not it
             -   option: +
-                feedback: Correct!
+                feedback: Korrekt!
             correct_answer: D
             hint: It's the plus sign.
             question_text: What do you use when you want to add two numbers?
@@ -817,7 +817,7 @@ levels:
             code: '{print} 2*10'
             mp_choice_options:
             -   option: '20'
-                feedback: Correct!
+                feedback: Korrekt!
             -   option: '12'
                 feedback: No, the plus sign is used in addition
             -   option: 2*10
@@ -864,7 +864,7 @@ levels:
             -   option: There shouldn't be quotation marks in line 2
                 feedback: No, there should be!
             -   option: The variable is called correct answer, but a variable's name can only be 1 word. So it should be correct_answer
-                feedback: Correct!
+                feedback: Korrekt!
             -   option: The `{if}` and `{else}` commands should be in the same line.
                 feedback: No, that's not true.
             -   option: The variable in line 2 can't be called answer, because it is too similar to the variable correct answer.
@@ -926,7 +926,7 @@ levels:
             -   feedback: The word `{times}` is there, another word is missing.
                 option: Wrong, the word `{times}` is missing
             -   option: Wrong, the word `{print}` is missing
-                feedback: Correct
+                feedback: Korrekt
             correct_answer: D
             hint: "It should be: `{repeat}` 100 `{times}` `{print}` 'Hello'"
             question_score: '10'
@@ -953,7 +953,7 @@ levels:
             question_text: Is this code right or wrong?
             code: "{repeat} 100 {times} {print} 'Hedy is awesome!'"
             mp_choice_options:
-            -   option: Correct
+            -   option: Korrekt
                 feedback: That's right!
             -   option: Wrong
                 feedback: That's not it
@@ -1058,7 +1058,7 @@ levels:
             -   option: There is a spelling mistake in the `{repeat}` command.
                 feedback: Nee, repeat is de goede spelling
             -   option: The second line need to start with 4 spaces as indentation.
-                feedback: Correct!
+                feedback: Korrekt!
             question_text: What is wrong with this code?
             correct_answer: D
             hint: Something is missing in the second line?
@@ -1083,7 +1083,7 @@ levels:
             -   option: "The children went:\nYay!\nWere going on holiday!\n"
                 feedback: Mind the `{repeat}` command !
             -   option: "The children went:\nYay!\nWere going on holiday!\nYay!\nWere going on holiday!\n"
-                feedback: Correct!
+                feedback: Korrekt!
             -   option: "The children went:\nYay!\nYay!\nWere going on holiday!\nWere going on holiday!\n"
                 feedback: This order is incorrect.
             -   feedback: The last line is repeated too.
@@ -1208,7 +1208,7 @@ levels:
             -   option: "Good job ! \n Good job! \n You can use the computer!"
                 feedback: That's not it!
             -   option: "Good job! \n You can use the computer! \n Good job! \n You can use the computer!"
-                feedback: Correct!
+                feedback: Korrekt!
             correct_answer: D
             hint: Everything under the `{repeat}` command is repeated twice.
             question_score: '10'
@@ -1337,7 +1337,7 @@ levels:
             code: "{for} i {in} {range} 1 {to} 3\n    {print} i"
             mp_choice_options:
             -   option: "1\n2\n3"
-                feedback: Correct!
+                feedback: Korrekt!
             -   option: 1 2 3
                 feedback: That's not it
             -   option: 1, 2, 3
@@ -1349,33 +1349,33 @@ levels:
             question_score: '10'
         6:
             correct_answer: C
-            code: "{for} i {in} {range} 0 {to} 2\n    {print} 'Hello'"
+            code: "{for} i {in} {range} 0 {to} 2\n    {print} 'Hej'"
             mp_choice_options:
-            -   option: 1 time
-                feedback: No
-            -   option: 2 times
-                feedback: No
-            -   option: 3 times
-                feedback: That's right!
-            -   option: Never
-                feedback: No
-            hint: 0 also counts. So 0,1,2 that's 3 times.
+            -   option: 1 gång
+                feedback: Nej
+            -   option: 2 gånger
+                feedback: Nej
+            -   option: 3 gånger
+                feedback: Det stämmer!
+            -   option: Aldrig
+                feedback: Nej
+            hint: 0 räknas också. Så 0, 1, 2, det är 3 gånger.
             question_score: '10'
-            question_text: How many times does the word Hello appear on your screen when you run the code?
+            question_text: Hur många gånger dyker ordet Hej upp på din skärm när du kör denna kod?
         3:
             mp_choice_options:
-            -   feedback: Now Hedy prints the numbers from 0 to 10 instead of 10 to 0.
-                option: "```\n{for} i {in} {range} 0 {to} 10\n    {print} i\n```\n"
-            -   option: "```\n{for} i {in} {range} 0 to 10\n    {print} - i\n```\n"
-                feedback: Hedy would print negative numbers in this case.
-            -   option: "```\n{for} i {in} {range} 10 to 0\n    {print} i\n```\n"
-                feedback: Unfortunately this does not exist.
-            -   feedback: That's right!
-                option: "```\n{for} i {in} {range} 0 {to} 10\n    {print} 10 - i\n```\n"
-            question_text: Which code was used to get this output?
-            output: "10\n9\n8\n7\n6\n5\n4\n3\n2\n1\n0"
-            correct_answer: D
-            hint: It has to be a calculation...
+            -   feedback: Perfekt
+                option: "```\n{for} i {in} {range} 1 {to} 5\n    {print} i\n{print} 'Jag kunde hitta hem'\n```\n"
+            -   option: "```\n{for} i {in} {range} 1 {to} 5\n{print} i\n{print} 'Jag kunde hitta hem'\n```\n"
+                feedback: Denna kod kommer inte fungera. Du behöver en indentering efter {for}.
+            -   option: "```\n{for} i {in} {range} 1 {to} 5\n    {print} i\n    {print} 'Jag kunde hitta hem'\n```\n"
+                feedback: Nu kommer Hedy räkna '1 Jag kunde hitta hem, 2 Jag kunde hitta hem', osv.
+            -   feedback: i är en variabel och ska inte ha citattecken
+                option: "```\n{for} i {in} {range} 1 {to} 5\n    {print} 'i'\n{print} 'Jag kunde hitta hem'\n```\n"
+            question_text: Vilken kod användes för denna utskrift?
+            output: "1\n2\n3\n4\n5\nJag kunde hitta hem"
+            correct_answer: A
+            hint: Först alla nummer, sedan meningen
             question_score: '10'
         2:
             question_text: Which code was used to get this output?
@@ -1384,76 +1384,76 @@ levels:
                 feedback: Perfect
             -   option: "```\n{for} i {in} {range} 1 {to} 5\n{print} i\n{print} 'Once I caught a fish alive!'\n```\n"
                 feedback: This code won't work. You need an indent after {for}.
-            -   option: "```\n{for} i {in} {range} 1 {to} 5\n    {print} i\n    {print} 'Once I caught a fish alive!'\n```\n"
-                feedback: Now Hedy will count '1 Once I caught a fish alive!, 2 Once I caught a fish alive! etc.
-            -   option: "```\n{for} i {in} {range} 1 {to} 5\n    {print} 'i'\n{print} 'Once I caught a fish alive!'\n```\n"
-                feedback: i is a variable and shouldn't have quotation marks
-            hint: First all the numbers, then the sentence
+            -   option: "1, 2, 3"
+                feedback: Det är fel
+            -   option: "123"
+                feedback: Det är fel
+            hint: Hur visas numren på skärmen?
             question_score: '10'
             correct_answer: A
             code: "{for} i {in} {range} 1 {to} 3\n    {print} i"
         4:
             mp_choice_options:
-            -   option: The i in the last line need quotation marks
-                feedback: No it doesn't.
-            -   option: You can't use `{range}` 1 `{to}` 5 only `{range}` 1 `{to}` 10
-                feedback: You could use 1 to 5 just as well!
-            -   option: Line 1 needs to start with an indention.
-                feedback: Not line 1...
-            -   option: Line 2 needs to start with an indention
-                feedback: Perfect!
-            question_text: What's wrong with this code?
+            -   option: "```\n{for} i {in} {range} 0 {to} 10\n    {print} i\n```\n"
+                feedback: Nu skriver Hedy ut numren från 0 till 10 istället för 10 till 0.
+            -   option: "```\n{for} i {in} {range} 0 to 10\n    {print} - i\n```\n"
+                feedback: Hedy skulle skriva ut negativa nummer i detta fall.
+            -   option: "```\n{for} i {in} {range} 10 to 0\n    {print} 10 9 8 7 6 5 4 3 2 1 0\n```\n"
+                feedback: Tyvärr finns detta inte.
+            -   option: "```\n{for} i {in} {range} 0 {to} 10\n    {print} 10 - i\n```\n"
+                feedback: Det är rätt!
+            question_text: Vilken kod användes för att få denna utmatning?
             correct_answer: D
-            hint: There is something wrong with the indention
+            hint: Det måste vara en uträkning...
             question_score: '10'
             output: "10\n9\n8\n7\n6\n5\n4\n3\n2\n1\n0"
         5:
-            question_text: What word should be at the place of the question mark?
-            code: "{for} i {in} _?_ 1 {to} 10\n    {print} i"
+            question_text: Vad är fel med denna kod?
+            code: "{for} i {in} {range} 1 {to} 10\n{print} i"
             mp_choice_options:
-            -   option: "```\ncounter\n```\n"
-                feedback: No
-            -   option: "```\n{range}\n```\n"
-                feedback: Correct
-            -   option: "```\n{if}\n```\n"
-                feedback: No
-            -   option: "```\n{for}\n```\n"
-                feedback: No
-            correct_answer: B
-            hint: What did you learn in this level?
+            -   option: "i:et på den sista raden behöver citattecken"
+                feedback: Nej, det gör det inte
+            -   option: "Du kan inte använda `{range}` 1 `{to}` 5, bara `{range}` 1 `{to}` 10"
+                feedback: Du hade också kunnat använda 1 till 5!
+            -   option: "Rad 1 behöver börja med en indentering."
+                feedback: Inte rad 1...
+            -   option: "Rad 2 behöver börja med en indentering"
+                feedback: Perfekt!
+            correct_answer: D
+            hint: Det är något fel med indenteringen
             question_score: '10'
         7:
-            question_text: What should be on the place of the question mark?
+            question_text: Vad ska finnas där frågetecknet är?
             mp_choice_options:
-            -   feedback: There's not always 3 people
+            -   feedback: Det är inte alltid 3 personer
                 option: "```\n{for} i {in} {range} 0 {to} 3\n```\n"
-            -   option: "```\n{for} i {in} {range} 1 {to} guests\n```\n"
-                feedback: The variable is not named guests
-            -   option: "```\n{for} i {in} {range} 1 {to} people\n```\n"
-                feedback: Great!
-            -   option: "```\n{for} i {in} {range} 0 {to} people\n```\n"
-                feedback: That's one order too many!
-            code: "{print} 'Welcome to Hedys diner'\npeople is {ask} 'How many people will be eating here tonight?'\n_?_\n    food is {ask} 'What would you like to order?'\n    {print} food"
+            -   option: "```\n{for} i {in} {range} 1 {to} gäster\n```\n"
+                feedback: Variabeln heter inte gäster
+            -   option: "```\n{for} i {in} {range} 1 {to} personer\n```\n"
+                feedback: Bra!
+            -   option: "```\n{for} i {in} {range} 0 {to} personer\n```\n"
+                feedback: Det är en beställning för mycket!
+            code: "{print} 'Välkomna till Hedys fik'\npersoner is {ask} 'Hur många personer är ni?'\n_?_\n    mat is {ask} 'Vad vill du beställa?'\n    {print} mat"
             correct_answer: C
-            hint: Use the variable 'people'
+            hint: Använd variabeln 'personer'
             question_score: '10'
         8:
-            question_text: What will be the output from this code?
-            code: "{for} i {in} {range} 23 {to} 25\n    {print} 'hi'"
+            question_text: Vad blir utmatningen från denna kod?
+            code: "{for} i {in} {range} 23 {to} 25\n    {print} 'Hej'"
             mp_choice_options:
             -   option: "23\n24\n25"
-                feedback: The numbers don't appear. It doesn't say `{print}` i.
-            -   option: 23 hi 24 hi 25 hi
-                feedback: The numbers don't appear. It doesn't say `{print}` i
-            -   option: "hi\nhi\nhi"
-                feedback: Correct
-            -   option: The word 'hi' will appear 25 times in a row.
-                feedback: No it will only appear 3 times.
+                feedback: Numren skrivs inte ut. Det står inte `{print}` i.
+            -   option: 23 Hej 24 Hej 25 Hej
+                feedback: Numren skrivs inte ut. Det står inte `{print}` i
+            -   option: "Hej\nHej\nHej"
+                feedback: Korrekt
+            -   option: Ordet 'Hej' kommer skrivas ut 25 gånger på rad.
+                feedback: Nej, det dyker bara upp 3 gånger.
             correct_answer: C
-            hint: It doesn't say `{print}` i
+            hint: Det står inte `{print}` i
             question_score: '10'
         9:
-            question_text: How many times does Hedy chant Hip Hip Hooray?
+            question_text: Hur många gånger säger Hedy Hipp Hipp Hurra?
             code: "age = {ask} 'How old are you?'\n{for} i {in} {range} 1 {to} age\n    {print} 'Hip Hip Hoorray!'"
             mp_choice_options:
             -   option: 1 time
