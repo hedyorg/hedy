@@ -1400,13 +1400,13 @@ levels:
         5:
             question_text: Which code produced this output?
             mp_choice_options:
-            -   option: "desert = {ask} 'What is your favorite type of desert?'\n{if} desert {is} icecream\n    {repeat} 3 {times}\n    {print} 'Icecream is the best!'"
+            -   option: "desert = {ask} 'What is your favorite type of desert?'\n{if} desert {is} ice cream\n    {repeat} 3 {times}\n    {print} 'Icecream is the best!'"
                 feedback: Don't forget the indentation after {repeat} commands.
-            -   option: "desert = {ask} 'What is your favorite type of desert?'\n{if} desert {is} icecream\n{repeat} 3 {times}\n    {print} 'Icecream is the best!'"
+            -   option: "desert = {ask} 'What is your favorite type of desert?'\n{if} desert {is} ice cream\n{repeat} 3 {times}\n    {print} 'Icecream is the best!'"
                 feedback: Use indentation after an {if} command
-            -   option: "desert = {ask} 'What is your favorite type of desert?'\n{if} desert {is} icecream\n    {repeat} 3 {times}\n        {print} 'Icecream is the best!'"
+            -   option: "desert = {ask} 'What is your favorite type of desert?'\n{if} desert {is} ice cream\n    {repeat} 3 {times}\n        {print} 'Icecream is the best!'"
                 feedback: Perfect
-            -   option: "{repeat} 3 {times}\n    desert = {ask} 'What is your favorite type of desert?'\n    {if} desert {is} icecream\n        {repeat} 3 {times}\n        {print} 'Icecream is the best!'"
+            -   option: "{repeat} 3 {times}\n    desert = {ask} 'What is your favorite type of desert?'\n    {if} desert {is} ice cream\n        {repeat} 3 {times}\n        {print} 'Icecream is the best!'"
                 feedback: There are 2 {repeat} commands in this code.
             correct_answer: C
             hint: Whatch the indentation

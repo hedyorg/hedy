@@ -1828,7 +1828,7 @@ adventures:
                     {print} 'Here is our menu:'
                     {print} 'Our starters are salad, soup, or carpaccio'
                     {print} 'Our main courses are pizza, lasagne, or spaghetti'
-                    {print} 'Our desserts are brownie, icecream, or milkshake'
+                    {print} 'Our desserts are brownie, ice cream, or milkshake'
                     starter = {ask} 'Which starter would you like to have?'
                     main = {ask} 'Which main course would you like?'
                     dessert = {ask} 'Which dessert do you pick?'
@@ -1838,7 +1838,7 @@ adventures:
                     {if} main {is} lasagne price = price + 12
                     {if} main {is} spaghetti price = price + 8
                     {if} dessert {is} brownie price = price + 7
-                    {if} dessert {is} icecream price = price + 5
+                    {if} dessert {is} ice cream price = price + 5
                     {if} dessert {is} milkshake price = price + 4
                     {print} 'You have ordered ' starter ' , ' main ' and ' dessert
                     {print} 'That will be ' price ' dollars, please'

@@ -392,7 +392,7 @@ levels:
             question_text: "What command should be used on the line 1?"
             code: |-
                 flavor {is} _?_
-                {print} Your favorite icecream is...
+                {print} Your favorite ice cream is...
                 {sleep}
                 {print} flavor
             mp_choice_options:
@@ -413,7 +413,7 @@ levels:
                 feedback: "This way you are making a list. You don't want that now."
             -   option: |
                     ```
-                    {ask} What flavor icecream do you like?
+                    {ask} What flavor ice cream do you like?
                     ```
                 feedback: "That's right!"
             correct_answer: "D"
@@ -1949,7 +1949,7 @@ levels:
             -   option: |
                     ```
                     desert = {ask} 'What is your favorite type of desert?'
-                    {if} desert {is} icecream
+                    {if} desert {is} ice cream
                         {repeat} 3 {times}
                         {print} 'Icecream is the best!'
                     ```
@@ -1957,7 +1957,7 @@ levels:
             -   option: |
                     ```
                     desert = {ask} 'What is your favorite type of desert?'
-                    {if} desert {is} icecream
+                    {if} desert {is} ice cream
                     {repeat} 3 {times}
                         {print} 'Icecream is the best!'
                     ```
@@ -1965,7 +1965,7 @@ levels:
             -   option: |
                     ```
                     desert = {ask} 'What is your favorite type of desert?'
-                    {if} desert {is} icecream
+                    {if} desert {is} ice cream
                         {repeat} 3 {times}
                             {print} 'Icecream is the best!'
                     ```
@@ -1974,7 +1974,7 @@ levels:
                     ```
                     {repeat} 3 {times}
                         desert = {ask} 'What is your favorite type of desert?'
-                        {if} desert {is} icecream
+                        {if} desert {is} ice cream
                             {repeat} 3 {times}
                             {print} 'Icecream is the best!'
                     ```
