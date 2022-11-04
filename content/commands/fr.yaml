@@ -195,83 +195,83 @@
 -   name: "{and}"
     explanation: "Les deux parties doivent être correctes."
     demo_code: |-
-        answer1 = {ask} 'What is 3+2?'
-        answer2 = {ask} 'What is 2+2?'
-        {if} answer1 {is} 5 {and} answer2 {is} 4
-            {print} 'Both answers are correct!'
-        else
-            {print} 'At least one answer is wrong!'
+        reponse1 = {ask} 'Que font 3 + 2 ?'
+        reponse2 = {ask} 'Que font 2 + 2 ?'
+        {if} reponse1 {is} 5 {and} reponse2 {is} 4
+            {print} 'Les deux réponses sont correctes !'
+        {else}
+            {print} 'Au moins une des deux réponses est fausse !'
 -   name: "{or}"
-    explanation: "At least 1 of the two parts need to be correct. If both are correct, it is also fine."
+    explanation: "Au moins une des deux parties doit être correcte. Si les deux sont correctes, ça marche aussi."
     demo_code: |-
-        answer1 = {ask} 'What is 3+2?'
-        answer2 = {ask} 'What is 2+2?'
-        {if} answer1 {is} 5 {or} answer2 {is} 4
-            {print} 'At least one answer is correct!'
-        else
-            {print} 'Both answers are wrong!'
+        reponse1 = {ask} 'Que font 3 + 2 ?'
+        reponse2 = {ask} 'Que font 2 + 2 ?'
+        {if} reponse1 {is} 5 {or} reponse2 {is} 4
+            {print} 'Au moins une des deux réponses est correcte !'
+        {else}
+            {print} 'Les deux réponses sont fausses !'
 14:
--   name: "Smaller"
-    explanation: "We use the `<` to check if the first number is smaller than the second number."
+-   name: "Plus petit"
+    explanation: "On utilise `<` pour vérifier si le premier nombre est plus petit que le second."
     demo_code: |-
-        age = {ask} 'How old are you?'
+        age = {ask} 'Quel âge as-tu ?'
         {if} age < 13
-            {print} 'You are younger than me!'
--   name: "Bigger"
-    explanation: "We use the `>` to check if the first number is bigger than the second number."
+            {print} 'Tu es plus jeune que moi !'
+-   name: "Plus grand"
+    explanation: "On utilise `>` pour vérifier si le premier nombre est plus grand que le second."
     demo_code: |-
-        age = {ask} 'How old are you?'
+        age = {ask} 'Quel âge as-tu ?'
         {if} age > 13
-            {print} 'You are older than me!'
--   name: "Equal"
-    explanation: "We use the `==` to check if two things are the same."
+            {print} 'Tu es plus vieux que moi !'
+-   name: "Égal à"
+    explanation: "On utilise `==` pour vérifier si deux choses sont identiques."
     demo_code: |-
-        answer = {ask} 'What is 5 * 5?'
-        {if} answer == 25
-            {print} 'That {is} correct!'
--   name: "Not equal"
-    explanation: "Nous utilisons  `!=` pour verifier que deux choses sont différentes."
+        reponse = {ask} 'Que font 5 * 5 ?'
+        {if} reponse == 25
+            {print} 'Correct !'
+-   name: "Différent de"
+    explanation: "On utilise `!=` pour verifier que deux choses sont différentes."
     demo_code: |-
-        answer = {ask} 'What is 5 * 5?'
-        {if} answer != 25
-            {print} 'That is not correct!'
+        reponse = {ask} 'Que font 5 * 5 ?'
+        {if} reponse != 25
+            {print} 'Pas correct !'
 
--   name: "Smaller {or} equal"
-    explanation: "We use the `<=` to check if the first number is smaller than or equal to the second number."
+-   name: "Plus petit ou égal"
+    explanation: "On utilise le `<=` pour vérifier si le premier nombre est plus petit ou égal au second."
     demo_code: |-
-        age = {ask} 'How old are you?'
+        age = {ask} 'Quel âge as-tu ?'
         {if} age <= 12
-            {print} 'You are younger than me!'
+            {print} 'Tu es plus jeune que moi !'
 
--   name: "Bigger or equal"
-    explanation: "We use the `>=` to check if the first number is bigger than or equal to the second number."
+-   name: "Plus grand ou égal"
+    explanation: "On utilise le `>=` pour vérifier si le premier nombre est plus grand ou égal au second."
     demo_code: |-
-        age = {ask} 'How old are you?'
+        age = {ask} 'Quel âge as-tu ?'
         {if} age >= 14
-            {print} 'You are older than me!'
+            {print} ''Tu es plus vieux que moi !'
 15:
 -   name: "{while}"
-    explanation: "On peut utiliser la boucle `{while}` avec l'opérateur différent."
+    explanation: "On peut utiliser la boucle `{while}` avec l'opérateur différent de."
     demo_code: |-
-        answer = 0
-        {while} answer != 25
-            answer = {ask} 'What is 5 times 5?'
-        {print} 'A correct answer has been given'
--   name: "Smaller {while}"
-    explanation: "Nous pouvons aussi utiliser une boucle  `{while}` avec `<` et `>`."
+        reponse = 0
+        {while} reponse != 25
+            reponse = {ask} 'Que fait 5 multiplié par 5 ?'
+        {print} 'Une bonne réponse a été donnée'
+-   name: "Plus petit {while}"
+    explanation: "On peut aussi utiliser `{while}` avec `<` et `>`."
     demo_code: |-
-        count = 1
-        {while} count < 3
-            {print} 'We do this ' 3 - count ' more times'
-            count = count + 1
-        {print} 'We are done'
+        compteur = 1
+        {while} compteur < 3
+            {print} 'On doit compter encore ' 3 - compteur ' fois'
+            compteur = compteur + 1
+        {print} 'On a fini'
 16:
--   name: "square brackets"
+-   name: "crochets"
     explanation: "Liste avec des crochets."
     demo_code: |-
         fruit = ['apple', 'banana', 'cherry']
         {print} fruit
--   name: "Get an item from a list"
+-   name: "Obtenir un élément d'une liste"
     explanation: "To get an item from a list we use [number] so fruit[1] means, get the first fruit from the list!"
     demo_code: |-
         fruit = ['banana', 'apple', 'cherry']
