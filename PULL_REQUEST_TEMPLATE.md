@@ -4,6 +4,9 @@ Start the name of the PR with one of the relevant prefixed in the title of the P
 * [FIX] -> solving a bug
 * [CHORE] -> things unrelated to the code, such as mergify scripts
 * [REFACTORING] -> should not change anything, cleanup of code
+* [UI] -> improvements and changes of the Hedy user interface
+* [TESTING] -> changes made to the test suite
+* [BACKEND] -> changes to the internal logic of the Hedy website
 
 Finish the name of the PR with a clear description of the changes and delete the lines above from the description.
 
