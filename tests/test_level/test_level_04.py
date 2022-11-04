@@ -50,7 +50,7 @@ class TestsLevel4(HedyTester):
             code=code,
             expected=expected,
             expected_commands=expected_commands,
-            max_level=11)
+            max_level=7)
 
     def test_print_single_quoted_text_with_inner_double_quote(self):
         code = """print 'quote is "'"""

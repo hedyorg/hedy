@@ -2217,17 +2217,17 @@ def preprocess_blocks(code, level):
     for line in lines:
         leading_spaces = find_indent_length(line)
 
+        # ignore whitespace-only lines
+        if leading_spaces == len(line):
+            processed_code.append('')
+            continue
+
         line_number += 1
 
         # first encounter sets indent size for this program
         if indent_size_adapted == False and leading_spaces > 0:
             indent_size = leading_spaces
             indent_size_adapted = True
-
-        # ignore whitespace-only lines
-        if leading_spaces == len(line):
-            processed_code.append(line)
-            continue
 
         #calculate nuber of indents if possible
         if indent_size != None:
@@ -2283,6 +2283,7 @@ def preprocess_blocks(code, level):
         processed_code.append('end-block')
     return "\n".join(processed_code)
 
+
 def preprocess_ifs(code):
     processed_code = []
     lines = code.split("\n")
@@ -2290,13 +2291,13 @@ def preprocess_ifs(code):
         line = lines[i]
         next_line = lines[i + 1]
         # todo convert to all languages!!
+        # if this line starts with if but does not contain an else, and the next line too is not an else.
         if line[0:2] == "if" and (not next_line[0:4] == 'else') and (not ("else" in line)):
-            # is this line just a condition and no other keyword (because that is no problem)
-            if "print" in line or "ask" in line or "forward" in line or "turn" in line: # and this should also (TODO) check for a second is cause that too is problematic.
-                # a second command, but also no else in this line -> check next line!
-                
-                # no else in next line?
-                # add a nop (like 'Pass' but we just insert a meaningless assign)
+            # is there an command in the line too (cause just if, f.e. if name is Hank, is fine)
+            commands = ["print", "ask", "forward", "turn"]
+            if any(x in line for x in commands): # and this should also
+
+                # then add a nop (like 'Pass' but we just insert a meaningless assign)
                 line = line + " else _ is x"
 
         processed_code.append(line)

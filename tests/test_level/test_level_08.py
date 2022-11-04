@@ -1,4 +1,5 @@
 import hedy
+from hedy import Command
 import textwrap
 from tests.Tester import HedyTester
 from parameterized import parameterized
@@ -392,11 +393,39 @@ class TestsLevel8(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
-    def test_if_empty_line_with_whitespace_else_print(self):
-        code = textwrap.dedent("""\
+    def test_print_line_with_spaces_works(self):
+        code = "print 'hallo'\n      \nprint 'hallo'"
+        expected = "print(f'hallo')\nprint(f'hallo')"
+        expected_commands = [Command.print, Command.print]
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            expected_commands=expected_commands,
+            max_level=11)
+
+    def test_if_empty_start_line_with_whitespace_else_print(self):
+        code = "        \n"
+        code += textwrap.dedent("""\
         if 1 is 2
             print 'nice!'
-               
+        else
+            print 'pizza is better'""")
+
+        expected = textwrap.dedent("""\
+        if convert_numerals('Latin', '1') == convert_numerals('Latin', '2'):
+          print(f'nice!')
+        else:
+          print(f'pizza is better')""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=11)
+
+    def test_if_empty_middle_line_with_whitespace_else_print(self):
+        code = textwrap.dedent("""\
+        if 1 is 2
+            print 'nice!'""")
+        code += "\n        \n"
+        code += textwrap.dedent("""\
         else
             print 'pizza is better'""")
 
