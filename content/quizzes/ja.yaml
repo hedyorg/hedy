@@ -3,7 +3,6 @@ levels:
         5:
             correct_answer: C
             question_text: What happens when you use the `{sleep}` command?
-            code: '{sleep}'
             mp_choice_options:
             -   option: It slows down your computer
                 feedback: fortunately not!
@@ -1085,7 +1084,6 @@ levels:
             question_text: How many `{if}` commands can be placed inside another `{if}` command?
             hint: You can put an `{if}` command inside an `{if}` command.
             question_score: '10'
-            code: '# No code provided'
         1:
             question_text: What is wrong with this code?
             code: "{repeat} 3 {times}\n   eten = {ask} 'What would you like to eat?'\n   {if} food {is} fries\n       sauce = {ask} 'What sauce would you like?'\n       {print} 'One fries with ' sauce\n   {if} food {is} pizza\n       topping = {ask} 'What topping would you like?'\n       {print} 'One pizza with ' topping\n{print} 'That you for your order'"
@@ -1221,7 +1219,6 @@ levels:
             correct_answer: A
             hint: First all the numbers, then the sentence
             question_score: '10'
-            output: "1\n2\n3\n4\n5\nOnce I caught a fish alive!"
         5:
             question_text: What word should be at the place of the question mark?
             code: "{for} i {in} _?_ 1 {to} 10\n    {print} i"
@@ -1284,7 +1281,6 @@ levels:
             question_score: '10'
         4:
             question_text: What's wrong with this code?
-            code: "{for} i {in} {range} 1 {to} 10\n{print} i"
             mp_choice_options:
             -   option: The i in the last line need quotation marks
                 feedback: No it doesn't.

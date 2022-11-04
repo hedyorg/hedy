@@ -242,7 +242,6 @@ levels:
             correct_answer: B
         9:
             question_text: How many `{if}` commands can be placed inside another `{if}` command?
-            code: '# No code provided'
             mp_choice_options:
             -   option: None, that is not allowed
                 feedback: You are allowed to
@@ -812,7 +811,6 @@ levels:
             question_score: '10'
         5:
             question_text: What happens when you use the `{sleep}` command?
-            code: '{sleep}'
             mp_choice_options:
             -   option: It slows down your computer
                 feedback: fortunately not!
@@ -1345,7 +1343,6 @@ levels:
             -   option: "```\n{for} i {in} {range} 1 {to} 5\n    {print} 'i'\n{print} 'Once I caught a fish alive!'\n```\n"
                 feedback: i is a variable and shouldn't have quotation marks
             question_text: Which code was used to get this output?
-            output: "1\n2\n3\n4\n5\nOnce I caught a fish alive!"
             correct_answer: A
             hint: First all the numbers, then the sentence
             question_score: '10'
@@ -1366,7 +1363,6 @@ levels:
             output: "10\n9\n8\n7\n6\n5\n4\n3\n2\n1\n0"
         4:
             question_text: What's wrong with this code?
-            code: "{for} i {in} {range} 1 {to} 10\n{print} i"
             mp_choice_options:
             -   option: The i in the last line need quotation marks
                 feedback: No it doesn't.

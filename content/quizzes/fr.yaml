@@ -222,7 +222,6 @@ levels:
             question_score: '10'
         5:
             question_text: "Que se passe-t-il lorsque tu utilises la commande `{sleep}` ?"
-            code: "{sleep}"
             mp_choice_options:
             -   option: "Il ralentit ton ordinateur"
                 feedback: "Heureusement, non !"
@@ -1415,7 +1414,6 @@ levels:
             correct_answer: "D"
             hint: "La ligne 2 dit pour 'chaque plat dans la liste des plats' ."
             question_score: '10'
-            output: "1\n2\n3\n4\n5\nOnce I caught a fish alive!"
         3:
             question_text: "Quelle sortie est correcte ?"
             mp_choice_options:
@@ -1436,10 +1434,6 @@ levels:
             output: "10\n9\n8\n7\n6\n5\n4\n3\n2\n1\n0"
         4:
             question_text: "Où est le problème avec ce code ?"
-            code: |-
-                courses = pommes, pain, lait
-                for article in courses
-                    print 'On a besoin de ' courses
             mp_choice_options:
             -   option: "La ligne 2 doit commencer avec 4 espaces en guise d'indentation."
                 feedback: "Non, ce n'est pas le cas. Seule la ligne 3 a besoin d'une indentation, et il y en a."
@@ -1781,7 +1775,6 @@ levels:
             hint: You can put an `{if}` command inside an `{if}` command.
             question_text: How many `{if}` commands can be placed inside another `{if}` command?
             question_score: '10'
-            code: '# No code provided'
         10:
             mp_choice_options:
             -   option: All lines should start with 4 spaces

@@ -232,7 +232,6 @@ levels:
             hint: "'name' is being replaced with 'Hedy' in both places"
         5:
             question_text: What happens when you use the `{sleep}` command?
-            code: '{sleep}'
             mp_choice_options:
             -   option: It slows down your computer
                 feedback: fortunately not!
@@ -1300,7 +1299,6 @@ levels:
             -   option: Infinite, as long as you keep using indentation correctly
                 feedback: That is true
             question_text: How many `{if}` commands can be placed inside another `{if}` command?
-            code: '# No code provided'
             correct_answer: D
             hint: You can put an `{if}` command inside an `{if}` command.
             question_score: '10'
@@ -1361,7 +1359,6 @@ levels:
                 feedback: Perfect!
             correct_answer: D
             question_text: What's wrong with this code?
-            code: "{for} i {in} {range} 1 {to} 10\n{print} i"
             hint: There is something wrong with the indention
             question_score: '10'
         5:
@@ -1435,7 +1432,6 @@ levels:
                 feedback: Now Hedy will count '1 Once I caught a fish alive!, 2 Once I caught a fish alive! etc.
             -   option: "```\n{for} i {in} {range} 1 {to} 5\n    {print} 'i'\n{print} 'Once I caught a fish alive!'\n```\n"
                 feedback: i is a variable and shouldn't have quotation marks
-            output: "1\n2\n3\n4\n5\nOnce I caught a fish alive!"
             correct_answer: A
             hint: First all the numbers, then the sentence
             question_score: '10'
