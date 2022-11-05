@@ -1,7 +1,7 @@
 2:
 -   name: '{is}'
     explanation: Назвіть щось за допомогою `{is}`. Ви самі можете вибрати назву.
-    demo_code: "імʼя {is} Hedy\n{print} ласкаво просимо, імʼя"
+    demo_code: "імʼя {is} Хейді\n{print} ласкаво просимо, імʼя"
 -   demo_code: "колір {is} {ask} Який твій улюблений колір?\n{print} колір твій улюблений!"
     name: '{ask}'
     explanation: Запитайте щось, використовоючи `{ask}`, та назвіть відповідь за допомогою `{is}`.
@@ -10,7 +10,7 @@
     demo_code: "{print} Одну секунду, дайте подумати...\n{sleep}\n{print} Хм.. Мені потрібно ще 3 секунди...\n{sleep} 3\n{print} Еврика! В мене получилось!"
 -   name: '{is} з черепашкою'
     explanation: Назвіть число за допомогою `{is}`. Ви самі можете вибрати назву.
-    demo_code: "уклін {is} 90\n{turn} уклін\n{forward} 100"
+    demo_code: "нахил {is} 90\n{turn} нахил\n{forward} 100"
 1:
 -   explanation: Надрукуйте щось за допомогою `{print}`.
     demo_code: '{print} Привіт, ласкаво просимо в Hedy!'
@@ -32,76 +32,76 @@
     demo_code: "{forward} 25\n{turn} {left}\n{forward} 25\n{turn} {right}"
 3:
 -   name: Виберіть випадкове
-    explanation: Виберіть випадкове слово з групи за допомогою `{at}` і `{random}`.
-    demo_code: "animals {is} dog, cat, kangaroo\n{print} animals {at} {random}"
+    explanation: Виберіть випадкове слово з групи за допомогою `{at}``{random}`.
+    demo_code: "тварини {is} собака, кіт, кенгуру\n{print} тварини {at} {random}"
 -   name: '{add}'
-    explanation: '`{add}` an item `{to_list}` a list.'
-    demo_code: "animals {is} cow, cat\n{add} dog {to_list} animals"
+    explanation: '`{add}` елемент `{to_list}` списку.'
+    demo_code: "тварини {is} корова, кіт\n{add} собака {to_list} тварини"
 -   name: '{remove}'
-    explanation: '`{remove}` an item `{from}` a list.'
-    demo_code: "animals {is} cat, dog, cow\n{remove} dog {from} animals"
+    explanation: '`{remove}` елемент зі списку.'
+    demo_code: "тварини {is} кіт, собака, корова\n{remove} собака {from} тварини"
 4:
 -   name: '{print}'
-    explanation: Print exactly using quotation marks.
-    demo_code: "{print} 'Hello welcome to Hedy.'"
+    explanation: Друкуй конкретні фрази за допомогою лапок.
+    demo_code: "{print} 'Привіт, вітаємо в Хейді.'"
 -   name: '{is}'
-    explanation: Give a name to some text and `{print}` without quotation marks.
-    demo_code: "name {is} Hedy\n{print} 'my name is ' name"
+    explanation: Назвіть якись текст і `{print}` його без лапок.
+    demo_code: "імʼя {is} Хейді\n{print} 'мене звати ' імʼя"
 -   name: '{ask}'
-    explanation: Ask something with `{ask}`.
-    demo_code: "color {is} {ask} 'What is your favorite color?'\n{print} color ' is your favorite!'"
+    explanation: Запитайте щось за допомогою `{ask}`.
+    demo_code: "колір {is} {ask} 'Який твій улюблений колір?'\n{print} колір ' твій улюблений!'"
 5:
 -   name: '{print}'
-    explanation: Print exactly using quotation marks.
-    demo_code: "{print} 'Hello welcome to Hedy.'"
+    explanation: Друкуй конкретні фрази за допомогою лапок.
+    demo_code: "{print} 'Привіт, вітаємо в Хейді.'"
 -   name: '{ask}'
-    explanation: Ask something with `{ask}`.
-    demo_code: "color {is} {ask} 'What is your favorite color?'\n{print} color ' is your favorite!'"
+    explanation: Запитайте щось за допомогою `{ask}`.
+    demo_code: "колір {is} {ask} 'Який твій улюблений колір?'\n{print} колір ' твій улюблений!'"
 -   name: '{if}'
-    explanation: Make a choice with `{if}`.
-    demo_code: "color {is} {ask} 'What is your favorite color?'\n{if} color {is} green {print} 'pretty!' {else} {print} 'meh'"
--   name: '{if} with turtle'
-    explanation: Make a choice with `{if}`.
-    demo_code: "answer {is} {ask} 'How far should I walk?'\n{if} answer {is} far {forward} 100 {else} {forward} 5"
+    explanation: Зроби вибір за допомогою `{if}`.
+    demo_code: "колір {is} {ask} 'Який твій улюблений колір?'\n{if} колір {is} зелений {print} 'чудово!' {else} {print} 'пф'"
+-   name: '{if} з черепашкою'
+    explanation: Зроби вибір за допомогою `{if}`.
+    demo_code: "відповідь {is} {ask} 'Як далеко мені йти?'\n{if} відповідь {is} далеко {forward} 100 {else} {forward} 5"
 -   name: '{in}'
-    explanation: Check elements with `{in}`.
-    demo_code: "pretty_colors {is} green, yellow\ncolor {is} {ask} 'What {is} your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
+    explanation: Перевір елементи командою `{in}`.
+    demo_code: "красиві_кольори {is} зелений, жовтий\nколір {is} {ask} 'Який {is} твій улюблений колір?'\n{if} колір {in} красиві_кольори {print} 'красивий!' {else} {print} 'пф'"
 6:
 -   name: '{print}'
-    explanation: Print exactly using quotation marks.
-    demo_code: "{print} '5 times 5 is ' 5 * 5"
+    explanation: Друкуй конкретні фрази за допомогою лапок.
+    demo_code: "{print} '5 на 5 це ' 5 * 5"
 -   name: '{ask}'
-    explanation: Ask for a calculation and check whether it is correct.
-    demo_code: "answer = {ask} 'What is 10 plus 10?'\n{if} answer {is} 20 {print} 'Yes!' {else} {print} 'Oops'"
--   name: '{ask} and {if} with turtle'
-    explanation: Ask the user how many angles they want.
-    demo_code: "angles = {ask} 'How many angles?'\nangle = 360 / angles\n{forward} 50"
+    explanation: Задай питання і перевір відповідь.
+    demo_code: "відповідь = {ask} 'Скільки буде 10 додати 10?'\n{if} відповідь {is} 20 {print} 'Так!' {else} {print} 'Ой...'"
+-   name: '{ask} і {if} з черепашкою'
+    explanation: Запитай користувача скільки кутів він бажає.
+    demo_code: "кути = {ask} 'Скільки кутів?'\nнахил = 360 / кути\n{forward} 50"
 7:
 -   name: '{print}'
-    explanation: Print exactly using quotation marks.
-    demo_code: "{print} 'Hello welcome to Hedy.'"
+    explanation: Друкуй конкретні фрази за допомогою лапок.
+    demo_code: "{print} 'Привіт, вітаємо в Хейді.'"
 -   name: '{ask}'
-    explanation: Ask something with `{ask}`.
-    demo_code: "color = {ask} 'What is your favorite color?'\n{print} color ' is your favorite!'"
+    explanation: Запитайте щось за допомогою `{ask}`.
+    demo_code: "колір = {ask} 'Який твій улюблений колір?'\n{print} колір ' твій улюблений!'"
 -   name: '{if}'
-    explanation: Make a choice with `{if}`.
-    demo_code: "color = {ask} 'What is your favorite color?'\n{if} color {is} green {print} 'pretty!' {else} {print} 'meh'"
--   name: '{repeat} with turtle'
-    explanation: Repeat a line of code with `{repeat}`.
+    explanation: Зроби вибір за допомогою `{if}`.
+    demo_code: "колір = {ask} 'Який твій улюблений колір?'\n{if} колір {is} зелений {print} 'красивий!' {else} {print} 'пф'"
+-   name: '{repeat} з черепашкою'
+    explanation: Повторіть лінію коду за допомогою `{repeat}`.
     demo_code: '{repeat} 3 {times} {forward} 10'
 8:
 -   name: '{print}'
-    explanation: Print something. Remember to use a quotation mark for literal printing.
-    demo_code: "{print} '5 times 5 is ' 5 * 5"
+    explanation: Видрукуйте щось. Памʼятайте вживати лапки для друку конкретних фраз.
+    demo_code: "{print} '5 на 5 це ' 5 * 5"
 -   name: '{ask}'
-    explanation: Ask for the answer to a sum and check if it is correct. We can now print 2 lines.
-    demo_code: "answer = {ask} 'What is 5 plus 5?'\n{if} answer {is} 10\n    {print} 'Well done!'\n    {print} 'Indeed, the answer was ' answer\n{else}\n    {print} 'Oops!'\n    {print} 'The answer is 10'"
--   name: '{repeat} with turtle'
-    explanation: Repeat multiple lines.
+    explanation: Запитайте про суму і перевірте відповідь. Тепер ми можемо друкувати дві лінії.
+    demo_code: "відповідь = {ask} 'Скільки буде 5 додати 5?'\n{if} відповідь {is} 10\n    {print} 'Добра робота!'\n    {print} 'Дійсно, правильна відповідь ' answer\n{else}\n    {print} 'Ой!'\n    {print} 'Відповідь 10'"
+-   name: '{repeat} з черепашкою'
+    explanation: Повторіть декілька ліній.
     demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
 9:
--   name: '{if} with multiple lines'
-    explanation: The answer of a sum of questions with `{ask}` and see if it is correct. Now we print out two lines.
+-   name: '{if} з багатьма лініями'
+    explanation: Запитай про суму чисел за допомогою команди `{ask}` і перевір відповідь. Тепер ми друкуємо дві лінії.
     demo_code: "answer = {ask} 'What is 10 plus 10?'\n{if} answer {is} 20\n    {print} 'Well done!!'\n    {print} 'The answer is indeed' answer\n{else}\n    {print} 'Wrong'\n    {print} 'The answer is 20'"
 -   name: '{repeat} with turtle'
     explanation: Repeat multiple lines.
