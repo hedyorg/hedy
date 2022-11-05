@@ -468,13 +468,13 @@ adventures:
                 start_code: '# 在这里写你的代码'
             9:
                 story_text: "## 计算器 \n在前面的级别中您已经学会如何编写一个计算器，在这个等级里你可以扩写这些代码并把它写成一个小小的数学游戏，就像这样...\n"
-                example_code: "```\nscore = 0\n{repeat} 10 {times}\n    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    number1 = numbers {at} {random}\n    number2 = numbers {at} {random}\n    correct_answer = number1 * number2\n    {print} 'What is ' number1 ' times ' number2 '?'\n    answer = {ask} 'Type your answer here...'\n    {print} 'Your answer is' answer\n    {if} answer {is} correct_answer\n        score = score + 1\n{print} 'Great job! Your score is... ' score ' out of 10!'\n```\n"
+                example_code: "```\n分数 = 0\n{repeat} 10 {times}\n    数字 = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    数1 = 数字 {at} {random}\n    数2 = 数字 {at} {random}\n    正确答案 = 数1 * 数2\n    {print} 数1 '乘以' 数2 '是多少？'\n    答案 = {ask} '在这里输入答案……'\n    {print} '你的答案是' 答案\n    {if} 答案 {is} 正确答案\n        分数 = 分数 + 1\n{print} '做得好！你的分数是' 分数 '分，满分是10分！'\n```\n"
                 start_code: "{print} '欢迎来到这个计算器!'"
             6:
                 story_text: "## 计算器 \n现在你可以计算了，你也可以创建一个程序来练习数学计算。你可以自己编造一个计算题，例如：\n"
                 example_code: "```\n正确答案 = 11 * 27\n答案 = {ask} '11乘以27是多少？'\n{if} 答案 {is} 正确答案 {print} '做得好！'\n{else} {print} '错了！是' 正确答案\n```\n"
                 story_text_2: "## 随机数 \n您也可以让计算机自己用随机函数做一个随机求和。 \n这就是您选择多个表格进行练习的方式，而且您将总是得到一个不一样的和：\n"
-                example_code_2: "```\ntables = 4, 5, 6, 8\nnumbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\ntable = tables {at} {random}\nnumber = numbers {at} {random}\ncorrect_answer = table * number\nanswer = {ask} 'how much is ' table ' times ' number '?'\n{if} answer {is} correct_answer {print} 'okay'\n{else} {print} 'mistake! it was ' correct_answer\n```\n"
+                example_code_2: "```\n被乘数表 = 4, 5, 6, 8\n乘数表 = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n被乘数 = 被乘数表 {at} {random}\n乘数 = 乘数表 {at} {random}\n正确答案 = 被乘数 * 乘数\n答案 = {ask} 被乘数 '乘以' 乘数 '是多少？'\n{if} 答案 {is} 正确答案 {print} '正确'\n{else} {print} '错误！是' 正确答案\n```\n"
                 start_code: "{print} '欢迎来到这个计算器!'"
             15:
                 story_text: "## 计算器 \n您可以添加 `{while}` 循环到您已经在上一关中学过的计算器游戏中去。 \n这可以确保{if}玩家在没有回答正确的情况下不会进行下一个问题。\n"
