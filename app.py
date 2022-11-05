@@ -1,7 +1,5 @@
 # coding=utf-8
 import copy
-from itertools import count
-from multiprocessing.dummy import active_children
 from logging_config import LOGGING_CONFIG
 from logging.config import dictConfig as logConfig
 logConfig(LOGGING_CONFIG)
@@ -437,8 +435,11 @@ def parse_by_id(user):
     program = DATABASE.program_by_id(body.get('id'))
     if program and program.get('username') == user['username']:
         try:
-            hedy.transpile(program.get('code'), program.get(
-                'level'), program.get('lang'))
+            hedy.transpile(
+                program.get('code'),
+                program.get('level'),
+                program.get('lang')
+            )
             return {}, 200
         except:
             return {"error": "parsing error"}, 200
