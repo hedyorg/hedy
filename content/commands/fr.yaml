@@ -157,7 +157,7 @@
     explanation: "Affiche tout les éléments d'un liste."
     demo_code: |-
         animaux {is} chiens, chats, poissons
-        {for} animal {in} animaux 
+        {for} animal {in} animaux
           {print} 'j aime les ' animal
 11:
 -   name: "la boucle {for}"
@@ -179,7 +179,7 @@
     explanation: "Texte avec des guillemets après `=`"
     demo_code: |
         nom = 'Hedy le robot'
-        {print} 'Bonjour ' name
+        {print} 'Bonjour ' nom
 -   name: "comparaison avec guillemets après {if}"
     explanation: "Texte avec guillemets suivant un `{if}`."
     demo_code: |
@@ -248,7 +248,7 @@
     demo_code: |-
         age = {ask} 'Quel âge as-tu ?'
         {if} age >= 14
-            {print} ''Tu es plus vieux que moi !'
+            {print} 'Tu es plus vieux que moi !'
 15:
 -   name: "{while}"
     explanation: "On peut utiliser la boucle `{while}` avec l'opérateur différent de."
