@@ -307,42 +307,42 @@ levels:
         10:
             question_text: "Quelle commande doit être utilisée sur la ligne 1 ?"
             code: |-
-                gout is _?_
-                print Ta glace préférée is ...
-                sleep
-                print gout
+                gout {is} _?_
+                {print} Ta glace préférée est...
+                {sleep}
+                {print} gout
             mp_choice_options:
             -   option: "sleep 3"
                 feedback: "Tu veux connaître la saveur préférée !"
             -   option: "print fraises"
-                feedback: "Tu ne veux pas d'une commande d'affichage au milieu de la ligne..."
+                feedback: "Tu ne veux pas `{print}` au milieu de la ligne..."
             -   option: "fraises, chocolat, vanille"
                 feedback: "Si tu fait cela, tu feras une liste. Tu ne veux pas de ça maintenant."
             -   option: "ask Quel parfum de glace aimes-tu ?"
-                feedback: "C'est vrai !"
+                feedback: "C'est juste !"
             correct_answer: "D"
-            hint: "Tu veux poser une question"
+            hint: "Tu veux `{ask}` une question"
             question_score: '10'
     3:
         1:
             question_text: "Quelle commande utilise-tu pour laisser Hedy choisir quelque chose arbitrairement ?"
             mp_choice_options:
             -   option: "print"
-                feedback: "print est utilisé pour afficher du texte"
+                feedback: "`{print}` est utilisé pour afficher du texte"
             -   option: "ask"
-                feedback: "ask est utilisé pour poser une question"
+                feedback: "`{ask}` est utilisé pour poser une question"
             -   option: "is"
-                feedback: "is est utilisé pour faire une liste"
+                feedback: "`{is}` est utilisé pour faire une liste"
             -   option: "at random"
-                feedback: "Correct !"
+                feedback: "C’est bien ça !"
             correct_answer: "D"
             hint: "Arbitrairement signifie au hasard."
             question_score: '10'
         2:
             question_text: "Quel est le problème avec ce code ?"
             code: |-
-                animaux is chien chat vache
-                print animaux at random
+                animaux {is} chien chat vache
+                {print} animaux {at} {random}
             mp_choice_options:
             -   option: "Il faut des virgules à la ligne 1 : chien, chat, vache."
                 feedback: "Bon travail !"
