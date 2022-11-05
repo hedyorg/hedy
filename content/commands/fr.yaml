@@ -293,7 +293,7 @@
         {elif} a == 2:
             {print} 'a est 2'
         {else}:
-            {print} 'a n'est pas 1 ou 2'
+            {print} "a n'est pas 1 ou 2"
 -   name: "{print}"
     explanation: "Quand nous utilisons un  `{for}`, nous devons mettre un  `:` derrière l'affirmation du  `{for}` !"
     demo_code: |-
@@ -305,9 +305,9 @@
     demo_code: |-
         couleur = {ask} 'Quel est ta couleur préférée ?'
         {if} couleur == 'vert':
-            {print} 'Ta couleur préférée est le vert'
+            {print} "Ta couleur préférée est le vert"
         {else}:
-            {print} 'Ta couleur préférée n'est pas le vert'
+            {print} "Ta couleur préférée n'est pas le vert"
 18:
 -   name: "{print}"
     explanation: "Avec `{print}` on doit utiliser des parenthèses."
@@ -316,7 +316,7 @@
 -   name: "{range}"
     explanation: "Avec `{range}` on doit utiliser des parenthèses."
     demo_code: |-
-        {for} i {in} {range} (1,10) :
+        {for} i {in} {range} (1,10):
              {print}('Salut, ', i, ' fois')
 -   name: '{print} avec var'
     explanation: Avec `{print}` on doit utiliser des parenthèses et des virgules si l'on affiche plusieurs éléments.
