@@ -1276,6 +1276,9 @@ class ConvertToPython_1(ConvertToPython):
     def comment(self, meta, args):
         return f"#{''.join(args)}"
 
+    def empty_line(self, meta, args):
+        return ''
+
     def forward(self, meta, args):
         if len(args) == 0:
             return sleep_after('t.forward(50)', False)
@@ -2274,16 +2277,17 @@ def preprocess_blocks(code, level):
     for line in lines:
         leading_spaces = find_indent_length(line)
 
+        # ignore whitespace-only lines
+        if leading_spaces == len(line):
+            processed_code.append('')
+            continue
+
         line_number += 1
 
         # first encounter sets indent size for this program
         if indent_size_adapted == False and leading_spaces > 0:
             indent_size = leading_spaces
             indent_size_adapted = True
-
-        # ignore whitespace-only lines
-        if leading_spaces == len(line):
-            continue
 
         #calculate nuber of indents if possible
         if indent_size != None:
@@ -2339,6 +2343,7 @@ def preprocess_blocks(code, level):
         processed_code.append('end-block')
     return "\n".join(processed_code)
 
+
 def preprocess_ifs(code):
     processed_code = []
     lines = code.split("\n")
@@ -2346,15 +2351,12 @@ def preprocess_ifs(code):
         line = lines[i]
         next_line = lines[i + 1]
         # todo convert to all languages!!
+        # if this line starts with if but does not contain an else, and the next line too is not an else.
         if line[0:2] == "if" and (not next_line[0:4] == 'else') and (not ("else" in line)):
             # is this line just a condition and no other keyword (because that is no problem)
+            commands = ["print", "ask", "forward", "turn"]
             if (
-                "pressed" not in line and (
-                "print" in line or
-                "ask" in line or
-                "forward" in line or
-                "turn" in line
-                )
+                "pressed" not in line and any(x in line for x in commands)
             ): # and this should also (TODO) check for a second is cause that too is problematic.
                 # a second command, but also no else in this line -> check next line!
                 

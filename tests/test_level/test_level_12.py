@@ -1,5 +1,5 @@
-from math import exp
 import hedy
+from hedy import Command
 import textwrap
 from parameterized import parameterized
 from tests.Tester import HedyTester
@@ -23,7 +23,7 @@ class TestsLevel12(HedyTester):
     #
     # print tests
     #
-    def test_print_float(self):
+    def test_print_float_variable(self):
         code = textwrap.dedent("""\
             pi is 3.14
             print pi""")
@@ -36,7 +36,17 @@ class TestsLevel12(HedyTester):
             max_level=17,
             expected=expected
         )
+    def test_print_float(self):
+        code = "print 3.14"
+        
+        expected = "print(f'''3.14''')"
 
+        self.multi_level_tester(
+            code=code,
+            max_level=17,
+            expected=expected,
+            output='3.14'
+        )
     def test_print_division_float(self):
         code = "print 3 / 2"
         expected = "print(f'''{3 / 2}''')"
@@ -58,6 +68,17 @@ class TestsLevel12(HedyTester):
             max_level=17,
             expected=expected,
         )
+
+    def test_print_line_with_spaces_works(self):
+        code = "print 'hallo'\n      \nprint 'hallo'"
+        expected = "print(f'''hallo''')\nprint(f'''hallo''')"
+        expected_commands = [Command.print, Command.print]
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            expected_commands=expected_commands,
+            max_level=17)
 
     def test_print_string_with_triple_quotes_gives_error(self):
         code = textwrap.dedent("""\

@@ -399,7 +399,7 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
         }
       }
     } else {
-      code = get_trimmed_code();
+      code = get_active_and_trimmed_code();
       if (code.length == 0) {
         clearErrors(editor);
         stopit();
@@ -472,7 +472,7 @@ export function saveMachineFiles() {
     url: '/generate_machine_files',
     data: JSON.stringify({
       level: window.State.level,
-      code: get_trimmed_code(),
+      code: get_active_and_trimmed_code(),
       lang: window.State.lang,
     }),
     contentType: 'application/json',
@@ -1548,7 +1548,8 @@ function get_parsons_code() {
     return code.replace(/ +$/mg, '');
 }
 
-export function get_trimmed_code() {
+export function get_active_and_trimmed_code() {
+
   try {
     // This module may or may not exist, so let's be extra careful here.
     const whitespace = ace.require("ace/ext/whitespace");
@@ -1556,9 +1557,6 @@ export function get_trimmed_code() {
   } catch (e) {
     console.error(e);
   }
-  // FH Feb: the above code turns out not to remove spaces from lines that contain only whitespace,
-  // but that upsets the parser so this removes those spaces also:
-  // Remove whitespace at the end of every line
 
   // ignore the lines with a breakpoint in it.
   const breakpoints = getBreakpoints(editor);
@@ -1579,9 +1577,7 @@ export function get_trimmed_code() {
     code = lines.join('\n');
   }
 
-  // regex for any number of whitespace \s*
-  // g: global (replace all matches, not just the first one)
-  return code.replace(/\s*$/gm, '');
+  return code;
 }
 
 export function confetti_cannon(){
