@@ -1,0 +1,42 @@
+_PRINT: ("друк" | "print") _SPACE?
+_ASK: ("запитання" | "ask") _SPACE?
+_ECHO: ("повторити" | "echo") _SPACE?
+_FORWARD: ("вперед" | "forward") _SPACE?
+_TURN: ("поворот" | "turn") _SPACE?
+left: ("вліво" | "left") _SPACE?
+right: ("вправо" | "right") _SPACE?
+black: ("чорний" | "black") _SPACE?
+blue: ("синій" | "blue") _SPACE?
+brown: ("коричневий" | "brown") _SPACE?
+gray: ("сірий" | "gray") _SPACE?
+green: ("зелений" | "green") _SPACE?
+orange: ("оранжевий" | "orange") _SPACE?
+pink: ("рожевий" | "pink") _SPACE?
+purple: ("фіолетовий" | "purple") _SPACE?
+red: ("червоний" | "red") _SPACE?
+white: ("білий" | "white") _SPACE?
+yellow: ("жовтий" | "yellow") _SPACE?
+_IS: _SPACE ("це" | "is") _SPACE
+_SLEEP: ("сон" | "sleep") _SPACE?
+_ADD_LIST: ("додати" | "add") _SPACE
+_TO_LIST: _SPACE ("до" | "to") _SPACE
+_REMOVE: ("видалити" | "remove") _SPACE
+_FROM: _SPACE ("з" | "from") _SPACE
+_AT: _SPACE ("на" | "at") _SPACE
+random: ("випадковий" | "random") _SPACE?
+_IN: _SPACE ("в" | "in") _SPACE
+_IF: ("якщо" | "if") _SPACE
+_ELSE: "інакше" | "else"
+_AND: _SPACE ("і" | "and") _SPACE
+_REPEAT: ("повторити" | "repeat") _SPACE
+_TIMES: _SPACE ("раз" | "times")
+_FOR: ("для" | "for") _SPACE
+_RANGE: ("діапазон" | "range") _SPACE?
+_TO: _SPACE ("до" | "to") _SPACE
+_STEP: "крок" | "step"
+_ELIF: _SPACE? ("інакше\якщо" | "elif") _SPACE
+_INPUT: ("введення" | "input")
+_OR: _SPACE ("або" | "or") _SPACE
+_WHILE: ("тоді як" | "while") _SPACE
+_LENGTH: "довжина" | "length"
+_COLOR : ("колір" | "color") _SPACE?
