@@ -138,7 +138,8 @@ class TestsLevel4(HedyTester):
         self.multi_level_tester(
             code=code,
             max_level=5,
-            exception=hedy.exceptions.UnquotedTextException
+            exception=hedy.exceptions.UnquotedTextException,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 1
         )
 
     def test_print_without_quotes_gives_error_from_transpiler(self):
@@ -191,6 +192,7 @@ class TestsLevel4(HedyTester):
             code=code,
             max_level=17,
             exception=hedy.exceptions.UndefinedVarException,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2
         )
 
     @parameterized.expand(HedyTester.quotes)
