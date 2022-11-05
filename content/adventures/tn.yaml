@@ -56,10 +56,10 @@ adventures:
                 story_text_2: "## diadventure di thatafalela pele\ndiadventure di thatafalela pele mo ditsebeng tse dilatelang.\nKa jalo go botlhokwa go simolola ko molemeng wa polelo obo o bereka o ya mojeng gore o ikgwethe go feta.\n"
             7:
                 start_code: "{repeat} 3 {times} {print} 'Hedy e monate!'"
-                example_code: "```\n{boeletsa} 3 {times} {print} 'Hedy e monate!'\n```\n"
+                example_code: "```\n{repeat} 3 {times} {print} 'Hedy e monate!'\n```\n"
                 story_text: "## Legato 7! Legato7!\nLegato 7 oketsa `{repeat}` command.  `{repeat}` eka dirisiwa go dira mola ole mongwe wa code gantsi.\n"
             8:
-                start_code: "{boeletsa} 5 {times}\n    {print} 'dumelang betsho'\n    {print} 'Se se taa gatisiwa ga tlhano'"
+                start_code: "{repeat} 5 {times}\n    {print} 'dumelang betsho'\n    {print} 'Se se taa gatisiwa ga tlhano'"
                 story_text: "## Indentation\n`{botsa}` le `{print}` disantse di bereka jaaka o di itse. mme `{if}`, `{else}` le `{repeat}` di fetogile!\nJaanong oka tsamaisa digopa tsa code mmogo, mme o tshwanelwa ke go *indent* code.\nSe se raya gore o tsenya diphatha tse nne ko tshimologong ya mola. Gape o tshwanetse go indent fa o bata go dira block ja mola ole mongwe.\n"
                 example_code: "Se ke kafa Command ya  `{repeat}` e berekang ka teng gompieno:\n```\n{repeat} 5 {times}\n    {print} 'Dumelang lotlhe'\n    {print} 'Tse tsotlhe di boeleditswe ga tlhano'\n```\nSe ke kafa  `{if}` le  `{else}` command di berekang ka teng gompieno:\n\n```\nleina {is} {ask} 'leina la gago ke mang?'\n{if} leina {is} Hedy\n    {print} 'Amogelesega Hedy'\n    {print} 'O ka tshameka mo sebalamakgolong sa gago!'\n{else}\n    {print} 'Serukuthi!'\n    {print} 'Gao letelelwe go dirisa sebalamakgolo se!'\n```\n"
             10:
