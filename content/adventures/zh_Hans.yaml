@@ -608,60 +608,60 @@ adventures:
                 start_code: "# 在这里写你的代码"
             6:
                 story_text: |
-                    ## Restaurant
-                    In this level you can use maths to calculate the total price of your customer's order, which can make your virtual restaurant more realistic.
+                    ## 餐厅
+                    在这一关，你可以用数学计算客人的订单总价，这会让你的虚拟餐厅更真实。
 
                 example_code: |4
 
-                    You can make a simple restaurant code, like this:
+                    你可以写一段简单的餐厅代码，像这样：
                     ```
-                    {print} 'Welcome to Hedys restaurant'
-                    {print} 'Here is our menu:'
-                    {print} 'Our main courses are pizza, lasagne, or spaghetti'
-                    main = {ask} 'Which main course would you like?'
-                    price = 0
-                    {if} main {is} pizza price = 10
-                    {if} main {is} lasagne price = 12
-                    {if} main {is} spaghetti price = 8
-                    {print} 'You have ordered ' main
-                    {print} 'That will be ' price ' dollars, please'
-                    {print} 'Thank you, enjoy your meal!'
+                    {print} '欢迎来到海迪餐厅'
+                    {print} '这是我们的菜单：'
+                    {print} '我们的主菜有披萨、千层面、意面'
+                    主菜 = {ask} '您想要哪道主菜？'
+                    价格 = 0
+                    {if} 主菜 {is} 披萨 价格 = 10
+                    {if} 主菜 {is} 千层面 价格 = 12
+                    {if} 主菜 {is} 意面 价格 = 8
+                    {print} '您点了' 主菜
+                    {print} '请付' 价格 '元'
+                    {print} '谢谢，祝您用餐愉快！'
                     ```
                 story_text_2: |
-                    But you can also add many more things to your virtual restaurant, for example more courses.
+                    但你也可以给你的虚拟餐厅加上更多东西，比如更多的菜。
 
-                    ## Challenge
-                    You can add many more things to your virtual restaurant. For example, can you...
-                    - {ask} how many people are coming and multiply the price by that amount?
-                    - add another course?
-                    - give people a discount when they enter a (secret) couponcode?
-                    - add a children's menu?
-                    - think of other fun things to add?
+                    ## 挑战
+                    你可以给你的虚拟餐厅加上很多东西。比如，你能否……
+                    - {ask} 来了几个人，并将价格乘以人数？
+                    - 增加另一道菜？
+                    - 如果有人用了（秘密的）优惠码，给他一个折扣？
+                    - 增加一个儿童菜单？
+                    - 想想还能加什么有趣的东西？
                 example_code_2: |4
 
-                    In this example there are three courses, which requires more code and more additions in calculating the price.
+                    你可以写一段简单的餐厅代码，像这样：
                     ```
-                    {print} 'Welcome to Hedys restaurant'
-                    {print} 'Here is our menu:'
-                    {print} 'Our starters are salad, soup, or carpaccio'
-                    {print} 'Our main courses are pizza, lasagne, or spaghetti'
-                    {print} 'Our desserts are brownie, icecream, or milkshake'
-                    starter = {ask} 'Which starter would you like to have?'
-                    main = {ask} 'Which main course would you like?'
-                    dessert = {ask} 'Which dessert do you pick?'
-                    price = 0
-                    {if} starter {is} soup price = price + 6 {else} price = price + 7
-                    {if} main {is} pizza price = price + 10
-                    {if} main {is} lasagne price = price + 12
-                    {if} main {is} spaghetti price = price + 8
-                    {if} dessert {is} brownie price = price + 7
-                    {if} dessert {is} icecream price = price + 5
-                    {if} dessert {is} milkshake price = price + 4
-                    {print} 'You have ordered ' starter ' , ' main ' and ' dessert
-                    {print} 'That will be ' price ' dollars, please'
-                    {print} 'Thank you, enjoy your meal!'
+                    {print} '欢迎来到海迪餐厅'
+                    {print} '这是我们的菜单：'
+                    {print} '我们的前菜有沙拉、汤和肉片'
+                    {print} '我们的主菜有披萨、千层面和意面'
+                    {print} '我们的甜点有布朗尼、冰淇淋和奶昔'
+                    前菜 = {ask} '您想吃什么前菜？'
+                    主菜 = {ask} '您想要哪道主菜？'
+                    甜点 = {ask} '您选哪个甜点？'
+                    价格 = 0
+                    {if} 前菜 {is} 汤 价格 = 价格 + 6 {else} 价格 = 价格 + 7
+                    {if} 主菜 {is} 披萨 价格 = 价格 + 10
+                    {if} 主菜 {is} 千层面 价格 = 价格 + 12
+                    {if} 主菜 {is} 意面 价格 = 价格 + 8
+                    {if} 甜点 {is} 布朗尼 价格 = 价格 + 7
+                    {if} 甜点 {is} 冰淇淋 价格 = 价格 + 5
+                    {if} 甜点 {is} 奶昔 价格 = 价格 + 4
+                    {print} '您点了' 前菜 '、' 主菜 '和' 甜点
+                    {print} '请付' 价格 '元'
+                    {print} '谢谢，祝您用餐愉快！'
                     ```
-                start_code: "# place your code here"
+                start_code: "# 在这里写你的代码"
             7:
                 story_text: |
                     ## Restaurant
