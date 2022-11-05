@@ -7,10 +7,10 @@
     explanation: Запитайте щось, використовоючи `{ask}`, та назвіть відповідь за допомогою `{is}`.
 -   name: '{sleep}'
     explanation: '`{sleep}` робить так, що Hedy затримується на секунду, або на кілька секунд.'
-    demo_code: "{print} Let me think for one second...\n{sleep}\n{print} Hmm.. I need 3 more seconds...\n{sleep} 3\n{print} Eureka! Ive got it!"
--   name: '{is} with turtle'
-    explanation: Give a number a name using `{is}`. You can choose the name yourself.
-    demo_code: "angle {is} 90\n{turn} angle\n{forward} 100"
+    demo_code: "{print} Одну секунду, дайте подумати...\n{sleep}\n{print} Хм.. Мені потрібно ще 3 секунди...\n{sleep} 3\n{print} Еврика! В мене получилось!"
+-   name: '{is} з черепашкою'
+    explanation: Назвіть число за допомогою `{is}`. Ви самі можете вибрати назву.
+    demo_code: "уклін {is} 90\n{turn} уклін\n{forward} 100"
 1:
 -   explanation: Надрукуйте щось за допомогою `{print}`.
     demo_code: '{print} Привіт, ласкаво просимо в Hedy!'
@@ -31,8 +31,8 @@
     explanation: Поверніть малюнок черепашки за допомогою `{turn}`.
     demo_code: "{forward} 25\n{turn} {left}\n{forward} 25\n{turn} {right}"
 3:
--   name: Choose random
-    explanation: Choose a random word from a group with `{at}` and `{random}`.
+-   name: Виберіть випадкове
+    explanation: Виберіть випадкове слово з групи за допомогою `{at}` і `{random}`.
     demo_code: "animals {is} dog, cat, kangaroo\n{print} animals {at} {random}"
 -   name: '{add}'
     explanation: '`{add}` an item `{to_list}` a list.'
