@@ -25,7 +25,7 @@
     explanation: Ask something with `{ask}`. Beware! You need to give the answer a name with `{is}`.
     demo_code: "color {is} {ask} What is your favorite color?\n{print} color is your favorite!"
 -   name: '{sleep}'
-    explanation: Let Hedy pause for a (couple of) second(s).
+    explanation: '`{sleep}` låter Hedy vila en (eller flera) sekund(er).'
     demo_code: "{print} Let me think for one second...\n{sleep}\n{print} Hmm.. I need 3 more seconds...\n{sleep} 3\n{print} Eureka! Ive got it!"
 -   name: '{is} with turtle'
     explanation: Give a number a name using `{is}`. You can choose the name yourself.
@@ -35,10 +35,10 @@
     name: Choose random
     explanation: Choose a random word from a group with `{at}` and `{random}`.
 -   name: '{add}'
-    explanation: Add an item to a list.
+    explanation: '`{add}` lägg till en sak `{to_list}` en lista.'
     demo_code: "animals {is} cow, cat\n{add} dog {to_list} animals"
 -   name: '{remove}'
-    explanation: Remove an item from a list.
+    explanation: '`{remove}` en sak `{from}` en lista.'
     demo_code: "animals {is} cat, dog, cow\n{remove} dog {from} animals"
 4:
 -   name: '{print}'
@@ -138,7 +138,7 @@
     demo_code: "fruit = ['banana', 'apple', 'cherry']\nfirstfruit = fruit[1]\n{print} firstfruit"
 -   name: Get a random item from a list
     explanation: To get a random item from a list we use [random] so fruit[random] means, get a random fruit from the list!
-    demo_code: "fruit = ['banana', 'apple', 'cherry']\nrandom_fruit = fruit[random]\n{print} random_fruit"
+    demo_code: "frukt = ['banan', 'äpple', 'körsbär']\nslumpad_frukt = frukt[{random}]\n{print} slumpad_frukt"
 17:
 -   name: '{elif}'
     demo_code: "a = 2\n{if} a == 1:\n    {print} 'a is 1'\n{elif} a == 2:\n    {print} 'a is 2'\n{else}:\n    {print} 'a is not 1 or 2'"

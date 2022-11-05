@@ -105,11 +105,11 @@ levels:
                 {print} Tout de suite !
             mp_choice_options:
             -   option: "À la ligne 1, `{print}` doit être remplacé par `{ask}`"
-                feedback: "Tu es sûr que c'est un problème ?"
+                feedback: "Tu es sûr que quelque chose ne va pas ?"
             -   option: "À la ligne 1 `{print}` doit être remplacé par `{echo}`"
                 feedback: "Tu es sûr que quelque chose ne va pas ?"
             -   option: "À la ligne 3, il faut remplacer `{echo}` par `{print}`"
-                feedback: "Tu es sûr que c'est un problème ?"
+                feedback: "Tu es sûr que quelque chose ne va pas ?"
             -   option: "Rien ! C'est un code parfait !"
                 feedback: "Exact !"
             correct_answer: "D"
@@ -143,7 +143,7 @@ levels:
             -   option: "`{echo}` à la ligne 3 devrait être `{ask}`"
                 feedback: "Non, il faut bien un `{echo}` ici ! Où est posée la question ?"
             -   option: "Rien. C'est un code parfait !"
-                feedback: "Regarde plus attentivement..."
+                feedback: "Cherches bien l'erreur..."
             correct_answer: "B"
             hint: "`{ask}` te permet de poser une question"
             question_score: '10'
@@ -159,18 +159,18 @@ levels:
             question_score: '10'
     2:
         1:
-            question_text: "Quelle est la phrase vraie ?"
+            question_text: "Quelle affirmation est vraie ?"
             mp_choice_options:
-            -   option: "Au niveau 2, la commande `{print}` n'existe plus"
-                feedback: "`{print}` fonctionne encore"
-            -   option: "Au niveau 2, la commande `{ask}` n'existe plus"
-                feedback: "`{ask}` fonctionne encore"
-            -   option: "Au niveau 2, la commande `{echo}` n'existe plus"
+            -   option: "Tu peux utiliser la commande {print} pour poser des questions."
+                feedback: "C'est a ça que demande sert"
+            -   option: "Tu peux utiliser la commande {ask} pour afficher les réponses."
+                feedback: "Ce n'est pas vrai"
+            -   option: "Avec la commande {print} tu peux faire apparaître du texte"
                 feedback: "Bien"
-            -   option: "Au niveau 2, toutes les commandes du niveau 1 fonctionnent encore"
-                feedback: "Non, il y a une des commandes qui n'existe plus."
+            -   option: "Avec la commande {sleep}, tu peux supprimer du texte de l'écran."
+                feedback: "Sleep ne fonctionne pas comme ça."
             correct_answer: "C"
-            hint: "`{print}` et `{ask}` existent encore."
+            hint: "`{print}` fonctionne toujours de la même manière qu'au niveau 1."
             question_score: '10'
         2:
             question_text: "Quel code est correct ?"
@@ -222,12 +222,11 @@ levels:
             question_score: '10'
         5:
             question_text: "Que se passe-t-il lorsque tu utilises la commande `{sleep}` ?"
-            code: "{sleep}"
             mp_choice_options:
             -   option: "Il ralentit ton ordinateur"
-                feedback: "Heureusement, non !"
+                feedback: "heureusement, non !"
             -   option: "Il ferme Hedy"
-                feedback: "Heureusement, non !"
+                feedback: "heureusement, non !"
             -   option: "Votre programme se met en pause pendant une seconde puis continue"
                 feedback: "C'est vrai !"
             -   option: "On le met à la fin pour qu'Hedy sache que ton programme est terminé"
@@ -236,7 +235,7 @@ levels:
             hint: "L'ordinateur attend une seconde à la commande `{sleep}`"
             question_score: '10'
         6:
-            question_text: "Qu'est-ce qui doit figurer sur les lignes ?"
+            question_text: "Que doit-il y avoir sur les lignes ?"
             code: |-
                 {print} Et le prix du meilleur langage de programmation revient à...
                 _?_
@@ -249,9 +248,9 @@ levels:
             -   option: "```\n{print}\n```\n"
                 feedback: "Il n'y a pas de texte à afficher avec `{print}` à cet endroit"
             -   option: "```\n{ask}\n```\n"
-                feedback: "Il n'y a pas de question ici"
+                feedback: "Il n'y a pas de question à poser ici"
             correct_answer: "A"
-            hint: "Pause pour un effet dramatique..."
+            hint: "Pause pour effet dramatique..."
             question_score: '10'
         7:
             question_text: "Quelle commande doit être utilisée sur la ligne 2 ?"
@@ -274,25 +273,25 @@ levels:
         8:
             question_text: "Comment corriger la première ligne de code ?"
             code: |-
-                ask is Quel âge as-tu ?
-                print âge
+                {ask} {is} Quel âge as-tu ?
+                {print} age
             mp_choice_options:
             -   option: "âge ask is Quel âge as-tu ?"
                 feedback: "Ce n'est pas le bon ordre !"
             -   option: "ask is âge Quel âge as-tu ?"
                 feedback: "Ce n'est pas le bon ordre !"
             -   option: "âge is ask Quel âge as-tu ?"
-                feedback: "C'est le bon ordre !"
+                feedback: "Tu as compris !"
             -   option: "âge is Quel âge as-tu ?"
-                feedback: "Où est la commande 'ask' ?"
+                feedback: "Où est la commande `{ask}` ?"
             correct_answer: "C"
             hint: "Le nom de la variable doit venir en premier"
             question_score: '10'
         9:
             question_text: "Qu'est-ce qui ne va pas dans ce code ?"
             code: |-
-                chiens is animaux
-                print Jaime les animaux
+                chiens {is} animal
+                {print} Jaime les animaux
             mp_choice_options:
             -   option: "La ligne 1 devrait dire : chiens is animal"
                 feedback: "Le nom de la variable est animaux"
@@ -301,9 +300,9 @@ levels:
             -   option: "La ligne 2 devrait dire : print Jaime les animals"
                 feedback: "Le nom de la variable est animaux"
             -   option: "La ligne 2 devrait dire : sleep Jaime les animaux"
-                feedback: "sleep n'est pas utilisé pour afficher du texte"
+                feedback: "Sleep n'est pas utilisé pour `{print}` du texte"
             correct_answer: "B"
-            hint: "Tu veux afficher 'J aime les chiens'"
+            hint: "Tu veux `{print}` 'J aime les chiens'"
             question_score: '10'
         10:
             question_text: "Quelle commande doit être utilisée sur la ligne 1 ?"
@@ -1415,7 +1414,7 @@ levels:
             correct_answer: "D"
             hint: "La ligne 2 dit pour 'chaque plat dans la liste des plats' ."
             question_score: '10'
-            output: "1\n2\n3\n4\n5\nOnce I caught a fish alive!"
+            code: "{for} i {in} {range} 1 {to} 3\n    {print} i"
         3:
             question_text: "Quelle sortie est correcte ?"
             mp_choice_options:
@@ -1436,10 +1435,6 @@ levels:
             output: "10\n9\n8\n7\n6\n5\n4\n3\n2\n1\n0"
         4:
             question_text: "Où est le problème avec ce code ?"
-            code: |-
-                courses = pommes, pain, lait
-                for article in courses
-                    print 'On a besoin de ' courses
             mp_choice_options:
             -   option: "La ligne 2 doit commencer avec 4 espaces en guise d'indentation."
                 feedback: "Non, ce n'est pas le cas. Seule la ligne 3 a besoin d'une indentation, et il y en a."
@@ -1452,6 +1447,7 @@ levels:
             correct_answer: "C"
             hint: "On veut pour chaque article dans la liste de courses"
             question_score: '10'
+            output: "10\n9\n8\n7\n6\n5\n4\n3\n2\n1\n0"
         5:
             question_text: "Comment compléter la ligne de commande ?"
             code: |-
@@ -1781,7 +1777,6 @@ levels:
             hint: You can put an `{if}` command inside an `{if}` command.
             question_text: How many `{if}` commands can be placed inside another `{if}` command?
             question_score: '10'
-            code: '# No code provided'
         10:
             mp_choice_options:
             -   option: All lines should start with 4 spaces

@@ -29,7 +29,6 @@ class HedyTester(unittest.TestCase):
   number_comparison_commands = ['>', '>=', '<', '<=']
   comparison_commands = number_comparison_commands + ['!=']
   arithmetic_operations = ['+', '-', '*', '/']
-  arithmetic_transpiled_operators = [('*', '*'), ('/', '//'), ('+', '+'), ('-', '-')]
   quotes = ["'", '"']
 
   @staticmethod

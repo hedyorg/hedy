@@ -91,12 +91,13 @@ def render_tutorial_mode(level, cheatsheet, commands, adventures, parsons_exerci
 
     return render_template("code-page.html", **arguments_dict, cheatsheet=cheatsheet, blur_button_available = False)
 
-def render_specific_adventure(level_number, adventure, version, prev_level, next_level):
+def render_specific_adventure(commands, level_number, adventure, version, prev_level, next_level):
     arguments_dict = {}
 
     # Meta stuff
     arguments_dict['specific_adventure'] = True
     arguments_dict['level_nr'] = str(level_number)
+    arguments_dict['commands'] = commands
     arguments_dict['level'] = level_number
     arguments_dict['prev_level'] = prev_level
     arguments_dict['next_level'] = next_level

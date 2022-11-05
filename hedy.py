@@ -33,8 +33,11 @@ local_keywords_enabled = True
 # dictionary to store transpilers
 TRANSPILER_LOOKUP = {}
 
-# Python keywords need hashing when used as var names
-reserved_words = ['and', 'except', 'lambda', 'with', 'as', 'finally', 'nonlocal', 'while', 'assert', 'False', 'None', 'yield', 'break', 'for', 'not', 'class', 'from', 'or', 'continue', 'global', 'pass', 'def', 'if', 'raise', 'del', 'import', 'return', 'elif', 'in', 'True', 'else', 'is', 'try']
+# builtins taken from 3.11.0 docs: https://docs.python.org/3/library/functions.html
+PYTHON_BUILTIN_FUNCTIONS = ['abs', 'aiter', 'all', 'any', 'anext', 'ascii', 'bin', 'bool', 'breakpoint', 'bytearray', 'bytes', 'callable', 'chr', 'classmethod', 'compile', 'complex', 'delattr', 'dict', 'dir', 'divmod', 'enumerate', 'eval', 'exec', 'filter', 'float', 'format', 'frozenset', 'getattr', 'globals', 'hasattr', 'hash', 'help', 'hex', 'id', 'input', 'int', 'isinstance', 'issubclass', 'iter', 'len', 'list', 'locals', 'map', 'max', 'memoryview', 'min', 'next', 'object', 'oct', 'open', 'ord', 'pow', 'print', 'property', 'range', 'repr', 'reversed', 'round', 'set', 'setattr', 'slice', 'sorted', 'staticmethod', 'str', 'sum', 'super', 'tuple', 'type', 'vars', 'zip']
+PYTHON_KEYWORDS = ['and', 'except', 'lambda', 'with', 'as', 'finally', 'nonlocal', 'while', 'assert', 'False', 'None', 'yield', 'break', 'for', 'not', 'class', 'from', 'or', 'continue', 'global', 'pass', 'def', 'if', 'raise', 'del', 'import', 'return', 'elif', 'in', 'True', 'else', 'is', 'try', 'int']
+# Python keywords and function names need hashing when used as var names
+reserved_words = set(PYTHON_BUILTIN_FUNCTIONS + PYTHON_KEYWORDS)
 
 # Let's retrieve all keywords dynamically from the cached KEYWORDS dictionary
 indent_keywords = []
@@ -1258,6 +1261,9 @@ class ConvertToPython_1(ConvertToPython):
     def comment(self, meta, args):
         return f"#{''.join(args)}"
 
+    def empty_line(self, meta, args):
+        return ''
+
     def forward(self, meta, args):
         if len(args) == 0:
             return sleep_after('t.forward(50)', False)
@@ -1859,6 +1865,9 @@ class ConvertToPython_12(ConvertToPython_11):
         if add_sleep:
             return sleep_after(transpiled, False)
         return transpiled
+    
+    def division(self, meta, args):
+        return self.process_calculation(args, '/')
 
 @v_args(meta=True)
 @hedy_transpiler(level=13)
@@ -2207,16 +2216,17 @@ def preprocess_blocks(code, level):
     for line in lines:
         leading_spaces = find_indent_length(line)
 
+        # ignore whitespace-only lines
+        if leading_spaces == len(line):
+            processed_code.append('')
+            continue
+
         line_number += 1
 
         # first encounter sets indent size for this program
         if indent_size_adapted == False and leading_spaces > 0:
             indent_size = leading_spaces
             indent_size_adapted = True
-
-        # ignore whitespace-only lines
-        if leading_spaces == len(line):
-            continue
 
         #calculate nuber of indents if possible
         if indent_size != None:
@@ -2272,6 +2282,7 @@ def preprocess_blocks(code, level):
         processed_code.append('end-block')
     return "\n".join(processed_code)
 
+
 def preprocess_ifs(code):
     processed_code = []
     lines = code.split("\n")
@@ -2279,13 +2290,13 @@ def preprocess_ifs(code):
         line = lines[i]
         next_line = lines[i + 1]
         # todo convert to all languages!!
+        # if this line starts with if but does not contain an else, and the next line too is not an else.
         if line[0:2] == "if" and (not next_line[0:4] == 'else') and (not ("else" in line)):
-            # is this line just a condition and no other keyword (because that is no problem)
-            if "print" in line or "ask" in line or "forward" in line or "turn" in line: # and this should also (TODO) check for a second is cause that too is problematic.
-                # a second command, but also no else in this line -> check next line!
-                
-                # no else in next line?
-                # add a nop (like 'Pass' but we just insert a meaningless assign)
+            # is there an command in the line too (cause just if, f.e. if name is Hank, is fine)
+            commands = ["print", "ask", "forward", "turn"]
+            if any(x in line for x in commands): # and this should also
+
+                # then add a nop (like 'Pass' but we just insert a meaningless assign)
                 line = line + " else _ is x"
 
         processed_code.append(line)
