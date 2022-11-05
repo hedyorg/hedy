@@ -199,14 +199,14 @@ levels:
             mp_choice_options:
             -   option: "你可以用`{print}`命令来提问。"
                 feedback: "这是`{ask}`的作用"
-            -   option: "第二关里不能用`{ask}`命令了"
-                feedback: "`{ask}`仍然有效！"
-            -   option: "第二关里不能用`{echo}`命令了"
+            -   option: "你可以用 {ask} 命令来复述回答。"
+                feedback: "不是的"
+            -   option: "你可以用`{print}`命令显示文本"
                 feedback: "不错"
-            -   option: "第二关里仍然可以使用所有第一关的命令"
-                feedback: "不，有一个命令不能用了。"
+            -   option: "你可以用 {sleep} 命令清除屏幕上的文本。"
+                feedback: "这不是sleep的作用。"
             correct_answer: "C"
-            hint: "`{print}`和`{ask}`还在。"
+            hint: "`{print}`的作用仍然和第1关中一样"
             question_score: '10'
         2:
             question_text: "哪段代码是正确的？"
@@ -865,8 +865,8 @@ levels:
             question_text: "Which command should be filled in on the _?_?"
             code: |-
                 数字 {is} {ask} '你的幸运数字是多少？'
-                {if} 数字 {is} 5 {print} 我也是！
-                _?_ {print} 我的幸运数字是 5！
+                {if} 数字 {is} 5 {print} '我也是！'
+                _?_ {print} '我的幸运数字是 5！'
             mp_choice_options:
             -   option: |
                     ```
@@ -1556,21 +1556,21 @@ levels:
             hint: "Both lines are repeated twice."
             question_score: '10'
         2:
-            question_text: "What is wrong with this code?"
+            question_text: "这段代码有什么问题？"
             code: |-
                 {repeat} 5 {times}
-                {print} 'Hedy is cool!'
+                {print} '海迪很酷！'
             mp_choice_options:
-            -   option: "This should be only one line, not 2."
-                feedback: "No it should be 2 lines."
-            -   option: "This `{print}` command has to go"
-                feedback: "No, you need it."
-            -   option: "There is a spelling mistake in the `{repeat}` command."
-                feedback: "Nee, repeat is de goede spelling"
-            -   option: "The second line need to start with 4 spaces as indentation."
-                feedback: "Correct!"
+            -   option: "这里应该只有一行代码，不是两行。"
+                feedback: "不，应该有两行。"
+            -   option: "必须去掉`{print}`命令。"
+                feedback: "不，你需要它。"
+            -   option: "`{repeat}`命令打错了。"
+                feedback: "不，没打错"
+            -   option: "第二行开头需要缩进空四格。"
+                feedback: "正确！"
             correct_answer: "D"
-            hint: "Something is missing in the second line?"
+            hint: "第二行缺了什么？"
             question_score: '10'
         3:
             question_text: "What output will be produced when you run this program?"
@@ -1798,27 +1798,27 @@ levels:
             hint: "all the indentation is done correctly."
             question_score: '10'
         2:
-            question_text: "What will be printed after entering the correct password?"
+            question_text: "输入正确的密码后会显示什么？"
             code: |-
-                password = {ask} 'What is the password?'
-                correct_password = Hedy
-                {if} password {is} correct_password
+                密码 = {ask} '密码是什么？'
+                正确密码 = '海迪'
+                {if} 密码 {is} 正确密码
                     {repeat} 2 {times}
-                        {print} 'Good job!'
-                        {print} 'You can use the computer!'
+                        {print} '做得好！'
+                        {print} '你可以用电脑了！'
                 {else}
-                    {print} 'The computer will explode in 5... 4... 3... 2... 1...'
+                    {print} '电脑即将爆炸。倒计时，5... 4... 3... 2... 1...'
             mp_choice_options:
-            -   option: "Good job! \n Good job!"
-                feedback: "That's not it!"
-            -   option: "The computer will explode in 5... 4... 3... 2... 1..."
-                feedback: "That's not it!"
-            -   option: "Good job ! \n Good job! \n You can use the computer!"
-                feedback: "That's not it!"
-            -   option: "Good job! \n You can use the computer! \n Good job! \n You can use the computer!"
-                feedback: "Correct!"
+            -   option: "```\n做得好！\n做得好！\n```"
+                feedback: "不是这个！"
+            -   option: "```\n电脑即将爆炸。倒计时，5... 4... 3... 2... 1...\n```"
+                feedback: "不是这个！"
+            -   option: "```\n做得好！\n做得好！\n你可以用电脑了！\n```"
+                feedback: "不是这个！"
+            -   option: "```\n做得好！\n你可以用电脑了！\n做得好！\n你可以用电脑了！\n```"
+                feedback: "正确！"
             correct_answer: "D"
-            hint: "Everything under the `{repeat}` command is repeated twice."
+            hint: "`{repeat}`命令下的所有东西都会重复两次。"
             question_score: '10'
         3:
             question_text: "Which case should you choose to win a million dollars?"
@@ -2024,131 +2024,113 @@ levels:
             question_score: '10'
     11:
         1:
-            question_text: "What will be the output from this code?"
-            code: |-
-                {for} i {in} {range} 1 {to} 3
-                    {print} i
-            mp_choice_options:
-            -   option: "1\n2\n3"
-                feedback: "Correct!"
-            -   option: "1 2 3"
-                feedback: "That's not it"
-            -   option: "1, 2, 3"
-                feedback: "That's not it"
-            -   option: "123"
-                feedback: "That's not it"
-            correct_answer: "A"
-            hint: "How do the numbers appear in the screen?"
-            question_score: '10'
-        2:
-            question_text: "Which code was used to get this output?"
-            mp_choice_options:
-            -   option: |
-                    ```
-                    {for} i {in} {range} 1 {to} 5
-                        {print} i
-                    {print} 'Once I caught a fish alive!'
-                    ```
-                feedback: "Perfect"
-            -   option: |
-                    ```
-                    {for} i {in} {range} 1 {to} 5
-                    {print} i
-                    {print} 'Once I caught a fish alive!'
-                    ```
-                feedback: "This code won't work. You need an indent after {for}."
-            -   option: |
-                    ```
-                    {for} i {in} {range} 1 {to} 5
-                        {print} i
-                        {print} 'Once I caught a fish alive!'
-                    ```
-                feedback: "Now Hedy will count '1 Once I caught a fish alive!, 2 Once I caught a fish alive! etc."
-            -   option: |
-                    ```
-                    {for} i {in} {range} 1 {to} 5
-                        {print} 'i'
-                    {print} 'Once I caught a fish alive!'
-                    ```
-                feedback: "i is a variable and shouldn't have quotation marks"
-            correct_answer: "A"
-            hint: "First all the numbers, then the sentence"
-            question_score: '10'
-            code: "{for} i {in} {range} 1 {to} 3\n    {print} i"
-        3:
-            question_text: "Which code was used to get this output?"
-            mp_choice_options:
-            -   option: |
-                    ```
-                    {for} i {in} {range} 0 {to} 10
-                        {print} i
-                    ```
-                feedback: "Now Hedy prints the numbers from 0 to 10 instead of 10 to 0."
-            -   option: |
-                    ```
-                    {for} i {in} {range} 0 to 10
-                        {print} - i
-                    ```
-                feedback: "Hedy would print negative numbers in this case."
-            -   option: |
-                    ```
-                    {for} i {in} {range} 10 to 0
-                        {print} i
-                    ```
-                feedback: "Unfortunately this does not exist."
-            -   option: |
-                    ```
-                    {for} i {in} {range} 0 {to} 10
-                        {print} 10 - i
-                    ```
-                feedback: "That's right!"
-            correct_answer: "D"
-            hint: "It has to be a calculation..."
-            question_score: '10'
-            output: "10\n9\n8\n7\n6\n5\n4\n3\n2\n1\n0"
-        4:
-            question_text: "What's wrong with this code?"
-            mp_choice_options:
-            -   option: "The i in the last line need quotation marks"
-                feedback: "No it doesn't."
-            -   option: "You can't use `{range}` 1 `{to}` 5 only `{range}` 1 `{to}` 10"
-                feedback: "You could use 1 to 5 just as well!"
-            -   option: "Line 1 needs to start with an indention."
-                feedback: "Not line 1..."
-            -   option: "Line 2 needs to start with an indention"
-                feedback: "Perfect!"
-            correct_answer: "D"
-            hint: "There is something wrong with the indention"
-            question_score: '10'
-            output: "10\n9\n8\n7\n6\n5\n4\n3\n2\n1\n0"
-        5:
-            question_text: "What word should be at the place of the question mark?"
+            question_text: "问号处应该填什么？"
             code: |-
                 {for} i {in} _?_ 1 {to} 10
                     {print} i
             mp_choice_options:
-            -   option: |
-                    ```
-                    counter
-                    ```
-                feedback: "No"
-            -   option: |
-                    ```
-                    {range}
-                    ```
-                feedback: "Correct"
-            -   option: |
-                    ```
-                    {if}
-                    ```
-                feedback: "No"
-            -   option: |
-                    ```
-                    {for}
-                    ```
-                feedback: "No"
+            -   option: "```\n计数器\n```\n"
+                feedback: "不是"
+            -   option: "```\n{range}\n```\n"
+                feedback: "正确"
+            -   option: "```\n{if}\n```\n"
+                feedback: "不是"
+            -   option: "```\n{for}\n```\n"
+                feedback: "不是"
             correct_answer: "B"
-            hint: "What did you learn in this level?"
+            hint: "你学了什么？"
+            question_score: '10'
+        2:
+            question_text: "这段代码会输出什么？"
+            mp_choice_options:
+            -   option: |-
+                    1
+                    2
+                    3
+                feedback: "正确！"
+            -   option: |-
+                    1 2 3
+                feedback: "不是这个"
+            -   option: |-
+                    1, 2, 3
+                feedback: "不是这个"
+            -   option: |-
+                    123
+                feedback: "不是这个"
+            correct_answer: "A"
+            hint: "这些数字会如何显示在屏幕上？"
+            question_score: '10'
+            code: "{for} i {in} {range} 1 {to} 3\n    {print} i"
+        3:
+            question_text: "哪段代码可以输出这个？"
+            mp_choice_options:
+            -   option: |
+                    ```
+                    {for} i {in} {range} 1 {to} 5
+                        {print} i
+                    {print} '我曾经抓住一条活鱼！'
+                    ```
+                feedback: "完美"
+            -   option: |
+                    ```
+                    {for} i {in} {range} 1 {to} 5
+                    {print} i
+                    {print} '我曾经抓住一条活鱼！'
+                    ```
+                feedback: "这段代码无法运行。你需要在 {for} 后面缩进。"
+            -   option: |
+                    ```
+                    {for} i {in} {range} 1 {to} 5
+                        {print} i
+                        {print} '我曾经抓住一条活鱼！'
+                    ```
+                feedback: "那么海迪会说“1 我曾经抓住一条活鱼！2 我曾经抓住一条活鱼！”……等等。"
+            -   option: |
+                    ```
+                    {for} i {in} {range} 1 {to} 5
+                        {print} 'i'
+                    {print} '我曾经抓住一条活鱼！'
+                    ```
+                feedback: "i 是一个变量，不应该加引号"
+            correct_answer: "A"
+            hint: "先输出所有数字，再输出那句话"
+            question_score: '10'
+            output: "1\n2\n3\n4\n5\n我曾经抓住一条活鱼！"
+        4:
+            question_text: "哪段代码可以输出这个？"
+            mp_choice_options:
+            -   option: "```\n{for} i {in} {range} 0 {to} 10\n    {print} i\n```\n"
+                feedback: "这样海迪会打印0到10，而不是10到0。"
+            -   option: "```\n{for} i {in} {range} 0 to 10\n    {print} - i\n```\n"
+                feedback: "这样海迪会打印负数。"
+            -   option: "```\n{for} i {in} {range} 10 {to} 0\n    {print} 10 9 8 7 6 5 4 3 2 1 0\n```\n"
+                feedback: "不幸的是这样并不对。"
+            -   option: "```\n{for} i {in} {range} 0 {to} 10\n    {print} 10 - i\n```\n"
+                feedback: "对！"
+            correct_answer: "D"
+            hint: "这里需要用到计算……"
+            question_score: '10'
+            output: "10\n9\n8\n7\n6\n5\n4\n3\n2\n1\n0"
+        5:
+            question_text: "这段代码哪里错了？"
+            code: |-
+                {for} i {in} {range} 1 {to} 10
+                {print} i
+            mp_choice_options:
+            -   option: |-
+                    最后一行的 i 需要引号
+                feedback: "不，它不需要。"
+            -   option: |-
+                    不能写`{range}` 1 `{to}` 5，只能写`{range}` 1 `{to}` 10
+                feedback: "也可以用1到5！"
+            -   option: |-
+                    第1行开头需要缩进。
+                feedback: "不是第1行……"
+            -   option: |-
+                    第二行开头需要缩进
+                feedback: "太棒了！"
+            correct_answer: "D"
+            hint: "缩进有地方不对"
             question_score: '10'
         6:
             question_text: "How many times does the word Hello appear on your screen when you run the code?"
