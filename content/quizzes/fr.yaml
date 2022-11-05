@@ -105,11 +105,11 @@ levels:
                 {print} Tout de suite !
             mp_choice_options:
             -   option: "À la ligne 1, `{print}` doit être remplacé par `{ask}`"
-                feedback: "Tu es sûr que c'est un problème ?"
+                feedback: "Tu es sûr que quelque chose ne va pas ?"
             -   option: "À la ligne 1 `{print}` doit être remplacé par `{echo}`"
                 feedback: "Tu es sûr que quelque chose ne va pas ?"
             -   option: "À la ligne 3, il faut remplacer `{echo}` par `{print}`"
-                feedback: "Tu es sûr que c'est un problème ?"
+                feedback: "Tu es sûr que quelque chose ne va pas ?"
             -   option: "Rien ! C'est un code parfait !"
                 feedback: "Exact !"
             correct_answer: "D"
@@ -143,7 +143,7 @@ levels:
             -   option: "`{echo}` à la ligne 3 devrait être `{ask}`"
                 feedback: "Non, il faut bien un `{echo}` ici ! Où est posée la question ?"
             -   option: "Rien. C'est un code parfait !"
-                feedback: "Regarde plus attentivement..."
+                feedback: "Cherches bien l'erreur..."
             correct_answer: "B"
             hint: "`{ask}` te permet de poser une question"
             question_score: '10'
@@ -159,10 +159,10 @@ levels:
             question_score: '10'
     2:
         1:
-            question_text: "Quelle est la phrase vraie ?"
+            question_text: "Quelle affirmation est vraie ?"
             mp_choice_options:
-            -   option: "Au niveau 2, la commande `{print}` n'existe plus"
-                feedback: "`{print}` fonctionne encore"
+            -   option: "Tu peux utiliser la commande {print} pour poser des questions."
+                feedback: "C'est a ça que demande sert"
             -   option: "Au niveau 2, la commande `{ask}` n'existe plus"
                 feedback: "`{ask}` fonctionne encore"
             -   option: "Au niveau 2, la commande `{echo}` n'existe plus"
