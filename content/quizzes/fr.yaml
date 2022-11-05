@@ -281,17 +281,17 @@ levels:
             -   option: "ask is âge Quel âge as-tu ?"
                 feedback: "Ce n'est pas le bon ordre !"
             -   option: "âge is ask Quel âge as-tu ?"
-                feedback: "C'est le bon ordre !"
+                feedback: "Tu as compris !"
             -   option: "âge is Quel âge as-tu ?"
-                feedback: "Où est la commande 'ask' ?"
+                feedback: "Où est la commande `{ask}` ?"
             correct_answer: "C"
             hint: "Le nom de la variable doit venir en premier"
             question_score: '10'
         9:
             question_text: "Qu'est-ce qui ne va pas dans ce code ?"
             code: |-
-                chiens is animaux
-                print Jaime les animaux
+                chiens {is} animal
+                {print} Jaime les animaux
             mp_choice_options:
             -   option: "La ligne 1 devrait dire : chiens is animal"
                 feedback: "Le nom de la variable est animaux"
@@ -300,9 +300,9 @@ levels:
             -   option: "La ligne 2 devrait dire : print Jaime les animals"
                 feedback: "Le nom de la variable est animaux"
             -   option: "La ligne 2 devrait dire : sleep Jaime les animaux"
-                feedback: "sleep n'est pas utilisé pour afficher du texte"
+                feedback: "Sleep n'est pas utilisé pour `{print}` du texte"
             correct_answer: "B"
-            hint: "Tu veux afficher 'J aime les chiens'"
+            hint: "Tu veux `{print}` 'J aime les chiens'"
             question_score: '10'
         10:
             question_text: "Quelle commande doit être utilisée sur la ligne 1 ?"
