@@ -61,7 +61,7 @@ class TestsLevel12(HedyTester):
 
     def test_print_line_with_spaces_works(self):
         code = "print 'hallo'\n      \nprint 'hallo'"
-        expected = "print(f'''hallo''')\n\nprint(f'''hallo''')"
+        expected = "print(f'''hallo''')\nprint(f'''hallo''')"
         expected_commands = [Command.print, Command.print]
 
         self.multi_level_tester(
