@@ -566,46 +566,46 @@ adventures:
                     Be careful! In the previous levels apostrophes were allowed in the text, but in this level Hedy will confuse them for quotation marks and the code will not work!
                     So instead of typing  `{print} Today we're serving pizza` , you should type `{print} 'Today we are serving pizza'`
                 example_code: |
-                    ## Example Hedy Restaurant
+                    ## 海迪餐厅示例
                     ```
-                    {print} 'Welcome to Hedys restaurant!'
-                    {print} 'Today we are serving pizza or lasagna.'
-                    food {is} {ask} 'What would you like to eat?'
-                    {print} 'Great choice! The ' food ' is my favorite!'
-                    topping {is} {ask} 'Would you like meat or veggies on that?'
-                    {print} food ' with ' topping ' is on its way!'
-                    drinks {is} {ask} 'What would you like to drink with that?'
-                    {print} 'Thank you for your order.'
-                    {print} 'Your ' food ' and ' drinks ' will be right there!'
+                    {print} '欢迎来到海迪餐厅！'
+                    {print} '今天我们提供披萨和千层面。'
+                    食物 {is} {ask} '您想吃什么？'
+                    {print} '选得好！这是我最爱的食物！'
+                    配料 {is} {ask} '您想要加肉的还是蔬菜的？'
+                    {print} '加了' 配料 '的' 食物 '已经在做了！'
+                    饮料 {is} {ask} '您想喝点什么？'
+                    {print} '谢谢您的点单。'
+                    {print} '您的' 食物 '和' 饮料 '马上就来！'
                     ```
-                start_code: "# place your code here"
+                start_code: "# 在这里写你的代码"
             5:
                 story_text: |
-                    ## Restaurant
-                    In this level the {if} command allows you to {ask} your customers questions and give different responses to the answers.
-                    In the example below, you see that you can {ask} the customer {if} they want to hear the specials and Hedy can respond accordingly.
+                    ## 餐厅
+                    在这一关，{if}命令让你可以对你的客人{ask}，并对其回答做出不同的反应。
+                    在下面的例子里，你能看到你可以{ask}你的客人是否想听推荐，海迪会根据回答做出相应的回应。
 
                 example_code: |
                     ```
-                    {print} 'Welcome to Hedys restaurant!'
-                    special {is} {ask} 'Would you like to hear our specials today?'
-                    {if} special {is} yes {print} 'Todays special is chicken piri piri and rice.' {else} {print} 'No problem.'
-                    food {is} {ask} 'What would you like to eat?'
-                    {print} 'One ' food ', coming right up!'
-                    drink {is} {ask} 'What would you like to drink with that?'
-                    {if} drink {is} cola {print} 'Im sorry, we are out of cola!' {else} {print} 'Great choice!'
-                    anything {is} {ask} 'Would you like anything {else}?'
-                    {print} 'Let me repeat your order...'
-                    {print} 'One ' food
-                    {if} drink {is} cola {print} 'and...' {else} {print} 'One ' drink
-                    {if} anything {is} no {print} 'Thats it!' {else} {print} 'One ' anything
-                    {print} 'Thank you for your order and enjoy your meal!'
+                    {print} '欢迎来到海迪餐厅！'
+                    推荐 {is} {ask} '您想听我们今天的推荐吗？'
+                    {if} 推荐 {is} 是 {print} '今天的推荐是考级' {else} {print} 'No problem.'
+                    食物 {is} {ask} '您想吃什么？'
+                    {print} '一份' food '，马上就来！'
+                    饮料 {is} {ask} '您想配点什么喝的？'
+                    {if} 饮料 {is} 可乐 {print} '对不起，可乐卖完了！' {else} {print} '选得好！'
+                    别的 {is} {ask} '您还想要别的吗？'
+                    {print} '我复述一下您的点单'
+                    {print} '一份' 食物
+                    {if} 饮料 {is} 可乐 {print} '以及……' {else} {print} '一杯' 饮料
+                    {if} 别的 {is} 不用 {print} '就是这些' {else} {print} '一份' 别的
+                    {print} '谢谢您的点单。祝您用餐愉快！'
                     ```
                 story_text_2: |
                     ## 挑战
                     你能想出更多的问题，在顾客点餐时`{ask}` ，并通过使用`{if}` 命令对他们不同的应答做出合适的答复吗？
 
-                start_code: "# place your code here"
+                start_code: "# 在这里写你的代码"
             6:
                 story_text: |
                     ## Restaurant
