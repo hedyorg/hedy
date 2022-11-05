@@ -197,16 +197,16 @@ levels:
         1:
             question_text: "Which statement is true?"
             mp_choice_options:
-            -   option: "In level 2 the `{print}` command doesn't exist anymore"
-                feedback: "`{print}` still works"
-            -   option: "In level 2 the `{ask}` command doesn't exist anymore"
-                feedback: "`{ask}` still works!"
-            -   option: "In level 2 the `{echo}` command doesn't exist anymore"
+            -   option: "You can use the {print} command to ask questions."
+                feedback: "That is what ask is for"
+            -   option: "You can use the {ask} command to echo answers."
+                feedback: "That is not true"
+            -   option: "With the {print} command you can make text appear"
                 feedback: "Good"
-            -   option: "In level 2 all the level 1 commands still work"
-                feedback: "No one command doesn't work anymore."
+            -   option: "With the {sleep} command, you can remove text from the screen."
+                feedback: "That's not how sleep works."
             correct_answer: "C"
-            hint: "`{print}` and `{ask}` still exist."
+            hint: "`{print}` still works the same way as in level 1"
             question_score: '10'
         2:
             question_text: "Which code is correct?"
@@ -270,7 +270,6 @@ levels:
             question_score: '10'
         5:
             question_text: "What happens when you use the `{sleep}` command?"
-            code: "{sleep}"
             mp_choice_options:
             -   option: "It slows down your computer"
                 feedback: "fortunately not!"
@@ -642,7 +641,6 @@ levels:
             correct_answer: "A"
             hint: "The person who walked the dog yesterday should be removed from the list."
             question_score: '10'
-
     4:
         1:
             question_text: "Which of these is true?"
@@ -866,8 +864,8 @@ levels:
             question_text: "Which command should be filled in on the _?_?"
             code: |-
                 number {is} {ask} 'What is your lucky number?'
-                {if} number {is} 5 {print} Mine too!
-                _?_ {print} My lucky number is 5!
+                {if} number {is} 5 {print} 'Mine too!'
+                _?_ {print} 'My lucky number is 5!'
             mp_choice_options:
             -   option: |
                     ```
@@ -1432,7 +1430,7 @@ levels:
                     ```
                     {repeat} 2 {times} {print} 'Here comes the sun'
                     {print} 'And I say'
-                    {print} 'Its alright'"
+                    {print} 'Its alright'
                 feedback: "Where did you leave 'Do do do do'?"
             -   option: |
                     ```
@@ -1447,7 +1445,7 @@ levels:
                     {repeat} 2 {times} {print} 'Here comes the sun'
                     {repeat} 2 {times} {print} 'Do do'
                     {print} 'And I say'
-                    {print} 'Its alright'"
+                    {print} 'Its alright'
                     ```
                 feedback: "This is not the correct order.."
             hint: "`{repeat}` can only be used if you want to execute the same line multiple times in a row."
@@ -1461,7 +1459,7 @@ levels:
                 Help!
                 Help!
                 Help!
-                Please help me!"
+                Please help me!
             mp_choice_options:
             -   option: |
                     ```
@@ -1564,7 +1562,7 @@ levels:
                     Hello
                     Hello
                     Im Hedy!
-                    Im Hedy!"
+                    Im Hedy!
                 feedback: "Everything is printed twice"
             correct_answer: "C"
             hint: "Both lines are repeated twice."
@@ -1577,7 +1575,7 @@ levels:
             mp_choice_options:
             -   option: "This should be only one line, not 2."
                 feedback: "No it should be 2 lines."
-            -   option: "This `{print}` command has to go"
+            -   option: "This `{print}` command has to be removed."
                 feedback: "No, you need it."
             -   option: "There is a spelling mistake in the `{repeat}` command."
                 feedback: "Nee, repeat is de goede spelling"
@@ -1834,7 +1832,7 @@ levels:
                    {if} food {is} pizza
                        topping = {ask} 'What topping would you like?'
                        {print} 'One pizza with ' topping
-                {print} 'That you for your order'
+                {print} 'Thank you for your order'
             mp_choice_options:
             -   option: "Nothing this code is correct!"
                 feedback: "That's right!."
@@ -1859,13 +1857,31 @@ levels:
                 {else}
                     {print} 'The computer will explode in 5... 4... 3... 2... 1...'
             mp_choice_options:
-            -   option: "Good job! \n Good job!"
+            -   option: |-
+                  ```
+                  Good job!
+                  Good job!
+                  ```
                 feedback: "That's not it!"
-            -   option: "The computer will explode in 5... 4... 3... 2... 1..."
+            -   option: |-
+                  ```
+                  The computer will explode in 5... 4... 3... 2... 1...
+                  ```
                 feedback: "That's not it!"
-            -   option: "Good job! \n Good job! \n You can use the computer!"
+            -   option: |-
+                  ```
+                  Good job!
+                  Good job!
+                  You can use the computer!
+                  ```
                 feedback: "That's not it!"
-            -   option: "Good job! \n You can use the computer! \n Good job! \n You can use the computer!"
+            -   option: |-
+                  ```
+                  Good job!
+                  You can use the computer!
+                  Good job!
+                  You can use the computer!
+                  ```
                 feedback: "Correct!"
             correct_answer: "D"
             hint: "Everything under the `{repeat}` command is repeated twice."
@@ -1981,7 +1997,7 @@ levels:
             hint: "Indentation happens on the line below some commands"
             question_score: '10'
         7:
-            question_text: "In this code from a pizza restaurant. \nYoull get a 5 dollar discount if you order a medium pizza with coke.\n What should you do to debug this code?"
+            question_text: "In this code from a pizza restaurant. \nYou'll get a 5 dollar discount if you order a medium pizza with coke.\n What should you do to debug this code?"
             code: |-
                 {if} food {is} pizza
                 {if} size {is} medium
@@ -2030,7 +2046,7 @@ levels:
                 singing = {ask} 'Would you like us to sing?'
                     if singing {is} yes
                         {repeat} years {times}
-                        {print} 'Hip Hip Hooray'
+                          {print} 'Hip Hip Hooray'
             mp_choice_options:
             -   option: "You can't put two questions in a row"
                 feedback: "Yes you can."
@@ -2045,8 +2061,6 @@ levels:
             question_score: '10'
         9:
             question_text: "How many `{if}` commands can be placed inside another `{if}` command?"
-            code: |-
-                # No code provided
             mp_choice_options:
             -   option: "None, that is not allowed"
                 feedback: "You are allowed to"
@@ -2072,13 +2086,42 @@ levels:
                 feedback: "Line 3 should start with 8"
             -   option: "Line 2 and 3 should start with 8 spaces"
                 feedback: "Line 2 should start with 4"
-            -   option: "line 2 should atart with 4 spaces and line 3 with 8"
+            -   option: "line 2 should start with 4 spaces and line 3 with 8"
                 feedback: "You are correct!"
             correct_answer: "D"
             hint: "The first line doens't start with any spaces"
             question_score: '10'
     11:
         1:
+            question_text: "What word should be at the place of the question mark?"
+            code: |-
+                {for} i {in} _?_ 1 {to} 10
+                    {print} i
+            mp_choice_options:
+            -   option: |
+                    ```
+                    counter
+                    ```
+                feedback: "No"
+            -   option: |
+                    ```
+                    {range}
+                    ```
+                feedback: "Correct"
+            -   option: |
+                    ```
+                    {if}
+                    ```
+                feedback: "No"
+            -   option: |
+                    ```
+                    {for}
+                    ```
+                feedback: "No"
+            correct_answer: "B"
+            hint: "What did you learn in this level?"
+            question_score: '10'
+        2:
             question_text: "What will be the output from this code?"
             code: |-
                 {for} i {in} {range} 1 {to} 3
@@ -2095,7 +2138,7 @@ levels:
             correct_answer: "A"
             hint: "How do the numbers appear in the screen?"
             question_score: '10'
-        2:
+        3:
             question_text: "Which code was used to get this output?"
             output: |-
                 1
@@ -2136,7 +2179,7 @@ levels:
             correct_answer: "A"
             hint: "First all the numbers, then the sentence"
             question_score: '10'
-        3:
+        4:
             question_text: "Which code was used to get this output?"
             output: |-
                 10
@@ -2166,7 +2209,7 @@ levels:
             -   option: |
                     ```
                     {for} i {in} {range} 10 to 0
-                        {print} i
+                        {print} 10 9 8 7 6 5 4 3 2 1 0
                     ```
                 feedback: "Unfortunately this does not exist."
             -   option: |
@@ -2178,7 +2221,7 @@ levels:
             correct_answer: "D"
             hint: "It has to be a calculation..."
             question_score: '10'
-        4:
+        5:
             question_text: "What's wrong with this code?"
             code: |-
                 {for} i {in} {range} 1 {to} 10
@@ -2194,35 +2237,6 @@ levels:
                 feedback: "Perfect!"
             correct_answer: "D"
             hint: "There is something wrong with the indention"
-            question_score: '10'
-        5:
-            question_text: "What word should be at the place of the question mark?"
-            code: |-
-                {for} i {in} _?_ 1 {to} 10
-                    {print} i
-            mp_choice_options:
-            -   option: |
-                    ```
-                    counter
-                    ```
-                feedback: "No"
-            -   option: |
-                    ```
-                    {range}
-                    ```
-                feedback: "Correct"
-            -   option: |
-                    ```
-                    {if}
-                    ```
-                feedback: "No"
-            -   option: |
-                    ```
-                    {for}
-                    ```
-                feedback: "No"
-            correct_answer: "B"
-            hint: "What did you learn in this level?"
             question_score: '10'
         6:
             question_text: "How many times does the word Hello appear on your screen when you run the code?"
@@ -2547,7 +2561,7 @@ levels:
             hint: "Mind the quotation marks and the names of the variables"
             question_score: '10'
         9:
-            question_text: "What is the first question Hedy will `{ask}` you when you run the program?"
+            question_text: "What is the first question Hedy will ask you when you run the program?"
             code: |-
                 courses = appetizer, main course, dessert
                 names = Timon, Onno
