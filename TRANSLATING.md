@@ -81,4 +81,4 @@ This enables us to contact the weblate repo.
 
 5. Push the branch `weblatefixes` (or your own name) and make a PR. 
 
-6. Mention me ([@Felienne](https://github.com/Felienne)) on GitHub or Slack. I am the only one that can merge them correctly (they require a merge commit, not a squash merge!) so ping me to accept the PR.
+6. Mention me ([@Felienne](https://github.com/Felienne)) on GitHub or Discord. I am the only one that can merge them correctly (they require a merge commit, not a squash merge!) so ping me to accept the PR.
