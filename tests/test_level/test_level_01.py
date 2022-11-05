@@ -550,6 +550,17 @@ class TestsLevel1(HedyTester):
         output = 'Hallo welkom bij Hedy!'
 
         self.single_level_tester(code=code, expected=expected, output=output)
+        
+    def test_comments_may_be_empty(self):
+        code = textwrap.dedent("""\
+            #
+            # This is a comment
+            #
+            print Привіт, Хейді!""")
+        expected = "print('Привіт, Хейді!')"
+        output = "Привіт, Хейді!"
+
+        self.single_level_tester(code=code, expected=expected, output=output)
 
     #
     # negative tests
