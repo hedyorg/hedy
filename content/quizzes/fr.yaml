@@ -373,47 +373,47 @@ levels:
             hint: "La variable (la liste) est appelée options."
             question_score: '10'
         4:
-            question_text: "Que faut-il changer dans la ligne pour afficher un prix aléatoire ?"
+            question_text: "Que faut-il changer dans la ligne 2 pour afficher un prix aléatoire ?"
             code: |-
-                prix is 1 euro, 100 euros, 100 euros
-                print prix at random
+                prix {is} 1 euro, 100 euros, 100 euros
+                {print} prix {at} {random}
             mp_choice_options:
             -   option: "print prix"
-                feedback: "tu ne veux pas afficher le mot 'prix', mais tu veux afficher un prix tiré au hasard dans ta liste"
+                feedback: "Tu ne veux pas `{print}` le mot prix, mais tu veux `{print}` un prix tiré `{at} {random}` dans ta liste"
             -   option: "print prix at random"
                 feedback: "Super ! Tu as vraiment fait attention."
             -   option: "print at random prix"
-                feedback: "Tu y es presque. L'ordre des mots n'est pas encore correct."
+                feedback: "`{at} {random}` est placé derrière la variable."
             -   option: "Rien, ce code est correct."
-                feedback: "Cherche bien l'erreur que tu as loupée !"
+                feedback: "Cherche bien l'erreur que tu as manquée !"
             correct_answer: "B"
             hint: "Le nom de la variable est prix"
             question_score: '10'
         5:
             question_text: "Qu'est-ce qui ne va pas dans ce code ?"
             code: |-
-                question is ask Qu'est-ce que tu veux savoir ?
-                print question
-                réponse is oui, non, peut-être
-                print réponses at random
+                question {is} {ask} Qu'est-ce que tu veux savoir ?
+                {print} question
+                reponses {is} oui, non, peut-être
+                print reponses {at} {random}
             mp_choice_options:
             -   option: "La ligne 1 doit dire `print` au lieu de `ask`"
-                feedback: "Non, ce n'est pas faux..."
+                feedback: "Non, ce n'est pas faux."
             -   option: "La ligne 2 doit dire `{ask}` au lieu de `{print}`"
                 feedback: "Non, ce n'est pas faux..."
-            -   option: "La ligne 2 doit indiquer que les réponses au hasard sont oui, non, peut-être"
+            -   option: "La ligne 2 doit indiquer les réponses `{at} {random}` `{is}` oui, non, peut-être"
                 feedback: "Non, ce n'est pas faux..."
             -   option: "Rien, ce code est parfait"
                 feedback: "C'est bien ça !"
             correct_answer: "D"
-            hint: "Ce code comporte-t-il une erreur ?"
+            hint: "Ce code a-t-il une erreur ?"
             question_score: '10'
         6:
             question_text: "Quel est le problème avec ce code ?"
             code: |-
-                question is ask Qu'est-ce que tu veux savoir ?
-                réponse are oui, non, peut-être
-                print réponse at random
+                question {is} {ask} Qu'est-ce que tu veux savoir ?
+                reponses oui, non, peut-être
+                {print} reponses {at} {random}
             mp_choice_options:
             -   option: "La ligne 2 doit être 'question' au lieu de 'réponse'"
                 feedback: "Non, ce n'est pas ça"
@@ -424,107 +424,107 @@ levels:
             -   option: "Rien ! Ce code est génial !"
                 feedback: "En fait, la ligne 2 comporte une erreur."
             correct_answer: "B"
-            hint: "Are n'est pas une commande."
+            hint: "Il y a quelque chose qui ne va pas avec la ligne 2."
             question_score: '10'
         7:
             correct_answer: C
-            hint: The add command adds a book, but which one?
+            hint: La commande `{add}` ajoute un livre, mais lequel ?
             question_score: '10'
             mp_choice_options:
             -   option: The add command removes a random book from the list
-                feedback: The remove command removes, the add command adds
+                feedback: La commande remove supprime, la commande add ajoute
             -   option: The add command adds a random book to a list
-                feedback: It doesn't. It adds your answer to the list!
+                feedback: Ce n'est pas le cas. Elle ajoute ta réponse à la liste !
             -   option: The add command adds your favotite book to the list
-                feedback: Correct!
+                feedback: Correct !
             -   option: The add command prints your favorite book.
-                feedback: No, it adds your favorite book to the list
-            question_text: What does the add command do?
+                feedback: Non, elle ajoute ton livre préféré à la liste
+            question_text: Que fait la commande `{add}` ?
             code: "books is Harry Potter, The Hobbit, Green Eggs and Ham\nyour_book is ask What is your favorite book?\nadd your_book to books\nprint books at random"
         10:
-            question_text: What should be on the _?_ ?
-            code: "walkers is dad, mom, Sam, Petra\nwalked_yesterday is ask Who walked the dogs yesterday?\nprint walked_yesterday shouldn't have to walk the dogs again today\n_?_\nprint walkers at random , it's your turn to walk the dogs!"
+            question_text: Que devrait-il y avoir sur le _?_ ?
+            code: "promeneurs {is} papa, maman, Sam, Petra\npromeneur_hier {is} {ask} Qui a promené les chiens hier ?\n{print} promeneur_hier ne devrait pas avoir à promener les chiens encore aujourd'hui\n_?_\n{print} promeneurs {at} {random}, c'est ton tour de promener les chiens !"
             mp_choice_options:
-            -   option: remove walked_yesterday from walkers
-                feedback: Super!
-            -   option: remove walked yesterday to walkers
-                feedback: remove from or add to, not remove to
-            -   option: remove walkers from yesterday
-                feedback: yesterday is not a variable
-            -   option: add walked_yesterday to walkers
-                feedback: This increased the change that the person who walked yesterday now has to do it again. That's mean.
+            -   option: "```\n{remove} promeneur_hier {from} promeneurs\n```\n"
+                feedback: Super !
+            -   option: "```\n{remove} promeneur hier {to} promeneurs\n```\n"
+                feedback: '`{remove} {from}` ou `{add} {to}`, et non pas `{remove} {to}`'
+            -   option: "```\n{remove} promeneurs {from} hier\n```\n"
+                feedback: hier n'est pas une variable
+            -   option: "```\n{add} promeneur_hier {to} promeneurs\n```\n"
+                feedback: Cela va faire que la personne qui a promené hier va avoir plus de chance de le refaire. C'est pas très gentil pour elle.
             question_score: '10'
-            hint: The person who walked the dog yesterday should be removed from the list.
+            hint: La personne qui a promené les chiens hier devrait être retirée de la liste.
             correct_answer: A
         8:
             mp_choice_options:
             -   option: You can't tell, because Hedy will print one of the 3 flavors at random
-                feedback: Take a look at the remove commands
-            -   option: sea salt
-                feedback: sea salt is removed from the list
+                feedback: Jettes un coup d'œil aux commandes `{remove}`
+            -   option: sel de mer
+                feedback: sel de mer est retiré de la liste
             -   option: paprika
-                feedback: Paprika is removed from the list
-            -   option: sour cream
-                feedback: That's right!
-            question_text: What is the output of this code?
-            code: "crisps is sea salt, paprika, sour cream\nremove sea salt from crisps\nremove paprika from crisps\nprint crisps at random"
+                feedback: Paprika est retiré de la liste
+            -   option: crème aigre
+                feedback: C'est bien ça !
+            question_text: Quelle est la sortie de ce code ?
+            code: "chips {is} sel de mer, paprika, crème aigre\n{remove} sel de mer {from} chips\n{remove} paprika {from} chips\n{print} chips {at} {random}"
             correct_answer: D
-            hint: There are 3 flavors, bit 2 are removed. Which one remains?
+            hint: Il y a 3 parfums, 2 sont retirés. Lequel reste-t-il ?
             question_score: '10'
         9:
-            question_text: What's wrong with this code??
-            code: "colors is blue, purple, green\nchosen_color is ask Which haircolor wouldn't your like to have?\nremove chosen_color from colors\nprint I will dye my hair color at random"
+            question_text: Quel est le problème avec ce code ?
+            code: "couleurs {is} bleu, violet, vert\ncouleur_choisie {is} {ask} Quelle couleur de cheveux n’aimeriez-vous pas avoir?\n{remove} couleur_choisie {from} couleurs\n{print} Je vais teindre ma couleur de cheveux {at} {random}"
             mp_choice_options:
-            -   option: 'Line 3 should say: remove blue from colors'
-                feedback: Maybe you want blue hair though!
-            -   option: Line 3 should have an add command instead of a remove command
-                feedback: You want to remove the chosen color so remove is right.
-            -   option: In line 4 the variable should be called colors instead of color
-                feedback: Great job!
-            -   option: Nothing, this is a correct code!
-                feedback: Find the mistake!
-            hint: Look at line 3
+            -   option: 'La ligne 3 devrait indiquer : `{remove}` bleu `{from}` couleurs'
+                feedback: Mais tu veux peut-être des cheveux bleus !
+            -   option: La ligne 3 devrait avoir une commande `{add}` au lieu de la commande `{remove}`
+                feedback: Tu veux supprimer la couleur choisie donc `{remove}` est correct.
+            -   option: À la ligne 4, la variable doit être appelée couleurs au lieu de couleur.
+                feedback: Bon travail !
+            -   option: Rien, c'est un code correct !
+                feedback: Trouves l'erreur !
+            hint: Regardes la ligne 3
             question_score: '10'
             correct_answer: C
     4:
         1:
             question_text: "Laquelle de ces réponses est vraie ?"
             mp_choice_options:
-            -   option: "`print` et `ask` ont maintenant a besoin de guillemets"
+            -   option: "`{print}` et `{ask}` ont maintenant besoin de guillemets"
                 feedback: "C'est exact !"
-            -   option: "Seul le `print` a besoin de guillemets"
-                feedback: "`ask` a aussi besoin de guillemets !"
-            -   option: "`at random` ne fonctionne plus au niveau 4"
-                feedback: "`at random` fonctionne encore !"
-            -   option: "`at random` a besoin de guillemets"
-                feedback: "Non mais deux commandes le font."
+            -   option: "Seul le `{print}` a besoin de guillemets"
+                feedback: "`{ask}` a aussi besoin de guillemets !"
+            -   option: "`{at} {random}` ne fonctionne plus au niveau 4"
+                feedback: "`{at} {random}` fonctionne encore"
+            -   option: "`{at} {random}` a besoin de guillemets"
+                feedback: "Non, mais 2 autres commandes en ont besoin."
             correct_answer: "A"
-            hint: "Au niveau 4, il y deux commandes qui ont besoin de guillemets."
+            hint: "Au niveau 4, il y 2 commandes qui ont besoin de guillemets."
             question_score: '10'
         2:
-            question_text: "Quel code utilise les guillemets corrects ?"
+            question_text: "Quel code utilise les bons guillemets ?"
             mp_choice_options:
-            -   option: "print `Salut !`"
-                feedback: "Le guillemet n'est pas le bon."
-            -   option: "print 'Salut !'"
-                feedback: "Correct !"
-            -   option: "print \"Salut !\""
-                feedback: "Ce sont des guillemets doubles, il faut des guillemets simples."
-            -   option: "print ,Salut !,"
+            -   option: "```\n{print} `bonjour`\n```\n"
+                feedback: "Ce guillemet est de travers, il en faut un droit."
+            -   option: "```\n{print} 'bonjour'\n```\n"
+                feedback: "C’est bien ça"
+            -   option: "```\n{print} bonjour\n```\n"
+                feedback: "Il n'y a pas de guillemets ici !."
+            -   option: "```\n{print} ,bonjour,\n```\n"
                 feedback: "C'est une virgule, tu as besoin de guillemets."
             correct_answer: "B"
             hint: "Choisis les bons guillemets."
             question_score: '10'
         3:
-            question_text: "Où les guillemets sont-ils utilisés correctement ?"
+            question_text: "Où es-ce que les guillemets sont correctement utilisés ?"
             mp_choice_options:
-            -   option: "print Salut, je suis Hedy"
-                feedback: "Il manque quelque chose !"
-            -   option: "print 'Salut, je suis Hedy"
-                feedback: "Il faut des guillemets des 2 cotés des mots que tu veux imprimer."
-            -   option: "'print Salut, je suis Hedy'"
-                feedback: "Il faut des guillemets des 2 cotés !"
-            -   option: "print 'Salut, je suis Hedy'"
+            -   option: "```\n{print} Salut je suis Hedy\n```\n"
+                feedback: "Ajoutes des guillements s'il te plait !"
+            -   option: "```\n{print} 'Salut je suis Hedy\n```\n"
+                feedback: "Il doit y avoir un guillemet avant et après ce que tu veux afficher."
+            -   option: "```\n'{print} Salut je suis Hedy'\n```\n"
+                feedback: "Le premier guillemet doit se trouver après le mot {print}"
+            -   option: "```\n{print} 'Salut je suis Hedy'\n```\n"
                 feedback: "Parfait !"
             correct_answer: "D"
             hint: "Les mots que tu veux afficher doivent être précédés et suivis d'un guillemet."
@@ -532,12 +532,12 @@ levels:
         4:
             question_text: "Laquelle de ces réponses est vraie ?"
             mp_choice_options:
-            -   option: "Tu as besoin de guillemets autour du mot print, comme ceci : 'print'."
+            -   option: "Tu as besoin de guillemets autour du mot `{print}`, comme ceci : `'{print}'`."
                 feedback: "Les guillemets ne doivent pas entourer la commande elle-même."
             -   option: "Tu dois mettre des guillemets autour des mots que tu veux afficher."
                 feedback: "Super !"
             -   option: "Tu n'as pas besoin de guillemets lorsque tu utilise la commande `{ask}`"
-                feedback: "Tu es sûr ?"
+                feedback: "`{print}` et `{ask}` requièrent des guillemets"
             -   option: "Tu peux choisir toi-même d'utiliser ou non des guillemets."
                 feedback: "Malheureusement, Hedy est plus strict que ça."
             correct_answer: "B"
@@ -546,53 +546,53 @@ levels:
         5:
             question_text: "Qu'est-ce qui doit être changé pour que le code fonctionne ?"
             code: |-
-                options is pierre, feuille, ciseaux
-                print 'options at random'
+                options {is} pierre, feuille, ciseaux
+                {print} 'options {at} {random}'
             mp_choice_options:
-            -   option: "'print options at random'"
-                feedback: "N'utilise jamais de guillemets devant la commande print."
-            -   option: "print 'options' at random"
-                feedback: "Si tu fait cela, tu afficheras le mot options."
-            -   option: "print options at random"
-                feedback: "Super !"
-            -   option: "Rien, le code fonctionne !"
-                feedback: "Regarde mieux. Il y a une erreur."
+            -   option: "```\n'{print} options {at} {random}'\n```\n"
+                feedback: "N'utilise jamais de guillemets avant la commande {print}."
+            -   option: "```\n{print} 'options' {at} {random}\n```\n"
+                feedback: "options est une variable. Tu ne souhaites pas afficher 'options {at} {random}'."
+            -   option: "```\n{print} options {at} {random}\n```\n"
+                feedback: "C’est juste"
+            -   option: "Rien, le jeu fonctionne déjà !"
+                feedback: "Regardes bien. Il y a une erreur."
             correct_answer: "C"
-            hint: "Tu ne veux pas qu'Hedy affiche littéralement 'options at random', tu veux que cela affiche 'pierre' ou 'feuille' ou 'ciseaux'."
+            hint: "Tu ne veux pas qu'Hedy affiche littéralement 'options {at} {random}', tu veux qu'elle affiche 'pierre' ou 'feuille' ou 'ciseaux'."
             question_score: '10'
         6:
             question_text: "Quelle serait la prochaine ligne de ce code ?"
             code: |-
-                prix is 1 euro, 100 euros, 1000 euros
+                prix {is} 1 euro, 100 euros, 1 million euros
             mp_choice_options:
-            -   option: "print 'Tu gagnes...' prix at random"
-                feedback: "Super ! Tu l'as eu !"
-            -   option: "print Tu gagnes... 'prix at random'"
-                feedback: "Hedy va afficher 'prix {at} {random}'."
-            -   option: "print Tu gagnes... prix at random"
-                feedback: "Il faut des guillemets !"
-            -   option: "print 'Tu gagnes... prix at random'"
-                feedback: "Hedy va afficher 'Prix {at} {random}''"
+            -   option: "```\n{print} 'Tu gagnes...' prix {at} {random}\n```\n"
+                feedback: "Super ! Tu as compris !"
+            -   option: "```\n{print} Tu gagnes... 'prix {at} {random}'\n```\n"
+                feedback: "Hedy va afficher 'prix {at} {random}'"
+            -   option: "```\n{print} Tu gagnes... prix {at} {random}\n```\n"
+                feedback: "Tu as besoin de guillemets !"
+            -   option: "```\n{print} 'Tu gagnes... prix {at} {random}'\n```\n"
+                feedback: "Hedy va afficher 'prix{at} {random}''"
             correct_answer: "A"
-            hint: "Réfléchissez bien à ce qui est  variable et doit être en dehors des guillemets et quels sont les mots normaux qui devraient être à l'intérieur."
+            hint: "Réfléchis bien : qu'est-ce qui est une variable et doit être en dehors des guillemets ? Et quels sont les mots normaux qui doivent être à l'intérieur ?."
             question_score: '10'
         7:
             question_text: "Quel est le problème avec ce code ?"
             code: |-
-                question is ask Que veux-tu savoir ?
-                réponses is oui, non, peut-être
-                print réponses at random
+                question {is} {ask} Que veux-tu savoir ?
+                reponses {is} oui, non, peut-être
+                {print} reponses {at} {random}
             mp_choice_options:
-            -   option: "Les guillemets manquent à la ligne 1"
+            -   option: "Les guillemets sont manquants à la ligne 1"
                 feedback: "Correct !"
-            -   option: "Les guillemets manquent à la ligne 2"
+            -   option: "Les guillemets sont manquants à la ligne 2"
                 feedback: "Une variable n'a pas besoin de guillemets"
-            -   option: "Les guillemets manquent à la ligne 3"
-                feedback: "Réfléchis mieux à l'emplacement des guillemets !"
+            -   option: "Les guillemets sont manquants à la ligne 3"
+                feedback: "Tu ne veux pas qu'Hedy affiche littéralement 'reponses {at} {random}', donc pas besoin de guillemets ici !"
             -   option: "Rien, le code est bien comme ça !"
-                feedback: "Regarde bien. Tu as loupé une erreur !"
+                feedback: "Regardes bien. Tu as loupé une erreur !"
             correct_answer: "A"
-            hint: "Regarde pour chaque ligne si elle a besoin de guillemets ou pas."
+            hint: "Vérifies chaque ligne pour savoir si elle a besoin de guillemets ou pas."
             question_score: '10'
         8:
             question_text: "Quelle serait la prochaine ligne à ajouter à ce code ?"
