@@ -4,7 +4,7 @@
     demo_code: "{print} Bonjour et bienvenue à Hedy !"
 -   name: "{ask}"
     explanation: "Demande quelque chose avec `{ask}`."
-    demo_code: "{ask} Quelle est ta couleur préférée?"
+    demo_code: "{ask} Quelle est ta couleur préférée ?"
 -   name: "{echo}"
     explanation: "Répète quelque chose avec `{echo}`."
     demo_code: |-
@@ -28,7 +28,7 @@
 -   name: "{ask}"
     explanation: "Demande quelque chose avec `{ask}`. Attention ! Tu dois donner à la réponse un nom avec `{is}`."
     demo_code: |-
-        couleur {is} {ask} Quelle est ta couleur préférée?
+        couleur {is} {ask} Quelle est ta couleur préférée ?
         {print} couleur est ton préféré !
 -   explanation: "`{sleep}` Laissez Hedy faire une pause d'une (ou deux) seconde(s)."
     name: '{sleep}'
@@ -86,12 +86,12 @@
 -   name: "{print}"
     explanation: "Affiche exactement ce qui est entre les guillemets."
     demo_code: "{print} '5 fois 5 font ' 5 * 5"
--   name: "{ask} et {if} avec des calculs"
+-   name: "{ask}"
     explanation: "Demandes un calcul et vérifies si elle est correcte."
     demo_code: |-
         reponse = {ask} 'Combien font 10 plus 10?'
         {if} reponse {is} 20 {print} 'Oui!' {else} {print} 'Oups'
--   name: "`{ask}` et`{if}` avec la tortue"
+-   name: "{ask} et {if} avec la tortue"
     explanation: "Ask the user how many angles they want."
     demo_code: |-
         angles = {ask} 'Nombres angles?'
@@ -119,7 +119,7 @@
 -   name: "{print}"
     explanation: "Affiche quelque chose. N’oublies pas les guillemets pour afficher exactement ce qui est saisi."
     demo_code: "{print} '5 fois 5 font ' 5 * 5"
--   name: "`{if}` sur plusieurs lignes"
+-   name: "{ask}"
     explanation: "Demandes le résultat d’une addition et vérifies si elle est correcte. Tu peux désormais imprimer sur 2 lignes."
     demo_code: |-
         reponse = {ask} 'Combien font 5 plus 5?'
@@ -130,7 +130,7 @@
             {print} 'Oups!'
             {print} 'La réponse est 10.'
 -   demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
-    name: '`{repeat}` avec la tortue'
+    name: '{repeat} avec la tortue'
     explanation: 'Répète plusieurs lignes.'
 9:
 -   name: "{if} avec plusieurs lignes"
@@ -143,7 +143,7 @@
         {else}
             {print} 'Oups'
             {print} 'La réponse est 20'
--   name: "`{repeat}` et la tortue"
+-   name: "{repeat} avec la tortue"
     explanation: "Répète des lignes multiples."
     demo_code: |-
         {repeat} 4 {times}
@@ -284,8 +284,8 @@
         fruit_aleatoire = fruits[{random}]
         {print} fruit_aleatoire
 17:
--   name: "`{for}` avec `:`"
-    explanation: "Utilisant un `{for}` sur plusieurs lignes, il te faut un `:` à la fin"
+-   name: "{elif}"
+    explanation: "`{elif}`"
     demo_code: |-
         a = 2
         {if} a == 1:
@@ -293,34 +293,34 @@
         {elif} a == 2:
             {print} 'a est 2'
         {else}:
-            {print} 'a n est pas 1 ou 2'
--   name: "`{if}` avec `:`"
+            {print} 'a n'est pas 1 ou 2'
+-   name: "{print}"
     explanation: "Quand nous utilisons un  `{for}`, nous devons mettre un  `:` derrière l'affirmation du  `{for}` !"
     demo_code: |-
         {for} i {in} {range} 1 {to} 12:
             {print} i
         {print} "Cache toi, j'arrive!"
--   name: "(Optionnel) `{elif}`"
-    explanation: "Nous devons faire de même avec toutes nos `{if}` déclarations."
+-   name: "{if}"
+    explanation: "Nous devons faire de même avec toutes nos déclarations `{if}`."
     demo_code: |-
-        couleur = {ask} 'Quel est ta couleur favorite ?'
+        couleur = {ask} 'Quel est ta couleur préférée ?'
         {if} couleur == 'vert':
-            {print} 'ta couleur préféré est le vert'
+            {print} 'Ta couleur préférée est le vert'
         {else}:
-            {print} 'ta couleur préféré n est pas le vert'
+            {print} 'Ta couleur préférée n'est pas le vert'
 18:
 -   name: "{print}"
     explanation: "Avec `{print}` on doit utiliser des parenthèses."
     demo_code: |-
         {print}('hi!')
--   name: "{print} with var"
+-   name: "{range}"
     explanation: "Avec `{range}` on doit utiliser des parenthèses."
     demo_code: |-
-        name = 'Hedy'
-        {print}('my name is ', name)
+        {for} i {in} {range} (1,10) :
+             {print}('Salut, ', i, ' fois')
 -   name: '{print} avec var'
-    explanation: Avec `{print}` on doit utiliser des parenthèses et des virgules si l'on {print} plusieurs éléments.
-    demo_code: "name = 'Hedy'\n{print}('my name is ', name)"
--   name: ask something with {input}
+    explanation: Avec `{print}` on doit utiliser des parenthèses et des virgules si l'on affiche plusieurs éléments.
+    demo_code: "nom = 'Hedy'\n{print}('mon nom est ', nom)"
+-   name: demande quelque chose avec {input}
     explanation: Utilisez `{input}` au lieu de `{ask}` pour demander quelque chose.
-    demo_code: "name = {input}('What is your name?')\n{print}('So your name is ', name)"
+    demo_code: "nom = {input}('Quel est ton nom ?')\n{print}('Donc, ton nom est ', nom)"
