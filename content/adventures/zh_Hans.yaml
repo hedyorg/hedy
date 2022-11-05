@@ -464,7 +464,7 @@ adventures:
                 start_code: '# 在这里写你的代码'
             10:
                 story_text: "## 计算器 \n这个计算器游戏帮助您练习你的乘法口诀表！ \n如果您添加更多数到这个列表，你可以练习到所有的乘法。\n"
-                example_code: "```\nnumbers = 1, 2, 3\n{for} number1 {in} numbers\n    {for} number2 {in} numbers\n        answer = {ask} 'How much is ' number2 ' times ' number1 '?'\n        correct = number1 * number2\n        {if} answer {is} correct\n            {print} 'Great job!'\n        {else}\n            {print} 'Thats wrong. The right answer is ' correct\n```\n"
+                example_code: "```\n数字 = 1, 2, 3\n{for} 数1 {in} 数字\n    {for} 数2 {in} 数字\n        答案 = {ask} 数1 '乘以' 数2 '是多少？'\n        正确答案 = 数1 * 数2\n        {if} 答案 {is} 正确答案\n            {print} '做得好！'\n        {else}\n            {print} '回答错误。正确答案是' 正确答案\n```\n"
                 start_code: '# 在这里写你的代码'
             9:
                 story_text: "## 计算器 \n在前面的级别中您已经学会如何编写一个计算器，在这个等级里你可以扩写这些代码并把它写成一个小小的数学游戏，就像这样...\n"
@@ -478,14 +478,14 @@ adventures:
                 start_code: "{print} '欢迎来到这个计算器!'"
             15:
                 story_text: "## 计算器 \n您可以添加 `{while}` 循环到您已经在上一关中学过的计算器游戏中去。 \n这可以确保{if}玩家在没有回答正确的情况下不会进行下一个问题。\n"
-                example_code: "```\nscore = 0\n{for} i {in} {range} 0 {to} 9\n    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    number1 = numbers {at} {random}\n    number2 = numbers {at} {random}\n    correct = number1 * number2\n    answer = 0\n    {while} answer != correct\n        {print} 'How much is ' number1 ' times ' number2 '?'\n        answer = {ask} 'Fill in your answer:'\n        {print} 'Your answer is ' answer\n    {print} 'Good job!'\n{print} 'You win!'\n```\n"
+                example_code: "```\n分数 = 0\n{for} i {in} {range} 0 {to} 9\n    数字 = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    数1 = 数字 {at} {random}\n    数2 = 数字 {at} {random}\n    正确 = 数1 * 数2\n    答案 = 0\n    {while} 回答 != 正确\n        {print} 数1 '乘以' 数2 '是多少？'\n        答案 = {ask} '填写答案'\n        {print} '你的答案是' 答案\n    {print} '做得好！'\n{print} '你赢了！'\n```\n"
                 start_code: '# 在这里写你的代码'
         description: 创建一个计算器
         default_save_name: 计算器
     restaurant:
-        name: "Restaurant"
+        name: "餐厅"
         description: "创建你自己的虚拟餐厅"
-        default_save_name: "Restaurant"
+        default_save_name: "餐厅"
         levels:
             1:
                 story_text: |
@@ -493,11 +493,11 @@ adventures:
                     在第一关中您可以编写一个你自己的虚拟餐厅并接受客人的点单。
                 example_code: |
                     ```
-                    {print} Welcome to Hedy's restaurant 🍟
-                    {ask} What would you like to order?
-                    {echo} So you would like to order
-                    {print} Thanks you for your order!
-                    {print} It's on its way!
+                    {print} 欢迎来到海迪餐厅 🍟
+                    {ask} 你想点什么？
+                    {echo} 你想点
+                    {print} 谢谢你的点单！
+                    {print} 已经在做了！
                     ```
                 story_text_2: |
                     ## 挑战 
