@@ -243,7 +243,6 @@ levels:
             question_text: What happens when you use the `{sleep}` command?
             correct_answer: C
             hint: The computer waits for a second at the `{sleep}` command
-            code: '{sleep}'
             question_score: '10'
         7:
             question_text: What command should be used on line 2?
@@ -1273,7 +1272,6 @@ levels:
             correct_answer: D
             hint: You can put an `{if}` command inside an `{if}` command.
             question_score: '10'
-            code: '# No code provided'
         10:
             mp_choice_options:
             -   option: All lines should start with 4 spaces
@@ -1352,7 +1350,6 @@ levels:
         4:
             correct_answer: D
             question_text: What's wrong with this code?
-            code: "{for} i {in} {range} 1 {to} 10\n{print} i"
             mp_choice_options:
             -   option: The i in the last line need quotation marks
                 feedback: No it doesn't.
@@ -1364,6 +1361,7 @@ levels:
                 feedback: Perfect!
             hint: There is something wrong with the indention
             question_score: '10'
+            output: "10\n9\n8\n7\n6\n5\n4\n3\n2\n1\n0"
         7:
             mp_choice_options:
             -   option: "```\n{for} i {in} {range} 0 {to} 3\n```\n"
@@ -1411,7 +1409,6 @@ levels:
             question_score: '10'
         2:
             question_text: Which code was used to get this output?
-            output: "1\n2\n3\n4\n5\nOnce I caught a fish alive!"
             mp_choice_options:
             -   option: "```\n{for} i {in} {range} 1 {to} 5\n    {print} i\n{print} 'Once I caught a fish alive!'\n```\n"
                 feedback: Perfect
@@ -1424,6 +1421,7 @@ levels:
             correct_answer: A
             hint: First all the numbers, then the sentence
             question_score: '10'
+            code: "{for} i {in} {range} 1 {to} 3\n    {print} i"
         3:
             question_text: Which code was used to get this output?
             output: "10\n9\n8\n7\n6\n5\n4\n3\n2\n1\n0"

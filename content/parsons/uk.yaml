@@ -76,47 +76,47 @@ levels:
                 C: "{print} Ми будемо знімати"
                 D: '{print} Гарного вам задоволення!'
         2:
-            story: "This is the webshop of a toy store. Create a program where costumers can add an item to their shopping cart.\n"
+            story: "Це інтернет-магазин іграшок. Створіть програму, за допомогою якої користувач може додати товар до свого кошика.\n"
             code_lines:
-                A: '{print} Welcome to our toystore'
-                B: toy {is} {ask} What would you like to buy?
-                C: '{print} The toy is added to your shopping cart.'
-                D: '{print} Thank you for shopping with us!'
+                A: '{print} Ласкаво просимо в наш магазин іграшок'
+                B: іграшка {is} {ask} Що б ви хотіли купити?
+                C: '{print} Іграшка додана до кошика покупок.'
+                D: '{print} Дякуємо, що купуєте у нас!'
     3:
         1:
             code_lines:
-                A: '{print} The new school year at Hogwarts is starting!'
-                B: '{print} The sorting hat is ready to sort you into a Hogwarts house.'
-                C: houses {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin
+                A: '{print} Новий навчальний рік у Гоґвортсі розпочинається!'
+                B: '{print} Капелюх-сортувальник готовий розсортувати вас по домівках Гоґвортсу.'
+                C: 'будинок {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin'
                 D: '{sleep} 2'
-                E: '{print} And it is houses {at} {random}'
-            story: "The new school year at Hogwarts is starting! \nIt is the job of the sorting hat to sort you into one of the houses.\nWhich house will you be sorted into?\nAre you a Gryffindor, Hufflepuf, Ravenclaw or Slytherin.\nLet the program wait a short period before revealing your house.\n"
+                E: '{print} І це будинок {at} {random}'
+            story: "Новий навчальний рік у Гоґвортсі розпочинається! \nЗавдання капелюха-сортувальника - відсортувати вас до одного з будиночків.\nВ який будинок ви потрапите?\nВи будите навчатися на Гриффіндорі, Хаффлпафі, Рейвенклову чи Слизерину?\nНехай програма почекає деякий час, перш ніж покаже ваш будинок.\n"
         2:
-            story: "Create a program that chooses a random meal for you. Make a list of food and a list of toppings and let the program decide what you'll have!\n"
+            story: "Створіть програму, яка вибирає випадкову їжу для вас. Складіть список продуктів і список начинок та дозвольте програмі вирішити, що ви будете їсти!\n"
             code_lines:
-                A: food {is} pizza, icecream, salad, sandwich
-                B: toppings {is} chocolate, cheese, tuna, sprinkles
-                C: '{print} Your random meal for today is...'
+                A: їжа {is} pizza, icecream, salad, sandwich
+                B: начинкою {is} chocolate, cheese, tuna, sprinkles
+                C: '{print} Ваша випадкова вечеря на сьогодні - це...'
                 D: sleep 2
-                E: '{print} food {at} {random} with toppings {at} {random}'
+                E: '{print} їжа {at} {random} начинкою {at} {random}'
     4:
         1:
-            story: "You are the newest Pokémon trainer from Pallet Town!\nMake a program that selects your first Pokémon.\nLet the program wait a minute before revealing your first pokémon.\n"
+            story: "Ви - новий тренер покемонів з Палеттауна!\nСкладіть програму, яка вибирає вашого першого покемона.\nЗачекайте хвилину, перш ніж програма покаже вам першого покемона.\n"
             code_lines:
-                A: pokemons {is} Pikachu, Charmander, Bulbasaur, Squirtle
-                B: "{print} 'This is going to be your first pokémon!'"
+                A: Покемон {is} Pikachu, Charmander, Bulbasaur, Squirtle
+                B: "{print} 'Це буде ваш перший покемон!'"
                 C: '{sleep}'
-                D: '{print} pokemons {at} {random}'
+                D: '{print} Покемон {at} {random}'
         2:
-            story: "Create a lottery that lets you choose an extra price that you might win.\n"
+            story: "Створіть лотерею, яка дозволить вам вибрати додаткову ціну, яку ви можете виграти.\n"
             code_lines:
-                A: prices {is} car, hamster, 1 million euros
-                C: '{add} price {to_list} prices'
-                B: price {is} {ask} 'What would you like to win?'
-                D: "{print} 'You won a ' prices {at} {random}"
+                A: ціни {is} car, hamster, 1 million euros
+                B: ціна {is} {ask} 'Яку суму ви б хотіли отримати за перемогу?'
+                C: '{add} ціна {to_list} ціни'
+                D: "{print} 'You won a ' ціни {at} {random}"
     5:
         1:
-            story: "Make a program that checks if your favourite movie is already in the list of the computer.\nIf so, print that you have great taste, otherwise add the movie to the list.\n"
+            story: "Зробіть програму, яка перевіряє, чи є ваш улюблений фільм у списку комп'ютера.\nЯкщо так, то надрукуйте, що у вас чудовий смак, інакше додайте фільм до списку.\n"
             code_lines:
                 A: favoriete_movies {is} Batman, Spiderman, The Avengers, Jurassic Park
                 B: movie {is} {ask} 'What is your favourite movie?'
