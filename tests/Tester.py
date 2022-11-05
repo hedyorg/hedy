@@ -1,4 +1,6 @@
 import textwrap
+
+import exceptions
 import hedy, hedy_translation
 import re
 import sys
@@ -172,9 +174,9 @@ class HedyTester(unittest.TestCase):
       pass
     except OSError as E:
       return None # programs with ask cannot be tested with output :(
-    except Exception as E:
+    except exceptions.HedyException as E:
         try:
-            location = E.location[0]
+            location = E.error_location
         except:
             location = 'No Location Found'
         return f'{str(E)} at line {location}'
