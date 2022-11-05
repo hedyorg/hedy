@@ -235,7 +235,7 @@ levels:
             hint: "L'ordinateur attend une seconde à la commande `{sleep}`"
             question_score: '10'
         6:
-            question_text: "Qu'est-ce qui doit figurer sur les lignes ?"
+            question_text: "Que doit-il y avoir sur les lignes ?"
             code: |-
                 {print} Et le prix du meilleur langage de programmation revient à...
                 _?_
@@ -248,9 +248,9 @@ levels:
             -   option: "```\n{print}\n```\n"
                 feedback: "Il n'y a pas de texte à afficher avec `{print}` à cet endroit"
             -   option: "```\n{ask}\n```\n"
-                feedback: "Il n'y a pas de question ici"
+                feedback: "Il n'y a pas de question à poser ici"
             correct_answer: "A"
-            hint: "Pause pour un effet dramatique..."
+            hint: "Pause pour effet dramatique..."
             question_score: '10'
         7:
             question_text: "Quelle commande doit être utilisée sur la ligne 2 ?"
@@ -273,8 +273,8 @@ levels:
         8:
             question_text: "Comment corriger la première ligne de code ?"
             code: |-
-                ask is Quel âge as-tu ?
-                print âge
+                {ask} {is} Quel âge as-tu ?
+                {print} age
             mp_choice_options:
             -   option: "âge ask is Quel âge as-tu ?"
                 feedback: "Ce n'est pas le bon ordre !"
