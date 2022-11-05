@@ -288,7 +288,57 @@ class TestsLevel8(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, output='Nice', max_level=11)
 
-    
+    #
+    # ifpressed tests
+    #
+
+    def test_if_x_is_pressed_turtle(self):
+        code = textwrap.dedent("""\
+        if x is pressed
+            forward 100
+        """)
+        expected = HedyTester.dedent(
+            "if event.key == pygame.K_x:"
+            (HedyTester.forward_transpiled(100, self.level), '  '))
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            extra_check_functional=self.is_turtle(),
+            max_level=16
+        )
+
+    def test_if_x_is_pressed_print_else_print(self):
+        code = textwrap.dedent("""\
+        if x is pressed
+            print 'gezellig'
+        else
+            print 'niet gezellig'
+            """)
+        expected = textwrap.dedent("""\
+        if event.key == pygame.K_x:
+            print(f'gezellig')
+            pygame_end = True
+        else:
+            print(f'niet gezellig')
+            pygame_end = True
+        """)
+
+        self.multi_level_tester(code=code, expected=expected, max_level=16)
+
+        def test_if_x_is_pressed_print(self):
+            code = textwrap.dedent("""\
+            if x is pressed
+                print 'gezellig'
+                """)
+            expected = textwrap.dedent("""\
+            if event.key == pygame.K_x:
+                print(f'gezellig')
+                pygame_end = True
+            """)
+
+            self.multi_level_tester(code=code, expected=expected, max_level=16)
+
     #
     # if else tests
     #
