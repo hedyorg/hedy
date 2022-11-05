@@ -1,4 +1,5 @@
 import hedy
+from hedy import Command
 import textwrap
 from tests.Tester import HedyTester
 from parameterized import parameterized
@@ -39,6 +40,17 @@ class TestsLevel4(HedyTester):
             code=code,
             max_level=11,
             expected=expected)
+
+    def test_print_line_with_spaces_works(self):
+        code = "print 'hallo'\n      \nprint 'hallo'"
+        expected = "print(f'hallo')\n\nprint(f'hallo')"
+        expected_commands = [Command.print, Command.print]
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            expected_commands=expected_commands,
+            max_level=7)
 
     def test_print_single_quoted_text_with_inner_double_quote(self):
         code = """print 'quote is "'"""
@@ -558,7 +570,7 @@ class TestsLevel4(HedyTester):
 
         expected = HedyTester.dedent(
             "afstand = input(f'hoe ver dan?')",
-            HedyTester.forward_transpiled('afstand'))
+            HedyTester.forward_transpiled('afstand', self.level))
 
         self.multi_level_tester(
             max_level=11,
@@ -606,6 +618,13 @@ class TestsLevel4(HedyTester):
             code=code,
             exception=hedy.exceptions.ParseException,
             extra_check_function=lambda c: c.exception.fixed_code == "print 'Hello'"
+        )
+
+    def test_lonely_text(self):
+        code = "'Hello'"
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.LonelyTextException
         )
 
     #

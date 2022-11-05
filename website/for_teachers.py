@@ -3,7 +3,8 @@ from flask_babel import gettext
 import hedy
 import hedyweb
 from .achievements import Achievements
-from website.auth import requires_login, is_teacher, is_admin, current_user, validate_student_signup_data, store_new_student_account
+from website.auth import requires_login, is_teacher, is_admin, current_user, validate_student_signup_data, \
+    store_new_student_account
 import utils
 import uuid
 from flask import g, request, jsonify, session
@@ -12,6 +13,7 @@ import os
 import hedy_content
 from .database import Database
 from .website_module import WebsiteModule, route
+
 
 class ForTeachersModule(WebsiteModule):
     def __init__(self, db: Database, achievements: Achievements):
@@ -43,7 +45,6 @@ class ForTeachersModule(WebsiteModule):
                                teacher_classes=teacher_classes,
                                teacher_adventures=adventures, welcome_teacher=welcome_teacher)
 
-
     @route('/manual', methods=['GET'])
     @requires_login
     def get_teacher_manual(self, user):
@@ -63,12 +64,14 @@ class ForTeachersModule(WebsiteModule):
         for student_username in Class.get('students', []):
             student = self.db.user_by_username(student_username)
             programs = self.db.programs_for_user(student_username)
-            highest_level = max(program['level'] for program in programs) if len(programs) else 0
+            # Fixme: The get_quiz_stats function requires a list of ids -> doesn't work on single string
+            quiz_scores = self.db.get_quiz_stats([student_username])
+            highest_quiz = max([x.get('level') for x in quiz_scores if x.get('finished')]) if quiz_scores else "-"
             students.append({
                 'username': student_username,
                 'last_login': student['last_login'],
                 'programs': len(programs),
-                'highest_level': highest_level
+                'highest_level': highest_quiz
             })
 
         # Sort the students by their last login
@@ -93,10 +96,11 @@ class ForTeachersModule(WebsiteModule):
                             'expire_timestamp': utils.localized_date_format(invite['ttl'], short_format=True)})
 
         return render_template('class-overview.html', current_page='my-profile',
-                                page_title=gettext('title_class-overview'),
-                                achievement=achievement, invites=invites,
-                                class_info={'students': students, 'link': os.getenv('BASE_URL') + '/hedy/l/' + Class['link'],
-                                            'teacher': Class['teacher'], 'name': Class['name'], 'id': Class['id']})
+                               page_title=gettext('title_class-overview'),
+                               achievement=achievement, invites=invites,
+                               class_info={'students': students,
+                                           'link': os.getenv('BASE_URL') + '/hedy/l/' + Class['link'],
+                                           'teacher': Class['teacher'], 'name': Class['name'], 'id': Class['id']})
 
     @route('/customize-class/<class_id>', methods=['GET'])
     @requires_login
@@ -216,7 +220,7 @@ class ForTeachersModule(WebsiteModule):
         if not current_class or current_class.get('teacher') != user.get('username'):
             return utils.error_page(error=403, ui_message=gettext('no_such_class'))
 
-        return render_template('create-accounts.html', current_class = current_class)
+        return render_template('create-accounts.html', current_class=current_class)
 
     @route('/create-accounts', methods=['POST'])
     @requires_login
@@ -276,7 +280,8 @@ class ForTeachersModule(WebsiteModule):
             return utils.error_page(error=403, ui_message=gettext('retrieve_adventure_error'))
 
         # Add level to the <pre> tag to let syntax highlighting know which highlighting we need!
-        adventure['content'] = adventure['content'].replace("<pre>", "<pre class='no-copy-button' level='" + str(adventure['level']) + "'>")
+        adventure['content'] = adventure['content'].replace("<pre>", "<pre class='no-copy-button' level='" + str(
+            adventure['level']) + "'>")
         adventure['content'] = adventure['content'].format(**hedy_content.KEYWORDS.get(g.keyword_lang))
 
         return render_template('view-adventure.html', adventure=adventure,

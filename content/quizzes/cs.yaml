@@ -270,7 +270,6 @@ levels:
             question_score: '10'
         5:
             question_text: "What happens when you use the `{sleep}` command?"
-            code: "{sleep}"
             mp_choice_options:
             -   option: "It slows down your computer"
                 feedback: "fortunately not!"
@@ -465,7 +464,7 @@ levels:
             hint: "There's something wrong in line 1"
             question_score: '10'
         3:
-            question_text: "What's wrong in line 2 of this code?"
+            question_text: "How do you fix the mistake in line 2 of this code?"
             code: |-
                 volba {is} kámen, nůžky, papír
                 {print} kámen, nůžky, papír {at} {random}
@@ -556,7 +555,7 @@ levels:
         7:
             question_text: "What does the `{add}` command do?"
             code: |-
-                books {is} Harry Potter, de Hobbit, Green eggs and Ham
+                books {is} Harry Potter, The Hobbit, Green Eggs and Ham
                 your_book {is} {ask} What is your favorite book?
                 {add} your_book {to} books
                 {print} books {at} {random}
@@ -1993,8 +1992,6 @@ levels:
             question_score: '10'
         9:
             question_text: "How many `{if}` commands can be placed inside another `{if}` command?"
-            code: |-
-                # No code provided
             mp_choice_options:
             -   option: "None, that is not allowed"
                 feedback: "You are allowed to"
@@ -2077,7 +2074,7 @@ levels:
             correct_answer: "A"
             hint: "First all the numbers, then the sentence"
             question_score: '10'
-            output: "1\n2\n3\n4\n5\nOnce I caught a fish alive!"
+            code: "{for} i {in} {range} 1 {to} 3\n    {print} i"
         3:
             question_text: "Which code was used to get this output?"
             mp_choice_options:
@@ -2111,9 +2108,6 @@ levels:
             output: "10\n9\n8\n7\n6\n5\n4\n3\n2\n1\n0"
         4:
             question_text: "What's wrong with this code?"
-            code: |-
-                {for} i {in} {range} 1 {to} 10
-                {print} i
             mp_choice_options:
             -   option: "The i in the last line need quotation marks"
                 feedback: "No it doesn't."
@@ -2126,6 +2120,7 @@ levels:
             correct_answer: "D"
             hint: "There is something wrong with the indention"
             question_score: '10'
+            output: "10\n9\n8\n7\n6\n5\n4\n3\n2\n1\n0"
         5:
             question_text: "What word should be at the place of the question mark?"
             code: |-

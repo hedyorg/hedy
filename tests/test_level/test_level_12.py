@@ -1,4 +1,5 @@
 import hedy
+from hedy import Command
 import textwrap
 from parameterized import parameterized
 from tests.Tester import HedyTester
@@ -22,7 +23,7 @@ class TestsLevel12(HedyTester):
     #
     # print tests
     #
-    def test_print_float(self):
+    def test_print_float_variable(self):
         code = textwrap.dedent("""\
             pi is 3.14
             print pi""")
@@ -35,6 +36,28 @@ class TestsLevel12(HedyTester):
             max_level=17,
             expected=expected
         )
+    def test_print_float(self):
+        code = "print 3.14"
+        
+        expected = "print(f'''3.14''')"
+
+        self.multi_level_tester(
+            code=code,
+            max_level=17,
+            expected=expected,
+            output='3.14'
+        )
+    def test_print_division_float(self):
+        code = "print 3 / 2"
+        expected = "print(f'''{3 / 2}''')"
+        output = "1.5"
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            max_level=17,
+            output=output
+        )
 
     def test_print_literal_strings(self):
         code = """print "It's " '"Hedy"!'"""
@@ -45,6 +68,17 @@ class TestsLevel12(HedyTester):
             max_level=17,
             expected=expected,
         )
+
+    def test_print_line_with_spaces_works(self):
+        code = "print 'hallo'\n      \nprint 'hallo'"
+        expected = "print(f'''hallo''')\nprint(f'''hallo''')"
+        expected_commands = [Command.print, Command.print]
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            expected_commands=expected_commands,
+            max_level=17)
 
     def test_print_string_with_triple_quotes_gives_error(self):
         code = textwrap.dedent("""\
@@ -299,7 +333,7 @@ class TestsLevel12(HedyTester):
             forward a""")
         expected = HedyTester.dedent(
             "a = 50",
-            HedyTester.forward_transpiled('a'))
+            HedyTester.forward_transpiled('a', self.level))
 
         self.multi_level_tester(
             code=code,
@@ -324,7 +358,7 @@ class TestsLevel12(HedyTester):
 
         expected = HedyTester.dedent("""\
         directions = [10, 100, 360]""",
-        HedyTester.forward_transpiled('random.choice(directions)'))
+        HedyTester.forward_transpiled('random.choice(directions)', self.level))
 
         self.multi_level_tester(
             max_level=15,
@@ -342,7 +376,7 @@ class TestsLevel12(HedyTester):
             turn direction""")
         expected = HedyTester.dedent(
             "direction = 70",
-            HedyTester.turn_transpiled('direction'))
+            HedyTester.turn_transpiled('direction', self.level))
 
         self.multi_level_tester(
             code=code,
@@ -350,26 +384,17 @@ class TestsLevel12(HedyTester):
             extra_check_function=self.is_turtle()
         )
 
-    def test_turn_with_non_latin_number_var(self):
+    def test_turn_with_non_latin_float_number_var(self):
         code = textwrap.dedent("""\
-        الزاوية هو ٩٠
-        استدر الزاوية
-        تقدم ١٠٠""")
-        expected = textwrap.dedent("""\
-        الزاوية = 90
-        trtl = الزاوية
-        try:
-          trtl = int(trtl)
-        except ValueError:
-          raise Exception(f'While running your program the command <span class="command-highlighted">turn</span> received the value <span class="command-highlighted">{trtl}</span> which is not allowed. Try changing the value to a number.')
-        t.right(min(600, trtl) if trtl > 0 else max(-600, trtl))
-        trtl = 100
-        try:
-          trtl = int(trtl)
-        except ValueError:
-          raise Exception(f'While running your program the command <span class="command-highlighted">forward</span> received the value <span class="command-highlighted">{trtl}</span> which is not allowed. Try changing the value to a number.')
-        t.forward(min(600, trtl) if trtl > 0 else max(-600, trtl))
-        time.sleep(0.1)""")
+            الزاوية هو ٩.٠
+            استدر الزاوية
+            تقدم ١٠.١٠""")
+        
+        expected = HedyTester.dedent(
+            "الزاوية = 9.0",
+            HedyTester.turn_transpiled("الزاوية", self.level),
+            HedyTester.forward_transpiled("10.1", self.level)
+        )
 
         self.multi_level_tester(
             code=code,
@@ -377,6 +402,21 @@ class TestsLevel12(HedyTester):
             expected=expected,
             extra_check_function=self.is_turtle()
         )
+    
+    def test_turtle_with_expression(self):
+
+        code = textwrap.dedent("""\
+            num = 10.6
+            turn num + 10.5
+            forward 10.5 + num""")
+            
+        expected = HedyTester.dedent(
+            "num = 10.6",
+            HedyTester.turn_transpiled('num + 10.5', self.level),
+            HedyTester.forward_transpiled('10.5 + num', self.level)
+        )
+
+        self.multi_level_tester(code=code, expected=expected)
 
     def test_turn_with_string_var_gives_type_error(self):
         code = textwrap.dedent("""\
@@ -394,7 +434,7 @@ class TestsLevel12(HedyTester):
             turn ángulo""")
         expected = HedyTester.dedent(
             "ángulo = 90",
-            HedyTester.turn_transpiled('ángulo'))
+            HedyTester.turn_transpiled('ángulo', self.level))
 
         self.multi_level_tester(
             code=code,
@@ -410,7 +450,7 @@ class TestsLevel12(HedyTester):
 
         expected = HedyTester.dedent("""\
         directions = [10, 100, 360]""",
-        HedyTester.turn_transpiled('random.choice(directions)'))
+        HedyTester.turn_transpiled('random.choice(directions)', self.level))
 
         self.multi_level_tester(
             max_level=15,
@@ -433,7 +473,7 @@ class TestsLevel12(HedyTester):
                 afstand = float(afstand)
               except ValueError:
                 pass""",
-            HedyTester.forward_transpiled('afstand'))
+            HedyTester.forward_transpiled('afstand', self.level))
 
         self.multi_level_tester(
             max_level=17,
@@ -1538,7 +1578,7 @@ class TestsLevel12(HedyTester):
     #
     @parameterized.expand([
         ('*', '*', '12'),
-        ('/', '//', '3'),
+        ('/', '/', '3.0'),
         ('+', '+', '8'),
         ('-', '-', '4')])
     def test_int_calc(self, op, transpiled_op, output):
@@ -1549,7 +1589,7 @@ class TestsLevel12(HedyTester):
 
     @parameterized.expand([
         ('*', '*', '100'),
-        ('/', '//', '1'),
+        ('/', '/', '1.0'),
         ('+', '+', '17'),
         ('-', '-', '3')])
     def test_nested_int_calc(self, op, transpiled_op, output):
@@ -1558,24 +1598,24 @@ class TestsLevel12(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, output=output, max_level=17)
 
-    @parameterized.expand(HedyTester.arithmetic_transpiled_operators)
-    def test_float_calc(self, op, transpiled_op):
+    @parameterized.expand(HedyTester.arithmetic_operations)
+    def test_float_calc(self, op):
         code = f"print 2.5 {op} 2.5"
-        expected = f"print(f'''{{2.5 {transpiled_op} 2.5}}''')"
+        expected = f"print(f'''{{2.5 {op} 2.5}}''')"
 
         self.multi_level_tester(code=code, expected=expected, max_level=17)
 
-    @parameterized.expand(HedyTester.arithmetic_transpiled_operators)
-    def test_float_calc_arabic(self, op, transpiled_op):
+    @parameterized.expand(HedyTester.arithmetic_operations)
+    def test_float_calc_arabic(self, op):
         code = f"print ١.٥ {op} ١.٥"
-        expected = f"print(f'''{{1.5 {transpiled_op} 1.5}}''')"
+        expected = f"print(f'''{{1.5 {op} 1.5}}''')"
 
         self.multi_level_tester(code=code, expected=expected, max_level=17)
 
-    @parameterized.expand(HedyTester.arithmetic_transpiled_operators)
-    def test_print_float_calc_with_string(self, op, transpiled_op):
+    @parameterized.expand(HedyTester.arithmetic_operations)
+    def test_print_float_calc_with_string(self, op):
         code = f"print 'het antwoord is ' 2.5 {op} 2.5"
-        expected = f"print(f'''het antwoord is {{2.5 {transpiled_op} 2.5}}''')"
+        expected = f"print(f'''het antwoord is {{2.5 {op} 2.5}}''')"
 
         self.multi_level_tester(code=code, expected=expected, max_level=17)
 
@@ -1589,8 +1629,8 @@ class TestsLevel12(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=17)
 
-    @parameterized.expand(HedyTester.arithmetic_transpiled_operators)
-    def test_float_calc_with_var(self, op, transpiled_op):
+    @parameterized.expand(HedyTester.arithmetic_operations)
+    def test_float_calc_with_var(self, op):
         code = textwrap.dedent(f"""\
         getal1 is 5
         getal2 is 4.3
@@ -1598,12 +1638,12 @@ class TestsLevel12(HedyTester):
         expected = textwrap.dedent(f"""\
         getal1 = 5
         getal2 = 4.3
-        print(f'''dat is dan: {{getal1 {transpiled_op} getal2}}''')""")
+        print(f'''dat is dan: {{getal1 {op} getal2}}''')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=17)
 
-    @parameterized.expand(HedyTester.arithmetic_transpiled_operators)
-    def test_int_calc_with_var(self, op, transpiled_op):
+    @parameterized.expand(HedyTester.arithmetic_operations)
+    def test_int_calc_with_var(self, op):
         code = textwrap.dedent(f"""\
         a is 1
         b is 2
@@ -1611,7 +1651,7 @@ class TestsLevel12(HedyTester):
         expected = textwrap.dedent(f"""\
         a = 1
         b = 2
-        c = a {transpiled_op} b""")
+        c = a {op} b""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=17)
 

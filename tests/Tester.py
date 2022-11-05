@@ -29,7 +29,6 @@ class HedyTester(unittest.TestCase):
   number_comparison_commands = ['>', '>=', '<', '<=']
   comparison_commands = number_comparison_commands + ['!=']
   arithmetic_operations = ['+', '-', '*', '/']
-  arithmetic_transpiled_operators = [('*', '*'), ('/', '//'), ('+', '+'), ('-', '-')]
   quotes = ["'", '"']
 
   @staticmethod
@@ -119,7 +118,6 @@ class HedyTester(unittest.TestCase):
     if exception is not None:
       with self.assertRaises(exception) as context:
         result = hedy.transpile(code, level, lang)
-
       if extra_check_function is not None:
         self.assertTrue(extra_check_function(context))
 
@@ -194,24 +192,27 @@ class HedyTester(unittest.TestCase):
   # The turtle commands get transpiled into big pieces of code that probably will change
   # The followings methods abstract the specifics of the tranpilation and keep tests succinct
   @staticmethod
-  def forward_transpiled(val):
-    return HedyTester.turtle_command_transpiled('forward', val)
+  def forward_transpiled(val, level):
+    return HedyTester.turtle_command_transpiled('forward', val, level)
 
   @staticmethod
-  def turn_transpiled(val):
-    return HedyTester.turtle_command_transpiled('right', val)
+  def turn_transpiled(val, level):
+    return HedyTester.turtle_command_transpiled('right', val, level)
 
   @staticmethod
-  def turtle_command_transpiled(command, val):
+  def turtle_command_transpiled(command, val, level):
     command_text = 'turn'
     suffix = ''
     if command == 'forward':
       command_text = 'forward'
       suffix = '\n      time.sleep(0.1)'
+    
+    type = 'int' if level < 12 else 'float'
+    
     return textwrap.dedent(f"""\
       trtl = {val}
       try:
-        trtl = int(trtl)
+        trtl = {type}(trtl)
       except ValueError:
         raise Exception(f'While running your program the command <span class="command-highlighted">{command_text}</span> received the value <span class="command-highlighted">{{trtl}}</span> which is not allowed. Try changing the value to a number.')
       t.{command}(min(600, trtl) if trtl > 0 else max(-600, trtl)){suffix}""")

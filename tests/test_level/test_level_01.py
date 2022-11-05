@@ -1,3 +1,4 @@
+from audioop import maxpp
 import hedy
 import textwrap
 from hedy import Command
@@ -49,6 +50,14 @@ class TestsLevel1(HedyTester):
             expected_commands=expected_commands
         )
         self.assertEqual([output], hedy.all_print_arguments(code, self.level))
+
+    def test_print_line_with_spaces_works(self):
+        code = "print hallo\n      \nprint hallo"
+        expected = "print('hallo')\n\nprint('hallo')"
+        expected_commands = [Command.print, Command.print]
+
+        self.single_level_tester(code=code, expected=expected, expected_commands=expected_commands)
+
 
     def test_print_comma(self):
         code = "print one, two, three"
@@ -149,7 +158,7 @@ class TestsLevel1(HedyTester):
             code=code,
             expected=expected,
             output=output,
-            translate=False, #translation will remove the tatweels, we will deal with that later
+            translate=False,  # translation will remove the tatweels, we will deal with that later
             lang='ar')
 
     def test_ask_ar_tatweel_all_places(self):
@@ -159,7 +168,7 @@ class TestsLevel1(HedyTester):
         self.single_level_tester(
             code=code,
             expected=expected,
-            translate=False, #translation will remove the tatweels, we will deal with that later
+            translate=False,  # translation will remove the tatweels, we will deal with that later
             lang='ar')
 
     # def test_print_ar_tatweel_itself(self):
@@ -186,7 +195,7 @@ class TestsLevel1(HedyTester):
             code=code,
             expected=expected,
             output=output,
-            translate=False, #translation will remove the tatweels, we will deal with that later
+            translate=False,  # translation will remove the tatweels, we will deal with that later
             lang='ar')
 
     def test_print_ar_tatweel_begin(self):
@@ -198,7 +207,7 @@ class TestsLevel1(HedyTester):
             code=code,
             expected=expected,
             output=output,
-            translate=False, #translation will remove the tatweels, we will deal with that later
+            translate=False,  # translation will remove the tatweels, we will deal with that later
             lang='ar')
 
     def test_print_ar_tatweel_multiple_end(self):
@@ -210,7 +219,7 @@ class TestsLevel1(HedyTester):
             code=code,
             expected=expected,
             output=output,
-            translate=False, #translation will remove the tatweels, we will deal with that later
+            translate=False,  # translation will remove the tatweels, we will deal with that later
             lang='ar')
 
     def test_print_ar_2(self):
@@ -322,32 +331,35 @@ class TestsLevel1(HedyTester):
     #
     def test_forward(self):
         code = "forward 50"
-        expected = HedyTester.dedent(HedyTester.forward_transpiled(50))
+        expected = HedyTester.dedent(HedyTester.forward_transpiled(50, self.level))
 
         self.multi_level_tester(
             code=code,
             expected=expected,
-            extra_check_function=self.is_turtle()
+            extra_check_function=self.is_turtle(),
+            max_level=11
         )
 
     def test_forward_arabic_numeral(self):
         code = "forward ١١١١١١١"
-        expected = HedyTester.forward_transpiled(1111111)
+        expected = HedyTester.forward_transpiled(1111111, self.level)
 
         self.multi_level_tester(
             code=code,
             expected=expected,
-            extra_check_function=self.is_turtle()
+            extra_check_function=self.is_turtle(),
+            max_level=11
         )
 
     def test_forward_hindi_numeral(self):
         code = "forward ५५५"
-        expected = HedyTester.forward_transpiled(555)
+        expected = HedyTester.forward_transpiled(555, self.level)
 
         self.multi_level_tester(
             code=code,
             expected=expected,
-            extra_check_function=self.is_turtle()
+            extra_check_function=self.is_turtle(),
+            max_level=11
         )
 
     def test_forward_without_argument(self):
@@ -359,7 +371,8 @@ class TestsLevel1(HedyTester):
         self.multi_level_tester(
             code=code,
             expected=expected,
-            extra_check_function=self.is_turtle()
+            extra_check_function=self.is_turtle(),
+            max_level=11
         )
 
     def test_forward_with_text_gives_type_error(self):
@@ -516,15 +529,16 @@ class TestsLevel1(HedyTester):
             forward 100""")
 
         expected = HedyTester.dedent(
-            HedyTester.forward_transpiled(50),
+            HedyTester.forward_transpiled(50, self.level),
             't.right(90)',
-            HedyTester.forward_transpiled(100))
+            HedyTester.forward_transpiled(100, self.level))
 
         self.multi_level_tester(
             code=code,
             expected=expected,
             extra_check_function=self.is_turtle(),
-            expected_commands=[Command.forward, Command.turn, Command.forward]
+            expected_commands=[Command.forward, Command.turn, Command.forward],
+            max_level=11
         )
 
     #
@@ -581,6 +595,19 @@ class TestsLevel1(HedyTester):
         echo what can't we do?
         ask time travel """)
         self.single_level_tester(code, exception=hedy.exceptions.LonelyEchoException)
+
+    def test_pint_after_empty_line_gives_error_line_3(self):
+        code = textwrap.dedent("""\
+        print hallo
+        
+        prnt hallo""")
+        self.single_level_tester(
+            code,
+            exception=hedy.exceptions.InvalidCommandException,
+            extra_check_function=(lambda x: x.exception.arguments['line_number'] == 3)
+        )
+
+
 
     def test_print_without_argument_gives_incomplete(self):
         self.multi_level_tester(

@@ -311,7 +311,7 @@ class TestsLevel3(HedyTester):
 
         expected = HedyTester.dedent("""\
         directions = ['10', '100', '360']""",
-        HedyTester.forward_transpiled('random.choice(directions)'))
+        HedyTester.forward_transpiled('random.choice(directions)', self.level))
 
         self.multi_level_tester(
             max_level=11,
@@ -341,7 +341,7 @@ class TestsLevel3(HedyTester):
 
         expected = HedyTester.dedent("""\
         directions = ['10', '100', '360']""",
-        HedyTester.turn_transpiled('random.choice(directions)'))
+        HedyTester.turn_transpiled('random.choice(directions)', self.level))
 
         self.multi_level_tester(
             max_level=11,

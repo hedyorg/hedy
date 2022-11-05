@@ -33,8 +33,11 @@ local_keywords_enabled = True
 # dictionary to store transpilers
 TRANSPILER_LOOKUP = {}
 
-# Python keywords need hashing when used as var names
-reserved_words = ['and', 'except', 'lambda', 'with', 'as', 'finally', 'nonlocal', 'while', 'assert', 'False', 'None', 'yield', 'break', 'for', 'not', 'class', 'from', 'or', 'continue', 'global', 'pass', 'def', 'if', 'raise', 'del', 'import', 'return', 'elif', 'in', 'True', 'else', 'is', 'try']
+# builtins taken from 3.11.0 docs: https://docs.python.org/3/library/functions.html
+PYTHON_BUILTIN_FUNCTIONS = ['abs', 'aiter', 'all', 'any', 'anext', 'ascii', 'bin', 'bool', 'breakpoint', 'bytearray', 'bytes', 'callable', 'chr', 'classmethod', 'compile', 'complex', 'delattr', 'dict', 'dir', 'divmod', 'enumerate', 'eval', 'exec', 'filter', 'float', 'format', 'frozenset', 'getattr', 'globals', 'hasattr', 'hash', 'help', 'hex', 'id', 'input', 'int', 'isinstance', 'issubclass', 'iter', 'len', 'list', 'locals', 'map', 'max', 'memoryview', 'min', 'next', 'object', 'oct', 'open', 'ord', 'pow', 'print', 'property', 'range', 'repr', 'reversed', 'round', 'set', 'setattr', 'slice', 'sorted', 'staticmethod', 'str', 'sum', 'super', 'tuple', 'type', 'vars', 'zip']
+PYTHON_KEYWORDS = ['and', 'except', 'lambda', 'with', 'as', 'finally', 'nonlocal', 'while', 'assert', 'False', 'None', 'yield', 'break', 'for', 'not', 'class', 'from', 'or', 'continue', 'global', 'pass', 'def', 'if', 'raise', 'del', 'import', 'return', 'elif', 'in', 'True', 'else', 'is', 'try', 'int']
+# Python keywords and function names need hashing when used as var names
+reserved_words = set(PYTHON_BUILTIN_FUNCTIONS + PYTHON_KEYWORDS)
 
 # Let's retrieve all keywords dynamically from the cached KEYWORDS dictionary
 indent_keywords = []
@@ -165,10 +168,14 @@ commands_and_types_per_level = {
         16: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.list]
     },
     Command.turn: {1: command_turn_literals,
-                   2: [HedyType.integer, HedyType.input]},
+                   2: [HedyType.integer, HedyType.input],
+                   12: [HedyType.integer, HedyType.input, HedyType.float]
+    },
     Command.color: {1: command_make_color,
                     2: [command_make_color, HedyType.string, HedyType.input]},
-    Command.forward: {1: [HedyType.integer, HedyType.input]},
+    Command.forward: {1: [HedyType.integer, HedyType.input],
+                      12: [HedyType.integer, HedyType.input, HedyType.float]
+    },
     Command.sleep: {1: [HedyType.integer, HedyType.input]},
     Command.list_access: {1: [HedyType.list]},
     Command.in_list: {1: [HedyType.list]},
@@ -271,7 +278,7 @@ def closest_command(invalid_command, known_commands, threshold=2):
     return min_command
 
 
-def style_closest_command(command):
+def style_command(command):
     return f'<span class="command-highlighted">{command}</span>'
 
 def closest_command_with_min_distance(invalid_command, commands, threshold):
@@ -1022,6 +1029,11 @@ class IsValid(Filter):
     def error_repeat_no_times(self, meta, args):
         error = InvalidInfo('repeat missing times', arguments=[str(args[0])], line=meta.line, column=meta.column)
         return False, error, meta
+
+    def error_text_no_print(self, meta, args):
+        error = InvalidInfo('lonely text', arguments=[str(args[0])], line=meta.line, column=meta.column)
+        return False, error, meta
+
     #other rules are inherited from Filter
 
 def valid_echo(ast):
@@ -1250,6 +1262,9 @@ class ConvertToPython_1(ConvertToPython):
     def comment(self, meta, args):
         return f"#{''.join(args)}"
 
+    def empty_line(self, meta, args):
+        return ''
+
     def forward(self, meta, args):
         if len(args) == 0:
             return sleep_after('t.forward(50)', False)
@@ -1297,7 +1312,7 @@ class ConvertToPython_1(ConvertToPython):
             try:
               {variable} = int({variable})
             except ValueError:
-              raise Exception(f'While running your program the command {style_closest_command(command)} received the value {style_closest_command('{'+variable+'}')} which is not allowed. Try changing the value to a number.')
+              raise Exception(f'While running your program the command {style_command(command)} received the value {style_command('{' + variable + '}')} which is not allowed. Try changing the value to a number.')
             t.{command_text}(min(600, {variable}) if {variable} > 0 else max(-600, {variable}))""")
         if add_sleep:
             return sleep_after(transpiled, False)
@@ -1308,7 +1323,7 @@ class ConvertToPython_1(ConvertToPython):
         return textwrap.dedent(f"""\
             {variable} = f'{parameter}'
             if {variable} not in {command_make_color}:
-              raise Exception(f'While running your program the command {style_closest_command(command)} received the value {style_closest_command('{' + variable + '}')} which is not allowed. Try using another color.')
+              raise Exception(f'While running your program the command {style_command(command)} received the value {style_command('{' + variable + '}')} which is not allowed. Try using another color.')
             t.{command_text}({variable})""")
 
 @v_args(meta=True)
@@ -1416,7 +1431,7 @@ class ConvertToPython_2(ConvertToPython_1):
                 try:
                   time.sleep(int({value}))
                 except ValueError:
-                  raise Exception(f'While running your program the command {style_closest_command(Command.sleep)} received the value {style_closest_command('{' + value + '}')} which is not allowed. Try changing the value to a number.')""")
+                  raise Exception(f'While running your program the command {style_command(Command.sleep)} received the value {style_command('{' + value + '}')} which is not allowed. Try changing the value to a number.')""")
 
 
 @v_args(meta=True)
@@ -1611,6 +1626,26 @@ class ConvertToPython_6(ConvertToPython_5):
     def division(self, meta, args):
         return self.process_calculation(args, '//')
 
+    def turn(self, meta, args):
+        if len(args) == 0:
+            return "t.right(90)"  # no arguments defaults to a right turn
+        arg = args[0]
+        if self.is_variable(arg):
+            return self.make_turn(escape_var(arg))
+        if isinstance(arg, Tree):
+            return self.make_turn(arg.children[0])        
+        return self.make_turn(int(arg))
+    
+    def forward(self, meta, args):        
+        if len(args) == 0:
+            return sleep_after('t.forward(50)', False)
+        arg = args[0]
+        if self.is_variable(arg):
+            return self.make_forward(escape_var(arg))
+        if isinstance(arg, Tree):
+            return self.make_forward(arg.children[0])
+        return self.make_forward(int(args[0]))
+
 def sleep_after(commands, indent=True):
     lines = commands.split()
     if lines[-1] == "time.sleep(0.1)": #we don't sleep double so skip if final line is a sleep already
@@ -1638,7 +1673,7 @@ class ConvertToPython_7(ConvertToPython_6):
 class ConvertToPython_8_9(ConvertToPython_7):
 
     def command(self, meta, args):
-        return "".join(args)
+            return "".join(args)
 
     def repeat(self, meta, args):
         # todo fh, may 2022, could be merged with 7 if we make
@@ -1718,7 +1753,7 @@ class ConvertToPython_12(ConvertToPython_11):
             if all(all_int):
                 return ''.join(args)
             else:
-                # int succeeds but does nto return the same? these are non-latin numbers
+                # int succeeds but does not return the same? these are non-latin numbers
                 # and need to be casted
                 return ''.join([str(int(x)) for x in args])
         except Exception as E:
@@ -1798,6 +1833,42 @@ class ConvertToPython_12(ConvertToPython_11):
         name = args[0]
         self.check_var_usage(args, meta.line)
         return escape_var(name)
+    
+    def turn(self, meta, args):
+        if len(args) == 0:
+            return "t.right(90)"  # no arguments defaults to a right turn
+        arg = args[0]
+        if self.is_variable(arg):
+            return self.make_turn(escape_var(arg))
+        if isinstance(arg, Tree):
+            return self.make_turn(arg.children[0])        
+        return self.make_turn(float(arg))
+    
+    def forward(self, meta, args):        
+        if len(args) == 0:
+            return sleep_after('t.forward(50)', False)
+        arg = args[0]
+        if self.is_variable(arg):
+            return self.make_forward(escape_var(arg))
+        if isinstance(arg, Tree):
+            return self.make_forward(arg.children[0])
+        return self.make_forward(float(args[0]))
+
+    def make_turtle_command(self, parameter, command, command_text, add_sleep):
+        variable = self.get_fresh_var('trtl')
+        transpiled = textwrap.dedent(f"""\
+            {variable} = {parameter}
+            try:
+              {variable} = float({variable})
+            except ValueError:
+              raise Exception(f'While running your program the command {style_command(command)} received the value {style_command('{'+variable+'}')} which is not allowed. Try changing the value to a number.')
+            t.{command_text}(min(600, {variable}) if {variable} > 0 else max(-600, {variable}))""")
+        if add_sleep:
+            return sleep_after(transpiled, False)
+        return transpiled
+    
+    def division(self, meta, args):
+        return self.process_calculation(args, '/')
 
 @v_args(meta=True)
 @hedy_transpiler(level=13)
@@ -2146,16 +2217,17 @@ def preprocess_blocks(code, level):
     for line in lines:
         leading_spaces = find_indent_length(line)
 
+        # ignore whitespace-only lines
+        if leading_spaces == len(line):
+            processed_code.append('')
+            continue
+
         line_number += 1
 
         # first encounter sets indent size for this program
         if indent_size_adapted == False and leading_spaces > 0:
             indent_size = leading_spaces
             indent_size_adapted = True
-
-        # ignore whitespace-only lines
-        if leading_spaces == len(line):
-            continue
 
         #calculate nuber of indents if possible
         if indent_size != None:
@@ -2211,6 +2283,7 @@ def preprocess_blocks(code, level):
         processed_code.append('end-block')
     return "\n".join(processed_code)
 
+
 def preprocess_ifs(code):
     processed_code = []
     lines = code.split("\n")
@@ -2218,13 +2291,13 @@ def preprocess_ifs(code):
         line = lines[i]
         next_line = lines[i + 1]
         # todo convert to all languages!!
+        # if this line starts with if but does not contain an else, and the next line too is not an else.
         if line[0:2] == "if" and (not next_line[0:4] == 'else') and (not ("else" in line)):
-            # is this line just a condition and no other keyword (because that is no problem)
-            if "print" in line or "ask" in line or "forward" in line or "turn" in line: # and this should also (TODO) check for a second is cause that too is problematic.
-                # a second command, but also no else in this line -> check next line!
-                
-                # no else in next line?
-                # add a nop (like 'Pass' but we just insert a meaningless assign)
+            # is there an command in the line too (cause just if, f.e. if name is Hank, is fine)
+            commands = ["print", "ask", "forward", "turn"]
+            if any(x in line for x in commands): # and this should also
+
+                # then add a nop (like 'Pass' but we just insert a meaningless assign)
                 line = line + " else _ is x"
 
         processed_code.append(line)
@@ -2331,12 +2404,15 @@ def is_program_valid(program_root, input_string, level, lang):
             raise exceptions.UnquotedTextException(level=level, unquotedtext=unquotedtext)
         elif invalid_info.error_type == 'unsupported number':
             raise exceptions.UnsupportedFloatException(value=''.join(invalid_info.arguments))
+        elif invalid_info.error_type == 'lonely text':
+            raise exceptions.LonelyTextException(level=level, line_number=line)
         else:
             invalid_command = invalid_info.command
             closest = closest_command(invalid_command, get_suggestions_for_language(lang, level))
 
             if closest == 'keyword':  # we couldn't find a suggestion
-                if invalid_command == Command.turn:
+                invalid_command_en = hedy_translation.translate_keyword_to_en(invalid_command, lang)
+                if invalid_command_en == Command.turn:
                     arg = invalid_info.arguments[0][0]
                     raise hedy.exceptions.InvalidArgumentException(command=invalid_info.command,
                                                                    allowed_types=get_allowed_types(Command.turn, level),
