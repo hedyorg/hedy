@@ -2872,7 +2872,6 @@ levels:
         1:
             question_text: "Which code should be filled in at the ??? ?"
             code: |-
-              ```
               name = ask 'What is your name?'
               song = ask 'Whould you like to hear a song?'
               birthday = ask 'Is today your birthday?'
@@ -2881,7 +2880,6 @@ levels:
                 print 'Happy Birthday to you!'
                 print 'Happy Birthday. dear ' name
                 print 'Happy Birthday to you!'
-              ```
             mp_choice_options:
             -   option: |-
                   ```
@@ -2909,12 +2907,10 @@ levels:
         2:
             question_text: "Which command is missing in the code at the place of the ??? ?"
             code: |-
-              ```
               menu = 'cheese', 'sausage rolls', 'cookies'
               diet = ask 'Do you have any dietary restrictions?'
               if diet = 'vegan' ??? diet = 'halal'
-                remove 'sausage rolls' from menu
-              ```
+                  remove 'sausage rolls' from menu
             mp_choice_options:
             -   option: "and"
                 feedback: "You don't have to be vegan and muslim"
@@ -2930,14 +2926,12 @@ levels:
         3:
             question_text: "Which output is given to a member without a discount code?"
             code: |-
-              ```
               member = ask 'Do you have a membership card?'
               discount = ask 'Do you have a discount code?'
               if member = 'yes' or discount = 'yes'
-                print 'You get a free apple pie!'
+                  print 'You get a free apple pie!'
               else
-                print 'That will be 5 dollars please'
-              ```
+                  print 'That will be 5 dollars please'
             mp_choice_options:
             -   option: "You get a free pie!"
                 feedback: "Great job!"
@@ -2953,9 +2947,7 @@ levels:
         4:
             question_text: "Which line of code should follow this line in rock-paper-scissors game?"
             code: |-
-              ```
               if computer_choice is 'rock' and your_choice is 'paper'
-              ```
             mp_choice_options:
             -   option: "print 'you win'"
                 feedback: "You win!"
@@ -2971,10 +2963,8 @@ levels:
         5:
             question_text: "Which statement is true about this code?"
             code: |-
-              ```
               if name = 'Cinderella' and shoe_size = '38'
                   print 'You are my one true love!'
-              ```
             mp_choice_options:
             -   option: "Every person with shoe size 38 is this prince's one true love"
                 feedback: "The prince is a little more picky than that!"
@@ -2990,19 +2980,17 @@ levels:
         6:
             question_text: "Which statement about this code is true?"
             code: |-
-              ```
               print 'Let me guess which family member you are!'
               glasses = ask 'Do you wear glasses?'
               female = ask 'Are you female?'
               if glasses = 'yes' and female = 'yes'
-                print 'You must be Sophie!'
+                  print 'You must be Sophie!'
               if glasses = 'no' and female = 'yes'
-                print 'You must be Marleen!'
+                 print 'You must be Marleen!'
               if glasses = 'yes' and female = 'no'
-                print 'You must be Wouter!'
+                  print 'You must be Wouter!'
               if glasses = 'no' and female = 'no'
-                print 'You must be Michael!'
-              ```
+                  print 'You must be Michael!'
             mp_choice_options:
             -   option: "Michael is a boy with glasses"
                 feedback: "Try again"
@@ -3018,20 +3006,18 @@ levels:
         7:
             question_text: "Which statement is false?"
             code: |-
-              ```
               print 'Thank you for helping me take care of my pets'
               print 'Here is a program to help feed them'
               animal is ask 'What kind of animal are they?'
               color is ask 'What colour are they?'
               if animal is 'cat' and color = 'grey'
-                print 'That is Abby. She eats 3 scoops of cat nibbles'
+                  print 'That is Abby. She eats 3 scoops of cat nibbles'
               if animal is 'cat' and color = 'orange'
-                print 'That is Milo. He eats 4 scoops of cat nibbles'
+                  print 'That is Milo. He eats 4 scoops of cat nibbles'
               if animal is 'bird' or color is 'black'
-                print 'I fed them this moring! They do not need more food today'
+                  print 'I fed them this moring! They do not need more food today'
               if animal is 'hamster' and color is 'brown'
-                print 'You can feed them a piece of carrot'
-              ```
+                  print 'You can feed them a piece of carrot'
             mp_choice_options:
             -   option: "The grey cat is called Abby"
                 feedback: "This is true!"
@@ -3047,48 +3033,38 @@ levels:
         8:
             question_text: "What output do you get if you order popcorn but no drink?"
             code: |-
-              ```
               print 'Welcome to the movie theater'
               popcorn = ask 'Would you like some popcorn?'
               drink = ask 'Would you like a drink?'
               if popcorn = 'yes' and drink = 'yes'
-                print 'That will be 8 dollars please'
+                  print 'That will be 8 dollars please'
               if popcorn = 'no' and drink = 'yes'
-               print 'That will be 3 dollars please'
+                 print 'That will be 3 dollars please'
               if popcorn = 'yes' and drink = 'no'
-                print 'That will be 5 dollars please'
+                  print 'That will be 5 dollars please'
               if popcorn = 'no' and drink = 'no'
-                print 'Ok'
+                  print 'Ok'
               print 'Enjoy the movie'
-              ```
             mp_choice_options:
             -   option: |-
-                  ```
                   Welcome to the movie theater
                   That will be 8 dollars please
                   Enjoy the movie
-                  ```
                 feedback: "You have paid too much!"
             -   option: |-
-                  ```
                   Welcome to the movie theater
                   That will be 5 dollars please
                   Enjoy the movie
-                  ```
                 feedback: "Amazing!"
             -   option: |-
-                  ```
                   Welcome to the movie theater
                   That will be 3 dollars please
                   Enjoy the movie
-                  ```
                 feedback: "That's not enough money!"
             -   option: |-
-                  ```
                   Welcome to the movie theater
                   Ok
                   Enjoy the movie
-                  ```
                 feedback: "You have to pay for your popcorn!"
             correct_answer: "B"
             hint: "popcorn = yes and drink = no"
@@ -3096,18 +3072,16 @@ levels:
         9:
             question_text: "What is wrong with this code?"
             code: |-
-              ```
-              1 chocolate = ask 'Would you like chocolate sauce on your icecream?'
-              2 sprinkles = ask 'Would you like sprinkles on your icecream?'
-              3 if chocolate and sprinkles = 'yes'
-              4   print 'Icrecream with chocolate sauce and sprinkles, coming up!'
-              5 if chocolate = 'yes' and sprinkles = 'no'
-              6   print 'Icecream with chocolate sauce, coming up!'
-              7 if chocolate = 'no' and sprinkles = 'yes'
-              8   print 'Icecream with sprinkles, coming up'
-              9 if chocolate = 'no' and sprinkles = 'no'
-              10  print 'Just plain icecream, coming up!'
-              ```
+              1  chocolate = ask 'Would you like chocolate sauce on your ice cream?'
+              2  sprinkles = ask 'Would you like sprinkles on your ice cream?'
+              3  if chocolate and sprinkles = 'yes'
+              4      print 'Ice cream with chocolate sauce and sprinkles, coming up!'
+              5  if chocolate = 'yes' and sprinkles = 'no'
+              6      print 'Ice cream with chocolate sauce, coming up!'
+              7  if chocolate = 'no' and sprinkles = 'yes'
+              8      print 'Ice cream with sprinkles, coming up'
+              9  if chocolate = 'no' and sprinkles = 'no'
+              10     print 'Just plain icecream, coming up!'
             mp_choice_options:
             -   option: "Line 3 should be: if chocolate = 'yes' and sprinkles is 'no'"
                 feedback: "Correct!"
@@ -3121,26 +3095,24 @@ levels:
             hint: "There is a mistake in line 3"
             question_score: '10'
         10:
-            question_text: "Which command needs to be in lien 8 at the place of the ??? ?"
+            question_text: "Which command needs to be in line 8 at the place of the ??? ?"
             code: |-
-              ```
               print 'Welcome to the product finder of this supermarkt'
               item is ask 'What product are you looking for?'
-              bakery = 'bread', 'buns', muffins'
+              bakery = 'bread', 'buns', 'muffins'
               drinks = 'soda', 'water', 'lemonade'
               snacks = 'chips', 'nuts', 'dips'
               frozen = 'fries', 'icecream', 'pizza'
               fruit = 'bananas', 'apples', 'oranges'
               if item in snacks ??? item in drinks
-                print 'This item is in aile 3'
-              if item in bakery or frozen
-                print 'This item in in the back of the store'
+                  print 'This item is in aile 3'
+              if item in bakery or item in bakery
+                  print 'This item in in the back of the store'
               if item in fruit
-                print 'The fruit is sold near the register'
-              ```
+                  print 'The fruit is sold near the register'
             mp_choice_options:
             -   option: "and"
-                feedback: "An item can never be in both the list of snacks and the list of drinks"
+                feedback: "There are no items that are both the list of snacks and the list of drinks"
             -   option: "or"
                 feedback: "Great job!"
             -   option: "in"
