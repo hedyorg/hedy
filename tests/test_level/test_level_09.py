@@ -130,25 +130,6 @@ class TestsLevel9(HedyTester):
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
     #
-    # ifpressed repeat test
-    #
-    def test_if_x_is_pressed_repeat_print(self):
-        code = textwrap.dedent("""\
-        if x is pressed
-            repeat 5 times
-                print 'ik print dit 5 keer'
-        """)
-        expected = textwrap.dedent("""\
-        if event.key == pygame.K_x:
-            for i in range(int('5')):
-                print(f'ik print dit 5 keer')
-                time.sleep(0.1)
-            pygame_end = True
-        """)
-
-        self.multi_level_tester(code=code, expected=expected, max_level=16)
-
-    #
     # if and repeat nesting
     #
     def test_if_nested_in_repeat(self):
