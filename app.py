@@ -1,7 +1,5 @@
 # coding=utf-8
 import copy
-from itertools import count
-from multiprocessing.dummy import active_children
 from logging_config import LOGGING_CONFIG
 from logging.config import dictConfig as logConfig
 logConfig(LOGGING_CONFIG)
@@ -437,8 +435,11 @@ def parse_by_id(user):
     program = DATABASE.program_by_id(body.get('id'))
     if program and program.get('username') == user['username']:
         try:
-            hedy.transpile(program.get('code'), program.get(
-                'level'), program.get('lang'))
+            hedy.transpile(
+                program.get('code'),
+                program.get('level'),
+                program.get('lang')
+            )
             return {}, 200
         except:
             return {"error": "parsing error"}, 200
@@ -1029,8 +1030,12 @@ def get_specific_adventure(name, level):
     except:
         return utils.error_page(error=404, ui_message=gettext('no_such_level'))
 
-    adventure = [x for x in load_adventures_per_level(
-        level, g.keyword_lang) if x.get('short_name') == name]
+    # In case of a "forced keyword language" -> load that one, otherwise: load the one stored in the g object
+    keyword_language = request.args.get('keyword_language', default=None, type=str)
+    if keyword_language:
+        adventure = [x for x in load_adventures_per_level(level, keyword_language) if x.get('short_name') == name]
+    else:
+        adventure = [x for x in load_adventures_per_level(level, g.keyword_lang) if x.get('short_name') == name]
     if not adventure:
         return utils.error_page(error=404, ui_message=gettext('no_such_adventure'))
 
@@ -1039,8 +1044,11 @@ def get_specific_adventure(name, level):
     next_level = level+1 if [x for x in load_adventures_per_level(
         level+1, g.keyword_lang) if x.get('short_name') == name] else False
 
-    return hedyweb.render_specific_adventure(level_number=level, adventure=adventure, version=version(),
-                                             prev_level=prev_level, next_level=next_level)
+    # Add the commands to enable the language switcher dropdown
+    commands = hedy.commands_per_level.get(level)
+
+    return hedyweb.render_specific_adventure(commands=commands, level_number=level, adventure=adventure,
+                                             version=version(), prev_level=prev_level, next_level=next_level)
 
 
 @app.route('/cheatsheet/', methods=['GET'], defaults={'level': 1})

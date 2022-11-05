@@ -588,6 +588,17 @@ class TestsLevel1(HedyTester):
         ask time travel """)
         self.single_level_tester(code, exception=hedy.exceptions.LonelyEchoException)
 
+    def test_pint_after_empty_line_gives_error_line_3(self):
+        code = textwrap.dedent("""\
+        print hallo
+        
+        prnt hallo""")
+        self.single_level_tester(
+            code,
+            exception=hedy.exceptions.InvalidCommandException,
+            extra_check_function=(lambda x: x.exception.arguments['line_number'] == 3)
+            )
+
     def test_print_without_argument_gives_incomplete(self):
         self.multi_level_tester(
             code="print",

@@ -23,7 +23,7 @@ class TestsLevel12(HedyTester):
     #
     # print tests
     #
-    def test_print_float(self):
+    def test_print_float_variable(self):
         code = textwrap.dedent("""\
             pi is 3.14
             print pi""")
@@ -36,7 +36,17 @@ class TestsLevel12(HedyTester):
             max_level=17,
             expected=expected
         )
+    def test_print_float(self):
+        code = "print 3.14"
+        
+        expected = "print(f'''3.14''')"
 
+        self.multi_level_tester(
+            code=code,
+            max_level=17,
+            expected=expected,
+            output='3.14'
+        )
     def test_print_division_float(self):
         code = "print 3 / 2"
         expected = "print(f'''{3 / 2}''')"
