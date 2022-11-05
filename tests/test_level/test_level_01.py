@@ -560,7 +560,7 @@ class TestsLevel1(HedyTester):
         expected = "print('Привіт, Хейді!')"
         output = "Привіт, Хейді!"
 
-        self.single_level_tester(code=code, expected=exppected, output=output)
+        self.single_level_tester(code=code, expected=expected, output=output)
 
     #
     # negative tests
