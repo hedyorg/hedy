@@ -664,42 +664,42 @@ adventures:
                 start_code: "# 在这里写你的代码"
             7:
                 story_text: |
-                    ## Restaurant
-                    In this level you've learned how to use the {repeat} command to repeat a line of code a certain amount of times.
-                    You can use that in your restaurant to {ask} multiple people what they'd like to eat. Like this:
+                    ## 餐厅
+                    在这一关，你需要学习如何使用 {repeat} 命令重复一行代码数次。
+                    你可以以此在你的餐厅里向多个人 {ask} 他们喜欢吃什么。比如这样：
                 example_code: |
                     ```
-                    {print} 'Welcome to Hedys restaurant!'
-                    people = {ask} 'How many people are joining us today?'
-                    {repeat} people times food = {ask} 'What would you like to eat?'
-                    {print} 'Thanks for your order! Its coming right up!'
+                    {print} '欢迎来到海迪餐厅！'
+                    人数 = {ask} '今天来了多少人？'
+                    {repeat} 人数 times 食物 = {ask} '您想吃什么？'
+                    {print} '谢谢您的点单！马上就来！'
                     ```
-                start_code: "# place your code here"
+                start_code: "# 在这里写你的代码"
             8:
                 story_text: |
-                    ## Restaurant
-                    In this level you can make your virtual restaurant more elaborate by repeating multiple lines of code. Like this:
+                    ## 餐厅
+                    在这一关，你可以通过重复多行代码，让你的虚拟餐厅更加细化。像这样：
                 example_code: |
                     ```
-                    {print} 'Welcome to Hedys restaurant!'
-                    people = {ask} 'How many people will be joining us today?'
-                    {print} 'Great!'
-                    {repeat} people {times}
-                        food = {ask} 'What would you like to order?'
-                        {print} food
-                    {print} 'Thank you for ordering!'
-                    {print} 'Enjoy your meal!'
+                    {print} '欢迎来到海迪餐厅！'
+                    人数 = {ask} '今天来了多少人？'
+                    {print} '好！'
+                    {repeat} 人数 {times}
+                        食物 = {ask} '您想点什么？'
+                        {print} 食物
+                    {print} '谢谢您的点单！'
+                    {print} '祝您用餐愉快！'
                     ```
                 story_text_2: |
-                    ## Challenge
-                    Of course, this code can be expanded with more items on the menu, offering drinks, and/or multiple courses, so feel free to add as many options as you like!
-                start_code: "# place your code here"
+                    ## 挑战
+                    当然，这代码还可以拓展，在菜单上加更多东西，提供饮料和多道菜，所以你可以按照自己的喜好随便增加多少选项！
+                start_code: "# 在这里写你的代码"
             9:
                 story_text: |
-                    ## Restaurant
-                    In this level you can use nesting to make your restaurant more realistic and more fun!
-                    For example you would {ask} for sauce {if} somebody orders fries, but you wouldn't {if} someone orders pizza!
-                    Check out the example, and try this at your own virtual restaurant!
+                    ## 餐厅
+                    在这一关，你可以用嵌套让你的餐厅更真实更有趣！
+                    比如如果有人点了薯条，你可以 {ask} 他要不要酱，但是点披萨的就不用！
+                    看看例子，然后在你自己的虚拟餐厅里试一下。
                 example_code: |
                     ```
                     {print} 'Welcome to Hedys restaurant!'
