@@ -14,7 +14,7 @@ var SearchBox = function (editor, range, showReplaceForm) {
     dom.buildDom(["div", { class: "ace_search right" },
         ["span", { action: "hide", class: "ace_searchbtn_close" }],
         ["div", { class: "ace_search_form" },
-            ["input", { class: "ace_search_field", placeholder: "Search...", spellcheck: "false" }],
+            ["input", { class: "ace_search_field", placeholder: document.getElementById("search_placeholder").innerHTML, spellcheck: "false" }],
             ["span", { action: "findPrev", class: "ace_searchbtn prev" }, "\u200b"],
             ["span", { action: "findNext", class: "ace_searchbtn next" }, "\u200b"],
             ["span", { action: "findAll", class: "ace_searchbtn", title: "Alt-Enter" }, "All"]
