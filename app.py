@@ -1,7 +1,5 @@
 # coding=utf-8
 import copy
-from itertools import count
-from multiprocessing.dummy import active_children
 from logging_config import LOGGING_CONFIG
 from logging.config import dictConfig as logConfig
 logConfig(LOGGING_CONFIG)
