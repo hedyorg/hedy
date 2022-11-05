@@ -269,20 +269,20 @@
 -   name: "crochets"
     explanation: "Liste avec des crochets."
     demo_code: |-
-        fruit = ['apple', 'banana', 'cherry']
-        {print} fruit
+        fruits = ['pomme', 'banane', 'cerise']
+        {print} fruits
 -   name: "Obtenir un élément d'une liste"
-    explanation: "To get an item from a list we use [number] so fruit[1] means, get the first fruit from the list!"
+    explanation: "Pour obtenir un élément d'une liste, on utilise [nombre] donc fruits[1] signifie : obtenir le premier fruit de la liste !"
     demo_code: |-
-        fruit = ['banana', 'apple', 'cherry']
-        firstfruit = fruit[1]
-        {print} firstfruit
--   name: "Get a random item from a list"
-    explanation: "To get a random item from a list we use [random] so fruit[random] means, get a random fruit from the list!"
+        fruits = ['banane', 'pomme', 'cerise']
+        premierfruit = fruits[1]
+        {print} premierfruit
+-   name: "Obtenir un élément aléatoire dans une liste"
+    explanation: "Pour obtenir un élément aléatoire d'une liste, on utilise [aléatoire] donc fruits[aléatoire] signifie : obtenir un fruit aléatoire de la liste !"
     demo_code: |-
-        fruit = ['banana', 'apple', 'cherry']
-        random_fruit = fruit[random]
-        {print} random_fruit
+        fruits = ['banane', 'pomme', 'cerise']
+        fruit_aleatoire = fruits[{random}]
+        {print} fruit_aleatoire
 17:
 -   name: "`{for}` avec `:`"
     explanation: "Utilisant un `{for}` sur plusieurs lignes, il te faut un `:` à la fin"
