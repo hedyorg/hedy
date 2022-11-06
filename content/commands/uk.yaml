@@ -95,7 +95,7 @@
     demo_code: "{print} '5 на 5 це ' 5 * 5"
 -   name: '{ask}'
     explanation: Запитайте про суму і перевірте відповідь. Тепер ми можемо друкувати дві лінії.
-    demo_code: "відповідь = {ask} 'Скільки буде 5 додати 5?'\n{if} відповідь {is} 10\n    {print} 'Добра робота!'\n    {print} 'Дійсно, правильна відповідь ' answer\n{else}\n    {print} 'Ой!'\n    {print} 'Відповідь 10'"
+    demo_code: "відповідь = {ask} 'Скільки буде 5 додати 5?' \n{if} відповідь {is} 10 \n      {print} 'Добра робота!' \n      {print} 'Дійсно, правильна відповідь ' answer \n{else} \n      {print} 'Ой!\n      {print} 'Відповідь 10'"
 -   name: '{repeat} з черепашкою'
     explanation: Повторіть декілька ліній.
     demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
@@ -109,7 +109,7 @@
 10:
 -   name: '{print}'
     explanation: Надрукуйте щось. Не забувайте використовувати лапки для літерного друку.
-    demo_code: "{print} '5 помножити на 5' - це 5 * 5"
+    demo_code: "{print} '5 помножити на 5 - це ' 5 * 5"
 -   name: '{for} зі списком'
     explanation: Надрукуйте всі речі у вигляді списку.
     demo_code: "animals {is} dog, cat, blobfish\n{for} animal {in} animals\n  {print} 'I love ' animal"
