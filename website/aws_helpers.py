@@ -7,13 +7,15 @@ import config
 import utils
 import threading
 
+logger = logging.getLogger(__name__)
+
 
 def s3_querylog_transmitter_from_env():
     """Return an S3 transmitter, or return None."""
     have_aws_creds = os.getenv('AWS_ACCESS_KEY_ID') and os.getenv('AWS_SECRET_ACCESS_KEY')
 
     if not have_aws_creds:
-        logging.warning('Unable to initialize S3 querylogger (missing AWS_ACCESS_KEY_ID or AWS_SECRET_ACCESS_KEY)')
+        logger.warning('Unable to initialize S3 querylogger (missing AWS_ACCESS_KEY_ID or AWS_SECRET_ACCESS_KEY)')
         return None
 
     return make_s3_transmitter(config.config['s3-query-logs'])
@@ -24,7 +26,7 @@ def s3_parselog_transmitter_from_env():
     have_aws_creds = os.getenv('AWS_ACCESS_KEY_ID') and os.getenv('AWS_SECRET_ACCESS_KEY')
 
     if not have_aws_creds:
-        logging.warning('Unable to initialize S3 parse logger (missing AWS_ACCESS_KEY_ID or AWS_SECRET_ACCESS_KEY)')
+        logger.warning('Unable to initialize S3 parse logger (missing AWS_ACCESS_KEY_ID or AWS_SECRET_ACCESS_KEY)')
         return None
 
     return make_s3_transmitter(config.config['s3-parse-logs'])
@@ -58,5 +60,5 @@ def make_s3_transmitter(s3config):
             Key=key,
             StorageClass='STANDARD_IA', # Cheaper, applicable for logs
             Body=body)
-        logging.debug(f'Wrote {len(records)} query logs to s3://{s3config["bucket"]}/{key}')
+        logger.debug(f'Wrote {len(records)} query logs to s3://{s3config["bucket"]}/{key}')
     return transmit_to_s3

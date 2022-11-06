@@ -1242,7 +1242,7 @@ class TestClasses(AuthHelper):
         # THEN the class should contain a student with valid fields
         self.assertEqual(len(Class_data['students']), 1)
         class_student = Class_data['students'][0]
-        self.assertEqual(class_student['highest_level'], 0)
+        self.assertEqual(class_student['highest_level'], "-")
         self.assertEqual(class_student['programs'], 0)
         self.assertIsInstance(class_student['last_login'], str)
         self.assertEqual(class_student['username'], student['username'])

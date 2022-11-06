@@ -75,6 +75,24 @@ $ npx cypress open
 
 You will see the Cypress Launchpad in which you should choose to open the End2End testing panel. Afterwards you are able to run all the tests configured in the test suite, as well as adding your own according to [the documentation of Cypress](https://docs.cypress.io/guides/end-to-end-testing/writing-your-first-end-to-end-test).
 
+### Feeding the local database
+
+Hedy uses a local database in developing enviroments. This database is called `dev_database.py` and it's not tracked by Git. To feed this local database you can use the one that's been filled with data already, `data-for-testing.json`, it contains:
+
+1. Five users, from user1 to user5.
+2. One teacher called teacher1.
+3. Five students, from student1 to student5.
+4. A class called CLASS1.
+5. Several saved programs, quiz attemps and some users have achievements.
+
+The password to all of the accounts is 123456
+
+To feed the dev database with the data in this one, you can run:
+
+```
+bash feed_dev_database.sh
+```
+
 ## Python code styling
 As this project is growing and multiple people are working on it, we want to move to a more uniformly styled code base. We choose to stick to PEP8 guidelines, with the exception of a max line length of 100 characters instead of 79. To ensure your code adheres to these guidelines, you can install the pre-commit configuration to automatically check modified code when you make a commit. Installing this pre-commit hook has to be done manually (for security reasons) and can be done using the following commands:
 
