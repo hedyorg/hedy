@@ -1197,3 +1197,98 @@ levels:
                 feedback: It not, though.
             hint: all the indentation is done correctly.
             correct_answer: A
+            question_score: '10'
+        2:
+            question_text: What will be printed after entering the correct password?
+            code: "password = {ask} 'What is the password?'\ncorrect_password = Hedy\n{if} password {is} correct_password\n    {repeat} 2 {times}\n        {print} 'Good job!'\n        {print} 'You can use the computer!'\n{else}\n    {print} 'The computer will explode in 5... 4... 3... 2... 1...'"
+            mp_choice_options:
+            -   option: "```\nGood job!\nGood job!\n```"
+                feedback: That's not it!
+            -   option: "```\nThe computer will explode in 5... 4... 3... 2... 1...\n```"
+                feedback: That's not it!
+            -   feedback: That's not it!
+                option: "```\nGood job!\nGood job!\nYou can use the computer!\n```"
+            -   option: "```\nGood job!\nYou can use the computer!\nGood job!\nYou can use the computer!\n```"
+                feedback: Correct!
+            correct_answer: D
+            hint: Everything under the `{repeat}` command is repeated twice.
+            question_score: '10'
+        3:
+            question_text: Which case should you choose to win a million dollars?
+            code: "{print} 'Choose the right case and win!'\ncase = {ask} 'Which case will you pick? 1 or 2?'\n{if} case {is} 1\n     action = {ask} 'Open it or sell it?'\n         {if} action {is} sell\n             {print} 'You sell your case for 10 dollars'\n         {if} action {is} open\n             {print} 'You open the case and win an apple pie'\n{if} case {is} 2\n     action = {ask} 'Open it or sell it?'\n         {if} action {is} sell\n             {print} 'You sell the case for 500 dollars'\n         {if} action {is} open\n             {print} 'You open the case and win a million dollars!'"
+            mp_choice_options:
+            -   option: case 1, sell
+                feedback: You don't win a million!
+            -   option: case 1, open
+                feedback: You don't win a million
+            -   option: case 2, sell
+                feedback: You don't win a million
+            -   option: case 2, open
+                feedback: Great job! You win!
+            correct_answer: D
+            hint: Follow the right path
+            question_score: '10'
+        4:
+            question_text: Which statement is true?
+            code: "name = {ask} 'What is your name?'\nsize = {ask} 'What is your shoe size?'\n{if} size {is} 38\n    {if} name {is} Cinderella\n        {print} 'I was looking for you!'\n    {else}\n        {print} 'You are not the one!'\n{else}\n    {print} 'Ill keep looking'"
+            mp_choice_options:
+            -   option: Sleeping Beauty with shoe size 38 gets the output 'Ill keep looking'
+                feedback: No, she gets 'You are not the one!'
+            -   option: "Cinderella with shoe size 40 gets the output: 'I was looking for you!'"
+                feedback: No, she gets 'Ill keep looking'
+            -   option: Sleeping Beauty with shoe size 40 gets the output 'Ill keep looking'
+                feedback: That's right!
+            -   option: Cinderella with shoe size 40 gets the output 'I was looking for you!'
+                feedback: No she gets 'Ill keep looking'
+            correct_answer: C
+            hint: No matter what your name is, if you have shoe size 40 you will get the message 'Ill keep looking'.
+            question_score: '10'
+        5:
+            question_text: Which code produced this output?
+            output: "Icecream is the best!\nIcecream is the best!\nIcecream is the best!"
+            mp_choice_options:
+            -   option: "```\ndesert = {ask} 'What is your favorite type of desert?'\n{if} desert {is} icecream\n    {repeat} 3 {times}\n    {print} 'Icecream is the best!'\n```\n"
+                feedback: Don't forget the indentation after `{repeat}` commands.
+            -   option: "```\ndesert = {ask} 'What is your favorite type of desert?'\n{if} desert {is} icecream\n{repeat} 3 {times}\n    {print} 'Icecream is the best!'\n```\n"
+                feedback: Use indentation after an `{if}` command
+            -   option: "```\ndesert = {ask} 'What is your favorite type of desert?'\n{if} desert {is} icecream\n    {repeat} 3 {times}\n        {print} 'Icecream is the best!'\n```\n"
+                feedback: Perfect
+            -   option: "```\n{repeat} 3 {times}\n    desert = {ask} 'What is your favorite type of desert?'\n    {if} desert {is} icecream\n        {repeat} 3 {times}\n        {print} 'Icecream is the best!'\n```\n"
+                feedback: There are 2 `{repeat}` commands in this code.
+            correct_answer: C
+            hint: Watch the indentation
+            question_score: '10'
+        6:
+            question_text: After which command(s) should you use indentation (starting the next line with 4 spaces)?
+            mp_choice_options:
+            -   option: '`{if}`'
+                feedback: Don't forget the others
+            -   option: '`{if}` `{repeat}`'
+                feedback: Don't forget `{else}`!
+            -   option: '`{if}` `{else}` `{repeat}`'
+                feedback: Keep it up!
+            -   option: '`{if}` `{else}` `{repeat}` `{print}`'
+                feedback: Not with print
+            correct_answer: C
+            hint: Indentation happens on the line below some commands
+            question_score: '10'
+        7:
+            question_text: "In this code from a pizza restaurant. \nYou'll get a 5 dollar discount if you order a medium pizza with coke.\n What should you do to debug this code?"
+            mp_choice_options:
+            -   option: "```\n{if} food {is} pizza\n    {if} size {is} medium\n        {if} drink {is} coke\n            price = price - 2\n```\n"
+                feedback: Amazing!
+            -   option: "```\n{if} food {is} pizza\n    {if} size {is} medium\n{if} drink {is} coke\n    price = price - 2\n```\n"
+                feedback: Try again!
+            -   option: "```\n{if} food {is} pizza\n{if} size {is} medium\n{if} drink {is} coke\n        price = price - 2\n```\n"
+                feedback: Try again
+            -   option: "```\n{if} food {is} pizza\n    {if} size {is} medium\n        {if} drink {is} coke\n        price = price - 2\n```\n"
+                feedback: Try again
+            hint: After each `{if}` command, the line below should indent
+            question_score: '10'
+            code: "{if} food {is} pizza\n{if} size {is} medium\n{if} drink {is} coke\nprice = price - 2"
+            correct_answer: A
+        8:
+            question_text: What is wrong is this code?
+            code: "age = {ask} 'Happy Birthday! How old are you?'\nsinging = {ask} 'Would you like us to sing?'\n    if singing {is} yes\n        {repeat} years {times}\n          {print} 'Hip Hip Hooray'"
+            mp_choice_options:
+            -   option: You can't put two questions in a row
