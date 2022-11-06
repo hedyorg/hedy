@@ -2227,25 +2227,22 @@ def preprocess_blocks(code, level):
             indent_size = leading_spaces
             indent_size_adapted = True
 
-        # there are leading spaces but this line does not require indents? raise!
+        # indentation size not 4
+        if (leading_spaces % indent_size) != 0:
+            # there is inconsistent indentation, not sure if that is too much or too little!
+            if leading_spaces < current_number_of_indents * indent_size:
+                fixed_code = program_repair.fix_indent(code, line_number, leading_spaces, indent_size)
+                raise hedy.exceptions.NoIndentationException(line_number=line_number, leading_spaces=leading_spaces,
+                                                             indent_size=indent_size, fixed_code=fixed_code)
+            else:
+                fixed_code = program_repair.fix_indent(code, line_number, leading_spaces, indent_size)
+                raise hedy.exceptions.IndentationException(line_number=line_number, leading_spaces=leading_spaces,
+                                                             indent_size=indent_size, fixed_code=fixed_code)
 
-
-        #calculate nuber of indents if possible
-        if indent_size != None:
-            if (leading_spaces % indent_size) != 0:
-                # there is inconsistent indentation, not sure if that is too much or too little!
-                if leading_spaces < current_number_of_indents * indent_size:
-                    fixed_code = program_repair.fix_indent(code, line_number, leading_spaces, indent_size)
-                    raise hedy.exceptions.NoIndentationException(line_number=line_number, leading_spaces=leading_spaces,
-                                                                 indent_size=indent_size, fixed_code=fixed_code)
-                else:
-                    fixed_code = program_repair.fix_indent(code, line_number, leading_spaces, indent_size)
-                    raise hedy.exceptions.IndentationException(line_number=line_number, leading_spaces=leading_spaces,
-                                                                 indent_size=indent_size, fixed_code=fixed_code)
-
-            current_number_of_indents = leading_spaces // indent_size
-            if current_number_of_indents > 1 and level == hedy.LEVEL_STARTING_INDENTATION:
-                raise hedy.exceptions.LockedLanguageFeatureException(concept="nested blocks")
+        # happy path, multiple of 4 spaces:
+        current_number_of_indents = leading_spaces // indent_size
+        if current_number_of_indents > 1 and level == hedy.LEVEL_STARTING_INDENTATION:
+            raise hedy.exceptions.LockedLanguageFeatureException(concept="nested blocks")
 
         if current_number_of_indents > previous_number_of_indents and not next_line_needs_indentation:
             # we are indenting, but this line is not following* one that even needs indenting, raise
