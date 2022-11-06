@@ -878,3 +878,322 @@ levels:
             mp_choice_options:
             -   option: You can only fill in the word is on the `_?_`
                 feedback: You are allowed to use the `=` sign as well
+            -   option: You can fill in either the word is or the `=` sign on the `_?_`
+                feedback: Amazing!
+            -   option: You have to fill in =is= on the `_?_`
+                feedback: No, one `=` sign is enough
+            -   option: You can only use the `=` sign when working with numbers, not with words.
+                feedback: You can also use `=` with words.
+            correct_answer: B
+            hint: '`{is}` and `=` are both allowed'
+            question_score: '10'
+    7:
+        1:
+            question_text: How many lines can you repeat at once with the repeat command at this level?
+            mp_choice_options:
+            -   option: '0'
+                feedback: No you can repeat a line.
+            -   option: '1'
+                feedback: Correct, one line at a time
+            -   option: '2'
+                feedback: In this level only one line at a time
+            -   option: infinite
+                feedback: In this level you can only repeat one line at a time
+            correct_answer: B
+            hint: You can only repeat 1 line at a time
+            question_score: '10'
+        2:
+            question_text: Which code is right?
+            mp_choice_options:
+            -   feedback: "`{repeat}` 100 `{times}` `{print}` 'hello'"
+                option: "```\n{print} 100 {times} 'hello'\n```\n"
+            -   option: "```\n{print} {repeat} 100 {times} 'hello'\n```\n"
+                feedback: "{repeat} 100 {times} {print} 'hello'"
+            -   option: "```\n{repeat} 'hello' 100 {times}\n```\n"
+                feedback: "{repeat} 100 {times} {print} 'hello'"
+            -   option: "```\n{repeat} 100 {times} {print} 'hello'\n```\n"
+                feedback: That's right!
+            correct_answer: D
+            hint: First the repeat command, then the `{print}` command
+            question_score: '10'
+        3:
+            question_text: Is this code right or wrong?
+            code: "{repeat} 100 {times} 'Hello!'"
+            mp_choice_options:
+            -   option: Right
+                feedback: No, a word is missing
+            -   option: Wrong, the word `{repeat}` is missing
+                feedback: The word `{repeat}` is there, another word is missing
+            -   option: Wrong, the word `{times}` is missing
+                feedback: The word `{times}` is there, another word is missing.
+            -   option: Wrong, the word `{print}` is missing
+                feedback: Correct
+            correct_answer: D
+            hint: "It should be: `{repeat}` 100 `{times}` `{print}` 'Hello'"
+            question_score: '10'
+        4:
+            question_text: Which word is wrong in the code?
+            code: "{print} 'I'm blue'\n{repeat} 7 {times} {print} 'da ba dee, da ba da'"
+            mp_choice_options:
+            -   option: "```\nI'm\n```\n"
+                feedback: That's right!
+            -   option: "```\n{print}\n```\n"
+                feedback: '`{print}` is spelled correctly'
+            -   option: "```\n{repeat}\n```\n"
+                feedback: '`{repeat}` is spelled correctly'
+            -   option: "```\n{times}\n```\n"
+                feedback: '`{times}` is spelled correctly'
+            correct_answer: A
+            hint: I'm is wrong, you can't use apostrophes
+            question_score: '10'
+        5:
+            question_text: Is this code right or wrong?
+            code: "{repeat} 100 {times} {print} 'Hedy is awesome!'"
+            mp_choice_options:
+            -   option: Correct
+                feedback: That's right!
+            -   option: Wrong
+                feedback: That's not it
+            correct_answer: A
+            hint: The code is correct!
+            question_score: '10'
+        6:
+            question_text: What will be the output from this code?
+            code: "{print} 'The wheels on the bus go'\n{repeat} 3 {times} {print} ' round and round'"
+            mp_choice_options:
+            -   option: "the wheels on the bus go\nround and round"
+                feedback: Only the second line is repeated 3 times
+            -   option: "the wheels on the bus go\nthe wheels on the bus go\nthe wheels on the bus go\nround and round"
+                feedback: Only the second line is repeated 3 times
+            -   option: "the wheels on the bus go\nround and round\nthe wheels on the bus go\nround and round\nthe wheels on the bus go\nround and round"
+                feedback: Only the second line is repeated 3 times
+            -   option: "the wheels on the bus go\nround and round\nround and round\nround and round"
+                feedback: All though the town! Perfect!
+            correct_answer: D
+            hint: Only 'round and round' is repeated 3 times.
+            question_score: '10'
+        7:
+            question_text: What will be the output from this code?
+            code: "{repeat} 2 {times} {print} 'We will'\n{print} 'ROCK YOU!'"
+            mp_choice_options:
+            -   option: "We will We will\nROCK YOU!"
+                feedback: "'We will' won't appear twice in the same line"
+            -   option: "We will\nWe will\nROCK YOU!"
+                feedback: Great!
+            -   option: "We will\nROCK YOU!\nWe will\nROCK YOU!"
+                feedback: ROCK YOU! won't be repeated
+            -   option: "We will\nROCK YOU!"
+                feedback: Mind the repeat command
+            correct_answer: B
+            hint: Mind the `{repeat}` command.
+            question_score: '10'
+        8:
+            question_text: What Hedy code belongs to this output?
+            code: "Here comes the sun\nDo do do do\nHere comes the sun\nAnd I say\nIts alright"
+            mp_choice_options:
+            -   option: "```\n{print} 'Here comes the sun'\n{print} 'Do do do do'\n{print} 'Here comes the sun'\n{print} 'And I say'\n{print} 'Its alright'\n```\n"
+                feedback: Awesome, you can't use the `{repeat}` command here.
+            -   option: "```\n{repeat} 2 {times} {print} 'Here comes the sun'\n{print} 'And I say'\n{print} 'Its alright'\n"
+                feedback: Where did you leave 'Do do do do'?
+            -   option: "```\n{repeat} 2 {times} {print} 'Here comes the sun'\n{print} 'Do do do do'\n{print} 'And I say'\n{print} 'Its alright'\n```\n"
+                feedback: This is not the correct order..
+            -   option: "```\n{repeat} 2 {times} {print} 'Here comes the sun'\n{repeat} 2 {times} {print} 'Do do'\n{print} 'And I say'\n{print} 'Its alright'\n```\n"
+                feedback: This is not the correct order..
+            hint: '`{repeat}` can only be used if you want to execute the same line multiple times in a row.'
+            correct_answer: A
+            question_score: '10'
+        9:
+            question_text: What Hedy code belongs to this output?
+            code: "Batman was flying through Gotham.\nWhen suddenly he heard someone screaming...\nHelp!\nHelp!\nHelp!\nPlease help me!"
+            mp_choice_options:
+            -   option: "```\n{print} 'Batman was flying through Gotham. '\n{print} 'When suddenly he heard someone screaming...'\n{print} 'Help!'\n{repeat} 3 {times} {print} 'Please help me!'\n```\n"
+                feedback: Your repeated line is incorrect.
+            -   option: "```\n{print} 'Batman was flying through Gotham.'\n{print} 'When suddenly he heard someone screaming...'\n{repeat} 3 {times} 'Help!'\n{print} 'Please help me!'\n```\n"
+                feedback: The `{print}` command is missing on line 3.
+            -   option: "```\n{print} Batman was flying through Gotham.\n{print} When suddenly he heard someone screaming...\n{repeat} 3 {times} {print} Help!\n{print} Please help me!\n```\n"
+                feedback: You're missing the quotation marks
+            -   option: "```\n{print} 'Batman was flying through Gotham.'\n{print} 'When suddenly he heard someone screaming...'\n{repeat} 3 {times} {print} 'Help!'\n{print} 'Please help me!'\n```\n"
+                feedback: Perfect
+            question_score: '10'
+            hint: "'Help!' is repeated 3 times."
+            correct_answer: D
+        10:
+            question_text: What Hedy code belongs to this output?
+            code: "if youre happy and you know it clap your hands\nif youre happy and you know it clap your hands\nif youre happy and you know it and you really want to show it\nif youre happy and you know it clap your hands"
+            mp_choice_options:
+            -   option: "```\n{repeat} 2 {times} 'if youre happy and you know it clap your hands'\n{print} 'if youre happy and you know it and you really want to show it'\n{print} 'if youre happy and you know it clap your hands'\n```\n"
+                feedback: Almost! the first line needs an extra word
+            -   option: "```\n{repeat} 2 {times} {print} 'if youre happy and you know it clap your hands'\n{print} 'if youre happy and you know it and you really want to show it'\n{print} 'if youre happy and you know it clap your hands'\n```\n"
+                feedback: Great!
+            -   option: "```\n{repeat} 3 {times} {print} 'if youre happy and you know it clap your hands'\n{print} 'if youre happy and you know it and you really want to show it'\n```\n"
+                feedback: This is not in the right order.
+            -   option: "```\n{repeat} 4 {times} 'if youre happy and you know it'\n{repeat} 2 times 'clap your hands'\n{print} 'and you really want to show it'\n{print} 'clap your hands'\n```\n"
+                feedback: This is not in the right order.
+            correct_answer: B
+            hint: Mind the order of the sentences.
+            question_score: '10'
+    8:
+        1:
+            question_text: Which output will be produced by this code?
+            code: "{repeat} 2 {times}\n    {print} 'Hello'\n    {print} 'Im Hedy!'"
+            mp_choice_options:
+            -   option: "Hello\nIm Hedy!\n"
+                feedback: Everything is printed twice.
+            -   option: "Hello\nHello\nIm Hedy\n"
+                feedback: The second line is repeated twice as well.
+            -   option: "Hello\nIm Hedy!\nHello\nIm Hedy!\n"
+                feedback: Super!
+            -   option: "Hello\nHello\nIm Hedy!\nIm Hedy!\n"
+                feedback: Everything is printed twice
+            correct_answer: C
+            hint: Both lines are repeated twice.
+            question_score: '10'
+        2:
+            question_text: What is wrong with this code?
+            code: "{repeat} 5 {times}\n{print} 'Hedy is cool!'"
+            mp_choice_options:
+            -   option: This should be only one line, not 2.
+                feedback: No it should be 2 lines.
+            -   option: This `{print}` command has to be removed.
+                feedback: No, you need it.
+            -   feedback: Nee, repeat is de goede spelling
+                option: There is a spelling mistake in the `{repeat}` command.
+            -   option: The second line need to start with 4 spaces as indentation.
+                feedback: Correct!
+            correct_answer: D
+            hint: Something is missing in the second line?
+            question_score: '10'
+        3:
+            question_text: What output will be produced when you run this program?
+            code: "{repeat} 3 {times}\n    {print} 'Baby shark tututudutudu'\n{print} 'Baby shark'"
+            mp_choice_options:
+            -   option: "Baby shark tututudutudu\nBaby shark\n"
+                feedback: Mind the `{repeat}` command!
+            -   option: "Baby shark tututudutudu\nBaby shark\nBaby shark tututudutudu\nBaby shark\nBaby shark tututudutudu\nBaby shark\n"
+                feedback: The last line has no indentation, so it's not repeated.
+            -   option: "Baby shark tututudutudu\nBaby shark tututudutudu\nBaby shark tututudutudu\nBaby shark\n"
+                feedback: Right!
+            -   option: "Baby shark tututudutudu\nBaby shark\nBaby shark\nBaby shark\n"
+                feedback: What is being repeated and what isn't.
+            correct_answer: C
+            hint: What is being repeated and what is not?.
+            question_score: '10'
+        4:
+            question_text: Which output is correct?
+            code: "{print} 'The children went:'\n{repeat} 2 {times}\n    {print} 'Yay!'\n    {print} 'Were going on holiday!'"
+            mp_choice_options:
+            -   option: "The children went:\nYay!\nWere going on holiday!\n"
+                feedback: Mind the `{repeat}` command!
+            -   option: "The children went:\nYay!\nWere going on holiday!\nYay!\nWere going on holiday!\n"
+                feedback: Correct!
+            -   option: "The children went:\nYay!\nYay!\nWere going on holiday!\nWere going on holiday!\n"
+                feedback: This order is incorrect.
+            -   option: "The children went:\nYay!\nYay!\nWere going on holiday!\n"
+                feedback: The last line is repeated too.
+            correct_answer: B
+            hint: The block under the `{repeat}` command is repeated twice.
+            question_score: '10'
+        5:
+            question_text: What is wrong with this code?
+            code: "end = {ask} 'Do you want a happy or a sad ending?'\n{if} end {is} happy {print} 'They lived happily ever after'\n{else} {print} 'The world exploded. The end.'"
+            mp_choice_options:
+            -   option: The `{print}` commands on the last two lines should start on new lines en start with 4 spaces.
+                feedback: That's right!
+            -   option: '`{else}` is not a command!'
+                feedback: It is!
+            -   option: Lines that start with `{if}` should start with 4 spaces
+                feedback: That's not true
+            -   option: '`{ask}` is no longer a command'
+                feedback: That's not true
+            correct_answer: A
+            hint: Something is wrong with indentation
+            question_score: '10'
+        6:
+            question_text: Which code was used to create this output?
+            output: "Welcome to restaurant Hedy\nPizza\nHamburger"
+            mp_choice_options:
+            -   option: "```\n{print} 'Welcome to restaurant Hedy'\nfood = {ask} 'What would you like to eat?'\n{print} food\n```\n"
+                feedback: You need to take 2 orders.
+            -   option: "```\n{repeat} 2 {times}\n    {print} 'Welcome to restaurant Hedy'\n    food = {ask} 'What would you like to eat?'\n    {print} food\n```\n"
+                feedback: The welcome line would be printed twice in this code too
+            -   option: "```\n{print} 'Welcome to restaurant Hedy'\n{repeat} 2 {times}\n    food = {ask} 'What would you like to eat?'\n{print} food\n```\n"
+                feedback: Now only the last order is printed.
+            -   option: "```\n{print} 'Welcome to restaurant Hedy'\n{repeat} 2 {times}\n    food = {ask} 'What would you like to eat?'\n    {print} food\n```\n"
+                feedback: Awesome!
+            hint: Pay attention to what sould be repeated and what should only be printed once.
+            correct_answer: D
+            question_score: '10'
+        7:
+            question_text: What is wrong with this code?
+            code: "eten = {ask} 'What would you like to eat?'\n{if} food {is} fries\nsauce = {ask} 'What sauce would you like?'\n    {print} 'One fries with ' sauce\n{if} food {is} pizza\n    topping = {ask} 'What topping would you like?'\n    {print} 'One pizza with ' topping\n{print} 'That you for your order'"
+            mp_choice_options:
+            -   option: Nothing this code is correct!
+                feedback: Something is wrong!.
+            -   option: You're not allowed to use an `{if}` command after an `{ask}` command.
+                feedback: You are!
+            -   option: You don't have to use indentation twice. Only in the first `{if}` command.
+                feedback: You always have to use indentation.
+            -   option: The indentation is wrong in the first `{if}` command.
+                feedback: That's right.
+            correct_answer: D
+            hint: Take a careful look at the indentation.
+            question_score: '10'
+        8:
+            question_text: In which of the codes is the indentation done right?
+            mp_choice_options:
+            -   option: "```\n{if} answer {is} 32\n   {print} 'You are...'\n      {sleep}\n          {print} 'right!'\n      {else}\n          {print} 'You are wrong!'\n```\n"
+                feedback: You are wrong!
+            -   option: "```\n{if} answer {is} 32\n{print} 'You are...'\n{sleep}\n{print} 'right!'\n{else}\n{print} 'You are wrong!'\n```\n"
+                feedback: You are wrong!
+            -   option: "```\n{if} answer {is} 32\n    {print} 'You are...'\n    {sleep}\n    {print} 'right!'\n{else}\n    {print} 'You are wrong!'\n```\n"
+                feedback: You are... right!
+            -   option: "```\n{if} answer {is} 32\n    {print} 'You are...'\n    {sleep}\n{print} 'right!'\n{else}\n    {print} 'You are wrong!'\n```\n"
+                feedback: You are wrong!
+            correct_answer: C
+            hint: What should happen if the person is right? And what else?
+            question_score: '10'
+        9:
+            question_text: What line(s) in this code should start with 4 spaces?
+            code: "1 music = {ask} 'What is your favorite music genre?'\n2 {if} music {is} rock\n3 {print} '\U0001F918'\n4 {else}\n5 {print} '\U0001F44E'"
+            mp_choice_options:
+            -   option: Line 2 and 4
+                feedback: The lines after the `{if}` and `{else}` command should start with 4 spaces
+            -   option: Only line 3
+                feedback: Not only 3...
+            -   option: Line 3, 4 and 5
+                feedback: Line 4 shouldn't
+            -   option: Line 3 and 5
+                feedback: Great job!
+            correct_answer: D
+            hint: The lines after an `{if}` or `{else}` command should start with 4 spaces.
+            question_score: '10'
+        10:
+            question_text: Which statement is true?
+            code: "1 level = {ask} 'What level are you on?'\n2 {if} level {is} 8\n3 {print} 'Great job!'"
+            mp_choice_options:
+            -   option: All lines should start with 4 spaces
+                feedback: That's not true
+            -   option: Line 2 and 3 should start with 4 spaces
+                feedback: That's not true
+            -   option: Line 2 should start with 4 spaces
+                feedback: That's not true
+            -   option: Line 3 should start with 4 spaces
+                feedback: You are correct!
+            correct_answer: D
+            question_score: '10'
+            hint: Only one line starts with 4 spaces, but which one...?
+    9:
+        1:
+            question_text: What is wrong with this code?
+            code: "{repeat} 3 {times}\n   eten = {ask} 'What would you like to eat?'\n   {if} food {is} fries\n       sauce = {ask} 'What sauce would you like?'\n       {print} 'One fries with ' sauce\n   {if} food {is} pizza\n       topping = {ask} 'What topping would you like?'\n       {print} 'One pizza with ' topping\n{print} 'Thank you for your order'"
+            mp_choice_options:
+            -   option: Nothing this code is correct!
+                feedback: That's right!.
+            -   option: You're not allowed to use an `{if}` command after an `{ask}` command.
+                feedback: You are!.
+            -   option: You don't have to use indentation twice.
+                feedback: You always have to use indentation.
+            -   option: The indentation is wrong in the last `{if}` command.
+                feedback: It not, though.
+            hint: all the indentation is done correctly.
+            correct_answer: A
