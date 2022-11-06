@@ -2192,7 +2192,7 @@ def find_indent_length(line):
             break
     return number_of_spaces
 
-def needs_indentation(code):
+def line_requires_indentation(code):
     # this is done a bit half-assed, clearly *parsing* the one line would be superior
     # because now a line like
     # repeat is 5 would also require indentation!
@@ -2202,8 +2202,6 @@ def needs_indentation(code):
 
     first_keyword = all_words[0]
     return first_keyword in indent_keywords
-
-
 
 def preprocess_blocks(code, level):
     processed_code = []
@@ -2229,6 +2227,9 @@ def preprocess_blocks(code, level):
             indent_size = leading_spaces
             indent_size_adapted = True
 
+        # there are leading spaces but this line does not require indents? raise!
+
+
         #calculate nuber of indents if possible
         if indent_size != None:
             if (leading_spaces % indent_size) != 0:
@@ -2246,30 +2247,37 @@ def preprocess_blocks(code, level):
             if current_number_of_indents > 1 and level == hedy.LEVEL_STARTING_INDENTATION:
                 raise hedy.exceptions.LockedLanguageFeatureException(concept="nested blocks")
 
+        if current_number_of_indents > previous_number_of_indents and not next_line_needs_indentation:
+            # we are indenting, but this line is not following* one that even needs indenting, raise
+            # * note that we have not yet updated the value of 'next line needs indenting' so if refers to this line!
+            fixed_code = program_repair.fix_indent(code, line_number, leading_spaces, indent_size)
+            raise hedy.exceptions.IndentationException(line_number=line_number, leading_spaces=leading_spaces,
+                                                       indent_size=indent_size, fixed_code=fixed_code)
+
+
         if next_line_needs_indentation and current_number_of_indents <= previous_number_of_indents:
             fixed_code = program_repair.fix_indent(code, line_number, leading_spaces, indent_size)
             raise hedy.exceptions.NoIndentationException(line_number=line_number, leading_spaces=leading_spaces,
                                                          indent_size=indent_size, fixed_code=fixed_code)
-
-        if needs_indentation(line):
-            next_line_needs_indentation = True
-        else:
-            next_line_needs_indentation = False
 
         if current_number_of_indents - previous_number_of_indents > 1:
             fixed_code = program_repair.fix_indent(code, line_number, leading_spaces, indent_size)
             raise hedy.exceptions.IndentationException(line_number=line_number, leading_spaces=leading_spaces,
                                             indent_size=indent_size, fixed_code=fixed_code)
 
-
-
         if current_number_of_indents < previous_number_of_indents:
-            # we springen 'terug' dus er moeten end-blocken in
-            # bij meerdere terugsprongen sluiten we ook meerdere blokken
+                # we are dedenting ('jumping back) so we need to and an end-block
+                # (multiple if multiple dedents are happening)
 
-            difference_in_indents = (previous_number_of_indents - current_number_of_indents)
-            for i in range(difference_in_indents):
-                processed_code.append('end-block')
+                difference_in_indents = (previous_number_of_indents - current_number_of_indents)
+                for i in range(difference_in_indents):
+                    processed_code.append('end-block')
+
+
+        if line_requires_indentation(line):
+            next_line_needs_indentation = True
+        else:
+            next_line_needs_indentation = False
 
         #save to compare for next line
         previous_number_of_indents = current_number_of_indents
