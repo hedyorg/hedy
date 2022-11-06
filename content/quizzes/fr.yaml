@@ -373,21 +373,21 @@ levels:
             hint: "La variable (la liste) est appelée options."
             question_score: '10'
         4:
-            question_text: "Que faut-il changer dans la ligne pour afficher un prix aléatoire ?"
+            question_text: "Que faut-il changer dans la ligne pour afficher un coût aléatoire ?"
             code: |-
-                prix is 1 euro, 100 euros, 100 euros
-                print prix at random
+                coûts is 1 euro, 100 euros, 1 million euros
+                print coût at random
             mp_choice_options:
-            -   option: "print prix"
-                feedback: "tu ne veux pas afficher le mot 'prix', mais tu veux afficher un prix tiré au hasard dans ta liste"
-            -   option: "print prix at random"
+            -   option: "print coût"
+                feedback: "tu ne veux pas afficher le mot 'coût', mais tu veux afficher un coût tiré au hasard dans ta liste"
+            -   option: "print coûts at random"
                 feedback: "Super ! Tu as vraiment fait attention."
-            -   option: "print at random prix"
+            -   option: "print at random coût"
                 feedback: "Tu y es presque. L'ordre des mots n'est pas encore correct."
             -   option: "Rien, ce code est correct."
                 feedback: "Cherche bien l'erreur que tu as loupée !"
             correct_answer: "B"
-            hint: "Le nom de la variable est prix"
+            hint: "Le nom de la variable est coûts"
             question_score: '10'
         5:
             question_text: "Qu'est-ce qui ne va pas dans ce code ?"
