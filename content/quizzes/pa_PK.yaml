@@ -811,3 +811,70 @@ levels:
                 feedback: Great!
             correct_answer: D
             hint: '`price` `is` `people` `times` 10'
+            question_score: '10'
+        6:
+            question_text: How much does a hamburger cost is this virtual restaurant?
+            code: "{print} 'Welcome at Hedys diner'\nfood = {ask} 'What would you like to eat?'\nprice = 0\n{if} food {is} hamburger price = 15\n{if} food {is} fries price = 6"
+            mp_choice_options:
+            -   feedback: Super!
+                option: 15 dollars
+            -   option: 6 dollars
+                feedback: The fries are 6 dollars
+            -   feedback: The hamburger isn't free!
+                option: 0 dollars
+            -   option: 21 dollars
+                feedback: That's the price for a hamburger and fries!
+            correct_answer: A
+            hint: Mind the fourth line.
+            question_score: '10'
+        7:
+            question_text: Why does line 7 say 'price is price + 3' instead of 'price is 3'?
+            mp_choice_options:
+            -   option: It could have been `price = 3` just as well.
+                feedback: No, that's not true. Hedy needs to add 3 dollars to the total.
+            -   option: Because Hedy doesn't understand `price = 3`.
+                feedback: Hedy would understand, but it wouldn't be right.
+            -   option: Because Hedy would otherwise forget about the previous order. The price would be 3 dollars in total.
+                feedback: That's right!
+            -   option: Because the price is 0 dollars to begin with.
+                feedback: That's true, but not the reason
+            code: "{print} 'Welcome at Hedys diner'\nfood = {ask} 'What would you like to eat?'\nprice = 0\n{if} food {is} hamburger price = price + 15\n{if} food {is} fries price = price + 6\ndrinks is {ask} 'What would you like to drink?'\n{if} drinks {is} coke price = price + 3\n{if} drinks {is} water price = price + 1\n{print} price ' dollars please'"
+            correct_answer: C
+            hint: The price shouldn't be 3, but 3 dollars more than it already was
+            question_score: '10'
+        8:
+            question_text: Why is this code incorrect?
+            code: "correct answer = 3*12\nanswer = {ask} 'What is 3 times 12?'\n{if} answer {is} correct answer {print} 'Good job!'\n{else} {print} 'No... It was ' correct answer"
+            mp_choice_options:
+            -   option: There shouldn't be quotation marks in line 2
+                feedback: No, there should be!
+            -   feedback: Correct!
+                option: The variable is called correct answer, but a variable's name can only be 1 word. So it should be correct_answer
+            -   option: The `{if}` and `{else}` commands should be in the same line.
+                feedback: No, that's not true.
+            -   option: The variable in line 2 can't be called answer, because it is too similar to the variable correct answer.
+                feedback: Variable names can be similar, but they can't be 2 words...
+            question_score: '10'
+            correct_answer: B
+            hint: Inspect what the variables are called.
+        9:
+            question_text: Imagine you love football a 10, you've eaten 2 bananas and have washed your hands 3 times today. How smart does the silly fortune teller think you are?
+            code: "{print} 'Im Hedy the silly fortune teller'\n{print} 'I will predict how smart you are!'\nfootball = {ask} 'On a scale of 0 to 10 how much do you love football?'\nbananas = {ask} 'How many bananas have you eaten this week?'\nhygiene = {ask} 'How many times did you wash your hands today??'\nresult = bananas + hygiene\nresult = result * football\n{print} 'You are ' result 'percent smart.'"
+            mp_choice_options:
+            -   option: 10%
+                feedback: (2 bananas + 3 hygiene) * 10 football = 5*10 =?
+            -   feedback: (2 bananas + 3 hygiene) * 10 football = 5*10 =?
+                option: 32%
+            -   option: 50%
+                feedback: Super! You are 100 percent smart!
+            -   option: 100%
+                feedback: (2 bananas + 3 hygiene) * 10 football = 5*10 =?
+            correct_answer: C
+            hint: (2 bananas + 3 hygiene) * 10 football = 5*10 =?
+            question_score: '10'
+        10:
+            question_text: Which statement is true?
+            code: "name _?_ Hedy\n{print} name 'is walking trough the forrest'"
+            mp_choice_options:
+            -   option: You can only fill in the word is on the `_?_`
+                feedback: You are allowed to use the `=` sign as well
