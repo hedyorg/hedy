@@ -702,27 +702,27 @@ adventures:
                     看看例子，然后在你自己的虚拟餐厅里试一下。
                 example_code: |
                     ```
-                    {print} 'Welcome to Hedys restaurant!'
-                    people = {ask} 'How many people will be joining us today?'
-                    {print} 'Great!'
-                    price = 0
-                    {repeat} people {times}
-                        food = {ask} 'What would you like to order?'
-                        {print} food
-                        {if} food {is} fries
-                            price = price + 3
-                            sauce = {ask} 'What kind of sauce would you like with your fries?'
-                            {if} sauce {is} no
-                                {print} 'no sauce'
+                    {print} '欢迎来到海迪餐厅！'
+                    人数 = {ask} '今天来了多少人！'
+                    {print} '好！'
+                    价格 = 0
+                    {repeat} 人数 {times}
+                        食物 = {ask} '您想点什么？'
+                        {print} 食物
+                        {if} 食物 {is} 薯条
+                            价格 = 价格 + 3
+                            酱汁 = {ask} '您的薯条要配什么酱？'
+                            {if} 酱汁 {is} 不要
+                                {print} '不要酱'
                             {else}
-                                price = price + 1
-                                {print} 'with ' sauce
-                        {if} food {is} pizza
-                            price = price + 4
-                    {print} 'That will be ' price ' dollar'
-                    {print} 'Enjoy your meal!'
+                                价格 = 价格 + 1
+                                {print} '配' 酱汁
+                        {if} 食物 {is} 披萨
+                            价格 = 价格 + 4
+                    {print} '一共' 价格 '元'
+                    {print} '祝您用餐愉快！'
                     ```
-                start_code: "# place your code here"
+                start_code: "# 在这里写你的代码"
             10:
                 story_text: |
                     ## Restaurant
