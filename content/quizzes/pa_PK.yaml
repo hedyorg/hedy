@@ -590,3 +590,224 @@ levels:
         1:
             question_text: Which command should be filled in on the _?_?
             code: "number {is} {ask} 'What is your lucky number?'\n{if} number {is} 5 {print} 'Mine too!'\n_?_ {print} 'My lucky number is 5!'"
+            mp_choice_options:
+            -   option: "```\n{print}\n```\n"
+                feedback: There already is a `{print}` command.
+            -   option: "```\n{if}\n```\n"
+                feedback: The `{if}` command is used in the line above.
+            -   option: "```\n{sleep}\n```\n"
+                feedback: That's not it!
+            -   option: "```\n{else}\n```\n"
+                feedback: That's right!
+            correct_answer: D
+            hint: Which one goes together with the `{if}` command?
+            question_score: '10'
+        2:
+            question_text: What appears in your output screen when you type in the name Hedy?
+            code: "name {is} {ask} 'What is your name?'\n{if} name {is} Hedy {print} 'fun' {else} {print} 'less fun'"
+            mp_choice_options:
+            -   option: fun
+                feedback: That's right!
+            -   option: less fun
+                feedback: If the name is Hedy, it will say 'fun''
+            -   option: Hedy
+                feedback: No, it doesn't print the name
+            -   feedback: Fortunately not!
+                option: Error
+            correct_answer: A
+            hint: '`{if}` name `{is}` Hedy `{print}` ...?'
+            question_score: '10'
+        3:
+            question_text: What is the right password?
+            mp_choice_options:
+            -   option: Correct!
+                feedback: This is printed when you type in the correct password
+            -   option: SECRET
+                feedback: That's right!'
+            -   option: password
+                feedback: The password isn't password...
+            -   option: ALARM INTRUDER
+                feedback: This is printed when you type in the incorrect password!
+            code: "password {is} {ask} 'What is the password?'\n{if} password {is} SECRET {print} 'Correct!'\n{else} {print} 'ALARM! INTRUDER!'"
+            hint: "`{if}` password `{is}` ... `{print}` 'Correct!'!'"
+            question_score: '10'
+            correct_answer: B
+        4:
+            question_text: What does Hedy print when you type in the wrong password?
+            code: "password {is} {ask} 'What is the password?'\n{if} password {is} SECRET {print} 'Correct!'\n{else} {print} 'ALARM! INTRUDER!'"
+            mp_choice_options:
+            -   option: Correct
+                feedback: That's printed if the correct answer is given, not the wrong one...
+            -   option: SECRET
+                feedback: That's not the right answer
+            -   option: Wrong!
+                feedback: No, this is not what Hedy will print
+            -   option: ALARM! INTRUDER!
+                feedback: Great job!
+            hint: Your computer will sound the alarm for intruders!
+            question_score: '10'
+            correct_answer: D
+        5:
+            question_text: Why will Hedy say 'ALARM! INTRUDER' when you type in 'secret'?
+            code: "password {is} {ask} 'What is the password?'\n{if} password {is} SECRET {print} 'Correct!'\n{else} {print} 'ALARM! INTRUDER!'"
+            mp_choice_options:
+            -   option: Because it needs to be in capitals, so SECRET
+                feedback: Indeed!
+            -   option: Because the password is alarm
+                feedback: No, this is not the password.
+            -   option: Because it's spelled wrong.
+                feedback: That's not how you spell secret
+            -   option: Because Hedy makes a mistake
+                feedback: No, Hedy is right
+            hint: The spelling of the word has to be exactly the same.
+            question_score: '10'
+            correct_answer: A
+        6:
+            question_text: Which word should be on the place of the question mark in the last line?
+            code: "{print} 'Im Hedy the football fortune teller!'\n{print} 'I will predict what place your team will end up!'\nclub is {ask} 'Which club is your favorite?'\n{if} club {is} ajax {print} 'Ajax is going to win of course!'\n_?_ {print} 'Sorry, your club is gonna be in last place...'"
+            mp_choice_options:
+            -   option: "```\n{if}\n```\n"
+                feedback: '`{if}` is already in the line above'
+            -   option: "```\n{at} {random}\n```\n"
+                feedback: No, you need `{else}`.
+            -   feedback: Great!
+                option: "```\n{else}\n```\n"
+            -   option: "```\n{print}\n```\n"
+                feedback: '`{print}` is already there, we need a word before it!'
+            correct_answer: C
+            question_score: '10'
+            hint: '`{if}` goes together with...?'
+        7:
+            question_text: Which word should be in the place of the question mark?
+            code: "{print} 'I can predict if you will be a millionair or not!'\nname {is} {ask} 'Whats your name?'\n{if} name {is} Hedy {print} 'You will be a millionair!'\n{else} _?_ 'Unfortunately... No big money for you.'"
+            mp_choice_options:
+            -   option: "```\n{if}\n```\n"
+                feedback: '`{if}` is in the line above.'
+            -   option: "```\n{at} {random}\n```\n"
+                feedback: No, you don't need `{at} {random}`.
+            -   option: "```\n{else}\n```\n"
+                feedback: There already is an `{else}` command
+            -   option: "```\n{print}\n```\n"
+                feedback: Awesome!
+            correct_answer: D
+            hint: After `{else}` a `{print}` command follows
+            question_score: '10'
+        8:
+            question_text: Which word should be on the place of the question mark?
+            code: "animal {is} {ask} 'What is your favorite animal?'\n{if} _?_ {is} penguin {print} 'Thats my favorite animal too!'\n{else} {print} 'Cool! I like penguins.'"
+            mp_choice_options:
+            -   option: "```\nfavorite animal\n```\n"
+                feedback: That's not the variable name.
+            -   option: "```\nanimal\n```\n"
+                feedback: Great job!
+            -   option: "```\n{if}\n```\n"
+                feedback: '`{if}` is already there'
+            -   option: "```\n{print}\n```\n"
+                feedback: No, that's not it.
+            correct_answer: B
+            hint: What the variable name?
+            question_score: '10'
+        9:
+            question_text: Which door should you choose to escape??
+            code: "{print} 'Escape from the haunted house!'\n{print} 'There are 3 doors in front of you'\ndoor {is} {ask} 'Which door do you choose?'\nmonsters {is} vampire, werewolf, giant spider\n{if} door {is} 2 {print} 'Yay, you can escape!'\n{else} {print} 'You are being devoured by a... ' monsters {at} {random}"
+            mp_choice_options:
+            -   option: '1'
+                feedback: Bad choice! You're being eaten
+            -   option: '2'
+                feedback: Super! You escaped!
+            -   option: '3'
+                feedback: Bad choice! You're being eaten.
+            -   option: It's a trap, you will always be eaten!
+                feedback: Luckily not!
+            correct_answer: B
+            hint: One of the doors will keep you safe..
+            question_score: '10'
+        10:
+            question_text: Which monster is standing behind door 1?
+            code: "{print} 'Escape from the haunted house!'\n{print} 'There are 3 doors in front of you'\ndoor {is} {ask} 'Which door do you choose?'\nmonsters {is} vampire, werewolf, giant spider\n{if} door {is} 2 {print} 'Yay, you can escape!'\n{else} {print} 'You are being devoured by a... ' monsters {at} {random}"
+            mp_choice_options:
+            -   option: Hedy picks a random monster each time.
+                feedback: Awesome!
+            -   option: vampire
+                feedback: Not always...
+            -   option: werewolf
+                feedback: Not always...
+            -   option: giant spider
+                feedback: Not always...
+            correct_answer: A
+            hint: Mind the last 3 words... monsters `{at} {random}`...
+            question_score: '10'
+    6:
+        1:
+            question_text: What's Hedy's output when you run this code?
+            mp_choice_options:
+            -   option: '20'
+                feedback: Correct!
+            -   option: '12'
+                feedback: No, the plus sign is used in addition
+            -   option: 2*10
+                feedback: No, Hedy will calculate the answer
+            -   option: '210'
+                feedback: Mind it's a calculation.
+            correct_answer: A
+            hint: The `*` is used as a multiplication sign
+            question_score: '10'
+            code: '{print} 2*10'
+        2:
+            question_text: What do you use when you want to add two numbers?
+            mp_choice_options:
+            -   option: '-'
+                feedback: That's not it
+            -   option: plus
+                feedback: That's not it
+            -   option: '*'
+                feedback: That's not it
+            -   option: +
+                feedback: Correct!
+            correct_answer: D
+            hint: It's the plus sign.
+            question_score: '10'
+        3:
+            question_text: What's Hedy's output when you run this code?
+            mp_choice_options:
+            -   option: '30'
+                feedback: This would be the right answer if there were no quotation marks.
+            -   option: '13'
+                feedback: Try again..
+            -   option: 3*10
+                feedback: Correct! There are quotation marks, so Hedy will print it literally.
+            -   option: Nothing, Hedy will give an error message.
+                feedback: No, Hedy will print it literally.
+            correct_answer: C
+            hint: Mind the quotation marks!!
+            code: "{print} '3*10'"
+            question_score: '10'
+        4:
+            question_text: Kim is 10 years old. What will Hedy print for her?
+            code: "name = {ask} 'How many letters are in your name?'\nage = {ask} 'How old are you?'\nluckynumber = name*age\n{print} 'Your lucky number is...' luckynumber"
+            mp_choice_options:
+            -   option: '30'
+                feedback: Mind, Hedy also prints 'Your lucky number is...'
+            -   option: '10'
+                feedback: Please try again.
+            -   option: Your lucky number is... 30
+                feedback: That's right!
+            -   feedback: Her lucky number is name times age...
+                option: Your lucky number is... 10
+            correct_answer: C
+            hint: 'Kim has 3 letters, she is 10 years old so: letters times age = 3*10 = 30.'
+            question_score: '10'
+        5:
+            question_text: If 5 people eat at this restaurant, how much do they have to pay in total?
+            code: "{print} 'Welcome to Hedys!'\npeople = {ask} 'How many people are eating with us tonight?'\nprice = people * 10\n{print} 'That will be ' price 'dollar please'"
+            mp_choice_options:
+            -   option: 5 dollars
+                feedback: Unfortunately, it's not that cheap.
+            -   option: 10 dollars
+                feedback: No, it's 10 dollars each.
+            -   option: 15 dollars
+                feedback: The * means multiplication.
+            -   option: 50 dollars
+                feedback: Great!
+            correct_answer: D
+            hint: '`price` `is` `people` `times` 10'
