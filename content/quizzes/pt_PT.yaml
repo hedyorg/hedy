@@ -1,197 +1,197 @@
 levels:
     1:
         1:
-            question_text: "What's this programming language called?"
+            question_text: "Como se chama esta linguagem de programação ?"
             mp_choice_options:
             -   option: "Hedy"
-                feedback: "Good job!"
+                feedback: "Bem feito!"
             -   option: "Heddy"
-                feedback: "Not this one!"
+                feedback: "Não é bem essa!"
             -   option: "Haydie"
-                feedback: "Not this one!"
+                feedback: "Não é esta!"
             -   option: "Heidi"
-                feedback: "Not this one!"
+                feedback: "Não é esta!"
             correct_answer: "A"
-            hint: "It's named after Hedy Lamarr."
+            hint: "É nomeada em homenagem a Hedy Lamarr."
             question_score: '10'
         2:
-            question_text: "Which command makes text appear?"
+            question_text: "Qual comando faz o texto ser mostrado?"
             mp_choice_options:
             -   option: |
                     ```
                     {echo}
                     ```
-                feedback: "`{echo}` repeats a given answer."
+                feedback: "`{echo}` repete uma resposta que foi dada antes."
             -   option: |
                     ```
                     {print}
                      ```
-                feedback: "Correct!"
+                feedback: "Correto!"
             -   option: |
                     ```
-                    hello
+                    olá
                     ```
-                feedback: "Hello isn't a command."
+                feedback: "Olá não é um comando."
             -   option: |
                     ```
                     {ask}
                     ```
-                feedback: "With `{ask}`, you can ask a question."
+                feedback: "Com `{ask}`, você pode fazer uma pergunta."
             correct_answer: "B"
-            hint: "_?_ Hello world!"
+            hint: "_?_ Olá mundo!"
             question_score: '10'
         3:
-            question_text: "How do you ask what someone's favorite color is?"
+            question_text: "Como pergunta qual é a cor favorita de uma pessoa ?"
             mp_choice_options:
             -   option: |
                     ```
-                    {print} What is your favorite color?
+                    {print} Qual a sua cor favorita?
                     ```
-                feedback: "`{print}` prints text, but it doesn't ask questions."
+                feedback: "`{print}` mostra texto, mas não faz perguntas."
             -   option: |
                     ```
-                    {ask} {print} What is your favorite color?
+                    {ask} {print} Qual a sua cor favorita?
                     ```
-                feedback: "You only need one command, not two."
+                feedback: "Precisa apenas de um comando, não de dois."
             -   option: |
                     ```
-                    {ask} What is your favorite color?
+                    {ask} Qual a sua cor favorita?
                     ```
                 feedback: "Great!"
             -   option: |
                     ```
-                    {echo} What is your favorite color?
+                    {echo} Qual a sua cor favorita?
                     ```
-                feedback: "`{echo}` repeats your answer back to you."
+                feedback: "`{echo}` repete sua resposta para você."
             correct_answer: "C"
-            hint: "You can {ask} something with the {ask} command"
+            hint: "Pode perguntar algo com o comando `{ask}`"
             question_score: '10'
         4:
-            question_text: "What is wrong with this code?"
+            question_text: "O que está errado neste código?"
             code: |-
-                Hi Im Hedy!
-                {ask} Who are you?
-                {echo} Hi...
+                Oi, eu sou Hedy!
+                {ask} Quem é você?
+                {echo} Oi...
             mp_choice_options:
-            -   option: "`{print}` in line 1 is missing."
-                feedback: "Correct!"
-            -   option: "Im in line 1 is spelled wrong."
-                feedback: "Im is spelled wrong on purpose; Hedy doesn't understand the apostrophes yet."
-            -   option: "`{echo}` isn't a command."
-                feedback: "`{echo}` is a command, there's another mistake."
-            -   option: "Nothing! This is a perfect code!"
-                feedback: "Wrong, look carefully!"
+            -   option: "O `{print}` na linha 1 está faltando."
+                feedback: "Correto!"
+            -   option: "A linha 1 está escrita errado."
+                feedback: "A linha 1 está escrita de propósito; Hedy ainda não sabe usar apóstrofos."
+            -   option: "`{echo}` não é um comando."
+                feedback: "`{echo}` é um comando, há um outro erro."
+            -   option: "Nada! Este é um código perfeito!"
+                feedback: "Errado, olhe com atenção!"
             correct_answer: "A"
-            hint: "Line 1 doesn't seem right"
+            hint: "A linha 1 não parece correta"
             question_score: '10'
         5:
-            question_text: "Which command is missing in line 2?"
+            question_text: "Qual comando está faltando na linha 2?"
             code: |-
-                {ask} What is your favorite pet?
-                _?_ So your favorite pet is...
+                {ask} Qual é seu bichinho de estimação favorito?
+                _?_ Então seu bichinho de estimação favorito é...
             mp_choice_options:
             -   option: |
                     ```
                     {print}
                     ```
-                feedback: "No, you would like the answer to be repeated back to you."
+                feedback: "Não, você gostaria que a resposta fosse repetida para você."
             -   option: |
                     ```
                     Hedy
                     ```
-                feedback: "Hedy isn't a command."
+                feedback: "Hedy não é um comando."
             -   option: |
                     ```
                     {ask}
                     ```
-                feedback: "With `{ask}` you can ask a question."
+                feedback: "Com `{ask}` você pode fazer uma pergunta."
             -   option: |
                     ```
                     {echo}
                     ```
                 feedback: "Right on!"
             correct_answer: "D"
-            hint: "You want to see the answer at the end of line 2..."
+            hint: "Quer ver a resposta no final da linha 2..."
             question_score: '10'
         6:
-            question_text: "What's wrong with this code?"
+            question_text: "O que está errado com este código?"
             code: |-
-                {print} Hi im Hedy!
-                {print} Which football team do you support?
-                {echo} You support...
-                {print} Cool! Me too!
+                {print} Oi sou a Hedy!
+                {print} Qual time de futebol você torce?
+                {echo} Apoia...
+                {print} Legal! Também!
             mp_choice_options:
             -   option: "In line 1 `{print}` should be replaced with `{ask}`."
-                feedback: "`{print}` in line 1 is correct."
+                feedback: "`{print}` na linha 1 está correto."
             -   option: "In line 2, `{print}` should be replaced with `{ask}`."
-                feedback: "Great! You paid attention!"
-            -   option: "Line 3 has to begin with `{print}` instead of `{echo}`."
-                feedback: "`{echo}` is correct."
-            -   option: "In line 4, `{print}` is spelled wrong."
-                feedback: "No, there is a mistake somewhere else"
+                feedback: "Excelente! Prestou atenção!"
+            -   option: "A linha 3 deve começar com `{print}` em vez de `{echo}`."
+                feedback: "`{echo}` está correto."
+            -   option: "Na linha 4, `{print}` está escrito errado."
+                feedback: "Não, há um erro em outro lugar"
             correct_answer: "B"
-            hint: "Check the `{print}` commands."
+            hint: "Verifique os comandos `{print}`."
             question_score: '10'
         7:
-            question_text: "What's wrong with this code?"
+            question_text: "O que há de errado com este código?"
             code: |-
-                {print} Welcome at Hedys restaurant!
-                {ask} What would you like to eat?
-                {echo} So you want to order ...
-                {print} Coming right up! Enjoy!
+                {print} Bem-vindo ao restaurante Hedys!
+                {ask} O que você gostaria de comer?
+                {echo} Então você quer pedir...
+                {print} Em breve! Aproveite!
             mp_choice_options:
             -   option: "In line 1 `{print}` needs to be replaced with `{ask}`"
-                feedback: "Are you sure something is wrong?"
+                feedback: "Tem certeza de que algo está errado?"
             -   option: "In line 1 `{print}` needs to be replaced with `{echo}`"
-                feedback: "Are you sure something's wrong?"
+                feedback: "Tem certeza de que algo está errado?"
             -   option: "In line 3 `{echo}` needs to be replaced with `{print}`"
-                feedback: "Are you sure something is wrong?"
-            -   option: "Nothing! This is a perfect code!"
-                feedback: "Correct!"
+                feedback: "Tem certeza de que algo está errado?"
+            -   option: "Nada! Este é um código perfeito!"
+                feedback: "Correto!"
             correct_answer: "D"
-            hint: "Check the code line by line"
+            hint: "Verifique o código linha por linha"
             question_score: '10'
         8:
-            question_text: "How do you use the `{echo}` command?"
+            question_text: "Como você usa o comando `{echo}`?"
             mp_choice_options:
-            -   option: "You can use it to `{ask}` a question."
-                feedback: "That's what `{ask}` is for!"
-            -   option: "You can use it to `{print}` text."
-                feedback: "That's what `{print}` is for!"
-            -   option: "You can use it to repeat an answer."
-                feedback: "Good job!"
-            -   option: "You can use it to make text disappear."
-                feedback: "That's not right..."
+            -   option: "Pode usá-lo para fazer uma pergunta com `{ask}`."
+                feedback: "É para isso que serve `{ask}`!"
+            -   option: "Pode usar para imprimir texto."
+                feedback: "É para isso que serve `{print}`!"
+            -   option: "Pode usá-lo para repetir uma resposta."
+                feedback: "Bom trabalho!"
+            -   option: "Pode usá-lo para fazer o texto desaparecer."
+                feedback: "Isso não está certo..."
             correct_answer: "C"
             hint: "`{echo}` is used after an `{ask}` command."
             question_score: '10'
         9:
-            question_text: "What's wrong with this code?"
+            question_text: "O que há de errado com este código?"
             code: |-
-                {print} Hello!
-                {print} How are you doing?
-                {echo} So you are doing...
+                {print} Olá!
+                {print} Como você está?
+                {echo} Então você está fazendo...
             mp_choice_options:
             -   option: "`{print}` in line 1 should be `{ask}`"
-                feedback: "No, `{print}` is right. Where is the question being asked?"
+                feedback: "Não, `{print}` está certo. Onde a pergunta está sendo feita?"
             -   option: "`{print}` in line 2 should be `{ask}`"
-                feedback: "Super!"
+                feedback: "Muito bom!"
             -   option: "`{echo}` in line 3 should be `{ask}`"
-                feedback: "No, `{echo}` is right. Where is the question being asked?"
-            -   option: "Nothing. This is a perfect code!"
-                feedback: "Look carefully for the mistake..."
+                feedback: "Não, `{echo}` está certo. Onde a pergunta está sendo feita?"
+            -   option: "Nada. Este é um código perfeito!"
+                feedback: "Olhe atentamente para o erro..."
             correct_answer: "B"
-            hint: "`{ask}` allows you to ask a question"
+            hint: "`{ask}` permite que você faça uma pergunta"
             question_score: '10'
         10:
-            question_text: "Are you ready for level 2?"
+            question_text: "Está pronto(a) para o nível 2?"
             mp_choice_options:
-            -   option: "Yes!"
-                feedback: "Great! Let's go to the next level!"
+            -   option: "Sim!"
+                feedback: "Excelente! Vamos para o próximo nível!"
             -   option: "No"
-                feedback: "What a shame... You can practice some more in level 1!"
+                feedback: "Que pena... Pode praticar um pouco mais no nível 1!"
             correct_answer: "A"
-            hint: "Let's go!"
+            hint: "Vamos lá!"
             question_score: '10'
     2:
         1:
@@ -2033,10 +2033,10 @@ levels:
                 feedback: "Correct!"
             -   option: "1 2 3"
                 feedback: "That's not it"
-            -   option: "1, 2, 3"
+            -   option: "```\n{if}\n```\n"
                 feedback: "That's not it"
             -   option: "123"
-                feedback: "That's not it"
+                feedback: "Não"
             correct_answer: "A"
             hint: "How do the numbers appear in the screen?"
             question_score: '10'
