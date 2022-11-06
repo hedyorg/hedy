@@ -108,3 +108,25 @@ levels:
             story: "Create the song 'The wheels on the bus go round and round'\n"
             code_lines:
                 A: "{print} 'the wheels on the bus go'"
+                B: "{repeat} 3 {times} {print} 'round and round'"
+                C: "{print} 'the wheels of the bus go round and round'"
+                D: "{print} 'all through the town '"
+    8:
+        2:
+            code_lines:
+                F: "{print} 'Ready or not here I come!'"
+                A: counter = 11
+                B: '{repeat} 10 {times}'
+                C: '  counter = counter - 1'
+                D: '  {print} counter'
+                E: '  {sleep} 1'
+            story: "Print the countdown for a game of hide and seek.\n"
+        1:
+            story: "You and four other friends are playing Pokémon Go! Create a program that decides in which team each of you will play.\nEither red, yellow or blue! Take a little pauze after announcing a team.\n"
+            code_lines:
+                A: teams = red, yellow, blue
+                B: "{print} 'Red, Yellow or Blue?'"
+                C: '{repeat} 5 {times}'
+                D: "  {print} 'You are selected in team... '"
+                E: '  {print} teams {at} {random}'
+                F: '  sleep 2'
