@@ -282,6 +282,8 @@ for folder in os.listdir('translations'):
     # so we have to load en for those until Babel adds support
     if folder in NON_BABEL:
         folder = 'en'
+    if folder == 'pa_PK':  # Babel uses a different name to indicate the Arabic script
+        folder = 'pa_Arab_PK'
     locale_dir = os.path.join('translations', folder, 'LC_MESSAGES')
     if not os.path.isdir(locale_dir):
         continue
