@@ -492,7 +492,7 @@ adventures:
                     - Finale felice: La principessa tira fuori la sua spada e il mostro fugge via
                     - Finale triste: Il mostro mangia la principessa
 
-                    Puoi anche fare in modo che si possa inserire un nome di nuovo. Quello funziona esattamente come prime. Puoi anche aggiungere un comando `{if}`, e hai già scritto un intero programma!
+                    Puoi anche fare in modo che si possa inserire un nome di nuovo. Quello funziona esattamente come prima. Puoi anche aggiungere un comando `{if}`, e hai già scritto un intero programma!
                 example_code: |
                     ```
                     name {is} {ask} 'Who is walking in the forest?'
@@ -505,9 +505,9 @@ adventures:
                 start_code: "{print} 'La tua storia inizia qui!'"
             7:
                 story_text: |
-                    ## Story
-                    In a story, someone says words several times. For example, when someone calls for help or sings a song.
-                    You can put such repetitions in your story, in this level with `{repeat}`.
+                    ## Storia
+                    In una storia, qualcuno può ripetere la stessa parola più volte. Per esempio, quando qualcuno chiede aiuto o canta una canzone.
+                    Puoi aggiungere queste ripetizioni nella tua storia, in questo livello puoi usare il comando `{repeat}`.
 
                 example_code: |
                     ```
@@ -519,8 +519,8 @@ adventures:
                 start_code: "{repeat} 5 {times} {print} 'Help!'"
             8:
                 story_text: |
-                    ## Story
-                    In this level you can use multiple lines in your {if} commands, this way you can upgrade your happy or sad ending!
+                    ## Storia
+                    In questo livello puoi usare più righe nei tuoi comandi {if}, in questo modo puoi ampliare il tuo finale felice o triste!
 
                 example_code: |
                     ```
@@ -539,8 +539,8 @@ adventures:
                 start_code: "# scrivi il tuo codice qui"
             9:
                 story_text: |
-                    ## Story
-                    In this level you can use nesting to put {if}, {repeat} or {for} commands inside other {if}, {repeat} or {for} commands. This gives you many options and really helps you to make your story interactive.
+                    ## Storia
+                    In questo livello puoi annidare i comandi {if}, {repeat} o {for} dentro altri comandi {if}, {repeat} o {for}. Questo ti darà molte opzioni e ti aiuterà a rendere la tua storia veramente interattiva.
                 example_code: |
                     ```
                     {print} 'Robin is walking downtown'
@@ -559,33 +559,33 @@ adventures:
                 story_text_2: |-
                     The example above is pretty straightforward, but by nesting {if} you can really elaborate your code and turn your story into a real game. Check out this example!
                 example_code_2: |
-                    ## Elaborate code
+                    ## Codice più elaborato
                     ```
-                    sword = lost
-                    game = on
-                    {print} 'Our hero is walking through the forest'
-                    {print} 'The path splits two ways'
+                    spada = persa
+                    gioco = iniziato
+                    {print} 'Il nostro eroe sta camminando nel bosco'
+                    {print} 'Il percorso si divide in due'
                     {repeat} 2 {times}
-                        {if} game {is} on
-                            path = {ask} 'Which path should she choose?'
-                            {if} path {is} left
-                                {if} sword {is} found
-                                    {print} 'Our hero comes across a dragon!'
-                                    {print} 'Luckily our hero has a sword to defeat the beast!'
-                                    game = over
+                        {if} gioco {is} iniziato
+                            percorso = {ask} 'Da che parte bisogna andare?'
+                            {if} percorso {is} sinistra
+                                {if} spada {is} trovata
+                                    {print} 'Il nostro eroe si imbatte in un drago!'
+                                    {print} 'Fortunatamente ha una spada per sconfiggere il mostro!'
+                                    gioco = finito
                                 {else}
-                                    {print} 'Our hero finds a dragon, but she doesnt have any weapons!'
-                                    {print} 'Our hero is beaten by the dragon...'
-                                    {print} 'Try again'
-                                    game = over
-                            {if} path {is} right
-                                {if} sword {is} lost
-                                    {print} 'Our hero finds a sword'
-                                    {print} 'This could come in very handy'
-                                    sword = found
+                                    {print} 'Il nostro eroe si imbatte in un drago, ma non ha un'arma!'
+                                    {print} 'Il nostro eroe é sconfitto dal drago...'
+                                    {print} 'Ritenta'
+                                    gioco = finito
+                            {if} percorso {is} destra
+                                {if} spada {is} persa
+                                    {print} 'Il nostro eroe trova una spada'
+                                    {print} 'Questo potrà tornarci molto utile'
+                                    spada = trovata
                                 {else}
-                                    {print} 'You have already found the sword. There is nothing left here.'
-                                    {print} 'She walks back'
+                                    {print} 'Hai già trovato la spada. Non c'è nient'altro qui.'
+                                    {print} 'Torna indietro'
                     ```
                 start_code: "# scrivi il tuo codice qui"
             10:
