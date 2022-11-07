@@ -260,8 +260,12 @@ def setup_language():
     # Switch to "right-to-left" if one of the language is rtl according to Locale (from Babel) settings.
     # This is the only place to expand / shrink the list of RTL languages -> front-end is fixed based on this value
     g.dir = "ltr"
-    if Locale(g.lang).text_direction in ["ltr", "rtl"]:
-        g.dir = Locale(g.lang).text_direction
+    if g.lang == 'pa_PK':
+        babel_lang = 'pa_Arab_PK'
+    else:
+        babel_lang = g.lang
+    if Locale(babel_lang).text_direction in ["ltr", "rtl"]:
+        g.dir = Locale(babel_lang).text_direction
 
     # Check that requested language is supported, otherwise return 404
     if g.lang not in ALL_LANGUAGES.keys():
