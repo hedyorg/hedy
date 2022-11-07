@@ -430,7 +430,7 @@ levels:
             question_score: '10'
         9:
             question_text: What Hedy code belongs to this output?
-            code: "Batman was flying through Gotham.\nWhen suddenly he heard someone screaming...\nHelp!\nHelp!\nHelp!\nPlease help me!\""
+            code: "Batman was flying through Gotham.\nWhen suddenly he heard someone screaming...\nHelp!\nHelp!\nHelp!\nPlease help me!"
             mp_choice_options:
             -   option: "```\n{print} 'Batman was flying through Gotham. '\n{print} 'When suddenly he heard someone screaming...'\n{print} 'Help!'\n{repeat} 3 {times} {print} 'Please help me!'\n```\n"
                 feedback: Your repeated line is incorrect.
@@ -1228,7 +1228,7 @@ levels:
             question_score: '10'
         1:
             question_text: Which command should be filled in on the _?_?
-            code: "number {is} {ask} 'What is your lucky number?'\n{if} number {is} 5 {print} Mine too!\n_?_ {print} My lucky number is 5!"
+            code: "number {is} {ask} 'What is your lucky number?'\n{if} number {is} 5 {print} 'Mine too!'\n_?_ {print} 'My lucky number is 5!'"
             mp_choice_options:
             -   option: "```\n{print}\n```\n"
                 feedback: There already is a `{print}` command.
@@ -1335,7 +1335,7 @@ levels:
         2:
             mp_choice_options:
             -   option: "1\n2\n3"
-                feedback: Perfect
+                feedback: Правильно!
             -   option: "1 2 3"
                 feedback: Це не так
             -   option: "1, 2, 3"
@@ -1356,7 +1356,7 @@ levels:
             -   option: "```\n{for} i {in} {range} 1 {to} 5\n    {print} i\n    {print} 'Одного разу я зловив рибу на живця!'\n```\n"
                 feedback: Unfortunately this does not exist.
             -   option: "```\n{for} i {in} {range} 01 {to} 105\n    {print} 10 - i'i'\n{print} 'Одного разу я зловив рибу на живця!'\n```\n"
-                feedback: That's right!
+                feedback: i - змінна і не повинна мати лапок
             correct_answer: D
             hint: Спочатку всі цифри, потім речення
             question_score: '10'
@@ -1442,7 +1442,7 @@ levels:
             code: "{for} i {in} _?_ 1 {to} 10\n    {print} i"
             mp_choice_options:
             -   option: "```\nлічильник\n```\n"
-                feedback: Correct!
+                feedback: Ні
             -   option: "```\n{range}\n```\n"
                 feedback: That's not it
             -   feedback: That's not it
@@ -1465,11 +1465,11 @@ levels:
             -   option: "В останньому рядку \"i\" потрібно взяти в лапки"
                 feedback: Ні, це не так.
             -   option: "Ви не можете використовувати `{range}` 1 `{to}` 5, тільки `{range}` 1 `{to}` 10"
-                feedback: Correct
+                feedback: Від 1 до 5 можна використовувати з таким же успіхом!
             -   feedback: Не в першому рядку...
                 option: "Рядок 1 потрібно починати з відступу."
             -   option: "Рядок 2 потрібно починати з відступу"
-                feedback: No
+                feedback: Чудово!
             correct_answer: B
             hint: Щось не так з відступом
             question_score: '10'
