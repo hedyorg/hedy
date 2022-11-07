@@ -66,7 +66,7 @@ def get_target_keyword(keyword_dict, keyword):
 def translate_keywords(input_string_, from_lang="en", to_lang="nl", level=1):
     """"Return code with keywords translated to language of choice in level of choice"""
     try:
-        processed_input = hedy.process_input_string(input_string_, level, escape_backslashes=False)
+        processed_input = hedy.process_input_string(input_string_, level, from_lang, escape_backslashes=False)
 
         parser = hedy.get_parser(level, from_lang, True)
         keyword_dict_from = keywords_to_dict(from_lang)
@@ -92,11 +92,12 @@ def translate_keywords(input_string_, from_lang="en", to_lang="nl", level=1):
                 result = replace_line(lines, rule.line-1, replaced_line)
 
         # For now the needed post processing is only removing the 'end-block's added during pre-processing
-        result = '\n'.join([line for line in result.splitlines()
-                           if not line.startswith('end-block')])
+        result = '\n'.join([line for line in result.splitlines()])
+        result = result.replace('#ENDBLOCK\n', '')
+        result = result.replace('#ENDBLOCK', '')
 
         return result
-    except:
+    except Exception as E:
         return input_string_
 
 

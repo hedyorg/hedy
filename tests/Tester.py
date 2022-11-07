@@ -134,7 +134,7 @@ class HedyTester(unittest.TestCase):
 
           #TODO FH Feb 2022: we pick Dutch here not really fair or good practice :D Maybe we should do a random language?
           in_dutch = hedy_translation.translate_keywords(code, from_lang=lang, to_lang="nl", level=self.level)
-          back_in_english = hedy_translation.translate_keywords(in_dutch, from_lang="nl", to_lang=lang, level=self.level)
+          back_in_english = hedy_translation.translate_keywords(in_dutch, from_lang="nl", to_lang=lang, level=self.level).strip()
           self.assert_translated_code_equal(code, back_in_english)
         else: #not English? translate to it and back!
           in_english = hedy_translation.translate_keywords(code, from_lang=lang, to_lang="en", level=self.level)

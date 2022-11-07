@@ -1,6 +1,6 @@
-command:+= ifs elses?
+command:+= ifs elses?-= error_invalid_space | error_repeat_no_command
 
-repeat: _REPEAT (INT | var_access) _TIMES _SPACE? _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK
+repeat: _REPEAT (INT | var_access) _TIMES _SPACE? _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
 
 // FH jan 2022 (#1817) we can allow unquoted rhs's again cause there now is a line break after
 // not sure of we want it, but we could
@@ -9,6 +9,6 @@ equality_check: (textwithoutspaces | NUMBER) (_IS | _EQUALS) (textwithoutspaces 
 
 
 // from level 8 on if is implemented slightly differently
-elses: _EOL (_SPACE)* _ELSE (_SPACE)* _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK
+elses: _EOL (_SPACE)* _ELSE (_SPACE)* _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
 //'if' cannot be used in Python, hence the name of the rule is 'ifs'
-ifs: _IF condition _EOL (_SPACE command) (_EOL _SPACE command)* _EOL _END_BLOCK
+ifs: _IF condition _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
