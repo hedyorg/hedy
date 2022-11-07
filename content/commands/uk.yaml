@@ -38,7 +38,7 @@
     explanation: '`{add}` елемент `{to_list}` списку.'
     demo_code: "тварини {is} корова, кіт\n{add} собака {to_list} тварини"
 -   name: '{remove}'
-    explanation: '`{remove} елемент зі списку.`{remove}`'
+    explanation: '`{remove}` елемент `{from}` списку.'
     demo_code: "тварини {is} кіт, собака, корова\n{remove} собака {from} тварини"
 4:
 -   name: '{print}'
@@ -102,7 +102,7 @@
 9:
 -   name: '{if} з багатьма лініями'
     explanation: Запитай про суму чисел за допомогою команди `{ask}` і перевір відповідь. Тепер ми друкуємо дві лінії.
-    demo_code: "answer = {ask} 'What is 10 plus 10?'\n{if} answer {is} 20\n    {print} 'Well done!!'\n    {print} 'The answer is indeed' answer\n{else}\n    {print} 'Wrong'\n    {print} 'The answer is 20'"
+    demo_code: "answer = {ask} \"Скільки буде 10 плюс 10?\n{if} відповідь {is} 20\n    {print} 'Молодець!!!'\n    {print} 'The answer is indeed' answer\n{else}\n    {print} 'Wrong'\n    {print} 'The answer is 20'"
 -   name: '{repeat} з черепахою'
     explanation: Повторіть кілька рядків.
     demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
