@@ -168,13 +168,13 @@ levels:
         2:
             question_text: What will be printed after entering the correct password?
             mp_choice_options:
-            -   option: "Good job! \n Good job!"
+            -   option: "```\nМолодець!\nМолодець!\n```"
                 feedback: That's not it!
-            -   option: The computer will explode in 5... 4... 3... 2... 1...
+            -   option: "```\nКомп'ютер вибухне через 5... 4... 3... 2... 1...\n```"
                 feedback: That's not it!
-            -   option: "Good job! \n Good job! \n You can use the computer!"
+            -   option: "```\nМолодець!\nМолодець!\nМожеш користуватися комп'ютером!\n```"
                 feedback: That's not it!
-            -   option: "Good job! \n You can use the computer! \n Good job! \n You can use the computer!"
+            -   option: "```\nМолодець!\nМожеш користуватися комп'ютером!\nМолодець!\nТи можеш користуватися комп'ютером!\n```"
                 feedback: Correct!
             code: "password = {ask} 'What is the password?'\ncorrect_password = Hedy\n{if} password {is} correct_password\n    {repeat} 2 {times}\n        {print} 'Good job!'\n        {print} 'You can use the computer!'\n{else}\n    {print} 'The computer will explode in 5... 4... 3... 2... 1...'"
             correct_answer: D
@@ -495,7 +495,7 @@ levels:
             mp_choice_options:
             -   option: This should be only one line, not 2.
                 feedback: No it should be 2 lines.
-            -   option: This `{print}` command has to go
+            -   option: Ця команда `{print}` має бути видалена.
                 feedback: No, you need it.
             -   option: There is a spelling mistake in the `{repeat}` command.
                 feedback: Nee, repeat is de goede spelling
@@ -740,15 +740,15 @@ levels:
             correct_answer: C
             question_text: Which statement is true?
             mp_choice_options:
-            -   option: In level 2 the `{print}` command doesn't exist anymore
-                feedback: '`{print}` still works'
-            -   option: In level 2 the `{ask}` command doesn't exist anymore
-                feedback: '`{ask}` still works!'
-            -   option: In level 2 the `{echo}` command doesn't exist anymore
+            -   option: Ви можете використовувати команду {print}, щоб поставити запитання.
+                feedback: 'Це те, про що ми просимо'
+            -   option: Для повторення відповідей можна використовувати команду {ask}.
+                feedback: 'Це не так'
+            -   option: З допомогою команди {print} можна зробити так, щоб текст виводився на екран
                 feedback: Good
-            -   option: In level 2 all the level 1 commands still work
+            -   option: За допомогою команди {sleep} можна прибрати текст з екрану.
                 feedback: No one command doesn't work anymore.
-            hint: '`{print}` and `{ask}` still exist.'
+            hint: '`{print}` працює так само, як і на рівні 1'
             question_score: '10'
         4:
             correct_answer: D
@@ -1334,47 +1334,47 @@ levels:
     11:
         2:
             mp_choice_options:
-            -   option: "```\n{for} i {in} {range} 1 {to} 5\n    {print} i\n{print} 'Once I caught a fish alive!'\n```\n"
+            -   option: "1\n2\n3"
                 feedback: Perfect
-            -   option: "```\n{for} i {in} {range} 1 {to} 5\n{print} i\n{print} 'Once I caught a fish alive!'\n```\n"
-                feedback: This code won't work. You need an indent after {for}.
-            -   option: "```\n{for} i {in} {range} 1 {to} 5\n    {print} i\n    {print} 'Once I caught a fish alive!'\n```\n"
-                feedback: Now Hedy will count '1 Once I caught a fish alive!, 2 Once I caught a fish alive! etc.
-            -   option: "```\n{for} i {in} {range} 1 {to} 5\n    {print} 'i'\n{print} 'Once I caught a fish alive!'\n```\n"
+            -   option: "1 2 3"
+                feedback: Це не так
+            -   option: "1, 2, 3"
+                feedback: Це не так
+            -   option: "123"
                 feedback: i is a variable and shouldn't have quotation marks
             question_text: Which code was used to get this output?
             correct_answer: A
-            hint: First all the numbers, then the sentence
+            hint: Як відображаються цифри на екрані?
             question_score: '10'
             code: "{for} i {in} {range} 1 {to} 3\n    {print} i"
         3:
             mp_choice_options:
-            -   option: "```\n{for} i {in} {range} 0 {to} 10\n    {print} i\n```\n"
-                feedback: Now Hedy prints the numbers from 0 to 10 instead of 10 to 0.
-            -   option: "```\n{for} i {in} {range} 0 to 10\n    {print} - i\n```\n"
-                feedback: Hedy would print negative numbers in this case.
-            -   option: "```\n{for} i {in} {range} 10 to 0\n    {print} i\n```\n"
+            -   option: "```\n{for} i {in} {range} 1 {to} 5\n    {print} i\n{print} 'Одного разу я зловив рибу на живця!'\n```\n"
+                feedback: Чудово
+            -   option: "```\n{for} i {in} {range} 1 {to} 5\n{print} i\n{print} 'Одного разу я зловив рибу на живця!'\n```\n"
+                feedback: Цей код не буде працювати. Вам потрібен відступ після {for}.
+            -   option: "```\n{for} i {in} {range} 1 {to} 5\n    {print} i\n    {print} 'Одного разу я зловив рибу на живця!'\n```\n"
                 feedback: Unfortunately this does not exist.
-            -   option: "```\n{for} i {in} {range} 0 {to} 10\n    {print} 10 - i\n```\n"
+            -   option: "```\n{for} i {in} {range} 01 {to} 105\n    {print} 10 - i'i'\n{print} 'Одного разу я зловив рибу на живця!'\n```\n"
                 feedback: That's right!
             correct_answer: D
-            hint: It has to be a calculation...
+            hint: Спочатку всі цифри, потім речення
             question_score: '10'
             question_text: Which code was used to get this output?
-            output: "10\n9\n8\n7\n6\n5\n4\n3\n2\n1\n0"
+            output: "1\n2\n3\n4\n5\nОдного разу я зловив рибу на живця!"
         4:
             question_text: What's wrong with this code?
             mp_choice_options:
-            -   option: The i in the last line need quotation marks
+            -   option: "```\n{for} i {in} {range} 0 {to} 10\n    {print} i\n```\n"
                 feedback: No it doesn't.
-            -   option: You can't use `{range}` 1 `{to}` 5 only `{range}` 1 `{to}` 10
-                feedback: You could use 1 to 5 just as well!
-            -   option: Line 1 needs to start with an indention.
+            -   option: "```\n{for} i {in} {range} 0 to 10\n    {print} - i\n```\n"
+                feedback: У цьому випадку Hedy виводила б від'ємні числа.
+            -   option: "```\n{for} i {in} {range} 10 to 0\n    {print} 10 9 8 7 6 5 4 3 2 1 0\n```\n"
                 feedback: Not line 1...
-            -   option: Line 2 needs to start with an indention
+            -   option: "```\n{for} i {in} {range} 0 {to} 10\n    {print} 10 - i\n```\n"
                 feedback: Perfect!
             correct_answer: D
-            hint: There is something wrong with the indention
+            hint: Це має бути розрахунок...
             question_score: '10'
             output: "10\n9\n8\n7\n6\n5\n4\n3\n2\n1\n0"
         7:
@@ -1439,33 +1439,39 @@ levels:
             hint: Mind the indention
         1:
             question_text: What will be the output from this code?
-            code: "{for} i {in} {range} 1 {to} 3\n    {print} i"
+            code: "{for} i {in} _?_ 1 {to} 10\n    {print} i"
             mp_choice_options:
-            -   option: "1\n2\n3"
+            -   option: "```\nлічильник\n```\n"
                 feedback: Correct!
-            -   option: 1 2 3
+            -   option: "```\n{range}\n```\n"
                 feedback: That's not it
             -   feedback: That's not it
-                option: 1, 2, 3
-            -   option: '123'
+                option: "```\n{if}\n```\n"
+            -   option: '```
+
+                    {for}
+
+                    ```
+
+                    '
                 feedback: That's not it
             correct_answer: A
             hint: How do the numbers appear in the screen?
             question_score: '10'
         5:
             question_text: What word should be at the place of the question mark?
-            code: "{for} i {in} _?_ 1 {to} 10\n    {print} i"
+            code: "{for} i {in} {range} 1 {to} 10\n{print} i"
             mp_choice_options:
-            -   option: "```\ncounter\n```\n"
-                feedback: No
-            -   option: "```\n{range}\n```\n"
+            -   option: "В останньому рядку \"i\" потрібно взяти в лапки"
+                feedback: Ні, це не так.
+            -   option: "Ви не можете використовувати `{range}` 1 `{to}` 5, тільки `{range}` 1 `{to}` 10"
                 feedback: Correct
-            -   feedback: No
-                option: "```\n{if}\n```\n"
-            -   option: "```\n{for}\n```\n"
+            -   feedback: Не в першому рядку...
+                option: "Рядок 1 потрібно починати з відступу."
+            -   option: "Рядок 2 потрібно починати з відступу"
                 feedback: No
             correct_answer: B
-            hint: What did you learn in this level?
+            hint: Щось не так з відступом
             question_score: '10'
         6:
             mp_choice_options:
@@ -1619,7 +1625,7 @@ levels:
             hint: Each name should be told what they will have for dinner.
             question_score: '10'
         9:
-            question_text: What is the first question Hedy will `{ask}` you when you run the program?
+            question_text: Яке перше питання задасть вам Hedy, коли ви запустите програму?
             code: "courses = appetizer, main course, dessert\nnames = Timon, Onno\n{for} name in names\n    {for} course {in} courses\n        food = {ask} name ', what would you like to eat as your ' course '?'\n        {print} name ' orders ' food ' as their ' course"
             mp_choice_options:
             -   option: Timon, what would you like to eat as your appetizer?
