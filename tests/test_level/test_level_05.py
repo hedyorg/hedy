@@ -680,17 +680,18 @@ class TestsLevel5(HedyTester):
         self.single_level_tester(code=code, expected=expected)
 
     def test_list_access_index(self):
-      code = textwrap.dedent("""\
-      friends is Hedy, Lola, Frida
-      friend is friends at 2
-      print friend""")
-      
-      expected = textwrap.dedent("""\
-      friends = ['Hedy', 'Lola', 'Frida']
-      friend = friends[2-1]
-      print(f'{friend}')""")
-      
-      self.multi_level_tester(code=code, expected=expected, max_level=11)
+        code = textwrap.dedent("""\
+        friends is Hedy, Lola, Frida
+        friend is friends at 2
+        print friend""")
+        
+        expected = textwrap.dedent("""\
+        friends = ['Hedy', 'Lola', 'Frida']
+        friend = friends[2-1]
+        print(f'{friend}')""")
+        
+        self.multi_level_tester(code=code, expected=expected, max_level=11)
+
     #
     # negative tests
     #
@@ -745,3 +746,148 @@ class TestsLevel5(HedyTester):
 
         self.assertEqual(2, line)
         self.assertEqual(23, column)
+
+    #
+    # if pressed tests
+    #
+    def test_if_pressed_x_is_letter_key(self):
+        code = textwrap.dedent("""\
+        if x is pressed print 'it is a letter key'""")
+
+        expected = """
+        if event.key == pygame.K_x:
+            print(f'it is a letter key')
+            pygame_end = True"""
+
+        self.multi_level_tester(code=code, expected=expected, max_level=7)
+
+    def test_double_if_pressed(self):
+        code = textwrap.dedent("""\
+        if x is pressed print 'first key'
+        if y is pressed print 'second key'""")
+
+        expected = """
+        if event.key == pygame.K_x:
+            print(f'first key')
+            pygame_end = True
+
+        if event.key == pygame.K_y:
+            print(f'second key')
+            pygame_end = True"""
+
+        self.multi_level_tester(code=code, expected=expected, max_level=7)
+
+    def test_if_pressed_has_enter_after_pressed(self):
+        code = textwrap.dedent("""\
+        if x is pressed
+        print 'it is a letter key'""")
+
+        expected = """
+        if event.key == pygame.K_x:
+            print(f'it is a letter key')
+            pygame_end = True"""
+
+        self.multi_level_tester(code=code, expected=expected, max_level=7)
+    
+    def test_if_pressed_x_is_number_key(self):
+        code = textwrap.dedent("""\
+        if 1 is pressed print 'it is a number key'""")
+
+        expected = """
+        if event.key == pygame.K_1:
+            print(f'it is a number key')
+            pygame_end = True"""
+
+        self.multi_level_tester(code=code, expected=expected, max_level=7)
+
+    def test_if_pressed_with_trailing_spaces_after_key(self):
+        code = textwrap.dedent("""\
+        if x       is pressed print 'trailing spaces!'""")
+
+        expected = """
+        if event.key == pygame.K_x:
+            print(f'trailing spaces!')
+            pygame_end = True"""
+
+        self.multi_level_tester(code=code, expected=expected, max_level=7)
+
+    #
+    # if pressed else tests
+    #
+    def test_if_pressed_x_else(self):
+        code = textwrap.dedent("""\
+        if x is pressed print 'x is pressed!' else print 'x is not pressed!'""")
+
+        expected = """
+        if event.key == pygame.K_x:
+            print(f'x is pressed!')
+            pygame_end = True
+        else:
+            print(f'x is not pressed!')
+            pygame_end = True"""
+
+        self.multi_level_tester(code=code, expected=expected, max_level=7)
+
+    def test_if_pressed_has_enter_before_else(self):
+        code = textwrap.dedent("""\
+        if x is pressed print 'x is pressed!' 
+        else print 'x is not pressed!'""")
+
+        expected = """
+        if event.key == pygame.K_x:
+            print(f'x is pressed!')
+            pygame_end = True
+        else:
+            print(f'x is not pressed!')
+            pygame_end = True"""
+
+        self.multi_level_tester(code=code, expected=expected, max_level=7)
+
+    def test_if_pressed_has_enter_before_both_prints_and_else(self):
+        code = textwrap.dedent("""\
+        if x is pressed 
+        print 'x is pressed!' 
+        else 
+        print 'x is not pressed!'""")
+
+        expected = """
+        if event.key == pygame.K_x:
+            print(f'x is pressed!')
+            pygame_end = True
+        else:
+            print(f'x is not pressed!')
+            pygame_end = True"""
+
+        self.multi_level_tester(code=code, expected=expected, max_level=7)
+
+    def test_if_pressed_has_enter_before_first_print_and_else(self):
+        code = textwrap.dedent("""\
+        if x is pressed 
+        print 'x is pressed!' 
+        else print 'x is not pressed!'""")
+
+        expected = """
+        if event.key == pygame.K_x:
+            print(f'x is pressed!')
+            pygame_end = True
+        else:
+            print(f'x is not pressed!')
+            pygame_end = True"""
+
+        self.multi_level_tester(code=code, expected=expected, max_level=7)
+
+    def test_if_pressed_has_enter_before_second_print_and_else(self):
+        code = textwrap.dedent("""\
+        if x is pressed print 'x is pressed!' 
+        else 
+        print 'x is not pressed!'""")
+
+        expected = """
+        if event.key == pygame.K_x:
+            print(f'x is pressed!')
+            pygame_end = True
+        else:
+            print(f'x is not pressed!')
+            pygame_end = True"""
+
+        self.multi_level_tester(code=code, expected=expected, max_level=7)

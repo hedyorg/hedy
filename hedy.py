@@ -1570,8 +1570,7 @@ else:
         return f"""
         if event.key == pygame.K_{args[0]}:
 {ConvertToPython.indent(args[1], 12)}
-            pygame_end = True
-"""
+            pygame_end = True"""
 
     def ifpressed_else(self, met, args):
         return f"""
@@ -1580,8 +1579,7 @@ else:
             pygame_end = True
         else:
 {ConvertToPython.indent(args[2], 12)}
-            pygame_end = True
-"""
+            pygame_end = True"""
 
 @v_args(meta=True)
 @hedy_transpiler(level=6)
