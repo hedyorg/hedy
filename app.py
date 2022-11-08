@@ -37,6 +37,10 @@ import zipfile
 
 logger = logging.getLogger(__name__)
 
+# Very important: First hacky-tacky the custom locales to make sure Weblate and Babel are both happy
+CUSTOM_LOCALES = {'pa_PK': 'pa_Arab_PK'}
+utils.hack_babel_core_to_support_custom_locales(CUSTOM_LOCALES)
+
 # Todo TB: This can introduce a possible app breaking bug when switching to Python 4 -> e.g. Python 4.0.1 is invalid
 if (sys.version_info.major < 3 or sys.version_info.minor < 7):
     print('Hedy requires Python 3.7 or newer to run. However, your version of Python is',
