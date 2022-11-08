@@ -14,6 +14,9 @@ def keywords_to_dict(lang="nl"):
     """"Return a dictionary of keywords from language of choice. Key is english value is lang of choice"""
     base = path.abspath(path.dirname(__file__))
 
+    if lang == 'pa_Arab_PK':
+        lang = 'pa_PK'
+
     keywords_path = 'content/keywords/'
     yaml_filesname_with_path = path.join(
         base, keywords_path, lang + '.yaml')

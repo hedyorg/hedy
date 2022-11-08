@@ -367,6 +367,7 @@ class Adventures:
         self.language = language
         self.file = {}
         self.data = {}
+        self.weblatelanguage = 'pa_Arab_PK' if language == 'pa_PK' else language
 
         # For some reason the is_debug_mode() function is not (yet) ready when we call this code
         # So we call the NO_DEBUG_MODE directly from the environment
@@ -375,7 +376,7 @@ class Adventures:
 
         if not self.debug_mode:
             self.file = YamlFile.for_file(
-                f'content/adventures/{self.language}.yaml').get('adventures')
+                f'content/adventures/{self.weblatelanguage}.yaml').get('adventures')
             # We always create one with english keywords
             self.data["en"] = self.cache_adventure_keywords("en")
             if language in ALL_KEYWORD_LANGUAGES.keys():

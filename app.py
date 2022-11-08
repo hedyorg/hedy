@@ -248,6 +248,8 @@ def setup_language():
             ALL_LANGUAGES.keys(), 'en')
 
     g.lang = session['lang']
+    if g.lang == 'pa_Arab_PK':
+        g.lang = 'pa_PK'
     if 'keyword_lang' not in session:
         if g.lang in ALL_KEYWORD_LANGUAGES.keys() and g.lang in NON_LATIN_LANGUAGES:
             g.keyword_lang = g.lang
