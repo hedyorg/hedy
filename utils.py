@@ -315,6 +315,7 @@ def session_id():
             session['session_id'] = uuid.uuid4().hex
     return session['session_id']
 
+# https://github.com/python-babel/babel/issues/454
 def hack_babel_core_to_support_custom_locales(custom_locales: dict):
     """ Hack Babel core to make it support custom locale names
 
