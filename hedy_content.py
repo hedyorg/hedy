@@ -39,8 +39,9 @@ ALL_KEYWORD_LANGUAGES = {}
 # Todo TB -> We create this list manually, but it would be nice if we find a way to automate this as well
 NON_LATIN_LANGUAGES = ['ar', 'bg', 'bn', 'el', 'fa', 'hi', 'he', 'pa_PK', 'ru', 'zh_Hans']
 
-# It would be nice if we created this list manually but couldn't find a way to retrieve this from Babel
-NON_BABEL = ['tn']
+# Babel has a different naming convention than Weblate and doesn't support some languages -> fix this manually
+RENAMED_BABEL_LANGUAGES = {'pa_PK': 'pa_Arab_PK'}
+CUSTOM_BABEL_LANGUAGES = ['tn']
 
 ADVENTURE_NAMES = [
     'default',
@@ -278,21 +279,11 @@ if not os.path.isdir('translations'):
     ALL_KEYWORD_LANGUAGES['en'] = 'EN'
 
 for folder in os.listdir('translations'):
-    # we cant properly open non-supported langs like Tswana (tn)
-    # so we have to load en for those until Babel adds support
-    if folder in NON_BABEL:
-        folder = 'en'
     locale_dir = os.path.join('translations', folder, 'LC_MESSAGES')
     if not os.path.isdir(locale_dir):
         continue
-
-    if folder == 'pa_PK':  # Babel uses a different name to indicate the Arabic script
-        folder_babel = 'pa_Arab_PK'
-    else:
-        folder_babel = folder
-
     if filter(lambda x: x.endswith('.mo'), os.listdir(locale_dir)):
-        locale = Locale.parse(folder_babel)
+        locale = Locale.parse(folder)
         languages[folder] = locale.display_name.title()
 
 for l in sorted(languages):
