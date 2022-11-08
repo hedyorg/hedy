@@ -33,5 +33,5 @@ pybabel compile -f -d translations
 
 echo '-----> Move translated Punjabi to the right folder so Babel can find it'
 cd translations
-mkdir pa_Arab_pk
+mkdir -p pa_Arab_pk
 cp -r pa_PK/LC_MESSAGES pa_Arab_pk
