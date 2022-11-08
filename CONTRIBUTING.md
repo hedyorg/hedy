@@ -46,11 +46,19 @@ Or if you're on windows in a powershell window with py launcher installed:
 (.env)> pip install -r requirements.txt
 ```
 
-To install the front-end test framework, execute the following commands:
+To install Cypress, the front-end test framework, execute the following commands:
 ```bash
 $ cd tests
 $ npm install cypress --save-dev
 ```
+
+To run the tests go to `/tests/` first.
+You can then the tests on the command line with the following: `npx cypress run --spec "[path to test(s)]"`
+An example of running cypress: `npx cypress run --spec "cypress/e2e/login_page/*"`
+
+If you want to connect Cypress to the online dashboard, use:
+
+`npx cypress run --record --key <key here>`
 
 If you want to run the website version locally, run:
 ```bash
