@@ -4,6 +4,7 @@ import logging
 
 from babel import Locale, languages
 
+from utils import customize_babel_locale, add_babel_locale
 from website.yaml_file import YamlFile
 import iso3166
 
@@ -42,6 +43,9 @@ NON_LATIN_LANGUAGES = ['ar', 'bg', 'bn', 'el', 'fa', 'hi', 'he', 'pa_PK', 'ru', 
 # Babel has a different naming convention than Weblate and doesn't support some languages -> fix this manually
 RENAMED_BABEL_LANGUAGES = {'pa_PK': 'pa_Arab_PK'}
 CUSTOM_BABEL_LANGUAGES = ['tn']
+
+customize_babel_locale(RENAMED_BABEL_LANGUAGES)
+add_babel_locale(CUSTOM_BABEL_LANGUAGES)
 
 ADVENTURE_NAMES = [
     'default',
