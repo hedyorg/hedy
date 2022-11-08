@@ -59,4 +59,4 @@ class TestsParsonsPrograms(unittest.TestCase):
         if snippet is not None:
             print(snippet.code)
             result = HedyTester.check_Hedy_code_for_errors(snippet)
-            self.assertTrue(result)
+            self.assertIsNone(result)
