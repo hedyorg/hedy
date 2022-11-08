@@ -314,3 +314,47 @@ def session_id():
         else:
             session['session_id'] = uuid.uuid4().hex
     return session['session_id']
+
+# https://github.com/python-babel/babel/issues/454
+def hack_babel_core_to_support_custom_locales(custom_locales: dict):
+    """ Hack Babel core to make it support custom locale names
+
+    Based on : https://github.com/python-babel/babel/issues/454
+
+    Patch mechanism provided by @kolypto
+
+    Args:
+        custom_locales: Mapping from { custom name => ordinary name }
+    """
+    from babel.core import get_global
+
+    # In order for Babel to know "en_CUSTOM", we have to hack its database and put our custom
+    # locale names there.
+    # This database is pickle-loaded from a .dat file and cached, so we only have to do it once.
+    db = get_global('likely_subtags')
+    for custom_name in custom_locales:
+        db[custom_name] = custom_name
+
+    # Also, monkey-patch the exists() and load() functions that load locale data from 'babel/locale-data'
+    import babel.localedata
+
+    # Originals
+    o_exists, o_load, o_parse_locale = babel.localedata.exists, babel.localedata.load, babel.core.parse_locale
+
+    # Make sure we do not patch twice
+    if o_exists.__module__ != __name__:
+        # Definitions
+        def exists(name):
+            # Convert custom names to normalized names
+            name = custom_locales.get(name, name)
+            return o_exists(name)
+
+        def load(name, merge_inherited=True):
+            # Convert custom names to normalized names
+            name = custom_locales.get(name, name)
+            return o_load(name, merge_inherited)
+            # Make sure we do not patch twice
+
+        # Patch
+        babel.localedata.exists = exists
+        babel.localedata.load = load

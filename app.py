@@ -37,6 +37,10 @@ import zipfile
 
 logger = logging.getLogger(__name__)
 
+# Very important: First hacky-tacky the custom locales to make sure Weblate and Babel are both happy
+CUSTOM_LOCALES = {'pa_PK': 'pa_Arab_PK'}
+utils.hack_babel_core_to_support_custom_locales(CUSTOM_LOCALES)
+
 # Todo TB: This can introduce a possible app breaking bug when switching to Python 4 -> e.g. Python 4.0.1 is invalid
 if (sys.version_info.major < 3 or sys.version_info.minor < 7):
     print('Hedy requires Python 3.7 or newer to run. However, your version of Python is',
@@ -260,12 +264,8 @@ def setup_language():
     # Switch to "right-to-left" if one of the language is rtl according to Locale (from Babel) settings.
     # This is the only place to expand / shrink the list of RTL languages -> front-end is fixed based on this value
     g.dir = "ltr"
-    if g.lang == 'pa_PK':
-        babel_lang = 'pa_Arab_PK'
-    else:
-        babel_lang = g.lang
-    if Locale(babel_lang).text_direction in ["ltr", "rtl"]:
-        g.dir = Locale(babel_lang).text_direction
+    if Locale(g.lang).text_direction in ["ltr", "rtl"]:
+        g.dir = Locale(g.lang).text_direction
 
     # Check that requested language is supported, otherwise return 404
     if g.lang not in ALL_LANGUAGES.keys():
