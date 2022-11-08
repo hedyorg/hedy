@@ -402,110 +402,110 @@ sections:
                 error_text: |
                     Après avoir utilisé if ou else, les élèves oublient d'utiliser une deuxième commande comme print ou ask.
                 error_code: |
-                    if name is Hedy 'Great!'
-                    else 'Hedy is better!'
+                    if nom is Hedy 'Super !'
+                    else 'Hedy est mieux !'
                 solution_text: |
-                    Add the print command to fix it.
+                    Corriges le problème en ajoutant la commande print.
                 solution_code: |
-                    if name is Hedy print 'Great!'
-                    else print 'Hedy is better!'
-        -   title: "Students might use two different names for the same variable"
+                    if nom is Hedy print 'Super !'
+                    else print 'Hedy est mieux !'
+        -   title: "Les élèves peuvent utiliser deux noms différents pour la même variable"
             example:
                 error_text: |
-                    In this example the student has used 'horse' and 'name' for the same variables.
+                    Dans cet exemple, l'élève a utilisé 'cheval' et 'nom' pour les mêmes variables.
                 error_code: |
-                    horse is ask 'What is your horse called?'
-                    if name is Bonfire print 'cool'
-                    else print 'less cool!'
+                    cheval is ask 'Comment s appelle ton cheval ?'
+                    if nom is Bonfire print 'cool'
+                    else print 'moins cool !'
                 solution_text: |
-                    Always check wheter the variable has the same name throughout the code. Slight differences can be hard to spot (for example plurals) but they will interfere with the code.
+                    Vérifies toujours si la variable a le même nom dans tout le code. De légères différences peuvent être difficiles à repérer (par exemple les pluriels) mais elles interfèrent avec le code.
                 solution_code: |
-                    horse is ask 'What is your horse called'
-                    if horse is Bonfire print 'cool!'
-                    else print 'less cool!'
+                    cheval is ask 'Comment s appelle ton cheval ? '
+                    if cheval is Bonfire print 'cool !'
+                    else print 'moins cool !'
         -   title: "Les élèves oublient encore les guillemets des deux côtés"
             example:
                 error_text: |
-                    If commandos can get very long and students tend to forget to use quotes.
+                    Les codes utilisant la commande `if` peuvent devenir très longs et les étudiants ont tendance à oublier d'utiliser les guillemets.
                 error_code: |
-                    if name is Hedy print fun
-                    else print 'meh!
+                    if nom is Hedy print fun
+                    else print 'beurk !
                 solution_text: |
-                    Always use 2 quotes in a print command.
+                    Utilises toujours 2 guillemets avec la commande print.
                 solution_code: |
-                    if name is Hedy print 'fun'
-                    else print 'meh!'
+                    if nom is Hedy print 'fun'
+                    else print 'beurk !'
         -   title: "Les élèves utilisent des guillemets autour des noms de variables"
             example:
                 error_text: |
-                    In this level there are no quotes around variable names.
+                    Dans ce niveau, il n’y a pas de guillemets autour des noms de variables.
                 error_code: |
-                    if 'name' is 'Hedy' print 'fun'
-                    else print 'meh!'
+                    if 'nom' is 'Hedy' print 'fun'
+                    else print 'beurk !'
                 solution_text: |
-                    Remove the quotes to get the code to work.
+                    Enlèves les guillemets pour que le code fonctionne.
                 solution_code: |
-                    if name is Hedy print 'fun'
-                    else print 'meh!
+                    if nom is Hedy print 'fun'
+                    else print 'beurk !
         -   title: "Les élèves utilisent des noms de variable longs contenant 2 mots"
             example:
                 error_text: |
-                    A variable should be named with one word. You could use an underscore to connect two words. That counts as one.
+                    Une variable doit être nommée avec un seul mot. Tu peux utiliser un trait de soulignement pour relier deux mots. Ça compte pour un mot.
                 error_code: |
-                    chosen door is ask 'Which door do you pick?'
+                    porte choisie is ask 'Quelle porte choisis-tu ?'
                 solution_text: |
-                    Add an underscore.
+                    Ajoutez un trait de soulignement.
                 solution_code: |
-                    chosen_door is ask 'which door do you pick?'
-        -   title: "Students want multiple answers to be correct"
+                    porte_choisie is ask 'quelle porte choisis-tu ?'
+        -   title: "Les élèves veulent que plusieurs réponses soient correctes"
             example:
                 error_text: |
-                    For example this student Hedy to tell all his friends that they are funny, but other classmates would be told that they are not.
+                    Dans cet exemple, l'élève veux qu'Hedy dise que tous ses amis sont drôles, mais aucun ne le sera.
                 error_code: |
-                    if name is Jesse, David, Souf print 'You are funny' else print 'You are not funny'
+                    if nom is Jesse, David, Souf print 'Tu es drôle' else print 'Tu n es pas drôle'
                 solution_text: |
-                    You could use the `in` command for that. It is explained in a higher level, but it does already work in level 5.
-                    Another solution is to use multiple if commands and no else command. The disadvantage is that it won't tell the other classmates that they are not funny.
+                    Tu peux utiliser la commande `in` pour résoudre ce problème. Elle est expliquée dans un niveau supérieur, mais elle fonctionne déjà au niveau 5.
+                    Une autre solution consiste à utiliser plusieurs commandes if sans commande else. Le programme ne dira pas que les autre personnes ne sont pas drôle par contre.
                 solution_code: |
-                    friends is Jesse, David, Souf
-                    name is ask 'Who are you?'
-                    if name in friends print 'You are funny'
-                    else print 'You are not funny'
+                    amis is Jesse, David, Souf
+                    nom is ask 'Qui es-tu ?'
+                    if nom in amis print 'Tu es drôle'
+                    else print 'Tu n es pas drôle'
 
-                    or
+                    ou
 
-                    name is ask 'Who are you?'
-                    if naam is Jesse print 'You are funny'
-                    if naam is David print 'You are funny'
-                    if naam is Souf print 'You are funny'
-        -   title: "The students make the variable name the same as the value in the if statement"
+                    nom is ask 'Qui es-tu?'
+                    if nom is Jesse print 'Tu es drôle'
+                    if nom is David print 'Tu es drôle'
+                    if nom is Souf print 'Tu es drôle'
+        -   title: "Les élèves utilisent un nom de variable identique à la valeur comparée dans l'instruction if"
             example:
                 error_text: |
-                    In the example below the password is 'password'. This will result in it always being correct.
+                    Dans l'exemple ci-dessous, la variable mot_de_passe est comparée à elle-même, le résultat de la comparaison sera donc toujours vrai.
                 error_code: |
-                    password is ask 'What is the password?'
-                    if password is password print 'Access granted'
-                    else print 'Acces denied!'
+                    mot_de_passe is ask 'Quel est le mot de passe?'
+                    if mot_de_passe is mot_de_passe print 'Accès autorisé'
+                    else print Accès refusé !'
                 solution_text: |
-                    Pick a different name for your variable.
+                    Choisis un nom different pour ta variable.
                 solution_code: |
-                    secret_password is ask 'What is the password'
-                    if secret_password is password print 'Access granted!'
-                    else print 'Access denied!'
+                    mot_de_passe_secret is ask 'Quel est le mot de passe ?'
+                    if mot_de_passe_secret is mot_de_passe print 'Accès accordé !'
+                    else print 'Accès refusé !'
     -   level: '6'
         sections:
-        -   title: Students struggle with quotation marks
+        -   title: Les élèves ont du mal avec les guillemets
             example:
-                error_text: "Some students struggle with adding quotattion marks or not. If you add quotation marks, the output screen will literally show '5+5'.\n"
+                error_text: "Certains élèves ont des difficultés à ajouter ou non des guillemets. Si tu ajoutes des guillemets, l'écran de sortie affichera littéralement '5+5'.\n"
                 error_code: "print '5 + 5'\n"
-                solution_text: "In this code the output screen will print '10'.\n"
+                solution_text: "Dans ce code, l'écran de sortie affichera '10'.\n"
                 solution_code: "print 5 + 5\n"
-        -   title: Students struggle with the concept of doing maths with a variable
+        -   title: Les élèves ont du mal avec le concept de faire des mathématiques avec une variable
             example:
-                error_code: "age = ask 'How old are you?'\nprint 'Next year you will be ' age + 1\n"
-                error_text: "Some students will find it hard to do maths with variables. Try to show them very simple examples, like:\n"
-                solution_text: "Or take it a step further like this.\n"
-                solution_code: "price = 0\nprint 'Welcome to our burger restaurant'\nburger = ask 'Would you like a burger?'\nif burger = yes price = price + 10\ndrink = ask 'Would you like a drink?'\nif drink = yes price = price + 4\nprint 'That will be ' price ' euros please'\n"
+                error_code: "age = ask 'Quel age as-tu ?'\nprint 'L année prochaine ton age sera ' age + 1\n"
+                error_text: "Certains élèves auront du mal à faire des mathématiques avec des variables. Essayes de leur montrer des exemples très simples, comme :\n"
+                solution_text: "Ou un échelon au dessus comme ceci.\n"
+                solution_code: "prix = 0 \nprint 'Bienvenue dans le restaurant de hamburgers' \nburger = ask 'Veux-tu un burger ?' \nif burger = oui prix = prix + 10 \nboisson = ask 'Veux-tu une boisson ?' \nif boisson = oui prix = prix + 4 \nprint 'Ce sera ' prix ' s il te plaît'\n"
     -   level: '7'
         sections:
         -   title: Students forget one of the word of the repeat command, or they forget the print command
