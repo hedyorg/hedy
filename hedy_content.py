@@ -37,7 +37,7 @@ ALL_LANGUAGES = {}
 ALL_KEYWORD_LANGUAGES = {}
 
 # Todo TB -> We create this list manually, but it would be nice if we find a way to automate this as well
-NON_LATIN_LANGUAGES = ['ar', 'bg', 'bn', 'el', 'fa', 'hi', 'he', 'ru', 'zh_Hans']
+NON_LATIN_LANGUAGES = ['ar', 'bg', 'bn', 'el', 'fa', 'hi', 'he', 'pa_PK', 'ru', 'zh_Hans']
 
 # It would be nice if we created this list manually but couldn't find a way to retrieve this from Babel
 NON_BABEL = ['tn']
@@ -286,8 +286,13 @@ for folder in os.listdir('translations'):
     if not os.path.isdir(locale_dir):
         continue
 
+    if folder == 'pa_PK':  # Babel uses a different name to indicate the Arabic script
+        folder_babel = 'pa_Arab_PK'
+    else:
+        folder_babel = folder
+
     if filter(lambda x: x.endswith('.mo'), os.listdir(locale_dir)):
-        locale = Locale.parse(folder)
+        locale = Locale.parse(folder_babel)
         languages[folder] = locale.display_name.title()
 
 for l in sorted(languages):
