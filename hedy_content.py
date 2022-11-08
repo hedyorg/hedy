@@ -42,6 +42,8 @@ NON_LATIN_LANGUAGES = ['ar', 'bg', 'bn', 'el', 'fa', 'hi', 'he', 'pa_PK', 'ru', 
 
 # Babel has a different naming convention than Weblate and doesn't support some languages -> fix this manually
 CUSTOM_BABEL_LANGUAGES = {'pa_PK': 'pa_Arab_PK', 'tn': 'en'}
+# For the non-existing language manually overwrite the display language to make sure it is displayed correctly
+CUSTOM_LANGUAGE_TRANSLATIONS = {'tn': 'Setswana'}
 customize_babel_locale(CUSTOM_BABEL_LANGUAGES)
 
 ADVENTURE_NAMES = [
@@ -284,6 +286,9 @@ for folder in os.listdir('translations'):
     if not os.path.isdir(locale_dir):
         continue
     if filter(lambda x: x.endswith('.mo'), os.listdir(locale_dir)):
+        if language in CUSTOM_LANGUAGE_TRANSLATIONS.keys():
+            languages[folder] = CUSTOM_BABEL_LANGUAGES.get(language)
+            continue
         locale = Locale.parse(folder)
         languages[folder] = locale.display_name.title()
 
