@@ -139,8 +139,6 @@ def load_adventures_per_level(level, keyword_lang):
 
 @babel.localeselector
 def get_locale():
-    if session.get("lang", request.accept_languages.best_match(ALL_LANGUAGES.keys(), 'en')) in NON_BABEL:
-        return "en"
     return session.get("lang", request.accept_languages.best_match(ALL_LANGUAGES.keys(), 'en'))
 
 

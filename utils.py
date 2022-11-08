@@ -12,6 +12,7 @@ import uuid
 from flask_babel import gettext, format_date, format_datetime, format_timedelta
 from ruamel import yaml
 import commonmark
+
 commonmark_parser = commonmark.Parser()
 commonmark_renderer = commonmark.HtmlRenderer()
 from bs4 import BeautifulSoup
@@ -84,26 +85,30 @@ NORMAL_PREFIX_CODE = textwrap.dedent("""\
             return number
         """)
 
+
 class Timer:
-  """A quick and dirty timer."""
-  def __init__(self, name):
-    self.name = name
+    """A quick and dirty timer."""
 
-  def __enter__(self):
-    self.start = time.time()
+    def __init__(self, name):
+        self.name = name
 
-  def __exit__(self, type, value, tb):
-    delta = time.time() - self.start
-    print(f'{self.name}: {delta}s')
+    def __enter__(self):
+        self.start = time.time()
+
+    def __exit__(self, type, value, tb):
+        delta = time.time() - self.start
+        print(f'{self.name}: {delta}s')
 
 
 def timer(fn):
-  """Decoractor for fn."""
-  @functools.wraps(fn)
-  def wrapper(*args, **kwargs):
-    with Timer(fn.__name__):
-      return fn(*args, **kwargs)
-  return wrapper
+    """Decoractor for fn."""
+
+    @functools.wraps(fn)
+    def wrapper(*args, **kwargs):
+        with Timer(fn.__name__):
+            return fn(*args, **kwargs)
+
+    return wrapper
 
 
 def timems():
@@ -115,6 +120,7 @@ def timems():
     """
     return int(round(time.time() * 1000))
 
+
 def times():
     """Return the UNIX timestamp in seconds.
 
@@ -123,9 +129,8 @@ def times():
     return int(round(time.time()))
 
 
-
-
 DEBUG_MODE = False
+
 
 def is_debug_mode():
     """Return whether or not we're in debug mode.
@@ -154,8 +159,9 @@ def dump_yaml_rt(data):
     """Dump round-tripped YAML."""
     return yaml.round_trip_dump(data, indent=4, width=999)
 
+
 def slash_join(*args):
-    ret =[]
+    ret = []
     for arg in args:
         if not arg: continue
 
@@ -163,6 +169,7 @@ def slash_join(*args):
             ret.append('/')
         ret.append(arg.lstrip('/') if ret else arg)
     return ''.join(ret)
+
 
 def is_testing_request(request):
     """Whether the current request is a test request.
@@ -174,8 +181,10 @@ def is_testing_request(request):
     """
     return not is_heroku() and bool('X-Testing' in request.headers and request.headers['X-Testing'])
 
+
 def extract_bcrypt_rounds(hash):
     return int(re.match(r'\$2b\$\d+', hash)[0].replace('$2b$', ''))
+
 
 def isoformat(timestamp):
     """Turn a timestamp into an ISO formatted string."""
@@ -207,7 +216,6 @@ def is_heroku():
 
 
 def version():
-
     # """Get the version from the Heroku environment variables."""
     if not is_heroku():
         return 'DEV'
@@ -217,6 +225,7 @@ def version():
 
     commit = os.getenv('HEROKU_SLUG_COMMIT', '????')[0:6]
     return the_date.strftime('%Y %b %d') + f'({commit})'
+
 
 def valid_email(s):
     return bool(re.match(r'^(([a-zA-Z0-9_+\.\-]+)@([\da-zA-Z\.\-]+)\.([a-zA-Z\.]{2,6})\s*)$', s))
@@ -237,7 +246,7 @@ def atomic_write_file(filename, mode='wb'):
     tmp_file = f'{filename}.{os.getpid()}'
     with open(tmp_file, mode) as f:
         yield f
-    
+
     os.replace(tmp_file, filename)
 
 
@@ -247,8 +256,10 @@ def atomic_write_file(filename, mode='wb'):
 def mstoisostring(date):
     return datetime.datetime.fromtimestamp(int(str(date)[:-3])).isoformat()
 
+
 def string_date_to_date(date):
     return datetime.datetime.strptime(date, "%Y-%m-%d")
+
 
 def timestamp_to_date(timestamp, short_format=False):
     try:
@@ -267,8 +278,10 @@ def delta_timestamp(date, short_format=False):
         delta = datetime.datetime.now() - datetime.datetime.fromtimestamp(int(str(date)[:-3]))
     return format_timedelta(delta)
 
+
 def stoisostring(date):
     return datetime.datetime.fromtimestamp(date)
+
 
 def localized_date_format(date, short_format=False):
     # Improve the date by using the Flask Babel library and return timestamp as expected by language
@@ -278,13 +291,16 @@ def localized_date_format(date, short_format=False):
         timestamp = datetime.datetime.fromtimestamp(int(str(date)[:-3]))
     return format_date(timestamp, format='medium') + " " + format_datetime(timestamp, "H:mm")
 
+
 def datetotimeordate(date):
     print(date)
     return date.replace("T", " ")
 
+
 # https://stackoverflow.com/a/2257449
 def random_id_generator(size=6, chars=string.ascii_uppercase + string.ascii_lowercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
+
 
 # This function takes a Markdown string and returns a list with each of the HTML elements obtained
 # by rendering the Markdown into HTML.
@@ -315,6 +331,7 @@ def session_id():
             session['session_id'] = uuid.uuid4().hex
     return session['session_id']
 
+
 # https://github.com/python-babel/babel/issues/454
 def customize_babel_locale(custom_locales: dict):
     from babel.core import get_global
@@ -323,16 +340,15 @@ def customize_babel_locale(custom_locales: dict):
         db[custom_name] = custom_name
     import babel.localedata
 
-    o_exists, o_load, o_parse_locale = babel.localedata.exists, babel.localedata.load, babel.core.parse_locale
+    o_exists, o_load = babel.localedata.exists, babel.localedata.load
     if o_exists.__module__ != __name__:
         def exists(name):
             name = custom_locales.get(name, name)
             return o_exists(name)
+
         def load(name, merge_inherited=True):
             name = custom_locales.get(name, name)
             return o_load(name, merge_inherited)
+
         babel.localedata.exists = exists
         babel.localedata.load = load
-
-def add_babel_locale(new_locales):
-    print(new_locales)
