@@ -1530,6 +1530,10 @@ class ConvertToPython_4(ConvertToPython_3):
 @v_args(meta=True)
 @hedy_transpiler(level=5)
 class ConvertToPython_5(ConvertToPython_4):
+    def __init__(self, lookup, numerals_language):
+        super().__init__(lookup, numerals_language)
+        self.ifpressed_prefix_added = False
+
     def list_access_var(self, meta, args):
         var = escape_var(args[0])
         if isinstance(args[2], Tree):
@@ -1566,20 +1570,41 @@ else:
         arg1 = self.process_variable(args[1], meta.line)
         return f"{arg0} in {arg1}"
 
+    def make_ifpressed_command(self, command):
+        if self.ifpressed_prefix_added:
+            return command
+        else:
+            command = f"""
+while not pygame_end:
+    time.sleep(0.1)
+    pygame.display.update()
+    event = pygame.event.wait()
+    if event.type == pygame.QUIT:
+        pygame_end = True
+        pygame.quit()
+        break
+    if event.type == pygame.KEYDOWN:
+{command}
+"""
+            self.ifpressed_prefix_added = True
+        return command
+
     def ifpressed(self, met, args):
-        return f"""
+        return self.make_ifpressed_command(f"""
         if event.key == pygame.K_{args[0]}:
 {ConvertToPython.indent(args[1], 12)}
-            pygame_end = True"""
+            break
+""")
 
     def ifpressed_else(self, met, args):
-        return f"""
+        return self.make_ifpressed_command(f"""
         if event.key == pygame.K_{args[0]}:
 {ConvertToPython.indent(args[1], 12)}
-            pygame_end = True
+            break
         else:
 {ConvertToPython.indent(args[2], 12)}
-            pygame_end = True"""
+            break
+""")
 
 @v_args(meta=True)
 @hedy_transpiler(level=6)
@@ -1727,11 +1752,11 @@ class ConvertToPython_8_9(ConvertToPython_7):
         all_lines = '\n'.join([x for x in args[1:]])
         all_lines = ConvertToPython.indent(all_lines, 12)
 
-        return f"""
+        return self.make_ifpressed_command(f"""
         if event.key == pygame.K_{args[0]}:
 {all_lines}
-            pygame_end = True
-"""
+            break
+""")
 
     def ifpressed_else(self, met, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
@@ -1739,10 +1764,11 @@ class ConvertToPython_8_9(ConvertToPython_7):
         all_lines = '\n'.join([x for x in args[1:]])
         all_lines = ConvertToPython.indent(all_lines, 12)
 
-        return f"""
+        return self.make_ifpressed_command(f"""
         if event.key == pygame.K_{args[0]}:
 {all_lines}
-"""
+            break
+""")
 
     def elses(self, meta, args):
         args = [a for a in args if a != ""] # filter out in|dedent tokens
@@ -1752,7 +1778,7 @@ class ConvertToPython_8_9(ConvertToPython_7):
 
     def ifpressed_elses(self, meta, args):
         args = [a for a in args if a != ""] # filter out in|dedent tokens
-        args += ["\npygame_end = True\n"]
+        args += ["\nbreak\n"]
 
         all_lines = "\n".join(
             [ConvertToPython.indent(x, 8) for x in args]

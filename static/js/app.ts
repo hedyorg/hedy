@@ -27,21 +27,12 @@ import pygame
 pygame.init()
 canvas = pygame.display.set_mode((711,300))
 canvas.fill(pygame.Color(247, 250, 252, 255))
-
 pygame_end = False
-
-while not pygame_end:
-    pygame.display.update()
-    event = pygame.event.wait()
-    if event.type == pygame.QUIT:
-        pygame.quit()
-        break
-    if event.type == pygame.KEYDOWN:
 `;
 
 const pygame_suffix =
 `# coding=utf8
-pygame.display.update()
+pygame_end = True
 pygame.quit()
 `;
 
@@ -324,13 +315,14 @@ function clearErrors(editor: AceAjax.Editor) {
 }
 
 export function stopit() {
-  // check if running PyGame
-  let runningPyGame = $('#runit').attr('running-pygame');
-
-  if (runningPyGame === "true") {
+  if (window.State.pygame_running) {
       // when running pygame, raise the pygame quit event
       Sk.insertPyGameEvent("quit");
-      $('#runit').removeAttr('running-pygame');
+      Sk.unbindPygameListeners();
+
+      window.State.pygame_running = false;
+      $('#stopit').hide();
+      $('#runit').show();
   }
   else
   {
@@ -371,6 +363,11 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
     if (disabled_prompt) {
       return modal.alert(disabled_prompt, 3000, true);
     } return;
+  }
+
+  // Make sure to stop previous PyGame event listeners
+  if (typeof Sk.unbindPygameListeners === 'function') {
+    Sk.unbindPygameListeners();
   }
 
   // We set the run limit to 1ms -> make sure that the previous programs stops (if there is any)
@@ -1042,7 +1039,7 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
     initSkulpt4Pygame();
     initCanvas4PyGame();
 
-    $('#runit').attr("running-pygame", "true");
+    window.State.pygame_running = true;
   }
 
   code = code_prefix + code;
@@ -1084,7 +1081,7 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
     }) ()
   });
 
-  return Sk.misceval.asyncToPromise( () =>
+  return Sk.misceval.asyncToPromise(() =>
     Sk.importMainWithBody("<stdin>", false, code, true), {
       "*": () => {
         // We don't do anything here...
@@ -1115,6 +1112,8 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
     }
     if (cb) cb ();
   }).catch(function(err) {
+
+
     const errorMessage = errorMessageFromSkulptError(err) || null;
     if (!errorMessage) {
       throw null;
@@ -1288,21 +1287,10 @@ function initCanvas4PyGame() {
 }
 
 function initSkulpt4Pygame() {
-    const killWhileAndForBool = true;
     Sk.main_canvas = document.createElement("canvas");
-    Sk.builtin.KeyboardInterrupt = function (_:any) {
-        let o;
-        if (!(this instanceof Sk.builtin.KeyboardInterrupt)) {
-            o = Object.create(Sk.builtin.KeyboardInterrupt.prototype);
-            o.constructor.apply(o, arguments);
-            return o;
-        }
-        Sk.builtin.BaseException.apply(this, arguments);
-    };
-    Sk.abstr.setUpInheritance("KeyboardInterrupt", Sk.builtin.KeyboardInterrupt, Sk.builtin.BaseException);
     Sk.configure({
-        killableWhile: killWhileAndForBool,
-        killableFor: killWhileAndForBool,
+        killableWhile: true,
+        killableFor: true,
         __future__: Sk.python3,
     });
 }
