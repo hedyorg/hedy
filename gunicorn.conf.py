@@ -8,6 +8,7 @@ def worker_exit(server, worker):
     querylog.emergency_shutdown()
     jsonbin.emergency_shutdown()
 
+
 def post_fork(server, worker):
     """When the worker has started."""
     import app

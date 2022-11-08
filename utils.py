@@ -1,3 +1,6 @@
+from flask import session, request
+from flask_helpers import render_template
+from bs4 import BeautifulSoup
 import contextlib
 import datetime
 import textwrap
@@ -14,9 +17,6 @@ from ruamel import yaml
 import commonmark
 commonmark_parser = commonmark.Parser()
 commonmark_renderer = commonmark.HtmlRenderer()
-from bs4 import BeautifulSoup
-from flask_helpers import render_template
-from flask import session, request
 
 IS_WINDOWS = os.name == 'nt'
 
@@ -84,26 +84,28 @@ NORMAL_PREFIX_CODE = textwrap.dedent("""\
             return number
         """)
 
+
 class Timer:
-  """A quick and dirty timer."""
-  def __init__(self, name):
-    self.name = name
+    """A quick and dirty timer."""
 
-  def __enter__(self):
-    self.start = time.time()
+    def __init__(self, name):
+        self.name = name
 
-  def __exit__(self, type, value, tb):
-    delta = time.time() - self.start
-    print(f'{self.name}: {delta}s')
+    def __enter__(self):
+        self.start = time.time()
+
+    def __exit__(self, type, value, tb):
+        delta = time.time() - self.start
+        print(f'{self.name}: {delta}s')
 
 
 def timer(fn):
-  """Decoractor for fn."""
-  @functools.wraps(fn)
-  def wrapper(*args, **kwargs):
-    with Timer(fn.__name__):
-      return fn(*args, **kwargs)
-  return wrapper
+    """Decoractor for fn."""
+    @functools.wraps(fn)
+    def wrapper(*args, **kwargs):
+        with Timer(fn.__name__):
+            return fn(*args, **kwargs)
+    return wrapper
 
 
 def timems():
@@ -115,6 +117,7 @@ def timems():
     """
     return int(round(time.time() * 1000))
 
+
 def times():
     """Return the UNIX timestamp in seconds.
 
@@ -123,9 +126,8 @@ def times():
     return int(round(time.time()))
 
 
-
-
 DEBUG_MODE = False
+
 
 def is_debug_mode():
     """Return whether or not we're in debug mode.
@@ -154,15 +156,18 @@ def dump_yaml_rt(data):
     """Dump round-tripped YAML."""
     return yaml.round_trip_dump(data, indent=4, width=999)
 
+
 def slash_join(*args):
-    ret =[]
+    ret = []
     for arg in args:
-        if not arg: continue
+        if not arg:
+            continue
 
         if ret and not ret[-1].endswith('/'):
             ret.append('/')
         ret.append(arg.lstrip('/') if ret else arg)
     return ''.join(ret)
+
 
 def is_testing_request(request):
     """Whether the current request is a test request.
@@ -174,8 +179,10 @@ def is_testing_request(request):
     """
     return not is_heroku() and bool('X-Testing' in request.headers and request.headers['X-Testing'])
 
+
 def extract_bcrypt_rounds(hash):
     return int(re.match(r'\$2b\$\d+', hash)[0].replace('$2b$', ''))
+
 
 def isoformat(timestamp):
     """Turn a timestamp into an ISO formatted string."""
@@ -218,6 +225,7 @@ def version():
     commit = os.getenv('HEROKU_SLUG_COMMIT', '????')[0:6]
     return the_date.strftime('%Y %b %d') + f'({commit})'
 
+
 def valid_email(s):
     return bool(re.match(r'^(([a-zA-Z0-9_+\.\-]+)@([\da-zA-Z\.\-]+)\.([a-zA-Z\.]{2,6})\s*)$', s))
 
@@ -227,7 +235,7 @@ def atomic_write_file(filename, mode='wb'):
     """Write to a filename atomically.
 
     First write to a unique tempfile, then rename the tempfile into
-    place. Use replace instead of rename to make it atomic on windows as well. 
+    place. Use replace instead of rename to make it atomic on windows as well.
     Use as a context manager:
 
         with atomic_write_file('file.txt') as f:
@@ -237,7 +245,7 @@ def atomic_write_file(filename, mode='wb'):
     tmp_file = f'{filename}.{os.getpid()}'
     with open(tmp_file, mode) as f:
         yield f
-    
+
     os.replace(tmp_file, filename)
 
 
@@ -247,8 +255,10 @@ def atomic_write_file(filename, mode='wb'):
 def mstoisostring(date):
     return datetime.datetime.fromtimestamp(int(str(date)[:-3])).isoformat()
 
+
 def string_date_to_date(date):
     return datetime.datetime.strptime(date, "%Y-%m-%d")
+
 
 def timestamp_to_date(timestamp, short_format=False):
     try:
@@ -256,7 +266,7 @@ def timestamp_to_date(timestamp, short_format=False):
             return datetime.datetime.fromtimestamp(int(str(timestamp)))
         else:
             return datetime.datetime.fromtimestamp(int(str(timestamp)[:-3]))
-    except:
+    except BaseException:
         return None
 
 
@@ -267,8 +277,10 @@ def delta_timestamp(date, short_format=False):
         delta = datetime.datetime.now() - datetime.datetime.fromtimestamp(int(str(date)[:-3]))
     return format_timedelta(delta)
 
+
 def stoisostring(date):
     return datetime.datetime.fromtimestamp(date)
+
 
 def localized_date_format(date, short_format=False):
     # Improve the date by using the Flask Babel library and return timestamp as expected by language
@@ -278,16 +290,25 @@ def localized_date_format(date, short_format=False):
         timestamp = datetime.datetime.fromtimestamp(int(str(date)[:-3]))
     return format_date(timestamp, format='medium') + " " + format_datetime(timestamp, "H:mm")
 
+
 def datetotimeordate(date):
     print(date)
     return date.replace("T", " ")
 
 # https://stackoverflow.com/a/2257449
-def random_id_generator(size=6, chars=string.ascii_uppercase + string.ascii_lowercase + string.digits):
+
+
+def random_id_generator(
+        size=6,
+        chars=string.ascii_uppercase +
+        string.ascii_lowercase +
+        string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
 
 # This function takes a Markdown string and returns a list with each of the HTML elements obtained
 # by rendering the Markdown into HTML.
+
+
 def markdown_to_html_tags(markdown):
     _html = commonmark_renderer.render(commonmark_parser.parse(markdown))
     soup = BeautifulSoup(_html, 'html.parser')

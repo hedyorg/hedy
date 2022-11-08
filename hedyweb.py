@@ -1,14 +1,9 @@
 import collections
 
-from flask_babel import gettext
-
 from website.yaml_file import YamlFile
-import attr
 import glob
 from os import path
 from flask_helpers import render_template
-from website.auth import current_user, is_teacher
-import utils
 
 
 class AchievementTranslations:
@@ -49,7 +44,24 @@ class PageTranslations:
         return d
 
 
-def render_code_editor_with_tabs(cheatsheet, commands, max_level, level_number, version, quiz, quiz_questions, loaded_program, adventures, parsons, parsons_exercises, tutorial, customizations, hide_cheatsheet, enforce_developers_mode, teacher_adventures, adventure_name):
+def render_code_editor_with_tabs(
+        cheatsheet,
+        commands,
+        max_level,
+        level_number,
+        version,
+        quiz,
+        quiz_questions,
+        loaded_program,
+        adventures,
+        parsons,
+        parsons_exercises,
+        tutorial,
+        customizations,
+        hide_cheatsheet,
+        enforce_developers_mode,
+        teacher_adventures,
+        adventure_name):
     arguments_dict = {}
 
     # Meta stuff
@@ -73,7 +85,11 @@ def render_code_editor_with_tabs(cheatsheet, commands, max_level, level_number, 
     arguments_dict['quiz'] = quiz
     arguments_dict['quiz_questions'] = quiz_questions
 
-    return render_template("code-page.html", **arguments_dict, cheatsheet=cheatsheet, blur_button_available = False)
+    return render_template(
+        "code-page.html",
+        **arguments_dict,
+        cheatsheet=cheatsheet,
+        blur_button_available=False)
 
 
 def render_tutorial_mode(level, cheatsheet, commands, adventures, parsons_exercises):
@@ -89,7 +105,12 @@ def render_tutorial_mode(level, cheatsheet, commands, adventures, parsons_exerci
     arguments_dict['parsons'] = True if parsons_exercises else False
     arguments_dict['parsons_exercises'] = parsons_exercises
 
-    return render_template("code-page.html", **arguments_dict, cheatsheet=cheatsheet, blur_button_available = False)
+    return render_template(
+        "code-page.html",
+        **arguments_dict,
+        cheatsheet=cheatsheet,
+        blur_button_available=False)
+
 
 def render_specific_adventure(commands, level_number, adventure, version, prev_level, next_level):
     arguments_dict = {}
@@ -108,4 +129,4 @@ def render_specific_adventure(commands, level_number, adventure, version, prev_l
     arguments_dict['adventures'] = adventure
     arguments_dict['latest'] = version
 
-    return render_template("code-page.html", **arguments_dict, blur_button_available = False)
+    return render_template("code-page.html", **arguments_dict, blur_button_available=False)

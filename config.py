@@ -6,7 +6,7 @@ dyno = os.getenv('DYNO')
 athena_query = os.getenv('AWS_ATHENA_PREPARE_STATEMENT')
 
 config = {
-    'port': os.getenv ('PORT') or 8080,
+    'port': os.getenv('PORT') or 8080,
     'session': {
         'cookie_name': 'hedy',
         # in minutes
@@ -44,6 +44,6 @@ config = {
         's3_output': 's3://hedy-query-outputs/',
         'max_results': 50
     },
-    #enables the quiz environment by setting the config variable on True
+    # enables the quiz environment by setting the config variable on True
     'quiz-enabled': True,
 }
