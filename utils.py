@@ -347,7 +347,6 @@ def hack_babel_core_to_support_custom_locales(custom_locales: dict):
         def exists(name):
             # Convert custom names to normalized names
             name = custom_locales.get(name, name)
-            print(name)
             return o_exists(name)
 
         def load(name, merge_inherited=True):
