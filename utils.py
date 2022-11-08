@@ -346,6 +346,7 @@ def hack_babel_core_to_support_custom_locales(custom_locales: dict):
         def exists(name):
             # Convert custom names to normalized names
             name = custom_locales.get(name, name)
+            print(name)
             return o_exists(name)
 
         def load(name, merge_inherited=True):
@@ -357,17 +358,3 @@ def hack_babel_core_to_support_custom_locales(custom_locales: dict):
         # Patch
         babel.localedata.exists = exists
         babel.localedata.load = load
-    if o_parse_locale.__module__ != __name__:
-
-        # Definitions
-        def parse_locale(name, sep='_'):
-            # Convert custom names to normalized names
-            name = custom_locales.get(name, name)
-            return o_parse_locale(name, sep)
-
-        # Patch
-        babel.core.parse_locale = parse_locale
-
-        # See that they actually exist
-        for normalized_name in custom_locales.values():
-            assert o_exists(normalized_name)
