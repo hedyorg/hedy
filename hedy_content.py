@@ -286,11 +286,12 @@ for folder in os.listdir('translations'):
     if not os.path.isdir(locale_dir):
         continue
     if filter(lambda x: x.endswith('.mo'), os.listdir(locale_dir)):
-        if language in CUSTOM_LANGUAGE_TRANSLATIONS.keys():
-            languages[folder] = CUSTOM_BABEL_LANGUAGES.get(language)
+        if folder in CUSTOM_LANGUAGE_TRANSLATIONS.keys():
+            languages[folder] = CUSTOM_LANGUAGE_TRANSLATIONS.get(folder)
             continue
         locale = Locale.parse(folder)
         languages[folder] = locale.display_name.title()
+
 
 for l in sorted(languages):
     ALL_LANGUAGES[l] = languages[l]
