@@ -126,7 +126,7 @@ adventures:
                 story_text: |-
                     ## Schleifen! 
                     `{print}` funktioniert exakt genauso, aber wir verwenden jetzt die neue Form des Befehls `{for}`. Du kannst jetzt ``{for} counter {in} {range} 1 {to} 5` schreiben und `counter` in deinem Programm verwenden.
-                    Probier es mal aus, und schau was passiert! Denke daran, Einrückungen nach den `{for}`- und `{if}`-Anweisungen zu verwenden (Das bedeutet, einen Satz mit vier Leerzeichen zu beginnen)
+                    Probier es aus, und schau, was passiert! Denke daran, Einrückungen nach den `{for}`- und `{if}`-Anweisungen zu verwenden (Das bedeutet, einen Satz mit vier Leerzeichen zu beginnen).
                 example_code: "```\n{for} Zähler {in} {range} 1 {to} 5\n    {print} Zähler\n```\n"
             12:
                 start_code: |-
@@ -236,8 +236,8 @@ adventures:
 
                 example_code_2: |
                     ```
-                    temperatur = 25
-                    {print}('Draußen sind es ', temperature, 'Grad')
+                    temperature = 25
+                    {print}('Draußen sind es ', temperature,' Grad')
                     ```
 
                 story_text_3: |-
@@ -253,7 +253,7 @@ adventures:
                 example_code: |
                     ```
                     {print}('Hallo!')
-                    {for} i in {range}(1, 10):
+                    {for} i {in} {range}(1, 10):
                         {print}('This ist Zeile ', i)
                     ```
     story:

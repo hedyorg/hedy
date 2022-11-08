@@ -51,6 +51,14 @@ class TestsLevel1(HedyTester):
         )
         self.assertEqual([output], hedy.all_print_arguments(code, self.level))
 
+    def test_print_line_with_spaces_works(self):
+        code = "print hallo\n      \nprint hallo"
+        expected = "print('hallo')\n\nprint('hallo')"
+        expected_commands = [Command.print, Command.print]
+
+        self.single_level_tester(code=code, expected=expected, expected_commands=expected_commands)
+
+
     def test_print_comma(self):
         code = "print one, two, three"
         expected = "print('one, two, three')"
@@ -150,7 +158,7 @@ class TestsLevel1(HedyTester):
             code=code,
             expected=expected,
             output=output,
-            translate=False, #translation will remove the tatweels, we will deal with that later
+            translate=False,  # translation will remove the tatweels, we will deal with that later
             lang='ar')
 
     def test_ask_ar_tatweel_all_places(self):
@@ -160,7 +168,7 @@ class TestsLevel1(HedyTester):
         self.single_level_tester(
             code=code,
             expected=expected,
-            translate=False, #translation will remove the tatweels, we will deal with that later
+            translate=False,  # translation will remove the tatweels, we will deal with that later
             lang='ar')
 
     # def test_print_ar_tatweel_itself(self):
@@ -187,7 +195,7 @@ class TestsLevel1(HedyTester):
             code=code,
             expected=expected,
             output=output,
-            translate=False, #translation will remove the tatweels, we will deal with that later
+            translate=False,  # translation will remove the tatweels, we will deal with that later
             lang='ar')
 
     def test_print_ar_tatweel_begin(self):
@@ -199,7 +207,7 @@ class TestsLevel1(HedyTester):
             code=code,
             expected=expected,
             output=output,
-            translate=False, #translation will remove the tatweels, we will deal with that later
+            translate=False,  # translation will remove the tatweels, we will deal with that later
             lang='ar')
 
     def test_print_ar_tatweel_multiple_end(self):
@@ -211,7 +219,7 @@ class TestsLevel1(HedyTester):
             code=code,
             expected=expected,
             output=output,
-            translate=False, #translation will remove the tatweels, we will deal with that later
+            translate=False,  # translation will remove the tatweels, we will deal with that later
             lang='ar')
 
     def test_print_ar_2(self):
@@ -542,6 +550,17 @@ class TestsLevel1(HedyTester):
         output = 'Hallo welkom bij Hedy!'
 
         self.single_level_tester(code=code, expected=expected, output=output)
+        
+    def test_comments_may_be_empty(self):
+        code = textwrap.dedent("""\
+            #
+            # This is a comment
+            #
+            print Привіт, Хейді!""")
+        expected = "print('Привіт, Хейді!')"
+        output = "Привіт, Хейді!"
+
+        self.single_level_tester(code=code, expected=expected, output=output)
 
     #
     # negative tests
@@ -597,7 +616,9 @@ class TestsLevel1(HedyTester):
             code,
             exception=hedy.exceptions.InvalidCommandException,
             extra_check_function=(lambda x: x.exception.arguments['line_number'] == 3)
-            )
+        )
+
+
 
     def test_print_without_argument_gives_incomplete(self):
         self.multi_level_tester(
