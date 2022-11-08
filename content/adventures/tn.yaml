@@ -37,7 +37,7 @@ adventures:
                 example_code: "```\n{repeat} 3 {times}\n    dijo = {ask} 'O batla eng?'\n    {if} dijo {is} pizza\n        {print} 'monate!'\n    {else}\n        {print} 'pizza e botoka'\n```\n"
             14:
                 example_code: "```\nage = {ask} 'How old are you?'\n{if} age > 12\n    {print} 'You are older than I am!'\n```\n"
-                start_code: "age = {ask} 'How old are you?'\n{if} age < 13\n    {print} 'You are younger than me!'\n{else}\n    {print} 'You are older than me!'"
+                start_code: "dingwaga = {ask} 'O na le dingwaga tse kahe?'\n{if} dingwaga < 13\n    {print} 'o monnye mo go nna!'\n{else}\n    {print} 'o motona mo go nna!'"
                 story_text: "## Great, Greater, Greatest!\nWe are going to learn more new items. You might know them already from mathematics, the `<` and `>`.\nThe `<` checks if the first number is smaller than the second, for example age `<` 12 checks if age is smaller than 12.\nIf you want to check if the first number is smaller or equal to the second, you can use `<=`, for example age `<=` 11.\nThe `>` checks if the first number is bigger than the second, for example points `>` 10 checks if points is larger than 10.\nIf you want to check if the first number is bigger or equal to the second, you can use `>=`, for example points `>=` 11.\nYou use these comparisons in an `{if}`, like this:\n"
                 story_text_2: "From this level on, if you want to compare exactly, you can use two equal signs. This is what most programming languages do:\n"
                 example_code_2: "```\nname = {ask} 'What is your name?'\n{if} name == 'Hedy'\n    {print} 'You are cool!'\n```\n"
@@ -86,8 +86,8 @@ adventures:
                 story_text_6: "**Dipalo ka mafoko** \nMo legatong le go letlelesega go dirisa lotshwao la + ka mafoko. Sekai:"
             13:
                 start_code: "leina = {ask} 'leina la gago ke mang?'\ndingwaga = {ask} 'o dingwaga tse kahe?'\n{if} leina {is} 'Hedy' {and} dingwaga {is} 2\n    {print} 'ke wena Hedy wa nnete!'"
-                story_text: "## And... Or..?\nWe are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two {if}'s but can use `{and}` and `{or}`. If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct."
-                example_code: "```\nname = {ask} 'what is your name?'\nage = {ask} 'what is your age?'\n{if} name {is} 'Hedy' {and} age {is} 2\n    {print} 'You are the real Hedy!'\n```\n"
+                story_text: "## And... kana..?\nMo legatong le, retile go ithuta `{and}` le `{kana}`! Fa o batla o ka thodumela diele tse pedi, ga o tlhoke go dirisa bo {if} ba babedi, mme o ka dirisa `{and}` le `{kana}`. Fa o ka dirisa `{and}`, diele tsotlhe ka bobedi, molema le moja wa `{and}` di tlhoka go nna boammaaruri. gape re ka dirisa  `{kana}`. Ka jalo, seele sele sengwe fela se tlhoka go baakanngwa."
+                example_code: "```\nleina = {ask} 'leina la gago ke mang?'\nage = {ask} 'O dingwaga di kahe?'\n{if} leina {is} 'Hedy' {and} dingwaga {is} 2\n    {print} 'ke wena Hedy sa boammaaruri!'\n```\n"
             15:
                 start_code: "answer = 0\n{while} answer != 25\n    answer = {ask} 'What is 5 times 5?'\n{print} 'A correct answer has been given'"
                 story_text: "## More loops!\nWe are going to learn a new loop, the `{while}` loop! We continue the loop as long as the statement is true.\nSo don't forget to change the value in the loop.\n\nIn the example code, we continue until a correct answer has been given.\nIf the correct answer is never given, the loop never ends!"
