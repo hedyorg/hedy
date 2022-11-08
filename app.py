@@ -13,7 +13,7 @@ from website.auth import current_user, login_user_from_token_cookie, requires_lo
 from website.yaml_file import YamlFile
 from website import querylog, aws_helpers, jsonbin, translating, ab_proxying, cdn, database, achievements
 import hedy_translation
-from hedy_content import ADVENTURE_ORDER_PER_LEVEL, COUNTRIES, ALL_LANGUAGES, ALL_KEYWORD_LANGUAGES, NON_LATIN_LANGUAGES, NON_BABEL
+from hedy_content import ADVENTURE_ORDER_PER_LEVEL, COUNTRIES, ALL_LANGUAGES, ALL_KEYWORD_LANGUAGES, NON_LATIN_LANGUAGES
 import hedyweb
 import hedy_content
 from flask_babel import gettext, Babel
@@ -36,10 +36,6 @@ import textwrap
 import zipfile
 
 logger = logging.getLogger(__name__)
-
-# Very important: First hacky-tacky the custom locales to make sure Weblate and Babel are both happy
-CUSTOM_LOCALES = {'pa_PK': 'pa_Arab_PK'}
-utils.hack_babel_core_to_support_custom_locales(CUSTOM_LOCALES)
 
 # Todo TB: This can introduce a possible app breaking bug when switching to Python 4 -> e.g. Python 4.0.1 is invalid
 if (sys.version_info.major < 3 or sys.version_info.minor < 7):
@@ -143,8 +139,6 @@ def load_adventures_per_level(level, keyword_lang):
 
 @babel.localeselector
 def get_locale():
-    if session.get("lang", request.accept_languages.best_match(ALL_LANGUAGES.keys(), 'en')) in NON_BABEL:
-        return "en"
     return session.get("lang", request.accept_languages.best_match(ALL_LANGUAGES.keys(), 'en'))
 
 
