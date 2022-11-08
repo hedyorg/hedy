@@ -87,7 +87,7 @@ class TestsTranslationLevel17(HedyTester):
         self.assertEqual(expected, result)
 
     def test_elif_english_dutch(self):
-        code = textwrap.dedent("""\n
+        code = textwrap.dedent("""\
         hedy = 4
         if hedy is 4:
             print 'hedy'
