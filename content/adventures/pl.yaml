@@ -397,10 +397,10 @@ adventures:
                 story_text: "## Fortune Teller\nThis level has no new functions, but allows you to practice with using the quotation marks.\nYou can remake your level 3 code, and make sure to add the quotation marks in the right places!\n\nMind that in level 3, we couldn't use the word 'question' as both the name of the variable and a normal word that could be printed.\nThe quotation marks in level 3 make this possible!\n\nImportant! Mind that now that we're using quotation marks, Hedy will get confused when you use the apostrophe for contractions like I'm or What's.\nMake sure to remove those apostrophes and change the spelling to Im or Whats.\n"
                 example_code: "```\n{print} 'Im Hedy the fortune teller!'\nquestion {is} {ask} 'What do you want to know?'\n{print} 'This is your question: ' question\nanswers {is} yes, no, maybe\n{print} 'My crystal ball says...'\n{sleep} 2\n{print} answers {at} {random}\n```\n"
             1:
-                story_text: "## Wróżka\nHave you ever been to a carnival and had your future predicted by a fortune teller? Or have you ever played with a magic eight ball?\nThen you probably know that they can't really predict your future, but it's still fun to play!\n\nIn the upcoming levels you can learn how to create your own fortune telling machine!\nIn level 1 you can start off easy by letting Hedy introduce herself as a fortune teller and let her {echo} the players' answers.\nLike this:\n"
-                example_code: "```\n{print} Hello, I'm Hedy the fortune teller!\n{ask} Who are you?\n{print} Let me take a look in my crystal ball\n{print} I see... I see...\n{echo} Your name is\n```\n"
-                story_text_2: "## Challenge\nHedy now only tells you your name. Can you expand the code so that Hedy can predict more things about you?\nObviously, Hedy isn't a very good fortune teller yet, as she can only repeat the answers that were given by the players!\nTake a look in level 2 to improve your fortune teller.\n"
-                start_code: '# place your code here'
+                story_text: "## Wróżka\nCzy byłeś kiedyś w wesołym miasteczku i wróżka przepowiedziała Ci przyszłość? Albo czy kiedykolwiek grałeś magiczną ósemką?\nWtedy prawdopodobnie wiesz, że tak naprawdę nie mogą one przewidzieć twojej przyszłości, ale nadal jest to zabawne!\n\nW najbliższych poziomach możesz nauczyć się jak stworzyć własną maszynę do wróżenia!\nW poziomie 1 możesz zacząć łatwo, pozwalając Hedy przedstawić się jako wróżka i pozwolić jej odpowiedzieć {echo} odpowiedziami graczy.\nNa przykład tak:\n"
+                example_code: "```\n{print} Cześć, jestem wróżka Hedy!\n{ask} A ty kim jesteś?\n{print} Pozwól mi spojrzeć w moją kryształową kulę\n{print} Wiedzę... Widzę...\n{echo} Masz na imię\n```\n"
+                story_text_2: "## Wyzwanie\nHedy mówi ci teraz tylko twoje imię. Czy możesz rozszerzyć kod tak, aby Hedy mogła przewidzieć więcej rzeczy o Tobie?\nOczywiście Hedy nie jest jeszcze zbyt dobrą wróżką, ponieważ potrafi tylko powtarzać odpowiedzi, które zostały udzielone przez graczy!\nZajrzyj do poziomu 2, aby udoskonalić swoją wróżbę.\n"
+                start_code: '# umieść swój kod tu'
             12:
                 story_text: "## Fortune Teller\nIn this level you can make your fortunes multiple words. Like in this example below:\n"
                 example_code: "```\nfortunes = 'you will be rich', 'you will fall in love', 'you will slip on a banana peel'\n{print} 'I will take a look in my crystall ball for your future.'\n{print} 'I see... I see...'\n{sleep}\n{print} fortunes {at} {random}\n```\n"
@@ -445,10 +445,10 @@ adventures:
                 story_text: "## Haunted House Game\nThis haunted house game uses the connection between the lists you can use in this level.\nFor example: all the properties that belong to the zombie are first in all the lists, witch second and vampire third.\nCheck out the code!\n"
                 example_code: "```\nnumbers = [1, 2, 3]\ni = numbers[random]\nhint = ['growling', 'a cackling laugh', 'fluttering batwings']\nmonsters = ['zombie', 'witch', 'vampire']\nbad_fate = ['Your brain is eaten', 'You are forever cursed', 'You are bitten']\ngood_fate = ['You throw the ham. The zombie is distracted and starts etaing it.', 'You set the curtains on fire. The witch flees out of fear for the fire', 'The vampire hates garlic and flees']\nweapons = ['ham', 'lighter', 'garlic']\n{print} 'You are standing in front of an old mension'\n{print} 'Something is not right here'\n{print} 'You hear ' hint[i]\n{print} 'You are going to explore it'\n{print} 'You enter the kitchen en see a lighter, a raw ham and a garlic.'\nyour_weapon = {ask} 'What do you bring with you?'\n{print} 'With your ' your_weapon ' you enter the living room'\n{print} 'There you find a ' monsters[i]\nneeded_weapon = weapons[i]\n{if} your_weapon == needed_weapon\n    {print} 'You use your ' your_weapon\n    {print} good_fate[i]\n    {print} 'YOU WIN!'\n{else}\n    {print} 'You have chosen the wrong weapon...'\n    {print} bad_fate[i]\n    {print} 'GAME OVER'\n```\n"
             1:
-                story_text: "## Haunted house\nIn this adventure you are working towards making a game in which you have to escape from a haunted house by picking the correct door.\nIf you pick the right door you'll survive, but {if} not a terrible monster might...\n\nIn level 1 we start our haunted house game by making up a scary story and {ask} the player what monster they'll see in the haunted house.\n"
-                example_code: "\n```\n{print} How did I get here?\n{print} I remember my friend telling me to go into the old mansion...\n{print} and suddenly everything went black.\n{print} But how did I end up on the floor...?\n{print} My head hurts like Ive been hit by a baseball bat!\n{print} What's that sound?\n{print} Oh no! I feel like Im not alone in this house!\n{print} I need to get out of here!\n{print} There are 3 doors in front of me..\n{ask} Which door should i pick?\n{echo} I choose door\n{print} ...?\n```\n"
-                story_text_2: "## Challenge\nCan you finish the scary story? Or make up your own haunted house story?\n"
-                start_code: '{print} How did I get here?'
+                story_text: "## Nawiedzony dom\nW tej przygodzie pracujesz nad stworzeniem gry, w której musisz uciec z nawiedzonego domu wybierając właściwe drzwi.\nJeśli wybierzesz właściwe drzwi, przeżyjesz, ale jeśli nie, straszny potwór może...\n\nW poziomie 1 zaczynamy naszą grę w nawiedzony dom przez wymyślenie strasznej historii i zapytania gracza jakiego potwora zobaczą w nawiedzonym domu.\n"
+                example_code: "```\n{print} Jak się tu dostałem?\n{print} Pamiętam, jak przyjaciel powiedział mi, że mam wejść do starej rezydencji...\n{print} i nagle wszystko stało się czarne.\n{print}  Ale jak wylądowałem na podłodze...?\n{print} Strasznie boli mnie głowa, jakby ktoś walnął mnie kijem!\n{print} Co to za dźwięk?\n{print} O nie! Chyba nie jestem sam w tym domu!\n{print} Muszę się stąd wydostać!\n{print} Przede mną są 3 drzwi...\n{ask} Które drzwi powinienem wybrać?\n{echo} Wybieram drzwi\n{print} ...?\n```\n"
+                story_text_2: "## Wyzwanie\nMożesz dokończyć przerażającą historię? Albo wymyślić własną?\n"
+                start_code: '{print} Jak się tu znalazłem?'
             2:
                 story_text: "## Haunted House\nIn this haunted house you can choose your monsters with emojis. Of course you could also use words.\n"
                 example_code: "```\nmonster_1 {is} \U0001F47B\nmonster_2 {is} \U0001F921\nmonster_3 {is} \U0001F476\n{print} You enter the haunted house.\n{print} Suddenly you see a monster_1\n{print} You run into the other room, but a monster_2 is waiting there for you!\n{print} Oh no! Quickly get to the kitchen.\n{print} But as you enter monster_3 attacks you!\n```\n"
@@ -470,9 +470,9 @@ adventures:
                 example_code: "```\n{print} Escape from the haunted house!\n{print} There are 3 doors in front of you...\nchoice {is} {ask} Which door do you choose?\n{print} You picked door ... choice\nmonsters {is} a zombie, a vampire, NOTHING YOUVE ESCAPED\n{print} You see...\n{sleep}\n{print} monsters {at} {random}\n```\n"
                 story_text_2: "## Challenge\nThis story is pretty straight {forward}, maybe you can spook it up a bit by adding a more exciting story.\nAlso you have very limited outcomes right now, there are only 3 options of what's behind the doors. Maybe you can think of more monsters to add to the list!\n\n## Change the game into a tv gameshow!\nLastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!\nCan you do it?\n"
                 start_code: '# place your code here'
-        name: Haunted House
-        description: escape from the haunted house
-        default_save_name: Haunted House
+        name: Nawiedzony dom
+        description: Ucieknij z nawiedzonego domu
+        default_save_name: Nawiedzony dom
     story:
         levels:
             10:
@@ -646,15 +646,15 @@ adventures:
                 example_code: "```\nname is ask 'What is your name?'\npassword is ask 'What is your password?'\nif name is 'Agent007' and password is 'TOPSECRET'\n    print 'Go to the airport at 02.00'\nelse\n    print 'Go to the trainstation at 10.00'\n ```\n"
                 start_code: '## place your code here'
     next:
-        name: What's next?
-        description: What's Next?
-        default_save_name: next
+        name: Co dalej?
+        description: Co dalej?
+        default_save_name: Dalej
         levels:
             1:
-                story_text: "## What's next?\nCongratulations! You've reached the end of level 1. Hopefully you've already made some awesome codes, but Hedy has a lot more to discover. \n\nIn the first level you might've notice that the `{echo}` command can only save one bit of information at a time. \nFor example in the restaurant adventure, you could {echo} what the costumer wanted to eat, or what they wanted to drink, but not both in one sentence. \n"
-                example_code: "```\n{print} Welcome at Hedy's\n{ask} What would you like to eat?\n{echo} So you want \n{ask} what would you like to drink?\n{echo} So you want \n```\n"
-                story_text_2: "If the player types a hamburger and coke, you can't say `so you would like a hamburger and coke`, but you have to make two separate line. \nAlso, the `{echo}` command only echoes the word at the end of the sentence. So you can't say `your hamburger is coming right up!`.\n\nThat changes in level 2. In level 2 you'll learn to work with variables, that allow you to save multiple pieces of information and print them in any place you want.\nSo let's go to the next level!\n"
-                start_code: "{print} Let's go!"
+                story_text: "## Co dalej?\nGratulacje!!! Dotarłeś do końca poziomu 1. Mam nadzieję, że udało Ci się już stworzyć kilka niesamowitych programów, ale Hedy ma jeszcze wiele do odkrycia. \n\nNa pierwszym poziomie mogłeś zauważyć, że komenda `{echo}` może zapisać tylko jedną informację na raz. \nNa przykład w przygodzie z restauracją, mógłbyś wyświetlić za pomocą polecenia {echo} co chciał zjeść klient, lub co chciał wypić, ale nie oba w jednym zdaniu.\n"
+                example_code: "```\n{print} Witamy u Hedy\n{ask} Co chciałbyś zjeść?\n{echo} Więc chcesz \n{ask} Co chciałbyś wypić?\n{echo} Więc chcesz \n```\n"
+                story_text_2: "Jeśli gracz wpisze hamburger i cola, to nie możesz powiedzieć \"więc chciałbyś hamburgera i colę\",  a musisz wykorzystać dwie osobne linijki kodu. \nRównież komenda `{echo}` powoduje tylko pojawienie się słowa na końcu zdania. Nie możesz więc powiedzieć \"Twój hamburger zaraz będzie!\".\n\nTo się zmieni na poziomie 2. Na poziomie 2 nauczysz się pracować ze zmiennymi, które pozwalają na zapisanie wielu informacji i wypisanie ich w dowolnym miejscu.\nPrzejdźmy więc do następnego poziomu!\n"
+                start_code: "{print} Chodźmy!"
             2:
                 story_text: "## What's next?\nIn this level you've learned what a variable is and how you can use it to make your adventures more interactive.\nBut... that's not the only thing you can do with variables! You can also use variables to make lists.\nAnd you can even let Hedy pick a random word out of a list, which allows you to make real games!\nTake a quick look at the next level!\n"
                 start_code: "{print} Let's go to the next level!"
