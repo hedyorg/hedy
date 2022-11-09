@@ -1,11 +1,15 @@
+from flask import request
 from flask_babel import gettext
-from flask import request, g
+
 import hedyweb
-from website import statistics
-from website.auth import create_verify_link, current_user, is_admin, is_teacher, make_salt, password_hash, pick, requires_admin, send_localized_email_template, password_hash
-from .database import Database
 import utils
 from flask_helpers import render_template
+from website import statistics
+from website.auth import (create_verify_link, current_user, is_admin,
+                          is_teacher, make_salt, password_hash, pick,
+                          requires_admin, send_localized_email_template)
+
+from .database import Database
 from .website_module import WebsiteModule, route
 
 
@@ -87,9 +91,9 @@ class AdminModule(WebsiteModule):
             userdata.append(data)
 
         return render_template('admin/admin-users.html', users=userdata, page_title=gettext('title_admin'),
-                                filter=category, start_date=start_date, end_date=end_date, text_filter=substring,
-                                language_filter=language, keyword_language_filter=keyword_language,
-                                next_page_token=users.next_page_token, current_page='admin')
+                               filter=category, start_date=start_date, end_date=end_date, text_filter=substring,
+                               language_filter=language, keyword_language_filter=keyword_language,
+                               next_page_token=users.next_page_token, current_page='admin')
 
     @route('/classes', methods=['GET'])
     @requires_admin
@@ -151,7 +155,7 @@ class AdminModule(WebsiteModule):
                 stats[achieved]["count"] += 1
 
         return render_template('admin/admin-achievements.html', stats=stats, current_page='admin',
-                                total=total, page_title=gettext('title_admin'))
+                               total=total, page_title=gettext('title_admin'))
 
     @route('/markAsTeacher', methods=['POST'])
     def mark_as_teacher(self):
@@ -201,18 +205,19 @@ class AdminModule(WebsiteModule):
         token = make_salt()
         hashed_token = password_hash(token, make_salt())
 
-        # We assume that this email is not in use by any other users. In other words, we trust the admin to enter a valid, not yet used email address.
+        # We assume that this email is not in use by any other users. In other
+        # words, we trust the admin to enter a valid, not yet used email address.
         self.db.update_user(user['username'], {'email': body['email'], 'verification_pending': hashed_token})
 
         # If this is an e2e test, we return the email verification token directly instead of emailing it.
         if utils.is_testing_request(request):
-            resp = {'username': user['username'], 'token': hashed_token}
+            return {'username': user['username'], 'token': hashed_token}, 200
         else:
             try:
                 send_localized_email_template(locale=user['language'], template='welcome_verify', email=body['email'],
                                               link=create_verify_link(user['username'], hashed_token),
                                               username=user['username'])
-            except:
+            except BaseException:
                 return gettext('mail_error_change_processed'), 400
 
         return {}, 200
@@ -262,7 +267,10 @@ def update_is_teacher(db: Database, user, is_teacher_value=1):
 
     if user_becomes_teacher and not utils.is_testing_request(request):
         try:
-            send_localized_email_template(locale=user['language'], template='welcome_teacher', email=user['email'], username=user['username'])
-        except:
+            send_localized_email_template(
+                locale=user['language'],
+                template='welcome_teacher',
+                email=user['email'],
+                username=user['username'])
+        except BaseException:
             print(f"An error occurred when sending a welcome teacher mail to {user['email']}, changes still processed")
-
