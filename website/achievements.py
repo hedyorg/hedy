@@ -1,10 +1,11 @@
+from flask import jsonify, request, session
 from flask_babel import gettext
 
-from website import database
-from hedyweb import AchievementTranslations
-from website.auth import requires_login, current_user
-from flask import request, jsonify, session
 import hedy
+from hedyweb import AchievementTranslations
+from website import database
+from website.auth import current_user, requires_login
+
 from .website_module import WebsiteModule, route
 
 
@@ -18,11 +19,12 @@ class Achievements:
 
     def get_all_commands(self):
         commands = []
-        for i in range(1, hedy.HEDY_MAX_LEVEL+1):
+        for i in range(1, hedy.HEDY_MAX_LEVEL + 1):
             for command in hedy.commands_per_level.get(i):
                 commands.append(command)
         commands = set(commands)
-        # We manually remove the redundant commands, these are stored in the commands_per_level but not returned by the parser via AllCommands()
+        # We manually remove the redundant commands, these are stored in the
+        # commands_per_level but not returned by the parser via AllCommands()
         redundant_commands = {'at', 'from', 'times', 'range', 'to'}
         return commands - redundant_commands
 
@@ -82,7 +84,8 @@ class Achievements:
 
     def add_single_achievement(self, username, achievement):
         self.initialize_user_data_if_necessary()
-        if achievement not in session['achieved'] and achievement in self.translations.get_translations(session['lang']).get("achievements"):
+        if achievement not in session['achieved'] and achievement in self.translations.get_translations(
+                session['lang']).get("achievements"):
             return self.verify_pushed_achievement(username, achievement)
         else:
             return None
@@ -154,8 +157,9 @@ class Achievements:
         for achievement in session['new_achieved']:
             percentage = round(((self.statistics[achievement] / self.total_users) * 100), 2)
             stats = gettext('percentage_achieved').format(**{'percentage': percentage})
-            translated_achievements.append([translations[achievement]['title'], translations[achievement]['text'], stats])
-        session['new_achieved'] = [] # Once we get earned achievements -> empty the array with "waiting" ones
+            translated_achievements.append([translations[achievement]['title'],
+                                           translations[achievement]['text'], stats])
+        session['new_achieved'] = []  # Once we get earned achievements -> empty the array with "waiting" ones
         return translated_achievements
 
     def check_programs_run(self):
@@ -204,7 +208,8 @@ class Achievements:
                 session['new_achieved'].append("trying_is_key")
         if 'did_you_say_please' not in session['achieved'] and "ask" in hedy.all_commands(code, level, session['lang']):
             session['new_achieved'].append("did_you_say_please")
-        if 'talk-talk-talk' not in session['achieved'] and hedy.all_commands(code, level, session['lang']).count("ask") >= 5:
+        if 'talk-talk-talk' not in session['achieved'] and hedy.all_commands(
+                code, level, session['lang']).count("ask") >= 5:
             session['new_achieved'].append("talk-talk-talk")
         if 'hedy_honor' not in session['achieved'] and "Hedy" in code:
             session['new_achieved'].append("hedy_honor")
@@ -225,7 +230,7 @@ class Achievements:
             session['consecutive_errors'] += 1
             if session['previous_code'] == code:
                 if session['identical_consecutive_errors'] == 0:
-                    session['identical_consecutive_errors'] += 2 #We have to count the first one too!
+                    session['identical_consecutive_errors'] += 2  # We have to count the first one too!
                 else:
                     session['identical_consecutive_errors'] += 1
             if session['identical_consecutive_errors'] >= 3:
@@ -250,6 +255,11 @@ class AchievementsModule(WebsiteModule):
         body = request.json
         if "achievement" in body:
             self.achievements.initialize_user_data_if_necessary()
-            if body['achievement'] not in session['achieved'] and body['achievement'] in self.achievements.translations.get_translations(session['lang']).get('achievements'):
-                return jsonify({"achievements": self.achievements.verify_pushed_achievement(user.get('username'), body['achievement'])})
+            if (
+                body['achievement'] not in session['achieved']
+                and body['achievement'] in self.achievements.translations.get_translations(
+                    session['lang']).get('achievements')
+            ):
+                return jsonify({"achievements": self.achievements.verify_pushed_achievement(
+                    user.get('username'), body['achievement'])})
         return jsonify({})
