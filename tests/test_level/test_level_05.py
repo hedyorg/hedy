@@ -754,10 +754,18 @@ class TestsLevel5(HedyTester):
         code = textwrap.dedent("""\
         if x is pressed print 'it is a letter key'""")
 
-        expected = """
-        if event.key == pygame.K_x:
-            print(f'it is a letter key')
-            pygame_end = True"""
+        expected = HedyTester.dedent("""\
+          while not pygame_end:
+            pygame.display.update()
+            event = pygame.event.wait()
+            if event.type == pygame.QUIT:
+              pygame_end = True
+              pygame.quit()
+              break
+            if event.type == pygame.KEYDOWN: 
+              if event.key == pygame.K_x:
+                print(f'it is a letter key')
+                break""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=7)
 
@@ -766,14 +774,21 @@ class TestsLevel5(HedyTester):
         if x is pressed print 'first key'
         if y is pressed print 'second key'""")
 
-        expected = """
-        if event.key == pygame.K_x:
-            print(f'first key')
-            pygame_end = True
-
-        if event.key == pygame.K_y:
-            print(f'second key')
-            pygame_end = True"""
+        expected = HedyTester.dedent("""\
+          while not pygame_end:
+            pygame.display.update()
+            event = pygame.event.wait()
+            if event.type == pygame.QUIT:
+              pygame_end = True
+              pygame.quit()
+              break
+            if event.type == pygame.KEYDOWN: 
+              if event.key == pygame.K_x:
+                print(f'first key')
+                break
+              if event.key == pygame.K_y:
+                print(f'second key')
+                break""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=7)
 
@@ -782,21 +797,37 @@ class TestsLevel5(HedyTester):
         if x is pressed
         print 'it is a letter key'""")
 
-        expected = """
-        if event.key == pygame.K_x:
-            print(f'it is a letter key')
-            pygame_end = True"""
+        expected = HedyTester.dedent("""\
+          while not pygame_end:
+            pygame.display.update()
+            event = pygame.event.wait()
+            if event.type == pygame.QUIT:
+              pygame_end = True
+              pygame.quit()
+              break
+            if event.type == pygame.KEYDOWN: 
+              if event.key == pygame.K_x:
+                print(f'it is a letter key')
+                break""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=7)
     
-    def test_if_pressed_x_is_number_key(self):
+    def test_if_pressed_1_is_number_key(self):
         code = textwrap.dedent("""\
         if 1 is pressed print 'it is a number key'""")
 
-        expected = """
-        if event.key == pygame.K_1:
-            print(f'it is a number key')
-            pygame_end = True"""
+        expected = HedyTester.dedent("""\
+          while not pygame_end:
+            pygame.display.update()
+            event = pygame.event.wait()
+            if event.type == pygame.QUIT:
+              pygame_end = True
+              pygame.quit()
+              break
+            if event.type == pygame.KEYDOWN: 
+              if event.key == pygame.K_1:
+                print(f'it is a number key')
+                break""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=7)
 
@@ -804,10 +835,18 @@ class TestsLevel5(HedyTester):
         code = textwrap.dedent("""\
         if x       is pressed print 'trailing spaces!'""")
 
-        expected = """
-        if event.key == pygame.K_x:
-            print(f'trailing spaces!')
-            pygame_end = True"""
+        expected = HedyTester.dedent("""\
+          while not pygame_end:
+            pygame.display.update()
+            event = pygame.event.wait()
+            if event.type == pygame.QUIT:
+              pygame_end = True
+              pygame.quit()
+              break
+            if event.type == pygame.KEYDOWN: 
+              if event.key == pygame.K_x:
+                print(f'trailing spaces!')
+                break""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=7)
 
@@ -818,13 +857,21 @@ class TestsLevel5(HedyTester):
         code = textwrap.dedent("""\
         if x is pressed print 'x is pressed!' else print 'x is not pressed!'""")
 
-        expected = """
-        if event.key == pygame.K_x:
-            print(f'x is pressed!')
-            pygame_end = True
-        else:
-            print(f'x is not pressed!')
-            pygame_end = True"""
+        expected = HedyTester.dedent("""\
+          while not pygame_end:
+            pygame.display.update()
+            event = pygame.event.wait()
+            if event.type == pygame.QUIT:
+              pygame_end = True
+              pygame.quit()
+              break
+            if event.type == pygame.KEYDOWN: 
+              if event.key == pygame.K_x:
+                print(f'x is pressed!')
+                break
+              else:
+                print(f'x is not pressed!')
+                break""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=7)
 
@@ -833,13 +880,21 @@ class TestsLevel5(HedyTester):
         if x is pressed print 'x is pressed!' 
         else print 'x is not pressed!'""")
 
-        expected = """
-        if event.key == pygame.K_x:
-            print(f'x is pressed!')
-            pygame_end = True
-        else:
-            print(f'x is not pressed!')
-            pygame_end = True"""
+        expected = HedyTester.dedent("""\
+          while not pygame_end:
+            pygame.display.update()
+            event = pygame.event.wait()
+            if event.type == pygame.QUIT:
+              pygame_end = True
+              pygame.quit()
+              break
+            if event.type == pygame.KEYDOWN: 
+              if event.key == pygame.K_x:
+                print(f'x is pressed!')
+                break
+              else:
+                print(f'x is not pressed!')
+                break""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=7)
 
@@ -850,13 +905,21 @@ class TestsLevel5(HedyTester):
         else 
         print 'x is not pressed!'""")
 
-        expected = """
-        if event.key == pygame.K_x:
-            print(f'x is pressed!')
-            pygame_end = True
-        else:
-            print(f'x is not pressed!')
-            pygame_end = True"""
+        expected = HedyTester.dedent("""\
+          while not pygame_end:
+            pygame.display.update()
+            event = pygame.event.wait()
+            if event.type == pygame.QUIT:
+              pygame_end = True
+              pygame.quit()
+              break
+            if event.type == pygame.KEYDOWN: 
+              if event.key == pygame.K_x:
+                print(f'x is pressed!')
+                break
+              else:
+                print(f'x is not pressed!')
+                break""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=7)
 
@@ -866,13 +929,21 @@ class TestsLevel5(HedyTester):
         print 'x is pressed!' 
         else print 'x is not pressed!'""")
 
-        expected = """
-        if event.key == pygame.K_x:
-            print(f'x is pressed!')
-            pygame_end = True
-        else:
-            print(f'x is not pressed!')
-            pygame_end = True"""
+        expected = HedyTester.dedent("""\
+          while not pygame_end:
+            pygame.display.update()
+            event = pygame.event.wait()
+            if event.type == pygame.QUIT:
+              pygame_end = True
+              pygame.quit()
+              break
+            if event.type == pygame.KEYDOWN: 
+              if event.key == pygame.K_x:
+                print(f'x is pressed!')
+                break
+              else:
+                print(f'x is not pressed!')
+                break""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=7)
 
@@ -882,12 +953,20 @@ class TestsLevel5(HedyTester):
         else 
         print 'x is not pressed!'""")
 
-        expected = """
-        if event.key == pygame.K_x:
-            print(f'x is pressed!')
-            pygame_end = True
-        else:
-            print(f'x is not pressed!')
-            pygame_end = True"""
+        expected = HedyTester.dedent("""\
+          while not pygame_end:
+            pygame.display.update()
+            event = pygame.event.wait()
+            if event.type == pygame.QUIT:
+              pygame_end = True
+              pygame.quit()
+              break
+            if event.type == pygame.KEYDOWN: 
+              if event.key == pygame.K_x:
+                print(f'x is pressed!')
+                break
+              else:
+                print(f'x is not pressed!')
+                break""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=7)

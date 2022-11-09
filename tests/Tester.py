@@ -179,7 +179,7 @@ class HedyTester(unittest.TestCase):
     # Code used in the Adventure and Level Defaults tester to validate Hedy code
 
     try:
-        if not parseresult.has_turtle: #ouput from turtle cannot be captured
+        if not parseresult.has_turtle and not parseresult.has_pygame: #ouput from turtle or pygame cannot be captured
           output = HedyTester.run_code(parseresult)
     except hedy.exceptions.CodePlaceholdersPresentException as E: # Code with blanks is allowed
       pass
