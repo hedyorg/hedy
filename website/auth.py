@@ -1,19 +1,21 @@
 import json
+import logging
 import os
-import bcrypt
 import re
 import urllib
 from functools import wraps
 
+import bcrypt
 import boto3
-from botocore.exceptions import ClientError as email_error, NoCredentialsError
-from flask import g, request, session
-from flask_babel import gettext, force_locale
 import requests
+from botocore.exceptions import ClientError as email_error
+from botocore.exceptions import NoCredentialsError
+from flask import g, request, session
+from flask_babel import force_locale, gettext
 
 import utils
-from utils import timems, times, is_debug_mode
 from config import config
+from utils import is_debug_mode, timems, times
 from website import querylog
 
 TOKEN_COOKIE_NAME = config['session']['cookie_name']
@@ -35,6 +37,7 @@ if os.getenv('MAILCHIMP_API_KEY') and os.getenv('MAILCHIMP_AUDIENCE_ID'):
         1] + '.api.mailchimp.com/3.0/lists/' + os.getenv('MAILCHIMP_AUDIENCE_ID')
     MAILCHIMP_API_HEADERS = {'Content-Type': 'application/json',
                              'Authorization': 'apikey ' + os.getenv('MAILCHIMP_API_KEY')}
+
 
 def mailchimp_subscribe_user(email, country, role):
     request_body = {'email_address': email, 'status': 'subscribed', 'tags': [country, role]}
@@ -67,12 +70,13 @@ def password_hash(password, salt):
 
 
 # The current user is a slice of the user information from the database and placed on the Flask session.
-# The main purpose of the current user is to provide a convenient container for
+# The main purpose of the current user is to provide a convenient container for:
 # * username
 # * email
 # * is_teacher
 #
-# Since the is_teacher can be changed during a session we also store a time-to-live. When retrieving the current user, we can check if we need to reload data from the database.
+# Since the is_teacher can be changed during a session we also store a time-to-live.
+# When retrieving the current user, we can check if we need to reload data from the database.
 #
 # The current user should be retrieved with `current_user` function since it will return a sane default.
 # You can remove the current user from the Flask session with the `forget_current_user`.
@@ -94,7 +98,7 @@ def current_user():
     now = times()
     user = session.get('user', {'username': '', 'email': ''})
     ttl = session.get('user-ttl', None)
-    if ttl == None or now >= ttl:
+    if ttl is None or now >= ttl:
         username = user['username']
         if username:
             db_user = g.db.user_by_username(username)
@@ -232,7 +236,6 @@ def validate_signup_data(account):
 
 
 # Turn off verbose logs from boto/SES, thanks to https://github.com/boto/boto3/issues/521
-import logging
 
 for name in logging.Logger.manager.loggerDict.keys():
     if ('boto' in name) or ('urllib3' in name) or ('s3transfer' in name) or ('boto3' in name) or (
@@ -242,10 +245,11 @@ for name in logging.Logger.manager.loggerDict.keys():
 # https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-using-sdk-python.html
 email_client = boto3.client('ses', region_name=config['email']['region'])
 
+
 @querylog.timed
 def send_email(recipient, subject, body_plain, body_html):
     try:
-        result = email_client.send_email(
+        email_client.send_email(
             Source=config['email']['sender'],
             Destination={'ToAddresses': [recipient]},
             Message={
@@ -340,6 +344,7 @@ def store_new_student_account(db, account, teacher_username):
     db.store_user(user)
     return user
 
+
 def prepare_user_db(username, password):
     hashed = password_hash(password, make_salt())
 
@@ -370,6 +375,7 @@ def email_base_url():
     if from_env:
         return from_env.rstrip('/')
     return request.host_url
+
 
 def create_recover_link(username, token):
     email = email_base_url() + '/reset?username='
