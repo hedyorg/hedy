@@ -1,11 +1,13 @@
 """Routines for interacting with AWS."""
-import boto3
-import os
 import json
 import logging
+import os
+import threading
+
+import boto3
+
 import config
 import utils
-import threading
 
 logger = logging.getLogger(__name__)
 
@@ -32,12 +34,12 @@ def s3_parselog_transmitter_from_env():
     return make_s3_transmitter(config.config['s3-parse-logs'])
 
 
-
 # The 'boto3.client' method is not thread safe: https://github.com/boto/boto3/issues/1592
 #
 # Put a lock around it to make sure that when both log queues try to get an S3 client at the
 # same time, they don't trample on each other.
 BOTO3_LOCK = threading.Lock()
+
 
 def make_s3_transmitter(s3config):
     """Make a transmitter function (for use with a LogQueue) which will save records to S3."""
@@ -50,7 +52,8 @@ def make_s3_transmitter(s3config):
 
         # Grouping in the key is important, we need this to zoom into an interesting
         # log period.
-        key = s3config.get('prefix', '') + utils.isoformat(timestamp).replace('T', '/') + s3config.get('postfix', '') + '.jsonl'
+        key = s3config.get('prefix', '') + utils.isoformat(timestamp).replace('T', '/') + \
+            s3config.get('postfix', '') + '.jsonl'
 
         # Store as json-lines format
         body = '\n'.join(json.dumps(r) for r in records)
@@ -58,7 +61,7 @@ def make_s3_transmitter(s3config):
         s3.put_object(
             Bucket=s3config['bucket'],
             Key=key,
-            StorageClass='STANDARD_IA', # Cheaper, applicable for logs
+            StorageClass='STANDARD_IA',  # Cheaper, applicable for logs
             Body=body)
         logger.debug(f'Wrote {len(records)} query logs to s3://{s3config["bucket"]}/{key}')
     return transmit_to_s3
