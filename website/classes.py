@@ -1,19 +1,24 @@
-from flask_babel import gettext
-from .achievements import Achievements
-from website.auth import requires_login, is_teacher, current_user
-import utils
 import uuid
-from flask import g, request, jsonify, redirect, session
-from flask_helpers import render_template
+
+from flask import jsonify, redirect, request, session
+from flask_babel import gettext
+
+import utils
 from config import config
+from flask_helpers import render_template
+from website.auth import current_user, is_teacher, requires_login
+
+from .achievements import Achievements
 from .database import Database
 from .website_module import WebsiteModule, route
 
 cookie_name = config['session']['cookie_name']
 invite_length = config['session']['invite_length'] * 60
 
+
 class ClassModule(WebsiteModule):
     """The /class/... pages."""
+
     def __init__(self, db: Database, achievements: Achievements):
         super().__init__('class', __name__, url_prefix='/class')
 
@@ -70,7 +75,7 @@ class ClassModule(WebsiteModule):
         if len(body.get('name')) < 1:
             return gettext('class_name_empty'), 400
 
-        Class = self.db.get_class (class_id)
+        Class = self.db.get_class(class_id)
         if not Class or Class['teacher'] != user['username']:
             return gettext('no_such_class'), 404
 
@@ -78,7 +83,7 @@ class ClassModule(WebsiteModule):
         Classes = self.db.get_teacher_classes(user['username'], True)
         for Class in Classes:
             if Class['name'] == body['name']:
-                return "duplicate", 200 # Todo TB: Will have to look into this, but not sure why we return a 200?
+                return "duplicate", 200  # Todo TB: Will have to look into this, but not sure why we return a 200?
 
         self.db.update_class(class_id, body['name'])
         achievement = self.achievements.add_single_achievement(user['username'], "on_second_thoughts")
@@ -107,10 +112,10 @@ class ClassModule(WebsiteModule):
         if request.cookies.get(cookie_name):
             token = self.db.get_token(request.cookies.get(cookie_name))
             if token and token.get('username') in Class.get('students', []):
-                    return render_template('class-prejoin.html', joined=True, page_title=gettext('title_join-class'),
-                                            current_page='my-profile', class_info={'name': Class ['name']})
+                return render_template('class-prejoin.html', joined=True, page_title=gettext('title_join-class'),
+                                       current_page='my-profile', class_info={'name': Class['name']})
         return render_template('class-prejoin.html', joined=False, page_title=gettext('title_join-class'),
-                               current_page='my-profile', class_info={'id': Class ['id'], 'name': Class ['name']})
+                               current_page='my-profile', class_info={'id': Class['id'], 'name': Class['name']})
 
     @route('/join', methods=['POST'])
     def join_class(self):
@@ -152,6 +157,7 @@ class ClassModule(WebsiteModule):
             return {'achievement': achievement}, 200
         return {}, 200
 
+
 class MiscClassPages(WebsiteModule):
     """All the pages that have to do with the teacher interface or classes, but
     are not mounted under the '/class' URL space.
@@ -168,7 +174,7 @@ class MiscClassPages(WebsiteModule):
     def get_classes(self, user):
         if not is_teacher(user):
             return utils.error_page(error=403, ui_message=gettext('retrieve_class_error'))
-        return jsonify (self.db.get_teacher_classes(user['username'], True))
+        return jsonify(self.db.get_teacher_classes(user['username'], True))
 
     @route('/duplicate_class', methods=['POST'])
     @requires_login
@@ -219,7 +225,6 @@ class MiscClassPages(WebsiteModule):
         achievement = self.achievements.add_single_achievement(current_user()['username'], "one_for_money")
         if achievement:
             return {'achievement': achievement}, 200
-
 
     @route('/invite_student', methods=['POST'])
     @requires_login
@@ -291,4 +296,12 @@ class MiscClassPages(WebsiteModule):
         Class = self.db.resolve_class_link(link_id)
         if not Class:
             return utils.error_page(error=404, ui_message=gettext('invalid_class_link'))
-        return redirect(request.url.replace('/hedy/l/' + link_id, '/class/' + Class ['id'] + '/prejoin/' + link_id), code=302)
+        return redirect(
+            request.url.replace(
+                '/hedy/l/' +
+                link_id,
+                '/class/' +
+                Class['id'] +
+                '/prejoin/' +
+                link_id),
+            code=302)
