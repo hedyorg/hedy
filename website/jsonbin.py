@@ -1,12 +1,12 @@
-import threading
-import os
 import json
-import queue
-import requests
 import logging
+import os
+import queue
+import threading
 
-from . import log_queue
-from . import aws_helpers
+import requests
+
+from . import aws_helpers, log_queue
 
 logger = logging.getLogger(__name__)
 
@@ -79,12 +79,14 @@ class JsonBinLogger:
 
 class NullJsonbinLogger():
     """A jsonbin logger that doesn't actually do anything."""
+
     def log(self, obj):
         pass
 
 
 class MultiParseLogger():
     """A logger that forwards to other loggers."""
+
     def __init__(self, *loggers):
         self.loggers = loggers
 
