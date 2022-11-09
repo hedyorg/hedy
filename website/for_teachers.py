@@ -1,16 +1,20 @@
 import json
-from flask_babel import gettext
-import hedy
-import hedyweb
-from .achievements import Achievements
-from website.auth import requires_login, is_teacher, is_admin, current_user, validate_student_signup_data, \
-    store_new_student_account
-import utils
-import uuid
-from flask import g, request, jsonify, session
-from flask_helpers import render_template
 import os
+import uuid
+
+from flask import g, jsonify, request, session
+from flask_babel import gettext
+
+import hedy
 import hedy_content
+import hedyweb
+import utils
+from flask_helpers import render_template
+from website.auth import (current_user, is_admin, is_teacher, requires_login,
+                          store_new_student_account,
+                          validate_student_signup_data)
+
+from .achievements import Achievements
 from .database import Database
 from .website_module import WebsiteModule, route
 
@@ -177,7 +181,7 @@ class ForTeachersModule(WebsiteModule):
             else:
                 try:
                     opening_dates[level] = utils.datetotimeordate(timestamp)
-                except:
+                except BaseException:
                     return 'One or more of your opening dates is invalid', 400
 
         adventures = {}
@@ -190,7 +194,7 @@ class ForTeachersModule(WebsiteModule):
             if name == 'quiz':
                 try:
                     value = int(value)
-                except:
+                except BaseException:
                     return 'Quiz threshold value is invalid', 400
                 if value < 0 or value > 100:
                     return 'Quiz threshold value is invalid', 400
@@ -351,7 +355,7 @@ class ForTeachersModule(WebsiteModule):
         # Try to parse with our current language, if it fails -> return an error to the user
         try:
             body['content'].format(**hedy_content.KEYWORDS.get(g.keyword_lang))
-        except:
+        except BaseException:
             return gettext('something_went_wrong_keyword_parsing'), 400
 
         adventure = {
@@ -395,7 +399,7 @@ class ForTeachersModule(WebsiteModule):
         body = request.json
         try:
             code = body.get('code').format(**hedy_content.KEYWORDS.get(g.keyword_lang))
-        except:
+        except BaseException:
             return gettext('something_went_wrong_keyword_parsing'), 400
         return {'code': code}, 200
 
