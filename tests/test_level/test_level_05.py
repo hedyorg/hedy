@@ -970,3 +970,28 @@ class TestsLevel5(HedyTester):
                 break""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=7)
+
+    ## DEZE WERKT (NOG) NIET!
+    # def test_if_pressed_has_enter_before_both_prints(self):
+    #     code = textwrap.dedent("""\
+    #     if x is pressed 
+    #     print 'x is pressed!' else 
+    #     print 'x is not pressed!'""")
+
+    #     expected = HedyTester.dedent("""\
+    #       while not pygame_end:
+    #         pygame.display.update()
+    #         event = pygame.event.wait()
+    #         if event.type == pygame.QUIT:
+    #           pygame_end = True
+    #           pygame.quit()
+    #           break
+    #         if event.type == pygame.KEYDOWN: 
+    #           if event.key == pygame.K_x:
+    #             print(f'x is pressed!')
+    #             break
+    #           else:
+    #             print(f'x is not pressed!')
+    #             break""")
+
+    #     self.multi_level_tester(code=code, expected=expected, max_level=7)
