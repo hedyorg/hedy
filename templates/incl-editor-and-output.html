@@ -1,7 +1,7 @@
 <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
 <div id="editor-area" class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5">
     <!-- Row 1: editor, output pane -->
-    <div class="flex flex-col order-1 relative w-full" id="code_editor" style="min-height: 22rem;">
+    <div class="w-full flex flex-col relative border border-red-500" id="code_editor" style="min-height: 22rem;">
       <!-- language selector overlay -->
       {% if is_admin and other_keyword_language() %}
           <div id="main_editor_keyword_selector">
@@ -27,15 +27,15 @@
               </div>
           </div>
         {% endif %}
-        <div id="fold_toggle_container" class="absolute z-10 top-1/2 -translate-y-1/2 ltr:-right-2 rtl:-left-2 cursor-pointer" onclick="$('.hide_editor_arrow').toggle();$('#code_editor').toggle();">
+        <!--The div below is used to send translation of search to Ace through the frontend-->
+        <div id="search_placeholder" style="display: none":>{{_('search')}}</div>
+      <div class="w-full relative flex-1 flex flex-col">
+        <div id="fold_toggle_container" class="absolute z-10 top-1/2 -translate-y-1/2 ltr:-right-2 rtl:-left-2 cursor-pointer" onclick="$('.hide_editor_arrow').toggle();$('#code_editor').toggleClass('w-6');$('#editor-area').toggleClass('grid-flow-col-dense')">
             <div class="bg-green-500 text-white py-4 px-1 rounded-lg text-sm">
                 <span class="hide_editor_arrow">←</span>
                 <span class="hide_editor_arrow" style="display: none;">→</span>
             </div>
         </div>
-        <!--The div below is used to send translation of search to Ace through the frontend-->
-        <div id="search_placeholder" style="display: none":>{{_('search')}}</div>
-      <div class="w-full flex-1 flex flex-col">
         <div id="editor" style="background: #272822; font-size:0.95em; color: white" lang="en" blurred='false'
         data-loaded-program="{{not not loaded_program}}"
           {% if editor_readonly %}data-readonly="true"{% endif %}
@@ -100,7 +100,7 @@
         </div>
       </div>
     </div>
-    <div class="flex flex-col order-3 relative" id="code_output" style="height: 22rem;">
+    <div class="w-full grow flex flex-col border border-red-500" id="code_output" style="height: 22rem;">
         <div class="inline-block ltr:right-0 rtl:left-0 absolute z-10 mx-2 mt-2 text-white" id="variables_container">
             <button id="variable_button" class="inline-flex items-center text-xl px-2 bg-blue-600 rounded-lg" onclick="hedyApp.showVariableView()">
                 🏷<svg class="float-right w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -132,7 +132,7 @@
       </div>
     </div>
     <!-- Col 2: run button (move below editor in single-column layout), level buttons -->
-  <div class="order-2 lg:order-4" id="code_related_buttons">
+  <div id="code_related_buttons">
       <div class="flex justify-between gap-2 items-start h-12 overflow-visible">
         <div id="runButtonContainer">
           <button id="runit" class="green-btn" onclick="hedyApp.runit({{ level }}, '{{ g.lang }}', '{{_('already_program_running')}}')">{{_('run_code_button')}} </button>
@@ -164,7 +164,7 @@
           </select>
       </div>
     </div>
-    <div class="order-5">
+    <div>
       {% if not specific_adventure %}
           <div class="flex {% if prev_level %}justify-between{% else %}justify-end{%endif%}">
             {% if prev_level and (not customizations or prev_level in customizations['available_levels']) %}
