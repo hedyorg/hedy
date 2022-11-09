@@ -1,9 +1,11 @@
-import time
-import functools
-import threading
-import os
 import datetime
+import functools
+import os
+import threading
+import time
+
 from . import log_queue
+
 IS_WINDOWS = os.name == 'nt'
 if not IS_WINDOWS:
     import resource
@@ -11,6 +13,7 @@ if not IS_WINDOWS:
 
 class LogRecord:
     """A log record."""
+
     def __init__(self, **kwargs):
         self.start_time = time.time()
 
@@ -108,6 +111,7 @@ class NullRecord(LogRecord):
 
     Will be returned if we don't have a default record.
     """
+
     def __init__(self, **kwargs): pass
     def finish(self): pass
     def set(self, **kwargs): pass
@@ -198,6 +202,7 @@ def dtfmt(timestamp):
 
 class LogTimer:
     """A quick and dirty timer."""
+
     def __init__(self, record, name):
         self.record = record
         self.name = name
