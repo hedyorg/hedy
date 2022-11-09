@@ -1,9 +1,11 @@
-import boto3
+import logging
 import os
 from collections import namedtuple
-from config import config
+
+import boto3
 from retrying import retry
-import logging
+
+from config import config
 
 logger = logging.getLogger(__name__)
 
