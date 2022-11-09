@@ -1,5 +1,11 @@
 <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
 <div id="editor-area" class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5">
+    <div id="fold_toggle_container" class="absolute z-10 top-1/2 -translate-y-1/2 ltr:-right-2 rtl:-left-2 cursor-pointer" onclick="$('.hide_editor_arrow').toggle();$('#code_editor').toggle();$('#editor-area').toggleClass('lg:grid-cols-2')">
+        <div class="bg-green-500 text-white py-4 px-1 rounded-lg text-sm">
+            <span class="hide_editor_arrow">←</span>
+            <span class="hide_editor_arrow" style="display: none;">→</span>
+        </div>
+    </div>
     <!-- Row 1: editor, output pane -->
     <div class="w-full flex flex-col relative border border-red-500" id="code_editor" style="min-height: 22rem;">
       <!-- language selector overlay -->
@@ -30,12 +36,6 @@
         <!--The div below is used to send translation of search to Ace through the frontend-->
         <div id="search_placeholder" style="display: none":>{{_('search')}}</div>
       <div class="w-full relative flex-1 flex flex-col">
-        <div id="fold_toggle_container" class="absolute z-10 top-1/2 -translate-y-1/2 ltr:-right-2 rtl:-left-2 cursor-pointer" onclick="$('.hide_editor_arrow').toggle();$('#code_editor').toggleClass('w-6');$('#editor-area').toggleClass('grid-flow-col-dense')">
-            <div class="bg-green-500 text-white py-4 px-1 rounded-lg text-sm">
-                <span class="hide_editor_arrow">←</span>
-                <span class="hide_editor_arrow" style="display: none;">→</span>
-            </div>
-        </div>
         <div id="editor" style="background: #272822; font-size:0.95em; color: white" lang="en" blurred='false'
         data-loaded-program="{{not not loaded_program}}"
           {% if editor_readonly %}data-readonly="true"{% endif %}
