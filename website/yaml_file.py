@@ -1,11 +1,14 @@
 import os
 import pickle
+
 from ruamel import yaml
-from utils import atomic_write_file, is_debug_mode, is_heroku
+
+from utils import atomic_write_file, is_heroku
 
 yaml_loader = yaml.YAML(typ='safe', pure=True)
 
 YAML_FILES_CACHE = {}
+
 
 class YamlFile:
     """Data from a YAML file, accessible as if it is a dictionary.
