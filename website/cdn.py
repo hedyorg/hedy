@@ -1,5 +1,6 @@
 import utils
 
+
 class Cdn:
     """Set up CDN configuration.
 
@@ -22,6 +23,7 @@ class Cdn:
     Because the commit number is in the URL, it can be extremely aggressively
     cached by the CDN.
     """
+
     def __init__(self, app, cdn_prefix, commit):
         self.cdn_prefix = cdn_prefix or ''
         self.commit = commit
@@ -41,8 +43,8 @@ class Cdn:
             # emails and content we forgot to replace or are unable to replace (like in Markdowns).
             self.static_prefix = '/static-' + commit
             app.add_url_rule(self.static_prefix + '/<path:filename>',
-                    endpoint='cdn_static',
-                    view_func=self._send_static_file)
+                             endpoint='cdn_static',
+                             view_func=self._send_static_file)
 
         app.add_template_global(self.static, name='static')
 
@@ -63,6 +65,5 @@ class Cdn:
         """
         response = self.app.send_static_file(filename)
         response.headers['Access-Control-Allow-Origin'] = '*'
-        response.cache_control.max_age = 24 * 3600 # A day
+        response.cache_control.max_age = 24 * 3600  # A day
         return response
-
