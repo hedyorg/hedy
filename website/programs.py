@@ -1,14 +1,18 @@
-from flask import g, request, jsonify
-from flask_babel import gettext
-import hedy
-from config import config
-from .achievements import Achievements
-from .database import Database
-from website.auth import requires_login, current_user, is_admin, send_email, email_base_url, requires_admin
-import utils
 import uuid
 
+from flask import g, jsonify, request
+from flask_babel import gettext
+
+import hedy
+import utils
+from config import config
+from website.auth import (current_user, email_base_url, is_admin,
+                          requires_admin, requires_login, send_email)
+
+from .achievements import Achievements
+from .database import Database
 from .website_module import WebsiteModule, route
+
 
 class ProgramsModule(WebsiteModule):
     def __init__(self, db: Database, achievements: Achievements):
@@ -37,7 +41,8 @@ class ProgramsModule(WebsiteModule):
 
         # This only happens in the situation were a user deletes their favourite program -> Delete from public profile
         public_profile = self.db.get_public_profile_settings(current_user()['username'])
-        if public_profile and 'favourite_program' in public_profile and public_profile['favourite_program'] == body['id']:
+        if (public_profile and 'favourite_program' in public_profile
+                and public_profile['favourite_program'] == body['id']):
             self.db.set_favourite_program(user['username'], None)
 
         achievement = self.achievements.add_single_achievement(user['username'], "do_you_have_copy")
@@ -84,13 +89,15 @@ class ProgramsModule(WebsiteModule):
         error = False
         try:
             hedy.transpile(body.get('code'), body.get('level'), g.lang)
-        except:
+        except BaseException:
             error = True
             if not body.get('force_save', True):
                 return jsonify({'parse_error': True, 'message': gettext('save_parse_warning')})
 
         # We check if a program with a name `xyz` exists in the database for the username.
-        # It'd be ideal to search by username & program name, but since DynamoDB doesn't allow searching for two indexes at the same time, this would require to create a special index to that effect, which is cumbersome.
+        # It'd be ideal to search by username & program name,
+        # but since DynamoDB doesn't allow searching for two indexes at the same time,
+        # this would require to create a special index to that effect, which is cumbersome.
         # For now, we bring all existing programs for the user and then search within them for repeated names.
         programs = self.db.programs_for_user(user['username']).records
         program_id = uuid.uuid4().hex
@@ -129,9 +136,11 @@ class ProgramsModule(WebsiteModule):
         self.achievements.increase_count("saved")
 
         if self.achievements.verify_save_achievements(user['username'],
-                                                    'adventure_name' in body and len(body['adventure_name']) > 2):
-            return jsonify(
-                {'message': gettext('save_success_detail'), 'name': body['name'], 'id': program_id, "achievements": self.achievements.get_earned_achievements()})
+                                                      'adventure_name' in body and len(body['adventure_name']) > 2):
+            return jsonify({'message': gettext('save_success_detail'),
+                            'name': body['name'],
+                            'id': program_id,
+                            "achievements": self.achievements.get_earned_achievements()})
         return jsonify({'message': gettext('save_success_detail'), 'name': body['name'], 'id': program_id})
 
     @route('/share', methods=['POST'])
@@ -152,7 +161,7 @@ class ProgramsModule(WebsiteModule):
         # This only happens in the situation were a user un-shares their favourite program -> Delete from public profile
         public_profile = self.db.get_public_profile_settings(current_user()['username'])
         if public_profile and 'favourite_program' in public_profile and public_profile['favourite_program'] == body[
-            'id']:
+                'id']:
             self.db.set_favourite_program(user['username'], None)
 
         self.db.set_program_public_by_id(body['id'], bool(body['public']))
@@ -240,7 +249,6 @@ class ProgramsModule(WebsiteModule):
 
         link = email_base_url() + '/hedy/' + body.get('id') + '/view'
         send_email(config['email']['sender'], "The following program is reported by " + user['username'], link,
-                    '<a href="' + link + '">Program link</a>')
+                   '<a href="' + link + '">Program link</a>')
 
         return {'message': gettext('report_success')}, 200
-
