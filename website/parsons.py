@@ -1,6 +1,8 @@
-from flask import jsonify, g
+from flask import g, jsonify
 from flask_babel import gettext
+
 from .website_module import WebsiteModule, route
+
 
 class ParsonsModule(WebsiteModule):
     def __init__(self, parsons):
