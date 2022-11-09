@@ -1,13 +1,21 @@
 import datetime
 import hashlib
+
 import requests
+from flask import jsonify, request, session
 from flask_babel import gettext
-from hedy_content import COUNTRIES, ALL_LANGUAGES, ALL_KEYWORD_LANGUAGES
-from website.auth import MAILCHIMP_API_HEADERS, MAILCHIMP_API_URL, SESSION_LENGTH, create_verify_link, mailchimp_subscribe_user, make_salt, remember_current_user, requires_login, send_email_template, password_hash
-from flask import request, session, jsonify
-from utils import timems, is_testing_request, valid_email
+
+from hedy_content import ALL_KEYWORD_LANGUAGES, ALL_LANGUAGES, COUNTRIES
+from utils import is_testing_request, timems, valid_email
+from website.auth import (MAILCHIMP_API_HEADERS, MAILCHIMP_API_URL,
+                          SESSION_LENGTH, create_verify_link,
+                          mailchimp_subscribe_user, make_salt, password_hash,
+                          remember_current_user, requires_login,
+                          send_email_template)
+
 from .database import Database
 from .website_module import WebsiteModule, route
+
 
 class ProfileModule(WebsiteModule):
     def __init__(self, db: Database):
@@ -65,9 +73,9 @@ class ProfileModule(WebsiteModule):
                 else:
                     try:
                         send_email_template(template='welcome_verify', email=email,
-                                        link=create_verify_link(user['username'], hashed_token),
-                                        username=user['username'])
-                    except:
+                                            link=create_verify_link(user['username'], hashed_token),
+                                            username=user['username'])
+                    except BaseException:
                         # Todo TB: Now we only log to the back-end, would be nice to also return the user some info
                         # We have two options: return an error at this point (don't process changes)
                         # Add a notification to the response, still process the changes
