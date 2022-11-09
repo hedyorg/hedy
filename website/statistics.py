@@ -1,14 +1,15 @@
 from collections import namedtuple
 from datetime import date
 from enum import Enum
-from flask import request, jsonify, g
+
+from flask import g, jsonify, request
 from flask_babel import gettext
 
+import utils
 from flask_helpers import render_template
 from website import querylog
-from website.auth import requires_login, is_admin, is_teacher, requires_admin
+from website.auth import is_admin, is_teacher, requires_admin, requires_login
 
-import utils
 from .database import Database
 from .website_module import WebsiteModule, route
 
@@ -138,7 +139,7 @@ def _to_response_per_level(data):
 def _data_to_response_per_level(data):
     res = {}
 
-    _add_value_to_result(res, 'successful_runs',  data['successful_runs'], is_counter=True)
+    _add_value_to_result(res, 'successful_runs', data['successful_runs'], is_counter=True)
     _add_value_to_result(res, 'failed_runs', data['failed_runs'], is_counter=True)
     res['error_rate'] = _calc_error_rate(data.get('failed_runs'), data.get('successful_runs'))
     _add_exception_data(res, data)
@@ -176,7 +177,13 @@ def _to_response(data, values_field, series_selector, values_map=None):
         d = e['data']
         _add_dict_to_result(res[values], 'successful_runs', series, d['successful_runs'], is_counter=True)
         _add_dict_to_result(res[values], 'failed_runs', series, d['failed_runs'], is_counter=True)
-        _add_dict_to_result(res[values], 'abandoned_quizzes', series, d['total_attempts'] - d['completed_attempts'], is_counter=True)
+        _add_dict_to_result(
+            res[values],
+            'abandoned_quizzes',
+            series,
+            d['total_attempts'] -
+            d['completed_attempts'],
+            is_counter=True)
         _add_dict_to_result(res[values], 'completed_quizzes', series, d['completed_attempts'], is_counter=True)
 
         _add_value_to_result(res[values], 'anonymous_runs', d['anonymous_runs'], is_counter=True)
@@ -224,7 +231,7 @@ def _score_metrics(scores):
         if s > max_result:
             max_result = s
         total += s
-    return min_result, max_result, total/len(scores)
+    return min_result, max_result, total / len(scores)
 
 
 def _aggregate_for_keys(data, keys):
