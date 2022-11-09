@@ -1,19 +1,35 @@
-from utils import timems, times
-from datetime import date
-from . import dynamo
 import functools
 import operator
+from datetime import date
 
+from utils import timems, times
 
+from . import dynamo
 
 storage = dynamo.AwsDynamoStorage.from_env() or dynamo.MemoryStorage('dev_database.json')
 
-USERS = dynamo.Table(storage, 'users', 'username', indexed_fields=[dynamo.IndexKey('email'), dynamo.IndexKey('epoch', 'created')])
+USERS = dynamo.Table(
+    storage,
+    'users',
+    'username',
+    indexed_fields=[
+        dynamo.IndexKey('email'),
+        dynamo.IndexKey(
+            'epoch',
+            'created')])
 TOKENS = dynamo.Table(storage, 'tokens', 'id', indexed_fields=[dynamo.IndexKey(v) for v in ['id', 'username']])
-PROGRAMS = dynamo.Table(storage, 'programs', 'id', indexed_fields=[dynamo.IndexKey(v) for v in ['username', 'public', 'hedy_choice']])
+PROGRAMS = dynamo.Table(
+    storage, 'programs', 'id', indexed_fields=[
+        dynamo.IndexKey(v) for v in [
+            'username', 'public', 'hedy_choice']])
 CLASSES = dynamo.Table(storage, 'classes', 'id', indexed_fields=[dynamo.IndexKey(v) for v in ['teacher', 'link']])
 ADVENTURES = dynamo.Table(storage, 'adventures', 'id', indexed_fields=[dynamo.IndexKey('creator')])
-INVITATIONS = dynamo.Table(storage, 'class_invitations', partition_key='username', indexed_fields=[dynamo.IndexKey('class_id')])
+INVITATIONS = dynamo.Table(
+    storage,
+    'class_invitations',
+    partition_key='username',
+    indexed_fields=[
+        dynamo.IndexKey('class_id')])
 CUSTOMIZATIONS = dynamo.Table(storage, 'class_customizations', partition_key='id')
 ACHIEVEMENTS = dynamo.Table(storage, 'achievements', partition_key='username')
 PUBLIC_PROFILES = dynamo.Table(storage, 'public_profiles', partition_key='username')
@@ -68,6 +84,7 @@ PROGRAM_STATS = dynamo.Table(storage, 'program-stats', partition_key='id#level',
 
 QUIZ_STATS = dynamo.Table(storage, 'quiz-stats', partition_key='id#level', sort_key='week',
                           indexed_fields=[dynamo.IndexKey('id', 'week')])
+
 
 class Database:
     def record_quiz_answer(self, attempt_id, username, level, question_number, answer, is_correct):
@@ -159,7 +176,7 @@ class Database:
 
     def increase_user_program_count(self, username, delta=1):
         """Increase the program count of a user by the given delta."""
-        return USERS.update({ 'username': username }, {
+        return USERS.update({'username': username}, {
             'program_count': dynamo.DynamoIncrement(delta)
         })
 
@@ -198,9 +215,9 @@ class Database:
     def record_login(self, username, new_password_hash=None):
         """Record the fact that the user logged in, potentially updating their password hash."""
         if new_password_hash:
-            self.update_user(username, {'password': new_password_hash, 'last_login': timems ()})
+            self.update_user(username, {'password': new_password_hash, 'last_login': timems()})
         else:
-            self.update_user(username, {'last_login': timems ()})
+            self.update_user(username, {'last_login': timems()})
 
     def update_user(self, username, userdata):
         """Update the user data with the given fields.
@@ -213,7 +230,7 @@ class Database:
 
     def forget_user(self, username):
         """Forget the given user."""
-        classes = USERS.get({'username': username}).get ('classes') or []
+        classes = USERS.get({'username': username}).get('classes') or []
         USERS.delete({'username': username})
         INVITATIONS.delete({'username': username})
         # The recover password token may exist, so we delete it
@@ -222,11 +239,11 @@ class Database:
 
         # Remove user from classes of which they are a student
         for class_id in classes:
-            self.remove_student_from_class (class_id, username)
+            self.remove_student_from_class(class_id, username)
 
         # Delete classes owned by the user
-        for Class in self.get_teacher_classes (username, False):
-            self.delete_class (Class)
+        for Class in self.get_teacher_classes(username, False):
+            self.delete_class(Class)
 
     def all_users(self, page_token=None):
         """Return a page from the users table.
@@ -238,7 +255,9 @@ class Database:
         """
         limit = 500
 
-        epoch, pagination_token = page_token.split(':', maxsplit=1) if page_token is not None else (CURRENT_USER_EPOCH, None)
+        epoch, pagination_token = page_token.split(
+            ':', maxsplit=1) if page_token is not None else (
+            CURRENT_USER_EPOCH, None)
         epoch = int(epoch)
 
         page = USERS.get_many(dict(epoch=epoch), pagination_token=pagination_token, limit=limit, reverse=True)
@@ -309,7 +328,6 @@ class Database:
             return profiles[:50] + [i for i in profiles if i['username'] == username]
         return profiles[:50]
 
-
     def get_all_hedy_choices(self):
         return PROGRAMS.get_many({'hedy_choice': 1}, reverse=True)
 
@@ -339,13 +357,13 @@ class Database:
         else:
             classes = []
             for Class in CLASSES.get_many({'teacher': username}, reverse=True):
-                classes.append (Class.copy())
+                classes.append(Class.copy())
         if students_to_list:
             for Class in classes:
-                if not 'students' in Class:
-                    Class ['students'] = []
+                if 'students' not in Class:
+                    Class['students'] = []
                 else:
-                    Class ['students'] = list (Class ['students'])
+                    Class['students'] = list(Class['students'])
         return classes
 
     def get_teacher_students(self, username):
@@ -353,9 +371,9 @@ class Database:
         students = []
         classes = CLASSES.get_many({'teacher': username}, reverse=True)
         for Class in classes:
-            for student in Class.get ('students', []):
+            for student in Class.get('students', []):
                 if student not in students:
-                    students.append (student)
+                    students.append(student)
         return students
 
     def get_adventure(self, adventure_id):
@@ -367,10 +385,9 @@ class Database:
         ADVENTURES.delete({'id': adventure_id})
         for Class in self.get_teacher_classes(teacher, True):
             customizations = self.get_class_customizations(Class.get('id'))
-            if customizations and adventure_id in customizations.get('teacher_adventures',[]):
+            if customizations and adventure_id in customizations.get('teacher_adventures', []):
                 customizations['teacher_adventures'].remove(adventure_id)
                 self.update_class_customizations(customizations)
-
 
     def store_adventure(self, adventure):
         """Store an adventure."""
@@ -393,8 +410,8 @@ class Database:
         """Return all the classes of which the user is a student."""
         classes = []
         for class_id in self.get_student_classes_ids(username):
-            Class = self.get_class (class_id)
-            classes.append ({'id': Class ['id'], 'name': Class ['name']})
+            Class = self.get_class(class_id)
+            classes.append({'id': Class['id'], 'name': Class['name']})
 
         return classes
 
@@ -408,17 +425,17 @@ class Database:
 
     def add_student_to_class(self, class_id, student_id):
         """Adds a student to a class."""
-        CLASSES.update ({'id': class_id}, {'students': dynamo.DynamoAddToStringSet (student_id)})
-        USERS.update({'username': student_id}, {'classes': dynamo.DynamoAddToStringSet (class_id)})
+        CLASSES.update({'id': class_id}, {'students': dynamo.DynamoAddToStringSet(student_id)})
+        USERS.update({'username': student_id}, {'classes': dynamo.DynamoAddToStringSet(class_id)})
 
     def remove_student_from_class(self, class_id, student_id):
         """Removes a student from a class."""
-        CLASSES.update ({'id': class_id}, {'students': dynamo.DynamoRemoveFromStringSet (student_id)})
-        USERS.update({'username': student_id}, {'classes': dynamo.DynamoRemoveFromStringSet (class_id)})
+        CLASSES.update({'id': class_id}, {'students': dynamo.DynamoRemoveFromStringSet(student_id)})
+        USERS.update({'username': student_id}, {'classes': dynamo.DynamoRemoveFromStringSet(class_id)})
 
     def delete_class(self, Class):
-        for student_id in Class.get ('students', []):
-            Database.remove_student_from_class (self, Class ['id'], student_id)
+        for student_id in Class.get('students', []):
+            Database.remove_student_from_class(self, Class['id'], student_id)
 
         CUSTOMIZATIONS.del_many({'id': Class['id']})
         INVITATIONS.del_many({'class_id': Class['id']})
@@ -553,7 +570,9 @@ class Database:
         data = PUBLIC_PROFILES.get({'username': username})
         # In the case that we make this call but there is no public profile -> don't do anything
         if data:
-            PUBLIC_PROFILES.update({'username': username}, {'achievements': amount_achievements, 'last_achievement': timems()})
+            PUBLIC_PROFILES.update({'username': username},
+                                   {'achievements': amount_achievements,
+                                    'last_achievement': timems()})
 
     def update_country_public_profile(self, username, country):
         data = PUBLIC_PROFILES.get({'username': username})
