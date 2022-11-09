@@ -1188,11 +1188,14 @@ var init$1 = function $__init__123$(self, size, fullscreen = false, main = true)
     main = Sk.ffi.remapToJs(main);
     if (main) {
         self.main_canvas = Sk.main_canvas;
-        self.main_canvas.addEventListener('mousedown', mouseEventListener);
-        self.main_canvas.addEventListener('mouseup', mouseEventListener);
-        self.main_canvas.addEventListener('mousemove', mouseEventListener);
-        window.addEventListener("keydown", keyEventListener);
-        window.addEventListener("keyup", keyEventListener);
+
+        Sk.bindPygameListeners = function () {
+            self.main_canvas.addEventListener('mousedown', mouseEventListener);
+            self.main_canvas.addEventListener('mouseup', mouseEventListener);
+            self.main_canvas.addEventListener('mousemove', mouseEventListener);
+            window.addEventListener("keydown", keyEventListener);
+            window.addEventListener("keyup", keyEventListener);
+        }
 
         Sk.unbindPygameListeners = function () {
             self.main_canvas.removeEventListener('mousedown', mouseEventListener);
@@ -1202,6 +1205,7 @@ var init$1 = function $__init__123$(self, size, fullscreen = false, main = true)
             window.removeEventListener("keyup", keyEventListener);
         }
 
+        Sk.bindPygameListeners();
     }
     self.main_canvas.width = self.width;
     self.main_canvas.height = self.height;

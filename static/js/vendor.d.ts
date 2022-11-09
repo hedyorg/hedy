@@ -35,6 +35,7 @@ declare const Sk: {
 
   setTimeout?: (func: () => void, delay: number) => any;
   insertPyGameEvent: (eventName: string) => null;
+  bindPygameListeners(); void;
   unbindPygameListeners(): void;
 }
 
