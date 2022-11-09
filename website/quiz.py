@@ -1,16 +1,20 @@
 import json
-from typing import Dict
 import uuid
-from flask import g, request, session, jsonify, render_template
+from typing import Dict
+
+from flask import g, jsonify, render_template, request, session
 from flask_babel import gettext
+
+import utils
+from hedy import HEDY_MAX_LEVEL
 from hedy_content import Quizzes
 from website import statistics
-from .achievements import Achievements
 from website.auth import current_user
+
+from .achievements import Achievements
 from .database import Database
-import utils
 from .website_module import WebsiteModule, route
-from hedy import HEDY_MAX_LEVEL
+
 MAX_ATTEMPTS = 2
 
 ANSWER_PARSER = {
@@ -95,21 +99,23 @@ class QuizModule(WebsiteModule):
         if question_number > self.quizzes[g.lang].get_highest_question_level(level) or question_number < 1:
             return gettext('question_doesnt_exist'), 400
 
-
         question = self.quizzes[g.lang].get_quiz_data_for_level_question(level, question_number, g.keyword_lang)
         is_correct = True if question['correct_answer'] == ANSWER_PARSER.get(body.get('answer')) else False
 
         username = current_user()['username'] or f'anonymous:{utils.session_id()}'
         answer = ANSWER_PARSER.get((body.get('answer')))
         self.db.record_quiz_answer(session['quiz-attempt-id'], username=username, level=level,
-                                    is_correct=is_correct, question_number=question_number,
-                                    answer=answer)
+                                   is_correct=is_correct, question_number=question_number,
+                                   answer=answer)
 
         response = {
             'question_text': question.get("question_text"),
             'level': level,
             'attempt': session.get('attempt'),
-            'correct_answer_text': question.get("mp_choice_options")[REVERSE_ANSWER_PARSER.get(question.get('correct_answer'))-1].get('option'),
+            'correct_answer_text': (question
+                                    .get("mp_choice_options")[
+                                        REVERSE_ANSWER_PARSER.get(question.get('correct_answer')) - 1]
+                                    .get('option')),
             'feedback': question.get("mp_choice_options")[body.get('answer') - 1].get('feedback'),
             'max_question': self.quizzes[g.lang].get_highest_question_level(level),
             'next_question': True if question_number < self.quizzes[g.lang].get_highest_question_level(level) else False
