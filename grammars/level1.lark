@@ -40,7 +40,7 @@ empty_line: _SPACE
 
 any: /.+/ -> text
 
-COMMENT: _HASH /([^\n]+)/
+COMMENT: _HASH /([^\n]*)/
 %ignore COMMENT
 
 _EOL: "\r"?"\n"+
