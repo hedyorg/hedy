@@ -40,10 +40,12 @@ PYTHON_KEYWORDS = ['and', 'except', 'lambda', 'with', 'as', 'finally', 'nonlocal
 reserved_words = set(PYTHON_BUILTIN_FUNCTIONS + PYTHON_KEYWORDS)
 
 # Let's retrieve all keywords dynamically from the cached KEYWORDS dictionary
-indent_keywords = []
+indent_keywords = {}
 for lang, keywords in KEYWORDS.items():
-    for keyword in ['if', 'for', 'repeat', 'while', 'else']:
-        indent_keywords.append(keywords.get(keyword))
+    indent_keywords[lang] = []
+    for keyword in ['if', 'elif', 'for', 'repeat', 'while', 'else']:
+        indent_keywords[lang].append(keyword) #always also check for En
+        indent_keywords[lang].append(keywords.get(keyword))
 
 # These are the preprocessor rules that we use to specify changes in the rules that
 # are expected to work across several rules
@@ -938,7 +940,7 @@ class AllCommands(Transformer):
 
 
 def all_commands(input_string, level, lang='en'):
-    input_string = process_input_string(input_string, level)
+    input_string = process_input_string(input_string, level, lang)
     program_root = parse_input(input_string, level, lang)
 
     return AllCommands(level).transform(program_root)
@@ -980,7 +982,7 @@ class AllPrintArguments(Transformer):
 
 
 def all_print_arguments(input_string, level, lang='en'):
-    input_string = process_input_string(input_string, level)
+    input_string = process_input_string(input_string, level, lang)
     program_root = parse_input(input_string, level, lang)
 
     return AllPrintArguments(level).transform(program_root)
@@ -2192,18 +2194,27 @@ def find_indent_length(line):
             break
     return number_of_spaces
 
-def line_requires_indentation(code):
+def line_requires_indentation(line, lang):
     # this is done a bit half-assed, clearly *parsing* the one line would be superior
-    # because now a line like
-    # repeat is 5 would also require indentation!
-    all_words = code.split()
-    if len(all_words) == 0:
-        return False
+    # because now a line like `repeat is 5` would also require indentation!
 
-    first_keyword = all_words[0]
-    return first_keyword in indent_keywords
+    line = line.lstrip() #remove spaces since also `    for    ` requires indentation
+    if not lang in indent_keywords.keys(): # some language like Greek or Czech do not have local keywords
+        lang = 'en'
 
-def preprocess_blocks(code, level):
+    local_indent_keywords = indent_keywords[lang]
+
+    for k in local_indent_keywords:
+        # does the line start with this keyword?
+        # We can't just split since some langs like French have keywords containing a space
+        # We also have to check space/lineending/: after or forward 100 wil also require indentation
+        end_of_line_or_word = (len(line) > len(k) and (line[len(k)] == " " or line[len(k)] == ":")) or len(line) == len(k)
+        if end_of_line_or_word and line[:len(k)] == k:
+            return True
+
+    return False
+
+def preprocess_blocks(code, level, lang):
     processed_code = []
     lines = code.split("\n")
     current_number_of_indents = 0
@@ -2263,15 +2274,15 @@ def preprocess_blocks(code, level):
                                             indent_size=indent_size, fixed_code=fixed_code)
 
         if current_number_of_indents < previous_number_of_indents:
-                # we are dedenting ('jumping back) so we need to and an end-block
-                # (multiple if multiple dedents are happening)
+            # we are dedenting ('jumping back) so we need to and an end-block
+            # (multiple if multiple dedents are happening)
 
-                difference_in_indents = (previous_number_of_indents - current_number_of_indents)
-                for i in range(difference_in_indents):
-                    processed_code.append('end-block')
+            difference_in_indents = (previous_number_of_indents - current_number_of_indents)
+            for i in range(difference_in_indents):
+                processed_code.append('end-block')
 
 
-        if line_requires_indentation(line):
+        if line_requires_indentation(line, lang):
             next_line_needs_indentation = True
         else:
             next_line_needs_indentation = False
@@ -2320,7 +2331,7 @@ def check_program_size_is_valid(input_string):
         raise exceptions.InputTooBigException(lines_of_code=number_of_lines, max_lines=MAX_LINES)
 
 
-def process_input_string(input_string, level, escape_backslashes=True):
+def process_input_string(input_string, level, lang, escape_backslashes=True):
     result = input_string.replace('\r\n', '\n')
 
     if contains_blanks(result):
@@ -2335,7 +2346,7 @@ def process_input_string(input_string, level, escape_backslashes=True):
 
     # In level 8 we add indent-dedent blocks to the code before parsing
     if level >= hedy.LEVEL_STARTING_INDENTATION:
-        result = preprocess_blocks(result, level)
+        result = preprocess_blocks(result, level, lang)
 
     return result
 
@@ -2472,7 +2483,7 @@ def transpile_inner(input_string, level, lang="en"):
     if level > HEDY_MAX_LEVEL:
         raise Exception(f'Levels over {HEDY_MAX_LEVEL} not implemented yet')
 
-    input_string = process_input_string(input_string, level)
+    input_string = process_input_string(input_string, level, lang)
 
     program_root = parse_input(input_string, level, lang)
 
