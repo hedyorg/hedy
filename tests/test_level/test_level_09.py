@@ -211,26 +211,29 @@ class TestsLevel9(HedyTester):
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
     #
-    #if pressed repeat tests
+    # if pressed repeat tests
     #
-
+    
     def test_if_pressed_repeat(self):
-        code = "if x is pressed repeat 5 times print 'doe het 5 keer!'"
+        code = textwrap.dedent("""\
+        if x is pressed 
+            repeat 5 times 
+                print 'doe het 5 keer!'""")
 
         expected = HedyTester.dedent("""\
-          while not pygame_end:
-            time.sleep(0.1)
-            pygame.display.update()
-            event = pygame.event.wait()
-            if event.type == pygame.QUIT:
-              pygame_end = True
-              pygame.quit()
-              break
-            if event.type == pygame.KEYDOWN:
-              if event.key == pygame.K_x:
-                for i in range(int('5')):
-                  print(f'doe het 5 keer!')
-                    time.sleep(0.1)
-                    break""")
+        while not pygame_end:
+          pygame.display.update()
+          event = pygame.event.wait()
+          if event.type == pygame.QUIT:
+            pygame_end = True
+            pygame.quit()
+            break
+          if event.type == pygame.KEYDOWN: 
+            if event.key == pygame.K_x:
+              for i in range(int('5')):
+                print(f'doe het 5 keer!')
+                time.sleep(0.1)
+              break""")
 
         self.multi_level_tester(code=code, expected=expected, max_level = 11)
+        

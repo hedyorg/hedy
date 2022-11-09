@@ -754,6 +754,36 @@ class TestsLevel8(HedyTester):
             output=output,
             max_level=11
         )
+        
+    #
+    # negative tests
+    #
+
+    # issue 902
+    def test_repeat_if_gives_error(self):
+        code = textwrap.dedent("""\
+           print 'kassabon'
+           prijs is 0
+           repeat 7 times # TEST
+               ingredient is ask 'wat wil je kopen?'
+               if ingredient is appel
+                   prijs is prijs + 1
+           print 'Dat is in totaal ' prijs ' euro.'""")
+
+        self.single_level_tester(code=code, exception=hedy.exceptions.LockedLanguageFeatureException)
+
+    def test_if_repeat_gives_error(self):
+        code = textwrap.dedent("""\
+        kleur is groen
+        if kleur is groen
+            repeat 3 times
+                print 'mooi'""")
+
+        self.single_level_tester(code=code, exception=hedy.exceptions.LockedLanguageFeatureException)
+
+    #
+    # if pressed tests
+    #
 
     def test_if_pressed_x_print(self):
         code = textwrap.dedent("""\
@@ -843,32 +873,79 @@ class TestsLevel8(HedyTester):
                 break    
               else:
                 print(f'x is not pressed!')
-                break""")
+                break\n""") +  "    "
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
     #
-    # negative tests
+    # pressed turtle tests
     #
-
-    # issue 902
-    def test_repeat_if_gives_error(self):
+    
+    def test_if_pressed_with_turtlecolor(self):
         code = textwrap.dedent("""\
-           print 'kassabon'
-           prijs is 0
-           repeat 7 times # TEST
-               ingredient is ask 'wat wil je kopen?'
-               if ingredient is appel
-                   prijs is prijs + 1
-           print 'Dat is in totaal ' prijs ' euro.'""")
+        if x is pressed 
+            color red""")
 
-        self.single_level_tester(code=code, exception=hedy.exceptions.LockedLanguageFeatureException)
+        expected = HedyTester.dedent("""\
+        while not pygame_end:
+          pygame.display.update()
+          event = pygame.event.wait()
+          if event.type == pygame.QUIT:
+            pygame_end = True
+            pygame.quit()
+            break
+          if event.type == pygame.KEYDOWN: 
+            if event.key == pygame.K_x:
+              trtl = f'red'
+              if trtl not in ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']:
+                raise Exception(f'While running your program the command <span class="command-highlighted">color</span> received the value <span class="command-highlighted">{trtl}</span> which is not allowed. Try using another color.')
+              t.pencolor(trtl)
+              break""")
 
-    def test_if_repeat_gives_error(self):
+        self.multi_level_tester(
+            code=code, 
+            expected=expected,
+            extra_check_function=self.is_turtle(),
+            max_level=11
+        )
+
+    def test_if_pressed_else_with_turtle(self):
         code = textwrap.dedent("""\
-        kleur is groen
-        if kleur is groen
-            repeat 3 times
-                print 'mooi'""")
+        if x is pressed
+            forward 25
+        else
+            turn 90""")
 
-        self.single_level_tester(code=code, exception=hedy.exceptions.LockedLanguageFeatureException)
+        expected = HedyTester.dedent("""\
+        while not pygame_end:
+          pygame.display.update()
+          event = pygame.event.wait()
+          if event.type == pygame.QUIT:
+            pygame_end = True
+            pygame.quit()
+            break
+          if event.type == pygame.KEYDOWN: 
+            if event.key == pygame.K_x:
+              trtl = 25
+              try:
+                trtl = int(trtl)
+              except ValueError:
+                raise Exception(f'While running your program the command <span class="command-highlighted">forward</span> received the value <span class="command-highlighted">{trtl}</span> which is not allowed. Try changing the value to a number.')
+              t.forward(min(600, trtl) if trtl > 0 else max(-600, trtl))
+              time.sleep(0.1)
+              break    
+            else:
+              trtl = 90
+              try:
+                trtl = int(trtl)
+              except ValueError:
+                raise Exception(f'While running your program the command <span class="command-highlighted">turn</span> received the value <span class="command-highlighted">{trtl}</span> which is not allowed. Try changing the value to a number.')
+              t.right(min(600, trtl) if trtl > 0 else max(-600, trtl))
+              break\n""") +  "    "
+
+        self.multi_level_tester(
+            code=code, 
+            expected=expected,
+            extra_check_function=self.is_turtle(),
+            max_level=11
+        )

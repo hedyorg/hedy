@@ -106,30 +106,29 @@ class TestsLevel10(HedyTester):
     #
 
     def test_if_pressed_with_list_and_for(self):
-        code = textwrap.dedent("""
+        code = textwrap.dedent("""\
         lijstje is kip, haan, kuiken
         if x is pressed
-        for dier in lijstje
-            print dier
-        """)
+            for dier in lijstje
+                print 'dier'""")
+
         expected = HedyTester.dedent("""\
-          lijstje = ['kip', 'haan', 'kuiken'] 
-          while not pygame_end:
-            time.sleep(0.1)
-            pygame.display.update()
-            event = pygame.event.wait()
-            if event.type == pygame.QUIT:
-              pygame_end = True
-              pygame.quit()
-              break
-            if event.type == pygame.KEYDOWN:
-              if event.key == pygame.K_x:
-                for dier in lijstje:
-                  print(f'{dier}')
-                  time.sleep(0.1)
-                  break""")
+        lijstje = ['kip', 'haan', 'kuiken']
+        while not pygame_end:
+          pygame.display.update()
+          event = pygame.event.wait()
+          if event.type == pygame.QUIT:
+            pygame_end = True
+            pygame.quit()
+            break
+          if event.type == pygame.KEYDOWN: 
+            if event.key == pygame.K_x:
+              for dier in lijstje:
+                print(f'dier')
+                time.sleep(0.1)
+              break""")
 
         self.multi_level_tester(
             code=code,
             expected=expected,
-            max_level=16)
+            max_level=11)
