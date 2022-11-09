@@ -1,18 +1,21 @@
-import functools
 import base64
-import boto3
 import copy
-import numbers
-from abc import ABCMeta
-import os
-import logging
-from config import config
-from . import querylog
-from dataclasses import dataclass
-from boto3.dynamodb.types import TypeSerializer, TypeDeserializer
+import functools
 import json
+import logging
+import numbers
+import os
 import threading
+from abc import ABCMeta
+from dataclasses import dataclass
 from typing import List, Optional
+
+import boto3
+from boto3.dynamodb.types import TypeDeserializer, TypeSerializer
+
+from config import config
+
+from . import querylog
 
 logger = logging.getLogger(__name__)
 
@@ -83,6 +86,7 @@ class Table:
           own sort keys.
         - sort_key: a field that is the sort key for the table.
     """
+
     def __init__(self, storage: TableStorage, table_name, partition_key, sort_key=None, indexed_fields=None):
         self.storage = storage
         self.table_name = table_name
@@ -103,8 +107,12 @@ class Table:
             return self.storage.get_item(lookup.table_name, lookup.key)
         if isinstance(lookup, IndexLookup):
             return first_or_none(
-                self.storage.query_index(lookup.table_name, lookup.index_name, lookup.key, sort_key=lookup.sort_key, limit=1)[0]
-            )
+                self.storage.query_index(
+                    lookup.table_name,
+                    lookup.index_name,
+                    lookup.key,
+                    sort_key=lookup.sort_key,
+                    limit=1)[0])
         assert False
 
     @querylog.timed_as('db_get_many')
@@ -122,16 +130,16 @@ class Table:
         lookup = self._determine_lookup(key, many=True)
         if isinstance(lookup, TableLookup):
             items, next_page_token = self.storage.query(lookup.table_name, lookup.key,
-                sort_key=self.sort_key,
-                reverse=reverse,
-                limit=limit,
-                pagination_token=decode_page_token(pagination_token))
+                                                        sort_key=self.sort_key,
+                                                        reverse=reverse,
+                                                        limit=limit,
+                                                        pagination_token=decode_page_token(pagination_token))
         elif isinstance(lookup, IndexLookup):
             items, next_page_token = self.storage.query_index(lookup.table_name, lookup.index_name, lookup.key,
-                sort_key=lookup.sort_key,
-                reverse=reverse,
-                limit=limit,
-                pagination_token=decode_page_token(pagination_token))
+                                                              sort_key=lookup.sort_key,
+                                                              reverse=reverse,
+                                                              limit=limit,
+                                                              pagination_token=decode_page_token(pagination_token))
         else:
             assert False
         querylog.log_counter('db_get_many_items', len(items))
@@ -177,7 +185,7 @@ class Table:
         return self.storage.delete(self.table_name, key)
 
     @querylog.timed_as('db_del_many')
-    def del_many (self, key):
+    def del_many(self, key):
         """Delete all items matching a key.
 
         DynamoDB does not support this operation natively, so we have to turn
@@ -198,7 +206,8 @@ class Table:
     def scan(self, limit=None, pagination_token=None):
         """Reads the entire table into memory."""
         querylog.log_counter('db_scan:' + self.table_name)
-        items, next_page_token = self.storage.scan(self.table_name, limit=limit, pagination_token=decode_page_token(pagination_token))
+        items, next_page_token = self.storage.scan(
+            self.table_name, limit=limit, pagination_token=decode_page_token(pagination_token))
         return ResultPage(items, encode_page_token(next_page_token))
 
     @querylog.timed_as('db_describe')
@@ -249,7 +258,7 @@ class Table:
         if self.sort_key and self.sort_key not in data:
             raise RuntimeError(f"Sort key '{self.sort_key}' missing from data: {data}")
 
-        return { k: data[k] for k in self._key_names() }
+        return {k: data[k] for k in self._key_names()}
 
     def _key_names(self):
         return set(x for x in [self.partition_key, self.sort_key] if x is not None)
@@ -260,6 +269,7 @@ class Table:
         if any(not v for v in key.values()):
             raise RuntimeError(f'key fields cannot be empty: {key}')
 
+
 DDB_SERIALIZER = TypeSerializer()
 DDB_DESERIALIZER = TypeDeserializer()
 
@@ -269,8 +279,8 @@ class AwsDynamoStorage(TableStorage):
     def from_env():
         # If we have AWS credentials, use the real DynamoDB
         if os.getenv('AWS_ACCESS_KEY_ID'):
-            db = boto3.client ('dynamodb', region_name = config ['dynamodb'] ['region'])
-            db_prefix = os.getenv ('AWS_DYNAMODB_TABLE_PREFIX', '')
+            db = boto3.client('dynamodb', region_name=config['dynamodb']['region'])
+            db_prefix = os.getenv('AWS_DYNAMODB_TABLE_PREFIX', '')
             return AwsDynamoStorage(db, db_prefix)
         return None
 
@@ -281,7 +291,7 @@ class AwsDynamoStorage(TableStorage):
     def get_item(self, table_name, key):
         result = self.db.get_item(
             TableName=make_table_name(self.db_prefix, table_name),
-            Key = self._encode(key))
+            Key=self._encode(key))
         return self._decode(result.get('Item', None))
 
     def query(self, table_name, key, sort_key, reverse, limit, pagination_token):
@@ -296,7 +306,12 @@ class AwsDynamoStorage(TableStorage):
             ExclusiveStartKey=self._encode(pagination_token) if pagination_token else None))
 
         items = [self._decode(x) for x in result.get('Items', [])]
-        next_page_token = self._decode(result.get('LastEvaluatedKey', None)) if result.get('LastEvaluatedKey', None) else None
+        next_page_token = self._decode(
+            result.get(
+                'LastEvaluatedKey',
+                None)) if result.get(
+            'LastEvaluatedKey',
+            None) else None
         return items, next_page_token
 
     def query_index(self, table_name, index_name, keys, sort_key, reverse=False, limit=None, pagination_token=None):
@@ -313,7 +328,12 @@ class AwsDynamoStorage(TableStorage):
             ExclusiveStartKey=self._encode(pagination_token) if pagination_token else None))
 
         items = [self._decode(x) for x in result.get('Items', [])]
-        next_page_token = self._decode(result.get('LastEvaluatedKey', None)) if result.get('LastEvaluatedKey', None) else None
+        next_page_token = self._decode(
+            result.get(
+                'LastEvaluatedKey',
+                None)) if result.get(
+            'LastEvaluatedKey',
+            None) else None
         return items, next_page_token
 
     def _prep_query_data(self, key, sort_key=None):
@@ -321,7 +341,8 @@ class AwsDynamoStorage(TableStorage):
         validate_only_sort_key(special_conditions, sort_key)
 
         # We must escape field names with a '#' because Dynamo is unhappy
-        # with fields called 'level' etc: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
+        # with fields called 'level' etc:
+        # https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
         # This escapes too much, but at least it's easy.
 
         key_expression = ' AND '.join(
@@ -339,7 +360,7 @@ class AwsDynamoStorage(TableStorage):
     def put(self, table_name, _key, data):
         return self.db.put_item(
             TableName=make_table_name(self.db_prefix, table_name),
-            Item = self._encode(data))
+            Item=self._encode(data))
 
     def update(self, table_name, key, updates):
         value_updates = {k: v for k, v in updates.items() if not isinstance(v, DynamoUpdate)}
@@ -347,8 +368,8 @@ class AwsDynamoStorage(TableStorage):
 
         return self.db.update_item(
             TableName=make_table_name(self.db_prefix, table_name),
-            Key = self._encode(key),
-            AttributeUpdates = {
+            Key=self._encode(key),
+            AttributeUpdates={
                 **self._encode_updates(value_updates),
                 **special_updates,
             })
@@ -356,10 +377,10 @@ class AwsDynamoStorage(TableStorage):
     def delete(self, table_name, key):
         return self.db.delete_item(
             TableName=make_table_name(self.db_prefix, table_name),
-            Key = self._encode(key))
+            Key=self._encode(key))
 
     def item_count(self, table_name):
-        result = self.db.describe_table (
+        result = self.db.describe_table(
             TableName=make_table_name(self.db_prefix, table_name))
         return result['Table']['ItemCount']
 
@@ -369,13 +390,18 @@ class AwsDynamoStorage(TableStorage):
             Limit=limit,
             ExclusiveStartKey=self._encode(pagination_token) if pagination_token else None))
         items = [self._decode(x) for x in result.get('Items', [])]
-        next_page_token = self._decode(result.get('LastEvaluatedKey', None)) if result.get('LastEvaluatedKey', None) else None
+        next_page_token = self._decode(
+            result.get(
+                'LastEvaluatedKey',
+                None)) if result.get(
+            'LastEvaluatedKey',
+            None) else None
         return items, next_page_token
 
-    def _encode (self, data):
+    def _encode(self, data):
         return {k: DDB_SERIALIZER.serialize(v) for k, v in data.items()}
 
-    def _encode_updates (self, data):
+    def _encode_updates(self, data):
         def encode_update(value):
             # None is special, we use it to remove a field from a record
             if value is None:
@@ -384,7 +410,7 @@ class AwsDynamoStorage(TableStorage):
                 return {'Value': DDB_SERIALIZER.serialize(value)}
         return {k: encode_update(v) for k, v in data.items()}
 
-    def _decode (self, data):
+    def _decode(self, data):
         if data is None:
             return None
 
@@ -401,6 +427,7 @@ class Lock:
             with self.lock:
                 return fn(*args, **kwargs)
         return _wrapper
+
 
 lock = Lock()
 
@@ -422,7 +449,9 @@ class MemoryStorage(TableStorage):
             except IOError:
                 pass
             except json.decoder.JSONDecodeError as e:
-                logger.warning(f'Error loading {filename}. The next write operation will overwrite the database with a clean copy: {e}')
+                logger.warning(
+                    f'Error loading {filename}.\
+                    The next write operation will overwrite the database with a clean copy: {e}')
 
     # NOTE: on purpose not @synchronized here
     def get_item(self, table_name, key):
@@ -445,7 +474,7 @@ class MemoryStorage(TableStorage):
 
         # Pagination token
         def extract_key(i, record):
-            ret = { k: record[k] for k in key.keys() }
+            ret = {k: record[k] for k in key.keys()}
             if sort_key is None:
                 ret['offset'] = i
             else:
@@ -475,7 +504,13 @@ class MemoryStorage(TableStorage):
 
     # NOTE: on purpose not @synchronized here
     def query_index(self, table_name, index_name, keys, sort_key, reverse=False, limit=None, pagination_token=None):
-        return self.query(table_name, keys, sort_key=sort_key, reverse=reverse, limit=limit, pagination_token=pagination_token)
+        return self.query(
+            table_name,
+            keys,
+            sort_key=sort_key,
+            reverse=reverse,
+            limit=limit,
+            pagination_token=pagination_token)
 
     @lock.synchronized
     def put(self, table_name, key, data):
@@ -574,7 +609,7 @@ class MemoryStorage(TableStorage):
 
     def _query_matches(self, record, eq, conds):
         return (all(record.get(k) == v for k, v in eq.items())
-            and all(cond.matches(record.get(k)) for k, cond in conds.items()))
+                and all(cond.matches(record.get(k)) for k, cond in conds.items()))
 
     def _flush(self):
         if self.filename:
@@ -584,13 +619,16 @@ class MemoryStorage(TableStorage):
             except IOError:
                 pass
 
+
 def first_or_none(xs):
     return xs[0] if xs else None
+
 
 @dataclass
 class TableLookup:
     table_name: str
     key: dict
+
 
 @dataclass
 class IndexLookup:
@@ -611,23 +649,27 @@ class DynamoIncrement(DynamoUpdate):
 
     def to_dynamo(self):
         return {
-                'Action': 'ADD',
-                'Value': { 'N': str(self.delta) },
-            }
+            'Action': 'ADD',
+            'Value': {'N': str(self.delta)},
+        }
+
 
 class DynamoAddToStringSet(DynamoUpdate):
     """Add one or more elements to a string set."""
+
     def __init__(self, *elements):
         self.elements = elements
 
     def to_dynamo(self):
         return {
-                'Action': 'ADD',
-                'Value': { 'SS': list(self.elements) },
-            }
+            'Action': 'ADD',
+            'Value': {'SS': list(self.elements)},
+        }
+
 
 class DynamoAddToNumberSet(DynamoUpdate):
     """Add one or more elements to a number set."""
+
     def __init__(self, *elements):
         for el in elements:
             if not isinstance(el, numbers.Real):
@@ -636,33 +678,35 @@ class DynamoAddToNumberSet(DynamoUpdate):
 
     def to_dynamo(self):
         return {
-                'Action': 'ADD',
-                'Value': { 'NS': [str(x) for x in self.elements] },
-            }
+            'Action': 'ADD',
+            'Value': {'NS': [str(x) for x in self.elements]},
+        }
 
 
 class DynamoAddToList(DynamoUpdate):
     """Add one or more elements to a list."""
+
     def __init__(self, *elements):
         self.elements = elements
 
     def to_dynamo(self):
         return {
-                'Action': 'ADD',
-                'Value': { 'L': [DDB_SERIALIZER.serialize(x) for x in self.elements] },
-            }
+            'Action': 'ADD',
+            'Value': {'L': [DDB_SERIALIZER.serialize(x) for x in self.elements]},
+        }
 
 
 class DynamoRemoveFromStringSet(DynamoUpdate):
     """Remove one or more elements to a string set."""
+
     def __init__(self, *elements):
         self.elements = elements
 
     def to_dynamo(self):
         return {
-                'Action': 'DELETE',
-                'Value': { 'SS': list(self.elements) },
-            }
+            'Action': 'DELETE',
+            'Value': {'SS': list(self.elements)},
+        }
 
 
 class DynamoCondition:
@@ -672,6 +716,7 @@ class DynamoCondition:
 
     Conditions only apply to sort keys.
     """
+
     def to_dynamo_expression(self, _field_name):
         """Render expression part of Dynamo query."""
         raise NotImplementedError()
@@ -692,8 +737,8 @@ class DynamoCondition:
         NOT of type DynamoCondition. The other one will contain all the elements
         for which the value ARE DynamoConditions.
         """
-        eq_conditions = { k: v for k, v in key.items() if not isinstance(v, DynamoCondition) }
-        special_conditions = { k: v for k, v in key.items() if isinstance(v, DynamoCondition) }
+        eq_conditions = {k: v for k, v in key.items() if not isinstance(v, DynamoCondition)}
+        special_conditions = {k: v for k, v in key.items() if isinstance(v, DynamoCondition)}
 
         return (eq_conditions, special_conditions)
 
@@ -746,11 +791,11 @@ def replace_decimals(obj):
 
 class CustomEncoder(json.JSONEncoder):
     """An encoder that serializes non-standard types like sets."""
+
     def default(self, obj):
         if isinstance(obj, set):
             return {"$type": "set", "elements": list(obj)}
         return json.JSONEncoder.default(self, obj)
-
 
     @staticmethod
     def decode_object(obj):
@@ -768,13 +813,15 @@ def validate_only_sort_key(conds, sort_key):
 
 def encode_page_token(x):
     """Encode a compound key page token (dict) to a string."""
-    if x is None: return None
+    if x is None:
+        return None
     return base64.urlsafe_b64encode(json.dumps(x).encode('utf-8')).decode('ascii')
 
 
 def decode_page_token(x):
     """Decode string page token to compound key (dict)."""
-    if x is None: return None
+    if x is None:
+        return None
     return json.loads(base64.urlsafe_b64decode(x.encode('ascii')).decode('utf-8'))
 
 
