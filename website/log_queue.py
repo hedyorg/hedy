@@ -1,11 +1,11 @@
 import collections
 import glob
 import json
+import logging
 import os
 import threading
 import time
 import traceback
-import logging
 
 logger = logging.getLogger(__name__)
 
@@ -30,6 +30,7 @@ class LogQueue:
     thread-safe. We do as little work as possible every time we hold the mutex
     to allow for maximum parallelism.
     """
+
     def __init__(self, name, batch_window_s, do_print=False):
         self.name = name
         self.records_queue = collections.defaultdict(list)
