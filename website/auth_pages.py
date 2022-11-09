@@ -1,12 +1,24 @@
-from flask_babel import gettext
-from hedy_content import COUNTRIES, ALL_LANGUAGES
-from website.auth import MAILCHIMP_API_URL, RESET_LENGTH, SESSION_LENGTH, TOKEN_COOKIE_NAME, check_password, create_recover_link, create_verify_link, forget_current_user, is_admin, is_teacher, mailchimp_subscribe_user, make_salt, prepare_user_db, remember_current_user, requires_login, send_email, send_email_template, validate_signup_data, password_hash
-from flask import request, session, make_response, jsonify, redirect
-from utils import times, timems, extract_bcrypt_rounds, is_testing_request, is_heroku
 import datetime
+
+from flask import jsonify, make_response, redirect, request, session
+from flask_babel import gettext
+
 from config import config
+from hedy_content import ALL_LANGUAGES, COUNTRIES
+from utils import (extract_bcrypt_rounds, is_heroku, is_testing_request,
+                   timems, times)
+from website.auth import (MAILCHIMP_API_URL, RESET_LENGTH, SESSION_LENGTH,
+                          TOKEN_COOKIE_NAME, check_password,
+                          create_recover_link, create_verify_link,
+                          forget_current_user, is_admin, is_teacher,
+                          mailchimp_subscribe_user, make_salt, password_hash,
+                          prepare_user_db, remember_current_user,
+                          requires_login, send_email, send_email_template,
+                          validate_signup_data)
+
 from .database import Database
 from .website_module import WebsiteModule, route
+
 
 class AuthModule(WebsiteModule):
     def __init__(self, db: Database):
@@ -64,7 +76,8 @@ class AuthModule(WebsiteModule):
             self.db.update_user(user['username'], {'verification_pending': None})
             resp = make_response({'first_time': True})
 
-        # We set the cookie to expire in a year, just so that the browser won't invalidate it if the same cookie gets renewed by constant use.
+        # We set the cookie to expire in a year, just so that the browser won't invalidate
+        # it if the same cookie gets renewed by constant use.
         # The server will decide whether the cookie expires.
         resp.set_cookie(TOKEN_COOKIE_NAME, value=cookie, httponly=True, secure=is_heroku(), samesite='Lax', path='/',
                         max_age=365 * 24 * 60 * 60)
@@ -93,7 +106,8 @@ class AuthModule(WebsiteModule):
             return gettext('language_invalid'), 400
         if not isinstance(body.get('agree_terms'), str) or not body.get('agree_terms'):
             return gettext('agree_invalid'), 400
-        if not isinstance(body.get('keyword_language'), str) or body.get('keyword_language') not in ['en', body.get('language')]:
+        if not isinstance(body.get('keyword_language'), str) or body.get(
+                'keyword_language') not in ['en', body.get('language')]:
             return gettext('keyword_language_invalid'), 400
 
         # Validations, optional fields
@@ -130,7 +144,6 @@ class AuthModule(WebsiteModule):
         # We receive the pre-processed user and response package from the function
         user, resp = self.store_new_account(body, body['email'].strip().lower())
 
-        
         if not is_testing_request(request) and 'subscribe' in body:
             # If we have a Mailchimp API key, we use it to add the subscriber through the API
             if MAILCHIMP_API_URL:
@@ -139,12 +152,13 @@ class AuthModule(WebsiteModule):
             # Otherwise, we send an email to notify about the subscription to the main email address
             else:
                 send_email(config['email']['sender'], 'Subscription to Hedy newsletter on signup', user['email'],
-                            '<p>' + user['email'] + '</p>')
+                           '<p>' + user['email'] + '</p>')
 
         # We automatically login the user
         cookie = make_salt()
         self.db.store_token({'id': cookie, 'username': user['username'], 'ttl': times() + SESSION_LENGTH})
-        # We set the cookie to expire in a year, just so that the browser won't invalidate it if the same cookie gets renewed by constant use.
+        # We set the cookie to expire in a year, just so that the browser won't invalidate
+        # it if the same cookie gets renewed by constant use.
         # The server will decide whether the cookie expires.
         resp.set_cookie(TOKEN_COOKIE_NAME, value=cookie, httponly=True, secure=is_heroku(), samesite='Lax', path='/',
                         max_age=365 * 24 * 60 * 60)
@@ -167,7 +181,7 @@ class AuthModule(WebsiteModule):
             return gettext('username_invalid'), 403
 
         # If user is already verified -> re-direct to landing-page anyway
-        if not 'verification_pending' in user:
+        if 'verification_pending' not in user:
             return redirect('/landing-page')
 
         # Verify the token
@@ -239,7 +253,7 @@ class AuthModule(WebsiteModule):
             return gettext('ajax_error'), 400
         if not isinstance(body.get('old_password'), str) or not isinstance(body.get('new-password'), str):
             return gettext('password_invalid'), 400
-        if not isinstance(body.get( 'password_repeat'), str):
+        if not isinstance(body.get('password_repeat'), str):
             return gettext('repeat_match_password'), 400
         if len(body['new-password']) < 6:
             return gettext('password_six'), 400
@@ -259,7 +273,7 @@ class AuthModule(WebsiteModule):
         if not is_testing_request(request):
             try:
                 send_email_template(template='change_password', email=user['email'], username=user['username'])
-            except:
+            except BaseException:
                 return gettext('mail_error_change_processed'), 400
 
         return jsonify({'message': gettext('password_updated')}), 200
@@ -300,8 +314,8 @@ class AuthModule(WebsiteModule):
         else:
             try:
                 send_email_template(template='recover_password', email=email,
-                                link=create_recover_link(user['username'], token), username=user['username'])
-            except:
+                                    link=create_recover_link(user['username'], token), username=user['username'])
+            except BaseException:
                 return gettext('mail_error_change_processed'), 400
 
             return jsonify({'message': gettext('sent_password_recovery')}), 200
@@ -344,7 +358,7 @@ class AuthModule(WebsiteModule):
         if not is_testing_request(request):
             try:
                 send_email_template(template='reset_password', email=email, username=user['username'])
-            except:
+            except BaseException:
                 return gettext('mail_error_change_processed'), 400
 
         return jsonify({'message': gettext('password_resetted')}), 200
@@ -391,9 +405,8 @@ class AuthModule(WebsiteModule):
         else:
             try:
                 send_email_template(template='welcome_verify', email=email,
-                                link=create_verify_link(username, hashed_token), username=user['username'])
-            except:
+                                    link=create_verify_link(username, hashed_token), username=user['username'])
+            except BaseException:
                 return user, make_response({gettext('mail_error_change_processed')}, 400)
             resp = make_response({})
         return user, resp
-
