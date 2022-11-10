@@ -46,7 +46,7 @@ jobs:
         Write-Host "::set-output name=docs_changed::$HasDiff"
     - name: Run all tests
       shell: pwsh
-      if: steps.check_file_changed.outputs.docs_changed == 'True'
+      if: steps.check_file_changed.outputs.docs_changed == 'True' -or ${{ github.event.label.name == 'force_tests' }}
       run: |
         build-tools/github/validate --all
     - name: Run non-code related tests
