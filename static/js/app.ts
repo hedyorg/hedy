@@ -886,8 +886,11 @@ export function copy_to_clipboard (string: string, prompt: string) {
      document.getSelection()?.removeAllRanges ();
      document.getSelection()?.addRange (originalSelection);
   }
-  modal.hide_alert();
-  modal.alert (prompt, 3000, false);
+  // We only want to show this alert if the copy_modal is NOT shown -> otherwise duplicate modal
+  if (prompt) {
+    modal.hide_alert();
+    modal.alert(prompt, 3000, false);
+  }
 }
 
 /**
