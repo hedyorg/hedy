@@ -837,6 +837,11 @@ adventures:
                     ## Songs
                     Songs often contain a lot of repetition. Sometimes the repetition is also based on counting.
                     For example, in the well-known song 'Bottles of beer'. You can program that song with a little math.
+
+                    Tip: Use the read aloud function to let Hedy sing the song to you!
+
+                    ## Challenge
+                    You can now repeat lines 2 to 7 as many times as you want by copying the lines.
                 example_code: |
                     ```
                     verse = 99
@@ -845,10 +850,23 @@ adventures:
                     {print} 'Take one down, pass it around'
                     verse = verse - 1
                     {print} verse ' bottles of beer on the wall'
+                    sleep
                     ```
-
-                    You can now repeat lines 2 to 6 as many times as you want by copying the lines.
-                start_code: "{print} 'Baby shark'"
+                story_text_2: |
+                    ## 5 Little Monkeys jumping on the bed
+                    This children's song counts down from 5 little monkeys to 1 monkey.
+                    If you copy line 2 - 7 and paste it under the the code, you can sing the whole song!
+                example_code_2: |
+                    ```
+                    number = 6
+                    number = number - 1
+                    print number ' little monkeys jumping on the bed'
+                    print 'One fell off and bumped his head'
+                    print 'Mama called the doctor and the doctor said'
+                    print 'NO MORE MONKEYS JUMPING ON THE BED!'
+                    sleep
+                    ```
+                start_code: "{print} 'Lets sing!'"
             7:
                 story_text: |
                     ## Songs
@@ -1378,6 +1396,9 @@ adventures:
                     You can also make an Earthworm die again in this, but now you can also calculate how many points have been rolled.
                     You may know that the worm counts 5 points for Earthworms. Now after a roll you can immediately calculate how many points you have thrown.
                     This is the code to calculate points for one die:
+
+                    ## Challenge
+                    Can you make the code so that you get the total score for 8 dice? To do that, you have to cut and paste some lines of the code.
                 example_code: |
                     ```
                     choices = 1, 2, 3, 4, 5, earthworm
@@ -1387,7 +1408,6 @@ adventures:
                     {if} throw {is} earthworm points = points + 5 {else} points = points + throw
                     {print} 'those are' points ' point'
                     ```
-                    Can you make the code so that you get the total score for 8 dice? To do that, you have to cut and paste some lines of the code.
                 example_code_2: |
                     ## Looking forward
 
@@ -1617,19 +1637,30 @@ adventures:
             6:
                 story_text: |
                     ## Calculator
-                    Now that you can calculate, you can also create a program to practice maths calculations. You can make up the calculations yourself, for example:
+                    Now that you can do maths, you can make a calculator yourself!
                 example_code: |
+                    ```
+                    number_1 {is} {ask} 'Fill in the first number:'
+                    number_2 {is} {ask} 'Fill in the second number:'
+                    correct_answer = number_1 * number_2
+                    {print} number_1 ' times ' number_2 ' is ' correct_answer
+                    ```
+                story_text_2: |
+                    ## Challenge
+                    The calculator above will calculate the answer for you, but you can also make a program to test your own maths skills, like this:
+                    Fill in the blanks to make it complete!
+                example_code_2: |
                     ```
                     correct_answer = 11 * 27
                     answer = {ask} 'How much is 11 times 27?'
-                    {if} answer {is} correct_answer {print} 'good job!'
-                    {else} {print} 'Wrong! It was ' correct_answer
+                    {if} answer {is} _ {print} 'good job!'
+                    {else} {print} 'Wrong! It was ' _
                     ```
-                story_text_2: |
+                story_text_3: |
                     ## Random numbers
                     You can also let the computer do random sums on its own using random.
                     This is how you choose a number of tables to practice, and from that you always get a different sum:
-                example_code_2: |
+                example_code_3: |
                     ```
                     tables = 4, 5, 6, 8
                     numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
@@ -2211,6 +2242,11 @@ adventures:
                     In this level you can use math in your predictions as a fortune teller. This allows you to make up (silly) formulas to calculate the future.
                     For example you could calculate how rich you'll get or how many kids you will have when you grow up.
 
+
+
+                    ## Challenge
+                    Can you think of your own (silly) fortune telling machine?
+
                 example_code: |
                     ```
                     {print} 'I am Hedy the fortune teller!'
@@ -2227,7 +2263,6 @@ adventures:
 
                     ## Example Silly Fortune Teller
                     If the previous example wasn't silly enough for you, take a look at this one!
-
                     ```
                     {print} 'Im Hedy the silly fortune teller!'
                     {print} 'I will predict how smart you are!'
