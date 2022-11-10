@@ -214,11 +214,11 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'end'
     ],
     13: [
-        'default',  
+        'default',
         'restaurant',
-        'story',
-        'rock',
         'secret',
+        'rock',
+        'story',
         'tic',
         'next',
         'end'
