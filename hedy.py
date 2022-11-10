@@ -40,10 +40,12 @@ PYTHON_KEYWORDS = ['and', 'except', 'lambda', 'with', 'as', 'finally', 'nonlocal
 reserved_words = set(PYTHON_BUILTIN_FUNCTIONS + PYTHON_KEYWORDS)
 
 # Let's retrieve all keywords dynamically from the cached KEYWORDS dictionary
-indent_keywords = []
+indent_keywords = {}
 for lang, keywords in KEYWORDS.items():
-    for keyword in ['if', 'for', 'repeat', 'while', 'else']:
-        indent_keywords.append(keywords.get(keyword))
+    indent_keywords[lang] = []
+    for keyword in ['if', 'elif', 'for', 'repeat', 'while', 'else']:
+        indent_keywords[lang].append(keyword) #always also check for En
+        indent_keywords[lang].append(keywords.get(keyword))
 
 # These are the preprocessor rules that we use to specify changes in the rules that
 # are expected to work across several rules
@@ -695,7 +697,7 @@ class TypeValidator(Transformer):
             if in_lookup:
                 return type_in_lookup
             else:
-                raise hedy.exceptions.UndefinedVarException(name=var_name)
+                raise hedy.exceptions.UndefinedVarException(name=var_name, line_number=tree.meta.line)
 
         if tree.data == 'var_access_print':
             var_name = tree.children[0]
@@ -709,16 +711,16 @@ class TypeValidator(Transformer):
                 # we first check if the list of vars is empty since that is cheaper than stringdistancing.
                 # TODO: Can be removed since fall back handles that now
                 if len(self.lookup) == 0:
-                    raise hedy.exceptions.UnquotedTextException(level=self.level, unquotedtext=var_name)
+                    raise hedy.exceptions.UnquotedTextException(level=self.level, unquotedtext=var_name, line_number=tree.meta.line)
                 else:
                     # TODO: decide when this runs for a while whether this distance small enough!
                     minimum_distance_allowed = 4
                     for var_in_lookup in self.lookup:
                         if calculate_minimum_distance(var_in_lookup.name, var_name) <= minimum_distance_allowed:
-                            raise hedy.exceptions.UndefinedVarException(name=var_name)
+                            raise hedy.exceptions.UndefinedVarException(name=var_name, line_number=tree.meta.line)
 
                     # nothing found? fall back to UnquotedTextException
-                    raise hedy.exceptions.UnquotedTextException(level=self.level, unquotedtext=var_name)
+                    raise hedy.exceptions.UnquotedTextException(level=self.level, unquotedtext=var_name, line_number=tree.meta.line)
 
 
         # TypedTree with type 'None' and 'string' could be in the lookup because of the grammar definitions
@@ -938,7 +940,7 @@ class AllCommands(Transformer):
 
 
 def all_commands(input_string, level, lang='en'):
-    input_string = process_input_string(input_string, level)
+    input_string = process_input_string(input_string, level, lang)
     program_root = parse_input(input_string, level, lang)
 
     return AllCommands(level).transform(program_root)
@@ -980,7 +982,7 @@ class AllPrintArguments(Transformer):
 
 
 def all_print_arguments(input_string, level, lang='en'):
-    input_string = process_input_string(input_string, level)
+    input_string = process_input_string(input_string, level, lang)
     program_root = parse_input(input_string, level, lang)
 
     return AllPrintArguments(level).transform(program_root)
@@ -997,7 +999,6 @@ class IsValid(Filter):
         return False, InvalidInfo(" ", line=args[0][2].line, column=args[0][2].column), meta
 
     def error_print_nq(self, meta, args):
-        # return error source to indicate what went wrong
         if len(args) > 1:
             text = args[1][1]
         else:
@@ -1183,7 +1184,7 @@ class ConvertToPython(Transformer):
             # TODO: check whether this is really never raised??
             # return first name with issue
             first_unquoted_var = unquoted_args[0]
-            raise exceptions.UndefinedVarException(name=first_unquoted_var)
+            raise exceptions.UndefinedVarException(name=first_unquoted_var, line_number=var_access_linenumber)
 
     # static methods
     @staticmethod
@@ -1821,7 +1822,7 @@ class ConvertToPython_12(ConvertToPython_11):
             # is the text a number? then no quotes are fine. if not, raise maar!
 
             if not (ConvertToPython.is_int(right_hand_side) or ConvertToPython.is_float(right_hand_side) or ConvertToPython.is_random(right_hand_side)):
-                raise exceptions.UnquotedAssignTextException(text = args[1])
+                raise exceptions.UnquotedAssignTextException(text=args[1])
 
         if isinstance(right_hand_side, Tree):
             return left_hand_side + " = " + right_hand_side.children[0]
@@ -2192,20 +2193,27 @@ def find_indent_length(line):
             break
     return number_of_spaces
 
-def needs_indentation(code):
+def line_requires_indentation(line, lang):
     # this is done a bit half-assed, clearly *parsing* the one line would be superior
-    # because now a line like
-    # repeat is 5 would also require indentation!
-    all_words = code.split()
-    if len(all_words) == 0:
-        return False
+    # because now a line like `repeat is 5` would also require indentation!
 
-    first_keyword = all_words[0]
-    return first_keyword in indent_keywords
+    line = line.lstrip() #remove spaces since also `    for    ` requires indentation
+    if not lang in indent_keywords.keys(): # some language like Greek or Czech do not have local keywords
+        lang = 'en'
 
+    local_indent_keywords = indent_keywords[lang]
 
+    for k in local_indent_keywords:
+        # does the line start with this keyword?
+        # We can't just split since some langs like French have keywords containing a space
+        # We also have to check space/lineending/: after or forward 100 wil also require indentation
+        end_of_line_or_word = (len(line) > len(k) and (line[len(k)] == " " or line[len(k)] == ":")) or len(line) == len(k)
+        if end_of_line_or_word and line[:len(k)] == k:
+            return True
 
-def preprocess_blocks(code, level):
+    return False
+
+def preprocess_blocks(code, level, lang):
     processed_code = []
     lines = code.split("\n")
     current_number_of_indents = 0
@@ -2229,47 +2237,54 @@ def preprocess_blocks(code, level):
             indent_size = leading_spaces
             indent_size_adapted = True
 
-        #calculate nuber of indents if possible
-        if indent_size != None:
-            if (leading_spaces % indent_size) != 0:
-                # there is inconsistent indentation, not sure if that is too much or too little!
-                if leading_spaces < current_number_of_indents * indent_size:
-                    fixed_code = program_repair.fix_indent(code, line_number, leading_spaces, indent_size)
-                    raise hedy.exceptions.NoIndentationException(line_number=line_number, leading_spaces=leading_spaces,
-                                                                 indent_size=indent_size, fixed_code=fixed_code)
-                else:
-                    fixed_code = program_repair.fix_indent(code, line_number, leading_spaces, indent_size)
-                    raise hedy.exceptions.IndentationException(line_number=line_number, leading_spaces=leading_spaces,
-                                                                 indent_size=indent_size, fixed_code=fixed_code)
+        # indentation size not 4
+        if (leading_spaces % indent_size) != 0:
+            # there is inconsistent indentation, not sure if that is too much or too little!
+            if leading_spaces < current_number_of_indents * indent_size:
+                fixed_code = program_repair.fix_indent(code, line_number, leading_spaces, indent_size)
+                raise hedy.exceptions.NoIndentationException(line_number=line_number, leading_spaces=leading_spaces,
+                                                             indent_size=indent_size, fixed_code=fixed_code)
+            else:
+                fixed_code = program_repair.fix_indent(code, line_number, leading_spaces, indent_size)
+                raise hedy.exceptions.IndentationException(line_number=line_number, leading_spaces=leading_spaces,
+                                                             indent_size=indent_size, fixed_code=fixed_code)
 
-            current_number_of_indents = leading_spaces // indent_size
-            if current_number_of_indents > 1 and level == hedy.LEVEL_STARTING_INDENTATION:
-                raise hedy.exceptions.LockedLanguageFeatureException(concept="nested blocks")
+        # happy path, multiple of 4 spaces:
+        current_number_of_indents = leading_spaces // indent_size
+        if current_number_of_indents > 1 and level == hedy.LEVEL_STARTING_INDENTATION:
+            raise hedy.exceptions.LockedLanguageFeatureException(concept="nested blocks")
+
+        if current_number_of_indents > previous_number_of_indents and not next_line_needs_indentation:
+            # we are indenting, but this line is not following* one that even needs indenting, raise
+            # * note that we have not yet updated the value of 'next line needs indenting' so if refers to this line!
+            fixed_code = program_repair.fix_indent(code, line_number, leading_spaces, indent_size)
+            raise hedy.exceptions.IndentationException(line_number=line_number, leading_spaces=leading_spaces,
+                                                       indent_size=indent_size, fixed_code=fixed_code)
+
 
         if next_line_needs_indentation and current_number_of_indents <= previous_number_of_indents:
             fixed_code = program_repair.fix_indent(code, line_number, leading_spaces, indent_size)
             raise hedy.exceptions.NoIndentationException(line_number=line_number, leading_spaces=leading_spaces,
                                                          indent_size=indent_size, fixed_code=fixed_code)
 
-        if needs_indentation(line):
-            next_line_needs_indentation = True
-        else:
-            next_line_needs_indentation = False
-
         if current_number_of_indents - previous_number_of_indents > 1:
             fixed_code = program_repair.fix_indent(code, line_number, leading_spaces, indent_size)
             raise hedy.exceptions.IndentationException(line_number=line_number, leading_spaces=leading_spaces,
                                             indent_size=indent_size, fixed_code=fixed_code)
 
-
-
         if current_number_of_indents < previous_number_of_indents:
-            # we springen 'terug' dus er moeten end-blocken in
-            # bij meerdere terugsprongen sluiten we ook meerdere blokken
+            # we are dedenting ('jumping back) so we need to and an end-block
+            # (multiple if multiple dedents are happening)
 
             difference_in_indents = (previous_number_of_indents - current_number_of_indents)
             for i in range(difference_in_indents):
                 processed_code.append('end-block')
+
+
+        if line_requires_indentation(line, lang):
+            next_line_needs_indentation = True
+        else:
+            next_line_needs_indentation = False
 
         #save to compare for next line
         previous_number_of_indents = current_number_of_indents
@@ -2315,7 +2330,7 @@ def check_program_size_is_valid(input_string):
         raise exceptions.InputTooBigException(lines_of_code=number_of_lines, max_lines=MAX_LINES)
 
 
-def process_input_string(input_string, level, escape_backslashes=True):
+def process_input_string(input_string, level, lang, escape_backslashes=True):
     result = input_string.replace('\r\n', '\n')
 
     if contains_blanks(result):
@@ -2330,7 +2345,7 @@ def process_input_string(input_string, level, escape_backslashes=True):
 
     # In level 8 we add indent-dedent blocks to the code before parsing
     if level >= hedy.LEVEL_STARTING_INDENTATION:
-        result = preprocess_blocks(result, level)
+        result = preprocess_blocks(result, level, lang)
 
     return result
 
@@ -2400,8 +2415,7 @@ def is_program_valid(program_root, input_string, level, lang):
             raise exceptions.IncompleteRepeatException(command='times', level=level, line_number=line)    
         elif invalid_info.error_type == 'print without quotes':
             unquotedtext = invalid_info.arguments[0]
-            # grammar rule is agnostic of line number so we can't easily return that here
-            raise exceptions.UnquotedTextException(level=level, unquotedtext=unquotedtext)
+            raise exceptions.UnquotedTextException(level=level, unquotedtext=unquotedtext, line_number=invalid_info.line)
         elif invalid_info.error_type == 'unsupported number':
             raise exceptions.UnsupportedFloatException(value=''.join(invalid_info.arguments))
         elif invalid_info.error_type == 'lonely text':
@@ -2467,7 +2481,7 @@ def transpile_inner(input_string, level, lang="en"):
     if level > HEDY_MAX_LEVEL:
         raise Exception(f'Levels over {HEDY_MAX_LEVEL} not implemented yet')
 
-    input_string = process_input_string(input_string, level)
+    input_string = process_input_string(input_string, level, lang)
 
     program_root = parse_input(input_string, level, lang)
 
