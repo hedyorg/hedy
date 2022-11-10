@@ -1,16 +1,25 @@
-First, provide a one line summary of your changes in the **Title of the PR**
+Start the name of the PR with one of the relevant prefixed in the title of the PR:
+
+* [LANGUAGE] -> changes related to grammars or the transpiler
+* [FIX] -> solving a bug
+* [CHORE] -> things unrelated to the code, such as mergify scripts
+* [REFACTORING] -> should not change anything, cleanup of code
+* [UI] -> improvements and changes of the Hedy user interface
+* [TESTING] -> changes made to the test suite
+* [BACKEND] -> changes to the internal logic of the Hedy website
+
+Finish the name of the PR with a clear description of the changes and delete the lines above from the description.
 
 **Now fill out the remainder of this template by replacing all _italic_ content**
 
 **Description**
 
-_Changes in detail_
-
-For example: "**Adds** translations of levels 1 to 12 to Polish" (note the use of present tense!)
+_Changes in detail. For example: "**Adds** translations of levels 1 to 12 to Polish" (note the use of present tense!)_
 
 **Fixes _issue or discussion number_**
 
-Always link the number of the issue or of the discussion that your pr concerns.
+Always link the number of the issue or of the discussion that your PR concerns.
+Tip, if you use the words fixes before the issue number in this description, the related issue will automatically close then the PR is merged! 
 
 **How to test**
 
@@ -20,7 +29,8 @@ Always link the number of the issue or of the discussion that your pr concerns.
 **Checklist**
 Done? Check if you have it all in place using this list:*
   
-- [ ] Describes changes in the format above (present tense)
+- [ ] Contains one of the PR categories in the name
+- [ ] Describes changes in the format above
 - [ ] Links to an existing issue or discussion 
 - [ ] Has a "How to test" section
 

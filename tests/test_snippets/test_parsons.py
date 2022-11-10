@@ -58,5 +58,5 @@ class TestsParsonsPrograms(unittest.TestCase):
     def test_parsons(self, name, snippet):
         if snippet is not None:
             print(snippet.code)
-            result = HedyTester.validate_Hedy_code(snippet)
-            self.assertTrue(result)
+            result = HedyTester.check_Hedy_code_for_errors(snippet)
+            self.assertIsNone(result)
