@@ -697,7 +697,7 @@ class TypeValidator(Transformer):
             if in_lookup:
                 return type_in_lookup
             else:
-                raise hedy.exceptions.UndefinedVarException(name=var_name)
+                raise hedy.exceptions.UndefinedVarException(name=var_name, line_number=tree.meta.line)
 
         if tree.data == 'var_access_print':
             var_name = tree.children[0]
@@ -711,16 +711,16 @@ class TypeValidator(Transformer):
                 # we first check if the list of vars is empty since that is cheaper than stringdistancing.
                 # TODO: Can be removed since fall back handles that now
                 if len(self.lookup) == 0:
-                    raise hedy.exceptions.UnquotedTextException(level=self.level, unquotedtext=var_name)
+                    raise hedy.exceptions.UnquotedTextException(level=self.level, unquotedtext=var_name, line_number=tree.meta.line)
                 else:
                     # TODO: decide when this runs for a while whether this distance small enough!
                     minimum_distance_allowed = 4
                     for var_in_lookup in self.lookup:
                         if calculate_minimum_distance(var_in_lookup.name, var_name) <= minimum_distance_allowed:
-                            raise hedy.exceptions.UndefinedVarException(name=var_name)
+                            raise hedy.exceptions.UndefinedVarException(name=var_name, line_number=tree.meta.line)
 
                     # nothing found? fall back to UnquotedTextException
-                    raise hedy.exceptions.UnquotedTextException(level=self.level, unquotedtext=var_name)
+                    raise hedy.exceptions.UnquotedTextException(level=self.level, unquotedtext=var_name, line_number=tree.meta.line)
 
 
         # TypedTree with type 'None' and 'string' could be in the lookup because of the grammar definitions
@@ -999,7 +999,6 @@ class IsValid(Filter):
         return False, InvalidInfo(" ", line=args[0][2].line, column=args[0][2].column), meta
 
     def error_print_nq(self, meta, args):
-        # return error source to indicate what went wrong
         if len(args) > 1:
             text = args[1][1]
         else:
@@ -1185,7 +1184,7 @@ class ConvertToPython(Transformer):
             # TODO: check whether this is really never raised??
             # return first name with issue
             first_unquoted_var = unquoted_args[0]
-            raise exceptions.UndefinedVarException(name=first_unquoted_var)
+            raise exceptions.UndefinedVarException(name=first_unquoted_var, line_number=var_access_linenumber)
 
     # static methods
     @staticmethod
@@ -1823,7 +1822,7 @@ class ConvertToPython_12(ConvertToPython_11):
             # is the text a number? then no quotes are fine. if not, raise maar!
 
             if not (ConvertToPython.is_int(right_hand_side) or ConvertToPython.is_float(right_hand_side) or ConvertToPython.is_random(right_hand_side)):
-                raise exceptions.UnquotedAssignTextException(text = args[1])
+                raise exceptions.UnquotedAssignTextException(text=args[1])
 
         if isinstance(right_hand_side, Tree):
             return left_hand_side + " = " + right_hand_side.children[0]
@@ -2213,8 +2212,7 @@ def line_requires_indentation(line, lang):
             return True
 
     return False
-
-
+    
 def preprocess_blocks(code, level, lang):
     processed_code = []
     lines = code.split("\n")
@@ -2281,6 +2279,12 @@ def preprocess_blocks(code, level, lang):
             difference_in_indents = (previous_number_of_indents - current_number_of_indents)
             for i in range(difference_in_indents):
                 processed_code[-1] += '#ENDBLOCK\n'
+
+
+        if line_requires_indentation(line, lang):
+            next_line_needs_indentation = True
+        else:
+            next_line_needs_indentation = False
 
 
         if line_requires_indentation(line, lang):
@@ -2417,8 +2421,7 @@ def is_program_valid(program_root, input_string, level, lang):
             raise exceptions.IncompleteRepeatException(command='times', level=level, line_number=line)    
         elif invalid_info.error_type == 'print without quotes':
             unquotedtext = invalid_info.arguments[0]
-            # grammar rule is agnostic of line number so we can't easily return that here
-            raise exceptions.UnquotedTextException(level=level, unquotedtext=unquotedtext)
+            raise exceptions.UnquotedTextException(level=level, unquotedtext=unquotedtext, line_number=invalid_info.line)
         elif invalid_info.error_type == 'unsupported number':
             raise exceptions.UnsupportedFloatException(value=''.join(invalid_info.arguments))
         elif invalid_info.error_type == 'lonely text':

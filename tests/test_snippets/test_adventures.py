@@ -88,7 +88,7 @@ def collect_snippets(path, filtered_language = None):
   return Hedy_snippets
 
 # use this to filter on 1 lang, zh_Hans for Chinese, nb_NO for Norwegian, pt_PT for Portuguese
-# filtered_language = 'nl'
+# filtered_language = 'en'
 
 Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/adventures', filtered_language=filtered_language)]
 
@@ -104,5 +104,5 @@ class TestsAdventurePrograms(unittest.TestCase):
   def test_adventures(self, name, snippet):
     if snippet is not None:
       print(snippet.code)
-      result = HedyTester.validate_Hedy_code(snippet)
-      self.assertTrue(result)
+      result = HedyTester.check_Hedy_code_for_errors(snippet)
+      self.assertIsNone(result)
