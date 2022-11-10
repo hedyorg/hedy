@@ -483,6 +483,9 @@ adventures:
                     You do have to program a little bit extra for that. You must now name your main character first.
 
                     You can then put that name anywhere in a sentence.
+
+                    ## Challenge
+                    Can you make a story using a variable yourself? Can you add even more variables?
                 example_code: |-
                     ```
                     name {is} {ask} What is the name of the main character?
@@ -770,6 +773,21 @@ adventures:
                     {sleep}
                     {print} name
                     ```
+                story_text_2: |
+                    ## Challenge
+                    You can use variables to make the parrot say more than only your name. Can you complete this code?
+                example_code_2: |
+                    ```
+                    {print} Im Hedy the parrot
+                    name {is} {ask} whats your name?
+                    {print} name
+                    {sleep}
+                    {print} name
+                    surname {is} {ask} whats your surname?
+                    _
+                    {sleep}
+                    _
+                    ```
                 start_code: "{print} Im Hedy the parrot!"
             3:
                 story_text: |
@@ -1030,6 +1048,8 @@ adventures:
                     In level 2 he can point his nose in all directions.
 
                     Use 90 to turn a quarter. We call this degrees. A full turn is 360 degrees.
+
+                    ## Challenge
                     Can you make a figure with this code? Maybe a triangle or a circle?
                 example_code_2: |
                     ```
@@ -1434,8 +1454,8 @@ adventures:
 
                 example_code: |
                     ```
-                    choice {is} _
-                    {print} I choose choice
+                    _ {is} {ask} rock, paper, or scissors?
+                    {print} I choose _
                     ```
                 start_code: "# place your code here"
             3:
@@ -1714,7 +1734,7 @@ adventures:
                 story_text: |
                     ## Restaurant
                     In level 2 you could expand your restaurant by using variables. In level 1 Hedy could only {echo} the order once and only remember the last thing that was ordered.
-                    Now you can use variables and Hedy can remember both the food and the drinks!
+                    Now you can use variables and Hedy can remember both the food and the toppings!
                 example_code: |
                     ```
                     {print} Welcome to Hedy's restaurant!
@@ -1723,9 +1743,20 @@ adventures:
                     {print} Great choice! The food is my favorite!
                     topping {is} {ask} Would you like meat or veggies on that?
                     {print} food with topping is on its way!
-                    drinks {is} {ask} What would you like to drink with that?
-                    {print} Thank you for your order.
-                    {print} Your food and drinks will be right there!
+                    ```
+                story_text_2: |
+                    ## Challenge
+                    Can you make this code more elaborate? For example by adding drinks to the order? Or...?
+
+                example_code_2: |
+                    ```
+                    {print} Welcome to Hedy's restaurant!
+                    {print} Today we're serving pizza or lasagna.
+                    food {is} {ask} What would you like to eat?
+                    {print} Great choice! The food is my favorite!
+                    topping {is} {ask} Would you like meat or veggies on that?
+                    {print} food with topping is on its way!
+                    drinks {is} _
                     ```
                 start_code: "# place your code here"
             3:
@@ -2300,6 +2331,21 @@ adventures:
                     monster_1 {is} 👻
                     monster_2 {is} 🤡
                     monster_3 {is} 👶
+                    {print} You enter the haunted house.
+                    {print} Suddenly you see a monster_1
+                    {print} You run into the other room, but a monster_2 is waiting there for you!
+                    {print} Oh no! Quickly get to the kitchen.
+                    {print} But as you enter monster_3 attacks you!
+                    ```
+                story_text_2: |
+                    ## Challenge
+                    In the example above the monsters are predetermined. So each time you run your code, the output is the same.
+                    Can you add `{ask}` commands to make the haunted house interactive and have the players choose the monsters they come across?
+                example_code_2: |
+                    ```
+                    monster_1 {is} _
+                    monster_2 {is} _
+                    monster_3 {is} _
                     {print} You enter the haunted house.
                     {print} Suddenly you see a monster_1
                     {print} You run into the other room, but a monster_2 is waiting there for you!
