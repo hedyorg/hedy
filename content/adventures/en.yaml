@@ -471,6 +471,9 @@ adventures:
                     {print} He hears crazy noises everywhere
                     {print} He's afraid this is a haunted forest
                     ```
+                story_text_2: |
+                    ## Challenge
+                    Can you make your own story in Hedy now by using `{print}` , `{ask}` and `{echo}`?
                 start_code: "{print} Your story starts here"
             2:
                 story_text: |
@@ -743,6 +746,15 @@ adventures:
                     {echo}
                     {echo}
                     ```
+                story_text_2: |
+                    ## Challenge
+                    Can you make the parrot ask a different question? Fill in the blanks in the example!
+                example_code_2: |
+                    ```
+                    {print} Im Hedy the parrot
+                    {ask} _
+                    {echo}
+                    {echo}
                 start_code: "{print} Im Hedy the parrot"
             2:
                 story_text: |
@@ -973,8 +985,10 @@ adventures:
                     You can also use Hedy to draw. By combining turns and lines, you can make a square or stairs!
 
                     Using `{forward}` you draw a line forwards. The number behind it determines how far the turtle will walk. `{turn} {right}` turns a quarter turn in clockwise direction, `{turn} {left}` turns counter clockwise.
+
                     If you want to go backwards, you use the `{forward}` command but with a negative number. So for example `{forward} -100`
 
+                    ## Challenge
                     This is the start of a little staircase. Can you make it have 5 steps?
 
                 example_code: |
@@ -1402,7 +1416,16 @@ adventures:
                     {ask} choose from rock, paper or scissors
                     {echo} so your choice was:
                     ```
-                    Instead of using words, you could also use emojis of course: ✊✋✌
+                story_text_2: |
+                    ## Challenge
+                    Instead of using words, you could also use emojis: ✊✋✌
+                    Can you create a code using emojis?
+                example_code_2: |
+                    ```
+                    {print} what do you choose?
+                    {ask} choose from _
+                    {echo} so your choice was:
+                    ```
                 start_code: "{print} Welcome to your own rock scissors paper!"
             2:
                 story_text: |
