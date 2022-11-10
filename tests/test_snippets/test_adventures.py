@@ -90,6 +90,12 @@ def collect_snippets(path, filtered_language = None):
 # use this to filter on 1 lang, zh_Hans for Chinese, nb_NO for Norwegian, pt_PT for Portuguese
 filtered_language = 'en'
 
+
+# This bit of code here allows filtering out languages locally, but will throw an error
+# on GitHub Actions (or other CI system) so nobody accidentally commits this.
+if os.getenv('CI') and filtered_language:
+    raise RuntimeError('Whoops, it looks like you committed a change to "filtered_language".')
+
 Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/adventures', filtered_language=filtered_language)]
 
 level = 4
