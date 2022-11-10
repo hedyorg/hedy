@@ -508,31 +508,31 @@ sections:
                 solution_code: "prix = 0 \nprint 'Bienvenue dans le restaurant de hamburgers' \nburger = ask 'Veux-tu un burger ?' \nif burger = oui prix = prix + 10 \nboisson = ask 'Veux-tu une boisson ?' \nif boisson = oui prix = prix + 4 \nprint 'Ce sera ' prix ' s il te plaît'\n"
     -   level: '7'
         sections:
-        -   title: Students forget one of the word of the repeat command, or they forget the print command
+        -   title: Les élèves oublient l’un des mots de la commande repeat ou oublient la commande print
             example:
-                error_text: "Make sure that the students know to use both the full repeat command and the print command.\n"
-                error_code: "repeat 3 times 'For he`s a jolly good fellow'\nrepeat 3 print 'Which nobody can deny!'\n"
-                solution_text: "This is the correct code:\n"
-                solution_code: "repeat 3 times print 'For he`s a jolly good fellow'\nrepeat 3 times print 'Which nobody can deny!'\n"
-        -   title: Students try to repeat multiple lines
+                error_text: "Assures-toi que tes élèves savent utiliser la commande repeat complète et la commande print.\n"
+                error_code: "repeat 3 times 'Car c`est un bon camarade'\nrepeat 3 print 'personne ne dira le contraire !'\n"
+                solution_text: "Voici le code correct :\n"
+                solution_code: "repeat 3 times print 'Car c`est un bon camarade'\nrepeat 3 times print 'personne ne dira le contraire !'\n"
+        -   title: Les élèves essaient de répéter plusieurs lignes
             example:
-                error_code: "repeat 3 times drink = ask 'What would you like to drink?'\nprint drink\n"
-                solution_text: "You should go to the next level to be able to repeat multiple lines. So on this level you'll have to print everything seperately.\n"
-                solution_code: "drink = ask 'What would you like to drink?'\nprint drink\ndrink = ask 'What would you like to drink?'\nprint drink\ndrink = ask 'What would you like to drink?'\nprint drink\n"
-                error_text: "In this level you can only repeat one line of code multiple times. In this code the student wanted to print 3 different drinks, but it won't work. It will ask the question 3 times and only print the last answer.\n"
-        -   title: Students make programs that take too long to run
+                error_code: "repeat 3 times boisson = ask 'Que veux-tu boire ?'\nprint boisson\n"
+                solution_text: "Tu dois passer au niveau suivant pour pouvoir répéter plusieurs lignes de code. À ce niveau, tu dois tout imprimer séparément.\n"
+                solution_code: "boisson = ask 'Que veux-tu boire ?'\nprint boisson\nboisson = ask 'Que veux-tu boire ?'\nprint boisson\nboisson = ask 'Que veux-tu boire ?'\nprint boisson\n"
+                error_text: "Dans ce niveau, tu ne peux seulement répéter qu'une ligne de code plusieurs fois. Dans ce code, l'élève voulait imprimer 3 boissons différentes, mais cela ne fonctionnera pas. Hedy posera la question 3 fois et n'imprimera que la dernière réponse.\n"
+        -   title: Les élèves créent des programmes qui prennent trop de temps à s'exécuter
             example:
-                error_text: "In this level it's very easy to make long codes. The students aren't allowed to make programs that take to long to load (to save our servers).\n"
-                error_code: "repeat 100 times print 'How many times can I repeat this?'\n"
-                solution_text: "Make sure the codes aren't too long\n"
-                solution_code: "repeat 20 times print 'This is enough'\n"
+                error_text: "Dans ce niveau, il est très facile de créer des programmes à temps d’exécution long. Les élèves sont restreints à faire des programmes à temps d’exécution court (pour ménager nos serveurs).\n"
+                error_code: "repeat 100 times print 'Ou est la limite de répétition ?'\n"
+                solution_text: "Assures toi que les programmes ne prennent pas trop de temps\n"
+                solution_code: "repeat 20 times print 'C`est suffisant'\n"
     -   sections:
         -   example:
-                error_code: "repeat 3 times\nprint 'hello'\n"
-                error_text: "Indentation is a new concept in this level, that is hard to use for some students. Make sure they practise some simple codes before making a whole program with it.\n"
-                solution_text: "This is the correct code:\n"
-                solution_code: "repeat 3 times\n    print 'hello'\n"
-            title: Students use the indentation wrong
+                error_code: "repeat 3 times\nprint 'bonjour'\n"
+                error_text: "L’indentation est un nouveau concept à ce niveau, difficile à utiliser pour certains élèves. Fais les s'exercer sur des bouts de code simples avant de passer sur un programme complet.\n"
+                solution_text: "Voici le code correct :\n"
+                solution_code: "repeat 3 times\n    print 'bonjour'\n"
+            title: Les élèves utilisent mal l’indentation
         -   title: Students only repeat 1 line when they wanted to repeat multiple lines
             example:
                 solution_text: "In the correct code the third line starts with indentation too. This way it belongs to the repeat block and therefore it will be repeated 3 times.\nShowing your students these differences can help them understand why we need indentation to make our programs work.\n"
