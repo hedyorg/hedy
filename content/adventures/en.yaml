@@ -518,6 +518,9 @@ adventures:
                     ```
                 story_text_3: |
                     This is an example of the `{remove}` command in your story
+
+                    ## Challenge
+                    Can you use the 3 new commands `{at} {random}` , `{add} {to}` and `{remove} {from}` in your own story?
                 example_code_3: |
                     ```
                     {print} His backpack got way too heavy.
@@ -535,12 +538,12 @@ adventures:
                 example_code: |
                     ```
                     name {is} Hans
-                    {print} 'The name of the main character is' name
-                    {print} name 'is now going to walk in the woods'
-                    {print} name 'is a bit scared'
+                    {print}  _ The name of the main character is _ name
+                    {print} name  _ is now going to walk in the woods _
+                    {print} name _ is a bit scared _
                     animals {is} 🦔, 🐿, 🦉, 🦇
-                    {print} 'He hears the sound of an' animals {at} {random}
-                    {print} name 'is afraid this is a haunted forest'
+                    {print} _ He hears the sound of a _ animals {at} {random}
+                    {print} name _ is afraid this is a haunted forest _
                     ```
                 start_code: "{print} 'Your story will be printed here!'"
             5:
@@ -793,13 +796,15 @@ adventures:
                 story_text: |
                     ## Parrot
                     Teach your parrot a new word with `{add}`.
+                    ## Challenge
+                    How can make your parrot say multiple words?
                 example_code: |
                     ```
                     words {is} squawk, Hedy
                     {print} Train your parrot!
                     new_word {is} {ask} Which word do you want to teach them?
                     {add} new_word {to_list} words
-                    {print} 🧒 Say new_word , Hedy!
+                    {print} 🧒 Say new_word, Hedy!
                     {print} 🦜 words {at} {random}
                     ```
                 start_code: "# place your code here"
@@ -1069,7 +1074,9 @@ adventures:
                 story_text: |
                     ## Searching turtle
                     In this level you can use use `{at} {random}` with the drawing turtle. A random choice makes the turtle walk a different path each time.
-                    Use `{at} {random}` to choose a value from a list. You can copy and paste lines 2 and 3 to create a longer random path.
+                    Use `{at} {random}` to choose a value from a list.
+                    ## Challenge
+                    Can you copy and paste lines 2 and 3 to create a longer random path?
                 example_code: |
                     ```
                     angles {is} 10, 50, 90, 150, 250
@@ -1086,7 +1093,7 @@ adventures:
                     In level 4 you have to use quotation marks with `{print}` and `{ask}`. Also when drawing!
                 example_code: |
                     ```
-                    {print} 'Drawing figures'
+                    {print} _ Drawing figures _
                     angle {is} 90
                     {turn} angle
                     {forward} 25
@@ -1210,13 +1217,13 @@ adventures:
                     ```
                 story_text_2: |
                     ## Hack the dishwashing program!
-                    Don't feel like doing the dishes yourself? Hack the program to remove your name from the list.
+                    Don't feel like doing the dishes yourself? Hack the program by removing your name from the list with the `{remove}` `{from}` command.
                 example_code_2: |
                     ```
                     people {is} mom, dad, Emma, Sophie
                     your_name {is} {ask} Who are you?
-                    {remove} your_name {from} people
-                    {print} people {at} {random} does the dishes
+                    _ your_name _ people
+                    {print} _ _ _ does the dishes
                     ```
                 start_code: "{print} Who does the dishes?"
             4:
@@ -1326,6 +1333,14 @@ adventures:
                     ```
                     choices {is} 1, 2, 3, 4, 5, earthworm
                     {print} choices {at} {random}
+                    ```
+                story_text_2: |
+                    ## Challenge
+                    The dice in the example above are dice for a specific game. Can you make normal dice?
+                    Or other special dice from a different game?
+                example_code_2: |
+                    ```
+                    choices {is} _
                     ```
                 start_code: "{print} What will the die indicate this time?"
             4:
@@ -1470,6 +1485,16 @@ adventures:
                     ```
                     choices {is} rock, paper, scissors
                     {print} choices {at} {random}
+                    ```
+                story_text_2: |
+                    ## Challenge
+                    Now you only have one player, so can you add a second player?
+                    You can even use variables to name player 1 and player 2.
+                example_code_2: |
+                    ```
+                    choices {is} rock, paper, scissors
+                    {print} player 1 chooses... choices {at} {random}
+                    {print} player 2 _
                     ```
                 start_code: "{print} Welcome to your own rock scissors paper!"
             4:
@@ -1765,7 +1790,8 @@ adventures:
                     Having trouble to decide what you wanna have for dinner? You can let Hedy choose for you!
                     Simply add lists of your favorite (or least favorite) meals and Hedy can randomly choose your dinner.
                     You can also have a bit of fun, by letting Hedy choose the price for your dinner as well! What will you get?
-
+                    ## Challenge
+                    Can you make your own version of the random restaurant?
                 example_code: |
                     ```
                     {print} Welcome to Hedy's Random Restaurant!
@@ -1791,30 +1817,30 @@ adventures:
                     {print} Mystery milkshake
                     flavors {is} strawberry, chocolate, vanilla
                     allergies {is} {ask} Are you allergic to any falvors?
-                    {remove} allergies {from} flavors
+                    _
                     {print} You get a flavors {at} {random} milkshake
                     ```
                 start_code: "# place your code here"
             4:
                 story_text: |
                     ## Restaurant
-                    In this level you have to use quotation marks when using the `{print}` command.
-                    Can you make your code from the previous levels work in this level too by adding the quotation marks?
+                    In this level you have to use quotation marks when using the `{print}` or `{ask}` command.
 
-                    Be careful! In the previous levels apostrophes were allowed in the text, but in this level Hedy will confuse them for quotation marks and the code will not work!
-                    So instead of typing  `{print} Today we're serving pizza` , you should type `{print} 'Today we are serving pizza'`
+                    ## Challenge
+                    Add the quotation marks to this code to make it work! Be careful: variables should not be in quotation marks.
                 example_code: |
                     ## Example Hedy Restaurant
                     ```
-                    {print} 'Welcome to Hedys restaurant!'
-                    {print} 'Today we are serving pizza or lasagna.'
-                    food {is} {ask} 'What would you like to eat?'
-                    {print} 'Great choice! The ' food ' is my favorite!'
-                    topping {is} {ask} 'Would you like meat or veggies on that?'
-                    {print} food ' with ' topping ' is on its way!'
-                    drinks {is} {ask} 'What would you like to drink with that?'
-                    {print} 'Thank you for your order.'
-                    {print} 'Your ' food ' and ' drinks ' will be right there!'
+                    _ Add the quotation marks to this code _
+                    {print} Welcome to Hedys restaurant!
+                    {print} Today we are serving pizza or lasagna.
+                    food {is} {ask} What would you like to eat?
+                    {print} Great choice! The  food  is my favorite!
+                    topping {is} {ask} Would you like meat or veggies on that?
+                    {print} food  with  topping  is on its way!
+                    drinks {is} {ask} What would you like to drink with that?
+                    {print} Thank you for your order.
+                    {print} Your  food  and  drinks  will be right there!
                     ```
                 start_code: "# place your code here"
             5:
@@ -2114,7 +2140,7 @@ adventures:
                     {print} answers {at} {random}
                     ```
                 story_text_2: |
-                    ## Challenges
+                    ## Challenge
                     Now, Hedy can only answer yes, no or maybe. Can you give Hedy more answer options, like 'definitely' or '{ask} again'.
                 start_code: "# place your code here"
             4:
@@ -2128,13 +2154,17 @@ adventures:
 
                     Important! Mind that now that we're using quotation marks, Hedy will get confused when you use the apostrophe for contractions like I'm or What's.
                     Make sure to remove those apostrophes and change the spelling to Im or Whats.
+
+                    ## Challenge
+                    We have removed all the quotation marks from this example code, can you add them in all the right places?
                 example_code: |
                     ```
-                    {print} 'Im Hedy the fortune teller!'
-                    question {is} {ask} 'What do you want to know?'
-                    {print} 'This is your question: ' question
+                    _ Add the quotation marks to this code _
+                    {print} Im Hedy the fortune teller!
+                    question {is} {ask} What do you want to know?
+                    {print} This is your question:  question
                     answers {is} yes, no, maybe
-                    {print} 'My crystal ball says...'
+                    {print} My crystal ball says...
                     {sleep} 2
                     {print} answers {at} {random}
                     ```
@@ -2374,10 +2404,17 @@ adventures:
                     ## Challenge
                     This story is pretty straight {forward}, maybe you can spook it up a bit by adding a more exciting story.
                     Also you have very limited outcomes right now, there are only 3 options of what's behind the doors. Maybe you can think of more monsters to add to the list!
-
+                story_text_3: |
                     ## Change the game into a tv gameshow!
                     Lastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!
                     Can you do it?
+                example_code_3: |
+                    ```
+                    {print} The big gameshow!
+                    {print} There are 3 suitcases in front of you...
+                    {print} One of them contains _
+                    _
+                    ```
                 start_code: "# place your code here"
             4:
                 story_text: |
@@ -2386,12 +2423,12 @@ adventures:
                     Can you make your Haunted House level 4 proof?
                 example_code: |
                     ```
-                    {print} _Escape from the haunted house!_
-                    {print} _There are 3 doors in front of you..._
-                    choice {is} {ask} _Which door do you choose?_
-                    {print} _You picked door ..._ choice
+                    {print} _ Escape from the haunted house! _
+                    {print} _ There are 3 doors in front of you... _
+                    choice {is} {ask} _ Which door do you choose? _
+                    {print} _ You picked door ... _ choice
                     monsters {is} a zombie, a vampire, NOTHING YOUVE ESCAPED
-                    {print} _You see..._
+                    {print} _ You see... _
                     {sleep}
                     {print} monsters {at} {random}
                      ```
