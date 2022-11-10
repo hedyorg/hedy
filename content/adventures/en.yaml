@@ -551,6 +551,7 @@ adventures:
                     ## Story
                     In this level you can program different endings, which will make your story even more fun.
 
+                    ## Challenge
                     Think of two endings for your story, for example:
 
                     - The princess is walking through the forest
@@ -812,6 +813,7 @@ adventures:
                 story_text: |
                     ## Parrot
                     Reward your parrot if it says the correct word!
+                    Finish the code by filling in the 4 missing commands.
                 example_code: |
                     ```
                     words {is} squawk, Hedy
@@ -821,8 +823,8 @@ adventures:
                     said_word {is} words {at} {random}
                     {print} '🧒 Say ' new_word ', Hedy!'
                     {print} '🦜 ' said_word
-                    {if} said_word {is} new_word {print} '🧒 Great job, Hedy! 🍪'
-                    {else} {print} '🧒 No, Hedy! Say ' new_word
+                    _ said_word {is} new_word _ '🧒 Great job, Hedy! 🍪'
+                    _ _ '🧒 No, Hedy! Say ' new_word
                     ```
                 start_code: "# place your code here"
     songs:
@@ -2440,6 +2442,9 @@ adventures:
                     Up until this level the haunted house game always asked the player to choose a door, but as you might have noticed, they didn't really have to answer correctly.
                     If the player filled in a completely random answer, the game would still work and the player might even win (despite not picking a door).
                     In this level you can only win the game by picking the same door Hedy picked randomly.
+
+                    ## Challenge
+                    Can you find the 4 missing words to complete the code?
                 example_code: |
                     ```
                     {print} 'Escape from the haunted house!'
@@ -2450,7 +2455,7 @@ adventures:
                     {print} 'You chose door...' chosen_door
                     {sleep}
                     correct_door {is} doors {at} {random}
-                    {if} chosen_door {is} correct_door {print} 'Great! Youve escaped!'
+                    _ _ _ _ {print} 'Great! Youve escaped!'
                     {else} {print} 'Oh no! You are being eaten by a...' monsters {at} {random}
                     ```
 
@@ -2654,6 +2659,9 @@ adventures:
                 story_text: |
                     ## Learn a new language
                     Make your own program to practice your vocabulary in a new language.
+
+                    ## Challenge
+                    Can you make this program for a different language? Or can you add more words to the French one?
                 example_code: |
                     ```
                     {print} 'Learn French!'
