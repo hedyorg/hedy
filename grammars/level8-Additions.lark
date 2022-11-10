@@ -9,6 +9,6 @@ equality_check: (textwithoutspaces | NUMBER) (_IS | _EQUALS) (textwithoutspaces 
 
 
 // from level 8 on if is implemented slightly differently
-elses: _EOL (_SPACE)* _ELSE (_SPACE)* _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
+elses: _EOL (_SPACE)* _ELSE (_SPACE)* _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK _SPACE?
 //'if' cannot be used in Python, hence the name of the rule is 'ifs'
-ifs: _IF condition _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
+ifs: _IF condition _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK _SPACE?
