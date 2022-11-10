@@ -14,6 +14,8 @@ import json
 import threading
 from typing import List, Optional
 
+logger = logging.getLogger(__name__)
+
 
 class TableStorage(metaclass=ABCMeta):
     def get_item(self, table_name, key): ...
@@ -420,7 +422,7 @@ class MemoryStorage(TableStorage):
             except IOError:
                 pass
             except json.decoder.JSONDecodeError as e:
-                logging.warning(f'Error loading {filename}. The next write operation will overwrite the database with a clean copy: {e}')
+                logger.warning(f'Error loading {filename}. The next write operation will overwrite the database with a clean copy: {e}')
 
     # NOTE: on purpose not @synchronized here
     def get_item(self, table_name, key):

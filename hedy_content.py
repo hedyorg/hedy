@@ -1,9 +1,14 @@
 import copy
 import os
+import logging
+
 from babel import Locale, languages
 
+from utils import customize_babel_locale
 from website.yaml_file import YamlFile
 import iso3166
+
+logger = logging.getLogger(__name__)
 
 # Define and load all countries
 COUNTRIES = {k: v.name for k, v in iso3166.countries_by_alpha2.items()}
@@ -33,12 +38,15 @@ ALL_LANGUAGES = {}
 ALL_KEYWORD_LANGUAGES = {}
 
 # Todo TB -> We create this list manually, but it would be nice if we find a way to automate this as well
-NON_LATIN_LANGUAGES = ['ar', 'bg', 'bn', 'el', 'fa', 'hi', 'he', 'ru', 'zh_Hans']
+NON_LATIN_LANGUAGES = ['ar', 'bg', 'bn', 'el', 'fa', 'hi', 'he', 'pa_PK', 'ru', 'zh_Hans']
 
-# It would be nice if we created this list manually but couldn't find a way to retrieve this from Babel
-NON_BABEL = ['tn']
+# Babel has a different naming convention than Weblate and doesn't support some languages -> fix this manually
+CUSTOM_BABEL_LANGUAGES = {'pa_PK': 'pa_Arab_PK', 'tn': 'en'}
+# For the non-existing language manually overwrite the display language to make sure it is displayed correctly
+CUSTOM_LANGUAGE_TRANSLATIONS = {'tn': 'Setswana'}
+customize_babel_locale(CUSTOM_BABEL_LANGUAGES)
 
-ADVENTURE_ORDER = [
+ADVENTURE_NAMES = [
     'default',
     'parrot',
     'fortune',
@@ -61,6 +69,203 @@ ADVENTURE_ORDER = [
     'end'
 ]
 
+ADVENTURE_ORDER_PER_LEVEL = {
+    1: [
+        'default',
+        'parrot',
+        'fortune',
+        'haunted',
+        'restaurant',
+        'story',        
+        'turtle',        
+        'rock',
+        'next',
+        'end'
+    ],
+    2: [
+        'default',
+        'parrot',
+        'haunted',
+        'restaurant',
+        'story',
+        'turtle',
+        'rock',  
+        'next',
+        'end'
+    ],
+    3: [
+        'default',
+        'parrot',
+        'fortune',
+        'haunted',
+        'restaurant',
+        'story',
+        'turtle',
+        'dishes',
+        'dice',
+        'rock',
+        'next',
+        'end'
+    ],
+    4: [
+        'default',
+        'fortune',
+        'haunted',
+        'restaurant',
+        'story',
+        'turtle',
+        'dishes',
+        'dice',
+        'rock',
+        'next',
+        'end'
+    ],
+    5: [
+        'default',
+        'parrot',
+        'fortune',
+        'haunted',
+        'restaurant',
+        'story',
+        'turtle',
+        'dishes',
+        'dice',
+        'rock',
+        'language',
+        'next',
+        'end'
+    ],
+    6: [
+        'default',
+        'fortune',
+        'restaurant',
+        'songs',
+        'turtle',
+        'dishes',
+        'dice',
+        'calculator',
+        'next',
+        'end'
+    ],
+    7: [
+        'default',
+        'fortune',
+        'restaurant',
+        'story',
+        'songs',
+        'turtle',
+        'dishes',
+        'dice',
+        'next',
+        'end'
+    ],
+    8: [
+        'default',  
+        'fortune',
+        'haunted',
+        'restaurant',
+        'story',
+        'songs',
+        'turtle',
+        'next',
+        'end'
+    ],
+    9: [
+        'default',
+        'haunted',
+        'restaurant',
+        'story',  
+        'rock',
+        'calculator',
+        'next',
+        'end'
+    ],
+    10: [
+        'default',
+        'fortune',
+        'restaurant',
+        'story',
+        'songs',
+        'dishes',
+        'dice',
+        'rock',
+        'calculator',  
+        'next',
+        'end'
+    ],
+    11: [
+        'default',
+        'haunted',
+        'restaurant',
+        'songs',  
+        'next',
+        'end'
+    ],
+    12: [
+        'default',
+        'fortune',
+        'restaurant',
+        'story',
+        'songs',    
+        'calculator',
+        'piggybank',  
+        'secret',
+        'next',
+        'end'
+    ],
+    13: [
+        'default',  
+        'restaurant',
+        'story',
+        'rock',
+        'secret',
+        'tic',
+        'next',
+        'end'
+    ],
+    14: [
+        'default',
+        'haunted',
+        'calculator',
+        'piggybank',
+        'quizmaster',
+        'tic',
+        'next',
+        'end'
+    ],
+    15: [
+        'default',
+        'restaurant',
+        'story',
+        'dice',
+        'rock',
+        'calculator',
+        'tic',
+        'next',
+        'end'
+    ],
+    16: [
+        'default',
+        'haunted',
+        'songs',
+        'language',
+        'next',
+        'end'
+    ],
+    17: [
+        'default',
+        'tic',
+        'blackjack',
+        'next',
+        'end'
+    ],
+    18: [
+        'default',
+        'next',
+        'end'
+    ]
+}
+
 RESEARCH = {}
 for paper in sorted(os.listdir('content/research'), key=lambda x: int(x.split("_")[-1][:-4]), reverse=True):
     # An_approach_to_describing_the_semantics_of_Hedy_2022.pdf -> 2022, An approach to describing the semantics of Hedy
@@ -77,17 +282,16 @@ if not os.path.isdir('translations'):
     ALL_KEYWORD_LANGUAGES['en'] = 'EN'
 
 for folder in os.listdir('translations'):
-    # we cant properly open non-supported langs like Tswana (tn)
-    # so we have to load en for those until Babel adds support
-    if folder in NON_BABEL:
-        folder = 'en'
     locale_dir = os.path.join('translations', folder, 'LC_MESSAGES')
     if not os.path.isdir(locale_dir):
         continue
-
     if filter(lambda x: x.endswith('.mo'), os.listdir(locale_dir)):
+        if folder in CUSTOM_LANGUAGE_TRANSLATIONS.keys():
+            languages[folder] = CUSTOM_LANGUAGE_TRANSLATIONS.get(folder)
+            continue
         locale = Locale.parse(folder)
         languages[folder] = locale.display_name.title()
+
 
 for l in sorted(languages):
     ALL_LANGUAGES[l] = languages[l]
@@ -135,11 +339,11 @@ class Commands:
                     try:
                         command[k] = v.format(**KEYWORDS.get(language))
                     except IndexError:
-                        print("There is an issue due to an empty placeholder in the following line:")
-                        print(v)
+                        logger.error(
+                            f"There is an issue due to an empty placeholder in line: {v}")
                     except KeyError:
-                        print("There is an issue due to a non-existing key in the following line:")
-                        print(v)
+                        logger.error(
+                            f"There is an issue due to a non-existing key in line: {v}")
             keyword_data[level] = commands
         return keyword_data
 
@@ -178,7 +382,7 @@ class Adventures:
     def cache_adventure_keywords(self, language):
         # Sort the adventure to a fixed structure to make sure they are structured the same for each language
         sorted_adventures = {}
-        for adventure_index in ADVENTURE_ORDER:
+        for adventure_index in ADVENTURE_NAMES:
             if self.file.get(adventure_index, None):
                 sorted_adventures[adventure_index] = (self.file.get(adventure_index))
         self.file = sorted_adventures
@@ -191,11 +395,11 @@ class Adventures:
                     try:
                         parsed_adventure.get('levels').get(level)[k] = v.format(**KEYWORDS.get(language))
                     except IndexError:
-                        print("There is an issue due to an empty placeholder in the following line:")
-                        print(v)
+                        logger.error(
+                            f"There is an issue due to an empty placeholder in line: {v}")
                     except KeyError:
-                        print("There is an issue due to a non-existing key in the following line:")
-                        print(v)
+                        logger.error(
+                            f"There is an issue due to a non-existing key in line: {v}")
             keyword_data[short_name] = parsed_adventure
         return keyword_data
 
@@ -272,11 +476,11 @@ class ParsonsProblem:
                     try:
                         exercises.get(number).get('code_lines')[k] = v.format(**KEYWORDS.get(language))
                     except IndexError:
-                        print("There is an issue due to an empty placeholder in the following line:")
-                        print(v)
+                        logger.error(
+                            f"There is an issue due to an empty placeholder in line: {v}")
                     except KeyError:
-                        print("There is an issue due to a non-existing key in the following line:")
-                        print(v)
+                        logger.error(
+                            f"There is an issue due to a non-existing key in line: {v}")
             keyword_data[level] = exercises
         return keyword_data
 

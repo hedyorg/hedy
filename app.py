@@ -1,8 +1,8 @@
 # coding=utf-8
 import copy
-from itertools import count
-from multiprocessing.dummy import active_children
-
+from logging_config import LOGGING_CONFIG
+from logging.config import dictConfig as logConfig
+logConfig(LOGGING_CONFIG)
 from website import (
     auth_pages, classes, profile, parsons, statistics, quiz, admin, for_teachers, programs,
 )
@@ -13,7 +13,7 @@ from website.auth import current_user, login_user_from_token_cookie, requires_lo
 from website.yaml_file import YamlFile
 from website import querylog, aws_helpers, jsonbin, translating, ab_proxying, cdn, database, achievements
 import hedy_translation
-from hedy_content import COUNTRIES, ALL_LANGUAGES, ALL_KEYWORD_LANGUAGES, NON_LATIN_LANGUAGES, NON_BABEL
+from hedy_content import ADVENTURE_ORDER_PER_LEVEL, COUNTRIES, ALL_LANGUAGES, ALL_KEYWORD_LANGUAGES, NON_LATIN_LANGUAGES
 import hedyweb
 import hedy_content
 from flask_babel import gettext, Babel
@@ -34,6 +34,8 @@ import datetime
 import sys
 import textwrap
 import zipfile
+
+logger = logging.getLogger(__name__)
 
 # Todo TB: This can introduce a possible app breaking bug when switching to Python 4 -> e.g. Python 4.0.1 is invalid
 if (sys.version_info.major < 3 or sys.version_info.minor < 7):
@@ -135,17 +137,8 @@ def load_adventures_per_level(level, keyword_lang):
     return all_adventures
 
 
-logging.basicConfig(
-    level=logging.DEBUG,
-    format='[%(asctime)s] %(levelname)-8s: %(message)s')
-
-# Return the session language, if not: return best match
-
-
 @babel.localeselector
 def get_locale():
-    if session.get("lang", request.accept_languages.best_match(ALL_LANGUAGES.keys(), 'en')) in NON_BABEL:
-        return "en"
     return session.get("lang", request.accept_languages.best_match(ALL_LANGUAGES.keys(), 'en'))
 
 
@@ -274,7 +267,7 @@ def setup_language():
 
 
 if utils.is_heroku() and not os.getenv('HEROKU_RELEASE_CREATED_AT'):
-    logging.warning(
+    logger.warning(
         'Cannot determine release; enable Dyno metadata by running "heroku labs:enable runtime-dyno-metadata -a <APP_NAME>"')
 
 
@@ -440,8 +433,11 @@ def parse_by_id(user):
     program = DATABASE.program_by_id(body.get('id'))
     if program and program.get('username') == user['username']:
         try:
-            hedy.transpile(program.get('code'), program.get(
-                'level'), program.get('lang'))
+            hedy.transpile(
+                program.get('code'),
+                program.get('level'),
+                program.get('lang')
+            )
             return {}, 200
         except:
             return {"error": "parsing error"}, 200
@@ -861,7 +857,12 @@ def index(level, program_id):
         adventures = load_adventures_per_level(level, keyword_language)
     else:
         adventures = load_adventures_per_level(level, g.keyword_lang)
-
+    
+    # Sort the adventures based on the ordering defined
+    adventures_order = ADVENTURE_ORDER_PER_LEVEL[level]
+    index_map = {v: i for i, v in enumerate(adventures_order)}
+    adventures = sorted(adventures, key = lambda pair: index_map.get(pair['short_name'], len(adventures_order)))
+    
     # Initially all levels are available -> strip those for which conditions are not met or not available yet
     available_levels = list(range(1, hedy.HEDY_MAX_LEVEL + 1))
 
@@ -1027,8 +1028,12 @@ def get_specific_adventure(name, level):
     except:
         return utils.error_page(error=404, ui_message=gettext('no_such_level'))
 
-    adventure = [x for x in load_adventures_per_level(
-        level, g.keyword_lang) if x.get('short_name') == name]
+    # In case of a "forced keyword language" -> load that one, otherwise: load the one stored in the g object
+    keyword_language = request.args.get('keyword_language', default=None, type=str)
+    if keyword_language:
+        adventure = [x for x in load_adventures_per_level(level, keyword_language) if x.get('short_name') == name]
+    else:
+        adventure = [x for x in load_adventures_per_level(level, g.keyword_lang) if x.get('short_name') == name]
     if not adventure:
         return utils.error_page(error=404, ui_message=gettext('no_such_adventure'))
 
@@ -1037,8 +1042,11 @@ def get_specific_adventure(name, level):
     next_level = level+1 if [x for x in load_adventures_per_level(
         level+1, g.keyword_lang) if x.get('short_name') == name] else False
 
-    return hedyweb.render_specific_adventure(level_number=level, adventure=adventure, version=version(),
-                                             prev_level=prev_level, next_level=next_level)
+    # Add the commands to enable the language switcher dropdown
+    commands = hedy.commands_per_level.get(level)
+
+    return hedyweb.render_specific_adventure(commands=commands, level_number=level, adventure=adventure,
+                                             version=version(), prev_level=prev_level, next_level=next_level)
 
 
 @app.route('/cheatsheet/', methods=['GET'], defaults={'level': 1})
@@ -1771,7 +1779,7 @@ if __name__ == '__main__':
     is_in_debugger = sys.gettrace() is not None
 
     on_server_start()
-
+    logger.debug(f'app starting in debug mode')
     # Threaded option enables multiple instances for multiple user access support
     app.run(threaded=True, debug=not is_in_debugger,
             port=config['port'], host="0.0.0.0")

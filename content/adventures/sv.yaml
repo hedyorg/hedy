@@ -62,113 +62,113 @@ adventures:
                 start_code: "{for} räknare {in} {range} 1 {to} 5\n    {print} räknare"
                 story_text: "## Loopar!\n`{print}` fungerar precis som förut men vi lägger till en ny variant av `{for}`. Du kan nu skriva `{for} räknare {in} {range} 1 {to} 5` och använda `räknare` i ditt program.\nTesta och se vad som händer! Kom ihåg att använda indentering efter `{for}`- och `{if}`-kommandona. (Det betyder att raderna börjar med fyra mellanslag.)"
             12:
-                start_code: "{print} 'decimal numbers now need to use a dot'\n{print} 2.5 + 2.5"
-                story_text: "## Numbers and texts\n**Decimal numbers**\nSo far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the `.` for decimal numbers."
-                example_code: "```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n"
-                story_text_2: "**All texts need to be in quotation marks**\nFor this level on you will also have to use quotation marks when storing a text with `=`:\n"
-                example_code_3: "```\nsuperheroes = 'Spiderman', 'Batman', 'Iron Man'\n{print} superheroes {at} {random}\n```\n"
-                story_text_4: "**All text after `{if}` comparisons need quotation marks too**\n"
-                example_code_4: "```\nname = {ask} 'What is your name?'\n{if} name = 'Hedy the Robot'\n    {print} 'Hi there!'\n```\n"
-                story_text_5: "**Numbers don't need quotation marks**\nFor numbers, you do not use quotation marks in the `=`:\n"
-                example_code_5: "```\nscore = 25\n{print} 'You got ' score\n```\n"
-                story_text_6: "**Maths with words** \nIn this level it is also allowed to use the + sign with texts. For example:"
-                example_code_6: "```\na = 'Hello '\nb = 'world!'\n{print} a + b\n```\n"
-                example_code_2: "```\nname = 'Hedy the Robot'\n{print} 'Hello ' name\n```\n"
-                story_text_3: "**All items in lists need quotation marks too**\nLists are texts, so they need quotation marks too. Mind that each single item on the list has quotation marks.\nThis allows you to save two words as 1 item on the list, for example 'Iron Man'.\n"
+                start_code: "{print} 'decimaltal behöver nu en punkt som decimaltecken'\n{print} 2.5 + 2.5"
+                story_text: "## Nummer och texter\n**Decimaltal**\nHittils har Hedy inte tillåtit decimaltal som 1,5, men nu tillåter vi det. Notera att datorer använder `.` (en punkt) för decimaltal istället för kommatecken."
+                example_code: "```\n{print} 'Två och en halv plus två och en halv är...'\n{print} 2.5 + 2.5\n```\n"
+                story_text_2: "**Alla texter måste ha citattecken runt sig**\nI denna och nästkommande nivåer behöver du också citattecken när du lagrar text med `=`:\n"
+                example_code_3: "```\nstarka = 'Pippi Långström', 'Starke Adolf', 'Bamse'\n{print} starka {at} {random}\n```\n"
+                story_text_4: "**Alla texter efter `{if}`-jämförelser behöver också citattecken**\n"
+                example_code_4: "```\nnamn = {ask} 'Vad heter du?'\n{if} namn = 'Roboten Hedy'\n    {print} 'Hejsan!'\n```\n"
+                story_text_5: "**Nummer behöver inte citattecken**\nDu använder inte citattecken för nummer i `=`:\n"
+                example_code_5: "```\npoäng = 25\n{print} 'Du fick ' poäng\n```\n"
+                story_text_6: "**Matematik med ord** \nI denna nivå är det också tillåtet att använda +-tecknet med texter. Till exempel:"
+                example_code_6: "```\na = 'Hej '\nb = 'världen!'\n{print} a + b\n```\n"
+                example_code_2: "```\nnamn = 'Roboten Hedy'\n{print} 'Hej ' namn\n```\n"
+                story_text_3: "**Alla saker i listor behöver också citattecken**\nListor är texter, så de behöver också citattecken. Tänk på att varje enskild sak i listan har sina egna citattecken.\nDet låter dig spara två ord som 1 sak i listan, till exempel \"En robot\".\n"
             13:
-                story_text: "## And... Or..?\nWe are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two {if}'s but can use `{and}` and `{or}`. If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct."
-                example_code: "```\nname = {ask} 'what is your name?'\nage = {ask} 'what is your age?'\n{if} name {is} 'Hedy' {and} age {is} 2\n    {print} 'You are the real Hedy!'\n```\n"
-                start_code: "name = {ask} 'what is your name?'\nage = {ask} 'what is your age?'\n{if} name {is} 'Hedy' {and} age {is} 2\n    {print} 'You are the real Hedy!'"
+                story_text: "## Och... Eller..?\nVi kommer nu lära oss om `{and}` och `{or}`! Om du vill kolla två uttryck så behöver du inte använda två {if}-ar utan kan istället använda `{and}` och `{or}`. Om du använder `{and}` så måste båda uttrycken, på vänster och höger sida om `{and}`, vara sanna. Vi kan också använda `{or}`. Då behöver bara ett uttryck vara korrekt."
+                example_code: "```\nnamn = {ask} 'vad heter du?'\nålder = {ask} 'hur gammal är du?'\n{if} namn {is} 'Hedy' {and} ålder {is} 2\n    {print} 'Du är den riktiga Hedy!'\n```\n"
+                start_code: "namn = {ask} 'vad heter du?'\nålder = {ask} 'hur gammal är du?'\n{if} namn {is} 'Hedy' {and} ålder {is} 2\n    {print} 'Du är den riktiga Hedy!'"
             14:
-                example_code_3: "```\nname = {ask} 'What is your name?'\n{if} name != 'Hedy'\n    {print} 'You are not Hedy'\n```\n"
-                start_code: "age = {ask} 'How old are you?'\n{if} age < 13\n    {print} 'You are younger than me!'\n{else}\n    {print} 'You are older than me!'"
-                story_text: "## Great, Greater, Greatest!\nWe are going to learn more new items. You might know them already from mathematics, the `<` and `>`.\nThe `<` checks if the first number is smaller than the second, for example age `<` 12 checks if age is smaller than 12.\nIf you want to check if the first number is smaller or equal to the second, you can use `<=`, for example age `<=` 11.\nThe `>` checks if the first number is bigger than the second, for example points `>` 10 checks if points is larger than 10.\nIf you want to check if the first number is bigger or equal to the second, you can use `>=`, for example points `>=` 11.\nYou use these comparisons in an `{if}`, like this:\n"
-                example_code: "```\nage = {ask} 'How old are you?'\n{if} age > 12\n    {print} 'You are older than I am!'\n```\n"
-                story_text_2: "From this level on, if you want to compare exactly, you can use two equal signs. This is what most programming languages do:\n"
-                example_code_2: "```\nname = {ask} 'What is your name?'\n{if} name == 'Hedy'\n    {print} 'You are cool!'\n```\n"
-                story_text_3: "You can also compare if something is *not* equal to something else using `!=` like this:\n"
+                example_code_3: "```\nnamn = {ask} 'Vad är ditt namn?'\n{if} namn != 'Hedy'\n    {print} 'Du är inte Hedy'\n```\n"
+                start_code: "ålder = {ask} 'Hur gammal är du?'\n{if} ålder < 13\n    {print} 'Du är yngre än jag!'\n{else}\n    {print} 'Du är äldre än jag!'"
+                story_text: "## Stor, Större, Störst\nNu ska vi lära oss fler nya saker. Du kanske redan känner till dem från matematiken, jämförelserna `<` och `>`.\nJämförelsen `<` kollar om det första numret är mindre än det andra, till exempel så kollar ålder `<` 12 om åldern är mindre än 12.\nOm du vill kolla om det första numret är mindre eller lika stort som det andra så kan du använda `<=`, till exempel ålder `<=` 11.\nJämförelsen `>` kollar om det första numret är större än det andra, till exempel så kollar poäng `>` 10 om poäng är större än 10.\nVill du kolla om första numret är större eller lika stort som det andra så kan du använda `>=`, till exempel poäng `>=` 11.\nDu kan använda dessa jämförelser i en `{if}`, så här:\n"
+                example_code: "```\nålder = {ask} 'Hur gammal är du?'\n{if} ålder > 12\n    {print} 'Du är äldre än jag!'\n```\n"
+                story_text_2: "Från och med denna nivå så kan du använda två likhetstecken för att jämföra exakt. Detta är vad de flesta programmeringsspråk gör:\n"
+                example_code_2: "```\nnamn = {ask} 'Vad är ditt namn?'\n{if} namn == 'Hedy'\n    {print} 'Du är cool!'\n```\n"
+                story_text_3: "Du kan också jämföra om något *inte* är lika med något annat med `!=`, på detta vis:\n"
             15:
-                start_code: "answer = 0\n{while} answer != 25\n    answer = {ask} 'What is 5 times 5?'\n{print} 'A correct answer has been given'"
-                story_text: "## More loops!\nWe are going to learn a new loop, the `{while}` loop! We continue the loop as long as the statement is true.\nSo don't forget to change the value in the loop.\n\nIn the example code, we continue until a correct answer has been given.\nIf the correct answer is never given, the loop never ends!"
-                example_code: "```\nanswer = 0\n{while} answer != 25\n    answer = {ask} 'What is 5 times 5?'\n{print} 'A correct answer has been given'\n```\n"
+                start_code: "svar = 0\n{while} svar != 25\n    svar = {ask} 'Vad är 5 gånger 5?'\n{print} 'Det var det korrekta svaret'"
+                story_text: "## Fler loopar!\nNu ska vi lära oss en ny loop: `{while}`-loopen! Denna loop fortsätter så länge uttrycket är sant.\nSå glöm inte att ändra värdet i loopen.\n\nI denna exempelkod fortsätter vi till vi får rätt svar.\nOm rätt svar aldrig ges så kommer denna loop aldrig sluta!"
+                example_code: "```\nsvar = 0\n{while} svar != 25\n    svar = {ask} 'Vad är 5 gånger 5?'\n{print} 'Det var rätt svar'\n```\n"
             16:
-                start_code: "fruit = ['apple', 'banana', 'cherry']\n{print} fruit"
-                story_text: "## More and more like real code!\nWe are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels.\nYou can use the square brackets as well to point out a place in the lists."
-                example_code: "```\nfriends = ['Ahmed', 'Ben', 'Cayden']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'the lucky number of ' friends[i]\n    {print} 'is ' lucky_numbers[i]\n```\n"
+                start_code: "frukt = ['äpple', 'banan', 'körsbär']\n{print} frukt"
+                story_text: "## Mer och mer som riktig kod!\nVi ska nu göra listor på Python-sättet, med hakparenteser runt listorna! Vi fortsätter också med citattecken runt varje sak precis som i föregående nivåer.\nDu kan också använda hakparenteser för att peka på en viss plats i listor."
+                example_code: "```\nvänner = ['Ahmed', 'Björn', 'Christina']\nlyckotal = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'Lyckotalet från ' vänner[i]\n    {print} 'är ' lyckotal[i]\n```\n"
             17:
-                example_code: "```\nprices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
-                start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'"
-                story_text: "## Elif\nNow we are going to change indentation a little bit. Every time that we need an indentation, we need `:` at the line before the indentation.\n\nIn this level you can also use a new command: `{elif}`. `{elif}` is short for {else} {if} and you need it when you want to make 3 (or more!) options.\nCheck it out!"
+                example_code: "```\npriser = ['1 miljon kronor', 'en äppelpaj', 'ingenting']\nditt_pris = priser[{random}]\n{print} 'Du vinner ' ditt_pris\n{if} ditt_pris == '1 miljon kronor' :\n    {print} 'Just det! Du är rik!'\n{elif} ditt_pris == 'en äppelpaj' :\n    {print} 'Underbart, en äppelpaj!'\n{else}:\n    {print} 'Bättre lycka nästa gång..'\n```\n"
+                start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Nu kommer jag!'"
+                story_text: "## Annarsom\nVi kommer nu ändra indenteringen en aning. Varje gång vi behöver en indentering så behöver vi också en `:` på slutet av raden före indenteringen.\n\nFrån denna nivå kan du också använda ett nytt kommando: `{elif}`. `{elif}` är kort för {else} {if} och du kommer behöva den om du vill göra 3 (eller fler!) alternativ.\nKolla in!"
             18:
-                start_code: "name = 'Hedy'\n{print}('My name is ', name)"
-                story_text: "## The last level!\nWe arrived at real Python code! That means we need to use parentheses with {print} and {range} from now on."
-                example_code: "```\n{print}('my name is Hedy!')\n```\n"
-                story_text_2: If you want to print more than one item, you need to separate them by commas.
-                example_code_2: "```\ntemperature = 25\n{print}('It is ', temperature, 'degrees outside')\n```\n"
-                story_text_3: "##  Input\nThe final change we will need to make to get Python code is changing `{ask}` into `{input}`."
-                example_code_3: "```\n{print}('My name is Hedy!')\nname = {input}('What is your name?')\n{print}('So your name is ', name)\n```\n"
+                start_code: "namn = 'Hedy'\n{print}('Mitt namn är ', namn)"
+                story_text: "## Den sista nivån!\nVi har nått fram till äkta Python-kod! Det betyder att vi måste använda parenteser med {print} och {range} i fortsättningen."
+                example_code: "```\n{print}('Hej!')\n{for} i {in} {range}(1, 10):\n    {print}('Detta är rad ', i)\n```\n"
+                story_text_2: Om du vill skriva ut mer än en sak så måste du separera dem med kommatecken.
+                example_code_2: "```\ntemperatur = 25\n{print}('Det är ', temperature, ' grader utomhus')\n```\n"
+                story_text_3: "##  Inmatning\nDen sista ändringen vi behöver göra för att få Python-kod är att byta ut `{ask}` mot `{input}`."
+                example_code_3: "```\n{print}('Mitt namn är Hedy!')\nnamn = {input}('Vad är ditt namn?')\n{print}('Så ditt namn är ', namn)\n```\n"
         name: Introduktion
         description: Nivåbeskrivning
         default_save_name: introduktion
     story:
         levels:
             1:
-                story_text: "## Make a story\nIn level 1 you can make a story with a different main character that you enter yourself.\n\nIn the first line, use `{ask}` and ask who the main character of the story will be.\n\nAfter that first line, start with `{print}` if the sentence needs to be printed.\nYou use `{echo}` if you want your main character to be at the end of the sentence.\n"
-                example_code: "```\n{ask} The main character of this story is\n{print} The main character is now going to walk in the forest\n{echo} He's a bit scared,\n{print} He hears crazy noises everywhere\n{print} He's afraid this is a haunted forest\n```\n"
-                start_code: '{print} Your story starts here'
+                story_text: "## Gör en berättelse\nPå nivå 1 kan du göra en berättelse där du får ange namnet på huvudkaraktären själv.\n\nPå första raden, använd `{ask}` för att fråga vem huvudkaraktären i din saga ska vara.\n\nEfter den första raden, börja med `{print}` om en mening ska skrivas ut på skärmen.\nDu använder `{echo}` om du vill att namnet på huvudkaraktären ska vara på slutet av meningen.\n"
+                example_code: "```\n{ask} Huvudkaraktären av denna berättelse är\n{print} Nu kommer huvudkaraktären ta en promenad i skogen\n{echo} Han är lite rädd,\n{print} Han hör galna ljud överallt\n{print} Han är rädd för att detta är en hemsökt skog\n```\n"
+                start_code: '{print} Din berättelse börjar här'
             2:
-                story_text: "## Story\nIn level 2 you can make your story more fun. Your main character's name can now be anywhere in the sentence.\n\nYou do have to program a little bit extra for that. You must now name your main character first.\n\nYou can then put that name anywhere in a sentence.\n"
-                example_code: "```\nname {is} {ask} What is the name of the main character?\n{print} name is now going to run in the woods\n{print} name is a bit scared\n{print} Suddenly he hears a crazy noise...\n{sleep}\n{print} name is afraid this is a haunted forest\n```"
-                start_code: '{print} Your story'
+                story_text: "## Berättelse\nI nivå 2 kan du göra din berättelse lite roligare. Din huvudkaraktärs namn kan nu vara varsomhelst i meningen.\n\nDu behöver programmera lite mer för det. Du måste nu börja med att namnge din karaktär.\n\nDu kan sedan använda detta namn varsomhelst i en mening.\n"
+                example_code: "```\nnamn {is} {ask} Vad heter huvudkaraktären?\n{print} namn ska nu gå en promenad i skogen\n{print} namn är lite rädd\n{print} Plötsligt hör han ett galet ljud...\n{sleep}\n{print} namn är rädd att detta är en hemsökt skog\n```"
+                start_code: '{print} Din berättelse'
             3:
-                story_text: "## Story\nIn level 3 you can make your story more fun. You can use randomness for any monster, animal or other obstacle, like this:\n"
-                example_code: "```\nanimals {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} He now hears the sound of an animals {at} {random}\n```\n"
-                story_text_2: "The command `{add}` can also come in handy in your story.\n"
-                example_code_2: "```\n{print} He hears a sound\nanimals {is} \U0001F43F, \U0001F994, \U0001F987, \U0001F989\nanimal {is} {ask} What do you think it is?\n{add} animal {to_list} animals\n{print} it was a animals {at} {random}\n```\n"
-                story_text_3: "This is an example of the `{remove}` command in your story\n"
-                example_code_3: "```\n{print} His backpack got way too heavy.\n{print} Inside were a bottle of water, a flashlight and a brick.\nbag {is} water, flashlight, brick\ndump {is} {ask} Which item should he dump?\n{remove} dump {from} bag\n```\n"
-                start_code: '{print} Your story'
+                story_text: "## Berättelse\nI nivå 3 kan du göra din berättelse lite roligare. Du kan använda slumpen för monster, djur, eller annat hinder, så här:\n"
+                example_code: "```\ndjur {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} Han hör nu ljudet av en djur {at} {random}\n```\n"
+                story_text_2: "Kommandot `{add}` kan också vara användbar för din berättelse.\n"
+                example_code_2: "```\n{print} Han hör ett ljud\ndjur {is} \U0001F43F, \U0001F994, \U0001F987, \U0001F989\ndjuret {is} {ask} Vad tror du det är?\n{add} djuret {to_list} djur\n{print} det var ett djur {at} {random}\n```\n"
+                story_text_3: "Detta är ett exempel på `{remove}`-kommandot i din berättelse\n"
+                example_code_3: "```\n{print} Hans ryggsäck blev alldeles för tung.\n{print} Inuti var en vattenflaska, en ficklampa, och en tegelsten.\nsäck {is} vatten, ficklampa, tegelsten\nkasta {is} {ask} Vad ska han kasta bort?\n{remove} kasta {from} säck\n```\n"
+                start_code: '{print} Din berättelse'
             5:
-                start_code: "{print} 'Here your story will start!'"
-                story_text: "## Story\nIn this level you can program different endings, which will make your story even more fun.\n\nThink of two endings for your story, for example:\n\n- The princess is walking through the forest\n- She runs into a monster\n\n- Happy ending: She takes her sword and the monster quickly runs away\n- Bad Ending: The monster eats the princess\n\nYou can also ensure that a name can be entered again. That works just like in the previous levels. You can combine that with an `{if}`, and then you have already made a whole program!\n"
-                example_code: "```\nname {is} {ask} 'Who is walking in the forest?'\n{print} name 'walks through the forest'\n{print} name 'encounter a monster'\nend {is} {ask} 'Would you like a good or a bad ending?'\n{if} end {is} good {print} name 'takes the sword and the monster quickly runs away'\n{else} {print} 'The monster eats' name\n```\n"
+                start_code: "{print} 'Här börjar din berättelse!'"
+                story_text: "## Berättelse\nI denna nivå kan du programmera in olika slut, vilket gör din berättelse ännu mer rolig.\n\nTänk ut två slut på din berättelse, till exempel:\n\n- Prinsessan gick genom skogen\n- Hon springer på ett monster\n\n- Lyckligt slut: Hon tar fram sitt svärd och monstret springer bort\n- Dåligt slut: Monstret äter upp prinsessan\n\nDu kan också se till så att ett namn kan fyllas i igen. Det fungerar precis som i föregående nivåer. Du kan kombinera detta med en `{if}` och sedan har du ett komplett program!\n"
+                example_code: "```\nnamn {is} {ask} 'Vem går genom skogen?'\n{print} namn 'går igenom skogen'\n{print} namn 'stöter på ett monster'\nslutet {is} {ask} 'Vill du ha ett bra eller ett dåligt slut?'\n{if} slutet {is} bra {print} namn 'tar upp sitt svärd och monstret springer bort'\n{else} {print} 'Monstret åt upp' namn\n```\n"
             7:
-                example_code: "```\n{print} 'The prince kept calling for help'\n{repeat} 5 {times} {print} 'Help!'\n{print} 'Why is nobody helping me?'\n```\n"
-                start_code: "{repeat} 5 {times} {print} 'Help!'"
-                story_text: "## Story\nIn a story, someone says words several times. For example, when someone calls for help or sings a song.\nYou can put such repetitions in your story, in this level with `{repeat}`.\n"
+                example_code: "```\n{print} 'Prinsen fortsatte ropa på hjälp'\n{repeat} 5 {times} {print} 'Hjälp!'\n{print} 'Varför hjälper ingen mig?'\n```\n"
+                start_code: "{repeat} 5 {times} {print} 'Hjälp!'"
+                story_text: "## Berättelse\nI en berättelse säger någon ord flera gånger. Till exempel, när någon ropar på hjälp eller sjunger en sång.\nDu kan lägga såna repetitioner i din berättelse med hjälp av `{repeat}` från denna nivå och framåt.\n"
             9:
-                story_text: "## Story\nIn this level you can use nesting to put {if}, {repeat} or {for} commands inside other {if}, {repeat} or {for} commands. This gives you many options and really helps you to make your story interactive.\n"
-                story_text_2: The example above is pretty straightforward, but by nesting {if} you can really elaborate your code and turn your story into a real game. Check out this example!
-                example_code_2: "## Elaborate code\n```\nsword = lost\ngame = on\n{print} 'Our hero is walking through the forest'\n{print} 'The path splits two ways'\n{repeat} 2 {times}\n    {if} game {is} on\n        path = {ask} 'Which path should she choose?'\n        {if} path {is} left\n            {if} sword {is} found\n                {print} 'Our hero comes across a dragon!'\n                {print} 'Luckily our hero has a sword to defeat the beast!'\n                game = over\n            {else}\n                {print} 'Our hero finds a dragon, but she doesnt have any weapons!'\n                {print} 'Our hero is beaten by the dragon...'\n                {print} 'Try again'\n                game = over\n        {if} path {is} right\n            {if} sword {is} lost\n                {print} 'Our hero finds a sword'\n                {print} 'This could come in very handy'\n                sword = found\n            {else}\n                {print} 'You have already found the sword. There is nothing left here.'\n                {print} 'She walks back'\n```\n"
-                example_code: "```\n{print} 'Robin is walking downtown'\nlocation = {ask} 'Is Robin going into a shop, or does she go home?'\n{if} location {is} shop\n    {print} 'She enters the shop.'\n    {print} 'Robin sees an interesting looking book'\n    book = {ask} 'Does Robin buy the book?'\n    {if} book {is} yes\n        {print} 'Robin buys the book and goes home'\n    {else}\n        {print} 'Robin leaves the shop and goes home'\n{else}\n    {print} 'Robin goes home'\n```\n"
-                start_code: '# place your code here'
+                story_text: "## Berättelse\nI denna nivå kan du använda nästning för att placera `{if}`-, `{repeat}`- eller `{for}`-kommandon inuti ett annat `{if}`-, `{repeat}`- eller `{for}`-kommando. Detta ger dig många valmöjligheter och hjälper dig verkligen göra handlingen interaktiv.\n"
+                story_text_2: Exemplet ovan är ganska okomplicerad, men genom att nästa {if} så kan du verkligen utveckla din kod och göra din berättelse till ett riktigt spel. Kolla in detta exempel!
+                example_code_2: "## Utförlig kod\n```\nsvärd = förlorat\nspel = på\n{print} 'Vår hjälte går igenom skogen'\n{print} 'Vägen delar på sig åt höger och vänster'\n{repeat} 2 {times}\n    {if} spel {is} på\n        väg = {ask} 'Vilken väg ska hon gå?'\n        {if} väg {is} vänster\n            {if} svärd {is} hittat\n                {print} 'Vår hjälte stöter på en drake!'\n                {print} 'Vilken tur att hon har ett svärd att besegra denna best med!'\n                spel = slut\n            {else}\n                {print} 'Vår hjälte hittar en drake, men hon har inget svärd!'\n                {print} 'Vår hjälte blir besegrad av draken...'\n                {print} 'Försök igen'\n                spel = slut\n        {if} väg {is} höger\n            {if} svärd {is} förlorat\n                {print} 'Vår hjälte hittar ett svärd'\n                {print} 'Det kan komma till väl användning'\n                svärd = hittat\n            {else}\n                {print} 'Du har redan tagit svärdet. Det finns inget kvar här.'\n                {print} 'Hon går tillbaka'\n```\n"
+                example_code: "```\n{print} 'Robyn promenerar ned för kvarteret'\nplats = {ask} 'Går Robyn till en affär eller går hon hem?'\n{if} plats {is} affär\n    {print} 'Hon går in i affären'\n    {print} 'Robyn ser en intressant bok'\n    bok = {ask} 'Köper Robyn boken?'\n    {if} bok {is} ja\n        {print} 'Robyn köper boken och går sedan hem'\n    {else}\n        {print} 'Robyn lämnar affären och går hem'\n{else}\n    {print} 'Robyn går hem'\n```\n"
+                start_code: '# placera din kod här'
             13:
-                start_code: '# place your code here'
-                story_text: "## Story\nBy using the `{and}` and `{or}` commands, you can shorten your stories. For example, check out the dragon story.\n"
-                example_code: "```\nsword = 'lost'\ngame = 'on'\n{print} 'Our hero is walking through the forest'\n{print} 'The path splits two ways'\n{for} i {in} {range} 0 {to} 2\n    {if} game {is} 'on'\n        path = {ask} 'Which path should she choose?'\n        {if} path {is} 'left' {and} sword {is} 'found'\n            {print} 'Our hero comes across a dragon!'\n            {print} 'Luckily our hero has a sword to defeat the beast!'\n            game = 'over'\n        {if} path {is} 'left' {and} sword {is} 'lost'\n            {print} 'Our hero finds a dragon, but she doesnt have any weapons!'\n            {print} 'Our hero is beaten by the dragon...'\n            {print} 'Try again'\n            game = 'over'\n        {if} path {is} 'right' {and} sword {is} 'found'\n            {print} 'You have already found the sword. There is nothing left here.'\n            {print} 'She walks back'\n        {if} path {is} 'right' {and} sword {is} 'lost'\n            {print} 'Our hero finds a sword'\n            {print} 'This could come in very handy'\n            sword = 'found'\n```\n"
+                start_code: '# placera din kod här'
+                story_text: "## Berättelse\nGenom att använda `{and}`- och `{or}`-kommandona så kan du korta ned dina berättelser. Till exempel, kolla in drakberättelsen.\n"
+                example_code: "```\nsvärd = 'förlorat'\nspel = 'på'\n{print} 'Vår hjälte går genom skogen'\n{print} 'Vägen delar på sig åt höger och vänster'\n{for} i {in} {range} 0 {to} 2\n    {if} spel {is} 'på'\n        väg = {ask} 'Vilken väg ska hon ta?'\n        {if} väg {is} 'vänster' {and} svärd {is} 'hittat'\n            {print} 'Vår hjälte stöter på en drake!'\n            {print} 'Vilken tur att hon har ett svärd att besegra denna best med!'\n            spel = 'over'\n        {if} väg {is} 'vänster' {and} svärd {is} 'förlorat'\n            {print} 'Vår hjälte hittar en drake, men hon har inget svärd!'\n            {print} 'Vår hjälte blir besegrad av draken...'\n            {print} 'Försök igen'\n            spel = 'slut'\n        {if} väg {is} 'höger' {and} svärd {is} 'hittat'\n            {print} 'Du har redan tagit svärdet. Det finns inget kvar här..'\n            {print} 'Hon går tillbaka'\n        {if} väg {is} 'höger' {and} svärd {is} 'förlorat'\n            {print} 'Vår hjälte hittar ett svärd'\n            {print} 'Det kan komma till väl användning'\n            svärd = 'hittat'\n```\n"
             4:
-                example_code: "```\nname {is} Hans\n{print} 'The name of the main character is' name\n{print} name 'is now going to walk in the woods'\n{print} name 'is a bit scared'\nanimals {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} 'He hears the sound of an' animals {at} {random}\n{print} name 'is afraid this is a haunted forest'\n```\n"
-                start_code: "{print} 'Your story will be printed here!'"
-                story_text: "## Story\nYou may have noticed that there is still a problem in the previous levels. Did you try to print a sentence that contained the word name?\nYou can solve that in this level. You must use quotation marks for everything that you are going to print.\n"
+                example_code: "```\nnamn {is} Olle\n{print} 'Huvudkaraktären är en person vid namn' namn\n{print} namn 'ska nu ta en promenad i skogen'\n{print} namn 'är lite rädd'\ndjur {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} 'Han hör ljudet av en' djur {at} {random}\n{print} namn 'är rädd att denna skog är hemsökt'\n```\n"
+                start_code: "{print} 'Din berättelse skrivs ut här!'"
+                story_text: "## Berättelse\nDu kan ha nämnt ett litet problem i föregående nivåer. Försöker du skriva ut en mening som innehöll ordet namn?\nDu kan lösa det i denna nivå. Du måste använda citattecken för allt du ska skriva ut.\n"
             8:
-                story_text: "## Story\nIn this level you can use multiple lines in your {if} commands, this way you can upgrade your happy or sad ending!\n"
-                example_code: "```\n{print} 'OH NO! The T-rex is closing in!'\nend = {ask} 'Do you want a happy or a sad ending?'\n{if} end {is} happy\n    {print} 'Just in time Richard jumps back into the time machine!'\n    {print} 'Michael types in the code and...'\n    {print} '\U0001F4A5ZAP!\U0001F4A5'\n    {print} 'They are back in their garage'\n{else}\n    {print} 'Michael yells COME ON RICHARD! RUN FASTER!'\n    {print} 'But Richard is too slow...'\n    {print} 'The T-rex closes in and eats him in one big bite!\U0001F996'\n```\n"
-                start_code: '# place your code here'
+                story_text: "## Berättelse\nI denna nivån kan du använda flera rader i dina {if}-kommandon. På detta sätt kan du uppgradera dina bra och dåliga slut!\n"
+                example_code: "```\n{print} 'ÅH NEJ! T-rexen närmar sig!'\nslut = {ask} 'Vill du ha ett bra eller dåligt slut?'\n{if} slut {is} bra\n    {print} 'Precis i rättan tid hoppar Rickard tillbaka in i tidsmaskinen!'\n    {print} 'Mikael skriver in koden och...'\n    {print} '\U0001F4A5BZZT!\U0001F4A5'\n    {print} 'De är tillbaka i deras garage igen'\n{else}\n    {print} 'Mikael skriker KOM IGEN RICKARD! SPRING SNABBARE!'\n    {print} 'Men Rickard är för långsam...'\n    {print} 'T-rexen kommer ikapp och slukar honom i en stor tugga!\U0001F996'\n```\n"
+                start_code: '# Placera din kod här'
             10:
-                story_text: "## Story\nIn this level you can use the {for} command in your story. In this way you could easily program the children's book 'brown bear, brown bear, what do you see'.\n"
-                example_code: "```\nanimals = red bird, black sheep, green frog, yellow duck, little child\n{print} 'brown bear'\n{print} 'brown bear'\n{print} 'What do you see?'\n{for} animal {in} animals\n    {print} 'I see a ' animal ' looking at me'\n    {print} animal\n    {print} animal\n    {print} 'What do you see?'\n{print} 'I see all the animals looking at me!'\n```\n"
-                start_code: '# place your code here'
+                story_text: "## Berättelse\nPå denna nivå kan du använda {for}-kommandot i din berättelse. På detta sätt kan du enkelt programmera in barnboken \"Brunbjörn, brunbjörn, vad är det du ser?\"\n"
+                example_code: "```\ndjuren = röd fågel, vit hare, grön groda, gul anka, liten bäbis\n{print} 'Brunbjörn'\n{print} 'Brunbjörn'\n{print} 'Vad är det du ser?'\n{for} djur {in} djuren\n    {print} 'Jag ser en ' djur ' som tittar på mig'\n    {print} djur\n    {print} djur\n    {print} 'Vad är det du ser?'\n{print} 'Jag ser alla djuren som tittar på mig.'\n```\n"
+                start_code: '# placera din kod här'
             12:
-                story_text: "## Story\nIn this level you can use the quotation marks to save multiple words in a variable."
-                example_code: "```\nname = 'The Queen of England'\n{print} name ' was eating a piece of cake, when suddenly...'\n```\n"
-                start_code: '# place your code here'
+                story_text: "## Berättelse\nI denna nivå kan du använda citattecken för att spara flera ord i samma variabel."
+                example_code: "```\nnamn = 'Drottningen av England'\n{print} namn ' åt en tårtbit, när plötsligt...'\n```\n"
+                start_code: '# placera din kod här'
             15:
                 start_code: '# place your code here'
                 story_text: "## Story\nUsing the `{while}` loop can make your stories more interesting. For example, you can use `{while} game {is} 'on'` so you can play until the game is over.\nOr you can use `{while} sword {is} 'lost'` so the player can't continu the game until they have found something.\n"
                 example_code: "```\nkeys = 'lost'\n{print} 'You are standing in your garden and you have lost your keys.'\n{print} 'Where do you want to look for them?'\n{print} 'You can choose: tree, flowerbed, rock, postbox'\n{while} keys == 'lost'\n    location = {ask} 'Where do you want to look?'\n    {if} location == 'flowerbed'\n        {print} 'Here they are!'\n        keys = 'found'\n    {else}\n        {print} 'Nope they are not at the ' location\n{print} 'Now you can enter the house!'\n```\n"
-        name: Story
-        description: Story
-        default_save_name: Story
+        name: Berättelse
+        description: Berättelse
+        default_save_name: Berättelse
     parrot:
         levels:
             2:
