@@ -501,6 +501,16 @@ class TestsLevel8(HedyTester):
             extra_check_function=(lambda x: x.exception.fixed_code == fixed_code)
         )
 
+    def test_unexpected_indent(self):
+        code = textwrap.dedent("""\
+        print('repair')
+           print('me')""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.IndentationException
+        )
+
     def test_repeat_turtle(self):
         code = textwrap.dedent("""\
             repeat 3 times
