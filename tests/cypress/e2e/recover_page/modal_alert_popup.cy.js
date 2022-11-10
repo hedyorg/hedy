@@ -1,5 +1,4 @@
 import {goToRecover} from '../tools/navigation/nav.js'
-import {setupDatabase} from '../tools/login/login.js'
 
 describe('Modal alert popup test', () => {
   it('passes', () => {
@@ -24,9 +23,8 @@ describe('Modal alert popup test', () => {
       .clear();
 
     // Tests visibility of succes modal alert text/ recover existing account
-    setupDatabase();
     cy.get('#username')
-      .type('student_user')
+      .type('user1')
     cy.get('button[class*="green-btn mt-2"]')
        .click()
     cy.get('#modal_alert_text')

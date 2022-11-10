@@ -1,5 +1,5 @@
 import {goToLogin} from '../tools/navigation/nav.js'
-import {setupDatabase} from '../tools/login/login.js'
+import {login, loginForUser} from '../tools/login/login.js'
 
 describe('Login button test', () => {
   it('passes', () => {
@@ -12,13 +12,7 @@ describe('Login button test', () => {
       .should('have.text', 'Log in');
 
     // Tests login button on existing account
-    setupDatabase();
-    cy.get('#username')
-      .type('student_user');
-    cy.get('#password')
-      .type('useruser');
-    cy.get('button[class*="green-btn mt-2"]')
-       .click();
+    loginForUser();
     cy.url()
       .should('eq', Cypress.config('baseUrl') + Cypress.env('landing_page'));
   })
