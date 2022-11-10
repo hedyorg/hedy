@@ -912,6 +912,16 @@ adventures:
                     In this level you can easily make the childrens' song 'Five little monkeys'. Can you make the last chorus?
                     You can also make the whole baby shark song (including all the other sharks in the family) in only 6 lines, using `{for}`!
                     Or you can make Old McDonald with all the different animals.
+
+
+
+                    ## Challenges
+                    Can you add the last verse of the monkeys on the bed, when there is only one monkey left?
+
+                    Can you make the baby shark code even shorter by using a `{repeat}` command?
+
+                    Can you add new animals to Old MacDonald's farm?
+
                 example_code: |
                     ## 5 Little Monkeys Jumping on the bed
                     ```
@@ -927,10 +937,10 @@ adventures:
                     ```
                     sharks = baby, mommy, daddy, grandma, grandpa
                     {for} shark {in} sharks
-                        {print} shark 'tututututudu'
-                        {print} shark 'tututututudu'
-                        {print} shark 'tututututudu'
-                        {print} shark
+                        {print} shark ' shark tututututudu'
+                        {print} shark ' shark tututututudu'
+                        {print} shark ' shark tututututudu'
+                        {print} shark ' shark'
                     ```
                     ## Old McDonald
                     ```
@@ -1336,7 +1346,7 @@ adventures:
                     ```
                     days = Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
                     names = mom, dad, Emma, Sophie
-                    {for} day {in} days
+                    _ day _ days
                         {print} names {at} {random} ' does the dishes on ' day
                     ```
                 start_code: "# place your code here"
@@ -1435,11 +1445,12 @@ adventures:
                 story_text: |
                     ## Dice
                     Is everybody taking too long throwing the dice? In this level you can let Hedy throw all the dice at once!
+                    Can you fill in the correct line of code on the blanks?
                 example_code: |
                     ```
                     players = Ann, John, Jesse
                     choices = 1, 2, 3, 4, 5, 6
-                    {for} player {in} players
+                    _
                         {print} player ' throws ' choices {at} {random}
                         {sleep}
                     ```
@@ -1583,10 +1594,11 @@ adventures:
                 story_text: |
                     ## Rock, Paper, Scissors
                     Feeling too lazy to play the game yourself? Let Hedy play it for you!
+                    You only have to fill in the names of the players.
                 example_code: |
                     ```
                     choices = rock, paper, scissors
-                    players = Marleen, Michael
+                    players = _
                     {for} player {in} players
                          {print} player ' chooses ' choices {at} {random}
                     ```
@@ -1704,7 +1716,8 @@ adventures:
                 story_text: |
                     ## Calculator
                     This calculator game helps you practise your tables of multiplication!
-                    If you add more numbers to the list, you can practise all the multiplications.
+                    ## Challenge
+                    Can you add more numbers to the list, so you can practise all the multiplications?
                 example_code: |
                     ```
                     numbers = 1, 2, 3
@@ -2011,7 +2024,7 @@ adventures:
                     This is a challenge for the real brainiacs! Each line that needs indentation has been given a blank.
                     Can you figure out how much indentation each line needs in order for the code to work propperly?
                     Good luck!
-                    TIP: If the customer orders pizza, Hedy shouldn't ask what sauce the costumer wants. 
+                    TIP: If the customer orders pizza, Hedy shouldn't ask what sauce the costumer wants.
                 example_code: |
                     ```
                     {print} 'Welcome to Hedys restaurant!'
@@ -2046,17 +2059,19 @@ adventures:
                         food = {ask} 'What would you like to eat as your ' course '?'
                         {print} food ' will be your ' course
                     ```
-                story_text_2: |4
-
+                story_text_2: |
+                    ## Challenge
                     Of course, you could also order for multiple people!
+                    Can you add the correct amount of indentation before each line to make the code work properly?
+                    TIP: some lines don't need any indentation at all.
                 example_code_2: |
                     ```
-                    courses = appetizer, main course, dessert
-                    names = Timon, Onno
-                    {for} name {in} names
-                        {for} course {in} courses
-                            food = {ask} name ', what would you like to eat as your ' course '?'
-                            {print} name ' orders ' food ' as their ' course
+                    _ courses = appetizer, main course, dessert
+                    _ names = Timon, Onno
+                    _ {for} name {in} names
+                    _ {for} course {in} courses
+                    _ food = {ask} name ', what would you like to eat as your ' course '?'
+                    _ {print} name ' orders ' food ' as their ' course
                     ```
                 start_code: "courses = appetizer, main course, dessert"
             11:
@@ -2350,17 +2365,19 @@ adventures:
                         {print} name ' will get a ' pets {at} {random} ' as their pet.'
                         {sleep}
                     ```
-                story_text_2: We can also make a Harry Potter themed fortune teller.
+                story_text_2: |
+                    ## Challenge
+                    We can also make a Harry Potter themed fortune teller. Fill in the correct line of code in line 5 and add the correct indentation to line 6 - 8 and this program will act like the sorting hat!
                 example_code_2: |
                     ```
                     houses = Gryffindor, Slytherin, Hufflepuff, Ravenclaw
                     subjects = potions, defence against the dark arts, charms, transfiguration
                     fears = Voldemort, spiders, failing your OWL test
                     names = Harry, Ron, Hermione
-                    {for} name {in} names
-                        {print} name ' is placed in ' houses {at} {random}
-                        {print} name ' is great at ' subjects {at} {random}
-                        {print} name 's greatest fear is ' fears {at} {random}
+                    _
+                    _ {print} name ' is placed in ' houses {at} {random}
+                    _ {print} name ' is great at ' subjects {at} {random}
+                    _ {print} name 's greatest fear is ' fears {at} {random}
                     ```
                 start_code: "# place your code here"
             12:
