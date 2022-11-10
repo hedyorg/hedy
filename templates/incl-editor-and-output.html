@@ -1,5 +1,11 @@
 <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
-<div id="editor-area" class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5">
+<div id="editor-area" class="relative grid grid-cols-1 lg:grid-cols-2 lg:grid-flow-row-dense gap-4 mt-5">
+    <div id="fold_toggle_container" class="hidden lg:flex absolute z-10 top-8 ltr:-left-3 rtl:-right-3 cursor-pointer" onclick="$('.hide_editor_arrow').toggle();$('#code_editor').toggle();$('#editor-area').toggleClass('lg:grid-cols-2')">
+         <div class="bg-green-500 text-white py-4 px-1 rounded-lg text-sm">
+             <span class="hide_editor_arrow">←</span>
+             <span class="hide_editor_arrow" style="display: none;">→</span>
+         </div>
+    </div>
     <!-- Row 1: editor, output pane -->
     <div class="flex flex-col order-1 relative" id="code_editor" style="min-height: 22rem;">
       <!-- language selector overlay -->
@@ -165,7 +171,7 @@
       </div>
     </div>
     <div class="order-5">
-      {% if not specific_adventure %}F
+      {% if not specific_adventure %}
           <div class="flex {% if prev_level %}justify-between{% else %}justify-end{%endif%}">
             {% if prev_level and (not customizations or prev_level in customizations['available_levels']) %}
               <button class="green-btn" onclick="hedyApp.prompt_unsaved (function () {window.location = '{{ hedy_link(prev_level, 1) }}'})">{{_('regress_button')|replace("{level}", prev_level)}}</button>
