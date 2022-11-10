@@ -195,9 +195,9 @@ ADVENTURE_ORDER_PER_LEVEL = {
     ],
     11: [
         'default',
+        'songs',
         'haunted',
         'restaurant',
-        'songs',  
         'next',
         'end'
     ],

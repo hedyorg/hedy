@@ -240,7 +240,7 @@ adventures:
                         {print} counter
                 story_text: |-
                     ## Loops!
-                    `{print}` works just the same but we add a new form of the `{for}`. You can now write `{for} counter {in} {range} 1 {to} 5` and use `counter` in your program.
+                    `{print}` works just the same but we add a new form of the `{for}`. You can now write `{for} counter {in} {range} 1 {to} 5` instead of `{repeat} 5 {times}` and use `counter` in your program.
                     Try it out to see what happens! Remember to use indentations after the `{for}` and `{if}` statements (That means starting a sentence with four spaces).
                 example_code: |
                     ```
@@ -966,11 +966,14 @@ adventures:
             11:
                 story_text: |
                     ## Songs
-                    In this level you can use the `{for} i {in} {range}` command to make songs that use counting.
+                    In this level you can use the `{for} i {in} {range}` command to make songs that use counting, like the 5 little monkeys.
+
+                    ## Challenge
+                    Fill in the blanks and make the code work!
                 example_code: |
                     ## 5 little monkeys
                     ```
-                    {for} i {in} {range} 5 {to} 1
+                    _ _ _ _ 5 _ 1
                         {print} i ' little monkeys jumping on the bed'
                         {print} 'One fell off and bumped his head'
                         {print} 'Mama called the doctor and the doctor said'
@@ -2078,19 +2081,22 @@ adventures:
                 story_text: |
                     ## Restaurant
                     We can use the `{for} i {in} {range} 1 {to} 5` to `{print}` the orders from multiple customers in an orderly manner.
+
+                    ## Challange
+                    Can you handle another indentation challenge? Get the code to work properly by adding the right amount of indentation before each line!
                 example_code: |
                     ```
                     {print} 'Welcome to Restaurant Hedy!'
                     people = {ask} 'For how many people would you like to order?'
                     {for} i {in} {range} 1 {to} people
-                        {print} 'Order number ' i
-                        food = {ask} 'What would you like to eat?'
-                        {print} food
-                        {if} food {is} fries
-                            sauce = {ask} 'What kind of sauce would you like with that?'
-                            {print} sauce
-                        drinks = {ask} 'What would you like to drink?'
-                        {print} drinks
+                    _ {print} 'Order number ' i
+                    _ food = {ask} 'What would you like to eat?'
+                    _ {print} food
+                    _ {if} food {is} fries
+                    _ sauce = {ask} 'What kind of sauce would you like with that?'
+                    _ {print} sauce
+                    _ drinks = {ask} 'What would you like to drink?'
+                    _ {print} drinks
                     price = 4 * people
                     {print} 'That will be ' price ' dollars, please!'
                     ```
@@ -2564,13 +2570,16 @@ adventures:
                 story_text: |
                     ## Haunted House
                     In this level we've changed the repeat command and we've added a line to our haunted house that tells the player in which room they are.
+
+                    ## Challenge
+                    Finish the program with the correct line of code. Mind: There are 3 rooms that the player needs to survive before they win!
                 example_code: |
                     ```
                     {print} 'Escape from the Haunted House!'
                     player {is} alive
                     doors = 1, 2, 3
                     monsters = zombie, vampire, giant spider
-                    {for} i {in} {range} 1 {to} 3
+                    _
                         {if} player {is} alive
                             correct_door = doors {at} {random}
                             {print} 'Room ' i
