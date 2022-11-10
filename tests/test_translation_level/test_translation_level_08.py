@@ -1,8 +1,10 @@
-import hedy
-from tests.Tester import HedyTester
-from parameterized import parameterized
-import hedy_translation
 import textwrap
+
+from parameterized import parameterized
+
+import hedy
+import hedy_translation
+from tests.Tester import HedyTester
 
 # tests should be ordered as follows:
 # * Translation from English to Dutch
@@ -44,7 +46,7 @@ class TestsTranslationLevel8(HedyTester):
         expected = textwrap.dedent("""\
         repeat 3 times
             print 'Hedy is fun!'""")
-        
+
         code = textwrap.dedent("""\
         repete 3 fois
             affiche 'Hedy is fun!'""")

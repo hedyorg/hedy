@@ -1,10 +1,10 @@
-from parameterized import parameterized
-import hedy
-from tests.Tester import HedyTester
-import hedy_translation
-from hedy_content import ALL_KEYWORD_LANGUAGES
 import textwrap
 
+from parameterized import parameterized
+
+import hedy_translation
+from hedy_content import ALL_KEYWORD_LANGUAGES
+from tests.Tester import HedyTester
 
 # tests should be ordered as follows:
 # * Translation from English to Dutch
@@ -107,7 +107,11 @@ class TestsTranslationLevel14(HedyTester):
 
         self.assertEqual(expected, result)
 
-    @parameterized.expand(HedyTester.as_list_of_tuples(all_keywords_dict["if"], all_keywords_dict["print"], list(ALL_KEYWORD_LANGUAGES.keys())))
+    @parameterized.expand(
+        HedyTester.as_list_of_tuples(
+            all_keywords_dict["if"],
+            all_keywords_dict["print"],
+            list(ALL_KEYWORD_LANGUAGES.keys())))
     def test_double_equals_all_lang(self, if_keyword, print_keyword, lang):
         code = textwrap.dedent(f"""\
         hedy = 5
