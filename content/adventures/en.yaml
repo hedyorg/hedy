@@ -985,22 +985,6 @@ adventures:
                     {turn} {left}
                     {forward} 50
                     ```
-                story_text_2: |
-                    ## Colors
-                    You can also change the color of the lines with the command `{color}`. Check out the example.
-                    You can also use the command `{color} {white}` to make 'invisible' lines. You could use these white lines to move the turtle anywhere in the screen before you start drawing.
-
-                example_code_2: |
-                    ```
-                    {color} {white}
-                    {forward} -80
-                    {color} {green}
-                    {forward} 50
-                    {color} {yellow}
-                    {forward} 50
-                    {color} {red}
-                    {forward} 50
-                    ```
                 start_code: "{forward} 50\n{turn} {left}"
             2:
                 story_text: |
@@ -1059,12 +1043,27 @@ adventures:
                     {turn} angle
                     {forward} 25
                     ```
+                story_text_2: |
+                    ## Colors
+                    You can also change the color of the lines with the command `{color}`. Check out the example.
+                    You can also use the command `{color} {white}` to make 'invisible' lines. You could use these white lines to move the turtle anywhere in the screen before you start drawing.
+
+                example_code_2: |
+                    ```
+                    {color} {white}
+                    {forward} -80
+                    {color} {green}
+                    {forward} 50
+                    {color} {yellow}
+                    {forward} 50
+                    {color} {red}
+                    {forward} 50
+                    ```
                 start_code: |-
                     {print} 'Drawing figures'
                     angle {is} 90
                     {turn} angle
                     {forward} 25
-
             5:
                 story_text: |
                     ## Let's draw
