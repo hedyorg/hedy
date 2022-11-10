@@ -237,7 +237,6 @@ class TestsLevel9(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level = 11)
 
-
     def test_if_pressed_repeat_turtle_moves_multiple_keys(self):
         code = textwrap.dedent("""\
         repeat 10 times
@@ -249,6 +248,7 @@ class TestsLevel9(HedyTester):
                 turn 90
             if s is pressed
                 turn 180""")
+                
         expected = HedyTester.dedent("""\
         for i in range(int('10')):
           while not pygame_end:

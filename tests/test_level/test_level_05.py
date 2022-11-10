@@ -1121,3 +1121,19 @@ class TestsLevel5(HedyTester):
             extra_check_function=self.is_turtle(),
             max_level=7
         )
+
+    #
+    # pressed negative tests
+    #
+
+    def test_if_indent_after_pressed_gives_parse_error(self):
+        code = textwrap.dedent("""\
+        if x is pressed 
+            print 'a double indent!'""")
+
+        self.multi_level_tester(
+            max_level=7,
+            code=code,
+            exception=hedy.exceptions.ParseException,
+            extra_check_function=lambda c: c.exception.error_location[0] == 1 and c.exception.error_location[1] == 1
+        )

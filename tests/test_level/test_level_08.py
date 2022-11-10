@@ -762,13 +762,13 @@ class TestsLevel8(HedyTester):
     # issue 902
     def test_repeat_if_gives_error(self):
         code = textwrap.dedent("""\
-           print 'kassabon'
-           prijs is 0
-           repeat 7 times # TEST
-               ingredient is ask 'wat wil je kopen?'
-               if ingredient is appel
-                   prijs is prijs + 1
-           print 'Dat is in totaal ' prijs ' euro.'""")
+        print 'kassabon'
+        prijs is 0
+        repeat 7 times # TEST
+            ingredient is ask 'wat wil je kopen?'
+            if ingredient is appel
+                prijs is prijs + 1
+        print 'Dat is in totaal ' prijs ' euro.'""")
 
         self.single_level_tester(code=code, exception=hedy.exceptions.LockedLanguageFeatureException)
 
@@ -949,3 +949,25 @@ class TestsLevel8(HedyTester):
             extra_check_function=self.is_turtle(),
             max_level=11
         )
+    
+    #
+    # pressed negative tests
+    #
+
+    def test_if_no_indent_after_pressed_gives_noindent_error(self):
+        code = textwrap.dedent("""\
+        if x is pressed 
+        print 'no indent!'""")
+
+        self.multi_level_tester(code=code, exception=hedy.exceptions.NoIndentationException)
+
+    def test_if_no_indent_after_pressed_and_else_gives_noindent_error(self):
+        code = textwrap.dedent("""\
+        if x is pressed 
+        print 'no indent!'
+        else
+        print 'no indent again!'""")
+
+        # gives the right exception for all levels even though it misses brackets
+        # because the indent check happens before parsing
+        self.multi_level_tester(code=code, exception=hedy.exceptions.NoIndentationException)

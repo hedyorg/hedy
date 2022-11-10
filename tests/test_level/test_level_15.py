@@ -140,3 +140,43 @@ class TestsLevel15(HedyTester):
       max_level=15,
       exception=exceptions.NoIndentationException
     )
+
+  #
+  # pressed with while loop tests
+  #
+
+  def test_if_pressed_works_in_while_loop(self):
+    code = textwrap.dedent("""\
+    stop is 0
+    while stop != 1
+        if p is pressed
+            print 'press'
+        if s is pressed
+            stop = 1
+    print 'Uit de loop!'""")
+
+    expected = textwrap.dedent("""\
+    stop = 0
+    while convert_numerals('Latin', stop).zfill(100)!=convert_numerals('Latin', 1).zfill(100):
+      while not pygame_end:
+        pygame.display.update()
+        event = pygame.event.wait()
+        if event.type == pygame.QUIT:
+          pygame_end = True
+          pygame.quit()
+          break
+        if event.type == pygame.KEYDOWN: 
+          if event.key == pygame.K_p:
+            print(f'''press''')
+            break
+          if event.key == pygame.K_s:
+            stop = 1
+            break
+      time.sleep(0.1)
+    print(f'''Uit de loop!''')""")
+
+    self.multi_level_tester(
+      code=code,
+      max_level=16,
+      expected=expected,
+    )

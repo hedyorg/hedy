@@ -12,6 +12,7 @@ class TestsLevel17(HedyTester):
     naam is 'Hedy'
     if naam is 'Hedy':
         print 'koekoek'""")
+    
     expected = textwrap.dedent("""\
     naam = 'Hedy'
     if convert_numerals('Latin', naam) == convert_numerals('Latin', 'Hedy'):
@@ -132,6 +133,7 @@ class TestsLevel17(HedyTester):
     for a in range 2 to 4:
         a is a + 2
         b is b + 2""")
+    
     expected = textwrap.dedent("""\
     a = 2
     b = 3
@@ -152,6 +154,7 @@ class TestsLevel17(HedyTester):
         x is 2
     else:
         x is 222""")
+    
     expected = textwrap.dedent("""\
     a = 5
     if convert_numerals('Latin', a) == convert_numerals('Latin', '1'):
@@ -165,6 +168,7 @@ class TestsLevel17(HedyTester):
     for i in range 1 to 10:
         print i
     print 'wie niet weg is is gezien'""")
+    
     expected = textwrap.dedent("""\
     step = 1 if 1 < 10 else -1
     for i in range(1, 10 + step, step):
@@ -272,6 +276,7 @@ class TestsLevel17(HedyTester):
           x is 2
       elif a is 2:
           x is 222""")
+    
     expected = textwrap.dedent("""\
       a = 5
       if convert_numerals('Latin', a) == convert_numerals('Latin', '1'):
@@ -290,6 +295,7 @@ class TestsLevel17(HedyTester):
           x est 2
       sinon si a est 2:
           x est 222""")
+    
     expected = textwrap.dedent("""\
       a = 5
       if convert_numerals('Latin', a) == convert_numerals('Latin', '1'):
@@ -308,6 +314,7 @@ class TestsLevel17(HedyTester):
           x is 3
       elif a is 2:
           x is 222""")
+    
     expected = textwrap.dedent("""\
       a = 5
       if convert_numerals('Latin', a) == convert_numerals('Latin', '1'):
@@ -324,6 +331,7 @@ class TestsLevel17(HedyTester):
     items is 'red'
     if 'red' in items:
         a is 1""")
+    
     self.multi_level_tester(
       code=code,
       exception=hedy.exceptions.InvalidArgumentTypeException
@@ -353,6 +361,7 @@ class TestsLevel17(HedyTester):
     b is 15
     if a is b:
       c is 1""")
+    
     self.multi_level_tester(
       code=code,
       exception=hedy.exceptions.InvalidTypeCombinationException
@@ -364,6 +373,7 @@ class TestsLevel17(HedyTester):
       leeftijd is ask 'Hoe oud ben jij?'
       if leeftijd {comparison} 12:
           print 'Dan ben je jonger dan ik!'""")
+    
     expected = textwrap.dedent(f"""\
       leeftijd = input(f'''Hoe oud ben jij?''')
       try:
@@ -394,6 +404,7 @@ class TestsLevel17(HedyTester):
     code = textwrap.dedent(f"""\
     if 'quoted' != 'string':
       sleep""")
+    
     expected = textwrap.dedent(f"""\
     if 'quoted'.zfill(100)!='string'.zfill(100):
       time.sleep(1)""")
@@ -437,3 +448,147 @@ class TestsLevel17(HedyTester):
       code=code,
       exception=exceptions.InvalidTypeCombinationException
     )
+
+  #
+  # if pressed turtle tests
+  #
+  def test_if_pressed_repeat_multiple_x_turtle_move(self):
+      code = textwrap.dedent("""\
+      repeat 10 times
+          if w is pressed:
+              forward 25
+          if a is pressed:
+              turn -90
+          if d is pressed:
+              turn 90
+          if s is pressed:
+              turn 180""")
+
+      expected = HedyTester.dedent("""\
+      for i in range(int('10')):
+        while not pygame_end:
+          pygame.display.update()
+          event = pygame.event.wait()
+          if event.type == pygame.QUIT:
+            pygame_end = True
+            pygame.quit()
+            break
+          if event.type == pygame.KEYDOWN: 
+            if event.key == pygame.K_w:
+              trtl = 25.0
+              try:
+                trtl = float(trtl)
+              except ValueError:
+                raise Exception(f'While running your program the command <span class="command-highlighted">forward</span> received the value <span class="command-highlighted">{trtl}</span> which is not allowed. Try changing the value to a number.')
+              t.forward(min(600, trtl) if trtl > 0 else max(-600, trtl))
+              time.sleep(0.1)
+              break
+            if event.key == pygame.K_a:
+              trtl = -90.0
+              try:
+                trtl = float(trtl)
+              except ValueError:
+                raise Exception(f'While running your program the command <span class="command-highlighted">turn</span> received the value <span class="command-highlighted">{trtl}</span> which is not allowed. Try changing the value to a number.')
+              t.right(min(600, trtl) if trtl > 0 else max(-600, trtl))
+              break
+            if event.key == pygame.K_d:
+              trtl = 90.0
+              try:
+                trtl = float(trtl)
+              except ValueError:
+                raise Exception(f'While running your program the command <span class="command-highlighted">turn</span> received the value <span class="command-highlighted">{trtl}</span> which is not allowed. Try changing the value to a number.')
+              t.right(min(600, trtl) if trtl > 0 else max(-600, trtl))
+              break
+            if event.key == pygame.K_s:
+              trtl = 180.0
+              try:
+                trtl = float(trtl)
+              except ValueError:
+                raise Exception(f'While running your program the command <span class="command-highlighted">turn</span> received the value <span class="command-highlighted">{trtl}</span> which is not allowed. Try changing the value to a number.')
+              t.right(min(600, trtl) if trtl > 0 else max(-600, trtl))
+              break
+        time.sleep(0.1)""")
+
+      self.multi_level_tester(code=code, expected=expected, extra_check_function=self.is_turtle())
+
+  def test_if_pressed_with_turtlecolor(self):
+      code = textwrap.dedent("""\
+      if x is pressed:
+          color red""")
+
+      expected = HedyTester.dedent("""\
+      while not pygame_end:
+        pygame.display.update()
+        event = pygame.event.wait()
+        if event.type == pygame.QUIT:
+          pygame_end = True
+          pygame.quit()
+          break
+        if event.type == pygame.KEYDOWN: 
+          if event.key == pygame.K_x:
+            trtl = f'red'
+            if trtl not in ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']:
+              raise Exception(f'While running your program the command <span class="command-highlighted">color</span> received the value <span class="command-highlighted">{trtl}</span> which is not allowed. Try using another color.')
+            t.pencolor(trtl)
+            break""")
+
+      self.multi_level_tester(
+          code=code,
+          expected=expected,
+          extra_check_function=self.is_turtle()
+      )
+
+  def test_if_pressed_else_with_turtle(self):
+      code = textwrap.dedent("""\
+      if x is pressed:
+          forward 25
+      else:
+          turn 90""")
+
+      expected = HedyTester.dedent("""\
+      while not pygame_end:
+        pygame.display.update()
+        event = pygame.event.wait()
+        if event.type == pygame.QUIT:
+          pygame_end = True
+          pygame.quit()
+          break
+        if event.type == pygame.KEYDOWN: 
+          if event.key == pygame.K_x:
+            trtl = 25.0
+            try:
+              trtl = float(trtl)
+            except ValueError:
+              raise Exception(f'While running your program the command <span class="command-highlighted">forward</span> received the value <span class="command-highlighted">{trtl}</span> which is not allowed. Try changing the value to a number.')
+            t.forward(min(600, trtl) if trtl > 0 else max(-600, trtl))
+            time.sleep(0.1)
+            break    
+          else:
+            trtl = 90.0
+            try:
+              trtl = float(trtl)
+            except ValueError:
+              raise Exception(f'While running your program the command <span class="command-highlighted">turn</span> received the value <span class="command-highlighted">{trtl}</span> which is not allowed. Try changing the value to a number.')
+            t.right(min(600, trtl) if trtl > 0 else max(-600, trtl))
+            break\n""") +  "    "
+
+      self.multi_level_tester(
+          code=code,
+          expected=expected,
+          extra_check_function=self.is_turtle()
+      )
+      
+  #
+  # pressed negative tests
+  #
+
+  def test_if_no_colon_after_pressed_gives_parse_error(self):
+      code = textwrap.dedent("""\
+      if x is pressed
+          print 'no colon!'""")
+
+      self.single_level_tester(
+          code=code,
+          exception=hedy.exceptions.ParseException,
+          extra_check_function=lambda c: c.exception.error_location[0] == 3 and c.exception.error_location[1] == 4
+      )

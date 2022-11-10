@@ -1812,7 +1812,7 @@ class TestsLevel12(HedyTester):
     #
     # if pressed else tests
     #
-#
+
     def test_if_pressed_repeat(self):
         code = textwrap.dedent("""\
         if x is pressed 
@@ -1835,7 +1835,7 @@ class TestsLevel12(HedyTester):
               break""")
 
         self.multi_level_tester(code=code, expected=expected, max_level = 16)
-#
+
     def test_if_pressed_x_else(self):
         code = textwrap.dedent("""\
         if x is pressed
@@ -1860,7 +1860,7 @@ class TestsLevel12(HedyTester):
               break\n""") +  "    "
 
         self.multi_level_tester(code=code, expected=expected, max_level=16)
-#
+
     def test_if_pressed_x_print(self):
         code = textwrap.dedent("""\
         if x is pressed
@@ -1878,7 +1878,7 @@ class TestsLevel12(HedyTester):
                 print(f'''it is a letter key''')
                 break""")
         self.multi_level_tester(code=code, expected=expected, max_level=16)
-#
+
     def test_double_if_pressed(self):
         code = textwrap.dedent("""\
         if x is pressed
@@ -1903,7 +1903,7 @@ class TestsLevel12(HedyTester):
                 break""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=16)
-#
+
     def test_if_pressed_is_number_key_print(self):
         code = textwrap.dedent("""\
         if 1 is pressed
@@ -1924,12 +1924,10 @@ class TestsLevel12(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=16)
 
-
-
     #
     # if pressed turtle tests
     #
-#
+
     def test_if_pressed_repeat_multiple_x_turtle_move(self):
         code = textwrap.dedent("""\
         repeat 10 times
@@ -1941,6 +1939,7 @@ class TestsLevel12(HedyTester):
                 turn 90
             if s is pressed
                 turn 180""")
+                
         expected = HedyTester.dedent("""\
         for i in range(int('10')):
           while not pygame_end:

@@ -300,3 +300,34 @@ class TestsLevel11(HedyTester):
             print x*y""")
 
         self.multi_level_tester(code, exception=hedy.exceptions.IndentationException)
+
+    #
+    # pressed with for loop tests
+    #
+
+    def test_if_pressed_works_in_for_loop(self):
+        code = textwrap.dedent("""\
+        for i in range 1 to 10
+            if p is pressed
+                print 'press'""")
+
+        expected = textwrap.dedent("""\
+        step = 1 if int(1) < int(10) else -1
+        for i in range(int(1), int(10) + step, step):
+          while not pygame_end:
+            pygame.display.update()
+            event = pygame.event.wait()
+            if event.type == pygame.QUIT:
+              pygame_end = True
+              pygame.quit()
+              break
+            if event.type == pygame.KEYDOWN: 
+              if event.key == pygame.K_p:
+                print(f'press')
+                break
+          time.sleep(0.1)""")
+
+        self.single_level_tester(
+            code=code,
+            expected=expected,
+        )
