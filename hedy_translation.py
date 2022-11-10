@@ -66,7 +66,7 @@ def get_target_keyword(keyword_dict, keyword):
 def translate_keywords(input_string_, from_lang="en", to_lang="nl", level=1):
     """"Return code with keywords translated to language of choice in level of choice"""
     try:
-        processed_input = hedy.process_input_string(input_string_, level, escape_backslashes=False)
+        processed_input = hedy.process_input_string(input_string_, level, from_lang, escape_backslashes=False)
 
         parser = hedy.get_parser(level, from_lang, True)
         keyword_dict_from = keywords_to_dict(from_lang)
