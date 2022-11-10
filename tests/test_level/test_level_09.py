@@ -236,4 +236,62 @@ class TestsLevel9(HedyTester):
               break""")
 
         self.multi_level_tester(code=code, expected=expected, max_level = 11)
-        
+
+
+    def test_if_pressed_repeat_turtle_moves_multiple_keys(self):
+        code = textwrap.dedent("""\
+        repeat 10 times
+            if w is pressed
+                forward 25
+            if a is pressed
+                turn -90
+            if d is pressed
+                turn 90
+            if s is pressed
+                turn 180""")
+        expected = HedyTester.dedent("""\
+        for i in range(int('10')):
+          while not pygame_end:
+            pygame.display.update()
+            event = pygame.event.wait()
+            if event.type == pygame.QUIT:
+              pygame_end = True
+              pygame.quit()
+              break
+            if event.type == pygame.KEYDOWN: 
+              if event.key == pygame.K_w:
+                trtl = 25
+                try:
+                  trtl = int(trtl)
+                except ValueError:
+                  raise Exception(f'While running your program the command <span class="command-highlighted">forward</span> received the value <span class="command-highlighted">{trtl}</span> which is not allowed. Try changing the value to a number.')
+                t.forward(min(600, trtl) if trtl > 0 else max(-600, trtl))
+                time.sleep(0.1)
+                break
+              if event.key == pygame.K_a:
+                trtl = -90
+                try:
+                  trtl = int(trtl)
+                except ValueError:
+                  raise Exception(f'While running your program the command <span class="command-highlighted">turn</span> received the value <span class="command-highlighted">{trtl}</span> which is not allowed. Try changing the value to a number.')
+                t.right(min(600, trtl) if trtl > 0 else max(-600, trtl))
+                break
+              if event.key == pygame.K_d:
+                trtl = 90
+                try:
+                  trtl = int(trtl)
+                except ValueError:
+                  raise Exception(f'While running your program the command <span class="command-highlighted">turn</span> received the value <span class="command-highlighted">{trtl}</span> which is not allowed. Try changing the value to a number.')
+                t.right(min(600, trtl) if trtl > 0 else max(-600, trtl))
+                break
+              if event.key == pygame.K_s:
+                trtl = 180
+                try:
+                  trtl = int(trtl)
+                except ValueError:
+                  raise Exception(f'While running your program the command <span class="command-highlighted">turn</span> received the value <span class="command-highlighted">{trtl}</span> which is not allowed. Try changing the value to a number.')
+                t.right(min(600, trtl) if trtl > 0 else max(-600, trtl))
+                break
+          time.sleep(0.1)""")
+
+        self.multi_level_tester(code=code, expected=expected, extra_check_function=self.is_turtle(), max_level = 11)
