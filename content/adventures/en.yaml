@@ -577,6 +577,8 @@ adventures:
                     In a story, someone says words several times. For example, when someone calls for help or sings a song.
                     You can put such repetitions in your story, in this level with `{repeat}`.
 
+                    ## Challenge
+                    Can you make your own story with repitition?
                 example_code: |
                     ```
                     {print} 'The prince kept calling for help'
@@ -1186,7 +1188,7 @@ adventures:
                 example_code: |
                     ```
                     {print} 'Draw figures'
-                    {repeat} 3 {times} {forward} 10
+                    _ 3 _ {forward} 10
                     ```
                 start_code: |-
                     {print} 'Draw figures'
@@ -1963,12 +1965,15 @@ adventures:
                 story_text: |
                     ## Restaurant
                     In this level you've learned how to use the `{repeat}` command to repeat a line of code a certain amount of times.
-                    You can use that in your restaurant to `{ask}` multiple people what they'd like to eat. Like this:
+                    You can use that in your restaurant to `{ask}` multiple people what they'd like to eat.
+
+                    ## Challenge
+                    Can you fill in the blanks? Hedy needs to repeat this question as many times as there are people. So of there are 5 people, the question needs to be asked 5 times.
                 example_code: |
                     ```
                     {print} 'Welcome to Hedys restaurant!'
                     people = {ask} 'How many people are joining us today?'
-                    {repeat} people times food = {ask} 'What would you like to eat?'
+                    {repeat} _ times food = {ask} 'What would you like to eat?'
                     {print} 'Thanks for your order! Its coming right up!'
                     ```
                 start_code: "# place your code here"
