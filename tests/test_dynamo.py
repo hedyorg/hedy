@@ -1,8 +1,9 @@
-from website import dynamo
+import contextlib
+import os
 import unittest
 from unittest import mock
-import os
-import contextlib
+
+from website import dynamo
 
 
 class Helpers:

@@ -1,6 +1,8 @@
 import unittest
-import hedy
+
 from parameterized import parameterized
+
+import hedy
 
 
 class TestsKeywordSuggestions(unittest.TestCase):

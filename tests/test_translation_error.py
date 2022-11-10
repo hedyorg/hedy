@@ -1,7 +1,8 @@
+from parameterized import parameterized
+
 from app import app, translate_error
 from hedy import exceptions
 from hedy_content import ALL_LANGUAGES
-from parameterized import parameterized
 from tests.Tester import HedyTester
 
 

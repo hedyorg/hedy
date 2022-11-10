@@ -1,5 +1,6 @@
-from website import querylog, log_queue
 import unittest
+
+from website import log_queue, querylog
 
 
 class TestQueryLog(unittest.TestCase):

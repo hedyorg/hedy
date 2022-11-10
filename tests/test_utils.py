@@ -1,6 +1,8 @@
 import unittest
-import utils
+
 import bcrypt
+
+import utils
 
 
 class TestUtils(unittest.TestCase):

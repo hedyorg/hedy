@@ -1,8 +1,7 @@
-import unittest
-import re
 import json
 import os
-
+import re
+import unittest
 
 # Transcription of the used tokens into a symbol (a letter) in order to apply a coloring
 TOKEN_CODE = {
