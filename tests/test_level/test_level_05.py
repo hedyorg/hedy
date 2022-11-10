@@ -373,20 +373,20 @@ class TestsLevel5(HedyTester):
           print(f'minder leuk')""")
 
         self.single_level_tester(code=code, expected=expected)
-      
+
     def test_if_with_negative_number(self):
-      code = textwrap.dedent("""\
+        code = textwrap.dedent("""\
       antwoord is -10
       if antwoord is -10 print 'Nice' else print 'Oh no'""")
-      
-      expected = textwrap.dedent("""\
+
+        expected = textwrap.dedent("""\
       antwoord = '-10'
       if antwoord == '-10':
         print(f'Nice')
       else:
         print(f'Oh no')""")
-      
-      self.single_level_tester(code=code, expected=expected, output='Nice')
+
+        self.single_level_tester(code=code, expected=expected, output='Nice')
 
     def test_if_equality_linebreak_print_linebreak_else_print(self):
         # line breaks after if-condition and before else are allowed
@@ -555,8 +555,8 @@ class TestsLevel5(HedyTester):
         print(f'test')""")
 
         self.single_level_tester(code=code,
-                                expected=expected,
-                                translate=False)
+                                 expected=expected,
+                                 translate=False)
 
     def test_restaurant_example(self):
         code = textwrap.dedent("""\
@@ -580,8 +580,8 @@ class TestsLevel5(HedyTester):
         print(f'{eten}')""")
 
         self.single_level_tester(code=code,
-                                expected=expected,
-                                translate=False)
+                                 expected=expected,
+                                 translate=False)
 
     def test_onno_3372_else(self):
         code = textwrap.dedent("""\
@@ -598,8 +598,8 @@ class TestsLevel5(HedyTester):
         print(f'test')""")
 
         self.single_level_tester(code=code,
-                                expected=expected,
-                                translate=False)
+                                 expected=expected,
+                                 translate=False)
 
     def test_consecutive_if_and_if_else_statements(self):
         code = textwrap.dedent("""\
@@ -620,8 +620,8 @@ class TestsLevel5(HedyTester):
           print(f'minder leuk!')""")
 
         self.single_level_tester(code=code,
-                                expected=expected,
-                                translate=False)
+                                 expected=expected,
+                                 translate=False)
 
     def test_consecutive_if_else_statements(self):
         code = textwrap.dedent("""\
@@ -680,20 +680,21 @@ class TestsLevel5(HedyTester):
         self.single_level_tester(code=code, expected=expected)
 
     def test_list_access_index(self):
-      code = textwrap.dedent("""\
+        code = textwrap.dedent("""\
       friends is Hedy, Lola, Frida
       friend is friends at 2
       print friend""")
-      
-      expected = textwrap.dedent("""\
+
+        expected = textwrap.dedent("""\
       friends = ['Hedy', 'Lola', 'Frida']
       friend = friends[2-1]
       print(f'{friend}')""")
-      
-      self.multi_level_tester(code=code, expected=expected, max_level=11)
+
+        self.multi_level_tester(code=code, expected=expected, max_level=11)
     #
     # negative tests
     #
+
     def test_if_indent_gives_parse_error(self):
         code = textwrap.dedent("""\
         option is ask 'Rock Paper or Scissors?'

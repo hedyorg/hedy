@@ -1,8 +1,10 @@
+import textwrap
+
+from parameterized import parameterized
+
 import hedy
 from hedy import Command
-import textwrap
 from tests.Tester import HedyTester
-from parameterized import parameterized
 
 
 class TestsLevel8(HedyTester):
@@ -281,7 +283,7 @@ class TestsLevel8(HedyTester):
         antwoord = -10
         if antwoord is -10
             print 'Nice'""")
-        
+
         expected = textwrap.dedent("""\
         antwoord = '-10'
         if convert_numerals('Latin', antwoord) == convert_numerals('Latin', '-10'):
@@ -289,10 +291,10 @@ class TestsLevel8(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, output='Nice', max_level=11)
 
-    
     #
     # if else tests
     #
+
     def test_if_else_no_indentation(self):
         code = textwrap.dedent("""\
         antwoord is ask Hoeveel is 10 keer tien?

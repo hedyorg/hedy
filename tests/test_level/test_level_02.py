@@ -1,7 +1,9 @@
-import hedy
 import textwrap
-from hedy import Command
+
 from parameterized import parameterized
+
+import hedy
+from hedy import Command
 from tests.Tester import HedyTester
 
 
@@ -65,7 +67,7 @@ class TestsLevel2(HedyTester):
         self.multi_level_tester(code=code, expected=expected, output=output, max_level=3)
 
     def test_print_var_with_comma(self):
-        #test for issue 2549
+        # test for issue 2549
         code = textwrap.dedent("""\
         name is test
         print name, heya!""")
@@ -103,11 +105,10 @@ class TestsLevel2(HedyTester):
         expected = "print(f'hello world!\\'')"
         output = "hello world!\'"
 
-        self.multi_level_tester\
-            (code=code,
-             expected=expected,
-             output=output,
-             max_level=3)
+        self.multi_level_tester(code=code,
+                                expected=expected,
+                                output=output,
+                                max_level=3)
 
     def test_print_double_quoted_text(self):
         code = 'print "Welcome to OceanView"'
@@ -365,8 +366,8 @@ class TestsLevel2(HedyTester):
         code = textwrap.dedent("""\
             print the name program
             name is Hedy""")
-        with self.assertRaises(hedy.exceptions.AccessBeforeAssign) as context:
-            result = hedy.transpile(code, self.level)
+        with self.assertRaises(hedy.exceptions.AccessBeforeAssign):
+            hedy.transpile(code, self.level)
 
     def test_turn_with_string_var_gives_type_error(self):
         code = textwrap.dedent("""\

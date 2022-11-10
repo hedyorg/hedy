@@ -1,7 +1,6 @@
-from cmath import exp
-import hedy
 import textwrap
 from parameterized import parameterized
+import hedy
 from tests.Tester import HedyTester
 
 
@@ -117,22 +116,22 @@ class TestsLevel6(HedyTester):
             code=code,
             expected=expected
         )
-    
+
     def test_assign_substract_negative_number(self):
-      
-      code = textwrap.dedent("""\
+
+        code = textwrap.dedent("""\
       n = -3-4
       print n""")
-      
-      expected = textwrap.dedent("""\
+
+        expected = textwrap.dedent("""\
       n = int(-3) - int(4)
       print(f'{n}')""")
 
-      self.multi_level_tester(
-        max_level=11,
-        code=code,
-        expected=expected
-      )
+        self.multi_level_tester(
+            max_level=11,
+            code=code,
+            expected=expected
+        )
 
     #
     # if tests
@@ -154,7 +153,7 @@ class TestsLevel6(HedyTester):
     def test_if_equality_trailing_space_linebreak_print(self):
         code = textwrap.dedent("""\
         naam is James
-        if naam is trailing_space 
+        if naam is trailing_space
         print 'shaken'""")
 
         expected = textwrap.dedent("""\
@@ -363,20 +362,20 @@ class TestsLevel6(HedyTester):
           acu = int(acu) + int(5)""")
 
         self.multi_level_tester(max_level=7, code=code, expected=expected)
-      
+
     def test_if_with_negative_number(self):
-      code = textwrap.dedent("""\
+        code = textwrap.dedent("""\
       antwoord is -10
       if antwoord is -10 print 'Nice' else print 'Oh no'""")
-      
-      expected = textwrap.dedent("""\
+
+        expected = textwrap.dedent("""\
       antwoord = '-10'
       if convert_numerals('Latin', antwoord) == convert_numerals('Latin', '-10'):
         print(f'Nice')
       else:
         print(f'Oh no')""")
-      
-      self.multi_level_tester(code=code, expected=expected, output='Nice', max_level=7)
+
+        self.multi_level_tester(code=code, expected=expected, output='Nice', max_level=7)
 
     # Legal syntax:
     #
@@ -544,8 +543,6 @@ class TestsLevel6(HedyTester):
             code=code,
             expected=expected,
             output=output)
-
-
 
     def test_print_nested_calcs(self):
         code = "print 5 * 5 * 5"
@@ -880,24 +877,24 @@ class TestsLevel6(HedyTester):
         self.multi_level_tester(max_level=6, code=code, expected=expected)
 
     def test_negative_variable(self):
-      code = textwrap.dedent("""\
+        code = textwrap.dedent("""\
         a = -3
         b = a + 3
         print b""")
-      expected = textwrap.dedent("""\
+        expected = textwrap.dedent("""\
         a = '-3'
         b = int(a) + int(3)
         print(f'{b}')""")
-      self.multi_level_tester(code=code, expected=expected, output='0', max_level=11)
+        self.multi_level_tester(code=code, expected=expected, output='0', max_level=11)
 
     def test_turtle_with_expression(self):
-      self.maxDiff = None
-      code = textwrap.dedent("""\
+        self.maxDiff = None
+        code = textwrap.dedent("""\
         num = 10
         turn num + 10
         forward 10 + num""")
 
-      expected = textwrap.dedent("""\
+        expected = textwrap.dedent("""\
         num = '10'
         trtl = int(num) + int(10)
         try:
@@ -913,4 +910,4 @@ class TestsLevel6(HedyTester):
         t.forward(min(600, trtl) if trtl > 0 else max(-600, trtl))
         time.sleep(0.1)""")
 
-      self.multi_level_tester(code=code, expected=expected, max_level=11)
+        self.multi_level_tester(code=code, expected=expected, max_level=11)

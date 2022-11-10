@@ -1,18 +1,19 @@
 
-import hedy
 import textwrap
+
 from tests.Tester import HedyTester
 
-class TestsLevel13(HedyTester):
-  level = 13
 
-  def test_and(self):
-    code = textwrap.dedent("""\
+class TestsLevel13(HedyTester):
+    level = 13
+
+    def test_and(self):
+        code = textwrap.dedent("""\
       naam is ask 'hoe heet jij?'
       leeftijd is ask 'hoe oud ben jij?'
       if naam is 'Felienne' and leeftijd is 37
           print 'hallo jij!'""")
-    expected = textwrap.dedent("""\
+        expected = textwrap.dedent("""\
       naam = input(f'''hoe heet jij?''')
       try:
         naam = int(naam)
@@ -32,20 +33,20 @@ class TestsLevel13(HedyTester):
       if convert_numerals('Latin', naam) == convert_numerals('Latin', 'Felienne') and convert_numerals('Latin', leeftijd) == convert_numerals('Latin', '37'):
         print(f'''hallo jij!''')""")
 
-    self.multi_level_tester(
-      max_level=16,
-      code=code,
-      expected=expected
-    )
+        self.multi_level_tester(
+            max_level=16,
+            code=code,
+            expected=expected
+        )
 
-  def test_equals(self):
-    code = textwrap.dedent("""\
+    def test_equals(self):
+        code = textwrap.dedent("""\
     name = ask 'what is your name?'
     age = ask 'what is your age?'
     if name is 'Hedy' and age is 2
         print 'You are the real Hedy!'""")
 
-    expected = textwrap.dedent("""\
+        expected = textwrap.dedent("""\
       name = input(f'''what is your name?''')
       try:
         name = int(name)
@@ -65,28 +66,24 @@ class TestsLevel13(HedyTester):
       if convert_numerals('Latin', name) == convert_numerals('Latin', 'Hedy') and convert_numerals('Latin', age) == convert_numerals('Latin', '2'):
         print(f'''You are the real Hedy!''')""")
 
-    self.multi_level_tester(
-      code=code,
-      max_level=16,
-      expected=expected,
-      expected_commands=['ask', 'ask', 'if', 'and', 'print']
-    )
+        self.multi_level_tester(
+            code=code,
+            max_level=16,
+            expected=expected,
+            expected_commands=['ask', 'ask', 'if', 'and', 'print']
+        )
 
-
-  def test_or(self):
-    code = textwrap.dedent("""\
+    def test_or(self):
+        code = textwrap.dedent("""\
       if 5 is 5 or 4 is 4
           print 'hallo'""")
-    expected = textwrap.dedent("""\
+        expected = textwrap.dedent("""\
       if convert_numerals('Latin', '5') == convert_numerals('Latin', '5') or convert_numerals('Latin', '4') == convert_numerals('Latin', '4'):
         print(f'''hallo''')""")
 
-    self.multi_level_tester(
-      code=code,
-      max_level=16,
-      expected=expected,
-      expected_commands=['if', 'or', 'print']
-    )
-
-
-
+        self.multi_level_tester(
+            code=code,
+            max_level=16,
+            expected=expected,
+            expected_commands=['if', 'or', 'print']
+        )

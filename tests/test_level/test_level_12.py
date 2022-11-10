@@ -1,7 +1,9 @@
+import textwrap
+
+from parameterized import parameterized
+
 import hedy
 from hedy import Command
-import textwrap
-from parameterized import parameterized
 from tests.Tester import HedyTester
 
 
@@ -36,9 +38,10 @@ class TestsLevel12(HedyTester):
             max_level=17,
             expected=expected
         )
+
     def test_print_float(self):
         code = "print 3.14"
-        
+
         expected = "print(f'''3.14''')"
 
         self.multi_level_tester(
@@ -47,6 +50,7 @@ class TestsLevel12(HedyTester):
             expected=expected,
             output='3.14'
         )
+
     def test_print_division_float(self):
         code = "print 3 / 2"
         expected = "print(f'''{3 / 2}''')"
@@ -102,7 +106,6 @@ class TestsLevel12(HedyTester):
             max_level=15,
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
-
 
     def test_print_subtraction_with_text(self):
         code = "print 'And the winner is ' 5 - 5"
@@ -358,7 +361,7 @@ class TestsLevel12(HedyTester):
 
         expected = HedyTester.dedent("""\
         directions = [10, 100, 360]""",
-        HedyTester.forward_transpiled('random.choice(directions)', self.level))
+                                     HedyTester.forward_transpiled('random.choice(directions)', self.level))
 
         self.multi_level_tester(
             max_level=15,
@@ -389,7 +392,7 @@ class TestsLevel12(HedyTester):
             الزاوية هو ٩.٠
             استدر الزاوية
             تقدم ١٠.١٠""")
-        
+
         expected = HedyTester.dedent(
             "الزاوية = 9.0",
             HedyTester.turn_transpiled("الزاوية", self.level),
@@ -402,14 +405,14 @@ class TestsLevel12(HedyTester):
             expected=expected,
             extra_check_function=self.is_turtle()
         )
-    
+
     def test_turtle_with_expression(self):
 
         code = textwrap.dedent("""\
             num = 10.6
             turn num + 10.5
             forward 10.5 + num""")
-            
+
         expected = HedyTester.dedent(
             "num = 10.6",
             HedyTester.turn_transpiled('num + 10.5', self.level),
@@ -450,7 +453,7 @@ class TestsLevel12(HedyTester):
 
         expected = HedyTester.dedent("""\
         directions = [10, 100, 360]""",
-        HedyTester.turn_transpiled('random.choice(directions)', self.level))
+                                     HedyTester.turn_transpiled('random.choice(directions)', self.level))
 
         self.multi_level_tester(
             max_level=15,
@@ -473,7 +476,7 @@ class TestsLevel12(HedyTester):
                 afstand = float(afstand)
               except ValueError:
                 pass""",
-            HedyTester.forward_transpiled('afstand', self.level))
+                                     HedyTester.forward_transpiled('afstand', self.level))
 
         self.multi_level_tester(
             max_level=17,
@@ -1343,7 +1346,8 @@ class TestsLevel12(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=17)
 
-    @parameterized.expand(['5', '𑁫', '५', '૫', '੫', '৫', '೫', '୫', '൫', '௫', '౫', '၅', '༥', '᠕', '៥', '๕', '໕', '꧕', '٥', '۵'])
+    @parameterized.expand(['5', '𑁫', '५', '૫', '੫', '৫', '೫', '୫', '൫', '௫',
+                          '౫', '၅', '༥', '᠕', '៥', '๕', '໕', '꧕', '٥', '۵'])
     def test_repeat_with_all_numerals(self, number):
         code = textwrap.dedent(f"""\
         repeat {number} times
@@ -1549,7 +1553,7 @@ class TestsLevel12(HedyTester):
         expected = HedyTester.dedent("""\
         step = 1 if 0 < 10 else -1
         for i in range(0, 10 + step, step):""",
-          (HedyTester.input_transpiled('antwoord', 'Wat is 5*5'), '  '), """\
+                                     (HedyTester.input_transpiled('antwoord', 'Wat is 5*5'), '  '), """\
           if convert_numerals('Latin', antwoord) == convert_numerals('Latin', '24'):
             print(f'''fout''')
           time.sleep(0.1)

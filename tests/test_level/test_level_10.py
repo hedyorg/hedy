@@ -1,5 +1,6 @@
-import hedy
 import textwrap
+
+import hedy
 from tests.Tester import HedyTester
 
 
