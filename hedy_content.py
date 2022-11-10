@@ -160,23 +160,23 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'end'
     ],
     8: [
-        'default',  
+        'default',
+        'story',
+        'songs',
         'fortune',
         'haunted',
         'restaurant',
-        'story',
-        'songs',
         'turtle',
         'next',
         'end'
     ],
     9: [
         'default',
+        'rock',
+        'story',
+        'calculator',
         'haunted',
         'restaurant',
-        'story',  
-        'rock',
-        'calculator',
         'next',
         'end'
     ],

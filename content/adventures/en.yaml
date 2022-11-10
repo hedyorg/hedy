@@ -592,6 +592,8 @@ adventures:
                     ## Story
                     In this level you can use multiple lines in your {if} commands, this way you can upgrade your happy or sad ending!
 
+                    ## Challenge
+                    Can you make your own story with two different endings?
                 example_code: |
                     ```
                     {print} 'OH NO! The T-rex is closing in!'
@@ -891,11 +893,12 @@ adventures:
             8:
                 story_text: |
                     ## Songs
-                    In a previous level you've programmed the song 'Bottles of beer'. You made one verse and then had to copy the verses 99 times. In level 7 you can repeat the song 99 times, just by adding one simple line!
+                    In a previous level you've programmed the song 'Bottles of beer'. You made one verse and then had to copy the verses 99 times. In this level you can repeat the song 99 times, just by adding one simple line!
+                    Do you know which line of code to add on the blanks?
                 example_code: |
                     ```
                     verse = 99
-                    {repeat} 99 {times}
+                    _ _ _
                         {print} verse ' bottles of beer on the wall'
                         {print} verse ' bottles of beer'
                         {print} 'Take one down, pass it around'
@@ -1678,7 +1681,9 @@ adventures:
             9:
                 story_text: |
                     ## Calculator
-                    In previous levels you've learned how to make a calculator, in this level you can expand that code and make it into a little maths game. Like this...
+                    In previous levels you've learned how to make a calculator, in this level you can expand that code and make it into a little maths game.
+                    ## Challenge
+                    Can you finish line 10 to make to program work?
                 example_code: |
                     ```
                     score = 0
@@ -1690,7 +1695,7 @@ adventures:
                         {print} 'What is ' number1 ' times ' number2 '?'
                         answer = {ask} 'Type your answer here...'
                         {print} 'Your answer is' answer
-                        {if} answer {is} correct_answer
+                        {if} _ {is} _
                             score = score + 1
                     {print} 'Great job! Your score is... ' score ' out of 10!'
                     ```
@@ -2000,8 +2005,13 @@ adventures:
                 story_text: |
                     ## Restaurant
                     In this level you can use nesting to make your restaurant more realistic and more fun!
-                    For example you would `{ask}` for sauce `{if}` somebody orders fries, but you wouldn't `{if}` someone orders pizza!
-                    Check out the example, and try this at your own virtual restaurant!
+                    For example you would ask for sauce if somebody orders fries, but you wouldn't if someone orders pizza!
+
+                    ## Challenge
+                    This is a challenge for the real brainiacs! Each line that needs indentation has been given a blank.
+                    Can you figure out how much indentation each line needs in order for the code to work propperly?
+                    Good luck!
+                    TIP: If the customer orders pizza, Hedy shouldn't ask what sauce the costumer wants. 
                 example_code: |
                     ```
                     {print} 'Welcome to Hedys restaurant!'
@@ -2009,18 +2019,18 @@ adventures:
                     {print} 'Great!'
                     price = 0
                     {repeat} people {times}
-                        food = {ask} 'What would you like to order?'
-                        {print} food
-                        {if} food {is} fries
-                            price = price + 3
-                            sauce = {ask} 'What kind of sauce would you like with your fries?'
-                            {if} sauce {is} no
-                                {print} 'no sauce'
-                            {else}
-                                price = price + 1
-                                {print} 'with ' sauce
-                        {if} food {is} pizza
-                            price = price + 4
+                    _ food = {ask} 'What would you like to order?'
+                    _ {print} food
+                    _ {if} food {is} fries
+                    _ price = price + 3
+                    _ sauce = {ask} 'What kind of sauce would you like with your fries?'
+                    _ {if} sauce {is} no
+                    _ {print} 'no sauce'
+                    _ {else}
+                    _ price = price + 1
+                    _ {print} 'with ' sauce
+                    _ {if} food {is} pizza
+                    _ price = price + 4
                     {print} 'That will be ' price ' dollar'
                     {print} 'Enjoy your meal!'
                     ```
@@ -2309,12 +2319,15 @@ adventures:
                     In the previous levels you've learned how to use repeat to make the fortune teller answer 3 questions in a row, but we had a problem with printing the questions.
                     Now that problem is solved, because of the new way of using the repeat command.
                     In the next example you can have your fortune teller {ask} 3 questions and also print them!
+
+                    ## Challenge
+                    Can you fill in the repeat command correctly on the blanks?
                 example_code: |
                     ```
                     {print} 'I am Hedy the fortune teller!'
                     {print} 'You can {ask} me 3 questions.'
                     answers = yes, no, maybe
-                    {repeat} 3 {times}
+                    _ _ _
                        question = {ask} 'What do you want to know?'
                        {print} question
                        {sleep}
