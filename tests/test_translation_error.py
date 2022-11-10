@@ -13,7 +13,8 @@ def exception_language_input():
 
 def custom_name_func(testcase_func, _, param):
     (ex, lang) = param.args
-    return parameterized.to_safe_name(f"{testcase_func.__name__}_{ex.__class__.__name__}_to_{lang}_lang")
+    return parameterized.to_safe_name(
+        f"{testcase_func.__name__}_{ex.__class__.__name__}_to_{lang}_lang")
 
 
 def create_exceptions():
@@ -22,7 +23,8 @@ def create_exceptions():
 
 
 def create_exception(ex_class):
-    ex_args = [f'{n}-value' for n in ex_class.__init__.__code__.co_varnames if n not in ['self', 'arguments']]
+    ex_args = [
+        f'{n}-value' for n in ex_class.__init__.__code__.co_varnames if n not in ['self', 'arguments']]
     return ex_class(*ex_args)
 
 
