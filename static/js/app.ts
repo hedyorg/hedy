@@ -2047,6 +2047,20 @@ function markCurrentDebuggerLine() {
   }
 }
 
+export function hide_editor() {
+  $('#fold_in_toggle_container').hide();
+  $('#code_editor').toggle();
+  $('#code_output').addClass('col-span-2');
+  $('#fold_out_toggle_container').show();
+}
+
+export function show_editor() {
+  $('#fold_out_toggle_container').hide();
+  $('#code_editor').toggle();
+  $('#code_output').removeClass('col-span-2');
+  $('#fold_in_toggle_container').show();
+}
+
 // See https://github.com/skulpt/skulpt/pull/579#issue-156538278 for the JS version of this code
 // We support multiple timers, even though it's unlikely we would ever need them
 let timers: number[] = [];
