@@ -128,11 +128,14 @@ class ProgramsModule(WebsiteModule):
         self.db.increase_user_save_count(user['username'])
         self.achievements.increase_count("saved")
 
+        # Todo TB: Would be nice to clean-up this response (a lot) by removing all duplicate dict entries
         if self.achievements.verify_save_achievements(user['username'],
                                                     'adventure_name' in body and len(body['adventure_name']) > 2):
             return jsonify(
-                {'message': gettext('save_success_detail'), 'name': body['name'], 'id': program_id, "achievements": self.achievements.get_earned_achievements()})
-        return jsonify({'message': gettext('save_success_detail'), 'name': body['name'], 'id': program_id})
+                {'message': gettext('save_success_detail'), 'share_message': gettext('copy_clipboard'),
+                 'name': body['name'], 'id': program_id, "achievements": self.achievements.get_earned_achievements()})
+        return jsonify({'message': gettext('save_success_detail'), 'share_message': gettext('copy_clipboard'),
+                        'name': body['name'], 'id': program_id})
 
     @route('/share', methods=['POST'])
     @requires_login
