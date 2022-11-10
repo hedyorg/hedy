@@ -608,7 +608,6 @@ function storeProgram(level: number | [number, string], lang: string, name: stri
     // The auth functions use this callback function.
     if (cb) return response.Error ? cb (response) : cb (null, response);
     if (shared) {
-      console.log(response);
       $('#modal-copy-button').attr('onclick', "hedyApp.copy_to_clipboard('" + viewProgramLink(response.id) + "', '" + response.share_message + "')");
       modal.copy_alert (response.message, 5000);
     } else {
