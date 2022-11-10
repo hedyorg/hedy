@@ -1,15 +1,17 @@
 import os
-import hedy
-from website.yaml_file import YamlFile
 import unittest
-from tests.Tester import HedyTester, Snippet
+
 from parameterized import parameterized
-from hedy_content import ALL_KEYWORD_LANGUAGES
+
+import hedy
+from tests.Tester import HedyTester, Snippet
+from website.yaml_file import YamlFile
 
 # Set the current directory to the root Hedy folder
 os.chdir(os.path.join(os.getcwd(), __file__.replace(os.path.basename(__file__), '')))
 
 unique_snippets_table = set()
+
 
 def collect_snippets(path):
     Hedy_snippets = []
@@ -41,12 +43,17 @@ def collect_snippets(path):
                             continue
                         else:
                             unique_snippets_table.add(hash(code))
-                        Hedy_snippets.append(Snippet(filename=file, level=level, field_name=f"{exercise_id}", code=code))
-                except:
+                        Hedy_snippets.append(
+                            Snippet(
+                                filename=file,
+                                level=level,
+                                field_name=f"{exercise_id}",
+                                code=code))
+                except BaseException:
                     print(f'Problem reading commands yaml for {lang} level {level}')
 
-
     return Hedy_snippets
+
 
 Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/parsons')]
 Hedy_snippets = HedyTester.translate_keywords_in_snippets(Hedy_snippets)
