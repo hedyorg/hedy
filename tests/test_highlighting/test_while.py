@@ -1,5 +1,7 @@
-from tests.Highlighter import HighlightTester
 from parameterized import parameterized
+
+from tests.Highlighter import HighlightTester
+
 
 class HighlighterTestWhile(HighlightTester):
 
@@ -26,7 +28,6 @@ class HighlighterTestWhile(HighlightTester):
             "while keys != 'lost'",
             "KKKKK TTTT KK SSSSSS",
             level=level, lang="en")
-
 
     @parameterized.expand([
         ("level15"),

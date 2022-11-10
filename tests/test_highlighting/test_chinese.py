@@ -1,5 +1,7 @@
-from tests.Highlighter import HighlightTester
 from parameterized import parameterized
+
+from tests.Highlighter import HighlightTester
+
 
 class HighlighterTestPrintChinese(HighlightTester):
 
@@ -36,8 +38,6 @@ class HighlighterTestPrintChinese(HighlightTester):
             "KK SSSSSSSSSSSSSSSS",
             level=level, lang='zh_Hans')
 
-
-
     @parameterized.expand([
         ("level3"),
         ("level4"),
@@ -60,8 +60,6 @@ class HighlighterTestPrintChinese(HighlightTester):
             "打印 动物们 在 随机",
             "KK TTT K KK",
             level=level, lang='zh_Hans')
-
-
 
     def test_print_random1(self):
         self.assert_highlighted_chr(
@@ -90,4 +88,3 @@ class HighlighterTestPrintChinese(HighlightTester):
             "打印 '从现在开始我们需要使用什么？' 答案 在 随机",
             "KK SSSSSSSSSSSSSSSS TT K KK",
             level=level, lang='zh_Hans')
-
