@@ -9,7 +9,7 @@ describe('Is able to click on duplicate class', () => {
     goToTeachersPage();
 
     // Click on duplicate icon
-    cy.get('.no-underline > .fas').click();
+    cy.get('.no-underline > .fas').first().click();
 
     // Checks for input field
     cy.get('#modal-prompt-input').should('be.empty');

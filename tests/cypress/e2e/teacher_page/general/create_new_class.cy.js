@@ -10,6 +10,6 @@ describe('Is able to create new class', () => {
 
     // Assert that there is a class that's called: test class
     //
-    cy.get('tbody > :nth-child(1) > .px-4').should("have.text", "test class");
+    cy.get('tbody > :nth-child(1) > .px-4').should("contain.text", "test class");
 });
 });
