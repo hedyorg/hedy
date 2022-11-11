@@ -13,6 +13,7 @@ os.chdir(os.path.join(os.getcwd(), __file__.replace(os.path.basename(__file__), 
 
 unique_snippets_table = set()
 filtered_language = None
+level = None
 
 def collect_snippets(path, filtered_language = None):
   Hedy_snippets = []
@@ -87,6 +88,7 @@ def collect_snippets(path, filtered_language = None):
 
   return Hedy_snippets
 
+# filtered_language = 'en'
 # use this to filter on 1 lang, zh_Hans for Chinese, nb_NO for Norwegian, pt_PT for Portuguese
 # filtered_language = 'en'
 
