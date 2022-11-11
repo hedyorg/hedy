@@ -1383,7 +1383,6 @@ def get_highscores_page(user, filter):
                            in_class=True if classes else False)
 
 
-# Fixme: TB -> Why is the response code inside the response dictionary? This doesn't make any sense
 @app.route('/change_language', methods=['POST'])
 def change_language():
     body = request.json
@@ -1392,7 +1391,6 @@ def change_language():
     return '', 204
 
 
-# Fixme: TB -> Why is the response code inside the response dictionary? This doesn't make any sense
 @app.route('/translate_keywords', methods=['POST'])
 def translate_keywords():
     body = request.json
@@ -1400,7 +1398,7 @@ def translate_keywords():
         translated_code = hedy_translation.translate_keywords(body.get('code'), body.get(
             'start_lang'), body.get('goal_lang'), level=int(body.get('level', 1)))
         if translated_code:
-            return jsonify({'success': 200, 'code': translated_code})
+            return jsonify({'code': translated_code})
         else:
             return gettext('translate_error'), 400
     except:
@@ -1412,7 +1410,7 @@ def translate_keywords():
 def get_tutorial_translation(level, step):
     # Keep this structure temporary until we decide on a nice code / parse structure
     if step == "code_snippet":
-        return jsonify({'code': gettext('tutorial_code_snippet')}), 200
+        return jsonify({'code': gettext('tutorial_code_snippet')})
     try:
         step = int(step)
     except ValueError:
@@ -1421,7 +1419,7 @@ def get_tutorial_translation(level, step):
     data = TUTORIALS[g.lang].get_tutorial_for_level_step(level, step, g.keyword_lang)
     if not data:
         data = {'title': gettext('tutorial_title_not_found'), 'text': gettext('tutorial_message_not_found')}
-    return jsonify(data), 200
+    return jsonify(data)
 
 
 @app.route('/store_parsons_order', methods=['POST'])

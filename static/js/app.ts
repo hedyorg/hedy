@@ -1787,11 +1787,9 @@ export function change_keyword_language(start_lang: string, new_lang: string) {
     contentType: 'application/json',
     dataType: 'json'
   }).done(function (response: any) {
-    if (response.success) {
       ace.edit('editor').setValue(response.code);
       $('#editor').attr('lang', new_lang);
       update_view('main_editor_keyword_selector', new_lang);
-    }
   }).fail(function (err) {
       modal.alert(err.responseText, 3000, true);
   });
