@@ -408,12 +408,12 @@ adventures:
                 example_code: |
                     ```
                     {print}('Hallo!')
-                    {for} i in {range}(1, 10):
+                    {for} i {in} {range}(1, 10):
                         {print}('Dit is regel ', i)
                     ```
                 story_text_2: Als je meer dan één tekst wilt printen, moeten er komma's tussen.
-                example_code_2: "```\ntemperatuur = 25\n{print}('Het is ', temperatuur, 'graden buiten')\n```\n"
-                story_text_3: "##  Input\nDe laatste aanpassing die we moeten maken om echte Python code te krijgen is `{ask}` veranderen in `{input}`."
+                example_code_2: "```\ntemperatuur = 25\n{print}('Het is ', temperatuur, ' graden buiten')\n```\n"
+                story_text_3: "## Input\nDe laatste aanpassing die we moeten maken om echte Python code te krijgen is `{ask}` veranderen in `{input}`."
                 example_code_3: "```\n{print}('Mijn naam is Hedy!')\nnaam = {input}('Hoe heet jij?')\n{print}('Jij heet dus ', naam)\n```\n"
     story:
         name: "Verhaal"
@@ -489,10 +489,8 @@ adventures:
             4:
                 story_text: |
                     ## Verhaal
-                    Misschien heb je gezien dat in het vorige level nog wel een foutje zit.
-                    Heb je toevallig geprobeerd om een zin te maken waarin het woord naam zat? Bijv. `{print} mijn naam {is} naam`.
-                    Dat werkte niet goed! Dan krijg je: `mijn Henk {is} Henk`. Dat kun je in dit level oplossen.
-                    Daarvoor moet je wel aanhalingstekens gebruiken bij alles dat je gaat printen.
+                    Misschien heb je gezien dat in het vorige level nog wel een foutje zit. Heb je toevallig geprobeerd om een zin te maken waarin het woord naam zat? Bijv. `{print}` mijn naam is naam.
+                    Dat werkte niet goed! Dan krijg je: mijn Henk is Henk. Dat kun je in dit level oplossen. Daarvoor moet je wel aanhalingstekens gebruiken bij alles dat je gaat printen.
                 example_code: |
                     ```
                     naam {is} Hans
@@ -819,14 +817,12 @@ adventures:
                 story_text: |
                     ## Zing een liedje!
                     Ook in dit level kunnen we weer liedjes zingen, bijv. Baby Shark.
-                    Met de nieuwe code `{for}` kunnen we voor de hele familie in een keer printen.
-                    Eerst zetten we alle dieren in een lijst familie. Nu gaan we steeds voor een van de familieleden het liedje printen.
-
+                    Met de nieuwe code `{for}` kunnen we voor de hele familie in een keer printen. Eerst zetten we alle dieren in een lijst familie. Nu gaan we steeds voor een van de familieleden het liedje printen.
                     Dat scheelt een hoop regels code!
                 example_code: |
                     ## Baby Shark
                     ```
-                    familie = baby, mommy, daddy, grandpa, grandma
+                    familie = baby, mama, papa, opa, oma
                     {for} shark {in} familie
                       {print} shark ' shark tudutudutudu'
                       {print} shark ' shark tudutudutudu'
@@ -1668,8 +1664,9 @@ adventures:
                     {if} naam {is} Hedy {print} 'Hoera, je wint! 🤩' {else} {print} 'Helaas, iemand anders wint 😭'
                     ```
                 story_text_2: |
-                    Verander Hedy in je eigen naam en jij zult altijd de loterij winnen! Natuurlijk is dit wel een beetje verdacht voor andere spelers...
-                    Om dat op te lossen kun je ervoor zorgen dat Hedy wel steeds iets anders zegt, maar bij jou altijd een goed antwoord en bij de anderen een slechte.
+                    ## Hack het programma
+                    Verander Hedy in je eigen naam en jij zult altijd de loterij winnen! 
+                    Natuurlijk is dit wel een beetje verdacht voor andere spelers... Om dat op te lossen kun je ervoor zorgen dat Hedy wel steeds iets anders zegt, maar bij jou altijd een goed antwoord en bij de anderen een slechte.
                     Kijk maar naar dit voorbeeld:
                 example_code_2: |
                     ```
@@ -1703,6 +1700,20 @@ adventures:
                     {print} 'Jij krijgt later... '
                     {sleep} 2
                     {print} kinderen ' kinderen!'
+                    ```
+
+                    ## Example Silly Fortune Teller
+                    If the previous example wasn't silly enough for you, take a look at this one!
+
+                    ```
+                    {print} 'Ik ben Hedy de gekke Waarzegger!'
+                    {print} 'Ik kan voorspellen hoe slim jij bent!!'
+                    voetbal = {ask} 'Geef een cijfer van 1 tot 10 hoe erg jij van voetbalt houdt?'
+                    bananen = {ask} 'Hoeveel bananen heb jij deze week gegeten?'
+                    hygiene = {ask} 'Hoevaak heb jij jouw handen gewassen vandaag?'
+                    resultaat = bananen + hygiene
+                    resultaat = resultaat * voetbal
+                    {print} 'Jij bent ' resultaat ' procent slim.'
                     ```
                 start_code: "# Schrijf jouw code hier"
             7:
@@ -1866,13 +1877,23 @@ adventures:
                     Let op! In vorige levels was het toegestaan om enkele aanhalingstekens (`'`) te gebruiken in de tekst, maar vanaf dit level zal Hedy denken dat dat aanhalingstekens zijn, waardoor je code niet werkt. Dus in plaats van `{print} Hedy's pizza is de lekkerste`, moet je nu typen: `{print} 'De pizza van Hedy is de lekkerste'`.
                 start_code: "# Schrijf jouw code hier"
                 example_code: |
+                    ## Voorbeeld Hedy Restaurant
                     ```
-                    {print} 'Welkom bij Restaurant Hedy'
+                    {print} 'Welkm bij Hedys restaurant!'
+                    {print} 'Vandaag serveren we pizza of lasagna.'
+                    eten {is} {ask} 'Wat wil je eten?'
+                    {print} 'Goede keuze! The ' eten ' is mijn favoriet!'
+                    extra {is} {ask} 'wil je er vlees of groeten extra bij?'
+                    {print} eten ' with ' extra ' wordt gemaakt!'
+                    drank {is} {ask} 'Wat wil je erbij drinken?'
+                    {print} 'Bedankt voor de bestelling.'
+                    {print} 'Jouw ' eten ' and ' drank ' komen er zo aan!'
                     ```
             5:
                 story_text: |
                     ## Restaurant
-                    Nu kun je het nieuwe `{if}` commando gebruiken om verschillende reacties te geven op antwoorden van de klanten. Zo kun je bijvoorbeeld vragen of de klant saus wil bij de frietjes, terwijl dat een rare vraag zou zijn als de klant pizza bestelt.
+                    Nu kun je het nieuwe `{if}` commando gebruiken om een `{ask}` te stellen aan jouw klanten en verschillende reacties te geven op hun antwoorden. 
+                    Zo kun je bijvoorbeeld de `{ask}` stellen of de klant saus wil bij de frietjes, terwijl dat een rare vraag zou zijn `{if}` de klant pizza bestelt.
                 example_code: |
                     ```
                     {print} 'Welkom bij McHedy'
@@ -1946,7 +1967,8 @@ adventures:
             7:
                 story_text: |
                     ## Restaurant
-                    Nu kun je het `{repeat}`commando gebruiken om van meerdere klanten de bestelling op te nemen.
+                    In dit level heb je geleerd hoe je `{repeat}` gebruikt om een regel code een aantal keren te herhalen.
+                    Nu kun je dit commando gebruiken om een `{ask}` aan meerdere klanten te stellen om hun bestelling op te nemen.
                 example_code: |
                     ```
                     {print} 'Welkom bij restaurant Hedy'
@@ -1980,14 +2002,17 @@ adventures:
             9:
                 story_text: |
                     ## Restaurant
-                    In dit level kun je het restaurant interactiever maken met {if} commando's in in commando's.
+                    In dit level kun je het restaurant interactiever en leuker maken.
+                    Je kunt bijvoorbeeld de `{ask}` stellen of er saus bij `{if}` iemand friet besteld, maar dat niet doen `{if}` iemand pizza besteld.
+                    Bekijk het voorbeeld en probeer het uit in jouw eigen restaurant.
                 example_code: |
                     ```
                     {print} 'Welkom bij restaurant Hedy'
                     mensen = {ask} 'Met hoeveel mensen bent u vanavond?'
+                    {print} 'Mooi, welkom allemaal'
                     prijs = 0
                     {repeat} mensen {times}
-                        eten = {ask} 'Wat wilt u eten?'
+                        eten = {ask} 'Wat wilt u bestellen?'
                         {print} eten
                         {if} eten {is} friet
                             prijs = prijs + 3
@@ -1998,7 +2023,7 @@ adventures:
                                 prijs = prijs + 1
                                 {print} 'met ' saus
                         {if} eten {is} pizza
-                            prijs = prijs + 7
+                            prijs = prijs + 4
                         {print} 'Dat is dan ' prijs ' euro'
                         {print} 'Eet smakelijk!'
                     ```
@@ -2031,7 +2056,7 @@ adventures:
             11:
                 story_text: |
                     ## Maak je eigen restaurant
-                    Je kunt nu `{for} i {in} {range} 1 {to} 5` gebruiken om een bestelling te printen voor meerdere mensen.
+                    Je kunt nu `{for} i {in} {range} 1 {to} 5` gebruiken om een bestelling met `{print}` te tonen voor meerdere mensen.
                 example_code: |
                     ```
                     {print} 'Welkom bij McHedy!'
@@ -2456,7 +2481,7 @@ adventures:
         default_save_name: "Geheim agent"
         levels:
             12:
-                start_code: '# Schrijf jouw code hier'
+                start_code: '## Schrijf jouw code hier'
                 story_text: |
                     ## Maak een geheime code als een geheim agent
                     In dit avontuur kun je jouw eigen geheim agent code maken. Maak een bericht dat alleen de juiste agent kan ontcijferen.
@@ -2476,7 +2501,7 @@ adventures:
                     {print} a + b
                     ```
             13:
-                start_code: '# Schrijf jouw code hier'
+                start_code: '## Schrijf jouw code hier'
                 story_text: |
                     ## Geheim agent
                     De code die je gemaakt hebt kunnen we een stuk makkelijker maken met het `{and}` commando.
@@ -2486,7 +2511,7 @@ adventures:
                     wachtwoord {is} {ask} 'Wat is het wachtwoord?'
                     {if} naam {is} 'Agent007' {and} wachtwoord {is} 'TOPSECRET'
                         {print} 'Ga naar het vliegveld om 02:00'
-                    else
+                    {else}
                         {print} 'Ga naar het treinstation om 10:00'
                     ```
     next:
@@ -2589,11 +2614,7 @@ adventures:
             7:
                 story_text: |
                     ## Vooruitblik
-                    In dit level heb je met `{repeat}` al geleerd hoe je één regel code kunt herhalen.
-
-                    Soms is het wel fijn als je niet maar één regel kunt herhalen, maar meerdere regels.
-                    Want nu moest je wel een hoop knippen en plakken in sommige programma's.
-
+                    In dit level heb je met `{repeat}` al geleerd hoe je één regel code kunt herhalen. Soms is het wel fijn als je niet maar één regel, maar voor meerdere regels `{repeat}` kunt gebruiken. Want nu moest je wel een hoop knippen en plakken in sommige programma's.
                     In het volgende level wordt dat mogelijk gemaakt door stukjes code bij elkaar een groepje te maken, door ze te beginnen met een aantal spaties. Zo'n groepje regels kun je dan in één keer herhalen met {repeat}.
                 example_code: |
                     ```
@@ -2631,9 +2652,9 @@ adventures:
                 example_code: |
                     ```
                     {repeat} 2 {times}
-                        {print} '{if} youre happy {and} you know it clap your hands'
-                    {print} '{if} youre happy {and} you know it {and} you really want to show it'
-                    {print} '{if} youre happy {and} you know it clap your hands'
+                        {print} 'if youre happy and you know it clap your hands'
+                    {print} 'if youre happy and you know it and you really want to show it'
+                    {print} 'if youre happy and you know it clap your hands'
                     ```
                 start_code: "{print} 'Op naar het volgende level!'"
             10:

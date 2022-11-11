@@ -382,7 +382,7 @@ adventures:
             5:
                 start_code: "{print} '谁负责洗碗？'"
                 story_text: "## 洗碗\n你可以用`{if}`给程序加入选项，来让它更有趣。你可以让你的程序对电脑做出的选择进行回应。\n\n你能不能完成这段代码，让它在选中你的时候打印“太糟了”，其它情况下打印“好！”？\n别忘了引号！\n"
-                example_code: "```\n人们 {is} 妈妈, 爸爸, 艾玛, 索菲\n洗碗的 {is} 人们 {at} {random}\n{if} 洗碗的 {is} 索菲 {print} _ 太糟了，轮到我洗碗 _ {else} {print} '运气真好，' _ '把碗洗了'\n```\n"
+                example_code: "```\n人们 {is} 妈妈, 爸爸, 艾玛, 索菲\n洗碗的 {is} 人们 {at} {random}\n{if} 洗碗的 {is} 索菲 {print} _ 太糟了，轮到我洗碗 _\n{else} {print} '运气真好，' _ '把碗洗了'\n```\n"
             10:
                 story_text: "## 洗碗\n在这一级，你可以制作一个更好的洗碗时间表。\n"
                 example_code: "```\n日期列表 = 周一, 周二, 周三, 周四, 周五, 周六, 周日\n人们 = 妈妈, 爸爸, 艾玛, 索菲\n{for} 日期 {in} 日期列表\n    {print} 人们 {at} {random} '负责在' 日期 '洗碗'\n```\n"
@@ -510,53 +510,53 @@ adventures:
                     现在你可以使用变量来让 Hedy 同时记住食物和饮料！
                 example_code: |
                     ```
-                    {print} Welcome to Hedy's restaurant!
-                    {print} Today we're serving pizza or lasagna.
-                    food {is} {ask} What would you like to eat?
-                    {print} Great choice! The food is my favorite!
-                    topping {is} {ask} Would you like meat or veggies on that?
-                    {print} food with topping is on its way!
-                    drinks {is} {ask} What would you like to drink with that?
-                    {print} Thank you for your order.
-                    {print} Your food and drinks will be right there!
+                    {print} 欢迎来到海迪餐厅！
+                    {print} 今天我们提供披萨和千层面。
+                    食物 {is} {ask} 您想吃什么？
+                    {print} 选得好！这是我最爱的食物！
+                    配料 {is} {ask} 您想要加肉的还是蔬菜的？
+                    {print} 加了 配料 的 食物 已经在做了！
+                    饮料 {is} {ask} 您想喝点什么？
+                    {print} 谢谢您的点单。
+                    {print} 您的 食物 和 饮料 马上就来！
                     ```
                 start_code: "# 将代码写在这里"
             3:
                 story_text: |
-                    ## Random Restaurant
-                    Having trouble to decide what you wanna have for dinner? You can let Hedy choose for you!
-                    Simply add lists of your favorite (or least favorite) meals and Hedy can randomly choose your dinner.
-                    You can also have a bit of fun, by letting Hedy choose the price for your dinner as well! What will you get?
+                    ## 随机餐厅
+                    在选择晚饭吃什么时选择困难了吗？你可以让海迪帮你选！
+                    只要将你最喜欢（或者最不喜欢）的食物加入列表，海迪就可以随机帮你选择晚饭。
+                    你也可以让海迪帮你选择晚饭的价格，来获得更多乐趣！你会得到什么？
 
                 example_code: |
                     ```
-                    {print} Welcome to Hedy's Random Restaurant!
-                    {print} The only restaurant that will randomly choose your meal and its price for you!
-                    starters {is} salad, soup, carpaccio
-                    mains {is} pizza, brussels sprouts, spaghetti
-                    desserts {is} brownies, ice cream, french cheeses
-                    drinks {is} cola, beer, water
-                    prices {is} 1 dollar, 10 dollars, 100 dollars
-                    {print} You will start with: starters {at} {random}
-                    {print} Then we'll serve: mains {at} {random}
-                    {print} And as dessert: desserts {at} {random}
-                    {print} You will get a drinks {at} {random} to drink
-                    {print} That will be: prices {at} {random}
-                    {print} Thank you and enjoy your meal!
+                    {print} 欢迎来到海迪餐厅！
+                    {print} 唯一会为您随机选择餐食和价格的餐厅！
+                    前菜 {is} 沙拉, 汤, 肉片
+                    主菜 {is} 披萨, 布鲁塞尔芽菜, 意面
+                    甜点 {is} 布朗尼, 冰淇淋, 法国奶酪
+                    饮料 {is} 可乐, 啤酒, 水
+                    价格 {is} 1元, 10元, 100元
+                    {print} 您会先吃到 前菜 {at} {random}
+                    {print} 然后我们会上 主菜 {at} {random}
+                    {print} 然后甜点是 甜点 {at} {random}
+                    {print} 您可以喝 饮料 {at} {random}
+                    {print} 一共是 价格 {at} {random}
+                    {print} 谢谢，祝您用餐愉快！
                     ```
                 story_text_2: |
-                    ## Allergies
-                    Does your costumer have any allergies or do they dislike certain dishes? Then you can use the `{remove}`command to remove it from your menu.
+                    ## 过敏
+                    你的客人是否有食物过敏，或者讨厌某道菜？那么你可以用`{remove}`命令将它从你的菜单中去除。
 
                 example_code_2: |
                     ```
-                    {print} Mystery milkshake
-                    flavors {is} strawberry, chocolate, vanilla
-                    allergies {is} {ask} Are you allergic to any falvors?
-                    {remove} allergies {from} flavors
-                    {print} You get a flavors {at} {random} milkshake
+                    {print} 神秘奶昔
+                    口味 {is} 草莓, 巧克力, 香草
+                    过敏 {is} {ask} 你对什么口味过敏吗？
+                    {remove} 过敏 {from} 口味
+                    {print} 你得到了一杯 口味 {at} {random} 味的奶昔
                     ```
-                start_code: "# place your code here"
+                start_code: "# 在这里写你的代码"
             4:
                 story_text: |
                     ## Restaurant
@@ -566,191 +566,191 @@ adventures:
                     Be careful! In the previous levels apostrophes were allowed in the text, but in this level Hedy will confuse them for quotation marks and the code will not work!
                     So instead of typing  `{print} Today we're serving pizza` , you should type `{print} 'Today we are serving pizza'`
                 example_code: |
-                    ## Example Hedy Restaurant
+                    ## 海迪餐厅示例
                     ```
-                    {print} 'Welcome to Hedys restaurant!'
-                    {print} 'Today we are serving pizza or lasagna.'
-                    food {is} {ask} 'What would you like to eat?'
-                    {print} 'Great choice! The ' food ' is my favorite!'
-                    topping {is} {ask} 'Would you like meat or veggies on that?'
-                    {print} food ' with ' topping ' is on its way!'
-                    drinks {is} {ask} 'What would you like to drink with that?'
-                    {print} 'Thank you for your order.'
-                    {print} 'Your ' food ' and ' drinks ' will be right there!'
+                    {print} '欢迎来到海迪餐厅！'
+                    {print} '今天我们提供披萨和千层面。'
+                    食物 {is} {ask} '您想吃什么？'
+                    {print} '选得好！这是我最爱的食物！'
+                    配料 {is} {ask} '您想要加肉的还是蔬菜的？'
+                    {print} '加了' 配料 '的' 食物 '已经在做了！'
+                    饮料 {is} {ask} '您想喝点什么？'
+                    {print} '谢谢您的点单。'
+                    {print} '您的' 食物 '和' 饮料 '马上就来！'
                     ```
-                start_code: "# place your code here"
+                start_code: "# 在这里写你的代码"
             5:
                 story_text: |
-                    ## Restaurant
-                    In this level the {if} command allows you to {ask} your customers questions and give different responses to the answers.
-                    In the example below, you see that you can {ask} the customer {if} they want to hear the specials and Hedy can respond accordingly.
+                    ## 餐厅
+                    在这一关，{if}命令让你可以对你的客人{ask}，并对其回答做出不同的反应。
+                    在下面的例子里，你能看到你可以{ask}你的客人是否想听推荐，海迪会根据回答做出相应的回应。
 
                 example_code: |
                     ```
-                    {print} 'Welcome to Hedys restaurant!'
-                    special {is} {ask} 'Would you like to hear our specials today?'
-                    {if} special {is} yes {print} 'Todays special is chicken piri piri and rice.' {else} {print} 'No problem.'
-                    food {is} {ask} 'What would you like to eat?'
-                    {print} 'One ' food ', coming right up!'
-                    drink {is} {ask} 'What would you like to drink with that?'
-                    {if} drink {is} cola {print} 'Im sorry, we are out of cola!' {else} {print} 'Great choice!'
-                    anything {is} {ask} 'Would you like anything {else}?'
-                    {print} 'Let me repeat your order...'
-                    {print} 'One ' food
-                    {if} drink {is} cola {print} 'and...' {else} {print} 'One ' drink
-                    {if} anything {is} no {print} 'Thats it!' {else} {print} 'One ' anything
-                    {print} 'Thank you for your order and enjoy your meal!'
+                    {print} '欢迎来到海迪餐厅！'
+                    推荐 {is} {ask} '您想听我们今天的推荐吗？'
+                    {if} 推荐 {is} 是 {print} '今天的推荐是考级' {else} {print} 'No problem.'
+                    食物 {is} {ask} '您想吃什么？'
+                    {print} '一份' food '，马上就来！'
+                    饮料 {is} {ask} '您想配点什么喝的？'
+                    {if} 饮料 {is} 可乐 {print} '对不起，可乐卖完了！' {else} {print} '选得好！'
+                    别的 {is} {ask} '您还想要别的吗？'
+                    {print} '我复述一下您的点单'
+                    {print} '一份' 食物
+                    {if} 饮料 {is} 可乐 {print} '以及……' {else} {print} '一杯' 饮料
+                    {if} 别的 {is} 不用 {print} '就是这些' {else} {print} '一份' 别的
+                    {print} '谢谢您的点单。祝您用餐愉快！'
                     ```
                 story_text_2: |
                     ## 挑战
                     你能想出更多的问题，在顾客点餐时`{ask}` ，并通过使用`{if}` 命令对他们不同的应答做出合适的答复吗？
 
-                start_code: "# place your code here"
+                start_code: "# 在这里写你的代码"
             6:
                 story_text: |
-                    ## Restaurant
-                    In this level you can use maths to calculate the total price of your customer's order, which can make your virtual restaurant more realistic.
+                    ## 餐厅
+                    在这一关，你可以用数学计算客人的订单总价，这会让你的虚拟餐厅更真实。
 
                 example_code: |4
 
-                    You can make a simple restaurant code, like this:
+                    你可以写一段简单的餐厅代码，像这样：
                     ```
-                    {print} 'Welcome to Hedys restaurant'
-                    {print} 'Here is our menu:'
-                    {print} 'Our main courses are pizza, lasagne, or spaghetti'
-                    main = {ask} 'Which main course would you like?'
-                    price = 0
-                    {if} main {is} pizza price = 10
-                    {if} main {is} lasagne price = 12
-                    {if} main {is} spaghetti price = 8
-                    {print} 'You have ordered ' main
-                    {print} 'That will be ' price ' dollars, please'
-                    {print} 'Thank you, enjoy your meal!'
+                    {print} '欢迎来到海迪餐厅'
+                    {print} '这是我们的菜单：'
+                    {print} '我们的主菜有披萨、千层面、意面'
+                    主菜 = {ask} '您想要哪道主菜？'
+                    价格 = 0
+                    {if} 主菜 {is} 披萨 价格 = 10
+                    {if} 主菜 {is} 千层面 价格 = 12
+                    {if} 主菜 {is} 意面 价格 = 8
+                    {print} '您点了' 主菜
+                    {print} '请付' 价格 '元'
+                    {print} '谢谢，祝您用餐愉快！'
                     ```
                 story_text_2: |
-                    But you can also add many more things to your virtual restaurant, for example more courses.
+                    但你也可以给你的虚拟餐厅加上更多东西，比如更多的菜。
 
-                    ## Challenge
-                    You can add many more things to your virtual restaurant. For example, can you...
-                    - {ask} how many people are coming and multiply the price by that amount?
-                    - add another course?
-                    - give people a discount when they enter a (secret) couponcode?
-                    - add a children's menu?
-                    - think of other fun things to add?
+                    ## 挑战
+                    你可以给你的虚拟餐厅加上很多东西。比如，你能否……
+                    - {ask} 来了几个人，并将价格乘以人数？
+                    - 增加另一道菜？
+                    - 如果有人用了（秘密的）优惠码，给他一个折扣？
+                    - 增加一个儿童菜单？
+                    - 想想还能加什么有趣的东西？
                 example_code_2: |4
 
-                    In this example there are three courses, which requires more code and more additions in calculating the price.
+                    你可以写一段简单的餐厅代码，像这样：
                     ```
-                    {print} 'Welcome to Hedys restaurant'
-                    {print} 'Here is our menu:'
-                    {print} 'Our starters are salad, soup, or carpaccio'
-                    {print} 'Our main courses are pizza, lasagne, or spaghetti'
-                    {print} 'Our desserts are brownie, icecream, or milkshake'
-                    starter = {ask} 'Which starter would you like to have?'
-                    main = {ask} 'Which main course would you like?'
-                    dessert = {ask} 'Which dessert do you pick?'
-                    price = 0
-                    {if} starter {is} soup price = price + 6 {else} price = price + 7
-                    {if} main {is} pizza price = price + 10
-                    {if} main {is} lasagne price = price + 12
-                    {if} main {is} spaghetti price = price + 8
-                    {if} dessert {is} brownie price = price + 7
-                    {if} dessert {is} icecream price = price + 5
-                    {if} dessert {is} milkshake price = price + 4
-                    {print} 'You have ordered ' starter ' , ' main ' and ' dessert
-                    {print} 'That will be ' price ' dollars, please'
-                    {print} 'Thank you, enjoy your meal!'
+                    {print} '欢迎来到海迪餐厅'
+                    {print} '这是我们的菜单：'
+                    {print} '我们的前菜有沙拉、汤和肉片'
+                    {print} '我们的主菜有披萨、千层面和意面'
+                    {print} '我们的甜点有布朗尼、冰淇淋和奶昔'
+                    前菜 = {ask} '您想吃什么前菜？'
+                    主菜 = {ask} '您想要哪道主菜？'
+                    甜点 = {ask} '您选哪个甜点？'
+                    价格 = 0
+                    {if} 前菜 {is} 汤 价格 = 价格 + 6 {else} 价格 = 价格 + 7
+                    {if} 主菜 {is} 披萨 价格 = 价格 + 10
+                    {if} 主菜 {is} 千层面 价格 = 价格 + 12
+                    {if} 主菜 {is} 意面 价格 = 价格 + 8
+                    {if} 甜点 {is} 布朗尼 价格 = 价格 + 7
+                    {if} 甜点 {is} 冰淇淋 价格 = 价格 + 5
+                    {if} 甜点 {is} 奶昔 价格 = 价格 + 4
+                    {print} '您点了' 前菜 '、' 主菜 '和' 甜点
+                    {print} '请付' 价格 '元'
+                    {print} '谢谢，祝您用餐愉快！'
                     ```
-                start_code: "# place your code here"
+                start_code: "# 在这里写你的代码"
             7:
                 story_text: |
-                    ## Restaurant
-                    In this level you've learned how to use the {repeat} command to repeat a line of code a certain amount of times.
-                    You can use that in your restaurant to {ask} multiple people what they'd like to eat. Like this:
+                    ## 餐厅
+                    在这一关，你需要学习如何使用 {repeat} 命令重复一行代码数次。
+                    你可以以此在你的餐厅里向多个人 {ask} 他们喜欢吃什么。比如这样：
                 example_code: |
                     ```
-                    {print} 'Welcome to Hedys restaurant!'
-                    people = {ask} 'How many people are joining us today?'
-                    {repeat} people times food = {ask} 'What would you like to eat?'
-                    {print} 'Thanks for your order! Its coming right up!'
+                    {print} '欢迎来到海迪餐厅！'
+                    人数 = {ask} '今天来了多少人？'
+                    {repeat} 人数 times 食物 = {ask} '您想吃什么？'
+                    {print} '谢谢您的点单！马上就来！'
                     ```
-                start_code: "# place your code here"
+                start_code: "# 在这里写你的代码"
             8:
                 story_text: |
-                    ## Restaurant
-                    In this level you can make your virtual restaurant more elaborate by repeating multiple lines of code. Like this:
+                    ## 餐厅
+                    在这一关，你可以通过重复多行代码，让你的虚拟餐厅更加细化。像这样：
                 example_code: |
                     ```
-                    {print} 'Welcome to Hedys restaurant!'
-                    people = {ask} 'How many people will be joining us today?'
-                    {print} 'Great!'
-                    {repeat} people {times}
-                        food = {ask} 'What would you like to order?'
-                        {print} food
-                    {print} 'Thank you for ordering!'
-                    {print} 'Enjoy your meal!'
+                    {print} '欢迎来到海迪餐厅！'
+                    人数 = {ask} '今天来了多少人？'
+                    {print} '好！'
+                    {repeat} 人数 {times}
+                        食物 = {ask} '您想点什么？'
+                        {print} 食物
+                    {print} '谢谢您的点单！'
+                    {print} '祝您用餐愉快！'
                     ```
                 story_text_2: |
-                    ## Challenge
-                    Of course, this code can be expanded with more items on the menu, offering drinks, and/or multiple courses, so feel free to add as many options as you like!
-                start_code: "# place your code here"
+                    ## 挑战
+                    当然，这代码还可以拓展，在菜单上加更多东西，提供饮料和多道菜，所以你可以按照自己的喜好随便增加多少选项！
+                start_code: "# 在这里写你的代码"
             9:
                 story_text: |
-                    ## Restaurant
-                    In this level you can use nesting to make your restaurant more realistic and more fun!
-                    For example you would {ask} for sauce {if} somebody orders fries, but you wouldn't {if} someone orders pizza!
-                    Check out the example, and try this at your own virtual restaurant!
+                    ## 餐厅
+                    在这一关，你可以用嵌套让你的餐厅更真实更有趣！
+                    比如如果有人点了薯条，你可以 {ask} 他要不要酱，但是点披萨的就不用！
+                    看看例子，然后在你自己的虚拟餐厅里试一下。
                 example_code: |
                     ```
-                    {print} 'Welcome to Hedys restaurant!'
-                    people = {ask} 'How many people will be joining us today?'
-                    {print} 'Great!'
-                    price = 0
-                    {repeat} people {times}
-                        food = {ask} 'What would you like to order?'
-                        {print} food
-                        {if} food {is} fries
-                            price = price + 3
-                            sauce = {ask} 'What kind of sauce would you like with your fries?'
-                            {if} sauce {is} no
-                                {print} 'no sauce'
+                    {print} '欢迎来到海迪餐厅！'
+                    人数 = {ask} '今天来了多少人？'
+                    {print} '好！'
+                    价格 = 0
+                    {repeat} 人数 {times}
+                        食物 = {ask} '您想点什么？'
+                        {print} 食物
+                        {if} 食物 {is} 薯条
+                            价格 = 价格 + 3
+                            酱汁 = {ask} '您的薯条要配什么酱？'
+                            {if} 酱汁 {is} 不要
+                                {print} '不要酱'
                             {else}
-                                price = price + 1
-                                {print} 'with ' sauce
-                        {if} food {is} pizza
-                            price = price + 4
-                    {print} 'That will be ' price ' dollar'
-                    {print} 'Enjoy your meal!'
+                                价格 = 价格 + 1
+                                {print} '配' 酱汁
+                        {if} 食物 {is} 披萨
+                            价格 = 价格 + 4
+                    {print} '一共' 价格 '元'
+                    {print} '祝您用餐愉快！'
                     ```
-                start_code: "# place your code here"
+                start_code: "# 在这里写你的代码"
             10:
                 story_text: |
-                    ## Restaurant
-                    In this level you'll learn how to easily {ask} your guests' orders in a short code.
+                    ## 餐厅
+                    在这一关，你会学到如何用 {ask} 命令加上一些简单的代码，就能向你的客人询问点单。
                 example_code: |
                     ```
-                    courses = appetizer, main course, dessert
-                    {for} course {in} courses
-                        food = {ask} 'What would you like to eat as your ' course '?'
-                        {print} food ' will be your ' course
+                    上菜顺序 = 前菜, 主菜, 甜点
+                    {for} 上菜 {in} 上菜顺序
+                        食物 = {ask} '您想要吃什么' 上菜 '？'
+                        {print} '您的' 食物 '会是' 上菜
                     ```
                 story_text_2: |4
 
-                    Of course, you could also order for multiple people!
+                    当然，你也可以帮多个人点单！
                 example_code_2: |
                     ```
-                    courses = appetizer, main course, dessert
-                    names = Timon, Onno
-                    {for} name {in} names
-                        {for} course {in} courses
-                            food = {ask} name ', what would you like to eat as your ' course '?'
-                            {print} name ' orders ' food ' as their ' course
+                    上菜顺序 = 前菜, 主菜, 甜点
+                    客人们 = 丁满, 彭彭
+                    {for} 客人 {in} 客人们
+                        {for} 上菜 {in} 上菜顺序
+                        食物 = {ask} 客人 '，你想要吃什么' 上菜 '？'
+                        {print} 客人 '点了' 食物 '作为' 上菜
                     ```
-                start_code: "courses = appetizer, main course, dessert"
+                start_code: "上菜顺序 = 前菜, 主菜, 甜点"
             11:
                 story_text: |
-                    ## Restaurant
-                    We can use the `{for} i {in} {range} 1 {to} 5` to {print} the orders from multiple customers in an orderly manner.
+                    ## 餐厅
+                    我们可以用`{for} i {in} {range} 1 {to} 5`来按顺序`{print}`多个客人的点单。
                 example_code: |
                     ```
                     {print} 'Welcome to Restaurant Hedy!'

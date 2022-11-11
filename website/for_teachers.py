@@ -66,7 +66,9 @@ class ForTeachersModule(WebsiteModule):
             programs = self.db.programs_for_user(student_username)
             # Fixme: The get_quiz_stats function requires a list of ids -> doesn't work on single string
             quiz_scores = self.db.get_quiz_stats([student_username])
-            highest_quiz = max([x.get('level') for x in quiz_scores if x.get('finished')]) if quiz_scores else "-"
+            # Verify if the user did finish any quiz before getting the max() of the finished levels
+            finished_quizzes = any('finished' in x for x in quiz_scores)
+            highest_quiz = max([x.get('level') for x in quiz_scores if x.get('finished')]) if finished_quizzes else "-"
             students.append({
                 'username': student_username,
                 'last_login': student['last_login'],

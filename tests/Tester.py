@@ -1,4 +1,6 @@
 import textwrap
+
+import exceptions
 import hedy, hedy_translation
 import re
 import sys
@@ -48,7 +50,7 @@ class HedyTester(unittest.TestCase):
       code = utils.TURTLE_PREFIX_CODE + parse_result.code
     else:
       code = utils.NORMAL_PREFIX_CODE + parse_result.code
-# remove sleep comments to make program execution less slow
+    # remove sleep comments to make program execution less slow
     code = re.sub(r'time\.sleep\([^\n]*\)', 'pass', code)
 
     with HedyTester.captured_output() as (out, err):
@@ -156,8 +158,10 @@ class HedyTester(unittest.TestCase):
     self.assertEqual(re.sub('\\s+', ' ', orignal), re.sub('\\s+', ' ', translation))
 
   @staticmethod
-  def validate_Hedy_code(snippet):
-    # Code used in the Adventure and Level Defaults tester to validate Hedy code
+  def check_Hedy_code_for_errors(snippet):
+    # Code used in the Snippet testers to validate Hedy code
+    # Note that None is the happy path! If None is returned, no errors are found
+    # If an error is found a (reasonably) readable string is returned.
 
     try:
       if len(snippet.code) != 0:   # We ignore empty code snippets or those of length 0
@@ -169,10 +173,14 @@ class HedyTester(unittest.TestCase):
     except hedy.exceptions.CodePlaceholdersPresentException as E: # Code with blanks is allowed
       pass
     except OSError as E:
-      return True # programs with ask cannot be tested with output :(
-    except Exception as E:
-      return False
-    return True
+      return None # programs with ask cannot be tested with output :(
+    except exceptions.HedyException as E:
+        try:
+            location = E.error_location
+        except:
+            location = 'No Location Found'
+        return f'{str(E)} at line {location}'
+    return None
 
   @staticmethod
   def validate_Python_code(parseresult):
