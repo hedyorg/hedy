@@ -32,7 +32,7 @@ class AuthModule(WebsiteModule):
             user = self.db.user_by_username(body['username'])
 
         if not user or not check_password(body['password'], user['password']):
-            return gettext('invalid_username_password') + " " + gettext('no_account'), 403
+            return gettext('invalid_username_password') + " " + gettext('no_account'), 400
 
         # If the number of bcrypt rounds has changed, create a new hash.
         new_hash = None
@@ -123,9 +123,9 @@ class AuthModule(WebsiteModule):
                     return gettext('programming_invalid'), 400
 
         if self.db.user_by_username(body['username'].strip().lower()):
-            return gettext('exists_username'), 403
+            return gettext('exists_username'), 400
         if self.db.user_by_email(body['email'].strip().lower()):
-            return gettext('exists_email'), 403
+            return gettext('exists_email'), 400
 
         # We receive the pre-processed user and response package from the function
         user, resp = self.store_new_account(body, body['email'].strip().lower())
@@ -163,7 +163,7 @@ class AuthModule(WebsiteModule):
         # Verify that user actually exists
         user = self.db.user_by_username(username)
         if not user:
-            return gettext('username_invalid'), 403
+            return gettext('username_invalid'), 400
 
         # If user is already verified -> re-direct to landing-page anyway
         if not 'verification_pending' in user:
@@ -171,7 +171,7 @@ class AuthModule(WebsiteModule):
 
         # Verify the token
         if token != user['verification_pending']:
-            return gettext('token_invalid'), 403
+            return gettext('token_invalid'), 400
 
         # Remove the token from the user
         self.db.update_user(username, {'verification_pending': None})
@@ -249,7 +249,7 @@ class AuthModule(WebsiteModule):
         user = self.db.user_by_username(user['username'])
 
         if not check_password(body['old_password'], user['password']):
-            return gettext('password_invalid'), 403
+            return gettext('password_invalid'), 400
 
         hashed = password_hash(body['new-password'], make_salt())
 
@@ -279,7 +279,7 @@ class AuthModule(WebsiteModule):
             user = self.db.user_by_username(body['username'].strip().lower())
 
         if not user:
-            return gettext('username_invalid'), 403
+            return gettext('username_invalid'), 400
 
         # In this case -> account has a related teacher (and is a student)
         # We still store the token, but sent the mail to the teacher instead
@@ -324,7 +324,7 @@ class AuthModule(WebsiteModule):
 
         token = self.db.get_token(body['token'])
         if not token or body['token'] != token.get('id') or body['username'] != token.get('username'):
-            return gettext('token_invalid'), 403
+            return gettext('token_invalid'), 400
 
         hashed = password_hash(body['password'], make_salt())
         self.db.update_user(body['username'], {'password': hashed})
