@@ -122,81 +122,81 @@ sections:
             example:
                 error_text: "Список не може бути надрукований. Ви можете надрукувати тільки один елемент зі списку, причому навмання.\n"
                 error_code: "groceries is apples, milk, chocolate\nprint groceries\n"
-                solution_text: "To print a list of all the groceries, you simply need to put them after a print command. Else you can use the list to print one item with at random.\n"
+                solution_text: "Щоб надрукувати список всіх продуктів, потрібно просто вказати їх після команди друку. В іншому випадку зі списку можна надрукувати один елемент навмання.\n"
                 solution_code: "print apples, milk, chocolate\n\nor\n\ngroceries is apples, milk, chocolate\nprint groceries at random\n"
-        -   title: Students use the name of a variable or list as regular text
+        -   title: Студенти використовують ім'я перемінної або списку як звичайний текст
             example:
-                error_text: "This problem probably occured in level 2 as well. Now it can happen with lists too.\n"
+                error_text: "Ця проблема, ймовірно, сталася і на рівні 2. Тепер це може статися і зі списками.\n"
                 error_code: "name is Hedy\nprint Hi my name is name\n\nor\n\nanimal is rhino, bee, swan\nprint The best animal is... animal at random\n"
-                solution_text: "Don't use the names of variables or lists in regular text to print. In level 4 this problem is solves with quotation marks.\n"
+                solution_text: "Не використовуйте імена перемінних або списків у звичайному тексті для виведення на друк. На рівні 4 ця проблема вирішується за допомогою лапок.\n"
                 solution_code: "name is Hedy\nprint Hi I'm name\n\nor\n\nanimals is rhino, bee, swan\nprint The best animal is... animals at random\n"
         -   title: Students forget at in at random
             example:
-                error_text: "Like in the example\n"
+                error_text: "Як у прикладі\n"
                 error_code: "birds is sparrow, seagull, robin\nprint birds random\n"
-                solution_text: "This problem is solved by adding the word at.\n"
+                solution_text: "Ця проблема вирішується додаванням слова at.\n"
                 solution_code: "birds is sparrow, seagull, robin\nprint birds at random\n"
-        -   title: Students forget to use the print command when also using the at random command
+        -   title: Учні забувають використовувати команду print при використанні команди at random
             example:
-                error_text: "Or they will sometimes put at random at the beginning of the line.\n"
+                error_text: "Або іноді ставлять навмання на початок ряду.\n"
                 error_code: "fruit is apple, cherry, banana\nfruit at random\n"
-                solution_text: "Emphasize to your students that you always need a print to print text.\n"
+                solution_text: "Наголосіть учням, що для друку тексту завжди потрібен print.\n"
                 solution_code: "fruit is apple, cherry, banana\nprint fruit at random\n"
-        -   title: Students forget to use commas in their lists
+        -   title: Студенти забувають ставити коми у списках
             example:
-                error_text: "In a list items are seperated with a comma.\n"
+                error_text: "У списку елементи розділяються комою.\n"
                 error_code: "pizzas is funghi tonno quattro stagioni\nprint pizzas at random\n"
-                solution_text: "After each item on your list, there should be a comma\n"
+                solution_text: "Після кожного елемента вашого списку повинна стояти кома\n"
                 solution_code: "pizzas is funghi, tonno, quattro stagioni\nprint pizzas at random\n"
         -   example:
-                error_text: "For example\n"
+                error_text: "Наприклад\n"
                 error_code: "clubs is Manchester United\nprint clubs at random\n"
-                solution_text: "Hedy can't print anything at random, because there is no list to choose from.\n"
+                solution_text: "Hedy не може надрукувати що-небудь довільно, тому що немає списку, з якого можна було б вибирати.\n"
                 solution_code: "clubs is Manchester United, Bayrn Munchen, FC Barcelona\nprint clubs at random\n"
-            title: Students try to use at random without a list
-        -   title: 'Students try to use add/remove without a list '
+            title: Студенти намагаються використовувати random без списку
+        -   title: 'Студенти намагаються використовувати додавання/видалення без списку '
             example:
-                error_text: "In the example below 'names' is not a list, but a variable. You cannot add anything to it.\n"
+                error_text: "У наведеному нижче прикладі \"names\" - це не список, а перемінна. До неї не можна нічого додавати.\n"
                 error_code: "names is Jake\nyour_name is ask Who are you?\nadd your_name to names\nprint names at random\n"
-                solution_text: "There has to be a list first, so you have to add a second name to turn names into a list, for example Amy. If you don't want amy on your list, you can use remove to remove it after.\n"
+                solution_text: "Спочатку має бути список, тому вам потрібно додати друге ім'я, щоб перетворити імена на список, наприклад, Емі. Якщо ви не хочете, щоб ім'я Емі було у вашому списку, ви можете використати команду видалити, щоб видалити його після.\n"
                 solution_code: "names is Jake, Amy\nyour_name is ask Who are you?\nadd your_name to names\nprint names at random\n"
-        -   title: Students forget to use to/from in add/remove
+        -   title: Студенти забувають використовувати до/з в додаванні/видаленні
             example:
-                error_text: "Without to/from the add/remove command won't work.\n"
+                error_text: "Без до/з команди додавання/видалення працювати не будуть.\n"
                 error_code: "adventures is story, parrot, dice\nchoice is Which adventure do you like best?\nadd choice\nremove dice\nprint I love adventures at random\n"
-                solution_text: "Hedy has to know which list the item should be added to/removed from.\n"
+                solution_text: "Hedy має знати, до якого списку слід додати/вилучити елемент.\n"
                 solution_code: "adventures is story, parrot, dice\nchoice is Which adventure do you like best?\nadd choice to adventures\nremove dice from adventures\nprint I love adventures at random\n"
     -   level: '4'
         sections:
-        -   title: Students forget to use quotation marks on both sides of the text
+        -   title: Студенти забувають використовувати лапки з обох боків тексту
             example:
-                error_text: "In this level print and ask need a set of quotation marks. One before of the text and one after.\n"
+                error_text: "На цьому рівні потрібно ставити лапки і задавати набір лапок. Один перед текстом і один після.\n"
                 error_code: "print Hello\nmood is ask 'How are you?\n"
-                solution_text: "Add the correct quotation marks.\n"
+                solution_text: "Поставте правильні лапки.\n"
                 solution_code: "print 'Hello'\nmood is ask 'How are you?'\n"
         -   example:
-                solution_text: "These are the correct quotation marks:\n"
-                error_text: "It is important to start your lesson by checking if the students know how to type a quotation mark properly. Else they might use the \"double quotes\" or the skewed one `.\n"
+                solution_text: "Це правильні лапки:\n"
+                error_text: "Важливо почати урок з перевірки того, чи знають студенти, як правильно набирати лапки. Інакше вони можуть використовувати \"подвійні лапки\" або \"перекошені лапки\".\n"
                 error_code: "print `Welcome to the restaurant`\nfood is ask \"What would you like to order?\"\n"
                 solution_code: "print 'Welcome to the restaurant'\nfood is ask 'What would you like to order?'\n"
-            title: Students use the wrong quotation marks
-        -   title: Students use an apostrophe in their text
+            title: Студенти використовують неправильні лапки
+        -   title: Студенти використовують апостроф у тексті
             example:
-                error_text: "From this level on apostrophes are not allowed. They are often used in English when thyping contractions like you're, don't or what's.\n"
+                error_text: "Починаючи з цього рівня апострофи не допускаються. Вони часто використовуються в англійській мові при наборі скорочень типу you're, don't або what's.\n"
                 error_code: "print 'You're not allowed to type this'\n"
-                solution_text: "You can choose to use the wrong grammar and just leave the apostrophe out. Or you could use the ` as an apostrophe.\n"
+                solution_text: "Ви можете використовувати неправильну граматику і просто не ставити апостроф. Або ви можете використовувати ` як апостроф.\n"
                 solution_code: "print 'Youre allowed to type this'\nprint 'And you`re able to do this'\n"
     -   level: '5'
         sections:
         -   example:
-                error_text: "After students use if or else they forget to use a second command like print or ask.\n"
+                error_text: "Після того, як студенти використають if, або якщо вони забудуть використати другу команду, наприклад, print або ask.\n"
                 error_code: "if name is Hedy 'Great!'\nelse 'Hedy is better!'\n"
-                solution_text: "Add the print command to fix it.\n"
+                solution_text: "Додайте команду print, щоб виправити це.\n"
                 solution_code: "if name is Hedy print 'Great!'\nelse print 'Hedy is better!'\n"
-            title: Students forget to use print in an if command
-        -   title: Students might use two different names for the same variable
+            title: Студенти забувають використовувати print в команді if
+        -   title: Студенти можуть використовувати дві різні назви для однієї й тієї ж перемінної
             example:
-                error_text: "In this example the student has used 'horse' and 'name' for the same variables.\n"
+                error_text: "У цьому прикладі учень використав \"horse\" та \"name\" для одних і тих самих перемінних.\n"
                 error_code: "horse is ask 'What is your horse called?'\nif name is Bonfire print 'cool'\nelse print 'less cool!'\n"
                 solution_text: "Always check wheter the variable has the same name throughout the code. Slight differences can be hard to spot (for example plurals) but they will interfere with the code.\n"
                 solution_code: "horse is ask 'What is your horse called'\nif horse is Bonfire print 'cool!'\nelse print 'less cool!'\n"
