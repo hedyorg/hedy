@@ -293,6 +293,11 @@ class Database:
                 achievements = self.achievements_by_username(profile.get('username'))
                 if not profile.get('no_public_profile'):
                     self.update_achievements_public_profile(profile.get('username'), len(achievements) or 0)
+                else:
+                    # As the last achievement timestamp is stored on the public profile -> create an artificial one
+                    # We don't have a choice, otherwise the double sorting below will crash
+                    # Todo TB -> Store last achievement on achievements data instead of public profile data (11-11-22)
+                    profile['last_achievement'] = timems()
                 profile['achievements'] = len(achievements) or 0
 
         # If we filter on country, make sure to filter out all non-country values
