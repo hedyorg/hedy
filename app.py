@@ -1388,7 +1388,7 @@ def change_language():
     body = request.json
     session['lang'] = body.get('lang')
     # return an empty but success response
-    return '', 204
+    return make_response('', 204)
 
 
 @app.route('/translate_keywords', methods=['POST'])
@@ -1447,7 +1447,7 @@ def store_parsons_order():
     }
 
     DATABASE.store_parsons(attempt)
-    return '', 204
+    return make_response('', 204)
 
 
 @app.route('/client_messages.js', methods=['GET'])
