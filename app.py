@@ -1455,11 +1455,9 @@ def client_messages():
     # Not really nice, but we don't call this often as it is cached
     d = collections.defaultdict(lambda: 'Unknown Exception')
     d.update(YamlFile.for_file('content/client-messages/en.yaml').to_dict())
-    d.update(YamlFile.for_file(
-        f'content/client-messages/{g.lang}.yaml').to_dict())
+    d.update(YamlFile.for_file(f'content/client-messages/{g.lang}.yaml').to_dict())
 
-    response = make_response(render_template(
-        "client_messages.js", error_messages=json.dumps(d)))
+    response = make_response(render_template("client_messages.js", error_messages=json.dumps(d)))
 
     if not is_debug_mode():
         # Cache for longer when not developing
@@ -1647,10 +1645,11 @@ def update_public_profile(user):
             body['tags'].append('admin')
 
     DATABASE.update_public_profile(user['username'], body)
+
+    response = {'message': gettext('public_profile_updated')}
     if achievement:
-        # Todo TB -> Check if we require message or success on front-end
-        return {'message': gettext('public_profile_updated'), 'achievement': achievement}, 200
-    return {'message': gettext('public_profile_updated')}, 200
+        response['achievement'] = achievement
+    return jsonify(response)
 
 
 @app.route('/translating')
