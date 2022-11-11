@@ -1657,28 +1657,6 @@ def translating_page():
     return render_template('translating.html')
 
 
-@app.route('/update_yaml', methods=['POST'])
-def update_yaml():
-    filename = path.join('coursedata', request.form['file'])
-    # The file MUST point to something inside our 'coursedata' directory
-    filepath = path.abspath(filename)
-    expected_path = path.abspath('coursedata')
-    if not filepath.startswith(expected_path):
-        raise RuntimeError('Invalid path given')
-
-    data = load_yaml_rt(filepath)
-    for key, value in request.form.items():
-        if key.startswith('c:'):
-            translating.apply_form_change(
-                data, key[2:], translating.normalize_newlines(value))
-
-    data = translating.normalize_yaml_blocks(data)
-
-    return Response(dump_yaml_rt(data),
-                    mimetype='application/x-yaml',
-                    headers={'Content-disposition': 'attachment; filename=' + request.form['file'].replace('/', '-')})
-
-
 @app.route('/user/<username>')
 def public_user_page(username):
     if not current_user()['username']:
