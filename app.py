@@ -1426,6 +1426,7 @@ def get_tutorial_translation(level, step):
 def store_parsons_order():
     body = request.json
     # Validations
+    # Fixme TB -> This is a typical undesirable response -> replace with gettext keys in issue #3615 (11-11-22)
     if not isinstance(body, dict):
         return 'body must be an object', 400
     if not isinstance(body.get('level'), str):
