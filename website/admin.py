@@ -200,7 +200,7 @@ class AdminModule(WebsiteModule):
         token = make_salt()
         hashed_token = password_hash(token, make_salt())
 
-        # Fixme TB: This seems like a (very) big risk -> why not just add one validation line? (11-11-22)
+        # Fixme TB: This seems like a (very) big security risk -> why not just add one validation line? (11-11-22)
         # We assume that this email is not in use by any other users. In other words, we trust the admin to enter a valid, not yet used email address.
         self.db.update_user(user['username'], {'email': body['email'], 'verification_pending': hashed_token})
 

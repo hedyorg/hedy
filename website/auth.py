@@ -36,6 +36,7 @@ if os.getenv('MAILCHIMP_API_KEY') and os.getenv('MAILCHIMP_AUDIENCE_ID'):
     MAILCHIMP_API_HEADERS = {'Content-Type': 'application/json',
                              'Authorization': 'apikey ' + os.getenv('MAILCHIMP_API_KEY')}
 
+
 def mailchimp_subscribe_user(email, country, role):
     request_body = {'email_address': email, 'status': 'subscribed', 'tags': [country, role]}
     r = requests.post(MAILCHIMP_API_URL + '/members', headers=MAILCHIMP_API_HEADERS, data=json.dumps(request_body))
@@ -94,7 +95,7 @@ def current_user():
     now = times()
     user = session.get('user', {'username': '', 'email': ''})
     ttl = session.get('user-ttl', None)
-    if ttl == None or now >= ttl:
+    if not ttl == None or now >= ttl:
         username = user['username']
         if username:
             db_user = g.db.user_by_username(username)

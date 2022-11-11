@@ -130,7 +130,6 @@ class AuthModule(WebsiteModule):
         # We receive the pre-processed user and response package from the function
         user, resp = self.store_new_account(body, body['email'].strip().lower())
 
-        
         if not is_testing_request(request) and 'subscribe' in body:
             # If we have a Mailchimp API key, we use it to add the subscriber through the API
             if MAILCHIMP_API_URL:
@@ -189,7 +188,7 @@ class AuthModule(WebsiteModule):
         forget_current_user()
         if request.cookies.get(TOKEN_COOKIE_NAME):
             self.db.forget_token(request.cookies.get(TOKEN_COOKIE_NAME))
-        return '', 200
+        return make_response('', 204)
 
     @route('/destroy', methods=['POST'])
     @requires_login
@@ -197,14 +196,14 @@ class AuthModule(WebsiteModule):
         forget_current_user()
         self.db.forget_token(request.cookies.get(TOKEN_COOKIE_NAME))
         self.db.forget_user(user['username'])
-        return '', 200
+        return make_response('', 204)
 
     @route('/destroy_public', methods=['POST'])
     @requires_login
     def destroy_public(self, user):
         self.db.forget_public_profile(user['username'])
         session.pop('profile_image', None)  # Delete profile image id if existing
-        return '', 200
+        return make_response('', 204)
 
     @route('/change_student_password', methods=['POST'])
     @requires_login
@@ -228,7 +227,7 @@ class AuthModule(WebsiteModule):
         hashed = password_hash(body['password'], make_salt())
         self.db.update_user(body['username'], {'password': hashed})
 
-        return {'success': gettext("password_change_success")}, 200
+        return jsonify({'message': gettext("password_change_success")})
 
     @route('/change_password', methods=['POST'])
     @requires_login
@@ -262,7 +261,7 @@ class AuthModule(WebsiteModule):
             except:
                 return gettext('mail_error_change_processed'), 400
 
-        return jsonify({'message': gettext('password_updated')}), 200
+        return jsonify({'message': gettext('password_updated')})
 
     @route('/recover', methods=['POST'])
     def recover(self):
@@ -304,7 +303,7 @@ class AuthModule(WebsiteModule):
             except:
                 return gettext('mail_error_change_processed'), 400
 
-            return jsonify({'message': gettext('sent_password_recovery')}), 200
+            return jsonify({'message': gettext('sent_password_recovery')})
 
     @route('/reset', methods=['POST'])
     def reset(self):
@@ -347,7 +346,7 @@ class AuthModule(WebsiteModule):
             except:
                 return gettext('mail_error_change_processed'), 400
 
-        return jsonify({'message': gettext('password_resetted')}), 200
+        return jsonify({'message': gettext('password_resetted')})
 
     @route('/request_teacher', methods=['GET'])
     @requires_login
@@ -359,7 +358,7 @@ class AuthModule(WebsiteModule):
             return gettext('already_teacher_request'), 400
 
         self.db.update_user(user['username'], {'teacher_request': True})
-        return jsonify({'message': gettext('teacher_account_success')}), 200
+        return jsonify({'message': gettext('teacher_account_success')})
 
     def store_new_account(self, account, email):
         username, hashed, hashed_token = prepare_user_db(account['username'], account['password'])

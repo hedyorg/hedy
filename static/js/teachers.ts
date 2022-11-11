@@ -311,7 +311,7 @@ export function change_password_student(username: string, enter_password: string
               contentType: 'application/json',
               dataType: 'json'
             }).done(function (response) {
-              modal.alert(response.success, 3000, false);
+              modal.alert(response.message, 3000, false);
             }).fail(function (err) {
               modal.alert(err.responseText, 3000, true);
             });
