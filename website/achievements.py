@@ -3,7 +3,7 @@ from flask_babel import gettext
 from website import database
 from hedyweb import AchievementTranslations
 from website.auth import requires_login, current_user
-from flask import request, jsonify, session
+from flask import request, jsonify, session, make_response
 import hedy
 from .website_module import WebsiteModule, route
 
@@ -252,4 +252,4 @@ class AchievementsModule(WebsiteModule):
             self.achievements.initialize_user_data_if_necessary()
             if body['achievement'] not in session['achieved'] and body['achievement'] in self.achievements.translations.get_translations(session['lang']).get('achievements'):
                 return jsonify({"achievements": self.achievements.verify_pushed_achievement(user.get('username'), body['achievement'])})
-        return jsonify({})
+        return make_response('', 204)

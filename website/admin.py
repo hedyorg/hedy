@@ -1,5 +1,5 @@
 from flask_babel import gettext
-from flask import request, g
+from flask import request, g, make_response, jsonify
 import hedyweb
 from website import statistics
 from website.auth import create_verify_link, current_user, is_admin, is_teacher, make_salt, password_hash, pick, requires_admin, send_localized_email_template, password_hash
@@ -177,8 +177,7 @@ class AdminModule(WebsiteModule):
         is_teacher_value = 1 if body['is_teacher'] else 0
         update_is_teacher(self.db, user, is_teacher_value)
 
-        # Todo TB feb 2022 -> Return the success message here instead of fixing in the front-end
-        return '', 200
+        return make_response('', 204)
 
     @route('/changeUserEmail', methods=['POST'])
     @requires_admin
@@ -201,6 +200,7 @@ class AdminModule(WebsiteModule):
         token = make_salt()
         hashed_token = password_hash(token, make_salt())
 
+        # Fixme TB: This seems like a (very) big risk -> why not just add one validation line? (11-11-22)
         # We assume that this email is not in use by any other users. In other words, we trust the admin to enter a valid, not yet used email address.
         self.db.update_user(user['username'], {'email': body['email'], 'verification_pending': hashed_token})
 
@@ -215,7 +215,7 @@ class AdminModule(WebsiteModule):
             except:
                 return gettext('mail_error_change_processed'), 400
 
-        return {}, 200
+        return make_response('', 204)
 
     @route('/getUserTags', methods=['POST'])
     @requires_admin
@@ -224,7 +224,7 @@ class AdminModule(WebsiteModule):
         user = self.db.get_public_profile_settings(body['username'].strip().lower())
         if not user:
             return "User doesn't have a public profile", 400
-        return {'tags': user.get('tags', [])}, 200
+        return jsonify({'tags': user.get('tags', [])})
 
     @route('/updateUserTags', methods=['POST'])
     @requires_admin
@@ -251,7 +251,7 @@ class AdminModule(WebsiteModule):
         db_user['tags'] = tags
 
         self.db.update_public_profile(username, db_user)
-        return {}, 200
+        return make_response('', 204)
 
 
 def update_is_teacher(db: Database, user, is_teacher_value=1):
