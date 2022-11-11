@@ -2280,7 +2280,7 @@ def preprocess_blocks(code, level, lang):
 
             difference_in_indents = (previous_number_of_indents - current_number_of_indents)
             for i in range(difference_in_indents):
-                processed_code[-1] += '#ENDBLOCK\n'
+                processed_code[-1] += '#ENDBLOCK'
 
 
         if line_requires_indentation(line, lang):
@@ -2297,7 +2297,7 @@ def preprocess_blocks(code, level, lang):
     # if the last line is indented, the end of the program is also the end of all indents
     # so close all blocks
     for i in range(current_number_of_indents):
-        processed_code[-1] += '#ENDBLOCK\n'
+        processed_code[-1] += '#ENDBLOCK'
     return "\n".join(processed_code)
 
 

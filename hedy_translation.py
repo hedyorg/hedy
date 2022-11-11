@@ -93,7 +93,6 @@ def translate_keywords(input_string_, from_lang="en", to_lang="nl", level=1):
 
         # For now the needed post processing is only removing the 'end-block's added during pre-processing
         result = '\n'.join([line for line in result.splitlines()])
-        result = result.replace('#ENDBLOCK\n', '')
         result = result.replace('#ENDBLOCK', '')
 
         return result
