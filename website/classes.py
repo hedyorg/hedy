@@ -24,7 +24,7 @@ class ClassModule(WebsiteModule):
     @requires_login
     def create_class(self, user):
         if not is_teacher(user):
-            return gettext('only_teacher_create_class'), 403
+            return gettext('only_teacher_create_class'), 401
 
         body = request.json
         # Validations
@@ -39,7 +39,7 @@ class ClassModule(WebsiteModule):
         Classes = self.db.get_teacher_classes(user['username'], True)
         for Class in Classes:
             if Class['name'] == body['name']:
-                return gettext('class_name_duplicate'), 200
+                return jsonify(gettext('class_name_duplicate'))
 
         Class = {
             'id': uuid.uuid4().hex,
