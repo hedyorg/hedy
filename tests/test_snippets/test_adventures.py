@@ -13,7 +13,7 @@ os.chdir(os.path.join(os.getcwd(), __file__.replace(os.path.basename(__file__), 
 
 unique_snippets_table = set()
 filtered_language = None
-level = 5
+level = None
 
 def collect_snippets(path, filtered_language = None):
   Hedy_snippets = []
