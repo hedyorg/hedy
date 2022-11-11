@@ -1388,7 +1388,8 @@ def get_highscores_page(user, filter):
 def change_language():
     body = request.json
     session['lang'] = body.get('lang')
-    return jsonify({'succes': 200})
+    # return an empty but success response
+    return '', 204
 
 
 # Fixme: TB -> Why is the response code inside the response dictionary? This doesn't make any sense

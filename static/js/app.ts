@@ -1767,21 +1767,11 @@ export function change_language(lang: string) {
     }),
     contentType: 'application/json',
     dataType: 'json'
-  }).done(function(response: any) {
-      if (response.succes){        
-        // Check if keyword_language is set to change it to English
-        const queryString = window.location.search;
-        const urlParams = new URLSearchParams(queryString);
-        if (urlParams.get('keyword_language') !== null) {
-          urlParams.set('keyword_language', 'en');
-          window.location.search = urlParams.toString();          
-        } else {
-          location.reload();
-        }        
-      }
-    }).fail(function(xhr) {
+  }).done(function() {
+      location.reload();
+  }).fail(function(xhr) {
       console.error(xhr);
-    });
+  });
 }
 
 export function change_keyword_language(start_lang: string, new_lang: string) {
