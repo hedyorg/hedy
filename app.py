@@ -1447,7 +1447,7 @@ def store_parsons_order():
     }
 
     DATABASE.store_parsons(attempt)
-    return jsonify({}), 200
+    return '', 204
 
 
 @app.route('/client_messages.js', methods=['GET'])
