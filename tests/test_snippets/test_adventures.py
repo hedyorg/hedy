@@ -13,6 +13,7 @@ os.chdir(os.path.join(os.getcwd(), __file__.replace(os.path.basename(__file__), 
 
 unique_snippets_table = set()
 filtered_language = None
+level = None
 
 def collect_snippets(path, filtered_language = None):
   Hedy_snippets = []
@@ -87,14 +88,22 @@ def collect_snippets(path, filtered_language = None):
 
   return Hedy_snippets
 
+# filtered_language = 'en'
 # use this to filter on 1 lang, zh_Hans for Chinese, nb_NO for Norwegian, pt_PT for Portuguese
 # filtered_language = 'en'
+
 
 Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/adventures', filtered_language=filtered_language)]
 
 # level = 4
 # if level:
 #     Hedy_snippets = [(name, snippet) for (name, snippet) in Hedy_snippets if snippet.level == level]
+
+# This allows filtering out languages locally, but will throw an error
+# on GitHub Actions (or other CI system) so nobody accidentally commits this.
+if os.getenv('CI') and (filtered_language or level):
+    raise RuntimeError('Whoops, it looks like you left a snippet filter in!')
+
 
 Hedy_snippets = HedyTester.translate_keywords_in_snippets(Hedy_snippets)
 
