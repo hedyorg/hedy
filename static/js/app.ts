@@ -608,7 +608,7 @@ function storeProgram(level: number | [number, string], lang: string, name: stri
     // The auth functions use this callback function.
     if (cb) return response.Error ? cb (response) : cb (null, response);
     if (shared) {
-      $('#modal-copy-button').attr('onclick', "hedyApp.copy_to_clipboard('" + viewProgramLink(response.id) + "')");
+      $('#modal-copy-button').attr('onclick', "hedyApp.copy_to_clipboard('" + viewProgramLink(response.id) + "', '" + response.share_message + "')");
       modal.copy_alert (response.message, 5000);
     } else {
       modal.alert(response.message, 3000, false);
@@ -886,8 +886,10 @@ export function copy_to_clipboard (string: string, prompt: string) {
      document.getSelection()?.removeAllRanges ();
      document.getSelection()?.addRange (originalSelection);
   }
-  modal.hide_alert();
-  modal.alert (prompt, 3000, false);
+
+  // Hide all modals to make sure the copy clipboard modal is hidden as well -> show alert() with feedback
+  modal.hide();
+  modal.alert(prompt, 3000, false);
 }
 
 /**
