@@ -87,7 +87,7 @@ adventures:
             13:
                 start_code: "leina = {ask} 'leina la gago ke mang?'\ndingwaga = {ask} 'o dingwaga tse kahe?'\n{if} leina {is} 'Hedy' {and} dingwaga {is} 2\n    {print} 'ke wena Hedy wa nnete!'"
                 story_text: "## And... kana..?\nMo legatong le, retile go ithuta `{and}` le `{kana}`! Fa o batla o ka thodumela diele tse pedi, ga o tlhoke go dirisa bo {if} ba babedi, mme o ka dirisa `{and}` le `{kana}`. Fa o ka dirisa `{and}`, diele tsotlhe ka bobedi, molema le moja wa `{and}` di tlhoka go nna boammaaruri. gape re ka dirisa  `{kana}`. Ka jalo, seele sele sengwe fela se tlhoka go baakanngwa."
-                example_code: "```\nleina = {ask} 'leina la gago ke mang?'\nage = {ask} 'O dingwaga di kahe?'\n{if} leina {is} 'Hedy' {and} dingwaga {is} 2\n    {print} 'ke wena Hedy sa boammaaruri!'\n```\n"
+                example_code: "```\nleina = {ask} 'leina la gago ke mang?'\ndingwaga = {ask} 'O dingwaga di kahe?'\n{if} leina {is} 'Hedy' {and} dingwaga {is} 2\n    {print} 'ke wena Hedy sa boammaaruri!'\n```\n"
             15:
                 start_code: "karabo = 0\n{while} karabo != 25\n    karabo = {ask} '5 a boeletswa ga 5 ke bokahe?'\n{print} 'karabo ee siameng e setse e filwe'"
                 story_text: "## dipoeletso tse dingwe!\nre ya go ithuta poeletso e ntsha, ya `{while}` poeletso! Re tswelela ka poeletso fela fa seele sesantse sele boammaaruri.\nKa jalo o seka wa lebala go fetola bokao mo poeletsong.\n\nMo sekaing sa code, re tswelela go fitlhela karabo ya nnete e fiwa.\nFa karabo ya nnete e sa fiwe, poeletso ga e kakek ya fela!"
@@ -95,7 +95,7 @@ adventures:
             16:
                 start_code: "leungo = ['apole', 'panana', 'cherry']\n{print} leungo"
                 story_text: "## Go tswelela go lebega jaaka code ya nnete!\nRe ya go dira dilist jaaka tsa Python ka square brackets go dikologa dilist! Gape re dirisa ditsejwana go dikologa karolo nngwe le nngwe jaaka re ithutile mo dikarolong tse di fetileng.\nGape o ka dirisa di square brackets go supa sengwe mo listing."
-                example_code: "```\nditsala = ['Thabo', 'Jason, 'Lefika']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} ' lucky number ya ' ditsala[i]\n    {print} 'ke ' lucky_numbers[i]\n```\n"
+                example_code: "```\nditsala = ['Thabo', 'Jason', 'Lefika']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} ' lucky number ya ' ditsala[i]\n    {print} 'ke ' lucky_numbers[i]\n```\n"
             18:
                 start_code: "leina = 'Hedy'\n{print}('leina lame ke ', leina)"
                 story_text: "## The last level!\nWe arrived at real Python code! That means we need to use parentheses with {print} and {range} from now on."
