@@ -1383,6 +1383,7 @@ def get_highscores_page(user, filter):
                            in_class=True if classes else False)
 
 
+# Fixme: TB -> Why is the response code inside the response dictionary? This doesn't make any sense
 @app.route('/change_language', methods=['POST'])
 def change_language():
     body = request.json
@@ -1390,6 +1391,7 @@ def change_language():
     return jsonify({'succes': 200})
 
 
+# Fixme: TB -> Why is the response code inside the response dictionary? This doesn't make any sense
 @app.route('/translate_keywords', methods=['POST'])
 def translate_keywords():
     body = request.json
