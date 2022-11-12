@@ -1,5 +1,5 @@
 16:
--   name: square brackets
+-   name: квадратные скобки
     explanation: Lists with square brackets
     demo_code: "fruit = ['apple', 'banana', 'cherry']\n{print} fruit"
 -   name: Get an item from a list
@@ -21,11 +21,11 @@
 18:
 -   name: '{print}'
     explanation: With `{print}` you need to use parentheses
-    demo_code: "{print}('hi!')"
+    demo_code: "{print}(\"Привет!\")"
 -   name: '{range}'
     explanation: With `{print}` you need to use parentheses and commas if you {print} more items
     demo_code: "name = 'Hedy'\n{print}('my name is ', name)"
--   name: '{print} with var'
+-   name: '{print} с var'
     demo_code: "name = 'Hedy'\n{print}('my name is ', name)"
     explanation: With `{print}` you need to use parentheses and commas if you {print} more items
 -   name: ask something with {input}
@@ -62,9 +62,9 @@
     demo_code: "{print} Let me think for one second...\n{sleep}\n{print} Hmm.. I need 3 more seconds...\n{sleep} 3\n{print} Eureka! Ive got it!"
 -   explanation: Give a number a name using `{is}`. You can choose the name yourself.
     demo_code: "angle {is} 90\n{turn} angle\n{forward} 100"
-    name: is - turtle
+    name: '{is} с черепахой'
 3:
--   name: choose_random
+-   name: Выберите случайный
     explanation: Choose a random word from a group with `{at}` and `{random}`
     demo_code: "animals {is} dog, cat, kangaroo\n{print} animals {at} {random}"
 -   name: '{add}'
@@ -81,23 +81,23 @@
     explanation: Give a name to some text and `{print}` without quotation marks
     demo_code: "name {is} Hedy\n{print} 'my name is ' name"
 -   name: '{ask}'
-    explanation: ask something with `{ask}`.
+    explanation: Спросите что-нибудь с помощью `{ask}`.
     demo_code: "color {is} {ask} 'What is your favorite color?'\n{print} color ' is your favorite!'"
 5:
 -   name: '{print}'
     explanation: print exactly using quotation marks
     demo_code: "{print} 'Hello welcome to Hedy.'"
 -   name: '{ask}'
-    explanation: ask something with `{ask}`.
+    explanation: Спросите что-нибудь с помощью `{ask}`.
     demo_code: "color {is} {ask} 'What is your favorite color?'\n{print} color ' {is} your favorite!'"
 -   name: '{if}'
     explanation: Make a choice with `{if}`
     demo_code: "color {is} {ask} 'What is your favorite color?'\n{if} color {is} green {print} 'pretty!' {else} {print} 'meh'"
--   name: '{if} with turtle'
+-   name: '{if} с черепахой'
     explanation: Make a choice with `{if}`
     demo_code: "answer {is} {ask} 'How far should I walk?'\n{if} answer {is} far {forward} 100 {else} {forward} 5"
 -   name: '{in}'
-    explanation: Check elements with `{in}`
+    explanation: Проверяйте элементы с помощью `{in}`.
     demo_code: "pretty_colors {is} green, yellow\ncolor {is} {ask} 'What {is} your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
 6:
 -   name: '{print}'
@@ -114,12 +114,12 @@
     explanation: print exactly using quotation marks
     demo_code: "{print} 'Hello welcome to Hedy.'"
 -   name: '{ask}'
-    explanation: ask something with `{ask}`.
+    explanation: Спросите что-нибудь с помощью `{ask}`.
     demo_code: "color = {ask} 'What is your favorite color?'\n{print} color ' is your favorite!'"
 -   name: '{if}'
     explanation: Make a choice with `{if}`
     demo_code: "color = {ask} 'What is your favorite color?'\n{if} color {is} green {print} 'pretty!' {else} {print} 'meh'"
--   name: '{repeat} - turtle'
+-   name: '{repeat} с черепахой'
     explanation: repeat a line of code with `{repeat}`.
     demo_code: '{repeat} 3 {times} {forward} 10'
 8:
@@ -129,41 +129,41 @@
 -   name: '{ask}'
     explanation: ask for the answer to a sum and check if it is correct. We can now print 2 lines.
     demo_code: "answer = {ask} 'What is 5 plus 5?'\n{if} answer {is} 10\n    {print} 'Well done!'\n    {print} 'Indeed, the answer was ' answer\nelse\n    {print} 'Oops!'\n    {print} 'The answer is 10'"
--   name: '`{repeat}` with turtle'
-    explanation: '{repeat} multiple lines'
+-   name: '{repeat} с черепахой'
+    explanation: 'Повторите несколько строк.'
     demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
 9:
--   name: '`{if}` with multiple lines'
+-   name: '{if} с несколькими линиями'
     explanation: The answer of a sum of questions with '{ask}' and see if it is correct. Now we print out two lines.
     demo_code: "answer = {ask} 'What is 20 plus 20?'\n{if} answer {is} 20\n    {print} 'Well done!!'\n    {print} 'The answer is indeed' answer\nelse\n    {print} 'Wrong'\n    {print} 'The answer is 20'"
--   name: '`{repeat}` and turtle'
-    explanation: '{repeat} multiple lines'
+-   name: '{repeat} с черепахой'
+    explanation: 'Повторите несколько строк.'
     demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
 10:
 -   name: '{print}'
     explanation: print something. Remember to use a quotation mark for literal printing.
     demo_code: "{print} '5 times 5 is ' 5 * 5"
--   name: '{for} with a list'
+-   name: '{for} со списком'
     explanation: 'print all things in a list '
     demo_code: "animals {is} dog, cat, blobfish\n{for} animal {in} animals\n  {print} 'I love ' animal"
 11:
--   name: '{for} loop'
+-   name: '{for} цикл'
     explanation: We can use `{for}` with a {range}
     demo_code: "{for} counter {in} {range} 1 {to} 5\n    {print} counter"
 -   name: '{ask}'
     explanation: ask for the answer to a sum and check if it is correct. We can now print 2 lines.
     demo_code: "answer = {ask} 'What is 5 plus 5?'\n{if} answer {is} 10\n    {print} 'Well done!'\n    {print} 'Indeed, the answer was ' answer\nelse\n    {print} 'Oops!'\n    {print} 'The answer is 10'"
 12:
--   name: float directly
-    explanation: Decimal numbers
+-   name: плавать напрямую
+    explanation: Десятичные числа.
     demo_code: "{print} 'Calculate away!'\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n"
--   name: assign text
+-   name: назначить текст
     explanation: Text with quotation marks after =
     demo_code: "name = 'Hedy the Robot'\n{print} 'Hello ' name\n"
 -   name: quotes after {if} comparison
     explanation: Text with quotation marks after {if}
     demo_code: "name = {ask} 'Who are you?'\n{if} name = 'Hedy'\n    {print} 'Hi there!'\n"
--   name: quotes in list
+-   name: кавычки в списке
     explanation: A list with quotation marks
     demo_code: "superheroes = 'Iron Man', 'Batman', 'Superman'\n{print} superheroes {at} {random}\n"
 13:
@@ -177,25 +177,25 @@
 -   name: '{while}'
     explanation: We can use the `{while}` loop with not equal
     demo_code: "answer = 0\n{while} answer != 25\n    answer = {ask} 'What is 5 times 5?'\n{print} 'A correct answer has been given'"
--   name: Smaller {while}
+-   name: Меньше {while}
     explanation: 'We can also use the `{while}` loop with `<` and `>`. '
     demo_code: "count = 1\n{while} count < 3\n    {print} 'We do this ' 3 - count ' more times'\n    count = count + 1\n{print} 'We are done'"
 14:
--   name: Smaller
+-   name: Меньше
     explanation: We use the `<` to check if the first number is smaller than the second number.
     demo_code: "age = {ask} 'How old are you?'\n{if} age < 13\n    {print} 'You are younger than me!'"
--   name: Bigger
+-   name: Больше
     explanation: We use the `>` to check if the first number is bigger than the second number.
     demo_code: "age = {ask} 'How old are you?'\n{if} age > 13\n    {print} 'You are older than me!'"
--   name: Equal
+-   name: Равный
     explanation: We use the `==` to check if two things are the same.
     demo_code: "answer = {ask} 'What is 5 * 5?'\n{if} answer == 25\n    {print} 'That {is} correct!'"
--   name: Not equal
+-   name: Не равны
     explanation: 'We use the `!=` to check if two things are not the same. '
     demo_code: "answer = {ask} 'What is 5 * 5?'\n{if} answer != 25\n    {print} 'That is not correct!'"
--   name: Smaller {or} equal
+-   name: Меньше или равно
     explanation: We use the `<=` to check if the first number is smaller than or equal to the second number.
     demo_code: "age = {ask} 'How old are you?'\n{if} age <= 12\n    {print} 'You are younger than me!'"
--   name: Bigger or equal
+-   name: Больше или равно
     explanation: We use the `>=` to check if the first number is bigger than or equal to the second number.
     demo_code: "age = {ask} 'How old are you?'\n{if} age >= 14\n    {print} 'You are older than me!'"
