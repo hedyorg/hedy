@@ -608,7 +608,7 @@ function storeProgram(level: number | [number, string], lang: string, name: stri
     // The auth functions use this callback function.
     if (cb) return response.Error ? cb (response) : cb (null, response);
     if (shared) {
-      $('#modal-copy-button').attr('onclick', "hedyApp.copy_to_clipboard('" + viewProgramLink(response.id) + "')");
+      $('#modal-copy-button').attr('onclick', "hedyApp.copy_to_clipboard('" + viewProgramLink(response.id) + "', '" + response.share_message + "')");
       modal.copy_alert (response.message, 5000);
     } else {
       modal.alert(response.message, 3000, false);
@@ -886,8 +886,10 @@ export function copy_to_clipboard (string: string, prompt: string) {
      document.getSelection()?.removeAllRanges ();
      document.getSelection()?.addRange (originalSelection);
   }
-  modal.hide_alert();
-  modal.alert (prompt, 3000, false);
+
+  // Hide all modals to make sure the copy clipboard modal is hidden as well -> show alert() with feedback
+  modal.hide();
+  modal.alert(prompt, 3000, false);
 }
 
 /**
@@ -2045,6 +2047,20 @@ function markCurrentDebuggerLine() {
   } else {
     markers.setDebuggerCurrentLine(undefined);
   }
+}
+
+export function hide_editor() {
+  $('#fold_in_toggle_container').hide();
+  $('#code_editor').toggle();
+  $('#code_output').addClass('col-span-2');
+  $('#fold_out_toggle_container').show();
+}
+
+export function show_editor() {
+  $('#fold_out_toggle_container').hide();
+  $('#code_editor').toggle();
+  $('#code_output').removeClass('col-span-2');
+  $('#fold_in_toggle_container').show();
 }
 
 // See https://github.com/skulpt/skulpt/pull/579#issue-156538278 for the JS version of this code
