@@ -269,6 +269,15 @@ class HedyTester(unittest.TestCase):
                       for a in args])
 
   @staticmethod
+  def indent(code, spaces_amount = 2, skip_first_line = False):
+      lines = code.split('\n')
+
+      if not skip_first_line:
+        return '\n'.join([' ' * spaces_amount + l for l in lines])
+      else:
+        return lines[0] + '\n' + f'\n'.join([' ' * spaces_amount + l for l in lines[1::]])
+
+  @staticmethod
   def translate_keywords_in_snippets(snippets):
     # fill keyword dict for all keyword languages
     keyword_dict = {}
