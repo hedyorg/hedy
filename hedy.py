@@ -833,7 +833,7 @@ class Filter(Transformer):
 
 class UsesTurtle(Transformer):
     def __default__(self, args, children, meta):
-        if len(children) == 0:  # no children? you are a leaf that is not Pressed, so you are no PyGame command
+        if len(children) == 0:  # no children? you are a leaf that is not Turn or Forward, so you are no Turtle command
             return False
         else:
             return any(type(c) == bool and c is True for c in children)

@@ -527,7 +527,6 @@ def transpile_add_stats(code, level, lang_):
         result = hedy.transpile(code, level, lang_)
         statistics.add(
             username, lambda id_: DATABASE.add_program_stats(id_, level, number_of_lines,None))
-        print(result)
         return result
     except Exception as ex:
         statistics.add(username, lambda id_: DATABASE.add_program_stats(
