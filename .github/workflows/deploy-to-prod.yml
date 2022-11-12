@@ -6,11 +6,10 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      # Require one of these roles, configured ON THE REPOSITORY itself
-      # (On the Organization is not enough)
-      - if: github.actor.role != 'Maintainer' && github.actor.role != 'Admin'
+      # Restrict who can run this workflow
+      - if: github.actor != 'Felienne'
         run: |
-          echo "You must be a Maintainer or Admin to run this workflow." >&2
+          echo "You must be Felienne to run this workflow :D" >&2
           exit 1
       - uses: actions/checkout@v2
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
