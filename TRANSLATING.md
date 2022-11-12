@@ -26,7 +26,7 @@ Click on "Languages" in the menu on top to get to this screen:
 
 ![](image/TRANSLATING/1652368938016.png)
 
-Here you can see the progress of languages, calculated over all components. There are a few reasons why a translation is not complete. First of course, because texts are not yet translated. But on this screen you can see more reasons. Often, the 100% is nog reached because of checks that failed. This tool checks many things, like "are question marks copied to the translation". The checks make translations better. You as a translator can dismiss any of these checks per text if you're sure it does not apply.
+Here you can see the progress of languages, calculated over all components. There are a few reasons why a translation is not complete. First of course, because texts are not yet translated. But on this screen you can see more reasons. Often, the 100% is not reached because of checks that failed. This tool checks many things, like "are question marks copied to the translation". The checks make translations better. You as a translator can dismiss any of these checks per text if you're sure it does not apply.
 
 Now click on Dutch to reach the following screen:
 
@@ -42,7 +42,7 @@ Click on Adventures to reach this screen:
 
 Now you see an overview of this component. Little too much information maybe. Don't worry, just start with "Strings marked for edit". These are strings that have the English text in place of the translation or have been translated, but the source has changed. All texts start with the English source text, this way every text that has not been translated yet, is at least visible in English on the website.
 
-If you're a little more expericend, you might want to try some of the texts that have specific checks failing.
+If you're a little more experienced, you might want to try some of the texts that have specific checks failing.
 At the right, you can choose between Translate or Zen.
 
 If you choose for Translate for the Failing checks: Placeholders, you might see something like this:
@@ -53,9 +53,9 @@ Again, maybe a little too much information, but a lot is very helpful. Browse a 
 
 ![](image/TRANSLATING/1652370483598.png)
 
-You see more strings on the same page for faster translation, but less helpfull info per translation.
+You see more strings on the same page for faster translation, but less helpful info per translation.
 
-One important thing to notice is the **grayed pieces of text**. This is computer code and should not be translated! There are two versions: keywords between {}, this is in real code that we need to be able to run. Translating these wil make our software fail. The other version is also between {}, but with extra `` around them. This is to highlight this code within text. It wil not make our software fail, but will make the program harder to use. So both of these should be handled with care.
+One important thing to notice is the **grayed pieces of text**. This is computer code and should not be translated! There are two versions: keywords between {}, this is in real code that we need to be able to run. Translating these will make our software fail. The other version is also between {}, but with extra `` around them. This is to highlight this code within text. It wil not make our software fail, but will make the program harder to use. So both of these should be handled with care.
 
 
 
