@@ -1,14 +1,15 @@
 import inspect
 import io
 import os
-import re
-import sys
 import textwrap
-import unittest
-from contextlib import contextmanager
 
+import exceptions
 import hedy
 import hedy_translation
+import re
+import sys
+import unittest
+from contextlib import contextmanager
 import utils
 from hedy_content import ALL_KEYWORD_LANGUAGES, KEYWORDS
 
@@ -51,7 +52,7 @@ class HedyTester(unittest.TestCase):
             code = utils.TURTLE_PREFIX_CODE + parse_result.code
         else:
             code = utils.NORMAL_PREFIX_CODE + parse_result.code
-# remove sleep comments to make program execution less slow
+        # remove sleep comments to make program execution less slow
         code = re.sub(r'time\.sleep\([^\n]*\)', 'pass', code)
 
         with HedyTester.captured_output() as (out, err):
@@ -167,8 +168,7 @@ class HedyTester(unittest.TestCase):
 
                     # TODO FH Feb 2022: we pick Dutch here not really fair or good practice :D
                     # Maybe we should do a random language?
-                    in_dutch = hedy_translation.translate_keywords(
-                        code, from_lang=lang, to_lang="nl", level=self.level)
+                    in_dutch = hedy_translation.translate_keywords(code, from_lang=lang, to_lang="nl", level=self.level)
                     back_in_english = hedy_translation.translate_keywords(
                         in_dutch, from_lang="nl", to_lang=lang, level=self.level)
                     self.assert_translated_code_equal(code, back_in_english)
@@ -182,8 +182,7 @@ class HedyTester(unittest.TestCase):
             all_commands = hedy.all_commands(code, level, lang)
             if expected_commands is not None:
                 self.assertEqual(expected_commands, all_commands)
-            if ('ask' not in all_commands) and (
-                    'input' not in all_commands):  # <- use this to run tests locally with unittest
+            if ('ask' not in all_commands) and ('input' not in all_commands):  # <- use this to run tests locally with unittest
                 self.assertTrue(self.validate_Python_code(result))
             if output is not None:
                 self.assertEqual(output, HedyTester.run_code(result))
@@ -191,13 +190,14 @@ class HedyTester(unittest.TestCase):
 
     def assert_translated_code_equal(self, orignal, translation):
         # When we translate a program we lose information about the whitespaces of the original program.
-        # So when comparing the original and the translated code, we compress
-        # multiple whitespaces into one.
+        # So when comparing the original and the translated code, we compress multiple whitespaces into one.
         self.assertEqual(re.sub('\\s+', ' ', orignal), re.sub('\\s+', ' ', translation))
 
     @staticmethod
-    def validate_Hedy_code(snippet):
-        # Code used in the Adventure and Level Defaults tester to validate Hedy code
+    def check_Hedy_code_for_errors(snippet):
+        # Code used in the Snippet testers to validate Hedy code
+        # Note that None is the happy path! If None is returned, no errors are found
+        # If an error is found a (reasonably) readable string is returned.
 
         try:
             if len(snippet.code) != 0:   # We ignore empty code snippets or those of length 0
@@ -210,10 +210,14 @@ class HedyTester(unittest.TestCase):
         except hedy.exceptions.CodePlaceholdersPresentException:  # Code with blanks is allowed
             pass
         except OSError:
-            return True  # programs with ask cannot be tested with output :(
-        except Exception:
-            return False
-        return True
+            return None  # programs with ask cannot be tested with output :(
+        except exceptions.HedyException as E:
+            try:
+                location = E.error_location
+            except BaseException:
+                location = 'No Location Found'
+            return f'{str(E)} at line {location}'
+        return None
 
     @staticmethod
     def validate_Python_code(parseresult):
@@ -251,55 +255,55 @@ class HedyTester(unittest.TestCase):
         type = 'int' if level < 12 else 'float'
 
         return textwrap.dedent(f"""\
-      trtl = {val}
-      try:
-        trtl = {type}(trtl)
-      except ValueError:
-        raise Exception(f'While running your program the command <span class="command-highlighted">{command_text}</span> received the value <span class="command-highlighted">{{trtl}}</span> which is not allowed. Try changing the value to a number.')
-      t.{command}(min(600, trtl) if trtl > 0 else max(-600, trtl)){suffix}""")
+    trtl = {val}
+    try:
+      trtl = {type}(trtl)
+    except ValueError:
+      raise Exception(f'While running your program the command <span class="command-highlighted">{command_text}</span> received the value <span class="command-highlighted">{{trtl}}</span> which is not allowed. Try changing the value to a number.')
+    t.{command}(min(600, trtl) if trtl > 0 else max(-600, trtl)){suffix}""")
 
     @staticmethod
     def sleep_command_transpiled(val):
         return textwrap.dedent(f"""\
-        try:
-          time.sleep(int({val}))
-        except ValueError:
-          raise Exception(f'While running your program the command <span class="command-highlighted">sleep</span> received the value <span class="command-highlighted">{{{val}}}</span> which is not allowed. Try changing the value to a number.')""")
+      try:
+        time.sleep(int({val}))
+      except ValueError:
+        raise Exception(f'While running your program the command <span class="command-highlighted">sleep</span> received the value <span class="command-highlighted">{{{val}}}</span> which is not allowed. Try changing the value to a number.')""")
 
     @staticmethod
     def turtle_color_command_transpiled(val):
         return textwrap.dedent(f"""\
-      trtl = f'{val}'
-      if trtl not in ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']:
-        raise Exception(f'While running your program the command <span class="command-highlighted">color</span> received the value <span class="command-highlighted">{{trtl}}</span> which is not allowed. Try using another color.')
-      t.pencolor(trtl)""")
+    trtl = f'{val}'
+    if trtl not in ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']:
+      raise Exception(f'While running your program the command <span class="command-highlighted">color</span> received the value <span class="command-highlighted">{{trtl}}</span> which is not allowed. Try using another color.')
+    t.pencolor(trtl)""")
 
     @staticmethod
     def input_transpiled(var_name, text):
         return textwrap.dedent(f"""\
-    {var_name} = input(f'''{text}''')
+  {var_name} = input(f'''{text}''')
+  try:
+    {var_name} = int({var_name})
+  except ValueError:
     try:
-      {var_name} = int({var_name})
+      {var_name} = float({var_name})
     except ValueError:
-      try:
-        {var_name} = float({var_name})
-      except ValueError:
-        pass""")
+      pass""")
 
     @staticmethod
     def remove_transpiled(list_name, value):
         return textwrap.dedent(f"""\
-      try:
-        {list_name}.remove({value})
-      except:
-        pass""")
+    try:
+      {list_name}.remove({value})
+    except:
+      pass""")
 
     # Used to overcome indentation issues when the above code is inserted
     # in test cases which use different indentation style (e.g. 2 or 4 spaces)
     @staticmethod
     def dedent(*args):
-        return '\n'.join([textwrap.indent(textwrap.dedent(a[0]), a[1])
-                         if isinstance(a, tuple) else textwrap.dedent(a) for a in args])
+        return '\n'.join([textwrap.indent(textwrap.dedent(a[0]), a[1]) if isinstance(a, tuple) else textwrap.dedent(a)
+                          for a in args])
 
     @staticmethod
     def translate_keywords_in_snippets(snippets):
@@ -313,8 +317,7 @@ class HedyTester(unittest.TestCase):
                     keyword_dict[lang][k] = v.split('|')[0]
         english_keywords = KEYWORDS.get("en")
 
-        # We replace the code snippet placeholders with actual keywords to the
-        # code is valid: {print} -> print
+        # We replace the code snippet placeholders with actual keywords to the code is valid: {print} -> print
         for snippet in snippets:
             try:
                 if snippet[1].language in ALL_KEYWORD_LANGUAGES.keys():
