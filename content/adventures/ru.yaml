@@ -471,7 +471,7 @@ adventures:
             7:
                 story_text: "## Songs\nSongs often contain a lot of repetition. For example... Baby Shark! If you sing it, you keep singing the same thing:\n\nBaby Shark tututudutudu <br>\nBaby Shark tututudutudu <br>\nBaby Shark tututudutudu <br>\nBaby Shark\n\nYou can make this song much shorter with a `{repeat}`! Can you finish the code?\n"
                 example_code: "```\n{repeat} _ _ {print} 'Baby Shark tututudutudu'\n{print} 'Baby Shark'\n```\n\nAfter Baby Shark you can of course also program other songs. There are many songs with repetition.\n"
-                start_code: "{print} «Малыш акула»"
+                start_code: "{print} 'Малыш акула'"
             8:
                 story_text: "## Songs\nIn a previous level you've programmed the song 'Bottles of beer'. You made one verse and then had to copy the verses 99 times. In level 7 you can repeat the song 99 times, just by adding one simple line!\n"
                 example_code: "```\nverse = 99\n{repeat} 99 {times}\n    {print} verse ' bottles of beer on the wall'\n    {print} verse ' bottles of beer'\n    {print} 'Take one down, pass it around'\n    verse = verse - 1\n    {print} verse ' bottles of beer on the wall'\n```\n"
