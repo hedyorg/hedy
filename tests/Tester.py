@@ -187,7 +187,7 @@ class HedyTester(unittest.TestCase):
     # Code used in the Adventure and Level Defaults tester to validate Hedy code
 
     try:
-        if not parseresult.has_turtle: #ouput from turtle cannot be captured
+        if not parseresult.has_turtle and not parseresult.has_pygame: #ouput from turtle or pygame cannot be captured
           output = HedyTester.run_code(parseresult)
     except hedy.exceptions.CodePlaceholdersPresentException as E: # Code with blanks is allowed
       pass
@@ -267,6 +267,15 @@ class HedyTester(unittest.TestCase):
   def dedent(*args):
     return '\n'.join([textwrap.indent(textwrap.dedent(a[0]), a[1]) if type(a) is tuple else textwrap.dedent(a)
                       for a in args])
+
+  @staticmethod
+  def indent(code, spaces_amount = 2, skip_first_line = False):
+      lines = code.split('\n')
+
+      if not skip_first_line:
+        return '\n'.join([' ' * spaces_amount + l for l in lines])
+      else:
+        return lines[0] + '\n' + f'\n'.join([' ' * spaces_amount + l for l in lines[1::]])
 
   @staticmethod
   def translate_keywords_in_snippets(snippets):

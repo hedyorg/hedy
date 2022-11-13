@@ -375,8 +375,13 @@ def parse():
                 exception = ex
         try:
             response['Code'] = transpile_result.code
+
+            if transpile_result.has_pygame:
+                response['has_pygame'] = True
+
             if transpile_result.has_turtle:
                 response['has_turtle'] = True
+
         except Exception as E:
             pass
         try:
@@ -1071,7 +1076,7 @@ def get_certificate_page(username):
     user = DATABASE.user_by_username(username)
     if not user:
         return utils.error_page(error=403, ui_message=gettext('user_inexistent'))
-    progress_data = DATABASE.progress_by_username(username)   
+    progress_data = DATABASE.progress_by_username(username)
     if progress_data is None:
         return utils.error_page(error=404, ui_message=gettext('no_certificate'))
     achievements = progress_data.get('achieved', None)
@@ -1083,11 +1088,11 @@ def get_certificate_page(username):
         count_programs = 0
     quiz_score = get_highest_quiz_score(username)
     longest_program = get_longest_program(username)
-    
+
     number_achievements = len(achievements)
     congrats_message = gettext('congrats_message').format(**{'username': username})
-    return render_template("certificate.html", count_programs=count_programs, quiz_score=quiz_score, 
-                            longest_program=longest_program, number_achievements=number_achievements, 
+    return render_template("certificate.html", count_programs=count_programs, quiz_score=quiz_score,
+                            longest_program=longest_program, number_achievements=number_achievements,
                             congrats_message=congrats_message)
 
 def get_highest_quiz_score(username):
