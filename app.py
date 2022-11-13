@@ -9,7 +9,8 @@ from website import (
 import utils
 from utils import timems, load_yaml_rt, dump_yaml_rt, version, is_debug_mode
 from website.log_fetcher import log_fetcher
-from website.auth import current_user, login_user_from_token_cookie, requires_login, is_admin, is_teacher
+from website.auth import current_user, login_user_from_token_cookie, requires_login, is_admin, is_teacher, \
+    requires_teacher
 from website.yaml_file import YamlFile
 from website import querylog, aws_helpers, jsonbin, translating, ab_proxying, cdn, database, achievements
 import hedy_translation
@@ -798,14 +799,11 @@ def tutorial_index():
 
 
 @app.route('/teacher-tutorial', methods=['GET'])
-@requires_login
+@requires_teacher
 def teacher_tutorial(user):
-    if not is_teacher(user):
-        return utils.error_page(error=403, ui_message=gettext('not_teacher'))
-
-    teacher_classes = DATABASE.get_teacher_classes(current_user()['username'], True)
+    teacher_classes = DATABASE.get_teacher_classes(user['username'], True)
     adventures = []
-    for adventure in DATABASE.get_teacher_adventures(current_user()['username']):
+    for adventure in DATABASE.get_teacher_adventures(user['username']):
         adventures.append(
             {'id': adventure.get('id'),
              'name': adventure.get('name'),
