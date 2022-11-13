@@ -15,6 +15,7 @@ import uuid
 from flask_babel import gettext, format_date, format_datetime, format_timedelta
 from ruamel import yaml
 import commonmark
+
 commonmark_parser = commonmark.Parser()
 commonmark_renderer = commonmark.HtmlRenderer()
 
@@ -214,7 +215,6 @@ def is_heroku():
 
 
 def version():
-
     # """Get the version from the Heroku environment variables."""
     if not is_heroku():
         return 'DEV'
@@ -295,6 +295,7 @@ def datetotimeordate(date):
     print(date)
     return date.replace("T", " ")
 
+
 # https://stackoverflow.com/a/2257449
 
 
@@ -304,6 +305,7 @@ def random_id_generator(
         string.ascii_lowercase +
         string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
+
 
 # This function takes a Markdown string and returns a list with each of the HTML elements obtained
 # by rendering the Markdown into HTML.
@@ -335,3 +337,25 @@ def session_id():
         else:
             session['session_id'] = uuid.uuid4().hex
     return session['session_id']
+
+
+# https://github.com/python-babel/babel/issues/454
+def customize_babel_locale(custom_locales: dict):
+    from babel.core import get_global
+    db = get_global('likely_subtags')
+    for custom_name in custom_locales:
+        db[custom_name] = custom_name
+    import babel.localedata
+
+    o_exists, o_load = babel.localedata.exists, babel.localedata.load
+    if o_exists.__module__ != __name__:
+        def exists(name):
+            name = custom_locales.get(name, name)
+            return o_exists(name)
+
+        def load(name, merge_inherited=True):
+            name = custom_locales.get(name, name)
+            return o_load(name, merge_inherited)
+
+        babel.localedata.exists = exists
+        babel.localedata.load = load
