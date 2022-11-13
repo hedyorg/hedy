@@ -43,6 +43,7 @@ adventures:
                 story_text: "## Krijo një tregim\nNë nivelin 1, ju mund të krijoni një tregim me një tjetër personazh kryesor që mund ta shtoni vetë.\n\nNë rreshtin e parë, përdorni komandën `{ask}` dhe pyetni cili do jetë personazhi kryesor në tregim.\n\nPas rreshtit të parë, filloni me `{print}` nëse fjalia duhet të printohet.\nPërdorni `{echo}` Nëse doni që personazhi kryesor të jetë në fund të fjalisë.\n"
                 example_code: "```\n{ask} Personazhi kryesor në tregim është\n{print} Personazhi kryesor tani ecën në pyll\n{echo} Ai është i pak i frikësuar,\n{print} Ai dëgjon zëra kudo\n{print} Ai frikësohet se ky pyll është me fantazma\n```\n"
                 start_code: '{print} Tregimi yt fillon këtu'
+                story_text_2: "## Challenge\nCan you make your own story in Hedy now by using `{print}` , `{ask}` and `{echo}`?\n"
             2:
                 story_text: "## Tregimi\nNë nivelin e 2, ju mund ta bëni tregimin më jetë më argëtues. Emri i personazhit tuaj kryesor mund të jetë kudo në fjali.\n\nJu duhet të programoni pak më shumë për këtë. Ju tani duhet ti jepni një emër personazhit tuaj kryesor.\n\nJu mund ta përdorni atë emër kudo në fjali.\n"
                 example_code: "```\nemri {is} {ask} Cili është emri i personazhit kryesor?\n{print} emri është tani duke vrapuar në pyll\n{print} emri është pak i frikësuar\n{print} Papritur ai dëgjon një zë të çuditshëm...\n{sleep}\n{print} emri është i frikësuar se ky pyll ka fantazma\n```"
@@ -74,6 +75,8 @@ adventures:
                 example_code: "```\npërgjigja_saktë = 11 * 27\npërgjigja = {ask} 'Sa bëjnë 11 herë 27?'\n{if} përgjigja {is} përgjigja_saktë {print} 'punë e mirë!'\n{else} {print} 'Gabim! ishte ' përgjigja_saktë\n```\n"
                 story_text_2: "## Numrat e rastësishëm\nJu gjithashtu mund ta leni që kompjuteri të bëjë mbledhje të rastësishme në vetvete duke përdorur random komandën.\nKjo është si ju mund të zgjidhni një numër tabelash që të praktikoni, dhe nga ajo gjithmonë e keni një shumë të ndryshme:\n"
                 example_code_2: "```\ntabelat = 4, 5, 6, 8\nnumrat = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\ntabela = tabelat {at} {random}\nnumri = numrat {at} {random}\nzgjedhja_saktë = tabela * numri\npërgjigja = {ask} 'Sa bëjnë ' tabela' herë' numri '?'\n{if} përgjigja {is} përgjigja_saktë {print} 'saktë'\n{else} {print} 'Gabim! ishte ' përgjigja_saktë\n```\n"
+                example_code_3: "```\ntables = 4, 5, 6, 8\nnumbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\ntable = tables {at} {random}\nnumber = numbers {at} {random}\ncorrect_answer = table * number\nanswer = {ask} 'how much is ' table ' times ' number '?'\n{if} answer {is} correct_answer {print} 'okay'\n{else} {print} 'mistake! it was ' correct_answer\n```\n"
+                story_text_3: "## Random numbers\nYou can also let the computer do random sums on its own using random.\nThis is how you choose a number of tables to practice, and from that you always get a different sum:\n"
             9:
                 story_text: "## Kalkulatori\nNë nivelet e mëparshme keni mësuar si të bëni një kalkulator, në këtë nivel mund ta zmadhoni kodin dhe ta shndërroni në lojë matematikore. Si kështu...\n"
                 example_code: "```\npikë = 0\n{repeat} 10 {times}\n    numrat = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    numri1 = numrat {at} {random}\n    numri2 = numrat {at} {random}\n    përgjigja_saktë = numri1 * numri2\n    {print} 'Sa bëjnë ' numri1 ' herë ' numri2 '?'\n    përgjigja = {ask} 'Shkruani përgjigjen tuaj këtu...'\n    {print} 'Përgjigja juaj është' përgjigja\n    {if} përgjigja {is} përgjigja_saktë\n        pikë = pikë + 1\n{print} 'Punë mirë! Pikët tuaja janë... ' pikë ' nga 10!'\n```\n"
@@ -102,6 +105,8 @@ adventures:
                 story_text: "## Restorant\nNë nivelin 2 mund ta zmadhoni kodin e restorantin duke përdorur variabla. Në nivelin 1 Hedy vetëm mund të përdorte komandën {echo} dhe të shfaq porosinë një herë dhe vetëm e mban mend porosinë e fundit.\nTani mund të përdorni variabla dhe Hedy mund të mbaje mend ushqimin dhe pijet!\n"
                 example_code: "```\n{print} Mirë se erdhët ne Restorantin e Hedy-it!\n{print} Sot ne shërbejmë pica ose lazanja.\nushqimi {is} {ask} Çfarë doni të hani?\n{print} Zgjedhje e mirë! Ky ushqim është e kam të preferuar!\nmajë {is} {ask} Dëshironi mish apo perime në të?\n{print} ushqimi me majë është duke u bërë!\npije {is} {ask} Çfarë dëshironi të pini me at?\n{print} Faleminderit për porosinë.\n{print} Ushqimi dhe pijet tuaja do jenë aty!\n```\n"
                 start_code: '# Vendoseni kodin tuaj këtu'
+                story_text_2: "## Challenge\nCan you make this code more elaborate? For example by adding drinks to the order? Or...?\n"
+                example_code_2: "```\n{print} Welcome to Hedy's restaurant!\n{print} Today we're serving pizza or lasagna.\nfood {is} {ask} What would you like to eat?\n{print} Great choice! The food is my favorite!\ntopping {is} {ask} Would you like meat or veggies on that?\n{print} food with topping is on its way!\ndrinks {is} _\n```\n"
             3:
                 story_text: "## Restorant i rastësishëm\nKeni problem që të zgjidhni çfarë doni të hani për darkë? Mund ta leni që Hedy të zgjedhë për ju!\nThjeshtë shtoni listë për ushqimet tuaja të preferuara (ose më pak të preferuara) dhe Hedy mund ta zgjedhë ushqimin tuaj rastësisht.\nMund të argëtoheni pak, duke lënë që Hedy të zgjedhë edhe çmimin e darkës! Çfarë do të merni?\n"
                 example_code: "```\n{print} Mirë se erdhët në Restorantin e rastësishëm të Hedy-it!\n{print} Restoranti i vetëm që do të zgjedhë ushqimin dhe çmimin për ju!\nfillimi {is} sallatë, supë, karpacio\nkryesore {is} pica, lakra brukseli, spageti\nëmbëlsirë {is} brownies, akullore, djathë francezë\npije {is} kola, birrë, water\nçmimet {is} 10 lekë, 100 lekë, 1000 lekë\n{print} Ju do të filloni me: fillimi {at} {random}\n{print} Pastaj ne do të shërbejmë: kryesore {at} {random}\n{print} Dhe pastaj: ëmbëlsirë {at} {random}\n{print} Ju do të keni pije {at} {random} për të pirë\n{print} Kjo do të jetë: çmimet {at} {random}\n{print} Faleminderit dhe shijoni ushqimin tuaj!\n```\n"
@@ -170,10 +175,14 @@ adventures:
                 story_text: "## Papagalli\nKrijo papagallin tuaj online që do të ju kopjojë!\n"
                 example_code: "```\n{print} Jam Hedy papagalli\n{ask} Si e keni emrin?\n{echo}\n{echo}\n```\n"
                 start_code: '{print} Jam Hedy papagalli'
+                story_text_2: "## Challenge\nCan you make the parrot ask a different question? Fill in the blanks in the example!\n"
+                example_code_2: "```\n{print} Im Hedy the parrot\n{ask} _\n{echo}\n{echo}\n"
             2:
                 story_text: "## Papagalli\nKrijo papagallin tuaj online që do të ju kopjojë!\n"
                 example_code: "```\n{print} Jam Hedy papagalli\nemri {is} {ask} Si është emri juaj?\n{print} emri\n{sleep}\n{print} kuak\n{sleep}\n{print} emri\n```\n"
                 start_code: '{print} Jam Hedy papagalli!'
+                story_text_2: "## Challenge\nYou can use variables to make the parrot say more than only your name. Can you complete this code?\n"
+                example_code_2: "```\n{print} Im Hedy the parrot\nname {is} {ask} whats your name?\n{print} name\n{sleep}\n{print} name\nsurname {is} {ask} whats your surname?\n_\n{sleep}\n_\n```\n"
             3:
                 story_text: "## Papagalli\nMëso papagallin tënd fjalë të re me komandën `{add}`.\n"
                 example_code: "```\nfjalët {is} kuak, Hedy\n{print} Mëso papagallin tënd!\nfjala_re {is} {ask} Cilën fjalë doni ti ja mësoni?\n{add} fjala_re {to_list} fajlët\n{print} \U0001F9D2 Thuaj fjala_re , Hedy!\n{print} \U0001F99C fjalët {at} {random}\n```\n"
@@ -191,6 +200,8 @@ adventures:
                 story_text: "## Këngët\nKëngët shpesh herë kanë shumë përsëritje. Ndonjëherë përsëritja është e bazuar në numërim.\nPër shembull, në këngën e njohur 'Shishe birre'. Ju mund ta programoni këngën me pak matematik.\n"
                 example_code: "```\nvargu = 99\n{print} vargu ' shishe birre në mur'\n{print} vargu ' shishe birre'\n{print} 'Hiqe njërën, kaloje përreth'\nvargu = vargu - 1\n{print} vargu ' shishe birre në mur'\n```\n\nTani ju mund të përsëritni rreshtat 2 deri 9 sa herë që doni duke kopjuar rreshtat.\n"
                 start_code: "{print} 'Peshkaqeni i vogël'"
+                story_text_2: "## 5 Little Monkeys jumping on the bed\nThis children's song counts down from 5 little monkeys to 1 monkey.\nIf you copy line 2 - 7 and paste it under the the code, you can sing the whole song!\n"
+                example_code_2: "```\nnumber = 6\nnumber = number - 1\nprint number ' little monkeys jumping on the bed'\nprint 'One fell off and bumped his head'\nprint 'Mama called the doctor and the doctor said'\nprint 'NO MORE MONKEYS JUMPING ON THE BED!'\nsleep\n```\n"
             7:
                 story_text: "## Këngët\nKëngët shpesh herë kanë përsëritje. Për shembull... Peshkaqeni i vogël! Nëse e këndoni, ju vazhdoni të këndoni të njëjtën gjë:\n\nPeshkaqeni i vogël tututudutudu <br>\nPeshkaqeni i vogël tututudutudu <br>\nPeshkaqeni i vogël tututudutudu <br>\nPeshkaqeni i vogël\n\nJu mund ta bëni këtë këngë më të shkurtë me komdanën `{repeat}`! A mund ta përfundoni kodin?\n"
                 example_code: "```\n{repeat} _ _ {print} 'Peshkaqeni i vogël tututudutudu'\n{print} 'Pëshkaqeni i vogël'\n```\n\nPas Peshkani i vogël, ju mund të programi këngë të tjera. Ka shumë këngë me përsëritje.\n"
@@ -413,6 +424,8 @@ adventures:
                 story_text: "## Zare\nNë këtë nivel mund të zgjedhim nga një listë. Me këtë mund ta lëmë që kompjuteri të zgjedhë një anë nga zari.\nShikoni tek lojërat që keni në dollap në shtëpinë tuaj.\nA janë këto loja me një zar (special)? Gjithashtu mund ta kopjoni me këtë kod.\nSi për shembull, the dice of the game Earthworms with the numbers 1 to 5 and an earthworm on it.\n\n![Kërmilli i tokës me 1 deri 5 dhe me një kërmill mbi të](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)\n"
                 example_code: "```\nzgjedhjet {is} 1, 2, 3, 4, 5, kërmilli\n{print} zgjedhjet {at} {random}\n```\n"
                 start_code: '{print} Çfarë do të tregojë zari këtë herë?'
+                example_code_2: "```\nchoices {is} _\n```\n"
+                story_text_2: "## Challenge\nThe dice in the example above are dice for a specific game. Can you make normal dice?\nOr other special dice from a different game?\n"
             4:
                 story_text: "## Zare\nNë këtë nivel ne mund ta bëjmë që fjalia të ketë vlerën e zarit, me thonjëza sigurisht.\nKëtë herë shembulli i dhënë nuk është i plotësuar. A mund ta përfundoni kodin?\n"
                 example_code: "```\nzgjedhjet {is} 1, 2, 3, 4, 5, kërmilli\n{print} _ ju gjuajtët _\n{print} _ _ _ <- këtu duhet ta programoni zgjedhjen\n```\n"
@@ -451,6 +464,8 @@ adventures:
                 story_text: "## Gur, letër, gërshërë\nNë nivelin 1, ju mund të filloni me lojën gur, letër, gërshërë.\n\nMe komandën `{ask}` ju mund të bëni një zgjidhje, dhe me komandën `{echo}` ju mund ta përsëritni atë zgjidhje.\n"
                 example_code: "```\n{print} çfarë zgjidhni?\n{ask} zgjidhni gur, letër apo gërshërë\n{echo} zgjidhja e juaj ishte:\n```\nNë vend që të përdorni fjalë, ju mund gjithashtu të përdorni emoji (ikona): ✊✋✌\n"
                 start_code: '{print} Mirë se erdhët në lojën tuaj gur, letër, gërshërë!'
+                story_text_2: "## Challenge\nInstead of using words, you could also use emojis: ✊✋✌\nCan you create a code using emojis?\n"
+                example_code_2: "```\n{print} what do you choose?\n{ask} choose from _\n{echo} so your choice was:\n```\n"
             2:
                 story_text: "## Gur, letër, gërshërë\nNë këtë nivel mund ti praktikoni variablat, kështu që mund ta bëni lojën gur, letër, gërshërë në nivelin tjetër!\n"
                 example_code: "```\nzgjedhja {is} _\n{print} Unë zgjedh zgjedhja\n```\n"
@@ -459,6 +474,8 @@ adventures:
                 story_text: "## Gur, letër, gërshërë\n\nNë këtë nivel mund të futni një listë and të zgjidhni nga ajo.\nNë fillim e bëni një listë me komandën `{is}`. Dhe pastaj mund ta bëni që kompjuteri za zgjedhë një nga lista me komandën `{at} {random}`.\nSi për shembull, ju mund ta bëni që kompjuteri të zgjedhë gur, letër, gërshërë.\n"
                 example_code: "```\nzgjedhjet {is} gur, letër, gërshërë\n{print} zgjedhjet {at} {random}\n```\n"
                 start_code: '{print} Mirë se erdhët në lojën tuaj gur, letër, gërshërë!'
+                example_code_2: "```\nchoices {is} rock, paper, scissors\n{print} player 1 chooses... choices {at} {random}\n{print} player 2 _\n```\n"
+                story_text_2: "## Challenge\nNow you only have one player, so can you add a second player?\nYou can even use variables to name player 1 and player 2.\n"
             4:
                 story_text: "## Gur, letër, gërshërë\nNë këtë nivel mund të programoni më shumë lojën gur, letër, gërshërë. Por {if} (nëse) doni të shtoni tekst, duhet të shtoni thonjëzat gjithashtu.\nA e përfundoni kodin duke shtuar komandat e sakta ose shkronjat në vizat e poshtme?\n"
                 example_code: "```\nzgjedhjet {is} gur, letër, gërshërë\n{print} _ Kompjuteri zgjodhi: _ _ {at} _\n```\n"
@@ -532,6 +549,8 @@ adventures:
                 start_code: përbindëshi1 {is} _
                 story_text: "## Shtëpia e përhumbur\nNë këtë shtëpi të përhumbur ju mund të zgjidhni përbindëshat tuaja me emoji. Sigurisht që mund të përdorësh edhe fjalë.\n"
                 example_code: "```\npërbindëshi_1 {is} \U0001F47B\npërbindëshi_2 {is} \U0001F921\npërbindëshi_3 {is} \U0001F476\n{print} Ju hyni në shtëpinë e përhumbur.\n{print} Papritur shihni një përbindëshi_1\n{print} Ju vraponi në dhomën tjetër, por një përbindëshi_2 ju pret atje!\n{print} Oh jo! Shkoni shpejt në kuzhinë.\n{print} Por ndërsa hyni, përbindëshi_3 ju sulmon!\n```\n"
+                story_text_2: "## Challenge\nIn the example above the monsters are predetermined. So each time you run your code, the output is the same.\nCan you add `{ask}` commands to make the haunted house interactive and have the players choose the monsters they come across?\n"
+                example_code_2: "```\nmonster_1 {is} _\nmonster_2 {is} _\nmonster_3 {is} _\n{print} You enter the haunted house.\n{print} Suddenly you see a monster_1\n{print} You run into the other room, but a monster_2 is waiting there for you!\n{print} Oh no! Quickly get to the kitchen.\n{print} But as you enter monster_3 attacks you!\n```\n"
             14:
                 story_text: "## Shtëpia e përhumbur\nNë këtë nivel, ju mund të përdorni simbolin `<` dhe `>` për të futur jetë në lojën tuaj.\n"
                 start_code: '# Vendoseni kodin tuaj këtu'
@@ -546,6 +565,8 @@ adventures:
                 example_code: "```\n{print} Ik nga shtëpia e përhumbur!\n{print} Janë 3 dyer para jush...\nzgjedhja {is} {ask} Cilën derë zgjidhni?\n{print} Ju zgjodhët derën ... zgjedhja\npërbindëshit {is} një mumje, një vampir, ASGJE JU KENI IKUR\n{print} Ju shikoni...\n{sleep}\n{print} përbindëshit {at} {random}\n```\n"
                 story_text_2: "## Sfidë\nKy tregim është mjaft i drejtpërdrejtë {forward}, ndoshta mund ta mashtroni pak duke shtuar një histori më emocionuese.\nGjithashtu ju keni rezultate shumë të kufizuara tani, ka vetëm 3 opsione të asaj që është pas dyerve. Ndoshta mund të mendoni për më shumë përbindësha për të shtuar në listë!\n\n## Ndrysho lojën në një shfaqje lojërash televizive!\nSë fundmi, do të dëshironim t'ju sfidonim që ta ndryshoni këtë lojë në një shfaqje lojërash (si ato në TV) ku zgjidhni një derë ose valixhe dhe ajo përmban një çmim të madh!\nMund të bëni atë?\n"
                 start_code: '# Vendoseni kodin tuaj këtu'
+                story_text_3: "## Change the game into a tv gameshow!\nLastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!\nCan you do it?\n"
+                example_code_3: "```\n{print} The big gameshow!\n{print} There are 3 suitcases in front of you...\n{print} One of them contains _\n_\n```\n"
             4:
                 story_text: "## Shtëpi e përhumbur\nNë këtë nivel ju mësoni se si të përdorni thonjëza në lojërat tuaja.\nA mund të bëni prova të nivelit 4 të Shtëpisë së Përhumbur?\n"
                 example_code: "```\n{print} _Ik nga shtëpia e përhumbur!_\n{print} _Ka 3 dyer perpara..._\nzgjedhja {is} {ask} _Cilën derë zgjidhni?_\n{print} _Zgjodhe derën ..._ zgjedhja\npërbindëshit {is} një mumje, një vampir, ASGJE JU KENI IKUR\n{print} _E shihni..._\n{sleep}\n{print} përbindëshit {at} {random}\n ```\n"
