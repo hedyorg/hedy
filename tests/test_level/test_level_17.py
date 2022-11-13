@@ -578,5 +578,5 @@ class TestsLevel17(HedyTester):
       self.single_level_tester(
           code=code,
           exception=hedy.exceptions.ParseException,
-          extra_check_function=lambda c: c.exception.error_location[0] == 3 and c.exception.error_location[1] == 4
+          extra_check_function=lambda c: c.exception.error_location[0] == 2 and c.exception.error_location[1] == 5
       )

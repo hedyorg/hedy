@@ -64,6 +64,7 @@ class TestsLevel15(HedyTester):
     )
 
   def test_while_fr_equals(self):
+    #note to self: we need to pass in lang!!
     code = textwrap.dedent("""\
       antwoord est 0
       tant que antwoord != 25
