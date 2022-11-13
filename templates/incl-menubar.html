@@ -59,9 +59,18 @@
                       <div class="font-medium border-b-2 border-gray-700 mx-4 pb-2 text-center">
                         {{_('keyword_support')}}
                       </div>
-                      {% for lang in other_keyword_languages() %}
-                        <div class="hover:bg-blue-600 cursor-pointer w-52 font-medium text-white py-2 px-4 rounded-lg language" onclick="hedyApp.change_language ('{{lang.lang}}');event.preventDefault();">{{ lang.sym }}</div>
-                      {% endfor %}
+                      <div class="flex flex-row">
+                          <div class="flex flex-col">
+                            {% for lang in other_keyword_languages()[0:((other_keyword_languages()|length)/2)|int] %}
+                                <div class="hover:bg-blue-600 cursor-pointer w-52 font-medium text-white py-2 px-4 rounded-lg language" onclick="hedyApp.change_language ('{{lang.lang}}');event.preventDefault();">{{ lang.sym }}</div>
+                            {% endfor %}
+                          </div>
+                          <div class="flex flex-col">
+                             {% for lang in other_keyword_languages()[((other_keyword_languages()|length)/2)|int:] %}
+                                <div class="hover:bg-blue-600 cursor-pointer w-52 font-medium text-white py-2 px-4 rounded-lg language" onclick="hedyApp.change_language ('{{lang.lang}}');event.preventDefault();">{{ lang.sym }}</div>
+                            {% endfor %}
+                          </div>
+                      </div>
                   </div>
                   <div class="flex flex-col">
                       <div class="font-medium border-b-2 border-gray-700 mx-4 pb-2 text-center">
