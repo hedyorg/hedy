@@ -92,11 +92,11 @@ def translate_keywords(input_string_, from_lang="en", to_lang="nl", level=1):
                 result = replace_line(lines, rule.line-1, replaced_line)
 
         # For now the needed post processing is only removing the 'end-block's added during pre-processing
-        result = '\n'.join([line for line in result.splitlines()
-                           if not line.startswith('end-block')])
+        result = '\n'.join([line for line in result.splitlines()])
+        result = result.replace('#ENDBLOCK', '')
 
         return result
-    except:
+    except Exception as E:
         return input_string_
 
 
@@ -140,14 +140,14 @@ def find_keyword_in_rules(rules, keyword, start_line, end_line, start_column, en
 def get_original_keyword(keyword_dict, keyword, line):
     found = False
     for word in keyword_dict[keyword]:
-        if word in line:            
+        if word in line:
             original = word
             found = True
     # If we can't find the keyword, it means that it isn't part of the valid keywords for this language
     # so return original instead
     if found:
         return original
-    else:        
+    else:
         return keyword
 
 class Translator(Visitor):
@@ -285,6 +285,9 @@ class Translator(Visitor):
     def input_empty_brackets(self, tree):
         self.add_rule('_IS', 'is', tree)
         self.add_rule('_INPUT', 'input', tree)
+
+    def pressed(self, tree):
+        self.add_rule('_PRESSED', 'pressed', tree)
 
     def add_rule(self, token_name, token_keyword, tree):
         token = self.get_keyword_token(token_name, tree)
