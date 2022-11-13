@@ -4,7 +4,7 @@ import hedy
 import hedyweb
 from .achievements import Achievements
 from website.auth import requires_login, is_teacher, is_admin, current_user, validate_student_signup_data, \
-    store_new_student_account
+    store_new_student_account, requires_teacher
 import utils
 import uuid
 from flask import g, request, jsonify, session
@@ -22,11 +22,8 @@ class ForTeachersModule(WebsiteModule):
         self.achievements = achievements
 
     @route('/', methods=['GET'])
-    @requires_login
+    @requires_teacher
     def for_teachers_page(self, user):
-        if not is_teacher(user):
-            return utils.error_page(error=403, ui_message=gettext('not_teacher'))
-
         welcome_teacher = session.get('welcome-teacher') or False
         session.pop('welcome-teacher', None)
 
@@ -130,10 +127,8 @@ class ForTeachersModule(WebsiteModule):
                                current_page='my-profile')
 
     @route('/customize-class/<class_id>', methods=['DELETE'])
-    @requires_login
+    @requires_teacher
     def delete_customizations(self, user, class_id):
-        if not is_teacher(user):
-            return utils.error_page(error=403, ui_message=gettext('retrieve_class_error'))
         Class = self.db.get_class(class_id)
         if not Class or Class['teacher'] != user['username']:
             return utils.error_page(error=404, ui_message=gettext('no_such_class'))
@@ -142,10 +137,8 @@ class ForTeachersModule(WebsiteModule):
         return {'success': gettext('customization_deleted')}, 200
 
     @route('/customize-class/<class_id>', methods=['POST'])
-    @requires_login
+    @requires_teacher
     def update_customizations(self, user, class_id):
-        if not is_teacher(user):
-            return utils.error_page(error=403, ui_message=gettext('retrieve_class_error'))
         Class = self.db.get_class(class_id)
         if not Class or Class['teacher'] != user['username']:
             return utils.error_page(error=404, ui_message=gettext('no_such_class'))
@@ -214,10 +207,8 @@ class ForTeachersModule(WebsiteModule):
         return {'success': gettext('class_customize_success')}, 200
 
     @route('/create-accounts/<class_id>', methods=['GET'])
-    @requires_login
+    @requires_teacher
     def create_accounts(self, user, class_id):
-        if not is_teacher(user):
-            return utils.error_page(error=403, ui_message=gettext('not_teacher'))
         current_class = self.db.get_class(class_id)
         if not current_class or current_class.get('teacher') != user.get('username'):
             return utils.error_page(error=403, ui_message=gettext('no_such_class'))
@@ -225,10 +216,8 @@ class ForTeachersModule(WebsiteModule):
         return render_template('create-accounts.html', current_class=current_class)
 
     @route('/create-accounts', methods=['POST'])
-    @requires_login
+    @requires_teacher
     def store_accounts(self, user):
-        if not is_teacher(user):
-            return utils.error_page(error=403, ui_message=gettext('not_teacher'))
         body = request.json
 
         # Validations
@@ -290,10 +279,8 @@ class ForTeachersModule(WebsiteModule):
                                page_title=gettext('title_view-adventure'), current_page='my-profile')
 
     @route('/customize-adventure/<adventure_id>', methods=['GET'])
-    @requires_login
+    @requires_teacher
     def get_adventure_info(self, user, adventure_id):
-        if not is_teacher(user):
-            return utils.error_page(error=403, ui_message=gettext('retrieve_adventure_error'))
         adventure = self.db.get_adventure(adventure_id)
         if not adventure or adventure['creator'] != user['username']:
             return utils.error_page(error=404, ui_message=gettext('no_such_adventure'))
@@ -315,7 +302,7 @@ class ForTeachersModule(WebsiteModule):
                                max_level=hedy.HEDY_MAX_LEVEL, current_page='my-profile')
 
     @route('/customize-adventure', methods=['POST'])
-    @requires_login
+    @requires_teacher
     def update_adventure(self, user):
         body = request.json
         # Validations
@@ -336,8 +323,6 @@ class ForTeachersModule(WebsiteModule):
         if not isinstance(body.get('classes'), list):
             return gettext('classes_invalid'), 400
 
-        if not is_teacher(user):
-            return utils.error_page(error=403, ui_message=gettext('retrieve_adventure_error'))
         current_adventure = self.db.get_adventure(body['id'])
         if not current_adventure or current_adventure['creator'] != user['username']:
             return utils.error_page(error=404, ui_message=gettext('no_such_adventure'))
@@ -379,10 +364,8 @@ class ForTeachersModule(WebsiteModule):
         return {'success': gettext('adventure_updated')}, 200
 
     @route('/customize-adventure/<adventure_id>', methods=['DELETE'])
-    @requires_login
+    @requires_teacher
     def delete_adventure(self, user, adventure_id):
-        if not is_teacher(user):
-            return utils.error_page(error=403, ui_message=gettext('retrieve_adventure_error'))
         adventure = self.db.get_adventure(adventure_id)
         if not adventure or adventure['creator'] != user['username']:
             return utils.error_page(error=404, ui_message=gettext('no_such_adventure'))
@@ -400,11 +383,8 @@ class ForTeachersModule(WebsiteModule):
         return {'code': code}, 200
 
     @route('/create_adventure', methods=['POST'])
-    @requires_login
+    @requires_teacher
     def create_adventure(self, user):
-        if not is_teacher(user):
-            return utils.error_page(error=403, ui_message=gettext('create_adventure'))
-
         body = request.json
         # Validations
         if not isinstance(body, dict):
