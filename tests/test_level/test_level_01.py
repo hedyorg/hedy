@@ -549,7 +549,7 @@ class TestsLevel1(HedyTester):
         expected = "print('Hallo welkom bij Hedy! ')"
         output = 'Hallo welkom bij Hedy!'
 
-        self.single_level_tester(code=code, expected=expected, output=output)
+        self.single_level_tester(code=code, expected=expected, output=output, translate=False)
         
     def test_comments_may_be_empty(self):
         code = textwrap.dedent("""\
