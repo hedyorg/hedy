@@ -1,44 +1,49 @@
 # coding=utf-8
-from os import path
-import os
-import zipfile
-import textwrap
-import sys
-import datetime
 import collections
-import hedy
+import copy
+import datetime
 import json
 import logging
+import os
+import sys
+import textwrap
 import traceback
-from flask_commonmark import Commonmark
-from babel import Locale
-from werkzeug.urls import url_encode
-from config import config
-from flask import Flask, g, request, jsonify, session, abort, redirect, Response, make_response, \
-    Markup, send_file, after_this_request, send_from_directory
-from flask_helpers import render_template
-from flask_compress import Compress
-from flask_babel import gettext, Babel
-import hedy_content
-import hedyweb
-from hedy_content import ADVENTURE_ORDER_PER_LEVEL, COUNTRIES, ALL_LANGUAGES, \
-    ALL_KEYWORD_LANGUAGES, NON_LATIN_LANGUAGES, NON_BABEL
-import hedy_translation
-from website import querylog, aws_helpers, jsonbin, translating, ab_proxying, cdn, database, \
-    achievements
-from website.yaml_file import YamlFile
-from website.auth import current_user, login_user_from_token_cookie, requires_login, is_admin, is_teacher
-from website.log_fetcher import log_fetcher
-from utils import timems, load_yaml_rt, dump_yaml_rt, version, is_debug_mode
-import utils
-from website import (
-    auth_pages, classes, profile, parsons, statistics, quiz, admin, for_teachers, programs,
-)
-import copy
-from logging_config import LOGGING_CONFIG
+import zipfile
 from logging.config import dictConfig as logConfig
-logConfig(LOGGING_CONFIG)
+from os import path
 
+from babel import Locale
+from flask import (Flask, Markup, Response, abort, after_this_request, g,
+                   jsonify, make_response, redirect, request, send_file,
+                   send_from_directory, session)
+from flask_babel import Babel, gettext
+from flask_commonmark import Commonmark
+from flask_compress import Compress
+from werkzeug.urls import url_encode
+
+import hedy
+import hedy_content
+import hedy_translation
+import hedyweb
+import utils
+from config import config
+from flask_helpers import render_template
+from hedy_content import (ADVENTURE_ORDER_PER_LEVEL, ALL_KEYWORD_LANGUAGES,
+                          ALL_LANGUAGES, COUNTRIES,
+                          NON_LATIN_LANGUAGES)
+from logging_config import LOGGING_CONFIG
+from utils import dump_yaml_rt, is_debug_mode, load_yaml_rt, timems, version
+from website import (ab_proxying, achievements, admin, auth_pages, aws_helpers,
+                     cdn, classes, database, for_teachers, jsonbin, parsons,
+                     profile, programs, querylog, quiz, statistics,
+                     translating)
+from website.auth import (current_user, is_admin, is_teacher,
+                          login_user_from_token_cookie, requires_login)
+from website.log_fetcher import log_fetcher
+from website.yaml_file import YamlFile
+
+
+logConfig(LOGGING_CONFIG)
 logger = logging.getLogger(__name__)
 
 # Todo TB: This can introduce a possible app breaking bug when switching
@@ -146,12 +151,6 @@ def load_adventures_per_level(level, keyword_lang):
 
 @babel.localeselector
 def get_locale():
-    if session.get(
-        "lang",
-        request.accept_languages.best_match(
-            ALL_LANGUAGES.keys(),
-            'en')) in NON_BABEL:
-        return "en"
     return session.get("lang", request.accept_languages.best_match(ALL_LANGUAGES.keys(), 'en'))
 
 
@@ -276,12 +275,8 @@ def setup_language():
     # This is the only place to expand / shrink the list of RTL languages ->
     # front-end is fixed based on this value
     g.dir = "ltr"
-    if g.lang == 'pa_PK':
-        babel_lang = 'pa_Arab_PK'
-    else:
-        babel_lang = g.lang
-    if Locale(babel_lang).text_direction in ["ltr", "rtl"]:
-        g.dir = Locale(babel_lang).text_direction
+    if Locale(g.lang).text_direction in ["ltr", "rtl"]:
+        g.dir = Locale(g.lang).text_direction
 
     # Check that requested language is supported, otherwise return 404
     if g.lang not in ALL_LANGUAGES.keys():
