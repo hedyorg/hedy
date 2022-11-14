@@ -396,7 +396,7 @@ sections:
                 error_code: "icecream = 'starwberry', 'chocolate'\nprint 'I love ' icecream[random] ' icecream'\n"
                 solution_text: "Це правильний код:\n"
                 solution_code: "icecream = ['starwberry', 'chocolate']\nprint 'I love ' icecream[random] ' icecream'\n"
-        -   title: Students use the wrong brackets
+        -   title: Студенти використовують неправильні дужки
             example:
                 error_text: "From this level on lists should be in brackets.\n"
                 error_code: "icecream = ('starwberry', 'chocolate'}\nprint 'I love ' icecream[random] ' icecream'\n"
@@ -411,27 +411,27 @@ sections:
         -   example:
                 error_code: "icecream = [starwberry, chocolate]\nprint 'I love ' icecream at random ' icecream'\n"
                 error_text: "Students are sometimes very focussed on the new aspect of the syntax, that they forget the quotation marks.\n"
-                solution_text: "This is the correct code:\n"
+                solution_text: "Це вірний код:\n"
                 solution_code: "icecream = ['starwberry', 'chocolate']\nprint 'I love ' icecream[random] ' icecream'\n"
             title: Students still use the old at random command
         -   title: Students forget the quotation marks while focussing on the brackets
             example:
                 error_text: "Students are sometimes very focussed on the new aspect of the syntax, that they forget the quotation marks.\n"
                 error_code: "icecream = [starwberry, chocolate]\nprint 'I love ' icecream[random] ' icecream'\n"
-                solution_text: "This is the correct code:\n"
+                solution_text: "Це вірний код:\n"
                 solution_code: "icecream = ['starwberry', 'chocolate']\nprint 'I love ' icecream[random] ' icecream'\n"
     -   sections:
         -   example:
-                solution_text: "This is the correct code:\n"
+                solution_text: "Це вірний код:\n"
                 error_text: "The elif command needs a condition behind it. It cannot be used like else, without a condition.\n"
                 error_code: "color = ask 'What is your favorite color?'\nif color == 'green':\n    print 'green is nice'\nelif:\n    print 'I like green'\n"
                 solution_code: "color = ask 'What is your favorite color?'\nif color == 'green':\n    print 'green is nice'\nelif color == yellow:\n    print 'yellow is alright'\nelse:\n    print 'I like green'\n"
             title: Students use elif like else, so without a condition
-        -   title: Students forget the colon
+        -   title: Студенти забувають про двокрапку
             example:
                 error_text: "After each command that requires indentation, a colon should be used.\n"
                 error_code: "answer = ask 'How are you doing?'\nif answer is 'great'\n    print 'Me too!'\nelif answer is 'bad'\n    print 'Let me cheer you up!'\nelse\n    print 'Im great!'\n"
-                solution_text: "This is the correct code:\n"
+                solution_text: "Це вірний код:\n"
                 solution_code: "answer = ask 'How are you doing?'\nif answer is 'great':\n    print 'Me too!'\nelif answer is 'bad':\n    print 'Let me cheer you up!'\nelse:\n    print 'Im great!'\n"
         level: '17'
     -   level: '18'
@@ -440,50 +440,50 @@ sections:
             example:
                 error_text: "Students will forget to put brackets around their text.\n"
                 error_code: "print 'my name is Hedy!'\n"
-                solution_text: "This is the correct code:\n"
+                solution_text: "Це вірний код:\n"
                 solution_code: "print('my name is Hedy!')\n"
         -   title: Students will still use the ask command
             example:
                 error_text: "The ask command has been used since level 1. So it might be hard for the students to switch to input instead of ask.\n"
-                solution_text: "This is the correct code:\n"
+                solution_text: "Це вірний код:\n"
                 solution_code: "print('My name is Hedy!')\nname = input('What is your name?')\nprint('So your name is ', name)\n"
                 error_code: "print('My name is Hedy!')\nname = ask('What is your name?')\nprint('So your name is ', name)\n"
         -   title: Students might use the brackets as quotation marks
             example:
                 error_text: "They have learned to keep the variables outside of the quotation marks, so they might do the same with the brackets. Which is not the correct way to use them.\n"
                 error_code: "temperature = 25\nprint('It is ') temperature ('degrees outside')\n"
-                solution_text: "This is the correct code:\n"
+                solution_text: "Це вірний код:\n"
                 solution_code: "temperature = 25\nprint('It is ', temperature, 'degrees outside')\n"
     title: Часті помилки
     key: типові_помилки
     intro: "Ви можете вчитися на своїх помилках, особливо в кодуванні!\nРоблення помилок неминуче, і це чудова можливість вчитися, але для вчителів може бути складним завданням знайти правильне виправлення помилки!\nОсобливо тому, що коди стають все довшими в міру просування рівнів. Ось чому ми склали список із частими помилками на кожному рівні та способами їх вирішення.\n"
 learn-more-sections:
--   title: Do you like Hedy?
-    text: "We love to hear from you!\n[Click here to send us a message](mailto:hello@hedy.org \"About Hedy\")\n"
--   text: "[Let us know on GitHub](https://github.com/Felienne/hedy/issues/new/choose)\n"
-    title: Found a bug?
--   title: Code week talk
-    text: "Want to know more about Hedy? Check out this talk Felienne gave at the European Code Week 2020:\n\n<iframe width=\"560\" height=\"315\" class=\"mx-auto mt-4\" src=\"https://www.youtube.com/embed/R2U9MEowYag?wmode=opaque\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen=\"\"></iframe>\n"
--   title: Hedy in the news
-    text: "Some websites and newspapers have written about Hedy since our release in early 2020. We keep a list here:\n\n* [Codeweek Podcast, July 2022](https://codeweek.eu/podcast/26)\n* [Heise.de (German), Januari 2022](https://www.heise.de/news/Hedy-die-mitwachsende-Programmiersprache-6336264.html)\n* [Strumenta, November 2021](https://tomassetti.me/teaching-programming-with-hedy/)\n* [Vives (Dutch), CodeWeek Special October 2021](images/Vives-174-Codeweek.pdf)\n* [CodeWeek.eu - Haunted House Challenge, September 2021](https://codeweek.eu/2021/challenges/haunted-house)\n* [Opensource.com, April 2021](https://opensource.com/article/21/4/hedy-teach-code)\n* [IO Magazine, April 2021](https://ict-research.nl/wordpress/wp-content/uploads/2021/04/IO-magazine-NR1-2021_web.pdf)\n* [Ingeniería De Software (Spanish), February 2021](https://ingenieriadesoftware.es/hedy-mejor-lenguaje-ensenar-programacion-ninos/)\n* [Hello World Magazine, February 2021](images/Hello_World_15_Hedy.pdf)\n* [Discoro, January 2021](https://discoro.wordpress.com/2021/01/09/hedy-gradually-learning-a-programming-language/)\n* [Felienne wins the Dutch award for ICT research for Hedy, January 2021](https://www.nwo.nl/en/news/felienne-hermans-receives-dutch-prize-ict-research-2021)\n* [SlashDot, August 2020](https://news.slashdot.org/story/20/08/17/024248/scientist-proposes-a-new-programming-language-for-teaching-coding-and-python)\n* [GenBeta (Spanish), August 2020](https://www.genbeta.com/desarrollo/nuevo-lenguaje-para-ensenar-programacion-a-ninos-como-se-ensena-a-leer-escribir-forma-gradual-niveles)\n* [Developpez (French), August 2020](https://programmation.developpez.com/actu/308095/Une-scientifique-propose-un-nouveau-langage-de-programmation-pour-enseigner-aux-enfants-le-codage-informatique-au-travers-d-une-approche-graduelle-implementee-en-Python-sur-13-paliers/)\n* [Vives (Dutch), October 2020](images/artikel_vives.pdf) \"Met Hedy stap voor stap leren programmeren\"\n* [Leiden University, April 2020](https://www.universiteitleiden.nl/en/news/2020/03/looking-to-distract-the-kids-while-you-work-from-home-get-them-programming)\n* [Mare (Dutch), April 2020](https://www.mareonline.nl/cultuur/computercode-voor-de-kids/)\n* [AG Connect (Dutch), April 2020](https://www.agconnect.nl/artikel/stapsgewijs-python-leren-programmeren-met-nieuwe-taal-hedy)\n"
+-   title: Вам подобається Hedy?
+    text: "Ми будемо раді отримати від вас відгук!\n[Натисніть тут, щоб надіслати нам повідомлення](mailto:hello@hedy.org \"About Hedy\")\n"
+-   text: "[Дайте нам знати на GitHub](https://github.com/Felienne/hedy/issues/new/choose)\n"
+    title: Знайшли баг?
+-   title: Розмова про тиждень кодування
+    text: "Хочете дізнатися більше про Hedy? Перегляньте доповідь Фелієнни на Європейському тижні кодування 2020:\n\n<iframe width=\"560\" height=\"315\" class=\"mx-auto mt-4\" src=\"https://www.youtube.com/embed/R2U9MEowYag?wmode=opaque\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen=\"\"></iframe>\n"
+-   title: Hedy в новинах
+    text: "Деякі веб-сайти та газети писали про Hedy з моменту нашого випуску на початку 2020 року. Ми ведемо список тут:\n\n* [Codeweek Podcast, July 2022](https://codeweek.eu/podcast/26)\n* [Heise.de (German), Januari 2022](https://www.heise.de/news/Hedy-die-mitwachsende-Programmiersprache-6336264.html)\n* [Strumenta, November 2021](https://tomassetti.me/teaching-programming-with-hedy/)\n* [Vives (Dutch), CodeWeek Special October 2021](images/Vives-174-Codeweek.pdf)\n* [CodeWeek.eu - Haunted House Challenge, September 2021](https://codeweek.eu/2021/challenges/haunted-house)\n* [Opensource.com, April 2021](https://opensource.com/article/21/4/hedy-teach-code)\n* [IO Magazine, April 2021](https://ict-research.nl/wordpress/wp-content/uploads/2021/04/IO-magazine-NR1-2021_web.pdf)\n* [Ingeniería De Software (Spanish), February 2021](https://ingenieriadesoftware.es/hedy-mejor-lenguaje-ensenar-programacion-ninos/)\n* [Hello World Magazine, February 2021](images/Hello_World_15_Hedy.pdf)\n* [Discoro, January 2021](https://discoro.wordpress.com/2021/01/09/hedy-gradually-learning-a-programming-language/)\n* [Felienne wins the Dutch award for ICT research for Hedy, January 2021](https://www.nwo.nl/en/news/felienne-hermans-receives-dutch-prize-ict-research-2021)\n* [SlashDot, August 2020](https://news.slashdot.org/story/20/08/17/024248/scientist-proposes-a-new-programming-language-for-teaching-coding-and-python)\n* [GenBeta (Spanish), August 2020](https://www.genbeta.com/desarrollo/nuevo-lenguaje-para-ensenar-programacion-a-ninos-como-se-ensena-a-leer-escribir-forma-gradual-niveles)\n* [Developpez (French), August 2020](https://programmation.developpez.com/actu/308095/Une-scientifique-propose-un-nouveau-langage-de-programmation-pour-enseigner-aux-enfants-le-codage-informatique-au-travers-d-une-approche-graduelle-implementee-en-Python-sur-13-paliers/)\n* [Vives (Dutch), October 2020](images/artikel_vives.pdf) \"Met Hedy stap voor stap leren programmeren\"\n* [Leiden University, April 2020](https://www.universiteitleiden.nl/en/news/2020/03/looking-to-distract-the-kids-while-you-work-from-home-get-them-programming)\n* [Mare (Dutch), April 2020](https://www.mareonline.nl/cultuur/computercode-voor-de-kids/)\n* [AG Connect (Dutch), April 2020](https://www.agconnect.nl/artikel/stapsgewijs-python-leren-programmeren-met-nieuwe-taal-hedy)\n"
 start-sections:
 -   title: Що таке поступова мова програмування?
-    text: "Learning to program can be hard. Not that programming itself *is* hard! But there are a lot of rules you need to memorize, just like when you started to learn English.\nSimilarly, you will need a lot of practice to learn programming.\n\nYou can read these sentences with ease. But do you remember when you were learning to read? You took some time then for each letter!\nThat is true for programming too, it might be hard in the beginning, but it will get easier!\n\nThe nice thing about Hedy is that Hedy is *gradual*. That means that you do not have to learn all rules at once.\nThe first few levels do not have that many rules, so you can get used to programming comfortably.\nIn every level we add new rules, increasing the number of commands that you know. Commands are instructions for a computer.\n"
--   title: Why is Hedy gradual?
-    text: "In this video Felienne, the creator of Hedy, explains why Hedy is gradual.\n\n<iframe width=\"560\" height=\"315\" class=\"mx-auto mt-4\" src=\"https://www.youtube.com/embed/EdqT313rM40\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>\n"
--   title: Who is Hedy for?
-    text: "Hedy is meant for all kids that want to learn programming! You do need to be able to read English with ease.\n"
--   title: Do I need programming experience?
-    text: "No, that is not needed. However, if you have programmed with Scratch or Python, some commands will look familiar to you.\n"
--   title: Is Hedy free?
-    text: "Yes! Leiden University allows us to share it for free. Hedy is also 'Open source', which means that everyone who can program can help us make Hedy better.\nYou can find the code on [GitHub](https://github.com/Felienne/hedy).\nIf you like Hedy and want to contribute, we do accept (and are very grateful for) [donations](https://www.steunleiden.nl/project/hedy)!\n"
--   title: Do I need to install anything?
-    text: No. Hedy works in the browser, which is the program you are using to look at this page. Probably Chrome or Edge or Firefox. Hedy also works on your phone or tablet.
+    text: "Навчання програмуванню може бути важким. Не те, щоб саме програмування було важким! Але є багато правил, які потрібно запам'ятати, так само, як коли ви починали вивчати англійську мову.\nАналогічно, вам знадобиться багато практики, щоб навчитися програмуванню.\n\nВи з легкістю можете прочитати ці речення. Але пам'ятаєш, як ти вчився читати? Тоді на кожну літеру витрачався певний час!\nТак само і з програмуванням, спочатку може бути важко, але потім стане легше!\n\nПриємною особливістю Hedy є те, що навчання в ньому є *поступовим*. Це означає, що вам не потрібно вивчати всі правила одразу.\nПерші кілька рівнів мають не так багато правил, щоб ви могли комфортно звикнути до програмування.\nУ кожному рівні ми додаємо нові правила, збільшуючи кількість команд, які ви знаєте. Команди - це інструкції для комп'ютера.\n"
+-   title: Чому Hedy поступовий язик?
+    text: "У цьому відео Фелієнн, творець Hedy, пояснює, чому Hedy є поступовим язиком програмування.\n\n<iframe width=\"560\" height=\"315\" class=\"mx-auto mt-4\" src=\"https://www.youtube.com/embed/EdqT313rM40\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>\n"
+-   title: Для кого Hedy?
+    text: "Hedy призначений для всіх дітей, які хочуть вивчати програмування! Для цього потрібно вміти вільно читати англійською мовою. Українська мова в процесі. Ви можете допомогти з перекладом - [Допомогти](https://github.com/Felienne/hedy/blob/main/TRANSLATING.md).\n"
+-   title: Чи потрібен досвід програмування?
+    text: "Ні, не потрібен. Однак, якщо ви програмували на Scratch або Python, деякі команди будуть вам знайомі.\n"
+-   title: Hedy безплатний?
+    text: "Так! Лейденський університет дозволяє нам ділитися ним безкоштовно. Hedy також має \"відкритий вихідний код\", що означає, що кожен, хто вміє програмувати, може допомогти нам зробити Hedy кращим.\nЗнайти код можна на сайті [GitHub](https://github.com/Felienne/hedy).\nЯкщо вам подобається Hedy і ви хочете зробити свій внесок, ми приймаємо (і дуже вдячні за) [пожертви](https://www.steunleiden.nl/project/hedy)!\n"
+-   title: Чи потрібно щось встановлювати?
+    text: Ні. Hedy працює в браузері, тобто програма, яку ви використовуєте для перегляду цієї сторінки. Можливо, це Chrome, Edge або Firefox. Hedy також працює на вашому телефоні або планшеті.
 join-sections:
--   text: "# There are three ways in which you can support Hedy!\n"
--   title: Improving the language
-    text: "The gradual and multi-lingual nature of Hedy create a lot of interesting technical challenges.\nFind those issues on [Github](https://github.com/Felienne/hedy/issues?q=is%3Aopen+is%3Aissue+label%3Alanguage).\n"
--   title: Translating Hedy
-    text: "Not a programmer? No problem! Another way to support Hedy is by [translating keywords, error messages, adventures are other content](https://github.com/Felienne/hedy/blob/main/TRANSLATING.md)\n\nThis is the current status, help us complete a language, or add a new one!\n<a href=\"https://hosted.weblate.org/engage/hedy/\">\n<img src=\"https://hosted.weblate.org/widgets/hedy/-/multi-auto.svg\" alt=\"Translation status\" /></a>\n"
--   title: Help teachers get started
-    text: "Hedy is designed to support teachers in providing programming lessons in class. We have specific teacher features like the option to create a class, customize it and see how your students are doing.\nIf you like Hedy, you can reach out to schools that you know to help teachers get started! We can help you find schools or teachers via [Discord](https://discord.gg/8yY7dEme9r).\n"
+-   text: "# Ви можете підтримати Hedy трьома способами!\n"
+-   title: Вдосконалення мови
+    text: "Поступовий та багатомовний характер Hedy створює багато цікавих технічних викликів.\nОзнайомитися з цими питаннями можна на [Github](https://github.com/Felienne/hedy/issues?q=is%3Aopen+is%3Aissue+label%3Alanguage).\n"
+-   title: Переклад Hedy
+    text: "Не програміст? Не проблема! Ще один спосіб підтримати Hedy - це [переклад ключових слів, повідомлень про помилки, пригоди - інший контент](https://github.com/Felienne/hedy/blob/main/TRANSLATING.md)\n\nЦе поточний статус, допоможіть нам доповнити мову, або додати нову!\n<a href=\"https://hosted.weblate.org/engage/hedy/\">\n<img src=\"https://hosted.weblate.org/widgets/hedy/-/multi-auto.svg\" alt=\"Translation status\" /></a>\n"
+-   title: Допомогти вчителям розпочати роботу
+    text: "Hedy розроблений для підтримки вчителів у проведенні уроків програмування в класі. У нас є спеціальні функції для вчителів, такі як можливість створити клас, налаштувати його та побачити, як працюють ваші учні.\nЯкщо вам подобається Hedy, ви можете звернутися до шкіл, які ви знаєте, щоб допомогти вчителям розпочати роботу! Ми можемо допомогти вам знайти школи або вчителів за допомогою [Discord](https://discord.gg/8yY7dEme9r).\n"
