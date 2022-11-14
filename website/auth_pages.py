@@ -32,7 +32,7 @@ class AuthModule(WebsiteModule):
             user = self.db.user_by_username(body['username'])
 
         if not user or not check_password(body['password'], user['password']):
-            return gettext('invalid_username_password') + " " + gettext('no_account'), 403
+            return gettext('invalid_username_password') + " " + gettext('no_account'), 401
 
         # If the number of bcrypt rounds has changed, create a new hash.
         new_hash = None
