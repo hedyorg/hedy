@@ -48,7 +48,7 @@ jobs:
       shell: pwsh
       id: weblate_tests
       if: ${{ github.event.pull_request.user.login == 'weblate' }}
-      run: |F
+      run: |
         Write-Host "::set-output name=run::True"
         build-tools/github/validate --weblate
     - name: Run all tests
