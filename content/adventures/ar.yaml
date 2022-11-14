@@ -539,11 +539,11 @@ adventures:
                 example_code: "```\nchoices {is} rock, paper, scisscors\nyour_choice {is} {ask} 'What do you choose?'\n{print} 'You choose ' your_choice\ncomputer_choice {is} choices {at} {random}\n{print} 'The computer chooses ' computer_choice\n{if} computer_choice {is} your_choice\n    {print} 'Tie'\n{if} computer_choice {is} 'rock'\n    {if} your_choice {is} 'paper'\n        {print} 'You win!'\n    {if} your_choice {is} 'scissors'\n        {print} 'You lose!'\n```\n"
                 start_code: '# place your code here'
             1:
-                story_text: "## Rock, paper, scissors\nIn level 1 you can start with a rock, paper, scissors  game.\n\nWith `{ask}` you can make a choice, and with `{echo}` you can repeat that choice.\n"
-                example_code: "\n```\n{print} what do you choose?\n{ask} choose {from} rock, paper or scissors\n{echo} so your choice was:\n```\nInstead of using words, you could also use emojis of course: ✊✋✌\n"
-                start_code: '{print} Welcome to your own rock scissors paper!'
-                story_text_2: "## Challenge\nInstead of using words, you could also use emojis: ✊✋✌\nCan you create a code using emojis?\n"
-                example_code_2: "```\n{print} what do you choose?\n{ask} choose from _\n{echo} so your choice was:\n```\n"
+                story_text: "## حجر، ورقة، مقص\nفي المستوى ١ يمكنك بدأ لعبة حجر، ورقة، مقص.\n\nبإستخدام `{ask}` يمكنك الاختيار من بين حجر او ورقة او مقص، وبإستخدامك `{echo}` ستعيد ترديد الاختيار.\n"
+                example_code: "```\n{print} ماذا تختار؟\n{ask} اختر من بين (حجر، ورقة، مقص)\n{echo} إذًا اختارك هو:\n```\n"
+                start_code: '{print} اهلاً بك في لعبتك الإلكترونية حجر ورقة مقص!'
+                story_text_2: "## تحدي\nبدلاً من استخدامك للكلمات يمكنك استخدام الرموز التاليه: ✊✋✌\nهل يمكنك كتابة الكود بإستخدام الرموز؟\n"
+                example_code_2: "```\n{print} ماذا تختار؟\n{ask} اختر من بين _\n{echo} إذًا اختيارك هو:\n```\n"
             10:
                 story_text: "## Rock, Paper, Scissors\nFeeling too lazy to play the game yourself? Let Hedy play it for you!\n"
                 example_code: "```\nchoices = rock, paper, scissors\nplayers = Marleen, Michael\n{for} player {in} players\n     {print} player ' chooses ' choices {at} {random}\n```\n"
