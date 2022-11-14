@@ -55,7 +55,7 @@ class ProfileModule(WebsiteModule):
             if email != user.get('email'):
                 exists = self.db.user_by_email(email)
                 if exists:
-                    return gettext('exists_email'), 403
+                    return gettext('exists_email'), 400
                 token = make_salt()
                 hashed_token = password_hash(token, make_salt())
                 self.db.update_user(user['username'], {'email': email, 'verification_pending': hashed_token})

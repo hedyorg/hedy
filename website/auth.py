@@ -159,7 +159,7 @@ def requires_login(f):
     @wraps(f)
     def inner(*args, **kws):
         if not is_user_logged_in():
-            return utils.error_page(error=403)
+            return utils.error_page(error=403, ui_message=gettext('unauthorized'))
         # The reason we pass by keyword argument is to make this
         # work logically both for free-floating functions as well
         # as [unbound] class methods.
