@@ -14,7 +14,7 @@ describe('Is able to go to class statistics page', () => {
       currentUrl = url;
       cy.get('#stats_button').click(); // Press class statistics button
 
-      let statsUrl = '/stats/class/' + currentUrl.substring(currentUrl.indexOf('class/')+6);
+      let statsUrl = Cypress.env('stats_page') + currentUrl.substring(currentUrl.indexOf('class/')+6);
       cy.url().should('include', statsUrl); // Check if you are in the statistics page
     })    
   })
