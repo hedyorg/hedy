@@ -271,7 +271,6 @@ class Database:
         elif filter == "class":
             Class = self.get_class(filter_value)
             customizations = self.get_class_customizations(Class.get('id'))
-            print(customizations)
             for student in Class.get('students', []):
                 profile = self.get_public_profile_settings(student)
                 if profile:
