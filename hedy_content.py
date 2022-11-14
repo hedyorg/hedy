@@ -3,6 +3,7 @@ import os
 import logging
 
 from babel import Locale, languages
+from icu_i18n import icu_format
 
 from utils import customize_babel_locale
 from website.yaml_file import YamlFile
@@ -299,7 +300,7 @@ for l in sorted(languages):
         ALL_KEYWORD_LANGUAGES[l] = l[0:2].upper()  # first two characters
 
 # Load and cache all keyword yamls
-KEYWORDS = {}
+KEYWORDS: dict[str, dict[str, str]] = {}
 for lang in ALL_KEYWORD_LANGUAGES.keys():
     KEYWORDS[lang] = dict(YamlFile.for_file(f'content/keywords/{lang}.yaml'))
     for k, v in KEYWORDS[lang].items():
@@ -337,7 +338,7 @@ class Commands:
             for command in commands:
                 for k, v in command.items():
                     try:
-                        command[k] = v.format(**KEYWORDS.get(language))
+                        command[k] = icu_format(v, KEYWORDS.get(language, {}))
                     except IndexError:
                         logger.error(
                             f"There is an issue due to an empty placeholder in line: {v}")
@@ -393,7 +394,7 @@ class Adventures:
             for level in adventure.get('levels'):
                 for k, v in adventure.get('levels').get(level).items():
                     try:
-                        parsed_adventure.get('levels').get(level)[k] = v.format(**KEYWORDS.get(language))
+                        parsed_adventure.get('levels').get(level)[k] = icu_format(v, KEYWORDS.get(language, {}))
                     except IndexError:
                         logger.error(
                             f"There is an issue due to an empty placeholder in line: {v}")
@@ -474,7 +475,7 @@ class ParsonsProblem:
             for number, exercise in exercises.items():
                 for k, v in exercise.get('code_lines').items():
                     try:
-                        exercises.get(number).get('code_lines')[k] = v.format(**KEYWORDS.get(language))
+                        exercises.get(number).get('code_lines')[k] = icu_format(v, KEYWORDS.get(language, {}))
                     except IndexError:
                         logger.error(
                             f"There is an issue due to an empty placeholder in line: {v}")
@@ -535,11 +536,11 @@ class Quizzes:
                         for option in copy.deepcopy(v):
                             temp = {}
                             for key, value in option.items():
-                                temp[key] = value.format(**KEYWORDS.get(language))
+                                temp[key] = icu_format(value, KEYWORDS.get(language, {}))
                             options.append(temp)
                         questions[number][k] = options
                     else:
-                        questions[number][k] = v.format(**KEYWORDS.get(language))
+                        questions[number][k] = icu_format(v, KEYWORDS.get(language, {}))
             keyword_data[level] = questions
         return keyword_data
 
@@ -591,7 +592,7 @@ class Tutorials:
         for level in copy.deepcopy(self.file):
             steps = copy.deepcopy(self.file).get(level).get('steps')
             for index, data in steps.items():
-                steps[index]['text'] = data['text'].format(**KEYWORDS.get(language))
+                steps[index]['text'] = icu_format(data['text'], KEYWORDS.get(language, {}))
             tutorial_data[level] = steps
         return tutorial_data
 
