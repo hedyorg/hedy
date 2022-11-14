@@ -273,7 +273,7 @@ class TestPages(AuthHelper):
         # WHEN trying to reach the highscores page for a country without a profile country
         # THEN receive an error response from the server
         self.given_fresh_user_is_logged_in()
-        self.get_data("/highscores/country", expect_http_code=401)
+        self.get_data("/highscores/country", expect_http_code=404)
 
     def test_valid_class_highscore_page(self):
         # WHEN a teacher is logged in and create a class
@@ -293,7 +293,7 @@ class TestPages(AuthHelper):
         self.given_fresh_user_is_logged_in()
 
         # THEN we can can't access the class highscore page
-        self.get_data("/highscores/class", expect_http_code=403)
+        self.get_data("/highscores/class", expect_http_code=404)
 
     def test_valid_program_filtering_page(self):
         # WHEN a fresh user
@@ -546,12 +546,12 @@ class TestAuth(AuthHelper):
 
         for invalid_body in invalid_bodies:
             # THEN receive an invalid response code from the server
-            self.post_data('auth/change_password', invalid_body, expect_http_code=400)
+            self.post_data('auth/change_password', invalid_body, expect_http_code=401)
 
         # WHEN attempting to change password without sending the correct old password
         # THEN receive an invalid response code from the server
         body = {'old_password': 'pass1', 'new-password': '123456', 'password_repeat': '123456'}
-        self.post_data('auth/change_password', body, expect_http_code=403)
+        self.post_data('auth/change_password', body, expect_http_code=401)
 
     def test_change_password(self):
         # GIVEN a logged in user
@@ -565,7 +565,7 @@ class TestAuth(AuthHelper):
 
         # WHEN attempting to login with old password
         # THEN receive a forbidden response code from the server
-        self.post_data('auth/login', {'username': self.username, 'password': self.user['password']}, expect_http_code=403)
+        self.post_data('auth/login', {'username': self.username, 'password': self.user['password']}, expect_http_code=401)
 
         # GIVEN the same user
 
