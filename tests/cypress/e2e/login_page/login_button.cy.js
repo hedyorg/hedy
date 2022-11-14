@@ -6,10 +6,9 @@ describe('Login button test', () => {
     goToLogin();
 
     // Tests login button type and visibility
-    cy.get('button[class*="green-btn mt-2"]')
+    cy.get('#login_button')
       .should('be.visible')
       .should('have.attr', 'type', 'submit')
-      .should('have.text', 'Log in');
 
     // Tests login button on existing account
     loginForUser();

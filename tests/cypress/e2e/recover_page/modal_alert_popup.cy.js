@@ -16,7 +16,6 @@ describe('Modal alert popup test', () => {
        .click()
     cy.get('#modal_alert_text')
       .should('be.visible')
-      .contains('Your username is invalid.');
 
     // Reset fields
     cy.get('#username')
@@ -25,10 +24,9 @@ describe('Modal alert popup test', () => {
     // Tests visibility of succes modal alert text/ recover existing account
     cy.get('#username')
       .type('user1')
-    cy.get('button[class*="green-btn mt-2"]')
+    cy.get('#send_recovery_button')
        .click()
     cy.get('#modal_alert_text')
       .should('be.visible')
-      .contains('You should soon receive an email with instructions on how to reset your password.');
   })
 })
