@@ -44,6 +44,11 @@ jobs:
         $SourceDiff = $diff | Where-Object { $_ -match '^content/' -or $_ -match '^grammars/' -or $_ -match '^highlighting/' -or $_ -match '^tests/' -or $_ -match '^app.py' -or $_ -match '^hedy.py'}
         $HasDiff = $SourceDiff.Length -gt 0
         Write-Host "::set-output name=docs_changed::$HasDiff"
+    - name: Run weblate tests
+      shell: pwsh
+      run: |
+        build-tools/github/validate --weblate
+        exit 1
     - name: Run all tests
       shell: pwsh
       if: steps.check_file_changed.outputs.docs_changed == 'True' -or ${{ github.event.label.name == 'force_tests' }}

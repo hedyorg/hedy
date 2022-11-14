@@ -10,6 +10,8 @@ $scriptdir/validate-typescript
 $scriptdir/validate-yaml
 if [[ "${1:-}" == "--all" ]]; then
   $scriptdir/validate-tests --all
+if [[ "${1:-}" == "--weblate" ]]; then
+  $scriptdir/validate-tests --weblate
 else
   $scriptdir/validate-tests
 fi
