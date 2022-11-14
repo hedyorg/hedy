@@ -1367,12 +1367,12 @@ def get_highscores_page(user, filter):
     elif filter == "country":
         # Can't get a country highscore if you're not in a country!
         if not country:
-            return utils.error_page(error=403, ui_message=gettext('no_such_highscore'))
+            return utils.error_page(error=404, ui_message=gettext('no_such_highscore'))
         highscores = DATABASE.get_highscores(user['username'], filter, country)
     elif filter == "class":
         # Can't get a class highscore if you're not in a class!
         if not classes:
-            return utils.error_page(error=403, ui_message=gettext('no_such_highscore'))
+            return utils.error_page(error=404, ui_message=gettext('no_such_highscore'))
         highscores = DATABASE.get_highscores(user['username'], filter, classes[0])
 
     # Make a deepcopy if working locally, otherwise the local database values are by-reference and overwritten
@@ -1682,12 +1682,11 @@ def update_yaml():
 
 
 @app.route('/user/<username>')
-def public_user_page(username):
-    if not current_user()['username']:
-        return utils.error_page(error=403, ui_message=gettext('unauthorized'))
+@requires_login
+def public_user_page(user, username):
     username = username.lower()
-    user = DATABASE.user_by_username(username)
-    if not user:
+    profile_user = DATABASE.user_by_username(username)
+    if not profile_user:
         return utils.error_page(error=404, ui_message=gettext('user_not_private'))
     user_public_info = DATABASE.get_public_profile_settings(username)
     if user_public_info:
