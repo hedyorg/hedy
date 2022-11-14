@@ -1952,7 +1952,7 @@ if ($("#editor").length) {
 
     let row = e.getDocumentPosition().row;
     if (breakpoints[row] === undefined && row !== e.editor.getLastVisibleRow() + 1) {
-      // If the shift key is pressed -> mark all rows between the current on and the first one above that is selected
+      // If the shift key is pressed mark all rows between the current one and the first one above that is a debug line
       if (get_shift_key(event)) {
         let highest_key = row;
         for (const key in breakpoints) {
