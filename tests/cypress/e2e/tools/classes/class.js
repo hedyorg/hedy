@@ -1,4 +1,4 @@
-import { loginForTeacher } from "../login/login";
+//import { loginForTeacher } from "../login/login";
 import { goToTeachersPage } from "../navigation/nav";
 
 export function createClass()

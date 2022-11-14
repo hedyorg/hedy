@@ -1,16 +1,16 @@
-import {loginForAdmin, loginForTeacher} from '../tools/login/login.js'
+import { loginForTeacher} from '../tools/login/login.js'
 import { createClass } from "../tools/classes/class";
-//import { goToPage } from "../navigation/nav";
 
 describe('Testing all checkboxes', () => {
   it('Passes', () => {
     loginForTeacher();
     cy.wait(500);
-    
     createClass();
-    cy.get(':nth-child(3) > .no-underline').click()
-    //cy.get('.green-btn').contains("Customize class").click()
 
+    // click on view class:
+    cy.get(':nth-child(3) > .no-underline').click()
+
+    // get correct url:
     var currentUrl = '';
     cy.url().then(url => {
       currentUrl = url;
@@ -18,8 +18,7 @@ describe('Testing all checkboxes', () => {
       cy.get(classUrl).click(); // Press class statistics button
     })
     
-    //cy.get('.adventure_level_1').uncheck()
-
+    // following code checks every single checkbox on the current page:
     cy.get('[type="checkbox"]').check({force:true})
     cy.get('[type="checkbox"]').should('be.checked')
     cy.get('[type="checkbox"]').uncheck()

@@ -1,6 +1,5 @@
 import {loginForAdmin, loginForTeacher, loginForStudent} from '../tools/login/login.js'
 import { createClass } from "../tools/classes/class";
-//import { createAdventure } from "../tools/adventure/adventure.js";
 
 // Test is incomplete, because it only checks if it is not empty instead of the value
 // This is a bug in Cypress
@@ -8,12 +7,13 @@ import { createClass } from "../tools/classes/class";
 describe('Testing if opening dates is not empty', () => {
   it('Passes', () => {
     loginForTeacher();
-    
     cy.wait(500);
-    
     createClass();
+
+    // click on view class:
     cy.get(':nth-child(3) > .no-underline').click()
 
+    // get correct url:
     var currentUrl = '';
     cy.url().then(url => {
       currentUrl = url;
