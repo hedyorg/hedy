@@ -1929,6 +1929,13 @@ type Breakpoints = Record<number, string>;
  */
 const BP_DISABLED_LINE = 'ace_breakpoint';
 
+function get_shift_key(event: Event | undefined) {
+  // @ts-ignore
+  if (event.shiftKey) {
+    return true;
+  } return false;
+}
+
 if ($("#editor").length) {
   var editor: AceAjax.Editor = ace.edit("editor");
   editor.on("guttermousedown", function (e: GutterMouseDownEvent) {
@@ -1942,9 +1949,24 @@ if ($("#editor").length) {
       return;
 
     const breakpoints = getBreakpoints(e.editor);
+
     let row = e.getDocumentPosition().row;
     if (breakpoints[row] === undefined && row !== e.editor.getLastVisibleRow() + 1) {
-      e.editor.session.setBreakpoint(row, BP_DISABLED_LINE);
+      // If the shift key is pressed -> mark all rows between the current on and the first one above that is selected
+      if (get_shift_key(event)) {
+        let highest_key = row;
+        for (const key in breakpoints) {
+          const number_key = parseInt(key);
+          if (number_key < row) {
+            highest_key = number_key;
+          }
+        }
+        for (let i = highest_key; i <= row; i++) {
+          e.editor.session.setBreakpoint(i, BP_DISABLED_LINE);
+        }
+      } else {
+        e.editor.session.setBreakpoint(row, BP_DISABLED_LINE);
+      }
     } else {
       e.editor.session.clearBreakpoint(row);
     }
