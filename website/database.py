@@ -270,13 +270,16 @@ class Database:
         # If it's a class, only get the ones from your class
         elif filter == "class":
             Class = self.get_class(filter_value)
+            customizations = self.get_class_customizations(Class.get('id'))
+            print(customizations)
             for student in Class.get('students', []):
                 profile = self.get_public_profile_settings(student)
                 if profile:
                     profiles.append(profile)
-                # If the user doesn't have a public profile -> append a 'profile' with only the username
-                # Give it an extra attribute to make sure we don't update any non-existing public-profile
-                else:
+                # If the user doesn't have a public profile the situation depends on the customizations
+                # If the teacher has allowed the "all public" function -> add dummy profile to make all visible
+                # Give the profile an extra attribute to clarify we don't update any non-existing public-profile
+                elif customizations and 'all_highscores' in customizations.get('other_settings', []):
                     profiles.append({'username': student, 'no_public_profile': True})
 
         for profile in profiles:
