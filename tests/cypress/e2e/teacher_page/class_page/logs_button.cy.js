@@ -12,8 +12,7 @@ describe('Is able to go back to teacher page', () => {
     var currentUrl = '';
     cy.url().then(url => {
       currentUrl = url;
-      let logsButton = `[onclick="window.location.href = '/logs/class/` + currentUrl.substring(currentUrl.indexOf('class/')+6) + `'"]`; // Get logs button
-      cy.get(logsButton).click(); // Press logs button
+      cy.get('#logs_button').click(); // Press logs button
 
       let statsUrl = '/logs/class/' + currentUrl.substring(currentUrl.indexOf('class/')+6);
       cy.url().should('include', statsUrl); // Check if you are in the logs page
