@@ -103,8 +103,8 @@ class AuthHelper(unittest.TestCase):
         response = request('post', 'auth/signup', {}, body, cookies=self.user_cookies[username])
 
         # It might sometimes happen that by the time we attempted to create the user, another test did it already.
-        # In this case, we get a 403. We invoke the function recursively.
-        if response['code'] == 403:
+        # In this case, we get a 400. We invoke the function recursively.
+        if response['code'] == 400:
             return self.assert_user_exists(username)
 
         # Store the user & also the verify token for use in upcoming tests
@@ -273,7 +273,7 @@ class TestPages(AuthHelper):
         # WHEN trying to reach the highscores page for a country without a profile country
         # THEN receive an error response from the server
         self.given_fresh_user_is_logged_in()
-        self.get_data("/highscores/country", expect_http_code=403)
+        self.get_data("/highscores/country", expect_http_code=401)
 
     def test_valid_class_highscore_page(self):
         # WHEN a teacher is logged in and create a class
