@@ -300,7 +300,7 @@ class Database:
                     # We don't have a choice, otherwise the double sorting below will crash
                     # Todo TB -> Store last achievement on achievements data instead of public profile data (11-11-22)
                     profile['last_achievement'] = timems()
-                profile['achievements'] = len(achievements) or 0
+                profile['achievements'] = len(achievements) if achievements else 0
 
         # If we filter on country, make sure to filter out all non-country values
         if filter == "country":
