@@ -71,8 +71,8 @@ adventures:
                 start_code: '# Vendoseni kodin tuaj këtu'
             6:
                 start_code: "{print} 'Mirë se erdhët në këtë kalkulator!'"
-                story_text: "## Kalkulatori\nTani që mund të kalkuloni, ju gjithashtu mund të bëni një program që të ushtroni kalkulimet matematikore. You can make up the calculations yourself, for example:\n"
-                example_code: "```\npërgjigja_saktë = 11 * 27\npërgjigja = {ask} 'Sa bëjnë 11 herë 27?'\n{if} përgjigja {is} përgjigja_saktë {print} 'punë e mirë!'\n{else} {print} 'Gabim! ishte ' përgjigja_saktë\n```\n"
+                story_text: "## Kalkulatori\nTani që mund të kalkuloni, ju gjithashtu mund të bëni një kalkulator.\n"
+                example_code: "```\nnumri_1 {is} {ask} 'Plotëso numrin e parë:'\nnumri_2 {is} {ask} 'Plotëso numrin e dytë:'\npërgjigje_saktë = numri_1 * numri_2\n{print} numri_1 ' herë ' numri_2 ' është 'përgjigje_saktë\n```\n"
                 story_text_2: "## Numrat e rastësishëm\nJu gjithashtu mund ta leni që kompjuteri të bëjë mbledhje të rastësishme në vetvete duke përdorur random komandën.\nKjo është si ju mund të zgjidhni një numër tabelash që të praktikoni, dhe nga ajo gjithmonë e keni një shumë të ndryshme:\n"
                 example_code_2: "```\ntabelat = 4, 5, 6, 8\nnumrat = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\ntabela = tabelat {at} {random}\nnumri = numrat {at} {random}\nzgjedhja_saktë = tabela * numri\npërgjigja = {ask} 'Sa bëjnë ' tabela' herë' numri '?'\n{if} përgjigja {is} përgjigja_saktë {print} 'saktë'\n{else} {print} 'Gabim! ishte ' përgjigja_saktë\n```\n"
                 example_code_3: "```\ntables = 4, 5, 6, 8\nnumbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\ntable = tables {at} {random}\nnumber = numbers {at} {random}\ncorrect_answer = table * number\nanswer = {ask} 'how much is ' table ' times ' number '?'\n{if} answer {is} correct_answer {print} 'okay'\n{else} {print} 'mistake! it was ' correct_answer\n```\n"
@@ -184,12 +184,12 @@ adventures:
                 story_text_2: "## Sfidë\nJu mund të përdorni variabla për ta bërë papagallin të thotë më shumë se vetëm emrin tuaj. A mund ta plotësoni këtë kod?\n"
                 example_code_2: "```\n{print} Unë jam gati papagalli\nemri {is} {ask} si e keni emrin?\n{print} emri\n{sleep}\n{print} emri\nmbiemri {is} {ask} cili është mbiemri juaj?\n_\n{sleep}\n_\n```\n"
             3:
-                story_text: "## Papagalli\nMëso papagallin tënd fjalë të re me komandën `{add}`.\n"
-                example_code: "```\nfjalët {is} kuak, Hedy\n{print} Mëso papagallin tënd!\nfjala_re {is} {ask} Cilën fjalë doni ti ja mësoni?\n{add} fjala_re {to_list} fajlët\n{print} \U0001F9D2 Thuaj fjala_re , Hedy!\n{print} \U0001F99C fjalët {at} {random}\n```\n"
+                story_text: "## Papagalli\nMëso papagallin tënd fjalë të re me komandën `{add}`.\n## Sfidë\nSi mund ta bëjë papagallin tuaj të thotë shumë fjalë?\n"
+                example_code: "```\nfjalët {is} kuak, Hedy\n{print} Mëso papagallin tënd!\nfjala_re {is} {ask} Cilën fjalë doni ti ja mësoni?\n{add} fjala_re {to_list} fajlët\n{print} \U0001F9D2 Thuaj fjala_re, Hedy!\n{print} \U0001F99C fjalët {at} {random}\n```\n"
                 start_code: '# Vendoseni kodin tuaj këtu'
             5:
-                story_text: "## Papagalli\nShpërbleni papagallin tuaj nëse thot një fjalë të saktë!\n"
-                example_code: "```\nfjalët {is} kuak, Hedy\n{print} 'Mëso papagallin tënd!'\nfjala_re {is} {ask} 'Cilën fjalë doni ti ja mësoni?'\n{add} fjala_re {to_list} fjalët\nfjala_thënë {is} fjalët {at} {random}\n{print} '\U0001F9D2 Thuaj ' fjala_re ', Hedy!'\n{print} '\U0001F99C ' fjala_thënë\n{if} fjala_thënë {is} fjala_re {print} '\U0001F9D2 Punë e mrekullueshme, Hedy! \U0001F36A'\n{else} {print} '\U0001F9D2 Jo, Hedy! Thuaj ' fjala_re\n```\n"
+                story_text: "## Papagalli\nShpërbleni papagallin tuaj nëse thot një fjalë të saktë!\nPërfundoni kodin duke plotësuar 4 komandat që mungojnë.\n"
+                example_code: "```\nfjalët {is} kuak, Hedy\n{print} 'Mëso papagallin tënd!'\nfjala_re {is} {ask} 'Cilën fjalë doni ti ja mësoni?'\n{add} fjala_re {to_list} fjalët\nfjala_thënë {is} fjalët {at} {random}\n{print} '\U0001F9D2 Thuaj ' fjala_re ', Hedy!'\n{print} '\U0001F99C ' fjala_thënë\n_ fjala_thënë {is} fjala_re _'\U0001F9D2 Punë e mrekullueshme, Hedy! \U0001F36A'\n_ _ '\U0001F9D2 Jo, Hedy! Thuaj ' fjala_re\n```\n"
                 start_code: '# Vendoseni kodin tuaj këtu'
     songs:
         name: Këndo një këngë!
@@ -197,30 +197,30 @@ adventures:
         default_save_name: Këngë
         levels:
             6:
-                story_text: "## Këngët\nKëngët shpesh herë kanë shumë përsëritje. Ndonjëherë përsëritja është e bazuar në numërim.\nPër shembull, në këngën e njohur 'Shishe birre'. Ju mund ta programoni këngën me pak matematik.\n"
-                example_code: "```\nvargu = 99\n{print} vargu ' shishe birre në mur'\n{print} vargu ' shishe birre'\n{print} 'Hiqe njërën, kaloje përreth'\nvargu = vargu - 1\n{print} vargu ' shishe birre në mur'\n```\n\nTani ju mund të përsëritni rreshtat 2 deri 9 sa herë që doni duke kopjuar rreshtat.\n"
-                start_code: "{print} 'Peshkaqeni i vogël'"
-                story_text_2: "## 5 Little Monkeys jumping on the bed\nThis children's song counts down from 5 little monkeys to 1 monkey.\nIf you copy line 2 - 7 and paste it under the the code, you can sing the whole song!\n"
-                example_code_2: "```\nnumber = 6\nnumber = number - 1\nprint number ' little monkeys jumping on the bed'\nprint 'One fell off and bumped his head'\nprint 'Mama called the doctor and the doctor said'\nprint 'NO MORE MONKEYS JUMPING ON THE BED!'\nsleep\n```\n"
+                story_text: "## Këngët\nKëngët shpesh herë kanë shumë përsëritje. Ndonjëherë përsëritja është e bazuar në numërim.\nPër shembull, në këngën e njohur 'Shishe birre'. Ju mund ta programoni këngën me pak matematik.\n\nKëshillë: Përdorni funksionin e leximit me zë për ta lënë Hedy-n t'ju këndojë këngën!\n\n## Sfidë\nTani mund të përsërisni rreshtat 2 deri në 7 sa herë të dëshironi duke kopjuar rreshtat.\n"
+                example_code: "```\nvargu = 99\n{print} vargu ' shishe birre në mur'\n{print} vargu ' shishe birre'\n{print} 'Hiqe njërën, kaloje përreth'\nvargu = vargu - 1\n{print} vargu ' shishe birre në mur'\nsleep\n```\n"
+                start_code: "{print} 'Le të këndojmë'"
+                story_text_2: "## 5 Majmunët e vegjël që kërcejnë në shtrat\nKjo këngë për fëmijë numëron mbrapsht nga 5 majmunë të vegjël në 1 majmun.\nNëse kopjoni rreshtin 2 - 7 dhe ngjisni nën kodin, mund të këndoni të gjithë këngën!\n"
+                example_code_2: "```\nnumri = 6\nnumri = numri - 1\nprint numri \"majmunët e vegjël që kërcejnë në shtrat\"\nprint 'Një ra dhe përplasi kokën'\nprint 'Mami thirri doktorin dhe doktori tha'\nprint 'JO MË MAJMUNE QË KËRREN NË SHTRAT!'\nsleep\n```\n"
             7:
                 story_text: "## Këngët\nKëngët shpesh herë kanë përsëritje. Për shembull... Peshkaqeni i vogël! Nëse e këndoni, ju vazhdoni të këndoni të njëjtën gjë:\n\nPeshkaqeni i vogël tututudutudu <br>\nPeshkaqeni i vogël tututudutudu <br>\nPeshkaqeni i vogël tututudutudu <br>\nPeshkaqeni i vogël\n\nJu mund ta bëni këtë këngë më të shkurtë me komdanën `{repeat}`! A mund ta përfundoni kodin?\n"
                 example_code: "```\n{repeat} _ _ {print} 'Peshkaqeni i vogël tututudutudu'\n{print} 'Pëshkaqeni i vogël'\n```\n\nPas Peshkani i vogël, ju mund të programi këngë të tjera. Ka shumë këngë me përsëritje.\n"
                 start_code: "{print} 'Peshkaqeni i vogël'"
             8:
-                story_text: "## Këngë\nNë nivelin e mëparshëm, ju e keni programuar këngën 'Shishe birre'. Ju e bëtë një varg dhe u deshtë që të kopjoni vargun 99 herë. Në nivelin 7 ju mund të përsëritni këngën 99 herë, vetëm duke shtuar një rresht kodi!\n"
-                example_code: "```\nvargu = 99\n{repeat} 99 {times}\n    {print} vargu ' shishe birre në mur'\n    {print} vargu ' shishe birre'\n    {print} 'Hiqeni njërën, kaloje përreth'\n    vargu = vargu - 1\n    {print} vargu ' shishe birre në murr'\n```\n"
+                story_text: "## Këngë\nNë nivelin e mëparshëm, ju e keni programuar këngën 'Shishe birre'. Ju e bëtë një varg dhe u deshtë që të kopjoni vargun 99 herë. Në nivelin 7 ju mund të përsëritni këngën 99 herë, vetëm duke shtuar një rresht kodi!\nA e dini se cilën rresht kodi të shtoni në boshllëqet?\n"
+                example_code: "```\nvargu = 99\n_ _ _\n    {print} vargu ' shishe birre në mur'\n    {print} vargu ' shishe birre'\n    {print} 'Hiqeni njërën, kaloje përreth'\n    vargu = vargu - 1\n    {print} vargu ' shishe birre në murr'\n```\n"
                 start_code: '# Vendoseni kodin tuaj këtu'
             10:
-                story_text: "## Këngë\nNë këtë nivel ju mund thjeshtë të bëni këngën për fëmijë ' këngën 'Pesë fëmijët majmun'. A mund ta bëni korin e fundit?\nJu mund ta bëni të gjithë këngën e Peshkaqenit të vogël (duke përmbajtur të gjithë peshkaqenët në familje) në vetëm 6 rreshta, Duke përdorur komandën `{for}`\nOse ju mund ta bëni Mek Donald i vjetër me të gjitha kafshët e ndryshme.\n"
-                example_code: "## 5 majmunët e vogël duke kërcyer në shtrat\n```\nmajmunët = 5, 4, 3, 2\n{for} majmuni {in} majmunët\n    {print} majmuni ' majmunët e vogël duke kërcyer në shtrat'\n    {print} 'Njëri rra dhe vrau kokën'\n    {print} 'Nëna e thëriti doktorin dhe doktori tha'\n    {print} 'Jo më majmunët të kërcojnë në shtrat!'\n```\n\n## Peshkaqeni i vogël\n```\npeshkaqenët = i vogli, nëna , babai, gjyshja, gjyshi\n{for} peshkaqeni {in} peshkaqenët\n    {print} peshkaqeni 'tututututudu'\n    {print} peshkaqeni 'tututututudu'\n    {print} peshkaqeni 'tututututudu'\n    {print} peshkaqeni\n```\n## Mek Donald i vjetër\n```\nkafshët = derri, qeni, lopa\n{for} kafsha {in} kafshët\n    {if} kafsha {is} derri\n        zëri = oink\n    {if} kafsha {is} qeni\n        zëri = auf\n    {if} kafsha {is} lopa\n        zëri = muuuu\n    {print} 'Mek Donald i vjetër kishte një fermë'\n    {print} 'I A I A O!'\n    {print} 'dhe në këtë fermë ai kishte një ' kafshë\n    {print} 'I A I A O!'\n    {print} 'me një ' zëri zëri ' këtu'\n    {print} 'dhe një ' zëri zëri' atje'\n    {print} 'këtu një ' zëri\n    {print} 'atje një ' zëri\n    {print} 'gjithkund një ' zëri zëri\n```\n"
+                story_text: "## Këngë\nNë këtë nivel ju mund thjeshtë të bëni këngën për fëmijë ' këngën 'Pesë fëmijët majmun'. A mund ta bëni korin e fundit?\nJu mund ta bëni të gjithë këngën e Peshkaqenit të vogël (duke përmbajtur të gjithë peshkaqenët në familje) në vetëm 6 rreshta, Duke përdorur komandën `{for}`\nOse ju mund ta bëni Mek Donald i vjetër me të gjitha kafshët e ndryshme.\n\n\n\n## Sfida\nA mund të shtoni vargun e fundit të majmunëve në shtrat, kur ka mbetur vetëm një majmun?\n\nA mund ta bëni kodin e foshnjës së peshkaqenit edhe më të shkurtër duke përdorur një komandë `{repeat}`?\n\nA mund të shtoni kafshë të reja në fermën e Old MacDonald's?\n"
+                example_code: "## 5 majmunët e vogël duke kërcyer në shtrat\n```\nmajmunët = 5, 4, 3, 2\n{for} majmuni {in} majmunët\n    {print} majmuni ' majmunët e vogël duke kërcyer në shtrat'\n    {print} 'Njëri rra dhe vrau kokën'\n    {print} 'Nëna e thëriti doktorin dhe doktori tha'\n    {print} 'Jo më majmunët të kërcojnë në shtrat!'\n```\n\n## Peshkaqeni i vogël\n```\npeshkaqenët = i vogli, nëna , babai, gjyshja, gjyshi\n{for} peshkaqeni {in} peshkaqenët\n    {print} peshkaqeni ' peshkaqeni tututututudu'\n    {print} peshkaqeni ' peshkaqeni tututututudu'\n    {print} peshkaqeni ' peshkaqeni tututututudu'\n    {print} peshkaqeni ' peshkaqeni '\n```\n## Mek Donald i vjetër\n```\nkafshët = derri, qeni, lopa\n{for} kafsha {in} kafshët\n    {if} kafsha {is} derri\n        zëri = oink\n    {if} kafsha {is} qeni\n        zëri = auf\n    {if} kafsha {is} lopa\n        zëri = muuuu\n    {print} 'Mek Donald i vjetër kishte një fermë'\n    {print} 'I A I A O!'\n    {print} 'dhe në këtë fermë ai kishte një ' kafshë\n    {print} 'I A I A O!'\n    {print} 'me një ' zëri zëri ' këtu'\n    {print} 'dhe një ' zëri zëri' atje'\n    {print} 'këtu një ' zëri\n    {print} 'atje një ' zëri\n    {print} 'gjithkund një ' zëri zëri\n```\n"
                 start_code: '# Vendoseni kodin tuaj këtu'
             11:
-                story_text: "## Këngët\nNë këtë nivel ju mund të përdorni komandën `{for} i {in} {range}` të bëni muzika që përdorin numërim.\n"
-                example_code: "## 5 majmunët e vogël\n```\n{for} i {in} {range} 5 {to} 1\n    {print} i 'majmunët e vogël kërcejnë në shtrat'\n    {print} 'Njëri rra dhe vrau kokën'\n    {print} 'Nëna thërriti doktorin dhe doktori tha'\n    {if} i {is} 1\n        {print} 'Vendoseni këto majmunë drejt në shtrat!'\n    {else}\n        {print} 'Jo më majmunët të kërcejnë në shtrat'\n```\n"
+                story_text: "## Këngët\nNë këtë nivel ju mund të përdorni komandën `{for} i {in} {range}` të bëni muzika që përdorin numërim, si në 5 majmunët e vegjël.\n\n## Sfidë\nPlotësoni vendet bosh dhe bëni kodin të funksionojë!\n"
+                example_code: "## 5 majmunët e vogël\n```\n_ _ _ _ 5 _ 1\n    {print} i 'majmunët e vogël kërcejnë në shtrat'\n    {print} 'Njëri rra dhe vrau kokën'\n    {print} 'Nëna thërriti doktorin dhe doktori tha'\n    {if} i {is} 1\n        {print} 'Vendoseni këto majmunë drejt në shtrat!'\n    {else}\n        {print} 'Jo më majmunët të kërcejnë në shtrat'\n```\n"
                 start_code: '# Vendoseni kodin tuaj këtu'
             12:
-                story_text: "## Këndo një këngë!\nNë këtë këngë ne mund ta bëjmë ende më të lehtë të programojmë '{if} jeni të lumtur dhe e dini, duartrokitni'. Sepse mund ti vendosim të gjitha veprimet në një variabël, shiheni:\n"
-                example_code: "```\nveprimet = 'duartrokitni', 'sheklni me këmbët tuaja', 'thirrni URAA!'\n{for} veprim {in} veprimet\n    {for} i {in} {range} 1 {to} 2\n        {print} 'Nëse jeni të lumtur dhe e dini'\n        {print} veprim\n    {print} 'Nëse jeni të lumtur dhe e dini dhe vërtet doni ta tregoni'\n    {print} 'Nëse jeni të lumtur dhe e dini'\n    {print} veprim\n```\n"
+                story_text: "## Këndo një këngë!\nNë këtë këngë ne mund ta bëjmë ende më të lehtë të programojmë '{if} jeni të lumtur dhe e dini, duartrokitni'. Sepse mund ti vendosim të gjitha veprimet në një variabël, shiheni:\n\n## Sfidë\nA mund të shtoni sasinë e duhur të hapësirave përpara, në çdo rresht për ta bërë që kënga të luajë saktë?\nMendje: Jo të gjitha rreshtat kanë nevojë për hapësirë përpara\n"
+                example_code: "```\n_ veprimet = 'duartrokitni', 'sheklni me këmbët tuaja', 'thirrni URAA!'\n_ {for} veprim {in} veprimet\n_ {for} i {in} {range} 1 {to} 2\n_ {print} 'Nëse jeni të lumtur dhe e dini'\n_ {print} veprim\n_ {print} 'Nëse jeni të lumtur dhe e dini dhe vërtet doni ta tregoni'\n_ {print} 'Nëse jeni të lumtur dhe e dini'\n_ {print} veprim\n```\n"
                 start_code: '# Vendoseni kodin tuaj këtu'
             16:
                 story_text: "## Këndo një këngë!\nNë këtë nivel, ju mund ta programoni një këngë si Mek Donald i vjetër edhe më shpejtë. Ju mund ta lidhni kafshën e saktë me zërin e saktë thjeshtë duke i vënë me një vend në listë.\nMarinari i dehur gjithashtu mund të bëhet shpejtë. Ju duhet vetëm 8 rreshta për të gjithë këngën, shiheni!\n"
@@ -231,25 +231,25 @@ adventures:
         default_save_name: Breshka
         levels:
             1:
-                story_text: "## Le të vizatojmë\nJu mund ta përdorni Hedy për të vizatuar. Duke bashkangjitur kthesa dhe vija, Ju mund të bëni një katror apo shkallë!\n\nDuke përdorur komandën `{forward}` ju vizatoni një vijë përpara. Numri pas komandës përcakton sa larg do të ecë breshka. `{turn} {right}` kthen një çerek drejt akrepave të orës, `{turn} {left}` kthen kundër akrepave të orës.\nNëse do të shkosh mbrapa, duhet ta përdorni komandën `{forward}` por me numër negativ. Si për shembull `{forward} -100`\n\nKy është fillimi e një shkalle të vogël. A mund ta bëni të ketë 5 hapa?\n"
+                story_text: "## Le të vizatojmë\nJu mund ta përdorni Hedy për të vizatuar. Duke bashkangjitur kthesa dhe vija, Ju mund të bëni një katror apo shkallë!\n\nDuke përdorur komandën `{forward}` ju vizatoni një vijë përpara. Numri pas komandës përcakton sa larg do të ecë breshka. `{turn} {right}` kthen një çerek drejt akrepave të orës, `{turn} {left}` kthen kundër akrepave të orës.\n\nNëse do të shkosh mbrapa, duhet ta përdorni komandën `{forward}` por me numër negativ. Si për shembull `{forward} -100`\n\n## Sfidë\nKy është fillimi e një shkalle të vogël. A mund ta bëni të ketë 5 hapa?\n"
                 example_code: "```\n{forward} 50\n{turn} {right}\n{forward} 50\n{turn} {left}\n{forward} 50\n```\n"
                 start_code: "{forward} 50\n{turn} {left}"
             2:
                 story_text: "## Breshka\nNë këtë nivel ju mund të përdorni variabla që të bëni breshkën interaktive. Si për shembull mund ta pyetni lojtarin sa hapa duhet që të bëje breshka.\n"
                 example_code: "```\nrezultati {is} {ask} Sa hapa duhet të bëje breshka?\n{forward} rezultati\n```\n"
-                story_text_2: "Gjithashtu në nivelin 1, breshka mund që të shkonte vetëm majtas apo djathtas. Ajo është pak e mërzitshme!\nNë nivelin e 2 ajo mund të tregoje një drejtin me hundën e saj në të gjitha anët.\n\nPërdor 90 që të kthehet një çerek. Ne i thuam kësaj shkallë. Një kthesë e plot është 360 shkallë.\nA mund të vizatoni një figurë me këtë kod? Ndoshta një trekëndësh apo rreth?\n"
+                story_text_2: "Gjithashtu në nivelin 1, breshka mund që të shkonte vetëm majtas apo djathtas. Ajo është pak e mërzitshme!\nNë nivelin e 2 ajo mund të tregoje një drejtin me hundën e saj në të gjitha anët.\n\nPërdor 90 që të kthehet një çerek. Ne i thuam kësaj shkallë. Një kthesë e plot është 360 shkallë.\n\n## Sfidë\nA mund të vizatoni një figurë me këtë kod? Ndoshta një trekëndësh apo rreth?\n"
                 example_code_2: "```\n{print} Duke vizatuar figura\nkëndi {is} 90\n{turn} këndi\n{forward} 25\n{turn} këndi\n{forward} 25\n```\n"
                 start_code: "{print} Garë breshkash!\nkëndi {is} 90\n{turn} këndi\n{forward} 25"
             3:
-                story_text: "## Duke kërkuar breshkën\nNë këtë nivel ju mund të përdorni komandën `{at} {random}` me vizatimin e breshkës. Një zgjedhje random e bën breshkën të ecë rrugë të ndryshme çdo herë.\nPërdorni `{at} {random}` për të zgjedhur një vlerë nga një listë. Ju mund të bëni kopjoni rreshtat 2 dhe 3 për të krijuar një rrugë më të gjatë random.\n"
+                story_text: "## Duke kërkuar breshkën\nNë këtë nivel ju mund të përdorni komandën `{at} {random}` me vizatimin e breshkës. Një zgjedhje random e bën breshkën të ecë rrugë të ndryshme çdo herë. Përdorni `{at} {random}` për të zgjedhur një vlerë nga një listë. \n\n## Sfidë\nA mund të bëni kopjoni rreshtat 2 dhe 3 për të krijuar një rrugë më të gjatë random.\n"
                 example_code: "```\nkënde {is} 10, 50, 90, 150, 250\n{turn} kënde {at} {random}\n{forward} 25\n```\n"
                 start_code: "kënde {is} 10, 50, 90, 150, 250\n{turn} kënde {at} {random}\n{forward} 25"
             4:
                 story_text: "## Le të vizatojmë\nNë nivelin 4 do duhet të përdorni thonjëza me komandën `{print}` dh `{ask}`. Gjithashtu duke vizatuar!\n"
-                example_code: "```\n{print} 'Duke vizatuar figura'\nkëndi {is} 90\n{turn} këndi\n{forward} 25\n{turn} këndi\n{forward} 25\n```\n"
+                example_code: "```\n{print} _ Duke vizatuar figura _\nkëndi {is} 90\n{turn} këndi\n{forward} 25\n{turn} këndi\n{forward} 25\n```\n"
                 start_code: "{print} 'Duke vizatuar figura'\nkëndi {is} 90\n{turn} këndi\n{forward} 25"
                 example_code_2: "```\n{color} {white}\n{forward} -80\n{color} {green}\n{forward} 50\n{color} {yellow}\n{forward} 50\n{color} {red}\n{forward} 50\n```\n"
-                story_text_2: "## Colors\nYou can also change the color of the lines with the command `{color}`. Check out the example.\nYou can also use the command `{color} {white}` to make 'invisible' lines. You could use these white lines to move the turtle anywhere in the screen before you start drawing.\n"
+                story_text_2: "## Ngjyra\nJu gjithashtu mund të ndryshoni ngjyrën e rreshtave me komandën `{color}`. Shikoni shembullin.\nJu gjithashtu mund të përdorni komandën `{color} {white}` për të bërë vija \"të padukshme\". Ju mund t'i përdorni këto vija të bardha për të lëvizur breshkën kudo në ekran përpara se të filloni të vizatoni.\n"
             5:
                 story_text: "## Le të vizatojmë\nNë nivelin 5 ju mund të bëni një zgjidhje me komandën `{if}`. Si për shembull ndërmjet dy lloje të figurave.\n"
                 example_code: "```\n{print} 'Duke vizatuar figurë'\nfigura {is} {ask} 'A doni një katror apo një trekëndësh?'\n{if} figura {is} trekëndësh këndi {is} 120\n{else} këndi {is} 90\n{turn} këndi\n{forward} 25\n{turn} këndi\n{forward} 25\n{turn} këndi\n{forward} 25\n{turn} këndi\n{forward} 25\n```\n"
@@ -260,7 +260,7 @@ adventures:
                 start_code: "{print} 'Duke vizatuar figura'"
             7:
                 story_text: "## Le të vizatojmë\nNë këtë nivel mund të përsërisni një rresht kodi me komandën `{repeat}`.\n"
-                example_code: "```\n{print} 'Vizato figura'\n{repeat} 3 {times} {forward} 10\n```\n"
+                example_code: "```\n{print} 'Vizato figura'\n_ 3 _ {forward} 10\n```\n"
                 start_code: "{print} 'Vizato figura'\n{repeat} 3 {times} {forward} 10"
             8:
                 story_text: "## Le të vizatojmë\nTani që mund të përsërisim shumë rreshta, mund të bëjmë figura më lehtë.\nDuhet vetëm të vendosim këndin një herë, pastaj mund ta përdorim at variabël në komandën `{repeat}`.\n"
@@ -388,8 +388,8 @@ adventures:
             3:
                 story_text: "## Larja e enëve\nA nuk jeni dakord në shtëpi se kush ti lajë enët apo kush ta ndryshojë kutinë e mbeturinave?\nPastaj mund ta lëni kompjuterin të zgjedhë në mënyrë të drejtë. Mund ta programoni në këtë nivel!\nE bëni një listë me pjesëtarët e familjes. Pastaj zgjidhni '{at} {random}' nga lista.\n"
                 example_code: "```\nnjerëzit {is} nëna, babi, Erza, Sara\n{print} njerëzit {at} {random}\n```\n"
-                story_text_2: "## Bëni me hile me programin e larjeve të enëve!\nA nuk doni që ti lani enët? Ndryshoni programin që të hiqni emrin tuaj nga lista.\n"
-                example_code_2: "```\nnjerëzit {is} nëna, babi, Erza, Sara\nemri_juaj {is} {ask} Kush jeni ju?\n{remove} emri_juaj {from} njerëzit\n{print} njerëzit {at} {random} i lanë enët\n```\n"
+                story_text_2: "## Bëni me hile me programin e larjeve të enëve!\nA nuk doni që ti lani enët? Ndryshoni programin që të hiqni emrin tuaj nga lista me komandën `{remove}` `{from}`.\n"
+                example_code_2: "```\nnjerëzit {is} nëna, babi, Erza, Sara\nemri_juaj {is} {ask} Kush jeni ju?\n_ emri_juaj _ njerëzit\n{print} _ _ _ i lanë enët\n```\n"
                 start_code: '{print} Kush i lanë enët?'
             4:
                 story_text: "## Larja e enëve\nMe thonjëza mund ta bëni planin e larjeve të enëve më të bukur.\nKëtë herë shembulli nuk është i plotësuar.\n\nA mund ta plotësoni kodin? Çdo boshllëk duhet të zëvendësohet me një fjalë apo simbol.\n\nKëshillë: Mos harroni thonjëzat!\n"
@@ -411,7 +411,7 @@ adventures:
                 example_code: "```\nnjerëzit = nëna, babi, Erza, Sara\n{repeat} _ _ {print} 'larësi i enëve është' _\n```\n"
             10:
                 story_text: "## Larja e enëve\nNë këtë nivel, ju mund të bëni një orar më të mirë të larjes së enëve.\n"
-                example_code: "```\nditët = E hënë, E martë, E mërkurë, E enjte, E premte, E shtunë, E diel\nemrat = nëna, babi, Erza, Sara\n{for} dita {in} ditët\n    {print} emrat {at} {random} ' i lanë enët në ditën e ' dita\n```\n"
+                example_code: "```\nditët = E hënë, E martë, E mërkurë, E enjte, E premte, E shtunë, E diel\nemrat = nëna, babi, Erza, Sara\n_ dita _ ditët\n    {print} emrat {at} {random} ' i lanë enët në ditën e ' dita\n```\n"
                 start_code: '# Vendoseni kodin tuaj këtu'
     dice:
         name: Zare
@@ -424,8 +424,8 @@ adventures:
                 story_text: "## Zare\nNë këtë nivel mund të zgjedhim nga një listë. Me këtë mund ta lëmë që kompjuteri të zgjedhë një anë nga zari.\nShikoni tek lojërat që keni në dollap në shtëpinë tuaj.\nA janë këto loja me një zar (special)? Gjithashtu mund ta kopjoni me këtë kod.\nSi për shembull, the dice of the game Earthworms with the numbers 1 to 5 and an earthworm on it.\n\n![Kërmilli i tokës me 1 deri 5 dhe me një kërmill mbi të](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)\n"
                 example_code: "```\nzgjedhjet {is} 1, 2, 3, 4, 5, kërmilli\n{print} zgjedhjet {at} {random}\n```\n"
                 start_code: '{print} Çfarë do të tregojë zari këtë herë?'
-                example_code_2: "```\nchoices {is} _\n```\n"
-                story_text_2: "## Challenge\nThe dice in the example above are dice for a specific game. Can you make normal dice?\nOr other special dice from a different game?\n"
+                example_code_2: "```\nzgjedhjet {is} _\n```\n"
+                story_text_2: "## Sfidë\nZarat në shembullin e mësipërm janë zare për një lojë specifike. Mund të bëni zare normale?\nApo zare të tjerë të veçantë nga një lojë tjetër?\n"
             4:
                 story_text: "## Zare\nNë këtë nivel ne mund ta bëjmë që fjalia të ketë vlerën e zarit, me thonjëza sigurisht.\nKëtë herë shembulli i dhënë nuk është i plotësuar. A mund ta përfundoni kodin?\n"
                 example_code: "```\nzgjedhjet {is} 1, 2, 3, 4, 5, kërmilli\n{print} _ ju gjuajtët _\n{print} _ _ _ <- këtu duhet ta programoni zgjedhjen\n```\n"
@@ -435,13 +435,13 @@ adventures:
                 example_code: "```\nzgjedhjet {is} 1, 2, 3, 4, 5, krimb_toke\nhidhe {is} _\n{print} 'ti ke hedhur' _\n{if} _ {is} krimb_toke {print} 'Mund të ndaloni së hedhuri.' _ {print} 'Duhet ta hidhni përsëri!'\n```\n"
                 start_code: "{print} 'Çfarë do të tregojë zari këtë herë'"
             6:
-                story_text: "## Zare\nMund përsëri të bëni zarin e krimbit të tokës, por tani gjithashtu mund ta kalkuloni sa pikë keni hedhur.\nJu mund ta dini që krimbi njihet si 5 pikë. Pas një të hedhuri, ju mund menjëherë ta kalkuloni sa pikë keni hedhur.\nKy është kodi që kalkulon pikët për një zar:\n"
-                example_code: "```\nzgjedhjet = 1, 2, 3, 4, 5, krimi_tokes\npikët = 0\nhedhja = zgjedhjet {at} {random}\n{print} 'ju keni hedhur' hedhja\n{if} hedhja {is} krimi_tokes pikët = pikët+ 5 {else} pikët= pikët + hedhja\n{print} 'këto janë' pikët ' pikë'\n```\nA mund ta bëni kodin që të marrësh pikët totale për 8 zare? Për ta bërë këtë, duhet të bëni kopje disa rreshta nga kodi.\n"
+                story_text: "## Zare\nMund përsëri të bëni zarin e krimbit të tokës, por tani gjithashtu mund ta kalkuloni sa pikë keni hedhur.\nJu mund ta dini që krimbi njihet si 5 pikë. Pas një të hedhuri, ju mund menjëherë ta kalkuloni sa pikë keni hedhur.\nKy është kodi që kalkulon pikët për një zar:\n\n## Sfidë\nA mund ta bëni kodin në mënyrë që të merrni rezultatin total për 8 zare? Për ta bërë këtë, duhet të prisni dhe ngjitni disa rreshta të kodit.\n"
+                example_code: "```\nzgjedhjet = 1, 2, 3, 4, 5, krimi_tokes\npikët = 0\nhedhja = zgjedhjet {at} {random}\n{print} 'ju keni hedhur' hedhja\n{if} hedhja {is} krimi_tokes pikët = pikët+ 5 {else} pikët= pikët + hedhja\n{print} 'këto janë' pikët ' pikë'\n```\n"
                 example_code_2: "## Duke shikuar përpara\n\nA mundët që të kalkuloni pikët për 8 zare? U desh të kopjoni shumë apo? Ne do ta bëjmë më të lehtë në nivelin 7!\n"
                 start_code: "{print} 'Çfarë do të tregojë zari këtë herë'"
             10:
-                story_text: "## Zare\nA është secilit duke i marrë shumë kohë hedhja e zareve? Në këtë nivel ju mund ta bëni që Hedy ti hedhë të gjitha zaret në të njëjtën kohë!\n"
-                example_code: "```\nlojtarët = Ana, Jetoni, Agimi\nzgjedhjet = 1, 2, 3, 4, 5, 6\n{for} lojtari {in} lojtarët\n    {print} lojtari ' ka hedhur' zgjedhjet {at} {random}\n    {sleep}\n```\n"
+                story_text: "## Zare\nA është secilit duke i marrë shumë kohë hedhja e zareve? Në këtë nivel ju mund ta bëni që Hedy ti hedhë të gjitha zaret në të njëjtën kohë!\nA mund të plotësoni rreshtin e saktë të kodit në vendet bosh?\n"
+                example_code: "```\nlojtarët = Ana, Jetoni, Agimi\nzgjedhjet = 1, 2, 3, 4, 5, 6\n_\n    {print} lojtari ' ka hedhur' zgjedhjet {at} {random}\n    {sleep}\n```\n"
                 start_code: '# Vendoseni kodin tuaj këtu'
             15:
                 story_text: "## Zare\nNë këtë lojë duhet që të hidhni 6 me sa më pak përpjekje.\n"
@@ -462,35 +462,35 @@ adventures:
                 example_code: "```\nzgjedhjet {is} gur, letër, gërshërë\nzgjedhja_juaj {is} {ask} 'Çfarë zgjidhni?'\n{print} 'Ju zgjodhët ' zgjedhja_juaj\nzgjedhja_kompjuterit {is} zgjedhjet {at} {random}\n{print} 'Kompjuteri zgjodhi ' zgjedhja_kompjuterit\n{if} zgjedhja_kompjuterit {is} zgjedhja_juaj\n    {print} 'Barazim'\n{if} zgjedhja_kompjuterit {is} gur\n    {if} zgjedhja_juaj {is} letër\n        {print} 'Ju fitoni!'\n    {if} zgjedhja_juaj {is} gërshërë\n        {print} 'Ju humbët!'\n# përfundoni kodin\n```\n"
             1:
                 story_text: "## Gur, letër, gërshërë\nNë nivelin 1, ju mund të filloni me lojën gur, letër, gërshërë.\n\nMe komandën `{ask}` ju mund të bëni një zgjidhje, dhe me komandën `{echo}` ju mund ta përsëritni atë zgjidhje.\n"
-                example_code: "```\n{print} çfarë zgjidhni?\n{ask} zgjidhni gur, letër apo gërshërë\n{echo} zgjidhja e juaj ishte:\n```\nNë vend që të përdorni fjalë, ju mund gjithashtu të përdorni emoji (ikona): ✊✋✌\n"
+                example_code: "```\n{print} çfarë zgjidhni?\n{ask} zgjidhni gur, letër apo gërshërë\n{echo} zgjidhja e juaj ishte:\n```\n"
                 start_code: '{print} Mirë se erdhët në lojën tuaj gur, letër, gërshërë!'
-                story_text_2: "## Challenge\nInstead of using words, you could also use emojis: ✊✋✌\nCan you create a code using emojis?\n"
-                example_code_2: "```\n{print} what do you choose?\n{ask} choose from _\n{echo} so your choice was:\n```\n"
+                story_text_2: "## Sfidë\nNë vend që të përdorni fjalë, mund të përdorni edhe emoji: ✊✋✌\nA mund të krijoni një kod duke përdorur emojis?\n"
+                example_code_2: "```\n{print} çfarë zgjidhni?\n{ask} zgjidhni nga _\n{echo} kështu që zgjedhja juaj ishte:\n```\n"
             2:
                 story_text: "## Gur, letër, gërshërë\nNë këtë nivel mund ti praktikoni variablat, kështu që mund ta bëni lojën gur, letër, gërshërë në nivelin tjetër!\n"
-                example_code: "```\nzgjedhja {is} _\n{print} Unë zgjedh zgjedhja\n```\n"
+                example_code: "```\n_ {is} {ask} gur, letër, ose gërshërë?\n{print} Unë zgjedh _\n```\n"
                 start_code: '# Vendoseni kodin tuaj këtu'
             3:
                 story_text: "## Gur, letër, gërshërë\n\nNë këtë nivel mund të futni një listë and të zgjidhni nga ajo.\nNë fillim e bëni një listë me komandën `{is}`. Dhe pastaj mund ta bëni që kompjuteri za zgjedhë një nga lista me komandën `{at} {random}`.\nSi për shembull, ju mund ta bëni që kompjuteri të zgjedhë gur, letër, gërshërë.\n"
                 example_code: "```\nzgjedhjet {is} gur, letër, gërshërë\n{print} zgjedhjet {at} {random}\n```\n"
                 start_code: '{print} Mirë se erdhët në lojën tuaj gur, letër, gërshërë!'
-                example_code_2: "```\nchoices {is} rock, paper, scissors\n{print} player 1 chooses... choices {at} {random}\n{print} player 2 _\n```\n"
-                story_text_2: "## Challenge\nNow you only have one player, so can you add a second player?\nYou can even use variables to name player 1 and player 2.\n"
+                example_code_2: "```\nzgjedhje {is} gur, letër, gërshërë\n{print} lojtari 1 zgjedh... zgjedhje {at} {random}\n{print} lojtari 2 _\n```\n"
+                story_text_2: "## Sfidë\nTani ju keni vetëm një lojtar, kështu që mund të shtoni një lojtar të dytë?\nMund të përdorni edhe variabla për të emërtuar lojtarin 1 dhe lojtarin 2.\n"
             4:
                 story_text: "## Gur, letër, gërshërë\nNë këtë nivel mund të programoni më shumë lojën gur, letër, gërshërë. Por {if} (nëse) doni të shtoni tekst, duhet të shtoni thonjëzat gjithashtu.\nA e përfundoni kodin duke shtuar komandat e sakta ose shkronjat në vizat e poshtme?\n"
                 example_code: "```\nzgjedhjet {is} gur, letër, gërshërë\n{print} _ Kompjuteri zgjodhi: _ _ {at} _\n```\n"
                 start_code: "{print} 'Mirë se erdhët në lojën tuaj gur, letër, gërshërë!'"
             10:
-                story_text: "## Gur, letër, gërshërë\nJu mërzitet që të luani lojën vetë? Lëreni Hedy të luajë për ju!\n"
-                example_code: "```\nzgjedhjet = gur, letër, gërshërë\nlojtarët = Besarti, Agnesa\n{for} lojtari {in} lojtarët\n     {print} lojtari ' ka zgjedhur ' zgjedhjet {at} {random}\n```\n"
+                story_text: "## Gur, letër, gërshërë\nJu mërzitet që të luani lojën vetë? Lëreni Hedy të luajë për ju!\nMjafton të plotësoni emrat e lojtarëve.\n"
+                example_code: "```\nzgjedhjet = gur, letër, gërshërë\nlojtarët = _\n{for} lojtari {in} lojtarët\n     {print} lojtari ' ka zgjedhur ' zgjedhjet {at} {random}\n```\n"
                 start_code: '# Vendoseni kodin tuaj këtu'
             13:
                 story_text: "## Gur, letër, gërshërë\nMe komandën `{and}` mund ta shkurtoni kodin tuaj për gur, letër, gërshërë! Shikoni shembullin më poshtë dhe tentoni ta përfundoni.\n"
-                example_code: "```\nopsionet = 'gur', 'letër', 'gërshërë'\nzgjedhja_juaj = {ask} 'Çfarë zgjidhni?'\nzgjedhja_kompjuterit = opsionet {at} {random}\n{print} 'Ju keni zgjedhur ' zgjedhja_juaj\n{print} 'Kompjuteri ka zgjedhur ' zgjedhja_kompjuterit\n{if} zgjedhja_kompjuterit {is} zgjedhja_juaj\n    {print} 'Barazim'\n{if} zgjedhja_kompjuterit {is} 'gur' {and} zgjedhja_juaj {is} 'letër'\n    {print} 'Ju fitoni!'\n{if} zgjedhja_kompjuterit {is} 'gur' {and} zgjedhja_juaj {is} 'gërshërë'\n    {print} 'Kompjuteri fiton!'\n```\n"
+                example_code: "```\nopsionet = 'gur', 'letër', 'gërshërë'\nzgjedhja_juaj = {ask} 'Çfarë zgjidhni?'\nzgjedhja_kompjuterit = opsionet {at} {random}\n{print} 'Ju keni zgjedhur ' zgjedhja_juaj\n{print} 'Kompjuteri ka zgjedhur ' zgjedhja_kompjuterit\n{if} zgjedhja_kompjuterit {is} zgjedhja_juaj\n    {print} 'Barazim'\n{if} zgjedhja_kompjuterit {is} 'gur' {and} zgjedhja_juaj {is} 'letër'\n    {print} 'Ju fitoni!'\n{if} zgjedhja_kompjuterit {is} 'gur' {and} zgjedhja_juaj {is} 'gërshërë'\n    {print} 'Kompjuteri fiton!'\n_\n```\n"
                 start_code: '# Vendoseni kodin tuaj këtu'
             15:
                 story_text: "## Gur, letër, gërshërë\nLuani derisa ta fitoni kompjuterin! Por fillimisht, përfundoni shembullin e dhënë...\n"
-                example_code: "```\nfituat = 'jo'\nopsionet = 'gur', 'letër', 'gërshërë'\n{while} fituat == 'jo'\n    zgjedhja_juaj = {ask} 'Çfarë zgjidhni?'\n    zgjedhja_kompjuterit = opsionet {at} {random}\n    {print} 'Ju zgjodhët ' zgjedhja_juaj\n    {print} 'Kompjuteri zgjodhi ' zgjedhja_kompjuterit\n    {if} zgjedhja_kompjuterit == zgjedhja_juaj\n        {print} 'Barazim!'\n    {if} zgjedhja_kompjuterit == 'gur' {and} zgjedhja_juaj == 'gërshërë'\n        {print} 'Ju humbët!'\n    {if} zgjedhja_kompjuterit == 'gur' {and} zgjedhja_juaj == 'letër'\n        {print} 'Ju fitoni!'\n        fituat = 'po'\n```\n"
+                example_code: "```\nfituat = 'jo'\nopsionet = 'gur', 'letër', 'gërshërë'\n{while} fituat == 'jo'\n    zgjedhja_juaj = {ask} 'Çfarë zgjidhni?'\n    zgjedhja_kompjuterit = opsionet {at} {random}\n    {print} 'Ju zgjodhët ' zgjedhja_juaj\n    {print} 'Kompjuteri zgjodhi ' zgjedhja_kompjuterit\n    {if} zgjedhja_kompjuterit == zgjedhja_juaj\n        {print} 'Barazim!'\n    {if} zgjedhja_kompjuterit == 'gur' {and} zgjedhja_juaj == 'gërshërë'\n        {print} 'Ju humbët!'\n    {if} zgjedhja_kompjuterit == 'gur' {and} zgjedhja_juaj == 'letër'\n        {print} 'Ju fitoni!'\n        fituat = 'po'\n_\n```\n"
                 start_code: '# Vendoseni kodin tuaj këtu'
         description: Bëjeni lojën tuaj me gur, letër, gërshërë
         default_save_name: Gur
