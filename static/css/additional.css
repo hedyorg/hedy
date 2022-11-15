@@ -79,16 +79,16 @@ body[dir='rtl'] #editor .ace_scroller {
     width: 32px !important;
 }
 
-/*
-The fix should be something with the .ace_text-input shifting behind the gutter when the lines are too long
+/* The fix should be something with the .ace_text-input shifting behind the gutter when the lines are too long */
 body[dir='rtl'] #editor .ace_text-input {
     padding-right: 10px;
+    padding-left: 10px;
 }
 
 body[dir='rtl'] #editor .ace_text-input > * {
     padding-right: 6px;
+    padding-left: 6px;
 }
- */
 
 body[dir='ltr'] #editor .ace_gutter-layer > * {
     margin-left: 2px;
