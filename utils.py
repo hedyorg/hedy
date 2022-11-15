@@ -9,7 +9,8 @@ import string
 import random
 import uuid
 
-from flask_babel import gettext, format_date, format_datetime, format_timedelta
+from flask_babel import format_date, format_datetime, format_timedelta
+from icu_i18n import gettext
 from ruamel import yaml
 import commonmark
 
