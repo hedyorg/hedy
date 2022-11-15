@@ -17,9 +17,10 @@ import hedy_translation
 from hedy_content import ADVENTURE_ORDER_PER_LEVEL, COUNTRIES, ALL_LANGUAGES, ALL_KEYWORD_LANGUAGES, NON_LATIN_LANGUAGES
 import hedyweb
 import hedy_content
-from flask_babel import gettext, Babel
+from flask_babel import Babel
 from flask_compress import Compress
 from flask_helpers import render_template
+from icu_i18n import gettext
 from flask import Flask, g, request, jsonify, session, abort, redirect, Response, make_response, Markup, send_file, \
     after_this_request, send_from_directory
 from config import config
@@ -551,54 +552,41 @@ def hedy_error_to_response(ex):
 
 def translate_error(code, arguments, keyword_lang):
     arguments_that_require_translation = ['allowed_types', 'invalid_type', 'invalid_type_2', 'character_found',
-                                          'concept', 'tip', 'command', 'print', 'ask', 'echo', 'is', 'repeat']
+                                          'concept', 'tip', 'command']
     arguments_that_require_highlighting = ['command', 'guessed_command', 'invalid_argument', 'invalid_argument_2',
-                                           'variable', 'invalid_value', 'print', 'ask', 'echo', 'is', 'repeat']
-
-    # Todo TB -> We have to find a more delicate way to fix this: returns some gettext() errors
-    error_template = gettext('' + str(code))
-
-    # Fetch tip if it exists and merge into template, since it can also contain placeholders
-    # that need to be translated/highlighted
-
-    if 'tip' in arguments:
-        error_template = error_template.replace("{tip}", gettext('' + str(arguments['tip'])))
-        #TODO, FH Oct 2022 -> Could we do this with a format even though we don't have all fields?
-
-    # adds keywords to the dictionary so they can be translated if they occur in the error text
+                                           'variable', 'invalid_value']
 
     # FH Oct 2022: this could be optimized by only adding them when they occur in the text (either with string matching or with a list
     # of placeholders for each error
-    arguments["print"] = "print"
-    arguments["ask"] = "ask"
-    arguments["echo"] = "echo"
-    arguments["repeat"] = "repeat"
-    arguments["is"] = "is"
+    # adds keywords to the dictionary so they can be translated if they occur in the error text
+    arguments["print"] = hedy.style_command(gettext("print"))
+    arguments["ask"] = hedy.style_command(gettext("ask"))
+    arguments["echo"] = hedy.style_command(gettext("echo"))
+    arguments["repeat"] = hedy.style_command(gettext("repeat"))
+    arguments["is"] = hedy.style_command(gettext("is"))
 
-    # some arguments like allowed types or characters need to be translated in the error message
     for k, v in arguments.items():
+        if k in arguments_that_require_highlighting:
+            arguments[k] = v = hedy.style_command(v)
         if k in arguments_that_require_translation:
             if isinstance(v, list):
                 arguments[k] = translate_list(v)
             else:
-                arguments[k] = gettext('' + str(v))
+                # Arguments ("tip") may themsleves be patterns, making formatting necessary here
+                arguments[k] = gettext(v, **arguments)
 
-        if k in arguments_that_require_highlighting:
-            if k in arguments_that_require_translation:
-                local_keyword = hedy_translation.translate_keyword_from_en(v, keyword_lang)
-                arguments[k] = hedy.style_command(local_keyword)
-            else:
-                arguments[k] = hedy.style_command(v)
+    print(arguments)
 
-    return error_template.format(**arguments)
+    error_template = gettext(code, **arguments)
+    return error_template
+
 
 
 
 
 def translate_list(args):
-    translated_args = [gettext('' + str(a)) for a in args]
     # Deduplication is needed because diff values could be translated to the same value, e.g. int and float => a number
-    translated_args = list(dict.fromkeys(translated_args))
+    translated_args = {gettext(a) for a in args}
 
     if len(translated_args) > 1:
         return f"{', '.join(translated_args[0:-1])}" \
