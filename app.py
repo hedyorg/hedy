@@ -579,9 +579,6 @@ def translate_error(code, arguments, keyword_lang):
     return error_template
 
 
-
-
-
 def translate_list(args):
     # Deduplication is needed because diff values could be translated to the same value, e.g. int and float => a number
     translated_args = {gettext(a) for a in args}

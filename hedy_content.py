@@ -190,7 +190,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'story',
         'fortune',
         'restaurant',
-        'calculator',  
+        'calculator',
         'next',
         'end'
     ],
@@ -209,7 +209,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'songs',
         'restaurant',
         'calculator',
-        'piggybank',  
+        'piggybank',
         'secret',
         'next',
         'end'
@@ -309,8 +309,6 @@ for lang in ALL_KEYWORD_LANGUAGES.keys():
             KEYWORDS[lang][k] = v.split('|')[0]
 
 
-
-
 class Commands:
     # Want to parse the keywords only once, they can be cached -> perform this action on server start
     def __init__(self, language):
@@ -360,6 +358,7 @@ class Commands:
 class NoSuchCommand:
     def get_commands_for_level(self, level, keyword_lang):
         return {}
+
 
 class Adventures:
     def __init__(self, language):
@@ -445,13 +444,14 @@ class Adventures:
                 self.file = YamlFile.for_file(
                     f'content/adventures/{self.language}.yaml').get('adventures')
             self.data["en"] = self.cache_adventure_keywords("en")
-        return True if self.data.get("en") else False     
-      
+        return True if self.data.get("en") else False
+
+
 # Todo TB -> We don't need these anymore as we guarantee with Weblate that each language file is there
 class NoSuchAdventure:
-  def get_adventure(self):
-    return {}
-  
+    def get_adventure(self):
+        return {}
+
 
 class ParsonsProblem:
     def __init__(self, language):
@@ -609,6 +609,7 @@ class Tutorials:
         if level not in ["intro", "teacher"]:
             level = int(level)
         return self.data.get(keyword_lang, {}).get(level, {}).get(step, None)
+
 
 class NoSuchTutorial:
     def get_tutorial_for_level(self, level, keyword_lang):
