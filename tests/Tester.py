@@ -1,6 +1,3 @@
-import inspect
-import io
-import os
 import textwrap
 
 import exceptions
@@ -8,8 +5,11 @@ import hedy
 import hedy_translation
 import re
 import sys
-import unittest
+import io
+import os
 from contextlib import contextmanager
+import inspect
+import unittest
 import utils
 from hedy_content import ALL_KEYWORD_LANGUAGES, KEYWORDS
 
@@ -170,7 +170,7 @@ class HedyTester(unittest.TestCase):
                     # Maybe we should do a random language?
                     in_dutch = hedy_translation.translate_keywords(code, from_lang=lang, to_lang="nl", level=self.level)
                     back_in_english = hedy_translation.translate_keywords(
-                        in_dutch, from_lang="nl", to_lang=lang, level=self.level)
+                        in_dutch, from_lang="nl", to_lang=lang, level=self.level).strip()
                     self.assert_translated_code_equal(code, back_in_english)
                 else:  # not English? translate to it and back!
                     in_english = hedy_translation.translate_keywords(
@@ -224,7 +224,7 @@ class HedyTester(unittest.TestCase):
         # Code used in the Adventure and Level Defaults tester to validate Hedy code
 
         try:
-            if not parseresult.has_turtle:  # ouput from turtle cannot be captured
+            if not parseresult.has_turtle and not parseresult.has_pygame:  # ouput from turtle or pygame cannot be captured
                 HedyTester.run_code(parseresult)
         except hedy.exceptions.CodePlaceholdersPresentException:  # Code with blanks is allowed
             pass
@@ -255,48 +255,48 @@ class HedyTester(unittest.TestCase):
         type = 'int' if level < 12 else 'float'
 
         return textwrap.dedent(f"""\
-    trtl = {val}
-    try:
-      trtl = {type}(trtl)
-    except ValueError:
-      raise Exception(f'While running your program the command <span class="command-highlighted">{command_text}</span> received the value <span class="command-highlighted">{{trtl}}</span> which is not allowed. Try changing the value to a number.')
-    t.{command}(min(600, trtl) if trtl > 0 else max(-600, trtl)){suffix}""")
+      trtl = {val}
+      try:
+        trtl = {type}(trtl)
+      except ValueError:
+        raise Exception(f'While running your program the command <span class="command-highlighted">{command_text}</span> received the value <span class="command-highlighted">{{trtl}}</span> which is not allowed. Try changing the value to a number.')
+      t.{command}(min(600, trtl) if trtl > 0 else max(-600, trtl)){suffix}""")
 
     @staticmethod
     def sleep_command_transpiled(val):
         return textwrap.dedent(f"""\
-      try:
-        time.sleep(int({val}))
-      except ValueError:
-        raise Exception(f'While running your program the command <span class="command-highlighted">sleep</span> received the value <span class="command-highlighted">{{{val}}}</span> which is not allowed. Try changing the value to a number.')""")
+        try:
+          time.sleep(int({val}))
+        except ValueError:
+          raise Exception(f'While running your program the command <span class="command-highlighted">sleep</span> received the value <span class="command-highlighted">{{{val}}}</span> which is not allowed. Try changing the value to a number.')""")
 
     @staticmethod
     def turtle_color_command_transpiled(val):
         return textwrap.dedent(f"""\
-    trtl = f'{val}'
-    if trtl not in ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']:
-      raise Exception(f'While running your program the command <span class="command-highlighted">color</span> received the value <span class="command-highlighted">{{trtl}}</span> which is not allowed. Try using another color.')
-    t.pencolor(trtl)""")
+      trtl = f'{val}'
+      if trtl not in ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']:
+        raise Exception(f'While running your program the command <span class="command-highlighted">color</span> received the value <span class="command-highlighted">{{trtl}}</span> which is not allowed. Try using another color.')
+      t.pencolor(trtl)""")
 
     @staticmethod
     def input_transpiled(var_name, text):
         return textwrap.dedent(f"""\
-  {var_name} = input(f'''{text}''')
-  try:
-    {var_name} = int({var_name})
-  except ValueError:
+    {var_name} = input(f'''{text}''')
     try:
-      {var_name} = float({var_name})
+      {var_name} = int({var_name})
     except ValueError:
-      pass""")
+      try:
+        {var_name} = float({var_name})
+      except ValueError:
+        pass""")
 
     @staticmethod
     def remove_transpiled(list_name, value):
         return textwrap.dedent(f"""\
-    try:
-      {list_name}.remove({value})
-    except:
-      pass""")
+      try:
+        {list_name}.remove({value})
+      except:
+        pass""")
 
     # Used to overcome indentation issues when the above code is inserted
     # in test cases which use different indentation style (e.g. 2 or 4 spaces)
@@ -304,6 +304,15 @@ class HedyTester(unittest.TestCase):
     def dedent(*args):
         return '\n'.join([textwrap.indent(textwrap.dedent(a[0]), a[1]) if isinstance(a, tuple) else textwrap.dedent(a)
                           for a in args])
+
+    @staticmethod
+    def indent(code, spaces_amount=2, skip_first_line=False):
+        lines = code.split('\n')
+
+        if not skip_first_line:
+            return '\n'.join([' ' * spaces_amount + line for line in lines])
+        else:
+            return lines[0] + '\n' + '\n'.join([' ' * spaces_amount + line for line in lines[1::]])
 
     @staticmethod
     def translate_keywords_in_snippets(snippets):

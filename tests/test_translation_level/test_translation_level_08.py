@@ -115,12 +115,12 @@ class TestsTranslationLevel8(HedyTester):
 
         self.assertEqual(code, result)
 
-    @parameterized.expand([('en', 'is'), ('es', 'es'), ('es', 'is'), ('en', '='), ('es', '=')])
+    @parameterized.expand([('es', 'es'), ('es', 'is'), ('en', '='), ('es', '='), ('en', 'is')])
     def test_equality_type_error_translates_command(self, lang, is_):
         code = textwrap.dedent(f"""\
-            letters is a, b, c
-            if letters {is_} '10'
-                print 'wrong!'""")
+        letters is a, b, c
+        if letters {is_} '10'
+            print 'wrong!'""")
 
         self.multi_level_tester(
             lang=lang,

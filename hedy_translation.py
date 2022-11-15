@@ -99,13 +99,12 @@ def translate_keywords(input_string_, from_lang="en", to_lang="nl", level=1):
                 replaced_line = replace_token_in_line(line, rule, original, target)
                 result = replace_line(lines, rule.line - 1, replaced_line)
 
-        # For now the needed post processing is only removing the 'end-block's
-        # added during pre-processing
-        result = '\n'.join([line for line in result.splitlines()
-                           if not line.startswith('end-block')])
+        # For now the needed post processing is only removing the 'end-block's added during pre-processing
+        result = '\n'.join([line for line in result.splitlines()])
+        result = result.replace('#ENDBLOCK', '')
 
         return result
-    except BaseException:
+    except Exception:
         return input_string_
 
 
@@ -311,6 +310,9 @@ class Translator(Visitor):
     def input_empty_brackets(self, tree):
         self.add_rule('_IS', 'is', tree)
         self.add_rule('_INPUT', 'input', tree)
+
+    def pressed(self, tree):
+        self.add_rule('_PRESSED', 'pressed', tree)
 
     def add_rule(self, token_name, token_keyword, tree):
         token = self.get_keyword_token(token_name, tree)

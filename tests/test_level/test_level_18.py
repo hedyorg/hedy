@@ -190,7 +190,6 @@ class TestsLevel18(HedyTester):
           time.sleep(0.1)""")
 
         self.multi_level_tester(
-
             code=code,
             expected=expected,
             extra_check_function=self.is_not_turtle()

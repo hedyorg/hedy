@@ -431,3 +431,136 @@ class TestsLevel17(HedyTester):
             code=code,
             exception=exceptions.InvalidTypeCombinationException
         )
+
+    #
+    # if pressed turtle tests
+    #
+    def test_if_pressed_repeat_multiple_x_turtle_move(self):
+        code = textwrap.dedent("""\
+      repeat 10 times
+          if w is pressed:
+              forward 25
+          if a is pressed:
+              turn -90
+          if d is pressed:
+              turn 90
+          if s is pressed:
+              turn 180""")
+
+        expected = HedyTester.dedent(f"""\
+      for i in range(int('10')):
+        while not pygame_end:
+          pygame.display.update()
+          event = pygame.event.wait()
+          if event.type == pygame.QUIT:
+            pygame_end = True
+            pygame.quit()
+            break
+          if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_w:
+              {HedyTester.indent(
+                HedyTester.forward_transpiled(25.0, self.level),
+                14, True)
+              }
+              break
+            if event.key == pygame.K_a:
+              {HedyTester.indent(
+                HedyTester.turn_transpiled(-90.0, self.level),
+                14, True)
+              }
+              break
+            if event.key == pygame.K_d:
+              {HedyTester.indent(
+                HedyTester.turn_transpiled(90.0, self.level),
+                14, True)
+              }
+              break
+            if event.key == pygame.K_s:
+              {HedyTester.indent(
+                HedyTester.turn_transpiled(180.0, self.level),
+                14, True)
+              }
+              break
+        time.sleep(0.1)""")
+
+        print(expected)
+
+        self.multi_level_tester(code=code, expected=expected, extra_check_function=self.is_turtle())
+
+    def test_if_pressed_with_turtlecolor(self):
+        code = textwrap.dedent("""\
+      if x is pressed:
+          color red""")
+
+        expected = HedyTester.dedent(f"""\
+      while not pygame_end:
+        pygame.display.update()
+        event = pygame.event.wait()
+        if event.type == pygame.QUIT:
+          pygame_end = True
+          pygame.quit()
+          break
+        if event.type == pygame.KEYDOWN:
+          if event.key == pygame.K_x:
+            {HedyTester.indent(
+              HedyTester.turtle_color_command_transpiled('red'),
+              12, True)
+            }
+            break""")
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            extra_check_function=self.is_turtle()
+        )
+
+    def test_if_pressed_else_with_turtle(self):
+        self.maxDiff = None
+        code = textwrap.dedent("""\
+      if x is pressed:
+          forward 25
+      else:
+          turn 90""")
+
+        expected = HedyTester.dedent(f"""\
+      while not pygame_end:
+        pygame.display.update()
+        event = pygame.event.wait()
+        if event.type == pygame.QUIT:
+          pygame_end = True
+          pygame.quit()
+          break
+        if event.type == pygame.KEYDOWN:
+          if event.key == pygame.K_x:
+            {HedyTester.indent(
+              HedyTester.forward_transpiled(25.0, self.level),
+              12, True)
+            }
+            break    
+          else:
+            {HedyTester.indent(
+              HedyTester.turn_transpiled(90.0, self.level),
+              12, True)
+            }
+            break\n""") + "    "
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            extra_check_function=self.is_turtle()
+        )
+
+    #
+    # pressed negative tests
+    #
+
+    def test_if_no_colon_after_pressed_gives_parse_error(self):
+        code = textwrap.dedent("""\
+        if x is pressed
+            print 'no colon!'""")
+
+        self.single_level_tester(
+            code=code,
+            exception=hedy.exceptions.ParseException,
+            extra_check_function=lambda c: c.exception.error_location[0] == 2 and c.exception.error_location[1] == 5
+        )

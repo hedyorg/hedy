@@ -64,6 +64,8 @@ interface State {
   no_unload_prompt?: boolean;
 
   programsInExecution?: integer;
+
+  pygame_running?: boolean;
 }
 
 declare interface Window {

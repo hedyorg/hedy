@@ -38,7 +38,7 @@ from website import (ab_proxying, achievements, admin, auth_pages, aws_helpers,
                      profile, programs, querylog, quiz, statistics,
                      translating)
 from website.auth import (current_user, is_admin, is_teacher,
-                          login_user_from_token_cookie, requires_login)
+                          login_user_from_token_cookie, requires_login, requires_teacher)
 from website.log_fetcher import log_fetcher
 from website.yaml_file import YamlFile
 
@@ -394,6 +394,10 @@ def parse():
                 exception = ex
         try:
             response['Code'] = transpile_result.code
+
+            if transpile_result.has_pygame:
+                response['has_pygame'] = True
+
             if transpile_result.has_turtle:
                 response['has_turtle'] = True
         except Exception:
@@ -849,14 +853,11 @@ def tutorial_index():
 
 
 @app.route('/teacher-tutorial', methods=['GET'])
-@requires_login
+@requires_teacher
 def teacher_tutorial(user):
-    if not is_teacher(user):
-        return utils.error_page(error=403, ui_message=gettext('not_teacher'))
-
-    teacher_classes = DATABASE.get_teacher_classes(current_user()['username'], True)
+    teacher_classes = DATABASE.get_teacher_classes(user['username'], True)
     adventures = []
-    for adventure in DATABASE.get_teacher_adventures(current_user()['username']):
+    for adventure in DATABASE.get_teacher_adventures(user['username']):
         adventures.append(
             {'id': adventure.get('id'),
              'name': adventure.get('name'),

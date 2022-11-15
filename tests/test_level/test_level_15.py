@@ -68,24 +68,25 @@ class TestsLevel15(HedyTester):
         )
 
     def test_while_fr_equals(self):
+        # note to self: we need to pass in lang!!
         code = textwrap.dedent("""\
-      antwoord est 0
-      tant que antwoord != 25
-          antwoord est demande 'Wat is 5 keer 5?'
-      affiche 'Goed gedaan!'""")
+        antwoord est 0
+        tant que antwoord != 25
+            antwoord est demande 'Wat is 5 keer 5?'
+        affiche 'Goed gedaan!'""")
         expected = textwrap.dedent("""\
-    antwoord = 0
-    while convert_numerals('Latin', antwoord).zfill(100)!=convert_numerals('Latin', 25).zfill(100):
-      antwoord = input(f'''Wat is 5 keer 5?''')
-      try:
-        antwoord = int(antwoord)
-      except ValueError:
+      antwoord = 0
+      while convert_numerals('Latin', antwoord).zfill(100)!=convert_numerals('Latin', 25).zfill(100):
+        antwoord = input(f'''Wat is 5 keer 5?''')
         try:
-          antwoord = float(antwoord)
+          antwoord = int(antwoord)
         except ValueError:
-          pass
-      time.sleep(0.1)
-    print(f'''Goed gedaan!''')""")
+          try:
+            antwoord = float(antwoord)
+          except ValueError:
+            pass
+        time.sleep(0.1)
+      print(f'''Goed gedaan!''')""")
 
         self.multi_level_tester(
             code=code,
@@ -143,4 +144,44 @@ class TestsLevel15(HedyTester):
             code=code,
             max_level=15,
             exception=exceptions.NoIndentationException
+        )
+
+    #
+    # pressed with while loop tests
+    #
+
+    def test_if_pressed_works_in_while_loop(self):
+        code = textwrap.dedent("""\
+      stop is 0
+      while stop != 1
+          if p is pressed
+              print 'press'
+          if s is pressed
+              stop = 1
+      print 'Uit de loop!'""")
+
+        expected = textwrap.dedent("""\
+      stop = 0
+      while convert_numerals('Latin', stop).zfill(100)!=convert_numerals('Latin', 1).zfill(100):
+        while not pygame_end:
+          pygame.display.update()
+          event = pygame.event.wait()
+          if event.type == pygame.QUIT:
+            pygame_end = True
+            pygame.quit()
+            break
+          if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_p:
+              print(f'''press''')
+              break
+            if event.key == pygame.K_s:
+              stop = 1
+              break
+        time.sleep(0.1)
+      print(f'''Uit de loop!''')""")
+
+        self.multi_level_tester(
+            code=code,
+            max_level=16,
+            expected=expected,
         )
