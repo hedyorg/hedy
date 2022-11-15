@@ -575,8 +575,6 @@ def translate_error(code, arguments, keyword_lang):
                 # Arguments ("tip") may themsleves be patterns, making formatting necessary here
                 arguments[k] = gettext(v, **arguments)
 
-    print(arguments)
-
     error_template = gettext(code, **arguments)
     return error_template
 
