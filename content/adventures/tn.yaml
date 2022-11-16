@@ -117,6 +117,7 @@ adventures:
                 story_text: "## Make a story\nIn level 1 you can make a story with a different main character that you enter yourself.\n\nIn the first line, use `{ask}` and ask who the main character of the story will be.\n\nAfter that first line, start with `{print}` if the sentence needs to be printed.\nYou use `{echo}` if you want your main character to be at the end of the sentence.\n"
                 example_code: "```\n{ask} The main character of this story is\n{print} The main character is now going to walk in the forest\n{echo} He's a bit scared,\n{print} He hears crazy noises everywhere\n{print} He's afraid this is a haunted forest\n```\n"
                 start_code: '{print} Your story starts here'
+                story_text_2: "## Challenge\nCan you make your own story in Hedy now by using `{print}` , `{ask}` and `{echo}`?\n"
             2:
                 story_text: "## Story\nIn level 2 you can make your story more fun. Your main character's name can now be anywhere in the sentence.\n\nYou do have to program a little bit extra for that. You must now name your main character first.\n\nYou can then put that name anywhere in a sentence.\n"
                 example_code: "```\nname {is} {ask} What is the name of the main character?\n{print} name is now going to run in the woods\n{print} name is a bit scared\n{print} Suddenly he hears a crazy noise...\n{sleep}\n{print} name is afraid this is a haunted forest\n```"
@@ -175,6 +176,8 @@ adventures:
                 example_code: "```\n{print} Im Hedy the parrot\nname {is} {ask} whats your name?\n{print} name\n{sleep}\n{print} squawk\n{sleep}\n{print} name\n```\n"
                 start_code: '{print} Im Hedy the parrot!'
                 story_text: "## Parrot\nCreate your own online pet parrot that will copy you!\n"
+                story_text_2: "## Challenge\nYou can use variables to make the parrot say more than only your name. Can you complete this code?\n"
+                example_code_2: "```\n{print} Im Hedy the parrot\nname {is} {ask} whats your name?\n{print} name\n{sleep}\n{print} name\nsurname {is} {ask} whats your surname?\n_\n{sleep}\n_\n```\n"
             3:
                 story_text: "## Parrot\nTeach your parrot a new word with `{add}`.\n"
                 example_code: "```\nwords {is} squawk, Hedy\n{print} Train your parrot!\nnew_word {is} {ask} Which word do you want to teach them?\n{add} new_word {to_list} words\n{print} \U0001F9D2 Say new_word , Hedy!\n{print} \U0001F99C words {at} {random}\n```\n"
@@ -183,6 +186,8 @@ adventures:
                 story_text: "## Parrot\nCreate your own online pet parrot that will copy you!\n"
                 example_code: "```\n{print} Im Hedy the parrot\n{ask} whats your name?\n{echo}\n{echo}\n```\n"
                 start_code: '{print} Im Hedy the parrot'
+                example_code_2: "```\n{print} Im Hedy the parrot\n{ask} _\n{echo}\n{echo}\n"
+                story_text_2: "## Challenge\nCan you make the parrot ask a different question? Fill in the blanks in the example!\n"
             5:
                 story_text: "## Parrot\nReward your parrot if it says the correct word!\n"
                 start_code: '# place your code here'
@@ -196,6 +201,8 @@ adventures:
                 start_code: "{print} 'Baby shark'"
                 story_text: "## Songs\nSongs often contain a lot of repetition. Sometimes the repetition is also based on counting.\nFor example, in the well-known song 'Bottles of beer'. You can program that song with a little math.\n"
                 example_code: "```\nverse = 99\n{print} verse ' bottles of beer on the wall'\n{print} verse ' bottles of beer'\n{print} 'Take one down, pass it around'\nverse = verse - 1\n{print} verse ' bottles of beer on the wall'\n```\n\nYou can now repeat lines 2 to 9 as many times as you want by copying the lines.\n"
+                story_text_2: "## 5 Little Monkeys jumping on the bed\nThis children's song counts down from 5 little monkeys to 1 monkey.\nIf you copy line 2 - 7 and paste it under the the code, you can sing the whole song!\n"
+                example_code_2: "```\nnumber = 6\nnumber = number - 1\nprint number ' little monkeys jumping on the bed'\nprint 'One fell off and bumped his head'\nprint 'Mama called the doctor and the doctor said'\nprint 'NO MORE MONKEYS JUMPING ON THE BED!'\nsleep\n```\n"
             7:
                 start_code: "{print} 'Baby Shark'"
                 example_code: "```\n{repeat} _ _ {print} 'Baby Shark tututudutudu'\n{print} 'Baby Shark'\n```\n\nAfter Baby Shark you can of course also program other songs. There are many songs with repetition.\n"
@@ -306,6 +313,8 @@ adventures:
                 story_text: "## Dice\nIn this level we can choose from a list. With that we can let the computer choose one side of the die.\nTake a look at the games you have in your closet at home.\nAre there games with a (special) die? You can also copy it with this code.\nFor example, the dice of the game Earthworms with the numbers 1 to 5 and an earthworm on it.\n\n![Die of earthworms with 1 to 5 and an earthworm on it](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)\n"
                 example_code: "```\nchoices {is} 1, 2, 3, 4, 5, earthworm\n{print} choices {at} {random}\n```\n"
                 start_code: '{print} What will the die indicate this time?'
+                example_code_2: "```\nchoices {is} _\n```\n"
+                story_text_2: "## Challenge\nThe dice in the example above are dice for a specific game. Can you make normal dice?\nOr other special dice from a different game?\n"
             7:
                 start_code: "{print} 'What will the die indicate this time?'"
                 story_text: "## Dice\nYou can also make a die again in level 5. With the `{repeat}` code you can easily roll a whole hand of dice.\nTry to finish the sample code! The dashes should contain multiple commands and characters.\n\nBut maybe you want to make a completely different die. Of course you can!\n"
@@ -356,6 +365,8 @@ adventures:
                 story_text: "## Rock, paper, scissors\nIn level 1 you can start with a rock, paper, scissors  game.\n\nWith `{ask}` you can make a choice, and with `{echo}` you can repeat that choice.\n"
                 example_code: "```\n{print} what do you choose?\n{ask} choose from rock, paper or scissors\n{echo} so your choice was:\n```\nInstead of using words, you could also use emojis of course: ✊✋✌\n"
                 start_code: '{print} Welcome to your own rock scissors paper!'
+                story_text_2: "## Challenge\nInstead of using words, you could also use emojis: ✊✋✌\nCan you create a code using emojis?\n"
+                example_code_2: "```\n{print} what do you choose?\n{ask} choose from _\n{echo} so your choice was:\n```\n"
             2:
                 story_text: "## Rock, paper, scissors\nIn this level you can practise using the variables, so that you can make the rock, paper, scissors game in the next level!\n"
                 start_code: '# place your code here'
@@ -364,6 +375,8 @@ adventures:
                 story_text: "## Rock, paper, scissors\n\nIn this level we can enter lists and choose things from them.\nYou first make a list with `{is}`. Then you can let the computer choose something from the list with `{at} {random}`.\nFor example, you can let the computer pick from rock, paper and scissors.\n"
                 example_code: "```\nchoices {is} rock, paper, scissors\n{print} choices {at} {random}\n```\n"
                 start_code: '{print} Welcome to your own rock scissors paper!'
+                story_text_2: "## Challenge\nNow you only have one player, so can you add a second player?\nYou can even use variables to name player 1 and player 2.\n"
+                example_code_2: "```\nchoices {is} rock, paper, scissors\n{print} player 1 chooses... choices {at} {random}\n{print} player 2 _\n```\n"
             4:
                 story_text: "## Rock, paper, scissors\nIn this level we can further program rock, paper, scissors. But {if} you want to add text, you have to use quotation marks here too.\nDo you complete the code by entering the correct commands or characters on the underscores?\n"
                 example_code: "```\nchoices {is} rock, paper, scissors\n{print} _ The computer chose: _ _ {at} _\n```\n"
@@ -389,6 +402,8 @@ adventures:
                 story_text_2: "## Random numbers\nYou can also let the computer do random sums on its own using random.\nThis is how you choose a number of tables to practice, and from that you always get a different sum:\n"
                 example_code_2: "```\ntables = 4, 5, 6, 8\nnumbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\ntable = tables {at} {random}\nnumber = numbers {at} {random}\ncorrect_answer = table * number\nanswer = {ask} 'how much is ' table ' times ' number '?'\n{if} answer {is} correct_answer {print} 'okay'\n{else} {print} 'mistake! it was ' correct_answer\n```\n"
                 start_code: "{print} 'Welcome to this calculator!'"
+                story_text_3: "## Random numbers\nYou can also let the computer do random sums on its own using random.\nThis is how you choose a number of tables to practice, and from that you always get a different sum:\n"
+                example_code_3: "```\ntables = 4, 5, 6, 8\nnumbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\ntable = tables {at} {random}\nnumber = numbers {at} {random}\ncorrect_answer = table * number\nanswer = {ask} 'how much is ' table ' times ' number '?'\n{if} answer {is} correct_answer {print} 'okay'\n{else} {print} 'mistake! it was ' correct_answer\n```\n"
             9:
                 story_text: "## Calculator\nIn previous levels you've learned how to make a calculator, in this level you can expand that code and make it into a little maths game. Like this...\n"
                 example_code: "```\nscore = 0\n{repeat} 10 {times}\n    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    number1 = numbers {at} {random}\n    number2 = numbers {at} {random}\n    correct_answer = number1 * number2\n    {print} 'What is ' number1 ' times ' number2 '?'\n    answer = {ask} 'Type your answer here...'\n    {print} 'Your answer is' answer\n    {if} answer {is} correct_answer\n        score = score + 1\n{print} 'Great job! Your score is... ' score ' out of 10!'\n```\n"
@@ -411,6 +426,8 @@ adventures:
                 story_text: "## Restaurant\nIn level 2 you could expand your restaurant by using variables. In level 1 Hedy could only {echo} the order once and only remember the last thing that was ordered.\nNow you can use variables and Hedy can remember both the food and the drinks!\n"
                 example_code: "```\n{print} Welcome to Hedy's restaurant!\n{print} Today we're serving pizza or lasagna.\nfood {is} {ask} What would you like to eat?\n{print} Great choice! The food is my favorite!\ntopping {is} {ask} Would you like meat or veggies on that?\n{print} food with topping is on its way!\ndrinks {is} {ask} What would you like to drink with that?\n{print} Thank you for your order.\n{print} Your food and drinks will be right there!\n```\n"
                 start_code: '# place your code here'
+                story_text_2: "## Challenge\nCan you make this code more elaborate? For example by adding drinks to the order? Or...?\n"
+                example_code_2: "```\n{print} Welcome to Hedy's restaurant!\n{print} Today we're serving pizza or lasagna.\nfood {is} {ask} What would you like to eat?\n{print} Great choice! The food is my favorite!\ntopping {is} {ask} Would you like meat or veggies on that?\n{print} food with topping is on its way!\ndrinks {is} _\n```\n"
             6:
                 start_code: '# place your code here'
                 example_code: "\nYou can make a simple restaurant code, like this:\n```\n{print} 'Welcome to Hedys restaurant'\n{print} 'Here is our menu:'\n{print} 'Our main courses are pizza, lasagne, or spaghetti'\nmain = {ask} 'Which main course would you like?'\nprice = 0\n{if} main {is} pizza price = 10\n{if} main {is} lasagne price = 12\n{if} main {is} spaghetti price = 8\n{print} 'You have ordered ' main\n{print} 'That will be ' price ' dollars, please'\n{print} 'Thank you, enjoy your meal!'\n```\n"
@@ -540,11 +557,15 @@ adventures:
                 example_code: "```\nmonster_1 {is} \U0001F47B\nmonster_2 {is} \U0001F921\nmonster_3 {is} \U0001F476\n{print} You enter the haunted house.\n{print} Suddenly you see a monster_1\n{print} You run into the other room, but a monster_2 is waiting there for you!\n{print} Oh no! Quickly get to the kitchen.\n{print} But as you enter monster_3 attacks you!\n```\n"
                 start_code: monster1 {is} _
                 story_text: "## Haunted House\nIn this haunted house you can choose your monsters with emojis. Of course you could also use words.\n"
+                story_text_2: "## Challenge\nIn the example above the monsters are predetermined. So each time you run your code, the output is the same.\nCan you add `{ask}` commands to make the haunted house interactive and have the players choose the monsters they come across?\n"
+                example_code_2: "```\nmonster_1 {is} _\nmonster_2 {is} _\nmonster_3 {is} _\n{print} You enter the haunted house.\n{print} Suddenly you see a monster_1\n{print} You run into the other room, but a monster_2 is waiting there for you!\n{print} Oh no! Quickly get to the kitchen.\n{print} But as you enter monster_3 attacks you!\n```\n"
             3:
                 story_text_2: "## Challenge\nThis story is pretty straight {forward}, maybe you can spook it up a bit by adding a more exciting story.\nAlso you have very limited outcomes right now, there are only 3 options of what's behind the doors. Maybe you can think of more monsters to add to the list!\n\n## Change the game into a tv gameshow!\nLastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!\nCan you do it?\n"
                 start_code: '# place your code here'
                 story_text: "## Haunted house game\nIn the previous levels you've made an introduction to your haunted house game, but as you might have noticed the story would always have a dreadful end.\nIn this level you can make your story more interactive by changing the outcome of the game; sometimes you'll get eaten, sometimes you'll escape!\nLet Hedy decide randomly!\n"
                 example_code: "```\n{print} Escape from the haunted house!\n{print} There are 3 doors in front of you...\nchoice {is} {ask} Which door do you choose?\n{print} You picked door ... choice\nmonsters {is} a zombie, a vampire, NOTHING YOUVE ESCAPED\n{print} You see...\n{sleep}\n{print} monsters {at} {random}\n```\n"
+                example_code_3: "```\n{print} The big gameshow!\n{print} There are 3 suitcases in front of you...\n{print} One of them contains _\n_\n```\n"
+                story_text_3: "## Change the game into a tv gameshow!\nLastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!\nCan you do it?\n"
             5:
                 start_code: '# place your code here'
                 story_text: "## Haunted House\nUp until this level the haunted house game always asked the player to choose a door, but as you might have noticed, they didn't really have to answer correctly.\nIf the player filled in a completely random answer, the game would still work and the player might even win (despite not picking a door).\nIn this level you can only win the game by picking the same door Hedy picked randomly.\n"
