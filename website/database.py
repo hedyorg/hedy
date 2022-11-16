@@ -270,26 +270,37 @@ class Database:
         # If it's a class, only get the ones from your class
         elif filter == "class":
             Class = self.get_class(filter_value)
+            customizations = self.get_class_customizations(Class.get('id'))
             for student in Class.get('students', []):
                 profile = self.get_public_profile_settings(student)
                 if profile:
                     profiles.append(profile)
+                # If the user doesn't have a public profile the situation depends on the customizations
+                # If the teacher has allowed the "all public" function -> add dummy profile to make all visible
+                # Give the profile an extra attribute to clarify we don't update any non-existing public-profile
+                elif customizations and 'all_highscores' in customizations.get('other_settings', []):
+                    profiles.append({'username': student, 'no_public_profile': True})
 
         for profile in profiles:
             if not profile.get('country'):
-                # This seems to crash on production even if it shouldn't (all profiles should have a username)
-                # To be sure, surround with a try catch
                 try:
                     country = self.user_by_username(profile.get('username')).get('country')
-                    self.update_country_public_profile(profile.get('username'), country)
+                    if not profile.get('no_public_profile'):
+                        self.update_country_public_profile(profile.get('username'), country)
                 except AttributeError:
                     print("This profile username is invalid...")
                     country = None
                 profile['country'] = country
             if not profile.get('achievements'):
                 achievements = self.achievements_by_username(profile.get('username'))
-                self.update_achievements_public_profile(profile.get('username'), len(achievements) or 0)
-                profile['achievements'] = len(achievements) or 0
+                if not profile.get('no_public_profile'):
+                    self.update_achievements_public_profile(profile.get('username'), len(achievements) or 0)
+                else:
+                    # As the last achievement timestamp is stored on the public profile -> create an artificial one
+                    # We don't have a choice, otherwise the double sorting below will crash
+                    # Todo TB -> Store last achievement on achievements data instead of public profile data (11-11-22)
+                    profile['last_achievement'] = timems()
+                profile['achievements'] = len(achievements) if achievements else 0
 
         # If we filter on country, make sure to filter out all non-country values
         if filter == "country":
