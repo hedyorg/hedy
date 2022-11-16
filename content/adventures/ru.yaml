@@ -85,7 +85,7 @@ adventures:
 
             5:
                 start_code: "имя {is} {ask} 'как тебя зовут?'\n{if} имя {is} Хеди {print} 'круто!' {else} {print} 'meh'"
-                story_text: "## If... else....\nIn level 5 there is something new, the `{if}`! With the `{if}` you can choose between two different options.\nThis code prints nice if you enter Hedy as a name, and boo! if you enter something else.\n`{ask}` {and} `{print}` still work like they did in level 4.\n"
+                story_text: "## If... else....\nНа 5 уровне есть что-то новенькое, `{if}`! С помощью `{if}` ты можешь выбирать между двумя разными опциями.\nЭтот код выводит \"nice\" если ты введешь \"Hedy\" в качестве имени, а если ты введешь что-либо другое, выведется \"boo!\".\n`{ask}` {и} `{print}` работают также, как они работали на 4 уровне.\n"
                 example_code: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'\n```\n"
                 story_text_3: "## Lists\nWhen we want to check if something is in a list, we can now use the `{in}` command.\nThis code prints pretty! if you choose green or yellow, and meh otherwise.\n"
                 example_code_3: "```\npretty_colors {is} green, yellow\ncolor {is} {ask} 'What is your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!'\n{else} {print} 'meh'\n```\n"
