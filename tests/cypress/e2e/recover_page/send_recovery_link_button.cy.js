@@ -5,9 +5,8 @@ describe('Send recovery link button test', () => {
     goToRecover();
 
     // Tests send recovery link button type and visibility
-    cy.get('button[class*="green-btn mt-2"]')
+    cy.get('#send_recovery_button')
       .should('be.visible')
       .should('have.attr', 'type', 'submit')
-      .contains('Send me a password recovery link');
   })
 })
