@@ -6,15 +6,12 @@ adventures:
         levels:
             1:
                 story_text: |
-                    ¡Bienvenido a Hedy! En el Nivel 1 puedes usar los comandos `{print}`,` {ask}` y `{echo}`.
+                    ## ¡Bienvenido/a a Hedy!
+                    En el Nivel 1 puedes usar los comandos `{print}`,`{ask}` y `{echo}`.
+                    Escribe tu código en el panel de programación o presiona el botón verde en los bloques de ejemplo y ¡el código se escribirá automáticamente!
+                    Prueba el código con el botón verde 'Ejecutar código' debajo del espacio de programación de la izquierdo.
 
-                    En el lado izquierdo de tu pantalla están todos los comandos del Nivel 1.
-
-                    ¡Presiona el botón azul y el código será escrito automáticamente!
-
-                    Prueba el código con el botón verde 'Ejecutar código' debajo del espacio de programación de la izquierda.
-
-                    ¿No sabes qué crear? En las siguientes pestañas encontrarás algunas ideas en las que inspirarte.
+                    Puedes mostrar texto por pantalla usando el comando `{print}`.     
                 start_code: "{print} hola mundo!"
                 example_code: "```\n{print} Hola!\n{print} Bienvenido a Hedy!\n```\n"
                 story_text_2: "También puedes solicitar  entrada y repetirla usando el comando`{echo}`.\nPrueba el código a tu izquierda de nuevo.\n\n¿No sabes qué crear? En las siguientes pestañas vas a encontrar ideas de programas para construir.\n"
@@ -72,21 +69,10 @@ adventures:
                     nombre {is} {ask} '¿Cómo te llamas?'
                     {if} nombre {is} Hedy {print} '¡genial!' {else} {print} 'meh'
                 story_text: |
+                    ## If... else...
+                    En el nivel 5 hay una novedad, ¡el `{if}`! `if` significa si en inglés. Con el `{if}` puedes elegir entre dos opciones.
+                    El siguiente código muestra por pantalla bien si introduces el nombre Hedy sino mostrará buu.
                     `{ask}` y `{print}` siguen funcionando como en el nivel 4.
-
-                     En el nivel 5 hay algo nuevo, el `{if}`! `{if}` significa `si` en inglés. Con el `{if}` puedes elegir entre dos opciones.
-
-                     ## Ejemplo de código Hedy
-                     ```
-                     nombre {is} {ask} '¿Cómo te llamas?'
-                     {if} nombre {is} Hedy {print} 'bien' {else} {print} 'buu'
-                     ```
-
-                     Este código imprime bien si introduces Hedy como nombre, y buu si introduces algo distinto.
-
-                     ## Las tareas son cada vez más difíciles
-
-                     También en el nivel 5, las tareas en las pestañas se vuelven cada vez más difíciles. Así que hazlas de izquierda a derecha.
                 example_code_2: "```\nnombre {is} {ask} '¿Cuál es tu nombre?'\n{if} nombre {is} Hedy {print} 'bien'\n{else} {print} '¡buuu!'\n```\n"
                 story_text_3: "## Listas\nCuando queremos comprobar si algo está en una lista, podemos usar el comando `{in}`.\nEste código imprime ¡bonito! si se elige el verde o el amarillo, y meh en caso contrario.\n"
                 example_code: "```\nnombre {is} {ask} '¿Cuál es tu nombre?'\n{if} nombre {is} Hedy {print} 'bien' {else} {print} 'buu'\n```\n"
@@ -95,19 +81,13 @@ adventures:
             6:
                 start_code: "{print} '5 veces 5 es ' 5 * 5"
                 story_text: |
-                    `{ask}`,` {print}` y `{if}` siguen funcionando como en los niveles 5.
-                     Pero en el nivel 6 hay algo nuevo, ahora también puedes calcular.
+                    ## 1 + 1
+                    En este nivel aprenderás algo nuevo: ahora puedes hacer cálculos.
 
-                     El signo más es fácil, lo escribes como en las matemáticas: `5 + 5` por ejemplo. El signo menos también funciona: `5 - 5`.
+                    La suma es fácil, se escribe igual que en matemáticas, por ejemplo `5+5`. Las restas también `5-5`
 
-                     La multiplicación es un poco diferente, ya que no hay signo de multiplicación en el teclado. ¡Búscalo, verás que no lo hay!
-                     Es por eso que usamos el asterisco para multiplicar: `5 * 5`. Lee esto como "5 veces 5", entonces lo recordarás con mayor facilidad.
-                     ## Ejemplo de código Hedy
-                     ```
-                     {print} '5 más 5 es ' 5 + 5
-                     {print} '5 menos 5 es ' 5 - 5
-                     {print} '5 multiplicado por 5 es ' 5 * 5
-                     ```
+                    La multiplicación es un poco diferente, porque el símbolo multiplicar no está en tu teclado, busca, ¡no existe!
+                    Por esa razón utilizamos el símbolo asterisco, al lado del enter: `5*5`. Léelo como "5 veces 5" y te ayudará a recordarlo mejor.
                 example_code: "```\n{print} '5 más 5 es ' 5 + 5\n{print} '5 menos 5 es ' 5 - 5\n{print} '5 veces 5 es ' 5 * 5\n```\n"
                 story_text_2: "¡También cambiamos cómo se guarda una palabra en una variable! Ahora se puede utilizar `=` en lugar de `{is}` cuando guardamos un nombre o un número en una variable, así:\n"
                 example_code_2: "```\nnombre = Hedy\nrespuesta = 20 + 4\n```\n"
@@ -162,7 +142,7 @@ adventures:
                 start_code: "{for} contador {in} {range} 1 {to} 5\n    {print} contador"
                 story_text: '## Bucles
 
-                    `{print}` funciona igual pero añadimos una nueva forma del `{for}`. Ahora puedes escribir `{for} contador {in} {range} 1 {to} 5` y utilizar `contador` en tu programa.
+                    `{print}` funciona igual pero añadimos una nueva forma del `{for}`. Ahora puedes escribir `{for} contador {in} {range} 1 {to} 5` en vez de `{repeat}5 {times}` y utilizar `contador` en tu programa.
 
                     Pruébalo para ver qué pasa. Recuerda usar indentaciones después de las instrucciones `{for}` y `{if}` (Eso significa empezar una línea con cuatro espacios)'
                 example_code: "```\nfor counter in range 1 to 5\n    print counter\n```\n"
