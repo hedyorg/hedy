@@ -967,7 +967,6 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
   outputDiv.append(variables);
 
   const storage = window.localStorage;
-  const codeContainsInputFunction = new RegExp("input\\(.+\\)").test(code);
   let skulptExternalLibraries:{[index: string]:any} = {};
   let debug = storage.getItem("debugLine");
 
@@ -1044,7 +1043,11 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
     initSkulpt4Pygame();
     initCanvas4PyGame();
 
-    if (!hasTurtle && !codeContainsInputFunction) {
+    const codeContainsInputFunctionBeforePygame = new RegExp(
+      "input\\([\\s\\S]*\\)[\\s\\S]*pygame_end", 'gm'
+    ).test(code);
+
+    if (!hasTurtle && !codeContainsInputFunctionBeforePygame) {
       $('#inline-modal .pygame-modal').show();
     }
 
