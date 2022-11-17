@@ -1043,7 +1043,7 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
     initSkulpt4Pygame();
     initCanvas4PyGame();
 
-    if (!hasTurtle) {
+    if (!hasTurtle && !code.includes("input")) {
       $('#inline-modal .pygame-modal').show();
     }
 
