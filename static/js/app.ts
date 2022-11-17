@@ -199,7 +199,7 @@ $(document).on("click", function(event){
           stopit();
           editor.focus(); // Make sure the editor has focus, so we can continue typing
         }
-        if ($('#inline-modal').is (':visible')) $('#inline-modal').hide();
+        if ($('#inline-modal .ask-modal').is (':visible')) $('#inline-modal').hide();
         window.State.disable_run = false;
         $ ('#runit').css('background-color', '');
         window.State.unsaved_changes = true;
@@ -321,6 +321,8 @@ export function stopit() {
       Sk.unbindPygameListeners();
 
       window.State.pygame_running = false;
+      document.onkeydown = null;
+      $('#inline-modal .pygame-modal').hide();
       $('#stopit').hide();
       $('#runit').show();
   }
@@ -334,9 +336,9 @@ export function stopit() {
 
       // This gets a bit complex: if we do have some input modal waiting, fake submit it and hide it
       // This way the Promise is no longer "waiting" and can no longer mess with our next program
-      if ($('#inline-modal').is(":visible")) {
-        $('#inline-modal form').submit();
-        $('#inline-modal').hide();
+      if ($('#inline-modal .ask-modal').is(":visible")) {
+        $('#inline-modal .ask-modal form').submit();
+        $('#inline-modal .ask-modal').hide();
       }
   }
 
@@ -1041,6 +1043,11 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
     initSkulpt4Pygame();
     initCanvas4PyGame();
 
+    if (!hasTurtle) {
+      $('#inline-modal .pygame-modal').show();
+    }
+
+    document.onkeydown = animateKeys;
     window.State.pygame_running = true;
   }
 
@@ -1095,6 +1102,12 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
     load_variables(pythonVariables);
     $('#stopit').hide();
     $('#runit').show();
+
+    if (hasPygame) {
+      document.onkeydown = null;
+      $('#inline-modal .pygame-modal').hide();
+    }
+
     if (hasTurtle) {
       $('#saveFiles').show();
     }
@@ -1189,8 +1202,8 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
     return new Promise(function(ok) {
       window.State.disable_run = true;
 
-      const input = $('#inline-modal input[type="text"]');
-      $('#inline-modal .caption').text(prompt);
+      const input = $('#inline-modal .ask-modal input[type="text"]');
+      $('#inline-modal .ask-modal .caption').text(prompt);
       input.val('');
       input.attr('placeholder', prompt);
       speak(prompt)
@@ -1198,10 +1211,10 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
       setTimeout(function() {
         input.focus();
       }, 0);
-      $('#inline-modal form').one('submit', function(event) {
+      $('#inline-modal .ask-modal form').one('submit', function(event) {
         window.State.disable_run = false;
         event.preventDefault();
-        $('#inline-modal').hide();
+        $('#inline-modal .ask-modal').hide();
         if (hasTurtle) {
           $('#turtlecanvas').show();
         }
@@ -1223,7 +1236,9 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
 
           return false;
         });
-        $('#inline-modal').show();
+        document.onkeydown = null;
+        $('#inline-modal .pygame-modal').hide();
+        $('#inline-modal .ask-modal').show();
       });
     } else {
       return new Promise(function (ok) {
@@ -1249,6 +1264,41 @@ function resetTurtleTarget() {
     }
 
     return null;
+}
+
+function animateKeys(event: KeyboardEvent) {
+    const keyColors = ['#cbd5e0', '#bee3f8', '#4299e1', '#ff617b', '#ae81ea', '#68d391'];
+    const output = document.getElementById("output");
+
+    if (output !== null) {
+      let keyElement = document.createElement('div');
+      output.appendChild(keyElement);
+
+      keyElement.style.position = 'absolute';
+      keyElement.style.fontFamily = `system-ui,
+      -apple-system,BlinkMacSystemFont,
+      "Segoe UI",Roboto,
+      "Helvetica Neue",
+      Arial,"Noto Sans",
+      sans-serif,"Apple Color Emoji",
+      "Segoe UI Emoji","Segoe UI Symbol",
+      "Noto Color Emoji"`
+
+      keyElement.style.right = '20px';
+      keyElement.style.bottom = '10px';
+      keyElement.textContent = event.key;
+      keyElement.style.color = keyColors[Math.floor(Math.random() * keyColors.length)];
+
+      keyElement.style.transition = 'all 1.0s linear 0s';
+      keyElement.style.right = '15px';
+      keyElement.style.bottom = keyElement.offsetTop + 10 + 'px';
+      keyElement.style.fontSize = '50px';
+      keyElement.style.opacity = '0';
+
+      setTimeout(function () {
+        keyElement.remove()
+      }, 1000);
+    }
 }
 
 function initCanvas4PyGame() {
