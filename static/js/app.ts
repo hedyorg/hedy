@@ -1044,7 +1044,7 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
     initCanvas4PyGame();
 
     const codeContainsInputFunctionBeforePygame = new RegExp(
-      "input\\([\\s\\S]*\\)[\\s\\S]*pygame_end", 'gm'
+      "input\\([\\s\\S]*\\)[\\s\\S]*while not pygame_end", 'gm'
     ).test(code);
 
     if (!hasTurtle && !codeContainsInputFunctionBeforePygame) {
