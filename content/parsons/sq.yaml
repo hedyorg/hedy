@@ -2,53 +2,53 @@ levels:
     1:
         2:
             code_lines:
-                C: '{ask} What song would you like to hear?'
-                A: '{print} This is DJ Hedy'
-                B: '{ask} Are you ready to party?'
-                D: '{echo} Great choice! I love'
-            story: "You're at the DJ Booth requesting a song. Create a program that asks if you are ready to party and then asks which song you would like to hear.\n"
+                C: '{ask} Çfarë kënge dëshironi të dëgjoni?'
+                A: '{print} Ky është DJ Hedy'
+                B: '{ask} A jeni gati për festë?'
+                D: '{echo} Zgjedhje e shkëlqyer! Unë dua'
+            story: "Jeni tek tavolina e DJ duke kërkuar një këngë. Krijoni një program që ju pyet nëse jeni gati për të festuar dhe më pas pyet se cilën këngë dëshironi të dëgjoni.\n"
         1:
-            story: "You're a customer at bakery Hedy.\nYou want into the bakery and are welcomed by the baker.\nHe asks what type of pie you want to order.\nNext, your order is being prepared.\n"
+            story: "Ju jeni një klient në furrën Hedy.\nJu dëshironi të hyni në furrë dhe jeni të mirëpritur nga bukëpjekësi.\nAi pyet se çfarë lloj byreku doni të porosisni.\nMë pas, porosia juaj është duke u përgatitur.\n"
             code_lines:
-                A: '{print} Welcome to bakery Hedy!'
-                B: '{ask} What type of pie do you want to order?'
-                C: '{echo} So you want'
-                D: '{print} Your order is being prepared!'
+                A: '{print} Mirë se vini në furrën e bukës Hedy!'
+                B: '{ask} Çfarë lloj byreku dëshironi të porosisni?'
+                C: '{echo} Pra, ju dëshironi'
+                D: '{print} Porosia juaj po përgatitet!'
     2:
         1:
-            story: "You and your friends are going to watch some Netflix.\nShow which movie you're about to watch and wish the viewers lot of fun!\n"
+            story: "Ju dhe miqtë tuaj do të shikoni disa Netflix.\nTrego se cilin film do të shikosh dhe uroj shikuesve shumë argëtim!\n"
             code_lines:
-                A: '{print} It is time for an evening of Netflix'
-                B: film {is} Sonic the Hedgehog 2
-                C: "{print} We're going to film"
-                D: '{print} Have lot of fun!'
+                A: '{print} Është koha për një mbrëmje të Netflix'
+                B: filmi {is} Sonic the Hedgehog 2
+                C: "{print} Ne do të filmojmë"
+                D: '{print} Argëtohu shumë!'
         2:
-            story: "This is the webshop of a toy store. Create a program where costumers can add an item to their shopping cart.\n"
+            story: "Ky është dyqani në internet i një dyqani lodrash. Krijo një program ku klientët mund të shtojnë një artikull në karrocën e tyre të blerjeve.\n"
             code_lines:
-                A: '{print} Welcome to our toystore'
-                B: toy {is} {ask} What would you like to buy?
-                C: '{print} The toy is added to your shopping cart.'
-                D: '{print} Thank you for shopping with us!'
+                A: '{print} Mirë se vini në dyqanin tonë të lodrave'
+                B: lodër {is} {ask} Çfarë dëshironi të blini?
+                C: '{print} Lodra është shtuar në shportën tuaj të blerjeve.'
+                D: '{print} Faleminderit për blerjet me ne!'
     3:
         1:
-            story: "The new school year at Hogwarts is starting! \nIt is the job of the sorting hat to sort you into one of the houses.\nWhich house will you be sorted into?\nAre you a Gryffindor, Hufflepuf, Ravenclaw or Slytherin.\nLet the program wait a short period before revealing your house.\n"
+            story: "Viti i ri shkollor në Hogwarts po fillon!\nËshtë detyra e kapelës së renditjes që t'ju renditë në një nga shtëpitë.\nNë cilën shtëpi do të renditeni?\nA jeni një Gryffindor, Hufflepuf, Ravenclaw apo Slytherin.\nLëreni programin të presë një periudhë të shkurtër përpara se të zbulojë shtëpinë tuaj.\n"
             code_lines:
-                A: '{print} The new school year at Hogwarts is starting!'
-                B: '{print} The sorting hat is ready to sort you into a Hogwarts house.'
-                C: houses {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin
+                A: '{print} Viti i ri shkollor në Hogwarts po fillon!'
+                B: '{print} Kapela e renditjes është gati për t''ju renditur në një shtëpi në Hogwarts.'
+                C: 'houses {is} Gryffindor, Hufflepuff, Ravenclaw, Slytherin'
                 D: '{sleep} 2'
-                E: '{print} And it is houses {at} {random}'
+                E: '{print} Dhe është houses {at} {random}'
         2:
-            story: "Create a program that chooses a random meal for you. Make a list of food and a list of toppings and let the program decide what you'll have!\n"
+            story: "Krijoni një program që zgjedh një vakt të rastësishëm për ju. Bëni një listë ushqimesh dhe një listë të shtesave dhe lëreni programin të vendosë se çfarë do të keni!\n"
             code_lines:
-                A: food {is} pizza, icecream, salad, sandwich
-                B: toppings {is} chocolate, cheese, tuna, sprinkles
-                C: '{print} Your random meal for today is...'
+                A: ushqimi {is} pica, akullore, sallatë, sanduiç
+                B: majë {is} çokollatë, djathë, tuna, sprinkles
+                C: '{print} Vakti juaj i rastësishëm për sot është...'
                 D: sleep 2
-                E: '{print} food at random with toppings at random'
+                E: '{print} ushqimi {at} {random} me majë {at} {random}'
     4:
         1:
-            story: "You are the newest Pokémon trainer from Pallet Town!\nMake a program that selects your first Pokémon.\nLet the program wait a minute before revealing your first pokémon.\n"
+            story: "Ju jeni trajneri më i ri i Pokémon nga Pallet Town!\nBëni një program që zgjedh Pokemon-in tuaj të parë.\nLëreni programin të presë një minutë përpara se të zbulojë pokemonin tuaj të parë.\n"
             code_lines:
                 A: pokemons {is} Pikachu, Charmander, Bulbasaur, Squirtle
                 B: "{print} 'This is going to be your first pokémon!'"

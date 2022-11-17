@@ -1380,193 +1380,274 @@ levels:
 
     11:
         1:
-            question_text: "Quel est la ligne manquante ?"
+            question_text: "What word should be at the place of the question mark?"
             code: |-
-                compliments = parfait, bien, genial
-                _?_
-                    print compliment
+                {for} i {in} _?_ 1 {to} 10
+                    {print} i
             mp_choice_options:
-            -   option: "for chaque compliment"
-                feedback: "Ce n'est pas ça !"
-            -   option: "for compliment in compliments"
-                feedback: "Bravo !"
-            -   option: "if compliment in compliments"
-                feedback: "Ce n'est pas ça !"
-            -   option: "for compliments in compliment"
-                feedback: "Attention aux `s`"
+            -   option: |
+                    ```
+                    counter
+                    ```
+                feedback: "No"
+            -   option: |
+                    ```
+                    {range}
+                    ```
+                feedback: "Correct"
+            -   option: |
+                    ```
+                    {if}
+                    ```
+                feedback: "No"
+            -   option: |
+                    ```
+                    {for}
+                    ```
+                feedback: "No"
             correct_answer: "B"
-            hint: "Utilise le `for`"
+            hint: "What did you learn in this level?"
             question_score: '10'
         2:
-            question_text: "Quelle sera la sortie de ce code ?"
-            mp_choice_options:
-            -   option: "je voudrais une pizza"
-                feedback: "La ligne 2 dit pour 'chaque plat dans la liste des plats' ."
-            -   option: "je voudrais une crêpe"
-                feedback: "La ligne 2 dit pour 'chaque plat dans la liste des plats' ."
-            -   option: "je voudrais une glace"
-                feedback: "La ligne 2 dit pour 'chaque plat dans la liste des plats' ."
-            -   option: |-
-                    je voudrais une pizza
-                    je voudrais une crêpe
-                    je voudrais une glace
-                feedback: "Bien !"
-            correct_answer: "D"
-            hint: "La ligne 2 dit pour 'chaque plat dans la liste des plats' ."
-            question_score: '10'
-            code: "{for} i {in} {range} 1 {to} 3\n    {print} i"
-        3:
-            question_text: "Quelle sortie est correcte ?"
-            mp_choice_options:
-            -   option: "chiens sont mignons"
-                feedback: "La ligne 2 dit pour 'chaque animal dans la liste des animaux' ."
-            -   option: "Les chiens, chats, hamsters sont mignons"
-                feedback: "Il y a plusieurs lignes.."
-            -   option: |-
-                    Les chiens sont mignons
-                    Les chats sont mignons
-                    Les hamsters sont mignons
-                feedback: "Bien !"
-            -   option: "On ne le sait pas encore. Parce qu'il choisit un des animaux au hasard."
-                feedback: "La ligne 2 dit pour 'chaque animal dans la liste des animaux' ."
-            correct_answer: "C"
-            hint: "La ligne 2 dit pour 'chaque animal dans la liste des animaux' ."
-            question_score: '10'
-            output: "10\n9\n8\n7\n6\n5\n4\n3\n2\n1\n0"
-        4:
-            question_text: "Où est le problème avec ce code ?"
-            mp_choice_options:
-            -   option: "La ligne 2 doit commencer avec 4 espaces en guise d'indentation."
-                feedback: "Non, ce n'est pas le cas. Seule la ligne 3 a besoin d'une indentation, et il y en a."
-            -   option: "La ligne 3 n'a pas besoin de commencer avec 4 espaces comme indentation."
-                feedback: "La ligne 2 est une commande `for`, donc la ligne 3 doit commencer avec une indentation."
-            -   option: "La ligne 3 devrait dire 'article' au lieu de 'courses'."
-                feedback: "Parfait !"
-            -   option: "La ligne 2 devrait dire 'courses' au lieu de 'article'"
-                feedback: "Non, ce n'est ça."
-            correct_answer: "C"
-            hint: "On veut pour chaque article dans la liste de courses"
-            question_score: '10'
-            output: "10\n9\n8\n7\n6\n5\n4\n3\n2\n1\n0"
-        5:
-            question_text: "Comment compléter la ligne de commande ?"
+            question_text: "What will be the output from this code?"
             code: |-
-                print 'Bienvenue aux dés numériques !'
-                joueurs = deborah, camille, emma, marion, coline
-                choix = 1, 2, 3, 4, 5, 6
-                for joueur in joueurs
-                    print joueur ' à fait un ' _?_ at random
+                {for} i {in} {range} 1 {to} 3
+                    {print} i
             mp_choice_options:
-            -   option: "joueurs"
-                feedback: "Cela fera 'emma à fait un coline'"
-            -   option: "choix"
-                feedback: "Bien joué !"
-            -   option: "chois"
-                feedback: "Attention à la faute d'orthographe !"
-            -   option: "dés"
-                feedback: "Regarde les noms des variables."
-            correct_answer: "B"
-            hint: "Hedy doit choisir un numéro au hasard"
+            -   option: "1\n2\n3"
+                feedback: "Correct!"
+            -   option: "1 2 3"
+                feedback: "That's not it"
+            -   option: "1, 2, 3"
+                feedback: "That's not it"
+            -   option: "123"
+                feedback: "That's not it"
+            correct_answer: "A"
+            hint: "How do the numbers appear in the screen?"
+            question_score: '10'
+        3:
+            question_text: "Which code was used to get this output?"
+            output: |-
+                1
+                2
+                3
+                4
+                5
+                Once I caught a fish alive!
+            mp_choice_options:
+            -   option: |
+                    ```
+                    {for} i {in} {range} 1 {to} 5
+                        {print} i
+                    {print} 'Once I caught a fish alive!'
+                    ```
+                feedback: "Perfect"
+            -   option: |
+                    ```
+                    {for} i {in} {range} 1 {to} 5
+                    {print} i
+                    {print} 'Once I caught a fish alive!'
+                    ```
+                feedback: "This code won't work. You need an indent after {for}."
+            -   option: |
+                    ```
+                    {for} i {in} {range} 1 {to} 5
+                        {print} i
+                        {print} 'Once I caught a fish alive!'
+                    ```
+                feedback: "Now Hedy will count '1 Once I caught a fish alive!, 2 Once I caught a fish alive! etc."
+            -   option: |
+                    ```
+                    {for} i {in} {range} 1 {to} 5
+                        {print} 'i'
+                    {print} 'Once I caught a fish alive!'
+                    ```
+                feedback: "i is a variable and shouldn't have quotation marks"
+            correct_answer: "A"
+            hint: "First all the numbers, then the sentence"
+            question_score: '10'
+        4:
+            question_text: "Which code was used to get this output?"
+            output: |-
+                10
+                9
+                8
+                7
+                6
+                5
+                4
+                3
+                2
+                1
+                0
+            mp_choice_options:
+            -   option: |
+                    ```
+                    {for} i {in} {range} 0 {to} 10
+                        {print} i
+                    ```
+                feedback: "Now Hedy prints the numbers from 0 to 10 instead of 10 to 0."
+            -   option: |
+                    ```
+                    {for} i {in} {range} 0 to 10
+                        {print} - i
+                    ```
+                feedback: "Hedy would print negative numbers in this case."
+            -   option: |
+                    ```
+                    {for} i {in} {range} 10 to 0
+                        {print} 10 9 8 7 6 5 4 3 2 1 0
+                    ```
+                feedback: "Unfortunately this does not exist."
+            -   option: |
+                    ```
+                    {for} i {in} {range} 0 {to} 10
+                        {print} 10 - i
+                    ```
+                feedback: "That's right!"
+            correct_answer: "D"
+            hint: "It has to be a calculation..."
+            question_score: '10'
+        5:
+            question_text: "What's wrong with this code?"
+            code: |-
+                {for} i {in} {range} 1 {to} 10
+                {print} i
+            mp_choice_options:
+            -   option: "The i in the last line need quotation marks"
+                feedback: "No it doesn't."
+            -   option: "You can't use `{range}` 1 `{to}` 5 only `{range}` 1 `{to}` 10"
+                feedback: "You could use 1 to 5 just as well!"
+            -   option: "Line 1 needs to start with an indention."
+                feedback: "Not line 1..."
+            -   option: "Line 2 needs to start with an indention"
+                feedback: "Perfect!"
+            correct_answer: "D"
+            hint: "There is something wrong with the indention"
             question_score: '10'
         6:
-            question_text: "Quelle sortie est correcte ?"
+            question_text: "How many times does the word Hello appear on your screen when you run the code?"
             code: |-
-                choix = pierre, feuille, ciseaux
-                joueurs = Aline, Sophie
-                for player in joueurs
-                    print player ' choisis ' choix at random
+                {for} i {in} {range} 0 {to} 2
+                    {print} 'Hello'
             mp_choice_options:
-            -   option: |-
-                    Aline choisis pierre
-                feedback: "Sophie veut jouer aussi !"
-            -   option: |-
-                    Sophie choisis ciseaux
-                    Aline choisis pierre
-                feedback: "Les joueuses ne sont pas dans le bon ordre"
-            -   option: |-
-                    Sophie choisis feuille
-                feedback: "Aline veut jouer aussi !"
-            -   option: |-
-                    Aline choisis feuille
-                    Sophie choisis ciseaux
-                feedback: "Génial !"
-            correct_answer: "D"
-            hint: "Chaque joueuse choisira une option."
+            -   option: "1 time"
+                feedback: "No"
+            -   option: "2 times"
+                feedback: "No"
+            -   option: "3 times"
+                feedback: "That's right!"
+            -   option: "Never"
+                feedback: "No"
+            correct_answer: "C"
+            hint: "0 also counts. So 0,1,2 that's 3 times."
             question_score: '10'
         7:
-            question_text: "Comment compléter le code ?"
+            question_text: "What should be on the place of the question mark?"
             code: |-
-                noms = eloise, fanny, soledad
-                plats = pates, frites, salade
+                {print} 'Welcome to Hedys diner'
+                people is {ask} 'How many people will be eating here tonight?'
                 _?_
-                    print nom ' veut manger ' plats at random ' ce soir '
+                    food is {ask} 'What would you like to order?'
+                    {print} food
             mp_choice_options:
-            -   option: "for nom in noms"
-                feedback: "Parfait !"
-            -   option: "for noms in nom"
-                feedback: "Tu as confondu les variables !"
-            -   option: "for plats in plats"
-                feedback: "Il faut dire à chaque nom ce qu'il aura pour le dîner."
-            -   option: "for nom in plats"
-                feedback: "Il faut dire à chaque nom ce qu'il aura pour le dîner."
-            correct_answer: "A"
-            hint: "Il faut dire à chaque nom ce qu'il aura pour le dîner."
+            -   option: |
+                    ```
+                    {for} i {in} {range} 0 {to} 3
+                    ```
+                feedback: "There's not always 3 people"
+            -   option: |
+                    ```
+                    {for} i {in} {range} 1 {to} guests
+                    ```
+                feedback: "The variable is not named guests"
+            -   option: |
+                    ```
+                    {for} i {in} {range} 1 {to} people
+                    ```
+                feedback: "Great!"
+            -   option: |
+                    ```
+                    {for} i {in} {range} 0 {to} people
+                    ```
+                feedback: "That's one order too many!"
+            correct_answer: "C"
+            hint: "Use the variable 'people'"
             question_score: '10'
         8:
-            question_text: "Comment compléter le code ?"
+            question_text: "What will be the output from this code?"
             code: |-
-                noms = Maria, Amelie, Delphine
-                couleurs = bleu, rouge, jaune, vert
-                for nom in noms
-                    print _?_
+                {for} i {in} {range} 23 {to} 25
+                    {print} 'hi'
             mp_choice_options:
-            -   option: "'nom veut un pantalon'"
-                feedback: "Ce n'est pas ça !"
-            -   option: "nom 'veut un pantalon' couleurs at random"
-                feedback: "Parfait !"
-            -   option: "noms 'veut un pantalon' couleurs at random"
-                feedback: "Tu veux que chaque nom soit affiché à la suite, pas tous d'un coup !"
-            -   option: "'gens veut un pantalon'"
-                feedback: "la variable `gens` n'existe pas.."
-            correct_answer: "B"
-            hint: "Fais attention aux apostrophes"
+            -   option: "23\n24\n25"
+                feedback: "The numbers don't appear. It doesn't say `{print}` i."
+            -   option: "23 hi 24 hi 25 hi"
+                feedback: "The numbers don't appear. It doesn't say `{print}` i"
+            -   option: "hi\nhi\nhi"
+                feedback: "Correct"
+            -   option: "The word 'hi' will appear 25 times in a row."
+                feedback: "No it will only appear 3 times."
+            correct_answer: "C"
+            hint: "It doesn't say `{print}` i"
             question_score: '10'
         9:
-            question_text: "Quelle est la première question qu'Hedy te posera lorsque tu exécuteras le programme ?"
+            question_text: "How many times does Hedy chant Hip Hip Hooray?"
             code: |-
-                courses = le plat principal, le fromage, le dessert
-                noms = Domitille, Camille, Charlotte
-                for nom in noms
-                    for course in courses
-                        plat = ask nom ', que veux-tu manger pour ' course '?'
-                        print nom ' choisis ' plat ' pour son ' course
+                age = {ask} 'How old are you?'
+                {for} i {in} {range} 1 {to} age
+                    {print} 'Hip Hip Hoorray!'
             mp_choice_options:
-            -   option: "Domitille, que veux-tu manger pour le plat principal ?"
-                feedback: "Parfait !"
-            -   option: "Camille, que veux-tu manger pour le plat principal ?"
-                feedback: "Domitille est la première de la liste !"
-            -   option: "Domitille, que veux-tu manger pour le dessert ?"
-                feedback: "le plat principal est en premier !"
-            -   option: "On ne sait pas ça. Hedy va choisir au hasard."
-                feedback: "Il n'y a pas la commande `at random` dans ce code.."
-            correct_answer: "A"
-            hint: "Les premières options des deux listes sont choisies."
+            -   option: "1 time"
+                feedback: "Try again"
+            -   option: "2 times"
+                feedback: "Try again"
+            -   option: "Never"
+                feedback: "Try again"
+            -   option: "That depends on how old you are"
+                feedback: "That's right!"
+            correct_answer: "D"
+            hint: "`{for}` i `{in}` `{range}` 1 `{to}` age"
             question_score: '10'
         10:
-            question_text: "Quelle est la phrase vraie ?"
+            question_text: "Which code belongs to this output?"
+            output: |-
+                Baby shark tututudutudu
+                Baby shark tututudutudu
+                Baby shark tututudutudu
+                Baby shark
             mp_choice_options:
-            -   option: "Tout le monde gagnera toujours un lot."
-                feedback: "Ce n'est pas vrai, tu pourrais te retrouver sans lot."
-            -   option: "Tous les lots vont toujours à une seule personne."
-                feedback: "Ce n'est pas vrai. Tous les lots sont donnés, mais à des personnes choisies au hasard."
-            -   option: "Marie ne gagnera jamais un lot"
-                feedback: "Ce n'est pas vrai. Marie a les mêmes chances que les autres"
-            -   option: "Quelqu'un pourrait gagner avec deux lots"
-                feedback: "Tu as compris !"
-            correct_answer: "D"
-            hint: "Essayez d'imaginer la sortie de ce code."
+            -   option: |
+                    ```
+                    {for} i {in} {range} 1 {to} 3
+                        {print} Baby shark tututudutudu
+                        {print} Baby shark
+                    ```
+                feedback: "Mind the indention"
+            -   option: |
+                    ```
+                    {for} i {in} {range} 1 {to} 3
+                        {print} Baby shark tututudutudu
+                    {print} Baby shark
+                    ```
+                feedback: "That's right!"
+            -   option: |
+                    ```
+                    {for} i {in} {range} 0 {to} 3
+                        {print} Baby shark tututudutudu
+                    {print} Baby shark
+                    ```
+                feedback: "`{range}` 0 `{to}` 3 is 4 times."
+            -   option: |
+                    ```
+                    {for} i {in} {range} 0 {to} 3
+                        {print} Baby shark tututudutudu
+                        {print} Baby shark
+                    ```
+                feedback: "`{range}` 0 `{to}` 3 is 4 times."
+            correct_answer: "B"
+            hint: "Mind the indention"
             question_score: '10'
-            output: "Baby shark tututudutudu\nBaby shark tututudutudu\nBaby shark tututudutudu\nBaby shark"
     8:
         5:
             mp_choice_options:

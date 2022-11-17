@@ -14,10 +14,9 @@ describe('Modal alert popup test', () => {
       .type('anonexistingaccount123@#$%^!')
     cy.get('#password')
       .type('anonexistingpassword123@#$%^!')
-    cy.get('button[class*="green-btn mt-2"]')
+    cy.get('#login_button')
        .click()
     cy.get('#modal_alert_text')
       .should('be.visible')
-      .contains('Invalid username/password. No account?');
   })
 })
