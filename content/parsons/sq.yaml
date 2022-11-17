@@ -97,36 +97,36 @@ levels:
         1:
             story: "Në një turne shahu kanë mbetur tre lojtarë.\nKrijoni një program që vendos se cilët dy lojtarë luajnë fillimisht kundër njëri-tjetrit.\nFillimisht printoni dy lojtarët që luajnë ndeshjen e parë, pastaj printoni kundër cilit lojtar do të luajë fituesi.\n"
             code_lines:
-                A: players = Liam, Noah, Sophie
-                B: player1 = players {at} {random}
-                C: player2 = players {at} {random}
-                D: "{print} player1 ' first plays against ' player2"
-                E: '{remove} player1 {from} players'
-                F: '{remove} player2 {from} players'
-                G: "{print} 'The winner plays against ' players {at} {random}"
+                A: lojtarët = Lisa, Nora, Sara
+                B: lojtari1 = lojtarët {at} {random}
+                C: lojtari2 = lojtarët {at} {random}
+                D: "{print} lojtari1 ' luan kundër ' lojtari2"
+                E: '{remove} lojtari1 {from} lojtarët'
+                F: '{remove} lojtari2 {from} lojtarët'
+                G: "{print} 'The winner plays against ' lojtarët {at} {random}"
         2:
-            story: "Create the song 'The wheels on the bus go round and round'\n"
+            story: "Krijo këngën \"Rrotat në autobus rrotullohen e rrotullohen\"\n"
             code_lines:
-                A: "{print} 'the wheels on the bus go'"
-                B: "{repeat} 3 {times} {print} 'round and round'"
-                C: "{print} 'the wheels of the bus go round and round'"
-                D: "{print} 'all through the town '"
+                A: "{print} 'rrotat në autobus shkojnë'"
+                B: "{repeat} 3 {times} {print} 'rrotull e rrotull'"
+                C: "{print} 'rrotat e autobusit rrotullohen e rrotullohen'"
+                D: "{print} 'në të gjithë qytetin '"
     8:
         1:
             story: "You and four other friends are playing Pokémon Go! Create a program that decides in which team each of you will play.\nEither red, yellow or blue! Take a little pauze after announcing a team.\n"
             code_lines:
-                A: teams = red, yellow, blue
-                B: "{print} 'Red, Yellow of Blue?'"
+                A: ekipet = e kuqe, e verdhë, blu
+                B: "{print} 'E kuqe, e verdha nga bluja?'"
                 C: '{repeat} 5 {times}'
-                D: "  {print} 'You are selected in team... '"
-                E: '  {print} teams {at} {random}'
+                D: "  {print} 'Ju jeni përzgjedhur në ekipin... '"
+                E: '  {print} ekipet {at} {random}'
                 F: '  sleep 2'
         2:
-            story: "Print the countdown for a  game of hide and seek.\n"
+            story: "Printoni numërimin mbrapsht për një lojë fshehjeje dhe kërkimi.\n"
             code_lines:
-                A: counter = 11
+                A: numëruesi = 11
                 B: '{repeat} 10 {times}'
-                C: '  counter = counter - 1'
-                D: '  {print} counter'
+                C: '  numëruesi = numëruesi - 1'
+                D: '  {print} numëruesi'
                 E: '  {sleep} 1'
-                F: "{print} 'Ready or not here I come!'"
+                F: "{print} 'Gati apo jo ja ku po vij!'"
