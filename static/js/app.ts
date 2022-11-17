@@ -1195,8 +1195,11 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
     if (storage.getItem("prompt-" + prompt) == null) {
     Sk.execStart = new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 365);
     $('#turtlecanvas').hide();
+
     if (window.State.pygame_running) {
       Sk.unbindPygameListeners();
+      document.onkeydown = null;
+      $('#inline-modal .pygame-modal').hide();
     }
 
     return new Promise(function(ok) {
@@ -1215,12 +1218,20 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
         window.State.disable_run = false;
         event.preventDefault();
         $('#inline-modal .ask-modal').hide();
+
         if (hasTurtle) {
           $('#turtlecanvas').show();
         }
+
         if (window.State.pygame_running) {
           Sk.bindPygameListeners();
+          document.onkeydown = animateKeys;
+
+          if (!hasTurtle) {
+            $('#inline-modal .pygame-modal').show();
+          }
         }
+
         // We reset the timer to the present moment.
         Sk.execStart = new Date ();
         // We set a timeout for sending back the input, so that the input box is hidden before processing the program.
