@@ -883,7 +883,7 @@ class TestsLevel8(HedyTester):
             if event.type == pygame.KEYDOWN:
               if event.key == pygame.K_x:
                 print(f'x is pressed!')
-                break
+                break    
               else:
                 print(f'x is not pressed!')
                 break\n""") + "    "
@@ -943,7 +943,7 @@ class TestsLevel8(HedyTester):
                 HedyTester.forward_transpiled(25, self.level),
                 14, True)
               }
-              break
+              break    
             else:
               {HedyTester.indent(
                 HedyTester.turn_transpiled(90, self.level),
