@@ -1,4 +1,4 @@
-import {loginForAdmin, loginForTeacher} from '../../tools/login/login.js'
+import {loginForTeacher} from '../../tools/login/login.js'
 import {createClass} from '../../tools/classes/class.js'
 
 
