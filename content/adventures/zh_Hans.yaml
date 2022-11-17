@@ -267,6 +267,7 @@ adventures:
                 story_text: "## 创作故事动画\n在第1级中你可以自己添加角色创作一个有不同主角的故事动画。。\n\n在第一行，使用`{ask}`，问谁是故事的主角。\n\n在这第一行之后，如果需要打印这个句子，就用`{print}`开始这个句子。\n如果你想让你的主角的名字出现在句子的末尾，你可以用`{echo}`。\n"
                 example_code: "```\n{ask} 这个故事的主人公是（谁）\n{print}主人公现在要到森林里去散步\n{echo} 他有点害怕，\n{print} 他听到到处都有疯狂的声音\n{print} 他害怕这是一片闹鬼的森林\n```\n"
                 start_code: '{print} 你的故事从这里开始'
+                story_text_2: "## Challenge\nCan you make your own story in Hedy now by using `{print}` , `{ask}` and `{echo}`?\n"
             10:
                 story_text: "## 故事\n在这一关，你可以在你的故事里使用 {for} 命令。这样很容易就能写出儿童书里的“棕熊，棕熊，你看到了什么”的故事。\n"
                 example_code: "```\n动物们 = 红鸟, 黑羊, 绿蛙, 黄鸭, 小孩\n{print} '棕熊'\n{print} '棕熊'\n{print} '你看到了什么？'\n{for} 动物 {in} 动物们\n    {print} '我看到' 动物 '在看我'\n    {print} 动物\n    {print} 动物\n    {print} '你看到了什么？'\n{print} '我看到所有动物们都在看我！'\n```\n"
@@ -306,6 +307,8 @@ adventures:
                 story_text: "## 歌曲\n歌曲中通常包含大量重复。有时重复是基于计数的。\n比如那首著名的“99瓶啤酒”（北美民谣）。你可以用一点数学知识编程出这首歌。\n"
                 example_code: "```\n瓶 = 99\n{print} 瓶 '瓶啤酒在墙上'\n{print} 瓶 '瓶啤酒'\n{print} '取下一瓶传下去'\n瓶 = 瓶 - 1\n{print} 瓶 '瓶啤酒在墙上'\n```\n\n你可以通过反复复制粘贴来重复第2行到第6行。\n"
                 start_code: "{print} '鲨鱼宝宝'"
+                story_text_2: "## 5 Little Monkeys jumping on the bed\nThis children's song counts down from 5 little monkeys to 1 monkey.\nIf you copy line 2 - 7 and paste it under the the code, you can sing the whole song!\n"
+                example_code_2: "```\nnumber = 6\nnumber = number - 1\nprint number ' little monkeys jumping on the bed'\nprint 'One fell off and bumped his head'\nprint 'Mama called the doctor and the doctor said'\nprint 'NO MORE MONKEYS JUMPING ON THE BED!'\nsleep\n```\n"
             12:
                 story_text: "## 唱一首歌吧!\n在这首歌中，我们可以使编程变得更加容易 '{if} 你很快乐，你意识到了，拍拍你的手'。因为我们可以把所有的动作放在一个变量中，看看吧。\n"
                 example_code: "```\n一组动作 = '拍拍手', '跺跺脚', '喊万岁!'\n{for} 动作 {in} 一组动作\n    {for} i {in} {range} 1 {to} 2\n        {print} '如果你很高兴，你意识到它。'\n        {print} 动作\n    {print} '如果你很高兴，你意识到它，你真的想表现出来'\n    {print} '如果你快乐并意识到它'\n    {print} 动作\n```\n"
@@ -424,6 +427,8 @@ adventures:
                 story_text: "## 石头剪刀布\n在第1级，你可以开始一个石头剪刀布游戏。\n\n你可以用`{ask}`做出选择，然后用`{echo}`复述这个选择。\n"
                 example_code: "```\n{print} 你选哪一个？\n{ask} 从石头、剪刀和布中选一个\n{echo} 所以你选的是：\n```\n当然，你也可以不使用文字，而是使用表情符号：✊✋✌\n"
                 start_code: '{print} 欢迎来到属于你自己的石头剪刀布！'
+                story_text_2: "## Challenge\nInstead of using words, you could also use emojis: ✊✋✌\nCan you create a code using emojis?\n"
+                example_code_2: "```\n{print} what do you choose?\n{ask} choose from _\n{echo} so your choice was:\n```\n"
             9:
                 example_code: "```\n选项 {is} 石头，剪刀，布\n你选择 {is} {ask} '你选择什么？'\n{print} '你选择了' 你选择\n计算机选择 {is} 选项 {at} {random}\n{print} '计算机选择了' 计算机选择\n{if} 计算机选择 {is} 你选择\n    {print} '平手'\n{if} 计算机选择 {is} 石头\n    {if} 你选择 {is}布\n        {print} '你赢了！'\n   {if} 你选择 {is} 剪刀\n        {print} '你输了！'\n# 完成这段代码\n```\n"
                 story_text: "## 石头剪刀布\n在这一级，你可以用嵌套的{if}命令来编程石头剪刀布。你能完成这段代码吗？\n"
@@ -436,6 +441,8 @@ adventures:
                 story_text: "## 石头剪刀布\n\n在这一级，我们可以输入列表并从列表中选择。\n你要先用`{is}`制作一个列表。然后你可以用`{at} {random}`让电脑从列表里选一个。\n例如，你可以让电脑选择石头、剪刀或布。\n"
                 start_code: '{print} 欢迎来到属于你自己的石头剪刀布！'
                 example_code: "```\n选择 {is} 石头，剪刀，布\n{print} 选择 {at} {random}\n```\n"
+                story_text_2: "## Challenge\nNow you only have one player, so can you add a second player?\nYou can even use variables to name player 1 and player 2.\n"
+                example_code_2: "```\nchoices {is} rock, paper, scissors\n{print} player 1 chooses... choices {at} {random}\n{print} player 2 _\n```\n"
             2:
                 story_text: "## 石头剪刀布\n在这一级，你可以练习使用变量，这样你就能在下一级中完成石头剪刀布游戏！\n"
                 example_code: "```\n选择 {is} _\n{print} 我选择 选择\n```\n"
@@ -476,6 +483,8 @@ adventures:
                 story_text_2: "## 随机数 \n您也可以让计算机自己用随机函数做一个随机求和。 \n这就是您选择多个表格进行练习的方式，而且您将总是得到一个不一样的和：\n"
                 example_code_2: "```\n被乘数表 = 4, 5, 6, 8\n乘数表 = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n被乘数 = 被乘数表 {at} {random}\n乘数 = 乘数表 {at} {random}\n正确答案 = 被乘数 * 乘数\n答案 = {ask} 被乘数 '乘以' 乘数 '是多少？'\n{if} 答案 {is} 正确答案 {print} '正确'\n{else} {print} '错误！是' 正确答案\n```\n"
                 start_code: "{print} '欢迎来到这个计算器!'"
+                story_text_3: "## Random numbers\nYou can also let the computer do random sums on its own using random.\nThis is how you choose a number of tables to practice, and from that you always get a different sum:\n"
+                example_code_3: "```\ntables = 4, 5, 6, 8\nnumbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\ntable = tables {at} {random}\nnumber = numbers {at} {random}\ncorrect_answer = table * number\nanswer = {ask} 'how much is ' table ' times ' number '?'\n{if} answer {is} correct_answer {print} 'okay'\n{else} {print} 'mistake! it was ' correct_answer\n```\n"
             15:
                 story_text: "## 计算器 \n您可以添加 `{while}` 循环到您已经在上一关中学过的计算器游戏中去。 \n这可以确保{if}玩家在没有回答正确的情况下不会进行下一个问题。\n"
                 example_code: "```\n分数 = 0\n{for} i {in} {range} 0 {to} 9\n    数字 = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    数1 = 数字 {at} {random}\n    数2 = 数字 {at} {random}\n    正确 = 数1 * 数2\n    答案 = 0\n    {while} 回答 != 正确\n        {print} 数1 '乘以' 数2 '是多少？'\n        答案 = {ask} '填写答案'\n        {print} '你的答案是' 答案\n    {print} '做得好！'\n{print} '你赢了！'\n```\n"
@@ -521,6 +530,8 @@ adventures:
                     {print} 您的 食物 和 饮料 马上就来！
                     ```
                 start_code: "# 将代码写在这里"
+                story_text_2: "## Challenge\nCan you make this code more elaborate? For example by adding drinks to the order? Or...?\n"
+                example_code_2: "```\n{print} Welcome to Hedy's restaurant!\n{print} Today we're serving pizza or lasagna.\nfood {is} {ask} What would you like to eat?\n{print} Great choice! The food is my favorite!\ntopping {is} {ask} Would you like meat or veggies on that?\n{print} food with topping is on its way!\ndrinks {is} _\n```\n"
             3:
                 story_text: |
                     ## 随机餐厅
@@ -1100,6 +1111,8 @@ adventures:
                     {print} But as you enter monster_3 attacks you!
                     ```
                 start_code: "monster1 {is} _"
+                story_text_2: "## Challenge\nIn the example above the monsters are predetermined. So each time you run your code, the output is the same.\nCan you add `{ask}` commands to make the haunted house interactive and have the players choose the monsters they come across?\n"
+                example_code_2: "```\nmonster_1 {is} _\nmonster_2 {is} _\nmonster_3 {is} _\n{print} You enter the haunted house.\n{print} Suddenly you see a monster_1\n{print} You run into the other room, but a monster_2 is waiting there for you!\n{print} Oh no! Quickly get to the kitchen.\n{print} But as you enter monster_3 attacks you!\n```\n"
             3:
                 story_text: |
                     ## Haunted house game
@@ -1126,6 +1139,8 @@ adventures:
                     Lastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!
                     Can you do it?
                 start_code: "# place your code here"
+                story_text_3: "## Change the game into a tv gameshow!\nLastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!\nCan you do it?\n"
+                example_code_3: "```\n{print} The big gameshow!\n{print} There are 3 suitcases in front of you...\n{print} One of them contains _\n_\n```\n"
             4:
                 story_text: |
                     ## Haunted house
@@ -1401,10 +1416,14 @@ adventures:
                 story_text: "## 鹦鹉\n创造属于你的在线宠物鹦鹉，它会学你说话！\n"
                 example_code: "```\n{print} Im Hedy the parrot\n{ask} whats your name?\n{echo}\n{echo}\n```\n"
                 start_code: '{print} 我是鹦鹉海迪'
+                example_code_2: "```\n{print} Im Hedy the parrot\n{ask} _\n{echo}\n{echo}\n"
+                story_text_2: "## Challenge\nCan you make the parrot ask a different question? Fill in the blanks in the example!\n"
             2:
                 story_text: "## 鹦鹉\n创造属于你的在线宠物鹦鹉，它会学你说话！\n"
                 example_code: "```\n{print} 我是鹦鹉海迪\n名字 {is} {ask} 你的名字叫什么？\n{print} 名字\n{sleep}\n{print} 叽叽喳喳\n{sleep}\n{print} 名字\n```\n"
                 start_code: '{print} 我是鹦鹉海迪！'
+                story_text_2: "## Challenge\nYou can use variables to make the parrot say more than only your name. Can you complete this code?\n"
+                example_code_2: "```\n{print} Im Hedy the parrot\nname {is} {ask} whats your name?\n{print} name\n{sleep}\n{print} name\nsurname {is} {ask} whats your surname?\n_\n{sleep}\n_\n```\n"
             3:
                 story_text: "## 鹦鹉\n用`{add}`教你的鹦鹉一个新词。\n"
                 example_code: "```\n单词表 {is} 叽叽喳喳, 海迪\n{print} 训练你的鹦鹉！\n新单词 {is} {ask} 你想让他们学哪个词？\n{add} 新单词 {to_list} 单词表\n{print} \U0001F9D2 海迪，说 新单词！\n{print} \U0001F99C 单词表 {at} {random}\n```\n"
@@ -1443,6 +1462,8 @@ adventures:
                 example_code: "```\n选项 {is} 1, 2, 3, 4, 5, 蚯蚓\n{print} 选项 {at} {random}\n```\n"
                 start_code: '{print} 骰子这次会投出什么？'
                 story_text: "## 骰子\n在这一级我们可以从列表中选择。通过这种方式，我们能让电脑选择骰子哪一面朝上。\n看看你家里柜子里的游戏。\n有没有用骰子玩的游戏？你也可以用这段代码来复制它。\n比如，蚯蚓游戏用的骰子上印着1到5和一条蚯蚓。\n\n![蚯蚓游戏的骰子，有1到5和一条蚯蚓](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)\n"
+                story_text_2: "## Challenge\nThe dice in the example above are dice for a specific game. Can you make normal dice?\nOr other special dice from a different game?\n"
+                example_code_2: "```\nchoices {is} _\n```\n"
             15:
                 story_text: "## 骰子\n在这个游戏里，你需要用尽可能少的次数投出6。\n"
                 example_code: "```\n选项 = 1, 2, 3, 4, 5, 6\n{print} '用最快的速度投出6！'\n投 = 0\n次数 = 0\n{while} 投 != 6\n    投 = 选项 {at} {random}\n    {print} '你投了' 投\n    次数 = 次数 + 1\n{print} '很好！你在' 次数 '次里投出了6！'\n```\n"

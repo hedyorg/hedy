@@ -319,6 +319,7 @@ adventures:
 
                 example_code: "```\n{ask} O personagem principal desta história é\n{print} O personagem principal agora vai andar pela floresta\n{echo} Ele está um pouco assustado,\n{print} Ele ouve barulhos estranhos em todos os lugares\n{print} Ele tem medo que esta seja uma floresta assombrada\n```\n"
                 start_code: '{print} A sua história começa aqui'
+                story_text_2: "## Challenge\nCan you make your own story in Hedy now by using `{print}` , `{ask}` and `{echo}`?\n"
             2:
                 story_text: "## História\nNo nível 2 você pode tornar sua história mais divertida. O nome do seu personagem principal agora pode estar em qualquer lugar dentro da frase.\n\nVocê tem que programar um pouco mais para isso. Agora você deve nomear seu personagem principal primeiro.\n\nVocê pode então colocar esse nome em qualquer lugar em uma frase.\n"
                 example_code: "```\nnome {is} {ask} Qual é o nome do(a) personagem principal?\n{print} nome agora vai correr na floresta\n{print} nome está um pouco(a) assustado(a)\n{print} De repente ele(a) ouve um barulho estranho...\n{sleep}\n{print} nome está com medo de que esta seja uma floresta assombrada\n```"
@@ -361,10 +362,14 @@ adventures:
                 story_text: "## Papagaio\nCrie seu próprio papagaio de estimação online que irá copiar você!\n"
                 example_code: "```\n{print} Eu sou Hedy a papagaio\n{ask} qual é o seu nome?\n{echo}\n{echo}\n```\n"
                 start_code: '{print} Eu sou Hedy a papagaio'
+                story_text_2: "## Challenge\nCan you make the parrot ask a different question? Fill in the blanks in the example!\n"
+                example_code_2: "```\n{print} Im Hedy the parrot\n{ask} _\n{echo}\n{echo}\n"
             2:
                 story_text: "## Papagaio\nCrie seu próprio papagaio de estimação online que irá copiar você!\n"
                 example_code: "```\n{print} Eu sou Hedy a papagaio\nnome {is} {ask} qual é o seu nome?\n{print} nome\n{sleep}\n{print} grasnar\n{sleep}\n{print} nome\n```\n"
                 start_code: '{print} Eu sou Hedy a papagaio!'
+                story_text_2: "## Challenge\nYou can use variables to make the parrot say more than only your name. Can you complete this code?\n"
+                example_code_2: "```\n{print} Im Hedy the parrot\nname {is} {ask} whats your name?\n{print} name\n{sleep}\n{print} name\nsurname {is} {ask} whats your surname?\n_\n{sleep}\n_\n```\n"
             3:
                 story_text: "## Papagaio\nEnsine ao seu papagaio uma nova palavra com `{add}`.\n"
                 example_code: "```\npalavras {is} grasnar, Hedy\n{print} Treine seu papagaio!\nnova_palavra {is} {ask} Qual palavra você quer ensinar a ele?\n{add} nova_palavra {to_list} palavras\n{print} \U0001F9D2 Diga nova_palavra , Hedy!\n{print} \U0001F99C palavras {at} {random}\n```\n"
@@ -401,6 +406,8 @@ adventures:
                 story_text: "## Músicas\nAs músicas geralmente contêm muita repetição. Às vezes, a repetição também se baseia na contagem.\nPor exemplo, como na conhecida canção 'Garrafas de cerveja'. Você pode programar essa música com um pouco de matemática.\n"
                 example_code: "```\nverso = 99\n{print} verso 'garrafas de cerveja na parede'\n{print} verso 'garrafas de cerveja'\n{print} 'Pegue uma, passe por aí'\nverso = verso - 1\n{print} verso 'garrafas de cerveja na parede'\n```\n\nAgora você pode repetir as linhas 2 a 9 quantas vezes quiser copiando as linhas.\n"
                 start_code: "{print} 'Bebê tubarão'"
+                story_text_2: "## 5 Little Monkeys jumping on the bed\nThis children's song counts down from 5 little monkeys to 1 monkey.\nIf you copy line 2 - 7 and paste it under the the code, you can sing the whole song!\n"
+                example_code_2: "```\nnumber = 6\nnumber = number - 1\nprint number ' little monkeys jumping on the bed'\nprint 'One fell off and bumped his head'\nprint 'Mama called the doctor and the doctor said'\nprint 'NO MORE MONKEYS JUMPING ON THE BED!'\nsleep\n```\n"
             16:
                 story_text: "## Cante uma canção!\nNeste nível, você pode programar uma música como Velho MacDonald ainda mais rapidamente. Você pode conectar o animal certo ao som certo simplesmente colocando-os no mesmo lugar na lista.\nO Marinheiro Bêbado também é feito rapidamente neste nível. Você só precisa de 8 linhas para a música inteira, confira!\n"
                 start_code: '# coloque o seu código aqui'
@@ -504,6 +511,8 @@ adventures:
                 story_text: "## Dice\nIn this level we can choose from a list. With that we can let the computer choose one side of the die.\nTake a look at the games you have in your closet at home.\nAre there games with a (special) die? You can also copy it with this code.\nFor example, the dice of the game Earthworms with the numbers 1 to 5 and an earthworm on it.\n\n![Die of earthworms with 1 to 5 and an earthworm on it](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)\n"
                 example_code: "\n```\nchoices {is} 1, 2, 3, 4, 5, earthworm\n{print} choices {at} {random}\n```\n"
                 start_code: '{print} What will the die indicate this time?'
+                story_text_2: "## Challenge\nThe dice in the example above are dice for a specific game. Can you make normal dice?\nOr other special dice from a different game?\n"
+                example_code_2: "```\nchoices {is} _\n```\n"
             10:
                 story_text: "## Dice\nIs everybody taking too long throwing the dice? In this level you can let Hedy throw all the dice at once!\n"
                 example_code: "\n```\nplayers = Ann, John, Jesse\nchoices = 1, 2, 3, 4, 5, 6\n{for} player {in} players\n    {print} player ' throws ' choices {at} {random}\n    {sleep}\n```\n"
@@ -532,6 +541,8 @@ adventures:
                 story_text: "## Pedra, papel e tesoura\nNo nível 1 você pode começar com um jogo de pedra, papel e tesoura.\n\nCom `{ask}` você pode fazer uma escolha, e com `{echo}` você pode repetir essa escolha.\n"
                 example_code: "```\n{print} o que você escolhe?\n{ask} escolha entre pedra, papel ou tesoura\n{echo} então sua escolha foi:\n```\nEm vez de usar palavras, você também pode usar emojis, é claro: ✊✋✌\n"
                 start_code: '{print} Bem-vindo ao seu próprio papel, pedra e tesoura!'
+                example_code_2: "```\n{print} what do you choose?\n{ask} choose from _\n{echo} so your choice was:\n```\n"
+                story_text_2: "## Challenge\nInstead of using words, you could also use emojis: ✊✋✌\nCan you create a code using emojis?\n"
             10:
                 story_text: "## Rock, Paper, Scissors\nFeeling too lazy to play the game yourself? Let Hedy play it for you!\n"
                 example_code: "\n```\nchoices = rock, paper, scissors\nplayers = Marleen, Michael\n{for} player {in} players\n     {print} player ' chooses ' choices {at} {random}\n```\n"
@@ -544,6 +555,8 @@ adventures:
                 story_text: "## Rock, paper, scissors\n\nIn this level we can enter lists and choose things from them.\nYou first make a list with `{is}`. Then you can let the computer choose something from the list with `{at} {random}`.\nFor example, you can let the computer pick from rock, paper and scissors.\n"
                 start_code: '{print} Welcome to your own rock scissors paper!'
                 example_code: "\n\n```\nchoices {is} rock, paper, scissors\n{print} choices {at} {random}\n```\n"
+                story_text_2: "## Challenge\nNow you only have one player, so can you add a second player?\nYou can even use variables to name player 1 and player 2.\n"
+                example_code_2: "```\nchoices {is} rock, paper, scissors\n{print} player 1 chooses... choices {at} {random}\n{print} player 2 _\n```\n"
             2:
                 story_text: "## Rock, paper, scissors\nIn this level you can practise using the variables, so that you can make the rock, paper, scissors game in the next level!\n"
                 example_code: "\n```\nchoice {is} _\n{print} I choose choice\n```\n"
@@ -579,6 +592,8 @@ adventures:
                 example_code: "\n```\ncorrect_answer = 11 * 27\nanswer = {ask} 'How much is 11 times 27?'\n{if} answer {is} correct_answer {print} 'good job!'\n{else} {print} 'Wrong! It was ' correct_answer\n```\n"
                 story_text_2: "## Random numbers\nYou can also let the computer do random sums on its own using random.\nThis is how you choose a number of tables to practice, and from that you always get a different sum:\n"
                 example_code_2: "\n```\ntables = 4, 5, 6, 8\nnumbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\ntable = tables {at} {random}\nnumber = numbers {at} {random}\ncorrect_answer = table * number\nanswer = {ask} 'how much is ' table ' times ' number '?'\n{if} answer {is} correct_answer {print} 'okay'\n{else} {print} 'mistake! it was ' correct_answer\n```\n"
+                story_text_3: "## Random numbers\nYou can also let the computer do random sums on its own using random.\nThis is how you choose a number of tables to practice, and from that you always get a different sum:\n"
+                example_code_3: "```\ntables = 4, 5, 6, 8\nnumbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\ntable = tables {at} {random}\nnumber = numbers {at} {random}\ncorrect_answer = table * number\nanswer = {ask} 'how much is ' table ' times ' number '?'\n{if} answer {is} correct_answer {print} 'okay'\n{else} {print} 'mistake! it was ' correct_answer\n```\n"
             14:
                 story_text: "## Guess which number\nIn this level you can programm the game 'Guess which number'\n"
                 example_code: "\n```\n{print} 'Guess which number'\nnumbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nnumber = numbers {at} {random}\ngame = 'on'\n{for} i {in} {range} 1 {to} 10\n    {if} game == 'on'\n        guess = {ask} 'Which number do you think it is?'\n        {if} guess > number\n            {print} 'Lower!'\n        {if} guess < number\n            {print} 'Higher!'\n        {if} guess == number\n            {print} 'You win!'\n            game = 'over'\n"
@@ -631,6 +646,8 @@ adventures:
                 story_text: "## Restaurant\nIn level 2 you could expand your restaurant by using variables. In level 1 Hedy could only {echo} the order once and only remember the last thing that was ordered.\nNow you can use variables and Hedy can remember both the food and the drinks!\n"
                 example_code: "```\n{print} Welcome to Hedy's restaurant!\n{print} Today we're serving pizza or lasagna.\nfood {is} {ask} What would you like to eat?\n{print} Great choice! The food is my favorite!\ntopping {is} {ask} Would you like meat or veggies on that?\n{print} food with topping is on its way!\ndrinks {is} {ask} What would you like to drink with that?\n{print} Thank you for your order.\n{print} Your food and drinks will be right there!\n```\n"
                 start_code: '# coloque o seu código aqui'
+                story_text_2: "## Challenge\nCan you make this code more elaborate? For example by adding drinks to the order? Or...?\n"
+                example_code_2: "```\n{print} Welcome to Hedy's restaurant!\n{print} Today we're serving pizza or lasagna.\nfood {is} {ask} What would you like to eat?\n{print} Great choice! The food is my favorite!\ntopping {is} {ask} Would you like meat or veggies on that?\n{print} food with topping is on its way!\ndrinks {is} _\n```\n"
             12:
                 story_text: "## Restaurant\nFrom this level on you can use decimal numbers to make you menu more realistic.\n"
                 example_code: "\n```\nprice = 0\nfood = {ask} 'What would you like to order?'\ndrinks = {ask} 'What would you like to drink?'\n{if} food {is} 'hamburger'\n    price = price + 6.50\n{if} food {is} 'pizza'\n    price = price + 5.75\n{if} drinks {is} 'water'\n    price = price + 1.20\n{if} drink {is} 'soda'\n    price = price + 2.35\n{print} 'That will be ' price ' dollar, please'\n```\n"
@@ -723,6 +740,8 @@ adventures:
                 start_code: monstro1 {is} _
                 story_text: "## Haunted House\nIn this haunted house you can choose your monsters with emojis. Of course you could also use words.\n\n```\nmonster1 {is} \U0001F47B\nmonster2 {is} \U0001F921\nmonster3 {is} \U0001F476\n{print} You enter the haunted house.\n{print} Suddenly you see a monster1\n{print} You run into the other room, but a monster2 is waiting there for you!\n{print} Oh no! Quickly get to the kitchen.\n{print} But as you enter monster3 attacks you!\n```\n"
                 example_code: "```\nmonster_1 {is} \U0001F47B\nmonster_2 {is} \U0001F921\nmonster_3 {is} \U0001F476\n{print} You enter the haunted house.\n{print} Suddenly you see a monster_1\n{print} You run into the other room, but a monster_2 is waiting there for you!\n{print} Oh no! Quickly get to the kitchen.\n{print} But as you enter monster_3 attacks you!\n```\n"
+                story_text_2: "## Challenge\nIn the example above the monsters are predetermined. So each time you run your code, the output is the same.\nCan you add `{ask}` commands to make the haunted house interactive and have the players choose the monsters they come across?\n"
+                example_code_2: "```\nmonster_1 {is} _\nmonster_2 {is} _\nmonster_3 {is} _\n{print} You enter the haunted house.\n{print} Suddenly you see a monster_1\n{print} You run into the other room, but a monster_2 is waiting there for you!\n{print} Oh no! Quickly get to the kitchen.\n{print} But as you enter monster_3 attacks you!\n```\n"
             14:
                 story_text: "## Haunted House\nIn this level you can use the `<` and `>` symbol to introduce lives to your game.\n"
                 example_code: "\n```\n{print} 'Escape from the haunted house'\nlives = 3\ndoors = 1, 2, 3\nmonsters = 'the wicked witch', 'a zombie', 'a sleeping 3 headed dog'\n{for} i {in} {range} 1 {to} 10\n    {if} lives > 0\n        good_door = doors {at} {random}\n        monster = monsters {at} {random}\n        chosen_door = {ask} 'Which door do you choose?'\n        {if} good_door == chosen_door\n            {print} 'You have chosen the correct door'\n        {else}\n            {print} 'You see...' monster\n            {if} monster == 'a sleeping 3 headed dog'\n                {print} 'Pffieuw.... Its asleep'\n            {else}\n                {print} 'You lose one life'\n                lives = lives -1\n    {else}\n        {print} 'GAME OVER'\n```\n"
@@ -732,6 +751,8 @@ adventures:
                 example_code: "\n```\n{print} Escape from the haunted house!\n{print} There are 3 doors in front of you...\nchoice {is} {ask} Which door do you choose?\n{print} You picked door ... choice\nmonsters {is} a zombie, a vampire, NOTHING YOUVE ESCAPED\n{print} You see...\n{sleep}\n{print} monsters {at} {random}\n```\n\n## Challenge\nThis story is pretty straight {forward}, maybe you can spook it up a bit by adding a more exciting story.\nAlso you have very limited outcomes right now, there are only 3 options of what's behind the doors. Maybe you can think of more monsters to add to the list!\n\n## Change the game into a tv gameshow!\nLastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!\nCan you do it?\n"
                 start_code: '# coloque o seu código aqui'
                 story_text_2: "## Challenge\nThis story is pretty straight {forward}, maybe you can spook it up a bit by adding a more exciting story.\nAlso you have very limited outcomes right now, there are only 3 options of what's behind the doors. Maybe you can think of more monsters to add to the list!\n\n## Change the game into a tv gameshow!\nLastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!\nCan you do it?\n"
+                story_text_3: "## Change the game into a tv gameshow!\nLastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!\nCan you do it?\n"
+                example_code_3: "```\n{print} The big gameshow!\n{print} There are 3 suitcases in front of you...\n{print} One of them contains _\n_\n```\n"
             16:
                 story_text: "## Haunted House Game\nThis haunted house game uses the connection between the lists you can use in this level.\nFor example: all the properties that belong to the zombie are first in all the lists, witch second and vampire third.\nCheck out the code!\n"
                 example_code: "\n```\nnumbers = [1, 2, 3]\ni = numbers[random]\nhint = ['growling', 'a cackling laugh', 'fluttering batwings']\nmonsters = ['zombie', 'witch', 'vampire']\nbad_fate = ['Your brain is eaten', 'You are forever cursed', 'You are bitten']\ngood_fate = ['You throw the ham. The zombie is distracted and starts etaing it.', 'You set the curtains on fire. The witch flees out of fear for the fire', 'The vampire hates garlic and flees']\nweapons = ['ham', 'lighter', 'garlic']\n{print} 'You are standing in front of an old mension'\n{print} 'Something is not right here'\n{print} 'You hear ' hint[i]\n{print} 'You are going to explore it'\n{print} 'You enter the kitchen en see a lighter, a raw ham and a garlic.'\nyour_weapon = {ask} 'What do you bring with you?'\n{print} 'With your ' your_weapon ' you enter the living room'\n{print} 'There you find a ' monsters[i]\nneeded_weapon = weapons[i]\n{if} your_weapon == needed_weapon\n    {print} 'You use your ' your_weapon\n    {print} good_fate[i]\n    {print} 'YOU WIN!'\n{else}\n    {print} 'You have chosen the wrong weapon...'\n    {print} bad_fate[i]\n    {print} 'GAME OVER'\n```\n"

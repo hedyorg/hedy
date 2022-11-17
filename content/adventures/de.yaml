@@ -282,6 +282,7 @@ adventures:
                     ```
 
                 start_code: "{print} Deine Geschichte beginnt hier"
+                story_text_2: "## Challenge\nCan you make your own story in Hedy now by using `{print}` , `{ask}` and `{echo}`?\n"
             2:
                 story_text: |
                     ## Schreibe eine Geschichte
@@ -520,6 +521,8 @@ adventures:
                     {echo}
                     ```
                 start_code: "{print} Ich bin Hedy der Papagei"
+                example_code_2: "```\n{print} Im Hedy the parrot\n{ask} _\n{echo}\n{echo}\n"
+                story_text_2: "## Challenge\nCan you make the parrot ask a different question? Fill in the blanks in the example!\n"
             2:
                 story_text: |
                     ## Papagei
@@ -536,6 +539,8 @@ adventures:
                     {print} Name
                     ```
                 start_code: "{print} Ich bin Hedy der Papagei!"
+                story_text_2: "## Challenge\nYou can use variables to make the parrot say more than only your name. Can you complete this code?\n"
+                example_code_2: "```\n{print} Im Hedy the parrot\nname {is} {ask} whats your name?\n{print} name\n{sleep}\n{print} name\nsurname {is} {ask} whats your surname?\n_\n{sleep}\n_\n```\n"
             3:
                 story_text: |
                     ## Papagei
@@ -714,6 +719,8 @@ adventures:
                     Dazu kopierst du sie und fügst sie am Ende wieder ein.
 
                 start_code: "{print} 'Baby Hai'"
+                story_text_2: "## 5 Little Monkeys jumping on the bed\nThis children's song counts down from 5 little monkeys to 1 monkey.\nIf you copy line 2 - 7 and paste it under the the code, you can sing the whole song!\n"
+                example_code_2: "```\nnumber = 6\nnumber = number - 1\nprint number ' little monkeys jumping on the bed'\nprint 'One fell off and bumped his head'\nprint 'Mama called the doctor and the doctor said'\nprint 'NO MORE MONKEYS JUMPING ON THE BED!'\nsleep\n```\n"
             16:
                 story_text: |
                     ## Lieder
@@ -1157,6 +1164,8 @@ adventures:
                     ```
 
                 start_code: "print Was zeigt der Würfel diesmal?"
+                story_text_2: "## Challenge\nThe dice in the example above are dice for a specific game. Can you make normal dice?\nOr other special dice from a different game?\n"
+                example_code_2: "```\nchoices {is} _\n```\n"
             15:
                 story_text: |
                     ## Würfel
@@ -1195,6 +1204,8 @@ adventures:
                     ```
                     Instead of using words, you could also use emojis of course: ✊✋✌
                 start_code: "print Welcome to your own rock scissors paper!"
+                story_text_2: "## Challenge\nInstead of using words, you could also use emojis: ✊✋✌\nCan you create a code using emojis?\n"
+                example_code_2: "```\n{print} what do you choose?\n{ask} choose from _\n{echo} so your choice was:\n```\n"
             10:
                 story_text: |
                     ## Schere, Stein, Papier
@@ -1278,6 +1289,8 @@ adventures:
                     print choices at random
                     ```
                 start_code: "print Welcome to your own rock scissors paper!"
+                story_text_2: "## Challenge\nNow you only have one player, so can you add a second player?\nYou can even use variables to name player 1 and player 2.\n"
+                example_code_2: "```\nchoices {is} rock, paper, scissors\n{print} player 1 chooses... choices {at} {random}\n{print} player 2 _\n```\n"
             2:
                 story_text: |
                     ## Schere, Stein, Papier
@@ -1443,6 +1456,8 @@ adventures:
                     ```
 
                 start_code: "print 'Welcome to this calculator!'"
+                example_code_3: "```\ntables = 4, 5, 6, 8\nnumbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\ntable = tables {at} {random}\nnumber = numbers {at} {random}\ncorrect_answer = table * number\nanswer = {ask} 'how much is ' table ' times ' number '?'\n{if} answer {is} correct_answer {print} 'okay'\n{else} {print} 'mistake! it was ' correct_answer\n```\n"
+                story_text_3: "## Random numbers\nYou can also let the computer do random sums on its own using random.\nThis is how you choose a number of tables to practice, and from that you always get a different sum:\n"
             15:
                 story_text: |
                     ## Calculator
@@ -1493,6 +1508,8 @@ adventures:
                     Jetzt kannst du Variablen verwenden und Hedy kann sich sowohl das Essen als auch die Getränke merken!
                 start_code: "# setze hier deinen Code hin"
                 example_code: "```\n{print} Willkommen in Hedys Restaurant!\n{print} Heute gibt es Pizza oder Lasagne.\nEssen {is} {ask} Was würden Sie gerne essen?\n{print} Gute Wahl! Das ist mein Lieblingsessen!\nBelag {is} {ask} Hätten Sie die gerne mit Fleisch oder mit Gemüse?\n{print} Das Essen mit Belag ist auf dem Weg!\nGetränke {is} {ask} Was würden Sie gerne dazu trinken?\n{print} Danke für Ihre Bestellung.\n{print} Ihr Essen und Ihre Getränke kommen sofort!\n```\n"
+                story_text_2: "## Challenge\nCan you make this code more elaborate? For example by adding drinks to the order? Or...?\n"
+                example_code_2: "```\n{print} Welcome to Hedy's restaurant!\n{print} Today we're serving pizza or lasagna.\nfood {is} {ask} What would you like to eat?\n{print} Great choice! The food is my favorite!\ntopping {is} {ask} Would you like meat or veggies on that?\n{print} food with topping is on its way!\ndrinks {is} _\n```\n"
             12:
                 story_text: |
                     ## Restaurant
@@ -2026,6 +2043,8 @@ adventures:
                     In diesem Spukhaus kannst du Monster mit Emojis auswählen. Natürlich kannst du auch Wörter verwenden.
                 start_code: "monster1 is _"
                 example_code: "```\nMonster_1 {is} \U0001F47B\nMonster_2 {is} \U0001F921\nMonster_3 {is} \U0001F476\n{print} Du gehst ins Spukhaus.\n{print} Plötzlich siehst du ein Monster_1\n{print} Du läufst in den anderen Raum, aber ein Monster_2 wartet dort auf dich!\n{print} Oh nein! Schnell flitzt du in die Küche.\n{print} Aber als du reinkommst greift dich Monster_3 an!\n```\n"
+                story_text_2: "## Challenge\nIn the example above the monsters are predetermined. So each time you run your code, the output is the same.\nCan you add `{ask}` commands to make the haunted house interactive and have the players choose the monsters they come across?\n"
+                example_code_2: "```\nmonster_1 {is} _\nmonster_2 {is} _\nmonster_3 {is} _\n{print} You enter the haunted house.\n{print} Suddenly you see a monster_1\n{print} You run into the other room, but a monster_2 is waiting there for you!\n{print} Oh no! Quickly get to the kitchen.\n{print} But as you enter monster_3 attacks you!\n```\n"
             14:
                 story_text: |
                     ## Spukhaus
@@ -2165,6 +2184,8 @@ adventures:
                     ```
                 start_code: "# setze hier deinen Code hin"
                 story_text_2: "## Challenge\nDiese Geschichte ist ziemlich einfach, vielleicht kannst du sie etwas mehr gruselig machen indem du die Geschichte spannender machst.\nAußerdem kennt die Geschichte gerade nur wenige Ausgänge, es gibt nur drei Möglichkeiten was hinter den Türen ist. Fallen dir noch mehr Monster ein die du der Liste hinzufügen kannst?\n\n## Mach das Spiel zu einer Fernseh-Show!\nZum Schluss wollen wir dich herausfordern, das Spiel zu einer Fernseh-Show zu machen, in der du eine Tür oder einen Koffer wählst der einen großen Preis enthält!\nSchaffst du das?\n"
+                story_text_3: "## Change the game into a tv gameshow!\nLastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!\nCan you do it?\n"
+                example_code_3: "```\n{print} The big gameshow!\n{print} There are 3 suitcases in front of you...\n{print} One of them contains _\n_\n```\n"
             16:
                 story_text: |
                     ## Spukhaus-Spiel
