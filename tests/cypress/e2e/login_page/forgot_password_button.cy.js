@@ -5,10 +5,9 @@ describe('Forgot password button test', () => {
     goToLogin();
 
     // Tests forgot password button type and visibility
-    cy.get('button[class*="blue-btn"]')
+    cy.get('#forgot_password_button')
       .should('be.visible')
       .should('have.attr', 'type', 'submit')
-      .contains('Forgot your password?')
       .click()
 
     cy.url()
