@@ -1,5 +1,5 @@
-import {loginForAdmin, loginForTeacher, loginForStudent} from '../tools/login/login.js'
-import { createClass } from "../tools/classes/class";
+import { loginForTeacher } from '../../tools/login/login.js'
+import { createClass } from "../../tools/classes/class";
 
 // Test is incomplete, because it only checks if it is not empty instead of the value
 // This is a bug in Cypress
@@ -10,16 +10,9 @@ describe('Testing if opening dates is not empty', () => {
     cy.wait(500);
     createClass();
 
-    // click on view class:
-    cy.get(':nth-child(3) > .no-underline').click()
+    cy.get('#class_view_button > .no-underline').click() // Press on view class button
 
-    // get correct url:
-    var currentUrl = '';
-    cy.url().then(url => {
-      currentUrl = url;
-      let classUrl = `[onclick="window.location.href = '/for-teachers/customize-class/` + currentUrl.substring(currentUrl.indexOf('class/')+6) + `'"]`; // get statistics class url
-      cy.get(classUrl).click(); // Press class statistics button
-    })
+    cy.get('#customize-class-button').click(); // Press customize class button
 
     // The following line has a bug in cypress:
     // cy.get("#opening_date_level_1").type("2022-12-01").should("have.value", "2023-01-01")

@@ -1,5 +1,5 @@
-import { loginForTeacher } from '../tools/login/login.js'
-import { createClass } from "../tools/classes/class";
+import { loginForTeacher } from '../../tools/login/login.js'
+import { createClass } from "../../tools/classes/class";
 
 describe('Testing individual adventure buttons', () => {
   it('Passes', () => {
@@ -7,16 +7,9 @@ describe('Testing individual adventure buttons', () => {
     cy.wait(500);
     createClass();
 
-    // click on view class:
-    cy.get(':nth-child(3) > .no-underline').click()
+    cy.get('#class_view_button > .no-underline').click() // Press on view class button
 
-    // get correct url:
-    var currentUrl = '';
-    cy.url().then(url => {
-      currentUrl = url;
-      let classUrl = `[onclick="window.location.href = '/for-teachers/customize-class/` + currentUrl.substring(currentUrl.indexOf('class/')+6) + `'"]`; // get statistics class url
-      cy.get(classUrl).click(); // Press class statistics button
-    })
+    cy.get('#customize-class-button').click(); // Press customize class button
 
     // check every individual level button:
     cy.get('#level_button_1').click()
