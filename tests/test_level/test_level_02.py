@@ -86,6 +86,17 @@ class TestsLevel2(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, output=output, max_level=3)
 
+    def test_print_line_with_spaces_works(self):
+        code = "print hallo\n      \nprint hallo"
+        expected = "print(f'hallo')\n\nprint(f'hallo')"
+        expected_commands = [Command.print, Command.print]
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            expected_commands=expected_commands,
+            max_level=3)
+
     def test_print_exclamation_mark_and_quote(self):
         # test for issue 279
         code = "print hello world!'"

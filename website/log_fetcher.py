@@ -1,9 +1,11 @@
 import boto3
-import logging
 import os
 from collections import namedtuple
 from config import config
 from retrying import retry
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 def _get_value(filters, name, default):
@@ -21,7 +23,7 @@ class AwsAthenaClient:
             database = config['athena']['database']
             s3_output = config['athena']['s3_output']
             return AwsAthenaClient(db, database, s3_output)
-        logging.warning('Unable to initialize Athena client (missing AWS_ACCESS_KEY_ID or AWS_SECRET_ACCESS_KEY)')
+        logger.warning('Unable to initialize Athena client (missing AWS_ACCESS_KEY_ID or AWS_SECRET_ACCESS_KEY)')
         return None
 
     def __init__(self, client, database, s3_output):

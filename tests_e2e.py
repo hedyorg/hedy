@@ -941,7 +941,7 @@ class TestProgram(AuthHelper):
         saved_program = saved_programs[0]
         for key in program:
             # WHEN we create a program an achievement is achieved, being in the response but not the saved_program
-            if key != "achievements" and key != "message":
+            if key != "achievements" and key != "message" and key != "share_message":
                 self.assertEqual(program[key], saved_program[key])
 
     def test_invalid_make_program_public(self):
@@ -1242,7 +1242,7 @@ class TestClasses(AuthHelper):
         # THEN the class should contain a student with valid fields
         self.assertEqual(len(Class_data['students']), 1)
         class_student = Class_data['students'][0]
-        self.assertEqual(class_student['highest_level'], 0)
+        self.assertEqual(class_student['highest_level'], "-")
         self.assertEqual(class_student['programs'], 0)
         self.assertIsInstance(class_student['last_login'], str)
         self.assertEqual(class_student['username'], student['username'])

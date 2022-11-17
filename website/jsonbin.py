@@ -8,7 +8,8 @@ import logging
 from . import log_queue
 from . import aws_helpers
 
-logger = logging.getLogger('jsonbin')
+logger = logging.getLogger(__name__)
+
 
 class JsonBinLogger:
     """Logger for jsonbin.io
@@ -25,7 +26,8 @@ class JsonBinLogger:
         collection = os.getenv('JSONBIN_COLLECTION_ID')
 
         if key is None or collection is None:
-            logger.warn('Set JSONBIN_SECRET_KEY and JSONBIN_COLLECTION_ID if you want to log (disabled for now)')
+            logger.warning('Set JSONBIN_SECRET_KEY and JSONBIN_COLLECTION_ID '
+                           'if you want to log (disabled for now)')
             return NullJsonbinLogger()
         return JsonBinLogger(key, collection)
 
@@ -44,7 +46,8 @@ class JsonBinLogger:
         # Let's start off by printing warnings. If this turns out to be an
         # issue in the future, we might start dropping work.
         if self.queue.qsize() > 20:
-            logger.warn(f'jsonbin logging queue is backing up, contains {self.queue.qsize()} items')
+            logger.warning(f'jsonbin logging queue is backing up, '
+                           f'contains {self.queue.qsize()} items')
 
     def _run(self):
         logger.debug('jsonbin logger started')
@@ -65,12 +68,13 @@ class JsonBinLogger:
                     if response.status_code == 200:
                         logger.info('Posted to jsonbin')
                     else:
-                        logger.warning(f'Posting to jsonbin failed: {response.status_code} {resp["message"]}')
+                        logger.warning(
+                            f'Posting to jsonbin failed: {response.status_code} {resp["message"]}')
                 except Exception:
                     # Not JSON or no success field
                     logger.exception(f'Posting to jsonbin failed: {response.text}')
             except Exception:
-                logger.exception(f'Error posting to jsonbin.')
+                logger.exception('Error posting to jsonbin.')
 
 
 class NullJsonbinLogger():
@@ -85,8 +89,8 @@ class MultiParseLogger():
         self.loggers = loggers
 
     def log(self, obj):
-        for logger in self.loggers:
-            logger.log(obj)
+        for _logger in self.loggers:
+            _logger.log(obj)
 
 
 class S3ParseLogger():
@@ -111,6 +115,7 @@ class S3ParseLogger():
 
 S3_LOG_QUEUE = log_queue.LogQueue('parse', batch_window_s=300)
 S3_LOG_QUEUE.try_load_emergency_saves()
+
 
 def emergency_shutdown():
     """The process is being killed. Do whatever needs to be done to save the logs."""

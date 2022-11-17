@@ -97,7 +97,7 @@ levels:
                 A: "{print} 'Solve this problem'"
                 B: "answer {is} {ask} '88 - 16 = ?'"
                 C: "{if} answer {is} 72 {print} 'Correct!'"
-                D: "{else} print 'Wrong! The answer was 72'"
+                D: "{else} {print} 'Wrong! The answer was 72'"
     6:
         1:
             story: |
@@ -117,7 +117,7 @@ levels:
             code_lines:
                 A: "{print} 'It is your birthday!'"
                 B: "people = {ask} 'How many people do you want to give a slice of cake?'"
-                C: "cakes_amount is people/8"
+                C: "cakes_amount {is} people/8"
                 D: "{print} 'You will have to buy ' cakes_amount ' cakes'"
     7:
         1:

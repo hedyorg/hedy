@@ -1,4 +1,5 @@
 import hedy
+from hedy import Command
 import textwrap
 from tests.Tester import HedyTester
 from parameterized import parameterized
@@ -392,11 +393,39 @@ class TestsLevel8(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
-    def test_if_empty_line_with_whitespace_else_print(self):
-        code = textwrap.dedent("""\
+    def test_print_line_with_spaces_works(self):
+        code = "print 'hallo'\n      \nprint 'hallo'"
+        expected = "print(f'hallo')\nprint(f'hallo')"
+        expected_commands = [Command.print, Command.print]
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            expected_commands=expected_commands,
+            max_level=11)
+
+    def test_if_empty_start_line_with_whitespace_else_print(self):
+        code = "        \n"
+        code += textwrap.dedent("""\
         if 1 is 2
             print 'nice!'
-               
+        else
+            print 'pizza is better'""")
+
+        expected = textwrap.dedent("""\
+        if convert_numerals('Latin', '1') == convert_numerals('Latin', '2'):
+          print(f'nice!')
+        else:
+          print(f'pizza is better')""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=11, translate=False)
+
+    def test_if_empty_middle_line_with_whitespace_else_print(self):
+        code = textwrap.dedent("""\
+        if 1 is 2
+            print 'nice!'""")
+        code += "\n        \n"
+        code += textwrap.dedent("""\
         else
             print 'pizza is better'""")
 
@@ -470,6 +499,16 @@ class TestsLevel8(HedyTester):
             code=code,
             exception=hedy.exceptions.IndentationException,
             extra_check_function=(lambda x: x.exception.fixed_code == fixed_code)
+        )
+
+    def test_unexpected_indent(self):
+        code = textwrap.dedent("""\
+        print('repair')
+           print('me')""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.IndentationException
         )
 
     def test_repeat_turtle(self):
@@ -725,7 +764,7 @@ class TestsLevel8(HedyTester):
             output=output,
             max_level=11
         )
-
+        
     #
     # negative tests
     #
@@ -733,13 +772,13 @@ class TestsLevel8(HedyTester):
     # issue 902
     def test_repeat_if_gives_error(self):
         code = textwrap.dedent("""\
-           print 'kassabon'
-           prijs is 0
-           repeat 7 times # TEST
-               ingredient is ask 'wat wil je kopen?'
-               if ingredient is appel
-                   prijs is prijs + 1
-           print 'Dat is in totaal ' prijs ' euro.'""")
+        print 'kassabon'
+        prijs is 0
+        repeat 7 times # TEST
+            ingredient is ask 'wat wil je kopen?'
+            if ingredient is appel
+                prijs is prijs + 1
+        print 'Dat is in totaal ' prijs ' euro.'""")
 
         self.single_level_tester(code=code, exception=hedy.exceptions.LockedLanguageFeatureException)
 
@@ -751,3 +790,189 @@ class TestsLevel8(HedyTester):
                 print 'mooi'""")
 
         self.single_level_tester(code=code, exception=hedy.exceptions.LockedLanguageFeatureException)
+
+    #
+    # if pressed tests
+    #
+
+    def test_if_pressed_x_print(self):
+        code = textwrap.dedent("""\
+        if x is pressed
+            print 'it is a letter key'""")
+        expected = HedyTester.dedent("""\
+          while not pygame_end:
+            pygame.display.update()
+            event = pygame.event.wait()
+            if event.type == pygame.QUIT:
+              pygame_end = True
+              pygame.quit()
+              break
+            if event.type == pygame.KEYDOWN: 
+              if event.key == pygame.K_x:
+                print(f'it is a letter key')
+                break""")
+        self.multi_level_tester(code=code, expected=expected, max_level=11)
+
+    def test_double_if_pressed(self):
+        code = textwrap.dedent("""\
+        if x is pressed
+            print 'first key'
+        if y is pressed
+            print 'second key'""")
+
+        expected = HedyTester.dedent("""\
+          while not pygame_end:
+            pygame.display.update()
+            event = pygame.event.wait()
+            if event.type == pygame.QUIT:
+              pygame_end = True
+              pygame.quit()
+              break
+            if event.type == pygame.KEYDOWN: 
+              if event.key == pygame.K_x:
+                print(f'first key')
+                break
+              if event.key == pygame.K_y:
+                print(f'second key')
+                break""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=11)
+
+    def test_if_pressed_is_number_key_print(self):
+        code = textwrap.dedent("""\
+        if 1 is pressed
+            print 'it is a number key'""")
+
+        expected = HedyTester.dedent("""\
+          while not pygame_end:
+            pygame.display.update()
+            event = pygame.event.wait()
+            if event.type == pygame.QUIT:
+              pygame_end = True
+              pygame.quit()
+              break
+            if event.type == pygame.KEYDOWN: 
+              if event.key == pygame.K_1:
+                print(f'it is a number key')
+                break""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=11)
+
+    #
+    # if pressed else tests
+    #
+
+    def test_if_pressed_x_else(self):
+        code = textwrap.dedent("""\
+        if x is pressed
+            print 'x is pressed!'
+        else
+            print 'x is not pressed!'""")
+
+        expected = HedyTester.dedent("""\
+          while not pygame_end:
+            pygame.display.update()
+            event = pygame.event.wait()
+            if event.type == pygame.QUIT:
+              pygame_end = True
+              pygame.quit()
+              break
+            if event.type == pygame.KEYDOWN: 
+              if event.key == pygame.K_x:
+                print(f'x is pressed!')
+                break    
+              else:
+                print(f'x is not pressed!')
+                break\n""") +  "    "
+
+        self.multi_level_tester(code=code, expected=expected, max_level=11)
+
+    #
+    # pressed turtle tests
+    #
+    
+    def test_if_pressed_with_turtlecolor(self):
+        code = textwrap.dedent("""\
+        if x is pressed 
+            color red""")
+
+        expected = HedyTester.dedent(f"""\
+        while not pygame_end:
+          pygame.display.update()
+          event = pygame.event.wait()
+          if event.type == pygame.QUIT:
+            pygame_end = True
+            pygame.quit()
+            break
+          if event.type == pygame.KEYDOWN: 
+            if event.key == pygame.K_x:
+              {HedyTester.indent(
+                HedyTester.turtle_color_command_transpiled('red'), 
+                14, True)
+              }
+              break""")
+
+        self.multi_level_tester(
+            code=code, 
+            expected=expected,
+            extra_check_function=self.is_turtle(),
+            max_level=11
+        )
+
+    def test_if_pressed_else_with_turtle(self):
+        code = textwrap.dedent("""\
+        if x is pressed
+            forward 25
+        else
+            turn 90""")
+
+        expected = HedyTester.dedent(f"""\
+        while not pygame_end:
+          pygame.display.update()
+          event = pygame.event.wait()
+          if event.type == pygame.QUIT:
+            pygame_end = True
+            pygame.quit()
+            break
+          if event.type == pygame.KEYDOWN: 
+            if event.key == pygame.K_x:
+              {HedyTester.indent(
+                HedyTester.forward_transpiled(25, self.level), 
+                14, True)
+              }
+              break    
+            else:
+              {HedyTester.indent(
+                HedyTester.turn_transpiled(90, self.level), 
+                14, True)
+              }
+              break\n""") +  "    "
+
+        self.multi_level_tester(
+            code=code, 
+            expected=expected,
+            extra_check_function=self.is_turtle(),
+            max_level=11
+        )
+    
+    #
+    # pressed negative tests
+    #
+
+    def test_if_no_indent_after_pressed_gives_noindent_error(self):
+        code = textwrap.dedent("""\
+        if x is pressed 
+        print 'no indent!'""")
+
+        self.multi_level_tester(code=code, exception=hedy.exceptions.NoIndentationException)
+
+    def test_if_no_indent_after_pressed_and_else_gives_noindent_error(self):
+        code = textwrap.dedent("""\
+        if x is pressed 
+        print 'no indent!'
+        else
+        print 'no indent again!'""")
+
+        # gives the right exception for all levels even though it misses brackets
+        # because the indent check happens before parsing
+        self.multi_level_tester(code=code, exception=hedy.exceptions.NoIndentationException)

@@ -1,7 +1,7 @@
 ---
 name: Idea for the Hedy language
 about: Suggest an idea for the Hedy language
-title: "[Language idea]"
+title: "[LANGUAGE idea]"
 labels: ''
 assignees: ''
 

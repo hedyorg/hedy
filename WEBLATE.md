@@ -1,16 +1,3 @@
-# Working with Weblate
-
-Installing wlc (pip install wlc) gives you some control over the Weblate environment. To use this, create a .weblate file in the root and put the following content in there:
-
-```
-[weblate]
-url = https://hosted.weblate.org/api/
-translation = hedy/level-defaults
-key = <personal key>
-```
-
-The personal key can be found in your profile on Weblate.
-
 # Fixing Weblate Merge conflicts
 
 If there are too many changes, Weblate might not be able to resolve them automatically. You will then have to fix stuff locally, to do so, follow these stetps:
@@ -46,4 +33,21 @@ For the po files:
 
 For `messages.pot`:  
 `sort messages.pot | uniq -c | grep "2 msgid"`
+
+# New strings versus fuzzy strings
+
+There are a few Weblate peculiarities that are handy to know in working with the strings. If you add a new string in the code base in English, it will be automatially copied to ll languages in English, and then shown in English in the UI. However if you _update_ a string, the original (even if it is still the original, untranslated English one) will remain as is in Weblate, and will just be shown as #fuzzy (which is not visible to users of the Hedy site)
+
+# Working with Weblate locally
+
+Installing wlc (pip install wlc) gives you some control over the Weblate environment. To use this, create a .weblate file in the root and put the following content in there:
+
+```
+[weblate]
+url = https://hosted.weblate.org/api/
+translation = hedy/adventures
+key = <personal key>
+```
+
+The personal key can be found in your profile on Weblate.
 

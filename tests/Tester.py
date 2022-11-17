@@ -1,4 +1,6 @@
 import textwrap
+
+import exceptions
 import hedy, hedy_translation
 import re
 import sys
@@ -29,7 +31,6 @@ class HedyTester(unittest.TestCase):
   number_comparison_commands = ['>', '>=', '<', '<=']
   comparison_commands = number_comparison_commands + ['!=']
   arithmetic_operations = ['+', '-', '*', '/']
-  arithmetic_transpiled_operators = [('*', '*'), ('/', '//'), ('+', '+'), ('-', '-')]
   quotes = ["'", '"']
 
   @staticmethod
@@ -49,7 +50,7 @@ class HedyTester(unittest.TestCase):
       code = utils.TURTLE_PREFIX_CODE + parse_result.code
     else:
       code = utils.NORMAL_PREFIX_CODE + parse_result.code
-# remove sleep comments to make program execution less slow
+    # remove sleep comments to make program execution less slow
     code = re.sub(r'time\.sleep\([^\n]*\)', 'pass', code)
 
     with HedyTester.captured_output() as (out, err):
@@ -135,7 +136,7 @@ class HedyTester(unittest.TestCase):
 
           #TODO FH Feb 2022: we pick Dutch here not really fair or good practice :D Maybe we should do a random language?
           in_dutch = hedy_translation.translate_keywords(code, from_lang=lang, to_lang="nl", level=self.level)
-          back_in_english = hedy_translation.translate_keywords(in_dutch, from_lang="nl", to_lang=lang, level=self.level)
+          back_in_english = hedy_translation.translate_keywords(in_dutch, from_lang="nl", to_lang=lang, level=self.level).strip()
           self.assert_translated_code_equal(code, back_in_english)
         else: #not English? translate to it and back!
           in_english = hedy_translation.translate_keywords(code, from_lang=lang, to_lang="en", level=self.level)
@@ -157,8 +158,10 @@ class HedyTester(unittest.TestCase):
     self.assertEqual(re.sub('\\s+', ' ', orignal), re.sub('\\s+', ' ', translation))
 
   @staticmethod
-  def validate_Hedy_code(snippet):
-    # Code used in the Adventure and Level Defaults tester to validate Hedy code
+  def check_Hedy_code_for_errors(snippet):
+    # Code used in the Snippet testers to validate Hedy code
+    # Note that None is the happy path! If None is returned, no errors are found
+    # If an error is found a (reasonably) readable string is returned.
 
     try:
       if len(snippet.code) != 0:   # We ignore empty code snippets or those of length 0
@@ -170,17 +173,21 @@ class HedyTester(unittest.TestCase):
     except hedy.exceptions.CodePlaceholdersPresentException as E: # Code with blanks is allowed
       pass
     except OSError as E:
-      return True # programs with ask cannot be tested with output :(
-    except Exception as E:
-      return False
-    return True
+      return None # programs with ask cannot be tested with output :(
+    except exceptions.HedyException as E:
+        try:
+            location = E.error_location
+        except:
+            location = 'No Location Found'
+        return f'{str(E)} at line {location}'
+    return None
 
   @staticmethod
   def validate_Python_code(parseresult):
     # Code used in the Adventure and Level Defaults tester to validate Hedy code
 
     try:
-        if not parseresult.has_turtle: #ouput from turtle cannot be captured
+        if not parseresult.has_turtle and not parseresult.has_pygame: #ouput from turtle or pygame cannot be captured
           output = HedyTester.run_code(parseresult)
     except hedy.exceptions.CodePlaceholdersPresentException as E: # Code with blanks is allowed
       pass
@@ -260,6 +267,15 @@ class HedyTester(unittest.TestCase):
   def dedent(*args):
     return '\n'.join([textwrap.indent(textwrap.dedent(a[0]), a[1]) if type(a) is tuple else textwrap.dedent(a)
                       for a in args])
+
+  @staticmethod
+  def indent(code, spaces_amount = 2, skip_first_line = False):
+      lines = code.split('\n')
+
+      if not skip_first_line:
+        return '\n'.join([' ' * spaces_amount + l for l in lines])
+      else:
+        return lines[0] + '\n' + f'\n'.join([' ' * spaces_amount + l for l in lines[1::]])
 
   @staticmethod
   def translate_keywords_in_snippets(snippets):

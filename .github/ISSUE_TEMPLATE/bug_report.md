@@ -16,9 +16,6 @@ It is super helpful if we can copy-paste the Hedy code to test, so please paste 
 **Add a screenshot (optional)**
 Make a picture or screenshot to show the issue. Tip! You can make a screenshot and simply paste the image into GitHub with ctrl-v.
 
-**Expected behavior**
-A clear and concise description of what you expected to happen.
-
 **What machine and browser you were using (optional)**
 If the issue concerns things in the website, let us know:
 - What computer you are using (Windows, Mac, Linux?)

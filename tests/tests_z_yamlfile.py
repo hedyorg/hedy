@@ -12,11 +12,11 @@ class TestYamlFile(unittest.TestCase):
     although we're not going to fail the test on the numbers we get from that.
     """
     n = 50
-
+ 
     # Pick a file with unicode in it so we're sure it gets handled properly
-    file = YamlFile(
-      os.path.join(os.path.dirname(__file__), '..', 'content/adventures/hu.yaml'), 
-      try_pickle=True)
+    root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
+    yaml_file = os.path.normpath(root_dir+'/content/adventures/hu.yaml')
+    file = YamlFile(yaml_file, try_pickle=True)
 
     # Remove pickled version of this file if it exists, it may
     # influence the tests

@@ -47,9 +47,16 @@ def collect_snippets(path):
 Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/commands')]
 Hedy_snippets = HedyTester.translate_keywords_in_snippets(Hedy_snippets)
 
+lang = None
 # lang = 'ar' #useful if you want to test just 1 language
 # if lang:
 #     Hedy_snippets = [(name, snippet) for (name, snippet) in Hedy_snippets if snippet.language[:2] == lang]
+
+
+# This allows filtering out languages locally, but will throw an error
+# on GitHub Actions (or other CI system) so nobody accidentally commits this.
+if os.getenv('CI') and (lang):
+    raise RuntimeError('Whoops, it looks like you left a snippet filter in!')
 
 
 class TestsCommandPrograms(unittest.TestCase):
@@ -58,8 +65,8 @@ class TestsCommandPrograms(unittest.TestCase):
     def test_defaults(self, name, snippet):
         if snippet is not None:
             print(snippet.code)
-            result = HedyTester.validate_Hedy_code(snippet)
-            self.assertTrue(result)
+            result = HedyTester.check_Hedy_code_for_errors(snippet)
+            self.assertIsNone(result)
 
 
 

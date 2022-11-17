@@ -1,17 +1,17 @@
 1:
--   name: 'הדפס'
+-   name: '{print}'
     explanation: הדפיסו משהו עם `{print}`.
     demo_code: '{print} שלום וברוכים הבאים להֶדִי!'
--   name: 'שאל'
-    explanation: שאלו משהו עם `שאל`.
+-   name: '{ask}'
+    explanation: שאלו משהו עם `{ask}`.
     demo_code: '{ask} מה הצבע האהוב עליך?'
--   name: 'הדהד'
+-   name: '{echo}'
     explanation: חזרו על משהו באמצעות `{echo}`.
     demo_code: "{ask} מה הצבע האהוב עליך?\n{echo} אז הצבע האהוב עליך הוא"
 -   name: '{print} אמוג׳י'
     explanation: הדפיסו אמוג'י עם `{print}`.
     demo_code: '{print} 🙋 🌍 ❗'
--   name: '{הלאה}'
+-   name: '{forward}'
     explanation: ציירו קו עם `{forward}`.
     demo_code: '{forward} 100'
 -   name: '{turn}'
@@ -145,14 +145,14 @@
     explanation: על שני החלקים להיות נכונים.
     demo_code: "answer1 = {ask} 'What is 3+2?'\nanswer2 = {ask} 'What is 2+2?'\n{if} answer1 {is} 5 {and} answer2 {is} 4\n    {print} 'Both answers are correct!'\n{else}\n    {print} 'At least one answer is wrong!'"
 -   name: '{or}'
-    explanation: At least 1 of the two parts need to be correct. If both are correct, it is also fine.
+    explanation: לפחות אחד משני החלקים צריך להיות נכון. זה בסדר גם אם שניהם נכונים.
     demo_code: "answer1 = {ask} 'What is 3+2?'\nanswer2 = {ask} 'What is 2+2?'\n{if} answer1 {is} 5 {or} answer2 {is} 4\n    {print} 'At least one answer is correct!'\n{else}\n    {print} 'Both answers are wrong!'"
 14:
--   name: Smaller
-    explanation: We use the `<` to check if the first number is smaller than the second number.
-    demo_code: "age = {ask} 'How old are you?'\n{if} age < 13\n    {print} 'You are younger than me!'"
--   name: Bigger
-    explanation: We use the `>` to check if the first number is bigger than the second number.
+-   name: קטן יותר
+    explanation: אנחנו משתמשים ב-`<` כדי לבדוק אם המספר הראשון קטן מהמספר השני.
+    demo_code: "גיל = {ask} 'בת כמה את?'\n{if} גיל < 13\n    {print} 'את יותר קטנה ממני!'"
+-   name: גדול יותר
+    explanation: אנחנו משתמשים ב-`>` כדי לבדוק אם המספר הראשון גדול מהמספר השני.
     demo_code: "age = {ask} 'How old are you?'\n{if} age > 13\n    {print} 'You are older than me!'"
 -   name: Equal
     explanation: We use the `==` to check if two things are the same.

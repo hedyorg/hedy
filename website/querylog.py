@@ -1,17 +1,13 @@
 import time
 import functools
 import threading
-import logging
 import os
 import datetime
+from . import log_queue
 IS_WINDOWS = os.name == 'nt'
 if not IS_WINDOWS:
     import resource
-import logging
 
-from . import log_queue
-
-logger = logging.getLogger('querylog')
 
 class LogRecord:
     """A log record."""
@@ -149,13 +145,15 @@ def finish_global_log_record(exc=None):
 def log_value(**kwargs):
     """Log values into the currently globally active Log Record."""
     if hasattr(THREAD_LOCAL, 'current_log_record'):
-        # For some malformed URLs, the records are not initialized, so we check whether there's a current_log_record
+        # For some malformed URLs, the records are not initialized,
+        # so we check whether there's a current_log_record
         THREAD_LOCAL.current_log_record.set(**kwargs)
 
 
 def log_time(name):
     """Log a time into the currently globally active Log Record."""
     return THREAD_LOCAL.current_log_record.timer(name)
+
 
 def log_counter(name, count=1):
     """Increase the count of something in the currently globally active Log Record."""
@@ -170,6 +168,7 @@ def timed(fn):
             return fn(*args, **kwargs)
 
     return wrapped
+
 
 def timed_as(name):
     """Function decorator to make the given function timed into the currently active log record.

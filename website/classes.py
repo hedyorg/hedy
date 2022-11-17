@@ -1,6 +1,6 @@
 from flask_babel import gettext
 from .achievements import Achievements
-from website.auth import requires_login, is_teacher, current_user
+from website.auth import requires_login, is_teacher, current_user, requires_teacher
 import utils
 import uuid
 from flask import g, request, jsonify, redirect, session
@@ -21,11 +21,8 @@ class ClassModule(WebsiteModule):
         self.achievements = achievements
 
     @route('/', methods=['POST'])
-    @requires_login
+    @requires_teacher
     def create_class(self, user):
-        if not is_teacher(user):
-            return gettext('only_teacher_create_class'), 403
-
         body = request.json
         # Validations
         if not isinstance(body, dict):
@@ -56,11 +53,8 @@ class ClassModule(WebsiteModule):
         return {'id': Class['id']}, 200
 
     @route('/<class_id>', methods=['PUT'])
-    @requires_login
+    @requires_teacher
     def update_class(self, user, class_id):
-        if not is_teacher(user):
-            return 'Only teachers can update classes', 403
-
         body = request.json
         # Validations
         if not isinstance(body, dict):
@@ -164,18 +158,13 @@ class MiscClassPages(WebsiteModule):
         self.achievements = achievements
 
     @route('/classes', methods=['GET'])
-    @requires_login
+    @requires_teacher
     def get_classes(self, user):
-        if not is_teacher(user):
-            return utils.error_page(error=403, ui_message=gettext('retrieve_class_error'))
         return jsonify (self.db.get_teacher_classes(user['username'], True))
 
     @route('/duplicate_class', methods=['POST'])
-    @requires_login
+    @requires_teacher
     def duplicate_class(self, user):
-        if not is_teacher(user):
-            return gettext('only_teacher_create_class'), 403
-
         body = request.json
         # Validations
         if not isinstance(body, dict):
@@ -222,7 +211,7 @@ class MiscClassPages(WebsiteModule):
 
 
     @route('/invite_student', methods=['POST'])
-    @requires_login
+    @requires_teacher
     def invite_student(self, user):
         body = request.json
         # Validations
@@ -238,8 +227,6 @@ class MiscClassPages(WebsiteModule):
         username = body.get('username').lower()
         class_id = body.get('class_id')
 
-        if not is_teacher(user):
-            return utils.error_page(error=403, ui_message=gettext('retrieve_class_error'))
         Class = self.db.get_class(class_id)
         if not Class or Class['teacher'] != user['username']:
             return utils.error_page(error=404, ui_message=gettext('no_such_class'))
@@ -277,6 +264,7 @@ class MiscClassPages(WebsiteModule):
         username = body.get('username')
         class_id = body.get('class_id')
 
+        # Fixme TB -> Sure the user is also allowed to remove their invite, but why the 'retrieve_class_error'?
         if not is_teacher(user) and username != user.get('username'):
             return utils.error_page(error=403, ui_message=gettext('retrieve_class_error'))
         Class = self.db.get_class(class_id)

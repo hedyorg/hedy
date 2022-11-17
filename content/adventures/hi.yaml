@@ -1,7 +1,7 @@
 adventures:
     default:
         name: "Introduction"
-        description: "Level explanation"
+        description: "स्तर स्पष्टीकरण"
         default_save_name: "intro"
         levels:
             1:
@@ -28,7 +28,7 @@ adventures:
                     {ask} आपका नाम क्या है?
                     {echo} हेलो
                     ```
-                story_text_3: "Let's get started! Don't know what to create? In the next tabs you will find ideas for programs to build.\n"
+                story_text_3: "आएँ शुरू करें! आप नहीं जानते कि क्या बनाना है? अगले टैब में आपको प्रोग्राम बनाने के लिए सुझाव मिलेंगे।\n"
             2:
                 story_text: |-
                     स्तर २ में हम कुछ नया सीखते हैं। आप `{is}` वाले शब्द को नाम दे सकते हैं। आप अपने कोड में कहीं भी नाम का उपयोग कर सकते हैं और इसे हेडी से बदल दिया जाएगा, जैसे:
@@ -88,7 +88,7 @@ adventures:
                     आपको फिर से बाईं ओर कमांड और निम्नलिखित टैब में कार्यभार मिलेंगे। लगातार टैब में कार्यभार अब और अधिक कठिन होते जा रहे हैं।
                     इसलिए कहानी के साथ बाईं ओर शुरू करना और दाईं ओर काम करना सबसे अच्छा है, ताकि अधिक से अधिक चुनौती दी जा सके।
                 example_code: "```\nprint 'You need to use quotation marks from now on!'\nanswer is ask 'What do we need to use from now on?'\nprint 'We need to use ' answer\n```\n"
-                story_text_2: "## Adventures are getting more and more difficult\nThe adventures are now getting more and more difficult in the successive tabs.\nSo it is best to start on the left with the story, and work to the right, in order to be challenged more and more.\n"
+                story_text_2: "## रोमांच अधिक कठिन होता जा रहा है\nक्रमिक टैब में रोमांच अब और अधिक कठिन होता जा रहा है।\nइसलिए अधिक से अधिक चुनौतियों का सामना करने के लिए, बाईं ओर से शुरू करना और दाईं ओर काम करना सबसे अच्छा है।\n"
             5:
                 start_code: |-
                     नाम {is} {ask} आपका नाम क्या है?
@@ -112,14 +112,14 @@ adventures:
                     {if} नाम {is} हेडी {print} 'अच्छा' {else} प्रिंट 'बू!'
                     ```
                 story_text_3: "## Lists\nWhen we want to check if something is in a list, we can now use the `{in}` command.\nThis code prints pretty! if you choose green or yellow, and meh otherwise.\n"
-                example_code_3: |-
-                    कभी-कभी `{if}` वाला कोड वास्तव में लंबा हो जाता है और लाइन पर ठीक से फिट नहीं होता है। <br> आप कोड को दो पंक्तियों में विभाजित भी कर सकते हैं, दूसरी पंक्ति को `{else}` से इस प्रकार शुरू करते हुए:
+                example_code_3: |
+                    ``` 
+                    सुंदर_रंग {is} हरा, पीला 
+                    पसंदीदा_रंग {is} {ask} 'आपका पसंदीदा रंग कौन सा है?' 
+                    {if} पसंदीदा_रंग {in} सुंदर_रंग {print} 'सुंदर!' 
+                    {else} {print} 'मेह' 
                     ```
-                    name {is} {ask} 'आपका नाम क्या है?'
-                    {if} नाम {is} हेडी {print} 'अच्छा'
-                    {else} {print} 'बू!'
-                    ```
-                story_text_2: "Sometimes code with an `{if}` gets really long and does not fit on the line well. <br> You may also divide the code over two lines, starting the second line at the `{else}` like this:\n"
+                story_text_2: "कभी-कभी `{if}` वाला कोड वास्तव में लंबा हो जाता है और लाइन पर ठीक से फिट नहीं होता है। <br> आप कोड को दो पंक्तियों में विभाजित भी कर सकते हैं, दूसरी पंक्ति को `{else}` से इस प्रकार शुरू करते हुए:\n"
                 example_code_2: |-
                     ```
                     सुंदर_रंग {is} हरा, पीला
@@ -463,6 +463,7 @@ adventures:
                     {print} उसे डर है कि यह एक प्रेतवाधित जंगल है
                     ```
                 start_code: '{print} आपकी कहानी यहां से शुरू होती है'
+                story_text_2: "## Challenge\nCan you make your own story in Hedy now by using `{print}` , `{ask}` and `{echo}`?\n"
             2:
                 story_text: |-
                     ## कहानी
@@ -728,6 +729,8 @@ adventures:
                     angle {is} 90
                     {turn} angle
                     {forward} 25
+                example_code_2: "```\n{color} {white}\n{forward} -80\n{color} {green}\n{forward} 50\n{color} {yellow}\n{forward} 50\n{color} {red}\n{forward} 50\n```\n"
+                story_text_2: "## Colors\nYou can also change the color of the lines with the command `{color}`. Check out the example.\nYou can also use the command `{color} {white}` to make 'invisible' lines. You could use these white lines to move the turtle anywhere in the screen before you start drawing.\n"
             5:
                 story_text: |
                     ## Let's draw
@@ -771,8 +774,6 @@ adventures:
                 start_code: |-
                     {forward} 50
                     {turn} left
-                story_text_2: "## Colors\nYou can also change the color of the lines with the command `{color}`. Check out the example.\nYou can also use the command `{color} {white}` to make 'invisible' lines. You could use these white lines to move the turtle anywhere in the screen before you start drawing.\n"
-                example_code_2: "```\n{color} {white}\n{forward} -80\n{color} {green}\n{forward} 50\n{color} {yellow}\n{forward} 50\n{color} {red}\n{forward} 50\n```\n"
             8:
                 story_text: |
                     ## Let's draw
@@ -1000,6 +1001,8 @@ adventures:
                     {print} choices {at} {random}
                     ```
                 start_code: '{print} What will the die indicate this time?'
+                example_code_2: "```\nchoices {is} _\n```\n"
+                story_text_2: "## Challenge\nThe dice in the example above are dice for a specific game. Can you make normal dice?\nOr other special dice from a different game?\n"
             10:
                 story_text: |
                     ## Dice
@@ -1084,6 +1087,8 @@ adventures:
                     ```
                     Instead of using words, you could also use emojis of course: ✊✋✌
                 start_code: '{print} Welcome to your own rock scissors paper!'
+                example_code_2: "```\n{print} what do you choose?\n{ask} choose from _\n{echo} so your choice was:\n```\n"
+                story_text_2: "## Challenge\nInstead of using words, you could also use emojis: ✊✋✌\nCan you create a code using emojis?\n"
             10:
                 story_text: |
                     ## Rock, Paper, Scissors
@@ -1161,6 +1166,8 @@ adventures:
                     choices {is} rock, paper, scissors
                     {print} choices {at} {random}
                     ```
+                story_text_2: "## Challenge\nNow you only have one player, so can you add a second player?\nYou can even use variables to name player 1 and player 2.\n"
+                example_code_2: "```\nchoices {is} rock, paper, scissors\n{print} player 1 chooses... choices {at} {random}\n{print} player 2 _\n```\n"
             2:
                 story_text: |
                     ## Rock, paper, scissors
@@ -1262,6 +1269,8 @@ adventures:
                     {if} answer {is} correct_answer {print} 'okay'
                     {else} {print} 'mistake! it was ' correct_answer
                     ```
+                story_text_3: "## Random numbers\nYou can also let the computer do random sums on its own using random.\nThis is how you choose a number of tables to practice, and from that you always get a different sum:\n"
+                example_code_3: "```\ntables = 4, 5, 6, 8\nnumbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\ntable = tables {at} {random}\nnumber = numbers {at} {random}\ncorrect_answer = table * number\nanswer = {ask} 'how much is ' table ' times ' number '?'\n{if} answer {is} correct_answer {print} 'okay'\n{else} {print} 'mistake! it was ' correct_answer\n```\n"
             14:
                 story_text: |
                     ## Guess which number
@@ -1347,13 +1356,13 @@ adventures:
                     ## Restaurant
                      In level 1 you can make your own virtual restaurant and take your guests' orders.
                 example_code: |
-                     ```
-                     {print} Welcome to Hedy's restaurant 🍟
-                     {ask} What would you like to order?
-                     {echo} So you would like to order
-                     {print} Thanks you for your order!
-                     {print} It's on its way!
-                     ```
+                    ```
+                    {print} Welcome to Hedy's restaurant 🍟
+                    {ask} What would you like to order?
+                    {echo} So you would like to order
+                    {print} Thanks you for your order!
+                    {print} It's on its way!
+                    ```
                 story_text_2: |
                     ## Challenge
                     Can you think of more lines to add to your restaurant code? For example, can you {ask} the guests what they'd like to drink, tell them the price, or wish them a pleasant meal?
@@ -1376,6 +1385,8 @@ adventures:
                     {print} Your food and drinks will be right there!
                     ```
                 start_code: "# place your code here"
+                story_text_2: "## Challenge\nCan you make this code more elaborate? For example by adding drinks to the order? Or...?\n"
+                example_code_2: "```\n{print} Welcome to Hedy's restaurant!\n{print} Today we're serving pizza or lasagna.\nfood {is} {ask} What would you like to eat?\n{print} Great choice! The food is my favorite!\ntopping {is} {ask} Would you like meat or veggies on that?\n{print} food with topping is on its way!\ndrinks {is} _\n```\n"
             3:
                 story_text: |
                     ## Random Restaurant
@@ -1466,7 +1477,7 @@ adventures:
                     ## Restaurant
                     In this level you can use maths to calculate the total price of your customer's order, which can make your virtual restaurant more realistic.
 
-                example_code: |
+                example_code: |4
 
                     You can make a simple restaurant code, like this:
                     ```
@@ -1492,7 +1503,7 @@ adventures:
                     - give people a discount when they enter a (secret) couponcode?
                     - add a children's menu?
                     - think of other fun things to add?
-                example_code_2: |
+                example_code_2: |4
 
                     In this example there are three courses, which requires more code and more additions in calculating the price.
                     ```
@@ -1589,7 +1600,7 @@ adventures:
                         food = {ask} 'What would you like to eat as your ' course '?'
                         {print} food ' will be your ' course
                     ```
-                story_text_2: |
+                story_text_2: |4
 
                     Of course, you could also order for multiple people!
                 example_code_2: |
@@ -2321,6 +2332,8 @@ adventures:
                     {echo}
                     ```
                 start_code: '{print} Im Hedy the parrot'
+                story_text_2: "## Challenge\nCan you make the parrot ask a different question? Fill in the blanks in the example!\n"
+                example_code_2: "```\n{print} Im Hedy the parrot\n{ask} _\n{echo}\n{echo}\n"
             3:
                 story_text: |
                     ## Parrot
@@ -2367,6 +2380,8 @@ adventures:
                     {print} name
                     ```
                 start_code: '{print} Im Hedy the parrot!'
+                story_text_2: "## Challenge\nYou can use variables to make the parrot say more than only your name. Can you complete this code?\n"
+                example_code_2: "```\n{print} Im Hedy the parrot\nname {is} {ask} whats your name?\n{print} name\n{sleep}\n{print} name\nsurname {is} {ask} whats your surname?\n_\n{sleep}\n_\n```\n"
     songs:
         name: "Sing a song!"
         description: "Print a song"
@@ -2389,6 +2404,8 @@ adventures:
 
                     You can now repeat lines 2 to 9 as many times as you want by copying the lines.
                 start_code: "{print} 'Baby shark'"
+                story_text_2: "## 5 Little Monkeys jumping on the bed\nThis children's song counts down from 5 little monkeys to 1 monkey.\nIf you copy line 2 - 7 and paste it under the the code, you can sing the whole song!\n"
+                example_code_2: "```\nnumber = 6\nnumber = number - 1\nprint number ' little monkeys jumping on the bed'\nprint 'One fell off and bumped his head'\nprint 'Mama called the doctor and the doctor said'\nprint 'NO MORE MONKEYS JUMPING ON THE BED!'\nsleep\n```\n"
             7:
                 story_text: |
                     ## Songs
@@ -2586,6 +2603,8 @@ adventures:
                     {print} But as you enter monster_3 attacks you!
                     ```
                 start_code: "monster1 {is} _"
+                story_text_2: "## Challenge\nIn the example above the monsters are predetermined. So each time you run your code, the output is the same.\nCan you add `{ask}` commands to make the haunted house interactive and have the players choose the monsters they come across?\n"
+                example_code_2: "```\nmonster_1 {is} _\nmonster_2 {is} _\nmonster_3 {is} _\n{print} You enter the haunted house.\n{print} Suddenly you see a monster_1\n{print} You run into the other room, but a monster_2 is waiting there for you!\n{print} Oh no! Quickly get to the kitchen.\n{print} But as you enter monster_3 attacks you!\n```\n"
             3:
                 story_text: |
                     ## Haunted house game
@@ -2612,6 +2631,8 @@ adventures:
                     Lastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!
                     Can you do it?
                 start_code: "# place your code here"
+                example_code_3: "```\n{print} The big gameshow!\n{print} There are 3 suitcases in front of you...\n{print} One of them contains _\n_\n```\n"
+                story_text_3: "## Change the game into a tv gameshow!\nLastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!\nCan you do it?\n"
             4:
                 story_text: |
                     ## Haunted house

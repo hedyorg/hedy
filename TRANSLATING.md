@@ -55,7 +55,7 @@ Again, maybe a little too much information, but a lot is very helpful. Browse a 
 
 You see more strings on the same page for faster translation, but less helpfull info per translation.
 
-One important thing to notice is the **grayed pieces of tekst**. This is computer code and should not be translated! There are two versions: keywords between {}, this is in real code that we need to be able to run. Translating these wil make our software fail. The other version is also between {}, but with extra `` around them. This is to highlight this code within text. It wil not make our software fail, but will make the program harder to use. So both of these should be handled with care.
+One important thing to notice is the **grayed pieces of text**. This is computer code and should not be translated! There are two versions: keywords between {}, this is in real code that we need to be able to run. Translating these wil make our software fail. The other version is also between {}, but with extra `` around them. This is to highlight this code within text. It wil not make our software fail, but will make the program harder to use. So both of these should be handled with care.
 
 
 
@@ -67,13 +67,13 @@ Fixing Weblate issues
 Sometimes Weblate gets in a conflict state because of changes in our repo as well as in their. This is how to fix that on the command line:
 
 
-1. Gather all commits from weblate by adding an extra remote to my local github like this:
+1. Gather all commits from weblate by adding an extra remote to your local git repository like this:
 
 `git remote add weblate https://hosted.weblate.org/git/hedy/adventures/`
 
 This enables us to contact the weblate repo.
 
-2. Using `git fetch weblate` get all commits that exist in Weblate.
+2. Use `git fetch weblate` to get all commits that exist in Weblate.
 
 3. Switch to a fresh branch with `git checkout -b weblatefixes` <- this name is an example, you may write your own more specific one
 
@@ -81,4 +81,4 @@ This enables us to contact the weblate repo.
 
 5. Push the branch `weblatefixes` (or your own name) and make a PR. 
 
-6. Mention me on GitHub or Slack. I am the only one that can merge them correctly (they require a merge commit, not a squash merge!) so ping me to accept the PR.
+6. Mention me ([@Felienne](https://github.com/Felienne)) on GitHub or Discord. I am the only one that can merge them correctly (they require a merge commit, not a squash merge!) so ping me to accept the PR.
