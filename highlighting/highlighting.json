@@ -883,12 +883,14 @@
                 {
                     "regex": "\"[^\"]*$",
                     "token": "constant.character",
-                    "next": "start"
+                    "next": "start",
+                    "unicode": true
                 },
                 {
                     "regex": "'[^']*$",
                     "token": "constant.character",
-                    "next": "start"
+                    "next": "start",
+                    "unicode": true
                 }
             ],
             "valueSimple": [
@@ -924,20 +926,23 @@
                         "keyword",
                         "keyword",
                         "keyword"
-                    ]
+                    ],
+                    "unicode": true
                 },
                 {
                     "regex": "(^| )(__at__)(?![\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}·])",
                     "token": [
                         "text",
                         "keyword"
-                    ]
+                    ],
+                    "unicode": true
                 },
                 {
                     "regex": "(__black__|__blue__|__brown__|__gray__|__green__|__orange__|__pink__|__purple__|__red__|__white__|__yellow__)",
                     "token": [
                         "text"
-                    ]
+                    ],
+                    "unicode": true
                 }
             ],
             "valAdd": [
@@ -972,13 +977,15 @@
                         "text",
                         "keyword"
                     ],
-                    "next": "valueTo"
+                    "next": "valueTo",
+                    "unicode": true
                 },
                 {
                     "regex": "(__black__|__blue__|__brown__|__gray__|__green__|__orange__|__pink__|__purple__|__red__|__white__|__yellow__)",
                     "token": [
                         "text"
-                    ]
+                    ],
+                    "unicode": true
                 }
             ],
             "valueTo": [
@@ -1040,13 +1047,15 @@
                         "text",
                         "keyword"
                     ],
-                    "next": "valueFrom"
+                    "next": "valueFrom",
+                    "unicode": true
                 },
                 {
                     "regex": "(__black__|__blue__|__brown__|__gray__|__green__|__orange__|__pink__|__purple__|__red__|__white__|__yellow__)",
                     "token": [
                         "text"
-                    ]
+                    ],
+                    "unicode": true
                 }
             ],
             "valueFrom": [
