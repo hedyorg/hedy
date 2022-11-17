@@ -1236,8 +1236,6 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
 
           return false;
         });
-        document.onkeydown = null;
-        $('#inline-modal .pygame-modal').hide();
         $('#inline-modal .ask-modal').show();
       });
     } else {
@@ -1268,36 +1266,19 @@ function resetTurtleTarget() {
 
 function animateKeys(event: KeyboardEvent) {
     const keyColors = ['#cbd5e0', '#bee3f8', '#4299e1', '#ff617b', '#ae81ea', '#68d391'];
-    const output = document.getElementById("output");
+    const output = $("#output");
 
     if (output !== null) {
-      let keyElement = document.createElement('div');
-      output.appendChild(keyElement);
+      let keyElement = $("<div></div>");
+      output.append(keyElement);
 
-      keyElement.style.position = 'absolute';
-      keyElement.style.fontFamily = `system-ui,
-      -apple-system,BlinkMacSystemFont,
-      "Segoe UI",Roboto,
-      "Helvetica Neue",
-      Arial,"Noto Sans",
-      sans-serif,"Apple Color Emoji",
-      "Segoe UI Emoji","Segoe UI Symbol",
-      "Noto Color Emoji"`
-
-      keyElement.style.right = '20px';
-      keyElement.style.bottom = '10px';
-      keyElement.textContent = event.key;
-      keyElement.style.color = keyColors[Math.floor(Math.random() * keyColors.length)];
-
-      keyElement.style.transition = 'all 1.0s linear 0s';
-      keyElement.style.right = '15px';
-      keyElement.style.bottom = keyElement.offsetTop + 10 + 'px';
-      keyElement.style.fontSize = '50px';
-      keyElement.style.opacity = '0';
+      keyElement.text(event.key);
+      keyElement.css('color', keyColors[Math.floor(Math.random() * keyColors.length)]);
+      keyElement.addClass('animate-keys')
 
       setTimeout(function () {
         keyElement.remove()
-      }, 1000);
+      }, 1500);
     }
 }
 
