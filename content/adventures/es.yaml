@@ -373,19 +373,19 @@ adventures:
             8:
                 story_text: |
                     ## Canciones
-                    En nivel 6 has programado la canción 'Bottles of beer'. Hiciste un versículo y entonces tenías que copiar los versículos 99 veces. En nivel 7 puede repetir la canción 99 veces, ¡simplemente agregando una línea simplee!
+                    En un nivel anterior programamos la canción de los elefante. Hicimos un verso y lo copiamos un montón de veces. En el nivel 7 vamos a repetir la canción ¡Simplemente agregado una linea!
+                    ¡Sabes qué línea añadir?
                 example_code: |
                     ```
-                    versículo {is} 99
-                    {repeat} 99 {times}
-                        {print} versículo ' botellas de cerveza en la pared'
-                        {print} versículo ' botellas de cerveza'
-                        {print} 'Tomar uno abajo, pásalo alrededor'
-                        versículo {is} versículo - 1
-                        {print} versículo ' botellas de cerveza en la pared'
+                    elefantes = 1
+                    {print} elefantes 'elefante se balanceaba, sobre la tela de una araña. Cómo veía que resistía, fue a llamar a otro elefante.'
+
+                    {repeat} 10 {times}
+                        elefantes = elefante + 1
+                        {print} elefantes 'elefantes se balanceaban, sobre la tela de una araña. Cómo veían que resistían, fueron a llamar a otro elefante.'```
                     ```
 
-                start_code: "# place your code here"
+                start_code: "# pon tu código aquí"
             7:
                 story_text: |
                     ## Canciones
@@ -413,40 +413,39 @@ adventures:
             6:
                 story_text: |
                     ## Canciones
-                    En las canciones hay a menudo mucha repetición. Por ejemplo, Bebé Tiburón! En esa canción cantan siempre lo mismo:
+                    En las canciones hay a menudo mucha repetición. Algunas veces la repetición se basa en contar.
+                    Por ejemplo, en la canción el elefante se balancea en la tela de una araña. Puedes programar esta canción con un poco de matemáticas.
 
-                    Bebé Tiburón tututudutudu <br>
-                    Bebé Tiburón tututudutudu <br>
-                    Bebé Tiburón tututudutudu <br>
-                    Bebé Tiburón
+                    Consejo: Utiliza la función de "leer en voz alta" para que ¡Hedy te cante la canción!
 
-                    Puedes acortar mucho este programa usando el comando `{repeat}`! Puedes intentar escribir el programa?
+                    ## Desafío
+                    Puedes repetir las líneas 2 a 7 cuantas veces quieras copiando las líneas.
                 example_code: |
                     ```
-                    {repeat} _ _ {print} 'Bebé Tiburón tututudutudu'
-                    {print} 'Bebe Tiburón'
+                    elefantes = 1
+                    {print} elefantes 'elefante se balanceaba, sobre la tela de una araña. Cómo veía que resistía, fue a llamar a otro elefante.'
+                    elefantes = elefante + 1
+                    {print} elefantes 'elefantes se balanceaban, sobre la tela de una araña. Cómo veían que resistían, fueron a llamar a otro elefante.'```
                     ```
 
-                    Luego puedes, por supuesto, programar otras canciones. Hay muchas canciones donde hay repetición.
-
-                start_code: "{print} 'Una canción'"
+                start_code: "{print} '¡Vamos a cantar!'"
                 example_code_2: "```\nnumber = 6\nnumber = number - 1\nprint number ' little monkeys jumping on the bed'\nprint 'One fell off and bumped his head'\nprint 'Mama called the doctor and the doctor said'\nprint 'NO MORE MONKEYS JUMPING ON THE BED!'\nsleep\n```\n"
                 story_text_2: "## 5 Little Monkeys jumping on the bed\nThis children's song counts down from 5 little monkeys to 1 monkey.\nIf you copy line 2 - 7 and paste it under the the code, you can sing the whole song!\n"
             12:
                 example_code: "```\nactions = 'clap your hands', 'stomp your feet', 'shout Hurray!'\n{for} action {in} actions\n    {for} i {in} {range} 1 {to} 2\n        {print} '{if} youre happy and you know it'\n        {print} action\n    {print} '{if} youre happy and you know it and you really want to show it'\n    {print} '{if} youre happy and you know it'\n    {print} action\n```\n"
-                story_text: "## Sing a song!\nIn this song we can make it even easier to program '{if} you're happy and you know it, clap your hands'. Because we can put all of the actions in a variable, check it out:\n"
-                start_code: '# place your code here'
+                story_text: "## ¡Canta una canción!\nEn ésta canción haremos mas fácil programa 'si({if}) estás contento y lo sabes, aplaude'. Porque podemos poner todas las acciones en variables, mira:\n"
+                start_code: '# pon tu código aquí'
             11:
-                story_text: "## Songs\nIn this level you can use the `{for} i {in} {range}` command to make songs that use counting.\n"
+                story_text: "## Canciones\nEn este nivel, podrás usar el comando `{for} i {in} {range}` para crear canciones.\n"
                 example_code: "## 5 little monkeys\n```\n{for} i {in} {range} 5 {to} 1\n    {print} i ' little monkeys jumping on the bed'\n    {print} 'One fell off and bumped his head'\n    {print} 'Mama called the doctor and the doctor said'\n    {if} i {is} 1\n        {print} 'PUT THOSE MONKEYS RIGHT TO BED!'\n    {else}\n        {print} 'NO MORE MONKEYS JUMPING ON THE BED!'\n```\n"
-                start_code: '# place your code here'
+                start_code: '# pon tu código aquí'
             10:
                 story_text: "## Songs\nIn this level you can easily make the childrens' song 'Five little monkeys'. Can you make the last chorus?\nYou can also make the whole baby shark song (including all the other sharks in the family) in only 6 lines!\nOr you can make Old McDonald with all the different animals.\n"
                 example_code: "## 5 Little Monkeys Jumping on the bed\n```\nmonkeys = 5, 4, 3, 2\n{for} monkey {in} monkeys\n    {print} monkey ' little monkeys jumping on the bed'\n    {print} 'One fell off and bumped his head'\n    {print} 'Mama called the doctor and the doctor said'\n    {print} 'NO MORE MONKEYS JUMPING ON THE BED!'\n```\n\n## Baby Shark\n```\nsharks = baby, mommy, daddy, grandma, grandpa\n{for} shark {in} sharks\n    {print} shark 'tututututudu'\n    {print} shark 'tututututudu'\n    {print} shark 'tututututudu'\n    {print} shark\n```\n## Old McDonald\n```\nanimals = pig, dog, cow\n{for} animal {in} animals\n    {if} animal {is} pig\n        sound = oink\n    {if} animal {is} dog\n        sound = woof\n    {if} animal {is} cow\n        sound = moo\n    {print} 'Old McDonald had a farm'\n    {print} 'E I E I O!'\n    {print} 'and on that farm he had a ' animal\n    {print} 'E I E I O!'\n    {print} 'with a ' sound sound ' here'\n    {print} 'and a ' sound sound ' there'\n    {print} 'here a ' sound\n    {print} 'there a ' sound\n    {print} 'everywhere a ' sound sound\n```\n"
-                start_code: '# place your code here'
+                start_code: '# pon tu código aquí'
             16:
                 story_text: "## Sing a song!\nIn this level, you can program a song like OldMacDonald even more quickly. You can connect the right animal to the right sound by simply putting them in the same place in the list.\nThe Drunken Sailor is also quickly made in this level. You only need 8 lines for the entire song, check it out!\n\n## Old MacDonald\n```\nanimals = ['pig', 'dog', 'cow']\nsounds = ['oink', 'woof', 'moo']\n{for} i {in} {range} 1 {to} 3\n    animal = animals[i]\n    sound = sounds[i]\n    {print} 'Old McDonald had a farm'\n    {print} 'E I E I O!'\n    {print} 'and on that farm he had a ' animal\n    {print} 'E I E I O!'\n    {print} 'with a ' sound sound ' here'\n    {print} 'and a ' sound sound ' there'\n    {print} 'here a ' sound\n    {print} 'there a ' sound\n    {print} 'everywhere a ' sound sound\n```\n\n## Drunken Sailor\n```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines\n    {for} i {in} {range} 1 {to} 3\n        {print} line\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
-                start_code: '# place your code here'
+                start_code: '# pon tu código aquí'
                 example_code: "## Old MacDonald\n```\nanimals = ['pig', 'dog', 'cow']\nsounds = ['oink', 'woof', 'moo']\n{for} i {in} {range} 1 {to} 3\n    animal = animals[i]\n    sound = sounds[i]\n    {print} 'Old McDonald had a farm'\n    {print} 'E I E I O!'\n    {print} 'and on that farm he had a ' animal\n    {print} 'E I E I O!'\n    {print} 'with a ' sound sound ' here'\n    {print} 'and a ' sound sound ' there'\n    {print} 'here a ' sound\n    {print} 'there a ' sound\n    {print} 'everywhere a ' sound sound\n```\n\n## Drunken Sailor\n```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines\n    {for} i {in} {range} 1 {to} 3\n        {print} line\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
     turtle:
         name: "La tortuga"
@@ -456,11 +455,14 @@ adventures:
             1:
                 story_text: |
                     ## Dibujemos
-                    En nivel 1 puede usar Hedy para dibujar también. Combinando giros y líneas, ¡puede hacer un cuadrado o una escalera!
+                    En nivel 1 también puedes usar Hedy para dibujar. Combinando giros y líneas, ¡puede hacer un cuadrado o una escalera!
 
-                    Usando `{forward}` dibuja una línea hacia adelante. El numero detrás de él determina qué tan lejos caminará la tortuga. `{turn} right` gira un cuarto de vuelta en el sentido de las agujas del reloj, `{turn} left` gira en sentido contrario a las agujas del reloj.
+                    Usando `{forward}` dibujas una línea hacia adelante. El numero detrás del comando determina qué tan lejos caminará la tortuga. `{turn} {right}` gira un cuarto de vuelta en el sentido de las agujas del reloj, `{turn} {left}` gira en sentido contrario a las agujas del reloj.
 
-                    Este es el comienzo de unas pequeñas escaleras. ¿Puedes llegar a 5 pasos?
+                    Si quieres ir hacia atrás, puedes utilizar el comando `{forward}` pero con un número negativo. Por ejemplo `{forward} -100`
+
+                    ## Challenge
+                    Este es el principio de una pequeña escalera, ¿Puedes hacer 5 escalones más?
                 example_code: |
                     ```
                     {forward} 50
@@ -473,11 +475,8 @@ adventures:
                 start_code: "{forward} 50\n{turn} left"
             2:
                 story_text: |
-                    En nivel 1 la tortuga sólo podía girar a la izquierda o a la derecha. ¡Eso es un poco aburrido!
-                    En nivel 2 puede apuntar su nariz en todas las direcciones.
-
-                    Usa 90 para girar un cuarto. A esto lo llamamos grados. Un giro completo es de 360 grados.
-                    ¿Puedes hacer una figura con este código? ¿Tal vez un triángulo o un círculo?
+                    ## Tortuga
+                    En este nivel puedes utilizar variables para hacer tu tortuga interactiva. Por ejemplo, puedes preguntar al jugador cuantos pasos dará la tortuga.
                 example_code: |
                     ```
                     {print} Figuras de dibujo
@@ -490,13 +489,13 @@ adventures:
 
 
 
-                start_code: |
+                start_code: |-
                     {print} ¡Carrera de tortugas!
-                    hoek {is} 90
-                    {turn} hoek
+                    angulo {is} 90
+                    {turn} angulo
                     {forward} 25
-                story_text_2: "Also, in level 1 the turtle could only turn left or right. That is a bit boring!\nIn level 2 he can point his nose in all directions.\n\nUse 90 to turn a quarter. We call this degrees. A full turn is 360 degrees.\nCan you make a figure with this code? Maybe a triangle or a circle?\n"
-                example_code_2: "```\n{print} Drawing figures\nangle {is} 90\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n```\n"
+                story_text_2: "Además, en el nivel 1 la tortuga solo podía girar a la derecha o a la izquierda. ¡Qué aburrido!\nEn el nivel 2 la tortuga puede apuntar su nariz en todas las direcciones.\n\nUtiliza 90 para girar un cuarto. Lo llamamos grados, un giro completo son 360 grados.\n¿Puedes hacer una figura con este código? ?Quizá un triangulo o un círculo?\n"
+                example_code_2: "```\n{print} Dibujando figur\nangulo {is} 90\n{turn} angulo\n{forward} 25\n{turn} angulo\n{forward} 25\n```\n"
             8:
                 story_text: |
                     ## Dibujemos
