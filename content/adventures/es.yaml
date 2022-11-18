@@ -1,7 +1,7 @@
 adventures:
     default:
         name: "Introducción"
-        description: "Nivel de explicación"
+        description: "Explicación del nivel"
         default_save_name: "intro"
         levels:
             1:
@@ -14,27 +14,16 @@ adventures:
                     Puedes mostrar texto por pantalla usando el comando `{print}`.     
                 start_code: "{print} hola mundo!"
                 example_code: "```\n{print} Hola!\n{print} Bienvenido a Hedy!\n```\n"
-                story_text_2: "También puedes solicitar  entrada y repetirla usando el comando`{echo}`.\nPrueba el código a tu izquierda de nuevo.\n\n¿No sabes qué crear? En las siguientes pestañas vas a encontrar ideas de programas para construir.\n"
+                story_text_2: "También puedes solicitar  entrada con `{ask}` y repetirla usando el comando`{echo}`.\n"
                 example_code_2: "```\n{ask} ¿Cuál es tu nombre?\n{echo} hola\n```\n"
                 story_text_3: "¡Empezemos! ¿No sabes que crear? En las siguientes pestañas encontrarás ideas sobre programas que puedes construir.\n"
             2:
                 story_text: |
-                    En el nivel 2 aprendemos algo nuevo. Puedes nombrar una palabra con `{is}`.
+                    ## Variables
+                    En el nivel 2 aprendemos dos nuevos comandos: `{is}` and `{sleep}`.
+                    Puedes nombrar una palabra con `{is}`. Esto es llamado una variable. En este ejemplo hemos hecho una variable llamada nombre y una variable llamada edad. Puedes usar la palabra nombre en donde sea en tu código y será reemplazada por Hedy, así:
 
-                    Si pones el código en la parte superior de tu programa, puedes usar `nombre` en cualquier parte y será reemplazado por Hedy:
-
-                    ```
-                    nombre {is} Hedy
-                    {print} Bienvenido nombre
-                    ```
-
-                    Nota: `{ask}` ha cambiado en el nivel 2, también puedes guardar la respuesta con un nombre:
-
-                    ```
-                    respuesta {is} {ask} ¿Cómo te llamas?
-                    ```
-
-                    `{print}` sigue funcionando como en el nivel 1, así que ya no necesitas usar `{echo}`.
+                    ¡De esta forma ya no necesitas el comando `{echo}`!
                 start_code: "{print} hola mundo!"
                 example_code: "```\nnombre {is} Hedy\nedad {is} 15\n{print} nombre tiene edad años\n```\n"
                 story_text_2: "El comando `{print}` sigue funcionando igual, pero el comando `{ask}` ha cambiado. Ahora hay que utilizar una variable en el comando `{ask}`. Algo como esto:\n"
@@ -43,24 +32,22 @@ adventures:
                 example_code_3: "```\n{print} Mi color favorito es...\n{sleep} 2\n{print} ¡verde!\n```\n"
             3:
                 story_text: |
-                    En el nivel 3 también puedes hacer una lista. Puedes dejar al ordenador escoger algo aleatorio de la lista, usando `{at} {random}` (se pronuncia: et ren-dom).
+                    ## ¡Haz una lista!
+                    En el nivel 3 también puedes hacer una lista. Puedes dejar al ordenador escoger algo aleatorio de la lista, usando `{at} {random}`.
                 start_code: "{print} hola mundo!"
                 story_text_2: También puedes añadir elementos a una lista con `{add}` y quitar elementos con `{remove}`.
                 example_code_2: "```\nanimales {is} perro, gato, canguro\n{add} pingüino {to_list} animales\n{remove} gato {from} animales\n{print} animales {at} {random}\n```\n"
                 example_code: "```\nanimales {is} perro, gato, canguro \n{print} animales {at} {random}\n```\n"
             4:
                 story_text: |
-                    En el nivel 4 `{ask}` y `{print}` funcionan diferente.
+                    ## 'Comillas'
+                    En el nivel 4 `{ask}` y `{print}` han cambiado.
 
-                    Debes poner el texto que quieras imprimir entre comillas.
+                    Debes poner el texto que quieres imprimir entre comillas.
 
-                    Esto es útil, porque ahora puedes imprimir todas las palabras que quieras. También las palabras que usaste para almacenar algo con `{is}`.
+                    Esto es útil porque ahora puedes imprimir todas las palabras que quieras. También las palabras que usaste para guardar algo con `{is}`.
 
-                    La mayoría de los lenguajes de programación también utilizan comillas al imprimir, ¡por lo que nos estamos acercando un paso más a la programación real!
-
-                    ## Las tareas son cada vez más difíciles
-                    Encontrarás de nuevo los comandos a la izquierda y las tareas en las siguientes pestañas. Las tareas serán cada vez más difíciles.
-                    Así que lo mejor es empezar por la izquierda con la historia y continuar hacia la derecha para que los desafíos sean cada vez mayores.
+                    La mayoría de lenguajes de programación usan comillas para imprimir, ¡entonces nos estamos acercando cada vez más a programación de verdad!
                 start_code: "{print} 'Hola mundo'"
                 example_code: "```\n{print} '¡Necesitas usar comillas de ahora en adelante!'\nrespuesta {is} {ask} '¿Que necesitamos usar de ahora en adelante?'\n{print} ' Necesitamos usar ' respuesta \n```\n"
                 story_text_2: "## Las aventuras son cada vez más difíciles\nLas aventuras son cada vez más difíciles en las sucesivas pestañas.\nAsí que es mejor empezar por la izquierda, y seguir hacia la derecha, para que los retos sean cada vez mayores.\n"
@@ -70,34 +57,32 @@ adventures:
                     {if} nombre {is} Hedy {print} '¡genial!' {else} {print} 'meh'
                 story_text: |
                     ## If... else...
-                    En el nivel 5 hay una novedad, ¡el `{if}`! `if` significa si en inglés. Con el `{if}` puedes elegir entre dos opciones.
+                    En el nivel 5 hay una novedad, ¡el `{if}`! Con el `{if}` puedes elegir entre dos opciones.
                     El siguiente código muestra por pantalla bien si introduces el nombre Hedy sino mostrará buu.
                     `{ask}` y `{print}` siguen funcionando como en el nivel 4.
                 example_code_2: "```\nnombre {is} {ask} '¿Cuál es tu nombre?'\n{if} nombre {is} Hedy {print} 'bien'\n{else} {print} '¡buuu!'\n```\n"
                 story_text_3: "## Listas\nCuando queremos comprobar si algo está en una lista, podemos usar el comando `{in}`.\nEste código imprime ¡bonito! si se elige el verde o el amarillo, y meh en caso contrario.\n"
                 example_code: "```\nnombre {is} {ask} '¿Cuál es tu nombre?'\n{if} nombre {is} Hedy {print} 'bien' {else} {print} 'buu'\n```\n"
-                example_code_3: "```\ncolores_bonitos {is} verde, amarillo\ncolor {is} {ask} '¿Cuál es tu color favorito?'\n{if} color {in} colores_bonitos {print} ''¡bonito!'\n{else} {print} 'meh'\n```\n"
+                example_code_3: "```\ncolores_bonitos {is} verde, amarillo\ncolor {is} {ask} '¿Cuál es tu color favorito?'\n{if} color {in} colores_bonitos {print} '¡bonito!'\n{else} {print} 'meh'\n```\n"
                 story_text_2: "A veces el código con un `{if}` se hace muy largo y no cabe bien en la línea. <br> También puedes dividir el código en dos líneas, empezando la segunda línea en el `{else}` así:\n"
             6:
-                start_code: "{print} '5 veces 5 es ' 5 * 5"
+                start_code: "{print} '5 por 5 es ' 5 * 5"
                 story_text: |
                     ## 1 + 1
                     En este nivel aprenderás algo nuevo: ahora puedes hacer cálculos.
 
-                    La suma es fácil, se escribe igual que en matemáticas, por ejemplo `5+5`. Las restas también `5-5`
+                    La suma es fácil, se escribe igual que en matemáticas, por ejemplo: `5 + 5`. Las restas también `5 - 5`
 
                     La multiplicación es un poco diferente, porque el símbolo multiplicar no está en tu teclado, busca, ¡no existe!
-                    Por esa razón utilizamos el símbolo asterisco, al lado del enter: `5*5`. Léelo como "5 veces 5" y te ayudará a recordarlo mejor.
-                example_code: "```\n{print} '5 más 5 es ' 5 + 5\n{print} '5 menos 5 es ' 5 - 5\n{print} '5 veces 5 es ' 5 * 5\n```\n"
+                    Por esa razón utilizamos el símbolo asterisco, al lado del enter: `5 * 5`. Léelo como "5 por 5" y te ayudará a recordarlo mejor.
+                example_code: "```\n{print} '5 más 5 es ' 5 + 5\n{print} '5 menos 5 es ' 5 - 5\n{print} '5 por 5 es ' 5 * 5\n```\n"
                 story_text_2: "¡También cambiamos cómo se guarda una palabra en una variable! Ahora se puede utilizar `=` en lugar de `{is}` cuando guardamos un nombre o un número en una variable, así:\n"
                 example_code_2: "```\nnombre = Hedy\nrespuesta = 20 + 4\n```\n"
             7:
                 start_code: "{repeat} 3 {times} {print} 'Hedy es divertido!'"
                 story_text: |
-                    ## nivel 7! nivel 7!
-                    `{ask}`, `{print}` e `{if}` funcionan como en el nivel 5 y 6.
-                    Pero en el nivel 7 hay algo nuevo: `{repeat}`.
-                    Con `{repeat}` puedes repetir una línea de código varias veces.
+                    ## Nivel 7! Nivel 7!
+                    El nivel 7 agrega el comando `{repeat}`.  `{repeat}` puede ser usado para ejecutar una línea de código varias veces.
                 example_code: |
                     ```
                     {repeat} 3 {times} {print} '¡Hedy es divertido!'
@@ -132,29 +117,29 @@ adventures:
                     ```
             9:
                 start_code: "{repeat} 3 {times}\n    comida = {ask} '¿Qué quieres comer?'\n    {if} comida {is} 'pizza'\n        {print} '¡bien!'\n    {else}\n        {print} 'pizza es mejor'"
-                story_text: "In this level you can not only use multiple lines with `{if}` {and} `{repeat}`, but you can also put them together!\nIn the example you see an `{if}` command within a `{repeat}` command. It is also allowed the other way around, and an `{if}` is also allowed in an `{if}` and a `{repeat}` in a `{repeat}`.\nGive it a try!"
-                example_code: "```\n{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    else\n        {print} 'pizza is better'\n```\n"
+                story_text: "## ¡Todo junto ahora!\nEn este nivel no solo puedes usar múltiples líneas con `{if}` y `{repeat}`, ¡pero también los puedes usar juntos!\nEn el ejemplo puedes ver un comando `{if}` dentro de un `{repeat}`. También está permitido de forma contraria, y un `{if}` también está permitido dentro de un `{if}` y un `{repeat}` dentro de un `{repeat}`.\nGive it a try!\n"
+                example_code: "```\n{repeat} 3 {times}\n    comida = {ask} '¿Qué quieres?'\n    {if} comida {is} pizza\n        {print} '¡bien!'\n    else\n        {print} 'pizza es mejor'\n```\n"
             10:
-                story_text: "In this level we learn a new code called `{for}`. With `{for}` you can make a list and use all elements.\n`{for}` creates a block, like `{repeat}` and `{if}` so all lines in the block need to start with spaces."
+                story_text: "## Para cada elemento en mi lista...\nEn este nivel vamos a aprender un nuevo código llamado `{for}`. Con `{for}` Puedes hacer una lista y usar todos sus elementos.\n`{for}` crea un bloque, como `{repeat}` y `{if}` por lo que todas las líneas del bloque necesitan empezar con espacios."
                 start_code: "animales {is} perros, gatos, peces\n{for} animal {in} animales\n  {print} 'Me gustan los  ' animal"
-                example_code: "```\nanimals {is} dog, cat, blobfish\n{for} animal {in} animals\n  {print} 'I love ' animal\n```\n"
+                example_code: "```\nanimales {is} perros, gatos, peces globo\n{for} animal {in} animales\n  {print} 'Amo a los ' animal\n```\n"
             11:
                 start_code: "{for} contador {in} {range} 1 {to} 5\n    {print} contador"
                 story_text: '## Bucles
 
-                    `{print}` funciona igual pero añadimos una nueva forma del `{for}`. Ahora puedes escribir `{for} contador {in} {range} 1 {to} 5` en vez de `{repeat}5 {times}` y utilizar `contador` en tu programa.
+                    `{print}` funciona igual pero añadimos una nueva forma del `{for}`. Ahora puedes escribir `{for} counter {in} {range} 1 {to} 5` en vez de `{repeat} 5 {times}` y utilizar `counter` en tu programa.
 
-                    Pruébalo para ver qué pasa. Recuerda usar indentaciones después de las instrucciones `{for}` y `{if}` (Eso significa empezar una línea con cuatro espacios)'
-                example_code: "```\nfor counter in range 1 to 5\n    print counter\n```\n"
+                    ¡Pruébalo para ver qué pasa! Recuerda usar indentaciones después de las instrucciones `{for}` y `{if}` (Eso significa empezar una línea con cuatro espacios)'
+                example_code: "```\n{for} contador {in} {range} 1 {to} 5\n    {print} contador\n```\n"
             12:
                 start_code: "{print} 'los números decimales ahora necesitan usar un punto'\n{print} 2.5 + 2.5"
                 story_text: "## Números y textos\n**Números decimales**\nHasta ahora, Hedy no permitía números decimales como 1.5, pero a partir de ahora sí lo permitiremos. Fíjate que los ordenadores utilizan el punto `.` para los decimales, no la coma."
                 example_code_2: "```\nnombre = 'Hedy el Robot'\n{print} 'Hola ' nombre\n```\n"
-                example_code: "```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n"
+                example_code: "```\n{print} 'Dos y medio más dos y medio es...'\n{print} 2.5 + 2.5\n```\n"
                 story_text_2: "**Todos los textos deben ir entre comillas**.\nA partir de este nivel también tendrás que usar comillas cuando guardes un texto con `=`:\n"
                 story_text_3: "**Todos los elementos de las listas también necesitan comillas**.\nLas listas son textos, por lo que también necesitan comillas. Ten en cuenta que cada elemento de la lista lleva comillas.\nEsto te permite guardar dos palabras como un elemento de la lista, por ejemplo \"Iron Man\".\n"
                 example_code_3: "```\nsuperheroes = 'Spiderman', 'Batman', 'Iron Man'\n{print} superheroes {at} {random}\n```\n"
-                story_text_4: "**Todo los textos después de las instrucciones `{if}` también necesita comillas**.\n"
+                story_text_4: "**Todo los textos después de las instrucciones `{if}` también necesitan comillas**.\n"
                 example_code_4: "```\nnombre = {ask} '¿Cuál es tu nombre?'\n{if} nombre = 'Hedy el Robot'\n    {print} '¡Hola!'\n```\n"
                 story_text_5: "**Los números no necesitan comillas**.\nCon los números no se utilizan las comillas en el `=`:\n"
                 example_code_5: "```\npuntuacion = 25\n{print} 'Tu puntación es ' puntuacion \n```\n"
@@ -162,31 +147,31 @@ adventures:
                 example_code_6: "```\na = '¡Hola '\nb = 'mundo!'\n{print} a + b\n```\n"
             13:
                 start_code: "nombre = {ask} '¿Cuál es tu nombre?'\nedad = {ask} '¿Cuántos años tienes?'\n{if} nombre {is} 'Hedy' {and} edad {is} 2\n    {print} '¡Eres la verdadera Hedy!'"
-                story_text: "## And... Or..?\nAhora vamos a aprender sobre `{and}` y `{or}`, and significa y, or significa o. Si quieres comprobar dos condiciones, no necesitas utilizar dos {if} puedes utilizar `{and}` y `{or}`. Si utilizas `{and}`, ambas condiciones, a derecha e izquierda del `{and}`, deberán ser ciertas. También puedes utilizar `{or}`, en cuyo caso solo una debe ser cierta."
+                story_text: "## Y... O..?\n¡Ahora vamos a aprender sobre `{and}` y `{or}`! Si quieres comprobar dos condiciones, no necesitas utilizar dos {if} sino que puedes utilizar `{and}` y `{or}`. Si utilizas `{and}`, ambas condiciones, a derecha e izquierda del `{and}`, deberán ser ciertas. También puedes utilizar `{or}`, en cuyo caso solo una debe ser cierta."
                 example_code: "```\nname = {ask} '¿Cuál es tu nombre?'\nage = {ask} '¿Qué edad tienes?'\n{if} name {is} 'Hedy' {and} age {is} 2\n    {print} '¡Eres la verdadera Hedy!'\n```\n"
             14:
                 start_code: "age = {ask} '¿Qué edad tienes?'\n{if} age < 13\n    {print} '¡Eres más joven que yo!'\n{else}\n    {print} '¡Eres mayor que yo!'"
-                story_text: "## Great, Greater, Greatest!\n¡Vamos a aprender más! Puede que ya los conozcas de matemáticas, el `<` y `>`.\nEl `<`comprueba si el primer número es mas pequeño que el segundo, por ejemplo edad `<` 12 comprueba si edad es menor que 12.\nSi quieres comprobar si el primer número es menor o igual al segundo, puedes utilizar `<=`, por ejemplo, edad `<=` 11.\nEl `>` comprueba si el primer número es mayor que el segundo, por ejemplo puntos `>`10 comprueba si puntos es mayor que 10.\nSi quieres comprobar si el primer número es mayor o igual al segundo, puedes utilizar `>=`, por ejemplo, puntos `>=` 11.\nPuedes utilizar estos símbolos en un `{if}`. ejemplo:\n"
-                example_code: "```\nage = {ask} 'How old are you?'\n{if} age > 12\n    {print} 'You are older than I am!'\n```\n"
+                story_text: "## Great, Greater, Greatest!\n¡Vamos a aprender más! Puede que ya los conozcas de matemáticas, el `<` y `>`.\nEl `<`comprueba si el primer número es mas pequeño que el segundo, por ejemplo edad `<` 12 comprueba si edad es menor que 12.\nSi quieres comprobar si el primer número es menor o igual al segundo, puedes utilizar `<=`, por ejemplo, edad `<=` 11.\nEl `>` comprueba si el primer número es mayor que el segundo, por ejemplo puntos `>`10 comprueba si puntos es mayor que 10.\nSi quieres comprobar si el primer número es mayor o igual al segundo, puedes utilizar `>=`, por ejemplo, puntos `>=` 11.\nPuedes utilizar estos símbolos en un `{if}`. Ejemplo:\n"
+                example_code: "```\nage = {ask} '¿Qué edad tienes?'\n{if} edad > 12\n    {print} '¡Eres más viejo que yo!'\n```\n"
                 story_text_2: "A partir de este nivel, si quieres una comparación exacta, puedes utilizar dos símbolos de igual. Así es como funcionan la mayoría de lenguajes de programación:\n"
-                example_code_2: "```\nname = {ask} '¿Cuál es tu nombre?'\n{if} name == 'Hedy'\n    {print} '¡Molas mucho!'\n```\n"
+                example_code_2: "```\nnombre = {ask} '¿Cuál es tu nombre?'\n{if} nombre == 'Hedy'\n    {print} '¡Eres genial!'\n```\n"
                 story_text_3: "Puedes comprobar si algo *no* es igual a otra cosa utilizando `!=` por ejemplo:\n"
-                example_code_3: "```\nname = {ask} '¿Cuál es tu nombre?'\n{if} name != 'Hedy'\n    {print} 'No te llamas Hedy'\n```\n"
+                example_code_3: "```\nnombre = {ask} '¿Cuál es tu nombre?'\n{if} nombre != 'Hedy'\n    {print} 'No te llamas Hedy'\n```\n"
             15:
                 start_code: "respuesta = 0\n{while} respuesta != 25\n    respuesta = {ask} 'Cuanto es 5 por 5?'\n{print} 'Tenemos la respuesta correcta'"
-                story_text: "## ¡Más bucles!\nVamos a aprender una nueva forma de bucles, ¡el bucle `{while}`! Este bucle se repetirá hasta que la condición sea cierta.\nAsí que no te olvides de cambiar el valor en el bucle.\n\nEn el código de ejemplo, continuará hasta que se le dé una respuesta correcta.\nSi no se le da nunca la respuesta correcta, ¡el bucle nunca acaba!"
-                example_code: "```\nanswer = 0\nwhile answer != 25\n    answer = ask 'What is 5 times 5?'\nprint 'A correct answer has been given'\n```\n"
+                story_text: "## ¡Más bucles!\nVamos a aprender una nueva forma de bucles, ¡el bucle `{while}`! Este bucle se repetirá hasta que la condición sea cierta.\nAsí que no te olvides de cambiar el valor en el bucle.\n\nEn el código de ejemplo, este continuará hasta que se le dé una respuesta correcta.\nSi no se le da nunca la respuesta correcta, ¡el bucle nunca acaba!"
+                example_code: "```\nrespuesta = 0\n{while} respuesta != 25\n    respuesta = {ask} '¿Cuánto es 5 por 5?'\n{print} Una respuesta correcta ha sido dada'\n```\n"
             16:
-                start_code: "fruta = ['apple', 'banana', 'cherry']\n{print} fruta"
+                start_code: "fruta = ['manzana', 'banana', 'cereza']\n{print} fruta"
                 story_text: "## ¡Cada vez nos acercamos más al código profesional!\nVamos a hacer listas como en Python, ¡con corchetes (`[]`) alrededor de las listas! También mantendremos las comillas alrededor de cada elemento como hemos aprendido en los niveles anteriores.\nTambién puedes utilizar los corchetes para seleccionar una posición en la lista."
-                example_code: "```\nfriends = ['Ahmed', 'Ben', 'Cayden']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'the lucky number of ' friends[i]\n    {print} 'is ' lucky_numbers[i]\n```\n"
+                example_code: "```\namigos = ['Ahmed', 'Ben', 'Cayden']\nnumero_de_suerte = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'El número de la suerte de ' friends[i]\n    {print} 'es ' numero_de_suerte[i]\n```\n"
             17:
                 start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Listo o no, ¡Allá voy!'"
-                story_text: "Now we are going to change indentation a little bit. Every time that we need an indentation, we need `:` at the line before the indentation.\n\nIn this level you can also use a new command: `{elif}`. `{elif}` is short for {else} {if} and you need it when you you want to make 3 (or more!) options.\nCheck it out!"
-                example_code: "```\nprices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
+                story_text: "## Elif\nAhora vamos a cambiar la indentación un poquito. Cada vez que necesitamos indentación, necesitamos `:` en la línea antes de la indentación.\n\nEn este nivel puedes usar un nuevo comando: `{elif}`. `{elif}` es una abreviación de {else} {if} y la necesitas cuando quieres hacer 3 o más opciones.\n¡Pruebalas!"
+                example_code: "```\npremios = ['1 millón de dólares', 'un pie de manzana, 'nada']\ntu_premio = premios[{random}]\n{print} 'Tu ganas ' tu_premio\n{if} tu_premio == '1 millón de dólares' :\n    {print} '¡Sí! ¡Eres rico!'\n{elif} tu_premio == 'un pie de manzana' :\n    {print} '¡Excelente! ¡Un pie de manzana!'\n{else}:\n    {print} 'Mejor suerte la próxima vez.'\n```\n"
             18:
                 start_code: "nombre = 'Hedy'\n{print}('Mi nombre es ', nombre)"
-                story_text: "We arrived at real Python code! That means we need to use parentheses with {print} and {range} from now on.\nThat looks like this:\n```\n{print}('my name is Hedy!')\n```\nIf you want to print more thant one items, you need to separate them by commas.\n```\nnaam = 'Hedy'\n{print}('my name is ', naam)\n```"
+                story_text: "## ¡El último nivel!\n¡Llegamos código real de Python! Eso significa que necesitamos usar paréntesis con {print} y {range} de ahora en adelante."
                 story_text_2: Si quieres mostrar por pantalla mas de un elemento, debes separarlos con comas.
                 example_code_2: "```\ntemperatura = 25\n{print}('Hace ', temperatura, ' grados afuera')\n```\n"
                 story_text_3: "## Input\nEl último cambio que necesitaremos para escribir en Python es cambiar `{ask}` por `{input}`."
@@ -215,9 +200,6 @@ adventures:
                     {print} Él tiene miedo de que éste sea un bosque encantado
                     ```
 
-                    ## Avance
-                    No te parece algo limitante que el nombre del protagonista sólo pueda aparecer al final de la oración? En los niveles 2 y 3 puedes hacer cosas más interesantes con tu programa.
-
                 start_code: "{print} Aquí comienza tu historia"
                 story_text_2: "## Desafío\n¿Puedes crear tu propia historia en Hedy utilizando `{print}` , `{ask}` y `{echo}`?\n"
             2:
@@ -231,12 +213,13 @@ adventures:
 
                     ## Desafío
                     ¿Puedes crear una historia con una variable? ¿Puedes añadir aún más variables?
-                example_code: |
+                example_code: |-
                     ```
                     nombre {is} {ask} Cómo se llama el protagonista?
                     {print} nombre está caminando por el bosque
                     {print} nombre está bastante asustado
                     {print} Por todos lados se oyen extraños ruidos
+                    {sleep}
                     {print} nombre tiene miedo de que éste sea un bosque encantado
                     ```
 
@@ -259,7 +242,7 @@ adventures:
                 start_code: "{repeat} 5 {times} {print} 'Ayuda!'"
             5:
                 story_text: |
-                    ## Una história
+                    ## Una historia
                     Lo que también puedes hacer para hacer tu historia todavía más interesante es darle distintos finales posibles.
 
                     ## Desafío
@@ -285,30 +268,22 @@ adventures:
                 story_text: |
                     ## Una historia
                     Quizá te hayas dado cuenta que aún hay un problema en los niveles anteriores. ¿Has intentado mostrar por pantalla una frase que contenga la palabra nombre? por ejemplo `{print}` mi nombre es nombre.
-                    Puedes solucionar este problem en este nivel. Debes utilizar comillas para todo lo que quieras mostrar por pantalla.
+                    Puedes solucionar ese problema en este nivel. Debes utilizar comillas para todo lo que quieras mostrar por pantalla.
                 example_code: |
                     ```
                     nombre {is} Carlos
-                    {print} 'El protagonista de esta historia es' nombre
-                    {print} nombre ' está caminando por el bosque'
-                    {print} nombre ' está un poco asustado'
+                    {print} _ El protagonista de esta historia es _ nombre
+                    {print} nombre _ está caminando por el bosque _
+                    {print} nombre _ está un poco asustado _
                     animales {is} 🦔, 🐿, 🦉, 🦇
-                    {print} 'Él/Ella escucha el ruido de un' animales {at} {random}
-                    {print} nombre 'tiene miedo de que éste sea un bosque encantado'
+                    {print} _ Él/Ella escucha el ruido de un_ animales {at} {random}
+                    {print} nombre _tiene miedo de que éste sea un bosque encantado_
                     ```
-                start_code: "{print} 'Aquí viene tu historia!'"
+                start_code: "{print} '¡Aquí viene tu historia!'"
             3:
-                story_text: |4
-
-
-                    ## Elementos al azar
-                    Puedes también agregar elementos al azar en tu historia. Por ejemplo, un monstruo, animal u otro obstáculo.
-
-                    Por ejemplo:
-                    ```
-                    animales {is} búho, águila, armadillo
-                    {print} Él escucha el ruido de un animales {at} {random}
-                    ```
+                story_text: |
+                    ## Historia
+                    En el nivel 3 puedes hacer tu historia más divertida. Puedes usar aleatoriedad para cualquier monstruo, animal, o cualquier otro obstáculo, como este:
                 start_code: "{print} Aquí viene tu historia!"
                 example_code: |
                     ```
@@ -316,15 +291,14 @@ adventures:
                     {print} Él ahora escucha el ruido de un animales {at} {random}
                     ```
                 story_text_2: |
-                    The command `{add}` can also come in handy in your story. For example
+                    El comando `{add}` puede ser útil en tu historia.
 
-                example_code_2: |4
-
-                    {print} He hears a sound
-                    animals {is} 🐿, 🦔, 🦇, 🦉
-                    animal {is} {ask} What do you think it is?
-                    {add} animal {to_list} animals
-                    {print} it was a animals {at} {random}
+                example_code_2: |
+                    {print} El escucha un sonido
+                    animales {is} 🐿, 🦔, 🦇, 🦉
+                    animal {is} {ask} ¿Qué piensas qué es?
+                    {add} animal {to_list} animales
+                    {print} fue un animales {at} {random}
                     ```
                 story_text_3: |
                     Este es un ejemplo del comando `{remove}`en tu historia
