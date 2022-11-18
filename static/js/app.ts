@@ -199,7 +199,7 @@ $(document).on("click", function(event){
           stopit();
           editor.focus(); // Make sure the editor has focus, so we can continue typing
         }
-        if ($('#inline-modal .ask-modal').is (':visible')) $('#inline-modal').hide();
+        if ($('#ask-modal').is (':visible')) $('#inline-modal').hide();
         window.State.disable_run = false;
         $ ('#runit').css('background-color', '');
         window.State.unsaved_changes = true;
@@ -322,7 +322,7 @@ export function stopit() {
 
       window.State.pygame_running = false;
       document.onkeydown = null;
-      $('#inline-modal .pygame-modal').hide();
+      $('#pygame-modal').hide();
       $('#stopit').hide();
       $('#runit').show();
   }
@@ -336,9 +336,9 @@ export function stopit() {
 
       // This gets a bit complex: if we do have some input modal waiting, fake submit it and hide it
       // This way the Promise is no longer "waiting" and can no longer mess with our next program
-      if ($('#inline-modal .ask-modal').is(":visible")) {
-        $('#inline-modal .ask-modal form').submit();
-        $('#inline-modal .ask-modal').hide();
+      if ($('#ask-modal').is(":visible")) {
+        $('#ask-modal form').submit();
+        $('#ask-modal').hide();
       }
   }
 
@@ -1048,9 +1048,9 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
     ).test(code);
 
     if (!hasTurtle && !codeContainsInputFunctionBeforePygame) {
-      $('#inline-modal .pygame-modal').show();
+      $('#pygame-modal').show();
     }
-
+    
     document.onkeydown = animateKeys;
     window.State.pygame_running = true;
   }
@@ -1109,7 +1109,7 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
 
     if (hasPygame) {
       document.onkeydown = null;
-      $('#inline-modal .pygame-modal').hide();
+      $('#pygame-modal').hide();
     }
 
     if (hasTurtle) {
@@ -1203,14 +1203,14 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
     if (window.State.pygame_running) {
       Sk.unbindPygameListeners();
       document.onkeydown = null;
-      $('#inline-modal .pygame-modal').hide();
+      $('#pygame-modal').hide();
     }
 
     return new Promise(function(ok) {
       window.State.disable_run = true;
 
-      const input = $('#inline-modal .ask-modal input[type="text"]');
-      $('#inline-modal .ask-modal .caption').text(prompt);
+      const input = $('#ask-modal input[type="text"]');
+      $('#ask-modal .caption').text(prompt);
       input.val('');
       input.attr('placeholder', prompt);
       speak(prompt)
@@ -1218,10 +1218,10 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
       setTimeout(function() {
         input.focus();
       }, 0);
-      $('#inline-modal .ask-modal form').one('submit', function(event) {
+      $('#ask-modal form').one('submit', function(event) {
         window.State.disable_run = false;
         event.preventDefault();
-        $('#inline-modal .ask-modal').hide();
+        $('#ask-modal').hide();
 
         if (hasTurtle) {
           $('#turtlecanvas').show();
@@ -1232,7 +1232,7 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
           document.onkeydown = animateKeys;
 
           if (!hasTurtle) {
-            $('#inline-modal .pygame-modal').show();
+            $('#pygame-modal').show();
           }
         }
 
@@ -1251,7 +1251,7 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
 
           return false;
         });
-        $('#inline-modal .ask-modal').show();
+        $('#ask-modal').show();
       });
     } else {
       return new Promise(function (ok) {
