@@ -102,10 +102,9 @@ bash feed_dev_database.sh
 ```
 
 ## Python code styling
-As this project is growing and multiple people are working on it, we want to move to a more uniformly styled code base. We choose to stick to PEP8 guidelines, with the exception of a max line length of 100 characters instead of 79. To ensure your code adheres to these guidelines, you can install the pre-commit configuration to automatically check modified code when you make a commit. Installing this pre-commit hook has to be done manually (for security reasons) and can be done using the following commands:
+As this project is growing and multiple people are working on it, we want to move to a more uniformly styled code base. We choose to stick to PEP8 guidelines, with the exception of a max line length of 120 characters instead of 79. To ensure your code adheres to these guidelines, you can install the pre-commit configuration to automatically check modified code when you make a commit. Installing this pre-commit hook has to be done manually (for security reasons) and can be done using the following commands. The pre-commit hook is available for installation once you run `requirements.txt`:
 
 ```
-pip install pre-commit
 pre-commit install
 ```
 
