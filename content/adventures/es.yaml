@@ -494,19 +494,19 @@ adventures:
                         girar _
                         adelante _
                     ```
-                start_code: |
-                    ángulos {is} {ask} '¿Cuántos ángulos debo dibujar?'
+                start_code: |-
+                    ángulos = {ask} '¿Cuántos ángulos debo dibujar?'
             7:
                 story_text: |
                     ## Dibujemos
                     Enivel 6 puede repetir una línea de código con `{repeat}`.
                 example_code: |
                     ```
-                    {print} 'Dibujar figuras'
-                    {repeat} 3 {times} {forward} 10
+                    {print} 'Dibuja figuras'
+                    _ 3 _ {forward} 10
                     ```
-                start_code: |
-                    {print} 'Dibujar figuras'
+                start_code: |-
+                    {print} 'Dibuja figuras'
                     {repeat} 3 {times} {forward} 10
 
             6:
@@ -533,8 +533,8 @@ adventures:
                     {forward} 50
                     {turn} ángulo
                     ```
-                start_code: |
-                    {print} 'Figuras de dibujo'
+                start_code: |-
+                    {print} 'Dibujando figuras'
             5:
                 story_text: |
                     ## Dibujemos
@@ -553,10 +553,11 @@ adventures:
                     {turn} ángulo
                     {forward} 25
                     ```
-                start_code: |
-                    {print} 'Figuras de dibujo'
+                start_code: |-
+                    {print} 'Dibujando figuras'
                     figura {is} {ask} '¿Quieres un cuadrado o un triángulo?'
-                    {if} figura {is} triángulo ángulo {is} 120 {else} ángulo {is} 90                   {turn} ángulo
+                    {if} figura {is} triángulo ángulo {is} 120 {else} ángulo {is} 90
+                    {turn} ángulo
                     {forward} 25
             4:
                 story_text: |
@@ -564,27 +565,29 @@ adventures:
                     En nivel 3 tienes que usar comillas con `{print}` y `{ask}`. ¡También al dibujar!
                 example_code: |
                     ```
-                    {print} 'Figuras de dibujo'
-                    ángulo {is} 90
-                    {turn} ángulo
+                    {print} _ Dibujando figuras _
+                    angulo {is} 90
+                    {turn} angulo
                     {forward} 25
-                    {turn} ángulo
+                    {turn} angulo
                     {forward} 25
                     ```
 
-                start_code: |
-                    {print} 'Figuras de dibujo'
-                    ángulo {is} 90
-                    {turn} ángulo
+                start_code: |-
+                    {print} 'Dibujando figuras'
+                    angulo {is} 90
+                    {turn} angulo
                     {forward} 25
 
-                story_text_2: "## Colors\nYou can also change the color of the lines with the command `{color}`. Check out the example.\nYou can also use the command `{color} {white}` to make 'invisible' lines. You could use these white lines to move the turtle anywhere in the screen before you start drawing.\n"
+                story_text_2: "## Colores\nTambién puedes cambiar los colores de las líneas con el comando `{color}`. Mira el ejemplo.\nPuedes utilizar el comando `{color} {white}` para hacer lineas \"invisibles\". Puedes usar estas líneas blancas para mover la tortuga done quieras en la pantalla antes de empezar a dibujar.\n"
                 example_code_2: "```\n{color} {white}\n{forward} -80\n{color} {green}\n{forward} 50\n{color} {yellow}\n{forward} 50\n{color} {red}\n{forward} 50\n```\n"
             3:
                 story_text: |
-                    ## Tortuga en busca
-                    También puedes usar `{random}` con la tortuga de dibujo. Una elección aleatoria hace que la tortuga camine por un camino diferente cada vez..
-                    Usar `{at} {random}` para elegir un valor de una lista. Puede copiar y pegar las líneas 2 y 3, así que cree una ruta aleatoria más larga.
+                    ## La Tortuga que busca
+                    En este nivel, puedes utilizar `{at} {random}` con la tortuga que dibuja. Una elección aleatoria hace que la tortuga camine por un camino diferente cada vez.
+                    Utiliza `{at} {random}` para elegir un valor de una lista.
+                    ## Desafío
+                    ¿Puedes copiar y pegar las líneas 2 y 3 para crear un camino más largo?
                 example_code: |
                     ```
                     ángulos {is} 10, 50, 90, 150, 250
@@ -592,10 +595,9 @@ adventures:
                     {forward} 25
                     ```
 
-                start_code: |
-                    {print} ¡Carrera de tortugas!
-                    hoek {is} 90
-                    {turn} hoek
+                start_code: |-
+                    angulo {is} 10, 50, 90, 150, 250
+                    {turn} angulo {at} {random}
                     {forward} 25
     dishes:
         name: "Platos"
