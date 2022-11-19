@@ -21,7 +21,7 @@ adventures:
                 story_text: |
                     ## ا لمتغيرات
                     في المستوى الثاني نتعلم الأوامر الجديدة `{is}` و `{sleep}`.
-                    يمكنك أن تعطي اسما لشيء ما باستخدام `{is}`. هذا ما يسمى ب "متغير". في المثال الموجود قمنا باشناء متغير يسمى الاسم ونتغير اخر يسمى العمر. يمكنك أن تستخدم كلمة الاسم في أي مكان في البرنامج الخاص بك وسيتم استبدالها ب هيدي، كما في المثال التوضيحي: 
+                    يمكنك أن تعطي اسما لشيء ما باستخدام `{is}`. هذا ما يسمى ب "متغير". في المثال الموجود قمنا بانشاء متغير يسمى الاسم ومتغير آخر يسمى العمر. يمكنك أن تستخدم كلمة الاسم في أي مكان في البرنامج الخاص بك وسيتم استبدالها ب هيدي، كما في المثال التوضيحي: 
 
                     بهذا الشكل لم تعد الان بحاجة للأمر `{echo}`.
                 start_code: '{print} مرحبا أيها العالم!'
@@ -349,11 +349,11 @@ adventures:
                 story_text_2: "## Challenge\nCan you make the parrot ask a different question? Fill in the blanks in the example!\n"
                 example_code_2: "```\n{print} Im Hedy the parrot\n{ask} _\n{echo}\n{echo}\n"
             2:
-                story_text: "## الببغاء\nاصنع ببغاء الكتروني خاص بك، سيقوم بنسخ كل ما تقول!\n"
-                example_code: "```\n{print} Im Hedy the parrot\nname {is} {ask} whats your name?\n{print} name\n{sleep}\n{print} squawk\n{sleep}\n{print} name\n```\n"
-                start_code: '{print} Im Hedy the parrot!'
-                story_text_2: "## Challenge\nYou can use variables to make the parrot say more than only your name. Can you complete this code?\n"
-                example_code_2: "```\n{print} Im Hedy the parrot\nname {is} {ask} whats your name?\n{print} name\n{sleep}\n{print} name\nsurname {is} {ask} whats your surname?\n_\n{sleep}\n_\n```\n"
+                story_text: "## الببغاء\nاصنع ببغاء إلكتروني خاص بك، سيقوم بنسخ كل ما تقول!\n"
+                example_code: "```\n{print} أنا الببغاء هيدي\nالاسم {is} {ask} ما اسمك؟\n{print} الاسم\n{sleep}\n{print} squawk\n{sleep}\n{print} الاسم\n```\n"
+                start_code: '{print} أنا الببغاء هيدي'
+                story_text_2: "## تحدي\nبإمكانك استخدام المتغيرات لتجعل الببغاء يقول أي شيء تريده, هل تستطيع إكمال هذا الكود؟\n"
+                example_code_2: "```\n{print}أنا الببغاء هيدي\nالاسم١ {is} {ask} ما اسمك؟\n{print} الاسم١\n{sleep}\n{print} الاسم١\nالاسم٢ {is} {ask} ما اسم عائلتك؟\n_\n{sleep}\n_\n```\n"
             5:
                 story_text: "## الببغاء\nكافئ الببغاء {if} قال الكلمةالصحيحة!\n"
                 example_code: "```\nwords {is} squawk, Hedy\n{print} 'Train your parrot!'\nnew_word {is} {ask} 'Which word do you want to teach them?'\n{add} new_word {to_list} words\nsaid_word {is} words {at} {random}\n{print} '\U0001F9D2 Say ' new_word ', Hedy!'\n{print} '\U0001F99C ' said_word\n{if} said_word {is} new_word {print} '\U0001F9D2 Great job, Hedy! \U0001F36A'\n{else} {print} '\U0001F9D2 No, Hedy! Say ' new_word\n```\n"
@@ -726,10 +726,10 @@ adventures:
                 example_code: "```\n{print} ما الذي جاء بي الى هنا؟\n{print} اتذكر ان صديقي اخبرني ان اتي الي هذا القصر القديم...\n{print} ولكن فجأة اصبح كل شيء اسود.\n{print} كيف انتهى بي المطاف في هذا الطابق..؟\n{print} رأسي تؤلمني كثيرًا.. كأنه تم ضربي بمضرب بيسبول كبير!\n{print} ما هذا الصوت؟؟\n{print} يا الهي! اعتقد انني لست الوحيد في هذا القصر!\n{print} يجب علي الخروج من هنا!\n{print} هناك ٣ ابواب امامي..\n{ask} ما الباب الذي علي اختباره للخروج؟\n{echo} اختار الباب \n{print} ...؟\n```\n"
                 story_text_2: "## تحدي\nهل يمكنك تكملة القصة المخيفة هذه؟ او ابتكار قصتك الخاصه لبيت الاشباح؟\n"
             2:
-                story_text: "## Haunted House\nIn this haunted house you can choose your monsters with emojis. Of course you could also use words.\n\n```\nmonster1 {is} \U0001F47B\nmonster2 {is} \U0001F921\nmonster3 {is} \U0001F476\n{print} You enter the haunted house.\n{print} Suddenly you see a monster1\n{print} You run into the other room, but a monster2 is waiting there for you!\n{print} Oh no! Quickly get to the kitchen.\n{print} But as you enter monster3 attacks you!\n```\n"
-                start_code: monster1 {is} _
-                example_code: "```\nmonster_1 {is} \U0001F47B\nmonster_2 {is} \U0001F921\nmonster_3 {is} \U0001F476\n{print} You enter the haunted house.\n{print} Suddenly you see a monster_1\n{print} You run into the other room, but a monster_2 is waiting there for you!\n{print} Oh no! Quickly get to the kitchen.\n{print} But as you enter monster_3 attacks you!\n```\n"
-                story_text_2: "## Challenge\nIn the example above the monsters are predetermined. So each time you run your code, the output is the same.\nCan you add `{ask}` commands to make the haunted house interactive and have the players choose the monsters they come across?\n"
+                story_text: "## بيت الأشباح\nفي بيت الأشباح في هذا المستوى يمكنك اختيار الأشباح الخاصة بك باستخدام الرموز التعبيرية، أو باستخدام الكلمات طبعًا.\n"
+                start_code: الشبح١ {is} _
+                example_code: "```\nالشبح_١ {is} \U0001F47B\nالشبح_٢ {is} \U0001F921\nالشبح_٣ {is} \U0001F476\n{print}تدخل إلى بيت الأشباح.\n{print} فجأةً ترى الشبح_١\n{print} تهرب إلى الغرفة الأخرى، لكنك تجد الشبح_٢ بانتظارك هناك!\n{print} أوه! لا. تصل سريعًا إلى المطبخ.\n{print} لكن سرعان ما تدخله الشبح_٣ يهاجمك!\n```\n"
+                story_text_2: "## تحدي\nفي المثال أعلاه، قمت بتعريف الأشباح مسبقًا باستخدام المتغيرات، لذلك ترى نفس النتيجة دائمًا عند تنفيذ الكود.\nهل تستطيع إضافة الأمر `{ask}` ليصبح بيت الأشباح ممتعًا أكثر حيث يستطيع اللاعبين اختيار أشباحهم الخاصة؟\n"
                 example_code_2: "```\nmonster_1 {is} _\nmonster_2 {is} _\nmonster_3 {is} _\n{print} You enter the haunted house.\n{print} Suddenly you see a monster_1\n{print} You run into the other room, but a monster_2 is waiting there for you!\n{print} Oh no! Quickly get to the kitchen.\n{print} But as you enter monster_3 attacks you!\n```\n"
             14:
                 story_text: "## Haunted House\nIn this level you can use the `<` and `>` symbol to introduce lives to your game.\n"
