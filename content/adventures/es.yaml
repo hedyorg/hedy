@@ -235,7 +235,7 @@ adventures:
                 example_code: |
                     ```
                     {print} 'La princesa grita pidiendo ayuda'
-                    {repeat} 5 {times} {print} 'Ayuda!'
+                    {repeat} 5 {times} {print} '¡Ayuda!'
                     {print} 'Por qué nadie viene en mi ayuda?'
                     ```
 
@@ -261,9 +261,10 @@ adventures:
                     {print} nombre ' camina por el bosque'
                     {print} nombre ' se topa con un monstruo'
                     final {is} {ask} 'Quieres un final feliz o un final triste?'
-                    {if} final {is} feliz {print} nombre ' desenfunda su espada y el monstruo se va corriendo' {else} {print} 'El monstruo se come a ' nombre
+                    {if} final {is} feliz {print} nombre ' desenfunda su espada y el monstruo se va corriendo' 
+                    {else} {print} 'El monstruo se come a ' nombre
                     ```
-                start_code: "{print} 'Aquí viene tu historia!'"
+                start_code: "{print} '¡Aquí viene tu historia!'"
             4:
                 story_text: |
                     ## Una historia
@@ -272,8 +273,8 @@ adventures:
                 example_code: |
                     ```
                     nombre {is} Carlos
-                    {print} _ El protagonista de esta historia es _ nombre
-                    {print} nombre _ está caminando por el bosque _
+                    {print}  _ El protagonista de esta historia es _ nombre
+                    {print} nombre  _ está caminando por el bosque _
                     {print} nombre _ está un poco asustado _
                     animales {is} 🦔, 🐿, 🦉, 🦇
                     {print} _ Él/Ella escucha el ruido de un_ animales {at} {random}
@@ -284,7 +285,7 @@ adventures:
                 story_text: |
                     ## Historia
                     En el nivel 3 puedes hacer tu historia más divertida. Puedes usar aleatoriedad para cualquier monstruo, animal, o cualquier otro obstáculo, como este:
-                start_code: "{print} Aquí viene tu historia!"
+                start_code: "{print} Aquí viene tu historia"
                 example_code: |
                     ```
                     animales {is} 🦔, 🐿, 🦉, 🦇
@@ -294,6 +295,7 @@ adventures:
                     El comando `{add}` puede ser útil en tu historia.
 
                 example_code_2: |
+                    ```
                     {print} El escucha un sonido
                     animales {is} 🐿, 🦔, 🦇, 🦉
                     animal {is} {ask} ¿Qué piensas qué es?
@@ -314,8 +316,8 @@ adventures:
                     {remove} botar {from} bolso
                     ```
             9:
-                story_text: "## Historia\nEn este nivel puedes usar anidamiento para poner comandos {if}, {repeat} o {for} dentro de otros comandos {if}, {repeat} o {for}. Esto te permite muchas opciones y te ayuda a hacer tu historia más interactiva.\n"
-                story_text_2: "El ejemplo de arriba es bastante sencillo, pero con la anidación puedes realmente elaborar tu código y convertir la historia en un juego real. ¡Mira este ejemplo!"
+                story_text: "## Historia\nEn este nivel puedes usar anidamiento para poner comandos `{if}`, `{repeat}` o `{for}` dentro de otros comandos `{if}`, `{repeat}` o `{for}`. Esto te permite muchas opciones y te ayuda a hacer tu historia más interactiva.\n"
+                story_text_2: "El ejemplo de arriba es bastante sencillo, pero con la anidación de `{if}` puedes realmente elaborar tu código y convertir la historia en un juego real. ¡Mira este ejemplo!"
                 example_code: "```\n{print} 'Robin está caminando hacia el centro de la ciudad'\nlugar = {ask} '¿Robin va a ir a una tienda, o va a ir a casa?'\n{if} lugar {is} tienda\n    {print} 'Ella entra en la tienda.'\n    {print} 'Robin ve un libro que luce interesante'\n    libro = {ask} '¿Compra el libro Robin?'\n    {if} libro {is} si\n        {print} 'Robin compra el libro y se va a casa'\n    {else}\n        {print} 'Robin deja la tienda y se va a casa'\n{else}\n    {print} 'Robin se va a casa'\n```\n"
                 example_code_2: "## Elabora el código\n```\nespada = perdida\njuego = en marcha\n{print} 'Nuestra heroína está caminando en el bosque'\n{print} 'El camino se divide en dos'\n{repeat} 2 {times}\n    {if} juego {is} en marcha\n        camino = {ask} '¿Cuál camino debería escoger ella?'\n        {if} camino {is} izquierda\n            {if} espada {is} encontrada\n                {print} '¡Nuestra heroína se encuentra a un dragón!'\n                {print} '¡Por suerte nuestra heroína tiene una espada para vencer a la bestia!'\n                juego = finalizado\n            {else}\n                {print} '¡Nuestra heroína se encuentra a un dragón, pero no tiene ningún arma!'\n                {print} 'Nuestra heroína es vencida por el dragón...'\n                {print} 'Intenta de nuevo'\n                juego = finalizado\n        {if} camino {is} derecha\n            {if} espada {is} perdida\n                {print} 'Nuestra heroína se encuentra una espada'\n                {print} 'Esto podría ser muy útil'\n                espada = encontrada\n            {else}\n                {print} 'Ya encontraste la espada. No queda nada aquí.'\n                {print} 'Ella se devuelve'\n```\n"
                 start_code: '# coloca tú código aquí'
@@ -329,32 +331,32 @@ adventures:
                 start_code: '# coloca tu código aquí'
             15:
                 story_text: "## Historia\nUsando el bucle `{while}` puedes hacer que tus historias sean más interesantes. Por ejemplo, puedes usar `{while} juego {is} 'en marcha'` de forma que puedas jugar hasta que el juego se ha acabado.\nO puedes usar `{while} espada {is} 'perdida'` de forma que el jugador no pueda continuar el juego hasta que haya encontrado algo.\n"
-                example_code: "```\nkeys = 'lost'\n{print} 'You are standing in your garden and you have lost your keys.'\n{print} 'Where do you want to look for them?'\n{print} 'You can choose: tree, flowerbed, rock, postbox'\n{while} keys == 'lost'\n    location = {ask} 'Where do you want to look?'\n    {if} location == 'flowerbed'\n        {print} 'Here they are!'\n        keys = 'found'\n    {else}\n        {print} 'Nope they are not at the ' location\n{print} 'Now you can enter the house!'\n"
+                example_code: "```\nllaves = 'perdidas'\n{print} 'Estás en tu jardín y perdiste tus llaves.'\n{print} '¿En donde las quieres buscar?'\n{print} '¨Puedes escoger: árbol, lecho de flores, roca, buzón'\n{while} llaves == 'perdidas'\n    lugar = {ask} '¿En donde quieres buscar?'\n    {if} lugar == 'lecho de flores'\n        {print} '¡Aquí están!'\n        keys = 'encontradas'\n    {else}\n        {print} 'Nope, no están en ' lugar\n{print} '¡Ahora puedes entrar en la casa'\n```\n"
                 start_code: '# coloca tú código aquí'
             13:
                 example_code: "```\nespada = 'perdida'\njuego = 'en marcha'\n{print} 'Nuestra heroína está caminando en el bosque'\n{print} 'El camino se divide en dos'\n{for} i {in} {range} 0 {to} 2\n    {if} juego {is} 'en marcha'\n        camino = {ask} '¿Que camino debería escoger ella?'\n        {if} path {is} 'izquierda' {and} espada {is} 'encontrada'\n            {print} '¡Nuestra heroína se encuentra a un dragón!'\n            {print} '¡Por suerte nuestra heroína tiene una espada para vencer a la bestia!'\n            juego = 'acabado'\n        {if} camino {is} 'izquierda' {and} espada {is} 'perdida'\n            {print} '¡Nuestra heroína, encuentra un dragón, pero no tiene ningún arma!'\n            {print} 'Nuestra heroína es vencida por el dragón...'\n            {print} 'Intenta de nuevo'\n            game = 'acabado'\n        {if} camino {is} 'derecha' {and} espada {is} 'encontrada'\n            {print} 'Ya encontraste la espada. No queda nada aquí.'\n            {print} 'Ella camina de vuelta'\n        {if} camino {is} 'derecha' {and} espada {is} 'perdida'\n            {print} 'Nuestra heroína encuentra una espada'\n            {print} 'Esto podría resultar muy útil'\n            espada = 'encontrada'\n```\n"
                 story_text: "## Historia\nUsando los comandos `{and}` y `{or}`puedes acortar tus historias. Por ejemplo, mira la historia del dragón.\n\n## Desafío\n¿Puedes hacer tu propio mini-juego de aventura?\n"
                 start_code: '# coloca tu código aquí'
             10:
-                story_text: "## Historia\nEn este nivel puedes usar el comando {for} en tu historia. De esta manera puedes programar fácimelmente el libro para niños 'oso pardo, oso pardo, ¿qué ves?'\n"
+                story_text: "## Historia\nEn este nivel puedes usar el comando {for} en tu historia. De esta manera puedes programar fácilmente el libro para niños 'oso pardo, oso pardo, ¿qué ves?'\n"
                 example_code: "```\nanimales = pájaro rojo, oveja negra, rana verde, pato amarillo, niño pequeño\n{print} 'oso pardo'\n{print} 'oso pardo'\n{print} '¿Qué ves?'\n{for} animal {in} animales\n    {print} 'Veo a un ' animal ' viéndome'\n    {print} animal\n    {print} animal\n    {print} '¿Qué ves?'\n{print} '¡Veo a todos los animales viéndome!'\n```\n"
                 start_code: '# coloca tu código aquí'
     songs:
-        name: "Canción"
+        name: "¡Canta una canción!"
         description: "Imprime una canción"
         default_save_name: "Canción"
         levels:
             8:
                 story_text: |
                     ## Canciones
-                    En un nivel anterior programamos la canción de los elefante. Hicimos un verso y lo copiamos un montón de veces. En el nivel 7 vamos a repetir la canción ¡Simplemente agregado una linea!
+                    En un nivel anterior programamos la canción de los elefantes. Hicimos un verso y lo copiamos un montón de veces. En el nivel 7 vamos a repetir la canción ¡Simplemente agregado una linea!
                     ¡Sabes qué línea añadir?
                 example_code: |
                     ```
                     elefantes = 1
                     {print} elefantes 'elefante se balanceaba, sobre la tela de una araña. Cómo veía que resistía, fue a llamar a otro elefante.'
 
-                    {repeat} 10 {times}
+                    ___
                         elefantes = elefante + 1
                         {print} elefantes 'elefantes se balanceaban, sobre la tela de una araña. Cómo veían que resistían, fueron a llamar a otro elefante.'```
                     ```
@@ -363,68 +365,64 @@ adventures:
             7:
                 story_text: |
                     ## Canciones
-                    En las canciones hay a menudo mucha repetición. Por ejemplo, hay canciones que repiten con números.
-                    Por ejemplo, la canción de los elefantes que se balancean! Ahora puedes programar esa canción programando con números.
+                    Las canciones suelen tener mucha repetición. Por ejemplo... ¡Baby Shark! Si la cantas, sigues cantando lo mismo:
+
+                    Baby Shark tututudutudu <br>
+                    Baby Shark tututudutudu <br>
+                    Baby Shark tututudutudu <br>
+                    Baby Shark
+
+                    ¡Puedes hacer esta canción mucho más corta con un `{repeat}`! ¿Puedes terminar el código?
                 example_code: |
                     ```
-                    elefantes {is} 2
-                    {print} elefantes ' se balanceaban sobre la tela de una araña'
-                    {print} 'como veian que resistia, fueron a buscar otro elefante'
-                    elefantes {is} elefantes + 1
+                    {repeat} _ _ {print} 'Baby Shark tututudutudu'
+                    {print} 'Baby Shark'
                     ```
-                    Puedes repetir las líneas 2 a 4 tantas veces como quieras, simplemente copiándolas y pegándolas debajo de las que ya escribiste.
 
-                    Por supuesto, puedes también programar otras canciones. Hay muchas canciones que usan números.
-                    Tal vez podría interesarte programar la canción "99 botellas en la pared"! En esa canción, contamos para atrás en vez de para adelante.
-
-                    # Avance
-                    En el nivel 5 hemos aprendido un comando para repetir, `{repeat}`, que se puede usar de la siguiente manera:
-
-                    * `{repeat} 3 {times} {print} 'Bebé Tiburón Tutududududu'`
-
-                    Pero como tal vez hayas notado en esta lección, a veces tenemos que repetir múltiples líneas, no solamente una. Eso puede hacerse copiando y pegando, pero eso da mucho trabajo. En el nivel 7 veremos como hacerlo más fácilmente.
-                start_code: "{print} 'Bebe Tiburón'"
+                    Luego de Baby Shark puedes intentar programar otras canciones. Hay muchas canciones con repetición.
+                start_code: "{print} 'Baby Shark'"
             6:
                 story_text: |
                     ## Canciones
                     En las canciones hay a menudo mucha repetición. Algunas veces la repetición se basa en contar.
                     Por ejemplo, en la canción el elefante se balancea en la tela de una araña. Puedes programar esta canción con un poco de matemáticas.
 
-                    Consejo: Utiliza la función de "leer en voz alta" para que ¡Hedy te cante la canción!
+                    Consejo: ¡Utiliza la función de "leer en voz alta" para que Hedy te cante la canción!
 
                     ## Desafío
                     Puedes repetir las líneas 2 a 7 cuantas veces quieras copiando las líneas.
                 example_code: |
                     ```
                     elefantes = 1
-                    {print} elefantes 'elefante se balanceaba, sobre la tela de una araña. Cómo veía que resistía, fue a llamar a otro elefante.'
+                    {print} elefantes 'elefantes se balanceaban sobre la tela de una araña. Cómo veía que resistía, fueron a llamar a otro elefante.'
                     elefantes = elefante + 1
-                    {print} elefantes 'elefantes se balanceaban, sobre la tela de una araña. Cómo veían que resistían, fueron a llamar a otro elefante.'```
+                    {print} elefantes 'elefantes se balanceaban, sobre la tela de una araña. Cómo veían que resistían, fueron a llamar a otro elefante.'
+                    sleep
                     ```
 
                 start_code: "{print} '¡Vamos a cantar!'"
-                example_code_2: "```\nnumber = 6\nnumber = number - 1\nprint number ' little monkeys jumping on the bed'\nprint 'One fell off and bumped his head'\nprint 'Mama called the doctor and the doctor said'\nprint 'NO MORE MONKEYS JUMPING ON THE BED!'\nsleep\n```\n"
-                story_text_2: "## 5 Little Monkeys jumping on the bed\nThis children's song counts down from 5 little monkeys to 1 monkey.\nIf you copy line 2 - 7 and paste it under the the code, you can sing the whole song!\n"
+                example_code_2: "```\nnumero = 6\nnumero = numero - 1\nprint numero ' monos saltando en la ventana'\nprint 'Uno se calló y se golpeó su cabeza'\nprint 'Mamá llamo al doctor y el doctor dijo'\nprint 'NO MÁS MONOS SALTANDO EN LA CAMA'\nsleep\n```\n"
+                story_text_2: "## 5 Monos saltando en la cama\nEsta canción de niños cuenta desde 5 monos hasta un mono.\n¡Si copias las líneas 2 a 7 debajo del código, puedes cantar toda la canción!\n"
             12:
-                example_code: "```\nactions = 'clap your hands', 'stomp your feet', 'shout Hurray!'\n{for} action {in} actions\n    {for} i {in} {range} 1 {to} 2\n        {print} '{if} youre happy and you know it'\n        {print} action\n    {print} '{if} youre happy and you know it and you really want to show it'\n    {print} '{if} youre happy and you know it'\n    {print} action\n```\n"
-                story_text: "## ¡Canta una canción!\nEn ésta canción haremos mas fácil programa 'si({if}) estás contento y lo sabes, aplaude'. Porque podemos poner todas las acciones en variables, mira:\n"
+                example_code: "```\n_ acciones = 'aplaude', 'mueve los pies así', '¡grita hurra!'\n_ {for} accion {in} acciones\n_ {for} i {in} {range} 1 {to} 2\n_ {print} 'si estás feliz y lo sabes'\n_ {print} accion\n_ {print} 'Si en verdad estas contento tu sonrisa es el reflejo'\n_ {print} 'si estás feliz y lo sabes'\n_ {print} accion\n```\n"
+                story_text: "## ¡Canta una canción!\nEn ésta canción haremos mas fácil programa 'si({if}) estás contento y lo sabes, aplaude'. Porque podemos poner todas las acciones en variables, mira:\n\n## Desafío\n¿Puedes agregar la cantidad correcta de identación a cada línea para reproducir la canción correctamente?\nTen en cuenta que no todas las líneas necesitan identación\n"
                 start_code: '# pon tu código aquí'
             11:
-                story_text: "## Canciones\nEn este nivel, podrás usar el comando `{for} i {in} {range}` para crear canciones.\n"
-                example_code: "## 5 little monkeys\n```\n{for} i {in} {range} 5 {to} 1\n    {print} i ' little monkeys jumping on the bed'\n    {print} 'One fell off and bumped his head'\n    {print} 'Mama called the doctor and the doctor said'\n    {if} i {is} 1\n        {print} 'PUT THOSE MONKEYS RIGHT TO BED!'\n    {else}\n        {print} 'NO MORE MONKEYS JUMPING ON THE BED!'\n```\n"
+                story_text: "## Canciones\nEn este nivel, podrás usar el comando `{for} i {in} {range}` para crear canciones que utilizan cuentas, como cinco pequeños monitos.\n\n## Desafío\n¡Rellena los espacios y haz que el código funcione!\n"
+                example_code: "## 5 pequeños monitos\n```\n_ _ _ _ 5 _ 1\n    {print} i ' pequeños monitos saltando en la cama'\n    {print} 'Uno se cayó y se golpeó la cabeza'\n    {print} 'Mamá llamó al doctor y el doctor dijo'\n    {if} i {is} 1\n        {print} '¡PON A ESOS MONOS A DORMIR!'\n    {else}\n        {print} '¡NO MÁS MONOS SALTANDO EN LA CAMA!'\n```\n"
                 start_code: '# pon tu código aquí'
             10:
-                story_text: "## Songs\nIn this level you can easily make the childrens' song 'Five little monkeys'. Can you make the last chorus?\nYou can also make the whole baby shark song (including all the other sharks in the family) in only 6 lines!\nOr you can make Old McDonald with all the different animals.\n"
-                example_code: "## 5 Little Monkeys Jumping on the bed\n```\nmonkeys = 5, 4, 3, 2\n{for} monkey {in} monkeys\n    {print} monkey ' little monkeys jumping on the bed'\n    {print} 'One fell off and bumped his head'\n    {print} 'Mama called the doctor and the doctor said'\n    {print} 'NO MORE MONKEYS JUMPING ON THE BED!'\n```\n\n## Baby Shark\n```\nsharks = baby, mommy, daddy, grandma, grandpa\n{for} shark {in} sharks\n    {print} shark 'tututututudu'\n    {print} shark 'tututututudu'\n    {print} shark 'tututututudu'\n    {print} shark\n```\n## Old McDonald\n```\nanimals = pig, dog, cow\n{for} animal {in} animals\n    {if} animal {is} pig\n        sound = oink\n    {if} animal {is} dog\n        sound = woof\n    {if} animal {is} cow\n        sound = moo\n    {print} 'Old McDonald had a farm'\n    {print} 'E I E I O!'\n    {print} 'and on that farm he had a ' animal\n    {print} 'E I E I O!'\n    {print} 'with a ' sound sound ' here'\n    {print} 'and a ' sound sound ' there'\n    {print} 'here a ' sound\n    {print} 'there a ' sound\n    {print} 'everywhere a ' sound sound\n```\n"
+                story_text: "## Songs\nEn este nivel puedes hacer fácilmente la canción de niños 'Cinco monitos'. ¿Puedes hacer en último coro? También puedes hacer toda la canción de Baby Shark (incluyendo todos los otros tiburones en la familia) en solo 6 líneas, ¡usando solo el `{for}`!\nO puedes hacer la canción del Viejo McDonald con distintos animales.\n\n\n\n## Desafío\n¿Puedes agregar el último verso de los monos en la cama, cuando solo hay un mono restante?\n\n¿Puedes hacer el código de baby shark incluso más corto usando el comando `{repeat}`?\n\n¿Puedes agregar nuevos animales a la granja del Viejo McDonald?\n"
+                example_code: "## 5 pequeños monos saltando en la cama\n```\nmonkeys = 5, 4, 3, 2\n{for} mono {in} monos\n    {print} mono ' monitos saltando en la cama'\n    {print} 'Uno se cayó y golpeó su cabeza'\n    {print} 'Mamá llamó al doctor y el doctor dijo'\n    {print} '¡NO MÁS MONOS SALTANDO EN LA CAMA!'\n```\n\n## Baby Shark\n```\ntiburones = bebé, mamá, papá, abuela, abuelo\n{for} tiburon {in} tiburones\n    {print} tiburon ' shark tututututudu'\n    {print} tiburon ' shark tututututudu'\n    {print} tiburon ' shark tututututudu'\n    {print} tiburon ' shark'\n```\n## El Viejo McDonald\n```\nanimales = cerdo, perro, vaca\n{for} animal {in} animales\n    {if} animal {is} cerdo\n        sonido = oink\n    {if} animal {is} perro\n        sonido = guau\n    {if} animal {is} vaca\n        sonido = muuu\n    {print} 'El viejo McDonald tenía una granja'\n    {print} '¡IA IA IOO!'\n    {print} 'y en esa granja tenía un ' animal\n    {print} '¡IA IA IOO!'\n    {print} 'con un ' sonido sonido ' aquí'\n    {print} 'y un ' sonido sonido ' allí'\n    {print} 'aquí un ' sonido\n    {print} 'allá un ' sonido\n    {print} 'en todos lados un ' sonido sonido\n```\n"
                 start_code: '# pon tu código aquí'
             16:
-                story_text: "## Sing a song!\nIn this level, you can program a song like OldMacDonald even more quickly. You can connect the right animal to the right sound by simply putting them in the same place in the list.\nThe Drunken Sailor is also quickly made in this level. You only need 8 lines for the entire song, check it out!\n\n## Old MacDonald\n```\nanimals = ['pig', 'dog', 'cow']\nsounds = ['oink', 'woof', 'moo']\n{for} i {in} {range} 1 {to} 3\n    animal = animals[i]\n    sound = sounds[i]\n    {print} 'Old McDonald had a farm'\n    {print} 'E I E I O!'\n    {print} 'and on that farm he had a ' animal\n    {print} 'E I E I O!'\n    {print} 'with a ' sound sound ' here'\n    {print} 'and a ' sound sound ' there'\n    {print} 'here a ' sound\n    {print} 'there a ' sound\n    {print} 'everywhere a ' sound sound\n```\n\n## Drunken Sailor\n```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines\n    {for} i {in} {range} 1 {to} 3\n        {print} line\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
+                story_text: "## ¡Canta una canción!\nEn este nivel puedes programar una canción como la del Viejo McDonald incluso más rápido. Puedes conectar el animal con el sonido correcto simplemente poniéndolos en el mismo lugar en la lista.\nEl Marinero Borracho también se puede hacer rápidamente en este nivel. Solo necesitas 8 líneas de código para toda la canción, ¡mira!\n"
                 start_code: '# pon tu código aquí'
-                example_code: "## Old MacDonald\n```\nanimals = ['pig', 'dog', 'cow']\nsounds = ['oink', 'woof', 'moo']\n{for} i {in} {range} 1 {to} 3\n    animal = animals[i]\n    sound = sounds[i]\n    {print} 'Old McDonald had a farm'\n    {print} 'E I E I O!'\n    {print} 'and on that farm he had a ' animal\n    {print} 'E I E I O!'\n    {print} 'with a ' sound sound ' here'\n    {print} 'and a ' sound sound ' there'\n    {print} 'here a ' sound\n    {print} 'there a ' sound\n    {print} 'everywhere a ' sound sound\n```\n\n## Drunken Sailor\n```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines\n    {for} i {in} {range} 1 {to} 3\n        {print} line\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
+                example_code: "## El Viejo McDonald\n```\nanimales = ['cerdo', 'perro, 'vaca']\nsonidos = ['oink', 'guau', 'muu']\n{for} i {in} {range} 1 {to} 3\n    animal = animales[i]\n    sonido = sonidos[i]\n    {print} 'El viejo McDonald tenía una granja'\n    {print} '¡IA IA IOOO!'\n    {print} 'y en esa granja tenía un ' animal\n    {print} '¡IA IA IOOO!'\n    {print} 'con un ' sonido sound ' here'\n    {print} 'y un ' sound sonido ' allá'\n    {print} 'aquí un ' sonido\n    {print} 'allá un ' sonido\n    {print} 'en todos lados un ' sonido sonido\n```\n\n## El Marinero Borracho\n```\nlineas = ['que debemos hacer con el marinero borracho', 'afeitar su barriga con una afeitadora oxidada', 'ponerlo en un bote hasta que esté sobrio']\n{for} linea {in} lineas\n    {for} i {in} {range} 1 {to} 3\n        {print} linea\n    {print} 'temprano en la mañana'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'hey, ho, levamos anclas'\n    {print} 'desde que amanece'\n```\n"
     turtle:
         name: "La tortuga"
-        description: "Haga su propio dibujo"
-        default_save_name: "tortuga"
+        description: "Haz tu propio dibujo"
+        default_save_name: "Tortuga"
         levels:
             1:
                 story_text: |
@@ -435,30 +433,27 @@ adventures:
 
                     Si quieres ir hacia atrás, puedes utilizar el comando `{forward}` pero con un número negativo. Por ejemplo `{forward} -100`
 
-                    ## Challenge
+                    ## Desafío
                     Este es el principio de una pequeña escalera, ¿Puedes hacer 5 escalones más?
                 example_code: |
                     ```
                     {forward} 50
-                    {turn} left
+                    {turn} {right}
                     {forward} 50
-                    {turn} right
+                    {turn} {left}
+                    {forward} 50
                     ```
 
 
-                start_code: "{forward} 50\n{turn} left"
+                start_code: "{forward} 50\n{turn} {left}"
             2:
                 story_text: |
                     ## Tortuga
                     En este nivel puedes utilizar variables para hacer tu tortuga interactiva. Por ejemplo, puedes preguntar al jugador cuantos pasos dará la tortuga.
                 example_code: |
                     ```
-                    {print} Figuras de dibujo
-                    ángulo {is} 90
-                    {turn} ángulo
-                    {forward} 25
-                    {turn} ángulo
-                    {forward} 25
+                    respuesta {is} {ask} ¿Cuántos pasos debería dar la tortuga?
+                    {forward} respuesta
                     ```
 
 
@@ -468,16 +463,16 @@ adventures:
                     angulo {is} 90
                     {turn} angulo
                     {forward} 25
-                story_text_2: "Además, en el nivel 1 la tortuga solo podía girar a la derecha o a la izquierda. ¡Qué aburrido!\nEn el nivel 2 la tortuga puede apuntar su nariz en todas las direcciones.\n\nUtiliza 90 para girar un cuarto. Lo llamamos grados, un giro completo son 360 grados.\n¿Puedes hacer una figura con este código? ?Quizá un triangulo o un círculo?\n"
-                example_code_2: "```\n{print} Dibujando figur\nangulo {is} 90\n{turn} angulo\n{forward} 25\n{turn} angulo\n{forward} 25\n```\n"
+                story_text_2: "Además, en el nivel 1 la tortuga solo podía girar a la derecha o a la izquierda. ¡Qué aburrido!\nEn el nivel 2 la tortuga puede apuntar su nariz en todas las direcciones.\n\nUtiliza 90 para girar un cuarto. Lo llamamos grados, un giro completo son 360 grados.\n\n## Desafío\n¿Puedes hacer una figura con este código? ¿Quizá un triangulo o un círculo?\n"
+                example_code_2: "```\n{print} Dibujando figuras\nangulo {is} 90\n{turn} angulo\n{forward} 25\n{turn} angulo\n{forward} 25\n```\n"
             8:
                 story_text: |
                     ## Dibujemos
-                    hora que podemos repetir varias líneas, podemos hacer cifras más fácilmente.
+                    Ahora que podemos repetir varias líneas, podemos hacer figuras más fácilmente.
                     Solo tenemos que establecer el ángulo una vez y luego usar esa variable en el `{repeat}`.
                 example_code: |
                     ```
-                    ángulo {is} 90
+                    ángulo = 90
                     {repeat} 10 {times}
                         {turn} ángulo
                         {forward} 50
@@ -499,7 +494,7 @@ adventures:
             7:
                 story_text: |
                     ## Dibujemos
-                    Enivel 6 puede repetir una línea de código con `{repeat}`.
+                    En este nivel puedes repetir una línea de código con `{repeat}`.
                 example_code: |
                     ```
                     {print} 'Dibuja figuras'
@@ -538,12 +533,13 @@ adventures:
             5:
                 story_text: |
                     ## Dibujemos
-                    En nivel 4 puede elegir con `{if}`. Por ejemplo, entre diferentes tipos de figuras.
+                    En nivel 5 puede elegir con `{if}`. Por ejemplo, entre diferentes tipos de figuras.
                 example_code: |
                     ```
-                    {print} 'Figuras de dibujo'
-                    figura {is} preguntar '¿Quieres un cuadrado o un triángulo?'
-                    {if} figura {is} triángulo ángulo {is} 120 {else} ángulo {is} 90
+                    {print} 'Dibujando figuras'
+                    figura {is} {ask} '¿Quieres un cuadrado o un triángulo?'
+                    {if} figura {is} triángulo ángulo {is} 120
+                    {else} ángulo {is} 90
                     {turn} ángulo
                     {forward} 25
                     {turn} ángulo
@@ -600,7 +596,7 @@ adventures:
                     {turn} angulo {at} {random}
                     {forward} 25
     dishes:
-        name: "Platos"
+        name: "¿Platos?"
         description: "Usa la computadora para ver quien ha de lavar los platos (Comienza en el nivel 2)"
         default_save_name: "Platos"
         levels:
@@ -631,9 +627,15 @@ adventures:
                     Usando el comando `{repeat}` puedes repetir porciones de tu programa. De esa forma, puedes determinar quien ha de lavar los platos cada día de la semana.
                 example_code: |
                     ```
-                    personas {is} mamá, papá, María, Carlos
-                    {repeat} _ _ {print} 'lavará los platos' _
+                    personas = mamá, papá, Genésis, María
+                    genesis_lava = 0
+                    lavaplatos = personas {at} {random}
+                    {print} 'El lavaplatos es ' lavaplatos
+                    {if} lavaplatos {is} Genésis genesis_lava = genesis_lava + 1
+                    {print} 'Genésis va a hacer los platos hoy ' genesis_lava 'veces'
                     ```
+
+                    Ahora puedes copiar las líneas 3 a 5 unas cuantas veces (por ejemplo, 7 para toda la semana) para calcular para toda la semana otra vez. ¿Puedes hacer el código para toda la semana?
                 start_code: "{print} 'Wie doet de afwas?'"
                 story_text_2: "## Make it fair\nIf you are extremely unlucky the previous program might choose you to to the dishes for the whole week! That's not fair!\nTo create a fairer system you can use the `{remove}` command to remove the chosen person from the list. This way you don't have to do the dishes again untill everybody has had a turn.\n\nMonday and tuesday are ready for you! Can you add the rest of the week?\nAnd... can you come up with a solution for when your list is empty?\n"
                 example_code_2: "```\npeople = mom, dad, Emma, Sophie\ndishwasher = people {at} {random}\n{print} 'Monday the dishes are done by: ' dishwasher\n{remove} dishwasher {from} people\ndishwasher = people {at} {random}\n{print} 'Tuesday the dishes are done by: ' dishwasher\n{remove} dishwasher {from} people\ndishwasher = people {at} {random}\n```\n"
@@ -642,8 +644,8 @@ adventures:
                     ## Programa de lavado de platos
                     Usando el comando `{if}` ahora puedes hacer tu programa todavía más interesante. Ahora tu programa puede reaccionar de acuerdo a la elección de quien lavará los platos.
 
-                    Puede hacer que tu programa imprima 'oh no' si {is} tu turno de lavar los platos, y 'sí!' en caso de que no sea tu turno de lavar los platos?
-                    No olvides las comillas!
+                    Puede hacer que tu programa imprima 'oh no' si {is} tu turno de lavar los platos, y '¡sí!' en caso de que no sea tu turno de lavar los platos?
+                    ¡No olvides las comillas!
                 example_code: |
                     ```
                     personas {is} mamá, papá, María, Carlos
@@ -651,29 +653,24 @@ adventures:
                     {if} lavador {is} María {print} 'oh no, hoy me toca lavar los platos' {else} {print} 'por suerte no debo lavar los platos porque' _ 'los lavará hoy!'
                     ```
 
-                start_code: "{print} 'Quien lavará los platos hoy?'"
+                start_code: "{print} '¿Quien lavará los platos hoy?'"
             4:
                 story_text: |
                     ## Programa de lavado de platos
                     Usando comillas puedes hacer más interesante tu programa.
                     Esta vez el programa de ejemplo no está completo.
-                    Puedes completar el código reemplazando los guiones bajos con los comandos correctos y las comillas?
-                    En cada guión bajo debes colocar un comando o una comilla.
 
-                    Consejo: no olvides las comillas!                example_code: |
-                    ```
-                    personas {is} mamá, papá, Carlos, María
-                    {print} _ los platos serán lavados por _
-                    {print} personas {at} _
-                    ```
-                start_code: "{print} 'Quien lavará los platos hoy?'"
-                example_code: "```\npeople {is} mom, dad, Emma, Sophie\n{print} _ the dishes are done by _\n{sleep}\n{print} people {at} _\n```\n"
+                    ¿Puedes completar el código reemplazando los guiones bajos con los comandos correctos y las comillas? En cada guión bajo debes colocar un comando o una comilla.
+
+                    Consejo: ¡no olvides las comillas!
+                start_code: "{print} '¿Quien lavará los platos hoy?'"
+                example_code: "```\npersonas {is} mamá, papá, Genésis, María\n{print} _ los platos serán hechos por _\n{sleep}\n{print} personas {at} _\n```\n"
             3:
                 story_text: |
                     ## Programa de lavado de platos
-                    Tienes en tu casa discusiones interminables sobre quien ha de lavar los platos hoy, o quien tiene que limpiar la caja del gato?
+                    ¿Tienes en tu casa discusiones interminables sobre quien ha de lavar los platos hoy, o quien tiene que limpiar la caja del gato?
 
-                    Ahora puedes dejar que la computadora elija honestamente a quien debe hacerlo. Puedes programar esto ahora en el nivel 2!
+                    Ahora puedes dejar que la computadora elija honestamente a quien debe hacerlo. ¡Puedes programar esto ahora en el nivel 2!
 
                     Primero debes hacer una lista con los miembros de tu familia. Luego puedes elegir a alguien de la lista usando el comando `{at} {random}`.
                 example_code: |
@@ -681,16 +678,9 @@ adventures:
                     personas {is} mamá, papá, María, Carlos
                     {print} personas {at} {random}
                     ```
-
-                    ## Avance
-                    Haz por casualidad probado escribir una oración donde está incluída la palabra "personas"?
-
-                    Por ejemplo: `{print} elijo a una de estas personas`. Puedes probarlo ahora si no lo has intentado todavía.
-
-                    Eso no va a funcionar! Como resultado obtendrás: elijo a una de estas [papá, mamá, Carlos, María]. Puedes resolver este problema en el nivel 3.
-                start_code: "{print} Quien lavará los platos hoy?"
-                story_text_2: "## Hack the dishwashing program!\nDon't feel like doing the dishes yourself? Hack the program to remove your name from the list.\n"
-                example_code_2: "```\npeople {is} mom, dad, Emma, Sophie\nyour_name {is} {ask} Who are you?\n{remove} your_name {from} people\n{print} people {at} {random} does the dishes\n```\n"
+                start_code: "{print} ¿Quien lavará los platos hoy?"
+                story_text_2: "## ¡Hackea el programa para lavar platos!\n¿No quieres lavar los platos por ti mismo? Hackea el programa quitando tu nombre de la lista con el comando `{remove}``{from}`\n"
+                example_code_2: "```\npersonas {is} mamá, papá, Genésis, María\ntu_nombre {is} {ask} ¿Quien eres tu?\n_ tu_nombre _ personas\n{print} _ _ _ lavará los platos\n```\n"
             10:
                 example_code: "```\ndays = Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday\nnames = mom, dad, Emma, Sophie\n{for} day {in} days\n    {print} names {at} {random} ' does the dishes on ' day\n```\n"
                 story_text: "## Dishwashing\nIn this level you could make an even better dish washing shedule.\n"
@@ -1340,24 +1330,24 @@ adventures:
             2:
                 story_text: "## Loro\nCrea tu propia mascota online, ¡un loro que copiará lo que digas!\n"
                 example_code: "```\n{print} Im Hedy the parrot\nname {is} {ask} whats your name?\n{print} name\n{sleep}\n{print} squawk\n{sleep}\n{print} name\n```\n"
-                start_code: '{print} ¡Soy Hedy el loro!'
-                story_text_2: "## Desafío\nPuedes utilizar variables para hacer que el loro diga más cosas, ¿Puedes completar este código?\n"
-                example_code_2: "```\n{print} Soy Hedy el loro\nnombre {is} {ask} ¿Cuál es tu nombre?\n{print} nombre\n{sleep}\n{print} nombre\napellido {is} {ask} ¿Cuál es tu apellido?\n_\n{sleep}\n_\n```\n"
+                start_code: '{print} ¡Soy Hedy la lora!'
+                story_text_2: "## Desafío\nPuedes utilizar variables para hacer que el loro diga más cosas. ¿Puedes completar este código?\n"
+                example_code_2: "```\n{print} Soy Hedy la lora\nnombre {is} {ask} ¿Cuál es tu nombre?\n{print} nombre\n{sleep}\n{print} nombre\napellido {is} {ask} ¿Cuál es tu apellido?\n_\n{sleep}\n_\n```\n"
             1:
-                story_text: "## Loro\nCrea tu propia mascota online, un loro que ¡copiará lo que digas!\n"
-                example_code: "```\n{print} Im Hedy the parrot\n{ask} whats your name?\n{echo}\n{echo}\n```\n"
-                start_code: '{print} Soy Hedy el loro'
+                story_text: "## Loro\n¡Crea tu propia mascota online, un loro que copiará lo que digas!\n"
+                example_code: "```\n{print} Soy Hedy la lora\n{ask} ¿Cuál es tu nombre?\n{echo}\n{echo}\n```\n"
+                start_code: '{print} Soy Hedy la lora'
                 story_text_2: "## Desafío\n¿Puedes hacer que el loro pregunte diferentes preguntas? ¡Llena lo que falta en este ejemplo!\n"
-                example_code_2: "```\n{print} Soy Hedy el loro\n{ask} _\n{echo}\n{echo}\n"
+                example_code_2: "```\n{print} Soy Hedy la lora\n{ask} _\n{echo}\n{echo}\n"
             5:
-                example_code: "```\nwords {is} squawk, Hedy\n{print} 'Train your parrot!'\nnew_word {is} {ask} 'Which word do you want to teach them?'\n{add} new_word {to_list} words\nsaid_word {is} words {at} {random}\n{print} '\U0001F9D2 Say ' new_word ', Hedy!'\n{print} '\U0001F99C ' said_word\n{if} said_word {is} new_word {print} '\U0001F9D2 Great job, Hedy! \U0001F36A'\n{else} {print} '\U0001F9D2 No, Hedy! Say ' new_word\n```\n"
-                story_text: "## Loro\nRecompensa tu loro si ({if}) dice la ¡palabra correcta!\nFinaliza el código llenando los 4 commandos que faltan.\n"
+                example_code: "```\npalabras {is} squawk, Hedy\n{print} '¡Entrena a tu lora'\nnueva_palabra {is} {ask} '¿Que palabra le quieres enseñar?'\n{add} nueva_palabra {to_list} palabras\npalabra_dicha {is} palabras {at} {random}\n{print} '\U0001F9D2 Say ' nueva_palabra ', Hedy!'\n{print} '\U0001F99C ' palabra_dicha\n_ palabra_dicha {is} nueva_palabra _ '\U0001F9D2 ¡Gran trabajo, Hedy!\U0001F36A'\n_ _ '\U0001F9D2 No, Hedy, di ' nueva_palabra\n```\n"
+                story_text: "## Loro\n¡Recompensa tu loro si dice la ¡palabra correcta!\nFinaliza el código llenando los 4 comandos que faltan.\n"
                 start_code: '# pon tu código aquí'
             3:
                 story_text: "## Loro\nEnseña a tu loro una nueva palabra con `{add}`.\n## Desafío\n¿Cómo puedes hacer que tu loro diga muchas palabras?\n"
-                example_code: "```\nwords {is} squawk, Hedy\n{print} Train your parrot!\nnew_word {is} {ask} Which word do you want to teach them?\n{add} new_word {to_list} words\n{print} \U0001F9D2 Say new_word , Hedy!\n{print} \U0001F99C words {at} {random}\n```\n"
+                example_code: "```\npalabras {is} squawk, Hedy\n{print} ¡Entrena a tu lora!\nnueva_palabra {is} {ask} ¿Que palabra le quieres enseñar?\n{add} nueva_palabra {to_list} palabras\n{print} \U0001F9D2 ¡Di nueva_palabra, Hedy!\n{print} \U0001F99C palabras {at} {random}\n```\n"
                 start_code: '# pon tu código aquí'
-        description: Crea tu propia mascota loro que ¡copiará lo que digas!
+        description: ¡Crea tu propia mascota loro que copiará lo que digas!
         default_save_name: Loro
     next:
         name: What's next?
