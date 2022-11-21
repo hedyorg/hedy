@@ -46,7 +46,7 @@ def validate_ruleset(levels):
   for level in levels:
     for state, rules in level['rules'].items():
       for rule in rules:
-        r = re.compile(rule['regex'])
+        r = regex.compile(rule['regex'])
 
         if r.groups == 0:
             if type(rule["token"]) != str:
@@ -154,7 +154,7 @@ def get_translations(KEYWORDS_PATH, KEYWORDS_PATTERN):
 
     # get content
     for language_file in list_language_file:
-        language_code = re.search(KEYWORDS_PATTERN,language_file).group(1)
+        language_code = regex.search(KEYWORDS_PATTERN,language_file).group(1)
         tmp[language_code] = get_yaml_content(os.path.join(KEYWORDS_PATH, language_file))
 
     # english is ref

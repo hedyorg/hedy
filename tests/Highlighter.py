@@ -1,5 +1,5 @@
 import unittest
-import re
+import regex
 import json
 import os
 
@@ -352,7 +352,7 @@ class SimulatorAce:
                 if "token" not in rule :
                     raise ValueError("We need a token in all rules !")
 
-                rule["regex_compile"] =  re.compile(rule['regex'], re.MULTILINE)
+                rule["regex_compile"] =  regex.compile(rule['regex'], regex.MULTILINE)
                 rule["nb_groups"] = rule["regex_compile"].groups
 
 
