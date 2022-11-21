@@ -864,18 +864,18 @@ adventures:
                     ¿Puedes terminar la línea 10 y hacer que el programa funcione?
                 example_code: |
                     ```
-                    marcado {is} 0
+                    puntaje {is} 0
                     {repeat} 10 {times}
                         números {is} 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                        number1 {is} números {at} {random}
-                        number2 {is} números {at} {random}
-                        correctanswer {is} number1 * number2
-                        {print} 'Qué {is} ' number1 ' por ' number2 '?'
-                        respuesta {is} {ask} 'Escriba su respuesta aquí'
+                        número1 {is} números {at} {random}
+                        número2 {is} números {at} {random}
+                        respuesta_correcta {is} número1 * número2
+                        {print} '¿Cuánto es ' número1 ' por ' número2 '?'
+                        respuesta {is} {ask} 'Escribe tu respuesta aquí'
                         {print} 'Tu respuesta es' respuesta
-                        {if} respuesta {is} correctanswer
-                            marcado {is} marcado + 1
-                    {print} '¡Gran trabajo! Tu puntuación es... ' marcado ' de 10!'
+                        {if} _ {is} _
+                            puntaje {is} puntaje + 1
+                    {print} '¡Gran trabajo! Tu puntuación es... ' puntaje ' de 10!'
                     ```
                 start_code: "{print} '¡Bienvenido a esta calculadora!'"
             6:
