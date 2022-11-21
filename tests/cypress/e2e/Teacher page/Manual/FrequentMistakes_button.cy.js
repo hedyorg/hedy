@@ -6,7 +6,7 @@ describe('Is able to see teacher page', () => {
     loginForTeacher();
     cy.wait(500);
     goToPage('/for-teachers/manual');
-    cy.get('#button-4')should('be.visible');
+    cy.get('#button-4').should('be.visible');
     cy.get('#button-4').click();
 
 
