@@ -11,7 +11,7 @@ adventures:
                     Tippe den Code in das Programmierfeld. Oder drücke den grünen Knopf beim Beispielcode um ihn in dein Programm zu übernehmen!
                     Probiere den Code selbst mit der grünen Schaltfläche 'Code ausführen' unter dem linken Programmierfeld aus.
 
-                    Du kannst Text auf dem Bildschirm ausgeben lassen indem du den Befehl `{print}` verwendest.
+                    Du kannst Text auf dem Bildschirm ausgeben lassen indem du den Befehl `{print}` verwendest.     
                 start_code: "{print} Hallo Welt!"
                 example_code: "```\n{print} Hallo!\n{print} Willkommen bei Hedy!\n```\n"
                 story_text_2: "Du kannst auch mit `{ask}` nach Eingaben fragen und sie dir mit dem Befehl `{echo}`zurückgeben lassen.\n"
@@ -282,6 +282,7 @@ adventures:
                     ```
 
                 start_code: "{print} Deine Geschichte beginnt hier"
+                story_text_2: "## Challenge\nCan you make your own story in Hedy now by using `{print}` , `{ask}` and `{echo}`?\n"
             2:
                 story_text: |
                     ## Schreibe eine Geschichte
@@ -336,7 +337,7 @@ adventures:
             9:
                 story_text: |
                     ## Geschichte
-                    In diesem Level nutzt Du Verschachtelungen, um {if}-, {repeat}- oder {for}-Befehle in anderen {if}-, {repeat}- oder {for}-Befehlen zu verwenden. Das eröffnet Dir viele Möglichkeiten und hilft Dir, Deine Geschichte richtig interaktiv werden zu lassen.
+                    In diesem Level nutzt du Verschachtelungen, um {if}-, {repeat}- oder {for}-Befehle in anderen {if}-, {repeat}- oder {for}-Befehlen zu verwenden. Das eröffnet dir viele Möglichkeiten und hilft dir, deine Geschichte richtig interaktiv werden zu lassen.
                 start_code: "# setze hier deinen Code hin"
                 example_code: "```\n{print} 'Robin läuft durch die Innenstadt.'\nOrt = {ask} 'Geht Robin in ein Geschäft oder nach Hause?'\n{if} Ort {is} Geschäft\n    {print} 'Sie betritt ein Geschäft.'\n    {print} 'Robin sieht ein Buch, das spanned wirkt.'\n    Buch = {ask} 'Kauft Robin das Buch?'\n    {if} Buch {is} ja\n        {print} 'Robin kauft das Buch und geht nach Hause.'\n    {else}\n        {print} 'Robin verlässt das Geschäft und geht nach Hause.'\n{else}\n    {print} 'Robin geht nach Hause.'\n```\n"
                 story_text_2: "Das obige Beispiel ist recht simpel, doch mit verschachtelten {if} kannst Du richtig aufwendigen Code schreiben und aus Deiner Geschichte ein richtiges Spiel machen. Sieh Dir einmal dieses Beispiel an!"
@@ -403,8 +404,8 @@ adventures:
             4:
                 story_text: |
                     ## Geschichte
-                    Vielleicht ist Dir ja aufgefallen, dass es in den letzten Levels ein Problem gab. Hast Du zum Beispiel versucht, einen Satz mit dem Wort Tiere oder dem Wort Name zu schreiben?
-                    In diesem Level kannst Du dieses Problem lösen. Setze einfach alles, was Du ausgeben möchtest, in einfache Anführungszeichen.
+                    Vielleicht ist Dir ja aufgefallen, dass es in den letzten Levels ein Problem gab. Hast du zum Beispiel versucht, einen Satz mit dem Wort Tiere oder dem Wort Name zu schreiben?
+                    In diesem Level kannst du dieses Problem lösen. Setze einfach alles, was du ausgeben möchtest, in einfache Anführungszeichen.
 
                 example_code: |
                     ```
@@ -520,6 +521,8 @@ adventures:
                     {echo}
                     ```
                 start_code: "{print} Ich bin Hedy der Papagei"
+                example_code_2: "```\n{print} Im Hedy the parrot\n{ask} _\n{echo}\n{echo}\n"
+                story_text_2: "## Challenge\nCan you make the parrot ask a different question? Fill in the blanks in the example!\n"
             2:
                 story_text: |
                     ## Papagei
@@ -536,6 +539,8 @@ adventures:
                     {print} Name
                     ```
                 start_code: "{print} Ich bin Hedy der Papagei!"
+                story_text_2: "## Challenge\nYou can use variables to make the parrot say more than only your name. Can you complete this code?\n"
+                example_code_2: "```\n{print} Im Hedy the parrot\nname {is} {ask} whats your name?\n{print} name\n{sleep}\n{print} name\nsurname {is} {ask} whats your surname?\n_\n{sleep}\n_\n```\n"
             3:
                 story_text: |
                     ## Papagei
@@ -612,9 +617,9 @@ adventures:
             10:
                 story_text: |
                     ## Lieder
-                    In diesem Level kannst Du ganz einfach das Kinderlied 'Fünf kleine Affen' programmieren. Kriegst Du die letzte Strophe auch alleine hin?
-                    Du kannst auch das Lied über den Babyhai machen (mit allen Mitgliedern der Haifamilie) in nur sechs Zeilen!
-                    Und auch "Old MacDonald hat ne Farm" kriegst Du ganz einfach mit allen Tieren hin, die Dir einfallen.
+                    In diesem Level kannst du ganz einfach das Kinderlied 'Fünf kleine Affen' programmieren. Kriegst du die letzte Strophe auch alleine hin?
+                    Du kannst auch das Lied über den Babyhai (mit allen Mitgliedern der Haifamilie) in nur sechs Zeilen machen!
+                    Und auch "Old MacDonald hat 'ne Farm" kriegst du ganz einfach mit allen Tieren hin, die dir einfallen.
 
                 example_code: |
                     ## Fünf kleine Affen springen auf dem Bett
@@ -710,10 +715,12 @@ adventures:
                     {print} Strophe ' Flaschen Bier an der Wand.'
                     ```
 
-                    Du kannst jetzt die Zeilen 2 bis 6 so oft wiederholen, wie Du möchtest.
-                    Dazu kopierst Du sie und fügst sie am Ende wieder ein.
+                    Du kannst jetzt die Zeilen 2 bis 6 so oft wiederholen, wie du möchtest.
+                    Dazu kopierst du sie und fügst sie am Ende wieder ein.
 
                 start_code: "{print} 'Baby Hai'"
+                story_text_2: "## 5 Little Monkeys jumping on the bed\nThis children's song counts down from 5 little monkeys to 1 monkey.\nIf you copy line 2 - 7 and paste it under the the code, you can sing the whole song!\n"
+                example_code_2: "```\nnumber = 6\nnumber = number - 1\nprint number ' little monkeys jumping on the bed'\nprint 'One fell off and bumped his head'\nprint 'Mama called the doctor and the doctor said'\nprint 'NO MORE MONKEYS JUMPING ON THE BED!'\nsleep\n```\n"
             16:
                 story_text: |
                     ## Lieder
@@ -777,8 +784,6 @@ adventures:
                 start_code: |-
                     forward 50
                     turn left
-                story_text_2: "## Farben\nDu kannst auch die Linienfarbe mit dem Befehl `{color}` ändern. Sieh dir das Beispiel an.\nDu kannst auch den Befehl `{color} {white}` benutzen, um Linien unsichtbar‘ zu machen. Du könntest diese weißen Linien dazu benutzen, die Schildkröte überallhin zu bewegen, bevor du zu zeichnen beginnst.\n"
-                example_code_2: "```\n{color} {white}\n{forward} -80\n{color} {green}\n{forward} 50\n{color} {yellow}\n{forward} 50\n{color} {red}\n{forward} 50\n```\n"
             2:
                 story_text: |
                     ## Schildkröte
@@ -838,6 +843,8 @@ adventures:
                     {turn} Winkel
                     {forward} 25
 
+                story_text_2: "## Farben\nDu kannst auch die Farben der Linien mit dem Befehl `{color}` ändern. Sieh dir das Beispiel an.\nDu kannst auch den Befehl `{color} {white}` benutzen, um unsichtbare Linien zu ziehen. Du kannst diese weißen Linien nutzen, um die Schildkröte irgendwo auf dem Bildschirm hin zu bewegen bevor du zu malen anfängst.\n"
+                example_code_2: "```\n{color} {white}\n{forward} -80\n{color} {green}\n{forward} 50\n{color} {yellow}\n{forward} 50\n{color} {red}\n{forward} 50\n```\n"
             5:
                 story_text: |
                     ## Lass uns zeichnen
@@ -1010,9 +1017,10 @@ adventures:
 
                 example_code: |
                     ```
-                    Familienmitglieder is Mama, Papa, Emma, Sophie
-                    Tellerwäscher is Familienmitglieder at random
-                    if Tellerwäscher is Sophie print _ So ein Pech. Ich muss abwaschen. _ else print 'Zum Glück kein Abwasch, weil ' _ ' dran ist.'
+                    Leute {is} Mama, Papa, Emma, Sophie
+                    Tellerwäscher {is} Leute {at} {random}
+                    {if} Tellerwäscher {is} Sophie {print} _ So ein Pech. Ich muss abwaschen. _ 
+                    {else} {print} 'Zum Glück kein Abwasch, weil ' _ ' dran ist.'
                     ```
                 start_code: "print 'Wer macht den Abwasch?'"
             4:
@@ -1156,6 +1164,8 @@ adventures:
                     ```
 
                 start_code: "print Was zeigt der Würfel diesmal?"
+                story_text_2: "## Challenge\nThe dice in the example above are dice for a specific game. Can you make normal dice?\nOr other special dice from a different game?\n"
+                example_code_2: "```\nchoices {is} _\n```\n"
             15:
                 story_text: |
                     ## Würfel
@@ -1194,6 +1204,8 @@ adventures:
                     ```
                     Instead of using words, you could also use emojis of course: ✊✋✌
                 start_code: "print Welcome to your own rock scissors paper!"
+                story_text_2: "## Challenge\nInstead of using words, you could also use emojis: ✊✋✌\nCan you create a code using emojis?\n"
+                example_code_2: "```\n{print} what do you choose?\n{ask} choose from _\n{echo} so your choice was:\n```\n"
             10:
                 story_text: |
                     ## Schere, Stein, Papier
@@ -1277,6 +1289,8 @@ adventures:
                     print choices at random
                     ```
                 start_code: "print Welcome to your own rock scissors paper!"
+                story_text_2: "## Challenge\nNow you only have one player, so can you add a second player?\nYou can even use variables to name player 1 and player 2.\n"
+                example_code_2: "```\nchoices {is} rock, paper, scissors\n{print} player 1 chooses... choices {at} {random}\n{print} player 2 _\n```\n"
             2:
                 story_text: |
                     ## Schere, Stein, Papier
@@ -1442,6 +1456,8 @@ adventures:
                     ```
 
                 start_code: "print 'Welcome to this calculator!'"
+                example_code_3: "```\ntables = 4, 5, 6, 8\nnumbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\ntable = tables {at} {random}\nnumber = numbers {at} {random}\ncorrect_answer = table * number\nanswer = {ask} 'how much is ' table ' times ' number '?'\n{if} answer {is} correct_answer {print} 'okay'\n{else} {print} 'mistake! it was ' correct_answer\n```\n"
+                story_text_3: "## Random numbers\nYou can also let the computer do random sums on its own using random.\nThis is how you choose a number of tables to practice, and from that you always get a different sum:\n"
             15:
                 story_text: |
                     ## Calculator
@@ -1492,6 +1508,8 @@ adventures:
                     Jetzt kannst du Variablen verwenden und Hedy kann sich sowohl das Essen als auch die Getränke merken!
                 start_code: "# setze hier deinen Code hin"
                 example_code: "```\n{print} Willkommen in Hedys Restaurant!\n{print} Heute gibt es Pizza oder Lasagne.\nEssen {is} {ask} Was würden Sie gerne essen?\n{print} Gute Wahl! Das ist mein Lieblingsessen!\nBelag {is} {ask} Hätten Sie die gerne mit Fleisch oder mit Gemüse?\n{print} Das Essen mit Belag ist auf dem Weg!\nGetränke {is} {ask} Was würden Sie gerne dazu trinken?\n{print} Danke für Ihre Bestellung.\n{print} Ihr Essen und Ihre Getränke kommen sofort!\n```\n"
+                story_text_2: "## Challenge\nCan you make this code more elaborate? For example by adding drinks to the order? Or...?\n"
+                example_code_2: "```\n{print} Welcome to Hedy's restaurant!\n{print} Today we're serving pizza or lasagna.\nfood {is} {ask} What would you like to eat?\n{print} Great choice! The food is my favorite!\ntopping {is} {ask} Would you like meat or veggies on that?\n{print} food with topping is on its way!\ndrinks {is} _\n```\n"
             12:
                 story_text: |
                     ## Restaurant
@@ -1516,7 +1534,7 @@ adventures:
             11:
                 story_text: |
                     ## Restaurant
-                    We can use the `for i in range 1 to 5` to print the orders from multiple customers in an orderly manner.
+                    Wir können `{for} i {in} {range} 1 {to} 5` nutzen, um die Bestellungen mehrerer Kundinnen und Kunden in angebrachter Reihenfolge zu `{print}`.
 
                 example_code: |
                     ```
@@ -1565,9 +1583,9 @@ adventures:
             9:
                 story_text: |
                     ## Restaurant
-                    In this level you can use nesting to make your restaurant more realistic and more fun!
-                    For example you would ask for sauce if somebody orders fries, but you wouldn't if someone orders pizza!
-                    Check out the example, and try this at your own virtual restaurant!
+                    In diesem Level kannst du nesting nutzen, um dein Restaurant realistischer und unterhaltsamer zu gestalten!
+                    Du könntest zum Beispiel jemanden fragen, ob er eine Sauce zu den Pommes haben will, jedoch nicht zur Pizza!
+                    Schau dir das Beispiel an und probiere es in deinem eingenen virtuellen Restaurant!
 
                 example_code: |
                     ```
@@ -1602,8 +1620,8 @@ adventures:
             7:
                 story_text: |
                     ## Restaurant
-                    In diesem Level hast du gelernt wie du den Befehl {repeat} verwenden kannst um eine Zeile Code eine bestimmte Anzahl Male zu wiederholen.
-                    Du kannst das in deinem Restaurant verwenden um mehrere Leute nach ihren Essenwünschen zu fragen. Das geht so:
+                    In diesem Level hast du gelernt, wie du den Befehl `{repeat}` verwenden kannst, um eine Codezeile um eine bestimmte Anzahl zu wiederholen.
+                    Du kannst das in deinem Restaurant verwenden um mehrere Leute nach ihren Essenwünschen zu fragen (`{ask}`). Das geht so:
                 start_code: "# setze hier deinen Code hin"
                 example_code: "```\n{print} 'Willkommen in Hedys Restaurant!'\nGäste = {ask} 'Zu wie vielen kommen Sie heute zu uns?'\n{repeat} Gäste {times} Essen = {ask} 'Was würden Sie gerne essen?'\n{print} 'Danke für Ihre Bestellung! Kommt sofort!'\n```\n"
             6:
@@ -1667,8 +1685,8 @@ adventures:
             5:
                 story_text: |
                     ## Restaurant
-                    In this level the if command allows you to ask your customers questions and give different responses to the answers.
-                    In the example below, you see that you can ask the customer if they want to hear the specials and Hedy can respond accordingly.
+                    In diesem Level erlaubt dir der `{if}`-Befehl deinen Kundinnen oder Kunden Fragen zu stellen und verschiedene Antworten zu geben.
+                    In dem unteren Beispiel siehst du, dass du die Kundin oder den Kunden fragen kannst, ob sie oder er die Tagesgerichte erfahren möchte, und Hedy kann dementsprechend antworten.
 
                 example_code: |
                     ```
@@ -1688,7 +1706,7 @@ adventures:
                     ```
 
                 start_code: "# setze hier deinen Code hin"
-                story_text_2: "## Challenge\nFallen dir noch mehr Fragen ein, die du den Kunden stellen kannst ({ask}) wenn sie bestellen? Und kannst du dir ein paar Antworten auf ihre Fragen ausdenken indem du den {if} Befehl verwendest?\n"
+                story_text_2: "## Herausforderung\nFallen dir noch mehr Fragen ein, die du den Kundinnen oder Kunden stellen kannst (`{ask}`), wenn sie bestellen? Und kannst du dir ein paar Antworten auf ihre Fragen ausdenken, indem du den `{if}` Befehl verwendest?\n"
             4:
                 story_text: |
                     ## Restaurant
@@ -1768,7 +1786,7 @@ adventures:
                     print 'That will be ' price ' dollars'
                     ```
                 story_text_2: |
-                    We use `or` to see if one our of two things is the case.
+                    Wir nutzen `{or}` um zu sehen, ob eine der beiden Sachen im Koffer ist.
 
                 example_code_2: |
                     ```
@@ -1839,13 +1857,13 @@ adventures:
                 example_code_2: |
                     ```
                     houses = Gryffindor, Slytherin, Hufflepuff, Ravenclaw
-                    subjects = potions, defence against the dark arts, charms, transfiguration
-                    fears = Voldemort, spiders, failing your OWL test
-                    names = Harry, Ron, Hermione
-                    for name in names
-                        print name ' is placed in ' houses at random
-                        print name ' is great at ' subjects at random
-                        print name 's greatest fear is ' fears at random
+                    subjects = Zaubertränke, Verteidigung gegen die dunklen Künste, Zauberkunst, Verwandlung
+                    fears = Voldemort, Spinnen, den ZAG nicht bestehen
+                    names = Harry, Ron, Hermine
+                    {for} name {in}names
+                        {print} name ' gehört zu ' houses {at} {random}
+                        {print}  name ' ist gut in ' subjects {at} {random}
+                        {print}  name 's größte Angst: ' fears {at} {random}
                     ```
                 start_code: "# setze hier deinen Code hin"
             8:
@@ -2025,6 +2043,8 @@ adventures:
                     In diesem Spukhaus kannst du Monster mit Emojis auswählen. Natürlich kannst du auch Wörter verwenden.
                 start_code: "monster1 is _"
                 example_code: "```\nMonster_1 {is} \U0001F47B\nMonster_2 {is} \U0001F921\nMonster_3 {is} \U0001F476\n{print} Du gehst ins Spukhaus.\n{print} Plötzlich siehst du ein Monster_1\n{print} Du läufst in den anderen Raum, aber ein Monster_2 wartet dort auf dich!\n{print} Oh nein! Schnell flitzt du in die Küche.\n{print} Aber als du reinkommst greift dich Monster_3 an!\n```\n"
+                story_text_2: "## Challenge\nIn the example above the monsters are predetermined. So each time you run your code, the output is the same.\nCan you add `{ask}` commands to make the haunted house interactive and have the players choose the monsters they come across?\n"
+                example_code_2: "```\nmonster_1 {is} _\nmonster_2 {is} _\nmonster_3 {is} _\n{print} You enter the haunted house.\n{print} Suddenly you see a monster_1\n{print} You run into the other room, but a monster_2 is waiting there for you!\n{print} Oh no! Quickly get to the kitchen.\n{print} But as you enter monster_3 attacks you!\n```\n"
             14:
                 story_text: |
                     ## Spukhaus
@@ -2164,6 +2184,8 @@ adventures:
                     ```
                 start_code: "# setze hier deinen Code hin"
                 story_text_2: "## Challenge\nDiese Geschichte ist ziemlich einfach, vielleicht kannst du sie etwas mehr gruselig machen indem du die Geschichte spannender machst.\nAußerdem kennt die Geschichte gerade nur wenige Ausgänge, es gibt nur drei Möglichkeiten was hinter den Türen ist. Fallen dir noch mehr Monster ein die du der Liste hinzufügen kannst?\n\n## Mach das Spiel zu einer Fernseh-Show!\nZum Schluss wollen wir dich herausfordern, das Spiel zu einer Fernseh-Show zu machen, in der du eine Tür oder einen Koffer wählst der einen großen Preis enthält!\nSchaffst du das?\n"
+                story_text_3: "## Change the game into a tv gameshow!\nLastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!\nCan you do it?\n"
+                example_code_3: "```\n{print} The big gameshow!\n{print} There are 3 suitcases in front of you...\n{print} One of them contains _\n_\n```\n"
             16:
                 story_text: |
                     ## Spukhaus-Spiel
@@ -2321,7 +2343,7 @@ adventures:
 
                 start_code: "print Let's go!"
                 example_code: "```\n{print} Willkommen bei Hedy's\n{ask} Was würden Sie gerne essen?\n{echo} Sie hätten also gerne \n{ask} Was würden Sie gerne trinken?\n{echo} Sie hätten also gerne \n```\n"
-                story_text_2: "Wenn der Spieler einen Hamburger und eine Cola eintippt, kannst du nicht sagen `Sie hätten also gerne einen Hamburger und eine Cola`, sondern musst zwei eigene Zeilen schreiben. \nAußerdem gibt der `{echo}` Befehl nur das letzte Wort des Satzes zurück. Du kannst also nicht sagen `Ihr Hamburger kommt sofort!`.\n\nDas ändert sich in Level 2. In Level 2 lernst du mit Variablen zu arbeiten, die es dir erlauben mehrere Informationen zu speichern, und sie auszugeben, wo du willst.\nDazu lernst du noch mit dem `{at} {random}` Befehl umzugehen, den du benutzen kannst um Spiele zu machen.\nAlso, auf geht's zu Level 2!\n"
+                story_text_2: "Wenn der Spieler einen Hamburger und ein Cola eintippt, kannst du nicht \"Sie hätten also gerne einen Hamburger und ein Cola\" sagen , sondern musst zwei eigene Zeilen schreiben. \nAußerdem gibt der `{echo}` Befehl nur das letzte Wort des Satzes zurück. Du kannst also nicht \"Ihr Hamburger kommt sofort!\" sagen.\n\nDas ändert sich ab Level 2. In Level 2 lernst du, mit Variablen zu arbeiten, die es dir erlauben, mehrere Informationsfragmente zu speichern und sie dort wo du willst auszugeben.\nAlso gleich weiter zu Level 2!\n"
             2:
                 story_text: |
                     ## Was kommt als nächstes?
@@ -2380,8 +2402,8 @@ adventures:
             7:
                 story_text: |
                     ## Was kommt als Nächstes?
-                    Jetzt hast du gelernt wie du eine Zeile Code wiederholen kannst. Das wird sich noch als nützlich erweisen, aber reicht nicht immer aus. Manchmal möchtest du mehrere Zeilen auf einmal wiederholen.
-                    Das nächste Level erlaubt dir, ein paar Zeilen Code zu einer Gruppe zusammenzufügen, und diese kleine Gruppe dann auf einmal zu wiederholen!
+                    Jetzt hast du gelernt, wie du eine Zeile Code wiederholen (`{repeat}`) kannst. Das wird sich noch als nützlich erweisen, reicht aber nicht immer aus. Manchmal musst du mehrere Zeilen auf einmal wiederholen `{repeat}`.
+                    Das nächste Level erlaubt dir, ein paar Zeilen Code zu einer Gruppe zusammenzufügen und diese kleine Gruppe dann auf einmal zu wiederholen!
 
                 start_code: "print 'Lets go to the next level!'"
                 example_code: "```\n{repeat} 5 {times} {print} 'Im nächsten Level kannst du mehrere Zeilen Code auf einmal wiederholen!'\n```\n"
@@ -2402,7 +2424,7 @@ adventures:
                     Im nächsten Level lernst du den `{for}` Befehl, der es dir erlaubt eine Liste von Aktionen zu machen und den Code jedes Mal mit einer anderen Aktion zu wiederholen!
                     Schau es dir an!
                 start_code: "print 'Lets go to the next level!'"
-                example_code: "```\n{repeat} 2 {times}\n    {print} '{if} youre happy and you know it clap your hands'\n{print} '{if} youre happy and you know it and you really want to show it'\n{print} '{if} youre happy and you know it clap your hands'\n```\n"
+                example_code: "```\n{repeat} 2 {times}\n    {print} 'Wenn du glücklich bist, dann klatsche in die Hand'\n{print} 'Zeig mir, wenn du bei mir bist, wie dir so zumute ist'\n{print} 'Wenn du glücklich bist, dann klatsche in die Hand'\n```\n"
             10:
                 story_text: |
                     ## What's next?
@@ -2412,13 +2434,10 @@ adventures:
             11:
                 story_text: |
                     ## Was kommt als Nächstes?
-                    Vielleicht hast du im Restaurant-Abenteuer schon mal versucht, Dezimalzahlen (Kommazahlen) zu verwenden. Falls ja, hast du vielleicht gemerkt dass Hedy die noch nicht versteht und immer abgerundet hat.
+                    Vielleicht hast du im Restaurant-Abenteuer schon einmal versucht, Dezimalzahlen zu verwenden. Falls ja, hast du vielleicht bemerkt, dass Hedy diese noch nicht verstanden und immer abgerundet hat.
                     Ab dem nächsten Level kannst du Dezimalzahlen verwenden.
-
-                    Eine weitere coole Sache im nächsten Level ist, dass du mehrere Wörter in einer Variable verwenden kannst.
-                    Zum Beispiel konntest du schon das hier machen...
                 start_code: "print 'Lets go to the next level!'"
-                example_code: "```\nName = {ask} 'Was ist deine Lieblingssendung im Fernsehen?'\n{print} 'Ich mag am liebsten ' name\n```\nMehrere Wörter in einer Variable könntest du aber nicht benutzen, so wie im Beispiel unten. Dieses Programm funktioniert in diesem Level noch nicht!\n```\nSendung = Biene Maja\n{print} Sendung 'ist meine Lieblingssendung!'\n```\nGeh zum nächsten Level um diesen Code zum Laufen zu bringen!\n"
+                example_code: "```\nburger {is} 5\ndrink {is} 2\ntotal {is} burger + drink\nprint 'Du hast einen Burger und ein Getränk bestellt'\nprint 'Das macht dann bitte ' total ' Euro'\n```\nDer Code oben funktioniert, weil der Burger 5 Dollar und das Getränk 2 Dollar kostet. Wenn du aber 50 Cent mehr verrechnest, funktioniert das Programm nicht mehr! So wie im unteren Code:\n```\nburger {is} 5,50\ndrink {is} 2,30\ntotal {is} burger + drink\nprint 'Du hast einen Burger und ein Getränk bestellt'\nprint 'Das macht dann bitte ' total ' Euro'\n```\nGeh zum nächsten Level, um diesen Code zum Laufen zu bringen!\n"
             12:
                 story_text: |
                     ## Was kommt als Nächstes?
@@ -2470,41 +2489,42 @@ adventures:
             18:
                 story_text: |
                     ## Was kommt als nächstes?
-                    Herzlichen Glückwunsch! Du hast das letzte Level von Hedy erreicht! Aber keine Angst, wir arbeiten hart daran noch mehr Level und neue Abenteuer zu erfinden. Also komm gerne später nochmal vorbei und schau dir die neuesten Level an!
+                    Herzlichen Glückwunsch! Du hast das letzte Level von Hedy erreicht! Der Code, den du geschrieben hast, kann in echte Python-Umgebungen wie Replit oder PyCharm kopiert werden, wo du dann weiterüben kannst!
+                    Beachte jedoch, dass Python nur englische Befehle auslesen kann. Wenn du sonst also mit anderen Sprachen gearbeitet hast, musst du jetzt auch Englisch wechseln.
                 start_code: "print ('Great job!!!')"
     secret:
         default_save_name: Sprache
         levels:
             12:
                 story_text: "## Schreibe einen Geheim-Code wie ein Superspion\nIn diesem Abenteuer kannst du deinen eigenen Superspion-Code schreiben. Verschlüssele eine Nachricht die nur der richtige Agent entschlüsseln kann.\nWenn der Feind versucht den Code zu knacken, wird er nur falsche Informationen bekommen die seine Zeit verschwenden.\n"
-                example_code: "```\nName is ask 'Wie heißt du?'\nif Name is 'Agent007'\n    A is 'Geh zum Flughafen '\nelse\n    A is 'Geh zum Bahnhof '\nPasswort is ask 'Was ist das Passwort?'\nif Passwort is 'TOPSECRET'\n    B is 'Morgen um 2 Uhr'\nelse\n    B is 'Morgen um 10 Uhr'\nprint A + B\n```\n"
+                example_code: "```\nName {is} {ask} 'Wie heißt du?'\nif Name {is} 'Agent007'\n    a {is} 'Geh zum Flughafen '\n{else}\n    a {is} 'Geh zum Bahnhof '\nPasswort {is}  {ask} 'Wie lautet das Passwort?'\n{if} Passwort {is} 'STRENGGEHEIM'\n    b {is} 'Morgen um 2 Uhr'\n{else}\n    b {is} 'Morgen um 10 Uhr'\n{print} a + b\n```\n"
                 start_code: '## setze hier deinen Code hin'
             13:
                 story_text: "## Superspion\nDer Code den du im vorherigen Level geschrieben hast, kann mit dem `{and}` Befehl einfacher gemacht werden.\n"
-                example_code: "```\nName is ask 'Wie heißt du?'\nPasswort is ask 'Was ist dein Passwort?'\nif Name is 'Agent007' and Passwort is 'TOPSECRET'\n    print 'Gehe zum Flughafen um 2 Uhr'\nelse\n    print 'Gehe zum Bahnhof um 10 Uhr'\n ```\n"
+                example_code: "```\nName {is} {ask} 'Wie heißt du?'\nPasswort {is} {ask} 'Wie lautet dein Passwort?'\n{if} Name {is} 'Agent007' {and} Passwort {is} 'STRENGGEHEIM'\n    {print} 'Gehe um 2 Uhr zum Flughafen'\n{else}\n    {print}  'Gehe um 10 Uhr zum Bahnhof'\n ```\n"
                 start_code: '## setze hier deinen Code hin'
         name: Superspion
         description: Schreibe deinen eigenen Spion-Code
     tic:
         name: Tic Tac Toe
-        description: Play a game of Tic Tac Toe!
+        description: Spiele ein Spiel Tic Tac Toe!
         default_save_name: Tic
         levels:
             13:
-                story_text: "## Tic Tac Toe\nIn this adventure you can program a game of Tic Tac Toe. You can play with two people. Taking turns, you pick a number of the spot (1 - 9) you want to put your sign (x or o) on.\nThe first player that gets 3 in a row (horizontally, vertically or diagonally) wins!\nHave fun!\n"
+                story_text: "## Tic Tac Toe\nIn diesem Abenteuer kannst du ein Tic Tac Toe-Spiel programmieren. Du kannst mit zwei Leuten spielen. Ihr wählt abwechselnd die Zahl (zwischen 1 und 9) des Feldes, in das ihr euer Symbol (X oder O) einsetzen wollt.\nDie erste Person, die 3 Symbole in einer Reihe (horizontal, vertikal oder diagonal) hat, gewinnt!\nViel Spaß!\n"
                 example_code: "```\nsign = 'x'\nopen_spots = 1, 2, 3, 4, 5, 6, 7, 8, 9\ngame = 'on'\nspot_1 = '.'\nspot_2 = '.'\nspot_3 = '.'\nspot_4 = '.'\nspot_5 = '.'\nspot_6 = '.'\nspot_7 = '.'\nspot_8 = '.'\nspot_9 = '.'\n{print} 'TIC TAC TOE!'\n{print} spot_1 spot_2 spot_3\n{print} spot_4 spot_5 spot_6\n{print} spot_7 spot_8 spot_9\n{print} ' '\n{for} i {in} {range} 1 {to} 9\n    {if} game {is} 'on'\n        choice = {ask} 'Player ' sign ', which spot?'\n        {if} choice {in} open_spots\n            {remove} choice {from} open_spots\n            {if} choice {is} 1\n                spot_1 = sign\n            {if} choice {is} 2\n                spot_2 = sign\n            {if} choice {is} 3\n                spot_3 = sign\n            {if} choice {is} 4\n                spot_4 = sign\n            {if} choice {is} 5\n                spot_5 = sign\n            {if} choice {is} 6\n                spot_6 = sign\n            {if} choice {is} 7\n                spot_7 = sign\n            {if} choice {is} 8\n                spot_8 = sign\n            {if} choice {is} 9\n                spot_9 = sign\n        {else}\n            {print} 'That spot was already taken'\n        {print} spot_1 spot_2 spot_3\n        {print} spot_4 spot_5 spot_6\n        {print} spot_7 spot_8 spot_9\n        {print} ' '\n        winner = {ask} 'Did you win?'\n        {if} winner {is} 'yes'\n            {print} 'Good job, player ' sign '!'\n            game = 'over'\n        {else}\n            {if} sign {is} 'x'\n                sign = 'o'\n            {else}\n                sign = 'x'\n```\n"
                 start_code: '##Schreibe deinen Code hier'
             14:
                 start_code: '## Schreibe deinen Code hier'
-                story_text: "## Tic Tac Toe\nIn the previous levels you've made a tic tac toe game. Now you've learned how to use the = sign, the == sign and the != sign.\nYou can use this knowledge in your new Taic Tac Toe game, like this:\n"
+                story_text: "## Tic Tac Toe\nIn den vorigen Levels hast du ein Tic Tac Toe-Spiel kreiert. Jetzt weißt du, wie du das =-Symbol, das ==-Symbol und das !=-Symbol nutzen kannst.\nDu kannst dieses Wissen in deinem neuen Tic Tac Toe-Spiel zum Beispiel so anwenden:\n"
                 example_code: "```\nsign = 'x'\nopen_spots = 1, 2, 3, 4, 5, 6, 7, 8, 9\ngame = 'on'\nspot_1 = '.'\nspot_2 = '.'\nspot_3 = '.'\nspot_4 = '.'\nspot_5 = '.'\nspot_6 = '.'\nspot_7 = '.'\nspot_8 = '.'\nspot_9 = '.'\n{print} 'TIC TAC TOE!'\n{print} spot_1 spot_2 spot_3\n{print} spot_4 spot_5 spot_6\n{print} spot_7 spot_8 spot_9\n{print} ' '\n{for} i {in} {range} 1 {to} 9\n    {if} game != 'over'\n        choice = {ask} 'Player ' sign ', which spot?'\n        {if} choice {in} open_spots\n            {remove} choice {from} open_spots\n            {if} choice == 1\n                spot_1 = sign\n            {if} choice == 2\n                spot_2 = sign\n            {if} choice == 3\n                spot_3 = sign\n            {if} choice == 4\n                spot_4 = sign\n            {if} choice == 5\n                spot_5 = sign\n            {if} choice == 6\n                spot_6 = sign\n            {if} choice == 7\n                spot_7 = sign\n            {if} choice == 8\n                spot_8 = sign\n            {if} choice == 9\n                spot_9 = sign\n        {else}\n            {print} 'That spot was already taken'\n        {print} spot_1 spot_2 spot_3\n        {print} spot_4 spot_5 spot_6\n        {print} spot_7 spot_8 spot_9\n        {print} ' '\n        winner = {ask} 'Did you win?'\n        {if} winner == 'yes'\n            {print} 'Good job, player ' sign '!'\n            game = 'over'\n        {else}\n            {if} sign == 'x'\n                sign = 'o'\n            {else}\n                sign = 'x'\n```\n"
             15:
-                start_code: '## place your code here'
-                story_text: "## Tic Tac Toe\nIn this level you can improve your Tic Tac Toe game with the {while} loop/ With this loop you can combine the `{if} game != 'over'` and the `{for} i {in} {range} 1 to 9` into one simple line.\nCheck it out:\n"
+                start_code: '## füge hier deinen Code ein'
+                story_text: "## Tic Tac Toe\nIn diesem Level kannst du dein Tic Tac Toe-Spiel mit der {while}-Schleife verbessern. Mit dieser Schleife kannst du `{if} game != 'over'` und `{for} i {in} {range} 1 to 9` in eine einfache Zeile zusammenführen.\nProbiere es gleich aus:\n"
                 example_code: "```\nsign = 'x'\nopen_spots = 1, 2, 3, 4, 5, 6, 7, 8, 9\ngame = 'on'\nspot_1 = '.'\nspot_2 = '.'\nspot_3 = '.'\nspot_4 = '.'\nspot_5 = '.'\nspot_6 = '.'\nspot_7 = '.'\nspot_8 = '.'\nspot_9 = '.'\n{print} 'TIC TAC TOE!'\n{print} spot_1 spot_2 spot_3\n{print} spot_4 spot_5 spot_6\n{print} spot_7 spot_8 spot_9\n{print} ' '\n{while} game != 'over'\n    choice = {ask} 'Player ' sign ', which spot?'\n    {if} choice {in} open_spots\n        {remove} choice {from} open_spots\n        {if} choice == 1\n            spot_1 = sign\n        {if} choice == 2\n            spot_2 = sign\n        {if} choice == 3\n            spot_3 = sign\n        {if} choice == 4\n            spot_4 = sign\n        {if} choice == 5\n            spot_5 = sign\n        {if} choice == 6\n            spot_6 = sign\n        {if} choice == 7\n            spot_7 = sign\n        {if} choice == 8\n            spot_8 = sign\n        {if} choice == 9\n            spot_9 = sign\n    {else}\n        {print} 'That spot was already taken'\n    {print} spot_1 spot_2 spot_3\n    {print} spot_4 spot_5 spot_6\n    {print} spot_7 spot_8 spot_9\n    {print} ' '\n    winner = {ask} 'Did you win?'\n    {if} winner == 'yes'\n        {print} 'Good job, player ' sign '!'\n        game = 'over'\n    {else}\n        {if} sign == 'x'\n            sign = 'o'\n        {else}\n            sign = 'x'\n```\n"
             17:
-                start_code: '## place your code here'
-                story_text: "## Tic Tac Toe\nIn the previous levels the tic tac toe game had an annoying feature. After every move, you had to fill in yourself if you had won or not.\nThis made the game playable, but also quite slow. In this level we have learned the `{elif}` command, that could solve that problem.\nTo use the {elif} to let Hedy check whether or not a player has won is fun, but it also requires a fair amount of extra lines.\n\nIn the example code you see that we added the requirements to win (3 spots in a row horizontally, vertically or diagonally).\nYou can find them in line 46 to 69. You can see that each time the requirement is met (so if a player has won) the variable game is set to 'over'.\nThis means that the {while} loop will be stopped and the game ends.\n"
+                start_code: '## gib deinen Code hier ein'
+                story_text: "## Tic Tac Toe\nIn den vorigen Leveln hatte das Tic Tac Toe-Spiel ein nerviges Feature. Nach jedem Zug musstest du selbstständig eintragen, ob du gewonnen hast oder nicht. Zwar hat das das Spiel spielbar gemacht, gleichzeitig aber auch stark gebremst. In diesem Level haben wir gelernt, wie wir den `{elif}`-Befehl nutzen können, um dieses Problem zu lösen.\nDen `{elif}`-Befehl so zu nutzen, um Hedy feststellen zu lassen, ob eine Spielerin oder ein Spieler gewonnen hat, ist spaßig, braucht aber auch eine gewisse Anzahl an zusätzlichen Zeilen.\n\nIm Beispielcode kannst du sehen, dass wir Siegesbestimmungen hinzugefügt haben (3 Felder in einer horizontalen, vertikalen oder diagonalen Reihe). Du kannst diese in den Zeilen 46 bis 69 (leiwand) finden. Du kannst ebenso sehen, dass jedes Mal, wenn die Bestimmungen erfüllt sind (also, wenn jemand gewonnen hat), die Variable game auf 'over' gesetzt wird. Das bedeutet, dass die {while}-Schleife gestoppt wird und das Spiel zu Ende ist.\n"
                 example_code: "```\nsign = 'x'\nopen_spots = [1, 2, 3, 4, 5, 6, 7, 8, 9]\ngame = 'on'\nspot_1 = '.'\nspot_2 = '.'\nspot_3 = '.'\nspot_4 = '.'\nspot_5 = '.'\nspot_6 = '.'\nspot_7 = '.'\nspot_8 = '.'\nspot_9 = '.'\n{print} 'TIC TAC TOE!'\n{print} spot_1 spot_2 spot_3\n{print} spot_4 spot_5 spot_6\n{print} spot_7 spot_8 spot_9\n{print} ' '\n{while} game != 'over':\n    choice = {ask} 'Player ' sign ', which spot?'\n    {if} choice {in} open_spots:\n        {remove} choice {from} open_spots\n        {if} choice == 1:\n            spot_1 = sign\n        {if} choice == 2:\n            spot_2 = sign\n        {if} choice == 3:\n            spot_3 = sign\n        {if} choice == 4:\n            spot_4 = sign\n        {if} choice == 5:\n            spot_5 = sign\n        {if} choice == 6:\n            spot_6 = sign\n        {if} choice == 7:\n            spot_7 = sign\n        {if} choice == 8:\n            spot_8 = sign\n        {if} choice == 9:\n            spot_9 = sign\n    {else}:\n        {print} 'That spot was already taken'\n    {print} spot_1 spot_2 spot_3\n    {print} spot_4 spot_5 spot_6\n    {print} spot_7 spot_8 spot_9\n    {print} ' '\n    {if} spot_1 == spot_2 {and} spot_2 == spot_3 {and} spot_1 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_4 == spot_5 {and} spot_5 == spot_6 {and} spot_4 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_7 == spot_8 {and} spot_8 == spot_9 {and} spot_7 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_1 == spot_4 {and} spot_4 == spot_7 {and} spot_1 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_2 == spot_5 {and} spot_5 == spot_8 {and} spot_2 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_3 == spot_6 {and} spot_6 == spot_9 {and} spot_3 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_1 == spot_5 {and} spot_5 == spot_9 {and} spot_1 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_3 == spot_5 {and} spot_5 == spot_7 {and} spot_3 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {else}:\n        {if} sign == 'x':\n            sign = 'o'\n        {else}:\n            sign = 'x'\n```\n"
     blackjack:
         name: Blackjack
