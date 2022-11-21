@@ -168,7 +168,7 @@ adventures:
             17:
                 start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Listo o no, ¡Allá voy!'"
                 story_text: "## Elif\nAhora vamos a cambiar la indentación un poquito. Cada vez que necesitamos indentación, necesitamos `:` en la línea antes de la indentación.\n\nEn este nivel puedes usar un nuevo comando: `{elif}`. `{elif}` es una abreviación de {else} {if} y la necesitas cuando quieres hacer 3 o más opciones.\n¡Pruebalas!"
-                example_code: "```\npremios = ['1 millón de dólares', 'un pie de manzana, 'nada']\ntu_premio = premios[{random}]\n{print} 'Tu ganas ' tu_premio\n{if} tu_premio == '1 millón de dólares' :\n    {print} '¡Sí! ¡Eres rico!'\n{elif} tu_premio == 'un pie de manzana' :\n    {print} '¡Excelente! ¡Un pie de manzana!'\n{else}:\n    {print} 'Mejor suerte la próxima vez.'\n```\n"
+                example_code: "```\npremios = ['1 millón de dólares', 'un pie de manzana', 'nada']\ntu_premio = premios[{random}]\n{print} 'Tu ganas ' tu_premio\n{if} tu_premio == '1 millón de dólares' :\n    {print} '¡Sí! ¡Eres rico!'\n{elif} tu_premio == 'un pie de manzana' :\n    {print} '¡Excelente! ¡Un pie de manzana!'\n{else}:\n    {print} 'Mejor suerte la próxima vez.'\n```\n"
             18:
                 start_code: "nombre = 'Hedy'\n{print}('Mi nombre es ', nombre)"
                 story_text: "## ¡El último nivel!\n¡Llegamos código real de Python! Eso significa que necesitamos usar paréntesis con {print} y {range} de ahora en adelante."
