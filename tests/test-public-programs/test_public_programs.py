@@ -6,6 +6,10 @@ from parameterized import parameterized
 most_recent_file_name = 'tests/test-public-programs/filtered-programs-2022-11-17.json'
 public_snippets = []
 
+# this file tests all public programs in the database
+# while saving, they were not broken (no Parse error or other Hedy exception)
+# these tests make sure we aren't accidentally breaking public programs
+
 with open(most_recent_file_name, 'r') as public_programs_file:
     text = public_programs_file.read()
     public_programs = json.loads(text)
