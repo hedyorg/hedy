@@ -1479,12 +1479,12 @@ class ConvertToPython_3(ConvertToPython_2):
             return self.process_variable(arg, meta.line)         
 
     def add(self, meta, args):
-        value = self.process_variable(args[0], meta.line)
+        value = self.process_argument(meta, args[0])
         list_var = args[1]
         return f"{list_var}.append({value})"
 
     def remove(self, meta, args):
-        value = self.process_variable(args[0], meta.line)
+        value = self.process_argument(meta, args[0])
         list_var = args[1]
         return textwrap.dedent(f"""\
         try:
