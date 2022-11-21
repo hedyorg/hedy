@@ -9,7 +9,8 @@ from website import (
 import utils
 from utils import timems, load_yaml_rt, dump_yaml_rt, version, is_debug_mode
 from website.log_fetcher import log_fetcher
-from website.auth import current_user, login_user_from_token_cookie, requires_login, is_admin, is_teacher
+from website.auth import current_user, login_user_from_token_cookie, requires_login, is_admin, is_teacher, \
+    requires_teacher
 from website.yaml_file import YamlFile
 from website import querylog, aws_helpers, jsonbin, translating, ab_proxying, cdn, database, achievements
 import hedy_translation
@@ -375,8 +376,13 @@ def parse():
                 exception = ex
         try:
             response['Code'] = transpile_result.code
+
+            if transpile_result.has_pygame:
+                response['has_pygame'] = True
+
             if transpile_result.has_turtle:
                 response['has_turtle'] = True
+
         except Exception as E:
             pass
         try:
@@ -793,14 +799,11 @@ def tutorial_index():
 
 
 @app.route('/teacher-tutorial', methods=['GET'])
-@requires_login
+@requires_teacher
 def teacher_tutorial(user):
-    if not is_teacher(user):
-        return utils.error_page(error=403, ui_message=gettext('not_teacher'))
-
-    teacher_classes = DATABASE.get_teacher_classes(current_user()['username'], True)
+    teacher_classes = DATABASE.get_teacher_classes(user['username'], True)
     adventures = []
-    for adventure in DATABASE.get_teacher_adventures(current_user()['username']):
+    for adventure in DATABASE.get_teacher_adventures(user['username']):
         adventures.append(
             {'id': adventure.get('id'),
              'name': adventure.get('name'),
@@ -1071,7 +1074,7 @@ def get_certificate_page(username):
     user = DATABASE.user_by_username(username)
     if not user:
         return utils.error_page(error=403, ui_message=gettext('user_inexistent'))
-    progress_data = DATABASE.progress_by_username(username)   
+    progress_data = DATABASE.progress_by_username(username)
     if progress_data is None:
         return utils.error_page(error=404, ui_message=gettext('no_certificate'))
     achievements = progress_data.get('achieved', None)
@@ -1083,11 +1086,11 @@ def get_certificate_page(username):
         count_programs = 0
     quiz_score = get_highest_quiz_score(username)
     longest_program = get_longest_program(username)
-    
+
     number_achievements = len(achievements)
     congrats_message = gettext('congrats_message').format(**{'username': username})
-    return render_template("certificate.html", count_programs=count_programs, quiz_score=quiz_score, 
-                            longest_program=longest_program, number_achievements=number_achievements, 
+    return render_template("certificate.html", count_programs=count_programs, quiz_score=quiz_score,
+                            longest_program=longest_program, number_achievements=number_achievements,
                             congrats_message=congrats_message)
 
 def get_highest_quiz_score(username):
