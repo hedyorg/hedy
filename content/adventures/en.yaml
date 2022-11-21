@@ -1489,17 +1489,27 @@ adventures:
         levels:
             5:
                 story_text: |
+                    ## Press it!
+                    In this adventure you can make text appear with a button on your keyboard.
+                    Use the command `{pressed}` followed by `{print}` to assign text to a button on your keyboard.
+                    Run the example code and try pressing the x button on your keyboard.
                 example_code: |
                     ```
-                    if x is {pressed} {print} 'pressed'
+                    if x is {pressed} {print} 'you pressed the x key!'
                     ```
                 story_text_2: |
+                    ## If Else Pressed
+                    You can assign text to any letter on your keyboard.
+                    Run the example code, press a key on your keyboard and see what happens!
 
                 example_code_2: |
+                    ```
+                    if y is {pressed} {print} 'you pressed the y key!'
+                    else {print} 'you did not press the y key.'
+                    ```
 
                 start_code: |
                     if x is {pressed} {print} 'pressed'
-
 
     rock:
         name: "Rock, paper, scissors"
