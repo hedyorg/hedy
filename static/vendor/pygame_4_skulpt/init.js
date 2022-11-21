@@ -88,7 +88,7 @@ var createKeyboardEvent = function (event) {
             var difference = 0;
             if ((event.which <= 90) && (event.which >= 65))
                 difference = 32;
-            return [keyPGConstant, { key: (event.which + difference)}];
+            return [keyPGConstant, { key: (event.which + difference), unicode: event.key}];
     }
 };
 
