@@ -57,7 +57,7 @@ sections:
         -   title: Студенты используют печатать без вопроса
             example:
                 error_text: "Эхо создано для того, чтобы повторять ответ после команды спросить. Без команды спросить эхо не будет ничего делать.\n"
-                error_code: "echo Your name is\n"
+                error_code: "echo Ваше имя\n"
                 solution_text: "Add an ask command to make it work.\n"
                 solution_code: "ask What's your name?\necho Your name is\n"
         -   title: Students want their echo word (variable) to be in the middle of a sentence
@@ -69,9 +69,9 @@ sections:
         -   title: 'Turtle: Students let the turtle walk off of the screen'
             example:
                 error_text: "Often students love to try out big numbers when using the turtle, which causes the arrow to walk off the screen.\n"
-                error_code: "forward 300\nturn 90\n"
+                error_code: "вперед 300\nповорот 90\n"
                 solution_text: "In the example. students tend to think that the turn command doesn't work. Eventhough is does work, but you can't see it happening off screen. Use smaller numbers to prevent this from happening.\n"
-                solution_code: "forward 100\nturn 90\n"
+                solution_code: "вперед 100\nповорот 90\n"
         -   title: "Turtle: Students use the command backward, but that doens't exist"
             example:
                 error_text: "Назад - это не команда.\n"
@@ -82,9 +82,9 @@ sections:
         sections:
         -   title: Students make typos in their commands
             example:
-                solution_code: "print Don't make typos!\n"
+                solution_code: "печать Не делайте опечаток!\n"
                 error_text: "Hedy can't recognize a command with a typo.\n"
-                error_code: "prinnt Don't make typos!\n"
+                error_code: "prinnt Не делайте опечаток!\n"
                 solution_text: "Teach your students to read the error messages. This way they can find out themselves what went wrong.\n"
         -   title: Students forget that the ask command has changed
             example:
@@ -96,7 +96,7 @@ sections:
             example:
                 error_text: "For some students it might be frustrating to learn that the echo command doesn't work anymore. That's why it's very important to explain the advantages of using variables. For example you can use multiple variables in a code, and you can put them anywhere you like in a sentence!\n"
                 error_code: "answer is ask Why doesn't echo work anymore?!\necho\n"
-                solution_text: "Use a varible instead.\n"
+                solution_text: "Вместо этого используйте переменную.\n"
                 solution_code: "answer is ask Why doens't echo work anymore?!\nprint answer\n"
         -   title: Students use a variable name or as a normal word
             example:
@@ -132,7 +132,7 @@ sections:
                 solution_code: "name is Hedy\nprint Hi I'm name\n\nor\n\nanimals is rhino, bee, swan\nprint The best animal is... animals at random\n"
         -   title: Students forget at in at random
             example:
-                error_text: "Like in the example\n"
+                error_text: "Как в примере\n"
                 error_code: "birds is sparrow, seagull, robin\nprint birds random\n"
                 solution_text: "This problem is solved by adding the word at.\n"
                 solution_code: "birds is sparrow, seagull, robin\nprint birds at random\n"
@@ -464,7 +464,7 @@ learn-more-sections:
     text: "[Сообщите нам через Github](https://github.com/Felienne/hedy/issues/new/choose)\n"
 -   text: "Самый простой способ — помочь нам [с переводом Хэди](https://github.com/Felienne/hedy/blob/main/TRANSLATING.md)\n\nВот текущий статус перевода. Помогите нам закончить перевод на русский или другой язык, или добавьте новый язык, которого нет в списке.\n<a href=\"https://hosted.weblate.org/engage/hedy/\">\n<img src=\"https://hosted.weblate.org/widgets/hedy/-/multi-auto.svg\" alt=\"Translation status\" /></a>\n"
     title: Разговор на неделе кодов
--   title: Выступление с Недели кода
+-   title: Хеди в новостях
     text: "Хотите узнать больше про Хэди? Фелина подробно рассказывала про него (на английском языке) на Европейской Неделе Кода в 2020:\n\n<iframe width=\"560\" height=\"315\" class=\"mx-auto mt-4\" src=\"https://www.youtube.com/embed/R2U9MEowYag?wmode=opaque\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen=\"\"></iframe>\n"
 start-sections:
 -   title: Что такое поэтапный язык программирования?
