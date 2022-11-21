@@ -1,5 +1,5 @@
 import os
-import regex as re
+import re
 import yaml
 import json
 

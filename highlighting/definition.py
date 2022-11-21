@@ -1,10 +1,10 @@
 # This file defines the special regexes
 
 # list of symbols recognized as characters (with non-Latin characters)
-CHARACTER = '[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_\p{Mn}\p{Mc}\p{Nd}\p{Pc}·]'
+CHARACTER = '0-9_A-Za-zÀ-ÿء-ي'
 
 # definition of word
-WORD      = '(' + CHARACTER + "+)"
+WORD      = '([' + CHARACTER + "]+)"
 # space
 SPACE     = "( +)"
 
@@ -14,7 +14,7 @@ END_LINE = '( *$)'
 
 # beginning and end of words
 START_WORD = '(^| )'
-END_WORD   = '(?!' + CHARACTER + ')'
+END_WORD   = '(?![' + CHARACTER + '])'
 
 DIGIT = '[__DIGIT__]'
 
