@@ -629,7 +629,7 @@ adventures:
             13:
                 story_text: "## Super spiuni\nA mund të plotësoni komandën e duhur në vendin bosh? Mendja: Superspiuni duhet t'u përgjigjet saktë të DY pyetjeve, përpara se të marrë informacionin konfidencial!\n"
                 start_code: '## Vendoseni kodin tuaj këtu'
-                example_code: "```\nemri {is} {ask} 'Cili është emri juaj?'\nfjalëkalimi {is} {ask} \"Cili është fjalëkalimi juaj?\"\n{if} emri {is} 'Agent007'_ fjalëkalimi {is} 'TOPSECRET'\n     {print} 'Shko në aeroport në orën 02:00'\n{else}\n     {print} 'Shko në stacionin e trenit në orën 10:00'\n ```\n"
+                example_code: "```\nemri {is} {ask} 'Cili është emri juaj?'\nfjalëkalimi {is} {ask} \"Cili është fjalëkalimi juaj?\"\n{if} emri {is} 'Agent007' _ fjalëkalimi {is} 'TOPSECRET'\n     {print} 'Shko në aeroport në orën 02:00'\n{else}\n     {print} 'Shko në stacionin e trenit në orën 10:00'\n ```\n"
             12:
                 story_text: "## Bëni një kod sekret si një super spiun\nNë këtë aventurë ju mund të krijoni kodin tuaj super spiun. Kodoni një mesazh që vetëm agjenti i duhur mund ta deshifrojë.\nNëse armiku përpiqet të thyejë kodin, ata do të marrin disa informacione të rreme për të humbur kohën e tyre.\n\n## Sfidë\nBëni kodin tuaj sekret për superspiunin tuaj. A mund ta bëni atë të përbëhet nga edhe më shumë variabla?\n"
                 example_code: "```\nemri {is} {ask} 'Cili është emri juaj?'\n{if} emri {is} 'Agent007'\n     a {is} 'Shko në aeroport'\n{else}\n     a {is} 'Shko në stacionin e trenit'\nfjalëkalimi {is} {ask} \"Cili është fjalëkalimi?\"\n{if} fjalëkalimi {is} \"TOPSECRET\"\n     b {is} 'nesër në 02:00'\n{else}\n     b {is} 'sot në orën 10:00'\n{print} a + b\n```\n"
