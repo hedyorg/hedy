@@ -900,7 +900,7 @@ adventures:
                     {else} {print} '¡Incorrecto! Era ' _
                     ```
                 start_code: "{print} 'Bienvenide a tu propia calculadora!'"
-                story_text_3: "## Random numbers\nYou can also let the computer do random sums on its own using random.\nThis is how you choose a number of tables to practice, and from that you always get a different sum:\n"
+                story_text_3: "## Números aleatorios\nTambién puedes hacer que la computadora haga sumas aleatorias por su propia cuenta.\nAsí es como puedes escoger un número de tablas para practicar, y de ahí puedes tener siempre una suma diferente:\n"
                 example_code_3: "```\ntables = 4, 5, 6, 8\nnumbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\ntable = tables {at} {random}\nnumber = numbers {at} {random}\ncorrect_answer = table * number\nanswer = {ask} 'how much is ' table ' times ' number '?'\n{if} answer {is} correct_answer {print} 'okay'\n{else} {print} 'mistake! it was ' correct_answer\n```\n"
             14:
                 story_text: "## Guess which number\nIn this level you can programm the game 'Guess which number'\n"
