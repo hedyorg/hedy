@@ -1333,154 +1333,273 @@ levels:
             question_score: '10'
     11:
         1:
-            question_text: What will be the output from this code?
-            code: "{for} i {in} {range} 1 {to} 3\n    {print} i"
+            question_text: "What word should be at the place of the question mark?"
+            code: |-
+                {for} i {in} _?_ 1 {to} 10
+                    {print} i
             mp_choice_options:
-            -   option: "1\n2\n3"
-                feedback: Korrekt!
-            -   option: 1 2 3
-                feedback: That's not it
-            -   option: 1, 2, 3
-                feedback: That's not it
-            -   option: '123'
-                feedback: That's not it
-            correct_answer: A
-            hint: How do the numbers appear in the screen?
-            question_score: '10'
-        6:
-            correct_answer: C
-            code: "{for} i {in} {range} 0 {to} 2\n    {print} 'Hej'"
-            mp_choice_options:
-            -   option: 1 gång
-                feedback: Nej
-            -   option: 2 gånger
-                feedback: Nej
-            -   option: 3 gånger
-                feedback: Det stämmer!
-            -   option: Aldrig
-                feedback: Nej
-            hint: 0 räknas också. Så 0, 1, 2, det är 3 gånger.
-            question_score: '10'
-            question_text: Hur många gånger dyker ordet Hej upp på din skärm när du kör denna kod?
-        3:
-            mp_choice_options:
-            -   feedback: Perfekt
-                option: "```\n{for} i {in} {range} 1 {to} 5\n    {print} i\n{print} 'Jag kunde hitta hem'\n```\n"
-            -   option: "```\n{for} i {in} {range} 1 {to} 5\n{print} i\n{print} 'Jag kunde hitta hem'\n```\n"
-                feedback: Denna kod kommer inte fungera. Du behöver en indentering efter {for}.
-            -   option: "```\n{for} i {in} {range} 1 {to} 5\n    {print} i\n    {print} 'Jag kunde hitta hem'\n```\n"
-                feedback: Nu kommer Hedy räkna '1 Jag kunde hitta hem, 2 Jag kunde hitta hem', osv.
-            -   feedback: i är en variabel och ska inte ha citattecken
-                option: "```\n{for} i {in} {range} 1 {to} 5\n    {print} 'i'\n{print} 'Jag kunde hitta hem'\n```\n"
-            question_text: Vilken kod användes för denna utskrift?
-            output: "1\n2\n3\n4\n5\nJag kunde hitta hem"
-            correct_answer: A
-            hint: Först alla nummer, sedan meningen
+            -   option: |
+                    ```
+                    counter
+                    ```
+                feedback: "No"
+            -   option: |
+                    ```
+                    {range}
+                    ```
+                feedback: "Correct"
+            -   option: |
+                    ```
+                    {if}
+                    ```
+                feedback: "No"
+            -   option: |
+                    ```
+                    {for}
+                    ```
+                feedback: "No"
+            correct_answer: "B"
+            hint: "What did you learn in this level?"
             question_score: '10'
         2:
-            question_text: Which code was used to get this output?
+            question_text: "What will be the output from this code?"
+            code: |-
+                {for} i {in} {range} 1 {to} 3
+                    {print} i
             mp_choice_options:
-            -   option: "```\n{for} i {in} {range} 1 {to} 5\n    {print} i\n{print} 'Once I caught a fish alive!'\n```\n"
-                feedback: Perfect
-            -   option: "```\n{for} i {in} {range} 1 {to} 5\n{print} i\n{print} 'Once I caught a fish alive!'\n```\n"
-                feedback: This code won't work. You need an indent after {for}.
+            -   option: "1\n2\n3"
+                feedback: "Correct!"
+            -   option: "1 2 3"
+                feedback: "That's not it"
             -   option: "1, 2, 3"
-                feedback: Det är fel
+                feedback: "That's not it"
             -   option: "123"
-                feedback: Det är fel
-            hint: Hur visas numren på skärmen?
+                feedback: "That's not it"
+            correct_answer: "A"
+            hint: "How do the numbers appear in the screen?"
             question_score: '10'
-            correct_answer: A
-            code: "{for} i {in} {range} 1 {to} 3\n    {print} i"
+        3:
+            question_text: "Which code was used to get this output?"
+            output: |-
+                1
+                2
+                3
+                4
+                5
+                Once I caught a fish alive!
+            mp_choice_options:
+            -   option: |
+                    ```
+                    {for} i {in} {range} 1 {to} 5
+                        {print} i
+                    {print} 'Once I caught a fish alive!'
+                    ```
+                feedback: "Perfect"
+            -   option: |
+                    ```
+                    {for} i {in} {range} 1 {to} 5
+                    {print} i
+                    {print} 'Once I caught a fish alive!'
+                    ```
+                feedback: "This code won't work. You need an indent after {for}."
+            -   option: |
+                    ```
+                    {for} i {in} {range} 1 {to} 5
+                        {print} i
+                        {print} 'Once I caught a fish alive!'
+                    ```
+                feedback: "Now Hedy will count '1 Once I caught a fish alive!, 2 Once I caught a fish alive! etc."
+            -   option: |
+                    ```
+                    {for} i {in} {range} 1 {to} 5
+                        {print} 'i'
+                    {print} 'Once I caught a fish alive!'
+                    ```
+                feedback: "i is a variable and shouldn't have quotation marks"
+            correct_answer: "A"
+            hint: "First all the numbers, then the sentence"
+            question_score: '10'
         4:
+            question_text: "Which code was used to get this output?"
+            output: |-
+                10
+                9
+                8
+                7
+                6
+                5
+                4
+                3
+                2
+                1
+                0
             mp_choice_options:
-            -   option: "```\n{for} i {in} {range} 0 {to} 10\n    {print} i\n```\n"
-                feedback: Nu skriver Hedy ut numren från 0 till 10 istället för 10 till 0.
-            -   option: "```\n{for} i {in} {range} 0 to 10\n    {print} - i\n```\n"
-                feedback: Hedy skulle skriva ut negativa nummer i detta fall.
-            -   option: "```\n{for} i {in} {range} 10 to 0\n    {print} 10 9 8 7 6 5 4 3 2 1 0\n```\n"
-                feedback: Tyvärr finns detta inte.
-            -   option: "```\n{for} i {in} {range} 0 {to} 10\n    {print} 10 - i\n```\n"
-                feedback: Det är rätt!
-            question_text: Vilken kod användes för att få denna utmatning?
-            correct_answer: D
-            hint: Det måste vara en uträkning...
+            -   option: |
+                    ```
+                    {for} i {in} {range} 0 {to} 10
+                        {print} i
+                    ```
+                feedback: "Now Hedy prints the numbers from 0 to 10 instead of 10 to 0."
+            -   option: |
+                    ```
+                    {for} i {in} {range} 0 to 10
+                        {print} - i
+                    ```
+                feedback: "Hedy would print negative numbers in this case."
+            -   option: |
+                    ```
+                    {for} i {in} {range} 10 to 0
+                        {print} 10 9 8 7 6 5 4 3 2 1 0
+                    ```
+                feedback: "Unfortunately this does not exist."
+            -   option: |
+                    ```
+                    {for} i {in} {range} 0 {to} 10
+                        {print} 10 - i
+                    ```
+                feedback: "That's right!"
+            correct_answer: "D"
+            hint: "It has to be a calculation..."
             question_score: '10'
-            output: "10\n9\n8\n7\n6\n5\n4\n3\n2\n1\n0"
         5:
-            question_text: Vad är fel med denna kod?
-            code: "{for} i {in} {range} 1 {to} 10\n{print} i"
+            question_text: "What's wrong with this code?"
+            code: |-
+                {for} i {in} {range} 1 {to} 10
+                {print} i
             mp_choice_options:
-            -   option: "i:et på den sista raden behöver citattecken"
-                feedback: Nej, det gör det inte
-            -   option: "Du kan inte använda `{range}` 1 `{to}` 5, bara `{range}` 1 `{to}` 10"
-                feedback: Du hade också kunnat använda 1 till 5!
-            -   option: "Rad 1 behöver börja med en indentering."
-                feedback: Inte rad 1...
-            -   option: "Rad 2 behöver börja med en indentering"
-                feedback: Perfekt!
-            correct_answer: D
-            hint: Det är något fel med indenteringen
+            -   option: "The i in the last line need quotation marks"
+                feedback: "No it doesn't."
+            -   option: "You can't use `{range}` 1 `{to}` 5 only `{range}` 1 `{to}` 10"
+                feedback: "You could use 1 to 5 just as well!"
+            -   option: "Line 1 needs to start with an indention."
+                feedback: "Not line 1..."
+            -   option: "Line 2 needs to start with an indention"
+                feedback: "Perfect!"
+            correct_answer: "D"
+            hint: "There is something wrong with the indention"
+            question_score: '10'
+        6:
+            question_text: "How many times does the word Hello appear on your screen when you run the code?"
+            code: |-
+                {for} i {in} {range} 0 {to} 2
+                    {print} 'Hello'
+            mp_choice_options:
+            -   option: "1 time"
+                feedback: "No"
+            -   option: "2 times"
+                feedback: "No"
+            -   option: "3 times"
+                feedback: "That's right!"
+            -   option: "Never"
+                feedback: "No"
+            correct_answer: "C"
+            hint: "0 also counts. So 0,1,2 that's 3 times."
             question_score: '10'
         7:
-            question_text: Vad ska finnas där frågetecknet är?
+            question_text: "What should be on the place of the question mark?"
+            code: |-
+                {print} 'Welcome to Hedys diner'
+                people is {ask} 'How many people will be eating here tonight?'
+                _?_
+                    food is {ask} 'What would you like to order?'
+                    {print} food
             mp_choice_options:
-            -   feedback: Det är inte alltid 3 personer
-                option: "```\n{for} i {in} {range} 0 {to} 3\n```\n"
-            -   option: "```\n{for} i {in} {range} 1 {to} gäster\n```\n"
-                feedback: Variabeln heter inte gäster
-            -   option: "```\n{for} i {in} {range} 1 {to} personer\n```\n"
-                feedback: Bra!
-            -   option: "```\n{for} i {in} {range} 0 {to} personer\n```\n"
-                feedback: Det är en beställning för mycket!
-            code: "{print} 'Välkomna till Hedys fik'\npersoner is {ask} 'Hur många personer är ni?'\n_?_\n    mat is {ask} 'Vad vill du beställa?'\n    {print} mat"
-            correct_answer: C
-            hint: Använd variabeln 'personer'
+            -   option: |
+                    ```
+                    {for} i {in} {range} 0 {to} 3
+                    ```
+                feedback: "There's not always 3 people"
+            -   option: |
+                    ```
+                    {for} i {in} {range} 1 {to} guests
+                    ```
+                feedback: "The variable is not named guests"
+            -   option: |
+                    ```
+                    {for} i {in} {range} 1 {to} people
+                    ```
+                feedback: "Great!"
+            -   option: |
+                    ```
+                    {for} i {in} {range} 0 {to} people
+                    ```
+                feedback: "That's one order too many!"
+            correct_answer: "C"
+            hint: "Use the variable 'people'"
             question_score: '10'
         8:
-            question_text: Vad blir utmatningen från denna kod?
-            code: "{for} i {in} {range} 23 {to} 25\n    {print} 'Hej'"
+            question_text: "What will be the output from this code?"
+            code: |-
+                {for} i {in} {range} 23 {to} 25
+                    {print} 'hi'
             mp_choice_options:
             -   option: "23\n24\n25"
-                feedback: Numren skrivs inte ut. Det står inte `{print}` i.
-            -   option: 23 Hej 24 Hej 25 Hej
-                feedback: Numren skrivs inte ut. Det står inte `{print}` i
-            -   option: "Hej\nHej\nHej"
-                feedback: Korrekt
-            -   option: Ordet 'Hej' kommer skrivas ut 25 gånger på rad.
-                feedback: Nej, det dyker bara upp 3 gånger.
-            correct_answer: C
-            hint: Det står inte `{print}` i
+                feedback: "The numbers don't appear. It doesn't say `{print}` i."
+            -   option: "23 hi 24 hi 25 hi"
+                feedback: "The numbers don't appear. It doesn't say `{print}` i"
+            -   option: "hi\nhi\nhi"
+                feedback: "Correct"
+            -   option: "The word 'hi' will appear 25 times in a row."
+                feedback: "No it will only appear 3 times."
+            correct_answer: "C"
+            hint: "It doesn't say `{print}` i"
             question_score: '10'
         9:
-            question_text: Hur många gånger säger Hedy Hipp Hipp Hurra?
-            code: "age = {ask} 'How old are you?'\n{for} i {in} {range} 1 {to} age\n    {print} 'Hip Hip Hoorray!'"
+            question_text: "How many times does Hedy chant Hip Hip Hooray?"
+            code: |-
+                age = {ask} 'How old are you?'
+                {for} i {in} {range} 1 {to} age
+                    {print} 'Hip Hip Hoorray!'
             mp_choice_options:
-            -   option: 1 time
-                feedback: Try again
-            -   option: 2 times
-                feedback: Try again
-            -   option: Never
-                feedback: Try again
-            -   option: That depends on how old you are
-                feedback: That's right!
-            correct_answer: D
-            hint: '`{for}` i `{in}` `{range}` 1 `{to}` age'
+            -   option: "1 time"
+                feedback: "Try again"
+            -   option: "2 times"
+                feedback: "Try again"
+            -   option: "Never"
+                feedback: "Try again"
+            -   option: "That depends on how old you are"
+                feedback: "That's right!"
+            correct_answer: "D"
+            hint: "`{for}` i `{in}` `{range}` 1 `{to}` age"
             question_score: '10'
         10:
-            question_text: Which code belongs to this output?
+            question_text: "Which code belongs to this output?"
+            output: |-
+                Baby shark tututudutudu
+                Baby shark tututudutudu
+                Baby shark tututudutudu
+                Baby shark
             mp_choice_options:
-            -   feedback: Mind the indention
-                option: "```\n{for} i {in} {range} 1 {to} 3\n    {print} Baby shark tututudutudu\n    {print} Baby shark\n```\n"
-            -   option: "```\n{for} i {in} {range} 1 {to} 3\n    {print} Baby shark tututudutudu\n{print} Baby shark\n```\n"
-                feedback: That's right!
-            -   option: "```\n{for} i {in} {range} 0 {to} 3\n    {print} Baby shark tututudutudu\n{print} Baby shark\n```\n"
-                feedback: '`{range}` 0 `{to}` 3 is 4 times.'
-            -   option: "```\n{for} i {in} {range} 0 {to} 3\n    {print} Baby shark tututudutudu\n    {print} Baby shark\n```\n"
-                feedback: '`{range}` 0 `{to}` 3 is 4 times.'
-            output: "Baby shark tututudutudu\nBaby shark tututudutudu\nBaby shark tututudutudu\nBaby shark"
-            correct_answer: B
-            hint: Mind the indention
+            -   option: |
+                    ```
+                    {for} i {in} {range} 1 {to} 3
+                        {print} Baby shark tututudutudu
+                        {print} Baby shark
+                    ```
+                feedback: "Mind the indention"
+            -   option: |
+                    ```
+                    {for} i {in} {range} 1 {to} 3
+                        {print} Baby shark tututudutudu
+                    {print} Baby shark
+                    ```
+                feedback: "That's right!"
+            -   option: |
+                    ```
+                    {for} i {in} {range} 0 {to} 3
+                        {print} Baby shark tututudutudu
+                    {print} Baby shark
+                    ```
+                feedback: "`{range}` 0 `{to}` 3 is 4 times."
+            -   option: |
+                    ```
+                    {for} i {in} {range} 0 {to} 3
+                        {print} Baby shark tututudutudu
+                        {print} Baby shark
+                    ```
+                feedback: "`{range}` 0 `{to}` 3 is 4 times."
+            correct_answer: "B"
+            hint: "Mind the indention"
             question_score: '10'
     10:
         1:

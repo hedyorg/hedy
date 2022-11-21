@@ -1,5 +1,5 @@
 // Queue interface for the frontend
-Sk.insertEvent = function (eventName) {
+Sk.insertPyGameEvent = function (eventName) {
     var e = [];
     switch (eventName) {
         case "left":
@@ -1188,32 +1188,24 @@ var init$1 = function $__init__123$(self, size, fullscreen = false, main = true)
     main = Sk.ffi.remapToJs(main);
     if (main) {
         self.main_canvas = Sk.main_canvas;
-        self.main_canvas.addEventListener('mousedown', mouseEventListener);
-        self.main_canvas.addEventListener('mouseup', mouseEventListener);
-        self.main_canvas.addEventListener('mousemove', mouseEventListener);
-        window.addEventListener("keydown", keyEventListener);
-        window.addEventListener("keyup", keyEventListener);
 
+        Sk.bindPygameListeners = function () {
+            self.main_canvas.addEventListener('mousedown', mouseEventListener);
+            self.main_canvas.addEventListener('mouseup', mouseEventListener);
+            self.main_canvas.addEventListener('mousemove', mouseEventListener);
+            window.addEventListener("keydown", keyEventListener);
+            window.addEventListener("keyup", keyEventListener);
+        }
 
-        /*if (Sk.ffi.remapToJs(fullscreen)) {
-            self.width = window.innerWidth;
-            self.height = window.innerHeight;
-            self.main_canvas.style["z-index"] = "100";
-            self.main_canvas.style["position"] = "absolute";
-            self.main_canvas.style["top"] = "0";
-            self.main_canvas.style["left"] = "0";
-            document.body.appendChild(self.main_canvas);
-            window.onresize = function (event) {
-                self.width = window.innerWidth;
-                self.height = window.innerHeight;
-                self.main_canvas.width = self.width;
-                self.main_canvas.height = self.height;
-                self.main_context.drawImage(self.offscreen_canvas, 0, 0);
-                self.offscreen_canvas.width = self.width;
-                self.offscreen_canvas.height = self.height;
-                self.context2d.drawImage(self.main_canvas, 0, 0);
-            };
-        }*/
+        Sk.unbindPygameListeners = function () {
+            self.main_canvas.removeEventListener('mousedown', mouseEventListener);
+            self.main_canvas.removeEventListener('mouseup', mouseEventListener);
+            self.main_canvas.removeEventListener('mousemove', mouseEventListener);
+            window.removeEventListener("keydown", keyEventListener);
+            window.removeEventListener("keyup", keyEventListener);
+        }
+
+        Sk.bindPygameListeners();
     }
     self.main_canvas.width = self.width;
     self.main_canvas.height = self.height;
@@ -1235,7 +1227,6 @@ var init$1 = function $__init__123$(self, size, fullscreen = false, main = true)
 function fillBlack(ctx, w, h, main = false) {
     ctx.beginPath();
     ctx.rect(0, 0, w, h);
-    console.log("main:", main);
     if (main){
         ctx.fillStyle = "black";
     } else {
