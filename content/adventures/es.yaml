@@ -118,7 +118,7 @@ adventures:
             9:
                 start_code: "{repeat} 3 {times}\n    comida = {ask} '¿Qué quieres comer?'\n    {if} comida {is} 'pizza'\n        {print} '¡bien!'\n    {else}\n        {print} 'pizza es mejor'"
                 story_text: "## ¡Todo junto ahora!\nEn este nivel no solo puedes usar múltiples líneas con `{if}` y `{repeat}`, ¡pero también los puedes usar juntos!\nEn el ejemplo puedes ver un comando `{if}` dentro de un `{repeat}`. También está permitido de forma contraria, y un `{if}` también está permitido dentro de un `{if}` y un `{repeat}` dentro de un `{repeat}`.\nGive it a try!\n"
-                example_code: "```\n{repeat} 3 {times}\n    comida = {ask} '¿Qué quieres?'\n    {if} comida {is} pizza\n        {print} '¡bien!'\n    else\n        {print} 'pizza es mejor'\n```\n"
+                example_code: "```\n{repeat} 3 {times}\n    comida = {ask} '¿Qué quieres?'\n    {if} comida {is} pizza\n        {print} '¡bien!'\n    {else}\n        {print} 'mejor pizza'\n```\n"
             10:
                 story_text: "## Para cada elemento en mi lista...\nEn este nivel vamos a aprender un nuevo código llamado `{for}`. Con `{for}` Puedes hacer una lista y usar todos sus elementos.\n`{for}` crea un bloque, como `{repeat}` y `{if}` por lo que todas las líneas del bloque necesitan empezar con espacios."
                 start_code: "animales {is} perros, gatos, peces\n{for} animal {in} animales\n  {print} 'Me gustan los  ' animal"
@@ -483,11 +483,11 @@ adventures:
                     ¿Puedes averiguar hasta dónde tiene que llegar la tortuga aquí? ¡Termina el código y podrás dibujar cualquier polígono que quieras!
                 example_code_2: |
                     ```
-                    ángulos {is} {ask} '¿Cuántos ángulos debo dibujar?'
-                    ángulo {is} 360 / ángulos
+                    ángulos = {ask} '¿Cuántos ángulos debo dibujar?'
+                    ángulo = 360 / ángulos
                     {repeat} ángulo {times}
-                        girar _
-                        adelante _
+                        {turn} _
+                        {forward} _
                     ```
                 start_code: |-
                     ángulos = {ask} '¿Cuántos ángulos debo dibujar?'
@@ -513,8 +513,8 @@ adventures:
                     Ahora que podemos hacer matemáticas con Hedy, ¡podemos dibujar todas las figuras que queramos!
                 example_code: |
                     ```
-                    ángulos {is} {ask} '¿Cuántos ángulos quieres?'
-                    ángulo {is} 360 / ángulos
+                    ángulos = {ask} '¿Cuántos ángulos quieres?'
+                    ángulo = 360 / ángulos
                     {forward} 50
                     {turn} ángulo
                     {forward} 50
@@ -623,8 +623,8 @@ adventures:
                 start_code: "{print} 'Quien lavará los platos esta semana?'"
             6:
                 story_text: |
-                    ## Programa de lavado de platos en el nivel 5
-                    Usando el comando `{repeat}` puedes repetir porciones de tu programa. De esa forma, puedes determinar quien ha de lavar los platos cada día de la semana.
+                    ## Lavar los platos
+                    ¿Todo el mundo lava los platos por igual? ¿Te parece justo? Puedes contarlo en este nivel.
                 example_code: |
                     ```
                     personas = mamá, papá, Genésis, María
@@ -637,14 +637,14 @@ adventures:
 
                     Ahora puedes copiar las líneas 3 a 5 unas cuantas veces (por ejemplo, 7 para toda la semana) para calcular para toda la semana otra vez. ¿Puedes hacer el código para toda la semana?
                 start_code: "{print} 'Wie doet de afwas?'"
-                story_text_2: "## Make it fair\nIf you are extremely unlucky the previous program might choose you to to the dishes for the whole week! That's not fair!\nTo create a fairer system you can use the `{remove}` command to remove the chosen person from the list. This way you don't have to do the dishes again untill everybody has had a turn.\n\nMonday and tuesday are ready for you! Can you add the rest of the week?\nAnd... can you come up with a solution for when your list is empty?\n"
+                story_text_2: "## Hagámoslo justo\nSi tienes mucha mala suerte, el programa anterior puede que ¡te elija para lavar los platos toda la semana! ¡Eso no es justo!\nPara crear un sistema mas justo puedes utilizar el comando `{remove}` para eliminar la persona elegida de la lista. De esta forma no tendrás que lavar los platos hasta que todos hayan hecho un turno.\n\n¿Lunes y martes ya están añadidos! ¿Puedes añadir el resto de la semana?\nY ¿puedes dar con una solución para cuando la lista esté vacía?\n"
                 example_code_2: "```\npeople = mom, dad, Emma, Sophie\ndishwasher = people {at} {random}\n{print} 'Monday the dishes are done by: ' dishwasher\n{remove} dishwasher {from} people\ndishwasher = people {at} {random}\n{print} 'Tuesday the dishes are done by: ' dishwasher\n{remove} dishwasher {from} people\ndishwasher = people {at} {random}\n```\n"
             5:
                 story_text: |
                     ## Programa de lavado de platos
-                    Usando el comando `{if}` ahora puedes hacer tu programa todavía más interesante. Ahora tu programa puede reaccionar de acuerdo a la elección de quien lavará los platos.
+                    Usando el comando `{if}` ahora puedes hacer tu programa todavía más divertido. Ahora tu programa puede reaccionar de acuerdo a la elección de quien lavará los platos.
 
-                    Puede hacer que tu programa imprima 'oh no' si {is} tu turno de lavar los platos, y '¡sí!' en caso de que no sea tu turno de lavar los platos?
+                    Puede hacer que tu programa imprima 'oh no' si es tu turno de lavar los platos, y '¡sí!' en caso de que no sea tu turno de lavar los platos?
                     ¡No olvides las comillas!
                 example_code: |
                     ```
