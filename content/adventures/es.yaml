@@ -909,13 +909,13 @@ adventures:
                 example_code: "```\n{print} 'Guess which number'\nnumbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nnumber = numbers {at} {random}\ngame = 'on'\n{for} i {in} {range} 1 {to} 10\n    {if} game == 'on'\n        guess = {ask} 'Which number do you think it is?'\n        {if} guess > number\n            {print} 'Lower!'\n        {if} guess < number\n            {print} 'Higher!'\n        {if} guess == number\n            {print} 'You win!'\n            game = 'over'\n"
                 start_code: '# place your code here'
             12:
-                story_text: "## Calculator\nNow you can make a calculator that works for decimal numbers.\n"
+                story_text: "## Calculadora\nAhora puedes hacer una calculadora que funcione con números decimales. ¡Rellena los espacios para hacer que funcione correctamente!\n"
                 example_code: "```\nnumber1 = {ask} 'What is the first number?'\nnumber2 = {ask} 'What is the second number?'\nanswer = number1 + number2\n{print} number1 ' plus ' number2 ' is ' answer\n"
                 start_code: '# place your code here'
             10:
-                story_text: "## Calculator\nThis calculator game helps you practise your tables of multiplication!\nIf you add more numbers to the list, you can practise all the multiplications.\n"
-                example_code: "```\nnumbers = 1, 2, 3\n{for} number1 {in} numbers\n    {for} number2 {in} numbers\n        answer = {ask} 'How much is ' number2 ' times ' number1 '?'\n        correct = number1 * number2\n        {if} answer {is} correct\n            {print} 'Great job!'\n        {else}\n            {print} 'Thats wrong. The right answer is ' correct\n```\n"
-                start_code: '# place your code here'
+                story_text: "## Calculadora\n¡Este juego de calcular te ayudar a practicar las tablas de la multiplicación!\n## Desafío\nPuedes agregar más números a la lista, así puedes practicar todas las multiplicaciones.\n"
+                example_code: "```\nnúmeros = 1, 2, 3\n{for} número1 {in} números\n    {for} número2 {in} números\n        respuesta = {ask} '¿Cuánto es ' número2 ' por ' número1 '?'\n        correcta = número1 * número2\n        {if} respuesta {is} correcta\n            {print} 'Muy bien!'\n        {else}\n            {print} 'Estás equivocade. La respuesta correcta es ' correcta\n```\n"
+                start_code: '# pon tu código aquí'
             15:
                 story_text: "## Calculator\nYou can add the `{while}` loop to the calculator game you've learned to make in a previous level.\nThis makes sure the player can't continue to the next question {if} they answer incorrectly.\n"
                 example_code: "```\nscore = 0\n{for} i {in} {range} 0 {to} 9\n    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    number1 = numbers {at} {random}\n    number2 = numbers {at} {random}\n    correct = number1 * number2\n    answer = 0\n    {while} answer != correct\n        {print} 'How much is ' number1 ' times ' number2 '?'\n        answer = {ask} 'Fill in your answer:'\n        {print} 'Your answer is ' answer\n    {print} 'Good job!'\n{print} 'You win!'\n```\n"
