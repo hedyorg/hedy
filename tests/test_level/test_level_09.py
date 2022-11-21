@@ -229,7 +229,7 @@ class TestsLevel9(HedyTester):
             pygame.quit()
             break
           if event.type == pygame.KEYDOWN: 
-            if event.key == pygame.K_x:
+            if event.unicode == 'x':
               for i in range(int('5')):
                 print(f'doe het 5 keer!')
                 time.sleep(0.1)
@@ -259,7 +259,7 @@ class TestsLevel9(HedyTester):
               pygame.quit()
               break
             if event.type == pygame.KEYDOWN: 
-              if event.key == pygame.K_w:
+              if event.unicode == 'w':
                 trtl = 25
                 try:
                   trtl = int(trtl)
@@ -268,7 +268,7 @@ class TestsLevel9(HedyTester):
                 t.forward(min(600, trtl) if trtl > 0 else max(-600, trtl))
                 time.sleep(0.1)
                 break
-              if event.key == pygame.K_a:
+              if event.unicode == 'a':
                 trtl = -90
                 try:
                   trtl = int(trtl)
@@ -276,7 +276,7 @@ class TestsLevel9(HedyTester):
                   raise Exception(f'While running your program the command <span class="command-highlighted">turn</span> received the value <span class="command-highlighted">{trtl}</span> which is not allowed. Try changing the value to a number.')
                 t.right(min(600, trtl) if trtl > 0 else max(-600, trtl))
                 break
-              if event.key == pygame.K_d:
+              if event.unicode == 'd':
                 trtl = 90
                 try:
                   trtl = int(trtl)
@@ -284,7 +284,7 @@ class TestsLevel9(HedyTester):
                   raise Exception(f'While running your program the command <span class="command-highlighted">turn</span> received the value <span class="command-highlighted">{trtl}</span> which is not allowed. Try changing the value to a number.')
                 t.right(min(600, trtl) if trtl > 0 else max(-600, trtl))
                 break
-              if event.key == pygame.K_s:
+              if event.unicode == 's':
                 trtl = 180
                 try:
                   trtl = int(trtl)

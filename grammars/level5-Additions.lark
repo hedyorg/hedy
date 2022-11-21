@@ -17,8 +17,8 @@ assign: var _IS textwithspaces
 error_print_no_quotes: _PRINT (textwithoutspaces | list_access | var_access) (_SPACE (textwithoutspaces | list_access | var_access))*  -> error_print_nq
 
 // new commands for level 5
-ifpressed_else: _IF SMALL_LETTER_OR_NUMERAL _IS _PRESSED _EOL* _if_less_command (_SPACE+ _EOL* | _SPACE* _EOL+) _ELSE (_SPACE+ _EOL* | _SPACE* _EOL+) _if_less_command
-ifpressed: _IF SMALL_LETTER_OR_NUMERAL _IS _PRESSED _EOL* _if_less_command
+ifpressed_else: _IF LETTER_OR_NUMERAL _IS _PRESSED _EOL* _if_less_command (_SPACE+ _EOL* | _SPACE* _EOL+) _ELSE (_SPACE+ _EOL* | _SPACE* _EOL+) _if_less_command
+ifpressed: _IF LETTER_OR_NUMERAL _IS _PRESSED _EOL* _if_less_command
 
 _if_clause: _IF (condition (_SPACE+ _EOL* | _SPACE* _EOL+) | condition_spaces _SPACE* _EOL+ | error_condition) _if_less_command
 error_condition: condition_spaces _SPACE
