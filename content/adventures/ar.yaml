@@ -360,8 +360,8 @@ adventures:
                 start_code: '# place your code here'
             3:
                 story_text: "## الببغاء\nعلّم الببغاء كلمة جديدة من خلال الأمر `{add}`.\n"
-                example_code: "```\nwords {is} squawk, Hedy\n{print} Train your parrot!\nnew_word {is} {ask} Which word do you want to teach them?\n{add} new_word {to_list} words\n{print} \U0001F9D2 Say new_word , Hedy!\n{print} \U0001F99C words {at} {random}\n```\n"
-                start_code: '# place your code here'
+                example_code: "```\nكلمات {is} نعيق، هيدي\n{print} درِب ببغاءك!\nكلمة_جديدة {is} {ask} ما الكلمة الجديدة التي تريد أن يتعلمها؟\n{add} كلمة_جديدة {to_list} كلمات\n{print} \U0001F9D2 تكلم كلمة_جديدة أيها الببغاء هيدي!\n{print} \U0001F99C كلمات {at} {random}\n```\n"
+                start_code: '# اكتب الكود الخاص بك هنا'
     songs:
         name: غنّ أغنية!
         description: Print a song
@@ -710,10 +710,10 @@ adventures:
                 start_code: '# place your code here'
                 story_text_3: "## Challenges\nThis concept can be used to make may different programs, just be creative! For example you could create a machine that predicts that your favorite sports team will beat all the competitors!\nOr you could make  Snow White's magic mirror on the wall, to tell everyone you are the fairest of them all!\nLet your imagination do the work!\n"
             3:
-                example_code: "In this example the player can {ask} Hedy a yes-no question and Hedy will pick a random answer for you.\n```\n{print} I’m Hedy the fortune teller!\nquestion {is} {ask} What do you want to know?\n{print} This is what you want to know: question\nanswers {is} yes, no, maybe\n{print} My crystal ball says...\n{sleep} 2\n{print} answers {at} {random}\n```\n\n## Challenges\nNow, Hedy can only answer yes, no or maybe. Can you give Hedy more answer options, like 'definitely' or '{ask} again'.\n"
-                story_text: "## Fortune Teller\nIn the previous levels you've created your first fortune telling machine, but Hedy couldn't really predict anything, only {echo}.\nIn this level you can use a variable and the `{at} {random}` command to really let Hedy choose an answer for you. Check out this code for instance:\n"
-                start_code: '# place your code here'
-                story_text_2: "## Challenges\nNow, Hedy can only answer yes, no or maybe. Can you give Hedy more answer options, like 'definitely' or '{ask} again'.\n"
+                example_code: "\nفي هذا المثال يمكن لللاعب استخدام {ask} ليسأل هيدي العرافة سؤال بنعم أو لا وهيدي سوف تختار لك إجابة عشوائية في كل مرة.\n```\n{print} أنا هيدي العرافة!\nسؤال {is} {ask} ماذا تود أن تعرف؟\n{print} سؤالك هو: سؤال\nإجابات {is} نعم، لا، ربما\n{print} كرتي السحرية تقول...\n{sleep} 2\n{print} إجابات {at} {random}\n```\n"
+                story_text: "## العراف\nفي المستويات السابقة استطعت أن تصنع أول عراف آلي لك، ولكن لم تستطع هيدي التنبؤ بأي شيء، لقد رددت فقط بعض الإجابات من {echo}.\nولكن في هذا المستوى يمكنك استخدام المتغيرات و الأمر الجديد الذي تعلمته `{at} {random}` لكي تجعل هيدي تتنبأ لك الإجابة حقًا. تحقق من الكود الموضح فالمثال و جرب بنفسك:\n"
+                start_code: '# اكتب الكود الخاص بك هنا'
+                story_text_2: "## تحدي\nالان هيدي العرافة تستطيع الإجابة بنعم، لا او ربما فقط. هل يمكنك أن تعطيها خيارات لإجابات أخرى مثل \"بالتأكيد\" او \"{ask} مرة أخرى\".\n"
         description: Let Hedy predict the future
         default_save_name: العراف
     haunted:
