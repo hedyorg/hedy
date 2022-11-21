@@ -1,7 +1,8 @@
-import {loginForTeacher} from '../../tools/login/login.js'
+import {loginForTeacher, logout} from '../../tools/login/login.js'
 import { createClass} from '../../tools/classes/class'
 describe('Is able to see teacher page', () => {
   it('Passes', () => {
+    
     loginForTeacher();
     cy.wait(500);
     
@@ -10,9 +11,11 @@ describe('Is able to see teacher page', () => {
 
     cy.get('.green-btn').contains("Add students").click();
     cy.get('.green-btn').contains("Copy join link").click();
+    
     cy.window().then((win) => {
       win.navigator.clipboard.readText().then((text) => {
-        expect(text).to.eq('http://localhost:8080/hedy/l/yH8QNXu');
+          
+        expect(text).to.eq('http://localhost:8080/hedy/L/26EUkkL');
       });
     });
   })
