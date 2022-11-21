@@ -602,25 +602,14 @@ adventures:
         levels:
             7:
                 story_text: |
-                    ## Programa de lavado de platos en el nivel 6
-                    Cuán seguido lava los platos cada miembro de la familia? Es eso justo? Ahora podemos calcularlo.
+                    ## Programa de lavado de platos
+                    Con el comando `{repeat}` puedes repetir partes del código. Puedes usarlo para calcular quién va a lavar los platos toda la semana.
                 example_code: |
                     ```
-                    personas {is} mama, papa, Maria, Carlos
-                    lavados_de_carlos {is} 0
-                    lavador {is} personas {at} {random}
-                    {print} lavador ' debe lavar los platos'
-                    {if} lavador {is} Carlos lavados_de_carlos {is} lavados_de_carlos + 1
-                    {print} 'Carlos lavara los platos ' lavados_de_carlos ' veces esta semana'
+                    people = mamá, papá, Genésis, María
+                    {repeat} _ _ {print} 'el lavaplatos es ' _
                     ```
-
-                    Si copias las líneas 3 a 5 unas siete veces, puedes contar cuantas veces te tocará lavar los platos.
-                    Puedes escribir el programa para calcular la semana entera?
-
-                    ## Avance
-                    Escribir el programa para la semana entera require bastante copiar y pegar, no crees? Vamos a arreglar eso en el nivel 7.
-                    Este nivel es el último de la aventura del lavado de platos! Pero puedes elegir otra aventura y programar cosas como una calculadora, una historia interactiva o un juego más interesante.
-                start_code: "{print} 'Quien lavará los platos esta semana?'"
+                start_code: "{print} '¿Quien lavará los platos esta semana?'"
             6:
                 story_text: |
                     ## Lavar los platos
@@ -636,9 +625,9 @@ adventures:
                     ```
 
                     Ahora puedes copiar las líneas 3 a 5 unas cuantas veces (por ejemplo, 7 para toda la semana) para calcular para toda la semana otra vez. ¿Puedes hacer el código para toda la semana?
-                start_code: "{print} 'Wie doet de afwas?'"
-                story_text_2: "## Hagámoslo justo\nSi tienes mucha mala suerte, el programa anterior puede que ¡te elija para lavar los platos toda la semana! ¡Eso no es justo!\nPara crear un sistema mas justo puedes utilizar el comando `{remove}` para eliminar la persona elegida de la lista. De esta forma no tendrás que lavar los platos hasta que todos hayan hecho un turno.\n\n¿Lunes y martes ya están añadidos! ¿Puedes añadir el resto de la semana?\nY ¿puedes dar con una solución para cuando la lista esté vacía?\n"
-                example_code_2: "```\npeople = mom, dad, Emma, Sophie\ndishwasher = people {at} {random}\n{print} 'Monday the dishes are done by: ' dishwasher\n{remove} dishwasher {from} people\ndishwasher = people {at} {random}\n{print} 'Tuesday the dishes are done by: ' dishwasher\n{remove} dishwasher {from} people\ndishwasher = people {at} {random}\n```\n"
+                start_code: "{print} '¿Quién lavará los platos?'"
+                story_text_2: "## Hagámoslo justo\nSi tienes muy mala suerte, ¡el programa anterior puede que te elija para lavar los platos toda la semana! ¡Eso no es justo!\nPara crear un sistema mas justo puedes utilizar el comando `{remove}` para eliminar la persona elegida de la lista. De esta forma no tendrás que lavar los platos hasta que todos hayan hecho un turno.\n\n¡Lunes y martes ya están añadidos! ¿Puedes añadir el resto de la semana?\nY ¿puedes dar con una solución para cuando la lista esté vacía?\n"
+                example_code_2: "```\npersonas = mamá, papá, Genésis, María\nlavaplatos = personas {at} {random}\n{print} 'El lunes los platos serán lavados por ' lavaplatos\n{remove} lavaplatos {from} personas\nlavaplatos = personas {at} {random}\n{print} 'El martes los platos serán lavados por ' lavaplatos\n{remove} lavaplatos {from} personas\nlavaplatos = personas {at} {random}\n```\n"
             5:
                 story_text: |
                     ## Programa de lavado de platos
@@ -682,9 +671,9 @@ adventures:
                 story_text_2: "## ¡Hackea el programa para lavar platos!\n¿No quieres lavar los platos por ti mismo? Hackea el programa quitando tu nombre de la lista con el comando `{remove}``{from}`\n"
                 example_code_2: "```\npersonas {is} mamá, papá, Genésis, María\ntu_nombre {is} {ask} ¿Quien eres tu?\n_ tu_nombre _ personas\n{print} _ _ _ lavará los platos\n```\n"
             10:
-                example_code: "```\ndays = Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday\nnames = mom, dad, Emma, Sophie\n{for} day {in} days\n    {print} names {at} {random} ' does the dishes on ' day\n```\n"
-                story_text: "## Dishwashing\nIn this level you could make an even better dish washing shedule.\n"
-                start_code: '# place your code here'
+                example_code: "```\ndías = Lunes, Martes, Miércoles, Jueves, Viernes, Sábado, Domingo\nnombres = mamá, papá, Genésis, María\n_ día _ días\n    {print} nombres {at} {random} ' Hará los platos el ' day\n```\n"
+                story_text: "## Programa de lavado de platos\nEn este nivel puedes hacer un horario de lavado de platos incluso mejor.\n"
+                start_code: '# pon tu código aquí'
     dice:
         name: "Dados"
         description: "Crea tu propio juego de dados"
@@ -693,45 +682,42 @@ adventures:
             7:
                 story_text: |
                     ## Dados
-                    En el nivel 6 puedes nuevamente crear dados, pero ahora puedes contar cuántos puntos se han tirado ya.
+                    Puedes hacer un dado otra vez en el nivel 7. Con el comando `{repeat}` puedes tirar el dado muchas veces fácilmente.
+                    ¡Intenta terminar el código de ejemplo! Los guíones bajos deben contener múltiples comandos y letras.
 
-                    Tal vez sepas que tirar un gusanito cuenta como 5 puntos. Ahora puedes tirar un dado y luego sumar cuántos puntos has obtenido ya. El siguiente ejemplo es para tirar un sólo dado:
+                    Pero quizás quieras hacer un tipo completamente distinto de dado. ¡Por supuesto que puedes!
                 example_code: |
                     ```
-                    opciones {is} 1, 2, 3, 4, 5, gusanito
-                    puntaje {is} 0
-                    tirada {is} opciones {at} {random}
-                    {print} 'has tirado un ' tirada
-                    {if} tirada {is} gusanito puntaje {is} puntaje + 5 {else} puntaje {is} puntaje + tirada
-                    {print} 'Tu puntaje es ' puntaje ' puntaje'
+                    opciones = 1, 2, 3, 4, 5, gusanito
+                    {repeat} _ _ {print} _ _ _
                     ```
-                    Puedes modificar el programa de manera que puedas calcular el puntaje si tiras el dado 8 veces? Para hacer eso deberás copiar y pegar algunas líneas de tu programa.
-
-                    ## Avance
-
-                    Haz podido modificar el programa correctamente? Escribir el programa para repetir el dado 8 veces require bastante copiar y pegar, no crees? Vamos a hacer eso más simple en el nivel 7!
-                start_code: "{print} 'Qué salió esta vez?'"
+                start_code: "{print} '¿Qué salió esta vez?'"
             6:
                 story_text: |
                     ## Dados
-                    En el nivel 5 puedes nuevamente crear dados. Esta vez puedes usar el comando `{repeat}` para tirar varios dados a la vez.
-                    Puedes usar el programa de ejemplo para terminar el juego!
-
-                    Pero tal vez prefieras crear un dado distinto o sino inventar un juego completamente distinto.
+                    Puedes hacer un dado de gusanito otra vez en este nivel, pero ahora también puedes calcular cuantos puntos han sido tirados.
+                    Puedse saber que el gusano cuenta como cinco puntos para los gusanitos. Ahora cada vez que lances el dado puedes calcular inmediatamente cuantos puntos haz tirado.
+                    ## Desafío
+                    ¿Puedes hacer que el código obtenga la puntuación total por 8 dados? Para hacer eso tienes que cortar y copiar algunas líneas de código.
                 example_code: |
                     ```
-                    opciones {is} 1, 2, 3, 4, 5, gusanito
-                    {repeat} _ _ {print} _ _ _
+                    opciones = 1, 2, 3, 4, 5, gusanito
+                    puntos = 0
+                    tirada = opciones {at} {random}
+                    {print} 'tiraste un' throw
+                    {if} tirada {is} gusanito puntos = puntos + 5 {else} puntos = puntos + tirada
+                    {print} 'esos son ' puntos ' puntos'
                     ```
 
-                start_code: "{print} 'Qué salió esta vez?'"
-                example_code_2: "## Looking forward\n\nDid you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!\n"
+                start_code: "{print} '¿Qué salió esta vez?'"
+                example_code_2: "## Avances\n\n¿Pudiste calcular la puntuación para los 8 dados? Eso necesito que copiaras y pegaras mucho, ¿verdad? ¡Vamos a hacer eso más fácil en el nivel 7!\n"
             5:
                 story_text: |
                     ## Dados
-                    En el nivel 4 puedes nuevamente crear dados, y ahora puedes usar el comando `{if}`.
-                    Puedes modificar el programa de ejemplo para que éste diga "Puedes dejar de tirar los dados" si el jugador ha obtenido un gusanito.
-                    Pero tal vez prefieras crear un dado distinto o sino inventar un juego completamente distinto. Por ejemplo, puedes hacer que el juego responda de manera distinta. Por ejemplo, diciendo 'éxito' si arrojas un 6 o 'que injusticia!' si arrojas algo distinto.
+                    También puedes hacer un dado otra vez en este nivel usando el `{if}`
+                    Completa el código de ejemplo de forma que diga "Puedes dejar de tirar" una vez te sale un gusanito.
+
+                    Pero quizás quieres recrear el dado de un juego completamente diferente. ¡Eso está bien también! Luego haz tu propia reacción. Por ejemplo, 'sí' para 6 y 'oh no' {else} (sino).
                 example_code: |
                     ```
                     opciones {is} 1, 2, 3, 4, 5, gusanito
@@ -740,55 +726,40 @@ adventures:
                     {if} _ {is} gusanito {print} 'Puedes dejar de tirar los dados' _ {print} 'Debes tirar los dados nuevamente!'
                     ```
 
-                start_code: "{print} 'Qué salió esta vez?'"
+                start_code: "{print} '¿Qué salió esta vez?'"
             4:
                 story_text: |
                     ## Dados
                     En el nivel 3 podemos crear oraciones que incluyan el valor obtenido de la tirada de dados, pero usando comillas.
-                    Puedes escribir el programa, reemplazando los guiones bajos?                example_code: |
-                    ```
-                    opciones {is} 1, 2, 3, 4, 5, gusanito
-                    {print} 'has tirado un ' _
-                    {print} _ _ _ <- agregar código aquí
-                    ```
-                start_code: "{print} 'Qué salió esta vez?'"
-                example_code: "```\nchoices {is} 1, 2, 3, 4, 5, earthworm\n{print} _ you threw _\n{print} _ _ _ <- here you have to program the choice\n```\n"
+                    ¿Puedes escribir el programa, reemplazando los guiones bajos?
+                start_code: "{print} '¿Qué salió esta vez?'"
+                example_code: "```\nopciones {is} 1, 2, 3, 4, 5, gusanito\n{print} 'has tirado un ' _\n{print} _ _ _ <- agregar código aquí\n```\n"
             3:
                 story_text: |
                     ## Dados
                     En el nivel 2 puedes elegir elementos de una lista. De esa manera podemos hacer que se tiren los dados.
-
                     Dale una mirada a los juegos de mesa que tienes en tu casa.
-
-                    Hay en tu casa juegos que usen un dado normal (o un dado especial)? Puedes crear los mismos dados con el siguiente programa.
-
+                    Hay en tu casa juegos que usen un dado normal (¿o un dado especial)? Puedes crear los mismos dados con el siguiente programa.
                     Por ejemplo, los dados del juego Gusanitos, que tienen los números del 1 al 5, y en lugar de 6, un gusanito.
 
                     ![Dado con números del 1 al 5 y un gusanito en lugar del 6](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)
                 example_code: |
                     ```
                     opciones {is} 1, 2, 3, 4, 5, gusanito
-                    {print} opciones {at} {random}
+                    {print} gusanito {at} {random}
                     ```
 
-                    ## Avance
-                    Haz por casualidad intentado escribir una oración que contenga la palabra "opciones"?
-
-                    Por ejemplo, `{print} yo elijo una de las opciones`. Puedes probarlo ahora si no lo has hecho todavía.
-
-                    Lamentablemente eso no va a funcionar! Como resultado de ese ejemplo, obtendrás: `yo elijo una de las [1, 2, 3, 4, 5, regenworm]. Pero ahora puedes resolver este problema en el nivel 3.
-
-                start_code: "{print} Qué salió esta vez?"
-                example_code_2: "```\nchoices {is} _\n```\n"
-                story_text_2: "## Challenge\nThe dice in the example above are dice for a specific game. Can you make normal dice?\nOr other special dice from a different game?\n"
+                start_code: "{print} ¿Qué salió esta vez?"
+                example_code_2: "```\nopciones {is} _\n```\n"
+                story_text_2: "## Desafío\nLos dados en el ejemplo de arriba son dados para un juego en específico. ¿Puedes hacer un dado normal?\n¿U otro dado especial para un juego diferente?\n"
             15:
-                story_text: "## Dice\nIn this game you have to throw 6 in as little tries as possible.\n"
-                example_code: "```\noptions = 1, 2, 3, 4, 5, 6\n{print} 'Throw 6 as fast as you can!'\nthrown = 0\ntries = 0\n{while} thrown != 6\n    thrown = options {at} {random}\n    {print} 'You threw ' thrown\n    tries = tries + 1\n{print} 'Yes! You have thrown 6 in ' tries ' tries.'\n```\n"
-                start_code: '# place your code here'
+                story_text: "## Dados\nEn este juego tienes que tirar un 6 en el menor número de intentos posibles.\n"
+                example_code: "```\nopciones = 1, 2, 3, 4, 5, 6\n{print} '¡Lanza un 6 lo más rápido que puedas!'\nlanzado = 0\nobtenidos = 0\n{while} lanzado != 6\n    lanzado = opciones {at} {random}\n    {print} 'Lanzaste un ' lanzado\n    intentos = intentos + 1\n{print} '¡Sí! Lanzaste un 6 en ' intentos ' intentos.'\n```\n"
+                start_code: '# pon tú código aquí'
             10:
-                story_text: "## Dice\nIs everybody taking too long throwing the dice? In this level you can let Hedy throw all the dice at once!\n"
-                example_code: "```\nplayers = Ann, John, Jesse\nchoices = 1, 2, 3, 4, 5, 6\n{for} player {in} players\n    {print} player ' throws ' choices {at} {random}\n    {sleep}\n```\n"
-                start_code: '# place your code here'
+                story_text: "## Dados\n¿Todo el mundo está tardando mucho lanzando el dado? ¡En este nivel puedes lanzar todos los dados a la vez!\n¿Puedes rellenar los espacios con la línea de código correcta?\n"
+                example_code: "```\njugadores = Ana, Juan, Pedro\nopciones = 1, 2, 3, 4, 5, 6\n{for} jugador {in} jugadores\n    {print} jugador ' tiró un ' opciones {at} {random}\n    {sleep}\n```\n"
+                start_code: '# Coloca tu código aquí'
     rock:
         name: "Piedra, papel o tijera"
         description: "Crea tu propio juego de piedra, papel y tijera"
@@ -802,30 +773,27 @@ adventures:
                     Con `{ask}` puedes tomar una opción, y con `{echo}` puedes repetir la opción elegida.
                 example_code: |
                     ```
-                    {print} Qué eliges?
+                    {print} ¿Qué eliges?
                     {ask} elige piedra, papel o tijera
                     {echo} has elegido:
                     ```
 
-                    ## Avance
-                    Sólamente repetir la opción elegida es bastante aburrido, pero en los próximos niveles podremos hacer mucho más.
-
-                start_code: "{print} Bienvenide a tu propio piedra, papel o tijera!"
-                story_text_2: "## Challenge\nInstead of using words, you could also use emojis: ✊✋✌\nCan you create a code using emojis?\n"
-                example_code_2: "```\n{print} what do you choose?\n{ask} choose from _\n{echo} so your choice was:\n```\n"
+                start_code: "{print} ¡Bienvenide a tu propio piedra, papel o tijera!"
+                story_text_2: "## Desafío\nEn lugar de usar palabras, puedes también usar emojis: ✊✋✌\n¿Puedes hacer el código usando emojis?\n"
+                example_code_2: "```\n{print} ¿Qué escoges?\n{ask} escoge _\n{echo} tu elección fue\n```\n"
             5:
                 story_text: |
                     ## Piedra, papel o tijera
                     En el nivel 4 podemos determinar quien ha ganado el juego.
                     Para eso necesitamos un nuevo comando: `{if}`.
 
-                    Graba tu opción con el nombre opción y la opción de la computadora como opcióncomputadora.
+                    Graba tu opción con el nombre opción y la opción de la computadora como opción computadora.
                     Luego puedes usar `{if}` para comprobar si ambas opciones fueron iguales o si fueron distintas.
                     Puedes escribir el código?
                 example_code: |
                     ```
                     opciones {is} piedra, papel, tijera
-                    opcióncomputadora {is} _
+                    opción_computadora {is} _
                     opción {is} {ask} 'Que eliges?'
                     {print} 'Has elegido ' _
                     {print} 'La computadora ha elegido ' _
@@ -839,7 +807,7 @@ adventures:
                 story_text: |
                     ## Piedra, papel o tijera
                     En el nivel 3 podemos seguir desarrollando nuestro juego de piedra, papel o tijera. Pero ahora, si quieres imprimir texto, debes usar comillas.
-                    Eres capaz de imprimir un texto adicional? Reemplaza el guión bajo con el código correcto.
+                    ¿Eres capaz de imprimir un texto adicional? Reemplaza el guión bajo con el código correcto.
                 example_code: |
                     ```
                     opciones {is} piedra, papel, tijera
@@ -851,9 +819,7 @@ adventures:
                     ## Piedra, papel o tijera
 
                     En el nivel 2 puedes ingresar listas de elementos y luego escoger uno de ellos.
-
                     Primero debes ingresar una lista con el comando `{is}`. Luego puedes hacer que la computadora escoja un elemento de la lista con el comando `{at} {random}`.
-
                     De esa manera, la computadora puede elegir una opción: piedra, papel o tijera.
                 example_code: |
                     ```
@@ -861,33 +827,30 @@ adventures:
                     {print} opciones {at} {random}
                     ```
 
-                    En el nivel 2 también puedes usar `{ask}` nuevamente, entonces puedes intentar imprimir tanto tu elección como la elección de la computadora!
-                    Ten cuidado, ahora `{ask}` funciona de manera distinta que en el nivel 1. Y también requiere que pongas un nombre delante de él.
 
-
-                start_code: "{print} Bienvenide a tu propio piedra papel o tijera!"
-                story_text_2: "## Challenge\nNow you only have one player, so can you add a second player?\nYou can even use variables to name player 1 and player 2.\n"
-                example_code_2: "```\nchoices {is} rock, paper, scissors\n{print} player 1 chooses... choices {at} {random}\n{print} player 2 _\n```\n"
+                start_code: "{print} ¡Bienvenide a tu propio piedra papel o tijera!"
+                story_text_2: "## Desafío\nAhora solo tienes un solo jugador, ¿puedes agregar un segundo jugador?\nPuedes usar variables para nombrar al jugador 1 y al jugador 2.\n"
+                example_code_2: "```\nopciones {is} piedra, papel o tijera\n{print} el jugador 1 escoge... opciones {at} {random}\n{print} jugador 2 _\n```\n"
             10:
-                story_text: "## Rock, Paper, Scissors\nFeeling too lazy to play the game yourself? Let Hedy play it for you!\n"
-                example_code: "```\nchoices = rock, paper, scissors\nplayers = Marleen, Michael\n{for} player {in} players\n     {print} player ' chooses ' choices {at} {random}\n```\n"
-                start_code: '# place your code here'
+                story_text: "## Piedra, papel o tijera\n¿No tienes ganas de jugar el juego? ¡Deja que Hedy lo haga por ti!\nLo único que tiense que hacer es llenar el nombre de los jugadores\n"
+                example_code: "```\nopciones = piedra, papel, tijera\njugadores = _\n{for} jugador {in} jugadores\n     {print} jugador ' escoge ' opciones {at} {random}\n```\n"
+                start_code: '# pon tu código aquí'
             2:
-                story_text: "## Rock, paper, scissors\nIn this level you can practise using the variables, so that you can make the rock, paper, scissors game in the next level!\n"
-                example_code: "```\nchoice {is} _\n{print} I choose choice\n```\n"
-                start_code: '# place your code here'
+                story_text: "## Piedra, papel o tijera\nEn este nivel puedes practicar usando las variables, ¡así puedes hacer un juego de piedra, papel o tijeras en el próximo nivel!\n"
+                example_code: "```\n_ {is} {ask} ¿piedra, papel o tijera?\n{print} Escojo _\n```\n"
+                start_code: '# pon tu codigo aquí'
             15:
-                story_text: "## Rock, Paper, Scissors\nPlay until you beat the computer! But first, finish the example code...\n"
-                example_code: "```\nwon = 'no'\noptions = 'rock', 'paper', 'scissors'\n{while} won == 'no'\n    your_choice = {ask} 'What do you choose?'\n    computer_choice = options {at} {random}\n    {print} 'you chose ' your_choice\n    {print} 'the computer chose ' computer_choice\n    {if} computer_choice == your_choice\n        {print} 'Tie!'\n    {if} computer_choice == 'rock' {and} your_choice == 'scissors'\n        {print} 'You lose!'\n    {if} computer_choice == 'rock' {and} your_choice == 'paper'\n        {print} 'You win!'\n        won = 'yes'\n"
-                start_code: '# place your code here'
+                story_text: "## Piedra, papel o tijera\n¡Juega hazta que le ganes a la computadora! Pero primero termina el código de ejemplo...\n"
+                example_code: "```\nganó = 'no'\nopciones = 'piedra', 'papel', 'tijeras'\n{while} ganó == 'no'\n    tu_opcion = {ask} '¿Que escoges?'\n    opcion_computadora = opciones {at} {random}\n    {print} 'Escogiste ' your_choice\n    {print} 'La computadora escogió ' computer_choice\n    {if} opcion_computadora == tu_opcion\n        {print} '¡Empate!'\n    {if} opcion_computadora == 'roca' {and} tu_opcion == 'tijera'\n        {print} '¡Perdiste!'\n    {if} opcion_computadora == 'roca' {and} tu_opcion == 'papel'\n        {print} '¡Ganaste!'\n        won = 'sí'\n"
+                start_code: '# pon tu código aquí'
             9:
-                story_text: "## Rock, paper, scissors\nIn this level you can program the whole rock, paper, scissors game by nesting the {if}-commands. Can you finish the code?\n"
-                example_code: "```\nchoices {is} rock, paper, scisscors\nyour_choice {is} {ask} 'What do you choose?'\n{print} 'You choose ' your_choice\ncomputer_choice {is} choices {at} {random}\n{print} 'The computer chooses ' computer_choice\n{if} computer_choice {is} your_choice\n    {print} 'Tie'\n{if} computer_choice {is} 'rock'\n    {if} your_choice {is} 'paper'\n        {print} 'You win!'\n    {if} your_choice {is} 'scissors'\n        {print} 'You lose!'\n```\n"
-                start_code: '# place your code here'
+                story_text: "## Piedra, papel o tijera\nEn este nivel puedes hacer el juego de piedra, papel o tijera completo aninando comandos {if}. ¿Puedes terminar el código?\n"
+                example_code: "```\nopciones {is} piedra, papel, tijera\ntu_opción {is} {ask} '¿Que escoges?'\n{print} 'Escogiste ' tu_opción\nopción_computadora {is} opciones {at} {random}\n{print} 'La computadora escogió ' opción_computadora\n{if} opción_computadora {is} tu_opción\n    {print} 'Empate'\n{if} opción_computadora {is} piedra\n    {if} tu_opción {is} papel\n        {print} '¡Ganaste!'\n    {if} tu_opción {is} tijera\n        {print} '¡Perdiste!'\n# termina este código\n```\n"
+                start_code: '# pon tu código aquí'
             13:
-                example_code: "```\noptions = 'rock', 'paper', 'scissors'\nyour_choice = {ask} 'What do you choose?'\ncomputer_choice = options {at} {random}\n{print} 'You choose ' your_choice\n{print} 'The computer chooses ' computer_choice\n{if} computer_choice {is} your_choice\n    {print} 'Tie'\n{if} computer_choice {is} 'rock' {and} your_choice {is} 'paper'\n    {print} 'You win!'\n{if} computer_choice {is} 'rock' {and} your_choice {is} 'scissors'\n    {print} 'The computer wins!'\n```\n"
-                story_text: "## Rock, paper, scissors\nWith the `{and}` command you can shorten your rock, paper, scissors code! Check out the example code below and try to finish it.\n"
-                start_code: '# place your code here'
+                example_code: "```\nopciones = 'piedra', 'papel', 'tijera'\ntu_opcion = {ask} '¿Qué quieres escoger?'\nopcion_computadora = opciones {at} {random}\n{print} 'Escogiste ' tu_opcion\n{print} 'La computadora escoge ' opcion_computadora\n{if} opcion_computadora {is} tu_opcion\n    {print} 'Empate'\n{if} opcion_computadora {is} 'piedra' {and} tu_opcion {is} 'papel'\n    {print} 'You win!'\n{if} opcion_computadora {is} 'piedra' {and} tu_opcion {is} 'tijera'\n    {print} '¡La computadora ganó!'\n_\n```\n"
+                story_text: "## Piedra, papel o tijera\n¡Con el comando `{and}` puedes reducir tu código del juego de piedra, papel o tijera! Mira el ejemplo de abajo e intenta terminarlo.\n"
+                start_code: '# pon tú código aquí'
     calculator:
         name: "Calculadora"
         description: "Haz una calculadora"
@@ -916,29 +879,25 @@ adventures:
             6:
                 story_text: |
                     ## Calculadora
-                    Ahora que puedes calcular, puedes escribir un programa para practicar las tablas de multiplicar. Puedes decidir que cuentas incluir, por ejemplo:
+                    Ahora que puedes calcular, ¡puedes hacer una calculadora!
                 example_code: |
                     ```
-                    respuestacorrecta {is} 11 * 27
-                    respuesta {is} {ask} 'Cuánto es 11 veces 27?'
-                    {if} respuesta {is} respuestacorrecta {print} 'Bien hecho'
-                    {else} {print} 'Incorrecto! La respuesta correcta es ' respuestacorrecta
+                    numero_1 {is} {ask} 'Llena el primer número:'
+                    numero_2 {is} {ask} 'Llena el segundo número:'
+                    respuesta_correcta = numero_1 * numero_2
+                    {print} numero_1 ' por ' numero_2 ' is ' respuesta_correcta
                     ```
                 story_text_2: |
-                    ## Multiplicaciones al azar
-                    También puedes hacer que la computadora elija multiplicaciones al azar con `{random}`.
+                    ## Desafío
+                    La calcula va a ser capaz de calcular las respuestas por ti, pero también puedes hacer un programa para probar tus propias habilidades matemáticas, así:
 
-                    Entonces puedes listar algunas tablas para practicar, y elegir un número distinto para multipicarlas:
+                    ¡Rellena los espacios para completar el código!
                 example_code_2: |
                     ```
-                    tablas {is} 4, 5, 6, 8
-                    veces {is} 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                    tabla {is} tablas {at} {random}
-                    multiplicador {is} veces {at} {random}
-                    respuestacorrecta {is} tabla * multiplicador
-                    respuesta {is} {ask} 'Cuánto es ' tabla ' veces ' multiplicador '?'
-                    {if} respuesta {is} respuestacorrecta {print} 'Bien hecho'
-                    {else} {print} 'Incorrecto! La respuesta correcta es ' respuestacorrecta
+                    respuesta_correcta = 11 * 27
+                    respuesta = {ask} '¿Cuanto es 11 por 27?'
+                    {if} respuesta {is} _ {print} '¡Buen trabajo!'
+                    {else} {print} '¡Incorrecto! Era ' _
                     ```
                 start_code: "{print} 'Bienvenide a tu propia calculadora!'"
                 story_text_3: "## Random numbers\nYou can also let the computer do random sums on its own using random.\nThis is how you choose a number of tables to practice, and from that you always get a different sum:\n"
@@ -1329,7 +1288,7 @@ adventures:
         levels:
             2:
                 story_text: "## Loro\nCrea tu propia mascota online, ¡un loro que copiará lo que digas!\n"
-                example_code: "```\n{print} Im Hedy the parrot\nname {is} {ask} whats your name?\n{print} name\n{sleep}\n{print} squawk\n{sleep}\n{print} name\n```\n"
+                example_code: "```\n{print} Soy Hedy la lora\nnombre {is} {ask} ¿Cuál es tu nombre?\n{print} nombre\n{sleep}\n{print} squawk\n{sleep}\n{print} nombre\n```\n"
                 start_code: '{print} ¡Soy Hedy la lora!'
                 story_text_2: "## Desafío\nPuedes utilizar variables para hacer que el loro diga más cosas. ¿Puedes completar este código?\n"
                 example_code_2: "```\n{print} Soy Hedy la lora\nnombre {is} {ask} ¿Cuál es tu nombre?\n{print} nombre\n{sleep}\n{print} nombre\napellido {is} {ask} ¿Cuál es tu apellido?\n_\n{sleep}\n_\n```\n"
