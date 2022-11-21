@@ -1,4 +1,3 @@
-//import { loginForTeacher } from "../login/login";
 import { goToTeachersPage } from "../navigation/nav";
 
 export function createClass()

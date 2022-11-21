@@ -7,7 +7,7 @@ describe('Testing all checkboxes', () => {
     cy.wait(500);
     createClass();
 
-    cy.get('#class_view_button > .no-underline').click() // Press on view class button
+    cy.get('#class_view_button').click() // Press on view class button
 
     cy.get('#customize-class-button').click(); // Press customize class button
     
