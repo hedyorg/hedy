@@ -139,20 +139,20 @@ commands_per_level = {
     2 :['print', 'ask', 'is', 'turn', 'forward', 'color', 'sleep'],
     3 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from'],
     4 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from'],
-    5 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'pressed'],
-    6 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'pressed'],
-    7 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'pressed', 'repeat', 'times'],
-    8 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'pressed', 'repeat', 'times'],
-    9 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'pressed', 'repeat', 'times'],
-    10 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'pressed', 'repeat', 'times', 'for'],
-    11 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'pressed', 'for', 'range', 'repeat'],
-    12 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'pressed', 'for', 'range', 'repeat'],
-    13 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'pressed', 'for', 'range', 'repeat', 'and', 'or'],
-    14 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'pressed', 'for', 'range', 'repeat', 'and', 'or'],
-    15 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'pressed', 'for', 'range', 'repeat', 'and', 'or', 'while'],
-    16 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'pressed', 'for', 'range', 'repeat', 'and', 'or', 'while'],
-    17 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'pressed', 'for', 'range', 'repeat', 'and', 'or', 'while', 'elif'],
-    18 :['is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'pressed', 'range', 'repeat', 'and', 'or', 'while', 'elif', 'input'],
+    5 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'pressed', 'button'],
+    6 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'pressed', 'button'],
+    7 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'pressed', 'button', 'repeat', 'times'],
+    8 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'pressed', 'button', 'repeat', 'times'],
+    9 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'pressed', 'button', 'repeat', 'times'],
+    10 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'pressed', 'button', 'repeat', 'times', 'for'],
+    11 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat'],
+    12 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat'],
+    13 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or'],
+    14 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or'],
+    15 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or', 'while'],
+    16 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or', 'while'],
+    17 :['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'elif'],
+    18 :['is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'pressed', 'button', 'range', 'repeat', 'and', 'or', 'while', 'elif', 'input'],
 }
 
 command_turn_literals = ['right', 'left']
@@ -1571,6 +1571,10 @@ else:
         arg1 = self.process_variable(args[1], meta.line)
         return f"{arg0} in {arg1}"
 
+    def assign_button(self, meta, args):
+        button_name = self.process_variable(args[0], meta.line)
+        return f"create_button({button_name})"
+
     def make_ifpressed_command(self, command):
         if self.ifpressed_prefix_added:
             return command
@@ -1583,7 +1587,7 @@ while not pygame_end:
     pygame_end = True
     pygame.quit()
     break
-  if event.type == pygame.KEYDOWN: 
+  if event.type == pygame.KEYDOWN:
 {command}""")
             self.ifpressed_prefix_added = True
 
@@ -1685,10 +1689,10 @@ class ConvertToPython_6(ConvertToPython_5):
         if self.is_variable(arg):
             return self.make_turn(escape_var(arg))
         if isinstance(arg, Tree):
-            return self.make_turn(arg.children[0])        
+            return self.make_turn(arg.children[0])
         return self.make_turn(int(arg))
-    
-    def forward(self, meta, args):        
+
+    def forward(self, meta, args):
         if len(args) == 0:
             return sleep_after('t.forward(50)', False)
         arg = args[0]
@@ -1913,7 +1917,7 @@ class ConvertToPython_12(ConvertToPython_11):
         name = args[0]
         self.check_var_usage(args, meta.line)
         return escape_var(name)
-    
+
     def turn(self, meta, args):
         if len(args) == 0:
             return "t.right(90)"  # no arguments defaults to a right turn
@@ -1921,10 +1925,10 @@ class ConvertToPython_12(ConvertToPython_11):
         if self.is_variable(arg):
             return self.make_turn(escape_var(arg))
         if isinstance(arg, Tree):
-            return self.make_turn(arg.children[0])        
+            return self.make_turn(arg.children[0])
         return self.make_turn(float(arg))
-    
-    def forward(self, meta, args):        
+
+    def forward(self, meta, args):
         if len(args) == 0:
             return sleep_after('t.forward(50)', False)
         arg = args[0]
@@ -1946,7 +1950,7 @@ class ConvertToPython_12(ConvertToPython_11):
         if add_sleep:
             return sleep_after(transpiled, False)
         return transpiled
-    
+
     def division(self, meta, args):
         return self.process_calculation(args, '/')
 
@@ -2399,7 +2403,7 @@ def preprocess_ifs(code):
                 "pressed" not in line and any(x in line for x in commands)
             ): # and this should also (TODO) check for a second is cause that too is problematic.
                 # a second command, but also no else in this line -> check next line!
-                
+
                 # no else in next line?
                 # add a nop (like 'Pass' but we just insert a meaningless assign)
                 line = line + " else _ is x"
