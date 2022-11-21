@@ -322,7 +322,7 @@ class TestsLevel11(HedyTester):
               pygame.quit()
               break
             if event.type == pygame.KEYDOWN: 
-              if event.key == pygame.K_p:
+              if event.unicode == 'p':
                 print(f'press')
                 break
           time.sleep(0.1)""")
