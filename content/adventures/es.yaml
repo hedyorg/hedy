@@ -152,7 +152,7 @@ adventures:
             14:
                 start_code: "age = {ask} '¿Qué edad tienes?'\n{if} age < 13\n    {print} '¡Eres más joven que yo!'\n{else}\n    {print} '¡Eres mayor que yo!'"
                 story_text: "## Great, Greater, Greatest!\n¡Vamos a aprender más! Puede que ya los conozcas de matemáticas, el `<` y `>`.\nEl `<`comprueba si el primer número es mas pequeño que el segundo, por ejemplo edad `<` 12 comprueba si edad es menor que 12.\nSi quieres comprobar si el primer número es menor o igual al segundo, puedes utilizar `<=`, por ejemplo, edad `<=` 11.\nEl `>` comprueba si el primer número es mayor que el segundo, por ejemplo puntos `>`10 comprueba si puntos es mayor que 10.\nSi quieres comprobar si el primer número es mayor o igual al segundo, puedes utilizar `>=`, por ejemplo, puntos `>=` 11.\nPuedes utilizar estos símbolos en un `{if}`. Ejemplo:\n"
-                example_code: "```\nage = {ask} '¿Qué edad tienes?'\n{if} edad > 12\n    {print} '¡Eres más viejo que yo!'\n```\n"
+                example_code: "```\nage = {ask} '¿Qué edad tienes?'\n{if} age > 12\n    {print} '¡Eres más viejo que yo!'\n```\n"
                 story_text_2: "A partir de este nivel, si quieres una comparación exacta, puedes utilizar dos símbolos de igual. Así es como funcionan la mayoría de lenguajes de programación:\n"
                 example_code_2: "```\nnombre = {ask} '¿Cuál es tu nombre?'\n{if} nombre == 'Hedy'\n    {print} '¡Eres genial!'\n```\n"
                 story_text_3: "Puedes comprobar si algo *no* es igual a otra cosa utilizando `!=` por ejemplo:\n"
@@ -160,11 +160,11 @@ adventures:
             15:
                 start_code: "respuesta = 0\n{while} respuesta != 25\n    respuesta = {ask} 'Cuanto es 5 por 5?'\n{print} 'Tenemos la respuesta correcta'"
                 story_text: "## ¡Más bucles!\nVamos a aprender una nueva forma de bucles, ¡el bucle `{while}`! Este bucle se repetirá hasta que la condición sea cierta.\nAsí que no te olvides de cambiar el valor en el bucle.\n\nEn el código de ejemplo, este continuará hasta que se le dé una respuesta correcta.\nSi no se le da nunca la respuesta correcta, ¡el bucle nunca acaba!"
-                example_code: "```\nrespuesta = 0\n{while} respuesta != 25\n    respuesta = {ask} '¿Cuánto es 5 por 5?'\n{print} Una respuesta correcta ha sido dada'\n```\n"
+                example_code: "```\nrespuesta = 0\n{while} respuesta != 25\n    respuesta = {ask} '¿Cuánto es 5 por 5?'\n{print} 'Una respuesta correcta ha sido dada'\n```\n"
             16:
                 start_code: "fruta = ['manzana', 'banana', 'cereza']\n{print} fruta"
                 story_text: "## ¡Cada vez nos acercamos más al código profesional!\nVamos a hacer listas como en Python, ¡con corchetes (`[]`) alrededor de las listas! También mantendremos las comillas alrededor de cada elemento como hemos aprendido en los niveles anteriores.\nTambién puedes utilizar los corchetes para seleccionar una posición en la lista."
-                example_code: "```\namigos = ['Ahmed', 'Ben', 'Cayden']\nnumero_de_suerte = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'El número de la suerte de ' friends[i]\n    {print} 'es ' numero_de_suerte[i]\n```\n"
+                example_code: "```\namigos = ['Ahmed', 'Ben', 'Cayden']\nnumero_de_suerte = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'El número de la suerte de ' amigos[i]\n    {print} 'es ' numero_de_suerte[i]\n```\n"
             17:
                 start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Listo o no, ¡Allá voy!'"
                 story_text: "## Elif\nAhora vamos a cambiar la indentación un poquito. Cada vez que necesitamos indentación, necesitamos `:` en la línea antes de la indentación.\n\nEn este nivel puedes usar un nuevo comando: `{elif}`. `{elif}` es una abreviación de {else} {if} y la necesitas cuando quieres hacer 3 o más opciones.\n¡Pruebalas!"
