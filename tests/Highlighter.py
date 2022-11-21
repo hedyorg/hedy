@@ -1,5 +1,5 @@
 import unittest
-import re
+import regex as re
 import json
 import os
 
