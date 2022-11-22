@@ -2270,7 +2270,7 @@ adventures:
                 example_code_2: |
                     ```
                     {print} 'Im Hedy the fortune teller!'
-                    {print} 'I can predict {if} you will win the lottery tomorrow!'
+                    {print} 'I can predict if you will win the lottery tomorrow!'
                     person {is} {ask} 'Who are you?'
                     goodanswer {is} Hurray! You win!, You will definitely win!, We have a winner!
                     badanswer {is} Bad luck! Try again!, Another person will win, You lose!
@@ -2328,7 +2328,7 @@ adventures:
                 example_code: |
                     ```
                     {print} 'Im Hedy the fortune teller!'
-                    {print} 'You can {ask} 3 questions!'
+                    {print} 'You can ask 3 questions!'
                     {repeat} 3 {times} question = {ask} 'What do you want to know?'
                     answer = yes, no, maybe
                     {repeat} 3 {times} {print} 'My crystal ball says... ' answer {at} {random}
@@ -2343,17 +2343,17 @@ adventures:
                     This does mean that you can only use `{repeat}` for the answers, and you will have to ask and print all the questions separately.
                     Can you do it?
 
-                    In the upcoming levels the layout of {repeat} command will change, which enables you to repeat multiple lines at once.
+                    In the upcoming levels the layout of `{repeat}` command will change, which enables you to repeat multiple lines at once.
                 start_code: "# place your code here"
             8:
                 story_text: |
                     ## Fortune Teller
-                    In the previous levels you've learned how to use repeat to make the fortune teller answer 3 questions in a row, but we had a problem with printing the questions.
-                    Now that problem is solved, because of the new way of using the repeat command.
-                    In the next example you can have your fortune teller {ask} 3 questions and also print them!
+                    In the previous levels you've learned how to use `{repeat}` to make the fortune teller answer 3 questions in a row, but we had a problem with printing the questions.
+                    Now that problem is solved, because of the new way of using the `{repeat}` command.
+                    In the next example you can have your fortune teller ask 3 questions and also print them!
 
                     ## Challenge
-                    Can you fill in the repeat command correctly on the blanks?
+                    Can you fill in the `{repeat}` command correctly on the blanks?
                 example_code: |
                     ```
                     {print} 'I am Hedy the fortune teller!'
