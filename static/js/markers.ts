@@ -57,10 +57,6 @@ export class Markers {
     }
   }
 
-  public dummyFunctionForTesting() {
-    // Just to see that the JS generator runs. Can be deleted.
-  }
-
   /**
    * Set the current line in the debugger
    */
