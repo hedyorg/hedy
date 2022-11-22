@@ -31,7 +31,7 @@ jobs:
 
     - name: Commit changed files
       uses: stefanzweifel/git-auto-commit-action@v2.3.0
-      if: github.event_name == "push"
+      if: ${{ github.event_name == "push" }}
       with:
         commit_message: Automatically update JavaScript bundle 🤖 beep boop
         branch: ${{ github.head_ref }}
