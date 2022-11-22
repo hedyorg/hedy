@@ -212,7 +212,7 @@ class TestsLevel7(HedyTester):
         code = "if x is pressed repeat 5 times print 'doe het 5 keer!'"
 
         expected = HedyTester.dedent("""\
-	    if event.key == pygame.K_x:
+	    if event.unicode == 'x':
 	    	for i in range(int('5')):
 		    	print(f'doe het 5 keer!')
 			    time.sleep(0.1)""")

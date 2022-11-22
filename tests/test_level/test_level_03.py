@@ -451,6 +451,24 @@ class TestsLevel3(HedyTester):
             extra_check_function=self.result_in(['koe', 'kiep', 'mui\"s']),
         )
 
+    def test_add_integer_to_list(self):
+        code = textwrap.dedent("""\
+        dieren is koe, kiep
+        add 5 to dieren
+        print dieren at random""")
+
+        expected = textwrap.dedent("""\
+        dieren = ['koe', 'kiep']
+        dieren.append(5)
+        print(f'{random.choice(dieren)}')""")
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            max_level=11,
+            extra_check_function=self.result_in(['koe', 'kiep', 5]),
+        )
+
     def test_remove_text_from_list(self):
         code = textwrap.dedent("""\
         dieren is koe, kiep

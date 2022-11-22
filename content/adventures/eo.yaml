@@ -13,6 +13,7 @@ adventures:
                     Post tiu unua linio, komencu per `{print}` se la frazo bezonas esti presita.
                     Vi uzas `{echo}` se vi volas, ke via ĉeffiguro estu ĉe la fino de la frazo.
                 example_code: "```\n{ask} La ĉefrolulo de ĉi tiu rakonto estas\n{print} La ĉefrolulo nun promenas en la arbaro\n{echo} Li timetas\n{print} Li aŭdas ĉie frenezajn bruojn\n{print} Li timas, ke ĉi tie estas hantata arbaro\n```\n"
+                story_text_2: "## Challenge\nCan you make your own story in Hedy now by using `{print}` , `{ask}` and `{echo}`?\n"
             8:
                 start_code: '# via kodo ĉi tie'
                 story_text: "## Rakonto\nEn ĉi tiu nivelo, vi povas uzi plurajn liniojn en viaj `{if}`-komandoj; tiel, vi povas plibonigi vian ĝojan aŭ malĝojan finon!\n"
@@ -75,6 +76,8 @@ adventures:
                 story_text: "## Kantoj\nKantoj ofte enhavas multe da ripetado. Foje la ripeto ankaŭ baziĝas sur kalkulado.\nEkzemple, en la konata kanto 'Boteloj da biero'. Vi povas programi tiun kanton per iom da matematiko.\n"
                 example_code: "```\nnombro = 99\n{print} nombro ' boteloj da biero sur la muro'\n{print} nombro ' boteloj da biero'\n{print} 'Prenu unu, ĝuu ĝin kune'\nnombro = nombro - 1\n{print} nombro ' boteloj da biero sur la muro'\n```\n\nVi nun povas ripeti liniojn 2 ĝis 6 tiom da fojoj, kiom vi volas, kopiante la liniojn.\n"
                 start_code: "{print} 'Ŝarkido'"
+                example_code_2: "```\nnumber = 6\nnumber = number - 1\nprint number ' little monkeys jumping on the bed'\nprint 'One fell off and bumped his head'\nprint 'Mama called the doctor and the doctor said'\nprint 'NO MORE MONKEYS JUMPING ON THE BED!'\nsleep\n```\n"
+                story_text_2: "## 5 Little Monkeys jumping on the bed\nThis children's song counts down from 5 little monkeys to 1 monkey.\nIf you copy line 2 - 7 and paste it under the the code, you can sing the whole song!\n"
             7:
                 story_text: "## Kantoj\nKantoj ofte enhavas multe da ripetaĵojn. Ekzemple… Ŝarkido! Se vi kantas ĝin, vi ripete kantas la samajn vortojn:\n\nŜarkido tututudutudu <br>\nŜarkido tututudutudu <br>\nŜarkido tututudutudu <br>\nŜarkido\n\nVi povas malplilongigi la kanton per `{repeat}`! Ĉu vi povas kompletigi la kodon?\n"
                 example_code: "```\n{repeat} _ _ {print} 'Ŝarkido tututudutudu'\n{print} 'Ŝarkido'\n```\n\nPost Ŝarkido, vi povas programi aliajn kantojn. Ekzistas multaj kantoj enhavantaj ripetaĵojn.\n"
@@ -183,6 +186,8 @@ adventures:
                 story_text: "## Roko, papero, tondilo\nEn Nivelo 1, vi komencu per la ludo «roko, papero, tondilo».\n\nPer `{ask}` oni povas fari elekton, kaj per `{echo}` oni povas ripeti tiun elekton.\n"
                 example_code: "```\n{print} kion vi elektas?\n{ask} elektu el roko, papero aŭ tondilo\n{echo} do via elekto estis:\n```\nAnstataŭ vortoj, vi ankaŭ povus uzi vinjetosignojn kompreneble: ✊✋✌\n"
                 start_code: '{print} Bonvenon al ludo de roko, papero kaj tondilo!'
+                story_text_2: "## Challenge\nInstead of using words, you could also use emojis: ✊✋✌\nCan you create a code using emojis?\n"
+                example_code_2: "```\n{print} what do you choose?\n{ask} choose from _\n{echo} so your choice was:\n```\n"
             2:
                 story_text: "## Roko, papero, tondilo\nEn ĉi tiu nivelo, vi povas praktiki uzi la variablojn, por ke vi povu fari la ludon de roko, papero kaj tondilo en la sekva nivelo!\n"
                 example_code: "```\nelekto {is} _\n{print} Mi elektas elekto\n```\n"
@@ -191,6 +196,8 @@ adventures:
                 story_text: "## Roko, papero, tondilo\n\nEn ĉi tiu nivelo ni povas eniri listojn kaj elekti aferojn el ili.\nVi unue faru liston per `{is}`. Tiam vi povas lasi la komputilon elekti ion el la listo per `{at} {random}`.\nEkzemple, vi povas lasi la komputilon elekti el roko, papero kaj tondilo.\n"
                 example_code: "```\nelektoj {is} roko, papero, tondilo\n{print} elektoj {at} {random}\n```\n"
                 start_code: '{print} Bonvenon al ludo de roko, papero kaj tondilo!'
+                story_text_2: "## Challenge\nNow you only have one player, so can you add a second player?\nYou can even use variables to name player 1 and player 2.\n"
+                example_code_2: "```\nchoices {is} rock, paper, scissors\n{print} player 1 chooses... choices {at} {random}\n{print} player 2 _\n```\n"
             4:
                 story_text: "## Roko, papero, tondilo\nEn ĉi tiu nivelo ni povas plu programi rokon, paperon, tondilon. Sed se vi volas aldoni tekston, vi devas uzi citilojn ankaŭ ĉi tie.\nĈu vi kompletigas la kodon enmetante la ĝustajn komandojn aŭ signojn sur la substrekoj?<!--{if}-->\n"
                 example_code: "```\nelektoj {is} roko, papero, tondilo\n{print} _ La komputilo elektis la jenon: _ _ {at} _\n```\n"
@@ -228,6 +235,8 @@ adventures:
                 story_text_2: "## Hazardaj nombroj\nVi ankaŭ povas lasi la komputilon fari hazardajn sumojn memstare uzante hazardajn.\nJen kiel vi elektas kelkajn tabelojn por ekzerciĝi, kaj el tio vi ĉiam ricevas malsaman sumon:\n"
                 example_code_2: "```\ntabeloj = 4, 5, 6, 8\nnombroj = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\ntabelo = tabeloj {at} {random}\nnombro = nombroj {at} {random}\nĝusta_respondo = tabelo * nombro\nrespondo = {ask} 'Kiom estas ' tabelo ' multiplikite per ' nombro '?'\n{if} respondo {is} ĝusta_respondo {print} 'Bone!'\n{else} {print} 'Malĝuste! La ĝusta respondo estas ' ĝusta_respondo\n```\n"
                 start_code: "{print} 'Bonvenon al kalkulilo!'"
+                story_text_3: "## Random numbers\nYou can also let the computer do random sums on its own using random.\nThis is how you choose a number of tables to practice, and from that you always get a different sum:\n"
+                example_code_3: "```\ntables = 4, 5, 6, 8\nnumbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\ntable = tables {at} {random}\nnumber = numbers {at} {random}\ncorrect_answer = table * number\nanswer = {ask} 'how much is ' table ' times ' number '?'\n{if} answer {is} correct_answer {print} 'okay'\n{else} {print} 'mistake! it was ' correct_answer\n```\n"
             9:
                 story_text: "## Kalkulilo\nEn antaŭaj niveloj, vi lernis kiel verki kalkulilon. En ĉi tiu nivelo, vi povas apliki tiun kodon por verki matematikan ludeton jene…\n"
                 example_code: "```\npoentaro = 0\n{repeat} 10 {times}\n    nombroj = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    nombro1 = nombroj {at} {random}\n    nombro2 = nombroj {at} {random}\n    ĝusta_respondo = nombro1 * nombro2\n    {print} 'Kiom estas ' nombro1 ' multiplikite per ' nombro2 '?'\n    respondo = {ask} 'Tajpu vian respondon ĉi tie…'\n    {print} 'Jen via respondo:' respondo\n    {if} respondo {is} ĝusta_respondo\n        poentaro = poentaro + 1\n{print} 'Bonege! Jen via poentaro: ' poentaro '/10!'\n```\n"
@@ -260,6 +269,8 @@ adventures:
                 story_text: "## Restaurant\nIn level 2 you could expand your restaurant by using variables. In level 1 Hedy could only {echo} the order once and only remember the last thing that was ordered.\nNow you can use variables and Hedy can remember both the food and the drinks!\n"
                 example_code: "```\n{print} Bonvenon al Restoracio Hedy!\n{print} Hodiaŭ ni servas picon aŭ lasanjojn.\nmanĝaĵo {is} {ask} Kion vi ŝatus manĝi?\n{print} Bonega elekto! La manĝaĵo estas mia plej ŝatata!\ntopping {is} {ask} Ĉu vi ŝatus viandon aŭ legomojn sur tio?\n{print} manĝaĵo kun topping estas survoje!\ntrinkas {is} {ask} Kion vi ŝatus trinki per tio?\n{print} Dankon pro via mendo.\n{print} Viaj manĝaĵoj kaj trinkaĵoj estos ĝuste tie!\n```\n"
                 start_code: '# via kodo ĉi tie'
+                example_code_2: "```\n{print} Welcome to Hedy's restaurant!\n{print} Today we're serving pizza or lasagna.\nfood {is} {ask} What would you like to eat?\n{print} Great choice! The food is my favorite!\ntopping {is} {ask} Would you like meat or veggies on that?\n{print} food with topping is on its way!\ndrinks {is} _\n```\n"
+                story_text_2: "## Challenge\nCan you make this code more elaborate? For example by adding drinks to the order? Or...?\n"
             3:
                 story_text: "## Hazarda Restoracio\nĈu vi havas problemon decidante, kion vi volas manĝi por vespermanĝo? Vi povas lasi Hedy elekti por vi!\nSimple tajpu listojn de viaj plej ŝatataj (aŭ malplej ŝatataj) manĝoj, kaj Hedy povas hazarde elekti vian vespermanĝon.\nVi ankaŭ povas iomete amuziĝi, lasante Hedy ankaŭ elekti la prezon de via vespermanĝo! Kion vi ricevos?\n"
                 example_code: "```\n{print} Bonvenon al la Hazarda Restoracio de Hedy!\n{print} La ununura restoracio, kiu hazarde elektos vian manĝon kaj ĝian prezon por vi!\nantaŭmanĝaĵoj {is} salato, supo, krudaĵo\nĉefpladoj {is} pico, brussels sprouts, spagetoj\ndesertoj {is} kuketoj, glaciaĵo, francaj fromaĝoj\ntrinkaĵoj {is} kolao, biero, akvo\nprezoj {is} 1 spesmilo, 10 spesmiloj, 100 spesmiloj\n{print} Vi komencos per: antaŭmanĝaĵoj {at} {random}\n{print} Then we'll serve: ĉefpladoj {at} {random}\n{print} Kaj kiel deserto: desertoj {at} {random}\n{print} You will get a trinkaĵoj {at} {random} por trinki\n{print} Jen la totalo: prezoj {at} {random}\n{print} Dankon kaj ĝuu vian manĝon!\n```\n"
@@ -324,11 +335,15 @@ adventures:
                 start_code: monstro1 {is} _
                 story_text: "## Hantata domo\nEn ĉi tiu hantata domo, vi povas montri viajn monstrojn per vinjetosignoj. Kompreneble vi ankaŭ povas uzi vortojn.\n"
                 example_code: "```\nmonstro_1 {is} \U0001F47B\nmonstro_2 {is} \U0001F921\nmonstro_3 {is} \U0001F476\n{print} Vi eniras la hantatan domon.\n{print} Subite vi vidas monstro_1\n{print} Vi kuras en la alian ĉambron, sed monstro_2 atendas vin tie!\n{print} Ho ne! Rapidu al la kuirejo.\n{print} Sed dum vi eniras monstro_3 atakas vin!\n```\n"
+                story_text_2: "## Challenge\nIn the example above the monsters are predetermined. So each time you run your code, the output is the same.\nCan you add `{ask}` commands to make the haunted house interactive and have the players choose the monsters they come across?\n"
+                example_code_2: "```\nmonster_1 {is} _\nmonster_2 {is} _\nmonster_3 {is} _\n{print} You enter the haunted house.\n{print} Suddenly you see a monster_1\n{print} You run into the other room, but a monster_2 is waiting there for you!\n{print} Oh no! Quickly get to the kitchen.\n{print} But as you enter monster_3 attacks you!\n```\n"
             3:
                 start_code: '# via kodo ĉi tie'
                 story_text: "## Haunted house game\nIn the previous levels you've made an introduction to your haunted house game, but as you might have noticed the story would always have a dreadful end.\nIn this level you can make your story more interactive by changing the outcome of the game; sometimes you'll get eaten, sometimes you'll escape!\nLet Hedy decide randomly!\n"
                 example_code: "```\n{print} Escape from the haunted house!\n{print} There are 3 doors in front of you...\nchoice {is} {ask} Which door do you choose?\n{print} You picked door ... choice\nmonsters {is} a zombie, a vampire, NOTHING YOUVE ESCAPED\n{print} You see...\n{sleep}\n{print} monsters {at} {random}\n```\n"
                 story_text_2: "## Defio\nĈi tiu rakonto estas sufiĉe simpla; eble vi povas iom timigi ĝin aldonante pli ekscitan rakonton.\nAnkaŭ vi havas tre limigitajn rezultojn nun, ekzistas nur 3 ebloj de kio estas malantaŭ la pordoj. Eble vi povas pensi pri pli da monstroj por aldoni al la listo!\n\n## Ŝanĝu la ludon en televidan ludspektaklon!\nFinfine, ni ŝatus defii vin ŝanĝi ĉi tiun ludon en ludspektaklon (kiel tiuj en televido) kie vi elektas pordon aŭ valizon kaj ĝi enhavas grandan prezon!\nĈu vi povas fari ĝin?\n"
+                story_text_3: "## Change the game into a tv gameshow!\nLastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!\nCan you do it?\n"
+                example_code_3: "```\n{print} The big gameshow!\n{print} There are 3 suitcases in front of you...\n{print} One of them contains _\n_\n```\n"
             4:
                 start_code: '# via kodo ĉi tie'
                 story_text: "## Hantata domo\nEn ĉi tiu nivelo vi lernas kiel uzi citilojn en viaj ludoj.\nĈu vi povas igi vian Hantatan Domon rulebla en Nivelo 4?\n"
@@ -588,10 +603,14 @@ adventures:
                 story_text: "## Papago\nKreu vian propran Interretan dorlotpapagon, kiu kopios vin!\n"
                 example_code: "```\n{print} Mi estas Hedy la papago\n{ask} kio estas via nomo?\n{echo}\n{echo}\n```\n"
                 start_code: '{print} Mi estas Hedy la papago'
+                story_text_2: "## Challenge\nCan you make the parrot ask a different question? Fill in the blanks in the example!\n"
+                example_code_2: "```\n{print} Im Hedy the parrot\n{ask} _\n{echo}\n{echo}\n"
             2:
                 story_text: "## Papago\nKreu vian propran Interretan dorlotpapagon, kiu kopios vin!\n"
                 example_code: "```\n{print} Mi estas Hedy la papago\nnomo {is} {ask} kio estas via nomo?\n{print} nomo\n{sleep}\n{print} grak\n{sleep}\n{print} nomo\n```\n"
                 start_code: '{print} Mi estas Hedy la papago!'
+                story_text_2: "## Challenge\nYou can use variables to make the parrot say more than only your name. Can you complete this code?\n"
+                example_code_2: "```\n{print} Im Hedy the parrot\nname {is} {ask} whats your name?\n{print} name\n{sleep}\n{print} name\nsurname {is} {ask} whats your surname?\n_\n{sleep}\n_\n```\n"
             3:
                 story_text: "## Papago\nInstruu al via papago novan vorton per `{add}`.\n"
                 example_code: "```\nvortoj {is} grak, Hedy\n{print} Trejnu vian papagon!\nnova_vorto {is} {ask} Kiun vorton instrui?\n{add} nova_vorto {to_list} vortoj\n{print} \U0001F9D2 Diru nova_vorto , Hedy!\n{print} \U0001F99C vortoj {at} {random}\n```\n"
@@ -609,6 +628,8 @@ adventures:
                 story_text: "## Ĵetkuboj\nEn ĉi tiu nivelo, oni povas elekti el listo. Per tio, oni povas igi la komputilon elekti unu flankon de ĵetkubo.\nRigardu tiujn ludojn, kiujn vi havas en via ŝranko hejme.\nĈu ekzistas ludoj uzantaj (specialajn) ĵetkubojn? Vi ankaŭ povas kopii ĝin per ĉi tiu kodo.\nEkzemple, la ĵetkubo de la ludo Lumbrikoj kun la numeroj 1 ĝis 5 kaj lumbriko sur ĝi.\n\n![Ĵetkubo de Lumbrikoj montrante la numerojn 1 ĝis 5 kaj lumbrikon](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)\n"
                 example_code: "```\nelektoj {is} 1, 2, 3, 4, 5, lumbriko\n{print} elektoj {at} {random}\n```\n"
                 start_code: '{print} Kion indikos la ĵetkubo ĉi foje?'
+                story_text_2: "## Challenge\nThe dice in the example above are dice for a specific game. Can you make normal dice?\nOr other special dice from a different game?\n"
+                example_code_2: "```\nchoices {is} _\n```\n"
             4:
                 story_text: "## Ĵetkuboj\nEn ĉi tiu nivelo ni povas fari frazojn kun la die valoro en la frazo, kun citaĵoj kompreneble.\nĈi-foje la ekzempla kodo ne estas tute kompleta. Ĉu vi povas fini la kodon?\n"
                 example_code: "```\nelektoj {is} 1, 2, 3, 4, 5, lumbriko\n{print} _ la rezulto de via ĵeto estas _\n{print} _ _ _ <- jen vi programu la elektadon\n```\n"

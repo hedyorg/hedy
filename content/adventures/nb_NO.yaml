@@ -125,6 +125,7 @@ adventures:
                 story_text: "## Lag en fortelling\nPå nivå 1 kan du lage en fortelling med en hovedperson som du velger selv.\n\nSom første linje, bruk denne koden:\n\n```\n{ask} hvem er stjernen i fortellingen din?\n```\n\nEtter den første linjen, start med `{print}` hvis du vil at setningen skal skrives ut. \nDu bruker `{echo}` hvis du vil ha hovedpersonen din skal være på slutten av setningen.\n"
                 example_code: "\n```\n{ask} Hovedpersonen i fortellingen er\n{print} Hovedpersonen skal nå på tur i skogen\n{echo} Han er litt redd,\n{print} Han hører skumle lyder overalt\n{print} Han er redd dette er en forhekset skog\n```\n"
                 start_code: '{print} Fortellingen din starter her'
+                story_text_2: "## Challenge\nCan you make your own story in Hedy now by using `{print}` , `{ask}` and `{echo}`?\n"
             2:
                 story_text: "## Fortelling\nPå nivå 2 kan du gjøre fortellingen din gøyere. Hovedpersonen sitt navn kan nå være overalt i setningen.\n\nDu må programmere litt ekstra for det. Du må nå navngi hovedpersonen din først.\n\nDa kan du bruke navnet hvor som helst i en setning.\n"
                 example_code: "\n```\nnavn {is} {ask} Hva heter hovedpersonen?\n{print} navn skal nå løpe i skogen\n{print} navn er litt redd\n{print} Plutselig hører han en skummel lyd...\n{sleep}\n{print} navn er redd dette er en forhekset skog\n```\n"
@@ -222,6 +223,8 @@ adventures:
                 story_text: "## Stein, saks, papir\nPå nivå 1 kan du starte med spillet stein, saks, papir.\n\nMed `{ask}` kan du ta et valg og med `{echo}` kan du gjenta det valget.\n"
                 example_code: "\n```\n{print} hva velger du?\n{ask} velg mellom stein, saks, papir\n{echo} du valgte:\n```\nIstedenfor å bruke ord så kan du selvfølgelig bruke emoji: ✊✋✌\n"
                 start_code: '{print} Velkommen til din egen stein saks papir!'
+                story_text_2: "## Challenge\nInstead of using words, you could also use emojis: ✊✋✌\nCan you create a code using emojis?\n"
+                example_code_2: "```\n{print} what do you choose?\n{ask} choose from _\n{echo} so your choice was:\n```\n"
             10:
                 story_text: "## Stein, saks, papir\nEr du for lat til å spille spillet selv? La Hedy spille det for deg!\n"
                 example_code: "```\nvalgene = stein, saks, papir\nspillere = Maren, Magnus\n{for} spiller {in} spillere\n     {print} spiller ' velger ' valgene {at} {random}\n```\n"
@@ -238,6 +241,8 @@ adventures:
                 story_text: "## Stein, saks, papir\n\nPå dette nivået kan vi lage lister og velge ting fra de.\nDu kan først lage en liste med `{is}`. Så kan du la datamaskinen velge noe annet fra listen med `{at} {random}`.\nFor eksempel så kan du la datamaskinen velge mellom stein, saks og papir.\n"
                 example_code: "\n```\nvalgene {is} stein, saks, papir\n{print} valgene {at} {random}\n```\n"
                 start_code: '{print} Velkommen til din egen stein saks papir!'
+                story_text_2: "## Challenge\nNow you only have one player, so can you add a second player?\nYou can even use variables to name player 1 and player 2.\n"
+                example_code_2: "```\nchoices {is} rock, paper, scissors\n{print} player 1 chooses... choices {at} {random}\n{print} player 2 _\n```\n"
             2:
                 story_text: "## Stein, saks, papir\nPå dette nivået kan du øve deg på å bruke variabler så du kan lage stein, saks, papir-spillet på neste nivå!\n"
                 example_code: "```\nvalg {is} _\n{print} Jeg velger valg\n```\n"
@@ -277,6 +282,8 @@ adventures:
                 story_text_2: "## Tilfeldige tall\nDu kan også la datamaskinen lage tilfeldige regnestykker på egenhånd ved hjelp av `{at} {random}`.\nDette er hvordan du velger tall fra en tabell med tall å øve på og fra det vil du få forskjellige summer:\n"
                 example_code_2: "```\ntabellene = 4, 5, 6, 8\ntallene = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\ntabell = tabellene {at} {random}\ntall = tallene {at} {random}\nriktig_svar = tabell * tall\nditt_svar = {ask} 'hvor mye er ' tabell ' ganget med ' tall '?'\n{if} ditt_svar {is} riktig_svar {print} 'riktig'\n{else} {print} 'feil! det var ' riktig_svar\n```\n"
                 start_code: "{print} 'Velkommen til denne kalkulatoren!'"
+                story_text_3: "## Random numbers\nYou can also let the computer do random sums on its own using random.\nThis is how you choose a number of tables to practice, and from that you always get a different sum:\n"
+                example_code_3: "```\ntables = 4, 5, 6, 8\nnumbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\ntable = tables {at} {random}\nnumber = numbers {at} {random}\ncorrect_answer = table * number\nanswer = {ask} 'how much is ' table ' times ' number '?'\n{if} answer {is} correct_answer {print} 'okay'\n{else} {print} 'mistake! it was ' correct_answer\n```\n"
             15:
                 story_text: "## Kalkulator\nDu kan legge til en `{while}`-løkke til kalkulatorspillet du lærte å lage på det forrige nivået.\nDette gjør det sånn at spilleren ikke kan fortsette til neste spørsmål om de har svart feil.\n"
                 example_code: "```\npoengsum = 0\n{for} i {in} {range} 0 {to} 9\n    tallene = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    tall1 = tallene {at} {random}\n    tall2 = tallene {at} {random}\n    riktig_svar = tall1 * tall2\n    ditt_svar = 0\n    {while} ditt_svar != riktig_svar\n        {print} 'Hvor mye er ' tall1 ' ganger ' tall2 '?'\n        ditt_svar = {ask} 'Skriv inn ditt svar:'\n        {print} 'Ditt svar er ' ditt_svar\n    {print} 'Godt jobbet!'\n{print} 'Du vant!'\n```\n"
@@ -290,6 +297,8 @@ adventures:
                 start_code: '# skriv koden din her'
                 story_text: "## Restaurant\nPå nivå 2 kan du utvide din restaurant ved å bruke variabler. På nivå 1 kunne Hedy bare svare med bestillingen 1 gang og den kunne bare huske siste ting som var bestilt.\nNå kan du bruke variabler og Hedy kan huske både mat og drikke!\n"
                 example_code: "```\n{print} Velkommen til Hedys restaurant!\n{print} I dag har vi pizza og lasagne på menyen.\nmaten {is} {ask} Hva har du lyst til å spise?\n{print} Godt valg! maten er min favoritt!\ntilbehør {is} {ask} Foretrekker du vegetar eller med kjøtt?\n{print} maten med tilbehør skal bli!\ndrikken {is} {ask} Vil du ha noe å drikke med det?\n{print} Takk for bestillingen\n{print} maten og drikken kommer snart!\n```\n"
+                story_text_2: "## Challenge\nCan you make this code more elaborate? For example by adding drinks to the order? Or...?\n"
+                example_code_2: "```\n{print} Welcome to Hedy's restaurant!\n{print} Today we're serving pizza or lasagna.\nfood {is} {ask} What would you like to eat?\n{print} Great choice! The food is my favorite!\ntopping {is} {ask} Would you like meat or veggies on that?\n{print} food with topping is on its way!\ndrinks {is} _\n```\n"
             7:
                 example_code: "```\n{print} 'Velkommen Hedys restaurant!'\nantall_personer = {ask} 'Hvor mange personer er dere i dag?'\n{repeat} antall_personer times mat = {ask} 'Hva vil du spise?'\n{print} 'Takk for bestillingen, den er på vei!'\n```\n"
                 story_text: "## Restaurant\nPå dette nivået har du lært å bruke `{repeat}`-kommandoen til å repeterer en linje med kode et visst antall ganger.\nDu kan bruke det i din restaurant til å spørre flere gjester hva de har lyst på. Slik:\n"
@@ -424,6 +433,8 @@ adventures:
                 story_text: "## Haunted House\nIn this haunted house you can choose your monsters with emojis. Of course you could also use words.\n"
                 example_code: "```\nmonster_1 {is} \U0001F47B\nmonster_2 {is} \U0001F921\nmonster_3 {is} \U0001F476\n{print} You enter the haunted house.\n{print} Suddenly you see a monster_1\n{print} You run into the other room, but a monster_2 is waiting there for you!\n{print} Oh no! Quickly get to the kitchen.\n{print} But as you enter monster_3 attacks you!\n```\n"
                 start_code: monster1 {is} _
+                story_text_2: "## Challenge\nIn the example above the monsters are predetermined. So each time you run your code, the output is the same.\nCan you add `{ask}` commands to make the haunted house interactive and have the players choose the monsters they come across?\n"
+                example_code_2: "```\nmonster_1 {is} _\nmonster_2 {is} _\nmonster_3 {is} _\n{print} You enter the haunted house.\n{print} Suddenly you see a monster_1\n{print} You run into the other room, but a monster_2 is waiting there for you!\n{print} Oh no! Quickly get to the kitchen.\n{print} But as you enter monster_3 attacks you!\n```\n"
             14:
                 story_text: "## Haunted House\nIn this level you can use the `<` and `>` symbol to introduce lives to your game.\n"
                 example_code: "```\n{print} 'Escape from the haunted house'\nlives = 3\ndoors = 1, 2, 3\nmonsters = 'the wicked witch', 'a zombie', 'a sleeping 3 headed dog'\n{for} i {in} {range} 1 {to} 10\n    {if} lives > 0\n        good_door = doors {at} {random}\n        monster = monsters {at} {random}\n        chosen_door = {ask} 'Which door do you choose?'\n        {if} good_door == chosen_door\n            {print} 'You have chosen the correct door'\n        {else}\n            {print} 'You see...' monster\n            {if} monster == 'a sleeping 3 headed dog'\n                {print} 'Pffieuw.... Its asleep'\n            {else}\n                {print} 'You lose one life'\n                lives = lives -1\n    {else}\n        {print} 'GAME OVER'\n```\n"
@@ -445,6 +456,8 @@ adventures:
                 example_code: "```\n{print} Escape from the haunted house!\n{print} There are 3 doors in front of you...\nchoice {is} {ask} Which door do you choose?\n{print} You picked door ... choice\nmonsters {is} a zombie, a vampire, NOTHING YOUVE ESCAPED\n{print} You see...\n{sleep}\n{print} monsters {at} {random}\n```\n"
                 story_text_2: "## Challenge\nThis story is pretty straight {forward}, maybe you can spook it up a bit by adding a more exciting story.\nAlso you have very limited outcomes right now, there are only 3 options of what's behind the doors. Maybe you can think of more monsters to add to the list!\n\n## Change the game into a tv gameshow!\nLastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!\nCan you do it?\n"
                 start_code: '# skriv koden din her'
+                story_text_3: "## Change the game into a tv gameshow!\nLastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!\nCan you do it?\n"
+                example_code_3: "```\n{print} The big gameshow!\n{print} There are 3 suitcases in front of you...\n{print} One of them contains _\n_\n```\n"
         name: Spøkelseshus
         description: flykt fra det forheksede huset
         default_save_name: Spøkelseshus
@@ -470,10 +483,14 @@ adventures:
                 story_text: "## Papegøye\nLag din egen online papegøye som hermer etter deg!\n"
                 example_code: "```\n{print} Jeg er papegøyen Hedy\n{ask} hva er ditt navn?\n{echo}\n{echo}\n```\n"
                 start_code: '{print} Jeg er papegøyen Hedy'
+                story_text_2: "## Challenge\nCan you make the parrot ask a different question? Fill in the blanks in the example!\n"
+                example_code_2: "```\n{print} Im Hedy the parrot\n{ask} _\n{echo}\n{echo}\n"
             2:
                 story_text: "## Papegøye\nLag din egen online papegøye som hermer etter deg!\n"
                 example_code: "```\n{print} Jeg er papegøyen Hedy\nnavn {is} {ask} hva er ditt navn?\n{print} navn\n{sleep}\n{print} skrik!\n{sleep}\n{print} navn\n```\n"
                 start_code: '{print} Jeg er papegøyen Hedy!'
+                story_text_2: "## Challenge\nYou can use variables to make the parrot say more than only your name. Can you complete this code?\n"
+                example_code_2: "```\n{print} Im Hedy the parrot\nname {is} {ask} whats your name?\n{print} name\n{sleep}\n{print} name\nsurname {is} {ask} whats your surname?\n_\n{sleep}\n_\n```\n"
             3:
                 story_text: "## Papegøye\nLær papegøyen din et nytt ord med `{add}`.\n"
                 example_code: "```\nordene {is} skrik, Hedy\n{print} Lær din papegøye!\nnytt_ord {is} {ask} Hvilket nytt ord vil du lære den?\n{add} nytt_ord {to_list} ordene\n{print} \U0001F9D2 Si nytt_ord , Hedy!\n{print} \U0001F99C ordene {at} {random}\n```\n"
@@ -511,6 +528,8 @@ adventures:
                 story_text: "## Sanger\nSanger inneholder ofte en del repetisjon. Noen ganger er repetisjonen også basert på telling.\nFor eksempel i den velkjente sangen 'Bottles of beer'. Du kan programmere den sangen med litt matte.\n"
                 example_code: "```\nvers = 99\n{print} vers ' bottles of beer on the wall'\n{print} vers ' bottles of beer'\n{print} 'Take one down, pass it around'\nverse = vers - 1\n{print} vers ' bottles of beer on the wall'\n```\n\nDu kan repetere linjene 2 til 9 så mange ganger du vil ved å kopiere de linjene.\n"
                 start_code: "{print} 'Baby shark'"
+                story_text_2: "## 5 Little Monkeys jumping on the bed\nThis children's song counts down from 5 little monkeys to 1 monkey.\nIf you copy line 2 - 7 and paste it under the the code, you can sing the whole song!\n"
+                example_code_2: "```\nnumber = 6\nnumber = number - 1\nprint number ' little monkeys jumping on the bed'\nprint 'One fell off and bumped his head'\nprint 'Mama called the doctor and the doctor said'\nprint 'NO MORE MONKEYS JUMPING ON THE BED!'\nsleep\n```\n"
             16:
                 story_text: "## Sing a song!\nPå dette nivået kan du programmere en sang som \"Old MacDonald\" enda raskere. Du kan knytte sammen det riktige dyret til den riktige lyden ved å putte de på den samme plassen i listen.\n\"The Drunken Sailor\" er også rask å lage på dette nivået. Du trenger bare 8 linjer for hele sangen, sjekk det ut!\n"
                 example_code: "## Old MacDonald\n```\ndyrene = ['pig', 'dog', 'cow']\nlydene = ['oink', 'woof', 'moo']\n{for} i {in} {range} 1 {to} 3\n    dyret = dyrene[i]\n    lyden = lydene[i]\n    {print} 'Old McDonald had a farm'\n    {print} 'E I E I O!'\n    {print} 'and on that farm he had a ' dyret\n    {print} 'E I E I O!'\n    {print} 'with a ' lyden lyden ' here'\n    {print} 'and a ' lyden lyden ' there'\n    {print} 'here a ' lyden\n    {print} 'there a ' lyden\n    {print} 'everywhere a ' lyden lyden\n```\n\n## Drunken Sailor\n```\nlinjene = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} linjen {in} linjene\n    {for} i {in} {range} 1 {to} 3\n        {print} linjen\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
@@ -578,6 +597,8 @@ adventures:
                 story_text: "## Terninger\nPå dette nivået kan vi velge fra en liste. Med det kan vi la datamaskinen velge en side av en terning.\nTa en titt på spillene du har i skapet hjemme.\nEr det spill der med en (spesiell) terning? Du kan også kopiere den med denne koden.\nFor eksempel, en terning fra spillet Earthworms med tallene 1 til 5 og en makk på\n\n![Terning fra Earthworms med 1 til 5 og en makk på](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)\n"
                 example_code: "```\nvalgene {is} 1, 2, 3, 4, 5, makk\n{print} valgene {at} {random}\n```\n"
                 start_code: '{print} Hva vil terningen vise denne gangen?'
+                story_text_2: "## Challenge\nThe dice in the example above are dice for a specific game. Can you make normal dice?\nOr other special dice from a different game?\n"
+                example_code_2: "```\nchoices {is} _\n```\n"
             15:
                 story_text: "## Terning\nI dette spillet må du trille 6 på så få forsøk som mulig.\n"
                 example_code: "```\nvalg = 1, 2, 3, 4, 5, 6\n{print} 'Trill 6 så raskt som du kan!'\ntrillet = 0\nforsøk = 0\n{while} trillet != 6\n    trillet = valg {at} {random}\n    {print} 'Du trillet ' trillet\n    forsøk = forsøk + 1\n{print} 'Jippi! Du trillet 6 på ' forsøk ' forsøk.'\n```\n"
