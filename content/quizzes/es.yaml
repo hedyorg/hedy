@@ -25,7 +25,7 @@ levels:
             -   option: |
                     ```
                     {print}
-                     ```
+                    ```
                 feedback: "Correcto !"
             -   option: |
                     ```
@@ -45,22 +45,22 @@ levels:
             mp_choice_options:
             -   option: |
                     ```
-                    {print} What is your favorite color?
+                    {print} Cuál es tu color favorito?
                     ```
                 feedback: "`{print}` imprime texto, pero no pregunta preguntas."
             -   option: |
                     ```
-                    {ask} {print} What is your favorite color?
+                    {ask} {print} Cuál es tu color favorito?
                     ```
                 feedback: "Solo necesitas un comando, no dos."
             -   option: |
                     ```
-                    {ask} What is your favorite color?
+                    {ask} ¿Cuál es tu color favorito?
                     ```
                 feedback: "Bueno !"
             -   option: |
                     ```
-                    {echo} What is your favorite color?
+                    {echo} ¿Cuál es tu color favorito?
                     ```
                 feedback: "`{echo}` te repite tu respuesta."
             correct_answer: "C"
@@ -73,13 +73,13 @@ levels:
                 {ask} Quien eres ?
                 {echo} Hola...
             mp_choice_options:
-            -   option: "`{print}` in line 1 is missing."
+            -   option: "`{print}` faltante en la línea 1."
                 feedback: "Correcto !"
-            -   option: "Im in line 1 is spelled wrong."
+            -   option: "La línea 1 está mal escrita."
                 feedback: "Yo soy esta escribido incorrecto a propósito; Hedy todavia no entiende las apóstrofes."
-            -   option: "`{echo}` isn't a command."
+            -   option: "`{echo}` no es un comando."
                 feedback: "`{echo}` es un comando, hay otro error."
-            -   option: "Nothing! This is a perfect code!"
+            -   option: "Nada! Este código es perfecto!"
                 feedback: "Incorrecto, mira con más cuidado !"
             correct_answer: "A"
             hint: "La línea 1 no se mira correcta"
@@ -116,10 +116,10 @@ levels:
         6:
             question_text: "Que pasa de malo con este código ?"
             code: |-
-                {print} Hi im Hedy!
-                {print} Which football team do you support?
-                {echo} You support...
-                {print} Cool! Me too!
+                {print} Hola soy Hedy!
+                {print} ¿Cuál es tu equipo de fútbol favorito?
+                {echo} Tu respaldas...
+                {print} Cool! Yo también!
             mp_choice_options:
             -   option: "In line 1 `{print}` should be replaced with `{ask}`."
                 feedback: "`{print}` el la línea 1 está correcto."
