@@ -38,7 +38,7 @@ jobs:
       if: github.event_name == 'push'
       with:
         commit_message: Automatically update JavaScript bundle 🤖 beep boop
-        branch: ${{ github.head_ref }}
+        branch: ${{ github.ref_name }}
       env:
         # This is necessary to bypass branch protection (which will disallow non-reviewed pushes otherwise)
         GITHUB_TOKEN: ${{ secrets.FELIENNE_GITHUB_ACCESS_TOKEN }}
