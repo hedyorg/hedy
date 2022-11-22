@@ -21,177 +21,177 @@ levels:
                     ```
                     {echo}
                     ```
-                feedback: "`{echo}` repeats a given answer."
+                feedback: "`{echo}` يعيد تكرار إجابة سؤال."
             -   option: |
                     ```
                     {print}
                      ```
-                feedback: "Correct!"
+                feedback: "إجابة صحيحة!"
             -   option: |
                     ```
-                    hello
+                    اهلاً
                     ```
                 feedback: "مرحباً ليس أمراً."
             -   option: |
                     ```
                     {ask}
                     ```
-                feedback: "With `{ask}`, you can ask a question."
+                feedback: "مع `{ask}`، يمكنك طرح سؤال."
             correct_answer: "B"
-            hint: "_?_ Hello world!"
+            hint: "_؟_ مرحبًا يا عالم!"
             question_score: '10'
         3:
-            question_text: "How do you ask what someone's favorite color is?"
+            question_text: "كيف تسأل شخص ما هو لونه المفضل؟"
             mp_choice_options:
             -   option: |
                     ```
-                    {print} What is your favorite color?
+                    {print} ما هو لونك المفضل؟
                     ```
-                feedback: "`{print}` prints text, but it doesn't ask questions."
+                feedback: "`{print}` تطبع الكلام، ولكن لا يمكن استخدامها للسؤال."
             -   option: |
                     ```
-                    {ask} {print} What is your favorite color?
+                    {ask} {print} ما هو لونك المفضل؟
                     ```
                 feedback: "تحتاج فقط إلى أمر واحد ، وليس اثنين."
             -   option: |
                     ```
-                    {ask} What is your favorite color?
+                    {ask} ما هو لونك المفضل؟
                     ```
-                feedback: "Great!"
+                feedback: "رائع!"
             -   option: |
                     ```
-                    {echo} What is your favorite color?
+                    {echo} ما هو لونك المفضل؟
                     ```
-                feedback: "`{echo}` repeats your answer back to you."
+                feedback: "`{echo}` يكرر إجابة سؤالك."
             correct_answer: "C"
             hint: "يمكنك أن تسأل شيئاً باستخدام الأمر `{ask}`"
             question_score: '10'
         4:
-            question_text: "What is wrong with this code?"
+            question_text: "ما الخطأ في هذا الكود؟"
             code: |-
-                Hi Im Hedy!
-                {ask} Who are you?
-                {echo} Hi...
+                مرحبًا انا هيدي!
+                {ask} من انت؟
+                {echo} مرحبًا...
             mp_choice_options:
-            -   option: "`{print}` in line 1 is missing."
-                feedback: "Correct!"
-            -   option: "Im in line 1 is spelled wrong."
-                feedback: "Im is spelled wrong on purpose; Hedy doesn't understand the apostrophes yet."
-            -   option: "`{echo}` isn't a command."
-                feedback: "`{echo}` is a command, there's another mistake."
-            -   option: "Nothing! This is a perfect code!"
-                feedback: "Wrong, look carefully!"
+            -   option: "`{print}` مفقودة في السطر الاول."
+                feedback: "إجابة صحيحة!"
+            -   option: "التهجئة خاطئة في السطر الاول."
+                feedback: "لا، التهجئة الخاطئة للنص لا تسبب مشكلة إلا إذا كان الخطأ فالأمر البرمجي فقط."
+            -   option: "`{echo}` ليس أمراً."
+                feedback: "`{echo}` يستخدم كأمر بالفعل، هناك خطأ أخر."
+            -   option: "لا شئ! إنه كود ممتاز!"
+                feedback: "خطأ، حاول النظر بتمعن اكثر!"
             correct_answer: "A"
-            hint: "Line 1 doesn't seem right"
+            hint: "السطر الاول لا يبدو صحيحًا"
             question_score: '10'
         5:
             question_text: "ما هو الأمر المفقود في السطر 2؟"
             code: |-
-                {ask} What is your favorite pet?
-                _?_ So your favorite pet is...
+                {ask} ما الحيوان الأليف المفضل لديك؟
+                _؟_ إذًا حيوانك الأليف المفضل هو...
             mp_choice_options:
             -   option: |
                     ```
                     {print}
                     ```
-                feedback: "No, you would like the answer to be repeated back to you."
+                feedback: "لا، انت تريد تكرار إجابة سؤالك."
             -   option: |
                     ```
-                    Hedy
+                    هيدي
                     ```
-                feedback: "Hedy isn't a command."
+                feedback: "هيدي لا نستخدمه كأمر."
             -   option: |
                     ```
                     {ask}
                     ```
-                feedback: "With `{ask}` you can ask a question."
+                feedback: "مع `{ask}` يمكنك طرح سؤال."
             -   option: |
                     ```
                     {echo}
                     ```
-                feedback: "Right on!"
+                feedback: "أحسنت!"
             correct_answer: "D"
             hint: "تريد أن ترى الإجابة في نهاية السطر 2 ..."
             question_score: '10'
         6:
-            question_text: "What's wrong with this code?"
+            question_text: "ما الخطأ في هذا الكود؟"
             code: |-
-                {print} Hi im Hedy!
-                {print} Which football team do you support?
-                {echo} You support...
-                {print} Cool! Me too!
+                {print} مرحبًا انا هيدي!
+                {print} أي فريق كرة قدم تشجع؟
+                {echo} انت تشجع...
+                {print} عظيم! انا ايضاً!
             mp_choice_options:
-            -   option: "In line 1 `{print}` should be replaced with `{ask}`."
-                feedback: "`{print}` in line 1 is correct."
-            -   option: "In line 2, `{print}` should be replaced with `{ask}`."
-                feedback: "Great! You paid attention!"
-            -   option: "Line 3 has to begin with `{print}` instead of `{echo}`."
-                feedback: "`{echo}` is correct."
-            -   option: "In line 4, `{print}` is spelled wrong."
-                feedback: "No, there is a mistake somewhere else"
+            -   option: "يجب استبدال `{print}` في السطر الأول بالأمر `{ask}`."
+                feedback: "`{print}` في السطر الأول صحيحة."
+            -   option: "يجب استبدال `{print}` في السطر الثاني بالأمر `{ask}`."
+                feedback: "رائع! لقد انتبهت جيداً!"
+            -   option: "يجب بداية السطر الثالث بالأمر `{print}` بدلاً من `{echo}`."
+                feedback: "`{echo}` صحيحة."
+            -   option: "في السطر الرابع، تهجئة `{print}` ليست صحيحة."
+                feedback: "لا، يوجد خطأ في مكان أخر"
             correct_answer: "B"
-            hint: "Check the `{print}` commands."
+            hint: "تحقق من الأمر `{print}`."
             question_score: '10'
         7:
-            question_text: "What's wrong with this code?"
+            question_text: "ما الخطأ في هذا الكود؟"
             code: |-
-                {print} Welcome at Hedys restaurant!
-                {ask} What would you like to eat?
-                {echo} So you want to order ...
-                {print} Coming right up! Enjoy!
+                {print} اهلاً بك في مطعم هيدي!
+                {ask} ماذا تود ان تطلب؟
+                {echo} إذاً تود طلب ...
+                {print} طلبك قادم فالحال! استمتع!
             mp_choice_options:
-            -   option: "In line 1 `{print}` needs to be replaced with `{ask}`"
-                feedback: "Are you sure something is wrong?"
-            -   option: "In line 1 `{print}` needs to be replaced with `{echo}`"
-                feedback: "Are you sure something's wrong?"
-            -   option: "In line 3 `{echo}` needs to be replaced with `{print}`"
-                feedback: "Are you sure something is wrong?"
-            -   option: "Nothing! This is a perfect code!"
-                feedback: "Correct!"
+            -   option: "يجب استبدال `{print}` في السطر الأول بالأمر `{ask}`"
+                feedback: "هل انت متأكد من وجود خطأ ما؟"
+            -   option: "يجب استبدال `{print}` في السطر الأول بالأمر `{echo}`"
+                feedback: "هل انت متأكد من وجود خطأ ما؟"
+            -   option: "يجب استبدال `{echo}` في السطر الثالث بالأمر `{print}`"
+                feedback: "هل انت متأكد من وجود خطأ ما؟"
+            -   option: "لا شئ! الكود ممتاز!"
+                feedback: "إجابة صحيحة!"
             correct_answer: "D"
             hint: "تحقق من الرمز سطرا سطرا"
             question_score: '10'
         8:
-            question_text: "How do you use the `{echo}` command?"
+            question_text: "كيف تستخدم الأمر `{echo}`؟"
             mp_choice_options:
-            -   option: "You can use it to `{ask}` a question."
-                feedback: "That's what `{ask}` is for!"
-            -   option: "You can use it to `{print}` text."
-                feedback: "That's what `{print}` is for!"
-            -   option: "You can use it to repeat an answer."
-                feedback: "Good job!"
-            -   option: "You can use it to make text disappear."
+            -   option: "يمكن إستخدامه ل`{ask}` سؤال."
+                feedback: "هذا ما يفعله الأمر `{ask}`!"
+            -   option: "يمكن إستخدامه لأطبع الكلام."
+                feedback: "هذا ما يفعله الأمر `{print}`!"
+            -   option: "يمكن إستخدامه لتكرار إجابة سؤال."
+                feedback: "أحسنت!"
+            -   option: "يمكن إستخدامه لجعل النص يختفي."
                 feedback: "هذا غير صحيح..."
             correct_answer: "C"
-            hint: "`{echo}` is used after an `{ask}` command."
+            hint: "`{echo}` يستخدم بعد الأمر `{ask}`."
             question_score: '10'
         9:
-            question_text: "What's wrong with this code?"
+            question_text: "ما الخطأ في هذا الكود؟"
             code: |-
-                {print} Hello!
-                {print} How are you doing?
-                {echo} So you are doing...
+                {print} مرحبًا!
+                {print} كيف حالك؟
+                {echo} إذاً انت...
             mp_choice_options:
-            -   option: "`{print}` in line 1 should be `{ask}`"
-                feedback: "No, `{print}` is right. Where is the question being asked?"
-            -   option: "`{print}` in line 2 should be `{ask}`"
-                feedback: "Super!"
-            -   option: "`{echo}` in line 3 should be `{ask}`"
-                feedback: "No, `{echo}` is right. Where is the question being asked?"
-            -   option: "Nothing. This is a perfect code!"
+            -   option: "`{print}` في السطر الأول يجب أن تكون `{ask}`"
+                feedback: "لا،`{print}` صحيحة. أين السؤال في الكود؟"
+            -   option: "`{print}` في السطر الثاني يجب أن تكون `{ask}`"
+                feedback: "رائع!"
+            -   option: "`{echo}` في السطر الثالث يجب أن تكون `{ask}`"
+                feedback: "لا، `{echo}` صحيحة. أين السؤال في الكود؟"
+            -   option: "لا شيء! الكود ممتاز!"
                 feedback: "ابحث عن الخطأ..."
             correct_answer: "B"
-            hint: "`{ask}` allows you to ask a question"
+            hint: "`{ask}` يمكنك من طرح سؤال"
             question_score: '10'
         10:
             question_text: "هل أنت مستعد للمستوى الثاني؟"
             mp_choice_options:
-            -   option: "Yes!"
-                feedback: "Great! Let's go to the next level!"
-            -   option: "No"
+            -   option: "أجل!"
+                feedback: "رائع! هيا بنا لإستكشاف المستوى التالي!"
+            -   option: "لا"
                 feedback: "يمكنك ممارسة المزيد في المستوى الأول!"
             correct_answer: "A"
-            hint: "Let's go!"
+            hint: "هيا بنا!"
             question_score: '10'
     2:
         1:
