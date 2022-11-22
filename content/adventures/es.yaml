@@ -357,7 +357,7 @@ adventures:
                     {print} elefantes 'elefante se balanceaba, sobre la tela de una araña. Cómo veía que resistía, fue a llamar a otro elefante.'
 
                     ___
-                        elefantes = elefante + 1
+                        elefantes = elefantes + 1
                         {print} elefantes 'elefantes se balanceaban, sobre la tela de una araña. Cómo veían que resistían, fueron a llamar a otro elefante.'```
                     ```
 
@@ -395,7 +395,7 @@ adventures:
                     ```
                     elefantes = 1
                     {print} elefantes 'elefantes se balanceaban sobre la tela de una araña. Cómo veía que resistía, fueron a llamar a otro elefante.'
-                    elefantes = elefante + 1
+                    elefantes = elefantes + 1
                     {print} elefantes 'elefantes se balanceaban, sobre la tela de una araña. Cómo veían que resistían, fueron a llamar a otro elefante.'
                     sleep
                     ```
@@ -746,7 +746,7 @@ adventures:
                 example_code: |
                     ```
                     opciones {is} 1, 2, 3, 4, 5, gusanito
-                    {print} gusanito {at} {random}
+                    {print} opciones {at} {random}
                     ```
 
                 start_code: "{print} ¿Qué salió esta vez?"
@@ -754,7 +754,7 @@ adventures:
                 story_text_2: "## Desafío\nLos dados en el ejemplo de arriba son dados para un juego en específico. ¿Puedes hacer un dado normal?\n¿U otro dado especial para un juego diferente?\n"
             15:
                 story_text: "## Dados\nEn este juego tienes que tirar un 6 en el menor número de intentos posibles.\n"
-                example_code: "```\nopciones = 1, 2, 3, 4, 5, 6\n{print} '¡Lanza un 6 lo más rápido que puedas!'\nlanzado = 0\nobtenidos = 0\n{while} lanzado != 6\n    lanzado = opciones {at} {random}\n    {print} 'Lanzaste un ' lanzado\n    intentos = intentos + 1\n{print} '¡Sí! Lanzaste un 6 en ' intentos ' intentos.'\n```\n"
+                example_code: "```\nopciones = 1, 2, 3, 4, 5, 6\n{print} '¡Lanza un 6 lo más rápido que puedas!'\nlanzado = 0\nintentos = 0\n{while} lanzado != 6\n    lanzado = opciones {at} {random}\n    {print} 'Lanzaste un ' lanzado\n    intentos = intentos + 1\n{print} '¡Sí! Lanzaste un 6 en ' intentos ' intentos.'\n```\n"
                 start_code: '# pon tú código aquí'
             10:
                 story_text: "## Dados\n¿Todo el mundo está tardando mucho lanzando el dado? ¡En este nivel puedes lanzar todos los dados a la vez!\n¿Puedes rellenar los espacios con la línea de código correcta?\n"
