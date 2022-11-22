@@ -325,6 +325,28 @@ class TestsLevel16(HedyTester):
           expected=expected
         )
 
+    def test_add_list_access_to_list(self):
+        code = textwrap.dedent("""\
+        colors1 is ['green', 'red', 'blue']
+        colors2 is ['yellow', 'purple']
+        add colors1[2] to colors2
+        print colors2[3]""")
+
+        expected = textwrap.dedent("""\
+        colors1 = ['green', 'red', 'blue']
+        colors2 = ['yellow', 'purple']
+        colors2.append(colors1[2-1])
+        print(f'''{colors2[3-1]}''')""")
+
+        check_in_list = (lambda x: HedyTester.run_code(x) == 'red') # check that 'red' was correctly appended 
+
+        self.multi_level_tester(
+          code=code,
+          max_level=17,
+          expected=expected,
+          extra_check_function=check_in_list
+        )
+
     def test_remove_from_list(self):
         code = textwrap.dedent("""\
         colors is ['green', 'red', 'blue']
@@ -352,6 +374,31 @@ class TestsLevel16(HedyTester):
           code=code,
           max_level=17,
           expected=expected
+        )
+
+    def test_remove_list_access_from_list(self):
+        code = textwrap.dedent("""\
+        colors1 is ['green', 'red', 'blue']
+        colors2 is ['red', 'purple']
+        remove colors1[2] from colors2
+        print colors2[1]""")
+
+        expected = textwrap.dedent("""\
+        colors1 = ['green', 'red', 'blue']
+        colors2 = ['red', 'purple']
+        try:
+          colors2.remove(colors1[2-1])
+        except:
+          pass
+        print(f'''{colors2[1-1]}''')""")
+
+        check_removed_from_list = (lambda x: HedyTester.run_code(x) == 'purple') # check that 'red' was removed
+
+        self.multi_level_tester(
+          code=code,
+          max_level=17,
+          expected=expected,
+          extra_check_function=check_removed_from_list
         )
 
     def test_equality_with_lists(self):

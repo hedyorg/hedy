@@ -805,7 +805,7 @@ adventures:
                     ## Parrot
                     Teach your parrot a new word with `{add}`.
                     ## Challenge
-                    How can make your parrot say multiple words?
+                    How can you make your parrot say multiple words?
                 example_code: |
                     ```
                     words {is} squawk, Hedy
@@ -857,7 +857,7 @@ adventures:
                     {print} 'Take one down, pass it around'
                     verse = verse - 1
                     {print} verse ' bottles of beer on the wall'
-                    sleep
+                    {sleep}
                     ```
                 story_text_2: |
                     ## 5 Little Monkeys jumping on the bed
@@ -1057,7 +1057,7 @@ adventures:
                     If you want to go backwards, you use the `{forward}` command but with a negative number. So for example `{forward} -100`
 
                     ## Challenge
-                    This is the start of a little staircase. Can you make it have 3 steps?
+                    This is the start of a little staircase. Can you make it have 5 steps?
 
                 example_code: |
                     ```
@@ -2002,7 +2002,7 @@ adventures:
                     ```
                     {print} 'Welcome to Hedys restaurant!'
                     people = {ask} 'How many people are joining us today?'
-                    {repeat} _ times food = {ask} 'What would you like to eat?'
+                    {repeat} _ {times} food = {ask} 'What would you like to eat?'
                     {print} 'Thanks for your order! Its coming right up!'
                     ```
                 start_code: "# place your code here"

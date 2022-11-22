@@ -27,7 +27,7 @@ levels:
             code_lines:
                 A: "{print} It is time for an evening of Netflix"
                 B: "film {is} Sonic the Hedgehog 2"
-                C: "{print} We're going to film"
+                C: "{print} Мы будем смотреть"
                 D: "{print} Have lot of fun!"
         2:
             story: |
@@ -58,7 +58,7 @@ levels:
                 A: "еда {is} pizza, icecream, salad, sandwich"
                 B: "начинками {is} chocolate, cheese, tuna, sprinkles"
                 C: "{print} Your random meal for today is..."
-                D: "sleep 2"
+                D: "{sleep} 2"
                 E: "{print} еда {at} {random} с начинками {at} {random}"
     4:
         1:
@@ -85,11 +85,11 @@ levels:
                 Make a program that checks if your favourite movie is already in the list of the computer.
                 If so, print that you have great taste, otherwise add the movie to the list.
             code_lines:
-                A: "favoriete_movies {is} Batman, Spiderman, The Avengers, Jurassic Park"
+                A: "favorite_movies {is} Бэтмен, Человек-паук, Мстители, Парк Юрского периода"
                 B: "movie {is} {ask} 'What is your favourite movie?'"
-                C: "{if} movie {in} favoriete_movies {print} 'You have great taste!'"
+                C: "{if} фильм {in} favorite_movies {print} 'У вас отличный вкус!'"
                 D: "{else} {print} 'Such a shame that your favourite movie is not in the list, we will add it right away!'"
-                E: "{add} movie {to_list} favoriete_movies"
+                E: "{add} фильм {to_list} favorite_movies"
         2:
             story: |
                 Create a maths game.
@@ -144,8 +144,8 @@ levels:
     8:
         1:
             story: |
-                You and four other friends are playing Pokémon Go! Create a program that decides in which team each of you will play.
-                Either red, yellow or blue! Take a little pauze after announcing a team.
+                Вы и еще четыре друга играете в Pokémon Go! Создайте программу, которая решает, в какой команде будет играть каждый из вас.
+                Либо в красную, желтую или синюю! Сделайте небольшую паузу после объявления команды.
             code_lines:
                 A: "teams = red, yellow, blue"
                 B: "{print} 'Красный, желтый или синий?'"
