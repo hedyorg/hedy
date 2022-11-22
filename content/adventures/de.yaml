@@ -125,8 +125,8 @@ adventures:
                         {print} Zähler
                 story_text: |-
                     ## Schleifen! 
-                    `{print}` funktioniert exakt genauso, aber wir verwenden jetzt die neue Form des Befehls `{for}`. Du kannst jetzt ``{for} counter {in} {range} 1 {to} 5` schreiben und `counter` in deinem Programm verwenden.
-                    Probier es aus, und schau, was passiert! Denke daran, Einrückungen nach den `{for}`- und `{if}`-Anweisungen zu verwenden (Das bedeutet, einen Satz mit vier Leerzeichen zu beginnen).
+                    `{print}` funktioniert exakt genauso, aber wir verwenden jetzt die neue Form des Befehls `{for}`. Du kannst jetzt `{for} counter {in} {range} 1 {to} 5` schreiben anstelle von `{repeat} 5 {times}` und `counter` in deinem Programm verwenden.
+                    Probier es aus und schau, was passiert! Denke daran, Einrückungen nach den `{for}`- und `{if}`-Anweisungen zu verwenden (Das bedeutet, einen Satz mit vier Leerzeichen zu beginnen).
                 example_code: "```\n{for} Zähler {in} {range} 1 {to} 5\n    {print} Zähler\n```\n"
             12:
                 start_code: |-
@@ -282,7 +282,7 @@ adventures:
                     ```
 
                 start_code: "{print} Deine Geschichte beginnt hier"
-                story_text_2: "## Challenge\nCan you make your own story in Hedy now by using `{print}` , `{ask}` and `{echo}`?\n"
+                story_text_2: "## Challenge\nKannst du deine eigene Geschichte in Hedy erstellen, indem du `{print}` , `{ask}` und `{echo}` verwendest?\n"
             2:
                 story_text: |
                     ## Schreibe eine Geschichte
@@ -291,6 +291,9 @@ adventures:
                     Dafür musst Du aber auch ein kleines bisschen mehr programmieren. Du musst Dir jetzt seinen oder ihren Namen richtig merken.
 
                     Dafür kannst Du den Namen irgendwo im Satz verwenden.
+
+                    ## Challenge
+                    Kannst du selbst eine Geschichte schreiben, die eine Variable verwendet? Kannst du noch mehr Variablen hinzufügen?
 
                 example_code: |-
                     ```
@@ -347,6 +350,9 @@ adventures:
                     ## Geschichte
                     In diesem Level kannst Du mehrere Zeilen zu einem {if}-Befehl hinzufügen. So kannst Du Deine guten und schlechten Enden etwas erweitern.
 
+                    ## Challenge
+                    Kannst du deine eigene Geschichte mit zwei verschiedenen Enden schreiben?
+
                 example_code: |
                     ```
                     {print} 'OH NEIN! Der T-rex kommt immer näher!'
@@ -368,6 +374,9 @@ adventures:
                     In einer Geschichte kommt es manchmal vor, dass jemand ein Wort mehrmals hintereinander sagt. So zum Beispiel, wenn jemand um Hilfe ruft, oder etwas singt.
                     Solche Wiederholungen kannst Du mit dem Befehl `{repeat}` in Deine Geschichte einfügen. Repeat bedeutet wiederholen.
 
+                    ## Challenge
+                    Kannst du deine eigene Geschichte mit Wiederholungen schreiben?
+
                 example_code: |
                     ```
                     {print} 'Der Prinz rief immer wieder um Hilfe.'
@@ -381,6 +390,7 @@ adventures:
                     ## Geschichte
                     In diesem Level programmierst Du unterschiedliche Enden, was Deine Geschichte noch spannender werden lässt.
 
+                    ## Challenge
                     Denke Dir einfach eine Geschichte mit zwei möglichen Enden aus, zum Beispiel:
 
                     - Die Prinzessin läuft durch den Wald.
@@ -441,6 +451,9 @@ adventures:
                     ```
                 story_text_3: |
                     Das ist ein Beispiel für den `{remove}` Befehl in deiner Geschichte
+
+                    ## Challenge
+                    Kannst du die 3 neuen Befehle `{at} {random}`, `{add} {to}` und `{remove} {from}` in deiner eigenen Geschichte verwenden?
                 example_code_3: |
                     ```
                     {print} Sein Rucksack wurde viel zu schwer.
@@ -475,6 +488,9 @@ adventures:
                 story_text: |
                     ## Geschichte
                     Mit den Befehlen `{and}` und `{or}` kannst Du Deine Geschichte etwas abkürzen. Sieh Dir zum Beispiel noch einmal die Geschichte mit dem Drachen an.
+
+                    ## Challenge
+                    Kannst Du dein eigenes Adventure-Minispiel wie dieses entwickeln?
 
                 example_code: |
                     ```
@@ -522,7 +538,7 @@ adventures:
                     ```
                 start_code: "{print} Ich bin Hedy der Papagei"
                 example_code_2: "```\n{print} Im Hedy the parrot\n{ask} _\n{echo}\n{echo}\n"
-                story_text_2: "## Challenge\nCan you make the parrot ask a different question? Fill in the blanks in the example!\n"
+                story_text_2: "## Challenge\nKannst du den Papagei dazu bringen, eine andere Frage zu stellen? Fülle die Lücken im Beispiel aus!\n"
             2:
                 story_text: |
                     ## Papagei
@@ -539,12 +555,14 @@ adventures:
                     {print} Name
                     ```
                 start_code: "{print} Ich bin Hedy der Papagei!"
-                story_text_2: "## Challenge\nYou can use variables to make the parrot say more than only your name. Can you complete this code?\n"
+                story_text_2: "## Challenge\nDu kannst Variablen verwenden, damit der Papagei mehr als nur deinen Namen sagt. Kannst Du diesen Code vervollständigen?\n"
                 example_code_2: "```\n{print} Im Hedy the parrot\nname {is} {ask} whats your name?\n{print} name\n{sleep}\n{print} name\nsurname {is} {ask} whats your surname?\n_\n{sleep}\n_\n```\n"
             3:
                 story_text: |
                     ## Papagei
                     Bringe Deinem Papageien mit dem Befehl `{add}` neue Wörter bei.
+                    ## Challenge
+                    Wie kannst Du deinen Papagei dazu bringen, mehrere Wörter zu sagen?
 
                 example_code: |
                     ```
@@ -768,8 +786,9 @@ adventures:
                     ## Lass uns zeichnen
                     Du kannst mit Hedy auch zeichnen. Indem Du Drehungen und Linien kombinierst, kannst Du ein Quadrat oder eine Treppe zeichnen.
 
-                    Mit `{forward}` ziehst Du eine Linie vorwärts. Die Zahl dahinter legt fest, wie weit die Schildkröte wandert. Mit ``{turn} {right}` ("drehe Dich nach rechts") macht sie eine Viertelumdrehung im Uhrzeigersinn, mit `{turn} {left}` ("drehe Dich nach links") entgegen dem Uhrzeigersinn. Wenn du zurück laufen möchtest, benutzt du den `{forward}`-Befehl mit einer negativen Zahl., wie zum Beispiel `{forward}-100`.
+                    Mit `{forward}` ziehst Du eine Linie vorwärts. Die Zahl dahinter legt fest, wie weit die Schildkröte wandert. Mit `{turn} {right}` ("drehe Dich nach rechts") macht sie eine Viertelumdrehung im Uhrzeigersinn, mit `{turn} {left}` ("drehe Dich nach links") entgegen dem Uhrzeigersinn. Wenn du zurück laufen möchtest, benutzt du den `{forward}`-Befehl mit einer negativen Zahl., wie zum Beispiel `{forward} -100`.
 
+                    ## Challenge
                     Das ist der Anfang einer kleinen Treppe. Kannst Du sie so zeichnen, dass sie 5 Stufen hat?
 
                 example_code: |
@@ -825,7 +844,7 @@ adventures:
             4:
                 story_text: |
                     ## Lass uns zeichnen
-                    In Level 4 musst Du bei `print` und `ask` Anführungszeichen nutzen. Das gilt auch für's Zeichnen!
+                    In Level 4 musst Du bei `{print}` und `{ask}` Anführungszeichen nutzen. Das gilt auch für's Zeichnen!
 
                 example_code: |
                     ```
@@ -848,7 +867,7 @@ adventures:
             5:
                 story_text: |
                     ## Lass uns zeichnen
-                    In Level 5 kannst Du mit dem Befehl `if` Entscheidungen treffen. Du kannst Dich zum Beispiel zwischen verschiedenen Formen entscheiden.
+                    In Level 5 kannst Du mit dem Befehl `{if}` Entscheidungen treffen. Du kannst Dich zum Beispiel zwischen verschiedenen Formen entscheiden.
 
                 example_code: |
                     ```
@@ -875,7 +894,7 @@ adventures:
                 story_text: |
                     ## Lass uns zeichnen
                     Jetzt, da wir einzelne Linien wiederholen können, fällt uns das Zeichnen einzelner Formen leichter.
-                    Wir setzen den Winkel einmalig und nutzen dann die Variable im `repeat`.
+                    Wir setzen den Winkel einmalig und nutzen dann die Variable im `{repeat}`.
 
                 example_code: |
                     ```
@@ -902,7 +921,7 @@ adventures:
             7:
                 story_text: |
                     ## Lass uns zeichnen!
-                    In diesem Level kannst Du mit dem Befehl `repeat` eine Code-Zeile wiederholen.
+                    In diesem Level kannst Du mit dem Befehl `{repeat}` eine Code-Zeile wiederholen.
 
                 example_code: |
                     ```
