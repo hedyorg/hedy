@@ -527,9 +527,9 @@ adventures:
                 story_text_2: "## Challenge\nNow you only have one player, so can you add a second player?\nYou can even use variables to name player 1 and player 2.\n"
                 example_code_2: "```\nchoices {is} rock, paper, scissors\n{print} player 1 chooses... choices {at} {random}\n{print} player 2 _\n```\n"
             2:
-                story_text: "## Rock, paper, scissors\nIn this level you can practise using the variables, so that you can make the rock, paper, scissors game in the next level!\n"
-                example_code: "```\nchoice {is} _\n{print} I choose choice\n```\n"
-                start_code: '# place your code here'
+                story_text: "## حجر، ورقة، مقص\nفي هذا المستوى يمكنك التدرب على استخدام المتغيرات، حتى تتمكن من صنع لعبة حجر ورقة مقص باستخدامها في المستوى القادم.\n"
+                example_code: "```\nالخيار {is}\n{print}اخترت الخيار\n```\n"
+                start_code: '#اكتب الكود الخاص بك هنا'
             15:
                 story_text: "## Rock, Paper, Scissors\nPlay until you beat the computer! But first, finish the example code...\n"
                 example_code: "```\nwon = 'no'\noptions = 'rock', 'paper', 'scissors'\n{while} won == 'no'\n    your_choice = {ask} 'What do you choose?'\n    computer_choice = options {at} {random}\n    {print} 'you chose ' your_choice\n    {print} 'the computer chose ' computer_choice\n    {if} computer_choice == your_choice\n        {print} 'Tie!'\n    {if} computer_choice == 'rock' {and} your_choice == 'scissors'\n        {print} 'You lose!'\n    {if} computer_choice == 'rock' {and} your_choice == 'paper'\n        {print} 'You win!'\n        won = 'yes'\n"
@@ -837,8 +837,8 @@ adventures:
                 example_code: "```\n{print} مرحبًا بك في هيدي\n{ask} ماذا تود ان تطلب؟\n{echo} إذًا انت تريد \n{ask} وماذا تود ان تشرب؟\n{echo} إذًا انت تريد \n```\n"
                 story_text_2: "إذا طلب اللاعب همبرغر و كوكاكولا، فلن تستطيع قول \"إذًا ان تريد همبرغر و كوكاكولا\"، يجب ان تضعهم في سطرين منفردين.\nو كذلك الامر `{echo}` يمكنه ترديد الكلمة في اخر الجملة فقط. إذًا فلن تستطيع ايضًا قول \"شطيرتك قادمة حالاً!\" في اول الجمله.\n\nسنغير هذه الامور في المستوى٢. في المستوى٢ ستتعلم كيفية استخدام المتغيرات، وستتمكن من حفظ اكثر من معلومة واحدة وطباعتها في أي جزء تريده فالجملة.\nلذا هيا بنا لإستكشاف المستوى التالي!\n"
             2:
-                story_text: "## What's next?\nIn this level you've learned what a variable is and how you can use it to make your adventures more interactive.\nBut... that's not the only thing you can do with variables! You can also use variables to make lists.\nAnd you can even let Hedy pick a random word out of a list, which allows you to make real games!\nTake a quick look at the next level!\n"
-                start_code: "{print} Let's go to the next level!"
+                story_text: "## ما التالي؟\nلقد تعلمت في هذا المستوى عن المتغيرات وكيفية استخدامها لجعل البرامج الخاصة بك أكثر تشويقًا.\nلكن يمكنك فعل ما هو أكثر بالمتغيرات، حيث يمكنك إنشاء قوائم ويمكنك جعل هيدي تختار كلمة عشوائية من قائمة قد قمت بإنشائها، فتصنع لعبًا أكثر إثارة.\nألقِ نظرة سريعة على المستوى التالي!\n"
+                start_code: "{print} هيا بنا إلى المستوى التالي!"
             6:
                 start_code: "{print} 'On to the next level!'"
                 story_text: "## What's next?\n Great job! You've reached the end of this level, which means you have practiced with `{if}` and `{else}`. You have probably noticed that your codes are getting longer and longer.\n For example {if} you want to program 'Happy Birthday'\n\n ```\n {print} 'happy birthday to you'\n {print} 'happy birthday to you'\n {print} 'happy birthday dear Hedy'\n {print} 'happy birthday to you'\n\n ```\n That's a lot of code for mainly the same words over and over again. Luckily in the next level has a solution with the `{repeat}` command, that allows you to repeat a line of code multiple times.\n"
