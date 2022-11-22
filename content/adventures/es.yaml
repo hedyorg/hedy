@@ -951,55 +951,20 @@ adventures:
             11:
                 story_text: |
                     ## Restaurante
-                    Podemos usar `{for} i {in} {range} 1 {to} 5` para imprimir los pedidos de varios clientes de manera ordenada. 
+                    Podemos usar `{for} i {in} {range} 1 {to} 5` para imprimir los pedidos de varios clientes de manera ordenada.
 
-                    ## Example Hedy código
-                    ```
-                    {print} '¡Bienvenido al restaurante Hedys!'
-                    people {is} {ask} '¿Para cuántas personas te gustaría pedir?'
-                    {for} i {in} {range} 1 {to} people
-                        {print} 'El número de pedido ' i
-                        food {is} {ask} '¿Qué te gustaría comer?'
-                        {print} food
-                        {if} food {is} fries
-                            sauce {is} {ask} '¿Qué tipo de salsa te gustaría con eso?'
-                            {print} sauce
-                        drinks {is} {ask} '¿Qué quieres tomar?'
-                        {print} drinks
-                    price {is} 4 * people
-                    {print} 'Eso será ' price ' dólar/dólares, ¡por favor!'
-                    ```
-                start_code: "# place your code here"
-                example_code: "```\n{print} 'Welcome to Restaurant Hedy!'\npeople = {ask} 'For how many people would you like to order?'\n{for} i {in} {range} 1 {to} people\n    {print} 'Order number ' i\n    food = {ask} 'What would you like to eat?'\n    {print} food\n    {if} food {is} fries\n        sauce = {ask} 'What kind of sauce would you like with that?'\n        {print} sauce\n    drinks = {ask} 'What would you like to drink?'\n    {print} drinks\nprice = 4 * people\n{print} 'That will be ' price ' dollars, please!'\n```\n"
+                    ## Desafío
+                    ¿Puedes con otro desafío de indetación?¡Haz que el código funcione agregando la cantidad correcta de indetación antes de cada línea!
+                start_code: "# pon tu código aquí"
+                example_code: "```\n{print} '¡Bienvenido al restaurante Hedys!'\npersona {is} {ask} '¿Para cuántas personas te gustaría pedir?'\n{for} i {in} {range} 1 {to} persona\n_ {print} 'El número de pedido ' i\n_ comida {is} {ask} '¿Qué te gustaría comer?'\n_ {print} comida\n_ {if} comida {is} papas fritas\n_ salsa {is} {ask} '¿Qué tipo de salsa te gustaría con eso?'\n_ {print} salsa\n_ bebidas {is} {ask} '¿Qué quieres tomar?'\n_ {print} bebidas\nprecio {is} 4 * persona\n{print} '¡Eso será ' precio ' dólares, por favor!'\n```\n"
             10:
                 story_text: |
                     ## Restaurante
-                    En nivel 7 puede hacer que su restaurante virtual sea más elaborado repitiendo varias líneas de código. Así:
-
-                    ```
-                    {print} '¡Bienvenido al restaurante Hedys!'
-                    people {is} {ask} '¿Cuántas personas se unirán a nosotros hoy?'
-                    {print} '¡Excelente!'
-                    {print} 'El menú de hoy tiene pizza o ensalada'
-                    price {is} 0
-                    {repeat} people {times}
-                        food {is} {ask} '¿Qué quieres pedir?'
-                        {print} food
-                        {if} food {is} pizza
-                            price {is} price + 10
-                        {else}
-                            price {is} price + 8
-                    {print} '¡Gracias por pedir!'
-                    {print} 'Eso será ' price 'dólar/dólares'
-                    {print} '¡Buen provecho!'
-                    ```
-
-                    ## Reto
-                    Por supuesto, Este código se puede ampliar con más elementos en el menú, oferta de bebidas, y/o múltiples cursos, ¡así que siéntase libre de agregar tantas opciones como desee!
-                start_code: "courses = appetizer, main course, dessert"
-                story_text_2: "Of course, you could also order for multiple people!\n"
-                example_code: "```\ncourses = appetizer, main course, dessert\n{for} course {in} courses\n    food = {ask} 'What would you like to eat as your ' course '?'\n    {print} food ' will be your ' course\n```\n"
-                example_code_2: "```\ncourses = appetizer, main course, dessert\nnames = Timon, Onno\n{for} name {in} names\n    {for} course {in} courses\n        food = {ask} name ', what would you like to eat as your ' course '?'\n        {print} name ' orders ' food ' as their ' course\n```\n"
+                    En este nivel puedes aprender como {ask} (preguntar) las ordenes a tus clientes con un código muy corto.
+                start_code: "platos = apertivo, plato principal, postre"
+                story_text_2: "## Desafío\n¡Por supuesto, también puedes ordenar para varias personas!\n¿Puedes agregar la cantidad correcta de indetanción a cada línea para hacerla funcionar correctamente?\nConsejo: algunas líneas no necesita tener indentación.\n"
+                example_code: "```\nplatos = apertivo, plato principal, postre\n{for} plato {in} platos\n    comida = {ask} '¿Que te gustaría ordenar como tu ' course '?'\n    {print} comida ' va a ser tu ' plato\n```\n"
+                example_code_2: "```\n_ platos = apertivo, plato principal, postre\n_ nombres = Jesús, Génesis\n_ {for} nombre {in} nombres\n_ {for} plato {in} platos\n_ comida = {ask} '¿Que te gustaría ordenar como tu ' plato '?'\n_ {print} nombre ' ordenó ' comida ' como su ' plato\n```\n"
             7:
                 story_text: |
                     ## Restaurante
@@ -1053,27 +1018,27 @@ adventures:
                 example_code_2: "```\n{print} Malteada misteriosa\nsabores {is} fresa, chocolate, vainilla\nalergías {is} {ask} ¿Eres alérgico a algún sabor?\n_\n{print} Vas a beber una malteada de sabores {at} {random}\n```\n"
             8:
                 story_text: "## Restaurante\nEn este nivel puedes hacer tu restaurant más complejo repitiendo múltiples líneas de código. Así:\n"
-                example_code: "```\n{print} 'Welcome to Hedys restaurant!'\npeople = {ask} 'How many people will be joining us today?'\n{print} 'Great!'\n{repeat} people {times}\n    food = {ask} 'What would you like to order?'\n    {print} food\n{print} 'Thank you for ordering!'\n{print} 'Enjoy your meal!'\n```\n\n## Challenge\nOf course, this code can be expanded with more items on the menu, offering drinks, and/or multiple courses, so feel free to add as many options as you like!\n"
-                start_code: '# place your code here'
-                story_text_2: "## Challenge\nOf course, this code can be expanded with more items on the menu, offering drinks, and/or multiple courses, so feel free to add as many options as you like!\n"
+                example_code: "```\n{print} '¡Bienvenido al restaurant Hedy's'\npersonas = {ask} '¿Cuántas personas se nos van a unir hoy?'\n{print} '¡Genial!'\n{repeat} persona {times}\n    comida = {ask} '¿Que te gustaría ordenar?'\n    {print} comida\n{print} '¡Gracias por ordenar!'\n{print} '¡Disfruta tu comida!'\n```\n"
+                start_code: '# pon tú código aquí'
+                story_text_2: "## Desafío\nClaro, puedes expandir este código agregando más comidas al menú, ofreciendo bebidas, y/o múltiples platos, ¡agrega tantas opciones como quieras!\n"
             12:
-                story_text: "## Restaurant\nFrom this level on you can use decimal numbers to make you menu more realistic.\n"
-                example_code: "```\nprice = 0\nfood = {ask} 'What would you like to order?'\ndrinks = {ask} 'What would you like to drink?'\n{if} food {is} 'hamburger'\n    price = price + 6.50\n{if} food {is} 'pizza'\n    price = price + 5.75\n{if} drinks {is} 'water'\n    price = price + 1.20\n{if} drink {is} 'soda'\n    price = price + 2.35\n{print} 'That will be ' price ' dollar, please'\n```\n"
-                start_code: '# place your code here'
+                story_text: "## Restaurant\nA partir de este nivel puedes usar números decimales para hacer que tu menú se vea más realista.\n\n## Desafío\n¿Puedes pensar en un código para darle a tus amigos y familiares un 15% de descuento?\n"
+                example_code: "```\nprecio = 0\ncomida = {ask} '¿Qué te gustaría ordenar?'\ndrinks = {ask} '¿Que te gustaría beber?'\n{if} comida {is} 'hamburguesa'\n    precio = precio + 6.50\n{if} comida {is} 'pizza'\n    precio = precio + 5.75\n{if} drinks {is} 'agyua'\n    precio = precio + 1.20\n{if} drink {is} 'refresco'\n    precio = precio + 2.35\n{print} 'Serán ' precio ' dólares, por favor'\n```\n"
+                start_code: '# pon tu código aquí'
             9:
-                story_text: "## Restaurant\nIn this level you can use nesting to make your restaurant more realistic and more fun!\nFor example you would {ask} for sauce {if} somebody orders fries, but you wouldn't {if} someone orders pizza!\nCheck out the example, and try this at your own virtual restaurant!\n"
-                example_code: "```\n{print} 'Welcome to Hedys restaurant!'\npeople = {ask} 'How many people will be joining us today?'\n{print} 'Great!'\nprice = 0\n{repeat} people {times}\n    food = {ask} 'What would you like to order?'\n    {print} food\n    {if} food {is} fries\n        price = price + 3\n        sauce = {ask} 'What kind of sauce would you like with your fries?'\n        {if} sauce {is} no\n            {print} 'no sauce'\n        {else}\n            price = price + 1\n            {print} 'with ' sauce\n    {if} food {is} pizza\n        price = price + 4\n{print} 'That will be ' price ' dollar'\n{print} 'Enjoy your meal!'\n```\n"
-                start_code: '# place your code here'
+                story_text: "## Restaurant\n¡En este nivel puedes usar anidación para hacer tu restaurant más realista y divertido!\nPor ejemplo, puedes ofrecer una salsa si alguien ordena papas fritas, ¡pero no lo harías si alguien pide pizza!\n\n## Desafío\n¡Este es un desafío para los cerebritos! Cada línea que necesita identación tiene un guión bajo.\n¿Puedes hacer que el código funcione agregando la cantidad correcta de indentación a cada línea que lo necesite!\n¡Buena suerte!\nTip: Si el cliente quiere una pizza, ¡Hedy no debería preguntar que salsa quiere el cliente!\n"
+                example_code: "```\n{print} '¡Bienvenido al restaurant Hedy's'\npersonas = {ask} '¿Cuántas personas se nos van a unir hoy?'\n{print} 'Great!'\nprecio = 0\n{repeat} persona {times}\n_ comida = {ask} '¿Que te gustaría ordenar?'\n_ {print} comida\n_ {if} comida {is} papas fritas\n_ precio = precio + 3\n_ salsa = {ask} '¿Qué clase de salsa te gustaría con esas papas fritas?'\n_ {if} salsa {is} no\n_ {print} 'sin salsa'\n_ {else}\n_ precio = precio + 1\n_ {print} 'con ' salsa\n_ {if} comida {is} pizza\n_ precio = precio + 4\n{print} 'Eso te va a costar ' precio ' dólares'\n{print} '¡Disfruta tu comida!'\n```\n"
+                start_code: '# pon tu código aquí'
             15:
-                example_code: "```\n{print} 'Welcome at McHedy'\nmore = 'yes'\n{while} more == 'yes'\n    order = {ask} 'What would you like to order?'\n    {print} order\n    more = {ask} 'Would you like to order anything {else}?'\n{print} 'Thank you!'\n"
-                story_text: "## Restaurant\nWith the `{while}` you can make sure your costumers can keep adding orders until they are done.\n"
-                start_code: '# place your code here'
+                example_code: "```\n{print} 'Bienvenido a McHedy'\nmás = 'sí'\n{while} más == 'sí'\n    pedido = {ask} '¿Qué te gustaría ordenar?'\n    {print} pedido\n    más = {ask} '¿Te gustaría pedir algo más?'\n{print} '¡Gracias!'\n```\n"
+                story_text: "## Restaurant\nCon el comando `{while}` puedes asegurarte que tus clientes sigan agregando ordenes hasta que gusten.\n"
+                start_code: '# pon tu código'
             13:
-                story_text: "## Restaurant\nIn this level we can use the new commands to upgrade our restaurant.\nWe use `{and}` to see {if} two things are both the case.\n"
-                example_code: "```\nprice = 10\nfood = {ask} 'What would you like to eat?'\ndrinks = {ask} 'What would you like to drink?'\n{if} food {is} 'sandwich' {and} drinks {is} 'juice'\n    {print} 'Thats our discount menu'\n    price = price - 3\n{print} 'That will be ' price ' dollars'\n```\n"
-                example_code_2: "```\ndrinks = {ask} 'What would you like to drink?'\n{if} drinks {is} 'water' {or} drinks {is} 'juice'\n    {print} 'Thats a healthy choice'\n```\n"
-                story_text_2: "We use `{or}` to see {if} one our of two things is the case.\n"
-                start_code: '# place your code here'
+                story_text: "## Restaurante\nEn este nivel podemos usar los nuevos comandos para mejorar nuestro restaurantes.\nUsamos `{and}` para ver {if} si dos cosas son verdaderas.\n"
+                example_code: "```\nprecio = 10\ncomida = {ask} '¿Qué te gustaría comer?'\nbebidas = {ask} '¿Qué te gustaría beber?'\n{if} comida {is} 'sandwich' {and} bebidas {is} 'jugo'\n    {print} 'Ese es nuestro menú de descuento'\n    precio = precio - 3\n{print} 'Eso sería ' precio ' dólares'\n```\n"
+                example_code_2: "```\nbebidas = {ask} '¿Qué te gustaría beber?'\n{if} bebidas {is} 'agua' {or} bebidas {is} 'jugo'\n    {print} 'Esa es una opción saludable'\n```\n"
+                story_text_2: "Usamos `{or}` para ver si una de dos cosas son verdaderas.\n"
+                start_code: '# pon tú código aquí'
     fortune:
         name: "El adivino"
         description: "Deja que Hedy prediga el futuro"
@@ -1089,45 +1054,17 @@ adventures:
                     En nivel 1 puedes comenzar fácil dejando que Hedy se presente como adivina y dejes que se haga eco de las respuestas de los jugadores.
                     Así:
 
-                    ## Example Hedy código
-                    ```
-                    {print} Hola, soy Hedy la adivina!
-                    {ask} ¿Quién eres?
-                    {print} Déjame echar un vistazo a mi bola de cristal
-                    {print} Veo... Veo...
-                    {echo} Te llamas 
-                    ```
-
-                    ## Reto
-                    Hedy ahora solo te dice tu nombre. ¿Puedes expandir el código para que Hedy pueda predecir más cosas sobre ti?
-
-                    Obviamente, Hedy aún no es una muy buena adivina, ¡ya que solo puede repetir las respuestas que dieron los jugadores!
-                    Echa un vistazo en el nivel 2 para mejorar tu adivino.
-
-                start_code: "# place your code here"
-                example_code: "```\n{print} Hello, I'm Hedy the fortune teller!\n{ask} Who are you?\n{print} Let me take a look in my crystal ball\n{print} I see... I see...\n{echo} Your name is\n```\n\n## Challenge\nHedy now only tells you your name. Can you expand the code so that Hedy can predict more things about you?\n\nObviously, Hedy isn't a very good fortune teller yet, as she can only repeat the answers that were given by the players!\nTake a look in level 2 to improve your fortune teller.\n"
-                story_text_2: "## Challenge\nHedy now only tells you your name. Can you expand the code so that Hedy can predict more things about you?\nObviously, Hedy isn't a very good fortune teller yet, as she can only repeat the answers that were given by the players!\nTake a look in level 2 to improve your fortune teller.\n"
+                start_code: "# pon tu código aquí"
+                example_code: "```\n{print} Hola, soy Hedy la adivina!\n{ask} ¿Quién eres?\n{print} Déjame echar un vistazo a mi bola de cristal\n{print} Veo... Veo...\n{echo} Te llamas \n```\n"
+                story_text_2: "## Desafío\nHedy ahora solo te dice tu nombre. ¿Puedes expandir el código para que Hedy pueda predecir más cosas sobre ti?\nObviamente, Hedy aún no es una muy buena adivina, ¡ya que solo puede repetir las respuestas que dieron los jugadores!\nEcha un vistazo en el nivel 2 para mejorar tu adivina.\n"
             3:
                 story_text: |
                     ## El adivino
-                    En nivel 1 has creado tu primera máquina de adivinación, pero Hedy realmente no podía predecir nada, sólo eco.
-                    En nivel 2 puede utilizar una variable y `{at} {random}` ordene realmente dejar que Hedy elija una respuesta para usted. Echa un vistazo a este código, por ejemplo:
-
-                    ## Example Hedy código
-                    En este ejemplo, el jugador puede hacerle a Hedy una pregunta de sí-no y Hedy elegirá una respuesta aleatoria para usted.
-                    ```
-                    {print} ¡Soy Hedy la adivina!
-                    question {is} {ask} ¿Qué quieres saber?
-                    {print} Esto es lo que quieres saber: question
-                    answers {is} yes, no, maybe
-                    {print} Mi bola de cristal dice... answers {at} {random}
-                    ```
-
-                    ## Retos
-                    Ahora, Hedy solo puede responder sí, no o tal vez. ¿Puedes darle a Hedy más opciones de respuesta, como 'definitivamente' o 'preguntar de nuevo'?
-                start_code: "# place your code here"
-                example_code: "In this example the player can {ask} Hedy a yes-no question and Hedy will pick a random answer for you.\n```\n{print} I’m Hedy the fortune teller!\nquestion {is} {ask} What do you want to know?\n{print} This is what you want to know: question\nanswers {is} yes, no, maybe\n{print} My crystal ball says...\n{sleep} 2\n{print} answers {at} {random}\n```\n\n## Challenges\nNow, Hedy can only answer yes, no or maybe. Can you give Hedy more answer options, like 'definitely' or '{ask} again'.\n"
-                story_text_2: "## Challenges\nNow, Hedy can only answer yes, no or maybe. Can you give Hedy more answer options, like 'definitely' or '{ask} again'.\n"
+                    En el nivel anterior has creado tu primera máquina de adivinación, pero Hedy realmente no podía predecir nada, sólo repetir ({echo}).
+                    En este nivel puedes utilizar una variable y el comando `{at} {random}` para dejar que Hedy escoja una pregunta. Mira este código, por ejemplo:
+                start_code: "# pon tu código aquí"
+                example_code: "\nEn este ejemplo, el jugador puede hacerle {ask} (preguntar) a Hedy una pregunta de sí-no y Hedy elegirá una respuesta aleatoria para ti.\n```\n{print} ¡Soy Hedy la adivina!\npregunta {is} {ask} ¿Qué quieres saber?\n{print} Esto es lo que quieres saber: pregunta\nrespuesta {is} yes, no, maybe\n{print} Mi bola de cristal dice...\n{sleep} 2\n{print} respuesta {at} {random}\n```\n"
+                story_text_2: "## Desafío\nAhora Hedy solo puede responder sí, no o quizás. ¿Puedes darle más opciones a Hedy, como 'definitivamente' o 'pregunta de nuevo'.\n"
             12:
                 story_text: "## Fortune Teller\nIn this level you can make your fortunes multiple words. Like in this example below:\n"
                 example_code: "```\nfortunes = 'you will be rich', 'you will fall in love', 'you will slip on a banana peel'\n{print} 'I will take a look in my crystall ball for your future.'\n{print} 'I see... I see...'\n{sleep}\n{print} fortunes {at} {random}\n```\n"
@@ -1143,16 +1080,16 @@ adventures:
                 example_code: "```\n{print} 'I am Hedy the fortune teller!'\n{print} 'I can predict how many kids youll get when you grow up!'\nage = {ask} 'How old are you?'\nsiblings = {ask} 'How many siblings do you have?'\nlength = {ask} 'How tall are you in centimetres?'\nkids = length / age\nkids = kids - siblings\n{print} 'You will get ...'\n{sleep}\n{print} kids ' kids!'\n```\n\n## Example Silly Fortune Teller\nIf the previous example wasn't silly enough for you, take a look at this one!\n\n```\n{print} 'Im Hedy the silly fortune teller!'\n{print} 'I will predict how smart you are!'\nfootball = {ask} 'On a scale 1-10 how much do you love football?'\nbananas = {ask} 'How many bananas did you eat this week?'\nhygiene = {ask} 'How many times did you wash your hands today?'\nresult = bananas + hygiene\nresult = result * football\n{print} 'You are ' result ' percent smart.'\n```\n"
                 start_code: '# place your code here'
             5:
-                story_text: "## Fortune Teller\nIn this level you'll learn to (secretly) tip the odds in your favor, when using the fortune teller!\nBy using `{if}` and `{else}` you can make sure that you will always get a good fotune, while other people might not.\nCheck out this example to find out how.\n"
-                example_code: "```\n{print} 'Im Hedy the fortune teller!'\n{print} 'I can predict {if} youll win the lottery tomorrow!'\nperson {is} {ask} 'Who are you?'\n{if} person {is} Hedy {print} 'You will definitely win!\U0001F929' {else} {print} 'Bad luck! Someone {else} will win!\U0001F62D'\n```\n"
+                story_text: "## El adivino\n¡En este nivel vas a aprender a (secretamente) voltear las chances a tu favor cuando usas el adivino!\nUsando `{if}` y `{else}` puedes asegurarte que siempre vas a tener buena suerte, mientras otras personas puede que no.\nMira este ejemplo para descubrir como.\n"
+                example_code: "```\n{print} '¡Soy Hedy la adivina!'\n{print} '¡Puedo predecir si ganarás la lotería mañana!'\npersona {is} {ask} '¿Quién eres?'\n{if} persona {is} Hedy {print} '¡Definitivamente vas a ganar!\U0001F929' {else} {print} '¡Mala suerte! ¡Alguien más va a ganar!\U0001F62D'\n```\n"
                 story_text_2: "Replace Hedy with your own name in the last line, and Hedy will always predict that you will win the lottery and others won't!\nOf course this might raise some suspicion with the other players... To avoid that, you can make sure that Hedy does give different answers every time you run the code.\nBut of course, still gives you a positive answer and the other players a negative one.\n"
                 example_code_2: "```\n{print} 'Im Hedy the fortune teller!'\n{print} 'I can predict {if} you will win the lottery tomorrow!'\nperson {is} {ask} 'Who are you?'\ngoodanswer {is} Hurray! You win!, You will definitely win!, We have a winner!\nbadanswer {is} Bad luck! Try again!, Another person will win, You lose!\n{if} person {is} Hedy {print} goodanswer {at} {random} {else} {print} badanswer {at} {random}\n```\n\n## Challenges\nThis concept can be used to make may different programs, just be creative! For example you could create a machine that predicts that your favorite sports team will beat all the competitors!\nOr you could make  Snow White's magic mirror on the wall, to tell everyone you are the fairest of them all!\nLet your imagination do the work!\n"
                 start_code: '# place your code here'
                 story_text_3: "## Challenges\nThis concept can be used to make may different programs, just be creative! For example you could create a machine that predicts that your favorite sports team will beat all the competitors!\nOr you could make  Snow White's magic mirror on the wall, to tell everyone you are the fairest of them all!\nLet your imagination do the work!\n"
             4:
-                example_code: "```\n{print} 'Im Hedy the fortune teller!'\nquestion {is} {ask} 'What do you want to know?'\n{print} 'This is your question: ' question\nanswers {is} yes, no, maybe\n{print} 'My crystal ball says...'\n{sleep} 2\n{print} answers {at} {random}\n```\n"
-                story_text: "## Fortune Teller\nThis level has no new functions, but allows you to practice with using the quotation marks.\nYou can remake your level 3 code, and make sure to add the quotation marks in the right places!\n\nMind that in level 3, we couldn't use the word 'question' as both the name of the variable and a normal word that could be printed.\nThe quotation marks in level 3 make this possible!\n\nImportant! Mind that now that we're using quotation marks, Hedy will get confused when you use the apostrophe for contractions like I'm or What's.\nMake sure to remove those apostrophes and change the spelling to Im or Whats.\n"
-                start_code: '# place your code here'
+                example_code: "```\n_ Agrega las comillas a este código _\n{print} ¡Soy Hedy la adivina!\npregunta {is} {ask} ¿Qué quieres saber?\n{print} Esta es tu pregunta:  pregunta\nrespuesta {is} sí, no, quizás\n{print} Mi bola de cristal dice...\n{sleep} 2\n{print} respuesta {at} {random}\n```\n"
+                story_text: "## El adivino\nEste nivel no tiene funciones nuevas, pero te permite practicar usando las comillas.\nPuedes rehacer tu código del nivel 3, ¡y asegurarte de agregar las comillas en los lugares correctos!\n\nTen en cuenta que en el nivel 3 no podíamos usar la palabra 'pregunta' como el nombre de la variable y una palabra normal que podía ser mostrada en pantalla.\n¡Las comillas en el nivel 3 hacen que eso sea posible!\n\n¡Importante! Ten en cuenta que ahora que Hedy usa comillas, se va a confundir cuando uses el apóstrofe o comillas dentro de las palabras.\nAsegúrate de quitar ese apóstrofe.\n\n## Desafío\nHemos quitado todas las comillas de este código de ejemplo, ¿puedes agregarla en los lugares correctos?\n"
+                start_code: '# pon tu código aquí'
             8:
                 story_text: "## Fortune Teller\nIn the previous levels you've learned how to use repeat to make the fortune teller answer 3 questions in a row, but we had a problem with printing the questions.\nNow that problem is solved, because of the new way of using the repeat command.\nIn the next example you can have your fortune teller {ask} 3 questions and also print them!\n"
                 example_code: "```\n{print} 'I am Hedy the fortune teller!'\n{print} 'You can {ask} me 3 questions.'\nanswers = yes, no, maybe\n{repeat} 3 {times}\n   question = {ask} 'What do you want to know?'\n   {print} question\n   {sleep}\n   {print} 'My crystal ball says...' answers {at} {random}\n```\n"
