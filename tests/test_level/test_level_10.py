@@ -122,7 +122,7 @@ class TestsLevel10(HedyTester):
             pygame.quit()
             break
           if event.type == pygame.KEYDOWN: 
-            if event.key == pygame.K_x:
+            if event.unicode == 'x':
               for dier in lijstje:
                 print(f'dier')
                 time.sleep(0.1)

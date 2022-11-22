@@ -863,7 +863,7 @@ levels:
             correct_answer: "D"
             hint: "Er is alleen een commando bijgekomen."
             question_score: '10'
-            code: "number {is} {ask} 'What is your lucky number?'\n{if} number {is} 5 {print} Mine too!\n_?_ {print} My lucky number is 5!"
+            code: "nummer {is} {ask} 'Wat is jouw geluksnummer?'\n{if} nummer {is} 5 {print} De mijne ook!\n_?_ {print} Mijn geluksnummer is 5!"
         2:
             question_text: "Wat verschijnt er in het uitvoerscherm als je Hedy invult als naam?"
             code: |-
@@ -1720,34 +1720,34 @@ levels:
             question_score: '10'
     11:
         1:
-          question_text: "Welk woord moet op de plek van het vraagteken?"
-          code: |-
-            {for} i {in} _?_ 1 {to} 10
-                {print} i
-          mp_choice_options:
-            - option: |
-                ```
-                rang
-                ```
-              feedback: "Nee, helaas"
-            - option: |
-                ```
-                {range}
-                ```
-              feedback: "Correct"
-            - option: |
-                ```
-                ragne
-                ```
-              feedback: "Nee, helaas"
-            - option: |
-                ```
-                ranch
-                ```
-              feedback: "Nee, helaas"
-          correct_answer: "B"
-          hint: "Wat is de juiste spelling?"
-          question_score: '10'
+            question_text: "Welk woord moet op de plek van het vraagteken?"
+            code: |-
+                {for} i {in} _?_ 1 {to} 10
+                    {print} i
+            mp_choice_options:
+            -   option: |
+                    ```
+                    rang
+                    ```
+                feedback: "Nee, helaas"
+            -   option: |
+                    ```
+                    {range}
+                    ```
+                feedback: "Correct"
+            -   option: |
+                    ```
+                    ragne
+                    ```
+                feedback: "Nee, helaas"
+            -   option: |
+                    ```
+                    ranch
+                    ```
+                feedback: "Nee, helaas"
+            correct_answer: "B"
+            hint: "Wat is de juiste spelling?"
+            question_score: '10'
         2:
             question_text: "Wat wordt de uitvoer van deze code?"
             code: |-
@@ -1800,11 +1800,11 @@ levels:
             hint: "Eerst komen alle cijfers en dan pas het zinnetje"
             question_score: '10'
             output: |
-              1
-              2
-              3
-              4
-              Hoedje van papier
+                1
+                2
+                3
+                4
+                Hoedje van papier
         4:
             question_text: "Welke code is gebruikt om deze output te krijgen?"
             mp_choice_options:
