@@ -198,55 +198,55 @@ levels:
             question_text: "اختر الجملة الصحيحة"
             mp_choice_options:
             -   option: "يمكنك استخدام الأمر `{print}` لإنشاء سؤال"
-                feedback: "هذا هو عمل الأمر `{ask}`"
+                feedback: "هذا عمل الأمر `{ask}`"
             -   option: "يمكنك استخدام الأمر `{ask}` لإعادة ترديد إجابتك"
-                feedback: "`{ask}` still works!"
-            -   option: "In level 2 the `{echo}` command doesn't exist anymore"
+                feedback: "هذا ليس صحيحًا"
+            -   option: "باستخدام الأمر `{print}` يمكنك جعل النص يظهر على الشاشة"
                 feedback: "جيد"
-            -   option: "In level 2 all the level 1 commands still work"
-                feedback: "No one command doesn't work anymore."
+            -   option: "باستخدام الأمر `{sleep}` يمكنك إزالة النص عن الشاشة"
+                feedback: "لا يعمل الأمر `{sleep}` بهذه الطريقة"
             correct_answer: "C"
-            hint: "`{print}` and `{ask}` still exist."
+            hint: "الأمر `{print}` ما زال يعمل كما كان في المستوى الأول"
             question_score: '10'
         2:
-            question_text: "Which code is correct?"
+            question_text: "اختر الكود الصحيح"
             mp_choice_options:
             -   option: |
                     ```
-                    name {is} {ask} What is your name?
+                    الاسم {is} {ask} ما اسمك؟
                     ```
-                feedback: "Super!"
+                feedback: "رائع!"
             -   option: |
                     ```
-                    {ask} {is} name What is your name
+                    {ask} {is} الاسم ما اسمك؟
                     ```
-                feedback: "The words are right, the order is not!"
+                feedback: "الكلمات صحيحة، لكن ترتيبها خاطئ"
             -   option: |
                     ```
-                    {ask} What is your name?
+                    {ask} ما اسمك؟
                     ```
-                feedback: "This worked in level 1, but in level 2 and up it works differently."
+                feedback: "هذا كان صحيحًا في المستوى الأول، لكن ابتداءً من هذا المستوى أصبح الأمر مختلفًا."
             -   option: |
                     ```
-                    {ask} What is your name? {is} name
+                    {ask} ما اسمك؟  {is} الاسم
                     ```
-                feedback: "The words are right, the order isn't!"
+                feedback: "الكلمات صحيحة، لكن ترتيبها خاطئ!"
             correct_answer: "A"
-            hint: "`{ask}` doesn't work like in level 1"
+            hint: "الأمر `{ask}` يعمل الآن بشكل مختلف عن المستوى الأول"
             question_score: '10'
         3:
-            question_text: "What appears on your output screen when you run this code?"
+            question_text: "ما النتيجة التي تظهر على الشاشة عند تنفيذ الكود التالي؟"
             code: |-
-                name {is} Marleen
-                {print} name goes to the market and she buys an apple.
+                الاسم {is} مريم
+                {print} الاسم ذهبت إلى البقالة واشترت تفاحة.
             mp_choice_options:
-            -   option: "name goes to the market and she buys an apple."
-                feedback: "The word name is replaced with Marleen"
-            -   option: "Marleen goes to the market."
-                feedback: "The second part of the sentence isn't left out!"
-            -   option: "Marleen goes to the market and she buys an apple."
-                feedback: "Right on!"
-            -   option: "Marleen goes to the market and Marleen buys an apple."
+            -   option: "الاسم ذهبت إلى البقالة واشترت تفاحة."
+                feedback: "كلمة \"الاسم\" يتم استبدالها بـِ\"مريم\""
+            -   option: "مريم ذهبت إلى البقالة."
+                feedback: "جزء من الجملة مفقود!"
+            -   option: "مريم ذهبت إلى البقالة واشترت تفاحة."
+                feedback: "ممتاز!"
+            -   option: "مريم ذهبت إلى البقالة مريم اشترت تفاحة"
                 feedback: "She is not replaced with the name"
             correct_answer: "C"
             hint: "The word name is replaced with Marleen"
