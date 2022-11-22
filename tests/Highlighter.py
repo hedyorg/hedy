@@ -170,8 +170,6 @@ class HighlightTester(unittest.TestCase):
         """
         simulator = SimulatorAce(state_machine)
         result, last_state_result = simulator.highlight(code, start_token)
-        print("-"*20)
-        print(result)
 
         result = list(result)
         expected = list(expected)
