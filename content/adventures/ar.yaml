@@ -312,7 +312,7 @@ adventures:
                 example_code: "```\nsword = 'lost'\ngame = 'on'\n{print} 'Our hero is walking through the forest'\n{print} 'The path splits two ways'\n{for} i {in} {range} 0 {to} 2\n    {if} game {is} 'on'\n        path = {ask} 'Which path should she choose?'\n        {if} path {is} 'left' {and} sword {is} 'found'\n            {print} 'Our hero comes across a dragon!'\n            {print} 'Luckily our hero has a sword to defeat the beast!'\n            game = 'over'\n        {if} path {is} 'left' {and} sword {is} 'lost'\n            {print} 'Our hero finds a dragon, but she doesnt have any weapons!'\n            {print} 'Our hero is beaten by the dragon...'\n            {print} 'Try again'\n            game = 'over'\n        {if} path {is} 'right' {and} sword {is} 'found'\n            {print} 'You have already found the sword. There is nothing left here.'\n            {print} 'She walks back'\n        {if} path {is} 'right' {and} sword {is} 'lost'\n            {print} 'Our hero finds a sword'\n            {print} 'This could come in very handy'\n            sword = 'found'\n```\n"
                 start_code: '# place your code here'
             2:
-                story_text: "##القصة\nفي المستوى الثاني يمكنك أن تجعل القصة الخاصة بك ممتعة أكثر.ستكون قادرًا على استخدام اسم الشخصية الرئيسية في أي مكانٍ تريده في قصتك.\n\nلتتمكن من فعل ذلك، ستحتاج إلى إضافة بعض الأسطر البرمجية، ولكن أولًا يجب أن تختار اسمًا للشخصية الرئيسية، بعد ذلك ضع الاسم في الجملة التي تشاء.\n"
+                story_text: "## القصة\nفي المستوى الثاني يمكنك أن تجعل القصة الخاصة بك ممتعة أكثر.ستكون قادرًا على استخدام اسم الشخصية الرئيسية في أي مكانٍ تريده في قصتك.\n\nلتتمكن من فعل ذلك، ستحتاج إلى إضافة بعض الأسطر البرمجية، ولكن أولًا يجب أن تختار اسمًا للشخصية الرئيسية، بعد ذلك ضع الاسم في الجملة التي تشاء.\n\n## تحدي\nهل تستطيع أن تصنع قصة باستخدام المتغيرات لوحدك؟ أو أن تضيف متغيرات جديدة للقصة؟\n"
                 example_code: "```\nالاسم {is} {ask} الشخصية الرئيسية في القصة هو\n{print} الاسم يتجول الآن في الغابة\n{print} الاسم خائفٌ قليلًا\n{print} لقد سمع ضوضاء رهيبة في المكان من حوله\n{sleep}\n{print} الاسم خائفٌ من أن تكون هذه الغابة مسكونة\n```"
                 start_code: '{print} قصتك'
             12:
@@ -350,10 +350,10 @@ adventures:
                 example_code_2: "```\n{print} Im Hedy the parrot\n{ask} _\n{echo}\n{echo}\n"
             2:
                 story_text: "## الببغاء\nاصنع ببغاء إلكتروني خاص بك، سيقوم بنسخ كل ما تقول!\n"
-                example_code: "```\n{print} أنا الببغاء هيدي\nالاسم {is} {ask} ما اسمك؟\n{print} الاسم\n{sleep}\n{print} squawk\n{sleep}\n{print} الاسم\n```\n"
+                example_code: "```\n{print}  أنا الببغاء هيدي\nالاسم {is} {ask} ما اسمك؟\n{print}  الاسم\n{sleep}\n{print}  سلام!\n{sleep}\n{print}  الاسم\n```\n"
                 start_code: '{print} أنا الببغاء هيدي'
                 story_text_2: "## تحدي\nبإمكانك استخدام المتغيرات لتجعل الببغاء يقول أي شيء تريده, هل تستطيع إكمال هذا الكود؟\n"
-                example_code_2: "```\n{print}أنا الببغاء هيدي\nالاسم١ {is} {ask} ما اسمك؟\n{print} الاسم١\n{sleep}\n{print} الاسم١\nالاسم٢ {is} {ask} ما اسم عائلتك؟\n_\n{sleep}\n_\n```\n"
+                example_code_2: "```\n{print} أنا الببغاء هيدي\nالاسم١ {is} {ask} ما اسمك؟\n{print}  الاسم١\n{sleep}\n{print}  الاسم١\nالاسم٢ {is} {ask} ما اسم عائلتك؟\n_\n{sleep}\n_\n```\n"
             5:
                 story_text: "## الببغاء\nكافئ الببغاء {if} قال الكلمةالصحيحة!\n"
                 example_code: "```\nwords {is} squawk, Hedy\n{print} 'Train your parrot!'\nnew_word {is} {ask} 'Which word do you want to teach them?'\n{add} new_word {to_list} words\nsaid_word {is} words {at} {random}\n{print} '\U0001F9D2 Say ' new_word ', Hedy!'\n{print} '\U0001F99C ' said_word\n{if} said_word {is} new_word {print} '\U0001F9D2 Great job, Hedy! \U0001F36A'\n{else} {print} '\U0001F9D2 No, Hedy! Say ' new_word\n```\n"
@@ -528,7 +528,7 @@ adventures:
                 example_code_2: "```\nchoices {is} rock, paper, scissors\n{print} player 1 chooses... choices {at} {random}\n{print} player 2 _\n```\n"
             2:
                 story_text: "## حجر، ورقة، مقص\nفي هذا المستوى يمكنك التدرب على استخدام المتغيرات، حتى تتمكن من صنع لعبة حجر ورقة مقص باستخدامها في المستوى القادم.\n"
-                example_code: "```\nالخيار {is}\n{print}اخترت الخيار\n```\n"
+                example_code: "```\n_  {is}{ask} حجر, ورقة, مقص؟\n{print}اخترت _\n```\n"
                 start_code: '#اكتب الكود الخاص بك هنا'
             15:
                 story_text: "## Rock, Paper, Scissors\nPlay until you beat the computer! But first, finish the example code...\n"
@@ -604,11 +604,11 @@ adventures:
                 start_code: '# اكتب الكود الخاص بك هنا'
                 story_text_2: "## تحدي\nهل يمكنك التفكير في عدة سطور اخرى تضيفها لتطور كود مطعمك؟ على سبيل المثال، هل يمكنك استخدام {ask} لسؤال الضيوف ماذا يفضلون كشراب بجانب وجبتهم، وبعد ذلك اخبارهم بسعر طلبهم، و ان تتمنى لهم وجبة هنيئة؟\n"
             2:
-                story_text: "## المطعم\nفي المستوى الثاني ستتمكن من تطوير مطعمك باستخدام المتغيرات، في المستوى الأول، كانت هيدي تستطيع فقط أن تردد طلبك باستخدام الأمر  {echo}  وكان باستطاعتها أخذ طلب واحد فقط، الآن باستخدام المتغيرات بإمكان هيدي أن تأخذ طلبات الطعام والمشروبات أيضًا!\n"
-                example_code: "```\n{print} أهلا بكم في مطعم هيدي.\n{print}أطباق اليوم هي البيتزا واللازانيا.\nالطعام {is} {ask} ماذا تودّ أن تأكل؟\n{print}خيار رائع! الطعام هي وجبتي المفضلة.\nالصلصة {is} {ask} هل تفضل الصلصة باللحم أم بالخضار؟\n{print}الطعام مع الصلصة في طريقها إليك.\nالمشروب {is} {ask}ماذا تود أن تشرب؟\n{print} شكرًا لطلبك من مطعمنا.\n{print}الطعام الخاصة بك بالإضافة إلى المشروب ستصلك قريبًا، بالهناء والشفاء.\n```\n"
+                story_text: "## المطعم\nفي المستوى الثاني ستتمكن من تطوير مطعمك باستخدام المتغيرات، في المستوى الأول، كانت هيدي تستطيع فقط أن تردد طلبك باستخدام الأمر  `{echo} ` وكان باستطاعتها أخذ طلب واحد فقط، الآن باستخدام المتغيرات بإمكان هيدي أن تأخذ طلبات الطعام والمشروبات أيضًا!\n"
+                example_code: "```\n{print} أهلا بكم في مطعم هيدي.\n{print} أطباق اليوم هي البيتزا واللازانيا.\nالوجبة {is} {ask} ماذا تودّ أن تأكل؟\n{print} اختيار رائع! الوجبة هي وجبتي المفضلة.\nالصلصة {is} {ask} هل تفضل الصلصة باللحم أم بالخضار؟\n{print}الوجبة مع الصلصة في طريقها إليك.\nالمشروب {is} {ask}ماذا تود أن تشرب؟\n{print} شكرًا لطلبك من مطعمنا.\n{print}الوجبة الخاصة بك بالإضافة إلى المشروب ستصلك قريبًا، بالهناء والشفاء.\n```\n"
                 start_code: '#ضع الكود الخاص بك هنا'
                 story_text_2: "## تحدي\nهل بإمكانك أن تجعل الكود مفصّلًا أكثر؟ بإضافة مشروبات إلى الطلب مثلًا؟\n"
-                example_code_2: "```\n{print} أهلا بكم في مطعم هيدي.\n{print}أطباق اليوم هي البيتزا واللازانيا.\nالطعام {is} {ask} ماذا تودّ أن تأكل؟\n{print}خيار رائع! الطعام هي وجبتي المفضلة.\nالصلصة {is} {ask} هل تفضل الصلصة باللحم أم بالخضار؟\n{print}الطعام مع الصلصة في طريقها إليك.\nالمشروب {is} _\n```\n"
+                example_code_2: "```\n{print} أهلا بكم في مطعم هيدي.\n{print} أطباق اليوم هي البيتزا واللازانيا.\nالوجبة {is} {ask} ماذا تودّ أن تأكل؟\n{print} اختيار رائع! الوجبة هي وجبتي المفضلة.\nالصلصة {is} {ask} هل تفضل الصلصة باللحم أم بالخضار؟\n{print}الوجبة مع الصلصة في طريقها إليك.\nالمشروب {is} _\n```\n"
             12:
                 story_text: "## Restaurant\nFrom this level on you can use decimal numbers to make you menu more realistic.\n"
                 example_code: "```\nprice = 0\nfood = {ask} 'What would you like to order?'\ndrinks = {ask} 'What would you like to drink?'\n{if} food {is} 'hamburger'\n    price = price + 6.50\n{if} food {is} 'pizza'\n    price = price + 5.75\n{if} drinks {is} 'water'\n    price = price + 1.20\n{if} drink {is} 'soda'\n    price = price + 2.35\n{print} 'That will be ' price ' dollar, please'\n```\n"
@@ -728,9 +728,9 @@ adventures:
             2:
                 story_text: "## بيت الأشباح\nفي بيت الأشباح في هذا المستوى يمكنك اختيار الأشباح الخاصة بك باستخدام الرموز التعبيرية، أو باستخدام الكلمات طبعًا.\n"
                 start_code: الشبح١ {is} _
-                example_code: "```\nالشبح_١ {is} \U0001F47B\nالشبح_٢ {is} \U0001F921\nالشبح_٣ {is} \U0001F476\n{print}تدخل إلى بيت الأشباح.\n{print} فجأةً ترى الشبح_١\n{print} تهرب إلى الغرفة الأخرى، لكنك تجد الشبح_٢ بانتظارك هناك!\n{print} أوه! لا. تصل سريعًا إلى المطبخ.\n{print} لكن سرعان ما تدخله الشبح_٣ يهاجمك!\n```\n"
+                example_code: "```\nالشبح_١ {is} \U0001F47B\nالشبح_٢ {is} \U0001F921\nالشبح_٣ {is} \U0001F476\n{print} عندما تدخل إلى بيت الأشباح.\n{print} فجأةً ترى الشبح_١\n{print} تهرب إلى الغرفة الأخرى، لكنك تجد الشبح_٢ بانتظارك هناك!\n{print} أوه! لا. تصل سريعًا إلى المطبخ.\n{print} لكن سرعان ما تدخله الشبح_٣ يهاجمك!\n```\n"
                 story_text_2: "## تحدي\nفي المثال أعلاه، قمت بتعريف الأشباح مسبقًا باستخدام المتغيرات، لذلك ترى نفس النتيجة دائمًا عند تنفيذ الكود.\nهل تستطيع إضافة الأمر `{ask}` ليصبح بيت الأشباح ممتعًا أكثر حيث يستطيع اللاعبين اختيار أشباحهم الخاصة؟\n"
-                example_code_2: "```\nmonster_1 {is} _\nmonster_2 {is} _\nmonster_3 {is} _\n{print} You enter the haunted house.\n{print} Suddenly you see a monster_1\n{print} You run into the other room, but a monster_2 is waiting there for you!\n{print} Oh no! Quickly get to the kitchen.\n{print} But as you enter monster_3 attacks you!\n```\n"
+                example_code_2: "```\nالشبح_١ {is} _\nالشبح_٢ {is} _\nالشبح_٣ {is} _\n{print} عندما تدخل إلى بيت الأشباح.\n{print} فجأةً ترى الشبح_١\n{print} تهرب إلى الغرفة الأخرى، لكنك تجد الشبح_٢ بانتظارك هناك!\n{print} أوه! لا. تصل سريعًا إلى المطبخ.\n{print} لكن سرعان ما تدخله الشبح_٣ يهاجمك!\n```\n"
             14:
                 story_text: "## Haunted House\nIn this level you can use the `<` and `>` symbol to introduce lives to your game.\n"
                 example_code: "```\n{print} 'Escape from the haunted house'\nlives = 3\ndoors = 1, 2, 3\nmonsters = 'the wicked witch', 'a zombie', 'a sleeping 3 headed dog'\n{for} i {in} {range} 1 {to} 10\n    {if} lives > 0\n        good_door = doors {at} {random}\n        monster = monsters {at} {random}\n        chosen_door = {ask} 'Which door do you choose?'\n        {if} good_door == chosen_door\n            {print} 'You have chosen the correct door'\n        {else}\n            {print} 'You see...' monster\n            {if} monster == 'a sleeping 3 headed dog'\n                {print} 'Pffieuw.... Its asleep'\n            {else}\n                {print} 'You lose one life'\n                lives = lives -1\n    {else}\n        {print} 'GAME OVER'\n```\n"
