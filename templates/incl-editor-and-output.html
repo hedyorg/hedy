@@ -186,9 +186,7 @@
             {% elif next_level and not (not customizations or next_level in customizations['available_levels']) %}
                 <div class="relative">
                     <button class="green-btn ltr:ml-1 rtl:mr-1" id="next_level_button" disabled>{{_('advance_button')|replace("{level}", next_level)}}</button>
-                    <div class="opacity-0 hover:opacity-100 duration-300 absolute inset-0 z-10 flex justify-center items-center">
-                        <!-- Todo: This structure is the starting point for adding an overlay hover text -->
-                    </div>
+                    
                 </div>
             {% endif %}
           </div>

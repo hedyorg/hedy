@@ -55,6 +55,10 @@ strong {
   @apply bg-gray-500 border-gray-700;
 }
 
+.green-btn:hover:disabled, .green-btn:hover[disabled] {
+  @apply text-opacity-0
+}
+
 .green-btn:hover:enabled {
   @apply bg-green-400 border-green-500;
 }
