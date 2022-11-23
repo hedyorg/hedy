@@ -55,8 +55,8 @@ levels:
             story: |
                 Create a program that chooses a random meal for you. Make a list of food and a list of toppings and let the program decide what you'll have!
             code_lines:
-                A: "food {is} pizza, icecream, salad, sandwich"
-                B: "toppings {is} chocolate, cheese, tuna, sprinkles"
+                A: "essen {is} pizza, icecream, salad, sandwich"
+                B: "Belag {is} chocolate, cheese, tuna, sprinkles"
                 C: "{print} Your random meal for today is..."
                 D: "{sleep} 2"
                 E: "{print} essen {at} {random} mit Belag {at} {random}"
@@ -116,9 +116,9 @@ levels:
                 Create a program that helps you calculate how many cakes you should buy for your birthday party.
             code_lines:
                 A: "{print} 'It is your birthday!'"
-                B: "people = {ask} 'How many people do you want to give a slice of cake?'"
+                B: "leute = {ask} 'How many people do you want to give a slice of cake?'"
                 C: "kuchenanzahl {is} leute/8"
-                D: "{print} 'You will have to buy ' cakes_amount ' cakes'"
+                D: "{print} 'You will have to buy ' kuchenanzahl ' cakes'"
     7:
         1:
             story: |
