@@ -15,6 +15,16 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+      name: Checkout branch (with token)
+      if: github.event_name == 'push'
+      with:
+        fetch-depth: 1        
+        
+        # We need to pass the token here -- the commit action below will not overwrite the token to push.
+        token: ${{ secrets.FELIENNE_GITHUB_ACCESS_TOKEN }}
+    - uses: actions/checkout@v3
+      name: Checkout branch (on pull requests)
+      if: github.event_name != 'push'
       with:
         fetch-depth: 1        
     - name: Install Nodejs dependencies
