@@ -363,6 +363,11 @@ function clearOutput() {
   outputDiv.append(variables);
   error.hide();
   success.hide();
+
+  // Clear the user created buttons.
+  buttonsDiv = $('#dynamic-buttons');
+  buttonsDiv.empty();
+  buttonsDiv.hide();
 }
 
 export function runit(level: string, lang: string, disabled_prompt: string, cb: () => void) {
