@@ -878,6 +878,9 @@ class UsesPyGame(Transformer):
     def ifpressed_else(self, args):
         return True
 
+    def assign_button(self, args):
+        return True
+
 
 class AllCommands(Transformer):
     def __init__(self, level):
