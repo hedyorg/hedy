@@ -473,6 +473,7 @@ class ParsonsProblem:
             exercises = copy.deepcopy(self.file.get(level))
             for number, exercise in exercises.items():
                 try:
+                    print(exercises.get(number))
                     exercises.get(number)['code'] = exercises.get(number).get('code').format(**KEYWORDS.get(language))
                 except IndexError:
                     logger.error(
