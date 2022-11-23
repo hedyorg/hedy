@@ -472,15 +472,14 @@ class ParsonsProblem:
         for level in copy.deepcopy(self.file):
             exercises = copy.deepcopy(self.file.get(level))
             for number, exercise in exercises.items():
-                for k, v in exercise.get('code_lines').items():
-                    try:
-                        exercises.get(number).get('code_lines')[k] = v.format(**KEYWORDS.get(language))
-                    except IndexError:
-                        logger.error(
-                            f"There is an issue due to an empty placeholder in line: {v}")
-                    except KeyError:
-                        logger.error(
-                            f"There is an issue due to a non-existing key in line: {v}")
+                try:
+                    exercises.get(number)['code'] = exercises.get(number).get('code').format(**KEYWORDS.get(language))
+                except IndexError:
+                    logger.error(
+                        f"There is an issue due to an empty placeholder in exercise: {number}")
+                except KeyError:
+                    logger.error(
+                        f"There is an issue due to a non-existing key in exercise: {number}")
             keyword_data[level] = exercises
         return keyword_data
 
