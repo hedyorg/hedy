@@ -1468,13 +1468,23 @@ class ConvertToPython_3(ConvertToPython_2):
         else:
             return args[0] + '[' + args[1] + '-1]'
 
+    def process_argument(self, meta, arg):
+        # only call process_variable if arg is a string, else keep as is (ie. don't change 5 into '5', my_list[1] into 'my_list[1]')
+        if arg.isnumeric(): # is int/float
+            return arg
+        elif ('[' in arg and ']' in arg): # is list indexing
+            before_index, after_index = arg.split(']', 1)
+            return before_index + '-1' + ']' + after_index # account for 1-based indexing
+        else:
+            return self.process_variable(arg, meta.line)         
+
     def add(self, meta, args):
-        value = self.process_variable(args[0], meta.line)
+        value = self.process_argument(meta, args[0])
         list_var = args[1]
         return f"{list_var}.append({value})"
 
     def remove(self, meta, args):
-        value = self.process_variable(args[0], meta.line)
+        value = self.process_argument(meta, args[0])
         list_var = args[1]
         return textwrap.dedent(f"""\
         try:
@@ -1482,7 +1492,7 @@ class ConvertToPython_3(ConvertToPython_2):
         except:
           pass""")
 
-
+  
 @v_args(meta=True)
 @hedy_transpiler(level=4)
 class ConvertToPython_4(ConvertToPython_3):
@@ -1591,13 +1601,13 @@ while not pygame_end:
 
     def ifpressed(self, met, args):
         return self.make_ifpressed_command(f"""\
-    if event.key == pygame.K_{args[0]}:
+    if event.unicode == '{args[0]}':
 {ConvertToPython.indent(args[1], 6)}
       break""")
 
     def ifpressed_else(self, met, args):
         return self.make_ifpressed_command(f"""\
-    if event.key == pygame.K_{args[0]}:
+    if event.unicode == '{args[0]}':
 {ConvertToPython.indent(args[1], 6)}
       break
     else:
@@ -1751,7 +1761,7 @@ class ConvertToPython_8_9(ConvertToPython_7):
         all_lines = ConvertToPython.indent(all_lines, 6)
 
         return self.make_ifpressed_command(f"""\
-    if event.key == pygame.K_{args[0]}:
+    if event.unicode == '{args[0]}':
 {all_lines}
       break""")
 
@@ -1762,7 +1772,7 @@ class ConvertToPython_8_9(ConvertToPython_7):
         all_lines = ConvertToPython.indent(all_lines, 6)
 
         return self.make_ifpressed_command(f"""\
-    if event.key == pygame.K_{args[0]}:
+    if event.unicode == '{args[0]}':
 {all_lines}
       break""")
 
