@@ -3,8 +3,8 @@ _empty_program: (_EOL | _SPACE)*
 _non_empty_program: _EOL* (command | error_invalid) _SPACE* (_EOL+ command _SPACE*)* _EOL* //lines may end on spaces and might be separated by many newlines
 
 //placing assign after print means print is will print 'is' and print is Felienne will print 'is Felienne'
-command:+= ifpressed_else | ifpressed | ifelse | ifs | list_access_var -= error_invalid | error_ask_no_quotes > assign
-_if_less_command: print | ask | turtle | assign_list | add | remove | sleep | error_print_no_quotes | list_access_var | assign
+command:+= ifpressed_else | ifpressed | ifelse | ifs | assign_button | list_access_var -= error_invalid | error_ask_no_quotes > assign
+_if_less_command: print | ask | turtle | assign_button | assign_list | add | remove | sleep | error_print_no_quotes | list_access_var | assign
 
 // error_invalid is moved from to command to program, so that command rules have priority over error_invalid
 error_invalid: textwithoutspaces _SPACE* (quoted_text | textwithspaces)?

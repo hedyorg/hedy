@@ -1573,7 +1573,8 @@ else:
 
     def assign_button(self, meta, args):
         button_name = self.process_variable(args[0], meta.line)
-        return f"create_button({button_name})"
+        return f"""create_button({button_name})
+print("test")"""
 
     def make_ifpressed_command(self, command):
         if self.ifpressed_prefix_added:
