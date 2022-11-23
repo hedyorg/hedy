@@ -472,6 +472,7 @@ class ParsonsProblem:
         for level in copy.deepcopy(self.file):
             exercises = copy.deepcopy(self.file.get(level))
             for number, exercise in exercises.items():
+                # Fixme: This is here for relic YAML structure support -> remove once all languages are up-to-date
                 if exercise.get('code_lines'):
                     for k, v in exercise.get('code_lines').items():
                         try:

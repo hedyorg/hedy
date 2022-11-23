@@ -51,6 +51,7 @@ function updateHeader(exercise: number) {
 
 function showExercise(response: ParsonsExercise) {
     let code_lines = null;
+    // Fixme: This is here for relic YAML structure support -> remove once all languages are up-to-date
     if (response.code_lines) {
         code_lines = shuffle_code_lines(response.code_lines, true);
     } else {
