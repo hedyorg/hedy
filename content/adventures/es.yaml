@@ -396,7 +396,7 @@ adventures:
                     {print} elefantes 'elefantes se balanceaban sobre la tela de una araña. Cómo veía que resistía, fueron a llamar a otro elefante.'
                     elefantes = elefantes + 1
                     {print} elefantes 'elefantes se balanceaban, sobre la tela de una araña. Cómo veían que resistían, fueron a llamar a otro elefante.'
-                    sleep
+                    {sleep}
                     ```
 
                 start_code: "{print} '¡Vamos a cantar!'"
@@ -757,7 +757,7 @@ adventures:
                 start_code: '# pon tú código aquí'
             10:
                 story_text: "## Dados\n¿Todo el mundo está tardando mucho lanzando el dado? ¡En este nivel puedes lanzar todos los dados a la vez!\n¿Puedes rellenar los espacios con la línea de código correcta?\n"
-                example_code: "```\njugadores = Ana, Juan, Pedro\nopciones = 1, 2, 3, 4, 5, 6\n{for} jugador {in} jugadores\n    {print} jugador ' tiró un ' opciones {at} {random}\n    {sleep}\n```\n"
+                example_code: "```\njugadores = Ana, Juan, Pedro\nopciones = 1, 2, 3, 4, 5, 6\n_\n    {print} jugador ' tiró un ' opciones {at} {random}\n    {sleep}\n```\n"
                 start_code: '# Coloca tu código aquí'
     rock:
         name: "Piedra, papel o tijera"
@@ -805,7 +805,7 @@ adventures:
             4:
                 story_text: |
                     ## Piedra, papel o tijera
-                    En el nivel 3 podemos seguir desarrollando nuestro juego de piedra, papel o tijera. Pero ahora, si quieres imprimir texto, debes usar comillas.
+                    En el nivel 3 podemos seguir desarrollando nuestro juego de piedra, papel o tijera. Pero ahora, si ({if}) quieres imprimir texto, debes usar comillas.
                     ¿Eres capaz de imprimir un texto adicional? Reemplaza el guión bajo con el código correcto.
                 example_code: |
                     ```
@@ -941,7 +941,7 @@ adventures:
             2:
                 story_text: |
                     ## Restaurante
-                    En nivel 2 puede expandir su restaurante mediante variables. En nivel 1 Hedy solo podía hacer eco de la orden una vez y solo recordar lo último que se ordenó.
+                    En nivel 2 puede expandir su restaurante mediante variables. En nivel 1 Hedy solo podía hacer eco ({echo}) de la orden una vez y solo recordar lo último que se ordenó.
                     ¡Ahora puedes usar variables y Hedy puede recordar tanto la comida como las bebidas!
 
                 start_code: "# pon tu código aquí"
@@ -951,7 +951,7 @@ adventures:
             11:
                 story_text: |
                     ## Restaurante
-                    Podemos usar `{for} i {in} {range} 1 {to} 5` para imprimir los pedidos de varios clientes de manera ordenada.
+                    Podemos usar `{for} i {in} {range} 1 {to} 5` para imprimir (`{print}`) los pedidos de varios clientes de manera ordenada.
 
                     ## Desafío
                     ¿Puedes con otro desafío de indetación?¡Haz que el código funcione agregando la cantidad correcta de indetación antes de cada línea!
@@ -975,7 +975,7 @@ adventures:
                     ¿Puedes rellenar los espacios? Hedy necesitar repetir esta pregunta tantas veces como personas halla. Entonces si hay 5 personas, Hedy necesita hacer la pregunta 5 veces.
 
                 start_code: "# pon tú código aquí"
-                example_code: "```\n{print} '¡Bienvenido al restaurante Hedy's!'\npersonas {is} {ask} '¿Cuántas personas se unen a nosotros hoy?'\n{repeat} _ {times} comida = {ask} '¿Qué te gustaría comer?'\n{print} '¡Gracias por su orden! ¡Ya casi está lista!'\n```\n"
+                example_code: "```\n{print} '¡Bienvenido al restaurante Hedys!'\npersonas = {ask} '¿Cuántas personas se unen a nosotros hoy?'\n{repeat} _ {times} comida = {ask} '¿Qué te gustaría comer?'\n{print} '¡Gracias por su orden! ¡Ya casi está lista!'\n```\n"
             6:
                 story_text: |
                     ## Restaurante
@@ -1051,7 +1051,7 @@ adventures:
                     Entonces probablemente sepas que realmente no pueden predecir tu futuro, ¡pero sigue siendo divertido jugar!
 
                     ¡En los próximos niveles puedes aprender a crear tu propia máquina de adivinación!
-                    En nivel 1 puedes comenzar fácil dejando que Hedy se presente como adivina y dejes que se haga eco de las respuestas de los jugadores.
+                    En nivel 1 puedes comenzar fácil dejando que Hedy se presente como adivina y dejes que se haga eco ({echo}) de las respuestas de los jugadores.
                     Así:
 
                 start_code: "# pon tu código aquí"
@@ -1064,7 +1064,7 @@ adventures:
                     En este nivel puedes utilizar una variable y el comando `{at} {random}` para dejar que Hedy escoja una pregunta. Mira este código, por ejemplo:
                 start_code: "# pon tu código aquí"
                 example_code: "\nEn este ejemplo, el jugador puede hacerle {ask} (preguntar) a Hedy una pregunta de sí-no y Hedy elegirá una respuesta aleatoria para ti.\n```\n{print} ¡Soy Hedy la adivina!\npregunta {is} {ask} ¿Qué quieres saber?\n{print} Esto es lo que quieres saber: pregunta\nrespuesta {is} yes, no, maybe\n{print} Mi bola de cristal dice...\n{sleep} 2\n{print} respuesta {at} {random}\n```\n"
-                story_text_2: "## Desafío\nAhora Hedy solo puede responder sí, no o quizás. ¿Puedes darle más opciones a Hedy, como 'definitivamente' o 'pregunta de nuevo'.\n"
+                story_text_2: "## Desafío\nAhora Hedy solo puede responder si, no o quizás. ¿Puedes darle más opciones a Hedy, como 'definitivamente' o 'pregunta de nuevo'.\n"
             12:
                 story_text: "## El adivino\nEn este nivel puedes hacer tus adivinaciones con varias palabras. ¿Puedes agregar distintas adivinaciones a la lista?\n"
                 example_code: "```\nadivinaciones = 'vas a resbalarte con una cascara de banana', _\n{print} 'Voy a revisar mi bola de cristal para ver el futuro.'\n{print} 'Veo... Veo...'\n{sleep}\n{print} adivinaciones {at} {random}\n```\n"
@@ -1200,9 +1200,9 @@ adventures:
     haunted:
         levels:
             14:
-                story_text: "## Haunted House\nIn this level you can use the `<` and `>` symbol to introduce lives to your game.\n"
+                story_text: "## Casa encantada\nEn este nivel puedes usar los símbolos `<` y `>`  para introducir vidas a tu juego.\n"
                 example_code: "```\n{print} 'Escape from the haunted house'\nlives = 3\ndoors = 1, 2, 3\nmonsters = 'the wicked witch', 'a zombie', 'a sleeping 3 headed dog'\n{for} i {in} {range} 1 {to} 10\n    {if} lives > 0\n        good_door = doors {at} {random}\n        monster = monsters {at} {random}\n        chosen_door = {ask} 'Which door do you choose?'\n        {if} good_door == chosen_door\n            {print} 'You have chosen the correct door'\n        {else}\n            {print} 'You see...' monster\n            {if} monster == 'a sleeping 3 headed dog'\n                {print} 'Pffieuw.... Its asleep'\n            {else}\n                {print} 'You lose one life'\n                lives = lives -1\n    {else}\n        {print} 'GAME OVER'\n```\n"
-                start_code: '# place your code here'
+                start_code: '# pon tu código aquí'
             4:
                 story_text: "## La Casa Embrujada\nEn este nivel vas a aprender como usar comillas en tus juegos.\n¿Puedes hacer que tu Casa Encantada resistente al nivel 4?\n"
                 start_code: '# pon tú código aquí'
@@ -1210,7 +1210,7 @@ adventures:
             16:
                 story_text: "## Haunted House Game\nThis haunted house game uses the connection between the lists you can use in this level.\nFor example: all the properties that belong to the zombie are first in all the lists, witch second and vampire third.\nCheck out the code!\n"
                 example_code: "```\nnumbers = [1, 2, 3]\ni = numbers[random]\nhint = ['growling', 'a cackling laugh', 'fluttering batwings']\nmonsters = ['zombie', 'witch', 'vampire']\nbad_fate = ['Your brain is eaten', 'You are forever cursed', 'You are bitten']\ngood_fate = ['You throw the ham. The zombie is distracted and starts etaing it.', 'You set the curtains on fire. The witch flees out of fear for the fire', 'The vampire hates garlic and flees']\nweapons = ['ham', 'lighter', 'garlic']\n{print} 'You are standing in front of an old mension'\n{print} 'Something is not right here'\n{print} 'You hear ' hint[i]\n{print} 'You are going to explore it'\n{print} 'You enter the kitchen en see a lighter, a raw ham and a garlic.'\nyour_weapon = {ask} 'What do you bring with you?'\n{print} 'With your ' your_weapon ' you enter the living room'\n{print} 'There you find a ' monsters[i]\nneeded_weapon = weapons[i]\n{if} your_weapon == needed_weapon\n    {print} 'You use your ' your_weapon\n    {print} good_fate[i]\n    {print} 'YOU WIN!'\n{else}\n    {print} 'You have chosen the wrong weapon...'\n    {print} bad_fate[i]\n    {print} 'GAME OVER'\n```\n"
-                start_code: '# place your code here'
+                start_code: '# pon tu código aquí'
             1:
                 story_text: "## Casa embrujada\nEn esta aventura vas a a empezar a hacer un juego en el cual necesitas escapar de una casa embrujada escogiendo la puerta correcta.\nSi escoges la puerta correcta vas a sobrevivir, pero sino un terrible monstruo podría...\n\nEn el nivel 1 vamos a empezar nuestro juego de la casa embrujada haciendo una historia de terror y preguntando al jugador que ven en la casa embrujada.\n"
                 example_code: "```\n{print} ¿Cómo llegué aquí?\n{print} Recuerdo que mi amigo me estaba diciendo que fuéramos a la mansión...\n{print} y de repente todo se volvio negro.\n{print} ¿Pero como termine en el suelo...?\n{print} ¡Mi cabeza me duele como si me hubieran golpeado con un bate de baseball!\n{print} ¿Qué es ese sonido?\n{print} Oh no! ¡Siento que no estoy solo en esta casa!\n{print} ¡Necesito salir de aquí!\n{print} Hay 3 puertas...\n{ask} ¿Cual puerta debería escoger?\n{echo} Escogo la puerta\n{print} ...?\n```\n"
@@ -1223,17 +1223,17 @@ adventures:
                 story_text_2: "## Desafío\nEn el ejemplo de arriba los monstruos están predeterminados. De forma que cada vez que ejecutas tu código, el resultado es el mismo.\n¿Puedes agregar un comando `{ask}` para hacer que interactiva la casa embrujada y dejar que los jugadores escojan que monstruos se encuentran?\n"
                 example_code_2: "```\nmonstruo_1 {is} _\nmonstruo_2 {is} _\nmonstruo_3 {is} _\n{print} Entras en la casa embrujada\n{print} De repende ves un monstruo_1\n{print} ¡Vas al otro cuarto, pero ves que un monstruo_2 te está esperando allí!\n{print} ¡Oh no! Ve rápido a la cocina.\n{print} ¡Pero tan pronto entras allí el monstruo_3 te ataca!\n```\n"
             11:
-                story_text: "## Haunted House\nIn this level we've changed the repeat command and we've added a line to our haunted house that tells the player in which room they are.\n"
-                example_code: "```\n{print} 'Escape from the Haunted House!'\nplayer {is} alive\ndoors = 1, 2, 3\nmonsters = zombie, vampire, giant spider\n{for} i {in} {range} 1 {to} 3\n    {if} player {is} alive\n        correct_door = doors {at} {random}\n        {print} 'Room ' i\n        {print} 'There are 3 doors in front of you...'\n        chosendoor = {ask} 'Which door do you choose?'\n        {if} chosendoor {is} correct_door\n            {print} 'No monsters here!'\n        {else}\n            {print} 'You are eaten by a ' monsters {at} {random}\n            player = dead\n    {else}\n        {print} 'GAME OVER'\n{if} player {is} alive\n    {print} 'Great! You survived!'\n```\n"
-                start_code: "{print} 'Escape from the haunted house!'"
+                story_text: "## Casa encantada\nEn este nivel hemos cambiado el comando repetir (repeat) y hemos añadido una línea a nuestra casa encantada que le dice al jugador en qué habitación están.\n\n## Desafío\nTermina el programa con la línea correcta de código. Ten en cuenta que el jugador debe sobrevivir 3 habitaciones antes de ganar.\n"
+                example_code: "```\n{print} '¡Escapa de la casa encantada!'\njugador {is} vivo\npuertas = 1, 2, 3\nmonstruos = zombie, vampiro, araña gigante\n_\n    {if} jugador {is} vivo\n        puerta_correcta = puertas {at} {random}\n        {print} 'Habitación ' i\n        {print} 'Hay 3 puertas frente a ti...'\n        puerta_elegida = {ask} '¿Qué puerta eliges?'\n        {if} puerta_elegida {is} puerta_correcta\n            {print} '¡No hay monstrous aquí!'\n        {else}\n            {print} 'The ha comido un ' monstruos {at} {random}\n            jugador = muerto\n    {else}\n        {print} '¡FIN DEL JUEGO!'\n{if} jugador {is} vivo\n    {print} '¡Genial! ¡Has sobrevivido!'\n```\n"
+                start_code: "{print} '¡Escapa de la casa encantada!'"
             9:
-                story_text: "## Haunted House\nIn this level you can use nesting, which allows you to make the haunted house even more interactive!\n"
+                story_text: "## Casa encantada\nEn este nivel, puedes utilizar anidados (nesting), ¡que te permitirán hacer la casa encantada aún mas interactiva!\n\n## Desafío\nAhora es muy difícil ganar, ¿Puedes hacer que sea más fácil ganar?\nPor ejemplo, ¿puedes hacer que solo haya 1 puerta incorrecta y 2 correctas?\n"
                 example_code: "```\n{print} 'Escape from the Haunted House!'\nplayer = alive\ndoors = 1, 2, 3\nmonsters = zombie, vampire, giant spider\n{repeat} 3 {times}\n    {if} player {is} alive\n        correct_door {is} doors {at} {random}\n        {print} 'There are 3 doors in front of you...'\n        chosen_door = {ask} 'Which door do you choose?'\n        {if} chosen_door {is} correct_door\n            {print} 'No monsters here!'\n        {else}\n            {print} 'You are eaten by a ' monsters {at} {random}\n            player = dead\n    {else}\n        {print} 'GAME OVER'\n{if} player {is} alive\n    {print} 'Great! You survived!'\n```\n## Challenge\nNow it's very hard to win this game, can you make it easier to win?\nFor example by only having 1 wrong door and 2 correct doors instead of 1 correct door en 2 wrong ones?\n"
-                start_code: "{print} 'Escape from the haunted house!'"
+                start_code: "{print} '¡Escapa de la casa encantada!'"
             5:
-                story_text: "## Haunted House\nUp until this level the haunted house game always asked the player to choose a door, but as you might have noticed, they didn't really have to answer correctly.\nIf the player filled in a completely random answer, the game would still work and the player might even win (despite not picking a door).\nIn this level you can only win the game by picking the same door Hedy picked randomly.\n"
-                example_code: "```\n{print} 'Escape from the haunted house!'\n{print} 'There are 3 doors in front of you...'\ndoors {is} 1, 2, 3\nmonsters {is} werewolf, mummy, vampire, zombie\nchosen_door {is} {ask} 'Which door do you choose?'\n{print} 'You chose door...' chosen_door\n{sleep}\ncorrect_door {is} doors {at} {random}\n{if} chosen_door {is} correct_door {print} 'Great! Youve escaped!'\n{else} {print} 'Oh no! You are being eaten by a...' monsters {at} {random}\n```\n"
-                start_code: '# place your code here'
+                story_text: "## Casa encantada\nHasta este nivel el juego de la casa encantada siempre preguntaba al jugador que eligiera una puerta, pero como puede que te hayas dado cuenta los jugadores no necesitaban responder correctamente.\nSi el jugador respondía algo aleatorio, el juego funcionaría igual y el jugador ¡puede que hasta ganase! (pese a que no eligiese una puerta).\nEn este nivel, solo podrás ganar el juego si eliges la puerta que Hedy eligió de forma aleatoria.\n"
+                example_code: "```\n{print} '¡Escapa de la casa encantada!'\n{print} 'Hay tres puertas frente a ti...'\npuertas {is} 1, 2, 3\nmonstruos {is} hombre lobo, momia, vampiro, zombie\npuerta_elegida {is} {ask} '¿Qué puerta eliges?'\n{print} 'Has elegido la puerta...' puerta_elegida\n{sleep}\npuerta_correcta {is} puertas {at} {random}\n_ _ _ _ {print} '¡Genial! ¡Has escapado!'\n{else} {print} '¡O no! The ha comido un...' monstruos {at} {random}\n```\n"
+                start_code: '# pon tu código aquí'
             3:
                 story_text: "## Juego de la Casa Embrujada\nEn los niveles anteriores hiciste la introducción al juego de la casa embrujada, pero como te habrás dado cuenta, la historia siempre termina en un final tenebroso.\nEn este nivel puedes hacer que tu historia sea más interactiva cambiando el resultado del juego; ¡algunas veces te comerán, otras veces escaparás!\n¡Deja que Hedy decida aleatoriamente!\n"
                 example_code: "```\n{print} ¡Escape de la casa embrujada\n{print} Hay 3 puertas...\nelección {is} {ask} ¿Qué puerta quieres escoger?\n{print} Escogiste la puerta ... elección\nmonstruos {is} un zombie, un vampiro, NADA PUDISTE ESCAPAR\n{print} Ves...\n{sleep}\n{print} monstruos {at} {random}\n```\n"
@@ -1247,16 +1247,16 @@ adventures:
     piggybank:
         levels:
             12:
-                story_text: "## Piggy Bank\nIn this adventure you learn how to make a digital piggy bank, to calculate how much money you have and how long you need to save up to buy what you want!\n"
-                example_code: "```\n{print} 'The digital piggy bank'\nwish = {ask} 'What would you like to buy?'\nprice = {ask} 'How much does that cost?'\nsaved = {ask} 'How much money have you saved already?'\nallowance = {ask} 'How much pocket money do you get per week?'\nto_save = price - saved\nweeks = to_save / allowance\n{print} 'You can buy a ' wish ' in ' weeks ' weeks.'\n"
-                start_code: '# place your code here'
+                story_text: "## Cerdito Hucha\nEn esta aventura aprenderás como hacer una hucha virtual.\nTermina el código que calculará cuanto dinero tienes y cuando tiempo debes ahorrar para comprar lo que quieres\n"
+                example_code: "```\n{print} '¡La hucha virtual!'\ndeseo = {ask} '¿Qué quieres comprar?'\nprecio = {ask} '¿Cuánto cuesta?'\nahorrado = {ask} '¿Cuánto dinero tienes ahorrado?'\npaga = {ask} '¿Cuánto dinero obtienes por semana?'\na_ahorrar = precio - ahorrado\nsemanas = a_ahorrar / paga\n{print} 'Podrás comprar un ' _ ' en ' _ ' semanas.'\n```\n"
+                start_code: '# pon tu código aquí'
             14:
                 example_code: "```\nmoney = {ask} 'How much money have you saved?'\nwish = {ask} 'How much money do you need?'\nallowance = {ask} 'How much pocket money do you get each week?'\nto_save = wish - money\nweeks = to_save / allowance\n{if} wish > money\n    {print} 'You need to save up some more!'\n    {print} 'Youll need ' weeks ' more weeks.'\n{else}\n    {print} 'Great! You have enough'\n    {print} 'Lets go shopping!'\n```\n"
-                story_text: "## Piggybank\nIn this level you can let Hedy tell you {if} you have saved up enough money!\n"
+                story_text: "## Hucha virtual\n¡En este nivel puedes hacer que Hedy te diga si ({if}) has ahorrado suficiente dinero!\n"
                 start_code: '# place your code here'
-        name: Piggy Bank
-        description: Count your pocketmoney!
-        default_save_name: Piggy Bank
+        name: Hucha de cerdito
+        description: ¡Cuenta tu dinero!
+        default_save_name: Cerdito hucha
     quizmaster:
         name: Quizmaster
         description: Make your own quiz!
