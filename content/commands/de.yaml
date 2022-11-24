@@ -220,7 +220,7 @@
             {print} 'Mindestens eine Antwort ist falsch!'
 -   name: "{or}"
     explanation: |-
-        Mindestens eine der beiden Aussagen links und rechts vom `or`, muss richtig sein. Wenn beide richtig sind, ist es auch in Ordnung.
+        Mindestens einer der beiden Teile muss korrekt sein. Wenn beide korrekt sind, ist es auch in Ordnung.
     demo_code: |-
         antwort1 = {ask} 'Was ergibt 3+2?'
         antwort2 = {ask} 'Was ergibt 2+2?'
@@ -231,18 +231,18 @@
 14:
 -   name: "Kleiner"
     explanation: |-
-        Wir verwenden das `<`, um zu prüfen, ob die erste Zahl kleiner als die zweite Zahl ist. Wenn wir zum Beispiel sehen wollen, ob eine Variable kleiner als 15 ist, verwenden wir `variable < 15`.
+        Wir verwenden das `<`, um zu prüfen, ob die erste Zahl kleiner als die zweite Zahl ist.
     demo_code: |-
-        alter = ask 'Wie alt bist du?'
-        if alter < 13
-            print 'Du bist jünger als ich!'
+        alter = {ask} 'Wie alt bist du?'
+        {if} alter < 13
+            {print} 'Du bist jünger als ich!'
 -   name: "Größer"
     explanation: |-
-        Wir verwenden das `>`, um zu prüfen, ob die erste Zahl größer als die zweite Zahl ist. Wenn wir zum Beispiel sehen wollen, ob eine Variable größer als 15 ist, verwenden wir `variable > 15`.
+        Wir verwenden das `>`, um zu prüfen, ob die erste Zahl größer als die zweite Zahl ist.
     demo_code: |-
-        alter = ask 'Wie alt bist du?'
-        if alter > 13
-            print 'Du bist älter als ich!'
+        alter = {ask} 'Wie alt bist du?'
+        {if} alter > 13
+            {print} 'Du bist älter als ich!'
 -   name: Gleich
     explanation: Wir verwenden `==` um zu überprüfen ob zwei Dinge gleich sind.
     demo_code: "Antwort = {ask} 'Was ergibt 5 * 5?'\n{if} Antwort == 25\n    {print} 'Das stimmt!'"
@@ -256,39 +256,39 @@
     explanation: Wir verwenden `>=` um zu überprüfen ob die erste Zahl größer oder gleich der zweiten Zahl ist.
     demo_code: "Alter = {ask} 'Wie alt bist du?'\n{if} Alter >= 14\n    {print} 'Du bist älter als ich!'"
 15:
--   name: "while"
+-   name: "{while}"
     explanation: "Wir können die `{while}`-Schleife mit ungleich verwenden."
     demo_code: |-
         antwort = 0
-        while antwort != 25
-            antwort = ask 'Wieviel ist 5 mal 5?'
-            print 'Das ist die richtge Antwort!'
--   name: "while mit Ungleichungen"
+        {while} antwort != 25
+            antwort = {ask} 'Wieviel ist 5 mal 5?'
+        {print} 'Eine richtige Antwort wurde eingegeben!'
+-   name: "{while} mit Ungleichungen"
     explanation: |-
         Wir können die `{while}`-Schleife auch mit `<` und `>` verwenden.
     demo_code: |-
         zähler = 1
-        while zähler < 3
-            print 'Wir machen dies noch ' 3 - zähler ' mal.'
+        {while} zähler < 3
+            {print} 'Wir machen dies noch ' 3 - zähler ' mal'
             zähler = zähler + 1
-        print 'Wir sind fertig!'
+        {print} 'Wir sind fertig'
 16:
 -   explanation: |-
         Listen mit eckigen Klammern.
     demo_code: |-
-        früchte = ['Apfel', 'Banane', 'Kirsche']
-        print früchte
+        obst = ['Apfel', 'Banane', 'Kirsche']
+        {print} obst
     name: Eckige Klammern
 -   name: "Nimm ein Element aus einer Liste"
     explanation: |-
-        Um ein Element aus einer Liste zu erhalten, verwenden wir `[Zahl]`. Mit `früchte[1]` erhalten wir also die erste Frucht aus der Liste!
+        Um ein Element aus einer Liste zu erhalten, verwenden wir [zahl]. Mit obst[1] erhalten wir also das erste Obst aus der Liste!
     demo_code: |-
-        früchte = ['Apfel', 'Banane', 'Kirsche']
-        erste_frucht = früchte[1]
-        print erste_frucht
+        obst = ['Apfel', 'Banane', 'Kirsche']
+        erstesobst = obst[1]
+        {print} erstesobst
 -   name: "Nimm ein zufälliges Element aus einer Liste"
     explanation: |-
-        Um ein zufälliges Element aus einer Liste zu erhalten, verwenden wir `[random]`. Mit früchte[random] erhalten wir also eine zufällige Frucht aus der Liste!
+        Um ein zufälliges Element aus einer Liste zu erhalten, verwenden wir [random]. Mit obst[random] erhalten wir also ein zufälliges Obst aus der Liste!
     demo_code: |-
         obst = ['Banane', 'Apfel', 'Kirsche']
         zufälliges_obst = obst[{random}]
