@@ -498,11 +498,11 @@ adventures:
                 example_code: "```\nchoices {is} 1, 2, 3, 4, 5, earthworm\n{print} _ you threw _\n{print} _ _ _ <- here you have to program the choice\n```\n"
                 start_code: "{print} 'What will the die indicate this time?'"
             3:
-                story_text: "## Dice\nIn this level we can choose from a list. With that we can let the computer choose one side of the die.\nTake a look at the games you have in your closet at home.\nAre there games with a (special) die? You can also copy it with this code.\nFor example, the dice of the game Earthworms with the numbers 1 to 5 and an earthworm on it.\n\n![Die of earthworms with 1 to 5 and an earthworm on it](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)\n"
-                example_code: "```\nchoices {is} 1, 2, 3, 4, 5, earthworm\n{print} choices {at} {random}\n```\n"
+                story_text: "## حجر النرد\nيمكننا الإختار من قائمة في هذا المستوى. ومع ذلك سيتولى الكومبيوتر الإختيار هذه المرة من بين أوجه حجر النرد.\nألقِ نظرة على الألعاب الموجودة في خزانتك في المنزل.\nهل يوجد ألعاب ذات نرد (خاص)؟ عندما تجد شيئاً مماثل يمكنك نسخه ايضاً في هذا الكود.\nعلى سبيل المثال، هناك لعبة تسمى نرد دودة الأرض تتكون من ٦ اوجه مرقمة من ١ إلى ٥ والأخيرة عليها دودة الأرض.\n\n![Die of earthworms with 1 to 5 and an earthworm on it](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)\n"
+                example_code: "```\nإختيارات {is} ١، ٢، ٣، ٤، ٥، دودة الأرض\n{print} إختيارات {at} {random}\n```\n"
                 start_code: '{print} What will the die indicate this time?'
-                example_code_2: "```\nchoices {is} _\n```\n"
-                story_text_2: "## Challenge\nThe dice in the example above are dice for a specific game. Can you make normal dice?\nOr other special dice from a different game?\n"
+                example_code_2: "```\nالخيارات {is} _\n```\n"
+                story_text_2: "## تحدي\nالنرد المستخدم فالمثال هو حجر نرد مخصص للعبة معينة. هل يمكنك تغييره للحجر النرد الأصلي؟\n أو جعله حجر نرد خاص بلعبة أخرى تعرفها أو من إختراعك؟\n"
             15:
                 story_text: "## Dice\nIn this game you have to throw 6 in as little tries as possible.\n"
                 example_code: "```\noptions = 1, 2, 3, 4, 5, 6\n{print} 'Throw 6 as fast as you can!'\nthrown = 0\ntries = 0\n{while} thrown != 6\n    thrown = options {at} {random}\n    {print} 'You threw ' thrown\n    tries = tries + 1\n{print} 'Yes! You have thrown 6 in ' tries ' tries.'\n```\n"
@@ -521,11 +521,11 @@ adventures:
                 start_code: "{print} 'Welcome to your own rock scissors paper!'"
                 example_code: "```\nchoices {is} rock, paper, scissors\n{print} _ The computer chose: _ _ {at} _\n```\n"
             3:
-                start_code: '{print} Welcome to your own rock scissors paper!'
-                story_text: "## Rock, paper, scissors\n\nIn this level we can enter lists and choose things from them.\nYou first make a list with `{is}`. Then you can let the computer choose something from the list with `{at} {random}`.\nFor example, you can let the computer pick from rock, paper and scissors.\n"
-                example_code: "\n```\nchoices {is} rock, paper, scissors\n{print} choices {at} {random}\n```\n"
-                story_text_2: "## Challenge\nNow you only have one player, so can you add a second player?\nYou can even use variables to name player 1 and player 2.\n"
-                example_code_2: "```\nchoices {is} rock, paper, scissors\n{print} player 1 chooses... choices {at} {random}\n{print} player 2 _\n```\n"
+                start_code: '{print} مرحبًا في لعبة حجر ورقة مقص الخاصة بك!'
+                story_text: "## حجر، ورقة، مقص\n\nفي هذا المستوى يمكننا إستخدام القوائم و الإختار منها.\nفي البداية اصنع قائمة بإستخدام `{is}`. بعد ذلك يمكنك ترك الكومبيوتر يختار شيئًا من هذه القائمة بإستخدام `{at} {random}`.\nعلى سبيل المثال، ستترك الكومبيوتر يختار من بين حجر، ورقة، أو مقص.\n"
+                example_code: "```\nالإختيارات {is} حجر، ورقة، مقص\n{print} الإختيارات {at} {random}\n```\n"
+                story_text_2: "## تحدي\nهناك لاعب واحد فقط يمكنه اللعب حاليًا، هل يمكنك إضافة لاعب أخر؟\nيمكنك ايضًا إستخدام المتغيرات لتسمية لاعب ١ و لاعب٢.\n"
+                example_code_2: "```\nالإختيارات {is} حجر، ورقة، مقص\n{print} لاعب ١ يختار... الإختيارات {at} {random}\n{print} لاعب٢ _\n```\n"
             2:
                 story_text: "## حجر، ورقة، مقص\nفي هذا المستوى يمكنك التدرب على استخدام المتغيرات، حتى تتمكن من صنع لعبة حجر ورقة مقص باستخدامها في المستوى القادم.\n"
                 example_code: "```\n_  {is}{ask} حجر, ورقة, مقص؟\n{print}اخترت _\n```\n"
@@ -757,11 +757,11 @@ adventures:
                 example_code: "```\n{print} _Escape from the haunted house!_\n{print} _There are 3 doors in front of you..._\nchoice {is} {ask} _Which door do you choose?_\n{print} _You picked door ..._ choice\nmonsters {is} a zombie, a vampire, NOTHING YOUVE ESCAPED\n{print} _You see..._\n{sleep}\n{print} monsters {at} {random}\n ```\n"
             3:
                 story_text: "## لعبة بيت الأشباح\nفي المستويات السابقة استطعت كتابة مقدمة للعبة بيت الأشباح الخاصة بك، ولكن ربما لاحظت أن القصة غالباً ما ستنتهي نهاية مروعة.\nستتمكن في هذا المستوى من جعل قصتك أكثر تفاعلاً من خلال تغيير بعض مخرجات اللعبة، في بعض الأحيان ستأكلك الأشباح ولن تستطيع الخروج من البيت وفي أحيانٍ أخرى ستنجو بالهرب!\nدع هيدي تقرر ذلك عشوائيًا!\n"
-                example_code: "```\n{print} Escape from the haunted house!\n{print} There are 3 doors in front of you...\nchoice {is} {ask} Which door do you choose?\n{print} You picked door ... choice\nmonsters {is} a zombie, a vampire, NOTHING YOUVE ESCAPED\n{print} You see...\n{sleep}\n{print} monsters {at} {random}\n```\n\n## Challenge\nThis story is pretty straight {forward}, maybe you can spook it up a bit by adding a more exciting story.\nAlso you have very limited outcomes right now, there are only 3 options of what's behind the doors. Maybe you can think of more monsters to add to the list!\n\n## Change the game into a tv gameshow!\nLastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!\nCan you do it?\n"
-                start_code: '# place your code here'
+                example_code: "```\n{print} الهروب من بيت الأشباح!\n{print} هناك ٣ أبواب أمامك...\nالإختيار {is} {ask} أيأً من الأبواب الثلاثة تختار؟\n{print} إخترت الباب رقم ... الإختيار\nالشبح {is} زومبي، مصاص دماء، لا شيء لقد استطعت الهرب\n{print} انت ترى...\n{sleep}\n{print} الشبح {at} {random}\n```\n"
+                start_code: '# اكتب الكود الخاص بك هنا'
                 story_text_2: "## تحدي\nهذه القصة تعتبر إلى حدٍ ما مباشرة، ربما يمكنك إضافة بعض الأحداث المرعبة لتجعلها أكثر إثارة.\nوكذلك الآن هذا المثال يعطيك نتائج محدودة للغاية، هناك فقط ٣ خيارات حول ما المُخبأ وراء كل باب. ربما يمكنك التفكير في المزيد من الوحوش و إضافتها للقائمة!\n"
-                story_text_3: "## Change the game into a tv gameshow!\nLastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!\nCan you do it?\n"
-                example_code_3: "```\n{print} The big gameshow!\n{print} There are 3 suitcases in front of you...\n{print} One of them contains _\n_\n```\n"
+                story_text_3: "## تغيير اللعبة إلى برنامج تلفزيوني للألعاب!\nوأخيراً، نود أن نتحداك لتغيير هذه اللعبة إلى برنامج للألعاب (كالذي يعرض على التلفاز) حيث تختار باب أو حقيبة من بين الأخرين و تكون تحتوي على مبلغ كبير!\nهل يمكنك فعلها؟\n"
+                example_code_3: "```\n{print} برنامجنا الضخم للألعاب!\n{print} هناك ٣ حقائب امامك...\n{print} فقط واحدة منهم تحتوي على _\n_\n```\n"
         name: بيت الأشباح
     piggybank:
         name: البنك الإلكتروني
