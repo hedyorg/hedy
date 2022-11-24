@@ -808,7 +808,7 @@ class TestsLevel8(HedyTester):
               pygame.quit()
               break
             if event.type == pygame.KEYDOWN: 
-              if event.key == pygame.K_x:
+              if event.unicode == 'x':
                 print(f'it is a letter key')
                 break""")
         self.multi_level_tester(code=code, expected=expected, max_level=11)
@@ -829,10 +829,10 @@ class TestsLevel8(HedyTester):
               pygame.quit()
               break
             if event.type == pygame.KEYDOWN: 
-              if event.key == pygame.K_x:
+              if event.unicode == 'x':
                 print(f'first key')
                 break
-              if event.key == pygame.K_y:
+              if event.unicode == 'y':
                 print(f'second key')
                 break""")
 
@@ -852,7 +852,7 @@ class TestsLevel8(HedyTester):
               pygame.quit()
               break
             if event.type == pygame.KEYDOWN: 
-              if event.key == pygame.K_1:
+              if event.unicode == '1':
                 print(f'it is a number key')
                 break""")
 
@@ -878,7 +878,7 @@ class TestsLevel8(HedyTester):
               pygame.quit()
               break
             if event.type == pygame.KEYDOWN: 
-              if event.key == pygame.K_x:
+              if event.unicode == 'x':
                 print(f'x is pressed!')
                 break    
               else:
@@ -905,7 +905,7 @@ class TestsLevel8(HedyTester):
             pygame.quit()
             break
           if event.type == pygame.KEYDOWN: 
-            if event.key == pygame.K_x:
+            if event.unicode == 'x':
               {HedyTester.indent(
                 HedyTester.turtle_color_command_transpiled('red'), 
                 14, True)
@@ -935,7 +935,7 @@ class TestsLevel8(HedyTester):
             pygame.quit()
             break
           if event.type == pygame.KEYDOWN: 
-            if event.key == pygame.K_x:
+            if event.unicode == 'x':
               {HedyTester.indent(
                 HedyTester.forward_transpiled(25, self.level), 
                 14, True)
