@@ -1517,16 +1517,12 @@ adventures:
                     it works te same as with the other statements, see the example!
                 example_code: |
                     ```
-                    if x is {pressed}
+                    {if} x is {pressed}
                         {print} 'Only the cool kids press the x key.'
-                    else
+                    {else}
                         {print} 'The adventurous kids press something else.'
                     ```
-                start_code: |
-                    if x is {pressed}
-                        {print} 'Only the cool kids press the x key.'
-                    else
-                        {print} 'The adventurous kids press something else.'
+                start_code: "# place your code here"
             9:
                 story_text: |
                     Now that you know how to nest multiple statements, you can also do this with {pressed}!
