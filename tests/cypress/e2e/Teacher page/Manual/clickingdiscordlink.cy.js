@@ -8,12 +8,5 @@ describe('Is able to see teacher page', () => {
     goToPage('/for-teachers/manual');
     cy.get(':nth-child(21) > a').should('have.attr', 'href').and('include', 'https://discord.gg/8yY7dEme9r');
 
-
-//    cy.location().then((loc) => {
-//      expect(loc.pathname).to.equal('/for-teachers');
-//    });
-
-
-
   })
 })

@@ -9,11 +9,5 @@ describe('Is able to see teacher page', () => {
     cy.get('#section-1 > :nth-child(3) > a').should('have.attr', 'href').and('include', 'https://www.youtube.com/watch?v=EdqT313rM40&t=2s');
 
 
-//    cy.location().then((loc) => {
-//      expect(loc.pathname).to.equal('/for-teachers');
-//    });
-
-
-
   })
 })

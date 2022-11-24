@@ -9,12 +9,5 @@ describe('Is able to see teacher page', () => {
     cy.get('#button-3').should('be.visible');
     cy.get('#button-3').click();
 
-
-//    cy.location().then((loc) => {
-//      expect(loc.pathname).to.equal('/for-teachers');
-//    });
-
-
-
   })
 })
