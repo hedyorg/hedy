@@ -1495,7 +1495,7 @@ adventures:
                     Run the example code and try pressing the x button on your keyboard.
                 example_code: |
                     ```
-                    if x is {pressed} {print} 'you pressed the x key!'
+                    if x is {pressed} {print} 'You are so cool! You pressed the x key!'
                     ```
                 story_text_2: |
                     ## If Else Pressed
@@ -1504,13 +1504,45 @@ adventures:
 
                 example_code_2: |
                     ```
-                    if y is {pressed} {print} 'you pressed the y key!'
-                    else {print} 'you did not press the y key.'
+                    if y is {pressed} {print} 'Amazing! You pressed the y key!'
+                    else {print} 'Oh no! You did not press the y key.'
                     ```
 
+                start_code: "# place your code here"
+            8:
+                story_text: |
+                    ## Press It!
+                    Now that you need to use indents for the {if} and {else} statements,
+                    you will also have to indent code when using {pressed}! Don't worry,
+                    it works te same as with the other statements, see the example!
+                example_code: |
+                    ```
+                    if x is {pressed}
+                        {print} 'Only the cool kids press the x key.'
+                    else
+                        {print} 'The adventurous kids press something else.'
+                    ```
                 start_code: |
-                    if x is {pressed} {print} 'pressed'
+                    if x is {pressed}
+                        {print} 'Only the cool kids press the x key.'
+                    else
+                        {print} 'The adventurous kids press something else.'
+            9:
+                story_text: |
+                    Now that you know how to nest multiple statements, you can also do this with {pressed}!
+                    By nesting a pressed in a {repeat} loop, you can repeatedly press buttons and make something happen.
+                    Try it!
+                example_code: |
+                    ```
+                    total = 1
+                    {repeat} 5 times
+                        {if} x is {pressed}
+                            {print} total
+                            {print} 'keep pressing!'
+                            total = total + 1
+                    ```
 
+                start_code: "# place your code here"
     rock:
         name: "Rock, paper, scissors"
         description: "Make your own rock, paper, scissors game"
