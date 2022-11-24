@@ -1253,7 +1253,7 @@ adventures:
                     ## Dishwashing
                     Do you always disagree at home about who should wash the dishes or change the litter box today?
                     Then you can let the computer choose very fairly. You can program that in this level!
-                    You first make a list of the members of your family. Then choose '{at} {random}' from the list.
+                    You first make a list of the members of your family. Then choose `{at} {random}` from the list.
                 example_code: |
                     ```
                     people {is} mom, dad, Emma, Sophie
@@ -2170,7 +2170,7 @@ adventures:
                     {while} more == 'yes'
                         order = {ask} 'What would you like to order?'
                         {print} order
-                        more = {ask} 'Would you like to order anything {else}?'
+                        more = {ask} 'Would you like to order anything else?'
                     {print} 'Thank you!'
                     ```
                 start_code: "# place your code here"
@@ -2221,7 +2221,7 @@ adventures:
                     ```
                 story_text_2: |
                     ## Challenge
-                    Now, Hedy can only answer yes, no or maybe. Can you give Hedy more answer options, like 'definitely' or '{ask} again'.
+                    Now, Hedy can only answer yes, no or maybe. Can you give Hedy more answer options, like 'definitely' or 'ask again'.
                 start_code: "# place your code here"
             4:
                 story_text: |
@@ -3064,7 +3064,7 @@ adventures:
             15:
                 story_text: |
                     ## Tic Tac Toe
-                    In this level you can improve your Tic Tac Toe game with the {while} loop. With this loop you can combine the `{if} game != 'over'` and the `{for} i {in} {range} 1 to 9` into one simple line.
+                    In this level you can improve your Tic Tac Toe game with the {while} loop. With this loop you can combine the `{if} game != 'over'` and the `{for} i {in} {range} 1 {to} 9` into one simple line.
                     Check it out:
                 example_code: |
                     ```
@@ -3225,7 +3225,7 @@ adventures:
                     Congratulations! You've reached the end of level 1. Hopefully you've already made some awesome codes, but Hedy has a lot more to discover. 
 
                     In the first level you might've notice that the `{echo}` command can only save one bit of information at a time. 
-                    For example in the restaurant adventure, you could {echo} what the costumer wanted to eat, or what they wanted to drink, but not both in one sentence.
+                    For example in the restaurant adventure, you could echo what the costumer wanted to eat, or what they wanted to drink, but not both in one sentence.
                 example_code: |
                     ```
                     {print} Welcome at Hedy's
@@ -3280,7 +3280,7 @@ adventures:
             5:
                 story_text: |
                     ## What's next?
-                    Now you've reached the end of this level, so you have learned `{ask}` and `{if}`. For example you can {ask} guests what they would like to eat.
+                    Now you've reached the end of this level, so you have learned `{ask}` and `{if}`. For example you can ask guests what they would like to eat.
                     What you can't yet do though, is calculate the price for everyone's dinner.
 
                     The next level makes it possible to use addition, subtraction and multiplication in your programs. This way you can calculate the prices in your restaurant, but you could also add a secret code to give your friends and family a discount.
@@ -3318,7 +3318,7 @@ adventures:
             7:
                 story_text: |
                     ## What's next?
-                    Now you've learned how to `{repeat}` one single line of code. This comes in handy, but it's not always enough. Sometimes you want to `{repeat}` multiple lines at once.
+                    Now you've learned how to repeat one single line of code. This comes in handy, but it's not always enough. Sometimes you want to repeat multiple lines at once.
                     The next level allows you to group a couple of lines of code, and repeat that little group of lines all at once!
                 example_code: |
                     ```
@@ -3414,9 +3414,9 @@ adventures:
             13:
                 story_text: |
                     ## What's next?
-                    With the program below you can calulate {if} you've passed a subject at school (so, a grade of six or higher).
-                    You can see this code is extremely inefficient, du to the very long code in line 5.
-                    All the different grades from 1 to 5 had to be programmed seperately. Lucky for you, in the next level you'll learn how to do this without this extremely long code!
+                    With the program below you can calculate if you've passed a subject at school (so, a grade of six or higher).
+                    You can see this code is extremely inefficient, due to the very long code in line 5.
+                    All the different grades from 1 to 5 had to be programmed separately. Lucky for you, in the next level you'll learn how to do this without this extremely long code!
                 example_code: |
                     ```
                     first_grade = {ask} 'What score did you get on your first test?'
@@ -3433,7 +3433,7 @@ adventures:
                 story_text: |
                     ## What's next?
                     In this game below a code has been made to make sure the player can play on as long as he/she wants...
-                    But the code is ineffective and way too long. Also, what {if} the player wants to play 101 games instead of 100?
+                    But the code is ineffective and way too long. Also, what if the player wants to play 101 games instead of 100?
                     You can't play to infinity?
                     In the next level you will learn a command that makes all of this a lot easier!
                 example_code: |
@@ -3451,7 +3451,7 @@ adventures:
             15:
                 story_text: |
                     ## What's next?
-                    In the next level we will grow a bit more towards real Python code. thon code. You will also learn how to match two lists together.
+                    In the next level we will grow a bit more towards real Python code. You will also learn how to match two lists together.
                     This way you can program a code in which the correct animal is matched to the right sound.
                     Because the two codes below... Are obviously nonsense!
                 example_code: |
