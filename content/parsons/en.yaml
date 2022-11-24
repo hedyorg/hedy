@@ -27,7 +27,7 @@ levels:
             code_lines:
                 A: "{print} It is time for an evening of Netflix"
                 B: "film {is} Sonic the Hedgehog 2"
-                C: "{print} We're going to film"
+                C: "{print} We're going to watch"
                 D: "{print} Have lot of fun!"
         2:
             story: |
@@ -58,7 +58,7 @@ levels:
                 A: "food {is} pizza, icecream, salad, sandwich"
                 B: "toppings {is} chocolate, cheese, tuna, sprinkles"
                 C: "{print} Your random meal for today is..."
-                D: "sleep 2"
+                D: "{sleep} 2"
                 E: "{print} food {at} {random} with toppings {at} {random}"
     4:
         1:
@@ -85,11 +85,11 @@ levels:
                 Make a program that checks if your favourite movie is already in the list of the computer.
                 If so, print that you have great taste, otherwise add the movie to the list.
             code_lines:
-                A: "favoriete_movies {is} Batman, Spiderman, The Avengers, Jurassic Park"
+                A: "favorite_movies {is} Batman, Spiderman, The Avengers, Jurassic Park"
                 B: "movie {is} {ask} 'What is your favourite movie?'"
-                C: "{if} movie {in} favoriete_movies {print} 'You have great taste!'"
+                C: "{if} movie {in} favorite_movies {print} 'You have great taste!'"
                 D: "{else} {print} 'Such a shame that your favourite movie is not in the list, we will add it right away!'"
-                E: "{add} movie {to_list} favoriete_movies"
+                E: "{add} movie {to_list} favorite_movies"
         2:
             story: |
                 Create a maths game.
@@ -145,7 +145,7 @@ levels:
         1:
             story: |
                 You and four other friends are playing Pokémon Go! Create a program that decides in which team each of you will play.
-                Either red, yellow or blue! Take a little pauze after announcing a team.
+                Either red, yellow or blue! Take a little pause after announcing a team.
             code_lines:
                 A: "teams = red, yellow, blue"
                 B: "{print} 'Red, Yellow or Blue?'"

@@ -474,25 +474,25 @@ class TestsLevel17(HedyTester):
             pygame.quit()
             break
           if event.type == pygame.KEYDOWN: 
-            if event.key == pygame.K_w:
+            if event.unicode == 'w':
               {HedyTester.indent(
                 HedyTester.forward_transpiled(25.0, self.level), 
                 14, True)
               }
               break
-            if event.key == pygame.K_a:
+            if event.unicode == 'a':
               {HedyTester.indent(
                 HedyTester.turn_transpiled(-90.0, self.level), 
                 14, True)
               }
               break
-            if event.key == pygame.K_d:
+            if event.unicode == 'd':
               {HedyTester.indent(
                 HedyTester.turn_transpiled(90.0, self.level), 
                 14, True)
               }
               break
-            if event.key == pygame.K_s:
+            if event.unicode == 's':
               {HedyTester.indent(
                 HedyTester.turn_transpiled(180.0, self.level), 
                 14, True)
@@ -518,7 +518,7 @@ class TestsLevel17(HedyTester):
           pygame.quit()
           break
         if event.type == pygame.KEYDOWN: 
-          if event.key == pygame.K_x:
+          if event.unicode == 'x':
             {HedyTester.indent(
               HedyTester.turtle_color_command_transpiled('red'), 
               12, True)
@@ -547,7 +547,7 @@ class TestsLevel17(HedyTester):
           pygame.quit()
           break
         if event.type == pygame.KEYDOWN: 
-          if event.key == pygame.K_x:
+          if event.unicode == 'x':
             {HedyTester.indent(
               HedyTester.forward_transpiled(25.0, self.level), 
               12, True)

@@ -1,5 +1,3 @@
-
-
 export const logs = {
 
   initialize: function() {
