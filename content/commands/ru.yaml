@@ -1,11 +1,11 @@
 16:
 -   name: квадратные скобки
     explanation: Списки в квадратных скобках.
-    demo_code: "фрукты = ['яблоко', 'банан', 'вишня'].\n{print} фрукты"
+    demo_code: "фрукты = ['яблоко', 'банан', 'вишня']\n{print} фрукты"
 -   name: Получить элемент из списка
     explanation: Чтобы получить элемент из списка, мы используем [number], поэтому fruit[1] означает, получить первый фрукт из списка!
-    demo_code: "fruit = ['банан', 'яблоко', 'вишня'].\nfirstfruit = fruit[1]\n{print} firstfruit"
--   demo_code: "fruit = ['банан', 'яблоко', 'вишня'].\nrandom_fruit = fruit[{random}]\n{print} random_fruit"
+    demo_code: "fruit = ['банан', 'яблоко', 'вишня']\nfirstfruit = fruit[1]\n{print} firstfruit"
+-   demo_code: "fruit = ['банан', 'яблоко', 'вишня']\nrandom_fruit = fruit[{random}]\n{print} random_fruit"
     name: Получение случайного элемента из списка
     explanation: Чтобы получить случайный элемент из списка, мы используем [random], поэтому fruit[random] означает получить случайный фрукт из списка!
 17:
@@ -17,7 +17,7 @@
     demo_code: "{for} i {in} {range} 1 {to} 12:\n    {print} i\n{print} 'Готов или нет, но я иду!'"
 -   name: '{if}'
     explanation: Мы должны сделать то же самое со всеми нашими заявлениями на сайте `{if}`.
-    demo_code: "color = {ask} 'Какой ваш любимый цвет?'\n{if} цвет == 'зеленый':\n    {print} 'Ваш любимый цвет - зеленый'\n{else}:\n    {print} 'Ваш любимый цвет не зеленый'"
+    demo_code: "цвет = {ask} 'Какой ваш любимый цвет?'\n{if} цвет == 'зеленый':\n    {print} 'Ваш любимый цвет - зеленый'\n{else}:\n    {print} 'Ваш любимый цвет не зеленый'"
 18:
 -   name: '{print}'
     explanation: После `{print}` необходимо использовать круглые скобки.
@@ -26,11 +26,11 @@
     explanation: После `{range}` необходимо использовать круглые скобки.
     demo_code: "{for} i {in} {range} (1,10):\n   {print}('Hello, times ', i)"
 -   name: '{print} с var'
-    demo_code: "name = 'Hedy'\n{print}('Меня зовут ', имя)"
+    demo_code: "имя = 'Hedy'\n{print}('Меня зовут ', имя)"
     explanation: При использовании `{print}` необходимо использовать круглые скобки и запятые, если вы печатаете больше элементов.
 -   name: спросить что-нибудь с {input}
     explanation: Чтобы спросить что-то, используйте `{input}` вместо `{ask}`.
-    demo_code: "name = {input}('Как вас зовут?')\n{print}('Так вас зовут ', имя)"
+    demo_code: "имя = {input}('Как вас зовут?')\n{print}('Так вас зовут ', имя)"
 1:
 -   name: '{print}'
     explanation: 'Напечатать что-нибудь с `{print}`.'
@@ -162,24 +162,24 @@
     demo_code: "имя = 'Hedy the Robot'\n{print} 'Hello ' имя\n"
 -   name: котировки после сравнения {if}
     explanation: Текст в кавычках после `{if}`.
-    demo_code: "name = {ask} 'Кто вы?'\n{if} имя = 'Хеди'\n    {print} 'Hi there!'\n"
+    demo_code: "имя = {ask} 'Кто вы?'\n{if} имя = 'Хеди'\n    {print} 'Hi there!'\n"
 -   name: кавычки в списке
     explanation: Список с кавычками.
     demo_code: "супергерои = 'Железный человек', 'Бэтмен', 'Супермен'\n{print} супергерои {at} {random}\n"
 13:
 -   name: '{and}'
     explanation: Две части должны быть правильными.
-    demo_code: "answer1 = {ask} 'What is 3+2?'\nanswer2 = {ask} 'What is 2+2?'\n{if} ответ1 {is} 5 {and} ответ2 {is} 4\n    {print} 'Оба ответа верны!'\n{else}\n    {print} 'По крайней мере, один ответ неверен!'"
+    demo_code: "ответ1 = {ask} 'What is 3+2?'\nответ2 = {ask} 'What is 2+2?'\n{if} ответ1 {is} 5 {and} ответ2 {is} 4\n    {print} 'Оба ответа верны!'\n{else}\n    {print} 'По крайней мере, один ответ неверен!'"
 -   name: '{or}'
     explanation: Как минимум 1 из двух частей должна быть правильной. Если обе части верны, это тоже хорошо.
-    demo_code: "answer1 = {ask} 'What is 3+2?'\nanswer2 = {ask} 'What is 2+2?'\n{if} ответ1 {is} 5 {or} ответ2 {is} 4\n    {print} 'Хотя бы один ответ правильный!\n{else}\n    {print} 'Оба ответа неверны!'"
+    demo_code: "ответ1 = {ask} 'What is 3+2?'\nответ2 = {ask} 'What is 2+2?'\n{if} ответ1 {is} 5 {or} ответ2 {is} 4\n    {print} 'Хотя бы один ответ правильный!'\n{else}\n    {print} 'Оба ответа неверны!'"
 15:
 -   name: '{while}'
     explanation: Мы можем использовать цикл `{while}` с параметром not equal.
     demo_code: "ответ = 0\n{while} ответ != 25\n    ответ = {ask} 'Сколько будет 5 раз по 5?'\n{print} 'Был дан правильный ответ'"
 -   name: Меньше {while}
     explanation: 'Мы также можем использовать цикл `{while}` с `<` и `>`.'
-    demo_code: "счёт = 1\n{while} счёт < 3\n    {print} 'Мы делаем это ' 3 - count ' большее количество раз'\n    count = count + 1\n{print} 'Мы закончили'"
+    demo_code: "счёт = 1\n{while} счёт < 3\n    {print} 'Мы делаем это ' 3 - count ' большее количество раз'\n    счёт = счёт + 1\n{print} 'Мы закончили'"
 14:
 -   name: Меньше
     explanation: Мы используем `<`, чтобы проверить, меньше ли первое число второго.
