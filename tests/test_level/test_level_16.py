@@ -1,8 +1,10 @@
+import textwrap
+
+from parameterized import parameterized
+
 import exceptions
 import hedy
-import textwrap
 from tests.Tester import HedyTester
-from parameterized import parameterized
 
 
 class TestsLevel16(HedyTester):
@@ -25,7 +27,7 @@ class TestsLevel16(HedyTester):
             expected=expected,
             extra_check_function=check_in_list
         )
-    
+
     def test_create_empty_list(self):
         code = "friends = []"
         expected = "friends = []"
@@ -35,7 +37,7 @@ class TestsLevel16(HedyTester):
             max_level=17,
             expected=expected
         )
-    
+
     def test_create_with_single_item(self):
         code = "friends = ['Ashli']"
         expected = "friends = ['Ashli']"
@@ -48,18 +50,18 @@ class TestsLevel16(HedyTester):
             expected=expected,
             extra_check_function=check_in_list
         )
-    
+
     def test_add_to_empty_list(self):
         code = textwrap.dedent("""\
                 friends = []
                 add 'Ashli' to friends
                 print friends[1]""")
-        
+
         expected = textwrap.dedent("""\
                 friends = []
                 friends.append('Ashli')
                 print(f'''{friends[1-1]}''')""")
-        
+
         check_in_list = (lambda x: HedyTester.run_code(x) == 'Ashli')
 
         self.multi_level_tester(
@@ -107,12 +109,12 @@ class TestsLevel16(HedyTester):
             expected=expected,
             extra_check_function=check_in_list
         )
-    
+
     def test_list_access_space(self):
         code = textwrap.dedent("""\
             szamok1 = [ '1' , '2' , '3' , '4' , '5' ]
             print szamok1 [random]""")
-        
+
         expected = textwrap.dedent("""\
             szamok1 = ['1', '2', '3', '4', '5']
             print(f'''{random.choice(szamok1)}''')""")
@@ -233,7 +235,7 @@ class TestsLevel16(HedyTester):
         )
 
     @parameterized.expand(HedyTester.comparison_commands)
-    def test_access_smaller_check(self,comparison):
+    def test_access_smaller_check(self, comparison):
         code = textwrap.dedent(f"""\
             balletje = 0
             bingo_getallen is [11, 17, 21]
@@ -298,7 +300,7 @@ class TestsLevel16(HedyTester):
             expected=expected
         )
 
-    #add/remove tests
+    # add/remove tests
     def test_add_to_list(self):
         code = textwrap.dedent("""\
         color is ask 'what is your favorite color? '
@@ -320,9 +322,9 @@ class TestsLevel16(HedyTester):
         print(f'''{random.choice(colors)}''')""")
 
         self.multi_level_tester(
-          code=code,
-          max_level=17,
-          expected=expected
+            code=code,
+            max_level=17,
+            expected=expected
         )
 
     def test_add_list_access_to_list(self):
@@ -338,7 +340,7 @@ class TestsLevel16(HedyTester):
         colors2.append(colors1[2-1])
         print(f'''{colors2[3-1]}''')""")
 
-        check_in_list = (lambda x: HedyTester.run_code(x) == 'red') # check that 'red' was correctly appended 
+        check_in_list = (lambda x: HedyTester.run_code(x) == 'red')  # check that 'red' was correctly appended 
 
         self.multi_level_tester(
           code=code,
@@ -371,9 +373,9 @@ class TestsLevel16(HedyTester):
         print(f'''{random.choice(colors)}''')""")
 
         self.multi_level_tester(
-          code=code,
-          max_level=17,
-          expected=expected
+            code=code,
+            max_level=17,
+            expected=expected
         )
 
     def test_remove_list_access_from_list(self):
@@ -392,7 +394,7 @@ class TestsLevel16(HedyTester):
           pass
         print(f'''{colors2[1-1]}''')""")
 
-        check_removed_from_list = (lambda x: HedyTester.run_code(x) == 'purple') # check that 'red' was removed
+        check_removed_from_list = (lambda x: HedyTester.run_code(x) == 'purple')  # check that 'red' was removed
 
         self.multi_level_tester(
           code=code,
@@ -472,7 +474,7 @@ class TestsLevel16(HedyTester):
 
         expected = HedyTester.dedent("""\
         colors = ['red', 'green', 'blue']""",
-        HedyTester.turtle_color_command_transpiled('{random.choice(colors)}'))
+                                     HedyTester.turtle_color_command_transpiled('{random.choice(colors)}'))
 
         self.multi_level_tester(
             code=code,
@@ -500,7 +502,7 @@ class TestsLevel16(HedyTester):
 
         expected = HedyTester.dedent("""\
         directions = [10, 100, 360]""",
-        HedyTester.forward_transpiled('random.choice(directions)', self.level))
+                                     HedyTester.forward_transpiled('random.choice(directions)', self.level))
 
         self.multi_level_tester(
             code=code,
@@ -528,7 +530,7 @@ class TestsLevel16(HedyTester):
 
         expected = HedyTester.dedent("""\
         directions = [10, 100, 360]""",
-        HedyTester.turn_transpiled('random.choice(directions)', self.level))
+                                     HedyTester.turn_transpiled('random.choice(directions)', self.level))
 
         self.multi_level_tester(
             code=code,
@@ -556,7 +558,7 @@ class TestsLevel16(HedyTester):
             pygame_end = True
             pygame.quit()
             break
-          if event.type == pygame.KEYDOWN: 
+          if event.type == pygame.KEYDOWN:
             if event.unicode == 'x':
               for dier in lijstje:
                 print(f'''dier''')

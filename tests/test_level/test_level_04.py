@@ -1,8 +1,10 @@
+import textwrap
+
+from parameterized import parameterized
+
 import hedy
 from hedy import Command
-import textwrap
 from tests.Tester import HedyTester
-from parameterized import parameterized
 
 
 class TestsLevel4(HedyTester):
@@ -188,7 +190,6 @@ class TestsLevel4(HedyTester):
             max_level=17,
             exception=hedy.exceptions.UnquotedTextException,
         )
-
 
     def test_print_similar_var_gives_error(self):
         # continuing: is this unquoted? or did we forget an initialization of a variable?
