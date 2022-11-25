@@ -1,12 +1,12 @@
-import threading
-import os
 import json
-import queue
-import requests
 import logging
+import os
+import queue
+import threading
 
-from . import log_queue
-from . import aws_helpers
+import requests
+
+from . import aws_helpers, log_queue
 
 logger = logging.getLogger(__name__)
 
@@ -22,12 +22,11 @@ class JsonBinLogger:
     @staticmethod
     def from_env_vars():
         """Create a new JsonBinLogger using standard environment variables."""
-        key = os.getenv('JSONBIN_SECRET_KEY')
-        collection = os.getenv('JSONBIN_COLLECTION_ID')
+        key = os.getenv("JSONBIN_SECRET_KEY")
+        collection = os.getenv("JSONBIN_COLLECTION_ID")
 
         if key is None or collection is None:
-            logger.warning('Set JSONBIN_SECRET_KEY and JSONBIN_COLLECTION_ID '
-                           'if you want to log (disabled for now)')
+            logger.warning("Set JSONBIN_SECRET_KEY and JSONBIN_COLLECTION_ID " "if you want to log (disabled for now)")
             return NullJsonbinLogger()
         return JsonBinLogger(key, collection)
 
@@ -36,7 +35,7 @@ class JsonBinLogger:
         self.collection_id = collection_id
         self.queue = queue.Queue()
 
-        self.thread = threading.Thread(target=self._run, daemon=True, name='jsonbin_logger')
+        self.thread = threading.Thread(target=self._run, daemon=True, name="jsonbin_logger")
         self.thread.start()
 
     def log(self, obj):
@@ -46,45 +45,49 @@ class JsonBinLogger:
         # Let's start off by printing warnings. If this turns out to be an
         # issue in the future, we might start dropping work.
         if self.queue.qsize() > 20:
-            logger.warning(f'jsonbin logging queue is backing up, '
-                           f'contains {self.queue.qsize()} items')
+            logger.warning(f"jsonbin logging queue is backing up, " f"contains {self.queue.qsize()} items")
 
     def _run(self):
-        logger.debug('jsonbin logger started')
+        logger.debug("jsonbin logger started")
         while True:
             obj = self.queue.get()
 
             try:
-                response = requests.post('https://api.jsonbin.io/v3/b', json=obj, headers={
-                    'Content-Type': 'application/json',
-                    'X-Master-Key': self.secret_key,
-                    'X-Collection-Id': self.collection_id,
-                })
+                response = requests.post(
+                    "https://api.jsonbin.io/v3/b",
+                    json=obj,
+                    headers={
+                        "Content-Type": "application/json",
+                        "X-Master-Key": self.secret_key,
+                        "X-Collection-Id": self.collection_id,
+                    },
+                )
 
                 # Try to read the response as JSON
                 try:
                     resp = json.loads(response.text)
 
                     if response.status_code == 200:
-                        logger.info('Posted to jsonbin')
+                        logger.info("Posted to jsonbin")
                     else:
-                        logger.warning(
-                            f'Posting to jsonbin failed: {response.status_code} {resp["message"]}')
+                        logger.warning(f'Posting to jsonbin failed: {response.status_code} {resp["message"]}')
                 except Exception:
                     # Not JSON or no success field
-                    logger.exception(f'Posting to jsonbin failed: {response.text}')
+                    logger.exception(f"Posting to jsonbin failed: {response.text}")
             except Exception:
-                logger.exception('Error posting to jsonbin.')
+                logger.exception("Error posting to jsonbin.")
 
 
-class NullJsonbinLogger():
+class NullJsonbinLogger:
     """A jsonbin logger that doesn't actually do anything."""
+
     def log(self, obj):
         pass
 
 
-class MultiParseLogger():
+class MultiParseLogger:
     """A logger that forwards to other loggers."""
+
     def __init__(self, *loggers):
         self.loggers = loggers
 
@@ -93,13 +96,14 @@ class MultiParseLogger():
             _logger.log(obj)
 
 
-class S3ParseLogger():
+class S3ParseLogger:
     """A logger that logs to S3.
 
     - Well then why is it in a file called 'jsonbin.py'?
 
     - Legacy, young grasshopper. Legacy.
     """
+
     @staticmethod
     def from_env_vars():
         transmitter = aws_helpers.s3_parselog_transmitter_from_env()
@@ -113,7 +117,7 @@ class S3ParseLogger():
         S3_LOG_QUEUE.add(obj)
 
 
-S3_LOG_QUEUE = log_queue.LogQueue('parse', batch_window_s=300)
+S3_LOG_QUEUE = log_queue.LogQueue("parse", batch_window_s=300)
 S3_LOG_QUEUE.try_load_emergency_saves()
 
 
