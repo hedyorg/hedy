@@ -277,36 +277,39 @@ adventures:
                 example_code: "```\n{print} 'The prince kept calling for help'\n{repeat} 5 {times} {print} 'Help!'\n{print} 'Why is nobody helping me?'\n```\n"
             3:
                 story_text: |
-                    ## Story
-                    In level 3 you can make your story more fun. You can use randomness for any monster, animal or other obstacle, like this:
+                    ## قصة
+                    في المستوى الثالث يمكنك جعل القصة أكثر متعة. يمكنك إستخدام الطريقة العشوائية لأي وحش أو حيوان أو حتى عائق، مثل:
 
                 example_code: |
                     ```
-                    animals {is} 🦔, 🐿, 🦉, 🦇
-                    {print} He now hears the sound of an animals {at} {random}
+                    الحيوانات هي 🦔, 🐿, 🦉, 🦇
+                    {print} هو الآن يسمع صوت حيوان {at} {random}
                     ```
                 story_text_2: |
-                    The command `{add}` can also come in handy in your story. For example
+                    الأمر `{add}` يمكن أن يكون مفيداً أيضاً في قصتك.
 
-                example_code_2: |4
-
-                    {print} He hears a sound
-                    animals {is} 🐿, 🦔, 🦇, 🦉
-                    animal {is} {ask} What do you think it is?
-                    {add} animal {to_list} animals
-                    {print} it was a animals {at} {random}
+                example_code_2: |
+                    ```
+                    {print} إنه يسمع صوت
+                    الحيوانات هي 🐿, 🦔, 🦇, 🦉
+                    الحيوان {is} {ask} برأيك ماذا ممكن أن يكون؟
+                    {add} الحيوان {to_list} الحيوانات
+                    {print} إنه حيوان {at} {random}
                     ```
                 story_text_3: |
-                    This is an example of the `{remove}` command in your story
+                    هذا مثال لإستخدام الأمر `{remove}` في قصتك
+
+                    ## تحدي
+                    هل يمكنك إستخدام الأوامر الثلاثة الجُدد `{at} {random}` ، `{add} {to}` ، `{remove} {from}` في قصتك؟
                 example_code_3: |
                     ```
-                    {print} His backpack got way too heavy.
-                    {print} Inside were a bottle of water, a flashlight and a brick.
-                    bag {is} water, flashlight, brick
-                    dump {is} {ask} Which item should he dump?
-                    {remove} dump {from} bag
+                    {print} حقيبة الظهر خاصته أصبحت ثقيلة للغاية.
+                    {print} كان داخلها زجاجة ماء و مصباح و طوبة.
+                    حقيبة {is} ماء، مصباح، طوبة
+                    النفاية هي {ask} ما الذي عليه التخلص منه؟
+                    {remove} النفاية {from} حقيبة
                     ```
-                start_code: "{print} Your story"
+                start_code: "{print} قصتك"
             13:
                 story_text: "## Story\nBy using the `{and}` and `{or}` commands, you can shorten your stories. For example, check out the dragon story.\n"
                 example_code: "```\nsword = 'lost'\ngame = 'on'\n{print} 'Our hero is walking through the forest'\n{print} 'The path splits two ways'\n{for} i {in} {range} 0 {to} 2\n    {if} game {is} 'on'\n        path = {ask} 'Which path should she choose?'\n        {if} path {is} 'left' {and} sword {is} 'found'\n            {print} 'Our hero comes across a dragon!'\n            {print} 'Luckily our hero has a sword to defeat the beast!'\n            game = 'over'\n        {if} path {is} 'left' {and} sword {is} 'lost'\n            {print} 'Our hero finds a dragon, but she doesnt have any weapons!'\n            {print} 'Our hero is beaten by the dragon...'\n            {print} 'Try again'\n            game = 'over'\n        {if} path {is} 'right' {and} sword {is} 'found'\n            {print} 'You have already found the sword. There is nothing left here.'\n            {print} 'She walks back'\n        {if} path {is} 'right' {and} sword {is} 'lost'\n            {print} 'Our hero finds a sword'\n            {print} 'This could come in very handy'\n            sword = 'found'\n```\n"
@@ -628,11 +631,11 @@ adventures:
                 story_text: "## Restaurant\nIn this level you can use nesting to make your restaurant more realistic and more fun!\nFor example you would {ask} for sauce {if} somebody orders fries, but you wouldn't {if} someone orders pizza!\nCheck out the example, and try this at your own virtual restaurant!\n"
                 start_code: '# place your code here'
             3:
-                story_text: "## Random Restaurant\nHaving trouble to decide what you wanna have for dinner? You can let Hedy choose for you!\nSimply add lists of your favorite (or least favorite) meals and Hedy can randomly choose your dinner.\nYou can also have a bit of fun, by letting Hedy choose the price for your dinner as well! What will you get?\n"
-                example_code: "```\n{print} Welcome to Hedy's Random Restaurant!\n{print} The only restaurant that will randomly choose your meal and its price for you!\nstarters {is} salad, soup, carpaccio\nmains {is} pizza, brussels sprouts, spaghetti\ndesserts {is} brownies, ice cream, french cheeses\ndrinks {is} cola, beer, water\nprices {is} 1 dollar, 10 dollars, 100 dollars\n{print} You will start with: starters {at} {random}\n{print} Then we'll serve: mains {at} {random}\n{print} And as dessert: desserts {at} {random}\n{print} You will get a drinks {at} {random} to drink\n{print} That will be: prices {at} {random}\n{print} Thank you and enjoy your meal!\n```\n"
-                story_text_2: "## Allergies\nDoes your costumer have any allergies or do they dislike certain dishes? Then you can use the `{remove}`command to remove it from your menu.\n"
-                example_code_2: "```\n{print} Mystery milkshake\nflavors {is} strawberry, chocolate, vanilla\nallergies {is} {ask} Are you allergic to any falvors?\n{remove} allergies {from} flavors\n{print} You get a flavors {at} {random} milkshake\n```\n"
-                start_code: '# place your code here'
+                story_text: "## إختيار مطعم عشوائياً\nهل تواجهة صعوبة في تحديد ماذا تريد على العشاء؟ دع هيدي تساعدك فالإختيار\nببساطة يمكنك إضافة قائمة بأفضل (أو أسوء) وجبات وهيدي سوف تختار لك وجبة عشاؤك عشوائياً \nويمكنك جعلها أكثر متعة، بأن تترك هيدي تختار لك أيضاً سعر عشاؤك! على ماذا ستحصل فالنهاية؟\n## تحدي\nهل يمكنك صنع نسختك الخاصة من أحداث إختيار مطعم عشوائياً؟\n"
+                example_code: "```\n{print} مرحباً في هيدي مطعم الإختيار العشوائي!\n{print} المطعم الوحيد الذي يمكنه إختيار لك وجبة وسعرها بطريقة عشوائية!\nالمقبلات {is} سلطة، حساء، كارباتشو\nالرئيسي {is} بيتزا، براعم بروكسل، معكرونة\nالتحلية {is} براوني، مثلجات، أجبان فرنسية\nالمشروبات {is} مشروب غازي، عصير، ماء\nالأسعار {is} ١ دولار، ١٠ دولارات، ١٠٠ دولار\n{print} ستبدأ بـ : المقبلات {at} {random}\n{print} وبعدها سنقدم لك: الرئيسي {at} {random}\n{print} وللتحلية: التحلية {at} {random}\n{print} وستحصل على المشروبات {at} {random} لشربه\n{print} سيكلفك هذا: الأسعار {at} {random}\n{print} شكراً لك، إستمتع بوجبتك!\n```\n"
+                story_text_2: "## حساسية\nهل يعاني زبونك من أي حساسية أو لا يحب نوع معين من الأطباق؟ إذاً يمكنك إستخدام الأمر `{remove}`لإزالة هذا النوع من قائمة طعامك.\n"
+                example_code_2: "```\n{print} مخفوق اللبن الغامض\nنكهات {is} فراولة، شوكولاتة، فانيليا\nحساسية هي {ask} هل لديك حساسية من أي نكهات؟\n_\n{print} ستحصل على نكهة {at} {random} نكهات\n```\n"
+                start_code: '# اكتب الكود الخاص بك هنا'
             15:
                 story_text: "## Restaurant\nWith the `{while}` you can make sure your costumers can keep adding orders until they are done.\n"
                 example_code: "```\n{print} 'Welcome at McHedy'\nmore = 'yes'\n{while} more == 'yes'\n    order = {ask} 'What would you like to order?'\n    {print} order\n    more = {ask} 'Would you like to order anything {else}?'\n{print} 'Thank you!'\n"
