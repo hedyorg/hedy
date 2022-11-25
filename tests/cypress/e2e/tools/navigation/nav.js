@@ -40,4 +40,9 @@ export function goToTeachersPage()
     return goToPage(Cypress.env('teachers_page'));
 }
 
+export function goToHedyPage()
+{
+    return goToPage(Cypress.env('hedy_page'));
+}
+
 export default {goToPage}
