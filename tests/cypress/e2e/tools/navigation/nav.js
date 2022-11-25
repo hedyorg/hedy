@@ -45,4 +45,9 @@ export function goToHedyPage()
     return goToPage(Cypress.env('hedy_page'));
 }
 
+export function goToHedyLevel2Page()
+{
+    return goToPage(Cypress.env('hedy_level2_page'));
+}
+
 export default {goToPage}
