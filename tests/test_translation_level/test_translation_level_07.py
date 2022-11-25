@@ -1,9 +1,10 @@
+import textwrap
+
+from parameterized import parameterized
+
 import hedy
 import hedy_translation
-import textwrap
-from parameterized import parameterized
 from tests.Tester import HedyTester
-
 
 # tests should be ordered as follows:
 # * Translation from English to Dutch
