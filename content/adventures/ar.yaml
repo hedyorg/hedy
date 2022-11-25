@@ -328,7 +328,7 @@ adventures:
                 start_code: '# place your code here'
             5:
                 example_code: "```\nاسمك {is} {ask} 'من يمشي في الغابة؟'\n{print} اسمك 'يمشي عبر الغابة'\n{print} اسمك 'واجه وحش'\nنهاية {is} {ask} ' هل تريد نهاية جيدة او سيئة؟'\n{if} نهاية {is} جيدة {print} اسمك 'يأخذ السيف ويهرب الوحش بسرعة'\n{else} {print} 'الوحش يأكل' اسمك.\n```\n"
-                start_code: "{print} 'Here your story will start!'"
+                start_code: "{print} 'هنا قصتك سوف تبدأ!'"
                 story_text: "## قصة\nفي هذا المستوى تستطيع برمجة نهايات مختلفة، والتي ستجعل قصتك اكثر متعة\n\nفكر في نهايتين لقصتك، على سبيل المثال:\n\n- الأميرة تمشي عبر الغابة\n- واجهت وحشًا\n\n- نهاية سعيدة: تأخذ سيفها والوحش يهرب بسرعة.\n- نهاية سيئة : الوحش يأكل الأميرة.\n\nيمكنك أيضًا التأكد من إمكانية إدخال الاسم مرة أخرى. هذا يعمل تمامًا كما في المستويات السابقة. يمكنك دمج ذلك مع \"{if}\" ، وبعد ذلك تكون قد أنشأت بالفعل برنامجًا كاملاً!\n"
             4:
                 story_text: "## Story\nYou may have noticed that there is still a problem in the previous levels. Did you try to print a sentence that contained the word name?\nYou can solve that in this level. You must use quotation marks for everything that you are going to print.\n"
@@ -516,9 +516,9 @@ adventures:
         description: اصنع لعبة حجر، ورقة، مقص الخاصة بك
         levels:
             5:
-                example_code: "```\noptions {is} rock, paper, scissors\ncomputer_choice {is} _\nchoice {is} {ask} What do you choose?\n{print} 'you chose ' _\n{print} 'computer chose ' _\n{if} _ {is} _ {print} 'tie!' {else} {print} 'no tie'\n```\n\nFill in the correct code on the blanks to see {if} it is a draw.\n"
+                example_code: "```\nالخيارات {is} حجر، ورقة، مقص\nاختيار_الحاسوب {is} _\nالاختيار {is} {ask}' ماذا اخترت'؟\n{print} 'انت اخترت ' _\n{print} 'الحاسوب اختار ' _\n{if} _ {is} _ {print} 'تعادل!' {else} {print} 'ليس تعادل'\n```\n\nاملأ الكود الصحيح في الفراغات لترى {if} إنه تعادل.\n"
                 start_code: "{print} 'Welcome to your own rock scissors paper!'"
-                story_text: "## Rock, paper, scissors\nIn this level we can determine who won.\nFor that you need the new `{if}` code.\n\nSave your choice with the name of choice and the choice of computer as computer choice.\nThen you can use `{if}` to see {if} they are the same or different.\nWill you finish the code?\n"
+                story_text: "## حجر، ورقة، مقص\nفي هذا المستوى يمكننا تحديد من فاز.\nلذلك انت بحاجة استخدام الأمر `{if}` .\n\nلذلك تحتاج إلى حفظ اختيارك الجديد بالاسم الذي تختاره واختيار الكمبيوتر كاختيار الكمبيوتر.\nثم يمكنك استخدام \"{if}\" لمعرفة {if} انهم متطابقين او مختلفين.\nهل ستنهي الكود؟\n"
             4:
                 story_text: "## Rock, paper, scissors\nIn this level we can further program rock, paper, scissors. But {if} you want to add text, you have to use quotation marks here too.\nDo you complete the code by entering the correct commands or characters on the underscores?\n"
                 start_code: "{print} 'Welcome to your own rock scissors paper!'"
@@ -797,7 +797,7 @@ adventures:
             5:
                 story_text: "## تعلم لغة جديدة\nاصنع برنامجك الخاص لتتدرب على مفردات بلغة جديدة.\n"
                 start_code: '# place your code here'
-                example_code: "```\n{print} 'Learn French!'\ncat {is} {ask} '\U0001F431'\n{if} cat {is} chat {print} 'Terrific!'\n{else} {print} 'No, cat is chat'\nfrog {is} {ask} '\U0001F438'\n{if} frog {is} grenouille {print} 'Super!'\n{else} {print} 'No, frog is grenouille'\n```\n"
+                example_code: "```\n{print} 'تعلم الفرنسية!'\nقطة {is} {ask} '\U0001F431'\n{if} قطة {is} محادثة {print} 'رائع!'\n{else} {print} 'لا، قطة هي المحادثة '\nالضفدع {is} {ask} '\U0001F438'\n{if} ضفدع {is} غرينويل {print} 'ممتاز!'\n{else} {print} 'لا, الضفدع هو غرينويل'\n```\n"
         name: لغة
         description: تدرب على كلمات من لغة جديدة
         default_save_name: لغة
