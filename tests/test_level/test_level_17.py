@@ -463,19 +463,19 @@ class TestsLevel17(HedyTester):
                 14, True)
               }
               break
-            if event.key == pygame.K_a:
+            if event.unicode == 'a':
               {HedyTester.indent(
                 HedyTester.turn_transpiled(-90.0, self.level),
                 14, True)
               }
               break
-            if event.key == pygame.K_d:
+            if event.unicode == 'd':
               {HedyTester.indent(
                 HedyTester.turn_transpiled(90.0, self.level),
                 14, True)
               }
               break
-            if event.key == pygame.K_s:
+            if event.unicode == 's':
               {HedyTester.indent(
                 HedyTester.turn_transpiled(180.0, self.level),
                 14, True)
