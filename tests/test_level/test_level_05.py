@@ -787,7 +787,7 @@ class TestsLevel5(HedyTester):
             if event.key == pygame.K_x:
               print(f'first key')
               break
-            if event.unicode == 'y':
+            if event.key == pygame.K_y:
               print(f'second key')
               break""")
 
@@ -1102,47 +1102,6 @@ class TestsLevel5(HedyTester):
             else:
               {HedyTester.indent(
                 HedyTester.turn_transpiled(90, self.level),
-                14, True)
-              }
-              break""")
-
-        self.multi_level_tester(
-            code=code,
-            expected=expected,
-            extra_check_function=self.is_turtle(),
-            max_level=7
-        )
-
-    def test_if_pressed_non_latin(self):
-        code = textwrap.dedent("""\
-        if ش is pressed forward 25
-        if ש is pressed forward 25
-        if ф is pressed forward 25""")
-
-        expected = HedyTester.dedent(f"""\
-        while not pygame_end:
-          pygame.display.update()
-          event = pygame.event.wait()
-          if event.type == pygame.QUIT:
-            pygame_end = True
-            pygame.quit()
-            break
-          if event.type == pygame.KEYDOWN: 
-            if event.unicode == 'ش':
-              {HedyTester.indent(
-                HedyTester.forward_transpiled(25, self.level), 
-                14, True)
-              }
-              break
-            if event.unicode == 'ש':
-              {HedyTester.indent(
-                HedyTester.forward_transpiled(25, self.level), 
-                14, True)
-              }
-              break
-            if event.unicode == 'ф':
-              {HedyTester.indent(
-                HedyTester.forward_transpiled(25, self.level), 
                 14, True)
               }
               break""")

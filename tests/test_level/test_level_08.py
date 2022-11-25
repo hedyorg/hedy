@@ -835,7 +835,7 @@ class TestsLevel8(HedyTester):
               if event.key == pygame.K_x:
                 print(f'first key')
                 break
-              if event.unicode == 'y':
+              if event.key == pygame.K_y:
                 print(f'second key')
                 break""")
 

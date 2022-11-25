@@ -1876,8 +1876,8 @@ class TestsLevel12(HedyTester):
               pygame_end = True
               pygame.quit()
               break
-            if event.type == pygame.KEYDOWN: 
-              if event.unicode == 'x':
+            if event.type == pygame.KEYDOWN:
+              if event.key == pygame.K_x:
                 print(f'''it is a letter key''')
                 break""")
         self.multi_level_tester(code=code, expected=expected, max_level=16)
@@ -1901,7 +1901,7 @@ class TestsLevel12(HedyTester):
               if event.key == pygame.K_x:
                 print(f'''first key''')
                 break
-              if event.unicode == 'y':
+              if event.key == pygame.K_y:
                 print(f'''second key''')
                 break""")
 
@@ -1959,19 +1959,19 @@ class TestsLevel12(HedyTester):
                   16, True)
                 }
                 break
-              if event.unicode == 'a':
+              if event.key == pygame.K_a:
                 {HedyTester.indent(
                   HedyTester.turn_transpiled(-90.0, self.level),
                   16, True)
                 }
                 break
-              if event.unicode == 'd':
+              if event.key == pygame.K_d:
                 {HedyTester.indent(
                   HedyTester.turn_transpiled(90.0, self.level),
                   16, True)
                 }
                 break
-              if event.unicode == 's':
+              if event.key == pygame.K_s:
                 {HedyTester.indent(
                   HedyTester.turn_transpiled(180.0, self.level),
                   16, True)
