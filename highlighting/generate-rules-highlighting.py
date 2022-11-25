@@ -1,8 +1,8 @@
 import json
 import os
-import re
-
+import regex as re
 import yaml
+
 from definition import TRANSLATE_WORDS
 # import rules from files
 from rules_automaton import rule_level1, rule_level2, rule_level3, rule_level4

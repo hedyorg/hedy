@@ -170,11 +170,11 @@ class TestsLevel15(HedyTester):
             pygame_end = True
             pygame.quit()
             break
-          if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_p:
+          if event.type == pygame.KEYDOWN: 
+            if event.unicode == 'p':
               print(f'''press''')
               break
-            if event.key == pygame.K_s:
+            if event.unicode == 's':
               stop = 1
               break
         time.sleep(0.1)

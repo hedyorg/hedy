@@ -167,6 +167,7 @@ $(document).on("click", function(event){
     var editor = turnIntoAceEditor($editor.get(0)!, $editor.data('readonly'));
     theGlobalEditor = editor;
     theGlobalEditor.setShowPrintMargin(false);
+    theGlobalEditor.renderer.setScrollMargin(0, 0, 0, 20)
     error.setEditor(editor);
     markers = new Markers(theGlobalEditor);
 

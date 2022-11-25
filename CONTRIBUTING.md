@@ -1,7 +1,7 @@
 Helping build Hedy
 ------------
 
-We would be grateful if you help make Hedy better! First you will want to follow the instructions below to run the code locally and configuring your manchine as explained below. After that, you want to look at these things:
+We would be grateful if you help make Hedy better! First you will want to follow the instructions below to run the code locally and configuring your machine as explained below. After that, you want to look at these things:
 
 **Open issues**
 
@@ -19,7 +19,7 @@ We also run a Discord channel to enable users and contributors to get in touch w
 
 **Discussions**
 
-The [Discussion board](https://github.com/Felienne/hedy/discussions) has ideas that are not yet detailed enough to be put into issue, like big new features or overhuals of the language or architecture. If you are interested in picking up such a large feature do [let us know](mailto:hello@hedy.org) and read the corresponding discussion to see what has alrady been considered.
+The [Discussion board](https://github.com/Felienne/hedy/discussions) has ideas that are not yet detailed enough to be put into issue, like big new features or overhauls of the language or architecture. If you are interested in picking up such a large feature do [let us know](mailto:hello@hedy.org) and read the corresponding discussion to see what has already been considered.
 
 **For newcomers: No PR without an issue and no "issue + PR"**
 
@@ -85,13 +85,13 @@ You will see the Cypress Launchpad in which you should choose to open the End2En
 
 ### Feeding the local database
 
-Hedy uses a local database in developing enviroments. This database is called `dev_database.py` and it's not tracked by Git. To feed this local database you can use the one that's been filled with data already, `data-for-testing.json`, it contains:
+Hedy uses a local database in developing environments. This database is called `dev_database.py` and it's not tracked by Git. To feed this local database you can use the one that's been filled with data already, `data-for-testing.json`, it contains:
 
 1. Five users, from user1 to user5.
 2. One teacher called teacher1.
 3. Five students, from student1 to student5.
 4. A class called CLASS1.
-5. Several saved programs, quiz attemps and some users have achievements.
+5. Several saved programs, quiz attempt and some users have achievements.
 
 The password to all of the accounts is 123456
 
@@ -249,11 +249,11 @@ docker run -it --rm -p 8080:8080 --mount type=bind,source="$(pwd)",target=/app h
 
 ## Testing Teacher facing features locally
 
-For some things like making classes you need a teacher's account and you might want to test that locally. To do so, you have to first make an account, this works offline without issues. Then you have to run Hedy with the environment variable ADMIN_USER set to your username, f.e. ADMIN_USER=Pete. It works a bit differently in each IDE, this is whta it looks like for PyCharm:
+For some things like making classes you need a teacher's account and you might want to test that locally. To do so, you have to first make an account, this works offline without issues. Then you have to run Hedy with the environment variable ADMIN_USER set to your username, f.e. ADMIN_USER=Pete. It works a bit differently in each IDE, this is what it looks like for PyCharm:
 
 ![image](https://user-images.githubusercontent.com/1003685/152981667-0ab1f273-c668-429d-8ac4-9dd554f9bab3.png)
 
-Once you have made yourself an admin, you can acess the admin interface on http://localhost:8080/admin. Go to the Users Overview, and on the users page, select the tickmark under Teacher to make your account a teacher:
+Once you have made yourself an admin, you can access the admin interface on http://localhost:8080/admin. Go to the Users Overview, and on the users page, select the tick-mark under Teacher to make your account a teacher:
 
 ![image](https://user-images.githubusercontent.com/1003685/152981987-64010e8b-a850-4178-aa51-42b0f6cd3aeb.png)
 
@@ -278,4 +278,3 @@ Likely you will have to first set your AWS credentials using:
 `aws configure`
 
 You can fetch these credentials here: https://console.aws.amazon.com/iam/home?#security_credential
-

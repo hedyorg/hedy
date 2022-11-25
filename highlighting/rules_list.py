@@ -18,20 +18,20 @@ def rule_all(level):
     list_rules = data_level["extra_rules"]
 
     # Rule for comments :
-    list_rules.append({'regex': '#.*$', 'token': 'comment', 'next': 'start'})
+    list_rules.append({'regex': '#.*$', 'token': 'comment', 'next': 'start', 'unicode': True})
 
     # Rule for quoted string :
     # complete
-    list_rules.append({'regex': '\"[^\"]*\"', 'token': 'constant.character', 'next': 'start'})
-    list_rules.append({'regex': "\'[^\']*\'", 'token': 'constant.character', 'next': 'start'})
+    list_rules.append({'regex': '\"[^\"]*\"', 'token': 'constant.character', 'next': 'start', 'unicode': True})
+    list_rules.append({'regex': "\'[^\']*\'", 'token': 'constant.character', 'next': 'start', 'unicode': True})
 
     # incomplete
-    list_rules.append({'regex': '\"[^\"]*$', 'token': 'constant.character', 'next': 'start'})
-    list_rules.append({'regex': "\'[^\']*$", 'token': 'constant.character', 'next': 'start'})
+    list_rules.append({'regex': '\"[^\"]*$', 'token': 'constant.character', 'next': 'start', 'unicode': True})
+    list_rules.append({'regex': "\'[^\']*$", 'token': 'constant.character', 'next': 'start', 'unicode': True})
 
     # Rule for blanks marks :
-    list_rules.append({'regex': '_\\?_', 'token': 'invalid', 'next': 'start'})
-    list_rules.append({'regex': '(^| )(_)(?= |$)', 'token': ['text', 'invalid'], 'next': 'start'})
+    list_rules.append({'regex': '_\\?_', 'token': 'invalid', 'next': 'start', 'unicode': True})
+    list_rules.append({'regex': '(^| )(_)(?= |$)', 'token': ['text', 'invalid'], 'next': 'start', 'unicode': True})
 
     # Rules for numbers
     if (data_level["number"]):
@@ -41,7 +41,7 @@ def rule_all(level):
             number_regex = '(' + DIGIT + '+)'
 
         list_rules.append({'regex': START_WORD + number_regex + END_WORD,
-                          'token': ['text', 'variable'], 'next': 'start'})
+                          'token': ['text', 'variable'], 'next': 'start', 'unicode': True})
 
         # Special case of an number directly followed by a number
         for command in data_level["space_before"]:
@@ -49,6 +49,7 @@ def rule_all(level):
                 'regex': START_WORD + get_translated_keyword(command) + number_regex + END_WORD,
                 'token': ['text', 'keyword', 'variable'],
                 'next': 'start',
+                'unicode': True
             })
 
         for command in data_level["no_space"]:
@@ -56,6 +57,7 @@ def rule_all(level):
                 'regex': get_translated_keyword(command) + number_regex + END_WORD,
                 'token': ['keyword', 'variable'],
                 'next': 'start',
+                'unicode': True
             })
 
     # Rules for commands of space_before_and_after
@@ -65,6 +67,7 @@ def rule_all(level):
             'regex': START_WORD + get_translated_keyword(command) + END_WORD,
             'token': ["text", "keyword"],
             'next': "start",
+            'unicode': True
         })
 
     # Rules for commands of no_space
@@ -75,6 +78,7 @@ def rule_all(level):
             'regex': get_translated_keyword(command),
             'token': ["keyword"],
             'next': "start",
+            'unicode': True
         })
 
     # Rules for commands of space_before
@@ -85,6 +89,7 @@ def rule_all(level):
             'regex': START_WORD + get_translated_keyword(command),
             'token': ["text", "keyword"],
             'next': "start",
+            'unicode': True
         })
 
     # Rules for commands of space_after
@@ -95,6 +100,7 @@ def rule_all(level):
             'regex': get_translated_keyword(command) + END_WORD,
             'token': ["keyword"],
             'next': "start",
+            'unicode': True
         })
 
     # Rules for constants (colors, directions)
@@ -103,6 +109,7 @@ def rule_all(level):
             'regex': START_WORD + get_translated_keyword(command) + END_WORD,
             'token': ["text", TOKEN_CONSTANT],
             'next': "start",
+            'unicode': True
         })
 
     return {"start": list_rules}
