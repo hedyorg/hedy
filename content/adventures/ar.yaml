@@ -359,7 +359,7 @@ adventures:
                 example_code_2: "```\n{print} أنا الببغاء هيدي\nالاسم١ {is} {ask} ما اسمك؟\n{print}  الاسم١\n{sleep}\n{print}  الاسم١\nالاسم٢ {is} {ask} ما اسم عائلتك؟\n_\n{sleep}\n_\n```\n"
             5:
                 story_text: "## الببغاء\nكافئ الببغاء {if} قال الكلمةالصحيحة!\n"
-                example_code: "```\nwords {is} squawk, Hedy\n{print} 'Train your parrot!'\nnew_word {is} {ask} 'Which word do you want to teach them?'\n{add} new_word {to_list} words\nsaid_word {is} words {at} {random}\n{print} '\U0001F9D2 Say ' new_word ', Hedy!'\n{print} '\U0001F99C ' said_word\n{if} said_word {is} new_word {print} '\U0001F9D2 Great job, Hedy! \U0001F36A'\n{else} {print} '\U0001F9D2 No, Hedy! Say ' new_word\n```\n"
+                example_code: "```\nالكلمات {is} نعيق, هيدي\n{print} 'درب ببغاءك!'\nالكلمة_الجديدة {is} {ask} 'ما هي الكلمة التي تريده ان يتعلمها؟'\n{add} الكلمة_الجديدة {to_list} الكلمات\nالكلمة_التي_قالها {is} الكلمات {at} {random}\n{print} '\U0001F9D2 قل ' الكلمة_الجديدة ', هيدي!'\n{print} '\U0001F99C ' الكلمة_التي_قالها'\n_ الكلمة_التي_قالها{is} الكلمة_الجديدة {print} '\U0001F9D2 هيدي، عمل رائع! \U0001F36A'\n__ {print} '\U0001F9D2 لا, هيدي! قل ' الكلمة_الجديدة\n```\n"
                 start_code: '# place your code here'
             3:
                 story_text: "## الببغاء\nعلّم الببغاء كلمة جديدة من خلال الأمر `{add}`.\n"
@@ -456,7 +456,7 @@ adventures:
                 story_text_2: "## Make it fair\nIf you are extremely unlucky the previous program might choose you to to the dishes for the whole week! That's not fair!\nTo create a fairer system you can use the `{remove}` command to remove the chosen person from the list. This way you don't have to do the dishes again untill everybody has had a turn.\n\nMonday and tuesday are ready for you! Can you add the rest of the week?\nAnd... can you come up with a solution for when your list is empty?\n"
                 example_code_2: "```\npeople = mom, dad, Emma, Sophie\ndishwasher = people {at} {random}\n{print} 'Monday the dishes are done by: ' dishwasher\n{remove} dishwasher {from} people\ndishwasher = people {at} {random}\n{print} 'Tuesday the dishes are done by: ' dishwasher\n{remove} dishwasher {from} people\ndishwasher = people {at} {random}\n```\n"
             4:
-                story_text: "## Dishwashing\nWith quotation marks you can make your dishwashing planning more beautiful.\nThis time the sample code is not quite complete.\n\nCan you complete the code by filling the blanks? Every blank must be replaced with one word of symbol.\n\nTip: Don't forget the quotation marks!\n"
+                story_text: "## غسل الأطباق\nباستخدام علامات الاقتباس، يمكنك جعل التخطيط لغسل الأطباق أكثر جمالًا.\nهذه المرة لم يكتمل نموذج التعليمات البرمجية تمامًا.\n\nهل يمكنك إكمال الكود عن طريق ملء الفراغات؟ يجب استبدال كل فراغ برمز واحد.\n\nنصيحة: لا تنس علامات الاقتباس!\n"
                 example_code: "```\nأشخاص {is} أمي، أبي، إيما، صوفي\n{print} _ غسل الأطباق سيكون على _\n{sleep}\n{print} أشخاص{at} _\n```\n"
                 start_code: "{print} \"من سيغسل الأطباق؟\""
             3:
@@ -470,7 +470,7 @@ adventures:
                 example_code: "```\ndays = Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday\nnames = mom, dad, Emma, Sophie\n{for} day {in} days\n    {print} names {at} {random} ' does the dishes on ' day\n```\n"
                 start_code: '# place your code here'
             5:
-                story_text: "## Dishwashing\nWith the `{if}` you can now have more fun with choice in the program. You can have your program respond to the choice that the computer has made.\n\nCan you finish the code so that it prints 'too bad' when it is your turn and otherwise 'yes!'?\nDon't forget the quotes!\n"
+                story_text: "## غسل الاطباق\nباستخدام `{if}` يمكنك الآن الحصول على مزيد من المرح مع الاختيار في البرنامج. يمكنك جعل برنامجك يستجيب للاختيار الذي اتخذه الكمبيوتر.\n\nهل يمكنك إنهاء الكود بحيث يطبع \"سيئًا جدًا\" عندما يحين دورك و في الحالات الاخرى يطبع \"نعم!\"؟\nلا تنس الاقتباسات!\n"
                 example_code: "```\npeople {is} mom, dad, Emma, Sophie\ndishwasher {is} people {at} {random}\n{if} dishwasher {is} Sophie {print} _ too bad I have to do the dishes _ {else} {print} 'luckily no dishes because' _ 'is already washing up'\n```\n"
                 start_code: "{print} \"من سيغسل الأطباق؟\""
         name: غسل الأطباق؟
@@ -493,9 +493,9 @@ adventures:
                 example_code: "```\nplayers = Ann, John, Jesse\nchoices = 1, 2, 3, 4, 5, 6\n{for} player {in} players\n    {print} player ' throws ' choices {at} {random}\n    {sleep}\n```\n"
                 start_code: '# place your code here'
             5:
-                start_code: "{print} 'What will the die indicate this time?'"
-                story_text: "## Dice\nYou can also make a die again in this level using the `{if}`.\nComplete the sample code so that the code says \"You can stop throwing\" once you have thrown an earthworm.\n\nBut maybe you want to recreate a die from a completely different game. That's fine too! Then make up your own reaction. Eg 'yes' for 6 and 'pity' for something {else}.\n"
-                example_code: "```\nchoices {is} 1, 2, 3, 4, 5, earthworm\nthrow {is} _\n{print} 'you have' _ 'thrown'\n{if} _ {is} earthworm {print} 'You can stop throwing.' _ {print} 'You have to hear it again!'\n```\n"
+                start_code: "{print} 'إلى ماذا يشير حجر النرد هذه المرة؟'"
+                story_text: "## حجر النرد\nتستطيع صنع حجر النرد الخاص بك في هذا المستوى باستخدام `{if}`.\nأكمل نموذج الكود بحيث يطبع \"تستطيع التوقف عن الالقاء\" بمجرد رمي رمز دودة الارض.\n\nولكن ربما تريد اعادة إنشاء حجر نرد من لعبة مختلفة تمامًا. هذا جيد أيضًا! ثم اكتب ردة فعلك الخاصة. مثال 'نعم' لرقم 6 و 'للاسف' لاي شيء {else}.\n"
+                example_code: "```\nالخيارات {is} 1, 2, 3, 4, 5, دودة الارض\nالرمية {is} _\n{print} 'لديك' _ 'تم القاءها'\n{if} _ {is} دودة ارض {print} 'تستطيع التوقف عن الرمي.' _ {print} 'عليك أن تسمعه مرة أخرى!'\n```\n"
             4:
                 story_text: "## Dice\nIn this level we can make sentences with the die value in the sentence, with quotes of course.\nThis time the sample code is not quite complete. Can you finish the code?\n"
                 example_code: "```\nchoices {is} 1, 2, 3, 4, 5, earthworm\n{print} _ you threw _\n{print} _ _ _ <- here you have to program the choice\n```\n"
