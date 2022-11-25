@@ -558,7 +558,7 @@ class TestsLevel16(HedyTester):
             pygame_end = True
             pygame.quit()
             break
-          if event.type == pygame.KEYDOWN: 
+          if event.type == pygame.KEYDOWN:
             if event.unicode == 'x':
               for dier in lijstje:
                 print(f'''dier''')

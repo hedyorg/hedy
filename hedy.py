@@ -1735,13 +1735,13 @@ while not pygame_end:
 
     def ifpressed(self, met, args):
         return self.make_ifpressed_command(f"""\
-    if event.key == pygame.K_{args[0]}:
+    if event.unicode == '{args[0]}':
 {ConvertToPython.indent(args[1], 6)}
       break""")
 
     def ifpressed_else(self, met, args):
         return self.make_ifpressed_command(f"""\
-    if event.key == pygame.K_{args[0]}:
+    if event.unicode == '{args[0]}':
 {ConvertToPython.indent(args[1], 6)}
       break
     else:
@@ -1899,7 +1899,7 @@ class ConvertToPython_8_9(ConvertToPython_7):
         all_lines = ConvertToPython.indent(all_lines, 6)
 
         return self.make_ifpressed_command(f"""\
-    if event.key == pygame.K_{args[0]}:
+    if event.unicode == '{args[0]}':
 {all_lines}
       break""")
 
@@ -1910,7 +1910,7 @@ class ConvertToPython_8_9(ConvertToPython_7):
         all_lines = ConvertToPython.indent(all_lines, 6)
 
         return self.make_ifpressed_command(f"""\
-    if event.key == pygame.K_{args[0]}:
+    if event.unicode == '{args[0]}':
 {all_lines}
       break""")
 

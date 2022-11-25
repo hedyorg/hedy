@@ -763,7 +763,7 @@ class TestsLevel5(HedyTester):
             pygame_end = True
             pygame.quit()
             break
-          if event.type == pygame.KEYDOWN: 
+          if event.type == pygame.KEYDOWN:
             if event.unicode == 'x':
               print(f'it is a letter key')
               break""")
@@ -783,11 +783,11 @@ class TestsLevel5(HedyTester):
             pygame_end = True
             pygame.quit()
             break
-          if event.type == pygame.KEYDOWN: 
+          if event.type == pygame.KEYDOWN:
             if event.unicode == 'x':
               print(f'first key')
               break
-            if event.key == pygame.K_y:
+            if event.unicode == 'y':
               print(f'second key')
               break""")
 
@@ -806,7 +806,7 @@ class TestsLevel5(HedyTester):
             pygame_end = True
             pygame.quit()
             break
-          if event.type == pygame.KEYDOWN: 
+          if event.type == pygame.KEYDOWN:
             if event.unicode == 'x':
               print(f'it is a letter key')
               break""")
@@ -825,7 +825,7 @@ class TestsLevel5(HedyTester):
             pygame_end = True
             pygame.quit()
             break
-          if event.type == pygame.KEYDOWN: 
+          if event.type == pygame.KEYDOWN:
             if event.unicode == '1':
               print(f'it is a number key')
               break""")
@@ -844,7 +844,7 @@ class TestsLevel5(HedyTester):
             pygame_end = True
             pygame.quit()
             break
-          if event.type == pygame.KEYDOWN: 
+          if event.type == pygame.KEYDOWN:
             if event.unicode == 'x':
               print(f'trailing spaces!')
               break""")
@@ -866,7 +866,7 @@ class TestsLevel5(HedyTester):
             pygame_end = True
             pygame.quit()
             break
-          if event.type == pygame.KEYDOWN: 
+          if event.type == pygame.KEYDOWN:
             if event.unicode == 'x':
               print(f'x is pressed!')
               break
@@ -889,7 +889,7 @@ class TestsLevel5(HedyTester):
             pygame_end = True
             pygame.quit()
             break
-          if event.type == pygame.KEYDOWN: 
+          if event.type == pygame.KEYDOWN:
             if event.unicode == 'x':
               print(f'x is pressed!')
               break
@@ -914,7 +914,7 @@ class TestsLevel5(HedyTester):
             pygame_end = True
             pygame.quit()
             break
-          if event.type == pygame.KEYDOWN: 
+          if event.type == pygame.KEYDOWN:
             if event.unicode == 'x':
               print(f'x is pressed!')
               break
@@ -938,7 +938,7 @@ class TestsLevel5(HedyTester):
             pygame_end = True
             pygame.quit()
             break
-          if event.type == pygame.KEYDOWN: 
+          if event.type == pygame.KEYDOWN:
             if event.unicode == 'x':
               print(f'x is pressed!')
               break
@@ -962,7 +962,7 @@ class TestsLevel5(HedyTester):
             pygame_end = True
             pygame.quit()
             break
-          if event.type == pygame.KEYDOWN: 
+          if event.type == pygame.KEYDOWN:
             if event.unicode == 'x':
               print(f'x is pressed!')
               break
@@ -986,7 +986,7 @@ class TestsLevel5(HedyTester):
               pygame_end = True
               pygame.quit()
               break
-            if event.type == pygame.KEYDOWN: 
+            if event.type == pygame.KEYDOWN:
               if event.unicode == 'x':
                 print(f'x is pressed!')
                 break
@@ -1011,7 +1011,7 @@ class TestsLevel5(HedyTester):
             pygame_end = True
             pygame.quit()
             break
-          if event.type == pygame.KEYDOWN: 
+          if event.type == pygame.KEYDOWN:
             if event.unicode == 'x':
               {HedyTester.indent(
                 HedyTester.forward_transpiled(50, self.level),
@@ -1038,7 +1038,7 @@ class TestsLevel5(HedyTester):
             pygame_end = True
             pygame.quit()
             break
-          if event.type == pygame.KEYDOWN: 
+          if event.type == pygame.KEYDOWN:
             if event.unicode == 'x':
               {HedyTester.indent(
                 HedyTester.turn_transpiled(90, self.level),
@@ -1065,7 +1065,7 @@ class TestsLevel5(HedyTester):
             pygame_end = True
             pygame.quit()
             break
-          if event.type == pygame.KEYDOWN: 
+          if event.type == pygame.KEYDOWN:
             if event.unicode == 'x':
               {HedyTester.indent(
                 HedyTester.turtle_color_command_transpiled('red'),
@@ -1092,7 +1092,7 @@ class TestsLevel5(HedyTester):
             pygame_end = True
             pygame.quit()
             break
-          if event.type == pygame.KEYDOWN: 
+          if event.type == pygame.KEYDOWN:
             if event.unicode == 'x':
               {HedyTester.indent(
                 HedyTester.forward_transpiled(25, self.level),
