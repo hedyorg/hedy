@@ -35,6 +35,7 @@ def collect_snippets(path, filtered_language = None):
 
                         code_snippet_counter = 0
                         # code snippets inside story_text
+
                         for tag in utils.markdown_to_html_tags(level['story_text']):
                             if tag.name != 'pre' or not tag.contents[0]:
                                 continue
@@ -45,7 +46,6 @@ def collect_snippets(path, filtered_language = None):
                             try:
                                 code = tag.contents[0].contents[0]
                                 if hash(code) in unique_snippets_table:
-
                                     continue
                                 else:
                                     unique_snippets_table.add(hash(code))
@@ -56,10 +56,7 @@ def collect_snippets(path, filtered_language = None):
                         # code snippets inside start_code
                         try:
                             start_code = level['start_code']
-                            if hash(start_code) in unique_snippets_table:
-
-                                continue
-                            else:
+                            if not hash(start_code) in unique_snippets_table:
                                 unique_snippets_table.add(hash(start_code))
                             Hedy_snippets.append(Snippet(f, level_number, 'start_code', start_code, adventure_name))
                         except KeyError:
@@ -77,9 +74,7 @@ def collect_snippets(path, filtered_language = None):
                             try:
                                 code = tag.contents[0].contents[0]
                                 # test only unique snippets
-                                if hash(code) in unique_snippets_table:
-                                    continue
-                                else:
+                                if not hash(code) in unique_snippets_table:
                                     unique_snippets_table.add(hash(code))
                             except:
                                 print("Code container is empty...")
@@ -90,12 +85,10 @@ def collect_snippets(path, filtered_language = None):
 
 # filtered_language = 'en'
 # use this to filter on 1 lang, zh_Hans for Chinese, nb_NO for Norwegian, pt_PT for Portuguese
-# filtered_language = 'en'
-
 
 Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/adventures', filtered_language=filtered_language)]
 
-# level = 18
+# level = 10
 # if level:
 #     Hedy_snippets = [(name, snippet) for (name, snippet) in Hedy_snippets if snippet.level == level]
 
