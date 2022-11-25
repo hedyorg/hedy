@@ -419,7 +419,7 @@ adventures:
                 example_code_2: "```\n{print} رسم الأشكال\nالزاوية هي ٩٠\n{turn} الزاوية\n{forward} ٢٥\n{turn} الزاوية\n{forward} ٢٥\n```\n"
                 story_text_2: "بالاضافة الى ذلك، الرسام لم يكن قادراً إلا على الاستدارة الى اليمن أو اليسار. هذا ممل بعض الشيء! \nفي المستوى الثاني يمكننا الاإستدارة في كل الإتجاهات!\n\nاستعمل ٩٠ للإستدارة بمقدار ربع دائرة. هذا ما نسميه بالدرجات. استدارة كاملة تساوي ٣٦٠ درجة.\nهل تستطيع أن ترسم شكلاً معينا باستخدام هذا الكود؟ ربما مثلث أو دائرة؟\n"
             3:
-                story_text: "## Searching turtle\nفي هذا المستوى يمكننا استخدام الأوامر `{at} {random}` مع الرسام. اختيار عشوائي سيجعل الرسام يتحرك بشكل مختلف كل مرة. \nاستعمل {random}`{at} {random}` لإختيار رقم من قائمة. يمكنك أن تنسخ وتلصق السطرين ٢ و٣ لتصنع مساراً عشوائياً أطول.\n"
+                story_text: "## الرسام\nفي هذا المستوى يمكننا استخدام الأوامر `{at} {random}` مع الرسام. اختيار عشوائي سيجعل الرسام يتحرك بشكل مختلف كل مرة. \nاستعمل `{at} {random}` لإختيار رقم من قائمة.\n## تحدي\nهل يمكنك أن تنسخ وتلصق السطرين ٢ و٣ لتصنع مساراً عشوائياً أطول؟\n"
                 example_code: "\n\n\n```\nالزاوايا هي ١٠، ٥٠، ٩٠، ١٥٠، ٢٥٠\n{turn} الزاوايا {at} {random}\n{forward} ٢٥\n```\n"
                 start_code: "الزاوايا هي ١٠، ٥٠، ٩٠، ١٥٠، ٢٥٠\n{turn} الزاوايا {at} {random}\n{forward} ٢٥"
             4:
@@ -454,14 +454,14 @@ adventures:
                 example_code_2: "```\npeople = mom, dad, Emma, Sophie\ndishwasher = people {at} {random}\n{print} 'Monday the dishes are done by: ' dishwasher\n{remove} dishwasher {from} people\ndishwasher = people {at} {random}\n{print} 'Tuesday the dishes are done by: ' dishwasher\n{remove} dishwasher {from} people\ndishwasher = people {at} {random}\n```\n"
             4:
                 story_text: "## Dishwashing\nWith quotation marks you can make your dishwashing planning more beautiful.\nThis time the sample code is not quite complete.\n\nCan you complete the code by filling the blanks? Every blank must be replaced with one word of symbol.\n\nTip: Don't forget the quotation marks!\n"
-                example_code: "```\npeople {is} mom, dad, Emma, Sophie\n{print} _ the dishes are done by _\n{sleep}\n{print} people {at} _\n```\n"
+                example_code: "```\nأشخاص {is} أمي، أبي، إيما، صوفي\n{print} _ غسل الأطباق سيكون على _\n{sleep}\n{print} أشخاص{at} _\n```\n"
                 start_code: "{print} \"من سيغسل الأطباق؟\""
             3:
-                story_text: "## Dishwashing\nDo you always disagree at home about who should wash the dishes or change the litter box today?\nThen you can let the computer choose very fairly. You can program that in this level!\nYou first make a list of the members of your family. Then choose '{at} {random}' from the list.\n"
+                story_text: "## غسل الأطباق\nهل دائماً ما تعترض في المنزل على من يجب عليه غسل الأطباق أو تغيير صندوق المهملات اليوم؟\nإذاً يمكنك أن تدع الكومبيوتر يختار بالعدل من عليه فعلها. يمكنك في هذا المستوى برمجة ذلك\nتحتاج في البدايةأن تصنع قائمة بأفراد عائلتك. وبعدها إستخدم الأمر `{at} {random}` لإختيار شخص من تلك القائمة.\n"
                 start_code: '{print} من سيغسل الأطباق؟'
-                example_code: "```\npeople {is} mom, dad, Emma, Sophie\n{print} people {at} {random}\n```\n## Hack the dishwashing program!\nDon't feel like doing the dishes yourself? Hack the program to remove your name from the list.\n\n```\npeople {is} mom, dad, Emma, Sophie\nyour_name {is} {ask} Who are you?\n{remove} your_name {from} people\n{print} people {at} {random} does the dishes\n```\n"
-                story_text_2: "## Hack the dishwashing program!\nDon't feel like doing the dishes yourself? Hack the program to remove your name from the list.\n"
-                example_code_2: "```\npeople {is} mom, dad, Emma, Sophie\nyour_name {is} {ask} Who are you?\n{remove} your_name {from} people\n{print} people {at} {random} does the dishes\n```\n"
+                example_code: "```\nأشخاص {is} أمي، أبي، إيما، صوفي\n{print} أشخاص {at} {random}\n```\n"
+                story_text_2: "## تهكير برنامج غسل الأطباق!\nتشعر بعدم الرغبة في غسل الأطباق اليوم؟ هكر البرنامج وإمسح اسمك من قائمة أفراد العائلة بإستخدام الأمر `{remove}` `{from}`\n"
+                example_code_2: "```\nأشخاص {is} أمي، أبي، إيما، صوفي\nإسمك {is} {ask} من أنت؟\n_ إسمك _ أشخاص\n{print} _ _ _ سيغسل الأطباق\n```\n"
             10:
                 story_text: "## Dishwashing\nIn this level you could make an even better dish washing shedule.\n"
                 example_code: "```\ndays = Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday\nnames = mom, dad, Emma, Sophie\n{for} day {in} days\n    {print} names {at} {random} ' does the dishes on ' day\n```\n"
@@ -499,9 +499,9 @@ adventures:
                 start_code: "{print} 'What will the die indicate this time?'"
             3:
                 story_text: "## حجر النرد\nيمكننا الإختار من قائمة في هذا المستوى. ومع ذلك سيتولى الكومبيوتر الإختيار هذه المرة من بين أوجه حجر النرد.\nألقِ نظرة على الألعاب الموجودة في خزانتك في المنزل.\nهل يوجد ألعاب ذات نرد (خاص)؟ عندما تجد شيئاً مماثل يمكنك نسخه ايضاً في هذا الكود.\nعلى سبيل المثال، هناك لعبة تسمى نرد دودة الأرض تتكون من ٦ اوجه مرقمة من ١ إلى ٥ والأخيرة عليها دودة الأرض.\n\n![Die of earthworms with 1 to 5 and an earthworm on it](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)\n"
-                example_code: "```\nإختيارات {is} ١، ٢، ٣، ٤، ٥، دودة الأرض\n{print} إختيارات {at} {random}\n```\n"
-                start_code: '{print} What will the die indicate this time?'
-                example_code_2: "```\nالخيارات {is} _\n```\n"
+                example_code: "```\nالخيارات هي ١، ٢، ٣، ٤، ٥، دودة الأرض\n{print} الخيارات {at} {random}\n```\n"
+                start_code: '{print} إلى ماذا يشير حجر النرد هذه المرة؟'
+                example_code_2: "```\nالخيارات هي _\n```\n"
                 story_text_2: "## تحدي\nالنرد المستخدم فالمثال هو حجر نرد مخصص للعبة معينة. هل يمكنك تغييره للحجر النرد الأصلي؟\n أو جعله حجر نرد خاص بلعبة أخرى تعرفها أو من إختراعك؟\n"
             15:
                 story_text: "## Dice\nIn this game you have to throw 6 in as little tries as possible.\n"
