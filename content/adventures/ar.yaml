@@ -805,11 +805,11 @@ adventures:
         name: ما التالي؟
         levels:
             3:
-                story_text: "## What's next?\nIn this level you've been practising with variables, but maybe you've come across this mistake.\n\nTry to run this code:\n```\nname {is} Sophie\n{print} My name is name\n```\nOf course you wanted to print `My name is Sophie` but Hedy prints `My Sophie is Sophie`. \nIn the next level this problem is fixed by using quotation marks.\n"
-                start_code: "{print} Let's go to the next level!"
+                story_text: "## ما التالي؟\nلقد تدربت على إستخدام المتغيرات في هذا المستوى، ولكنك ربما مررت بهذا الخطأ خلال كتابتك للأكواد.\n\nجرب تنفيذ هذا البرنامج:\n```\nاسمي {is} صوفي\n{print} صوفي هو صوفي\n```\nبالتأكيد اردت طباعة `اسمي هو صوفي` ولكن هيدي طبعت `صوفي هو صوفي`\nفي المستوى القادم سيتم حل تلك المشكلة بإستخدام علامات التنصيص.\n"
+                start_code: "{print} هيا بنا إلى المستوى التالي!"
             4:
                 story_text: "## What's next?\nIn the previous levels you've already learned to use `{at} {random}` which made your games different every time you ran the code.\nBut it's not really interactive, the player doesn't have any influence on what happens in the game.\n\nIn the next level you'll learn the `{if}` command, that allows you to give different responses in your program. This way you can program a secret password for your computer for example.\nSo let's take a peak!\n\n```\npassword {is} {ask} 'What is the correct password?'\n```\n"
-                start_code: "{print} 'Lets go to the next level!'"
+                start_code: "{print} 'هيا بنا إلى المستوى التالي!'"
             5:
                 start_code: "{print} 'On to the next level!'"
                 story_text: "## What's next?\nNow you've reached the end of this level, so you have learned `{ask}` and `{if}`. For example you can {ask} guests what they would like to eat.\nWhat you can't yet do though, is calculate the price for everyone's dinner.\n\nThe next level makes it possible to use addition, subtraction and multiplication in your programs. This way you can calculate the prices in your restaurant, but you could also add a secret code to give your friends and family a discount.\nAnother option in the next level is programming your own maths game, for your little brother or sister to practice their multiplications.\nGo see for yourself in the next level!\n```\n{print} 'Welcome at McHedy'\norder {is} {ask} 'What would you like to eat?'\n{print} 'You would like ' order\n{if} order {is} hamburger price {is} 5\n{if} order {is} fries price {is} 2\ndrinks {is} {ask} 'What would you like to drink?'\n{print} 'You would like ' drinks\n{print} 'That will be ' price ' dollars for your ' order ' please'\n{print} 'The drinks are free in this level because Hedy cant calculate the price yet...'\n```\n"
