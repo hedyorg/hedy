@@ -104,10 +104,35 @@ class HighlighterTestIfInline(HighlightTester):
             "KKKK TTTTT KK N",
             level=level, lang="en")
 
+    @parameterized.expand([
+        ("level5"),
+        ("level6"),
+        ("level7"),
+    ])
+    def test_if_is_pressed(self, level):
+        self.assert_highlighted_chr(
+            "if x is pressed",
+            "KK T KK KKKKKKK",
+            level=level, lang="en")
 
+    @parameterized.expand([
+        ("level5"),
+        ("level6"),
+        ("level7"),
+    ])
+    def test_if_is_pressed_print(self, level):
+        self.assert_highlighted_chr(
+            "if x is pressed print 'Yay!'",
+            "KK T KK KKKKKKK KKKKK SSSSSS",
+            level=level, lang="en")
 
-
-
-
-
-
+    @parameterized.expand([
+        ("level5"),
+        ("level6"),
+        ("level7"),
+    ])
+    def test_if_is_pressed_print_else_print(self, level):
+        self.assert_highlighted_chr(
+            "if x is pressed print 'Yay!' else print 'Boo!'",
+            "KK T KK KKKKKKK KKKKK SSSSSS KKKK KKKKK SSSSSS",
+            level=level, lang="en")
