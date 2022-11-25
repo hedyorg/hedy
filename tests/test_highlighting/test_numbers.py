@@ -1,8 +1,9 @@
-from tests.Highlighter import HighlightTester
 from parameterized import parameterized
 
-class HighlighterTestNumbers(HighlightTester):
+from tests.Highlighter import HighlightTester
 
+
+class HighlighterTestNumbers(HighlightTester):
 
     @parameterized.expand([
         ("level6"),
@@ -86,7 +87,6 @@ class HighlighterTestNumbers(HighlightTester):
             "TTTTT K NNNTTT",
             level=level, lang="en")
 
-
     @parameterized.expand([
         ("level6"),
         ("level7"),
@@ -107,7 +107,6 @@ class HighlighterTestNumbers(HighlightTester):
             "TTTTT K NNNNN K NNNNN",
             level=level, lang="en")
 
-
     @parameterized.expand([
         ("level12"),
         ("level13"),
@@ -121,7 +120,6 @@ class HighlighterTestNumbers(HighlightTester):
             "sword = 123.46 + 7949.8",
             "TTTTT K NNNNNN K NNNNNN",
             level=level, lang="en")
-
 
     @parameterized.expand([
         ("level6"),
@@ -143,7 +141,6 @@ class HighlighterTestNumbers(HighlightTester):
             "TTTTT K NNNNN K NNNNN",
             level=level, lang="en")
 
-
     @parameterized.expand([
         ("level12"),
         ("level13"),
@@ -157,8 +154,6 @@ class HighlighterTestNumbers(HighlightTester):
             "sword = 123.46 - 7949.8",
             "TTTTT K NNNNNN K NNNNNN",
             level=level, lang="en")
-
-
 
     @parameterized.expand([
         ("level6"),
@@ -179,7 +174,6 @@ class HighlighterTestNumbers(HighlightTester):
             "sword = 12346 * 78564",
             "TTTTT K NNNNN K NNNNN",
             level=level, lang="en")
-
 
     @parameterized.expand([
         ("level12"),
@@ -214,7 +208,6 @@ class HighlighterTestNumbers(HighlightTester):
             "sword = 12346 / 78564",
             "TTTTT K NNNNN K NNNNN",
             level=level, lang="en")
-
 
     @parameterized.expand([
         ("level12"),

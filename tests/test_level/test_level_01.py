@@ -1,6 +1,5 @@
-from audioop import maxpp
-import hedy
 import textwrap
+import hedy
 from hedy import Command
 from tests.Tester import HedyTester
 
@@ -57,7 +56,6 @@ class TestsLevel1(HedyTester):
         expected_commands = [Command.print, Command.print]
 
         self.single_level_tester(code=code, expected=expected, expected_commands=expected_commands)
-
 
     def test_print_comma(self):
         code = "print one, two, three"
@@ -550,7 +548,7 @@ class TestsLevel1(HedyTester):
         output = 'Hallo welkom bij Hedy!'
 
         self.single_level_tester(code=code, expected=expected, output=output, translate=False)
-        
+
     def test_comments_may_be_empty(self):
         code = textwrap.dedent("""\
             #
@@ -610,15 +608,13 @@ class TestsLevel1(HedyTester):
     def test_pint_after_empty_line_gives_error_line_3(self):
         code = textwrap.dedent("""\
         print hallo
-        
+
         prnt hallo""")
         self.single_level_tester(
             code,
             exception=hedy.exceptions.InvalidCommandException,
             extra_check_function=(lambda x: x.exception.arguments['line_number'] == 3)
         )
-
-
 
     def test_print_without_argument_gives_incomplete(self):
         self.multi_level_tester(

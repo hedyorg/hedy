@@ -1,5 +1,6 @@
-import hedy
 import textwrap
+
+import hedy
 from tests.Tester import HedyTester
 
 
@@ -102,7 +103,7 @@ class TestsLevel10(HedyTester):
             exception=hedy.exceptions.InvalidArgumentTypeException)
 
     #
-    #if pressed tests
+    # if pressed tests
     #
 
     def test_if_pressed_with_list_and_for(self):
@@ -121,7 +122,7 @@ class TestsLevel10(HedyTester):
             pygame_end = True
             pygame.quit()
             break
-          if event.type == pygame.KEYDOWN: 
+          if event.type == pygame.KEYDOWN:
             if event.unicode == 'x':
               for dier in lijstje:
                 print(f'dier')
