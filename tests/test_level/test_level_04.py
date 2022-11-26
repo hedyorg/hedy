@@ -181,6 +181,16 @@ class TestsLevel4(HedyTester):
             exception=hedy.exceptions.UnquotedTextException
         )
 
+    def test_place_holder_no_space(self):
+        # same as print for level 4
+        code = "print _Escape from the haunted house!_"
+
+        self.multi_level_tester(
+            code=code,
+            max_level=11,
+            exception=hedy.exceptions.CodePlaceholdersPresentException
+        )
+
     def test_ask_without_quotes_gives_error_from_transpiler(self):
         # same as print
         code = "antwoord is ask hallo wereld"
