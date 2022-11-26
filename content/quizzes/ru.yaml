@@ -21,59 +21,59 @@ levels:
                     ```
                     {echo}
                     ```
-                feedback: "`{echo}` repeats a given answer."
+                feedback: "`{echo}` повторяет заданный ответ."
             -   option: |
                     ```
                     {print}
-                     ```
+                    ```
                 feedback: "Правильно!"
             -   option: |
                     ```
-                    hello
+                    привет
                     ```
-                feedback: "Hello isn't a command."
+                feedback: "Привет - это не команда."
             -   option: |
                     ```
                     {ask}
                     ```
-                feedback: "With `{ask}`, you can ask a question."
+                feedback: "На сайте `{ask}` вы можете задать вопрос."
             correct_answer: "B"
-            hint: "_?_ Hello world!"
+            hint: "_?_ Привет, мир!"
             question_score: '10'
         3:
-            question_text: "How do you ask what someone's favorite color is?"
+            question_text: "Как спросить, какой у кого-то любимый цвет?"
             mp_choice_options:
             -   option: |
                     ```
-                    {print} What is your favorite color?
+                    {print} Какой ваш любимый цвет?
                     ```
-                feedback: "`{print}` prints text, but it doesn't ask questions."
+                feedback: "`{print}` печатает текст, но не задает вопросов."
             -   option: |
                     ```
-                    {ask} {print} What is your favorite color?
+                    {ask} {print} Какой ваш любимый цвет?
                     ```
-                feedback: "You only need one command, not two."
+                feedback: "Вам нужна только одна команда, а не две."
             -   option: |
                     ```
-                    {ask} What is your favorite color?
+                    {ask} Какой ваш любимый цвет?
                     ```
                 feedback: "Great!"
             -   option: |
                     ```
-                    {echo} What is your favorite color?
+                    {echo} Какой ваш любимый цвет?
                     ```
-                feedback: "`{echo}` repeats your answer back to you."
+                feedback: "`{echo}` повторяет ваш ответ за вами."
             correct_answer: "C"
-            hint: "You can {ask} something with the {ask} command"
+            hint: "Вы можете спросить что-нибудь с помощью команды `{ask}`"
             question_score: '10'
         4:
-            question_text: "What is wrong with this code?"
+            question_text: "Что не так с этим кодом?"
             code: |-
-                Hi Im Hedy!
-                {ask} Who are you?
-                {echo} Hi...
+                Привет, я Хеди!
+                {ask} А ты кто?
+                {echo} Привет...
             mp_choice_options:
-            -   option: "`{print}` in line 1 is missing."
+            -   option: "`{print}` в строке 1 отсутствует."
                 feedback: "Правильно!"
             -   option: "Im in line 1 is spelled wrong."
                 feedback: "Im is spelled wrong on purpose; Hedy doesn't understand the apostrophes yet."
