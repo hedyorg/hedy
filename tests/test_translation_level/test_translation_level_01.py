@@ -1,14 +1,16 @@
 from parameterized import parameterized
+
+import hedy
+import hedy_translation
 # from test_level_01 import HedyTester
 from tests.Tester import HedyTester
-import hedy_translation
-import hedy
 
-    # tests should be ordered as follows:
-    # * Translation from English to Dutch
-    # * Translation from Dutch to English
-    # * Translation to several languages
-    # * Error handling
+# tests should be ordered as follows:
+# * Translation from English to Dutch
+# * Translation from Dutch to English
+# * Translation to several languages
+# * Error handling
+
 
 class TestsTranslationLevel1(HedyTester):
     level = 1
@@ -55,7 +57,6 @@ class TestsTranslationLevel1(HedyTester):
 
         self.assertEqual(expected, result)
 
-
     def test_forward_english_dutch(self):
         code = "forward 50"
 
@@ -72,8 +73,6 @@ class TestsTranslationLevel1(HedyTester):
 
         self.assertEqual(expected, result)
 
-
-
     def test_print_dutch_english(self):
         code = 'print Hallo welkom bij Hedy!'
 
@@ -81,7 +80,6 @@ class TestsTranslationLevel1(HedyTester):
         expected = 'print Hallo welkom bij Hedy!'
 
         self.assertEqual(expected, result)
-
 
     def test_ask_dutch_english(self):
         code = "vraag Hallo welkom bij Hedy!\nvraag veel plezier"
@@ -138,8 +136,6 @@ class TestsTranslationLevel1(HedyTester):
         result = hedy_translation.translate_keywords(result, from_lang="nl", to_lang="en", level=self.level)
 
         self.assertEqual(code, result)
-
-
 
     def test_invalid(self):
         code = "hallo"

@@ -1,15 +1,17 @@
 import textwrap
 
-import hedy
 from parameterized import parameterized
-from tests.Tester import HedyTester
-import hedy_translation
 
-    # tests should be ordered as follows:
-    # * Translation from English to Dutch
-    # * Translation from Dutch to English
-    # * Translation to several languages
-    # * Error handling
+import hedy
+import hedy_translation
+from tests.Tester import HedyTester
+
+# tests should be ordered as follows:
+# * Translation from English to Dutch
+# * Translation from Dutch to English
+# * Translation to several languages
+# * Error handling
+
 
 class TestsTranslationLevel4(HedyTester):
     level = 4
@@ -61,7 +63,6 @@ class TestsTranslationLevel4(HedyTester):
         expected = "ask is vraag 'What is your favorite color?'"
 
         self.assertEqual(expected, result)
-
 
     def test_print_nl_en(self):
         code = "print 'Hello welcome to Hedy.'"

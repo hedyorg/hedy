@@ -1,16 +1,17 @@
 import textwrap
 
-import hedy
 from parameterized import parameterized
-from tests.Tester import HedyTester
+
+import hedy
 import hedy_translation
+from tests.Tester import HedyTester
 
+# tests should be ordered as follows:
+# * Translation from English to Dutch
+# * Translation from Dutch to English
+# * Translation to several languages
+# * Error handling
 
-    # tests should be ordered as follows:
-    # * Translation from English to Dutch
-    # * Translation from Dutch to English
-    # * Translation to several languages
-    # * Error handling
 
 class TestsTranslationLevel3(HedyTester):
     level = 3
@@ -89,7 +90,6 @@ class TestsTranslationLevel3(HedyTester):
         print antwoorden at random""")
 
         result = hedy_translation.translate_keywords(code, "nl", "en", self.level)
-
 
         self.assertEqual(expected, result)
 
