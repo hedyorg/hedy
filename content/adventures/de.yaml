@@ -436,7 +436,7 @@ adventures:
                 example_code: |
                     ```
                     Tiere {is} 🦔, 🐿, 🦉, 🦇
-                    {print} Er hört jetzt Tiergeräusche {at} {random}
+                    {print} Er hört jetzt ein Tiergeräusch {at} {random}
                     ```
                 story_text_2: |
                     Der Befehl `{add}` könnte auch nützlich werden in deiner Geschichte.
@@ -447,7 +447,7 @@ adventures:
                     Tiere {is} 🐿, 🦔, 🦇, 🦉
                     Tier {is} {ask} Was denkst du ist es?
                     {add} Tier {to_list} Tiere
-                    {print} Es war das Tier {at} {random}
+                    {print} Es war das Tiere {at} {random}
                     ```
                 story_text_3: |
                     Das ist ein Beispiel für den `{remove}` Befehl in deiner Geschichte
@@ -603,6 +603,10 @@ adventures:
                     ## Lieder
                     Jetzt machen wir es uns richtig einfach und programmieren 'Wenn Du glücklich bist, dann klatsche in die Hand'. Alles, was wir tun möchten, wenn wir glücklich sind, speichern wir in einer Variablen. Sieh es Dir an:
 
+                    ## Herausforderung
+                    Kannst du die richtige Anzahl Leerzeichen zum Einrücken hinzufügen, damit das Lied richtig spielt?
+                    Beachte: Nicht jede Zeile braucht Einrückung.
+
                 example_code: |
                     ```
                     Aktionen = 'klatsche in die Hand', 'stampfe mit dem Fuß', 'ruf Hurra'
@@ -618,12 +622,15 @@ adventures:
             11:
                 story_text: |
                     ## Lieder
-                    In diesem Level nutzt Du den Befehl `{for} i {in} {range}` für Lieder, in denen gezählt wird. Das klappt besonders gut mit 'Fünf kleine Affen'. Du kannst Dir aber auch die hustenden Würmchen ansehen.
+                    In diesem Level nutzt du den Befehl `{for} i {in} {range}` für Lieder, in denen gezählt wird, wie z.B. bei 'Fünf kleine Affen'.
+
+                    ## Herausforderung
+                    Fülle die Lücken und mach, dass der Code funktioniert.
 
                 example_code: |
                     ## Fünf kleine Affen
                     ```
-                    {for} i {in} {range} 5 {to} 1
+                    _ _ _ _ 5 _ 1
                         {print} i ' kleine Affen springen auf dem Bett'
                         {print} 'Einer fiel herunter und stieß sich am Brett'
                         {print} 'Da rief Mama den Doktor und der Doktor hat gesagt'
@@ -653,41 +660,41 @@ adventures:
                     ## Fünf kleine Affen springen auf dem Bett
                     ```
                     Affen = 5, 4, 3, 2
-                    for Affe in Affen
-                        print Affe ' kleine Affen springen auf dem Bett'
-                        print 'Einer fiel herunter und stieß sich am Brett'
-                        print 'Mama rief den Arzt und der Arzt hat gesagt'
-                        print 'KEIN AFFE SPRINGT MEHR AUF DEM BETT!'
+                    {for} Affe {in} Affen
+                        {print} Affe ' kleine Affen springen auf dem Bett'
+                        {print} 'Einer fiel herunter und stieß sich am Brett'
+                        {print} 'Mama rief den Arzt und der Arzt hat gesagt'
+                        {print} 'KEIN AFFE SPRINGT MEHR AUF DEM BETT!'
                     ```
 
                     ## Baby Hai
                     ```
                     Haie = Baby, Mami, Papi, Omi, Opi
-                    for Hai in Haie
-                        print Hai ' tututututudu'
-                        print Hai ' tututututudu'
-                        print Hai ' tututututudu'
-                        print Hai
+                    {for} Hai {in} Haie
+                        {print} Hai ' Hai tututututudu'
+                        {print} Hai ' Hai tututututudu'
+                        {print} Hai ' Hai tututututudu'
+                        {print} Hai ' Hai'
                     ```
                     ## Old MacDonald hat ne Farm
                     ```
                     Tiere = Schweine, Hunde, Kühe
-                    for Tier in Tiere
-                        if Tier is Schweine
+                    {for} Tier {in} Tiere
+                        {if} Tier {is} Schweine
                             Geräusch = grunz
-                        if Tier is Hunde
+                        {if} Tier {is} Hunde
                             Geräusch = wuff
-                        if Tier is Kühe
+                        {if} Tier {is} Kühe
                             Geräusch = muh
-                        print 'Old MacDonald hat ne Farm'
-                        print 'I A I A O!'
-                        print 'und auf der Farm da gibt es ' Tier
-                        print 'I A I A O!'
-                        print 'mit nem ' Geräusch Geräusch ' hier'
-                        print 'und nem ' Geräusch Geräusch ' da'
-                        print 'hier ein ' Geräusch
-                        print 'dort ein ' Geräusch
-                        print 'überall ein ' Geräusch Geräusch
+                        {print} 'Old MacDonald hat ne Farm'
+                        {print} 'I A I A O!'
+                        {print} 'und auf der Farm da gibt es ' Tier
+                        {print} 'I A I A O!'
+                        {print} 'mit nem ' Geräusch Geräusch ' hier'
+                        {print} 'und nem ' Geräusch Geräusch ' da'
+                        {print} 'hier ein ' Geräusch
+                        {print} 'dort ein ' Geräusch
+                        {print} 'überall ein ' Geräusch Geräusch
                     ```
                 start_code: "# setze hier deinen Code hin"
             8:
