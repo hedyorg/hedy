@@ -1,8 +1,9 @@
-from tests.Highlighter import HighlightTester
 from parameterized import parameterized
 
-class HighlighterTestSleep(HighlightTester):
+from tests.Highlighter import HighlightTester
 
+
+class HighlighterTestSleep(HighlightTester):
 
     @parameterized.expand([
         ("level2"),
@@ -28,8 +29,6 @@ class HighlighterTestSleep(HighlightTester):
             "KKKKK",
             level=level, lang="en")
 
-
-
     @parameterized.expand([
         ("level2"),
         ("level3"),
@@ -41,7 +40,6 @@ class HighlighterTestSleep(HighlightTester):
             "sleep 12",
             "KKKKK TT",
             level=level, lang="en")
-
 
     @parameterized.expand([
         ("level7"),
@@ -61,7 +59,6 @@ class HighlighterTestSleep(HighlightTester):
             "sleep 12",
             "KKKKK NN",
             level=level, lang="en")
-
 
     @parameterized.expand([
         ("level2"),

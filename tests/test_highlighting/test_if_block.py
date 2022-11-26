@@ -1,9 +1,9 @@
-from tests.Highlighter import HighlightTester
 from parameterized import parameterized
 
+from tests.Highlighter import HighlightTester
+
+
 class HighlighterTestIfBlock(HighlightTester):
-
-
 
     @parameterized.expand([
         ("level8"),
@@ -59,7 +59,6 @@ class HighlighterTestIfBlock(HighlightTester):
             "KK TTTTTT KK NNNN",
             level=level, lang="en")
 
-
     @parameterized.expand([
         ("level8"),
         ("level9"),
@@ -114,7 +113,6 @@ class HighlighterTestIfBlock(HighlightTester):
             "KK TTTTTT KK NNNN",
             level=level, lang="en")
 
-
     @parameterized.expand([
         ("level14"),
         ("level15"),
@@ -150,8 +148,6 @@ class HighlighterTestIfBlock(HighlightTester):
             "if answer != 4242",
             "KK TTTTTT KK NNNN",
             level=level, lang="en")
-
-
 
     @parameterized.expand([
         ("level14"),
@@ -189,8 +185,6 @@ class HighlighterTestIfBlock(HighlightTester):
             "KK TTTTTT KK NNNN",
             level=level, lang="en")
 
-
-
     @parameterized.expand([
         ("level14"),
         ("level15"),
@@ -226,7 +220,6 @@ class HighlighterTestIfBlock(HighlightTester):
             "if answer >= 4242",
             "KK TTTTTT KK NNNN",
             level=level, lang="en")
-
 
     @parameterized.expand([
         ("level14"),
@@ -264,11 +257,6 @@ class HighlighterTestIfBlock(HighlightTester):
             "KK TTTTTT KK NNNN",
             level=level, lang="en")
 
-
-
-
-
-
     @parameterized.expand([
         ("level8"),
         ("level9"),
@@ -287,14 +275,6 @@ class HighlighterTestIfBlock(HighlightTester):
             "KKKK",
             level=level, lang="en")
 
-
-
-
-
-
-
-
-
     @parameterized.expand([
         ("level14"),
         ("level15"),
@@ -306,7 +286,6 @@ class HighlighterTestIfBlock(HighlightTester):
             "if answer is var or answer is 'yes'",
             "KK TTTTTT KK TTT KK TTTTTT KK SSSSS",
             level=level, lang="en")
-
 
     @parameterized.expand([
         ("level14"),
@@ -320,7 +299,6 @@ class HighlighterTestIfBlock(HighlightTester):
             "KK TTTTTT KK NNN KKK TTTTTT KK SSSSS",
             level=level, lang="en")
 
-
     @parameterized.expand([
         ("level14"),
         ("level15"),
@@ -333,7 +311,6 @@ class HighlighterTestIfBlock(HighlightTester):
             "KK TTTTTT KK TTT KK TTTTTT KK SSSSS",
             level=level, lang="en")
 
-
     @parameterized.expand([
         ("level14"),
         ("level15"),
@@ -345,5 +322,3 @@ class HighlighterTestIfBlock(HighlightTester):
             "if answer != 246 and answer == 'yes'",
             "KK TTTTTT KK NNN KKK TTTTTT KK SSSSS",
             level=level, lang="en")
-
-
