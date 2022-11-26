@@ -1,15 +1,16 @@
-from pathlib import Path
 import collections
 import copy
 import os
 import yaml
+
 
 def extract_Lark_grammar_from_yaml():
     """Creates a lark file in ../grammars/ for  all yaml files located in ../content/keywords/.
     If a keyword is not yet translated, it will use the English translation of the keyword
 
     Args:
-        only_new_lang (bool, optional): Specifies if only a lark file should be created for a new keyword language or for all languages. Defaults to True.
+        only_new_lang (bool, optional): Specifies if only a lark file should be created for a new keyword language
+        or for all languages. Defaults to True.
     """
     dirname = os.path.dirname(__file__)
     input_path = os.path.join(dirname, 'keywords')
@@ -44,11 +45,11 @@ def extract_Lark_grammar_from_yaml():
         translation_copy = copy.deepcopy(translations)
         for k, v in translation_copy.items():
             if yaml_lang == "ar":
-              mixed_tatweel_in = ''.join([' "ـ"* ' + '"'+l+'"' for l in v]) + ' "ـ"* '
-              translations[k] = mixed_tatweel_in
+                mixed_tatweel_in = ''.join([' "ـ"* ' + '"' + lang + '"' for lang in v]) + ' "ـ"* '
+                translations[k] = mixed_tatweel_in
             else:
-              # other languages need their translations surrounded by "'s
-              translations[k] = '"' + v + '"'
+                # other languages need their translations surrounded by "'s
+                translations[k] = '"' + v + '"'
 
             # we use | if we have multiple options, such as repete and repète
             if "|" in v:
@@ -64,6 +65,5 @@ def extract_Lark_grammar_from_yaml():
         with open(lark_filesname_with_path, 'w', encoding='utf-8') as f:
             f.write(translated_template)
 
+
 extract_Lark_grammar_from_yaml()
-
-

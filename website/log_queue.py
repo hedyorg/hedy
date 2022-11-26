@@ -1,11 +1,11 @@
 import collections
 import glob
 import json
+import logging
 import os
 import threading
 import time
 import traceback
-import logging
 
 logger = logging.getLogger(__name__)
 
@@ -30,6 +30,7 @@ class LogQueue:
     thread-safe. We do as little work as possible every time we hold the mutex
     to allow for maximum parallelism.
     """
+
     def __init__(self, name, batch_window_s, do_print=False):
         self.name = name
         self.records_queue = collections.defaultdict(list)
@@ -37,7 +38,7 @@ class LogQueue:
         self.transmitter = None
         self.do_print = do_print
         self.mutex = threading.Lock()
-        self.thread = threading.Thread(target=self._write_thread, name=f'{name}Writer', daemon=True)
+        self.thread = threading.Thread(target=self._write_thread, name=f"{name}Writer", daemon=True)
         self.thread.start()
 
     def add(self, data):
@@ -74,8 +75,8 @@ class LogQueue:
         if not all_records:
             return
 
-        filename = f'{self.name}_dump.{os.getpid()}.{time.time()}.jsonl'
-        with open(filename, 'w', encoding='utf-8') as f:
+        filename = f"{self.name}_dump.{os.getpid()}.{time.time()}.jsonl"
+        with open(filename, "w", encoding="utf-8") as f:
             json.dump(all_records, f)
 
     def try_load_emergency_saves(self):
@@ -87,16 +88,16 @@ class LogQueue:
 
         We use the atomicity of renaming the file as a way of claiming ownership of it.
         """
-        candidates = glob.glob(f'{self.name}_dump.*.jsonl')
+        candidates = glob.glob(f"{self.name}_dump.*.jsonl")
         for candidate in candidates:
             try:
-                claim_name = candidate + '.claimed'
+                claim_name = candidate + ".claimed"
                 os.rename(candidate, claim_name)
 
                 # If this succeeded, we're guaranteed to be able to read this file (and because
                 # we renamed it to something not matching the glob pattern, no one else is going to
                 # try to pick it up later)
-                with open(claim_name, 'r', encoding='utf-8') as f:
+                with open(claim_name, "r", encoding="utf-8") as f:
                     all_records = json.load(f)
 
                 bucket = div_clip(time.time(), self.batch_window_s)
@@ -135,7 +136,7 @@ class LogQueue:
             return self.transmitter(timestamp, records)
         else:
             count = len(records)
-            logger.warning(f'No querylog transmitter configured, {count} records dropped')
+            logger.warning(f"No querylog transmitter configured, {count} records dropped")
 
     def _write_thread(self):
         """Background thread which will wake up every batch_window_s seconds

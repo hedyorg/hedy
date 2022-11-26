@@ -6,7 +6,8 @@ import yaml
 from os import path
 import hedy_content
 
-# Holds the token that needs to be translated, its line number, start and end indexes and its value (e.g. ", ").
+# Holds the token that needs to be translated, its line number, start and
+# end indexes and its value (e.g. ", ").
 Rule = namedtuple("Rule", "keyword line start end value")
 
 
@@ -26,9 +27,11 @@ def keywords_to_dict(lang="nl"):
 
     return command_combinations
 
+
 def keywords_to_dict_single_choice(lang):
     command_combinations = keywords_to_dict(lang)
-    return {k : v[0] for (k, v) in command_combinations.items()}
+    return {k: v[0] for (k, v) in command_combinations.items()}
+
 
 def all_keywords_to_dict():
     """Return a dictionary where each value is a list of the translations of that keyword (key). Used for testing"""
@@ -37,11 +40,12 @@ def all_keywords_to_dict():
         commands = keywords_to_dict_single_choice(lang)
         keyword_dict[lang] = commands
 
-    all_translations = {k: [v.get(k,k) for v in keyword_dict.values()] for k in keyword_dict['en']}
+    all_translations = {k: [v.get(k, k) for v in keyword_dict.values()] for k in keyword_dict['en']}
     return all_translations
 
+
 def translate_keyword_from_en(keyword, lang="en"):
-    #translated the keyword to a local lang
+    # translated the keyword to a local lang
     local_keywords = keywords_to_dict(lang)
     if keyword in local_keywords.keys():
         local_keyword = local_keywords[keyword][0]
@@ -49,19 +53,22 @@ def translate_keyword_from_en(keyword, lang="en"):
         local_keyword = keyword
     return local_keyword
 
+
 def translate_keyword_to_en(keyword, lang):
-    #translated the keyword to from a local lang
+    # translated the keyword to from a local lang
     original_keywords = keywords_to_dict(lang)
     for k, v in original_keywords.items():
         if keyword in v:
             return k
     return keyword
 
+
 def get_target_keyword(keyword_dict, keyword):
     if keyword in keyword_dict.keys():
         return keyword_dict[keyword][0]
     else:
         return keyword
+
 
 def translate_keywords(input_string_, from_lang="en", to_lang="nl", level=1):
     """"Return code with keywords translated to language of choice in level of choice"""
@@ -79,31 +86,31 @@ def translate_keywords(input_string_, from_lang="en", to_lang="nl", level=1):
         ordered_rules = reversed(
             sorted(translator.rules, key=operator.attrgetter("line", "start")))
 
-        # FH Feb 2022 TODO trees containing invalid nodes are happily translated, should be stopped here!
+        # FH Feb 2022 TODO trees containing invalid nodes are happily translated,
+        # should be stopped here!
 
         result = processed_input
         for rule in ordered_rules:
             if rule.keyword in keyword_dict_from and rule.keyword in keyword_dict_to:
                 lines = result.splitlines()
-                line = lines[rule.line-1]
+                line = lines[rule.line - 1]
                 original = get_original_keyword(keyword_dict_from, rule.keyword, line)
                 target = get_target_keyword(keyword_dict_to, rule.keyword)
                 replaced_line = replace_token_in_line(line, rule, original, target)
-                result = replace_line(lines, rule.line-1, replaced_line)
+                result = replace_line(lines, rule.line - 1, replaced_line)
 
         # For now the needed post processing is only removing the 'end-block's added during pre-processing
         result = '\n'.join([line for line in result.splitlines()])
         result = result.replace('#ENDBLOCK', '')
 
         return result
-    except Exception as E:
+    except Exception:
         return input_string_
-
 
 
 def replace_line(lines, index, line):
     before = '\n'.join(lines[0:index])
-    after = '\n'.join(lines[index+1:])
+    after = '\n'.join(lines[index + 1:])
     if len(before) > 0:
         before = before + '\n'
     if len(after) > 0:
@@ -114,20 +121,36 @@ def replace_line(lines, index, line):
 def replace_token_in_line(line, rule, original, target):
     """Replaces a token in a line from the user input with its translated equivalent"""
     before = '' if rule.start == 0 else line[0:rule.start]
-    after = '' if rule.end == len(line)-1 else line[rule.end+1:]
+    after = '' if rule.end == len(line) - 1 else line[rule.end + 1:]
     # Note that we need to replace the target value in the original value because some
-    # grammar rules have ambiguous length and value, e.g. _COMMA: _SPACES* (latin_comma | arabic_comma) _SPACES*
+    # grammar rules have ambiguous length and value, e.g. _COMMA: _SPACES*
+    # (latin_comma | arabic_comma) _SPACES*
     return before + rule.value.replace(original, target) + after
 
 
-def find_command_keywords(input_string, lang, level, keywords, start_line, end_line, start_column, end_column):
+def find_command_keywords(
+        input_string,
+        lang,
+        level,
+        keywords,
+        start_line,
+        end_line,
+        start_column,
+        end_column):
     parser = hedy.get_parser(level, lang, True)
     program_root = parser.parse(input_string).children[0]
 
     translator = Translator(input_string)
     translator.visit(program_root)
 
-    return {k: find_keyword_in_rules(translator.rules, k, start_line, end_line, start_column, end_column) for k in keywords}
+    return {
+        k: find_keyword_in_rules(
+            translator.rules,
+            k,
+            start_line,
+            end_line,
+            start_column,
+            end_column) for k in keywords}
 
 
 def find_keyword_in_rules(rules, keyword, start_line, end_line, start_column, end_column):
@@ -136,6 +159,7 @@ def find_keyword_in_rules(rules, keyword, start_line, end_line, start_column, en
             if rule.line < end_line or (rule.line == end_line and rule.end <= end_column):
                 return rule.value
     return None
+
 
 def get_original_keyword(keyword_dict, keyword, line):
     found = False
@@ -149,6 +173,7 @@ def get_original_keyword(keyword_dict, keyword, line):
         return original
     else:
         return keyword
+
 
 class Translator(Visitor):
     """The visitor finds tokens that must be translated and stores information about their exact position
