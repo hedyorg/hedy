@@ -45,9 +45,6 @@ describe('Save button test', () => {
     cy.get('#save_adventure_button')
       .click();
 
-    cy.get('#modal-confirm')
-      .should('be.visible');
-
     cy.get('#modal-no-button')
       .should('be.visible')
       .click();
@@ -55,11 +52,6 @@ describe('Save button test', () => {
     cy.get('#modal_alert_container')
       .should('not.be.visible');
     cy.get('#modal_alert_text')
-      .should('not.be.visible');
-
-    cy.wait(500);
-
-    cy.get('#modal-confirm')
       .should('not.be.visible');
   })
 })
