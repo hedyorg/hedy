@@ -1,15 +1,16 @@
 import {loginForTeacher} from '../../tools/login/login.js'
 import {goToEditAdventure} from '../../tools/navigation/nav.js'
 
-describe('Level Field test', () => {
+describe('Agree public checkbox test', () => {
   it('passes', () => {
     loginForTeacher();
     goToEditAdventure();
 
-    // Tests level field interaction
-    cy.get('#custom_adventure_level')
+    cy.get('#agree_public')
       .should('be.visible')
-      .select('1')
-      .should('have.value', '1');
+      .check()
+      .should('be.checked')
+      .uncheck()
+      .should('not.be.checked');
   })
 })

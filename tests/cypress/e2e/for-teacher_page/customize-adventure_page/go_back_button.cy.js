@@ -1,15 +1,16 @@
 import {loginForTeacher} from '../../tools/login/login.js'
 import {goToEditAdventure} from '../../tools/navigation/nav.js'
 
-describe('Level Field test', () => {
+describe('Preview button test', () => {
   it('passes', () => {
     loginForTeacher();
     goToEditAdventure();
 
-    // Tests level field interaction
-    cy.get('#custom_adventure_level')
+    cy.get('#go_back_button')
       .should('be.visible')
-      .select('1')
-      .should('have.value', '1');
+      .click();
+
+    cy.url()
+      .should('eq', Cypress.config('baseUrl') + Cypress.env('teachers_page'));
   })
 })
