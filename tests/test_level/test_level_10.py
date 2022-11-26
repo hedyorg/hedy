@@ -41,6 +41,24 @@ class TestsLevel10(HedyTester):
             max_level=11
         )
 
+
+    def test_blanks(self):
+        code = textwrap.dedent("""\
+        players = Ann, John, Jesse
+        choices = 1, 2, 3, 4, 5, 6
+        _
+            print player ' throws ' choices at random
+            sleep
+        """)
+
+        self.multi_level_tester(
+            max_level=16,
+            code=code,
+            exception=hedy.exceptions.CodePlaceholdersPresentException
+        )
+
+
+
     def test_for_list_hindi(self):
         code = textwrap.dedent("""\
         क is hond, kat, papegaai
