@@ -40,6 +40,11 @@ export function goToTeachersPage()
     return goToPage(Cypress.env('teachers_page'));
 }
 
+export function goToHedyPage()
+{
+    return goToPage(Cypress.env('hedy_page'));
+}
+
 // Must be logged in and able to edit an adventure
 export function goToEditAdventure()
 {

@@ -1,4 +1,5 @@
 import textwrap
+
 from tests.Tester import HedyTester
 
 
@@ -213,11 +214,11 @@ class TestsLevel9(HedyTester):
     #
     # if pressed repeat tests
     #
-    
+
     def test_if_pressed_repeat(self):
         code = textwrap.dedent("""\
-        if x is pressed 
-            repeat 5 times 
+        if x is pressed
+            repeat 5 times
                 print 'doe het 5 keer!'""")
 
         expected = HedyTester.dedent("""\
@@ -228,14 +229,14 @@ class TestsLevel9(HedyTester):
             pygame_end = True
             pygame.quit()
             break
-          if event.type == pygame.KEYDOWN: 
-            if event.key == pygame.K_x:
+          if event.type == pygame.KEYDOWN:
+            if event.unicode == 'x':
               for i in range(int('5')):
                 print(f'doe het 5 keer!')
                 time.sleep(0.1)
               break""")
 
-        self.multi_level_tester(code=code, expected=expected, max_level = 11)
+        self.multi_level_tester(code=code, expected=expected, max_level=11)
 
     def test_if_pressed_repeat_turtle_moves_multiple_keys(self):
         code = textwrap.dedent("""\
@@ -248,7 +249,7 @@ class TestsLevel9(HedyTester):
                 turn 90
             if s is pressed
                 turn 180""")
-                
+
         expected = HedyTester.dedent("""\
         for i in range(int('10')):
           while not pygame_end:
@@ -258,8 +259,8 @@ class TestsLevel9(HedyTester):
               pygame_end = True
               pygame.quit()
               break
-            if event.type == pygame.KEYDOWN: 
-              if event.key == pygame.K_w:
+            if event.type == pygame.KEYDOWN:
+              if event.unicode == 'w':
                 trtl = 25
                 try:
                   trtl = int(trtl)
@@ -268,7 +269,7 @@ class TestsLevel9(HedyTester):
                 t.forward(min(600, trtl) if trtl > 0 else max(-600, trtl))
                 time.sleep(0.1)
                 break
-              if event.key == pygame.K_a:
+              if event.unicode == 'a':
                 trtl = -90
                 try:
                   trtl = int(trtl)
@@ -276,7 +277,7 @@ class TestsLevel9(HedyTester):
                   raise Exception(f'While running your program the command <span class="command-highlighted">turn</span> received the value <span class="command-highlighted">{trtl}</span> which is not allowed. Try changing the value to a number.')
                 t.right(min(600, trtl) if trtl > 0 else max(-600, trtl))
                 break
-              if event.key == pygame.K_d:
+              if event.unicode == 'd':
                 trtl = 90
                 try:
                   trtl = int(trtl)
@@ -284,7 +285,7 @@ class TestsLevel9(HedyTester):
                   raise Exception(f'While running your program the command <span class="command-highlighted">turn</span> received the value <span class="command-highlighted">{trtl}</span> which is not allowed. Try changing the value to a number.')
                 t.right(min(600, trtl) if trtl > 0 else max(-600, trtl))
                 break
-              if event.key == pygame.K_s:
+              if event.unicode == 's':
                 trtl = 180
                 try:
                   trtl = int(trtl)
@@ -294,4 +295,4 @@ class TestsLevel9(HedyTester):
                 break
           time.sleep(0.1)""")
 
-        self.multi_level_tester(code=code, expected=expected, extra_check_function=self.is_turtle(), max_level = 11)
+        self.multi_level_tester(code=code, expected=expected, extra_check_function=self.is_turtle(), max_level=11)
