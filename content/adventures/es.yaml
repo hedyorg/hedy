@@ -964,7 +964,7 @@ adventures:
                     En este nivel puedes aprender como {ask} (preguntar) las ordenes a tus clientes con un código muy corto.
                 start_code: "platos = apertivo, plato principal, postre"
                 story_text_2: "## Desafío\n¡Por supuesto, también puedes ordenar para varias personas!\n¿Puedes agregar la cantidad correcta de indetanción a cada línea para hacerla funcionar correctamente?\nConsejo: algunas líneas no necesita tener indentación.\n"
-                example_code: "```\nplatos = apertivo, principal, postre\n{for} plato {in} platos\n    comida = {ask} '¿Que te gustaría ordenar como tu ' course '?'\n    {print} comida ' va a ser tu ' plato\n```\n"
+                example_code: "```\nplatos = apertivo, principal, postre\n{for} plato {in} platos\n    comida = {ask} '¿Que te gustaría ordenar como tu ' plato '?'\n    {print} comida ' va a ser tu ' plato\n```\n"
                 example_code_2: "```\n_ platos = apertivo, plato principal, postre\n_ nombres = Jesús, Génesis\n_ {for} nombre {in} nombres\n_ {for} plato {in} platos\n_ comida = {ask} '¿Que te gustaría ordenar como tu ' plato '?'\n_ {print} nombre ' ordenó ' comida ' como su ' plato\n```\n"
             7:
                 story_text: |
