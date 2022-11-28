@@ -116,7 +116,7 @@ def rule_all(level):
     for command in data_level["event"]:
         list_rules.append({
             'regex': START_WORD + get_translated_keyword(command) + END_WORD,
-            'token': ["text", "keyword"],
+            'token': ["text", "event"],
             'next': "start",
             'unicode': True
         })
