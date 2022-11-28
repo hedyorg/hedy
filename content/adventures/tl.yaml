@@ -74,7 +74,7 @@ adventures:
             12:
                 start_code: '# place your code here'
                 story_text: "## Restaurant\nFrom this level on you can use decimal numbers to make you menu more realistic.\n\n## Challange\nCan you think of a code to give your friends and family a 15% discount?\n"
-                example_code: "```\nprice = 0\nfood = {ask} 'What would you like to order?'\ndrinks = {ask} 'What would you like to drink?'\n{if} food {is} 'hamburger'\n    price = price + 6.50\n{if} food {is} 'pizza'\n    price = price + 5.75\n{if} drinks {is} 'water'\n    price = price + 1.20\n{if} drink {is} 'soda'\n    price = price + 2.35\n{print} 'That will be ' price ' dollar, please'\n```\n"
+                example_code: "```\nprice = 0\nfood = {ask} 'What would you like to order?'\ndrink = {ask} 'What would you like to drink?'\n{if} food {is} 'hamburger'\n    price = price + 6.50\n{if} food {is} 'pizza'\n    price = price + 5.75\n{if} drink {is} 'water'\n    price = price + 1.20\n{if} drink {is} 'soda'\n    price = price + 2.35\n{print} 'That will be ' price ' dollar, please'\n```\n"
             13:
                 story_text_2: "We use `{or}` to see if one our of two things is the case.\n"
                 story_text: "## Restaurant\nIn this level we can use the new commands to upgrade our restaurant.\nWe use `{and}` to see {if} two things are both the case.\n"
@@ -279,8 +279,8 @@ adventures:
                 story_text_2: "The command `{add}` can also come in handy in your story.\n"
                 example_code_3: "```\n{print} His backpack got way too heavy.\n{print} Inside were a bottle of water, a flashlight and a brick.\nbag {is} water, flashlight, brick\ndump {is} {ask} Which item should he dump?\n{remove} dump {from} bag\n```\n"
                 start_code: '{print} Your story'
-                example_code_2: "```\n{print} He hears a sound\nanimals {is} \U0001F43F, \U0001F994, \U0001F987, \U0001F989\nanimal {is} {ask} What do you think it is?\n{add} animal {to_list} animals\n{print} it was an animal {at} {random}\n```\n"
-                example_code: "```\nanimals {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} He now hears the sound of an animal {at} {random}\n```\n"
+                example_code_2: "```\n{print} He hears a sound\nanimals {is} \U0001F43F, \U0001F994, \U0001F987, \U0001F989\nanimal {is} {ask} What do you think it is?\n{add} animal {to_list} animals\n{print} it was an animals {at} {random}\n```\n"
+                example_code: "```\nanimals {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} He now hears the sound of an animals {at} {random}\n```\n"
                 story_text_3: "This is an example of the `{remove}` command in your story\n\n## Challenge\nCan you use the 3 new commands `{at} {random}` , `{add} {to}` and `{remove} {from}` in your own story?\n"
             4:
                 start_code: "{print} 'Your story will be printed here!'"
