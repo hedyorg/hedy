@@ -1,4 +1,4 @@
-import {goToLogin, gotoRegisterTeacher, goToPage, gotoRegisterStudent, goToProfilePage} from '../tools/navigation/nav.js'
+import {goToLogin, gotoRegisterTeacher, goToPage, gotoRegisterStudent} from '../tools/navigation/nav.js'
 import {login, loginForUser} from '../tools/login/login.js'
 
 describe('Username field test', () => {
