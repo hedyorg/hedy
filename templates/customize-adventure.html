@@ -65,13 +65,13 @@
             </div>
             <div class="flex flex-row justify-end gap-2 my-4">
                 <button class="blue-btn" id="preview_adventure_button" onclick="hedyApp.preview_adventure();event.preventDefault();">{{_('preview')}}</button>
-                <button type="submit" class="green-btn">{{_('save')}}</button>
-                <button type="reset" class="red-btn" onclick="hedyApp.delete_adventure('{{ adventure.id }}', '{{_('delete_adventure_prompt')}}')">{{_('remove')}}</button>
+                <button type="submit" class="green-btn" id="save_adventure_button">{{_('save')}}</button>
+                <button type="reset" class="red-btn" id="remove_adventure_button" onclick="hedyApp.delete_adventure('{{ adventure.id }}', '{{_('delete_adventure_prompt')}}')">{{_('remove')}}</button>
             </div>
         </form>
     </div>
     <div>
-        <button class="blue-btn" onclick="window.open('/for-teachers', '_self');">{{_('back_to_teachers_page')}}</button>
+        <button class="blue-btn" id="go_back_button" onclick="window.open('/for-teachers', '_self');">{{_('back_to_teachers_page')}}</button>
     </div>
 </div>
 {% endblock %}
