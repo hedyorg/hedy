@@ -1,8 +1,10 @@
+import textwrap
+
+from parameterized import parameterized
+
 import hedy
 from hedy import Command
-import textwrap
 from tests.Tester import HedyTester
-from parameterized import parameterized
 
 
 class TestsLevel8(HedyTester):
@@ -62,7 +64,7 @@ class TestsLevel8(HedyTester):
     def test_if_equality_trailing_space_linebreak_print(self):
         code = textwrap.dedent("""\
         naam is James
-        if naam is trailing_space 
+        if naam is trailing_space
             print 'shaken'""")
 
         expected = textwrap.dedent("""\
@@ -88,7 +90,7 @@ class TestsLevel8(HedyTester):
     def test_if_equality_unquoted_rhs_with_space_and_trailing_space_linebreak_print(self):
         code = textwrap.dedent("""\
         naam is James
-        if naam is trailing space  
+        if naam is trailing space
             print 'shaken'""")
 
         expected = textwrap.dedent("""\
@@ -281,7 +283,7 @@ class TestsLevel8(HedyTester):
         antwoord = -10
         if antwoord is -10
             print 'Nice'""")
-        
+
         expected = textwrap.dedent("""\
         antwoord = '-10'
         if convert_numerals('Latin', antwoord) == convert_numerals('Latin', '-10'):
@@ -289,10 +291,10 @@ class TestsLevel8(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, output='Nice', max_level=11)
 
-    
     #
     # if else tests
     #
+
     def test_if_else_no_indentation(self):
         code = textwrap.dedent("""\
         antwoord is ask Hoeveel is 10 keer tien?
@@ -362,7 +364,7 @@ class TestsLevel8(HedyTester):
         a is 1
         if a is 1
             print a
-        else    
+        else
             print 'nee'""")
 
         expected = textwrap.dedent("""\
@@ -685,7 +687,8 @@ class TestsLevel8(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
-    @parameterized.expand(['5', '𑁫', '५', '૫', '੫', '৫', '೫', '୫', '൫', '௫', '౫', '၅', '༥', '᠕', '៥', '๕', '໕', '꧕', '٥', '۵'])
+    @parameterized.expand(['5', '𑁫', '५', '૫', '੫', '৫', '೫', '୫', '൫', '௫',
+                          '౫', '၅', '༥', '᠕', '៥', '๕', '໕', '꧕', '٥', '۵'])
     def test_repeat_with_all_numerals(self, number):
         code = textwrap.dedent(f"""\
         repeat {number} times
@@ -764,7 +767,7 @@ class TestsLevel8(HedyTester):
             output=output,
             max_level=11
         )
-        
+
     #
     # negative tests
     #
@@ -807,7 +810,7 @@ class TestsLevel8(HedyTester):
               pygame_end = True
               pygame.quit()
               break
-            if event.type == pygame.KEYDOWN: 
+            if event.type == pygame.KEYDOWN:
               if event.unicode == 'x':
                 print(f'it is a letter key')
                 break""")
@@ -828,7 +831,7 @@ class TestsLevel8(HedyTester):
               pygame_end = True
               pygame.quit()
               break
-            if event.type == pygame.KEYDOWN: 
+            if event.type == pygame.KEYDOWN:
               if event.unicode == 'x':
                 print(f'first key')
                 break
@@ -851,7 +854,7 @@ class TestsLevel8(HedyTester):
               pygame_end = True
               pygame.quit()
               break
-            if event.type == pygame.KEYDOWN: 
+            if event.type == pygame.KEYDOWN:
               if event.unicode == '1':
                 print(f'it is a number key')
                 break""")
@@ -877,23 +880,23 @@ class TestsLevel8(HedyTester):
               pygame_end = True
               pygame.quit()
               break
-            if event.type == pygame.KEYDOWN: 
+            if event.type == pygame.KEYDOWN:
               if event.unicode == 'x':
                 print(f'x is pressed!')
                 break    
               else:
                 print(f'x is not pressed!')
-                break\n""") +  "    "
+                break\n""") + "    "
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
     #
     # pressed turtle tests
     #
-    
+
     def test_if_pressed_with_turtlecolor(self):
         code = textwrap.dedent("""\
-        if x is pressed 
+        if x is pressed
             color red""")
 
         expected = HedyTester.dedent(f"""\
@@ -904,16 +907,16 @@ class TestsLevel8(HedyTester):
             pygame_end = True
             pygame.quit()
             break
-          if event.type == pygame.KEYDOWN: 
+          if event.type == pygame.KEYDOWN:
             if event.unicode == 'x':
               {HedyTester.indent(
-                HedyTester.turtle_color_command_transpiled('red'), 
+                HedyTester.turtle_color_command_transpiled('red'),
                 14, True)
               }
               break""")
 
         self.multi_level_tester(
-            code=code, 
+            code=code,
             expected=expected,
             extra_check_function=self.is_turtle(),
             max_level=11
@@ -934,41 +937,41 @@ class TestsLevel8(HedyTester):
             pygame_end = True
             pygame.quit()
             break
-          if event.type == pygame.KEYDOWN: 
+          if event.type == pygame.KEYDOWN:
             if event.unicode == 'x':
               {HedyTester.indent(
-                HedyTester.forward_transpiled(25, self.level), 
+                HedyTester.forward_transpiled(25, self.level),
                 14, True)
               }
               break    
             else:
               {HedyTester.indent(
-                HedyTester.turn_transpiled(90, self.level), 
+                HedyTester.turn_transpiled(90, self.level),
                 14, True)
               }
-              break\n""") +  "    "
+              break\n""") + "    "
 
         self.multi_level_tester(
-            code=code, 
+            code=code,
             expected=expected,
             extra_check_function=self.is_turtle(),
             max_level=11
         )
-    
+
     #
     # pressed negative tests
     #
 
     def test_if_no_indent_after_pressed_gives_noindent_error(self):
         code = textwrap.dedent("""\
-        if x is pressed 
+        if x is pressed
         print 'no indent!'""")
 
         self.multi_level_tester(code=code, exception=hedy.exceptions.NoIndentationException)
 
     def test_if_no_indent_after_pressed_and_else_gives_noindent_error(self):
         code = textwrap.dedent("""\
-        if x is pressed 
+        if x is pressed
         print 'no indent!'
         else
         print 'no indent again!'""")

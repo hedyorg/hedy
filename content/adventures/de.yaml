@@ -242,7 +242,7 @@ adventures:
 
                 story_text_3: |-
                     ## Eingabe
-                    Die letzte Änderung, die wir vornehmen müssen, um Python-Code zu erhalten, ist die Änderung von `{ask}` in `{input}`.
+                    Die letzte Änderung, die wir vornehmen müssen, um Python-Code zu erhalten, ist die Änderung von `{ask}` zu `{input}`.
 
                 example_code_3: |
                     ```
@@ -414,18 +414,18 @@ adventures:
             4:
                 story_text: |
                     ## Geschichte
-                    Vielleicht ist Dir ja aufgefallen, dass es in den letzten Levels ein Problem gab. Hast du zum Beispiel versucht, einen Satz mit dem Wort Tiere oder dem Wort Name zu schreiben?
-                    In diesem Level kannst du dieses Problem lösen. Setze einfach alles, was du ausgeben möchtest, in einfache Anführungszeichen.
+                    Vielleicht ist dir aufgefallen, dass es in den vorigen Leveln noch ein Problem gab. Hast du versucht, einen Satz mit dem Wort Name zu schreiben? Z.B. `{print}` mein Name ist Name.
+                    In diesem Level kannst du das lösen. Du musst alles, was du ausgeben möchtest, in einfache Anführungszeichen setzen.
 
                 example_code: |
                     ```
                     Name {is} Hans
-                    {print} 'Der Name der Hauptfigur lautet ' Name '.'
-                    {print} Name ' läuft nun in den Wald hinein.'
-                    {print} Name ' fürchtet sich ein wenig.'
-                    Tiere {is} Wildschwein, Eichhörnchen, Gürteltier
-                    {print} 'Da hört er plötzlich ein ' Tiere {at} {random} '.'
-                    {print} Name ' erschrickt. Es spukt in diesem Wald.'
+                    {print}  _ Der Name der Hauptfigur lautet _ Name
+                    {print} Name  _ läuft nun in den Wald hinein _
+                    {print} Name _ fürchtet sich ein wenig _
+                    Tiere {is} 🦔, 🐿, 🦉, 🦇
+                    {print} _ Da hört er plötzlich ein _ Tiere {at} {random}
+                    {print} Name _ erschrickt. Es spukt in diesem Wald _
                     ```
                 start_code: "{print} 'Deine Geschichte wird hier gedruckt!'"
             3:
@@ -436,7 +436,7 @@ adventures:
                 example_code: |
                     ```
                     Tiere {is} 🦔, 🐿, 🦉, 🦇
-                    {print} Er hört jetzt Tiergeräusche {at} {random}
+                    {print} Er hört jetzt ein Tiergeräusch {at} {random}
                     ```
                 story_text_2: |
                     Der Befehl `{add}` könnte auch nützlich werden in deiner Geschichte.
@@ -447,7 +447,7 @@ adventures:
                     Tiere {is} 🐿, 🦔, 🦇, 🦉
                     Tier {is} {ask} Was denkst du ist es?
                     {add} Tier {to_list} Tiere
-                    {print} Es war das Tier {at} {random}
+                    {print} Es war das Tiere {at} {random}
                     ```
                 story_text_3: |
                     Das ist ein Beispiel für den `{remove}` Befehl in deiner Geschichte
@@ -537,7 +537,7 @@ adventures:
                     {echo}
                     ```
                 start_code: "{print} Ich bin Hedy der Papagei"
-                example_code_2: "```\n{print} Im Hedy the parrot\n{ask} _\n{echo}\n{echo}\n"
+                example_code_2: "```\n{print} Ich bin Hedy der Papagei\n{ask} _\n{echo}\n{echo}\n"
                 story_text_2: "## Challenge\nKannst du den Papagei dazu bringen, eine andere Frage zu stellen? Fülle die Lücken im Beispiel aus!\n"
             2:
                 story_text: |
@@ -556,7 +556,7 @@ adventures:
                     ```
                 start_code: "{print} Ich bin Hedy der Papagei!"
                 story_text_2: "## Challenge\nDu kannst Variablen verwenden, damit der Papagei mehr als nur deinen Namen sagt. Kannst Du diesen Code vervollständigen?\n"
-                example_code_2: "```\n{print} Im Hedy the parrot\nname {is} {ask} whats your name?\n{print} name\n{sleep}\n{print} name\nsurname {is} {ask} whats your surname?\n_\n{sleep}\n_\n```\n"
+                example_code_2: "```\n{print} Ich bin Hedy der Papagei\nname {is} {ask} Wie heißt du?\n{print} name\n{sleep}\n{print} name\nNachname {is} {ask} Wie ist dein Nachname?\n_\n{sleep}\n_\n```\n"
             3:
                 story_text: |
                     ## Papagei
@@ -567,29 +567,30 @@ adventures:
                 example_code: |
                     ```
                     Wörter {is} Aaaaaaak, Hedy
-                    {print} Bring Deinem Papageien etwas bei!
-                    Neues_Wort {is} {ask} Welches Wort willst Du ihm beibringen?
-                    {add} Neues_Wort {to_list} Wörter
-                    {print} 🧒 Sag Neues_Wort , Hedy!
+                    {print} Bring deinem Papagei etwas bei!
+                    neues_Wort {is} {ask} Welches Wort willst du ihm beibringen?
+                    {add} neues_Wort {to_list} Wörter
+                    {print} 🧒 Sag neues_Wort, Hedy!
                     {print} 🦜 Wörter {at} {random}
                     ```
                 start_code: "# setze hier deinen Code hin"
             5:
                 story_text: |
                     ## Papagei
-                    Belohne Deinen Papageien, wenn er das richtige Wort sagt!
+                    Belohne deinen Papagei, wenn er das richtige Wort sagt!
+                    Vervollständige den Code, indem du die 4 fehlenden Befehle ergänzt.
 
                 example_code: |
                     ```
-                    Wörter is Aaaaaaak, Hedy
-                    {print} 'Bring Deinem Papageien etwas bei!'
-                    Neues_Wort {is} {ask} 'Welches Wort willst Du ihm beibringen?'
-                    {add} Neues_Wort {to_list} Wörter
+                    Wörter {is} Aaaaaaak, Hedy
+                    {print} 'Bring deinem Papagei etwas bei!'
+                    neues_Wort {is} {ask} 'Welches Wort willst du ihm beibringen?'
+                    {add} neues_Wort {to_list} Wörter
                     gesagtes_Wort {is} Wörter {at} {random}
-                    {print} '🧒 Sag ' Neues_Wort ', Hedy!'
+                    {print} '🧒 Sag ' neues_Wort ', Hedy!'
                     {print} '🦜 ' gesagtes_Wort
-                    {if} gesagtes_Wort is Neues_Wort {print} '🧒 Gut gemacht, Hedy! 🍪'
-                    {else} {print} '🧒 Nein, Hedy! Sag ' Neues_Wort '!'
+                    _ gesagtes_Wort {is} neues_Wort _ '🧒 Gut gemacht, Hedy! 🍪'
+                    _ _ '🧒 Nein, Hedy! Sag ' neues_Wort
                     ```
                 start_code: "# setze hier deinen Code hin"
     songs:
@@ -601,6 +602,10 @@ adventures:
                 story_text: |
                     ## Lieder
                     Jetzt machen wir es uns richtig einfach und programmieren 'Wenn Du glücklich bist, dann klatsche in die Hand'. Alles, was wir tun möchten, wenn wir glücklich sind, speichern wir in einer Variablen. Sieh es Dir an:
+
+                    ## Herausforderung
+                    Kannst du die richtige Anzahl Leerzeichen zum Einrücken hinzufügen, damit das Lied richtig spielt?
+                    Beachte: Nicht jede Zeile braucht Einrückung.
 
                 example_code: |
                     ```
@@ -617,12 +622,15 @@ adventures:
             11:
                 story_text: |
                     ## Lieder
-                    In diesem Level nutzt Du den Befehl `{for} i {in} {range}` für Lieder, in denen gezählt wird. Das klappt besonders gut mit 'Fünf kleine Affen'. Du kannst Dir aber auch die hustenden Würmchen ansehen.
+                    In diesem Level nutzt du den Befehl `{for} i {in} {range}` für Lieder, in denen gezählt wird, wie z.B. bei 'Fünf kleine Affen'.
+
+                    ## Herausforderung
+                    Fülle die Lücken und mach, dass der Code funktioniert.
 
                 example_code: |
                     ## Fünf kleine Affen
                     ```
-                    {for} i {in} {range} 5 {to} 1
+                    _ _ _ _ 5 _ 1
                         {print} i ' kleine Affen springen auf dem Bett'
                         {print} 'Einer fiel herunter und stieß sich am Brett'
                         {print} 'Da rief Mama den Doktor und der Doktor hat gesagt'
@@ -635,65 +643,75 @@ adventures:
             10:
                 story_text: |
                     ## Lieder
-                    In diesem Level kannst du ganz einfach das Kinderlied 'Fünf kleine Affen' programmieren. Kriegst du die letzte Strophe auch alleine hin?
-                    Du kannst auch das Lied über den Babyhai (mit allen Mitgliedern der Haifamilie) in nur sechs Zeilen machen!
-                    Und auch "Old MacDonald hat 'ne Farm" kriegst du ganz einfach mit allen Tieren hin, die dir einfallen.
+                    In diesem Level kannst du ganz einfach das Kinderlied 'Fünf kleine Affen' programmieren. Kriegst du die letzte Strophe erstellen?
+                    Du kannst auch das ganze Lied über den Babyhai (mit allen Mitgliedern der Haifamilie) in nur sechs Zeilen machen, indem du `{for}` benutzt!
+                    Oder du kannst "Old MacDonald hat 'ne Farm" mit all den verschiedenen Tieren machen.
+
+
+
+                    ## Herausforderungen
+                    Kannst du die Strophe der Affen auf dem Bett hinzufügen, wo nur noch ein Affe übrig ist?
+
+                    Kannst du den Babyhai-Code noch kürzer machen, indem du `{repeat}` verwendest?
+
+                    Kannst du neue Tiere zu "Old MacDonald hat 'ne Farm" hinzufügen?
 
                 example_code: |
                     ## Fünf kleine Affen springen auf dem Bett
                     ```
                     Affen = 5, 4, 3, 2
-                    for Affe in Affen
-                        print Affe ' kleine Affen springen auf dem Bett'
-                        print 'Einer fiel herunter und stieß sich am Brett'
-                        print 'Mama rief den Arzt und der Arzt hat gesagt'
-                        print 'KEIN AFFE SPRINGT MEHR AUF DEM BETT!'
+                    {for} Affe {in} Affen
+                        {print} Affe ' kleine Affen springen auf dem Bett'
+                        {print} 'Einer fiel herunter und stieß sich am Brett'
+                        {print} 'Mama rief den Arzt und der Arzt hat gesagt'
+                        {print} 'KEIN AFFE SPRINGT MEHR AUF DEM BETT!'
                     ```
 
                     ## Baby Hai
                     ```
                     Haie = Baby, Mami, Papi, Omi, Opi
-                    for Hai in Haie
-                        print Hai ' tututututudu'
-                        print Hai ' tututututudu'
-                        print Hai ' tututututudu'
-                        print Hai
+                    {for} Hai {in} Haie
+                        {print} Hai ' Hai tututututudu'
+                        {print} Hai ' Hai tututututudu'
+                        {print} Hai ' Hai tututututudu'
+                        {print} Hai ' Hai'
                     ```
                     ## Old MacDonald hat ne Farm
                     ```
                     Tiere = Schweine, Hunde, Kühe
-                    for Tier in Tiere
-                        if Tier is Schweine
+                    {for} Tier {in} Tiere
+                        {if} Tier {is} Schweine
                             Geräusch = grunz
-                        if Tier is Hunde
+                        {if} Tier {is} Hunde
                             Geräusch = wuff
-                        if Tier is Kühe
+                        {if} Tier {is} Kühe
                             Geräusch = muh
-                        print 'Old MacDonald hat ne Farm'
-                        print 'I A I A O!'
-                        print 'und auf der Farm da gibt es ' Tier
-                        print 'I A I A O!'
-                        print 'mit nem ' Geräusch Geräusch ' hier'
-                        print 'und nem ' Geräusch Geräusch ' da'
-                        print 'hier ein ' Geräusch
-                        print 'dort ein ' Geräusch
-                        print 'überall ein ' Geräusch Geräusch
+                        {print} 'Old MacDonald hat ne Farm'
+                        {print} 'I A I A O!'
+                        {print} 'und auf der Farm da gibt es ' Tier
+                        {print} 'I A I A O!'
+                        {print} 'mit nem ' Geräusch Geräusch ' hier'
+                        {print} 'und nem ' Geräusch Geräusch ' da'
+                        {print} 'hier ein ' Geräusch
+                        {print} 'dort ein ' Geräusch
+                        {print} 'überall ein ' Geräusch Geräusch
                     ```
                 start_code: "# setze hier deinen Code hin"
             8:
                 story_text: |
                     ## Lieder
-                    In einem vorigen Level hast Du das Lied über dei Bierflaschen programmiert. Du hast eine Strophe geschrieben und musstest sie dann 99 mal kopieren! In Level 8 kannst Du die Strophe 99 mal wiederholen lassen, indem Du nur eine einfache Zeile hinzufügst.
+                    In einem vorigen Level hast du das Lied über die Bierflaschen programmiert. Du hast eine Strophe geschrieben und musstest sie dann 99 mal kopieren. In diesem Level kannst du das Lied 99 mal wiederholen, indem du nur eine einfache Zeile hinzufügst!
+                    Weißt du welche Zeile Code du in die Lücken füllen musst?
 
                 example_code: |
                     ```
                     Strophe = 99
-                    {repeat} 99 {times}
-                        {print} Strophe ' Flaschen Bier an der Wand,'
-                        {print} Strophe ' Flaschen Bier.'
-                        {print} 'Nimm eine runter, reich sie herum,'
+                    _ _ _
+                        {print} Strophe ' Flaschen Bier an der Wand'
+                        {print} Strophe ' Flaschen Bier'
+                        {print} 'Nimm eine runter, reich sie herum'
                         Strophe = Strophe - 1
-                        {print} Strophe ' Flaschen Bier an der Wand.'
+                        {print} Strophe ' Flaschen Bier an der Wand'
                     ```
                 start_code: "# setze hier deinen Code hin"
             7:
@@ -721,24 +739,27 @@ adventures:
                 story_text: |
                     ## Lieder
                     In Liedern wiederholt sich oft einiges. Manchmal beinhaltet die Wiederholung auch, dass etwas gezählt wird.
-                    So zum Beispiel beim Lied über die Bierflaschen. Dies ist eigentlich ein englisches Lied und hat den Titel "99 bottles of beer". Dieses Lied kannst Du mit einem kleinen bisschen Mathematik einfach programmieren.
+                    So zum Beispiel im Lied über die Bierflaschen. Dies ist eigentlich ein englisches Lied und hat den Titel "99 bottles of beer". Dieses Lied kannst du mit ein klein wenig Mathematik programmieren.
+
+                    Tipp: Nutze die Laut-Vorlesen-Funktion um Hedy das Lied für dich singen zu lassen.
+
+                    ## Herausforderung
+                    Du kannst nun die Zeilen 2 bis 7 so oft wie du möchtest wiederholen, indem du sie kopierst.
 
                 example_code: |
                     ```
                     Strophe = 99
-                    {print} Strophe ' Flaschen Bier an der Wand,'
-                    {print} Strophe ' Flaschen Bier.'
-                    {print} 'Nimm eine runter, reich sie herum,'
+                    {print} Strophe ' Flaschen Bier an der Wand'
+                    {print} Strophe ' Flaschen Bier'
+                    {print} 'Nimm eine runter, reich sie herum'
                     Strophe = Strophe - 1
-                    {print} Strophe ' Flaschen Bier an der Wand.'
+                    {print} Strophe ' Flaschen Bier an der Wand'
+                    {sleep}
                     ```
 
-                    Du kannst jetzt die Zeilen 2 bis 6 so oft wiederholen, wie du möchtest.
-                    Dazu kopierst du sie und fügst sie am Ende wieder ein.
-
-                start_code: "{print} 'Baby Hai'"
-                story_text_2: "## 5 Little Monkeys jumping on the bed\nThis children's song counts down from 5 little monkeys to 1 monkey.\nIf you copy line 2 - 7 and paste it under the the code, you can sing the whole song!\n"
-                example_code_2: "```\nnumber = 6\nnumber = number - 1\nprint number ' little monkeys jumping on the bed'\nprint 'One fell off and bumped his head'\nprint 'Mama called the doctor and the doctor said'\nprint 'NO MORE MONKEYS JUMPING ON THE BED!'\nsleep\n```\n"
+                start_code: "{print} 'Lass uns singen!'"
+                story_text_2: "## 5 Kleine Affen springen auf dem Bett\nDieses Kinderlied zählt runter, von 5 kleinen Affen bis zu 1 Affe.\nWenn du die Zeilen 2 bis 7 kopierst und unter dem Code einfügst, kannst du das ganze Lied singen!\n"
+                example_code_2: "```\nnummer = 6\nnummer = nummer - 1\nprint nummer ' kleine Affen springen auf dem Bett'\nprint 'Einer fiel runter und stieß sich den Kopf'\nprint 'Mama rief den Arzt und der Arzt sagte'\nprint 'KEINE KLEINEN AFFEN SPRINGEN MEHR AUF DEM BETT!'\nsleep\n```\n"
             16:
                 story_text: |
                     ## Lieder
