@@ -42,9 +42,9 @@ ALL_KEYWORD_LANGUAGES = {}
 NON_LATIN_LANGUAGES = ['ar', 'bg', 'bn', 'el', 'fa', 'hi', 'he', 'pa_PK', 'ru', 'zh_Hans']
 
 # Babel has a different naming convention than Weblate and doesn't support some languages -> fix this manually
-CUSTOM_BABEL_LANGUAGES = {'pa_PK': 'pa_Arab_PK', 'tn': 'en'}
+CUSTOM_BABEL_LANGUAGES = {'pa_PK': 'pa_Arab_PK', 'tn': 'en', 'tl': 'en'}
 # For the non-existing language manually overwrite the display language to make sure it is displayed correctly
-CUSTOM_LANGUAGE_TRANSLATIONS = {'tn': 'Setswana'}
+CUSTOM_LANGUAGE_TRANSLATIONS = {'tn': 'Setswana', 'tl': 'ᜆᜄᜎᜓᜄ᜔'}
 customize_babel_locale(CUSTOM_BABEL_LANGUAGES)
 
 ADVENTURE_NAMES = [
@@ -484,26 +484,14 @@ class ParsonsProblem:
         for level in copy.deepcopy(self.file):
             exercises = copy.deepcopy(self.file.get(level))
             for number, exercise in exercises.items():
-                # Fixme: This is here for relic YAML structure support -> remove once all languages are up-to-date
-                if exercise.get('code_lines'):
-                    for k, v in exercise.get('code_lines').items():
-                        try:
-                            exercises.get(number).get('code_lines')[k] = v.format(**KEYWORDS.get(language))
-                        except IndexError:
-                            logger.error(
-                                f"There is an issue due to an empty placeholder in line: {v}")
-                        except KeyError:
-                            logger.error(
-                                f"There is an issue due to a non-existing key in line: {v}")
-                else:
-                    try:
-                        exercises.get(number)['code'] = exercises.get(number).get('code').format(**KEYWORDS.get(language))
-                    except IndexError:
-                        logger.error(
-                            f"There is an issue due to an empty placeholder in exercise: {number}")
-                    except KeyError:
-                        logger.error(
-                            f"There is an issue due to a non-existing key in exercise: {number}")
+                try:
+                    exercises.get(number)['code'] = exercises.get(number).get('code').format(**KEYWORDS.get(language))
+                except IndexError:
+                    logger.error(
+                        f"There is an issue due to an empty placeholder in exercise: {number}")
+                except KeyError:
+                    logger.error(
+                        f"There is an issue due to a non-existing key in exercise: {number}")
             keyword_data[level] = exercises
         return keyword_data
 
