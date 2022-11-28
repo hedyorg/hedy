@@ -17,10 +17,10 @@ levels:
     4:
         1:
             code: |
-                {print} pokemons {at} {random}'
+                {print} pokemons {at} {random}
                 pokemons {is} Pikachu, Charmander, Bulbasaur, Squirtle
                 {print} 'This is going to be your first pokémon!'
-                {sleep}'
+                {sleep}
             story: You are the newest Pokémon trainer from Pallet Town!\nMake a program that selects your first Pokémon.\nLet the program wait a minute before revealing your first pokémon.\n
         2:
             story: Create a lottery that lets you choose an extra price that you might win.\n
@@ -53,8 +53,8 @@ levels:
                 {print} 'The winner plays against ' players {at} {random}
                 player2 = players {at} {random}
                 {print} player1 ' first plays against ' player2
-                {remove} player1 {from} players'
-                {remove} player2 {from} players'
+                {remove} player1 {from} players
+                {remove} player2 {from} players
             story: In a chess tournament there are three players left.\nCreate a program that decides which two players first play against each other.\nFirst print the two players who play the first match, then print against which player the winner will play.\n
         2:
             story: Create the song 'The wheels on the bus go round and round'\n
@@ -117,16 +117,16 @@ levels:
                 {print} 'You are selected in team... '
                 teams = red, yellow, blue
                 {print} 'Red, Yellow of Blue?'
-                {repeat} 5 {times}'
-                  {print} teams {at} {random}'
-                  sleep 2'
+                {repeat} 5 {times}
+                  {print} teams {at} {random}
+                  sleep 2
             story: You and four other friends are playing Pokémon Go! Create a program that decides in which team each of you will play.\nEither red, yellow or blue! Take a little pauze after announcing a team.\n
         2:
             story: Print the countdown for a  game of hide and seek.\n
             code: |
                 counter = 11
-                {repeat} 10 {times}'
-                  counter = counter - 1'
-                  {print} counter'
-                  {sleep} 1'
+                {repeat} 10 {times}
+                  counter = counter - 1
+                  {print} counter
+                  {sleep} 1
                 {print} 'Ready or not here I come!'

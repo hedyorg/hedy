@@ -132,7 +132,7 @@ levels:
                 {print} player1 ' first plays against ' player2
                 {remove} player1 {from} players
                 {remove} player2 {from} players
-                Gcode: |{print} 'The winner plays against ' players {at} {random}
+                {print} 'The winner plays against ' players {at} {random}
         2:
             story: |
                 Create the song 'The wheels on the bus go round and round'

@@ -2,42 +2,42 @@ levels:
     1:
         2:
             code: |
-                {ask} Çfarë kënge dëshironi të dëgjoni?'
-                {print} Ky është DJ Hedy'
-                {ask} A jeni gati për festë?'
-                {echo} Zgjedhje e shkëlqyer! Unë dua'
+                {ask} Çfarë kënge dëshironi të dëgjoni?
+                {print} Ky është DJ Hedy
+                {ask} A jeni gati për festë?
+                {echo} Zgjedhje e shkëlqyer! Unë dua
             story: Jeni tek tavolina e DJ duke kërkuar një këngë. Krijoni një program që ju pyet nëse jeni gati për të festuar dhe më pas pyet se cilën këngë dëshironi të dëgjoni.\n
         1:
             story: Ju jeni një klient në furrën Hedy.\nJu dëshironi të hyni në furrë dhe jeni të mirëpritur nga bukëpjekësi.\nAi pyet se çfarë lloj byreku doni të porosisni.\nMë pas, porosia juaj është duke u përgatitur.\n
             code: |
-                {print} Mirë se vini në furrën e bukës Hedy!'
-                {ask} Çfarë lloj byreku dëshironi të porosisni?'
-                {echo} Pra, ju dëshironi'
-                {print} Porosia juaj po përgatitet!'
+                {print} Mirë se vini në furrën e bukës Hedy!
+                {ask} Çfarë lloj byreku dëshironi të porosisni?
+                {echo} Pra, ju dëshironi
+                {print} Porosia juaj po përgatitet!
     2:
         1:
             story: Ju dhe miqtë tuaj do të shikoni disa Netflix.\nTrego se cilin film do të shikosh dhe uroj shikuesve shumë argëtim!\n
             code: |
-                {print} Është koha për një mbrëmje të Netflix'
+                {print} Është koha për një mbrëmje të Netflix
                 filmi {is} Sonic the Hedgehog 2
                 {print} Ne do të shikojmë
-                {print} Argëtohu shumë!'
+                {print} Argëtohu shumë!
         2:
             story: Ky është dyqani në internet i një dyqani lodrash. Krijo një program ku klientët mund të shtojnë një artikull në karrocën e tyre të blerjeve.\n
             code: |
-                {print} Mirë se vini në dyqanin tonë të lodrave'
+                {print} Mirë se vini në dyqanin tonë të lodrave
                 lodër {is} {ask} Çfarë dëshironi të blini?
-                {print} Lodra është shtuar në shportën tuaj të blerjeve.'
-                {print} Faleminderit për blerjet me ne!'
+                {print} Lodra është shtuar në shportën tuaj të blerjeve.
+                {print} Faleminderit për blerjet me ne!
     3:
         1:
             story: Viti i ri shkollor në Hogwarts po fillon!\nËshtë detyra e kapelës së renditjes që t'ju renditë në një nga shtëpitë.\nNë cilën shtëpi do të renditeni?\nA jeni një Gryffindor, Hufflepuf, Ravenclaw apo Slytherin.\nLëreni programin të presë një periudhë të shkurtër përpara se të zbulojë shtëpinë tuaj.\n
             code: |
-                {print} Viti i ri shkollor në Hogwarts po fillon!'
-                {print} Kapela e renditjes është gati për t''ju renditur në një shtëpi në Hogwarts.'
-                houses {is} Gryffindor, Hufflepuff, Ravenclaw, Slytherin'
-                {sleep} 2'
-                {print} Dhe është houses {at} {random}'
+                {print} Viti i ri shkollor në Hogwarts po fillon!
+                {print} Kapela e renditjes është gati për t''ju renditur në një shtëpi në Hogwarts.
+                houses {is} Gryffindor, Hufflepuff, Ravenclaw, Slytherin
+                {sleep} 2
+                {print} Dhe është houses {at} {random}
         2:
             story: Krijoni një program që zgjedh një vakt të rastësishëm për ju. Bëni një listë ushqimesh dhe një listë të shtesave dhe lëreni programin të vendosë se çfarë do të keni!\n
             code: |

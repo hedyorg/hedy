@@ -2,32 +2,32 @@ levels:
     1:
         1:
             code: |
-                {print} Your order is being prepared!'
-                {print} Welcome to bakery Hedy!'
-                {ask} What type of pie do you want to order?'
-                {echo} So you want'
+                {print} Your order is being prepared!
+                {print} Welcome to bakery Hedy!
+                {ask} What type of pie do you want to order?
+                {echo} So you want
             story: You're a customer at bakery Hedy.\nYou want into the bakery and are welcomed by the baker.\nHe asks what type of pie you want to order.\nNext, your order is being prepared.\n
         2:
             story: You're at the DJ Booth requesting a song. Create a program that asks if you are ready to party and then asks which song you would like to hear.\n
             code: |
-                {print} This is DJ Hedy'
-                {ask} Are you ready to party?'
-                {ask} What song would you like to hear?'
-                {echo} Great choice! I love'
+                {print} This is DJ Hedy
+                {ask} Are you ready to party?
+                {ask} What song would you like to hear?
+                {echo} Great choice! I love
     2:
         2:
             code: |
-                {print} Thank you for shopping with us!'
-                {print} Welcome to our toystore'
-                toy {is} {ask} What would you like to buy?
-                {print} The toy is added to your shopping cart.'
+                {print} Thank you for shopping with us!
+                {print} Welcome to our toystore
+                toy {is} {ask} What would you like to buy
+                {print} The toy is added to your shopping cart.
             story: This is the webshop of a toy store. Create a program where costumers can add an item to their shopping cart.\n
         1:
             code: |
                 film {is} Sonic the Hedgehog 2
-                {print} It is time for an evening of Netflix'
+                {print} It is time for an evening of Netflix
                 {print} We're going to film
-                {print} Have lot of fun!'
+                {print} Have lot of fun!
             story: You and your friends are going to watch some Netflix.\nShow which movie you're about to watch and wish the viewers lot of fun!\n
     5:
         2:
@@ -73,10 +73,10 @@ levels:
         2:
             code: |
                 toppings {is} chocolate, cheese, tuna, sprinkles
-                {print} Your random meal for today is...'
+                {print} Your random meal for today is...
                 food {is} pizza, icecream, salad, sandwich
                 sleep 2
-                {print} food {at} {random} with toppings {at} {random}'
+                {print} food {at} {random} with toppings {at} {random}
             story: Create a program that chooses a random meal for you. Make a list of food and a list of toppings and let the program decide what you'll have!\n
     4:
         1:
@@ -116,17 +116,17 @@ levels:
             code: |
                 {print} 'Ready or not here I come!'
                 counter = 11
-                {repeat} 10 {times}'
-                  counter = counter - 1'
-                  {print} counter'
-                  {sleep} 1'
+                {repeat} 10 {times}
+                  counter = counter - 1
+                  {print} counter
+                  {sleep} 1
             story: Print the countdown for a game of hide and seek.\n
         1:
             story: You and four other friends are playing Pokémon Go! Create a program that decides in which team each of you will play.\nEither red, yellow or blue! Take a little pauze after announcing a team.\n
             code: |
                 teams = red, yellow, blue
                 {print} 'Red, Yellow or Blue?'
-                {repeat} 5 {times}'
+                {repeat} 5 {times}
                   {print} 'You are selected in team... '
-                  {print} teams {at} {random}'
-                  sleep 2'
+                  {print} teams {at} {random}
+                  sleep 2
