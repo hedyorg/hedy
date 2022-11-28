@@ -41,7 +41,7 @@ ask_after_equal = {
 
 LEVELS = {
     4: {  # not used
-        "space_before_and_after": ["is", "at", "add", "to_list", "remove", "from", "color", "pressed"],
+        "space_before_and_after": ["is", "at", "add", "to_list", "remove", "from", "color"],
         "no_space": ["comma"],
         "space_before": ["print", "sleep", "forward", "turn", "random"],
         "space_after": [],
