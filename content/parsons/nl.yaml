@@ -12,7 +12,7 @@ levels:
                 {echo} Dus u wilt
                 {print} De bestelling wordt klaargezet!
         2:
-            story: "You're at the DJ Booth requesting a song. Create a program that asks if you are ready to party and then asks which song you would like to hear."
+            story: You're at the DJ Booth requesting a song. Create a program that asks if you are ready to party and then asks which song you would like to hear.
             code: |
                 {print} This is DJ Hedy
                 {ask} Are you ready to party?
@@ -29,7 +29,7 @@ levels:
                 {print} We gaan kijken naar film
                 {print} Heel veel plezier!
         2:
-            story: "This is the webshop of a toy store. Create a program where costumers can add an item to their shopping cart."
+            story: This is the webshop of a toy store. Create a program where costumers can add an item to their shopping cart.
             code: |
                 {print} Welcome to our toystore
                 toy is {ask} What would you like to buy?
@@ -50,7 +50,7 @@ levels:
                 {sleep} 2
                 {print} het wordt afdelingen {at} {random}
         2:
-            story: "Create a program that chooses a random meal for you. Make a list of food and a list of toppings and let the program decide what you'll have!"
+            story: Create a program that chooses a random meal for you. Make a list of food and a list of toppings and let the program decide what you'll have!
             code: |
                 food {is} pizza, icecream, salad, sandwich
                 toppings {is} chocolate, cheese, tuna, sprinkles
@@ -69,7 +69,7 @@ levels:
                 {sleep}
                 {print} pokemons {at} {random}
         2:
-            story: "Create a lottery that lets you choose an extra price that you might win."
+            story: Create a lottery that lets you choose an extra price that you might win.
             code: |
                 prices {is} car, hamster, million euros
                 price {is} {ask} 'What would you like to win?'
@@ -87,7 +87,7 @@ levels:
                 {else} {print} 'Wat jammer dat jouw favoriete film niet in het lijstje staat, we voegen hem toe aan de lijst!'
                 {add} film {to_list} favoriete_film
         2:
-            story: "Create a maths game."
+            story: Create a maths game.
             code: |
                 {print} 'Solve this problem'
                 answer {is} {ask} '88 - 16 = ?'
@@ -107,7 +107,7 @@ levels:
                 {print} 'In hondenjaren ben jij ' hond_leeftijd ' jaar oud.'
                 {print} 'In kattenjaren ben jij ' kat_leeftijd ' jaar oud.'
         2:
-            story: "Create a program that helps you calculate how many cakes you should buy for your birthday party."
+            story: Create a program that helps you calculate how many cakes you should buy for your birthday party.
             code: |
                 {print} 'It is your birthday!'
                 people = {ask} 'How many people do you want to give a slice of cake?'
@@ -128,7 +128,7 @@ levels:
                 {remove} speler2 {from} spelers
                 {print} 'De winnaar speelt tegen ' spelers {at} {random}
         2:
-            story: "Create the song 'The wheels on the bus go round and round'"
+            story: Create the song 'The wheels on the bus go round and round'
             code: |
                 {print} 'the wheels on the bus go'
                 {repeat} 3 {times} {print} 'round and round'
