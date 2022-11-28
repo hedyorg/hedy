@@ -5,7 +5,7 @@ export function loginForUser() {
 }
 
 export function loginForTeacher() {
-    login("teacher1", "123456");
+    login("panda123!", "bier123!");
 }
 
 export function loginForStudent() {

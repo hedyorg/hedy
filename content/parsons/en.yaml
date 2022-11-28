@@ -15,10 +15,10 @@ levels:
             story: |
                 You're at the DJ Booth requesting a song. Create a program that asks if you are ready to party and then asks which song you would like to hear.
             code: |
-                A: "{print} This is DJ Hedy"
-                B: "{ask} Are you ready to party?"
-                C: "{ask} What song would you like to hear?"
-                D: "{echo} Great choice! I love"
+                {print} This is DJ Hedy
+                {ask} Are you ready to party?
+                {ask} What song would you like to hear?
+                {echo} Great choice! I love
     2:
         1:
             story: |
@@ -68,7 +68,7 @@ levels:
                 Let the program wait a minute before revealing your first pokémon.
             code: |
                 pokemons {is} Pikachu, Charmander, Bulbasaur, Squirtle
-                {print} 'This is going to be your first pokémon!'
+                {print} 'This is going to be your first Pokémon!'
                 {sleep}
                 {print} pokemons {at} {random}
         2:
@@ -85,11 +85,11 @@ levels:
                 Make a program that checks if your favourite movie is already in the list of the computer.
                 If so, print that you have great taste, otherwise add the movie to the list.
             code: |
-                favorite_movies {is} Batman, Spiderman, The Avengers, Jurassic Park"
-                movie {is} {ask} 'What is your favourite movie?'"
-                {if} movie {in} favorite_movies {print} 'You have great taste!'"
-                {else} {print} 'Such a shame that your favourite movie is not in the list, we will add it right away!'"
-                {add} movie {to_list} favorite_movies"
+                favorite_movies {is} Batman, Spiderman, The Avengers, Jurassic Park
+                movie {is} {ask} 'What is your favourite movie?'
+                {if} movie {in} favorite_movies {print} 'You have great taste!'
+                {else} {print} 'Such a shame that your favourite movie is not in the list, we will add it right away!'
+                {add} movie {to_list} favorite_movies
         2:
             story: |
                 Create a maths game.
@@ -109,8 +109,8 @@ levels:
                 age = {ask} 'How old are you?'
                 dog_age = age * 7
                 cat_age = age * 5
-                {print} 'In dogyears you are ' dog_age ' years old.'
-                {print} 'In catyears you are ' cat_age ' years old.'
+                {print} 'In dog years you are ' dog_age ' years old.'
+                {print} 'In cat years you are ' cat_age ' years old.'
         2:
             story: |
                 Create a program that helps you calculate how many cakes you should buy for your birthday party.
@@ -150,16 +150,16 @@ levels:
                 teams = red, yellow, blue
                 {print} 'Red, Yellow or Blue?'
                 {repeat} 5 {times}
-                {print} 'You are selected in team... '
-                {print} teams {at} {random}
-                  sleep 2
+                    {print} 'You are selected in team... '
+                    {print} teams {at} {random}
+                    sleep 2
         2:
             story: |
                 Print the countdown for a game of hide and seek.
             code: |
                 counter = 11
                 {repeat} 10 {times}
-                  counter = counter - 1
-                  {print} counter
-                  {sleep} 1
+                    counter = counter - 1
+                    {print} counter
+                    {sleep} 1
                 {print} 'Ready or not here I come!'

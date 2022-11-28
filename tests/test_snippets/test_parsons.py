@@ -29,19 +29,9 @@ def collect_snippets(path):
             else:
                 try:
                     for exercise_id, exercise in levels[level].items():
-                        lines = exercise.get('code_lines')
-                        code = ""
-                        # The lines have a letter: A: ..., B:...., C:....
-                        for letter in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
-                            line = lines.get(letter)
-                            if line:
-                                code += line + "\n"
-                            else:
-                                break
+                        code = exercise.get('code')
                         # test only unique snippets
-                        if hash(code) in unique_snippets_table:
-                            continue
-                        else:
+                        if not hash(code) in unique_snippets_table:
                             unique_snippets_table.add(hash(code))
                         Hedy_snippets.append(
                             Snippet(
