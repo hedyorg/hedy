@@ -42,9 +42,9 @@ ALL_KEYWORD_LANGUAGES = {}
 NON_LATIN_LANGUAGES = ['ar', 'bg', 'bn', 'el', 'fa', 'hi', 'he', 'pa_PK', 'ru', 'zh_Hans']
 
 # Babel has a different naming convention than Weblate and doesn't support some languages -> fix this manually
-CUSTOM_BABEL_LANGUAGES = {'pa_PK': 'pa_Arab_PK', 'tn': 'en'}
+CUSTOM_BABEL_LANGUAGES = {'pa_PK': 'pa_Arab_PK', 'tn': 'en', 'tl': 'en'}
 # For the non-existing language manually overwrite the display language to make sure it is displayed correctly
-CUSTOM_LANGUAGE_TRANSLATIONS = {'tn': 'Setswana'}
+CUSTOM_LANGUAGE_TRANSLATIONS = {'tn': 'Setswana', 'tl': 'ᜆᜄᜎᜓᜄ᜔'}
 customize_babel_locale(CUSTOM_BABEL_LANGUAGES)
 
 ADVENTURE_NAMES = [
@@ -497,7 +497,8 @@ class ParsonsProblem:
                                 f"There is an issue due to a non-existing key in line: {v}")
                 else:
                     try:
-                        exercises.get(number)['code'] = exercises.get(number).get('code').format(**KEYWORDS.get(language))
+                        exercises.get(number)['code'] = exercises.get(number).get('code').\
+                            format(**KEYWORDS.get(language))
                     except IndexError:
                         logger.error(
                             f"There is an issue due to an empty placeholder in exercise: {number}")
