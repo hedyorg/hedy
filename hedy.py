@@ -1592,11 +1592,11 @@ while not pygame_end:
         if button:
             command = f"""\
     if event.type == pygame.USEREVENT:
-{ConvertToPython.indent(command, 6)}"""
+{ConvertToPython.indent(command, 8)}"""
         else:
             command = f"""\
     if event.type == pygame.KEYDOWN:
-{ConvertToPython.indent(command, 6)}"""
+{ConvertToPython.indent(command, 8)}"""
 
         if self.ifpressed_prefix_added:
             return command
@@ -1610,22 +1610,32 @@ while not pygame_end:
             button_name = self.process_variable(args[0], meta.line)
             return self.make_ifpressed_command(f"""\
 if event.key == {button_name}:
-{ConvertToPython.indent(args[1], 2)}
-  break;""", True)
+{ConvertToPython.indent(args[1], 4)}
+    break""", True)
         else:
             return self.make_ifpressed_command(f"""\
 if event.key == pygame.K_{args[0]}:
-{ConvertToPython.indent(args[1], 2)}
-  break""")
+{ConvertToPython.indent(args[1], 4)}
+    break""")
 
-    def ifpressed_else(self, met, args):
-        return self.make_ifpressed_command(f"""\
-    if event.key == pygame.K_{args[0]}:
-{ConvertToPython.indent(args[1], 6)}
-      break
-    else:
-{ConvertToPython.indent(args[2], 6)}
-      break""")
+    def ifpressed_else(self, meta, args):
+        if (len(args[0]) > 1):
+            button_name = self.process_variable(args[0], meta.line)
+            return self.make_ifpressed_command(f"""\
+if event.key == {button_name}:
+{ConvertToPython.indent(args[1], 4)}
+    break
+else:
+{ConvertToPython.indent(args[2], 4)}
+    break""", True)
+        else:
+            return self.make_ifpressed_command(f"""\
+if event.key == pygame.K_{args[0]}:
+{ConvertToPython.indent(args[1], 4)}
+    break
+else:
+{ConvertToPython.indent(args[2], 4)}
+    break""")
 
 @v_args(meta=True)
 @hedy_transpiler(level=6)
