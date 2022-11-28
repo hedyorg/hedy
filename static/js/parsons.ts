@@ -86,11 +86,10 @@ export function loadNextExercise() {
 
 function parse_code_string_into_dict(code: string) {
     // Fixme: For relic code support we still need the alphabetic order
-    const order = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     const splitted_code = code.split(/\r?\n/).filter(e => String(e).trim());
     let code_lines: Record<string, string> = {};
     for (let index = 0; index < splitted_code.length; index++) {
-        code_lines[order[index]] = splitted_code[index]
+        code_lines[index+1] = splitted_code[index]
     }
     return code_lines;
 }
