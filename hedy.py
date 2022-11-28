@@ -1781,33 +1781,47 @@ class ConvertToPython_8_9(ConvertToPython_7):
         args = [a for a in args if a != ""] # filter out in|dedent tokens
 
         all_lines = '\n'.join([x for x in args[1:]])
-        all_lines = ConvertToPython.indent(all_lines, 6)
+        all_lines = ConvertToPython.indent(all_lines, 4)
 
-        return self.make_ifpressed_command(f"""\
-    if event.key == pygame.K_{args[0]}:
+        if (len(args[0]) > 1):
+            button_name = self.process_variable(args[0], met.line)
+            return self.make_ifpressed_command(f"""\
+if event.key == {button_name}:
 {all_lines}
-      break""")
+    break""", True)
+        else:
+            return self.make_ifpressed_command(f"""\
+if event.key == pygame.K_{args[0]}:
+{all_lines}
+    break""")
 
     def ifpressed_else(self, met, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
 
         all_lines = '\n'.join([x for x in args[1:]])
-        all_lines = ConvertToPython.indent(all_lines, 6)
+        all_lines = ConvertToPython.indent(all_lines, 4)
 
-        return self.make_ifpressed_command(f"""\
-    if event.key == pygame.K_{args[0]}:
+        if (len(args[0]) > 1):
+            button_name = self.process_variable(args[0], met.line)
+            return self.make_ifpressed_command(f"""\
+if event.key == {button_name}:
 {all_lines}
-      break""")
+    break""", True)
+        else:
+            return self.make_ifpressed_command(f"""\
+if event.key == pygame.K_{args[0]}:
+{all_lines}
+    break""")
 
     def elses(self, meta, args):
         args = [a for a in args if a != ""] # filter out in|dedent tokens
-        all_lines = [ConvertToPython.indent(x) for x in args]
+        all_lines = [ConvertToPython.indent(x, 8) for x in args]
 
-        return "\nelse:\n" + "\n".join(all_lines)
+        return "\n    else:\n" + "\n".join(all_lines)
 
     def ifpressed_elses(self, meta, args):
         args = [a for a in args if a != ""] # filter out in|dedent tokens
-        args += ["  break\n"]
+        args += ["        break\n"]
 
         all_lines = "\n".join(
             [ConvertToPython.indent(x, 4) for x in args]
