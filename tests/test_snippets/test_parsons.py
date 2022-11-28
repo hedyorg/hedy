@@ -31,9 +31,7 @@ def collect_snippets(path):
                     for exercise_id, exercise in levels[level].items():
                         code = exercise.get('code')
                         # test only unique snippets
-                        if hash(code) in unique_snippets_table:
-                            continue
-                        else:
+                        if not hash(code) in unique_snippets_table:
                             unique_snippets_table.add(hash(code))
                         Hedy_snippets.append(
                             Snippet(

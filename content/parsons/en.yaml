@@ -68,7 +68,7 @@ levels:
                 Let the program wait a minute before revealing your first pokémon.
             code: |
                 pokemons {is} Pikachu, Charmander, Bulbasaur, Squirtle
-                {print} 'This is going to be your first pokémon!'
+                {print} 'This is going to be your first Pokémon!'
                 {sleep}
                 {print} pokemons {at} {random}
         2:
@@ -109,8 +109,8 @@ levels:
                 age = {ask} 'How old are you?'
                 dog_age = age * 7
                 cat_age = age * 5
-                {print} 'In dogyears you are ' dog_age ' years old.'
-                {print} 'In catyears you are ' cat_age ' years old.'
+                {print} 'In dog years you are ' dog_age ' years old.'
+                {print} 'In cat years you are ' cat_age ' years old.'
         2:
             story: |
                 Create a program that helps you calculate how many cakes you should buy for your birthday party.
@@ -150,16 +150,16 @@ levels:
                 teams = red, yellow, blue
                 {print} 'Red, Yellow or Blue?'
                 {repeat} 5 {times}
-                {print} 'You are selected in team... '
-                {print} teams {at} {random}
-                  sleep 2
+                    {print} 'You are selected in team... '
+                    {print} teams {at} {random}
+                    sleep 2
         2:
             story: |
                 Print the countdown for a game of hide and seek.
             code: |
                 counter = 11
                 {repeat} 10 {times}
-                  counter = counter - 1
-                  {print} counter
-                  {sleep} 1
+                    counter = counter - 1
+                    {print} counter
+                    {sleep} 1
                 {print} 'Ready or not here I come!'

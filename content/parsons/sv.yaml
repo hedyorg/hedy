@@ -3,25 +3,25 @@ levels:
         1:
             story: Du är kund hos bageriet Hedy. \nDu går in på bageriet och välkomnas av bagaren. \nHan frågar vilken sorts paj du vill beställa. \nSedan förbereds din order.\n
             code: |
-                {print} Välkommen till bageriet Hedy!'
-                {ask} Vilken typ av paj vill du beställa?'
-                {echo} So you want'
-                {print} Your order is being prepared!'
+                {print} Välkommen till bageriet Hedy!
+                {ask} Vilken typ av paj vill du beställa?
+                {echo} So you want
+                {print} Your order is being prepared!
         2:
             story: You're at the DJ Booth requesting a song. Create a program that asks if you are ready to party and then asks which song you would like to hear.\n
             code: |
-                {print} This is DJ Hedy'
-                {ask} Are you ready to party?'
-                {ask} What song would you like to hear?'
-                {echo} Great choice! I love'
+                {print} This is DJ Hedy
+                {ask} Are you ready to party?
+                {ask} What song would you like to hear?
+                {echo} Great choice! I love
     3:
         2:
             code: |
                 food {is} pizza, icecream, salad, sandwich
                 toppings {is} chocolate, cheese, tuna, sprinkles
                 {print} Your random meal for today is...'
-                sleep 2
-                {print} food at random with toppings at random'
+                {sleep} 2
+                {print} food at random with toppings at random
             story: Create a program that chooses a random meal for you. Make a list of food and a list of toppings and let the program decide what you'll have!\n
         1:
             story: The new school year at Hogwarts is starting! \nIt is the job of the sorting hat to sort you into one of the houses.\nWhich house will you be sorted into?\nAre you a Gryffindor, Hufflepuf, Ravenclaw or Slytherin.\nLet the program wait a short period before revealing your house.\n
@@ -29,22 +29,22 @@ levels:
                 {print} The new school year at Hogwarts is starting!'
                 {print} The sorting hat is ready to sort you into a Hogwarts house.'
                 houses {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin
-                {sleep} 2'
-                {print} And it is houses {at} {random}'
+                {sleep} 2
+                {print} And it is houses {at} {random}
     4:
         1:
             story: You are the newest Pokémon trainer from Pallet Town!\nMake a program that selects your first Pokémon.\nLet the program wait a minute before revealing your first pokémon.\n
             code: |
                 pokemons {is} Pikachu, Charmander, Bulbasaur, Squirtle
                 {print} 'This is going to be your first pokémon!'
-                {sleep}'
-                {print} pokemons {at} {random}'
+                {sleep}
+                {print} pokemons {at} {random}
         2:
             story: Create a lottery that lets you choose an extra price that you might win.\n
             code: |
                 prices {is} car, hamster, 1 million euros
                 price {is} {ask} 'What would you like to win?'
-                {add} price {to_list} prices'
+                {add} price {to_list} prices
                 {print} 'You won a ' prices {at} {random}
     5:
         2:
@@ -56,11 +56,11 @@ levels:
             story: Create a maths game.\n
         1:
             code: |
-                favoriete_movies {is} Batman, Spiderman, The Avengers, Jurassic Park
+                favorite_movies {is} Batman, Spiderman, The Avengers, Jurassic Park
                 movie {is} {ask} 'What is your favourite movie?'
-                {if} movie {in} favoriete_movies {print} 'You have great taste!'
+                {if} movie {in} favorite_movies {print} 'You have great taste!'
                 {else} {print} 'Such a shame that your favourite movie is not in the list, we will add it right away!'
-                {add} movie {to_list} favoriete_movies'
+                {add} movie {to_list} favorite_movies
             story: Make a program that checks if your favourite movie is already in the list of the computer.\nIf so, print that you have great taste, otherwise add the movie to the list.\n
     6:
         1:
@@ -86,8 +86,8 @@ levels:
                 player1 = players {at} {random}
                 player2 = players {at} {random}
                 {print} player1 ' first plays against ' player2
-                {remove} player1 {from} players'
-                {remove} player2 {from} players'
+                {remove} player1 {from} players
+                {remove} player2 {from} players
                 {print} 'The winner plays against ' players {at} {random}
         2:
             story: Create the song 'The wheels on the bus go round and round'\n
@@ -117,16 +117,16 @@ levels:
             code: |
                 teams = red, yellow, blue
                 {print} 'Red, Yellow of Blue?'
-                {repeat} 5 {times}'
-                  {print} 'You are selected in team... '
-                  {print} teams {at} {random}'
-                  sleep 2'
+                {repeat} 5 {times}
+                    {print} 'You are selected in team... '
+                    {print} teams {at} {random}
+                    sleep 2
         2:
             story: Print the countdown for a  game of hide and seek.\n
             code: |
                 counter = 11
-                {repeat} 10 {times}'
-                  counter = counter - 1'
-                  {print} counter'
-                  {sleep} 1'
+                {repeat} 10 {times}
+                    counter = counter - 1
+                    {print} counter
+                    {sleep} 1
                 {print} 'Ready or not here I come!'

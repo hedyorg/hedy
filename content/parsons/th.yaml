@@ -27,8 +27,8 @@ levels:
             code: |
                 pokemons {is} Pikachu, Charmander, Bulbasaur, Squirtle
                 {print} 'This is going to be your first pokémon!'
-                {sleep}'
-                {print} pokemons {at} {random}'
+                {sleep}
+                {print} pokemons {at} {random}
     2:
         1:
             story: You and your friends are going to watch some Netflix.\nShow which movie you're about to watch and wish the viewers lot of fun!\n
@@ -65,19 +65,19 @@ levels:
             code: |
                 teams = red, yellow, blue
                 {print} 'Red, Yellow of Blue?'
-                {repeat} 5 {times}'
-                  {print} 'You are selected in team... '
-                  {print} teams {at} {random}'
-                  sleep 2'
+                {repeat} 5 {times}
+                    {print} 'You are selected in team... '
+                    {print} teams {at} {random}
+                    sleep 2
             story: You and four other friends are playing Pokémon Go! Create a program that decides in which team each of you will play.\nEither red, yellow or blue! Take a little pauze after announcing a team.\n
         2:
             story: Print the countdown for a  game of hide and seek.\n
             code: |
                 counter = 11
-                {repeat} 10 {times}'
-                  counter = counter - 1'
-                  {print} counter'
-                  {sleep} 1'
+                {repeat} 10 {times}
+                    counter = counter - 1
+                    {print} counter
+                    {sleep} 1
                 {print} 'Ready or not here I come!'
     7:
         1:
@@ -87,8 +87,8 @@ levels:
                 player1 = players {at} {random}
                 player2 = players {at} {random}
                 {print} player1 ' first plays against ' player2
-                {remove} player1 {from} players'
-                {remove} player2 {from} players'
+                {remove} player1 {from} players
+                {remove} player2 {from} players
                 {print} 'The winner plays against ' players {at} {random}
         2:
             story: Create the song 'The wheels on the bus go round and round'\n
@@ -104,8 +104,8 @@ levels:
                 {print} The new school year at Hogwarts is starting!'
                 {print} The sorting hat is ready to sort you into a Hogwarts house.'
                 houses {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin
-                {sleep} 2'
-                {print} And it is houses {at} {random}'
+                {sleep} 2
+                {print} And it is houses {at} {random}
         2:
             story: Create a program that chooses a random meal for you. Make a list of food and a list of toppings and let the program decide what you'll have!\n
             code: |
@@ -113,16 +113,16 @@ levels:
                 toppings {is} chocolate, cheese, tuna, sprinkles
                 {print} Your random meal for today is...'
                 sleep 2
-                {print} food at random with toppings at random'
+                {print} food at random with toppings at random
     5:
         1:
             story: Make a program that checks if your favourite movie is already in the list of the computer.\nIf so, print that you have great taste, otherwise add the movie to the list.\n
             code: |
-                favoriete_movies {is} Batman, Spiderman, The Avengers, Jurassic Park
+                favorite_movies {is} Batman, Spiderman, The Avengers, Jurassic Park
                 movie {is} {ask} 'What is your favourite movie?'
-                {if} movie {in} favoriete_movies {print} 'You have great taste!'
+                {if} movie {in} favorite_movies {print} 'You have great taste!'
                 {else} {print} 'Such a shame that your favourite movie is not in the list, we will add it right away!'
-                {add} movie {to_list} favoriete_movies'
+                {add} movie {to_list} favorite_movies
         2:
             story: Create a maths game.\n
             code: |

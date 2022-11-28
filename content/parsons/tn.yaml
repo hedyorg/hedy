@@ -17,17 +17,17 @@ levels:
     4:
         1:
             code: |
-                {print} pokemons {at} {random}
+                {print} 'This is going to be your first Pokémon!'
                 pokemons {is} Pikachu, Charmander, Bulbasaur, Squirtle
-                {print} 'This is going to be your first pokémon!'
                 {sleep}
+                {print} pokemons {at} {random}
             story: You are the newest Pokémon trainer from Pallet Town!\nMake a program that selects your first Pokémon.\nLet the program wait a minute before revealing your first pokémon.\n
         2:
             story: Create a lottery that lets you choose an extra price that you might win.\n
             code: |
                 prices {is} car, hamster, 1 million euros
                 price {is} {ask} 'What would you like to win?'
-                {add} price {to_list} prices'
+                {add} price {to_list} prices
                 {print} 'You won a ' prices {at} {random}
     6:
         1:
@@ -82,28 +82,28 @@ levels:
         1:
             story: The new school year at Hogwarts is starting! \nIt is the job of the sorting hat to sort you into one of the houses.\nWhich house will you be sorted into?\nAre you a Gryffindor, Hufflepuf, Ravenclaw or Slytherin.\nLet the program wait a short period before revealing your house.\n
             code: |
-                {print} The new school year at Hogwarts is starting!'
-                {print} The sorting hat is ready to sort you into a Hogwarts house.'
+                {print} The new school year at Hogwarts is starting!
+                {print} The sorting hat is ready to sort you into a Hogwarts house.
                 houses {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin
-                {sleep} 2'
-                {print} And it is houses {at} {random}'
+                {sleep} 2
+                {print} And it is houses {at} {random}
         2:
             story: Create a program that chooses a random meal for you. Make a list of food and a list of toppings and let the program decide what you'll have!\n
             code: |
                 food {is} pizza, icecream, salad, sandwich
                 toppings {is} chocolate, cheese, tuna, sprinkles
-                {print} Your random meal for today is...'
+                {print} Your random meal for today is...
                 sleep 2
-                {print} food at random with toppings at random'
+                {print} food at random with toppings at random
     5:
         1:
             story: Make a program that checks if your favourite movie is already in the list of the computer.\nIf so, print that you have great taste, otherwise add the movie to the list.\n
             code: |
-                favoriete_movies {is} Batman, Spiderman, The Avengers, Jurassic Park
+                favorite_movies {is} Batman, Spiderman, The Avengers, Jurassic Park
                 movie {is} {ask} 'What is your favourite movie?'
-                {if} movie {in} favoriete_movies {print} 'You have great taste!'
+                {if} movie {in} favorite_movies {print} 'You have great taste!'
                 {else} {print} 'Such a shame that your favourite movie is not in the list, we will add it right away!'
-                {add} movie {to_list} favoriete_movies'
+                {add} movie {to_list} favorite_movies
         2:
             code: |
                 answer {is} {ask} '88 - 16 = ?'

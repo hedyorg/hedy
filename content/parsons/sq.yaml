@@ -43,23 +43,23 @@ levels:
             code: |
                 ushqimi {is} pica, akullore, sallatë, sanduiç
                 majë {is} çokollatë, djathë, tuna, sprinkles
-                {print} Vakti juaj i rastësishëm për sot është...'
-                {sleep} 2'
-                {print} ushqimi {at} {random} me majë {at} {random}'
+                {print} Vakti juaj i rastësishëm për sot është...
+                {sleep} 2
+                {print} ushqimi {at} {random} me majë {at} {random}
     4:
         1:
             story: Ju jeni trajneri më i ri i Pokémon nga Pallet Town!\nBëni një program që zgjedh Pokemon-in tuaj të parë.\nLëreni programin të presë një minutë përpara se të zbulojë pokemonin tuaj të parë.\n
             code: |
                 pokemona {is} Pikaçu, Çarmender, Balbazor, Skuertëll
                 {print} 'Ky do të jetë pokemon-i juaj i parë!'
-                {sleep}'
-                {print} pokemona {at} {random}'
+                {sleep}
+                {print} pokemona {at} {random}
         2:
             story: Krijoni një llotari që ju lejon të zgjidhni një çmim shtesë që mund të fitoni.\n
             code: |
                 çmimet {is} makinë, lloj brejtësi, 1 milion euro
                 çmimi {is} {ask} 'Çfarë dëshironi të fitoni?'
-                {add} çmimi {to_list} çmimet'
+                {add} çmimi {to_list} çmimet
                 {print} 'Ju fituat ' çmimet {at} {random}
     5:
         1:
@@ -69,7 +69,7 @@ levels:
                 filmi {is} {ask} 'Cili është filmi juaj i preferuar?'
                 {if} filmi {in} filmat_preferuar {print} 'Ke shije të shkëlqyer!'
                 {else} {print} 'Sa turp që filmi juaj i preferuar nuk është në listë, do ta shtojmë menjëherë!'
-                {add} filmi {to_list} filmat_preferuar'
+                {add} filmi {to_list} filmat_preferuar
         2:
             story: Krijo një lojë matematikore.\n
             code: |
@@ -101,8 +101,8 @@ levels:
                 lojtari1 = lojtarët {at} {random}
                 lojtari2 = lojtarët {at} {random}
                 {print} lojtari1 ' luan kundër ' lojtari2
-                {remove} lojtari1 {from} lojtarët'
-                {remove} lojtari2 {from} lojtarët'
+                {remove} lojtari1 {from} lojtarët
+                {remove} lojtari2 {from} lojtarët
                 {print} 'The winner plays against ' lojtarët {at} {random}
         2:
             story: Krijo këngën \Rrotat në autobus rrotullohen e rrotullohen\\n
@@ -117,16 +117,16 @@ levels:
             code: |
                 ekipet = e kuqe, e verdhë, blu
                 {print} 'E kuqe, e verdha nga bluja?'
-                {repeat} 5 {times}'
-                  {print} 'Ju jeni përzgjedhur në ekipin... '
-                  {print} ekipet {at} {random}'
-                  sleep 2'
+                {repeat} 5 {times}
+                    {print} 'Ju jeni përzgjedhur në ekipin... '
+                    {print} ekipet {at} {random}
+                    sleep 2
         2:
             story: Printoni numërimin mbrapsht për një lojë fshehjeje dhe kërkimi.\n
             code: |
                 numëruesi = 11
-                {repeat} 10 {times}'
-                  numëruesi = numëruesi - 1'
-                  {print} numëruesi'
-                  {sleep} 1'
+                {repeat} 10 {times}
+                    numëruesi = numëruesi - 1
+                    {print} numëruesi
+                    {sleep} 1
                 {print} 'Gati apo jo ja ku po vij!'
