@@ -50,13 +50,7 @@ function updateHeader(exercise: number) {
 }
 
 function showExercise(response: ParsonsExercise) {
-    let code_lines = null;
-    // Fixme: This is here for relic YAML structure support -> remove once all languages are up-to-date
-    if (response.code_lines) {
-        code_lines = shuffle_code_lines(response.code_lines, true);
-    } else {
-        code_lines = shuffle_code_lines(response.code, false);
-    }
+    const code_lines = shuffle_code_lines(response.code);
     let counter = 0;
     // Hide all containers, show the onces relevant dynamically
     $('.parsons_start_line_container').hide();
@@ -102,11 +96,8 @@ function parse_code_string_into_dict(code: string) {
 }
 
 // https://stackoverflow.com/questions/26503595/javascript-shuffling-object-properties-with-their-values
-function shuffle_code_lines(code: any, already_dict: boolean) {
-    let code_lines = code;
-    if (!already_dict) {
-        code_lines = parse_code_string_into_dict(code);
-    }
+function shuffle_code_lines(code: string) {
+    const code_lines = parse_code_string_into_dict(code);
     let shuffled: Record<string, string> = {};
     let keys = Object.keys(code_lines);
     fisherYatesShuffle(keys);
