@@ -1,132 +1,132 @@
 levels:
     1:
         2:
-            code_lines:
-                C: '{ask} Çfarë kënge dëshironi të dëgjoni?'
-                A: '{print} Ky është DJ Hedy'
-                B: '{ask} A jeni gati për festë?'
-                D: '{echo} Zgjedhje e shkëlqyer! Unë dua'
-            story: "Jeni tek tavolina e DJ duke kërkuar një këngë. Krijoni një program që ju pyet nëse jeni gati për të festuar dhe më pas pyet se cilën këngë dëshironi të dëgjoni.\n"
+            code: |
+                {ask} Çfarë kënge dëshironi të dëgjoni?
+                {print} Ky është DJ Hedy
+                {ask} A jeni gati për festë?
+                {echo} Zgjedhje e shkëlqyer! Unë dua
+            story: Jeni tek tavolina e DJ duke kërkuar një këngë. Krijoni një program që ju pyet nëse jeni gati për të festuar dhe më pas pyet se cilën këngë dëshironi të dëgjoni.\n
         1:
-            story: "Ju jeni një klient në furrën Hedy.\nJu dëshironi të hyni në furrë dhe jeni të mirëpritur nga bukëpjekësi.\nAi pyet se çfarë lloj byreku doni të porosisni.\nMë pas, porosia juaj është duke u përgatitur.\n"
-            code_lines:
-                A: '{print} Mirë se vini në furrën e bukës Hedy!'
-                B: '{ask} Çfarë lloj byreku dëshironi të porosisni?'
-                C: '{echo} Pra, ju dëshironi'
-                D: '{print} Porosia juaj po përgatitet!'
+            story: Ju jeni një klient në furrën Hedy.\nJu dëshironi të hyni në furrë dhe jeni të mirëpritur nga bukëpjekësi.\nAi pyet se çfarë lloj byreku doni të porosisni.\nMë pas, porosia juaj është duke u përgatitur.\n
+            code: |
+                {print} Mirë se vini në furrën e bukës Hedy!
+                {ask} Çfarë lloj byreku dëshironi të porosisni?
+                {echo} Pra, ju dëshironi
+                {print} Porosia juaj po përgatitet!
     2:
         1:
-            story: "Ju dhe miqtë tuaj do të shikoni disa Netflix.\nTrego se cilin film do të shikosh dhe uroj shikuesve shumë argëtim!\n"
-            code_lines:
-                A: '{print} Është koha për një mbrëmje të Netflix'
-                B: filmi {is} Sonic the Hedgehog 2
-                C: "{print} Ne do të shikojmë"
-                D: '{print} Argëtohu shumë!'
+            story: Ju dhe miqtë tuaj do të shikoni disa Netflix.\nTrego se cilin film do të shikosh dhe uroj shikuesve shumë argëtim!\n
+            code: |
+                {print} Është koha për një mbrëmje të Netflix
+                filmi {is} Sonic the Hedgehog 2
+                {print} Ne do të shikojmë
+                {print} Argëtohu shumë!
         2:
-            story: "Ky është dyqani në internet i një dyqani lodrash. Krijo një program ku klientët mund të shtojnë një artikull në karrocën e tyre të blerjeve.\n"
-            code_lines:
-                A: '{print} Mirë se vini në dyqanin tonë të lodrave'
-                B: lodër {is} {ask} Çfarë dëshironi të blini?
-                C: '{print} Lodra është shtuar në shportën tuaj të blerjeve.'
-                D: '{print} Faleminderit për blerjet me ne!'
+            story: Ky është dyqani në internet i një dyqani lodrash. Krijo një program ku klientët mund të shtojnë një artikull në karrocën e tyre të blerjeve.\n
+            code: |
+                {print} Mirë se vini në dyqanin tonë të lodrave
+                lodër {is} {ask} Çfarë dëshironi të blini?
+                {print} Lodra është shtuar në shportën tuaj të blerjeve.
+                {print} Faleminderit për blerjet me ne!
     3:
         1:
-            story: "Viti i ri shkollor në Hogwarts po fillon!\nËshtë detyra e kapelës së renditjes që t'ju renditë në një nga shtëpitë.\nNë cilën shtëpi do të renditeni?\nA jeni një Gryffindor, Hufflepuf, Ravenclaw apo Slytherin.\nLëreni programin të presë një periudhë të shkurtër përpara se të zbulojë shtëpinë tuaj.\n"
-            code_lines:
-                A: '{print} Viti i ri shkollor në Hogwarts po fillon!'
-                B: '{print} Kapela e renditjes është gati për t''ju renditur në një shtëpi në Hogwarts.'
-                C: 'houses {is} Gryffindor, Hufflepuff, Ravenclaw, Slytherin'
-                D: '{sleep} 2'
-                E: '{print} Dhe është houses {at} {random}'
+            story: Viti i ri shkollor në Hogwarts po fillon!\nËshtë detyra e kapelës së renditjes që t'ju renditë në një nga shtëpitë.\nNë cilën shtëpi do të renditeni?\nA jeni një Gryffindor, Hufflepuf, Ravenclaw apo Slytherin.\nLëreni programin të presë një periudhë të shkurtër përpara se të zbulojë shtëpinë tuaj.\n
+            code: |
+                {print} Viti i ri shkollor në Hogwarts po fillon!
+                {print} Kapela e renditjes është gati për t''ju renditur në një shtëpi në Hogwarts.
+                houses {is} Gryffindor, Hufflepuff, Ravenclaw, Slytherin
+                {sleep} 2
+                {print} Dhe është houses {at} {random}
         2:
-            story: "Krijoni një program që zgjedh një vakt të rastësishëm për ju. Bëni një listë ushqimesh dhe një listë të shtesave dhe lëreni programin të vendosë se çfarë do të keni!\n"
-            code_lines:
-                A: ushqimi {is} pica, akullore, sallatë, sanduiç
-                B: majë {is} çokollatë, djathë, tuna, sprinkles
-                C: '{print} Vakti juaj i rastësishëm për sot është...'
-                D: '{sleep} 2'
-                E: '{print} ushqimi {at} {random} me majë {at} {random}'
+            story: Krijoni një program që zgjedh një vakt të rastësishëm për ju. Bëni një listë ushqimesh dhe një listë të shtesave dhe lëreni programin të vendosë se çfarë do të keni!\n
+            code: |
+                ushqimi {is} pica, akullore, sallatë, sanduiç
+                majë {is} çokollatë, djathë, tuna, sprinkles
+                {print} Vakti juaj i rastësishëm për sot është...
+                {sleep} 2
+                {print} ushqimi {at} {random} me majë {at} {random}
     4:
         1:
-            story: "Ju jeni trajneri më i ri i Pokémon nga Pallet Town!\nBëni një program që zgjedh Pokemon-in tuaj të parë.\nLëreni programin të presë një minutë përpara se të zbulojë pokemonin tuaj të parë.\n"
-            code_lines:
-                A: pokemona {is} Pikaçu, Çarmender, Balbazor, Skuertëll
-                B: "{print} 'Ky do të jetë pokemon-i juaj i parë!'"
-                C: '{sleep}'
-                D: '{print} pokemona {at} {random}'
+            story: Ju jeni trajneri më i ri i Pokémon nga Pallet Town!\nBëni një program që zgjedh Pokemon-in tuaj të parë.\nLëreni programin të presë një minutë përpara se të zbulojë pokemonin tuaj të parë.\n
+            code: |
+                pokemona {is} Pikaçu, Çarmender, Balbazor, Skuertëll
+                {print} 'Ky do të jetë pokemon-i juaj i parë!'
+                {sleep}
+                {print} pokemona {at} {random}
         2:
-            story: "Krijoni një llotari që ju lejon të zgjidhni një çmim shtesë që mund të fitoni.\n"
-            code_lines:
-                A: çmimet {is} makinë, lloj brejtësi, 1 milion euro
-                B: çmimi {is} {ask} 'Çfarë dëshironi të fitoni?'
-                C: '{add} çmimi {to_list} çmimet'
-                D: "{print} 'Ju fituat ' çmimet {at} {random}"
+            story: Krijoni një llotari që ju lejon të zgjidhni një çmim shtesë që mund të fitoni.\n
+            code: |
+                çmimet {is} makinë, lloj brejtësi, 1 milion euro
+                çmimi {is} {ask} 'Çfarë dëshironi të fitoni?'
+                {add} çmimi {to_list} çmimet
+                {print} 'Ju fituat ' çmimet {at} {random}
     5:
         1:
-            story: "Krijoni një program që kontrollon nëse filmi juaj i preferuar është tashmë në listën e kompjuterit.\nNëse po, printoni se keni shije të shkëlqyer, përndryshe shtoni filmin në listë.\n"
-            code_lines:
-                A: filmat_preferuar {is} Batman, Spiderman, The Avengers, Jurassic Park
-                B: filmi {is} {ask} 'Cili është filmi juaj i preferuar?'
-                C: "{if} filmi {in} filmat_preferuar {print} 'Ke shije të shkëlqyer!'"
-                D: "{else} {print} 'Sa turp që filmi juaj i preferuar nuk është në listë, do ta shtojmë menjëherë!'"
-                E: '{add} filmi {to_list} filmat_preferuar'
+            story: Krijoni një program që kontrollon nëse filmi juaj i preferuar është tashmë në listën e kompjuterit.\nNëse po, printoni se keni shije të shkëlqyer, përndryshe shtoni filmin në listë.\n
+            code: |
+                filmat_preferuar {is} Batman, Spiderman, The Avengers, Jurassic Park
+                filmi {is} {ask} 'Cili është filmi juaj i preferuar?'
+                {if} filmi {in} filmat_preferuar {print} 'Ke shije të shkëlqyer!'
+                {else} {print} 'Sa turp që filmi juaj i preferuar nuk është në listë, do ta shtojmë menjëherë!'
+                {add} filmi {to_list} filmat_preferuar
         2:
-            story: "Krijo një lojë matematikore.\n"
-            code_lines:
-                A: "{print} 'Zgjidh këtë problem'"
-                B: përgjigja {is} {ask} '88 - 16 = ?'
-                C: "{if} përgjigja {is} 72 {print} 'Correct!'"
-                D: "{else} {print} 'Gabim! Përgjigjja ishte 72'"
+            story: Krijo një lojë matematikore.\n
+            code: |
+                {print} 'Zgjidh këtë problem'
+                përgjigja {is} {ask} '88 - 16 = ?'
+                {if} përgjigja {is} 72 {print} 'Correct!'
+                {else} {print} 'Gabim! Përgjigjja ishte 72'
     6:
         1:
-            story: "Bëni një program që llogarit sa vjeç jeni në vitet e qenve dhe maceve.\nFillimisht pyesni moshën e përdoruesit dhe filloni të llogaritni.\nFillimisht llogaritni vitet e qenve, pastaj vitet e maceve.\nTregoji përdoruesit moshat e ndryshme.\n"
-            code_lines:
-                A: mosha = {ask} 'Sa vjeç jeni?'
-                B: mosha_qeni = mosha * 7
-                C: mosha_maca = mosha * 5
-                D: "{print} 'Në vitet e qenve ju jeni 'mosha_qeni' vjeç.'"
-                E: "{print} 'Në moshën e macës ju jeni ' mosha_maca' vjeç.'"
+            story: Bëni një program që llogarit sa vjeç jeni në vitet e qenve dhe maceve.\nFillimisht pyesni moshën e përdoruesit dhe filloni të llogaritni.\nFillimisht llogaritni vitet e qenve, pastaj vitet e maceve.\nTregoji përdoruesit moshat e ndryshme.\n
+            code: |
+                mosha = {ask} 'Sa vjeç jeni?'
+                mosha_qeni = mosha * 7
+                mosha_maca = mosha * 5
+                {print} 'Në vitet e qenve ju jeni 'mosha_qeni' vjeç.'
+                {print} 'Në moshën e macës ju jeni ' mosha_maca' vjeç.'
         2:
-            story: "Krijoni një program që ju ndihmon të llogaritni se sa ëmbëlsira duhet të blini për festën tuaj të ditëlindjes.\n"
-            code_lines:
-                A: "{print} 'Është ditëlindja jote!'"
-                B: njerëzit = {ask} 'Sa njerëzve dëshironi t iu jepni një copë tortë?'
-                C: numri_torteve {is} njerëzit/8
-                D: "{print} 'Ju duhet të bleni ' numri_torteve ' torte'"
+            story: Krijoni një program që ju ndihmon të llogaritni se sa ëmbëlsira duhet të blini për festën tuaj të ditëlindjes.\n
+            code: |
+                {print} 'Është ditëlindja jote!'
+                njerëzit = {ask} 'Sa njerëzve dëshironi t iu jepni një copë tortë?'
+                numri_torteve {is} njerëzit/8
+                {print} 'Ju duhet të bleni ' numri_torteve ' torte'
     7:
         1:
-            story: "Në një turne shahu kanë mbetur tre lojtarë.\nKrijoni një program që vendos se cilët dy lojtarë luajnë fillimisht kundër njëri-tjetrit.\nFillimisht printoni dy lojtarët që luajnë ndeshjen e parë, pastaj printoni kundër cilit lojtar do të luajë fituesi.\n"
-            code_lines:
-                A: lojtarët = Lisa, Nora, Sara
-                B: lojtari1 = lojtarët {at} {random}
-                C: lojtari2 = lojtarët {at} {random}
-                D: "{print} lojtari1 ' luan kundër ' lojtari2"
-                E: '{remove} lojtari1 {from} lojtarët'
-                F: '{remove} lojtari2 {from} lojtarët'
-                G: "{print} 'The winner plays against ' lojtarët {at} {random}"
+            story: Në një turne shahu kanë mbetur tre lojtarë.\nKrijoni një program që vendos se cilët dy lojtarë luajnë fillimisht kundër njëri-tjetrit.\nFillimisht printoni dy lojtarët që luajnë ndeshjen e parë, pastaj printoni kundër cilit lojtar do të luajë fituesi.\n
+            code: |
+                lojtarët = Lisa, Nora, Sara
+                lojtari1 = lojtarët {at} {random}
+                lojtari2 = lojtarët {at} {random}
+                {print} lojtari1 ' luan kundër ' lojtari2
+                {remove} lojtari1 {from} lojtarët
+                {remove} lojtari2 {from} lojtarët
+                {print} 'The winner plays against ' lojtarët {at} {random}
         2:
-            story: "Krijo këngën \"Rrotat në autobus rrotullohen e rrotullohen\"\n"
-            code_lines:
-                A: "{print} 'rrotat në autobus shkojnë'"
-                B: "{repeat} 3 {times} {print} 'rrotull e rrotull'"
-                C: "{print} 'rrotat e autobusit rrotullohen e rrotullohen'"
-                D: "{print} 'në të gjithë qytetin '"
+            story: Krijo këngën \Rrotat në autobus rrotullohen e rrotullohen\\n
+            code: |
+                {print} 'rrotat në autobus shkojnë'
+                {repeat} 3 {times} {print} 'rrotull e rrotull'
+                {print} 'rrotat e autobusit rrotullohen e rrotullohen'
+                {print} 'në të gjithë qytetin '
     8:
         1:
-            story: "Ju dhe katër miq të tjerë po luani Pokémon Go! Krijo një program që vendos se në cilin ekip do të luajë secili prej jush.\nOse e kuqe, e verdhë ose blu! Bëni pak pauzë pasi të shpallni një ekip.\n"
-            code_lines:
-                A: ekipet = e kuqe, e verdhë, blu
-                B: "{print} 'E kuqe, e verdha nga bluja?'"
-                C: '{repeat} 5 {times}'
-                D: "  {print} 'Ju jeni përzgjedhur në ekipin... '"
-                E: '  {print} ekipet {at} {random}'
-                F: '  sleep 2'
+            story: Ju dhe katër miq të tjerë po luani Pokémon Go! Krijo një program që vendos se në cilin ekip do të luajë secili prej jush.\nOse e kuqe, e verdhë ose blu! Bëni pak pauzë pasi të shpallni një ekip.\n
+            code: |
+                ekipet = e kuqe, e verdhë, blu
+                {print} 'E kuqe, e verdha nga bluja?'
+                {repeat} 5 {times}
+                    {print} 'Ju jeni përzgjedhur në ekipin... '
+                    {print} ekipet {at} {random}
+                    sleep 2
         2:
-            story: "Printoni numërimin mbrapsht për një lojë fshehjeje dhe kërkimi.\n"
-            code_lines:
-                A: numëruesi = 11
-                B: '{repeat} 10 {times}'
-                C: '  numëruesi = numëruesi - 1'
-                D: '  {print} numëruesi'
-                E: '  {sleep} 1'
-                F: "{print} 'Gati apo jo ja ku po vij!'"
+            story: Printoni numërimin mbrapsht për një lojë fshehjeje dhe kërkimi.\n
+            code: |
+                numëruesi = 11
+                {repeat} 10 {times}
+                    numëruesi = numëruesi - 1
+                    {print} numëruesi
+                    {sleep} 1
+                {print} 'Gati apo jo ja ku po vij!'
