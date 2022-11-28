@@ -151,7 +151,7 @@ LEVELS = {
         "extra_rules": [ask_after_is, ask_after_equal]
     },
     15: {
-        "space_before_and_after": ["is", "at", "add", "to_list", "remove", "from", "in", "if", "for", "range", "to", "and", "or", "while", "repeat", "color, "pressed""],
+        "space_before_and_after": ["is", "at", "add", "to_list", "remove", "from", "in", "if", "for", "range", "to", "and", "or", "while", "repeat", "color", "pressed"],
         "no_space": ["comma", "-", "=", "/", "\\*", "\\+", "<", ">", "!"],
         "space_before": ["print", "sleep", "forward", "turn", "random", "else", "times"],
         "space_after": [],
