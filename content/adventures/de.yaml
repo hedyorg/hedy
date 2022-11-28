@@ -610,13 +610,13 @@ adventures:
                 example_code: |
                     ```
                     Aktionen = 'klatsche in die Hand', 'stampfe mit dem Fuß', 'ruf Hurra'
-                    {for} Aktion {in} Aktionen
-                        {for} i {in} {range} 1 {to} 2
-                            {print} 'Wenn Du glücklich bist'
-                            {print} Aktion
-                        {print} 'Zeig mir, wenn du bei mir bist, wie dir so zumute ist.'
-                        {print} 'Wenn Du glücklich bist'
-                        {print} Aktion
+                    _ {for} Aktion {in} Aktionen
+                    _ {for} i {in} {range} 1 {to} 2
+                    _ {print} 'Wenn Du glücklich bist'
+                    _ {print} Aktion
+                    _ {print} 'Zeig mir, wenn du bei mir bist, wie dir so zumute ist.'
+                    _ {print} 'Wenn Du glücklich bist'
+                    _ {print} Aktion
                     ```
                 start_code: "# setze hier deinen Code hin"
             11:
@@ -843,13 +843,16 @@ adventures:
                     Winkel {is} 90
                     {turn} Winkel
                     {forward} 25
-                story_text_2: "In Level 1 konnte sich die Schildkröte außerdem nur nach links oder rechts drehen. Das ist ein bisschen langweilig!\nIn level 2 kann sie ihr Nase in alle Richtungen strecken..\n\nBenutze 90 für eine Vierteldrehung. Dies wird Grad genannt. Eine komplette Drehung sind 360 Grad.\nKannst du mit diesem Code eine Figur erstellen? Vielleicht einen Kreis oder ein Dreieck?\n"
+                story_text_2: "In Level 1 konnte sich die Schildkröte außerdem nur nach links oder rechts drehen. Das ist ein bisschen langweilig!\nIn level 2 kann sie ihre Nase in alle Richtungen strecken.\n\nBenutze 90 für eine Vierteldrehung. Dies wird Grad genannt. Eine komplette Drehung sind 360 Grad.\nKannst du mit diesem Code eine Figur erstellen? Vielleicht einen Kreis oder ein Dreieck?\n\n## Herausforderung\nKannst du mit diesem Code eine Form gestalten? Vielleicht ein Dreieck oder einen Kreis?\n"
                 example_code_2: "```\n{print} Figuren werden gezeichnet\nwinkel {is} 90\n{turn} winkel\n{forward} 25\n{turn} winkel\n{forward} 25\n```\n"
             3:
                 story_text: |
                     ## Suchende Schildkröte
                     In diesem Level kannst Du `{at} {random}` nutzen, während die Schildkröte etwas zeichnet. Durch eine zufällige Wahl nimmt die Schildkröte jedes Mal einen anderen Weg.
-                    Nutze `{at} {random}` um einen zufälligen Wert aus einer Liste zu wählen. Wenn Du die Zeilen 2 und 3 kopierst und wieder einfügst, kannst Du einen längeren zufälligen Pfad erzeugen.
+                    Nutze `{at} {random}` um einen zufälligen Wert aus einer Liste zu wählen.
+
+                    ## Herausforderung
+                    Kannst du die Zeilen 2 und 3 kopieren und wieder einfügen, um einen längeren, zufälligen Pfad zu erzeugen?
 
                 example_code: |
                     ```
@@ -869,12 +872,12 @@ adventures:
 
                 example_code: |
                     ```
-                    print 'Formen zeichnen'
-                    Winkel is 90
-                    turn Winkel
-                    forward 25
-                    turn Winkel
-                    forward 25
+                    {print} _ Formen zeichnen _
+                    Winkel {is} 90
+                    {turn} Winkel
+                    {forward} 25
+                    {turn} Winkel
+                    {forward} 25
                     ```
 
                 start_code: |-
@@ -946,8 +949,8 @@ adventures:
 
                 example_code: |
                     ```
-                    print 'Formen zeichnen'
-                    repeat 3 times forward 10
+                    {print} 'Formen zeichnen'
+                    _ 3 _ {forward} 10
                     ```
                 start_code: |-
                     {print} 'Formen zeichnen'
@@ -994,8 +997,8 @@ adventures:
                     ```
                     Wochentage = Montag, Dienstag, Mittwoch, Donnerstag, Freitag, Samstag, Sonntag
                     Familienmitglieder = Mama, Papa, Emma, Sophie
-                    for Tag in Wochentage
-                        print Familienmitglieder at random ' ist am ' Tag ' mit dem Abwasch dran.'
+                    _ Tag _ Wochentage
+                        {print} Familienmitglieder {at} {random} ' ist am ' Tag ' mit dem Abwasch dran.'
                     ```
                 start_code: "# setze hier deinen Code hin"
             7:
@@ -1083,9 +1086,9 @@ adventures:
             3:
                 story_text: |
                     ## Abwaschen
-                    Gibt es bei Euch zu Hause immer Streit, wer mit dem Abwasch dran ist und wer den Müll raus bringen muss?
-                    Dann kannst Du den Computer völlig fair entscheiden lassen. Das kannst Du in diesem Level programmieren.
-                    Zunächst legst Du eine Liste Deiner Familienmitglieder an. Anschließend wählst Du mit `at random` zufällig jemanden von der Liste aus.
+                    Gibt es bei euch zu Hause immer Streit, wer mit dem Abwasch dran ist und wer den Müll raus bringen muss?
+                    Dann kannst du den Computer völlig fair entscheiden lassen. Das kannst du in diesem Level programmieren.
+                    Zunächst legst du eine Liste deiner Familienmitglieder an. Anschließend wählst du mit `{at} {random}` zufällig jemanden von der Liste aus.
 
                 example_code: |
                     ```
@@ -1094,14 +1097,14 @@ adventures:
                     ```
                 story_text_2: |
                     ## Hacke den Geschirrspüler!
-                    Keine Lust auf abwaschen? Hacke das Spülmaschinenprogramm und entferne Deinen Namen von der Liste.
+                    Keine Lust auf selbst abwaschen? Hacke das Spülmaschinenprogramm und entferne deinen Namen von der Liste mit dem `{remove}` `{from}` Befehl.
 
                 example_code_2: |
                     ```
-                    Familienmitglieder is Mama, Papa, Emma, Sophie
-                    Dein_Name is ask Wer bist Du?
-                    remove Dein_Name from Familienmitglieder
-                    print Familienmitglieder at random ist heute mit dem Abwasch dran.
+                    Familienmitglieder {is} Mama, Papa, Emma, Sophie
+                    dein_Name {is} {ask} Wer bist Du?
+                    _ dein_Name _ Familienmitglieder
+                    {print} _ _ _ ist heute mit dem Abwasch dran.
                     ```
                 start_code: "print Wer macht den Abwasch?"
     dice:
@@ -1112,15 +1115,16 @@ adventures:
             10:
                 story_text: |
                     ## Würfel
-                    Brauchen alle zu lange, um zu würfeln? In diesem Level kannst Du Hedy alle Würfel auf einmal werfen lassen.
+                    Brauchen alle zu lange, um zu würfeln? In diesem Level kannst du Hedy alle Würfel auf einmal werfen lassen.
+                    Kannst du die korrekte Zeile Code in die Lücken füllen?
 
                 example_code: |
                     ```
-                    SpielerListe = Ann, John, Jesse
+                    Spielerliste = Ann, John, Jesse
                     Würfelseiten = 1, 2, 3, 4, 5, 6
-                    for Spieler in SpielerListe
-                        print Spieler ' würfelt ' Würfelseiten at random
-                        sleep
+                    _
+                        {print} Spieler ' würfelt ' Würfelseiten {at} {random}
+                        {sleep}
                     ```
                 start_code: "# setze hier deinen Code hin"
             7:
@@ -1144,16 +1148,18 @@ adventures:
                     Vielleicht weißt Du ja, dass der Wurm 5 Punkte zählt. Jetzt kannst Du nach jedem Wurf direkt berechnen, wie viele Punkte Du bekommst.
                     Hier ist der Code zur Berechnung der Punkte für einen Würfel:
 
+                    ## Herausforderung
+                    Kannst du den Code verändern, um die Gesamtpunktzahl für 8 Würfel zu bekommen? Um das zu machen musst du einige Zeilen Code kopieren und einfügen.
+
                 example_code: |
                     ```
                     Würfelseiten = 1, 2, 3, 4, 5, Regenwurm
                     Punkte = 0
-                    Wurf = Würfelseiten at random
-                    print 'Du hast ' Wurf ' gewürfelt.'
-                    if Wurf is Regenwurm Punkte = Punkte + 5 else Punkte = Punkte + Wurf
-                    print 'Jetzt hast Du ' Punkte ' Punkte.'
+                    Wurf = Würfelseiten {at} {random}
+                    {print} 'Du hast ' Wurf ' gewürfelt.'
+                    {if} Wurf {is} Regenwurm Punkte = Punkte + 5 {else} Punkte = Punkte + Wurf
+                    {print} 'Jetzt hast Du ' Punkte ' Punkte.'
                     ```
-                    Kannst Du den Code so ändern, dass Du die Gesamtpunktzahl für 8 Würfel erhältst? Dafür musste Du einige Code-Zeilen kopieren und einfügen.
 
                 start_code: "print 'Was wird der Würfel diesmal anzeigen?'"
                 example_code_2: "## Vorschau\n\nIst es dir gelungen, die Gesamtpunktzahl für 8 Würfel auszurechnen? Dafür musstest du ganz schön viel hin und her kopieren, oder?In Level 7 machen wir das einfacher!\n"
@@ -1204,8 +1210,8 @@ adventures:
                     ```
 
                 start_code: "print Was zeigt der Würfel diesmal?"
-                story_text_2: "## Challenge\nThe dice in the example above are dice for a specific game. Can you make normal dice?\nOr other special dice from a different game?\n"
-                example_code_2: "```\nchoices {is} _\n```\n"
+                story_text_2: "## Herausforderung\nDie Würfel im Beispiel oben sind die Würfel für ein bestimmtes Spiel. Kannst du normale Würfel machen?\nOder andere Spezialwürfel von einem anderen Spiel?\n"
+                example_code_2: "```\nAuswahlmöglichkeiten {is} _\n```\n"
             15:
                 story_text: |
                     ## Würfel
@@ -1238,25 +1244,25 @@ adventures:
 
                 example_code: |
                     ```
-                    print what do you choose?
-                    ask choose from rock, paper or scissors
-                    echo so your choice was:
+                    {print} Was wählst du?
+                    {ask} Wähle aus Stein, Schere oder Papier
+                    {echo} Also war deine Wahl:
                     ```
-                    Instead of using words, you could also use emojis of course: ✊✋✌
                 start_code: "print Welcome to your own rock scissors paper!"
-                story_text_2: "## Challenge\nInstead of using words, you could also use emojis: ✊✋✌\nCan you create a code using emojis?\n"
-                example_code_2: "```\n{print} what do you choose?\n{ask} choose from _\n{echo} so your choice was:\n```\n"
+                story_text_2: "## Herausforderung\nAnstelle von Wörtern kannst du auch Emoji benutzen ✊✋✌\nKannst du Code erstellen, der Emoji benutzt?\n"
+                example_code_2: "```\n{print} Was wählst du?\n{ask} Wähle aus _\n{echo} Also war deine Wahl:\n```\n"
             10:
                 story_text: |
                     ## Schere, Stein, Papier
-                    Bist du zu faul um das Spiel selbst zu spielen? Lass Hedy es für dich spielen!
+                    Bist du zu faul, um das Spiel selbst zu spielen? Lass Hedy es für dich spielen!
+                    Du musst nur die Namen der Spieler ausfüllen.
 
                 example_code: |
                     ```
-                    choices = rock, paper, scissors
-                    players = Marleen, Michael
-                    for player in players
-                         print player ' chooses ' choices at random
+                    Auswahl = rock, paper, scissors
+                    Personen = _
+                    {for} Spieler {in} Personen
+                         {print} Spieler ' wählt ' Auswahl {at} {random}
                     ```
                 start_code: "# setze hier deinen Code hin"
             9:
@@ -1329,8 +1335,8 @@ adventures:
                     print choices at random
                     ```
                 start_code: "print Welcome to your own rock scissors paper!"
-                story_text_2: "## Challenge\nNow you only have one player, so can you add a second player?\nYou can even use variables to name player 1 and player 2.\n"
-                example_code_2: "```\nchoices {is} rock, paper, scissors\n{print} player 1 chooses... choices {at} {random}\n{print} player 2 _\n```\n"
+                story_text_2: "## Herausforderung\nJetzt hast du nur einen Spieler. Kannst du einen zweiten Spieler hinzufügen?\nDu kannst sogar Variablen benutzen um Spieler 1 und Spieler 2 zu benennen.\n"
+                example_code_2: "```\nAuswahl {is} Stein, Schere, Papier\n{print} Spieler 1 wählt... Auswahl {at} {random}\n{print} Spieler 2 _\n```\n"
             2:
                 story_text: |
                     ## Schere, Stein, Papier
@@ -1338,8 +1344,8 @@ adventures:
 
                 example_code: |
                     ```
-                    choice is _
-                    print I choose choice
+                    _ {is} {ask} Stein, Schere oder Papier?
+                    {print} Ich wähle
                     ```
                 start_code: "# setze hier deinen Code hin"
             15:
@@ -1363,6 +1369,7 @@ adventures:
                         {if} Computer_Wahl == 'Stein' {and} deine_Wahl == 'Papier'
                             {print} 'Du hast gewonnen!'
                             gewonnen = 'ja'
+                    _
                     ```
                 start_code: "# setze hier deinen Code hin"
             13:
@@ -1372,17 +1379,18 @@ adventures:
 
                 example_code: |
                     ```
-                    options = 'rock', 'paper', 'scissors'
-                    your_choice = ask 'What do you choose?'
-                    computer_choice = options at random
-                    print 'You choose ' your_choice
-                    print 'The computer chooses ' computer_choice
-                    if computer_choice is your_choice
-                        print 'Tie'
-                    if computer_choice is 'rock' and your_choice is 'paper'
-                        print 'You win!'
-                    if computer_choice is 'rock' and your_choice is 'scissors'
-                        print 'The computer wins!'
+                    Optionen = 'Stein', 'Papier', 'Schere'
+                    deine_auswahl = {ask} 'Was wählst du?'
+                    computer_auswahl = Optionen {at} {random}
+                    {print} 'Du wählst ' deine_auswahl
+                    {print} 'Der Computer wählt ' computer_auswahl
+                    {if} computer_auswahl {is} deine_auswahl
+                        {print} 'Unentschieden'
+                    {if} computer_auswahl {is} 'Stein' {and} deine_auswahl {is} 'Papier'
+                        {print} 'Du gewinnst!'
+                    {if} computer_auswahl {is} 'Stein' {and} deine_auswahl {is} 'Schere'
+                        {print} 'Der Computer gewinnt!'
+                    _
                     ```
                 start_code: "# setze hier deinen Code hin"
     calculator:
@@ -1416,13 +1424,13 @@ adventures:
             12:
                 story_text: |
                     ## Taschenrechner
-                    Jetzt kannst du einen Taschenrechner bauen, der mit Dezimalzahlen umgehen kann.
+                    Jetzt kannst du einen Taschenrechner bauen, der mit Dezimalzahlen umgehen kann. Fülle die Lücken, damit er ordentlich arbeitet!
 
                 example_code: |
                     ```
                     Zahl1 = {ask} 'Was ist die erste Zahl?'
                     Zahl2 = {ask} 'Was ist die zweite Zahl?'
-                    Antwort = Zahl1 + Zahl2
+                    Antwort = _
                     {print} Zahl1 ' plus ' Zahl2 ' macht ' Antwort
                     ```
                 start_code: "# setze hier deinen Code hin"
@@ -1430,7 +1438,9 @@ adventures:
                 story_text: |
                     ## Taschenrechner
                     Dieses Taschenrechnerspiel hilft dir deine Multiplikationstabellen zu üben!
-                    Wenn du noch mehr Zahlen der Liste hinzufügst, kannst du alle Multiplikationen üben.
+
+                    ## Herausforderung
+                    Kannst du mehr Nummern zur Liste hinzufügen, um alle Multiplikationen zu üben?
 
                 example_code: |
                     ```
@@ -1448,56 +1458,55 @@ adventures:
             9:
                 story_text: |
                     ## Taschenrechner
-                    In den vorherigen Leveln hast du gelernt wie sich ein Taschenrechner machen lässt. In diesem Level kannst du diesen Code erweitern und zu einem kleinen Mathespiel machen. Und zwar so...
+                    In den vorherigen Leveln hast du gelernt wie sich ein Taschenrechner machen lässt. In diesem Level kannst du diesen Code erweitern und zu einem kleinen Mathespiel machen.
+
+                    ## Herausforderung
+                    Kannst du Zeile 10 vervollständigen, um das Programm zum laufen zu bringen?
 
                 example_code: |
                     ```
-                    score = 0
-                    repeat 10 times
-                        numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                        number1 = numbers at random
-                        number2 = numbers at random
-                        correct_answer = number1 * number2
-                        print 'What is ' number1 ' times ' number2 '?'
-                        answer = ask 'Type your answer here...'
-                        print 'Your answer is' answer
-                        if answer is correct_answer
-                            score = score + 1
-                    print 'Great job! Your score is... ' score ' out of 10!'
+                    Punkte = 0
+                    {repeat} 10 {times}
+                        Nummern = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                        Nummer1 = Nummern {at} {random}
+                        Nummer2 = Nummern {at} {random}
+                        richtige_antwort = Nummer1 * Nummer2
+                        {print} 'Was ist ' Nummer1 ' mal ' Nummer2 '?'
+                        Antwort = {ask} 'Tippe deine Antwort hier ein...'
+                        {print} 'Deine Antwort ist' Antwort
+                        {if} _ {is} _
+                            Punkte = Punkte + 1
+                    {print} 'Großartig gemacht! Dein Punktestand ist... ' Punkte ' von 10!'
                     ```
                 start_code: "print 'Welcome to this calculator!'"
             6:
                 story_text: |
                     ## Taschenrechner
-                    Jetzt wo du rechnen kannst, lässt sich auch ein kleines Programm zum Üben von Matherechnungen schreiben. Du kannst dir die Rechnungen selbst ausdenken, zum Beispiel:
+                    Jetzt wo du rechnen kannst, kannst du selbst einen Taschenrechner erstellen!
 
                 example_code: |
                     ```
-                    correct_answer = 11 * 27
-                    answer = ask 'How much is 11 times 27?'
-                    if answer is correct_answer print 'good job!'
-                    else print 'Wrong! It was ' correct_answer
+                    nummer1 {is} {ask} 'Gib die erste Zahl ein:'
+                    nummer2 {is} {ask} 'Gib die zweite Zahl ein:'
+                    richtige_antwort = nummer1 * nummer2
+                    {print} nummer1 ' mal ' nummer2 ' ist ' richtige_antwort
                     ```
                 story_text_2: |
-                    ## Zufallszahlen
-                    Du kannst auch den Computer ganz allein zufällige Summen ausrechnen lassen, mit dem {random} Befehl.
-                    So wählst du eine Anzahl Tabellen zum üben aus, und bekommst dann immer eine andere Summe:
+                    ## Herausforderung
+                    Der Taschenrechner oben berechnet die Antwort für dich, aber du kannst auch ein Programm erstellen, um deine mathematischen Fähigkeiten zu testen, so wie dieses:
+                    Fülle die Lücken aus, um es zu vervollständigen!
 
                 example_code_2: |
                     ```
-                    tables = 4, 5, 6, 8
-                    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                    table = tables at random
-                    number = numbers at random
-                    correct_answer = table * number
-                    answer = ask 'how much is ' table ' times ' number '?'
-                    if answer is correct_answer print 'okay'
-                    else print 'mistake! it was ' correct_answer
+                    richtige_antwort = 11 * 27
+                    antwort = {ask} 'Wie viel ist 11 mal 27?'
+                    {if} antwort {is} _ {print} 'Gut gemacht!'
+                    {else} {print} 'Falsch! Es war ' _
                     ```
 
                 start_code: "print 'Welcome to this calculator!'"
-                example_code_3: "```\ntables = 4, 5, 6, 8\nnumbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\ntable = tables {at} {random}\nnumber = numbers {at} {random}\ncorrect_answer = table * number\nanswer = {ask} 'how much is ' table ' times ' number '?'\n{if} answer {is} correct_answer {print} 'okay'\n{else} {print} 'mistake! it was ' correct_answer\n```\n"
-                story_text_3: "## Random numbers\nYou can also let the computer do random sums on its own using random.\nThis is how you choose a number of tables to practice, and from that you always get a different sum:\n"
+                example_code_3: "```\nTabellen = 4, 5, 6, 8\nNummern = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nTabelle = Tabellen {at} {random}\nNummer = Nummern {at} {random}\nrichtige_antwort = Tabelle * Nummer\nAntwort = {ask} 'Wie viel ist ' Tabelle ' mal ' Nummer '?'\n{if} Antwort {is} richtige_antwort {print} 'okay'\n{else} {print} 'Fehler! Es war ' richtige_antwort\n```\n"
+                story_text_3: "## Zufallszahlen\nDu kannst den Computer auch allein zufällige Summen rechnen lassen, indem du Zufall benutzt.\nSo wählst du einige Tabellen zum Üben, und daraus erhältst du immer eine andere Summe.\n"
             15:
                 story_text: |
                     ## Calculator
@@ -1544,12 +1553,12 @@ adventures:
             2:
                 story_text: |
                     ## Restaurant
-                    In Level 2 konntest du dein Restaurant mit Variablen erweitern. In Level 1 konnte Hedy nur die Bestellung einmal wiedergeben ({echo}), und sich nur das merken, was als letztes bestellt wurde.
-                    Jetzt kannst du Variablen verwenden und Hedy kann sich sowohl das Essen als auch die Getränke merken!
+                    In Level 2 konntest du dein Restaurant mit Variablen erweitern. In Level 1 konnte Hedy nur die Bestellung einmal wiedergeben ({echo}) und sich nur das merken, was zuletzt bestellt wurde.
+                    Jetzt kannst du Variablen verwenden und Hedy kann sich sowohl das Essen als auch den Belag merken!
                 start_code: "# setze hier deinen Code hin"
-                example_code: "```\n{print} Willkommen in Hedys Restaurant!\n{print} Heute gibt es Pizza oder Lasagne.\nEssen {is} {ask} Was würden Sie gerne essen?\n{print} Gute Wahl! Das ist mein Lieblingsessen!\nBelag {is} {ask} Hätten Sie die gerne mit Fleisch oder mit Gemüse?\n{print} Das Essen mit Belag ist auf dem Weg!\nGetränke {is} {ask} Was würden Sie gerne dazu trinken?\n{print} Danke für Ihre Bestellung.\n{print} Ihr Essen und Ihre Getränke kommen sofort!\n```\n"
-                story_text_2: "## Challenge\nCan you make this code more elaborate? For example by adding drinks to the order? Or...?\n"
-                example_code_2: "```\n{print} Welcome to Hedy's restaurant!\n{print} Today we're serving pizza or lasagna.\nfood {is} {ask} What would you like to eat?\n{print} Great choice! The food is my favorite!\ntopping {is} {ask} Would you like meat or veggies on that?\n{print} food with topping is on its way!\ndrinks {is} _\n```\n"
+                example_code: "```\n{print} Willkommen in Hedys Restaurant!\n{print} Heute gibt es Pizza oder Lasagne.\nEssen {is} {ask} Was würden Sie gerne essen?\n{print} Gute Wahl! Das ist mein Lieblingsessen!\nBelag {is} {ask} Hätten Sie die gerne mit Fleisch oder mit Gemüse?\n{print} Das Essen mit Belag ist auf dem Weg!\n```\n"
+                story_text_2: "## Herausforderung\nKannst du den Code erweitern? Zum Beispiel, indem du Getränke zur Bestellung hinzufügst? Oder...?\n"
+                example_code_2: "```\n{print} Willkommen in Hedys Restaurant!\n{print} Heute gibt es Pizza oder Lasagne.\nEssen {is} {ask} Was würden Sie gerne essen?\n{print} Gute Wahl! Das ist mein Lieblingsessen!\nBelag {is} {ask} Hätten Sie die gerne mit Fleisch oder mit Gemüse?\n{print} Das Essen mit Belag ist auf dem Weg!\nGetränke {is} _\n```\n"
             12:
                 story_text: |
                     ## Restaurant
@@ -1575,6 +1584,9 @@ adventures:
                 story_text: |
                     ## Restaurant
                     Wir können `{for} i {in} {range} 1 {to} 5` nutzen, um die Bestellungen mehrerer Kundinnen und Kunden in angebrachter Reihenfolge zu `{print}`.
+
+                    ## Herausforderung
+                    Kannst du eine weitere Einrückungsherausforderung bestehen? Bringe den Code zum Laufen, indem du vor jede Zeile die richtige Anzahl an Leerzeichen zur Einrückung hinzufügst!
 
                 example_code: |
                     ```
@@ -1606,18 +1618,20 @@ adventures:
                         print food ' will be your ' course
                     ```
 
-                story_text_2: |4
-
+                story_text_2: |
+                    ## Herausforderung
                     Natürlich kannst auch für mehrere Personen bestellen!
+                    Kannst du die richtige Anzahl an Leerzeichen zur Einrückung vor jeder Zeile hinzufügen, damit der Code richtig läuft?
+                    TIPP: manche Zeilen brauchen gar keine Einrückung.
 
                 example_code_2: |
                     ```
-                    courses = appetizer, main course, dessert
-                    names = Timon, Onno
-                    for name in names
-                        for course in courses
-                            food = ask name ', what would you like to eat as your ' course '?'
-                            print name ' orders ' food ' as their ' course
+                    _ Kurse = Vorspeise, Hauptgericht, Nachtisch
+                    _ Namen = Timon, Onno
+                    _ {for} Name {in} Namen
+                    _ {for} Kurs {in} Kurse
+                    _ Essen = {ask} Name ', Was möchten Sie als ' Kurs '?'
+                    _ {print} Name ' bestellt ' Essen ' als ' Kurs
                     ```
                 start_code: "Gänge = Vorspeise, Hauptspeise, Dessert"
             9:
@@ -1627,27 +1641,33 @@ adventures:
                     Du könntest zum Beispiel jemanden fragen, ob er eine Sauce zu den Pommes haben will, jedoch nicht zur Pizza!
                     Schau dir das Beispiel an und probiere es in deinem eingenen virtuellen Restaurant!
 
+                    ## Herausforderung
+                    Dies ist eine Herausforderung für echte Tüftler! Jede Zeile die eine Einrückung benötigt, hat eine Lücke bekommen.
+                    Kannst du herausbekommen wie viel Einrückung jede Zeile benötigt, damit der Code richtig läuft?
+                    Viel Erfolg!
+                    TIPP: Wenn jemand Pizza bestellt, sollte Hedy nicht fragen, welche Sauce gewünscht ist.
+
                 example_code: |
                     ```
-                    print 'Welcome to Hedys restaurant!'
-                    people = ask 'How many people will be joining us today?'
-                    print 'Great!'
-                    price = 0
-                    repeat people times
-                        food = ask 'What would you like to order?'
-                        print food
-                        if food is fries
-                            price = price + 3
-                            sauce = ask 'What kind of sauce would you like with your fries?'
-                            if sauce is no
-                                print 'no sauce'
-                            else
-                                price = price + 1
-                                print 'with ' sauce
-                        if food is pizza
-                            price = price + 4
-                    print 'That will be ' price ' dollar'
-                    print 'Enjoy your meal!'
+                    {print} 'Willkommen in Hedys Restaurant!'
+                    Leute = {ask} 'Wie viele Leute kommen heute?'
+                    {print} 'Großartig!'
+                    Preis = 0
+                    {repeat} Leute {times}
+                    _ Essen = {ask} 'Was möchten Sie bestellen?'
+                    _ {print} Essen
+                    _ {if} Essen {is} Fritten
+                    _ Preis = Preis + 3
+                    _ Sauce = {ask} 'Welche Sauce möchten Sie für die Fritten?'
+                    _ {if} Sauce {is} keine
+                    _ {print} 'keine Sauce'
+                    _ {else}
+                    _ Preis = Preis + 1
+                    _ {print} 'mit ' Sauce
+                    _ {if} Essen {is} Pizza
+                    _ Preis = Preis + 4
+                    {print} 'Das macht ' Preis ' Euro'
+                    {print} 'Genießen Sie Ihre Mahlzeit!'
                     ```
                 start_code: "# setze hier deinen Code hin"
             8:
@@ -1661,9 +1681,12 @@ adventures:
                 story_text: |
                     ## Restaurant
                     In diesem Level hast du gelernt, wie du den Befehl `{repeat}` verwenden kannst, um eine Codezeile um eine bestimmte Anzahl zu wiederholen.
-                    Du kannst das in deinem Restaurant verwenden um mehrere Leute nach ihren Essenwünschen zu fragen (`{ask}`). Das geht so:
+                    Du kannst das in deinem Restaurant verwenden um mehrere Leute nach ihren Essenwünschen zu fragen (`{ask}`).
+
+                    ## Herausforderung
+                    Kannst du die Lücken füllen? Hedy muss diese Frage so oft wiederholen wie Leute da sind. Wenn also 5 Leute da sind, muss die Frage 5 mal gestellt werden.
                 start_code: "# setze hier deinen Code hin"
-                example_code: "```\n{print} 'Willkommen in Hedys Restaurant!'\nGäste = {ask} 'Zu wie vielen kommen Sie heute zu uns?'\n{repeat} Gäste {times} Essen = {ask} 'Was würden Sie gerne essen?'\n{print} 'Danke für Ihre Bestellung! Kommt sofort!'\n```\n"
+                example_code: "```\n{print} 'Willkommen in Hedys Restaurant!'\nGäste = {ask} 'Zu wie vielen kommen Sie heute zu uns?'\n{repeat} _ {times} Essen = {ask} 'Was würden Sie gerne essen?'\n{print} 'Danke für Ihre Bestellung! Kommt sofort!'\n```\n"
             6:
                 story_text: |
                     ## Restaurant
@@ -1725,8 +1748,8 @@ adventures:
             5:
                 story_text: |
                     ## Restaurant
-                    In diesem Level erlaubt dir der `{if}`-Befehl deinen Kundinnen oder Kunden Fragen zu stellen und verschiedene Antworten zu geben.
-                    In dem unteren Beispiel siehst du, dass du die Kundin oder den Kunden fragen kannst, ob sie oder er die Tagesgerichte erfahren möchte, und Hedy kann dementsprechend antworten.
+                    In diesem Level erlaubt dir der `{if}`-Befehl deinen Kundinnen oder Kunden Fragen zu stellen (`{ask}`) und verschiedene Antworten zu geben.
+                    In dem unteren Beispiel siehst du, dass du die Kundin oder den Kunden fragen (`{ask}`) kannst, ob (`{if}`) sie oder er die Tagesgerichte erfahren möchte, und Hedy kann dementsprechend antworten.
 
                 example_code: |
                     ```
@@ -1750,19 +1773,20 @@ adventures:
             4:
                 story_text: |
                     ## Restaurant
-                    In diesem Level musst du Anführungszeichen verwenden, wenn du den Befehl `{print}` benutzt.
-                    Bekommst du den Code aus den vorherigen Leveln zum laufen, indem du Anführungszeichen hinzufügst?
+                    In diesem Level musst du Anführungszeichen verwenden, wenn du die Befehle `{print}` oder `{ask}`benutzt.
 
-                    Vorsicht! In den vorherigen Leveln waren Apostrophe (') im Text erlaubt, aber in diesem Level wird Hedy sie mit Anführungszeichen verwechseln und der Code wird nicht funktionieren!
-                    Statt zum Beispiel `{print} Heute gibt's pizza` solltest du also `{print} Heute gibt es Pizza` tippen.
+                    ## Herausforderung
+                    Füge die Anführungszeichen zum Code hinzu, um ihn zum Laufen zu bringen! Sei vorsichtig: Variablen sollten nicht in Anführungszeichen sein.
                 start_code: "# setze hier deinen Code hin"
-                example_code: "## Beispiel für Hedy's Restaurant\n```\n{print} 'Willkommen in Hedys Restaurant!'\n{print} 'Heute gibt es Pizza oder Lasagne.'\nEssen {is} {ask} 'Was würden Sie gerne essen?'\n{print} 'Gute Wahl! Die ' Essen ' ist mein Favorit!'\nBelag {is} {ask} 'Hätten Sie gerne Fleisch oder Gemüse als Belag?'\n{print} Essen ' mit ' Belag ' ist auf dem Weg!'\nGetränke {is} {ask} 'Was würden Sie gerne dazu trinken?'\n{print} 'Danke für Ihre Bestellung.'\n{print} 'Ihre ' Essen ' und ' Getränke ' kommen sofort!'\n```\n"
+                example_code: "## Beispiel für Hedy's Restaurant\n```\n_ Füge Anführungszeichen in diesen Code ein _\n{print} Willkommen in Hedys Restaurant!\n{print} Heute gibt es Pizza oder Lasagne.\nEssen {is} {ask} Was würden Sie gerne essen?\n{print} Gute Wahl! Die  Essen  ist mein Favorit!\nBelag {is} {ask} Hätten Sie gerne Fleisch oder Gemüse als Belag?\n{print} Essen  mit  Belag  ist auf dem Weg!\nGetränke {is} {ask} Was würden Sie gerne dazu trinken?\n{print} Danke für Ihre Bestellung.\n{print} Ihre  Essen  und  Getränke  kommen sofort!\n```\n"
             3:
                 story_text: |
                     ## Zufallsrestaurant
                     Fällt es dir schwer zu entscheiden, was du gerne zum Abendessen hättest? Du kannst das Hedy machen lassen!
                     Füge einfach Listen deiner Lieblingsgerichte (oder der von dir nicht so gemochten Gerichte) hinzu und Hedy kann zufällig für dich ein Abendessen auswählen.
                     Du kannst dir auch einen Spaß draus machen, indem du Hedy den Preis für dein Abendessen auswählen lässt! Was wird wohl rauskommen?
+                    ## Herausforderung
+                    Kannst du deine eigene Version des Zufallsrestaurants erstellen?
 
                 example_code: |
                     ```
@@ -1786,11 +1810,11 @@ adventures:
 
                 example_code_2: |
                     ```
-                    print Mystery milkshake
-                    flavors is strawberry, chocolate, vanilla
-                    allergies is ask Are you allergic to any falvors?
-                    remove allergies from flavors
-                    print You get a flavors at random milkshake
+                    {print} Überraschungs-Milchshake
+                    Geschmacksrichtungen {is} Erdbeere, Schokolade, Vanille
+                    Allergien {is} {ask} Bist du allergisch gegen irgendeine Geschmacksrichtung?
+                    _
+                    {print} Du bekommst einen Geschmacksrichtungen {at} {random} Milchshake
                     ```
                 start_code: "# setze hier deinen Code hin"
             15:
