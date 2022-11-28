@@ -10,11 +10,26 @@ describe('Username field test', () => {
 
 // This tests fills all field and tests create account button. Individual fields are tested in separated tests.
 
+const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+function generateString(length) {
+    let result = ' ';
+    const charactersLength = characters.length;
+    for ( let i = 0; i < length; i++ ) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+
+    return result;
+}
+
+const username = generateString(12)
+const email = username + '@gmail.com'
+
        cy.get('#username')
-      .type('some_username123')
+      .type(username)
 
        cy.get('#email')
-      .type('arandomemail@gmail.com')
+      .type(email)
 
        const some_password = 'some_password\"!#@\'( )*$%\'123\"'
        cy.get('#password')
@@ -32,21 +47,19 @@ describe('Username field test', () => {
 
        cy.get('#country').select('Australia')
 
-       cy.get('.mr-5 > .ltr\\:mr-2')
-       .check()
+       cy.get('#prog_experience_yes').check()
 
         // After checking the 'Yes' checkbox, programming language 'Python' is checked
-       cy.get(':nth-child(3) > .flex > input')
-       .check()
+       cy.get('#experience_language_python').check()
 
        cy.get('#agree_terms').check()
 
-       cy.get(':nth-child(16) > .green-btn').click()
+       cy.get('#submit_button').click()
 
        // Tests whether creating account is succesful [NOT WORKING YET]
-       cy.url()
-      .should('eq', Cypress.config('baseUrl') + Cypress.env('landing_page'));
+       cy.url().should('contain', Cypress.config('baseUrl') + Cypress.env('landing_page'));
 
 
-  })
+})
+
 })
