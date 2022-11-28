@@ -10,6 +10,7 @@ describe('Add to class checkbox test', () => {
     // It does not matter which one we take (we choose the first one)
     cy.get(':nth-child(1) > .customize_adventure_class_checkbox')
       .should('be.visible')
+      .should('not.be.disabled')
       .check()
       .should('be.checked')
       .uncheck()

@@ -10,10 +10,15 @@ describe('Preview button test', () => {
     // Initially this should not be visible
     cy.get('#modal-confirm')
       .should('not.be.visible');
+    cy.get('#modal-no-button')
+      .should('not.be.visible');
+    cy.get('#modal-yes-button')
+      .should('not.be.visible');
 
     // Testing not removing adventure (clicking on remove and then on 'no')
     cy.get('#remove_adventure_button')
       .should('be.visible')
+      .should('not.be.disabled')
       .should('have.attr', 'type', 'reset')
       .click();
 
@@ -22,11 +27,14 @@ describe('Preview button test', () => {
 
     cy.get('#modal-no-button')
       .should('be.visible')
+      .should('not.be.disabled')
       .click();
 
     cy.wait(500);
 
     cy.get('#modal-confirm')
+      .should('not.be.visible');
+    cy.get('#modal-no-button')
       .should('not.be.visible');
 
     // Creating a new adventure to remove
@@ -38,6 +46,7 @@ describe('Preview button test', () => {
 
     cy.get('#modal-yes-button')
       .should('be.visible')
+      .should('not.be.disabled')
       .click();
 
     // back to for-teacher page

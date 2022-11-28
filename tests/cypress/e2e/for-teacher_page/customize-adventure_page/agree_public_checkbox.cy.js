@@ -8,6 +8,7 @@ describe('Agree public checkbox test', () => {
 
     cy.get('#agree_public')
       .should('be.visible')
+      .should('not.be.disabled')
       .check()
       .should('be.checked')
       .uncheck()

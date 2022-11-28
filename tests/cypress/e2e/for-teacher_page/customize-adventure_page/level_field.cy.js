@@ -9,6 +9,7 @@ describe('Level Field test', () => {
     // Tests level field interaction
     cy.get('#custom_adventure_level')
       .should('be.visible')
+      .should('not.be.disabled')
       .select('1')
       .should('have.value', '1');
   })

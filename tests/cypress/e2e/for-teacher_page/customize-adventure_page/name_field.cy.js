@@ -9,6 +9,7 @@ describe('Name Field test', () => {
     // Tests name field interaction
     cy.get('#custom_adventure_name')
       .should('be.visible')
+      .should('not.be.disabled')
       .clear()
       .should('be.empty')
       .type('some_name\"!#@\'( )*$%\'123\"')

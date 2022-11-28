@@ -8,6 +8,7 @@ describe('Adventure content Field test', () => {
 
     cy.get('#custom_adventure_content')
       .should('be.visible')
+      .should('not.be.disabled')
       .clear()
       .should('have.value', '')
       .type('this is the content of this adventure \"!#@\'( )*$%\'123\"')

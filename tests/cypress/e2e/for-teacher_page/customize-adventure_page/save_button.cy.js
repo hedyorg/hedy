@@ -13,10 +13,15 @@ describe('Save button test', () => {
       .should('not.be.visible');
     cy.get('#modal_alert_text')
       .should('not.be.visible');
+    cy.get('#modal-no-button')
+      .should('not.be.visible');
+    cy.get('#modal-yes-button')
+      .should('not.be.visible');
 
     // Not saving (clicking in save and than on 'yes')
     cy.get('#save_adventure_button')
       .should('be.visible')
+      .should('not.be.disabled')
       .should('have.attr', 'type', 'submit')
       .click();
 
@@ -25,6 +30,7 @@ describe('Save button test', () => {
 
     cy.get('#modal-yes-button')
       .should('be.visible')
+      .should('not.be.disabled')
       .click();
 
     cy.get('#modal_alert_container')
@@ -40,6 +46,8 @@ describe('Save button test', () => {
       .should('not.be.visible');
     cy.get('#modal_alert_text')
       .should('not.be.visible');
+    cy.get('#modal-yes-button')
+      .should('not.be.visible')
 
     // Not saving (clicking in save and than on 'no')
     cy.get('#save_adventure_button')
@@ -47,11 +55,14 @@ describe('Save button test', () => {
 
     cy.get('#modal-no-button')
       .should('be.visible')
+      .should('not.be.disabled')
       .click();
 
     cy.get('#modal_alert_container')
       .should('not.be.visible');
     cy.get('#modal_alert_text')
+      .should('not.be.visible');
+    cy.get('#modal-no-button')
       .should('not.be.visible');
   })
 })

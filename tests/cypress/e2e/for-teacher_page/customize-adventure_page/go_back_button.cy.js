@@ -8,6 +8,7 @@ describe('Preview button test', () => {
 
     cy.get('#go_back_button')
       .should('be.visible')
+      .should('not.be.disabled')
       .click();
 
     cy.url()

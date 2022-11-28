@@ -12,6 +12,7 @@ describe('Preview button test', () => {
     // opening preview
     cy.get('#preview_adventure_button')
       .should('be.visible')
+      .should('not.be.disabled')
       .click();
 
     cy.get('#modal-content')
@@ -21,9 +22,13 @@ describe('Preview button test', () => {
 
     // closing preview
     cy.get('#modal-preview-button')
+      .should('not.be.disabled')
       .click();
 
     cy.get('#modal-content')
       .should('not.be.visible');
+
+    cy.get('#modal-preview-button')
+      .should('not.be.visible')
   })
 })
