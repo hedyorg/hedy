@@ -10,11 +10,12 @@ TOKEN_CODE = {
     "comment": 'C',
     "variable": 'N',
     "constant.character": 'S',
+    "event": 'E',
     "invalid": 'I',
 }
 
 # for the caractere SPACE, all this highlights are equals
-SAME_COLOR_FOR_SPACE = ['T', 'K', 'C', 'N', 'S']
+SAME_COLOR_FOR_SPACE = ['T', 'K', 'C', 'N', 'S', 'E']
 
 ABBREVIATION = {
     "text": "T",
@@ -43,6 +44,11 @@ ABBREVIATION = {
     "str": "S",
     "blue": "S",
     "S": "S",
+
+    "event": "E",
+    "pressed": "E",
+    "orange": "E",
+    "E": "E",
 
     "invalid": "I",
     "inv": "I",
