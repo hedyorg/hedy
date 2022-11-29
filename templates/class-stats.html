@@ -8,17 +8,17 @@
 
   <!-- TODO: why use anchors that lead to nowhere here? Just use buttons, nice beautiful buttons -->
 
-  <a href="javascript:void(0);" class="stats-period-toggle"
+  <a href="javascript:void(0);" class="stats-period-toggle" id="this_week_button"
      onclick="hedyApp.stats.getClassStats(('{{class_info.id}}'), 1, this)">This week</a> |
-  <a href="javascript:void(0);" class="stats-period-toggle"
+  <a href="javascript:void(0);" class="stats-period-toggle" id="two_weeks_button"
      onclick="hedyApp.stats.getClassStats(('{{class_info.id}}'), 2, this)">Past 2 weeks</a> |
-  <a href="javascript:void(0);" class="stats-period-toggle"
+  <a href="javascript:void(0);" class="stats-period-toggle" id="four_weeks_button"
      onclick="hedyApp.stats.getClassStats(('{{class_info.id}}'), 4, this)">Past 4 weeks</a> |
-  <a href="javascript:void(0);" class="stats-period-toggle"
+  <a href="javascript:void(0);" class="stats-period-toggle" id="year_button"
      onclick="hedyApp.stats.getClassStats(('{{class_info.id}}'), 52, this)">Past year</a>
 
 
-    <button class="green-btn float-right" onclick="window.location.href='/for-teachers/class/{{class_info.id}}'">
+    <button class="green-btn float-right" id="to_class_button" onclick="window.location.href='/for-teachers/class/{{class_info.id}}'">
       {{_('back_to_class')}}
     </button>
 

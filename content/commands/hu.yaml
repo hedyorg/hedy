@@ -1,61 +1,58 @@
 1:
--   name: "print"
-    explanation: "Írass ki valamit vele: `print`."
-    demo_code: "print Szia, üdvözlünk a Hedynél!"
--   name: "ask"
-    explanation: "Kérdezz valamit vele: `ask`."
-    demo_code: "ask 'Mi a kedvenc színed?'"
--   name: "echo"
-    explanation: "Ismételj valamit: `echo`."
+-   name: "{print}"
+    explanation: "Írass ki valamit: `{print}`."
+    demo_code: "{print} Szia, üdvözlünk a Hedynél!"
+-   name: "{ask}"
+    explanation: "Kérdezz valamit: `{ask}`."
+    demo_code: "{ask} Mi a kedvenc színed?"
+-   name: "{echo}"
+    explanation: "Ismételj valamit: `{echo}`."
     demo_code: |-
-        ask Mi a kedvenc színed?
-        echo a kedvenc színed
--   name: forward
-    explanation: Rajzolj egy vonalat a `forward` utasítással.
-    demo_code: forward 100
--   name: turn
-    explanation: Fordulj a rajzoló teknőssel a `turn` utasítással
+        {ask} Mi a kedvenc színed?
+        {echo} A kedvenc színed tehát
+-   name: '{print} emoji'
+    explanation: 'Rajzolj egy emojit: `{print}`.'
+    demo_code: '{print} 🙋 🌍 ❗'
+-   name: '{forward}'
+    explanation: 'Rajzolj egy vonalat: `{forward}`.'
     demo_code: |-
-        forward 25
-        turn left
-        forward 25
-        turn right
+        {forward} 100
 -   name: '{turn}'
-    explanation: turn the drawing turtle with `{turn}`
-    demo_code: "{forward} 25\n{turn} left\n{forward} 25\n{turn} right"
+    explanation: 'Fordítsd el a teknőst: `{turn}`.'
+    demo_code: "{forward} 25\n{turn} {left}\n{forward} 25\n{turn} {right}"
 2:
--   name: "is"
-    explanation: "Az `is` használatához adj egy nevet (ne legyen benne ékezet) a szónak, amit ki akarsz íratni."
+-   name: "{is}"
+    explanation: "Nevezz el egy szót az `{is}` paranccsal, és használd a programban. Tetszőleges nevet választhatsz."
     demo_code: |-
-        nev is Hedy
-        print szia nev
--   name: "ask"
-    explanation: "Kérdezz valami az `ask` utasítással. Vigyázz! A válaszodnak nevet kell adnod az `is` segítségével."
+        név {is} Hedy
+        {print} szia név
+-   name: "{ask}"
+    explanation: "Kérdezz valami az `{ask}` utasítással. Vigyázz! A válaszodnak nevet kell adnod az `{is}` segítségével."
     demo_code: |-
-        szin is ask Mi a kedvenc színed?
-        print szin a kedvenc színed!
--   explanation: Let Hedy pause for a (couple of) second(s).
+        szín {is} {ask} Mi a kedvenc színed?
+        {print} szín a kedvenc színed!
+-   explanation: 'Állítsd meg a Hedy-t egy (pár) másodpercre: `{sleep}`.'
     name: '{sleep}'
-    demo_code: "{print} Let me think for one second...\n{sleep}\n{print} Hmm.. I need 3 more seconds...\n{sleep} 3\n{print} Eureka! Ive got it!"
--   name: is - turtle
-    explanation: Give a number a name using `{is}`. You can choose the name yourself.
-    demo_code: "angle {is} 90\n{turn} angle\n{forward} 100"
+    demo_code: "{print} Hadd gondolkodjak egy pillanatot...\n{sleep}\n{print} Hmm.. Kell még 3 másodperc...\n{sleep} 3\n{print} Heuréka! Kitaláltam!"
+-   name: '{is} a teknőssel'
+    explanation: Nevezz el egy számot az `{is}` paranccsal. Tetszőleges nevet választhatsz.
+    demo_code: "szög {is} 90\n{turn} szög\n{forward} 100"
 3:
--   name: choose_random
-    explanation: Válassz véletlenszerűen egy szót az `at` és a `random` utasításokkal
+-   name: Véletlen választás
+    explanation: Válassz véletlenszerűen egy szót egy csoportból az `{at}` és a `{random}` utasításokkal.
     demo_code: |-
-        allatok is kutya, cica, kenguru
-        print allatok at random
--   explanation: add an item to a list
-    demo_code: "animals {is} cow, cat\n{add} dog {to_list} animals"
+        állatok {is} kutya, cica, kenguru
+        {print} állatok {at} {random}
+-   explanation: '`{add}` egy elemet `{to_list}` a listába.'
+    demo_code: "állatok {is} boci, cica\n{add} kutya {to_list} állatok"
     name: '{add}'
 -   name: '{remove}'
-    explanation: remove an item from a list
-    demo_code: "animals {is} cat, dog, cow\n{remove} dog {from} animals"
+    explanation: '`{remove}` egy elemet `{from}` a listából.'
+    demo_code: "állatok {is} cica, kutya, boci\n{remove} kutya {from} állatok"
 4:
--   name: "print"
-    explanation: "Kiíratás idézőjelekkel"
-    demo_code: "print 'Szia, üdvözlünk a Hedy-nél.'"
+-   name: "{print}"
+    explanation: "Pontos kiíratás idézőjelekkel."
+    demo_code: "{print} \"Szia, üdvözlünk a Hedy-nél.\""
 -   name: "is"
     explanation: "Adj nevet a szövegnek és írasd ki `print`segítségével idézőjelek nélkül"
     demo_code: |-

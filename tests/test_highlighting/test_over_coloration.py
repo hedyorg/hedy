@@ -1,5 +1,7 @@
-from tests.Highlighter import HighlightTester
 from parameterized import parameterized
+
+from tests.Highlighter import HighlightTester
+
 
 class HighlighterTestOverCol(HighlightTester):
 
@@ -21,8 +23,6 @@ class HighlighterTestOverCol(HighlightTester):
             "TTT KK TTTT",
             level=level, lang="en")
 
-
-
     @parameterized.expand([
         ("level12"),
         ("level13"),
@@ -36,7 +36,6 @@ class HighlighterTestOverCol(HighlightTester):
             "ask is 'lost'",
             "TTT KK SSSSSS",
             level=level, lang="en")
-
 
     @parameterized.expand([
         ("level6"),
@@ -66,7 +65,6 @@ class HighlighterTestOverCol(HighlightTester):
             "TTT K SSSSSS",
             level=level, lang="en")
 
-
     @parameterized.expand([
         ("level2"),
         ("level3"),
@@ -76,7 +74,6 @@ class HighlighterTestOverCol(HighlightTester):
             "print hello world! ask",
             "KKKKK TTTTTTTTTTTTTTTT",
             level=level, lang="en")
-
 
     @parameterized.expand([
         ("level4"),
@@ -99,7 +96,6 @@ class HighlighterTestOverCol(HighlightTester):
             "print 'hello world!' ask",
             "KKKKK SSSSSSSSSSSSSS TTT",
             level=level, lang="en")
-
 
     @parameterized.expand([
         ("level3"),
@@ -124,7 +120,6 @@ class HighlighterTestOverCol(HighlightTester):
             "KKKKK TTTTTTT KK KKKKKK",
             level=level, lang='en')
 
-
     @parameterized.expand([
         ("level3"),
         ("level4"),
@@ -148,7 +143,6 @@ class HighlighterTestOverCol(HighlightTester):
             "KKKKK TTTTT KK KKKKKK",
             level=level, lang='nl')
 
-
     @parameterized.expand([
         ("level3"),
         ("level4"),
@@ -158,7 +152,6 @@ class HighlighterTestOverCol(HighlightTester):
             "remove fromyour_name from people",
             "KKKKKK TTTTTTTTTTTTT KKKK TTTTTT",
             level=level, lang='en')
-
 
     @parameterized.expand([
         ("level3"),
@@ -179,4 +172,3 @@ class HighlighterTestOverCol(HighlightTester):
             "add toanimal to animals",
             "KKK TTTTTTTT KK TTTTTTT",
             level=level, lang='en')
-

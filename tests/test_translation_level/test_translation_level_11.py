@@ -1,9 +1,11 @@
+import textwrap
+
+from parameterized import parameterized
+
 import hedy
-from tests.Tester import HedyTester
 import hedy_translation
 from hedy_content import ALL_KEYWORD_LANGUAGES
-import textwrap
-from parameterized import parameterized
+from tests.Tester import HedyTester
 
 # tests should be ordered as follows:
 # * Translation from English to Dutch
@@ -31,8 +33,24 @@ class TestsTranslationLevel11(HedyTester):
 
         self.assertEqual(expected, result)
 
-    @parameterized.expand(HedyTester.as_list_of_tuples(all_keywords["ask"], all_keywords["for"], all_keywords["in"], all_keywords["range"], all_keywords["to"], all_keywords["print"], list(ALL_KEYWORD_LANGUAGES.keys())))
-    def test_for_in_all_lang(self, ask_keyword, for_keyword, in_keyword, range_keyword, to_keyword, print_keyword, lang):
+    @parameterized.expand(
+        HedyTester.as_list_of_tuples(
+            all_keywords["ask"],
+            all_keywords["for"],
+            all_keywords["in"],
+            all_keywords["range"],
+            all_keywords["to"],
+            all_keywords["print"],
+            list(ALL_KEYWORD_LANGUAGES.keys())))
+    def test_for_in_all_lang(
+            self,
+            ask_keyword,
+            for_keyword,
+            in_keyword,
+            range_keyword,
+            to_keyword,
+            print_keyword,
+            lang):
         code = textwrap.dedent(f"""\
         nummer = {ask_keyword} 'hoe oud ben je'
         {for_keyword} counter {in_keyword} {range_keyword} 1 {to_keyword} 5

@@ -1,8 +1,9 @@
-from tests.Highlighter import HighlightTester
 from parameterized import parameterized
 
-class HighlighterTestInput(HighlightTester):
+from tests.Highlighter import HighlightTester
 
+
+class HighlighterTestInput(HighlightTester):
 
     @parameterized.expand([
         ("level2"),
@@ -13,7 +14,6 @@ class HighlighterTestInput(HighlightTester):
             "sword is ask l ost",
             "TTTTT KK KKK T TTT",
             level=level, lang="en")
-
 
     @parameterized.expand([
         ("level4"),
@@ -37,7 +37,6 @@ class HighlighterTestInput(HighlightTester):
             "TTTTT KK KKK SSSSSSSSS",
             level=level, lang="en")
 
-
     @parameterized.expand([
         ("level6"),
         ("level7"),
@@ -57,4 +56,3 @@ class HighlighterTestInput(HighlightTester):
             "sword = ask 'lo st'",
             "TTTTT K KKK SSSSSSS",
             level=level, lang="en")
-
