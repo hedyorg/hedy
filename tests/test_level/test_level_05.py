@@ -1113,6 +1113,33 @@ class TestsLevel5(HedyTester):
             max_level=7
         )
 
+    def test_if_pressed_non_latin(self):
+        code = textwrap.dedent("""\
+        if ض is pressed print 'arabic'
+        if ש is pressed print 'hebrew'
+        if й is pressed print 'russian'""")
+
+        expected = HedyTester.dedent("""\
+        while not pygame_end:
+          pygame.display.update()
+          event = pygame.event.wait()
+          if event.type == pygame.QUIT:
+            pygame_end = True
+            pygame.quit()
+            break
+          if event.type == pygame.KEYDOWN:
+            if event.unicode == 'ض':
+              print(f'arabic')
+              break
+            if event.unicode == 'ש':
+              print(f'hebrew')
+              break
+            if event.unicode == 'й':
+              print(f'russian')
+              break""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=7)
+
     #
     # pressed negative tests
     #
