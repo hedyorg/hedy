@@ -116,24 +116,24 @@ levels:
         6:
             question_text: "Co jest nie tak z tym kodem?"
             code: |-
-                {print} Hi im Hedy!
-                {print} Which football team do you support?
-                {echo} You support...
-                {print} Cool! Me too!
+                {print} Cześć, jestem Hedy!
+                {print} Której drużynie piłkarskiej kibicujesz?
+                {echo} Kibicujesz...
+                {print} Fajnie! Ja też!
             mp_choice_options:
             -   option: "In line 1 `{print}` should be replaced with `{ask}`."
                 feedback: "`{print}` in line 1 is correct."
             -   option: "In line 2, `{print}` should be replaced with `{ask}`."
-                feedback: "Great! You paid attention!"
+                feedback: "Świetnie! Zwróciłeś uwagę!"
             -   option: "Line 3 has to begin with `{print}` instead of `{echo}`."
-                feedback: "`{echo}` is correct."
+                feedback: "`{echo}` jest prawidłowa."
             -   option: "In line 4, `{print}` is spelled wrong."
-                feedback: "No, there is a mistake somewhere else"
+                feedback: "Nie, błąd jest gdzieś indziej"
             correct_answer: "B"
-            hint: "Check the `{print}` commands."
+            hint: "Sprawdź polecenia `{print}`."
             question_score: '10'
         7:
-            question_text: "What's wrong with this code?"
+            question_text: "Co jest nie tak z tym kodem?"
             code: |-
                 {print} Welcome at Hedys restaurant!
                 {ask} What would you like to eat?

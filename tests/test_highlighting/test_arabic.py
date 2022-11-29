@@ -1,5 +1,7 @@
-from tests.Highlighter import HighlightTester
 from parameterized import parameterized
+
+from tests.Highlighter import HighlightTester
+
 
 class HighlighterTestPrintArabic(HighlightTester):
 
@@ -36,8 +38,6 @@ class HighlighterTestPrintArabic(HighlightTester):
             "KKK SSSSSSSSSSSSSSSSSSS",
             level=level, lang='ar')
 
-
-
     @parameterized.expand([
         ("level3"),
         ("level4"),
@@ -60,8 +60,6 @@ class HighlighterTestPrintArabic(HighlightTester):
             "قول حيواناتي بشكل عشوائي",
             "KKK TTTTTTTT KKKK KKKKKK",
             level=level, lang='ar')
-
-
 
     def test_print_random1(self):
         self.assert_highlighted_chr(
@@ -91,7 +89,6 @@ class HighlighterTestPrintArabic(HighlightTester):
             "KKK TTTTTTTT KKKK KKKKKK SSSSSSSSSSSSSSSSSSSS",
             level=level, lang='ar')
 
-
     @parameterized.expand([
         ("level6"),
         ("level7"),
@@ -112,7 +109,6 @@ class HighlighterTestPrintArabic(HighlightTester):
             "TTTTT K NNNNN K NNNNN",
             level=level, lang="ar")
 
-
     @parameterized.expand([
         ("level12"),
         ("level13"),
@@ -126,7 +122,6 @@ class HighlighterTestPrintArabic(HighlightTester):
             "sword = ١٢٣.٤٦ + ٧٩٤٩.٨",
             "TTTTT K NNNNNN K NNNNNN",
             level=level, lang="ar")
-
 
     @parameterized.expand([
         ("level6"),
@@ -184,6 +179,3 @@ class HighlighterTestPrintArabic(HighlightTester):
             'الحيوانات هو كلب، قطة، جمل',
             "TTTTTTTTT KK TTTK TTTK TTT",
             level=level, lang='ar')
-
-
-
