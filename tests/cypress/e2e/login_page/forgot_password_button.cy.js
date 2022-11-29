@@ -7,6 +7,7 @@ describe('Forgot password button test', () => {
     // Tests forgot password button type and visibility
     cy.get('#forgot_password_button')
       .should('be.visible')
+      .should('not.be.disabled')
       .should('have.attr', 'type', 'submit')
       .click()
 
