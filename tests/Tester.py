@@ -222,6 +222,8 @@ class HedyTester(unittest.TestCase):
             with app.app_context():
                 with force_locale('en'):
                     error_message = translate_error(E.error_code, E.arguments, 'en')
+                    error_message = error_message.replace('<span class="command-highlighted">', '`')
+                    error_message = error_message.replace('</span>', '`')
                     return f'{error_message} at line {location}'
 
         return None
