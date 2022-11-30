@@ -12,7 +12,7 @@ import inspect
 import unittest
 import utils
 from hedy_content import ALL_KEYWORD_LANGUAGES, KEYWORDS
-from app import translate_error
+from app import translate_error, app
 from flask_babel import force_locale
 
 class Snippet:
@@ -218,9 +218,11 @@ class HedyTester(unittest.TestCase):
             except BaseException:
                 location = 'No Location Found'
 
-            with force_locale('en'):
-                error_message = translate_error(E.error_code, E.arguments, 'en')
-                return f'{error_message} at line {location}'
+            # Must run this in the context of the Flask app, because FlaskBabel requires that.
+            with app.app_context():
+                with force_locale('en'):
+                    error_message = translate_error(E.error_code, E.arguments, 'en')
+                    return f'{error_message} at line {location}'
 
         return None
 
