@@ -86,9 +86,9 @@ adventures:
                 start_code: "wiek = {ask} 'Ile masz lat?'\n{if} wiek < 13\n    {print} 'Jesteś młodszy niż ja!'\n{else}\n    {print} 'Jesteś starszy niż ja!'"
                 story_text: "## Great, Greater, Greatest!\nWe are going to learn more new items. You might know them already from mathematics, the `<` and `>`.\nThe `<` checks if the first number is smaller than the second, for example `age < 12` checks if `age` {is} smaller than 12.\nIf you want to check if the first number is smaller or equal to the second, you can use `<=`, for example `age <= 11`.\nThe `>` checks if the first number is bigger than the second, for example `points > 10` checks if `points` is larger than 10.\nIf you want to check if the first number is bigger or equal to the second, you can use `>=`, for example `points >= 11`.\nYou use these comparisons in an `{if}`, like this:\n"
                 example_code: "```\nage = {ask} 'How old are you?'\n{if} age > 12\n    {print} 'You are older than I am!'\n```\n"
-                story_text_2: "From this level on, if you want to compare exactly, you can use two equal signs. This is what most programming languages do:\n"
+                story_text_2: "Od tego poziomu, jeśli chcesz dokładnie porównać, możesz użyć dwóch znaków równości. Tak właśnie robi większość języków programowania:\n"
                 example_code_2: "```\nname = {ask} 'What is your name?'\n{if} name == 'Hedy'\n    {print} 'You are coo!'\n```\n"
-                story_text_3: "You can also compare if something is *not* equal to something else using `!=` like this:\n"
+                story_text_3: "Możesz również porównać, czy coś jest *nie* równe czemuś innemu, używając `!=` jak to:\n"
                 example_code_3: "```\nname = {ask} 'What is your name?'\n{if} name != 'Hedy'\n    {print} 'You are not Hedy'\n```\n"
             15:
                 start_code: "answer = 0\n{while} answer != 25\n    answer = {ask} 'What is 5 times 5?'\n{print} 'A correct answer has been given'"

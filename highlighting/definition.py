@@ -61,7 +61,8 @@ TRANSLATE_WORDS = [
     "or",
     "while",
     "length",
-    "comma"
+    "comma",
+    "pressed"
 ]
 
 

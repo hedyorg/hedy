@@ -504,7 +504,7 @@ adventures:
                 example_code: |
                     ```
                     animals {is} 🦔, 🐿, 🦉, 🦇
-                    {print} He now hears the sound of an animals {at} {random}
+                    {print} He now hears the sound of an animal {at} {random}
                     ```
                 story_text_2: |
                     The command `{add}` can also come in handy in your story.
@@ -514,7 +514,7 @@ adventures:
                     animals {is} 🐿, 🦔, 🦇, 🦉
                     animal {is} {ask} What do you think it is?
                     {add} animal {to_list} animals
-                    {print} it was a animals {at} {random}
+                    {print} it was an animal {at} {random}
                     ```
                 story_text_3: |
                     This is an example of the `{remove}` command in your story
@@ -989,7 +989,7 @@ adventures:
             12:
                 story_text: |
                     ## Sing a song!
-                    In this song we can make it even easier to program '{if} you're happy and you know it, clap your hands'. Because we can put all of the actions in a variable, check it out:
+                    In this song we can make it even easier to program 'if you're happy and you know it, clap your hands'. Because we can put all of the actions in a variable, check it out:
 
                     ## Challenge
                     Can you add the right amount of indentation to each line to make the song play correctly?
@@ -1253,7 +1253,7 @@ adventures:
                     ## Dishwashing
                     Do you always disagree at home about who should wash the dishes or change the litter box today?
                     Then you can let the computer choose very fairly. You can program that in this level!
-                    You first make a list of the members of your family. Then choose '{at} {random}' from the list.
+                    You first make a list of the members of your family. Then choose `{at} {random}` from the list.
                 example_code: |
                     ```
                     people {is} mom, dad, Emma, Sophie
@@ -2170,7 +2170,7 @@ adventures:
                     {while} more == 'yes'
                         order = {ask} 'What would you like to order?'
                         {print} order
-                        more = {ask} 'Would you like to order anything {else}?'
+                        more = {ask} 'Would you like to order anything else?'
                     {print} 'Thank you!'
                     ```
                 start_code: "# place your code here"
@@ -2221,7 +2221,7 @@ adventures:
                     ```
                 story_text_2: |
                     ## Challenge
-                    Now, Hedy can only answer yes, no or maybe. Can you give Hedy more answer options, like 'definitely' or '{ask} again'.
+                    Now, Hedy can only answer yes, no or maybe. Can you give Hedy more answer options, like 'definitely' or 'ask again'.
                 start_code: "# place your code here"
             4:
                 story_text: |
@@ -2258,9 +2258,9 @@ adventures:
                 example_code: |
                     ```
                     {print} 'Im Hedy the fortune teller!'
-                    {print} 'I can predict {if} youll win the lottery tomorrow!'
+                    {print} 'I can predict if youll win the lottery tomorrow!'
                     person {is} {ask} 'Who are you?'
-                    {if} person {is} Hedy {print} 'You will definitely win!🤩' {else} {print} 'Bad luck! Someone {else} will win!😭'
+                    {if} person {is} Hedy {print} 'You will definitely win!🤩' {else} {print} 'Bad luck! Someone else will win!😭'
                     ```
                 story_text_2: |
                     ## Hack the program
@@ -2270,7 +2270,7 @@ adventures:
                 example_code_2: |
                     ```
                     {print} 'Im Hedy the fortune teller!'
-                    {print} 'I can predict {if} you will win the lottery tomorrow!'
+                    {print} 'I can predict if you will win the lottery tomorrow!'
                     person {is} {ask} 'Who are you?'
                     goodanswer {is} Hurray! You win!, You will definitely win!, We have a winner!
                     badanswer {is} Bad luck! Try again!, Another person will win, You lose!
@@ -2328,7 +2328,7 @@ adventures:
                 example_code: |
                     ```
                     {print} 'Im Hedy the fortune teller!'
-                    {print} 'You can {ask} 3 questions!'
+                    {print} 'You can ask 3 questions!'
                     {repeat} 3 {times} question = {ask} 'What do you want to know?'
                     answer = yes, no, maybe
                     {repeat} 3 {times} {print} 'My crystal ball says... ' answer {at} {random}
@@ -2343,21 +2343,21 @@ adventures:
                     This does mean that you can only use `{repeat}` for the answers, and you will have to ask and print all the questions separately.
                     Can you do it?
 
-                    In the upcoming levels the layout of {repeat} command will change, which enables you to repeat multiple lines at once.
+                    In the upcoming levels the layout of `{repeat}` command will change, which enables you to repeat multiple lines at once.
                 start_code: "# place your code here"
             8:
                 story_text: |
                     ## Fortune Teller
-                    In the previous levels you've learned how to use repeat to make the fortune teller answer 3 questions in a row, but we had a problem with printing the questions.
-                    Now that problem is solved, because of the new way of using the repeat command.
-                    In the next example you can have your fortune teller {ask} 3 questions and also print them!
+                    In the previous levels you've learned how to use `{repeat}` to make the fortune teller answer 3 questions in a row, but we had a problem with printing the questions.
+                    Now that problem is solved, because of the new way of using the `{repeat}` command.
+                    In the next example you can have your fortune teller ask 3 questions and also print them!
 
                     ## Challenge
-                    Can you fill in the repeat command correctly on the blanks?
+                    Can you fill in the `{repeat}` command correctly on the blanks?
                 example_code: |
                     ```
                     {print} 'I am Hedy the fortune teller!'
-                    {print} 'You can {ask} me 3 questions.'
+                    {print} 'You can ask me 3 questions.'
                     answers = yes, no, maybe
                     _ _ _
                        question = {ask} 'What do you want to know?'
@@ -2491,7 +2491,7 @@ adventures:
                     ```
                 story_text_2: |
                     ## Challenge
-                    This story is pretty straight {forward}, maybe you can spook it up a bit by adding a more exciting story.
+                    This story is pretty straight forward, maybe you can spook it up a bit by adding a more exciting story.
                     Also you have very limited outcomes right now, there are only 3 options of what's behind the doors. Maybe you can think of more monsters to add to the list!
                 story_text_3: |
                     ## Change the game into a tv gameshow!
@@ -2694,7 +2694,7 @@ adventures:
             14:
                 story_text: |
                     ## Piggybank
-                    In this level you can let Hedy tell you {if} you have saved up enough money!
+                    In this level you can let Hedy tell you if you have saved up enough money!
                 example_code: |
                     ```
                     money = {ask} 'How much money have you saved?'
@@ -3064,7 +3064,7 @@ adventures:
             15:
                 story_text: |
                     ## Tic Tac Toe
-                    In this level you can improve your Tic Tac Toe game with the {while} loop. With this loop you can combine the `{if} game != 'over'` and the `{for} i {in} {range} 1 to 9` into one simple line.
+                    In this level you can improve your Tic Tac Toe game with the {while} loop. With this loop you can combine the `{if} game != 'over'` and the `{for} i {in} {range} 1 {to} 9` into one simple line.
                     Check it out:
                 example_code: |
                     ```
@@ -3225,7 +3225,7 @@ adventures:
                     Congratulations! You've reached the end of level 1. Hopefully you've already made some awesome codes, but Hedy has a lot more to discover. 
 
                     In the first level you might've notice that the `{echo}` command can only save one bit of information at a time. 
-                    For example in the restaurant adventure, you could {echo} what the costumer wanted to eat, or what they wanted to drink, but not both in one sentence.
+                    For example in the restaurant adventure, you could echo what the costumer wanted to eat, or what they wanted to drink, but not both in one sentence.
                 example_code: |
                     ```
                     {print} Welcome at Hedy's
@@ -3280,7 +3280,7 @@ adventures:
             5:
                 story_text: |
                     ## What's next?
-                    Now you've reached the end of this level, so you have learned `{ask}` and `{if}`. For example you can {ask} guests what they would like to eat.
+                    Now you've reached the end of this level, so you have learned `{ask}` and `{if}`. For example you can ask guests what they would like to eat.
                     What you can't yet do though, is calculate the price for everyone's dinner.
 
                     The next level makes it possible to use addition, subtraction and multiplication in your programs. This way you can calculate the prices in your restaurant, but you could also add a secret code to give your friends and family a discount.
@@ -3318,7 +3318,7 @@ adventures:
             7:
                 story_text: |
                     ## What's next?
-                    Now you've learned how to `{repeat}` one single line of code. This comes in handy, but it's not always enough. Sometimes you want to `{repeat}` multiple lines at once.
+                    Now you've learned how to repeat one single line of code. This comes in handy, but it's not always enough. Sometimes you want to repeat multiple lines at once.
                     The next level allows you to group a couple of lines of code, and repeat that little group of lines all at once!
                 example_code: |
                     ```
@@ -3347,7 +3347,7 @@ adventures:
                 story_text: |
                     ## What's next?
                     You're doing great! In this level we still face a small problem. You have learned to repeat lines, but what if you'd want to slightly change the line.
-                    For example if you want to sing the song '{if} you're happy and you know it'. It would look like this:
+                    For example if you want to sing the song 'if you're happy and you know it'. It would look like this:
 
                     If you'd also want the next verse 'stomp your feet', and the next one, and the next one, you'd have to change the code completely.
                     In the next level you'll learn the `{for}` command, which allows you to make a list of actions and repeat the code with another action each time!
@@ -3414,9 +3414,9 @@ adventures:
             13:
                 story_text: |
                     ## What's next?
-                    With the program below you can calulate {if} you've passed a subject at school (so, a grade of six or higher).
-                    You can see this code is extremely inefficient, du to the very long code in line 5.
-                    All the different grades from 1 to 5 had to be programmed seperately. Lucky for you, in the next level you'll learn how to do this without this extremely long code!
+                    With the program below you can calculate if you've passed a subject at school (so, a grade of six or higher).
+                    You can see this code is extremely inefficient, due to the very long code in line 5.
+                    All the different grades from 1 to 5 had to be programmed separately. Lucky for you, in the next level you'll learn how to do this without this extremely long code!
                 example_code: |
                     ```
                     first_grade = {ask} 'What score did you get on your first test?'
@@ -3433,7 +3433,7 @@ adventures:
                 story_text: |
                     ## What's next?
                     In this game below a code has been made to make sure the player can play on as long as he/she wants...
-                    But the code is ineffective and way too long. Also, what {if} the player wants to play 101 games instead of 100?
+                    But the code is ineffective and way too long. Also, what if the player wants to play 101 games instead of 100?
                     You can't play to infinity?
                     In the next level you will learn a command that makes all of this a lot easier!
                 example_code: |
@@ -3451,7 +3451,7 @@ adventures:
             15:
                 story_text: |
                     ## What's next?
-                    In the next level we will grow a bit more towards real Python code. thon code. You will also learn how to match two lists together.
+                    In the next level we will grow a bit more towards real Python code. You will also learn how to match two lists together.
                     This way you can program a code in which the correct animal is matched to the right sound.
                     Because the two codes below... Are obviously nonsense!
                 example_code: |
