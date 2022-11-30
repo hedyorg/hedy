@@ -99,9 +99,8 @@ def collect_snippets(path, filtered_language=None):
 
     return Hedy_snippets
 
-# filtered_language = 'en'
+filtered_language = 'nb_NO'
 # use this to filter on 1 lang, zh_Hans for Chinese, nb_NO for Norwegian, pt_PT for Portuguese
-# filtered_language = 'en'
 
 
 Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/adventures',
@@ -125,6 +124,10 @@ class TestsAdventurePrograms(unittest.TestCase):
     @parameterized.expand(Hedy_snippets)
     def test_adventures(self, name, snippet):
         if snippet is not None:
-            print(snippet.code)
             result = HedyTester.check_Hedy_code_for_errors(snippet)
+            if result is not None:
+                print(f'\n----\n{snippet.code}\n----')
+                print(f'in language {snippet.language} from level {snippet.level} gives error:')
+                print(result)
             self.assertIsNone(result)
+
