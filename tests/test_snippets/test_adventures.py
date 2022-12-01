@@ -47,10 +47,7 @@ def collect_snippets(path, filtered_language=None):
                                 code_snippet_counter += 1
                                 try:
                                     code = tag.contents[0].contents[0]
-                                    if hash(code) in unique_snippets_table:
-
-                                        continue
-                                    else:
+                                    if not hash(code) in unique_snippets_table:
                                         unique_snippets_table.add(hash(code))
                                 except BaseException:
                                     print("Code container is empty...")
@@ -67,10 +64,7 @@ def collect_snippets(path, filtered_language=None):
                             # code snippets inside start_code
                             try:
                                 start_code = level['start_code']
-                                if hash(start_code) in unique_snippets_table:
-
-                                    continue
-                                else:
+                                if not hash(start_code) in unique_snippets_table:
                                     unique_snippets_table.add(hash(start_code))
                                 Hedy_snippets.append(Snippet(f, level_number, 'start_code', start_code, adventure_name))
                             except KeyError:
@@ -88,9 +82,7 @@ def collect_snippets(path, filtered_language=None):
                                 try:
                                     code = tag.contents[0].contents[0]
                                     # test only unique snippets
-                                    if hash(code) in unique_snippets_table:
-                                        continue
-                                    else:
+                                    if not hash(code) in unique_snippets_table:
                                         unique_snippets_table.add(hash(code))
                                 except BaseException:
                                     print("Code container is empty...")
@@ -107,9 +99,8 @@ def collect_snippets(path, filtered_language=None):
 
     return Hedy_snippets
 
-# filtered_language = 'en'
+# filtered_language = 'nb_NO'
 # use this to filter on 1 lang, zh_Hans for Chinese, nb_NO for Norwegian, pt_PT for Portuguese
-# filtered_language = 'en'
 
 
 Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/adventures',
@@ -133,6 +124,10 @@ class TestsAdventurePrograms(unittest.TestCase):
     @parameterized.expand(Hedy_snippets)
     def test_adventures(self, name, snippet):
         if snippet is not None:
-            print(snippet.code)
             result = HedyTester.check_Hedy_code_for_errors(snippet)
+            if result is not None:
+                print(f'\n----\n{snippet.code}\n----')
+                print(f'in language {snippet.language} from level {snippet.level} gives error:')
+                print(result)
             self.assertIsNone(result)
+
