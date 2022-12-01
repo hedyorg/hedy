@@ -7,6 +7,7 @@ describe('Password field test', () => {
     // Tests password field interaction
     cy.get('#password')
       .should('be.visible')
+      .should('not.be.disabled')
       .should('be.empty')
       .should('have.attr', 'type', 'password')
       .type('some_password\"!#@\'( )*$%\'123\"')
