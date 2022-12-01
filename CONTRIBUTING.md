@@ -72,6 +72,11 @@ To run the tests go to `/tests/` first.
 You can then the tests on the command line with the following: `npx cypress run --spec "[path to test(s)]"`
 An example of running cypress: `npx cypress run --spec "cypress/e2e/login_page/*"`
 
+Do note a few things:
+* Run the `feed_dev_database.sh` script before running the tests as they something belong on certain users or classes being present in the database
+* Run pybabel before running the tests as they can also rely on exact labels
+* For the same reason, set your app to English
+
 If you want to connect Cypress to the online dashboard, use:
 
 `npx cypress run --record --key <key here>`
