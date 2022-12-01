@@ -538,10 +538,9 @@ input:checked ~ .toggle-path {
 }
 
 .animate-keys {
-  position: absolute;
-  bottom: 15px;
-  right: 15px;
+  @apply absolute bottom-1 right-1;
 
+  /* Would be nice to animate this with Tailwind as well, but should be fine for now */
   animation-name: animate-keys;
   animation-duration: 1.5s;
   animation-timing-function: ease-in-out;
