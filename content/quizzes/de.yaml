@@ -25,20 +25,20 @@ levels:
             -   option: |
                     ```
                     {print}
-                     ```
+                    ```
                 feedback: "Richtig!"
             -   option: |
                     ```
-                    hello
+                    hallo
                     ```
-                feedback: "Hello isn't a command."
+                feedback: "Hallo ist kein Befehl."
             -   option: |
                     ```
                     {ask}
                     ```
                 feedback: "Mit `{ask}` kannst du eine Frage stellen."
             correct_answer: "B"
-            hint: "_?_ Hello world!"
+            hint: "_?_ Hallo Welt!"
             question_score: '10'
         3:
             question_text: "Wie fragst du, was jemandes Lieblingsfarbe ist?"
@@ -62,7 +62,7 @@ levels:
                     ```
                     {echo} Was ist deine Lieblingsfarbe?
                     ```
-                feedback: "`{echo}` repeats your answer back to you."
+                feedback: "`{echo}` gibt deine Antwort aus."
             correct_answer: "C"
             hint: "Mit dem `{ask}`-Befehl kann du etwas fragen."
             question_score: '10'
