@@ -53,7 +53,7 @@ jobs:
         build-tools/github/validate --weblate
     - name: Run all tests
       shell: pwsh
-      if: ${{(steps.check_file_changed.outputs.docs_changed == 'True' || github.event.label.name == 'force_tests') && steps.check_file_changed.weblate_tests.run != 'True'}}
+      if: ${{(steps.check_file_changed.outputs.docs_changed == 'True' || github.event.label.name == 'force_tests') && steps.weblate_tests.run != 'True'}}
       run: |
         build-tools/github/validate --all
     - name: Run non-code related tests
