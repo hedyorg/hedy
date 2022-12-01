@@ -7,7 +7,7 @@ describe('Is able to see teacher page', () => {
     cy.wait(500);
     
 
-    cy.get('#class_view_button').click();
+    cy.get(':nth-child(1) > #class_view_button').click();
 
     cy.get('.green-btn').contains("Add students").click();
     cy.get('.green-btn').contains("Copy join link").click();

@@ -7,7 +7,7 @@ describe('Is able to add student by name', () => {
     
     cy.wait(500);
     
-    cy.get('#class_view_button').click();
+    cy.get(':nth-child(1) > #class_view_button').click();
 
     //delete student1 if in class
     cy.get('.username_cell').then(($div) => {
