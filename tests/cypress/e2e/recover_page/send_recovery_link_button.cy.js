@@ -7,6 +7,7 @@ describe('Send recovery link button test', () => {
     // Tests send recovery link button type and visibility
     cy.get('#send_recovery_button')
       .should('be.visible')
+      .should('not.be.disabled')
       .should('have.attr', 'type', 'submit')
   })
 })

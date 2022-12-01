@@ -1,5 +1,7 @@
-from tests.Highlighter import HighlightTester
 from parameterized import parameterized
+
+from tests.Highlighter import HighlightTester
+
 
 class HighlighterTestIfInline(HighlightTester):
 
@@ -13,7 +15,6 @@ class HighlighterTestIfInline(HighlightTester):
             "if cat is chat print 'Terrific!' var at random",
             "KK TTT KK TTTT KKKKK SSSSSSSSSSS TTT KK KKKKKK",
             level=level, lang="en")
-
 
     def test_if_affectation1(self):
         self.assert_highlighted_chr(
@@ -41,7 +42,6 @@ class HighlighterTestIfInline(HighlightTester):
             "KK TTT KK NNN TTTTT K N K NN",
             level=level, lang="en")
 
-
     @parameterized.expand([
         ("level5"),
         ("level6"),
@@ -52,9 +52,6 @@ class HighlighterTestIfInline(HighlightTester):
             "if anything is no print 'Thats it!' goodanswer at random else print 'One ' anything at random",
             "KK TTTTTTTT KK TT KKKKK SSSSSSSSSSS TTTTTTTTTT KK KKKKKK KKKK KKKKK SSSSSS TTTTTTTT KK KKKKKK",
             level=level, lang="en")
-
-
-
 
     @parameterized.expand([
         ("level5"),
@@ -67,11 +64,6 @@ class HighlighterTestIfInline(HighlightTester):
             "KK TTTTTTTT KK TT TTT KK TTTT KKKK TTT KK TTTTTT",
             level=level, lang="en")
 
-
-
-
-
-
     @parameterized.expand([
         ("level5"),
         ("level6"),
@@ -82,7 +74,6 @@ class HighlighterTestIfInline(HighlightTester):
             "else print 'Oh no! You are being eaten by a...' monsters at random",
             "KKKK KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS TTTTTTTT KK KKKKKK",
             level=level, lang="en")
-
 
     @parameterized.expand([
         ("level6"),
@@ -103,11 +94,3 @@ class HighlighterTestIfInline(HighlightTester):
             "else price is 5",
             "KKKK TTTTT KK N",
             level=level, lang="en")
-
-
-
-
-
-
-
-

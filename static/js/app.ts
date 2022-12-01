@@ -175,6 +175,7 @@ $(document).on("click", function(event){
     var editor = turnIntoAceEditor($editor.get(0)!, $editor.data('readonly'));
     theGlobalEditor = editor;
     theGlobalEditor.setShowPrintMargin(false);
+    theGlobalEditor.renderer.setScrollMargin(0, 0, 0, 20)
     error.setEditor(editor);
     markers = new Markers(theGlobalEditor);
 
@@ -1525,7 +1526,7 @@ function store_parsons_attempt(order: Array<string>, correct: boolean) {
 // Todo: As the parsons functionality will rapidly increase, we should probably all store this in a dedicated file (?)
 function get_parsons_code() {
     let code = "";
-    let count = 65;
+    let count = 1;
     let order = new Array();
     let mistake = false;
 
@@ -1539,8 +1540,8 @@ function get_parsons_code() {
           code += text + "\n";
         }
         $(this).parents().removeClass('border-black');
-        let index = $(this).attr('index') || "-";
-        if (index.charCodeAt(0) == count) {
+        let index = $(this).attr('index') || 999;
+        if (index == count) {
           $(this).parents().addClass('border-green-500');
         } else {
           mistake = true;
