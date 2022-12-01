@@ -1,11 +1,12 @@
-import {goToLogin, gotoRegisterTeacher, goToPage, gotoRegisterStudent} from '../tools/navigation/nav.js'
+import {goToRegisterStudent, goToLogin, goToProfilePage} from '../tools/navigation/nav.js'
 import {login, loginForUser} from '../tools/login/login.js'
 
 describe('Username field test', () => {
   it('passes', () => {
-    goToPage(Cypress.env('register_student_page'));
+//    goToPage(Cypress.env('register_student_page'));
 
-//      goToRegisterStudent();
+      goToRegisterStudent();
+
 // This function is not working yet. Preferably we use the goToRegisterStudent function instead of the goToPage function.
 
 // This tests fills all field and tests create account button. Individual fields are tested in separated tests.
@@ -44,7 +45,7 @@ describe('Username field test', () => {
        // Tests whether creating account is succesful [NOT WORKING YET]
        cy.url().should('contain', Cypress.config('baseUrl') + Cypress.env('landing_page'));
 
-       goToLogin();
+       goToProfilePage();
        cy.get('#personal_settings').click()
        cy.get('#delete_profile_button').click()
        cy.get('#modal-yes-button').click()
