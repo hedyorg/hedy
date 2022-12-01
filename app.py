@@ -912,6 +912,9 @@ def index(level, program_id):
                 max_score = 0 if len(scores) < 1 else max(scores)
                 # We don't have the score yet for the next level -> remove all upcoming levels from 'available_levels'
                 if max_score < threshold:
+                    # if this level is currently available, but score is below max score
+                    
+                    customizations["below_threshold"] =  (level + 1 in available_levels) 
                     available_levels = available_levels[:available_levels.index(level)+1]
 
     # Add the available levels to the customizations dict -> simplify implementation on the front-end
@@ -956,7 +959,7 @@ def index(level, program_id):
         quiz = False
 
     commands = hedy.commands_per_level.get(level)
-
+    print("here", customizations.items())
     return hedyweb.render_code_editor_with_tabs(
         cheatsheet=cheatsheet,
         commands=commands,

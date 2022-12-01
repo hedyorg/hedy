@@ -57,16 +57,38 @@ strong {
 
 
 .tooltip {
-  @apply invisible absolute;
+  position: relative;
+  display: inline-block;
+ 
 }
 
-.has-tooltip:hover .tooltip {
-  @apply visible z-10;
+.tooltip .tooltiptext{
+    @apply invisible absolute;
+    @apply bg-white text-red-600 items-center;
+    width: 130;
+    bottom: 150%;
+    left: 50%;
+    margin-left: -80px;
+ 
+ 
+}
+.tooltip:hover .tooltiptext {
+  visibility: visible;
 }
 
-/* .green-btn:hover:disabled, .green-btn:hover[disabled] {
-  @apply text-opacity-0
-} */
+.tooltip .tooltiptext::after {
+  @apply absolute;
+  content: " ";
+  top: 100%;
+  /* At the bottom of the tooltip */
+  left: 50%;
+  margin-left: -10px;
+  border-width: 10px;
+  border-style: solid;
+  border-color: white transparent transparent transparent;
+}
+
+
 
 .green-btn:hover:enabled {
   @apply bg-green-400 border-green-500;
