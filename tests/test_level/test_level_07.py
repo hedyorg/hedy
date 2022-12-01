@@ -1,6 +1,8 @@
-import hedy
 import textwrap
+
 from parameterized import parameterized
+
+import hedy
 from tests.Tester import HedyTester
 
 
@@ -93,7 +95,7 @@ class TestsLevel7(HedyTester):
         repeat 3 times x""")
 
         self.single_level_tester(code=code, exception=hedy.exceptions.IncompleteRepeatException)
-    
+
     def test_repeat_with_missing_print_gives_lonely_text_exc(self):
         code = textwrap.dedent("""\
         repeat 3 times 'n'""")
@@ -119,7 +121,8 @@ class TestsLevel7(HedyTester):
 
         self.single_level_tester(code=code, expected=expected)
 
-    @parameterized.expand(['5', '𑁫', '५', '૫', '੫', '৫', '೫', '୫', '൫', '௫', '౫', '၅', '༥', '᠕', '៥', '๕', '໕', '꧕', '٥', '۵'])
+    @parameterized.expand(['5', '𑁫', '५', '૫', '੫', '৫', '೫', '୫', '൫', '௫',
+                          '౫', '၅', '༥', '᠕', '៥', '๕', '໕', '꧕', '٥', '۵'])
     def test_repeat_with_all_numerals(self, number):
         code = textwrap.dedent(f"repeat {number} times print 'me wants a cookie!'")
 
@@ -161,7 +164,7 @@ class TestsLevel7(HedyTester):
         self.single_level_tester(
             code=code,
             expected=expected,
-            expected_commands=['repeat','print'],
+            expected_commands=['repeat', 'print'],
             output=output)
 
     def test_repeat_with_variable_name_collision(self):
@@ -207,12 +210,11 @@ class TestsLevel7(HedyTester):
             code=code,
             expected=expected)
 
+    # def test_if_pressed_repeat(self):
+    #     code = "if x is pressed repeat 5 times print 'doe het 5 keer!'"
 
-    def test_if_pressed_repeat(self):
-        code = "if x is pressed repeat 5 times print 'doe het 5 keer!'"
-
-        expected = HedyTester.dedent("""\
-	    if event.unicode == 'x':
-	    	for i in range(int('5')):
-		    	print(f'doe het 5 keer!')
-			    time.sleep(0.1)""")
+    #     expected = HedyTester.dedent("""\
+    #     if event.key == pygame.K_x:
+    #         for i in range(int('5')):
+    #             print(f'doe het 5 keer!')
+    #             time.sleep(0.1)""")

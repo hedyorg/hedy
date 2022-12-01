@@ -1,5 +1,7 @@
-from tests.Highlighter import HighlightTester
 from parameterized import parameterized
+
+from tests.Highlighter import HighlightTester
+
 
 class HighlighterTestTurtle(HighlightTester):
 
@@ -43,10 +45,6 @@ class HighlighterTestTurtle(HighlightTester):
             "KKKKKKK",
             level=level, lang="en")
 
-
-
-
-
     def test_turn_left(self):
         self.assert_highlighted_chr(
             "turn left",
@@ -58,7 +56,6 @@ class HighlighterTestTurtle(HighlightTester):
             "turn right",
             "KKKK TTTTT",
             level="level1", lang="en")
-
 
     @parameterized.expand([
         ("level1"),
@@ -75,8 +72,6 @@ class HighlighterTestTurtle(HighlightTester):
             "turn",
             "KKKK",
             level=level, lang="en")
-
-
 
     @parameterized.expand([
         ("level1"),
@@ -102,9 +97,6 @@ class HighlighterTestTurtle(HighlightTester):
             "KKKK NN",
             level=level, lang="en")
 
-
-
-
     @parameterized.expand([
         ("level1"),
         ("level2"),
@@ -122,7 +114,6 @@ class HighlighterTestTurtle(HighlightTester):
             "color black",
             "KKKKK TTTTT",
             level=level, lang="en")
-
 
     @parameterized.expand([
         ("level1"),
@@ -142,7 +133,6 @@ class HighlighterTestTurtle(HighlightTester):
             "KKKKK TTTT",
             level=level, lang="en")
 
-
     @parameterized.expand([
         ("level1"),
         ("level2"),
@@ -160,7 +150,6 @@ class HighlighterTestTurtle(HighlightTester):
             "color brown",
             "KKKKK TTTTT",
             level=level, lang="en")
-
 
     @parameterized.expand([
         ("level1"),
@@ -180,7 +169,6 @@ class HighlighterTestTurtle(HighlightTester):
             "KKKKK TTTT",
             level=level, lang="en")
 
-
     @parameterized.expand([
         ("level1"),
         ("level2"),
@@ -198,7 +186,6 @@ class HighlighterTestTurtle(HighlightTester):
             "color green",
             "KKKKK TTTTT",
             level=level, lang="en")
-
 
     @parameterized.expand([
         ("level1"),
@@ -218,7 +205,6 @@ class HighlighterTestTurtle(HighlightTester):
             "KKKKK TTTTTT",
             level=level, lang="en")
 
-
     @parameterized.expand([
         ("level1"),
         ("level2"),
@@ -236,7 +222,6 @@ class HighlighterTestTurtle(HighlightTester):
             "color pink",
             "KKKKK TTTT",
             level=level, lang="en")
-
 
     @parameterized.expand([
         ("level1"),
@@ -256,7 +241,6 @@ class HighlighterTestTurtle(HighlightTester):
             "KKKKK TTTTTT",
             level=level, lang="en")
 
-
     @parameterized.expand([
         ("level1"),
         ("level2"),
@@ -275,7 +259,6 @@ class HighlighterTestTurtle(HighlightTester):
             "KKKKK TTT",
             level=level, lang="en")
 
-
     @parameterized.expand([
         ("level1"),
         ("level2"),
@@ -293,7 +276,6 @@ class HighlighterTestTurtle(HighlightTester):
             "color white",
             "KKKKK TTTTT",
             level=level, lang="en")
-
 
     @parameterized.expand([
         ("level1"),

@@ -72,6 +72,11 @@ To run the tests go to `/tests/` first.
 You can then the tests on the command line with the following: `npx cypress run --spec "[path to test(s)]"`
 An example of running cypress: `npx cypress run --spec "cypress/e2e/login_page/*"`
 
+Do note a few things:
+* Run the `feed_dev_database.sh` script before running the tests as they something belong on certain users or classes being present in the database
+* Run pybabel before running the tests as they can also rely on exact labels
+* For the same reason, set your app to English
+
 If you want to connect Cypress to the online dashboard, use:
 
 `npx cypress run --record --key <key here>`
@@ -102,10 +107,9 @@ bash feed_dev_database.sh
 ```
 
 ## Python code styling
-As this project is growing and multiple people are working on it, we want to move to a more uniformly styled code base. We choose to stick to PEP8 guidelines, with the exception of a max line length of 100 characters instead of 79. To ensure your code adheres to these guidelines, you can install the pre-commit configuration to automatically check modified code when you make a commit. Installing this pre-commit hook has to be done manually (for security reasons) and can be done using the following commands:
+As this project is growing and multiple people are working on it, we want to move to a more uniformly styled code base. We choose to stick to PEP8 guidelines, with the exception of a max line length of 120 characters instead of 79. To ensure your code adheres to these guidelines, you can install the pre-commit configuration to automatically check modified code when you make a commit. Installing this pre-commit hook has to be done manually (for security reasons) and can be done using the following commands. The pre-commit hook is available for installation once you run `requirements.txt`:
 
 ```
-pip install pre-commit
 pre-commit install
 ```
 

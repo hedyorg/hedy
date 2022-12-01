@@ -8,6 +8,7 @@ describe('Login button test', () => {
     // Tests login button type and visibility
     cy.get('#login_button')
       .should('be.visible')
+      .should('not.be.disabled')
       .should('have.attr', 'type', 'submit')
 
     // Tests login button on existing account
