@@ -1490,17 +1490,20 @@ adventures:
             5:
                 story_text: |
                     ## Press it!
-                    In this adventure you can make text appear with a button on your keyboard.
-                    Use the command `{pressed}` followed by `{print}` to assign text to a button on your keyboard.
-                    Run the example code and try pressing the x button on your keyboard.
+                    In the introduction you were also told about the new keyword ```pressed```! Using ```pressed```
+                    can make coding much more interactive, and you can have live control of what is executed!
+                    In the upcoming levels you will learn how ```pressed``` makes this possible and what uses ```pressed```
+                    has.
+                    Besides printing text, there is a whole other variety of uses for ```pressed```
+                    For example, you can also link turtle commands to keys! Try it!
                 example_code: |
                     ```
-                    if x is {pressed} {print} 'You are so cool! You pressed the x key!'
+                    if x is {pressed} forward 50
                     ```
                 story_text_2: |
                     ## If Else Pressed
-                    You can assign text to any letter on your keyboard.
-                    Run the example code, press a key on your keyboard and see what happens!
+                    You can also assign an else statement to ```pressed```. The else statement will be executed
+                    whenever you press a key other than the key you assigned.
 
                 example_code_2: |
                     ```
@@ -1508,6 +1511,16 @@ adventures:
                     else {print} 'Oh no! You did not press the y key.'
                     ```
 
+                start_code: "# place your code here"
+            7:
+                story_text: |
+                    You might have tried it in level 5 and 6, pressing the key linked to ```pressed``` multiple
+                    times. If you did, you noticed that this did nothing. but now that you have learned about repeat, we
+                    can press keys multiple times! Make the turtle walk forward!
+                example_code: |
+                    ```
+                    repeat 3 times if x is {pressed} forward 15
+                    ```
                 start_code: "# place your code here"
             8:
                 story_text: |
@@ -1539,6 +1552,7 @@ adventures:
                     ```
 
                 start_code: "# place your code here"
+
     rock:
         name: "Rock, paper, scissors"
         description: "Make your own rock, paper, scissors game"
