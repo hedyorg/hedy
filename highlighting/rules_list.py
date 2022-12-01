@@ -112,4 +112,13 @@ def rule_all(level):
             'unicode': True
         })
 
+    # Rules for events ('pressed')
+    for command in data_level["event"]:
+        list_rules.append({
+            'regex': START_WORD + get_translated_keyword(command) + END_WORD,
+            'token': ["text", "event"],
+            'next': "start",
+            'unicode': True
+        })
+
     return {"start": list_rules}
