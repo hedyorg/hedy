@@ -502,10 +502,10 @@ adventures:
                     {print} 'भूरा भालू'
                     {print} 'भूरा भालू'
                     {print} 'आप क्या देखते हैं?'
-                    {for} जानवर {in} जानवर
-                        {print} 'मुझे एक 'जानवर' दिखाई दे रहा है जो मुझे देख रहा है'
-                        {print} जानवर
-                        {print} जानवर
+                    {for} प्राणी {in} जानवर
+                        {print} 'मुझे एक 'प्राणी' दिखाई दे रहा है जो मुझे देख रहा है'
+                        {print} प्राणी
+                        {print} प्राणी
                         {print} 'आप क्या देखते हैं?'
                     {print} 'मैं देख रहा हूं कि सभी जानवर मुझे देख रहे हैं!'
                     ```
@@ -1642,12 +1642,12 @@ adventures:
                     ```
                     price = 0
                     food = {ask} 'What would you like to order?'
-                    drinks = {ask} 'What would you like to drink?'
+                    drink = {ask} 'What would you like to drink?'
                     {if} food {is} 'hamburger'
                         price = price + 6.50
                     {if} food {is} 'pizza'
                         price = price + 5.75
-                    {if} drinks {is} 'water'
+                    {if} drink {is} 'water'
                         price = price + 1.20
                     {if} drink {is} 'soda'
                         price = price + 2.35
