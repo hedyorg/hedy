@@ -58,6 +58,6 @@ jobs:
         build-tools/github/validate --all
     - name: Run non-code related tests
       shell: pwsh
-      if: ${{steps.check_file_changed.outputs.docs_changed != 'True' && steps.check_file_changed.weblate_tests.run != 'True'}}
+      if: ${{steps.check_file_changed.outputs.docs_changed != 'True' && steps.weblate_tests.run != 'True'}}
       run: |
         build-tools/github/validate
