@@ -20,6 +20,7 @@ module.exports = defineConfig({
     stats_page: '/stats/class/', // You should concatenate this with the class id e.g. /stats/class/<class id>
     logs_page: '/logs/class/', // You should concatenate this with the class id e.g. /logs/class/<class id>
     register_student_page: '/signup?teacher=false',
-    register_teacher_page: '/signup?teacher=true'
+    register_teacher_page: '/signup?teacher=true',
+    profile_page: '/my-profile'
   }
 });
