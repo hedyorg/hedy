@@ -1541,7 +1541,7 @@ adventures:
                     Now that you know how to nest multiple statements, you can also do this with {pressed}!
                     By nesting a pressed in a {repeat} loop, you can repeatedly press buttons and make something happen.
                     Now we know you could do this before, but by using the indents you have much more overview!
-                    Try it counting to 5 for example!
+                    Try it counting to 5, for example!
                 example_code: |
                     ```
                     total = 1
@@ -1571,7 +1571,28 @@ adventures:
                             turn right
                     ```
                 start_code: "# place your code here"
-
+            11:
+                story_text: |
+                    Now that you have learned of the ```for ... in range ... to ...``` rule, you can use it for ```pressed```
+                    too! for example, try moving the turtle! The turtle grows everytime you press a linked button.
+                    This way the turtle can move further every step!
+                example_code: |
+                    ```
+                    left = -90
+                    right = 90
+                    around = 180
+                    for counter in range 1 to 15
+                        stepsize = counter * 5
+                        {if} w is {pressed}
+                            forward stepsize
+                        {if} s is {pressed}
+                            turn around
+                        {if} a is {pressed}
+                            turn left
+                        {if} d is {pressed}
+                            turn right
+                    ```
+                start_code: "# place your code here"
     rock:
         name: "Rock, paper, scissors"
         description: "Make your own rock, paper, scissors game"
