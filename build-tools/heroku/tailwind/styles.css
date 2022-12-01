@@ -536,3 +536,19 @@ input:checked ~ .toggle-path {
 .current {
   @apply text-white bg-blue-600 !important;
 }
+
+.animate-keys {
+  @apply absolute bottom-1 right-2;
+
+  /* Would be nice to animate this with Tailwind as well, but should be fine for now */
+  animation-name: animate-keys;
+  animation-duration: 1.5s;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-timing-function: ease-in-out;
+}
+
+/* We could also add this keyframe to tailwind.config.js, but as it is the only one: leave here for now */
+@keyframes animate-keys {
+  0%   {bottom:15px; font-size: 1em; opacity: 1}
+  100% {bottom:100%; font-size: 4em; opacity: 0}
+}

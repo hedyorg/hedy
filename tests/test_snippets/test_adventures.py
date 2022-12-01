@@ -47,10 +47,7 @@ def collect_snippets(path, filtered_language=None):
                                 code_snippet_counter += 1
                                 try:
                                     code = tag.contents[0].contents[0]
-                                    if hash(code) in unique_snippets_table:
-
-                                        continue
-                                    else:
+                                    if not hash(code) in unique_snippets_table:
                                         unique_snippets_table.add(hash(code))
                                 except BaseException:
                                     print("Code container is empty...")
@@ -67,10 +64,7 @@ def collect_snippets(path, filtered_language=None):
                             # code snippets inside start_code
                             try:
                                 start_code = level['start_code']
-                                if hash(start_code) in unique_snippets_table:
-
-                                    continue
-                                else:
+                                if not hash(start_code) in unique_snippets_table:
                                     unique_snippets_table.add(hash(start_code))
                                 Hedy_snippets.append(Snippet(f, level_number, 'start_code', start_code, adventure_name))
                             except KeyError:
@@ -88,9 +82,7 @@ def collect_snippets(path, filtered_language=None):
                                 try:
                                     code = tag.contents[0].contents[0]
                                     # test only unique snippets
-                                    if hash(code) in unique_snippets_table:
-                                        continue
-                                    else:
+                                    if not hash(code) in unique_snippets_table:
                                         unique_snippets_table.add(hash(code))
                                 except BaseException:
                                     print("Code container is empty...")
