@@ -8,7 +8,7 @@
     <!-- Row 1: editor, output pane -->
     <div class="flex flex-col order-1 relative" id="code_editor" style="min-height: 22rem;">
         <div id="fold_in_toggle_container" class="hidden lg:flex absolute z-10 top-16 ltr:-right-1 rtl:-left-1 cursor-pointer" onclick="hedyApp.hide_editor();">
-         <div class="bg-green-500 text-white py-3 rounded-lg text-sm">
+         <div id="text_field" class="bg-green-500 text-white py-3 rounded-lg text-sm">
              <span>←</span>
          </div>
         </div>
@@ -139,7 +139,7 @@
     <div class="order-2 lg:order-4" id="code_related_buttons">
       <div class="flex justify-between gap-2 items-start h-12 overflow-visible">
         <div id="runButtonContainer">
-          <button id="runit" class="green-btn" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {{_('already_program_running')|tojson}})'>{{_('run_code_button')}} </button>
+          <button id="runit" class="green-btn" onclick="hedyApp.runit({{ level }}, '{{ g.lang }}', '{{_('already_program_running')}}')">{{_('run_code_button')}} </button>
           <button id="stopit" class="red-btn" onclick="hedyApp.stopit()" style="display: none;">{{_('stop_code_button')}}</button>
         </div>
         <div id="saveFilesContainer">
@@ -198,7 +198,7 @@
               <button class="green-btn" onclick="hedyApp.prompt_unsaved (function () {window.location = '/adventure/{{ adventures[0].short_name}}/{{prev_level}}'})">{{_('regress_button')|replace("{level}", prev_level)}}</button>
             {% endif %}
             {% if next_level %}
-                <button class="green-btn ltr:ml-1 rtl:mr-1" onclick="hedyApp.prompt_unsaved (function () {window.location = '/adventure/{{ adventures[0].short_name}}/{{next_level}}'})">{{_('advance_button')|replace("{level}", next_level)}}</button>
+            <button class="green-btn ltr:ml-1 rtl:mr-1" onclick="hedyApp.prompt_unsaved (function () {window.location = '/adventure/{{ adventures[0].short_name}}/{{next_level}}'})">{{_('advance_button')|replace("{level}", next_level)}}</button>
             {% endif %}
           </div>
       {% endif %}
