@@ -331,8 +331,8 @@ adventures:
                 start_code: "{print} 'هنا قصتك سوف تبدأ!'"
                 story_text: "## قصة\nفي هذا المستوى تستطيع برمجة نهايات مختلفة، والتي ستجعل قصتك اكثر متعة\n\nفكر في نهايتين لقصتك، على سبيل المثال:\n\n- الأميرة تمشي عبر الغابة\n- واجهت وحشًا\n\n- نهاية سعيدة: تأخذ سيفها والوحش يهرب بسرعة.\n- نهاية سيئة : الوحش يأكل الأميرة.\n\nيمكنك أيضًا التأكد من إمكانية إدخال الاسم مرة أخرى. هذا يعمل تمامًا كما في المستويات السابقة. يمكنك دمج ذلك مع \"{if}\" ، وبعد ذلك تكون قد أنشأت بالفعل برنامجًا كاملاً!\n"
             4:
-                story_text: "## Story\nYou may have noticed that there is still a problem in the previous levels. Did you try to print a sentence that contained the word name?\nYou can solve that in this level. You must use quotation marks for everything that you are going to print.\n"
-                example_code: "```\nname {is} Hans\n{print} 'The name of the main character is' name\n{print} name 'is now going to walk in the woods'\n{print} name 'is a bit scared'\nanimals {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} 'He hears the sound of an' animals {at} {random}\n{print} name 'is afraid this is a haunted forest'\n```\n"
+                story_text: "## قصة\nربما لاحظت أنه لا زال هناك مشكلة في المستويات السابقة عند محاولة طباعة جملة تحتوي على كلمة -الاسم-؟ مثل: `{print}` الاسم هو الاسم.\nستتمكن من حل هذه المشكلة في هذا المستوى. يجب أن تضع علامات الاقتباس حول أي نص تريد طباعته.\n"
+                example_code: "```\nالاسم {is} حسن  \n{print} _اسم الشخصية الرئيسية في القصة هو_ الاسم\n{print} الاسم _ذاهبٌ الآن للسير في الغابة_\n{print} الاسم _خائفٌ قليلًا_\nالحيوانات {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} _لقد سمع صوت_ الحيوانات {at} {random}\n{print} الاسم _خائفٌ أن تكون هذه الغابة مسكونة_\n```\n"
                 start_code: "{print} 'Your story will be printed here!'"
             15:
                 example_code: "```\nkeys = 'lost'\n{print} 'You are standing in your garden and you have lost your keys.'\n{print} 'Where do you want to look for them?'\n{print} 'You can choose: tree, flowerbed, rock, postbox'\n{while} keys == 'lost'\n    location = {ask} 'Where do you want to look?'\n    {if} location == 'flowerbed'\n        {print} 'Here they are!'\n        keys = 'found'\n    {else}\n        {print} 'Nope they are not at the ' location\n{print} 'Now you can enter the house!'\n"
@@ -430,7 +430,7 @@ adventures:
                 example_code: "\n\n```\n{print} \"رسم الأشكال\"\nالزاوية هي ٩٠\n{turn} الزاوية\n{forward} ٢٥\n{turn} الزاوية\n{forward} ٢٥\n```\n"
                 start_code: "{print} \"رسم الأشكال\"\nالزاوية هي ٩٠\n{turn} الزاوية\n{forward} ٢٥"
                 example_code_2: "```\n{color} {white}\n{forward} -80\n{color} {green}\n{forward} 50\n{color} {yellow}\n{forward} 50\n{color} {red}\n{forward} 50\n```\n"
-                story_text_2: "## Colors\nYou can also change the color of the lines with the command `{color}`. Check out the example.\nYou can also use the command `{color} {white}` to make 'invisible' lines. You could use these white lines to move the turtle anywhere in the screen before you start drawing.\n"
+                story_text_2: "## الألوان\nيمكنك أيضًا تغيير لون الخطوط باستخدام الأمر `{color}`. انظر للمثال التوضيحي\nبالإضافة إلى ذلك، يمكنك استخدام الأمر `{color} {white}` لرسم خطوط غير مرئية، وبالتالي يمكنك تحريك السلحفاة لأي مكان تريده على الشاشة قبل البدء بالرسم.\n"
             7:
                 story_text: "## فلنرسم!\nفي هذا المستوى يمكننا تكرار سطر واحد من الكود باستخدام الأمر `{repeat}`.\n"
                 example_code: "\n\n```\n{print} \"رسم الأشكال\"\n{repeat} ٣ {times} {forward} ١٠\n```\n"
