@@ -737,7 +737,7 @@ class TestsLevel5(HedyTester):
         self.single_level_tester(
             code=code,
             exception=hedy.exceptions.UnquotedTextException,
-            extra_check_function=lambda c: c.exception.error_location[0] == 0
+            extra_check_function=lambda c: c.exception.error_location[0] == 1
         )
 
     def test_if_equality_print_backtick_text_gives_error(self):
@@ -749,16 +749,6 @@ class TestsLevel5(HedyTester):
             exception=hedy.exceptions.UnquotedTextException
         )
 
-    @parameterized.expand(HedyTester.quotes)
-    def test_meta_column_missing_quote(self, q):
-        code = textwrap.dedent(f"""\
-        name is ask 'what is your name?'
-        if name is Hedy print nice{q} else print {q}boo!{q}""")
-
-        line, column = self.codeToInvalidInfo(code)
-
-        self.assertEqual(2, line)
-        self.assertEqual(23, column)
 
     #
     # if pressed tests
