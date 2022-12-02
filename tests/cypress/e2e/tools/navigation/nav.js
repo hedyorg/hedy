@@ -45,6 +45,11 @@ export function goToHedyPage()
     return goToPage(Cypress.env('hedy_page'));
 }
 
+export function goToAdminUsersPage()
+{
+    return goToPage(Cypress.env('admin/users'));
+}
+
 // Must be logged in and able to edit an adventure
 export function goToEditAdventure()
 {
