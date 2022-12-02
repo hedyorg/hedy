@@ -399,7 +399,7 @@ adventures:
                 story_text: "## Sing a song!\nIn this level, you can program a song like OldMacDonald even more quickly. You can connect the right animal to the right sound by simply putting them in the same place in the list.\nThe Drunken Sailor is also quickly made in this level. You only need 8 lines for the entire song, check it out!\n\n## Old MacDonald\n```\nanimals = ['pig', 'dog', 'cow']\nsounds = ['oink', 'woof', 'moo']\n{for} i {in} {range} 1 {to} 3\n    animal = animals[i]\n    sound = sounds[i]\n    {print} 'Old McDonald had a farm'\n    {print} 'E I E I O!'\n    {print} 'and on that farm he had a ' animal\n    {print} 'E I E I O!'\n    {print} 'with a ' sound sound ' here'\n    {print} 'and a ' sound sound ' there'\n    {print} 'here a ' sound\n    {print} 'there a ' sound\n    {print} 'everywhere a ' sound sound\n```\n\n## Drunken Sailor\n```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines\n    {for} i {in} {range} 1 {to} 3\n        {print} line\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
                 start_code: '# place your code here'
                 example_code: "## Old MacDonald\n```\nanimals = ['pig', 'dog', 'cow']\nsounds = ['oink', 'woof', 'moo']\n{for} i {in} {range} 1 {to} 3\n    animal = animals[i]\n    sound = sounds[i]\n    {print} 'Old McDonald had a farm'\n    {print} 'E I E I O!'\n    {print} 'and on that farm he had a ' animal\n    {print} 'E I E I O!'\n    {print} 'with a ' sound sound ' here'\n    {print} 'and a ' sound sound ' there'\n    {print} 'here a ' sound\n    {print} 'there a ' sound\n    {print} 'everywhere a ' sound sound\n```\n\n## Drunken Sailor\n```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines\n    {for} i {in} {range} 1 {to} 3\n        {print} line\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
-        default_save_name: Song
+        default_save_name: أغنية
     turtle:
         name: الرسام
         description: اصنع الرسم الخاص بك
@@ -497,9 +497,9 @@ adventures:
                 story_text: "## حجر النرد\nتستطيع صنع حجر النرد الخاص بك في هذا المستوى باستخدام `{if}`.\nأكمل نموذج الكود بحيث يطبع \"تستطيع التوقف عن الالقاء\" بمجرد رمي رمز دودة الارض.\n\nولكن ربما تريد اعادة إنشاء حجر نرد من لعبة مختلفة تمامًا. هذا جيد أيضًا! ثم اكتب ردة فعلك الخاصة. مثال 'نعم' لرقم 6 و 'للاسف' لاي شيء {else}.\n"
                 example_code: "```\nالخيارات {is} 1, 2, 3, 4, 5, دودة الارض\nالرمية {is} _\n{print} 'لديك' _ 'تم القاءها'\n{if} _ {is} دودة ارض {print} 'تستطيع التوقف عن الرمي.' _ {print} 'عليك أن تسمعه مرة أخرى!'\n```\n"
             4:
-                story_text: "## Dice\nIn this level we can make sentences with the die value in the sentence, with quotes of course.\nThis time the sample code is not quite complete. Can you finish the code?\n"
-                example_code: "```\nchoices {is} 1, 2, 3, 4, 5, earthworm\n{print} _ you threw _\n{print} _ _ _ <- here you have to program the choice\n```\n"
-                start_code: "{print} 'What will the die indicate this time?'"
+                story_text: "## حجر النرد\nفي هذا المستوى يمكنك إنشاء جمل مفيدة باستخدام القيمة التي تظهر على حجر النرد، ولا تنسَ علامات الإقتباس.\nالمثال التوضيحي هذه المرة غير مكتمل كليًا، هل يمكنك إكماله؟\n"
+                example_code: "```\nالخيارات {is} ١، ٢، ٣، ٤، ٥، دودة الأرض\n{print} _ لقد رميت حجر النرد _\n{print} _ _ _ <- هنا يجب عليك كتابة الكود الخاص باختيار الرقم الذي سيظهر على حجر النرد\n```\n"
+                start_code: "{print} 'ما الرقم الذي سيظهر على حجر النرد هذه المرة؟'"
             3:
                 story_text: "## حجر النرد\nيمكننا الإختار من قائمة في هذا المستوى. ومع ذلك سيتولى الكومبيوتر الإختيار هذه المرة من بين أوجه حجر النرد.\nألقِ نظرة على الألعاب الموجودة في خزانتك في المنزل.\nهل يوجد ألعاب ذات نرد (خاص)؟ عندما تجد شيئاً مماثل يمكنك نسخه ايضاً في هذا الكود.\nعلى سبيل المثال، هناك لعبة تسمى نرد دودة الأرض تتكون من ٦ اوجه مرقمة من ١ إلى ٥ والأخيرة عليها دودة الأرض.\n\n![Die of earthworms with 1 to 5 and an earthworm on it](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)\n"
                 example_code: "```\nالخيارات هي ١، ٢، ٣، ٤، ٥، دودة الأرض\n{print} الخيارات {at} {random}\n```\n"
@@ -520,9 +520,9 @@ adventures:
                 start_code: "{print} 'اهلاً بك في لعبتك الإلكترونية حجر ورقة مقص!'"
                 story_text: "## حجر، ورقة، مقص\nفي هذا المستوى يمكننا تحديد من فاز.\nلذلك انت بحاجة استخدام الأمر `{if}` .\n\nلذلك تحتاج إلى حفظ اختيارك الجديد بالاسم الذي تختاره واختيار الكمبيوتر كاختيار الكمبيوتر.\nثم يمكنك استخدام \"{if}\" لمعرفة {if} انهم متطابقين او مختلفين.\nهل ستنهي الكود؟\n"
             4:
-                story_text: "## Rock, paper, scissors\nIn this level we can further program rock, paper, scissors. But {if} you want to add text, you have to use quotation marks here too.\nDo you complete the code by entering the correct commands or characters on the underscores?\n"
-                start_code: "{print} 'Welcome to your own rock scissors paper!'"
-                example_code: "```\nchoices {is} rock, paper, scissors\n{print} _ The computer chose: _ _ {at} _\n```\n"
+                story_text: "##حجر،ورقة،مقص\nفي هذا المستوى أيضًا يمكنك برمجة لعبة حجر،ورقة،مقص. لكن إذا أردت كتابة نص يجب عليك استخدام علامات الإقتباس.\nهل يمكنك إكمال الكود بوضع الأوامر أو علامات الترقيم المناسبة في الفراغات؟\n"
+                start_code: "{print} 'أهلا بك في لعبة حجر،ورقة،مقص الخاصة بك'"
+                example_code: "```\nالخيارات {is} حجر,ورقة,مقص\n{print} _ الحاسوب اختار: _ _ {at} _\n```\n"
             3:
                 start_code: '{print} مرحبًا في لعبة حجر ورقة مقص الخاصة بك!'
                 story_text: "## حجر، ورقة، مقص\n\nفي هذا المستوى يمكننا إستخدام القوائم و الإختار منها.\nفي البداية اصنع قائمة بإستخدام `{is}`. بعد ذلك يمكنك ترك الكومبيوتر يختار شيئًا من هذه القائمة بإستخدام `{at} {random}`.\nعلى سبيل المثال، ستترك الكومبيوتر يختار من بين حجر، ورقة، أو مقص.\n"

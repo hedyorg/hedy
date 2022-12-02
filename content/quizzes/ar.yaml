@@ -612,34 +612,34 @@ levels:
         10:
             question_text: "ماذا يجب أن يوضع مكان _؟_؟"
             code: |-
-                walkers {is} dad, mom, Sam, Petra
-                walked_yesterday {is} {ask} Who walked the dogs yesterday?
-                {print} walked_yesterday shouldn't have to walk the dogs again today
-                _?_
-                {print} walkers {at} {random} , it's your turn to walk the dogs!
+                مسؤول_التمشية {is} أبي، أمي، سام، بيترا
+                مشي_أمس {is} {ask} من أخذ الكلب للتمشية أمس؟
+                {print} مشي_أمس لا يجب عليه تمشية الكلب اليوم
+                _؟_
+                {print} مسؤول_التمشية {at} {random}، دورك لتأخذ الكلب للتمشية!
             mp_choice_options:
             -   option: |
                     ```
-                    {remove} walked_yesterday {from} walkers
+                    {remove} مشي_أمس {from} مسؤول_التمشية
                     ```
-                feedback: "Super!"
+                feedback: "رائع!"
             -   option: |
                     ```
-                    {remove} walked yesterday {to} walkers
+                    {remove} مشي_أمس {to} مسؤول_التمشية
                     ```
-                feedback: "`{remove} {from}` or `{add} {to}`, not `{remove} {to}`"
+                feedback: "`{remove} {from}` أو `{add} {to}`،و ليس `{remove} {to}`"
             -   option: |
                     ```
-                    {remove} walkers {from} yesterday
+                    {remove} مسؤول_التمشية {from} أمس
                     ```
-                feedback: "yesterday is not a variable"
+                feedback: "أمس ليست أسم المتغيير"
             -   option: |
                     ```
-                    {add} walked_yesterday {to} walkers
+                    {add} مشي_أمس {to} مسؤول_التمشية
                     ```
-                feedback: "This increased the change that the person who walked yesterday now has to do it again. That's mean."
+                feedback: "معنى تلك الإضافة أن الذي قام بتمشية الكلب أمس عليه أن يفعل ذلك مرة أخرى اليوم، هذا معناه."
             correct_answer: "A"
-            hint: "The person who walked the dog yesterday should be removed from the list."
+            hint: "الشخص الذي قام بتمشية الكلب أمس يجب حذف اسمه من القائمة."
             question_score: '10'
 
     4:
