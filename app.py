@@ -961,7 +961,8 @@ def index(level, program_id):
             # A bit out-of-scope, but we want to enable the next level button directly after finishing the quiz
             # Todo: How can we fix this without a re-load?
             quiz_stats = DATABASE.get_quiz_stats([current_user()['username']])
-            if level > 1:
+            # Only check the quiz threshold if there is a quiz to obtain a score on the previous level
+            if level > 1 and QUIZZES[g.lang].get_quiz_data_for_level(level-1):
                 scores = [x.get('scores', []) for x in quiz_stats if x.get('level') == level - 1]
                 scores = [score for week_scores in scores for score in week_scores]
                 max_score = 0 if len(scores) < 1 else max(scores)
@@ -970,7 +971,8 @@ def index(level, program_id):
                         error=403, ui_message=gettext('quiz_threshold_not_reached'))
 
             # We also have to check if the next level should be removed from the available_levels
-            if level < hedy.HEDY_MAX_LEVEL:
+            # Only check the quiz threshold if there is a quiz to obtain a score on the current level
+            if level < hedy.HEDY_MAX_LEVEL and QUIZZES[g.lang].get_quiz_data_for_level(level):
                 scores = [x.get('scores', []) for x in quiz_stats if x.get('level') == level]
                 scores = [score for week_scores in scores for score in week_scores]
                 max_score = 0 if len(scores) < 1 else max(scores)
