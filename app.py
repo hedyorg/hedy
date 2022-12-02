@@ -1430,9 +1430,7 @@ def explore():
                 from_lang="en",
                 to_lang=g.keyword_lang,
                 level=int(
-                    program.get(
-                        'level',
-                        1)))
+                    program.get('level', 1)))
 
         filtered_programs.append({
             'username': program['username'],
