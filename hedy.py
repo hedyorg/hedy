@@ -1132,7 +1132,8 @@ class IsValid(Filter):
         return False, InvalidInfo(" ", line=args[0][2].line, column=args[0][2].column), meta
 
     def error_print_nq(self, meta, args):
-        text = args[0][1]
+        words = [x[1] for x in args] #second half of the list is the word
+        text = ' '.join(words)
         return False, InvalidInfo("print without quotes", arguments=[
                                   text], line=meta.line, column=meta.column), meta
 
