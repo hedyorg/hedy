@@ -4,12 +4,12 @@
         <li class="ltr:mr-2 rtl:ml-2"><a href="/" class="inline-block w-10 lg:w-12"><img src="{{static('/images/Hedy-logo-96x96.png')}}" height="48px" width="48px" alt="{{_('hedy_logo_alt')}}"></a></li>
         <li class="hidden lg:flex menubar-item{% if current_page == 'start' %} active{% endif %}"><a class="menubar-text" href="/">{{_('nav_start')}}</a>
         </li>
-        <li class="menubar-item{% if current_page == 'hedy' %} active{% endif %}"><a class="menubar-text" href="/hedy">{{_('nav_hedy')}}</a></li>
+        <li class="menubar-item{% if current_page == 'hedy' %} active{% endif %}"><a class="menubar-text" id="hedybutton" href="/hedy">{{_('nav_hedy')}}</a></li>
         {% if is_admin %}
             <li class="menubar-item{% if current_page == 'admin' %} active{% endif %}"><a class="menubar-text" href="/admin">Admin</a></li>
         {% endif %}
-        <li class="menubar-item{% if current_page == 'explore' %} active{% endif %}"><a class="menubar-text" href="/explore">{{_('nav_explore')}}</a></li>
-        <li class="menubar-item{% if current_page == 'learn-more' %} active{% endif %}"><a class="menubar-text" href="/learn-more">{{_('nav_learn_more')}}</a></li>
+        <li class="menubar-item{% if current_page == 'explore' %} active{% endif %}"><a class="menubar-text" id="explorebutton" href="/explore">{{_('nav_explore')}}</a></li>
+        <li class="menubar-item{% if current_page == 'learn-more' %} active{% endif %}"><a class="menubar-text" id="learnmorebutton" href="/learn-more">{{_('nav_learn_more')}}</a></li>
     {% if username %}
         <li class="menubar-item ltr:ml-auto rtl:mr-auto{% if current_page == 'programs' %} active{% endif %}">
             <a class="menubar-text gap-2" href="/programs">

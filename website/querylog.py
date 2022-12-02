@@ -1,16 +1,19 @@
-import time
-import functools
-import threading
-import os
 import datetime
+import functools
+import os
+import threading
+import time
+
 from . import log_queue
-IS_WINDOWS = os.name == 'nt'
+
+IS_WINDOWS = os.name == "nt"
 if not IS_WINDOWS:
     import resource
 
 
 class LogRecord:
     """A log record."""
+
     def __init__(self, **kwargs):
         self.start_time = time.time()
 
@@ -19,13 +22,9 @@ class LogRecord:
         self.attributes = kwargs
         self.running_timers = set([])
         loadavg = os.getloadavg()[0] if not IS_WINDOWS else None
-        self.set(
-            start_time=dtfmt(self.start_time),
-            pid=os.getpid(),
-            loadavg=loadavg,
-            fault=0)
+        self.set(start_time=dtfmt(self.start_time), pid=os.getpid(), loadavg=loadavg, fault=0)
 
-        dyno = os.getenv('DYNO')
+        dyno = os.getenv("DYNO")
         if dyno:
             self.set(dyno=dyno)
 
@@ -49,7 +48,8 @@ class LogRecord:
             sys_ms=sys_ms,
             max_rss=max_rss,
             inc_max_rss=inc_max_rss,
-            duration_ms=ms_from_fsec(end_time - self.start_time))
+            duration_ms=ms_from_fsec(end_time - self.start_time),
+        )
 
         # There should be 0, but who knows
         self._terminate_running_timers()
@@ -74,8 +74,8 @@ class LogRecord:
             self.attributes[name] = amount
 
     def inc_timer(self, name, time_ms):
-        self.inc(name + '_ms', time_ms)
-        self.inc(name + '_cnt')
+        self.inc(name + "_ms", time_ms)
+        self.inc(name + "_cnt")
 
     def record_exception(self, exc):
         self.set(fault=1, error_message=str(exc))
@@ -108,14 +108,30 @@ class NullRecord(LogRecord):
 
     Will be returned if we don't have a default record.
     """
-    def __init__(self, **kwargs): pass
-    def finish(self): pass
-    def set(self, **kwargs): pass
-    def _remember_timer(self, _): pass
-    def _forget_timer(self, _): pass
-    def _terminate_running_timers(self): pass
-    def inc_timer(self, _, _2): pass
-    def inc(self, name, amount=1): pass
+
+    def __init__(self, **kwargs):
+        pass
+
+    def finish(self):
+        pass
+
+    def set(self, **kwargs):
+        pass
+
+    def _remember_timer(self, _):
+        pass
+
+    def _forget_timer(self, _):
+        pass
+
+    def _terminate_running_timers(self):
+        pass
+
+    def inc_timer(self, _, _2):
+        pass
+
+    def inc(self, name, amount=1):
+        pass
 
     def record_exception(self, exc):
         self.set(fault=1, error_message=str(exc))
@@ -134,7 +150,7 @@ def finish_global_log_record(exc=None):
     """Finish the global log record."""
 
     # When developing, this can sometimes get called before 'current_log_record' has been set.
-    if hasattr(THREAD_LOCAL, 'current_log_record'):
+    if hasattr(THREAD_LOCAL, "current_log_record"):
         record = THREAD_LOCAL.current_log_record
         if exc:
             record.record_exception(exc)
@@ -144,7 +160,7 @@ def finish_global_log_record(exc=None):
 
 def log_value(**kwargs):
     """Log values into the currently globally active Log Record."""
-    if hasattr(THREAD_LOCAL, 'current_log_record'):
+    if hasattr(THREAD_LOCAL, "current_log_record"):
         # For some malformed URLs, the records are not initialized,
         # so we check whether there's a current_log_record
         THREAD_LOCAL.current_log_record.set(**kwargs)
@@ -162,6 +178,7 @@ def log_counter(name, count=1):
 
 def timed(fn):
     """Function decorator to make the given function timed into the currently active log record."""
+
     @functools.wraps(fn)
     def wrapped(*args, **kwargs):
         with log_time(fn.__name__):
@@ -175,12 +192,15 @@ def timed_as(name):
 
     Use a different name from the actual function name.
     """
+
     def decoractor(fn):
         @functools.wraps(fn)
         def wrapped(*args, **kwargs):
             with log_time(name):
                 return fn(*args, **kwargs)
+
         return wrapped
+
     return decoractor
 
 
@@ -193,11 +213,12 @@ def emergency_shutdown():
 
 def dtfmt(timestamp):
     dt = datetime.datetime.utcfromtimestamp(timestamp)
-    return dt.isoformat() + 'Z'
+    return dt.isoformat() + "Z"
 
 
 class LogTimer:
     """A quick and dirty timer."""
+
     def __init__(self, record, name):
         self.record = record
         self.name = name
@@ -224,5 +245,5 @@ def ms_from_fsec(x):
     return int(x * 1000)
 
 
-LOG_QUEUE = log_queue.LogQueue('querylog', batch_window_s=300)
+LOG_QUEUE = log_queue.LogQueue("querylog", batch_window_s=300)
 LOG_QUEUE.try_load_emergency_saves()

@@ -1,8 +1,9 @@
-from tests.Highlighter import HighlightTester
 from parameterized import parameterized
 
-class HighlighterTestAffectation(HighlightTester):
+from tests.Highlighter import HighlightTester
 
+
+class HighlighterTestAffectation(HighlightTester):
 
     @parameterized.expand([
         ("level2"),
@@ -14,7 +15,6 @@ class HighlighterTestAffectation(HighlightTester):
             "sword is lost",
             "TTTTT KK TTTT",
             level=level, lang="en")
-
 
     @parameterized.expand([
         ("level5"),
@@ -37,7 +37,6 @@ class HighlighterTestAffectation(HighlightTester):
             "TTTTT KK SSSSSS",
             level=level, lang="en")
 
-
     @parameterized.expand([
         ("level4"),
     ])
@@ -46,9 +45,6 @@ class HighlighterTestAffectation(HighlightTester):
             "sword is 'lost'",
             "TTTTT KK TTTTTT",
             level=level, lang="en")
-
-
-
 
     @parameterized.expand([
         ("level6"),
@@ -69,8 +65,3 @@ class HighlighterTestAffectation(HighlightTester):
             "sword = 'lost'",
             "TTTTT K SSSSSS",
             level=level, lang="en")
-
-
-
-
-

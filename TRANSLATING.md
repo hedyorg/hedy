@@ -26,7 +26,7 @@ Click on "Languages" in the menu on top to get to this screen:
 
 ![](image/TRANSLATING/1652368938016.png)
 
-Here you can see the progress of languages, calculated over all components. There are a few reasons why a translation is not complete. First of course, because texts are not yet translated. But on this screen you can see more reasons. Often, the 100% is nog reached because of checks that failed. This tool checks many things, like "are question marks copied to the translation". The checks make translations better. You as a translator can dismiss any of these checks per text if you're sure it does not apply.
+Here you can see the progress of languages, calculated over all components. There are a few reasons why a translation is not complete. First of course, because texts are not yet translated. But on this screen you can see more reasons. Often, the 100% is not reached because of checks that failed. This tool checks many things, like "are question marks copied to the translation". The checks make translations better. You as a translator can dismiss any of these checks per text if you're sure it does not apply.
 
 Now click on Dutch to reach the following screen:
 
@@ -42,7 +42,7 @@ Click on Adventures to reach this screen:
 
 Now you see an overview of this component. Little too much information maybe. Don't worry, just start with "Strings marked for edit". These are strings that have the English text in place of the translation or have been translated, but the source has changed. All texts start with the English source text, this way every text that has not been translated yet, is at least visible in English on the website.
 
-If you're a little more expericend, you might want to try some of the texts that have specific checks failing.
+If you're a little more experienced, you might want to try some of the texts that have specific checks failing.
 At the right, you can choose between Translate or Zen.
 
 If you choose for Translate for the Failing checks: Placeholders, you might see something like this:
@@ -53,32 +53,9 @@ Again, maybe a little too much information, but a lot is very helpful. Browse a 
 
 ![](image/TRANSLATING/1652370483598.png)
 
-You see more strings on the same page for faster translation, but less helpfull info per translation.
+You see more strings on the same page for faster translation, but less helpful info per translation.
 
-One important thing to notice is the **grayed pieces of text**. This is computer code and should not be translated! There are two versions: keywords between {}, this is in real code that we need to be able to run. Translating these wil make our software fail. The other version is also between {}, but with extra `` around them. This is to highlight this code within text. It wil not make our software fail, but will make the program harder to use. So both of these should be handled with care.
-
-
+One important thing to notice is the **grayed pieces of text**. This is computer code and should not be translated! There are two versions: keywords between {}, this is in real code that we need to be able to run. Translating these will make our software fail. The other version is also between {}, but with extra `` around them. This is to highlight this code within text. It wil not make our software fail, but will make the program harder to use. So both of these should be handled with care.
 
 If you run into any problems, let us know, so we can address them here for future translators. You can reach us at [hello@hedy.org](mailto:hello@hedy.org), or you can join our [Discord #translators channel](https://discord.gg/N7XXDtcNRY)
 
-Fixing Weblate issues
-================
-
-Sometimes Weblate gets in a conflict state because of changes in our repo as well as in their. This is how to fix that on the command line:
-
-
-1. Gather all commits from weblate by adding an extra remote to your local git repository like this:
-
-`git remote add weblate https://hosted.weblate.org/git/hedy/adventures/`
-
-This enables us to contact the weblate repo.
-
-2. Use `git fetch weblate` to get all commits that exist in Weblate.
-
-3. Switch to a fresh branch with `git checkout -b weblatefixes` <- this name is an example, you may write your own more specific one
-
-4. With `git merge weblate/main` the Weblate commits are merged into our current branch. This can lead to merge conflicts (it will, cause why otherwise would you be going to all this trouble) that you will have to manually fix in your editor.
-
-5. Push the branch `weblatefixes` (or your own name) and make a PR. 
-
-6. Mention me ([@Felienne](https://github.com/Felienne)) on GitHub or Discord. I am the only one that can merge them correctly (they require a merge commit, not a squash merge!) so ping me to accept the PR.

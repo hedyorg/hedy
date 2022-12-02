@@ -218,7 +218,7 @@ adventures:
             9:
                 start_code: '# skriv koden din her'
                 story_text: "## Stein, saks, papir\nPå dette nivået kan du programmere hele stein, saks, papir ved å plassere `{if}`-kommandoer inni `{if}`-kommandoer. Kan du fullføre koden?\n"
-                example_code: "```\nvalgene {is} stein, saks, papir\nditt_valg {is} {ask} 'Hva velger du?'\n{print} 'Du valgte ' your_choice\ndatamaskinens_valg {is} valgene {at} {random}\n{print} 'Datamaskinen valgte ' datamaskinens_valg\n{if} datamaskinens_valg {is} ditt_valg\n    {print} 'Uavgjort'\n{if} datamaskinens_valg {is} stein\n    {if} ditt_valg {is} papir\n        {print} 'Du vant!'\n    {if} ditt_valg {is} saks\n        {print} 'Du tapte!'\n```\n"
+                example_code: "```\nvalgene {is} stein, saks, papir\nditt_valg {is} {ask} 'Hva velger du?'\n{print} 'Du valgte ' ditt_valg\ndatamaskinens_valg {is} valgene {at} {random}\n{print} 'Datamaskinen valgte ' datamaskinens_valg\n{if} datamaskinens_valg {is} ditt_valg\n    {print} 'Uavgjort'\n{if} datamaskinens_valg {is} stein\n    {if} ditt_valg {is} papir\n        {print} 'Du vant!'\n    {if} ditt_valg {is} saks\n        {print} 'Du tapte!'\n```\n"
             1:
                 story_text: "## Stein, saks, papir\nPå nivå 1 kan du starte med spillet stein, saks, papir.\n\nMed `{ask}` kan du ta et valg og med `{echo}` kan du gjenta det valget.\n"
                 example_code: "\n```\n{print} hva velger du?\n{ask} velg mellom stein, saks, papir\n{echo} du valgte:\n```\nIstedenfor å bruke ord så kan du selvfølgelig bruke emoji: ✊✋✌\n"
@@ -249,7 +249,7 @@ adventures:
                 start_code: '# skriv koden din her'
             15:
                 story_text: "## Stein, saks, papir\nSpill til du klarer å slå datamaskinen! Men først, fullfør eksempelkoden...\n"
-                example_code: "```\nvunnet = 'nei'\nvalgene = 'stein', 'saks', 'papir'\n{while} vunnet == 'nei'\n    ditt_valg = {ask} 'Hva velger du?'\n    datamaskinens_valg = options {at} {random}\n    {print} 'du valgte ' ditt_valg\n    {print} 'datamaskinen valgte ' datamaskinens_valg\n    {if} datamaskinens_valg == ditt_valg\n        {print} 'Uavgjort!'\n    {if} datamaskinens_valg == 'stein' {and} ditt_valg == 'saks'\n        {print} 'Du tapte!'\n    {if} datamaskinens_valg == 'stein {and} ditt_valg == 'papir'\n        {print} 'Du vant!'\n        vunnet = 'yes'\n```\n"
+                example_code: "```\nvunnet = 'nei'\nvalgene = 'stein', 'saks', 'papir'\n{while} vunnet == 'nei'\n    ditt_valg = {ask} 'Hva velger du?'\n    datamaskinens_valg = valgene {at} {random}\n    {print} 'du valgte ' ditt_valg\n    {print} 'datamaskinen valgte ' datamaskinens_valg\n    {if} datamaskinens_valg == ditt_valg\n        {print} 'Uavgjort!'\n    {if} datamaskinens_valg == 'stein' {and} ditt_valg == 'saks'\n        {print} 'Du tapte!'\n    {if} datamaskinens_valg == 'stein' {and} ditt_valg == 'papir'\n        {print} 'Du vant!'\n        vunnet = 'yes'\n```\n"
                 start_code: '# skriv koden din her'
             13:
                 story_text: "## Stein, saks, papir\nMed `{and}`-kommandoen kan du korte ned stein, saks, papir-koden din! Sjekk ut eksempelkoden under og prøv å fullføre den.\n"
@@ -310,7 +310,7 @@ adventures:
                 start_code: '# skriv koden din her'
             12:
                 story_text: "## Restaurant\nFra dette nivået av kan du bruke desimaltall for å gjøre menyen mer realistisk.\n"
-                example_code: "```\npris = 0\nønsket_mat = {ask} 'What would you like to order?'\nønsket_drikke = {ask} 'What would you like to drink?'\n{if} ønsket_mat {is} 'hamburger'\n    pris = pris + 60.50\n{if} food {is} 'pizza'\n    pris = pris + 50.75\n{if} ønsket_drikke {is} 'vann'\n    pris = pris + 10.50\n{if} ønsket_drikke {is} 'brus'\n    pris = pris + 20.35\n{print} 'Det blir ' pris ' kroner, takk!'\n```\n"
+                example_code: "```\npris = 0\nønsket_mat = {ask} 'What would you like to order?'\nønsket_drikke = {ask} 'What would you like to drink?'\n{if} ønsket_mat {is} 'hamburger'\n    pris = pris + 60.50\n{if} ønsket_mat {is} 'pizza'\n    pris = pris + 50.75\n{if} ønsket_drikke {is} 'vann'\n    pris = pris + 10.50\n{if} ønsket_drikke {is} 'brus'\n    pris = pris + 20.35\n{print} 'Det blir ' pris ' kroner, takk!'\n```\n"
                 start_code: '# skriv koden din her'
             11:
                 story_text: "## Restaurant\nVi kan bruke `{for} i {in} {range} 1 {to} 5`til å skrive ut ordrene fra flere kunder på en ordnet måte.\n"
@@ -541,7 +541,7 @@ adventures:
         levels:
             10:
                 story_text: "## Oppvasken\nPå dette nivået kan du lage en enda bedre oppvaskeplan.\n"
-                example_code: "```\ndager = Mandag, Tirsdag, Onsdag, Torsdag, Fredag, Lørdag, Søndag\nnavn = mamma, pappa, Emma, Sofie\n{for} day {in} days\n    {print} navn {at} {random} ' tar oppvasken på ' day\n```\n"
+                example_code: "```\ndager = Mandag, Tirsdag, Onsdag, Torsdag, Fredag, Lørdag, Søndag\nnavn = mamma, pappa, Emma, Sofie\n{for} day {in} dager\n    {print} navn {at} {random} ' tar oppvasken på ' day\n```\n"
                 start_code: '# skriv koden din her'
             7:
                 story_text: "## Oppvasken\nMed `{repeat}` kan du repetere deler av kode. Du kan bruke dette til å beregne hvem som skal ta oppvasken for hele uken.\n"
@@ -549,7 +549,7 @@ adventures:
                 start_code: "{print} 'Hvem tar oppvasken?'"
             6:
                 story_text: "## Oppvasken\nHvor ofte må hver ta oppvasken? Er det rettferdig? Du kan telle det på dette nivået.\n"
-                example_code: "```\nfamilie = mamma, pappa, Emma, Sofie\nemma_vasker = 0\noppvasker = familie {at} {random}\n{print} 'Den som tar oppvasken er ' dishwasher\n{if} oppvasker {is} Emma emma_vasker = emma_vasker + 1\n{print} 'Emma tar oppvasken ' emma_washes ' ganger denne uken'\n```\n\nDu kan nå kopiere linjene 3 til 5 et par ganger (f.eks. 7 ganger for en hel uke) for å regne ut for hele uken.\nLager du koden for hele uken?\n"
+                example_code: "```\nfamilie = mamma, pappa, Emma, Sofie\nemma_vasker = 0\noppvasker = familie {at} {random}\n{print} 'Den som tar oppvasken er ' oppvasker\n{if} oppvasker {is} Emma emma_vasker = emma_vasker + 1\n{print} 'Emma tar oppvasken ' emma_vasker ' ganger denne uken'\n```\n\nDu kan nå kopiere linjene 3 til 5 et par ganger (f.eks. 7 ganger for en hel uke) for å regne ut for hele uken.\nLager du koden for hele uken?\n"
                 story_text_2: "## Gjør det rettferdig\nOm du er ekstremt uheldig så kan det forrige programmet velge deg til å gjøre oppvasken hele uken! Det er ikke rettferdig!\nFor å lage et mer rettferdig system så kan du bruke `{remove}`-kommandoen for å fjerne en gitt person fra listen. På denne måten trenger du ikke å ta oppvasken igjen før alle har tatt sin tur.\n\nMandag og tirsdag er klar for deg! Kan du legge til resten av uken?\nOg.. kan du komme på en løsning dersom listen er tom?\n"
                 example_code_2: "```\nfamilie = mamma, pappa, Emma, Sofie\noppvasker = familie {at} {random}\n{print} 'Mandag blir oppvasken tatt av: ' dishwasher\n{remove} oppvasker {from} familie\noppvasker = people {at} {random}\n{print} 'Tirsdag blir oppvasken tatt av: ' dishwasher\n{remove} oppvasker {from} familie\noppvasker = familie {at} {random}\n```\n"
                 start_code: "{print} 'Hvem tar oppvasken?'"

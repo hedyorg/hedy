@@ -1,8 +1,9 @@
-from tests.Highlighter import HighlightTester
 from parameterized import parameterized
 
-class HighlighterTestRepeat(HighlightTester):
+from tests.Highlighter import HighlightTester
 
+
+class HighlighterTestRepeat(HighlightTester):
 
     @parameterized.expand([
         ("level7"),
@@ -41,8 +42,6 @@ class HighlighterTestRepeat(HighlightTester):
             "repeat 3 times question is ask 'What do you want to know?'",
             'KKKKKK N KKKKK TTTTTTTT KK KKK SSSSSSSSSSSSSSSSSSSSSSSSSSS',
             level=lang, lang="en")
-
-
 
     @parameterized.expand([
         ("level7"),

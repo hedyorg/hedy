@@ -1,8 +1,10 @@
-import hedy
-from tests.Tester import HedyTester
-from parameterized import parameterized
-import hedy_translation
 import textwrap
+
+from parameterized import parameterized
+
+import hedy
+import hedy_translation
+from tests.Tester import HedyTester
 
 # tests should be ordered as follows:
 # * Translation from English to Dutch
@@ -46,9 +48,9 @@ class TestsTranslationLevel6(HedyTester):
         result = hedy_translation.translate_keywords(code, from_lang="nl", to_lang="en", level=self.level)
         expected = "angle = 360 / angles"
         self.assertEqual(expected, result)
-    
+
     def test_translate_back_is(self):
-        code ="breuk is 13 / 4"
+        code = "breuk is 13 / 4"
 
         result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
         result = hedy_translation.translate_keywords(result, from_lang="nl", to_lang="en", level=self.level)
@@ -80,7 +82,7 @@ class TestsTranslationLevel6(HedyTester):
         expected = "nombre is ask '¿Cual es tu nombre?'"
 
         self.assertEqual(expected, result)
-    
+
     def test_assign_list_is_spanish_english(self):
         code = "lenguajes es Hedy, Python, C"
 
@@ -117,7 +119,8 @@ class TestsTranslationLevel6(HedyTester):
             extra_check_function=self.exception_command(is_)
         )
 
-    @parameterized.expand([('en', '+'), ('es', '+'), ('en', '-'), ('es', '-'), ('en', '*'), ('es', '*'), ('en', '/'), ('es', '/')])
+    @parameterized.expand([('en', '+'), ('es', '+'), ('en', '-'), ('es', '-'),
+                          ('en', '*'), ('es', '*'), ('en', '/'), ('es', '/')])
     def test_expression_type_error_uses_arith_operator(self, lang, operator):
         code = textwrap.dedent(f"""\
             a is test
