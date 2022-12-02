@@ -1512,6 +1512,25 @@ adventures:
                     ```
 
                 start_code: "# place your code here"
+            6:
+                story_text: |
+                    Did you know you can also make a calculator using ```pressed```?
+                    Give the calculator two numbers and press the m key to multiply.
+                    Now you don't have to bring your own!
+                    Try other keys and see what happens! Do you get a different result?
+                example_code: |
+                    ```
+                    first = {ask} 'what is your first number?'
+                    second = {ask} 'what is your second number?'
+                    print 'press a to add, s to substract, d to divide, m to multiply'
+                    if a is {pressed} result = first + second
+                    if s is {pressed} result = first - second
+                    if d is {pressed} result = first / second
+                    if m is {pressed} result = first * second
+                    print 'The answer is ' result
+                    ```
+                start_code: "# place your code here"
+
             7:
                 story_text: |
                     You might have tried it in level 5 and 6, pressing the key linked to ```pressed``` multiple
