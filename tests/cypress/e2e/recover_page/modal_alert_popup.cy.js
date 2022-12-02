@@ -12,7 +12,9 @@ describe('Modal alert popup test', () => {
     // Tests visibility of error modal alert text/ recover non existing account
     cy.get('#username')
       .type('anonexistingaccount123@#$%^!')
-    cy.get('button[class*="green-btn mt-2"]')
+    cy.get('#send_recovery_button')
+       .should('be.visible')
+       .should('not.be.disabled')
        .click()
     cy.get('#modal_alert_text')
       .should('be.visible')

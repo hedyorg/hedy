@@ -79,17 +79,6 @@ body[dir='rtl'] #editor .ace_scroller {
     width: 32px !important;
 }
 
-body[dir='ltr'] .ace_line {
-    direction: ltr !important;
-    unicode-bidi: bidi-override !important;
-}
-
-/* https://stackoverflow.com/questions/53278788/dynamically-change-the-text-direction-in-ace-editor */
-body[dir='rtl'] .ace_line {
-    direction: rtl !important;
-    unicode-bidi: bidi-override !important;
-}
-
 body[dir='ltr'] #editor .ace_gutter-layer > * {
     margin-left: 2px;
     margin-right: 0px;

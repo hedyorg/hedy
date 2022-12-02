@@ -109,11 +109,11 @@
                     <ul class="signup-input" style="margin-top: -0.3em">
                         <div class="flex flex-row gap-2">
                             <li class="flex flex-row items-center mr-5">
-                                <input type="radio" name="prog_experience" value="yes" onclick="$('#languages').show()" class="ltr:mr-2 rtl:ml-2">
+                                <input type="radio" name="prog_experience" value="yes" onclick="$('#languages').show()" class="ltr:mr-2 rtl: ml-2" id="prog_experience_yes">
                                 <label for="prog_experience"> {{_('yes')}}</label>
                             </li>
                             <li class="flex flex-row items-center">
-                                <input type="radio" name="prog_experience" value="no" onclick="$('#languages').hide()" class="ltr:mr-2 rtl:ml-2">
+                                <input type="radio" name="prog_experience" value="no" onclick="$('#languages').hide()" class="ltr:mr-2 rtl:ml-2" id="prog_experience_no">
                                 <label for="prog_experience"> {{_('no')}}</label>
                             </li>
                         </div>
@@ -137,7 +137,7 @@
                         </li>
                         <li class="flex">
                             <div class="flex flex-row items-center gap-2">
-                                <input type="checkbox" name="experience_languages" value="python">
+                                <input type="checkbox" name="experience_languages" value="python" id="experience_language_python">
                                 <label>Python</label>
                             </div>
                         </li>
@@ -173,7 +173,7 @@
 
                 </div>
                 <div class="flex">
-                    <button type="submit" class="green-btn mx-auto">{{_('create_account')}}</button>
+                    <button type="submit" class="green-btn mx-auto" id="submit_button">{{_('create_account')}}</button>
                 </div>
             </form>
         </div>

@@ -2470,12 +2470,15 @@ def preprocess_blocks(code, level, lang):
     processed_code = []
     lines = code.split("\n")
     current_number_of_indents = 0
-    previous_number_of_indents = 0
-    indent_size = 4  # set at 4 for now
-    indent_size_adapted = False
+    previous_number_of_indents = 0 
+    indent_size = 4 # set at 4 for now
+    indent_size_adapted = False #FH We can remove this now since we changed in indenter a bit in Nov 2022
     line_number = 0
     next_line_needs_indentation = False
     for line in lines:
+        if ' _ ' in line or line == '_':
+            raise hedy.exceptions.CodePlaceholdersPresentException
+
         leading_spaces = find_indent_length(line)
 
         # ignore whitespace-only lines
@@ -2581,7 +2584,7 @@ def preprocess_ifs(code):
 
 
 def contains_blanks(code):
-    return (" _ " in code) or (" _\n" in code)
+    return (" _ " in code) or (" _" in code) or ("_ " in code) or (" _\n" in code)
 
 
 def check_program_size_is_valid(input_string):

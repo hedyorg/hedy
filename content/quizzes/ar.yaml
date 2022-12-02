@@ -195,451 +195,451 @@ levels:
             question_score: '10'
     2:
         1:
-            question_text: "Which statement is true?"
+            question_text: "اختر الجملة الصحيحة"
             mp_choice_options:
-            -   option: "In level 2 the `{print}` command doesn't exist anymore"
-                feedback: "`{print}` still works"
-            -   option: "In level 2 the `{ask}` command doesn't exist anymore"
-                feedback: "`{ask}` still works!"
-            -   option: "In level 2 the `{echo}` command doesn't exist anymore"
+            -   option: "يمكنك استخدام الأمر `{print}` لإنشاء سؤال"
+                feedback: "هذا عمل الأمر `{ask}`"
+            -   option: "يمكنك استخدام الأمر `{ask}` لإعادة ترديد إجابتك"
+                feedback: "هذا ليس صحيحًا"
+            -   option: "باستخدام الأمر `{print}` يمكنك جعل النص يظهر على الشاشة"
                 feedback: "جيد"
-            -   option: "In level 2 all the level 1 commands still work"
-                feedback: "No one command doesn't work anymore."
+            -   option: "باستخدام الأمر `{sleep}` يمكنك إزالة النص عن الشاشة"
+                feedback: "لا يعمل الأمر `{sleep}` بهذه الطريقة"
             correct_answer: "C"
-            hint: "`{print}` and `{ask}` still exist."
+            hint: "الأمر `{print}`  ما زال يعمل كما كان في المستوى الأول"
             question_score: '10'
         2:
-            question_text: "Which code is correct?"
+            question_text: "اختر الكود الصحيح"
             mp_choice_options:
             -   option: |
                     ```
-                    name {is} {ask} What is your name?
+                    الاسم {is} {ask} ما اسمك؟
                     ```
-                feedback: "Super!"
+                feedback: "رائع!"
             -   option: |
                     ```
-                    {ask} {is} name What is your name
+                    {ask} {is}  الاسم ما اسمك؟
                     ```
-                feedback: "The words are right, the order is not!"
+                feedback: "الكلمات صحيحة، لكن ترتيبها خاطئ"
             -   option: |
                     ```
-                    {ask} What is your name?
+                    {ask} ما اسمك؟
                     ```
-                feedback: "This worked in level 1, but in level 2 and up it works differently."
+                feedback: "هذا كان صحيحًا في المستوى الأول، لكن ابتداءً من هذا المستوى أصبح الأمر مختلفًا."
             -   option: |
                     ```
-                    {ask} What is your name? {is} name
+                    {ask} ما اسمك؟  {is} الاسم
                     ```
-                feedback: "The words are right, the order isn't!"
+                feedback: "الكلمات صحيحة، لكن ترتيبها خاطئ!"
             correct_answer: "A"
-            hint: "`{ask}` doesn't work like in level 1"
+            hint: "الأمر `{ask}` يعمل الآن بشكل مختلف عن المستوى الأول"
             question_score: '10'
         3:
-            question_text: "What appears on your output screen when you run this code?"
+            question_text: "ما النتيجة التي تظهر على الشاشة عند تنفيذ الكود التالي؟"
             code: |-
-                name {is} Marleen
-                {print} name goes to the market and she buys an apple.
+                الاسم {is} مريم
+                {print} الاسم ذهبت إلى البقالة واشترت تفاحة.
             mp_choice_options:
-            -   option: "name goes to the market and she buys an apple."
-                feedback: "The word name is replaced with Marleen"
-            -   option: "Marleen goes to the market."
-                feedback: "The second part of the sentence isn't left out!"
-            -   option: "Marleen goes to the market and she buys an apple."
-                feedback: "Right on!"
-            -   option: "Marleen goes to the market and Marleen buys an apple."
-                feedback: "She is not replaced with the name"
+            -   option: "الاسم ذهبت إلى البقالة واشترت تفاحة."
+                feedback: "كلمة \"الاسم\" يتم استبدالها بـِ\"مريم\""
+            -   option: "مريم ذهبت إلى البقالة."
+                feedback: "جزء من الجملة مفقود!"
+            -   option: "مريم ذهبت إلى البقالة واشترت تفاحة."
+                feedback: "ممتاز!"
+            -   option: "مريم ذهبت إلى البقالة مريم اشترت تفاحة"
+                feedback: "من المفترض أن يظهر اسم مريم مرة واحدة"
             correct_answer: "C"
-            hint: "The word name is replaced with Marleen"
+            hint: "يتم استبدال كلمة \"الاسم\" بـِ\"مريم\""
             question_score: '10'
         4:
-            question_text: "What will you see on the output screen when you run this code?"
+            question_text: "ما النتيجة التي تظهر على الشاشة عند تنفيذ الكود التالي؟"
             code: |-
-                name {is} Hedy
-                {print} Hi my name is name!
+                اسمي {is} هيدي
+                {print} مرحبًا، اسمي هو اسمي
             mp_choice_options:
-            -   option: "Hi my name is name"
-                feedback: "The variable name is replaced with Hedy"
-            -   option: "Hi my name is Hedy"
-                feedback: "The variable name is replaced with Hedy"
-            -   option: "Hi my Hedy is name"
-                feedback: "The variable name is replaced with Hedy"
-            -   option: "Hi my Hedy is Hedy"
-                feedback: "Correct, this mistake will be fixed in level 3!"
+            -   option: "مرحبًا، اسمي هو اسمي"
+                feedback: "يتم استبدال المتغير \"اسمي\" بـِ\"هيدي\""
+            -   option: "مرحبًا، اسمي هو هيدي"
+                feedback: "يتم استبدال المتغير\"اسمي\" بـِ\"هيدي\""
+            -   option: "مرحبًا، هيدي هو اسمي"
+                feedback: "يتم استبدال المتغير \"اسمي\" بـِ\"هيدي\""
+            -   option: "مرحبًا، هيدي هو هيدي"
+                feedback: "صحيح! سيتم تصحيح هذا الخطأ في المستور الثالث!"
             correct_answer: "D"
-            hint: "'name' is being replaced with 'Hedy' in both places"
+            hint: "كلمة \"اسمي\" سيتم استبدالها بـِ\"هيدي\" مرتين"
             question_score: '10'
         5:
-            question_text: "What happens when you use the `{sleep}` command?"
+            question_text: "ماذا يحدث عند استخدام الأمر `{sleep}` ؟"
             mp_choice_options:
-            -   option: "It slows down your computer"
-                feedback: "fortunately not!"
-            -   option: "It closes down Hedy"
-                feedback: "fortunately not!"
-            -   option: "Your program pauses for a second and then continues"
-                feedback: "That's right!"
-            -   option: "You put it at the end so Hedy knows your program is finished"
-                feedback: "No it would be useless at the end of your code"
+            -   option: "يصبح جهاز الحاسوب خاصتك أبطأ في العمل"
+                feedback: "لحسن الحظ، لا!"
+            -   option: "يغلق موقع هيدي"
+                feedback: "بالطبع لا!"
+            -   option: "يتوقف البرنامج الخاص بك لثانية ثم يكمل عمله"
+                feedback: "صحيح!"
+            -   option: "يتم استخدام الأمر `{sleep}` في نهاية الكود عادةً لنخبر هيدي أن البرنامج انتهى"
+                feedback: "لا طبعًا، لن تستفيد منه إذا وضعته في نهاية الكود"
             correct_answer: "C"
-            hint: "The computer waits for a second at the `{sleep}` command"
+            hint: "الحاسوب ينتظر لمدة ثانية عند استخدام الأمر `{sleep}`"
             question_score: '10'
         6:
-            question_text: "What should be on the lines?"
+            question_text: "ماذا يجب أن يكون في الأسطر الفارغة؟"
             code: |-
-                {print} And the award for best programming language goes to...
+                {print}  جائزة أفضل لغة برمجة ستكون لـِ ... ؟
                 _?_
-                {print} Hedy!
+                {print}  هيدي!
             mp_choice_options:
             -   option: |
                     ```
                     {sleep}
                     ```
-                feedback: "Perfect!"
+                feedback: "رائع!"
             -   option: |
                     ```
                     {echo}
                     ```
-                feedback: "There is nothing to repeat back here"
+                feedback: "لا يوجد شيء لإعادة ترديده!"
             -   option: |
                     ```
                     {print}
                     ```
-                feedback: "There is no text there to `{print}` there"
+                feedback: "لا يوجد نص لطباعته باستخدام  `{print}`"
             -   option: |
                     ```
                     {ask}
                     ```
-                feedback: "There is no question there to be asked"
+                feedback: "لا يوجد سؤال لاستخدام `{ask}` من أجله!"
             correct_answer: "A"
-            hint: "Pause for dramatic effect..."
+            hint: "توقف للحظة من أجل هذا الحدث الرائع"
             question_score: '10'
         7:
-            question_text: "What command should be used on line 2?"
+            question_text: "ما هو الأمر الذي يجب استخدامه في السطر ٢؟"
             code: |-
-                {print} I will explode in 3 seconds!
+                {print}  سأنفجر في خلال ٣ ثوانٍ!
                 _?_
-                {print} BOOM!
+                {print}  💣 💣💣
             mp_choice_options:
             -   option: |
                     ```
-                    {print} 3
+                    {print}  ٣
                     ```
-                feedback: "You don't need to `{print}`"
+                feedback: "أنت لا تحتاج إلى الأمر  `{print}`"
             -   option: |
                     ```
-                    {sleep} 3
+                    {sleep} ٣
                     ```
-                feedback: "Perfect!"
+                feedback: "أحسنت!"
             -   option: |
                     ```
                     {sleep}
                     ```
-                feedback: "This way the bomb will explode in 1 second"
+                feedback: "بهذه الطريقة ستنفجر القنبلة بعد ثانية واحدة"
             -   option: |
                     ```
                     {sleep} {sleep} {sleep}
                     ```
-                feedback: "Make it easier on yourself by using the number 3"
+                feedback: "استخدم الرقم ٣ لتسهل الأمر عليك"
             correct_answer: "B"
-            hint: "You want the computer to wait for 3 seconds"
+            hint: "نريد من الحاسوب أن ينتظر لثلاثة ثوانٍ"
             question_score: '10'
         8:
-            question_text: "How would you correct the first line of code?"
+            question_text: "كيف ستصلح السطر الأول من الكود؟"
             code: |-
-                {ask} {is} How old are you?
-                {print} age
+                {ask} {is}  كم عمرك؟
+                {print}  العمر
             mp_choice_options:
             -   option: |
                     ```
-                    age {ask} {is} How old are you?
+                    العمر {ask} {is} كم عمرك؟
                     ```
-                feedback: "That is the wrong order"
+                feedback: "هذا الترتيب خاطئ!"
             -   option: |
                     ```
-                    {ask} {is} age How old are you?
+                    {ask} {is} العمر كم عمرك؟
                     ```
-                feedback: "That is the wrong order"
+                feedback: "هذا الترتيب خاطئ!"
             -   option: |
                     ```
-                    age {is} {ask} How old are you?
+                    العمر {is} {ask} كم عمرك؟
                     ```
-                feedback: "You get it!"
+                feedback: "أحسنت!"
             -   option: |
                     ```
-                    age {is} How old are you?
+                    العمر {is} كم عمرك؟
                     ```
-                feedback: "Where is the `{ask}` command?"
+                feedback: "أين الأمر  `{ask}`؟"
             correct_answer: "C"
-            hint: "The variable name should come first"
+            hint: "اسم المتغير يجب أن ياتي أولًا"
             question_score: '10'
         9:
-            question_text: "What is going wrong in this code?"
+            question_text: "اكتشف الخطأ في الكود التالي"
             code: |-
-                dogs {is} animal
-                {print} I love animal
+                الكلب {is} الحيوان_المفضل
+                {print}  حيواني المفضل هو الحيوان_المفضل
             mp_choice_options:
-            -   option: "Line 1 should say: dogs `{is}` animals"
-                feedback: "The variable name is animal"
-            -   option: "Line 1 should say: animal `{is}` dogs"
-                feedback: "Great!"
-            -   option: "Line 2 should say: `{print}` I love animals"
-                feedback: "The variable name is animal"
-            -   option: "Line 2 should say: `{sleep}` I love animals"
-                feedback: "Sleep is not used to `{print}` text"
+            -   option: "السطر الاول يجب ان يكون هكذا: الكلب `{is}` الحيوان_المفضل"
+                feedback: "اسم المتغير هو \"الحيوان_المفضل\""
+            -   option: "السطر الاول يجب ان يكون هكذا: الحيوان_المفضل`{is}` الكلب"
+                feedback: "رائع!"
+            -   option: "السطر الثاني يجب أن يكون هكذا: `{print}`  حيواني المفضل هو الكلب"
+                feedback: "اسم المتغير هو \"الحيوان_المفضل\""
+            -   option: "السطر الثاني يجب أن يكون هكذا:  `{sleep}`  حيواني المفضل هو الكلب"
+                feedback: "`{sleep}` لا يستخدم لطباعة الكلام"
             correct_answer: "B"
-            hint: "You want to `{print}` 'I love dogs'"
+            hint: "أنت تريد أن تـ`{print}`  \"حيواني المفضل هو الكلب\""
             question_score: '10'
         10:
-            question_text: "What command should be used on the line 1?"
+            question_text: "ما الأمر الذي يجب ان نستخدمه في السطر الأول؟"
             code: |-
-                flavor {is} _?_
-                {print} Your favorite icecream is...
+                النكهة {is}  _?_
+                {print}  نكهة المثلجات المفضلة لديك هي...
                 {sleep}
-                {print} flavor
+                {print}  النكهة
             mp_choice_options:
             -   option: |
                     ```
-                    {sleep} 3
+                    {sleep} ٣
                     ```
-                feedback: "You want to know the favorite flavor!"
+                feedback: "أنت تريد الإجابة عن نكهة المثلجات المفضلة!"
             -   option: |
                     ```
-                    {print} strawberries
+                    {print} الفراولة
                     ```
-                feedback: "You do not want a `{print}` command at the middle of the line..."
+                feedback: "أنت لا تريد الأمر `{print}`  في منتصف السطر!"
             -   option: |
                     ```
-                    strawberries, chocolate, vanilla
+                    الفراولة, الشوكولاتة, الفانيلا
                     ```
-                feedback: "This way you are making a list. You don't want that now."
+                feedback: "أنت تنشئ قائمة بهذه الطريقة!"
             -   option: |
                     ```
-                    {ask} What flavor icecream do you like?
+                    {ask} ما هي نكهة المثلجات المفضلة لديك؟
                     ```
-                feedback: "That's right!"
+                feedback: "رائع!"
             correct_answer: "D"
-            hint: "You want to `{ask}` a question"
+            hint: "أنت تريد أن تسأل سؤالًا"
             question_score: '10'
     3:
         1:
-            question_text: "What command do you use to let Hedy pick something arbitrarily?"
+            question_text: "أياً من الأوامر التالية يستخدم لجعل هيدي تختار شيئاً بطريقة تعسفية؟"
             mp_choice_options:
             -   option: |
                     ```
                     {print}
                     ```
-                feedback: "`{print}` is used to print text"
+                feedback: "`{print}` تستخدم لطبع الكلمات والجُمل"
             -   option: |
                     ```
                     {ask}
                     ```
-                feedback: "`{ask}` is used to ask a question"
+                feedback: "`{ask}` تستخدم لطرح سؤال"
             -   option: |
                     ```
                     {is}
                     ```
-                feedback: "`{is}` is used to make a list"
+                feedback: "`{is}` تستخدم في صنع قائمة"
             -   option: |
                     ```
                     {at} {random}
                     ```
-                feedback: "Correct!"
+                feedback: "إجابة صحيحة!"
             correct_answer: "D"
-            hint: "Arbitrarily means without a plan or randomly."
+            hint: "تعسفي يعني بدون تخطيط أو بعشوائية."
             question_score: '10'
         2:
-            question_text: "What's wrong with this code?"
+            question_text: "ما الخطأ في هذا الكود؟"
             code: |-
                 animals {is} dog cat cow
                 {print} animals {at} {random}
             mp_choice_options:
-            -   option: "You need commas in line 1: dog, cat, cow."
-                feedback: "Good job!"
-            -   option: "Line 1 needs to start with `{print}`."
-                feedback: "No, you don't need `{print}`"
-            -   option: "Line 2 needs to say 'animal' instead of 'animals'',"
-                feedback: "animals is correct."
-            -   option: "`{at} {random}` is spelled incorrectly"
-                feedback: "`{at} {random}` is the correct spelling"
+            -   option: "في السطر ١ يجب إستخدام الفاصلة: كلب، قطة، بقرة."
+                feedback: "أحسنت!"
+            -   option: "`{print}`السطر ١ يجب أن يبدأ بالأمر `{print}`."
+                feedback: "لا تحتاج للأمر `{print}`"
+            -   option: "السطر٢ يحتاج تغيير كلمة ’حيوانات‘ إلى ’حيوان‘"
+                feedback: "كلمة حيوانات صحيحة."
+            -   option: "`{at} {random}`الأمر `{at} {random}` تهجئته غير صحيحة"
+                feedback: "الأمر `{at} {random}` تهجئته صحيحة"
             correct_answer: "A"
-            hint: "There's something wrong in line 1"
+            hint: "هناك شيء خاطيء في السطر ١"
             question_score: '10'
         3:
-            question_text: "How do you fix the mistake in line 2 of this code?"
+            question_text: "كيف بمكنك تصحيح الخطأ في السطر٢ للكود؟"
             code: |-
-                options {is} rock, paper, scissors
-                {print} rock, paper, scissors {at} {random}
+                الخيارات هي حجر، ورقة، مقص
+                {print} حجر، ورقة، مقص {at} {random}
             mp_choice_options:
             -   option: |
                     ```
-                    {at} {random} {print} options
+                    {at} {random} {print} الخيارات
                     ```
-                feedback: "You're almost there. The order of the words isn't right yet."
+                feedback: "أنت على وشك حلها. ترتيب الجملة ليس صحيحاً بعد."
             -   option: |
                     ```
-                    {print} rock {at} {random}
+                    {print} حجر {at} {random}
                     ```
-                feedback: "you don't always want the Hedy to {print} rock, sometimes you want scissors or paper."
+                feedback: "أنت لا تريد من هيدي {print} حجر دائماً، أحياناً تريد قول ورقة أو مقص."
             -   option: |
                     ```
-                    {print} options {at} {random}
+                    {print} الخيارات {at} {random}
                     ```
-                feedback: "Very good!"
-            -   option: "Nothing, the code is correct!"
-                feedback: "Look carefully for the mistake"
+                feedback: "ممتاز للغاية!"
+            -   option: "لا شيء، الكود صحيح!"
+                feedback: "أبحث جيداً عن الخطأ"
             correct_answer: "C"
-            hint: "The variable (the list) is called options."
+            hint: "المتغير المستخدم (القائمة) تسمى الخيارات."
             question_score: '10'
         4:
-            question_text: "What should change in line 2 to print a random price?"
+            question_text: "ما الذي يجب تغييره في السطر٢ لطباعة سعر عشوائي؟"
             code: |-
-                prices {is} 1 dollar, 100 dollar, 1 million dollar
-                {print} price {at} {random}
+                الأسعار هي ١ دولار، ١٠ دولار، ١٠٠ دولار
+                {print} السعر {at} {random}
             mp_choice_options:
             -   option: |
                     ```
-                    {print} price
+                    {print} السعر
                     ```
-                feedback: "You don't want to `{print}` the word price, but you want to `{print}` one price out of your list `{at} {random}`"
+                feedback: "أنت لا تريد طباعة كلمة السعر، لكنك تريد طباعة سعر واحد من الموجودين في القائمة `{at} {random}`"
             -   option: |
                     ```
-                    {print} prices {at} {random}
+                    {print} الأسعار {at} {random}
                     ```
-                feedback: "Great! You've really paid attention."
+                feedback: "رائع! لقد أنتبهت بالفعل."
             -   option: |
                     ```
-                    {print} {at} {random} price
+                    {print} {at} {random} السعر
                     ```
-                feedback: "`{at} {random}` is placed behind the variable."
-            -   option: "Nothing, this code is alright."
-                feedback: "Look carefully for the mistake you missed!"
+                feedback: "الأمر `{at} {random}` مكتوب بعد المتغيير."
+            -   option: "لا شيء، الكود صحيح."
+                feedback: "أنظر جيداً هناك خطأ لم تنتبه له!"
             correct_answer: "B"
-            hint: "The variable name is prices"
+            hint: "المتغيير اسمه الأسعار"
             question_score: '10'
         5:
-            question_text: "What is wrong in this code?"
+            question_text: "ما الخطأ في هذا الكود؟"
             code: |-
-                question {is} {ask} What do you want to know?
-                {print} question
-                answers {is} yes, no, maybe
-                {print} answers {at} {random}
+                السؤال {is} {ask} ما الذي تود معرفته؟
+                {print} السؤال
+                الإجابات هي نعم، لا، ربما
+                {print} الإجابات {at} {random}
             mp_choice_options:
-            -   option: "Line 1 needs to say `{print}` instead of `{ask}`"
-                feedback: "No, that's not wrong."
-            -   option: "Line 2 needs to say `{ask}` instead of `{print}`"
-                feedback: "No that's not wrong."
-            -   option: "Line 2 needs to say answers `{at} {random}` `{is}` yes, no, maybe"
-                feedback: "No, that's not wrong."
-            -   option: "Nothing, this code is perfect"
-                feedback: "That's right!"
+            -   option: "السطر ١ يحتاج إستبدال الأمر `{ask}` بالأمر `{print}`"
+                feedback: "لا، هذا ليس بخطأ."
+            -   option: "السطر٢ نحتاج إستخدام `{ask}` بدلاً من `{print}`"
+                feedback: "لا هذا ليس خطأ."
+            -   option: "في السطر٢ علينا إستخدام الإجابات`{at} {random}` `{is}` نعم، لا، ربما"
+                feedback: "لا، هذا ليس خطأ."
+            -   option: "لا شيء، الكود صحيح"
+                feedback: "أجل هذا صحيح!"
             correct_answer: "D"
-            hint: "Does this code even have a mistake?"
+            hint: "هل هذا الكود يحتوي على أي أخطاء من الأساس؟"
             question_score: '10'
         6:
-            question_text: "What's wrong with this code?"
+            question_text: "ما الخطأ في هذا الكود؟"
             code: |-
-                question {is} {ask} What do you want to know?
-                answers yes, no, maybe
-                {print} answers {at} {random}
+                السؤال {is} {ask} ما الذي تود معرفته؟
+                الإجابات نعم، لا، ربما
+                {print} الإجابات {at} {random}
             mp_choice_options:
-            -   option: "Line 2 needs to say question instead of answers"
-                feedback: "No that's not right"
-            -   option: "Line 2 needs the `{is}` command"
-                feedback: "Correct"
-            -   option: "Line 3 needs to say answer instead of answers"
-                feedback: "No the variable's called answers"
-            -   option: "Nothing! This code is great!"
-                feedback: "Actually, line 2 has a mistake."
+            -   option: "إستبدال كلمة الإجابات في السطر٢ بكلمة السؤال"
+                feedback: "لا هذا ليس صحيحاً"
+            -   option: "السطر٢ يحتاج الأمر `{is}`"
+                feedback: "صحيح"
+            -   option: "إستبدال كلمة الإجابات في السطر٣ بكلمة الإجابة"
+                feedback: "لا المتغيير اسمه الإجابات"
+            -   option: "لا شيء! الكود رائع!"
+                feedback: "فالواقع، السطر٢ يوجد به خطأ."
             correct_answer: "B"
-            hint: "There is something wrong with line 2."
+            hint: "هناك شيء خاطيء في السطر٢."
             question_score: '10'
         7:
-            question_text: "What does the `{add}` command do?"
+            question_text: "ما الذي يفعله الأمر `{add}`؟"
             code: |-
-                books {is} Harry Potter, The Hobbit, Green Eggs and Ham
-                your_book {is} {ask} What is your favorite book?
-                {add} your_book {to} books
-                {print} books {at} {random}
+                الكتب هي هاري بوتر، الهوبيت، البيض الأخضر واللحم
+                كتابك {is} {ask} ما هو كتابك المفضل؟
+                {add} كتابك {to} الكتب
+                {print} الكتب {at} {random}
             mp_choice_options:
-            -   option: "The `{add}` command removes a random book from the list"
-                feedback: "The remove command removes, the add command adds"
-            -   option: "The `{add}` command adds a random book to a list"
-                feedback: "It doesn't. It adds your answer to the list!"
-            -   option: "The `{add}` command adds your favorite book to the list"
-                feedback: "Correct!"
-            -   option: "The `{add}` command prints your favorite book."
-                feedback: "No, it adds your favorite book to the list"
+            -   option: "الأمر `{add}` يحذف كتاب عشوائي من القائمة"
+                feedback: "الأمر احذف للحذف، والأمر اضف للإضافة"
+            -   option: "الأمر `{add}` يضيف كتاب عشوائي إلى القائمة"
+                feedback: "لا يفعل ذلك. بل إنه يضيف إجابتك للقائمة!"
+            -   option: "الأمر `{add}` يضيف كتابك المفضل للقائمة"
+                feedback: "صحيح!"
+            -   option: "الأمر `{add}` يطبع اسم كتابك المفضل."
+                feedback: "لا، بل يضيف كتابك المفضل للقائمة"
             correct_answer: "C"
-            hint: "The `{add}` command adds a book, but which one?"
+            hint: "الأمر `{add}` يضيف كتاب للقائمة، ولكن أي كتاب؟"
             question_score: '10'
         8:
-            question_text: "What is the output of this code?"
+            question_text: "ما خرج هذا الكود عند تشغيله؟"
             code: |-
-                crisps {is} sea salt, paprika, sour cream
-                {remove} sea salt {from} crisps
-                {remove} paprika {from} crisps
-                {print} crisps {at} {random}
+                الرقائق هي ملح البحر، الفلفل الحلو، القشدة الحامضة
+                {remove} ملح البحر {from} الرقائق
+                {remove} الفلفل الحلو {from} الرقائق
+                {print} الرقائق {at} {random}
             mp_choice_options:
-            -   option: "You can't tell, because Hedy will `{print}` one of the 3 flavors `{at} {random}`"
-                feedback: "Take a look at the `{remove}` commands"
-            -   option: "sea salt"
-                feedback: "sea salt is removed from the list"
-            -   option: "paprika"
-                feedback: "Paprika is removed from the list"
-            -   option: "sour cream"
-                feedback: "That's right!"
+            -   option: "لا يمكن أن نعرف، لأن هيدي سوف تطبع ثلاث نكهات `{at} {random}`"
+                feedback: "ألق نظرة على الأمر `{remove}`"
+            -   option: "ملح البحر"
+                feedback: "لقد تم حذف ملح البحر من القائمة"
+            -   option: "الفلفل الحلو"
+                feedback: "لقد تم حذف الفلفل الحلو من القائمة"
+            -   option: "القشدة الحامضة"
+                feedback: "هذا صحيح!"
             correct_answer: "D"
-            hint: "There are 3 flavors, bit 2 are removed. Which one remains?"
+            hint: "هناك ثلاث نكهات، تم حذف اثنين. ما المتبقي؟"
             question_score: '10'
         9:
-            question_text: "What's wrong with this code?"
+            question_text: "ما الخطأ في هذا الكود؟"
             code: |-
-                colors {is} blue, purple, green
-                chosen_color {is} {ask} Which haircolor wouldn't your like to have?
-                {remove} chosen_color {from} colors
-                {print} I will dye my hair color {at} {random}
+                الألوان هي الأزرق، الأرجواني، الأخضر
+                اللون_المختار {is} {ask} ما لون الشعر الذي لا ترغب في الحصول عليه؟
+                {remove} اللون_المختار {from} الألوان 
+                {print} سوف أصبغ شعري اللون {at} {random}
             mp_choice_options:
-            -   option: "Line 3 should say: `{remove}` blue `{from}` colors"
-                feedback: "Maybe you want blue hair though!"
-            -   option: "Line 3 should have an `{add}` command instead of a `{remove}` command"
-                feedback: "You want to remove the chosen color so `{remove}` is right."
-            -   option: "In line 4 the variable should be called colors instead of color"
-                feedback: "Great job!"
-            -   option: "Nothing, this is a correct code!"
-                feedback: "Find the mistake!"
+            -   option: "في السطر٣ يجب قول: `{remove}` الأزرق `{from}` الألوان"
+                feedback: "ربما تود اللون الأزرق!"
+            -   option: "في السطر٣ يجب إستخدام الأمر `{add}` بدلاً من الأمر `{remove}`"
+                feedback: "أنت تريد حذف اللون المختار لذلك الأمر `{remove}` صحيح."
+            -   option: "في السطر٤ المتغير يجب أن يكون اسمه الألوان وليس اللون"
+                feedback: "عمل رائع أحسنت!"
+            -   option: "لا شئ، هذا الكود صحيح!"
+                feedback: "أوجد الخطأ!"
             correct_answer: "C"
-            hint: "Look at line 3"
+            hint: "تحقق من السطر٣"
             question_score: '10'
         10:
-            question_text: "What should be on the _?_?"
+            question_text: "ماذا يجب أن يوضع مكان _؟_؟"
             code: |-
-                walkers {is} dad, mom, Sam, Petra
-                walked_yesterday {is} {ask} Who walked the dogs yesterday?
-                {print} walked_yesterday shouldn't have to walk the dogs again today
-                _?_
-                {print} walkers {at} {random} , it's your turn to walk the dogs!
+                مسؤول_التمشية {is} أبي، أمي، سام، بيترا
+                مشي_أمس {is} {ask} من أخذ الكلب للتمشية أمس؟
+                {print} مشي_أمس لا يجب عليه تمشية الكلب اليوم
+                _؟_
+                {print} مسؤول_التمشية {at} {random}، دورك لتأخذ الكلب للتمشية!
             mp_choice_options:
             -   option: |
                     ```
-                    {remove} walked_yesterday {from} walkers
+                    {remove} مشي_أمس {from} مسؤول_التمشية
                     ```
-                feedback: "Super!"
+                feedback: "رائع!"
             -   option: |
                     ```
-                    {remove} walked yesterday {to} walkers
+                    {remove} مشي_أمس {to} مسؤول_التمشية
                     ```
-                feedback: "`{remove} {from}` or `{add} {to}`, not `{remove} {to}`"
+                feedback: "`{remove} {from}` أو `{add} {to}`،و ليس `{remove} {to}`"
             -   option: |
                     ```
-                    {remove} walkers {from} yesterday
+                    {remove} مسؤول_التمشية {from} أمس
                     ```
-                feedback: "yesterday is not a variable"
+                feedback: "أمس ليست أسم المتغيير"
             -   option: |
                     ```
-                    {add} walked_yesterday {to} walkers
+                    {add} مشي_أمس {to} مسؤول_التمشية
                     ```
-                feedback: "This increased the change that the person who walked yesterday now has to do it again. That's mean."
+                feedback: "معنى تلك الإضافة أن الذي قام بتمشية الكلب أمس عليه أن يفعل ذلك مرة أخرى اليوم، هذا معناه."
             correct_answer: "A"
-            hint: "The person who walked the dog yesterday should be removed from the list."
+            hint: "الشخص الذي قام بتمشية الكلب أمس يجب حذف اسمه من القائمة."
             question_score: '10'
 
     4:
