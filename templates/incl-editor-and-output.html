@@ -8,7 +8,7 @@
     <!-- Row 1: editor, output pane -->
     <div class="flex flex-col order-1 relative" id="code_editor" style="min-height: 22rem;">
         <div id="fold_in_toggle_container" class="hidden lg:flex absolute z-10 top-16 ltr:-right-1 rtl:-left-1 cursor-pointer" onclick="hedyApp.hide_editor();">
-         <div class="bg-green-500 text-white py-3 rounded-lg text-sm">
+         <div id="text_field" class="bg-green-500 text-white py-3 rounded-lg text-sm">
              <span>←</span>
          </div>
         </div>
@@ -178,7 +178,7 @@
       {% if not specific_adventure %}
           <div class="flex {% if prev_level %}justify-between{% else %}justify-end{%endif%}">
             {% if prev_level and (not customizations or prev_level in customizations['available_levels']) %}
-              <button class="green-btn" onclick="hedyApp.prompt_unsaved (function () {window.location = '{{ hedy_link(prev_level, 1) }}'})">{{_('regress_button')|replace("{level}", prev_level)}}</button>
+              <button class="green-btn" id="prev_level_button" onclick="hedyApp.prompt_unsaved (function () {window.location = '{{ hedy_link(prev_level, 1) }}'})">{{_('regress_button')|replace("{level}", prev_level)}}</button>
             {% elif prev_level and not (not customizations or prev_level in customizations['available_levels']) %}
                 <div class="relative">
                     <button class="green-btn absolute inset-0" disabled>{{_('regress_button')|replace("{level}", prev_level)}}</button>
@@ -204,7 +204,7 @@
               <button class="green-btn" onclick="hedyApp.prompt_unsaved (function () {window.location = '/adventure/{{ adventures[0].short_name}}/{{prev_level}}'})">{{_('regress_button')|replace("{level}", prev_level)}}</button>
             {% endif %}
             {% if next_level %}
-                <button class="green-btn ltr:ml-1 rtl:mr-1" onclick="hedyApp.prompt_unsaved (function () {window.location = '/adventure/{{ adventures[0].short_name}}/{{next_level}}'})">{{_('advance_button')|replace("{level}", next_level)}}</button>
+            <button class="green-btn ltr:ml-1 rtl:mr-1" onclick="hedyApp.prompt_unsaved (function () {window.location = '/adventure/{{ adventures[0].short_name}}/{{next_level}}'})">{{_('advance_button')|replace("{level}", next_level)}}</button>
             {% endif %}
           </div>
       {% endif %}
