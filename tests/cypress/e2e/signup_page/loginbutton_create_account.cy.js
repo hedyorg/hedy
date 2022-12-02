@@ -3,14 +3,15 @@ import {login, loginForUser} from '../tools/login/login.js'
 
 describe('Username field test', () => {
   it('passes', () => {
+    goToPage(Cypress.env('register_student_page'));
 
     goToRegisterStudent();
 
     // Tests username field interaction
-       cy.get('#username')
+       cy.get('.btn')
       .should('be.visible')
-      .should('be.empty')
-      .type('some_username123')
-      .should('have.value', 'some_username123');
+      .click()
+
+    cy.url().should('eq', Cypress.config('baseUrl') + Cypress.env('login_page'));
   })
 })
