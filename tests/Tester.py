@@ -16,11 +16,12 @@ from app import translate_error, app
 from flask_babel import force_locale
 
 class Snippet:
-    def __init__(self, filename, level, field_name, code, adventure_name=None):
+    def __init__(self, filename, level, code, field_name=None, adventure_name=None, error=None):
         self.filename = filename
         self.level = level
         self.field_name = field_name
         self.code = code
+        self.error=error
         filename_shorter = os.path.basename(filename)
         self.language = filename_shorter.split(".")[0]
         self.adventure_name = adventure_name
