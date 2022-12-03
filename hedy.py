@@ -1581,9 +1581,10 @@ class ConvertToPython_2(ConvertToPython_1):
 @v_args(meta=True)
 @hedy_transpiler(level=3)
 class ConvertToPython_3(ConvertToPython_2):
-    def list(self, meta, args):
-        values = [f"'{process_characters_needing_escape(a)}'" for a in args]
-        return f"[{', '.join(values)}]"
+    def assign_list(self, meta, args):
+        parameter = args[0]
+        values = [f"'{process_characters_needing_escape(a)}'" for a in args[1:]]
+        return f"{parameter} = [{', '.join(values)}]"
 
     def list_access(self, meta, args):
         args = [escape_var(a) for a in args]
