@@ -330,7 +330,9 @@ def get_subject_translation(template):
     return None
 
 
-def send_email_template(template, email, link=None, username=gettext("user")):
+def send_email_template(template, email, link=None, username=None):
+    if username is None:
+        username = gettext("user")
     subject = get_subject_translation(template)
     if not subject:
         print("Something went wrong, mail template could not be found...")
