@@ -959,7 +959,6 @@ def index(level, program_id):
         quiz = False
 
     commands = hedy.commands_per_level.get(level)
-    print("here", customizations.items())
     return hedyweb.render_code_editor_with_tabs(
         cheatsheet=cheatsheet,
         commands=commands,
