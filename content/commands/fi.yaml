@@ -12,37 +12,37 @@
     explanation: Toista koodirivi komennolla `{repeat}`.
     demo_code: '{repeat} 3 {times} {forward} 10'
 12:
--   demo_code: "{print} 'Calculate away!'\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n"
+-   demo_code: "{print} 'Laskehan!'\n{print} 'Kaksi ja puoli plus kaksi ja puoli on yhteensä...'\n{print} 2.5 + 2.5\n"
     name: float directly
-    explanation: Decimal numbers.
+    explanation: Desimaaliluvut.
 -   name: assign text
-    explanation: Text with quotation marks after `=`
-    demo_code: "name = 'Hedy the Robot'\n{print} 'Hello ' name\n"
--   name: quotes after {if} comparison
-    explanation: Text with quotation marks after `{if}`.
-    demo_code: "name = {ask} 'Who are you?'\n{if} name = 'Hedy'\n    {print} 'Hi there!'\n"
--   name: quotes in list
-    explanation: A list with quotation marks.
-    demo_code: "superheroes = 'Iron Man', 'Batman', 'Superman'\n{print} superheroes {at} {random}\n"
+    explanation: Teksti lainausmerkeissä merkin `=` jälkeen
+    demo_code: "nimi = 'Hedy robotti'\n{print} 'Hei ' nimi\n"
+-   name: heittomerkit {if} vertailun jälkeen
+    explanation: Teksti lainausmerkeissä komennon `{if}` jälkeen.
+    demo_code: "nimi = {ask} 'Kuka olet?'\n{if} nimi = 'Hedy'\n    {print} 'Moikka!'\n"
+-   name: lainausmerkit listassa
+    explanation: Lista käyttäen lainausmerkkejä.
+    demo_code: "supersankarit = 'Iron Man', 'Batman', 'Superman'\n{print} supersankarit {at} {random}\n"
 14:
--   name: Smaller
-    explanation: We use the `<` to check if the first number is smaller than the second number.
-    demo_code: "age = {ask} 'How old are you?'\n{if} age < 13\n    {print} 'You are younger than me!'"
--   name: Bigger
-    explanation: We use the `>` to check if the first number is bigger than the second number.
-    demo_code: "age = {ask} 'How old are you?'\n{if} age > 13\n    {print} 'You are older than me!'"
--   name: Equal
-    explanation: We use the `==` to check if two things are the same.
-    demo_code: "answer = {ask} 'What is 5 * 5?'\n{if} answer == 25\n    {print} 'That is correct!'"
--   name: Not equal
-    explanation: We use the `!=` to check if two things are not the same.
-    demo_code: "answer = {ask} 'What is 5 * 5?'\n{if} answer != 25\n    {print} 'That is not correct!'"
--   name: Smaller or equal
-    explanation: We use the `<=` to check if the first number is smaller than or equal to the second number.
-    demo_code: "age = {ask} 'How old are you?'\n{if} age <= 12\n    {print} 'You are younger than me!'"
--   name: Bigger or equal
-    explanation: We use the `>=` to check if the first number is bigger than or equal to the second number.
-    demo_code: "age = {ask} 'How old are you?'\n{if} age >= 14\n    {print} 'You are older than me!'"
+-   name: Pienempi
+    explanation: Käytämme merkkiä `<` tarkistaaksemme onko ensimmäinen numero toista numeroa pienempi.
+    demo_code: "ikä = {ask} 'Kuinka vanha olet?'\n{if} ikä < 13\n    {print} 'Olet minua nuorempi!'"
+-   name: Suurempi
+    explanation: Käytämme merkkiä `>` tarkistaaksemme onko ensimmäinen numero toista numeroa suurempi.
+    demo_code: "ikä = {ask} 'Kuinka vanha olet?'\n{if} ikä > 13\n    {print} 'Olet minua vanhempi!'"
+-   name: Yhtä suuri
+    explanation: Käytämme merkkejä `==` tarkistaaksemme ovatko kaksi asiaa samoja.
+    demo_code: "vastaus = {ask} 'Paljonko on 5 * 5?'\n{if} vastaus == 25\n    {print} 'Oikein!'"
+-   name: Eivät yhtä suuret
+    explanation: Käytämme merkkejä `!=` tarkistaaksemme ettei kaksi asiaa ole samoja.
+    demo_code: "vastaus = {ask} 'Paljonko on 5 * 5?'\n{if} vastaus != 25\n    {print} 'Väärin!'"
+-   name: Pienempi tai yhtäsuuri
+    explanation: Käytämme merkkejä `<=` tarkistaaksemme onko ensimmäinen numero pienempi tai yhtäsuuri kuin jälkimmäinen numero.
+    demo_code: "ikä = {ask} 'Kuinka vanha olet?'\n{if} ikä <= 12\n    {print} 'Olet minua nuorempi!'"
+-   name: Suurempi tai yhtäsuuri
+    explanation: Käytämme merkkejä `>=` tarkistaaksemme onko ensimmäinen numero suurempi tai yhtäsuuri kuin jälkimmäinen numero.
+    demo_code: "ikä = {ask} 'Kuinka vanha olet?'\n{if} ikä >= 14\n    {print} 'Olet minua vanhempi!'"
 1:
 -   name: '{print}'
     explanation: Tulosta jotain komennolla `{print}`.
@@ -134,36 +134,36 @@
 9:
 -   name: '{if} monelle riville'
     explanation: The answer of a sum of questions with `{ask}` and see if it is correct. Now we print out two lines.
-    demo_code: "answer = {ask} 'What is 10 plus 10?'\n{if} answer {is} 20\n    {print} 'Well done!!'\n    {print} 'The answer is indeed' answer\n{else}\n    {print} 'Wrong'\n    {print} 'The answer is 20'"
--   name: '{repeat} with turtle'
-    explanation: Repeat multiple lines.
+    demo_code: "vastaus = {ask} 'Paljonko on 10 plus 10?'\n{if} vastaus {is} 20\n    {print} 'Hienoa!!'\n    {print} 'Vastaus on tosiaan' vastaus\n{else}\n    {print} 'Väärin'\n    {print} 'Vastaus on 10'"
+-   name: '{repeat} kilpikonnan kanssa'
+    explanation: Toista monta riviä.
     demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
 10:
 -   name: '{print}'
     explanation: Print something. Remember to use a quotation mark for literal printing.
-    demo_code: "{print} '5 times 5 is ' 5 * 5"
--   name: '{for} with a list'
-    explanation: Print all things in a list.
-    demo_code: "animals {is} dog, cat, blobfish\n{for} animal {in} animals\n  {print} 'I love ' animal"
+    demo_code: "{print} '5 kertaa 5 on ' 5 * 5"
+-   name: '{for} listojen kanssa'
+    explanation: Tulosta kaikki asiat listasta.
+    demo_code: "eläimet {is} koira, kissa, kala\n{for} eläin {in} eläimet\n  {print} eläin 'on ihana'"
 11:
--   name: '{for} loop'
-    explanation: We can use `{for}` with a `{range}`.
-    demo_code: "{for} counter {in} {range} 1 {to} 5\n    {print} counter"
+-   name: '{for} silmukka'
+    explanation: Voimme käyttää komentoa `{for}` komennon `{range}` kanssa.
+    demo_code: "{for} laskuri {in} {range} 1 {to} 5\n    {print} laskuri"
 -   name: '{ask}'
-    explanation: Ask for the answer to a sum and check if it is correct. We can now print 2 lines.
-    demo_code: "answer = {ask} 'What is 5 plus 5?'\n{if} answer {is} 10\n    {print} 'Well done!'\n    {print} 'Indeed, the answer was ' answer\n{else}\n    {print} 'Oops!'\n    {print} 'The answer is 10'"
+    explanation: Kysy vastausta ja tarkista, onko se oikein. Voimme nyt tulostaa 2 riviä.
+    demo_code: "vastaus = {ask} 'Paljonko on 5 + 5?'\n{if} vastaus {is} 10\n    {print} 'Hienoa!'\n    {print} 'Vastaus on tosiaan ' answer\n{else}\n    {print} 'Oho!'\n    {print} 'Vastaus on 10'"
 13:
 -   name: '{and}'
-    explanation: Two parts both need to be correct.
-    demo_code: "answer1 = {ask} 'What is 3+2?'\nanswer2 = {ask} 'What is 2+2?'\n{if} answer1 {is} 5 {and} answer2 {is} 4\n    {print} 'Both answers are correct!'\n{else}\n    {print} 'At least one answer is wrong!'"
+    explanation: Kaksi osaa joiden molempien on oltava oikein.
+    demo_code: "vastaus1 = {ask} 'Paljonko on 3+2'\nvastaus2 = {ask} 'Paljonko on 2+2?'\n{if} vastaus1 {is} 5 {and} vastaus2 {is} 4\n    {print} 'Molemmat vastaukset ovat oikein!'\n{else}\n    {print} 'Ainakin toinen vastauksista on väärin!'"
 -   name: '{or}'
-    explanation: At least 1 of the two parts need to be correct. If both are correct, it is also fine.
-    demo_code: "answer1 = {ask} 'What is 3+2?'\nanswer2 = {ask} 'What is 2+2?'\n{if} answer1 {is} 5 {or} answer2 {is} 4\n    {print} 'At least one answer is correct!'\n{else}\n    {print} 'Both answers are wrong!'"
+    explanation: Ainakin toisen vastauksista on oltava oikein. Jos molemmat vastaukset ovat oikein, sekin on ok.
+    demo_code: "vastaus1 = {ask} 'Paljonko on 3+2'\nvastaus2 = {ask} 'Paljonko on 2+2?'\n{if} vastaus1 {is} 5 {or} vastaus2 {is} 4\n    {print} 'Ainakin toinen vastauksista on oikein!'\n{else}\n    {print} 'Molemmat vastaukset ovat väärin!'"
 15:
 -   name: '{while}'
-    explanation: We can use the `{while}` loop with not equal.
-    demo_code: "answer = 0\n{while} answer != 25\n    answer = {ask} 'What is 5 times 5?'\n{print} 'A correct answer has been given'"
--   name: Smaller {while}
+    explanation: Voimme käyttää `{while}` silmukkaa erisuuruuden kanssa.
+    demo_code: "vastaus = 0\n{while} vastaus != 25\n    vastaus = {ask} 'Paljonko on 5 kertaa 5?'\n{print} 'Oikea vastaus on annettu'"
+-   name: Pienempi {while}
     explanation: We can also use the `{while}` loop with `<` and `>`.
     demo_code: "count = 1\n{while} count < 3\n    {print} 'We do this ' 3 - count ' more times'\n    count = count + 1\n{print} 'We are done'"
 16:
