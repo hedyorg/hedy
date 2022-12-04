@@ -1,15 +1,15 @@
 7:
 -   name: '{print}'
-    explanation: Print exactly using quotation marks.
-    demo_code: "{print} 'Hello welcome to Hedy.'"
+    explanation: Tulosta tarkasti käyttäen heittomerkkejä.
+    demo_code: "{print} 'Tervetuloa Hedyn pariin.'"
 -   name: '{ask}'
-    explanation: Ask something with `{ask}`.
-    demo_code: "color = {ask} 'What is your favorite color?'\n{print} color ' is your favorite!'"
+    explanation: Kysy jotain komennolla `{ask}`.
+    demo_code: "väri = {ask} 'Mikä on lempivärisi?'\n{print} väri ' on lempivärisi!'"
 -   name: '{if}'
-    explanation: Make a choice with `{if}`.
-    demo_code: "color = {ask} 'What is your favorite color?'\n{if} color {is} green {print} 'pretty!' {else} {print} 'meh'"
--   name: '{repeat} with turtle'
-    explanation: Repeat a line of code with `{repeat}`.
+    explanation: Tee valinta komennolla `{if}`.
+    demo_code: "väri = {ask} 'Mikä on lempivärisi?'\n{if} väri {is} vihreä {print} 'hieno!' {else} {print} 'plääh'"
+-   name: '{repeat} kilpikonnan kanssa'
+    explanation: Toista koodirivi komennolla `{repeat}`.
     demo_code: '{repeat} 3 {times} {forward} 10'
 12:
 -   demo_code: "{print} 'Calculate away!'\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n"
@@ -45,94 +45,94 @@
     demo_code: "age = {ask} 'How old are you?'\n{if} age >= 14\n    {print} 'You are older than me!'"
 1:
 -   name: '{print}'
-    explanation: Print something with `{print}`.
-    demo_code: '{print} Hello welcome to Hedy!'
+    explanation: Tulosta jotain komennolla `{print}`.
+    demo_code: '{print} Hei! Tervetuloa Hedyn pariin!'
 -   name: '{ask}'
-    explanation: Ask something with `{ask}`.
-    demo_code: '{ask} What is your favorite color?'
+    explanation: Kysy jotain komennolla `{ask}`.
+    demo_code: '{ask} Mikä on lempivärisi?'
 -   name: '{echo}'
-    explanation: Repeat something using `{echo}`.
-    demo_code: "{ask} What is your favorite color?\n{echo} so your favorite color is"
--   name: '{print} emojis'
-    explanation: Print an emoji with `{print}`.
+    explanation: Toista jotain komennolla `{echo}`.
+    demo_code: "{ask} Mikä on lempivärisi?\n{echo} lempivärisi on siis"
+-   name: '{print} emojit'
+    explanation: Tulosta emoji komennolla `{print}`.
     demo_code: '{print} 🙋 🌍 ❗'
 -   name: '{forward}'
-    explanation: Draw a line with `{forward}`.
+    explanation: Piirrä viiva komennolla `{forward}`.
     demo_code: '{forward} 100'
 -   name: '{turn}'
-    explanation: Turn the drawing turtle with `{turn}`.
+    explanation: Käännä piirtävä kilpikonna komennolla `{turn}`.
     demo_code: "{forward} 25\n{turn} {left}\n{forward} 25\n{turn} {right}"
 2:
 -   name: '{is}'
-    explanation: Give a word a name to use in the program using `{is}`. You can choose the name yourself.
-    demo_code: "name {is} Hedy\n{print} welcome name"
+    explanation: Anna sanalle nimi jota voit käyttää myöhemmin ohjelmassa komennolla `{is}`. Voit valita nimen itse.
+    demo_code: "nimi {is} Hedy\n{print} Tervetuloa nimi"
 -   name: '{ask}'
-    explanation: Ask something with `{ask}`. Beware! You need to give the answer a name with `{is}`.
-    demo_code: "color {is} {ask} What is your favorite color?\n{print} color is your favorite!"
+    explanation: Kysy jotain komennolla `{ask}`. Huomaa että sinun on annettava vastaukselle nimi käyttämällä komentoa `{is}`.
+    demo_code: "väri {is} {ask} Mikä on lempivärisi?\n{print} väri on lempivärisi!"
 -   name: '{sleep}'
-    explanation: '`{sleep}` let Hedy pause for a (couple of) second(s).'
-    demo_code: "{print} Let me think for one second...\n{sleep}\n{print} Hmm.. I need 3 more seconds...\n{sleep} 3\n{print} Eureka! Ive got it!"
--   name: '{is} with turtle'
-    explanation: Give a number a name using `{is}`. You can choose the name yourself.
-    demo_code: "angle {is} 90\n{turn} angle\n{forward} 100"
+    explanation: '`{sleep}` anna Hedyn pitää (muutama) sekunti taukoa.'
+    demo_code: "{print} Annas kun ajattelen sekunnin...\n{sleep}\n{print} Hmm.. Tarvitsen vielä 3 sekuntia...\n{sleep} 3\n{print} Heureka! Keksin sen!"
+-   name: '{is} kilpikonnan kanssa'
+    explanation: Anna numerolle nimi käyttäen komentoa `{is}`. Voit valita nimen itse.
+    demo_code: "kulma {is} 90\n{turn} kulma\n{forward} 100"
 3:
--   name: Choose random
-    explanation: Choose a random word from a group with `{at}` and `{random}`.
-    demo_code: "animals {is} dog, cat, kangaroo\n{print} animals {at} {random}"
+-   name: Valitse satunnainen
+    explanation: Valitse satunnainen sana listasta komennoilla `{at}` ja `{random}`.
+    demo_code: "eläimet {is} koira, kissa, kenguru\n{print} eläimet {at} {random}"
 -   name: '{add}'
-    explanation: '`{add}` an item `{to_list}` a list.'
-    demo_code: "animals {is} cow, cat\n{add} dog {to_list} animals"
+    explanation: '`{add}` asia `{to_list}`.'
+    demo_code: "eläimet {is} lehmä, kissa\n{add} koira {to_list} eläimet"
 -   name: '{remove}'
-    explanation: '`{remove}` an item `{from}` a list.'
-    demo_code: "animals {is} cat, dog, cow\n{remove} dog {from} animals"
+    explanation: '`{remove}` asia `{from}`.'
+    demo_code: "eläimet {is} kissa, koira, lehmä\n{remove} koira {from} eläimet"
 4:
 -   name: '{print}'
-    explanation: Print exactly using quotation marks.
-    demo_code: "{print} 'Hello welcome to Hedy.'"
+    explanation: Tulosta tarkasti käyttäen lainausmerkkejä.
+    demo_code: "{print} 'Hei! Tervetuloa Hedyn pariin.'"
 -   name: '{is}'
-    explanation: Give a name to some text and `{print}` without quotation marks.
-    demo_code: "name {is} Hedy\n{print} 'my name is ' name"
+    explanation: Anna tekstinpätkälle nimi ja käytä komentoa `{print}` ilman lainausmerkkejä.
+    demo_code: "nimi {is} Hedy\n{print} 'minun nimeni on' nimi"
 -   name: '{ask}'
-    explanation: Ask something with `{ask}`.
-    demo_code: "color {is} {ask} 'What is your favorite color?'\n{print} color ' is your favorite!'"
+    explanation: Kysy jotain komennolla `{ask}`.
+    demo_code: "väri {is} {ask} 'Mikä on lempivärisi?'\n{print} väri ' on lempivärisi!'"
 5:
 -   name: '{print}'
-    explanation: Print exactly using quotation marks.
-    demo_code: "{print} 'Hello welcome to Hedy.'"
+    explanation: Tulosta tarkasti käyttäen heittomerkkejä.
+    demo_code: "{print} 'Tervetuloa Hedyn pariin.'"
 -   name: '{ask}'
-    explanation: Ask something with `{ask}`.
-    demo_code: "color {is} {ask} 'What is your favorite color?'\n{print} color ' is your favorite!'"
+    explanation: Kysy jotain komennolla `{ask}`.
+    demo_code: "väri {is} {ask} 'Mikä on lempivärisi?'\n{print} väri ' on lempivärisi!'"
 -   name: '{if}'
-    explanation: Make a choice with `{if}`.
-    demo_code: "color {is} {ask} 'What is your favorite color?'\n{if} color {is} green {print} 'pretty!' {else} {print} 'meh'"
--   name: '{if} with turtle'
-    explanation: Make a choice with `{if}`.
-    demo_code: "answer {is} {ask} 'How far should I walk?'\n{if} answer {is} far {forward} 100 {else} {forward} 5"
+    explanation: Tee valinta komennolla `{if}`.
+    demo_code: "väri {is} {ask} 'Mikä on lempivärisi?'\n{if} väri {is} vihreä {print} 'hieno!' {else} {print} 'plääh'"
+-   name: '{if} kilpikonnan kanssa'
+    explanation: Tee valinta komennolla `{if}`.
+    demo_code: "vastaus {is} {ask} 'Kuinka pitkälle minun pitäisi kävellä?'\n{if} vastaus {is} kauas {forward} 100 {else} {forward} 5"
 -   name: '{in}'
-    explanation: Check elements with `{in}`.
-    demo_code: "pretty_colors {is} green, yellow\ncolor {is} {ask} 'What {is} your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
+    explanation: Tarkista onko asia listassa komennolla `{in}`.
+    demo_code: "hienot_värit {is} vihreä, keltainen\nväri {is} {ask} 'Mikä on lempivärisi?'\n{if} väri {in} hienot_värit {print} 'hieno!' {else} {print} 'plääh'"
 6:
 -   name: '{print}'
-    explanation: Print exactly using quotation marks.
-    demo_code: "{print} '5 times 5 is ' 5 * 5"
+    explanation: Tulosta tarkasti käyttäen heittomerkkejä.
+    demo_code: "{print} '5 kertaa 5 on ' 5 * 5"
 -   name: '{ask}'
-    explanation: Ask for a calculation and check whether it is correct.
-    demo_code: "answer = {ask} 'What is 10 plus 10?'\n{if} answer {is} 20 {print} 'Yes!' {else} {print} 'Oops'"
--   name: '{ask} and {if} with turtle'
-    explanation: Ask the user how many angles they want.
+    explanation: Kysy laskun tulos ja tarkista onko se oikein.
+    demo_code: "vastaus = {ask} 'Paljonko on 10 plus 10?'\n{if} vastaus {is} 20 {print} 'Kyllä!' {else} {print} 'Oho'"
+-   name: '{ask} ja {if} kilpikonnan kanssa'
+    explanation: ''
     demo_code: "angles = {ask} 'How many angles?'\nangle = 360 / angles\n{forward} 50"
 8:
 -   name: '{print}'
-    explanation: Print something. Remember to use a quotation mark for literal printing.
-    demo_code: "{print} '5 times 5 is ' 5 * 5"
+    explanation: Tulosta jotain. Muista käyttää lainausmerkkejä.
+    demo_code: "{print} '5 kertaa 5 on ' 5 * 5"
 -   name: '{ask}'
-    explanation: Ask for the answer to a sum and check if it is correct. We can now print 2 lines.
-    demo_code: "answer = {ask} 'What is 5 plus 5?'\n{if} answer {is} 10\n    {print} 'Well done!'\n    {print} 'Indeed, the answer was ' answer\n{else}\n    {print} 'Oops!'\n    {print} 'The answer is 10'"
--   name: '{repeat} with turtle'
-    explanation: Repeat multiple lines.
+    explanation: Kysy vastausta ja tarkista, onko se oikein. Voimme nyt tulostaa 2 riviä.
+    demo_code: "vastaus = {ask} 'Paljonko on 5 + 5?'\n{if} vastaus {is} 10\n    {print} 'Hienoa!'\n    {print} 'Vastaus on tosiaan ' answer\n{else}\n    {print} 'Oho!'\n    {print} 'Vastaus on 10'"
+-   name: '{repeat} kilpikonnan kanssa'
+    explanation: Toista monta riviä.
     demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
 9:
--   name: '{if} with multiple lines'
+-   name: '{if} monelle riville'
     explanation: The answer of a sum of questions with `{ask}` and see if it is correct. Now we print out two lines.
     demo_code: "answer = {ask} 'What is 10 plus 10?'\n{if} answer {is} 20\n    {print} 'Well done!!'\n    {print} 'The answer is indeed' answer\n{else}\n    {print} 'Wrong'\n    {print} 'The answer is 20'"
 -   name: '{repeat} with turtle'
