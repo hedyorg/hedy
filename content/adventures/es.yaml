@@ -404,7 +404,7 @@ adventures:
                 story_text_2: "## 5 Monos saltando en la cama\nEsta canción de niños cuenta desde 5 monos hasta un mono.\n¡Si copias las líneas 2 a 7 debajo del código, puedes cantar toda la canción!\n"
             12:
                 example_code: "```\n_ acciones = 'aplaude', 'mueve los pies así', '¡grita hurra!'\n_ {for} accion {in} acciones\n_ {for} i {in} {range} 1 {to} 2\n_ {print} 'si estás feliz y lo sabes'\n_ {print} accion\n_ {print} 'Si en verdad estas contento tu sonrisa es el reflejo'\n_ {print} 'si estás feliz y lo sabes'\n_ {print} accion\n```\n"
-                story_text: "## ¡Canta una canción!\nEn esta canción, podemos programar aún más fácil `si estás feliz y lo sabes, aplaude`. Ya que podemos poner todas las acciones en una variable, mira esto:\n\n## Ejercicio\n¿Puedes a agregar la cantidad justa de sangría a cada línea para que la canción se reproduzca correctamente?\nAyuda: no todas las líneas necesitan sangría\n"
+                story_text: "## ¡Canta una canción!\nEn esta canción, podemos programar aún más fácil `si estás feliz y lo sabes, aplaude`. Ya que podemos poner todas las acciones en una variable, mira esto:\n\n## Ejercicio\n¿Puedes agregar la cantidad justa de sangría a cada línea para que la canción se reproduzca correctamente?\nPista: no todas las líneas necesitarán sangría\n"
                 start_code: '# pon tu código aquí'
             11:
                 story_text: "## Canciones\nEn este nivel, podrás usar el comando `{for} i {in} {range}` para crear canciones que utilizan cuentas, como cinco pequeños monitos.\n\n## Desafío\n¡Rellena los espacios y haz que el código funcione!\n"
@@ -702,12 +702,12 @@ adventures:
                     ¿Puedes hacer que el código obtenga la puntuación total por 8 dados? Para hacer eso tienes que cortar y copiar algunas líneas de código.
                 example_code: |
                     ```
-                    opciones = 1, 2, 3, 4, 5, gusanito
+                    opciones = 1, 2, 3, 4, 5, tierra
                     puntos = 0
-                    tirada = opciones {at} {random}
-                    {print} 'tiraste un' tirada
-                    {if} tirada {is} gusanito puntos = puntos + 5 {else} puntos = puntos + tirada
-                    {print} 'esos son ' puntos ' puntos'
+                    tirar = opciones {at} {random}
+                    {print} 'tú lanzaste' tirar
+                    {if} rodar {is} puntos de suelo = puntos + 5 {else} puntos = puntos + rodar
+                    {print} 'este' puntos 'punto'
                     ```
 
                 start_code: "{print} '¿Qué salió esta vez?'"
