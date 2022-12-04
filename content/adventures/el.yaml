@@ -13,21 +13,21 @@ adventures:
 
                     Πάτησε το πράσινο κουμπί και ο κώδικας θα πληκτρολογηθεί για σένα.
                     Δοκίμασε και εσύ τον κώδικα πατώντας το πράσινο κουμπί 'Εκτέλεσε κώδικα' κάτω από το αριστερό προγραμματιστικό πεδίο.
-                start_code: 'print γειά σου κόσμε!'
+                start_code: '{print} γειά σου κόσμε!'
                 example_code: "```\n{print} Γεια!\n{print} Καλώς ήρθες στη Hedy!\n```\n"
                 story_text_2: "Μπορείς επίσης να ζητήσεις δεδομένα εισόδου και  να τα επαναλάβεις με μια εντολή  `{echo}`.\nΔοκίμασε τον κώδικα στα αριστερά σου πάλι. \n\nΔεν ξέρεις τι δημιούργησες;  Στις επόμενες καρτέλες θα βρεις ιδέες για προγράμματα προς κατασκευή.\n"
                 example_code_2: "```\n{ask} Ποιο είναι το όνομά σου;\n{echo} γεια\n```\n"
                 story_text_3: "Ας ξεκινήσουμε! Δεν ξέρετε τι να δημιουργήσετε; Στις επόμενες καρτέλες θα βρείτε ιδέες για προγράμματα να φτιάξετε.\n"
             2:
                 story_text: |
-                    Στο επίπεδο 2 θα μάθουμε κάτι καινούριο. Μπορείς να ορίσεις μια λέξη με την `is`.  Μπορείς να χρησιμοποιήσεις τη λέξη οπουδήποτε στον κώδικά σου και θα αντικατασταθεί από την Hedy, ως εξής:
+                    Στο επίπεδο 2 θα μάθουμε κάτι καινούριο. Μπορείς να ορίσεις μια λέξη με την `{is}`.  Μπορείς να χρησιμοποιήσεις τη λέξη οπουδήποτε στον κώδικά σου και θα αντικατασταθεί από την Hedy, ως εξής:
 
-                    Σημείωση: Η `ask` έχει αλλάξει, μπορείς να αποθηκεύσεις την απάντηση με ένα όνομα , κάπως έτσι.
+                    Σημείωση: Η `{ask}` έχει αλλάξει, μπορείς να αποθηκεύσεις την απάντηση με ένα όνομα , κάπως έτσι.
 
-                    Η print λειτουργεί όπως και στο επίπεδο 1, και πλέον δεν χρειάζεσαι την `echo`.
+                    Η {print} λειτουργεί όπως και στο επίπεδο 1, και πλέον δεν χρειάζεσαι την `{echo}`.
 
                     Μια νέα εντολή  σ' αυτό το επίπεδο είναι η `{sleep}`, η οποία σταματάει το πρόγραμμα για ένα δευτερόλεπτο. Αν πλητρολογήσεις έναν αριθμό μετά την εντολή   `{sleep}`, το πρόγραμμα θα σταματήσει για τόσα δευτερόλεπτα όσα ο αριθμός που έθεσες.
-                start_code: 'print γεια σου κόσμε!'
+                start_code: '{print} γεια σου κόσμε!'
                 example_code: |-
                     ```
                     name {is} Χέντι
@@ -47,13 +47,13 @@ adventures:
                     ```
             3:
                 story_text: |
-                    Στο επίπεδο 3 μπορείς να δημιουργήσεις μια λίστα. Μπορείς να αφήσεις τον υπολογιστή να επιλέξει κάτι τυχαία από τη λίστα. Αυτό γίνεται με τη χρήση της `at random`.
-                start_code: 'print γεια σου κόσμε!'
+                    Στο επίπεδο 3 μπορείς να δημιουργήσεις μια λίστα. Μπορείς να αφήσεις τον υπολογιστή να επιλέξει κάτι τυχαία από τη λίστα. Αυτό γίνεται με τη χρήση της `{at} {random}`.
+                start_code: '{print} γεια σου κόσμε!'
                 example_code: "```\nanimals {is} σκύλος, γάτα, καγκουρό\n{print} animals {at} {random}\n```\n"
                 story_text_2: Μπορείς επίσης να προσθέσεις στοιχεία με την `{add}` και να αφαιρέσεις με την `{remove}`.
                 example_code_2: "\n```\nanimals {is} σκύλος, γάτα, καγκουρό\n{add} πιγκουίνος {to_list} animals\n{remove} γάτα {from} animals\n{print} animals {at} {random}\n```\n"
             4:
-                start_code: "print 'Γεια σου κόσμε'"
+                start_code: "{print} 'Γεια σου κόσμε'"
                 story_text: |
                     Στο επίπεδο 4  οι εντολές `{ask}` and `{print}` αλλάζουν.
 
@@ -66,16 +66,16 @@ adventures:
                     ## Οι ασκήσεις γίνονται ολοένα και πιο δύσκολες
                     Θα βρεις τις εντολές στα αριστερά και πάλι, και τις ασκήσεις στις ακόλουθες καρτέλες. Οι ασκήσεις πλέον γίνονται όλο και πιο δύσκολες στις διαδοχικές καρτέλες. 
                     Έτσι, είναι καλύτερα να ξεκινήσεις από τα αριστερά με την ιστορία, και να δουλεύεις στα δεξιά, έτσι ώστε να προσπαθείς όλο και περισσότερο.
-                example_code: "```\nprint 'You need to use quotation marks from now on!'\nanswer is ask 'What do we need to use from now on?'\nprint 'We need to use ' answer\n```\n"
+                example_code: "```\n{print}'You need to use quotation marks from now on!'\nanswer is ask 'What do we need to use from now on?'\n{print}'We need to use ' answer\n```\n"
                 story_text_2: "## Adventures are getting more and more difficult\nThe adventures are now getting more and more difficult in the successive tabs.\nSo it is best to start on the left with the story, and work to the right, in order to be challenged more and more.\n"
             5:
                 start_code: |-
-                    name is ask 'Ποιό είναι το όνομά σου;'
-                    if name is Hedy print 'τέλεια!' else print 'έτσι κι έτσι'
+                    name {is} {ask} 'Ποιό είναι το όνομά σου;'
+                    {if} name {is} Hedy {print} 'τέλεια!' {else} {print} 'έτσι κι έτσι'
                 story_text: |
-                    Οι `ask` και `print` λειτουργούν ακριβώς όπως στο επίπεδο 4.
+                    Οι `{ask}` και `{print}` λειτουργούν ακριβώς όπως στο επίπεδο 4.
 
-                    Στο επίπεδο 5 υπάρχει κάτι νέο, η εντολή `if`! Με την `if` μπορείς να διαλέξεις ανάμεσα σε δύο διαφορετικές επιλογές.
+                    Στο επίπεδο 5 υπάρχει κάτι νέο, η εντολή `{if}`! Με την `{if}` μπορείς να διαλέξεις ανάμεσα σε δύο διαφορετικές επιλογές.
 
 
                     Όταν θέλουμε να ελέγξουμε ότι κάτι είναι μέσα σε μια λίστα, μπορούμε τώρα να χρησιμοποιούμε το `in` ανάμεσα στο πράγμα και τη λίστα.
@@ -88,7 +88,7 @@ adventures:
                 example_code: |-
                     ```
                     name {is} {ask} 'ποιο είναι το όνομά σου;'
-                    {if} name {is} Hedy print 'ωραία' else print 'μπου!'
+                    {if} name {is} Hedy {print} 'ωραία' {else} {print} 'μπου!'
                     ```
                 story_text_3: "## Lists\nWhen we want to check if something is in a list, we can now use the `{in}` command.\nThis code prints pretty! if you choose green or yellow, and meh otherwise.\n"
                 example_code_3: |-
@@ -107,9 +107,9 @@ adventures:
                     {else} {print} 'μπου!'
                     ```
             6:
-                start_code: "print '5 επί 5 ίσον με ' 5 * 5"
+                start_code: "{print} '5 επί 5 ίσον με ' 5 * 5"
                 story_text: |
-                    Οι `ask`, `print` και `if` είναι ακόμα ίδιες όπως και στο επίπεδο 5.
+                    Οι `{ask}`, `{print}` και `{if}` είναι ακόμα ίδιες όπως και στο επίπεδο 5.
                     Αλλά στο επίπεδο 6 μαθαίνεις κάτι καινούριο: πλέον μπορείς να κάνεις υπολογισμούς.
 
                     Το συν είναι εύκολο, το γράφεις όπως στα μαθηματικά: για παράδειγμα `5+5`. Το πλην επίσης λειτουργεί μια χαρά, έτσι `5-5`.
@@ -121,9 +121,9 @@ adventures:
 
                 example_code: |-
                     ```
-                    print '5 συν 5 κάνει ' 5 + 5
-                    print '5 πλην 5 κάνει ' 5 - 5
-                    print '5 επί 5 κάνει ' 5 * 5
+                    {print} '5 συν 5 κάνει ' 5 + 5
+                    {print} '5 πλην 5 κάνει ' 5 - 5
+                    {print} '5 επί 5 κάνει ' 5 * 5
                     ```
                 story_text_2: "We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:\n"
                 example_code_2: |-
@@ -132,75 +132,75 @@ adventures:
                     answer = 20 + 4
                     ```
             7:
-                start_code: "repeat 3 times print 'Η Hedy είναι διασκεδαστική!'"
+                start_code: "{repeat} 3 {times} {print} 'Η Hedy είναι διασκεδαστική!'"
                 story_text: |
-                    Οι `ask`, `print` και `if` λειτουργούν ακριβώς όπως και στο επίπεδο 5 και 6.
-                    Όμως, το επίπεδο 7 προσθέτει την εντολή `repeat`. H repeat (επανάληψη) μπορεί να χρησιμοποιηθεί για να εκτελέσουμε μια γραμμή κώδικα πολλές φορές.
+                    Οι `{ask}`, `{print}` και `{if}` λειτουργούν ακριβώς όπως και στο επίπεδο 5 και 6.
+                    Όμως, το επίπεδο 7 προσθέτει την εντολή `{repeat}`. H {repeat} (επανάληψη) μπορεί να χρησιμοποιηθεί για να εκτελέσουμε μια γραμμή κώδικα πολλές φορές.
                 example_code: |-
                     ```
-                    repeat 3 times print 'H Hedy είναι διασκεδαστική!'
+                    {repeat} 3 {times} {print} 'H Hedy είναι διασκεδαστική!'
                     ```
             8:
                 start_code: |-
-                    repeat 5 times
-                        print 'Γειά σας παιδιά'
-                        print 'Αυτό θα εμφανιστεί 5 φορές'
+                    {repeat} 5 {times}
+                        {print} 'Γειά σας παιδιά'
+                        {print} 'Αυτό θα εμφανιστεί 5 φορές'
                 story_text: |
-                    Οι ask και print λειτουργούν ακόμα όπως τις γνωρίζεις. Όμως, οι if και repeat έχουν αλλάξει!
+                    Οι {ask} και {print} λειτουργούν ακόμα όπως τις γνωρίζεις. Όμως, οι {if} και {repeat} έχουν αλλάξει!
                     Τώρα μπορείτε να εκτελείς μαζί ομάδες κώδικα, αλλά θα πρέπει να βάλεις εσοχή στον κώδικα.
                     Αυτό σημαίνει να προσθέσεις τέσσερα κενά στην αρχή της γραμμής. Το ίδιο ισχύει όταν θέλεις να δημιουργήσεις ένα μπλοκ μιας γραμμής.
                 example_code: |-
                     ```
-                    repeat 5 times
-                        print 'Γεια σας'
-                        print 'Αυτό θα επαναληφθεί 5 φορές'
+                    {repeat} 5 {times}
+                        {print} 'Γεια σας'
+                        {print} 'Αυτό θα επαναληφθεί 5 φορές'
                     ```
             9:
                 start_code: |-
-                    repeat 3 times
-                        food = ask 'Τι θέλεις;'
-                        if food is 'πίτσα'
-                            print 'ωραία!'
-                        else
-                            print 'η πίτσα είναι καλύτερη!'
+                    {repeat} 3 {times}
+                        food = {ask} 'Τι θέλεις;'
+                        {if} food {is} 'πίτσα'
+                            {print} 'ωραία!'
+                        {else}
+                            {print} 'η πίτσα είναι καλύτερη!'
                 story_text: |
-                    Σ΄αυτό το επίπεδο όχι μόνον μπορείς να χρησιμοποιήσεις πολλές γραμμές στις εντολές `if` and `repeat`, αλλά μπορέις και να τις τοποθετήσεις μαζί! 
-                    Στο παρακάτω παράδειγμα βλέπεις μια εντολή  `if` μέσα σε μια εντολή `repeat`. Μπορεί να χρησιμοποιηθεί και αντίστροφα, επιτέπεται επίσης και ένα `if` μέσα σε ένα `if` και ένα `repeat` μέσα σε ένα `repeat`.
+                    Σ΄αυτό το επίπεδο όχι μόνον μπορείς να χρησιμοποιήσεις πολλές γραμμές στις εντολές `{if}` and `{repeat}`, αλλά μπορέις και να τις τοποθετήσεις μαζί! 
+                    Στο παρακάτω παράδειγμα βλέπεις μια εντολή  `{if}` μέσα σε μια εντολή `{repeat}`. Μπορεί να χρησιμοποιηθεί και αντίστροφα, επιτέπεται επίσης και ένα `{if}` μέσα σε ένα `{if}` και ένα `{repeat}` μέσα σε ένα `{repeat}`.
                     Δοκίμασέ το!
 
                 example_code: |-
                     ```
-                    repeat 3 times
-                        food = ask 'Τι θέλεις;'
-                        if food is 'πίτσα'
-                            print 'ωραία!'
-                        else
-                            print 'η πίτσα είναι καλύτερη!'
+                    {repeat} 3 {times}
+                        food = {ask} 'Τι θέλεις;'
+                        {if} food {is} 'πίτσα'
+                            {print} 'ωραία!'
+                        {else}
+                            {print} 'η πίτσα είναι καλύτερη!'
                     ```
             10:
                 start_code: |-
-                    animals is dog, cat, blobfish
-                    for animal in animals
-                      print 'I love ' animal
+                    animals {is} dog, cat, blobfish
+                    {for} animal {in} animals
+                      {print} 'I love ' animal
                 story_text: |
-                    In this level we learn a new code called `for`. With `for` you can make a list and use all elements.
-                    `for` creates a block, like `repeat` and `if` so all lines in the block need to start with spaces.
+                    In this level we learn a new code called `{for}`. With `{for}` you can make a list and use all elements.
+                    `{for}` creates a block, like `{repeat}` and `{if}` so all lines in the block need to start with spaces.
                 example_code: |-
                     ```
-                    animals is dog, cat, blobfish
-                    for animal in animals
-                      print 'I love ' animal
+                    animals {is} dog, cat, blobfish
+                    {for} animal {in} animals
+                      {print} 'I love ' animal
                     ```
             11:
                 start_code: |-
                     {for} counter {in} {range} 1 {to} 5
                         {print} counter
-                story_text: 'Η `print` λειτουργεί ακριβώς όπως και πριν, όμως η `repeat` τώρα αντικαθίσταται από τη `for`! Θα χρησιμοποιείς `for i in range 1 to 5`, αντί για `repeat 5 times`. Μπορείς επίσης να χρησιμοποιείς το `i` στο πρόγραμμα σου! Θυμήσου να χρησιμοποιείς εσοχές ύστερα από κάθε δήλωση `for` και `if` (Αυτό σημαίνει να ξεκινάς μια πρόταση με 4 κενά)'
-                example_code: "```\nfor counter in range 1 to 5\n    print counter\n```\n"
+                story_text: 'Η `{print}` λειτουργεί ακριβώς όπως και πριν, όμως η `{repeat}` τώρα αντικαθίσταται από τη `{for}`! Θα χρησιμοποιείς `{for} i {in} {range} 1 {to} 5`, αντί για `{repeat} 5 {times}`. Μπορείς επίσης να χρησιμοποιείς το `i` στο πρόγραμμα σου! Θυμήσου να χρησιμοποιείς εσοχές ύστερα από κάθε δήλωση `{for}` και `{if}` (Αυτό σημαίνει να ξεκινάς μια πρόταση με 4 κενά)'
+                example_code: "```\n{for} counter {in} {range} 1 {to} 5\n    {print} counter\n```\n"
             12:
                 start_code: |-
-                    print 'decimal numbers now need to use a dot'
-                    print 2.5 + 2.5
+                    {print} 'decimal numbers now need to use a dot'
+                    {print} 2.5 + 2.5
                 story_text: |
                     ## Δεκαδικοί αριθμοί
                     Μέχρι τώρα η Hedy δενεπέτρεπε δεκαδικούς αριθμούς όπως 1.5, αλλά δεν θα το επιτρέψουμε πλέον. Σημείωσε ότι οι υπολογιστές χρησιμοποιούν το `.` για τους δεκαδικούς αριθμούς.
@@ -247,14 +247,14 @@ adventures:
                     ```
                 story_text_5: "**Numbers don't need quotation marks**\nFor numbers, you do not use quotation marks in the `=`:\n"
                 story_text_6: "**Maths with words** In this level it is also allowed to use the + sign with texts. For example:\n"
-                example_code_6: "```\na = 'Hello '\nb = 'world!'\nprint a + b\n```\n"
+                example_code_6: "```\na = 'Hello '\nb = 'world!'\n{print} a + b\n```\n"
             13:
                 start_code: |-
-                    name = ask 'what is your name?'
-                    age = ask 'what is your age?'
-                    if name is 'Hedy' and age is 2
-                        print 'You are the real Hedy!'
-                story_text: Τώρα θα μάθουμε τα `and` και `or`! Αν θέλεις να ελέγξεις δύο δηλώσεις, δεν χρειάζεται να χρησιμοποίησεις δύο if αλλά μπορείς να χρησιμοποιήσεις τα `and` και `or`. Αν χρησιμοποιήσεις τo `and`, και οι δύο προτάσεις, αριστερά και δεξιά από το `and` θα πρέπει να είναι αληθείς. Μπορούμε επίσης να χρησιμοποιήσουμε το `or`. Τότε, μόνο μια πρόταση χρειάζεται να είναι αληθής.
+                    name = {ask} 'what is your name?'
+                    age = {ask} 'what is your age?'
+                    {if} name {is} 'Hedy' {and} age {is} 2
+                        {print} 'You are the real Hedy!'
+                story_text: Τώρα θα μάθουμε τα `{and}` και `{or}`! Αν θέλεις να ελέγξεις δύο δηλώσεις, δεν χρειάζεται να χρησιμοποίησεις δύο if αλλά μπορείς να χρησιμοποιήσεις τα `{and}` και `{or}`. Αν χρησιμοποιήσεις τo `{and}`, και οι δύο προτάσεις, αριστερά και δεξιά από το `{and}` θα πρέπει να είναι αληθείς. Μπορούμε επίσης να χρησιμοποιήσουμε το `{or}`. Τότε, μόνο μια πρόταση χρειάζεται να είναι αληθής.
                 #16:
                 #    start_code: |-
                 #        # Αυτό είναι ένα πρόγραμμα που θα ρωτήσεις κάποιες ερωτήσεις μαθηματικών
@@ -280,14 +280,14 @@ adventures:
                 #            # Δημιουργήθηκε με τη Hedy
                 #            # Δεν κάνει τίποτα άλλο εκτός από το να εμφανίζει Γειά
                 #            print('γειά!')
-                example_code: "```\nname = ask 'what is your name?'\nage = ask 'what is your age?'\nif name is 'Hedy' and age is 2\n    print 'You are the real Hedy!'\n```\n"
+                example_code: "```\nname = {ask} 'what is your name?'\nage = {ask} 'what is your age?'\n{if} name {is} 'Hedy' {and} age {is} 2\n    {print} 'You are the real Hedy!'\n```\n"
             14:
                 start_code: |-
-                    age = ask 'Πόσο χρονών είσαι;'
-                    if age < 13
-                        print 'Είσαι νεότερη από εμένα!'
-                    else
-                        print 'Είσαι μεγαλύτερη από εμένα!'
+                    age = {ask} 'Πόσο χρονών είσαι;'
+                    {if} age < 13
+                        {print} 'Είσαι νεότερη από εμένα!'
+                    {else}
+                        {print} 'Είσαι μεγαλύτερη από εμένα!'
                 story_text: "Θα μάθουμε μερικά ακόμα νέα πράγματα! Ίσως να τα γνωρίζεις ήδη από τα μαθηματικά, τα `<` και `>`. \nΤο `<` ελέγχει αν ο πρώτος αριθμός είναι μικρότερος από τον δεύτερο, πχ `age < 12` ελέγχει αν το  `age` είναι μικρότερο από  12.\nΑν θέλεις να ελέγξεις αν ο πρώτος αριθμός είναι μικρότερος ή ίσος από τον δεύτερο, μπορείς να χρησιμοποιήσεις  `<=`, πχ`age <= 11`.\nΤο `>` ελέγχει αν ο πρώτος αριθμός είναι μεγαλύτερος από τον δεύτερο, πχ `points > 10` ελέγχει αν `points` είναι μεγαλύτερο  από 10.\nΑν θέλεις να ελέγξεις αν ο πρώτος αριθμός είναι μεγαλύτερος ή ίσος από τον δεύτερο, μπορείς να χρησιμοποιήσεις`>=`, πχ `points >= 11`.\nΧρησιμοποιείς αυτές τις συγκρίσεις μέσα σε ένα  `{if}`, ως εξής."
                 example_code: "```\nage = {ask} 'How old are you?'\n{if} age > 12\n    {print} 'You are older than I am!'\n```\n"
                 story_text_2: "From this level on, if you want to compare exactly, you can use two equal signs. This is what most programming languages do:\n"
@@ -297,23 +297,23 @@ adventures:
             15:
                 start_code: |-
                     answer = 0
-                    while answer != 25
-                        answer = ask 'Πόσο κάνει 5 φορές το 5;'
-                    print 'Δόθηκε η σωστή απάντηση'
-                story_text: "Θα μάθουμε ένα νέο βρόχο, το βρόχο `while`! Συνεχίζουμε το βρόχο για όσο η πρόταση είναι αληθής/ορθή! \nΜην ξεχάσεις να αλλάξεις την τιμή στον βρόχο.\n\nΈτσι στο παράδειγμα του κώδικα, συνεχίζουμε ώσπου να δοθεί μια σωστή απάντηση. \nΑν δε δοθεί ποτέ η σωστή απάντηση, ο βρόχος δε θα σταματήσει ποτέ!\n"
-                example_code: "```\nanswer = 0\nwhile answer != 25\n    answer = ask 'What is 5 times 5?'\nprint 'A correct answer has been given'\n```\n"
+                    {while} answer != 25
+                        answer = {ask} 'Πόσο κάνει 5 φορές το 5;'
+                    {print} 'Δόθηκε η σωστή απάντηση'
+                story_text: "Θα μάθουμε ένα νέο βρόχο, το βρόχο `{while}`! Συνεχίζουμε το βρόχο για όσο η πρόταση είναι αληθής/ορθή! \nΜην ξεχάσεις να αλλάξεις την τιμή στον βρόχο.\n\nΈτσι στο παράδειγμα του κώδικα, συνεχίζουμε ώσπου να δοθεί μια σωστή απάντηση. \nΑν δε δοθεί ποτέ η σωστή απάντηση, ο βρόχος δε θα σταματήσει ποτέ!\n"
+                example_code: "```\nanswer = 0\n{while} answer != 25\n    answer = {ask} 'What is 5 times 5?'\n{print} 'A correct answer has been given'\n```\n"
             16:
                 start_code: |-
                     fruit = ['μήλο', 'μπανάνα', 'κεράσι']
-                    print fruit
+                    {print} fruit
                 story_text: "Θα κάνουμε λίστες με τον τρόπο που ακολουθεί η Python, με αγκύλες γύρω από τις λίστες! Επίσης διατηρούμε τα εισαγωγικά γύρω από κάθε στοιχείο 'οπως μάθαμε σε προηγούμενα επίπεδα. \nΜπορείς επίσης να χρησιμοποιήσεις τις αγκύλες για να υποδείξεις μια θέση μέσα στις λίστες. ."
                 example_code: |-
                     \n```\nfriends = ['Μαρία', 'Κώστας', 'Αλκμήνη']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'ο τυχερός αριθμός του/της' friends[i]\n    {print} 'είναι' lucky_numbers[i]\n```\n"
             17:
                 start_code: |-
-                    for i in range 1 to 10:
-                        print i
-                    print 'Έτοιμοι ή όχι, έρχομαι!'
+                    {for} i {in} {range} 1 {to} 10:
+                        {print} i
+                    {print} 'Έτοιμοι ή όχι, έρχομαι!'
                 story_text: "Τώρα θα αλλάξουμε λίγο τις εσοχές. Κάθε φορά που χρειαζόμαστε μια εσοχή, χρειαζόμαστε ένα `:` στη γραμμή πριν την εσοχή.\n\nΣ' αυτό το επίπεδο μπορείς επίσηςνα χρησιμοποιήσει ςμια νέα εντολή: `{elif}`. 'Η`{elif}` είναι σύντμηση των {else} {if}  και θα το χρειαστείς όταν θέλεις να έχεις 2 (ή περισσότερες!) επιλογές. \nΔοκίμασέ το!."
                 example_code: "```\nprices = ['1 εκατομμύριο ευρώ', 'μια μηλόπιτα', 'τίποτα']\nyour_price = prices[random]\n{print} 'Κέρδισες ' your_price\n{if} your_price == '1 εκατομμύριο ευρώ' :\n    {print} 'Είσαι πλούσιος!'\n{elif} your_price == 'μια μηλόπιτα' :\n    {print} 'Ωραιότατα, μια μηλόπιτα!'\n{else}:\n    {print} 'Θα έχεις περισσότερη φορά την επόμενη φορά..'\n```"
             18:
@@ -361,16 +361,16 @@ adventures:
 
                     Σαν πρώτη γραμμή, χρησιμοποίησε αυτόν τον κώδικα `{ask}`.
 
-                    Ύστερα από αυτήν την πρώτη γραμμή, ξεκίνα με την `print` αν η πρόταση χρειάζεται να εμφανιστεί.
-                    Χρησιμοποίησε την `echo` αν θέλεις ο βασικός σου χαρακτήρας να εμφανίζεται στο τέλος της πρότασης.
+                    Ύστερα από αυτήν την πρώτη γραμμή, ξεκίνα με την `{print}` αν η πρόταση χρειάζεται να εμφανιστεί.
+                    Χρησιμοποίησε την `{echo}` αν θέλεις ο βασικός σου χαρακτήρας να εμφανίζεται στο τέλος της πρότασης.
 
                 example_code: |
                     ```
-                    ask Ο βασικός χαρακτήρας της ιστορίας είναι
-                    print Ο βασικός χαρακτήρας της ιστορίας τώρα περπατάει στο δάσος
-                    echo Φοβάται λίγο 
-                    print Ακούει περίεργους ήχους παντού
-                    print Φοβάται πως αυτό είναι ένα στοιχειωμένο δάσος
+                    {ask} Ο βασικός χαρακτήρας της ιστορίας είναι
+                    {print} Ο βασικός χαρακτήρας της ιστορίας τώρα περπατάει στο δάσος
+                    {echo} Φοβάται λίγο 
+                    {print} Ακούει περίεργους ήχους παντού
+                    {print} Φοβάται πως αυτό είναι ένα στοιχειωμένο δάσος
                     ```
 
                     ## Τί ακολουθεί;
@@ -378,7 +378,7 @@ adventures:
                     Είναι κρίμα που μπορείς να δημιουργήσεις μόνο προτάσεις όπου ο βασικός χαρακτήρας είναι στο τέλος της πρότασης, σωστά; Αφού έχεις εξασκηθεί με αυτήν την ιστορία, προχώρησε στο επίπεδο 2 και μετά στο επίπεδο 3, όπου μπορείς να δημιουργήσεις περισσότερα και πιο σύνθετα προγράμματα.
 
 
-                start_code: "print Η ιστορία σου ξεκινά εδώ"
+                start_code: "{print} Η ιστορία σου ξεκινά εδώ"
                 story_text_2: "## Challenge\nCan you make your own story in Hedy now by using `{print}` , `{ask}` and `{echo}`?\n"
             2:
                 story_text: |
@@ -391,28 +391,28 @@ adventures:
 
                 example_code: |
                     ```
-                    name is ask What is the name of the main character?
-                    print name is now going to run in the woods
-                    print name is a bit scared
-                    print He hears crazy noises everywhere
-                    print name is afraid this is a haunted forest
+                    name {is} {ask} What is the name of the main character?
+                    {print} name {is} now going to run in the woods
+                    {print} name {is} a bit scared
+                    {print} He hears crazy noises everywhere
+                    {print} name {is} afraid this {is} a haunted forest
                     ```
-                start_code: "print Η ιστορία σου"
+                start_code: "{print} Η ιστορία σου"
             7:
                 story_text: |
                     ## Η ιστορία
 
                     Σε μια ιστορία, κάποιος μπορεί να αναφέρει διάφορες λέξεις πολλές φορές. Για παράδειγμα, όταν κάποιος φωνάζει βοήθεια ή τραγουδά ένα τραγούδι. 
-                    Μπορείς να βάλεις μια τέτοια επανάληψη στην ιστορία σου στο επίπεδο 5 με την `repeat`.
+                    Μπορείς να βάλεις μια τέτοια επανάληψη στην ιστορία σου στο επίπεδο 5 με την `{repeat}`.
 
                 example_code: |
                     ```
-                    print 'Ο πρίγκιπας φώναζε για βοήθεια συνεχώς'
-                    repeat 5 times print 'Βοήθεια!'
-                    print 'Γιατί δε με βοηθάει κανείς;'
+                    {print} 'Ο πρίγκιπας φώναζε για βοήθεια συνεχώς'
+                    {repeat} 5 {times} {print} 'Βοήθεια!'
+                    {print} 'Γιατί δε με βοηθάει κανείς;'
                     ```
 
-                start_code: "repeat 5 times print 'Βοήθεια!'"
+                start_code: "{repeat} 5 {times} {print} 'Βοήθεια!'"
             5:
                 story_text: |
                     ## Η ιστορία
@@ -426,24 +426,24 @@ adventures:
                     - Ευχάριστο τέλος: Παίρνει το σπαθί της και το τέρας τρέχει μακριά.
                     - Δυσάρεστο τέλος: Το τέρας τρώει την πριγκίπισσα
 
-                    Επιπλέον, μπορείς να βεβαιώσεις πως θα δηλωθεί πάλι το όνομα. Αυτό λειτουργεί όπως στο επίπεδο 3. Μπορείς να το συνδυάσεις με ένα `if`,  και έτσι έχεις δημιουργήσει ήδη ένα ολόκληρο πρόγραμμα!
+                    Επιπλέον, μπορείς να βεβαιώσεις πως θα δηλωθεί πάλι το όνομα. Αυτό λειτουργεί όπως στο επίπεδο 3. Μπορείς να το συνδυάσεις με ένα `{if}`,  και έτσι έχεις δημιουργήσει ήδη ένα ολόκληρο πρόγραμμα!
 
                 example_code: |
                     ```
-                    name is ask 'Ποιός περπατάει στο δάσος;'
-                    print 'Ο' name 'περπατάει στο δάσος'
-                    print 'Ο' name 'συναντά ένα τέρας'
-                    end is ask 'Θα ήθελες ένα ευχάριστο ή ένα δυσάρεστο φινάλε (good or bad)?'
-                    if end is good print 'Ο' name 'παίρνει το σπαθί και το τέρας τρέχει γρήγορα μακριά' else print 'Το τέρας τρώει τον' name
+                    name {is} {ask} 'Ποιός περπατάει στο δάσος;'
+                    {print} 'Ο' name 'περπατάει στο δάσος'
+                    {print} 'Ο' name 'συναντά ένα τέρας'
+                    end {is} {ask} 'Θα ήθελες ένα ευχάριστο ή ένα δυσάρεστο φινάλε (good or bad)?'
+                    {if} end {is} good {print} 'Ο' name 'παίρνει το σπαθί και το τέρας τρέχει γρήγορα μακριά' {else} {print} 'Το τέρας τρώει τον' name
                     ```
-                start_code: "print 'Εδώ θα βρίσκεται σύντομα η ιστορία σου!'"
+                start_code: "{print} 'Εδώ θα βρίσκεται σύντομα η ιστορία σου!'"
             4:
                 story_text: |
                     ## Η ιστορία στο επίπεδο 3
 
                     Θα παρατήρησες πως υπάρχει ακόμα ένα σφάλμα στο επίπεδο 2.
 
-                    Δοκίμασες να κάνεις μια πρόταση χρησιμοποιώντας τη λέξη name; Δηλαδή, `print το name μου είναι name`.
+                    Δοκίμασες να κάνεις μια πρόταση χρησιμοποιώντας τη λέξη name; Δηλαδή, `{print} το name μου είναι name`.
 
                     Αυτό δε δούλεψε σωστά! Τότε θα έχεις σαν αποτέλεσμα: το Γιάννης μου είναι Γιάννης. Αυτό μπορεί να λυθεί στο επίπεδο 3.
 
@@ -451,15 +451,15 @@ adventures:
 
                 example_code: |
                     ```
-                    name is Γιάννης
-                    print 'Το όνομα του βασικού χαρακτήρα είναι' name
-                    print 'O' name 'τώρα θα περπατήσει στο δάσος'
-                    print 'Ο' name 'φοβάται λίγο'
-                    animals is κουκουβάγια, σκαντζόχοιρος, αρμαντίλο
-                    print 'Ακούει τον ήχο ενός' animals at random
-                    print 'Ο' name 'φοβάται πως αυτό είναι ένα στοιχειωμένο δάσος'
+                    name {is} Γιάννης
+                    {print} 'Το όνομα του βασικού χαρακτήρα είναι' name
+                    {print} 'O' name 'τώρα θα περπατήσει στο δάσος'
+                    {print} 'Ο' name 'φοβάται λίγο'
+                    animals {is} κουκουβάγια, σκαντζόχοιρος, αρμαντίλο
+                    {print} 'Ακούει τον ήχο ενός' animals {at} {random}
+                    {print} 'Ο' name 'φοβάται πως αυτό είναι ένα στοιχειωμένο δάσος'
                     ```
-                start_code: "print 'Η ιστορία σου θα εμφανιστεί εδώ!'"
+                start_code: "{print} 'Η ιστορία σου θα εμφανιστεί εδώ!'"
             3:
                 story_text: |4
 
@@ -470,8 +470,8 @@ adventures:
                 start_code: "print Η ιστορία σου"
                 example_code: |
                     ```
-                    animals is κουκουβάγια, σκαντζόχοιρος, αρμαντίλο
-                    print Τώρα ακούει τον ήχο ένος animals at random
+                    animals {is} κουκουβάγια, σκαντζόχοιρος, αρμαντίλο
+                    {print} Τώρα ακούει τον ήχο ένος animals {at} {random}
                     ```
                 story_text_2: |
                     The command `{add}` can also come in handy in your story. For example
@@ -535,14 +535,14 @@ adventures:
                     Μωρό Καρχαρίας τουτουρουτουτου <br>
                     Μωρό Καρχαρίας
 
-                    Μπορείς να κάνεις το τραγούδι αυτό πολύ πιο σύντομο με ένα `repeat`! Μπορείς να ολοκληρώσεις τον κώδικα;
+                    Μπορείς να κάνεις το τραγούδι αυτό πολύ πιο σύντομο με ένα `{repeat}`! Μπορείς να ολοκληρώσεις τον κώδικα;
 
                     Ύστερα από το Μωρό Καρχαρίας μπορείς φυσικά να προγραμματ΄ και άλλα τραγούδια. Υπάρχουν πολλά τραγούδια με επανάληψη.
-                start_code: "print 'Μωρό Καρχαρίας'"
+                start_code: "{print} 'Μωρό Καρχαρίας'"
                 example_code: |-
                     ```
-                    repeat _ _ print 'Μωρό Καρχαρίας τουτουρουτουτου'
-                    print 'Μωρό Καρχαρίας'
+                    {repeat} _ _ {print} 'Μωρό Καρχαρίας τουτουρουτουτου'
+                    {print} 'Μωρό Καρχαρίας'
                     ```
             6:
                 story_text: |
@@ -552,26 +552,26 @@ adventures:
 
                 example_code: |
                     ```
-                    verse is 99
-                    print verse ' μπουκάλια μπύρας στον τοίχο'
-                    print verse ' μπουκάλια μπύρας'
-                    print 'Κατέβασε ένα, και δώσε το τριγύρω'
-                    verse is verse - 1
-                    print verse ' μπουκάλια μπύρας στον τοίχο'
+                    verse {is} 99
+                    {print} verse ' μπουκάλια μπύρας στον τοίχο'
+                    {print} verse ' μπουκάλια μπύρας'
+                    {print} 'Κατέβασε ένα, και δώσε το τριγύρω'
+                    verse {is} verse - 1
+                    {print} verse ' μπουκάλια μπύρας στον τοίχο'
                     ```
 
                     Μπορείς τώρα να επαναλάβεις τις γραμμές 2 έως 9 όσες φορές θέλεις αντιγράφοντας τις γραμμές.
 
                     # Κοιτώντας μπροστά
-                    Στο επίπεδο 5 μάθαμε να επαναλαμβάνουμε 1 γραμμή με τη `repeat`, έτσι:
+                    Στο επίπεδο 5 μάθαμε να επαναλαμβάνουμε 1 γραμμή με τη `{repeat}`, έτσι:
 
-                    * repeat 3 times print 'Μωρό Καρχαρίας Τουτουρουτουτου'
+                    * {repeat} 3 {times} {print} 'Μωρό Καρχαρίας Τουτουρουτουτου'
 
                     Όμως όπως θα δείτε σε αυτό το μάθημα, κάποιες φορές θέλεις να επαναλάβεις αρκετές γραμμές μαζί. Αυτό μπορεί να γίνει με αποκοπή και επικόλληση, όμως αυτό απαιτεί αρκετή δουλειά. Στο επίπεδο 7 θα μάθες πώς να το κάνεις αυτό εύκολα.
 
-                start_code: "print 'Μωρό Καρχαρίας'"
+                start_code: "{print} 'Μωρό Καρχαρίας'"
                 story_text_2: "## 5 Little Monkeys jumping on the bed\nThis children's song counts down from 5 little monkeys to 1 monkey.\nIf you copy line 2 - 7 and paste it under the the code, you can sing the whole song!\n"
-                example_code_2: "```\nnumber = 6\nnumber = number - 1\nprint number ' little monkeys jumping on the bed'\nprint 'One fell off and bumped his head'\nprint 'Mama called the doctor and the doctor said'\nprint 'NO MORE MONKEYS JUMPING ON THE BED!'\nsleep\n```\n"
+                example_code_2: "```\nnumber = 6\nnumber = number - 1\n{print} number ' little monkeys jumping on the bed'\n{print} 'One fell off and bumped his head'\n{print} 'Mama called the doctor and the doctor said'\n{print} 'NO MORE MONKEYS JUMPING ON THE BED!'\n{sleep}\n```\n"
             8:
                 story_text: "## Songs\nIn a previous level you've programmed the song 'Bottles of beer'. You made one verse and then had to copy the verses 99 times. In level 7 you can repeat the song 99 times, just by adding one simple line!\n"
                 example_code: "\n```\nverse = 99\n{repeat} 99 {times}\n    {print} verse ' bottles of beer on the wall'\n    {print} verse ' bottles of beer'\n    {print} 'Take one down, pass it around'\n    verse = verse - 1\n    {print} verse ' bottles of beer on the wall'\n```\n"
@@ -600,12 +600,12 @@ adventures:
             7:
                 story_text: |
                     ## Πρόγραμμα πλυσίματος πιάτων
-                    Με την `repeat` μπορείς να επαναλάβεις κομμάτια κώδικα. Μπορείς να το χρησιμοποιήσεις αυτό για να υπολογίσεις ποιος θα πλένει τα πιάτα για όλην την εβδομάδα.
-                start_code: "print 'Ποιός θα πλύνει τα πιάτα;'"
+                    Με την `{repeat}` μπορείς να επαναλάβεις κομμάτια κώδικα. Μπορείς να το χρησιμοποιήσεις αυτό για να υπολογίσεις ποιος θα πλένει τα πιάτα για όλην την εβδομάδα.
+                start_code: "{print} 'Ποιός θα πλύνει τα πιάτα;'"
                 example_code: |-
                     ```
-                    people is μαμά, μπαμπάς, Ελένη, Σοφία
-                    repeat _ _ print 'αυτό που θα πλύνει τα πιάτα είναι' _
+                    people {is} μαμά, μπαμπάς, Ελένη, Σοφία
+                    {repeat} _ _ {print} 'αυτό που θα πλύνει τα πιάτα είναι' _
                     ```
             6:
                 story_text: |
@@ -624,17 +624,17 @@ adventures:
                 story_text_2: "## Make it fair\nIf you are extremely unlucky the previous program might choose you to to the dishes for the whole week! That's not fair!\nTo create a fairer system you can use the `{remove}` command to remove the chosen person from the list. This way you don't have to do the dishes again untill everybody has had a turn.\n\nMonday and tuesday are ready for you! Can you add the rest of the week?\nAnd... can you come up with a solution for when your list is empty?\n"
                 example_code_2: |-
                     ```
-                    people is μαμά, μπαμπάς, Ελένη, Σοφία
-                    eleni_washes is 0
-                    dishwasher is people at random
-                    print 'Αυτός που θα πλυνει τα πιάτα' dishwasher
-                    if dishwasher is Ελένη eleni_washes is eleni_washes + 1
-                    print 'Η Ελένη θα πλύνει τα πιάτα ' eleni_washes 'φορές αυτήν την εβδομάδα'
+                    people {is} μαμά, μπαμπάς, Ελένη, Σοφία
+                    eleni_washes {is} 0
+                    dishwasher {is} people {at} {random}
+                    {print} 'Αυτός που θα πλυνει τα πιάτα' dishwasher
+                    {if} dishwasher {is} Ελένη eleni_washes {is} eleni_washes + 1
+                    {print} 'Η Ελένη θα πλύνει τα πιάτα ' eleni_washes 'φορές αυτήν την εβδομάδα'
                     ```
             5:
                 story_text: |
                     ## Πρόγραμμα πλυσίματος πιάτων
-                    Με το `if` τώρα μπορείς να διασκεδάσεις λίγο παραπάνω με τις επιλογές στο πρόγραμμα. Μπορείς να κάνεις το πρόγραμμα να απαντά στην επιλογή που έκανε ο υπολογιστής.
+                    Με το `{if}` τώρα μπορείς να διασκεδάσεις λίγο παραπάνω με τις επιλογές στο πρόγραμμα. Μπορείς να κάνεις το πρόγραμμα να απαντά στην επιλογή που έκανε ο υπολογιστής.
 
                     Μπορείς να ολοκληρώσεις τον κώδικα έτσι ώστε να εμφανίζει 'κριμα!' όταν είναι σειρά σου αλλιώς 'ναι!';
                     Μην ξεχάσεις τα εισαγωγικά!
@@ -642,11 +642,11 @@ adventures:
 
                 example_code: |
                     ```
-                    people is μαμά, μπαμπάς, Ελένη, Σοφία
-                    dishwasher is people at random
-                    if dishwasher is Σοφία print _ τί κρίμα που πρέπει να πλύνω τα πιάτα _ else print 'ευτυχώς δεν έχει πιάτα επειδή ο' _ 'πλένει ήδη'
+                    people {is} μαμά, μπαμπάς, Ελένη, Σοφία
+                    dishwasher {is} people {at} {random}
+                    {if} dishwasher {is} Σοφία {print} _ τί κρίμα που πρέπει να πλύνω τα πιάτα _ {else} {print} 'ευτυχώς δεν έχει πιάτα επειδή ο' _ 'πλένει ήδη'
                     ```
-                start_code: "print 'Ποιός θα πλύνει τα πιάτα;'"
+                start_code: "{print} 'Ποιός θα πλύνει τα πιάτα;'"
             4:
                 story_text: |
                     ## Πρόγραμμα πλυσίματος πιάτων στο επίπεδο 3
@@ -660,11 +660,11 @@ adventures:
 
                 example_code: |
                     ```
-                    people is μαμά, μπαμπάς, Ελένη, Σοφία
-                    print _ τα πιάτα πλένονται από _
-                    print people at _
+                    people {is} μαμά, μπαμπάς, Ελένη, Σοφία
+                    {print} _ τα πιάτα πλένονται από _
+                    {print} people {at} _
                     ```
-                start_code: "print 'Ποιός πλένει τα πιάτα;'"
+                start_code: "{print} 'Ποιός πλένει τα πιάτα;'"
             3:
                 story_text: |
                     ## Πρόγραμμα πλυσίματος πιάτων
@@ -676,18 +676,18 @@ adventures:
 
                 example_code: |
                     ```
-                    people is μαμά, μπαμπάς, Ελένη, Σοφία
-                    print people at random
+                    people {is} μαμά, μπαμπάς, Ελένη, Σοφία
+                    {print} people {at} {random}
                     ```
 
                     ## Τί ακολουθεί;
                     Δοκίμασες να κάνεις μια πρόταση χρησιμοποιώντας τη λέξη people; 
 
-                    Δηλαδή, `print Επέλεξα από αυτούς τους people`. Αν δεν το έχεις κάνει ήδη, πήγαινε να το δοκιμάσεις! 
+                    Δηλαδή, `{print} Επέλεξα από αυτούς τους people`. Αν δεν το έχεις κάνει ήδη, πήγαινε να το δοκιμάσεις! 
 
                     Θα δεις ότι δε δουλεύει σωστά. H Hedy θα εμφανίσει: Επέλεξα από αυτούς τους [μαμά, μπαμπάς, Ελένη, Σοφία]. Αυτό μπορείς να το λύσεις στο επίπεδο 3.
 
-                start_code: "print Ποιός θα πλύνει τα πιάτα;"
+                start_code: "{print} Ποιός θα πλύνει τα πιάτα;"
                 story_text_2: "## Hack the dishwashing program!\nDon't feel like doing the dishes yourself? Hack the program to remove your name from the list.\n"
                 example_code_2: "```\npeople {is} mom, dad, Emma, Sophie\nyour_name {is} {ask} Who are you?\n{remove} your_name {from} people\n{print} people {at} {random} does the dishes\n```\n"
             10:
@@ -702,17 +702,17 @@ adventures:
             7:
                 story_text: |
                     ## Ζάρια
-                    Μπορείς να φτιάξεις ένα ζάρι και πάλι στο επίπεδο 6. Με την εντολή `repeat` μπορείς έυκολα να ρίξεις μια ολόκληρη χούφτα από ζάρια.
+                    Μπορείς να φτιάξεις ένα ζάρι και πάλι στο επίπεδο 6. Με την εντολή `{repeat}` μπορείς έυκολα να ρίξεις μια ολόκληρη χούφτα από ζάρια.
                     Προσπάθησε να συμπληρώσεις το δείγμα κώδικα! Οι παύλες θα πρέπει να περιέχουν πολλαπλές εντολές και χαρακτήρες.
 
                     Ίσως όμως θέλεις να φτιάξεις ένα τελείως διαφορετικό ζάρι. Φυσικά και μπορείς!
 
                 example_code: |
                     ```
-                    choices is 1, 2, 3, 4, 5, σκουληκάκι
-                    repeat _ _ print _ _ _
+                    choices {is} 1, 2, 3, 4, 5, σκουληκάκι
+                    {repeat} _ _ {print} _ _ _
                     ```
-                start_code: "print 'Τί θα δείξει το ζάρι αυτήν τη φορά;'"
+                start_code: "{print} 'Τί θα δείξει το ζάρι αυτήν τη φορά;'"
             6:
                 story_text: |
                     ## Ζάρια
@@ -724,12 +724,12 @@ adventures:
 
                 example_code: |
                     ```
-                    choices is 1, 2, 3, 4, 5, σκουληκάκι
-                    points is 0
-                    throw is choices at random
-                    print 'έριξες' throw
-                    if throw is σκουληκάκι points is points + 5 else points is points + throw
-                    print 'αυτό είναι' points ' points'
+                    choices {is} 1, 2, 3, 4, 5, σκουληκάκι
+                    points {is} 0
+                    throw {is} choices {at} {random}
+                    {print} 'έριξες' throw
+                    {if} throw {is} σκουληκάκι points {is} points + 5 {else} points {is} points + throw
+                    {print} 'αυτό είναι' points ' points'
                     ```
 
                     Μπορείς να αλλάξεις τον κώδικα ώστε να παίρνεις το συνολικό σκορ για 8 ζάρια; Για να το κάνεις αυτό, πρέπει να κάνεις αποκοπή και επικόλληση από μερικές γραμμές κώδικα.
@@ -738,12 +738,12 @@ adventures:
 
                     Κατάφερες να υπολογίσεις το σκορ για 8 ζάρια; Χρειάστηκε αρκετή αποκοπή και επικόλληση, έτσι; Θα το κάνουμε πιο εύκολο στο επίπεδο 7!
 
-                start_code: "print 'Τί θα δείξει το ζάρι αυτήν τη φορά;'"
+                start_code: "{print} 'Τί θα δείξει το ζάρι αυτήν τη φορά;'"
                 example_code_2: "## Looking forward\n\nDid you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!\n"
             5:
                 story_text: |
                     ## Ζάρια
-                    Μπορείς και πάλι να δημιουργήσεις ένα ζάρι στο επίπεδο 4 χρησιμοποιώντας την `if`.
+                    Μπορείς και πάλι να δημιουργήσεις ένα ζάρι στο επίπεδο 4 χρησιμοποιώντας την `{if}`.
                     Συμπλήρωσε το δείγμα κώδικα έτσι ώστε ο κώδικας να λέει "Μπορείς να σταματήσεις να ρίχνεις" όταν ρίξεις ένα σκουληκάκι.
 
                     Ίσως όμως να θέλεις να αναδημιουργήσεις ένα ζάρι από ένα τελείως διαφορετικό παιχνίδι. Και αυτό γίνεται! Έπειτα, δημιούργησε τη δική σου αντίδραση. Πχ. 'ναι' για το 6 και 'κρίμα' για οτιδήποτε άλλο.
@@ -751,11 +751,11 @@ adventures:
                 example_code: |
                     ```
                     choices is 1, 2, 3, 4, 5, σκουληκάκι
-                    throw is _
-                    print 'έχεις ρίξει' _
-                    if _ is earthworm print 'Μπορείς να σταματήσεις να ρίχνεις.' _ print 'Πρέπει να το ακούσεις πάλι!'
+                    throw {is} _
+                    {print} 'έχεις ρίξει' _
+                    {if} _ {is} earthworm {print} 'Μπορείς να σταματήσεις να ρίχνεις.' _ {print} 'Πρέπει να το ακούσεις πάλι!'
                     ```
-                start_code: "print 'Τί θα δείξει το ζάρι αυτήν τη φορά;'"
+                start_code: "{print} 'Τί θα δείξει το ζάρι αυτήν τη φορά;'"
             4:
                 story_text: |
                     ## Ζάρια
@@ -765,12 +765,12 @@ adventures:
 
                 example_code: |
                     ```
-                    choices is 1, 2, 3, 4, 5, σκουληκάκι
-                    print _ έριξες _
-                    print _ _ _ <- εδώ θα πρέπει να προγραμματίσεις τη ρίψη
+                    choices {is} 1, 2, 3, 4, 5, σκουληκάκι
+                    {print} _ έριξες _
+                    {print} _ _ _ <- εδώ θα πρέπει να προγραμματίσεις τη ρίψη
                     ```
 
-                start_code: "print 'Τί θα δείξει το ζάρι αυτήν τη φορά;'"
+                start_code: "{print} 'Τί θα δείξει το ζάρι αυτήν τη φορά;'"
             3:
                 story_text: |
                     ## Ζάρια
@@ -783,18 +783,18 @@ adventures:
 
                 example_code: |
                     ```
-                    choices is 1, 2, 3, 4, 5, σκουληκάκι
-                    print choices at random
+                    choices {is} 1, 2, 3, 4, 5, σκουληκάκι
+                    {print} choices {at} {random}
                     ```
 
                     ## Τί ακολουθεί;
                     Δοκίμασες να κάνεις μια πρόταση χρησιμοποιώντας τη λέξη choices; 
 
-                    Δηλαδή, `print Επέλεξα από τις choices`. Αν δεν το έχεις κάνει ήδη, πήγαινε να το δοκιμάσεις! 
+                    Δηλαδή, `{print} Επέλεξα από τις choices`. Αν δεν το έχεις κάνει ήδη, πήγαινε να το δοκιμάσεις! 
 
                     Θα δεις ότι δε δουλεύει σωστά. H Hedy θα πει: Επέλεξα από τις [1, 2, 3, 4, 5, σκουληκάκι]. To Επίπεδο 3 έχει μια λύση για αυτό.
 
-                start_code: "print Τί θα δείξει το ζάρι αυτήν τη φορά;"
+                start_code: "{print} Τί θα δείξει το ζάρι αυτήν τη φορά;"
                 example_code_2: "```\nchoices {is} _\n```\n"
                 story_text_2: "## Challenge\nThe dice in the example above are dice for a specific game. Can you make normal dice?\nOr other special dice from a different game?\n"
             10:
@@ -815,44 +815,44 @@ adventures:
                     ## Πέτρα, ψαλίδι, χαρτί
                     Στο επίπεδο 1 μπορείς να ξεκινήσεις με ένα παιχνίδι Πέτρα, ψαλίδι, χαρτί.
 
-                    Με την `ask` μπορείς να κάνεις μια επιλογή, και με την `echo` μπορείς να επαναλάβεις αυτήν την επιλογή.
+                    Με την `{ask}` μπορείς να κάνεις μια επιλογή, και με την `{echo}` μπορείς να επαναλάβεις αυτήν την επιλογή.
 
                 example_code: |
                     ```
-                    print τί επιλέγεις;
-                    ask επίλεξε ανάμεσα σε πέτρα, ψαλίδι ή χαρτί
-                    echo ώστε η επιλογή σου είναι: 
+                    {print} τί επιλέγεις;
+                    {ask} επίλεξε ανάμεσα σε πέτρα, ψαλίδι ή χαρτί
+                    {echo} ώστε η επιλογή σου είναι: 
                     ```
 
                     ## Τί ακολουθεί;
                     Η απλή επανάληψη είναι φυσικά κάπως βαρετή επειδή ο υπολογιστής δεν επιλέγει τίποτα. Θα φτιάξουμε κάτι τέτοιο αργότερα.
 
 
-                start_code: "print Καλωσήλθες στο δικό σου παιχνίδι Πέτρα, ψαλίδι, χαρτί!"
+                start_code: "{print} Καλωσήλθες στο δικό σου παιχνίδι Πέτρα, ψαλίδι, χαρτί!"
                 story_text_2: "## Challenge\nInstead of using words, you could also use emojis: ✊✋✌\nCan you create a code using emojis?\n"
                 example_code_2: "```\n{print} what do you choose?\n{ask} choose from _\n{echo} so your choice was:\n```\n"
             5:
                 story_text: |
                     ## Πέτρα, ψαλίδι, χαρτί
-                    Στο επίπεδο 4 μπορούμε να αποφασίσουμε ποιός θα κερδίσει. Για αυτό θα χρειαστούμε τον νέο κώδικα `if`.
+                    Στο επίπεδο 4 μπορούμε να αποφασίσουμε ποιός θα κερδίσει. Για αυτό θα χρειαστούμε τον νέο κώδικα `{if}`.
 
                     Αποθήκευσε την επιλογή σου με το όνομα της επιλογής σου και την επιλογή του υπολογιστή ως computer choices`.
-                    Έπειτα, μπορείς να χρησιμοποιήσεις την `if` για να δεις αν αυτές είναι ίδιες ή διαφορετικές.
+                    Έπειτα, μπορείς να χρησιμοποιήσεις την `{if}` για να δεις αν αυτές είναι ίδιες ή διαφορετικές.
                     Θα τελειώσεις τον κώδικα;
 
                 example_code: |
                     ```
-                    options is πέτρα, ψαλίδι, χαρτί
-                    computer_choice is _
-                    choice is ask 'Τί επιλέγεις;'
-                    print 'εσύ επέλεξες ' _
-                    print 'ο υπολογιστής επέλεξε ' _
-                    if _ is _ print 'ισοπαλία!' else print 'όχι ισοπαλία'
+                    options {is} πέτρα, ψαλίδι, χαρτί
+                    computer_choice {is} _
+                    choice {is} {ask} 'Τί επιλέγεις;'
+                    {print} 'εσύ επέλεξες ' _
+                    {print} 'ο υπολογιστής επέλεξε ' _
+                    {if} _ {is} _ {print} 'ισοπαλία!' {else} {print} 'όχι ισοπαλία'
                     ```
 
                     Πρώτα, συμπλήρωσε το σωστό κώδικα στις τελίτσες για να δεις αν είναι ισοπαλία.
 
-                start_code: "print 'Καλωσήλθες στο δικό σου παιχνίδι Πέτρα, ψαλίδι, χαρτί'"
+                start_code: "{print} 'Καλωσήλθες στο δικό σου παιχνίδι Πέτρα, ψαλίδι, χαρτί'"
             4:
                 story_text: |
                     ## Πέτρα, ψαλίδι, χαρτί
@@ -860,29 +860,29 @@ adventures:
 
                 example_code: |
                     ```
-                    choices is πέτρα, ψαλίδι, χαρτί
-                    print _ Ο υπολογιστής επέλεξε: _ _ at _
+                    choices {is} πέτρα, ψαλίδι, χαρτί
+                    {print} _ Ο υπολογιστής επέλεξε: _ _ {at} _
                     ```
-                start_code: "print 'Καλωσήλθες στο δικό σου παιχνίδι Πέτρα, ψαλίδι, χαρτί!'"
+                start_code: "{print} 'Καλωσήλθες στο δικό σου παιχνίδι Πέτρα, ψαλίδι, χαρτί!'"
             3:
                 story_text: |
                     ## Πέτρα, ψαλίδι, χαρτί
 
                     Στο επίπεδο 2 μπορούμε να εισάγουμε λίστες και να επιλέξουμε πράγματα από αυτές. 
 
-                    Αρχικά θα φτιάξεις μια λίστα με την `is`. Ύστερα μπορείς να αφήσεις τον υπολογιστή να επιλέξει κάτι από τη λίστα με την `at random` (τυχαία).
+                    Αρχικά θα φτιάξεις μια λίστα με την `{is}`. Ύστερα μπορείς να αφήσεις τον υπολογιστή να επιλέξει κάτι από τη λίστα με την `{at} {random}` (τυχαία).
 
                     Για παράδειγμα, μπορείς να αφήσεις τον υπολογιστή να επιλέξει ανάμεσα σε πέτρα, ψαλίδι και χαρτί.
 
                 example_code: |
                     ```
-                    choices is πέτρα, ψαλίδι, χαρτί
-                    print choices at random
+                    choices {is} πέτρα, ψαλίδι, χαρτί
+                    {print} choices {at} {random}
                     ```
 
-                    Μπορείς να χρησιμοποιήσεις την `ask` και πάλι στο επίπεδο 2. Μπορείς να εμφανίσεις την επιλογή σου και την επιλογή από τον υπολογιστή;
-                    Προσοχή όμως, η `ask` τώρα λειτουργεί διαφορετικά απ'ότι στο επίπεδο 1. Θα πρέπει να υπάρχει ένα όνομα πριν από αυτή.
-                start_code: "print Καλωσήλθες στο δικό σου παιχνίδι Πέτρα ψαλίδι χαρτί!"
+                    Μπορείς να χρησιμοποιήσεις την `{ask}` και πάλι στο επίπεδο 2. Μπορείς να εμφανίσεις την επιλογή σου και την επιλογή από τον υπολογιστή;
+                    Προσοχή όμως, η `{ask}` τώρα λειτουργεί διαφορετικά απ'ότι στο επίπεδο 1. Θα πρέπει να υπάρχει ένα όνομα πριν από αυτή.
+                start_code: "{print} Καλωσήλθες στο δικό σου παιχνίδι Πέτρα ψαλίδι χαρτί!"
                 example_code_2: "```\nchoices {is} rock, paper, scissors\n{print} player 1 chooses... choices {at} {random}\n{print} player 2 _\n```\n"
                 story_text_2: "## Challenge\nNow you only have one player, so can you add a second player?\nYou can even use variables to name player 1 and player 2.\n"
             10:
@@ -917,10 +917,10 @@ adventures:
 
                 example_code: |
                     ```
-                    correct_answer is 11 * 27
-                    answer is ask 'Πόσο κάνει 11 φορές το 27;'
-                    if answer is correct_answer print 'συγχαρητήρια!'
-                    else print 'Λάθος! Ήταν ' correct_answer
+                    correct_answer {is} 11 * 27
+                    answer {is} {ask} 'Πόσο κάνει 11 φορές το 27;'
+                    {if} answer {is} correct_answer {print} 'συγχαρητήρια!'
+                    {else} {print} 'Λάθος! Ήταν ' correct_answer
                     ```
                 story_text_2: |
                     ## Τυχαίοι αριθμοί
@@ -930,17 +930,17 @@ adventures:
 
                 example_code_2: |
                     ```
-                    tables is 4, 5, 6, 8
-                    numbers is 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                    table is tables at random
-                    number is numbers at random
-                    correct_answer is table * number
-                    answer is ask 'πόσο είναι ' table ' φορές ' number '?'
-                    if answer is correct_answer print 'οκ'
-                    else print 'λάθος! ήταν ' correct_answer
+                    tables {is} 4, 5, 6, 8
+                    numbers {is} 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                    table {is} tables {at} {random}
+                    number {is} numbers {at} {random}
+                    correct_answer {is} table * number
+                    answer {is} {ask} 'πόσο είναι ' table ' φορές ' number '?'
+                    {if} answer {is} correct_answer {print} 'οκ'
+                    {else} {print} 'λάθος! ήταν ' correct_answer
                     ```
 
-                start_code: "print 'Καλωσήλθες σε αυτήν την αριθμομηχανή!'"
+                start_code: "{print} 'Καλωσήλθες σε αυτήν την αριθμομηχανή!'"
                 story_text_3: "## Random numbers\nYou can also let the computer do random sums on its own using random.\nThis is how you choose a number of tables to practice, and from that you always get a different sum:\n"
                 example_code_3: "```\ntables = 4, 5, 6, 8\nnumbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\ntable = tables {at} {random}\nnumber = numbers {at} {random}\ncorrect_answer = table * number\nanswer = {ask} 'how much is ' table ' times ' number '?'\n{if} answer {is} correct_answer {print} 'okay'\n{else} {print} 'mistake! it was ' correct_answer\n```\n"
             12:
@@ -975,11 +975,11 @@ adventures:
                       
                 example_code: |
                     ```
-                    print Καλωσήλθες στο εστιατόριο της Hedy
-                    ask Tί θα ήθελες να παραγγείλεις;
-                    echo Ώστε θα ήθελες να παραγγείλεις
-                    print Ευχαριστούμε για την παραγγελία σου!
-                    print Ετοιμάζεται!
+                    {print} Καλωσήλθες στο εστιατόριο της Hedy
+                    {ask} Tί θα ήθελες να παραγγείλεις;
+                    {echo} Ώστε θα ήθελες να παραγγείλεις
+                    {print} Ευχαριστούμε για την παραγγελία σου!
+                    {print} Ετοιμάζεται!
                     ```
                       
                     ## Δοκιμασία
@@ -999,15 +999,15 @@ adventures:
                     ## Παράδειγμα Εστιατορίου Hedy
 
                     ```
-                    print Καλωσήλθατε στο εστιατόριο της Hedy!
-                    print Σήμερα σερβίρουμε πίτσα ή λαζάνια.
-                    food is ask Τί θα θέλατε να φάτε;
-                    print Καλή επιλογή! Αυτό το φαγητό είναι το αγαπημένο μου!
-                    topping is ask Θα θέλατε κρέας ή λαχανικά μαζί με αυτό;
-                    print food with topping ετοιμάζεται!
-                    drinks is ask Τί θα θέλατε να πιείς με αυτό;
-                    print Σας ευχαριστώ για την παραγγελία.
-                    print Το φαγητό και τα ποτά σας θα είναι έτοιμα αμέσως!
+                    {print} Καλωσήλθατε στο εστιατόριο της Hedy!
+                    {print} Σήμερα σερβίρουμε πίτσα ή λαζάνια.
+                    food {is} {ask} Τί θα θέλατε να φάτε;
+                    {print} Καλή επιλογή! Αυτό το φαγητό είναι το αγαπημένο μου!
+                    topping {is} {ask} Θα θέλατε κρέας ή λαχανικά μαζί με αυτό;
+                    {print} food with topping ετοιμάζεται!
+                    drinks {is} {ask} Τί θα θέλατε να πιείς με αυτό;
+                    {print} Σας ευχαριστώ για την παραγγελία.
+                    {print} Το φαγητό και τα ποτά σας θα είναι έτοιμα αμέσως!
                     ```
                 story_text_2: "## Challenge\nCan you make this code more elaborate? For example by adding drinks to the order? Or...?\n"
                 example_code_2: "```\n{print} Welcome to Hedy's restaurant!\n{print} Today we're serving pizza or lasagna.\nfood {is} {ask} What would you like to eat?\n{print} Great choice! The food is my favorite!\ntopping {is} {ask} Would you like meat or veggies on that?\n{print} food with topping is on its way!\ndrinks {is} _\n```\n"
@@ -1021,24 +1021,24 @@ adventures:
                 start_code: "# place your code here"
                 example_code: |-
                     ```
-                    print Καλωσήλθατε στο Τυχαίο Εστιατόριο της Hedy!
-                    print Το μόνο εστιατόριο που θα επιλέξει τυχαία το γεύμα σας και την τιμή του!
-                    starters is σαλάτα, σούπα, καρπάτσιο
-                    mains is πίτσα, λαχανάκια Βρυξελλών, σπαγγέτι
-                    desserts is μπράουνι, παγωτό, γαλλικά τυριά
-                    drinks is κόλα, μπύρα, νερό
-                    prices is 1 ευρώ, 10 ευρώ, 100 ευρώ
-                    print Θα ξεκινήσετε με: starters at random
-                    print Έπειτα θα σερβίρουμε: mains at random
-                    print Και ως επιδόρπιο: desserts at random
-                    print Θα έχετε ένα drinks at random για να πιείτε
-                    print Το κόστος θα είναι: prices at random
-                    print Ευχαριστούμε και καλή όρεξη!
+                    {print} Καλωσήλθατε στο Τυχαίο Εστιατόριο της Hedy!
+                    {print} Το μόνο εστιατόριο που θα επιλέξει τυχαία το γεύμα σας και την τιμή του!
+                    starters {is} σαλάτα, σούπα, καρπάτσιο
+                    mains {is} πίτσα, λαχανάκια Βρυξελλών, σπαγγέτι
+                    desserts {is} μπράουνι, παγωτό, γαλλικά τυριά
+                    drinks {is} κόλα, μπύρα, νερό
+                    prices {is} 1 ευρώ, 10 ευρώ, 100 ευρώ
+                    {print} Θα ξεκινήσετε με: starters {at} {random}
+                    {print} Έπειτα θα σερβίρουμε: mains {at} {random}
+                    {print} Και ως επιδόρπιο: desserts {at} {random}
+                    {print} Θα έχετε ένα drinks {at} {random} για να πιείτε
+                    {print} Το κόστος θα είναι: prices {at} {random}
+                    {print} Ευχαριστούμε και καλή όρεξη!
                     ```
                 story_text_2: "## Allergies\nDoes your costumer have any allergies or do they dislike certain dishes? Then you can use the `{remove}`command to remove it from your menu.\n"
                 example_code_2: "```\n{print} Mystery milkshake\nflavors {is} strawberry, chocolate, vanilla\nallergies {is} {ask} Are you allergic to any falvors?\n{remove} allergies {from} flavors\n{print} You get a flavors {at} {random} milkshake\n```\n"
             12:
-                example_code: "\n```\nprice = 0\nfood = {ask} 'What would you like to order?'\ndrink = {ask} 'What would you like to drink?'\n{if} food {is} 'hamburger'\n    price = price + 6.50\n{if} food {is} 'pizza'\n    price = price + 5.75\n{if} drink {is} 'water'\n    price = price + 1.20\n{if} drink {is} 'soda'\n    price = price + 2.35\n{print} 'That will be ' price ' dollar, please'\n```\n"
+                example_code: "\n```\nprice = 0\nfood = {ask} 'What would you like to order?'\ndrinks = {ask} 'What would you like to drink?'\n{if} food {is} 'hamburger'\n    price = price + 6.50\n{if} food {is} 'pizza'\n    price = price + 5.75\n{if} drinks {is} 'water'\n    price = price + 1.20\n{if} drink {is} 'soda'\n    price = price + 2.35\n{print} 'That will be ' price ' dollar, please'\n```\n"
                 story_text: "## Restaurant\nFrom this level on you can use decimal numbers to make you menu more realistic.\n"
                 start_code: '# place your code here'
             11:
@@ -1504,7 +1504,7 @@ adventures:
                 story_text_2: "## Challenge\nAs you can see, the questions aren't printed in this example. That's because the variable `question` was changed 3 times.\nEvery time the player fills in the new answer, Hedy overwrites the previous one, so the first answer the player gave is forgotten.\nThis means you can't print all the questions this way.\n\nBy using 3 different variables instead of 1 (for example `question_1` , `question_2` and `question_3`), you could solve the problem and print the questions.\nThis does mean that you can only use `{repeat}` for the answers, and you will have to ask and print all the questions separately.\nCan you do it?\n\nIn the upcoming levels the layout of {repeat} command will change, which enables you to repeat multiple lines at once.\n"
             6:
                 story_text: "## Fortune Teller\nIn this level you can use math in your predictions as a fortune teller. This allows you to make up (silly) formulas to calculate the future.\nFor example you could calculate how rich you'll get or how many kids you will have when you grow up.\n"
-                example_code: "\n```\n{print} 'I am Hedy the fortune teller!'\n{print} 'I can predict how many kids youll get when you grow up!'\nage = {ask} 'How old are you?'\nsiblings = {ask} 'How many siblings do you have?'\nlength = {ask} 'How tall are you in centimetres?'\nkids = length / age\nkids = kids - siblings\n{print} 'You will get ...'\n{sleep}\n{print} kids ' kids!'\n```\n\n## Example Silly Fortune Teller\nIf the previous example wasn't silly enough for you, take a look at this one!\n\n```\n{print} 'Im Hedy the silly fortune teller!'\n{print} 'I will predict how smart you are!'\nfootball = {ask} 'On a scale 1-10 how much do you love football?'\nbananas = {ask} 'How many bananas did you eat this week?'\nhygiene = {ask} 'How many times did you wash your hands today?'\nresult = bananas + hygiene\nresult = result * football\n{print} 'You are ' result ' percent smart.'\n```\n"
+                example_code: "\n```\n{print} 'I am Hedy the fortune teller!'\n{print} 'I can predict how many kids youll get when you grow up!'\nage = {ask} 'How old are you?'\nsiblings = {ask} 'How many siblings do you have?'\n{length} = {ask} 'How tall are you in centimetres?'\nkids = {length} / age\nkids = kids - siblings\n{print} 'You will get ...'\n{sleep}\n{print} kids ' kids!'\n```\n\n## Example Silly Fortune Teller\nIf the previous example wasn't silly enough for you, take a look at this one!\n\n```\n{print} 'Im Hedy the silly fortune teller!'\n{print} 'I will predict how smart you are!'\nfootball = {ask} 'On a scale 1-10 how much do you love football?'\nbananas = {ask} 'How many bananas did you eat this week?'\nhygiene = {ask} 'How many times did you wash your hands today?'\nresult = bananas + hygiene\nresult = result * football\n{print} 'You are ' result ' percent smart.'\n```\n"
                 start_code: '# place your code here'
             5:
                 example_code: "\n```\n{print} 'Im Hedy the fortune teller!'\n{print} 'I can predict {if} youll win the lottery tomorrow!'\nperson {is} {ask} 'Who are you?'\n{if} person {is} Hedy {print} 'You will definitely win!\U0001F929' {else} {print} 'Bad luck! Someone {else} will win!\U0001F62D'\n```\n"
@@ -1581,11 +1581,11 @@ adventures:
         levels:
             12:
                 story_text: "## Make a secret code like a super spy\nIn this adventure you can create your own super spy code. Encode a message that only the right agent can decipher.\nIf the enemy tries to crack the code, they will get some false info to waste their time.\n"
-                example_code: "```\nname is ask 'What is your name?'\nif name is 'Agent007'\n    a is 'Go to the airport '\nelse\n    a is 'Go to the trainstation '\npassword is ask 'What is the password?'\nif password is 'TOPSECRET'\n    b is 'tomorrow at 02.00'\nelse\n    b is 'today at 10.00'\nprint a + b\n```\n"
+                example_code: "```\nname {is} {ask} 'What is your name?'\n{if} name {is} 'Agent007'\n    a {is} 'Go to the airport '\n{else}\n    a {is} 'Go to the trainstation '\npassword {is} {ask} 'What is the password?'\n{if} password {is} 'TOPSECRET'\n    b {is} 'tomorrow at 02.00'\n{else}\n    b {is} 'today at 10.00'\n{print} a + b\n```\n"
                 start_code: '## place your code here'
             13:
                 story_text: "## Superspy\nThe code you made in the previous level can be made a lot easier in this one with the `{and}` command.\n"
-                example_code: "```\nname is ask 'What is your name?'\npassword is ask 'What is your password?'\nif name is 'Agent007' and password is 'TOPSECRET'\n    print 'Go to the airport at 02.00'\nelse\n    print 'Go to the trainstation at 10.00'\n ```\n"
+                example_code: "```\nname {is} {ask} 'What is your name?'\npassword {is} {ask} 'What is your password?'\n{if} name {is} 'Agent007' {and} password {is} 'TOPSECRET'\n    {print} 'Go to the airport at 02.00'\n{else}\n    {print} 'Go to the trainstation at 10.00'\n ```\n"
                 start_code: '## place your code here'
         name: SuperSpy
         description: Make your own spy code
@@ -1608,7 +1608,7 @@ adventures:
                 story_text: "## Tic Tac Toe\nIn the previous levels the tic tac toe game had an annoying feature. After every move, you had to fill in yourself if you had won or not.\nThis made the game playable, but also quite slow. In this level we have learned the `{elif}` command, that could solve that problem.\nTo use the {elif} to let Hedy check whether or not a player has won is fun, but it also requires a fair amount of extra lines.\n\nIn the example code you see that we added the requirements to win (3 spots in a row horizontally, vertically or diagonally).\nYou can find them in line 46 to 69. You can see that each time the requirement is met (so if a player has won) the variable game is set to 'over'.\nThis means that the {while} loop will be stopped and the game ends.\n"
                 example_code: "```\nsign = 'x'\nopen_spots = [1, 2, 3, 4, 5, 6, 7, 8, 9]\ngame = 'on'\nspot_1 = '.'\nspot_2 = '.'\nspot_3 = '.'\nspot_4 = '.'\nspot_5 = '.'\nspot_6 = '.'\nspot_7 = '.'\nspot_8 = '.'\nspot_9 = '.'\n{print} 'TIC TAC TOE!'\n{print} spot_1 spot_2 spot_3\n{print} spot_4 spot_5 spot_6\n{print} spot_7 spot_8 spot_9\n{print} ' '\n{while} game != 'over':\n    choice = {ask} 'Player ' sign ', which spot?'\n    {if} choice {in} open_spots:\n        {remove} choice {from} open_spots\n        {if} choice == 1:\n            spot_1 = sign\n        {if} choice == 2:\n            spot_2 = sign\n        {if} choice == 3:\n            spot_3 = sign\n        {if} choice == 4:\n            spot_4 = sign\n        {if} choice == 5:\n            spot_5 = sign\n        {if} choice == 6:\n            spot_6 = sign\n        {if} choice == 7:\n            spot_7 = sign\n        {if} choice == 8:\n            spot_8 = sign\n        {if} choice == 9:\n            spot_9 = sign\n    {else}:\n        {print} 'That spot was already taken'\n    {print} spot_1 spot_2 spot_3\n    {print} spot_4 spot_5 spot_6\n    {print} spot_7 spot_8 spot_9\n    {print} ' '\n    {if} spot_1 == spot_2 {and} spot_2 == spot_3 {and} spot_1 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_4 == spot_5 {and} spot_5 == spot_6 {and} spot_4 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_7 == spot_8 {and} spot_8 == spot_9 {and} spot_7 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_1 == spot_4 {and} spot_4 == spot_7 {and} spot_1 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_2 == spot_5 {and} spot_5 == spot_8 {and} spot_2 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_3 == spot_6 {and} spot_6 == spot_9 {and} spot_3 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_1 == spot_5 {and} spot_5 == spot_9 {and} spot_1 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {elif} spot_3 == spot_5 {and} spot_5 == spot_7 {and} spot_3 != '.':\n        {print} 'Player ' sign ' wins!'\n        game = 'over'\n    {else}:\n        {if} sign == 'x':\n            sign = 'o'\n        {else}:\n            sign = 'x'\n```\n"
             15:
-                story_text: "## Tic Tac Toe\nIn this level you can improve your Tic Tac Toe game with the {while} loop/ With this loop you can combine the `{if} game != 'over'` and the `{for} i {in} {range} 1 to 9` into one simple line.\nCheck it out:\n"
+                story_text: "## Tic Tac Toe\nIn this level you can improve your Tic Tac Toe game with the {while} loop/ With this loop you can combine the `{if} game != 'over'` and the `{for} i {in} {range} 1 {to} 9` into one simple line.\nCheck it out:\n"
                 example_code: "```\nsign = 'x'\nopen_spots = 1, 2, 3, 4, 5, 6, 7, 8, 9\ngame = 'on'\nspot_1 = '.'\nspot_2 = '.'\nspot_3 = '.'\nspot_4 = '.'\nspot_5 = '.'\nspot_6 = '.'\nspot_7 = '.'\nspot_8 = '.'\nspot_9 = '.'\n{print} 'TIC TAC TOE!'\n{print} spot_1 spot_2 spot_3\n{print} spot_4 spot_5 spot_6\n{print} spot_7 spot_8 spot_9\n{print} ' '\n{while} game != 'over'\n    choice = {ask} 'Player ' sign ', which spot?'\n    {if} choice {in} open_spots\n        {remove} choice {from} open_spots\n        {if} choice == 1\n            spot_1 = sign\n        {if} choice == 2\n            spot_2 = sign\n        {if} choice == 3\n            spot_3 = sign\n        {if} choice == 4\n            spot_4 = sign\n        {if} choice == 5\n            spot_5 = sign\n        {if} choice == 6\n            spot_6 = sign\n        {if} choice == 7\n            spot_7 = sign\n        {if} choice == 8\n            spot_8 = sign\n        {if} choice == 9\n            spot_9 = sign\n    {else}\n        {print} 'That spot was already taken'\n    {print} spot_1 spot_2 spot_3\n    {print} spot_4 spot_5 spot_6\n    {print} spot_7 spot_8 spot_9\n    {print} ' '\n    winner = {ask} 'Did you win?'\n    {if} winner == 'yes'\n        {print} 'Good job, player ' sign '!'\n        game = 'over'\n    {else}\n        {if} sign == 'x'\n            sign = 'o'\n        {else}\n            sign = 'x'\n```\n"
                 start_code: '## place your code here'
     blackjack:
@@ -1619,4 +1619,4 @@ adventures:
             17:
                 start_code: '# place your code here'
                 story_text: "## Create a game of Blackjack\nBlackjack is a simple game of cards in which you have to get as close to 21 points as possible. You get two cards. Each card is worth their numeral value, and the face cards (Jack, Queen and King) are worth 10 points.\nThe Ace is worth either 1 or 11 points (you can choose). The dealer, your opponent, also gets two cards.\nIf you want, you can get another card, and its points will be added to your total. The dealer can also choose to take another card.\nBut be careful not to get more than 21 points, because if you do, you lose!\nThe player who gets closest to 21, without going over it, wins!\n\nHave fun!\n"
-                example_code: "```\n{print} 'BLACKJACK'\ncards = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Jack', 'Queen','King', 'Ace']\npoints = 0\ndealer_points = 0\ncard_1 = cards[{random}]\ncard_2 = cards[{random}]\ncard_3 = cards [{random}]\ndealer_card_1 = cards[{random}]\ndealer_card_2 = cards[{random}]\ndealer_card_3 = cards[{random}]\n# Points for card 1\n{if} card_1 == 'Jack' {or} card_1 == 'Queen' {or} card_1 == 'King':\n    points = points + 10\n{elif} card_1 == 'Ace':\n    points = points + 11\n{else}:\n    points = points + card_1\n# Points for card 2\n{if} card_2 == 'Jack' {or} card_2 == 'Queen' {or} card_2 == 'King':\n    points = points + 10\n{elif} card_2 == 'Ace':\n    points = points + 11\n{else}:\n    points = points + card_2\n# Points for dealer card 1\n{if} dealer_card_1 == 'Jack' {or} dealer_card_1 == 'Queen' {or} dealer_card_1 == 'King':\n    dealer_points = dealer_points + 10\n{elif} dealer_card_1 == 'Ace':\n    dealer_points = dealer_points + 11\n{else}:\n    dealer_points = dealer_points + dealer_card_1\n# Points for dealer card 2\n{if} dealer_card_2 == 'Jack' {or} dealer_card_2 == 'Queen' {or} dealer_card_2 == 'King':\n    dealer_points = dealer_points + 10\n{elif} dealer_card_2 == 'Ace':\n    dealer_points = dealer_points + 11\n{else}:\n    dealer_points = dealer_points + dealer_card_2\n# Two Aces\n{if} card_1 == 'Ace' {and} card_2 == 'Ace':\n    points = 12\n{if} dealer_card_1 == 'Ace' {and} dealer_card_2 == 'Ace':\n    dealer_points = 12\n# Scoreboard\n{print} 'You have a ' card_1 ' and a ' card_2 ' (' points ' points)'\n{print} 'The dealer has a ' dealer_card_1 ' and a ' dealer_card_2 ' (' dealer_points ' points)'\n# Extra card for the player\nhit = {ask} 'Do you want an extra card?'\n{if} hit == 'yes':\n    {if} card_3 == 'Jack' {or} card_3 == 'Queen' {or} card_3 == 'King':\n        points = points + 10\n    {elif} card_3 == 'Ace':\n        {if} points > 11:\n            points = points + 11\n        {else}:\n            points = points + 1\n    {else}:\n        points = points + card_3\n    print 'You get an extra ' card_3 ' (' points ' points)'\n{else}:\n    print 'No extra cards'\n# Winner\n{if} points > 21 {or} dealer_points > points {or} dealer_points == 21:\n    {print} 'You lose'\n{elif} dealer_points < 17:\n    {print} 'The dealer takes an extra card. It is a... ' dealer_card_3\n    {if} dealer_card_3 == 'Jack' {or} dealer_card_3 == 'Queen' {or} dealer_card_3 == 'King':\n        dealer_points = dealer_points + 10\n    {elif} dealer_card_3 == 'Ace':\n        {if} dealer_points < 11:\n            dealer_points = dealer_points + 11\n        {else}:\n            dealer_points = dealer_points + 1\n    {else}:\n        dealer_points = dealer_points + dealer_card_3\n    {print} 'The dealer has ' dealer_points ' points now'\n    {if} dealer_points < 21 {and} dealer_points > points:\n        {print} 'You lose'\n    {else}:\n        {print} 'You win'\n{elif} points > dealer_points {and} points < 21:\n    {print} 'You win!'\n```\n"
+                example_code: "```\n{print} 'BLACKJACK'\ncards = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Jack', 'Queen','King', 'Ace']\npoints = 0\ndealer_points = 0\ncard_1 = cards[{random}]\ncard_2 = cards[{random}]\ncard_3 = cards [{random}]\ndealer_card_1 = cards[{random}]\ndealer_card_2 = cards[{random}]\ndealer_card_3 = cards[{random}]\n# Points for card 1\n{if} card_1 == 'Jack' {or} card_1 == 'Queen' {or} card_1 == 'King':\n    points = points + 10\n{elif} card_1 == 'Ace':\n    points = points + 11\n{else}:\n    points = points + card_1\n# Points for card 2\n{if} card_2 == 'Jack' {or} card_2 == 'Queen' {or} card_2 == 'King':\n    points = points + 10\n{elif} card_2 == 'Ace':\n    points = points + 11\n{else}:\n    points = points + card_2\n# Points for dealer card 1\n{if} dealer_card_1 == 'Jack' {or} dealer_card_1 == 'Queen' {or} dealer_card_1 == 'King':\n    dealer_points = dealer_points + 10\n{elif} dealer_card_1 == 'Ace':\n    dealer_points = dealer_points + 11\n{else}:\n    dealer_points = dealer_points + dealer_card_1\n# Points for dealer card 2\n{if} dealer_card_2 == 'Jack' {or} dealer_card_2 == 'Queen' {or} dealer_card_2 == 'King':\n    dealer_points = dealer_points + 10\n{elif} dealer_card_2 == 'Ace':\n    dealer_points = dealer_points + 11\n{else}:\n    dealer_points = dealer_points + dealer_card_2\n# Two Aces\n{if} card_1 == 'Ace' {and} card_2 == 'Ace':\n    points = 12\n{if} dealer_card_1 == 'Ace' {and} dealer_card_2 == 'Ace':\n    dealer_points = 12\n# Scoreboard\n{print} 'You have a ' card_1 ' and a ' card_2 ' (' points ' points)'\n{print} 'The dealer has a ' dealer_card_1 ' and a ' dealer_card_2 ' (' dealer_points ' points)'\n# Extra card for the player\nhit = {ask} 'Do you want an extra card?'\n{if} hit == 'yes':\n    {if} card_3 == 'Jack' {or} card_3 == 'Queen' {or} card_3 == 'King':\n        points = points + 10\n    {elif} card_3 == 'Ace':\n        {if} points > 11:\n            points = points + 11\n        {else}:\n            points = points + 1\n    {else}:\n        points = points + card_3\n    {print} 'You get an extra ' card_3 ' (' points ' points)'\n{else}:\n    {print} 'No extra cards'\n# Winner\n{if} points > 21 {or} dealer_points > points {or} dealer_points == 21:\n    {print} 'You lose'\n{elif} dealer_points < 17:\n    {print} 'The dealer takes an extra card. It is a... ' dealer_card_3\n    {if} dealer_card_3 == 'Jack' {or} dealer_card_3 == 'Queen' {or} dealer_card_3 == 'King':\n        dealer_points = dealer_points + 10\n    {elif} dealer_card_3 == 'Ace':\n        {if} dealer_points < 11:\n            dealer_points = dealer_points + 11\n        {else}:\n            dealer_points = dealer_points + 1\n    {else}:\n        dealer_points = dealer_points + dealer_card_3\n    {print} 'The dealer has ' dealer_points ' points now'\n    {if} dealer_points < 21 {and} dealer_points > points:\n        {print} 'You lose'\n    {else}:\n        {print} 'You win'\n{elif} points > dealer_points {and} points < 21:\n    {print} 'You win!'\n```\n"

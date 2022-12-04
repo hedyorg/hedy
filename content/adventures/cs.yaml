@@ -6,7 +6,7 @@ adventures:
         levels:
             1:
                 story_text: |-
-                    Vítej v Hedy! V první úrovni můžeš používat příkazy `print`, `ask` a `echo`.
+                    Vítej v Hedy! V první úrovni můžeš používat příkazy `{print}`, `{ask}` a `{echo}`.
 
                     V levém panelu vidíš všechny příkazy 1. úrovně.
 
@@ -15,72 +15,72 @@ adventures:
                     Kód si vždy vyzkoušej pomocí zeleného tlačítka `Spustit kód` pod levým programovým polem.
 
                     Nevíš, co dál tvořit? Na dalších záložkách najdeš několik nápadů, kde si můžeš vše lépe procvičit.
-                start_code: print Ahoj světe!
+                start_code: {print} Ahoj světe!
                 example_code: "```\n{print} Hello!\n{print} Welcome to Hedy!\n```\n"
                 example_code_2: "```\n{ask} What is your name?\n{echo} hello\n```\n"
                 story_text_2: "You can also ask for input and repeat it back with an `{echo}` command.\nTry the code to your left again.\n\nDon't know what to create? In the next tabs you will find ideas for programs to build.\n"
                 story_text_3: "Nevíš kde začít? V záložkách najdeš různé nápady na programy které můžeš vytvořit.\n"
             2:
                 story_text: |-
-                    Ve 2. úrovni se naučíme něco nového. Odteď můžeš pojmenovat slovo za pomoci `is`.
+                    Ve 2. úrovni se naučíme něco nového. Odteď můžeš pojmenovat slovo za pomoci `{is}`.
 
                     Pokud použiješ příkaz `jmeno is Hedy`, můžeš pak kdekoli v kódu použít jmeno a bude nahrazeno slovem Hedy. Všimni si, že jmeno neobsahuje čárku nad e, Hedy totiž neumí pracovat s názvy s českou diakritikou.
 
-                    Poznámka: `ask` se změnilo, odpověď ukládej taky pod jméno, například takto:
+                    Poznámka: `{ask}` se změnilo, odpověď ukládej taky pod jméno, například takto:
 
                     ```
-                    odpoved is ask Jak se jmenuješ?
+                    odpoved {is} {ask} Jak se jmenuješ?
                     ```
 
-                    `print` stále funguje jako v úrovni 1 a už nepotřebuješ `echo`.
-                start_code: print Ahoj světe!
-                example_code: "```\nname {is} Hedy\nage {is} 15\n{print} name is age years old\n```\n"
+                    `{print}` stále funguje jako v úrovni 1 a už nepotřebuješ `{echo}`.
+                start_code: {print} Ahoj světe!
+                example_code: "```\nname {is} Hedy\nage {is} 15\n{print} name {is} age years old\n```\n"
                 story_text_2: "`{print}` funguje stále stejně, ale příkaz `{ask}` se změnil. I u příkazu `{ask}` musíš použít proměnnou. Bude to vypadat takhle:\n"
                 example_code_2: "```\njméno {is} {ask} Jak se jmenuješ?\n{print} Ahoj jméno\n```\n"
                 story_text_3: "Další nový příkaz této úrovně je `{sleep}`, který tvůj program na jednu vteřinu zastaví. Pokud za příkaz {sleep} napíšeš číslo, program se zstaví na právě tolik vteřin.\n"
                 example_code_3: "```\n{print} Moje oblíbená barva je...\n{sleep} 2\n{print} zelená!\n```\n"
             3:
                 story_text: |-
-                    V úrovni 3 můžeš také vytvořit seznam. Počítač umí z tohoto seznamu vybrat náhodného člena, konkrétně pomocí příkazu `at random`.
+                    V úrovni 3 můžeš také vytvořit seznam. Počítač umí z tohoto seznamu vybrat náhodného člena, konkrétně pomocí příkazu `{at} {random}`.
                     ```
-                    zvirata is pes, kočka, klokan
-                    print zvirata at random
+                    zvirata {is} pes, kočka, klokan
+                    {print} zvirata {at} {random}
                     ```
 
                     Všechny kódy úrovně 3 najdeš v levém panelu. Opět tady jsou i záložky s dalšími zadáními.
-                start_code: print Ahoj světe!
+                start_code: {print} Ahoj světe!
                 example_code: "```\nanimals {is} dog, cat, kangaroo\n{print} animals {at} {random}\n```\n"
                 story_text_2: Také můžeš přidat položky do seznamu příkazem `{add}` a odstranit je příkazem `{remove}`.
                 example_code_2: "```\nanimals {is} dog, cat, kangaroo\n{add} penguin {to_list} animals\n{remove} cat {from} animals\n{print} animals {at} {random}\n```\n"
             4:
-                start_code: print 'Ahoj světe!'
+                start_code: {print} 'Ahoj světe!'
                 story_text: |4
 
-                    V úrovni 4 se mění `ask` a `print`.
+                    V úrovni 4 se mění `{ask}` a `{print}`.
 
                     Text, který chceš vytisknout, teď musíš dát do uvozovek.
 
-                    Je to užitečné, protože tak můžeš vytisknout všechna slova, která chceš. A to dokonce včetně slov, pod která jsi něco uložil*a pomocí `is`.
+                    Je to užitečné, protože tak můžeš vytisknout všechna slova, která chceš. A to dokonce včetně slov, pod která jsi něco uložil*a pomocí `{is}`.
 
                     Většina programovacích jazyků také používá při vypisování uvozovky, takže se dostáváme zase o krok blíže ke skutečnému programování!
 
                     ## Úkoly jsou čím dál, tím obtížnější
                     Příkazy najdeš opět vlevo a úkoly v záložkách.
                     Obtížnost zadání se stupňuje, proto je nejlepší začít s příběhem vlevo a pokračovat doprava, abys měl*a postupně větší výzvy.
-                example_code: "```\nprint 'You need to use quotation marks from now on!'\nanswer is ask 'What do we need to use from now on?'\nprint 'We need to use ' answer\n```\n"
+                example_code: "```\n{print} 'You need to use quotation marks from now on!'\nanswer {is} {ask} 'What do we need to use from now on?'\n{print} 'We need to use ' answer\n```\n"
                 story_text_2: "## Dobrodružství začíná být čím dál tím těžší\nV každé další záložce na tebe čekají těžší a těžší ůkoly.\nNejlepší je začít s příběhem který je nalevo, a pokračovat napravo, pokud chceš větší výzvu.\n"
             5:
                 start_code: |-
-                    jmeno is ask 'Jak se jmenuješ?'
-                    if jmeno is Hedy print 'Super!' else print 'Ok, tebe neznám.'
+                    jmeno {is} {ask} 'Jak se jmenuješ?'
+                    {if} jmeno {is} Hedy {print} 'Super!' {else} {print} 'Ok, tebe neznám.'
                 story_text: |-
-                    `ask` a` print` fungují stále jako na úrovni 4.
+                    `{ask}` a` {print}` fungují stále jako na úrovni 4.
 
-                     V úrovni 5 máme něco nového, je to `if`! Pomocí `if` si můžeš vybrat ze dvou různých možností.
+                     V úrovni 5 máme něco nového, je to `{if}`! Pomocí `{if}` si můžeš vybrat ze dvou různých možností.
 
                      ```
-                     jmeno is ask 'Jak se jmenuješ?'
-                     if jmeno is Hedy print 'Ahoj!' else print 'Ráda tě poznávám!'
+                     jmeno {is} {ask} 'Jak se jmenuješ?'
+                     {if} jmeno {is} Hedy {print} 'Ahoj!' {else} {print} 'Ráda tě poznávám!'
                      ```
 
                      Tento kód vypíše Ahoj!, pokud jako jméno zadáš Hedy, a Ráda tě poznávám!, pokud odpovíš něco jiného.
@@ -94,9 +94,9 @@ adventures:
                 story_text_2: "Někdy je kód za příkazem `{if}` příliš dlouhý a nevejde se dobře na jeden řádek. <br> Proto lze takový kód rozdělit na více řádků, začínajíc druhý řádek s `{else}` takhle:\n"
                 example_code_2: "```\njméno {is} {ask} 'Jaké je tvé jméno?'\n{if} jméno {is} Hedy {print} 'pěkné'\n{else} {print} 'já mám hezčí!'\n```\n"
             6:
-                start_code: print '5 krát 5 je ' 5 * 5
+                start_code: {print} '5 krát 5 je ' 5 * 5
                 story_text: |-
-                    `ask`,` print` a `if` stále fungují jako na úrovních 5.
+                    `{ask}`,` {print}` a `{if}` stále fungují jako na úrovních 5.
                      V úrovni 6 je ale něco nového, nyní můžeš také počítat!
 
                      Plus je jednoduché, můžeš ho zapsat jako u matematiky, například `5 + 5`. Mínus funguje stejně, je to `5 - 5`.
@@ -104,38 +104,38 @@ adventures:
                      S krát je to trochu jiné, protože na klávesnici pro něj není žádný symbol. Zkus ho najít, opravdu tam není!
                      Písmenko x by se nám pletlo se slovy, proto násobíme hvězdičkou: `5 * 5`. Přečti si to jako "5 krát 5", pak si to zapamatujete nejsnáze.
                      ```
-                     print '5 plus 5 je ' 5 + 5
-                     print '5 mínus 5 je ' 5 - 5
-                     print '5 krát 5 je ' 5 * 5
+                     {print} '5 plus 5 je ' 5 + 5
+                     {print} '5 mínus 5 je ' 5 - 5
+                     {print} '5 krát 5 je ' 5 * 5
                      ```
                 example_code: "```\n{print} '5 plus 5 is ' 5 + 5\n{print} '5 minus 5 is ' 5 - 5\n{print} '5 {times} 5 is ' 5 * 5\n```\n"
                 story_text_2: "Odteď uděláme změnu v ukládání čísel a slov v proměnných! Odteď můžeš používat `=` namísto  `{is}` když ukládáš například číslo nebo jméno v proměnné, tahle:\n"
                 example_code_2: "```\njméno = Hedy\nodpověď = 20 + 4\n```\n"
             7:
-                start_code: repeat 3 times print 'Hedy je zábavná!'
+                start_code: {repeat} 3 {times} {print} 'Hedy je zábavná!'
                 story_text: |-
-                    `ask`, `print` a `if` fungují stejně jako na úrovni 5 a 6.
-                    Úroveň 7 však přidává příkaz `repeat`, pomocí kterého lze řádek kódu provést vícekrát.
+                    `{ask}`, `{print}` a `{if}` fungují stejně jako na úrovni 5 a 6.
+                    Úroveň 7 však přidává příkaz `{repeat}`, pomocí kterého lze řádek kódu provést vícekrát.
                 example_code: |4-
 
                     ```
-                    repeat 3 times print 'Hedy je zábavná!'
+                    {repeat} 3 {times} {print} 'Hedy je zábavná!'
                     ```
             8:
                 start_code: |-
-                    repeat 5 times
-                        print 'Ahojte, kamarádi'
-                        print 'Toto se vypíše 5krát'
+                    {repeat} 5 {times}
+                        {print} 'Ahojte, kamarádi'
+                        {print} 'Toto se vypíše 5krát'
                 story_text: |
-                    `ask` a `print` stále fungují tak, jak je znáš. Ale `if` a `repeat` se změnily!
+                    `{ask}` a `{print}` stále fungují tak, jak je znáš. Ale `{if}` a `{repeat}` se změnily!
                     Od teď můžeš spouštět víc řádků kódu společně, ale musíš je odsadit.
                     To znamená, že na začátek řádku dáš čtyři mezery. To platí i v případě, že chceš vytvořit blok z pouze jednoho řádku.
 
 
                     ```
-                    repeat 5 times
-                        print 'Ahoj všichni'
-                        print 'Tohle všechno se 5krát zopakuje'
+                    {repeat} 5 {times}
+                        {print} 'Ahoj všichni'
+                        {print} 'Tohle všechno se 5krát zopakuje'
                     ```
                 example_code: "```\n{repeat} 5 {times}\n    {print} 'Hello everyone'\n    {print} 'This is all repeated 5 times'\n```\n"
             9:
@@ -147,46 +147,46 @@ adventures:
                         {else}
                             {print} 'pizza je lepší'
                 story_text: |
-                    In this level you can not only use multiple lines with `if` and `repeat`, but you can also put them together!
-                    In the example you see an `if` command within a `repeat` command. It is also allowed the other way around, and an `if` is also allowed in an `if` and a `repeat` in a `repeat`.
+                    In this level you can not only use multiple lines with `{if}` and `{repeat}`, but you can also put them together!
+                    In the example you see an `{if}` command within a `{repeat}` command. It is also allowed the other way around, and an `{if}` is also allowed in an `{if}` and a `{repeat}` in a `{repeat}`.
                     Give it a try!
 
                     ```
-                    repeat 3 times
-                        food = ask 'What do you want?'
-                        if food is 'pizza'
-                            print 'nice!'
-                        else
-                            print 'pizza is better'
+                    {repeat} 3 {times}
+                        food = {ask} 'What do you want?'
+                        {if} food {is} 'pizza'
+                            {print} 'nice!'
+                        {else}
+                            {print} 'pizza is better'
                     ```
-                example_code: "```\n{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    else\n        {print} 'pizza is better'\n```\n"
+                example_code: "```\n{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    {else}\n        {print} 'pizza is better'\n```\n"
             10:
                 start_code: |-
-                    animals is dog, cat, blobfish
-                    for animal in animals
-                      print 'I love ' animal
+                    animals {is} dog, cat, blobfish
+                    {for} animal {in} animals
+                      {print} 'I love ' animal
                 story_text: |
-                    In this level we learn a new code called `for`. With `for` you can make a list and use all elements.
-                    `for` creates a block, like `repeat` and `if` so all lines in the block need to start with spaces.
+                    In this level we learn a new code called `{for}`. With `{for}` you can make a list and use all elements.
+                    `{for}` creates a block, like `{repeat}` and `{if}` so all lines in the block need to start with spaces.
 
                     ```
-                    animals is dog, cat, blobfish
-                    for animal in animals
-                      print 'I love ' animal
+                    animals {is} dog, cat, blobfish
+                    {for} animal {in} animals
+                      {print} 'I love ' animal
                     ```
                 example_code: "```\nanimals {is} dog, cat, blobfish\n{for} animal {in} animals\n  {print} 'I love ' animal\n```\n"
             11:
                 start_code: |-
-                    for pocitadlo in range 1 to 5
-                        print pocitadlo
+                    {for} pocitadlo {in} {range} 1 {to} 5
+                        {print} pocitadlo
                 story_text: '`{print}`  funguje stejně, ale odteď budeme používat novou formu příkazu `{for}`! Teď můžeš napsat `{for} pocitadlo {in} {range} 1 {to} 5` a použít `pocitadlo` ve svém programu.
 
                     Vyzkoušej si to a uvidíš, co se stane! Nezapomeň používat odsazení na řádcích za příkazy `{for}` a `{if}` (To znamená začínat řádek čtyřmi mezerami).'
-                example_code: "```\nfor counter in range 1 to 5\n    print counter\n```\n"
+                example_code: "```\n{for} counter {in} {range} 1 {to} 5\n    {print} counter\n```\n"
             12:
                 start_code: |-
-                    print 'decimal numbers now need to use a dot'
-                    print 2.5 + 2.5
+                    {print} 'decimal numbers now need to use a dot'
+                    {print} 2.5 + 2.5
                 story_text: |-
                     ## Čísla a text
                     Hedy doteď neumožňovala používat čísla s desetinami jako je 1.5, ale odteď už ano. Pozor, Hedy používá desetinnou tečku `.` namísto desetinné čárky.
@@ -200,14 +200,14 @@ adventures:
                 story_text_5: "**Numbers don't need quotation marks**\nFor numbers, you do not use quotation marks in the `=`:\n"
                 example_code_5: "```\nscore = 25\n{print} 'You got ' score\n```\n"
                 story_text_6: "**Maths with words** In this level it is also allowed to use the + sign with texts. For example:\n"
-                example_code_6: "```\na = 'Hello '\nb = 'world!'\nprint a + b\n```\n"
+                example_code_6: "```\na = 'Hello '\nb = 'world!'\n{print} a + b\n```\n"
             13:
                 start_code: |-
-                    name = ask 'what is your name?'
-                    age = ask 'what is your age?'
-                    if name is 'Hedy' and age is 2
-                        print 'You are the real Hedy!'
-                story_text: Teď se naučíme `and` (česky a) a `or` (nebo)! Když chceš ověřit dvě podmínky, nemusíš k tomu použít dva `if`y, ale stačí ti k tomu `and` a `or`. Pokud použiješ `and`, musí být obě podmínky, napravo i nalevo, pravdivé. S `or` stačí, aby byla pravdivá alespoň jedna z nich.
+                    name = {ask} 'what is your name?'
+                    age = {ask} 'what is your age?'
+                    {if} name {is} 'Hedy' {and} age {is} 2
+                        {print} 'You are the real Hedy!'
+                story_text: Teď se naučíme `{and}` (česky a) a `{or}` (nebo)! Když chceš ověřit dvě podmínky, nemusíš k tomu použít dva `{if}`y, ale stačí ti k tomu `{and}` a `{or}`. Pokud použiješ `{and}`, musí být obě podmínky, napravo i nalevo, pravdivé. S `{or}` stačí, aby byla pravdivá alespoň jedna z nich.
                 #16:
                 #    start_code: |-
                 #        # Tento program se tě zeptá na pár matematických otázek
@@ -290,14 +290,14 @@ adventures:
                 #                print('Ale ne, špatně!')
                 #
 
-                example_code: "```\nname = ask 'what is your name?'\nage = ask 'what is your age?'\nif name is 'Hedy' and age is 2\n    print 'You are the real Hedy!'\n```\n"
+                example_code: "```\nname = {ask} 'what is your name?'\nage = {ask} 'what is your age?'\n{if} name {is} 'Hedy' {and} age {is} 2\n    {print} 'You are the real Hedy!'\n```\n"
             14:
                 start_code: |-
-                    vek = ask 'Kolik je ti let?'
-                    if vek < 13
-                        print 'Jsi mladší než já!'
-                    else
-                        print 'Jsi starší než já!'
+                    vek = {ask} 'Kolik je ti let?'
+                    {if} vek < 13
+                        {print} 'Jsi mladší než já!'
+                    {else}
+                        {print} 'Jsi starší než já!'
                 story_text: |-
                     Pojďme se naučit pár nových věcí! Možná už je znáš z matematiky, jde o `<` a `>`.
                     `<`zjišťuje, zda je první číslo menší než to druhé, např. `4 < 5`.
@@ -310,23 +310,23 @@ adventures:
             15:
                 start_code: |-
                     odpoved = 0
-                    while odpoved != 25
-                        odpoved = ask 'Kolik je 5 * 5?'
-                    print 'Dostala jsem správnou odpověď!'
+                    {while} odpoved != 25
+                        odpoved = {ask} 'Kolik je 5 * 5?'
+                    {print} 'Dostala jsem správnou odpověď!'
 
-                story_text: Naučíme se nový cyklus, konkrátně `while` cyklus! Tento cyklus se opakuje tak dlouho, dokud je jeho podmínka pravdivá. V příkladu vidíte, že kód opakujeme, dokud nedostaneme správnou odpověď. Pokud bychom ji nikdy nedostali, bude cyklus nekonečný!
-                example_code: "```\nanswer = 0\nwhile answer != 25\n    answer = ask 'What is 5 times 5?'\nprint 'A correct answer has been given'\n```\n"
+                story_text: Naučíme se nový cyklus, konkrátně `{while}` cyklus! Tento cyklus se opakuje tak dlouho, dokud je jeho podmínka pravdivá. V příkladu vidíte, že kód opakujeme, dokud nedostaneme správnou odpověď. Pokud bychom ji nikdy nedostali, bude cyklus nekonečný!
+                example_code: "```\nanswer = 0\n{while} answer != 25\n    answer = {ask} 'What is 5 times 5?'\n{print} 'A correct answer has been given'\n```\n"
             16:
                 start_code: |-
                     ovoce = ['jablko', 'banán', 'třešně']
-                    print ovoce
+                    {print} ovoce
                 story_text: Už i naše seznamy mají vlastní závorky! Budeme je psát do hranatých závorek a jejich  jednotlivé položky do jednoduchých uvozovek ('), které už známe.
-                example_code: "```\nfriends = ['Ahmed', 'Ben', 'Cayden']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'the lucky number of ' friends[i]\n    {print} 'is ' lucky_numbers[i]\n```\n"
+                example_code: "```\nfriends = ['Ahmed', 'Ben', 'Cayden']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'the lucky number of ' friends[i]\n    {print} '{is} ' lucky_numbers[i]\n```\n"
             17:
                 start_code: |-
-                    for i in range 1 to 10:
-                        print i
-                    print 'Už jdu!'
+                    {for} i {in} {range} 1 {to} 10:
+                        {print} i
+                    {print} 'Už jdu!'
                 story_text: "## Elif\nNyní trochu změníme odsazení. Pokaždé, když potřebujeme odsazení, je třeba zapsat znak `:` na řádku před tímto odsazením.\n\nV této úrovni můžete také použít nový příkaz: `{elif}`. Příkaz `{elif}` je zkratka z {else} {if} a využijete jej, když chcete provést tři (nebo více!) možností.\nVyzkoušejte jej!"
                 example_code: "```\nprices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'\n```\n"
             18:
@@ -491,7 +491,7 @@ adventures:
                 start_code: "{print} 'Baby shark'"
                 story_text: "## Songs\nSongs often contain a lot of repetition. Sometimes the repetition is also based on counting.\nFor example, in the well-known song 'Bottles of beer'. You can program that song with a little math.\n"
                 example_code: "```\nverse = 99\n{print} verse ' bottles of beer on the wall'\n{print} verse ' bottles of beer'\n{print} 'Take one down, pass it around'\nverse = verse - 1\n{print} verse ' bottles of beer on the wall'\n```\n\nYou can now repeat lines 2 to 9 as many times as you want by copying the lines.\n"
-                example_code_2: "```\nnumber = 6\nnumber = number - 1\nprint number ' little monkeys jumping on the bed'\nprint 'One fell off and bumped his head'\nprint 'Mama called the doctor and the doctor said'\nprint 'NO MORE MONKEYS JUMPING ON THE BED!'\nsleep\n```\n"
+                example_code_2: "```\nnumber = 6\nnumber = number - 1\n{print} number ' little monkeys jumping on the bed'\n{print} 'One fell off and bumped his head'\n{print} 'Mama called the doctor and the doctor said'\n{print} 'NO MORE MONKEYS JUMPING ON THE BED!'\n{sleep}\n```\n"
                 story_text_2: "## 5 Little Monkeys jumping on the bed\nThis children's song counts down from 5 little monkeys to 1 monkey.\nIf you copy line 2 - 7 and paste it under the the code, you can sing the whole song!\n"
             8:
                 story_text: "## Songs\nIn a previous level you've programmed the song 'Bottles of beer'. You made one verse and then had to copy the verses 99 times. In level 7 you can repeat the song 99 times, just by adding one simple line!\n"
@@ -628,7 +628,7 @@ adventures:
                 story_text: "## Rock, paper, scissors\nIn this level we can determine who won.\nFor that you need the new `{if}` code.\n\nSave your choice with the name of choice and the choice of computer as computer choice.\nThen you can use `{if}` to see {if} they are the same or different.\nWill you finish the code?\n"
             1:
                 story_text: "## Rock, paper, scissors\nIn level 1 you can start with a rock, paper, scissors  game.\n\nWith `{ask}` you can make a choice, and with `{echo}` you can repeat that choice.\n"
-                example_code: "\n```\n{print} what do you choose?\n{ask} choose {from} rock, paper or scissors\n{echo} so your choice was:\n```\nInstead of using words, you could also use emojis of course: ✊✋✌\n"
+                example_code: "\n```\n{print} what do you choose?\n{ask} choose from rock, paper or scissors\n{echo} so your choice was:\n```\nInstead of using words, you could also use emojis of course: ✊✋✌\n"
                 start_code: '{print} Welcome to your own rock scissors paper!'
                 story_text_2: "## Challenge\nInstead of using words, you could also use emojis: ✊✋✌\nCan you create a code using emojis?\n"
                 example_code_2: "```\n{print} what do you choose?\n{ask} choose from _\n{echo} so your choice was:\n```\n"
@@ -746,7 +746,7 @@ adventures:
                 example_code_2: "```\n{print} Welcome to Hedy's restaurant!\n{print} Today we're serving pizza or lasagna.\nfood {is} {ask} What would you like to eat?\n{print} Great choice! The food is my favorite!\ntopping {is} {ask} Would you like meat or veggies on that?\n{print} food with topping is on its way!\ndrinks {is} _\n```\n"
             12:
                 story_text: "## Restaurant\nFrom this level on you can use decimal numbers to make you menu more realistic.\n"
-                example_code: "```\nprice = 0\nfood = {ask} 'What would you like to order?'\ndrink = {ask} 'What would you like to drink?'\n{if} food {is} 'hamburger'\n    price = price + 6.50\n{if} food {is} 'pizza'\n    price = price + 5.75\n{if} drink {is} 'water'\n    price = price + 1.20\n{if} drink {is} 'soda'\n    price = price + 2.35\n{print} 'That will be ' price ' dollar, please'\n```\n"
+                example_code: "```\nprice = 0\nfood = {ask} 'What would you like to order?'\ndrinks = {ask} 'What would you like to drink?'\n{if} food {is} 'hamburger'\n    price = price + 6.50\n{if} food {is} 'pizza'\n    price = price + 5.75\n{if} drinks {is} 'water'\n    price = price + 1.20\n{if} drink {is} 'soda'\n    price = price + 2.35\n{print} 'That will be ' price ' dollar, please'\n```\n"
                 start_code: '# place your code here'
             11:
                 story_text: "## Restaurant\nWe can use the `{for} i {in} {range} 1 {to} 5` to {print} the orders from multiple customers in an orderly manner.\n"
@@ -779,7 +779,7 @@ adventures:
                 story_text_2: We can also make a Harry Potter themed fortune teller.
                 story_text: "## Fortune Teller\nIn this level you'll learn how to program the game MASH (mansion, apartement, shack, house). In this game you can predict for all the players at once, what their future will look like.\n"
                 example_code: "```\nhouses = mansion, apartment, shack, house\nloves = nobody, a royal, their neighbour, their true love\npets = dog, cat, elephant\nnames = Jenna, Ryan, Jim\n{for} name {in} names\n    {print} name ' lives in a ' houses {at} {random}\n    {print} name ' will marry ' loves {at} {random}\n    {print} name ' will get a ' pets {at} {random} ' as their pet.'\n    {sleep}\n```\n"
-                example_code_2: "```\nhouses = Gryffindor, Slytherin, Hufflepuff, Ravenclaw\nsubjects = potions, defence against the dark arts, charms, transfiguration\nfears = Voldemort, spiders, failing your OWL test\nnames = Harry, Ron, Hermione\n{for} name in names\n    {print} name ' is placed in ' houses {at} {random}\n    {print} name ' is great at ' subjects {at} {random}\n    {print} name 's greatest fear is ' fears {at} {random}\n```\n"
+                example_code_2: "```\nhouses = Gryffindor, Slytherin, Hufflepuff, Ravenclaw\nsubjects = potions, defence against the dark arts, charms, transfiguration\nfears = Voldemort, spiders, failing your OWL test\nnames = Harry, Ron, Hermione\n{for} name {in} names\n    {print} name ' is placed in ' houses {at} {random}\n    {print} name ' is great at ' subjects {at} {random}\n    {print} name 's greatest fear is ' fears {at} {random}\n```\n"
                 start_code: '# place your code here'
             7:
                 story_text: "## Fortune Teller\nIn this level you can use the `{repeat}` command to make your machine tell multiple fortunes at once.\n"
@@ -808,7 +808,7 @@ adventures:
                 start_code: '# place your code here'
             6:
                 story_text: "## Fortune Teller\nIn this level you can use math in your predictions as a fortune teller. This allows you to make up (silly) formulas to calculate the future.\nFor example you could calculate how rich you'll get or how many kids you will have when you grow up.\n"
-                example_code: "```\n{print} 'I am Hedy the fortune teller!'\n{print} 'I can predict how many kids youll get when you grow up!'\nage = {ask} 'How old are you?'\nsiblings = {ask} 'How many siblings do you have?'\nlength = {ask} 'How tall are you in centimetres?'\nkids = length / age\nkids = kids - siblings\n{print} 'You will get ...'\n{sleep}\n{print} kids ' kids!'\n```\n\n## Example Silly Fortune Teller\nIf the previous example wasn't silly enough for you, take a look at this one!\n\n```\n{print} 'Im Hedy the silly fortune teller!'\n{print} 'I will predict how smart you are!'\nfootball = {ask} 'On a scale 1-10 how much do you love football?'\nbananas = {ask} 'How many bananas did you eat this week?'\nhygiene = {ask} 'How many times did you wash your hands today?'\nresult = bananas + hygiene\nresult = result * football\n{print} 'You are ' result ' percent smart.'\n```\n"
+                example_code: "```\n{print} 'I am Hedy the fortune teller!'\n{print} 'I can predict how many kids youll get when you grow up!'\nage = {ask} 'How old are you?'\nsiblings = {ask} 'How many siblings do you have?'\n{length} = {ask} 'How tall are you in centimetres?'\nkids = {length} / age\nkids = kids - siblings\n{print} 'You will get ...'\n{sleep}\n{print} kids ' kids!'\n```\n\n## Example Silly Fortune Teller\nIf the previous example wasn't silly enough for you, take a look at this one!\n\n```\n{print} 'Im Hedy the silly fortune teller!'\n{print} 'I will predict how smart you are!'\nfootball = {ask} 'On a scale 1-10 how much do you love football?'\nbananas = {ask} 'How many bananas did you eat this week?'\nhygiene = {ask} 'How many times did you wash your hands today?'\nresult = bananas + hygiene\nresult = result * football\n{print} 'You are ' result ' percent smart.'\n```\n"
                 start_code: '# place your code here'
             4:
                 story_text: "## Fortune Teller\nThis level has no new functions, but allows you to practice with using the quotation marks.\nYou can remake your level 3 code, and make sure to add the quotation marks in the right places!\n\nMind that in level 3, we couldn't use the word 'question' as both the name of the variable and a normal word that could be printed.\nThe quotation marks in level 3 make this possible!\n\nImportant! Mind that now that we're using quotation marks, Hedy will get confused when you use the apostrophe for contractions like I'm or What's.\nMake sure to remove those apostrophes and change the spelling to Im or Whats.\n"
@@ -926,8 +926,8 @@ adventures:
                 example_code: " ```\n {print} 'happy birthday to you'\n {print} 'happy birthday to you'\n {print} 'happy birthday dear Hedy'\n {print} 'happy birthday to you'\n ```\n"
             9:
                 start_code: "{print} 'Lets go to the next level!'"
-                story_text: "## What's next?\nYou're doing great! In this level we still face a small problem. You have learned to repeat lines, but what {if} you'd want to slightly change the line.\nFor example {if} you want to sing the song '{if} you're happy and you knwo it'\n\nIt would look like this:\n```\n{repeat} 2 {times}\n    {print} '{if} youre happy and you know it clap your hands'\n{print} '{if} youre happy and you know it and you really want to show it'\n{print} '{if} youre happy and you know it clap your hands'\n```\n\nIf you'd also want the next verse 'stomp your feet', and the next one, and the next one, you'd have to change the code completely.\nIn the next level you'll learn the `{for}` command, which allows you to make a list of actions and repeat the code with another action each time!\nPlease take a look!\n"
-                example_code: "```\n{repeat} 2 {times}\n    {print} '{if} youre happy and you know it clap your hands'\n{print} '{if} youre happy and you know it and you really want to show it'\n{print} '{if} youre happy and you know it clap your hands'\n```\n"
+                story_text: "## What's next?\nYou're doing great! In this level we still face a small problem. You have learned to repeat lines, but what if you'd want to slightly change the line.\nFor example if you want to sing the song 'if you're happy and you know it'\n\nIt would look like this:\n```\n{repeat} 2 {times}\n    {print} 'if youre happy and you know it clap your hands'\n{print} 'if youre happy and you know it and you really want to show it'\n{print} 'if youre happy and you know it clap your hands'\n```\n\nIf you'd also want the next verse 'stomp your feet', and the next one, and the next one, you'd have to change the code completely.\nIn the next level you'll learn the `{for}` command, which allows you to make a list of actions and repeat the code with another action each time!\nPlease take a look!\n"
+                example_code: "```\n{repeat} 2 {times}\n    {print} 'if youre happy and you know it clap your hands'\n{print} 'if youre happy and you know it and you really want to show it'\n{print} 'if youre happy and you know it clap your hands'\n```\n"
             10:
                 start_code: "{print} 'Lets go to the next level!'"
                 story_text: "## What's next?\nYou have reached the end of this level, you're doing great! You are about to go to the next level. In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.\nIn Python there is no `{repeat}` command, but there is a command that works like {repeat}. Are you curious to find out how to say `{repeat}` in Python language? Quickly go on to find out!\n"
@@ -963,7 +963,7 @@ adventures:
                 example_code: "```\n{repeat} 5 {times} {print} 'In the next level you can repeat multiple lines of code at once!'\n```\n"
             8:
                 start_code: "{print} 'Lets go to the next level!'"
-                story_text: "## What's next?\nGreat job! You've reached the end of another level! In this level you've learned to use multiple lines of code in an {if} or {repeat} command. But you can't yet combine the two...\nGood news! In the next level you will be allowed to put an {if} inside an {if}, or inside a {repeat} command.\n\nFor example:\n```\nanswer = {ask} 'Would you like to go to teh next level?'\n{if} answer {is} 'yes'\n    {print} 'Great! You can use the {repeat} commando in the {if} command!'\n    {print} 'Hooray!'\n    {print} 'Hooray!'\n    {print} 'Hooray!'\n{else}\n    {print} 'Okay, you can stay here for a little longer!'\n```\nIn this code Hedy will still say 'Your drink is on its way' even {if} you didn't even want to drink something! In the next level this will be fixed!\n"
+                story_text: "## What's next?\nGreat job! You've reached the end of another level! In this level you've learned to use multiple lines of code in an {if} or {repeat} command. But you can't yet combine the two...\nGood news! In the next level you will be allowed to put an {if} inside an {if}, or inside a {repeat} command.\n\nFor example:\n```\nanswer = {ask} 'Would you like to go to the next level?'\n{if} answer {is} 'yes'\n    {print} 'Great! You can use the {repeat} commando in the {if} command!'\n    {print} 'Hooray!'\n    {print} 'Hooray!'\n    {print} 'Hooray!'\n{else}\n    {print} 'Okay, you can stay here for a little longer!'\n```\nIn this code Hedy will still say 'Your drink is on its way' even if you didn't even want to drink something! In the next level this will be fixed!\n"
                 example_code: "```\nanswer = {ask} 'Would you like to go to the next level?'\n{if} answer {is} yes\n    {print} 'Great! You can use the {repeat} commando in the {if} command!'\n    {print} 'Hooray!'\n    {print} 'Hooray!'\n    {print} 'Hooray!'\n{else}\n    {print} 'Okay, you can stay here for a little longer!'\n```\n"
             16:
                 start_code: "{print} 'Lets go to the next level!'"
@@ -979,10 +979,10 @@ adventures:
         levels:
             13:
                 story_text: "## Superspy\nThe code you made in the previous level can be made a lot easier in this one with the `{and}` command.\n"
-                example_code: "```\nname is ask 'What is your name?'\npassword is ask 'What is your password?'\nif name is 'Agent007' and password is 'TOPSECRET'\n    print 'Go to the airport at 02.00'\nelse\n    print 'Go to the trainstation at 10.00'\n ```\n"
+                example_code: "```\nname {is} {ask} 'What is your name?'\npassword {is} {ask} 'What is your password?'\n{if} name {is} 'Agent007' {and} password {is} 'TOPSECRET'\n    {print} 'Go to the airport at 02.00'\n{else}\n    {print} 'Go to the trainstation at 10.00'\n ```\n"
                 start_code: '## place your code here'
             12:
-                example_code: "```\nname is ask 'What is your name?'\nif name is 'Agent007'\n    a is 'Go to the airport '\nelse\n    a is 'Go to the trainstation '\npassword is ask 'What is the password?'\nif password is 'TOPSECRET'\n    b is 'tomorrow at 02.00'\nelse\n    b is 'today at 10.00'\nprint a + b\n```\n"
+                example_code: "```\nname {is} {ask} 'What is your name?'\n{if} name {is} 'Agent007'\n    a {is} 'Go to the airport '\n{else}\n    a {is} 'Go to the trainstation '\npassword {is} {ask} 'What is the password?'\n{if} password {is} 'TOPSECRET'\n    b {is} 'tomorrow at 02.00'\n{else}\n    b {is} 'today at 10.00'\n{print} a + b\n```\n"
                 story_text: "## Make a secret code like a super spy\nIn this adventure you can create your own super spy code. Encode a message that only the right agent can decipher.\nIf the enemy tries to crack the code, they will get some false info to waste their time.\n"
                 start_code: '## place your code here'
         name: SuperSpy
@@ -995,7 +995,7 @@ adventures:
                 start_code: '## place your code here'
                 story_text: "## Tic Tac Toe\nIn the previous levels you've made a tic tac toe game. Now you've learned how to use the = sign, the == sign and the != sign.\nYou can use this knowledge in your new Taic Tac Toe game, like this:\n"
             15:
-                story_text: "## Tic Tac Toe\nIn this level you can improve your Tic Tac Toe game with the {while} loop/ With this loop you can combine the `{if} game != 'over'` and the `{for} i {in} {range} 1 to 9` into one simple line.\nCheck it out:\n"
+                story_text: "## Tic Tac Toe\nIn this level you can improve your Tic Tac Toe game with the {while} loop/ With this loop you can combine the `{if} game != 'over'` and the `{for} i {in} {range} 1 {to} 9` into one simple line.\nCheck it out:\n"
                 start_code: '## place your code here'
                 example_code: "```\nsign = 'x'\nopen_spots = 1, 2, 3, 4, 5, 6, 7, 8, 9\ngame = 'on'\nspot_1 = '.'\nspot_2 = '.'\nspot_3 = '.'\nspot_4 = '.'\nspot_5 = '.'\nspot_6 = '.'\nspot_7 = '.'\nspot_8 = '.'\nspot_9 = '.'\n{print} 'TIC TAC TOE!'\n{print} spot_1 spot_2 spot_3\n{print} spot_4 spot_5 spot_6\n{print} spot_7 spot_8 spot_9\n{print} ' '\n{while} game != 'over'\n    choice = {ask} 'Player ' sign ', which spot?'\n    {if} choice {in} open_spots\n        {remove} choice {from} open_spots\n        {if} choice == 1\n            spot_1 = sign\n        {if} choice == 2\n            spot_2 = sign\n        {if} choice == 3\n            spot_3 = sign\n        {if} choice == 4\n            spot_4 = sign\n        {if} choice == 5\n            spot_5 = sign\n        {if} choice == 6\n            spot_6 = sign\n        {if} choice == 7\n            spot_7 = sign\n        {if} choice == 8\n            spot_8 = sign\n        {if} choice == 9\n            spot_9 = sign\n    {else}\n        {print} 'That spot was already taken'\n    {print} spot_1 spot_2 spot_3\n    {print} spot_4 spot_5 spot_6\n    {print} spot_7 spot_8 spot_9\n    {print} ' '\n    winner = {ask} 'Did you win?'\n    {if} winner == 'yes'\n        {print} 'Good job, player ' sign '!'\n        game = 'over'\n    {else}\n        {if} sign == 'x'\n            sign = 'o'\n        {else}\n            sign = 'x'\n```\n"
             17:
@@ -1015,6 +1015,6 @@ adventures:
             17:
                 start_code: '# place your code here'
                 story_text: "## Create a game of Blackjack\nBlackjack is a simple game of cards in which you have to get as close to 21 points as possible. You get two cards. Each card is worth their numeral value, and the face cards (Jack, Queen and King) are worth 10 points.\nThe Ace is worth either 1 or 11 points (you can choose). The dealer, your opponent, also gets two cards.\nIf you want, you can get another card, and its points will be added to your total. The dealer can also choose to take another card.\nBut be careful not to get more than 21 points, because if you do, you lose!\nThe player who gets closest to 21, without going over it, wins!\n\nHave fun!\n"
-                example_code: "```\n{print} 'BLACKJACK'\ncards = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Jack', 'Queen','King', 'Ace']\npoints = 0\ndealer_points = 0\ncard_1 = cards[{random}]\ncard_2 = cards[{random}]\ncard_3 = cards [{random}]\ndealer_card_1 = cards[{random}]\ndealer_card_2 = cards[{random}]\ndealer_card_3 = cards[{random}]\n# Points for card 1\n{if} card_1 == 'Jack' {or} card_1 == 'Queen' {or} card_1 == 'King':\n    points = points + 10\n{elif} card_1 == 'Ace':\n    points = points + 11\n{else}:\n    points = points + card_1\n# Points for card 2\n{if} card_2 == 'Jack' {or} card_2 == 'Queen' {or} card_2 == 'King':\n    points = points + 10\n{elif} card_2 == 'Ace':\n    points = points + 11\n{else}:\n    points = points + card_2\n# Points for dealer card 1\n{if} dealer_card_1 == 'Jack' {or} dealer_card_1 == 'Queen' {or} dealer_card_1 == 'King':\n    dealer_points = dealer_points + 10\n{elif} dealer_card_1 == 'Ace':\n    dealer_points = dealer_points + 11\n{else}:\n    dealer_points = dealer_points + dealer_card_1\n# Points for dealer card 2\n{if} dealer_card_2 == 'Jack' {or} dealer_card_2 == 'Queen' {or} dealer_card_2 == 'King':\n    dealer_points = dealer_points + 10\n{elif} dealer_card_2 == 'Ace':\n    dealer_points = dealer_points + 11\n{else}:\n    dealer_points = dealer_points + dealer_card_2\n# Two Aces\n{if} card_1 == 'Ace' {and} card_2 == 'Ace':\n    points = 12\n{if} dealer_card_1 == 'Ace' {and} dealer_card_2 == 'Ace':\n    dealer_points = 12\n# Scoreboard\n{print} 'You have a ' card_1 ' and a ' card_2 ' (' points ' points)'\n{print} 'The dealer has a ' dealer_card_1 ' and a ' dealer_card_2 ' (' dealer_points ' points)'\n# Extra card for the player\nhit = {ask} 'Do you want an extra card?'\n{if} hit == 'yes':\n    {if} card_3 == 'Jack' {or} card_3 == 'Queen' {or} card_3 == 'King':\n        points = points + 10\n    {elif} card_3 == 'Ace':\n        {if} points > 11:\n            points = points + 11\n        {else}:\n            points = points + 1\n    {else}:\n        points = points + card_3\n    print 'You get an extra ' card_3 ' (' points ' points)'\n{else}:\n    print 'No extra cards'\n# Winner\n{if} points > 21 {or} dealer_points > points {or} dealer_points == 21:\n    {print} 'You lose'\n{elif} dealer_points < 17:\n    {print} 'The dealer takes an extra card. It is a... ' dealer_card_3\n    {if} dealer_card_3 == 'Jack' {or} dealer_card_3 == 'Queen' {or} dealer_card_3 == 'King':\n        dealer_points = dealer_points + 10\n    {elif} dealer_card_3 == 'Ace':\n        {if} dealer_points < 11:\n            dealer_points = dealer_points + 11\n        {else}:\n            dealer_points = dealer_points + 1\n    {else}:\n        dealer_points = dealer_points + dealer_card_3\n    {print} 'The dealer has ' dealer_points ' points now'\n    {if} dealer_points < 21 {and} dealer_points > points:\n        {print} 'You lose'\n    {else}:\n        {print} 'You win'\n{elif} points > dealer_points {and} points < 21:\n    {print} 'You win!'\n```\n"
+                example_code: "```\n{print} 'BLACKJACK'\ncards = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Jack', 'Queen','King', 'Ace']\npoints = 0\ndealer_points = 0\ncard_1 = cards[{random}]\ncard_2 = cards[{random}]\ncard_3 = cards [{random}]\ndealer_card_1 = cards[{random}]\ndealer_card_2 = cards[{random}]\ndealer_card_3 = cards[{random}]\n# Points for card 1\n{if} card_1 == 'Jack' {or} card_1 == 'Queen' {or} card_1 == 'King':\n    points = points + 10\n{elif} card_1 == 'Ace':\n    points = points + 11\n{else}:\n    points = points + card_1\n# Points for card 2\n{if} card_2 == 'Jack' {or} card_2 == 'Queen' {or} card_2 == 'King':\n    points = points + 10\n{elif} card_2 == 'Ace':\n    points = points + 11\n{else}:\n    points = points + card_2\n# Points for dealer card 1\n{if} dealer_card_1 == 'Jack' {or} dealer_card_1 == 'Queen' {or} dealer_card_1 == 'King':\n    dealer_points = dealer_points + 10\n{elif} dealer_card_1 == 'Ace':\n    dealer_points = dealer_points + 11\n{else}:\n    dealer_points = dealer_points + dealer_card_1\n# Points for dealer card 2\n{if} dealer_card_2 == 'Jack' {or} dealer_card_2 == 'Queen' {or} dealer_card_2 == 'King':\n    dealer_points = dealer_points + 10\n{elif} dealer_card_2 == 'Ace':\n    dealer_points = dealer_points + 11\n{else}:\n    dealer_points = dealer_points + dealer_card_2\n# Two Aces\n{if} card_1 == 'Ace' {and} card_2 == 'Ace':\n    points = 12\n{if} dealer_card_1 == 'Ace' {and} dealer_card_2 == 'Ace':\n    dealer_points = 12\n# Scoreboard\n{print} 'You have a ' card_1 ' and a ' card_2 ' (' points ' points)'\n{print} 'The dealer has a ' dealer_card_1 ' and a ' dealer_card_2 ' (' dealer_points ' points)'\n# Extra card for the player\nhit = {ask} 'Do you want an extra card?'\n{if} hit == 'yes':\n    {if} card_3 == 'Jack' {or} card_3 == 'Queen' {or} card_3 == 'King':\n        points = points + 10\n    {elif} card_3 == 'Ace':\n        {if} points > 11:\n            points = points + 11\n        {else}:\n            points = points + 1\n    {else}:\n        points = points + card_3\n    {print} 'You get an extra ' card_3 ' (' points ' points)'\n{else}:\n    {print} 'No extra cards'\n# Winner\n{if} points > 21 {or} dealer_points > points {or} dealer_points == 21:\n    {print} 'You lose'\n{elif} dealer_points < 17:\n    {print} 'The dealer takes an extra card. It is a... ' dealer_card_3\n    {if} dealer_card_3 == 'Jack' {or} dealer_card_3 == 'Queen' {or} dealer_card_3 == 'King':\n        dealer_points = dealer_points + 10\n    {elif} dealer_card_3 == 'Ace':\n        {if} dealer_points < 11:\n            dealer_points = dealer_points + 11\n        {else}:\n            dealer_points = dealer_points + 1\n    {else}:\n        dealer_points = dealer_points + dealer_card_3\n    {print} 'The dealer has ' dealer_points ' points now'\n    {if} dealer_points < 21 {and} dealer_points > points:\n        {print} 'You lose'\n    {else}:\n        {print} 'You win'\n{elif} points > dealer_points {and} points < 21:\n    {print} 'You win!'\n```\n"
         description: Try to get as close to 21 as you can
         default_save_name: Blackjack
