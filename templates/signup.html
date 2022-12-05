@@ -105,6 +105,7 @@
                     </select>
                 </div>
                 <!-- START OF NEW QUESTION -->
+                {% if is_teacher %}
                 <div class="signup-container">
                     <label class="signup-label" for="heard_about">How have you heard about Hedy?</label>
                     <ul class="signup-input appearance-none">
@@ -140,6 +141,7 @@
                         </li>
                     </ul>
                 </div>
+                {% endif %}
                 <!-- END OF NEW QUESTION -->
                 <div class="signup-container">
                     <label class="signup-label" for="prog_experience">{{_('programming_experience')}}</label>
