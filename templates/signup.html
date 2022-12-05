@@ -107,36 +107,36 @@
                 <!-- START OF NEW QUESTION -->
                 {% if is_teacher %}
                 <div class="signup-container">
-                    <label class="signup-label" for="heard_about">How have you heard about Hedy?</label>
+                    <label class="signup-label" for="heard_about">{{_('heard_about_hedy')}}</label>
                     <ul class="signup-input appearance-none">
                         <li class="flex" style="justify-content: end;">
                             <div class="flex flex-row items-center gap-2">
                                 <input type="checkbox" name="heard_about" value="teacher">
-                                <label style="width: 201px;">From another teacher</label>
+                                <label style="width: 201px;">{{_('from_another_teacher')}}</label>
                             </div>
                         </li>
                         <li class="flex" style="justify-content: end;">
                             <div class="flex flex-row items-center gap-2">
                                 <input type="checkbox" name="heard_about" value="social_media">
-                                <label style="width: 201px;">Social media</label>
+                                <label style="width: 201px;">{{_('social_media')}}</label>
                             </div>
                         </li>
                         <li class="flex" style="justify-content: end;">
                             <div class="flex flex-row items-center gap-2">
                                 <input type="checkbox" name="heard_about" value="video">
-                                <label style="width: 201px;">From a video</label>
+                                <label style="width: 201px;">{{_('from_video')}}</label>
                             </div>
                         </li>
                         <li class="flex" style="justify-content: end;">
                             <div class="flex flex-row items-center gap-2">
                                 <input type="checkbox" name="heard_about" value="magazine_website">
-                                <label style="width: 201px;">From a magazine or website</label>
+                                <label style="width: 201px;">{{_('from_magazine_website')}}</label>
                             </div>
                         </li>
                         <li class="flex" style="justify-content: end;">
                             <div class="flex flex-row items-center gap-2">
                                 <input type="checkbox" name="heard_about" value="other">
-                                <label style="width: 201px;">Other</label>
+                                <label style="width: 201px;">{{_('other_source')}}</label>
                             </div>
                         </li>
                     </ul>
