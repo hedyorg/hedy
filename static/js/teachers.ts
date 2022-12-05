@@ -520,6 +520,13 @@ export function generate_passwords() {
     });
 }
 
+export function append_classname() {
+    const classname = <string>$('#classes').val();
+    $('.usernames_input').each(function () {
+        $(this).val( classname + "_" + $(this).val());
+    });
+}
+
 export function create_accounts(prompt: string) {
     modal.confirm (prompt, function () {
         $('#account_rows_container').find(':input').each(function () {
