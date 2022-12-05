@@ -504,6 +504,10 @@ export function add_account_placeholder() {
 }
 
 export function generate_passwords() {
+    if (!$('#passwords_toggle').is(":checked")) {
+        $('.passwords_input').val('');
+        return;
+    }
     $('.account_row').each(function () {
         if ($(this).is(':visible')) {
             $(this).find(':input').each(function () {
