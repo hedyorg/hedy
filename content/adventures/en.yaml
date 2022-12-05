@@ -1530,7 +1530,6 @@ adventures:
                     print 'The answer is ' result
                     ```
                 start_code: "# place your code here"
-
             7:
                 story_text: |
                     You might have tried it in level 5 and 6, pressing the key linked to ```pressed``` multiple
@@ -1590,6 +1589,24 @@ adventures:
                             turn right
                     ```
                 start_code: "# place your code here"
+            10:
+                story_text: |
+                    In this level you can make the turtle draw you a figure. The turtle is raring to go.
+                    Give the turtle the starting signal by pressing the x or y key on your keyboard.
+                    Can you let the turtle draw you another figure?
+                example_code: |
+                    ```
+                    distances = 50, 40, 30, 20, 10
+                    {if} x is {pressed}
+                        for distance in distances
+                            {forward} distance
+                            {turn} {left}
+                    {if} y is {pressed}
+                        for distance in distances
+                            {forward} distance
+                            {turn} {right}
+                    ```
+                start_code: "# place your code here"
             11:
                 story_text: |
                     Now that you have learned of the ```for ... in range ... to ...``` rule, you can use it for ```pressed```
@@ -1610,6 +1627,50 @@ adventures:
                             turn left
                         {if} d is {pressed}
                             turn right
+                    ```
+                start_code: "# place your code here"
+            12:
+                story_text: |
+                Are you familiar with videogames? You walk into tall grass and are suddenly approached by
+                a very suspicious mouse. What will you do?
+                In this level we will make a small menu with different kinds of options.
+                Storing text into a variable is quite handy for repeated uses.
+                Option, I choose you!
+                example_code: |
+                    ```
+                    choose = 'You chose option: '
+                    print 'A wild mouse appeared!'
+                    print 'Choose an option and press first letter: (n)et, (c)at, (b)ag, (r)un'
+                    {if} n is {pressed}
+                        {print} choose + 'net'
+                        {print} 'You attempt to catch the mouse with a net..'
+                        sleep
+                        {print} 'Congratulations you did it!'
+                    {if} c is {pressed}
+                        {print} choose + 'cat'
+                        {print} 'You send out your cat'
+                        sleep
+                        {print} 'The mouse got scared and ran away!'
+                    {if} b is {pressed}
+                        {print} choose + 'bag'
+                        {print} 'The mouse jumped into you bag!'
+                    {if} r is {pressed}
+                        {print} choose + 'run'
+                        {print} 'You got away safely!'
+                    ```
+                start_code: "# place your code here"
+            16:
+                story_text: |
+                    Lets move a little with a game of Twister!
+                    When everyone is ready, press the x key for the next move!
+                example_code: |
+                    ```
+                    limbs = ['Right Hand', 'Left Hand', 'Right Foot', 'Left Foot']
+                    colours = ['Blue', 'Green', 'Red', 'Yellow']
+                    l = limbs[random]
+                    c = colours[random]
+                    {if} x is {pressed}
+                        {print} l + ' on ' + c + '!'
                     ```
                 start_code: "# place your code here"
     rock:
