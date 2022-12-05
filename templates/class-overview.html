@@ -26,7 +26,7 @@
               <th id="remove_student_header" class="text-center">{{_('remove')}}</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="username">
             {% for student in class_info.students %}
               <tr>
                 <td class="username_cell">{{student.username}}</td>
