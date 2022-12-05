@@ -2085,7 +2085,33 @@ class TestsLevel12(HedyTester):
               print(f'''The button got pressed!''')
               break""")
 
-        self.multi_level_tester(code=code, expected=expected, max_level=12)
+        self.multi_level_tester(code=code, expected=expected, max_level=16)
+
+    def test_if_button_is_pressed_make_button(self):
+        code = textwrap.dedent("""\
+        x = 'PRESS'
+        x is button
+        if PRESS is pressed
+            y = 'BUT'
+            y is button""")
+
+        expected = HedyTester.dedent(f"""\
+        x = 'PRESS'
+        create_button(x)
+        while not pygame_end:
+          pygame.display.update()
+          event = pygame.event.wait()
+          if event.type == pygame.QUIT:
+            pygame_end = True
+            pygame.quit()
+            break
+          if event.type == pygame.USEREVENT:
+            if event.key == 'PRESS':
+              y = 'BUT'
+              create_button(y)
+              break""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=16)
 
     def test_if_equality_make_button(self):
         code = textwrap.dedent("""\
@@ -2097,5 +2123,32 @@ class TestsLevel12(HedyTester):
         x = 'knop1'
         if convert_numerals('Latin', 'knop1') == convert_numerals('Latin', x):
           create_button(x)""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=16)
+
+    def test_if_button_is_pressed_print_in_repeat(self):
+        code = textwrap.dedent("""\
+        x = 'but' 
+        x is button
+        repeat 3 times
+            if but is pressed
+                print 'wow'""")
+
+        expected = HedyTester.dedent(f"""\
+        x = 'but'
+        create_button(x)
+        for i in range(int('3')):
+          while not pygame_end:
+            pygame.display.update()
+            event = pygame.event.wait()
+            if event.type == pygame.QUIT:
+              pygame_end = True
+              pygame.quit()
+              break
+            if event.type == pygame.USEREVENT:
+              if event.key == 'but':
+                print(f'''wow''')
+                break
+          time.sleep(0.1)""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=16)

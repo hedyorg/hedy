@@ -1185,7 +1185,7 @@ class TestsLevel5(HedyTester):
     def test_if_button_is_pressed_print(self):
         code = textwrap.dedent("""\
         PRINT is button
-        if naam is pressed print 'The button got pressed!'""")
+        if PRINT is pressed print 'The button got pressed!'""")
 
         expected = HedyTester.dedent(f"""\
         create_button('PRINT')
@@ -1197,8 +1197,29 @@ class TestsLevel5(HedyTester):
             pygame.quit()
             break
           if event.type == pygame.USEREVENT:
-            if event.key == 'naam':
+            if event.key == 'PRINT':
               print(f'The button got pressed!')
+              break""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=7)
+
+    def test_if_button_is_pressed_make_button(self):
+        code = textwrap.dedent("""\
+        BUTTON1 is button
+        if BUTTON1 is pressed BUTTON2 is button""")
+
+        expected = HedyTester.dedent(f"""\
+        create_button('BUTTON1')
+        while not pygame_end:
+          pygame.display.update()
+          event = pygame.event.wait()
+          if event.type == pygame.QUIT:
+            pygame_end = True
+            pygame.quit()
+            break
+          if event.type == pygame.USEREVENT:
+            if event.key == 'BUTTON1':
+              create_button('BUTTON2')
               break""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=7)

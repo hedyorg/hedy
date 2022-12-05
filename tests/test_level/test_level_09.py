@@ -299,3 +299,32 @@ class TestsLevel9(HedyTester):
           time.sleep(0.1)""")
 
         self.multi_level_tester(code=code, expected=expected, extra_check_function=self.is_turtle(), max_level=11)
+
+    #
+    # button tests
+    #
+
+    def test_if_button_is_pressed_print_in_repeat(self):
+        code = textwrap.dedent("""\
+        button1 is button
+        repeat 3 times
+          if button1 is pressed
+            print 'wow'""")
+
+        expected = HedyTester.dedent(f"""\
+        create_button('button1')
+        for i in range(int('3')):
+          while not pygame_end:
+            pygame.display.update()
+            event = pygame.event.wait()
+            if event.type == pygame.QUIT:
+              pygame_end = True
+              pygame.quit()
+              break
+            if event.type == pygame.USEREVENT:
+              if event.key == 'button1':
+                print(f'wow')
+                break
+          time.sleep(0.1)""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=11)
