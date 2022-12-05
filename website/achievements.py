@@ -93,7 +93,10 @@ class Achievements:
 
     def verify_run_achievements(self, username, code=None, level=None, response=None):
         self.initialize_user_data_if_necessary()
-        self.check_programs_run()
+        # To reduce a bit of cognitive load, prevent run achievements for the first 5 programs
+        # Todo: It would be nice to remove the "run 1 program" achievement in the future
+        if session["run_programs"] < 5:
+            return
         if code and level:
             self.check_code_achievements(code, level)
         if code and response:
