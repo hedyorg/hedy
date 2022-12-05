@@ -998,6 +998,32 @@ class UsesPyGame(Transformer):
         return True
 
 
+class UsesList(Transformer):
+    def __default__(self, args, children, meta):
+        if len(children) == 0:
+            return False
+        else:
+            return any(type(c) == bool and c is True for c in children)
+
+    def list_access(self, args):
+        return True
+
+    def add(self, args):
+        return True
+
+    def remove(self, args):
+        return True
+
+    def list_access_var(self, args):
+        return True
+
+    def assign_list(self, args):
+        return True
+
+    def change_list_item(self, args):
+        return True
+
+
 class AllCommands(Transformer):
     def __init__(self, level):
         self.level = level
@@ -1132,7 +1158,7 @@ class IsValid(Filter):
         return False, InvalidInfo(" ", line=args[0][2].line, column=args[0][2].column), meta
 
     def error_print_nq(self, meta, args):
-        words = [x[1] for x in args] #second half of the list is the word
+        words = [x[1] for x in args]  # second half of the list is the word
         text = ' '.join(words)
         return False, InvalidInfo("print without quotes", arguments=[
                                   text], line=meta.line, column=meta.column), meta
@@ -1601,7 +1627,8 @@ class ConvertToPython_3(ConvertToPython_2):
             return args[0] + '[' + args[1] + '-1]'
 
     def process_argument(self, meta, arg):
-        # only call process_variable if arg is a string, else keep as is (ie. don't change 5 into '5', my_list[1] into 'my_list[1]')
+        # only call process_variable if arg is a string, else keep as is (ie.
+        # don't change 5 into '5', my_list[1] into 'my_list[1]')
         if arg.isnumeric():  # is int/float
             return arg
         elif ('[' in arg and ']' in arg):  # is list indexing
@@ -2388,7 +2415,7 @@ def get_parser(level, lang="en", keep_all_tokens=False):
     return ret
 
 
-ParseResult = namedtuple('ParseResult', ['code', 'has_turtle', 'has_pygame'])
+ParseResult = namedtuple('ParseResult', ['code', 'has_turtle', 'has_pygame', 'has_list'])
 
 
 def transpile(input_string, level, lang="en"):
@@ -2468,9 +2495,9 @@ def preprocess_blocks(code, level, lang):
     processed_code = []
     lines = code.split("\n")
     current_number_of_indents = 0
-    previous_number_of_indents = 0 
-    indent_size = 4 # set at 4 for now
-    indent_size_adapted = False #FH We can remove this now since we changed in indenter a bit in Nov 2022
+    previous_number_of_indents = 0
+    indent_size = 4  # set at 4 for now
+    indent_size_adapted = False  # FH We can remove this now since we changed in indenter a bit in Nov 2022
     line_number = 0
     next_line_needs_indentation = False
     for line in lines:
@@ -2782,8 +2809,8 @@ def transpile_inner(input_string, level, lang="en"):
 
         has_turtle = UsesTurtle().transform(abstract_syntax_tree)
         has_pygame = UsesPyGame().transform(abstract_syntax_tree)
-
-        return ParseResult(python, has_turtle, has_pygame)
+        has_list = UsesList().transform(abstract_syntax_tree)
+        return ParseResult(python, has_turtle, has_pygame, has_list)
     except VisitError as E:
         # Exceptions raised inside visitors are wrapped inside VisitError. Unwrap it if it is a
         # HedyException to show the intended error message.
