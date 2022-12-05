@@ -506,6 +506,7 @@ export function add_account_placeholder() {
 export function generate_passwords() {
     if (!$('#passwords_toggle').is(":checked")) {
         $('.passwords_input').val('');
+        $('.passwords_input').prop('disabled', false);
         return;
     }
     $('.account_row').each(function () {
@@ -518,6 +519,7 @@ export function generate_passwords() {
             });
         }
     });
+    $('.passwords_input').prop('disabled', true);
 }
 
 export function append_classname() {
