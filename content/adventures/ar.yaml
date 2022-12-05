@@ -277,42 +277,45 @@ adventures:
                 example_code: "```\n{print} 'The prince kept calling for help'\n{repeat} 5 {times} {print} 'Help!'\n{print} 'Why is nobody helping me?'\n```\n"
             3:
                 story_text: |
-                    ## Story
-                    In level 3 you can make your story more fun. You can use randomness for any monster, animal or other obstacle, like this:
+                    ## قصة
+                    في المستوى الثالث يمكنك جعل القصة أكثر متعة. يمكنك إستخدام الطريقة العشوائية لأي وحش أو حيوان أو حتى عائق، مثل:
 
                 example_code: |
                     ```
-                    animals {is} 🦔, 🐿, 🦉, 🦇
-                    {print} He now hears the sound of an animals {at} {random}
+                    الحيوانات هي 🦔, 🐿, 🦉, 🦇
+                    {print} هو الآن يسمع صوت الحيوانات {at} {random}
                     ```
                 story_text_2: |
-                    The command `{add}` can also come in handy in your story. For example
+                    الأمر `{add}` يمكن أن يكون مفيداً أيضاً في قصتك.
 
-                example_code_2: |4
-
-                    {print} He hears a sound
-                    animals {is} 🐿, 🦔, 🦇, 🦉
-                    animal {is} {ask} What do you think it is?
-                    {add} animal {to_list} animals
-                    {print} it was a animals {at} {random}
+                example_code_2: |
+                    ```
+                    {print} إنه يسمع صوت
+                    الحيوانات هي 🐿, 🦔, 🦇, 🦉
+                    الحيوان {is} {ask} برأيك ماذا ممكن أن يكون؟
+                    {add} الحيوان {to_list} الحيوانات
+                    {print} إنه حيوان {at} {random}
                     ```
                 story_text_3: |
-                    This is an example of the `{remove}` command in your story
+                    هذا مثال لإستخدام الأمر `{remove}` في قصتك
+
+                    ## تحدي
+                    هل يمكنك إستخدام الأوامر الثلاثة الجُدد `{at} {random}` ، `{add} {to}` ، `{remove} {from}` في قصتك؟
                 example_code_3: |
                     ```
-                    {print} His backpack got way too heavy.
-                    {print} Inside were a bottle of water, a flashlight and a brick.
-                    bag {is} water, flashlight, brick
-                    dump {is} {ask} Which item should he dump?
-                    {remove} dump {from} bag
+                    {print} حقيبة الظهر خاصته أصبحت ثقيلة للغاية.
+                    {print} كان داخلها زجاجة ماء و مصباح و طوبة.
+                    حقيبة {is} ماء، مصباح، طوبة
+                    النفاية هي {ask} ما الذي عليه التخلص منه؟
+                    {remove} النفاية {from} حقيبة
                     ```
-                start_code: "{print} Your story"
+                start_code: "{print} قصتك"
             13:
                 story_text: "## Story\nBy using the `{and}` and `{or}` commands, you can shorten your stories. For example, check out the dragon story.\n"
                 example_code: "```\nsword = 'lost'\ngame = 'on'\n{print} 'Our hero is walking through the forest'\n{print} 'The path splits two ways'\n{for} i {in} {range} 0 {to} 2\n    {if} game {is} 'on'\n        path = {ask} 'Which path should she choose?'\n        {if} path {is} 'left' {and} sword {is} 'found'\n            {print} 'Our hero comes across a dragon!'\n            {print} 'Luckily our hero has a sword to defeat the beast!'\n            game = 'over'\n        {if} path {is} 'left' {and} sword {is} 'lost'\n            {print} 'Our hero finds a dragon, but she doesnt have any weapons!'\n            {print} 'Our hero is beaten by the dragon...'\n            {print} 'Try again'\n            game = 'over'\n        {if} path {is} 'right' {and} sword {is} 'found'\n            {print} 'You have already found the sword. There is nothing left here.'\n            {print} 'She walks back'\n        {if} path {is} 'right' {and} sword {is} 'lost'\n            {print} 'Our hero finds a sword'\n            {print} 'This could come in very handy'\n            sword = 'found'\n```\n"
                 start_code: '# place your code here'
             2:
-                story_text: "##القصة\nفي المستوى الثاني يمكنك أن تجعل القصة الخاصة بك ممتعة أكثر.ستكون قادرًا على استخدام اسم الشخصية الرئيسية في أي مكانٍ تريده في قصتك.\n\nلتتمكن من فعل ذلك، ستحتاج إلى إضافة بعض الأسطر البرمجية، ولكن أولًا يجب أن تختار اسمًا للشخصية الرئيسية، بعد ذلك ضع الاسم في الجملة التي تشاء.\n"
+                story_text: "## القصة\nفي المستوى الثاني يمكنك أن تجعل القصة الخاصة بك ممتعة أكثر.ستكون قادرًا على استخدام اسم الشخصية الرئيسية في أي مكانٍ تريده في قصتك.\n\nلتتمكن من فعل ذلك، ستحتاج إلى إضافة بعض الأسطر البرمجية، ولكن أولًا يجب أن تختار اسمًا للشخصية الرئيسية، بعد ذلك ضع الاسم في الجملة التي تشاء.\n\n## تحدي\nهل تستطيع أن تصنع قصة باستخدام المتغيرات لوحدك؟ أو أن تضيف متغيرات جديدة للقصة؟\n"
                 example_code: "```\nالاسم {is} {ask} الشخصية الرئيسية في القصة هو\n{print} الاسم يتجول الآن في الغابة\n{print} الاسم خائفٌ قليلًا\n{print} لقد سمع ضوضاء رهيبة في المكان من حوله\n{sleep}\n{print} الاسم خائفٌ من أن تكون هذه الغابة مسكونة\n```"
                 start_code: '{print} قصتك'
             12:
@@ -324,9 +327,9 @@ adventures:
                 example_code: "```\nanimals = red bird, black sheep, green frog, yellow duck, little child\n{print} 'brown bear'\n{print} 'brown bear'\n{print} 'What do you see?'\n{for} animal {in} animals\n    {print} 'I see a ' animal ' looking at me'\n    {print} animal\n    {print} animal\n    {print} 'What do you see?'\n{print} 'I see all the animals looking at me!'\n```\n"
                 start_code: '# place your code here'
             5:
-                example_code: "```\nname {is} {ask} Who is walking in the forest?\n{print} name 'walks through the forest'\n{print} name 'encounter a monster'\nend {is} {ask} Would you like a good or a bad ending?\n{if} end {is} good {print} name 'takes the sword and the monster quickly runs away'\n{else} {print} 'The monster eats' name\n```\n"
-                start_code: "{print} 'Here your story will start!'"
-                story_text: "## Story\nIn this level you can program different endings, which will make your story even more fun.\n\nThink of two endings for your story, for example:\n\n- The princess is walking through the forest\n- She runs into a monster\n\n- Happy ending: She takes her sword and the monster quickly runs away\n- Bad Ending: The monster eats the princess\n\nYou can also ensure that a name can be entered again. That works just like in the previous levels. You can combine that with an `{if}`, and then you have already made a whole program!\n"
+                example_code: "```\nاسمك {is} {ask} 'من يمشي في الغابة؟'\n{print} اسمك 'يمشي عبر الغابة'\n{print} اسمك 'واجه وحش'\nنهاية {is} {ask} ' هل تريد نهاية جيدة او سيئة؟'\n{if} نهاية {is} جيدة {print} اسمك 'يأخذ السيف ويهرب الوحش بسرعة'\n{else} {print} 'الوحش يأكل' اسمك\n```\n"
+                start_code: "{print} 'هنا قصتك سوف تبدأ!'"
+                story_text: "## قصة\nفي هذا المستوى تستطيع برمجة نهايات مختلفة، والتي ستجعل قصتك اكثر متعة\n\nفكر في نهايتين لقصتك، على سبيل المثال:\n\n- الأميرة تمشي عبر الغابة\n- واجهت وحشًا\n\n- نهاية سعيدة: تأخذ سيفها والوحش يهرب بسرعة.\n- نهاية سيئة : الوحش يأكل الأميرة.\n\nيمكنك أيضًا التأكد من إمكانية إدخال الاسم مرة أخرى. هذا يعمل تمامًا كما في المستويات السابقة. يمكنك دمج ذلك مع \"{if}\" ، وبعد ذلك تكون قد أنشأت بالفعل برنامجًا كاملاً!\n"
             4:
                 story_text: "## Story\nYou may have noticed that there is still a problem in the previous levels. Did you try to print a sentence that contained the word name?\nYou can solve that in this level. You must use quotation marks for everything that you are going to print.\n"
                 example_code: "```\nname {is} Hans\n{print} 'The name of the main character is' name\n{print} name 'is now going to walk in the woods'\n{print} name 'is a bit scared'\nanimals {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} 'He hears the sound of an' animals {at} {random}\n{print} name 'is afraid this is a haunted forest'\n```\n"
@@ -350,13 +353,13 @@ adventures:
                 example_code_2: "```\n{print} Im Hedy the parrot\n{ask} _\n{echo}\n{echo}\n"
             2:
                 story_text: "## الببغاء\nاصنع ببغاء إلكتروني خاص بك، سيقوم بنسخ كل ما تقول!\n"
-                example_code: "```\n{print} أنا الببغاء هيدي\nالاسم {is} {ask} ما اسمك؟\n{print} الاسم\n{sleep}\n{print} squawk\n{sleep}\n{print} الاسم\n```\n"
+                example_code: "```\n{print}  أنا الببغاء هيدي\nالاسم {is} {ask} ما اسمك؟\n{print}  الاسم\n{sleep}\n{print}  سلام!\n{sleep}\n{print}  الاسم\n```\n"
                 start_code: '{print} أنا الببغاء هيدي'
                 story_text_2: "## تحدي\nبإمكانك استخدام المتغيرات لتجعل الببغاء يقول أي شيء تريده, هل تستطيع إكمال هذا الكود؟\n"
-                example_code_2: "```\n{print}أنا الببغاء هيدي\nالاسم١ {is} {ask} ما اسمك؟\n{print} الاسم١\n{sleep}\n{print} الاسم١\nالاسم٢ {is} {ask} ما اسم عائلتك؟\n_\n{sleep}\n_\n```\n"
+                example_code_2: "```\n{print} أنا الببغاء هيدي\nالاسم١ {is} {ask} ما اسمك؟\n{print}  الاسم١\n{sleep}\n{print}  الاسم١\nالاسم٢ {is} {ask} ما اسم عائلتك؟\n_\n{sleep}\n_\n```\n"
             5:
                 story_text: "## الببغاء\nكافئ الببغاء {if} قال الكلمةالصحيحة!\n"
-                example_code: "```\nwords {is} squawk, Hedy\n{print} 'Train your parrot!'\nnew_word {is} {ask} 'Which word do you want to teach them?'\n{add} new_word {to_list} words\nsaid_word {is} words {at} {random}\n{print} '\U0001F9D2 Say ' new_word ', Hedy!'\n{print} '\U0001F99C ' said_word\n{if} said_word {is} new_word {print} '\U0001F9D2 Great job, Hedy! \U0001F36A'\n{else} {print} '\U0001F9D2 No, Hedy! Say ' new_word\n```\n"
+                example_code: "```\nالكلمات {is} نعيق, هيدي\n{print} 'درب ببغاءك!'\nالكلمة_الجديدة {is} {ask} 'ما هي الكلمة التي تريده ان يتعلمها؟'\n{add} الكلمة_الجديدة {to_list} الكلمات\nالكلمة_التي_قالها {is} الكلمات {at} {random}\n{print} '\U0001F9D2 قل ' الكلمة_الجديدة ', هيدي!'\n{print} '\U0001F99C ' الكلمة_التي_قالها'\n_ الكلمة_التي_قالها{is} الكلمة_الجديدة {print} '\U0001F9D2 هيدي، عمل رائع! \U0001F36A'\n__ {print} '\U0001F9D2 لا, هيدي! قل ' الكلمة_الجديدة\n```\n"
                 start_code: '# place your code here'
             3:
                 story_text: "## الببغاء\nعلّم الببغاء كلمة جديدة من خلال الأمر `{add}`.\n"
@@ -396,7 +399,7 @@ adventures:
                 story_text: "## Sing a song!\nIn this level, you can program a song like OldMacDonald even more quickly. You can connect the right animal to the right sound by simply putting them in the same place in the list.\nThe Drunken Sailor is also quickly made in this level. You only need 8 lines for the entire song, check it out!\n\n## Old MacDonald\n```\nanimals = ['pig', 'dog', 'cow']\nsounds = ['oink', 'woof', 'moo']\n{for} i {in} {range} 1 {to} 3\n    animal = animals[i]\n    sound = sounds[i]\n    {print} 'Old McDonald had a farm'\n    {print} 'E I E I O!'\n    {print} 'and on that farm he had a ' animal\n    {print} 'E I E I O!'\n    {print} 'with a ' sound sound ' here'\n    {print} 'and a ' sound sound ' there'\n    {print} 'here a ' sound\n    {print} 'there a ' sound\n    {print} 'everywhere a ' sound sound\n```\n\n## Drunken Sailor\n```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines\n    {for} i {in} {range} 1 {to} 3\n        {print} line\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
                 start_code: '# place your code here'
                 example_code: "## Old MacDonald\n```\nanimals = ['pig', 'dog', 'cow']\nsounds = ['oink', 'woof', 'moo']\n{for} i {in} {range} 1 {to} 3\n    animal = animals[i]\n    sound = sounds[i]\n    {print} 'Old McDonald had a farm'\n    {print} 'E I E I O!'\n    {print} 'and on that farm he had a ' animal\n    {print} 'E I E I O!'\n    {print} 'with a ' sound sound ' here'\n    {print} 'and a ' sound sound ' there'\n    {print} 'here a ' sound\n    {print} 'there a ' sound\n    {print} 'everywhere a ' sound sound\n```\n\n## Drunken Sailor\n```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines\n    {for} i {in} {range} 1 {to} 3\n        {print} line\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
-        default_save_name: Song
+        default_save_name: أغنية
     turtle:
         name: الرسام
         description: اصنع الرسم الخاص بك
@@ -419,7 +422,7 @@ adventures:
                 example_code_2: "```\n{print} رسم الأشكال\nالزاوية هي ٩٠\n{turn} الزاوية\n{forward} ٢٥\n{turn} الزاوية\n{forward} ٢٥\n```\n"
                 story_text_2: "بالاضافة الى ذلك، الرسام لم يكن قادراً إلا على الاستدارة الى اليمن أو اليسار. هذا ممل بعض الشيء! \nفي المستوى الثاني يمكننا الاإستدارة في كل الإتجاهات!\n\nاستعمل ٩٠ للإستدارة بمقدار ربع دائرة. هذا ما نسميه بالدرجات. استدارة كاملة تساوي ٣٦٠ درجة.\nهل تستطيع أن ترسم شكلاً معينا باستخدام هذا الكود؟ ربما مثلث أو دائرة؟\n"
             3:
-                story_text: "## Searching turtle\nفي هذا المستوى يمكننا استخدام الأوامر `{at} {random}` مع الرسام. اختيار عشوائي سيجعل الرسام يتحرك بشكل مختلف كل مرة. \nاستعمل {random}`{at} {random}` لإختيار رقم من قائمة. يمكنك أن تنسخ وتلصق السطرين ٢ و٣ لتصنع مساراً عشوائياً أطول.\n"
+                story_text: "## الرسام\nفي هذا المستوى يمكننا استخدام الأوامر `{at} {random}` مع الرسام. اختيار عشوائي سيجعل الرسام يتحرك بشكل مختلف كل مرة. \nاستعمل `{at} {random}` لإختيار رقم من قائمة.\n## تحدي\nهل يمكنك أن تنسخ وتلصق السطرين ٢ و٣ لتصنع مساراً عشوائياً أطول؟\n"
                 example_code: "\n\n\n```\nالزاوايا هي ١٠، ٥٠، ٩٠، ١٥٠، ٢٥٠\n{turn} الزاوايا {at} {random}\n{forward} ٢٥\n```\n"
                 start_code: "الزاوايا هي ١٠، ٥٠، ٩٠، ١٥٠، ٢٥٠\n{turn} الزاوايا {at} {random}\n{forward} ٢٥"
             4:
@@ -453,21 +456,21 @@ adventures:
                 story_text_2: "## Make it fair\nIf you are extremely unlucky the previous program might choose you to to the dishes for the whole week! That's not fair!\nTo create a fairer system you can use the `{remove}` command to remove the chosen person from the list. This way you don't have to do the dishes again untill everybody has had a turn.\n\nMonday and tuesday are ready for you! Can you add the rest of the week?\nAnd... can you come up with a solution for when your list is empty?\n"
                 example_code_2: "```\npeople = mom, dad, Emma, Sophie\ndishwasher = people {at} {random}\n{print} 'Monday the dishes are done by: ' dishwasher\n{remove} dishwasher {from} people\ndishwasher = people {at} {random}\n{print} 'Tuesday the dishes are done by: ' dishwasher\n{remove} dishwasher {from} people\ndishwasher = people {at} {random}\n```\n"
             4:
-                story_text: "## Dishwashing\nWith quotation marks you can make your dishwashing planning more beautiful.\nThis time the sample code is not quite complete.\n\nCan you complete the code by filling the blanks? Every blank must be replaced with one word of symbol.\n\nTip: Don't forget the quotation marks!\n"
-                example_code: "```\npeople {is} mom, dad, Emma, Sophie\n{print} _ the dishes are done by _\n{sleep}\n{print} people {at} _\n```\n"
+                story_text: "## غسل الأطباق\nباستخدام علامات الاقتباس، يمكنك جعل التخطيط لغسل الأطباق أكثر جمالًا.\nهذه المرة لم يكتمل نموذج التعليمات البرمجية تمامًا.\n\nهل يمكنك إكمال الكود عن طريق ملء الفراغات؟ يجب استبدال كل فراغ برمز واحد.\n\nنصيحة: لا تنس علامات الاقتباس!\n"
+                example_code: "```\nأشخاص {is} أمي، أبي، إيما، صوفي\n{print} _ غسل الأطباق سيكون على _\n{sleep}\n{print} أشخاص{at} _\n```\n"
                 start_code: "{print} \"من سيغسل الأطباق؟\""
             3:
-                story_text: "## Dishwashing\nDo you always disagree at home about who should wash the dishes or change the litter box today?\nThen you can let the computer choose very fairly. You can program that in this level!\nYou first make a list of the members of your family. Then choose '{at} {random}' from the list.\n"
+                story_text: "## غسل الأطباق\nهل دائماً ما تعترض في المنزل على من يجب عليه غسل الأطباق أو تغيير صندوق المهملات اليوم؟\nإذاً يمكنك أن تدع الكومبيوتر يختار بالعدل من عليه فعلها. يمكنك في هذا المستوى برمجة ذلك\nتحتاج في البدايةأن تصنع قائمة بأفراد عائلتك. وبعدها إستخدم الأمر `{at} {random}` لإختيار شخص من تلك القائمة.\n"
                 start_code: '{print} من سيغسل الأطباق؟'
-                example_code: "```\npeople {is} mom, dad, Emma, Sophie\n{print} people {at} {random}\n```\n## Hack the dishwashing program!\nDon't feel like doing the dishes yourself? Hack the program to remove your name from the list.\n\n```\npeople {is} mom, dad, Emma, Sophie\nyour_name {is} {ask} Who are you?\n{remove} your_name {from} people\n{print} people {at} {random} does the dishes\n```\n"
-                story_text_2: "## Hack the dishwashing program!\nDon't feel like doing the dishes yourself? Hack the program to remove your name from the list.\n"
-                example_code_2: "```\npeople {is} mom, dad, Emma, Sophie\nyour_name {is} {ask} Who are you?\n{remove} your_name {from} people\n{print} people {at} {random} does the dishes\n```\n"
+                example_code: "```\nأشخاص {is} أمي، أبي، إيما، صوفي\n{print} أشخاص {at} {random}\n```\n"
+                story_text_2: "## تهكير برنامج غسل الأطباق!\nتشعر بعدم الرغبة في غسل الأطباق اليوم؟ هكر البرنامج وإمسح اسمك من قائمة أفراد العائلة بإستخدام الأمر `{remove}` `{from}`\n"
+                example_code_2: "```\nأشخاص {is} أمي، أبي، إيما، صوفي\nإسمك {is} {ask} من أنت؟\n_ إسمك _ أشخاص\n{print} _ _ _ سيغسل الأطباق\n```\n"
             10:
                 story_text: "## Dishwashing\nIn this level you could make an even better dish washing shedule.\n"
                 example_code: "```\ndays = Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday\nnames = mom, dad, Emma, Sophie\n{for} day {in} days\n    {print} names {at} {random} ' does the dishes on ' day\n```\n"
                 start_code: '# place your code here'
             5:
-                story_text: "## Dishwashing\nWith the `{if}` you can now have more fun with choice in the program. You can have your program respond to the choice that the computer has made.\n\nCan you finish the code so that it prints 'too bad' when it is your turn and otherwise 'yes!'?\nDon't forget the quotes!\n"
+                story_text: "## غسل الاطباق\nباستخدام `{if}` يمكنك الآن الحصول على مزيد من المرح مع الاختيار في البرنامج. يمكنك جعل برنامجك يستجيب للاختيار الذي اتخذه الكمبيوتر.\n\nهل يمكنك إنهاء الكود بحيث يطبع \"سيئًا جدًا\" عندما يحين دورك و في الحالات الاخرى يطبع \"نعم!\"؟\nلا تنس الاقتباسات!\n"
                 example_code: "```\npeople {is} mom, dad, Emma, Sophie\ndishwasher {is} people {at} {random}\n{if} dishwasher {is} Sophie {print} _ too bad I have to do the dishes _ {else} {print} 'luckily no dishes because' _ 'is already washing up'\n```\n"
                 start_code: "{print} \"من سيغسل الأطباق؟\""
         name: غسل الأطباق؟
@@ -490,19 +493,19 @@ adventures:
                 example_code: "```\nplayers = Ann, John, Jesse\nchoices = 1, 2, 3, 4, 5, 6\n{for} player {in} players\n    {print} player ' throws ' choices {at} {random}\n    {sleep}\n```\n"
                 start_code: '# place your code here'
             5:
-                start_code: "{print} 'What will the die indicate this time?'"
-                story_text: "## Dice\nYou can also make a die again in this level using the `{if}`.\nComplete the sample code so that the code says \"You can stop throwing\" once you have thrown an earthworm.\n\nBut maybe you want to recreate a die from a completely different game. That's fine too! Then make up your own reaction. Eg 'yes' for 6 and 'pity' for something {else}.\n"
-                example_code: "```\nchoices {is} 1, 2, 3, 4, 5, earthworm\nthrow {is} _\n{print} 'you have' _ 'thrown'\n{if} _ {is} earthworm {print} 'You can stop throwing.' _ {print} 'You have to hear it again!'\n```\n"
+                start_code: "{print} 'إلى ماذا يشير حجر النرد هذه المرة؟'"
+                story_text: "## حجر النرد\nتستطيع صنع حجر النرد الخاص بك في هذا المستوى باستخدام `{if}`.\nأكمل نموذج الكود بحيث يطبع \"تستطيع التوقف عن الالقاء\" بمجرد رمي رمز دودة الارض.\n\nولكن ربما تريد اعادة إنشاء حجر نرد من لعبة مختلفة تمامًا. هذا جيد أيضًا! ثم اكتب ردة فعلك الخاصة. مثال 'نعم' لرقم 6 و 'للاسف' لاي شيء {else}.\n"
+                example_code: "```\nالخيارات {is} 1, 2, 3, 4, 5, دودة الارض\nالرمية {is} _\n{print} 'لديك' _ 'تم القاءها'\n{if} _ {is} دودة ارض {print} 'تستطيع التوقف عن الرمي.' _ {print} 'عليك أن تسمعه مرة أخرى!'\n```\n"
             4:
-                story_text: "## Dice\nIn this level we can make sentences with the die value in the sentence, with quotes of course.\nThis time the sample code is not quite complete. Can you finish the code?\n"
-                example_code: "```\nchoices {is} 1, 2, 3, 4, 5, earthworm\n{print} _ you threw _\n{print} _ _ _ <- here you have to program the choice\n```\n"
-                start_code: "{print} 'What will the die indicate this time?'"
+                story_text: "## حجر النرد\nفي هذا المستوى يمكنك إنشاء جمل مفيدة باستخدام القيمة التي تظهر على حجر النرد، ولا تنسَ علامات الإقتباس.\nالمثال التوضيحي هذه المرة غير مكتمل كليًا، هل يمكنك إكماله؟\n"
+                example_code: "```\nالخيارات {is} ١، ٢، ٣، ٤، ٥، دودة الأرض\n{print} _ لقد رميت حجر النرد _\n{print} _ _ _ <- هنا يجب عليك كتابة الكود الخاص باختيار الرقم الذي سيظهر على حجر النرد\n```\n"
+                start_code: "{print} 'ما الرقم الذي سيظهر على حجر النرد هذه المرة؟'"
             3:
-                story_text: "## Dice\nIn this level we can choose from a list. With that we can let the computer choose one side of the die.\nTake a look at the games you have in your closet at home.\nAre there games with a (special) die? You can also copy it with this code.\nFor example, the dice of the game Earthworms with the numbers 1 to 5 and an earthworm on it.\n\n![Die of earthworms with 1 to 5 and an earthworm on it](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)\n"
-                example_code: "```\nchoices {is} 1, 2, 3, 4, 5, earthworm\n{print} choices {at} {random}\n```\n"
-                start_code: '{print} What will the die indicate this time?'
-                example_code_2: "```\nchoices {is} _\n```\n"
-                story_text_2: "## Challenge\nThe dice in the example above are dice for a specific game. Can you make normal dice?\nOr other special dice from a different game?\n"
+                story_text: "## حجر النرد\nيمكننا الإختار من قائمة في هذا المستوى. ومع ذلك سيتولى الكومبيوتر الإختيار هذه المرة من بين أوجه حجر النرد.\nألقِ نظرة على الألعاب الموجودة في خزانتك في المنزل.\nهل يوجد ألعاب ذات نرد (خاص)؟ عندما تجد شيئاً مماثل يمكنك نسخه ايضاً في هذا الكود.\nعلى سبيل المثال، هناك لعبة تسمى نرد دودة الأرض تتكون من ٦ اوجه مرقمة من ١ إلى ٥ والأخيرة عليها دودة الأرض.\n\n![Die of earthworms with 1 to 5 and an earthworm on it](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)\n"
+                example_code: "```\nالخيارات هي ١، ٢، ٣، ٤، ٥، دودة الأرض\n{print} الخيارات {at} {random}\n```\n"
+                start_code: '{print} إلى ماذا يشير حجر النرد هذه المرة؟'
+                example_code_2: "```\nالخيارات هي _\n```\n"
+                story_text_2: "## تحدي\nالنرد المستخدم فالمثال هو حجر نرد مخصص للعبة معينة. هل يمكنك تغييره للحجر النرد الأصلي؟\n أو جعله حجر نرد خاص بلعبة أخرى تعرفها أو من إختراعك؟\n"
             15:
                 story_text: "## Dice\nIn this game you have to throw 6 in as little tries as possible.\n"
                 example_code: "```\noptions = 1, 2, 3, 4, 5, 6\n{print} 'Throw 6 as fast as you can!'\nthrown = 0\ntries = 0\n{while} thrown != 6\n    thrown = options {at} {random}\n    {print} 'You threw ' thrown\n    tries = tries + 1\n{print} 'Yes! You have thrown 6 in ' tries ' tries.'\n```\n"
@@ -513,23 +516,23 @@ adventures:
         description: اصنع لعبة حجر، ورقة، مقص الخاصة بك
         levels:
             5:
-                example_code: "```\noptions {is} rock, paper, scissors\ncomputer_choice {is} _\nchoice {is} {ask} What do you choose?\n{print} 'you chose ' _\n{print} 'computer chose ' _\n{if} _ {is} _ {print} 'tie!' {else} {print} 'no tie'\n```\n\nFill in the correct code on the blanks to see {if} it is a draw.\n"
-                start_code: "{print} 'Welcome to your own rock scissors paper!'"
-                story_text: "## Rock, paper, scissors\nIn this level we can determine who won.\nFor that you need the new `{if}` code.\n\nSave your choice with the name of choice and the choice of computer as computer choice.\nThen you can use `{if}` to see {if} they are the same or different.\nWill you finish the code?\n"
+                example_code: "```\nالخيارات {is} حجر، ورقة، مقص\nاختيار_الحاسوب {is} _\nالاختيار {is} {ask}' ماذا اخترت'؟\n{print} 'انت اخترت ' _\n{print} 'الحاسوب اختار ' _\n{if} _ {is} _ {print} 'تعادل!' {else} {print} 'ليس تعادل'\n```\n\nاملأ الكود الصحيح في الفراغات لترى {if} إنه تعادل.\n"
+                start_code: "{print} 'اهلاً بك في لعبتك الإلكترونية حجر ورقة مقص!'"
+                story_text: "## حجر، ورقة، مقص\nفي هذا المستوى يمكننا تحديد من فاز.\nلذلك انت بحاجة استخدام الأمر `{if}` .\n\nلذلك تحتاج إلى حفظ اختيارك الجديد بالاسم الذي تختاره واختيار الكمبيوتر كاختيار الكمبيوتر.\nثم يمكنك استخدام \"{if}\" لمعرفة {if} انهم متطابقين او مختلفين.\nهل ستنهي الكود؟\n"
             4:
-                story_text: "## Rock, paper, scissors\nIn this level we can further program rock, paper, scissors. But {if} you want to add text, you have to use quotation marks here too.\nDo you complete the code by entering the correct commands or characters on the underscores?\n"
-                start_code: "{print} 'Welcome to your own rock scissors paper!'"
-                example_code: "```\nchoices {is} rock, paper, scissors\n{print} _ The computer chose: _ _ {at} _\n```\n"
+                story_text: "##حجر،ورقة،مقص\nفي هذا المستوى أيضًا يمكنك برمجة لعبة حجر،ورقة،مقص. لكن إذا أردت كتابة نص يجب عليك استخدام علامات الإقتباس.\nهل يمكنك إكمال الكود بوضع الأوامر أو علامات الترقيم المناسبة في الفراغات؟\n"
+                start_code: "{print} 'أهلا بك في لعبة حجر،ورقة،مقص الخاصة بك'"
+                example_code: "```\nالخيارات {is} حجر,ورقة,مقص\n{print} _ الحاسوب اختار: _ _ {at} _\n```\n"
             3:
-                start_code: '{print} Welcome to your own rock scissors paper!'
-                story_text: "## Rock, paper, scissors\n\nIn this level we can enter lists and choose things from them.\nYou first make a list with `{is}`. Then you can let the computer choose something from the list with `{at} {random}`.\nFor example, you can let the computer pick from rock, paper and scissors.\n"
-                example_code: "\n```\nchoices {is} rock, paper, scissors\n{print} choices {at} {random}\n```\n"
-                story_text_2: "## Challenge\nNow you only have one player, so can you add a second player?\nYou can even use variables to name player 1 and player 2.\n"
-                example_code_2: "```\nchoices {is} rock, paper, scissors\n{print} player 1 chooses... choices {at} {random}\n{print} player 2 _\n```\n"
+                start_code: '{print} مرحبًا في لعبة حجر ورقة مقص الخاصة بك!'
+                story_text: "## حجر، ورقة، مقص\n\nفي هذا المستوى يمكننا إستخدام القوائم و الإختار منها.\nفي البداية اصنع قائمة بإستخدام `{is}`. بعد ذلك يمكنك ترك الكومبيوتر يختار شيئًا من هذه القائمة بإستخدام `{at} {random}`.\nعلى سبيل المثال، ستترك الكومبيوتر يختار من بين حجر، ورقة، أو مقص.\n"
+                example_code: "```\nالإختيارات {is} حجر، ورقة، مقص\n{print} الإختيارات {at} {random}\n```\n"
+                story_text_2: "## تحدي\nهناك لاعب واحد فقط يمكنه اللعب حاليًا، هل يمكنك إضافة لاعب أخر؟\nيمكنك ايضًا إستخدام المتغيرات لتسمية لاعب ١ و لاعب٢.\n"
+                example_code_2: "```\nالإختيارات {is} حجر، ورقة، مقص\n{print} لاعب ١ يختار... الإختيارات {at} {random}\n{print} لاعب٢ _\n```\n"
             2:
-                story_text: "## Rock, paper, scissors\nIn this level you can practise using the variables, so that you can make the rock, paper, scissors game in the next level!\n"
-                example_code: "```\nchoice {is} _\n{print} I choose choice\n```\n"
-                start_code: '# place your code here'
+                story_text: "## حجر، ورقة، مقص\nفي هذا المستوى يمكنك التدرب على استخدام المتغيرات، حتى تتمكن من صنع لعبة حجر ورقة مقص باستخدامها في المستوى القادم.\n"
+                example_code: "```\n_  {is}{ask} حجر, ورقة, مقص؟\n{print}اخترت _\n```\n"
+                start_code: '#اكتب الكود الخاص بك هنا'
             15:
                 story_text: "## Rock, Paper, Scissors\nPlay until you beat the computer! But first, finish the example code...\n"
                 example_code: "```\nwon = 'no'\noptions = 'rock', 'paper', 'scissors'\n{while} won == 'no'\n    your_choice = {ask} 'What do you choose?'\n    computer_choice = options {at} {random}\n    {print} 'you chose ' your_choice\n    {print} 'the computer chose ' computer_choice\n    {if} computer_choice == your_choice\n        {print} 'Tie!'\n    {if} computer_choice == 'rock' {and} your_choice == 'scissors'\n        {print} 'You lose!'\n    {if} computer_choice == 'rock' {and} your_choice == 'paper'\n        {print} 'You win!'\n        won = 'yes'\n"
@@ -604,14 +607,14 @@ adventures:
                 start_code: '# اكتب الكود الخاص بك هنا'
                 story_text_2: "## تحدي\nهل يمكنك التفكير في عدة سطور اخرى تضيفها لتطور كود مطعمك؟ على سبيل المثال، هل يمكنك استخدام {ask} لسؤال الضيوف ماذا يفضلون كشراب بجانب وجبتهم، وبعد ذلك اخبارهم بسعر طلبهم، و ان تتمنى لهم وجبة هنيئة؟\n"
             2:
-                story_text: "## المطعم\nفي المستوى الثاني ستتمكن من تطوير مطعمك باستخدام المتغيرات، في المستوى الأول، كانت هيدي تستطيع فقط أن تردد طلبك باستخدام الأمر  {echo}  وكان باستطاعتها أخذ طلب واحد فقط، الآن باستخدام المتغيرات بإمكان هيدي أن تأخذ طلبات الطعام والمشروبات أيضًا!\n"
-                example_code: "```\n{print} أهلا بكم في مطعم هيدي.\n{print}أطباق اليوم هي البيتزا واللازانيا.\nالطعام {is} {ask} ماذا تودّ أن تأكل؟\n{print}خيار رائع! الطعام هي وجبتي المفضلة.\nالصلصة {is} {ask} هل تفضل الصلصة باللحم أم بالخضار؟\n{print}الطعام مع الصلصة في طريقها إليك.\nالمشروب {is} {ask}ماذا تود أن تشرب؟\n{print} شكرًا لطلبك من مطعمنا.\n{print}الطعام الخاصة بك بالإضافة إلى المشروب ستصلك قريبًا، بالهناء والشفاء.\n```\n"
+                story_text: "## المطعم\nفي المستوى الثاني ستتمكن من تطوير مطعمك باستخدام المتغيرات، في المستوى الأول، كانت هيدي تستطيع فقط أن تردد طلبك باستخدام الأمر  `{echo} ` وكان باستطاعتها أخذ طلب واحد فقط، الآن باستخدام المتغيرات بإمكان هيدي أن تأخذ طلبات الطعام والمشروبات أيضًا!\n"
+                example_code: "```\n{print} أهلا بكم في مطعم هيدي.\n{print} أطباق اليوم هي البيتزا واللازانيا.\nالوجبة {is} {ask} ماذا تودّ أن تأكل؟\n{print} اختيار رائع! الوجبة هي وجبتي المفضلة.\nالصلصة {is} {ask} هل تفضل الصلصة باللحم أم بالخضار؟\n{print}الوجبة مع الصلصة في طريقها إليك.\nالمشروب {is} {ask}ماذا تود أن تشرب؟\n{print} شكرًا لطلبك من مطعمنا.\n{print}الوجبة الخاصة بك بالإضافة إلى المشروب ستصلك قريبًا، بالهناء والشفاء.\n```\n"
                 start_code: '#ضع الكود الخاص بك هنا'
                 story_text_2: "## تحدي\nهل بإمكانك أن تجعل الكود مفصّلًا أكثر؟ بإضافة مشروبات إلى الطلب مثلًا؟\n"
-                example_code_2: "```\n{print} أهلا بكم في مطعم هيدي.\n{print}أطباق اليوم هي البيتزا واللازانيا.\nالطعام {is} {ask} ماذا تودّ أن تأكل؟\n{print}خيار رائع! الطعام هي وجبتي المفضلة.\nالصلصة {is} {ask} هل تفضل الصلصة باللحم أم بالخضار؟\n{print}الطعام مع الصلصة في طريقها إليك.\nالمشروب {is} _\n```\n"
+                example_code_2: "```\n{print} أهلا بكم في مطعم هيدي.\n{print} أطباق اليوم هي البيتزا واللازانيا.\nالوجبة {is} {ask} ماذا تودّ أن تأكل؟\n{print} اختيار رائع! الوجبة هي وجبتي المفضلة.\nالصلصة {is} {ask} هل تفضل الصلصة باللحم أم بالخضار؟\n{print}الوجبة مع الصلصة في طريقها إليك.\nالمشروب {is} _\n```\n"
             12:
                 story_text: "## Restaurant\nFrom this level on you can use decimal numbers to make you menu more realistic.\n"
-                example_code: "```\nprice = 0\nfood = {ask} 'What would you like to order?'\ndrinks = {ask} 'What would you like to drink?'\n{if} food {is} 'hamburger'\n    price = price + 6.50\n{if} food {is} 'pizza'\n    price = price + 5.75\n{if} drinks {is} 'water'\n    price = price + 1.20\n{if} drink {is} 'soda'\n    price = price + 2.35\n{print} 'That will be ' price ' dollar, please'\n```\n"
+                example_code: "```\nprice = 0\nfood = {ask} 'What would you like to order?'\ndrink = {ask} 'What would you like to drink?'\n{if} food {is} 'hamburger'\n    price = price + 6.50\n{if} food {is} 'pizza'\n    price = price + 5.75\n{if} drink {is} 'water'\n    price = price + 1.20\n{if} drink {is} 'soda'\n    price = price + 2.35\n{print} 'That will be ' price ' dollar, please'\n```\n"
                 start_code: '# place your code here'
             11:
                 story_text: "## Restaurant\nWe can use the `{for} i {in} {range} 1 {to} 5` to {print} the orders from multiple customers in an orderly manner.\n"
@@ -628,11 +631,11 @@ adventures:
                 story_text: "## Restaurant\nIn this level you can use nesting to make your restaurant more realistic and more fun!\nFor example you would {ask} for sauce {if} somebody orders fries, but you wouldn't {if} someone orders pizza!\nCheck out the example, and try this at your own virtual restaurant!\n"
                 start_code: '# place your code here'
             3:
-                story_text: "## Random Restaurant\nHaving trouble to decide what you wanna have for dinner? You can let Hedy choose for you!\nSimply add lists of your favorite (or least favorite) meals and Hedy can randomly choose your dinner.\nYou can also have a bit of fun, by letting Hedy choose the price for your dinner as well! What will you get?\n"
-                example_code: "```\n{print} Welcome to Hedy's Random Restaurant!\n{print} The only restaurant that will randomly choose your meal and its price for you!\nstarters {is} salad, soup, carpaccio\nmains {is} pizza, brussels sprouts, spaghetti\ndesserts {is} brownies, ice cream, french cheeses\ndrinks {is} cola, beer, water\nprices {is} 1 dollar, 10 dollars, 100 dollars\n{print} You will start with: starters {at} {random}\n{print} Then we'll serve: mains {at} {random}\n{print} And as dessert: desserts {at} {random}\n{print} You will get a drinks {at} {random} to drink\n{print} That will be: prices {at} {random}\n{print} Thank you and enjoy your meal!\n```\n"
-                story_text_2: "## Allergies\nDoes your costumer have any allergies or do they dislike certain dishes? Then you can use the `{remove}`command to remove it from your menu.\n"
-                example_code_2: "```\n{print} Mystery milkshake\nflavors {is} strawberry, chocolate, vanilla\nallergies {is} {ask} Are you allergic to any falvors?\n{remove} allergies {from} flavors\n{print} You get a flavors {at} {random} milkshake\n```\n"
-                start_code: '# place your code here'
+                story_text: "## إختيار مطعم عشوائياً\nهل تواجهة صعوبة في تحديد ماذا تريد على العشاء؟ دع هيدي تساعدك فالإختيار\nببساطة يمكنك إضافة قائمة بأفضل (أو أسوء) وجبات وهيدي سوف تختار لك وجبة عشاؤك عشوائياً \nويمكنك جعلها أكثر متعة، بأن تترك هيدي تختار لك أيضاً سعر عشاؤك! على ماذا ستحصل فالنهاية؟\n## تحدي\nهل يمكنك صنع نسختك الخاصة من أحداث إختيار مطعم عشوائياً؟\n"
+                example_code: "```\n{print} مرحباً في هيدي مطعم الإختيار العشوائي!\n{print} المطعم الوحيد الذي يمكنه إختيار لك وجبة وسعرها بطريقة عشوائية!\nالمقبلات {is} سلطة، حساء، كارباتشو\nالرئيسي {is} بيتزا، براعم بروكسل، معكرونة\nالتحلية {is} براوني، مثلجات، أجبان فرنسية\nالمشروبات {is} مشروب غازي، عصير، ماء\nالأسعار {is} ١ دولار، ١٠ دولارات، ١٠٠ دولار\n{print} ستبدأ بـ : المقبلات {at} {random}\n{print} وبعدها سنقدم لك: الرئيسي {at} {random}\n{print} وللتحلية: التحلية {at} {random}\n{print} وستحصل على المشروبات {at} {random} لشربه\n{print} سيكلفك هذا: الأسعار {at} {random}\n{print} شكراً لك، إستمتع بوجبتك!\n```\n"
+                story_text_2: "## حساسية\nهل يعاني زبونك من أي حساسية أو لا يحب نوع معين من الأطباق؟ إذاً يمكنك إستخدام الأمر `{remove}`لإزالة هذا النوع من قائمة طعامك.\n"
+                example_code_2: "```\n{print} مخفوق اللبن الغامض\nنكهات {is} فراولة، شوكولاتة، فانيليا\nحساسية هي {ask} هل لديك حساسية من أي نكهات؟\n_\n{print} ستحصل على نكهة {at} {random} نكهات\n```\n"
+                start_code: '# اكتب الكود الخاص بك هنا'
             15:
                 story_text: "## Restaurant\nWith the `{while}` you can make sure your costumers can keep adding orders until they are done.\n"
                 example_code: "```\n{print} 'Welcome at McHedy'\nmore = 'yes'\n{while} more == 'yes'\n    order = {ask} 'What would you like to order?'\n    {print} order\n    more = {ask} 'Would you like to order anything {else}?'\n{print} 'Thank you!'\n"
@@ -728,9 +731,9 @@ adventures:
             2:
                 story_text: "## بيت الأشباح\nفي بيت الأشباح في هذا المستوى يمكنك اختيار الأشباح الخاصة بك باستخدام الرموز التعبيرية، أو باستخدام الكلمات طبعًا.\n"
                 start_code: الشبح١ {is} _
-                example_code: "```\nالشبح_١ {is} \U0001F47B\nالشبح_٢ {is} \U0001F921\nالشبح_٣ {is} \U0001F476\n{print}تدخل إلى بيت الأشباح.\n{print} فجأةً ترى الشبح_١\n{print} تهرب إلى الغرفة الأخرى، لكنك تجد الشبح_٢ بانتظارك هناك!\n{print} أوه! لا. تصل سريعًا إلى المطبخ.\n{print} لكن سرعان ما تدخله الشبح_٣ يهاجمك!\n```\n"
+                example_code: "```\nالشبح_١ {is} \U0001F47B\nالشبح_٢ {is} \U0001F921\nالشبح_٣ {is} \U0001F476\n{print} عندما تدخل إلى بيت الأشباح.\n{print} فجأةً ترى الشبح_١\n{print} تهرب إلى الغرفة الأخرى، لكنك تجد الشبح_٢ بانتظارك هناك!\n{print} أوه! لا. تصل سريعًا إلى المطبخ.\n{print} لكن سرعان ما تدخله الشبح_٣ يهاجمك!\n```\n"
                 story_text_2: "## تحدي\nفي المثال أعلاه، قمت بتعريف الأشباح مسبقًا باستخدام المتغيرات، لذلك ترى نفس النتيجة دائمًا عند تنفيذ الكود.\nهل تستطيع إضافة الأمر `{ask}` ليصبح بيت الأشباح ممتعًا أكثر حيث يستطيع اللاعبين اختيار أشباحهم الخاصة؟\n"
-                example_code_2: "```\nmonster_1 {is} _\nmonster_2 {is} _\nmonster_3 {is} _\n{print} You enter the haunted house.\n{print} Suddenly you see a monster_1\n{print} You run into the other room, but a monster_2 is waiting there for you!\n{print} Oh no! Quickly get to the kitchen.\n{print} But as you enter monster_3 attacks you!\n```\n"
+                example_code_2: "```\nالشبح_١ {is} _\nالشبح_٢ {is} _\nالشبح_٣ {is} _\n{print} عندما تدخل إلى بيت الأشباح.\n{print} فجأةً ترى الشبح_١\n{print} تهرب إلى الغرفة الأخرى، لكنك تجد الشبح_٢ بانتظارك هناك!\n{print} أوه! لا. تصل سريعًا إلى المطبخ.\n{print} لكن سرعان ما تدخله الشبح_٣ يهاجمك!\n```\n"
             14:
                 story_text: "## Haunted House\nIn this level you can use the `<` and `>` symbol to introduce lives to your game.\n"
                 example_code: "```\n{print} 'Escape from the haunted house'\nlives = 3\ndoors = 1, 2, 3\nmonsters = 'the wicked witch', 'a zombie', 'a sleeping 3 headed dog'\n{for} i {in} {range} 1 {to} 10\n    {if} lives > 0\n        good_door = doors {at} {random}\n        monster = monsters {at} {random}\n        chosen_door = {ask} 'Which door do you choose?'\n        {if} good_door == chosen_door\n            {print} 'You have chosen the correct door'\n        {else}\n            {print} 'You see...' monster\n            {if} monster == 'a sleeping 3 headed dog'\n                {print} 'Pffieuw.... Its asleep'\n            {else}\n                {print} 'You lose one life'\n                lives = lives -1\n    {else}\n        {print} 'GAME OVER'\n```\n"
@@ -756,12 +759,12 @@ adventures:
                 start_code: '# place your code here'
                 example_code: "```\n{print} _Escape from the haunted house!_\n{print} _There are 3 doors in front of you..._\nchoice {is} {ask} _Which door do you choose?_\n{print} _You picked door ..._ choice\nmonsters {is} a zombie, a vampire, NOTHING YOUVE ESCAPED\n{print} _You see..._\n{sleep}\n{print} monsters {at} {random}\n ```\n"
             3:
-                story_text: "## Haunted house game\nIn the previous levels you've made an introduction to your haunted house game, but as you might have noticed the story would always have a dreadful end.\nIn this level you can make your story more interactive by changing the outcome of the game; sometimes you'll get eaten, sometimes you'll escape!\nLet Hedy decide randomly!\n"
-                example_code: "```\n{print} Escape from the haunted house!\n{print} There are 3 doors in front of you...\nchoice {is} {ask} Which door do you choose?\n{print} You picked door ... choice\nmonsters {is} a zombie, a vampire, NOTHING YOUVE ESCAPED\n{print} You see...\n{sleep}\n{print} monsters {at} {random}\n```\n\n## Challenge\nThis story is pretty straight {forward}, maybe you can spook it up a bit by adding a more exciting story.\nAlso you have very limited outcomes right now, there are only 3 options of what's behind the doors. Maybe you can think of more monsters to add to the list!\n\n## Change the game into a tv gameshow!\nLastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!\nCan you do it?\n"
-                start_code: '# place your code here'
-                story_text_2: "## Challenge\nThis story is pretty straight {forward}, maybe you can spook it up a bit by adding a more exciting story.\nAlso you have very limited outcomes right now, there are only 3 options of what's behind the doors. Maybe you can think of more monsters to add to the list!\n\n## Change the game into a tv gameshow!\nLastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!\nCan you do it?\n"
-                story_text_3: "## Change the game into a tv gameshow!\nLastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!\nCan you do it?\n"
-                example_code_3: "```\n{print} The big gameshow!\n{print} There are 3 suitcases in front of you...\n{print} One of them contains _\n_\n```\n"
+                story_text: "## لعبة بيت الأشباح\nفي المستويات السابقة استطعت كتابة مقدمة للعبة بيت الأشباح الخاصة بك، ولكن ربما لاحظت أن القصة غالباً ما ستنتهي نهاية مروعة.\nستتمكن في هذا المستوى من جعل قصتك أكثر تفاعلاً من خلال تغيير بعض مخرجات اللعبة، في بعض الأحيان ستأكلك الأشباح ولن تستطيع الخروج من البيت وفي أحيانٍ أخرى ستنجو بالهرب!\nدع هيدي تقرر ذلك عشوائيًا!\n"
+                example_code: "```\n{print} الهروب من بيت الأشباح!\n{print} هناك ٣ أبواب أمامك...\nالإختيار {is} {ask} أيأً من الأبواب الثلاثة تختار؟\n{print} إخترت الباب رقم ... الإختيار\nالشبح {is} زومبي، مصاص دماء، لا شيء لقد استطعت الهرب\n{print} انت ترى...\n{sleep}\n{print} الشبح {at} {random}\n```\n"
+                start_code: '# اكتب الكود الخاص بك هنا'
+                story_text_2: "## تحدي\nهذه القصة تعتبر إلى حدٍ ما مباشرة، ربما يمكنك إضافة بعض الأحداث المرعبة لتجعلها أكثر إثارة.\nوكذلك الآن هذا المثال يعطيك نتائج محدودة للغاية، هناك فقط ٣ خيارات حول ما المُخبأ وراء كل باب. ربما يمكنك التفكير في المزيد من الوحوش و إضافتها للقائمة!\n"
+                story_text_3: "## تغيير اللعبة إلى برنامج تلفزيوني للألعاب!\nوأخيراً، نود أن نتحداك لتغيير هذه اللعبة إلى برنامج للألعاب (كالذي يعرض على التلفاز) حيث تختار باب أو حقيبة من بين الأخرين و تكون تحتوي على مبلغ كبير!\nهل يمكنك فعلها؟\n"
+                example_code_3: "```\n{print} برنامجنا الضخم للألعاب!\n{print} هناك ٣ حقائب امامك...\n{print} فقط واحدة منهم تحتوي على _\n_\n```\n"
         name: بيت الأشباح
     piggybank:
         name: البنك الإلكتروني
@@ -794,7 +797,7 @@ adventures:
             5:
                 story_text: "## تعلم لغة جديدة\nاصنع برنامجك الخاص لتتدرب على مفردات بلغة جديدة.\n"
                 start_code: '# place your code here'
-                example_code: "```\n{print} 'Learn French!'\ncat {is} {ask} '\U0001F431'\n{if} cat {is} chat {print} 'Terrific!'\n{else} {print} 'No, cat is chat'\nfrog {is} {ask} '\U0001F438'\n{if} frog {is} grenouille {print} 'Super!'\n{else} {print} 'No, frog is grenouille'\n```\n"
+                example_code: "```\n{print} 'تعلم الفرنسية!'\nقطة {is} {ask} '\U0001F431'\n{if} قطة {is} محادثة {print} 'رائع!'\n{else} {print} 'لا، قطة هي المحادثة '\nالضفدع {is} {ask} '\U0001F438'\n{if} ضفدع {is} غرينويل {print} 'ممتاز!'\n{else} {print} 'لا, الضفدع هو غرينويل'\n```\n"
         name: لغة
         description: تدرب على كلمات من لغة جديدة
         default_save_name: لغة
@@ -802,11 +805,11 @@ adventures:
         name: ما التالي؟
         levels:
             3:
-                story_text: "## What's next?\nIn this level you've been practising with variables, but maybe you've come across this mistake.\n\nTry to run this code:\n```\nname {is} Sophie\n{print} My name is name\n```\nOf course you wanted to print `My name is Sophie` but Hedy prints `My Sophie is Sophie`. \nIn the next level this problem is fixed by using quotation marks.\n"
-                start_code: "{print} Let's go to the next level!"
+                story_text: "## ما التالي؟\nلقد تدربت على إستخدام المتغيرات في هذا المستوى، ولكنك ربما مررت بهذا الخطأ خلال كتابتك للأكواد.\n\nجرب تنفيذ هذا البرنامج:\n```\nاسمي {is} صوفي\n{print} صوفي هو صوفي\n```\nبالتأكيد اردت طباعة `اسمي هو صوفي` ولكن هيدي طبعت `صوفي هو صوفي`\nفي المستوى القادم سيتم حل تلك المشكلة بإستخدام علامات التنصيص.\n"
+                start_code: "{print} هيا بنا إلى المستوى التالي!"
             4:
                 story_text: "## What's next?\nIn the previous levels you've already learned to use `{at} {random}` which made your games different every time you ran the code.\nBut it's not really interactive, the player doesn't have any influence on what happens in the game.\n\nIn the next level you'll learn the `{if}` command, that allows you to give different responses in your program. This way you can program a secret password for your computer for example.\nSo let's take a peak!\n\n```\npassword {is} {ask} 'What is the correct password?'\n```\n"
-                start_code: "{print} 'Lets go to the next level!'"
+                start_code: "{print} 'هيا بنا إلى المستوى التالي!'"
             5:
                 start_code: "{print} 'On to the next level!'"
                 story_text: "## What's next?\nNow you've reached the end of this level, so you have learned `{ask}` and `{if}`. For example you can {ask} guests what they would like to eat.\nWhat you can't yet do though, is calculate the price for everyone's dinner.\n\nThe next level makes it possible to use addition, subtraction and multiplication in your programs. This way you can calculate the prices in your restaurant, but you could also add a secret code to give your friends and family a discount.\nAnother option in the next level is programming your own maths game, for your little brother or sister to practice their multiplications.\nGo see for yourself in the next level!\n```\n{print} 'Welcome at McHedy'\norder {is} {ask} 'What would you like to eat?'\n{print} 'You would like ' order\n{if} order {is} hamburger price {is} 5\n{if} order {is} fries price {is} 2\ndrinks {is} {ask} 'What would you like to drink?'\n{print} 'You would like ' drinks\n{print} 'That will be ' price ' dollars for your ' order ' please'\n{print} 'The drinks are free in this level because Hedy cant calculate the price yet...'\n```\n"
@@ -837,8 +840,8 @@ adventures:
                 example_code: "```\n{print} مرحبًا بك في هيدي\n{ask} ماذا تود ان تطلب؟\n{echo} إذًا انت تريد \n{ask} وماذا تود ان تشرب؟\n{echo} إذًا انت تريد \n```\n"
                 story_text_2: "إذا طلب اللاعب همبرغر و كوكاكولا، فلن تستطيع قول \"إذًا ان تريد همبرغر و كوكاكولا\"، يجب ان تضعهم في سطرين منفردين.\nو كذلك الامر `{echo}` يمكنه ترديد الكلمة في اخر الجملة فقط. إذًا فلن تستطيع ايضًا قول \"شطيرتك قادمة حالاً!\" في اول الجمله.\n\nسنغير هذه الامور في المستوى٢. في المستوى٢ ستتعلم كيفية استخدام المتغيرات، وستتمكن من حفظ اكثر من معلومة واحدة وطباعتها في أي جزء تريده فالجملة.\nلذا هيا بنا لإستكشاف المستوى التالي!\n"
             2:
-                story_text: "## What's next?\nIn this level you've learned what a variable is and how you can use it to make your adventures more interactive.\nBut... that's not the only thing you can do with variables! You can also use variables to make lists.\nAnd you can even let Hedy pick a random word out of a list, which allows you to make real games!\nTake a quick look at the next level!\n"
-                start_code: "{print} Let's go to the next level!"
+                story_text: "## ما التالي؟\nلقد تعلمت في هذا المستوى عن المتغيرات وكيفية استخدامها لجعل البرامج الخاصة بك أكثر تشويقًا.\nلكن يمكنك فعل ما هو أكثر بالمتغيرات، حيث يمكنك إنشاء قوائم ويمكنك جعل هيدي تختار كلمة عشوائية من قائمة قد قمت بإنشائها، فتصنع لعبًا أكثر إثارة.\nألقِ نظرة سريعة على المستوى التالي!\n"
+                start_code: "{print} هيا بنا إلى المستوى التالي!"
             6:
                 start_code: "{print} 'On to the next level!'"
                 story_text: "## What's next?\n Great job! You've reached the end of this level, which means you have practiced with `{if}` and `{else}`. You have probably noticed that your codes are getting longer and longer.\n For example {if} you want to program 'Happy Birthday'\n\n ```\n {print} 'happy birthday to you'\n {print} 'happy birthday to you'\n {print} 'happy birthday dear Hedy'\n {print} 'happy birthday to you'\n\n ```\n That's a lot of code for mainly the same words over and over again. Luckily in the next level has a solution with the `{repeat}` command, that allows you to repeat a line of code multiple times.\n"

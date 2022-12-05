@@ -1021,12 +1021,12 @@ adventures:
                     ```
                     price = 0
                     food = {ask} 'What would you like to order?'
-                    drinks = {ask} 'What would you like to drink?'
+                    drink = {ask} 'What would you like to drink?'
                     {if} food {is} 'hamburger'
                         price = price + 6.50
                     {if} food {is} 'pizza'
                         price = price + 5.75
-                    {if} drinks {is} 'water'
+                    {if} drink {is} 'water'
                         price = price + 1.20
                     {if} drink {is} 'soda'
                         price = price + 2.35

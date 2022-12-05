@@ -1,14 +1,13 @@
-from cmath import exp
-import hedy
-from tests.Tester import HedyTester
-import hedy_translation
 import textwrap
+import hedy_translation
+from tests.Tester import HedyTester
 
 # tests should be ordered as follows:
 # * Translation from English to Dutch
 # * Translation from Dutch to English
 # * Translation to several languages
 # * Error handling
+
 
 class TestsTranslationLevel18(HedyTester):
     level = 18
@@ -58,4 +57,3 @@ class TestsTranslationLevel18(HedyTester):
         expected = textwrap.dedent("print()")
 
         self.assertEqual(expected, result)
-
