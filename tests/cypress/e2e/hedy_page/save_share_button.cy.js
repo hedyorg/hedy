@@ -1,7 +1,7 @@
 import {goToHedyPage, goToHome} from "../tools/navigation/nav";
 import {loginForStudent} from "../tools/login/login";
 
-describe('Checks if save button works', () => {
+describe('Checks if save & share button works', () => {
     it('Passes', () => {
       loginForStudent();
       cy.get('#start_programming_button').click();
@@ -12,8 +12,8 @@ describe('Checks if save button works', () => {
       cy.get('#runit').click();
       cy.wait(3000);
 
-      // the save button:
-      cy.get('#save_program_button')
+      // the save and share button:
+      cy.get('#share_program_button')
       .should('be.visible')
       .should('not.be.disabled')
       .click();
@@ -22,6 +22,23 @@ describe('Checks if save button works', () => {
       if (cy.get('#modal-confirm')){
         cy.get('#modal-yes-button').click();
       }
+
+      // block for copying link should be visible:
+      cy.get('#modal-copy')
+      .should('be.visible');
+
+      // clicking on button for copying the share link
+      cy.get('#modal-copy-button')
+      .should('be.visible')
+      .click();
+
+      // checking if correct link is copied to clipboard:
+      //http://localhost:8080/hedy/d89964c395f647bfb07c0ef4bcce8f31/view (this is the correct link)
+      cy.window().then((win) => {
+        win.navigator.clipboard.readText().then((text) => {
+          expect(text).include('/hedy/d89964c395f647bfb07c0ef4bcce8f31/view');
+        });
+      });
       
       goToHome();
       goToHedyPage();
@@ -35,6 +52,8 @@ describe('Checks if save button works', () => {
           cy.get(element).should('have.text', 'print test');
         }
       })
+
+      
       
     })
   })
