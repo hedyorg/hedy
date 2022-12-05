@@ -787,6 +787,7 @@ class TestsLevel5(HedyTester):
             if event.unicode == 'x':
               print(f'first key')
               break
+          if event.type == pygame.KEYDOWN:
             if event.unicode == 'y':
               print(f'second key')
               break""")
@@ -1131,9 +1132,11 @@ class TestsLevel5(HedyTester):
             if event.unicode == 'ض':
               print(f'arabic')
               break
+          if event.type == pygame.KEYDOWN:
             if event.unicode == 'ש':
               print(f'hebrew')
               break
+          if event.type == pygame.KEYDOWN:
             if event.unicode == 'й':
               print(f'russian')
               break""")
@@ -1187,16 +1190,16 @@ class TestsLevel5(HedyTester):
         expected = HedyTester.dedent(f"""\
         create_button('PRINT')
         while not pygame_end:
-            pygame.display.update()
-            event = pygame.event.wait()
-            if event.type == pygame.QUIT:
-                pygame_end = True
-                pygame.quit()
-                break
-            if event.type == pygame.USEREVENT:
-                if event.key == 'naam':
-                    print(f'The button got pressed!')
-                    break""")
+          pygame.display.update()
+          event = pygame.event.wait()
+          if event.type == pygame.QUIT:
+            pygame_end = True
+            pygame.quit()
+            break
+          if event.type == pygame.USEREVENT:
+            if event.key == 'naam':
+              print(f'The button got pressed!')
+              break""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=7)
 

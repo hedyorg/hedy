@@ -463,18 +463,21 @@ class TestsLevel17(HedyTester):
                 14, True)
               }
               break
+          if event.type == pygame.KEYDOWN:
             if event.unicode == 'a':
               {HedyTester.indent(
                 HedyTester.turn_transpiled(-90.0, self.level),
                 14, True)
               }
               break
+          if event.type == pygame.KEYDOWN:
             if event.unicode == 'd':
               {HedyTester.indent(
                 HedyTester.turn_transpiled(90.0, self.level),
                 14, True)
               }
               break
+          if event.type == pygame.KEYDOWN:
             if event.unicode == 's':
               {HedyTester.indent(
                 HedyTester.turn_transpiled(180.0, self.level),
@@ -564,3 +567,21 @@ class TestsLevel17(HedyTester):
             exception=hedy.exceptions.ParseException,
             extra_check_function=lambda c: c.exception.error_location[0] == 2 and c.exception.error_location[1] == 5
         )
+
+    #
+    # button tests
+    #
+
+    def test_if_equality_make_button(self):
+        code = textwrap.dedent("""\
+        x = 'knop1'
+        if 'knop1' = x:
+            x is button""")
+
+        expected = HedyTester.dedent(f"""\
+        x = 'knop1'
+        if convert_numerals('Latin', 'knop1') == convert_numerals('Latin', x):
+          create_button(x)""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=18)
+
