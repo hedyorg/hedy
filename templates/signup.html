@@ -155,10 +155,12 @@
                         <label for="is_teacher">{{_('request_teacher')}}</label>
                         <input type="checkbox" id="is_teacher" name="is_teacher" {% if is_teacher %}checked{% endif %}>
                     </div>
-                    <div class="flex flex-row justify-between items-center">
-                        <label for="subscribe">{{_('subscribe_newsletter')}}</label>
-                        <input type="checkbox" id="subscribe" name="subscribe">
-                    </div>
+                    {% if is_teacher %}
+                        <div class="flex flex-row justify-between items-center">
+                            <label for="subscribe">{{_('subscribe_newsletter')}}</label>
+                            <input type="checkbox" id="subscribe" name="subscribe">
+                        </div>
+                    {% endif %}
                     <div class="flex flex-row justify-between items-center">
                         <label for="agree_terms">{{_('agree_with')}} <a href="/privacy" target="_blank">{{_('privacy_terms')}}</a></label>
                         <input type="checkbox" id="agree_terms" name="agree_terms" required>
