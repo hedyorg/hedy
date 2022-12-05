@@ -435,6 +435,8 @@ class AuthModule(WebsiteModule):
 
         for field in ["country", "birth_year", "gender", "language", "heard_about", "prog_experience", "experience_languages"]:
             if field in account:
+                if field == "heard_about" and len(account[field]) == 0:
+                    continue
                 if field == "experience_languages" and len(account[field]) == 0:
                     continue
                 user[field] = account[field]
