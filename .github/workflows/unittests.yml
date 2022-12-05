@@ -49,15 +49,14 @@ jobs:
       id: weblate_tests
       if: ${{ github.event.pull_request.user.login == 'weblate' }}
       run: |
-        Write-Host "::set-output name=run::True"
         build-tools/github/validate --weblate
     - name: Run all tests
       shell: pwsh
-      if: ${{(steps.check_file_changed.outputs.docs_changed == 'True' || github.event.label.name == 'force_tests') && steps.weblate_tests.run != 'True'}}
+      if: ${{ ((steps.check_file_changed.outputs.docs_changed == 'True' && github.event.pull_request.user.login != 'weblate') || github.event.label.name == 'force_tests') }}
       run: |
         build-tools/github/validate --all
     - name: Run non-code related tests
       shell: pwsh
-      if: ${{steps.check_file_changed.outputs.docs_changed != 'True' && steps.weblate_tests.run != 'True'}}
+      if: ${{ (steps.check_file_changed.outputs.docs_changed != 'True' && github.event.pull_request.user.login != 'weblate') }}
       run: |
         build-tools/github/validate
