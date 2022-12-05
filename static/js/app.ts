@@ -85,6 +85,16 @@ def convert_numerals(alphabet, number):
     return number
 `;
 
+const try_prefix =
+`
+try:
+`
+
+const index_out_of_bounds_suffix =
+`
+except IndexError:
+  raise Exception(f"You tried to access a list that's empty or used an index that's not on the list.")
+`
 // Close the dropdown menu if the user clicks outside of it
 $(document).on("click", function(event){
     if(!$(event.target).closest(".dropdown").length){
@@ -444,7 +454,7 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
         $('#runit').show();
         return;
       }
-      runPythonProgram(response.Code, response.has_turtle, response.has_pygame, response.has_sleep, response.Warning, cb).catch(function(err) {
+      runPythonProgram(response.Code, response.has_turtle, response.has_pygame, response.has_list, response.has_sleep, response.Warning, cb).catch(function(err) {
         // The err is null if we don't understand it -> don't show anything
         if (err != null) {
           error.show(ErrorMessages['Execute_error'], err.message);
@@ -956,7 +966,7 @@ window.onerror = function reportClientException(message, source, line_number, co
   });
 }
 
-export function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasPygame: boolean, hasSleep: boolean, hasWarnings: boolean, cb: () => void) {
+export function runPythonProgram(this: any, code: string, hasTurtle: boolean, hasPygame: boolean, hasList: boolean,hasSleep: boolean, hasWarnings: boolean, cb: () => void) {
   // If we are in the Parsons problem -> use a different output
   let outputDiv = $('#output');
 
@@ -1055,10 +1065,23 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
     document.onkeydown = animateKeys;
     window.State.pygame_running = true;
   }
+  
+  if (hasList) {
+    code_prefix += try_prefix;    
+    code = indentCode(code);
+  }
+  
+  if (hasPygame) {
+    if (hasList) {      
+      code += indentCode(pygame_suffix);
+    } else {
+      code += pygame_suffix;
+    }
+  }
 
+  if (hasList) code += index_out_of_bounds_suffix;
   code = code_prefix + code;
-  if (hasPygame) code += pygame_suffix;
-
+  
   Sk.configure({
     output: outf,
     read: builtinRead,
@@ -1165,6 +1188,17 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
     addToOutput(text, 'white');
     speak(text)
   }
+
+  function indentCode(code: string) {
+    var lines = code.split("\n");
+    var indented_code = [];
+    for (var i = 0; i < lines.length; i++) {
+      const line = "  " + lines[i];
+      indented_code.push(line);
+    }
+    return indented_code.join("\n");
+  }
+
 
   function builtinRead(x: string) {
     if (x in skulptExternalLibraries) {
