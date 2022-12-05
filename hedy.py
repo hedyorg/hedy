@@ -1125,7 +1125,7 @@ class IsValid(Filter):
         return False, InvalidInfo(" ", line=args[0][2].line, column=args[0][2].column), meta
 
     def error_print_nq(self, meta, args):
-        words = [x[1] for x in args] #second half of the list is the word
+        words = [x[1] for x in args]  # second half of the list is the word
         text = ' '.join(words)
         return False, InvalidInfo("print without quotes", arguments=[
                                   text], line=meta.line, column=meta.column), meta
@@ -1601,7 +1601,7 @@ class ConvertToPython_3(ConvertToPython_2):
         # only call process_variable if arg is a string, else keep as is (ie. don't change 5 into '5', my_list[1] into 'my_list[1]')
         if arg.isnumeric():  # is int/float
             return arg
-        elif ('[' in arg and ']' in arg):  # is list indexing
+        elif (self.is_list(arg)):  # is list indexing
             before_index, after_index = arg.split(']', 1)
             return before_index + '-1' + ']' + after_index   # account for 1-based indexing
         else:
@@ -2458,9 +2458,9 @@ def preprocess_blocks(code, level, lang):
     processed_code = []
     lines = code.split("\n")
     current_number_of_indents = 0
-    previous_number_of_indents = 0 
-    indent_size = 4 # set at 4 for now
-    indent_size_adapted = False #FH We can remove this now since we changed in indenter a bit in Nov 2022
+    previous_number_of_indents = 0
+    indent_size = 4  # set at 4 for now
+    indent_size_adapted = False  # FH We can remove this now since we changed in indenter a bit in Nov 2022
     line_number = 0
     next_line_needs_indentation = False
     for line in lines:
