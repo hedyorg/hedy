@@ -5,7 +5,12 @@ We would be grateful if you help make Hedy better! First you will want to follow
 
 **Open issues**
 
-First have a look at the open issues. [Good first issues](https://github.com/Felienne/hedy/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) are issues that we think are doable for people new to the project. But of course, you may pick up other issues too! Issues that are currently unassigned, are not planning to be picked up by us in the near future. For issues that look interesting but are already assigned, just reply on the issue to see if your help can be used.
+First have a look at the open issues, there are three categories of issues you can work on:
+* [Good first issues](https://github.com/Felienne/hedy/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) are issues that we think are doable for people new to the project.
+* [Bugs](https://github.com/hedyorg/hedy/issues?q=is%3Aopen+is%3Aissue+label%3Abug) are problems that people have reported, which we want to see fixed.
+* [Approved](https://github.com/hedyorg/hedy/issues?q=is%3Aopen+is%3Aissue+label%3Aapproved) are issues we have decided we want to move forward.
+
+All other issues should not be picked up without contacting us on Discord (see below) since these issues require more deliberation. 
 
 **Project boards**
 
@@ -71,6 +76,11 @@ $ npm install cypress --save-dev
 To run the tests go to `/tests/` first.
 You can then the tests on the command line with the following: `npx cypress run --spec "[path to test(s)]"`
 An example of running cypress: `npx cypress run --spec "cypress/e2e/login_page/*"`
+
+Do note a few things:
+* Run the `feed_dev_database.sh` script before running the tests as they something belong on certain users or classes being present in the database
+* Run pybabel before running the tests as they can also rely on exact labels
+* For the same reason, set your app to English
 
 If you want to connect Cypress to the online dashboard, use:
 
