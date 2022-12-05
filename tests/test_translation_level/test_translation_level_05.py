@@ -1,9 +1,11 @@
+import textwrap
+
+from parameterized import parameterized
+
 import hedy
-from tests.Tester import HedyTester
 import hedy_translation
 from hedy_content import ALL_KEYWORD_LANGUAGES
-import textwrap
-from parameterized import parameterized
+from tests.Tester import HedyTester
 
 # tests should be ordered as follows:
 # * Translation from English to Dutch
@@ -145,7 +147,14 @@ class TestsTranslationLevel5(HedyTester):
 
         self.assertEqual(expected, result)
 
-    @parameterized.expand(HedyTester.as_list_of_tuples(all_keywords["if"], all_keywords["print"], all_keywords["is"], all_keywords["else"], list(ALL_KEYWORD_LANGUAGES.keys())))
+    @parameterized.expand(
+        HedyTester.as_list_of_tuples(
+            all_keywords["if"],
+            all_keywords["print"],
+            all_keywords["is"],
+            all_keywords["else"],
+            list(
+                ALL_KEYWORD_LANGUAGES.keys())))
     def test_print_if_is_else_all_lang(self, if_keyword, print_keyword, is_kwrd, else_kwrd, lang):
         code = f"{if_keyword} name {is_kwrd} Hedy {print_keyword} 'Great!' {else_kwrd} {print_keyword} 'Oh no'"
 

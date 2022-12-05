@@ -1,3 +1,6 @@
+from flask import session, request
+from flask_helpers import render_template
+from bs4 import BeautifulSoup
 import contextlib
 import datetime
 import textwrap
@@ -15,9 +18,6 @@ import commonmark
 
 commonmark_parser = commonmark.Parser()
 commonmark_renderer = commonmark.HtmlRenderer()
-from bs4 import BeautifulSoup
-from flask_helpers import render_template
-from flask import session, request
 
 IS_WINDOWS = os.name == 'nt'
 
@@ -102,12 +102,10 @@ class Timer:
 
 def timer(fn):
     """Decoractor for fn."""
-
     @functools.wraps(fn)
     def wrapper(*args, **kwargs):
         with Timer(fn.__name__):
             return fn(*args, **kwargs)
-
     return wrapper
 
 
@@ -163,7 +161,8 @@ def dump_yaml_rt(data):
 def slash_join(*args):
     ret = []
     for arg in args:
-        if not arg: continue
+        if not arg:
+            continue
 
         if ret and not ret[-1].endswith('/'):
             ret.append('/')
@@ -236,7 +235,7 @@ def atomic_write_file(filename, mode='wb'):
     """Write to a filename atomically.
 
     First write to a unique tempfile, then rename the tempfile into
-    place. Use replace instead of rename to make it atomic on windows as well. 
+    place. Use replace instead of rename to make it atomic on windows as well.
     Use as a context manager:
 
         with atomic_write_file('file.txt') as f:
@@ -267,7 +266,7 @@ def timestamp_to_date(timestamp, short_format=False):
             return datetime.datetime.fromtimestamp(int(str(timestamp)))
         else:
             return datetime.datetime.fromtimestamp(int(str(timestamp)[:-3]))
-    except:
+    except BaseException:
         return None
 
 
@@ -298,12 +297,20 @@ def datetotimeordate(date):
 
 
 # https://stackoverflow.com/a/2257449
-def random_id_generator(size=6, chars=string.ascii_uppercase + string.ascii_lowercase + string.digits):
+
+
+def random_id_generator(
+        size=6,
+        chars=string.ascii_uppercase +
+        string.ascii_lowercase +
+        string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
 
 
 # This function takes a Markdown string and returns a list with each of the HTML elements obtained
 # by rendering the Markdown into HTML.
+
+
 def markdown_to_html_tags(markdown):
     _html = commonmark_renderer.render(commonmark_parser.parse(markdown))
     soup = BeautifulSoup(_html, 'html.parser')

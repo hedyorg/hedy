@@ -1,8 +1,9 @@
-from tests.Highlighter import HighlightTester
 from parameterized import parameterized
 
-class HighlighterTestList(HighlightTester):
+from tests.Highlighter import HighlightTester
 
+
+class HighlighterTestList(HighlightTester):
 
     @parameterized.expand([
         ("level3"),
@@ -13,7 +14,6 @@ class HighlighterTestList(HighlightTester):
             "sword is l ost, 12, aver i",
             "TTTTT KK TTTTTK TTK TTTTTT",
             level=level, lang="en")
-
 
     @parameterized.expand([
         ("level5"),
@@ -45,7 +45,6 @@ class HighlighterTestList(HighlightTester):
             "TTTTT KK TTTTTTTK TTTTK TTTTTTTT",
             level=level, lang="en")
 
-
     @parameterized.expand([
         ("level5"),
         ("level6"),
@@ -60,8 +59,6 @@ class HighlighterTestList(HighlightTester):
             "variable is 🦔, 🦉, 🐿, 🦇",
             "TTTTTTTT KK TK TK TK T",
             level=level, lang="en")
-
-
 
     @parameterized.expand([
         ("level6"),
@@ -83,7 +80,6 @@ class HighlighterTestList(HighlightTester):
             "TTTTT K SSSSSSK SSSSSK SSSSSSSS",
             level=level, lang="en")
 
-
     @parameterized.expand([
         ("level6"),
         ("level7"),
@@ -97,8 +93,6 @@ class HighlighterTestList(HighlightTester):
             "variable = 🦔, 🦉, 🐿, 🦇",
             "TTTTTTTT K TK TK TK T",
             level=level, lang="en")
-
-
 
     @parameterized.expand([
         ("level6"),
@@ -140,7 +134,6 @@ class HighlighterTestList(HighlightTester):
             "TTTTT K SSSSSSSK NNK SSSSSSSSK N K NK N",
             level=level, lang="en")
 
-
     @parameterized.expand([
         ("level12"),
         ("level13"),
@@ -168,10 +161,6 @@ class HighlighterTestList(HighlightTester):
             "sword = 'l ost', 12, 'aver i', 1.97 , 3.5, 3",
             "TTTTT K SSSSSSSK NNK SSSSSSSSK NNNN K NNNK N",
             level=level, lang="en")
-
-
-
-
 
     @parameterized.expand([
         ("level3"),

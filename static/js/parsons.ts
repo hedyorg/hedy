@@ -4,6 +4,7 @@ import {stopit} from "./app";
 interface ParsonsExercise {
     readonly story: number;
     readonly code_lines: Record<string, string>;
+    readonly code: string;
 }
 
 (function() {
@@ -49,7 +50,7 @@ function updateHeader(exercise: number) {
 }
 
 function showExercise(response: ParsonsExercise) {
-    let code_lines = shuffle_code_lines(response.code_lines);
+    const code_lines = shuffle_code_lines(response.code);
     let counter = 0;
     // Hide all containers, show the onces relevant dynamically
     $('.parsons_start_line_container').hide();
@@ -83,9 +84,20 @@ export function loadNextExercise() {
     // Todo...
 }
 
+function parse_code_string_into_dict(code: string) {
+    // Fixme: For relic code support we still need the alphabetic order
+    const splitted_code = code.split(/\r?\n/).filter(e => String(e).trim());
+    let code_lines: Record<string, string> = {};
+    for (let index = 0; index < splitted_code.length; index++) {
+        code_lines[index+1] = splitted_code[index]
+    }
+    return code_lines;
+}
+
 // https://stackoverflow.com/questions/26503595/javascript-shuffling-object-properties-with-their-values
-function shuffle_code_lines<A>(code_lines: Record<string, A>): Record<string, A> {
-    let shuffled: Record<string, A> = {};
+function shuffle_code_lines(code: string) {
+    const code_lines = parse_code_string_into_dict(code);
+    let shuffled: Record<string, string> = {};
     let keys = Object.keys(code_lines);
     fisherYatesShuffle(keys);
     for (const k of keys) {
