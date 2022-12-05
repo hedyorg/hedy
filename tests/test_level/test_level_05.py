@@ -728,6 +728,18 @@ class TestsLevel5(HedyTester):
             extra_check_function=lambda c: str(c.exception.arguments['guessed_command']) == 'print'
         )
 
+    def test_print_no_quotes(self):
+        code = textwrap.dedent("""\
+        print 'Hoi ik ben Hedy de Waarzegger
+        print 'Ik kan voorspellen wie morgen de loterij wint!'
+        naam is ask 'Wie ben jij?'""")
+
+        self.single_level_tester(
+            code=code,
+            exception=hedy.exceptions.UnquotedTextException,
+            extra_check_function=lambda c: c.exception.error_location[0] == 1
+        )
+
     def test_if_equality_print_backtick_text_gives_error(self):
         code = "if 1 is 1 print `yay!` else print `nay`"
 
@@ -737,16 +749,6 @@ class TestsLevel5(HedyTester):
             exception=hedy.exceptions.UnquotedTextException
         )
 
-    @parameterized.expand(HedyTester.quotes)
-    def test_meta_column_missing_quote(self, q):
-        code = textwrap.dedent(f"""\
-        name is ask 'what is your name?'
-        if name is Hedy print nice{q} else print {q}boo!{q}""")
-
-        line, column = self.codeToInvalidInfo(code)
-
-        self.assertEqual(2, line)
-        self.assertEqual(23, column)
 
     #
     # if pressed tests
