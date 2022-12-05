@@ -1765,9 +1765,9 @@ adventures:
                     ```
                     limbs = ['Right Hand', 'Left Hand', 'Right Foot', 'Left Foot']
                     colours = ['Blue', 'Green', 'Red', 'Yellow']
-                    l = limbs[random]
-                    c = colours[random]
                     repeat 20 times
+                        l = limbs[random]
+                        c = colours[random]
                         {if} x is {pressed}
                             {print} l + ' on ' + c + '!'
                     ```
