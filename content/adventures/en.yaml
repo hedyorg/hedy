@@ -1631,11 +1631,11 @@ adventures:
                 start_code: "# place your code here"
             12:
                 story_text: |
-                Are you familiar with videogames? You walk into tall grass and are suddenly approached by
-                a very suspicious mouse. What will you do?
-                In this level we will make a small menu with different kinds of options.
-                Storing text into a variable is quite handy for repeated uses.
-                Option, I choose you!
+                    Are you familiar with videogames? You walk into tall grass and are suddenly approached by
+                    a very suspicious mouse. What will you do?
+                    In this level we will make a small menu with different kinds of options.
+                    Storing text into a variable is quite handy for repeated uses.
+                    Option, I choose you!
                 example_code: |
                     ```
                     choose = 'You chose option: '
@@ -1659,6 +1659,107 @@ adventures:
                         {print} 'You got away safely!'
                     ```
                 start_code: "# place your code here"
+            13:
+                story_text: |
+                    Now that you learned how to use ```and``` and ```or```, we can use it with ```pressed```too!
+                    imagine the turtle being able to do a superjump forward. by pressing ```p``` the turtle can make a
+                    superjump! However, the turtle can only do this jump if he turns left and right first!
+                example_code: |
+                    ```
+                    stepsize = 10
+                    left = -90
+                    right = 90
+                    around = 180
+                    looked_left = 0
+                    looked_right = 0
+                    repeat 40 times
+                        {if} w is {pressed}
+                            forward stepsize
+                        {if} s is {pressed}
+                            turn around
+                        {if} a is {pressed}
+                            turn left
+                            looked_left = 1
+                        {if} d is {pressed}
+                            turn right
+                            looked_right = 1
+                        {if} o is {pressed}
+                            {if} looked_left is 1 and looked_right is 1
+                                forward 40
+                                looked_left = 0
+                                looked_right = 0
+
+                    ```
+                starting_code:  "# place your code here"
+            14:
+                story_text: |
+                    Now that you learned how to use operators, we can use it with ```pressed```too!
+                    imagine the turtle being able to do a superjump forward. by pressing ```p``` the turtle can make a
+                    superjump! However, the turtle can only do this jump every 5 steps or every 4 turns
+                example_code: |
+                    ```
+                    stepsize = 15
+                    left = -90
+                    right = 90
+                    around = 180
+                    jumptime = 5
+                    spins = 4
+                    repeat 40 times
+                        {if} w is {pressed}
+                            forward stepsize
+                            jumptime = jumptime - 1
+                        {if} s is {pressed}
+                            turn around
+                        {if} a is {pressed}
+                            turn left
+                            spins = spins - 1
+                        {if} d is {pressed}
+                            turn right
+                            spins = spins - 1
+                        {if} o is {pressed}
+                            {if} jumptime <= 0 or spins <= 0
+                                forward stepsize * 3
+                                jumptime = 5
+                                spins = 4
+
+                    ```
+                starting_code:  "# place your code here"
+            15:
+                story_text: |
+                    Now that you have learned about the ```while``` loops, you can start using it on the turtle!
+                    The turtle is now only allowed to take only 15 steps or turn 15 times, before he gets tired!
+                    Try to get as far as possible before the turtle gets tired! You can use your superjump after 2 turns
+                    or 5 steps.
+                example_code: |
+                    ```
+                    stepsize = 15
+                    left = -90
+                    right = 90
+                    around = 180
+                    jumptime = 5
+                    spins = 2
+                    tired_in = 15
+                    while tired_in > 0
+                        {if} w is {pressed}
+                            forward stepsize
+                            jumptime = jumptime - 1
+                        {if} s is {pressed}
+                            turn around
+                        {if} a is {pressed}
+                            turn left
+                            spins = spins - 1
+                        {if} d is {pressed}
+                            turn right
+                            spins = spins - 1
+                        {if} o is {pressed}
+                            {if} jumptime <= 0 or spins <= 0
+                                forward stepsize * 4
+                                jumptime = 5
+                                spins = 2
+                        tired_in = tired_in - 1
+                    ```
+
+                starting_code:  "# place your code here"
             16:
                 story_text: |
                     Lets move a little with a game of Twister!
@@ -1673,6 +1774,44 @@ adventures:
                         {print} l + ' on ' + c + '!'
                     ```
                 start_code: "# place your code here"
+            17:
+                story_text: |
+                    Now that you learned how to use ```elif```, we can use it with ```pressed```too! Be aware,
+                    ```elif ... is pressed ``` is not possible! That is why we are going to nest some ```elif```
+                    statements into the ```pressed``` options. We also had to add ```:``` to the code to make
+                    everything work! imagine the turtle being able to do a superjump forward. by pressing ```p``` the
+                    turtle can make a superjump! However, the turtle can only do this jump every 5 steps or every
+                    4 turns
+                example_code: |
+                    ```
+                    stepsize = 15
+                    left = -90
+                    right = 90
+                    around = 180
+                    jumptime = 5
+                    spins = 4
+                    repeat 40 times
+                        {if} w is {pressed}:
+                            forward stepsize
+                            jumptime = jumptime - 1
+                        {if} s is {pressed}:
+                            turn around
+                        {if} a is {pressed}:
+                            turn left
+                            spins = spins - 1
+                        {if} d is {pressed}:
+                            turn right
+                            spins = spins - 1
+                        {if} o is {pressed}:
+                            {if} jumptime <= 0 or spins <= 0:
+                                forward stepsize * 3
+                                jumptime = 5
+                                spins = 4
+                            {elif} jumptime > 0:
+                                print "you need to take more steps or turns before you can superjump!"
+
+                    ```
+                starting_code:  "# place your code here"
     rock:
         name: "Rock, paper, scissors"
         description: "Make your own rock, paper, scissors game"
