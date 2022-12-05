@@ -1510,7 +1510,6 @@ adventures:
                     if y is {pressed} {print} 'Amazing! You pressed the y key!'
                     else {print} 'Oh no! You did not press the y key.'
                     ```
-
                 start_code: "# place your code here"
             6:
                 story_text: |
@@ -1546,6 +1545,7 @@ adventures:
                     Now that you need to use indents for the {if} and {else} statements,
                     you will also have to indent code when using {pressed}! Don't worry,
                     it works te same as with the other statements, see the example!
+                    Press another key instead of x and see what happens.
                 example_code: |
                     ```
                     {if} x is {pressed}
@@ -1596,15 +1596,15 @@ adventures:
                     Can you let the turtle draw you another figure?
                 example_code: |
                     ```
-                    distances = 50, 40, 30, 20, 10
+                    distances = 100, 80, 60, 40, 20, 10
                     {if} x is {pressed}
                         for distance in distances
                             {forward} distance
-                            {turn} {left}
+                            {turn} -90
                     {if} y is {pressed}
                         for distance in distances
                             {forward} distance
-                            {turn} {right}
+                            {turn} 90
                     ```
                 start_code: "# place your code here"
             11:
@@ -1683,12 +1683,11 @@ adventures:
                         {if} d is {pressed}
                             turn right
                             looked_right = 1
-                        {if} o is {pressed}
+                        {if} p is {pressed}
                             {if} looked_left is 1 and looked_right is 1
                                 forward 40
                                 looked_left = 0
                                 looked_right = 0
-
                     ```
                 starting_code:  "# place your code here"
             14:
@@ -1716,12 +1715,11 @@ adventures:
                         {if} d is {pressed}
                             turn right
                             spins = spins - 1
-                        {if} o is {pressed}
+                        {if} p is {pressed}
                             {if} jumptime <= 0 or spins <= 0
                                 forward stepsize * 3
                                 jumptime = 5
                                 spins = 4
-
                     ```
                 starting_code:  "# place your code here"
             15:
@@ -1751,14 +1749,13 @@ adventures:
                         {if} d is {pressed}
                             turn right
                             spins = spins - 1
-                        {if} o is {pressed}
+                        {if} p is {pressed}
                             {if} jumptime <= 0 or spins <= 0
                                 forward stepsize * 4
                                 jumptime = 5
                                 spins = 2
                         tired_in = tired_in - 1
                     ```
-
                 starting_code:  "# place your code here"
             16:
                 story_text: |
@@ -1770,8 +1767,9 @@ adventures:
                     colours = ['Blue', 'Green', 'Red', 'Yellow']
                     l = limbs[random]
                     c = colours[random]
-                    {if} x is {pressed}
-                        {print} l + ' on ' + c + '!'
+                    repeat 20 times
+                        {if} x is {pressed}
+                            {print} l + ' on ' + c + '!'
                     ```
                 start_code: "# place your code here"
             17:
@@ -1802,14 +1800,13 @@ adventures:
                         {if} d is {pressed}:
                             turn right
                             spins = spins - 1
-                        {if} o is {pressed}:
+                        {if} p is {pressed}:
                             {if} jumptime <= 0 or spins <= 0:
                                 forward stepsize * 3
                                 jumptime = 5
                                 spins = 4
                             {elif} jumptime > 0:
                                 print "you need to take more steps or turns before you can superjump!"
-
                     ```
                 starting_code:  "# place your code here"
     rock:
