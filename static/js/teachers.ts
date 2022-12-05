@@ -499,7 +499,7 @@ export function add_account_placeholder() {
     });
     // Append 5 rows at once
     for (let x = 0; x < 5; x++) {
-      row.appendTo("#account_rows_container");
+        row.clone().appendTo("#account_rows_container");
     }
 }
 
