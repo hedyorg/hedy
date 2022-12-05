@@ -99,6 +99,7 @@ class Achievements:
         self.initialize_user_data_if_necessary()
         if session["run_programs"] < self.ACHIEVEMENTS_THRESHOLD:
             return
+        self.check_programs_run()
         if code and level:
             self.check_code_achievements(code, level)
         if code and response:
