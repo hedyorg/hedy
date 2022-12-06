@@ -710,7 +710,7 @@ adventures:
                     puntos = 0
                     tirar = opciones {at} {random}
                     {print} 'tú lanzaste' tirar
-                    {if} rodar {is} tierra puntos = puntos + 5 {else} puntos = puntos + tirar
+                    {if} tirar {is} tierra puntos = puntos + 5 {else} puntos = puntos + tirar
                     {print} 'este' puntos 'punto'
                     ```
 
