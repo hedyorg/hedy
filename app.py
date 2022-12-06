@@ -1394,7 +1394,6 @@ def explore():
             # WITHOUT an adventure
             if adventure == "default":
                 programs = [x for x in programs if x.get('adventure_name') == ""]
-                return programs[-48:]
             programs = [x for x in programs if x.get('adventure_name') == adventure]
         programs = programs[-48:]
         achievement = ACHIEVEMENTS.add_single_achievement(
