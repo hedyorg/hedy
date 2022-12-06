@@ -151,6 +151,7 @@ table users:
     gender:               m|f|o|UNDEFINED
     created:              INTEGER (epoch milliseconds)
     last_login:           INTEGER|UNDEFINED (epoch milliseconds)
+    heard_about:UNDEFINED|['from_another_teacher'|'social_media'|'from_video'|'from_magazine_website'|'other_source']
     prog_experience:      UNDEFINED|'yes'|'no',
     experience_languages: UNDEFINED|['scratch'|'other_block'|'python'|'other_text']
     classes:              UNDEFINED|[STRING, ...] (ids of the classes of which the user is a member)
