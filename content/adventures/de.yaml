@@ -1579,7 +1579,7 @@ adventures:
                         price = price + 6.50
                     {if} food {is} 'pizza'
                         price = price + 5.75
-                    {if} drinks {is} 'water'
+                    {if} drink {is} 'water'
                         price = price + 1.20
                     {if} drink {is} 'soda'
                         price = price + 2.35
@@ -1919,7 +1919,7 @@ adventures:
                     Haustiere = Hund, Katze, Elephant
                     Namen = Judith, Benno, Tim
                     
-                    {for} Name {in} Names
+                    {for} Name {in} Namen
                         {print} Name ' lebt in einem ' Häuser {at} {random}
                         {print} Name ' wird ' Liebe {at} {random} ' heiraten.'
                         {print} Name ' wird eine(n) ' Haustiere {at} {random} ' als Haustier haben.'
