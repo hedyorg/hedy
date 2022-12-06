@@ -49,10 +49,14 @@ class HedyTester(unittest.TestCase):
 
     @staticmethod
     def run_code(parse_result):
+        code = utils.NORMAL_PREFIX_CODE
+
         if parse_result.has_turtle:
-            code = utils.TURTLE_PREFIX_CODE + parse_result.code
-        else:
-            code = utils.NORMAL_PREFIX_CODE + parse_result.code
+            code += utils.TURTLE_PREFIX_CODE
+        if parse_result.has_pygame:
+            code += utils.PYGAME_PREFIX_CODE
+
+        code += parse_result.code
         # remove sleep comments to make program execution less slow
         code = re.sub(r'time\.sleep\([^\n]*\)', 'pass', code)
 

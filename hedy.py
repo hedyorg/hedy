@@ -535,9 +535,6 @@ class LookupEntryCollector(visitors.Visitor):
             name = f'{list_name}[{position_name}-1]'
         self.add_to_lookup(name, tree, tree.meta.line, True)
 
-    def list_access_var(self, tree):
-        self.add_to_lookup(tree.children[0].children[0], tree, tree.meta.line)
-
     def change_list_item(self, tree):
         self.add_to_lookup(tree.children[0].children[0], tree, tree.meta.line, True)
 
@@ -638,10 +635,6 @@ class TypeValidator(Transformer):
         self.save_type_to_lookup(name, HedyType.any)
 
         return self.to_typed_tree(tree, HedyType.any)
-
-    def list_access_var(self, tree):
-        self.save_type_to_lookup(tree.children[0].children[0], HedyType.any)
-        return self.to_typed_tree(tree)
 
     def add(self, tree):
         self.validate_args_type_allowed(Command.add_to_list, tree.children[1], tree.meta)
@@ -1381,6 +1374,10 @@ class ConvertToPython(Transformer):
         return 'random.choice' in s
 
     @staticmethod
+    def is_list(s):
+        return '[' in s and ']' in s
+
+    @staticmethod
     def indent(s, spaces_amount=2):
         lines = s.split('\n')
         return '\n'.join([' ' * spaces_amount + line for line in lines])
@@ -1584,7 +1581,7 @@ class ConvertToPython_2(ConvertToPython_1):
     def assign(self, meta, args):
         parameter = args[0]
         value = args[1]
-        if self.is_random(value):
+        if self.is_random(value) or self.is_list(value):
             return parameter + " = " + value
         else:
             if self.is_variable(value):
@@ -1631,7 +1628,7 @@ class ConvertToPython_3(ConvertToPython_2):
         # don't change 5 into '5', my_list[1] into 'my_list[1]')
         if arg.isnumeric():  # is int/float
             return arg
-        elif ('[' in arg and ']' in arg):  # is list indexing
+        elif (self.is_list(arg)):  # is list indexing
             before_index, after_index = arg.split(']', 1)
             return before_index + '-1' + ']' + after_index   # account for 1-based indexing
         else:
@@ -1703,13 +1700,6 @@ class ConvertToPython_5(ConvertToPython_4):
     def __init__(self, lookup, numerals_language):
         super().__init__(lookup, numerals_language)
         self.ifpressed_prefix_added = False
-
-    def list_access_var(self, meta, args):
-        var = escape_var(args[0])
-        if isinstance(args[2], Tree):
-            return var + ' = random.choice(' + args[1] + ')'
-        else:
-            return var + ' = ' + args[1] + '[' + args[2] + '-1]'
 
     def ifs(self, meta, args):
         return f"""if {args[0]}:
