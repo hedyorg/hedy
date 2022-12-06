@@ -730,7 +730,7 @@ adventures:
                 start_code: '# place your code here'
             5:
                 story_text: "## Parrot\nReward your parrot if it says the correct word!\n"
-                example_code: "```\nслова {is} крякай, Хеді.\n{print} 'Дресируй папугу!'\nнове слово {is} {ask} 'Якому слову ви хочете їх навчити?'\n{add} нове слово {to_list} слова\nсказане слово {is} слів {at} {random}\n{print} '\U0001F9D2 Скажи ''нове слово'', Хеді!'\n{print} '\U0001F99C ' скажи слово,\nскажи слово {is} нове слово ' \U0001F9D2 Молодець, Хеді! \U0001F36A'\n' \U0001F9D2 Ні, Хеді! Скажи 'новеслово'\n```\n"
+                example_code: "```\nслова {is} крякай, Хеді.\n{print} 'Дресируй папугу!'\nнове_слово {is} {ask} 'Якому слову ви хочете їх навчити?'\n{add} нове_слово {to_list} слова\nсказане_слово {is} слів {at} {random}\n{print} '\U0001F9D2 Скажи ' нове_слово ', Хеді!'\n{print} '\U0001F99C ' сказане_слово\n_ сказане_слово {is} нове_слово ' \U0001F9D2 Молодець, Хеді! \U0001F36A'\n_ _ ' \U0001F9D2 Ні, Хеді! Скажи ' нове_слово\n```\n"
                 start_code: '# place your code here'
     quizmaster:
         name: Quizmaster
