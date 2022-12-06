@@ -42,7 +42,6 @@ from website.auth import (current_user, is_admin, is_teacher,
 from website.log_fetcher import log_fetcher
 from website.yaml_file import YamlFile
 
-
 logConfig(LOGGING_CONFIG)
 logger = logging.getLogger(__name__)
 
@@ -962,7 +961,7 @@ def index(level, program_id):
             # Todo: How can we fix this without a re-load?
             quiz_stats = DATABASE.get_quiz_stats([current_user()['username']])
             # Only check the quiz threshold if there is a quiz to obtain a score on the previous level
-            if level > 1 and QUIZZES[g.lang].get_quiz_data_for_level(level-1):
+            if level > 1 and QUIZZES[g.lang].get_quiz_data_for_level(level - 1):
                 scores = [x.get('scores', []) for x in quiz_stats if x.get('level') == level - 1]
                 scores = [score for week_scores in scores for score in week_scores]
                 max_score = 0 if len(scores) < 1 else max(scores)
@@ -1269,7 +1268,6 @@ def reset_page():
 @app.route('/my-profile', methods=['GET'])
 @requires_login
 def profile_page(user):
-
     profile = DATABASE.user_by_username(user['username'])
     programs = DATABASE.public_programs_for_user(user['username'])
     public_profile_settings = DATABASE.get_public_profile_settings(current_user()['username'])
@@ -1390,11 +1388,7 @@ def explore():
         if language:
             programs = [x for x in programs if x.get('lang') == language]
         if adventure:
-            # If the adventure we filter on is called 'default' -> return all programs
-            # WITHOUT an adventure
-            if adventure == "default":
-                programs = [x for x in programs if x.get('adventure_name') == ""]
-                return programs[-48:]
+            # Todo: We used to save adventures with "default" with an empty adventure_name, what changed?
             programs = [x for x in programs if x.get('adventure_name') == adventure]
         programs = programs[-48:]
         achievement = ACHIEVEMENTS.add_single_achievement(
@@ -1404,34 +1398,8 @@ def explore():
 
     filtered_programs = []
     for program in programs:
-        # If program does not have an error value set -> parse it and set value
-        if 'error' not in program:
-            try:
-                hedy.transpile(program.get('code'), program.get('level'), program.get('lang'))
-                program['error'] = False
-            except BaseException:
-                program['error'] = True
-            DATABASE.store_program(program)
+        program = pre_process_explore_program(program)
         public_profile = DATABASE.get_public_profile_settings(program['username'])
-
-        # If the language doesn't match the user -> parse the keywords
-        # We perform a "double parse" to make sure english keywords are also always translated
-        code = program['code']
-
-        # First, if the program language is not equal to english and the language supports keywords
-        # It might contain non-english keywords -> parse all to english
-        if program.get("lang") != "en" and program.get("lang") in ALL_KEYWORD_LANGUAGES.keys():
-            code = hedy_translation.translate_keywords(code, from_lang=program.get(
-                'lang'), to_lang="en", level=int(program.get('level', 1)))
-        # If the keyword language is non-English -> parse again to guarantee
-        # completely localized keywords
-        if g.keyword_lang != "en":
-            code = hedy_translation.translate_keywords(
-                code,
-                from_lang="en",
-                to_lang=g.keyword_lang,
-                level=int(
-                    program.get('level', 1)))
 
         filtered_programs.append({
             'username': program['username'],
@@ -1441,13 +1409,16 @@ def explore():
             'error': program['error'],
             'hedy_choice': True if program.get('hedy_choice') == 1 else False,
             'public_user': True if public_profile else None,
-            'code': "\n".join(code.split("\n")[:4]),
-            'number_lines': code.count('\n') + 1
+            'code': "\n".join(program['code'].split("\n")[:4]),
+            'number_lines': program['code'].count('\n') + 1
         })
 
     favourite_programs = DATABASE.get_hedy_choices()
     hedy_choices = []
     for program in favourite_programs:
+        program = pre_process_explore_program(program)
+        public_profile = DATABASE.get_public_profile_settings(program['username'])
+
         hedy_choices.append({
             'username': program['username'],
             'name': program['name'],
@@ -1456,7 +1427,7 @@ def explore():
             'hedy_choice': True,
             'public_user': True if public_profile else None,
             'code': "\n".join(program['code'].split("\n")[:4]),
-            'number_lines': code.count('\n') + 1
+            'number_lines': program['code'].count('\n') + 1
         })
 
     adventures_names = hedy_content.Adventures(session['lang']).get_adventure_names()
@@ -1473,6 +1444,34 @@ def explore():
         adventures_names=adventures_names,
         page_title=gettext('title_explore'),
         current_page='explore')
+
+
+def pre_process_explore_program(program):
+    # If program does not have an error value set -> parse it and set value
+    if 'error' not in program:
+        try:
+            hedy.transpile(program.get('code'), program.get('level'), program.get('lang'))
+            program['error'] = False
+        except BaseException:
+            program['error'] = True
+        DATABASE.store_program(program)
+
+    # First, if the program language is not equal to english and the language supports keywords
+    # It might contain non-english keywords -> parse all to english
+    if program.get("lang") != "en" and program.get("lang") in ALL_KEYWORD_LANGUAGES.keys():
+        program['code'] = hedy_translation.translate_keywords(program['code'], from_lang=program.get(
+            'lang'), to_lang="en", level=int(program.get('level', 1)))
+    # If the keyword language is non-English -> parse again to guarantee
+    # completely localized keywords
+    if g.keyword_lang != "en":
+        program['code'] = hedy_translation.translate_keywords(
+            program['code'],
+            from_lang="en",
+            to_lang=g.keyword_lang,
+            level=int(
+                program.get('level', 1)))
+
+    return program
 
 
 @app.route('/highscores', methods=['GET'], defaults={'filter': 'global'})
@@ -1735,6 +1734,7 @@ def get_user_messages():
         return session.get('messages')
     return None
 
+
 # Todo TB: Re-write this somewhere sometimes following the line below
 # We only store this @app.route here to enable the use of achievements ->
 # might want to re-write this in the future
@@ -1900,6 +1900,7 @@ app.register_blueprint(achievements.AchievementsModule(ACHIEVEMENTS))
 app.register_blueprint(quiz.QuizModule(DATABASE, ACHIEVEMENTS, QUIZZES))
 app.register_blueprint(parsons.ParsonsModule(PARSONS))
 app.register_blueprint(statistics.StatisticsModule(DATABASE))
+
 
 # *** START SERVER ***
 

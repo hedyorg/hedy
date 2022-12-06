@@ -433,6 +433,9 @@ class TestAuth(AuthHelper):
             {'username': username, 'password': 'foobar', 'email': 'me@something'},
             {'username': username, 'password': 'foobar', 'email': 'me@something.com', 'language': 123},
             {'username': username, 'password': 'foobar', 'email': 'me@something.com', 'language': True},
+            {'username': username, 'password': 'foobar', 'email': 'me@something.com', 'heard_about': 'foo'},
+            {'username': username, 'password': 'foobar', 'email': 'me@something.com', 'heard_about': ['other_source', 'foo']},
+            {'username': username, 'password': 'foobar', 'email': 'me@something.com', 'heard_about': [2]},
             {'username': username, 'password': 'foobar', 'email': 'me@something.com', 'prog_experience': [2]},
             {'username': username, 'password': 'foobar', 'email': 'me@something.com', 'prog_experience': 'foo'},
             {'username': username, 'password': 'foobar', 'email': 'me@something.com', 'experience_languages': 'python'}
@@ -451,6 +454,7 @@ class TestAuth(AuthHelper):
             'password_repeat': 'foobar',
             'language': 'nl',
             'keyword_language': 'en',
+            'heard_about': 'from_another_teacher',
             'agree_terms': 'yes'}
 
         # WHEN signing up a new user
