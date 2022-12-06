@@ -2546,19 +2546,37 @@ def preprocess_blocks(code, level, lang):
     return "\n".join(processed_code)
 
 
-def preprocess_ifs(code):
+def preprocess_ifs(code, lang='en'):
     processed_code = []
     lines = code.split("\n")
+
+    def starts_with(command, line):
+        command_plus_translated_command = [command, KEYWORDS[lang][command]]
+        for command in command_plus_translated_command:
+            if line[0:len(command)] == command:
+                return True
+        return False
+
+    def contains(command, line):
+        command_plus_translated_command = [command, KEYWORDS[lang][command]]
+        for command in command_plus_translated_command:
+            if command in line:
+                return True
+
+        return False
+
+
     for i in range(len(lines) - 1):
         line = lines[i]
         next_line = lines[i + 1]
-        # todo convert to all languages!!
+
         # if this line starts with if but does not contain an else, and the next line too is not an else.
-        if line[0:2] == "if" and (not next_line[0:4] == 'else') and (not ("else" in line)):
+        if starts_with('if', line) and (not starts_with('else', next_line)) and (not contains('else', line)):
             # is this line just a condition and no other keyword (because that is no problem)
             commands = ["print", "ask", "forward", "turn"]
+            commands_lang = [KEYWORDS[lang]['print'], KEYWORDS[lang]['ask'], KEYWORDS[lang]['forward'], KEYWORDS[lang]['turn']]
             if (
-                "pressed" not in line and any(x in line for x in commands)
+                not contains('pressed', line) and any(x in line for x in commands+commands_lang)
             ):  # and this should also (TODO) check for a second is cause that too is problematic.
                 # a second command, but also no else in this line -> check next line!
 
@@ -2593,7 +2611,7 @@ def process_input_string(input_string, level, lang, escape_backslashes=True):
 
     # In levels 5 to 8 we do not allow if without else, we add an empty print to make it possible in the parser
     if level >= 5 and level <= 8:
-        result = preprocess_ifs(result)
+        result = preprocess_ifs(result, lang)
 
     # In level 8 we add indent-dedent blocks to the code before parsing
     if level >= hedy.LEVEL_STARTING_INDENTATION:
