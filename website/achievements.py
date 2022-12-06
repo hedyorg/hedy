@@ -172,7 +172,7 @@ class Achievements:
 
     def check_programs_run(self):
         self.initialize_user_data_if_necessary()
-        if "getting_started_I" not in session["achieved"] and session["run_programs"] >= 1:
+        if "getting_started_I" not in session["achieved"] and session["run_programs"] >= 5:
             session["new_achieved"].append("getting_started_I")
         if "getting_started_II" not in session["achieved"] and session["run_programs"] >= 10:
             session["new_achieved"].append("getting_started_II")
