@@ -151,8 +151,8 @@ class AuthModule(WebsiteModule):
                 body["heard_about"] = [body["heard_about"]]
             if not isinstance(body["heard_about"], list):
                 return gettext("heard_about_invalid"), 400
-            for language in body["heard_about"]:
-                if language not in ["from_another_teacher", "social_media", "from_video", "from_magazine_website", \
+            for option in body["heard_about"]:
+                if option not in ["from_another_teacher", "social_media", "from_video", "from_magazine_website", \
                     "other_source"]:
                     return gettext("heard_about_invalid"), 400
         if "prog_experience" in body and body["prog_experience"] not in ["yes", "no"]:
@@ -177,7 +177,7 @@ class AuthModule(WebsiteModule):
         if not is_testing_request(request) and "subscribe" in body:
             # If we have a Mailchimp API key, we use it to add the subscriber through the API
             if MAILCHIMP_API_URL:
-                mailchimp_subscribe_user(user["email"], body["country"], "teacher")
+                mailchimp_subscribe_user(user["email"], body["country"])
             # Otherwise, we send an email to notify about the subscription to the main email address
             else:
                 send_email(
