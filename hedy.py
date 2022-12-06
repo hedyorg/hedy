@@ -2571,6 +2571,15 @@ def preprocess_ifs(code, lang='en'):
         else:
             return command in line
 
+    def contains_any_of(commands, line):
+
+        if lang in ALL_KEYWORD_LANGUAGES:
+            commands_lang = [KEYWORDS[lang]['print'], KEYWORDS[lang]['ask'], KEYWORDS[lang]['forward'],
+                             KEYWORDS[lang]['turn']]
+
+            any(x in line for x in commands+commands_lang)
+        else:
+            any(x in line for x in commands)
 
 
     for i in range(len(lines) - 1):
@@ -2581,9 +2590,9 @@ def preprocess_ifs(code, lang='en'):
         if starts_with('if', line) and (not starts_with('else', next_line)) and (not contains('else', line)):
             # is this line just a condition and no other keyword (because that is no problem)
             commands = ["print", "ask", "forward", "turn"]
-            commands_lang = [KEYWORDS[lang]['print'], KEYWORDS[lang]['ask'], KEYWORDS[lang]['forward'], KEYWORDS[lang]['turn']]
+
             if (
-                not contains('pressed', line) and any(x in line for x in commands+commands_lang)
+                not contains('pressed', line) and contains_any_of(commands, line)
             ):  # and this should also (TODO) check for a second is cause that too is problematic.
                 # a second command, but also no else in this line -> check next line!
 
