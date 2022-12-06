@@ -105,7 +105,7 @@ class ProfileModule(WebsiteModule):
                     if r.status_code == 200:
                         r = requests.delete(request_path, headers=MAILCHIMP_API_HEADERS)
                         role = self.db.get_username_role(user["username"])
-                        mailchimp_subscribe_user(email, body["country"], role)
+                        mailchimp_subscribe_user(email, body["country"])
 
         username = user["username"]
 
