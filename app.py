@@ -961,7 +961,8 @@ def index(level, program_id):
             # A bit out-of-scope, but we want to enable the next level button directly after finishing the quiz
             # Todo: How can we fix this without a re-load?
             quiz_stats = DATABASE.get_quiz_stats([current_user()['username']])
-            if level > 1:
+            # Only check the quiz threshold if there is a quiz to obtain a score on the previous level
+            if level > 1 and QUIZZES[g.lang].get_quiz_data_for_level(level-1):
                 scores = [x.get('scores', []) for x in quiz_stats if x.get('level') == level - 1]
                 scores = [score for week_scores in scores for score in week_scores]
                 max_score = 0 if len(scores) < 1 else max(scores)
@@ -970,13 +971,16 @@ def index(level, program_id):
                         error=403, ui_message=gettext('quiz_threshold_not_reached'))
 
             # We also have to check if the next level should be removed from the available_levels
-            if level < hedy.HEDY_MAX_LEVEL:
+            # Only check the quiz threshold if there is a quiz to obtain a score on the current level
+            if level < hedy.HEDY_MAX_LEVEL and QUIZZES[g.lang].get_quiz_data_for_level(level):
                 scores = [x.get('scores', []) for x in quiz_stats if x.get('level') == level]
                 scores = [score for week_scores in scores for score in week_scores]
                 max_score = 0 if len(scores) < 1 else max(scores)
                 # We don't have the score yet for the next level -> remove all upcoming
                 # levels from 'available_levels'
                 if max_score < threshold:
+                    # if this level is currently available, but score is below max score
+                    customizations["below_threshold"] = (level + 1 in available_levels)
                     available_levels = available_levels[:available_levels.index(level) + 1]
 
     # Add the available levels to the customizations dict -> simplify
@@ -1023,7 +1027,6 @@ def index(level, program_id):
         quiz = False
 
     commands = hedy.commands_per_level.get(level)
-
     return hedyweb.render_code_editor_with_tabs(
         cheatsheet=cheatsheet,
         commands=commands,
@@ -1428,9 +1431,7 @@ def explore():
                 from_lang="en",
                 to_lang=g.keyword_lang,
                 level=int(
-                    program.get(
-                        'level',
-                        1)))
+                    program.get('level', 1)))
 
         filtered_programs.append({
             'username': program['username'],

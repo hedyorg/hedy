@@ -30,9 +30,7 @@ def collect_snippets(path):
                     # commands.k.demo_code
                     for k, command in enumerate(yaml[level]):
                         # test only unique snippets
-                        if hash(command['demo_code']) in unique_snippets_table:
-                            continue
-                        else:
+                        if not hash(command['demo_code']) in unique_snippets_table:
                             unique_snippets_table.add(hash(command['demo_code']))
                         command_text_short = command['name'] if 'name' in command.keys(
                         ) else command['explanation'][0:10]

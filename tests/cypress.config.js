@@ -15,6 +15,7 @@ module.exports = defineConfig({
     login_page: '/login',
     recover_page: '/recover',
     hedy_page: '/hedy',
+    hedy_level2_page: '/hedy/2',
     teachers_page: '/for-teachers',
     customize_class_page: '/for-teachers/customize-class/', // You should concatenate this with the class id e.g. /for-teachers/customize_class/<class id>
     stats_page: '/stats/class/', // You should concatenate this with the class id e.g. /stats/class/<class id>

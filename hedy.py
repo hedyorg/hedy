@@ -538,9 +538,6 @@ class LookupEntryCollector(visitors.Visitor):
             name = f'{list_name}[{position_name}-1]'
         self.add_to_lookup(name, tree, tree.meta.line, True)
 
-    def list_access_var(self, tree):
-        self.add_to_lookup(tree.children[0].children[0], tree, tree.meta.line)
-
     def change_list_item(self, tree):
         self.add_to_lookup(tree.children[0].children[0], tree, tree.meta.line, True)
 
@@ -641,10 +638,6 @@ class TypeValidator(Transformer):
         self.save_type_to_lookup(name, HedyType.any)
 
         return self.to_typed_tree(tree, HedyType.any)
-
-    def list_access_var(self, tree):
-        self.save_type_to_lookup(tree.children[0].children[0], HedyType.any)
-        return self.to_typed_tree(tree)
 
     def add(self, tree):
         self.validate_args_type_allowed(Command.add_to_list, tree.children[1], tree.meta)
@@ -1141,12 +1134,10 @@ class IsValid(Filter):
         return False, InvalidInfo(" ", line=args[0][2].line, column=args[0][2].column), meta
 
     def error_print_nq(self, meta, args):
-        if len(args) > 1:
-            text = args[1][1]
-        else:
-            text = args[0][1]
+        words = [x[1] for x in args]  # second half of the list is the word
+        text = ' '.join(words)
         return False, InvalidInfo("print without quotes", arguments=[
-                                  text], line=args[0][2].line, column=args[0][2].column), meta
+                                  text], line=meta.line, column=meta.column), meta
 
     def error_invalid(self, meta, args):
         # TODO: this will not work for misspelling 'at', needs to be improved!
@@ -1366,6 +1357,10 @@ class ConvertToPython(Transformer):
         return 'random.choice' in s
 
     @staticmethod
+    def is_list(s):
+        return '[' in s and ']' in s
+
+    @staticmethod
     def indent(s, spaces_amount=2):
         lines = s.split('\n')
         return '\n'.join([' ' * spaces_amount + line for line in lines])
@@ -1569,7 +1564,7 @@ class ConvertToPython_2(ConvertToPython_1):
     def assign(self, meta, args):
         parameter = args[0]
         value = args[1]
-        if self.is_random(value):
+        if self.is_random(value) or self.is_list(value):
             return parameter + " = " + value
         else:
             if self.is_variable(value):
@@ -1615,7 +1610,7 @@ class ConvertToPython_3(ConvertToPython_2):
         # only call process_variable if arg is a string, else keep as is (ie. don't change 5 into '5', my_list[1] into 'my_list[1]')
         if arg.isnumeric():  # is int/float
             return arg
-        elif ('[' in arg and ']' in arg):  # is list indexing
+        elif (self.is_list(arg)):  # is list indexing
             before_index, after_index = arg.split(']', 1)
             return before_index + '-1' + ']' + after_index   # account for 1-based indexing
         else:
@@ -1687,13 +1682,6 @@ class ConvertToPython_5(ConvertToPython_4):
     def __init__(self, lookup, numerals_language):
         super().__init__(lookup, numerals_language)
         self.ifpressed_prefix_added = False
-
-    def list_access_var(self, meta, args):
-        var = escape_var(args[0])
-        if isinstance(args[2], Tree):
-            return var + ' = random.choice(' + args[1] + ')'
-        else:
-            return var + ' = ' + args[1] + '[' + args[2] + '-1]'
 
     def ifs(self, meta, args):
         return f"""if {args[0]}:
@@ -2769,7 +2757,6 @@ def transpile_inner(input_string, level, lang="en"):
         raise Exception(f'Levels over {HEDY_MAX_LEVEL} not implemented yet')
 
     input_string = process_input_string(input_string, level, lang)
-
     program_root = parse_input(input_string, level, lang)
 
     # checks whether any error production nodes are present in the parse tree
