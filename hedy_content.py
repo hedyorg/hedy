@@ -58,6 +58,7 @@ ADVENTURE_NAMES = [
     'turtle',
     'dishes',
     'dice',
+    'pressit',
     'rock',
     'calculator',
     'piggybank',
@@ -133,6 +134,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'haunted',
         'restaurant',
         'turtle',
+        'pressit',
         'next',
         'end'
     ],
