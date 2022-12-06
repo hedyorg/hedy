@@ -1255,7 +1255,7 @@ adventures:
                 example_code: "```\n{print} '¡La hucha virtual!'\ndeseo = {ask} '¿Qué quieres comprar?'\nprecio = {ask} '¿Cuánto cuesta?'\nahorrado = {ask} '¿Cuánto dinero tienes ahorrado?'\npaga = {ask} '¿Cuánto dinero obtienes por semana?'\na_ahorrar = precio - ahorrado\nsemanas = a_ahorrar / paga\n{print} 'Podrás comprar un ' _ ' en ' _ ' semanas.'\n```\n"
                 start_code: '# pon tu código aquí'
             14:
-                example_code: "```\ndinero = {ask} '¿Cuánto dinero has ahorrado?'\ndeseo = {ask} '¿Cuánto dinero necesitas?'\nasignación = {ask} '¿Cuánto dinero de bolsillo tienes cada semana?'\nto_save = deseo - dinero\nsemanas = ahorro/prestación\n{if} deseo > dinero\n    {print} \'¡Tienes que ahorrar más!'\n    {print} 'Necesitarás ' semanas ' más semanas.'\n{else}\n    {print} '¡Genial! Ya tienes suficiente'\n    {print} '¡Vamos a comprar!'\n```\n"
+                example_code: "```\ndinero = {ask} '¿Cuánto dinero has ahorrado?'\ndeseo = {ask} '¿Cuánto dinero necesitas?'\nasignación = {ask} '¿Cuánto dinero de bolsillo tienes cada semana?'\nto_save = deseo - dinero\nsemanas = ahorro/prestación\n{if} deseo > dinero\n    {print} \n'¡Tienes que ahorrar más!'\n    {print} 'Necesitarás ' semanas ' más semanas.'\n{else}\n    {print} '¡Genial! Ya tienes suficiente'\n    {print} '¡Vamos a comprar!'\n```\n"
                 story_text: "## Hucha virtual\n¡En este nivel puedes hacer que Hedy te diga si has ahorrado suficiente dinero!\n"
                 start_code: '# pon tu código aquí'
         name: Hucha de cerdito
