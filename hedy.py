@@ -991,32 +991,6 @@ class UsesPyGame(Transformer):
         return True
 
 
-class UsesList(Transformer):
-    def __default__(self, args, children, meta):
-        if len(children) == 0:
-            return False
-        else:
-            return any(type(c) == bool and c is True for c in children)
-
-    def list_access(self, args):
-        return True
-
-    def add(self, args):
-        return True
-
-    def remove(self, args):
-        return True
-
-    def list_access_var(self, args):
-        return True
-
-    def assign_list(self, args):
-        return True
-
-    def change_list_item(self, args):
-        return True
-
-
 class AllCommands(Transformer):
     def __init__(self, level):
         self.level = level
@@ -1558,7 +1532,6 @@ class ConvertToPython_2(ConvertToPython_1):
                 args_new.append(''.join([self.process_variable_for_fstring(x, meta.line) for x in res]))
 
         argument_string = ' '.join(args_new)
-
         return f"print(f'{argument_string}')"
 
     def ask(self, meta, args):
@@ -2405,7 +2378,7 @@ def get_parser(level, lang="en", keep_all_tokens=False):
     return ret
 
 
-ParseResult = namedtuple('ParseResult', ['code', 'has_turtle', 'has_pygame', 'has_list'])
+ParseResult = namedtuple('ParseResult', ['code', 'has_turtle', 'has_pygame'])
 
 
 def transpile(input_string, level, lang="en"):
@@ -2799,8 +2772,7 @@ def transpile_inner(input_string, level, lang="en"):
 
         has_turtle = UsesTurtle().transform(abstract_syntax_tree)
         has_pygame = UsesPyGame().transform(abstract_syntax_tree)
-        has_list = UsesList().transform(abstract_syntax_tree)
-        return ParseResult(python, has_turtle, has_pygame, has_list)
+        return ParseResult(python, has_turtle, has_pygame)
     except VisitError as E:
         # Exceptions raised inside visitors are wrapped inside VisitError. Unwrap it if it is a
         # HedyException to show the intended error message.

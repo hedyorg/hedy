@@ -400,9 +400,6 @@ def parse():
 
             if transpile_result.has_turtle:
                 response['has_turtle'] = True
-
-            if transpile_result.has_list:
-                response['has_list'] = True
         except Exception:
             pass
         try:
