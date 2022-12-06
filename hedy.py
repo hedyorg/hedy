@@ -9,6 +9,7 @@ from os import path
 import warnings
 import hedy
 import hedy_translation
+from hedy_content import ALL_KEYWORD_LANGUAGES
 import utils
 from collections import namedtuple
 import re
@@ -2551,19 +2552,25 @@ def preprocess_ifs(code, lang='en'):
     lines = code.split("\n")
 
     def starts_with(command, line):
-        command_plus_translated_command = [command, KEYWORDS[lang][command]]
-        for command in command_plus_translated_command:
-            if line[0:len(command)] == command:
-                return True
-        return False
+        if lang in ALL_KEYWORD_LANGUAGES:
+            command_plus_translated_command = [command, KEYWORDS[lang][command]]
+            for c in command_plus_translated_command:
+                if line[0:len(c)] == c:
+                    return True
+            return False
+        else:
+            return line[0:len(command)] == command
 
     def contains(command, line):
-        command_plus_translated_command = [command, KEYWORDS[lang][command]]
-        for command in command_plus_translated_command:
-            if command in line:
-                return True
+        if lang in ALL_KEYWORD_LANGUAGES:
+            command_plus_translated_command = [command, KEYWORDS[lang][command]]
+            for c in command_plus_translated_command:
+                if c in line:
+                    return True
+            return False
+        else:
+            return command in line
 
-        return False
 
 
     for i in range(len(lines) - 1):
