@@ -45,8 +45,9 @@ if os.getenv("MAILCHIMP_API_KEY") and os.getenv("MAILCHIMP_AUDIENCE_ID"):
     }
 
 
-def mailchimp_subscribe_user(email, country, role):
-    request_body = {"email_address": email, "status": "subscribed", "tags": [country, role]}
+def mailchimp_subscribe_user(email, country):
+    # Request is always for teachers as only they can subscribe to newsletters
+    request_body = {"email_address": email, "status": "subscribed", "tags": [country, "teacher"]}
     r = requests.post(MAILCHIMP_API_URL + "/members", headers=MAILCHIMP_API_HEADERS, data=json.dumps(request_body))
 
     subscription_error = None
