@@ -525,7 +525,7 @@ export function generate_passwords() {
 export function append_classname() {
     const classname = <string>$('#classes').val();
     $('.usernames_input').each(function () {
-        $(this).val( classname + "_" + $(this).val());
+        $(this).val($(this).val() + "_" + classname);
     });
 }
 
