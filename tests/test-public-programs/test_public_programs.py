@@ -3,7 +3,7 @@ import unittest
 from tests.Tester import HedyTester, Snippet
 from parameterized import parameterized
 
-most_recent_file_name = 'tests/test-public-programs/filtered-programs-2022-11-17.json'
+most_recent_file_name = 'tests/test-public-programs/filtered-programs-2022-12-01.json'
 public_snippets = []
 
 # this file tests all public programs in the database
@@ -19,6 +19,7 @@ for p in public_programs:
                 level=int(p['level']),
                 field_name='field',
                 code=p['code'],
+                language=p['language'],
                 error=p['error']
                 )
     public_snippets.append(s)
@@ -26,7 +27,6 @@ for p in public_programs:
 p2 = [(s.name, s) for s in public_snippets]
 
 class TestsPublicPrograms(unittest.TestCase):
-
   @parameterized.expand(p2)
   def test_programs(self, name, snippet):
     if snippet is not None and not snippet.error:
