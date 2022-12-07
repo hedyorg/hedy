@@ -539,7 +539,7 @@ class TestsLevel17(HedyTester):
               HedyTester.forward_transpiled(25.0, self.level),
               12, True)
             }
-            break    
+            break
           else:
             {HedyTester.indent(
               HedyTester.turn_transpiled(90.0, self.level),
@@ -571,19 +571,6 @@ class TestsLevel17(HedyTester):
     #
     # button tests
     #
-
-    def test_if_equality_make_button(self):
-        code = textwrap.dedent("""\
-        x = 'knop1'
-        if 'knop1' = x:
-            x is button""")
-
-        expected = HedyTester.dedent(f"""\
-        x = 'knop1'
-        if convert_numerals('Latin', 'knop1') == convert_numerals('Latin', x):
-          create_button(x)""")
-
-        self.multi_level_tester(code=code, expected=expected, max_level=18)
 
     def test_if_button_is_pressed_print(self):
         code = textwrap.dedent("""\
@@ -650,7 +637,7 @@ class TestsLevel17(HedyTester):
 
     def test_if_button_is_pressed_print_in_repeat(self):
         code = textwrap.dedent("""\
-        x = 'but' 
+        x = 'but'
         x is button
         repeat 3 times
             if but is pressed:
