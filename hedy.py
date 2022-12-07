@@ -1658,7 +1658,7 @@ def sleep_after(commands, indent=True):
 @hedy_transpiler(level=7)
 class ConvertToPython_7(ConvertToPython_6):
     def repeat(self, meta, args):
-        var_name = self.get_fresh_var('i')
+        var_name = self.get_fresh_var('__i__')
         times = self.process_variable(args[0], meta.line)
         command = args[1]
         # in level 7, repeats can only have 1 line as their arguments
