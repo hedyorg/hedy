@@ -574,6 +574,7 @@ class TypeValidator(Transformer):
         self.input_string = input_string
 
     def print(self, tree):
+       
         self.validate_args_type_allowed(Command.print, tree.children, tree.meta)
 
         return self.to_typed_tree(tree)
@@ -640,6 +641,7 @@ class TypeValidator(Transformer):
         return self.to_typed_tree(tree, HedyType.any)
 
     def list_access_var(self, tree):
+
         self.save_type_to_lookup(tree.children[0].children[0], HedyType.any)
         return self.to_typed_tree(tree)
 
@@ -693,6 +695,7 @@ class TypeValidator(Transformer):
 
     def text(self, tree):
         # under level 12 integers appear as text, so we parse them
+
         if self.level < 12:
             type_ = HedyType.integer if ConvertToPython.is_int(tree.children[0]) else HedyType.string
         else:
@@ -778,12 +781,14 @@ class TypeValidator(Transformer):
         return prom_left_type, prom_right_type
 
     def validate_args_type_allowed(self, command, children, meta):
+
         allowed_types = get_allowed_types(command, self.level)
         children = children if type(children) is list else [children]
         for child in children:
             self.check_type_allowed(command, allowed_types, child, meta)
 
     def check_type_allowed(self, command, allowed_types, tree, meta=None):
+
         arg_type = self.get_type(tree)
         if arg_type not in allowed_types and not self.ignore_type(arg_type):
             variable = tree.children[0]
@@ -822,6 +827,14 @@ class TypeValidator(Transformer):
             if in_lookup:
                 return type_in_lookup
             else:
+
+                # if the variable name is 'at', it's because they tried to print "at random" 
+                # in a level that wasn't allowed
+                if var_name == 'at' and self.level >= 16:
+                    raise exceptions.InvalidRandomCommandException()
+
+
+
                 # is there a variable that is mildly similar?
                 # if so, we probably meant that one
 
@@ -835,6 +848,7 @@ class TypeValidator(Transformer):
                     minimum_distance_allowed = 4
                     for var_in_lookup in self.lookup:
                         if calculate_minimum_distance(var_in_lookup.name, var_name) <= minimum_distance_allowed:
+
                             raise hedy.exceptions.UndefinedVarException(name=var_name, line_number=tree.meta.line)
 
                     # nothing found? fall back to UnquotedTextException
@@ -1130,7 +1144,7 @@ class IsValid(Filter):
     def error_invalid_space(self, meta, args):
         # return space to indicate that line starts in a space
         return False, InvalidInfo(" ", line=args[0][2].line, column=args[0][2].column), meta
-
+    
     def error_print_nq(self, meta, args):
         if len(args) > 1:
             text = args[1][1]
@@ -1170,6 +1184,9 @@ class IsValid(Filter):
         error = InvalidInfo('lonely text', arguments=[str(args[0])], line=meta.line, column=meta.column)
         return False, error, meta
 
+    def error_random_keyword(self, meta, args):
+        error = InvalidInfo('invalid random keyword', arguments=[str(args[0])], line=meta.line, column=meta.column)
+        return False, error, meta
     # other rules are inherited from Filter
 
 
@@ -1311,7 +1328,6 @@ class ConvertToPython(Transformer):
     def check_var_usage(self, args, var_access_linenumber=100):
         # this function checks whether arguments are valid
         # we can proceed if all arguments are either quoted OR all variables
-
         def is_var_candidate(arg) -> bool:
             return not isinstance(arg, Tree) and \
                 not ConvertToPython.is_int(arg) and \
@@ -1329,6 +1345,7 @@ class ConvertToPython(Transformer):
             # TODO: check whether this is really never raised??
             # return first name with issue
             first_unquoted_var = unquoted_args[0]
+
             raise exceptions.UndefinedVarException(name=first_unquoted_var, line_number=var_access_linenumber)
 
     # static methods
@@ -1681,6 +1698,10 @@ class ConvertToPython_5(ConvertToPython_4):
 
     def list_access_var(self, meta, args):
         var = escape_var(args[0])
+        
+        # if we tried to use 'at random' in level 16 raise an exception
+        if self.level >= 16:
+            raise exceptions.InvalidRandomCommandException()
         if isinstance(args[2], Tree):
             return var + ' = random.choice(' + args[1] + ')'
         else:
@@ -2646,6 +2667,7 @@ def parse_input(input_string, level, lang):
 def is_program_valid(program_root, input_string, level, lang):
     # IsValid returns (True,) or (False, args)
     instance = IsValid()
+
     instance.level = level  # TODO: could be done in a constructor once we are sure we will go this way
     is_valid = instance.transform(program_root)
 
@@ -2693,6 +2715,8 @@ def is_program_valid(program_root, input_string, level, lang):
             raise exceptions.UnsupportedFloatException(value=''.join(invalid_info.arguments))
         elif invalid_info.error_type == 'lonely text':
             raise exceptions.LonelyTextException(level=level, line_number=line)
+        elif invalid_info.error_type == 'invalid random keyword':
+            raise exceptions.InvalidRandomCommandException()
         else:
             invalid_command = invalid_info.command
             closest = closest_command(invalid_command, get_suggestions_for_language(lang, level))
@@ -2710,7 +2734,6 @@ def is_program_valid(program_root, input_string, level, lang):
                 raise exceptions.MissingCommandException(level=level, line_number=line)
 
             else:
-
                 fixed_code = None
                 result = None
                 fixed_code = input_string.replace(invalid_command, closest)
