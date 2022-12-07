@@ -1450,7 +1450,21 @@ class ConvertToPython_1(ConvertToPython):
 
     def make_turtle_command(self, parameter, command, command_text, add_sleep):
         variable = self.get_fresh_var('trtl')
-        transpiled = textwrap.dedent(f"""\
+        var_name = None
+        exception = ''
+        if self.is_list(parameter):
+            var_name = parameter.split('[')[0]
+        elif self.is_random(parameter):
+            var_name = re.search(r'random\.choice\((.+)\)', parameter).group(1)
+        if var_name is not None:
+            exception_text = gettext('catch_index_exception').replace('{list_name}', style_command(var_name))
+            exception = textwrap.dedent(f"""\
+            try:
+              {parameter}
+            except IndexError:
+              raise Exception('{exception_text}')
+            """)
+        transpiled = exception + textwrap.dedent(f"""\
             {variable} = {parameter}
             try:
               {variable} = int({variable})
@@ -1531,9 +1545,9 @@ class ConvertToPython_2(ConvertToPython_1):
                 res = regex.findall(
                     r"[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}\p{Mn}\p{Mc}\p{Nd}\p{Pc}]+|[^\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}]+", a)
                 args_new.append(''.join([self.process_variable_for_fstring(x, meta.line) for x in res]))
-
+        exception = self.make_catch_exception(args)
         argument_string = ' '.join(args_new)
-        return f"print(f'{argument_string}')"
+        return exception + f"print(f'{argument_string}')"
 
     def ask(self, meta, args):
         var = args[0]
@@ -1556,7 +1570,18 @@ class ConvertToPython_2(ConvertToPython_1):
         parameter = args[0]
         value = args[1]
         if self.is_random(value) or self.is_list(value):
-            return parameter + " = " + value
+            if self.is_list(value):
+                var_name = value.split('[')[0]
+            else:
+                var_name = re.search(r'random\.choice\((.+)\)', value).group(1)
+            exception_text = gettext('catch_index_exception').replace('{list_name}', style_command(var_name))
+            exception = textwrap.dedent(f"""\
+            try:
+              {value}
+            except IndexError:
+              raise Exception('{exception_text}')
+            """)
+            return exception + parameter + " = " + value
         else:
             if self.is_variable(value):
                 value = self.process_variable(value, meta.line)
@@ -1571,11 +1596,37 @@ class ConvertToPython_2(ConvertToPython_1):
             return "time.sleep(1)"
         else:
             value = f'"{args[0]}"' if self.is_int(args[0]) else args[0]
-            return textwrap.dedent(f"""\
-                try:
+            exceptions = self.make_catch_exception(args)
+            try_prefix = "try:\n" + textwrap.indent(exceptions, "  ")
+            code = try_prefix + textwrap.dedent(f"""\
                   time.sleep(int({value}))
                 except ValueError:
                   raise Exception(f'While running your program the command {style_command(Command.sleep)} received the value {style_command('{' + value + '}')} which is not allowed. Try changing the value to a number.')""")
+            return code
+
+    def make_catch_exception(self, args):
+        lists_names = []
+        list_args = []
+        for arg in args:
+            if self.is_list(arg):
+                var_name = arg.split("[")
+                lists_names.append(var_name[0])
+                list_args.append(arg)
+            elif self.is_random(arg):
+                var_name = re.search(r'random\.choice\((.+)\)', arg).group(1)
+                lists_names.append(var_name)
+                list_args.append(arg)
+        code = ""
+        exception_text_template = gettext('catch_index_exception')
+        for i, list_name in enumerate(lists_names):
+            exception_text = exception_text_template.replace('{list_name}', style_command(list_name))
+            code += textwrap.dedent(f"""\
+            try:
+              {list_args[i]}
+            except IndexError:
+              raise Exception('{exception_text}')
+            """)
+        return code
 
 
 @v_args(meta=True)
@@ -1657,24 +1708,8 @@ class ConvertToPython_4(ConvertToPython_3):
 
     def print(self, meta, args):
         argument_string = self.print_ask_args(meta, args)
-        lists_names = []
-        list_args = []
-        for arg in args:
-            if self.is_list(arg):
-                var_name = arg.split("[")
-                lists_names.append(var_name[0])
-                list_args.append(arg)
-        code = ""
-        exception_text_template = gettext('catch_index_exception')
-        for i, list_name in enumerate(lists_names):
-            exception_text = exception_text_template.replace('{list_name}', style_command(list_name))
-            code += textwrap.dedent(f"""\
-            try:
-              {list_args[i]}
-            except:
-              raise Exception('{exception_text}')
-            """)
-        return code + f"print(f'{argument_string}')"
+        exceptions = self.make_catch_exception(args)
+        return exceptions + f"print(f'{argument_string}')"
 
     def ask(self, meta, args):
         var = args[0]
@@ -2021,7 +2056,8 @@ class ConvertToPython_12(ConvertToPython_11):
 
     def print(self, meta, args):
         argument_string = self.print_ask_args(meta, args)
-        return f"print(f'''{argument_string}''')"
+        exception = self.make_catch_exception(args)
+        return exception + f"print(f'''{argument_string}''')"
 
     def ask(self, meta, args):
         var = args[0]
