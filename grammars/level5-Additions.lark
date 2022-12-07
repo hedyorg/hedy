@@ -11,7 +11,7 @@ error_invalid: textwithoutspaces _SPACE* (quoted_text | textwithspaces)?
 
 //todo: list_access_var can be merged with var? would simplify rewriting a bit, some duplication now in processing
 list_access_var: var _IS var _AT (INT | random)
-assign_button: var _IS _BUTTON
+assign_button: NAME _IS _BUTTON
 assign_list: var _IS textwithspaces (_COMMA textwithspaces)+
 assign: var _IS textwithspaces
 

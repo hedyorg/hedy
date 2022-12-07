@@ -13,7 +13,7 @@ equality_check: (textwithoutspaces | INT) (_IS | _EQUALS) (textwithoutspaces | q
 condition:+= equality_check -= equality_check
 
 list_access_var: var (_IS | _EQUALS) var _AT (INT | random)
-assign_button: var (_IS | _EQUALS) _BUTTON
+assign_button: NAME (_IS | _EQUALS) _BUTTON
 assign_list: var (_IS | _EQUALS) textwithspaces (_COMMA textwithspaces)+
 assign: var (_IS | _EQUALS) expression | var ( _IS  | _EQUALS) textwithoutspaces | var (_IS | _EQUALS) textwithspaces
 
