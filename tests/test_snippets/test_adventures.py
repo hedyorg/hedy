@@ -107,7 +107,7 @@ def collect_snippets(path, hashes_saved=set(), filtered_language=None, only_new_
     return Hedy_snippets
 
 
-filtered_language = 'nl'
+# filtered_language = 'nl'
 # use this to filter on 1 lang, zh_Hans for Chinese, nb_NO for Norwegian, pt_PT for Portuguese
 
 only_new_snippets = os.getenv('only_new_snippets')
