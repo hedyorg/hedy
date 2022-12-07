@@ -27,6 +27,13 @@ import pygame
 pygame.init()
 canvas = pygame.display.set_mode((711,300))
 canvas.fill(pygame.Color(247, 250, 252, 255))
+pygame_end = False
+`;
+
+const pygame_suffix =
+`# coding=utf8
+pygame_end = True
+pygame.quit()
 `;
 
 const normal_prefix =
@@ -160,6 +167,7 @@ $(document).on("click", function(event){
     var editor = turnIntoAceEditor($editor.get(0)!, $editor.data('readonly'));
     theGlobalEditor = editor;
     theGlobalEditor.setShowPrintMargin(false);
+    theGlobalEditor.renderer.setScrollMargin(0, 0, 0, 20)
     error.setEditor(editor);
     markers = new Markers(theGlobalEditor);
 
@@ -192,7 +200,7 @@ $(document).on("click", function(event){
           stopit();
           editor.focus(); // Make sure the editor has focus, so we can continue typing
         }
-        if ($('#inline-modal').is (':visible')) $('#inline-modal').hide();
+        if ($('#ask-modal').is (':visible')) $('#inline-modal').hide();
         window.State.disable_run = false;
         $ ('#runit').css('background-color', '');
         window.State.unsaved_changes = true;
@@ -308,17 +316,31 @@ function clearErrors(editor: AceAjax.Editor) {
 }
 
 export function stopit() {
-  // We bucket-fix stop the current program by setting the run limit to 1ms
-  Sk.execLimit = 1;
-  clearTimeouts();
-  $('#stopit').hide();
-  $('#runit').show();
+  if (window.State.pygame_running) {
+      // when running pygame, raise the pygame quit event
+      Sk.insertPyGameEvent("quit");
+      Sk.unbindPygameListeners();
 
-  // This gets a bit complex: if we do have some input modal waiting, fake submit it and hide it
-  // This way the Promise is no longer "waiting" and can no longer mess with our next program
-  if ($('#inline-modal').is(":visible")) {
-    $('#inline-modal form').submit();
-    $('#inline-modal').hide();
+      window.State.pygame_running = false;
+      document.onkeydown = null;
+      $('#pygame-modal').hide();
+      $('#stopit').hide();
+      $('#runit').show();
+  }
+  else
+  {
+      // We bucket-fix stop the current program by setting the run limit to 1ms
+      Sk.execLimit = 1;
+      clearTimeouts();
+      $('#stopit').hide();
+      $('#runit').show();
+
+      // This gets a bit complex: if we do have some input modal waiting, fake submit it and hide it
+      // This way the Promise is no longer "waiting" and can no longer mess with our next program
+      if ($('#ask-modal').is(":visible")) {
+        $('#ask-modal form').submit();
+        $('#ask-modal').hide();
+      }
   }
 
   window.State.disable_run = false;
@@ -344,6 +366,11 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
     if (disabled_prompt) {
       return modal.alert(disabled_prompt, 3000, true);
     } return;
+  }
+
+  // Make sure to stop previous PyGame event listeners
+  if (typeof Sk.unbindPygameListeners === 'function') {
+    Sk.unbindPygameListeners();
   }
 
   // We set the run limit to 1ms -> make sure that the previous programs stops (if there is any)
@@ -608,7 +635,7 @@ function storeProgram(level: number | [number, string], lang: string, name: stri
     // The auth functions use this callback function.
     if (cb) return response.Error ? cb (response) : cb (null, response);
     if (shared) {
-      $('#modal-copy-button').attr('onclick', "hedyApp.copy_to_clipboard('" + viewProgramLink(response.id) + "')");
+      $('#modal-copy-button').attr('onclick', "hedyApp.copy_to_clipboard('" + viewProgramLink(response.id) + "', '" + response.share_message + "')");
       modal.copy_alert (response.message, 5000);
     } else {
       modal.alert(response.message, 3000, false);
@@ -886,8 +913,10 @@ export function copy_to_clipboard (string: string, prompt: string) {
      document.getSelection()?.removeAllRanges ();
      document.getSelection()?.addRange (originalSelection);
   }
-  modal.hide_alert();
-  modal.alert (prompt, 3000, false);
+
+  // Hide all modals to make sure the copy clipboard modal is hidden as well -> show alert() with feedback
+  modal.hide();
+  modal.alert(prompt, 3000, false);
 }
 
 /**
@@ -957,18 +986,17 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
   turtleConfig.width = outputDiv.width();
   turtleConfig.worldWidth = outputDiv.width();
 
+  let code_prefix = normal_prefix;
+
   if (!hasTurtle && !hasPygame) {
     // There might still be a visible turtle panel. If the new program does not use the Turtle,
     // remove it (by clearing the '#turtlecanvas' div)
     $('#turtlecanvas').empty();
-    code = normal_prefix + code
-  } else {
-    // Otherwise make sure that it is shown as it might be hidden from a previous code execution.
-    $('#turtlecanvas').show();
   }
 
   if (hasTurtle) {
-    code = normal_prefix + turtle_prefix + code
+    code_prefix += turtle_prefix;
+    $('#turtlecanvas').show();
   }
 
   if (hasPygame){
@@ -1003,7 +1031,7 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
       './locals.js': {
         path: "/vendor/pygame_4_skulpt/locals.js",
       },
-      'src/lib/time.js': {
+      './time.js': {
         path: "/vendor/pygame_4_skulpt/time.js",
       },
       './version.js': {
@@ -1011,11 +1039,25 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
       },
     };
 
-    code = pygame_prefix + normal_prefix + code
+    code_prefix += pygame_prefix;
 
     initSkulpt4Pygame();
     initCanvas4PyGame();
+
+    const codeContainsInputFunctionBeforePygame = new RegExp(
+      "input\\([\\s\\S]*\\)[\\s\\S]*while not pygame_end", 'gm'
+    ).test(code);
+
+    if (!hasTurtle && !codeContainsInputFunctionBeforePygame) {
+      $('#pygame-modal').show();
+    }
+    
+    document.onkeydown = animateKeys;
+    window.State.pygame_running = true;
   }
+
+  code = code_prefix + code;
+  if (hasPygame) code += pygame_suffix;
 
   Sk.configure({
     output: outf,
@@ -1040,8 +1082,8 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
     // So: a very large limit in these levels, keep the limit on other onces.
     execLimit: (function () {
       const level = Number(window.State.level) || 0;
-      if (hasTurtle) {
-        // We don't want a timeout when using the turtle -> just set one for 10 minutes
+      if (hasTurtle || hasPygame) {
+        // We don't want a timeout when using the turtle or pygame -> just set one for 10 minutes
         return (6000000);
       }
       if (level < 7) {
@@ -1053,7 +1095,7 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
     }) ()
   });
 
-  return Sk.misceval.asyncToPromise( () =>
+  return Sk.misceval.asyncToPromise(() =>
     Sk.importMainWithBody("<stdin>", false, code, true), {
       "*": () => {
         // We don't do anything here...
@@ -1065,6 +1107,12 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
     load_variables(pythonVariables);
     $('#stopit').hide();
     $('#runit').show();
+
+    if (hasPygame) {
+      document.onkeydown = null;
+      $('#pygame-modal').hide();
+    }
+
     if (hasTurtle) {
       $('#saveFiles').show();
     }
@@ -1084,6 +1132,8 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
     }
     if (cb) cb ();
   }).catch(function(err) {
+
+
     const errorMessage = errorMessageFromSkulptError(err) || null;
     if (!errorMessage) {
       throw null;
@@ -1150,11 +1200,18 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
     if (storage.getItem("prompt-" + prompt) == null) {
     Sk.execStart = new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 365);
     $('#turtlecanvas').hide();
+
+    if (window.State.pygame_running) {
+      Sk.unbindPygameListeners();
+      document.onkeydown = null;
+      $('#pygame-modal').hide();
+    }
+
     return new Promise(function(ok) {
       window.State.disable_run = true;
 
-      const input = $('#inline-modal input[type="text"]');
-      $('#inline-modal .caption').text(prompt);
+      const input = $('#ask-modal input[type="text"]');
+      $('#ask-modal .caption').text(prompt);
       input.val('');
       input.attr('placeholder', prompt);
       speak(prompt)
@@ -1162,13 +1219,24 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
       setTimeout(function() {
         input.focus();
       }, 0);
-      $('#inline-modal form').one('submit', function(event) {
+      $('#ask-modal form').one('submit', function(event) {
         window.State.disable_run = false;
         event.preventDefault();
-        $('#inline-modal').hide();
+        $('#ask-modal').hide();
+
         if (hasTurtle) {
           $('#turtlecanvas').show();
         }
+
+        if (window.State.pygame_running) {
+          Sk.bindPygameListeners();
+          document.onkeydown = animateKeys;
+
+          if (!hasTurtle) {
+            $('#pygame-modal').show();
+          }
+        }
+
         // We reset the timer to the present moment.
         Sk.execStart = new Date ();
         // We set a timeout for sending back the input, so that the input box is hidden before processing the program.
@@ -1184,12 +1252,11 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
 
           return false;
         });
-        $('#inline-modal').show();
+        $('#ask-modal').show();
       });
     } else {
       return new Promise(function (ok) {
         ok(storage.getItem("prompt-" + prompt));
-
       });
     }
   }
@@ -1213,6 +1280,24 @@ function resetTurtleTarget() {
     return null;
 }
 
+function animateKeys(event: KeyboardEvent) {
+    const keyColors = ['#cbd5e0', '#bee3f8', '#4299e1', '#ff617b', '#ae81ea', '#68d391'];
+    const output = $("#output");
+
+    if (output !== null) {
+      let keyElement = $("<div></div>");
+      output.append(keyElement);
+
+      keyElement.text(event.key);
+      keyElement.css('color', keyColors[Math.floor(Math.random() * keyColors.length)]);
+      keyElement.addClass('animate-keys')
+
+      setTimeout(function () {
+        keyElement.remove()
+      }, 1500);
+    }
+}
+
 function initCanvas4PyGame() {
     let currentTarget = resetTurtleTarget();
 
@@ -1222,6 +1307,7 @@ function initCanvas4PyGame() {
       currentTarget.appendChild(div1);
       $(div1).addClass("modal");
       $(div1).css("text-align", "center");
+      $(div1).css("display", "none");
 
       let div2 = document.createElement("div");
       $(div2).addClass("modal-dialog modal-lg");
@@ -1249,27 +1335,17 @@ function initCanvas4PyGame() {
       div3.appendChild(div5);
       div3.appendChild(div6);
 
-      Sk.main_canvas.style.border = "none";
+      $(Sk.main_canvas).css("border", "none");
+      $(Sk.main_canvas).css("display", "none");
       div5.appendChild(Sk.main_canvas);
     }
 }
 
 function initSkulpt4Pygame() {
-    const killWhileAndForBool = true;
     Sk.main_canvas = document.createElement("canvas");
-    Sk.builtin.KeyboardInterrupt = function (_:any) {
-        let o;
-        if (!(this instanceof Sk.builtin.KeyboardInterrupt)) {
-            o = Object.create(Sk.builtin.KeyboardInterrupt.prototype);
-            o.constructor.apply(o, arguments);
-            return o;
-        }
-        Sk.builtin.BaseException.apply(this, arguments);
-    };
-    Sk.abstr.setUpInheritance("KeyboardInterrupt", Sk.builtin.KeyboardInterrupt, Sk.builtin.BaseException);
     Sk.configure({
-        killableWhile: killWhileAndForBool,
-        killableFor: killWhileAndForBool,
+        killableWhile: true,
+        killableFor: true,
         __future__: Sk.python3,
     });
 }
@@ -1480,7 +1556,7 @@ function store_parsons_attempt(order: Array<string>, correct: boolean) {
 // Todo: As the parsons functionality will rapidly increase, we should probably all store this in a dedicated file (?)
 function get_parsons_code() {
     let code = "";
-    let count = 65;
+    let count = 1;
     let order = new Array();
     let mistake = false;
 
@@ -1494,8 +1570,8 @@ function get_parsons_code() {
           code += text + "\n";
         }
         $(this).parents().removeClass('border-black');
-        let index = $(this).attr('index') || "-";
-        if (index.charCodeAt(0) == count) {
+        let index = $(this).attr('index') || 999;
+        if (index == count) {
           $(this).parents().addClass('border-green-500');
         } else {
           mistake = true;
@@ -1900,6 +1976,13 @@ type Breakpoints = Record<number, string>;
  */
 const BP_DISABLED_LINE = 'ace_breakpoint';
 
+function get_shift_key(event: Event | undefined) {
+  // @ts-ignore
+  if (event.shiftKey) {
+    return true;
+  } return false;
+}
+
 if ($("#editor").length) {
   var editor: AceAjax.Editor = ace.edit("editor");
   editor.on("guttermousedown", function (e: GutterMouseDownEvent) {
@@ -1913,9 +1996,24 @@ if ($("#editor").length) {
       return;
 
     const breakpoints = getBreakpoints(e.editor);
+
     let row = e.getDocumentPosition().row;
     if (breakpoints[row] === undefined && row !== e.editor.getLastVisibleRow() + 1) {
-      e.editor.session.setBreakpoint(row, BP_DISABLED_LINE);
+      // If the shift key is pressed mark all rows between the current one and the first one above that is a debug line
+      if (get_shift_key(event)) {
+        let highest_key = row;
+        for (const key in breakpoints) {
+          const number_key = parseInt(key);
+          if (number_key < row) {
+            highest_key = number_key;
+          }
+        }
+        for (let i = highest_key; i <= row; i++) {
+          e.editor.session.setBreakpoint(i, BP_DISABLED_LINE);
+        }
+      } else {
+        e.editor.session.setBreakpoint(row, BP_DISABLED_LINE);
+      }
     } else {
       e.editor.session.clearBreakpoint(row);
     }
@@ -2045,6 +2143,20 @@ function markCurrentDebuggerLine() {
   } else {
     markers.setDebuggerCurrentLine(undefined);
   }
+}
+
+export function hide_editor() {
+  $('#fold_in_toggle_container').hide();
+  $('#code_editor').toggle();
+  $('#code_output').addClass('col-span-2');
+  $('#fold_out_toggle_container').show();
+}
+
+export function show_editor() {
+  $('#fold_out_toggle_container').hide();
+  $('#code_editor').toggle();
+  $('#code_output').removeClass('col-span-2');
+  $('#fold_in_toggle_container').show();
 }
 
 // See https://github.com/skulpt/skulpt/pull/579#issue-156538278 for the JS version of this code

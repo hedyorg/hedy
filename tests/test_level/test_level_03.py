@@ -1,5 +1,6 @@
-import hedy
 import textwrap
+
+import hedy
 from tests.Tester import HedyTester
 
 
@@ -311,7 +312,7 @@ class TestsLevel3(HedyTester):
 
         expected = HedyTester.dedent("""\
         directions = ['10', '100', '360']""",
-        HedyTester.forward_transpiled('random.choice(directions)', self.level))
+                                     HedyTester.forward_transpiled('random.choice(directions)', self.level))
 
         self.multi_level_tester(
             max_level=11,
@@ -341,7 +342,7 @@ class TestsLevel3(HedyTester):
 
         expected = HedyTester.dedent("""\
         directions = ['10', '100', '360']""",
-        HedyTester.turn_transpiled('random.choice(directions)', self.level))
+                                     HedyTester.turn_transpiled('random.choice(directions)', self.level))
 
         self.multi_level_tester(
             max_level=11,
@@ -371,7 +372,7 @@ class TestsLevel3(HedyTester):
 
         expected = HedyTester.dedent("""\
         colors = ['red', 'green', 'blue']""",
-        HedyTester.turtle_color_command_transpiled('{random.choice(colors)}'))
+                                     HedyTester.turtle_color_command_transpiled('{random.choice(colors)}'))
 
         self.multi_level_tester(
             max_level=10,
@@ -449,6 +450,24 @@ class TestsLevel3(HedyTester):
             expected=expected,
             max_level=11,
             extra_check_function=self.result_in(['koe', 'kiep', 'mui\"s']),
+        )
+
+    def test_add_integer_to_list(self):
+        code = textwrap.dedent("""\
+        dieren is koe, kiep
+        add 5 to dieren
+        print dieren at random""")
+
+        expected = textwrap.dedent("""\
+        dieren = ['koe', 'kiep']
+        dieren.append(5)
+        print(f'{random.choice(dieren)}')""")
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            max_level=11,
+            extra_check_function=self.result_in(['koe', 'kiep', 5]),
         )
 
     def test_remove_text_from_list(self):
@@ -536,8 +555,8 @@ class TestsLevel3(HedyTester):
         print colors at random
         colors is green, red, blue""")
 
-        with self.assertRaises(hedy.exceptions.AccessBeforeAssign) as context:
-            result = hedy.transpile(code, self.level)
+        with self.assertRaises(hedy.exceptions.AccessBeforeAssign):
+            hedy.transpile(code, self.level)
 
     def test_add_ask_to_list(self):
         code = textwrap.dedent("""\

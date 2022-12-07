@@ -1,8 +1,6 @@
-import hedy
-from tests.Tester import HedyTester
-import hedy_translation
 import textwrap
-
+import hedy_translation
+from tests.Tester import HedyTester
 
 # tests should be ordered as follows:
 # * Translation from English to Dutch

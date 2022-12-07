@@ -1,8 +1,10 @@
+import textwrap
+
+from parameterized import parameterized
+
 import hedy
 from hedy import Command
-import textwrap
 from tests.Tester import HedyTester
-from parameterized import parameterized
 
 
 class TestsLevel4(HedyTester):
@@ -150,7 +152,8 @@ class TestsLevel4(HedyTester):
         self.multi_level_tester(
             code=code,
             max_level=5,
-            exception=hedy.exceptions.UnquotedTextException
+            exception=hedy.exceptions.UnquotedTextException,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 1
         )
 
     def test_print_without_quotes_gives_error_from_transpiler(self):
@@ -178,6 +181,16 @@ class TestsLevel4(HedyTester):
             exception=hedy.exceptions.UnquotedTextException
         )
 
+    def test_place_holder_no_space(self):
+        # same as print for level 4
+        code = "print _Escape from the haunted house!_"
+
+        self.multi_level_tester(
+            code=code,
+            max_level=11,
+            exception=hedy.exceptions.CodePlaceholdersPresentException
+        )
+
     def test_ask_without_quotes_gives_error_from_transpiler(self):
         # same as print
         code = "antwoord is ask hallo wereld"
@@ -187,7 +200,6 @@ class TestsLevel4(HedyTester):
             max_level=17,
             exception=hedy.exceptions.UnquotedTextException,
         )
-
 
     def test_print_similar_var_gives_error(self):
         # continuing: is this unquoted? or did we forget an initialization of a variable?
@@ -203,6 +215,7 @@ class TestsLevel4(HedyTester):
             code=code,
             max_level=17,
             exception=hedy.exceptions.UndefinedVarException,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2
         )
 
     @parameterized.expand(HedyTester.quotes)
@@ -627,27 +640,3 @@ class TestsLevel4(HedyTester):
             exception=hedy.exceptions.LonelyTextException
         )
 
-    #
-    # assorti tests
-    #
-    @parameterized.expand(HedyTester.quotes)
-    def test_meta_column_missing_closing_quote(self, q):
-        code = textwrap.dedent(f"""\
-        print {q}Hello{q}
-        print {q}World""")
-
-        line, column = self.codeToInvalidInfo(code)
-
-        self.assertEqual(2, line)
-        self.assertEqual(7, column)
-
-    @parameterized.expand(HedyTester.quotes)
-    def test_meta_column_missing_opening_quote(self, q):
-        code = textwrap.dedent(f"""\
-        print {q}Hello{q}
-        print World{q}""")
-
-        line, column = self.codeToInvalidInfo(code)
-
-        self.assertEqual(2, line)
-        self.assertEqual(7, column)

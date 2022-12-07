@@ -1,5 +1,7 @@
-from tests.Highlighter import HighlightTester
 from parameterized import parameterized
+
+from tests.Highlighter import HighlightTester
+
 
 class HighlighterTestPrint(HighlightTester):
 
@@ -35,7 +37,6 @@ class HighlighterTestPrint(HighlightTester):
             "print 'hello world!'",
             "KKKKK SSSSSSSSSSSSSS",
             level=level, lang='en')
-
 
     @parameterized.expand([
         ("level4"),
@@ -81,8 +82,6 @@ class HighlighterTestPrint(HighlightTester):
             "KKKKK SSSSSSSSSSSSSSSSSSSSSSSSSSS",
             level=level, lang='en')
 
-
-
     @parameterized.expand([
         ("level3"),
         ("level4"),
@@ -105,8 +104,6 @@ class HighlighterTestPrint(HighlightTester):
             "print animals at random",
             "KKKKK TTTTTTT KK KKKKKK",
             level=level, lang='en')
-
-
 
     def test_print_random1(self):
         self.assert_highlighted_chr(
@@ -135,7 +132,6 @@ class HighlighterTestPrint(HighlightTester):
             "print 'The' people at random 'does the dishes'",
             "KKKKK SSSSS TTTTTT KK KKKKKK SSSSSSSSSSSSSSSSS",
             level=level, lang='en')
-
 
     def test_print_at1(self):
         self.assert_highlighted_chr(
@@ -173,7 +169,6 @@ class HighlighterTestPrint(HighlightTester):
             "KKKKK SSSSS TTTTTT KK N SSSSSSSSSSSSSSSSS",
             level=level, lang='en')
 
-
     def test_print_18_1(self):
         self.assert_highlighted_chr(
             "print ('Great job!!!')",
@@ -206,7 +201,6 @@ class HighlighterTestPrint(HighlightTester):
             "KKKKK SSSSSSSSSSS NNNNN K NNNNN",
             level=level, lang="en")
 
-
     @parameterized.expand([
         ("level12"),
         ("level13"),
@@ -220,7 +214,6 @@ class HighlighterTestPrint(HighlightTester):
             "print 'answer is' 123.46 + 7949.8",
             "KKKKK SSSSSSSSSSS NNNNNN K NNNNNN",
             level=level, lang="en")
-
 
     @parameterized.expand([
         ("level6"),
@@ -242,7 +235,6 @@ class HighlighterTestPrint(HighlightTester):
             "KKKKK SSSSSSSSSSS NNNNN K NNNNN",
             level=level, lang="en")
 
-
     @parameterized.expand([
         ("level12"),
         ("level13"),
@@ -256,8 +248,6 @@ class HighlighterTestPrint(HighlightTester):
             "print 'answer is' 123.46 - 7949.8",
             "KKKKK SSSSSSSSSSS NNNNNN K NNNNNN",
             level=level, lang="en")
-
-
 
     @parameterized.expand([
         ("level6"),
@@ -278,7 +268,6 @@ class HighlighterTestPrint(HighlightTester):
             "print 'answer is' 12346 * 78564",
             "KKKKK SSSSSSSSSSS NNNNN K NNNNN",
             level=level, lang="en")
-
 
     @parameterized.expand([
         ("level12"),
@@ -313,7 +302,6 @@ class HighlighterTestPrint(HighlightTester):
             "print 'answer is' 12346 / 78564",
             "KKKKK SSSSSSSSSSS NNNNN K NNNNN",
             level=level, lang="en")
-
 
     @parameterized.expand([
         ("level12"),

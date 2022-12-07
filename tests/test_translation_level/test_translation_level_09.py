@@ -1,7 +1,7 @@
-import hedy
-from tests.Tester import HedyTester
-import hedy_translation
 import textwrap
+
+import hedy_translation
+from tests.Tester import HedyTester
 
 # tests should be ordered as follows:
 # * Translation from English to Dutch
@@ -38,7 +38,6 @@ class TestsTranslationLevel9(HedyTester):
                 repeat 2 times
                     print 'oh'""")
 
-
         result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
         expected = textwrap.dedent("""\
         herhaal 3 keer
@@ -57,7 +56,6 @@ class TestsTranslationLevel9(HedyTester):
                 print 'wat raar'
             anders
                 print 'gelukkig'""")
-
 
         result = hedy_translation.translate_keywords(code, from_lang="nl", to_lang="en", level=self.level)
         expected = textwrap.dedent("""\
