@@ -1736,11 +1736,13 @@ while not pygame_end:
         if button:
             command = f"""\
   if event.type == pygame.USEREVENT:
-{ConvertToPython.indent(command, 4)}"""
+{ConvertToPython.indent(command, 4)}
+"""
         else:
             command = f"""\
   if event.type == pygame.KEYDOWN:
-{ConvertToPython.indent(command, 4)}"""
+{ConvertToPython.indent(command, 4)}
+"""
 
         if self.ifpressed_prefix_added:
             return command
@@ -1750,8 +1752,8 @@ while not pygame_end:
 
 
     def ifpressed(self, meta, args):
+        button_name = self.process_variable(args[0], meta.line)
         if (len(args[0]) > 1):
-            button_name = self.process_variable(args[0], meta.line)
             return self.make_ifpressed_command(f"""\
 if event.key == {button_name}:
 {ConvertToPython.indent(args[1])}
@@ -1760,7 +1762,10 @@ if event.key == {button_name}:
             return self.make_ifpressed_command(f"""\
 if event.unicode == '{args[0]}':
 {ConvertToPython.indent(args[1])}
-  break""")
+  break""") + self.make_ifpressed_command(f"""\
+if event.key == {button_name}:
+{ConvertToPython.indent(args[1])}
+  break""", True)
 
     def ifpressed_else(self, meta, args):
         if (len(args[0]) > 1):
@@ -2519,7 +2524,7 @@ def preprocess_blocks(code, level, lang):
     processed_code = []
     lines = code.split("\n")
     current_number_of_indents = 0
-    previous_number_of_indents = 0 
+    previous_number_of_indents = 0
     indent_size = 4 # set at 4 for now
     indent_size_adapted = False #FH We can remove this now since we changed in indenter a bit in Nov 2022
     line_number = 0
