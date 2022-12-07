@@ -1,11 +1,14 @@
 import os
 import pickle
-from ruamel import yaml
-from utils import atomic_write_file, is_debug_mode, is_heroku
 
-yaml_loader = yaml.YAML(typ='safe', pure=True)
+from ruamel import yaml
+
+from utils import atomic_write_file, is_heroku
+
+yaml_loader = yaml.YAML(typ="safe", pure=True)
 
 YAML_FILES_CACHE = {}
+
 
 class YamlFile:
     """Data from a YAML file, accessible as if it is a dictionary.
@@ -47,7 +50,7 @@ class YamlFile:
         because it creates a mess of files.
         """
         self.filename = filename
-        self.pickle_filename = f'{self.filename}.pickle'
+        self.pickle_filename = f"{self.filename}.pickle"
         self.data = None
         self.timestamp = 0
         self.try_pickle = try_pickle
@@ -77,7 +80,7 @@ class YamlFile:
             self.timestamp = stat.st_mtime
 
         if not isinstance(self.data, dict):
-            raise RuntimeError(f'Contents of {self.filename} needs to be a dict, got: {self.data}')
+            raise RuntimeError(f"Contents of {self.filename} needs to be a dict, got: {self.data}")
 
         return self.data
 
@@ -109,13 +112,13 @@ class YamlFile:
         return data
 
     def load_pickle(self):
-        with open(self.pickle_filename, 'rb') as f:
+        with open(self.pickle_filename, "rb") as f:
             return pickle.load(f)
 
     def load_uncached(self):
         """Load the source YAML file."""
         try:
-            with open(self.filename, 'r', encoding='utf-8') as f:
+            with open(self.filename, "r", encoding="utf-8") as f:
                 return yaml_loader.load(f)
         except IOError:
             return {}

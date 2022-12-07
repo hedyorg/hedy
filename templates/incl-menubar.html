@@ -4,12 +4,12 @@
         <li class="ltr:mr-2 rtl:ml-2"><a href="/" class="inline-block w-10 lg:w-12"><img src="{{static('/images/Hedy-logo-96x96.png')}}" height="48px" width="48px" alt="{{_('hedy_logo_alt')}}"></a></li>
         <li class="hidden lg:flex menubar-item{% if current_page == 'start' %} active{% endif %}"><a class="menubar-text" href="/">{{_('nav_start')}}</a>
         </li>
-        <li class="menubar-item{% if current_page == 'hedy' %} active{% endif %}"><a class="menubar-text" href="/hedy">{{_('nav_hedy')}}</a></li>
+        <li class="menubar-item{% if current_page == 'hedy' %} active{% endif %}"><a class="menubar-text" id="hedybutton" href="/hedy">{{_('nav_hedy')}}</a></li>
         {% if is_admin %}
             <li class="menubar-item{% if current_page == 'admin' %} active{% endif %}"><a class="menubar-text" href="/admin">Admin</a></li>
         {% endif %}
-        <li class="menubar-item{% if current_page == 'explore' %} active{% endif %}"><a class="menubar-text" href="/explore">{{_('nav_explore')}}</a></li>
-        <li class="menubar-item{% if current_page == 'learn-more' %} active{% endif %}"><a class="menubar-text" href="/learn-more">{{_('nav_learn_more')}}</a></li>
+        <li class="menubar-item{% if current_page == 'explore' %} active{% endif %}"><a class="menubar-text" id="explorebutton" href="/explore">{{_('nav_explore')}}</a></li>
+        <li class="menubar-item{% if current_page == 'learn-more' %} active{% endif %}"><a class="menubar-text" id="learnmorebutton" href="/learn-more">{{_('nav_learn_more')}}</a></li>
     {% if username %}
         <li class="menubar-item ltr:ml-auto rtl:mr-auto{% if current_page == 'programs' %} active{% endif %}">
             <a class="menubar-text gap-2" href="/programs">
@@ -35,7 +35,7 @@
                       <li><a class="dropdown-item" href="/for-teachers"><span class="fas fa-chalkboard-teacher ltr:mr-4 rtl:ml-4"></span>{{_('for_teachers')}}</a></li>
                       <li><a class="dropdown-item" href="/for-teachers/manual"><span class="fas fa-notes-medical ltr:mr-4 rtl:ml-4"></span>{{_('teacher_manual')}}</a></li>
                   {% endif %}
-                    <li><a class="dropdown-item" href="#" onclick="hedyApp.logout();"><span class="fas fa-fw fa-sign-out-alt ltr:mr-4 rtl:ml-4"></span>{{_('logout')}}</a></li>
+                    <li><a class="dropdown-item" id="logout_button" href="#" onclick="hedyApp.logout();"><span class="fas fa-fw fa-sign-out-alt ltr:mr-4 rtl:ml-4"></span>{{_('logout')}}</a></li>
                 </ul>
             </div>
         </li>
@@ -59,9 +59,18 @@
                       <div class="font-medium border-b-2 border-gray-700 mx-4 pb-2 text-center">
                         {{_('keyword_support')}}
                       </div>
-                      {% for lang in other_keyword_languages() %}
-                        <div class="hover:bg-blue-600 cursor-pointer w-52 font-medium text-white py-2 px-4 rounded-lg language" onclick="hedyApp.change_language ('{{lang.lang}}');event.preventDefault();">{{ lang.sym }}</div>
-                      {% endfor %}
+                      <div class="flex flex-row">
+                          <div class="flex flex-col">
+                            {% for lang in other_keyword_languages()[0:((other_keyword_languages()|length)/2)|int] %}
+                                <div class="hover:bg-blue-600 cursor-pointer w-52 font-medium text-white py-2 px-4 rounded-lg language" onclick="hedyApp.change_language ('{{lang.lang}}');event.preventDefault();">{{ lang.sym }}</div>
+                            {% endfor %}
+                          </div>
+                          <div class="flex flex-col">
+                             {% for lang in other_keyword_languages()[((other_keyword_languages()|length)/2)|int:] %}
+                                <div class="hover:bg-blue-600 cursor-pointer w-52 font-medium text-white py-2 px-4 rounded-lg language" onclick="hedyApp.change_language ('{{lang.lang}}');event.preventDefault();">{{ lang.sym }}</div>
+                            {% endfor %}
+                          </div>
+                      </div>
                   </div>
                   <div class="flex flex-col">
                       <div class="font-medium border-b-2 border-gray-700 mx-4 pb-2 text-center">

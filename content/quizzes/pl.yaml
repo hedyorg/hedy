@@ -116,24 +116,24 @@ levels:
         6:
             question_text: "Co jest nie tak z tym kodem?"
             code: |-
-                {print} Hi im Hedy!
-                {print} Which football team do you support?
-                {echo} You support...
-                {print} Cool! Me too!
+                {print} Cześć, jestem Hedy!
+                {print} Której drużynie piłkarskiej kibicujesz?
+                {echo} Kibicujesz...
+                {print} Fajnie! Ja też!
             mp_choice_options:
             -   option: "In line 1 `{print}` should be replaced with `{ask}`."
                 feedback: "`{print}` in line 1 is correct."
             -   option: "In line 2, `{print}` should be replaced with `{ask}`."
-                feedback: "Great! You paid attention!"
+                feedback: "Świetnie! Zwróciłeś uwagę!"
             -   option: "Line 3 has to begin with `{print}` instead of `{echo}`."
-                feedback: "`{echo}` is correct."
+                feedback: "`{echo}` jest prawidłowe."
             -   option: "In line 4, `{print}` is spelled wrong."
-                feedback: "No, there is a mistake somewhere else"
+                feedback: "Nie, błąd jest gdzieś indziej"
             correct_answer: "B"
-            hint: "Check the `{print}` commands."
+            hint: "Sprawdź polecenia `{print}`."
             question_score: '10'
         7:
-            question_text: "What's wrong with this code?"
+            question_text: "Co jest nie tak z tym kodem?"
             code: |-
                 {print} Welcome at Hedys restaurant!
                 {ask} What would you like to eat?
@@ -2024,6 +2024,35 @@ levels:
             question_score: '10'
     11:
         1:
+            question_text: "What word should be at the place of the question mark?"
+            code: |-
+                {for} i {in} _?_ 1 {to} 10
+                    {print} i
+            mp_choice_options:
+            -   option: |
+                    ```
+                    counter
+                    ```
+                feedback: "No"
+            -   option: |
+                    ```
+                    {range}
+                    ```
+                feedback: "Correct"
+            -   option: |
+                    ```
+                    {if}
+                    ```
+                feedback: "No"
+            -   option: |
+                    ```
+                    {for}
+                    ```
+                feedback: "No"
+            correct_answer: "B"
+            hint: "What did you learn in this level?"
+            question_score: '10'
+        2:
             question_text: "What will be the output from this code?"
             code: |-
                 {for} i {in} {range} 1 {to} 3
@@ -2040,8 +2069,15 @@ levels:
             correct_answer: "A"
             hint: "How do the numbers appear in the screen?"
             question_score: '10'
-        2:
+        3:
             question_text: "Which code was used to get this output?"
+            output: |-
+                1
+                2
+                3
+                4
+                5
+                Once I caught a fish alive!
             mp_choice_options:
             -   option: |
                     ```
@@ -2074,9 +2110,20 @@ levels:
             correct_answer: "A"
             hint: "First all the numbers, then the sentence"
             question_score: '10'
-            code: "{for} i {in} {range} 1 {to} 3\n    {print} i"
-        3:
+        4:
             question_text: "Which code was used to get this output?"
+            output: |-
+                10
+                9
+                8
+                7
+                6
+                5
+                4
+                3
+                2
+                1
+                0
             mp_choice_options:
             -   option: |
                     ```
@@ -2093,7 +2140,7 @@ levels:
             -   option: |
                     ```
                     {for} i {in} {range} 10 to 0
-                        {print} i
+                        {print} 10 9 8 7 6 5 4 3 2 1 0
                     ```
                 feedback: "Unfortunately this does not exist."
             -   option: |
@@ -2105,9 +2152,11 @@ levels:
             correct_answer: "D"
             hint: "It has to be a calculation..."
             question_score: '10'
-            output: "10\n9\n8\n7\n6\n5\n4\n3\n2\n1\n0"
-        4:
+        5:
             question_text: "What's wrong with this code?"
+            code: |-
+                {for} i {in} {range} 1 {to} 10
+                {print} i
             mp_choice_options:
             -   option: "The i in the last line need quotation marks"
                 feedback: "No it doesn't."
@@ -2119,36 +2168,6 @@ levels:
                 feedback: "Perfect!"
             correct_answer: "D"
             hint: "There is something wrong with the indention"
-            question_score: '10'
-            output: "10\n9\n8\n7\n6\n5\n4\n3\n2\n1\n0"
-        5:
-            question_text: "What word should be at the place of the question mark?"
-            code: |-
-                {for} i {in} _?_ 1 {to} 10
-                    {print} i
-            mp_choice_options:
-            -   option: |
-                    ```
-                    counter
-                    ```
-                feedback: "No"
-            -   option: |
-                    ```
-                    {range}
-                    ```
-                feedback: "Correct"
-            -   option: |
-                    ```
-                    {if}
-                    ```
-                feedback: "No"
-            -   option: |
-                    ```
-                    {for}
-                    ```
-                feedback: "No"
-            correct_answer: "B"
-            hint: "What did you learn in this level?"
             question_score: '10'
         6:
             question_text: "How many times does the word Hello appear on your screen when you run the code?"
@@ -2236,6 +2255,11 @@ levels:
             question_score: '10'
         10:
             question_text: "Which code belongs to this output?"
+            output: |-
+                Baby shark tututudutudu
+                Baby shark tututudutudu
+                Baby shark tututudutudu
+                Baby shark
             mp_choice_options:
             -   option: |
                     ```
@@ -2268,7 +2292,6 @@ levels:
             correct_answer: "B"
             hint: "Mind the indention"
             question_score: '10'
-            output: "Baby shark tututudutudu\nBaby shark tututudutudu\nBaby shark tututudutudu\nBaby shark"
     10:
         1:
             question_text: "What do we need to fill in on the `_?_` if we want to print each compliment?"

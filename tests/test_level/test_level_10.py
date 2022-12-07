@@ -1,5 +1,6 @@
-import hedy
 import textwrap
+
+import hedy
 from tests.Tester import HedyTester
 
 
@@ -39,6 +40,24 @@ class TestsLevel10(HedyTester):
             expected_commands=['is', 'for', 'print'],
             max_level=11
         )
+
+
+    def test_blanks(self):
+        code = textwrap.dedent("""\
+        players = Ann, John, Jesse
+        choices = 1, 2, 3, 4, 5, 6
+        _
+            print player ' throws ' choices at random
+            sleep
+        """)
+
+        self.multi_level_tester(
+            max_level=16,
+            code=code,
+            exception=hedy.exceptions.CodePlaceholdersPresentException
+        )
+
+
 
     def test_for_list_hindi(self):
         code = textwrap.dedent("""\
@@ -100,3 +119,35 @@ class TestsLevel10(HedyTester):
             code=code,
             max_level=16,
             exception=hedy.exceptions.InvalidArgumentTypeException)
+
+    #
+    # if pressed tests
+    #
+
+    def test_if_pressed_with_list_and_for(self):
+        code = textwrap.dedent("""\
+        lijstje is kip, haan, kuiken
+        if x is pressed
+            for dier in lijstje
+                print 'dier'""")
+
+        expected = HedyTester.dedent("""\
+        lijstje = ['kip', 'haan', 'kuiken']
+        while not pygame_end:
+          pygame.display.update()
+          event = pygame.event.wait()
+          if event.type == pygame.QUIT:
+            pygame_end = True
+            pygame.quit()
+            break
+          if event.type == pygame.KEYDOWN:
+            if event.unicode == 'x':
+              for dier in lijstje:
+                print(f'dier')
+                time.sleep(0.1)
+              break""")
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            max_level=11)
