@@ -1,6 +1,7 @@
 import textwrap
 
 import lark
+from flask_babel import gettext
 from lark import Lark
 from lark.exceptions import UnexpectedEOF, UnexpectedCharacters, VisitError
 from lark import Tree, Transformer, visitors, v_args
@@ -1664,12 +1665,14 @@ class ConvertToPython_4(ConvertToPython_3):
                 lists_names.append(var_name[0])
                 list_args.append(arg)
         code = ""
+        exception_text_template = gettext('catch_index_exception')
         for i, list_name in enumerate(lists_names):
+            exception_text = exception_text_template.replace('{list_name}', style_command(list_name))
             code += textwrap.dedent(f"""\
             try:
               {list_args[i]}
             except:
-              raise Exception('Sorry! You tried to access the list {list_name} but its either empty or the index is not there')
+              raise Exception('{exception_text}')
             """)
         return code + f"print(f'{argument_string}')"
 
