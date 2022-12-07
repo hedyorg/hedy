@@ -30,9 +30,7 @@ def collect_snippets(path):
                     # commands.k.demo_code
                     for k, command in enumerate(yaml[level]):
                         # test only unique snippets
-                        if hash(command['demo_code']) in unique_snippets_table:
-                            continue
-                        else:
+                        if not hash(command['demo_code']) in unique_snippets_table:
                             unique_snippets_table.add(hash(command['demo_code']))
                         command_text_short = command['name'] if 'name' in command.keys(
                         ) else command['explanation'][0:10]
@@ -50,11 +48,11 @@ def collect_snippets(path):
     return Hedy_snippets
 
 
-Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/commands')]
+Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/cheatsheets')]
 Hedy_snippets = HedyTester.translate_keywords_in_snippets(Hedy_snippets)
 
 lang = None
-# lang = 'ar' #useful if you want to test just 1 language
+# lang = 'fi' #useful if you want to test just 1 language
 # if lang:
 #     Hedy_snippets = [(name, snippet) for (name, snippet) in Hedy_snippets if snippet.language[:2] == lang]
 

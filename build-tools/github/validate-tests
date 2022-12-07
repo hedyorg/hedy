@@ -13,7 +13,7 @@ echo "------> Python unit tests"
 if [[ "${1:-}" == "--all" ]]; then
   python -m pytest
 elif [[ "${1:-}" == "--weblate" ]]; then
-  python -m pytest tests/test_snippets
+  python -m pytest tests/test_snippets/test_adventures.py -s --tb=no -rN
 else
   python -m pytest --ignore=tests/test_highlighting --ignore=tests/test_level --ignore=tests/test_snippets --ignore=tests/test_translation_level
 fi
