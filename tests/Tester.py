@@ -1,5 +1,5 @@
 import textwrap
-
+import hashlib
 import exceptions
 import hedy
 import hedy_translation
@@ -25,6 +25,7 @@ class Snippet:
         self.language = filename_shorter.split(".")[0]
         self.adventure_name = adventure_name
         self.name = f'{self.language}-{self.level}-{self.field_name}'
+        self.hash = hashlib.md5(self.code.encode()).hexdigest()
 
 
 class HedyTester(unittest.TestCase):
