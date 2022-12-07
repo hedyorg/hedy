@@ -18,23 +18,7 @@ filtered_language = None
 level = None
 
 
-def collect_snippets(path, filtered_language=None, only_new_snippets=False):
-    try:
-        with open('adventure_hashes.pkl', 'rb') as f:
-            hashes_saved = pickle.load(f)
-    except _pickle.UnpicklingError:  # broken file, create and save
-        hashes_saved = set()
-        with open('adventure_hashes.pkl', 'wb') as f:
-            pickle.dump(hashes_saved, f)
-    except EOFError:  # empty file
-        hashes_saved = set()
-        with open('adventure_hashes.pkl', 'wb') as f:
-            pickle.dump(hashes_saved, f)
-    except FileNotFoundError:  # non existent file
-        hashes_saved = set()
-        with open('adventure_hashes.pkl', 'wb') as f:
-            pickle.dump(hashes_saved, f)
-
+def collect_snippets(path, hashes_saved=set(), filtered_language=None, only_new_snippets=False):
     Hedy_snippets = []
     files = [f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f)) and f.endswith('.yaml')]
     for f in files:
@@ -71,14 +55,14 @@ def collect_snippets(path, filtered_language=None, only_new_snippets=False):
                                 if not hash(code) in unique_snippets_table:
                                     unique_snippets_table.add(hash(code))
                                     snippet = Snippet(
-                                                f,
-                                                level_number,
-                                                adventure_name +
-                                                ' snippet #' +
-                                                str(code_snippet_counter),
-                                                code,
-                                                adventure_name)
-                                    if not only_new_snippets or not snippet.hash in hashes_saved:
+                                        f,
+                                        level_number,
+                                        adventure_name +
+                                        ' snippet #' +
+                                        str(code_snippet_counter),
+                                        code,
+                                        adventure_name)
+                                    if not only_new_snippets or snippet.hash not in hashes_saved:
                                         Hedy_snippets.append(snippet)
                             # code snippets inside start_code
                             try:
@@ -86,7 +70,7 @@ def collect_snippets(path, filtered_language=None, only_new_snippets=False):
                                 if not hash(start_code) in unique_snippets_table:
                                     unique_snippets_table.add(hash(start_code))
                                     snippet = Snippet(f, level_number, 'start_code', start_code, adventure_name)
-                                    if not only_new_snippets or not snippet.hash in hashes_saved:
+                                    if not only_new_snippets or snippet.hash not in hashes_saved:
                                         Hedy_snippets.append(snippet)
 
                             except KeyError:
@@ -110,26 +94,46 @@ def collect_snippets(path, filtered_language=None, only_new_snippets=False):
                                 if not hash(code) in unique_snippets_table:
                                     unique_snippets_table.add(hash(code))
                                     snippet = Snippet(
-                                            f,
-                                            level_number,
-                                            adventure_name +
-                                            ' snippet #' +
-                                            str(code_snippet_counter),
-                                            code,
-                                            adventure_name)
-                                    if not only_new_snippets or not snippet.hash in hashes_saved:
+                                        f,
+                                        level_number,
+                                        adventure_name +
+                                        ' snippet #' +
+                                        str(code_snippet_counter),
+                                        code,
+                                        adventure_name)
+                                    if not only_new_snippets or snippet.hash not in hashes_saved:
                                         Hedy_snippets.append(snippet)
 
     return Hedy_snippets
 
-# filtered_language = 'nl'
+
+filtered_language = 'nl'
 # use this to filter on 1 lang, zh_Hans for Chinese, nb_NO for Norwegian, pt_PT for Portuguese
 
-only_new_snippets = False
+only_new_snippets = os.getenv('only_new_snippets')
+if only_new_snippets is None:
+    only_new_snippets = False  # set default in case env var is not set (f.e. on Windows, or when running form the UI)
+
+try:
+    with open('adventure_hashes.pkl', 'rb') as f:
+        hashes_saved = pickle.load(f)
+except _pickle.UnpicklingError:  # broken file, create and save
+    hashes_saved = set()
+    with open('adventure_hashes.pkl', 'wb') as f:
+        pickle.dump(hashes_saved, f)
+except EOFError:  # empty file
+    hashes_saved = set()
+    with open('adventure_hashes.pkl', 'wb') as f:
+        pickle.dump(hashes_saved, f)
+except FileNotFoundError:  # non existent file
+    hashes_saved = set()
+    with open('adventure_hashes.pkl', 'wb') as f:
+        pickle.dump(hashes_saved, f)
+
 Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/adventures',
                                                        filtered_language=filtered_language,
+                                                       hashes_saved=hashes_saved,
                                                        only_new_snippets=only_new_snippets)]
-
 
 # level = 18
 # if level:
@@ -140,21 +144,23 @@ Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/adven
 if os.getenv('CI') and (filtered_language or level):
     raise RuntimeError('Whoops, it looks like you left a snippet filter in!')
 
-
 Hedy_snippets = HedyTester.translate_keywords_in_snippets(Hedy_snippets)
 
 
-
 class TestsAdventurePrograms(unittest.TestCase):
-    tests_ran = []
-    all_tests_passed = True
-    hashes = set()
+
+    @classmethod
+    def setUpClass(cls):
+        cls.tests_ran = 0
+        cls.all_tests_passed = True
+        cls.hashes_saved = hashes_saved
+        cls.new_hashes = set()
 
     @parameterized.expand(Hedy_snippets, skip_on_empty=True)
     def test_adventures(self, name, snippet):
 
         if snippet is not None:
-            self.tests_ran.append(name)
+            self.tests_ran += 1
             result = HedyTester.check_Hedy_code_for_errors(snippet)
             if result is not None:
                 print(f'\n----\n{snippet.code}\n----')
@@ -163,15 +169,14 @@ class TestsAdventurePrograms(unittest.TestCase):
                 self.all_tests_passed = False
             else:
                 # test passed? save hash!
-                self.hashes.add(snippet.hash)
+                self.new_hashes.add(snippet.hash)
 
             self.assertIsNone(result)  # this looks weird after the is not None but is used by the test runner!
 
-    def tearDown(self):
-        if len(self.tests_ran) == len(Hedy_snippets) and self.all_tests_passed:
+    @classmethod
+    def tearDownClass(cls):
+        if cls.tests_ran == len(Hedy_snippets) and cls.all_tests_passed:
             # fetch already saved hashes
-            with open('adventure_hashes.pkl', 'rb') as f:
-                hashes_saved = pickle.load(f)
-            hashes_saved |= self.hashes  # and merge in the new ones
+            all_hashes = cls.hashes_saved | cls.new_hashes  # and merge in the new ones
             with open('adventure_hashes.pkl', 'wb') as f:
-                pickle.dump(hashes_saved, f)
+                pickle.dump(all_hashes, f)
