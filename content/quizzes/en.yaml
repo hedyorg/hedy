@@ -1624,32 +1624,32 @@ levels:
                 {print} 'The children went:'
                 {repeat} 2 {times}
                     {print} 'Yay!'
-                    {print} 'Were going on holiday!'
+                    {print} 'We are going on vacation!'
             mp_choice_options:
             -   option: |
                     The children went:
                     Yay!
-                    Were going on holiday!
+                    We are going on vacation!
                 feedback: "Mind the `{repeat}` command!"
             -   option: |
                     The children went:
                     Yay!
-                    Were going on holiday!
+                    We are going on vacation!
                     Yay!
-                    Were going on holiday!
+                    We are going on vacation!
                 feedback: "Correct!"
             -   option: |
                     The children went:
                     Yay!
                     Yay!
-                    Were going on holiday!
-                    Were going on holiday!
+                    We are going on vacation!
+                    We are going on vacation!
                 feedback: "This order is incorrect."
             -   option: |
                     The children went:
                     Yay!
                     Yay!
-                    Were going on holiday!
+                    We are going on vacation!
                 feedback: "The last line is repeated too."
             correct_answer: "B"
             hint: "The block under the `{repeat}` command is repeated twice."
@@ -1661,7 +1661,7 @@ levels:
                 {if} end {is} happy {print} 'They lived happily ever after'
                 {else} {print} 'The world exploded. The end.'
             mp_choice_options:
-            -   option: "The `{print}` commands on the last two lines should start on new lines en start with 4 spaces."
+            -   option: "The `{print}` commands on the last two lines should start on new lines and start with 4 spaces."
                 feedback: "That's right!"
             -   option: "`{else}` is not a command!"
                 feedback: "It is!"
@@ -1716,7 +1716,7 @@ levels:
         7:
             question_text: "What is wrong with this code?"
             code: |-
-                eten = {ask} 'What would you like to eat?'
+                food = {ask} 'What would you like to eat?'
                 {if} food {is} fries
                 sauce = {ask} 'What sauce would you like?'
                     {print} 'One fries with ' sauce
@@ -2092,7 +2092,55 @@ levels:
             hint: "The first line doens't start with any spaces"
             question_score: '10'
     11:
-        1:
+        1: 
+            question_text: "Which text produces the right output?"
+            code: |-
+                10
+                9
+                8
+                7
+                6
+                5
+                4
+                3
+                2
+                1
+                Happy New Years!
+            mp_choice_options:
+            -   option: |
+                    ```
+                    {for} i {in} {range} 10 {to} 1
+                        {print} i
+                    {print} "Happy New Years!"
+                    ```
+                feedback: "Correct!"
+            -   option: |
+                    ```
+                    {for} i 10 {to} 1
+                        {print} i
+                    (print) "Happy New Years!"
+                    ```
+                feedback: "We want to make sure we have the correct syntax for a loop!"
+            -   option: |
+                    ```
+                    {for} i {in} {range} 1 {to} 10
+                        {print} i
+                    {print} "Happy New Years!"
+                    ```
+                feedback: "We want to make sure we count down instead of up!"
+            -   option: |
+                    ```
+                    {for} i {in} {range} 10 {to} 1
+                        {print} i
+                        {print} "Happy New Years!"
+                        {print} i
+                    ```
+                feedback: "Here, 'Happy New Years' is printed 10 times and i is printed multiple times!"
+            correct_answer: "A"
+            hint: "We want to count down and use the correct loop format!"
+            question_score: '10'
+
+        2:
             question_text: "What word should be at the place of the question mark?"
             code: |-
                 {for} i {in} _?_ 1 {to} 10
@@ -2121,7 +2169,7 @@ levels:
             correct_answer: "B"
             hint: "What did you learn in this level?"
             question_score: '10'
-        2:
+        3:
             question_text: "What will be the output from this code?"
             code: |-
                 {for} i {in} {range} 1 {to} 3
@@ -2138,7 +2186,7 @@ levels:
             correct_answer: "A"
             hint: "How do the numbers appear in the screen?"
             question_score: '10'
-        3:
+        4:
             question_text: "Which code was used to get this output?"
             output: |-
                 1
@@ -2179,7 +2227,7 @@ levels:
             correct_answer: "A"
             hint: "First all the numbers, then the sentence"
             question_score: '10'
-        4:
+        5:
             question_text: "Which code was used to get this output?"
             output: |-
                 10
@@ -2221,7 +2269,7 @@ levels:
             correct_answer: "D"
             hint: "It has to be a calculation..."
             question_score: '10'
-        5:
+        6:
             question_text: "What's wrong with this code?"
             code: |-
                 {for} i {in} {range} 1 {to} 10
@@ -2238,7 +2286,7 @@ levels:
             correct_answer: "D"
             hint: "There is something wrong with the indention"
             question_score: '10'
-        6:
+        7:
             question_text: "How many times does the word Hello appear on your screen when you run the code?"
             code: |-
                 {for} i {in} {range} 0 {to} 2
@@ -2255,7 +2303,7 @@ levels:
             correct_answer: "C"
             hint: "0 also counts. So 0,1,2 that's 3 times."
             question_score: '10'
-        7:
+        8:
             question_text: "What should be on the place of the question mark?"
             code: |-
                 {print} 'Welcome to Hedys diner'
@@ -2287,7 +2335,7 @@ levels:
             correct_answer: "C"
             hint: "Use the variable 'people'"
             question_score: '10'
-        8:
+        9:
             question_text: "What will be the output from this code?"
             code: |-
                 {for} i {in} {range} 23 {to} 25
@@ -2304,7 +2352,7 @@ levels:
             correct_answer: "C"
             hint: "It doesn't say `{print}` i"
             question_score: '10'
-        9:
+        10:
             question_text: "How many times does Hedy chant Hip Hip Hooray?"
             code: |-
                 age = {ask} 'How old are you?'
@@ -2322,7 +2370,7 @@ levels:
             correct_answer: "D"
             hint: "`{for}` i `{in}` `{range}` 1 `{to}` age"
             question_score: '10'
-        10:
+        11:
             question_text: "Which code belongs to this output?"
             output: |-
                 Baby shark tututudutudu
