@@ -5,7 +5,7 @@ ask: var _IS _ASK ((_SPACE | text_ask)*)?
 assign: var _IS (list_access | text) -> assign
 assign_list: var _IS text_list (_COMMA text_list)+
 
-list_access: var_access _AT (INT | random) -> list_access //todo: could be merged with list_access_var?
+list_access: var_access _AT (INT | random)
 turtle: _FORWARD ((NUMBER | list_access | textwithoutspaces))? -> forward | _TURN ((NUMBER | list_access | textwithoutspaces))? -> turn | _COLOR ((black | blue | brown | gray | green | orange | pink | purple | red | white | yellow | list_access | textwithoutspaces))? -> color
 
 sleep: _SLEEP (INT | list_access | var_access)?

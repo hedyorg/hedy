@@ -180,21 +180,23 @@
             {% if prev_level and (not customizations or prev_level in customizations['available_levels']) %}
               <button class="green-btn" id="prev_level_button" onclick="hedyApp.prompt_unsaved (function () {window.location = '{{ hedy_link(prev_level, 1) }}'})">{{_('regress_button')|replace("{level}", prev_level)}}</button>
             {% elif prev_level and not (not customizations or prev_level in customizations['available_levels']) %}
-                <div class="relative">
-                    <button class="green-btn absolute inset-0" disabled>{{_('regress_button')|replace("{level}", prev_level)}}</button>
-                    <div class="opacity-0 hover:opacity-100 duration-300 absolute inset-0 z-10 flex justify-center items-center">
-                        <!-- Todo: This structure is the starting point for adding an overlay hover text -->
+                  <div class="relative">
+
+                    <button class="green-btn" disabled>{{_('regress_button')|replace("{level}", prev_level)}}</button>
+
+                    <div class='text-center tooltip opacity-0 hover:opacity-100 duration-300 absolute inset-0 z-10 flex justify-center items-top'>
+                      <span class='tooltiptext text-xs font-semibold rounded shadow-lg p-1 bg-gray-100 -mt-8'> {{_('disabled_button_locked')}} </span>
+                      </span>
                     </div>
-                </div>
+                  </div>
             {% endif %}
             {% if next_level and (not customizations or next_level in customizations['available_levels']) %}
                 <button class="green-btn ltr:ml-1 rtl:mr-1" id="next_level_button" onclick="hedyApp.prompt_unsaved (function () {window.location = '{{ hedy_link(next_level, 1) }}'})">{{_('advance_button')|replace("{level}", next_level)}}</button>
             {% elif next_level and not (not customizations or next_level in customizations['available_levels']) %}
                 <div class="relative">
-                    <button class="green-btn ltr:ml-1 rtl:mr-1" id="next_level_button" disabled>{{_('advance_button')|replace("{level}", next_level)}}</button>
-                    <div class="opacity-0 hover:opacity-100 duration-300 absolute inset-0 z-10 flex justify-center items-center">
-                        <!-- Todo: This structure is the starting point for adding an overlay hover text -->
-                    </div>
+                    <button class="green-btn  ltr:ml-1 rtl:mr-1" id="next_level_button" disabled>{{_('advance_button')|replace("{level}", next_level)}}</button>
+                    <div class='text-center tooltip opacity-0 hover:opacity-100 duration-300 absolute inset-0 z-10 flex justify-center items-top'>
+                      <span class='tooltiptext text-xs font-semibold rounded shadow-lg p-1 bg-gray-100 -mt-8'>{{_('disabled_button_quiz') if customizations["below_threshold"] else _('disabled_button_locked')}} </span>
                 </div>
             {% endif %}
           </div>
