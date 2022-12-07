@@ -2577,9 +2577,15 @@ def preprocess_ifs(code, lang='en'):
             commands_lang = [KEYWORDS[lang]['print'], KEYWORDS[lang]['ask'], KEYWORDS[lang]['forward'],
                              KEYWORDS[lang]['turn']]
 
-            any(x in line for x in commands+commands_lang)
+            for c in commands+commands_lang:
+                if contains(c, line):
+                    return True
+            return False
         else:
-            any(x in line for x in commands)
+            for c in commands:
+                if contains(c, line):
+                    return True
+            return False
 
 
     for i in range(len(lines) - 1):
