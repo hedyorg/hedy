@@ -111,8 +111,13 @@ filtered_language = 'nl'
 # use this to filter on 1 lang, zh_Hans for Chinese, nb_NO for Norwegian, pt_PT for Portuguese
 
 only_new_snippets = os.getenv('only_new_snippets')
+
 if only_new_snippets is None:
     only_new_snippets = False  # set default in case env var is not set (f.e. on Windows, or when running form the UI)
+elif only_new_snippets is 1:
+    only_new_snippets = True
+else: # in case an invalid one is given
+    only_new_snippets = False
 
 try:
     with open('adventure_hashes.pkl', 'rb') as f:
