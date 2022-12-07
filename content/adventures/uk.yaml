@@ -425,7 +425,7 @@ adventures:
                 example_code: "```\ncourses = appetizer, main course, dessert\n{for} course {in} courses\n    food = {ask} 'What would you like to eat as your ' course '?'\n    {print} food ' will be your ' course\n```\n"
                 start_code: courses = appetizer, main course, dessert
                 story_text: "## Restaurant\nIn this level you'll learn how to easily {ask} your guests' orders in a short code.\n"
-                story_text_2: "\nOf course, you could also order for multiple people!\n"
+                story_text_2: "## Виклик\nЗвичайно, ви також можете замовити для кількох людей!\nЧи можна додати правильну кількість відступу до кожного рядка, щоб зробити роботу коду належним чином?\nПорада: деякі лінії не потребують відступу.\n"
                 example_code_2: "```\ncourses = appetizer, main course, dessert\nnames = Timon, Onno\n{for} name {in} names\n    {for} course {in} courses\n        food = {ask} name ', what would you like to eat as your ' course '?'\n        {print} name ' orders ' food ' as their ' course\n```\n"
             11:
                 story_text: "## Ресторан\nМи можемо використовувати`{for} i {in} {range} 1 {to} 5` для `{print}` виведення замовлень від декількох клієнтів у впорядкованому вигляді.\n"
@@ -493,7 +493,7 @@ adventures:
                 example_code: "```\nhouses = mansion, apartment, shack, house\nloves = nobody, a royal, their neighbour, their true love\npets = dog, cat, elephant\nnames = Jenna, Ryan, Jim\n{for} name {in} names\n    {print} name ' lives in a ' houses {at} {random}\n    {print} name ' will marry ' loves {at} {random}\n    {print} name ' will get a ' pets {at} {random} ' as their pet.'\n    {sleep}\n```\n"
                 start_code: '# place your code here'
                 story_text: "## Fortune Teller\nIn this level you'll learn how to program the game MASH (mansion, apartement, shack, house). In this game you can predict for all the players at once, what their future will look like.\n"
-                story_text_2: We can also make a Harry Potter themed fortune teller.
+                story_text_2: "## Виклик\nМи також можемо зробити ворожіння на тему Гаррі Поттера. Заповніть правильну лінію коду в рядку 5 і додайте правильний відступ до лінії 6 - 8 і ця програма буде діяти як сортувальний капелюх!\n"
                 example_code_2: "```\nhouses = Gryffindor, Slytherin, Hufflepuff, Ravenclaw\nsubjects = potions, defence against the dark arts, charms, transfiguration\nfears = Voldemort, spiders, failing your OWL test\nnames = Harry, Ron, Hermione\n{for} name {in} names\n    {print} name ' is placed in ' houses {at} {random}\n    {print} name ' is great at ' subjects {at} {random}\n    {print} name 's greatest fear is ' fears {at} {random}\n```\n"
             1:
                 story_text: "## Fortune Teller\nHave you ever been to a carnival and had your future predicted by a fortune teller? Or have you ever played with a magic eight ball?\nThen you probably know that they can't really predict your future, but it's still fun to play!\n\nIn the upcoming levels you can learn how to create your own fortune telling machine!\nIn level 1 you can start off easy by letting Hedy introduce herself as a fortune teller and let her {echo} the players' answers.\nLike this:\n"
@@ -730,7 +730,7 @@ adventures:
                 start_code: '# place your code here'
             5:
                 story_text: "## Parrot\nReward your parrot if it says the correct word!\n"
-                example_code: "```\nwords {is} squawk, Hedy\n{print} 'Train your parrot!'\nnew_word {is} {ask} 'Which word do you want to teach them?'\n{add} new_word {to_list} words\nsaid_word {is} words {at} {random}\n{print} '\U0001F9D2 Say ' new_word ', Hedy!'\n{print} '\U0001F99C ' said_word\n{if} said_word {is} new_word {print} '\U0001F9D2 Great job, Hedy! \U0001F36A'\n{else} {print} '\U0001F9D2 No, Hedy! Say ' new_word\n```\n"
+                example_code: "```\nслова {is} крякай, Хеді.\n{print} 'Дресируй папугу!'\nнове_слово {is} {ask} 'Якому слову ви хочете їх навчити?'\n{add} нове_слово {to_list} слова\nсказане_слово {is} слів {at} {random}\n{print} '\U0001F9D2 Скажи ' нове_слово ', Хеді!'\n{print} '\U0001F99C ' сказане_слово\n_ сказане_слово {is} нове_слово ' \U0001F9D2 Молодець, Хеді! \U0001F36A'\n_ _ ' \U0001F9D2 Ні, Хеді! Скажи ' нове_слово\n```\n"
                 start_code: '# place your code here'
     quizmaster:
         name: Quizmaster
