@@ -368,7 +368,7 @@ function clearOutput() {
   success.hide();
 
   // Clear the user created buttons.
-  buttonsDiv = $('#dynamic-buttons');
+  const buttonsDiv = $('#dynamic-buttons');
   buttonsDiv.empty();
   buttonsDiv.hide();
 }
@@ -1067,7 +1067,7 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
     if (!hasTurtle && !codeContainsInputFunctionBeforePygame) {
       $('#pygame-modal').show();
     }
-    
+
     document.onkeydown = animateKeys;
     window.State.pygame_running = true;
   }
