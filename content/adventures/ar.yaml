@@ -586,11 +586,11 @@ adventures:
                     {if} اجابتك {is} الاجابة_الصحيحة {print} "أحسنت"
                     {else} {print} "كان خطأ " الاجابة_الصحيحة
                     ```
-                story_text_2: "## أرقام عشوائية\nبامكانك جعل الحاسوب يقوم بعمليات حسابية عشوائية باستخدام الأمر بشكل عشوائي.\nبهذا الشكل يمكنك اختيار رقم عشوائي و تضربه برقم اخر وسيساعدك ذلك على التدرب على جدول الضرب بحيث تحصل كل مرة على عملية ضرب مختلفة:\n"
-                example_code_2: "```\nالجداول = ٤، ٥، ٦، ٧، ٨\nالأرقام = ١، ٢، ٣، ٤، ٥، ٦، ٧، ٨، ٩، ١٠\nالمضروب = الجداول {at} {random} \nالرقم = الأرقام {at} {random} \nالاجابة_الصحيحة = الرقم * المضروب\nاجابتك = {ask} \"ما ناتج \" الرقم \" ضرب \" المضروب \" ؟\"\n{if} اجابتك هي الاجابة_الصحيحة {print} \"أحسنت!\"\n{else} {print} \"خطأ! الاجابة هي \" الاجابة_الصحيحة\n```\n"
+                story_text_2: "## تحدي\nبرنامج الآلة الحاسبة فالأعلى يحسب لك ناتج العملية الحسابية التي تريد، ولكن يمكنك كتابة برنامج لتختبر مهارتك الحسابية، كما فالمثال التالي:\nأكمل الفراغات لجعله برنامج كاملاً!\n"
+                example_code_2: "```\nإجابة_صحيحة= ١١ * ٢٧\nإجابة= {ask} 'ما ناتج ضرب ١١ في ٢٧ ؟'\n{if} إجابة {is} _ {print} 'أحسنت!'\n{else} {print} 'خطأ! الإجابة هي ' _\n```\n"
                 start_code: "{print} \"أهلاً بكم في هذه الآلة الحاسبة!\""
-                story_text_3: "## أرقام عشوائية\nيمكنك أيضاً ترك الكومبيوتر يجمع أرقام عشوائياً بإستخدام الأمر بشكل عشوائي.\nيوضح هذا المثال كيفية إختيار رقم من الجداول للتدريب، و بذلك تحصل على نواتج جمع مختلفة دائماً:\n"
-                example_code_3: "```\ntables = 4, 5, 6, 8\nnumbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\ntable = tables {at} {random}\nnumber = numbers {at} {random}\ncorrect_answer = table * number\nanswer = {ask} 'how much is ' table ' times ' number '?'\n{if} answer {is} correct_answer {print} 'okay'\n{else} {print} 'mistake! it was ' correct_answer\n```\n"
+                story_text_3: "## أرقام عشوائية\nيمكنك أيضاً ترك الكومبيوتر يختار لك أرقام عشوائياً بإستخدام الأمر بشكل عشوائي.\nيوضح هذا المثال كيفية إختيار رقم من الجداول للتدريب، و بذلك تحصل على أرقام مختلفة دائماً لتتمرن على ناتج الضرب:\n"
+                example_code_3: "```\nجداول = ٤، ٥، ٦، ٨\nأرقام = ١، ٢، ٣، ٤، ٥، ٦، ٧، ٨، ٩، ١٠\nجدول = جداول {at} {random}\nرقم = أرقام {at} {random}\nإجابة_صحيحة = جدول * رقم\nإجابة = {ask} 'ما ناتج ' جدول ' في ' رقم '؟'\n{if} إجابة {is} إجابة_صحيحة {print} 'صح'\n{else} {print} 'خطأ! الإجابة هي ' إجابة_صحيحة\n```\n"
             15:
                 story_text: "## Calculator\nYou can add the `{while}` loop to the calculator game you've learned to make in a previous level.\nThis makes sure the player can't continue to the next question {if} they answer incorrectly.\n"
                 example_code: "```\nscore = 0\n{for} i {in} {range} 0 {to} 9\n    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    number1 = numbers {at} {random}\n    number2 = numbers {at} {random}\n    correct = number1 * number2\n    answer = 0\n    {while} answer != correct\n        {print} 'How much is ' number1 ' times ' number2 '?'\n        answer = {ask} 'Fill in your answer:'\n        {print} 'Your answer is ' answer\n    {print} 'Good job!'\n{print} 'You win!'\n```\n"
