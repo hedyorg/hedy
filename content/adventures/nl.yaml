@@ -2360,8 +2360,23 @@ adventures:
                     {print} Je rent naar de keuken, maar wordt daar aangevallen door een monster3
                     ```
                 start_code: "monster1 {is} _"
-                story_text_2: "## Challenge\nIn the example above the monsters are predetermined. So each time you run your code, the output is the same.\nCan you add `{ask}` commands to make the haunted house interactive and have the players choose the monsters they come across?\n"
-                example_code_2: "```\nmonster_1 {is} _\nmonster_2 {is} _\nmonster_3 {is} _\n{print} You enter the haunted house.\n{print} Suddenly you see a monster_1\n{print} You run into the other room, but a monster_2 is waiting there for you!\n{print} Oh no! Quickly get to the kitchen.\n{print} But as you enter monster_3 attacks you!\n```\n"
+                story_text_2: |
+                    ## Uitdaging
+                    In het voorbeeldje hierboven is van tevoren bepaald welk monster er achter de deur staat. Dus elke keer als je het programma start, heb je dezelfde uitkomst.
+                    Kun jij het `{ask}` commando gebruiken om het spookhuis interactief te maken, zodat de spelers kunnen kiezen welke monsters ze tegenkomen?
+                example_code_2: |
+                    ```
+                    monster1 {is} _
+                    monster2 {is} _
+                    monster3 {is} _
+                    {print} Je stapt het oude verlaten spookhuis binnen
+                    {print} Meteen hoor je het geluid van een monster1
+                    {print} Dus snel ren je naar de volgende kamer.
+                    {print} Maar daar wordt je opgewacht door een monster2
+                    {print} HELP!
+                    {print} Je rent naar de keuken, maar wordt daar aangevallen door een monster3
+                    ```
+
             3:
                 story_text: |
                     ## Spookhuis
@@ -2383,14 +2398,19 @@ adventures:
                     ## Uitdaging
                     Dit verhaal is kort maar krachtig. Kun jij het verhaal opleuken tot een echte spannende game?
                     Daarbij zijn er nu maar 3 mogelijke opties voor wat er achter de deur zit, kun jij meer monsters toevoegen aan die lijst?
-
+                story_text_3: |
                     ## Verander het spel in een tv prijzenshow!
                     Tot slot willen we je graag uitdagen om dit spel om te bouwen tot een prijzenshow zoals op tv!
                     In prijzenshows kiest de kandidaat een deur of een koffertje en vindt daarin een grote prijs (of niets natuurlijk...).
                     Kun jij een prijzenshow bouwen?
                 start_code: "{print} Ontsnap uit het spookhuis!"
-                story_text_3: "## Change the game into a tv gameshow!\nLastly, we'd like to challenge you to change this game into a gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!\nCan you do it?\n"
-                example_code_3: "```\n{print} The big gameshow!\n{print} There are 3 suitcases in front of you...\n{print} One of them contains _\n_\n```\n"
+                example_code_3: |
+                    ```
+                    {print} Miljoenenjacht!
+                    {print} Voor je staan 3 koffers...
+                    {print} In een koffer zit ____
+                    _
+                    ```
             4:
                 story_text: |
                     ## Spookhuis
@@ -2399,7 +2419,14 @@ adventures:
                 start_code: "{print} 'Ontsnap uit het spookhuis!'"
                 example_code: |
                     ```
-                    {print} 'Ontsnap uit het spookhuis!'
+                    {print} _Ontsnap uit het spookhuis!_
+                    {print} _ Voor je staan drie deuren... _
+                    keuze {is} {ask} _ Welke deur kies je?_
+                    {print} _ Je koos deur keuze _
+                    monsters {is} een zombie, een vampier, NIKS JE ONTSNAPT
+                    {print} _ Jij ziet... _
+                    {sleep}
+                    {print} monsters {at} {random}
                     ```
             5:
                 story_text: |
@@ -2407,6 +2434,10 @@ adventures:
                     Tot nu toe werd er in je spookhuisspel wel altijd aan de speler gevraagd welke deur geopend moest worden, maar zoals je misschien al gemerkt hebt, maakte het niet uit wat voor antwoord de speler gaf.
                     De speler kon netjes een deur kiezen, maar als de speler een compleet {random} antwoord gaf, zoals 'pannenkoek!', dan zou de speler het spel nog steeds kunnen winnen (ook al is er niet eens een deur gekozen!).
                     In dit level kun je alleen winnen als je dezelfde deur kiest als Hedy heeft gekozen en maakt het dus echt uit welk antwoord je invult!
+
+                    ## Uitdaging
+                    Kun jij de 4 missende woorden invullen op de streepjes?
+
                 example_code: |
                     ```
                     {print} 'Ontsnap uit het spookhuis!'
@@ -2417,7 +2448,7 @@ adventures:
                     {print} 'Jij kiest deur...' gekozendeur
                     {sleep}
                     goededeur {is} deuren {at} {random}
-                    {if} gekozendeur {is} goededeur {print} 'Hoera! Je ontsnapt!'
+                    _ _ _ _ {print} 'Hoera! Je ontsnapt!'
                     {else} {print} 'Oh nee! Je wordt opgepeuzeld door een...' monsters {at} {random}
                     ```
                 start_code: "{print} 'Ontsnap uit het spookhuis!'"
@@ -2460,13 +2491,16 @@ adventures:
                     In dit level kun je de speler gemakkelijk vertellen in welke kamer hij zit, door de variabele `i` te gebruiken.
                     Let op: Deze code is bijna gelijk aan die in het vorige level. Er zit een aanpassing op regel 5, waar het `{repeat}` commando is vervangen door `{for} i in {range} 1 {to} 3`.
                     Daarnaast is regel 8 toegevoegd, waardoor de speler nu ziet in welke kamer hij zit.
+
+                    ## Uitdaging
+                    Maak het programma af door de juiste regel code toe te voegen. Let op: De speler moet voorbij 3 kamers zien te komen om te winnen!
                 example_code: |
                     ```
                     {print} 'Ontsnap uit het spookhuis!'
                     speler = levend
                     deuren = 1, 2, 3
                     monsters = zombie, vampier, mummy, reuzespin
-                    {for} i {in} {range} 1 {to} 3
+                    _
                         {if} speler {is} levend
                             goededeur = deuren {at} {random}
                             {print} 'Kamer ' i
@@ -2565,7 +2599,7 @@ adventures:
                     zakgeld = {ask} 'Hoeveel zakgeld krijg je per week?'
                     sparen = prijs - gespaard
                     weken = sparen / zakgeld
-                    {print} 'Je kunt over ' weken ' weken een ' wens ' kopen!'
+                    {print} 'Je kunt over ' _ ' weken een ' _ ' kopen!'
                     ```
                 start_code: "# Schrijf jouw code hier"
             14:
@@ -2627,6 +2661,9 @@ adventures:
                 story_text: |
                     ## Leer een nieuwe taal
                     Maak een programma om woordjes mee te leren in een andere taal.
+
+                    ## Uitdaging
+                    Kun jij dit programma maken voor een andere taal? Of kun je meer woordjes toevoegen aan het Franse programma?
                 example_code: |
                     ```
                     {print} 'Leer Frans!'
@@ -2669,6 +2706,9 @@ adventures:
                     ## Maak een geheime code als een geheim agent
                     In dit avontuur kun je jouw eigen geheim agent code maken. Maak een bericht dat alleen de juiste agent kan ontcijferen.
                     Als je vijand probeert de code te kraken krijgen ze valse informatie om hun tijd te verspillen.
+
+                    ## Uitdaging
+                    Maak je eigen code voor jouw geheim agent. Kun jij het misschien zelfs uit meerdere variabelen laten bestaan?
                 example_code: |
                     ```
                     naam {is} {ask} 'Hoe heet je?'
