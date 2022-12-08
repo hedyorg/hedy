@@ -1320,6 +1320,7 @@ class ConvertToPython(Transformer):
     def check_var_usage(self, args, var_access_linenumber=100):
         # this function checks whether arguments are valid
         # we can proceed if all arguments are either quoted OR all variables
+
         def is_var_candidate(arg) -> bool:
             return not isinstance(arg, Tree) and \
                 not ConvertToPython.is_int(arg) and \
