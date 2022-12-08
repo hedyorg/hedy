@@ -127,7 +127,7 @@
     demo_code: "{print} '5 kertaa 5 on ' 5 * 5"
 -   name: '{ask}'
     explanation: Kysy vastausta ja tarkista, onko se oikein. Voimme nyt tulostaa 2 riviä.
-    demo_code: "vastaus = {ask} 'Paljonko on 5 + 5?'\n{if} vastaus {is} 10\n    {print} 'Hienoa!'\n    {print} 'Vastaus on tosiaan ' answer\n{else}\n    {print} 'Oho!'\n    {print} 'Vastaus on 10'"
+    demo_code: "vastaus = {ask} 'Paljonko on 5 + 5?'\n{if} vastaus {is} 10\n    {print} 'Hienoa!'\n    {print} 'Vastaus on tosiaan ' vastaus\n{else}\n    {print} 'Oho!'\n    {print} 'Vastaus on 10'"
 -   name: '{repeat} kilpikonnan kanssa'
     explanation: Toista monta riviä.
     demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
@@ -151,7 +151,7 @@
     demo_code: "{for} laskuri {in} {range} 1 {to} 5\n    {print} laskuri"
 -   name: '{ask}'
     explanation: Kysy vastausta ja tarkista, onko se oikein. Voimme nyt tulostaa 2 riviä.
-    demo_code: "vastaus = {ask} 'Paljonko on 5 + 5?'\n{if} vastaus {is} 10\n    {print} 'Hienoa!'\n    {print} 'Vastaus on tosiaan ' answer\n{else}\n    {print} 'Oho!'\n    {print} 'Vastaus on 10'"
+    demo_code: "vastaus = {ask} 'Paljonko on 5 + 5?'\n{if} vastaus {is} 10\n    {print} 'Hienoa!'\n    {print} 'Vastaus on tosiaan ' vastaus\n{else}\n    {print} 'Oho!'\n    {print} 'Vastaus on 10'"
 13:
 -   name: '{and}'
     explanation: Kaksi osaa joiden molempien on oltava oikein.

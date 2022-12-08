@@ -89,6 +89,50 @@ class TestsLevel5(HedyTester):
 
         self.single_level_tester(code=code, expected=expected, output='gelijkspel!')
 
+    def test_if_not_in_list_print(self):
+        code = textwrap.dedent("""\
+        items is red, green
+        selected is red
+        if selected not in items print 'not found!'
+        else print 'found'""")
+
+        expected = textwrap.dedent("""\
+        items = ['red', 'green']
+        selected = 'red'
+        if selected not in items:
+          print(f'not found!')
+        else:
+          print(f'found')""")
+
+        self.multi_level_tester(
+            max_level=7,
+            code=code,
+            expected=expected,
+            output='found'
+        )
+
+    def test_if_not_in_list_in_print(self):
+        code = textwrap.dedent("""\
+        items is red, green
+        selected is purple
+        if selected not in items print 'not found!'
+        else print 'found'""")
+
+        expected = textwrap.dedent("""\
+        items = ['red', 'green']
+        selected = 'purple'
+        if selected not in items:
+          print(f'not found!')
+        else:
+          print(f'found')""")
+
+        self.multi_level_tester(
+            max_level=7,
+            code=code,
+            expected=expected,
+            output='not found!'
+        )
+
     def test_if_in_list_print(self):
         code = textwrap.dedent("""\
         items is red, green
