@@ -1358,4 +1358,4 @@ class TestsLevel5(HedyTester):
                     print(f'The button got pressed!')
                     create_button('knop')""")
 
-        self.single_level_tester(code=code, expected=expected, max_level=18)
+        self.multi_level_tester(code=code, expected=expected, max_level=18)
