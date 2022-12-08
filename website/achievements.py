@@ -10,6 +10,9 @@ from .website_module import WebsiteModule, route
 
 
 class Achievements:
+    # To reduce a bit of cognitive load, prevent run achievements for the first 5 programs
+    ACHIEVEMENTS_THRESHOLD = 5
+
     def __init__(self, db: database.Database, translations: AchievementTranslations):
         self.db = db
         self.translations = translations
@@ -93,6 +96,8 @@ class Achievements:
 
     def verify_run_achievements(self, username, code=None, level=None, response=None):
         self.initialize_user_data_if_necessary()
+        if session["run_programs"] < self.ACHIEVEMENTS_THRESHOLD:
+            return
         self.check_programs_run()
         if code and level:
             self.check_code_achievements(code, level)
@@ -166,7 +171,7 @@ class Achievements:
 
     def check_programs_run(self):
         self.initialize_user_data_if_necessary()
-        if "getting_started_I" not in session["achieved"] and session["run_programs"] >= 1:
+        if "getting_started_I" not in session["achieved"] and session["run_programs"] >= 5:
             session["new_achieved"].append("getting_started_I")
         if "getting_started_II" not in session["achieved"] and session["run_programs"] >= 10:
             session["new_achieved"].append("getting_started_II")
