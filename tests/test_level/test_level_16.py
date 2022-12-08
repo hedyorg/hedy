@@ -579,10 +579,3 @@ class TestsLevel16(HedyTester):
             fruit is ['banaan', 'appel', 'kers']
             print fruit at random""")
         self.single_level_tester(code=code, exception=hedy.exceptions.InvalidRandomCommandException)
-
-    def test_at_random_general(self):
-        code = textwrap.dedent("""\
-            fruit is ['banaan', 'appel', 'kers']
-            fruit at random""")
-        self.single_level_tester(code=code, exception=hedy.exceptions.InvalidRandomCommandException)
-   
