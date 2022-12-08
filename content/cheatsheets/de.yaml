@@ -100,6 +100,9 @@
         schöne_farben {is} Grün, Gelb
         farbe {is} {ask} 'Was ist deine Lieblingsfarbe?'
         {if} farbe {in} schöne_farben {print} 'hübsch!' {else} {print} 'bäh'
+-   name: '{pressed}'
+    explanation: Check whether a given key on the keyboard is `{pressed}`.
+    demo_code: "{if} a {is} {pressed} {print} 'You pressed A!' {else} {print} 'You pressed another key!'"
 6:
 -   name: "{print}"
     explanation: "Benutze Anführungszeichen, um einen Text genau so auszugeben."
@@ -153,6 +156,9 @@
         {repeat} 4 {times}
             {turn} 90
             {forward} 50
+-   name: '{pressed}'
+    explanation: Check whether a given key on the keyboard is `{pressed}`.
+    demo_code: "{if} a {is} {pressed}\n    {print} 'You pressed A!'\n{else}\n    {print} 'You pressed another key!'"
 9:
 -   name: "{if} mit mehreren Befehlszeilen"
     explanation: "Frage nach einer Summe mit `{ask}` und prüfe, ob die Antwort korrekt ist. Jetzt geben wir zwei Zeilen aus."
