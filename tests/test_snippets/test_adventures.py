@@ -1,13 +1,13 @@
-import _pickle
+import pickle
 import os
 import unittest
-import pickle
+
 
 from parameterized import parameterized
 
 import hedy
 import utils
-from tests.Tester import HedyTester, Snippet
+from tests.Tester import HedyTester, Snippet, get_list_from_pickle, get_snippets_env_var
 from website.yaml_file import YamlFile
 
 # Set the current directory to the root Hedy folder
@@ -110,30 +110,9 @@ def collect_snippets(path, hashes_saved=set(), filtered_language=None, only_new_
 # filtered_language = 'nl'
 # use this to filter on 1 lang, zh_Hans for Chinese, nb_NO for Norwegian, pt_PT for Portuguese
 
-only_new_snippets = os.getenv('only_new_snippets')
+only_new_snippets = get_snippets_env_var()
 
-if only_new_snippets is None:
-    only_new_snippets = False  # set default in case env var is not set (f.e. on Windows, or when running form the UI)
-elif only_new_snippets == 1 or only_new_snippets == '1':
-    only_new_snippets = True
-else:  # in case an invalid one is given
-    only_new_snippets = False
-
-try:
-    with open('adventure_hashes.pkl', 'rb') as f:
-        hashes_saved = pickle.load(f)
-except _pickle.UnpicklingError:  # broken file, create and save
-    hashes_saved = set()
-    with open('adventure_hashes.pkl', 'wb') as f:
-        pickle.dump(hashes_saved, f)
-except EOFError:  # empty file
-    hashes_saved = set()
-    with open('adventure_hashes.pkl', 'wb') as f:
-        pickle.dump(hashes_saved, f)
-except FileNotFoundError:  # non existent file
-    hashes_saved = set()
-    with open('adventure_hashes.pkl', 'wb') as f:
-        pickle.dump(hashes_saved, f)
+hashes_saved = get_list_from_pickle('adventure_hashes.pkl')
 
 Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/adventures',
                                                        filtered_language=filtered_language,
