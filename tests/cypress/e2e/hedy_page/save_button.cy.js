@@ -6,8 +6,9 @@ describe('Checks if save button works', () => {
       loginForStudent();
       cy.get('#start_programming_button').click();
 
-      // type in editor 'print test'
-      cy.get('#editor').type('\nprint test');
+      // clear and type in editor 'print test'
+      cy.get('textarea').clear({force: true})
+      cy.get('#editor').type('print test');
       
       cy.get('#runit').click();
       cy.wait(3000);
@@ -29,9 +30,6 @@ describe('Checks if save button works', () => {
       // checks if it is correctly saved:
       cy.get('#editor > .ace_scroller > .ace_content .ace_line').each((element, index) => {
         if(index == 0) {
-          cy.get(element).should('have.text', 'print hello world!');
-        }
-        if(index == 1) {
           cy.get(element).should('have.text', 'print test');
         }
       })
