@@ -2567,7 +2567,7 @@ def preprocess_ifs(code, lang='en'):
 
     def starts_with(command, line):
         if lang in ALL_KEYWORD_LANGUAGES:
-            command_plus_translated_command = [command, KEYWORDS[lang][command]]
+            command_plus_translated_command = [command, KEYWORDS[lang].get(command)]
             for c in command_plus_translated_command:
                 if line[0:len(c)] == c:
                     return True
@@ -2577,7 +2577,7 @@ def preprocess_ifs(code, lang='en'):
 
     def contains(command, line):
         if lang in ALL_KEYWORD_LANGUAGES:
-            command_plus_translated_command = [command, KEYWORDS[lang][command]]
+            command_plus_translated_command = [command, KEYWORDS[lang].get(command)]
             for c in command_plus_translated_command:
                 if c in line:
                     return True
@@ -2586,12 +2586,9 @@ def preprocess_ifs(code, lang='en'):
             return command in line
 
     def contains_any_of(commands, line):
-
+        # translation is not needed here, happens in contains
         if lang in ALL_KEYWORD_LANGUAGES:
-            commands_lang = [KEYWORDS[lang]['print'], KEYWORDS[lang]['ask'], KEYWORDS[lang]['forward'],
-                             KEYWORDS[lang]['turn']]
-
-            for c in commands+commands_lang:
+            for c in commands:
                 if contains(c, line):
                     return True
             return False
