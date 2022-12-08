@@ -1,12 +1,12 @@
 {
-  "title": "JSON Schema for Hedy Commands",
+  "title": "JSON Schema for Hedy Commands Explanations",
   "type": "object",
   "additionalProperties": false,
   "patternProperties": {
-    "^[0-9]{1,2}-?[0-9]{0,2}$": { "$ref": "#/definitions/Commands" }
+    "^[0-9]{1,2}-?[0-9]{0,2}$": { "$ref": "#/definitions/Cheatsheets" }
   },
   "definitions": {
-    "Commands": {
+    "Cheatsheets": {
       "type": "object",
       "properties": {
         "name": { "type": "string" },

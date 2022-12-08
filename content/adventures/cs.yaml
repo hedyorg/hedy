@@ -16,7 +16,7 @@ adventures:
 
                     Nevíš, co dál tvořit? Na dalších záložkách najdeš několik nápadů, kde si můžeš vše lépe procvičit.
                 start_code: print Ahoj světe!
-                example_code: "```\n{print} Hello!\n{print} Welcome to Hedy!\n```\n"
+                example_code: "```\n{print} Ahoj!\n{print} Vítám tě v  Hedy!\n```\n"
                 example_code_2: "```\n{ask} Jaké je tvé jméno?\n{echo} Ahoj\n```\n"
                 story_text_2: "Můžete také požádat o vstup pomocí `{ask}` a zopakovat jej zpět pomocí příkazu `{echo}`.\nZkuste znovu kód vlevo.\n\nNevíte, co vytvořit? Na dalších kartách najdete nápady na programy ke sestavení.\n"
                 story_text_3: "Nevíš kde začít? V záložkách najdeš různé nápady na programy které můžeš vytvořit.\n"
@@ -362,9 +362,9 @@ adventures:
                     {print}('So your name is ', name)
                     ```
     story:
-        name: Story
-        description: Story
-        default_save_name: Story
+        name: Příběh
+        description: Příběh
+        default_save_name: Příběh
         levels:
             8:
                 story_text: "## Story\nIn this level you can use multiple lines in your {if} commands, this way you can upgrade your happy or sad ending!\n"
@@ -620,18 +620,18 @@ adventures:
         name: Dice
         description: Make your own dice
     rock:
-        default_save_name: Rock
+        default_save_name: Kámen
         levels:
             5:
                 start_code: "{print} 'Welcome to your own rock scissors paper!'"
                 example_code: "```\noptions {is} rock, paper, scissors\ncomputer_choice {is} _\nchoice {is} {ask} What do you choose?\n{print} 'you chose ' _\n{print} 'computer chose ' _\n{if} _ {is} _ {print} 'tie!' {else} {print} 'no tie'\n```\n\nFill in the correct code on the blanks to see {if} it is a draw.\n"
                 story_text: "## Rock, paper, scissors\nIn this level we can determine who won.\nFor that you need the new `{if}` code.\n\nSave your choice with the name of choice and the choice of computer as computer choice.\nThen you can use `{if}` to see {if} they are the same or different.\nWill you finish the code?\n"
             1:
-                story_text: "## Rock, paper, scissors\nIn level 1 you can start with a rock, paper, scissors  game.\n\nWith `{ask}` you can make a choice, and with `{echo}` you can repeat that choice.\n"
-                example_code: "\n```\n{print} what do you choose?\n{ask} choose {from} rock, paper or scissors\n{echo} so your choice was:\n```\nInstead of using words, you could also use emojis of course: ✊✋✌\n"
-                start_code: '{print} Welcome to your own rock scissors paper!'
-                story_text_2: "## Challenge\nInstead of using words, you could also use emojis: ✊✋✌\nCan you create a code using emojis?\n"
-                example_code_2: "```\n{print} what do you choose?\n{ask} choose from _\n{echo} so your choice was:\n```\n"
+                story_text: "## Kámen, nůžky, papír\nV úrovni 1 můžete začít hrou kámen, nůžky, papír.\n\nPomocí `{ask}` můžete provést výběr a pomocí `{echo}` můžete tuto volbu zopakovat.\n"
+                example_code: "```\n{print} Co si vybereš?\n{ask} Vyber si {from} kámen, nůžky, papír\n{echo} Tvá volba byla:\n```\nMísto slov můžete samozřejmě použít také emotikony: ✊✋✌\n"
+                start_code: '{print} Vítejte ve svém vlastním  kámen, nůžky, papír!'
+                story_text_2: "## Výzva\nMísto slov můžete také použít emotikony: ✊✋✌\nMůžete vytvořit kód pomocí emotikonů?\n"
+                example_code_2: "```\n{print} Co si vybereš?\n{ask} Tvá volba from _\n{echo} Tak tvá volba byla:\n```\n"
             10:
                 story_text: "## Rock, Paper, Scissors\nFeeling too lazy to play the game yourself? Let Hedy play it for you!\n"
                 example_code: "```\nchoices = rock, paper, scissors\nplayers = Marleen, Michael\n{for} player {in} players\n     {print} player ' chooses ' choices {at} {random}\n```\n"
@@ -662,8 +662,8 @@ adventures:
                 story_text: "## Rock, Paper, Scissors\nPlay until you beat the computer! But first, finish the example code...\n"
                 example_code: "```\nwon = 'no'\noptions = 'rock', 'paper', 'scissors'\n{while} won == 'no'\n    your_choice = {ask} 'What do you choose?'\n    computer_choice = options {at} {random}\n    {print} 'you chose ' your_choice\n    {print} 'the computer chose ' computer_choice\n    {if} computer_choice == your_choice\n        {print} 'Tie!'\n    {if} computer_choice == 'rock' {and} your_choice == 'scissors'\n        {print} 'You lose!'\n    {if} computer_choice == 'rock' {and} your_choice == 'paper'\n        {print} 'You win!'\n        won = 'yes'\n"
                 start_code: '# place your code here'
-        name: Rock, paper, scissors
-        description: Make your own rock, paper, scissors game
+        name: Kámen, nůžky, papír
+        description: Vytvořte si vlastní hru kámen, nůžky, papír
     calculator:
         description: Create a calculator
         levels:
@@ -698,15 +698,15 @@ adventures:
         name: Calculator
         default_save_name: Calculator
     restaurant:
-        name: Restaurant
-        description: Create your own virtual restaurant
-        default_save_name: Restaurant
+        name: Restaurace
+        description: Vytvořte si vlastní virtuální restauraci
+        default_save_name: Restaurace
         levels:
             1:
-                story_text: "## Restaurant\n In level 1 you can make your own virtual restaurant and take your guests' orders.\n"
-                example_code: "  ```\n {print} Welcome to Hedy's restaurant \U0001F35F\n {ask} What would you like to order?\n {echo} So you would like to order\n {print} Thanks you for your order!\n {print} It's on its way!\n ```\n\n## Challenge\nCan you think of more lines to add to your restaurant code? For example, can you {ask} the guests what they'd like to drink, tell them the price, or wish them a pleasant meal?\n"
-                start_code: '# place your code here'
-                story_text_2: "## Challenge\nCan you think of more lines to add to your restaurant code? For example, can you {ask} the guests what they'd like to drink, tell them the price, or wish them a pleasant meal?\n"
+                story_text: "## Restaurace\n V levelu 1 si můžete vytvořit svou vlastní virtuální restauraci a přijímat objednávky svých hostů..\n"
+                example_code: "```\n{print} Vítejte v restauraci Hedy \U0001F35F\n{ask} Co byste si chtěli objednat?\n{echo} Takže byste si chtěli objednat\n{print} Děkujeme za Vaši objednávku!\n{print} Je to na cestě!\n```\n"
+                start_code: '# Vložte svůj kód zde'
+                story_text_2: "## Výzva\nNapadá vás více řádků, které můžete přidat do kódu restaurace? Můžete se například hostů {ask}, co by si přáli k pití, říct jim cenu nebo jim popřát dobrou chuť?\n"
             10:
                 story_text_2: "Of course, you could also order for multiple people!\n"
                 example_code_2: "```\ncourses = appetizer, main course, dessert\nnames = Timon, Onno\n{for} name {in} names\n    {for} course {in} courses\n        food = {ask} name ', what would you like to eat as your ' course '?'\n        {print} name ' orders ' food ' as their ' course\n```\n"
