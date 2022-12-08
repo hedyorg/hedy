@@ -741,3 +741,64 @@ adventures:
         name: What's next?
         description: What's Next?
         default_save_name: Next
+    pressit:
+        levels:
+            5:
+                story_text: "## Press it!\nIn the introduction you were also told about the new keyword ```pressed```! Using ```pressed```\ncan make coding much more interactive, and you can have live control of what is executed!\nIn the upcoming levels you will learn how ```pressed``` makes this possible and what uses ```pressed```\nhas.\nBesides printing text, there is a whole other variety of uses for ```pressed```\nFor example, you can also link turtle commands to keys! Try it!\n"
+                example_code: "```\nif x is {pressed} forward 50\n```\n"
+                story_text_2: "## If Else Pressed\nYou can also assign an else statement to ```pressed```. The else statement will be executed\nwhenever you press a key other than the key you assigned.\n"
+                example_code_2: "```\nif y is {pressed} {print} 'Amazing! You pressed the y key!'\nelse {print} 'Oh no! You did not press the y key.'\n```\n"
+                start_code: '# place your code here'
+            6:
+                story_text: "Did you know you can also make a calculator using ```pressed```?\nGive the calculator two numbers and press the m key to multiply.\nNow you don't have to bring your own!\nTry other keys and see what happens! Do you get a different result?\n"
+                example_code: "```\nfirst = {ask} 'what is your first number?'\nsecond = {ask} 'what is your second number?'\nprint 'press a to add, s to substract, d to divide, m to multiply'\nif a is {pressed} result = first + second\nif s is {pressed} result = first - second\nif d is {pressed} result = first / second\nif m is {pressed} result = first * second\nprint 'The answer is ' result\n```\n"
+                start_code: '# place your code here'
+            7:
+                story_text: "You might have tried it in level 5 and 6, pressing the key linked to ```pressed``` multiple\ntimes. If you did, you noticed that this did nothing. but now that you have learned about repeat, we\ncan press keys multiple times! Make the turtle walk forward!\n"
+                example_code: "```\nrepeat 3 times if x is {pressed} forward 15\n```\n"
+                start_code: '# place your code here'
+            8:
+                story_text: "## Press It!\nNow that you need to use indents for the {if} and {else} statements,\nyou will also have to indent code when using {pressed}! Don't worry,\nit works te same as with the other statements, see the example!\nPress another key instead of x and see what happens.\n"
+                example_code: "```\n{if} x is {pressed}\n    {print} 'Only the cool kids press the x key.'\n{else}\n    {print} 'The adventurous kids press something else.'\n```\n"
+                start_code: '# place your code here'
+            9:
+                story_text: "Now that you know how to nest multiple statements, you can also do this with {pressed}!\nBy nesting a pressed in a {repeat} loop, you can repeatedly press buttons and make something happen.\nNow we know you could do this before, but by using the indents you have much more overview!\nTry it counting to 5, for example!\n"
+                example_code: "```\ntotal = 1\n{repeat} 5 times\n    {if} x is {pressed}\n        {print} total\n        {print} 'keep pressing!'\n        total = total + 1\n```\n"
+                story_text_2: "Besides counting, you can now also move the turtle in many more ways than only forward or backwards!\nTry making some figures by walking the turtle around!\n"
+                example_code_2: "```\nstepsize = 25\nleft = -90\nright = 90\naround = 180\nrepeat 40 times\n    {if} w is {pressed}\n        forward stepsize\n    {if} s is {pressed}\n        turn around\n    {if} a is {pressed}\n        turn left\n    {if} d is {pressed}\n        turn right\n```\n"
+                start_code: '# place your code here'
+            10:
+                story_text: "In this level you can make the turtle draw you a figure. The turtle is raring to go.\nGive the turtle the starting signal by pressing the x or y key on your keyboard.\nCan you let the turtle draw you another figure?\n"
+                start_code: '# place your code here'
+                example_code: "```\ndistances = 100, 80, 60, 40, 20, 10\n{if} x is {pressed}\n    for distance in distances\n        {forward} distance\n        {turn} -90\n{if} y is {pressed}\n    for distance in distances\n        {forward} distance\n        {turn} 90\n```\n"
+            11:
+                story_text: "Now that you have learned of the ```for ... in range ... to ...``` rule, you can use it for ```pressed```\ntoo! for example, try moving the turtle! The turtle grows everytime you press a linked button.\nThis way the turtle can move further every step!\n"
+                example_code: "```\nleft = -90\nright = 90\naround = 180\nfor counter in range 1 to 15\n    stepsize = counter * 5\n    {if} w is {pressed}\n        forward stepsize\n    {if} s is {pressed}\n        turn around\n    {if} a is {pressed}\n        turn left\n    {if} d is {pressed}\n        turn right\n```\n"
+                start_code: '# place your code here'
+            12:
+                story_text: "Are you familiar with videogames? You walk into tall grass and are suddenly approached by\na very suspicious mouse. What will you do?\nIn this level we will make a small menu with different kinds of options.\nStoring text into a variable is quite handy for repeated uses.\nOption, I choose you!\n"
+                example_code: "```\nchoose = 'You chose option: '\nprint 'A wild mouse appeared!'\nprint 'Choose an option and press first letter: (n)et, (c)at, (b)ag, (r)un'\n{if} n is {pressed}\n    {print} choose + 'net'\n    {print} 'You attempt to catch the mouse with a net..'\n    sleep\n    {print} 'Congratulations you did it!'\n{if} c is {pressed}\n    {print} choose + 'cat'\n    {print} 'You send out your cat'\n    sleep\n    {print} 'The mouse got scared and ran away!'\n{if} b is {pressed}\n    {print} choose + 'bag'\n    {print} 'The mouse jumped into you bag!'\n{if} r is {pressed}\n    {print} choose + 'run'\n    {print} 'You got away safely!'\n```\n"
+                start_code: '# place your code here'
+            13:
+                story_text: "Now that you learned how to use ```and``` and ```or```, we can use it with ```pressed```too!\nimagine the turtle being able to do a superjump forward. by pressing ```p``` the turtle can make a\nsuperjump! However, the turtle can only do this jump if he turns left and right first!\n"
+                start_code: '# place your code here'
+                example_code: "```\nstepsize = 10\nleft = -90\nright = 90\naround = 180\nlooked_left = 0\nlooked_right = 0\nrepeat 40 times\n    {if} w is {pressed}\n        forward stepsize\n    {if} s is {pressed}\n        turn around\n    {if} a is {pressed}\n        turn left\n        looked_left = 1\n    {if} d is {pressed}\n        turn right\n        looked_right = 1\n    {if} p is {pressed}\n        {if} looked_left is 1 and looked_right is 1\n            forward 40\n            looked_left = 0\n            looked_right = 0\n```\n"
+            14:
+                story_text: "Now that you learned how to use operators, we can use it with ```pressed```too!\nimagine the turtle being able to do a superjump forward. by pressing ```p``` the turtle can make a\nsuperjump! However, the turtle can only do this jump every 5 steps or every 4 turns\n"
+                start_code: '# place your code here'
+                example_code: "```\nstepsize = 15\nleft = -90\nright = 90\naround = 180\njumptime = 5\nspins = 4\nrepeat 40 times\n    {if} w is {pressed}\n        forward stepsize\n        jumptime = jumptime - 1\n    {if} s is {pressed}\n        turn around\n    {if} a is {pressed}\n        turn left\n        spins = spins - 1\n    {if} d is {pressed}\n        turn right\n        spins = spins - 1\n    {if} p is {pressed}\n        {if} jumptime <= 0 or spins <= 0\n            forward stepsize * 3\n            jumptime = 5\n            spins = 4\n```\n"
+            15:
+                story_text: "Now that you have learned about the ```while``` loops, you can start using it on the turtle!\nThe turtle is now only allowed to take only 15 steps or turn 15 times, before he gets tired!\nTry to get as far as possible before the turtle gets tired! You can use your superjump after 2 turns\nor 5 steps.\n"
+                example_code: "```\nstepsize = 15\nleft = -90\nright = 90\naround = 180\njumptime = 5\nspins = 2\ntired_in = 15\nwhile tired_in > 0\n    {if} w is {pressed}\n        forward stepsize\n        jumptime = jumptime - 1\n    {if} s is {pressed}\n        turn around\n    {if} a is {pressed}\n        turn left\n        spins = spins - 1\n    {if} d is {pressed}\n        turn right\n        spins = spins - 1\n    {if} p is {pressed}\n        {if} jumptime <= 0 or spins <= 0\n            forward stepsize * 4\n            jumptime = 5\n            spins = 2\n    tired_in = tired_in - 1\n```\n"
+                start_code: '# place your code here'
+            16:
+                example_code: "```\nlimbs = ['Right Hand', 'Left Hand', 'Right Foot', 'Left Foot']\ncolours = ['Blue', 'Green', 'Red', 'Yellow']\nrepeat 20 times\n    l = limbs[random]\n    c = colours[random]\n    {if} x is {pressed}\n        {print} l + ' on ' + c + '!'\n```\n"
+                story_text: "Lets move a little with a game of Twister!\nWhen everyone is ready, press the x key for the next move!\n"
+                start_code: '# place your code here'
+            17:
+                story_text: "Now that you learned how to use ```elif```, we can use it with ```pressed```too! Be aware,\n```elif ... is pressed ``` is not possible! That is why we are going to nest some ```elif```\nstatements into the ```pressed``` options. We also had to add ```:``` to the code to make\neverything work! imagine the turtle being able to do a superjump forward. by pressing ```p``` the\nturtle can make a superjump! However, the turtle can only do this jump every 5 steps or every\n4 turns\n"
+                start_code: '# place your code here'
+                example_code: "```\nstepsize = 15\nleft = -90\nright = 90\naround = 180\njumptime = 5\nspins = 4\nrepeat 40 times\n    {if} w is {pressed}:\n        forward stepsize\n        jumptime = jumptime - 1\n    {if} s is {pressed}:\n        turn around\n    {if} a is {pressed}:\n        turn left\n        spins = spins - 1\n    {if} d is {pressed}:\n        turn right\n        spins = spins - 1\n    {if} p is {pressed}:\n        {if} jumptime <= 0 or spins <= 0:\n            forward stepsize * 3\n            jumptime = 5\n            spins = 4\n        {elif} jumptime > 0:\n            print \"you need to take more steps or turns before you can superjump!\"\n```\n"
+        name: Press it!
+        description: Try linking a keyboard key to a command!
+        default_save_name: Pressit

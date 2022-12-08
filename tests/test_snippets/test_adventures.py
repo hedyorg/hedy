@@ -99,7 +99,7 @@ def collect_snippets(path, filtered_language=None):
 
     return Hedy_snippets
 
-# filtered_language = 'nb_NO'
+# filtered_language = 'de'
 # use this to filter on 1 lang, zh_Hans for Chinese, nb_NO for Norwegian, pt_PT for Portuguese
 
 

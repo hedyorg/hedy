@@ -1,10 +1,10 @@
-import {goToLogin, gotoRegisterTeacher, goToPage, goToRegisterStudent} from '../tools/navigation/nav.js'
+import {goToLogin, goToRegisterTeacher, goToPage, goToRegisterStudent} from '../tools/navigation/nav.js'
 import {login, loginForUser} from '../tools/login/login.js'
 
-describe('Username field test', () => {
+describe('Subscribe to newsletter test', () => {
   it('passes', () => {
 
-    goToRegisterStudent();
+    goToRegisterTeacher();
 
     // Tests username field interaction
        cy.get('#subscribe').check()

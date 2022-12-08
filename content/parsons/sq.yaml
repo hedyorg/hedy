@@ -6,9 +6,9 @@ levels:
                 {print} Ky është DJ Hedy
                 {ask} A jeni gati për festë?
                 {echo} Zgjedhje e shkëlqyer! Unë dua
-            story: Jeni tek tavolina e DJ duke kërkuar një këngë. Krijoni një program që ju pyet nëse jeni gati për të festuar dhe më pas pyet se cilën këngë dëshironi të dëgjoni.\n
+            story: "Jeni tek tavolina e DJ duke kërkuar një këngë. Krijoni një program që ju pyet nëse jeni gati për të festuar dhe më pas pyet se cilën këngë dëshironi të dëgjoni.\n"
         1:
-            story: Ju jeni një klient në furrën Hedy.\nJu dëshironi të hyni në furrë dhe jeni të mirëpritur nga bukëpjekësi.\nAi pyet se çfarë lloj byreku doni të porosisni.\nMë pas, porosia juaj është duke u përgatitur.\n
+            story: "Ju jeni një klient në furrën Hedy.\nJu dëshironi të hyni në furrë dhe jeni të mirëpritur nga bukëpjekësi.\nAi pyet se çfarë lloj byreku doni të porosisni.\nMë pas, porosia juaj është duke u përgatitur.\n"
             code: |
                 {print} Mirë se vini në furrën e bukës Hedy!
                 {ask} Çfarë lloj byreku dëshironi të porosisni?
@@ -16,14 +16,14 @@ levels:
                 {print} Porosia juaj po përgatitet!
     2:
         1:
-            story: Ju dhe miqtë tuaj do të shikoni disa Netflix.\nTrego se cilin film do të shikosh dhe uroj shikuesve shumë argëtim!\n
+            story: "Ju dhe miqtë tuaj do të shikoni filma në Netflix.\nTrego se cilin film do të shikosh dhe uroj shikuesve shumë argëtim!\n"
             code: |
                 {print} Është koha për një mbrëmje të Netflix
                 filmi {is} Sonic the Hedgehog 2
                 {print} Ne do të shikojmë
                 {print} Argëtohu shumë!
         2:
-            story: Ky është dyqani në internet i një dyqani lodrash. Krijo një program ku klientët mund të shtojnë një artikull në karrocën e tyre të blerjeve.\n
+            story: "Ky është dyqani në internet i një dyqani lodrash. Krijo një program ku klientët mund të shtojnë një artikull në karrocën e tyre të blerjeve.\n"
             code: |
                 {print} Mirë se vini në dyqanin tonë të lodrave
                 lodër {is} {ask} Çfarë dëshironi të blini?
@@ -31,7 +31,7 @@ levels:
                 {print} Faleminderit për blerjet me ne!
     3:
         1:
-            story: Viti i ri shkollor në Hogwarts po fillon!\nËshtë detyra e kapelës së renditjes që t'ju renditë në një nga shtëpitë.\nNë cilën shtëpi do të renditeni?\nA jeni një Gryffindor, Hufflepuf, Ravenclaw apo Slytherin.\nLëreni programin të presë një periudhë të shkurtër përpara se të zbulojë shtëpinë tuaj.\n
+            story: "Viti i ri shkollor në Hogwarts po fillon!\nËshtë detyra e kapelës së renditjes që t'ju renditë në një nga shtëpitë.\nNë cilën shtëpi do të renditeni?\nA jeni një Gryffindor, Hufflepuf, Ravenclaw apo Slytherin.\nLëreni programin të presë një periudhë të shkurtër përpara se të zbulojë shtëpinë tuaj.\n"
             code: |
                 {print} Viti i ri shkollor në Hogwarts po fillon!
                 {print} Kapela e renditjes është gati për t''ju renditur në një shtëpi në Hogwarts.
@@ -39,7 +39,7 @@ levels:
                 {sleep} 2
                 {print} Dhe është houses {at} {random}
         2:
-            story: Krijoni një program që zgjedh një vakt të rastësishëm për ju. Bëni një listë ushqimesh dhe një listë të shtesave dhe lëreni programin të vendosë se çfarë do të keni!\n
+            story: "Krijoni një program që zgjedh një vakt të rastësishëm për ju. Bëni një listë ushqimesh dhe një listë të shtesave dhe lëreni programin të vendosë se çfarë do të keni!\n"
             code: |
                 ushqimi {is} pica, akullore, sallatë, sanduiç
                 majë {is} çokollatë, djathë, tuna, sprinkles
@@ -48,14 +48,14 @@ levels:
                 {print} ushqimi {at} {random} me majë {at} {random}
     4:
         1:
-            story: Ju jeni trajneri më i ri i Pokémon nga Pallet Town!\nBëni një program që zgjedh Pokemon-in tuaj të parë.\nLëreni programin të presë një minutë përpara se të zbulojë pokemonin tuaj të parë.\n
+            story: "Ju jeni trajneri më i ri i Pokémon nga Pallet Town!\nBëni një program që zgjedh Pokemon-in tuaj të parë.\nLëreni programin të presë një minutë përpara se të zbulojë pokemonin tuaj të parë.\n"
             code: |
                 pokemona {is} Pikaçu, Çarmender, Balbazor, Skuertëll
                 {print} 'Ky do të jetë pokemon-i juaj i parë!'
                 {sleep}
                 {print} pokemona {at} {random}
         2:
-            story: Krijoni një llotari që ju lejon të zgjidhni një çmim shtesë që mund të fitoni.\n
+            story: "Krijoni një llotari që ju lejon të zgjidhni një çmim shtesë që mund të fitoni.\n"
             code: |
                 çmimet {is} makinë, lloj brejtësi, 1 milion euro
                 çmimi {is} {ask} 'Çfarë dëshironi të fitoni?'
@@ -63,7 +63,7 @@ levels:
                 {print} 'Ju fituat ' çmimet {at} {random}
     5:
         1:
-            story: Krijoni një program që kontrollon nëse filmi juaj i preferuar është tashmë në listën e kompjuterit.\nNëse po, printoni se keni shije të shkëlqyer, përndryshe shtoni filmin në listë.\n
+            story: "Krijoni një program që kontrollon nëse filmi juaj i preferuar është tashmë në listën e kompjuterit.\nNëse po, printoni se keni shije të shkëlqyer, përndryshe shtoni filmin në listë.\n"
             code: |
                 filmat_preferuar {is} Batman, Spiderman, The Avengers, Jurassic Park
                 filmi {is} {ask} 'Cili është filmi juaj i preferuar?'
@@ -71,7 +71,7 @@ levels:
                 {else} {print} 'Sa turp që filmi juaj i preferuar nuk është në listë, do ta shtojmë menjëherë!'
                 {add} filmi {to_list} filmat_preferuar
         2:
-            story: Krijo një lojë matematikore.\n
+            story: "Krijo një lojë matematikore.\n"
             code: |
                 {print} 'Zgjidh këtë problem'
                 përgjigja {is} {ask} '88 - 16 = ?'
@@ -79,7 +79,7 @@ levels:
                 {else} {print} 'Gabim! Përgjigjja ishte 72'
     6:
         1:
-            story: Bëni një program që llogarit sa vjeç jeni në vitet e qenve dhe maceve.\nFillimisht pyesni moshën e përdoruesit dhe filloni të llogaritni.\nFillimisht llogaritni vitet e qenve, pastaj vitet e maceve.\nTregoji përdoruesit moshat e ndryshme.\n
+            story: "Bëni një program që llogarit sa vjeç jeni në vitet e qenve dhe maceve.\nFillimisht pyesni moshën e përdoruesit dhe filloni të llogaritni.\nFillimisht llogaritni vitet e qenve, pastaj vitet e maceve.\nTregoji përdoruesit moshat e ndryshme.\n"
             code: |
                 mosha = {ask} 'Sa vjeç jeni?'
                 mosha_qeni = mosha * 7
@@ -87,7 +87,7 @@ levels:
                 {print} 'Në vitet e qenve ju jeni 'mosha_qeni' vjeç.'
                 {print} 'Në moshën e macës ju jeni ' mosha_maca' vjeç.'
         2:
-            story: Krijoni një program që ju ndihmon të llogaritni se sa ëmbëlsira duhet të blini për festën tuaj të ditëlindjes.\n
+            story: "Krijoni një program që ju ndihmon të llogaritni se sa ëmbëlsira duhet të blini për festën tuaj të ditëlindjes.\n"
             code: |
                 {print} 'Është ditëlindja jote!'
                 njerëzit = {ask} 'Sa njerëzve dëshironi t iu jepni një copë tortë?'
@@ -95,7 +95,7 @@ levels:
                 {print} 'Ju duhet të bleni ' numri_torteve ' torte'
     7:
         1:
-            story: Në një turne shahu kanë mbetur tre lojtarë.\nKrijoni një program që vendos se cilët dy lojtarë luajnë fillimisht kundër njëri-tjetrit.\nFillimisht printoni dy lojtarët që luajnë ndeshjen e parë, pastaj printoni kundër cilit lojtar do të luajë fituesi.\n
+            story: "Në një turne shahu kanë mbetur tre lojtarë.\nKrijoni një program që vendos se cilët dy lojtarë luajnë fillimisht kundër njëri-tjetrit.\nFillimisht printoni dy lojtarët që luajnë ndeshjen e parë, pastaj printoni kundër cilit lojtar do të luajë fituesi.\n"
             code: |
                 lojtarët = Lisa, Nora, Sara
                 lojtari1 = lojtarët {at} {random}
@@ -105,7 +105,7 @@ levels:
                 {remove} lojtari2 {from} lojtarët
                 {print} 'The winner plays against ' lojtarët {at} {random}
         2:
-            story: Krijo këngën \Rrotat në autobus rrotullohen e rrotullohen\\n
+            story: "Krijo këngën 'Rrotat në autobus rrotullohen e rrotullohen'\n"
             code: |
                 {print} 'rrotat në autobus shkojnë'
                 {repeat} 3 {times} {print} 'rrotull e rrotull'
@@ -113,7 +113,7 @@ levels:
                 {print} 'në të gjithë qytetin '
     8:
         1:
-            story: Ju dhe katër miq të tjerë po luani Pokémon Go! Krijo një program që vendos se në cilin ekip do të luajë secili prej jush.\nOse e kuqe, e verdhë ose blu! Bëni pak pauzë pasi të shpallni një ekip.\n
+            story: "Ju dhe katër miq të tjerë po luani Pokémon Go! Krijo një program që vendos se në cilin ekip do të luajë secili prej jush.\nOse e kuqe, e verdhë ose blu! Bëni pak pauzë pasi të shpallni një ekip.\n"
             code: |
                 ekipet = e kuqe, e verdhë, blu
                 {print} 'E kuqe, e verdha nga bluja?'
@@ -122,7 +122,7 @@ levels:
                     {print} ekipet {at} {random}
                     sleep 2
         2:
-            story: Printoni numërimin mbrapsht për një lojë fshehjeje dhe kërkimi.\n
+            story: "Printoni numërimin mbrapsht për një lojë fshehjeje dhe kërkimi.\n"
             code: |
                 numëruesi = 11
                 {repeat} 10 {times}
