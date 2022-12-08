@@ -63,11 +63,15 @@ if os.getenv('CI') and (lang):
     raise RuntimeError('Whoops, it looks like you left a snippet filter in!')
 
 
-class TestsCommandPrograms(unittest.TestCase):
+class TestsCheatsheetPrograms(unittest.TestCase):
 
     @parameterized.expand(Hedy_snippets)
-    def test_defaults(self, name, snippet):
+    def test_cheatsheets_programs(self, name, snippet):
         if snippet is not None:
-            print(snippet.code)
             result = HedyTester.check_Hedy_code_for_errors(snippet)
-            self.assertIsNone(result)
+            if result is not None:
+                print(f'\n----\n{snippet.code}\n----')
+                print(f'in language {snippet.language} from level {snippet.level} gives error:')
+                print(result)
+
+            self.assertIsNone(result)  # this looks weird after the is not None but is used by the test runner!
