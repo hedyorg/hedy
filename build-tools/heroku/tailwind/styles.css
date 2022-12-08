@@ -258,6 +258,10 @@ ol {
 }
 
 /* AUTH */
+input:disabled {
+  @apply border-gray-500 bg-gray-400;
+}
+
 input[type=checkbox], input[type=radio] {
   @apply appearance-none border border-gray-400 w-4 h-4;
 }
@@ -508,20 +512,20 @@ p.close-dialog {
   transition: all 0.5s ease-in-out;
 }
 
-body[dir='rtl'] #keyword_toggle_container input:checked ~ .toggle-circle {
+body[dir='rtl'] input:checked ~ .toggle-circle {
   transform: translateX(-200%);
 }
 
-body[dir='ltr'] #keyword_toggle_container input:checked ~ .toggle-circle {
+body[dir='ltr'] input:checked ~ .toggle-circle {
   transform: translateX(200%);
 }
 
-body[dir='rtl'] #developers_toggle_container input:checked ~ .toggle-circle {
+body[dir='rtl'] input:checked ~ .toggle-circle {
   transform: translateX(-100%);
   @apply bg-green-400;
 }
 
-body[dir='ltr'] #developers_toggle_container input:checked ~ .toggle-circle {
+body[dir='ltr'] input:checked ~ .toggle-circle {
   transform: translateX(100%);
   @apply bg-green-400;
 }
