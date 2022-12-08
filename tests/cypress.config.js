@@ -23,6 +23,7 @@ module.exports = defineConfig({
     register_student_page: '/signup?teacher=false',
     register_teacher_page: '/signup?teacher=true',
     admin_page: '/admin',
-    admin_stats_page: '/admin/stats'
+    admin_stats_page: '/admin/stats',
+    admin_adventures_overview_page: '/admin/adventures'
   }
 });
