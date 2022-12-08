@@ -137,6 +137,14 @@ adventures:
                     {if} name {is} Hedy {print} 'nice'
                     {else} {print} 'boo!'
                     ```
+                story_text_4: |
+                    Something else that works with ```if``` is ```pressed```! With pressed you can link any letter in
+                    the alphabet and any number key on your keyboard to a command. If you link it, and press the key,
+                    something will happen. Try it out!
+                example_code_4: |
+                    ```
+                    if x is pressed print "it worked!"
+                    ```
             6:
                 start_code: "{print} '5 times 5 is ' 5 * 5"
                 story_text: |
@@ -176,7 +184,7 @@ adventures:
                         {print} 'This will be printed 5 times'
                 story_text: |
                     ## Indentation
-                    `{ask}` and `{print}` still work as you know them. But `{if}`, `{else}` and `{repeat}` have changed!
+                    `{ask}` and `{print}` still work as you know them. But `{if}`, `{else}`, {pressed} and `{repeat}` have changed!
                     You can now execute groups of code together, but you will have to *indent* the code.
                     That means putting four spaces at the beginning of the line. You will also have to indent when you just want to create a block of one line.
                 example_code: |
