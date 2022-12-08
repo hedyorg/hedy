@@ -1055,6 +1055,8 @@ adventures:
                     Ook bij je teken-schildpad kun je `{at} {random}` gebruiken! Dan loopt hij steeds een ander pad.
                     Kies met `{at} {random}` een hoek uit een lijstje. Als je regels 2 en 3 een paar keer herhaalt, krijg je een langere tekening.
 
+                    ## Uitdaging
+                    Kun jij regel 2 en 3 kopiëren en plakken om een langere random code te maken?
                 example_code: |
                     ```
                     hoeken {is} 10, 50, 90, 150, 250
@@ -1144,7 +1146,7 @@ adventures:
                 example_code: |
                     ```
                     {print} 'Figuren tekenen'
-                    {repeat} 3 {times} {forward} 10
+                    _ 3 _ {forward} 10
                     ```
                 start_code: |-
                     {print} 'Figuren tekenen'
@@ -1198,8 +1200,8 @@ adventures:
                     ```
                     mensen {is} mama, papa, Emma, Sophie
                     jouw_naam {is} {ask} Wie ben jij?
-                    {remove} jouw_naam {from} mensen
-                    {print} mensen {at} {random} doet de afwas vanavond!
+                    _ jouw_naam _ mensen
+                    {print} _ _ _ doet de afwas vanavond!
                     ```
                 start_code: "{print} Wie doet de afwas?"
             4:
@@ -1285,7 +1287,7 @@ adventures:
                     ```
                     dagen = maandag, dinsdag, woensdag, donderdag, vrijdag, zaterdag, zondag
                     namen = mama, papa, Emma, Sophie
-                    {for} dag {in} dagen
+                    _ dag _ dagen
                         {print} namen {at} {random} ' doet de afwas op ' dag
                     ```
                 start_code: "# Schrijf jouw code hier"
@@ -1308,8 +1310,13 @@ adventures:
                     {print} keuzes {at} {random}
                     ```
                 start_code: "{print} Wat zal de dobbelsteen deze keer aangeven?"
-                example_code_2: "```\nchoices {is} _\n```\n"
-                story_text_2: "## Challenge\nThe dice in the example above are dice for a specific game. Can you make normal dice?\nOr other special dice from a different game?\n"
+                example_code_2: |
+                ```
+                keuze {is} _
+                ```
+                story_text_2: |
+                    ## Challenge
+                    De dobbelsteen in het voorbeeld hierboven zijn voor het spelletje regenwormen. Kun jij ook normale dobbelstenen maken? Of andere speciale dobbelstenen van een ander spel?
             4:
                 story_text: |
                     ## Dobbelsteen
@@ -1378,7 +1385,7 @@ adventures:
                     ```
                     spelers = Anne, Jonneke, Jessie, Ilona
                     keuzes = 1, 2, 3, 4, 5, 6
-                    {for} speler {in} spelers
+                    _ _ _ _
                         {print} speler ' gooit ' keuzes {at} {random}
                         {sleep}
                     ```
@@ -1409,6 +1416,7 @@ adventures:
                 story_text: |
                     ## Steen, papier, schaar
                     In level 1 kun je een begin maken met een steen, papier, schaar spel.
+
                     Met `{ask}` kun je een keuze maken, en met `{echo}` kan je die keuze herhalen.
                 example_code: |
                     ```
@@ -1419,16 +1427,24 @@ adventures:
 
                     Je kunt in plaats van woorden natuurlijk ook emoji's gebruiken: ✊✋✌
                 start_code: "{print} Welkom bij jouw eigen steen papier schaar!"
-                example_code_2: "```\n{print} what do you choose?\n{ask} choose from _\n{echo} so your choice was:\n```\n"
-                story_text_2: "## Challenge\nInstead of using words, you could also use emojis: ✊✋✌\nCan you create a code using emojis?\n"
+                example_code_2: |
+                    ```
+                    {print} Wat kies jij?
+                    {ask} kies uit: _
+                    {echo} Dus jouw keuze was :
+                    ```
+                story_text_2: |
+                    ## Uitdaging
+                    In plaats van woorden kun je ook emojis gebruiken: ✊✋✌
+                    Kun jij de code maken met emojis?
             2:
                 story_text: |
                     ## Steen, papier, schaar
                     In dit level kun je variabelen gebruiken om alvast een stukje van de spelletje te programmeren. In het volgende level leer je het spelletje maken.
                 example_code: |
                     ```
-                    keuze {is} _
-                    {print} ik kies keuze
+                    _ {is} {ask} steen, papier of schaar?
+                    {print} ik kies _
                     ```
                 start_code: "# Schrijf jouw code hier"
             3:
@@ -1444,8 +1460,15 @@ adventures:
                     {print} keuzes {at} {random}
                     ```
                 start_code: "{print} Welkom bij jouw eigen steen papier schaar!"
-                example_code_2: "```\nchoices {is} rock, paper, scissors\n{print} player 1 chooses... choices {at} {random}\n{print} player 2 _\n```\n"
-                story_text_2: "## Challenge\nNow you only have one player, so can you add a second player?\nYou can even use variables to name player 1 and player 2.\n"
+                example_code_2: |
+                    ```
+                    keuses {is} steen, papier, schaar
+                    {print} speler 1 kiest... keuzes {at} {random}
+                    {print} speler 2 _
+                story_text_2: |
+                    ## Uitdaging
+                    Nu heb je maar 1 speler, dus kun jij nog een tweede speler toevoegen?
+                    Je kun zelfs nog variabelen gebruiken om de namen van de spelers te vragen en te gebruiken.
             4:
                 story_text: |
                     ## Steen, papier, schaar
@@ -1496,16 +1519,18 @@ adventures:
                             {print} 'Jij wint!'
                         {if} jouw_keuze {is} schaar
                             {print} 'De computer wint!'
+                    # Maak deze code af
                     ```
                 start_code: "# Schrijf jouw code hier"
             10:
                 story_text: |
                     ## Steen, papier, schaar
                     Ben je te lui om zelf steen papier te spelen? Dan kan Hedy het voor je doen!
+                    Je hoeft alleen de namen van de spelers in te vullen.
                 example_code: |
                     ```
                     keuzes = steen, papier, schaar
-                    spelers = Marleen, Michael
+                    spelers = _
                     {for} speler {in} spelers
                         {print} speler ' kiest ' keuzes {at} {random}
                     ```
@@ -1527,6 +1552,7 @@ adventures:
                         {print} 'Jij wint!'
                     {if} computer_keuze {is} 'steen' {and} jouw_keuze {is} 'schaar'
                         {print} 'De computer wint!'
+                    _
                     ```
                 start_code: "# Schrijf jouw code hier"
             15:
@@ -1549,6 +1575,7 @@ adventures:
                         {if} computer_keuze == 'steen' {and} jouw_keuze == 'papier'
                             {print} 'Je wint!'
                             gewonnen = 'ja'
+                    _
                     ```
                 start_code: "# Schrijf jouw code hier"
     calculator:
@@ -1568,11 +1595,22 @@ adventures:
                     {else} {print} 'Foutje! Het was ' goedeantwoord
                     ```
                 story_text_2: |
+                    ## Uitdaging
+                    De rekenmachine hierboven rekent het antwoord voor je uit, maar je kunt ook een programma maken om je eigen rekenvaardigheid te testen, zoals deze:
+                    Vul de streepjes in om het af te maken!
+                example_code_2: |
+                    ```
+                    goed_antwoord = 11 * 27
+                    antwoord = {ask} 'Heveel is 11 keer 27?'
+                    {if} antwoord {is} _ {print} 'goed gedaan!'
+                    {else} {print} 'Wrong! It was ' _
+                    ```
+                story_text_3: |
                     ## Willekeurige getallen
                     Je kunt ook de computer zelf willekeurige sommen laten maken met {random}.
 
                     Zo kies je een aantal tafels om uit te oefenen, en pak je daaruit steeds een andere som:
-                example_code_2: |
+                example_code_3: |
                     ```
                     tafels = 4, 5, 6, 8
                     keer = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
@@ -1584,12 +1622,13 @@ adventures:
                     {else} {print} 'foutje! het was ' goede_antwoord
                     ```
                 start_code: "{print} 'Welkom bij jouw rekenmachine'"
-                story_text_3: "## Random numbers\nYou can also let the computer do random sums on its own using random.\nThis is how you choose a number of tables to practice, and from that you always get a different sum:\n"
-                example_code_3: "```\ntables = 4, 5, 6, 8\nnumbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\ntable = tables {at} {random}\nnumber = numbers {at} {random}\ncorrect_answer = table * number\nanswer = {ask} 'how much is ' table ' times ' number '?'\n{if} answer {is} correct_answer {print} 'okay'\n{else} {print} 'mistake! it was ' correct_answer\n```\n"
+
             9:
                 story_text: |
                     ## Rekenmachine
                     In dit level kun je een score bijhouden bij je rekenspelletje!
+                    # Uitdaging
+                    Kun jij regel 10 afmaken zodat het programma werkt?
                 example_code: |
                     ```
                     score = 0
@@ -1601,7 +1640,7 @@ adventures:
                         {print} 'Hoeveel is ' getal1 ' keer ' getal2 '?'
                         antwoord = {ask} 'Vul hier het antwoord in:'
                         {print} 'Jouw antwoord is ' antwoord
-                        {if} antwoord {is} goede_antwoord
+                        {if} _ {is} _
                             score = score +1
                     {print} 'Je score is ' score ' van 10!'
                     ```
@@ -1611,6 +1650,8 @@ adventures:
                     ## Rekenmachine
                     Met dit rekenspelletje kun je de tafels oefenen.
                     Hoe meer getallen je aan de lijst toevoegt, hoe meer tafels je kunt oefenen.
+                    # Uitdaging
+                    Kun jij meer getallen toevoegen aan de lijst, zodat je alle tafels tot 10 kunt oefenen?
                 example_code: |
                     ```
                     nummers = 1, 2, 3
@@ -1712,7 +1753,7 @@ adventures:
                     In het vorige level heb je een begin gemaakt aan de waarzegger, maar echt voorspellingen waren er nog niet.
                     In dit level kun je een variabele gebruiken en het `{at} {random}` commando om Hedy antwoorden te laten kiezen op je vraag.
                     Kijk maar naar dit voorbeeld:
-                example_code: |4
+                example_code: |
 
                     In dit voorbeeld kan de speler een ja/nee-vraag stellen aan Hedy, en Hedy kiest een willekeurig antwoord.
                     ```
@@ -1732,13 +1773,16 @@ adventures:
                 story_text: |
                     ## Hedy de Waarzegger
                     In dit level kun je oefenen met de aanhalingstekens. Probeer dezelfde code te maken als in je vorige level, maar let op dat je de aanhalingstekens op de goede plek plaatst!
+
+                    ## Uitdaging
+                    We hebben alle aanhalingstekens uit het voorbeeld verwijderd. Kun jij ze toevoegen om de code aan de praat te krijgen?
                 example_code: |
                     ```
-                    {print} 'Hoi ik ben Hedy de Waarzegger!'
-                    voorspelling {is} {ask} 'Wat wil je weten?'
-                    {print} 'Dit is je vraag: ' voorspelling
+                    {print} _Hoi ik ben Hedy de Waarzegger!_
+                    voorspelling {is} {ask} _Wat wil je weten?_
+                    {print} _ Dit is je vraag: _ voorspelling
                     antwoorden {is} ja, nee, misschien
-                    {print} 'Mijn glazen bol zegt...'
+                    {print} _ Mijn glazen bol zegt..._
                     {sleep} 2
                     {print} antwoorden {at} {random}
                     ```
@@ -1781,6 +1825,11 @@ adventures:
                     ## Hedy de Waarzegger
                     In dit level kun je rekenen met Hedy, waardoor je "magische" formules kunt gebruiken in je voorspellingen!
                     Zo kun je berekenen hoe rijk je wordt, aan de hand van de formule in het voorbeeld:
+
+
+
+                    ## Uitdaging
+                    Kun jij je eigen (gekke) waarzegmachine maken?
                 example_code: |
                     ```
                     {print} 'Ik ben Hedy de Waarzegger!'
@@ -1840,12 +1889,15 @@ adventures:
                     Het enige probleem dat we tegenkwamen is dat Hedy toen eerst de drie vragen printte en daarna pas de drie antwoorden.
                     Nu is dat probleem opgelost en kan Hedy na een vraag meteen een antwoord printen, omdat je nu niet maar één regel code kunt herhalen met {repeat}, maar een heel stuk van je code!
                     Kijk maar:
+
+                    ## Uitdaging
+                    Kun jij het `{repeat}` commando op de juiste wijze toevoegen aan de code?
                 example_code: |
                     ```
                     {print} 'Ik ben Hedy de waarzegger!'
                     {print} 'Je mag 3 vragen stellen!'
                     antwoorden = ja, nee, misschien
-                    {repeat} 3 {times}
+                    _ _ _
                         vraag = {ask} 'Wat wil je weten?'
                         {print} vraag
                         {sleep}
@@ -1869,26 +1921,27 @@ adventures:
                         {sleep} 2
                     ```
                 story_text_2: |-
-                    We kunnen ook een waarzegger maken in een ander thema, bijvoorbeeld Harry Potter.
+                    ## Uitdaging
+                    We kunnen ook een waarzegger maken in een ander thema, bijvoorbeeld Harry Potter. Vul de streepjes in om het programma aan de praat te krijgen!
                 example_code_2: |
                     ```
                     huizen = Griffoendor, Zwadderich, Huffelpuf, Ravenklauw
                     vakken = toverdranken, verweer tegen de zwarte kunsten, bezweringen, transfiguratie
                     angsten = Voldemort, Spinnen, falen bij je SLIJMBALLEN
                     namen = Harry, Ron, Hermelien
-                    {for} naam {in} namen
-                        {print} naam ' wordt gesorteerd in ' huizen {at} {random}
-                        {print} naam ' is goed in ' vakken {at} {random}
-                        {print} naam 's grootste angst is ' angsten {at} {random}
+                    _
+                    _ {print} naam ' wordt gesorteerd in ' huizen {at} {random}
+                    _ {print} naam ' is goed in ' vakken {at} {random}
+                    _ {print} naam 's grootste angst is ' angsten {at} {random}
                     ```
                 start_code: "# Schrijf jouw code hier"
             12:
                 story_text: |
                     ## Waarzegger
-                    In dit level kun je langere voorspellingen maken! Kijk maar:
+                    In dit level kun je langere voorspellingen maken! Kun jij voorspellingen toevoegen aan het lijstje?
                 example_code: |
                     ```
-                    voorspellingen = 'je wordt rijk', 'je wordt verliefd', 'je glijdt uit over een bananenschil'
+                    voorspellingen = 'je glijdt uit over een bananenschil' _
                     {print} 'Ik pak mijn glazen bol erbij...'
                     {print} 'Ik zie... Ik zie...'
                     {sleep} 2
@@ -1922,16 +1975,28 @@ adventures:
                     In level 2 kun je variabelen gebruiken om je restaurant interactiever te maken! Kijk maar naar het voorbeeld.
                 example_code: |
                     ```
-                    {print} Welkom bij McHedy!
+                    {print} Welkom bij Hedy's restaurant!
+                    {print} Vandaag serveren we pizza of lasagne.
                     eten {is} {ask} Wat wilt u eten?
-                    saus {is} {ask} Welke saus wilt u daarbij?
-                    drinken {is} {ask} Wat wilt u drinken?
-                    {print} U heeft eten met saus en drinken besteld.
-                    {print} Bedankt voor uw bestelling!
+                    {print} Heerlijk! eten is ook mijn favoriet!
+                    topping {is} {ask} Wilt eten met groente of vlees?
+                    {print} eten met topping komt eraan!
                     ```
                 start_code: "# Schrijf jouw code hier"
-                story_text_2: "## Challenge\nCan you make this code more elaborate? For example by adding drinks to the order? Or...?\n"
-                example_code_2: "```\n{print} Welcome to Hedy's restaurant!\n{print} Today we're serving pizza or lasagna.\nfood {is} {ask} What would you like to eat?\n{print} Great choice! The food is my favorite!\ntopping {is} {ask} Would you like meat or veggies on that?\n{print} food with topping is on its way!\ndrinks {is} _\n```\n"
+                story_text_2: |
+                    ## Uitdaging
+                    Kun jij de code nog verder uitbreiden? Bijvoorbeeld door drankjes op het menu te zetten? Of...?
+                example_code_2: |
+                    ```
+                    {print} Welkom bij Hedy's restaurant!
+                    {print} Vandaag serveren we pizza of lasagne.
+                    eten {is} {ask} Wat wilt u eten?
+                    {print} Heerlijk! eten is ook mijn favoriet!
+                    topping {is} {ask} Wilt eten met groente of vlees?
+                    {print} eten met topping komt eraan!
+                    drinken {is} _
+                    ```
+
             3:
                 story_text: |
                     ## Willekeurig restaurant
@@ -1960,7 +2025,7 @@ adventures:
                     {print} Mysterie Milkshake
                     smaken {is} aardbei, banaan, chocolade
                     allergie {is} {ask} Ben je allergisch voor een smaak?
-                    {remove} allergie {from} smaken
+                    _
                     {print} Jij krijgt een milkshake  smaken {at} {random}
                     ```
             4:
@@ -1974,15 +2039,16 @@ adventures:
                 example_code: |
                     ## Voorbeeld Hedy Restaurant
                     ```
-                    {print} 'Welkm bij Hedys restaurant!'
-                    {print} 'Vandaag serveren we pizza of lasagna.'
-                    eten {is} {ask} 'Wat wil je eten?'
-                    {print} 'Goede keuze! The ' eten ' is mijn favoriet!'
-                    extra {is} {ask} 'wil je er vlees of groeten extra bij?'
-                    {print} eten ' with ' extra ' wordt gemaakt!'
-                    drank {is} {ask} 'Wat wil je erbij drinken?'
-                    {print} 'Bedankt voor de bestelling.'
-                    {print} 'Jouw ' eten ' and ' drank ' komen er zo aan!'
+                    _Voeg aanhalingstekens toe aan deze code_
+                    {print} _Welkm bij Hedys restaurant!_
+                    {print} _Vandaag serveren we pizza of lasagna._
+                    eten {is} {ask} _Wat wil je eten?_
+                    {print} _Goede keuze! _ eten _ is mijn favoriet!_
+                    topping {is} {ask} _wil je er vlees of groeten bij?_
+                    {print} eten _ met _ topping _ wordt gemaakt!_
+                    drank {is} {ask} _Wat wil je erbij drinken?_
+                    {print} _Bedankt voor de bestelling._
+                    {print} _Jouw + eten _ en _ drank _ komen er zo aan!_
                     ```
             5:
                 story_text: |
@@ -2005,7 +2071,7 @@ adventures:
                 story_text: |
                     ## Restaurant
                     In dit level kun je in je restaurant prijzen toevoegen en berekenen!
-                example_code: |4
+                example_code: |
 
                     Je kunt een simpel restaurant maken:
                       ```
@@ -2033,7 +2099,7 @@ adventures:
                     - nog een gang toevoegen?
                     - een kindermenu toevoegen?
                     - nog iets anders?
-                example_code_2: |4
+                example_code_2: |
 
                     Met deze code kan een klant drie gerechten bestellen.
 
@@ -2064,11 +2130,14 @@ adventures:
                     ## Restaurant
                     In dit level heb je geleerd hoe je `{repeat}` gebruikt om een regel code een aantal keren te herhalen.
                     Nu kun je dit commando gebruiken om een `{ask}` aan meerdere klanten te stellen om hun bestelling op te nemen.
+
+                    ## Uitdaging
+                    Kun jij de streepjes invullen? Hedy moet de vraag zo vaak herhalen als dat er klanten zijn.
                 example_code: |
                     ```
                     {print} 'Welkom bij restaurant Hedy'
                     mensen = {ask} 'Met hoeveel personen bent u?'
-                    {repeat} mensen {times} eten = {ask} 'Wat wilt u bestellen?'
+                    {repeat} _ {times} eten = {ask} 'Wat wilt u bestellen?'
                     {print} 'Bedankt voor uw bestelling!'
                     ```
                     Nu kun je zoals je ziet wel aan meerdere mensen vragen wat ze willen eten, maar het printen van al die bestellingen lukt nog niet.
@@ -2100,6 +2169,12 @@ adventures:
                     In dit level kun je het restaurant interactiever en leuker maken.
                     Je kunt bijvoorbeeld de `{ask}` stellen of er saus bij `{if}` iemand friet besteld, maar dat niet doen `{if}` iemand pizza besteld.
                     Bekijk het voorbeeld en probeer het uit in jouw eigen restaurant.
+
+                    ## Uitdaging
+                    Deze opdracht is voor de echte slimmeriken onder ons! Elke regel waarbij moet worden ingesprongen heeft een streepje gekregen.
+                    Kun jij uitvinden hoeveel spaties er aan het begin van de regel moeten komen om een werkend programma te krijgen?
+                    Succes!
+                    TIP: Als de klant pizza besteld, moet Hedy niet vragen welke saus de klant daarij wil.
                 example_code: |
                     ```
                     {print} 'Welkom bij restaurant Hedy'
@@ -2107,20 +2182,20 @@ adventures:
                     {print} 'Mooi, welkom allemaal'
                     prijs = 0
                     {repeat} mensen {times}
-                        eten = {ask} 'Wat wilt u bestellen?'
-                        {print} eten
-                        {if} eten {is} friet
-                            prijs = prijs + 3
-                            saus = {ask} 'Welke saus wilt u daarbij?'
-                            {if} saus {is} geen
-                                {print} 'zonder saus'
-                            {else}
-                                prijs = prijs + 1
-                                {print} 'met ' saus
-                        {if} eten {is} pizza
-                            prijs = prijs + 4
-                        {print} 'Dat is dan ' prijs ' euro'
-                        {print} 'Eet smakelijk!'
+                    _ eten = {ask} 'Wat wilt u bestellen?'
+                    _ {print} eten
+                    _ {if} eten {is} friet
+                    _ prijs = prijs + 3
+                    _ saus = {ask} 'Welke saus wilt u daarbij?'
+                    _ {if} saus {is} geen
+                    _ {print} 'zonder saus'
+                    _ {else}
+                    _ prijs = prijs + 1
+                    _ {print} 'met ' saus
+                    _ {if} eten {is} pizza
+                    _ prijs = prijs + 4
+                    {print} 'Dat is dan ' prijs ' euro'
+                    {print} 'Eet smakelijk!'
                     ```
                 start_code: "# Schrijf jouw code hier"
             10:
@@ -2134,38 +2209,42 @@ adventures:
                         eten = {ask} 'Wat wilt u bestellen als ' gang '?'
                         {print} eten ' wordt uw ' gang
                     ```
-                story_text_2: |4
-
+                story_text_2: |
+                    ## Uitdaging
                     Dit kun je uiteraard ook voor meerdere mensen toepassen!
-
+                    Kun jij elke regel inspringen met de goede hoeveelheid spaties?
+                    TIP: Sommige regels hebben geen spaties nodig.
                 example_code_2: |
                     ```
-                    gangen = voorgerecht, hoofdgerecht, nagerecht
-                    namen = Timon, Onno
-                    {for} naam {in} namen
-                        {for} gang {in} gangen
-                            eten = {ask} naam ', Wat wil jij bestellen als ' gang '?'
-                            {print} naam ' bestelt ' eten ' als ' gang
+                    _ gangen = voorgerecht, hoofdgerecht, nagerecht
+                    _ namen = Timon, Onno
+                    _ {for} naam {in} namen
+                    _ {for} gang {in} gangen
+                    _ eten = {ask} naam ', Wat wil jij bestellen als ' gang '?'
+                    _ {print} naam ' bestelt ' eten ' als ' gang
                     ```
                 start_code: "gangen = voorgerecht, hoofdgerecht, nagerecht"
             11:
                 story_text: |
                     ## Maak je eigen restaurant
                     Je kunt nu `{for} i {in} {range} 1 {to} 5` gebruiken om een bestelling met `{print}` te tonen voor meerdere mensen.
+
+                    ## Uitdaging
+                    Kun jij nog een inspring-uitdaging aan? Zorg dat de code werkt door de goede hoeveelheid spateis in te springen bij elke regel!
                 example_code: |
                     ```
                     {print} 'Welkom bij McHedy!'
                     {print} 'U kunt hier uw bestelling doorgeven'
                     mensen = {ask} 'Voor hoeveel personen wilt u bestellen?'
                     {for} i {in} {range} 1 {to} mensen
-                        {print} i 'e bestelling:'
-                        eten = {ask} 'Wat wilt u eten?'
-                        {print} eten
-                        {if} eten {is} patat
-                            saus = {ask} 'Wat voor saus wil je?'
-                            {print} saus
-                        drinken = {ask} 'Wat wilt u drinken?'
-                        {print} drinken
+                    _ {print} i 'e bestelling:'
+                    _ eten = {ask} 'Wat wilt u eten?'
+                    _ {print} eten
+                    _ {if} eten {is} patat
+                    _ saus = {ask} 'Wat voor saus wil je?'
+                    _ {print} saus
+                    _ drinken = {ask} 'Wat wilt u drinken?'
+                    _ {print} drinken
                     prijs = 4 * mensen
                     {print} 'Dat wordt dan ' prijs ' euro!'
                     ```
@@ -2174,6 +2253,9 @@ adventures:
                 story_text: |
                     ## Restaurant
                     In dit level kun je kommagetallen gebruiken op je menukaart, kijk maar!
+
+                    ## uitdaging
+                    Kun jij een manier bedenken om je vrienden en familie 15% korting te geven?
                 example_code: |
                     ```
                     prijs = 0
@@ -2195,6 +2277,7 @@ adventures:
                     ## Restaurant
                     In dit level leer je nieuwe commando's om je code nog verder uit te breiden.
                     In het eerste voorbeeld wordt het `{and}` commando toegevoegd.
+
                 example_code: |
                     ```
                     prijs = 10
@@ -2218,6 +2301,7 @@ adventures:
                 story_text: |
                     ## Restaurant
                     Met de `{while}` kun je zorgen dat je klanten kunnen blijven bestellen tot ze klaar zijn.
+
                 example_code: |
                     ```
                     {print} 'Welkom bij McHedy'
