@@ -48,7 +48,7 @@ def collect_snippets(path):
     return Hedy_snippets
 
 
-Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/commands')]
+Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/cheatsheets')]
 Hedy_snippets = HedyTester.translate_keywords_in_snippets(Hedy_snippets)
 
 lang = None
