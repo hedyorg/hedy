@@ -1,5 +1,3 @@
-import { loginForAdmin } from "../login/login";
-
 export function goToPage(page)
 {
     if (typeof page === 'string' || page instanceof String)
@@ -54,8 +52,7 @@ export function goToHedyLevel2Page()
 
 export function goToAdminUsersPage()
 {
-    loginForAdmin();
-    cy.get('#users_button').click();
+    return goToPage(Cypress.env('admin/users'));
 }
 
 // Must be logged in and able to edit an adventure
