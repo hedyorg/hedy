@@ -55,7 +55,7 @@ export function goToHedyLevel2Page()
 export function goToAdminUsersPage()
 {
     loginForAdmin();
-    cy.get('#usersbutton').click();
+    cy.get('#users_button').click();
 }
 
 // Must be logged in and able to edit an adventure
