@@ -89,6 +89,7 @@ NORMAL_PREFIX_CODE = textwrap.dedent("""\
 PYGAME_PREFIX_CODE = textwrap.dedent("""\
     # coding=utf8
     os.environ["SDL_VIDEODRIVER"] = "dummy" # No real image drivers exist, set to dummy for testing
+    os.environ["SDL_AUDIODRIVER"] = "disk" # No real audio drivers exist, set to disk for testing
     import pygame
     pygame.init()
     canvas = pygame.display.set_mode((711,300))

@@ -538,7 +538,7 @@ adventures:
                 example_code_2: "```\n{print} On słyszy odgłos\nzwierzęta {is} \U0001F43F, \U0001F994, \U0001F987, \U0001F989\nzwierzę {is} {ask} Co to było?\n{add} zwierzę {to_list} zwierzęta\n{print} To był odgłos zwierzęta {at} {random}\n```\n"
                 story_text_3: "To jest przykład polecenia `{remove}` w twojej historii\n\n## Wyzwanie\nCzy możesz użyć 3 nowych poleceń `{at} {random}` , `{add} {to}` i `{remove} {from}` we własnej historii\n"
                 example_code_3: "```\n{print} Jego plecak stał się zbyt ciężki.\n{print} W środku była butelka wody, latarka i cegła.\nplecak {is} woda, latarka, cegła\nwyrzuc {is} {ask} Który przedmiot powinien wyrzucić?\n{remove} wyrzuc {from} plecak\n```\n"
-                start_code: '{print} Your story'
+                start_code: '{print} Twoja histora'
             15:
                 story_text: "## Story\nUsing the `{while}` loop can make your stories more interesting. For example, you can use `{while} game {is} 'on'` so you can play until the game is over.\nOr you can use `{while} sword {is} 'lost'` so the player can't continu the game until they have found something.\n"
                 example_code: "```\nkeys = 'lost'\n{print} 'You are standing in your garden and you have lost your keys.'\n{print} 'Where do you want to look for them?'\n{print} 'You can choose: tree, flowerbed, rock, postbox'\n{while} keys == 'lost'\n    location = {ask} 'Where do you want to look?'\n    {if} location == 'flowerbed'\n        {print} 'Here they are!'\n        keys = 'found'\n    {else}\n        {print} 'Nope they are not at the ' location\n{print} 'Now you can enter the house!'\n```\n"
