@@ -1,6 +1,5 @@
 import {goToHedyPage, goToHome} from "../tools/navigation/nav";
 import {loginForStudent} from "../tools/login/login";
-import {program_id} from "../../../../website/programs.py"
 
 describe('Checks if save & share button works', () => {
     it('Passes', () => {
@@ -37,7 +36,7 @@ describe('Checks if save & share button works', () => {
       //http://localhost:8080/hedy/d89964c395f647bfb07c0ef4bcce8f31/view (this is the correct link)
       cy.window().then((win) => {
         win.navigator.clipboard.readText().then((text) => {
-          expect(text).include('/hedy/program_id/view');
+          expect(text).include('/hedy/d89964c395f647bfb07c0ef4bcce8f31/view');
         });
       });
 
