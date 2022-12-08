@@ -1732,25 +1732,22 @@ while not pygame_end:
   if event.type == pygame.QUIT:
     pygame_end = True
     pygame.quit()
-    break
-""")
+    break""")
 
         if button:
             command = f"""\
   if event.type == pygame.USEREVENT:
-{ConvertToPython.indent(command, 4)}
-"""
+{ConvertToPython.indent(command, 4)}"""
         else:
             command = f"""\
   if event.type == pygame.KEYDOWN:
-{ConvertToPython.indent(command, 4)}
-"""
+{ConvertToPython.indent(command, 4)}"""
 
         if self.ifpressed_prefix_added:
             return command
         else:
             self.ifpressed_prefix_added = True
-            return command_suffix + command
+            return command_suffix + "\n" + command
 
 
     def ifpressed(self, meta, args):
@@ -1764,7 +1761,7 @@ if event.key == {button_name}:
             return self.make_ifpressed_command(f"""\
 if event.unicode == '{args[0]}':
 {ConvertToPython.indent(args[1])}
-  break""") + self.make_ifpressed_command(f"""\
+  break""") + "\n" + self.make_ifpressed_command(f"""\
 if event.key == {button_name}:
 {ConvertToPython.indent(args[1])}
   break""", True)
