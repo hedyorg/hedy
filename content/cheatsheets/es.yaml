@@ -82,6 +82,9 @@
 -   name: '{in}'
     explanation: Comprueba elementos con `{in}`
     demo_code: "colores_bonitos {is} verde, amarillo\ncolor {is} {ask} '¿Cuál es tu color favorito?'\n{if} color {in} colores_bonitos {print} '¡Bonito!' {else} {print} 'No es tan bonito'"
+-   name: '{pressed}'
+    explanation: Check whether a given key on the keyboard is `{pressed}`.
+    demo_code: "{if} a {is} {pressed} {print} 'You pressed A!' {else} {print} 'You pressed another key!'"
 6:
 -   name: "{print}"
     explanation: "Mostrar un texto literal con usando comillas simples."
@@ -132,6 +135,9 @@
 -   name: '`{repeat}` con tortuga'
     explanation: 'Repite varias líneas.'
     demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
+-   name: '{pressed}'
+    explanation: Check whether a given key on the keyboard is `{pressed}`.
+    demo_code: "{if} a {is} {pressed}\n    {print} 'You pressed A!'\n{else}\n    {print} 'You pressed another key!'"
 9:
 -   name: "{if} con varias líneas"
     explanation: "La respuesta a una pregunta de sumas con `{ask}` y ve si está correcto. Ahora muestra dos líneas."
