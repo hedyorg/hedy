@@ -438,7 +438,9 @@ adventures:
                     {print} Hij is bang dat dit een spookbos is
                     ```
                 start_code: "{print} Hier begint jouw verhaal"
-                story_text_2: "## Challenge\nCan you make your own story in Hedy now by using `{print}` , `{ask}` and `{echo}`?\n"
+                story_text_2: |
+                    ## Uitdaging
+                    Kun jij je eigen verhaal maken in Hedy met de commando's `{print}` , `{ask}` en `{echo}`?
             2:
                 story_text: |
                     ## Verhaal
@@ -447,6 +449,9 @@ adventures:
                     Je moet daar wel een klein beetje extra voor programmeren. Je moet je hoofdpersoon nu eerst een naam geven.
 
                     Die naam kun je dan overal in een zin neerzetten.
+
+                    ## Uitdaging
+                    Kun jij zelf ook een verhaaltje maken met een variabele erin? Kun je misschien zelfs nog meer variabelen toevoegen?
                 example_code: |-
                     ```
                     naam {is} {ask} Hoe heet de hoofdpersoon?
@@ -478,7 +483,11 @@ adventures:
                     {add} dier {to_list} dieren
                     {print} het was een dieren {at} {random}
                     ```
-                story_text_3: "Hiernaast zie je een voorbeeld van het `{remove}` commando in een verhaal\n"
+                story_text_3: |
+                    Hiernaast zie je een voorbeeld van het `{remove}` commando in een verhaal
+
+                    ## Uitdaging
+                    Kun jij de 3 nieuwe commando's `{at} {random}` , `{add} {to}` en `{remove} {from}` in jouw verhaaltje verwerken?
                 example_code_3: |
                     ```
                     {print} Zijn rugzak is veel te zwaar...
@@ -495,12 +504,12 @@ adventures:
                 example_code: |
                     ```
                     naam {is} Hans
-                    {print} 'De naam van de hoofdpersoon {is}' naam
-                    {print} naam 'gaat nu in het bos lopen'
-                    {print} naam 'is wel een beetje bang'
+                    {print} _De naam van de hoofdpersoon {is} _ naam
+                    {print} naam _ gaat nu in het bos lopen_
+                    {print} naam _ is wel een beetje bang_
                     dieren {is} 🦔, 🦉, 🐿, 🦇
-                    {print} 'Hij hoort het geluid van een ' dieren {at} {random}
-                    {print} naam ' is bang dat dit een spookbos is'
+                    {print} _Hij hoort het geluid van een _ dieren {at} {random}
+                    {print} naam _ is bang dat dit een spookbos is_
                     ```
                 start_code: "{print} 'Hier komt straks jouw verhaal!'"
             5:
@@ -532,6 +541,9 @@ adventures:
                     ## Verhaal
                     Soms zegt iemand in een verhaal iets meerdere keren. Bijvoorbeeld als iemand om hulp roept, of een liedje zingt.
                     Dat kun je nu in je verhaal zetten met `{repeat}`.
+
+                    ## Uitdaging
+                    Kun jij ook herhaling in jouw verhaal gebruiken?
                 example_code: |
                     ```
                     {print} 'De prins riep steeds om hulp'
@@ -543,6 +555,9 @@ adventures:
                 story_text: |
                     ## Verhaal
                     In dit level kun je je verhaal écht interactief maken! In dit level is het `{if}` commando namelijk veranderd, waardoor je meerdere regels kan printen na een `{if}`. Zo kun je de lezer van je verhaal een keuze laten maken. Na de keuze gaat het verhaal verder op basis van die keuze. Kijk maar naar het voorbeeld.
+
+                    ## Uitdaging
+                    Kun jij jouw eigen interactieve verhaal maken met twee verschillende eindes?
                 example_code: |
                     ```
                     hoofdpersoon = {ask} 'Hoe heet de hoofdpersoon in dit verhaal?'
@@ -703,9 +718,17 @@ adventures:
                     {echo}
                     {echo}
                     ```
+                story_text_2: |
+                    ## Uitdaging
+                    Kun jij de papegaai een andere vraag laten stellen? Vul de vraag in op het lijntje.
+                example_code_2: |
+                    ```
+                    {print} Ik ben Hedy de papegaai
+                    {ask} _
+                    {echo}
+                    {echo}
+                    ```
                 start_code: "{print} Ik ben Hedy de papegaai!"
-                story_text_2: "## Challenge\nCan you make the parrot ask a different question? Fill in the blanks in the example!\n"
-                example_code_2: "```\n{print} Im Hedy the parrot\n{ask} _\n{echo}\n{echo}\n"
             2:
                 story_text: |
                     ## Papegaai
@@ -721,12 +744,27 @@ adventures:
                     {print} naam
                     ```
                 start_code: "{print} Ik ben Hedy de papegaai!"
-                story_text_2: "## Challenge\nYou can use variables to make the parrot say more than only your name. Can you complete this code?\n"
-                example_code_2: "```\n{print} Im Hedy the parrot\nname {is} {ask} whats your name?\n{print} name\n{sleep}\n{print} name\nsurname {is} {ask} whats your surname?\n_\n{sleep}\n_\n```\n"
+                story_text_2: |
+                    ## Uitdaging
+                    Je kunt variabelen gebruiken om de papegaai meer te laten zeggen dat alleen je naam. Kun jij deze code afmaken?
+                example_code_2: |
+                    ```
+                    {print} Ik ben Hedy de papegaai
+                    naam {is} {ask} Wat is jouw naam?
+                    {print} naam
+                    {sleep}
+                    {print} naam
+                    achternaam {is} {ask} Wat is jouw achternaam?
+                    _
+                    {sleep}
+                    _
+                    ```
             3:
                 story_text: |
                     ## Papegaai
                     Leer je papegaai nieuwe woordjes met het `{add}` commando!
+                    ## Uitdaging
+                    Hoe kun je de papegaai meerde woorden laten zeggen?
                 example_code: |
                     ```
                     woorden {is} lorre, Hedy
@@ -750,8 +788,8 @@ adventures:
                     {print} '🧒 Zeg ' nieuw_woord ', Hedy!'
                     gezegd_woord {is} woorden {at} {random}
                     {print} '🦜 ' gezegd_woord
-                    {if} gezegd_woord {is} nieuw_woord {print} '🧒 Goedzo! 🍪'
-                    {else} {print} '🧒 Nee! Zeg ' nieuw_woord
+                    _ gezegd_woord {is} nieuw_woord _ '🧒 Goedzo! 🍪'
+                    _ _ '🧒 Nee! Zeg ' nieuw_woord
                     ```
                 start_code: "# Schrijf jouw code hier"
     songs:
@@ -764,6 +802,9 @@ adventures:
                     ## Liedjes
                     In liedjes zit vaak veel herhaling. Soms wordt er in die herhaling ook geteld.
                     Bijvoorbeeld in het welbekende potje met vet. Dat kan je met een beetje rekenen zelf programmeren.
+
+                    ## Uitdaging
+                    Je kunt nu regel 2 t/m 9 zo vaak herhalen als je wil door de regels te kopiëren en plakken.
                 example_code: |
                     ```
                     couplet = 1
@@ -776,13 +817,23 @@ adventures:
                     couplet = couplet + 1
                     {print} 'Door naar het ' couplet 'e couplet'
                     ```
-                    Regels 2 t/m 9 kun je nu zo vaak herhalen als je maar wilt, door de regels te kopiëren.
 
                     Na het potje met vet kun je natuurlijk ook nog andere liedjes programmeren. Er zijn veel liedjes met tellen erin.
                     Misschien kun jij het liedje 99 bottles of beer ook wel maken! Daar tellen we af in plaats van op.
-                start_code: "{print} 'Baby shark'"
-                story_text_2: "## 5 Little Monkeys jumping on the bed\nThis children's song counts down from 5 little monkeys to 1 monkey.\nIf you copy line 2 - 7 and paste it under the the code, you can sing the whole song!\n"
-                example_code_2: "```\nnumber = 6\nnumber = number - 1\nprint number ' little monkeys jumping on the bed'\nprint 'One fell off and bumped his head'\nprint 'Mama called the doctor and the doctor said'\nprint 'NO MORE MONKEYS JUMPING ON THE BED!'\nsleep\n```\n"
+                start_code: "{print} 'Zing een liedje!'"
+                story_text_2: |
+                    ## 10 kleine visjes
+                    Dit kinderliedje telt van 10 visjes naar 1 visje. Kopieer regel 2 tot en met 7 om het hele lied te maken!
+                example_code_2: |
+                    ```
+                    nummer = 11
+                    nummer = nummer - 1
+                    {print} nummer 'kleine visjes zwommen naar de zee'
+                    {print} 'Moeder zei ik ga niet mee! '
+                    {print} 'Ik blijf liever in de vieze oude sloop want in de zee daar zwemmen haaien en die bijten je'
+                    {print} 'BLUB BLUB BLUB BLUB BLUB BLUB BLUB BLUB BLUB BLUB BLUB BLUB BLUB'
+                    {sleep}
+                    ```
             7:
                 story_text: |
                     ## Liedjes
@@ -808,7 +859,7 @@ adventures:
                     Nu kun je meerdere regels herhalen, wat heel fijn is in liedjes!
                 example_code: |
                     ```
-                    {repeat} 3 {times}
+                    _ 3 {times}
                         dier = {ask} 'Welk dier kies je?'
                         {print} 'En wie rijdt er op zijn ' dier ' door de prairie?'
                         {print} 'Dat is cowboy Billie Boem, door de boeven zeer gevreesd!'
@@ -826,7 +877,26 @@ adventures:
                     Ook in dit level kunnen we weer liedjes zingen, bijv. Baby Shark.
                     Met de nieuwe code `{for}` kunnen we voor de hele familie in een keer printen. Eerst zetten we alle dieren in een lijst familie. Nu gaan we steeds voor een van de familieleden het liedje printen.
                     Dat scheelt een hoop regels code!
+
+
+
+                    ## Uitdagingen
+                    Kun jij ook het laatste couplet maken bij de 10 kleine visjes? Waarbij er nog maar 1 visje over is?
+
+                    Kun jij de code van baby shark nòg korter maken met een {repeat} commando?
+
+                    Kun jij nog wat dieren toevoegen aan de boerderij van Old McDonald?
                 example_code: |
+                    ## 10 kleine visjes
+                    ```
+                    monkeys = 10, 9, 8, 7, 6, 5, 4, 3, 2
+                    {for} vis {in} visjes
+                        {print} vis ' kleine visjes zwommen naar de zee'
+                        {print} 'Moeder zei ik ga niet mee!'
+                        {print} 'Ik blijf liever in de vieze oude sloop want in de zee daar zwemmen haaien en die bijten je'
+                        {print} 'BLUB BLUB BLUB BLUB BLUB BLUB BLUB BLUB BLUB BLUB BLUB BLUB BLUB'
+                    ```
+
                     ## Baby Shark
                     ```
                     familie = baby, mama, papa, opa, oma
@@ -862,10 +932,13 @@ adventures:
                 story_text: |
                     ## Zing een stapelliedje!
                     In dit level kun je makkelijk (af)tellen in een liedje. Zo kun je bijvoorbeeld het kinderliedje '10 kleine visjes' programmeren.
+
+                    ## Uitdaging
+                    Kun jij het liedje aan de praat krijgen?
                 example_code: |
                     ## 10 kleine visjes
                     ```
-                    {for} i {in} {range} 10 {to} 1
+                    _ _ _ _ 10 _ 1
                         {print} i ' kleine visjes zwommen naar de zee'
                         {print} 'Moeder zei: ik ga niet mee'
                         {print} 'Ik blijf liever in de vieze oude sloot'
@@ -881,16 +954,20 @@ adventures:
                 story_text: |
                     ## Zing een liedje
                     In dit level kun je meerdere woorden in een variabele opslaan. Dat komt goed uit bij liedjes zoals het Engelse kinderliedje 'if you're happy and you know it, clap your hands'. Kijk maar:
+
+                    ## Uitdaging
+                    Kun jij de regels beginnen met de goede hoeveelheid spaties om het liedje aan de praat te krijgen?
+                    Let op: Je hoeft niet overal in te springen!
                 example_code: |
                     ```
-                    actions = 'clap your hands', 'stomp your feet', 'shout Hurray!'
-                    {for} action {in} actions
-                        {for} i {in} {range} 1 {to} 2
-                            {print} 'if youre happy and you know it'
-                            {print} action
-                        {print} 'if youre happy and you know it {and} you really want to show it'
-                        {print} 'if youre happy and you know it'
-                        {print} action
+                    _ actions = 'clap your hands', 'stomp your feet', 'shout Hurray!'
+                    _ {for} action {in} actions
+                    _ {for} i {in} {range} 1 {to} 2
+                    _ {print} 'if youre happy and you know it'
+                    _ {print} action
+                    _ {print} 'if youre happy and you know it {and} you really want to show it'
+                    _ {print} 'if youre happy and you know it'
+                    _ {print} action
                     ```
                 start_code: "# Schrijf jouw code hier"
             16:
