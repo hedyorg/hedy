@@ -78,13 +78,13 @@
         {if} color {is} verde {print} 'qué bonito!' {else} {print} 'no es tan bonito'
 -   demo_code: "respuesta {is} {ask} '¿Cuán lejos debería caminar?'\n{if} respuesta {is} lejos {forward} 100 {else} {forward} 5"
     name: '{if} con tortuga'
-    explanation: Toma una decisión con `{if}`
+    explanation: Haga una elección con `{if}`.
 -   name: '{in}'
-    explanation: Comprueba elementos con `{in}`
+    explanation: Comprobar elementos con `{in}`.
     demo_code: "colores_bonitos {is} verde, amarillo\ncolor {is} {ask} '¿Cuál es tu color favorito?'\n{if} color {in} colores_bonitos {print} '¡Bonito!' {else} {print} 'No es tan bonito'"
 -   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
-    demo_code: "{if} a {is} {pressed} {print} 'You pressed A!' {else} {print} 'You pressed another key!'"
+    explanation: Comprueba si una tecla determinada del teclado está `{pressed}`.
+    demo_code: "{if} a {is} {pressed} {print} '¡Presionas A!' {else} {print} '¡Presionaste otra tecla!'"
 6:
 -   name: "{print}"
     explanation: "Mostrar un texto literal con usando comillas simples."
@@ -132,12 +132,12 @@
         {else}
             {print} '¡Ups!'
             {print} 'La respuesta es 10'
--   name: '`{repeat}` con tortuga'
+-   name: '{repeat} con tortuga'
     explanation: 'Repite varias líneas.'
     demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
 -   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
-    demo_code: "{if} a {is} {pressed}\n    {print} 'You pressed A!'\n{else}\n    {print} 'You pressed another key!'"
+    explanation: Comprueba si una tecla determinada del teclado está `{pressed}`.
+    demo_code: "{if} a {is} {pressed}\n    {print} '¡Presionaste A!'\n{else}\n    {print} '¡Presionaste otra tecla!'"
 9:
 -   name: "{if} con varias líneas"
     explanation: "La respuesta a una pregunta de sumas con `{ask}` y ve si está correcto. Ahora muestra dos líneas."
@@ -150,7 +150,7 @@
             {print} 'Mal'
             {print} 'La respuesta es 20'
 -   name: "{repeat} con la tortuga"
-    explanation: "Repeat con varias líneas"
+    explanation: "Repite varias líneas."
     demo_code: |-
         {repeat} 4 {times}
             {turn} 90
