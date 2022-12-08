@@ -114,10 +114,12 @@ only_new_snippets = os.getenv('only_new_snippets')
 
 if only_new_snippets is None:
     only_new_snippets = False  # set default in case env var is not set (f.e. on Windows, or when running form the UI)
-elif only_new_snippets is 1:
+elif only_new_snippets == '1':
     only_new_snippets = True
-else: # in case an invalid one is given
+else:  # in case an invalid one is given
     only_new_snippets = False
+
+only_new_snippets = False
 
 try:
     with open('adventure_hashes.pkl', 'rb') as f:
@@ -156,7 +158,6 @@ class TestsAdventurePrograms(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.tests_ran = 0
         cls.all_tests_passed = True
         cls.hashes_saved = hashes_saved
         cls.new_hashes = set()
@@ -165,7 +166,6 @@ class TestsAdventurePrograms(unittest.TestCase):
     def test_adventures(self, name, snippet):
 
         if snippet is not None:
-            self.tests_ran += 1
             result = HedyTester.check_Hedy_code_for_errors(snippet)
             if result is not None:
                 print(f'\n----\n{snippet.code}\n----')
@@ -180,7 +180,7 @@ class TestsAdventurePrograms(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        if cls.tests_ran == len(Hedy_snippets) and cls.all_tests_passed:
+        if cls.all_tests_passed:
             # fetch already saved hashes
             all_hashes = cls.hashes_saved | cls.new_hashes  # and merge in the new ones
             with open('adventure_hashes.pkl', 'wb') as f:
