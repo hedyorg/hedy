@@ -49,12 +49,17 @@ jobs:
       with:
         record: true
           # build: npm run build
-          #
         start: env HEROKU_APP_NAME=localhost SECRET_KEY=TheSecret python app.py
-        config-file: tests/cypress.config.js
         wait-on: 'http://localhost:8080'
         # We have already installed all dependencies
         install: false
+        # Where cypress.config.js lives, requires 'install: false'
+        working-directory: tests/
+      env:
+        # pass the Cypress Cloud record key as an environment variable
+        CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+        # pass GitHub token to allow accurately detecting a build vs a re-run build
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Run weblate tests
       shell: pwsh
       id: weblate_tests
