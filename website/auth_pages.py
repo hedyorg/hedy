@@ -146,6 +146,15 @@ class AuthModule(WebsiteModule):
         if "country" in body:
             if not body["country"] in COUNTRIES:
                 return gettext("country_invalid"), 400
+        if "heard_about" in body:
+            if isinstance(body["heard_about"], str):
+                body["heard_about"] = [body["heard_about"]]
+            if not isinstance(body["heard_about"], list):
+                return gettext("heard_about_invalid"), 400
+            for option in body["heard_about"]:
+                if option not in ["from_another_teacher", "social_media", "from_video", "from_magazine_website", \
+                    "other_source"]:
+                    return gettext("heard_about_invalid"), 400
         if "prog_experience" in body and body["prog_experience"] not in ["yes", "no"]:
             return gettext("experience_invalid"), 400
         if "experience_languages" in body:
@@ -168,8 +177,7 @@ class AuthModule(WebsiteModule):
         if not is_testing_request(request) and "subscribe" in body:
             # If we have a Mailchimp API key, we use it to add the subscriber through the API
             if MAILCHIMP_API_URL:
-                role = "teacher" if "is_teacher" in body else "student"
-                mailchimp_subscribe_user(user["email"], body["country"], role)
+                mailchimp_subscribe_user(user["email"], body["country"])
             # Otherwise, we send an email to notify about the subscription to the main email address
             else:
                 send_email(
@@ -426,8 +434,11 @@ class AuthModule(WebsiteModule):
             "last_login": timems(),
         }
 
-        for field in ["country", "birth_year", "gender", "language", "prog_experience", "experience_languages"]:
+        for field in ["country", "birth_year", "gender", "language", "heard_about", "prog_experience", \
+            "experience_languages"]:
             if field in account:
+                if field == "heard_about" and len(account[field]) == 0:
+                    continue
                 if field == "experience_languages" and len(account[field]) == 0:
                     continue
                 user[field] = account[field]
