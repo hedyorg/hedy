@@ -49,9 +49,12 @@ jobs:
       with:
         record: true
           # build: npm run build
+          #
         start: env HEROKU_APP_NAME=localhost SECRET_KEY=TheSecret python app.py
-        working-directory: tests/
+        config-file: tests/cypress.config.js
         wait-on: 'http://localhost:8080'
+        # We have already installed all dependencies
+        install: false
     - name: Run weblate tests
       shell: pwsh
       id: weblate_tests
