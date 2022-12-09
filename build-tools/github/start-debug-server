@@ -29,7 +29,7 @@ endpoint=http://localhost:$PORT
 # //////////////////////////////////////////////////////////////////////
 # Run directly or in the background
 
-command="env HEROKU_APP_NAME=localhost BASE_URL=$endpoint SECRET_KEY=TheSecret python app.py"
+command="env HEROKU_APP_NAME=localhost BASE_URL=$endpoint SECRET_KEY=TheSecret ADMIN_USER=admin python app.py"
 
 if ! $daemon; then
     exec eval "$command"
