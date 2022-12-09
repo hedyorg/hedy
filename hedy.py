@@ -1570,17 +1570,7 @@ class ConvertToPython_2(ConvertToPython_1):
         parameter = args[0]
         value = args[1]
         if self.is_random(value) or self.is_list(value):
-            if self.is_list(value):
-                var_name = value.split('[')[0]
-            else:
-                var_name = re.search(r'random\.choice\((.+)\)', value).group(1)
-            exception_text = gettext('catch_index_exception').replace('{list_name}', style_command(var_name))
-            exception = textwrap.dedent(f"""\
-            try:
-              {value}
-            except IndexError:
-              raise Exception('{exception_text}')
-            """)
+            exception = self.make_catch_exception_single_var(value)
             return exception + parameter + " = " + value
         else:
             if self.is_variable(value):
@@ -1590,6 +1580,19 @@ class ConvertToPython_2(ConvertToPython_1):
                 # if the assigned value is not a variable and contains single quotes, escape them
                 value = process_characters_needing_escape(value)
                 return parameter + " = '" + value + "'"
+
+    def make_catch_exception_single_var(self, value):
+        if self.is_list(value):
+            var_name = value.split('[')[0]
+        else:
+            var_name = re.search(r'random\.choice\((.+)\)', value).group(1)
+        exception_text = gettext('catch_index_exception').replace('{list_name}', style_command(var_name))
+        return textwrap.dedent(f"""\
+            try:
+              {value}
+            except IndexError:
+              raise Exception('{exception_text}')
+            """)
 
     def sleep(self, meta, args):
         if not args:
@@ -1829,7 +1832,11 @@ class ConvertToPython_6(ConvertToPython_5):
         else:
             if self.is_variable(value):
                 value = self.process_variable(value, meta.line)
-                return parameter + " = " + value
+                if self.is_list(value) or self.is_random(value):
+                    exception = self.make_catch_exception_single_var(value)
+                    return exception + parameter + " = " + value
+                else:
+                    return parameter + " = " + value
             else:
                 # if the assigned value is not a variable and contains single quotes, escape them
                 value = process_characters_needing_escape(value)
@@ -2100,7 +2107,11 @@ class ConvertToPython_12(ConvertToPython_11):
             return left_hand_side + " = " + right_hand_side.children[0]
         else:
             # we no longer escape quotes here because they are now needed
-            return left_hand_side + " = " + right_hand_side + ""
+            if self.is_list(right_hand_side) or self.is_random(right_hand_side):
+                exception = self.make_catch_exception_single_var(right_hand_side)
+                return exception + left_hand_side + " = " + right_hand_side + ""
+            else:
+                return left_hand_side + " = " + right_hand_side + ""
 
     def var(self, meta, args):
         name = args[0]
