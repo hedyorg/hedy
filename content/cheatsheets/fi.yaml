@@ -1,0 +1,201 @@
+7:
+-   name: '{print}'
+    explanation: Tulosta tarkasti käyttäen heittomerkkejä.
+    demo_code: "{print} 'Tervetuloa Hedyn pariin.'"
+-   name: '{ask}'
+    explanation: Kysy jotain komennolla `{ask}`.
+    demo_code: "väri = {ask} 'Mikä on lempivärisi?'\n{print} väri ' on lempivärisi!'"
+-   name: '{if}'
+    explanation: Tee valinta komennolla `{if}`.
+    demo_code: "väri = {ask} 'Mikä on lempivärisi?'\n{if} väri {is} vihreä {print} 'hieno!' {else} {print} 'plääh'"
+-   name: '{repeat} kilpikonnan kanssa'
+    explanation: Toista koodirivi komennolla `{repeat}`.
+    demo_code: '{repeat} 3 {times} {forward} 10'
+12:
+-   demo_code: "{print} 'Laskehan!'\n{print} 'Kaksi ja puoli plus kaksi ja puoli on yhteensä...'\n{print} 2.5 + 2.5\n"
+    name: float directly
+    explanation: Desimaaliluvut.
+-   name: assign text
+    explanation: Teksti lainausmerkeissä merkin `=` jälkeen
+    demo_code: "nimi = 'Hedy robotti'\n{print} 'Hei ' nimi\n"
+-   name: heittomerkit {if} vertailun jälkeen
+    explanation: Teksti lainausmerkeissä komennon `{if}` jälkeen.
+    demo_code: "nimi = {ask} 'Kuka olet?'\n{if} nimi = 'Hedy'\n    {print} 'Moikka!'\n"
+-   name: lainausmerkit listassa
+    explanation: Lista käyttäen lainausmerkkejä.
+    demo_code: "supersankarit = 'Iron Man', 'Batman', 'Superman'\n{print} supersankarit {at} {random}\n"
+14:
+-   name: Pienempi
+    explanation: Käytämme merkkiä `<` tarkistaaksemme onko ensimmäinen numero toista numeroa pienempi.
+    demo_code: "ikä = {ask} 'Kuinka vanha olet?'\n{if} ikä < 13\n    {print} 'Olet minua nuorempi!'"
+-   name: Suurempi
+    explanation: Käytämme merkkiä `>` tarkistaaksemme onko ensimmäinen numero toista numeroa suurempi.
+    demo_code: "ikä = {ask} 'Kuinka vanha olet?'\n{if} ikä > 13\n    {print} 'Olet minua vanhempi!'"
+-   name: Yhtä suuri
+    explanation: Käytämme merkkejä `==` tarkistaaksemme ovatko kaksi asiaa samoja.
+    demo_code: "vastaus = {ask} 'Paljonko on 5 * 5?'\n{if} vastaus == 25\n    {print} 'Oikein!'"
+-   name: Eivät yhtä suuret
+    explanation: Käytämme merkkejä `!=` tarkistaaksemme ettei kaksi asiaa ole samoja.
+    demo_code: "vastaus = {ask} 'Paljonko on 5 * 5?'\n{if} vastaus != 25\n    {print} 'Väärin!'"
+-   name: Pienempi tai yhtäsuuri
+    explanation: Käytämme merkkejä `<=` tarkistaaksemme onko ensimmäinen numero pienempi tai yhtäsuuri kuin jälkimmäinen numero.
+    demo_code: "ikä = {ask} 'Kuinka vanha olet?'\n{if} ikä <= 12\n    {print} 'Olet minua nuorempi!'"
+-   name: Suurempi tai yhtäsuuri
+    explanation: Käytämme merkkejä `>=` tarkistaaksemme onko ensimmäinen numero suurempi tai yhtäsuuri kuin jälkimmäinen numero.
+    demo_code: "ikä = {ask} 'Kuinka vanha olet?'\n{if} ikä >= 14\n    {print} 'Olet minua vanhempi!'"
+1:
+-   name: '{print}'
+    explanation: Tulosta jotain komennolla `{print}`.
+    demo_code: '{print} Hei! Tervetuloa Hedyn pariin!'
+-   name: '{ask}'
+    explanation: Kysy jotain komennolla `{ask}`.
+    demo_code: '{ask} Mikä on lempivärisi?'
+-   name: '{echo}'
+    explanation: Toista jotain komennolla `{echo}`.
+    demo_code: "{ask} Mikä on lempivärisi?\n{echo} lempivärisi on siis"
+-   name: '{print} emojit'
+    explanation: Tulosta emoji komennolla `{print}`.
+    demo_code: '{print} 🙋 🌍 ❗'
+-   name: '{forward}'
+    explanation: Piirrä viiva komennolla `{forward}`.
+    demo_code: '{forward} 100'
+-   name: '{turn}'
+    explanation: Käännä piirtävä kilpikonna komennolla `{turn}`.
+    demo_code: "{forward} 25\n{turn} {left}\n{forward} 25\n{turn} {right}"
+2:
+-   name: '{is}'
+    explanation: Anna sanalle nimi jota voit käyttää myöhemmin ohjelmassa komennolla `{is}`. Voit valita nimen itse.
+    demo_code: "nimi {is} Hedy\n{print} Tervetuloa nimi"
+-   name: '{ask}'
+    explanation: Kysy jotain komennolla `{ask}`. Huomaa että sinun on annettava vastaukselle nimi käyttämällä komentoa `{is}`.
+    demo_code: "väri {is} {ask} Mikä on lempivärisi?\n{print} väri on lempivärisi!"
+-   name: '{sleep}'
+    explanation: '`{sleep}` anna Hedyn pitää (muutama) sekunti taukoa.'
+    demo_code: "{print} Annas kun ajattelen sekunnin...\n{sleep}\n{print} Hmm.. Tarvitsen vielä 3 sekuntia...\n{sleep} 3\n{print} Heureka! Keksin sen!"
+-   name: '{is} kilpikonnan kanssa'
+    explanation: Anna numerolle nimi käyttäen komentoa `{is}`. Voit valita nimen itse.
+    demo_code: "kulma {is} 90\n{turn} kulma\n{forward} 100"
+3:
+-   name: Valitse satunnainen
+    explanation: Valitse satunnainen sana listasta komennoilla `{at}` ja `{random}`.
+    demo_code: "eläimet {is} koira, kissa, kenguru\n{print} eläimet {at} {random}"
+-   name: '{add}'
+    explanation: '`{add}` asia `{to_list}`.'
+    demo_code: "eläimet {is} lehmä, kissa\n{add} koira {to_list} eläimet"
+-   name: '{remove}'
+    explanation: '`{remove}` asia `{from}`.'
+    demo_code: "eläimet {is} kissa, koira, lehmä\n{remove} koira {from} eläimet"
+4:
+-   name: '{print}'
+    explanation: Tulosta tarkasti käyttäen lainausmerkkejä.
+    demo_code: "{print} 'Hei! Tervetuloa Hedyn pariin.'"
+-   name: '{is}'
+    explanation: Anna tekstinpätkälle nimi ja käytä komentoa `{print}` ilman lainausmerkkejä.
+    demo_code: "nimi {is} Hedy\n{print} 'minun nimeni on' nimi"
+-   name: '{ask}'
+    explanation: Kysy jotain komennolla `{ask}`.
+    demo_code: "väri {is} {ask} 'Mikä on lempivärisi?'\n{print} väri ' on lempivärisi!'"
+5:
+-   name: '{print}'
+    explanation: Tulosta tarkasti käyttäen heittomerkkejä.
+    demo_code: "{print} 'Tervetuloa Hedyn pariin.'"
+-   name: '{ask}'
+    explanation: Kysy jotain komennolla `{ask}`.
+    demo_code: "väri {is} {ask} 'Mikä on lempivärisi?'\n{print} väri ' on lempivärisi!'"
+-   name: '{if}'
+    explanation: Tee valinta komennolla `{if}`.
+    demo_code: "väri {is} {ask} 'Mikä on lempivärisi?'\n{if} väri {is} vihreä {print} 'hieno!' {else} {print} 'plääh'"
+-   name: '{if} kilpikonnan kanssa'
+    explanation: Tee valinta komennolla `{if}`.
+    demo_code: "vastaus {is} {ask} 'Kuinka pitkälle minun pitäisi kävellä?'\n{if} vastaus {is} kauas {forward} 100 {else} {forward} 5"
+-   name: '{in}'
+    explanation: Tarkista onko asia listassa komennolla `{in}`.
+    demo_code: "hienot_värit {is} vihreä, keltainen\nväri {is} {ask} 'Mikä on lempivärisi?'\n{if} väri {in} hienot_värit {print} 'hieno!' {else} {print} 'plääh'"
+6:
+-   name: '{print}'
+    explanation: Tulosta tarkasti käyttäen heittomerkkejä.
+    demo_code: "{print} '5 kertaa 5 on ' 5 * 5"
+-   name: '{ask}'
+    explanation: Kysy laskun tulos ja tarkista onko se oikein.
+    demo_code: "vastaus = {ask} 'Paljonko on 10 plus 10?'\n{if} vastaus {is} 20 {print} 'Kyllä!' {else} {print} 'Oho'"
+-   name: '{ask} ja {if} kilpikonnan kanssa'
+    explanation: 'Ask the user how many angles they want.'
+    demo_code: "angles = {ask} 'How many angles?'\nangle = 360 / angles\n{forward} 50"
+8:
+-   name: '{print}'
+    explanation: Tulosta jotain. Muista käyttää lainausmerkkejä.
+    demo_code: "{print} '5 kertaa 5 on ' 5 * 5"
+-   name: '{ask}'
+    explanation: Kysy vastausta ja tarkista, onko se oikein. Voimme nyt tulostaa 2 riviä.
+    demo_code: "vastaus = {ask} 'Paljonko on 5 + 5?'\n{if} vastaus {is} 10\n    {print} 'Hienoa!'\n    {print} 'Vastaus on tosiaan ' vastaus\n{else}\n    {print} 'Oho!'\n    {print} 'Vastaus on 10'"
+-   name: '{repeat} kilpikonnan kanssa'
+    explanation: Toista monta riviä.
+    demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
+9:
+-   name: '{if} monelle riville'
+    explanation: The answer of a sum of questions with `{ask}` and see if it is correct. Now we print out two lines.
+    demo_code: "vastaus = {ask} 'Paljonko on 10 plus 10?'\n{if} vastaus {is} 20\n    {print} 'Hienoa!!'\n    {print} 'Vastaus on tosiaan' vastaus\n{else}\n    {print} 'Väärin'\n    {print} 'Vastaus on 10'"
+-   name: '{repeat} kilpikonnan kanssa'
+    explanation: Toista monta riviä.
+    demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
+10:
+-   name: '{print}'
+    explanation: Print something. Remember to use a quotation mark for literal printing.
+    demo_code: "{print} '5 kertaa 5 on ' 5 * 5"
+-   name: '{for} listojen kanssa'
+    explanation: Tulosta kaikki asiat listasta.
+    demo_code: "eläimet {is} koira, kissa, kala\n{for} eläin {in} eläimet\n  {print} eläin 'on ihana'"
+11:
+-   name: '{for} silmukka'
+    explanation: Voimme käyttää komentoa `{for}` komennon `{range}` kanssa.
+    demo_code: "{for} laskuri {in} {range} 1 {to} 5\n    {print} laskuri"
+-   name: '{ask}'
+    explanation: Kysy vastausta ja tarkista, onko se oikein. Voimme nyt tulostaa 2 riviä.
+    demo_code: "vastaus = {ask} 'Paljonko on 5 + 5?'\n{if} vastaus {is} 10\n    {print} 'Hienoa!'\n    {print} 'Vastaus on tosiaan ' vastaus\n{else}\n    {print} 'Oho!'\n    {print} 'Vastaus on 10'"
+13:
+-   name: '{and}'
+    explanation: Kaksi osaa joiden molempien on oltava oikein.
+    demo_code: "vastaus1 = {ask} 'Paljonko on 3+2'\nvastaus2 = {ask} 'Paljonko on 2+2?'\n{if} vastaus1 {is} 5 {and} vastaus2 {is} 4\n    {print} 'Molemmat vastaukset ovat oikein!'\n{else}\n    {print} 'Ainakin toinen vastauksista on väärin!'"
+-   name: '{or}'
+    explanation: Ainakin toisen vastauksista on oltava oikein. Jos molemmat vastaukset ovat oikein, sekin on ok.
+    demo_code: "vastaus1 = {ask} 'Paljonko on 3+2'\nvastaus2 = {ask} 'Paljonko on 2+2?'\n{if} vastaus1 {is} 5 {or} vastaus2 {is} 4\n    {print} 'Ainakin toinen vastauksista on oikein!'\n{else}\n    {print} 'Molemmat vastaukset ovat väärin!'"
+15:
+-   name: '{while}'
+    explanation: Voimme käyttää `{while}` silmukkaa erisuuruuden kanssa.
+    demo_code: "vastaus = 0\n{while} vastaus != 25\n    vastaus = {ask} 'Paljonko on 5 kertaa 5?'\n{print} 'Oikea vastaus on annettu'"
+-   name: Pienempi {while}
+    explanation: We can also use the `{while}` loop with `<` and `>`.
+    demo_code: "count = 1\n{while} count < 3\n    {print} 'We do this ' 3 - count ' more times'\n    count = count + 1\n{print} 'We are done'"
+16:
+-   name: square brackets
+    explanation: Lists with square brackets.
+    demo_code: "fruit = ['apple', 'banana', 'cherry']\n{print} fruit"
+-   name: Get an item from a list
+    explanation: To get an item from a list we use [number] so fruit[1] means, get the first fruit from the list!
+    demo_code: "fruit = ['banana', 'apple', 'cherry']\nfirstfruit = fruit[1]\n{print} firstfruit"
+-   name: Get a random item from a list
+    explanation: To get a random item from a list we use [random] so fruit[random] means, get a random fruit from the list!
+    demo_code: "fruit = ['banana', 'apple', 'cherry']\nrandom_fruit = fruit[{random}]\n{print} random_fruit"
+17:
+-   name: '{elif}'
+    explanation: '`{elif}`'
+    demo_code: "a = 2\n{if} a == 1:\n    {print} 'a is 1'\n{elif} a == 2:\n    {print} 'a is 2'\n{else}:\n    {print} 'a is not 1 or 2'"
+-   name: '{print}'
+    explanation: When we use a `{for}`, we need to put a `:` behind the `{for}` statement!
+    demo_code: "{for} i {in} {range} 1 {to} 12:\n    {print} i\n{print} 'Ready or not, here I come!'"
+-   name: '{if}'
+    explanation: We need to do the same with all of our `{if}` statements.
+    demo_code: "color = {ask} 'What is your favorite color?'\n{if} color == 'green':\n    {print} 'Your favorite color is green'\n{else}:\n    {print} 'Your favorite color is not green'"
+18:
+-   name: '{print}'
+    explanation: After `{print}` you need to use parentheses.
+    demo_code: "{print}('hi!')"
+-   name: '{range}'
+    explanation: After `{range}` you need to use parentheses.
+    demo_code: "{for} i {in} {range} (1,10):\n    {print}('Hello, times ', i)"
+-   name: '{print} with var'
+    explanation: With `{print}` you need to use parentheses and commas if you print more items.
+    demo_code: "name = 'Hedy'\n{print}('my name is ', name)"
+-   name: ask something with {input}
+    explanation: Use `{input}` instead of `{ask}` to ask something.
+    demo_code: "name = {input}('What is your name?')\n{print}('So your name is ', name)"
