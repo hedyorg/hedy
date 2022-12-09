@@ -48,13 +48,13 @@ jobs:
       uses: cypress-io/github-action@v4
       with:
         record: true
-          # build: npm run build
-        start: env HEROKU_APP_NAME=localhost SECRET_KEY=TheSecret python app.py
+        # Where cypress.config.js and all the other cypress files live, requires 'install: false'
+        # and need to take this into account for other paths.
+        working-directory: tests/
+        start: 'cd .. && env HEROKU_APP_NAME=localhost SECRET_KEY=TheSecret python app.py'
         wait-on: 'http://localhost:8080'
         # We have already installed all dependencies
         install: false
-        # Where cypress.config.js lives, requires 'install: false'
-        working-directory: tests/
       env:
         # pass the Cypress Cloud record key as an environment variable
         CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
