@@ -8,7 +8,6 @@ module.exports = {
       '../../../main/**/*.md',
       '../../../content/**/*.md',
       '../../../static/js/*.ts',
-      "./node_modules/flowbite/**/*.js"
   ],
   theme: {
     extend: {},
@@ -165,7 +164,5 @@ module.exports = {
   variants: {},
   corePlugins: {
   },
-  plugins: [
-        require('flowbite/plugin')
-    ]
+  plugins: [],
 }
