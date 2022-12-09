@@ -44,23 +44,6 @@ jobs:
         $SourceDiff = $diff | Where-Object { $_ -match '^content/' -or $_ -match '^grammars/' -or $_ -match '^highlighting/' -or $_ -match '^tests/' -or $_ -match '^app.py' -or $_ -match '^hedy.py'}
         $HasDiff = $SourceDiff.Length -gt 0
         Write-Host "::set-output name=docs_changed::$HasDiff"
-    - name: Cypress run
-      uses: cypress-io/github-action@v4
-      with:
-        record: true
-        # Where cypress.config.js and all the other cypress files live, requires 'install: false'
-        # and need to take this into account for other paths.
-        working-directory: tests/
-        # Best to go via NPM/package.json, the cypress GHA is very opinionated on what it will accept here
-        start: npm run start-debug-server
-        wait-on: 'http://localhost:8080'
-        # We have already installed all dependencies
-        install: false
-      env:
-        # pass the Cypress Cloud record key as an environment variable
-        CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-        # pass GitHub token to allow accurately detecting a build vs a re-run build
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Run weblate tests
       shell: pwsh
       id: weblate_tests
