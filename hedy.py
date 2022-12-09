@@ -1457,7 +1457,7 @@ class ConvertToPython_1(ConvertToPython):
         return self.make_turtle_color_command(parameter, Command.color, 'pencolor')
 
     def make_turtle_command(self, parameter, command, command_text, add_sleep):
-        variable = self.get_fresh_var('trtl')
+        variable = self.get_fresh_var('__trtl')
         transpiled = textwrap.dedent(f"""\
             {variable} = {parameter}
             try:
@@ -1470,7 +1470,7 @@ class ConvertToPython_1(ConvertToPython):
         return transpiled
 
     def make_turtle_color_command(self, parameter, command, command_text):
-        variable = self.get_fresh_var('trtl')
+        variable = self.get_fresh_var('__trtl')
         return textwrap.dedent(f"""\
             {variable} = f'{parameter}'
             if {variable} not in {command_make_color}:
@@ -2088,7 +2088,7 @@ class ConvertToPython_12(ConvertToPython_11):
         return self.make_forward(float(args[0]))
 
     def make_turtle_command(self, parameter, command, command_text, add_sleep):
-        variable = self.get_fresh_var('trtl')
+        variable = self.get_fresh_var('__trtl')
         transpiled = textwrap.dedent(f"""\
             {variable} = {parameter}
             try:
