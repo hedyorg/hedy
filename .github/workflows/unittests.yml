@@ -44,6 +44,13 @@ jobs:
         $SourceDiff = $diff | Where-Object { $_ -match '^content/' -or $_ -match '^grammars/' -or $_ -match '^highlighting/' -or $_ -match '^tests/' -or $_ -match '^app.py' -or $_ -match '^hedy.py'}
         $HasDiff = $SourceDiff.Length -gt 0
         Write-Host "::set-output name=docs_changed::$HasDiff"
+    - name: Cypress run
+      uses: cypress-io/github-action@v4
+      with:
+        record: true
+          # build: npm run build
+        start: env HEROKU_APP_NAME=localhost SECRET_KEY=TheSecret python app.py
+        wait-on: 'http://localhost:8080'
     - name: Run weblate tests
       shell: pwsh
       id: weblate_tests
@@ -60,9 +67,3 @@ jobs:
       if: ${{ (steps.check_file_changed.outputs.docs_changed != 'True' && github.event.pull_request.user.login != 'weblate') }}
       run: |
         build-tools/github/validate
-    - name: Cypress run
-      uses: cypress-io/github-action@v4
-      with:
-        record: true
-          # build: npm run build
-        start: env HEROKU_APP_NAME=localhost SECRET_KEY=TheSecret python app.py
