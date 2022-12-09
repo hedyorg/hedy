@@ -2570,7 +2570,7 @@ def preprocess_ifs(code, lang='en'):
             command_plus_translated_command = [command, KEYWORDS[lang].get(command)]
             for c in command_plus_translated_command:
                 #  starts with the keyword and next character is a space
-                if line[0:len(c)] == c and line[len(c)] == ' ':
+                if line[0:len(c)] == c and (len(c) == len(line) or line[len(c)] == ' '):
                     return True
             return False
         else:
