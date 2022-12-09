@@ -5,7 +5,7 @@ describe('Is able to type in the editor box', () => {
       goToHedyPage();
 
       cy.get('#editor').type('ask What is your name?\necho hello');
-      cy.get('#editor > .ace_scroller > .ace_content .ace_line').should('have.text', 'ask What is your name?');
-      cy.get('#editor > .ace_scroller > .ace_content .ace_line').should('have.text', 'echo hello');
+      cy.get('#editor > .ace_scroller > .ace_content').should('have.text', 'ask What is your name?');
+      cy.get('#editor > .ace_scroller > .ace_content').should('have.text', 'echo hello');
     })
 })
