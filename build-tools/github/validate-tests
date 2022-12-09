@@ -11,7 +11,7 @@ echo "------> Python unit tests"
 
 # This is expected to run from the repo root
 if [[ "${1:-}" == "--all" ]]; then
-  python -m pytest
+  python -m pytest --ignore=tests/test_public_programs
 elif [[ "${1:-}" == "--weblate" ]]; then
   python -m pytest tests/test_snippets/test_adventures.py -s --tb=no -rN
 else

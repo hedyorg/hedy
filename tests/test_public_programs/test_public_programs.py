@@ -3,7 +3,7 @@ import unittest
 from tests.Tester import HedyTester, Snippet
 from parameterized import parameterized
 
-most_recent_file_name = 'tests/test-public-programs/filtered-programs-2022-12-01.json'
+most_recent_file_name = 'tests/test_public_programs/filtered-programs-2022-12-01.json'
 public_snippets = []
 
 # this file tests all public programs in the database
