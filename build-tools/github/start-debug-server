@@ -1,0 +1,6 @@
+#!/bin/bash
+set -eu
+scriptdir=$(cd $(dirname $0) && pwd)
+# CD to root
+cd $scriptdir/../..
+exec env HEROKU_APP_NAME=localhost SECRET_KEY=TheSecret python app.py
