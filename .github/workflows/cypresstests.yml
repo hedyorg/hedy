@@ -10,7 +10,8 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  # This identifier gets used in .mergify.yml
+  cypress:
     runs-on: ubuntu-latest
 
     steps:
