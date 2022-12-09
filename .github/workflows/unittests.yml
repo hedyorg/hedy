@@ -50,6 +50,7 @@ jobs:
         record: true
           # build: npm run build
         start: env HEROKU_APP_NAME=localhost SECRET_KEY=TheSecret python app.py
+        working-directory: tests/
         wait-on: 'http://localhost:8080'
     - name: Run weblate tests
       shell: pwsh
