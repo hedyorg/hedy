@@ -896,18 +896,18 @@ class TestsLevel6(HedyTester):
 
         expected = textwrap.dedent("""\
         num = '10'
-        trtl = int(num) + int(10)
+        __trtl = int(num) + int(10)
         try:
-          trtl = int(trtl)
+          __trtl = int(__trtl)
         except ValueError:
-          raise Exception(f'While running your program the command <span class=\"command-highlighted\">turn</span> received the value <span class=\"command-highlighted\">{trtl}</span> which is not allowed. Try changing the value to a number.')
-        t.right(min(600, trtl) if trtl > 0 else max(-600, trtl))
-        trtl = int(10) + int(num)
+          raise Exception(f'While running your program the command <span class=\"command-highlighted\">turn</span> received the value <span class=\"command-highlighted\">{__trtl}</span> which is not allowed. Try changing the value to a number.')
+        t.right(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
+        __trtl = int(10) + int(num)
         try:
-          trtl = int(trtl)
+          __trtl = int(__trtl)
         except ValueError:
-          raise Exception(f'While running your program the command <span class=\"command-highlighted\">forward</span> received the value <span class=\"command-highlighted\">{trtl}</span> which is not allowed. Try changing the value to a number.')
-        t.forward(min(600, trtl) if trtl > 0 else max(-600, trtl))
+          raise Exception(f'While running your program the command <span class=\"command-highlighted\">forward</span> received the value <span class=\"command-highlighted\">{__trtl}</span> which is not allowed. Try changing the value to a number.')
+        t.forward(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
         time.sleep(0.1)""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
