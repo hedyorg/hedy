@@ -51,7 +51,8 @@ jobs:
         # Where cypress.config.js and all the other cypress files live, requires 'install: false'
         # and need to take this into account for other paths.
         working-directory: tests/
-        start: ../build-tools/github/start-debug-server
+        # Best to go via NPM/package.json, the cypress GHA is very opinionated on what it will accept here
+        start: npm run start-debug-server
         wait-on: 'http://localhost:8080'
         # We have already installed all dependencies
         install: false
