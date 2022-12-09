@@ -61,7 +61,8 @@ jobs:
       run: |
         build-tools/github/validate
     - name: Cypress run
-      uses: cypress-io/github-action@v4.2.2
+      uses: cypress-io/github-action@v4
       with:
+        record: true
         build: npm run build
         start: npm start
