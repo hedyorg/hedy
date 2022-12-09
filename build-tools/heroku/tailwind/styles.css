@@ -512,12 +512,9 @@ p.close-dialog {
   transition: all 0.5s ease-in-out;
 }
 
-body[dir='rtl'] input:checked ~ .toggle-circle {
-  transform: translateX(-200%);
-}
-
 body[dir='ltr'] input:checked ~ .toggle-circle {
-  transform: translateX(200%);
+  transform: translateX(100%);
+  @apply bg-green-400;
 }
 
 body[dir='rtl'] input:checked ~ .toggle-circle {
@@ -525,9 +522,15 @@ body[dir='rtl'] input:checked ~ .toggle-circle {
   @apply bg-green-400;
 }
 
-body[dir='ltr'] input:checked ~ .toggle-circle {
-  transform: translateX(100%);
-  @apply bg-green-400;
+/* For the keyword toggle we have to move 200% instead of 100%, implement as edge case */
+body[dir='ltr'] #keyword_toggle_container input:checked ~ .toggle-circle {
+  transform: translateX(200%);
+  @apply bg-blue-500;
+}
+
+body[dir='rtl'] #keyword_toggle_container input:checked ~ .toggle-circle {
+  transform: translateX(-200%);
+  @apply bg-blue-500;
 }
 
 input:checked ~ .toggle-path {

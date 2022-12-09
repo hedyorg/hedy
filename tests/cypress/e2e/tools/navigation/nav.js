@@ -58,6 +58,11 @@ export function goToAdminUsersPage()
     cy.get('#users_button').click();
 }
 
+export function goToAdminStatsPage()
+{
+   return goToPage(Cypress.env('admin_stats_page'));
+}
+
 // Must be logged in and able to edit an adventure
 export function goToEditAdventure()
 {
