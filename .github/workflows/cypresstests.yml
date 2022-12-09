@@ -36,11 +36,11 @@ jobs:
         pybabel compile -f -d translations
 
     - name: Start the server
-        # Runs in the background
-        run: build-tools/github/start-debug-server --daemon
+      # Runs in the background
+      run: build-tools/github/start-debug-server --daemon
 
     - name: Feed the dev database
-        run: ./feed_dev_database.sh
+      run: ./feed_dev_database.sh
 
     - name: Cypress run
       uses: cypress-io/github-action@v4

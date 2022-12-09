@@ -60,4 +60,3 @@ jobs:
       if: ${{ (steps.check_file_changed.outputs.docs_changed != 'True' && github.event.pull_request.user.login != 'weblate') }}
       run: |
         build-tools/github/validate
-      # Put cypress here when all is said and done
