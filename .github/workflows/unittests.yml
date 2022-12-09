@@ -60,15 +60,8 @@ jobs:
       if: ${{ (steps.check_file_changed.outputs.docs_changed != 'True' && github.event.pull_request.user.login != 'weblate') }}
       run: |
         build-tools/github/validate
-  cypress-run:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      # Install NPM dependencies, cache them correctly
-      # and run all Cypress tests
-      - name: Cypress run
-        uses: cypress-io/github-action@v4.2.2
-        with:
-          build: npm run build
-          start: npm start
+    - name: Cypress run
+      uses: cypress-io/github-action@v4.2.2
+      with:
+        build: npm run build
+        start: npm start
