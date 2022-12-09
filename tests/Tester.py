@@ -268,12 +268,12 @@ class HedyTester(unittest.TestCase):
         type = 'int' if level < 12 else 'float'
 
         return textwrap.dedent(f"""\
-      trtl = {val}
+      __trtl = {val}
       try:
-        trtl = {type}(trtl)
+        __trtl = {type}(__trtl)
       except ValueError:
-        raise Exception(f'While running your program the command <span class="command-highlighted">{command_text}</span> received the value <span class="command-highlighted">{{trtl}}</span> which is not allowed. Try changing the value to a number.')
-      t.{command}(min(600, trtl) if trtl > 0 else max(-600, trtl)){suffix}""")
+        raise Exception(f'While running your program the command <span class="command-highlighted">{command_text}</span> received the value <span class="command-highlighted">{{__trtl}}</span> which is not allowed. Try changing the value to a number.')
+      t.{command}(min(600, __trtl) if __trtl > 0 else max(-600, __trtl)){suffix}""")
 
     @staticmethod
     def sleep_command_transpiled(val):
@@ -286,10 +286,10 @@ class HedyTester(unittest.TestCase):
     @staticmethod
     def turtle_color_command_transpiled(val):
         return textwrap.dedent(f"""\
-      trtl = f'{val}'
-      if trtl not in ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']:
-        raise Exception(f'While running your program the command <span class="command-highlighted">color</span> received the value <span class="command-highlighted">{{trtl}}</span> which is not allowed. Try using another color.')
-      t.pencolor(trtl)""")
+      __trtl = f'{val}'
+      if __trtl not in ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']:
+        raise Exception(f'While running your program the command <span class="command-highlighted">color</span> received the value <span class="command-highlighted">{{__trtl}}</span> which is not allowed. Try using another color.')
+      t.pencolor(__trtl)""")
 
     @staticmethod
     def input_transpiled(var_name, text):
