@@ -1,5 +1,5 @@
-import {loginForAdmin, loginForTeacher} from '../../tools/login/login.js'
-import { goToHome, goToLogin, goToRegister, goToPage } from "../../tools/navigation/nav.js";
+import {loginForTeacher} from '../../tools/login/login.js'
+import {goToPage} from "../../tools/navigation/nav.js";
 
 describe('Is able to see teacher page', () => {
   it('Passes', () => {

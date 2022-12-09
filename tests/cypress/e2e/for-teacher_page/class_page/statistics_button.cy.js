@@ -7,7 +7,7 @@ describe('Is able to go to class statistics page', () => {
     loginForTeacher();
     cy.wait(500);
     createClass();
-    cy.get("#class_view_button > .no-underline").click(); // Press view class button
+    cy.get(".view_class").first().click(); // Press view class button
 
     var currentUrl = '';
     cy.url().then(url => {
