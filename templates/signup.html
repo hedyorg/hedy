@@ -104,6 +104,45 @@
                         {% endfor %}
                     </select>
                 </div>
+                <!-- START OF NEW QUESTION -->
+                {% if is_teacher %}
+                <div class="signup-container">
+                    <label class="signup-label" for="heard_about">{{_('heard_about_hedy')}}</label>
+                    <ul class="signup-input appearance-none">
+                        <li class="flex">
+                            <div class="flex flex-row items-center gap-2">
+                                <input type="checkbox" name="heard_about" value="from_another_teacher">
+                                <label>{{_('from_another_teacher')}}</label>
+                            </div>
+                        </li>
+                        <li class="flex">
+                            <div class="flex flex-row items-center gap-2">
+                                <input type="checkbox" name="heard_about" value="social_media">
+                                <label>{{_('social_media')}}</label>
+                            </div>
+                        </li>
+                        <li class="flex">
+                            <div class="flex flex-row items-center gap-2">
+                                <input type="checkbox" name="heard_about" value="from_video">
+                                <label>{{_('from_video')}}</label>
+                            </div>
+                        </li>
+                        <li class="flex">
+                            <div class="flex flex-row items-center gap-2">
+                                <input type="checkbox" name="heard_about" value="from_magazine_website">
+                                <label>{{_('from_magazine_website')}}</label>
+                            </div>
+                        </li>
+                        <li class="flex">
+                            <div class="flex flex-row items-center gap-2">
+                                <input type="checkbox" name="heard_about" value="other_source">
+                                <label>{{_('other_source')}}</label>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                {% endif %}
+                <!-- END OF NEW QUESTION -->
                 <div class="signup-container">
                     <label class="signup-label" for="prog_experience">{{_('programming_experience')}}</label>
                     <ul class="signup-input" style="margin-top: -0.3em">
@@ -155,10 +194,12 @@
                         <label for="is_teacher">{{_('request_teacher')}}</label>
                         <input type="checkbox" id="is_teacher" name="is_teacher" {% if is_teacher %}checked{% endif %}>
                     </div>
-                    <div class="flex flex-row justify-between items-center">
-                        <label for="subscribe">{{_('subscribe_newsletter')}}</label>
-                        <input type="checkbox" id="subscribe" name="subscribe">
-                    </div>
+                    {% if is_teacher %}
+                        <div class="flex flex-row justify-between items-center">
+                            <label for="subscribe">{{_('subscribe_newsletter')}}</label>
+                            <input type="checkbox" id="subscribe" name="subscribe">
+                        </div>
+                    {% endif %}
                     <div class="flex flex-row justify-between items-center">
                         <label for="agree_terms">{{_('agree_with')}} <a href="/privacy" target="_blank">{{_('privacy_terms')}}</a></label>
                         <input type="checkbox" id="agree_terms" name="agree_terms" required>

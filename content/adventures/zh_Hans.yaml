@@ -133,7 +133,7 @@ adventures:
                 example_code: "```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n"
                 story_text_2: "**所有文本都要放在引号之间**\n这一关，在用 `=` 储存文本时，你需要使用引号：\n"
                 example_code_2: "```\n名字 = '海迪机器人'\n{print} '你好，' 名字\n```\n"
-                story_text_3: "**列表里的东西也需要引号**\n列表里的也是文本，所以他们也要引号。注意列表里的每一项都要加引号。\n这样就能把两个词保存为一项，比如 '你好，世界'。\n"
+                story_text_3: "**列表里的东西也需要引号**\n列表里的也是文本，所以他们也要引号。注意列表里的每一项都要加引号。\n这样就能把两个词保存为一项，比如 '你好，世界'\n"
                 example_code_3: "```\n超级英雄 = '蜘蛛侠', '蝙蝠侠', '钢铁侠'\n{print} 超级英雄 {at} {random}\n```\n"
                 story_text_4: "**在`{if}`中比较的所有文本也都需要引号**\n"
                 example_code_4: "```\n名字 = {ask} '你叫什么？'\n{if} 名字 = '海迪机器人'\n    {print} '你好啊！'\n```\n"
@@ -235,7 +235,7 @@ adventures:
                 example_code: |
                     ```
                     动物们 {is} 🦔, 🐿, 🦉, 🦇
-                    {print} 他现在听到了一个动物们的声音 {at} {random}
+                    {print} 他现在听到了一个的声音 动物们 {at} {random}
                     ```
                 story_text_2: |
                     你的故事也用得上`{add}`命令。
@@ -315,11 +315,11 @@ adventures:
                 start_code: '# 把你的代码放在这里'
             11:
                 story_text: "## 歌曲\n在这一级，你可以使用`{for} i {in} {range}`命令使用计数来创作歌曲。\n"
-                example_code: "## 5只小猴子们\n```\n{for} i{in} {range} 5{to} 1\n    {print} i ' 小猴子们在床上跳来跳去的'。\n    {print} '有一只掉下来，撞到了头'\n    {print} '妈妈叫来了医生，医生说\n    {if} i{is} 1\n        {print} '把这些猴子们直接放到床上去！'\n    {else}\n        {print} '不再有猴子们在床上跳来跳去了！'\n```\n"
+                example_code: "## 5只小猴子们\n```\n{for} i {in} {range} 5 {to} 1\n    {print} i ' 小猴子们在床上跳来跳去的。'\n    {print} '有一只掉下来，撞到了头'\n    {print} '妈妈叫来了医生，医生说'\n    {if} i {is} 1\n        {print} '把这些猴子们直接放到床上去！'\n    {else}\n        {print} '不再有猴子们在床上跳来跳去了！'\n```\n"
                 start_code: '# 把你的代码放在这里'
             10:
                 story_text: "## 歌曲\n在这一级中，你可以轻松地制作儿童歌曲《五只小猴子》。你能完成最后的合唱吗？\n你也可以只用6行就完成整首鲨鱼宝宝的歌曲（包括鲨鱼家族中所有其他种类的鲨鱼）！\n或者你可以用所有不同的动物制作《老麦当劳》。\n"
-                example_code: "## 5只小猴子们在床上跳来跳去\n```\n猴子们=5, 4, 3, 2\n{for} 猴子{in} 猴子们\n    {print} 猴子 ' 小猴子们在床上跳来跳去\n    {print} '有一只掉下来，撞到了头'\n    {print} '妈妈打电话给医生，医生说\n    {print} '不能再有猴子们在床上跳了！'\n```\n\n## 鲨鱼宝宝\n```\n鲨鱼们=宝宝，妈妈，爸爸，奶奶，爷爷\n{for} 鲨鱼{in} 鲨鱼们\n    {print} 鲨鱼 \"tutututudu\n    {print} 鲨鱼 \"tutututudu\n    {print} 鲨鱼 \"tutututudu\n    {print} 鲨鱼\n```\n## 老麦当劳\n```\n动物们=猪、狗、牛\n{for} 动物{in} 动物们\n    {if} 动物{is} 猪\n        声音 = 哼哼\n    {if} 动物{is} 狗\n        声音 = 汪汪\n    {if} 动物{is} 牛\n        声音 = 哞\n    {print} '老麦当劳有一个农场\n    {print} '咦啊咦啊欧！'\n    {print} '在那个农场里，他有一只' 动物\n    {print} '咦啊咦啊欧！'\n    {print} '这里有一个'声音'的声音\n    {print} '和一个'声音的声音'那里\n    {print} '这里有一个'声音\n    {print} '那里有一个'声音\n    {print} '到处都是一个'声音\n```\n"
+                example_code: "## 5只小猴子们在上跳来跳去\n```\n猴子们=5, 4, 3, 2\n{for} 猴子 {in} 猴子们\n    {print} 猴子 ' 小猴子们在床上跳来跳去'\n    {print} '有一只掉下来，撞到了头'\n    {print} '妈妈打电话给医生，医生说'\n    {print} '不能再有猴子们在床上跳了！'\n```\n\n## 鲨鱼宝宝\n```\n鲨鱼们=宝宝，妈妈，爸爸，奶奶，爷爷\n{for} 鲨鱼 {in} 鲨鱼们\n    {print} 鲨鱼 \"tutututudu\"\n    {print} 鲨鱼 \"tutututudu\"\n    {print} 鲨鱼 \"tutututudu\"\n    {print} 鲨鱼\n```\n## 老麦当劳\n```\n动物们=猪, 狗, 牛\n{for} 动物 {in} 动物们\n    {if} 动物 {is} 猪\n        声音 = 哼哼\n    {if} 动物 {is} 狗\n        声音 = 汪汪\n    {if} 动物 {is} 牛\n        声音 = 哞\n    {print} '老麦当劳有一个农场'\n    {print} '咦啊咦啊欧！'\n    {print} '在那个农场里，他有一只' 动物\n    {print} '咦啊咦啊欧！'\n    {print} '这里有一个'声音'的声音'\n    {print} '和一个'声音'的声音那里'\n    {print} '这里有一个'声音\n    {print} '那里有一个'声音\n    {print} '到处都是一个'声音\n```\n"
                 start_code: '# 在这里写你的代码'
             7:
                 story_text: "## 歌曲\n歌曲经常包含大量的重复。例如...鲨鱼宝宝!如果你唱这首歌，其实你就是一直在唱同一句歌词。\n\n鲨鱼宝宝 tututudutudu <br>\n鲨鱼宝宝tututududu <br>\n鲨鱼宝宝tututududu <br>\n鲨鱼宝宝\n\n你可以用`{repeat}` ，让这首歌变得更短!你能完成这个代码吗？\n"
@@ -328,7 +328,7 @@ adventures:
             16:
                 story_text: "## 唱一首歌!\n在这一级中，你可以更快速地编排一首像《老麦当劳》这样的歌曲。你可以把正确的动物和正确的声音联系起来，只要把它们放在列表的同一位置。\n《醉酒的水手》在这一级别也能很快制作完成。你只需要8行就可以完成整首歌，看看吧!\n"
                 start_code: '# 把你的代码放在这里'
-                example_code: "## 老麦当劳\n```\n动物们 = ['猪', '狗', '牛']\n一组声音 = ['哼哼', '汪汪', '哞'] 。\n{for} i{in} {range} 1{to} 3\n    动物 = 动物们[i]\n    声音 = 一组声音[i］\n    {print} '老麦当劳有一个农场'\n    {print} '咦啊咦啊欧！'\n    {print} '在那个农场里，他有一个' 动物\n    {print} '咦啊咦啊欧！'\n    {print} '这里有一个'声音'的声音\n    {print} '和一个'声音的声音'那里\n    {print} '这里有一个'声音\n    {print} '那里有一个'声音\n    {print} '到处都是一个'声音声音\n```\n\n## 醉酒的水手\n```\n一组句子 = ['我们该如何对待醉酒的水手', '用生锈的剃须刀刮光他的胡子', '把他放在大船上直到他清醒']\n{for} 句子{in} 一组句子\n    {for} i{in} {range} 1{to} 3\n        {print} 句子\n    {print} '一大清早'。\n    {for} i {in} {range} 1{to} 3\n        {print} '头昏脑涨的睁开眼'\n    {print} '一大清早'\n```\n"
+                example_code: "## 老麦当劳\n```\n动物们 = ['猪', '狗', '牛']\n一组声音 = ['哼哼', '汪汪', '哞']\n{for} i {in} {range} 1 {to} 3\n    动物 = 动物们[i]\n    声音 = 一组声音[i]\n    {print} '老麦当劳有一个农场'\n    {print} '咦啊咦啊欧！'\n    {print} '在那个农场里，他有一个' 动物\n    {print} '咦啊咦啊欧！'\n    {print} '这里有一个'声音'的声音'\n    {print} '和一个'声音'的声音那里'\n    {print} '这里有一个'声音\n    {print} '那里有一个'声音\n    {print} '到处都是一个'声音 声音\n```\n\n## 醉酒的水手\n```\n一组句子 = ['我们该如何对待醉酒的水手', '用生锈的剃须刀刮光他的胡子', '把他放在大船上直到他清醒']\n{for} 句子 {in} 一组句子\n    {for} i {in} {range} 1 {to} 3\n        {print} 句子\n    {print} '一大清早'\n    {for} i {in} {range} 1 {to} 3\n        {print} '头昏脑涨的睁开眼'\n    {print} '一大清早'\n```\n"
         name: 唱支歌！
         description: 打印一首歌
         default_save_name: 歌
@@ -430,7 +430,7 @@ adventures:
                 story_text_2: "## Challenge\nInstead of using words, you could also use emojis: ✊✋✌\nCan you create a code using emojis?\n"
                 example_code_2: "```\n{print} what do you choose?\n{ask} choose from _\n{echo} so your choice was:\n```\n"
             9:
-                example_code: "```\n选项 {is} 石头，剪刀，布\n你选择 {is} {ask} '你选择什么？'\n{print} '你选择了' 你选择\n计算机选择 {is} 选项 {at} {random}\n{print} '计算机选择了' 计算机选择\n{if} 计算机选择 {is} 你选择\n    {print} '平手'\n{if} 计算机选择 {is} 石头\n    {if} 你选择 {is}布\n        {print} '你赢了！'\n   {if} 你选择 {is} 剪刀\n        {print} '你输了！'\n# 完成这段代码\n```\n"
+                example_code: "```\n选项 {is} 石头，剪刀，布\n你选择 {is} {ask} '你选择什么？'\n{print} '你选择了' 你选择\n计算机选择 {is} 选项 {at} {random}\n{print} '计算机选择了' 计算机选择\n{if} 计算机选择 {is} 你选择\n    {print} '平手'\n{if} 计算机选择 {is} 石头\n    {if} 你选择 {is} 布\n        {print} '你赢了！'\n    {if} 你选择 {is} 剪刀\n        {print} '你输了！'\n# 完成这段代码\n```\n"
                 story_text: "## 石头剪刀布\n在这一级，你可以用嵌套的{if}命令来编程石头剪刀布。你能完成这段代码吗？\n"
                 start_code: '# 在这里写你的代码'
             10:
@@ -487,7 +487,7 @@ adventures:
                 example_code_3: "```\ntables = 4, 5, 6, 8\nnumbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\ntable = tables {at} {random}\nnumber = numbers {at} {random}\ncorrect_answer = table * number\nanswer = {ask} 'how much is ' table ' times ' number '?'\n{if} answer {is} correct_answer {print} 'okay'\n{else} {print} 'mistake! it was ' correct_answer\n```\n"
             15:
                 story_text: "## 计算器 \n您可以添加 `{while}` 循环到您已经在上一关中学过的计算器游戏中去。 \n这可以确保{if}玩家在没有回答正确的情况下不会进行下一个问题。\n"
-                example_code: "```\n分数 = 0\n{for} i {in} {range} 0 {to} 9\n    数字 = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    数1 = 数字 {at} {random}\n    数2 = 数字 {at} {random}\n    正确 = 数1 * 数2\n    答案 = 0\n    {while} 回答 != 正确\n        {print} 数1 '乘以' 数2 '是多少？'\n        答案 = {ask} '填写答案'\n        {print} '你的答案是' 答案\n    {print} '做得好！'\n{print} '你赢了！'\n```\n"
+                example_code: "```\n分数 = 0\n{for} i {in} {range} 0 {to} 9\n    数字 = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    数1 = 数字 {at} {random}\n    数2 = 数字 {at} {random}\n    正确 = 数1 * 数2\n    答案 = 0\n    {while} 答案 != 正确\n        {print} 数1 '乘以' 数2 '是多少？'\n        答案 = {ask} '填写答案'\n        {print} '你的答案是' 答案\n    {print} '做得好！'\n{print} '你赢了！'\n```\n"
                 start_code: '# 在这里写你的代码'
         description: 创建一个计算器
         default_save_name: 计算器
@@ -602,7 +602,7 @@ adventures:
                     推荐 {is} {ask} '您想听我们今天的推荐吗？'
                     {if} 推荐 {is} 是 {print} '今天的推荐是考级' {else} {print} 'No problem.'
                     食物 {is} {ask} '您想吃什么？'
-                    {print} '一份' food '，马上就来！'
+                    {print} '一份' 食物 '，马上就来！'
                     饮料 {is} {ask} '您想配点什么喝的？'
                     {if} 饮料 {is} 可乐 {print} '对不起，可乐卖完了！' {else} {print} '选得好！'
                     别的 {is} {ask} '您还想要别的吗？'
@@ -1310,7 +1310,7 @@ adventures:
                 start_code: '# place your code here'
             12:
                 story_text: "## Piggy Bank\nIn this adventure you learn how to make a digital piggy bank, to calculate how much money you have and how long you need to save up to buy what you want!\n"
-                example_code: "```\n{print} '数字存钱罐'\n愿望 = {ask} '你想买什么？'\n价格 = {ask} '这要花多少钱？'\n存款 = {ask} '你已经存了多少钱？'\n零花钱 = {ask} '你每周有多少零花钱？'\n需要_再存 = 价格 - 存款\n周数 = 需要_再存/ 零花钱\n{print} '你可以在'周数'周内买一个'愿望'。\n```\n"
+                example_code: "```\n{print} '数字存钱罐'\n愿望 = {ask} '你想买什么？'\n价格 = {ask} '这要花多少钱？'\n存款 = {ask} '你已经存了多少钱？'\n零花钱 = {ask} '你每周有多少零花钱？'\n需要_再存 = 价格 - 存款\n周数 = 需要_再存/ 零花钱\n{print} '你可以在'周数'周内买一个'愿望'。'\n```\n"
                 start_code: '# place your code here'
     quizmaster:
         name: Quizmaster
@@ -1447,7 +1447,7 @@ adventures:
                 start_code: '# 在这里写你的代码'
             6:
                 story_text: "## 骰子\n你这次可以再做一个蚯蚓骰子，但是这次你可以计算你总共投了多少点数。\n你可能知道，投出蚯蚓算5点。现在每一轮过后你都能立即算出你投了多少点。\n这段代码会对一个骰子统计点数：\n"
-                example_code: "```\n选项 = 1, 2, 3, 4, 5, 蚯蚓\n点数 = 0\n投 = 选项 {at} {random}\n{print} '你投出了' 投\n{if} 投 {is} 蚯蚓 点数 = 点数 + 5 {else} 点数 = 点数 + 投\n{print} '现在是' points '点'\n```\n你能修改这段代码，让它统计8个骰子的总分吗？为此，你必须复制粘贴代码里的某几行。\n"
+                example_code: "```\n选项 = 1, 2, 3, 4, 5, 蚯蚓\n点数 = 0\n投 = 选项 {at} {random}\n{print} '你投出了' 投\n{if} 投 {is} 蚯蚓 点数 = 点数 + 5 {else} 点数 = 点数 + 投\n{print} '现在是' 点数 '点'\n```\n你能修改这段代码，让它统计8个骰子的总分吗？为此，你必须复制粘贴代码里的某几行。\n"
                 example_code_2: "## 向前看\n\n你计算出8个骰子的点数了吗？这需要大量复制粘贴，对吗？在第7级，我们会让它更简单！\n"
                 start_code: "{print} '骰子这次会投出什么？'"
             5:
@@ -1511,3 +1511,64 @@ adventures:
                 story_text: "## Create a game of Blackjack\nBlackjack is a simple game of cards in which you have to get as close to 21 points as possible. You get two cards. Each card is worth their numeral value, and the face cards (Jack, Queen and King) are worth 10 points.\nThe Ace is worth either 1 or 11 points (you can choose). The dealer, your opponent, also gets two cards.\nIf you want, you can get another card, and its points will be added to your total. The dealer can also choose to take another card.\nBut be careful not to get more than 21 points, because if you do, you lose!\nThe player who gets closest to 21, without going over it, wins!\n\nHave fun!\n"
                 example_code: "```\n{print} 'BLACKJACK'\ncards = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Jack', 'Queen','King', 'Ace']\npoints = 0\ndealer_points = 0\ncard_1 = cards[{random}]\ncard_2 = cards[{random}]\ncard_3 = cards [{random}]\ndealer_card_1 = cards[{random}]\ndealer_card_2 = cards[{random}]\ndealer_card_3 = cards[{random}]\n# Points for card 1\n{if} card_1 == 'Jack' {or} card_1 == 'Queen' {or} card_1 == 'King':\n    points = points + 10\n{elif} card_1 == 'Ace':\n    points = points + 11\n{else}:\n    points = points + card_1\n# Points for card 2\n{if} card_2 == 'Jack' {or} card_2 == 'Queen' {or} card_2 == 'King':\n    points = points + 10\n{elif} card_2 == 'Ace':\n    points = points + 11\n{else}:\n    points = points + card_2\n# Points for dealer card 1\n{if} dealer_card_1 == 'Jack' {or} dealer_card_1 == 'Queen' {or} dealer_card_1 == 'King':\n    dealer_points = dealer_points + 10\n{elif} dealer_card_1 == 'Ace':\n    dealer_points = dealer_points + 11\n{else}:\n    dealer_points = dealer_points + dealer_card_1\n# Points for dealer card 2\n{if} dealer_card_2 == 'Jack' {or} dealer_card_2 == 'Queen' {or} dealer_card_2 == 'King':\n    dealer_points = dealer_points + 10\n{elif} dealer_card_2 == 'Ace':\n    dealer_points = dealer_points + 11\n{else}:\n    dealer_points = dealer_points + dealer_card_2\n# Two Aces\n{if} card_1 == 'Ace' {and} card_2 == 'Ace':\n    points = 12\n{if} dealer_card_1 == 'Ace' {and} dealer_card_2 == 'Ace':\n    dealer_points = 12\n# Scoreboard\n{print} 'You have a ' card_1 ' and a ' card_2 ' (' points ' points)'\n{print} 'The dealer has a ' dealer_card_1 ' and a ' dealer_card_2 ' (' dealer_points ' points)'\n# Extra card for the player\nhit = {ask} 'Do you want an extra card?'\n{if} hit == 'yes':\n    {if} card_3 == 'Jack' {or} card_3 == 'Queen' {or} card_3 == 'King':\n        points = points + 10\n    {elif} card_3 == 'Ace':\n        {if} points > 11:\n            points = points + 11\n        {else}:\n            points = points + 1\n    {else}:\n        points = points + card_3\n    print 'You get an extra ' card_3 ' (' points ' points)'\n{else}:\n    print 'No extra cards'\n# Winner\n{if} points > 21 {or} dealer_points > points {or} dealer_points == 21:\n    {print} 'You lose'\n{elif} dealer_points < 17:\n    {print} 'The dealer takes an extra card. It is a... ' dealer_card_3\n    {if} dealer_card_3 == 'Jack' {or} dealer_card_3 == 'Queen' {or} dealer_card_3 == 'King':\n        dealer_points = dealer_points + 10\n    {elif} dealer_card_3 == 'Ace':\n        {if} dealer_points < 11:\n            dealer_points = dealer_points + 11\n        {else}:\n            dealer_points = dealer_points + 1\n    {else}:\n        dealer_points = dealer_points + dealer_card_3\n    {print} 'The dealer has ' dealer_points ' points now'\n    {if} dealer_points < 21 {and} dealer_points > points:\n        {print} 'You lose'\n    {else}:\n        {print} 'You win'\n{elif} points > dealer_points {and} points < 21:\n    {print} 'You win!'\n```\n"
                 start_code: '# place your code here'
+    pressit:
+        levels:
+            14:
+                start_code: '# place your code here'
+                story_text: "Now that you learned how to use operators, we can use it with ```pressed```too!\nimagine the turtle being able to do a superjump forward. by pressing ```p``` the turtle can make a\nsuperjump! However, the turtle can only do this jump every 5 steps or every 4 turns\n"
+                example_code: "```\nstepsize = 15\nleft = -90\nright = 90\naround = 180\njumptime = 5\nspins = 4\nrepeat 40 times\n    {if} w is {pressed}\n        forward stepsize\n        jumptime = jumptime - 1\n    {if} s is {pressed}\n        turn around\n    {if} a is {pressed}\n        turn left\n        spins = spins - 1\n    {if} d is {pressed}\n        turn right\n        spins = spins - 1\n    {if} p is {pressed}\n        {if} jumptime <= 0 or spins <= 0\n            forward stepsize * 3\n            jumptime = 5\n            spins = 4\n```\n"
+            15:
+                story_text: "Now that you have learned about the ```while``` loops, you can start using it on the turtle!\nThe turtle is now only allowed to take only 15 steps or turn 15 times, before he gets tired!\nTry to get as far as possible before the turtle gets tired! You can use your superjump after 2 turns\nor 5 steps.\n"
+                start_code: '# place your code here'
+                example_code: "```\nstepsize = 15\nleft = -90\nright = 90\naround = 180\njumptime = 5\nspins = 2\ntired_in = 15\nwhile tired_in > 0\n    {if} w is {pressed}\n        forward stepsize\n        jumptime = jumptime - 1\n    {if} s is {pressed}\n        turn around\n    {if} a is {pressed}\n        turn left\n        spins = spins - 1\n    {if} d is {pressed}\n        turn right\n        spins = spins - 1\n    {if} p is {pressed}\n        {if} jumptime <= 0 or spins <= 0\n            forward stepsize * 4\n            jumptime = 5\n            spins = 2\n    tired_in = tired_in - 1\n```\n"
+            16:
+                start_code: '# place your code here'
+                story_text: "Lets move a little with a game of Twister!\nWhen everyone is ready, press the x key for the next move!\n"
+                example_code: "```\nlimbs = ['Right Hand', 'Left Hand', 'Right Foot', 'Left Foot']\ncolours = ['Blue', 'Green', 'Red', 'Yellow']\nrepeat 20 times\n    l = limbs[random]\n    c = colours[random]\n    {if} x is {pressed}\n        {print} l + ' on ' + c + '!'\n```\n"
+            12:
+                example_code: "```\nchoose = 'You chose option: '\nprint 'A wild mouse appeared!'\nprint 'Choose an option and press first letter: (n)et, (c)at, (b)ag, (r)un'\n{if} n is {pressed}\n    {print} choose + 'net'\n    {print} 'You attempt to catch the mouse with a net..'\n    sleep\n    {print} 'Congratulations you did it!'\n{if} c is {pressed}\n    {print} choose + 'cat'\n    {print} 'You send out your cat'\n    sleep\n    {print} 'The mouse got scared and ran away!'\n{if} b is {pressed}\n    {print} choose + 'bag'\n    {print} 'The mouse jumped into you bag!'\n{if} r is {pressed}\n    {print} choose + 'run'\n    {print} 'You got away safely!'\n```\n"
+                start_code: '# place your code here'
+                story_text: "Are you familiar with videogames? You walk into tall grass and are suddenly approached by\na very suspicious mouse. What will you do?\nIn this level we will make a small menu with different kinds of options.\nStoring text into a variable is quite handy for repeated uses.\nOption, I choose you!\n"
+            13:
+                story_text: "Now that you learned how to use ```and``` and ```or```, we can use it with ```pressed```too!\nimagine the turtle being able to do a superjump forward. by pressing ```p``` the turtle can make a\nsuperjump! However, the turtle can only do this jump if he turns left and right first!\n"
+                start_code: '# place your code here'
+                example_code: "```\nstepsize = 10\nleft = -90\nright = 90\naround = 180\nlooked_left = 0\nlooked_right = 0\nrepeat 40 times\n    {if} w is {pressed}\n        forward stepsize\n    {if} s is {pressed}\n        turn around\n    {if} a is {pressed}\n        turn left\n        looked_left = 1\n    {if} d is {pressed}\n        turn right\n        looked_right = 1\n    {if} p is {pressed}\n        {if} looked_left is 1 and looked_right is 1\n            forward 40\n            looked_left = 0\n            looked_right = 0\n```\n"
+            17:
+                story_text: "Now that you learned how to use ```elif```, we can use it with ```pressed```too! Be aware,\n```elif ... is pressed ``` is not possible! That is why we are going to nest some ```elif```\nstatements into the ```pressed``` options. We also had to add ```:``` to the code to make\neverything work! imagine the turtle being able to do a superjump forward. by pressing ```p``` the\nturtle can make a superjump! However, the turtle can only do this jump every 5 steps or every\n4 turns\n"
+                example_code: "```\nstepsize = 15\nleft = -90\nright = 90\naround = 180\njumptime = 5\nspins = 4\nrepeat 40 times\n    {if} w is {pressed}:\n        forward stepsize\n        jumptime = jumptime - 1\n    {if} s is {pressed}:\n        turn around\n    {if} a is {pressed}:\n        turn left\n        spins = spins - 1\n    {if} d is {pressed}:\n        turn right\n        spins = spins - 1\n    {if} p is {pressed}:\n        {if} jumptime <= 0 or spins <= 0:\n            forward stepsize * 3\n            jumptime = 5\n            spins = 4\n        {elif} jumptime > 0:\n            print \"you need to take more steps or turns before you can superjump!\"\n```\n"
+                start_code: '# place your code here'
+            11:
+                story_text: "Now that you have learned of the ```for ... in range ... to ...``` rule, you can use it for ```pressed```\ntoo! for example, try moving the turtle! The turtle grows everytime you press a linked button.\nThis way the turtle can move further every step!\n"
+                example_code: "```\nleft = -90\nright = 90\naround = 180\nfor counter in range 1 to 15\n    stepsize = counter * 5\n    {if} w is {pressed}\n        forward stepsize\n    {if} s is {pressed}\n        turn around\n    {if} a is {pressed}\n        turn left\n    {if} d is {pressed}\n        turn right\n```\n"
+                start_code: '# place your code here'
+            9:
+                example_code_2: "```\nstepsize = 25\nleft = -90\nright = 90\naround = 180\nrepeat 40 times\n    {if} w is {pressed}\n        forward stepsize\n    {if} s is {pressed}\n        turn around\n    {if} a is {pressed}\n        turn left\n    {if} d is {pressed}\n        turn right\n```\n"
+                start_code: '# place your code here'
+                story_text: "Now that you know how to nest multiple statements, you can also do this with {pressed}!\nBy nesting a pressed in a {repeat} loop, you can repeatedly press buttons and make something happen.\nNow we know you could do this before, but by using the indents you have much more overview!\nTry it counting to 5, for example!\n"
+                example_code: "```\ntotal = 1\n{repeat} 5 times\n    {if} x is {pressed}\n        {print} total\n        {print} 'keep pressing!'\n        total = total + 1\n```\n"
+                story_text_2: "Besides counting, you can now also move the turtle in many more ways than only forward or backwards!\nTry making some figures by walking the turtle around!\n"
+            10:
+                story_text: "In this level you can make the turtle draw you a figure. The turtle is raring to go.\nGive the turtle the starting signal by pressing the x or y key on your keyboard.\nCan you let the turtle draw you another figure?\n"
+                example_code: "```\ndistances = 100, 80, 60, 40, 20, 10\n{if} x is {pressed}\n    for distance in distances\n        {forward} distance\n        {turn} -90\n{if} y is {pressed}\n    for distance in distances\n        {forward} distance\n        {turn} 90\n```\n"
+                start_code: '# place your code here'
+            5:
+                story_text: "## Press it!\nIn the introduction you were also told about the new keyword ```pressed```! Using ```pressed```\ncan make coding much more interactive, and you can have live control of what is executed!\nIn the upcoming levels you will learn how ```pressed``` makes this possible and what uses ```pressed```\nhas.\nBesides printing text, there is a whole other variety of uses for ```pressed```\nFor example, you can also link turtle commands to keys! Try it!\n"
+                example_code: "```\nif x is {pressed} forward 50\n```\n"
+                story_text_2: "## If Else Pressed\nYou can also assign an else statement to ```pressed```. The else statement will be executed\nwhenever you press a key other than the key you assigned.\n"
+                example_code_2: "```\nif y is {pressed} {print} 'Amazing! You pressed the y key!'\nelse {print} 'Oh no! You did not press the y key.'\n```\n"
+                start_code: '# place your code here'
+            6:
+                story_text: "Did you know you can also make a calculator using ```pressed```?\nGive the calculator two numbers and press the m key to multiply.\nNow you don't have to bring your own!\nTry other keys and see what happens! Do you get a different result?\n"
+                example_code: "```\nfirst = {ask} 'what is your first number?'\nsecond = {ask} 'what is your second number?'\nprint 'press a to add, s to substract, d to divide, m to multiply'\nif a is {pressed} result = first + second\nif s is {pressed} result = first - second\nif d is {pressed} result = first / second\nif m is {pressed} result = first * second\nprint 'The answer is ' result\n```\n"
+                start_code: '# place your code here'
+            7:
+                story_text: "You might have tried it in level 5 and 6, pressing the key linked to ```pressed``` multiple\ntimes. If you did, you noticed that this did nothing. but now that you have learned about repeat, we\ncan press keys multiple times! Make the turtle walk forward!\n"
+                example_code: "```\nrepeat 3 times if x is {pressed} forward 15\n```\n"
+                start_code: '# place your code here'
+            8:
+                story_text: "## Press It!\nNow that you need to use indents for the {if} and {else} statements,\nyou will also have to indent code when using {pressed}! Don't worry,\nit works te same as with the other statements, see the example!\nPress another key instead of x and see what happens.\n"
+                example_code: "```\n{if} x is {pressed}\n    {print} 'Only the cool kids press the x key.'\n{else}\n    {print} 'The adventurous kids press something else.'\n```\n"
+                start_code: '# place your code here'
+        default_save_name: Pressit
+        name: Press it!
+        description: Try linking a keyboard key to a command!
