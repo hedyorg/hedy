@@ -55,21 +55,25 @@ def collect_snippets(path, hashes_saved=set(), filtered_language=None, only_new_
                                 if not hash(code) in unique_snippets_table:
                                     unique_snippets_table.add(hash(code))
                                     snippet = Snippet(
-                                        f,
-                                        level_number,
-                                        adventure_name +
-                                        ' snippet #' +
-                                        str(code_snippet_counter),
-                                        code,
-                                        adventure_name)
+                                        filename=f,
+                                        level=level_number,
+                                        field_name=adventure_name + ' snippet #' + str(code_snippet_counter),
+                                        code=code,
+                                        adventure_name=adventure_name)
                                     if not only_new_snippets or snippet.hash not in hashes_saved:
                                         Hedy_snippets.append(snippet)
+
                             # code snippets inside start_code
                             try:
                                 start_code = level['start_code']
                                 if not hash(start_code) in unique_snippets_table:
                                     unique_snippets_table.add(hash(start_code))
-                                    snippet = Snippet(f, level_number, 'start_code', start_code, adventure_name)
+                                    snippet = Snippet(
+                                        filename=f,
+                                        level=level_number,
+                                        field_name='start_code',
+                                        code=start_code,
+                                        adventure_name=adventure_name)
                                     if not only_new_snippets or snippet.hash not in hashes_saved:
                                         Hedy_snippets.append(snippet)
 
@@ -90,17 +94,16 @@ def collect_snippets(path, hashes_saved=set(), filtered_language=None, only_new_
                                 except BaseException:
                                     print("Code container is empty...")
                                     continue
-                                # test only unique snippets
+
+                                    # test only unique snippets
                                 if not hash(code) in unique_snippets_table:
                                     unique_snippets_table.add(hash(code))
                                     snippet = Snippet(
-                                        f,
-                                        level_number,
-                                        adventure_name +
-                                        ' snippet #' +
-                                        str(code_snippet_counter),
-                                        code,
-                                        adventure_name)
+                                        filename=f,
+                                        level=level_number,
+                                        field_name=adventure_name + ' snippet #' + str(code_snippet_counter),
+                                        code=code,
+                                        adventure_name=adventure_name)
                                     if not only_new_snippets or snippet.hash not in hashes_saved:
                                         Hedy_snippets.append(snippet)
 
