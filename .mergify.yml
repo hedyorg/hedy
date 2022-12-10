@@ -1,4 +1,4 @@
-# Using a Merge queue makes Mergify automatically keep the PR 
+# Using a Merge queue makes Mergify automatically keep the PR
 # up-to-date with 'main', one PR at a time.
 queue_rules:
   - name: default_queue
@@ -12,6 +12,7 @@ pull_request_rules:
           - "#approved-reviews-by>=1"
           - "#changes-requested-reviews-by=0"
           - "check-success=build"
+          - "check-success=cypress"
           - "-author=weblate"
     actions:
       comment:
@@ -21,7 +22,7 @@ pull_request_rules:
         method: squash
         commit_message_template: |-
           {{ title }} (#{{number}})
-          {{ body }} 
+          {{ body }}
 
   - name: Automatic regular merge for Weblate PRs
     conditions:
@@ -29,6 +30,7 @@ pull_request_rules:
           - "#approved-reviews-by>=1"
           - "#changes-requested-reviews-by=0"
           - "check-success=build"
+          - "check-success=cypress"
           - "author=weblate"
     actions:
       comment:
@@ -38,4 +40,4 @@ pull_request_rules:
         method: merge
         commit_message_template: |-
           {{ title }} (#{{number}})
-          {{ body }} 
+          {{ body }}

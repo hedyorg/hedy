@@ -2,8 +2,8 @@ name: Automatically deploy to Alpha
 on:
   # Run this AFTER the unit test job finishes
   workflow_run:
-    # Must be the same as in unittests.yml
-    workflows: ["Unit tests"]
+    # Must be the same as in unittests.yml, cypresstests.yml
+    workflows: ["Unit tests", "Cypress tests"]
     branches: [main]
     types:
       - completed
