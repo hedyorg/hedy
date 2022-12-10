@@ -674,3 +674,33 @@ class TestsLevel3(HedyTester):
             code=code,
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
+
+    def test_3778_at_index(self):
+        code = textwrap.dedent("""\
+        l is 1, 2, 3
+        print l at 3""")
+
+        expected = textwrap.dedent("""\
+        l = ['1', '2', '3']
+        try:
+          l[3-1]
+        except IndexError:
+          raise Exception('catch_index_exception')
+        print(f'{l[3-1]}')""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=15)
+
+    def test_3778_at_random(self):
+        code = textwrap.dedent("""\
+        l is 1, 2, 3
+        print l at random""")
+
+        expected = textwrap.dedent("""\
+        l = ['1', '2', '3']
+        try:
+          random.choice(l)
+        except IndexError:
+          raise Exception('catch_index_exception')
+        print(f'{random.choice(l)}')""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=15)
