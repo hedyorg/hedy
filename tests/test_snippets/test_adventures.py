@@ -54,19 +54,24 @@ def collect_snippets(path, filtered_language=None):
                                     continue
                                 Hedy_snippets.append(
                                     Snippet(
-                                        f,
-                                        level_number,
-                                        adventure_name +
-                                        ' snippet #' +
-                                        str(code_snippet_counter),
-                                        code,
-                                        adventure_name))
+                                        filename=f,
+                                        level=level_number,
+                                        field_name=adventure_name + ' snippet #' + str(code_snippet_counter),
+                                        code=code,
+                                        adventure_name=adventure_name)
+                                )
                             # code snippets inside start_code
                             try:
                                 start_code = level['start_code']
                                 if not hash(start_code) in unique_snippets_table:
                                     unique_snippets_table.add(hash(start_code))
-                                Hedy_snippets.append(Snippet(f, level_number, 'start_code', start_code, adventure_name))
+                                Hedy_snippets.append(Snippet(
+                                    filename=f,
+                                    level=level_number,
+                                    field_name='start_code',
+                                    code=start_code,
+                                    adventure_name=adventure_name)
+                                )
                             except KeyError:
                                 print(f'Problem reading startcode for {lang} level {level}')
                                 pass
@@ -88,14 +93,12 @@ def collect_snippets(path, filtered_language=None):
                                     print("Code container is empty...")
                                     continue
                                 Hedy_snippets.append(
-                                    Snippet(
-                                        f,
-                                        level_number,
-                                        adventure_name +
-                                        ' snippet #' +
-                                        str(code_snippet_counter),
-                                        code,
-                                        adventure_name))
+                                    Snippet(filename=f,
+                                            level=level_number,
+                                            field_name=adventure_name + ' snippet #' + str(code_snippet_counter),
+                                            code=code,
+                                            adventure_name=adventure_name)
+                                )
 
     return Hedy_snippets
 
