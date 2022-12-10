@@ -1,3 +1,5 @@
+import { loginForAdmin } from "../login/login";
+
 export function goToPage(page)
 {
     if (typeof page === 'string' || page instanceof String)
@@ -38,6 +40,38 @@ export function goToRecover()
 export function goToTeachersPage()
 {
     return goToPage(Cypress.env('teachers_page'));
+}
+
+export function goToHedyPage()
+{
+    return goToPage(Cypress.env('hedy_page'));
+}
+
+export function goToHedyLevel2Page()
+{
+    return goToPage(Cypress.env('hedy_level2_page'));
+}
+
+export function goToAdminUsersPage()
+{
+    loginForAdmin();
+    cy.get('#users_button').click();
+}
+
+export function goToAdminStatsPage()
+{
+   return goToPage(Cypress.env('admin_stats_page'));
+}
+
+// Must be logged in and able to edit an adventure
+export function goToEditAdventure()
+{
+    goToTeachersPage();
+
+    // takes the first adventures and goes to its edit page
+    // It does not matter which adventure we take (we choose the first one)
+    cy.get('#teacher_adventures > .table-auto > tbody > :nth-child(1) > :nth-child(5)')
+      .click();
 }
 
 export default {goToPage}

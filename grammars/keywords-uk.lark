@@ -1,6 +1,6 @@
 _PRINT: ("друкуй" | "print") _SPACE?
 _ASK: ("запитай" | "ask") _SPACE?
-_ECHO: ("поверни" | "echo") _SPACE?
+_ECHO: ("эхо" | "echo") _SPACE?
 _FORWARD: ("вперед" | "forward") _SPACE?
 _TURN: ("поверни" | "turn") _SPACE?
 left: ("вліво" | "left") _SPACE?
@@ -22,9 +22,10 @@ _ADD_LIST: ("додай" | "add") _SPACE
 _TO_LIST: _SPACE ("до" | "to") _SPACE
 _REMOVE: ("видали" | "remove") _SPACE
 _FROM: _SPACE ("iз" | "з" | "from") _SPACE
-_AT: _SPACE ("будь" | "at") _SPACE
-random: ("яка" | "який" | "random") _SPACE?
+_AT: _SPACE ("на позиції" | "at") _SPACE
+random: ("випадковий" | "випадковій" | "random") _SPACE?
 _IN: _SPACE ("в" | "in") _SPACE
+_NOT_IN: _SPACE ("не в" | "not in") _SPACE
 _IF: ("якщо" | "if") _SPACE
 _ELSE: "інакше" | "else"
 _AND: _SPACE ("і" | "and") _SPACE
@@ -40,3 +41,4 @@ _OR: _SPACE ("або" | "or") _SPACE
 _WHILE: ("тоді як" | "while") _SPACE
 _LENGTH: "довжина" | "length"
 _COLOR : ("колір" | "color") _SPACE?
+_PRESSED: ("натиснув" | "pressed") _SPACE?

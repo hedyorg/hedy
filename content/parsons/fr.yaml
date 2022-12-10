@@ -6,37 +6,37 @@ levels:
                 You want into the bakery and are welcomed by the baker.
                 He asks what type of pie you want to order.
                 Next, your order is being prepared.
-            code_lines:
-                A: "{print} Bienvenue à la boulangerie Hedy !"
-                B: "{ask} Quel type de tarte souhaites-tu commander ?"
-                C: "{echo} So you want"
-                D: "{print} Ta commande est en train d'être préparée !"
+            code: |
+                {print} Bienvenue à la boulangerie Hedy !
+                {ask} Quel type de tarte souhaites-tu commander ?
+                {echo} So you want
+                {print} Ta commande est en train d'être préparée !
         2:
             story: |
                 You're at the DJ Booth requesting a song. Create a program that asks if you are ready to party and then asks which song you would like to hear.
-            code_lines:
-                A: "{print} This is DJ Hedy"
-                B: "{ask} On fait la fête ?"
-                C: "{ask} Quelle chanson veux-tu écouter ?"
-                D: "{echo} Super choix ! J'adore"
+            code: |
+                {print} This is DJ Hedy
+                {ask} On fait la fête ?
+                {ask} Quelle chanson veux-tu écouter ?
+                {echo} Super choix ! J'adore
     2:
         1:
             story: |
                 Tes amis et toi allez regarder un film sur Netflix.
                 Affiche le titre du film que vous allez regarder et souhaite un bon visionnage !
-            code_lines:
-                A: "{print} It is time for an evening of Netflix"
-                B: "film {is} Sonic the Hedgehog 2"
-                C: "{print} We're going to film"
-                D: "{print} Bon visionnage !"
+            code: |
+                {print} It is time for an evening of Netflix
+                film {is} Sonic the Hedgehog 2
+                {print} We're going to film
+                {print} Bon visionnage !
         2:
             story: |
                 This is the webshop of a toy store. Create a program where costumers can add an item to their shopping cart.
-            code_lines:
-                A: "{print} Welcome to our toystore"
-                B: "jouet {is} {ask} Qu aimerais tu acheter ?"
-                C: "{print} The toy is added to your shopping cart."
-                D: "{print} Merci d'avoir fait tes achats chez nous !"
+            code: |
+                {print} Welcome to our toystore
+                jouet {is} {ask} Qu aimerais tu acheter ?
+                {print} The toy is added to your shopping cart.
+                {print} Merci d'avoir fait tes achats chez nous !
     3:
         1:
             story: |
@@ -45,59 +45,59 @@ levels:
                 Dans quelle maison iras-tu ?
                 Es-tu plutôt Gryffondor, Poufsouffle, Serdaigle, ou Serpentard ?
                 Laisse le programme faire une petite pause avant de dévoiler ta maison.
-            code_lines:
-                A: "{print} Une nouvelle année commence à Poudlard !"
-                B: "{print} The sorting hat is ready to sort you into a Hogwarts house."
-                C: "houses {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin"
-                D: "{sleep} 2"
-                E: "{print} And it is houses {at} {random}"
+            code: |
+                {print} Une nouvelle année commence à Poudlard !
+                {print} The sorting hat is ready to sort you into a Hogwarts house.
+                houses {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin
+                {sleep} 2
+                {print} And it is houses {at} {random}
         2:
             story: |
                 Écris un programme qui te choisit un plat au hasard. Crée une liste d'aliments et une liste de garnitures et laisse le programme décider pour toi !
-            code_lines:
-                A: "nourriture {is} pizza, icecream, salad, sandwich"
-                B: "garnitures {is} chocolate, cheese, tuna, sprinkles"
-                C: "{print} Your random meal for today is..."
-                D: "sleep 2"
-                E: "{print} nourriture {at} {random} avec garnitures {at} {random}"
+            code: |
+                nourriture {is} pizza, icecream, salad, sandwich
+                garnitures {is} chocolate, cheese, tuna, sprinkles
+                {print} Your random meal for today is...
+                sleep 2
+                {print} nourriture {at} {random} avec garnitures {at} {random}
     4:
         1:
             story: |
                 Tu es le plus jeune entraineur Pokémon de Pallet Town !
                 Fais un programme qui sélectionne ton premier Pokémon.
                 Laisse attendre le programme une minute avant de révéler ton premier Pokémon.
-            code_lines:
-                A: "pokemons {is} Pikachu, Charmander, Bulbasaur, Squirtle"
-                B: "{print} 'This is going to be your first pokémon!'"
-                C: "{sleep}"
-                D: "{print} pokemons {at} {random}"
+            code: |
+                pokemons {is} Pikachu, Charmander, Bulbasaur, Squirtle
+                {print} 'This is going to be your first pokémon!'
+                {sleep}
+                {print} pokemons {at} {random}
         2:
             story: |
                 Create a lottery that lets you choose an extra price that you might win.
-            code_lines:
-                A: "prices {is} car, hamster, 1 million euros"
-                B: "price {is} {ask} 'What would you like to win?'"
-                C: "{add} price {to_list} prices"
-                D: "{print} 'You won a ' prices {at} {random}"
+            code: |
+                prices {is} car, hamster, 1 million euros
+                price {is} {ask} 'What would you like to win?'
+                {add} price {to_list} prices
+                {print} 'You won a ' prices {at} {random}
     5:
         1:
             story: |
                 Make a program that checks if your favourite movie is already in the list of the computer.
                 If so, print that you have great taste, otherwise add the movie to the list.
-            code_lines:
-                A: "favoriete_movies {is} Batman, Spiderman, The Avengers, Jurassic Park"
-                B: "movie {is} {ask} 'What is your favourite movie?'"
-                C: "{if} movie {in} favoriete_movies {print} 'You have great taste!'"
-                D: "{else} {print} 'Such a shame that your favourite movie is not in the list, we will add it right away!'"
-                E: "{add} movie {to_list} favoriete_movies"
+            code: |
+                favoriete_movies {is} Batman, Spiderman, The Avengers, Jurassic Park
+                movie {is} {ask} 'What is your favourite movie?'
+                {if} movie {in} favoriete_movies {print} 'You have great taste!'
+                {else} {print} 'Such a shame that your favourite movie is not in the list, we will add it right away!'
+                {add} movie {to_list} favoriete_movies
         2:
             story: |
                 Create a maths game.
-            code_lines:
-                A: "{print} 'Solve this problem'"
-                B: "answer {is} {ask} '88 - 16 = ?'"
-                C: "{if} answer {is} 72 {print} 'Correct!'"
-                D: "{else} {print} 'Faux ! La réponse était 72'"
+            code: |
+                {print} 'Solve this problem'
+                answer {is} {ask} '88 - 16 = ?'
+                {if} answer {is} 72 {print} 'Correct!'
+                {else} {print} 'Faux ! La réponse était 72'
     6:
         1:
             story: |
@@ -105,61 +105,61 @@ levels:
                 First ask the age of the user and start calculating.
                 First calculate the dogyears then the catyears.
                 Show the user the different ages.
-            code_lines:
-                A: "age = {ask} 'How old are you?'"
-                B: "dog_age = age * 7"
-                C: "cat_age = age * 5"
-                D: "{print} 'In dogyears you are ' dog_age ' years old.'"
-                E: "{print} 'In catyears you are ' cat_age ' years old.'"
+            code: |
+                age = {ask} 'How old are you?'
+                dog_age = age * 7
+                cat_age = age * 5
+                {print} 'In dogyears you are ' dog_age ' years old.'
+                {print} 'In catyears you are ' cat_age ' years old.'
         2:
             story: |
                 Create a program that helps you calculate how many cakes you should buy for your birthday party.
-            code_lines:
-                A: "{print} 'It is your birthday!'"
-                B: "people = {ask} 'How many people do you want to give a slice of cake?'"
-                C: "cakes_amount {is} people/8"
-                D: "{print} 'You will have to buy ' cakes_amount ' cakes'"
+            code: |
+                {print} 'It is your birthday!'
+                people = {ask} 'How many people do you want to give a slice of cake?'
+                cakes_amount {is} people/8
+                {print} 'You will have to buy ' cakes_amount ' cakes'
     7:
         1:
             story: |
                 In a chess tournament there are three players left.
                 Create a program that decides which two players first play against each other.
                 First print the two players who play the first match, then print against which player the winner will play.
-            code_lines:
-                A: "players = Liam, Noah, Sophie"
-                B: "player1 = players {at} {random}"
-                C: "player2 = players {at} {random}"
-                D: "{print} player1 ' first plays against ' player2"
-                E: "{remove} player1 {from} players"
-                F: "{remove} player2 {from} players"
-                G: "{print} 'The winner plays against ' players {at} {random}"
+            code: |
+                players = Liam, Noah, Sophie
+                player1 = players {at} {random}
+                player2 = players {at} {random}
+                {print} player1 ' first plays against ' player2
+                {remove} player1 {from} players
+                {remove} player2 {from} players
+                {print} 'The winner plays against ' players {at} {random}
         2:
             story: |
                 Create the song 'The wheels on the bus go round and round'
-            code_lines:
-                A: "{print} 'the wheels on the bus go'"
-                B: "{repeat} 3 {times} {print} 'round and round'"
-                C: "{print} 'the wheels of the bus go round and round'"
-                D: "{print} 'all through the town '"
+            code: |
+                {print} 'the wheels on the bus go'
+                {repeat} 3 {times} {print} 'round and round'
+                {print} 'the wheels of the bus go round and round'
+                {print} 'all through the town '
     8:
         1:
             story: |
                 Tes quatre amis et toi jouent à Pokémon Go ! Crée un programme qui va décider pour chacun de vous l'équipe dans laquelle vous allez jouer.
                 Ce sera soit rouge, soit jaune, soit bleu ! Fais une pause après avoir annoncé l'équipe.
-            code_lines:
-                A: "teams = red, yellow, blue"
-                B: "{print} 'Rouge, Jaune ou Bleu ?'"
-                C: "{repeat} 5 {times}"
-                D: "  {print} 'You are selected in team... '"
-                E: "  {print} teams {at} {random}"
-                F: "  sleep 2"
+            code: |
+                teams = red, yellow, blue
+                {print} 'Rouge, Jaune ou Bleu ?'
+                {repeat} 5 {times}
+                  {print} 'You are selected in team... '
+                  {print} teams {at} {random}
+                  sleep 2
         2:
             story: |
                 Affiche le compte à rebours d'une partie de cache-cache.
-            code_lines:
-                A: "counter = 11"
-                B: "{repeat} 10 {times}"
-                C: "  counter = counter - 1"
-                D: "  {print} counter"
-                E: "  {sleep} 1"
-                F: "{print} 'Ready or not here I come!'"
+            code: |
+                counter = 11
+                {repeat} 10 {times}
+                  counter = counter - 1
+                  {print} counter
+                  {sleep} 1
+                {print} 'Ready or not here I come!'

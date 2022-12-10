@@ -15,7 +15,11 @@ levels:
             hint: "It's named after Hedy Lamarr."
             question_score: '10'
         2:
-            question_text: "Which command makes text appear?"
+            question_text: "Which need to be filled in on the blanks to make the text Hello! appear?"
+            code: |
+              ```
+              ___ Hello!
+              ```
             mp_choice_options:
             -   option: |
                     ```
@@ -1624,32 +1628,32 @@ levels:
                 {print} 'The children went:'
                 {repeat} 2 {times}
                     {print} 'Yay!'
-                    {print} 'Were going on holiday!'
+                    {print} 'We are going on vacation!'
             mp_choice_options:
             -   option: |
                     The children went:
                     Yay!
-                    Were going on holiday!
+                    We are going on vacation!
                 feedback: "Mind the `{repeat}` command!"
             -   option: |
                     The children went:
                     Yay!
-                    Were going on holiday!
+                    We are going on vacation!
                     Yay!
-                    Were going on holiday!
+                    We are going on vacation!
                 feedback: "Correct!"
             -   option: |
                     The children went:
                     Yay!
                     Yay!
-                    Were going on holiday!
-                    Were going on holiday!
+                    We are going on vacation!
+                    We are going on vacation!
                 feedback: "This order is incorrect."
             -   option: |
                     The children went:
                     Yay!
                     Yay!
-                    Were going on holiday!
+                    We are going on vacation!
                 feedback: "The last line is repeated too."
             correct_answer: "B"
             hint: "The block under the `{repeat}` command is repeated twice."
@@ -1661,7 +1665,7 @@ levels:
                 {if} end {is} happy {print} 'They lived happily ever after'
                 {else} {print} 'The world exploded. The end.'
             mp_choice_options:
-            -   option: "The `{print}` commands on the last two lines should start on new lines en start with 4 spaces."
+            -   option: "The `{print}` commands on the last two lines should start on new lines and start with 4 spaces."
                 feedback: "That's right!"
             -   option: "`{else}` is not a command!"
                 feedback: "It is!"
@@ -1716,7 +1720,7 @@ levels:
         7:
             question_text: "What is wrong with this code?"
             code: |-
-                eten = {ask} 'What would you like to eat?'
+                food = {ask} 'What would you like to eat?'
                 {if} food {is} fries
                 sauce = {ask} 'What sauce would you like?'
                     {print} 'One fries with ' sauce
