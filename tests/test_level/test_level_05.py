@@ -794,6 +794,31 @@ class TestsLevel5(HedyTester):
         )
 
 
+    def test_if_fix_nl(self):
+        code = textwrap.dedent("""\
+            naam is 5
+            als naam is 5 print 'leuk'
+            print 'minder leuk!'""")
+
+        expected = HedyTester.dedent("""\
+        naam = '5'
+        if naam == '5':
+          print(f'leuk')
+        else:
+          _ = 'x'
+        print(f'minder leuk!')""")
+
+        self.multi_level_tester(
+            max_level=5,
+            code=code,
+            lang='nl',
+            expected=expected,
+            translate=False
+        )
+
+
+
+
     #
     # if pressed tests
     #
