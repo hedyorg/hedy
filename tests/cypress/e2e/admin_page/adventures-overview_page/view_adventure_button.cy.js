@@ -4,14 +4,10 @@ import { goToAdminAdventuresOverviewPage } from '../../tools/navigation/nav.js';
 describe('View adventure button', () => {
   it('passes', () => {
     loginForAdmin();
-    goToAdminAdventuresOverviewPage()
+    goToAdminAdventuresOverviewPage();
 
-    cy.get('#statistics_cell')
+    cy.get(':nth-child(1) > #statistics_cell > a')
       .should('be.visible')
       .should('be.not.disabled')
-      .click();
-
-    cy.url()
-      .should('not.eq', Cypress.config('baseUrl') + Cypress.env('admin_page'));
   })
 })
