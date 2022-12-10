@@ -31,22 +31,8 @@ describe('Checks if save & share button works', () => {
       // clicking on button for copying the share link
       cy.get('#modal-copy-button')
       .should('be.visible')
+      .should('not.be.disabled')
       .click();
-
-
-      //cy.visit('http://localhost:8080/hedy/d89964c395f647bfb07c0ef4bcce8f31/view');
-
-      //cy.get('#public_button_container_2 > [onclick="hedyApp.copy_to_clipboard(hedyApp.viewProgramLink('d89964c395f647bfb07c0ef4bcce8f31'), 'Successfully copied to clipboard')"]')
-      
-      // checking if correct link is copied to clipboard:
-      //http://localhost:8080/hedy/d89964c395f647bfb07c0ef4bcce8f31/view (this is the correct link)
-      /*cy.window().then((win) => {
-        win.navigator.clipboard.readText().then((text) => {
-          expect(text).include('/hedy/d89964c395f647bfb07c0ef4bcce8f31/view');
-        });
-      });*/
-
-      //cy.get('#modal_alert_container').should('be.visible');
       
       goToHome();
       goToHedyPage();
@@ -58,7 +44,6 @@ describe('Checks if save & share button works', () => {
         }
       })
 
-      
       
     })
   })
