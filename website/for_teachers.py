@@ -453,3 +453,5 @@ class ForTeachersModule(WebsiteModule):
 
         self.db.store_adventure(adventure)
         return {"id": adventure["id"]}, 200
+
+# test
