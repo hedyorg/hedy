@@ -1,10 +1,10 @@
 import { loginForAdmin } from '../../tools/login/login.js'
-import { goToAdminAdventuresOverviewPage } from '../../tools/navigation/nav.js';
+import { goToAdminAdventuresPage } from '../../tools/navigation/nav.js';
 
 describe('View adventure button', () => {
   it('passes', () => {
     loginForAdmin();
-    goToAdminAdventuresOverviewPage();
+    goToAdminAdventuresPage();
 
     cy.get(':nth-child(1) > #statistics_cell > a')
       .should('be.visible')
