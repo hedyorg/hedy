@@ -10,7 +10,7 @@ First have a look at the open issues, there are three categories of issues you c
 * [Bugs](https://github.com/hedyorg/hedy/issues?q=is%3Aopen+is%3Aissue+label%3Abug) are problems that people have reported, which we want to see fixed.
 * [Approved](https://github.com/hedyorg/hedy/issues?q=is%3Aopen+is%3Aissue+label%3Aapproved) are issues we have decided we want to move forward.
 
-All other issues should not be picked up without contacting us on Discord (see below) since these issues require more deliberation. 
+All other issues should not be picked up without contacting us on Discord (see below) since these issues require more deliberation.
 
 **Project boards**
 
@@ -55,7 +55,7 @@ If you want to run the website version locally, run:
 ```bash
 (.env)$ python app.py
 ```
-Your local Hedy version should be available on address `http://0.0.0.0:8080/`. It appears that on some Windows machines this address does not work, make sure the server is still running and try visiting the website on `http://localhost:8080/`. 
+Your local Hedy version should be available on address `http://0.0.0.0:8080/`. It appears that on some Windows machines this address does not work, make sure the server is still running and try visiting the website on `http://localhost:8080/`.
 
 Additionally, some pages are known to give a type error about string concatenation. This can be fixed by creating an environment variable for the "BASE_URL" and setting it to `http://localhost:8080/`.
 
@@ -65,15 +65,19 @@ To run the unit tests:
 (.env)$ python -m pytest
 ```
 
-To run the front-end tests, you probably first need to install Cypress.
+To run the front-end tests, you need to install the NPM dependencies (which includes Cypress, the front-end test
+framework) first.
 
-To install Cypress, the front-end test framework, execute the following commands:
 ```bash
-$ cd tests
-$ npm install cypress --save-dev
+$ npm install
 ```
 
-To run the tests go to `/tests/` first.
+To run the tests go to `/tests/` first:
+
+```bash
+$ cd tests
+```
+
 You can then the tests on the command line with the following: `npx cypress run --spec "[path to test(s)]"`
 An example of running cypress: `npx cypress run --spec "cypress/e2e/login_page/*"`
 
@@ -118,12 +122,12 @@ As this project is growing and multiple people are working on it, we want to mov
 pre-commit install
 ```
 
-After this, every modification you commit will be linted by flake8 according to the configuration in setup.cfg. If there are any issues with your code, you can fix these manually using the output, or alternatively use autopep8 to solve these issues automatically (although autopep8 can't fix some issues). If you want to do this, install autopep8 using `pip install autopep8` and run `autopep8 --in-place --max-line-length=100 [your-file]`. 
+After this, every modification you commit will be linted by flake8 according to the configuration in setup.cfg. If there are any issues with your code, you can fix these manually using the output, or alternatively use autopep8 to solve these issues automatically (although autopep8 can't fix some issues). If you want to do this, install autopep8 using `pip install autopep8` and run `autopep8 --in-place --max-line-length=100 [your-file]`.
 
 If you want, you can bypass the pre-commit check by adding a no-verify flag:
 ```git commit -m "your message" --no-verify```
 
-When you push code to the repository or make a pull request, a Github Actions workflow will also automatically check your code. At the moment failing this check does not prevent from merging, as there is still some work to do to make the entire codebase compliant. However, it is appreciated if your modifications of new code follow PEP8 styling guidelines. Keep the Boy Scout Rule in mind: always leave the code better than you found it! 
+When you push code to the repository or make a pull request, a Github Actions workflow will also automatically check your code. At the moment failing this check does not prevent from merging, as there is still some work to do to make the entire codebase compliant. However, it is appreciated if your modifications of new code follow PEP8 styling guidelines. Keep the Boy Scout Rule in mind: always leave the code better than you found it!
 
 ## Working on the web front-end in TypeScript/JavaScript
 Part of the code base of Hedy is written in Python, which runs on the server.
@@ -143,20 +147,20 @@ $ npm ci
 $ build-tools/heroku/generate-typescript --watch
 ```
 
-The ```--watch``` command will keep looking for changes and automatically update the files. 
-To just keep it running while you are working on the front-end code. 
+The ```--watch``` command will keep looking for changes and automatically update the files.
+To just keep it running while you are working on the front-end code.
 If you just want to run the code once, simply remove this parameter.
-Make sure to re-load your browser (and work in incognito mode) to see the changes. 
+Make sure to re-load your browser (and work in incognito mode) to see the changes.
 These files are also automatically generated on deploy, so don't worry if you forget to generate them.
 
 ## Working on the web front-end in Tailwind
-All the styling in our front-end HTML templates is done using the Tailwind library. 
+All the styling in our front-end HTML templates is done using the Tailwind library.
 This library has generated classes for styling which we can call on HTML elements.
 To make sure you have access to all possible styling classes, generate the development css file:
 ```
 $ ./build-tools/heroku/tailwind/generate-development-css
 ```
-When merging we want to keep the CSS file as small as possible for performance reasons. 
+When merging we want to keep the CSS file as small as possible for performance reasons.
 Tailwind has a built-in ```purge``` option to only generate CSS for classes that are actually being used.
 Please run the following command so Tailwind only generated actual used classes:
 ```
@@ -214,9 +218,9 @@ When adding new Babel translations the implementation is a bit more complex, but
 
 ## Solving common merge conflicts
 When working on an issue in a branch it might happen that the main branch is updated before your contribution is finished.
-If you create a Pull Request it is possible that GitHub returns _merge conflicts_: 
+If you create a Pull Request it is possible that GitHub returns _merge conflicts_:
 you've worked on the same code as the updated part of main and GitHub in uncertain on which code to keep when merging.
-Always make sure that there are no merge conflicts when setting your PR to _Ready for Review_. 
+Always make sure that there are no merge conflicts when setting your PR to _Ready for Review_.
 In this section we describe the most common merge conflicts and how to solve them:
 
 - Conflict with `generated.css`
@@ -276,7 +280,7 @@ When you have your PR accepted into `main`, that version will be deployed on [he
 
 We do periodic deploys of `main` to the [production version](https://hedy.org) of Hedy.
 
-Accessing logs 
+Accessing logs
 -----------------------
 
 We store programs for logging purposes on s3. If you want to access the logs, you can use this command (if you have AWS access, mainly this is a note to self for Felienne!):

@@ -7,7 +7,7 @@ describe('Is able to load data from different timelines', () => {
     loginForTeacher();
     cy.wait(500);
     createClass();
-    cy.get('#class_view_button').click();
+    cy.get(".view_class").first().click();
     cy.get('#stats_button').click();
 
     // Test button visibility
