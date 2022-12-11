@@ -1696,7 +1696,6 @@ class ConvertToPython_5(ConvertToPython_4):
 
     def list_access_var(self, meta, args):
         var = escape_var(args[0])
-        print("in here")
          # if we tried to use 'at random' in level 16 raise an exception
         if isinstance(args[2], Tree):
             return var + ' = random.choice(' + args[1] + ')'
@@ -2198,14 +2197,6 @@ class ConvertToPython_16(ConvertToPython_15):
 
     def change_list_item(self, meta, args):
         return args[0] + '[' + args[1] + '-1] = ' + args[2]
-
-    def list_access_var(self, meta, args):
-        var = escape_var(args[0])       
-        if isinstance(args[2], Tree):
-            return var + ' = random.choice(' + args[1] + ')'
-        else:
-            return var + ' = ' + args[1] + '[' + args[2] + '-1]'
-
 
 @v_args(meta=True)
 @hedy_transpiler(level=17)
