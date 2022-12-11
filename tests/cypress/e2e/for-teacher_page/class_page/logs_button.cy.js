@@ -7,7 +7,7 @@ describe('Is able to go to logs page', () => {
     loginForTeacher();
     cy.wait(500);
     createClass();
-    cy.get("#class_view_button > .no-underline").click(); // Press view class button
+    cy.get(':nth-child(1) > #class_view_button').click(); // Press view class button
 
     var currentUrl = '';
     cy.url().then(url => {
