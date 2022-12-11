@@ -12,11 +12,9 @@ describe('Is able to see teacher page', () => {
     cy.get('#add-student').click();
     cy.get('#copy-join-link').click();
     
-  
-    cy.window().then((win) => {
-      win.navigator.clipboard.readText().then((text) => {
-        expect(text).include('/hedy/l/26EUkkL');
-      });
-    });
+    cy.window().its('navigator.clipboard').invoke('readText').then(cy.visit);
+    cy.wait(500);
+    cy.url().should('include', '/prejoin/');
+
   })
 })
