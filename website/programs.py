@@ -1,6 +1,6 @@
 import uuid
 
-from flask import g, jsonify, request
+from flask import g, jsonify, request, make_response
 from flask_babel import gettext
 
 import hedy
@@ -29,12 +29,12 @@ class ProgramsModule(WebsiteModule):
     def delete_program(self, user):
         body = request.json
         if not isinstance(body.get("id"), str):
-            return "program id must be a string", 400
+            return make_response("program id must be a string", 400)
 
         result = self.db.program_by_id(body["id"])
 
         if not result or (result["username"] != user["username"] and not is_admin(user)):
-            return "", 404
+            make_response("", 404)
         self.db.delete_program_by_id(body["id"])
         self.db.increase_user_program_count(user["username"], -1)
 
@@ -48,45 +48,45 @@ class ProgramsModule(WebsiteModule):
             self.db.set_favourite_program(user["username"], None)
 
         achievement = self.achievements.add_single_achievement(user["username"], "do_you_have_copy")
-        resp = {"message": gettext("delete_success")}
+        response = {"message": gettext("delete_success")}
         if achievement:
-            resp["achievement"] = achievement
-        return jsonify(resp)
+            response["achievement"] = achievement
+        return make_response(response)
 
     @route("/duplicate-check", methods=["POST"])
     def check_duplicate_program(self):
         body = request.json
         if not isinstance(body, dict):
-            return "body must be an object", 400
+            return make_response("body must be an object", 400)
         if not isinstance(body.get("name"), str):
-            return "name must be a string", 400
+            return make_response("name must be a string", 400)
 
         if not current_user()["username"]:
-            return gettext("save_prompt"), 403
+            return make_response(gettext("save_prompt"), 403)
 
         programs = self.db.programs_for_user(current_user()["username"])
         for program in programs:
             if program["name"] == body["name"]:
-                return jsonify({"duplicate": True, "message": gettext("overwrite_warning")})
-        return jsonify({"duplicate": False})
+                return make_response({"duplicate": True, "message": gettext("overwrite_warning")})
+        # Todo TB: Can't this response below not be empty? We can deduct the flow on the front-end
+        return make_response({"duplicate": False})
 
     @route("/", methods=["POST"])
     @requires_login
     def save_program(self, user):
         body = request.json
         if not isinstance(body, dict):
-            return "body must be an object", 400
+            return make_response("body must be an object", 400)
         if not isinstance(body.get("code"), str):
-            return "code must be a string", 400
+            return make_response("code must be a string", 400)
         if not isinstance(body.get("name"), str):
-            return "name must be a string", 400
+            return make_response("name must be a string", 400)
         if not isinstance(body.get("level"), int):
-            return "level must be an integer", 400
+            return make_response("level must be an integer", 400)
         if not isinstance(body.get("shared"), bool):
-            return "shared must be a boolean", 400
-        if "adventure_name" in body:
-            if not isinstance(body.get("adventure_name"), str):
-                return "if present, adventure_name must be a string", 400
+            return make_response("shared must be a boolean", 400)
+        if not isinstance(body.get("adventure_name", ""), str):
+            return make_response("if present, adventure_name must be a string", 400)
 
         error = False
         try:
@@ -94,7 +94,8 @@ class ProgramsModule(WebsiteModule):
         except BaseException:
             error = True
             if not body.get("force_save", True):
-                return jsonify({"parse_error": True, "message": gettext("save_parse_warning")})
+                # Todo TB: This boolean is redundant, we should deduct the flow from the response code
+                return make_response({"parse_error": True, "message": gettext("save_parse_warning")})
 
         # We check if a program with a name `xyz` exists in the database for the username.
         # It'd be ideal to search by username & program name,
@@ -137,27 +138,15 @@ class ProgramsModule(WebsiteModule):
         self.db.increase_user_save_count(user["username"])
         self.achievements.increase_count("saved")
 
-        # Todo TB: Would be nice to clean-up this response (a lot) by removing all duplicate dict entries
-        if self.achievements.verify_save_achievements(
-            user["username"], "adventure_name" in body and len(body["adventure_name"]) > 2
-        ):
-            return jsonify(
-                {
-                    "message": gettext("save_success_detail"),
-                    "share_message": gettext("copy_clipboard"),
-                    "name": body["name"],
-                    "id": program_id,
-                    "achievements": self.achievements.get_earned_achievements(),
-                }
-            )
-        return jsonify(
-            {
-                "message": gettext("save_success_detail"),
-                "share_message": gettext("copy_clipboard"),
-                "name": body["name"],
-                "id": program_id,
-            }
-        )
+        response = {
+            "message": gettext("save_success_detail"),
+            "share_message": gettext("copy_clipboard"),
+            "name": body["name"],
+            "id": program_id
+        }
+        if self.achievements.verify_save_achievements(user["username"], "adventure_name" in body and len(body["adventure_name"]) > 2):
+            response['achievements'] = self.achievements.get_earned_achievements()
+        return make_response(response)
 
     @route("/share", methods=["POST"])
     @requires_login
