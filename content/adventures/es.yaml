@@ -65,6 +65,8 @@ adventures:
                 example_code: "```\nnombre {is} {ask} '¿Cuál es tu nombre?'\n{if} nombre {is} Hedy {print} 'bien' {else} {print} 'buu'\n```\n"
                 example_code_3: "```\ncolores_bonitos {is} verde, amarillo\ncolor {is} {ask} '¿Cuál es tu color favorito?'\n{if} color {in} colores_bonitos {print} '¡bonito!'\n{else} {print} 'meh'\n```\n"
                 story_text_2: "A veces el código con un `{if}` se hace muy largo y no cabe bien en la línea. <br> También puedes dividir el código en dos líneas, empezando la segunda línea en el `{else}` así:\n"
+                story_text_4: "¡Otra cosa que funciona con ```if``` is ```pressed```! Con pressed puede enlazar cualquier letra en\nel alfabeto y cualquier tecla numérica de tu teclado a un comando. Si lo vinculas y pulsas la tecla,\nalgo sucederá. ¡Pruébalo!\n"
+                example_code_4: "```\nsi se pulsa x imprime \"¡funcionó!\"\n```\n"
             6:
                 start_code: "{print} '5 por 5 es ' 5 * 5"
                 story_text: |
@@ -93,10 +95,10 @@ adventures:
                         {print} 'Hola amigos'
                         {print} 'Esto se va a mostrar 5 veces'
                 story_text: |
-                    ## Indentación
-                     `{ask}` y `{print}` siguen funcionando igual. Pero `{if}`, `{else}` y `{repeat}` han cambiado.
-                    Ahora puedes ejecutar grupos de código juntos, pero tendrás que *indentar* el código.
-                    Esto signfica que es necesario poner 4 espacios al principio de la línea. Esto también se aplica cuando solo deseas crear un bloque de una línea.
+                    ## Sangría
+                    `{ask}` y `{print}` siguen funcionando como los conoces. Pero `{if}`, `{else}`, {pressed} y `{repeat}` han cambiado.
+                    Ahora puedes ejecutar grupos de código juntos, pero tendrás que *sangrar* el código.
+                    Eso significa poner cuatro espacios al principio de la línea. También tendrás que sangrar cuando sólo quieras crear un bloque de una línea.
                 example_code: |
                     Así es como funciona ahora el comando `{repeat}`:
                     ```

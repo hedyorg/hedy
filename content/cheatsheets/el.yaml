@@ -82,6 +82,9 @@
 -   name: '{in}'
     explanation: Έλεγξε τα στοιχεία με `{in}`
     demo_code: "pretty_colors {is} πράσινο, κίτρινο\ncolor {is} {ask} 'Ποιο είναι το αγαπημένο σου χρώμα;'\n{if} color {in} pretty_colors {print} 'ωραίο!' {else} {print} 'ωχ'"
+-   name: '{pressed}'
+    explanation: Check whether a given key on the keyboard is `{pressed}`.
+    demo_code: "{if} a {is} {pressed} {print} 'You pressed A!' {else} {print} 'You pressed another key!'"
 6:
 -   name: 'print'
     explanation: 'Εμφάνισε κάτι ακριβώς, χρησιμοποιώντας εισαγωγικά'
@@ -132,6 +135,9 @@
 -   demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
     name: '`{repeat}` με χελώνα'
     explanation: '{repeat} πολλές γραμμές'
+-   demo_code: "{if} a {is} {pressed}\n    {print} 'You pressed A!'\n{else}\n    {print} 'You pressed another key!'"
+    name: '{pressed}'
+    explanation: Check whether a given key on the keyboard is `{pressed}`.
 9:
 -   name: "`{if}` with multiple lines"
     explanation: "The answer of a sum of questions with '{ask}' and see if it is correct. Now we print out two lines."

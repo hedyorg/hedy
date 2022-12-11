@@ -1,6 +1,6 @@
 1:
 -   name: '{print}'
-    explanation: نطبع شيئاً على الشاشة باستخدام `{print}`.
+    explanation: نطبع شيئاً على الشاشة باستخدام `{الطباعه}`.
     demo_code: '{print} أهلا ومرحبا بكم في هيدي!'
 -   name: '{ask}'
     explanation: نسأل عن شيء ما باستخدام `{ask}`.
@@ -93,6 +93,9 @@
         الالوان_الجميلة {is} اخضر، اصفر، وردي
         لوني_المفضل {is} {ask} "ما لونك المفضل؟"
         {if} لوني_المفضل {in} الالوان_الجميلة {print} "هذا رائع!" {else} {print} "يا خسارة!"
+-   name: '{pressed}'
+    explanation: Check whether a given key on the keyboard is `{pressed}`.
+    demo_code: "{if} a {is} {pressed} {print} 'You pressed A!' {else} {print} 'You pressed another key!'"
 6:
 -   name: "{print}"
     explanation: "نطبع على الشاشة النص ما بين علامات الاقتباس حرفياً"
@@ -146,6 +149,9 @@
         {repeat} ٤ {times}
             {turn} ٩٠
             {forward} ٥٠
+-   name: '{pressed}'
+    explanation: Check whether a given key on the keyboard is `{pressed}`.
+    demo_code: "{if} a {is} {pressed}\n    {print} 'You pressed A!'\n{else}\n    {print} 'You pressed another key!'"
 9:
 -   name: "`{if}` مع أكثر من سطر برمجي"
     explanation: "نجيب على سؤال ما باستخدام الأمر {ask} و نفحص بعدها ما اذا كانت الاجابة صحيحة. يمكننا الان طباعة اكثر من سطر على الشاشة."
