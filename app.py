@@ -196,7 +196,7 @@ if os.getenv('IS_PRODUCTION'):
     @app.before_request
     def reject_e2e_requests():
         if utils.is_testing_request(request):
-            return 'No E2E tests are allowed in production', 400
+            return make_response('No E2E tests are allowed in production', 400)
 
 
 @app.before_request
@@ -323,29 +323,28 @@ if os.getenv('PROXY_TO_TEST_HOST') and not os.getenv('IS_TEST_ENV'):
 @app.route('/session_test', methods=['GET'])
 def echo_session_vars_test():
     if not utils.is_testing_request(request):
-        return 'This endpoint is only meant for E2E tests', 400
-    return jsonify({'session': dict(session)})
+        return make_response('This endpoint is only meant for E2E tests', 400)
+    return make_response({'session': dict(session)})
 
 
 @app.route('/session_main', methods=['GET'])
 def echo_session_vars_main():
     if not utils.is_testing_request(request):
-        return 'This endpoint is only meant for E2E tests', 400
-    return jsonify({'session': dict(session),
-                    'proxy_enabled': bool(os.getenv('PROXY_TO_TEST_HOST'))})
+        return make_response('This endpoint is only meant for E2E tests', 400)
+    return make_response({'session': dict(session), 'proxy_enabled': bool(os.getenv('PROXY_TO_TEST_HOST'))})
 
 
 @app.route('/parse', methods=['POST'])
 def parse():
     body = request.json
     if not body:
-        return "body must be an object", 400
+        return make_response("body must be an object", 400)
     if 'code' not in body:
-        return "body.code must be a string", 400
+        return make_response("body.code must be a string", 400)
     if 'level' not in body:
-        return "body.level must be a string", 400
+        return make_response("body.level must be a string", 400)
     if 'adventure_name' in body and not isinstance(body['adventure_name'], str):
-        return "if present, body.adventure_name must be a string", 400
+        return make_response("if present, body.adventure_name must be a string", 400)
 
     error_check = False
     if 'error_check' in body:
@@ -440,7 +439,7 @@ def parse():
 
     if "Error" in response and error_check:
         response["message"] = gettext('program_contains_error')
-    return jsonify(response)
+    return make_response(response)
 
 
 @app.route('/parse-by-id', methods=['POST'])
@@ -449,9 +448,9 @@ def parse_by_id(user):
     body = request.json
     # Validations
     if not isinstance(body, dict):
-        return 'body must be an object', 400
+        return make_response('body must be an object', 400)
     if not isinstance(body.get('id'), str):
-        return 'class id must be a string', 400
+        return make_response('class id must be a string', 400)
 
     program = DATABASE.program_by_id(body.get('id'))
     if program and program.get('username') == user['username']:
@@ -461,11 +460,11 @@ def parse_by_id(user):
                 program.get('level'),
                 program.get('lang')
             )
-            return {}, 200
+            return make_response('', 204)
         except BaseException:
-            return {"error": "parsing error"}, 200
+            return make_response({"error": "parsing error"})
     else:
-        return 'this is not your program!', 400
+        return make_response('this is not your program!', 400)
 
 
 @app.route('/parse_tutorial', methods=['POST'])
@@ -477,9 +476,9 @@ def parse_tutorial(user):
     level = int(body['level'])
     try:
         result = hedy.transpile(code, level, "en")
-        jsonify({'code': result.code}), 200
+        make_response({'code': result.code})
     except BaseException:
-        return "error", 400
+        return make_response("error", 400)
 
 
 @app.route("/generate_machine_files", methods=['POST'])
@@ -520,7 +519,7 @@ def prepare_files():
             zip_file.write('machine_files/' + file)
     zip_file.close()
 
-    return jsonify({'filename': filename}), 200
+    return make_response({'filename': filename})
 
 
 @app.route("/download_machine_files/<filename>", methods=['GET'])
@@ -663,7 +662,7 @@ def report_error():
         'is_test': 1 if os.getenv('IS_TEST_ENV') else None
     })
 
-    return 'logged'
+    return make_response('logged')
 
 
 @app.route('/client_exception', methods=['POST'])
@@ -680,7 +679,7 @@ def report_client_exception():
     )
 
     # Return a 500 so the HTTP status codes will stand out in our monitoring/logging
-    return 'logged', 500
+    return make_response('logged', 500)
 
 
 @app.route('/version', methods=['GET'])
@@ -817,8 +816,7 @@ def query_logs():
             return utils.error_page(error=403, ui_message=gettext('unauthorized'))
 
     (exec_id, status) = log_fetcher.query(body)
-    response = {'query_status': status, 'query_execution_id': exec_id}
-    return jsonify(response)
+    return make_response({'query_status': status, 'query_execution_id': exec_id})
 
 
 @app.route('/logs/results', methods=['GET'])
@@ -833,8 +831,7 @@ def get_log_results():
 
     data, next_token = log_fetcher.get_query_results(
         query_execution_id, next_token)
-    response = {'data': data, 'next_token': next_token}
-    return jsonify(response)
+    return make_response({'data': data, 'next_token': next_token})
 
 
 @app.route('/tutorial', methods=['GET'])
@@ -1531,11 +1528,11 @@ def translate_keywords():
         translated_code = hedy_translation.translate_keywords(body.get('code'), body.get(
             'start_lang'), body.get('goal_lang'), level=int(body.get('level', 1)))
         if translated_code:
-            return jsonify({'success': 200, 'code': translated_code})
+            return make_response({'code': translated_code})
         else:
-            return gettext('translate_error'), 400
+            return make_response(gettext('translate_error'), 400)
     except BaseException:
-        return gettext('translate_error'), 400
+        return make_response(gettext('translate_error'), 400)
 
 
 # TODO TB: Think about changing this to sending all steps to the front-end at once
