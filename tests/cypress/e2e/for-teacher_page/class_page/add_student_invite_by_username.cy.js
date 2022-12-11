@@ -7,7 +7,7 @@ describe('Is able to add student by name', () => {
     
     cy.wait(500);
    
-    cy.get(':nth-child(1) > #class_view_button').click();
+    cy.get(".view_class").first().click();
 
     //delete student1 if in class
   
@@ -52,7 +52,7 @@ describe('Is able to add student by name', () => {
 
     loginForTeacher();
     cy.wait(500);
-    cy.get('#class_view_button').click();
+    cy.get(".view_class").first().click();
     
     cy.get('.username_cell').should(($div) => {
       const text = $div.text()
