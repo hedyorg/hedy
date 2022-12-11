@@ -1,10 +1,10 @@
 import { loginForAdmin } from '../../tools/login/login.js'
-import { goToAdminStatsPage } from '../../tools/navigation/nav.js';
+import { goToAdminAchievementsPage } from '../../tools/navigation/nav.js';
 
 describe('Return to admin page button', () => {
   it('passes', () => {
     loginForAdmin();
-    goToAdminStatsPage();
+    goToAdminAchievementsPage();
 
     cy.get('#return_to_admin_page_button')
       .should('be.visible')

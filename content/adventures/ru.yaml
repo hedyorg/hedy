@@ -2,7 +2,7 @@ adventures:
     default:
         name: "Вступление"
         description: "Объяснение уровня"
-        default_save_name: "intro"
+        default_save_name: "вступление"
         levels:
             6:
                 start_code: "{print} '5 раз по 5 это ' 5 * 5"
@@ -26,11 +26,11 @@ adventures:
                 example_code_6: "```\na = 'Hello'\nb = 'Мир!'\n{print} a + b\n```\n"
             1:
                 story_text: "## Добро пожаловать в Hedy!\nНа Уровне 1 вы можете использовать команды `{print}`, `{ask}` и `{echo}`.\nВведите свой код в поле программирования. Или нажмите зеленую кнопку в блоке примера кода, и код будет набран за вас!\nПопробуйте выполнить код самостоятельно с помощью зеленой кнопки \"Выполнить код\" под полем программирования.\n\nВы можете распечатать текст на экране с помощью команды `{print}`.     \n"
-                example_code: "```\n{print} Hello!\n{print} Welcome to Hedy!\n```\n"
+                example_code: "```\n{print} Привет!\n{print} Добро пожаловать в Хеди!\n```\n"
                 story_text_2: "Вы также можете запросить ввод с помощью команды `{ask}`и повторить его с помощью команды `{echo}` .\n"
-                story_text_3: "Let's get started! Don't know what to create? In the next tabs you will find ideas for programs to build.\n"
-                example_code_2: "```\n{ask} What is your name?\n{echo} hello\n```\n"
-                start_code: '{print} hello world!'
+                story_text_3: "Давайте начнем! Не знаете, что создать? В следующих вкладках вы найдете идеи для создания программ.\n"
+                example_code_2: "```\n{ask} Как тебя зовут?\n{echo} привет\n```\n"
+                start_code: '{print} привет мир!'
             2:
                 story_text: "## Variables\nIn level 2 we learn two new commands: `{is}` and `{sleep}`.\nYou can name a word with `{is}`. This is called a variable. In this example we made a variable called name and a variable called age. You can use the word name anywhere in your code and it will be replaced by Hedy, like this:\n\nThis way you no longer need the `{echo}` command!\n"
                 example_code: "```\nname {is} Hedy\nage {is} 15\n{print} name is age years old\n```\n"
@@ -93,6 +93,8 @@ adventures:
                 example_code_3: "```\nкрасивые_цвета {is} зеленый, желтый\nцвет {is} {ask} 'Какой ваш любимый цвет?'\n{if} цвет {in} красивые_цвета {print} 'pretty!'\n{else} {print} 'meh'\n```\n"
                 story_text_2: "Иногда код с `{if}` становится очень длинным и не помещается на строке. <br> Вы также можете разделить код на две строки, начав вторую строку с `{else}` следующим образом:\n"
                 example_code_2: "```\nимя {is} {ask} 'как тебя зовут?'\n{if} имя {is} Хеди {print} 'мило'\n{else} {print} 'boo!'\n```\n"
+                example_code_4: "```\nif x is pressed print \"it worked!\"\n```\n"
+                story_text_4: "Something else that works with ```if``` is ```pressed```! With pressed you can link any letter in\nthe alphabet and any number key on your keyboard to a command. If you link it, and press the key,\nsomething will happen. Try it out!\n"
             7:
                 start_code: "{repeat} 3 {times} {print} 'Hedy is fun!'"
                 story_text: "## Уровень 7! Уровень 7!\nУровень 7 добавляет команду `{repeat}`. `{repeat}` можно использовать для многократного выполнения одной строки кода.\n"
