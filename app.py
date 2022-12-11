@@ -1521,7 +1521,7 @@ def get_highscores_page(user, filter):
 def change_language():
     body = request.json
     session['lang'] = body.get('lang')
-    return jsonify({'succes': 200})
+    return make_response('', 204)
 
 
 @app.route('/translate_keywords', methods=['POST'])
