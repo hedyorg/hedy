@@ -19,6 +19,7 @@ module.exports = defineConfig({
     admin_page: '/admin',
     admin_users_page: '/admin/users',
     teachers_page: '/for-teachers',
+    class_page: '/for-teachers/class/',
     customize_class_page: '/for-teachers/customize-class/', // You should concatenate this with the class id e.g. /for-teachers/customize_class/<class id>
     stats_page: '/stats/class/', // You should concatenate this with the class id e.g. /stats/class/<class id>
     logs_page: '/logs/class/', // You should concatenate this with the class id e.g. /logs/class/<class id>
