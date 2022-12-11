@@ -416,6 +416,35 @@ class TestsLevel3(HedyTester):
             extra_check_function=self.result_in(['koe', 'kiep', 'muis']),
         )
 
+    # add/remove tests (IMAN)
+    #
+    def test_add_text_to_list(self):
+        code = textwrap.dedent("""\
+        ff is 1, 2
+        remove 1 from ff
+        remove 2 from ff
+        print ff at random""")
+
+        expected = textwrap.dedent("""\
+        ff = ['1', '2']
+        try:
+          ff.remove(1)
+        except:
+          pass
+        try:
+          ff.remove(2)
+        except:
+          pass
+        print(f'{random.choice(ff)}')
+        """)
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            max_level=11,
+            extra_check_function=self.result_in([]),
+        )
+        
     def test_add_text_with_inner_single_quote_to_list(self):
         code = textwrap.dedent("""\
         dieren is koe, kiep
