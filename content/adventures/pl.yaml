@@ -38,6 +38,8 @@ adventures:
                 example_code_3: "```\nładne_kolory {is} zielony, żółty\nkolor {is} {ask} 'Jaki jest twój ulubiony kolor?'\n{if} kolor {in} ładne_kolory {print} 'śliczny!'\n{else} {print} 'eh'\n```\n"
                 story_text_2: "Czasami kod z `{if}` robi się bardzo długi i nie mieści się w linii.<br> Możesz podzielić kod na dwie linie, zaczynając drugą linię od `{else}` w taki sposób:\n"
                 example_code_2: "```\nimię {is} {ask} 'jak masz na imię?'\n{if} imię {is} Hedy {print} 'to miło'\n{else} {print} 'bu!'\n```\n"
+                story_text_4: "Something else that works with ```if``` is ```pressed```! With pressed you can link any letter in\nthe alphabet and any number key on your keyboard to a command. If you link it, and press the key,\nsomething will happen. Try it out!\n"
+                example_code_4: "```\nif x is pressed print \"it worked!\"\n```\n"
             6:
                 start_code: "{print} '5 razy 5 to' 5 * 5"
                 story_text: "## 1 + 1\n W tym poziomie nauczysz się czegoś nowego: od teraz możesz również liczyć.\n \n Dodawanie jest proste, możesz je zapisać tak jak w matematyce: na przykład `5 + 5`. Odejmowanie też jest proste, to po prostu `5 - 5`.\n \n Mnożenie jest trochę inne, ponieważ nie ma znaku mnożenia na twojej klawiaturze. Poszukaj, naprawdę go nie ma!\n Z tego powodu mnożymy za pomocą gwiazdki nad 8: `5 * 5`. Czytaj to jako „5 razy 5”, tak lepiej zapamiętasz.\n"
@@ -197,14 +199,14 @@ adventures:
                 example_code: "```\npeople {is} mom, dad, Emma, Sophie\n{print} _ the dishes are done by _\n{sleep}\n{print} people {at} _\n```\n"
                 start_code: "{print} 'Who does the dishes?'"
             3:
-                story_text: "## Dishwashing\nDo you always disagree at home about who should wash the dishes or change the litter box today?\nThen you can let the computer choose very fairly. You can program that in this level!\nYou first make a list of the members of your family. Then choose '{at} {random}' from the list.\n"
-                example_code: "```\npeople {is} mom, dad, Emma, Sophie\n{print} people {at} {random}\n```\n"
-                story_text_2: "## Hack the dishwashing program!\nDon't feel like doing the dishes yourself? Hack the program to remove your name from the list.\n"
-                example_code_2: "```\npeople {is} mom, dad, Emma, Sophie\nyour_name {is} {ask} Who are you?\n{remove} your_name {from} people\n{print} people {at} {random} does the dishes\n```\n"
-                start_code: '{print} Who does the dishes?'
-        name: Dishes?
-        description: Use the computer to see who does the dishes (Start at level 2)
-        default_save_name: Dishes
+                story_text: "## Zmywarka\nCzy w domu nie zawsze zgadzasz  się z tym, kto powinien umyć naczynia lub zmienić kuwetę dzisiaj?\nW takich przypadkach możesz użyć komputera aby wybrać sprawiedliwie. Możesz zaprogramować to na tym poziomie!\nNajpierw przygotuj listę członków swojej rodziny. Następnie wybierz z listy `{at} {random}`.\n"
+                example_code: "```\nosoby {is} mama, tata, Ewa, Sofia\n{print} osoby  {at} {random}\n```\n"
+                story_text_2: "## Zhakuj program zmywarki!\nNie masz ochoty samemu zmywać naczyń? Zhakuj program usuwając swoje imię z listy za pomocą komendy `{remove}` `{from}`.\n"
+                example_code_2: "```\nosoby {is} mama, tata, Ewa, Sofia\ntwoje_imie {is} {ask} Jak masz na imię?\n_ twoje_imie  _ osoby\n{print} _ _ _ dziś zmywa\n```\n"
+                start_code: '{print} Kto dziś zmywa naczynia?'
+        name: Zmywanie?
+        description: Użyj komputera, aby sprawdzić, kto zmywa naczynia (Start na poziomie 2)
+        default_save_name: Zmywanie
     dice:
         levels:
             4:
@@ -267,11 +269,11 @@ adventures:
                 example_code: "```\nchoices {is} rock, paper, scissors\n{print} _ The computer chose: _ _ {at} _\n```\n"
                 start_code: "{print} 'Welcome to your own rock scissors paper!'"
             3:
-                story_text: "## Rock, paper, scissors\n\nIn this level we can enter lists and choose things from them.\nYou first make a list with `{is}`. Then you can let the computer choose something from the list with `{at} {random}`.\nFor example, you can let the computer pick from rock, paper and scissors.\n"
-                example_code: "\n```\nchoices {is} rock, paper, scissors\n{print} choices {at} {random}\n```\n"
-                start_code: '{print} Welcome to your own rock scissors paper!'
-                story_text_2: "## Challenge\nNow you only have one player, so can you add a second player?\nYou can even use variables to name player 1 and player 2.\n"
-                example_code_2: "```\nchoices {is} rock, paper, scissors\n{print} player 1 chooses... choices {at} {random}\n{print} player 2 _\n```\n"
+                story_text: "## Papier, kamień, nożyce\n\nNa tym poziomie możemy wprowadzać listy i wybierać z nich rzeczy.\nNajpierw tworzysz listę za pomocą `{is}`. Następnie możesz pozwolić komputerowi wybrać coś z listy za pomocą `{at} {random}`.\nNa przykład, możesz pozwolić komputerowi wybrać z listy papier, kamień lub nożyce.\n"
+                example_code: "```\nmożliwości {is} papier, kamień, nożyce\n{print} możliwości  {at} {random}\n```\n"
+                start_code: '{print} Witamy, w twojej własnej grze w papier, kamień, nożyce!'
+                story_text_2: "## Wyzwanie\nObecnie masz tylko jednego gracza, czy możesz dodać drugiego?\nMożesz nawet użyć zmiennych, aby nazwać gracza 1 i gracza 2.\n"
+                example_code_2: "```\nmożliwości {is} papier, kamień, nożyce\n{print} gracz 1 wybiera... możliwości  {at} {random}\n{print} gracz 2 _\n```\n"
             2:
                 story_text: "## Papier, kamień, nożyce\nNa tym poziomie możesz poćwiczyć używanie zmiennych, dzięki będziesz mógł stworzyć grę w papier, kamień, nożyce w następnym poziomie!\n"
                 example_code: "```\n_ {is} {ask} papier, kamień czy nożyce?\n{print} Ja wybrałam _\n```\n"
@@ -322,11 +324,11 @@ adventures:
     restaurant:
         levels:
             3:
-                start_code: '# place your code here'
-                story_text: "## Random Restaurant\nHaving trouble to decide what you wanna have for dinner? You can let Hedy choose for you!\nSimply add lists of your favorite (or least favorite) meals and Hedy can randomly choose your dinner.\nYou can also have a bit of fun, by letting Hedy choose the price for your dinner as well! What will you get?\n"
-                example_code: "```\n{print} Welcome to Hedy's Random Restaurant!\n{print} The only restaurant that will randomly choose your meal and its price for you!\nstarters {is} salad, soup, carpaccio\nmains {is} pizza, brussels sprouts, spaghetti\ndesserts {is} brownies, ice cream, french cheeses\ndrinks {is} cola, beer, water\nprices {is} 1 dollar, 10 dollars, 100 dollars\n{print} You will start with: starters {at} {random}\n{print} Then we'll serve: mains {at} {random}\n{print} And as dessert: desserts {at} {random}\n{print} You will get a drinks {at} {random} to drink\n{print} That will be: prices {at} {random}\n{print} Thank you and enjoy your meal!\n```\n"
-                story_text_2: "## Allergies\nDoes your costumer have any allergies or do they dislike certain dishes? Then you can use the `{remove}`command to remove it from your menu.\n"
-                example_code_2: "```\n{print} Mystery milkshake\nflavors {is} strawberry, chocolate, vanilla\nallergies {is} {ask} Are you allergic to any falvors?\n{remove} allergies {from} flavors\n{print} You get a flavors {at} {random} milkshake\n```\n"
+                start_code: '# umieść swój kod tutaj'
+                story_text: "# Losowa Restauracja\nMasz problem z podjęciem decyzji, co chcesz zjeść na obiad? Możesz pozwolić Hedy wybrać za Ciebie!\nPo prostu dodaj listę swoich ulubionych (lub najmniej ulubionych) potraw, a Hedy może losowo wybrać Twój obiad.\nMożesz się też trochę zabawić, pozwalając Hedy wybrać także cenę za obiad! Co dostaniesz?\n## Wyzwanie\nCzy potrafisz stworzyć własną wersję losowej restauracji?\n"
+                example_code: "```\n{print} Witamy w Losowej Restauracji Hedy!\n{print} Jedyna taka restauracja w której wybierzemy twój obiad i jego cenę za ciebie całkowicie losowo!\nstarters {is} salad, soup, carpaccio\nmains {is} pizza, brussels sprouts, spaghetti\ndesserts {is} brownies, ice cream, french cheeses\ndrinks {is} cola, beer, water\nprices {is} 1 dollar, 10 dollars, 100 dollars\n{print} Rozpoczniesz od: starters {at} {random}\n{print} Następnie podamy: mains {at} {random}\n{print} A na deser: desserts {at} {random}\n{print} Do picia dosteniesz  drinks {at} {random} \n{print} Całość kosztuje: prices {at} {random}\n{print} Smacznego!\n```\n"
+                story_text_2: "## Alergeny\nCzy Twój klient ma jakieś alergie lub nie lubi pewnych potraw? Wtedy możesz użyć komendy `{remove}`, aby usunąć je ze swojego menu.\n"
+                example_code_2: "```\n{print} Tajemniczny shake\nsmaki {is} truskawkowy, czekoladowy, waniliowy\nalergie {is} {ask} Czy jesteś na coś uczulony?\n_\n{print} Dostaniesz  {at} {random} smami\n```\n"
             15:
                 start_code: '# place your code here'
                 story_text: "## Restaurant\nWith the `{while}` you can make sure your costumers can keep adding orders until they are done.\n"
@@ -559,8 +561,8 @@ adventures:
                 story_text: "## Papuga\nStwórz swoją własną cyfrową papugę która powtórzy wszystko co powiesz!\n"
                 example_code: "```\n{print} Jestem papuga Hedy\n{ask} Jak masz na imię?\n{echo}\n{echo}\n```\n"
                 start_code: '{print} Jestem papuga Hedy'
-                story_text_2: "## Challenge\nCan you make the parrot ask a different question? Fill in the blanks in the example!\n"
-                example_code_2: "```\n{print} Im Hedy the parrot\n{ask} _\n{echo}\n{echo}\n"
+                story_text_2: "## Wyzwanie\nCzy potrafisz sprawić, by papuga zadała inne pytanie? Uzupełnij puste miejsca w przykładzie!\n"
+                example_code_2: "```\n{print} Jestem papuga Hedy\n{ask} _\n{echo}\n{echo}\n"
             2:
                 story_text: "## Papuga\nStwórz swoją własną cyfrową papugę, która będzie po tobie powtarzać cokolwiek powiesz!\n"
                 example_code: "```\n{print} Jestem papuga Hedy\nimię {is} {ask} jak masz na imię?\n{print} imię\n{sleep}\n{print} ara\n{sleep}\n{print} imię\n```\n"
@@ -569,8 +571,8 @@ adventures:
                 example_code_2: "```\n{print} Jestem papuga Hedy\nimię {is} {ask} Jak masz na imię?\n{print} imię\n{sleep}\n{print} imię\nnazwisko {is} {ask} Jak masz na nazwisko?\n_\n{sleep}\n_\n```\n"
             3:
                 story_text: "## Papuga\nNaucz swoją papugę nowego słowa z poleceniem `{add}`.\n## Wyzwanie\nJak sprawić aby twoja papuga mówiła wiele słów?\n"
-                example_code: "```\nwords {is} squawk, Hedy\n{print} Train your parrot!\nnew_word {is} {ask} Which word do you want to teach them?\n{add} new_word {to_list} words\n{print} \U0001F9D2 Say new_word , Hedy!\n{print} \U0001F99C words {at} {random}\n```\n"
-                start_code: '# place your code here'
+                example_code: "```\nsłowa {is} ara, Hedy\n{print} Naucz twoją papugę!\nnowe_słowo {is} {ask} Jakiego słowa chcesz ja nauczyć?\n{add} nowe_słowo {to_list} słowa\n{print} \U0001F9D2 Powiedz nowe_słowo , Hedy!\n{print} \U0001F99C słowa {at} {random}\n```\n"
+                start_code: '# umieść swój kod tutaj'
             5:
                 story_text: "## Parrot\nReward your parrot {if} it says the correct word!\n"
                 example_code: "```\nwords {is} squawk, Hedy\n{print} 'Train your parrot!'\nnew_word {is} {ask} 'Which word do you want to teach them?'\n{add} new_word {to_list} words\nsaid_word {is} words {at} {random}\n{print} '\U0001F9D2 Say ' new_word ', Hedy!'\n{print} '\U0001F99C ' said_word\n{if} said_word {is} new_word {print} '\U0001F9D2 Great job, Hedy! \U0001F36A'\n{else} {print} '\U0001F9D2 No, Hedy! Say ' new_word\n```\n"
@@ -581,7 +583,7 @@ adventures:
         default_save_name: Żółw
         levels:
             1:
-                story_text: "## Narysujmy coś\nMożesz wykorzystać Hedy także do rysowania.  Rysując linie i obracając żółwia, możesz narysować kwadrat lub gwiazdę!\n\nPisząć `{forward}` możesz narysować linie. Liczba zaraz po komendzie mówi o tym ile ma przejść żółw rysując linie..`{turn} {right}` obraca żółwia o ćwierć obrotu w prawo (zgodnie z ruchem wskazówek zegara), `{turn} {left}` obraca w lewo (przeciwnie do ruchu wskazówek zegara).\nJeśli chcesz przesunąć żółwia do tył, możesz wykorzystać komendę `{forward}` ale z ujemną liczba. Na przykład `{forward} -100`\n\n## Wyzwanie\nTo jest początek schodków. Możesz sprawić aby miały 5 stopni?\n"
+                story_text: "## Narysujmy coś\nMożesz wykorzystać Hedy także do rysowania.  Rysując linie i obracając żółwia, możesz narysować kwadrat lub gwiazdę!\n\nPisząć `{forward}` możesz narysować linie. Liczba zaraz po komendzie mówi o tym ile ma przejść żółw rysując linie..`{turn} {right}` obraca żółwia o ćwierć obrotu w prawo (zgodnie z ruchem wskazówek zegara), `{turn} {left}` obraca w lewo (przeciwnie do ruchu wskazówek zegara).\n\nJeśli chcesz przesunąć żółwia do tył, możesz wykorzystać komendę `{forward}` ale z ujemną liczba. Na przykład `{forward} -100`\n\n## Wyzwanie\nTo jest początek schodków. Możesz sprawić aby miały 5 stopni?\n"
                 example_code: "```\n{forward} 50\n{turn} {right}\n{forward} 50\n{turn} {left}\n{forward} 50\n```\n"
                 start_code: "{forward} 50\n{turn} {left}"
             2:
@@ -591,9 +593,9 @@ adventures:
                 story_text_2: "Również na poziomie 1 żółw mógł skręcać tylko w lewo lub w prawo. To trochę nudne!\nNa poziomie 2 może obracać się we wszystkich kierunkach.\n\nUżyj liczby 90, aby obrócić o żółwia o ćwierć obrotu. Wielkość obrotu liczby w stopniach. Pełny obrót to 360 stopni.\n\n## Wyzwanie\nCzy możesz zrobić figurę za pomocą tego kodu? Może trójkąt lub okrąg?\n"
                 example_code_2: "```\n{print} Rysowanie kształtu\nkąt {is} 90\n{turn} kąt\n{forward} 25\n{turn} kąt\n{forward} 25\n```\n"
             3:
-                story_text: "## Searching turtle\nIn this level you can use use `{at} {random}` with the drawing turtle. A random choice makes the turtle walk a different path each time.\nUse `{at} {random}` to choose a value from a list. You can copy and paste lines 2 and 3 to create a longer random path.\n"
-                example_code: "\n```\nangles {is} 10, 50, 90, 150, 250\n{turn} angles {at} {random}\n{forward} 25\n```\n"
-                start_code: "angles {is} 10, 50, 90, 150, 250\n{turn} angles {at} {random}\n{forward} 25\n"
+                story_text: "## Poszukujący żółw\nNa tym poziomie możesz użyć  `{at} {random}` podczas rysowania żółwiem. Losowy wybór sprawia, że żółw za każdym razem idzie inną ścieżką.\nUżyj `{at} {random}`, aby wybrać wartość z listy. \n## Wyzwanie\nMożesz skopiować i wkleić linie 2 i 3, aby stworzyć dłuższą losową ścieżkę.\n"
+                example_code: "```\nkąty {is} 10, 50, 90, 150, 250\n{turn} kąty {at} {random}\n{forward} 25\n```\n"
+                start_code: "kąty {is} 10, 50, 90, 150, 250\n{turn} kąty {at} {random}\n{forward} 25"
             4:
                 story_text: "## Let's draw\nIn level 4 you have to use quotation marks with `{print}` and `{ask}`. Also when drawing!\n"
                 example_code: "```\n{print} 'Drawing figures'\nangle {is} 90\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n```\n"
