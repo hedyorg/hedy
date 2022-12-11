@@ -66,6 +66,9 @@
 -   name: '{in}'
     explanation: Sjekk om lister inneholder elementer `{in}`
     demo_code: "vakre_farger {is} grønn, gul\nfarge {is} {ask} 'Hva er din favoritt farge'\n{if} farge {in} vakre_farger {print} 'Vakkert!' {else} {print} 'meh'"
+-   name: '{pressed}'
+    explanation: Check whether a given key on the keyboard is `{pressed}`.
+    demo_code: "{if} a {is} {pressed} {print} 'You pressed A!' {else} {print} 'You pressed another key!'"
 6:
 -   name: '{print}'
     explanation: skriv ut nøyaktig det du vil med fnutter
@@ -99,6 +102,9 @@
 -   name: '`{repeat}` med skilpadden'
     explanation: '{repeat} flere linjer'
     demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
+-   name: '{pressed}'
+    explanation: Check whether a given key on the keyboard is `{pressed}`.
+    demo_code: "{if} a {is} {pressed}\n    {print} 'You pressed A!'\n{else}\n    {print} 'You pressed another key!'"
 9:
 -   name: '`{if}` med flere linjer'
     explanation: "'{ask}' om svaret på et regnestykke og se om det er korrekt. Nå skriver vi ut to linjer."
