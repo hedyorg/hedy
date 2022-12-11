@@ -153,15 +153,15 @@ class ProgramsModule(WebsiteModule):
     def share_unshare_program(self, user):
         body = request.json
         if not isinstance(body, dict):
-            return "body must be an object", 400
+            return make_response("body must be an object", 400)
         if not isinstance(body.get("id"), str):
-            return "id must be a string", 400
+            return make_response("id must be a string", 400)
         if not isinstance(body.get("public"), bool):
-            return "public must be a boolean", 400
+            return make_response("public must be a boolean", 400)
 
         result = self.db.program_by_id(body["id"])
         if not result or result["username"] != user["username"]:
-            return "No such program!", 404
+            return make_response("No such program!", 404)
 
         # This only happens in the situation were a user un-shares their favourite program -> Delete from public profile
         public_profile = self.db.get_public_profile_settings(current_user()["username"])
@@ -175,75 +175,75 @@ class ProgramsModule(WebsiteModule):
         self.db.set_program_public_by_id(body["id"], bool(body["public"]))
         achievement = self.achievements.add_single_achievement(user["username"], "sharing_is_caring")
 
-        resp = {"id": body["id"]}
+        response = {"id": body["id"]}
         if bool(body["public"]):
-            resp["message"] = gettext("share_success_detail")
+            response["message"] = gettext("share_success_detail")
         else:
-            resp["message"] = gettext("unshare_success_detail")
+            response["message"] = gettext("unshare_success_detail")
         if achievement:
-            resp["achievement"] = achievement
-        return jsonify(resp)
+            response["achievement"] = achievement
+        return make_response(response)
 
     @route("/submit", methods=["POST"])
     @requires_login
     def submit_program(self, user):
         body = request.json
         if not isinstance(body, dict):
-            return "body must be an object", 400
+            return make_response("body must be an object", 400)
         if not isinstance(body.get("id"), str):
-            return "id must be a string", 400
+            return make_response("id must be a string", 400)
 
         result = self.db.program_by_id(body["id"])
         if not result or result["username"] != user["username"]:
-            return "No such program!", 404
+            return make_response("No such program!", 404)
 
         self.db.submit_program_by_id(body["id"])
         self.db.increase_user_submit_count(user["username"])
         self.achievements.increase_count("submitted")
 
         if self.achievements.verify_submit_achievements(user["username"]):
-            return jsonify({"achievements": self.achievements.get_earned_achievements()})
-        return jsonify({})
+            return make_response({"achievements": self.achievements.get_earned_achievements()})
+        return make_response('', 204)
 
     @route("/set_favourite", methods=["POST"])
     @requires_login
     def set_favourite_program(self, user):
         body = request.json
         if not isinstance(body, dict):
-            return "body must be an object", 400
+            return make_response("body must be an object", 400)
         if not isinstance(body.get("id"), str):
-            return "id must be a string", 400
+            return make_response("id must be a string", 400)
 
         result = self.db.program_by_id(body["id"])
         if not result or result["username"] != user["username"]:
-            return "No such program!", 404
+            return make_response("No such program!", 404)
 
         if self.db.set_favourite_program(user["username"], body["id"]):
-            return jsonify({"message": gettext("favourite_success")})
+            return make_response({"message": gettext("favourite_success")})
         else:
-            return "You can't set a favourite program without a public profile", 400
+            return make_response("You can't set a favourite program without a public profile", 400)
 
     @route("/set_hedy_choice", methods=["POST"])
     @requires_admin
     def set_hedy_choice(self, user):
         body = request.json
         if not isinstance(body, dict):
-            return "body must be an object", 400
+            return make_response("body must be an object", 400)
         if not isinstance(body.get("id"), str):
-            return "id must be a string", 400
+            return make_response("id must be a string", 400)
         if not isinstance(body.get("favourite"), int):
-            return "favourite must be a integer", 400
+            return make_response("favourite must be a integer", 400)
 
         favourite = True if body.get("favourite") == 1 else False
 
         result = self.db.program_by_id(body["id"])
         if not result:
-            return "No such program!", 404
+            return make_response("No such program!", 404)
 
         self.db.set_program_as_hedy_choice(body["id"], favourite)
         if favourite:
-            return jsonify({"message": 'Program successfully set as a "Hedy choice" program.'}), 200
-        return jsonify({"message": 'Program successfully removed as a "Hedy choice" program.'}), 200
+            return make_response({"message": 'Program successfully set as a "Hedy choice" program.'})
+        return make_response({"message": 'Program successfully removed as a "Hedy choice" program.'})
 
     @route("/report", methods=["POST"])
     @requires_login
@@ -253,7 +253,7 @@ class ProgramsModule(WebsiteModule):
         # Make sure the program actually exists and is public
         program = self.db.program_by_id(body.get("id"))
         if not program or program.get("public") != 1:
-            return gettext("report_failure"), 400
+            return make_response("report_failure", 400)
 
         link = email_base_url() + "/hedy/" + body.get("id") + "/view"
         send_email(
@@ -263,4 +263,4 @@ class ProgramsModule(WebsiteModule):
             '<a href="' + link + '">Program link</a>',
         )
 
-        return {"message": gettext("report_success")}, 200
+        return make_response({"message": gettext("report_success")})
