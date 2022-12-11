@@ -1,7 +1,7 @@
 const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
-  projectId: '6y9x8a',
+  projectId: 'a1fbb9',
   watchForFileChanges: false,
   video: false,
   e2e: {
@@ -25,6 +25,8 @@ module.exports = defineConfig({
     register_student_page: '/signup?teacher=false',
     register_teacher_page: '/signup?teacher=true',
     admin_page: '/admin',
-    admin_stats_page: '/admin/stats'
+    admin_stats_page: '/admin/stats',
+    admin_adventures_page: '/admin/adventures',
+    admin_achievements_page: '/admin/achievements'
   }
 });

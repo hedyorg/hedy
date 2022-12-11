@@ -6,8 +6,8 @@ describe('Is able to go to class statistics page', () => {
   it('Passes', () => {
     loginForTeacher();
     cy.wait(500);
-
-    cy.get(":nth-child(1) > #class_view_button").click(); // Press view class button
+    createClass();
+    cy.get(".view_class").first().click(); // Press view class button
 
     var currentUrl = '';
     cy.url().then(url => {
