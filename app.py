@@ -1540,17 +1540,16 @@ def translate_keywords():
 def get_tutorial_translation(level, step):
     # Keep this structure temporary until we decide on a nice code / parse structure
     if step == "code_snippet":
-        return jsonify({'code': gettext('tutorial_code_snippet')}), 200
+        return make_response({'code': gettext('tutorial_code_snippet')})
     try:
         step = int(step)
     except ValueError:
-        return gettext('invalid_tutorial_step'), 400
+        return make_response(gettext('invalid_tutorial_step'), 400)
 
     data = TUTORIALS[g.lang].get_tutorial_for_level_step(level, step, g.keyword_lang)
     if not data:
-        data = {'title': gettext('tutorial_title_not_found'),
-                'text': gettext('tutorial_message_not_found')}
-    return jsonify(data), 200
+        data = {'title': gettext('tutorial_title_not_found'), 'text': gettext('tutorial_message_not_found')}
+    return make_response(data, 200)
 
 
 @app.route('/store_parsons_order', methods=['POST'])
@@ -1558,13 +1557,13 @@ def store_parsons_order():
     body = request.json
     # Validations
     if not isinstance(body, dict):
-        return 'body must be an object', 400
+        return make_response('body must be an object', 400)
     if not isinstance(body.get('level'), str):
-        return 'level must be a string', 400
+        return make_response('level must be a string', 400)
     if not isinstance(body.get('exercise'), str):
-        return 'exercise must be a string', 400
+        return make_response('exercise must be a string', 400)
     if not isinstance(body.get('order'), list):
-        return 'order must be a list', 400
+        return make_response('order must be a list', 400)
 
     attempt = {
         'id': utils.random_id_generator(12),
@@ -1577,7 +1576,7 @@ def store_parsons_order():
     }
 
     DATABASE.store_parsons(attempt)
-    return jsonify({}), 200
+    return make_response('', 204)
 
 
 @app.route('/client_messages.js', methods=['GET'])
@@ -1588,8 +1587,7 @@ def client_messages():
     d.update(YamlFile.for_file(
         f'content/client-messages/{g.lang}.yaml').to_dict())
 
-    response = make_response(render_template(
-        "client_messages.js", error_messages=json.dumps(d)))
+    response = make_response(render_template("client_messages.js", error_messages=json.dumps(d)))
 
     if not is_debug_mode():
         # Cache for longer when not developing
@@ -1744,20 +1742,21 @@ def update_public_profile(user):
 
     # Validations
     if not isinstance(body, dict):
-        return gettext('ajax_error'), 400
+        return make_response(gettext('ajax_error'), 400)
     # The images are given as a "picture id" from 1 till 12
+    # Todo TB: What if we add an image? Should store this as a global value in either utils or content!
     if not isinstance(body.get('image'), str) or int(body.get('image'), 0) not in [*range(1, 13)]:
-        return gettext('image_invalid'), 400
+        return make_response(gettext('image_invalid'), 400)
     if not isinstance(body.get('personal_text'), str):
-        return gettext('personal_text_invalid'), 400
+        return make_response(gettext('personal_text_invalid'), 400)
     if 'favourite_program' in body and not isinstance(body.get('favourite_program'), str):
-        return gettext('favourite_program_invalid'), 400
+        return make_response(gettext('favourite_program_invalid'), 400)
 
     # Verify that the set favourite program is actually from the user (and public)!
     if 'favourite_program' in body:
         program = DATABASE.program_by_id(body.get('favourite_program'))
         if not program or program.get('username') != user['username'] or not program.get('public'):
-            return gettext('favourite_program_invalid'), 400
+            return make_response(gettext('favourite_program_invalid'), 400)
 
     achievement = None
     current_profile = DATABASE.get_public_profile_settings(user['username'])
@@ -1781,36 +1780,15 @@ def update_public_profile(user):
             body['tags'].append('admin')
 
     DATABASE.update_public_profile(user['username'], body)
+    response = {'message': gettext('public_profile_updated')}
     if achievement:
-        # Todo TB -> Check if we require message or success on front-end
-        return {'message': gettext('public_profile_updated'), 'achievement': achievement}, 200
-    return {'message': gettext('public_profile_updated')}, 200
+        response['achievement'] = achievement
+    return make_response(response)
 
 
 @app.route('/translating')
 def translating_page():
     return render_template('translating.html')
-
-
-@app.route('/update_yaml', methods=['POST'])
-def update_yaml():
-    filename = path.join('coursedata', request.form['file'])
-    # The file MUST point to something inside our 'coursedata' directory
-    filepath = path.abspath(filename)
-    expected_path = path.abspath('coursedata')
-    if not filepath.startswith(expected_path):
-        raise RuntimeError('Invalid path given')
-
-    data = load_yaml_rt(filepath)
-    for key, value in request.form.items():
-        if key.startswith('c:'):
-            translating.apply_form_change(
-                data, key[2:], translating.normalize_newlines(value))
-
-    data = translating.normalize_yaml_blocks(data)
-
-    return Response(dump_yaml_rt(data), mimetype='application/x-yaml',
-                    headers={'Content-disposition': 'attachment; filename=' + request.form['file'].replace('/', '-')})
 
 
 @app.route('/user/<username>')
