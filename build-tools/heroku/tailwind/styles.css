@@ -8,7 +8,7 @@ html {
 }
 
 .font-slab {
-  font-family: 'Zilla Slab', serif;
+  font-family: 'Balsamiq Sans', sans-serif;
 }
 
 h1 {
@@ -42,7 +42,8 @@ strong {
 }
 
 .btn-shape {
-  @apply font-bold py-2 px-4 border-b-4 rounded;
+  @apply font-slab leading-6 font-normal tracking-wide;
+  @apply pt-2 pb-1 px-4 border border-b-4 rounded no-underline;
   display: inline-block;
 }
 
@@ -55,11 +56,21 @@ strong {
   @apply bg-gray-500 border-gray-700;
 }
 
+.center-block {
+  @apply mx-auto;
+  max-width: 1024px;
+}
+
+/* Not running text but fancy text! */
+.fancy-text h2 {
+  text-align: center;
+  @apply text-4xl;
+}
 
 .tooltip {
   position: relative;
   display: inline-block;
- 
+
 }
 
 .tooltip .tooltiptext{
@@ -69,8 +80,8 @@ strong {
     bottom: 150%;
     left: 50%;
     margin-left: -80px;
- 
- 
+
+
 }
 .tooltip:hover .tooltiptext {
   visibility: visible;
@@ -200,19 +211,25 @@ code {
 }
 
 .menubar-item {
-  @apply items-center h-full cursor-pointer block border-b-4 border-blue-500 tracking-wide;
+  @apply flex items-center flex-none cursor-pointer block border-b-4 tracking-wide mx-2 lg:mx-4;
+  /* Colors */
+  @apply border-gray-100;
 }
 
 .menubar-item:hover {
-  @apply bg-blue-600 border-blue-600;
+  /* Colors */
+  @apply border-gray-100;
 }
 
 .menubar-item.active {
-  @apply border-white !important;
+  /* Colors */
+  @apply border-blue-600 !important;
 }
 
 .menubar-text {
-  @apply flex items-center h-full text-white text-base lg:text-xl no-underline font-slab font-semibold px-2 lg:px-4;
+  @apply items-center text-base lg:text-xl no-underline font-slab p-1;
+  /* Colors */
+  @apply text-blue-600;
 }
 
 #output, #quiz_question_output_container {
@@ -220,11 +237,13 @@ code {
 }
 
 .dropdown-menu {
-  @apply absolute overflow-hidden block rounded-lg border border-black bg-blue-400 ltr:right-0 rtl:left-0 ltr:mr-1 rtl:ml-1 w-max;
+  @apply absolute overflow-hidden block rounded-lg border border-blue-300 bg-blue-400 ltr:right-0 rtl:left-0 ltr:mr-1 rtl:ml-1 w-max;
+  top: 40px;
 }
 
 .dropdown-level-menu {
-  @apply absolute overflow-hidden block rounded-lg border border-black bg-green-400 ltr:right-0 rtl:left-0 ltr:mr-1 rtl:ml-1 w-max;
+  @apply absolute overflow-hidden block rounded-lg border border-blue-300 bg-green-400 ltr:right-0 rtl:left-0 ltr:mr-1 rtl:ml-1 w-max;
+  top: 40px;
 }
 
 .dropdown-item {

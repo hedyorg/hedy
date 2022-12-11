@@ -1,16 +1,19 @@
-<nav aria-label="Website" class="bg-blue-500 ltr:pl-4 rtl:pr-4 h-14 lg:h-16">
+<nav aria-label="Website" class="mx-16 h-14 lg:h-16">
     {% block menu %}
     <ul class="h-full list-none flex flex-row items-center">
         <li class="ltr:mr-2 rtl:ml-2"><a href="/" class="inline-block w-10 lg:w-12"><img src="{{static('/images/Hedy-logo-96x96.png')}}" height="48px" width="48px" alt="{{_('hedy_logo_alt')}}"></a></li>
-        <li class="hidden lg:flex menubar-item{% if current_page == 'start' %} active{% endif %}"><a class="menubar-text" href="/">{{_('nav_start')}}</a>
-        </li>
+        <li class="menubar-item{% if current_page == 'start' %} active{% endif %}"><a class="menubar-text" href="/">{{_('nav_start')}}</a></li>
         <li class="menubar-item{% if current_page == 'hedy' %} active{% endif %}"><a class="menubar-text" id="hedybutton" href="/hedy">{{_('nav_hedy')}}</a></li>
         {% if is_admin %}
             <li class="menubar-item{% if current_page == 'admin' %} active{% endif %}"><a class="menubar-text" href="/admin">Admin</a></li>
         {% endif %}
         <li class="menubar-item{% if current_page == 'explore' %} active{% endif %}"><a class="menubar-text" id="explorebutton" href="/explore">{{_('nav_explore')}}</a></li>
         <li class="menubar-item{% if current_page == 'learn-more' %} active{% endif %}"><a class="menubar-text" id="learnmorebutton" href="/learn-more">{{_('nav_learn_more')}}</a></li>
+        <div class="flex-1"></div><!-- divider -->
+
+
     {% if username %}
+       <!-- Logged in -->
         <li class="menubar-item ltr:ml-auto rtl:mr-auto{% if current_page == 'programs' %} active{% endif %}">
             <a class="menubar-text gap-2" href="/programs">
                 <span class="fas fa-fw fa-list-alt"></span>
@@ -18,7 +21,7 @@
             </a>
         </li>
         <li class="menubar-item dropdown relative z-20{% if current_page == 'my-profile' %} active{% endif %}">
-            <a class="menubar-text gap-2 cursor-pointer" onclick="$('.dropdown-menu').hide();$('#profile-dropdown').slideToggle('medium');">
+            <a class="menubar-text gap-2 cursor-pointer" onclick="$('.dropdown-menu').hide(); $('#profile-dropdown').slideToggle('medium');">
                 {% if session.profile_image %}
                     <img src="{{static('/images/profile_images/' + session.profile_image + '.png')}}" class="h-10 lg:h-12">
                 {% else %}
@@ -40,10 +43,8 @@
             </div>
         </li>
     {% else %}
-        <li class="menubar-item"><a class="menubar-text" href="/login">{{_('login')}}</a></li>
-    {% endif %}
-    {% if not username %}
-      <li class="menubar-item dropdown relative z-20 ltr:ml-auto rtl:mr-auto">
+       <!-- Not logged in -->
+      <li class="menubar-item dropdown relative z-20">
           <a class="menubar-text border-transparent cursor-pointer" onclick="$('.dropdown-menu').hide();$('#language-dropdown').slideToggle('medium');">
             <div class="flex flex-row gap-2 items-center">
                 <i class="fas fa-fw fa-globe"></i>
@@ -57,7 +58,7 @@
               <div class="flex flex-row">
                   <div class="flex flex-col">
                       <div class="font-medium border-b-2 border-gray-700 mx-4 pb-2 text-center">
-                        {{_('keyword_support')}}
+                        {{_('non_keyword_support')}}
                       </div>
                       <div class="flex flex-row">
                           <div class="flex flex-col">
@@ -74,7 +75,7 @@
                   </div>
                   <div class="flex flex-col">
                       <div class="font-medium border-b-2 border-gray-700 mx-4 pb-2 text-center">
-                        {{_('non_keyword_support')}}
+                        {{_('keyword_support')}}
                       </div>
                       {% for lang in other_languages() %}
                         {% if lang.lang not in keyword_languages_keys() %}
@@ -85,6 +86,7 @@
               </div>
           </div>
       </li>
+      <a class="blue-btn" href="/login">{{_('login')}}</a>
     {% endif %}
     {% endblock %}
     </ul>
