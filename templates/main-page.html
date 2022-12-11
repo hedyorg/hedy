@@ -1,6 +1,6 @@
 {% extends "auth.html" %}
 {% block body %}
-<div class="relative text-xl flex flex-col">
+<div class="text-xl flex flex-col">
     <div class="bg-yellow-600 my-16 border-b-4 border-yellow-700">
         <div class="center-block py-16 px-16 mb-8 flex flex-col gap-16 md:flex-row justify-between items-stretch">
             <div class="flex flex-col gap-2">
@@ -14,12 +14,25 @@
         </div>
     </div>
     <class id="main_page_content" class="fancy-text">
-        {% for section in content['start-sections'] %}
+        {% for section in content['start-sections'][:3] %}
         <div class="border-b-4 {{loop.cycle('', 'bg-yellow-500 border-yellow-600')}} py-16">
             <div class="center-block px-16">
                 <h2 class="font-bold {{loop.cycle('', 'text-white')}}">{{ section['title'] }}</h2>
                 <div class="{{loop.cycle('bg-blue-500', 'bg-white')}} w-36 mx-auto h-1 my-8"></div>
                 <p>{{ section['text']|commonmark }}</p>
+            </div>
+        </div>
+        {% endfor %}
+
+        {% for section_chunk in content['start-sections'][3:] | chunk(3) %}
+        <div class="border-b-4 bg-yellow-500 border-yellow-600}} py-16">
+            <div class="center-block px-16 flex flex-col md:flex-row justify-between gap-6">
+                {% for section in section_chunk %}
+                <div class="bg-white shadow-md rounded-lg px-8 py-4 flex-1">
+                    <h3>{{ section['title'] }}</h3>
+                    <p>{{ section['text']|commonmark }}</p>
+                </div>
+                {% endfor %}
             </div>
         </div>
         {% endfor %}
