@@ -66,6 +66,9 @@
 -   name: '{in}'
     explanation: Check elements with `{in}`.
     demo_code: "pretty_colors {is} green, yellow\ncolor {is} {ask} 'What {is} your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
+-   name: '{pressed}'
+    explanation: Check whether a given key on the keyboard is `{pressed}`.
+    demo_code: "{if} a {is} {pressed} {print} 'You pressed A!' {else} {print} 'You pressed another key!'"
 6:
 -   name: '{print}'
     explanation: Print exactly using quotation marks.
@@ -99,6 +102,9 @@
 -   name: '{repeat} with turtle'
     explanation: Repeat multiple lines.
     demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
+-   name: '{pressed}'
+    explanation: Check whether a given key on the keyboard is `{pressed}`.
+    demo_code: "{if} a {is} {pressed}\n    {print} 'You pressed A!'\n{else}\n    {print} 'You pressed another key!'"
 9:
 -   name: '{if} with multiple lines'
     explanation: The answer of a sum of questions with `{ask}` and see if it is correct. Now we print out two lines.
