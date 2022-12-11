@@ -66,6 +66,8 @@ adventures:
                 example_code_3: "``` \nschöne_Farben {is} grün, gelb \nFarbe {is} {ask} 'Was ist deine Lieblingsfarbe?' \n{if} Farbe {in} schöne_Farben {print} 'schön!' \n{else} {print} 'na ja' \n```\n"
                 story_text_2: "Machmal wir Code mit einem`{if}`ziemlich lang und passt nicht gut in eine Zeile. <br> Du kannst den Code auch auf zwei Teilen aufteilen, beginnend mit der zweiten Zeile beim `{else}` Befehl, und zwar so:\n"
                 example_code_2: "```\nName {is} {ask} 'Wie heißt du?'\n{if} Name {is} Hedy {print} 'Schön'\n{else} {print} 'Buh!'\n```\n"
+                story_text_4: "Etwas anderes das mit ```if``` is ```pressed``` funktioniert! Mit `pressed` kannst du jeden beliebigen Buchstaben\ndes Alphabets und jede Zifferntaste auf deiner Tastatur an einen Befehl binden. Wenn du es bindest und die Taste drückst,\nwird etwas passieren. Probiere es aus!\n"
+                example_code_4: "```\nfalls x gedrückt ist drucke \"es klappt!\"\n```\n"
             6:
                 start_code: "{print} '5 mal 5 ist ' 5 * 5"
                 story_text: |
@@ -92,7 +94,7 @@ adventures:
                         {print} 'Das wird 5 mal ausgegeben'
                 story_text: |
                     ## Die Einrückung 
-                    `{ask}` und `{print}` funktionieren immer noch wie du es gewohnt bist. Aber `{if}`,`{else}` und `{repeat}` haben sich verändert! 
+                    `{ask}` und `{print}` funktionieren immer noch wie du es gewohnt bist. Aber `{if}`,`{else}`, {pressed} und `{repeat}` haben sich verändert! 
                     Du kannst jetzt Befehlsgruppen zusammen ausführen, aber du musst den Code dafür *einrücken*. 
                     Das bedeutet dass du die Befehlszeilen mit vier Leerzeichen beginnen musst. Das gilt auch, wenn du einen Block mit nur einer Zeile schreiben möchtest.
                 example_code: "Der `{repeat}` Befehl funktioniert jetzt so:\n```\n{repeat} 5 {times}\n    {print} 'Hallo zusammen'\n    {print} 'Das hier wird fünf Mal wiederholt'\n```\nDie Befehle `{if}` und `{else}` funktionieren jetzt so:\n\n```\nname {is} {ask} 'Wie heißt du?'\n{if} name {is} Hedy\n    {print} 'Willkommen Hedy'\n    {print} 'Du kannst an deinem Computer spielen'\n{else}\n    {print} 'EINDRINGLING!'\n    {print} 'Du darfst diesen Rechner nicht benutzen!'\n```\n"
@@ -1918,7 +1920,7 @@ adventures:
                     Liebe = niemand, ein*e König*in, den*die Nachbar*in, die wahre Liebe
                     Haustiere = Hund, Katze, Elephant
                     Namen = Judith, Benno, Tim
-                    
+
                     {for} Name {in} Namen
                         {print} Name ' lebt in einem ' Häuser {at} {random}
                         {print} Name ' wird ' Liebe {at} {random} ' heiraten.'
@@ -2673,11 +2675,11 @@ adventures:
                 example_code: "```\nstepsize = 10\nleft = -90\nright = 90\naround = 180\nlooked_left = 0\nlooked_right = 0\nrepeat 40 times\n    {if} w is {pressed}\n        forward stepsize\n    {if} s is {pressed}\n        turn around\n    {if} a is {pressed}\n        turn left\n        looked_left = 1\n    {if} d is {pressed}\n        turn right\n        looked_right = 1\n    {if} p is {pressed}\n        {if} looked_left is 1 and looked_right is 1\n            forward 40\n            looked_left = 0\n            looked_right = 0\n```\n"
                 start_code: '# place your code here'
             5:
-                start_code: '# place your code here'
-                story_text: "## Press it!\nIn the introduction you were also told about the new keyword ```pressed```! Using ```pressed```\ncan make coding much more interactive, and you can have live control of what is executed!\nIn the upcoming levels you will learn how ```pressed``` makes this possible and what uses ```pressed```\nhas.\nBesides printing text, there is a whole other variety of uses for ```pressed```\nFor example, you can also link turtle commands to keys! Try it!\n"
-                example_code: "```\nif x is {pressed} forward 50\n```\n"
-                story_text_2: "## If Else Pressed\nYou can also assign an else statement to ```pressed```. The else statement will be executed\nwhenever you press a key other than the key you assigned.\n"
-                example_code_2: "```\nif y is {pressed} {print} 'Amazing! You pressed the y key!'\nelse {print} 'Oh no! You did not press the y key.'\n```\n"
+                start_code: '# platziere deinen Code hier'
+                story_text: "## Drück es!\nIn der Einleitung wurde dir das neue Schlüsselwort ```pressed``` mitgeteilt! Benutzt du ```pressed```\nkann es deine Code viel interaktiver machen und du hast live die Kontrolle was ausgeführt wird!\nIn den kommenden Leveln lernst du wie```pressed``` dies ermöglicht und welche Anwendungsfälle ```pressed```\nhat.\nNeben dem Ausgeben von Text gibt es eine Reihe von anderen Anwendungsfällen von ```pressed```\nZum Beispiel kannst du auch Schildkrötenbefehle an Tasten binden! Probiere es!\n"
+                example_code: "```\nfalls x ist {pressed} vorwärts 50\n```\n"
+                story_text_2: "## falls sonst gedrückt\nDu kannst auch einen else Befahl an```pressed``` zuweisen. Der else Befehl wird ausgeführt\nwenn eine andere als die zugewiesene Taste gedrückt wird.\n"
+                example_code_2: "```\nfalls y ist {pressed} {print} 'Toll! Du hast die y Taste gedrückt!'\nsonst {print} 'Oh nein! Du hast nicht die y Taste gedrückt.'\n```\n"
             6:
                 story_text: "Did you know you can also make a calculator using ```pressed```?\nGive the calculator two numbers and press the m key to multiply.\nNow you don't have to bring your own!\nTry other keys and see what happens! Do you get a different result?\n"
                 example_code: "```\nfirst = {ask} 'what is your first number?'\nsecond = {ask} 'what is your second number?'\nprint 'press a to add, s to substract, d to divide, m to multiply'\nif a is {pressed} result = first + second\nif s is {pressed} result = first - second\nif d is {pressed} result = first / second\nif m is {pressed} result = first * second\nprint 'The answer is ' result\n```\n"
@@ -2686,6 +2688,6 @@ adventures:
                 example_code: "```\nrepeat 3 times if x is {pressed} forward 15\n```\n"
                 start_code: '# place your code here'
                 story_text: "You might have tried it in level 5 and 6, pressing the key linked to ```pressed``` multiple\ntimes. If you did, you noticed that this did nothing. but now that you have learned about repeat, we\ncan press keys multiple times! Make the turtle walk forward!\n"
-        name: Press it!
-        description: Try linking a keyboard key to a command!
-        default_save_name: Pressit
+        name: Drück es!
+        description: Versuche eine Taste an einen Befehl zu binden!
+        default_save_name: Drückes
