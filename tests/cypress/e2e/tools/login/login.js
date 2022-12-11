@@ -16,7 +16,7 @@ export function loginForStudent() {
 }
 
 export function loginForAdmin() {
-    login("user5", "123456");
+    login("admin", "123456");
     cy.wait(500);
 }
 

@@ -4,7 +4,7 @@ adventures:
             1:
                 example_code_2: "```\n{ask} Vad heter du?\n{echo} hej\n```\n"
                 start_code: '{print} hej världen!'
-                story_text: "## Välkommen till Hedy!\nPå nivå 1 kan du använda kommandona `{print}`, `{ask}` och `{echo}`.\nSkriv din kod i programmeringsrutan eller tryck på den gröna knappen i exempelrutan så skrivs koden åt dig!\nProva koden själv genom att trycka på den gröna knappen märkt 'Kör koden' under programmeringsrutan.\n\nDu kan skriva text på skärmen genom att använda `{print}` kommandot.\n"
+                story_text: "## Välkommen till Hedy!\nPå nivå 1 kan du använda kommandona `{print}`, `{ask}` och `{echo}`.\nSkriv din kod i programmeringsrutan eller tryck på den gröna knappen i exempelrutan så skrivs koden åt dig!\nProva koden själv genom att trycka på den gröna knappen märkt 'Kör koden' under programmeringsrutan.\n\nDu kan skriva text på skärmen genom att använda `{print}` kommandot.     \n"
                 example_code: "```\n{print} Hej!\n{print} Välkommen till Hedy!\n```\n"
                 story_text_2: "Du kan också be om en inmatning med `{ask}` och skriva ut det igen med ett `{echo}`-kommando.\n"
                 story_text_3: "Låt oss börja! Vet du inte vad du vill skapa? I de följande flikarna så hittar du idéer på program du kan bygga.\n"
@@ -35,6 +35,8 @@ adventures:
                 example_code_3: "```\nsnygga_färger {is} grön, gul\nfavorit_färg {is} {ask} 'Vad är din favoritfärg?'\n{if} favorit_färg {in} snygga_färger {print} 'snyggt!'\n{else} {print} 'meh'\n```\n"
                 story_text_2: "Ibland blir kod där du använder `{if}` riktigt lång och passar inte in på raden så bra.<br>Du kan också dela upp koden på två rader där den andra raden börjar med `{else}` så här:\n"
                 example_code_2: "```\nnamn {is} {ask} 'Vad heter du?'\n{if} namn {is} Hedy {print} 'trevligt'\n{else} {print} 'buu!'\n```\n"
+                story_text_4: "Something else that works with ```if``` is ```pressed```! With pressed you can link any letter in\nthe alphabet and any number key on your keyboard to a command. If you link it, and press the key,\nsomething will happen. Try it out!\n"
+                example_code_4: "```\nif x is pressed print \"it worked!\"\n```\n"
             6:
                 story_text: "## 1 + 1\n På den här nivån lär du dig någonting nytt: du kan nu räkna.\n\n Plus är enkelt, du skriver det som i matteboken: `5 + 5` till exempel. Minus fungerar också bra, du skriver `5 - 5`.\n\n Multiplikation (gånger) är lite annorlunda för det finns inget gångertecken på ditt tangentbord. Leta så får du se! \nDärför använder vi stjärnan som finns om du håller ned skift och trycker på tangenten till höger om 'ä': `5 * 5`. Läs det som \"5 gånger 5\", det hjälper dig minnas det bäst.\n"
                 example_code_2: "```\nnamn = Hedy\nsvar = 20 + 4\n```\n"
@@ -60,7 +62,7 @@ adventures:
             11:
                 example_code: "```\n{for} räknare {in} {range} 1 {to} 5\n    {print} räknare\n```\n"
                 start_code: "{for} räknare {in} {range} 1 {to} 5\n    {print} räknare"
-                story_text: "## Loopar!\n`{print}` fungerar precis som förut men vi lägger till en ny variant av `{for}`. Du kan nu skriva `{for} räknare {in} {range} 1 {to} 5` och använda `räknare` i ditt program.\nTesta och se vad som händer! Kom ihåg att använda indentering efter `{for}`- och `{if}`-kommandona. (Det betyder att raderna börjar med fyra mellanslag.)"
+                story_text: "## Loopar!\n`{print}` fungerar precis som förut men vi lägger till en ny variant av `{for}`. Du kan nu skriva `{for} räknare {in} {range} 1 {to} 5` istället för `{repeat} 5 {times}` och använda `räknare` i ditt program.\nTesta och se vad som händer! Kom ihåg att använda indentering efter `{for}`- och `{if}`-kommandona. (Det betyder att raderna börjar med fyra mellanslag.)"
             12:
                 start_code: "{print} 'decimaltal behöver nu en punkt som decimaltecken'\n{print} 2.5 + 2.5"
                 story_text: "## Nummer och texter\n**Decimaltal**\nHittils har Hedy inte tillåtit decimaltal som 1,5, men nu tillåter vi det. Notera att datorer använder `.` (en punkt) för decimaltal istället för kommatecken."

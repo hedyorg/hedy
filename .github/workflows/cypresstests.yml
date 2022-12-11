@@ -1,0 +1,60 @@
+# This workflow will run cypress tests
+
+# If you change this name, don't forget to change deploy-to-alpha.yml
+name: Cypress tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  # This identifier gets used in .mergify.yml
+  cypress:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.9
+    - name: Install Python dependencies
+      run: |
+        python3 -m pip install --upgrade pip
+        pip3 install -r requirements.txt
+    - name: Install Nodejs dependencies
+      run: |
+        npm ci
+    - name: Generate grammar files
+      run: |
+        python ./content/yaml_to_lark_utils.py
+    - name: Compiling Babel translations
+      run: |
+        pybabel compile -f -d translations
+
+    - name: Feed the dev database
+      # This replaces the json file, do it before starting the server
+      run: ./feed_dev_database.sh
+
+    - name: Start the server
+      # Runs in the background
+      run: build-tools/github/start-debug-server --daemon
+
+    - name: Cypress run
+      uses: cypress-io/github-action@v4
+      with:
+        record: true
+        # Where cypress.config.js and all the other cypress files live, requires 'install: false'
+        working-directory: tests/
+        # We have already installed all dependencies
+        install: false
+      env:
+        # pass the Cypress Cloud record key as an environment variable
+        CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+        # pass GitHub token to allow accurately detecting a build vs a re-run build
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+

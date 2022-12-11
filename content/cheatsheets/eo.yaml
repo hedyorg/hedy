@@ -105,6 +105,9 @@
 -   name: '{in}'
     explanation: Kontrolu elementojn per `{in}`.
     demo_code: "belaj_koloroj {is} verda, flava\nkoloro {is} {ask} 'Kio {is} via plej ŝatata koloro?'\n{if} koloro {in} belaj_koloroj {print} 'bela!' {else} {print} 'ba!'"
+-   name: '{pressed}'
+    explanation: Check whether a given key on the keyboard is `{pressed}`.
+    demo_code: "{if} a {is} {pressed} {print} 'You pressed A!' {else} {print} 'You pressed another key!'"
 6:
 -   name: '{print}'
     explanation: Presi ekzakte per citiloj.
@@ -125,6 +128,9 @@
 -   name: '{repeat} kun testudo'
     explanation: 'Ripeti plurajn liniojn.'
     demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
+-   name: '{pressed}'
+    explanation: Check whether a given key on the keyboard is `{pressed}`.
+    demo_code: "{if} a {is} {pressed}\n    {print} 'You pressed A!'\n{else}\n    {print} 'You pressed another key!'"
 10:
 -   name: '{print}'
     explanation: Presi ion. Ne forgesu uzi citilojn por laŭvorta presado.

@@ -11,9 +11,12 @@ echo "------> Python unit tests"
 
 # This is expected to run from the repo root
 if [[ "${1:-}" == "--all" ]]; then
-  python -m pytest
+  python -m pytest --ignore=tests/test_public_programs
 elif [[ "${1:-}" == "--weblate" ]]; then
+  export only_new_snippets=1   # set environment var, will not work on Windows, but defaults to 0/False in tests!
   python -m pytest tests/test_snippets/test_adventures.py -s --tb=no -rN
+  python -m pytest tests/test_snippets/test_cheatsheets.py -s --tb=no -rN
+  python -m pytest tests/test_snippets/test_parsons.py -s --tb=no -rN
 else
   python -m pytest --ignore=tests/test_highlighting --ignore=tests/test_level --ignore=tests/test_snippets --ignore=tests/test_translation_level
 fi
