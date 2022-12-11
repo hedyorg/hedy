@@ -2,6 +2,7 @@ import functools
 import operator
 from datetime import date
 
+import utils
 from utils import timems, times
 
 from . import dynamo
@@ -160,7 +161,7 @@ class Database:
         PROGRAMS.update({"id": id}, {"public": 1 if public else 0})
 
     def submit_program_by_id(self, id):
-        PROGRAMS.update({"id": id}, {"submitted": True})
+        PROGRAMS.update({"id": id}, {"submitted": True, "date": utils.timems()})
 
     def delete_program_by_id(self, id):
         """Delete a program by id."""
