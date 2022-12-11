@@ -63,6 +63,16 @@ export function goToAdminStatsPage()
    return goToPage(Cypress.env('admin_stats_page'));
 }
 
+export function goToAdminAdventuresPage()
+{
+   return goToPage(Cypress.env('admin_adventures_page'));
+}
+
+export function goToAdminAchievementsPage()
+{
+   return goToPage(Cypress.env('admin_achievements_page'));
+}
+
 // Must be logged in and able to edit an adventure
 export function goToEditAdventure()
 {
