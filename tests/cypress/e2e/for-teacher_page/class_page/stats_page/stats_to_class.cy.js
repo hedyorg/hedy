@@ -7,7 +7,7 @@ describe('Is able to go back to teacher page', () => {
     loginForTeacher();
     cy.wait(500);
     createClass();
-    cy.get('#class_view_button').click();
+    cy.get(".view_class").first().click();
 
     var currentUrl = '';
     cy.url().then(url => {

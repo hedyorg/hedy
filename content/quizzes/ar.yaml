@@ -15,7 +15,7 @@ levels:
             hint: "سميت على اسم هيدي لامار."
             question_score: '10'
         2:
-            question_text: "اي الاوامر التاليه يطبع النص؟"
+            question_text: "أي الأوامر التالية يطبع النص على الشاشة؟"
             mp_choice_options:
             -   option: |
                     ```
@@ -40,6 +40,7 @@ levels:
             correct_answer: "B"
             hint: "_؟_ مرحبًا يا عالم!"
             question_score: '10'
+            code: "```\n___ Hello!\n```\n"
         3:
             question_text: "كيف تسأل شخص ما هو لونه المفضل؟"
             mp_choice_options:
@@ -138,7 +139,7 @@ levels:
                 {print} اهلاً بك في مطعم هيدي!
                 {ask} ماذا تود ان تطلب؟
                 {echo} إذاً تود طلب ...
-                {print} طلبك قادم فالحال! استمتع!
+                {print} طلبك قادم في الحال! استمتع!
             mp_choice_options:
             -   option: "يجب استبدال `{print}` في السطر الأول بالأمر `{ask}`"
                 feedback: "هل انت متأكد من وجود خطأ ما؟"

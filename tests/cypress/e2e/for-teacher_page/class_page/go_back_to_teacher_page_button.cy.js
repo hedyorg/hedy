@@ -7,7 +7,7 @@ describe('Is able to go to logs page', () => {
     loginForTeacher();
     cy.wait(500);
 
-    cy.get(':nth-child(1) > #class_view_button').click(); // Press view class button
+    cy.get(".view_class").first().click(); // Press view class button
 
     cy.get('#go_back_to_teacher_page_button')
       .should('be.visible')

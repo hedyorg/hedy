@@ -5,14 +5,14 @@
 {% block main %}
 <div class="flex flex-row items-center justify-between border-b">
     <h1>Statistics overview</h1>
-    <button type="reset" class="green-btn" onclick="window.open('/admin', '_self');">Return to admin page</button>
+    <button type="reset" class="green-btn" id="return_to_admin_page_button" onclick="window.open('/admin', '_self');">Return to admin page</button>
 </div>
 <div>
   <div class="inline-block medium text-2xl">Load data for: </div>
-  <a href="javascript:void(0);" class="stats-period-toggle" onclick="hedyApp.stats.getProgramStats(1, this)">This week</a> |
-  <a href="javascript:void(0);" class="stats-period-toggle" onclick="hedyApp.stats.getProgramStats(2, this)">Past 2 weeks</a> |
-  <a href="javascript:void(0);" class="stats-period-toggle" onclick="hedyApp.stats.getProgramStats(4, this)">Past 4 weeks</a> |
-  <a href="javascript:void(0);" class="stats-period-toggle" onclick="hedyApp.stats.getProgramStats(52, this)">Past year</a>
+  <a href="javascript:void(0);" class="stats-period-toggle" id="period_toggle_this_week" onclick="hedyApp.stats.getProgramStats(1, this)">This week</a> |
+  <a href="javascript:void(0);" class="stats-period-toggle" id="period_toggle_past_2_weeks" onclick="hedyApp.stats.getProgramStats(2, this)">Past 2 weeks</a> |
+  <a href="javascript:void(0);" class="stats-period-toggle" id="period_toggle_past_4_weeks" onclick="hedyApp.stats.getProgramStats(4, this)">Past 4 weeks</a> |
+  <a href="javascript:void(0);" class="stats-period-toggle" id="period_toggle_past_year" onclick="hedyApp.stats.getProgramStats(52, this)">Past year</a>
 
   <div class="shadow-md stats accordion">
 
