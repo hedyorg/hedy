@@ -1617,20 +1617,6 @@ class ConvertToPython_3(ConvertToPython_2):
         else:
             return self.process_variable(arg, meta.line)
 
-    def ask(self, meta, args):
-        var = args[0]
-        all_parameters = "'"
-        has_var = False
-        for a in args[1].split(" "):
-            if all_parameters != "'":
-                all_parameters += " "
-            if not has_var:
-                if self.is_variable(a):
-                    has_var = True
-                    all_parameters += "' "
-            all_parameters += process_characters_needing_escape(a)
-        print(all_parameters)
-        return f'{var} = input(' + '+'.join(all_parameters) + ")"
 
     def add(self, meta, args):
         value = self.process_argument(meta, args[0])
