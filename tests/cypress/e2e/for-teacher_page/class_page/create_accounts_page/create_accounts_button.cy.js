@@ -28,7 +28,7 @@ describe('Is able to create new accounts for class', () => {
     cy.get('.username_cell').should(($div) => {
       const text = $div.text()
     
-      expect(text).include('student13');
+      expect(text).include('student10');
     }) 
     
     

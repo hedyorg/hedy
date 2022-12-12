@@ -17,6 +17,8 @@ describe('Is able to download login credentials', () => {
     })
     cy.wait(1000);
 
+    cy.get('#download_credentials_yes').check()
+
     cy.get('#create_accounts_button').click();
     cy.get('#modal-yes-button').click();
 
@@ -29,7 +31,7 @@ describe('Is able to download login credentials', () => {
     cy.get('.username_cell').should(($div) => {
       const text = $div.text()
     
-      expect(text).include('student13');
+      expect(text).include('student01');
     }) 
     
   })
