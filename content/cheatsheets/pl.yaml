@@ -97,6 +97,9 @@
         ładne_kolory {is} zielony, żółty
         kolor {is} {ask} 'Jaki {is} twój ulubiony kolor?'
         {if} kolor {in} ładne_kolory {print} 'ładny!' {else} {print} 'meh'
+-   name: '{pressed}'
+    explanation: Check whether a given key on the keyboard is `{pressed}`.
+    demo_code: "{if} a {is} {pressed} {print} 'You pressed A!' {else} {print} 'You pressed another key!'"
 6:
 -   name: "{print}"
     explanation: "Napisz dokładnie używając apostrofów."
@@ -150,6 +153,9 @@
         {repeat} 4 {times}
             {turn} 90
             {forward} 50
+-   demo_code: "{if} a {is} {pressed}\n    {print} 'You pressed A!'\n{else}\n    {print} 'You pressed another key!'"
+    name: '{pressed}'
+    explanation: Check whether a given key on the keyboard is `{pressed}`.
 9:
 -   name: "{if} z wieloma liniami"
     explanation: "Odpowiedź sumy pytań za pomocą `{ask}` i sprawdź czy są poprawne. Teraz drukujemy dwie linie."

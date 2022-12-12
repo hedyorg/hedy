@@ -50,6 +50,7 @@ customize_babel_locale(CUSTOM_BABEL_LANGUAGES)
 ADVENTURE_NAMES = [
     'default',
     'parrot',
+    'years',
     'fortune',
     'haunted',
     'restaurant',
@@ -198,6 +199,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
     ],
     11: [
         'default',
+        'years',
         'songs',
         'haunted',
         'restaurant',
