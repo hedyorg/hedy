@@ -1234,7 +1234,7 @@ class TestClasses(AuthHelper):
     def test_invalid_update_class(self):
         # GIVEN a user with teacher permissions and a class
         self.given_teacher_is_logged_in()
-        self.post_data('class', {'name': 'class1'})
+        self.post_data('class', {'name': 'class123panda'})
         Class = self.get_data('classes')[0]
 
         # WHEN attempting to update a class with no cookie
@@ -1298,7 +1298,7 @@ class TestClasses(AuthHelper):
         self.given_teacher_is_logged_in()
 
         # GIVEN a class
-        self.post_data('class', {'name': 'class1'})
+        self.post_data('class', {'name': 'class123panda'})
         Class = self.get_data('classes')[0]
 
         # WHEN attempting to join a class without being logged in
