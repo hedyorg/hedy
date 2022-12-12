@@ -804,3 +804,12 @@ adventures:
         name: Press it!
         description: Try linking a keyboard key to a command!
         default_save_name: Pressit
+    years:
+        name: New Year's
+        description: Countdown to the new year!
+        default_save_name: New Year's Countdown
+        levels:
+            11:
+                story_text: "## Songs\nIn this level you can use the `{for} i {in} {range}` command to countdown to the New Year.\n\n## Challenge\nFill in the blanks and make the code work!\n"
+                example_code: "## Countdown\n```\nfor _ in _ 10 to 1\n    {print} i\n{print} 'Happy New Year!'\n```\n"
+                start_code: '# place your code here'
