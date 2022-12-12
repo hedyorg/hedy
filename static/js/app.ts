@@ -8,6 +8,8 @@ export let theGlobalEditor: AceAjax.Editor;
 export let theModalEditor: AceAjax.Editor;
 let markers: Markers;
 
+let last_code: string;
+
 const turtle_prefix =
 `# coding=utf8
 import random, time, turtle
@@ -1127,7 +1129,10 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
     }
     if (!hasWarnings) {
       if (debug == null) {
-        showSuccesMessage();
+        if (code !== last_code) {
+          showSuccesMessage();
+          last_code = code;
+        }
       }
     }
     if (cb) cb ();
