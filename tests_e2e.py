@@ -169,7 +169,7 @@ class AuthHelper(unittest.TestCase):
 
         Need to log in again to refresh the session.
         """
-        self.post_data('admin/markAsTeacher', {'username': self.username, 'is_teacher': True})
+        self.post_data('admin/markAsTeacher', {'username': self.username, 'is_teacher': True}, expect_http_code=204)
         return self.login_user(self.username)
 
     def given_user_is_logged_in(self):
