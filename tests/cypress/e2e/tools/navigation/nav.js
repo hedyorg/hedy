@@ -50,6 +50,8 @@ export function goToHedyPage()
 export function goToProfilePage()
 {
     return goToPage(Cypress.env('profile_page'));
+}
+
 
 export function goToHedyLevel2Page()
 {
