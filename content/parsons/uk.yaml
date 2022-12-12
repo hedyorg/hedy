@@ -11,20 +11,20 @@ levels:
         2:
             story: Create a program that helps you calculate how many cakes you should buy for your birthday party.\n
             code: |
-                {print} 'It is your birthday!'
-                people = {ask} 'How many people do you want to give a slice of cake?'
-                cakes_amount {is} people/8
-                {print} 'You will have to buy ' cakes_amount ' cakes'
+                {print} "Це твій день народження!"
+                осіб = {ask} 'Скільком людям ви хочете дати шматочок торта?'
+                cakes_amount {is} осіб/8
+                {print} 'Вам доведеться купити ' cakes_amount ' тортів'
     7:
         1:
             code: |
-                players = Liam, Noah, Sophie
-                player1 = players {at} {random}
-                player2 = players {at} {random}
-                {print} player1 ' first plays against ' player2
-                {remove} player1 {from} players
-                {remove} player2 {from} players
-                {print} 'The winner plays against ' players {at} {random}
+                гравці = Ліам, Ной, Софі
+                гравець1 = гравці {at} {random}
+                гравець2 = гравці {at} {random}
+                {print} гравець1 ' спочатку грає проти ' гравець2
+                {remove} гравець1 {from} гравці
+                {remove} гравець12 {from} гравці
+                {print} 'Переможець грає проти ' гравці {at} {random}
             story: In a chess tournament there are three players left.\nCreate a program that decides which two players first play against each other.\nFirst print the two players who play the first match, then print against which player the winner will play.\n
         2:
             story: Create the song 'The wheels on the bus go round and round'\n
@@ -56,7 +56,7 @@ levels:
                 {print} 'Ready or not here I come!'
     1:
         1:
-            story: Ви покупець пекарні Hedy.\nВи хочете в пекарню, і пекар вас радо зустрічає.\nВін запитує, який тип пирога ви хочете замовити.\nДалі ваше замовлення готується.\n
+            story: "Ви покупець пекарні Hedy.\nВи хочете в пекарню, і пекар вас радо зустрічає.\nВін запитує, який тип пирога ви хочете замовити.\nДалі ваше замовлення готується.\n"
             code: |
                 {print} Ласкаво просимо в пекарню Hedy!
                 {ask} Який тип пирога ви хочете замовити?
@@ -64,7 +64,7 @@ levels:
                 {print} Ваше замовлення готується!
 
         2:
-            story: Ви біля ді-джейської столу та питаєте поставити пісню. Створіть програму, яка запитає, чи готові ви до вечірки, а потім запитає, яку пісню ви б хотіли почути.\n
+            story: "Ви біля ді-джейської столу та питаєте поставити пісню. Створіть програму, яка запитає, чи готові ви до вечірки, а потім запитає, яку пісню ви б хотіли почути.\n"
             code: |
                 {print} Це DJ Hedy
                 {ask} Ви готові до вечірки?
@@ -72,14 +72,14 @@ levels:
                 {echo} Чудовий вибір! Мені подобається
     2:
         1:
-            story: Ви та ваші друзі збираєтеся переглянути Netflix.\nПокажи, який фільм ти збираєшся дивитися, і побажай глядачам веселощів!\n
+            story: "Ви та ваші друзі збираєтеся переглянути Netflix.\nПокажи, який фільм ти збираєшся дивитися, і побажай глядачам веселощів!\n"
             code: |
                 {print} Настав час для вечора Netflix'
                 film {is} Sonic the Hedgehog 2
                 {print} Ми будемо знімати
                 {print} Гарного вам задоволення!'
         2:
-            story: Це інтернет-магазин іграшок. Створіть програму, за допомогою якої користувач може додати товар до свого кошика.\n
+            story: "Це інтернет-магазин іграшок. Створіть програму, за допомогою якої користувач може додати товар до свого кошика.\n"
             code: |
                 {print} Ласкаво просимо в наш магазин іграшок'
                 іграшка {is} {ask} Що б ви хотіли купити?
@@ -93,25 +93,25 @@ levels:
                 будинок {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin'
                 {sleep} 2
                 {print} І це будинок {at} {random}
-            story: Новий навчальний рік у Гоґвортсі розпочинається! \nЗавдання капелюха-сортувальника - відсортувати вас до одного з будиночків.\nВ який будинок ви потрапите?\nВи будите навчатися на Гриффіндорі, Хаффлпафі, Рейвенклову чи Слизерину?\nНехай програма почекає деякий час, перш ніж покаже ваш будинок.\n
+            story: "Новий навчальний рік у Гоґвортсі розпочинається!\nЗавдання капелюха-сортувальника - відсортувати вас до одного з будиночків.\nВ який будинок ви потрапите?\nВи будите навчатися на Гриффіндорі, Хаффлпафі, Рейвенклову чи Слизерину?\nНехай програма почекає деякий час, перш ніж покаже ваш будинок.\n"
         2:
-            story: Створіть програму, яка вибирає випадкову їжу для вас. Складіть список продуктів і список начинок та дозвольте програмі вирішити, що ви будете їсти!\n
+            story: "Створіть програму, яка вибирає випадкову їжу для вас. Складіть список продуктів і список начинок та дозвольте програмі вирішити, що ви будете їсти!\n"
             code: |
-                їжа {is} pizza, icecream, salad, sandwich
-                начинкою {is} chocolate, cheese, tuna, sprinkles
+                food {is} піцца, морозиво, салат, бутерброд
+                toppings {is} шоколадне, сирне, тунець, бризки
                 {print} Ваша випадкова вечеря на сьогодні - це...
-                sleep 2
-                {print} їжа {at} {random} начинкою {at} {random}
+                {sleep} 2
+                {print} food {at} {random} toppings {at} {random}
     4:
         1:
-            story: Ви - новий тренер покемонів з Палеттауна!\nСкладіть програму, яка вибирає вашого першого покемона.\nЗачекайте хвилину, перш ніж програма покаже вам першого покемона.\n
+            story: "Ви - новий тренер покемонів з Палеттауна!\nСкладіть програму, яка вибирає вашого першого покемона.\nЗачекайте хвилину, перш ніж програма покаже вам першого покемона.\n"
             code: |
                 Покемон {is} Pikachu, Charmander, Bulbasaur, Squirtle
                 {print} 'Це буде ваш перший покемон!'
                 {sleep}
                 {print} Покемон {at} {random}
         2:
-            story: Створіть лотерею, яка дозволить вам вибрати додаткову ціну, яку ви можете виграти.\n
+            story: "Створіть лотерею, яка дозволить вам вибрати додаткову ціну, яку ви можете виграти.\n"
             code: |
                 ціни {is} car, hamster, 1 million euros
                 ціна {is} {ask} 'Яку суму ви б хотіли отримати за перемогу?'
@@ -119,7 +119,7 @@ levels:
                 {print} 'You won a ' ціни {at} {random}
     5:
         1:
-            story: Зробіть програму, яка перевіряє, чи є ваш улюблений фільм у списку комп'ютера.\nЯкщо так, то надрукуйте, що у вас чудовий смак, інакше додайте фільм до списку.\n
+            story: "Зробіть програму, яка перевіряє, чи є ваш улюблений фільм у списку комп'ютера.\nЯкщо так, то надрукуйте, що у вас чудовий смак, інакше додайте фільм до списку.\n"
             code: |
                 favorite_movies {is} Batman, Spiderman, The Avengers, Jurassic Park
                 movie {is} {ask} 'What is your favourite movie?'
@@ -127,9 +127,9 @@ levels:
                 {else} {print} 'Such a shame that your favourite movie is not in the list, we will add it right away!'
                 {add} movie {to_list} favorite_movies
         2:
-            story: Create a maths game.\n
+            story: "Створіть математичну гру.\n"
             code: |
-                {print} 'Solve this problem'
+                {print} "Вирішіть цю проблему"
                 answer {is} {ask} '88 - 16 = ?'
-                {if} answer {is} 72 {print} 'Correct!'
-                {else} {print} 'Wrong! The answer was 72'
+                {if} answer {is} 72 {print} 'Правильно!'
+                {else} {print} 'Неправильно! Відповідь була 72'
