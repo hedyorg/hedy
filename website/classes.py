@@ -194,14 +194,14 @@ class MiscClassPages(WebsiteModule):
 
         Class = self.db.get_class(body.get("id"))
         if not Class or Class["teacher"] != user["username"]:
-            return gettext("no_such_class"), 404
+            return make_response(gettext("no_such_class"), 404)
 
         # We use this extra call to verify if the class name doesn't already exist, if so it's a duplicate
         # Todo TB: This is a duplicate function, might be nice to perform some clean-up to reduce these parts
         Classes = self.db.get_teacher_classes(user["username"], True)
         for Class in Classes:
             if Class["name"] == body.get("name"):
-                return gettext("class_name_duplicate"), 400
+                return make_response(gettext("class_name_duplicate"), 400)
 
         # All the class settings are still unique, we are only concerned with copying the customizations
         # Shortly: Create a class like normal: concern with copying the customizations
@@ -233,13 +233,13 @@ class MiscClassPages(WebsiteModule):
         body = request.json
         # Validations
         if not isinstance(body, dict):
-            return gettext("ajax_error"), 400
+            return make_response(gettext("ajax_error"), 400)
         if not isinstance(body.get("username"), str):
-            return gettext("username_invalid"), 400
+            return make_response(gettext("username_invalid"), 400)
         if not isinstance(body.get("class_id"), str):
-            return "class id must be a string", 400
+            return make_response("class id must be a string", 400)
         if len(body.get("username")) < 1:
-            return gettext("username_empty"), 400
+            return make_response(gettext("username_empty"), 400)
 
         username = body.get("username").lower()
         class_id = body.get("class_id")
@@ -250,11 +250,11 @@ class MiscClassPages(WebsiteModule):
 
         user = self.db.user_by_username(username)
         if not user:
-            return gettext("student_not_existing"), 400
+            return make_response(gettext("student_not_existing"), 400)
         if "students" in Class and user["username"] in Class["students"]:
-            return gettext("student_already_in_class"), 400
+            return make_response(gettext("student_already_in_class"), 400)
         if self.db.get_username_invite(user["username"]):
-            return gettext("student_already_invite"), 400
+            return make_response(gettext("student_already_invite"), 400)
 
         # So: The class and student exist and are currently not a combination -> invite!
         data = {
@@ -264,7 +264,7 @@ class MiscClassPages(WebsiteModule):
             "ttl": utils.times() + invite_length,
         }
         self.db.add_class_invite(data)
-        return {}, 200
+        return make_response('', 204)
 
     @route("/remove_student_invite", methods=["POST"])
     @requires_login
@@ -272,11 +272,11 @@ class MiscClassPages(WebsiteModule):
         body = request.json
         # Validations
         if not isinstance(body, dict):
-            return gettext("ajax_error"), 400
+            return make_response(gettext("ajax_error"), 400)
         if not isinstance(body.get("username"), str):
-            return gettext("username_invalid"), 400
+            return make_response(gettext("username_invalid"), 400)
         if not isinstance(body.get("class_id"), str):
-            return "class id must be a string", 400
+            return make_response("class id must be a string", 400)
 
         username = body.get("username")
         class_id = body.get("class_id")
@@ -289,7 +289,7 @@ class MiscClassPages(WebsiteModule):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
         self.db.remove_class_invite(username)
-        return {}, 200
+        return make_response('', 204)
 
     @route("/hedy/l/<link_id>", methods=["GET"])
     def resolve_class_link(self, link_id):
