@@ -25,7 +25,7 @@ class TestsTranslationLevel18(HedyTester):
 
     def test_input_empty_brackets(self):
         code = textwrap.dedent("""\
-        nombre es entrada()
+        nombre ఉంది ఇన్పుట్()
         ముద్రణ(nombre)""")
 
         result = hedy_translation.translate_keywords(code, from_lang="te", to_lang="en", level=self.level)
