@@ -418,31 +418,32 @@ class TestsLevel3(HedyTester):
 
     # add/remove tests (IMAN)
     #
-    def test_add_text_to_list(self):
+    def test_add_text_to_list_numerical(self):
         code = textwrap.dedent("""\
-        ff is 1, 2
-        remove 1 from ff
-        remove 2 from ff
-        print ff at random""")
+        numbers is 1, 2
+        remove 1 from numbers
+        remove 2 from numbers
+        add 4 to numbers
+        print numbers at random""")
 
         expected = textwrap.dedent("""\
-        ff = ['1', '2']
+        numbers = ['1', '2']
         try:
-          ff.remove(1)
+          numbers.remove('1')
         except:
           pass
         try:
-          ff.remove(2)
+          numbers.remove('2')
         except:
           pass
-        print(f'{random.choice(ff)}')
-        """)
+        numbers.append('4')
+        print(f'{random.choice(numbers)}')""")
 
         self.multi_level_tester(
             code=code,
             expected=expected,
             max_level=11,
-            extra_check_function=self.result_in([]),
+            extra_check_function=self.result_in([4]),
         )
         
     def test_add_text_with_inner_single_quote_to_list(self):
@@ -489,7 +490,7 @@ class TestsLevel3(HedyTester):
 
         expected = textwrap.dedent("""\
         dieren = ['koe', 'kiep']
-        dieren.append(5)
+        dieren.append('5')
         print(f'{random.choice(dieren)}')""")
 
         self.multi_level_tester(
