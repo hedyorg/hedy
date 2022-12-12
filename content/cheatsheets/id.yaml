@@ -82,6 +82,9 @@
 -   name: '{in}'
     explanation: Check elements with `{in}`
     demo_code: "pretty_colors {is} green, yellow\ncolor {is} {ask} 'What {is} your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
+-   explanation: Check whether a given key on the keyboard is `{pressed}`.
+    demo_code: "{if} a {is} {pressed} {print} 'You pressed A!' {else} {print} 'You pressed another key!'"
+    name: '{pressed}'
 6:
 -   explanation: Tampilkan sama persis menggunakan tanda kutip satu
     demo_code: print '5 kali 5 adalah ' 5 * 5
@@ -130,6 +133,9 @@
 -   demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
     name: '`{repeat}` with turtle'
     explanation: '{repeat} multiple lines'
+-   name: '{pressed}'
+    explanation: Check whether a given key on the keyboard is `{pressed}`.
+    demo_code: "{if} a {is} {pressed}\n    {print} 'You pressed A!'\n{else}\n    {print} 'You pressed another key!'"
 9:
 -   name: '`if` dengan beberapa baris'
     explanation: Cek apakah jawaban dari penjumlahan yang ditanyakan dengan `ask` benar. Sekarang kita menampilkan dua baris.
