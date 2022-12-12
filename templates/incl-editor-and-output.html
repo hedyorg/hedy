@@ -194,9 +194,9 @@
                 <button class="green-btn ltr:ml-1 rtl:mr-1" id="next_level_button" onclick="hedyApp.prompt_unsaved (function () {window.location = '{{ hedy_link(next_level, 1) }}'})">{{_('advance_button')|replace("{level}", next_level)}}</button>
             {% elif next_level and not (not customizations or next_level in customizations['available_levels']) %}
                 <div class="relative">
-                    <button class="green-btn  ltr:ml-1 rtl:mr-1" id="next_level_button" disabled>{{_('advance_button')|replace("{level}", next_level)}}</button>
-                    <div class='text-center tooltip opacity-0 hover:opacity-100 duration-300 absolute inset-0 z-10 flex justify-center items-top'>
-                      <span class='tooltiptext text-xs font-semibold rounded shadow-lg p-1 bg-gray-100 -mt-8'>{{_('disabled_button_quiz') if customizations["below_threshold"] else _('disabled_button_locked')}} </span>
+                    <button class="green-btn ltr:ml-1 rtl:mr-1" id="next_level_button" disabled>{{_('advance_button')|replace("{level}", next_level)}}</button>
+                    <div class="absolute flex items-center w-40 inset-0 z-10 opacity-0 hover:opacity-100 duration-300 -mt-36 ltr:-ml-8 rtl:-mr-8">
+                      <span class="text-red-500 text-center font-bold bg-gray-100 px-2 py-1 rounded-lg border border-black text-sm">{{_('disabled_button_quiz') if customizations["below_threshold"] else _('disabled_button_locked')}} </span>
                 </div>
             {% endif %}
           </div>

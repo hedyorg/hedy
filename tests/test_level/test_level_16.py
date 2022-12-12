@@ -418,6 +418,32 @@ class TestsLevel16(HedyTester):
 
         self.single_level_tester(code=code, expected=expected)
 
+    def test_change_list_item_var(self):
+        code = textwrap.dedent("""\
+        l = [1, 2]
+        x = 3
+        l[1] = x""")
+
+        expected = textwrap.dedent("""\
+        l = [1, 2]
+        x = 3
+        l[1-1] = x""")
+
+        self.single_level_tester(code=code, expected=expected)
+
+    def test_change_list_item_number(self):
+        code = textwrap.dedent("""\
+        l = [1, 2]
+        m = 2
+        l[m] = 3""")
+
+        expected = textwrap.dedent("""\
+        l = [1, 2]
+        m = 2
+        l[m-1] = 3""")
+
+        self.single_level_tester(code=code, expected=expected)
+
     def test_equality_with_number_and_list_gives_error(self):
         code = textwrap.dedent("""\
         color is [5, 6, 7]
