@@ -92,13 +92,13 @@ class ClassModule(WebsiteModule):
     def delete_class(self, user, class_id):
         Class = self.db.get_class(class_id)
         if not Class or Class["teacher"] != user["username"]:
-            return gettext("no_such_class"), 404
+            return make_response(gettext("no_such_class"), 404)
 
         self.db.delete_class(Class)
         achievement = self.achievements.add_single_achievement(user["username"], "end_of_semester")
         if achievement:
-            return {"achievement": achievement}, 200
-        return {}, 200
+            return make_response({"achievement": achievement})
+        return make_response('', 204)
 
     @route("/<class_id>/prejoin/<link>", methods=["GET"])
     def prejoin_class(self, class_id, link):
@@ -133,7 +133,7 @@ class ClassModule(WebsiteModule):
             return utils.error_page(error=404, ui_message=gettext("invalid_class_link"))
 
         if not current_user()["username"]:
-            return gettext("join_prompt"), 403
+            return make_response(gettext("join_prompt"), 403)
 
         self.db.add_student_to_class(Class["id"], current_user()["username"])
         # We only want to remove the invite if the user joins the class with an actual pending invite
@@ -145,23 +145,23 @@ class ClassModule(WebsiteModule):
 
         achievement = self.achievements.add_single_achievement(current_user()["username"], "epic_education")
         if achievement:
-            return {"achievement": achievement}, 200
-        return {}, 200
+            return make_response({"achievement": achievement})
+        return make_response('', 204)
 
     @route("/<class_id>/student/<student_id>", methods=["DELETE"])
     @requires_login
     def leave_class(self, user, class_id, student_id):
         Class = self.db.get_class(class_id)
         if not Class or (Class["teacher"] != user["username"] and student_id != user["username"]):
-            return gettext("ajax_error"), 400
+            return make_response(gettext("ajax_error"), 400)
 
         self.db.remove_student_from_class(Class["id"], student_id)
         achievement = None
         if Class["teacher"] == user["username"]:
             achievement = self.achievements.add_single_achievement(user["username"], "detention")
         if achievement:
-            return {"achievement": achievement}, 200
-        return {}, 200
+            return make_response({"achievement": achievement})
+        return make_response('', 204)
 
 
 class MiscClassPages(WebsiteModule):
