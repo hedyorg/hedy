@@ -1127,13 +1127,9 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
       }
       return;
     }
-    if (!hasWarnings) {
-      if (debug == null) {
-        if (code !== last_code) {
+    if (!hasWarnings && code !== last_code && debug == null) {
           showSuccesMessage();
           last_code = code;
-        }
-      }
     }
     if (cb) cb ();
   }).catch(function(err) {
