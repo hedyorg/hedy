@@ -24,7 +24,7 @@ describe('Is able to add student by name', () => {
     cy.get('#add-student').click();
 
     cy.get('#invite-student').click();
-
+    cy.wait(2000)
     cy.get('#modal-prompt-input').type("student1");
     cy.get('#modal-ok-button').click();
  
