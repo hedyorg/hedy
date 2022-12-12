@@ -583,7 +583,7 @@ class TestAuth(AuthHelper):
 
         # WHEN logging out the user
         # THEN receive an OK response code from the server
-        self.post_data('auth/logout', '')
+        self.post_data('auth/logout', '', expect_http_code=204)
 
         # WHEN retrieving the user profile with the same cookie
         # THEN receive a forbidden response code from the server
