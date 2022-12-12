@@ -491,16 +491,24 @@ export function add_account_placeholder() {
     let row = $("#account_row_unique").clone();
     row.removeClass('hidden');
     row.attr('id', "");
-    // Set all inputs expect class to required
+    // Set all inputs except class to required
     row.find(':input').each(function() {
        if ($(this).prop('id') != 'classes') {
            $(this).prop('required', true);
        }
     });
-    row.appendTo("#account_rows_container");
+    // Append 5 rows at once
+    for (let x = 0; x < 5; x++) {
+        row.clone().appendTo("#account_rows_container");
+    }
 }
 
 export function generate_passwords() {
+    if (!$('#passwords_toggle').is(":checked")) {
+        $('.passwords_input').val('');
+        $('.passwords_input').prop('disabled', false);
+        return;
+    }
     $('.account_row').each(function () {
         if ($(this).is(':visible')) {
             $(this).find(':input').each(function () {
@@ -510,6 +518,14 @@ export function generate_passwords() {
                 }
             });
         }
+    });
+    $('.passwords_input').prop('disabled', true);
+}
+
+export function append_classname() {
+    const classname = <string>$('#classes').val();
+    $('.usernames_input').each(function () {
+        $(this).val($(this).val() + "_" + classname);
     });
 }
 

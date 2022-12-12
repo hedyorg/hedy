@@ -85,6 +85,18 @@ NORMAL_PREFIX_CODE = textwrap.dedent("""\
             return number
         """)
 
+# Define code that will be used if a presssed command is used
+PYGAME_PREFIX_CODE = textwrap.dedent("""\
+    # coding=utf8
+    os.environ["SDL_VIDEODRIVER"] = "dummy" # No real image drivers exist, set to dummy for testing
+    os.environ["SDL_AUDIODRIVER"] = "disk" # No real audio drivers exist, set to disk for testing
+    import pygame
+    pygame.init()
+    canvas = pygame.display.set_mode((711,300))
+    canvas.fill(pygame.Color(247, 250, 252, 255))
+    pygame_end = True # Set to True so that we don't get stuck in a loop during testing'
+    """)
+
 
 class Timer:
     """A quick and dirty timer."""
