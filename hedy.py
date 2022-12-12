@@ -1441,15 +1441,15 @@ class ConvertToPython_1(ConvertToPython):
                                                           allowed_types=get_allowed_types(Command.turn, self.level))
 
     def make_turn(self, parameter):
-        return self.make_turtle_command(parameter, Command.turn, 'right', False)
+        return self.make_turtle_command(parameter, Command.turn, 'right', False, 'int')
 
     def make_forward(self, parameter):
-        return self.make_turtle_command(parameter, Command.forward, 'forward', True)
+        return self.make_turtle_command(parameter, Command.forward, 'forward', True, 'int')
 
     def make_color(self, parameter):
         return self.make_turtle_color_command(parameter, Command.color, 'pencolor')
 
-    def make_turtle_command(self, parameter, command, command_text, add_sleep):
+    def make_turtle_command(self, parameter, command, command_text, add_sleep, type):
         var_name = None
         exception = ''
         if self.is_list(parameter):
@@ -1468,7 +1468,7 @@ class ConvertToPython_1(ConvertToPython):
         transpiled = exception + textwrap.dedent(f"""\
             {variable} = {parameter}
             try:
-              {variable} = int({variable})
+              {variable} = {type}({variable})
             except ValueError:
               raise Exception(f'While running your program the command {style_command(command)} received the value {style_command('{' + variable + '}')} which is not allowed. Try changing the value to a number.')
             t.{command_text}(min(600, {variable}) if {variable} > 0 else max(-600, {variable}))""")
@@ -2139,18 +2139,11 @@ class ConvertToPython_12(ConvertToPython_11):
             return self.make_forward(arg.children[0])
         return self.make_forward(float(args[0]))
 
-    def make_turtle_command(self, parameter, command, command_text, add_sleep):
-        variable = self.get_fresh_var('__trtl')
-        transpiled = textwrap.dedent(f"""\
-            {variable} = {parameter}
-            try:
-              {variable} = float({variable})
-            except ValueError:
-              raise Exception(f'While running your program the command {style_command(command)} received the value {style_command('{'+variable+'}')} which is not allowed. Try changing the value to a number.')
-            t.{command_text}(min(600, {variable}) if {variable} > 0 else max(-600, {variable}))""")
-        if add_sleep:
-            return sleep_after(transpiled, False)
-        return transpiled
+    def make_turn(self, parameter):
+        return self.make_turtle_command(parameter, Command.turn, 'right', False, 'float')
+
+    def make_forward(self, parameter):
+        return self.make_turtle_command(parameter, Command.forward, 'forward', True, 'float')
 
     def division(self, meta, args):
         return self.process_calculation(args, '/')
@@ -2227,7 +2220,16 @@ class ConvertToPython_16(ConvertToPython_15):
         return parameter + " = [" + ", ".join(values) + "]"
 
     def change_list_item(self, meta, args):
-        return args[0] + '[' + args[1] + '-1] = ' + args[2]
+        left_side = args[0] + '[' + args[1] + '-1]'
+        right_side = args[2]
+        exception_text = gettext('catch_index_exception').replace('{list_name}', style_command(args[0]))
+        exception = textwrap.dedent(f"""\
+        try:
+            {left_side}
+        except IndexError:
+            raise Exception('{exception_text}')
+        """)
+        return exception + left_side + ' = ' + right_side
 
 
 @v_args(meta=True)
