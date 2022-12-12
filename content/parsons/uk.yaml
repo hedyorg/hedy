@@ -12,19 +12,19 @@ levels:
             story: Create a program that helps you calculate how many cakes you should buy for your birthday party.\n
             code: |
                 {print} "Це твій день народження!"
-                people = {ask} 'Скільком людям ви хочете дати шматочок торта?'
+                осіб = {ask} 'Скільком людям ви хочете дати шматочок торта?'
                 cakes_amount {is} осіб/8
                 {print} 'Вам доведеться купити ' cakes_amount ' тортів'
     7:
         1:
             code: |
-                players = Ліам, Ной, Софі
-                player1 = гравці {at} {random}
-                player2 = гравці {at} {random}
-                {print} player1 ' спочатку грає проти ' player2
-                {remove} player1 {from} players
-                {remove} player2 {from} players
-                {print} 'Переможець грає проти ' players {at} {random}
+                гравці = Ліам, Ной, Софі
+                гравець1 = гравці {at} {random}
+                гравець2 = гравці {at} {random}
+                {print} гравець1 ' спочатку грає проти ' гравець2
+                {remove} гравець1 {from} players
+                {remove} гравець12 {from} players
+                {print} 'Переможець грає проти ' гравці {at} {random}
             story: In a chess tournament there are three players left.\nCreate a program that decides which two players first play against each other.\nFirst print the two players who play the first match, then print against which player the winner will play.\n
         2:
             story: Create the song 'The wheels on the bus go round and round'\n
