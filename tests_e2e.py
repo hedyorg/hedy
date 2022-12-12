@@ -231,7 +231,7 @@ class AuthHelper(unittest.TestCase):
 
     def destroy_current_user(self):
         assert self.username is not None
-        self.post_data('auth/destroy', '')
+        self.post_data('auth/destroy', '', expect_http_code=204)
         # Remove any records of this user
         USERS.pop(self.username)
 
@@ -958,7 +958,7 @@ class TestAuth(AuthHelper):
 
         # WHEN destroying the public profile
         # THEN receive an OK response from the server
-        self.post_data('auth/destroy_public', public_profile, expect_http_code=200)
+        self.post_data('auth/destroy_public', public_profile, expect_http_code=204)
 
 
 class TestProgram(AuthHelper):
