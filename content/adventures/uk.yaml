@@ -29,7 +29,7 @@ adventures:
                 story_text: "## Рівень 7! Сьомий рівень!\nРівень 7 додає команду `{repeat}`.  Команда `{repeat}` може бути використана для виконання одного рядка коду декілька разів.\n"
             8:
                 example_code: "Ось як тепер працює команда `{repeat}`:\n```\n{repeat} 5 {times}\n    {print} 'Всім привіт'\n    {print} 'Це все повторюється 5 разів'\n```\nА ось як команди `{if}` і `{else}` тепер працюють:\n\n```\nімʼя {is} {ask} 'Як тебе звати?'\n{if} імʼя {is} Хейді\n    {print} 'Вітаємо Хейді'\n    {print} 'Можеш гратися на своєму компʼютері!'\n{else}\n    {print} 'ПОРУШНИК!'\n    {print} 'Не можеш користуватись цим компʼютером!'\n```\n"
-                story_text: "## Відступ\n`{ask}` і `{print}` все ще працюють так, як ви їх знаєте. А ось `{if}`, `{else}` і `{repeat}` змінилися!\nТепер ви можете виконувати групи коду разом, але вам доведеться *відступати* код.\nЦе означає, що на початку рядка потрібно поставити чотири пробіли. Вам також доведеться робити відступи, коли ви просто хочете створити блок з одного рядка.\n"
+                story_text: "## Відступ\n`{ask}` і `{print}` все ще працюють, як ви їх знаєте. Але `{if}`, `{else}`, {pressed} і `{repeat}` змінилися!\nТепер ви можете виконувати групи коду разом, але вам потрібно буде зробити *відступ* у коді.\nЦе означає поставити чотири пробіли на початку рядка. Вам також доведеться зробити відступ, якщо ви просто хочете створити блок з одного рядка.\n"
                 start_code: "{repeat} 5 {times}\n    {print} 'Hello folks'\n    {print} 'This will be printed 5 times'"
             9:
                 start_code: "{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    {else}\n        {print} 'pizza is better'"
@@ -76,15 +76,15 @@ adventures:
                 start_code: "імʼя {is} {ask} 'як тебе звати?'\n{if} імʼя {is} Хейді {print} 'круто!' {else} {print} 'пф'"
                 story_text: "## Якщо... то....\nУ 5 рівні з'явилося дещо нове - `{if}`! За допомогою `{if}` ви можете вибирати між двома різними варіантами.\nЦей код чудово друкується, якщо ви введете Hedy як ім'я, і бум! Якщо ви введете щось інше.\n`{ask}` і `{print}` все ще працюють так само як і на 4-му рівні.\n"
                 example_code_2: "```\nімʼя {is} {ask} 'як тебе звати?'\n{if} імʼя {is} Хейді {print} 'класно'\n{else} {print} 'фе!'\n```\n"
-                story_text_4: "Something else that works with ```if``` is ```pressed```! With pressed you can link any letter in\nthe alphabet and any number key on your keyboard to a command. If you link it, and press the key,\nsomething will happen. Try it out!\n"
-                example_code_4: "```\nif x is pressed print \"it worked!\"\n```\n"
+                story_text_4: "Ще щось, що працює з ```if``` is ```pressed```! За допомогою pressed ви можете зв’язати будь-яку літеру алфавіту та будь-яку цифрову клавішу на клавіатурі до команди. Якщо зв’язати його та натиснути клавішу,\nщось станеться. Спробуй!\n"
+                example_code_4: "```\nякщо x натиснуто, то надрукує \"це працює!\"\n```\n"
             10:
                 start_code: "animals {is} dog, cat, blobfish\n{for} animal {in} animals\n  {print} 'I love ' animal"
                 story_text: "## `{for}`\nУ цьому рівні ми вивчаємо новий код, який називається `{for}`. За допомогою `{for}` можна скласти список і використовувати всі елементи.\n`{for}` створює блок, як і `{repeat}` та `{if}`, тому всі рядки в блоці повинні починатися з пробілів."
                 example_code: "```\nanimals {is} dog, cat, blobfish\n{for} animal {in} animals\n  {print} 'I love ' animal\n```\n"
             11:
                 start_code: "{for} counter {in} {range} 1 {to} 5\n    {print} counter"
-                story_text: "## Цикли!\n`{print}` працює так само, але ми додаємо нову форму `{for}`. Тепер ви можете написати лічильник `{for} counter {in} {range} 1 {to} 5` і використовувати `counter` у вашій програмі.\nСпробуйте і подивіться, що вийде! Не забувайте використовувати відступи після операторів `{for}` і `{if}` (це означає починати речення з чотирьох пробілів)."
+                story_text: "## Цикли!\n`{print}` працює так само, але ми додаємо нову форму `{for}`. Тепер ви можете писати `{for} counter {in} {range} 1 {to} 5` замість `{repeat} 5 {times}` і використовувати `counter` у своїй програмі.\nСпробуйте, щоб побачити, що вийде! Не забудьте використовувати відступи після операторів `{for}` і `{if}` (це означає, що речення починається з чотирьох пробілів)."
                 example_code: "```\n{for} counter {in} {range} 1 {to} 5\n    {print} counter\n```\n"
             13:
                 start_code: "name = {ask} 'what is your name?'\nage = {ask} 'what is your age?'\n{if} name {is} 'Hedy' {and} age {is} 2\n    {print} 'You are the real Hedy!'"
@@ -104,10 +104,10 @@ adventures:
                 example_code: "```\nвинагороди = ['1 мільйон гривень', 'яблучний пиріг', 'ніщо']\nтвоя_винагорода = винагороди[{random}]\n{print} 'Ти виграв ' твоя_винагорода\n{if} твоя_винагорода == '1 мільйон гривень' :\n    {print} 'О так! Ти багатій!'\n{elif} твоя_винагорода == 'яблучний пиріг' :\n    {print} 'Ммм, яблучний пиріг!'\n{else}:\n    {print} 'Пощастить наступним разом...'\n```\n"
             18:
                 start_code: "імʼя = 'Хейді'\n{print}('Мене звати ', імʼя)"
-                story_text: "## The last level!\nWe arrived at real Python code! That means we need to use parentheses with {print} and {range} from now on."
+                story_text: "## Останній рівень!\nМи отримали справжній код Python! Це означає, що відтепер нам потрібно використовувати дужки з {print} і {range}."
                 example_code: "```\n{print}('Hello!')\n{for} i {in} {range}(1, 10):\n    {print}('This is line ', i)\n```\n"
-                story_text_2: If you want to print more than one item, you need to separate them by commas.
-                example_code_2: "```\ntemperature = 25\n{print}('It is ', temperature, 'degrees outside')\n```\n"
+                story_text_2: Якщо ви хочете надрукувати більше одного елемента, потрібно розділити їх комами.
+                example_code_2: "```\nтемпература = 25\n{print}('Зараз ', температура, 'градуси на вулиці')\n```\n"
                 story_text_3: "##  Input\nThe final change we will need to make to get Python code is changing `{ask}` into `{input}`."
                 example_code_3: "```\n{print}('My name is Hedy!')\nname = {input}('What is your name?')\n{print}('So your name is ', name)\n```\n"
         name: Вступ
@@ -804,3 +804,12 @@ adventures:
                 start_code: '# place your code here'
                 example_code: "```\nstepsize = 15\nleft = -90\nright = 90\naround = 180\njumptime = 5\nspins = 4\nrepeat 40 times\n    {if} w is {pressed}:\n        forward stepsize\n        jumptime = jumptime - 1\n    {if} s is {pressed}:\n        turn around\n    {if} a is {pressed}:\n        turn left\n        spins = spins - 1\n    {if} d is {pressed}:\n        turn right\n        spins = spins - 1\n    {if} p is {pressed}:\n        {if} jumptime <= 0 or spins <= 0:\n            forward stepsize * 3\n            jumptime = 5\n            spins = 4\n        {elif} jumptime > 0:\n            print \"you need to take more steps or turns before you can superjump!\"\n```\n"
         description: Try linking a keyboard key to a command!
+    years:
+        name: New Year's
+        description: Countdown to the new year!
+        levels:
+            11:
+                example_code: "## Countdown\n```\nfor _ in _ 10 to 1\n    {print} i\n{print} 'Happy New Year!'\n```\n"
+                story_text: "## Songs\nIn this level you can use the `{for} i {in} {range}` command to countdown to the New Year.\n\n## Challenge\nFill in the blanks and make the code work!\n"
+                start_code: '# place your code here'
+        default_save_name: New Year's Countdown
