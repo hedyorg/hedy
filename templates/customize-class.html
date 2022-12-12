@@ -54,6 +54,19 @@
             </table>
         </div>
     </div>
+    <div class="flex flex-row">
+        <div class="w-40">
+            Level 2
+        </div>
+        <div id="sortadventures" class="flex flex-row w-auto overflow-x-scroll overflow-y-hidden mb-2 px-2 pt-2">
+            {% for key, adventure in adventures.items() %}
+            <div draggable="true" class="tab z-10 whitespace-nowrap flex items-center justify-center" tabindex="0" id="{{ key }}" >
+                {{ key }}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    
     <div class="flex flex-col lg:flex-row gap-4">
         <div class="flex flex-col">
             <h3 class="px-4">{{_('opening_dates')}}</h3>
@@ -215,5 +228,10 @@ function validate_changes() {
         window.location = "/for-teachers/class/{{class_info.id}}";
     }
 }
+</script>
+<script>
+    window.addEventListener("DOMContentLoaded", () => {
+      hedyApp.slist(document.getElementById("sortadventures"));
+    });
 </script>
 {% endblock %}
