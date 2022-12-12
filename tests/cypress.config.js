@@ -27,6 +27,7 @@ module.exports = defineConfig({
     admin_page: '/admin',
     admin_stats_page: '/admin/stats',
     admin_adventures_page: '/admin/adventures',
-    admin_achievements_page: '/admin/achievements'
+    admin_achievements_page: '/admin/achievements',
+    admin_classes_page: '/admin/classes'
   }
 });
