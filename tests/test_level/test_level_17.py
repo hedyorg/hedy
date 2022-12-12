@@ -539,7 +539,7 @@ class TestsLevel17(HedyTester):
               HedyTester.forward_transpiled(25.0, self.level),
               12, True)
             }
-            break
+            break    
           else:
             {HedyTester.indent(
               HedyTester.turn_transpiled(90.0, self.level),
