@@ -50,7 +50,7 @@ levels:
                 {print} Tiara Przydziału jest gotowa, żeby przypisać cię do domu Hogwart.
                 domy {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin
                 {sleep} 2
-                {print} I wybrany domy {at} {random}
+                {print} I wybrała domy {at} {random}
         2:
             story: |
                 Stwórz program, który wybierze dla Ciebie losowy posiłek. Zrób listę jedzenia i listę dodatków, i pozwól programowi zdecydować, co zjesz!
@@ -58,7 +58,7 @@ levels:
                 jedzenie {is} pizza, lody, sałatka, kanapka
                 dodatki {is} czekolada, ser, tuńczyk, posypka
                 {print} Twój dzisiejszy losowy posiłek to...
-                sleep 2
+                {sleep} 2
                 {print} jedzenie {at} {random} z losowymi dodatki {at} {random}
     4:
         1:
@@ -137,10 +137,10 @@ levels:
             story: |
                 Utwórz piosenkę „Koła autobusu kręcą się w kółko”
             code: |
-                {print} 'the wheels on the bus go'
-                {repeat} 3 {times} {print} 'round and round'
-                {print} 'the wheels of the bus go round and round'
-                {print} 'all through the town '
+                {print} 'koła autobusu kręcą sie'
+                {repeat} 3 {times} {print} 'w kółko i w kołko'
+                {print} 'koła autobusu kręca się w kółko i w kółko'
+                {print} 'przez całą noc'
     8:
         1:
             story: |

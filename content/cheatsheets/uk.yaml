@@ -66,6 +66,9 @@
 -   name: '{in}'
     explanation: Перевір елементи командою `{in}`.
     demo_code: "красиві_кольори {is} зелений, жовтий\nколір {is} {ask} 'Який {is} твій улюблений колір?'\n{if} колір {in} красиві_кольори {print} 'красивий!' {else} {print} 'пф'"
+-   name: '{pressed}'
+    explanation: Check whether a given key on the keyboard is `{pressed}`.
+    demo_code: "{if} a {is} {pressed} {print} 'You pressed A!' {else} {print} 'You pressed another key!'"
 6:
 -   name: '{print}'
     explanation: Друкуй конкретні фрази за допомогою лапок.
@@ -99,6 +102,9 @@
 -   name: '{repeat} з черепашкою'
     explanation: Повторіть декілька ліній.
     demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
+-   name: '{pressed}'
+    explanation: Check whether a given key on the keyboard is `{pressed}`.
+    demo_code: "{if} a {is} {pressed}\n    {print} 'You pressed A!'\n{else}\n    {print} 'You pressed another key!'"
 9:
 -   name: '{if} з багатьма лініями'
     explanation: Запитай про суму чисел за допомогою команди `{ask}` і перевір відповідь. Тепер ми друкуємо дві лінії.

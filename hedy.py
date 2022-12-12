@@ -9,6 +9,7 @@ from os import path
 import warnings
 import hedy
 import hedy_translation
+from hedy_content import ALL_KEYWORD_LANGUAGES
 import utils
 from collections import namedtuple
 import re
@@ -1457,7 +1458,7 @@ class ConvertToPython_1(ConvertToPython):
         return self.make_turtle_color_command(parameter, Command.color, 'pencolor')
 
     def make_turtle_command(self, parameter, command, command_text, add_sleep):
-        variable = self.get_fresh_var('trtl')
+        variable = self.get_fresh_var('__trtl')
         transpiled = textwrap.dedent(f"""\
             {variable} = {parameter}
             try:
@@ -1470,7 +1471,7 @@ class ConvertToPython_1(ConvertToPython):
         return transpiled
 
     def make_turtle_color_command(self, parameter, command, command_text):
-        variable = self.get_fresh_var('trtl')
+        variable = self.get_fresh_var('__trtl')
         return textwrap.dedent(f"""\
             {variable} = f'{parameter}'
             if {variable} not in {command_make_color}:
@@ -1859,7 +1860,7 @@ def sleep_after(commands, indent=True):
 @hedy_transpiler(level=7)
 class ConvertToPython_7(ConvertToPython_6):
     def repeat(self, meta, args):
-        var_name = self.get_fresh_var('i')
+        var_name = self.get_fresh_var('__i__')
         times = self.process_variable(args[0], meta.line)
         command = args[1]
         # in level 7, repeats can only have 1 line as their arguments
@@ -2088,7 +2089,7 @@ class ConvertToPython_12(ConvertToPython_11):
         return self.make_forward(float(args[0]))
 
     def make_turtle_command(self, parameter, command, command_text, add_sleep):
-        variable = self.get_fresh_var('trtl')
+        variable = self.get_fresh_var('__trtl')
         transpiled = textwrap.dedent(f"""\
             {variable} = {parameter}
             try:
@@ -2560,19 +2561,56 @@ def preprocess_blocks(code, level, lang):
     return "\n".join(processed_code)
 
 
-def preprocess_ifs(code):
+def preprocess_ifs(code, lang='en'):
     processed_code = []
     lines = code.split("\n")
+
+    def starts_with(command, line):
+        if lang in ALL_KEYWORD_LANGUAGES:
+            command_plus_translated_command = [command, KEYWORDS[lang].get(command)]
+            for c in command_plus_translated_command:
+                #  starts with the keyword and next character is a space
+                if line[0:len(c)] == c and (len(c) == len(line) or line[len(c)] == ' '):
+                    return True
+            return False
+        else:
+            return line[0:len(command)] == command
+
+    def contains(command, line):
+        if lang in ALL_KEYWORD_LANGUAGES:
+            command_plus_translated_command = [command, KEYWORDS[lang].get(command)]
+            for c in command_plus_translated_command:
+                if c in line:
+                    return True
+            return False
+        else:
+            return command in line
+
+    def contains_any_of(commands, line):
+        # translation is not needed here, happens in contains
+        if lang in ALL_KEYWORD_LANGUAGES:
+            for c in commands:
+                if contains(c, line):
+                    return True
+            return False
+        else:
+            for c in commands:
+                if contains(c, line):
+                    return True
+            return False
+
+
     for i in range(len(lines) - 1):
         line = lines[i]
         next_line = lines[i + 1]
-        # todo convert to all languages!!
+
         # if this line starts with if but does not contain an else, and the next line too is not an else.
-        if line[0:2] == "if" and (not next_line[0:4] == 'else') and (not ("else" in line)):
+        if starts_with('if', line) and (not starts_with('else', next_line)) and (not contains('else', line)):
             # is this line just a condition and no other keyword (because that is no problem)
             commands = ["print", "ask", "forward", "turn"]
+
             if (
-                "pressed" not in line and any(x in line for x in commands)
+                not contains('pressed', line) and contains_any_of(commands, line)
             ):  # and this should also (TODO) check for a second is cause that too is problematic.
                 # a second command, but also no else in this line -> check next line!
 
@@ -2607,7 +2645,7 @@ def process_input_string(input_string, level, lang, escape_backslashes=True):
 
     # In levels 5 to 8 we do not allow if without else, we add an empty print to make it possible in the parser
     if level >= 5 and level <= 8:
-        result = preprocess_ifs(result)
+        result = preprocess_ifs(result, lang)
 
     # In level 8 we add indent-dedent blocks to the code before parsing
     if level >= hedy.LEVEL_STARTING_INDENTATION:
