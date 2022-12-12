@@ -1609,13 +1609,28 @@ class ConvertToPython_3(ConvertToPython_2):
 
     def process_argument(self, meta, arg):
         # only call process_variable if arg is a string, else keep as is (ie. don't change 5 into '5', my_list[1] into 'my_list[1]')
-        if arg.isnumeric():  # is int/float
+        if arg.isnumeric() and isinstance(arg, int):  # is int/float
             return arg
         elif (self.is_list(arg)):  # is list indexing
             before_index, after_index = arg.split(']', 1)
             return before_index + '-1' + ']' + after_index   # account for 1-based indexing
         else:
             return self.process_variable(arg, meta.line)
+
+    def ask(self, meta, args):
+        var = args[0]
+        all_parameters = "'"
+        has_var = False
+        for a in args[1].split(" "):
+            if all_parameters != "'":
+                all_parameters += " "
+            if not has_var:
+                if self.is_variable(a):
+                    has_var = True
+                    all_parameters += "' "
+            all_parameters += process_characters_needing_escape(a)
+        print(all_parameters)
+        return f'{var} = input(' + '+'.join(all_parameters) + ")"
 
     def add(self, meta, args):
         value = self.process_argument(meta, args[0])
@@ -2028,11 +2043,8 @@ class ConvertToPython_12(ConvertToPython_11):
         return textwrap.dedent(f"""\
         {assign}
         try:
-          {var} = int({var})
-        except ValueError:
-          try:
             {var} = float({var})
-          except ValueError:
+        except ValueError:
             pass""")  # no number? leave as string
 
     def assign_list(self, meta, args):
@@ -2119,7 +2131,6 @@ class ConvertToPython_13(ConvertToPython_12):
 @hedy_transpiler(level=14)
 class ConvertToPython_14(ConvertToPython_13):
     def process_comparison(self, meta, args, operator):
-
         # we are generating an fstring now
         arg0 = self.process_variable_for_fstring_padded(args[0])
         arg1 = self.process_variable_for_fstring_padded(args[1])
@@ -2129,9 +2140,8 @@ class ConvertToPython_14(ConvertToPython_13):
         # this at one point could be improved with a better type system, of course!
         # the issue is that we can't do everything in here because
         # kids submit things with the ask command that wew do not ask them to cast (yet)
-
-        simple_comparison = arg0 + operator + arg1
-
+        
+        simple_comparison = arg0 + " " + operator + " " + (arg1)
         if len(args) == 2:
             return simple_comparison  # no and statements
         else:

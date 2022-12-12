@@ -130,6 +130,27 @@ class TestsLevel14(HedyTester):
             max_level=16,
             expected=expected,
         )
+      
+    def test_comparison_float_int(self, comparison):
+      code = textwrap.dedent(f"""\
+        var = ask 'What is your number?'
+        if var {comparison} 15.0
+          print 'Above 15.0'
+        else
+          print 'Below'""")
+
+      expected = textwrap.dedent(f"""\
+        var = ask 'What is your number?'
+        if convert_numerals('Latin', var).zfill(100){comparison}convert_numberal('Latin', 15.0).zfill(100)
+          print 'Above 15.0'
+        else
+          print 'Below'""")
+
+      self.multi_level_tester(
+          code=code,
+          expected=expected,
+          max_level=16,
+      )
 
     @parameterized.expand(HedyTester.comparison_commands)
     def test_comparisons_else(self, comparison):
