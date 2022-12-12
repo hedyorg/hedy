@@ -91,7 +91,7 @@ class AuthModule(WebsiteModule):
         # We set the cookie to expire in a year,
         # just so that the browser won't invalidate it if the same cookie gets renewed by constant use.
         # The server will decide whether the cookie expires.
-        resp = make_response()
+        resp = make_response(response)
         resp.set_cookie(
             TOKEN_COOKIE_NAME,
             value=cookie,
@@ -105,7 +105,7 @@ class AuthModule(WebsiteModule):
         # Remember the current user on the session. This is "new style" logins, which should ultimately
         # replace "old style" logins (with the cookie above), as it requires fewer database calls.
         remember_current_user(user)
-        return resp(response)
+        return resp
 
     @route("/signup", methods=["POST"])
     def signup(self):
