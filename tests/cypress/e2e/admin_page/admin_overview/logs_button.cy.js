@@ -1,8 +1,8 @@
-import { loginForTeacher } from '../../tools/login/login.js'
+import { loginForAdmin } from '../../tools/login/login.js'
 
 describe('Users overview button', () => {
   it('passes', () => {
-    loginForTeacher();
+    loginForAdmin();
 
 
       cy.get('#logs_button')
