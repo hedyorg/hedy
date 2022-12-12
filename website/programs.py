@@ -34,7 +34,7 @@ class ProgramsModule(WebsiteModule):
         result = self.db.program_by_id(body["id"])
 
         if not result or (result["username"] != user["username"] and not is_admin(user)):
-            make_response("", 404)
+            return make_response('', 404)
         self.db.delete_program_by_id(body["id"])
         self.db.increase_user_program_count(user["username"], -1)
 
