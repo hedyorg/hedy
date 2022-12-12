@@ -1,6 +1,6 @@
 import uuid
 
-from flask import jsonify, redirect, request, session
+from flask import jsonify, redirect, request, session, make_response
 from flask_babel import gettext
 
 import utils
@@ -31,17 +31,17 @@ class ClassModule(WebsiteModule):
         body = request.json
         # Validations
         if not isinstance(body, dict):
-            return gettext("ajax_error"), 400
+            return make_response(gettext("ajax_error"), 400)
         if not isinstance(body.get("name"), str):
-            return gettext("class_name_invalid"), 400
+            return make_response(gettext("class_name_invalid"), 400)
         if len(body.get("name")) < 1:
-            return gettext("class_name_empty"), 400
+            return make_response(gettext("class_name_empty"), 400)
 
         # We use this extra call to verify if the class name doesn't already exist, if so it's a duplicate
         Classes = self.db.get_teacher_classes(user["username"], True)
         for Class in Classes:
             if Class["name"] == body["name"]:
-                return gettext("class_name_duplicate"), 200
+                return make_response(gettext("class_name_duplicate"), 400)
 
         Class = {
             "id": uuid.uuid4().hex,
@@ -52,10 +52,12 @@ class ClassModule(WebsiteModule):
         }
 
         self.db.store_class(Class)
+
+        response = {"id": Class["id"]}
         achievement = self.achievements.add_single_achievement(user["username"], "ready_set_education")
         if achievement:
-            return {"id": Class["id"], "achievement": achievement}, 200
-        return {"id": Class["id"]}, 200
+            response["achievement"] = achievement
+        return make_response(response)
 
     @route("/<class_id>", methods=["PUT"])
     @requires_teacher
@@ -63,27 +65,27 @@ class ClassModule(WebsiteModule):
         body = request.json
         # Validations
         if not isinstance(body, dict):
-            return gettext("ajax_error"), 400
+            return make_response(gettext("ajax_error"), 400)
         if not isinstance(body.get("name"), str):
-            return gettext("class_name_invalid"), 400
+            return make_response(gettext("class_name_invalid"), 400)
         if len(body.get("name")) < 1:
-            return gettext("class_name_empty"), 400
+            return make_response(gettext("class_name_empty"), 400)
 
         Class = self.db.get_class(class_id)
         if not Class or Class["teacher"] != user["username"]:
-            return gettext("no_such_class"), 404
+            return make_response(gettext("no_such_class"), 404)
 
         # We use this extra call to verify if the class name doesn't already exist, if so it's a duplicate
         Classes = self.db.get_teacher_classes(user["username"], True)
         for Class in Classes:
-            if Class["name"] == body["name"]:
-                return "duplicate", 200  # Todo TB: Will have to look into this, but not sure why we return a 200?
+            if Class.get("name") == body["name"] and Class.get("id") != class_id:
+                return make_response(gettext("class_name_duplicate"), 400)
 
         self.db.update_class(class_id, body["name"])
         achievement = self.achievements.add_single_achievement(user["username"], "on_second_thoughts")
         if achievement:
-            return {"achievement": achievement}, 200
-        return {}, 200
+            return make_response({"achievement": achievement})
+        return make_response('', 204)
 
     @route("/<class_id>", methods=["DELETE"])
     @requires_login
