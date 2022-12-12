@@ -1121,15 +1121,17 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
 
     // Check if the program was correct but the output window is empty: Return a warning
     if ($('#output').is(':empty') && $('#turtlecanvas').is(':empty')) {
-      if(debug == null){
+      if(!debug){
         pushAchievement("error_or_empty");
         error.showWarning(ErrorMessages['Transpile_warning'], ErrorMessages['Empty_output']);
       }
       return;
     }
-    if (!hasWarnings && code !== last_code && debug == null) {
-          showSuccesMessage();
-          last_code = code;
+    if (!hasWarnings && code !== last_code && !debug) {
+        console.log("We get here!");
+
+        showSuccesMessage();
+        last_code = code;
     }
     if (cb) cb ();
   }).catch(function(err) {
