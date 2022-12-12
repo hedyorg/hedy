@@ -2,7 +2,7 @@ import {loginForTeacher} from '../../../tools/login/login.js'
 import {createClass} from '../../../tools/classes/class.js'
 
 
-describe('Is able to go to logs page', () => {
+describe('Is able to download login credentials', () => {
   it('Passes', () => {
     loginForTeacher();
     cy.wait(500);
@@ -10,14 +10,11 @@ describe('Is able to go to logs page', () => {
     cy.get(".view_class").first().click(); // Press view class button
     cy.get('#add-student').click();
     cy.get('#create-accounts').click(); 
-    cy.get(':nth-child(2) > #username').type("student14");
-    cy.get(':nth-child(2) > #password').type("123456");
-    cy.get(':nth-child(3) > #username').type("student15");
-    cy.get(':nth-child(3) > #password').type("123456");
-    cy.get(':nth-child(4) > #username').type("student16");
-    cy.get(':nth-child(4) > #password').type("123456");
-    cy.get(':nth-child(5) > #username').type("student17");
-    cy.get(':nth-child(5) > #password').type("123456");
+    var levelarray = Array.from({length:4},(v, k)=>k+1) // length reflects how many rows to fill
+    cy.wrap(levelarray).each((index) => {
+      cy.get(':nth-child(' +(index + 1) + ') > #username').type("student" + '0' + index)
+      cy.get(':nth-child(' +(index + 1) + ') > #password').type('123456')
+    })
     cy.wait(1000);
 
     cy.get('#create_accounts_button').click();
