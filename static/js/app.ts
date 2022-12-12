@@ -2181,45 +2181,38 @@ const clearTimeouts = () => {
   timers = [];
 };
 
+// Got from https://code-boxx.com/drag-drop-sortable-list-javascript/ 
 export function slist (target: any) {
   // (A) SET CSS + GET ALL LIST ITEMS
   //target.classList.add("slist");
   let items = target.getElementsByTagName("div")
   let current : any = null;
 
-  // (B) MAKE ITEMS DRAGGABLE + SORTABLE
   for (let i of items) {
-    // (B1) ATTACH DRAGGABLE
     i.draggable = true;
     
-    // (B2) DRAG START - YELLOW HIGHLIGHT DROPZONES
-    i.ondragstart = (ev : any) => {
+    i.ondragstart = () => {
       current = i;
       for (let it of items) {
-        if (it != current) { it.classList.add("hint"); }
+        if (it != current) { it.classList.add("drop-adventures-hint"); console.log(it.classList)}
       }
     };
     
-    // (B3) DRAG ENTER - RED HIGHLIGHT DROPZONE
-    i.ondragenter = (ev: any) => {
-      if (i != current) { i.classList.add("active"); }
+    i.ondragenter = () => {
+      if (i != current) { i.classList.add("drop-adventures-active"); console.log(i.classList); }
     };
 
-    // (B4) DRAG LEAVE - REMOVE RED HIGHLIGHT
     i.ondragleave = () => {
-      i.classList.remove("active");
+      i.classList.remove("drop-adventures-active");
     };
-
-    // (B5) DRAG END - REMOVE ALL HIGHLIGHTS
+    
     i.ondragend = () => { for (let it of items) {
-        it.classList.remove("hint");
-        it.classList.remove("active");
+        it.classList.remove("drop-adventures-hint");
+        it.classList.remove("drop-adventures-active");
     }};
  
-    // (B6) DRAG OVER - PREVENT THE DEFAULT "DROP", SO WE CAN DO OUR OWN
     i.ondragover = (evt: any) => { evt.preventDefault(); };
  
-    // (B7) ON DROP - DO SOMETHING
     i.ondrop = (evt: any) => {
       evt.preventDefault();
       if (i != current) {
