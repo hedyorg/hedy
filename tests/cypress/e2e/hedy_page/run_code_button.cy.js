@@ -8,6 +8,10 @@ describe('Is able to run code', () => {
       cy.get('#runit').click();
       cy.get('#okbox').should('be.visible');
 
+      // Run again with same code
+      cy.get('#runit').click();
+      cy.get('#okbox').should('not.be.visible');
+
       // Run with incorrect code
       cy.get('#editor').type('\np');
       cy.get('#runit').click();
