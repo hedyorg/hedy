@@ -52,6 +52,11 @@ export function goToHedyLevel2Page()
     return goToPage(Cypress.env('hedy_level2_page'));
 }
 
+export function goToAdminPage()
+{
+    return goToPage(Cypress.env('admin_page'))
+}
+
 export function goToAdminUsersPage()
 {
     loginForAdmin();
