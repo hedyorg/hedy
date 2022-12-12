@@ -1234,7 +1234,7 @@ class TestClasses(AuthHelper):
     def test_invalid_update_class(self):
         # GIVEN a user with teacher permissions and a class
         self.given_teacher_is_logged_in()
-        self.post_data('class', {'name': 'class123panda'})
+        self.post_data('class', {'name': 'class1'})
         Class = self.get_data('classes')[0]
 
         # WHEN attempting to update a class with no cookie
@@ -1269,19 +1269,19 @@ class TestClasses(AuthHelper):
     def test_update_class(self):
         # GIVEN a user with teacher permissions and a class
         self.given_teacher_is_logged_in()
-        self.post_data('class', {'name': 'class123panda'})
+        self.post_data('class', {'name': 'class1'})
         Class = self.get_data('classes')[0]
 
         # WHEN attempting to update a class
         # THEN receive an OK status code from the server
-        self.post_data('class/' + Class['id'], {'name': 'class321panda'}, put_data=True)
+        self.post_data('class/' + Class['id'], {'name': 'class2'}, put_data=True)
 
         # WHEN retrieving the class
         # THEN receive an OK response code from the server
         Class = self.get_data('for-teachers/class/' + Class['id'])
 
         # THEN the name of the class should be updated
-        self.assertEqual(Class['name'], 'class321panda')
+        self.assertEqual(Class['name'], 'class2')
 
     def test_copy_class(self):
         # GIVEN a user with teacher permissions and a class
@@ -1298,7 +1298,7 @@ class TestClasses(AuthHelper):
         self.given_teacher_is_logged_in()
 
         # GIVEN a class
-        self.post_data('class', {'name': 'class123panda'})
+        self.post_data('class', {'name': 'class1'})
         Class = self.get_data('classes')[0]
 
         # WHEN attempting to join a class without being logged in
