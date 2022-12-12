@@ -43,11 +43,11 @@ class AuthModule(WebsiteModule):
         body = request.json
         # Validations
         if not isinstance(body, dict):
-            return gettext("ajax_error"), 400
+            return make_response(gettext("ajax_error"), 400)
         if not isinstance(body.get("username"), str):
-            return gettext("username_invalid"), 400
+            return make_response(gettext("username_invalid"), 400)
         if not isinstance(body.get("password"), str):
-            return gettext("password_invalid"), 400
+            return make_response(gettext("password_invalid"), 400)
 
         # If username has an @-sign, then it's an email
         if "@" in body["username"]:
@@ -56,7 +56,7 @@ class AuthModule(WebsiteModule):
             user = self.db.user_by_username(body["username"])
 
         if not user or not check_password(body["password"], user["password"]):
-            return gettext("invalid_username_password") + " " + gettext("no_account"), 403
+            return make_response(gettext("invalid_username_password") + " " + gettext("no_account"), 403)
 
         # If the number of bcrypt rounds has changed, create a new hash.
         new_hash = None
@@ -76,21 +76,22 @@ class AuthModule(WebsiteModule):
             session["profile_image"] = public_profile.get("image", 1)
 
         # Make an empty response to make sure we have one
-        resp = make_response()
+        response = {}
 
         if is_admin(user):
-            resp = make_response({"admin": True})
+            response["admin"] = True
         elif user.get("is_teacher"):
-            resp = make_response({"teacher": True})
+            response["teacher"] = True
 
         # If the user is a student (and has a related teacher) and the verification is still pending -> first login
         if user.get("teacher") and user.get("verification_pending"):
             self.db.update_user(user["username"], {"verification_pending": None})
-            resp = make_response({"first_time": True})
+            response["first_time"] = True
 
         # We set the cookie to expire in a year,
         # just so that the browser won't invalidate it if the same cookie gets renewed by constant use.
         # The server will decide whether the cookie expires.
+        resp = make_response()
         resp.set_cookie(
             TOKEN_COOKIE_NAME,
             value=cookie,
@@ -104,72 +105,73 @@ class AuthModule(WebsiteModule):
         # Remember the current user on the session. This is "new style" logins, which should ultimately
         # replace "old style" logins (with the cookie above), as it requires fewer database calls.
         remember_current_user(user)
-        return resp
+        return resp(response)
 
     @route("/signup", methods=["POST"])
     def signup(self):
         body = request.json
         # Validations, mandatory fields
         if not isinstance(body, dict):
-            return gettext("ajax_error"), 400
+            return make_response(gettext("ajax_error"), 400)
 
         # Validate the essential data using a function -> also used for multiple account creation
         validation = validate_signup_data(body)
         if validation:
-            return validation, 400
+            return make_response(validation, 400)
 
         # Validate fields only relevant when creating a single user account
         if not isinstance(body.get("password_repeat"), str) or body["password"] != body["password_repeat"]:
-            return gettext("repeat_match_password"), 400
+            return make_response(gettext("repeat_match_password"), 400)
         if not isinstance(body.get("language"), str) or body.get("language") not in ALL_LANGUAGES.keys():
-            return gettext("language_invalid"), 400
+            return make_response(gettext("language_invalid"), 400)
         if not isinstance(body.get("agree_terms"), str) or not body.get("agree_terms"):
-            return gettext("agree_invalid"), 400
+            return make_response(gettext("agree_invalid"), 400)
         if not isinstance(body.get("keyword_language"), str) or body.get("keyword_language") not in [
             "en",
             body.get("language"),
         ]:
-            return gettext("keyword_language_invalid"), 400
+            return make_response(gettext("keyword_language_invalid"), 400)
 
         # Validations, optional fields
+        # Todo TB: These are all fields and return messages that should never happen to a "normal" user!
         if "birth_year" in body:
             year = datetime.datetime.now().year
             try:
                 body["birth_year"] = int(body.get("birth_year"))
             except ValueError:
-                return gettext("year_invalid").format(**{"current_year": str(year)}), 400
+                return make_response(gettext("year_invalid").format(**{"current_year": str(year)}), 400)
             if not isinstance(body.get("birth_year"), int) or body["birth_year"] <= 1900 or body["birth_year"] > year:
-                return gettext("year_invalid").format(**{"current_year": str(year)}), 400
+                return make_response(gettext("year_invalid").format(**{"current_year": str(year)}), 400)
         if "gender" in body:
             if body["gender"] != "m" and body["gender"] != "f" and body["gender"] != "o":
-                return gettext("gender_invalid"), 400
+                return make_response(gettext("gender_invalid"), 400)
         if "country" in body:
             if not body["country"] in COUNTRIES:
-                return gettext("country_invalid"), 400
+                return make_response(gettext("country_invalid"), 400)
         if "heard_about" in body:
             if isinstance(body["heard_about"], str):
                 body["heard_about"] = [body["heard_about"]]
             if not isinstance(body["heard_about"], list):
-                return gettext("heard_about_invalid"), 400
+                return make_response(gettext("heard_about_invalid"), 400)
             for option in body["heard_about"]:
                 if option not in ["from_another_teacher", "social_media", "from_video", "from_magazine_website", \
-                    "other_source"]:
-                    return gettext("heard_about_invalid"), 400
+                                  "other_source"]:
+                    return make_response(gettext("heard_about_invalid"), 400)
         if "prog_experience" in body and body["prog_experience"] not in ["yes", "no"]:
-            return gettext("experience_invalid"), 400
+            return make_response(gettext("experience_invalid"), 400)
         if "experience_languages" in body:
             if isinstance(body["experience_languages"], str):
                 body["experience_languages"] = [body["experience_languages"]]
             if not isinstance(body["experience_languages"], list):
-                return gettext("experience_invalid"), 400
+                return make_response(gettext("experience_invalid"), 400)
             for language in body["experience_languages"]:
                 if language not in ["scratch", "other_block", "python", "other_text"]:
-                    return gettext("programming_invalid"), 400
+                    return make_response(gettext("programming_invalid"), 400)
 
         if self.db.user_by_username(body["username"].strip().lower()):
-            return gettext("exists_username"), 403
+            return make_response(gettext("exists_username"), 403)
         if self.db.user_by_email(body["email"].strip().lower()):
-            return gettext("exists_email"), 403
+            return make_response(gettext("exists_email"), 403)
 
         # We receive the pre-processed user and response package from the function
         user, resp = self.store_new_account(body, body["email"].strip().lower())
@@ -211,14 +213,14 @@ class AuthModule(WebsiteModule):
         username = request.args.get("username", None)
         token = request.args.get("token", None)
         if not token:
-            return gettext("token_invalid"), 400
+            return make_response(gettext("token_invalid"), 400)
         if not username:
-            return gettext("username_invalid"), 400
+            return make_response(gettext("username_invalid"), 400)
 
         # Verify that user actually exists
         user = self.db.user_by_username(username)
         if not user:
-            return gettext("username_invalid"), 403
+            return make_response(gettext("username_invalid"), 403)
 
         # If user is already verified -> re-direct to landing-page anyway
         if "verification_pending" not in user:
@@ -226,7 +228,7 @@ class AuthModule(WebsiteModule):
 
         # Verify the token
         if token != user["verification_pending"]:
-            return gettext("token_invalid"), 403
+            return make_response(gettext("token_invalid"), 403)
 
         # Remove the token from the user
         self.db.update_user(username, {"verification_pending": None})
@@ -243,7 +245,7 @@ class AuthModule(WebsiteModule):
         forget_current_user()
         if request.cookies.get(TOKEN_COOKIE_NAME):
             self.db.forget_token(request.cookies.get(TOKEN_COOKIE_NAME))
-        return "", 200
+        return make_response('', 204)
 
     @route("/destroy", methods=["POST"])
     @requires_login
@@ -251,14 +253,14 @@ class AuthModule(WebsiteModule):
         forget_current_user()
         self.db.forget_token(request.cookies.get(TOKEN_COOKIE_NAME))
         self.db.forget_user(user["username"])
-        return "", 200
+        return make_response('', 204)
 
     @route("/destroy_public", methods=["POST"])
     @requires_login
     def destroy_public(self, user):
         self.db.forget_public_profile(user["username"])
         session.pop("profile_image", None)  # Delete profile image id if existing
-        return "", 200
+        return make_response('', 204)
 
     @route("/change_student_password", methods=["POST"])
     @requires_login
@@ -435,7 +437,7 @@ class AuthModule(WebsiteModule):
         }
 
         for field in ["country", "birth_year", "gender", "language", "heard_about", "prog_experience", \
-            "experience_languages"]:
+                      "experience_languages"]:
             if field in account:
                 if field == "heard_about" and len(account[field]) == 0:
                     continue
