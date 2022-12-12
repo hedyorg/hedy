@@ -22,8 +22,8 @@ levels:
                 гравець1 = гравці {at} {random}
                 гравець2 = гравці {at} {random}
                 {print} гравець1 ' спочатку грає проти ' гравець2
-                {remove} гравець1 {from} players
-                {remove} гравець12 {from} players
+                {remove} гравець1 {from} гравці
+                {remove} гравець12 {from} гравці
                 {print} 'Переможець грає проти ' гравці {at} {random}
             story: In a chess tournament there are three players left.\nCreate a program that decides which two players first play against each other.\nFirst print the two players who play the first match, then print against which player the winner will play.\n
         2:
