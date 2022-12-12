@@ -14,7 +14,7 @@
     explanation: "Print een emoji met `{print}`."
     demo_code: "{print} \U0001F64B \U0001F30D ❗"
 -   name: "{forward}"
-    explanation: "Een lijn trekken met `{forward}`."
+    explanation: "Een lijn tekenen met `{forward}`."
     demo_code: "{forward} 100"
 -   name: "{turn}"
     explanation: "De teken-schildpad draaien met `{turn}`."
@@ -97,6 +97,9 @@
 -   explanation: Kijk of een onderdeel erin zit met `{in}`.
     name: '{in}'
     demo_code: "mooie_kleuren {is} groen, geel\nkleur {is} {ask} 'Wat {is} je lievelingskleur?'\n{if} kleur {in} mooie_kleuren {print} 'mooi!' {else} {print} 'bah'"
+-   name: '{pressed}'
+    explanation: Check whether a given key on the keyboard is `{pressed}`.
+    demo_code: "{if} a {is} {pressed} {print} 'You pressed A!' {else} {print} 'You pressed another key!'"
 6:
 -   name: "{print}"
     explanation: "Iets letterlijk printen met aanhalingstekens."
@@ -146,6 +149,9 @@
 -   name: '`{repeat}` met turtle'
     explanation: 'Herhaal meerdere regels.'
     demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
+-   name: '{pressed}'
+    explanation: Check whether a given key on the keyboard is `{pressed}`.
+    demo_code: "{if} a {is} {pressed}\n    {print} 'You pressed A!'\n{else}\n    {print} 'You pressed another key!'"
 9:
 -   name: "`{if}` met meerdere regels"
     explanation: "Het antwoord van een som vragen met `{ask}` en kijken of het goed is. Nu printen we twee regels uit."
