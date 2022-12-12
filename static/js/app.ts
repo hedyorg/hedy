@@ -1128,8 +1128,6 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
       return;
     }
     if (!hasWarnings && code !== last_code && !debug) {
-        console.log("We get here!");
-
         showSuccesMessage();
         last_code = code;
     }
