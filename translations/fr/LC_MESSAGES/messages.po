@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-14 09:21+0100\n"
-"PO-Revision-Date: 2022-11-15 16:36+0000\n"
+"POT-Creation-Date: 2022-12-08 14:32+0100\n"
+"PO-Revision-Date: 2022-12-08 13:41+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: fr <LL@li.org>\n"
 "Language: fr\n"
@@ -94,7 +94,7 @@ msgstr "Hedy - Explorer"
 
 #, fuzzy
 msgid "no_such_highscore"
-msgstr "Hedy niveau n'existe pas !"
+msgstr "Meilleurs scores"
 
 msgid "translate_error"
 msgstr "Quelque chose s'est mal passé lors de la traduction du code. Essayez d'exécuter le code pour voir s'il contient une erreur. Le code avec des erreurs ne peut pas être traduit."
@@ -467,6 +467,10 @@ msgstr "Non"
 msgid "generate_passwords"
 msgstr "Générer des mots de passe"
 
+#, fuzzy
+msgid "postfix_classname"
+msgstr "Postfix classname"
+
 msgid "reset_view"
 msgstr "Réinitialiser"
 
@@ -596,9 +600,8 @@ msgstr "Autres configurations"
 msgid "mandatory_mode"
 msgstr "Mode dévelopeur obligatoire"
 
-#, fuzzy
 msgid "all_class_highscores"
-msgstr "All students visible in class highscores"
+msgstr "Tous les élèves sont visibles dans les meilleurs scores de la classe"
 
 msgid "hide_cheatsheet"
 msgstr "Masquer les aides"
@@ -664,9 +667,6 @@ msgstr "Mes classes"
 msgid "students"
 msgstr "élèves"
 
-msgid "view"
-msgstr "Voir"
-
 msgid "duplicate"
 msgstr "Dupliquer"
 
@@ -681,6 +681,9 @@ msgstr "Mes aventures"
 
 msgid "last_update"
 msgstr "Dernière mise à jour"
+
+msgid "view"
+msgstr "Voir"
 
 msgid "edit"
 msgstr "Modifier"
@@ -745,6 +748,10 @@ msgstr "Saisissez votre réponse ici..."
 msgid "enter"
 msgstr "Entrer"
 
+#, fuzzy
+msgid "pygame_waiting_for_input"
+msgstr "Waiting for a button press..."
+
 msgid "already_program_running"
 msgstr "Il y a déjà un programme en cours, finissez d'abord celui-ci."
 
@@ -775,8 +782,16 @@ msgstr "Lire à voix haute"
 msgid "regress_button"
 msgstr "Retourner au niveau {level}"
 
+#, fuzzy
+msgid "disabled_button_locked"
+msgstr "Your teacher hasn't unlocked this level yet"
+
 msgid "advance_button"
 msgstr "Aller au niveau {level}"
+
+#, fuzzy
+msgid "disabled_button_quiz"
+msgstr "Your quiz score is below the threshold, try again!"
 
 msgid "developers_mode"
 msgstr "Mode développeur"
@@ -982,13 +997,11 @@ msgstr "Voir votre profil"
 msgid "profile_picture"
 msgstr "Image du profil"
 
-#, fuzzy
 msgid "personal_text"
-msgstr "Personal text"
+msgstr "Texte personnel"
 
-#, fuzzy
 msgid "your_personal_text"
-msgstr "Your personal text..."
+msgstr "Votre texte personnel..."
 
 msgid "favourite_program"
 msgstr "Programme favori"
@@ -1020,9 +1033,8 @@ msgstr "Année de naissance"
 msgid "preferred_language"
 msgstr "Langue préferée"
 
-#, fuzzy
 msgid "preferred_keyword_language"
-msgstr "Preferred keyword language"
+msgstr "Langue préférée pour les mots-clés"
 
 msgid "gender"
 msgstr "Genre"
@@ -1055,27 +1067,24 @@ msgstr "Mot de passe actuel"
 msgid "new_password"
 msgstr "Nouveau mot de passe"
 
-#, fuzzy
 msgid "repeat_new_password"
-msgstr "Repeat new password"
+msgstr "Répéter le nouveau mot de passe"
 
 msgid "request_teacher"
 msgstr "Souhaitez-vous postuler pour un compte enseignant ?"
 
-#, fuzzy
 msgid "request_teacher_account"
-msgstr "Request teacher account"
+msgstr "Demander un compte enseignant"
 
-#, fuzzy
 msgid "recent"
-msgstr "My recent programs"
+msgstr "Mes programmes récents"
 
 msgid "all"
 msgstr "Tout"
 
 #, fuzzy
 msgid "submitted"
-msgstr ""
+msgstr "Déposé"
 
 #, fuzzy
 msgid "submitted_header"
@@ -1084,9 +1093,8 @@ msgstr "This is a submitted program and can't be altered."
 msgid "title"
 msgstr "Titre"
 
-#, fuzzy
 msgid "last_edited"
-msgstr "Last edited"
+msgstr "Dernière modification"
 
 msgid "favourite_confirm"
 msgstr "Êtes-vous sûr de vouloir définir ce programme comme favori ?"
@@ -1094,9 +1102,8 @@ msgstr "Êtes-vous sûr de vouloir définir ce programme comme favori ?"
 msgid "open"
 msgstr "Ouvrir"
 
-#, fuzzy
 msgid "copy_clipboard"
-msgstr "Successfully copied to clipboard"
+msgstr "Copié avec succès dans le presse-papiers"
 
 msgid "unshare_confirm"
 msgstr "Voulez-vous vraiment rendre le programme privé ?"
@@ -1104,16 +1111,14 @@ msgstr "Voulez-vous vraiment rendre le programme privé ?"
 msgid "unshare"
 msgstr "Arrêter le partage"
 
-#, fuzzy
 msgid "submit_warning"
-msgstr "Are you sure you want to submit this program?"
+msgstr "Êtes-vous sûr de vouloir soumettre ce programme ?"
 
 msgid "submit_program"
 msgstr "Envoyer"
 
-#, fuzzy
 msgid "share_confirm"
-msgstr "Are you sure you want to make the program public?"
+msgstr "Voulez-vous vraiment rendre le programme public ?"
 
 msgid "share"
 msgstr "Partager"
@@ -1124,24 +1129,20 @@ msgstr "Vous n'avez pas encore de programme."
 msgid "write_first_program"
 msgstr "Écrivez votre premier programme !"
 
-#, fuzzy
 msgid "certified_teacher"
-msgstr "Certified teacher"
+msgstr "Enseignant certifié"
 
 msgid "admin"
 msgstr "Administration"
 
-#, fuzzy
 msgid "distinguished_user"
-msgstr "Distinguished user"
+msgstr "Utilisateur distingué"
 
-#, fuzzy
 msgid "contributor"
-msgstr "Contributor"
+msgstr "Contributeur"
 
-#, fuzzy
 msgid "no_shared_programs"
-msgstr "has no shared programs..."
+msgstr "n'a pas de programmes partagés..."
 
 msgid "quiz_logo_alt"
 msgstr "Logo du questionnaire"
@@ -1155,9 +1156,8 @@ msgstr "Aller à la question 1"
 msgid "question"
 msgstr "Question"
 
-#, fuzzy
 msgid "hint"
-msgstr "Hint?"
+msgstr "Un indice ?"
 
 #, fuzzy
 msgid "submit_answer"
@@ -1184,28 +1184,23 @@ msgstr "Fin du questionnaire"
 msgid "score"
 msgstr "Score"
 
-#, fuzzy
 msgid "get_certificate"
-msgstr "Get your certificate!"
+msgstr "Obtenez votre certificat !"
 
-#, fuzzy
 msgid "recover_password"
-msgstr "Request a password reset"
+msgstr "Demander une réinitialisation de mot de passe"
 
-#, fuzzy
 msgid "send_password_recovery"
-msgstr "Send me a password recovery link"
+msgstr "Envoyez-moi un lien de récupération de mot de passe"
 
 msgid "reset_password"
 msgstr "Réinitialiser le mot de passe"
 
-#, fuzzy
 msgid "password_repeat"
-msgstr "Repeat password"
+msgstr "Répéter le mot de passe"
 
-#, fuzzy
 msgid "signup_student_or_teacher"
-msgstr "Are you a student or a teacher?"
+msgstr "Êtes-vous un élève ou un enseignant ?"
 
 msgid "student_signup_header"
 msgstr "Étudiant"
@@ -1219,45 +1214,59 @@ msgstr "Créer un compte enseignant"
 msgid "create_student_account"
 msgstr "Créer un compte"
 
-#, fuzzy
 msgid "create_teacher_account_explanation"
-msgstr "With a teacher account, you can save your programs and see the results of your students."
+msgstr "Avec un compte enseignant, vous pouvez enregistrer vos programmes et voir les résultats de vos élèves."
 
-#, fuzzy
 msgid "create_student_account_explanation"
-msgstr "You can save your own programs with an account."
+msgstr "Vous pouvez enregistrer vos propres programmes avec un compte."
 
 #, fuzzy
+msgid "heard_about_hedy"
+msgstr "How have you heard about Hedy?"
+
+#, fuzzy
+msgid "from_another_teacher"
+msgstr "From another teacher"
+
+#, fuzzy
+msgid "social_media"
+msgstr "Social media"
+
+#, fuzzy
+msgid "from_video"
+msgstr "From a video"
+
+#, fuzzy
+msgid "from_magazine_website"
+msgstr "From a magazine or website"
+
+#, fuzzy
+msgid "other_source"
+msgstr "Other"
+
 msgid "programming_experience"
-msgstr "Do you have programming experience?"
+msgstr "Avez-vous de l'expérience en programmation ?"
 
-#, fuzzy
 msgid "languages"
-msgstr "Which of these programming languages have you used before?"
+msgstr "Lequel de ces langages de programmation avez-vous déjà utilisé ?"
 
-#, fuzzy
 msgid "other_block"
-msgstr "Another block language"
+msgstr "Un autre langage à blocs"
 
-#, fuzzy
 msgid "other_text"
-msgstr "Another text language"
+msgstr "Un autre langage textuel"
 
-#, fuzzy
 msgid "subscribe_newsletter"
-msgstr "Subscribe to the newsletter"
+msgstr "S'abonner à la newsletter"
 
-#, fuzzy
 msgid "agree_with"
-msgstr "I agree to the"
+msgstr "J’accepte les"
 
-#, fuzzy
 msgid "privacy_terms"
-msgstr "privacy terms"
+msgstr "termes de confidentialité"
 
-#, fuzzy
 msgid "already_account"
-msgstr "Already have an account?"
+msgstr "Vous avez déjà un compte ?"
 
 #, fuzzy
 msgid "teacher_invitation_require_login"
@@ -1421,6 +1430,10 @@ msgstr "Please select a valid gender, choose (Female, Male, Other)."
 #, fuzzy
 msgid "country_invalid"
 msgstr "Please select a valid country."
+
+#, fuzzy
+msgid "heard_about_invalid"
+msgstr "Please select a valid way you heard about us."
 
 #, fuzzy
 msgid "experience_invalid"
@@ -1594,7 +1607,7 @@ msgstr "You already have an adventure with this name."
 
 #, fuzzy
 msgid "something_went_wrong_keyword_parsing"
-msgstr ""
+msgstr "There is a mistake in your adventure, are all keywords correctly surrounded with { }?"
 
 #, fuzzy
 msgid "adventure_updated"

@@ -9,6 +9,7 @@ from os import path
 import warnings
 import hedy
 import hedy_translation
+from hedy_content import ALL_KEYWORD_LANGUAGES
 import utils
 from collections import namedtuple
 import re
@@ -177,6 +178,7 @@ class Command:
     remove_from_list = 'remove from list'
     list_access = 'at random'
     in_list = 'in list'
+    not_in_list = 'not in list'
     equality = 'is (equality)'
     repeat = 'repeat'
     for_list = 'for in'
@@ -204,6 +206,7 @@ translatable_commands = {Command.print: ['print'],
                          Command.remove_from_list: ['remove', 'from'],
                          Command.list_access: ['at', 'random'],
                          Command.in_list: ['in'],
+                         Command.not_in_list: ['not in', 'not'],
                          Command.equality: ['is', '=', '=='],
                          Command.repeat: ['repeat', 'times'],
                          Command.for_list: ['for', 'in'],
@@ -244,20 +247,20 @@ commands_per_level = {
     2: ['print', 'ask', 'is', 'turn', 'forward', 'color', 'sleep'],
     3: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from'],
     4: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from'],
-    5: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'pressed'],
-    6: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'pressed'],
-    7: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'pressed', 'repeat', 'times'],
-    8: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'pressed', 'repeat', 'times'],
-    9: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'pressed', 'repeat', 'times'],
-    10: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'pressed', 'repeat', 'times', 'for'],
-    11: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'pressed', 'for', 'range', 'repeat'],
-    12: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'pressed', 'for', 'range', 'repeat'],
-    13: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'pressed', 'for', 'range', 'repeat', 'and', 'or'],
-    14: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'pressed', 'for', 'range', 'repeat', 'and', 'or'],
-    15: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'pressed', 'for', 'range', 'repeat', 'and', 'or', 'while'],
-    16: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'pressed', 'for', 'range', 'repeat', 'and', 'or', 'while'],
-    17: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'pressed', 'for', 'range', 'repeat', 'and', 'or', 'while', 'elif'],
-    18: ['is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'else', 'for', 'pressed', 'range', 'repeat', 'and', 'or', 'while', 'elif', 'input'],
+    5: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed'],
+    6: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed'],
+    7: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'repeat', 'times'],
+    8: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'repeat', 'times'],
+    9: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'repeat', 'times'],
+    10: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'repeat', 'times', 'for'],
+    11: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'for', 'range', 'repeat'],
+    12: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'for', 'range', 'repeat'],
+    13: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'for', 'range', 'repeat', 'and', 'or'],
+    14: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'for', 'range', 'repeat', 'and', 'or'],
+    15: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'for', 'range', 'repeat', 'and', 'or', 'while'],
+    16: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'for', 'range', 'repeat', 'and', 'or', 'while'],
+    17: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'for', 'range', 'repeat', 'and', 'or', 'while', 'elif'],
+    18: ['is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'not in', 'else', 'for', 'pressed', 'range', 'repeat', 'and', 'or', 'while', 'elif', 'input'],
 }
 
 command_turn_literals = ['right', 'left']
@@ -287,6 +290,7 @@ commands_and_types_per_level = {
     Command.sleep: {1: [HedyType.integer, HedyType.input]},
     Command.list_access: {1: [HedyType.list]},
     Command.in_list: {1: [HedyType.list]},
+    Command.not_in_list: {1: [HedyType.list]},
     Command.add_to_list: {1: [HedyType.list]},
     Command.remove_from_list: {1: [HedyType.list]},
     Command.equality: {1: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float],
@@ -535,9 +539,6 @@ class LookupEntryCollector(visitors.Visitor):
             name = f'{list_name}[{position_name}-1]'
         self.add_to_lookup(name, tree, tree.meta.line, True)
 
-    def list_access_var(self, tree):
-        self.add_to_lookup(tree.children[0].children[0], tree, tree.meta.line)
-
     def change_list_item(self, tree):
         self.add_to_lookup(tree.children[0].children[0], tree, tree.meta.line, True)
 
@@ -639,10 +640,6 @@ class TypeValidator(Transformer):
 
         return self.to_typed_tree(tree, HedyType.any)
 
-    def list_access_var(self, tree):
-        self.save_type_to_lookup(tree.children[0].children[0], HedyType.any)
-        return self.to_typed_tree(tree)
-
     def add(self, tree):
         self.validate_args_type_allowed(Command.add_to_list, tree.children[1], tree.meta)
         return self.to_typed_tree(tree)
@@ -653,6 +650,10 @@ class TypeValidator(Transformer):
 
     def in_list_check(self, tree):
         self.validate_args_type_allowed(Command.in_list, tree.children[1], tree.meta)
+        return self.to_typed_tree(tree, HedyType.boolean)
+
+    def not_in_list_check(self, tree):
+        self.validate_args_type_allowed(Command.not_in_list, tree.children[1], tree.meta)
         return self.to_typed_tree(tree, HedyType.boolean)
 
     def equality_check(self, tree):
@@ -1026,6 +1027,8 @@ class AllCommands(Transformer):
             return 'while'
         if keyword == 'in_list_check':
             return 'in'
+        if keyword == 'not_in_list_check':
+            return 'not_in'
         if keyword == 'input_empty_brackets':
             return 'input'
         if keyword == 'print_empty_brackets':
@@ -1132,12 +1135,10 @@ class IsValid(Filter):
         return False, InvalidInfo(" ", line=args[0][2].line, column=args[0][2].column), meta
 
     def error_print_nq(self, meta, args):
-        if len(args) > 1:
-            text = args[1][1]
-        else:
-            text = args[0][1]
+        words = [x[1] for x in args]  # second half of the list is the word
+        text = ' '.join(words)
         return False, InvalidInfo("print without quotes", arguments=[
-                                  text], line=args[0][2].line, column=args[0][2].column), meta
+                                  text], line=meta.line, column=meta.column), meta
 
     def error_invalid(self, meta, args):
         # TODO: this will not work for misspelling 'at', needs to be improved!
@@ -1357,6 +1358,10 @@ class ConvertToPython(Transformer):
         return 'random.choice' in s
 
     @staticmethod
+    def is_list(s):
+        return '[' in s and ']' in s
+
+    @staticmethod
     def indent(s, spaces_amount=2):
         lines = s.split('\n')
         return '\n'.join([' ' * spaces_amount + line for line in lines])
@@ -1453,7 +1458,7 @@ class ConvertToPython_1(ConvertToPython):
         return self.make_turtle_color_command(parameter, Command.color, 'pencolor')
 
     def make_turtle_command(self, parameter, command, command_text, add_sleep):
-        variable = self.get_fresh_var('trtl')
+        variable = self.get_fresh_var('__trtl')
         transpiled = textwrap.dedent(f"""\
             {variable} = {parameter}
             try:
@@ -1466,7 +1471,7 @@ class ConvertToPython_1(ConvertToPython):
         return transpiled
 
     def make_turtle_color_command(self, parameter, command, command_text):
-        variable = self.get_fresh_var('trtl')
+        variable = self.get_fresh_var('__trtl')
         return textwrap.dedent(f"""\
             {variable} = f'{parameter}'
             if {variable} not in {command_make_color}:
@@ -1560,7 +1565,7 @@ class ConvertToPython_2(ConvertToPython_1):
     def assign(self, meta, args):
         parameter = args[0]
         value = args[1]
-        if self.is_random(value):
+        if self.is_random(value) or self.is_list(value):
             return parameter + " = " + value
         else:
             if self.is_variable(value):
@@ -1606,7 +1611,7 @@ class ConvertToPython_3(ConvertToPython_2):
         # only call process_variable if arg is a string, else keep as is (ie. don't change 5 into '5', my_list[1] into 'my_list[1]')
         if arg.isnumeric():  # is int/float
             return arg
-        elif ('[' in arg and ']' in arg):  # is list indexing
+        elif (self.is_list(arg)):  # is list indexing
             before_index, after_index = arg.split(']', 1)
             return before_index + '-1' + ']' + after_index   # account for 1-based indexing
         else:
@@ -1679,13 +1684,6 @@ class ConvertToPython_5(ConvertToPython_4):
         super().__init__(lookup, numerals_language)
         self.ifpressed_prefix_added = False
 
-    def list_access_var(self, meta, args):
-        var = escape_var(args[0])
-        if isinstance(args[2], Tree):
-            return var + ' = random.choice(' + args[1] + ')'
-        else:
-            return var + ' = ' + args[1] + '[' + args[2] + '-1]'
-
     def ifs(self, meta, args):
         return f"""if {args[0]}:
 {ConvertToPython.indent(args[1])}"""
@@ -1714,6 +1712,11 @@ else:
         arg0 = self.process_variable(args[0], meta.line)
         arg1 = self.process_variable(args[1], meta.line)
         return f"{arg0} in {arg1}"
+
+    def not_in_list_check(self, meta, args):
+        arg0 = self.process_variable(args[0], meta.line)
+        arg1 = self.process_variable(args[1], meta.line)
+        return f"{arg0} not in {arg1}"
 
     def make_ifpressed_command(self, command):
         if self.ifpressed_prefix_added:
@@ -1857,7 +1860,7 @@ def sleep_after(commands, indent=True):
 @hedy_transpiler(level=7)
 class ConvertToPython_7(ConvertToPython_6):
     def repeat(self, meta, args):
-        var_name = self.get_fresh_var('i')
+        var_name = self.get_fresh_var('__i__')
         times = self.process_variable(args[0], meta.line)
         command = args[1]
         # in level 7, repeats can only have 1 line as their arguments
@@ -2086,7 +2089,7 @@ class ConvertToPython_12(ConvertToPython_11):
         return self.make_forward(float(args[0]))
 
     def make_turtle_command(self, parameter, command, command_text, add_sleep):
-        variable = self.get_fresh_var('trtl')
+        variable = self.get_fresh_var('__trtl')
         transpiled = textwrap.dedent(f"""\
             {variable} = {parameter}
             try:
@@ -2470,9 +2473,9 @@ def preprocess_blocks(code, level, lang):
     processed_code = []
     lines = code.split("\n")
     current_number_of_indents = 0
-    previous_number_of_indents = 0 
-    indent_size = 4 # set at 4 for now
-    indent_size_adapted = False #FH We can remove this now since we changed in indenter a bit in Nov 2022
+    previous_number_of_indents = 0
+    indent_size = 4  # set at 4 for now
+    indent_size_adapted = False  # FH We can remove this now since we changed in indenter a bit in Nov 2022
     line_number = 0
     next_line_needs_indentation = False
     for line in lines:
@@ -2558,19 +2561,56 @@ def preprocess_blocks(code, level, lang):
     return "\n".join(processed_code)
 
 
-def preprocess_ifs(code):
+def preprocess_ifs(code, lang='en'):
     processed_code = []
     lines = code.split("\n")
+
+    def starts_with(command, line):
+        if lang in ALL_KEYWORD_LANGUAGES:
+            command_plus_translated_command = [command, KEYWORDS[lang].get(command)]
+            for c in command_plus_translated_command:
+                #  starts with the keyword and next character is a space
+                if line[0:len(c)] == c and (len(c) == len(line) or line[len(c)] == ' '):
+                    return True
+            return False
+        else:
+            return line[0:len(command)] == command
+
+    def contains(command, line):
+        if lang in ALL_KEYWORD_LANGUAGES:
+            command_plus_translated_command = [command, KEYWORDS[lang].get(command)]
+            for c in command_plus_translated_command:
+                if c in line:
+                    return True
+            return False
+        else:
+            return command in line
+
+    def contains_any_of(commands, line):
+        # translation is not needed here, happens in contains
+        if lang in ALL_KEYWORD_LANGUAGES:
+            for c in commands:
+                if contains(c, line):
+                    return True
+            return False
+        else:
+            for c in commands:
+                if contains(c, line):
+                    return True
+            return False
+
+
     for i in range(len(lines) - 1):
         line = lines[i]
         next_line = lines[i + 1]
-        # todo convert to all languages!!
+
         # if this line starts with if but does not contain an else, and the next line too is not an else.
-        if line[0:2] == "if" and (not next_line[0:4] == 'else') and (not ("else" in line)):
+        if starts_with('if', line) and (not starts_with('else', next_line)) and (not contains('else', line)):
             # is this line just a condition and no other keyword (because that is no problem)
             commands = ["print", "ask", "forward", "turn"]
+
             if (
-                "pressed" not in line and any(x in line for x in commands)
+                not contains('pressed', line) and contains_any_of(commands, line)
             ):  # and this should also (TODO) check for a second is cause that too is problematic.
                 # a second command, but also no else in this line -> check next line!
 
@@ -2605,7 +2645,7 @@ def process_input_string(input_string, level, lang, escape_backslashes=True):
 
     # In levels 5 to 8 we do not allow if without else, we add an empty print to make it possible in the parser
     if level >= 5 and level <= 8:
-        result = preprocess_ifs(result)
+        result = preprocess_ifs(result, lang)
 
     # In level 8 we add indent-dedent blocks to the code before parsing
     if level >= hedy.LEVEL_STARTING_INDENTATION:
@@ -2755,7 +2795,6 @@ def transpile_inner(input_string, level, lang="en"):
         raise Exception(f'Levels over {HEDY_MAX_LEVEL} not implemented yet')
 
     input_string = process_input_string(input_string, level, lang)
-
     program_root = parse_input(input_string, level, lang)
 
     # checks whether any error production nodes are present in the parse tree

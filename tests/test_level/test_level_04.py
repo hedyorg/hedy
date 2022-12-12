@@ -640,27 +640,3 @@ class TestsLevel4(HedyTester):
             exception=hedy.exceptions.LonelyTextException
         )
 
-    #
-    # assorti tests
-    #
-    @parameterized.expand(HedyTester.quotes)
-    def test_meta_column_missing_closing_quote(self, q):
-        code = textwrap.dedent(f"""\
-        print {q}Hello{q}
-        print {q}World""")
-
-        line, column = self.codeToInvalidInfo(code)
-
-        self.assertEqual(2, line)
-        self.assertEqual(7, column)
-
-    @parameterized.expand(HedyTester.quotes)
-    def test_meta_column_missing_opening_quote(self, q):
-        code = textwrap.dedent(f"""\
-        print {q}Hello{q}
-        print World{q}""")
-
-        line, column = self.codeToInvalidInfo(code)
-
-        self.assertEqual(2, line)
-        self.assertEqual(7, column)
