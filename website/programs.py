@@ -29,7 +29,7 @@ class ProgramsModule(WebsiteModule):
     def delete_program(self, user):
         body = request.json
         if not isinstance(body.get("id"), str):
-            return make_response("program id must be a string", 400)
+            return make_response(gettext("request_invalid"), 400)
 
         result = self.db.program_by_id(body["id"])
 
@@ -56,10 +56,8 @@ class ProgramsModule(WebsiteModule):
     @route("/duplicate-check", methods=["POST"])
     def check_duplicate_program(self):
         body = request.json
-        if not isinstance(body, dict):
-            return make_response("body must be an object", 400)
-        if not isinstance(body.get("name"), str):
-            return make_response("name must be a string", 400)
+        if not isinstance(body, dict) or not isinstance(body.get("name"), str):
+            return make_response(gettext("request_invalid"), 400)
 
         if not current_user()["username"]:
             return make_response(gettext("save_prompt"), 403)
@@ -68,8 +66,7 @@ class ProgramsModule(WebsiteModule):
         for program in programs:
             if program["name"] == body["name"]:
                 return make_response({"duplicate": True, "message": gettext("overwrite_warning")})
-        # Todo TB: Can't this response below not be empty? We can deduct the flow on the front-end
-        return make_response({"duplicate": False})
+        return make_response('', 204)
 
     @route("/", methods=["POST"])
     @requires_login
@@ -94,7 +91,6 @@ class ProgramsModule(WebsiteModule):
         except BaseException:
             error = True
             if not body.get("force_save", True):
-                # Todo TB: This boolean is redundant, we should deduct the flow from the response code
                 return make_response({"parse_error": True, "message": gettext("save_parse_warning")})
 
         # We check if a program with a name `xyz` exists in the database for the username.
@@ -242,8 +238,10 @@ class ProgramsModule(WebsiteModule):
 
         self.db.set_program_as_hedy_choice(body["id"], favourite)
         if favourite:
-            return make_response({"message": 'Program successfully set as a "Hedy choice" program.'})
-        return make_response({"message": 'Program successfully removed as a "Hedy choice" program.'})
+            message = "Program successfully set as a \"Hedy choice\" program."
+        else:
+            message = "Program successfully removed as a \"Hedy choice\" program."
+        return make_response({"message": message})
 
     @route("/report", methods=["POST"])
     @requires_login
