@@ -1233,9 +1233,17 @@ def login_page():
         return redirect('/my-profile')
     return render_template('login.html', page_title=gettext('title_login'), current_page='login')
 
-@app.route('/slides', methods=['GET'])
+@app.route('/slides/1', methods=['GET'])
 def slides_one():
     return render_template("slideOne.html")
+
+@app.route('/slides/2', methods=['GET'])
+def slides_two():
+    return render_template("slidesTwo.html")
+
+@app.route('/slides/0', methods=['GET'])
+def slides_zero():
+    return render_template("slidesZero.html")
 
 
 @app.route('/recover', methods=['GET'])
