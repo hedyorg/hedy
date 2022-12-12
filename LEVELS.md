@@ -33,15 +33,19 @@ computers need information about the types of variables. This level is thus an i
 programming concepts, which underlines their interdependency. The variable syntax using `is` remains unchanged, meaning that learners
 can now use both `number is 12` and `name is Hedy`.
 
-### Level 5: Selection with if and else flat
+### Level 5: Selection with if (pressed) and else flat
 
 In Level 5, selection with the if statement is introduced, but the
 syntax is 'flat', i.e. placed on one line, resembling a regular syntax
 more:\
 `if name is print `\
+Another feature is the `if pressed` statement, making it possible to link commands
+to any a-z and 1-0 key on the keyboard:\
+`if x is pressed print `
 Else statements are also included, and are also placed on one line,
 using the keyword `else`:\
 `if name is print else print `.
+this also works together with `pressed`.
 
 ### Level 6: Calculations
 
@@ -60,6 +64,8 @@ first simplest form, according to Design Goal 2, we opt to use
 [Quorum](https://quorumlanguage.com/) syntax `repeat x times`. In this
 initial form, like the if the syntax is placed on one line:\
 `repeat 5 times print `
+Repeat can also be used in combination with `pressed`, so that the program will
+a keypress multiple times before terminating. 
 
 ### Level 8: Code blocks with one level of nesting 
 
