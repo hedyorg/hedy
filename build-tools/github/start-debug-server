@@ -1,0 +1,60 @@
+#!/bin/bash
+set -eu
+scriptdir=$(cd $(dirname $0) && pwd)
+
+pidfile=$scriptdir/debug-server.pid
+
+# CD to root
+cd $scriptdir/../..
+
+# //////////////////////////////////////////////////////////////////////
+# Parse command line
+
+if [[ "${1:-}" == "--kill" ]]; then
+    if [[ -f $pidfile ]]; then
+        kill $(cat $pidfile) || true
+        rm $pidfile
+    fi
+    exit 0
+fi
+
+daemon=false
+if [[ "${1:-}" == "--daemon" ]]; then
+    daemon=true
+fi
+
+export PORT=${PORT:-8080}
+endpoint=http://localhost:$PORT
+
+# //////////////////////////////////////////////////////////////////////
+# Run directly or in the background
+
+command="env HEROKU_APP_NAME=localhost BASE_URL=$endpoint SECRET_KEY=TheSecret ADMIN_USER=admin python app.py"
+
+if ! $daemon; then
+    exec eval "$command"
+fi
+
+eval "$command" > e2e-server.log 2>&1 &
+echo $! > $pidfile
+
+# //////////////////////////////////////////////////////////////////////
+# Wait for server to come up
+
+echo "Waiting for server to start..." >&2
+up=false
+for i in $(seq 0 2000); do
+    if curl -sSf "$endpoint" > /dev/null 2>&1; then
+        up=true
+		break
+	fi
+done
+
+if ! $up; then
+  echo "Server didn't start in time..." >&2
+  echo "Here's what it had to say:" >&2
+  echo "-------------------------------------------" >&2
+  cat e2e-server.log >&2
+  echo "-------------------------------------------" >&2
+  exit 1
+fi

@@ -40,6 +40,7 @@ levels:
             correct_answer: "B"
             hint: "_?_ Witaj świecie!"
             question_score: '10'
+            code: "```\n___ Hello!\n```\n"
         3:
             question_text: "Jak zapytasz, jaki jest mój ulubiony kolor?"
             mp_choice_options:
@@ -156,7 +157,7 @@ levels:
             mp_choice_options:
             -   option: "You can use it to `{ask}` a question."
                 feedback: "That's what `{ask}` is for!"
-            -   option: "You can use it to `{print}` text."
+            -   option: "Możesz wykorzystać je do wypisana tekstu"
                 feedback: "That's what `{print}` is for!"
             -   option: "You can use it to repeat an answer."
                 feedback: "Good job!"
@@ -197,16 +198,16 @@ levels:
         1:
             question_text: "Which statement is true?"
             mp_choice_options:
-            -   option: "In level 2 the `{print}` command doesn't exist anymore"
-                feedback: "`{print}` still works"
-            -   option: "In level 2 the `{ask}` command doesn't exist anymore"
-                feedback: "`{ask}` still works!"
-            -   option: "In level 2 the `{echo}` command doesn't exist anymore"
+            -   option: "Możesz wykorzystać polecenie {print} do zadania pytania."
+                feedback: "Po to jest polecenie ask"
+            -   option: "Możesz wykorzystać polecenie {ask} do powtórzenia odpowiedzi"
+                feedback: "To jest nie prawda"
+            -   option: "Poleceniem {print} możesz wyświetlić jakiś tekst"
                 feedback: "Good"
-            -   option: "In level 2 all the level 1 commands still work"
+            -   option: "Poleceniem {sleep}, możesz usunąć tekst z ekranu."
                 feedback: "No one command doesn't work anymore."
             correct_answer: "C"
-            hint: "`{print}` and `{ask}` still exist."
+            hint: "`{print}` dalej działa tak samo jak na poziomie 1"
             question_score: '10'
         2:
             question_text: "Który kod jest poprawny?"
@@ -864,9 +865,9 @@ levels:
         1:
             question_text: "Which command should be filled in on the _?_?"
             code: |-
-                number {is} {ask} 'What is your lucky number?'
-                {if} number {is} 5 {print} Mine too!
-                _?_ {print} My lucky number is 5!
+                cyfra {is} {ask} 'Jaka jest twoja szczęściwa liczby?'
+                {if} cyfra {is} 5 {print} Moja też!
+                _?_ {print} Moją szczęśliwą cyfrą jest 5!
             mp_choice_options:
             -   option: |
                     ```
@@ -1544,13 +1545,13 @@ levels:
                     {print} 'Hello'
                     {print} 'Im Hedy!'
             mp_choice_options:
-            -   option: "Hello \n Im Hedy!"
+            -   option: "Cześć\nJestem Hedy!\n"
                 feedback: "Everything is printed twice."
-            -   option: "Hello \n Hello \n Im Hedy"
+            -   option: "Cześć\nCześć\nJestem Hedy\n"
                 feedback: "The second line is repeated twice as well."
-            -   option: "Hello \n Im Hedy! \n Hello \n Im Hedy!"
+            -   option: "Cześć\nJestem Hedy!\nCześć\nJestem Hedy!\n"
                 feedback: "Super!"
-            -   option: "Hello \n Hello \n Im Hedy! \n Im Hedy!"
+            -   option: "Cześć\nCześć\nJestem Hedy!\nJestem Hedy!\n"
                 feedback: "Everything is printed twice"
             correct_answer: "C"
             hint: "Both lines are repeated twice."
@@ -1579,13 +1580,13 @@ levels:
                     {print} 'Baby shark tututudutudu'
                 {print} 'Baby shark'
             mp_choice_options:
-            -   option: "Baby shark tututudutudu \n Baby shark"
+            -   option: "Baby shark tututudutudu\nBaby shark\n"
                 feedback: "Mind the `{repeat}` command!"
-            -   option: "Baby shark tututudutudu \n Baby shark \n Baby shark tututudutudu \n Baby shark \n Baby shark tututudutudu \n Baby shark"
+            -   option: "Baby shark tututudutudu\nBaby shark\nBaby shark tututudutudu\nBaby shark\nBaby shark tututudutudu\nBaby shark\n"
                 feedback: "The last line has no indentation, so it's not repeated."
-            -   option: "Baby shark tututudutudu \n Baby shark tututudutudu \n Baby shark tututudutudu \n Baby shark"
+            -   option: "Baby shark tututudutudu\nBaby shark tututudutudu\nBaby shark tututudutudu\nBaby shark\n"
                 feedback: "Right!"
-            -   option: "Baby shark tututudutudu \n Baby shark \n Baby shark \n Baby shark"
+            -   option: "Baby shark tututudutudu\nBaby shark\nBaby shark\nBaby shark\n"
                 feedback: "What is being repeated and what isn't."
             correct_answer: "C"
             hint: "What is being repeated and what is not?."
@@ -1598,13 +1599,13 @@ levels:
                     {print} 'Yay!'
                     {print} 'Were going on holiday!'
             mp_choice_options:
-            -   option: "The children went: \n Yay! \n Were going on holiday!"
+            -   option: "Dzieci poszły:\nYay!\nJedziemy na wakacje!\n"
                 feedback: "Mind the `{repeat}` command !"
-            -   option: "The children went: \n Yay! \n Were going on holiday! \n Yay! \n Were going on holiday!"
+            -   option: "Dzieci poszły:\nYay!\nJedziemy na wakacje\nYay!\nJedziemy na wakacje!\n"
                 feedback: "Correct!"
-            -   option: "The children went: \n Yay! \n Yay! \n Were going on holiday! \n Were going on holiday!"
+            -   option: "Dzieci poszły: \n Yay! \n Yay! \nJedziemy na wakacje!\nJedziemy na wakacje!\n"
                 feedback: "This order is incorrect."
-            -   option: "The children went: \n Yay! \n Yay! \n Were going on holiday!"
+            -   option: "Dzieci poszły:\nYay!\nYay!\nJedziemy na wakacje!\n"
                 feedback: "The last line is repeated too."
             correct_answer: "B"
             hint: "The block under the `{repeat}` command is repeated twice."
@@ -1693,42 +1694,42 @@ levels:
             mp_choice_options:
             -   option: |
                     ```
-                    {if} answer is right
-                       {print} You are...
-                          sleep
-                              {print} right!
+                    {if} odpowiedz{is} 32
+                       {print} 'Masz...'
+                          {sleep}
+                              {print} 'racje!'
                           {else}
-                              {print} You are wrong!
+                              {print} 'Masz błąd!'
                     ```
                 feedback: "You are wrong!"
             -   option: |
                     ```
-                    {if} answer is right
-                    {print} You are...
-                    sleep
-                    {print} right!
+                    {if} owiedziedź {is} 32
+                    {print} 'Masz...'
+                    {sleep}
+                    {print} 'rację!'
                     {else}
-                    {print} You are wrong!
+                    {print} 'Masz błąd!'
                     ```
                 feedback: "You are wrong!"
             -   option: |
                     ```
-                    {if} answer is right
-                        {print} You are...
-                        sleep
-                        {print} right!
+                    {if} odpowiedz {is} 32
+                        {print} 'Masz...'
+                        {sleep}
+                        {print} 'racje!'
                     {else}
-                        {print} You are wrong!
+                        {print} 'Masz bład!'
                     ```
                 feedback: "You are... right!"
             -   option: |
                     ```
-                    {if} answer is right
-                        {print} You are...
-                        sleep
-                    {print} right!
+                    {if} odpowiedz {is} 32
+                        {print} 'Masz...'
+                        {sleep}
+                    {print} 'racje!'
                     {else}
-                        {print} You are wrong!
+                        {print} 'Masz bład!'
                     ```
                 feedback: "You are wrong!"
             correct_answer: "C"
@@ -1737,8 +1738,8 @@ levels:
         9:
             question_text: "What line(s) in this code should start with 4 spaces?"
             code: |-
-                1 music = {ask} 'What is your favorite music genre?'
-                2 {if} music is rock
+                1 muzyka = {ask} 'Jaki jest twój ulubiony gatunek muzyki?'
+                2 {if} muzyka {is} rock
                 3 {print} '🤘'
                 4 {else}
                 5 {print} '👎'
@@ -1809,13 +1810,13 @@ levels:
                 {else}
                     {print} 'The computer will explode in 5... 4... 3... 2... 1...'
             mp_choice_options:
-            -   option: "Good job! \n Good job!"
+            -   option: "```\nŚwietna robota!\nŚwietna robota!\n```"
                 feedback: "That's not it!"
-            -   option: "The computer will explode in 5... 4... 3... 2... 1..."
+            -   option: "```\nKomputer wybuchnie za 5... 4... 3... 2... 1...\n```"
                 feedback: "That's not it!"
-            -   option: "Good job ! \n Good job! \n You can use the computer!"
+            -   option: "```\nŚwietna robota!\nŚwietna robota!\nMożesz wykorzystać komputer!\n```"
                 feedback: "That's not it!"
-            -   option: "Good job! \n You can use the computer! \n Good job! \n You can use the computer!"
+            -   option: "```\nŚwietna robota!\nMożesz wykorzystać komputer!\nŚwietna robota!\nMożesz wykorzystać komputer!\n```"
                 feedback: "Correct!"
             correct_answer: "D"
             hint: "Everything under the `{repeat}` command is repeated twice."
@@ -2492,7 +2493,7 @@ levels:
             hint: "Mind the quotation marks and the names of the variables"
             question_score: '10'
         9:
-            question_text: "What is the first question Hedy will `{ask}` you when you run the program?"
+            question_text: "Jakie jest pierwsze pytanie, które zada Hedy po uruchomieniu programu?"
             code: |-
                 courses = appetizer, main course, dessert
                 names = Timon, Onno

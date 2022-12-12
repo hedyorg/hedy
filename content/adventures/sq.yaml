@@ -279,6 +279,8 @@ adventures:
                 example_code_3: "```\nnjgjyrat_e_bukura {is} gjelbër, verdhë\nnjgjyrat_e_preferuara {is} {ask} 'Cila është ngjyra juaj e preferuar?'\n{if} njgjyrat_e_preferuara {in} njgjyrat_e_bukura {print} 'bukur!'\n{else} {print} 'meh'\n```\n"
                 story_text_2: "Nganjëherë kodi në komandën `{if}` bëhet shumë i gjatë dhe nuk e nxen rreshti. <br> Ju gjithashtu mund ta ndani kodin në dy rreshta, duke filluar rreshtin e dytë te komanda `{else}` ja kështu:\n"
                 example_code_2: "```\nemri {is} {ask} 'Si e ke emrin?'\n{if} emri {is} Hedy {print} 'bukur'\n{else} {print} 'boo!'\n```\n"
+                story_text_4: "Something else that works with ```if``` is ```pressed```! With pressed you can link any letter in\nthe alphabet and any number key on your keyboard to a command. If you link it, and press the key,\nsomething will happen. Try it out!\n"
+                example_code_4: "```\nif x is pressed print \"it worked!\"\n```\n"
             18:
                 example_code_3: "```\n{print}('Emri im është Hedy!')\nemri = {input}('Si e keni emrin?')\n{print}('Kështu që emri yt është ', emri)\n```\n"
                 start_code: "emri = 'Hedy'\n{print}('Emri im është ', emri)"
@@ -765,11 +767,11 @@ adventures:
         default_save_name: Shtype
         levels:
             5:
-                story_text_2: "## If Else Pressed\nYou can also assign an else statement to ```pressed```. The else statement will be executed\nwhenever you press a key other than the key you assigned.\n"
-                example_code_2: "```\nif y is {pressed} {print} 'Amazing! You pressed the y key!'\nelse {print} 'Oh no! You did not press the y key.'\n```\n"
+                story_text_2: "## Nëse shtypet tjetër\nJu gjithashtu mund të caktoni një deklaratë tjetër për ```pressed```. Deklarata else do të ekzekutohet\nsa herë që shtypni një tast tjetër nga tasti që keni caktuar.\n"
+                example_code_2: "```\nnëse y është {pressed} {print} 'E mahnitshme! Ju keni shtypur butonin y!'\nelse {print} 'Oh jo! Nuk e keni shtypur butonin y.'\n```\n"
                 story_text: "## Shtypni!\nNë hyrje ju është thënë edhe për fjalën kyçe të re ```pressed```! Using ```pressed```\nmund ta bëjë kodimin shumë më interaktiv, dhe ju mund të keni kontroll të drejtpërdrejtë të asaj që ekzekutohet!\nNë nivelet e ardhshme do të mësoni se si ```pressed`` makes this possible and what uses ```pressed```\nka.\nPërveç printimit të tekstit, ka një larmi tjetër përdorimesh për ```pressed```\nPër shembull, ju gjithashtu mund të lidhni komandat e breshkave me çelësat! Provoje!\n"
                 example_code: "```\nif x is {pressed} forward 50\n```\n"
-                start_code: '# place your code here'
+                start_code: '# vendoseni kodin tuaj këtu'
             6:
                 story_text: "Did you know you can also make a calculator using ```pressed```?\nGive the calculator two numbers and press the m key to multiply.\nNow you don't have to bring your own!\nTry other keys and see what happens! Do you get a different result?\n"
                 example_code: "```\nfirst = {ask} 'what is your first number?'\nsecond = {ask} 'what is your second number?'\nprint 'press a to add, s to substract, d to divide, m to multiply'\nif a is {pressed} result = first + second\nif s is {pressed} result = first - second\nif d is {pressed} result = first / second\nif m is {pressed} result = first * second\nprint 'The answer is ' result\n```\n"
