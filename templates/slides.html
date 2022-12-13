@@ -1,1 +1,24 @@
-{{ slides }}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../node_modules/reveal.js/dist/reveal.css">
+    <link rel="stylesheet" href="../node_modules/reveal.js/dist/theme/black.css">
+    <script>
+        let deck = new Reveal({
+           plugins: [ Markdown ]
+        })
+        deck.initialize();
+    </script>
+    <title>Hedy - Slides</title>
+</head>
+<body>
+    <div class="reveal">
+      <div class="slides">
+          {% for slide in slides %}
+            <section>{{ slide }}</section>
+          {% endfor %}
+      </div>
+    </div>
+  </body>
+</html>
