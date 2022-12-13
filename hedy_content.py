@@ -630,3 +630,17 @@ class Tutorials:
 class NoSuchTutorial:
     def get_tutorial_for_level(self, level, keyword_lang):
         return {}
+
+class Slides:
+    def __init__(self, language):
+        self.language = language
+        self.file = {}
+        self.data = {}
+
+        self.debug_mode = not os.getenv('NO_DEBUG_MODE')
+
+        self.data = YamlFile.for_file(f'content/slides/{self.language}.yaml').to_dict()
+
+class NoSuchSlide:
+    def get_slide_data_for_level(self, level, keyword_lang):
+        return {}

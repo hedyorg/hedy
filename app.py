@@ -1234,17 +1234,13 @@ def login_page():
     return render_template('login.html', page_title=gettext('title_login'), current_page='login')
 
 # First slide deck should appear at slides link
-@app.route('/slides/1', methods=['GET'])
-def slides_one():
-    return render_template("slideOne.html")
-
-@app.route('/slides/2', methods=['GET'])
-def slides_two():
-    return render_template("slidesTwo.html")
-
-@app.route('/slides/0', methods=['GET'])
-def slides_zero():
-    return render_template("slidesZero.html")
+@app.route('/slides/<level>', methods=['GET'])
+def slides(level):
+    SLIDES = collections.defaultdict(hedy_content.NoSuchSlide)
+    for lang in ALL_LANGUAGES.keys():
+        SLIDES[lang] = hedy_content.Slides(lang)
+    slides_for_level = SLIDES['en'].data[int(level)]
+    return render_template("slides.html", slides=slides_for_level)
 
 @app.route('/recover', methods=['GET'])
 def recover_page():

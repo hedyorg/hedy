@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="{{static('/css/reveal.css')}}">
+
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				{% for nr, text in slides.items() %}
+				<section data-markdown>
+					<script type="text/template">
+						<h1>{{ nr }} </h1>
+						{{	text }}
+					</script>
+				</section>
+				{% endfor %}
+			</div>
+		</div>
+
+		<script src="{{static('/js/reveal/dist/reveal.js')}}"></script>
+		<script src="{{static('/js/reveal/plugins/markdown/markdown.js')}}"></script>
+
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+				plugins: [ RevealMarkdown ]
+			});
+		</script>
+	</body>
+</html>
