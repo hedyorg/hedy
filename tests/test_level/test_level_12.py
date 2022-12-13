@@ -1347,7 +1347,7 @@ class TestsLevel12(HedyTester):
         self.multi_level_tester(code=code, expected=expected, max_level=17)
 
     @parameterized.expand(['5', '𑁫', '५', '૫', '੫', '৫', '೫', '୫', '൫', '௫',
-                          '౫', '၅', '༥', '᠕', '៥', '๕', '໕', '꧕', '٥', '۵'])
+                           '౫', '၅', '༥', '᠕', '៥', '๕', '໕', '꧕', '٥', '۵'])
     def test_repeat_with_all_numerals(self, number):
         code = textwrap.dedent(f"""\
         repeat {number} times
@@ -2062,7 +2062,7 @@ class TestsLevel12(HedyTester):
         create_button(x)""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=18)
-    
+
     def test_if_button_is_pressed_print(self):
         code = textwrap.dedent("""\
         x = 'PRINT'
