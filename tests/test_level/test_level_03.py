@@ -445,7 +445,7 @@ class TestsLevel3(HedyTester):
             max_level=11,
             extra_check_function=self.result_in([4]),
         )
-        
+
     def test_add_text_with_inner_single_quote_to_list(self):
         code = textwrap.dedent("""\
         dieren is koe, kiep

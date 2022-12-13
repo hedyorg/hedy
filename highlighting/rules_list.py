@@ -41,7 +41,7 @@ def rule_all(level):
             number_regex = '(' + DIGIT + '+)'
 
         list_rules.append({'regex': START_WORD + number_regex + END_WORD,
-                          'token': ['text', 'variable'], 'next': 'start', 'unicode': True})
+                           'token': ['text', 'variable'], 'next': 'start', 'unicode': True})
 
         # Special case of an number directly followed by a number
         for command in data_level["space_before"]:

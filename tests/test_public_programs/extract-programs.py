@@ -27,4 +27,3 @@ for program in all_programs:
 with open(f'filtered-programs-{date}.json', 'w') as public_programs:
     save_text = json.dumps(new_programs)
     public_programs.write(save_text)
-

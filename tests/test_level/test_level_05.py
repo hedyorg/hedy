@@ -793,7 +793,6 @@ class TestsLevel5(HedyTester):
             exception=hedy.exceptions.UnquotedTextException
         )
 
-
     def test_if_fix_nl(self):
         code = textwrap.dedent("""\
             naam is 5
@@ -816,12 +815,10 @@ class TestsLevel5(HedyTester):
             translate=False
         )
 
-
-
-
     #
     # if pressed tests
     #
+
     def test_if_pressed_x_is_letter_key(self):
         code = textwrap.dedent("""\
         if x is pressed print 'it is a letter key'""")

@@ -660,6 +660,7 @@ class Slides:
             self.data[keyword_lang] = self.cache_slides(keyword_lang)
         return self.data.get(keyword_lang, {}).get(level, None)
 
+
 class NoSuchSlides:
     def get_slides_for_level(self, level, keyword_lang):
         return {}
