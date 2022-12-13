@@ -1609,7 +1609,7 @@ class ConvertToPython_3(ConvertToPython_2):
 
     def process_argument(self, meta, arg):
         # only call process_variable if arg is a string, else keep as is (ie. don't change 5 into '5', my_list[1] into 'my_list[1]')
-        if arg.isnumeric():  # is int/float
+        if arg.isnumeric() and isinstance(arg, int):  # is int/float
             return arg
         elif (self.is_list(arg)):  # is list indexing
             before_index, after_index = arg.split(']', 1)

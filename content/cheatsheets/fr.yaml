@@ -82,6 +82,9 @@
 -   name: '{in}'
     explanation: Check elements with `{in}`.
     demo_code: "jolies_couleurs {is} vert, jaune\ncouleur {is} {ask} 'Quelle est ta couleur favorite?'\n{if} couleur {in} jolies_couleurs {print} 'joli!' {else} {print} 'moche'"
+-   name: '{pressed}'
+    explanation: Check whether a given key on the keyboard is `{pressed}`.
+    demo_code: "{if} a {is} {pressed} {print} 'You pressed A!' {else} {print} 'You pressed another key!'"
 6:
 -   name: "{print}"
     explanation: "Affiche exactement ce qui est entre les guillemets."
@@ -132,6 +135,9 @@
 -   demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
     name: '{repeat} avec la tortue'
     explanation: 'Répète plusieurs lignes.'
+-   name: '{pressed}'
+    explanation: Check whether a given key on the keyboard is `{pressed}`.
+    demo_code: "{if} a {is} {pressed}\n    {print} 'You pressed A!'\n{else}\n    {print} 'You pressed another key!'"
 9:
 -   name: "{if} avec plusieurs lignes"
     explanation: "Vérifies la réponse d'une addition de nombres avec `{ask}`. On affiche maintenant sur 2 lignes."

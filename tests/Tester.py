@@ -1,5 +1,5 @@
 import textwrap
-
+import hashlib
 import exceptions
 import hedy
 import hedy_translation
@@ -14,17 +14,23 @@ import utils
 from hedy_content import ALL_KEYWORD_LANGUAGES, KEYWORDS
 from app import translate_error, app
 from flask_babel import force_locale
+import pickle, _pickle
 
 class Snippet:
-    def __init__(self, filename, level, field_name, code, adventure_name=None):
+    def __init__(self, filename, level, code, field_name=None, adventure_name=None, error=None, language=None):
         self.filename = filename
         self.level = level
         self.field_name = field_name
         self.code = code
+        self.error = error
         filename_shorter = os.path.basename(filename)
-        self.language = filename_shorter.split(".")[0]
+        if language is None:
+            self.language = filename_shorter.split(".")[0]
+        else:
+            self.language = language
         self.adventure_name = adventure_name
         self.name = f'{self.language}-{self.level}-{self.field_name}'
+        self.hash = hashlib.md5(self.code.encode()).hexdigest()
 
 
 class HedyTester(unittest.TestCase):
@@ -243,7 +249,7 @@ class HedyTester(unittest.TestCase):
             pass
         except OSError:
             return True  # programs with ask cannot be tested with output :(
-        except Exception:
+        except Exception as E:
             return False
         return True
 
@@ -354,3 +360,31 @@ class HedyTester(unittest.TestCase):
                 print(snippet)
 
         return snippets
+
+def get_snippets_env_var():
+    only_new_snippets = os.getenv('only_new_snippets')
+    if only_new_snippets is None:
+        only_new_snippets = False  # set default in case env var is not set (f.e. on Windows, or when running form the UI)
+    elif only_new_snippets == 1 or only_new_snippets == '1':
+        only_new_snippets = True
+    else:  # in case an invalid one is given
+        only_new_snippets = False
+    return only_new_snippets
+
+def get_list_from_pickle(filename):
+    try:
+        with open(filename, 'rb') as f:
+            hashes_saved = pickle.load(f)
+    except _pickle.UnpicklingError:  # broken file, create and save
+        hashes_saved = set()
+        with open(filename, 'wb') as f:
+            pickle.dump(hashes_saved, f)
+    except EOFError:  # empty file
+        hashes_saved = set()
+        with open(filename, 'wb') as f:
+            pickle.dump(hashes_saved, f)
+    except FileNotFoundError:  # non existent file
+        hashes_saved = set()
+        with open(filename, 'wb') as f:
+            pickle.dump(hashes_saved, f)
+    return hashes_saved

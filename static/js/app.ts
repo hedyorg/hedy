@@ -8,6 +8,8 @@ export let theGlobalEditor: AceAjax.Editor;
 export let theModalEditor: AceAjax.Editor;
 let markers: Markers;
 
+let last_code: string;
+
 const turtle_prefix =
 `# coding=utf8
 import random, time, turtle
@@ -1119,16 +1121,15 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
 
     // Check if the program was correct but the output window is empty: Return a warning
     if ($('#output').is(':empty') && $('#turtlecanvas').is(':empty')) {
-      if(debug == null){
+      if(!debug){
         pushAchievement("error_or_empty");
         error.showWarning(ErrorMessages['Transpile_warning'], ErrorMessages['Empty_output']);
       }
       return;
     }
-    if (!hasWarnings) {
-      if (debug == null) {
+    if (!hasWarnings && code !== last_code && !debug) {
         showSuccesMessage();
-      }
+        last_code = code;
     }
     if (cb) cb ();
   }).catch(function(err) {

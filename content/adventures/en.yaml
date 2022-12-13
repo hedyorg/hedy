@@ -752,6 +752,28 @@ adventures:
                     {print} 'Now you can enter the house!'
                     ```
                 start_code: "# place your code here"
+    years:
+        name: "New Year's"
+        description: "Countdown to the new year!"
+        default_save_name: "New Year's Countdown"
+        levels:
+            
+            11:
+                story_text: |
+                    ## Songs
+                    In this level you can use the `{for} i {in} {range}` command to countdown to the New Year.
+
+                    ## Challenge
+                    Fill in the blanks and make the code work!
+                example_code: |
+                    ## Countdown
+                    ```
+                    for _ in _ 10 to 1
+                        {print} i
+                    {print} 'Happy New Year!'
+                    ```
+                start_code: "# place your code here"
+
     parrot:
         name: "Parrot"
         description: "Create your own online pet parrot that will copy you!"
