@@ -33,6 +33,9 @@
 -   name: '{in}'
     explanation: Check elements with `{in}`
     demo_code: "pretty_colors {is} green, yellow\ncolor {is} {ask} 'What {is} your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
+-   explanation: Check whether a given key on the keyboard is `{pressed}`.
+    demo_code: "{if} a {is} {pressed} {print} 'You pressed A!' {else} {print} 'You pressed another key!'"
+    name: '{pressed}'
 8:
 -   name: '{print}'
     explanation: print something. Remember to use a quotation mark for literal printing.
@@ -43,6 +46,9 @@
 -   name: '`{repeat}` with turtle'
     explanation: '{repeat} multiple lines'
     demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
+-   name: '{pressed}'
+    explanation: Check whether a given key on the keyboard is `{pressed}`.
+    demo_code: "{if} a {is} {pressed}\n    {print} 'You pressed A!'\n{else}\n    {print} 'You pressed another key!'"
 11:
 -   demo_code: "{for} counter {in} {range} 1 {to} 5\n    {print} counter"
     name: '{for} loop'

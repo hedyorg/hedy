@@ -50,6 +50,9 @@
 -   name: '{repeat} עם הצב'
     explanation: חזרו על מספר שורות.
     demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
+-   name: '{pressed}'
+    explanation: Check whether a given key on the keyboard is `{pressed}`.
+    demo_code: "{if} a {is} {pressed}\n    {print} 'You pressed A!'\n{else}\n    {print} 'You pressed another key!'"
 10:
 -   demo_code: "{print} '5 פעמים 5 זה ' 5 * 5"
     name: '{print}'
@@ -113,6 +116,9 @@
 -   name: '{in}'
     explanation: בדוק פריטים באמצעות `{in}`.
     demo_code: "צבעים_יפים {is} ירוק, צהוב\nצבע {is} {ask} 'מה {is} הצבע האהוב עליך?'\n{if} צבע {in} צבעים_יפים {print} 'יפה!' {else} {print} 'טוב נו...'"
+-   name: '{pressed}'
+    explanation: Check whether a given key on the keyboard is `{pressed}`.
+    demo_code: "{if} a {is} {pressed} {print} 'You pressed A!' {else} {print} 'You pressed another key!'"
 7:
 -   name: '{print}'
     explanation: הדפיסו בדיוק באמצעות במירכאות.
