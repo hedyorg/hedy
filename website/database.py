@@ -160,7 +160,7 @@ class Database:
         PROGRAMS.update({"id": id}, {"public": 1 if public else 0})
 
     def submit_program_by_id(self, id):
-        PROGRAMS.update({"id": id}, {"submitted": True})
+        PROGRAMS.update({"id": id}, {"submitted": True, "date": timems()})
 
     def delete_program_by_id(self, id):
         """Delete a program by id."""
