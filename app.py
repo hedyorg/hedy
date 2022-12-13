@@ -1530,8 +1530,12 @@ def change_language():
 
 @app.route('/hedy/slides', methods=['GET'], defaults={'level': 1})
 @app.route('/hedy/slides/<level>', methods=['GET'])
-def get_slides():
-    return render_template('slides.html')
+def get_slides(level):
+    if not SLIDES[g.lang].get_slides_for_level(level):
+        return utils.error_page(error=404, ui_message="Slides do not exist!")
+
+    slides = SLIDES[g.lang].get_slides_for_level_step(level, g.keyword_lang)
+    return render_template('slides.html', slides=slides)
 
 
 @app.route('/translate_keywords', methods=['POST'])
