@@ -1528,9 +1528,14 @@ def change_language():
     return jsonify({'succes': 200})
 
 
-@app.route('/hedy/slides', methods=['GET'], defaults={'level': 1})
+@app.route('/hedy/slides', methods=['GET'], defaults={'level': '1'})
 @app.route('/hedy/slides/<level>', methods=['GET'])
 def get_slides(level):
+    try:
+        level = int(level)
+    except ValueError:
+        return utils.error_page(error=404, ui_message="Slides do not exist!")
+
     if not SLIDES[g.lang].get_slides_for_level(level):
         return utils.error_page(error=404, ui_message="Slides do not exist!")
 
