@@ -13,8 +13,14 @@
 <body>
     <div class="reveal">
       <div class="slides">
-          <section>Slide 1</section>
-          <section>Slide 2</section>
+          {% for index, slide in slides.items() %}
+            <section data-markdown>
+                <textarea data-template>
+                    ## {{ slide['header'] }}
+                    {{ slide['text'] }}
+                </textarea>
+            </section>
+          {% endfor %}
       </div>
     </div>
     <script src="{{static('vendor/reveal/dist/reveal.js')}}"></script>
