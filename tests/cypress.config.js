@@ -30,5 +30,6 @@ module.exports = defineConfig({
     admin_adventures_page: '/admin/adventures',
     admin_achievements_page: '/admin/achievements',
     admin_logs_page: '/admin/logs'
+    admin_classes_page: '/admin/classes'
   }
 });

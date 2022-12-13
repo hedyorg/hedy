@@ -835,6 +835,7 @@ class TestsLevel8(HedyTester):
               if event.unicode == 'x':
                 print(f'first key')
                 break
+            if event.type == pygame.KEYDOWN:
               if event.unicode == 'y':
                 print(f'second key')
                 break""")
@@ -979,3 +980,79 @@ class TestsLevel8(HedyTester):
         # gives the right exception for all levels even though it misses brackets
         # because the indent check happens before parsing
         self.multi_level_tester(code=code, exception=hedy.exceptions.NoIndentationException)
+
+    #
+    # button tests
+    #
+    def test_if_button_is_pressed_print(self):
+        code = textwrap.dedent("""\
+        PRINT is button
+        if PRINT is pressed 
+          print 'The button got pressed!'""")
+
+        expected = HedyTester.dedent(f"""\
+        create_button('PRINT')
+        while not pygame_end:
+          pygame.display.update()
+          event = pygame.event.wait()
+          if event.type == pygame.QUIT:
+            pygame_end = True
+            pygame.quit()
+            break
+          if event.type == pygame.USEREVENT:
+            if event.key == 'PRINT':
+              print(f'The button got pressed!')
+              break""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=11)
+
+    def test_if_button_is_pressed_make_button(self):
+        code = textwrap.dedent("""\
+        BUTTON1 is button
+        if BUTTON1 is pressed 
+          BUTTON2 is button""")
+
+        expected = HedyTester.dedent(f"""\
+        create_button('BUTTON1')
+        while not pygame_end:
+          pygame.display.update()
+          event = pygame.event.wait()
+          if event.type == pygame.QUIT:
+            pygame_end = True
+            pygame.quit()
+            break
+          if event.type == pygame.USEREVENT:
+            if event.key == 'BUTTON1':
+              create_button('BUTTON2')
+              break""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=11)
+
+    def test_if_button_is_pressed_print_else_print(self):
+        code = textwrap.dedent("""\
+        PRINT is button
+        PRINT2 is button
+        if PRINT is pressed
+            print 'The button got pressed!'
+        else
+            print 'oof :('""")
+
+        expected = HedyTester.dedent(f"""\
+        create_button('PRINT')
+        create_button('PRINT2')
+        while not pygame_end:
+          pygame.display.update()
+          event = pygame.event.wait()
+          if event.type == pygame.QUIT:
+            pygame_end = True
+            pygame.quit()
+            break
+          if event.type == pygame.USEREVENT:
+            if event.key == 'PRINT':
+              print(f'The button got pressed!')
+              break    
+            else:
+              print(f'oof :(')
+              break\n""") +  "    "
+
+        self.multi_level_tester(code=code, expected=expected, max_level=11)
