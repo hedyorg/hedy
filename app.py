@@ -88,7 +88,7 @@ ACHIEVEMENTS = achievements.Achievements(DATABASE, ACHIEVEMENTS_TRANSLATIONS)
 # We retrieve these once on server-start: Would be nice to automate this
 # somewhere in the future (06/22)
 PUBLIC_PROGRAMS = DATABASE.get_all_public_programs()
-
+PARSED_PROGRAMS = {}
 
 # Load the adventures, by default with the selected keyword language
 def load_adventures_per_level(level, keyword_lang):
@@ -545,7 +545,11 @@ def transpile_add_stats(code, level, lang_):
     username = current_user()['username'] or None
     number_of_lines = code.count('\n')
     try:
-        result = hedy.transpile(code, level, lang_)
+        if hash(code) in PARSED_PROGRAMS:
+            result = PARSED_PROGRAMS.get(hash(code))
+        else:
+            result = hedy.transpile(code, level, lang_)
+            PARSED_PROGRAMS[hash(code)] = result
         statistics.add(
             username, lambda id_: DATABASE.add_program_stats(id_, level, number_of_lines, None))
         return result
