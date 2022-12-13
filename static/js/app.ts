@@ -26,10 +26,18 @@ t.showturtle()
 const pygame_prefix =
 `# coding=utf8
 import pygame
+import buttons
 pygame.init()
 canvas = pygame.display.set_mode((711,300))
 canvas.fill(pygame.Color(247, 250, 252, 255))
 pygame_end = False
+
+button_list = []
+def create_button(name):
+  if name not in button_list:
+    button_list.append(name)
+    buttons.add(name)
+
 `;
 
 const pygame_suffix =
@@ -360,6 +368,11 @@ function clearOutput() {
   outputDiv.append(variables);
   error.hide();
   success.hide();
+
+  // Clear the user created buttons.
+  const buttonsDiv = $('#dynamic-buttons');
+  buttonsDiv.empty();
+  buttonsDiv.hide();
 }
 
 export function runit(level: string, lang: string, disabled_prompt: string, cb: () => void) {
@@ -1039,6 +1052,9 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
       './version.js': {
         path: "/vendor/pygame_4_skulpt/version.js",
       },
+      './buttons.js': {
+          path: "/js/buttons.js",
+      },
     };
 
     code_prefix += pygame_prefix;
@@ -1053,7 +1069,7 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
     if (!hasTurtle && !codeContainsInputFunctionBeforePygame) {
       $('#pygame-modal').show();
     }
-    
+
     document.onkeydown = animateKeys;
     window.State.pygame_running = true;
   }
@@ -1843,16 +1859,16 @@ export function change_language(lang: string) {
     contentType: 'application/json',
     dataType: 'json'
   }).done(function(response: any) {
-      if (response.succes){        
+      if (response.succes){
         // Check if keyword_language is set to change it to English
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
         if (urlParams.get('keyword_language') !== null) {
           urlParams.set('keyword_language', 'en');
-          window.location.search = urlParams.toString();          
+          window.location.search = urlParams.toString();
         } else {
           location.reload();
-        }        
+        }
       }
     }).fail(function(xhr) {
       console.error(xhr);
