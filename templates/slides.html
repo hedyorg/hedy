@@ -2,23 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../node_modules/reveal.js/dist/reveal.css">
-    <link rel="stylesheet" href="../node_modules/reveal.js/dist/theme/black.css">
-    <script>
-        let deck = new Reveal({
-           plugins: [ Markdown ]
-        })
-        deck.initialize();
-    </script>
+    <link rel="stylesheet" href="node_modules/reveal.js/dist/reveal.css">
+    <link rel="stylesheet" href="node_modules/reveal.js/dist/theme/black.css">
     <title>Hedy - Slides</title>
 </head>
 <body>
     <div class="reveal">
       <div class="slides">
-          {% for slide in slides %}
-            <section>{{ slide }}</section>
-          {% endfor %}
+          <section>Slide 1</section>
+          <section>Slide 2</section>
       </div>
     </div>
-  </body>
+		<script src="node_modules/reveal.js"></script>
+ 		<script src="node_modules/reveal.js/plugin/markdown/markdown.js"></script>
+ 		<script>
+ 			Reveal.initialize();
+ 		</script>
+</body>
+
 </html>
