@@ -638,35 +638,4 @@ class TestsLevel1(HedyTester):
             extra_check_function=lambda c: c.exception.arguments['invalid_command'] == 'aks',
             max_level=17,
         )
-
-# testing dutch translation of slides in different circumstances
-def test_print_nl_slide0(self):
-        code = "print Hallo welkom bij Hedy!"
-        expected = "print('Hallo welkom bij Hedy!')"
-        output = 'Hallo welkom bij Hedy!'
-
-        self.single_level_tester(code=code, expected=expected, output=output, lang='nl')
-
-def test_ask_nl_code_transpiled_in_nl_slide0(self):
-        code = "vraag Heb je er zin in?"
-        expected = "answer = input('Heb je er zin in?')"
-
-        self.single_level_tester(code=code, expected=expected, lang='nl')
-
-def test_one_color_purple_nl_slide0(self):
-        code = "kleur paars"
-        expected = "t.pencolor('purple')"
-
-        self.single_level_tester(code=code, expected=expected,
-                                 extra_check_function=self.is_turtle(), lang='nl')
-
-def test_turn_left_nl_slide0(self):
-        code = "draai links"
-        expected = "t.left(90)"
-
-        self.single_level_tester(
-            code=code,
-            expected=expected,
-            extra_check_function=self.is_turtle(),
-            lang='nl'
-        )
+        
