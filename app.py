@@ -1233,6 +1233,11 @@ def login_page():
         return redirect('/my-profile')
     return render_template('login.html', page_title=gettext('title_login'), current_page='login')
 
+# First slide deck should appear at slides link
+@app.route('/slides', methods=['GET'])
+def slides_one():
+    return render_template("slideOne.html")
+
 
 @app.route('/recover', methods=['GET'])
 def recover_page():
