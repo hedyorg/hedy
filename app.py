@@ -1524,6 +1524,12 @@ def change_language():
     return jsonify({'succes': 200})
 
 
+@app.route('/hedy/slides', methods=['GET'], defaults={'level': 1})
+@app.route('/hedy/slides/<level>', methods=['GET'])
+def get_slides():
+    return render_template('slides.html')
+
+
 @app.route('/translate_keywords', methods=['POST'])
 def translate_keywords():
     body = request.json
