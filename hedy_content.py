@@ -300,7 +300,6 @@ for folder in os.listdir('translations'):
         locale = Locale.parse(folder)
         languages[folder] = locale.display_name.title()
 
-
 for lang in sorted(languages):
     ALL_LANGUAGES[lang] = languages[lang]
     if os.path.exists('./grammars/keywords-' + lang + '.lark'):
@@ -458,6 +457,7 @@ class Adventures:
                     f'content/adventures/{self.language}.yaml').get('adventures')
             self.data["en"] = self.cache_adventure_keywords("en")
         return True if self.data.get("en") else False
+
 
 # Todo TB -> We don't need these anymore as we guarantee with Weblate that
 # each language file is there
@@ -629,4 +629,34 @@ class Tutorials:
 
 class NoSuchTutorial:
     def get_tutorial_for_level(self, level, keyword_lang):
+        return {}
+
+
+class Slides:
+    def __init__(self, language):
+        self.language = language
+        self.file = YamlFile.for_file(f'content/slides/{self.language}.yaml')
+        self.data = {}
+
+        self.debug_mode = not os.getenv('NO_DEBUG_MODE')
+
+        if not self.debug_mode:
+            self.data["en"] = self.cache_slides("en")
+            if language in ALL_KEYWORD_LANGUAGES.keys():
+                self.data[language] = self.cache_slides(language)
+
+    def cache_slides(self, language):
+        slides_data = {}
+        for level in copy.deepcopy(self.file):
+            # We have to perform some formatting based on the file structure
+            pass
+        return slides_data
+
+    def get_slides_for_level(self, level, keyword_lang="en"):
+        if self.debug_mode and not self.data.get(keyword_lang, None):
+            self.data[keyword_lang] = self.cache_slides(keyword_lang)
+        return self.data.get(keyword_lang, {}).get(level, None)
+
+class NoSuchSlides:
+    def get_slides_for_level(self, level, keyword_lang):
         return {}

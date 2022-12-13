@@ -81,6 +81,10 @@ TUTORIALS = collections.defaultdict(hedy_content.NoSuchTutorial)
 for lang in ALL_LANGUAGES.keys():
     TUTORIALS[lang] = hedy_content.Tutorials(lang)
 
+SLIDES = collections.defaultdict(hedy_content.NoSuchSlides)
+for lang in ALL_LANGUAGES.keys():
+    SLIDES[lang] = hedy_content.Slides(lang)
+
 ACHIEVEMENTS_TRANSLATIONS = hedyweb.AchievementTranslations()
 DATABASE = database.Database()
 ACHIEVEMENTS = achievements.Achievements(DATABASE, ACHIEVEMENTS_TRANSLATIONS)
