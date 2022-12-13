@@ -1534,7 +1534,7 @@ def get_slides(level):
     if not SLIDES[g.lang].get_slides_for_level(level):
         return utils.error_page(error=404, ui_message="Slides do not exist!")
 
-    slides = SLIDES[g.lang].get_slides_for_level_step(level, g.keyword_lang)
+    slides = SLIDES[g.lang].get_slides_for_level(level, g.keyword_lang)
     return render_template('slides.html', slides=slides)
 
 

@@ -635,12 +635,13 @@ class NoSuchTutorial:
 class Slides:
     def __init__(self, language):
         self.language = language
-        self.file = YamlFile.for_file(f'content/slides/{self.language}.yaml')
+        self.file = {}
         self.data = {}
 
         self.debug_mode = not os.getenv('NO_DEBUG_MODE')
 
         if not self.debug_mode:
+            self.file = YamlFile.for_file(f'content/slides/{self.language}.yaml').get('levels')
             self.data["en"] = self.cache_slides("en")
             if language in ALL_KEYWORD_LANGUAGES.keys():
                 self.data[language] = self.cache_slides(language)
@@ -648,12 +649,14 @@ class Slides:
     def cache_slides(self, language):
         slides_data = {}
         for level in copy.deepcopy(self.file):
-            # We have to perform some formatting based on the file structure
-            pass
+            slides = copy.deepcopy(self.file.get(level))
+            slides_data[level] = slides
         return slides_data
 
     def get_slides_for_level(self, level, keyword_lang="en"):
         if self.debug_mode and not self.data.get(keyword_lang, None):
+            if not self.file:
+                self.file = YamlFile.for_file(f'content/slides/{self.language}.yaml').get('levels')
             self.data[keyword_lang] = self.cache_slides(keyword_lang)
         return self.data.get(keyword_lang, {}).get(level, None)
 
