@@ -10,6 +10,7 @@ t.speed(3)
 t.showturtle()
 `,Fd=`# coding=utf8
 import pygame
+import buttons
 pygame.init()
 canvas = pygame.display.set_mode((711,300))
 canvas.fill(pygame.Color(247, 250, 252, 255))
