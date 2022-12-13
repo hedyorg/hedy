@@ -88,6 +88,8 @@ ACHIEVEMENTS = achievements.Achievements(DATABASE, ACHIEVEMENTS_TRANSLATIONS)
 # We retrieve these once on server-start: Would be nice to automate this
 # somewhere in the future (06/22)
 PUBLIC_PROGRAMS = DATABASE.get_all_public_programs()
+
+# Todo TB: We start with an empty dictionary, maybe pre-parse all default programs when not in debug mode
 PARSED_PROGRAMS = {}
 
 # Load the adventures, by default with the selected keyword language
