@@ -227,3 +227,6 @@ class TestsLevel7(HedyTester):
                 print(f'do it 5 times!')
                 time.sleep(0.1)
               break""")
+        self.single_level_tester(
+            code=code,
+            expected=expected)
