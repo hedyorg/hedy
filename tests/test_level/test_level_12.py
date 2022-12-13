@@ -1901,6 +1901,7 @@ class TestsLevel12(HedyTester):
               if event.unicode == 'x':
                 print(f'''first key''')
                 break
+            if event.type == pygame.KEYDOWN:
               if event.unicode == 'y':
                 print(f'''second key''')
                 break""")
@@ -1959,18 +1960,21 @@ class TestsLevel12(HedyTester):
                   16, True)
                 }
                 break
+            if event.type == pygame.KEYDOWN:
               if event.unicode == 'a':
                 {HedyTester.indent(
                   HedyTester.turn_transpiled(-90.0, self.level),
                   16, True)
                 }
                 break
+            if event.type == pygame.KEYDOWN:
               if event.unicode == 'd':
                 {HedyTester.indent(
                   HedyTester.turn_transpiled(90.0, self.level),
                   16, True)
                 }
                 break
+            if event.type == pygame.KEYDOWN:
               if event.unicode == 's':
                 {HedyTester.indent(
                   HedyTester.turn_transpiled(180.0, self.level),
@@ -2044,3 +2048,107 @@ class TestsLevel12(HedyTester):
             extra_check_function=self.is_turtle(),
             max_level=16
         )
+
+    #
+    # button tests
+    #
+    def test_button(self):
+        code = textwrap.dedent("""\
+        x = 'knop'
+        x is button""")
+
+        expected = HedyTester.dedent(f"""\
+        x = 'knop'
+        create_button(x)""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=18)
+    
+    def test_if_button_is_pressed_print(self):
+        code = textwrap.dedent("""\
+        x = 'PRINT'
+        x is button
+        if PRINT is pressed 
+            print 'The button got pressed!'""")
+
+        expected = HedyTester.dedent(f"""\
+        x = 'PRINT'
+        create_button(x)
+        while not pygame_end:
+          pygame.display.update()
+          event = pygame.event.wait()
+          if event.type == pygame.QUIT:
+            pygame_end = True
+            pygame.quit()
+            break
+          if event.type == pygame.USEREVENT:
+            if event.key == 'PRINT':
+              print(f'''The button got pressed!''')
+              break""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=16)
+
+    def test_if_button_is_pressed_make_button(self):
+        code = textwrap.dedent("""\
+        x = 'PRESS'
+        x is button
+        if PRESS is pressed
+            y = 'BUT'
+            y is button""")
+
+        expected = HedyTester.dedent(f"""\
+        x = 'PRESS'
+        create_button(x)
+        while not pygame_end:
+          pygame.display.update()
+          event = pygame.event.wait()
+          if event.type == pygame.QUIT:
+            pygame_end = True
+            pygame.quit()
+            break
+          if event.type == pygame.USEREVENT:
+            if event.key == 'PRESS':
+              y = 'BUT'
+              create_button(y)
+              break""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=16)
+
+    def test_if_equality_make_button(self):
+        code = textwrap.dedent("""\
+        x = 'knop1'
+        if 'knop1' = x
+            x is button""")
+
+        expected = HedyTester.dedent(f"""\
+        x = 'knop1'
+        if convert_numerals('Latin', 'knop1') == convert_numerals('Latin', x):
+          create_button(x)""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=16)
+
+    def test_if_button_is_pressed_print_in_repeat(self):
+        code = textwrap.dedent("""\
+        x = 'but' 
+        x is button
+        repeat 3 times
+            if but is pressed
+                print 'wow'""")
+
+        expected = HedyTester.dedent(f"""\
+        x = 'but'
+        create_button(x)
+        for i in range(int('3')):
+          while not pygame_end:
+            pygame.display.update()
+            event = pygame.event.wait()
+            if event.type == pygame.QUIT:
+              pygame_end = True
+              pygame.quit()
+              break
+            if event.type == pygame.USEREVENT:
+              if event.key == 'but':
+                print(f'''wow''')
+                break
+          time.sleep(0.1)""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=16)

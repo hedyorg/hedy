@@ -247,20 +247,20 @@ commands_per_level = {
     2: ['print', 'ask', 'is', 'turn', 'forward', 'color', 'sleep'],
     3: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from'],
     4: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from'],
-    5: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed'],
-    6: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed'],
-    7: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'repeat', 'times'],
-    8: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'repeat', 'times'],
-    9: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'repeat', 'times'],
-    10: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'repeat', 'times', 'for'],
-    11: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'for', 'range', 'repeat'],
-    12: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'for', 'range', 'repeat'],
-    13: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'for', 'range', 'repeat', 'and', 'or'],
-    14: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'for', 'range', 'repeat', 'and', 'or'],
-    15: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'for', 'range', 'repeat', 'and', 'or', 'while'],
-    16: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'for', 'range', 'repeat', 'and', 'or', 'while'],
-    17: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'for', 'range', 'repeat', 'and', 'or', 'while', 'elif'],
-    18: ['is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'not in', 'else', 'for', 'pressed', 'range', 'repeat', 'and', 'or', 'while', 'elif', 'input'],
+    5: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button'],
+    6: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button'],
+    7: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'repeat', 'times'],
+    8: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'repeat', 'times'],
+    9: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'repeat', 'times'],
+    10: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'repeat', 'times', 'for'],
+    11: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat'],
+    12: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat'],
+    13: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or'],
+    14: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or'],
+    15: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or', 'while'],
+    16: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or', 'while'],
+    17: ['ask', 'is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'not in', 'if', 'else', 'pressed', 'button', 'for', 'range', 'repeat', 'and', 'or', 'while', 'elif'],
+    18: ['is', 'print', 'forward', 'turn', 'color', 'sleep', 'at', 'random', 'add', 'to', 'remove', 'from', 'in', 'if', 'not in', 'else', 'for', 'pressed', 'button', 'range', 'repeat', 'and', 'or', 'while', 'elif', 'input'],
 }
 
 command_turn_literals = ['right', 'left']
@@ -998,6 +998,9 @@ class UsesPyGame(Transformer):
     def ifpressed_else(self, args):
         return True
 
+    def assign_button(self, args):
+        return True
+
 
 class AllCommands(Transformer):
     def __init__(self, level):
@@ -1718,38 +1721,70 @@ else:
         arg1 = self.process_variable(args[1], meta.line)
         return f"{arg0} not in {arg1}"
 
-    def make_ifpressed_command(self, command):
-        if self.ifpressed_prefix_added:
-            return command
-        else:
-            command = (f"""\
+    def assign_button(self, meta, args):
+        button_name = self.process_variable(args[0], meta.line)
+        return f"""create_button({button_name})"""
+
+    def make_ifpressed_command(self, command, button = False):
+        command_suffix = (f"""\
 while not pygame_end:
   pygame.display.update()
   event = pygame.event.wait()
   if event.type == pygame.QUIT:
     pygame_end = True
     pygame.quit()
-    break
+    break""")
+
+        if button:
+            command = f"""\
+  if event.type == pygame.USEREVENT:
+{ConvertToPython.indent(command, 4)}"""
+        else:
+            command = f"""\
   if event.type == pygame.KEYDOWN:
-{command}""")
+{ConvertToPython.indent(command, 4)}"""
+
+        if self.ifpressed_prefix_added:
+            return command
+        else:
             self.ifpressed_prefix_added = True
+            return command_suffix + "\n" + command
 
-        return command
 
-    def ifpressed(self, met, args):
-        return self.make_ifpressed_command(f"""\
-    if event.unicode == '{args[0]}':
-{ConvertToPython.indent(args[1], 6)}
-      break""")
+    def ifpressed(self, meta, args):
+        button_name = self.process_variable(args[0], meta.line)
+        if (len(args[0]) > 1):
+            return self.make_ifpressed_command(f"""\
+if event.key == {button_name}:
+{ConvertToPython.indent(args[1])}
+  break""", True)
+        else:
+            return self.make_ifpressed_command(f"""\
+if event.unicode == '{args[0]}':
+{ConvertToPython.indent(args[1])}
+  break""") + "\n" + self.make_ifpressed_command(f"""\
+if event.key == {button_name}:
+{ConvertToPython.indent(args[1])}
+  break""", True)
 
-    def ifpressed_else(self, met, args):
-        return self.make_ifpressed_command(f"""\
-    if event.unicode == '{args[0]}':
-{ConvertToPython.indent(args[1], 6)}
-      break
-    else:
-{ConvertToPython.indent(args[2], 6)}
-      break""")
+    def ifpressed_else(self, meta, args):
+        if (len(args[0]) > 1):
+            button_name = self.process_variable(args[0], meta.line)
+            return self.make_ifpressed_command(f"""\
+if event.key == {button_name}:
+{ConvertToPython.indent(args[1])}
+  break
+else:
+{ConvertToPython.indent(args[2])}
+  break""", True)
+        else:
+            return self.make_ifpressed_command(f"""\
+if event.unicode == '{args[0]}':
+{ConvertToPython.indent(args[1])}
+  break
+else:
+{ConvertToPython.indent(args[2])}
+  break""")
 
 
 @v_args(meta=True)
@@ -1899,23 +1934,39 @@ class ConvertToPython_8_9(ConvertToPython_7):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
 
         all_lines = '\n'.join([x for x in args[1:]])
-        all_lines = ConvertToPython.indent(all_lines, 6)
+        all_lines = ConvertToPython.indent(all_lines)
 
-        return self.make_ifpressed_command(f"""\
-    if event.unicode == '{args[0]}':
+        if (len(args[0]) > 1):
+            button_name = self.process_variable(args[0], met.line)
+            return self.make_ifpressed_command(f"""\
+if event.key == {button_name}:
 {all_lines}
-      break""")
+  break""", True)
+        else:
+            return self.make_ifpressed_command(f"""\
+if event.unicode == '{args[0]}':
+{all_lines}
+  break""")
 
     def ifpressed_else(self, met, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
 
         all_lines = '\n'.join([x for x in args[1:]])
-        all_lines = ConvertToPython.indent(all_lines, 6)
+        all_lines = ConvertToPython.indent(all_lines)
 
-        return self.make_ifpressed_command(f"""\
-    if event.unicode == '{args[0]}':
+        if (len(args[0]) > 1):
+            button_name = self.process_variable(args[0], met.line)
+            return self.make_ifpressed_command(f"""\
+if event.key == {button_name}:
 {all_lines}
-      break""")
+  break
+    """, True)
+        else:
+            return self.make_ifpressed_command(f"""\
+if event.unicode == '{args[0]}':
+{all_lines}
+  break
+    """)
 
     def elses(self, meta, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
