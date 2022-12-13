@@ -1697,14 +1697,6 @@ class ConvertToPython_5(ConvertToPython_4):
         super().__init__(lookup, numerals_language)
         self.ifpressed_prefix_added = False
 
-    def list_access_var(self, meta, args):
-        var = escape_var(args[0])
-         # if we tried to use 'at random' in level 16 raise an exception
-        if isinstance(args[2], Tree):
-            return var + ' = random.choice(' + args[1] + ')'
-        else:
-            return var + ' = ' + args[1] + '[' + args[2] + '-1]'
-
 
 
     def ifs(self, meta, args):
