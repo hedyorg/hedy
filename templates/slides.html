@@ -2,9 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="node_modules/reveal.js/dist/reveal.css">
-    <link rel="stylesheet" href="node_modules/reveal.js/dist/theme/black.css">
     <title>Hedy - Slides</title>
+    <link rel="stylesheet" href="{{static('vendor/reveal/dist/reset.css')}}">
+    <link rel="stylesheet" href="{{static('vendor/reveal/dist/reveal.css')}}">
+    <link rel="stylesheet" href="{{static('vendor/reveal/dist/theme/black.css')}}">
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="{{static('vendor/reveal/plugin/highlight/monokai.css')}}">
 </head>
 <body>
     <div class="reveal">
@@ -13,11 +17,20 @@
           <section>Slide 2</section>
       </div>
     </div>
-		<script src="node_modules/reveal.js"></script>
- 		<script src="node_modules/reveal.js/plugin/markdown/markdown.js"></script>
- 		<script>
- 			Reveal.initialize();
- 		</script>
+    <script src="{{static('vendor/reveal/dist/reveal.js')}}"></script>
+    <script src="{{static('vendor/reveal/plugin/notes/notes.js')}}"></script>
+    <script src="{{static('vendor/reveal/plugin/markdown/markdown.js')}}"></script>
+    <script src="{{static('vendor/reveal/plugin/highlight/highlight.js')}}"></script>
+    <script>
+        // More info about initialization & config:
+        // - https://revealjs.com/initialization/
+        // - https://revealjs.com/config/
+        Reveal.initialize({
+            hash: true,
+            // Learn about plugins: https://revealjs.com/plugins/
+            plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+        });
+    </script>
 </body>
 
 </html>
