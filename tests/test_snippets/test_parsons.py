@@ -1,7 +1,7 @@
 import os
 import unittest
 import pickle
-from tests.Tester import HedyTester, Snippet, get_list_from_pickle, get_snippets_env_var
+from tests.Tester import get_list_from_pickle
 
 from parameterized import parameterized
 
