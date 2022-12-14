@@ -1643,6 +1643,7 @@ def chunk(x, size):
     """Chunk a list into groups of size at most 'size'."""
     return (x[pos:pos + size] for pos in range(0, len(x), size))
 
+
 @app.template_global()
 def hedy_link(level_nr, assignment_nr, subpage=None):
     """Make a link to a Hedy page."""
