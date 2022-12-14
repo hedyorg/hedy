@@ -547,11 +547,12 @@ def transpile_add_stats(code, level, lang_):
     username = current_user()['username'] or None
     number_of_lines = code.count('\n')
     try:
-        if hash(code + lang_) in PARSED_PROGRAMS:
-            result = PARSED_PROGRAMS.get(hash(code + lang_))
+        uniq_hash = hash(code + level + lang)
+        if uniq_hash in PARSED_PROGRAMS:
+            result = PARSED_PROGRAMS.get(uniq_hash)
         else:
             result = hedy.transpile(code, level, lang_)
-            PARSED_PROGRAMS[hash(code + lang_)] = result
+            PARSED_PROGRAMS[uniq_hash] = result
         statistics.add(
             username, lambda id_: DATABASE.add_program_stats(id_, level, number_of_lines, None))
         return result
