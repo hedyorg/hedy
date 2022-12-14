@@ -1300,9 +1300,11 @@ def profile_page(user):
 def get_research(filename):
     return send_from_directory('content/research/', filename)
 
+
 @app.route('/favicon.ico')
 def favicon(page):
     abort(404)
+
 
 @app.route('/')
 @app.route('/start')
@@ -1313,9 +1315,11 @@ def main_page():
     return render_template('main-page.html', page_title=gettext('title_start'),
                            current_page='start', content=content)
 
+
 @app.route('/my-achievements')
 def my_achievements():
     return achievements_page()
+
 
 @app.route('/learn-more')
 def learn_more():
@@ -1327,17 +1331,19 @@ def learn_more():
         current_page='learn-more',
         content=learn_more_translations)
 
+
 @app.route('/join')
 def join():
     join_translations = hedyweb.PageTranslations('join').get_page_translations(g.lang)
     return render_template('join.html', page_title=gettext('title_learn-more'),
-                            current_page='join', content=join_translations)
+                           current_page='join', content=join_translations)
+
 
 @app.route('/privacy')
 def privacy():
     privacy_translations = hedyweb.PageTranslations('privacy').get_page_translations(g.lang)
     return render_template('privacy.html', page_title=gettext('title_privacy'),
-                            content=privacy_translations)
+                           content=privacy_translations)
 
 
 @app.route('/landing-page/', methods=['GET'], defaults={'first': False})
