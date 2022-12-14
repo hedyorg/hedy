@@ -1214,12 +1214,6 @@ def internal_error(exception):
     return utils.error_page(error=500)
 
 
-@app.route('/index.html')
-@app.route('/')
-def default_landing_page():
-    return main_page('start')
-
-
 @app.route('/signup', methods=['GET'])
 def signup_page():
     if current_user()['username']:
@@ -1306,42 +1300,44 @@ def profile_page(user):
 def get_research(filename):
     return send_from_directory('content/research/', filename)
 
+@app.route('/favicon.ico')
+def favicon(page):
+    abort(404)
 
-@app.route('/<page>')
-def main_page(page):
-    if page == 'favicon.ico':
-        abort(404)
-
-    if page == "my-achievements":
-        return achievements_page()
-
-    if page == 'learn-more':
-        learn_more_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
-        return render_template(
-            'learn-more.html',
-            papers=hedy_content.RESEARCH,
-            page_title=gettext('title_learn-more'),
-            current_page='learn-more',
-            content=learn_more_translations)
-
-    if page == 'join':
-        join_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
-        return render_template('join.html', page_title=gettext('title_learn-more'),
-                               current_page='join', content=join_translations)
-
-    if page == 'privacy':
-        privacy_translations = hedyweb.PageTranslations(
-            page).get_page_translations(g.lang)
-        return render_template('privacy.html', page_title=gettext('title_privacy'),
-                               content=privacy_translations)
-
-    requested_page = hedyweb.PageTranslations(page)
-    if not requested_page.exists():
-        abort(404)
-
-    main_page_translations = requested_page.get_page_translations(g.lang)
+@app.route('/')
+@app.route('/start')
+@app.route('/index.html')
+def main_page():
+    content = hedyweb.PageTranslations('start').get_page_translations(g.lang)
+    print(content)
     return render_template('main-page.html', page_title=gettext('title_start'),
-                           current_page='start', content=main_page_translations)
+                           current_page='start', content=content)
+
+@app.route('/my-achievements')
+def my_achievements():
+    return achievements_page()
+
+@app.route('/learn-more')
+def learn_more():
+    learn_more_translations = hedyweb.PageTranslations('learn-more').get_page_translations(g.lang)
+    return render_template(
+        'learn-more.html',
+        papers=hedy_content.RESEARCH,
+        page_title=gettext('title_learn-more'),
+        current_page='learn-more',
+        content=learn_more_translations)
+
+@app.route('/join')
+def join():
+    join_translations = hedyweb.PageTranslations('join').get_page_translations(g.lang)
+    return render_template('join.html', page_title=gettext('title_learn-more'),
+                            current_page='join', content=join_translations)
+
+@app.route('/privacy')
+def privacy():
+    privacy_translations = hedyweb.PageTranslations('privacy').get_page_translations(g.lang)
+    return render_template('privacy.html', page_title=gettext('title_privacy'),
+                            content=privacy_translations)
 
 
 @app.route('/landing-page/', methods=['GET'], defaults={'first': False})

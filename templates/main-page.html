@@ -15,10 +15,10 @@
     </div>
     <class id="main_page_content" class="fancy-text">
         {% for section in content['start-sections'][:1] %}
-        <div class="border-b-4 {{loop.cycle('', 'bg-yellow-500 border-yellow-600')}} py-16">
+        <div class="{{loop.cycle('stripe-white', 'stripe-colored')}} py-16">
             <div class="center-block px-16">
-                <h2 class="font-bold {{loop.cycle('', 'text-white')}}">{{ section['title'] }}</h2>
-                <div class="{{loop.cycle('bg-blue-500', 'bg-white')}} w-36 mx-auto h-1 my-8"></div>
+                <h2 class="font-bold">{{ section['title'] }}</h2>
+                <div class="heading-underline"></div>
                 <p>{{ section['text']|commonmark }}</p>
             </div>
         </div>
@@ -37,10 +37,10 @@
         </div>
 
         {% for section in content['start-sections'][4:] %}
-        <div class="border-b-4 {{loop.cycle('', 'bg-yellow-500 border-yellow-600')}} py-16">
+        <div class="{{loop.cycle('stripe-white', 'stripe-colored')}} py-16">
             <div class="center-block px-16">
-                <h2 class="font-bold {{loop.cycle('', 'text-white')}}">{{ section['title'] }}</h2>
-                <div class="{{loop.cycle('bg-blue-500', 'bg-white')}} w-36 mx-auto h-1 my-8"></div>
+                <h2 class="font-bold">{{ section['title'] }}</h2>
+                <div class="heading-underline"></div>
                 <p>{{ section['text']|commonmark }}</p>
             </div>
         </div>
