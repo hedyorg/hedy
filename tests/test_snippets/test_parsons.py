@@ -1,12 +1,9 @@
 import os
 import unittest
 import pickle
-from tests.Tester import get_list_from_pickle
-
+from tests.Tester import get_list_from_pickle, HedyTester, Snippet
 from parameterized import parameterized
-
 import hedy
-from tests.Tester import HedyTester, Snippet
 from website.yaml_file import YamlFile
 
 # Set the current directory to the root Hedy folder

@@ -104,7 +104,7 @@ def translate_keywords(input_string_, from_lang="en", to_lang="nl", level=1):
         result = result.replace('#ENDBLOCK', '')
 
         return result
-    except Exception as E:
+    except Exception:
         return input_string_
 
 
