@@ -15,7 +15,7 @@ adventures:
                     Kód si vždy vyzkoušej pomocí zeleného tlačítka `Spustit kód` pod levým programovým polem.
 
                     Nevíš, co dál tvořit? Na dalších záložkách najdeš několik nápadů, kde si můžeš vše lépe procvičit.
-                start_code: {print} Ahoj světe!
+                start_code: "{print} Ahoj světe!"
                 example_code: "```\n{print} Ahoj!\n{print} Vítám tě v  Hedy!\n```\n"
                 example_code_2: "```\n{ask} Jaké je tvé jméno?\n{echo} Ahoj\n```\n"
                 story_text_2: "Můžete také požádat o vstup pomocí `{ask}` a zopakovat jej zpět pomocí příkazu `{echo}`.\nZkuste znovu kód vlevo.\n\nNevíte, co vytvořit? Na dalších kartách najdete nápady na programy ke sestavení.\n"
@@ -33,7 +33,7 @@ adventures:
                     ```
 
                     `{print}` stále funguje jako v úrovni 1 a už nepotřebuješ `{echo}`.
-                start_code: {print} Ahoj světe!
+                start_code: "{print} Ahoj světe!"
                 example_code: "```\nname {is} Hedy\nage {is} 15\n{print} name {is} age years old\n```\n"
                 story_text_2: "`{print}` funguje stále stejně, ale příkaz `{ask}` se změnil. I u příkazu `{ask}` musíš použít proměnnou. Bude to vypadat takhle:\n"
                 example_code_2: "```\njméno {is} {ask} Jak se jmenuješ?\n{print} Ahoj jméno\n```\n"
@@ -48,13 +48,13 @@ adventures:
                     ```
 
                     Všechny kódy úrovně 3 najdeš v levém panelu. Opět tady jsou i záložky s dalšími zadáními.
-                start_code: {print} Ahoj světe!
+                start_code: "{print} Ahoj světe!"
                 example_code: "```\nanimals {is} dog, cat, kangaroo\n{print} animals {at} {random}\n```\n"
                 story_text_2: Také můžeš přidat položky do seznamu příkazem `{add}` a odstranit je příkazem `{remove}`.
                 example_code_2: "```\nanimals {is} dog, cat, kangaroo\n{add} penguin {to_list} animals\n{remove} cat {from} animals\n{print} animals {at} {random}\n```\n"
             4:
-                start_code: {print} 'Ahoj světe!'
-                story_text: |4
+                start_code: "{print} 'Ahoj světe!'"
+                story_text: |
 
                     V úrovni 4 se mění `{ask}` a `{print}`.
 
@@ -96,7 +96,7 @@ adventures:
                 story_text_4: "Something else that works with ```if``` is ```pressed```! With pressed you can link any letter in\nthe alphabet and any number key on your keyboard to a command. If you link it, and press the key,\nsomething will happen. Try it out!\n"
                 example_code_4: "```\nif x is pressed print \"it worked!\"\n```\n"
             6:
-                start_code: {print} '5 krát 5 je ' 5 * 5
+                start_code: "{print} '5 krát 5 je ' 5 * 5"
                 story_text: |-
                     `{ask}`,` {print}` a `{if}` stále fungují jako na úrovních 5.
                      V úrovni 6 je ale něco nového, nyní můžeš také počítat!
@@ -114,11 +114,11 @@ adventures:
                 story_text_2: "Odteď uděláme změnu v ukládání čísel a slov v proměnných! Odteď můžeš používat `=` namísto  `{is}` když ukládáš například číslo nebo jméno v proměnné, tahle:\n"
                 example_code_2: "```\njméno = Hedy\nodpověď = 20 + 4\n```\n"
             7:
-                start_code: {repeat} 3 {times} {print} 'Hedy je zábavná!'
+                start_code: "{repeat} 3 {times} {print} 'Hedy je zábavná!'"
                 story_text: |-
                     `{ask}`, `{print}` a `{if}` fungují stejně jako na úrovni 5 a 6.
                     Úroveň 7 však přidává příkaz `{repeat}`, pomocí kterého lze řádek kódu provést vícekrát.
-                example_code: |4-
+                example_code: |-
 
                     ```
                     {repeat} 3 {times} {print} 'Hedy je zábavná!'
@@ -385,7 +385,7 @@ adventures:
                 story_text_2: |
                     The command `{add}` can also come in handy in your story. For example
 
-                example_code_2: |4
+                example_code_2: |
 
                     {print} He hears a sound
                     animals {is} 🐿, 🦔, 🦇, 🦉
