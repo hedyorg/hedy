@@ -38,12 +38,12 @@ def collect_snippets(path, hashes_saved=set(), only_new_snippets=False):
                                 else command['explanation'][0:10]
 
                             snippet = Snippet(
-                                    filename=file,
-                                    level=level,
-                                    field_name='command ' +
-                                    command_text_short +
-                                    ' demo_code',
-                                    code=command['demo_code'])
+                                filename=file,
+                                level=level,
+                                field_name='command ' +
+                                command_text_short +
+                                ' demo_code',
+                                code=command['demo_code'])
                             if not only_new_snippets or snippet.hash not in hashes_saved:
                                 Hedy_snippets.append(snippet)
                 except BaseException:
