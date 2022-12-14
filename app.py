@@ -549,7 +549,7 @@ def transpile_add_stats(code, level, lang_):
     username = current_user()['username'] or None
     number_of_lines = code.count('\n')
     try:
-        uniq_hash = hash(code + level + lang)
+        uniq_hash = hash(code + str(level) + lang)
         if uniq_hash in PARSED_PROGRAMS:
             result = PARSED_PROGRAMS.get(uniq_hash)
         else:
