@@ -1,12 +1,11 @@
 import os
 import unittest
 import pickle
-from tests.Tester import HedyTester, Snippet, get_list_from_pickle, get_snippets_env_var
+from tests.Tester import HedyTester, Snippet, get_list_from_pickle
 
 from parameterized import parameterized
 
 import hedy
-from tests.Tester import HedyTester, Snippet
 from website.yaml_file import YamlFile
 
 # Set the current directory to the root Hedy folder
@@ -36,10 +35,10 @@ def collect_snippets(path, hashes_saved=set(), only_new_snippets=False):
                         if not hash(code) in unique_snippets_table:
                             unique_snippets_table.add(hash(code))
                             snippet = Snippet(
-                                    filename=file,
-                                    level=level,
-                                    field_name=f"{exercise_id}",
-                                    code=code)
+                                filename=file,
+                                level=level,
+                                field_name=f"{exercise_id}",
+                                code=code)
                             if not only_new_snippets or snippet.hash not in hashes_saved:
                                 Hedy_snippets.append(snippet)
                 except BaseException:
@@ -47,8 +46,9 @@ def collect_snippets(path, hashes_saved=set(), only_new_snippets=False):
 
     return Hedy_snippets
 
+
 hashes_saved = get_list_from_pickle('parson_hashes.pkl')
-only_new_snippets = True #  get_snippets_env_var()
+only_new_snippets = True  # get_snippets_env_var()
 
 Hedy_snippets = [(s.name, s) for s in collect_snippets(
     path='../../content/parsons',

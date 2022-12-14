@@ -14,7 +14,9 @@ import utils
 from hedy_content import ALL_KEYWORD_LANGUAGES, KEYWORDS
 from app import translate_error, app
 from flask_babel import force_locale
-import pickle, _pickle
+import pickle
+import _pickle
+
 
 class Snippet:
     def __init__(self, filename, level, code, field_name=None, adventure_name=None, error=None, language=None):
@@ -249,7 +251,7 @@ class HedyTester(unittest.TestCase):
             pass
         except OSError:
             return True  # programs with ask cannot be tested with output :(
-        except Exception as E:
+        except Exception:
             return False
         return True
 
@@ -361,15 +363,18 @@ class HedyTester(unittest.TestCase):
 
         return snippets
 
+
 def get_snippets_env_var():
     only_new_snippets = os.getenv('only_new_snippets')
     if only_new_snippets is None:
-        only_new_snippets = False  # set default in case env var is not set (f.e. on Windows, or when running form the UI)
+        # set default in case env var is not set (f.e. on Windows, or when running form the UI)
+        only_new_snippets = False
     elif only_new_snippets == 1 or only_new_snippets == '1':
         only_new_snippets = True
     else:  # in case an invalid one is given
         only_new_snippets = False
     return only_new_snippets
+
 
 def get_list_from_pickle(filename):
     try:

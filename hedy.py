@@ -1725,7 +1725,7 @@ else:
         button_name = self.process_variable(args[0], meta.line)
         return f"""create_button({button_name})"""
 
-    def make_ifpressed_command(self, command, button = False):
+    def make_ifpressed_command(self, command, button=False):
         command_suffix = (f"""\
 while not pygame_end:
   pygame.display.update()
@@ -1749,7 +1749,6 @@ while not pygame_end:
         else:
             self.ifpressed_prefix_added = True
             return command_suffix + "\n" + command
-
 
     def ifpressed(self, meta, args):
         button_name = self.process_variable(args[0], meta.line)
@@ -2649,7 +2648,6 @@ def preprocess_ifs(code, lang='en'):
                 if contains(c, line):
                     return True
             return False
-
 
     for i in range(len(lines) - 1):
         line = lines[i]
