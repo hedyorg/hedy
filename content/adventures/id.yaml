@@ -22,7 +22,7 @@ adventures:
                 story_text_3: "Mari kita mulai! Tidak tahu apa yang harus dibuat? Di tab berikutnya anda akan menemukan ide untuk membuat program.\n"
             2:
                 story_text: |-
-                    Pada level 2, kita belajar hal baru. Kamu dapat menamai sebuah kata dengan `is`.
+                    Pada level 2, kita belajar hal baru. Kamu dapat menamai sebuah kata dengan `{is}`.
 
                     Jika kamu menggunakan kode `nama is Hedy`, kamu dapat menggunakan 'nama' tersebut dimanapun pada kodemu dan semuanya akan digantikan dengan 'Hedy'.
 
@@ -60,7 +60,7 @@ adventures:
 
                     Kamu harus memasukkan teks yang mau kamu tampilkan diantara tanda kutip satu.
 
-                    Ini berguna, karena sekarang kamu bisa menampilkan semua kata yang kamu mau, termasuk kata yang sebelumnya digunakan untuk menyimpan sesuatu dengan `is`.
+                    Ini berguna, karena sekarang kamu bisa menampilkan semua kata yang kamu mau, termasuk kata yang sebelumnya digunakan untuk menyimpan sesuatu dengan `{is}`.
 
                     Kebanyakan bahasa pemrograman juga menggunakan tanda kutip ketika menampilkan, jadi sebenarnya kita satu langkah lebih dekat dengan pemrograman yang sebenarnya!
 
@@ -76,7 +76,7 @@ adventures:
                 story_text: |-
                     Perintah `ask` dan `print` tetap sama seperti pada level 4.
 
-                    Pada level 5, ada hal baru, `if`! Dengan `if` kamu bisa memilih antara dua pilihan.
+                    Pada level 5, ada hal baru, `{if}`! Dengan `{if}` kamu bisa memilih antara dua pilihan.
 
                     ```
                     nama is ask 'siapa nama kamu?'
@@ -86,8 +86,8 @@ adventures:
                     Kode ini menampilkan keren jika kamu memasukkan Hedy sebagai nama, dan boo jika kamu memasukkan yang lain.
 
                     ## Tips
-                    Terkadang kode dengan `if` bisa menjadi sangat panjang dan tidak cukup menggunakan satu baris <br> 
-                    Kamu dapat memisah kodenya menjadi dua baris; baris kedua dimulai dengan `else` seperti ini:
+                    Terkadang kode dengan `{if}` bisa menjadi sangat panjang dan tidak cukup menggunakan satu baris <br>
+                    Kamu dapat memisah kodenya menjadi dua baris; baris kedua dimulai dengan `{else}` seperti ini:
                     ```
                     nama is ask 'siapa nama kamu?'
                     if nama is Hedy print 'keren' 
@@ -103,11 +103,11 @@ adventures:
                 example_code_3: "```\npretty_colors {is} hijau, kuning\nfavorite_color {is} {ask} 'Apa warna favoritmu?'\n{if} favorite_color {in} pretty_colors {print} 'cantik!'\n{else} {print} 'meh'\n```\n"
                 story_text_2: "Terkadang kode dengan `{if}` menjadi sangat panjang dan tidak sesuai dengan baris. <br> Anda juga dapat membagi kode menjadi dua baris, mulai baris kedua di `{else}` seperti ini:\n"
                 example_code_4: "```\nif x is pressed print \"it worked!\"\n```\n"
-                story_text_4: "Something else that works with ```if``` is ```pressed```! With pressed you can link any letter in\nthe alphabet and any number key on your keyboard to a command. If you link it, and press the key,\nsomething will happen. Try it out!\n"
+                story_text_4: "Something else that works with ```{if}``` is ```pressed```! With pressed you can link any letter in\nthe alphabet and any number key on your keyboard to a command. If you link it, and press the key,\nsomething will happen. Try it out!\n"
             6:
                 start_code: print '5 kali 5 adalah ' 5 * 5
                 story_text: |-
-                    `ask`, `print`, dan `if` berfungsi sama persis dengan yang ada pada level 4 dan level 5.
+                    `ask`, `print`, dan `{if}` berfungsi sama persis dengan yang ada pada level 4 dan level 5.
                     Tapi di level 6 ada sesuatu yang baru, kamu sekarang bisa melakukan perhitungan matematika.
 
                     Pada level 6, kode baru sudah ditambahkan untuk perhitungan matematika.
@@ -128,8 +128,8 @@ adventures:
             7:
                 start_code: repeat 3 times print 'Hedy itu menyenangkan!'
                 story_text: |-
-                    `ask`, `print`, dan `if` berfungsi sama persis dengan yang ada pada level 6.
-                    Tapi level 7 menambahkan perintah `repeat`. Perintah repeat dapat digunakan untuk menjalankan satu baris kode beberapa kali
+                    `ask`, `print`, dan `{if}` berfungsi sama persis dengan yang ada pada level 6.
+                    Tapi level 7 menambahkan perintah `{repeat}`. Perintah repeat dapat digunakan untuk menjalankan satu baris kode beberapa kali
 
                     ```
                     repeat 3 times print 'Hedy itu menyenangkan!'
@@ -141,7 +141,7 @@ adventures:
                         print 'Halo semua'
                         print 'Ini akan ditampilkan lima kali'
                 story_text: |-
-                    `ask` dan `print` tetap berfungsi sama seperti sebelumnya. Tapi `if` dan `repeat` berubah. 
+                    `ask` dan `print` tetap berfungsi sama seperti sebelumnya. Tapi `{if}` dan `{repeat}` berubah.
                     Kamu sekarang dapat mengeksekusi kumpulan kode secara bersamaan, tapi kamu harus memberikan indentasi pada kode tersebut.
                     Indentasi berarti memberikan empat spasi diawal baris. Ini juga berlaku ketika kamu hanya mau mengeksekusi satu baris kode saja.
 
@@ -160,8 +160,8 @@ adventures:
                         else
                             print 'pizza lebih enak'
                 story_text: |-
-                    Pada level ini kamu tidak hanya bisa menggunakan beberapa baris baru untuk  `if` and `repeat`, namun juga dapat menggabungkan mereka!
-                    Pada contoh kamu lihat sebuah perintah `if` didalam perintah `repeat`. Kamu juga dimungkinkan untuk melakukan sebaliknya, dan `if` juga boleh didalam `if` dan `repeat` didalam `repeat`.
+                    Pada level ini kamu tidak hanya bisa menggunakan beberapa baris baru untuk  `{if}` and `{repeat}`, namun juga dapat menggabungkan mereka!
+                    Pada contoh kamu lihat sebuah perintah `{if}` didalam perintah `{repeat}`. Kamu juga dimungkinkan untuk melakukan sebaliknya, dan `{if}` juga boleh didalam `{if}` dan `{repeat}` didalam `{repeat}`.
                     Cobalah!
 
                     ```
@@ -179,8 +179,8 @@ adventures:
                     for hewan in hewanhewan
                       print 'Aku suka ' hewan
                 story_text: |
-                    Pada level ini kita akan belajar perintah `for`. Dengan `for` kamu dapat membuat sebuah daftar dan mengakses semua isinya.
-                    `for` membentuk sebuah blok seperti `repeat` dan `if` jadi semua baris untuk aksi harus diawali dengan beberapa spasi.
+                    Pada level ini kita akan belajar perintah `{for}`. Dengan `{for}` kamu dapat membuat sebuah daftar dan mengakses semua isinya.
+                    `{for}` membentuk sebuah blok seperti `{repeat}` dan `{if}` jadi semua baris untuk aksi harus diawali dengan beberapa spasi.
 
                     ```
                     hewanhewan is anjing, kucing, ikan
@@ -192,7 +192,7 @@ adventures:
                 start_code: |-
                     for pembilang in range 1 to 5
                         print pembilang
-                story_text: "`print` berfungsi sama namun `repeat` kali ini diganti dengan `for`! Kamu sekarang dapat menulis `for pembilang in range 1 to 5` dan menggunakan `pembilang` pada program kamu. Cobalah lihat apa yang terjadi! Ingat untuk menggunakan indentasi sesudah perintah `for` dan `if` (Ini artinya mengawali baris dengan empat spasi)."
+                story_text: "`print` berfungsi sama namun `{repeat}` kali ini diganti dengan `{for}`! Kamu sekarang dapat menulis `for pembilang in range 1 to 5` dan menggunakan `pembilang` pada program kamu. Cobalah lihat apa yang terjadi! Ingat untuk menggunakan indentasi sesudah perintah `{for}` dan `{if}` (Ini artinya mengawali baris dengan empat spasi)."
                 example_code: "```\nfor counter in range 1 to 5\n    print counter\n```\n"
             12:
                 start_code: |-
@@ -202,14 +202,14 @@ adventures:
                     Sejauh ini, Hedy tidak mengijinkan penggunaan angka desimal seperti 1.5, tapi sekarang bisa.
                     Perlu diingat bahwa komputer menggunakan titik (.) untuk menandai angka desimal.
 
-                    Pada level ini kamu juga perlu menggunakan kutip satu ketika menyimpan teks dengan `is`:
+                    Pada level ini kamu juga perlu menggunakan kutip satu ketika menyimpan teks dengan `{is}`:
 
                     ```
                     nama = 'Hedy'
                     print 'Halo ' nama
                     ```
 
-                    Untuk angka, kamu tidak perlu menggunakan kutip satu untuk `is`:
+                    Untuk angka, kamu tidak perlu menggunakan kutip satu untuk `{is}`:
                     ```
                     skor = 25
                     print 'Kamu mendapatkan ' skor
@@ -231,7 +231,7 @@ adventures:
                     age = ask 'what is your age?'
                     if name is 'Hedy' and age is 2
                         print 'You are the real Hedy!'
-                story_text: "Kita sekarang akan belajar menggunakan perintah `and` dan `or`! Jika kamu mau mengecek apakah dua kondisi terpenuhi, kamu tidak perlu menggunakan dua `if`. Kamu dapat menggunakan `and` untuk menggabungkan kedua kondisi, sisi kiri dan kanan dari `and` harus terpenuhi keduanya. Kamu dapat menggunakan `or` jika hanya salah satu dari dua kondisi yang perlu dipenuhi. "
+                story_text: "Kita sekarang akan belajar menggunakan perintah `and` dan `or`! Jika kamu mau mengecek apakah dua kondisi terpenuhi, kamu tidak perlu menggunakan dua `{if}`. Kamu dapat menggunakan `and` untuk menggabungkan kedua kondisi, sisi kiri dan kanan dari `and` harus terpenuhi keduanya. Kamu dapat menggunakan `or` jika hanya salah satu dari dua kondisi yang perlu dipenuhi. "
                 example_code: "```\nname = ask 'what is your name?'\nage = ask 'what is your age?'\nif name is 'Hedy' and age is 2\n    print 'You are the real Hedy!'\n```\n"
             14:
                 start_code: |-
@@ -350,7 +350,7 @@ adventures:
                 story_text: |-
                     ## Cerita
                     Dalam sebuah cerita, seseorang dapat mengucapkan kumpulan kata beberapa kali. Sebagai contoh, ketika seseorang meminta bantuan atau menyanyikan sebuah lagu.
-                    Kamu dapat melakukan pengulangan tersebut pada level 5 dengan perintah `repeat`.
+                    Kamu dapat melakukan pengulangan tersebut pada level 5 dengan perintah `{repeat}`.
 
                 example_code: |
                     ```
@@ -372,7 +372,7 @@ adventures:
                     - Akhir yang bahagia: Dia mengambil pedangnya dan monster tersebut lari
                     - Akhir yang buruk: Monster tersebut memakan sang putri
 
-                    Kamu juga dapat menggunakan nama yang dimasukkan. Ini sama dengan yang ada di level 3. Kamu dapat menggabungkan ini dengan `if` dan akhirnya sebuah cerita dengan dua alternatif akhir jadi!
+                    Kamu juga dapat menggunakan nama yang dimasukkan. Ini sama dengan yang ada di level 3. Kamu dapat menggabungkan ini dengan `{if}` dan akhirnya sebuah cerita dengan dua alternatif akhir jadi!
 
                 example_code: |
                     ```
@@ -503,7 +503,7 @@ adventures:
                     Kamu sekarang dapat mengulang baris 2 ke baris 6 sebanyak yang kamu mau dengan menyalin ulang baris-baris tersebut.
 
                     # Melihat kedepan
-                    Pada level 5, kita belajar untuk mengulang satu baris dengan `repeat` seperti ini:
+                    Pada level 5, kita belajar untuk mengulang satu baris dengan `{repeat}` seperti ini:
 
                     ` repeat 3 times print 'Baby Shark Tutududududu`
 
@@ -519,7 +519,7 @@ adventures:
                     Baby Shark tututudutudu <br>
                     Baby Shark
 
-                    Kamu dapat membuat lagu ini menjadi lebih pendek dengan sebuah `repeat`! Bisakah kamu menyelesaikan kodenya?
+                    Kamu dapat membuat lagu ini menjadi lebih pendek dengan sebuah `{repeat}`! Bisakah kamu menyelesaikan kodenya?
 
                 example_code: |
                     ```
@@ -598,7 +598,7 @@ adventures:
                 story_text: |-
                     ## Mari menggambar
                     Sekarang karena kita sudah bisa mengulang beberapa baris, kita bisa menggambar bentuk dengan lebih mudah.
-                    Kita hanya perlu mengisi sudut sekali dan menggunakan variabel tersebut dalam `repeat`.
+                    Kita hanya perlu mengisi sudut sekali dan menggunakan variabel tersebut dalam `{repeat}`.
 
                 example_code: |
                     ```
@@ -621,7 +621,7 @@ adventures:
             7:
                 story_text: |-
                     ## Mari menggambar
-                    Pada level 5 kamu bisa mengulangi satu baris kode menggunakan `repeat`
+                    Pada level 5 kamu bisa mengulangi satu baris kode menggunakan `{repeat}`
 
                 example_code: |
                     ```
@@ -660,7 +660,7 @@ adventures:
             5:
                 story_text: |-
                     ## Mari menggambar
-                    Pada level 4 kita akan mengambil sebuah pilihan dengan `if`. Sebagai contoh: mengambil satu dari kumpulan bentuk.
+                    Pada level 4 kita akan mengambil sebuah pilihan dengan `{if}`. Sebagai contoh: mengambil satu dari kumpulan bentuk.
 
                 example_code: |
                     ```
@@ -746,7 +746,7 @@ adventures:
             6:
                 story_text: |-
                     ## Cuci piring
-                    Dengan `repeat`, kamu dapat mengulang bagian-bagian kode. Kamu dapat melakukan ini untuk menentukan siapa yang akan mencuci piring selama seminggu kedepan.
+                    Dengan `{repeat}`, kamu dapat mengulang bagian-bagian kode. Kamu dapat melakukan ini untuk menentukan siapa yang akan mencuci piring selama seminggu kedepan.
 
                 example_code: |
                     ```
@@ -759,7 +759,7 @@ adventures:
             5:
                 story_text: |-
                     ## Cuci piring
-                    Dengan `if` kamu bisa melakukan banyak hal menyenangkan dalam pengambilan pilihan dalam program tersebut. Kamu dapat membuat program kamu merespon pilihan yang sudah diberikan oleh komputer.
+                    Dengan `{if}` kamu bisa melakukan banyak hal menyenangkan dalam pengambilan pilihan dalam program tersebut. Kamu dapat membuat program kamu merespon pilihan yang sudah diberikan oleh komputer.
 
                     Dapatkah kamu melengkapi kode ini agar menampilkan 'Yahh' ketika yang dipilih adalah giliranmu dan 'Yeah!' untuk yang lainnya. 
                     Jangan lupakan tanda kutip satu!
@@ -816,7 +816,7 @@ adventures:
             7:
                 story_text: |-
                     ## Dadu
-                    Kamu juga dapat membuat dadu kembali di level 5. Dengan `repeat` kamu dapat dengan mudah melempar dadu beberapa kali.
+                    Kamu juga dapat membuat dadu kembali di level 5. Dengan `{repeat}` kamu dapat dengan mudah melempar dadu beberapa kali.
                     Cobalah lengkapi kode berikut! Bagian dengan garis bawah harus berisi beberapa perintah dan karakter.
 
                     Tapi mungkin kamu mau membuat dadu baru. Tentu kamu boleh melakukannya!
@@ -854,7 +854,7 @@ adventures:
             5:
                 story_text: |-
                     ## Dadu
-                    Kamu juga dapat membuat dadu di level 4 dengan menggunakan `if`
+                    Kamu juga dapat membuat dadu di level 4 dengan menggunakan `{if}`
                     Lengkapi kode berikut agar kode mengatakan 'Kamu dapat berhenti melempar' ketika kamu mendapatkan cacing sebagai hasil lemparan.
 
                     Tapi mungkin kamu mau membuat dadu dari permainan yang lain. Itu juga tidak masalah!
@@ -935,10 +935,10 @@ adventures:
                 story_text: |-
                     ## Batu, gunting, kertas
                     Pada level 4 kamu bisa menentukan siapa yang menang. 
-                    Untuk hal itu, kamu memerlukan perintah `if`
+                    Untuk hal itu, kamu memerlukan perintah `{if}`
 
                     Simpan pilihan kamu dengan sebuah nama favoritmu dan pilihan komputer dengan nama pilihan komputer.
-                    Lalu kamu bisa menggunakan `if` untuk melihat apakah kedua pilihan tersebut sama atau berbeda.
+                    Lalu kamu bisa menggunakan `{if}` untuk melihat apakah kedua pilihan tersebut sama atau berbeda.
                     Dapatkah kamu menyelesaikan kode ini?
 
                 example_code: |
@@ -973,7 +973,7 @@ adventures:
 
                     Pada level 2 kamu bisa memasukkan daftar pilihan dan memilih dari sana.
 
-                    Kamu pertama-tama perlu membuat daftar dengan `is`. Lalu kamu dapat meminta komputer untuk memilih sesuatu dari daftar tersebut dengan `at random`.
+                    Kamu pertama-tama perlu membuat daftar dengan `{is}`. Lalu kamu dapat meminta komputer untuk memilih sesuatu dari daftar tersebut dengan `at random`.
 
                     Sebagai contoh, kamu dapat membuat komputer memilih antara batu, gunting, atau kertas.
 
@@ -1156,7 +1156,7 @@ adventures:
             7:
                 story_text: |-
                     ## Rumah makan
-                    Pada level 5 kamu telah belajar bagaimana menggunakan perintah `repeat` untuk mengulang satu baris kode beberapa kali.
+                    Pada level 5 kamu telah belajar bagaimana menggunakan perintah `{repeat}` untuk mengulang satu baris kode beberapa kali.
                     Kamu dapat menggunakan itu di rumah makan kamu dengan cara menanyakan ke beberapa orang apa yang mau mereka makan, seperti ini:
 
                     ```
@@ -1230,7 +1230,7 @@ adventures:
             5:
                 story_text: |-
                     ## Rumah makan
-                    Pada level 4 perintah `if` memungkinkan kamu untuk menanyakan pertanyaan ke pembeli dan memberi respon yang berbeda bergantung pada jawaban yang diberikan.
+                    Pada level 4 perintah `{if}` memungkinkan kamu untuk menanyakan pertanyaan ke pembeli dan memberi respon yang berbeda bergantung pada jawaban yang diberikan.
                     Pada contoh dibawah, kamu dapat melihat bahwa kamu dapat menanyakan pembeli apakah mereka ingin tahu menu spesial dan Hedy dapat merespon sesuai dengan jawaban yang diberikan.
 
                 example_code: |
@@ -1363,8 +1363,8 @@ adventures:
             8:
                 story_text: |-
                     ## Peramal
-                    Pada level 5 kamu telah belajar bagaimana menggunakan perintah `repeat` untuk membuat sang peramal menjawab tiga pertanyaan sekaligus, namun kita masih tidak bisa menampilkan pertanyaan-pertanyaannya sekaligus.
-                    Pada level 7 masalah ini dapat diselesaikan, karena cara baru dalam penggunaan perintah `repeat`.
+                    Pada level 5 kamu telah belajar bagaimana menggunakan perintah `{repeat}` untuk membuat sang peramal menjawab tiga pertanyaan sekaligus, namun kita masih tidak bisa menampilkan pertanyaan-pertanyaannya sekaligus.
+                    Pada level 7 masalah ini dapat diselesaikan, karena cara baru dalam penggunaan perintah `{repeat}`.
                     Pada contoh berikut kamu dapat membuat sang peramal menanyakan 3 pertanyaan dan juga menampilkannya sekaligus!
 
                 example_code: |
@@ -1381,7 +1381,7 @@ adventures:
             7:
                 story_text: |-
                     ## Peramal
-                    Pada level 6 kamu dapat menggunakan perintah `repeat` untuk membuat mesin kamu meramal beberapa kali
+                    Pada level 6 kamu dapat menggunakan perintah `{repeat}` untuk membuat mesin kamu meramal beberapa kali
 
                 example_code: |
                     ```
@@ -1398,10 +1398,10 @@ adventures:
                     Artinya kamu tidak bisa menanyakan dengan cara seperti ini.
 
                     Dengan menggunakan tiga variabel (misal 'pertanyaan1', 'pertanyaan2' dan 'pertanyaan3') kamu dapat memecahkan masalah ini dan menampilkan semua pertanyaan.
-                    Ini berarti kamu hanya dapat menggunakan perintah `repeat` untuk jawaban. Kamu harus menanyakan dan menampilkan semua pertanyaan secara terpisah.
+                    Ini berarti kamu hanya dapat menggunakan perintah `{repeat}` untuk jawaban. Kamu harus menanyakan dan menampilkan semua pertanyaan secara terpisah.
                     Dapatkah kamu melakukannya?
 
-                    Pada level 7 tampilan perintah `repeat` akan berubah, memungkinkan kamu untuk mengulang beberapa baris sekaligus.
+                    Pada level 7 tampilan perintah `{repeat}` akan berubah, memungkinkan kamu untuk mengulang beberapa baris sekaligus.
                 start_code: print 'Halo, aku Hedy sang peramal!'
                 story_text_2: "## Challenge\nAs you can see, the questions aren't printed in this example. That's because the variable `question` was changed 3 times.\nEvery time the player fills in the new answer, Hedy overwrites the previous one, so the first answer the player gave is forgotten.\nThis means you can't print all the questions this way.\n\nBy using 3 different variables instead of 1 (for example `question_1` , `question_2` and `question_3`), you could solve the problem and print the questions.\nThis does mean that you can only use `{repeat}` for the answers, and you will have to ask and print all the questions separately.\nCan you do it?\n\nIn the upcoming levels the layout of {repeat} command will change, which enables you to repeat multiple lines at once.\n"
             6:
@@ -1441,7 +1441,7 @@ adventures:
                 story_text: |-
                     ## Peramal
                     Pada level 4 kamu akan belajar untuk membuat kemungkinan jawabannya sesuai dengan keinginanmu, ketika menggunakan jasa sang peramal!
-                    Dengan menggunakan `if` dan `else` kamu dapat memastikan bahwa kamu akan mendapatkan ramalan yang baik walaupun orang lain belum tentu.
+                    Dengan menggunakan `{if}` dan `{else}` kamu dapat memastikan bahwa kamu akan mendapatkan ramalan yang baik walaupun orang lain belum tentu.
                     Cek contoh berikut dan temukan caranya.
 
                 example_code: |
@@ -1554,7 +1554,7 @@ adventures:
             11:
                 story_text: |-
                     ## Rumah berhantu
-                    Pada level 8 kita telah mengubah perintah `repeat` dan menambahkan beberapa baris ke kode permainan rumah berhantu kita, yang menginformasikan ke pemain lokasi ruangan mereka.
+                    Pada level 8 kita telah mengubah perintah `{repeat}` dan menambahkan beberapa baris ke kode permainan rumah berhantu kita, yang menginformasikan ke pemain lokasi ruangan mereka.
 
                 example_code: |
                     ```
@@ -1728,7 +1728,7 @@ adventures:
 #                story_text: |-
 #                    ## Apa berikutnya?
 #                    Kode kamu sekarang terlihat semakin mirip dengan kode Python. Bagus! Pada level 9 kamu akan belajar satu langkah lagi untuk membuat kode kamu semakin mirip Python.
-#                    Hal menarik lain yang akan kamu pelajari di level 9 adalah perintah baru. Pada level 8, kamu mungkin sadar bahwa kamu kadang perlu menggunakan perintah `else` lebih dari satu.
+#                    Hal menarik lain yang akan kamu pelajari di level 9 adalah perintah baru. Pada level 8, kamu mungkin sadar bahwa kamu kadang perlu menggunakan perintah `{else}` lebih dari satu.
 #                    Sebagai contoh:
 #                    ```
 #                    print 'Apa menu untuk makan malam hari ini?'
@@ -1739,14 +1739,14 @@ adventures:
 #                    else
 #                        print 'Wew...'
 #                    ```
-#                    Kode ini sebaiknya memiliki dua perintah `else` jadi kamu dapat membuat satu respon eksklusif untuk brokoli dan satu lagi untuk kacang hijau. Level 9 mengenalkan perintah baru `elif` yang dapat memfasilitasi hal ini!
+#                    Kode ini sebaiknya memiliki dua perintah `{else}` jadi kamu dapat membuat satu respon eksklusif untuk brokoli dan satu lagi untuk kacang hijau. Level 9 mengenalkan perintah baru `elif` yang dapat memfasilitasi hal ini!
 #                    Maka mari kita cek level berikutnya!
 #                start_code: print 'Ayo bergerak ke level berikutnya!'
             8:
                 story_text: |-
                     ## Apa berikutnya?
                     Kamu telah mencapai akhir level 7. Kamu hebat! Kamu sekarang akan memasuki level 8. Pada level-level akhir, Hedy akan terfokus pada pengajaran terkait bahasa pemrograman Python.
-                    Python tidak memiliki perintah `repeat`, tapi dia punya perintah yang serupa.
+                    Python tidak memiliki perintah `{repeat}`, tapi dia punya perintah yang serupa.
                     Apakah kamu penasaran untuk mengetahui bagaimana mengulang di bahasa pemrograman sesungguhnya? Cepatlah ke level 8 dan lihat!
                 start_code: print 'Ayo bergerak ke level berikutnya!'
                 example_code: "```\nanswer = {ask} 'Would you like to go to the next level?'\n{if} answer {is} yes\n    {print} 'Great! You can use the {repeat} commando in the {if} command!'\n    {print} 'Hooray!'\n    {print} 'Hooray!'\n    {print} 'Hooray!'\n{else}\n    {print} 'Okay, you can stay here for a little longer!'\n```\n"
@@ -1764,7 +1764,7 @@ adventures:
             6:
                 story_text: |-
                     ## Apa berikutnya?
-                    Bagus! Kamu telah mencapai level 5, artinya kamu telah berlatih menggunakan perintah `if` dan `else`. Kamu mungkin menyadari bahwa kode kamu semakin panjang. Misal ketika kamu perlu membuat program lagu ulang tahun.
+                    Bagus! Kamu telah mencapai level 5, artinya kamu telah berlatih menggunakan perintah `{if}` dan `{else}`. Kamu mungkin menyadari bahwa kode kamu semakin panjang. Misal ketika kamu perlu membuat program lagu ulang tahun.
 
                      ```
                      print 'selamat ulang tahun'
@@ -1774,13 +1774,13 @@ adventures:
 
                      ```
 
-                    Kodenya cukup panjang walau sebagian besar hanya mengulang kata-kata yang sama. Untungnya level 6 memiliki solusi dengan perintah `repeat`, yang memungkinkan kamu mengulang satu baris kode beberapa kali.
+                    Kodenya cukup panjang walau sebagian besar hanya mengulang kata-kata yang sama. Untungnya level 6 memiliki solusi dengan perintah `{repeat}`, yang memungkinkan kamu mengulang satu baris kode beberapa kali.
                 start_code: print 'Ke level berikutnya!'
                 example_code: " ```\n {print} 'happy birthday to you'\n {print} 'happy birthday to you'\n {print} 'happy birthday dear Hedy'\n {print} 'happy birthday to you'\n ```\n"
             5:
                 story_text: |-
                     ## Apa berikutnya?
-                    Sekarang kamu sudah mencapai level 4, jadi kamu sudah belajar perintah `ask` dan `if`. Sebagai contoh, kamu bisa menanyakan pembeli apa yang mau mereka makan.
+                    Sekarang kamu sudah mencapai level 4, jadi kamu sudah belajar perintah `ask` dan `{if}`. Sebagai contoh, kamu bisa menanyakan pembeli apa yang mau mereka makan.
                     Apa yang tidak bisa kamu lakukan adalah: menghitung total harga dari semua makanan yang dipesan.
 
                     Level 5 memungkinkan kamu untuk menggunakan penambahan, pengurangan, dan perkalian di program kamu.
@@ -1795,7 +1795,7 @@ adventures:
                     Pada level 2 dan 3 kamu telah belajar menggunakan perintah `at random` yang memungkinkan permainan kamu berbeda setiap kali kamu memainkannya.
                     Tapi itu tidak terlalu interaktif, pemain tidak berpengaruh terhadap apa yang terjadi di permainan.
 
-                    Pada level 4 kamu akan belajar menggunakan perintah `if` yang memungkinkan kamu untuk memberikan respon berbeda di program kamu. Dengan cara ini kamu bisa membuat program kata kunci untuk komputer misalnya. 
+                    Pada level 4 kamu akan belajar menggunakan perintah `{if}` yang memungkinkan kamu untuk memberikan respon berbeda di program kamu. Dengan cara ini kamu bisa membuat program kata kunci untuk komputer misalnya.
                     Maka, mari kita lihat level 4.
                 start_code: print 'Ayo bergerak ke level berikutnya!'
             3:

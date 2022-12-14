@@ -75,7 +75,7 @@ adventures:
                 story_text_3: "## Listák\nHa el szeretnénk dönteni, hogy valami benne van-e egy listában, mostantól használhatjuk az `{in}` parancsot.\nEz a program kiírja, hogy szép! ha zöldet vagy sárgát választasz, és elégedetlen, ha mást.\n"
                 example_code_3: "```\nszép_színek {is} zöld, sárga\nkedvenc_szín {is} {ask} \"Mi a kedvenc színed?\"\n{if} kedvenc_szín {in} szép_színek {print} \"szép!\"\n{else} {print} \"ajaj\"\n```\n"
                 example_code_4: "```\nif x is pressed print \"it worked!\"\n```\n"
-                story_text_4: "Something else that works with ```if``` is ```pressed```! With pressed you can link any letter in\nthe alphabet and any number key on your keyboard to a command. If you link it, and press the key,\nsomething will happen. Try it out!\n"
+                story_text_4: "Something else that works with ```{if}``` is ```pressed```! With pressed you can link any letter in\nthe alphabet and any number key on your keyboard to a command. If you link it, and press the key,\nsomething will happen. Try it out!\n"
             6:
                 start_code: "{print} \"5-ször 5 az \" 5 * 5"
                 story_text: |
@@ -363,7 +363,7 @@ adventures:
                     - Boldog befejezés: Előveszi a kardját, és a szörny gyorsan elszalad
                     - Rossz befejezés: A szörny megeszi a hercegnőt
                     Biztosíthatod azt is, hogy egy név újra beírható legyen. Ez ugyanúgy működik, mint a 3.
-                    szinten. Kombinálhatod ezt egy `if`-fel, és akkor már készítettél is egy egész programot!
+                    szinten. Kombinálhatod ezt egy `{if}`-fel, és akkor már készítettél is egy egész programot!
                 start_code: print 'Itt lesz hamarosan a történeted!'
                 example_code: |-
                     ```
@@ -484,7 +484,7 @@ adventures:
                     Baby Shark tututudutudu <br>
                     Baby Shark
 
-                    ezt a dalt sokkal rövidebbé teheted egy `repeat` utasítással! Be tudod fejezni a kódot?
+                    ezt a dalt sokkal rövidebbé teheted egy `{repeat}` utasítással! Be tudod fejezni a kódot?
 
                     A Baby Shark után természetesen más dalokat is programozhat. Sok dal van ismétléssel.
                 example_code: |-
@@ -502,7 +502,7 @@ adventures:
                     Most megismételheted a 2–9. Sort, ahányszor csak akarod, a sorok másolásával.
 
                     # Előretekintve
-                    Az 5. szinten megtanultunk 1 sort megismételni az `repeat` szóval, így:
+                    Az 5. szinten megtanultunk 1 sort megismételni az `{repeat}` szóval, így:
 
                     * repeat 3 times print 'Baby Shark Tutududududu'
 
@@ -576,7 +576,7 @@ adventures:
                 start_code: print 'Ki mosogat?'
                 story_text: |-
                     ## Mosogatóprogram az 6. szinten
-                    Az `repeat` segítségével megismételheted a kódrészleteket. Ennek segítségével
+                    Az `{repeat}` segítségével megismételheted a kódrészleteket. Ennek segítségével
                     kiszámíthatod, hogy kik fogj mosogatni az egész héten.
                 example_code: |-
                     ```
@@ -610,7 +610,7 @@ adventures:
                 start_code: print 'Ki mosogat?'
                 story_text: |-
                     ## Mosogatóprogram
-                    Az `if` segítségével most szórakoztatóbbá teheted a választást a programban.
+                    Az `{if}` segítségével most szórakoztatóbbá teheted a választást a programban.
                     Megkérheted a programot, hogy válaszoljon a számítógép választására.
                     Befejezheted a kódot úgy, hogy „túl rosszul” írja ki, amikor rajtad a sor, és egyébként
                     „igen!”?
@@ -676,7 +676,7 @@ adventures:
             7:
                 story_text: |-
                     ## Kocka az 6. szinten
-                    Az 5. szinten ismét készíthetsz kockát . A `repeat` kóddal könnyedén dobhatsz egy
+                    Az 5. szinten ismét készíthetsz kockát . A `{repeat}` kóddal könnyedén dobhatsz egy
                     csomó dobókockát.
                     Próbáld meg befejezni a mintakódot! A kötőjeleknek több parancsot és karaktert
                     kell tartalmazniuk.
@@ -715,7 +715,7 @@ adventures:
             5:
                 story_text: |-
                     ## Kocka
-                    Ismét készíthetsz egy kockát a 4. szinten az `if` használatával.
+                    Ismét készíthetsz egy kockát a 4. szinten az `{if}` használatával.
                     Töltsd ki a mintakódot úgy, hogy a kód azt mondja: "Megállíthatod a dobást", miután
                     földigilisztát dobtál.
                     De lehet, hogy újra létre akarsz hozni egy kockát egy teljesen más játékból. Ez is
@@ -799,7 +799,7 @@ adventures:
                 story_text: |-
                     ## Kő, papír, olló
                     A 4. szinten meghatározhatjuk, hogy ki nyert.
-                    Ehhez szükséged van az új `if` kódra.
+                    Ehhez szükséged van az új `{if}` kódra.
 
                     Mentsd el a a számítógép választását egy tetszőleges névvel.
                     Ezután használhatod az `if' utasítást, hogy lásd, azonosak-e vagy különböznek-e.
@@ -834,7 +834,7 @@ adventures:
                 story_text: |
                     ## Kő, papír, olló
                     A 2. szinten listákat írhatunk be, és választhatunk belőlük dolgokat.
-                    Először készíts egy listát az `is` segítségével. Ezután hagyhatod, hogy a számítógép a `at
+                    Először készíts egy listát az `{is}` segítségével. Ezután hagyhatod, hogy a számítógép a `at
                     random` segítségével válasszon ki valamit a listából.
                     Például megengedheted, hogy a számítógép kő, papír és olló közül válogasson.
 
@@ -1271,7 +1271,7 @@ adventures:
                 story_text: |-
                     ## Rajzoljunk
                     Most, hogy több sort megismételhetünk, könnyebben készíthetünk alakzatokat.
-                    Csak egyszer kell beállítani a szöget, majd ezt a változót használni a `repeat` utasítással.
+                    Csak egyszer kell beállítani a szöget, majd ezt a változót használni a `{repeat}` utasítással.
 
 
                     ## Kölcsönhatás
@@ -1298,7 +1298,7 @@ adventures:
             7:
                 story_text: |-
                     ## Rajzoljunk
-                    A 7. szinten megismételheted a kód egyik sorát a `repeat` utasítással.
+                    A 7. szinten megismételheted a kód egyik sorát a `{repeat}` utasítással.
 
                 start_code: |-
                     print 'Alakzat rajzolása'
@@ -1336,7 +1336,7 @@ adventures:
             5:
                 story_text: |-
                     ## Rajzoljunk
-                    A 4. szinten választást hozhatsz létre az `if` utasítással. Például választhatsz különböző típusú alakzatok között.
+                    A 4. szinten választást hozhatsz létre az `{if}` utasítással. Például választhatsz különböző típusú alakzatok között.
 
 
                 start_code: |
@@ -1450,7 +1450,7 @@ adventures:
             7:
                 story_text: |-
                     ## Jósnő
-                    Az 6. szinten a `repeat` paranccsal beállíthatod, hogy a gép egyszerre több jóslatot mondjon.
+                    Az 6. szinten a `{repeat}` paranccsal beállíthatod, hogy a gép egyszerre több jóslatot mondjon.
 
                     ## Kihívás
                     Amint láthatod, a kérdések ebben a példában nincsenek kiíratva. Ennek az az oka, hogy a `kérdés` változót háromszor módosult.
@@ -1515,7 +1515,7 @@ adventures:
                 story_text: |-
                     ## Jós
                     A 4. szinten megtanulod (titokban) az esélyeket a magad javára billenteni a jósnő használata során!
-                    Az `if` és `else` használatával bebiztosíthatod, hogy mindig jó szerencsét kapj, míg mások nem.
+                    Az `{if}` és `{else}` használatával bebiztosíthatod, hogy mindig jó szerencsét kapj, míg mások nem.
                     Tekintsd meg ezt a példát, hogy megtudd, hogyan.
 
 
@@ -1803,7 +1803,7 @@ adventures:
                 story_text: |-
                     ## Mi a következő lépés?
                     Elérted a 7. szint végét, remekül csinálod! A 8. szintre készülsz. A magasabb szinteken Hedy egyre inkább a Python programozási nyelv megtanítására összpontosít.
-                    A Pythonban nincs `repeat` parancs, de van olyan parancs, amely úgy működik, mint az repeat. Kíváncsi vagy, hogyan működik "repeat" parancs "valódi" programozási nyelven? Gyorsan lépj a 8. szintre, hogy megtudd!
+                    A Pythonban nincs `{repeat}` parancs, de van olyan parancs, amely úgy működik, mint az repeat. Kíváncsi vagy, hogyan működik "repeat" parancs "valódi" programozási nyelven? Gyorsan lépj a 8. szintre, hogy megtudd!
                 start_code: print 'Menjünk a következő szintre!'
                 example_code: "```\nanswer = {ask} 'Would you like to go to the next level?'\n{if} answer {is} yes\n    {print} 'Great! You can use the {repeat} commando in the {if} command!'\n    {print} 'Hooray!'\n    {print} 'Hooray!'\n    {print} 'Hooray!'\n{else}\n    {print} 'Okay, you can stay here for a little longer!'\n```\n"
             7:

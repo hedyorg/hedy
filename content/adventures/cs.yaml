@@ -22,7 +22,7 @@ adventures:
                 story_text_3: "Nevíš kde začít? V záložkách najdeš různé nápady na programy které můžeš vytvořit.\n"
             2:
                 story_text: |-
-                    Ve 2. úrovni se naučíme něco nového. Odteď můžeš pojmenovat slovo za pomoci `is`.
+                    Ve 2. úrovni se naučíme něco nového. Odteď můžeš pojmenovat slovo za pomoci `{is}`.
 
                     Pokud použiješ příkaz `jmeno is Hedy`, můžeš pak kdekoli v kódu použít jmeno a bude nahrazeno slovem Hedy. Všimni si, že jmeno neobsahuje čárku nad e, Hedy totiž neumí pracovat s názvy s českou diakritikou.
 
@@ -60,7 +60,7 @@ adventures:
 
                     Text, který chceš vytisknout, teď musíš dát do uvozovek.
 
-                    Je to užitečné, protože tak můžeš vytisknout všechna slova, která chceš. A to dokonce včetně slov, pod která jsi něco uložil*a pomocí `is`.
+                    Je to užitečné, protože tak můžeš vytisknout všechna slova, která chceš. A to dokonce včetně slov, pod která jsi něco uložil*a pomocí `{is}`.
 
                     Většina programovacích jazyků také používá při vypisování uvozovky, takže se dostáváme zase o krok blíže ke skutečnému programování!
 
@@ -76,7 +76,7 @@ adventures:
                 story_text: |-
                     `ask` a` print` fungují stále jako na úrovni 4.
 
-                     V úrovni 5 máme něco nového, je to `if`! Pomocí `if` si můžeš vybrat ze dvou různých možností.
+                     V úrovni 5 máme něco nového, je to `{if}`! Pomocí `{if}` si můžeš vybrat ze dvou různých možností.
 
                      ```
                      jmeno is ask 'Jak se jmenuješ?'
@@ -93,12 +93,12 @@ adventures:
                 story_text_3: "## Seznamy\nPokud chceš skontrolovat jestli se něco nachází v seznamu, můžeš na to použít příkaz `{in}`.\nTento program vypíše pěkné! pokud si vybereš barvy zelená anebo žlutá, a nic-moc pokud si vybereš jinačí.\n"
                 story_text_2: "Někdy je kód za příkazem `{if}` příliš dlouhý a nevejde se dobře na jeden řádek. <br> Proto lze takový kód rozdělit na více řádků, začínajíc druhý řádek s `{else}` takhle:\n"
                 example_code_2: "```\njméno {is} {ask} 'Jaké je tvé jméno?'\n{if} jméno {is} Hedy {print} 'pěkné'\n{else} {print} 'já mám hezčí!'\n```\n"
-                story_text_4: "Something else that works with ```if``` is ```pressed```! With pressed you can link any letter in\nthe alphabet and any number key on your keyboard to a command. If you link it, and press the key,\nsomething will happen. Try it out!\n"
+                story_text_4: "Something else that works with ```{if}``` is ```pressed```! With pressed you can link any letter in\nthe alphabet and any number key on your keyboard to a command. If you link it, and press the key,\nsomething will happen. Try it out!\n"
                 example_code_4: "```\nif x is pressed print \"it worked!\"\n```\n"
             6:
                 start_code: print '5 krát 5 je ' 5 * 5
                 story_text: |-
-                    `ask`,` print` a `if` stále fungují jako na úrovních 5.
+                    `ask`,` print` a `{if}` stále fungují jako na úrovních 5.
                      V úrovni 6 je ale něco nového, nyní můžeš také počítat!
 
                      Plus je jednoduché, můžeš ho zapsat jako u matematiky, například `5 + 5`. Mínus funguje stejně, je to `5 - 5`.
@@ -116,8 +116,8 @@ adventures:
             7:
                 start_code: repeat 3 times print 'Hedy je zábavná!'
                 story_text: |-
-                    `ask`, `print` a `if` fungují stejně jako na úrovni 5 a 6.
-                    Úroveň 7 však přidává příkaz `repeat`, pomocí kterého lze řádek kódu provést vícekrát.
+                    `ask`, `print` a `{if}` fungují stejně jako na úrovni 5 a 6.
+                    Úroveň 7 však přidává příkaz `{repeat}`, pomocí kterého lze řádek kódu provést vícekrát.
                 example_code: |4-
 
                     ```
@@ -129,7 +129,7 @@ adventures:
                         print 'Ahojte, kamarádi'
                         print 'Toto se vypíše 5krát'
                 story_text: |
-                    `ask` a `print` stále fungují tak, jak je znáš. Ale `if` a `repeat` se změnily!
+                    `ask` a `print` stále fungují tak, jak je znáš. Ale `{if}` a `{repeat}` se změnily!
                     Od teď můžeš spouštět víc řádků kódu společně, ale musíš je odsadit.
                     To znamená, že na začátek řádku dáš čtyři mezery. To platí i v případě, že chceš vytvořit blok z pouze jednoho řádku.
 
@@ -149,8 +149,8 @@ adventures:
                         {else}
                             {print} 'pizza je lepší'
                 story_text: |
-                    In this level you can not only use multiple lines with `if` and `repeat`, but you can also put them together!
-                    In the example you see an `if` command within a `repeat` command. It is also allowed the other way around, and an `if` is also allowed in an `if` and a `repeat` in a `repeat`.
+                    In this level you can not only use multiple lines with `{if}` and `{repeat}`, but you can also put them together!
+                    In the example you see an `{if}` command within a `{repeat}` command. It is also allowed the other way around, and an `{if}` is also allowed in an `{if}` and a `{repeat}` in a `{repeat}`.
                     Give it a try!
 
                     ```
@@ -168,8 +168,8 @@ adventures:
                     for animal in animals
                       print 'I love ' animal
                 story_text: |
-                    In this level we learn a new code called `for`. With `for` you can make a list and use all elements.
-                    `for` creates a block, like `repeat` and `if` so all lines in the block need to start with spaces.
+                    In this level we learn a new code called `{for}`. With `{for}` you can make a list and use all elements.
+                    `{for}` creates a block, like `{repeat}` and `{if}` so all lines in the block need to start with spaces.
 
                     ```
                     animals is dog, cat, blobfish
@@ -209,7 +209,7 @@ adventures:
                     age = ask 'what is your age?'
                     if name is 'Hedy' and age is 2
                         print 'You are the real Hedy!'
-                story_text: Teď se naučíme `and` (česky a) a `or` (nebo)! Když chceš ověřit dvě podmínky, nemusíš k tomu použít dva `if`y, ale stačí ti k tomu `and` a `or`. Pokud použiješ `and`, musí být obě podmínky, napravo i nalevo, pravdivé. S `or` stačí, aby byla pravdivá alespoň jedna z nich.
+                story_text: Teď se naučíme `and` (česky a) a `or` (nebo)! Když chceš ověřit dvě podmínky, nemusíš k tomu použít dva `{if}`y, ale stačí ti k tomu `and` a `or`. Pokud použiješ `and`, musí být obě podmínky, napravo i nalevo, pravdivé. S `or` stačí, aby byla pravdivá alespoň jedna z nich.
                 #16:
                 #    start_code: |-
                 #        # Tento program se tě zeptá na pár matematických otázek
@@ -258,7 +258,7 @@ adventures:
                 #        else:
                 #            print('Ale ne, špatně!')
                 #    story_text: |-
-                #        Teď změníme `is` na `=` a `==`.
+                #        Teď změníme `{is}` na `=` a `==`.
                 #        `=` používáme, když chceme do proměnné přiřadit nějakou hodnotu. Pokud chceme přiřadit do proměnné `odpoved` číslo `8`, použijeme  `odpoved = 8`.
                 #        `==` použijeme, když budeme chtít zjistit, jestli jsou dvě věci stejné.
                 #    commands:

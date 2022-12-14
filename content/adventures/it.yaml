@@ -22,7 +22,7 @@ adventures:
                 story_text_3: "Iniziamo! Non sai cosa fare? Le prossime tab contengono idee per nuovi programmi.\n"
             2:
                 story_text: |
-                    Nel livello 2 impariamo qualcosa di nuovo. Puoi nominare una parola con `is`.
+                    Nel livello 2 impariamo qualcosa di nuovo. Puoi nominare una parola con `{is}`.
 
                     Se metti il codice `nome is Hedy` all'inizio del tuo programma, puoi usare nome ovunque. Quello sarà poi sostituito da Hedy.
 
@@ -55,7 +55,7 @@ adventures:
 
                     È necessario inserire il testo che si desidera stampare tra virgolette.
 
-                    Questo è utile, perché ora puoi stampare tutte le parole che desideri. Anche le parole che hai usato per memorizzare qualcosa con `is`.
+                    Questo è utile, perché ora puoi stampare tutte le parole che desideri. Anche le parole che hai usato per memorizzare qualcosa con `{is}`.
 
                     La maggior parte dei linguaggi di programmazione utilizza anche le virgolette durante la stampa, quindi ci stiamo avvicinando anche alla programmazione reale!
 
@@ -82,12 +82,12 @@ adventures:
                     ```
                 story_text_3: "## Liste\nQuando vogliamo controllare se qualcosa è in una lista, ora possiamo usare il comando `{in}` .\nQuesto codice stampa carino! se scegli il verde o il giallo, e mah altrimenti.\n"
                 example_code_2: "```\nnome {is} {ask} 'come ti chiami?'\n{if} nome {is} Hedy {print} 'che bello!'\n{else} {print} 'buu!'\n```\n"
-                story_text_4: "Something else that works with ```if``` is ```pressed```! With pressed you can link any letter in\nthe alphabet and any number key on your keyboard to a command. If you link it, and press the key,\nsomething will happen. Try it out!\n"
+                story_text_4: "Something else that works with ```{if}``` is ```pressed```! With pressed you can link any letter in\nthe alphabet and any number key on your keyboard to a command. If you link it, and press the key,\nsomething will happen. Try it out!\n"
                 example_code_4: "```\nif x is pressed print \"it worked!\"\n```\n"
             6:
                 start_code: "print '5 per 5 è ' 5 * 5"
                 story_text: |
-                    `ask`,` print` e `if` funzionano ancora come nei livelli 5.
+                    `ask`,` print` e `{if}` funzionano ancora come nei livelli 5.
                     Ma nel livello 6 c'è qualcosa di nuovo, ora puoi anche calcolare.
 
                     Il vantaggio è facile, lo scrivi come con la matematica: `5 + 5` per esempio. Anche il segno meno funziona bene, che è `5 - 5`.
@@ -106,9 +106,9 @@ adventures:
             7:
                 start_code: "repeat 3 times print 'Hedy è divertente!'"
                 story_text: |
-                    `ask`, `print` e `if` funzionano esattamente come funzionavano nel livello 6.
-                    Il 7 livello introduce il comando `repeat`.
-                    `repeat` può essere usato per ripetere una parte di codice 'x' volte.
+                    `ask`, `print` e `{if}` funzionano esattamente come funzionavano nel livello 6.
+                    Il 7 livello introduce il comando `{repeat}`.
+                    `{repeat}` può essere usato per ripetere una parte di codice 'x' volte.
                 example_code: |-
                     ```
                     {repeat} 3 {times} {print} 'Hedy è divertente!'

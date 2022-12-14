@@ -22,7 +22,7 @@ adventures:
                 story_text_3: "Let's get started! Don't know what to create? In the next tabs you will find ideas for programs to build.\n"
             2:
                 story_text: |
-                    Yn level 2 leare wy wat nijs. Kinst in wurd in namme jaan mei `is`. Dernei kinst oeral yn dyn koade dy namme brûke. Hedy ferfangt dat dan. Dat giet sa:
+                    Yn level 2 leare wy wat nijs. Kinst in wurd in namme jaan mei `{is}`. Dernei kinst oeral yn dyn koade dy namme brûke. Hedy ferfangt dat dan. Dat giet sa:
                     ```
                     namme is Hedy
                     print hoi namme
@@ -62,7 +62,7 @@ adventures:
 
                     Tekst dytst letterlik printe wolst, moatst no tusken oanhellingstekens sette.
 
-                    Dat is wol sa handich, want no kinst alle wurden printe dytst mar wolst. Ek de wurden dytst brûkt hast om eat mei te ûnthalden mei `is`.
+                    Dat is wol sa handich, want no kinst alle wurden printe dytst mar wolst. Ek de wurden dytst brûkt hast om eat mei te ûnthalden mei `{is}`.
 
                     De measte programmeartalen brûke ek oanhellingstekens by it printen, dat sa komme we al in stap tichterby echt programmearje!
 
@@ -77,7 +77,7 @@ adventures:
                 story_text: |
                     `ask` en `print` wurkje noch lykas yn level 4.
 
-                    Yn level 5 is der wat nijs, de `if`! If is Ingelsk foar 'as'. Mei de `if` kinst in kar (keus) meitsje tusken twa ferskillende opsjes.
+                    Yn level 5 is der wat nijs, de `{if}`! If is Ingelsk foar 'as'. Mei de `{if}` kinst in kar (keus) meitsje tusken twa ferskillende opsjes.
 
                     ## Foarbyld Hedy koade
                     ```
@@ -88,7 +88,7 @@ adventures:
                     Dizze koade print 'leuk' ast Hedy als namme ynfolst, en 'minder leuk' ast wat oars ynfolst.
 
                     ## Tip
-                    Koade mei in `if` kin tige lang wurde en dan past it net mear goed yn it tekstfakje. Brûk yn dat gefal in 'enter' om de koade oer twa rigels te ferdielen. Begjin dan de twadde rigel mei in `else`:
+                    Koade mei in `{if}` kin tige lang wurde en dan past it net mear goed yn it tekstfakje. Brûk yn dat gefal in 'enter' om de koade oer twa rigels te ferdielen. Begjin dan de twadde rigel mei in `{else}`:
                     ```
                     namme is ask 'Wat is dyn namme?'
                     if namme is Hedy print 'leuk'
@@ -103,12 +103,12 @@ adventures:
                 example_code_3: "```\npretty_colors {is} green, yellow\ncolor {is} {ask} 'What is your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!'\n{else} {print} 'meh'\n```\n"
                 story_text_2: "Sometimes code with an `{if}` gets really long and does not fit on the line well. <br> You may also divide the code over two lines, starting the second line at the `{else}` like this:\n"
                 example_code_2: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice'\n{else} {print} 'boo!'\n```\n"
-                story_text_4: "Something else that works with ```if``` is ```pressed```! With pressed you can link any letter in\nthe alphabet and any number key on your keyboard to a command. If you link it, and press the key,\nsomething will happen. Try it out!\n"
+                story_text_4: "Something else that works with ```{if}``` is ```pressed```! With pressed you can link any letter in\nthe alphabet and any number key on your keyboard to a command. If you link it, and press the key,\nsomething will happen. Try it out!\n"
                 example_code_4: "```\nif x is pressed print \"it worked!\"\n```\n"
             6:
                 start_code: "print '5 kear 5 is ' 5 * 5"
                 story_text: |
-                    `ask`, `print` en `if` wurkje noch lykas yn level 5.
+                    `ask`, `print` en `{if}` wurkje noch lykas yn level 5.
                     Mar yn Level 5 is der wat nijs, kinst no ek rekkenje.
 
                     De plus is maklik, dy skriuwst as by rekkenjen: `5 + 5` bygelyks. De min giet krekt sa, dat is `5 - 5`.
@@ -126,9 +126,9 @@ adventures:
             7:
                 start_code: "repeat 3 times print 'Hedy is leuk!'"
                 story_text: |
-                    `ask`, `print` en `if` wurkje noch lykas yn level 5 en 6.
-                    Mar yn Level 7 is er eat nijs: de `repeat`.
-                    Met `repeat` kinst koade in tal kear werhelje.
+                    `ask`, `print` en `{if}` wurkje noch lykas yn level 5 en 6.
+                    Mar yn Level 7 is er eat nijs: de `{repeat}`.
+                    Met `{repeat}` kinst koade in tal kear werhelje.
                 example_code: |-
                     ## Foarbyld Hedy koade
                     ```
@@ -140,7 +140,7 @@ adventures:
                         print 'Goeie allegearre'
                         print 'Dit wurdt allegearre 5 kear werhelle'
                 story_text: |
-                    `ask` en `print` wurkje noch as east, mar `if` en `repeat` binne no oars!
+                    `ask` en `print` wurkje noch as east, mar `{if}` en `{repeat}` binne no oars!
                     Kinst no meardere rigels tegearre werhelje. Dan moatst de rigel dytst werhelje wolst wol ynspringe,
                     dat wol sizze dat se mei fjouwer spaasjes begjinne moatte.
                     Ek atst mar ien rigel werhelje wolst, moatst ynspringe!
@@ -161,8 +161,8 @@ adventures:
                         else
                             print 'pizza is better'
                 story_text: |
-                    In this level you can not only use multiple lines with `if` and `repeat`, but you can also put them together!
-                    In the example you see an `if` command within a `repeat` command. It is also allowed the other way around, and an `if` is also allowed in an `if` and a `repeat` in a `repeat`.
+                    In this level you can not only use multiple lines with `{if}` and `{repeat}`, but you can also put them together!
+                    In the example you see an `{if}` command within a `{repeat}` command. It is also allowed the other way around, and an `{if}` is also allowed in an `{if}` and a `{repeat}` in a `{repeat}`.
                     Give it a try!
 
                     ```
@@ -180,8 +180,8 @@ adventures:
                     for dier in dieren
                       print dier ' is een leuk dier!'
                 story_text: |
-                    In dit level leren we een nieuwe code, de code `for`. Met `for` kun je alle dingen in een lijstje gebruiken.
-                    `for` mag meerdere regels gebruiken, net zoals de `repeat` and `if`, dus alle regels eronder moeten met spaties beginnen.
+                    In dit level leren we een nieuwe code, de code `{for}`. Met `{for}` kun je alle dingen in een lijstje gebruiken.
+                    `{for}` mag meerdere regels gebruiken, net zoals de `{repeat}` and `{if}`, dus alle regels eronder moeten met spaties beginnen.
 
                     ## Voorbeeld Hedy code
                     ```
@@ -196,7 +196,7 @@ adventures:
                         print i
                     print 'Wie niet weg is is gezien'
                 story_text: |-
-                    Wy feroarje no `repeat` yn `for`! No typst `for i in range 1 to 5`, ynstee fan `repeat 5 times`. 
+                    Wy feroarje no `{repeat}` yn `{for}`! No typst `for i in range 1 to 5`, ynstee fan `repeat 5 times`.
                     It leuke is datst dy fariabele `i` ek yn dyn programma brûke kinst!
                     Tink derom datst noch hieltiid alle rigels dy't werhelle wurde moatte, ynspringst mei 4 spaasjes.
                 example_code: "```\nfor counter in range 1 to 5\n    print counter\n```\n"
@@ -207,14 +207,14 @@ adventures:
                 story_text: |
                     So far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that cmputers use the . for decimal numbers.
 
-                    For this level on you will also have to use quotation marks when storing a text with `is`:
+                    For this level on you will also have to use quotation marks when storing a text with `{is}`:
 
                     ```
                     name = 'Hedy'
                     print 'Hello ' name
                     ```
 
-                    For numbers, you do not use quotation marks in the `is`:
+                    For numbers, you do not use quotation marks in the `{is}`:
                     ```
                     score = 25
                     print 'You got ' score
@@ -236,7 +236,7 @@ adventures:
                     age = ask 'what is your age?'
                     if name is 'Hedy' and age is 2
                         print 'You are the real Hedy!'
-                story_text: "We sille no `and` en `or` brûke. Ast 2 dingen kontroleare wolst, hoechst net mear 2 `if`-kes yninoar te dwaan, mar kinst no `and` brûke. Beide dingen yn 'e if moeten waar zijn als je een `and` gebruikt. We kunnen ek `or` brûke. Daarbij moet er 1 fan de twa waar zijn."
+                story_text: "We sille no `and` en `or` brûke. Ast 2 dingen kontroleare wolst, hoechst net mear 2 `{if}`-kes yninoar te dwaan, mar kinst no `and` brûke. Beide dingen yn 'e if moeten waar zijn als je een `and` gebruikt. We kunnen ek `or` brûke. Daarbij moet er 1 fan de twa waar zijn."
                 #16:
                 #    start_code: |-
                 #        # Dit is een programma dat in tal sommen freegjen giet
@@ -269,7 +269,7 @@ adventures:
                 #        fruit = ['apel', 'banaan', 'kjers']
                 #        for i in range(1, 3):
                 #            print(fruit[i])
-                #    story_text: "We kinne ek alles fan de list sjen litte. Omt er trije dingen yn sitte, pakke we de `for`-lus fan 1 oant 3. No printe we alles út wat yn de list sit."
+                #    story_text: "We kinne ek alles fan de list sjen litte. Omt er trije dingen yn sitte, pakke we de `{for}`-lus fan 1 oant 3. No printe we alles út wat yn de list sit."
                 #    commands:
                 #    -   name: "Lingte fan in list"
                 #        explanation: "Mei `length` kinst sjen hoe grut in list is. Hjir is `length` bygelyks 3 want we ha 3 dingen yn de list"

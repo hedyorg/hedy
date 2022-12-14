@@ -66,7 +66,7 @@ adventures:
                 example_code_3: "``` \nschöne_Farben {is} grün, gelb \nFarbe {is} {ask} 'Was ist deine Lieblingsfarbe?' \n{if} Farbe {in} schöne_Farben {print} 'schön!' \n{else} {print} 'na ja' \n```\n"
                 story_text_2: "Machmal wir Code mit einem`{if}`ziemlich lang und passt nicht gut in eine Zeile. <br> Du kannst den Code auch auf zwei Teilen aufteilen, beginnend mit der zweiten Zeile beim `{else}` Befehl, und zwar so:\n"
                 example_code_2: "```\nName {is} {ask} 'Wie heißt du?'\n{if} Name {is} Hedy {print} 'Schön'\n{else} {print} 'Buh!'\n```\n"
-                story_text_4: "Etwas anderes das mit ```if``` is ```pressed``` funktioniert! Mit `pressed` kannst du jeden beliebigen Buchstaben\ndes Alphabets und jede Zifferntaste auf deiner Tastatur an einen Befehl binden. Wenn du es bindest und die Taste drückst,\nwird etwas passieren. Probiere es aus!\n"
+                story_text_4: "Etwas anderes das mit ```{if}``` is ```pressed``` funktioniert! Mit `pressed` kannst du jeden beliebigen Buchstaben\ndes Alphabets und jede Zifferntaste auf deiner Tastatur an einen Befehl binden. Wenn du es bindest und die Taste drückst,\nwird etwas passieren. Probiere es aus!\n"
                 example_code_4: "```\nfalls x gedrückt ist drucke \"es klappt!\"\n```\n"
             6:
                 start_code: "{print} '5 mal 5 ist ' 5 * 5"
@@ -1169,7 +1169,7 @@ adventures:
             5:
                 story_text: |
                     ## Würfel
-                    Auch den Würfel kannst Du in diesem Level nochmal programmieren, diesmal mit dem `if`.
+                    Auch den Würfel kannst Du in diesem Level nochmal programmieren, diesmal mit dem `{if}`.
                     Vervollständige den Beispiel-Code, sodass er ausgibt "Du kannst aufhören zu würfeln", sobald Du einen Regenwurm gewürfelt hast.
 
                     Vielleicht möchtest Du auch einen Würfel aus einem ganz anderen Spiel nachbauen. Das ist auch super! Dann überlege Dir selbst eine Reaktion. Zum Beispiel 'ja' bei einer 6 und 'schade' für alles andere.
