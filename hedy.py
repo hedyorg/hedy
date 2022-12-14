@@ -1726,7 +1726,7 @@ else:
         return f"""create_button({button_name})"""
 
     def make_ifpressed_command(self, command, button=False):
-        command_suffix = (f"""\
+        command_suffix = ("""\
 while not pygame_end:
   pygame.display.update()
   event = pygame.event.wait()
