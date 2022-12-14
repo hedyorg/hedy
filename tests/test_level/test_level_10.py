@@ -41,7 +41,6 @@ class TestsLevel10(HedyTester):
             max_level=11
         )
 
-
     def test_blanks(self):
         code = textwrap.dedent("""\
         players = Ann, John, Jesse
@@ -56,8 +55,6 @@ class TestsLevel10(HedyTester):
             code=code,
             exception=hedy.exceptions.CodePlaceholdersPresentException
         )
-
-
 
     def test_for_list_hindi(self):
         code = textwrap.dedent("""\
