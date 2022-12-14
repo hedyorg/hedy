@@ -154,7 +154,7 @@ h2 {
 h2:first-child { margin-top: 0; }
 
 h3 {
-  @apply font-slab font-bold text-blue-700 italic;
+  @apply font-slab text-blue-700;
   @apply leading-tight text-xl mt-4 mb-1;
 }
 
@@ -236,17 +236,30 @@ code {
 }
 
 .dropdown-menu {
-  @apply absolute overflow-hidden block rounded-lg border border-blue-700 bg-blue-400 ltr:right-0 rtl:left-0 ltr:mr-1 rtl:ml-1 w-max;
+  @apply absolute overflow-hidden block rounded-lg ltr:right-0 rtl:left-0 ltr:mr-1 rtl:ml-1 w-max;
   top: 40px;
+
+  @apply cursor-auto; /* Undo cursor-pointer we inherit from the menu */
+  /* Colors */
+  @apply border-2 border-blue-400 bg-blue-200 px-4 py-2;
 }
 
 .dropdown-level-menu {
-  @apply absolute overflow-hidden block rounded-lg border border-blue-700 bg-green-400 ltr:right-0 rtl:left-0 ltr:mr-1 rtl:ml-1 w-max;
+  @apply absolute overflow-hidden block rounded-md border border-blue-700 bg-green-400 ltr:right-0 rtl:left-0 ltr:mr-1 rtl:ml-1 w-max;
   top: 40px;
 }
 
 .dropdown-item {
-  @apply text-white no-underline hover:bg-blue-600 py-2 px-4 w-full inline-block;
+  @apply text-gray-800 no-underline hover:bg-blue-600 py-2 px-4 w-full inline-block;
+  @apply cursor-pointer w-52 font-medium rounded-md;
+}
+
+.dropdown-item:hover {
+  @apply bg-blue-600 text-white;
+}
+
+.dropdown-menu h3 {
+  @apply font-medium border-b-2 border-blue-700 mx-4 pb-2 mb-2 text-center;
 }
 
 .text-shadow {
