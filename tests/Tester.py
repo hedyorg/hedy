@@ -251,7 +251,7 @@ class HedyTester(unittest.TestCase):
             pass
         except OSError:
             return True  # programs with ask cannot be tested with output :(
-        except Exception as E:
+        except Exception:
             return False
         return True
 
