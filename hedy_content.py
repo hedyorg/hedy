@@ -58,6 +58,7 @@ ADVENTURE_NAMES = [
     'turtle',
     'dishes',
     'dice',
+    'pressit',
     'rock',
     'calculator',
     'piggybank',
@@ -133,6 +134,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'haunted',
         'restaurant',
         'turtle',
+        'pressit',
         'next',
         'end'
     ],
@@ -319,7 +321,7 @@ class Commands:
         self.language = language
         # We can keep these cached, even in debug_mode: files are small and don't
         # influence start-up time much
-        self.file = YamlFile.for_file(f'content/commands/{self.language}.yaml')
+        self.file = YamlFile.for_file(f'content/cheatsheets/{self.language}.yaml')
         self.data = {}
 
         # For some reason the is_debug_mode() function is not (yet) ready when we call this code

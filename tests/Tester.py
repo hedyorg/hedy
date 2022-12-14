@@ -1,5 +1,5 @@
 import textwrap
-
+import hashlib
 import exceptions
 import hedy
 import hedy_translation
@@ -14,17 +14,23 @@ import utils
 from hedy_content import ALL_KEYWORD_LANGUAGES, KEYWORDS
 from app import translate_error, app
 from flask_babel import force_locale
+import pickle, _pickle
 
 class Snippet:
-    def __init__(self, filename, level, field_name, code, adventure_name=None):
+    def __init__(self, filename, level, code, field_name=None, adventure_name=None, error=None, language=None):
         self.filename = filename
         self.level = level
         self.field_name = field_name
         self.code = code
+        self.error = error
         filename_shorter = os.path.basename(filename)
-        self.language = filename_shorter.split(".")[0]
+        if language is None:
+            self.language = filename_shorter.split(".")[0]
+        else:
+            self.language = language
         self.adventure_name = adventure_name
         self.name = f'{self.language}-{self.level}-{self.field_name}'
+        self.hash = hashlib.md5(self.code.encode()).hexdigest()
 
 
 class HedyTester(unittest.TestCase):
@@ -49,10 +55,14 @@ class HedyTester(unittest.TestCase):
 
     @staticmethod
     def run_code(parse_result):
+        code = utils.NORMAL_PREFIX_CODE
+
         if parse_result.has_turtle:
-            code = utils.TURTLE_PREFIX_CODE + parse_result.code
-        else:
-            code = utils.NORMAL_PREFIX_CODE + parse_result.code
+            code += utils.TURTLE_PREFIX_CODE
+        if parse_result.has_pygame:
+            code += utils.PYGAME_PREFIX_CODE
+
+        code += parse_result.code
         # remove sleep comments to make program execution less slow
         code = re.sub(r'time\.sleep\([^\n]*\)', 'pass', code)
 
@@ -264,12 +274,12 @@ class HedyTester(unittest.TestCase):
         type = 'int' if level < 12 else 'float'
 
         return textwrap.dedent(f"""\
-      trtl = {val}
+      __trtl = {val}
       try:
-        trtl = {type}(trtl)
+        __trtl = {type}(__trtl)
       except ValueError:
-        raise Exception(f'While running your program the command <span class="command-highlighted">{command_text}</span> received the value <span class="command-highlighted">{{trtl}}</span> which is not allowed. Try changing the value to a number.')
-      t.{command}(min(600, trtl) if trtl > 0 else max(-600, trtl)){suffix}""")
+        raise Exception(f'While running your program the command <span class="command-highlighted">{command_text}</span> received the value <span class="command-highlighted">{{__trtl}}</span> which is not allowed. Try changing the value to a number.')
+      t.{command}(min(600, __trtl) if __trtl > 0 else max(-600, __trtl)){suffix}""")
 
     @staticmethod
     def sleep_command_transpiled(val):
@@ -282,10 +292,10 @@ class HedyTester(unittest.TestCase):
     @staticmethod
     def turtle_color_command_transpiled(val):
         return textwrap.dedent(f"""\
-      trtl = f'{val}'
-      if trtl not in ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']:
-        raise Exception(f'While running your program the command <span class="command-highlighted">color</span> received the value <span class="command-highlighted">{{trtl}}</span> which is not allowed. Try using another color.')
-      t.pencolor(trtl)""")
+      __trtl = f'{val}'
+      if __trtl not in ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']:
+        raise Exception(f'While running your program the command <span class="command-highlighted">color</span> received the value <span class="command-highlighted">{{__trtl}}</span> which is not allowed. Try using another color.')
+      t.pencolor(__trtl)""")
 
     @staticmethod
     def input_transpiled(var_name, text):
@@ -350,3 +360,31 @@ class HedyTester(unittest.TestCase):
                 print(snippet)
 
         return snippets
+
+def get_snippets_env_var():
+    only_new_snippets = os.getenv('only_new_snippets')
+    if only_new_snippets is None:
+        only_new_snippets = False  # set default in case env var is not set (f.e. on Windows, or when running form the UI)
+    elif only_new_snippets == 1 or only_new_snippets == '1':
+        only_new_snippets = True
+    else:  # in case an invalid one is given
+        only_new_snippets = False
+    return only_new_snippets
+
+def get_list_from_pickle(filename):
+    try:
+        with open(filename, 'rb') as f:
+            hashes_saved = pickle.load(f)
+    except _pickle.UnpicklingError:  # broken file, create and save
+        hashes_saved = set()
+        with open(filename, 'wb') as f:
+            pickle.dump(hashes_saved, f)
+    except EOFError:  # empty file
+        hashes_saved = set()
+        with open(filename, 'wb') as f:
+            pickle.dump(hashes_saved, f)
+    except FileNotFoundError:  # non existent file
+        hashes_saved = set()
+        with open(filename, 'wb') as f:
+            pickle.dump(hashes_saved, f)
+    return hashes_saved

@@ -1,0 +1,44 @@
+_PRINT: ("tulosta" | "print") _SPACE?
+_ASK: ("kysy" | "ask") _SPACE?
+_ECHO: ("kaiku" | "echo") _SPACE?
+_FORWARD: ("eteenpäin" | "forward") _SPACE?
+_TURN: ("käänny" | "turn") _SPACE?
+left: ("vasen" | "left") _SPACE?
+right: ("oikea" | "right") _SPACE?
+black: ("musta" | "black") _SPACE?
+blue: ("sininen" | "blue") _SPACE?
+brown: ("ruskea" | "brown") _SPACE?
+gray: ("harmaa" | "gray") _SPACE?
+green: ("vihreä" | "green") _SPACE?
+orange: ("oranssi" | "orange") _SPACE?
+pink: ("vaaleanpunainen" | "pink") _SPACE?
+purple: ("violetti" | "purple") _SPACE?
+red: ("punainen" | "red") _SPACE?
+white: ("valkoinen" | "white") _SPACE?
+yellow: ("keltainen" | "yellow") _SPACE?
+_IS: _SPACE ("on" | "is") _SPACE
+_SLEEP: ("nuku" | "sleep") _SPACE?
+_ADD_LIST: ("lisää" | "add") _SPACE
+_TO_LIST: _SPACE ("listaksi" | "to") _SPACE
+_REMOVE: ("poista" | "remove") _SPACE
+_FROM: _SPACE ("listasta" | "from") _SPACE
+_AT: _SPACE ("ota" | "at") _SPACE
+random: ("satunnainen" | "random") _SPACE?
+_IN: _SPACE ("listassa" | "in") _SPACE
+_NOT_IN: _SPACE ("not in" | "not in") _SPACE
+_IF: ("jos" | "if") _SPACE
+_ELSE: "muuten" | "else"
+_AND: _SPACE ("ja" | "and") _SPACE
+_REPEAT: ("toista" | "repeat") _SPACE
+_TIMES: _SPACE ("kertaa" | "times")
+_FOR: ("jokaiselle" | "for") _SPACE
+_RANGE: ("väli" | "range") _SPACE?
+_TO: _SPACE ("asti" | "to") _SPACE
+_STEP: "askel" | "step"
+_ELIF: _SPACE? ("muutenjos" | "elif") _SPACE
+_INPUT: ("syöte" | "input")
+_OR: _SPACE ("tai" | "or") _SPACE
+_WHILE: ("kun" | "while") _SPACE
+_LENGTH: "pituus" | "length"
+_COLOR : ("väri" | "color") _SPACE?
+_PRESSED: ("painettu" | "pressed") _SPACE?

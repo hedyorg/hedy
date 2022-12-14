@@ -9,32 +9,11 @@ echo "------> End-to-end tests"
 cd $scriptdir/../..
 
 pids=""
-trap 'kill $pids' EXIT
+trap "$scriptdir/start-debug-server --kill" EXIT
 
 export PORT=5050
-env HEROKU_APP_NAME=localhost BASE_URL=http://localhost:$PORT SECRET_KEY=TheSecret python app.py > e2e-server.log 2>&1 &
-pids="$pids $!"
+$scriptdir/start-debug-server --daemon
 
-endpoint=http://localhost:$PORT
-
-# We need to wait a bit for the server to come up. curl for a max time
-echo "Waiting for server to start..." >&2
-up=false
-for i in $(seq 0 2000); do
-    if curl -sSf "$endpoint" > /dev/null 2>&1; then
-        up=true
-		break
-	fi
-done
-
-if ! $up; then
-  echo "Server didn't start in time..." >&2
-  echo "Here's what it had to say:" >&2
-  echo "-------------------------------------------" >&2
-  cat e2e-server.log >&2
-  echo "-------------------------------------------" >&2
-  exit 1
-fi
 
 # Finally!
 if ! env ENDPOINT=http://localhost:$PORT pytest -q tests_e2e.py "$@"; then
