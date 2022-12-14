@@ -1,11 +1,11 @@
 {% extends "auth.html" %}
 {% block body %}
 <div class="text-xl flex flex-col">
-    <div class="bg-yellow-600 my-16 border-b-4 border-yellow-700">
+    <div class="bg-blue-200 my-16 border-b-8 border-blue-300">
         <div class="center-block py-16 px-16 mb-8 flex flex-col gap-16 md:flex-row justify-between items-stretch">
             <div class="flex flex-col gap-2">
-                <h1 class="font-bold font-slab text-white text-6xl text-shadow-md tracking-wide">{{_('main_title')}}</h1>
-                <h2 class="py-0 my-0 font-sans font-light text-white text-shadow-md tracking-wide">{{_('main_subtitle')}}</h2>
+                <h1 class="font-bold font-slab text-sky-600 text-6xl tracking-wide">{{_('main_title')}}</h1>
+                <h2 class="py-0 my-0 font-sans font-light text-black tracking-wide">{{_('main_subtitle')}}</h2>
                 <button id="tryitbutton" class="green-btn text-white px-8 py-4" onclick="window.location.href='/hedy'">{{_('try_it')}}</button>
             </div>
             <div class="invisible md:visible overflow-visible relative flex-none" style="width: 500px">
@@ -14,37 +14,41 @@
         </div>
     </div>
     <class id="main_page_content" class="fancy-text">
-        {% for section in content['start-sections'][:1] %}
+        {% for section in content %}
         <div class="{{loop.cycle('stripe-white', 'stripe-colored')}} py-16">
-            <div class="center-block px-16">
-                <h2 class="font-bold">{{ section['title'] }}</h2>
-                <div class="heading-underline"></div>
-                <p>{{ section['text']|commonmark }}</p>
-            </div>
-        </div>
-        {% endfor %}
-
-        {% for section_chunk in content['start-sections'][1:4] | chunk(3) %}
-        <div class="border-b-4 bg-yellow-500 border-yellow-600}} py-16">
-            <div class="center-block px-16 flex flex-col md:flex-row justify-between gap-6">
-                {% for section in section_chunk %}
-                <div class="bg-white shadow-md rounded-lg px-8 py-4 flex-1">
-                    <h3>{{ section['title'] }}</h3>
+            {% if section['style'] == 'block' %}
+                <div class="center-block px-16">
+                    <h2 class="font-bold">{{ section['title'] }}</h2>
+                    <div class="heading-underline"></div>
                     <p>{{ section['text']|commonmark }}</p>
                 </div>
-                {% endfor %}
-            </div>
+            {% elif section['style'] == 'pane-with-image-left' %}
+                <div class="center-block-wide px-16 flex flex-col md:flex-row justify-between gap-6">
+                    <img src="{{section['image']}}" class="w-1/3">
+                    <div class="column-pane px-8 py-4 w-2/3">
+                        <h3>{{ section['title'] }}</h3>
+                        <p>{{ section['text']|commonmark }}</p>
+                    </div>
+                </div>
+            {% elif section['style'] == 'pane-with-image-right' %}
+                <div class="center-block-wide px-16 flex flex-col md:flex-row justify-between gap-6">
+                    <div class="column-pane shadow-md rounded-lg px-8 py-4 w-2/3">
+                        <h3>{{ section['title'] }}</h3>
+                        <p>{{ section['text']|commonmark }}</p>
+                    </div>
+                    <img src="{{section['image']}}" class="w-1/3">
+                </div>
+            {% elif section['style'] == 'columns' %}
+                <div class="center-block columns px-16 flex flex-col md:flex-row justify-between gap-6">
+                    {% for col in section['columns'] %}
+                    <div class="column-pane shadow-md rounded-lg px-8 py-4 flex-1">
+                        <h3>{{ col['title'] }}</h3>
+                        <p>{{ col['text']|commonmark }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
         </div>
-
-        {% for section in content['start-sections'][4:] %}
-        <div class="{{loop.cycle('stripe-white', 'stripe-colored')}} py-16">
-            <div class="center-block px-16">
-                <h2 class="font-bold">{{ section['title'] }}</h2>
-                <div class="heading-underline"></div>
-                <p>{{ section['text']|commonmark }}</p>
-            </div>
-        </div>
-        {% endfor %}
         {% endfor %}
     </div>
 </div>

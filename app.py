@@ -705,6 +705,7 @@ def version_page():
                            commit=commit)
 
 
+@app.route('/my-achievements')
 def achievements_page():
     user = current_user()
     username = user['username']
@@ -1308,14 +1309,31 @@ def favicon(page):
 @app.route('/start')
 @app.route('/index.html')
 def main_page():
-    content = hedyweb.PageTranslations('start').get_page_translations(g.lang)
-    print(content)
+    sections = hedyweb.PageTranslations('start').get_page_translations(g.lang)['start-sections']
+
+    sections = sections[:]
+
+    # Sections have 'title', 'text'
+    # Annotate sections with display styles, based on the order which we know sections will appear
+    # Styles are one of: 'block', 'pane-with-image-{left,right}', 'columns'
+    # Do this by mutating the list in place
+    content = []
+    content.append(dict(style='block', **sections.pop(0)))
+
+    for i in range(3):
+        if not sections: break
+        content.append(dict(
+            style='pane-with-image-' + ('right' if i % 2 == 0 else 'left'),
+            image='',
+            **sections.pop(0)))
+
+    if sections: content.append(dict(style='block', **sections.pop(0)))
+    if sections: content.append(dict(style='columns', columns=sections))
+
+    import pprint
+    pprint.pprint(content)
     return render_template('main-page.html', page_title=gettext('title_start'),
                            current_page='start', content=content)
-
-@app.route('/my-achievements')
-def my_achievements():
-    return achievements_page()
 
 @app.route('/learn-more')
 def learn_more():

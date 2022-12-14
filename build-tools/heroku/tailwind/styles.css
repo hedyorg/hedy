@@ -20,7 +20,7 @@ h2 {
 }
 
 h3 {
-  @apply font-bold text-xl;
+  @apply font-bold text-2xl;
 }
 
 h4 {
@@ -56,32 +56,34 @@ strong {
   @apply bg-gray-500 border-gray-700;
 }
 
-.center-block {
-  @apply mx-auto;
-  max-width: 1024px;
-}
+.center-block { @apply max-w-screen-lg mx-auto; }
+.center-block-wide { @apply max-w-screen-xl mx-auto; }
 
 /* Not running text but fancy text! */
 .fancy-text h2 {
   text-align: center;
-  @apply text-4xl;
+  @apply text-4xl text-pink-600;
+}
+
+.fancy-text h3 {
+  @apply text-4xl text-pink-600;
+}
+
+.fancy-text .columns h3 {
+  @apply text-2xl;
 }
 
 .stripe-colored {
-  @apply bg-yellow-500 border-yellow-600 border-b-4;
+  @apply bg-yellow-400 border-yellow-500 border-b-4;
 }
 
-.stripe-colored h2, .stripe-colored a {
-  @apply text-white;
-}
+.stripe-white { @apply border-b-4; }
 
-.stripe-white {
-  @apply border-b-4;
-}
+.stripe-colored h2, .stripe-colored a { @apply text-white; }
+.stripe-colored .column-pane a { @apply text-blue-700; }
+.stripe-colored .column-pane { @apply bg-white shadow-md rounded-lg; }
 
-.heading-underline {
-  @apply bg-blue-500 w-36 mx-auto h-1 my-8;
-}
+.heading-underline { @apply bg-pink-600 w-36 mx-auto h-1 my-8; }
 
 .stripe-colored .heading-underline {
   @apply bg-white;
