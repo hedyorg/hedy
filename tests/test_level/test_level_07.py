@@ -210,23 +210,20 @@ class TestsLevel7(HedyTester):
             code=code,
             expected=expected)
 
-    def test_if_pressed_repeat(self):
-        code = "if x is pressed repeat 5 times print 'doe het 5 keer!'"
+    # def test_if_pressed_repeat(self):
+    #     code = "if x is pressed repeat 5 times print 'doe het 5 keer!'"
 
-        expected = HedyTester.dedent("""\
-        while not pygame_end:
-          pygame.display.update()
-          event = pygame.event.wait()
-          if event.type == pygame.QUIT:
-            pygame_end = True
-            pygame.quit()
-            break
-          if event.type == pygame.KEYDOWN:
-            if event.unicode == 'x':
-              for i in range(int('5')):
-                print(f'do it 5 times!')
-                time.sleep(0.1)
-              break""")
-        self.single_level_tester(
-            code=code,
-            expected=expected)
+    #     expected = HedyTester.dedent("""\
+    #     while not pygame_end:
+    #       pygame.display.update()
+    #       event = pygame.event.wait()
+    #       if event.type == pygame.QUIT:
+    #         pygame_end = True
+    #         pygame.quit()
+    #         break
+    #       if event.type == pygame.KEYDOWN:
+    #         if event.unicode == 'x':
+    #           for i in range(int('5')):
+    #             print(f'do it 5 times!')
+    #             time.sleep(0.1)
+    #           break""")
