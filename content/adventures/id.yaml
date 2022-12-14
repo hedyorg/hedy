@@ -6,7 +6,7 @@ adventures:
         levels:
             1:
                 story_text: |-
-                    Selamat datang di Hedy! Pada level 1 kamu dapat menggunakan perintah `print`, `ask` dan `echo`.
+                    Selamat datang di Hedy! Pada level 1 kamu dapat menggunakan perintah `{print}`, `{ask}` dan `{echo}`.
 
                     Pada bagian kiri kamu dapat melihat semua perintah untuk level 1.
 
@@ -26,12 +26,12 @@ adventures:
 
                     Jika kamu menggunakan kode `nama is Hedy`, kamu dapat menggunakan 'nama' tersebut dimanapun pada kodemu dan semuanya akan digantikan dengan 'Hedy'.
 
-                    Catatan: perintah `ask` sudah diupdate. Kamu juga dapat menyimpan jawaban dari perintah tersebut dengan sebuah nama, seperti ini:
+                    Catatan: perintah `{ask}` sudah diupdate. Kamu juga dapat menyimpan jawaban dari perintah tersebut dengan sebuah nama, seperti ini:
                     ```
                     jawaban is ask What is your name?
                     ```
 
-                    `print` tetap berfungsi sama dengan di level 1, dan kamu tidak lagi membutuhkan `echo`.
+                    `{print}` tetap berfungsi sama dengan di level 1, dan kamu tidak lagi membutuhkan `{echo}`.
 
                 start_code: print halo dunia!
                 example_code: "```\nname {is} Hedy\nage {is} 15\n{print} name is age years old\n```\n"
@@ -56,7 +56,7 @@ adventures:
             4:
                 start_code: print 'Halo dunia'
                 story_text: |-
-                    Pada level 4 perintah `ask` dan `print` sudah diupdate.
+                    Pada level 4 perintah `{ask}` dan `{print}` sudah diupdate.
 
                     Kamu harus memasukkan teks yang mau kamu tampilkan diantara tanda kutip satu.
 
@@ -74,7 +74,7 @@ adventures:
                     nama is ask 'siapa nama kamu?'
                     if nama is Hedy print 'keren' else print 'boo'
                 story_text: |-
-                    Perintah `ask` dan `print` tetap sama seperti pada level 4.
+                    Perintah `{ask}` dan `{print}` tetap sama seperti pada level 4.
 
                     Pada level 5, ada hal baru, `{if}`! Dengan `{if}` kamu bisa memilih antara dua pilihan.
 
@@ -107,7 +107,7 @@ adventures:
             6:
                 start_code: print '5 kali 5 adalah ' 5 * 5
                 story_text: |-
-                    `ask`, `print`, dan `{if}` berfungsi sama persis dengan yang ada pada level 4 dan level 5.
+                    `{ask}`, `{print}`, dan `{if}` berfungsi sama persis dengan yang ada pada level 4 dan level 5.
                     Tapi di level 6 ada sesuatu yang baru, kamu sekarang bisa melakukan perhitungan matematika.
 
                     Pada level 6, kode baru sudah ditambahkan untuk perhitungan matematika.
@@ -128,7 +128,7 @@ adventures:
             7:
                 start_code: repeat 3 times print 'Hedy itu menyenangkan!'
                 story_text: |-
-                    `ask`, `print`, dan `{if}` berfungsi sama persis dengan yang ada pada level 6.
+                    `{ask}`, `{print}`, dan `{if}` berfungsi sama persis dengan yang ada pada level 6.
                     Tapi level 7 menambahkan perintah `{repeat}`. Perintah repeat dapat digunakan untuk menjalankan satu baris kode beberapa kali
 
                     ```
@@ -141,7 +141,7 @@ adventures:
                         print 'Halo semua'
                         print 'Ini akan ditampilkan lima kali'
                 story_text: |-
-                    `ask` dan `print` tetap berfungsi sama seperti sebelumnya. Tapi `{if}` dan `{repeat}` berubah.
+                    `{ask}` dan `{print}` tetap berfungsi sama seperti sebelumnya. Tapi `{if}` dan `{repeat}` berubah.
                     Kamu sekarang dapat mengeksekusi kumpulan kode secara bersamaan, tapi kamu harus memberikan indentasi pada kode tersebut.
                     Indentasi berarti memberikan empat spasi diawal baris. Ini juga berlaku ketika kamu hanya mau mengeksekusi satu baris kode saja.
 
@@ -192,7 +192,7 @@ adventures:
                 start_code: |-
                     for pembilang in range 1 to 5
                         print pembilang
-                story_text: "`print` berfungsi sama namun `{repeat}` kali ini diganti dengan `{for}`! Kamu sekarang dapat menulis `for pembilang in range 1 to 5` dan menggunakan `pembilang` pada program kamu. Cobalah lihat apa yang terjadi! Ingat untuk menggunakan indentasi sesudah perintah `{for}` dan `{if}` (Ini artinya mengawali baris dengan empat spasi)."
+                story_text: "`{print}` berfungsi sama namun `{repeat}` kali ini diganti dengan `{for}`! Kamu sekarang dapat menulis `for pembilang in range 1 to 5` dan menggunakan `pembilang` pada program kamu. Cobalah lihat apa yang terjadi! Ingat untuk menggunakan indentasi sesudah perintah `{for}` dan `{if}` (Ini artinya mengawali baris dengan empat spasi)."
                 example_code: "```\nfor counter in range 1 to 5\n    print counter\n```\n"
             12:
                 start_code: |-
@@ -315,8 +315,8 @@ adventures:
                     ask siapakah karakter utama di cerita kamu?
                     ```
 
-                    Setelah baris pertama, mulai dengan `print` jika sebuah kalimat perlu ditampilkan.
-                    Kamu bisa menggunakan `echo` jika kamu mau nama karakter utamamu muncul diakhir kalimat.
+                    Setelah baris pertama, mulai dengan `{print}` jika sebuah kalimat perlu ditampilkan.
+                    Kamu bisa menggunakan `{echo}` jika kamu mau nama karakter utamamu muncul diakhir kalimat.
 
                 example_code: |
                     ```
@@ -685,7 +685,7 @@ adventures:
             4:
                 story_text: |-
                     ## Mari menggambar
-                    Pada level 3 kamu harus menggunakan tanda kutip satu pada perintah `print` dan `ask`. Begitu juga ketika menggambar!
+                    Pada level 3 kamu harus menggunakan tanda kutip satu pada perintah `{print}` dan `{ask}`. Begitu juga ketika menggambar!
 
                 example_code: |
                     ```
@@ -920,7 +920,7 @@ adventures:
                     ## Batu, gunting, kertas
                     Pada level 1 kamu dapat memulai dengan permainan batu gunting kertas
 
-                    Dengan perintah `ask` kamu bisa mengambil salah satu pilihan, dan dengan `echo` kamu bisa menampilkan pilihan tersebut.
+                    Dengan perintah `{ask}` kamu bisa mengambil salah satu pilihan, dan dengan `{echo}` kamu bisa menampilkan pilihan tersebut.
 
                 example_code: |
                     ```
@@ -983,8 +983,8 @@ adventures:
                     print pilihan at random
                     ```
 
-                    Kamu dapat menggunakan perintah `ask` lagi pada level 2. Dapatkah kamu menampilkan pilihan kamu dan pilihan komputer?
-                    Berhati-hatilah, `ask` sedikit berbeda dengan yang kamu gunakan di level 1. Sekarang perrintah ini memerlukan nama didepannya.
+                    Kamu dapat menggunakan perintah `{ask}` lagi pada level 2. Dapatkah kamu menampilkan pilihan kamu dan pilihan komputer?
+                    Berhati-hatilah, `{ask}` sedikit berbeda dengan yang kamu gunakan di level 1. Sekarang perrintah ini memerlukan nama didepannya.
 
                 start_code: print Selamat datang di permainan batu guning kertas mu sendiri!
                 story_text_2: "## Challenge\nNow you only have one player, so can you add a second player?\nYou can even use variables to name player 1 and player 2.\n"
@@ -1257,10 +1257,10 @@ adventures:
             4:
                 story_text: |-
                     ## Rumah makan
-                    Pada level 3 kamu harus memakai tanda kutip satu ketika menggunakan perintah `print`.
+                    Pada level 3 kamu harus memakai tanda kutip satu ketika menggunakan perintah `{print}`.
                     Dapatkah kamu membuat kode level 2 kamu berfungsi di level 3 dengan menambahkan kutip satu?
 
-                    Berhati-hatilah! Pada level 2 tanda kutip diperbolehkan di teks namun pada level 3 Hedy tidak akan bisa membedakannya dengan pembatas pada perintah `print`.
+                    Berhati-hatilah! Pada level 2 tanda kutip diperbolehkan di teks namun pada level 3 Hedy tidak akan bisa membedakannya dengan pembatas pada perintah `{print}`.
 
                 example_code: |
                     ```
@@ -1690,7 +1690,7 @@ adventures:
                     ## Apa berikutnya?
                     Selamat! Kamu sudah berhasil menyelesaikan level 1. Besar harapan kamu sudah membuat beberapa kode-kode keren. Tapi Hedy masih punya banyak hal yang dapat kamu pelajari.
 
-                    Pada level 1 kamu mungkin sadar bahwa perintah `echo` hanya dapat menyimpan satu informasi dalam satu satuan waktu.
+                    Pada level 1 kamu mungkin sadar bahwa perintah `{echo}` hanya dapat menyimpan satu informasi dalam satu satuan waktu.
                     Sebagai contoh pada petualangan rumah makan, kamu dapat menampilkan apa yang pembeli mau makan atau minum, namun tidak keduanya dalam satu kalimat.
 
                     ```
@@ -1702,7 +1702,7 @@ adventures:
                     ```
 
                     Jika pembeli menuliskan hamburger dan coke, kamu tidak dapat menampilkan 'jadi kamu mau hamburger dan coke', tapi kamu harus membuat dua baris berbeda.
-                    Lalu, perintah `echo` hanya menampilkan informasi pada akhir kalimat. Jadi kamu tidak bisa mengatakan 'hamburger pesanan sedang dipersiapkan!'
+                    Lalu, perintah `{echo}` hanya menampilkan informasi pada akhir kalimat. Jadi kamu tidak bisa mengatakan 'hamburger pesanan sedang dipersiapkan!'
 
                     Hal ini akan berubah di level 2. Pada level tersebut kamu akan belajar menggunakan variabel, yang memungkinkan kamu untuk menyimpan beberapa informasi dan menampilkannya di lokasi manapun yang kamu mau.
                     Selain itu, kamu juga akan belajar bagaimana menggunakan perintah `at random` yang dapat digunakan untuk membuat permainan.
@@ -1780,7 +1780,7 @@ adventures:
             5:
                 story_text: |-
                     ## Apa berikutnya?
-                    Sekarang kamu sudah mencapai level 4, jadi kamu sudah belajar perintah `ask` dan `{if}`. Sebagai contoh, kamu bisa menanyakan pembeli apa yang mau mereka makan.
+                    Sekarang kamu sudah mencapai level 4, jadi kamu sudah belajar perintah `{ask}` dan `{if}`. Sebagai contoh, kamu bisa menanyakan pembeli apa yang mau mereka makan.
                     Apa yang tidak bisa kamu lakukan adalah: menghitung total harga dari semua makanan yang dipesan.
 
                     Level 5 memungkinkan kamu untuk menggunakan penambahan, pengurangan, dan perkalian di program kamu.

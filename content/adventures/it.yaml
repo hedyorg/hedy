@@ -6,7 +6,7 @@ adventures:
         levels:
             1:
                 story_text: |
-                    Benvenuto in Hedy! Nel Livello 1 puoi usare i comandi `print`,` ask` e `echo`.
+                    Benvenuto in Hedy! Nel Livello 1 puoi usare i comandi `{print}`,` ask` e `{echo}`.
 
                     Sul lato sinistro dello schermo ci sono tutti i comandi del Livello 1.
 
@@ -26,9 +26,9 @@ adventures:
 
                     Se metti il codice `nome is Hedy` all'inizio del tuo programma, puoi usare nome ovunque. Quello sarà poi sostituito da Hedy.
 
-                    La `ask` è cambiata nel livello 2, salva anche la risposta con un nome.
+                    La `{ask}` è cambiata nel livello 2, salva anche la risposta con un nome.
 
-                    `print` funziona ancora come nel livello 1 e non è più necessaria `echo`.
+                    `{print}` funziona ancora come nel livello 1 e non è più necessaria `{echo}`.
 
                 start_code: "{print} ciao mondo!"
                 example_code: "```\nname {is} Hedy\nage {is} 15\n{print} name is age years old\n```\n"
@@ -51,7 +51,7 @@ adventures:
             4:
                 start_code: "{print} 'Ciao mondo'"
                 story_text: |
-                    `print` e `ask` cambiano al livello 4.
+                    `{print}` e `{ask}` cambiano al livello 4.
 
                     È necessario inserire il testo che si desidera stampare tra virgolette.
 
@@ -87,7 +87,7 @@ adventures:
             6:
                 start_code: "print '5 per 5 è ' 5 * 5"
                 story_text: |
-                    `ask`,` print` e `{if}` funzionano ancora come nei livelli 5.
+                    `{ask}`,` print` e `{if}` funzionano ancora come nei livelli 5.
                     Ma nel livello 6 c'è qualcosa di nuovo, ora puoi anche calcolare.
 
                     Il vantaggio è facile, lo scrivi come con la matematica: `5 + 5` per esempio. Anche il segno meno funziona bene, che è `5 - 5`.
@@ -106,7 +106,7 @@ adventures:
             7:
                 start_code: "repeat 3 times print 'Hedy è divertente!'"
                 story_text: |
-                    `ask`, `print` e `{if}` funzionano esattamente come funzionavano nel livello 6.
+                    `{ask}`, `{print}` e `{if}` funzionano esattamente come funzionavano nel livello 6.
                     Il 7 livello introduce il comando `{repeat}`.
                     `{repeat}` può essere usato per ripetere una parte di codice 'x' volte.
                 example_code: |-

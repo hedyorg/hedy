@@ -12,7 +12,7 @@ adventures:
                 example_code_2: "```\n{ask} Jina lako nani?\n{echo} hujambo\n```\n"
                 story_text_3: "Tuanze! Hujui kitu gani cha kutengeneza? Katika kipande kifuatacho utakuta mawazo kwa ajili ya kutengeneza programu.\n"
             2:
-                story_text: "`ask` na `print` mabadiliko katika kiwango cha 3. Hizi mabadiliko, kinamaanisha neno `echo` haitakiwi tena kuchapisha maneno."
+                story_text: "`{ask}` na `{print}` mabadiliko katika kiwango cha 3. Hizi mabadiliko, kinamaanisha neno `{echo}` haitakiwi tena kuchapisha maneno."
                 start_code: "print salamu dunia!"
                 example_code: "```\nname {is} Hedy\nage {is} 15\n{print} name is age years old\n```\n"
                 example_code_3: "```\n{print} My favorite colour is...\n{sleep} 2\n{print} green!\n```\n"
@@ -35,13 +35,13 @@ adventures:
             4:
                 start_code: "print 'Salamu, dunia'"
                 story_text: |-
-                    Neno `ask` kitatumika kama tulivio itumia katika kiwango cha tatu, ila matumizi ya neno `print` kimebadilika kidogo.
+                    Neno `{ask}` kitatumika kama tulivio itumia katika kiwango cha tatu, ila matumizi ya neno `{print}` kimebadilika kidogo.
                     Saa hii, unatakiwa tumia fungua semi na funga semi.
                 example_code: "```\nprint 'You need to use quotation marks from now on!'\nanswer is ask 'What do we need to use from now on?'\nprint 'We need to use ' answer\n```\n"
                 story_text_2: "## Adventures are getting more and more difficult\nThe adventures are now getting more and more difficult in the successive tabs.\nSo it is best to start on the left with the story, and work to the right, in order to be challenged more and more.\n"
             5:
                 start_code: "lugha is ask Lugha ya taifi ni kipi?\nif lugha is Kiswahili print 'umepatia!' else print 'umekosea'"
-                story_text: "`ask` na `print` zitabaki kama tulivio zitumia kiwango cha tatu. Kiwango cha nne tutasoma jinsi ya kitumia neno `{if}`."
+                story_text: "`{ask}` na `{print}` zitabaki kama tulivio zitumia kiwango cha tatu. Kiwango cha nne tutasoma jinsi ya kitumia neno `{if}`."
                 example_code: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'\n```\n"
                 story_text_3: "## Lists\nWhen we want to check if something is in a list, we can now use the `{in}` command.\nThis code prints pretty! if you choose green or yellow, and meh otherwise.\n"
                 example_code_3: "```\npretty_colors {is} green, yellow\ncolor {is} {ask} 'What is your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!'\n{else} {print} 'meh'\n```\n"
@@ -51,13 +51,13 @@ adventures:
                 example_code_4: "```\nif x is pressed print \"it worked!\"\n```\n"
             6:
                 start_code: "print '5 mara 5 ni sawa sawa na ' 5 * 5"
-                story_text: "Matumizi ya `ask`, `print` na `{if}` zitabaki kama kawaida. Kwa kiwango cha sita, tuta soma jinsi ya tufanya hesabu."
+                story_text: "Matumizi ya `{ask}`, `{print}` na `{if}` zitabaki kama kawaida. Kwa kiwango cha sita, tuta soma jinsi ya tufanya hesabu."
                 example_code_2: "```\nname = Hedy\nanswer = 20 + 4\n```\n"
                 example_code: "```\n{print} '5 plus 5 is ' 5 + 5\n{print} '5 minus 5 is ' 5 - 5\n{print} '5 {times} 5 is ' 5 * 5\n```\n"
                 story_text_2: "We also make a change in storing a word in a variable! You may now use `=` instead of  `{is}` when we store a name or a number in a variable, like this:\n"
             7:
                 start_code: "repeat 3 times print 'Hedy ni furaha!'"
-                story_text: "Matumizi ya `ask`, `print` na `{if}` zinabaki kama ziliwio. Ila kwa kiwango cha tano, tutasoma neno `{repeat}`. Neno `{repeat}` kinatumika kurudia utekelezaji mara nyingi."
+                story_text: "Matumizi ya `{ask}`, `{print}` na `{if}` zinabaki kama ziliwio. Ila kwa kiwango cha tano, tutasoma neno `{repeat}`. Neno `{repeat}` kinatumika kurudia utekelezaji mara nyingi."
                 example_code: "```\n{repeat} 3 {times} {print} 'Hedy ni furaha!'\n```\n"
             8:
                 start_code: "repeat 5 times\n    print 'Jambu!! rafiki'\n    print 'Hii itachapishwa kwenye skrini mara 5'"
@@ -84,7 +84,7 @@ adventures:
                 example_code: "```\nanimals {is} dog, cat, blobfish\n{for} animal {in} animals\n  {print} 'I love ' animal\n```\n"
             11:
                 start_code: "for i in range 1 to 10\n    print i\nprint 'Tayari au la, nakuja!'"
-                story_text: "`print` kinatumika kama kawaida ila `{repeat}` kimebadilishwa kuwa `{for}`! kwa sasa na kuendilea utatumia `for i in range 1 to 5`, badala ya `repeat 5 times`. Unawezakutumia  `i` kwenye mpango(program) yako! Kumbuka ujazo baada ya kutumia neno `{for}` na `{if}` (Ikimaanisha kutumia nafasi(space) mara nne kwa kila sentsensi)"
+                story_text: "`{print}` kinatumika kama kawaida ila `{repeat}` kimebadilishwa kuwa `{for}`! kwa sasa na kuendilea utatumia `for i in range 1 to 5`, badala ya `repeat 5 times`. Unawezakutumia  `i` kwenye mpango(program) yako! Kumbuka ujazo baada ya kutumia neno `{for}` na `{if}` (Ikimaanisha kutumia nafasi(space) mara nne kwa kila sentsensi)"
                 example_code: "```\nfor counter in range 1 to 5\n    print counter\n```\n"
             12:
                 start_code: "{print} 'decimal numbers now need to use a dot'\n{print} 2.5 + 2.5"
