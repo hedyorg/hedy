@@ -93,6 +93,8 @@ PUBLIC_PROGRAMS = DATABASE.get_all_public_programs()
 PARSED_PROGRAMS = {}
 
 # Load the adventures, by default with the selected keyword language
+
+
 def load_adventures_per_level(level, keyword_lang):
     loaded_programs = {}
     # If user is logged in, we iterate their programs that belong to the
