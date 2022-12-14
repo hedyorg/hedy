@@ -1320,11 +1320,17 @@ def main_page():
     content = []
     content.append(dict(style='block', **sections.pop(0)))
 
-    for i in range(3):
+    section_images = [
+        '/images/profile_images/5.png',
+        '/images/profile_images/6.png',
+        '/images/profile_images/7.png'
+    ]
+
+    for i, image in enumerate(section_images):
         if not sections: break
         content.append(dict(
             style='pane-with-image-' + ('right' if i % 2 == 0 else 'left'),
-            image='',
+            image=image,
             **sections.pop(0)))
 
     if sections: content.append(dict(style='block', **sections.pop(0)))

@@ -24,7 +24,7 @@
                 </div>
             {% elif section['style'] == 'pane-with-image-left' %}
                 <div class="center-block-wide px-16 flex flex-col md:flex-row justify-between gap-6">
-                    <img src="{{section['image']}}" class="w-1/3">
+                    <img src="{{static(section['image'])}}" class="w-1/3">
                     <div class="column-pane px-8 py-4 w-2/3">
                         <h3>{{ section['title'] }}</h3>
                         <p>{{ section['text']|commonmark }}</p>
@@ -36,7 +36,7 @@
                         <h3>{{ section['title'] }}</h3>
                         <p>{{ section['text']|commonmark }}</p>
                     </div>
-                    <img src="{{section['image']}}" class="w-1/3">
+                    <img src="{{static(section['image'])}}" class="w-1/3">
                 </div>
             {% elif section['style'] == 'columns' %}
                 <div class="center-block columns px-16 flex flex-col md:flex-row justify-between gap-6">
