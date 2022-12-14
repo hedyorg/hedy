@@ -48,7 +48,7 @@ def collect_snippets(path, hashes_saved=set(), only_new_snippets=False):
 
 
 hashes_saved = get_list_from_pickle('parson_hashes.pkl')
-only_new_snippets = True  # get_snippets_env_var()
+only_new_snippets = get_snippets_env_var()
 
 Hedy_snippets = [(s.name, s) for s in collect_snippets(
     path='../../content/parsons',
