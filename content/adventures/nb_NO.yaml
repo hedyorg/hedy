@@ -501,6 +501,10 @@ adventures:
                 story_text: "## Papegøye\nBelønn papegøyen din om det sier det riktige ordet!\n"
                 example_code: "```\nordene {is} skrik, Hedy\n{print} 'Tren papegøyen din!'\nnytt_ord {is} {ask} 'Hvilket nytt ord vil du lære den?'\n{add} nytt_ord {to_list} ordene\nuttalt_ord {is} ordene {at} {random}\n{print} '\U0001F9D2 Si ' nytt_ord ', Hedy!'\n{print} '\U0001F99C ' uttalt_ord\n{if} uttalt_ord {is} nytt_ord {print} '\U0001F9D2 Godt jobbet, Hedy! \U0001F36A'\n{else} {print} '\U0001F9D2 Nei, Hedy! Si ' nytt_ord\n```\n"
                 start_code: '# skriv koden din her'
+            4:
+                story_text: "## Parrot\nIn this level we have to use quotation marks with the commands `{ask}` and `{print}`.\nCan you complete the code by adding quotation marks?\n"
+                example_code: "```\nwords {is} squawk, Hedy\n{print} _ Train your parrot! _\nnew_word {is} {ask} _ Which word do you want to teach them? _\n{add} new_word {to_list} words\n{print} _ \U0001F9D2 Say _ new_word _, Hedy!_\n{print} _ \U0001F99C _ words {at} {random}\n```\n"
+                start_code: '# Write your code here'
     songs:
         name: Syng en sang!
         description: Skriv ut en sang
