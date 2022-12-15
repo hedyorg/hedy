@@ -1128,6 +1128,10 @@ adventures:
                 story_text: "## Loro\nEnseña a tu loro una nueva palabra con `{add}`.\n## Desafío\n¿Cómo puedes hacer que tu loro diga muchas palabras?\n"
                 example_code: "```\npalabras {is} squawk, Hedy\n{print} ¡Entrena a tu lora!\nnueva_palabra {is} {ask} ¿Que palabra le quieres enseñar?\n{add} nueva_palabra {to_list} palabras\n{print} \U0001F9D2 ¡Di nueva_palabra, Hedy!\n{print} \U0001F99C palabras {at} {random}\n```\n"
                 start_code: '# pon tu código aquí'
+            4:
+                start_code: '# Write your code here'
+                story_text: "## Parrot\nIn this level we have to use quotation marks with the commands `{ask}` and `{print}`.\nCan you complete the code by adding quotation marks?\n"
+                example_code: "```\nwords {is} squawk, Hedy\n{print} _ Train your parrot! _\nnew_word {is} {ask} _ Which word do you want to teach them? _\n{add} new_word {to_list} words\n{print} _ \U0001F9D2 Say _ new_word _, Hedy!_\n{print} _ \U0001F99C _ words {at} {random}\n```\n"
         description: ¡Crea tu propia mascota loro que copiará lo que digas!
         default_save_name: Loro
     next:
