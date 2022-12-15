@@ -1452,18 +1452,19 @@ class ConvertToPython_1(ConvertToPython):
     def make_turtle_command(self, parameter, command, command_text, add_sleep, type):
         var_name = None
         exception = ''
-        if self.is_list(parameter):
-            var_name = parameter.split('[')[0]
-        elif self.is_random(parameter):
-            var_name = re.search(r'random\.choice\((.+)\)', parameter).group(1)
-        if var_name is not None:
-            exception_text = gettext('catch_index_exception').replace('{list_name}', style_command(var_name))
-            exception = textwrap.dedent(f"""\
-            try:
-              {parameter}
-            except IndexError:
-              raise Exception('{exception_text}')
-            """)
+        if isinstance(parameter, str):
+            if self.is_list(parameter):
+                var_name = parameter.split('[')[0]
+            elif self.is_random(parameter):
+                var_name = re.search(r'random\.choice\((.+)\)', parameter).group(1)
+            if var_name is not None:
+                exception_text = gettext('catch_index_exception').replace('{list_name}', style_command(var_name))
+                exception = textwrap.dedent(f"""\
+                try:
+                {parameter}
+                except IndexError:
+                raise Exception('{exception_text}')
+                """)
         variable = self.get_fresh_var('__trtl')
         transpiled = exception + textwrap.dedent(f"""\
             {variable} = {parameter}
@@ -1599,8 +1600,9 @@ class ConvertToPython_2(ConvertToPython_1):
         lists_names = []
         list_args = []
         var_regex = r"[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_]+|[\p{Mn}\p{Mc}\p{Nd}\p{Pc}·]+"
-        list_regex = fr"(({var_regex})\[({var_regex})-1\])|(random\.choice\(({var_regex})\))"
+        list_regex = fr"(({var_regex})\[({var_regex})-1\])|(random\.choice\(({var_regex})\))"  # List usage comes in indexation and random choice
         for arg in args:
+            # Expressions come inside a Tree object, so unpack them
             if isinstance(arg, Tree):
                 arg = arg.children[0]
             for group in regex.findall(list_regex, arg):
