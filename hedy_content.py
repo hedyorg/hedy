@@ -115,6 +115,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'rock',
         'dice',
         'dishes',
+        'parrot',
         'turtle',
         'story',
         'haunted',
