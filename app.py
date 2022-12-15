@@ -1329,14 +1329,17 @@ def main_page():
     ]
 
     for i, image in enumerate(section_images):
-        if not sections: break
+        if not sections:
+            break
         content.append(dict(
             style='pane-with-image-' + ('right' if i % 2 == 0 else 'left'),
             image=image,
             **sections.pop(0)))
 
-    if sections: content.append(dict(style='block', **sections.pop(0)))
-    if sections: content.append(dict(style='columns', columns=sections))
+    if sections:
+        content.append(dict(style='block', **sections.pop(0)))
+    if sections:
+        content.append(dict(style='columns', columns=sections))
 
     import pprint
     pprint.pprint(content)
