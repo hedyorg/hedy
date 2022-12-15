@@ -30,7 +30,7 @@
     demo_code: |-
         cor {is} {ask} Qual a sua cor favorita?
         {print} cor é a sua favorita!
--   explanation: Faça Hedy pausar por um ou mais segundos.
+-   explanation: '`{sleep}` deixe Hedy pausar por um (ou mais) segundo(s).'
     name: '{sleep}'
     demo_code: "{print} Deixe-me pensar por um segundo...\n{sleep}\n{print} Hmm.. Eu preciso de mais 3 segundos...\n{sleep} 3\n{print} Eureka! Eu entendi!"
 -   name: '{is} com tartaruga'
@@ -43,11 +43,11 @@
         animais {is} cachorro, gato, canguru
         {print} animais {at} {random}
 -   name: '{add}'
-    explanation: Adicione um item a uma lista.
+    explanation: '`{add}` um item `{to_list}` uma lista.'
     demo_code: "animais {is} vaca, gato\n{add} cachorro {to_list} animais"
 -   demo_code: "animais {is} gato, cachorro, vaca\n{remove} cachorro {from} animais"
     name: '{remove}'
-    explanation: Remova um item de uma lista.
+    explanation: '`{remove}` um item `{from}` uma lista.'
 4:
 -   name: "{print}"
     explanation: "Imprima exatamente usando aspas simples."
@@ -85,8 +85,8 @@
     explanation: Verifique elementos com `{in}`.
     demo_code: "cores_bonitas {is} verde, amarelo\ncor {is} {ask} 'Qual é a sua cor favorita?'\n{if} cor {in} cores_bonitas {print} 'bonita!' {else} {print} 'não gostei'"
 -   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
-    demo_code: "{if} a {is} {pressed} {print} 'You pressed A!' {else} {print} 'You pressed another key!'"
+    explanation: Verifique se uma determinada tecla no teclado está `{pressed}`.
+    demo_code: "{if} a {is} {pressed} {print} 'Você apertou A!' {else} {print} 'Você apertou outra tecla!'"
 6:
 -   name: "{print}"
     explanation: "Imprima exatamente usando aspas simples."
@@ -138,8 +138,8 @@
     explanation: 'Repita múltiplas linhas.'
     demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
 -   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
-    demo_code: "{if} a {is} {pressed}\n    {print} 'You pressed A!'\n{else}\n    {print} 'You pressed another key!'"
+    explanation: Verifique se uma determinada tecla no teclado está `{pressed}`.
+    demo_code: "{if} a {is} {pressed}\n    {print} 'Você apertou A!'\n{else}\n    {print} 'Você apertou outra tecla!'"
 9:
 -   name: "{if} com múltiplas linhas"
     explanation: "Peça pela resposta de uma soma com `{ask}` e verifique se está correta. Agora imprima duas linhas."
@@ -160,7 +160,7 @@
 10:
 -   name: "{print}"
     explanation: "Imprima algo. Lembre-se de usar aspas para imprimir exatamente."
-    demo_code: "{print} '5 vezes 5 is ' 5 * 5"
+    demo_code: "{print} '5 vezes 5 é ' 5 * 5"
 -   name: "{for} com uma lista"
     explanation: "Imprima todas as coisas de uma lista."
     demo_code: |-
@@ -271,7 +271,7 @@
     explanation: "Para obter um elemento aleatório de uma lista nós usamos [random], então fruta[random] significa obter uma fruta qualquer da lista!"
     demo_code: |-
         fruta = ['banana', 'maçã', 'cereja']
-        qualquer_fruta = fruta[random]
+        qualquer_fruta = fruta[{random}]
         {print} qualquer_fruta
 17:
 -   explanation: "`{elif}`"
@@ -307,7 +307,7 @@
     explanation: "Depois de `{range}` você precisa usar parênteses."
     demo_code: |-
         {for} i {in} {range} (1,10):
-            {print}('Olá, vezes ', i)
+            {print}('Olá, ', i, ' vezes')
 -   name: '{print} com variável'
     explanation: Com `{print}` você precisa usar parênteses e vírgulas para imprimir mais itens.
     demo_code: "nome = 'Hedy'\n{print}('meu nome é ', nome)"

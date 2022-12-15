@@ -1,14 +1,14 @@
 1:
 -   name: "{print}"
     explanation: "Affiche quelque chose avec `{print}`."
-    demo_code: "{print} Bonjour et bienvenue dans Hedy !"
+    demo_code: "{print} Bonjour et bienvenue dans Hedy!"
 -   name: "{ask}"
     explanation: "Demande quelque chose avec `{ask}`."
     demo_code: "{ask} Quelle est ta couleur préférée ?"
 -   name: "{echo}"
     explanation: "Répète quelque chose avec `{echo}`."
     demo_code: |-
-        {ask} Quelle est ta couleur préférée ?
+        {ask} Quelle est ta couleur préférée?
         {echo} donc ta couleur préférée est
 -   name: '{print} emojis'
     explanation: Afficher un emoji avec `{print}`.
@@ -83,8 +83,8 @@
     explanation: Check elements with `{in}`.
     demo_code: "jolies_couleurs {is} vert, jaune\ncouleur {is} {ask} 'Quelle est ta couleur favorite?'\n{if} couleur {in} jolies_couleurs {print} 'joli!' {else} {print} 'moche'"
 -   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
-    demo_code: "{if} a {is} {pressed} {print} 'You pressed A!' {else} {print} 'You pressed another key!'"
+    explanation: Vérifiez si une touche donnée du clavier est `{pressed}`.
+    demo_code: "{if} a {is} {pressed} {print} 'Vous avez appuyé sur A!' {else} {print} 'Vous avez appuyé sur une autre touche!'"
 6:
 -   name: "{print}"
     explanation: "Affiche exactement ce qui est entre les guillemets."
@@ -136,8 +136,8 @@
     name: '{repeat} avec la tortue'
     explanation: 'Répète plusieurs lignes.'
 -   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
-    demo_code: "{if} a {is} {pressed}\n    {print} 'You pressed A!'\n{else}\n    {print} 'You pressed another key!'"
+    explanation: Vérifiez si une touche donnée du clavier est `{pressed}`.
+    demo_code: "{if} a {is} {pressed}\n    {print} 'Vous avez appuyé sur A!'\n{else}\n    {print} 'Vous avez appuyé sur une autre touche!'"
 9:
 -   name: "{if} avec plusieurs lignes"
     explanation: "Vérifies la réponse d'une addition de nombres avec `{ask}`. On affiche maintenant sur 2 lignes."

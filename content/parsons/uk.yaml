@@ -2,14 +2,14 @@ levels:
     6:
         1:
             code: |
-                age = {ask} 'How old are you?'
+                age = {ask} 'Скільки тобі років?'
                 dog_age = age * 7
                 cat_age = age * 5
-                {print} 'In dog years you are ' dog_age ' years old.'
-                {print} 'In cat years you are ' cat_age ' years old.'
-            story: Make a program that calculates how old you are in dog and cat years.\nFirst ask the age of the user and start calculating.\nFirst calculate the dogyears then the catyears.\nShow the user the different ages.\n
+                {print} 'У собачих роках вам ' dog_age ' років.'
+                {print} 'У котячих роках вам ' cat_age ' років.'
+            story: "Створіть програму, яка обчислює, скільки вам років у собачих і котячих роках.\nСпочатку запитайте вік користувача та почніть обчислювати.\nСпочатку обчисліть собачі роки, а потім котячі.\nПокажіть користувачеві різні віки.\n"
         2:
-            story: Create a program that helps you calculate how many cakes you should buy for your birthday party.\n
+            story: "Створіть програму, яка допоможе вам підрахувати, скільки тортів ви повинні купити на свій день народження.\n"
             code: |
                 {print} "Це твій день народження!"
                 осіб = {ask} 'Скільком людям ви хочете дати шматочок торта?'
@@ -25,72 +25,72 @@ levels:
                 {remove} гравець1 {from} гравці
                 {remove} гравець12 {from} гравці
                 {print} 'Переможець грає проти ' гравці {at} {random}
-            story: In a chess tournament there are three players left.\nCreate a program that decides which two players first play against each other.\nFirst print the two players who play the first match, then print against which player the winner will play.\n
+            story: "У шаховому турнірі залишилися три гравці.\nСтворіть програму, яка вирішує, які два гравці спочатку грають один проти одного.\nСпочатку роздрукуйте двох гравців, які грають перший матч, а потім роздрукуйте, проти якого гравця буде грати переможець.\n"
         2:
-            story: Create the song 'The wheels on the bus go round and round'\n
+            story: "Створіть пісню 'Колеса в автобусі крутяться'\n"
             code: |
-                {print} 'the wheels on the bus go'
-                {print} 'the wheels of the bus go round and round'
-                {print} 'all through the town '
-                {repeat} 3 {times} {print} 'round and round'
+                {print} 'Колеса автобуса крутяться'
+                {repeat} 3 {times} {print} 'по колу'
+                {print} 'Колеса автобуса крутяться і крутяться'
+                {print} 'по всьому місту'
     8:
         1:
             story: |
-                You and four other friends are playing Pokémon Go! Create a program that decides in which team each of you will play.
-                Either red, yellow or blue! Take a little pause after announcing a team.
+                Ви та ще четверо друзів граєте в Pokémon Go! Створіть програму, яка вирішить, у якій команді кожен із вас гратиме.
+                Червона, жовта або синя! Зробіть невелику паузу після оголошення команди.
             code: |
-                teams = red, yellow, blue
-                {print} 'Red, Yellow or Blue?'
+                команди = червоні, жовті, сині
+                {print} 'Червоні, жовті чи сині?'
                 {repeat} 5 {times}
-                    {print} 'You are selected in team... '
-                    {print} teams {at} {random}
-                    sleep 2
+                    {print} 'Ви обрані в команду...'
+                    {print} команди {at} {random}
+                    {sleep} 2
         2:
-            story: Print the countdown for a game of hide and seek.\n
+            story: "Роздрукуйте зворотний відлік для гри в хованки.\n"
             code: |
-                counter = 11
+                лічильник = 11
                 {repeat} 10 {times}
-                    counter = counter - 1
-                    {print} counter
+                    лічильник = лічильник - 1
+                    {print} лічильник
                     {sleep} 1
-                {print} 'Ready or not here I come!'
+                {print} 'Готові чи ні, але я йду!'
     1:
         1:
             story: "Ви покупець пекарні Hedy.\nВи хочете в пекарню, і пекар вас радо зустрічає.\nВін запитує, який тип пирога ви хочете замовити.\nДалі ваше замовлення готується.\n"
             code: |
-                {print} Ласкаво просимо в пекарню Hedy!
-                {ask} Який тип пирога ви хочете замовити?
-                {echo} Отже, ви хочете
+                {print} Ласкаво просимо до пекарні Хеді!
+                {ask} Який пиріг ви хочете замовити?
+                {echo} То ви хочете
                 {print} Ваше замовлення готується!
 
         2:
             story: "Ви біля ді-джейської столу та питаєте поставити пісню. Створіть програму, яка запитає, чи готові ви до вечірки, а потім запитає, яку пісню ви б хотіли почути.\n"
             code: |
-                {print} Це DJ Hedy
+                {print} З вами DJ Hedy
                 {ask} Ви готові до вечірки?
-                {ask} Яку пісню ви б хотіли почути?
+                {ask} Яку пісню хотіли б почути?
                 {echo} Чудовий вибір! Мені подобається
     2:
         1:
             story: "Ви та ваші друзі збираєтеся переглянути Netflix.\nПокажи, який фільм ти збираєшся дивитися, і побажай глядачам веселощів!\n"
             code: |
                 {print} Настав час для вечора Netflix'
-                film {is} Sonic the Hedgehog 2
-                {print} Ми будемо знімати
-                {print} Гарного вам задоволення!'
+                фільм {is} Сонік 2
+                {print} Ми будемо дивитися
+                {print} Веселіться!
         2:
             story: "Це інтернет-магазин іграшок. Створіть програму, за допомогою якої користувач може додати товар до свого кошика.\n"
             code: |
-                {print} Ласкаво просимо в наш магазин іграшок'
+                {print} Ласкаво просимо в наш магазин іграшок
                 іграшка {is} {ask} Що б ви хотіли купити?
-                {print} Іграшка додана до кошика покупок.'
-                {print} Дякуємо, що купуєте у нас!'
+                {print} Іграшка додана до кошика покупок.
+                {print} Дякуємо, що купуєте у нас!
     3:
         1:
             code: |
-                {print} Новий навчальний рік у Гоґвортсі розпочинається!'
-                {print} Капелюх-сортувальник готовий розсортувати вас по домівках Гоґвортсу.'
-                будинок {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin'
+                {print} Новий навчальний рік у Гоґвортсі розпочинається!
+                {print} Сортувальний капелюх готовий розсортувати вас по домівках Гоґвортсу.
+                будинок {is} Ґрифіндор, Гаффлпаф, Рейвенклов, Слизарин
                 {sleep} 2
                 {print} І це будинок {at} {random}
             story: "Новий навчальний рік у Гоґвортсі розпочинається!\nЗавдання капелюха-сортувальника - відсортувати вас до одного з будиночків.\nВ який будинок ви потрапите?\nВи будите навчатися на Гриффіндорі, Хаффлпафі, Рейвенклову чи Слизерину?\nНехай програма почекає деякий час, перш ніж покаже ваш будинок.\n"
@@ -106,26 +106,26 @@ levels:
         1:
             story: "Ви - новий тренер покемонів з Палеттауна!\nСкладіть програму, яка вибирає вашого першого покемона.\nЗачекайте хвилину, перш ніж програма покаже вам першого покемона.\n"
             code: |
-                Покемон {is} Pikachu, Charmander, Bulbasaur, Squirtle
+                Покемони {is} Пікачу, Чармандер, Бульбазавр, Сквиртл
                 {print} 'Це буде ваш перший покемон!'
                 {sleep}
-                {print} Покемон {at} {random}
+                {print} Покемони {at} {random}
         2:
             story: "Створіть лотерею, яка дозволить вам вибрати додаткову ціну, яку ви можете виграти.\n"
             code: |
-                ціни {is} car, hamster, 1 million euros
+                ціни {is} автомобіль, хом'як, 1 мільйон євро
                 ціна {is} {ask} 'Яку суму ви б хотіли отримати за перемогу?'
                 {add} ціна {to_list} ціни
-                {print} 'You won a ' ціни {at} {random}
+                {print} 'Ви виграли' ціни {at} {random}
     5:
         1:
             story: "Зробіть програму, яка перевіряє, чи є ваш улюблений фільм у списку комп'ютера.\nЯкщо так, то надрукуйте, що у вас чудовий смак, інакше додайте фільм до списку.\n"
             code: |
-                favorite_movies {is} Batman, Spiderman, The Avengers, Jurassic Park
-                movie {is} {ask} 'What is your favourite movie?'
-                {if} movie {in} favorite_movies {print} 'You have great taste!'
-                {else} {print} 'Such a shame that your favourite movie is not in the list, we will add it right away!'
-                {add} movie {to_list} favorite_movies
+                Улюблені_фільми {is} Бетмен, Людина-Павук, Месник, Парк Юрського періоду
+                фільм {is} {ask} 'Який твій улюблений фільм?'
+                {if} фільм {in} Улюблені_фільми {print} 'У вас чудовий смак!'
+                {else} {print} 'Як шкода, що вашого улюбленого фільму немає в списку, ми його відразу додамо!'
+                {add} фільм {to_list} Улюблені_фільми
         2:
             story: "Створіть математичну гру.\n"
             code: |
