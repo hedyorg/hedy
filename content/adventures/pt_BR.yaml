@@ -380,6 +380,10 @@ adventures:
                 story_text: "## Papagaio\nRecompense seu papagaio se ele disser a palavra correta!\n"
                 example_code: "```\npalavras {is} grasnar, Hedy\n{print} 'Treine seu papagaio!'\nnova_palavra {is} {ask} 'Qual palavra você quer ensinar a ele?'\n{add} nova_palavra {to_list} palavras\npalavra_dita {is} palavras {at} {random}\n{print} '\U0001F9D2 Diga ' nova_palavra ', Hedy!'\n{print} '\U0001F99C' palavra_dita\n{if} palavra_dita {is} nova_palavra {print} '\U0001F9D2 Ótimo trabalho, Hedy! \U0001F36A'\n{else} {print} '\U0001F9D2 Não, Hedy! Diga ' nova_palavra\n```\n"
                 start_code: '# coloque o seu código aqui'
+            4:
+                story_text: "## Parrot\nIn this level we have to use quotation marks with the commands `{ask}` and `{print}`.\nCan you complete the code by adding quotation marks?\n"
+                start_code: '# Write your code here'
+                example_code: "```\nwords {is} squawk, Hedy\n{print} _ Train your parrot! _\nnew_word {is} {ask} _ Which word do you want to teach them? _\n{add} new_word {to_list} words\n{print} _ \U0001F9D2 Say _ new_word _, Hedy!_\n{print} _ \U0001F99C _ words {at} {random}\n```\n"
         name: Papagaio
         description: Crie seu próprio papagaio de estimação online que irá copiar você!
     songs:
