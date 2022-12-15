@@ -1571,7 +1571,7 @@ class ConvertToPython_2(ConvertToPython_1):
         parameter = args[0]
         value = args[1]
         if self.is_random(value) or self.is_list(value):
-            exception = self.make_catch_exception_single_var(value)
+            exception = self.make_catch_exception([value])
             return exception + parameter + " = " + value
         else:
             if self.is_variable(value):
@@ -1581,19 +1581,6 @@ class ConvertToPython_2(ConvertToPython_1):
                 # if the assigned value is not a variable and contains single quotes, escape them
                 value = process_characters_needing_escape(value)
                 return parameter + " = '" + value + "'"
-
-    def make_catch_exception_single_var(self, value):
-        if self.is_list(value):
-            var_name = value.split('[')[0]
-        else:
-            var_name = re.search(r'random\.choice\((.+)\)', value).group(1)
-        exception_text = gettext('catch_index_exception').replace('{list_name}', style_command(var_name))
-        return textwrap.dedent(f"""\
-            try:
-              {value}
-            except IndexError:
-              raise Exception('{exception_text}')
-            """)
 
     def sleep(self, meta, args):
         if not args:
@@ -1611,15 +1598,18 @@ class ConvertToPython_2(ConvertToPython_1):
     def make_catch_exception(self, args):
         lists_names = []
         list_args = []
+        var_regex = r"[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_]+|[\p{Mn}\p{Mc}\p{Nd}\p{Pc}·]+"
+        list_regex = fr"(({var_regex})\[({var_regex})-1\])|(random\.choice\(({var_regex})\))"
         for arg in args:
-            if self.is_list(arg):
-                var_name = arg.split("[")
-                lists_names.append(var_name[0])
-                list_args.append(arg)
-            elif self.is_random(arg):
-                var_name = re.search(r'random\.choice\((.+)\)', arg).group(1)
-                lists_names.append(var_name)
-                list_args.append(arg)
+            if isinstance(arg, Tree):
+                arg = arg.children[0]
+            for group in regex.findall(list_regex, arg):
+                if group[0] != '':
+                    list_args.append(group[0])
+                    lists_names.append(group[1])
+                else:
+                    list_args.append(group[3])
+                    lists_names.append(group[4])
         code = ""
         exception_text_template = gettext('catch_index_exception')
         for i, list_name in enumerate(lists_names):
@@ -1834,7 +1824,7 @@ class ConvertToPython_6(ConvertToPython_5):
             if self.is_variable(value):
                 value = self.process_variable(value, meta.line)
                 if self.is_list(value) or self.is_random(value):
-                    exception = self.make_catch_exception_single_var(value)
+                    exception = self.make_catch_exception([value])
                     return exception + parameter + " = " + value
                 else:
                     return parameter + " = " + value
@@ -2109,7 +2099,7 @@ class ConvertToPython_12(ConvertToPython_11):
         else:
             # we no longer escape quotes here because they are now needed
             if self.is_list(right_hand_side) or self.is_random(right_hand_side):
-                exception = self.make_catch_exception_single_var(right_hand_side)
+                exception = self.make_catch_exception([right_hand_side])
                 return exception + left_hand_side + " = " + right_hand_side + ""
             else:
                 return left_hand_side + " = " + right_hand_side + ""
@@ -2208,7 +2198,8 @@ class ConvertToPython_15(ConvertToPython_14):
         all_lines = [ConvertToPython.indent(x) for x in args[1:]]
         body = "\n".join(all_lines)
         body = sleep_after(body)
-        return "while " + args[0] + ":\n" + body
+        exceptions = self.make_catch_exception([args[0]])
+        return exceptions + "while " + args[0] + ":\n" + body
 
 
 @v_args(meta=True)
@@ -2230,6 +2221,11 @@ class ConvertToPython_16(ConvertToPython_15):
             raise Exception('{exception_text}')
         """)
         return exception + left_side + ' = ' + right_side
+
+    def ifs(self, meta, args):
+        all_lines = [ConvertToPython.indent(x) for x in args[1:]]
+        exceptions = self.make_catch_exception([args[0]])
+        return exceptions + "if " + args[0] + ":\n" + "\n".join(all_lines)
 
 
 @v_args(meta=True)
