@@ -5,7 +5,7 @@
     <title>Hedy - Slides</title>
     <link rel="stylesheet" href="{{static('vendor/reveal/dist/reset.css')}}">
     <link rel="stylesheet" href="{{static('vendor/reveal/dist/reveal.css')}}">
-    <link rel="stylesheet" href="{{static('vendor/reveal/dist/theme/black.css')}}">
+    <link rel="stylesheet" href="{{static('vendor/reveal/dist/theme/simple.css')}}">
 
     <!-- Theme used for syntax highlighted code -->
     <link rel="stylesheet" href="{{static('vendor/reveal/plugin/highlight/monokai.css')}}">
@@ -15,6 +15,7 @@
       <div class="slides">
           {% for index, slide in slides.items() %}
             <section data-markdown>
+                {{ slide['header'] }}
                 <textarea data-template>
                     ## {{ slide['header'] }}
                     {{ slide['text'] }}
@@ -33,6 +34,9 @@
         // - https://revealjs.com/config/
         Reveal.initialize({
             hash: true,
+            transition: 'none',
+            slideNumber: true,
+            keyboard: true,
             // Learn about plugins: https://revealjs.com/plugins/
             plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
         });
