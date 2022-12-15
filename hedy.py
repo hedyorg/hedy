@@ -825,7 +825,7 @@ class TypeValidator(Transformer):
                 return type_in_lookup
             else:
 
-                # if the variable name is 'at', it's because they tried to print "at random" 
+                # if the variable name is 'at', it's because they tried to print "at random"
                 # in a level that wasn't allowed
                 if var_name == 'at' and self.level >= 16:
                     raise exceptions.InvalidRandomCommandException()
@@ -1697,8 +1697,6 @@ class ConvertToPython_5(ConvertToPython_4):
         super().__init__(lookup, numerals_language)
         self.ifpressed_prefix_added = False
 
-
-
     def ifs(self, meta, args):
         return f"""if {args[0]}:
 {ConvertToPython.indent(args[1])}"""
@@ -2239,6 +2237,7 @@ class ConvertToPython_16(ConvertToPython_15):
 
     def change_list_item(self, meta, args):
         return args[0] + '[' + args[1] + '-1] = ' + args[2]
+
 
 @v_args(meta=True)
 @hedy_transpiler(level=17)

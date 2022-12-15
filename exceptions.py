@@ -173,10 +173,12 @@ class MissingInnerCommandException(HedyException):
                          level=level,
                          line_number=line_number)
 
+
 class InvalidRandomCommandException(HedyException):
     def __init__(self):
         super().__init__('Invalid Random Command', command='at random', right_command='list_name[random]')
-                         
+
+
 class IncompleteRepeatException(HedyException):
     def __init__(self, command, level, line_number):
         super().__init__('Incomplete Repeat',
