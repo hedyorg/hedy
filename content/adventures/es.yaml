@@ -1351,7 +1351,7 @@ adventures:
                 example_code: "```\nstepsize = 15\nleft = -90\nright = 90\naround = 180\njumptime = 5\nspins = 4\nrepeat 40 times\n    {if} w {is} {pressed}:\n        forward stepsize\n        jumptime = jumptime - 1\n    {if} s {is} {pressed}:\n        turn around\n    {if} a {is} {pressed}:\n        turn left\n        spins = spins - 1\n    {if} d {is} {pressed}:\n        turn right\n        spins = spins - 1\n    {if} p {is} {pressed}:\n        {if} jumptime <= 0 or spins <= 0:\n            forward stepsize * 3\n            jumptime = 5\n            spins = 4\n        {elif} jumptime > 0:\n            print \"you need to take more steps or turns before you can superjump!\"\n```\n"
                 start_code: '# place your code here'
             7:
-                start_code: '# place your code here'
+                start_code: '# coloque su código aquí'
                 story_text: "Puede que lo hayas intentado en los niveles 5 y 6, pulsando varias veces la tecla vinculada a ```pressed```.\nSi lo hiciste, te diste cuenta de que esto no hizo nada. pero ahora que has aprendido acerca de la repetición, podemos\n¡podemos pulsar teclas varias veces! ¡Haz que la tortuga camine hacia delante!\n"
                 example_code: "```\n{repeat} 3 {times} {if} x {is} {pressed} forward 15\n```\n"
             8:
@@ -1379,7 +1379,7 @@ adventures:
             6:
                 start_code: '# coloque su código aquí'
                 story_text: "¿Sabías que también puedes hacer una calculadora con la tecla ``pressed``?\nDale a la calculadora dos números y pulsa la tecla m para multiplicar.\n¡Ahora ya no tienes que traer la tuya!\nPrueba con otras teclas y ¡a ver qué pasa! ¿Obtienes un resultado diferente?\n"
-                example_code: "```\nfirst = {ask} 'what is your first number?'\nsecond = {ask} 'what is your second number?'\nprint 'press a to add, s to substract, d to divide, m to multiply'\n{if} a {is} {pressed} result = first + second\n{if} s {is} {pressed} result = first - second\n{if} d {is} {pressed} result = first / second\n{if} m {is} {pressed} result = first * second\n{print}'The answer is ' result\n```\n"
+                example_code: "```\nprimero = {ask} ¿cuál es tu primer número?\nsegundo = {ask} ¿cuál es tu segundo número?\nprint 'pulsa a para sumar, s para restar, d para dividir, m para multiplicar'\nsi a {is} {pressed} resultado = primero + segundo\nsi s {is} {pressed} resultado = primero - segundo\nsi d {is} {pressed} resultado = primero / segundo\nsi m {is{ask}} {pressed} resultado = primero * segundo\nprint 'La respuesta es ' result\n```\n"
             5:
                 story_text_2: "## Si Else está pulsado\nTambién puede asignar una sentencia else a ```pressed``. La sentencia else se ejecutará\nsiempre que presione una tecla distinta a la asignada.\n"
                 example_code_2: "```\n{if} y {is} {pressed} {print} 'Amazing! You pressed the y key!'\n{else} {print} 'Oh no! You did not press the y key.'\n```\n"
