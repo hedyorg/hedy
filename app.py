@@ -545,16 +545,26 @@ def download_machine_file(filename, extension="zip"):
     return send_file("machine_files/" + filename + "." + extension, as_attachment=True)
 
 
+def hash_parse_lookup(uniq_hash):
+    PARSED_PROGRAMS[uniq_hash]['frequency'] += 1
+    return PARSED_PROGRAMS.get(uniq_hash).get('result')
+
+
+def add_hash_parse(uniq_hash, result):
+    #PARSED_PROGRAMS = sorted(PARSED_PROGRAMS, key=lambda key: PARSED_PROGRAMS['frequency'], reverse=True)[:999]
+    PARSED_PROGRAMS[uniq_hash] = {'result': result, 'frequency': 1}
+
+
 def transpile_add_stats(code, level, lang_):
     username = current_user()['username'] or None
     number_of_lines = code.count('\n')
     try:
         uniq_hash = hash(code + str(level) + lang)
         if uniq_hash in PARSED_PROGRAMS:
-            result = PARSED_PROGRAMS.get(uniq_hash)
+            result = hash_parse_lookup(uniq_hash)
         else:
             result = hedy.transpile(code, level, lang_)
-            PARSED_PROGRAMS[uniq_hash] = result
+            add_hash_parse(uniq_hash, result)
         statistics.add(
             username, lambda id_: DATABASE.add_program_stats(id_, level, number_of_lines, None))
         return result
