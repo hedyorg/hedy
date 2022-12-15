@@ -734,6 +734,10 @@ adventures:
                 story_text: "## Parrot\nReward your parrot if it says the correct word!\n"
                 example_code: "```\nслова {is} крякай, Хеді.\n{print} 'Дресируй папугу!'\nнове_слово {is} {ask} 'Якому слову ви хочете їх навчити?'\n{add} нове_слово {to_list} слова\nсказане_слово {is} слів {at} {random}\n{print} '\U0001F9D2 Скажи ' нове_слово ', Хеді!'\n{print} '\U0001F99C ' сказане_слово\n_ сказане_слово {is} нове_слово ' \U0001F9D2 Молодець, Хеді! \U0001F36A'\n_ _ ' \U0001F9D2 Ні, Хеді! Скажи ' нове_слово\n```\n"
                 start_code: '# place your code here'
+            4:
+                story_text: "## Parrot\nIn this level we have to use quotation marks with the commands `{ask}` and `{print}`.\nCan you complete the code by adding quotation marks?\n"
+                example_code: "```\nwords {is} squawk, Hedy\n{print} _ Train your parrot! _\nnew_word {is} {ask} _ Which word do you want to teach them? _\n{add} new_word {to_list} words\n{print} _ \U0001F9D2 Say _ new_word _, Hedy!_\n{print} _ \U0001F99C _ words {at} {random}\n```\n"
+                start_code: '# Write your code here'
     quizmaster:
         name: Quizmaster
         description: Make your own quiz!
