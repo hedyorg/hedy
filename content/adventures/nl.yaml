@@ -766,7 +766,7 @@ adventures:
                     ## Papegaai
                     Leer je papegaai nieuwe woordjes met het `{add}` commando!
                     ## Uitdaging
-                    Hoe kun je de papegaai meerde woorden laten zeggen?
+                    Hoe kun je de papegaai meerdere woorden laten zeggen?
                 example_code: |
                     ```
                     woorden {is} lorre, Hedy
@@ -777,6 +777,21 @@ adventures:
                     {print} 🦜: woorden {at} {random}
                     ```
                 start_code: "# Schrijf jouw code hier"
+            4:
+                story_text: |
+                    ## Papegaai
+                    In dit level gebruiken we aanhalingstekens bij de commando's `{ask}` en `{print}`.
+                    Kun jij de code afmaken door aanhalingstekens toe te voegen?
+                example_code: |
+                    ```
+                    woorden {is} lorre, Hedy
+                    {print} _ Train je papegaai! _
+                    nieuw_woord {is} {ask} _ Welk woord moet je papegaai leren? _
+                    {add} nieuw_woord {to_list} woorden
+                    {print} _ 🧒: Zeg _ nieuw_woord _ , Hedy! _
+                    {print} _ 🦜: _ woorden {at} {random}
+                    ```
+                start_code: "Schrijf jouw code hier"
             5:
                 story_text: |
                     ## Papegaai
