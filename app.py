@@ -7,6 +7,7 @@ import logging
 import os
 import sys
 import textwrap
+import random
 import traceback
 import zipfile
 from logging.config import dictConfig as logConfig
@@ -88,8 +89,6 @@ ACHIEVEMENTS = achievements.Achievements(DATABASE, ACHIEVEMENTS_TRANSLATIONS)
 # We retrieve these once on server-start: Would be nice to automate this
 # somewhere in the future (06/22)
 PUBLIC_PROGRAMS = DATABASE.get_all_public_programs()
-
-# Todo TB: We start with an empty dictionary, maybe pre-parse all default programs when not in debug mode
 PARSED_PROGRAMS = {}
 
 # Load the adventures, by default with the selected keyword language
@@ -546,12 +545,17 @@ def download_machine_file(filename, extension="zip"):
 
 
 def hash_parse_lookup(uniq_hash):
+    global PARSED_PROGRAMS
     PARSED_PROGRAMS[uniq_hash]['frequency'] += 1
     return PARSED_PROGRAMS.get(uniq_hash).get('result')
 
 
 def add_hash_parse(uniq_hash, result):
-    #PARSED_PROGRAMS = sorted(PARSED_PROGRAMS, key=lambda key: PARSED_PROGRAMS['frequency'], reverse=True)[:999]
+    global PARSED_PROGRAMS
+    if len(PARSED_PROGRAMS) >= 500:
+        min_freq = min(PARSED_PROGRAMS, key=PARSED_PROGRAMS.get('frequency'))
+        min_keys = [key for key in PARSED_PROGRAMS if PARSED_PROGRAMS['frequency'] == min_freq]
+        PARSED_PROGRAMS.pop(random.choice(min_keys))
     PARSED_PROGRAMS[uniq_hash] = {'result': result, 'frequency': 1}
 
 
