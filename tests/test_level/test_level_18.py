@@ -328,7 +328,7 @@ class TestsLevel18(HedyTester):
             if event.key == 'PRINT':
               print(f'''The button got pressed!''')
               break""")
-              
+
         self.single_level_tester(code=code, expected=expected)
 
     def test_if_button_is_pressed_print_in_repeat(self):
