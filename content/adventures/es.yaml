@@ -1383,7 +1383,7 @@ adventures:
             6:
                 start_code: '# coloque su código aquí'
                 story_text: "¿Sabías que también puedes hacer una calculadora con la tecla ``pressed``?\nDale a la calculadora dos números y pulsa la tecla m para multiplicar.\n¡Ahora ya no tienes que traer la tuya!\nPrueba con otras teclas y ¡a ver qué pasa! ¿Obtienes un resultado diferente?\n"
-                example_code: "```\nprimero = {ask} ¿cuál es tu primer número?\nsegundo = {ask} ¿cuál es tu segundo número?\nprint 'pulsa a para sumar, s para restar, d para dividir, m para multiplicar'\nsi a {is} {pressed} resultado = primero + segundo\nsi s {is} {pressed} resultado = primero - segundo\nsi d {is} {pressed} resultado = primero / segundo\nsi m {is{ask}} {pressed} resultado = primero * segundo\nprint 'La respuesta es ' result\n```\n"
+                example_code: "```\nprimero = {ask} ¿cuál es tu primer número?\nsegundo = {ask} ¿cuál es tu segundo número?\n{print} 'pulsa a para sumar, s para restar, d para dividir, m para multiplicar'\n{if} a {is} {pressed} resultado = primero + segundo\n{if} s {is} {pressed} resultado = primero - segundo\n{if} d {is} {pressed} resultado = primero / segundo\n{if} m {is} {pressed} resultado = primero * segundo\n{print} 'La respuesta es ' result\n```\n"
             5:
                 story_text_2: "## Si Else está pulsado\nTambién puede asignar una sentencia else a ```pressed``. La sentencia else se ejecutará\nsiempre que presione una tecla distinta a la asignada.\n"
                 example_code_2: "```\n{if} y {is} {pressed} {print} 'Amazing! You pressed the y key!'\n{else} {print} 'Oh no! You did not press the y key.'\n```\n"
