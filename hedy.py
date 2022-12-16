@@ -1453,21 +1453,9 @@ class ConvertToPython_1(ConvertToPython):
         return self.make_turtle_color_command(parameter, Command.color, 'pencolor')
 
     def make_turtle_command(self, parameter, command, command_text, add_sleep, type):
-        var_name = None
         exception = ''
         if isinstance(parameter, str):
-            if self.is_list(parameter):
-                var_name = parameter.split('[')[0]
-            elif self.is_random(parameter):
-                var_name = re.search(r'random\.choice\((.+)\)', parameter).group(1)
-            if var_name is not None:
-                exception_text = gettext('catch_index_exception').replace('{list_name}', style_command(var_name))
-                exception = textwrap.dedent(f"""\
-                try:
-                {parameter}
-                except IndexError:
-                raise Exception('{exception_text}')
-                """)
+            exception = self.make_catch_exception([parameter])
         variable = self.get_fresh_var('__trtl')
         transpiled = exception + textwrap.dedent(f"""\
             {variable} = {parameter}
@@ -1487,6 +1475,35 @@ class ConvertToPython_1(ConvertToPython):
             if {variable} not in {command_make_color}:
               raise Exception(f'While running your program the command {style_command(command)} received the value {style_command('{' + variable + '}')} which is not allowed. Try using another color.')
             t.{command_text}({variable})""")
+
+    def make_catch_exception(self, args):
+        lists_names = []
+        list_args = []
+        var_regex = r"[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_]+|[\p{Mn}\p{Mc}\p{Nd}\p{Pc}·]+"
+        # List usage comes in indexation and random choice
+        list_regex = fr"(({var_regex})\[({var_regex})-1\])|(random\.choice\(({var_regex})\))"
+        for arg in args:
+            # Expressions come inside a Tree object, so unpack them
+            if isinstance(arg, Tree):
+                arg = arg.children[0]
+            for group in regex.findall(list_regex, arg):
+                if group[0] != '':
+                    list_args.append(group[0])
+                    lists_names.append(group[1])
+                else:
+                    list_args.append(group[3])
+                    lists_names.append(group[4])
+        code = ""
+        exception_text_template = gettext('catch_index_exception')
+        for i, list_name in enumerate(lists_names):
+            exception_text = exception_text_template.replace('{list_name}', style_command(list_name))
+            code += textwrap.dedent(f"""\
+            try:
+              {list_args[i]}
+            except IndexError:
+              raise Exception('{exception_text}')
+            """)
+        return code
 
 
 @v_args(meta=True)
@@ -1598,35 +1615,6 @@ class ConvertToPython_2(ConvertToPython_1):
                 except ValueError:
                   raise Exception(f'While running your program the command {style_command(Command.sleep)} received the value {style_command('{' + value + '}')} which is not allowed. Try changing the value to a number.')""")
             return code
-
-    def make_catch_exception(self, args):
-        lists_names = []
-        list_args = []
-        var_regex = r"[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_]+|[\p{Mn}\p{Mc}\p{Nd}\p{Pc}·]+"
-        # List usage comes in indexation and random choice
-        list_regex = fr"(({var_regex})\[({var_regex})-1\])|(random\.choice\(({var_regex})\))"
-        for arg in args:
-            # Expressions come inside a Tree object, so unpack them
-            if isinstance(arg, Tree):
-                arg = arg.children[0]
-            for group in regex.findall(list_regex, arg):
-                if group[0] != '':
-                    list_args.append(group[0])
-                    lists_names.append(group[1])
-                else:
-                    list_args.append(group[3])
-                    lists_names.append(group[4])
-        code = ""
-        exception_text_template = gettext('catch_index_exception')
-        for i, list_name in enumerate(lists_names):
-            exception_text = exception_text_template.replace('{list_name}', style_command(list_name))
-            code += textwrap.dedent(f"""\
-            try:
-              {list_args[i]}
-            except IndexError:
-              raise Exception('{exception_text}')
-            """)
-        return code
 
 
 @v_args(meta=True)
