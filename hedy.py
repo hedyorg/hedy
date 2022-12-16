@@ -1481,7 +1481,7 @@ class ConvertToPython_1(ConvertToPython):
         list_args = []
         var_regex = r"[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_]+|[\p{Mn}\p{Mc}\p{Nd}\p{Pc}·]+"
         # List usage comes in indexation and random choice
-        list_regex = fr"(({var_regex})\[({var_regex})-1\])|(random\.choice\(({var_regex})\))"
+        list_regex = fr"(({var_regex})+\[({var_regex})-1\])|(random\.choice\(({var_regex})\))"
         for arg in args:
             # Expressions come inside a Tree object, so unpack them
             if isinstance(arg, Tree):
@@ -2262,9 +2262,9 @@ class ConvertToPython_16(ConvertToPython_15):
         exception_text = gettext('catch_index_exception').replace('{list_name}', style_command(args[0]))
         exception = textwrap.dedent(f"""\
         try:
-            {left_side}
+          {left_side}
         except IndexError:
-            raise Exception('{exception_text}')
+          raise Exception('{exception_text}')
         """)
         return exception + left_side + ' = ' + right_side
 
