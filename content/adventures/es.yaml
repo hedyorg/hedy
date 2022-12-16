@@ -65,7 +65,7 @@ adventures:
                 example_code: "```\nnombre {is} {ask} '¿Cuál es tu nombre?'\n{if} nombre {is} Hedy {print} 'bien' {else} {print} 'buu'\n```\n"
                 example_code_3: "```\ncolores_bonitos {is} verde, amarillo\ncolor {is} {ask} '¿Cuál es tu color favorito?'\n{if} color {in} colores_bonitos {print} '¡bonito!'\n{else} {print} 'meh'\n```\n"
                 story_text_2: "A veces el código con un `{if}` se hace muy largo y no cabe bien en la línea. <br> También puedes dividir el código en dos líneas, empezando la segunda línea en el `{else}` así:\n"
-                story_text_4: "Otra cosa que funciona con `{if}` es `pressed`. Con pressed puede vincular cualquier letra del\ndel alfabeto y cualquier tecla numérica del teclado a un comando. Si lo vinculas, y presionas la tecla,\nalgo sucederá. ¡Pruébalo!\n"
+                story_text_4: "¡Algo más que funciona con `{if}` es `pressed`! Con el pulsado puedes enlazar cualquier letra en\nel alfabeto y cualquier tecla numérica de su teclado a un comando. Si lo vinculas y presionas la tecla,\nalgo va a pasar ¡Pruébalo!\n"
                 example_code_4: "```\n{if} x {is} {pressed} {print} '¡funcionó!'\n```\n"
             6:
                 start_code: "{print} '5 por 5 es ' 5 * 5"
@@ -1148,7 +1148,7 @@ adventures:
                 example_code: "```\nprimera_nota = {ask} '¿Que nota tuviste en el primer examen?'\nsegunda_nota = {ask} '¿Que nota tuviste en la segunda nota?'\ntotal {is} primera_nota + segunda_nota\nnota_promedio {is} total / 2\n{if} nota_promedio = 1 {or} nota_promedio = 2 {or} nota_promedio = 3 {or} nota_promedio = 4 {or} nota_promedio = 5\n    {print} '¡Oh no! Reprobaste la materia...'\n{else}\n    {print} '¡Genial! ¡Aprobaste la materia!'\n```\n"
             4:
                 start_code: "{print} '¡Vamos al siguiente nivel!'"
-                story_text: "## ¿Qué es lo siguiente?\nEn el nivel anterior aprendiste a usar `{at} {random}` lo que hizo que tus juegos fueran diferentes cada vez que corrías el código.\nPero no es en realidad interactivo, el jugador no tiene ninguna influencia en lo que pasa en el juego.\nEn el siguiente nivel vas a aprender el comando `{if}`, el cual permite que tengas diferentes respuestas en tu programa. De esta manera puedes programar una contraseña secreta para tu computadora, por ejemplo.\n¡Entonces tomemos un pequeño vistazo!\n\n```\npassword {is} {ask} 'What is the correct password?'\n```\n"
+                story_text: "## ¿Que sigue?\nEn los niveles anteriores, ya aprendiste a usar `{at} {random}`, lo que hizo que tus juegos fueran diferentes cada vez que ejecutabas el código.\nPero no es realmente interactivo, el jugador no tiene ninguna influencia en lo que sucede en el juego.\n\nEn el siguiente nivel aprenderá el comando `{if}`, que le permite dar diferentes respuestas en su programa. De esta manera, puede programar una contraseña secreta para su computadora, por ejemplo.\n¡Así que vamos a echar un vistazo!\n\n```\ncontraseña {is} {ask} '¿Cuál es la contraseña correcta?'\n```\n"
             9:
                 start_code: "{print} '¡Vamos al próximo nivel!'"
                 story_text: "## What's next?\n¡Lo estás haciendo genial! En este nivel nos enfrentamos con un pequeño problema. Aprendiste a repetir líneas, pero ¿que tal si solo quieres cambiar la línea un poquito?:\nPor ejemplo, si quieres cantar la canción 'if you're happy and you know it'. Luciría así:\n\nSi también quieres decir el verso 'stomp your feet', y el siguiente, y el siguiente, tendrías que cambiar el código por completo.\nEn en el siguiente nivel aprenderás el comando `{for}` ¡que te permitirá hacer una lista de acciones y repetir el código con otra acción cada vez!\n¡Por favor, échale un vistazo!\n"
@@ -1182,7 +1182,7 @@ adventures:
                 start_code: "{print} '¡Vamos al próximo nivel!'"
                 example_code: "```\nhamburguesa {is} 5\nbebida {is} 2\ntotal {is} hamburguesa + bebida\nprint 'Haz ordenado una hamburguesa y una bebida'\nprint 'Eso cuesta ' total ' dólares por favor'\n```\nEl código de arriba funciona, porque la hamburguesa cuesta 5 dólares y la bebida 2 dólares. Pero si quieres cobrar 50 centavos más, ¡el programa no va a funcionar! Como el código de abajo:\n```\nhamburguesa {is} 5.50\nbebida {is} 2.30\ntotal {is} hamburguesa + bebida\nprint 'Haz ordenado una hamburguesa y una bebida'\nprint 'Eso cuesta ' total ' dólares por favor'\n```\n¡Ve al próximo nivel para hacer que este código funcione!\n"
             12:
-                story_text: "## ¿Qué es lo siguiente?\nEn los niveles anteriores aprendiste a poner dos comandos `{if}` uno de otro. Esto funciona bien, pero te da códigos largos y difíciles de entender como este:\n\nEn este sistema tienes que dar el nombre y la contraseña correcta. En el próximo level vas a aprender el comando `{and}` ¡que hará este código más corto y entendible!\n¡Pruébalo!\n"
+                story_text: "## ¿Que sigue?\nEn los niveles anteriores, aprendiste cómo colocar dos comandos `{if}` uno dentro del otro. Esto funciona bien, pero te da códigos muy largos y poco prácticos como este:\n\nEn este sistema, debe proporcionar tanto el nombre de usuario correcto como la contraseña correcta.\nEn el siguiente nivel, aprenderá el comando `{and}` que hará que este código sea mucho más breve y comprensible.\n¡Échale un vistazo!\n"
                 start_code: "{print} '¡Vamos al siguiente nivel!'"
                 example_code: "```\nnombre_de_usuario {is} {ask} '¿Cuál es tu nombre de usuario?'\ncontraseña {is} {ask} '¿Cuál es tu contraseña?'\n{if} nombre_de_usuario {is} 'Hedy'\n    {if} contraseña {is} 'secreto'\n        {print} '¡Bienvenida, Hedy!'\n    {else}\n        {print} '¡Acceso denegado!'\n{else}\n    {print} '¡Acceso denegado!'\n```\n"
             18:
@@ -1356,7 +1356,7 @@ adventures:
                 start_code: '# place your code here'
             7:
                 start_code: '# coloque su código aquí'
-                story_text: "Puede que lo hayas intentado en los niveles 5 y 6, pulsando varias veces la tecla vinculada a ```pressed```.\nSi lo hiciste, te diste cuenta de que esto no hizo nada. pero ahora que has aprendido acerca de la repetición, podemos\n¡podemos pulsar teclas varias veces! ¡Haz que la tortuga camine hacia delante!\n"
+                story_text: "Es posible que lo hayas probado en el nivel 5 y 6, presionando la tecla vinculada a ```pressed``` múltiple\nveces. Si lo hiciste, te diste cuenta de que esto no hizo nada. pero ahora que ha aprendido acerca de la repetición,\npuede presionar las teclas varias veces! ¡Haz que la tortuga camine hacia adelante!\n"
                 example_code: "```\n{repeat} 3 {times} {if} x {is} {pressed} forward 15\n```\n"
             8:
                 story_text: "## Press It!\nNow that you need to use indents for the {if} and {else} statements,\nyou will also have to indent code when using {pressed}! Don't worry,\nit works te same as with the other statements, see the example!\nPress another key instead of x and see what happens.\n"
@@ -1383,13 +1383,13 @@ adventures:
             6:
                 start_code: '# coloque su código aquí'
                 story_text: "¿Sabías que también puedes hacer una calculadora con la tecla ``pressed``?\nDale a la calculadora dos números y pulsa la tecla m para multiplicar.\n¡Ahora ya no tienes que traer la tuya!\nPrueba con otras teclas y ¡a ver qué pasa! ¿Obtienes un resultado diferente?\n"
-                example_code: "```\nprimero = {ask} '¿cuál es tu primer número?'\nsegundo = {ask} '¿cuál es tu segundo número?'\n{print} 'pulsa a para sumar, s para restar, d para dividir, m para multiplicar'\n{if} a {is} {pressed} resultado = primero + segundo\n{if} s {is} {pressed} resultado = primero - segundo\n{if} d {is} {pressed} resultado = primero / segundo\n{if} m {is} {pressed} resultado = primero * segundo\n{print} 'La respuesta es ' resultado\n```\n"
+                example_code: "```\nprimero = {ask} '¿cuál es tu primer número?'\nsegundo = {ask} '¿cuál es tu segundo número?'\nprint 'presione a para sumar, s para restar, d para dividir, m para multiplicar'\nsi un resultado {is} {pressed} = primero + segundo\nsi s {is} {pressed} resultado = primero - segundo\nsi d {is} {pressed} resultado = primero / segundo\nsi m {is} {pressed} resultado = primero * segundo\nimprime el resultado 'La respuesta es'\n```\n"
             5:
                 story_text_2: "## Si Else está pulsado\nTambién puede asignar una sentencia else a ```pressed``. La sentencia else se ejecutará\nsiempre que presione una tecla distinta a la asignada.\n"
                 example_code_2: "```\n{if} y {is} {pressed} {print} 'Amazing! You pressed the y key!'\n{else} {print} 'Oh no! You did not press the y key.'\n```\n"
                 start_code: '# coloque aquí su código'
-                story_text: "## ¡Presiónalo!\nEn la introducción también te hemos hablado de la nueva palabra clave ``pressed` ``! Using ` ``pressed``\npuede hacer que la programación sea mucho más interactiva, ¡y puedes controlar en directo lo que se ejecuta!\nEn los próximos niveles aprenderás cómo ``pressed`` hace esto posible y qué usos tiene ``pressed```.\nAdemás de imprimir texto, hay una gran variedad de usos para ``pressed``.\nPor ejemplo, ¡también puedes enlazar comandos de tortuga a teclas! ¡Pruébalo!\n"
-                example_code: "```\n{if} x {is} {pressed} {forward} 50\n```\n"
+                story_text: "## ¡Presiónelo!\nEn la introducción también se le informó acerca de la nueva palabra clave ```pressed```! Using ```pressed```\npuede hacer que la codificación sea mucho más interactiva, ¡y puede tener control en vivo de lo que se ejecuta!\nEn los próximos niveles aprenderá cómo ```pressed``` makes this possible and what uses ```pressed```\nposee.\nAdemás de imprimir texto, hay toda una variedad de usos para ```pressed```\nPor ejemplo, ¡también puede vincular los comandos de tortuga a las teclas! ¡Inténtalo!\n"
+                example_code: "```\nsi x {is} {pressed} {forward} 50\n```\n"
         name: ¡Presiónalo!
         description: ¡Intenta vincular una tecla del teclado a un comando!
         default_save_name: Presione
