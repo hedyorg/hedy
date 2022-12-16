@@ -159,47 +159,48 @@ class HedyTester(unittest.TestCase):
             expected_commands=None,
             lang='en',
             translate=True):
-        if level is None:  # no level set (from the multi-tester)? grap current level from class
-            level = self.level
-        if exception is not None:
-            with self.assertRaises(exception) as context:
+        if changes_in_grammars():
+            if level is None:  # no level set (from the multi-tester)? grap current level from class
+                level = self.level
+            if exception is not None:
+                with self.assertRaises(exception) as context:
+                    result = hedy.transpile(code, level, lang)
+                if extra_check_function is not None:
+                    self.assertTrue(extra_check_function(context))
+
+            if extra_check_function is None:  # most programs have no turtle so make that the default
+                extra_check_function = self.is_not_turtle()
+
+            if expected is not None:
                 result = hedy.transpile(code, level, lang)
-            if extra_check_function is not None:
-                self.assertTrue(extra_check_function(context))
+                self.assertEqual(expected, result.code)
 
-        if extra_check_function is None:  # most programs have no turtle so make that the default
-            extra_check_function = self.is_not_turtle()
+                if translate:
+                    if lang == 'en':  # if it is English
+                        # and if the code transpiles (evidenced by the fact that we reach this
+                        # line) we should be able to translate too
 
-        if expected is not None:
-            result = hedy.transpile(code, level, lang)
-            self.assertEqual(expected, result.code)
+                        # TODO FH Feb 2022: we pick Dutch here not really fair or good practice :D
+                        # Maybe we should do a random language?
+                        in_dutch = hedy_translation.translate_keywords(code, from_lang=lang, to_lang="nl", level=self.level)
+                        back_in_english = hedy_translation.translate_keywords(
+                            in_dutch, from_lang="nl", to_lang=lang, level=self.level).strip()
+                        self.assert_translated_code_equal(code, back_in_english)
+                    else:  # not English? translate to it and back!
+                        in_english = hedy_translation.translate_keywords(
+                            code, from_lang=lang, to_lang="en", level=self.level)
+                        back_in_org = hedy_translation.translate_keywords(
+                            in_english, from_lang="en", to_lang=lang, level=self.level)
+                        self.assert_translated_code_equal(code, back_in_org)
 
-            if translate:
-                if lang == 'en':  # if it is English
-                    # and if the code transpiles (evidenced by the fact that we reach this
-                    # line) we should be able to translate too
-
-                    # TODO FH Feb 2022: we pick Dutch here not really fair or good practice :D
-                    # Maybe we should do a random language?
-                    in_dutch = hedy_translation.translate_keywords(code, from_lang=lang, to_lang="nl", level=self.level)
-                    back_in_english = hedy_translation.translate_keywords(
-                        in_dutch, from_lang="nl", to_lang=lang, level=self.level).strip()
-                    self.assert_translated_code_equal(code, back_in_english)
-                else:  # not English? translate to it and back!
-                    in_english = hedy_translation.translate_keywords(
-                        code, from_lang=lang, to_lang="en", level=self.level)
-                    back_in_org = hedy_translation.translate_keywords(
-                        in_english, from_lang="en", to_lang=lang, level=self.level)
-                    self.assert_translated_code_equal(code, back_in_org)
-
-            all_commands = hedy.all_commands(code, level, lang)
-            if expected_commands is not None:
-                self.assertEqual(expected_commands, all_commands)
-            if ('ask' not in all_commands) and ('input' not in all_commands):  # <- use this to run tests locally with unittest
-                self.assertTrue(self.validate_Python_code(result))
-            if output is not None:
-                self.assertEqual(output, HedyTester.run_code(result))
-                self.assertTrue(extra_check_function(result))
+                all_commands = hedy.all_commands(code, level, lang)
+                if expected_commands is not None:
+                    self.assertEqual(expected_commands, all_commands)
+                if ('ask' not in all_commands) and ('input' not in all_commands):  # <- use this to run tests locally with unittest
+                    self.assertTrue(self.validate_Python_code(result))
+                if output is not None:
+                    self.assertEqual(output, HedyTester.run_code(result))
+                    self.assertTrue(extra_check_function(result))
 
     def assert_translated_code_equal(self, orignal, translation):
         # When we translate a program we lose information about the whitespaces of the original program.
@@ -363,6 +364,25 @@ class HedyTester(unittest.TestCase):
 
         return snippets
 
+def changes_in_grammars():
+    directory = 'grammars'
+    all_language_texts = ''
+
+    for filename in os.listdir(directory):
+        grammar_file = os.path.join(directory, filename)
+        with open(grammar_file, 'r') as contents:
+            all_language_texts += all_language_texts + "\n|\n" + contents
+
+    with open('app.py', 'r') as contents:
+        all_language_texts += all_language_texts + "\n|\n" + contents
+
+    with open('hedy.py', 'r') as contents:
+        all_language_texts += all_language_texts + "\n|\n" + contents
+
+    hash_grammars_app_hedy = hashlib.md5(all_language_texts).hexdigest()
+
+    with open('language_hashes.pkl', 'wb') as f:
+        pickle.dump(hash_grammars_app_hedy, f)
 
 def get_snippets_env_var():
     only_new_snippets = os.getenv('only_new_snippets')
