@@ -104,7 +104,7 @@ class ProfileModule(WebsiteModule):
                     # If user is subscribed, we remove the old email from the list and add the new one
                     if r.status_code == 200:
                         r = requests.delete(request_path, headers=MAILCHIMP_API_HEADERS)
-                        role = self.db.get_username_role(user["username"])
+                        self.db.get_username_role(user["username"])
                         mailchimp_subscribe_user(email, body["country"])
 
         username = user["username"]

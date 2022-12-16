@@ -138,12 +138,12 @@ adventures:
                     {else} {print} 'boo!'
                     ```
                 story_text_4: |
-                    Something else that works with ```if``` is ```pressed```! With pressed you can link any letter in
+                    Something else that works with `{if}` is `pressed`! With pressed you can link any letter in
                     the alphabet and any number key on your keyboard to a command. If you link it, and press the key,
                     something will happen. Try it out!
                 example_code_4: |
                     ```
-                    if x is pressed print "it worked!"
+                    {if} x {is} {pressed} {print} 'it worked!'
                     ```
             6:
                 start_code: "{print} '5 times 5 is ' 5 * 5"
@@ -757,7 +757,6 @@ adventures:
         description: "Countdown to the new year!"
         default_save_name: "New Year's Countdown"
         levels:
-            
             11:
                 story_text: |
                     ## Songs
@@ -846,6 +845,21 @@ adventures:
                     {print} 🦜 words {at} {random}
                     ```
                 start_code: "# place your code here"
+            4:
+                story_text: |
+                    ## Parrot
+                    In this level we have to use quotation marks with the commands `{ask}` and `{print}`.
+                    Can you complete the code by adding quotation marks?
+                example_code: |
+                    ```
+                    words {is} squawk, Hedy
+                    {print} _ Train your parrot! _
+                    new_word {is} {ask} _ Which word do you want to teach them? _
+                    {add} new_word {to_list} words
+                    {print} _ 🧒 Say _ new_word _, Hedy!_
+                    {print} _ 🦜 _ words {at} {random}
+                    ```
+                start_code: "# Write your code here"
             5:
                 story_text: |
                     ## Parrot
@@ -1528,7 +1542,7 @@ adventures:
                     For example, you can also link turtle commands to keys! Try it!
                 example_code: |
                     ```
-                    if x is {pressed} forward 50
+                    if x {is} {pressed} forward 50
                     ```
                 story_text_2: |
                     ## If Else Pressed
@@ -1537,8 +1551,8 @@ adventures:
 
                 example_code_2: |
                     ```
-                    if y is {pressed} {print} 'Amazing! You pressed the y key!'
-                    else {print} 'Oh no! You did not press the y key.'
+                    {if} y {is} {pressed} {print} 'Amazing! You pressed the y key!'
+                    {else} {print} 'Oh no! You did not press the y key.'
                     ```
                 start_code: "# place your code here"
             6:
@@ -1552,10 +1566,10 @@ adventures:
                     first = {ask} 'what is your first number?'
                     second = {ask} 'what is your second number?'
                     print 'press a to add, s to substract, d to divide, m to multiply'
-                    if a is {pressed} result = first + second
-                    if s is {pressed} result = first - second
-                    if d is {pressed} result = first / second
-                    if m is {pressed} result = first * second
+                    if a {is} {pressed} result = first + second
+                    if s {is} {pressed} result = first - second
+                    if d {is} {pressed} result = first / second
+                    if m {is} {pressed} result = first * second
                     print 'The answer is ' result
                     ```
                 start_code: "# place your code here"
@@ -1566,7 +1580,7 @@ adventures:
                     can press keys multiple times! Make the turtle walk forward!
                 example_code: |
                     ```
-                    repeat 3 times if x is {pressed} forward 15
+                    {repeat} 3 {times} {if} x {is} {pressed} forward 15
                     ```
                 start_code: "# place your code here"
             8:
@@ -1578,7 +1592,7 @@ adventures:
                     Press another key instead of x and see what happens.
                 example_code: |
                     ```
-                    {if} x is {pressed}
+                    {if} x {is} {pressed}
                         {print} 'Only the cool kids press the x key.'
                     {else}
                         {print} 'The adventurous kids press something else.'
@@ -1594,7 +1608,7 @@ adventures:
                     ```
                     total = 1
                     {repeat} 5 times
-                        {if} x is {pressed}
+                        {if} x {is} {pressed}
                             {print} total
                             {print} 'keep pressing!'
                             total = total + 1
@@ -1609,13 +1623,13 @@ adventures:
                     right = 90
                     around = 180
                     repeat 40 times
-                        {if} w is {pressed}
+                        {if} w {is} {pressed}
                             forward stepsize
-                        {if} s is {pressed}
+                        {if} s {is} {pressed}
                             turn around
-                        {if} a is {pressed}
+                        {if} a {is} {pressed}
                             turn left
-                        {if} d is {pressed}
+                        {if} d {is} {pressed}
                             turn right
                     ```
                 start_code: "# place your code here"
@@ -1627,11 +1641,11 @@ adventures:
                 example_code: |
                     ```
                     distances = 100, 80, 60, 40, 20, 10
-                    {if} x is {pressed}
+                    {if} x {is} {pressed}
                         for distance in distances
                             {forward} distance
                             {turn} -90
-                    {if} y is {pressed}
+                    {if} y {is} {pressed}
                         for distance in distances
                             {forward} distance
                             {turn} 90
@@ -1649,13 +1663,13 @@ adventures:
                     around = 180
                     for counter in range 1 to 15
                         stepsize = counter * 5
-                        {if} w is {pressed}
+                        {if} w {is} {pressed}
                             forward stepsize
-                        {if} s is {pressed}
+                        {if} s {is} {pressed}
                             turn around
-                        {if} a is {pressed}
+                        {if} a {is} {pressed}
                             turn left
-                        {if} d is {pressed}
+                        {if} d {is} {pressed}
                             turn right
                     ```
                 start_code: "# place your code here"
@@ -1671,20 +1685,20 @@ adventures:
                     choose = 'You chose option: '
                     print 'A wild mouse appeared!'
                     print 'Choose an option and press first letter: (n)et, (c)at, (b)ag, (r)un'
-                    {if} n is {pressed}
+                    {if} n {is} {pressed}
                         {print} choose + 'net'
                         {print} 'You attempt to catch the mouse with a net..'
                         sleep
                         {print} 'Congratulations you did it!'
-                    {if} c is {pressed}
+                    {if} c {is} {pressed}
                         {print} choose + 'cat'
                         {print} 'You send out your cat'
                         sleep
                         {print} 'The mouse got scared and ran away!'
-                    {if} b is {pressed}
+                    {if} b {is} {pressed}
                         {print} choose + 'bag'
                         {print} 'The mouse jumped into you bag!'
-                    {if} r is {pressed}
+                    {if} r {is} {pressed}
                         {print} choose + 'run'
                         {print} 'You got away safely!'
                     ```
@@ -1703,23 +1717,23 @@ adventures:
                     looked_left = 0
                     looked_right = 0
                     repeat 40 times
-                        {if} w is {pressed}
+                        {if} w {is} {pressed}
                             forward stepsize
-                        {if} s is {pressed}
+                        {if} s {is} {pressed}
                             turn around
-                        {if} a is {pressed}
+                        {if} a {is} {pressed}
                             turn left
                             looked_left = 1
-                        {if} d is {pressed}
+                        {if} d {is} {pressed}
                             turn right
                             looked_right = 1
-                        {if} p is {pressed}
+                        {if} p {is} {pressed}
                             {if} looked_left is 1 and looked_right is 1
                                 forward 40
                                 looked_left = 0
                                 looked_right = 0
                     ```
-                start_code:  "# place your code here"
+                start_code: "# place your code here"
             14:
                 story_text: |
                     Now that you learned how to use operators, we can use it with ```pressed```too!
@@ -1734,24 +1748,24 @@ adventures:
                     jumptime = 5
                     spins = 4
                     repeat 40 times
-                        {if} w is {pressed}
+                        {if} w {is} {pressed}
                             forward stepsize
                             jumptime = jumptime - 1
-                        {if} s is {pressed}
+                        {if} s {is} {pressed}
                             turn around
-                        {if} a is {pressed}
+                        {if} a {is} {pressed}
                             turn left
                             spins = spins - 1
-                        {if} d is {pressed}
+                        {if} d {is} {pressed}
                             turn right
                             spins = spins - 1
-                        {if} p is {pressed}
+                        {if} p {is} {pressed}
                             {if} jumptime <= 0 or spins <= 0
                                 forward stepsize * 3
                                 jumptime = 5
                                 spins = 4
                     ```
-                start_code:  "# place your code here"
+                start_code: "# place your code here"
             15:
                 story_text: |
                     Now that you have learned about the ```while``` loops, you can start using it on the turtle!
@@ -1768,25 +1782,25 @@ adventures:
                     spins = 2
                     tired_in = 15
                     while tired_in > 0
-                        {if} w is {pressed}
+                        {if} w {is} {pressed}
                             forward stepsize
                             jumptime = jumptime - 1
-                        {if} s is {pressed}
+                        {if} s {is} {pressed}
                             turn around
-                        {if} a is {pressed}
+                        {if} a {is} {pressed}
                             turn left
                             spins = spins - 1
-                        {if} d is {pressed}
+                        {if} d {is} {pressed}
                             turn right
                             spins = spins - 1
-                        {if} p is {pressed}
+                        {if} p {is} {pressed}
                             {if} jumptime <= 0 or spins <= 0
                                 forward stepsize * 4
                                 jumptime = 5
                                 spins = 2
                         tired_in = tired_in - 1
                     ```
-                start_code:  "# place your code here"
+                start_code: "# place your code here"
             16:
                 story_text: |
                     Lets move a little with a game of Twister!
@@ -1798,7 +1812,7 @@ adventures:
                     repeat 20 times
                         l = limbs[random]
                         c = colours[random]
-                        {if} x is {pressed}
+                        {if} x {is} {pressed}
                             {print} l + ' on ' + c + '!'
                     ```
                 start_code: "# place your code here"
@@ -1819,18 +1833,18 @@ adventures:
                     jumptime = 5
                     spins = 4
                     repeat 40 times
-                        {if} w is {pressed}:
+                        {if} w {is} {pressed}:
                             forward stepsize
                             jumptime = jumptime - 1
-                        {if} s is {pressed}:
+                        {if} s {is} {pressed}:
                             turn around
-                        {if} a is {pressed}:
+                        {if} a {is} {pressed}:
                             turn left
                             spins = spins - 1
-                        {if} d is {pressed}:
+                        {if} d {is} {pressed}:
                             turn right
                             spins = spins - 1
-                        {if} p is {pressed}:
+                        {if} p {is} {pressed}:
                             {if} jumptime <= 0 or spins <= 0:
                                 forward stepsize * 3
                                 jumptime = 5
@@ -1838,7 +1852,7 @@ adventures:
                             {elif} jumptime > 0:
                                 print "you need to take more steps or turns before you can superjump!"
                     ```
-                start_code:  "# place your code here"
+                start_code: "# place your code here"
     rock:
         name: "Rock, paper, scissors"
         description: "Make your own rock, paper, scissors game"
