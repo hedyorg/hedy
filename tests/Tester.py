@@ -364,7 +364,9 @@ class HedyTester(unittest.TestCase):
 
         return snippets
 
+
 def changes_in_grammars():
+    current_hash = get_list_from_pickle('grammars_and_hedy_hash.pkl')
     directory = 'grammars'
     all_language_texts = ''
 
@@ -373,16 +375,14 @@ def changes_in_grammars():
         with open(grammar_file, 'r') as contents:
             all_language_texts += all_language_texts + "\n|\n" + contents
 
-    with open('app.py', 'r') as contents:
-        all_language_texts += all_language_texts + "\n|\n" + contents
-
     with open('hedy.py', 'r') as contents:
         all_language_texts += all_language_texts + "\n|\n" + contents
 
-    hash_grammars_app_hedy = hashlib.md5(all_language_texts).hexdigest()
+    hash_grammars_and_hedy = hashlib.md5(all_language_texts).hexdigest()
 
-    with open('language_hashes.pkl', 'wb') as f:
-        pickle.dump(hash_grammars_app_hedy, f)
+    if hash_grammars_and_hedy == current_hash:
+        return False
+
 
 def get_snippets_env_var():
     only_new_snippets = os.getenv('only_new_snippets')
