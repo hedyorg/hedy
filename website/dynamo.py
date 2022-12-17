@@ -62,7 +62,8 @@ class Index:
 
     Specify if the index is a keys-only index. If not, is is expected to have all fields.
     """
-    def __init__(self, partition_key: str, sort_key: str=None, index_name: str=None, keys_only: bool=False):
+
+    def __init__(self, partition_key: str, sort_key: str = None, index_name: str = None, keys_only: bool = False):
         self.partition_key = partition_key
         self.sort_key = sort_key
         self.index_name = index_name
@@ -119,8 +120,10 @@ class Cancel(metaclass=ABCMeta):
     def is_cancelled(self):
         ...
 
+
 class TimeoutCancellation(Cancel):
     """Cancellation token for a timeout."""
+
     def __init__(self, deadline):
         self.deadline = deadline
 
@@ -130,6 +133,7 @@ class TimeoutCancellation(Cancel):
 
 class NeverCancellation(Cancel):
     """Never cancellation."""
+
     def is_cancelled(self):
         return False
 
@@ -192,20 +196,21 @@ class Table:
         querylog.log_counter(f"db_batch_get:{self.table_name}")
         input_is_dict = isinstance(keys, dict)
 
-        keys_dict = keys if input_is_dict else { f'k{i}': k for i, k in enumerate(keys) }
+        keys_dict = keys if input_is_dict else {f'k{i}': k for i, k in enumerate(keys)}
 
-        lookups = { k: self._determine_lookup(key, many=False) for k, key in keys_dict.items() }
+        lookups = {k: self._determine_lookup(key, many=False) for k, key in keys_dict.items()}
         if any(not isinstance(lookup, TableLookup) for lookup in lookups.values()):
             raise RuntimeError(f'batch_get must query table, not indexes, in: {keys}')
         if not lookups:
             return {} if input_is_dict else []
         first_lookup = next(iter(lookups.values()))
 
-        resp_dict = self.storage.batch_get_item(first_lookup.table_name, { k: l.key for k, l in lookups.items() }, table_key_names=self.key_names)
+        resp_dict = self.storage.batch_get_item(
+            first_lookup.table_name, {k: l.key for k, l in lookups.items()}, table_key_names=self.key_names)
         if input_is_dict:
-            return { k: resp_dict.get(k) for k in keys.keys() }
+            return {k: resp_dict.get(k) for k in keys.keys()}
         else:
-            return [ resp_dict.get(f'k{i}') for i in range(len(keys)) ]
+            return [resp_dict.get(f'k{i}') for i in range(len(keys))]
 
     @querylog.timed_as("db_get_many")
     def get_many(self, key, reverse=False, limit=None, pagination_token=None):
@@ -429,7 +434,7 @@ class AwsDynamoStorage(TableStorage):
         backoff = ExponentialBackoff()
         while next_query:
             result = self.db.batch_get_item(
-                RequestItems={ real_table_name: { 'Keys': next_query } }
+                RequestItems={real_table_name: {'Keys': next_query}}
             )
             for row in result.get('Responses', {}).get(real_table_name, []):
                 record = self._decode(row)
@@ -612,7 +617,7 @@ class MemoryStorage(TableStorage):
 
     def batch_get_item(self, table_name, keys_map, table_key_names):
         # The in-memory implementation is lovely and trivial
-        return { k: self.get_item(table_name, key) for k, key in keys_map.items() }
+        return {k: self.get_item(table_name, key) for k, key in keys_map.items()}
 
     @lock.synchronized
     def query(self, table_name, key, sort_key, reverse, limit, pagination_token):
@@ -674,7 +679,6 @@ class MemoryStorage(TableStorage):
         # In a keys_only index, we retain all fields that are in either a table or index key
         keys_to_retain = set(list(keys.keys()) + ([sort_key] if sort_key else []) + table_key_names)
         return [{key: record[key] for key in keys_to_retain} for record in records], next_page_token
-
 
     @lock.synchronized
     def put(self, table_name, key, data):
@@ -1018,6 +1022,7 @@ class QueryIterator:
 
     Wrapper around query_many that automatically paginates.
     """
+
     def __init__(self, table, key, reverse=False):
         self.table = table
         self.key = key

@@ -1383,7 +1383,8 @@ def explore():
         achievement = ACHIEVEMENTS.add_single_achievement(
             current_user()['username'], "indiana_jones")
 
-    programs = normalize_explore_programs(DATABASE.get_public_programs(level_filter=level, language_filter=language, adventure_filter=adventure))
+    programs = normalize_explore_programs(DATABASE.get_public_programs(
+        level_filter=level, language_filter=language, adventure_filter=adventure))
     favourite_programs = normalize_explore_programs(DATABASE.get_hedy_choices())
 
     adventures_names = hedy_content.Adventures(session['lang']).get_adventure_names()
@@ -1419,11 +1420,12 @@ def normalize_explore_programs(programs):
         program = pre_process_explore_program(program)
 
         ret.append(dict(program,
-            hedy_choice=True if program.get('hedy_choice') == 1 else False,
-            code="\n".join(program['code'].split("\n")[:4]),
-            number_lines=program['code'].count('\n') + 1))
+                        hedy_choice=True if program.get('hedy_choice') == 1 else False,
+                        code="\n".join(program['code'].split("\n")[:4]),
+                        number_lines=program['code'].count('\n') + 1))
     DATABASE.add_public_profile_information(ret)
     return ret
+
 
 @querylog.timed
 def pre_process_explore_program(program):

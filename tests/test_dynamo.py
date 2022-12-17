@@ -123,7 +123,6 @@ class TestDynamoAbstraction(unittest.TestCase, Helpers):
         })
 
 
-
 class TestSortKeysInMemory(unittest.TestCase):
     """Test that the operations work on an in-memory table with a sort key."""
 
@@ -180,7 +179,7 @@ class TestQueryInMemory(unittest.TestCase, Helpers):
                     'y'),
                 dynamo.Index('m'),
                 dynamo.Index('n', keys_only=True),
-                ])
+            ])
 
     def test_query(self):
         self.table.create({'id': 'key', 'sort': 1, 'm': 'val'})
@@ -338,7 +337,7 @@ class TestQueryInMemory(unittest.TestCase, Helpers):
             dict(id='key', sort=2, n=1, other='2'),
             dict(id='key', sort=3, n=1, other='3'))
 
-        ret = self.table.get_many({ 'n': 1 })
+        ret = self.table.get_many({'n': 1})
 
         # This is a keys_only index, so we expect to get { id, sort, n } back
         self.assertEqual(ret.records, [
