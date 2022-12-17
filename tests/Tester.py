@@ -36,6 +36,7 @@ class Snippet:
 
 
 class HedyTester(unittest.TestCase):
+
     level = None
     equality_comparison_with_is = ['is', '=']
     equality_comparison_commands = ['==', '=']
@@ -43,6 +44,38 @@ class HedyTester(unittest.TestCase):
     comparison_commands = number_comparison_commands + ['!=']
     arithmetic_operations = ['+', '-', '*', '/']
     quotes = ["'", '"']
+
+
+
+    @classmethod
+    def setUpClass(cls):
+        directory = 'grammars'
+        all_language_texts = ''
+
+        for filename in os.listdir(directory):
+            grammar_file = os.path.join(directory, filename)
+            with open(grammar_file, 'r') as contents:
+                all_language_texts += "\n|\n" + contents.read()
+
+        with open('hedy.py', 'r') as contents:
+            all_language_texts +=  "\n|\n" + contents.read()
+
+        cls.all_language_texts = all_language_texts
+        cls.hashes_saved = get_list_from_pickle('all_snippet_hashes.pkl')
+        cls.all_tests_passed = True
+        cls.new_hashes = set()
+
+    @classmethod
+    def tearDownClass(cls):
+        # fetch already saved hashes
+        all_hashes = cls.hashes_saved | cls.new_hashes  # and merge in the new ones
+        with open('all_snippet_hashes.pkl', 'wb') as f:
+            pickle.dump(all_hashes, f)
+
+    def snippet_already_tested_with_current_hedy_version(self, snippet, level):
+        hash_language_plus_snippet_and_level = self.create_hash(self.all_language_texts, snippet, level)
+        return hash_language_plus_snippet_and_level in self.hashes_saved
+
 
     @staticmethod
     @contextmanager
@@ -159,9 +192,9 @@ class HedyTester(unittest.TestCase):
             expected_commands=None,
             lang='en',
             translate=True):
-        if changes_in_grammars():
-            if level is None:  # no level set (from the multi-tester)? grap current level from class
-                level = self.level
+        if level is None:  # no level set (from the multi-tester)? grap current level from class
+            level = self.level
+        if not self.snippet_already_tested_with_current_hedy_version(code, level):
             if exception is not None:
                 with self.assertRaises(exception) as context:
                     result = hedy.transpile(code, level, lang)
@@ -175,23 +208,23 @@ class HedyTester(unittest.TestCase):
                 result = hedy.transpile(code, level, lang)
                 self.assertEqual(expected, result.code)
 
-                if translate:
-                    if lang == 'en':  # if it is English
-                        # and if the code transpiles (evidenced by the fact that we reach this
-                        # line) we should be able to translate too
-
-                        # TODO FH Feb 2022: we pick Dutch here not really fair or good practice :D
-                        # Maybe we should do a random language?
-                        in_dutch = hedy_translation.translate_keywords(code, from_lang=lang, to_lang="nl", level=self.level)
-                        back_in_english = hedy_translation.translate_keywords(
-                            in_dutch, from_lang="nl", to_lang=lang, level=self.level).strip()
-                        self.assert_translated_code_equal(code, back_in_english)
-                    else:  # not English? translate to it and back!
-                        in_english = hedy_translation.translate_keywords(
-                            code, from_lang=lang, to_lang="en", level=self.level)
-                        back_in_org = hedy_translation.translate_keywords(
-                            in_english, from_lang="en", to_lang=lang, level=self.level)
-                        self.assert_translated_code_equal(code, back_in_org)
+                # if translate:
+                #     if lang == 'en':  # if it is English
+                #         # and if the code transpiles (evidenced by the fact that we reach this
+                #         # line) we should be able to translate too
+                #
+                #         # TODO FH Feb 2022: we pick Dutch here not really fair or good practice :D
+                #         # Maybe we should do a random language?
+                #         in_dutch = hedy_translation.translate_keywords(code, from_lang=lang, to_lang="nl", level=self.level)
+                #         back_in_english = hedy_translation.translate_keywords(
+                #             in_dutch, from_lang="nl", to_lang=lang, level=self.level).strip()
+                #         self.assert_translated_code_equal(code, back_in_english)
+                #     else:  # not English? translate to it and back!
+                #         in_english = hedy_translation.translate_keywords(
+                #             code, from_lang=lang, to_lang="en", level=self.level)
+                #         back_in_org = hedy_translation.translate_keywords(
+                #             in_english, from_lang="en", to_lang=lang, level=self.level)
+                #         self.assert_translated_code_equal(code, back_in_org)
 
                 all_commands = hedy.all_commands(code, level, lang)
                 if expected_commands is not None:
@@ -201,6 +234,9 @@ class HedyTester(unittest.TestCase):
                 if output is not None:
                     self.assertEqual(output, HedyTester.run_code(result))
                     self.assertTrue(extra_check_function(result))
+
+            # all ok? -> save hash!
+            self.new_hashes.add(self.create_hash(self.all_language_texts, code, level))
 
     def assert_translated_code_equal(self, orignal, translation):
         # When we translate a program we lose information about the whitespaces of the original program.
@@ -364,24 +400,9 @@ class HedyTester(unittest.TestCase):
 
         return snippets
 
-
-def changes_in_grammars():
-    current_hash = get_list_from_pickle('grammars_and_hedy_hash.pkl')
-    directory = 'grammars'
-    all_language_texts = ''
-
-    for filename in os.listdir(directory):
-        grammar_file = os.path.join(directory, filename)
-        with open(grammar_file, 'r') as contents:
-            all_language_texts += all_language_texts + "\n|\n" + contents
-
-    with open('hedy.py', 'r') as contents:
-        all_language_texts += all_language_texts + "\n|\n" + contents
-
-    hash_grammars_and_hedy = hashlib.md5(all_language_texts).hexdigest()
-
-    if hash_grammars_and_hedy == current_hash:
-        return False
+    def create_hash(self, hedy_language, snippet, level):
+        t = snippet + "|\n" + str(level) + "|\n" + hedy_language
+        return hashlib.md5(t.encode()).hexdigest()
 
 
 def get_snippets_env_var():
