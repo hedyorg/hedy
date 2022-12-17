@@ -519,7 +519,7 @@ export function saveMachineFiles() {
 
 // We've observed that this code may gets invoked 100s of times in quick succession. Don't
 // ever push the same achievement more than once per page load to avoid this.
-const ACHIEVEMENTS_PUSHED = {};
+const ACHIEVEMENTS_PUSHED: Record<string, boolean> = {};
 
 export function pushAchievement(achievement: string) {
   if (ACHIEVEMENTS_PUSHED[achievement]) {
