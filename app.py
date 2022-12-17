@@ -158,7 +158,7 @@ def before_request_begin_logging():
     This needs to happen as one of the first things, as the database calls
     etc. depend on it.
     """
-    path = (str(request.path) + '?' + str(request.query_string)
+    path = (str(request.path) + '?' + request.query_string.decode('utf-8')
             ) if request.query_string else str(request.path)
     querylog.begin_global_log_record(path=path, method=request.method)
 
@@ -1369,21 +1369,16 @@ def explore():
     if not current_user()['username']:
         return redirect('/login')
 
-    def arg_disregard_null(name):
-        ret = request.args.get(name, default=None, type=str)
-        # FIXME: we shouldn't have been passing the string 'null' in the first place
-        return ret if ret != 'null' else None
-
-    level = arg_disregard_null('level')
-    adventure = arg_disregard_null('adventure')
-    language = arg_disregard_null('lang')
+    level = request.args.get('level', default=None, type=str)
+    adventure = request.args.get('adventure', default=None, type=str)
+    language = g.lang
 
     achievement = None
     if level or adventure or language:
         achievement = ACHIEVEMENTS.add_single_achievement(
             current_user()['username'], "indiana_jones")
 
-    programs = normalize_explore_programs(DATABASE.get_public_programs(
+    programs = normalize_explore_programs(DATABASE.get_public_programs(limit=40,
         level_filter=level, language_filter=language, adventure_filter=adventure))
     favourite_programs = normalize_explore_programs(DATABASE.get_hedy_choices())
 
@@ -1437,23 +1432,6 @@ def pre_process_explore_program(program):
         except BaseException:
             program['error'] = True
         DATABASE.store_program(program)
-
-    # First, if the program language is not equal to english and the language supports keywords
-    # It might contain non-english keywords -> parse all to english
-    if program.get("lang") != "en" and program.get("lang") in ALL_KEYWORD_LANGUAGES.keys():
-        with querylog.log_time('lang_to_en'):
-            program['code'] = hedy_translation.translate_keywords(program['code'], from_lang=program.get(
-                'lang'), to_lang="en", level=int(program.get('level', 1)))
-    # If the keyword language is non-English -> parse again to guarantee
-    # completely localized keywords
-    if g.keyword_lang != "en":
-        with querylog.log_time('en_to_lang'):
-            program['code'] = hedy_translation.translate_keywords(
-                program['code'],
-                from_lang="en",
-                to_lang=g.keyword_lang,
-                level=int(
-                    program.get('level', 1)))
 
     return program
 

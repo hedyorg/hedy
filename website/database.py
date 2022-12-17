@@ -284,12 +284,11 @@ class Database:
         programs = PROGRAMS.get_many({"public": 1}, reverse=True)
         return [x for x in programs if not x.get("submitted", False)]
 
-    def get_public_programs(self, level_filter=None, language_filter=None, adventure_filter=None):
-        """Return the most recent 48 public programs, optionally filtered by attributes.
+    def get_public_programs(self, level_filter=None, language_filter=None, adventure_filter=None, limit=40):
+        """Return the most recent N public programs, optionally filtered by attributes.
 
         Walk down three key-only indexes at the same time until we have accumulated enough programs.
         """
-        limit = 48
         filters = []
         if level_filter:
             filters.append(PROGRAMS.get_all({'level': int(level_filter)}, reverse=True))
@@ -310,12 +309,7 @@ class Database:
         #
         # Intersecting the filters beforehand and then fetching whatever matches
         # is more efficient if we are likely to match very little.
-        timeout = dynamo.Cancel.after_timeout(timedelta(seconds=2))
-
-        import pprint
-        for flt in filters:
-            pprint.pprint(flt.page.records)
-        pprint.pprint(programs.page.records)
+        timeout = dynamo.Cancel.after_timeout(timedelta(seconds=3))
 
         found_programs = []
         for program in programs:
@@ -323,6 +317,9 @@ class Database:
                 break
 
             # Advance every filter to match the date that the current program has
+            # FIXME: This is not guaranteed to catch 2 programs that have the same
+            # timestamp, but for the purposes of showing a sampling of public programs
+            # I don't really care.
             for flt in filters:
                 while flt and flt.current['date'] > program['date']:
                     flt.next()
