@@ -146,6 +146,10 @@ def begin_global_log_record(**kwargs):
     THREAD_LOCAL.current_log_record = LogRecord(**kwargs)
 
 
+def read_global_log_record():
+    return THREAD_LOCAL.current_log_record.as_data()
+
+
 def finish_global_log_record(exc=None):
     """Finish the global log record."""
 

@@ -85,12 +85,7 @@ ACHIEVEMENTS_TRANSLATIONS = hedyweb.AchievementTranslations()
 DATABASE = database.Database()
 ACHIEVEMENTS = achievements.Achievements(DATABASE, ACHIEVEMENTS_TRANSLATIONS)
 
-# We retrieve these once on server-start: Would be nice to automate this
-# somewhere in the future (06/22)
-PUBLIC_PROGRAMS = DATABASE.get_all_public_programs()
 
-
-# Load the adventures, by default with the selected keyword language
 def load_adventures_per_level(level, keyword_lang):
     loaded_programs = {}
     # If user is logged in, we iterate their programs that belong to the
@@ -311,6 +306,8 @@ def set_security_headers(response):
 
 @app.teardown_request
 def teardown_request_finish_logging(exc):
+    if is_debug_mode():
+        logger.debug(repr(querylog.read_global_log_record()))
     querylog.finish_global_log_record(exc)
 
 
@@ -1372,70 +1369,29 @@ def explore():
     if not current_user()['username']:
         return redirect('/login')
 
-    level = request.args.get('level', default=None, type=str)
-    adventure = request.args.get('adventure', default=None, type=str)
-    language = request.args.get('lang', default=None, type=str)
+    def arg_disregard_null(name):
+        ret = request.args.get(name, default=None, type=str)
+        # FIXME: we shouldn't have been passing the string 'null' in the first place
+        return ret if ret != 'null' else None
 
-    level = None if level == "null" else level
-    adventure = None if adventure == "null" else adventure
-    language = None if language == "null" else language
+    level = arg_disregard_null('level')
+    adventure = arg_disregard_null('adventure')
+    language = arg_disregard_null('lang')
 
     achievement = None
     if level or adventure or language:
-        programs = PUBLIC_PROGRAMS
-        if level:
-            programs = [x for x in programs if x.get('level') == int(level)]
-        if language:
-            programs = [x for x in programs if x.get('lang') == language]
-        if adventure:
-            # Todo: We used to save adventures with "default" with an empty adventure_name, what changed?
-            programs = [x for x in programs if x.get('adventure_name') == adventure]
-        programs = programs[-48:]
         achievement = ACHIEVEMENTS.add_single_achievement(
             current_user()['username'], "indiana_jones")
-    else:
-        programs = PUBLIC_PROGRAMS[:48]
 
-    filtered_programs = []
-    for program in programs:
-        program = pre_process_explore_program(program)
-        public_profile = DATABASE.get_public_profile_settings(program['username'])
-
-        filtered_programs.append({
-            'username': program['username'],
-            'name': program['name'],
-            'level': program['level'],
-            'id': program['id'],
-            'error': program['error'],
-            'hedy_choice': True if program.get('hedy_choice') == 1 else False,
-            'public_user': True if public_profile else None,
-            'code': "\n".join(program['code'].split("\n")[:4]),
-            'number_lines': program['code'].count('\n') + 1
-        })
-
-    favourite_programs = DATABASE.get_hedy_choices()
-    hedy_choices = []
-    for program in favourite_programs:
-        program = pre_process_explore_program(program)
-        public_profile = DATABASE.get_public_profile_settings(program['username'])
-
-        hedy_choices.append({
-            'username': program['username'],
-            'name': program['name'],
-            'level': program['level'],
-            'id': program['id'],
-            'hedy_choice': True,
-            'public_user': True if public_profile else None,
-            'code': "\n".join(program['code'].split("\n")[:4]),
-            'number_lines': program['code'].count('\n') + 1
-        })
+    programs = normalize_explore_programs(DATABASE.get_public_programs(level_filter=level, language_filter=language, adventure_filter=adventure))
+    favourite_programs = normalize_explore_programs(DATABASE.get_hedy_choices())
 
     adventures_names = hedy_content.Adventures(session['lang']).get_adventure_names()
 
     return render_template(
         'explore.html',
-        programs=filtered_programs,
-        favourite_programs=hedy_choices,
+        programs=programs,
+        favourite_programs=favourite_programs,
         filtered_level=level,
         achievement=achievement,
         filtered_adventure=adventure,
@@ -1446,6 +1402,30 @@ def explore():
         current_page='explore')
 
 
+def normalize_explore_programs(programs):
+    """Normalize the content for all programs in the given array, for showing on the /explore page.
+
+    Does the following thing:
+
+    - Try to compile and add 'error' field to show if this worked
+    - Adds public_user: True|None fields to each program
+    - Preprocess keywords into the current language
+    - Turn 'hedy_choice' from an integer into a boolean
+    - Change 'code' to only show the first 4 lines
+    - Add 'number_lines'
+    """
+    ret = []
+    for program in programs:
+        program = pre_process_explore_program(program)
+
+        ret.append(dict(program,
+            hedy_choice=True if program.get('hedy_choice') == 1 else False,
+            code="\n".join(program['code'].split("\n")[:4]),
+            number_lines=program['code'].count('\n') + 1))
+    DATABASE.add_public_profile_information(ret)
+    return ret
+
+@querylog.timed
 def pre_process_explore_program(program):
     # If program does not have an error value set -> parse it and set value
     if 'error' not in program:
@@ -1459,17 +1439,19 @@ def pre_process_explore_program(program):
     # First, if the program language is not equal to english and the language supports keywords
     # It might contain non-english keywords -> parse all to english
     if program.get("lang") != "en" and program.get("lang") in ALL_KEYWORD_LANGUAGES.keys():
-        program['code'] = hedy_translation.translate_keywords(program['code'], from_lang=program.get(
-            'lang'), to_lang="en", level=int(program.get('level', 1)))
+        with querylog.log_time('lang_to_en'):
+            program['code'] = hedy_translation.translate_keywords(program['code'], from_lang=program.get(
+                'lang'), to_lang="en", level=int(program.get('level', 1)))
     # If the keyword language is non-English -> parse again to guarantee
     # completely localized keywords
     if g.keyword_lang != "en":
-        program['code'] = hedy_translation.translate_keywords(
-            program['code'],
-            from_lang="en",
-            to_lang=g.keyword_lang,
-            level=int(
-                program.get('level', 1)))
+        with querylog.log_time('en_to_lang'):
+            program['code'] = hedy_translation.translate_keywords(
+                program['code'],
+                from_lang="en",
+                to_lang=g.keyword_lang,
+                level=int(
+                    program.get('level', 1)))
 
     return program
 
