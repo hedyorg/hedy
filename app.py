@@ -1379,7 +1379,7 @@ def explore():
             current_user()['username'], "indiana_jones")
 
     programs = normalize_explore_programs(DATABASE.get_public_programs(limit=40,
-        level_filter=level, language_filter=language, adventure_filter=adventure))
+                                                                       level_filter=level, language_filter=language, adventure_filter=adventure))
     favourite_programs = normalize_explore_programs(DATABASE.get_hedy_choices())
 
     adventures_names = hedy_content.Adventures(session['lang']).get_adventure_names()
