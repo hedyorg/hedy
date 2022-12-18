@@ -161,7 +161,11 @@ def before_request_begin_logging():
     """
     path = (str(request.path) + '?' + request.query_string.decode('utf-8')
             ) if request.query_string else str(request.path)
-    querylog.begin_global_log_record(path=path, method=request.method)
+    querylog.begin_global_log_record(
+        path=path,
+        method=request.method,
+        remote_ip=request.headers.get('X-Forwarded-For', request.remote_addr),
+        user_agent=request.headers.get('User-Agent'))
 
 
 @app.after_request
