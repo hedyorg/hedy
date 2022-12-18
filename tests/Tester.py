@@ -28,7 +28,7 @@ class Snippet:
             self.language = language
         self.adventure_name = adventure_name
         self.name = f'{self.language}-{self.level}-{self.field_name}'
-        self.hash = hashlib.md5(self.code.encode()).hexdigest()
+        self.hash = md5digest(self.code)
 
 
 class HedyTester(unittest.TestCase):
@@ -45,18 +45,23 @@ class HedyTester(unittest.TestCase):
     def setUpClass(cls):
         ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         directory = ROOT_DIR + '/grammars'
-        all_language_texts = ''
 
-        for filename in os.listdir(directory):
-            grammar_file = os.path.join(directory, filename)
-            with open(grammar_file, 'r', encoding='utf-8', newline='\n') as contents:
-                all_language_texts += "\n|\n" + contents.read()
+        files_affecting_parsing = (
+            [os.path.join(directory, filename) for filename in os.listdir(directory)] +
+            [ROOT_DIR + '/hedy.py']
+        )
 
-        with open(ROOT_DIR + '/hedy.py', 'r', encoding='utf-8', newline='\n') as contents:
-            all_language_texts += "\n|\n" + contents.read()
+        files_contents = []
+        for filename in files_affecting_parsing:
+            with open(filename, 'r', encoding='utf-8', newline='\n') as f:
+                contents = f.read()
+                print('Digest of ', filename, md5digest(contents))
+                files_contents.append(contents)
+
+        all_language_texts = '\n|\n'.join(files_contents)
 
         cls.all_language_texts = all_language_texts
-        print('Digest of Hedy language files: ', hashlib.md5(all_language_texts.encode('utf-8')).hexdigest())
+        print('Digest of Hedy language files: ', md5digest(all_language_texts))
         cls.snippet_hashes = get_list_from_pickle(ROOT_DIR + '/all_snippet_hashes.pkl')
         cls.snippet_hashes_original_len = len(cls.snippet_hashes)
 
@@ -375,3 +380,7 @@ def get_list_from_pickle(filename):
         with open(filename, 'wb') as f:
             pickle.dump(snippet_hashes, f)
     return snippet_hashes
+
+
+def md5digest(x):
+    return hashlib.md5(x.encode('utf-8')).hexdigest()
