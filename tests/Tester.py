@@ -239,8 +239,6 @@ class HedyTester(unittest.TestCase):
         # So when comparing the original and the translated code, we compress multiple whitespaces into one.
         self.assertEqual(re.sub('\\s+', ' ', orignal), re.sub('\\s+', ' ', translation))
 
-
-
     @staticmethod
     def validate_Python_code(parseresult):
         # Code used in the Adventure and Level Defaults tester to validate Hedy code

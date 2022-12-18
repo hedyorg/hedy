@@ -64,11 +64,11 @@ def collect_snippets(path, filtered_language=None):
                             try:
                                 start_code = level['start_code']
                                 snippet = Snippet(
-                                        filename=f,
-                                        level=level_number,
-                                        field_name='start_code',
-                                        code=start_code,
-                                        adventure_name=adventure_name)
+                                    filename=f,
+                                    level=level_number,
+                                    field_name='start_code',
+                                    code=start_code,
+                                    adventure_name=adventure_name)
                                 Hedy_snippets.append(snippet)
 
                             except KeyError:
@@ -90,17 +90,18 @@ def collect_snippets(path, filtered_language=None):
                                     continue
 
                                 snippet = Snippet(
-                                        filename=f,
-                                        level=level_number,
-                                        field_name=adventure_name + ' snippet #' + str(code_snippet_counter),
-                                        code=code,
-                                        adventure_name=adventure_name)
+                                    filename=f,
+                                    level=level_number,
+                                    field_name=adventure_name + ' snippet #' + str(code_snippet_counter),
+                                    code=code,
+                                    adventure_name=adventure_name)
                                 Hedy_snippets.append(snippet)
 
     return Hedy_snippets
 
 # filtered_language = 'nl'
 # use this to filter on 1 lang, zh_Hans for Chinese, nb_NO for Norwegian, pt_PT for Portuguese
+
 
 Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/adventures',
                                                        filtered_language=filtered_language)]
@@ -149,4 +150,3 @@ class TestsAdventurePrograms(HedyTester):
                         print(f'\n----\n{snippet.code}\n----')
                         print(f'in language {snippet.language} from level {snippet.level} gives error:')
                         print(f'{error_message} at line {location}')
-
