@@ -29,15 +29,16 @@ def collect_snippets(path):
                     for exercise_id, exercise in levels[level].items():
                         code = exercise.get('code')
                         snippet = Snippet(
-                                filename=file,
-                                level=level,
-                                field_name=f"{exercise_id}",
-                                code=code)
+                            filename=file,
+                            level=level,
+                            field_name=f"{exercise_id}",
+                            code=code)
                         Hedy_snippets.append(snippet)
                 except BaseException:
                     print(f'Problem reading commands yaml for {lang} level {level}')
 
     return Hedy_snippets
+
 
 Hedy_snippets = [(s.name, s) for s in collect_snippets(
     path='../../content/parsons')]
@@ -76,5 +77,3 @@ class TestsParsonsPrograms(HedyTester):
                         print(f'\n----\n{snippet.code}\n----')
                         print(f'in language {snippet.language} from level {snippet.level} gives error:')
                         print(f'{error_message} at line {location}')
-
-

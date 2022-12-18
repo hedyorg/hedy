@@ -12,6 +12,7 @@ from website.yaml_file import YamlFile
 # Set the current directory to the root Hedy folder
 os.chdir(os.path.join(os.getcwd(), __file__.replace(os.path.basename(__file__), '')))
 
+
 def collect_snippets(path):
     Hedy_snippets = []
     files = [f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f)) and f.endswith('.yaml')]
@@ -93,4 +94,3 @@ class TestsCheatsheetPrograms(HedyTester):
                         print(f'\n----\n{snippet.code}\n----')
                         print(f'in language {snippet.language} from level {snippet.level} gives error:')
                         print(f'{error_message} at line {location}')
-
