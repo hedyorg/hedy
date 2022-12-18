@@ -50,10 +50,10 @@ class HedyTester(unittest.TestCase):
 
         for filename in os.listdir(directory):
             grammar_file = os.path.join(directory, filename)
-            with open(grammar_file, 'r') as contents:
+            with open(grammar_file, 'r', encoding='utf-8', newline='\n') as contents:
                 all_language_texts += "\n|\n" + contents.read()
 
-        with open(ROOT_DIR + '/hedy.py', 'r') as contents:
+        with open(ROOT_DIR + '/hedy.py', 'r', encoding='utf-8', newline='\n') as contents:
             all_language_texts += "\n|\n" + contents.read()
 
         cls.all_language_texts = all_language_texts
