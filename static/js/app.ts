@@ -516,7 +516,18 @@ export function saveMachineFiles() {
 //   }
 //}
 
+
+// We've observed that this code may gets invoked 100s of times in quick succession. Don't
+// ever push the same achievement more than once per page load to avoid this.
+const ACHIEVEMENTS_PUSHED: Record<string, boolean> = {};
+
 export function pushAchievement(achievement: string) {
+  if (ACHIEVEMENTS_PUSHED[achievement]) {
+      console.error('Achievement already pushed, this may be a programming issue: ', achievement);
+      return;
+  }
+  ACHIEVEMENTS_PUSHED[achievement] = true;
+
   $.ajax({
     type: 'POST',
     url: '/achievements/push-achievement',
