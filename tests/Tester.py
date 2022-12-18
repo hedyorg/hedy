@@ -45,7 +45,6 @@ class HedyTester(unittest.TestCase):
     def setUpClass(cls):
         ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         directory = ROOT_DIR + '/grammars'
-        print(directory)
         all_language_texts = ''
 
         for filename in os.listdir(directory):
@@ -361,7 +360,7 @@ class HedyTester(unittest.TestCase):
 
     def create_hash(self, hedy_language, snippet, level):
         t = snippet + "|\n" + str(level) + "|\n" + hedy_language
-        return hashlib.md5(t.encode()).hexdigest()
+        return hashlib.md5(t.encode('utf-8')).hexdigest()
 
 
 def get_list_from_pickle(filename):
