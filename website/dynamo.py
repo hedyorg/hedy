@@ -36,7 +36,8 @@ class TableStorage(metaclass=ABCMeta):
     def query(self, table_name, key, sort_key, reverse, limit, pagination_token):
         ...
 
-    def query_index(self, table_name, index_name, keys, sort_key, reverse=False, limit=None, pagination_token=None, keys_only=None, table_key_names=None):
+    def query_index(self, table_name, index_name, keys, sort_key, reverse=False,
+        limit=None, pagination_token=None, keys_only=None, table_key_names=None):
         ...
 
     def put(self, table_name, key, data):
@@ -174,7 +175,8 @@ class Table:
         if isinstance(lookup, IndexLookup):
             return first_or_none(
                 self.storage.query_index(
-                    lookup.table_name, lookup.index_name, lookup.key, sort_key=lookup.sort_key, limit=1, keys_only=lookup.keys_only, table_key_names=self.key_names,
+                    lookup.table_name, lookup.index_name, lookup.key, sort_key=lookup.sort_key, limit=1,
+                    keys_only=lookup.keys_only, table_key_names=self.key_names,
                 )[0]
             )
         assert False
@@ -347,7 +349,8 @@ class Table:
         for index in self.indexes:
             index_key_names = [x for x in [index.partition_key, index.sort_key] if x is not None]
             if keys == set(index_key_names) or one_key == index.partition_key:
-                return IndexLookup(self.table_name, index.index_name, key_data, index.sort_key, keys_only=index.keys_only)
+                return IndexLookup(self.table_name, index.index_name, key_data,
+                    index.sort_key, keys_only=index.keys_only)
 
         if len(keys) != 1:
             raise RuntimeError(f"Getting key data: {key_data}, but expecting: {table_keys}")
@@ -463,9 +466,7 @@ class AwsDynamoStorage(TableStorage):
         )
 
         items = [self._decode(x) for x in result.get("Items", [])]
-        next_page_token = (
-            self._decode(result.get("LastEvaluatedKey", None)) if result.get("LastEvaluatedKey", None) else None
-        )
+        next_page_token = self._decode(result.get("LastEvaluatedKey", None))
         return items, next_page_token
 
     def query_index(self, table_name, index_name, keys, sort_key, reverse=False, limit=None, pagination_token=None, keys_only=None, table_key_names=None):
@@ -664,7 +665,8 @@ class MemoryStorage(TableStorage):
         return copy.copy([record for _, record in with_keys]), next_page_key
 
     # NOTE: on purpose not @synchronized here
-    def query_index(self, table_name, index_name, keys, sort_key, reverse=False, limit=None, pagination_token=None, keys_only=None, table_key_names=None):
+    def query_index(self, table_name, index_name, keys, sort_key, reverse=False, limit=None, pagination_token=None,
+        keys_only=None, table_key_names=None):
         # If keys_only, we project down to the index + table keys
         # In a REAL dynamo table, the index just wouldn't have more data. The in-memory table has everything,
         # so we need to drop some data so programmers don't accidentally rely on it.
