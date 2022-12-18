@@ -47,7 +47,9 @@ class HedyTester(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        directory = 'grammars'
+        ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        directory = ROOT_DIR + '/grammars'
+        print(directory)
         all_language_texts = ''
 
         for filename in os.listdir(directory):
@@ -55,20 +57,21 @@ class HedyTester(unittest.TestCase):
             with open(grammar_file, 'r') as contents:
                 all_language_texts += "\n|\n" + contents.read()
 
-        with open('hedy.py', 'r') as contents:
+        with open(ROOT_DIR + '/hedy.py', 'r') as contents:
             all_language_texts += "\n|\n" + contents.read()
 
         cls.all_language_texts = all_language_texts
-        cls.hashes_saved = get_list_from_pickle('all_snippet_hashes.pkl')
+        cls.hashes_saved = get_list_from_pickle(ROOT_DIR + '/all_snippet_hashes.pkl')
         cls.all_tests_passed = True
         cls.new_hashes = set()
 
     @classmethod
     def tearDownClass(cls):
+        ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         if os.getenv('save_snippet_hashes'):
             # fetch already saved hashes
             all_hashes = cls.hashes_saved | cls.new_hashes  # and merge in the new ones
-            with open('all_snippet_hashes.pkl', 'wb') as f:
+            with open(ROOT_DIR + '/all_snippet_hashes.pkl', 'wb') as f:
                 pickle.dump(all_hashes, f)
 
     def snippet_already_tested_with_current_hedy_version(self, snippet, level):
