@@ -1,6 +1,5 @@
 import textwrap
 import hashlib
-import exceptions
 import hedy
 import hedy_translation
 import re
@@ -12,8 +11,6 @@ import inspect
 import unittest
 import utils
 from hedy_content import ALL_KEYWORD_LANGUAGES, KEYWORDS
-from app import translate_error, app
-from flask_babel import force_locale
 import pickle
 import _pickle
 
@@ -62,15 +59,13 @@ class HedyTester(unittest.TestCase):
 
         cls.all_language_texts = all_language_texts
         cls.hashes_saved = get_list_from_pickle(ROOT_DIR + '/all_snippet_hashes.pkl')
-        cls.all_tests_passed = True
         cls.new_hashes = set()
 
     @classmethod
     def tearDownClass(cls):
         ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        if os.getenv('save_snippet_hashes'):
-            # fetch already saved hashes
-            all_hashes = cls.hashes_saved | cls.new_hashes  # and merge in the new ones
+        if True: # os.getenv('save_snippet_hashes'):
+            all_hashes = cls.new_hashes
             with open(ROOT_DIR + '/all_snippet_hashes.pkl', 'wb') as f:
                 pickle.dump(all_hashes, f)
 
@@ -201,13 +196,10 @@ class HedyTester(unittest.TestCase):
                     result = hedy.transpile(code, level, lang)
                 if extra_check_function is not None:
                     self.assertTrue(extra_check_function(context))
-
-            if extra_check_function is None:  # most programs have no turtle so make that the default
-                extra_check_function = self.is_not_turtle()
-
-            if expected is not None:
+            else:
                 result = hedy.transpile(code, level, lang)
-                self.assertEqual(expected, result.code)
+                if expected is not None:
+                    self.assertEqual(expected, result.code)
 
                 if translate:
                     if lang == 'en':  # if it is English
@@ -234,6 +226,8 @@ class HedyTester(unittest.TestCase):
                 if ('ask' not in all_commands) and ('input' not in all_commands):  # <- use this to run tests locally with unittest
                     self.assertTrue(self.validate_Python_code(result))
                 if output is not None:
+                    if extra_check_function is None:  # most programs have no turtle so make that the default
+                        extra_check_function = self.is_not_turtle()
                     self.assertEqual(output, HedyTester.run_code(result))
                     self.assertTrue(extra_check_function(result))
 
@@ -245,39 +239,7 @@ class HedyTester(unittest.TestCase):
         # So when comparing the original and the translated code, we compress multiple whitespaces into one.
         self.assertEqual(re.sub('\\s+', ' ', orignal), re.sub('\\s+', ' ', translation))
 
-    @staticmethod
-    def check_Hedy_code_for_errors(snippet):
-        # Code used in the Snippet testers to validate Hedy code
-        # Note that None is the happy path! If None is returned, no errors are found
-        # If an error is found a (reasonably) readable string is returned.
 
-        try:
-            if len(snippet.code) != 0:   # We ignore empty code snippets or those of length 0
-                result = hedy.transpile(snippet.code, int(snippet.level), snippet.language)
-                all_commands = hedy.all_commands(snippet.code, snippet.level, snippet.language)
-
-                if not result.has_turtle and ('ask' not in all_commands) and (
-                        'input' not in all_commands):  # output from turtle cannot be captured
-                    HedyTester.run_code(result)
-        except hedy.exceptions.CodePlaceholdersPresentException:  # Code with blanks is allowed
-            pass
-        except OSError:
-            return None  # programs with ask cannot be tested with output :(
-        except exceptions.HedyException as E:
-            try:
-                location = E.error_location
-            except BaseException:
-                location = 'No Location Found'
-
-            # Must run this in the context of the Flask app, because FlaskBabel requires that.
-            with app.app_context():
-                with force_locale('en'):
-                    error_message = translate_error(E.error_code, E.arguments, 'en')
-                    error_message = error_message.replace('<span class="command-highlighted">', '`')
-                    error_message = error_message.replace('</span>', '`')
-                    return f'{error_message} at line {location}'
-
-        return None
 
     @staticmethod
     def validate_Python_code(parseresult):
