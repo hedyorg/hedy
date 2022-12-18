@@ -315,6 +315,7 @@ for lang in ALL_KEYWORD_LANGUAGES.keys():
     for k, v in KEYWORDS[lang].items():
         if isinstance(v, str) and "|" in v:
             # when we have several options, pick the first one as default
+            # Some keys are ints, turn them into strings
             KEYWORDS[lang][k] = v.split('|')[0]
 
 
@@ -406,6 +407,7 @@ class Adventures:
             for level in adventure.get('levels'):
                 for k, v in adventure.get('levels').get(level).items():
                     try:
+                        logger.error('asdf %r', KEYWORDS.get(language))
                         parsed_adventure.get('levels').get(
                             level)[k] = safe_format(v, **KEYWORDS.get(language))
                     except IndexError:
