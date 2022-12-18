@@ -208,23 +208,24 @@ class HedyTester(unittest.TestCase):
                 result = hedy.transpile(code, level, lang)
                 self.assertEqual(expected, result.code)
 
-                # if translate:
-                #     if lang == 'en':  # if it is English
-                #         # and if the code transpiles (evidenced by the fact that we reach this
-                #         # line) we should be able to translate too
-                #
-                #         # TODO FH Feb 2022: we pick Dutch here not really fair or good practice :D
-                #         # Maybe we should do a random language?
-                #         in_dutch = hedy_translation.translate_keywords(code, from_lang=lang, to_lang="nl", level=self.level)
-                #         back_in_english = hedy_translation.translate_keywords(
-                #             in_dutch, from_lang="nl", to_lang=lang, level=self.level).strip()
-                #         self.assert_translated_code_equal(code, back_in_english)
-                #     else:  # not English? translate to it and back!
-                #         in_english = hedy_translation.translate_keywords(
-                #             code, from_lang=lang, to_lang="en", level=self.level)
-                #         back_in_org = hedy_translation.translate_keywords(
-                #             in_english, from_lang="en", to_lang=lang, level=self.level)
-                #         self.assert_translated_code_equal(code, back_in_org)
+                if translate:
+                    if lang == 'en':  # if it is English
+                        # and if the code transpiles (evidenced by the fact that we reach this
+                        # line) we should be able to translate too
+
+                        # TODO FH Feb 2022: we pick Dutch here not really fair or good practice :D
+                        # Maybe we should do a random language?
+                        in_dutch = hedy_translation.translate_keywords(
+                            code, from_lang=lang, to_lang="nl", level=self.level)
+                        back_in_english = hedy_translation.translate_keywords(
+                            in_dutch, from_lang="nl", to_lang=lang, level=self.level).strip()
+                        self.assert_translated_code_equal(code, back_in_english)
+                    else:  # not English? translate to it and back!
+                        in_english = hedy_translation.translate_keywords(
+                            code, from_lang=lang, to_lang="en", level=self.level)
+                        back_in_org = hedy_translation.translate_keywords(
+                            in_english, from_lang="en", to_lang=lang, level=self.level)
+                        self.assert_translated_code_equal(code, back_in_org)
 
                 all_commands = hedy.all_commands(code, level, lang)
                 if expected_commands is not None:
