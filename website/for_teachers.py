@@ -9,6 +9,7 @@ import hedy
 import hedy_content
 import hedyweb
 import utils
+from safe_format import safe_format
 from flask_helpers import render_template
 from website.auth import (
     current_user,
@@ -307,7 +308,7 @@ class ForTeachersModule(WebsiteModule):
         adventure["content"] = adventure["content"].replace(
             "<pre>", "<pre class='no-copy-button' level='" + str(adventure["level"]) + "'>"
         )
-        adventure["content"] = adventure["content"].format(**hedy_content.KEYWORDS.get(g.keyword_lang))
+        adventure["content"] = safe_format(adventure["content"], **hedy_content.KEYWORDS.get(g.keyword_lang))
 
         return render_template(
             "view-adventure.html",
@@ -377,6 +378,7 @@ class ForTeachersModule(WebsiteModule):
 
         # We want to make sure the adventure is valid and only contains correct placeholders
         # Try to parse with our current language, if it fails -> return an error to the user
+        # NOTE: format() instead of safe_format() on purpose!
         try:
             body["content"].format(**hedy_content.KEYWORDS.get(g.keyword_lang))
         except BaseException:
@@ -420,7 +422,7 @@ class ForTeachersModule(WebsiteModule):
     def parse_preview_adventure(self):
         body = request.json
         try:
-            code = body.get("code").format(**hedy_content.KEYWORDS.get(g.keyword_lang))
+            code = safe_format(body.get("code"), **hedy_content.KEYWORDS.get(g.keyword_lang))
         except BaseException:
             return gettext("something_went_wrong_keyword_parsing"), 400
         return {"code": code}, 200

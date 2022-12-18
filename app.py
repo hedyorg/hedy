@@ -26,6 +26,7 @@ import hedy_content
 import hedy_translation
 import hedyweb
 import utils
+from safe_format import safe_format
 from config import config
 from flask_helpers import render_template
 from hedy_content import (ADVENTURE_ORDER_PER_LEVEL, ALL_KEYWORD_LANGUAGES,
@@ -629,7 +630,7 @@ def translate_error(code, arguments, keyword_lang):
             else:
                 arguments[k] = hedy.style_command(v)
 
-    return error_template.format(**arguments)
+    return safe_format(error_template, **arguments)
 
 
 def translate_list(args):
@@ -990,7 +991,7 @@ def index(level, program_id):
         current_adventure = DATABASE.get_adventure(adventure)
         if current_adventure.get('level') == str(level):
             try:
-                current_adventure['content'] = current_adventure['content'].format(
+                current_adventure['content'] = safe_format(current_adventure['content'],
                     **hedy_content.KEYWORDS.get(g.keyword_lang))
             except BaseException:
                 # We don't want teacher being able to break the student UI -> pass this adventure
@@ -1174,7 +1175,7 @@ def get_certificate_page(username):
     longest_program = get_longest_program(username)
 
     number_achievements = len(achievements)
-    congrats_message = gettext('congrats_message').format(**{'username': username})
+    congrats_message = safe_format(gettext('congrats_message'), username=username)
     return render_template("certificate.html", count_programs=count_programs, quiz_score=quiz_score,
                            longest_program=longest_program, number_achievements=number_achievements,
                            congrats_message=congrats_message)
@@ -1804,7 +1805,7 @@ def public_user_page(username):
         last_achieved = None
         if user_achievements.get('achieved'):
             last_achieved = user_achievements['achieved'][-1]
-        certificate_message = gettext('see_certificate').format(**{'username': username})
+        certificate_message = safe_format(gettext('see_certificate'), username=username)
         # Todo: TB -> In the near future: add achievement for user visiting their own profile
 
         return render_template(

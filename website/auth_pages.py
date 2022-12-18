@@ -4,6 +4,7 @@ from flask import jsonify, make_response, redirect, request, session
 from flask_babel import gettext
 
 from config import config
+from safe_format import safe_format
 from hedy_content import ALL_LANGUAGES, COUNTRIES
 from utils import extract_bcrypt_rounds, is_heroku, is_testing_request, timems, times
 from website.auth import (
@@ -137,9 +138,9 @@ class AuthModule(WebsiteModule):
             try:
                 body["birth_year"] = int(body.get("birth_year"))
             except ValueError:
-                return gettext("year_invalid").format(**{"current_year": str(year)}), 400
+                return safe_format(gettext("year_invalid"), current_year=str(year)}), 400
             if not isinstance(body.get("birth_year"), int) or body["birth_year"] <= 1900 or body["birth_year"] > year:
-                return gettext("year_invalid").format(**{"current_year": str(year)}), 400
+                return safe_format(gettext("year_invalid"), current_year=str(year)}), 400
         if "gender" in body:
             if body["gender"] != "m" and body["gender"] != "f" and body["gender"] != "o":
                 return gettext("gender_invalid"), 400
