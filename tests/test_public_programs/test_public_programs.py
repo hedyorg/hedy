@@ -61,5 +61,3 @@ class TestsPublicPrograms(HedyTester):
                         print(f'\n----\n{snippet.code}\n----')
                         print(f'in language {snippet.language} from level {snippet.level} gives error:')
                         print(f'{error_message} at line {location}')
-
-

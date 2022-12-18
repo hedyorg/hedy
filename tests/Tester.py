@@ -364,6 +364,7 @@ class HedyTester(unittest.TestCase):
         t = snippet + "|\n" + str(level) + "|\n" + hedy_language
         return hashlib.md5(t.encode()).hexdigest()
 
+
 def get_list_from_pickle(filename):
     try:
         with open(filename, 'rb') as f:
