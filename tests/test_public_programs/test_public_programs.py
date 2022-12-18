@@ -33,12 +33,13 @@ p2 = [(s.name, s) for s in public_snippets]
 class TestsPublicPrograms(HedyTester):
     @parameterized.expand(p2)
     def test_programs(self, name, snippet):
-        if snippet is not None and len(snippet.code) > 0:
+        if snippet is not None and not snippet.error and len(snippet.code) > 0:
             try:
                 self.single_level_tester(
                     code=snippet.code,
                     level=int(snippet.level),
-                    lang=snippet.language
+                    lang=snippet.language,
+                    translate=False
                 )
 
             except hedy.exceptions.CodePlaceholdersPresentException:  # Code with blanks is allowed
