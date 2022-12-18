@@ -44,12 +44,15 @@ class HedyTester(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        directory = ROOT_DIR + '/grammars'
+        directory = os.path.join(ROOT_DIR, '/grammars')
 
         files_affecting_parsing = (
             [os.path.join(directory, filename) for filename in os.listdir(directory)] +
-            [ROOT_DIR + '/hedy.py']
+            [os.path.join(ROOT_DIR, 'hedy.py')]
         )
+
+        # Sort these files so that the order is consistent between all platforms (this affects the hash!)
+        files_affecting_parsing.sort()
 
         files_contents = []
         for filename in files_affecting_parsing:
