@@ -1,6 +1,6 @@
 import functools
 import operator
-from datetime import date
+from datetime import date, timedelta
 
 from utils import timems, times
 
@@ -8,17 +8,31 @@ from . import dynamo
 
 storage = dynamo.AwsDynamoStorage.from_env() or dynamo.MemoryStorage("dev_database.json")
 
-USERS = dynamo.Table(
-    storage, "users", "username", indexed_fields=[dynamo.IndexKey("email"), dynamo.IndexKey("epoch", "created")]
-)
-TOKENS = dynamo.Table(storage, "tokens", "id", indexed_fields=[dynamo.IndexKey(v) for v in ["id", "username"]])
-PROGRAMS = dynamo.Table(
-    storage, "programs", "id", indexed_fields=[dynamo.IndexKey(v) for v in ["username", "public", "hedy_choice"]]
-)
-CLASSES = dynamo.Table(storage, "classes", "id", indexed_fields=[dynamo.IndexKey(v) for v in ["teacher", "link"]])
-ADVENTURES = dynamo.Table(storage, "adventures", "id", indexed_fields=[dynamo.IndexKey("creator")])
+USERS = dynamo.Table(storage, "users", "username", indexes=[
+    dynamo.Index("email"),
+    dynamo.Index("epoch", sort_key="created")
+])
+TOKENS = dynamo.Table(storage, "tokens", "id", indexes=[
+    dynamo.Index('id'),
+    dynamo.Index('username'),
+])
+PROGRAMS = dynamo.Table(storage, "programs", "id", indexes=[
+    dynamo.Index('username', sort_key='date', index_name='username-index'),
+    dynamo.Index('public', sort_key='date', index_name='public-index'),
+    dynamo.Index('hedy_choice', sort_key='date', index_name='hedy_choice-index'),
+
+    # For the filtered view of the 'explore' page (keys_only so we don't duplicate other attributes unnecessarily)
+    dynamo.Index('lang', sort_key='date', keys_only=True),
+    dynamo.Index('level', sort_key='date', keys_only=True),
+    dynamo.Index('adventure_name', sort_key='date', keys_only=True),
+])
+CLASSES = dynamo.Table(storage, "classes", "id", indexes=[
+    dynamo.Index('teacher'),
+    dynamo.Index('link'),
+])
+ADVENTURES = dynamo.Table(storage, "adventures", "id", indexes=[dynamo.Index("creator")])
 INVITATIONS = dynamo.Table(
-    storage, "class_invitations", partition_key="username", indexed_fields=[dynamo.IndexKey("class_id")]
+    storage, "class_invitations", partition_key="username", indexes=[dynamo.Index("class_id")]
 )
 CUSTOMIZATIONS = dynamo.Table(storage, "class_customizations", partition_key="id")
 ACHIEVEMENTS = dynamo.Table(storage, "achievements", partition_key="username")
@@ -70,11 +84,11 @@ QUIZ_ANSWERS = dynamo.Table(storage, "quizAnswers", partition_key="user", sort_k
 # }
 #
 PROGRAM_STATS = dynamo.Table(
-    storage, "program-stats", partition_key="id#level", sort_key="week", indexed_fields=[dynamo.IndexKey("id", "week")]
+    storage, "program-stats", partition_key="id#level", sort_key="week", indexes=[dynamo.Index("id", "week")]
 )
 
 QUIZ_STATS = dynamo.Table(
-    storage, "quiz-stats", partition_key="id#level", sort_key="week", indexed_fields=[dynamo.IndexKey("id", "week")]
+    storage, "quiz-stats", partition_key="id#level", sort_key="week", indexes=[dynamo.Index("id", "week")]
 )
 
 
@@ -269,6 +283,65 @@ class Database:
     def get_all_public_programs(self):
         programs = PROGRAMS.get_many({"public": 1}, reverse=True)
         return [x for x in programs if not x.get("submitted", False)]
+
+    def get_public_programs(self, level_filter=None, language_filter=None, adventure_filter=None, limit=40):
+        """Return the most recent N public programs, optionally filtered by attributes.
+
+        Walk down three key-only indexes at the same time until we have accumulated enough programs.
+        """
+        filters = []
+        if level_filter:
+            filters.append(PROGRAMS.get_all({'level': int(level_filter)}, reverse=True))
+        if language_filter:
+            filters.append(PROGRAMS.get_all({'lang': language_filter}, reverse=True))
+        if adventure_filter:
+            filters.append(PROGRAMS.get_all({'adventure_name': adventure_filter}, reverse=True))
+
+        programs = dynamo.QueryIterator(PROGRAMS, {'public': 1}, reverse=True)
+
+        # Iterate down programs, filtering down by the filters in 'filters' as we go to make sure
+        # the programs match the filter. This works because they all have a 'matching' date field
+        # we can use to sync up the streams.
+        #
+        # Use a cancellation token to timeout if this takes too long. For example, if there are 0
+        # programs to find this might take a long while to iterate through everything before it
+        # concludes we didn't want any of it.
+        #
+        # Intersecting the filters beforehand and then fetching whatever matches
+        # is more efficient if we are likely to match very little.
+        timeout = dynamo.Cancel.after_timeout(timedelta(seconds=3))
+
+        found_programs = []
+        for program in programs:
+            if len(found_programs) >= limit or timeout.is_cancelled():
+                break
+
+            # Advance every filter to match the date that the current program has
+            # FIXME: This is not guaranteed to catch 2 programs that have the same
+            # timestamp, but for the purposes of showing a sampling of public programs
+            # I don't really care.
+            for flt in filters:
+                while flt and flt.current['date'] > program['date']:
+                    flt.next()
+
+            # Include the current program in the result set if it is now the front item in each filter.
+            if all((flt and flt.current['id'] == program['id']) for flt in filters):
+                found_programs.append(program)
+
+        return found_programs
+
+    def add_public_profile_information(self, programs):
+        """Add the information to a list of programs on whether the author has a public profile or not.
+
+        For each program, add 'public_user': True or 'public_user': None.
+
+        Modifies the list in-place.
+        """
+        queries = {p['id']: {'username': p['username'].strip().lower()} for p in programs}
+        profiles = PUBLIC_PROFILES.batch_get(queries)
+
+        for program in programs:
+            program['public_user'] = True if profiles[program['id']] else None
 
     def get_highscores(self, username, filter, filter_value=None):
         profiles = []

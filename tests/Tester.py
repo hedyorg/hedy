@@ -348,6 +348,7 @@ class HedyTester(unittest.TestCase):
         english_keywords = KEYWORDS.get("en")
 
         # We replace the code snippet placeholders with actual keywords to the code is valid: {print} -> print
+        # NOTE: .format() instead of safe_format() on purpose!
         for snippet in snippets:
             try:
                 if snippet[1].language in ALL_KEYWORD_LANGUAGES.keys():

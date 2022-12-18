@@ -35,7 +35,7 @@ class Helpers:
         return ret
 
 
-class TestDynamoAbstraction(unittest.TestCase):
+class TestDynamoAbstraction(unittest.TestCase, Helpers):
     def setUp(self):
         self.table = dynamo.Table(dynamo.MemoryStorage(), 'table', 'id')
 
@@ -90,6 +90,38 @@ class TestDynamoAbstraction(unittest.TestCase):
             final = table.get(dict(id='key'))
             self.assertEqual(final['values'], set(['a', 'b', 'c']))
 
+    def test_batch_get(self):
+        self.insert(
+            dict(id='k1', bla=1),
+            dict(id='k2', bla=2),
+            dict(id='k3', bla=3))
+
+        # Test list API
+        result = self.table.batch_get([
+            dict(id='k1'),
+            dict(id='oeps'),
+            dict(id='k2'),
+        ])
+
+        self.assertEqual(result, [
+            dict(id='k1', bla=1),
+            None,
+            dict(id='k2', bla=2),
+        ])
+
+        # Test dict API
+        result = self.table.batch_get({
+            'a': dict(id='k1'),
+            'b': dict(id='k2'),
+            'z': dict(id='oeps'),
+        })
+
+        self.assertEqual(result, {
+            'a': dict(id='k1', bla=1),
+            'b': dict(id='k2', bla=2),
+            'z': None,
+        })
+
 
 class TestSortKeysInMemory(unittest.TestCase):
     """Test that the operations work on an in-memory table with a sort key."""
@@ -141,11 +173,13 @@ class TestQueryInMemory(unittest.TestCase, Helpers):
             'table',
             partition_key='id',
             sort_key='sort',
-            indexed_fields=[
-                dynamo.IndexKey(
+            indexes=[
+                dynamo.Index(
                     'x',
                     'y'),
-                dynamo.IndexKey('m')])
+                dynamo.Index('m'),
+                dynamo.Index('n', keys_only=True),
+            ])
 
     def test_query(self):
         self.table.create({'id': 'key', 'sort': 1, 'm': 'val'})
@@ -296,6 +330,21 @@ class TestQueryInMemory(unittest.TestCase, Helpers):
         self.assertEqual(ret[0], {'id': 'key', 'sort': 3, 'y': 6})
 
         self.assertIsNone(ret.next_page_token)
+
+    def test_keys_only_index(self):
+        self.insert(
+            dict(id='key', sort=1, n=1, other='1'),
+            dict(id='key', sort=2, n=1, other='2'),
+            dict(id='key', sort=3, n=1, other='3'))
+
+        ret = self.table.get_many({'n': 1})
+
+        # This is a keys_only index, so we expect to get { id, sort, n } back
+        self.assertEqual(ret.records, [
+            dict(id='key', sort=1, n=1),
+            dict(id='key', sort=2, n=1),
+            dict(id='key', sort=3, n=1),
+        ])
 
 
 class TestSortKeysAgainstAws(unittest.TestCase):
