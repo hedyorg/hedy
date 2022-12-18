@@ -65,10 +65,11 @@ class HedyTester(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        # fetch already saved hashes
-        all_hashes = cls.hashes_saved | cls.new_hashes  # and merge in the new ones
-        with open('all_snippet_hashes.pkl', 'wb') as f:
-            pickle.dump(all_hashes, f)
+        if os.getenv('save_snippet_hashes'):
+            # fetch already saved hashes
+            all_hashes = cls.hashes_saved | cls.new_hashes  # and merge in the new ones
+            with open('all_snippet_hashes.pkl', 'wb') as f:
+                pickle.dump(all_hashes, f)
 
     def snippet_already_tested_with_current_hedy_version(self, snippet, level):
         hash_language_plus_snippet_and_level = self.create_hash(self.all_language_texts, snippet, level)
