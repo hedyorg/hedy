@@ -58,20 +58,18 @@ class HedyTester(unittest.TestCase):
             all_language_texts += "\n|\n" + contents.read()
 
         cls.all_language_texts = all_language_texts
-        cls.hashes_saved = get_list_from_pickle(ROOT_DIR + '/all_snippet_hashes.pkl')
-        cls.new_hashes = set()
+        cls.snippet_hashes = get_list_from_pickle(ROOT_DIR + '/all_snippet_hashes.pkl')
 
     @classmethod
     def tearDownClass(cls):
         ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         if os.getenv('save_snippet_hashes'):
-            all_hashes = cls.new_hashes
             with open(ROOT_DIR + '/all_snippet_hashes.pkl', 'wb') as f:
-                pickle.dump(all_hashes, f)
+                pickle.dump(cls.snippet_hashes, f)
 
     def snippet_already_tested_with_current_hedy_version(self, snippet, level):
         hash_language_plus_snippet_and_level = self.create_hash(self.all_language_texts, snippet, level)
-        return hash_language_plus_snippet_and_level in self.hashes_saved
+        return hash_language_plus_snippet_and_level in self.snippet_hashes
 
     @staticmethod
     @contextmanager
@@ -232,7 +230,7 @@ class HedyTester(unittest.TestCase):
                     self.assertTrue(extra_check_function(result))
 
             # all ok? -> save hash!
-            self.new_hashes.add(self.create_hash(self.all_language_texts, code, level))
+            self.snippet_hashes.add(self.create_hash(self.all_language_texts, code, level))
 
     def assert_translated_code_equal(self, orignal, translation):
         # When we translate a program we lose information about the whitespaces of the original program.
@@ -366,33 +364,20 @@ class HedyTester(unittest.TestCase):
         t = snippet + "|\n" + str(level) + "|\n" + hedy_language
         return hashlib.md5(t.encode()).hexdigest()
 
-
-def get_snippets_env_var():
-    only_new_snippets = os.getenv('only_new_snippets')
-    if only_new_snippets is None:
-        # set default in case env var is not set (f.e. on Windows, or when running form the UI)
-        only_new_snippets = False
-    elif only_new_snippets == 1 or only_new_snippets == '1':
-        only_new_snippets = True
-    else:  # in case an invalid one is given
-        only_new_snippets = False
-    return only_new_snippets
-
-
 def get_list_from_pickle(filename):
     try:
         with open(filename, 'rb') as f:
-            hashes_saved = pickle.load(f)
+            snippet_hashes = pickle.load(f)
     except _pickle.UnpicklingError:  # broken file, create and save
-        hashes_saved = set()
+        snippet_hashes = set()
         with open(filename, 'wb') as f:
-            pickle.dump(hashes_saved, f)
+            pickle.dump(snippet_hashes, f)
     except EOFError:  # empty file
-        hashes_saved = set()
+        snippet_hashes = set()
         with open(filename, 'wb') as f:
-            pickle.dump(hashes_saved, f)
+            pickle.dump(snippet_hashes, f)
     except FileNotFoundError:  # non existent file
-        hashes_saved = set()
+        snippet_hashes = set()
         with open(filename, 'wb') as f:
-            pickle.dump(hashes_saved, f)
-    return hashes_saved
+            pickle.dump(snippet_hashes, f)
+    return snippet_hashes
