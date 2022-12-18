@@ -133,6 +133,9 @@ class NullRecord(LogRecord):
     def inc(self, name, amount=1):
         pass
 
+    def as_data(self):
+        return {}
+
     def record_exception(self, exc):
         self.set(fault=1, error_message=str(exc))
 
@@ -147,19 +150,23 @@ def begin_global_log_record(**kwargs):
 
 
 def read_global_log_record():
+    """Read the current global log record."""
     return THREAD_LOCAL.current_log_record.as_data()
 
 
 def finish_global_log_record(exc=None):
-    """Finish the global log record."""
-
-    # When developing, this can sometimes get called before 'current_log_record' has been set.
-    if hasattr(THREAD_LOCAL, "current_log_record"):
-        record = THREAD_LOCAL.current_log_record
-        if exc:
-            record.record_exception(exc)
-        record.finish()
-    THREAD_LOCAL.current_log_record = NullRecord()
+    """Finish the global log record, and return it."""
+    try:
+        # When developing, this can sometimes get called before 'current_log_record' has been set.
+        if hasattr(THREAD_LOCAL, "current_log_record"):
+            record = THREAD_LOCAL.current_log_record
+            if exc:
+                record.record_exception(exc)
+            record.finish()
+            return record
+        return NullRecord()
+    finally:
+        THREAD_LOCAL.current_log_record = NullRecord()
 
 
 def log_value(**kwargs):

@@ -306,9 +306,9 @@ def set_security_headers(response):
 
 @app.teardown_request
 def teardown_request_finish_logging(exc):
+    log_record = querylog.finish_global_log_record(exc)
     if is_debug_mode():
-        logger.debug(repr(querylog.read_global_log_record()))
-    querylog.finish_global_log_record(exc)
+        logger.debug(repr(log_record.as_data()))
 
 
 # If present, PROXY_TO_TEST_HOST should be the 'http[s]://hostname[:port]' of the target environment
@@ -471,7 +471,7 @@ def parse_tutorial(user):
     body = request.json
 
     code = body['code']
-    level = int(body['level'])
+    level = try_parse_int(body['level'])
     try:
         result = hedy.transpile(code, level, "en")
         jsonify({'code': result.code}), 200
@@ -1369,7 +1369,7 @@ def explore():
     if not current_user()['username']:
         return redirect('/login')
 
-    level = request.args.get('level', default=None, type=str)
+    level = try_parse_int(request.args.get('level', default=None, type=str))
     adventure = request.args.get('adventure', default=None, type=str)
     language = g.lang
 
@@ -1878,6 +1878,14 @@ def on_server_start():
     pass
 
 
+def try_parse_int(x):
+    """Try to parse an int, return None on failure."""
+    try:
+        return int(x) if x else None
+    except ValueError:
+        return None
+
+
 if __name__ == '__main__':
     # Start the server on a developer machine. Flask is initialized in DEBUG mode, so it
     # hot-reloads files. We also flip our own internal "debug mode" flag to True, so our
@@ -1895,3 +1903,4 @@ if __name__ == '__main__':
             port=config['port'], host="0.0.0.0")
 
     # See `Procfile` for how the server is started on Heroku.
+
