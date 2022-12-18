@@ -996,7 +996,7 @@ def index(level, program_id):
         if current_adventure.get('level') == str(level):
             try:
                 current_adventure['content'] = safe_format(current_adventure['content'],
-                    **hedy_content.KEYWORDS.get(g.keyword_lang))
+                                                           **hedy_content.KEYWORDS.get(g.keyword_lang))
             except BaseException:
                 # We don't want teacher being able to break the student UI -> pass this adventure
                 pass
@@ -1908,4 +1908,3 @@ if __name__ == '__main__':
             port=config['port'], host="0.0.0.0")
 
     # See `Procfile` for how the server is started on Heroku.
-
