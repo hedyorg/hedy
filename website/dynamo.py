@@ -37,7 +37,7 @@ class TableStorage(metaclass=ABCMeta):
         ...
 
     def query_index(self, table_name, index_name, keys, sort_key, reverse=False,
-        limit=None, pagination_token=None, keys_only=None, table_key_names=None):
+                    limit=None, pagination_token=None, keys_only=None, table_key_names=None):
         ...
 
     def put(self, table_name, key, data):
@@ -350,7 +350,7 @@ class Table:
             index_key_names = [x for x in [index.partition_key, index.sort_key] if x is not None]
             if keys == set(index_key_names) or one_key == index.partition_key:
                 return IndexLookup(self.table_name, index.index_name, key_data,
-                    index.sort_key, keys_only=index.keys_only)
+                                   index.sort_key, keys_only=index.keys_only)
 
         if len(keys) != 1:
             raise RuntimeError(f"Getting key data: {key_data}, but expecting: {table_keys}")
@@ -667,7 +667,7 @@ class MemoryStorage(TableStorage):
 
     # NOTE: on purpose not @synchronized here
     def query_index(self, table_name, index_name, keys, sort_key, reverse=False, limit=None, pagination_token=None,
-        keys_only=None, table_key_names=None):
+                    keys_only=None, table_key_names=None):
         # If keys_only, we project down to the index + table keys
         # In a REAL dynamo table, the index just wouldn't have more data. The in-memory table has everything,
         # so we need to drop some data so programmers don't accidentally rely on it.

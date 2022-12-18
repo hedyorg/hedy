@@ -9,6 +9,7 @@ from website.auth import current_user, requires_login
 
 from .website_module import WebsiteModule, route
 
+
 class Achievements:
     # To reduce a bit of cognitive load, prevent run achievements for the first 5 programs
     ACHIEVEMENTS_THRESHOLD = 5

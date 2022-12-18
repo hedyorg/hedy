@@ -491,7 +491,8 @@ class ParsonsProblem:
             exercises = copy.deepcopy(self.file.get(level))
             for number, exercise in exercises.items():
                 try:
-                    exercises.get(number)['code'] = safe_format(exercises.get(number).get('code'), **KEYWORDS.get(language))
+                    exercises.get(number)['code'] = safe_format(
+                        exercises.get(number).get('code'), **KEYWORDS.get(language))
                 except IndexError:
                     logger.error(
                         f"There is an issue due to an empty placeholder in exercise: {number}")

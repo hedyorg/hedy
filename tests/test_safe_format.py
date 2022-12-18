@@ -1,6 +1,7 @@
 import unittest
 from safe_format import safe_format
 
+
 class TestSafeFormat(unittest.TestCase):
     def test_normal_operation(self):
         self.assertEqual(safe_format('a {b} c', b='b'), 'a b c')
