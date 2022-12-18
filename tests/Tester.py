@@ -56,12 +56,15 @@ class HedyTester(unittest.TestCase):
             all_language_texts += "\n|\n" + contents.read()
 
         cls.all_language_texts = all_language_texts
+        print('Digest of Hedy language files: ', hashlib.md5(all_language_texts.encode('utf-8')).hexdigest())
         cls.snippet_hashes = get_list_from_pickle(ROOT_DIR + '/all_snippet_hashes.pkl')
+        cls.snippet_hashes_original_len = len(cls.snippet_hashes)
 
     @classmethod
     def tearDownClass(cls):
         ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        if os.getenv('save_snippet_hashes'):
+        # Only write file if we added any hashes to it and the env var is set
+        if os.getenv('save_snippet_hashes') and cls.snippet_hashes_original_len != len(cls.snippet_hashes):
             with open(ROOT_DIR + '/all_snippet_hashes.pkl', 'wb') as f:
                 pickle.dump(cls.snippet_hashes, f)
 
