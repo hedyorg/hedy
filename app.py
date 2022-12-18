@@ -26,6 +26,7 @@ import hedy_content
 import hedy_translation
 import hedyweb
 import utils
+from safe_format import safe_format
 from config import config
 from flask_helpers import render_template
 from hedy_content import (ADVENTURE_ORDER_PER_LEVEL, ALL_KEYWORD_LANGUAGES,
@@ -85,12 +86,7 @@ ACHIEVEMENTS_TRANSLATIONS = hedyweb.AchievementTranslations()
 DATABASE = database.Database()
 ACHIEVEMENTS = achievements.Achievements(DATABASE, ACHIEVEMENTS_TRANSLATIONS)
 
-# We retrieve these once on server-start: Would be nice to automate this
-# somewhere in the future (06/22)
-PUBLIC_PROGRAMS = DATABASE.get_all_public_programs()
 
-
-# Load the adventures, by default with the selected keyword language
 def load_adventures_per_level(level, keyword_lang):
     loaded_programs = {}
     # If user is logged in, we iterate their programs that belong to the
@@ -163,7 +159,7 @@ def before_request_begin_logging():
     This needs to happen as one of the first things, as the database calls
     etc. depend on it.
     """
-    path = (str(request.path) + '?' + str(request.query_string)
+    path = (str(request.path) + '?' + request.query_string.decode('utf-8')
             ) if request.query_string else str(request.path)
     querylog.begin_global_log_record(
         path=path,
@@ -315,7 +311,9 @@ def set_security_headers(response):
 
 @app.teardown_request
 def teardown_request_finish_logging(exc):
-    querylog.finish_global_log_record(exc)
+    log_record = querylog.finish_global_log_record(exc)
+    if is_debug_mode():
+        logger.debug(repr(log_record.as_data()))
 
 
 # If present, PROXY_TO_TEST_HOST should be the 'http[s]://hostname[:port]' of the target environment
@@ -478,7 +476,7 @@ def parse_tutorial(user):
     body = request.json
 
     code = body['code']
-    level = int(body['level'])
+    level = try_parse_int(body['level'])
     try:
         result = hedy.transpile(code, level, "en")
         jsonify({'code': result.code}), 200
@@ -636,7 +634,7 @@ def translate_error(code, arguments, keyword_lang):
             else:
                 arguments[k] = hedy.style_command(v)
 
-    return error_template.format(**arguments)
+    return safe_format(error_template, **arguments)
 
 
 def translate_list(args):
@@ -997,8 +995,8 @@ def index(level, program_id):
         current_adventure = DATABASE.get_adventure(adventure)
         if current_adventure.get('level') == str(level):
             try:
-                current_adventure['content'] = current_adventure['content'].format(
-                    **hedy_content.KEYWORDS.get(g.keyword_lang))
+                current_adventure['content'] = safe_format(current_adventure['content'],
+                                                           **hedy_content.KEYWORDS.get(g.keyword_lang))
             except BaseException:
                 # We don't want teacher being able to break the student UI -> pass this adventure
                 pass
@@ -1181,7 +1179,7 @@ def get_certificate_page(username):
     longest_program = get_longest_program(username)
 
     number_achievements = len(achievements)
-    congrats_message = gettext('congrats_message').format(**{'username': username})
+    congrats_message = safe_format(gettext('congrats_message'), username=username)
     return render_template("certificate.html", count_programs=count_programs, quiz_score=quiz_score,
                            longest_program=longest_program, number_achievements=number_achievements,
                            congrats_message=congrats_message)
@@ -1376,70 +1374,28 @@ def explore():
     if not current_user()['username']:
         return redirect('/login')
 
-    level = request.args.get('level', default=None, type=str)
+    level = try_parse_int(request.args.get('level', default=None, type=str))
     adventure = request.args.get('adventure', default=None, type=str)
-    language = request.args.get('lang', default=None, type=str)
-
-    level = None if level == "null" else level
-    adventure = None if adventure == "null" else adventure
-    language = None if language == "null" else language
+    language = g.lang
 
     achievement = None
     if level or adventure or language:
-        programs = PUBLIC_PROGRAMS
-        if level:
-            programs = [x for x in programs if x.get('level') == int(level)]
-        if language:
-            programs = [x for x in programs if x.get('lang') == language]
-        if adventure:
-            # Todo: We used to save adventures with "default" with an empty adventure_name, what changed?
-            programs = [x for x in programs if x.get('adventure_name') == adventure]
-        programs = programs[-48:]
         achievement = ACHIEVEMENTS.add_single_achievement(
             current_user()['username'], "indiana_jones")
-    else:
-        programs = PUBLIC_PROGRAMS[:48]
 
-    filtered_programs = []
-    for program in programs:
-        program = pre_process_explore_program(program)
-        public_profile = DATABASE.get_public_profile_settings(program['username'])
-
-        filtered_programs.append({
-            'username': program['username'],
-            'name': program['name'],
-            'level': program['level'],
-            'id': program['id'],
-            'error': program['error'],
-            'hedy_choice': True if program.get('hedy_choice') == 1 else False,
-            'public_user': True if public_profile else None,
-            'code': "\n".join(program['code'].split("\n")[:4]),
-            'number_lines': program['code'].count('\n') + 1
-        })
-
-    favourite_programs = DATABASE.get_hedy_choices()
-    hedy_choices = []
-    for program in favourite_programs:
-        program = pre_process_explore_program(program)
-        public_profile = DATABASE.get_public_profile_settings(program['username'])
-
-        hedy_choices.append({
-            'username': program['username'],
-            'name': program['name'],
-            'level': program['level'],
-            'id': program['id'],
-            'hedy_choice': True,
-            'public_user': True if public_profile else None,
-            'code': "\n".join(program['code'].split("\n")[:4]),
-            'number_lines': program['code'].count('\n') + 1
-        })
+    programs = normalize_explore_programs(DATABASE.get_public_programs(
+        limit=40,
+        level_filter=level,
+        language_filter=language,
+        adventure_filter=adventure))
+    favourite_programs = normalize_explore_programs(DATABASE.get_hedy_choices())
 
     adventures_names = hedy_content.Adventures(session['lang']).get_adventure_names()
 
     return render_template(
         'explore.html',
-        programs=filtered_programs,
-        favourite_programs=hedy_choices,
+        programs=programs,
+        favourite_programs=favourite_programs,
         filtered_level=level,
         achievement=achievement,
         filtered_adventure=adventure,
@@ -1450,6 +1406,31 @@ def explore():
         current_page='explore')
 
 
+def normalize_explore_programs(programs):
+    """Normalize the content for all programs in the given array, for showing on the /explore page.
+
+    Does the following thing:
+
+    - Try to compile and add 'error' field to show if this worked
+    - Adds public_user: True|None fields to each program
+    - Preprocess keywords into the current language
+    - Turn 'hedy_choice' from an integer into a boolean
+    - Change 'code' to only show the first 4 lines
+    - Add 'number_lines'
+    """
+    ret = []
+    for program in programs:
+        program = pre_process_explore_program(program)
+
+        ret.append(dict(program,
+                        hedy_choice=True if program.get('hedy_choice') == 1 else False,
+                        code="\n".join(program['code'].split("\n")[:4]),
+                        number_lines=program['code'].count('\n') + 1))
+    DATABASE.add_public_profile_information(ret)
+    return ret
+
+
+@querylog.timed
 def pre_process_explore_program(program):
     # If program does not have an error value set -> parse it and set value
     if 'error' not in program:
@@ -1459,21 +1440,6 @@ def pre_process_explore_program(program):
         except BaseException:
             program['error'] = True
         DATABASE.store_program(program)
-
-    # First, if the program language is not equal to english and the language supports keywords
-    # It might contain non-english keywords -> parse all to english
-    if program.get("lang") != "en" and program.get("lang") in ALL_KEYWORD_LANGUAGES.keys():
-        program['code'] = hedy_translation.translate_keywords(program['code'], from_lang=program.get(
-            'lang'), to_lang="en", level=int(program.get('level', 1)))
-    # If the keyword language is non-English -> parse again to guarantee
-    # completely localized keywords
-    if g.keyword_lang != "en":
-        program['code'] = hedy_translation.translate_keywords(
-            program['code'],
-            from_lang="en",
-            to_lang=g.keyword_lang,
-            level=int(
-                program.get('level', 1)))
 
     return program
 
@@ -1843,7 +1809,7 @@ def public_user_page(username):
         last_achieved = None
         if user_achievements.get('achieved'):
             last_achieved = user_achievements['achieved'][-1]
-        certificate_message = gettext('see_certificate').format(**{'username': username})
+        certificate_message = safe_format(gettext('see_certificate'), username=username)
         # Todo: TB -> In the near future: add achievement for user visiting their own profile
 
         return render_template(
@@ -1915,6 +1881,14 @@ def on_server_start():
     Use this to initialize objects, dependencies and connections.
     """
     pass
+
+
+def try_parse_int(x):
+    """Try to parse an int, return None on failure."""
+    try:
+        return int(x) if x else None
+    except ValueError:
+        return None
 
 
 if __name__ == '__main__':

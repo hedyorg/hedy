@@ -6,6 +6,7 @@ from babel import Locale, languages
 
 from utils import customize_babel_locale
 from website.yaml_file import YamlFile
+from safe_format import safe_format
 import iso3166
 
 logger = logging.getLogger(__name__)
@@ -314,6 +315,7 @@ for lang in ALL_KEYWORD_LANGUAGES.keys():
     for k, v in KEYWORDS[lang].items():
         if isinstance(v, str) and "|" in v:
             # when we have several options, pick the first one as default
+            # Some keys are ints, turn them into strings
             KEYWORDS[lang][k] = v.split('|')[0]
 
 
@@ -346,7 +348,7 @@ class Commands:
             for command in commands:
                 for k, v in command.items():
                     try:
-                        command[k] = v.format(**KEYWORDS.get(language))
+                        command[k] = safe_format(v, **KEYWORDS.get(language))
                     except IndexError:
                         logger.error(
                             f"There is an issue due to an empty placeholder in line: {v}")
@@ -405,8 +407,9 @@ class Adventures:
             for level in adventure.get('levels'):
                 for k, v in adventure.get('levels').get(level).items():
                     try:
+                        logger.error('asdf %r', KEYWORDS.get(language))
                         parsed_adventure.get('levels').get(
-                            level)[k] = v.format(**KEYWORDS.get(language))
+                            level)[k] = safe_format(v, **KEYWORDS.get(language))
                     except IndexError:
                         logger.error(
                             f"There is an issue due to an empty placeholder in line: {v}")
@@ -490,7 +493,8 @@ class ParsonsProblem:
             exercises = copy.deepcopy(self.file.get(level))
             for number, exercise in exercises.items():
                 try:
-                    exercises.get(number)['code'] = exercises.get(number).get('code').format(**KEYWORDS.get(language))
+                    exercises.get(number)['code'] = safe_format(
+                        exercises.get(number).get('code'), **KEYWORDS.get(language))
                 except IndexError:
                     logger.error(
                         f"There is an issue due to an empty placeholder in exercise: {number}")
@@ -551,11 +555,11 @@ class Quizzes:
                         for option in copy.deepcopy(v):
                             temp = {}
                             for key, value in option.items():
-                                temp[key] = value.format(**KEYWORDS.get(language))
+                                temp[key] = safe_format(value, **KEYWORDS.get(language))
                             options.append(temp)
                         questions[number][k] = options
                     else:
-                        questions[number][k] = v.format(**KEYWORDS.get(language))
+                        questions[number][k] = safe_format(v, **KEYWORDS.get(language))
             keyword_data[level] = questions
         return keyword_data
 
@@ -609,7 +613,7 @@ class Tutorials:
         for level in copy.deepcopy(self.file):
             steps = copy.deepcopy(self.file).get(level).get('steps')
             for index, data in steps.items():
-                steps[index]['text'] = data['text'].format(**KEYWORDS.get(language))
+                steps[index]['text'] = safe_format(data['text'], **KEYWORDS.get(language))
             tutorial_data[level] = steps
         return tutorial_data
 
