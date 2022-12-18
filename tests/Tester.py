@@ -44,7 +44,7 @@ class HedyTester(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        directory = os.path.join(ROOT_DIR, '/grammars')
+        directory = os.path.join(ROOT_DIR, 'grammars')
 
         files_affecting_parsing = (
             [os.path.join(directory, filename) for filename in os.listdir(directory)] +
@@ -58,13 +58,11 @@ class HedyTester(unittest.TestCase):
         for filename in files_affecting_parsing:
             with open(filename, 'r', encoding='utf-8', newline='\n') as f:
                 contents = f.read()
-                print('Digest of ', filename, md5digest(contents))
                 files_contents.append(contents)
 
         all_language_texts = '\n|\n'.join(files_contents)
 
         cls.all_language_texts = all_language_texts
-        print('Digest of Hedy language files: ', md5digest(all_language_texts))
         cls.snippet_hashes = get_list_from_pickle(ROOT_DIR + '/all_snippet_hashes.pkl')
         cls.snippet_hashes_original_len = len(cls.snippet_hashes)
 
