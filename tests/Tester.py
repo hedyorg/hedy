@@ -369,14 +369,6 @@ def get_list_from_pickle(filename):
     try:
         with open(filename, 'rb') as f:
             snippet_hashes = pickle.load(f)
-    except _pickle.UnpicklingError:  # broken file, create and save
-        snippet_hashes = set()
-        with open(filename, 'wb') as f:
-            pickle.dump(snippet_hashes, f)
-    except EOFError:  # empty file
-        snippet_hashes = set()
-        with open(filename, 'wb') as f:
-            pickle.dump(snippet_hashes, f)
     except FileNotFoundError:  # non existent file
         snippet_hashes = set()
         with open(filename, 'wb') as f:
