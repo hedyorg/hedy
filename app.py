@@ -1107,9 +1107,10 @@ def view_program(user, id):
     return render_template("view-program-page.html", blur_button_available=True, **arguments_dict)
 
 
-@app.route('/adventure/<name>', methods=['GET'], defaults={'level': 1})
-@app.route('/adventure/<name>/<level>', methods=['GET'])
-def get_specific_adventure(name, level):
+@app.route('/adventure/<name>', methods=['GET'], defaults={'level': 1, 'mode': 'full'})
+@app.route('/adventure/<name>/<level>', methods=['GET'], defaults={'mode': 'full'})
+@app.route('/adventure/<name>/<level>/<mode>', methods=['GET'])
+def get_specific_adventure(name, level, mode):
     try:
         level = int(level)
     except BaseException:
@@ -1134,6 +1135,7 @@ def get_specific_adventure(name, level):
 
     # Add the commands to enable the language switcher dropdown
     commands = hedy.commands_per_level.get(level)
+    raw = mode == 'raw'
 
     return hedyweb.render_specific_adventure(
         commands=commands,
@@ -1141,7 +1143,8 @@ def get_specific_adventure(name, level):
         adventure=adventure,
         version=version(),
         prev_level=prev_level,
-        next_level=next_level)
+        next_level=next_level,
+        raw=raw)
 
 
 @app.route('/cheatsheet/', methods=['GET'], defaults={'level': 1})
