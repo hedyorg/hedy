@@ -12,7 +12,6 @@ import unittest
 import utils
 from hedy_content import ALL_KEYWORD_LANGUAGES, KEYWORDS
 import pickle
-import _pickle
 
 
 class Snippet:
