@@ -470,7 +470,7 @@ class AwsDynamoStorage(TableStorage):
         return items, next_page_token
 
     def query_index(self, table_name, index_name, keys, sort_key, reverse=False, limit=None, pagination_token=None,
-        keys_only=None, table_key_names=None):
+                    keys_only=None, table_key_names=None):
         # keys_only is ignored here -- that's only necessary for the in-memory implementation.
         # In an actual DDB table, that's an attribute of the index itself
 
