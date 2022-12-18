@@ -57,9 +57,9 @@ class ProfileModule(WebsiteModule):
             try:
                 body["birth_year"] = int(body.get("birth_year"))
             except ValueError:
-                return safe_format(gettext("year_invalid"), current_year=str(year)}), 400
+                return safe_format(gettext("year_invalid"), current_year=str(year)), 400
             if not isinstance(body.get("birth_year"), int) or body["birth_year"] <= 1900 or body["birth_year"] > year:
-                return safe_format(gettext("year_invalid"), current_year=str(year)}), 400
+                return safe_format(gettext("year_invalid"), current_year=str(year)), 400
         if "gender" in body:
             if body["gender"] not in ["m", "f", "o"]:
                 return gettext("gender_invalid"), 400
