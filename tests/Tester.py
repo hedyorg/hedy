@@ -64,7 +64,7 @@ class HedyTester(unittest.TestCase):
     @classmethod
     def tearDownClass(cls):
         ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        if True: # os.getenv('save_snippet_hashes'):
+        if os.getenv('save_snippet_hashes'):
             all_hashes = cls.new_hashes
             with open(ROOT_DIR + '/all_snippet_hashes.pkl', 'wb') as f:
                 pickle.dump(all_hashes, f)
