@@ -64,7 +64,7 @@ class HedyTester(unittest.TestCase):
     @classmethod
     def tearDownClass(cls):
         ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        if True: # os.getenv('save_snippet_hashes'):
+        if True:  # os.getenv('save_snippet_hashes'):
             all_hashes = cls.new_hashes
             with open(ROOT_DIR + '/all_snippet_hashes.pkl', 'wb') as f:
                 pickle.dump(all_hashes, f)
@@ -238,8 +238,6 @@ class HedyTester(unittest.TestCase):
         # When we translate a program we lose information about the whitespaces of the original program.
         # So when comparing the original and the translated code, we compress multiple whitespaces into one.
         self.assertEqual(re.sub('\\s+', ' ', orignal), re.sub('\\s+', ' ', translation))
-
-
 
     @staticmethod
     def validate_Python_code(parseresult):
