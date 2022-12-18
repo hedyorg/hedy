@@ -45,8 +45,6 @@ class HedyTester(unittest.TestCase):
     arithmetic_operations = ['+', '-', '*', '/']
     quotes = ["'", '"']
 
-
-
     @classmethod
     def setUpClass(cls):
         directory = 'grammars'
@@ -58,7 +56,7 @@ class HedyTester(unittest.TestCase):
                 all_language_texts += "\n|\n" + contents.read()
 
         with open('hedy.py', 'r') as contents:
-            all_language_texts +=  "\n|\n" + contents.read()
+            all_language_texts += "\n|\n" + contents.read()
 
         cls.all_language_texts = all_language_texts
         cls.hashes_saved = get_list_from_pickle('all_snippet_hashes.pkl')
@@ -75,7 +73,6 @@ class HedyTester(unittest.TestCase):
     def snippet_already_tested_with_current_hedy_version(self, snippet, level):
         hash_language_plus_snippet_and_level = self.create_hash(self.all_language_texts, snippet, level)
         return hash_language_plus_snippet_and_level in self.hashes_saved
-
 
     @staticmethod
     @contextmanager
