@@ -1,4 +1,4 @@
-import {loginForTeacher, loginForStudent, logout} from '../../tools/login/login.js'
+import {loginForTeacher, loginForStudent, login} from '../../tools/login/login.js'
 import { createClass} from '../../tools/classes/class'
 describe('Is able to add student by name', () => {
   it('Passes', () => {
@@ -13,7 +13,7 @@ describe('Is able to add student by name', () => {
   
     cy.get('#class-user-table').then(($div) => {
 
-        if ($div.text().includes('student1')){
+        if ($div.text().includes('student5')){
           cy.get('#remove-student').click();
           cy.get('#modal-yes-button').click();
         }
@@ -25,7 +25,7 @@ describe('Is able to add student by name', () => {
 
     cy.get('#invite-student').click();
     cy.wait(2000)
-    cy.get('#modal-prompt-input').type("student1");
+    cy.get('#modal-prompt-input').type("student5");
     cy.get('#modal-ok-button').click();
  
     //logout:
@@ -34,7 +34,7 @@ describe('Is able to add student by name', () => {
     cy.get('#logout_button').click();
 
     cy.wait(500);
-    loginForStudent();
+    login("student5", "123456");
     cy.wait(500);
 
     cy.get('.dropdown > .menubar-text').click();
@@ -57,7 +57,7 @@ describe('Is able to add student by name', () => {
     cy.get('.username_cell').should(($div) => {
       const text = $div.text()
     
-      expect(text).include('student1');
+      expect(text).include('student5');
     }) 
 
 
