@@ -1396,7 +1396,7 @@ def explore():
         'explore.html',
         programs=programs,
         favourite_programs=favourite_programs,
-        filtered_level=level,
+        filtered_level=str(level),
         achievement=achievement,
         filtered_adventure=adventure,
         filtered_lang=language,
