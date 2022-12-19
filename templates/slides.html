@@ -15,11 +15,14 @@
     <div class="reveal">
       <div class="slides">
           {% for index, slide in slides.items() %}
-            <section data-markdown style="text-align: left; height: 518px; left: 91.5px; top: 0px;">
+            <section data-markdown style="text-align: left; height: 1018px; left: 91.5px; top: 0px;">
                 {{ slide['header'] }}
                 <textarea data-template>
                     ### {{ slide['header'] }}
+
                     {{ slide['text'] }}
+
+                    {{ slide['editor'] }}
                 </textarea>
             </section>
           {% endfor %}
