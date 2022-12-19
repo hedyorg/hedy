@@ -18,7 +18,6 @@ module.exports = defineConfig({
     hedy_level2_page: '/hedy/2',
     admin_page: '/admin',
     admin_users_page: '/admin/users',
-    admin_classes_page: '/admin/classes',
     teachers_page: '/for-teachers',
     customize_class_page: '/for-teachers/customize-class/', // You should concatenate this with the class id e.g. /for-teachers/customize_class/<class id>
     stats_page: '/stats/class/', // You should concatenate this with the class id e.g. /stats/class/<class id>
