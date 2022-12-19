@@ -15,10 +15,10 @@
     <div class="reveal">
       <div class="slides">
           {% for index, slide in slides.items() %}
-            <section data-markdown>
+            <section data-markdown style="text-align: left; height: 518px; left: 91.5px; top: 0px;">
                 {{ slide['header'] }}
                 <textarea data-template>
-                    ## {{ slide['header'] }}
+                    ### {{ slide['header'] }}
                     {{ slide['text'] }}
                 </textarea>
             </section>
