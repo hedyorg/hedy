@@ -804,3 +804,12 @@ adventures:
                 story_text: "Now that you learned how to use ```elif```, we can use it with ```pressed```too! Be aware,\n```elif ... is pressed ``` is not possible! That is why we are going to nest some ```elif```\nstatements into the ```pressed``` options. We also had to add ```:``` to the code to make\neverything work! imagine the turtle being able to do a superjump forward. by pressing ```p``` the\nturtle can make a superjump! However, the turtle can only do this jump every 5 steps or every\n4 turns\n"
                 example_code: "```\nstepsize = 15\nleft = -90\nright = 90\naround = 180\njumptime = 5\nspins = 4\nrepeat 40 times\n    {if} w is {pressed}:\n        forward stepsize\n        jumptime = jumptime - 1\n    {if} s is {pressed}:\n        turn around\n    {if} a is {pressed}:\n        turn left\n        spins = spins - 1\n    {if} d is {pressed}:\n        turn right\n        spins = spins - 1\n    {if} p is {pressed}:\n        {if} jumptime <= 0 or spins <= 0:\n            forward stepsize * 3\n            jumptime = 5\n            spins = 4\n        {elif} jumptime > 0:\n            print \"you need to take more steps or turns before you can superjump!\"\n```\n"
                 start_code: '# place your code here'
+    years:
+        name: New Year's
+        description: Countdown to the new year!
+        default_save_name: New Year's Countdown
+        levels:
+            11:
+                story_text: "## Songs\nIn this level you can use the `{for} i {in} {range}` command to countdown to the New Year.\n\n## Challenge\nFill in the blanks and make the code work!\n"
+                example_code: "## Countdown\n```\nfor _ in _ 10 to 1\n    {print} i\n{print} 'Happy New Year!'\n```\n"
+                start_code: '# place your code here'

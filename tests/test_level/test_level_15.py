@@ -174,6 +174,7 @@ class TestsLevel15(HedyTester):
             if event.unicode == 'p':
               print(f'''press''')
               break
+          if event.type == pygame.KEYDOWN:
             if event.unicode == 's':
               stop = 1
               break
