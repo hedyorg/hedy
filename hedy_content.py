@@ -319,10 +319,6 @@ for lang in ALL_KEYWORD_LANGUAGES.keys():
             KEYWORDS[lang][k] = v.split('|')[0]
 
 
-# This assertion simplifies some code down below
-assert('en' in ALL_KEYWORD_LANGUAGES)
-
-
 class StructuredDataFile:
     """Base class for all data files in the content directory."""
     def __init__(self, filename):
