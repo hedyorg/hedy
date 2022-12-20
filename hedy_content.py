@@ -320,11 +320,12 @@ for lang in ALL_KEYWORD_LANGUAGES.keys():
 
 
 # This assertion simplifies some code down below
-assert('en' in ALL_KEYWORD_LANGUAGES)
+assert ('en' in ALL_KEYWORD_LANGUAGES)
 
 
 class StructuredDataFile:
     """Base class for all data files in the content directory."""
+
     def __init__(self, filename):
         self.filename = filename
         self._file = None
