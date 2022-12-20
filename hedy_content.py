@@ -1,13 +1,12 @@
-import copy
-import os
 import logging
+import os
 
 from babel import Locale, languages
+import iso3166
 
 from utils import customize_babel_locale
 from website.yaml_file import YamlFile
 from safe_format import safe_format
-import iso3166
 
 logger = logging.getLogger(__name__)
 
