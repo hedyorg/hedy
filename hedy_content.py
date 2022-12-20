@@ -320,6 +320,7 @@ for lang in ALL_KEYWORD_LANGUAGES.keys():
 
 class StructuredDataFile:
     """Base class for all data files in the content directory."""
+
     def __init__(self, filename):
         self.filename = filename
         self._file = None
