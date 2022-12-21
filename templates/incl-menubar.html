@@ -59,12 +59,12 @@
                       <div class="flex flex-row">
                           <div class="flex flex-col">
                             {% for lang in other_keyword_languages()[0:((other_keyword_languages()|length)/2)|int] %}
-                                <div class="dropdown-item" onclick="hedyApp.change_language ('{{lang.lang}}');event.preventDefault();">{{ lang.sym }}</div>
+                                <div class="dropdown-item language" onclick="hedyApp.change_language ('{{lang.lang}}');event.preventDefault();">{{ lang.sym }}</div>
                             {% endfor %}
                           </div>
                           <div class="flex flex-col">
                              {% for lang in other_keyword_languages()[((other_keyword_languages()|length)/2)|int:] %}
-                                <div class="dropdown-item" onclick="hedyApp.change_language ('{{lang.lang}}');event.preventDefault();">{{ lang.sym }}</div>
+                                <div class="dropdown-item language" onclick="hedyApp.change_language ('{{lang.lang}}');event.preventDefault();">{{ lang.sym }}</div>
                             {% endfor %}
                           </div>
                       </div>
@@ -75,7 +75,7 @@
                       </h3>
                       {% for lang in other_languages() %}
                         {% if lang.lang not in keyword_languages_keys() %}
-                            <div class="text-gray-300 dropdown-item language" onclick="hedyApp.change_language ('{{lang.lang}}');event.preventDefault();">{{ lang.sym }}</div>
+                            <div class="dropdown-item language" onclick="hedyApp.change_language ('{{lang.lang}}');event.preventDefault();">{{ lang.sym }}</div>
                         {% endif %}
                       {% endfor %}
                   </div>
