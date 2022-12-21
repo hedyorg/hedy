@@ -1,19 +1,19 @@
 levels:
     1:
         2:
-            story: You're at the DJ Booth requesting a song. Create a program that asks if you are ready to party and then asks which song you would like to hear.\n
+            story: "Bạn ở bàn DJ để yêu cầu phát một bài hát. Hãy viết chương trình để hỏi xem bạn đã sẵn sàng để tiệc tùng chưa và hỏi xem bạn muốn nghe bài hát nào.\n"
             code: |
-                {print} This is DJ Hedy'
-                {ask} Are you ready to party?'
-                {ask} What song would you like to hear?'
-                {echo} Great choice! I love'
+                {print} Đây là DJ Hedy
+                {ask} Bạn đã sẵn sàng "quẩy" chưa?
+                {ask} Bạn muốn nghe bài hát gì?
+                {echo} Rất tuyệt vời! Tôi thích
         1:
-            story: You're a customer at bakery Hedy.\nYou want into the bakery and are welcomed by the baker.\nHe asks what type of pie you want to order.\nNext, your order is being prepared.\n
+            story: "Bạn là một khách hàng của tiệm bánh Hedy.\nBạn bước vào trong tiệm bánh và được chào đón.\nThợ làm bánh hỏi bạn muốn đặt món gì.\nSau đó, đơn hàng của bạn sẽ được chuẩn bị.\n"
             code: |
-                {print} Chào mừng tới tiệm bánh Hedy!'
-                {ask} Bạn muốn gọi món bánh gì?'
-                {echo} Vậy bạn muốn'
-                {print} Your order is being prepared!'
+                {print} Chào mừng tới tiệm bánh Hedy!
+                {ask} Bạn muốn gọi món gì?
+                {echo} Vậy bạn muốn
+                {print} Đơn hàng của bạn đang được chuẩn bị!
     3:
         1:
             code: |
@@ -24,13 +24,13 @@ levels:
                 {print} And it is houses {at} {random}
             story: The new school year at Hogwarts is starting! \nIt is the job of the sorting hat to sort you into one of the houses.\nWhich house will you be sorted into?\nAre you a Gryffindor, Hufflepuf, Ravenclaw or Slytherin.\nLet the program wait a short period before revealing your house.\n
         2:
-            story: Create a program that chooses a random meal for you. Make a list of food and a list of toppings and let the program decide what you'll have!\n
+            story: "Viết chương trình chọn một món ăn ngẫu nhiên. Tạo một danh sách đồ ăn và lớp phủ (topping) và để chương trình quyết định bạn sẽ ăn gì!\n"
             code: |
-                food {is} pizza, icecream, salad, sandwich
-                toppings {is} chocolate, cheese, tuna, sprinkles
-                {print} Your random meal for today is...'
+                do_an {is} pizza, kem, salad, sandwich
+                lớp_phủ {is} sô-cô-la, phô mai, cá ngừ, cốm màu (sprinkles)
+                {print} Món ăn ngẫu nhiên của ngày hôm nay là...
                 {sleep} 2
-                {print} food {at} {random} with toppings {at} {random}
+                {print} do_an {at} {random} lớp_phủ  {at} {random}
     4:
         1:
             code: |
@@ -53,7 +53,7 @@ levels:
                 {print} 'the wheels of the bus go round and round'
                 {print} 'all through the town '
                 {print} 'the wheels on the bus go'
-            story: Create the song 'The wheels on the bus go round and round'\n
+            story: "Create the song 'The wheels on the bus go round and round'\\n\n"
         1:
             code: |
                 players = Liam, Noah, Sophie
@@ -73,9 +73,9 @@ levels:
                     {print} counter
                     {sleep} 1
                 {print} 'Ready or not here I come!'
-            story: Print the countdown for a game of hide and seek.\n
+            story: "Print the countdown for a game of hide and seek.\\n\n"
         1:
-            story: You and four other friends are playing Pokémon Go! Create a program that decides in which team each of you will play.\nEither red, yellow or blue! Take a little pause after announcing a team.\n
+            story: "You and four other friends are playing Pokémon Go! Create a program that decides in which team each of you will play.\\nEither red, yellow or blue! Take a little pause after announcing a team.\\n\n"
             code: |
                 teams = red, yellow, blue
                 {print} 'Red, Yellow or Blue?'
@@ -85,19 +85,19 @@ levels:
                     sleep 2
     2:
         1:
-            story: You and your friends are going to watch some Netflix.\nShow which movie you're about to watch and wish the viewers lot of fun!\n
+            story: "Nhóm bạn của bạn đang chuẩn bị xem phim trên Netflix.\nHãy cho biết bộ phim các bạn sắp xem và chúc khán giả xem phim vui vẻ!\n"
             code: |
-                {print} It is time for an evening of Netflix'
-                film {is} Sonic the Hedgehog 2
-                {print} We're going to watch
-                {print} Have lot of fun!'
+                {print} Đến giờ xem phim buổi tối rồi
+                Phim {is} Nhím Sonic 2
+                {print} Chúng tôi chuẩn bị xem Phim
+                {print} Xem phim vui vẻ nhé!
         2:
-            story: This is the webshop of a toy store. Create a program where costumers can add an item to their shopping cart.\n
+            story: "Đây là cửa hàng bán đồ chơi qua mạng. Viết chương trình để khách hàng có thể thêm sản phẩm vào giỏ hàng\n"
             code: |
-                {print} Welcome to our toystore'
-                toy {is} {ask} What would you like to buy?
-                {print} The toy is added to your shopping cart.'
-                {print} Thank you for shopping with us!'
+                {print} Chào mừng đến với cửa hàng đồ chơi của chúng tôi
+                do_choi {is} {ask} Bạn muốn mua gì?
+                {print} do_choi đã được thêm vào giỏ hàng.
+                {print} Xin cảm ơn quý khách đã mua hàng!
     5:
         1:
             story: Make a program that checks if your favourite movie is already in the list of the computer.\nIf so, print that you have great taste, otherwise add the movie to the list.\n
@@ -124,7 +124,7 @@ levels:
                 {print} 'In dogyears you are ' dog_age ' years old.'
                 {print} 'In catyears you are ' cat_age ' years old.'
         2:
-            story: Create a program that helps you calculate how many cakes you should buy for your birthday party.\n
+            story: "Create a program that helps you calculate how many cakes you should buy for your birthday party.\\n\n"
             code: |
                 {print} 'It is your birthday!'
                 people = {ask} 'How many people do you want to give a slice of cake?'

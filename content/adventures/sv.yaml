@@ -49,7 +49,7 @@ adventures:
                 example_code: "```\n{repeat} 3 {times} {print} 'Hedy är roligt!'\n```\n"
             8:
                 start_code: "{repeat} 5 {times}\n    {print} 'Hej allihopa'\n    {print} 'Det här kommer att skrivas 5 gånger'"
-                story_text: "## Indentering\n`{ask}` och `{print}` fungerar som vanligt. Men `{if}`, `{else}` och `{repeat}` har ändrats!\nDu kan nu köra delar av koden tillsammans i ett block, men du kommer att behöva *indentera* koden.\nDet betyder att du skriver fyra mellanslag i början av raden. Du behöver även indentera om du skapar ett block av kod som bara innehåller en rad.\n"
+                story_text: "## Indentering\n`{ask}` och `{print}` fungerar som vanligt. Men `{if}`, `{else}`, {pressed}  och `{repeat}` har ändrats!\nDu kan nu köra delar av koden tillsammans i ett block, men du kommer att behöva *indentera* koden.\nDet betyder att du skriver fyra mellanslag i början av raden. Du behöver även indentera om du skapar ett block av kod som bara innehåller en rad.\n"
                 example_code: "Så här fungerar `{repeat}`-kommandot nu:\n```\n{repeat} 5 {times}\n    {print} 'Hej allihop'\n    {print} 'Allt det här kommer att repeteras 5 gånger'\n```\nSå här fungerar `{if}` och `{else}` nu:\n\n```\nnamn {is} {ask} 'Vad heter du?'\n{if} namn {is} Hedy\n    {print} 'Välkommen Hedy'\n    {print} 'Du kan spela på din dator!'\n{else}\n    {print} 'INKRÄKTARE!'\n    {print} 'Du får inte använda den här datorn!'\n```\n"
             9:
                 start_code: "{repeat} 3 {times}\n    mat = {ask} 'Vad vill du äta?'\n    {if} mat {is} pizza\n        {print} 'gott!'\n    {else}\n        {print} 'pizza är godare'"
@@ -118,9 +118,9 @@ adventures:
                 story_text: "## Gör en berättelse\nPå nivå 1 kan du göra en berättelse där du får ange namnet på huvudkaraktären själv.\n\nPå första raden, använd `{ask}` för att fråga vem huvudkaraktären i din saga ska vara.\n\nEfter den första raden, börja med `{print}` om en mening ska skrivas ut på skärmen.\nDu använder `{echo}` om du vill att namnet på huvudkaraktären ska vara på slutet av meningen.\n"
                 example_code: "```\n{ask} Huvudkaraktären av denna berättelse är\n{print} Nu kommer huvudkaraktären ta en promenad i skogen\n{echo} Han är lite rädd,\n{print} Han hör galna ljud överallt\n{print} Han är rädd för att detta är en hemsökt skog\n```\n"
                 start_code: '{print} Din berättelse börjar här'
-                story_text_2: "## Challenge\nCan you make your own story in Hedy now by using `{print}` , `{ask}` and `{echo}`?\n"
+                story_text_2: "## Challenge\nKan du nu skriva din egen historia i Hedy med `{print}` , `{ask}` och `{echo}`?\n"
             2:
-                story_text: "## Berättelse\nI nivå 2 kan du göra din berättelse lite roligare. Din huvudkaraktärs namn kan nu vara varsomhelst i meningen.\n\nDu behöver programmera lite mer för det. Du måste nu börja med att namnge din karaktär.\n\nDu kan sedan använda detta namn varsomhelst i en mening.\n"
+                story_text: "## Berättelse\nI nivå 2 kan du göra din berättelse lite roligare. Din huvudkaraktärs namn kan nu vara varsomhelst i meningen.\n\nDu behöver programmera lite mer för det. Du måste nu börja med att namnge din karaktär.\n\nDu kan sedan använda detta namn varsomhelst i en mening.\n\n## Utmaning\nKan du själv skriva en historia med hjälp av en variabel? Kan du lägga till ännu fler variabler?\n"
                 example_code: "```\nnamn {is} {ask} Vad heter huvudkaraktären?\n{print} namn ska nu gå en promenad i skogen\n{print} namn är lite rädd\n{print} Plötsligt hör han ett galet ljud...\n{sleep}\n{print} namn är rädd att detta är en hemsökt skog\n```"
                 start_code: '{print} Din berättelse'
             3:
@@ -176,8 +176,8 @@ adventures:
         levels:
             2:
                 start_code: '{print} Im Hedy the parrot!'
-                story_text: "## Parrot\nCreate your own online pet parrot that will copy you!\n"
-                example_code: "```\n{print} Im Hedy the parrot\nname {is} {ask} whats your name?\n{print} name\n{sleep}\n{print} squawk\n{sleep}\n{print} name\n```\n"
+                story_text: "## Papegoja\nSkapa din egen papegoja som härmar dig!\n"
+                example_code: "```\n{print} Jag heter papegojan Hedy\nnamn {is} {ask} vad heter du?\n{print} namn\n{sleep}\n{print} krax\n{sleep}\n{print} namn\n```\n"
                 story_text_2: "## Challenge\nYou can use variables to make the parrot say more than only your name. Can you complete this code?\n"
                 example_code_2: "```\n{print} Im Hedy the parrot\nname {is} {ask} whats your name?\n{print} name\n{sleep}\n{print} name\nsurname {is} {ask} whats your surname?\n_\n{sleep}\n_\n```\n"
             3:
@@ -185,11 +185,11 @@ adventures:
                 start_code: '# place your code here'
                 example_code: "```\nwords {is} squawk, Hedy\n{print} Train your parrot!\nnew_word {is} {ask} Which word do you want to teach them?\n{add} new_word {to_list} words\n{print} \U0001F9D2 Say new_word , Hedy!\n{print} \U0001F99C words {at} {random}\n```\n"
             1:
-                example_code: "```\n{print} Im Hedy the parrot\n{ask} whats your name?\n{echo}\n{echo}\n```\n"
-                start_code: '{print} Im Hedy the parrot'
-                story_text: "## Parrot\nCreate your own online pet parrot that will copy you!\n"
-                story_text_2: "## Challenge\nCan you make the parrot ask a different question? Fill in the blanks in the example!\n"
-                example_code_2: "```\n{print} Im Hedy the parrot\n{ask} _\n{echo}\n{echo}\n"
+                example_code: "```\n{print} Jag heter papegojan Hedy\n{ask} vad heter du?\n{echo}\n{echo}\n```\n"
+                start_code: '{print} Jag heter papegojan Hedy'
+                story_text: "## Papegoja\nSkapa din egen papegoja som härmar dig!\n"
+                story_text_2: "## Utmaning\nKan du få papegojan att ställa en annan fråga? Fyll i tomrummen i exemplet!\n"
+                example_code_2: "```\n{print} Jag heter papegojan Hedy\n{ask} _\n{echo}\n{echo}\n"
             5:
                 story_text: "## Parrot\nReward your parrot if it says the correct word!\n"
                 example_code: "```\nwords {is} squawk, Hedy\n{print} 'Train your parrot!'\nnew_word {is} {ask} 'Which word do you want to teach them?'\n{add} new_word {to_list} words\nsaid_word {is} words {at} {random}\n{print} '\U0001F9D2 Say ' new_word ', Hedy!'\n{print} '\U0001F99C ' said_word\n{if} said_word {is} new_word {print} '\U0001F9D2 Great job, Hedy! \U0001F36A'\n{else} {print} '\U0001F9D2 No, Hedy! Say ' new_word\n```\n"
@@ -198,9 +198,9 @@ adventures:
                 start_code: '# Write your code here'
                 story_text: "## Parrot\nIn this level we have to use quotation marks with the commands `{ask}` and `{print}`.\nCan you complete the code by adding quotation marks?\n"
                 example_code: "```\nwords {is} squawk, Hedy\n{print} _ Train your parrot! _\nnew_word {is} {ask} _ Which word do you want to teach them? _\n{add} new_word {to_list} words\n{print} _ \U0001F9D2 Say _ new_word _, Hedy!_\n{print} _ \U0001F99C _ words {at} {random}\n```\n"
-        name: Parrot
-        description: Create your own online pet parrot that will copy you!
-        default_save_name: Parrot
+        name: Papegoja
+        description: Skapa din egen papegoja som härmar dig!
+        default_save_name: Papegoja
     songs:
         levels:
             11:
@@ -242,7 +242,7 @@ adventures:
         default_save_name: Turtle
         levels:
             1:
-                story_text: "## Let's draw\nYou can also use Hedy to draw. By combining turns and lines, you can make a square or stairs!\n\nUsing `{forward}` you draw a line forwards. The number behind it determines how far the turtle will walk. `{turn} {right}` turns a quarter turn in clockwise direction, `{turn} {left}` turns counter clockwise.\nIf you want to go backwards, you use the `{forward}` command but with a negative number. So for example `{forward} -100`\n\nThis is the start of a little staircase. Can you make it have 5 steps?\n"
+                story_text: "## Vi ritar\nMan kan också använda Hedy för att rite. Genom att kombinera svängar och streck kan man göra en kvadrat eller trappor!\n\nGenom att använda `{forward}` drar man ett streck framåt. Numret bakom avgör hur långt sköldpaddan ska gå. `{turn} {right}` svänger ett kvarts varv medsols, `{turn} {left}` svänger motsols.\nFör att gå bakåt använder man `{forward}`-kommandot men med ett negativt nummer, till exempel `{forward} -100`\n\n## Utmaning\nDet här är början på en liten trappa. Kan du göra så att den får 5 steg?\n"
                 example_code: "```\n{forward} 50\n{turn} {right}\n{forward} 50\n{turn} {left}\n{forward} 50\n```\n"
                 start_code: "{forward} 50\n{turn} {left}"
             8:
@@ -356,10 +356,10 @@ adventures:
                 story_text: "## Rock, Paper, Scissors\nPlay until you beat the computer! But first, finish the example code...\n"
                 example_code: "```\nwon = 'no'\noptions = 'rock', 'paper', 'scissors'\n{while} won == 'no'\n    your_choice = {ask} 'What do you choose?'\n    computer_choice = options {at} {random}\n    {print} 'you chose ' your_choice\n    {print} 'the computer chose ' computer_choice\n    {if} computer_choice == your_choice\n        {print} 'Tie!'\n    {if} computer_choice == 'rock' {and} your_choice == 'scissors'\n        {print} 'You lose!'\n    {if} computer_choice == 'rock' {and} your_choice == 'paper'\n        {print} 'You win!'\n        won = 'yes'\n```\n"
             1:
-                story_text: "## Rock, paper, scissors\nIn level 1 you can start with a rock, paper, scissors  game.\n\nWith `{ask}` you can make a choice, and with `{echo}` you can repeat that choice.\n"
+                story_text: "## Sten, sax, påse\nI nivå 1 kan du börja med ett sten, sax, påse-spel.\n\nMed `{ask}` kan du göra ett val, och med `{echo}` kan du upprepa det valet.\n"
                 example_code: "```\n{print} what do you choose?\n{ask} choose from rock, paper or scissors\n{echo} so your choice was:\n```\nInstead of using words, you could also use emojis of course: ✊✋✌\n"
                 start_code: '{print} Welcome to your own rock scissors paper!'
-                story_text_2: "## Challenge\nInstead of using words, you could also use emojis: ✊✋✌\nCan you create a code using emojis?\n"
+                story_text_2: "## Utmaning\nIstället för att använda ord skulle man kunna använda emojier: ✊✋✌\nKan du skriva en kod med emojier?\n"
                 example_code_2: "```\n{print} what do you choose?\n{ask} choose from _\n{echo} so your choice was:\n```\n"
             2:
                 story_text: "## Rock, paper, scissors\nIn this level you can practise using the variables, so that you can make the rock, paper, scissors game in the next level!\n"
