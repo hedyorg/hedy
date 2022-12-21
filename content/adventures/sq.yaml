@@ -191,6 +191,10 @@ adventures:
                 story_text: "## Papagalli\nShpërbleni papagallin tuaj nëse thot një fjalë të saktë!\nPërfundoni kodin duke plotësuar 4 komandat që mungojnë.\n"
                 example_code: "```\nfjalët {is} kuak, Hedy\n{print} 'Mëso papagallin tënd!'\nfjala_re {is} {ask} 'Cilën fjalë doni ti ja mësoni?'\n{add} fjala_re {to_list} fjalët\nfjala_thënë {is} fjalët {at} {random}\n{print} '\U0001F9D2 Thuaj ' fjala_re ', Hedy!'\n{print} '\U0001F99C ' fjala_thënë\n_ fjala_thënë {is} fjala_re _'\U0001F9D2 Punë e mrekullueshme, Hedy! \U0001F36A'\n_ _ '\U0001F9D2 Jo, Hedy! Thuaj ' fjala_re\n```\n"
                 start_code: '# Vendoseni kodin tuaj këtu'
+            4:
+                story_text: "## Parrot\nIn this level we have to use quotation marks with the commands `{ask}` and `{print}`.\nCan you complete the code by adding quotation marks?\n"
+                example_code: "```\nwords {is} squawk, Hedy\n{print} _ Train your parrot! _\nnew_word {is} {ask} _ Which word do you want to teach them? _\n{add} new_word {to_list} words\n{print} _ \U0001F9D2 Say _ new_word _, Hedy!_\n{print} _ \U0001F99C _ words {at} {random}\n```\n"
+                start_code: '# Write your code here'
     songs:
         name: Këndo një këngë!
         description: Printo një këngë
