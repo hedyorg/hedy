@@ -9,7 +9,7 @@ from . import querylog
 
 from ruamel import yaml
 
-from utils import atomic_write_file, is_heroku
+from utils import atomic_write_file
 from flask import has_request_context, g
 
 yaml_loader = yaml.YAML(typ="safe", pure=True)
@@ -180,7 +180,12 @@ class YamlFile:
 
 
 def pathname_slug(x):
-    """Turn a potentially long path name with any characters into an identifier we can use as a file name, while maintaining uniqueness."""
+    """Turn a path name into an identifier we can use as a file name.
+
+    Take into account that it may contain characters we want to remove,
+    that the full path may be too long to use as a file name, and that
+    it needs to remain unique.
+    """
     x = re.sub(r'[^a-zA-Z0-9_-]', '', x)
     return x[-20:] + md5digest(x)
 
