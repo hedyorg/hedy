@@ -1,6 +1,5 @@
 import textwrap
 import hashlib
-import exceptions
 import hedy
 import hedy_translation
 import re
@@ -12,10 +11,7 @@ import inspect
 import unittest
 import utils
 from hedy_content import ALL_KEYWORD_LANGUAGES, KEYWORDS
-from app import translate_error, app
-from flask_babel import force_locale
 import pickle
-import _pickle
 
 
 class Snippet:
@@ -32,10 +28,11 @@ class Snippet:
             self.language = language
         self.adventure_name = adventure_name
         self.name = f'{self.language}-{self.level}-{self.field_name}'
-        self.hash = hashlib.md5(self.code.encode()).hexdigest()
+        self.hash = md5digest(self.code)
 
 
 class HedyTester(unittest.TestCase):
+
     level = None
     equality_comparison_with_is = ['is', '=']
     equality_comparison_commands = ['==', '=']
@@ -43,6 +40,43 @@ class HedyTester(unittest.TestCase):
     comparison_commands = number_comparison_commands + ['!=']
     arithmetic_operations = ['+', '-', '*', '/']
     quotes = ["'", '"']
+
+    @classmethod
+    def setUpClass(cls):
+        ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        directory = os.path.join(ROOT_DIR, 'grammars')
+
+        files_affecting_parsing = (
+            [os.path.join(directory, filename) for filename in os.listdir(directory)] +
+            [os.path.join(ROOT_DIR, 'hedy.py')]
+        )
+
+        # Sort these files so that the order is consistent between all platforms (this affects the hash!)
+        files_affecting_parsing.sort()
+
+        files_contents = []
+        for filename in files_affecting_parsing:
+            with open(filename, 'r', encoding='utf-8', newline='\n') as f:
+                contents = f.read()
+                files_contents.append(contents)
+
+        all_language_texts = '\n|\n'.join(files_contents)
+
+        cls.all_language_texts = all_language_texts
+        cls.snippet_hashes = get_list_from_pickle(ROOT_DIR + '/all_snippet_hashes.pkl')
+        cls.snippet_hashes_original_len = len(cls.snippet_hashes)
+
+    @classmethod
+    def tearDownClass(cls):
+        ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        # Only write file if we added any hashes to it and the env var is set
+        if os.getenv('save_snippet_hashes') and cls.snippet_hashes_original_len != len(cls.snippet_hashes):
+            with open(ROOT_DIR + '/all_snippet_hashes.pkl', 'wb') as f:
+                pickle.dump(cls.snippet_hashes, f)
+
+    def snippet_already_tested_with_current_hedy_version(self, snippet, level):
+        hash_language_plus_snippet_and_level = self.create_hash(self.all_language_texts, snippet, level)
+        return hash_language_plus_snippet_and_level in self.snippet_hashes
 
     @staticmethod
     @contextmanager
@@ -161,84 +195,54 @@ class HedyTester(unittest.TestCase):
             translate=True):
         if level is None:  # no level set (from the multi-tester)? grap current level from class
             level = self.level
-        if exception is not None:
-            with self.assertRaises(exception) as context:
+        if not self.snippet_already_tested_with_current_hedy_version(code, level):
+            if exception is not None:
+                with self.assertRaises(exception) as context:
+                    result = hedy.transpile(code, level, lang)
+                if extra_check_function is not None:
+                    self.assertTrue(extra_check_function(context))
+            else:
                 result = hedy.transpile(code, level, lang)
-            if extra_check_function is not None:
-                self.assertTrue(extra_check_function(context))
+                if expected is not None:
+                    self.assertEqual(expected, result.code)
 
-        if extra_check_function is None:  # most programs have no turtle so make that the default
-            extra_check_function = self.is_not_turtle()
+                if translate:
+                    if lang == 'en':  # if it is English
+                        # and if the code transpiles (evidenced by the fact that we reach this
+                        # line) we should be able to translate too
 
-        if expected is not None:
-            result = hedy.transpile(code, level, lang)
-            self.assertEqual(expected, result.code)
+                        # TODO FH Feb 2022: we pick Dutch here not really fair or good practice :D
+                        # Maybe we should do a random language?
+                        in_dutch = hedy_translation.translate_keywords(
+                            code, from_lang=lang, to_lang="nl", level=self.level)
+                        back_in_english = hedy_translation.translate_keywords(
+                            in_dutch, from_lang="nl", to_lang=lang, level=self.level).strip()
+                        self.assert_translated_code_equal(code, back_in_english)
+                    else:  # not English? translate to it and back!
+                        in_english = hedy_translation.translate_keywords(
+                            code, from_lang=lang, to_lang="en", level=self.level)
+                        back_in_org = hedy_translation.translate_keywords(
+                            in_english, from_lang="en", to_lang=lang, level=self.level)
+                        self.assert_translated_code_equal(code, back_in_org)
 
-            if translate:
-                if lang == 'en':  # if it is English
-                    # and if the code transpiles (evidenced by the fact that we reach this
-                    # line) we should be able to translate too
+                all_commands = hedy.all_commands(code, level, lang)
+                if expected_commands is not None:
+                    self.assertEqual(expected_commands, all_commands)
+                if ('ask' not in all_commands) and ('input' not in all_commands):  # <- use this to run tests locally with unittest
+                    self.assertTrue(self.validate_Python_code(result))
+                if output is not None:
+                    if extra_check_function is None:  # most programs have no turtle so make that the default
+                        extra_check_function = self.is_not_turtle()
+                    self.assertEqual(output, HedyTester.run_code(result))
+                    self.assertTrue(extra_check_function(result))
 
-                    # TODO FH Feb 2022: we pick Dutch here not really fair or good practice :D
-                    # Maybe we should do a random language?
-                    in_dutch = hedy_translation.translate_keywords(code, from_lang=lang, to_lang="nl", level=self.level)
-                    back_in_english = hedy_translation.translate_keywords(
-                        in_dutch, from_lang="nl", to_lang=lang, level=self.level).strip()
-                    self.assert_translated_code_equal(code, back_in_english)
-                else:  # not English? translate to it and back!
-                    in_english = hedy_translation.translate_keywords(
-                        code, from_lang=lang, to_lang="en", level=self.level)
-                    back_in_org = hedy_translation.translate_keywords(
-                        in_english, from_lang="en", to_lang=lang, level=self.level)
-                    self.assert_translated_code_equal(code, back_in_org)
-
-            all_commands = hedy.all_commands(code, level, lang)
-            if expected_commands is not None:
-                self.assertEqual(expected_commands, all_commands)
-            if ('ask' not in all_commands) and ('input' not in all_commands):  # <- use this to run tests locally with unittest
-                self.assertTrue(self.validate_Python_code(result))
-            if output is not None:
-                self.assertEqual(output, HedyTester.run_code(result))
-                self.assertTrue(extra_check_function(result))
+            # all ok? -> save hash!
+            self.snippet_hashes.add(self.create_hash(self.all_language_texts, code, level))
 
     def assert_translated_code_equal(self, orignal, translation):
         # When we translate a program we lose information about the whitespaces of the original program.
         # So when comparing the original and the translated code, we compress multiple whitespaces into one.
         self.assertEqual(re.sub('\\s+', ' ', orignal), re.sub('\\s+', ' ', translation))
-
-    @staticmethod
-    def check_Hedy_code_for_errors(snippet):
-        # Code used in the Snippet testers to validate Hedy code
-        # Note that None is the happy path! If None is returned, no errors are found
-        # If an error is found a (reasonably) readable string is returned.
-
-        try:
-            if len(snippet.code) != 0:   # We ignore empty code snippets or those of length 0
-                result = hedy.transpile(snippet.code, int(snippet.level), snippet.language)
-                all_commands = hedy.all_commands(snippet.code, snippet.level, snippet.language)
-
-                if not result.has_turtle and ('ask' not in all_commands) and (
-                        'input' not in all_commands):  # output from turtle cannot be captured
-                    HedyTester.run_code(result)
-        except hedy.exceptions.CodePlaceholdersPresentException:  # Code with blanks is allowed
-            pass
-        except OSError:
-            return None  # programs with ask cannot be tested with output :(
-        except exceptions.HedyException as E:
-            try:
-                location = E.error_location
-            except BaseException:
-                location = 'No Location Found'
-
-            # Must run this in the context of the Flask app, because FlaskBabel requires that.
-            with app.app_context():
-                with force_locale('en'):
-                    error_message = translate_error(E.error_code, E.arguments, 'en')
-                    error_message = error_message.replace('<span class="command-highlighted">', '`')
-                    error_message = error_message.replace('</span>', '`')
-                    return f'{error_message} at line {location}'
-
-        return None
 
     @staticmethod
     def validate_Python_code(parseresult):
@@ -364,33 +368,21 @@ class HedyTester(unittest.TestCase):
 
         return snippets
 
-
-def get_snippets_env_var():
-    only_new_snippets = os.getenv('only_new_snippets')
-    if only_new_snippets is None:
-        # set default in case env var is not set (f.e. on Windows, or when running form the UI)
-        only_new_snippets = False
-    elif only_new_snippets == 1 or only_new_snippets == '1':
-        only_new_snippets = True
-    else:  # in case an invalid one is given
-        only_new_snippets = False
-    return only_new_snippets
+    def create_hash(self, hedy_language, snippet, level):
+        t = snippet + "|\n" + str(level) + "|\n" + hedy_language
+        return hashlib.md5(t.encode('utf-8')).hexdigest()
 
 
 def get_list_from_pickle(filename):
     try:
         with open(filename, 'rb') as f:
-            hashes_saved = pickle.load(f)
-    except _pickle.UnpicklingError:  # broken file, create and save
-        hashes_saved = set()
-        with open(filename, 'wb') as f:
-            pickle.dump(hashes_saved, f)
-    except EOFError:  # empty file
-        hashes_saved = set()
-        with open(filename, 'wb') as f:
-            pickle.dump(hashes_saved, f)
+            snippet_hashes = pickle.load(f)
     except FileNotFoundError:  # non existent file
-        hashes_saved = set()
+        snippet_hashes = set()
         with open(filename, 'wb') as f:
-            pickle.dump(hashes_saved, f)
-    return hashes_saved
+            pickle.dump(snippet_hashes, f)
+    return snippet_hashes
+
+
+def md5digest(x):
+    return hashlib.md5(x.encode('utf-8')).hexdigest()
