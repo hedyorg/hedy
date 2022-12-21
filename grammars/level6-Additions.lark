@@ -2,8 +2,8 @@ _print_argument: (_SPACE | quoted_text | list_access | expression | print_expres
 ?print_expression: var_access_print | error_unsupported_number | INT
 
 // redefining it entirely since it has many order-depending rules
-command: print | turtle | add | remove | sleep | error_print_no_quotes | ifpressed_else | ifpressed | ifelse | ifs | ask | assign | assign_list | error_invalid_space | error_text_no_print | empty_line
-_if_less_command: print | turtle | add | remove | sleep | error_print_no_quotes | ask | assign | assign_list
+command: print | turtle | add | remove | sleep | error_print_no_quotes | ifpressed_else | ifpressed | ifelse | ifs | ask | assign_button | assign | assign_list | error_invalid_space | error_text_no_print | empty_line
+_if_less_command: print | turtle | add | remove | sleep | error_print_no_quotes | ask | assign_button | assign | assign_list
 
 //splitting  these commands into two rules, one for equals and one for is so they can be properly handled in the translator
 ask: var (_IS | _EQUALS) _ASK (_print_argument)?
@@ -12,6 +12,8 @@ equality_check: (textwithoutspaces | INT) (_IS | _EQUALS) (textwithoutspaces | q
 
 condition:+= equality_check -= equality_check
 
+list_access_var: var (_IS | _EQUALS) var _AT (INT | random)
+assign_button: NAME (_IS | _EQUALS) _BUTTON
 assign_list: var (_IS | _EQUALS) textwithspaces (_COMMA textwithspaces)+
 assign: var (_IS | _EQUALS) (list_access | expression | textwithoutspaces | textwithspaces)
 
@@ -25,4 +27,3 @@ turtle: _FORWARD ((NUMBER | list_access | textwithoutspaces | expression))? -> f
 ?atom: INT | _MINUS INT |var_access | error_unsupported_number | textwithoutspaces
 
 error_unsupported_number: /([-+]?(\d+[\.،,，]\d+))/ -> error_unsupported_number
-

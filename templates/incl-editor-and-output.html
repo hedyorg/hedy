@@ -104,7 +104,7 @@
         </div>
       </div>
     </div>
-    <div class="w-full flex flex-col order-3 relative" id="code_output" style="height: 22rem;">
+    <div class="w-full flex flex-col order-3 relative" id="code_output" style="min-height: 22rem;">
         <div class="inline-block ltr:right-0 rtl:left-0 absolute z-10 mx-2 mt-2 text-white" id="variables_container">
             <button id="variable_button" class="inline-flex items-center text-xl px-2 bg-blue-600 rounded-lg" onclick="hedyApp.showVariableView()">
                 🏷<svg class="float-right w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -139,6 +139,8 @@
             <p class="text-2xl font-bold caption">{{_('pygame_waiting_for_input')}}</p>
           </div>
         </div>
+      </div>
+      <div id="dynamic-buttons" class="flex mt-3 gap-2 overflow-x-scroll border-4 border-blue-600 rounded bg-blue-300 py-2 px-3" style="display: none">
       </div>
     </div>
     <!-- Col 2: run button (move below editor in single-column layout), level buttons -->

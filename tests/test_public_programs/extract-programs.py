@@ -14,7 +14,7 @@ with open(f'public-programs-{date}.json', 'r') as public_programs:
 for program in all_programs:
     try:
         error = program['error']['BOOL']
-    except:
+    except Exception:
         error = True
     new_program = {
         'code': program['code']['S'],
@@ -27,4 +27,3 @@ for program in all_programs:
 with open(f'filtered-programs-{date}.json', 'w') as public_programs:
     save_text = json.dumps(new_programs)
     public_programs.write(save_text)
-

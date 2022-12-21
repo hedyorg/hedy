@@ -145,10 +145,12 @@ def get_digits(keywords, keywords_ref):
     digits = []
 
     for d in '0123456789':
-        if keywords_ref[d] not in digits:
-            digits.append(keywords_ref[d])
-        if keywords[d] not in digits:
-            digits.append(keywords[d])
+        # Each digit is keyed as d0, d1, d2, ...
+        key = f'd{d}'
+        if keywords_ref[key] not in digits:
+            digits.append(keywords_ref[key])
+        if keywords[key] not in digits:
+            digits.append(keywords[key])
 
     return "".join(digits)
 

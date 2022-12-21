@@ -639,4 +639,3 @@ class TestsLevel4(HedyTester):
             code=code,
             exception=hedy.exceptions.LonelyTextException
         )
-
