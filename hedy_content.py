@@ -310,7 +310,7 @@ for lang in sorted(languages):
 # Load and cache all keyword yamls
 KEYWORDS = {}
 for lang in ALL_KEYWORD_LANGUAGES.keys():
-    KEYWORDS[lang] = dict(YamlFile.for_file(f'content/keywords/{lang}.yaml'))
+    KEYWORDS[lang] = YamlFile.for_file(f'content/keywords/{lang}.yaml').to_dict()
     for k, v in KEYWORDS[lang].items():
         if isinstance(v, str) and "|" in v:
             # when we have several options, pick the first one as default
