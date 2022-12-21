@@ -100,8 +100,8 @@
     explanation: Проверяйте элементы с помощью `{in}`.
     demo_code: "красивые_цвета {is} зеленый, желтый\nцвет {is} {ask} 'Какой {is} ваш любимый цвет?'\n{if} цвет {in} красивые_цвета {print} 'красивый!' {else} {print} 'meh'"
 -   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
-    demo_code: "{if} a {is} {pressed} {print} 'You pressed A!' {else} {print} 'You pressed another key!'"
+    explanation: Проверьте, является ли данная клавиша на клавиатуре `{pressed}`.
+    demo_code: "{if} a {is} {pressed} {print} 'Вы нажали A!' {else} {print} 'Вы нажали другую клавишу!'"
 6:
 -   name: '{print}'
     explanation: Печатайте точно, используя кавычки.
@@ -136,8 +136,8 @@
     explanation: 'Повторите несколько строк.'
     demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
 -   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
-    demo_code: "{if} a {is} {pressed}\n    {print} 'You pressed A!'\n{else}\n    {print} 'You pressed another key!'"
+    explanation: Проверьте, является ли данная клавиша на клавиатуре `{pressed}`.
+    demo_code: "{if} a {is} {pressed}\n    {print} 'Вы нажали А!'\n{else}\n    {print} 'Вы нажали другую клавишу!'"
 9:
 -   name: '{if} с несколькими линиями'
     explanation: Ответ суммы вопросов с `{ask}` и посмотрите, правильный ли он. Теперь мы выводим две строки.
