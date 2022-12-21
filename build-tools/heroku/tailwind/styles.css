@@ -11,6 +11,13 @@ html {
   font-family: 'Balsamiq Sans', sans-serif;
 }
 
+.dot {
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
 h1 {
   @apply font-extralight text-4xl;
 }
@@ -269,7 +276,11 @@ code {
 
   @apply cursor-auto; /* Undo cursor-pointer we inherit from the menu */
   /* Colors */
-  @apply border-2 border-blue-400 bg-blue-200 px-4 py-2;
+  @apply border-2 border-gray-700 bg-gray-300 px-4 py-2;
+}
+
+.dropdown-menu h3 {
+  @apply font-medium border-b-2 text-gray-800 border-gray-700 mx-4 pb-2 mb-2 text-center;
 }
 
 .dropdown-level-menu {
@@ -284,10 +295,6 @@ code {
 
 .dropdown-item:hover {
   @apply bg-blue-600 text-white;
-}
-
-.dropdown-menu h3 {
-  @apply font-medium border-b-2 border-blue-700 mx-4 pb-2 mb-2 text-center;
 }
 
 .text-shadow {
