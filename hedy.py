@@ -2141,14 +2141,12 @@ class ConvertToPython_12(ConvertToPython_11):
                 raise exceptions.UnquotedAssignTextException(text=args[1])
 
         if isinstance(right_hand_side, Tree):
-            return left_hand_side + " = " + right_hand_side.children[0]
+            exception = self.make_catch_exception([right_hand_side.children[0]])
+            return exception + left_hand_side + " = " + right_hand_side.children[0]
         else:
             # we no longer escape quotes here because they are now needed
-            if self.is_list(right_hand_side) or self.is_random(right_hand_side):
-                exception = self.make_catch_exception([right_hand_side])
-                return exception + left_hand_side + " = " + right_hand_side + ""
-            else:
-                return left_hand_side + " = " + right_hand_side + ""
+            exception = self.make_catch_exception([right_hand_side])
+            return exception + left_hand_side + " = " + right_hand_side + ""
 
     def var(self, meta, args):
         name = args[0]
