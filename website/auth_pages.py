@@ -4,6 +4,7 @@ from flask import jsonify, make_response, redirect, request, session
 from flask_babel import gettext
 
 from config import config
+from safe_format import safe_format
 from hedy_content import ALL_LANGUAGES, COUNTRIES
 from utils import extract_bcrypt_rounds, is_heroku, is_testing_request, timems, times
 from website.auth import (
@@ -137,9 +138,9 @@ class AuthModule(WebsiteModule):
             try:
                 body["birth_year"] = int(body.get("birth_year"))
             except ValueError:
-                return gettext("year_invalid").format(**{"current_year": str(year)}), 400
+                return safe_format(gettext("year_invalid"), current_year=str(year)), 400
             if not isinstance(body.get("birth_year"), int) or body["birth_year"] <= 1900 or body["birth_year"] > year:
-                return gettext("year_invalid").format(**{"current_year": str(year)}), 400
+                return safe_format(gettext("year_invalid"), current_year=str(year)), 400
         if "gender" in body:
             if body["gender"] != "m" and body["gender"] != "f" and body["gender"] != "o":
                 return gettext("gender_invalid"), 400
@@ -206,7 +207,7 @@ class AuthModule(WebsiteModule):
         remember_current_user(user)
         return resp
 
-    @route("/verify", methods=["GET"])
+    @ route("/verify", methods=["GET"])
     def verify_email(self):
         username = request.args.get("username", None)
         token = request.args.get("token", None)
@@ -238,30 +239,30 @@ class AuthModule(WebsiteModule):
 
         return redirect("/landing-page")
 
-    @route("/logout", methods=["POST"])
+    @ route("/logout", methods=["POST"])
     def logout(self):
         forget_current_user()
         if request.cookies.get(TOKEN_COOKIE_NAME):
             self.db.forget_token(request.cookies.get(TOKEN_COOKIE_NAME))
         return "", 200
 
-    @route("/destroy", methods=["POST"])
-    @requires_login
+    @ route("/destroy", methods=["POST"])
+    @ requires_login
     def destroy(self, user):
         forget_current_user()
         self.db.forget_token(request.cookies.get(TOKEN_COOKIE_NAME))
         self.db.forget_user(user["username"])
         return "", 200
 
-    @route("/destroy_public", methods=["POST"])
-    @requires_login
+    @ route("/destroy_public", methods=["POST"])
+    @ requires_login
     def destroy_public(self, user):
         self.db.forget_public_profile(user["username"])
         session.pop("profile_image", None)  # Delete profile image id if existing
         return "", 200
 
-    @route("/change_student_password", methods=["POST"])
-    @requires_login
+    @ route("/change_student_password", methods=["POST"])
+    @ requires_login
     def change_student_password(self, user):
         body = request.json
         if not isinstance(body, dict):
@@ -284,8 +285,8 @@ class AuthModule(WebsiteModule):
 
         return {"success": gettext("password_change_success")}, 200
 
-    @route("/change_password", methods=["POST"])
-    @requires_login
+    @ route("/change_password", methods=["POST"])
+    @ requires_login
     def change_password(self, user):
         body = request.json
 
@@ -318,7 +319,7 @@ class AuthModule(WebsiteModule):
 
         return jsonify({"message": gettext("password_updated")}), 200
 
-    @route("/recover", methods=["POST"])
+    @ route("/recover", methods=["POST"])
     def recover(self):
         body = request.json
         # Validations
@@ -364,7 +365,7 @@ class AuthModule(WebsiteModule):
 
             return jsonify({"message": gettext("sent_password_recovery")}), 200
 
-    @route("/reset", methods=["POST"])
+    @ route("/reset", methods=["POST"])
     def reset(self):
         body = request.json
         # Validations
@@ -407,8 +408,8 @@ class AuthModule(WebsiteModule):
 
         return jsonify({"message": gettext("password_resetted")}), 200
 
-    @route("/request_teacher", methods=["GET"])
-    @requires_login
+    @ route("/request_teacher", methods=["GET"])
+    @ requires_login
     def request_teacher_account(self, user):
         account = self.db.user_by_username(user["username"])
         if account.get("is_teacher"):

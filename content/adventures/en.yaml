@@ -849,6 +849,21 @@ adventures:
                     {print} 🦜 words {at} {random}
                     ```
                 start_code: "# place your code here"
+            4:
+                story_text: |
+                    ## Parrot
+                    In this level we have to use quotation marks with the commands `{ask}` and `{print}`.
+                    Can you complete the code by adding quotation marks?
+                example_code: |
+                    ```
+                    words {is} squawk, Hedy
+                    {print} _ Train your parrot! _
+                    new_word {is} {ask} _ Which word do you want to teach them? _
+                    {add} new_word {to_list} words
+                    {print} _ 🧒 Say _ new_word _, Hedy!_
+                    {print} _ 🦜 _ words {at} {random}
+                    ```
+                start_code: "# Write your code here"
             5:
                 story_text: |
                     ## Parrot
@@ -1531,7 +1546,7 @@ adventures:
                     For example, you can also link turtle commands to keys! Try it!
                 example_code: |
                     ```
-                    if x {is} {pressed} forward 50
+                    if x {is} {pressed} {forward} 50
                     ```
                 story_text_2: |
                     ## If Else Pressed

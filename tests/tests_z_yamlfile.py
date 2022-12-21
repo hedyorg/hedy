@@ -12,12 +12,12 @@ class TestYamlFile(unittest.TestCase):
         Also get a gauge for the speedup we get from loading a pickled file,
         although we're not going to fail the test on the numbers we get from that.
         """
-        n = 50
+        n = 10
 
         # Pick a file with unicode in it so we're sure it gets handled properly
         root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
         yaml_file = os.path.normpath(root_dir + '/content/adventures/hu.yaml')
-        file = YamlFile(yaml_file, try_pickle=True)
+        file = YamlFile(yaml_file)
 
         # Remove pickled version of this file if it exists, it may
         # influence the tests

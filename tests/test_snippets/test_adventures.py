@@ -1,24 +1,23 @@
-import pickle
 import os
-import unittest
-
+from app import translate_error, app
+from flask_babel import force_locale
 
 from parameterized import parameterized
 
+import exceptions
 import hedy
 import utils
-from tests.Tester import HedyTester, Snippet, get_list_from_pickle, get_snippets_env_var
+from tests.Tester import HedyTester, Snippet
 from website.yaml_file import YamlFile
 
 # Set the current directory to the root Hedy folder
 os.chdir(os.path.join(os.getcwd(), __file__.replace(os.path.basename(__file__), '')))
 
-unique_snippets_table = set()
 filtered_language = None
 level = None
 
 
-def collect_snippets(path, hashes_saved=set(), filtered_language=None, only_new_snippets=False):
+def collect_snippets(path, filtered_language=None):
     Hedy_snippets = []
     files = [f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f)) and f.endswith('.yaml')]
     for f in files:
@@ -52,30 +51,25 @@ def collect_snippets(path, hashes_saved=set(), filtered_language=None, only_new_
                                 except BaseException:
                                     print("Code container is empty...")
                                     continue
-                                if not hash(code) in unique_snippets_table:
-                                    unique_snippets_table.add(hash(code))
-                                    snippet = Snippet(
-                                        filename=f,
-                                        level=level_number,
-                                        field_name=adventure_name + ' snippet #' + str(code_snippet_counter),
-                                        code=code,
-                                        adventure_name=adventure_name)
-                                    if not only_new_snippets or snippet.hash not in hashes_saved:
-                                        Hedy_snippets.append(snippet)
+
+                                snippet = Snippet(
+                                    filename=f,
+                                    level=level_number,
+                                    field_name=adventure_name + ' snippet #' + str(code_snippet_counter),
+                                    code=code,
+                                    adventure_name=adventure_name)
+                                Hedy_snippets.append(snippet)
 
                             # code snippets inside start_code
                             try:
                                 start_code = level['start_code']
-                                if not hash(start_code) in unique_snippets_table:
-                                    unique_snippets_table.add(hash(start_code))
-                                    snippet = Snippet(
-                                        filename=f,
-                                        level=level_number,
-                                        field_name='start_code',
-                                        code=start_code,
-                                        adventure_name=adventure_name)
-                                    if not only_new_snippets or snippet.hash not in hashes_saved:
-                                        Hedy_snippets.append(snippet)
+                                snippet = Snippet(
+                                    filename=f,
+                                    level=level_number,
+                                    field_name='start_code',
+                                    code=start_code,
+                                    adventure_name=adventure_name)
+                                Hedy_snippets.append(snippet)
 
                             except KeyError:
                                 print(f'Problem reading startcode for {lang} level {level}')
@@ -95,32 +89,22 @@ def collect_snippets(path, hashes_saved=set(), filtered_language=None, only_new_
                                     print("Code container is empty...")
                                     continue
 
-                                    # test only unique snippets
-                                if not hash(code) in unique_snippets_table:
-                                    unique_snippets_table.add(hash(code))
-                                    snippet = Snippet(
-                                        filename=f,
-                                        level=level_number,
-                                        field_name=adventure_name + ' snippet #' + str(code_snippet_counter),
-                                        code=code,
-                                        adventure_name=adventure_name)
-                                    if not only_new_snippets or snippet.hash not in hashes_saved:
-                                        Hedy_snippets.append(snippet)
+                                snippet = Snippet(
+                                    filename=f,
+                                    level=level_number,
+                                    field_name=adventure_name + ' snippet #' + str(code_snippet_counter),
+                                    code=code,
+                                    adventure_name=adventure_name)
+                                Hedy_snippets.append(snippet)
 
     return Hedy_snippets
-
 
 # filtered_language = 'nl'
 # use this to filter on 1 lang, zh_Hans for Chinese, nb_NO for Norwegian, pt_PT for Portuguese
 
-only_new_snippets = get_snippets_env_var()
-
-hashes_saved = get_list_from_pickle('adventure_hashes.pkl')
 
 Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/adventures',
-                                                       filtered_language=filtered_language,
-                                                       hashes_saved=hashes_saved,
-                                                       only_new_snippets=only_new_snippets)]
+                                                       filtered_language=filtered_language)]
 
 # level = 18
 # if level:
@@ -134,34 +118,36 @@ if os.getenv('CI') and (filtered_language or level):
 Hedy_snippets = HedyTester.translate_keywords_in_snippets(Hedy_snippets)
 
 
-class TestsAdventurePrograms(unittest.TestCase):
-
-    @classmethod
-    def setUpClass(cls):
-        cls.all_tests_passed = True
-        cls.hashes_saved = hashes_saved
-        cls.new_hashes = set()
+class TestsAdventurePrograms(HedyTester):
 
     @parameterized.expand(Hedy_snippets, skip_on_empty=True)
     def test_adventures(self, name, snippet):
 
-        if snippet is not None:
-            result = HedyTester.check_Hedy_code_for_errors(snippet)
-            if result is not None:
-                print(f'\n----\n{snippet.code}\n----')
-                print(f'in language {snippet.language} from level {snippet.level} gives error:')
-                print(result)
-                self.all_tests_passed = False
-            else:
-                # test passed? save hash!
-                self.new_hashes.add(snippet.hash)
+        if snippet is not None and len(snippet.code) > 0:
+            try:
+                self.single_level_tester(
+                    code=snippet.code,
+                    level=int(snippet.level),
+                    lang=snippet.language,
+                    translate=False
+                )
 
-            self.assertIsNone(result)  # this looks weird after the is not None but is used by the test runner!
+            except hedy.exceptions.CodePlaceholdersPresentException:  # Code with blanks is allowed
+                pass
+            except OSError:
+                return None  # programs with ask cannot be tested with output :(
+            except exceptions.HedyException as E:
+                try:
+                    location = E.error_location
+                except BaseException:
+                    location = 'No Location Found'
 
-    @classmethod
-    def tearDownClass(cls):
-        if cls.all_tests_passed:
-            # fetch already saved hashes
-            all_hashes = cls.hashes_saved | cls.new_hashes  # and merge in the new ones
-            with open('adventure_hashes.pkl', 'wb') as f:
-                pickle.dump(all_hashes, f)
+                # Must run this in the context of the Flask app, because FlaskBabel requires that.
+                with app.app_context():
+                    with force_locale('en'):
+                        error_message = translate_error(E.error_code, E.arguments, 'en')
+                        error_message = error_message.replace('<span class="command-highlighted">', '`')
+                        error_message = error_message.replace('</span>', '`')
+                        print(f'\n----\n{snippet.code}\n----')
+                        print(f'in language {snippet.language} from level {snippet.level} gives error:')
+                        print(f'{error_message} at line {location}')
