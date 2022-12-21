@@ -516,7 +516,18 @@ export function saveMachineFiles() {
 //   }
 //}
 
+
+// We've observed that this code may gets invoked 100s of times in quick succession. Don't
+// ever push the same achievement more than once per page load to avoid this.
+const ACHIEVEMENTS_PUSHED: Record<string, boolean> = {};
+
 export function pushAchievement(achievement: string) {
+  if (ACHIEVEMENTS_PUSHED[achievement]) {
+      console.error('Achievement already pushed, this may be a programming issue: ', achievement);
+      return;
+  }
+  ACHIEVEMENTS_PUSHED[achievement] = true;
+
   $.ajax({
     type: 'POST',
     url: '/achievements/push-achievement',
@@ -1912,13 +1923,6 @@ export function select_profile_image(image: number) {
   $('.profile_image').removeClass("border-2 border-blue-600");
   $('#profile_image_' + image).addClass("border-2 border-blue-600");
   $('#image').val(image);
-}
-
-export function filter_programs() {
-  const level = $('#explore_page_level').val();
-  const adventure = $('#explore_page_adventure').val();
-  const language = $('#explore_page_language').val();
-  window.open('?level=' + level + "&adventure=" + adventure + "&lang=" + language, "_self");
 }
 
 export function filter_user_programs(username: string, own_request?: boolean) {
