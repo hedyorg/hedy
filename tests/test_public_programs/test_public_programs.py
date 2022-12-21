@@ -26,10 +26,11 @@ for p in public_programs:
 
 p2 = [(s.name, s) for s in public_snippets]
 
+
 class TestsPublicPrograms(unittest.TestCase):
-  @parameterized.expand(p2)
-  def test_programs(self, name, snippet):
-    if snippet is not None and not snippet.error:
-      print(snippet.code)
-      result = HedyTester.check_Hedy_code_for_errors(snippet)
-      self.assertIsNone(result)
+    @parameterized.expand(p2)
+    def test_programs(self, name, snippet):
+        if snippet is not None and not snippet.error:
+            print(snippet.code)
+            result = HedyTester.check_Hedy_code_for_errors(snippet)
+            self.assertIsNone(result)

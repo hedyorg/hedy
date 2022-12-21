@@ -15,6 +15,7 @@ from flask_babel import force_locale, gettext
 
 import utils
 from config import config
+from safe_format import safe_format
 from utils import is_debug_mode, timems, times
 from website import querylog
 
@@ -338,7 +339,7 @@ def send_email_template(template, email, link=None, username=None):
     if not subject:
         print("Something went wrong, mail template could not be found...")
         return
-    body = gettext("mail_hello").format(username=username) + "\n\n"
+    body = safe_format(gettext("mail_hello"), username=username) + "\n\n"
     body += get_template_translation(template) + "\n\n"
     body += gettext("mail_goodbye")
 
@@ -348,8 +349,9 @@ def send_email_template(template, email, link=None, username=None):
     body_html = body_html.format(content=body)
     body_plain = body
     if link:
-        body_plain = body_plain.format(link=gettext("copy_mail_link") + " " + link)
-        body_html = body_html.format(link='<a href="' + link + '">{link}</a>').format(link=gettext("link"))
+        body_plain = safe_format(body_plain, link=gettext("copy_mail_link") + " " + link)
+        body_html = safe_format(body_html, link='<a href="' + link + '">{link}</a>')
+        body_html = safe_format(body_html, link=gettext("link"))
 
     send_email(email, subject, body_plain, body_html)
 
