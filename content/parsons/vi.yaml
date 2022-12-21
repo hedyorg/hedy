@@ -27,10 +27,10 @@ levels:
             story: "Viết chương trình chọn một món ăn ngẫu nhiên. Tạo một danh sách đồ ăn và lớp phủ (topping) và để chương trình quyết định bạn sẽ ăn gì!\n"
             code: |
                 do_an {is} pizza, kem, salad, sandwich
-                lop_phu {is} sô-cô-la, phô mai, cá ngừ, cốm màu (sprinkles)
+                lớp_phủ {is} sô-cô-la, phô mai, cá ngừ, cốm màu (sprinkles)
                 {print} Món ăn ngẫu nhiên của ngày hôm nay là...
                 {sleep} 2
-                {print} food {at} {random} với lớp phủ {at} {random}
+                {print} do_an {at} {random} lớp_phủ  {at} {random}
     4:
         1:
             code: |
