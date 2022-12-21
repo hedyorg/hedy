@@ -192,9 +192,13 @@ class TestsLevel16(HedyTester):
             optellen is lijst[1] + lijst[2]
             optellen is optellen + lijst[3]
             print optellen""")
-        expected = textwrap.dedent("""\
-            lijst = [1, 2, 3]
-            optellen = lijst[1-1] + lijst[2-1]
+        expected = HedyTester.dedent(
+            "lijst = [1, 2, 3]",
+            HedyTester.list_access_transpiled('lijst[1-1]'),
+            HedyTester.list_access_transpiled('lijst[2-1]'),
+            "optellen = lijst[1-1] + lijst[2-1]",
+            HedyTester.list_access_transpiled('lijst[3-1]'),
+            """\
             optellen = optellen + lijst[3-1]
             print(f'''{optellen}''')""")
 
