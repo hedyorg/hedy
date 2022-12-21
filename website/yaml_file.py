@@ -68,7 +68,8 @@ class YamlFile:
         because it creates a mess of files.
         """
         self.filename = filename
-        self.pickle_filename = path.join(tempfile.gettempdir(), 'hedy_pickles', f"{pathname_slug(self.filename)}.pickle")
+        self.pickle_filename = path.join(tempfile.gettempdir(), 'hedy_pickles',
+                                         f"{pathname_slug(self.filename)}.pickle")
 
     def exists(self):
         return os.path.exists(self.filename)
@@ -182,6 +183,7 @@ def pathname_slug(x):
     """Turn a potentially long path name with any characters into an identifier we can use as a file name, while maintaining uniqueness."""
     x = re.sub(r'[^a-zA-Z0-9_-]', '', x)
     return x[:-20] + md5digest(x)
+
 
 def md5digest(x):
     return hashlib.md5(x.encode("utf-8")).hexdigest()
