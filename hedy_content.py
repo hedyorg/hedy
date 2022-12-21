@@ -274,7 +274,7 @@ for folder in os.listdir('translations'):
         continue
     if filter(lambda x: x.endswith('.mo'), os.listdir(locale_dir)):
         languages[folder] = CUSTOM_LANGUAGE_TRANSLATIONS.get(folder,
-            static_babel_content.LANGUAGE_NAMES.get(folder, folder))
+                                                             static_babel_content.LANGUAGE_NAMES.get(folder, folder))
 
 
 for lang in sorted(languages):

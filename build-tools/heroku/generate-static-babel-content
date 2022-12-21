@@ -17,11 +17,13 @@ import os
 import iso3166
 from babel import Locale, languages, UnknownLocaleError
 
+
 def main():
     root_dir = path.abspath(path.join(path.dirname(__file__), '..', '..'))
     filename = path.join(root_dir, 'static_babel_content.py')
 
-    translated_languages = [lang for lang in os.listdir(path.join(root_dir, 'translations')) if path.isdir(path.join(root_dir, 'translations', lang, 'LC_MESSAGES'))]
+    translated_languages = [lang for lang in os.listdir(path.join(root_dir, 'translations')) if path.isdir(
+        path.join(root_dir, 'translations', lang, 'LC_MESSAGES'))]
 
     with open(filename, 'w', encoding='utf-8') as f:
         f.write('# coding=utf-8\n')
