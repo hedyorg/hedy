@@ -27,6 +27,7 @@ def main():
 
     with open(filename, 'w', encoding='utf-8') as f:
         f.write('# coding=utf-8\n')
+        f.write('# flake8: noqa\n')
         f.write('###################################################\n')
         f.write('#\n')
         f.write('# !!! THIS FILE HAS BEEN GENERATED. DO NOT EDIT !!!\n')
