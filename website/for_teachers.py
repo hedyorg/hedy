@@ -142,13 +142,20 @@ class ForTeachersModule(WebsiteModule):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
         if hedy_content.Adventures(g.lang).has_adventures():
-            adventures, adventure_names = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
+            adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
         else:
-            adventures, adventure_names = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
+            adventures = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
 
         teacher_adventures = self.db.get_teacher_adventures(user["username"])
         customizations = self.db.get_class_customizations(class_id)
-        print(adventure_names.items())
+        print(adventures.items())
+        adventure_names = {i: [] for i in range(1, hedy.HEDY_MAX_LEVEL + 1)}
+        for adv_key, adv_dic in adventures.items():
+            for name, levels in adv_dic.items():
+                for level in levels:
+                    adventure_names[level].append(name)
+        print(adventure_names)
+
         return render_template(
             "customize-class.html",
             page_title=gettext("title_customize-class"),

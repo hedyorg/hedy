@@ -2204,7 +2204,6 @@ const clearTimeouts = () => {
 
 // Got from https://code-boxx.com/drag-drop-sortable-list-javascript/ 
 export function slist (target: any) {
-  // (A) SET CSS + GET ALL LIST ITEMS
   //target.classList.add("slist");
   let items = target.getElementsByTagName("div")
   let current : any = null;

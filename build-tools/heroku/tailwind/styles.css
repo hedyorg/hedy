@@ -567,3 +567,12 @@ input:checked ~ .toggle-path {
 .drop-adventures-active {
   @apply bg-yellow-100 border-yellow-300;
 }
+
+.adventures-tab {
+  @apply flex flex-row w-auto overflow-x-scroll overflow-y-hidden mb-2 px-2 pt-2;
+  display :none;
+}
+
+.adventures-tab[style*='display: block'] {
+  display: flex !important;
+}

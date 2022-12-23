@@ -56,19 +56,21 @@
     </div>
     <div class="flex flex-row">
         <div class="flex flex-row justify-center items-center">
-            <select class="flex flex-row w-25 h-10 justify-center items-center text-center" name="levels">
+            <select class="flex flex-row w-25 h-10 justify-center items-center text-center" name="levels" id="adventures">
                 {% for i in range(1, max_level + 1) %}
-                    <option value="i">{{ _('level_title') }} {{ i }}</option>
+                    <option value="{{ i }}">{{ _('level_title') }} {{ i }}</option>
                 {% endfor %}
             </select>
         </div>        
-        <div id="sortadventures" class="flex flex-row w-auto overflow-x-scroll overflow-y-hidden mb-2 px-2 pt-2">
-            {% for  %}
-            {%%}
-            {% for key, adventure in adventure_names.items() %}
-            <div draggable="true" class="tab z-10 whitespace-nowrap flex items-center justify-center" tabindex="0" id="{{ key }}" adventure="{{ key }}">
-                {{ adventure }}
-            </div>
+        <div id="sortadventures">
+            {% for level, adventures in adventure_names.items() %}
+                <div id="level-{{ level }}" class="adventures-tab">
+                    {% for adventure in adventures %}
+                        <div draggable="true" class="tab z-10 whitespace-nowrap flex items-center justify-center" tabindex="0" id="{{ adventure }}" adventure="{{ adventure}}">
+                            {{ adventure }}
+                        </div>
+                    {% endfor %}
+                </div>
             {% endfor %}
         </div>
     </div>
@@ -240,4 +242,14 @@ function validate_changes() {
       hedyApp.slist(document.getElementById("sortadventures"));
     });
 </script>
+<script>
+    $(document).ready(function(){
+        $('#adventures').on('change', function(){
+            var demovalue = $(this).val(); 
+            $("div.adventures-tab").hide();
+            $("#level-"+demovalue).show();
+            hedyApp.slist(document.getElementById("level-"+demovalue));
+        });
+    });
+    </script>
 {% endblock %}
