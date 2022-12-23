@@ -55,13 +55,19 @@
         </div>
     </div>
     <div class="flex flex-row">
-        <div class="w-40">
-            Level 2
-        </div>
+        <div class="flex flex-row justify-center items-center">
+            <select class="flex flex-row w-25 h-10 justify-center items-center text-center" name="levels">
+                {% for i in range(1, max_level + 1) %}
+                    <option value="i">{{ _('level_title') }} {{ i }}</option>
+                {% endfor %}
+            </select>
+        </div>        
         <div id="sortadventures" class="flex flex-row w-auto overflow-x-scroll overflow-y-hidden mb-2 px-2 pt-2">
-            {% for key, adventure in adventures.items() %}
-            <div draggable="true" class="tab z-10 whitespace-nowrap flex items-center justify-center" tabindex="0" id="{{ key }}" >
-                {{ key }}
+            {% for  %}
+            {%%}
+            {% for key, adventure in adventure_names.items() %}
+            <div draggable="true" class="tab z-10 whitespace-nowrap flex items-center justify-center" tabindex="0" id="{{ key }}" adventure="{{ key }}">
+                {{ adventure }}
             </div>
             {% endfor %}
         </div>

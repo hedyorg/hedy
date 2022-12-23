@@ -142,13 +142,13 @@ class ForTeachersModule(WebsiteModule):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
         if hedy_content.Adventures(g.lang).has_adventures():
-            adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
+            adventures, adventure_names = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
         else:
-            adventures = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
+            adventures, adventure_names = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
 
         teacher_adventures = self.db.get_teacher_adventures(user["username"])
         customizations = self.db.get_class_customizations(class_id)
-
+        print(adventure_names.items())
         return render_template(
             "customize-class.html",
             page_title=gettext("title_customize-class"),
@@ -158,6 +158,7 @@ class ForTeachersModule(WebsiteModule):
             teacher_adventures=teacher_adventures,
             customizations=customizations,
             current_page="my-profile",
+            adventure_names=adventure_names,
         )
 
     @route("/customize-class/<class_id>", methods=["DELETE"])
