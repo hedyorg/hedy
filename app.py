@@ -1325,8 +1325,8 @@ def main_page():
     content.append(dict(style='block', **sections.pop(0)))
 
     section_images = [
-        '/images/profile_images/5.png',
-        '/images/profile_images/6.png',
+        '/images/multilang-3.png',
+        '/images/gradual2.png',
         '/images/profile_images/7.png'
     ]
 
@@ -1343,8 +1343,6 @@ def main_page():
     if sections:
         content.append(dict(style='columns', columns=sections))
 
-    import pprint
-    pprint.pprint(content)
     return render_template('main-page.html', page_title=gettext('title_start'),
                            current_page='start', content=content)
 
