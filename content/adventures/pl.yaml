@@ -145,17 +145,17 @@ adventures:
         default_save_name: Piosenka
         levels:
             12:
-                story_text: "## Sing a song!\nIn this song we can make it even easier to program '{if} you're happy and you know it, clap your hands'. Because we can put all of the actions in a variable, check it out:\n"
-                example_code: "```\nactions = 'clap your hands', 'stomp your feet', 'shout Hurray!'\n{for} action {in} actions\n    {for} i {in} {range} 1 {to} 2\n        {print} '{if} youre happy and you know it'\n        {print} action\n    {print} '{if} youre happy and you know it and you really want to show it'\n    {print} '{if} youre happy and you know it'\n    {print} action\n```\n"
-                start_code: '# umieść swój kod tutaj'
+                story_text: "## Zaśpiewaj piosenkę\nW tej piosence jeszcze prościej zaprogramujemy 'jeśli jesteś dziś szczęśliwy w dłonie klaszcz'. To wszystko dzięki temu, że wszystkie akcjie możemy przypisać do zmiennej. Na przykład:\n\n## Wyzwanie\nCzy potrafisz dodać odpowiednią długość wcięcia do każdej linii kodu żeby ta piosenka była zaśpiewana poprawnie?\nZwróć uwagę, że nie wszystkie linie kodu wymagają wcięcia.\n"
+                example_code: "```\nakcje = 'w dłonie klaszcz', 'tupnij tak', 'klepnij się'\n{for} akcja {in} akcje\n    {for} i {in} {range} 1 {to} 2\n        {print} 'jeśli jesteś dziś szczęśliwy'\n        {print} akcja\n    {print} 'jeśli jesteś dziś szczęśliwy, w sercu pokój masz prawdziwy'\n    {print} 'jeśli jesteś dziś szczęśliwy'\n    {print} akcja\n```\n"
+                start_code: '# umieść tutaj swój kod'
             11:
                 story_text: "## Piosenki\nNa tym poziomie możesz użyć polecenia `{for} i {in} {range}`, żeby zrobić piosenki które używają liczenia, na przykład \"5 Małych Małpek\".\n\n## Wyzwanie\nDokończ program uzupełniając puste miejsca.\n"
                 example_code: "## 5 Małych Małpek\n```\n_ _ _ _ 5 _ 1\n    {print} 'Skakało na łóżku małych małpek ' małpka\n    {print} 'Nagle jedna spadłą i potłukła się'\n    {print} 'Mama do doktora dzwoni i słyszy, że'\n    {if} i {is} 1\n        {print} 'SKAKAĆ NA ŁÓŻKU NIE POZWALA SIĘ!'\n    {else}\n        {print} 'SKAKAĆ NA ŁÓŻKU ZABRONIONE JEST!'\n```\n"
                 start_code: '# umieść swój kod tutaj'
             10:
                 story_text: "## Piosenki\nNa tym poziomie bardzo łatwo potrafisz zrobić piosenkę dla dzieci \"Pięć małych małpek\". Czy potrafisz zrobic ostatni refren tej piosenki?\nPotrafisz również zrobić całą \"Dziecko Rekin\" piosenkę (włącznie z wszystkimi innymi rekinami z rodziny) w 6 liniach kodu przy użyciu polecenia `{for}`!\nNie zapominajmy również o tym, że potrafisz też zrobić piosenkę \"Dziadek fajną farmę miał\" razem z wszystkimi zwierzątkami.\n\n\n## Wyzwania\nCzy potrafisz dodać ostatni wers piosenki o małpkach gdzie została tylko jedna małpka?\n\nCzy potrafisz jeszcze bardziej skrócić piosenkę \"Dziecko Rekin\" przy użyciu polecenia `{repeat}`?\n\nCzy potrafisz dodać nowe zwierzątka do \"Dziadek fajną farmę miał\"?\n"
-                example_code: "## 5 Małych Małpek\n```\nmałpki = 5, 4, 3, 2\n{for} małpka {in} małpki\n    {print} 'Skakało na łóżku małych małpek ' małpka\n    {print} 'Nagle jedna spadłą i potłukła się'\n    {print} 'Mama do doktora dzwoni i słyszy, że'\n    {print} 'SKAKAĆ NA ŁÓŻKU ZABRONIONE JEST!'\n```\n\n## Dziecko Rekin\n```\nrekiny = Dziecko, Mama, Tata, Babcia, Dziadek\n{for} rekin {in} rekiny\n    {print} rekin ' Rekin tututututudu'\n    {print} rekin ' Rekin tututututudu'\n    {print} rekin ' Rekin tututututudu'\n    {print} rekin ' Rekin'\n```\n\n## Dziadek Fajną Farmę Miał\n```\nzwierzęta = Kurki, Krówki, Świnkę\n{for} zwierzę {in} zwierzęta\n    {if} zwierzę {is} Kurki\n        dźwięk = ko\n    {if} zwierzę {is} Krówki\n        dźwięk = muu\n    {if} zwierzę {is} Świnkę\n        dźwięk = mchrum\n    {print} 'Dziadek fajną farmę miał'\n    {print} 'ija ija oo!'\n    {print} zwierzę ' na niej hodował'\n    {print} 'ija ija oo!'\n    {print} zwierzę ' ' dźwięk dźwięk ' tu i ' dźwięk dźwięk ' tam'\n    {print} dźwięk 'tu, ' dźwięk ' tam, ciągle tylko ' dźwięk dźwięk\n```\n"
-                start_code: '# umieść tu swój kod'
+                example_code: "## 5 Małych Małpek\n```\nmałpki = 5, 4, 3, 2\n{for} małpka {in} małpki\n    {print} 'Skakało na łóżku małych małpek ' małpka\n    {print} 'Nagle jedna spadłą i potłukła się'\n    {print} 'Mama do doktora dzwoni i słyszy, że'\n    {print} 'SKAKAĆ NA ŁÓŻKU ZABRONIONE JEST!'\n```\n\n## Dziecko Rekin\n```\nrekiny = Dziecko, Mama, Tata, Babcia, Dziadek\n{for} rekin {in} rekiny\n    {print} rekin ' Rekin tututututudu'\n    {print} rekin ' Rekin tututututudu'\n    {print} rekin ' Rekin tututututudu'\n    {print} rekin ' Rekin'\n```\n\n## Dziadek Fajną Farmę Miał\n```\nzwierzęta = Kurki, Krówki, Świnkę\n{for} zwierzę {in} zwierzęta\n    {if} zwierzę {is} Kurki\n        dźwięk = ko\n    {if} zwierzę {is} Krówki\n        dźwięk = muu\n    {if} zwierzę {is} Świnkę\n        dźwięk = chrum\n    {print} 'Dziadek fajną farmę miał'\n    {print} 'ija ija oo!'\n    {print} zwierzę ' na niej hodował'\n    {print} 'ija ija oo!'\n    {print} zwierzę ' ' dźwięk dźwięk ' tu i ' dźwięk dźwięk ' tam'\n    {print} dźwięk 'tu, ' dźwięk ' tam, ciągle tylko ' dźwięk dźwięk\n```\n"
+                start_code: '# umieść tutaj swój kod'
             8:
                 story_text: "## Piosenki\nW poprzednich poziomach programowałeś piosenkę \"Butelki Piwa\" (ang. Bottles of Beer). Napisałeś pierwszy wers piosenki, który potem skopiowałeś 99 razy. Na tym poziomie możesz powtórzyć ten wers 99 razy poprzez dodanie jednej prostej linii kodu.\nCzy wiesz jakie linie kodu powinieneś dodać w puste miejsca?\n"
                 example_code: "```\nwers = 99\n___\n    {print} wers ' butelek piwa na ścianie'\n    {print} wers ' butelek piwa'\n    {print} 'Weź jedną i przekaż ją dalej'\n    wers = wers - 1\n    {print} wers ' butelek piwa na ścianie'\n```\n"
@@ -171,31 +171,31 @@ adventures:
                 story_text_2: "## 5 Małych małpek skaczących po łóżku\nTa piosenka dla dzieci odlicza od 5 małych małpek do 1 małpki.\nMożesz zaśpiewać całą piosenkę jeżeli skopiujesz linie od 2 do 7 i wkleisz je poniżej kodu.\n"
                 example_code_2: "```\nnumer = 6\nnumer = numer - 1\nprint 'Skakało na łóżku małych małpek ' numer\nprint 'Nagle jedna spadła i potłukła się'\nprint 'Mama do doktora dzwoni i słyszy, że'\nprint 'SKAKAĆ NA ŁÓŻKU ZABRONIONE JEST!'\nsleep\n```\n"
             16:
-                story_text: "## Sing a song!\nIn this level, you can program a song like OldMacDonald even more quickly. You can connect the right animal to the right sound by simply putting them in the same place in the list.\nThe Drunken Sailor is also quickly made in this level. You only need 8 lines for the entire song, check it out!\n"
-                example_code: "## Old MacDonald\n```\nanimals = ['pig', 'dog', 'cow']\nsounds = ['oink', 'woof', 'moo']\n{for} i {in} {range} 1 {to} 3\n    animal = animals[i]\n    sound = sounds[i]\n    {print} 'Old McDonald had a farm'\n    {print} 'E I E I O!'\n    {print} 'and on that farm he had a ' animal\n    {print} 'E I E I O!'\n    {print} 'with a ' sound sound ' here'\n    {print} 'and a ' sound sound ' there'\n    {print} 'here a ' sound\n    {print} 'there a ' sound\n    {print} 'everywhere a ' sound sound\n```\n\n## Drunken Sailor\n```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines\n    {for} i {in} {range} 1 {to} 3\n        {print} line\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
-                start_code: '# umieść swój kod tutaj'
+                story_text: "## Zaśpiewaj piosenkę\nNa tym poziomie możesz zaprogramować piosenkę \"Dziadek Fajną Farmę Miał\". Możesz połączyć odpowiednie zwierzę z jego odgłosem poprzez dodanie ich w to samo miejsce na liście.\nThe Drunken Sailor is also quickly made in this level. You only need 8 lines for the entire song, check it out!\n"
+                example_code: "## Dziadek Fajną Farmę Miał\n```\nzwierzęta = ['Kurki', 'Krówki', 'Świnkę']\ndźwięki = ['ko', 'muu', 'chrum']\n{for} i {in} {range} 1 {to} 3\n    zwierzę = zwierzęta[i]\n    dźwięk = dźwięki[i]\n    {print} 'Dziadek fajną farmę miał'\n    {print} 'ija ija oo!'\n    {print} zwierzę ' na niej hodował'\n    {print} 'ija ija oo!'\n    {print} zwierzę ' ' dźwięk dźwięk ' tu i ' dźwięk dźwięk ' tam'\n    {print} dźwięk 'tu, ' dźwięk ' tam, ciągle tylko ' dźwięk dźwięk\n```\n\n## Drunken Sailor\n```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines\n    {for} i {in} {range} 1 {to} 3\n        {print} line\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
+                start_code: '# umieść tutaj swój kod'
     dishes:
         levels:
             5:
                 start_code: "{print} 'Kto zmywa naczynia?'"
-                story_text: "## Dishwashing\nWith the `{if}` you can now have more fun with choice in the program. You can have your program respond to the choice that the computer has made.\n\nCan you finish the code so that it prints 'too bad' when it is your turn and otherwise 'yes!'?\nDon't forget the quotes!\n"
-                example_code: "```\npeople {is} mom, dad, Emma, Sophie\ndishwasher {is} people {at} {random}\n{if} dishwasher {is} Sophie {print} _ too bad I have to do the dishes _ {else} {print} 'luckily no dishes because' _ 'is already washing up'\n```\n"
+                story_text: "## Mycie naczyń\nDzięki poleceniu `{if}` możesz mieć teraz trochę więcej zabawy z wyborami w twoich programach. Możesz teraz zrobić, żeby twój program reagował na odpowiedzi.\n\nCzy potrafisz dokończyć program który wyświetla \"o, nie...\" gdy jest Twoja tura, oraz który wyświetla \"tak!\" gdy to nie jest Twoja tura?\nNie zapomnij cudzysłowów!\n"
+                example_code: "```\nludzie {is} mama, tata, Agnieszka, ty\nkto_zmywa {is} ludzie {at} {random}\n{if} kto_zmywa {is} ty {print} _ o, nie... Twoja kolej zmywania naczyń _\n{else} {print} 'całe szczęście ' _ ' myje naczynia'\n````\n"
             10:
-                story_text: "## Dishwashing\nIn this level you could make an even better dish washing shedule.\n"
-                example_code: "```\ndays = Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday\nnames = mom, dad, Emma, Sophie\n{for} day {in} days\n    {print} names {at} {random} ' does the dishes on ' day\n```\n"
-                start_code: '# place your code here'
+                story_text: "## Zmywanie naczyń\nNa tym poziomie możesz zrobić jeszcze lepszy harmonogram mycia naczyń.\n"
+                example_code: "```\ndni = Poniedziałek, Wtorek, Środa, Czwartek, Piątek, Sobota, Niedziela\nimiona = mama, tata, Agnieszka, ty\n{for} dzień {in} dni\n    {print} imiona {at} {random} ' myje naczynia w ' dzień\n```\n"
+                start_code: '# umieść tutaj swój kod'
             7:
-                story_text: "## Dishwashing\nWith the `{repeat}` you can repeat pieces of code. You can use this to calculate who will be washing dishes for the entire week.\n"
+                story_text: "## Zmywanie naczyń\nPrzy użyciu komendy `{repeat}` możesz powtórzyć fragmenty kodu. Możesz to wykorzystać do ustalenia kto będzie zmywał naczynia przez cały tydzień.\n"
                 example_code: "```\npeople = mom, dad, Emma, Sophie\n{repeat} _ _ {print} 'the dishwasher is' _\n```\n"
-                start_code: "{print} 'Who does the dishes?'"
+                start_code: "{print} 'Kto myje naczynia?'"
             6:
                 story_text: "## Zmywanie naczyń\nJak często wszyscy będą zmywać naczynia? Czy to jest sprawiedliwe? Możesz to policzyć na tym poziomie.\n"
                 example_code: "```\npeople = mom, dad, Emma, Sophie\nemma_washes = 0\ndishwasher = people {at} {random}\n{print} 'The dishwasher is' dishwasher\n{if} dishwasher {is} Emma emma_washes = emma_washes + 1\n{print} 'Emma will do the dishes this week' emma_washes 'times'\n```\n\nNow you can copy lines 3 to 5 a few times (e.g. 7 times for a whole week) to calculate for a whole week again.\nDo you make the code for the whole week?\n"
-                story_text_2: "## Make it fair\nIf you are extremely unlucky the previous program might choose you to to the dishes for the whole week! That's not fair!\nTo create a fairer system you can use the `{remove}` command to remove the chosen person from the list. This way you don't have to do the dishes again untill everybody has had a turn.\n\nMonday and tuesday are ready for you! Can you add the rest of the week?\nAnd... can you come up with a solution for when your list is empty?\n"
-                example_code_2: "```\npeople = mom, dad, Emma, Sophie\ndishwasher = people {at} {random}\n{print} 'Monday the dishes are done by: ' dishwasher\n{remove} dishwasher {from} people\ndishwasher = people {at} {random}\n{print} 'Tuesday the dishes are done by: ' dishwasher\n{remove} dishwasher {from} people\ndishwasher = people {at} {random}\n```\n"
+                story_text_2: "## Zrób to sprawiedliwe\nW poprzednim programie jakbyś był bardzo pechowy to program mógłby Cię wybrać do mycia naczyń przez cały tydzien, a to nie jest sprawiedliwe!\nŻeby stworzyć bardziej sprawiedliwy system możesz użyc polecenia `{remove}` żeby usunąć osobę z listy zaraz po wybraniu jej do mycia naczyń. Ty sposobem ta osoba już nie zostanie wybrana do mycia naczyń zanim wszyscy nie mieli okazji umyć naczyń.\n\nPoniedziałek i wtorek zostały przygotowane dla Ciebie. Czy potrafisz dodać resztę tygodnia?\nCzy potrafisz również wymyślić co zrobić gdy lista jest pusta?\n"
+                example_code_2: "```\nludzie = mama, tata, Agnieszka, ty\nkto_zmywa = ludzie {at} {random}\n{print} 'Naczynia w poniedziałek myje: ' kto_zmywa\n{remove} kto_zmywa {from} ludzie\nkto_zmywa = ludzie {at} {random}\n{print} 'Naczynia we wtorek myje: ' kto_zmywa\n{remove} kto_zmywa {from} ludzie\nkto_zmywa = ludzie {at} {random}\n```\n"
                 start_code: "{print} 'Kto zmywa naczynia?'"
             4:
-                story_text: "## Dishwashing\nWith quotation marks you can make your dishwashing planning more beautiful.\nThis time the sample code is not quite complete.\n\nCan you complete the code by filling the blanks? Every blank must be replaced with one word of symbol.\n\nTip: Don't forget the quotation marks!\n"
+                story_text: "## Mycie naczyń\nŻeby upiększyć swój plan mycia naczyń możesz użyć cudzysłowów.\nTym razem Twój przykładowy kod nie jest w pełni ukończony.\n\nCzy potrafisz dokończyć ten kod uzupełniając puste miejsca? Każde puste miejsce musi być zastąpione przy użyciu jednego słowa lub symbolu.\n\nWskazówka: Nie zapomnij cudzysłowów!\n"
                 example_code: "```\npeople {is} mom, dad, Emma, Sophie\n{print} _ the dishes are done by _\n{sleep}\n{print} people {at} _\n```\n"
                 start_code: "{print} 'Kto zmywa naczynia?'"
             3:
@@ -240,9 +240,9 @@ adventures:
                 story_text: "## Dice\nIn this game you have to throw 6 in as little tries as possible.\n"
                 example_code: "```\noptions = 1, 2, 3, 4, 5, 6\n{print} 'Throw 6 as fast as you can!'\nthrown = 0\ntries = 0\n{while} thrown != 6\n    thrown = options {at} {random}\n    {print} 'You threw ' thrown\n    tries = tries + 1\n{print} 'Yes! You have thrown 6 in ' tries ' tries.'\n```\n"
                 start_code: '# umieść swój kod tutaj'
-        name: Dice
-        description: Make your own dice
-        default_save_name: Dice
+        name: Kostka do gry
+        description: Stwórz własną kostkę do gry
+        default_save_name: Kostka do gry
     rock:
         default_save_name: Kamień
         levels:
@@ -526,7 +526,7 @@ adventures:
                 example_code: "```\n{print} 'The prince kept calling for help'\n{repeat} 5 {times} {print} 'Help!'\n{print} 'Why is nobody helping me?'\n```\n"
                 start_code: "{repeat} 5 {times} {print} 'Help!'"
             5:
-                story_text: "## Opowieść\nW tym poziomie możesz zaprogramować różne zakończenia, które sprawią, że Twoja opowieść jest bardziej interestująca.\n\n## Wyzwanie\nWymyśl dwa różne zakonczenia dla swojej opowieści, na przykład:\n\n- Księżniczka przechadza się przez las\n- Napotyka potwora\n\n- Szczęśliwe zakończenie: Księżniczka wyciąga swój miecz i potwór ucieka\n- Tragiczne zakończenie: Potwór zjada księżniczkę\n\nNOTE FROM THE CONTRIBUTOR: I'm not sure what you mean by \"You can also ensure that a name can be entered again.\". The only way it makes sense is when the student is inroduced to the \"while\" loop, but while loops come much later in the course.\n\nYou can also ensure that a name can be entered again. That works just like in the previous levels. You can combine that with an `{if}`, and then you have already made a whole program!\n"
+                story_text: "## Opowieść\nW tym poziomie możesz zaprogramować różne zakończenia, które sprawią, że Twoja opowieść jest bardziej interestująca.\n\n## Wyzwanie\nWymyśl dwa różne zakonczenia dla swojej opowieści, na przykład:\n\n- Księżniczka przechadza się przez las\n- Napotyka potwora\n\n- Szczęśliwe zakończenie: Księżniczka wyciąga swój miecz i potwór ucieka\n- Tragiczne zakończenie: Potwór zjada księżniczkę\n\nYou can also ensure that a name can be entered again. That works just like in the previous levels. You can combine that with an `{if}`, and then you have already made a whole program!\n"
                 example_code: "```\nimię {is} {ask} 'Kto idzie przez las?'\n{print} imię ' idzie przez las'\n{print} imię ' spotyka potwora'\nzakończenie {is} {ask} 'Czy chciałbyś dobre albo złe zakończenie?'\n{if} zakończenie {is} dobre {print} imię ' wyciąga miecz i potwór ucieka'\n{else} {print} 'Potwór zjada ' imię\n```\n"
                 start_code: "{print} 'Tutaj jest początek Twojej opowieści!'"
             4:
@@ -601,29 +601,29 @@ adventures:
                 example_code: "```\nkąty {is} 10, 50, 90, 150, 250\n{turn} kąty {at} {random}\n{forward} 25\n```\n"
                 start_code: "kąty {is} 10, 50, 90, 150, 250\n{turn} kąty {at} {random}\n{forward} 25"
             4:
-                story_text: "## Let's draw\nIn level 4 you have to use quotation marks with `{print}` and `{ask}`. Also when drawing!\n"
-                example_code: "```\n{print} 'Drawing figures'\nangle {is} 90\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n```\n"
-                start_code: "{print} 'Drawing figures'\nangle {is} 90\n{turn} angle\n{forward} 25\n"
-                story_text_2: "## Colors\nYou can also change the color of the lines with the command `{color}`. Check out the example.\nYou can also use the command `{color} {white}` to make 'invisible' lines. You could use these white lines to move the turtle anywhere in the screen before you start drawing.\n"
+                story_text: "## Rysujmy\nNa poziomie 4 musisz użyć cudzysłowów z poleceniami `{print}` oraz `{ask}`. To samo się dotyczy rysowania!\n"
+                example_code: "```\n{print} _ Rysujemy figury _\nkąt {is} 90\n{turn} kąt\n{forward} 25\n{turn} kąt\n{forward} 25\n```\n"
+                start_code: "{print} 'Rysujemy figury'\nkąt {is} 90\n{turn} kąt\n{forward} 25"
+                story_text_2: "## Kolory\nMożesz również zmienić kolor rysowanych linii przy użyciu polecenia `{color}`. Sprawdź przykładowy program.\nMożesz również użyc polecenia `{color} {white}` żeby zrobić \"niewidoczne\" linie. Możesz użyć tych \"niewidocznych\" linii, żeby przesunąć żółwia w inne miejsce na ekranie zanim zaczniesz rysować.\n"
                 example_code_2: "```\n{color} {white}\n{forward} -80\n{color} {green}\n{forward} 50\n{color} {yellow}\n{forward} 50\n{color} {red}\n{forward} 50\n```\n"
             5:
-                story_text: "## Let's draw\nIn level 5 you can make a choice with `{if}`. For example between different types of figures.\n"
+                story_text: "## Rysujmy\nNa poziomie 5 możesz dokonywać wyboru przy użyciu polecenia `{if}`. Przykładem takiego wyboru byłby wybór pomiędzy różnymi typami figur do narysowania.\n"
                 example_code: "```\n{print} 'Drawing Figures'\nfigure {is} {ask} 'Do you want a square or a triangle?'\n{if} figure {is} triangle angle {is} 120\n{else} angle {is} 90\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n```\n"
-                start_code: "{print} 'Drawing Figures'\nfigure {is} {ask} 'Do you want a square or a triangle?'\n{if} figure {is} triangle angle {is} 120 {else} angle {is} 90\n{turn} angle\n{forward} 25\n"
+                start_code: "{print} 'Rysujemy figury'\nfigura {is} {ask} 'Czy chciałbyś narysować kwadrat czy też trójkąt?'\n{if} figura {is} trójkąt kąt {is} 120 {else} kąt {is} 90\n{turn} kąt\n{forward} 25"
             8:
-                story_text: "## Let's draw\nNow that we can repeat several lines, we can make figures more easily.\nWe only have to set the angle once and then use that variable in the `{repeat}`.\n"
+                story_text: "## Rysujemy\nDzięki naszej nowo nabytej umiejętności powtarzania wielu linii kodu możemy rysować figury w jeszcze prostszy sposób.\nWystarczy, że ustawimy kąt tylko raz i potem użyjemy go jako zmienną wewnątrz polecenia `{repeat}`.\n"
                 example_code: "```\nangle = 90\n{repeat} 10 {times}\n    {turn} angle\n    {forward} 50\n```\n"
-                story_text_2: "## Interaction\nAlso, we can now improve the program that draws different figures.\nCan you figure out how far the turtle has to turn here? Finish the code and you can draw any polygon you'd like!\n"
+                story_text_2: "## Interakcja\nMożemy również usprawnić nasz program, który rysuje różne figury.\nCzy potrafisz wymyślić o jaki kąt żółw musi się obrócić w tym przykładzie? Dokończ ten program i będziesz mógł narysować dowolny wielokąt.\n"
                 example_code_2: "```\nangles = {ask} 'How many angles should I draw?'\nangle = 360 / angles\n{repeat} angle {times}\n    {turn} _\n    {forward} _\n```\n"
                 start_code: "kąty = {ask} 'Ile kątów mam narysować?'"
             7:
-                story_text: "## Let's draw\nIn this level you can repeat one line of code with `{repeat}`.\n"
-                example_code: "```\n{print} 'Draw figures'\n{repeat} 3 {times} {forward} 10\n```\n"
-                start_code: "{print} 'Draw figures'\n{repeat} 3 {times} {forward} 10\n"
+                story_text: "## Rysujemy\nNa tym poziomie możesz powtórzyć jedną linię kodu przy użyciu polecenia `{repeat}`.\n"
+                example_code: "```\n{print} 'Rysujemy figury'\n_ 3 _ {forward} 10\n```\n"
+                start_code: "{print} 'Rysujemy figury'\n{repeat} 3 {times} {forward} 10"
             6:
-                story_text: "## Let's draw\nIn this level you can use calculations to draw different figures.\nYou may have learned in school that turning a full circle is 360 degrees. If not, now you know!\nThat's why you also use 90 degrees for a square. 360 divided by 4 is 90.\nNow that we can do math with Hedy, we can draw all the figures we want!\n"
+                story_text: "## Rysujemy\nNa tym poziomie możesz użyć matematyki żeby narysować różne figury.\nByć może pamiętasz ze szkoły, że obrócenie się dookoła jest tym samym co obrócenie się o 360 stopni. Jeżeli tego nie wiedziałeś to teraz już wiesz!\nZ tego też powodu już wiesz dlaczego gdy rysujemy kwadrat to obracamy się o 90 stopni. Jako, że kwadrat ma cztery boki pod kątem prostym to znaczy że kąt pomiędzy nimi to 90 stopni - 360 stopni podzielone przez 4 (boki) to 90 stopni.\nDzięki temu, że w Hedy możesz przeprowadzać obliczenia matematyczne, możesz tez rysować wszystkie figury jakie tylko chcesz!\n"
                 example_code: "```\nangles = {ask} 'How many angles do you want?'\nangle = 360 / angles\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n```\n"
-                start_code: "{print} 'Drawing figures'\n"
+                start_code: "{print} 'Rysujemy figury'"
     piggybank:
         name: Piggy Bank
         description: Count your pocketmoney!
