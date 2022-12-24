@@ -276,7 +276,7 @@ code {
 
   @apply cursor-auto; /* Undo cursor-pointer we inherit from the menu */
   /* Colors */
-  @apply border-2 border-gray-700 bg-gray-300 px-4 py-2;
+  @apply border  bg-blue-100 border-blue-500 p-4 shadow-lg;
 }
 
 .dropdown-menu h3 {
@@ -289,8 +289,9 @@ code {
 }
 
 .dropdown-item {
-  @apply text-gray-800 no-underline hover:bg-blue-600 py-2 px-4 w-full inline-block;
+  @apply text-gray-800 no-underline hover:bg-blue-600 py-2 px-4 block;
   @apply cursor-pointer w-52 font-medium rounded-md;
+  @apply grow-0;
 }
 
 .dropdown-item:hover {
