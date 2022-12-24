@@ -210,34 +210,34 @@ adventures:
     dice:
         levels:
             4:
-                start_code: "{print} 'What will the die indicate this time?'"
-                story_text: "## Dice\nIn this level we can make sentences with the die value in the sentence, with quotes of course.\nThis time the sample code is not quite complete. Can you finish the code?\n"
+                start_code: "{print} 'Jaka wartość tym razem wypadnie na kostce?'"
+                story_text: "## Kostki do gry\nNa tym poziomie możemy tworzyć zdania z wartością kostki w zdaniu, oczywiście w cudzysłowach.\nTym razem kod przykładowy nie jest do końca kompletny. Czy możesz uzupełnić kod?\n"
                 example_code: "```\nchoices {is} 1, 2, 3, 4, 5, earthworm\n{print} _ you threw _\n{print} _ _ _ <- here you have to program the choice\n```\n"
             10:
-                story_text: "## Dice\nIs everybody taking too long throwing the dice? In this level you can let Hedy throw all the dice at once!\n"
-                example_code: "```\nplayers = Ann, John, Jesse\nchoices = 1, 2, 3, 4, 5, 6\n{for} player {in} players\n    {print} player ' throws ' choices {at} {random}\n    {sleep}\n```\n"
-                start_code: '# place your code here'
+                story_text: "## Kostki do gry\nCzy wszystkie osoby biorą zbyt dużo czasu na rzucanie kostkami? W tym poziomie możesz pozwolić Hedy na rzucanie wszystkimi kostkami na raz!\nCzy możesz wypełnić poprawne linie kodu na pustych miejscach?\n"
+                example_code: "```\ngracze = Ania, Jasiek, Kasia\nwybory = 1, 2, 3, 4, 5, 6\n_\n    {print} gracz ' wurzycił ' wybory {at} {random}\n    {sleep}\n```\n"
+                start_code: '# umieść tutaj swój kod'
             7:
-                story_text: "## Dice\nYou can also make a die again in level 5. With the `{repeat}` code you can easily roll a whole hand of dice.\nTry to finish the sample code! The dashes should contain multiple commands and characters.\n\nBut maybe you want to make a completely different die. Of course you can!\n"
+                story_text: "## Kostki do gry\nNa poziomie 5 już mogłeś zrobić kostkę do gry. Przy pomocy polecenia `{repeat}` możesz łatwo zaprogramować rzut ręki pełen kostek do gry.\nSpróbuj uzupełnić kod przykładowy. Kreski powinny zawierać wiele poleceń i znaków.\n\nAle jeżeli chcesz to możesz zrobić zupełnie inną kostkę!\n"
                 example_code: "```\nchoices = 1, 2, 3, 4, 5, earthworm\n{repeat} _ _ {print} _ _ _\n```\n"
-                start_code: "{print} 'What will the die indicate this time?'"
+                start_code: "{print} 'Jaka wartość tym razem wypadnie na kostce?'"
             6:
-                story_text: "## Dice\nYou can also make an Earthworm die again in this, but now you can also calculate how many points have been rolled.\nYou may know that the worm counts 5 points for Earthworms. Now after a roll you can immediately calculate how many points you have thrown.\nThis is the code to calculate points for one die:\n"
-                example_code: "```\nchoices = 1, 2, 3, 4, 5, earthworm\npoints = 0\nthrow = choices {at} {random}\n{print} 'you threw' throw\n{if} throw {is} earthworm points = points + 5 {else} points = points + throw\n{print} 'those are' points ' point'\n```\nCan you make the code so that you get the total score for 8 dice? To do that, you have to cut and paste some lines of the code.\n"
-                example_code_2: "## Looking forward\n\nDid you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!\n"
-                start_code: "{print} 'What will the die indicate this time?'"
+                story_text: "## Kostka do gry\nNa tym poziomie możesz zrobić kostkę do gry z Gąsienicą i nawet policzyć ile punktów wyrzuciłaś w sumie.\nWiedząc, że Gąsienica jest warta 5 punktów możesz teraz policzyć ile punktów wyrzuciłaś w sumie.\nTen kod policzy ilość punktów jednek kostki:\n\n## Wyzwanie\nCzy potrafisz napisać kod, który policzy sumę punkt na 8 kostkach? Aby to zrobić musisz skopiować kilka linijek kodu.\n"
+                example_code: "```\nwybory = 1, 2, 3, 4, 5, gąsienica\npunkty = 0\nrzut = wybory {at} {random}\n{print} 'wyrzuciłeś' rzut\n{if} rzut {is} gąsienica punkty = punkty + 5 {else} punkty = punkty + throw\n{print} 'suma punktów to ' points\n```\n"
+                example_code_2: "## Wgląd w przyszłość\n\nCzy udało ci się policzyć wynik dla 8 kostek? Wymagało to sporo kopiowania i wklejania, prawda? W poziomie 7 ułatwimy to!\n"
+                start_code: "{print} 'Jaka wartość tym razem wypadnie na kostce?'"
             5:
-                story_text: "## Dice\nYou can also make a die again in this level using the `{if}`.\nComplete the sample code so that the code says \"You can stop throwing\" once you have thrown an earthworm.\n\nBut maybe you want to recreate a die from a completely different game. That's fine too! Then make up your own reaction. Eg 'yes' for 6 and 'pity' for something {else}.\n"
+                story_text: "## Kostki do gry\nW tym poziomie możesz stworzyć kostkę do gry używając polecenia `{if}`.\nUzupełnij kod przykładowy tak, aby kod mówił \"Możesz przestać rzucać\" gdy wyrzuciłeś gąsienicę.\n\nMoże chcesz stworzyć kostkę do gry z całkowicie innej gry? To też jest w porządku! W takim razie wymyśl swoją własną reakcję. Na przykład \"tak\" dla 6 i \"szkoda\" dla czegoś innego.\n"
                 example_code: "```\nchoices {is} 1, 2, 3, 4, 5, earthworm\nthrow {is} _\n{print} 'you have' _ 'thrown'\n{if} _ {is} earthworm {print} 'You can stop throwing.' _ {print} 'You have to hear it again!'\n```\n"
-                start_code: "{print} 'What will the die indicate this time?'"
+                start_code: "{print} 'Jaka wartość tym razem wypadnie na kostce?'"
             3:
-                story_text: "## Dice\nIn this level we can choose from a list. With that we can let the computer choose one side of the die.\nTake a look at the games you have in your closet at home.\nAre there games with a (special) die? You can also copy it with this code.\nFor example, the dice of the game Earthworms with the numbers 1 to 5 and an earthworm on it.\n\n![Die of earthworms with 1 to 5 and an earthworm on it](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)\n"
+                story_text: "## Kostka do gry\nNa tym poziomie posiadamy możliwość wyboru z listy. Dzięki temu możemy pozwolić komputerowi wybrać jedną ze stron kostki.\nZerknij na gry, które masz w swojej szafie w domu.\nCzy są tam gry z (specjalną) kostką? Możesz ją również skopiować przy pomocy tego kodu.\nNa przykład kostka do gry Gąsienice z liczbami od 1 do 5 i wężem na niej.\n\n![Kostka do gry Gąsienice z liczbami od 1 do 5 i gąsienicą na niej](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)\n"
                 example_code: "```\nchoices {is} 1, 2, 3, 4, 5, earthworm\n{print} choices {at} {random}\n```\n"
-                start_code: '{print} What will the die indicate this time?'
-                example_code_2: "```\nchoices {is} _\n```\n"
-                story_text_2: "## Challenge\nThe dice in the example above are dice for a specific game. Can you make normal dice?\nOr other special dice from a different game?\n"
+                start_code: '{print} Jaka wartość wypadnie na kostce tym razem?'
+                example_code_2: "```\nwybór {is} _\n```\n"
+                story_text_2: "## Wyzwanie\nKości w przykładzie powyżej są kośćmi do specjalnej gry. Czy możesz zrobić normalną kość do gry?\nLub inne specjalne kości z innej gry?\n"
             15:
-                story_text: "## Dice\nIn this game you have to throw 6 in as little tries as possible.\n"
+                story_text: "## Kości do gry\nW tej grze musisz wyrzucić 6 w jak najmniejszej liczbie prób.\n"
                 example_code: "```\noptions = 1, 2, 3, 4, 5, 6\n{print} 'Throw 6 as fast as you can!'\nthrown = 0\ntries = 0\n{while} thrown != 6\n    thrown = options {at} {random}\n    {print} 'You threw ' thrown\n    tries = tries + 1\n{print} 'Yes! You have thrown 6 in ' tries ' tries.'\n```\n"
                 start_code: '# umieść swój kod tutaj'
         name: Kostka do gry
@@ -776,9 +776,9 @@ adventures:
                 example_code: "```\n{print} 'BLACKJACK'\ncards = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Jack', 'Queen','King', 'Ace']\npoints = 0\ndealer_points = 0\ncard_1 = cards[{random}]\ncard_2 = cards[{random}]\ncard_3 = cards [{random}]\ndealer_card_1 = cards[{random}]\ndealer_card_2 = cards[{random}]\ndealer_card_3 = cards[{random}]\n# Points for card 1\n{if} card_1 == 'Jack' {or} card_1 == 'Queen' {or} card_1 == 'King':\n    points = points + 10\n{elif} card_1 == 'Ace':\n    points = points + 11\n{else}:\n    points = points + card_1\n# Points for card 2\n{if} card_2 == 'Jack' {or} card_2 == 'Queen' {or} card_2 == 'King':\n    points = points + 10\n{elif} card_2 == 'Ace':\n    points = points + 11\n{else}:\n    points = points + card_2\n# Points for dealer card 1\n{if} dealer_card_1 == 'Jack' {or} dealer_card_1 == 'Queen' {or} dealer_card_1 == 'King':\n    dealer_points = dealer_points + 10\n{elif} dealer_card_1 == 'Ace':\n    dealer_points = dealer_points + 11\n{else}:\n    dealer_points = dealer_points + dealer_card_1\n# Points for dealer card 2\n{if} dealer_card_2 == 'Jack' {or} dealer_card_2 == 'Queen' {or} dealer_card_2 == 'King':\n    dealer_points = dealer_points + 10\n{elif} dealer_card_2 == 'Ace':\n    dealer_points = dealer_points + 11\n{else}:\n    dealer_points = dealer_points + dealer_card_2\n# Two Aces\n{if} card_1 == 'Ace' {and} card_2 == 'Ace':\n    points = 12\n{if} dealer_card_1 == 'Ace' {and} dealer_card_2 == 'Ace':\n    dealer_points = 12\n# Scoreboard\n{print} 'You have a ' card_1 ' and a ' card_2 ' (' points ' points)'\n{print} 'The dealer has a ' dealer_card_1 ' and a ' dealer_card_2 ' (' dealer_points ' points)'\n# Extra card for the player\nhit = {ask} 'Do you want an extra card?'\n{if} hit == 'yes':\n    {if} card_3 == 'Jack' {or} card_3 == 'Queen' {or} card_3 == 'King':\n        points = points + 10\n    {elif} card_3 == 'Ace':\n        {if} points > 11:\n            points = points + 11\n        {else}:\n            points = points + 1\n    {else}:\n        points = points + card_3\n    print 'You get an extra ' card_3 ' (' points ' points)'\n{else}:\n    print 'No extra cards'\n# Winner\n{if} points > 21 {or} dealer_points > points {or} dealer_points == 21:\n    {print} 'You lose'\n{elif} dealer_points < 17:\n    {print} 'The dealer takes an extra card. It is a... ' dealer_card_3\n    {if} dealer_card_3 == 'Jack' {or} dealer_card_3 == 'Queen' {or} dealer_card_3 == 'King':\n        dealer_points = dealer_points + 10\n    {elif} dealer_card_3 == 'Ace':\n        {if} dealer_points < 11:\n            dealer_points = dealer_points + 11\n        {else}:\n            dealer_points = dealer_points + 1\n    {else}:\n        dealer_points = dealer_points + dealer_card_3\n    {print} 'The dealer has ' dealer_points ' points now'\n    {if} dealer_points < 21 {and} dealer_points > points:\n        {print} 'You lose'\n    {else}:\n        {print} 'You win'\n{elif} points > dealer_points {and} points < 21:\n    {print} 'You win!'\n```\n"
         default_save_name: Blackjack
     pressit:
-        name: Press it!
-        description: Try linking a keyboard key to a command!
-        default_save_name: Pressit
+        name: Naciśnij!
+        description: Spróbuj przypisać przycisk klawiatury do polecenia!
+        default_save_name: Naciśnij
         levels:
             5:
                 example_code: "```\n{if} x {is} {pressed} {forward} 50\n```\n"
