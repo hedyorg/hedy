@@ -29,7 +29,7 @@
                 {% endif %}
                 <span class="hidden lg:inline-block">{{username[0]|upper}}{{username[1:]}} {% if get_user_messages() %} ({{ get_user_messages() }}){% endif %}</span>
             </a>
-            <div class="dropdown-menu" id="profile-dropdown" style="display: none;">
+            <div class="dropdown-menu dropdown-blue" id="profile-dropdown" style="display: none;">
                 <a class="dropdown-item" href="/highscores"><span class="fas fa-trophy ltr:mr-4 rtl:ml-4"></span>{{_('highscores')}}</a>
                 <a class="dropdown-item" href="/my-achievements"><span class="fas fa-fw fa-list-alt ltr:mr-4 rtl:ml-4"></span>{{_('my_achievements')}}</a>
                 <a class="dropdown-item" href="/my-profile"><span class="fas fa-user-cog ltr:mr-4 rtl:ml-4"></span>{{_('my_account')}} {% if get_user_messages() %} ({{ get_user_messages() }}){% endif %}</a>
@@ -50,13 +50,13 @@
                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
             </div>
           </a>
-          <div class="dropdown-menu" id="language-dropdown" style="display: none;">
+          <div class="dropdown-menu dropdown-blue" id="language-dropdown" style="display: none;">
               <div class="mb-4">
                   <input id="search_language" placeholder="{{_('search')}}" class="border text-black border-gray-500 rounded h-8 px-2 w-full">
               </div>
               <!-- Flexbox wrapping in columns doesn't properly set the width -- we'll have to manually match max-height and width here when the list grows... -->
-              <div class="flex flex-col flex-wrap w-min justify-start content-start items-start" style="max-height: 28rem; width: 39rem;">
-                {% for lang in other_keyword_languages() %}
+              <div class="flex flex-col flex-wrap w-min justify-start content-start items-start" style="max-height: 38rem; width: 39rem;">
+                {% for lang in other_languages() %}
                     <div class="dropdown-item language" onclick="hedyApp.change_language ('{{lang.lang}}');event.preventDefault();">{{ lang.sym }}</div>
                 {% endfor %}
               </div>

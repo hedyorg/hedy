@@ -48,6 +48,11 @@ strong {
   @apply font-bold;
 }
 
+.tiny-btn {
+  @apply text-sm pt-1 px-2 border-b-2;
+}
+
+
 .btn-shape {
   @apply font-slab leading-6 font-normal tracking-wide;
   @apply pt-2 pb-1 px-4 border border-b-4 rounded no-underline;
@@ -155,6 +160,15 @@ strong {
 
 .yellow-btn:hover {
   @apply bg-yellow-400 border-yellow-500;
+}
+
+.pink-btn {
+  @apply btn-shape;
+  @apply text-white bg-pink-400 border-pink-500;
+}
+
+.pink-btn:hover {
+  @apply bg-pink-300 border-pink-400;
 }
 
 .blue-btn {
@@ -271,21 +285,25 @@ code {
 }
 
 .dropdown-menu {
-  @apply absolute overflow-hidden block rounded-lg ltr:right-0 rtl:left-0 ltr:mr-1 rtl:ml-1 w-max;
+  @apply absolute overflow-hidden block rounded-md ltr:right-0 rtl:left-0 ltr:mr-1 rtl:ml-1 w-max p-4 shadow-lg;;
   top: 40px;
-
   @apply cursor-auto; /* Undo cursor-pointer we inherit from the menu */
-  /* Colors */
-  @apply border  bg-blue-100 border-blue-500 p-4 shadow-lg;
 }
 
-.dropdown-menu h3 {
-  @apply font-medium border-b-2 text-gray-800 border-gray-700 mx-4 pb-2 mb-2 text-center;
+.dropdown-blue {
+  @apply border-blue-500 border-2 bg-gray-100;
 }
 
-.dropdown-level-menu {
-  @apply absolute overflow-hidden block rounded-md border border-blue-700 bg-green-400 ltr:right-0 rtl:left-0 ltr:mr-1 rtl:ml-1 w-max;
-  top: 40px;
+.dropdown-green {
+  @apply bg-gray-100 border-2 border-green-500;
+}
+
+.dropdown-menu h2 {
+  @apply font-medium mx-4 pb-2 mb-2 text-center;
+}
+
+.dropdown-green h2 {
+  @apply text-green-600;
 }
 
 .dropdown-item {
@@ -576,7 +594,7 @@ p.close-dialog {
 /* Developers mode toggle */
 .toggle-circle {
   @apply ltr:left-0 rtl:right-0;
-  transition: all 0.5s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 body[dir='ltr'] input:checked ~ .toggle-circle {
@@ -591,13 +609,11 @@ body[dir='rtl'] input:checked ~ .toggle-circle {
 
 /* For the keyword toggle we have to move 200% instead of 100%, implement as edge case */
 body[dir='ltr'] #keyword_toggle_container input:checked ~ .toggle-circle {
-  transform: translateX(200%);
-  @apply bg-blue-500;
+/*  transform: translateX(200%); */
 }
 
 body[dir='rtl'] #keyword_toggle_container input:checked ~ .toggle-circle {
-  transform: translateX(-200%);
-  @apply bg-blue-500;
+/*  transform: translateX(-200%); */
 }
 
 input:checked ~ .toggle-path {

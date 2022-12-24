@@ -1659,23 +1659,27 @@ def all_countries():
 
 @app.template_global()
 def other_languages():
+    """Return a list of language objects that are NOT the current language."""
     current_lang = g.lang
     return [make_lang_obj(lang) for lang in ALL_LANGUAGES.keys() if lang != current_lang]
 
 
 @app.template_global()
 def other_keyword_languages():
+    """Return a list of language objects that are NOT the current language, and that have translated keywords."""
     current_lang = g.lang
     return [make_lang_obj(lang) for lang in ALL_KEYWORD_LANGUAGES.keys() if lang != current_lang]
 
 
 @app.template_global()
 def keyword_languages():
+    """Return a list of language objects that have translated keywords."""
     return [make_lang_obj(lang) for lang in ALL_KEYWORD_LANGUAGES.keys()]
 
 
 @app.template_global()
 def keyword_languages_keys():
+    """Return the language codes for all languages that have translated keywords."""
     return [lang for lang in ALL_KEYWORD_LANGUAGES.keys()]
 
 
