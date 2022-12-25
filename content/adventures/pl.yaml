@@ -182,7 +182,7 @@ adventures:
                 example_code: "```\nludzie {is} mama, tata, Agnieszka, ty\nkto_zmywa {is} ludzie {at} {random}\n{if} kto_zmywa {is} ty {print} _ o, nie... Twoja kolej zmywania naczyń _\n{else} {print} 'całe szczęście ' _ ' myje naczynia'\n````\n"
             10:
                 story_text: "## Zmywanie naczyń\nNa tym poziomie możesz zrobić jeszcze lepszy harmonogram mycia naczyń.\n"
-                example_code: "```\ndni = Poniedziałek, Wtorek, Środa, Czwartek, Piątek, Sobota, Niedziela\nimiona = mama, tata, Agnieszka, ty\n{for} dzień {in} dni\n    {print} imiona {at} {random} ' myje naczynia w ' dzień\n```\n"
+                example_code: "```\ndni = Poniedziałek, Wtorek, Środa, Czwartek, Piątek, Sobota, Niedziela\nimiona = mama, tata, Agnieszka, ty\n_ dzień _ dni\n    {print} imiona {at} {random} ' myje naczynia w ' dzień\n```\n"
                 start_code: '# umieść tutaj swój kod'
             7:
                 story_text: "## Zmywanie naczyń\nPrzy użyciu komendy `{repeat}` możesz powtórzyć fragmenty kodu. Możesz to wykorzystać do ustalenia kto będzie zmywał naczynia przez cały tydzień.\n"
@@ -782,18 +782,18 @@ adventures:
         levels:
             5:
                 example_code: "```\n{if} x {is} {pressed} {forward} 50\n```\n"
-                story_text: "## Press it!\nIn the introduction you were also told about the new keyword ```pressed```! Using ```pressed```\ncan make coding much more interactive, and you can have live control of what is executed!\nIn the upcoming levels you will learn how ```pressed``` makes this possible and what uses ```pressed```\nhas.\nBesides printing text, there is a whole other variety of uses for ```pressed```\nFor example, you can also link turtle commands to keys! Try it!\n"
-                story_text_2: "## If Else Pressed\nYou can also assign an else statement to ```pressed```. The else statement will be executed\nwhenever you press a key other than the key you assigned.\n"
+                story_text: "## Naciśnij!\nWe wprowadzeniu wspomnieliśmy również o nowym poleceniu `{pressed}`. Wykorzystanie `{pressed}` pozwala na stworzenie interaktywnego kodu, który możesz kontrolować w czasie rzeczywistym. W kolejnych poziomach dowiesz się jak korzystać z `{pressed}` i do czego go wykorzystać.\nOprócz wyświetlania tekstu, istnieje wiele innych możliwości wykorzystania `{pressed}`.\nNa przykład możesz również powiązać polecenia żółwia z klawiszami! Spróbuj!\n"
+                story_text_2: "## Naciśnięcie klawiszu innego niż przypisany\nMożesz również użyć polecenia `{else}` w poleceniu `{pressed}`. Polecenie `{else}` zostanie wykonane gdy naciśniesz klawisz inny niż ten, który przypisałeś.\n"
                 example_code_2: "```\n{if} y {is} {pressed} {print} 'Amazing! You pressed the y key!'\n{else} {print} 'Oh no! You did not press the y key.'\n```\n"
-                start_code: '# place your code here'
+                start_code: '# umieść tutaj swój kod'
             6:
                 example_code: "```\nfirst = {ask} 'what is your first number?'\nsecond = {ask} 'what is your second number?'\nprint 'press a to add, s to substract, d to divide, m to multiply'\n{if} a {is} {pressed} result = first + second\n{if} s {is} {pressed} result = first - second\n{if} d {is} {pressed} result = first / second\n{if} m {is} {pressed} result = first * second\n{print}'The answer is ' result\n```\n"
-                start_code: '# place your code here'
-                story_text: "Did you know you can also make a calculator using ```pressed```?\nGive the calculator two numbers and press the m key to multiply.\nNow you don't have to bring your own!\nTry other keys and see what happens! Do you get a different result?\n"
+                start_code: '# umieść tutaj swój kod'
+                story_text: "Czy wiesz, że możesz również stworzyć kalkulator używając polecenia `{pressed}`?\nWprowadź do kalkulatora dwa liczby i naciśnij klawisz m, aby pomnożyć.\nTeraz nie musisz zabierać własnego kalkulatora!\nSpróbuj innych klawiszy i zobacz, co się stanie! Czy otrzymałeś inny wynik?\n"
             7:
                 example_code: "```\n{repeat} 3 {times} {if} x {is} {pressed} forward 15\n```\n"
-                story_text: "You might have tried it in level 5 and 6, pressing the key linked to ```pressed``` multiple\ntimes. If you did, you noticed that this did nothing. but now that you have learned about repeat, we\ncan press keys multiple times! Make the turtle walk forward!\n"
-                start_code: '# place your code here'
+                story_text: "W poziomie 5 i 6 mogłeś spróbować nacisnąć kilka razy klawisz powiązany z `{pressed}`. Jeżeli to zrobiłeś to mogłeś też zauważyć, że nic się nie działo. Teraz, kiedy już nauczyłeś się polecenia `{repeat}`, możesz nacisnąć klawisz kilka razy! Spraw, aby żółw chodził do przodu!\n"
+                start_code: '# umieść tutaj swój kod'
             8:
                 example_code: "```\n{if} x {is} {pressed}\n    {print} 'Only the cool kids press the x key.'\n{else}\n    {print} 'The adventurous kids press something else.'\n```\n"
                 story_text: "## Press It!\nNow that you need to use indents for the {if} and {else} statements,\nyou will also have to indent code when using {pressed}! Don't worry,\nit works te same as with the other statements, see the example!\nPress another key instead of x and see what happens.\n"
