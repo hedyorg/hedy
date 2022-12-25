@@ -40,7 +40,7 @@ levels:
             correct_answer: "B"
             hint: "_?_ Hallo Welt!"
             question_score: '10'
-            code: "```\n___ Hello!\n```\n"
+            code: "```\n___ Hallo!\n```\n"
         3:
             question_text: "Wie fragst du, was jemandes Lieblingsfarbe ist?"
             mp_choice_options:
@@ -86,7 +86,7 @@ levels:
             hint: "Zeile 1 sieht nicht ganz richtig aus"
             question_score: '10'
         5:
-            question_text: "Which command is missing in line 2?"
+            question_text: "Welcher Befehl fehlt in Zeile 2?"
             code: |-
                 {ask} What is your favorite pet?
                 _?_ So your favorite pet is...
@@ -100,12 +100,12 @@ levels:
                     ```
                     Hedy
                     ```
-                feedback: "Hedy isn't a command."
+                feedback: "Hedy ist kein Befehl."
             -   option: |
                     ```
                     {ask}
                     ```
-                feedback: "With `{ask}` you can ask a question."
+                feedback: "Mit `{ask}` kannst du fragen stellen."
             -   option: |
                     ```
                     {echo}
@@ -123,11 +123,11 @@ levels:
                 {print} Cool! Me too!
             mp_choice_options:
             -   option: "In line 1 `{print}` should be replaced with `{ask}`."
-                feedback: "`{print}` in line 1 is correct."
+                feedback: "`{print}` in Zeile 1 ist richtig."
             -   option: "In line 2, `{print}` should be replaced with `{ask}`."
                 feedback: "Great! You paid attention!"
             -   option: "Line 3 has to begin with `{print}` instead of `{echo}`."
-                feedback: "`{echo}` is correct."
+                feedback: "`{echo}` ist richtig."
             -   option: "In line 4, `{print}` is spelled wrong."
                 feedback: "No, there is a mistake somewhere else"
             correct_answer: "B"
@@ -148,7 +148,7 @@ levels:
             -   option: "In line 3 `{echo}` needs to be replaced with `{print}`"
                 feedback: "Are you sure something is wrong?"
             -   option: "Nothing! This is a perfect code!"
-                feedback: "Correct!"
+                feedback: "Richtig!"
             correct_answer: "D"
             hint: "Check the code line by line"
             question_score: '10'
@@ -160,9 +160,9 @@ levels:
             -   option: "You can use it to `{print}` text."
                 feedback: "That's what `{print}` is for!"
             -   option: "You can use it to repeat an answer."
-                feedback: "Good job!"
+                feedback: "Gut gemacht!"
             -   option: "You can use it to make text disappear."
-                feedback: "That's not right..."
+                feedback: "Das ist nicht richtig..."
             correct_answer: "C"
             hint: "`{echo}` is used after an `{ask}` command."
             question_score: '10'
@@ -177,7 +177,7 @@ levels:
                 feedback: "No, `{print}` is right. Where is the question being asked?"
             -   option: "`{print}` in line 2 should be `{ask}`"
                 feedback: "Super!"
-            -   option: "`{echo}` in line 3 should be `{ask}`"
+            -   option: "`{echo}` in Zeile 3 sollte `{ask}` sein"
                 feedback: "No, `{echo}` is right. Where is the question being asked?"
             -   option: "Nothing. This is a perfect code!"
                 feedback: "Look carefully for the mistake..."
@@ -192,7 +192,7 @@ levels:
             -   option: "No"
                 feedback: "What a shame... You can practice some more in level 1!"
             correct_answer: "A"
-            hint: "Let's go!"
+            hint: "Auf geht's!"
             question_score: '10'
     2:
         1:
