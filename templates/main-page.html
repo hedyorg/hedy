@@ -23,7 +23,7 @@
                     <p>{{ section['text']|commonmark }}</p>
                 </div>
             {% elif section['style'] == 'pane-with-image-left' %}
-                <div class="center-block-wide px-16 flex flex-col md:flex-row justify-between gap-6">
+                <div class="center-block-wide px-16 flex flex-col items-center md:flex-row justify-between gap-6">
                     <img src="{{static(section['image'])}}" class="w-1/3">
                     <div class="column-pane px-8 py-4 w-2/3">
                         <h3>{{ section['title'] }}</h3>
@@ -31,7 +31,7 @@
                     </div>
                 </div>
             {% elif section['style'] == 'pane-with-image-right' %}
-                <div class="center-block-wide px-16 flex flex-col md:flex-row justify-between gap-6">
+                <div class="center-block-wide px-16 flex flex-col items-center md:flex-row justify-between gap-6">
                     <div class="column-pane shadow-md rounded-lg px-8 py-4 w-2/3">
                         <h3>{{ section['title'] }}</h3>
                         <p>{{ section['text']|commonmark }}</p>
