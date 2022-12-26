@@ -1325,8 +1325,8 @@ def main_page():
     content.append(dict(style='block', **sections.pop(0)))
 
     section_images = [
-        '/images/multilang-3.png',
-        '/images/gradual2.png',
+        '/images/hedy-multilang.png',
+        '/images/hedy-grows.png',
         '/images/profile_images/7.png'
     ]
 
