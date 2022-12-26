@@ -1327,7 +1327,7 @@ def main_page():
     section_images = [
         '/images/hedy-multilang.png',
         '/images/hedy-grows.png',
-        '/images/profile_images/7.png'
+        '/images/hedy-classroom.png'
     ]
 
     for i, image in enumerate(section_images):
