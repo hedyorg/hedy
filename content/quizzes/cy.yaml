@@ -931,6 +931,36 @@ levels:
                 option: Wrong, the word `{print}` is missing
             correct_answer: D
             hint: "It should be: `{repeat}` 100 `{times}` `{print}` 'Hello'"
+            question_score: '10'
         4:
             correct_answer: A
             hint: I'm is wrong, you can't use apostrophes
+            mp_choice_options:
+            -   option: "```\nI'm\n```\n"
+                feedback: That's right!
+            -   option: "```\n{print}\n```\n"
+                feedback: '`{print}` is spelled correctly'
+            -   option: "```\n{repeat}\n```\n"
+                feedback: '`{repeat}` is spelled correctly'
+            -   option: "```\n{times}\n```\n"
+                feedback: '`{times}` is spelled correctly'
+            question_text: Which word is wrong in the code?
+            code: "{print} 'I'm blue'\n{repeat} 7 {times} {print} 'da ba dee, da ba da'"
+            question_score: '10'
+        5:
+            question_text: Is this code right or wrong?
+            code: "{repeat} 100 {times} {print} 'Hedy is awesome!'"
+            mp_choice_options:
+            -   option: Correct
+                feedback: That's right!
+            -   option: Wrong
+                feedback: That's not it
+            correct_answer: A
+            hint: The code is correct!
+            question_score: '10'
+        6:
+            mp_choice_options:
+            -   {}
+            -   option: "the wheels on the bus go\nthe wheels on the bus go\nthe wheels on the bus go\nround and round"
+                feedback: Only the second line is repeated 3 times
+            -   option: "the wheels on the bus go\nround and round\nthe wheels on the bus go\nround and round\nthe wheels on the bus go\nround and round"
