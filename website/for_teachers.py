@@ -125,7 +125,7 @@ class ForTeachersModule(WebsiteModule):
             invites=invites,
             class_info={
                 "students": students,
-                "link": os.getenv("BASE_URL") + "/hedy/l/" + Class["link"],
+                "link": os.getenv("BASE_URL", "") + "/hedy/l/" + Class["link"],
                 "teacher": Class["teacher"],
                 "name": Class["name"],
                 "id": Class["id"],

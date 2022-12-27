@@ -1,9 +1,9 @@
 {% extends "auth.html" %}
 
-{% block main %}
+{% block full_width_content %}
 <div class="text-xl flex flex-col">
     <div class="bg-blue-200 my-16 border-b-8 border-blue-300 py-8">
-        <div class="center-block">
+        <div class="copy-container">
             <form class="flex flex-col gap-2" action="https://hedycode.us7.list-manage.com/subscribe/post?u=22a3ce4e09535f82f587a7118&amp;id=57f3b3c090" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
                 <h2 class="my-0 text-center">{{_('mailing_title')}}</h2>
                 <div class="signup-container">
@@ -38,7 +38,7 @@
             <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='COUNTRY';ftypes[3]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
         </div>
     </div>
-    <div id="learn_more_content" class="center-block fancy-text text-xl py-16">
+    <div id="learn_more_content" class="copy-container text-display-copy text-xl py-16">
         {% for section in content['learn-more-sections'] %}
             <h2>{{ section['title'] }}</h2>
             <p>{{ section['text'] | commonmark }}</p>

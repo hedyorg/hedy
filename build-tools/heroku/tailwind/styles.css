@@ -52,6 +52,29 @@ strong {
   @apply text-sm pt-1 px-2 border-b-2;
 }
 
+/* Container for pages which are not the main code page and not copy pages */
+.common-page-container {
+  @apply w-full max-w-screen-2xl mx-auto p-8;
+}
+
+/* For main page content */
+.copy-container { @apply max-w-screen-lg mx-auto; }
+.copy-container-wide { @apply max-w-screen-xl mx-auto; }
+
+/* Apply somewhat fancy styles to running text (good for landing page copy) */
+.text-display-copy h2 {
+  text-align: center;
+  @apply text-4xl text-pink-600;
+}
+
+.text-display-copy h3 {
+  @apply text-4xl text-pink-600;
+}
+
+.text-display-copy .columns h3 {
+  @apply text-2xl;
+}
+
 
 .btn-shape {
   @apply font-slab leading-6 font-normal tracking-wide;
@@ -66,24 +89,6 @@ strong {
 
 .green-btn:disabled, .green-btn[disabled] {
   @apply bg-gray-500 border-gray-700;
-}
-
-/* For main page content */
-.center-block { @apply max-w-screen-lg mx-auto; }
-.center-block-wide { @apply max-w-screen-xl mx-auto; }
-
-/* Not running text but fancy text! */
-.fancy-text h2 {
-  text-align: center;
-  @apply text-4xl text-pink-600;
-}
-
-.fancy-text h3 {
-  @apply text-4xl text-pink-600;
-}
-
-.fancy-text .columns h3 {
-  @apply text-2xl;
 }
 
 .stripe-colored {
@@ -135,10 +140,6 @@ strong {
   border-color: white transparent transparent transparent;
 }
 
-/* Container for pages which are not the main code page and not copy pages */
-.other-page-container {
-  @apply w-full max-w-screen-2xl mx-auto p-8;
-}
 
 .green-btn:hover:enabled {
   @apply bg-green-400 border-green-500;
