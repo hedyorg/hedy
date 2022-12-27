@@ -857,3 +857,80 @@ levels:
                 option: The variable in line 2 can't be called answer, because it is too similar to the variable correct answer.
             correct_answer: B
             hint: Inspect what the variables are called.
+            question_score: '10'
+        9:
+            correct_answer: C
+            question_text: Imagine you love football a 10, you've eaten 2 bananas and have washed your hands 3 times today. How smart does the silly fortune teller think you are?
+            mp_choice_options:
+            -   option: 10%
+                feedback: (2 bananas + 3 hygiene) * 10 football = 5*10 =?
+            -   option: 32%
+                feedback: (2 bananas + 3 hygiene) * 10 football = 5*10 =?
+            -   option: 50%
+                feedback: Super! You are 100 percent smart!
+            -   option: 100%
+                feedback: (2 bananas + 3 hygiene) * 10 football = 5*10 =?
+            code: "{print} 'Im Hedy the silly fortune teller'\n{print} 'I will predict how smart you are!'\nfootball = {ask} 'On a scale of 0 to 10 how much do you love football?'\nbananas = {ask} 'How many bananas have you eaten this week?'\nhygiene = {ask} 'How many times did you wash your hands today??'\nresult = bananas + hygiene\nresult = result * football\n{print} 'You are ' result 'percent smart.'"
+            hint: (2 bananas + 3 hygiene) * 10 football = 5*10 =?
+            question_score: '10'
+        10:
+            code: "name _?_ Hedy\n{print} name 'is walking trough the forrest'"
+            mp_choice_options:
+            -   option: You can only fill in the word is on the `_?_`
+                feedback: You are allowed to use the `=` sign as well
+            -   option: You can fill in either the word is or the `=` sign on the `_?_`
+                feedback: Amazing!
+            -   option: You have to fill in =is= on the `_?_`
+                feedback: No, one `=` sign is enough
+            -   option: You can only use the `=` sign when working with numbers, not with words.
+                feedback: You can also use `=` with words.
+            correct_answer: B
+            question_text: Which statement is true?
+            hint: '`{is}` and `=` are both allowed'
+            question_score: '10'
+    7:
+        1:
+            mp_choice_options:
+            -   option: '0'
+                feedback: No you can repeat a line.
+            -   option: '1'
+                feedback: Correct, one line at a time
+            -   option: '2'
+                feedback: In this level only one line at a time
+            -   option: infinite
+                feedback: In this level you can only repeat one line at a time
+            correct_answer: B
+            question_text: How many lines can you repeat at once with the repeat command at this level?
+            hint: You can only repeat 1 line at a time
+            question_score: '10'
+        2:
+            question_text: Which code is right?
+            mp_choice_options:
+            -   option: "```\n{print} 100 {times} 'hello'\n```\n"
+                feedback: "`{repeat}` 100 `{times}` `{print}` 'hello'"
+            -   option: "```\n{print} {repeat} 100 {times} 'hello'\n```\n"
+                feedback: "{repeat} 100 {times} {print} 'hello'"
+            -   option: "```\n{repeat} 'hello' 100 {times}\n```\n"
+                feedback: "{repeat} 100 {times} {print} 'hello'"
+            -   option: "```\n{repeat} 100 {times} {print} 'hello'\n```\n"
+                feedback: That's right!
+            correct_answer: D
+            hint: First the repeat command, then the `{print}` command
+            question_score: '10'
+        3:
+            question_text: Is this code right or wrong?
+            code: "{repeat} 100 {times} 'Hello!'"
+            mp_choice_options:
+            -   option: Right
+                feedback: No, a word is missing
+            -   option: Wrong, the word `{repeat}` is missing
+                feedback: The word `{repeat}` is there, another word is missing
+            -   option: Wrong, the word `{times}` is missing
+                feedback: The word `{times}` is there, another word is missing.
+            -   feedback: Correct
+                option: Wrong, the word `{print}` is missing
+            correct_answer: D
+            hint: "It should be: `{repeat}` 100 `{times}` `{print}` 'Hello'"
+        4:
+            correct_answer: A
+            hint: I'm is wrong, you can't use apostrophes
