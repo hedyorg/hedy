@@ -1447,7 +1447,7 @@ adventures:
                     You can also make a die again in this level using the `{if}`.
                     Complete the sample code so that the code says "You can stop throwing" once you have thrown an earthworm.
 
-                    But maybe you want to recreate a die from a completely different game. That's fine too! Then make up your own reaction. Eg 'yes' for 6 and 'pity' for something {else}.
+                    But maybe you want to recreate a die from a completely different game. That's fine too! Then make up your own reaction, e.g. 'yes' for 6 and 'pity' for something else.
                 example_code: |
                     ```
                     choices {is} 1, 2, 3, 4, 5, earthworm
@@ -1656,7 +1656,7 @@ adventures:
                     left = -90
                     right = 90
                     around = 180
-                    {for} counter {in} range 1 {to} 15
+                    {for} counter {in} {range} 1 {to} 15
                         stepsize = counter * 5
                         {if} w {is} {pressed}
                             {forward} stepsize
@@ -1911,7 +1911,7 @@ adventures:
             4:
                 story_text: |
                     ## Rock, paper, scissors
-                    In this level we can further program rock, paper, scissors. But {if} you want to add text, you have to use quotation marks here too.
+                    In this level we can further program rock, paper, scissors. But if you want to add text, you have to use quotation marks here too.
                     Do you complete the code by entering the correct commands or characters on the underscores?
 
                 example_code: |
@@ -1927,7 +1927,7 @@ adventures:
                     For that you need the new `{if}` code.
 
                     Save your choice with the name of choice and the choice of computer as computer choice.
-                    Then you can use `{if}` to see {if} they are the same or different.
+                    Then you can use `{if}` to see if they are the same or different.
                     Will you finish the code?
                 example_code: |
                     ```
@@ -1945,7 +1945,7 @@ adventures:
             9:
                 story_text: |
                     ## Rock, paper, scissors
-                    In this level you can program the whole rock, paper, scissors game by nesting the {if}-commands. Can you finish the code?
+                    In this level you can program the whole rock, paper, scissors game by nesting the `{if}` commands. Can you finish the code?
                 example_code: |
                     ```
                     choices {is} rock, paper, scissors
