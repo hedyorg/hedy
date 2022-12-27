@@ -1440,9 +1440,47 @@ levels:
             question_score: '10'
         8:
             mp_choice_options:
-            -   {}
+            -   option: "23\n24\n25"
+                feedback: The numbers don't appear. It doesn't say `{print}` i.
             -   option: 23 hi 24 hi 25 hi
                 feedback: The numbers don't appear. It doesn't say `{print}` i
             -   option: "hi\nhi\nhi"
                 feedback: Correct
+            -   feedback: No it will only appear 3 times.
+                option: The word 'hi' will appear 25 times in a row.
             question_text: What will be the output from this code?
+            code: "{for} i {in} {range} 23 {to} 25\n    {print} 'hi'"
+            correct_answer: C
+            hint: It doesn't say `{print}` i
+            question_score: '10'
+        9:
+            code: "age = {ask} 'How old are you?'\n{for} i {in} {range} 1 {to} age\n    {print} 'Hip Hip Hoorray!'"
+            mp_choice_options:
+            -   option: 1 time
+                feedback: Try again
+            -   option: 2 times
+                feedback: Try again
+            -   option: Never
+                feedback: Try again
+            -   option: That depends on how old you are
+                feedback: That's right!
+            correct_answer: D
+            hint: '`{for}` i `{in}` `{range}` 1 `{to}` age'
+            question_text: How many times does Hedy chant Hip Hip Hooray?
+            question_score: '10'
+        10:
+            question_text: Which code belongs to this output?
+            output: "Baby shark tututudutudu\nBaby shark tututudutudu\nBaby shark tututudutudu\nBaby shark"
+            mp_choice_options:
+            -   option: "```\n{for} i {in} {range} 1 {to} 3\n    {print} Baby shark tututudutudu\n    {print} Baby shark\n```\n"
+                feedback: Mind the indention
+            -   {}
+            -   {}
+            -   feedback: '`{range}` 0 `{to}` 3 is 4 times.'
+            correct_answer: B
+            hint: Mind the indention
+            question_score: '10'
+    10:
+        1:
+            question_text: What do we need to fill in on the `_?_` if we want to print each compliment?
+            code: "compliments = perfect, great job, amazing\n_?_\n    {print} compliment"
