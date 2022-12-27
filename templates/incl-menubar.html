@@ -23,7 +23,7 @@
         <li class="menubar-item dropdown relative z-20{% if current_page == 'my-profile' %} active{% endif %}">
             <a class="menubar-text gap-2 cursor-pointer" onclick="$('.dropdown-menu').hide(); $('#profile-dropdown').slideToggle('medium');">
                 {% if session.profile_image %}
-                    <img src="{{static('/images/profile_images/' + session.profile_image + '.png')}}" class="h-10 lg:h-12">
+                    <img src="{{static('/images/profile_images/' + session.profile_image + '.png')}}" class="h-8 lg:h-10 inline-block">
                 {% else %}
                     <span class="fas fa-fw fa-user"></span>
                 {% endif %}
