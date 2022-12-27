@@ -38,7 +38,7 @@ adventures:
                 example_code_3: "```\nładne_kolory {is} zielony, żółty\nkolor {is} {ask} 'Jaki jest twój ulubiony kolor?'\n{if} kolor {in} ładne_kolory {print} 'śliczny!'\n{else} {print} 'eh'\n```\n"
                 story_text_2: "Czasami kod z `{if}` robi się bardzo długi i nie mieści się w linii.<br> Możesz podzielić kod na dwie linie, zaczynając drugą linię od `{else}` w taki sposób:\n"
                 example_code_2: "```\nimię {is} {ask} 'jak masz na imię?'\n{if} imię {is} Hedy {print} 'to miło'\n{else} {print} 'bu!'\n```\n"
-                story_text_4: "Something else that works with `{if}` is `pressed`! With pressed you can link any letter in\nthe alphabet and any number key on your keyboard to a command. If you link it, and press the key,\nsomething will happen. Try it out!\n"
+                story_text_4: "Coś innego co działa z poleceniem `{if}` jest polecenie `{pressed}`! Przy użyciu `{pressed}` możesz przypisać dowolną literę alfabetu lub liczbę ze swojej klawiatury do dowolnego polecenia. Coś się stanie jeżeli je przypiszesz i naciśniesz ten klawisz. Spróbuj teraz!\n"
                 example_code_4: "```\n{if} x {is} {pressed} {print} 'it worked!'\n```\n"
             6:
                 start_code: "{print} '5 razy 5 to' 5 * 5"
@@ -169,7 +169,7 @@ adventures:
                 example_code: "```\nwers = 99\n{print} wers ' butelek piwa na ścianie'\n{print} wers ' butelek piwa'\n{print} 'Weź jedną i przekaż ją dalej'\nwers = wers - 1\n{print} wers ' butelek piwa na ścianie'\n{sleep}\n```\n"
                 start_code: "{print} 'Zacznijmy śpiewać!'"
                 story_text_2: "## 5 Małych małpek skaczących po łóżku\nTa piosenka dla dzieci odlicza od 5 małych małpek do 1 małpki.\nMożesz zaśpiewać całą piosenkę jeżeli skopiujesz linie od 2 do 7 i wkleisz je poniżej kodu.\n"
-                example_code_2: "```\nnumer = 6\nnumer = numer - 1\nprint 'Skakało na łóżku małych małpek ' numer\nprint 'Nagle jedna spadła i potłukła się'\nprint 'Mama do doktora dzwoni i słyszy, że'\nprint 'SKAKAĆ NA ŁÓŻKU ZABRONIONE JEST!'\nsleep\n```\n"
+                example_code_2: "```\nnumer = 6\nnumer = numer - 1\n{print} 'Skakało na łóżku małych małpek ' numer\n{print} 'Nagle jedna spadła i potłukła się'\n{print} 'Mama do doktora dzwoni i słyszy, że'\n{print} 'SKAKAĆ NA ŁÓŻKU ZABRONIONE JEST!'\n{sleep}\n```\n"
             16:
                 story_text: "## Zaśpiewaj piosenkę\nNa tym poziomie możesz zaprogramować piosenkę \"Dziadek Fajną Farmę Miał\". Możesz połączyć odpowiednie zwierzę z jego odgłosem poprzez dodanie ich w to samo miejsce na liście.\nThe Drunken Sailor is also quickly made in this level. You only need 8 lines for the entire song, check it out!\n"
                 example_code: "## Dziadek Fajną Farmę Miał\n```\nzwierzęta = ['Kurki', 'Krówki', 'Świnkę']\ndźwięki = ['ko', 'muu', 'chrum']\n{for} i {in} {range} 1 {to} 3\n    zwierzę = zwierzęta[i]\n    dźwięk = dźwięki[i]\n    {print} 'Dziadek fajną farmę miał'\n    {print} 'ija ija oo!'\n    {print} zwierzę ' na niej hodował'\n    {print} 'ija ija oo!'\n    {print} zwierzę ' ' dźwięk dźwięk ' tu i ' dźwięk dźwięk ' tam'\n    {print} dźwięk 'tu, ' dźwięk ' tam, ciągle tylko ' dźwięk dźwięk\n```\n\n## Drunken Sailor\n```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines\n    {for} i {in} {range} 1 {to} 3\n        {print} line\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
@@ -843,5 +843,5 @@ adventures:
         levels:
             11:
                 story_text: "## Piosenki\nW tym poziomie możesz użyć polecenia `{for} i {in} {range}` żeby odliczyć czas do Nowego Roku.\n\n## Wyzwanie\nUzupełnij puste miejsca i upewnij się, czy kod działa.\n"
-                example_code: "## Odliczanie\n```\nfor _ in _ 10 to 1\n    {print} i\n{print} 'Szczęśliwego Nowego Roku!'\n```\n"
+                example_code: "## Odliczanie\n```\n{for} _ {in} _ 10 {to} 1\n    {print} i\n{print} 'Szczęśliwego Nowego Roku!'\n```\n"
                 start_code: '# tutaj umieść swój kod'
