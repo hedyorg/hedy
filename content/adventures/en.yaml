@@ -1639,11 +1639,11 @@ adventures:
                     ```
                     distances = 100, 80, 60, 40, 20, 10
                     {if} x {is} {pressed}
-                        for distance in distances
+                        {for} distance {in} distances
                             {forward} distance
                             {turn} -90
                     {if} y {is} {pressed}
-                        for distance in distances
+                        {for} distance {in} distances
                             {forward} distance
                             {turn} 90
                     ```
@@ -1658,16 +1658,16 @@ adventures:
                     left = -90
                     right = 90
                     around = 180
-                    for counter in range 1 to 15
+                    {for} counter {in} range 1 {to} 15
                         stepsize = counter * 5
                         {if} w {is} {pressed}
-                            forward stepsize
+                            {forward} stepsize
                         {if} s {is} {pressed}
-                            turn around
+                            {turn} around
                         {if} a {is} {pressed}
-                            turn left
+                            {turn} left
                         {if} d {is} {pressed}
-                            turn right
+                            {turn} right
                     ```
                 start_code: "# place your code here"
             12:
@@ -1680,17 +1680,17 @@ adventures:
                 example_code: |
                     ```
                     choose = 'You chose option: '
-                    print 'A wild mouse appeared!'
-                    print 'Choose an option and press first letter: (n)et, (c)at, (b)ag, (r)un'
+                    {print} 'A wild mouse appeared!'
+                    {print} 'Choose an option and press first letter: (n)et, (c)at, (b)ag, (r)un'
                     {if} n {is} {pressed}
                         {print} choose + 'net'
                         {print} 'You attempt to catch the mouse with a net..'
-                        sleep
+                        {sleep}
                         {print} 'Congratulations you did it!'
                     {if} c {is} {pressed}
                         {print} choose + 'cat'
                         {print} 'You send out your cat'
-                        sleep
+                        {sleep}
                         {print} 'The mouse got scared and ran away!'
                     {if} b {is} {pressed}
                         {print} choose + 'bag'
@@ -1714,20 +1714,20 @@ adventures:
                     around = 180
                     looked_left = 0
                     looked_right = 0
-                    repeat 40 times
+                    {repeat} 40 {times}
                         {if} w {is} {pressed}
-                            forward stepsize
+                            {forward} stepsize
                         {if} s {is} {pressed}
-                            turn around
+                            {turn} around
                         {if} a {is} {pressed}
-                            turn left
+                            {turn} left
                             looked_left = 1
                         {if} d {is} {pressed}
-                            turn right
+                            {turn} right
                             looked_right = 1
                         {if} p {is} {pressed}
-                            {if} looked_left is 1 and looked_right is 1
-                                forward 40
+                            {if} looked_left {is} 1 {and} looked_right {is} 1
+                                {forward} 40
                                 looked_left = 0
                                 looked_right = 0
                     ```
@@ -1746,21 +1746,21 @@ adventures:
                     around = 180
                     jumptime = 5
                     spins = 4
-                    repeat 40 times
+                    {repeat} 40 {times}
                         {if} w {is} {pressed}
-                            forward stepsize
+                            {forward} stepsize
                             jumptime = jumptime - 1
                         {if} s {is} {pressed}
-                            turn around
+                            {turn} around
                         {if} a {is} {pressed}
-                            turn left
+                            {turn} left
                             spins = spins - 1
                         {if} d {is} {pressed}
-                            turn right
+                            {turn} right
                             spins = spins - 1
                         {if} p {is} {pressed}
-                            {if} jumptime <= 0 or spins <= 0
-                                forward stepsize * 3
+                            {if} jumptime <= 0 {or} spins <= 0
+                                {forward} stepsize * 3
                                 jumptime = 5
                                 spins = 4
                     ```
@@ -1780,21 +1780,21 @@ adventures:
                     jumptime = 5
                     spins = 2
                     tired_in = 15
-                    while tired_in > 0
+                    {while} tired_in > 0
                         {if} w {is} {pressed}
-                            forward stepsize
+                            {forward} stepsize
                             jumptime = jumptime - 1
                         {if} s {is} {pressed}
-                            turn around
+                            {turn} around
                         {if} a {is} {pressed}
-                            turn left
+                            {turn} left
                             spins = spins - 1
                         {if} d {is} {pressed}
-                            turn right
+                            {turn} right
                             spins = spins - 1
                         {if} p {is} {pressed}
-                            {if} jumptime <= 0 or spins <= 0
-                                forward stepsize * 4
+                            {if} jumptime <= 0 {or} spins <= 0
+                                {forward} stepsize * 4
                                 jumptime = 5
                                 spins = 2
                         tired_in = tired_in - 1
@@ -1808,21 +1808,16 @@ adventures:
                     ```
                     limbs = ['Right Hand', 'Left Hand', 'Right Foot', 'Left Foot']
                     colours = ['Blue', 'Green', 'Red', 'Yellow']
-                    repeat 20 times
-                        l = limbs[random]
-                        c = colours[random]
+                    {repeat} 20 {times}
+                        l = limbs[{random}]
+                        c = colours[{random}]
                         {if} x {is} {pressed}
                             {print} l + ' on ' + c + '!'
                     ```
                 start_code: "# place your code here"
             17:
                 story_text: |
-                    Now that you learned how to use ```elif```, we can use it with ```pressed```too! Be aware,
-                    ```elif ... is pressed ``` is not possible! That is why we are going to nest some ```elif```
-                    statements into the ```pressed``` options. We also had to add ```:``` to the code to make
-                    everything work! imagine the turtle being able to do a superjump forward. by pressing ```p``` the
-                    turtle can make a superjump! However, the turtle can only do this jump every 5 steps or every
-                    4 turns
+                    Now that you learned how to use `{elif}`, we can use it with `{pressed}`too! Be aware, `{elif} ... {is} {pressed}` is not possible! That is why we are going to nest some `{elif}` statements into the `{pressed}` options. We also had to add `:` to the code to make everything work! Imagine the turtle being able to do a superjump forward. By pressing `p` the turtle can make a superjump! However, the turtle can only do this jump every 5 steps or every 4 turns
                 example_code: |
                     ```
                     stepsize = 15
@@ -1831,25 +1826,25 @@ adventures:
                     around = 180
                     jumptime = 5
                     spins = 4
-                    repeat 40 times
+                    {repeat} 40 {times}
                         {if} w {is} {pressed}:
-                            forward stepsize
+                            {forward} stepsize
                             jumptime = jumptime - 1
                         {if} s {is} {pressed}:
-                            turn around
+                            {turn} around
                         {if} a {is} {pressed}:
-                            turn left
+                            {turn} left
                             spins = spins - 1
                         {if} d {is} {pressed}:
-                            turn right
+                            {turn} right
                             spins = spins - 1
                         {if} p {is} {pressed}:
-                            {if} jumptime <= 0 or spins <= 0:
-                                forward stepsize * 3
+                            {if} jumptime <= 0 {or} spins <= 0:
+                                {forward} stepsize * 3
                                 jumptime = 5
                                 spins = 4
                             {elif} jumptime > 0:
-                                print "you need to take more steps or turns before you can superjump!"
+                                {print} "you need to take more steps or turns before you can superjump!"
                     ```
                 start_code: "# place your code here"
     rock:
