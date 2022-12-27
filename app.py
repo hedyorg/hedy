@@ -12,7 +12,7 @@ import zipfile
 from logging.config import dictConfig as logConfig
 from os import path
 
-from babel import Locale
+import static_babel_content
 from flask import (Flask, Markup, Response, abort, after_this_request, g,
                    jsonify, make_response, redirect, request, send_file,
                    send_from_directory, session)
@@ -273,9 +273,7 @@ def setup_language():
     # Switch to "right-to-left" if one of the language is rtl according to Locale (from Babel) settings.
     # This is the only place to expand / shrink the list of RTL languages ->
     # front-end is fixed based on this value
-    g.dir = "ltr"
-    if Locale(g.lang).text_direction in ["ltr", "rtl"]:
-        g.dir = Locale(g.lang).text_direction
+    g.dir = static_babel_content.TEXT_DIRECTIONS.get(g.lang, 'ltr')
 
     # Check that requested language is supported, otherwise return 404
     if g.lang not in ALL_LANGUAGES.keys():
