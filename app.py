@@ -705,6 +705,7 @@ def version_page():
                            commit=commit)
 
 
+@app.route('/my-achievements')
 def achievements_page():
     user = current_user()
     username = user['username']
@@ -1214,12 +1215,6 @@ def internal_error(exception):
     return utils.error_page(error=500)
 
 
-@app.route('/index.html')
-@app.route('/')
-def default_landing_page():
-    return main_page('start')
-
-
 @app.route('/signup', methods=['GET'])
 def signup_page():
     if current_user()['username']:
@@ -1307,41 +1302,72 @@ def get_research(filename):
     return send_from_directory('content/research/', filename)
 
 
-@app.route('/<page>')
-def main_page(page):
-    if page == 'favicon.ico':
-        abort(404)
+@app.route('/favicon.ico')
+def favicon(page):
+    abort(404)
 
-    if page == "my-achievements":
-        return achievements_page()
 
-    if page == 'learn-more':
-        learn_more_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
-        return render_template(
-            'learn-more.html',
-            papers=hedy_content.RESEARCH,
-            page_title=gettext('title_learn-more'),
-            current_page='learn-more',
-            content=learn_more_translations)
+@app.route('/')
+@app.route('/start')
+@app.route('/index.html')
+def main_page():
+    sections = hedyweb.PageTranslations('start').get_page_translations(g.lang)['start-sections']
 
-    if page == 'join':
-        join_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
-        return render_template('join.html', page_title=gettext('title_learn-more'),
-                               current_page='join', content=join_translations)
+    sections = sections[:]
 
-    if page == 'privacy':
-        privacy_translations = hedyweb.PageTranslations(
-            page).get_page_translations(g.lang)
-        return render_template('privacy.html', page_title=gettext('title_privacy'),
-                               content=privacy_translations)
+    # Sections have 'title', 'text'
+    # Annotate sections with display styles, based on the order which we know sections will appear
+    # Styles are one of: 'block', 'pane-with-image-{left,right}', 'columns'
+    # Do this by mutating the list in place
+    content = []
+    content.append(dict(style='block', **sections.pop(0)))
 
-    requested_page = hedyweb.PageTranslations(page)
-    if not requested_page.exists():
-        abort(404)
+    section_images = [
+        '/images/hedy-multilang.png',
+        '/images/hedy-grows.png',
+        '/images/hedy-classroom.png'
+    ]
 
-    main_page_translations = requested_page.get_page_translations(g.lang)
+    for i, image in enumerate(section_images):
+        if not sections:
+            break
+        content.append(dict(
+            style='pane-with-image-' + ('right' if i % 2 == 0 else 'left'),
+            image=image,
+            **sections.pop(0)))
+
+    if sections:
+        content.append(dict(style='block', **sections.pop(0)))
+    if sections:
+        content.append(dict(style='columns', columns=sections))
+
     return render_template('main-page.html', page_title=gettext('title_start'),
-                           current_page='start', content=main_page_translations)
+                           current_page='start', content=content)
+
+
+@app.route('/learn-more')
+def learn_more():
+    learn_more_translations = hedyweb.PageTranslations('learn-more').get_page_translations(g.lang)
+    return render_template(
+        'learn-more.html',
+        papers=hedy_content.RESEARCH,
+        page_title=gettext('title_learn-more'),
+        current_page='learn-more',
+        content=learn_more_translations)
+
+
+@app.route('/join')
+def join():
+    join_translations = hedyweb.PageTranslations('join').get_page_translations(g.lang)
+    return render_template('join.html', page_title=gettext('title_learn-more'),
+                           current_page='join', content=join_translations)
+
+
+@app.route('/privacy')
+def privacy():
+    privacy_translations = hedyweb.PageTranslations('privacy').get_page_translations(g.lang)
+    return render_template('privacy.html', page_title=gettext('title_privacy'),
+                           content=privacy_translations)
 
 
 @app.route('/landing-page/', methods=['GET'], defaults={'first': False})
@@ -1606,6 +1632,12 @@ def nl2br(x):
     return x.replace('\n', Markup('<br />'))
 
 
+@app.template_filter()
+def chunk(x, size):
+    """Chunk a list into groups of size at most 'size'."""
+    return (x[pos:pos + size] for pos in range(0, len(x), size))
+
+
 @app.template_global()
 def hedy_link(level_nr, assignment_nr, subpage=None):
     """Make a link to a Hedy page."""
@@ -1625,23 +1657,27 @@ def all_countries():
 
 @app.template_global()
 def other_languages():
+    """Return a list of language objects that are NOT the current language."""
     current_lang = g.lang
     return [make_lang_obj(lang) for lang in ALL_LANGUAGES.keys() if lang != current_lang]
 
 
 @app.template_global()
 def other_keyword_languages():
+    """Return a list of language objects that are NOT the current language, and that have translated keywords."""
     current_lang = g.lang
     return [make_lang_obj(lang) for lang in ALL_KEYWORD_LANGUAGES.keys() if lang != current_lang]
 
 
 @app.template_global()
 def keyword_languages():
+    """Return a list of language objects that have translated keywords."""
     return [make_lang_obj(lang) for lang in ALL_KEYWORD_LANGUAGES.keys()]
 
 
 @app.template_global()
 def keyword_languages_keys():
+    """Return the language codes for all languages that have translated keywords."""
     return [lang for lang in ALL_KEYWORD_LANGUAGES.keys()]
 
 
