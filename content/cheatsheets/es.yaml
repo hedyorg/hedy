@@ -184,24 +184,24 @@
 12:
 -   name: "Números decimales"
     explanation: "Números decimales."
-    demo_code: |
-        {print} '¡Calcula!'
+    demo_code: |-
+        {print} "¡Calcula!
         {print} 'Dos y medio más dos y medio es...'
         {print} 2.5 + 2.5
 -   name: "Asigna texto"
     explanation: "Texto con comillas simples luego de `=`"
-    demo_code: |
-        nombre = 'Hedy la Robot'
+    demo_code: |-
+        nombre = 'Hedy el Robot'
         {print} 'Hola ' nombre
 -   name: "Comillas después de la comparación con {if}"
     explanation: "Texto con comillas simples luego de `{if}`."
-    demo_code: |
+    demo_code: |-
         nombre = {ask} '¿Quién eres?'
         {if} nombre = 'Hedy'
             {print} '¡Hola!'
 -   name: "Comillas en una lista"
     explanation: "Una lista con comillas simples."
-    demo_code: |
+    demo_code: |-
         superhéroes = 'Iron Man', 'Batman', 'Superman'
         {print} superhéroes {at} {random}
 13:

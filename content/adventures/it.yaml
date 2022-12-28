@@ -6,15 +6,12 @@ adventures:
         levels:
             1:
                 story_text: |
-                    Benvenuto in Hedy! Nel Livello 1 puoi usare i comandi `print`,` ask` e `echo`.
+                    ## Benvenuto in Hedy!
+                    Nel Livello 1 puoi usare i comandi `{print}`, `{ask}` e `{echo}`.
+                    Digita il tuo codice nel campo di programmazione, oppure premi il pulsante verde nel blocco di codice di esempio, e il codice verrà digitato per te!
+                    Prova tu stesso il codice con il pulsante verde "Esegui codice" sotto il campo di programmazione.
 
-                    Sul lato sinistro dello schermo ci sono tutti i comandi del Livello 1.
-
-                    Premi il pulsante blu e il codice verrà digitato per te!
-
-                    Prova tu stesso il codice con il pulsante verde 'Esegui il codice' sotto il campo di programmazione a sinistra.
-
-                    Non sai cosa programmare? Nelle schede successive trovi alcune idee su cosa costruire.
+                    È possibile stampare il testo sullo schermo utilizzando il comando `{print}`.     
                 start_code: "{print} ciao mondo!"
                 example_code: "```\n{print} Hello!\n{print} Welcome to Hedy!\n```\n"
                 example_code_2: "```\n{ask} What is your name?\n{echo} hello\n```\n"
@@ -120,7 +117,7 @@ adventures:
                         {print} 'Questo sarà scritto 5 volte'
                 story_text: |
                     ## Indentazione
-                    `{ask}` e `{print}` funzionano ancora come prima. Ma `{if}`, `{else}` e `{repeat}` sono cambiati!
+                    `{ask}` e `{print}` funzionano ancora come prima. Ma `{if}`, `{else}`, {pressed} e `{repeat}` sono cambiati!
                     Ora puoi raggruppare più righe insieme, ma dovrai *indentare* il codice.
                     Questo significa inserire quattro spazi all'inizio della riga. Devi indentare anche se vuoi creare un blocco con una sola riga.
                 example_code: |
@@ -184,7 +181,7 @@ adventures:
                         {print} contatore
                 story_text: |-
                     ## Cicli!
-                    `{print}` funziona esattamente come prima ma aggiungiamo una nuova forma del comando `{for}`. Ora puoi scrivere `{for} contatore {in} {range} 1 {to} 5` e usare `contatore` nel tuo programma.
+                    `{print}` funziona esattamente come prima ma aggiungiamo una nuova forma del comando `{for}`. Ora puoi scrivere `{for} counter {in} {range} 1 {to} 5` invece di `{repeat} 5 {times}` e usare `counter` nel tuo programma.
                     Provalo per vedere cosa succede! Ricordati di indentare dopo i comandi `{for}` e `{if}` (Significa iniziare una riga con quattro spazi).
                 example_code: |
                     ```
@@ -416,15 +413,18 @@ adventures:
                     {print} He's afraid this is a haunted forest
                     ```
                 start_code: "{print} La tua storia inizia qui"
-                story_text_2: "## Challenge\nCan you make your own story in Hedy now by using `{print}` , `{ask}` and `{echo}`?\n"
+                story_text_2: "## Sfida\nRiesci a creare la tua storia in Hedy utilizzando `{print}`, `{ask}` e `{echo}`?\n"
             2:
                 story_text: |
                     ## Storia
                     Nel livello 2 puoi rendere la tua storia più divertente. Il nome del tuo protagonista può apparire in qualsiasi posizione nella frase.
 
-                    Devi scrivere un pochino più codice per quello. Prima devi dare un nome al tuo protagonista.
+                    Devi scrivere un po' più codice per fare questo. Prima devi dare un nome al tuo protagonista.
 
                     Poi, puoi mettere quel nome dovunque in una frase.
+
+                    ## Sfida
+                    Riesci a creare una storia utilizzando una variabile? Riesci ad aggiungere altre variabili?
                 example_code: |-
                     ```
                     name {is} {ask} What is the name of the main character?
@@ -449,14 +449,17 @@ adventures:
                     The command `{add}` can also come in handy in your story.
                 example_code_2: |
                     ```
-                    {print} He hears a sound
-                    animals {is} 🐿, 🦔, 🦇, 🦉
-                    animal {is} {ask} What do you think it is?
-                    {add} animal {to_list} animals
-                    {print} it was a animals {at} {random}
+                    {print} Lui sente un suono
+                    animali {is} 🐿, 🦔, 🦇, 🦉
+                    animale {is} {ask} Chi pensi che sia?
+                    {add} animale {to_list} animali
+                    {print} è stato l'animale {at} {random}
                     ```
                 story_text_3: |
                     Questo è un esempio del comando `{remove}` nella tua storia
+
+                    ## Sfida
+                    Riesci a usare i nuovi tre comandi `{at} {random}`{random}, `{add} {to}` e `{remove} {from}` nella tua storia?
                 example_code_3: |
                     ```
                     {print} His backpack got way too heavy.
@@ -473,13 +476,13 @@ adventures:
                     Puoi risolvere il problema in questo livello. Basta usare le virgolette per tutto quello che vuoi stampare.
                 example_code: |
                     ```
-                    name {is} Hans
-                    {print} 'The name of the main character is' name
-                    {print} name 'is now going to walk in the woods'
-                    {print} name 'is a bit scared'
-                    animals {is} 🦔, 🐿, 🦉, 🦇
-                    {print} 'He hears the sound of an' animals {at} {random}
-                    {print} name 'is afraid this is a haunted forest'
+                    nome {is} Hans
+                    {print} _Il nome del protagonista è_ nome
+                    {print} nome _sta andando a fare una passeggiata nel bosco_
+                    {print} nome _è un po' spaventato_
+                    animali {is} 🦔, 🐿, 🦉, 🦇
+                    {print} _Ha sentito il suono di un _ animali {at} {random}
+                    {print} name _ha paura che questa sia una foresta infestata_
                     ```
                 start_code: "{print} 'La tua storia verrà stampata qui!'"
             5:
