@@ -1502,15 +1502,20 @@ def change_language():
 @app.route('/hedy/slides', methods=['GET'], defaults={'level': '1'})
 @app.route('/hedy/slides/<level>', methods=['GET'])
 def get_slides(level):
+    # In case of a "forced keyword language" -> load that one, otherwise: load
+    # the one stored in the g object
+
+    keyword_language = request.args.get('keyword_language', default=g.keyword_lang, type=str)
+
     try:
         level = int(level)
     except ValueError:
         return utils.error_page(error=404, ui_message="Slides do not exist!")
 
-    if not SLIDES[g.lang].get_slides_for_level(level):
+    if not SLIDES[g.lang].get_slides_for_level(level, keyword_language):
         return utils.error_page(error=404, ui_message="Slides do not exist!")
 
-    slides = SLIDES[g.lang].get_slides_for_level(level, g.keyword_lang)
+    slides = SLIDES[g.lang].get_slides_for_level(level, keyword_language)
     return render_template('slides.html', slides=slides)
 
 
