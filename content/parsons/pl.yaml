@@ -3,10 +3,10 @@ levels:
         1:
             story: |
                 Jesteś klientem piekarni Hedy.
-                Przyszedłeś do piekarni i zostałeś powitany przez piekarza.
+                Po wejściu do środka wita Cię piekarz.
                 Pyta się, jaki rodzaj ciasta chcesz zamówić.
-                Wkrótce, twoje zamówienie jest przygotowywane.
-            code: |
+                Wkrótce twoje zamówienie jest przygotowywane.
+            code: |-
                 {print} Witaj w piekarni Hedy!
                 {ask} Jakie ciasto chcesz zamówić?
                 {echo} Więc chcesz
@@ -14,7 +14,7 @@ levels:
         2:
             story: |
                 Jesteś przy konsoli DJ i prosisz o piosenkę. Utwórz program, który zapyta, czy jesteś gotowy na imprezę, a następnie zapyta, którą piosenkę chciałbyś usłyszeć.
-            code: |
+            code: |-
                 {print} Z tej strony DJ Hedy
                 {ask} Jesteście gotowi na imprezę?
                 {ask} Jaką piosenkę chcielibyście usłyszeć?
@@ -24,18 +24,18 @@ levels:
             story: |
                 Ty i Twoi znajomi macie zamiar pooglądać Netflix'a.
                 Pokaż, który film chcesz obejrzeć i życz widzom dobrej zabawy!
-            code: |
+            code: |-
                 {print} Czas na popołudniowego Netfilx'a
                 film {is} Sonic 2 - Szybki jak błyskawica
-                {print} Idziemy na film
+                {print} Idziemy oglądać film
                 {print} Dobrej zabawy!
         2:
             story: |
                 To jest internetowy sklep z zabawkami. Stwórz program, w którym konsumenci mogą dodawać produkty od swojego koszyka.
-            code: |
+            code: |-
                 {print} Witaj w sklepie z zabawkami
                 zabawka {is} {ask} Co chciałbyś kupić?
-                {print} Zabawka została dodana do twojego koszyka.
+                {print} zabawka została dodana do twojego koszyka.
                 {print} Dziękujemy za wspólne zakupy!
     3:
         1:
@@ -45,16 +45,16 @@ levels:
                 Do którego domu zostaniesz przydzielony?
                 Jesteś Gryffindorem, Hufflepufem, Ravenclawem czy Slytherinem?
                 Pozwól programowi poczekać chwilę przed ujawnieniem twojego domu.
-            code: |
+            code: |-
                 {print} Nowy rok szkolny w Hogwarcie zaczyna się!
-                {print} Tiara Przydziału jest gotowa, żeby przypisać cię do domu Hogwart.
+                {print} Tiara Przydziału jest gotowa, żeby przypisać cię do jednego z domów w Hogwarcie
                 domy {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin
                 {sleep} 2
                 {print} I wybrała domy {at} {random}
         2:
             story: |
                 Stwórz program, który wybierze dla Ciebie losowy posiłek. Zrób listę jedzenia i listę dodatków, i pozwól programowi zdecydować, co zjesz!
-            code: |
+            code: |-
                 jedzenie {is} pizza, lody, sałatka, kanapka
                 dodatki {is} czekolada, ser, tuńczyk, posypka
                 {print} Twój dzisiejszy losowy posiłek to...
@@ -66,7 +66,7 @@ levels:
                 Jesteś nowym trenerem Pokémonów z Pallet Town!
                 Stwórz program, który wybierze twojego pierwszego Pokémona.
                 Pozwól programowi poczekać minutę przed ujawnieniem twojego pierwszego pokemona.
-            code: |
+            code: |-
                 pokemony {is} Pikachu, Charmander, Bulbasaur, Squirtle
                 {print} 'To będzie twój pierwszy pokemon!'
                 {sleep}
@@ -74,7 +74,7 @@ levels:
         2:
             story: |
                 Stwórz loterię, która pozwala ci na wybór dodatkowej nagrody którą możesz wygrać.
-            code: |
+            code: |-
                 nagrody {is} samochód, chomik, milion złotych
                 nagroda {is} {ask} 'Co chciałbyś wygrać?'
                 {add} nagroda {to_list} nagrody
@@ -84,7 +84,7 @@ levels:
             story: |
                 Stwórz program, który sprawdzi, czy Twój ulubiony film jest już na liście komputera.
                 Jeśli tak, napisz, że masz świetny gust - w przeciwnym razie dodaj film do listy.
-            code: |
+            code: |-
                 ulubione_filmy {is} Batman, Spiderman, Avengers, Jurassic Park
                 film {is} {ask} 'Jaki jest twój ulubiony film?'
                 {if} film {in} ulubione_filmy {print} 'Masz świetny gust!'
@@ -93,7 +93,7 @@ levels:
         2:
             story: |
                 Stwórz grę matematyczną.
-            code: |
+            code: |-
                 {print} 'Rozwiąż ten problem'
                 odpowiedź {is} {ask} '88 - 16 = ?'
                 {if} odpowiedź {is} 72 {print} 'Dobrze!'
@@ -105,7 +105,7 @@ levels:
                 Najpierw zapytaj o wiek użytkownika i rozpocznij obliczenia.
                 Oblicz psie lata, a potem kocie lata.
                 Pokaż użytkownikowi oby dwa wieki.
-            code: |
+            code: |-
                 wiek = {ask} 'Ile masz lat?'
                 psie_lata = wiek * 7
                 kocie_lata = wiek * 5
@@ -114,7 +114,7 @@ levels:
         2:
             story: |
                 Napisz program, który pomoże ci wyliczyć ile ciast jest ci potrzebnych na przyjęcie urodzinowe.
-            code: |
+            code: |-
                 {print} 'Dzisiaj są twoje urodziny!'
                 osoby = {ask} 'Ilu osobom chcesz dać kawałek ciasta?'
                 liczba_ciast {is} osoby/8
@@ -125,8 +125,8 @@ levels:
                 W turnieju szachowym pozostało trzech graczy.
                 Stwórz program, który zadecyduje, którzy dwaj gracze najpierw zagrają przeciwko sobie.
                 Najpierw wypisz dwóch graczy, którzy rozegrają pierwszy mecz, a następnie napisz, z którym graczem zagra zwycięzca.
-            code: |
-                gracze = Wilm, Noe, Zofia
+            code: |-
+                gracze = Władek, Tadek, Zofia
                 gracz1 = gracze {at} {random}
                 gracz2 = gracze {at} {random}
                 {print} gracz1 ' rozpoczyna grę z ' gracz2
@@ -136,7 +136,7 @@ levels:
         2:
             story: |
                 Utwórz piosenkę „Koła autobusu kręcą się w kółko”
-            code: |
+            code: |-
                 {print} 'koła autobusu kręcą sie'
                 {repeat} 3 {times} {print} 'w kółko i w kołko'
                 {print} 'koła autobusu kręca się w kółko i w kółko'
@@ -146,20 +146,20 @@ levels:
             story: |
                 Ty i czterej inni przyjaciele gracie w Pokémon Go! Stwórz program, który zdecyduje, w której drużynie każdy z was będzie grał.
                 Możliwe drużyny to: czerwona, żółta lub niebieska! Zrób krótką przerwę po ogłoszeniu drużyny.
-            code: |
+            code: |-
                 drużyny = czerwona, żółta, niebieska
                 {print} 'Czerwona, Żółta czy Niebieska?'
                 {repeat} 5 {times}
-                  {print} 'Twoja drużyna to drużyna... '
-                  {print} drużyny {at} {random}
-                  sleep 2
+                    {print} 'Twoja drużyna to drużyna... '
+                    {print} drużyny {at} {random}
+                    sleep 2
         2:
             story: |
                 Napisz odliczanie do gry w chowanego.
-            code: |
+            code: |-
                 licznik = 11
                 {repeat} 10 {times}
-                  licznik = licznik - 1
-                  {print} licznik
-                  {sleep} 1
+                    licznik = licznik - 1
+                    {print} licznik
+                    {sleep} 1
                 {print} 'Gotowi czy nie, szukam!'

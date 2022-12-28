@@ -1129,9 +1129,9 @@ adventures:
                 example_code: "```\npalabras {is} squawk, Hedy\n{print} ¡Entrena a tu lora!\nnueva_palabra {is} {ask} ¿Que palabra le quieres enseñar?\n{add} nueva_palabra {to_list} palabras\n{print} \U0001F9D2 ¡Di nueva_palabra, Hedy!\n{print} \U0001F99C palabras {at} {random}\n```\n"
                 start_code: '# pon tu código aquí'
             4:
-                start_code: '# Write your code here'
-                story_text: "## Parrot\nIn this level we have to use quotation marks with the commands `{ask}` and `{print}`.\nCan you complete the code by adding quotation marks?\n"
-                example_code: "```\nwords {is} squawk, Hedy\n{print} _ Train your parrot! _\nnew_word {is} {ask} _ Which word do you want to teach them? _\n{add} new_word {to_list} words\n{print} _ \U0001F9D2 Say _ new_word _, Hedy!_\n{print} _ \U0001F99C _ words {at} {random}\n```\n"
+                start_code: '# Escribe tu código aquí'
+                story_text: "## Loro\nEn este nivel, tenemos que usar comillas con los comandos `{ask}` y`{print}`.\n¿Puedes completar el código introduciendo comillas?\n"
+                example_code: "```\npalabras {is} croac, Hedy\n{print} _ ¡Entrena a tu loro! _\nnueva_palabra {is} {ask} _ ¿Qué palabra le quieres enseñar? _\n{add} nueva_palabra {to_list} palabras\n{print} _ \U0001F9D2 ¡Di _ new_word _, Hedy!_\n{print} _ \U0001F99C _ palabras {at} {random}\n```\n"
         description: ¡Crea tu propia mascota loro que copiará lo que digas!
         default_save_name: Loro
     next:
@@ -1336,54 +1336,54 @@ adventures:
         levels:
             13:
                 example_code: "```\nstepsize = 10\nleft = -90\nright = 90\naround = 180\nlooked_left = 0\nlooked_right = 0\nrepeat 40 times\n    {if} w {is} {pressed}\n        forward stepsize\n    {if} s {is} {pressed}\n        turn around\n    {if} a {is} {pressed}\n        turn left\n        looked_left = 1\n    {if} d {is} {pressed}\n        turn right\n        looked_right = 1\n    {if} p {is} {pressed}\n        {if} looked_left is 1 and looked_right is 1\n            forward 40\n            looked_left = 0\n            looked_right = 0\n```\n"
-                start_code: '# place your code here'
-                story_text: "Now that you learned how to use ```and``` and ```or```, we can use it with ```pressed```too!\nimagine the turtle being able to do a superjump forward. by pressing ```p``` the turtle can make a\nsuperjump! However, the turtle can only do this jump if he turns left and right first!\n"
+                start_code: '# pon tu código aquí'
+                story_text: "¡Has aprendido a usar```and``` and ```or```, we can use it with ```pressed```!\nImagina que la tortuga puede hacer un super salto hacia adelante. ¡Al pulsar ```p``` la tortuga puede hacer un\nsuper salto! Sin embargo, la tortuga solo puede hacer este salto si gira a la izquierda y a la derecha primero\n"
             14:
                 example_code: "```\nstepsize = 15\nleft = -90\nright = 90\naround = 180\njumptime = 5\nspins = 4\nrepeat 40 times\n    {if} w {is} {pressed}\n        forward stepsize\n        jumptime = jumptime - 1\n    {if} s {is} {pressed}\n        turn around\n    {if} a {is} {pressed}\n        turn left\n        spins = spins - 1\n    {if} d {is} {pressed}\n        turn right\n        spins = spins - 1\n    {if} p {is} {pressed}\n        {if} jumptime <= 0 or spins <= 0\n            forward stepsize * 3\n            jumptime = 5\n            spins = 4\n```\n"
-                story_text: "Now that you learned how to use operators, we can use it with ```pressed```too!\nimagine the turtle being able to do a superjump forward. by pressing ```p``` the turtle can make a\nsuperjump! However, the turtle can only do this jump every 5 steps or every 4 turns\n"
-                start_code: '# place your code here'
+                story_text: "Ahora que has aprendido a usar operadores, ¡lo podemos usar también con```pressed```!\nimagina que la tortuga puede hacer un super salto hacia adelante. ¡Al pulsar ```p```, la tortuga puede hacer un\nsuper salto! Sin embargo, la tortuga solo puede hacer este salto cada 5 pasos o cada 4 giros\n"
+                start_code: '# pon tu código aquí'
             15:
-                story_text: "Now that you have learned about the ```while``` loops, you can start using it on the turtle!\nThe turtle is now only allowed to take only 15 steps or turn 15 times, before he gets tired!\nTry to get as far as possible before the turtle gets tired! You can use your superjump after 2 turns\nor 5 steps.\n"
-                start_code: '# place your code here'
+                story_text: "Ahora que has aprendido sobre los bucles ```while```, ¡puedes empezar a usarlos en la tortuga!\nLa tortuga ahora solo puede dar 15 pasos o girar 15 veces antes de cansarse\n¡Intenta llegar lo más lejos posible antes de que la tortuga se canse! Puedes usar tu super salto tras 2 giros\no 5 pasos.\n"
+                start_code: '# pon tu código aquí'
                 example_code: "```\nstepsize = 15\nleft = -90\nright = 90\naround = 180\njumptime = 5\nspins = 2\ntired_in = 15\nwhile tired_in > 0\n    {if} w {is} {pressed}\n        forward stepsize\n        jumptime = jumptime - 1\n    {if} s {is} {pressed}\n        turn around\n    {if} a {is} {pressed}\n        turn left\n        spins = spins - 1\n    {if} d {is} {pressed}\n        turn right\n        spins = spins - 1\n    {if} p {is} {pressed}\n        {if} jumptime <= 0 or spins <= 0\n            forward stepsize * 4\n            jumptime = 5\n            spins = 2\n    tired_in = tired_in - 1\n```\n"
             16:
-                story_text: "Lets move a little with a game of Twister!\nWhen everyone is ready, press the x key for the next move!\n"
+                story_text: "Vamos a movernos un poco con un juego de Twister!\n¡Si te sientes preparado/a, pulsa la tecla x para el siguiente movimiento!\n"
                 example_code: "```\nlimbs = ['Right Hand', 'Left Hand', 'Right Foot', 'Left Foot']\ncolours = ['Blue', 'Green', 'Red', 'Yellow']\nrepeat 20 times\n    l = limbs[random]\n    c = colours[random]\n    {if} x {is} {pressed}\n        {print} l + ' on ' + c + '!'\n```\n"
-                start_code: '# place your code here'
+                start_code: '# pon tu código aquí'
             17:
-                story_text: "Now that you learned how to use ```elif```, we can use it with ```pressed```too! Be aware,\n```elif ... is pressed ``` is not possible! That is why we are going to nest some ```elif```\nstatements into the ```pressed``` options. We also had to add ```:``` to the code to make\neverything work! imagine the turtle being able to do a superjump forward. by pressing ```p``` the\nturtle can make a superjump! However, the turtle can only do this jump every 5 steps or every\n4 turns\n"
+                story_text: "Ahora que has aprendido a usar ```elif```, también podemos usarlo con ```pressed```. Ten en cuenta que\n```elif ... is pressed``` no es posible. Por eso vamos a anidar algunos ```elif```\nen las opciones de ```pressed```. También tuvimos que añadir ```:``` al código para que\ntodo funcione. Imagina que la tortuga puede hacer un super salto hacia adelante. Al pulsar ```p``` la\ntortuga puede hacer un super salto. Sin embargo, la tortuga solo puede hacer este salto cada 5 pasos o cada\n4 giros.\n"
                 example_code: "```\nstepsize = 15\nleft = -90\nright = 90\naround = 180\njumptime = 5\nspins = 4\nrepeat 40 times\n    {if} w {is} {pressed}:\n        forward stepsize\n        jumptime = jumptime - 1\n    {if} s {is} {pressed}:\n        turn around\n    {if} a {is} {pressed}:\n        turn left\n        spins = spins - 1\n    {if} d {is} {pressed}:\n        turn right\n        spins = spins - 1\n    {if} p {is} {pressed}:\n        {if} jumptime <= 0 or spins <= 0:\n            forward stepsize * 3\n            jumptime = 5\n            spins = 4\n        {elif} jumptime > 0:\n            print \"you need to take more steps or turns before you can superjump!\"\n```\n"
-                start_code: '# place your code here'
+                start_code: '# pon tu código aquí'
             7:
                 start_code: '# coloque su código aquí'
                 story_text: "Es posible que lo hayas probado en el nivel 5 y 6, presionando la tecla vinculada a ```pressed``` múltiple\nveces. Si lo hiciste, te diste cuenta de que esto no hizo nada. pero ahora que ha aprendido acerca de la repetición,\npuede presionar las teclas varias veces! ¡Haz que la tortuga camine hacia adelante!\n"
                 example_code: "```\n{repeat} 3 {times} {if} x {is} {pressed} forward 15\n```\n"
             8:
-                story_text: "## Press It!\nNow that you need to use indents for the {if} and {else} statements,\nyou will also have to indent code when using {pressed}! Don't worry,\nit works te same as with the other statements, see the example!\nPress another key instead of x and see what happens.\n"
+                story_text: "## ¡Púlsalo!\nAhora que debes usar sangrado para las instrucciones {if} y {else},\ntambién tendrás que sangrar el código al usar {pressed}! No te preocupes,\nfunciona igual que con las otras instrucciones, ¡ve el ejemplo!\nPulsa otra tecla en lugar de x y mira qué sucede.\n"
                 example_code: "```\n{if} x {is} {pressed}\n    {print} 'Only the cool kids press the x key.'\n{else}\n    {print} 'The adventurous kids press something else.'\n```\n"
-                start_code: '# place your code here'
+                start_code: '# pon tu código aquí'
             9:
-                story_text: "Now that you know how to nest multiple statements, you can also do this with {pressed}!\nBy nesting a pressed in a {repeat} loop, you can repeatedly press buttons and make something happen.\nNow we know you could do this before, but by using the indents you have much more overview!\nTry it counting to 5, for example!\n"
+                story_text: "Ahora que sabes cómo anidar varias instrucciones, ¡también puedes hacerlo con {pressed}!\nAl anidar un pulsado en un bucle {repeat}, puedes pulsar botones repetidamente y hacer que algo suceda.\nAhora sabemos que podrías hacerlo antes, ¡pero al usar los sangrados tienes mucha más visibilidad!\n¡Inténtalo contando hasta 5, por ejemplo!\n"
                 example_code: "```\ntotal = 1\n{repeat} 5 times\n    {if} x {is} {pressed}\n        {print} total\n        {print} 'keep pressing!'\n        total = total + 1\n```\n"
-                story_text_2: "Besides counting, you can now also move the turtle in many more ways than only forward or backwards!\nTry making some figures by walking the turtle around!\n"
+                story_text_2: "Además de contar, ¡ahora también puedes mover la tortuga de muchas más maneras que solo hacia adelante o hacia atrás!\n¡Intenta hacer algunas figuras moviendo la tortuga!\n"
                 example_code_2: "```\nstepsize = 25\nleft = -90\nright = 90\naround = 180\nrepeat 40 times\n    {if} w {is} {pressed}\n        forward stepsize\n    {if} s {is} {pressed}\n        turn around\n    {if} a {is} {pressed}\n        turn left\n    {if} d {is} {pressed}\n        turn right\n```\n"
-                start_code: '# place your code here'
+                start_code: '# pon tu código aquí'
             10:
-                story_text: "In this level you can make the turtle draw you a figure. The turtle is raring to go.\nGive the turtle the starting signal by pressing the x or y key on your keyboard.\nCan you let the turtle draw you another figure?\n"
+                story_text: "En este nivel puedes hacer que la tortuga te dibuje una figura. La tortuga está ansiosa por empezar.\nDale la señal de inicio a la tortuga pulsando la tecla x o y de tu teclado.\n¿Puedes hacer que la tortuga te dibuje otra figura?\n"
                 example_code: "```\ndistances = 100, 80, 60, 40, 20, 10\n{if} x {is} {pressed}\n    for distance in distances\n        {forward} distance\n        {turn} -90\n{if} y {is} {pressed}\n    for distance in distances\n        {forward} distance\n        {turn} 90\n```\n"
-                start_code: '# place your code here'
+                start_code: '# pon tu código aquí'
             11:
-                story_text: "Now that you have learned of the ```for ... in range ... to ...``` rule, you can use it for ```pressed```\ntoo! for example, try moving the turtle! The turtle grows everytime you press a linked button.\nThis way the turtle can move further every step!\n"
+                story_text: "¡Has aprendido ```for ... in range ... to ...``` rule, you can use it for ```pressed``` también!\nPor ejemplo, ¡intenta mover la tortuga! La tortuga crece cada vez que pulsas un botón.\n¡De esta manera, la tortuga puede avanzar más cada paso!\n"
                 example_code: "```\nleft = -90\nright = 90\naround = 180\nfor counter in range 1 to 15\n    stepsize = counter * 5\n    {if} w {is} {pressed}\n        forward stepsize\n    {if} s {is} {pressed}\n        turn around\n    {if} a {is} {pressed}\n        turn left\n    {if} d {is} {pressed}\n        turn right\n```\n"
-                start_code: '# place your code here'
+                start_code: '# pon tu código aquí'
             12:
-                story_text: "Are you familiar with videogames? You walk into tall grass and are suddenly approached by\na very suspicious mouse. What will you do?\nIn this level we will make a small menu with different kinds of options.\nStoring text into a variable is quite handy for repeated uses.\nOption, I choose you!\n"
+                story_text: "¿Tienes experiencia con los videojuegos? Entras en una hierba alta y de la nada se te acerca\nun ratón muy sospechoso. ¿Qué harías?\nEn este nivel crearemos un pequeño menú con diferentes opciones.\nAlmacenar texto en una variable es muy útil para repetir su uso.\nOpción, ¡te elijo a ti!\n"
                 example_code: "```\nchoose = 'You chose option: '\nprint 'A wild mouse appeared!'\nprint 'Choose an option and press first letter: (n)et, (c)at, (b)ag, (r)un'\n{if} n {is} {pressed}\n    {print} choose + 'net'\n    {print} 'You attempt to catch the mouse with a net..'\n    sleep\n    {print} 'Congratulations you did it!'\n{if} c {is} {pressed}\n    {print} choose + 'cat'\n    {print} 'You send out your cat'\n    sleep\n    {print} 'The mouse got scared and ran away!'\n{if} b {is} {pressed}\n    {print} choose + 'bag'\n    {print} 'The mouse jumped into you bag!'\n{if} r {is} {pressed}\n    {print} choose + 'run'\n    {print} 'You got away safely!'\n```\n"
-                start_code: '# place your code here'
+                start_code: '# pon tu código aquí'
             6:
                 start_code: '# coloque su código aquí'
                 story_text: "¿Sabías que también puedes hacer una calculadora con la tecla ``pressed``?\nDale a la calculadora dos números y pulsa la tecla m para multiplicar.\n¡Ahora ya no tienes que traer la tuya!\nPrueba con otras teclas y ¡a ver qué pasa! ¿Obtienes un resultado diferente?\n"
-                example_code: "```\nprimero = {ask} '¿cuál es tu primer número?'\nsegundo = {ask} '¿cuál es tu segundo número?'\n{print} 'presione a para sumar, s para restar, d para dividir, m para multiplicar'\n{if} a {is} {pressed} resultado = primero + segundo\n{if} s {is} {pressed} resultado = primero - segundo\n{if} d {is} {pressed} resultado = primero / segundo\n{if} m {is} {pressed} resultado = primero * segundo\n{print} 'La respuesta es ' resultado\n```\n"
+                example_code: "```\nprimero = {ask} '¿cuál es tu primer número?'\nsegundo = {ask} '¿cuál es tu segundo número?'\nprint 'pulsa a para sumar, s para restar, d para dividir, m para multiplicar'\nif a {is} {pressed} resultado = primero + segundo\nif s {is} {pressed} resultado = primero - segundo\nif d {is} {pressed} resultado = primero / segundo\nif m {is} {pressed} resultado = primero * segundo\nprint 'La respuesta es ' resultado\n```\n"
             5:
                 story_text_2: "## Si Else está pulsado\nTambién puede asignar una sentencia else a ```pressed``. La sentencia else se ejecutará\nsiempre que presione una tecla distinta a la asignada.\n"
                 example_code_2: "```\n{if} y {is} {pressed} {print} 'Amazing! You pressed the y key!'\n{else} {print} 'Oh no! You did not press the y key.'\n```\n"
