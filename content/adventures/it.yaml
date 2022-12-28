@@ -64,16 +64,26 @@ adventures:
 
             3:
                 story_text: |
-                    Nel livello 3 puoi anche fare una lista. Puoi quindi scegliere qualsiasi cosa dall'elenco. Lo fai con `at random` (dici: et ren-dom).
+                    ## Facciamo una lista!
+                    Nel livello 3 puoi fare una lista. Puoi lasciare che il computer scelga una cosa a caso dalla lista. Lo fai con `{at} {random}` (dici: et ren-dom).
 
-                    Troverai tutti i codici di livello 3 nella barra di sinistra. Ci sono anche schede con compiti.
-                start_code: "{print} ciao mondo!"
-                story_text_2: Puoi anche aggiungere elementi alla lista con `{add}` e rimuoverli con `{remove}`.
                 example_code: |
                     ```
                     animali {is} cane, gatto, canguro
                     {print} animali {at} {random}
-                example_code_2: "```\nanimals {is} dog, cat, kangaroo\n{add} penguin {to_list} animals\n{remove} cat {from} animals\n{print} animals {at} {random}\n```\n"
+                    ```
+
+                story_text_2: Puoi anche aggiungere elementi alla lista con `{add}` e rimuoverli con `{remove}`.
+
+                example_code_2: |
+                    ```
+                    animali {is} cane, gatto, canguro
+                    {add} pinguino {to_list} animali
+                    {remove} gatto {from} animali
+                    {print} animali {at} {random}
+                    ```
+
+                start_code: "{print} ciao mondo!"
             4:
                 start_code: "{print} 'Ciao mondo'"
                 story_text: |
