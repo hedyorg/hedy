@@ -33,20 +33,35 @@ adventures:
                 start_code: "{print} ciao mondo!"
             2:
                 story_text: |
-                    Nel livello 2 impariamo qualcosa di nuovo. Puoi nominare una parola con `is`.
+                    ## Variabili
+                    Nel livello 2 impariamo due nuovi comandi: `{is}` e `{sleep}`.
+                    Puoi dare un nome ad una parola con `{is}`. Si dice variabile. In questo esempio creiamo una variabile chiamata nome e una variabile chiamata età. Puoi usare la parola nome ovunque nel tuo codice e verrà sostituita da Hedy, in questo modo:
 
-                    Se metti il codice `nome is Hedy` all'inizio del tuo programma, puoi usare nome ovunque. Quello sarà poi sostituito da Hedy.
+                    In questo modo non hai più più bisogno del comando `{echo}`!
 
-                    La `ask` è cambiata nel livello 2, salva anche la risposta con un nome.
-
-                    `print` funziona ancora come nel livello 1 e non è più necessaria `echo`.
-
+                example_code: |
+                    ```
+                    nome {is} Hedy
+                    età {is} 15
+                    {print} nome ha età anni
+                    ```
+                story_text_2: |
+                    `{print}` funziona sempre nello stesso modo, ma il comando `{ask}` è cambiato. Devi usare anche una variabile nel comando `{ask}`. In questo modo:
+                example_code_2: |
+                    ```
+                    risposta {is} {ask} Come ti chiami?
+                    {print} Ciao risposta
+                    ```
+                story_text_3: |
+                    Un nuovo comando in questo livello è `{sleep}`, serve a mettere in pausa il tuo programma per un secondo. Se inserisci un numero dopo il comando {sleep}, il programma si mette in pausa per quel numero di secondi.
+                example_code_3: |
+                    ```
+                    {print} Il mio colore preferito è il...
+                    {sleep} 2
+                    {print} verde!
+                    ```
                 start_code: "{print} ciao mondo!"
-                example_code: "```\nname {is} Hedy\nage {is} 15\n{print} name is age years old\n```\n"
-                story_text_2: "`{print}` funziona nello stesso modo, ma il comando `{ask}` è cambiato. Devi usare anche una variabile nel comando `{ask}`. In questo modo:\n"
-                example_code_2: "```\nrisposta {is} {ask} Come ti chiami?\n{print} Ciao risposta\n```\n"
-                story_text_3: "Un nuovo comando in questo livello è `{sleep}`, serve a mettere in pausa il tuo programma per un secondo. Se inserisci un numero dopo il comando {sleep}, il programma si mette in pausa per quel numero di secondi.\n"
-                example_code_3: "```\n{print} Il mio colore preferito è il...\n{sleep} 2\n{print} verde!\n```\n"
+
             3:
                 story_text: |
                     Nel livello 3 puoi anche fare una lista. Puoi quindi scegliere qualsiasi cosa dall'elenco. Lo fai con `at random` (dici: et ren-dom).
