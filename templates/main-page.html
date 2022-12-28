@@ -1,23 +1,60 @@
 {% extends "auth.html" %}
-{% block body %}
-<div class="relative text-xl">
-    <a class="github-fork-ribbon left-top z-10" href="https://github.com/felienne/hedy" data-ribbon="Fork me on GitHub" title="Fork me on GitHub">Fork me on GitHub</a>
-    <div class="flex flex-col">
-        <div class="py-8 px-16 mb-8 bg-cover flex flex-row justify-between items-center" style="background-image: url(/images/header-3072x500.jpg); height: 250px; position: relative;">
-            <div class="flex flex-col justify-center gap-1">
-                <h1 class="font-bold font-slab text-white text-6xl text-shadow-md tracking-wide">{{_('main_title')}}</h1>
-                <h2 class="py-0 my-0 font-sans font-light text-white text-shadow-md tracking-wide">{{_('main_subtitle')}}</h2>
-            </div>
-            <div class="">
+{% block full_width_content %}
+<div class="text-xl flex flex-col">
+    <div class="bg-blue-200 mt-8 mb-8 border-b-8 border-blue-300">
+        <div class="copy-container px-8 py-8 md:py-16 md:px-16 mb-8 flex flex-col gap-16 md:flex-row justify-between items-stretch">
+            <div class="flex flex-col gap-2">
+                <h1 class="font-bold font-slab text-sky-600 text-6xl tracking-wide">{{_('main_title')}}</h1>
+                <h2 class="py-0 my-0 font-sans font-light text-black tracking-wide">{{_('main_subtitle')}}</h2>
                 <button id="tryitbutton" class="green-btn text-white px-8 py-4" onclick="window.location.href='/hedy'">{{_('try_it')}}</button>
             </div>
+            {# image for large screens #}
+            <div class="hidden md:block overflow-visible relative flex-none" style="width: 500px">
+                <img class="absolute drop-shadow-lg" src="images/hero-graphic.png" style="max-width: 600px; bottom: -170px; left: 0px;">
+            </div>
+            {# image for small screens #}
+            <div class="md:hidden flex-none">
+                <img class="drop-shadow-lg" src="images/hero-graphic.png">
+            </div>
         </div>
-        <div class="px-16" id="main_page_content">
-            {% for section in content['start-sections'] %}
-                <h2>{{ section['title'] }}</h2>
-                <p>{{ section['text']|commonmark }}</p>
-            {% endfor %}
+    </div>
+    <div id="main_page_content" class="text-display-copy">
+        {% for section in content %}
+        <div class="{{loop.cycle('stripe-white', 'stripe-colored')}} py-16">
+            {% if section['style'] == 'block' %}
+                <div class="copy-container px-10 md:px-16">
+                    <h2 class="font-bold">{{ section['title'] }}</h2>
+                    <div class="heading-underline"></div>
+                    <p>{{ section['text']|commonmark }}</p>
+                </div>
+            {% elif section['style'] == 'pane-with-image-left' %}
+                <div class="copy-container-wide px-4 md:px-16 flex flex-col items-center md:flex-row justify-between gap-6">
+                    <img src="{{static(section['image'])}}" class="w-2/5">
+                    <div class="column-pane px-8 py-4 md:w-3/5">
+                        <h3>{{ section['title'] }}</h3>
+                        <p>{{ section['text']|commonmark }}</p>
+                    </div>
+                </div>
+            {% elif section['style'] == 'pane-with-image-right' %}
+                <div class="copy-container-wide px-4 md:px-16 flex flex-col items-center md:flex-row justify-between gap-6">
+                    <div class="column-pane shadow-md rounded-lg px-8 py-4 md:w-3/5">
+                        <h3>{{ section['title'] }}</h3>
+                        <p>{{ section['text']|commonmark }}</p>
+                    </div>
+                    <img src="{{static(section['image'])}}" class="w-2/5">
+                </div>
+            {% elif section['style'] == 'columns' %}
+                <div class="copy-container columns px-4 md:px-16 flex flex-col md:flex-row justify-between gap-6">
+                    {% for col in section['columns'] %}
+                    <div class="column-pane shadow-md rounded-lg px-8 py-4 flex-1">
+                        <h3>{{ col['title'] }}</h3>
+                        <p>{{ col['text']|commonmark }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
         </div>
+        {% endfor %}
     </div>
 </div>
 {% endblock %}

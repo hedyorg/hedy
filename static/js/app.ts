@@ -154,7 +154,7 @@ $(document).on("click", function(event){
       if (dir === "rtl") {
         symbol = "⇤";
       }
-      $('<button>').css({ fontFamily: 'sans-serif' }).addClass('green-btn').text(symbol).appendTo(buttonContainer).click(function() {
+      $('<button>').css({ fontFamily: 'sans-serif' }).addClass('yellow-btn').text(symbol).appendTo(buttonContainer).click(function() {
         theGlobalEditor?.setValue(exampleEditor.getValue() + '\n');
         update_view("main_editor_keyword_selector", <string>$(preview).attr('lang'));
         stopit();

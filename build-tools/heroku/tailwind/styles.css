@@ -8,7 +8,14 @@ html {
 }
 
 .font-slab {
-  font-family: 'Zilla Slab', serif;
+  font-family: 'Balsamiq Sans', sans-serif;
+}
+
+.dot {
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  display: inline-block;
 }
 
 h1 {
@@ -20,7 +27,7 @@ h2 {
 }
 
 h3 {
-  @apply font-bold text-xl;
+  @apply font-bold text-2xl;
 }
 
 h4 {
@@ -41,8 +48,37 @@ strong {
   @apply font-bold;
 }
 
+.tiny-btn {
+  @apply text-sm pt-1 px-2 border-b-2;
+}
+
+/* Container for pages which are not the main code page and not copy pages */
+.common-page-container {
+  @apply w-full max-w-screen-2xl mx-auto p-8;
+}
+
+/* For main page content */
+.copy-container { @apply max-w-screen-lg mx-auto; }
+.copy-container-wide { @apply max-w-screen-xl mx-auto; }
+
+/* Apply somewhat fancy styles to running text (good for landing page copy) */
+.text-display-copy h2 {
+  text-align: center;
+  @apply text-4xl text-pink-600;
+}
+
+.text-display-copy h3 {
+  @apply text-4xl text-pink-600;
+}
+
+.text-display-copy .columns h3 {
+  @apply text-2xl;
+}
+
+
 .btn-shape {
-  @apply font-bold py-2 px-4 border-b-4 rounded;
+  @apply font-slab leading-6 font-normal tracking-wide;
+  @apply pt-2 pb-1 px-4 border border-b-4 rounded no-underline;
   display: inline-block;
 }
 
@@ -54,6 +90,56 @@ strong {
 .green-btn:disabled, .green-btn[disabled] {
   @apply bg-gray-500 border-gray-700;
 }
+
+.stripe-colored {
+  @apply bg-yellow-400 border-yellow-500 border-b-4;
+}
+
+.stripe-white { @apply border-b-4; }
+
+.stripe-colored h2, .stripe-colored a { @apply text-white; }
+.stripe-colored .column-pane a { @apply text-blue-700; }
+.stripe-colored .column-pane { @apply bg-white shadow-md rounded-lg; }
+
+.heading-underline { @apply bg-pink-600 w-36 mx-auto h-1 my-8; }
+
+.stripe-colored .heading-underline {
+  @apply bg-white;
+}
+
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+
+}
+
+.tooltip .tooltiptext{
+    @apply invisible absolute;
+    @apply bg-white text-red-600 items-center;
+    width: 130;
+    bottom: 150%;
+    left: 50%;
+    margin-left: -80px;
+
+
+}
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+.tooltip .tooltiptext::after {
+  @apply absolute;
+  content: " ";
+  top: 100%;
+  /* At the bottom of the tooltip */
+  left: 50%;
+  margin-left: -10px;
+  border-width: 10px;
+  border-style: solid;
+  border-color: white transparent transparent transparent;
+}
+
 
 .green-btn:hover:enabled {
   @apply bg-green-400 border-green-500;
@@ -75,6 +161,15 @@ strong {
 
 .yellow-btn:hover {
   @apply bg-yellow-400 border-yellow-500;
+}
+
+.pink-btn {
+  @apply btn-shape;
+  @apply text-white bg-pink-400 border-pink-500;
+}
+
+.pink-btn:hover {
+  @apply bg-pink-300 border-pink-400;
 }
 
 .blue-btn {
@@ -109,7 +204,7 @@ h2 {
 h2:first-child { margin-top: 0; }
 
 h3 {
-  @apply font-slab font-bold text-blue-700 italic;
+  @apply font-slab text-blue-700;
   @apply leading-tight text-xl mt-4 mb-1;
 }
 
@@ -165,19 +260,25 @@ code {
 }
 
 .menubar-item {
-  @apply items-center h-full cursor-pointer block border-b-4 border-blue-500 tracking-wide;
+  @apply flex items-center flex-none cursor-pointer block border-b-4 tracking-wide mx-2 lg:mx-4;
+  /* Colors */
+  @apply border-gray-100;
 }
 
 .menubar-item:hover {
-  @apply bg-blue-600 border-blue-600;
+  /* Colors */
+  @apply border-gray-100;
 }
 
 .menubar-item.active {
-  @apply border-white !important;
+  /* Colors */
+  @apply border-blue-600 !important;
 }
 
 .menubar-text {
-  @apply flex items-center h-full text-white text-base lg:text-xl no-underline font-slab font-semibold px-2 lg:px-4;
+  @apply items-center text-base lg:text-xl no-underline font-slab p-1;
+  /* Colors */
+  @apply text-blue-600;
 }
 
 #output, #quiz_question_output_container {
@@ -185,15 +286,35 @@ code {
 }
 
 .dropdown-menu {
-  @apply absolute overflow-hidden block rounded-lg border border-black bg-blue-400 ltr:right-0 rtl:left-0 ltr:mr-1 rtl:ml-1 w-max;
+  @apply absolute overflow-hidden block rounded-md ltr:right-0 rtl:left-0 ltr:mr-1 rtl:ml-1 w-max p-4 shadow-lg;;
+  top: 40px;
+  @apply cursor-auto; /* Undo cursor-pointer we inherit from the menu */
 }
 
-.dropdown-level-menu {
-  @apply absolute overflow-hidden block rounded-lg border border-black bg-green-400 ltr:right-0 rtl:left-0 ltr:mr-1 rtl:ml-1 w-max;
+.dropdown-blue {
+  @apply border-blue-500 border-2 bg-gray-100;
+}
+
+.dropdown-green {
+  @apply bg-gray-100 border-2 border-green-500;
+}
+
+.dropdown-menu h2 {
+  @apply font-medium mx-4 pb-2 mb-2 text-center;
+}
+
+.dropdown-green h2 {
+  @apply text-green-600;
 }
 
 .dropdown-item {
-  @apply text-white no-underline hover:bg-blue-600 py-2 px-4 w-full inline-block;
+  @apply text-gray-800 no-underline hover:bg-blue-600 py-2 px-4 block;
+  @apply cursor-pointer w-52 font-medium rounded-md;
+  @apply grow-0;
+}
+
+.dropdown-item:hover {
+  @apply bg-blue-600 text-white;
 }
 
 .text-shadow {
@@ -459,22 +580,22 @@ p.close-dialog {
 
 /* Signup page */
 .signup-container {
-  @apply mx-auto flex px-8 flex-row items-center;
+  @apply mx-auto flex px-8 flex-row items-center justify-start;
 }
 
 .signup-label {
-  @apply inline-block w-48;
+  @apply inline-block w-1/3 md:w-48;
 }
 
 
 .signup-input {
-  @apply inline-block w-64 md:w-80 lg:w-96 px-2 py-1 rounded-lg border-gray-400;
+  @apply inline-block w-2/3 md:w-80 lg:w-96 px-2 py-1 rounded-lg border-gray-400;
 }
 
 /* Developers mode toggle */
 .toggle-circle {
   @apply ltr:left-0 rtl:right-0;
-  transition: all 0.5s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 body[dir='ltr'] input:checked ~ .toggle-circle {
@@ -489,13 +610,11 @@ body[dir='rtl'] input:checked ~ .toggle-circle {
 
 /* For the keyword toggle we have to move 200% instead of 100%, implement as edge case */
 body[dir='ltr'] #keyword_toggle_container input:checked ~ .toggle-circle {
-  transform: translateX(200%);
-  @apply bg-blue-500;
+/*  transform: translateX(200%); */
 }
 
 body[dir='rtl'] #keyword_toggle_container input:checked ~ .toggle-circle {
-  transform: translateX(-200%);
-  @apply bg-blue-500;
+/*  transform: translateX(-200%); */
 }
 
 input:checked ~ .toggle-path {

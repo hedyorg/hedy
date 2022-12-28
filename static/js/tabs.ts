@@ -92,7 +92,6 @@ function resetWindow() {
       $ ('#level-header input').show ();
       $ ('#parsons_code_container').hide();
       $ ('#debug_container').show();
-      $ ('#adventures-tab').css('max-height', '20em');
     }
 
 
