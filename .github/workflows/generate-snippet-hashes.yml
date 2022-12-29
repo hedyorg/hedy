@@ -40,7 +40,7 @@ jobs:
       uses: stefanzweifel/git-auto-commit-action@v2.3.0
       with:
         commit_message: Updating hash files
-        branch: ${{ github.ref_name }}
+        branch: main
       env:
         # This is necessary to bypass branch protection (which will disallow non-reviewed pushes otherwise)
         GITHUB_TOKEN: ${{ secrets.FELIENNE_GITHUB_ACCESS_TOKEN }}
