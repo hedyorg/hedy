@@ -1,0 +1,46 @@
+env:
+  save_snippet_hashes: True
+
+name: Periodically generate hashes
+on:
+  schedule:
+    - cron: "0 0 * * 0"
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.9
+    - name: Install Python dependencies
+      run: |
+        python3 -m pip install --upgrade pip
+        pip3 install -r requirements.txt
+    - name: Install Nodejs dependencies
+      run: |
+        npm ci
+    - name: Generate grammar files
+      run: |
+        python ./content/yaml_to_lark_utils.py
+    - name: Compiling Babel translations
+      run: |
+        pybabel compile -f -d translations
+    - name: Run all tests
+      run: |
+        build-tools/github/validate --all
+        
+    - name: Commit changed files
+      uses: stefanzweifel/git-auto-commit-action@v2.3.0
+      with:
+        commit_message: Updating hash files
+        branch: main
+      env:
+        # This is necessary to bypass branch protection (which will disallow non-reviewed pushes otherwise)
+        GITHUB_TOKEN: ${{ secrets.FELIENNE_GITHUB_ACCESS_TOKEN }}
