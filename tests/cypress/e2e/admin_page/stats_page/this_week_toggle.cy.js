@@ -4,10 +4,10 @@ import { goToAdminStatsPage } from '../../tools/navigation/nav.js';
 describe('This week toggle', () => {
   it('passes', () => {
     loginForAdmin();
-    goToAdminStatsPage()
+    goToAdminStatsPage();
 
     cy.get('#period_toggle_this_week')
       .should('be.visible')
-      .should('be.not.disabled')
+      .should('be.not.disabled');
   })
 })

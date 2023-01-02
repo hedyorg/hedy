@@ -73,6 +73,9 @@
 -   name: '{repeat} kilpkonnaga'
     explanation: 'Korda mitut rida.'
     demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
+-   name: '{pressed}'
+    demo_code: "{if} a {is} {pressed}\n    {print} 'You pressed A!'\n{else}\n    {print} 'You pressed another key!'"
+    explanation: Check whether a given key on the keyboard is `{pressed}`.
 9:
 -   name: '{if} mitme reaga'
     demo_code: "vastus = {ask} 'Mis on 20 pluss 20?'\n{if} vastus {is} 20\n    {print} 'Tubli!!'\n    {print} 'Vastus on tõepoolest' vastus\n{else}\n    {print} 'Vale'\n    {print} 'Õige vastus on 20'"
@@ -157,6 +160,9 @@
 -   name: '{in}'
     explanation: Kontrolli elemente, kasutades võtmesõna `{in}`.
     demo_code: "ilusad_värvid {is} roheline, kollane\nvärv {is} {ask} 'Mis on su lemmikvärv?'\n{if} värv {in} ilusad_värvid {print} 'ilus!' {else} {print} 'pähh'"
+-   name: '{pressed}'
+    explanation: Check whether a given key on the keyboard is `{pressed}`.
+    demo_code: "{if} a {is} {pressed} {print} 'You pressed A!' {else} {print} 'You pressed another key!'"
 14:
 -   name: Smaller
     explanation: We use the `<` to check if the first number is smaller than the second number.

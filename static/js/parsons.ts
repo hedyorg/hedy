@@ -14,9 +14,17 @@ interface ParsonsExercise {
 
 export function loadParsonsExercise(level: number, exercise: number) {
     $('#next_parson_button').hide();
+
+    // If we have a forced keyword language, sent this info to the back-end to get the correct exercise
+    let parameters = new URLSearchParams(window.location.search)
+    let url = "/parsons/get-exercise/" + level + '/' + exercise;
+    if (parameters.has('keyword_language')) {
+        url += "/" + parameters.get('keyword_language')
+    }
+
     $.ajax({
       type: 'GET',
-      url: '/parsons/get-exercise/' + level + '/' + exercise,
+      url: url,
       dataType: 'json'
     }).done(function(response: ParsonsExercise) {
         $('#parsons_container').show();
