@@ -385,8 +385,10 @@ class TestsLevel8(HedyTester):
         else
             print 'luckily no dishes because' dishwasher 'is already washing up'""")
 
-        expected = textwrap.dedent("""\
-        people = ['mom', 'dad', 'Emma', 'Sophie']
+        expected = HedyTester.dedent(
+            "people = ['mom', 'dad', 'Emma', 'Sophie']",
+            HedyTester.list_access_transpiled('random.choice(people)'),
+            """\
         dishwasher = random.choice(people)
         if convert_numerals('Latin', dishwasher) == convert_numerals('Latin', 'Sophie'):
           print(f'too bad I have to do the dishes')
