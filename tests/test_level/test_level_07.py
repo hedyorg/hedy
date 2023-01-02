@@ -122,7 +122,7 @@ class TestsLevel7(HedyTester):
         self.single_level_tester(code=code, expected=expected)
 
     @parameterized.expand(['5', '𑁫', '५', '૫', '੫', '৫', '೫', '୫', '൫', '௫',
-                          '౫', '၅', '༥', '᠕', '៥', '๕', '໕', '꧕', '٥', '۵'])
+                           '౫', '၅', '༥', '᠕', '៥', '๕', '໕', '꧕', '٥', '۵'])
     def test_repeat_with_all_numerals(self, number):
         code = textwrap.dedent(f"repeat {number} times print 'me wants a cookie!'")
 
@@ -223,7 +223,17 @@ class TestsLevel7(HedyTester):
             break
           if event.type == pygame.KEYDOWN:
             if event.unicode == 'x':
-              for i in range(int('5')):
-                print(f'do it 5 times!')
+              for __i__ in range(int('5')):
+                print(f'doe het 5 keer!')
+                time.sleep(0.1)
+              break
+          if event.type == pygame.USEREVENT:
+            if event.key == 'x':
+              for __i__ in range(int('5')):
+                print(f'doe het 5 keer!')
                 time.sleep(0.1)
               break""")
+
+        self.single_level_tester(
+            code=code,
+            expected=expected)

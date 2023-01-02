@@ -32,10 +32,10 @@ endpoint=http://localhost:$PORT
 command="env HEROKU_APP_NAME=localhost BASE_URL=$endpoint SECRET_KEY=TheSecret ADMIN_USER=admin python app.py"
 
 if ! $daemon; then
-    exec eval "$command"
+    eval "exec $command"
 fi
 
-eval "$command" > e2e-server.log 2>&1 &
+eval "$command > e2e-server.log 2>&1 &"
 echo $! > $pidfile
 
 # //////////////////////////////////////////////////////////////////////
