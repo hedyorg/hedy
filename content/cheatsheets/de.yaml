@@ -199,21 +199,21 @@
 12:
 -   name: "float direkt"
     explanation: "Dezimalzahlen."
-    demo_code: |
+    demo_code: |-
         {print} 'Berechne los!'
         {print} 'Zweieinhalb plus zweieinhalb ist...'
         {print} 2.5 + 2.5
 -   name: "float in var"
     explanation: "Text mit Anführungszeichen nach `=`"
-    demo_code: |
+    demo_code: |-
         Name = 'Hedy der Roboter'
         {print} 'Hallo ' Name
 -   name: Anführungszeichen nach einem {if} Vergleich
     explanation: Text mit Anführungszeichen nach `{if}`.
-    demo_code: "Name = {ask} 'Wer bist du?'\n{if} Name = 'Hedy'\n    {print} 'Hallo!'\n"
+    demo_code: "Name = {ask} 'Wer bist du?'\n{if} Name = 'Hedy'\n    {print} 'Hallo!'"
 -   name: Anführungszeichen in Listen
     explanation: Eine Liste mit Anführungszeichen.
-    demo_code: "Superhelden = 'Iron Man', 'Batman', 'Superman'\n{print} Superhelden {at} {random}\n"
+    demo_code: "Superhelden = 'Iron Man', 'Batman', 'Superman'\n{print} Superhelden {at} {random}"
 13:
 -   name: "{and}"
     explanation: "Beide Teile müssen korrekt sein."

@@ -1,0 +1,90 @@
+#!/usr/bin/env python
+# This script regenerates the 'static_babel_content.py' file in the root of this repository,
+# upon deployment to Heroku (before the server starts).
+#
+# The reason we do this is because Babel keeps an in-memory cache for all locales
+# we ask about (https://github.com/python-babel/babel/blob/master/babel/localedata.py#L124).
+#
+# We ask for the language and territory name of every locale on startup (and
+# then never again), and Babel holds on to ~70MB of memory that we'll never need
+# again.
+#
+# What we will do instead is read all that information at build time, write it to a file,
+# and then load that file into the actual running server process.
+
+from os import path
+import os
+import iso3166
+from babel import Locale, languages, UnknownLocaleError
+
+
+def main():
+    root_dir = path.abspath(path.join(path.dirname(__file__), '..', '..'))
+    filename = path.join(root_dir, 'static_babel_content.py')
+
+    translated_languages = [lang for lang in os.listdir(path.join(root_dir, 'translations')) if path.isdir(
+        path.join(root_dir, 'translations', lang, 'LC_MESSAGES'))]
+
+    with open(filename, 'w', encoding='utf-8') as f:
+        f.write('# coding=utf-8\n')
+        f.write('# flake8: noqa\n')
+        f.write('###################################################\n')
+        f.write('#\n')
+        f.write('# !!! THIS FILE HAS BEEN GENERATED. DO NOT EDIT !!!\n')
+        f.write('#\n')
+        f.write('# Run build-tools/heroku/generate-static-babel-content to regenerate.\n')
+        f.write('#\n')
+        f.write('###################################################\n')
+        f.write('\n')
+        f.write('COUNTRIES = %r\n' % countries())
+        f.write('LANGUAGE_NAMES = %r\n' % language_names(translated_languages))
+        f.write('TEXT_DIRECTIONS = %r\n' % text_directions(translated_languages))
+    print('Wrote', filename)
+
+
+def countries():
+    """Return a map of country codes to country names."""
+    # Define and load all countries
+    countries = {k: v.name for k, v in iso3166.countries_by_alpha2.items()}
+
+    # Iterate through all found country abbreviations
+    for country in countries.keys():
+        # Get all spoken languages in this "territory"
+        spoken_languages = languages.get_territory_language_info(country).keys()
+        found = False
+        country_name = None
+        # For each language, try to parse the country name -> if correct: adjust in dict and break
+        # If we don't find any, keep the English one
+        for language in spoken_languages:
+            if found:
+                break
+            try:
+                value = language + "_" + country
+                lang = Locale.parse(value)
+                country_name = lang.get_territory_name(value)
+                found = True
+            except BaseException:
+                pass
+        if country_name:
+            countries[country] = country_name
+    return countries
+
+
+def language_names(langs):
+    return {lang: loc.display_name.title() for lang in langs if (loc := locale(lang))}
+
+
+def text_directions(langs):
+    return {lang: loc.text_direction for lang in langs if (loc := locale(lang))}
+
+
+def locale(lang):
+    try:
+        return Locale.parse(lang)
+    except UnknownLocaleError:
+        # This can happen, thanks Babel
+        pass
+
+
+if __name__ == '__main__':
+    main()
