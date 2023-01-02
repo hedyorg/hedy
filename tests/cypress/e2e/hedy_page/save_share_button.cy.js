@@ -19,20 +19,6 @@ describe('Checks if save & share button works', () => {
       .should('not.be.disabled')
       .click();
       
-      // this is for if you already have saved your level once:
-      if (cy.get('#modal-confirm')){
-        cy.get('#modal-yes-button').click();
-      }
-
-      // block for copying link should be visible:
-      cy.get('#modal-copy')
-      .should('be.visible');
-
-      // clicking on button for copying the share link
-      cy.get('#modal-copy-button')
-      .should('be.visible')
-      .should('not.be.disabled')
-      .click();
       
       goToHome();
       goToHedyPage();

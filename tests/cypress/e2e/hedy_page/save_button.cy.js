@@ -18,11 +18,7 @@ describe('Checks if save button works', () => {
       .should('be.visible')
       .should('not.be.disabled')
       .click();
-      
-      // this is for if you already have saved your level once:
-      if (cy.get('#modal-confirm')){
-        cy.get('#modal-yes-button').click();
-      }
+
       
       goToHome();
       goToHedyPage();
