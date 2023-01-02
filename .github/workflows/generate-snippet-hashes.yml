@@ -5,7 +5,8 @@ name: Periodically generate hashes
 on:
   schedule:
     - cron: "0 0 * * 0"
-
+  workflow_dispatch: {} # Allow running the workflow on-demand
+  
 jobs:
   build:
 
