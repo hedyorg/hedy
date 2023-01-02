@@ -89,7 +89,7 @@
                 </div>
            </div>
        {% endif %}
-       <h1 class="section-header" onclick="$('#profile-change-body').toggle();">{{_('settings')}}</h1>
+       <h1 class="section-header" onclick="$('#profile-change-body').toggle();" id="personal_settings">{{_('settings')}}</h1>
        <div class="profile-section-body" id="profile-change-body">
         <form id="profile">
             <h2 class="profile-section-body-header">{{_('settings')}}</h2>
@@ -153,7 +153,7 @@
                 <button type="submit" class="green-btn mt-4">{{_('update_profile')}}</button>
             </div>
         </form>
-        <button class="red-btn" onclick="hedyApp.destroy('{{_('are_you_sure')}}')">{{_('destroy_profile')}}</button>
+        <button class="red-btn" onclick="hedyApp.destroy('{{_('are_you_sure')}}')" id="delete_profile_button">{{_('destroy_profile')}}</button>
        </div>
       <h1 id="password_toggle" class="section-header" onclick="$ ('#change-password-body').toggle()">{{_('change_password')}}</h1>
         <div class="profile-section-body" id="change-password-body">

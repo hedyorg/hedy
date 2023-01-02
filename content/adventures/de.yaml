@@ -66,8 +66,8 @@ adventures:
                 example_code_3: "``` \nschöne_Farben {is} grün, gelb \nFarbe {is} {ask} 'Was ist deine Lieblingsfarbe?' \n{if} Farbe {in} schöne_Farben {print} 'schön!' \n{else} {print} 'na ja' \n```\n"
                 story_text_2: "Machmal wir Code mit einem`{if}`ziemlich lang und passt nicht gut in eine Zeile. <br> Du kannst den Code auch auf zwei Teilen aufteilen, beginnend mit der zweiten Zeile beim `{else}` Befehl, und zwar so:\n"
                 example_code_2: "```\nName {is} {ask} 'Wie heißt du?'\n{if} Name {is} Hedy {print} 'Schön'\n{else} {print} 'Buh!'\n```\n"
-                story_text_4: "Etwas anderes das mit ```if``` is ```pressed``` funktioniert! Mit `pressed` kannst du jeden beliebigen Buchstaben\ndes Alphabets und jede Zifferntaste auf deiner Tastatur an einen Befehl binden. Wenn du es bindest und die Taste drückst,\nwird etwas passieren. Probiere es aus!\n"
-                example_code_4: "```\nfalls x gedrückt ist drucke \"es klappt!\"\n```\n"
+                story_text_4: "Etwas anderes das mit `{if}` funktioniert ist `{pressed}`! Mit `{pressed}` kannst du jeden beliebigen Buchstaben\ndes Alphabets und jede Zifferntaste auf deiner Tastatur an einen Befehl binden. Wenn du es bindest und die Taste drückst,\nwird etwas passieren. Probiere es aus!\n"
+                example_code_4: "```\n{if} x {is} {pressed} {print} 'es hat geklappt!'\n```\n"
             6:
                 start_code: "{print} '5 mal 5 ist ' 5 * 5"
                 story_text: |
@@ -597,9 +597,9 @@ adventures:
                     ```
                 start_code: "# setze hier deinen Code hin"
             4:
-                story_text: "## Parrot\nIn this level we have to use quotation marks with the commands `{ask}` and `{print}`.\nCan you complete the code by adding quotation marks?\n"
-                example_code: "```\nwords {is} squawk, Hedy\n{print} _ Train your parrot! _\nnew_word {is} {ask} _ Which word do you want to teach them? _\n{add} new_word {to_list} words\n{print} _ \U0001F9D2 Say _ new_word _, Hedy!_\n{print} _ \U0001F99C _ words {at} {random}\n```\n"
-                start_code: '# Write your code here'
+                story_text: "## Papagei\nIn diesem Level müssen wir Anführungszeichen bei den Befehlen `{ask}` und `{print}` benutzen.\nKannst du den Code vervollständigen, indem du Anführungszeichen hinzufügst?\n"
+                example_code: "```\nwörter {is} krächz, Hedy\n{print} _ Trainiere deinen Papagei! _\nneues_wort {is} {ask} _ Welches Wort möchtest du ihm beibringen? _\n{add} neues_wort {to_list} wörter\n{print} _ \U0001F9D2 Sage _ neues_wort _, Hedy!_\n{print} _ \U0001F99C _ wörter {at} {random}\n```\n"
+                start_code: '# Schreibe deinen Code hier'
     songs:
         name: "Singe ein Lied!"
         description: "Gib einen Songtext aus"
@@ -766,7 +766,7 @@ adventures:
 
                 start_code: "{print} 'Lass uns singen!'"
                 story_text_2: "## 5 Kleine Affen springen auf dem Bett\nDieses Kinderlied zählt runter, von 5 kleinen Affen bis zu 1 Affe.\nWenn du die Zeilen 2 bis 7 kopierst und unter dem Code einfügst, kannst du das ganze Lied singen!\n"
-                example_code_2: "```\nnummer = 6\nnummer = nummer - 1\nprint nummer ' kleine Affen springen auf dem Bett'\nprint 'Einer fiel runter und stieß sich den Kopf'\nprint 'Mama rief den Arzt und der Arzt sagte'\nprint 'KEINE KLEINEN AFFEN SPRINGEN MEHR AUF DEM BETT!'\nsleep\n```\n"
+                example_code_2: "```\nnummer = 6\nnummer = nummer - 1\n{print} nummer ' kleine Affen springen auf dem Bett'\n{print} 'Einer fiel runter und stieß sich den Kopf'\n{print} 'Mama rief den Arzt und der Arzt sagte'\n{print} 'KEINE KLEINEN AFFEN SPRINGEN MEHR AUF DEM BETT!'\n{sleep}\n```\n"
             16:
                 story_text: |
                     ## Lieder
@@ -1173,7 +1173,7 @@ adventures:
             5:
                 story_text: |
                     ## Würfel
-                    Auch den Würfel kannst Du in diesem Level nochmal programmieren, diesmal mit dem `if`.
+                    Auch den Würfel kannst Du in diesem Level nochmal programmieren, diesmal mit dem `{if}`.
                     Vervollständige den Beispiel-Code, sodass er ausgibt "Du kannst aufhören zu würfeln", sobald Du einen Regenwurm gewürfelt hast.
 
                     Vielleicht möchtest Du auch einen Würfel aus einem ganz anderen Spiel nachbauen. Das ist auch super! Dann überlege Dir selbst eine Reaktion. Zum Beispiel 'ja' bei einer 6 und 'schade' für alles andere.
@@ -2680,14 +2680,14 @@ adventures:
                 start_code: '# place your code here'
             5:
                 start_code: '# platziere deinen Code hier'
-                story_text: "## Drück es!\nIn der Einleitung wurde dir das neue Schlüsselwort ```pressed``` mitgeteilt! Benutzt du ```pressed```\nkann es deine Code viel interaktiver machen und du hast live die Kontrolle was ausgeführt wird!\nIn den kommenden Leveln lernst du wie```pressed``` dies ermöglicht und welche Anwendungsfälle ```pressed```\nhat.\nNeben dem Ausgeben von Text gibt es eine Reihe von anderen Anwendungsfällen von ```pressed```\nZum Beispiel kannst du auch Schildkrötenbefehle an Tasten binden! Probiere es!\n"
-                example_code: "```\nfalls x ist {pressed} vorwärts 50\n```\n"
-                story_text_2: "## falls sonst gedrückt\nDu kannst auch einen else Befahl an```pressed``` zuweisen. Der else Befehl wird ausgeführt\nwenn eine andere als die zugewiesene Taste gedrückt wird.\n"
-                example_code_2: "```\nfalls y ist {pressed} {print} 'Toll! Du hast die y Taste gedrückt!'\nsonst {print} 'Oh nein! Du hast nicht die y Taste gedrückt.'\n```\n"
+                story_text: "## Drück es!\nIn der Einleitung wurde dir das neue Schlüsselwort `{pressed}` mitgeteilt! Benutzt du `{pressed}`\nkann es deine Code viel interaktiver machen und du hast live die Kontrolle was ausgeführt wird!\nIn den kommenden Leveln lernst du wie`{pressed}` dies ermöglicht und welche Anwendungsfälle `{pressed}`\nhat.\nNeben dem Ausgeben von Text gibt es eine Reihe von anderen Anwendungsfällen von `{pressed}`\nZum Beispiel kannst du auch Schildkrötenbefehle an Tasten binden! Probiere es!\n"
+                example_code: "```\n{if} x {is} {pressed} {forward} 50\n```\n"
+                story_text_2: "## falls sonst gedrückt\nDu kannst auch einen `{else}` Befehl an `{pressed}` zuweisen. Der `{else}` Befehl wird ausgeführt, wenn eine andere als die zugewiesene Taste gedrückt wird.\n"
+                example_code_2: "```\n{if} y {is} {pressed} {print} 'Toll! Du hast die y Taste gedrückt!'\n{else} {print} 'Oh nein! Du hast nicht die y Taste gedrückt.'\n```\n"
             6:
-                story_text: "Did you know you can also make a calculator using ```pressed```?\nGive the calculator two numbers and press the m key to multiply.\nNow you don't have to bring your own!\nTry other keys and see what happens! Do you get a different result?\n"
-                example_code: "```\nfirst = {ask} 'what is your first number?'\nsecond = {ask} 'what is your second number?'\nprint 'press a to add, s to substract, d to divide, m to multiply'\n{if} a {is} {pressed} result = first + second\n{if} s {is} {pressed} result = first - second\n{if} d {is} {pressed} result = first / second\n{if} m {is} {pressed} result = first * second\n{print}'The answer is ' result\n```\n"
-                start_code: '# place your code here'
+                story_text: "Wusstest du, dass du auch einen Taschenrechner mit `{pressed}` machen kannst?\nGib dem Taschenrechner zwei Zahlen und drücke die m Taste, um zu multiplizieren.\nNun brauchst du deinen eigenen nicht mitbringen!\nProbiere andere Tasten und schau was passiert! Bekommst du ein anderes Ergebnis?\n"
+                example_code: "```\nerstes = {ask} 'Was ist deine erste Zahl?'\nzweites = {ask} 'Was ist deine zweite Zahl?'\n{print} 'press a to add, s to substract, d to divide, m to multiply'\n{if} a {is} {pressed} ergebnis = erstes + zweites\n{if} s {is} {pressed} ergebnis = erstes - zweites\n{if} d {is} {pressed} ergebnis = erstes / zweites\n{if} m {is} {pressed} ergebnis = erstes * zweites\n{print}'Die Antwort ist ' ergebnis\n```\n"
+                start_code: '# Platziere deinen Code hier'
             7:
                 example_code: "```\n{repeat} 3 {times} {if} x {is} {pressed} forward 15\n```\n"
                 start_code: '# place your code here'
@@ -2696,11 +2696,11 @@ adventures:
         description: Versuche eine Taste an einen Befehl zu binden!
         default_save_name: Drückes
     years:
-        name: New Year's
-        description: Countdown to the new year!
-        default_save_name: New Year's Countdown
+        name: Neujahr
+        description: Runterzählen zum neuen Jahr!
+        default_save_name: Neujahrs-Countdown
         levels:
             11:
-                story_text: "## Songs\nIn this level you can use the `{for} i {in} {range}` command to countdown to the New Year.\n\n## Challenge\nFill in the blanks and make the code work!\n"
-                example_code: "## Countdown\n```\nfor _ in _ 10 to 1\n    {print} i\n{print} 'Happy New Year!'\n```\n"
-                start_code: '# place your code here'
+                story_text: "## Songs\nIn diesem Level kannst du den Befehl `{for} i {in} {range}` benutzen, um zum neuen Jahr runterzuzählen.\n\n## Herausforderung\nFülle die Lücken und bring den Code zum Laufen!\n"
+                example_code: "## Countdown\n```\n{for} _ {in} _ 10 {to} 1\n    {print} i\n{print} 'Frohes neues Jahr!'\n```\n"
+                start_code: '# Platziere deinen Code hier'

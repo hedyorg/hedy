@@ -11,56 +11,103 @@ adventures:
                     Digita il tuo codice nel campo di programmazione, oppure premi il pulsante verde nel blocco di codice di esempio, e il codice verrà digitato per te!
                     Prova tu stesso il codice con il pulsante verde "Esegui codice" sotto il campo di programmazione.
 
-                    È possibile stampare il testo sullo schermo utilizzando il comando `{print}`.     
+                    Puoi stampare il testo sullo schermo usando il comando `{print}`.
+
+                example_code: |
+                    ```
+                    {print} Hello!
+                    {print} Benvenuto in Hedy!
+                    ```
+
+                story_text_2: |
+                    Puoi anche chiedere input con `{ask}` e ripetere la risposta con il comando `{echo}`. 
+
+                story_text_3: |
+                    Iniziamo! Non sai cosa fare? Le prossime tab contengono idee per nuovi programmi.
+                example_code_2: |
+                    ```
+                    {ask} Come ti chiami?
+                    {echo} Ciao
+                    ```
+
                 start_code: "{print} ciao mondo!"
-                example_code: "```\n{print} Hello!\n{print} Welcome to Hedy!\n```\n"
-                example_code_2: "```\n{ask} What is your name?\n{echo} hello\n```\n"
-                story_text_2: "You can also ask for input and repeat it back with an `{echo}` command.\nTry the code to your left again.\n\nDon't know what to create? In the next tabs you will find ideas for programs to build.\n"
-                story_text_3: "Iniziamo! Non sai cosa fare? Le prossime tab contengono idee per nuovi programmi.\n"
             2:
                 story_text: |
-                    Nel livello 2 impariamo qualcosa di nuovo. Puoi nominare una parola con `is`.
+                    ## Variabili
+                    Nel livello 2 impariamo due nuovi comandi: `{is}` e `{sleep}`.
+                    Puoi dare un nome ad una parola con `{is}`. Si dice variabile. In questo esempio creiamo una variabile chiamata nome e una variabile chiamata età. Puoi usare la parola nome ovunque nel tuo codice e verrà sostituita da Hedy, in questo modo:
 
-                    Se metti il codice `nome is Hedy` all'inizio del tuo programma, puoi usare nome ovunque. Quello sarà poi sostituito da Hedy.
+                    In questo modo non hai più più bisogno del comando `{echo}`!
 
-                    La `ask` è cambiata nel livello 2, salva anche la risposta con un nome.
-
-                    `print` funziona ancora come nel livello 1 e non è più necessaria `echo`.
-
+                example_code: |
+                    ```
+                    nome {is} Hedy
+                    età {is} 15
+                    {print} nome ha età anni
+                    ```
+                story_text_2: |
+                    `{print}` funziona sempre nello stesso modo, ma il comando `{ask}` è cambiato. Devi usare anche una variabile nel comando `{ask}`. In questo modo:
+                example_code_2: |
+                    ```
+                    risposta {is} {ask} Come ti chiami?
+                    {print} Ciao risposta
+                    ```
+                story_text_3: |
+                    Un nuovo comando in questo livello è `{sleep}`, serve a mettere in pausa il tuo programma per un secondo. Se inserisci un numero dopo il comando {sleep}, il programma si mette in pausa per quel numero di secondi.
+                example_code_3: |
+                    ```
+                    {print} Il mio colore preferito è il...
+                    {sleep} 2
+                    {print} verde!
+                    ```
                 start_code: "{print} ciao mondo!"
-                example_code: "```\nname {is} Hedy\nage {is} 15\n{print} name is age years old\n```\n"
-                story_text_2: "`{print}` funziona nello stesso modo, ma il comando `{ask}` è cambiato. Devi usare anche una variabile nel comando `{ask}`. In questo modo:\n"
-                example_code_2: "```\nrisposta {is} {ask} Come ti chiami?\n{print} Ciao risposta\n```\n"
-                story_text_3: "Un nuovo comando in questo livello è `{sleep}`, serve a mettere in pausa il tuo programma per un secondo. Se inserisci un numero dopo il comando {sleep}, il programma si mette in pausa per quel numero di secondi.\n"
-                example_code_3: "```\n{print} Il mio colore preferito è il...\n{sleep} 2\n{print} verde!\n```\n"
+
             3:
                 story_text: |
-                    Nel livello 3 puoi anche fare una lista. Puoi quindi scegliere qualsiasi cosa dall'elenco. Lo fai con `at random` (dici: et ren-dom).
+                    ## Facciamo una lista!
+                    Nel livello 3 puoi fare una lista. Puoi lasciare che il computer scelga una cosa a caso dalla lista. Lo fai con `{at} {random}` (dici: et ren-dom).
 
-                    Troverai tutti i codici di livello 3 nella barra di sinistra. Ci sono anche schede con compiti.
-                start_code: "{print} ciao mondo!"
-                story_text_2: Puoi anche aggiungere elementi alla lista con `{add}` e rimuoverli con `{remove}`.
                 example_code: |
                     ```
                     animali {is} cane, gatto, canguro
                     {print} animali {at} {random}
-                example_code_2: "```\nanimals {is} dog, cat, kangaroo\n{add} penguin {to_list} animals\n{remove} cat {from} animals\n{print} animals {at} {random}\n```\n"
+                    ```
+
+                story_text_2: Puoi anche aggiungere elementi alla lista con `{add}` e rimuoverli con `{remove}`.
+
+                example_code_2: |
+                    ```
+                    animali {is} cane, gatto, canguro
+                    {add} pinguino {to_list} animali
+                    {remove} gatto {from} animali
+                    {print} animali {at} {random}
+                    ```
+
+                start_code: "{print} ciao mondo!"
             4:
                 start_code: "{print} 'Ciao mondo'"
                 story_text: |
-                    `print` e `ask` cambiano al livello 4.
+                    ## 'Virgolette'
+                    `{print}` e `{ask}` cambiano al livello 4.
+
 
                     È necessario inserire il testo che si desidera stampare tra virgolette.
 
-                    Questo è utile, perché ora puoi stampare tutte le parole che desideri. Anche le parole che hai usato per memorizzare qualcosa con `is`.
+                    Questo è utile, perché ora puoi stampare tutte le parole che desideri. Anche le parole che hai usato per memorizzare qualcosa con `{is}`.
 
                     La maggior parte dei linguaggi di programmazione utilizza anche le virgolette durante la stampa, quindi ci stiamo avvicinando anche alla programmazione reale!
 
-                    ## Le assegnazioni stanno diventando sempre più difficili
-                    Troverai di nuovo i comandi sulla sinistra e le assegnazioni nelle seguenti schede. Le assegnazioni stanno diventando sempre più difficili nelle schede successive.
-                    Quindi è meglio iniziare a sinistra con la storia e lavorare a destra per essere sempre più sfidati.
-                example_code: "```\nprint 'You need to use quotation marks from now on!'\nanswer is ask 'What do we need to use from now on?'\nprint 'We need to use ' answer\n```\n"
-                story_text_2: "## Le avventure diventano sempre più difficili\nLe avventure diventano sempre più difficili andando avanti nelle tab.\nÈ meglio iniziare da sinistra e andare verso destra per aumentare la difficoltà gradualmente.\n"
+
+                example_code: |
+                    ```
+                    {print} 'D'ora in poi dovrai usare le virgolette'
+                    risposta {is} {ask} 'Cosa dobbiamo fare d'ora in poi?'
+                    {print} 'Dobbiamo usare ' risposta
+
+                story_text_2: |
+                    ## Le avventure diventano sempre più difficili
+                    Le avventure diventano sempre più difficili andando avanti nelle tab.
+                    È meglio iniziare da sinistra e andare verso destra per aumentare la difficoltà gradualmente.
             5:
                 start_code: |-
                     nome  {is} {ask} 'Come ti chiami?'

@@ -46,7 +46,7 @@
             {% if is_admin and class_info.teacher != username %}
                 <button class="green-btn" id="customize-class-button" onclick="window.location.href = '/for-teachers/customize-class/{{class_info.id}}'">View customizations</button>
             {% else %}
-                <button class="green-btn" onclick=$('#add_students_options').toggle();$(this).toggleClass('green-btn');$(this).toggleClass('blue-btn');>{{_('add_students')}}</button>
+                <button class="green-btn" id="add-student" onclick=$('#add_students_options').toggle();$(this).toggleClass('green-btn');$(this).toggleClass('blue-btn');>{{_('add_students')}}</button>
                 <button class="green-btn" id="customize-class-button" onclick="window.location.href = '/for-teachers/customize-class/{{class_info.id}}'">{{_('customize_class')}}</button>
             {% endif %}
             <button class="green-btn" id="stats_button" onclick="window.location.href = '/stats/class/{{class_info.id}}'">{{_('class_stats')}}</button>
@@ -61,7 +61,7 @@
           <div class="flex flex-row gap-2">
             <button class="green-btn" onclick='hedyApp.copy_join_link("{{class_info.link}}", {{_('copy_link_success')|tojson}})'>{{_('copy_join_link')}}</button>
             <button class="green-btn" onclick='hedyApp.invite_student("{{class_info.id}}", {{_('invite_prompt')|tojson}})'>{{_('invite_by_username')}}</button>
-            <button class="green-btn" onclick="window.open('/for-teachers/create-accounts/{{ class_info.id }}', '_self')">{{_('create_accounts')}}</button>
+            <button class="green-btn" id="create-accounts" onclick="window.open('/for-teachers/create-accounts/{{ class_info.id }}', '_self')">{{_('create_accounts')}}</button>
           </div>
       </div>
       {% if invites %}
