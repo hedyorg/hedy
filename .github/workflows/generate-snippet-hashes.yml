@@ -4,7 +4,7 @@ env:
 name: Periodically generate hashes
 on:
   schedule:
-    - cron: "0 0 * * 0"
+    - cron: "0 0 * * 2"
 
 jobs:
   build:
@@ -13,8 +13,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+      name: Checkout branch (with token)
+      if: github.event_name == 'push'
       with:
-        fetch-depth: 0
+        fetch-depth: 0    
+        
+        # We need to pass the token here -- the commit action below will not overwrite the token to push.
+        token: ${{ secrets.FELIENNE_GITHUB_ACCESS_TOKEN }}
     - name: Set up Python 3.9
       uses: actions/setup-python@v1
       with:
