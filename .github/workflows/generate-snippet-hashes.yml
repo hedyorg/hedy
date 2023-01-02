@@ -4,8 +4,8 @@ env:
 name: Periodically generate hashes
 on:
   schedule:
-    - cron: "0 0 * * 2"
-
+    - cron: "0 0 * * 0"
+  workflow_dispatch: {} # Allow running the workflow on-demand
 jobs:
   build:
 
@@ -14,7 +14,6 @@ jobs:
     steps:
     - uses: actions/checkout@v3
       name: Checkout branch (with token)
-      if: github.event_name == 'push'
       with:
         fetch-depth: 0    
         
