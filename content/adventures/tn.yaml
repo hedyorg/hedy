@@ -8,12 +8,12 @@ adventures:
                 story_text_3: "Let's get started! Don't know what to create? In the next tabs you will find ideas for programs to build.\n"
                 example_code_2: "```\n{ask} Leina la gago ke mang?\n{echo} Dumela\n```\n"
                 start_code: '{print} dumela lefatshe!'
-                story_text: "## Re a go amogela mo Hedy!\nMo legatong la ntha o ka dirisa mafoko a `{kgatiso}`, `{ask}` le `{echo}`.\nKwala  code ya gago mo tsejwaneng ya  programming. Kana tobetsa fa botaleng mo sekaing sa karolo ya code, ka jalo code ya gago etlaabo e kwalega ka boyone!\nLekeletsa code kabowena kago tobetsa botala, fa go kwadilweng 'Run code' kotlase ga tsebe ya   programming.\n\nO ka gatisa mokwalo mo sekerineng o dirisa  molao wa  `{kgatiso}`.\n"
+                story_text: "## Re a go amogela mo Hedy!\nMo legatong la ntha o ka dirisa mafoko a `{print}`, `{ask}` le `{echo}`.\nKwala  code ya gago mo tsejwaneng ya  programming. Kana tobetsa fa botaleng mo sekaing sa karolo ya code, ka jalo code ya gago etlaabo e kwalega ka boyone!\nLekeletsa code kabowena kago tobetsa botala, fa go kwadilweng 'Run code' kotlase ga tsebe ya   programming.\n\nO ka gatisa mokwalo mo sekerineng o dirisa  molao wa  `{print}`.\n"
             2:
-                story_text: "## Variables\nmo legatong la bobedi re ithuta ditaelo tse pedi tse disha: `{is}` le `{robala}`.\noka bitsa lefoko leina ka `{is}`. Se se bidiwa gotwe variable. Mo sekaing se re dirile variable ee bidiwang leina le variable ee bidiwang dingwaga. O ka dirisa lefoko la leina gongwe le gongwe mo codeng ya gago mme etlaa direlwa leemedi ke Hedy, jaana:\n\nKa jalo gao sa thole o thoka taelo ya `{echo}` !\n"
+                story_text: "## Variables\nmo legatong la bobedi re ithuta ditaelo tse pedi tse disha: `{is}`.\noka bitsa lefoko leina ka `{is}`. Se se bidiwa gotwe variable. Mo sekaing se re dirile variable ee bidiwang leina le variable ee bidiwang dingwaga. O ka dirisa lefoko la leina gongwe le gongwe mo codeng ya gago mme etlaa direlwa leemedi ke Hedy, jaana:\n\nKa jalo gao sa thole o thoka taelo ya `{echo}` !\n"
                 example_code: "```\nLeina {is} Hedy\nDingwaga {is} 15\n{print} leina ke dingwaga tse\n```\n"
                 example_code_2: "```\nKarabo {is} {ask} Leina la gago ke mang?\n{print} karabo ya madume\n```\n"
-                story_text_3: "Taelo e nngwe e ntsha mo legatong le ke `{boroko}`, se se emisa program ya gago ka motsotswana. Fa o kwala nomoro fa morago ga taelo ya {boroko}, program etaabo e ema selekanyo sa metsotswana ee beilweng.\n"
+                story_text_3: "Taelo e nngwe e ntsha mo legatong le ke `{sleep}`, se se emisa program ya gago ka motsotswana. Fa o kwala nomoro fa morago ga taelo ya {sleep}, program etaabo e ema selekanyo sa metsotswana ee beilweng.\n"
                 example_code_3: "```\n{print} Mebala e ke e ratang ke...\n{sleep} bobedi\n{print} botala!\n```\n"
                 start_code: '{print} Dumela lefatshe!'
                 story_text_2: "`{print}` still works the same, but the `{ask}` command has changed. You need to use a variable in the `{ask}` command as well. It looks like this:\n"
@@ -49,7 +49,7 @@ adventures:
                 story_text: "## dira lenaneo!\nMo legatong la boraro okadira lenaneo. O ka dira gore computara e kgethe sengwe random mo lenaneong. O dira jalo ka `{at} {random}`.\n"
                 example_code: "```\ndiphologolo {is} Ntsa, katse, kangaroo\n{print} diphologolo {at} {random}\n```\n"
                 story_text_2: "ka tsenya dilo dingwe mo lenaneong ka `{tenya}` lego ntsha dilo dingwe ka `{remove}`."
-                example_code_2: "```\ndiphologolo {is} ntsa, katse, kangaroo\n{tsenya} penguin {to_list} diphologolo\n{remove} katse {from} diphologolo\n{print} diphologolo {at} {random}\n```\n"
+                example_code_2: "```\ndiphologolo {is} ntsa, katse, kangaroo\n{add} penguin {to_list} diphologolo\n{remove} katse {from} diphologolo\n{print} diphologolo {at} {random}\n```\n"
                 start_code: '{print} dumela lefatshe!'
             4:
                 start_code: "{print} 'dumela lefatshe'"
@@ -62,7 +62,7 @@ adventures:
                 story_text: "## Legato 7! Legato7!\nLegato 7 oketsa `{repeat}` command.  `{repeat}` eka dirisiwa go dira mola ole mongwe wa code gantsi.\n"
             8:
                 start_code: "{repeat} 5 {times}\n    {print} 'dumelang betsho'\n    {print} 'Se se taa gatisiwa ga tlhano'"
-                story_text: "## Indentation\n`{botsa}` le `{print}` disantse di bereka jaaka o di itse. mme `{if}`, `{else}` le `{repeat}` di fetogile!\nJaanong oka tsamaisa digopa tsa code mmogo, mme o tshwanelwa ke go *indent* code.\nSe se raya gore o tsenya diphatha tse nne ko tshimologong ya mola. Gape o tshwanetse go indent fa o bata go dira block ja mola ole mongwe.\n"
+                story_text: "## Indentation\n`{ask}` le `{print}` disantse di bereka jaaka o di itse. mme `{if}`, `{else}` le `{repeat}` di fetogile!\nJaanong oka tsamaisa digopa tsa code mmogo, mme o tshwanelwa ke go *indent* code.\nSe se raya gore o tsenya diphatha tse nne ko tshimologong ya mola. Gape o tshwanetse go indent fa o bata go dira block ja mola ole mongwe.\n"
                 example_code: "Se ke kafa Command ya  `{repeat}` e berekang ka teng gompieno:\n```\n{repeat} 5 {times}\n    {print} 'Dumelang lotlhe'\n    {print} 'Tse tsotlhe di boeleditswe ga tlhano'\n```\nSe ke kafa  `{if}` le  `{else}` command di berekang ka teng gompieno:\n\n```\nleina {is} {ask} 'leina la gago ke mang?'\n{if} leina {is} Hedy\n    {print} 'Amogelesega Hedy'\n    {print} 'O ka tshameka mo sebalamakgolong sa gago!'\n{else}\n    {print} 'Serukuthi!'\n    {print} 'Gao letelelwe go dirisa sebalamakgolo se!'\n```\n"
             10:
                 start_code: "diphologolo {is} ntsa, katse, thapi\n{for} phologolo {in} diphologolo\n  {print} 'ke rata ' phologolo"
@@ -88,7 +88,7 @@ adventures:
                 story_text_6: "**Dipalo ka mafoko** \nMo legatong le go letlelesega go dirisa lotshwao la + ka mafoko. Sekai:"
             13:
                 start_code: "leina = {ask} 'leina la gago ke mang?'\ndingwaga = {ask} 'o dingwaga tse kahe?'\n{if} leina {is} 'Hedy' {and} dingwaga {is} 2\n    {print} 'ke wena Hedy wa nnete!'"
-                story_text: "## And... kana..?\nMo legatong le, retile go ithuta `{and}` le `{kana}`! Fa o batla o ka thodumela diele tse pedi, ga o tlhoke go dirisa bo {if} ba babedi, mme o ka dirisa `{and}` le `{kana}`. Fa o ka dirisa `{and}`, diele tsotlhe ka bobedi, molema le moja wa `{and}` di tlhoka go nna boammaaruri. gape re ka dirisa  `{kana}`. Ka jalo, seele sele sengwe fela se tlhoka go baakanngwa."
+                story_text: "## And... kana..?\nMo legatong le, retile go ithuta `{and}` le `{or}`! Fa o batla o ka thodumela diele tse pedi, ga o tlhoke go dirisa bo {if} ba babedi, mme o ka dirisa `{and}` le `{kana}`. Fa o ka dirisa `{and}`, diele tsotlhe ka bobedi, molema le moja wa `{and}` di tlhoka go nna boammaaruri. gape re ka dirisa  `{kana}`. Ka jalo, seele sele sengwe fela se tlhoka go baakanngwa."
                 example_code: "```\nleina = {ask} 'leina la gago ke mang?'\ndingwaga = {ask} 'O dingwaga di kahe?'\n{if} leina {is} 'Hedy' {and} dingwaga {is} 2\n    {print} 'ke wena Hedy sa boammaaruri!'\n```\n"
             15:
                 start_code: "karabo = 0\n{while} karabo != 25\n    karabo = {ask} '5 a boeletswa ga 5 ke bokahe?'\n{print} 'karabo ee siameng e setse e filwe'"

@@ -1,21 +1,21 @@
 levels:
     1:
         1:
-            question_text: "Como se llama este lenguaje de programación?"
+            question_text: "¿Cómo se llama este lenguaje de programación?"
             mp_choice_options:
             -   option: "Hedy"
-                feedback: "Buen Trabajo!"
+                feedback: "¡Buen trabajo!"
             -   option: "Heddy"
                 feedback: "este no!"
             -   option: "Haydie"
                 feedback: "Este no!"
             -   option: "Heidi"
-                feedback: "Este no!"
+                feedback: "¡Este no!"
             correct_answer: "A"
             hint: "Es nombrado en honor de Hedy Lamarr."
             question_score: '10'
         2:
-            question_text: "Cual comando hace que aparezca el texto?"
+            question_text: "¿Qué debe introducirse en los huecos para que aparezca el texto \"Hello!\"?"
             mp_choice_options:
             -   option: |
                     ```
@@ -42,23 +42,23 @@ levels:
             question_score: '10'
             code: "```\n___ Hello!\n```\n"
         3:
-            question_text: "Como le preguntas cuál es el color favorito de alguien ?"
+            question_text: "¿Cómo preguntas cuál el color favorito de alguien?"
             mp_choice_options:
             -   option: |
                     ```
-                    {print} Cuál es tu color favorito?
+                    {print} ¿Cuál es tu color favorito?
                     ```
                 feedback: "`{print}` imprime texto, pero no pregunta preguntas."
             -   option: |
                     ```
-                    {ask} {print} Cuál es tu color favorito?
+                    {ask} {print} ¿Cuál es tu color favorito?
                     ```
                 feedback: "Solo necesitas un comando, no dos."
             -   option: |
                     ```
                     {ask} ¿Cuál es tu color favorito?
                     ```
-                feedback: "Bueno !"
+                feedback: "¡Genial!"
             -   option: |
                     ```
                     {echo} ¿Cuál es tu color favorito?
@@ -68,27 +68,27 @@ levels:
             hint: "Puedes preguntar algo con el comando `{ask}`"
             question_score: '10'
         4:
-            question_text: "Qué pasa de malo con este código ?"
+            question_text: "¿Qué está mal en este código?"
             code: |-
-                Hola soy Hedy !
-                {ask} Quien eres ?
+                ¡Hola, soy Hedy!
+                {ask} ¿Quién eres?
                 {echo} Hola...
             mp_choice_options:
             -   option: "`{print}` faltante en la línea 1."
-                feedback: "Correcto !"
+                feedback: "¡Correcto!"
             -   option: "La línea 1 está mal escrita."
                 feedback: "Yo soy esta escribido incorrecto a propósito; Hedy todavia no entiende las apóstrofes."
             -   option: "`{echo}` no es un comando."
                 feedback: "`{echo}` es un comando, hay otro error."
-            -   option: "Nada! Este código es perfecto!"
-                feedback: "Incorrecto, mira con más cuidado !"
+            -   option: "¡Nada! ¡Este código está perfecto!"
+                feedback: "Incorrecto, ¡presta atención!"
             correct_answer: "A"
-            hint: "La línea 1 no se mira correcta"
+            hint: "La línea 1 no parece correcta"
             question_score: '10'
         5:
-            question_text: "Cuál comando hace falta en la línea 2?"
+            question_text: "¿Qué comando falta en la línea 2?"
             code: |-
-                {ask} Cuál es tu mascota favorita ?
+                {ask} ¿Cuál es tu mascota favorita?
                 _?_ Entonces tu mascota favorita es..."
             mp_choice_options:
             -   option: |

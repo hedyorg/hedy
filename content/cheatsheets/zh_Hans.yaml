@@ -83,8 +83,8 @@
     explanation: 用 `{in}`检查元素。
     demo_code: "漂亮_颜色 {is} 绿色，黄色\n颜色 {is} {ask} '什么 {is} 你最喜欢的颜色？'\n{if} 颜色 {in} 漂亮_颜色 {print} '漂亮！' {else} {print} '呵呵'"
 -   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
-    demo_code: "{if} a {is} {pressed} {print} 'You pressed A!' {else} {print} 'You pressed another key!'"
+    explanation: 检查键盘上的某个键是否按下`{pressed}` 。
+    demo_code: "{if}a {is}{pressed} {pressed} {print} '你按了A！' {else} {print} '你按了另一个键！'"
 6:
 -   explanation: "打印的内容要用引号标注清楚。"
     demo_code: "{print} '5乘以5等于 5 * 5'"
@@ -136,8 +136,8 @@
     explanation: '重复多行。'
     demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
 -   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
-    demo_code: "{if} a {is} {pressed}\n    {print} 'You pressed A!'\n{else}\n    {print} 'You pressed another key!'"
+    explanation: 检查键盘上的某个键是否被 "按下"。`{pressed}`.
+    demo_code: "{if} a {is} {pressed}\n    {print} '你按下了A!'\n{else}\n    {print} '你按下了另外一个按钮!'"
 9:
 -   name: "{if} 条件语句和多行"
     explanation: "使用`{ask}`提问加法运算的答案然后检查答案是否正确。我们现在可以打印两行代码了。"
@@ -177,26 +177,26 @@
 12:
 -   name: "直接浮点数"
     explanation: "十进制数字。"
-    demo_code: |
+    demo_code: |-
         {print} '计算出来！'
-        {print} '两个半加上两个半是……'
+        {print} '二又二分之一加上二又二分之一是……'
         {print} 2.5 + 2.5
 -   name: "文本赋值"
     explanation: "`=`后带引号的文本"
-    demo_code: |
-        名字 = '海迪机器人'
-        {print} '你好，' 名字
+    demo_code: |-
+        name= '海迪机器人'
+        {print} '你好，' name
 -   name: "{if} 比较后的引号"
     explanation: "`{if}`之后的带引号文本。"
-    demo_code: |
-        名字 = {ask} '你是谁？'
-        {if} 名字 = 'Hedy'
+    demo_code: |-
+        名name= {ask} '你是谁？'
+        {if} name = 'Hedy'
             {print} '嗨，你好！'
 -   name: "列表中的引号"
     explanation: "带引号的列表。"
-    demo_code: |
-        超级英雄们 = '钢铁侠', '蝙蝠侠', '超人'
-        {print} 超级英雄们 {at} {random}
+    demo_code: |-
+        superheroes= '钢铁侠', '蝙蝠侠', '超人'
+        {print} superheroes{at} {random}
 13:
 -   name: "{and}"
     explanation: "左边和右边的两个语句都必须是正确的。"

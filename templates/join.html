@@ -1,7 +1,7 @@
 {% extends "auth.html" %}
 
-{% block main %}
-<div class="w-full mx-auto flex flex-col gap-4">
+{% block regular_content %}
+<div class="flex flex-col gap-4">
     <div id="learn_more_content" class="text-xl">
         {% for section in content['join-sections'] %}
             <h2>{{ section['title'] }}</h2>

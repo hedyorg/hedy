@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
-{% block body %}
+{% block full_width_content %}
 <div style="height: 30px;"></div>
-<div tabindex="0" class="flex-grow px-8">
+<div tabindex="0" class="flex-grow px-8 common-page-container">
   {% if loaded_program.submitted %}
       <div class="text-center">
         <h2>{{_('submitted_header')}}</h2>
