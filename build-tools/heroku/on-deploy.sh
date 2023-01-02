@@ -27,6 +27,7 @@ echo '-----> Doing a Tailwind build'
 tailwind/generate-css
 
 echo '-----> Compiling Babel translations'
-cd ..
-cd ..
-pybabel compile -f -d translations
+(cd ../.. && pybabel compile -f -d translations)
+
+echo '-----> Generating static Babel content'
+./generate-static-babel-content

@@ -120,7 +120,7 @@ class TestsTranslationLevel6(HedyTester):
         )
 
     @parameterized.expand([('en', '+'), ('es', '+'), ('en', '-'), ('es', '-'),
-                          ('en', '*'), ('es', '*'), ('en', '/'), ('es', '/')])
+                           ('en', '*'), ('es', '*'), ('en', '/'), ('es', '/')])
     def test_expression_type_error_uses_arith_operator(self, lang, operator):
         code = textwrap.dedent(f"""\
             a is test

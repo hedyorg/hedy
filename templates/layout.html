@@ -3,14 +3,17 @@
   <head>
     <title>{% if page_title %}{{page_title}}{% else %}Hedy{% endif %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka+One:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap">
     <link rel="stylesheet" href="{{static('/css/generated.css')}}">
     <link rel="stylesheet" href="{{static('/css/additional.css')}}">
-    <link rel="shortcut icon" type="image/png" href="{{static('/images/Hedy-logo-96x96.png')}}"/>
-    <link rel="stylesheet" href="{{static('/vendor/gh-fork-ribbon.min.css')}}"/>
+    <link rel="icon" type="image/png" href="{{static('/images/Hedy-logo-96x96.png')}}"/>
     <link rel="stylesheet" href="{{static('/fontawesome/css/all.min.css')}}"/>
   </head>
-  <body id="main_container" class="bg-gray-400" dir="{{ g.dir }}">
+  <body id="main_container" dir="{{ g.dir }}" class="bg-gray-100">
     {% if intro_tutorial or tutorial %}
       <div id="tutorial-mask" class="hidden fixed bg-black z-30 w-full h-full opacity-50"></div>
     {% endif %}
@@ -26,7 +29,7 @@
        </div>
        <div id="modal-prompt" class="hidden">
           <div id="modal-prompt-text" class="text-white mb-8 text-xl"></div>
-          <div class="ltr:ml-auto rtl:mr-auto ltr:mr-auto rtl:ml-auto">
+          <div class="xm-auto">
             <input id="modal-prompt-input" type="text" class="border border-green-400 rounded p-2 px-3 w-4/5 mt-1">
             <div class="mt-4 flex flex-row justify-center">
                 <button id="modal-ok-button" class="green-btn block m-4 w-40 pb-4 pt-4">{{_('ok')}}</button>
@@ -72,12 +75,12 @@
             <svg class="fill-current h-6 w-6 text-green-500 block sm:inline" id="modal-alert-button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
         </div>
     </div>
-    <div class="lg:container mx-auto bg-gray-100 min-h-screen shadow-md flex flex-col">
+    <div class="min-h-screen flex flex-col">
       {% if menu != False %}
         {% include "incl-menubar.html" %}
       {% endif %}
       {# Can't reindent this as it may contain preformatted code blocks whose indentation is important. #}
-      {% block body %}{% endblock %}
+      {% block full_width_content %}{% endblock %}
 
       <canvas id="confetti" style="width: 60vw;" class="hidden"></canvas>
     </div>

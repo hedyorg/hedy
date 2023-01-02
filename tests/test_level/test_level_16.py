@@ -340,13 +340,13 @@ class TestsLevel16(HedyTester):
         colors2.append(colors1[2-1])
         print(f'''{colors2[3-1]}''')""")
 
-        check_in_list = (lambda x: HedyTester.run_code(x) == 'red')  # check that 'red' was correctly appended 
+        check_in_list = (lambda x: HedyTester.run_code(x) == 'red')  # check that 'red' was correctly appended
 
         self.multi_level_tester(
-          code=code,
-          max_level=17,
-          expected=expected,
-          extra_check_function=check_in_list
+            code=code,
+            max_level=17,
+            expected=expected,
+            extra_check_function=check_in_list
         )
 
     def test_remove_from_list(self):
@@ -397,10 +397,10 @@ class TestsLevel16(HedyTester):
         check_removed_from_list = (lambda x: HedyTester.run_code(x) == 'purple')  # check that 'red' was removed
 
         self.multi_level_tester(
-          code=code,
-          max_level=17,
-          expected=expected,
-          extra_check_function=check_removed_from_list
+            code=code,
+            max_level=17,
+            expected=expected,
+            extra_check_function=check_removed_from_list
         )
 
     def test_equality_with_lists(self):
@@ -415,6 +415,32 @@ class TestsLevel16(HedyTester):
         n = [1, 2]
         if convert_numerals('Latin', m) == convert_numerals('Latin', n):
           print(f'''success!''')""")
+
+        self.single_level_tester(code=code, expected=expected)
+
+    def test_change_list_item_var(self):
+        code = textwrap.dedent("""\
+        l = [1, 2]
+        x = 3
+        l[1] = x""")
+
+        expected = textwrap.dedent("""\
+        l = [1, 2]
+        x = 3
+        l[1-1] = x""")
+
+        self.single_level_tester(code=code, expected=expected)
+
+    def test_change_list_item_number(self):
+        code = textwrap.dedent("""\
+        l = [1, 2]
+        m = 2
+        l[m] = 3""")
+
+        expected = textwrap.dedent("""\
+        l = [1, 2]
+        m = 2
+        l[m-1] = 3""")
 
         self.single_level_tester(code=code, expected=expected)
 
