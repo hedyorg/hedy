@@ -1,9 +1,9 @@
 {% extends "auth.html" %}
 
-{% block main %}
-<div class="" id="teacher_documentation">
+{% block regular_content %}
+<div class="text-display-copy copy-container" id="teacher_documentation">
         <h2 class="text-center">{{ content['title'] }}</h2>
-        <div class="flex flex-wrap gap-2 justify-center pb-4 border-b">
+        <div class="flex flex-wrap gap-2 justify-center mb-16 border-b">
         {% for section in content['sections'] %}
             <button class="{% if loop.index != 1 %}green-btn{% else %}blue-btn{% endif %} p-4 section-button" id="button-{{loop.index}}" onclick="hedyApp.show_doc_section('{{loop.index}}')">{{section.title}}</button>
         {% endfor %}
@@ -12,7 +12,7 @@
             <div class="section {% if loop.index != 1 %}hidden{% endif %}" id="section-{{loop.index}}">
             {% if section.key != "common_mistakes" %}
                 {% for subsection in section['subsections'] %}
-                    <h4>{{ subsection.title }}</h4>
+                    <h2>{{ subsection.title }}</h2>
                     <p>{{ subsection.text|commonmark }}</p>
                 {% endfor %}
             {% else %}

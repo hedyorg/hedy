@@ -1,45 +1,48 @@
 {% extends "auth.html" %}
 
-{% block main %}
-<div class="w-full mx-auto flex flex-col gap-4">
-    <div class="bg-white shadow-md mx-auto rounded-lg rounded py-4 px-0 md:px-4 lg:px-8">
-        <form class="flex flex-col gap-2" action="https://hedycode.us7.list-manage.com/subscribe/post?u=22a3ce4e09535f82f587a7118&amp;id=57f3b3c090" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-            <h2 class="my-0 text-center">{{_('mailing_title')}}</h2>
-            <div class="signup-container">
-                <label for="mce-EMAIL" class="signup-label">{{_('email')}}<span class="asterisk">*</span></label>
-                <input type="email" value="" name="EMAIL" class="signup-input" id="mce-EMAIL" required>
-            </div>
-            <div class="signup-container">
-                <label for="mce-FNAME" class="signup-label">{{_('surname')}}</label>
-                <input type="text" value="" name="FNAME" class="signup-input" id="mce-FNAME">
-            </div>
-            <div class="signup-container">
-                <label for="mce-LNAME" class="signup-label">{{_('lastname')}}</label>
-                <input type="text" value="" name="LNAME" class="signup-input" id="mce-LNAME">
-            </div>
-            <div class="signup-container">
-                <label for="mce-COUNTRY" class="signup-label">{{_('country')}}</label>
-                <input type="text" value="" name="COUNTRY" class="signup-input" id="mce-COUNTRY">
-            </div>
-            <div class="signup-container">
-                <div class="response" id="mce-error-response" style="display:none"></div>
-                <div class="response" id="mce-success-response" style="display:none"></div>
-            </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-            <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_22a3ce4e09535f82f587a7118_57f3b3c090" tabindex="-1" value=""></div>
-            <div class="flex flex-row items-center justify-center gap-4">
-                <button type="submit" name="subscribe" id="mc-embedded-subscribe" class="green-btn">{{_('subscribe')}}</button>
-                <p class="text-base mt-0">{{_('required_field')}}</p>
-            </div>
-            <a href="https://us7.campaign-archive.com/home/?u=22a3ce4e09535f82f587a7118&id=57f3b3c090" class="mx-2" target="_blank" title="View previous campaigns">{{_('previous_campaigns')}}</a>
-        </form>
-        <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='COUNTRY';ftypes[3]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
+{% block full_width_content %}
+<div class="text-xl flex flex-col">
+    <div class="bg-blue-200 my-16 border-b-8 border-blue-300 py-8">
+        <div class="copy-container">
+            <form class="flex flex-col gap-2" action="https://hedycode.us7.list-manage.com/subscribe/post?u=22a3ce4e09535f82f587a7118&amp;id=57f3b3c090" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                <h2 class="my-0 text-center">{{_('mailing_title')}}</h2>
+                <div class="signup-container">
+                    <label for="mce-EMAIL" class="signup-label">{{_('email')}}<span class="asterisk">*</span></label>
+                    <input type="email" value="" name="EMAIL" class="signup-input" id="mce-EMAIL" required>
+                </div>
+                <div class="signup-container">
+                    <label for="mce-FNAME" class="signup-label">{{_('surname')}}</label>
+                    <input type="text" value="" name="FNAME" class="signup-input" id="mce-FNAME">
+                </div>
+                <div class="signup-container">
+                    <label for="mce-LNAME" class="signup-label">{{_('lastname')}}</label>
+                    <input type="text" value="" name="LNAME" class="signup-input" id="mce-LNAME">
+                </div>
+                <div class="signup-container">
+                    <label for="mce-COUNTRY" class="signup-label">{{_('country')}}</label>
+                    <input type="text" value="" name="COUNTRY" class="signup-input" id="mce-COUNTRY">
+                </div>
+                <div class="signup-container">
+                    <div class="response" id="mce-error-response" style="display:none"></div>
+                    <div class="response" id="mce-success-response" style="display:none"></div>
+                </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_22a3ce4e09535f82f587a7118_57f3b3c090" tabindex="-1" value=""></div>
+                <div class="flex flex-row items-center justify-center gap-4">
+                    <button type="submit" name="subscribe" id="mc-embedded-subscribe" class="green-btn">{{_('subscribe')}}</button>
+                    <p class="text-base mt-0">{{_('required_field')}}</p>
+                </div>
+                <div class="text-center">
+                    (<a href="https://us7.campaign-archive.com/home/?u=22a3ce4e09535f82f587a7118&id=57f3b3c090" class="text-black" target="_blank" title="View previous campaigns">{{_('previous_campaigns')}}</a>)
+                </div>
+            </form>
+            <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='COUNTRY';ftypes[3]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
+        </div>
     </div>
-    <div id="learn_more_content" class="text-xl">
+    <div id="learn_more_content" class="copy-container text-display-copy text-xl py-16">
         {% for section in content['learn-more-sections'] %}
             <h2>{{ section['title'] }}</h2>
             <p>{{ section['text'] | commonmark }}</p>
         {% endfor %}
-    </div>
         {% if papers %}
             <div id="research_container" class="text-xl">
                 <h2>Hedy Research</h2>
