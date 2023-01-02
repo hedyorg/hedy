@@ -14,7 +14,7 @@
             </div>
             {# image for small screens #}
             <div class="md:hidden flex-none">
-                <img class="drop-shadow-lg" src="images/hero-graphic.png">
+                <img src="images/hero-graphic.png">
             </div>
         </div>
     </div>
@@ -29,7 +29,7 @@
                 </div>
             {% elif section['style'] == 'pane-with-image-left' %}
                 <div class="copy-container-wide px-4 md:px-16 flex flex-col items-center md:flex-row justify-between gap-6">
-                    <img src="{{static(section['image'])}}" class="w-2/5">
+                    <img src="{{static(section['image'])}}" class="w-4/5 md:w-2/5">
                     <div class="column-pane px-8 py-4 md:w-3/5">
                         <h3>{{ section['title'] }}</h3>
                         <p>{{ section['text']|commonmark }}</p>
@@ -41,7 +41,7 @@
                         <h3>{{ section['title'] }}</h3>
                         <p>{{ section['text']|commonmark }}</p>
                     </div>
-                    <img src="{{static(section['image'])}}" class="w-2/5">
+                    <img src="{{static(section['image'])}}" class="w-4/5 md:w-2/5">
                 </div>
             {% elif section['style'] == 'columns' %}
                 <div class="copy-container columns px-4 md:px-16 flex flex-col md:flex-row justify-between gap-6">
