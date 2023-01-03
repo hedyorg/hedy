@@ -12,7 +12,7 @@
    <h2 class="mx-4 lg:mx-16 px-2 mb-4">{{_('account_overview')}}</h2>
    <div class="flex flex-col gap-4 mx-4 lg:mx-16">
        {% if invite_data %}
-           <h1 class="section-header" onclick="$ ('#messages').toggle()">{{_('my_messages')}}</h1>
+           <h1 class="section-header" id="my-messages" onclick="$ ('#messages').toggle()">{{_('my_messages')}}</h1>
            <div id="messages" class="profile-section-body">
              <h2 class="profile-section-body-header">{{_('my_messages')}}</h2>
              {% if invite_data %}
@@ -20,7 +20,7 @@
                      {{_('invite_message')}} "<span class="font-bold italic">{{ invite_data['class_name'] }}</span>".<br>
                      {{_('sent_by')}} "<span class="font-bold italic">{{ invite_data['teacher'] }}</span>". {{_('prompt_join_class')}}
                      <div class="flex flex-row mt-4">
-                            <button type="reset" class="green-btn" onclick="window.open('/hedy/l/{{ invite_data['join_link'] }}', '_self');">{{_('join_class')}}</button>
+                            <button type="reset" class="green-btn" id="join-link" onclick="window.open('/hedy/l/{{ invite_data['join_link'] }}', '_self');">{{_('join_class')}}</button>
                             <button type="submit" class="red-btn mx-4 px-4" onclick="hedyApp.remove_student_invite('{{user_data['username']}}', '{{invite_data['class_id']}}', '{{_('delete_invite_prompt')}}')">{{_('delete_invite')}}</button>
                     </div>
                  </div>

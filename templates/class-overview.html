@@ -26,7 +26,7 @@
               <th id="remove_student_header" class="text-center">{{_('remove')}}</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="class-user-table">
             {% for student in class_info.students %}
               <tr>
                 <td class="username_cell">{{student.username}}</td>
@@ -35,7 +35,7 @@
                 <td class="amount_programs_cell">{{student.programs}}</td>
                 <td class="overview_cell"><a href="/programs?user={{student.username}}">{{student.username}}'s {{_('page')}}</a></td>
                 <td class="change_password_cell text-center"><a href="#" class="no-underline" onclick='hedyApp.change_password_student("{{student.username}}", {{_('enter_password')|tojson}}, {{_('password_change_prompt')|tojson}})'>✏️</a></td>
-                <td class="remove_student_cell text-center"><a href="#" class="no-underline" onclick='hedyApp.remove_student("{{class_info.id}}", "{{student.username}}", {{_('remove_student_prompt')|tojson}})'>🗑️</a></td>
+                <td class="remove_student_cell text-center"><a href="#" class="no-underline" id="remove-student" onclick='hedyApp.remove_student("{{class_info.id}}", "{{student.username}}", {{_('remove_student_prompt')|tojson}})'>🗑️</a></td>
               </tr>
             {% endfor %}
           </tbody>
@@ -59,8 +59,8 @@
       <div id="add_students_options" class="flex flex-col items-center border-t border-gray-500" style="display: none;">
           <h2 class="my-4 pt-4">{{_('add_students_options')}}</h2>
           <div class="flex flex-row gap-2">
-            <button class="green-btn" onclick='hedyApp.copy_join_link("{{class_info.link}}", {{_('copy_link_success')|tojson}})'>{{_('copy_join_link')}}</button>
-            <button class="green-btn" onclick='hedyApp.invite_student("{{class_info.id}}", {{_('invite_prompt')|tojson}})'>{{_('invite_by_username')}}</button>
+            <button class="green-btn" id="copy-join-link" onclick='hedyApp.copy_join_link("{{class_info.link}}", {{_('copy_link_success')|tojson}})'>{{_('copy_join_link')}}</button>
+            <button class="green-btn" id="invite-student" onclick='hedyApp.invite_student("{{class_info.id}}", {{_('invite_prompt')|tojson}})'>{{_('invite_by_username')}}</button>
             <button class="green-btn" id="create-accounts" onclick="window.open('/for-teachers/create-accounts/{{ class_info.id }}', '_self')">{{_('create_accounts')}}</button>
           </div>
       </div>
