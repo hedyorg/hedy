@@ -84,7 +84,7 @@
     demo_code: "漂亮_颜色 {is} 绿色，黄色\n颜色 {is} {ask} '什么 {is} 你最喜欢的颜色？'\n{if} 颜色 {in} 漂亮_颜色 {print} '漂亮！' {else} {print} '呵呵'"
 -   name: '{pressed}'
     explanation: 检查键盘上的某个键是否按下`{pressed}` 。
-    demo_code: "{if}a {is}{pressed} {pressed} {print} '你按了A！' {else} {print} '你按了另一个键！'"
+    demo_code: "{if} a {is} {pressed} {print} '你按了A！' {else} {print} '你按了另一个键！'"
 6:
 -   explanation: "打印的内容要用引号标注清楚。"
     demo_code: "{print} '5乘以5等于 5 * 5'"
@@ -189,14 +189,14 @@
 -   name: "{if} 比较后的引号"
     explanation: "`{if}`之后的带引号文本。"
     demo_code: |-
-        名name= {ask} '你是谁？'
+        name = {ask} '你是谁？'
         {if} name = 'Hedy'
             {print} '嗨，你好！'
 -   name: "列表中的引号"
     explanation: "带引号的列表。"
     demo_code: |-
-        superheroes= '钢铁侠', '蝙蝠侠', '超人'
-        {print} superheroes{at} {random}
+        superheroes = '钢铁侠', '蝙蝠侠', '超人'
+        {print} superheroes {at} {random}
 13:
 -   name: "{and}"
     explanation: "左边和右边的两个语句都必须是正确的。"

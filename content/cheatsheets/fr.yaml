@@ -1,14 +1,14 @@
 1:
 -   name: "{print}"
     explanation: "Affiche quelque chose avec `{print}`."
-    demo_code: "{print} Bonjour et bienvenue dans Hedy !"
+    demo_code: "{print} Bonjour et bienvenue dans Hedy!"
 -   name: "{ask}"
     explanation: "Demande quelque chose avec `{ask}`."
     demo_code: "{ask} Quelle est ta couleur préférée ?"
 -   name: "{echo}"
     explanation: "Répète quelque chose avec `{echo}`."
     demo_code: |-
-        {ask} Quelle est ta couleur préférée ?
+        {ask} Quelle est ta couleur préférée?
         {echo} donc ta couleur préférée est
 -   name: '{print} emojis'
     explanation: Afficher un emoji avec `{print}`.
@@ -294,11 +294,11 @@
     explanation: "`{elif}`"
     demo_code: |-
         a = 2
-        {if} a == 1 :
+        {if} a == 1:
             {print} 'a est 1'
-        {elif} a == 2 :
+        {elif} a == 2:
             {print} 'a est 2'
-        {else} :
+        {else}:
             {print} "a n'est pas 1 ou 2"
 -   name: "{print}"
     explanation: "Quand nous utilisons un  `{for}`, nous devons mettre un  `:` derrière l'affirmation du  `{for}` !"
@@ -309,10 +309,10 @@
 -   name: "{if}"
     explanation: "Nous devons faire de même avec toutes nos déclarations `{if}`."
     demo_code: |-
-        couleur = {ask} 'Quel est ta couleur préférée ?'
-        {if} couleur == 'vert' :
+        couleur = {ask} 'Quel est ta couleur préférée?'
+        {if} couleur == 'vert':
             {print} "Ta couleur préférée est le vert"
-        {else} :
+        {else}:
             {print} "Ta couleur préférée n'est pas le vert"
 18:
 -   name: "{print}"
@@ -322,7 +322,7 @@
 -   name: "{range}"
     explanation: "Avec `{range}` on doit utiliser des parenthèses."
     demo_code: |-
-        {for} i {in} {range} (1,10) :
+        {for} i {in} {range} (1,10):
             {print}('Salut, ', i, ' fois')
 -   name: '{print} avec var'
     explanation: Avec `{print}` on doit utiliser des parenthèses et des virgules si l'on affiche plusieurs éléments.
