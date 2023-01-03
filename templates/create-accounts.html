@@ -31,20 +31,20 @@
                     <div class="italic text-xl text-blue-600">{{_('download_login_credentials')}}</div>
                     <div>
                         <div class="flex flex-row items-center gap-4">
-                            <input type="radio" name="download_credentials_checkbox" value="yes" checked>
+                            <input type="radio" id="download_credentials_yes" name="download_credentials_checkbox" value="yes" checked>
                             <label for="yes">{{_('yes')}}</label>
                         </div>
                         <div class="flex flex-row items-center gap-4">
-                            <input type="radio" name="download_credentials_checkbox" value="no">
+                            <input type="radio" id="download_credentials_no" name="download_credentials_checkbox" value="no">
                             <label for="no">{{_('no')}}</label>
                         </div>
                     </div>
                 </div>
-                <svg class="fill-current w-8 h-8 ltr:ml-auto rtl:mr-auto mb-2 text-green-500 cursor-pointer" xmlns="http://www.w3.org/2000/svg" onclick="hedyApp.add_account_placeholder();" viewBox="0 0 24 24"><path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z"/></svg>
+                <svg class="fill-current w-8 h-8 ltr:ml-auto rtl:mr-auto mb-2 text-green-500 cursor-pointer" id="add_multiple_rows" xmlns="http://www.w3.org/2000/svg" onclick="hedyApp.add_account_placeholder();" viewBox="0 0 24 24"><path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z"/></svg>
             </div>
         </div>
         <div class="flex flex-row mt-4">
-            <button class="green-btn" onclick="window.open('/for-teachers/class/{{ current_class.id }}', '_self');">{{_('back_to_class')}}</button>
+            <button class="green-btn" id="back_to_class_button" onclick="window.open('/for-teachers/class/{{ current_class.id }}', '_self');">{{_('back_to_class')}}</button>
             <div class="ltr:ml-auto flex flex-row items-center gap-2">
                 <div class="mx-auto border-gray-400 border-2 rounded-full py-2 px-4">
                   <label for="passwords_toggle" class="flex flex-row items-center justify-center cursor-pointer">
@@ -57,9 +57,9 @@
                   </label>
                 </div>
                 <button class="yellow-btn text-white" onclick="hedyApp.append_classname();">{{_('postfix_classname')}}</button>
-                <button type="reset" class="red-btn" onclick="window.open('/for-teachers/create-accounts/{{ current_class.id }}', '_self');">
+                <button type="reset" id="reset_button" class="red-btn" onclick="window.open('/for-teachers/create-accounts/{{ current_class.id }}', '_self');">
                     {{_('reset_view')}}</button>
-                <button type="submit" class="blue-btn px-4">{{_('create_accounts')}}</button>
+                <button type="submit" id="create_accounts_button" class="blue-btn px-4">{{_('create_accounts')}}</button>
             </div>
         </div>
         </form>

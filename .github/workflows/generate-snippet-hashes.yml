@@ -12,8 +12,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-      name: Checkout branch (with token)
+    - name: Remove existing snippets file # So it does not grow indefinitely
+      run: rm all_snippet_hashes.pkl
+
+    - name: Checkout branch (with token)
+      uses: actions/checkout@v3
       with:
         fetch-depth: 0    
         
