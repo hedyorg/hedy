@@ -477,9 +477,9 @@ class TestsLevel4(HedyTester):
           taart is 'appeltaart, choladetaart, kwarktaart'
           print 'we bakken een ' taart at random""")
 
-        expected = textwrap.dedent("""\
-          taart = ['\\'appeltaart', 'choladetaart', 'kwarktaart\\'']
-          print(f'we bakken een {random.choice(taart)}')""")
+        expected = HedyTester.dedent("taart = ['\\'appeltaart', 'choladetaart', 'kwarktaart\\'']",
+                                     HedyTester.list_access_transpiled('random.choice(taart)'),
+                                     "print(f'we bakken een {random.choice(taart)}')")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
@@ -488,9 +488,9 @@ class TestsLevel4(HedyTester):
           taart is "appeltaart, choladetaart, kwarktaart"
           print 'we bakken een ' taart at random""")
 
-        expected = textwrap.dedent("""\
-          taart = ['"appeltaart', 'choladetaart', 'kwarktaart"']
-          print(f'we bakken een {random.choice(taart)}')""")
+        expected = HedyTester.dedent("taart = ['\"appeltaart', 'choladetaart', 'kwarktaart\"']",
+                                     HedyTester.list_access_transpiled('random.choice(taart)'),
+                                     "print(f'we bakken een {random.choice(taart)}')")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
@@ -499,9 +499,9 @@ class TestsLevel4(HedyTester):
         taart is 'appeltaart', 'choladetaart', 'kwarktaart'
         print 'we bakken een' taart at random""")
 
-        expected = textwrap.dedent("""\
-        taart = ['\\'appeltaart\\'', '\\'choladetaart\\'', '\\'kwarktaart\\'']
-        print(f'we bakken een{random.choice(taart)}')""")
+        expected = HedyTester.dedent("taart = ['\\'appeltaart\\'', '\\'choladetaart\\'', '\\'kwarktaart\\'']",
+                                     HedyTester.list_access_transpiled('random.choice(taart)'),
+                                     "print(f'we bakken een{random.choice(taart)}')")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
@@ -510,9 +510,9 @@ class TestsLevel4(HedyTester):
         taart is "appeltaart, choladetaart, kwarktaart"
         print 'we bakken een' taart at random""")
 
-        expected = textwrap.dedent("""\
-        taart = ['"appeltaart', 'choladetaart', 'kwarktaart"']
-        print(f'we bakken een{random.choice(taart)}')""")
+        expected = HedyTester.dedent("taart = ['\"appeltaart', 'choladetaart', 'kwarktaart\"']",
+                                     HedyTester.list_access_transpiled('random.choice(taart)'),
+                                     "print(f'we bakken een{random.choice(taart)}')")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
@@ -535,12 +535,11 @@ class TestsLevel4(HedyTester):
         colors is green, red, blue
         add color to colors
         print colors at random""")
-
-        expected = textwrap.dedent("""\
-        color = input(f'what is your favorite color?')
-        colors = ['green', 'red', 'blue']
-        colors.append(color)
-        print(f'{random.choice(colors)}')""")
+        expected = HedyTester.dedent("color = input(f'what is your favorite color?')",
+                                     "colors = ['green', 'red', 'blue']",
+                                     "colors.append(color)",
+                                     HedyTester.list_access_transpiled("random.choice(colors)"),
+                                     "print(f'{random.choice(colors)}')")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
@@ -551,14 +550,11 @@ class TestsLevel4(HedyTester):
         remove color from colors
         print colors at random""")
 
-        expected = textwrap.dedent("""\
-        colors = ['green', 'red', 'blue']
-        color = input(f'what color to remove?')
-        try:
-          colors.remove(color)
-        except:
-          pass
-        print(f'{random.choice(colors)}')""")
+        expected = HedyTester.dedent("colors = ['green', 'red', 'blue']",
+                                     "color = input(f'what color to remove?')",
+                                     HedyTester.remove_transpiled('colors', 'color'),
+                                     HedyTester.list_access_transpiled('random.choice(colors)'),
+                                     "print(f'{random.choice(colors)}')")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 

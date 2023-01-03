@@ -37,12 +37,13 @@ not_in_list_check: textwithoutspaces _NOT_IN var_access
 nospace: /[^\n, ]/
 
 
-textwithspaces: /(?:[^#\n،,， ]| (?!else|başka|faese|अन्यथा|否则|muuten|muidu|senão|ellers|alie|иначе|altrimenti|інакше|annars|anders|ndryshe|inaczej|sinon|sonst|sino|وکھرا|אחרת|وإلا))+/ -> text //anything can be parsed except for a newline and a comma for list separators
+textwithspaces: /(?:[^#\n،,， ]| (?!else|başka|faese|अन्यथा|否则|muuten|muidu|senão|ellers|alie|иначе|altrimenti|інакше|arall|annars|anders|ndryshe|inaczej|sinon|sonst|లేకపోతే|sino|وکھرا|אחרת|وإلا))+/ -> text //anything can be parsed except for a newline and a comma for list separators
 //a space is allowed, but it may not be followed by an else. The part " (?!else))" means space not followed by (negative look ahead) else
 //That is because allowing else in strings leads to issue #303
-textwithoutspaces: /(?:[^#\n،,， *+\-\/eiіиamfnsbअ否אو]|א(?!חרת )|و(?!إلا |کھرا )|否(?!则 )|अ(?!न्यथा )|и(?!наче )|m(?!uidu |uuten )|b(?!aşka )|n(?!dryshe )|f(?!aese )|e(?!lse |llers )|s(?!inon |enão |ino |onst )|і(?!накше )|i(?!naczej )|a(?!nders |lie |ltrimenti |nnars ))+/ -> text //anything can be parsed except for spaces (plus: a newline and a comma for list separators)
+textwithoutspaces: /(?:[^#\n،,， *+\-\/eiіиలేamfnsbअ否אو]|א(?!חרת )|و(?!إلا |کھرا )|否(?!则 )|अ(?!न्यथा )|и(?!наче )|m(?!uidu |uuten )|b(?!aşka )|n(?!dryshe )|f(?!aese )|e(?!lse |llers )|s(?!inon |enão |ino |onst )|і(?!накше )|i(?!naczej )|లే (?!కపోతే )|a(?!nders |lie |ltrimenti |nnars |rall ))+/ -> text //anything can be parsed except for spaces (plus: a newline and a comma for list separators)
 //the part e(?!lse)|i(?!f)) means e not followed by lse, and i not followed by f
 // this is because allowing else and if in invalid leads to ambiguity in the grammar
+// note that the i's look similar but are not: inaczej versus інакше!
 
 
-//
+

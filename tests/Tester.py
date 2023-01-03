@@ -323,6 +323,14 @@ class HedyTester(unittest.TestCase):
       except:
         pass""")
 
+    @staticmethod
+    def list_access_transpiled(list_access):
+        return textwrap.dedent(f"""\
+        try:
+          {list_access}
+        except IndexError:
+          raise Exception('catch_index_exception')""")
+
     # Used to overcome indentation issues when the above code is inserted
     # in test cases which use different indentation style (e.g. 2 or 4 spaces)
     @staticmethod
