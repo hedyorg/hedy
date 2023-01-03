@@ -795,10 +795,12 @@ class TestsLevel6(HedyTester):
         else punten is punten + worp
         print 'dat zijn dan ' punten""")
 
-        expected = textwrap.dedent("""\
+        expected = HedyTester.dedent("""\
         keuzes = ['1', '2', '3', '4', '5', 'regenworm']
-        punten = '0'
-        worp = random.choice(keuzes)
+        punten = '0'""",
+                                     HedyTester.list_access_transpiled('random.choice(keuzes)'),
+                                     "worp = random.choice(keuzes)",
+                                     """\
         if convert_numerals('Latin', worp) == convert_numerals('Latin', 'regenworm'):
           punten = int(punten) + int(5)
         else:
