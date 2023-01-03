@@ -93,15 +93,15 @@ adventures:
                 story_text_3: "Możesz również porównać, czy coś jest *nie* równe czemuś innemu, używając `!=` jak to:\n"
                 example_code_3: "```\nimię = {ask} 'Jak masz na imię?'\n{if} imię != 'Hedy'\n    {print} 'Nie jesteś Hedy'\n```\n"
             15:
-                start_code: "```\nodpowiedź = 0\n{while} odpowiedź != 25\n    odpowiedź = {ask} 'Ile jest 5 razy 5?'\n{print} 'Dobra odpowiedź'\n```"
+                start_code: "odpowiedź = 0\n{while} odpowiedź != 25\n    odpowiedź = {ask} 'Ile jest 5 razy 5?'\n{print} 'Dobra odpowiedź'"
                 story_text: "## Więcej pętli!\nTym razem nauczymy się nowego typu pętli - pętla `{while}`! Ta pętla będzie działać tak dlugo jak warunek w pętli jest prawdziwy, więc nie zapomnij zmienić wartosci warunku w pętli.\n\nPętla kodzie przykładowym będzie działać aż poprawna odpowiedź zostanie podana.\nPętla nigdy się nie skonczy gdy poprawna odpowiedź nie zostanie podana!"
                 example_code: "```\nanswer = 0\nwhile answer != 25\n    answer = ask 'What is 5 times 5?'\nprint 'A correct answer has been given'\n```\n"
             16:
                 example_code: "```\nfriends = ['Ahmed', 'Ben', 'Cayden']\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'the lucky number of ' friends[i]\n    {print} 'is ' lucky_numbers[i]\n```\n"
-                start_code: "```\nowoce = ['jabłko', 'banan', 'czereśnia']\n{print} owoce\n```"
+                start_code: "owoce = ['jabłko', 'banan', 'czereśnia']\n{print} owoce"
                 story_text: "## Coraz bliżej prawdziwego kodu!\nTym razem stworzymy listy w sposób podobny do Pythona. Te listy mają kwadratowe nawiasy dookoła listy! Dodatkowo, zostawimy też cudzysłowie dookoła każdego elementu listy tak jak się nauczyliśmy w poprzednich poziomach.\nMożesz również użyć kwadratowych nawiasów żeby wybrać konkretny element z listy."
             17:
-                start_code: "```\n{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Szukam!'\n```"
+                start_code: "{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Szukam!'"
                 story_text: "Now we are going to change indentation a little bit. Every time that we need an indentation, we need `:` at the line before the indentation.\n\nIn this level you can also use a new command: `{elif}`. `{elif}` is short for {else} {if} and you need it when you you want to make 3 (or more!) options.\nCheck it out!"
                 example_code: "```\nnagrody = ['milion złotch', 'szarlotkę', 'nic']\ntwoja_nagraoda = nagrody[{random}]\n{print} 'Wygrywasz ' twoja_nagraoda\n{if} twoja_nagraoda == 'milion złotch' :\n    {print} 'O tak! Jesteś bogaty!'\n{elif} twoja_nagraoda == 'szarlotkę' :\n    {print} 'Pyszna szarlotka!'\n{else}:\n    {print} 'Powodzenia następnym razem ...'\n```\n"
             18:
@@ -158,7 +158,7 @@ adventures:
                 start_code: '# umieść tutaj swój kod'
             8:
                 story_text: "## Piosenki\nW poprzednich poziomach programowałeś piosenkę \"Butelki Piwa\" (ang. Bottles of Beer). Napisałeś pierwszy wers piosenki, który potem skopiowałeś 99 razy. Na tym poziomie możesz powtórzyć ten wers 99 razy poprzez dodanie jednej prostej linii kodu.\nCzy wiesz jakie linie kodu powinieneś dodać w puste miejsca?\n"
-                example_code: "```\nwers = 99\n___\n    {print} wers ' butelek piwa na ścianie'\n    {print} wers ' butelek piwa'\n    {print} 'Weź jedną i przekaż ją dalej'\n    wers = wers - 1\n    {print} wers ' butelek piwa na ścianie'\n```\n"
+                example_code: "```\nwers = 99\n _ \n    {print} wers ' butelek piwa na ścianie'\n    {print} wers ' butelek piwa'\n    {print} 'Weź jedną i przekaż ją dalej'\n    wers = wers - 1\n    {print} wers ' butelek piwa na ścianie'\n```\n"
                 start_code: '# umieść tutaj swój kod'
             7:
                 story_text: "## Piosenki\nPiosenki często zawierają dużo powtórzeń, na przykład: Dziecko Rekin! Jeżeli ją zaśpiewasz to zaczniesz śpiewać ten sam tekst:\n\nDziecko Rekin dududududududu <br>\nDziecko Rekin dududududududu <br>\nDziecko Rekin dududududududu <br>\nDziecko Rekin\n\nMożesz skrócić tekst tej piosenki przy użyciu polecenia `{repeat}`! Potrafisz dończyć ten kod?\n"
@@ -223,7 +223,7 @@ adventures:
                 start_code: "{print} 'Jaka wartość tym razem wypadnie na kostce?'"
             6:
                 story_text: "## Kostka do gry\nNa tym poziomie możesz zrobić kostkę do gry z Gąsienicą i nawet policzyć ile punktów wyrzuciłaś w sumie.\nWiedząc, że Gąsienica jest warta 5 punktów możesz teraz policzyć ile punktów wyrzuciłaś w sumie.\nTen kod policzy ilość punktów jednek kostki:\n\n## Wyzwanie\nCzy potrafisz napisać kod, który policzy sumę punkt na 8 kostkach? Aby to zrobić musisz skopiować kilka linijek kodu.\n"
-                example_code: "```\nwybory = 1, 2, 3, 4, 5, gąsienica\npunkty = 0\nrzut = wybory {at} {random}\n{print} 'wyrzuciłeś' rzut\n{if} rzut {is} gąsienica punkty = punkty + 5 {else} punkty = punkty + throw\n{print} 'suma punktów to ' points\n```\n"
+                example_code: "```\nwybory = 1, 2, 3, 4, 5, gąsienica\npunkty = 0\nrzut = wybory {at} {random}\n{print} 'wyrzuciłeś' rzut\n{if} rzut {is} gąsienica punkty = punkty + 5 {else} punkty = punkty + rzut\n{print} 'suma punktów to ' punkty\n```\n"
                 example_code_2: "## Wgląd w przyszłość\n\nCzy udało ci się policzyć wynik dla 8 kostek? Wymagało to sporo kopiowania i wklejania, prawda? W poziomie 7 ułatwimy to!\n"
                 start_code: "{print} 'Jaka wartość tym razem wypadnie na kostce?'"
             5:
