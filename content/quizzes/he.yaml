@@ -1202,12 +1202,12 @@ levels:
         2:
             mp_choice_options:
             -   feedback: That's not it!
-                option: "Good job! \n Good job!"
+                option: "Good job!\nGood job!"
             -   option: The computer will explode in 5... 4... 3... 2... 1...
                 feedback: That's not it!
-            -   option: "Good job ! \n Good job! \n You can use the computer!"
+            -   option: "Good job !\nGood job!\nYou can use the computer!"
                 feedback: That's not it!
-            -   option: "Good job! \n You can use the computer! \n Good job! \n You can use the computer!"
+            -   option: "Good job!\nYou can use the computer!\nGood job!\nYou can use the computer!"
                 feedback: Correct!
             question_score: '10'
             code: "password = {ask} 'What is the password?'\ncorrect_password = Hedy\n{if} password {is} correct_password\n    {repeat} 2 {times}\n        {print} 'Good job!'\n        {print} 'You can use the computer!'\n{else}\n    {print} 'The computer will explode in 5... 4... 3... 2... 1...'"

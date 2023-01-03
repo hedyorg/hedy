@@ -1204,13 +1204,13 @@ levels:
             question_text: What will be printed after entering the correct password?
             code: "password = {ask} 'What is the password?'\ncorrect_password = Hedy\n{if} password {is} correct_password\n    {repeat} 2 {times}\n        {print} 'Good job!'\n        {print} 'You can use the computer!'\n{else}\n    {print} 'The computer will explode in 5... 4... 3... 2... 1...'"
             mp_choice_options:
-            -   option: "Good job! \n Good job!"
+            -   option: "Good job!\nGood job!"
                 feedback: That's not it!
             -   option: The computer will explode in 5... 4... 3... 2... 1...
                 feedback: That's not it!
-            -   option: "Good job! \n Good job! \n You can use the computer!"
+            -   option: "Good job!\nGood job!\nYou can use the computer!"
                 feedback: That's not it!
-            -   option: "Good job! \n You can use the computer! \n Good job! \n You can use the computer!"
+            -   option: "Good job!\nYou can use the computer!\nGood job!\nYou can use the computer!"
                 feedback: Correct!
             hint: Everything under the `{repeat}` command is repeated twice.
             question_score: '10'
