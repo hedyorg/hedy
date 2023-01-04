@@ -52,7 +52,7 @@ class ForTeachersModule(WebsiteModule):
 
         return render_template(
             "for-teachers.html",
-            current_page="my-profile",
+            current_page="for-teachers",
             page_title=gettext("title_for-teacher"),
             teacher_classes=teacher_classes,
             teacher_adventures=adventures,
@@ -60,10 +60,9 @@ class ForTeachersModule(WebsiteModule):
         )
 
     @route("/manual", methods=["GET"])
-    @requires_login
-    def get_teacher_manual(self, user):
+    def get_teacher_manual(self):
         page_translations = hedyweb.PageTranslations("for-teachers").get_page_translations(g.lang)
-        return render_template("teacher-manual.html", current_page="my-profile", content=page_translations)
+        return render_template("teacher-manual.html", current_page="teacher-manual", content=page_translations)
 
     @route("/class/<class_id>", methods=["GET"])
     @requires_login
@@ -119,7 +118,7 @@ class ForTeachersModule(WebsiteModule):
 
         return render_template(
             "class-overview.html",
-            current_page="my-profile",
+            current_page="for-teachers",
             page_title=gettext("title_class-overview"),
             achievement=achievement,
             invites=invites,
@@ -157,7 +156,7 @@ class ForTeachersModule(WebsiteModule):
             adventures=adventures,
             teacher_adventures=teacher_adventures,
             customizations=customizations,
-            current_page="my-profile",
+            current_page="for-teachers",
         )
 
     @route("/customize-class/<class_id>", methods=["DELETE"])
@@ -314,7 +313,7 @@ class ForTeachersModule(WebsiteModule):
             "view-adventure.html",
             adventure=adventure,
             page_title=gettext("title_view-adventure"),
-            current_page="my-profile",
+            current_page="for-teachers",
         )
 
     @route("/customize-adventure/<adventure_id>", methods=["GET"])
@@ -342,7 +341,7 @@ class ForTeachersModule(WebsiteModule):
             adventure=adventure,
             class_data=class_data,
             max_level=hedy.HEDY_MAX_LEVEL,
-            current_page="my-profile",
+            current_page="for-teachers",
         )
 
     @route("/customize-adventure", methods=["POST"])
