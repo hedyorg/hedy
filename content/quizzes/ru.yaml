@@ -1545,13 +1545,13 @@ levels:
                     {print} 'Hello'
                     {print} 'Im Hedy!'
             mp_choice_options:
-            -   option: "Hello \n Im Hedy!"
+            -   option: "Hello\nIm Hedy!"
                 feedback: "Everything is printed twice."
-            -   option: "Hello \n Hello \n Im Hedy"
+            -   option: "Hello\nHello\nIm Hedy"
                 feedback: "The second line is repeated twice as well."
-            -   option: "Hello \n Im Hedy! \n Hello \n Im Hedy!"
+            -   option: "Hello\nIm Hedy!\nHello\nIm Hedy!"
                 feedback: "Супер!"
-            -   option: "Hello \n Hello \n Im Hedy! \n Im Hedy!"
+            -   option: "Hello\nHello\nIm Hedy!\nIm Hedy!"
                 feedback: "Everything is printed twice"
             correct_answer: "C"
             hint: "Both lines are repeated twice."
@@ -1580,13 +1580,13 @@ levels:
                     {print} 'Baby shark tututudutudu'
                 {print} 'Baby shark'
             mp_choice_options:
-            -   option: "Baby shark tututudutudu \n Baby shark"
+            -   option: "Baby shark tututudutudu\nBaby shark"
                 feedback: "Mind the `{repeat}` command!"
-            -   option: "Baby shark tututudutudu \n Baby shark \n Baby shark tututudutudu \n Baby shark \n Baby shark tututudutudu \n Baby shark"
+            -   option: "Baby shark tututudutudu\nBaby shark\nBaby shark tututudutudu\nBaby shark\nBaby shark tututudutudu\nBaby shark"
                 feedback: "The last line has no indentation, so it's not repeated."
-            -   option: "Baby shark tututudutudu \n Baby shark tututudutudu \n Baby shark tututudutudu \n Baby shark"
+            -   option: "Baby shark tututudutudu\nBaby shark tututudutudu\nBaby shark tututudutudu\nBaby shark"
                 feedback: "Точно!"
-            -   option: "Baby shark tututudutudu \n Baby shark \n Baby shark \n Baby shark"
+            -   option: "Baby shark tututudutudu\nBaby shark\nBaby shark\nBaby shark"
                 feedback: "What is being repeated and what isn't."
             correct_answer: "C"
             hint: "What is being repeated and what is not?."
@@ -1599,13 +1599,13 @@ levels:
                     {print} 'Yay!'
                     {print} 'Were going on holiday!'
             mp_choice_options:
-            -   option: "The children went: \n Yay! \n Were going on holiday!"
+            -   option: "The children went:\nYay!\nWere going on holiday!"
                 feedback: "Mind the `{repeat}` command !"
-            -   option: "The children went: \n Yay! \n Were going on holiday! \n Yay! \n Were going on holiday!"
+            -   option: "The children went:\nYay!\nWere going on holiday!\nYay!\nWere going on holiday!"
                 feedback: "Правильно!"
-            -   option: "The children went: \n Yay! \n Yay! \n Were going on holiday! \n Were going on holiday!"
+            -   option: "The children went:\nYay!\nYay!\nWere going on holiday!\nWere going on holiday!"
                 feedback: "This order is incorrect."
-            -   option: "The children went: \n Yay! \n Yay! \n Were going on holiday!"
+            -   option: "The children went:\nYay!\nYay!\nWere going on holiday!"
                 feedback: "The last line is repeated too."
             correct_answer: "B"
             hint: "The block under the `{repeat}` command is repeated twice."
@@ -1810,13 +1810,13 @@ levels:
                 {else}
                     {print} 'Компьютер взорвется через 5... 4... 3... 2... 1...'
             mp_choice_options:
-            -   option: "Good job! \n Good job!"
+            -   option: "Good job!\nGood job!"
                 feedback: "That's not it!"
             -   option: "The computer will explode in 5... 4... 3... 2... 1..."
                 feedback: "That's not it!"
-            -   option: "Good job ! \n Good job! \n You can use the computer!"
+            -   option: "Good job !\nGood job!\nYou can use the computer!"
                 feedback: "That's not it!"
-            -   option: "Good job! \n You can use the computer! \n Good job! \n You can use the computer!"
+            -   option: "Good job!\nYou can use the computer!\nGood job!\nYou can use the computer!"
                 feedback: "Correct!"
             correct_answer: "D"
             hint: "Everything under the `{repeat}` command is repeated twice."
