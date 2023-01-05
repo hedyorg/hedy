@@ -260,14 +260,11 @@ def setup_language():
         session['lang'] = request.accept_languages.best_match(
             ALL_LANGUAGES.keys(), 'en')
 
-    g.lang = session['lang']
     if 'keyword_lang' not in session:
-        if g.lang in ALL_KEYWORD_LANGUAGES.keys() and g.lang in NON_LATIN_LANGUAGES:
-            g.keyword_lang = g.lang
-        else:
-            g.keyword_lang = "en"
-    else:
-        g.keyword_lang = session['keyword_lang']
+        g.keyword_lang = g.lang if g.lang in ALL_KEYWORD_LANGUAGES.keys() else 'en'
+
+    g.lang = session['lang']
+    g.keyword_lang = session['keyword_lang']
 
     # Set the page direction -> automatically set it to "left-to-right"
     # Switch to "right-to-left" if one of the language is rtl according to Locale (from Babel) settings.
@@ -1153,7 +1150,7 @@ def get_cheatsheet_page(level):
 
     commands = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
 
-    return render_template("cheatsheet.html", commands=commands, level=level)
+    return render_template("printable/cheatsheet.html", commands=commands, level=level)
 
 
 @app.route('/certificate/<username>', methods=['GET'])
@@ -1179,7 +1176,7 @@ def get_certificate_page(username):
 
     number_achievements = len(achievements)
     congrats_message = safe_format(gettext('congrats_message'), username=username)
-    return render_template("certificate.html", count_programs=count_programs, quiz_score=quiz_score,
+    return render_template("printable/certificate.html", count_programs=count_programs, quiz_score=quiz_score,
                            longest_program=longest_program, number_achievements=number_achievements,
                            congrats_message=congrats_message)
 

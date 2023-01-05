@@ -3,12 +3,12 @@ import {getHighlighter, showAchievements, turnIntoAceEditor} from "./app";
 
 import DOMPurify from 'dompurify'
 
-(function() {
+export function initializeTeacherPage() {
     // Use this to make sure that we return a prompt when a user leaves the page without saving
     $( "input" ).change(function() {
         window.State.unsaved_changes = true;
     });
-})();
+}
 
 export function create_class(class_name_prompt: string) {
   modal.prompt (class_name_prompt, '', function (class_name) {

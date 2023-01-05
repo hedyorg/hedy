@@ -1,5 +1,4 @@
-// It's important that this file gets loaded first
-import './syntaxModesRules';
+import { initializeSyntaxHighlighter } from './syntaxModesRules';
 
 import { modal, error, success } from './modal';
 import { Markers } from './markers';
@@ -95,20 +94,8 @@ def convert_numerals(alphabet, number):
     return number
 `;
 
-// Close the dropdown menu if the user clicks outside of it
-$(document).on("click", function(event){
-    if(!$(event.target).closest(".dropdown").length){
-        $(".dropdown-menu").slideUp("medium");
-        $(".cheatsheet-menu").slideUp("medium");
-    }
-});
-
-(function() {
-  // A bunch of code expects a global "State" object. Set it here if not
-  // set yet.
-  if (!window.State) {
-    window.State = {};
-  }
+export function initializeApp() {
+  initializeSyntaxHighlighter();
 
   // Set const value to determine the current page direction -> useful for ace editor settings
   const dir = $("body").attr("dir");
@@ -312,7 +299,15 @@ $(document).on("click", function(event){
 
     return editor;
   }
-})();
+
+  // Close the dropdown menu if the user clicks outside of it
+  $(document).on("click", function(event){
+      if(!$(event.target).closest(".dropdown").length){
+          $(".dropdown-menu").slideUp("medium");
+          $(".cheatsheet-menu").slideUp("medium");
+      }
+  });
+}
 
 export function getHighlighter(level: string) {
   return `ace/mode/level` + level;
