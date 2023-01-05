@@ -11,6 +11,7 @@ import re
 import string
 import random
 import uuid
+import unicodedata
 
 from flask_babel import gettext, format_date, format_datetime, format_timedelta
 from ruamel import yaml
@@ -371,3 +372,8 @@ def customize_babel_locale(custom_locales: dict):
 
         babel.localedata.exists = exists
         babel.localedata.load = load
+
+
+def strip_accents(s):
+    return ''.join(c for c in unicodedata.normalize('NFD', s)
+                   if unicodedata.category(c) != 'Mn')

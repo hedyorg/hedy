@@ -59,10 +59,39 @@ class ForTeachersModule(WebsiteModule):
             welcome_teacher=welcome_teacher,
         )
 
-    @route("/manual", methods=["GET"])
-    def get_teacher_manual(self):
-        page_translations = hedyweb.PageTranslations("for-teachers").get_page_translations(g.lang)
-        return render_template("teacher-manual.html", current_page="teacher-manual", content=page_translations)
+    @route("/manual", methods=["GET"], defaults={'section_key': 'intro'})
+    @route("/manual/<section_key>", methods=["GET"])
+    def get_teacher_manual(self, section_key):
+        content = hedyweb.PageTranslations("for-teachers").get_page_translations(g.lang)
+        page_title = content['title']
+        sections = {section['key']: section for section in content['sections']}
+        section_titles = [(section['key'], section['title']) for section in content['sections']]
+        current_section = sections.get(section_key)
+
+        if not current_section:
+            return utils.error_page(error=404, ui_message=gettext("page_not_found"))
+
+        intro = current_section.get('intro')
+
+        # Some pages have 'subsections', others have 'levels'. We're going to treat them ~the same.
+        # Give levels a 'title' field as well (doesn't have it in the YAML).
+        subsections = current_section.get('subsections', [])
+        levels = current_section.get('levels', [])
+        for level in levels:
+            level['title'] = gettext('level') + ' ' + str(level['level'])
+
+        subsection_titles = [x.get('title') for x in subsections + levels]
+
+        return render_template("teacher-manual.html",
+                               current_page="teacher-manual",
+                               page_title=page_title,
+                               section_titles=section_titles,
+                               section_key=section_key,
+                               section_title=current_section['title'],
+                               intro=intro,
+                               subsection_titles=subsection_titles,
+                               subsections=subsections,
+                               levels=levels)
 
     @route("/class/<class_id>", methods=["GET"])
     @requires_login
