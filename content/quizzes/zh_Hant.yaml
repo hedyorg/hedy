@@ -502,3 +502,130 @@ levels:
             code: "options {is} rock, paper, scissors\n{print} 'options {at} {random}'"
             mp_choice_options:
             -   option: "```\n'{print} options {at} {random}'\n```\n"
+                feedback: Never put the quotation mark in front of the {print} command.
+            -   option: "```\n{print} 'options' {at} {random}\n```\n"
+                feedback: options is a variable. You don't literally want to print 'options {at} {random}'.
+            -   option: "```\n{print} options {at} {random}\n```\n"
+                feedback: That's right
+            -   option: Nothing, the game already works!
+                feedback: Look carefully. There is an error.
+            correct_answer: C
+            hint: You don't want Hedy to literally print 'options {at} {random}', you want it to print 'rock' or 'paper' or 'scissors'.
+            question_score: '10'
+        7:
+            correct_answer: A
+            question_text: What's wrong with this code?
+            code: "question {is} {ask} What do you want to know?\nanswers {is} yes, no, maybe\n{print} answers {at} {random}"
+            mp_choice_options:
+            -   option: Quotation marks are missing in line 1
+                feedback: Correct!
+            -   option: Quotation marks are missing in line 2
+                feedback: A variable doesn't need quotes
+            -   option: Quotation marks are missing in line 3
+                feedback: You don't want Hedy to literally print 'answers {at} {random}' so no quotation marks needed here!
+            -   option: Nothing, this code is good as is!
+                feedback: Look carefully. You missed a mistake!
+            hint: Check each line on whether they'd need quotation marks or not.
+            question_score: '10'
+        6:
+            question_text: What would be a good next line in this code?
+            code: prices {is} 1 dollar, 100 dollars, 1 million dollars
+            mp_choice_options:
+            -   option: "```\n{print} 'You win...' prices {at} {random}\n```\n"
+                feedback: Great! You get it!
+            -   option: "```\n{print} You win... 'prices {at} {random}'\n```\n"
+                feedback: Hedy will literally print 'prices {at} {random}'
+            -   option: "```\n{print} You win... prices {at} {random}\n```\n"
+                feedback: You need some quotation marks!
+            -   option: "```\n{print} 'You win... prices {at} {random}'\n```\n"
+                feedback: Hedy will literally print 'prices {at} {random}''
+            correct_answer: A
+            hint: 'Think carefully: what is a variable and should be outside of the quotation marks? And what are normal words that should be inside?.'
+            question_score: '10'
+        8:
+            question_text: What would be a good next line for this code?
+            code: "{print} 'Welcome at the money show!'\n{print} 'In front of you are 3 doors'\ndoor {is} {ask} 'Which door do you choose?'"
+            mp_choice_options:
+            -   option: "```\n{print} So you pick door door\n```\n"
+                feedback: We need quotation marks
+            -   option: "```\n{print} 'So you pick ' door door\n```\n"
+                feedback: If the player chooses door 3, Hedy will say 'So you pick 3 3
+            -   option: "```\n{print} 'So you pick door ' door\n```\n"
+                feedback: Super!
+            -   option: "```\n{print} 'So you pick door door'\n```\n"
+                feedback: Hedy will literally print 'So you pick door door
+            correct_answer: C
+            hint: The second word door should be replaced with the number, the first should still be the word door...
+            question_score: '10'
+        9:
+            question_text: What will never appear in your output screen?
+            code: "clubs {is} Real Madrid, Bayern Munchen, Manchester United, Ajax\n{print} clubs {at} {random} ' is going the win the champions league'"
+            mp_choice_options:
+            -   option: Ajax is going to win the champions league
+                feedback: Hedy could `{print}` that
+            -   option: Real Madrid is going to win the champions league
+                feedback: Hedy could `{print}` that
+            -   option: Bayer Munchen is going to win the champions league
+                feedback: Hedy could `{print}` that
+            -   option: FC Barcelona is going to win the champions league
+                feedback: That's right. It's not in the list
+            correct_answer: D
+            hint: What are Hedy's options to randomly pick from?
+            question_score: '10'
+        10:
+            question_text: Which statement is true?
+            code: "people {is} mom, dad, Emma, Sophie\n{print} The dishes are done by...\n{print} people {at} {random}"
+            mp_choice_options:
+            -   option: Quotation marks are missing in line 1
+                feedback: A list doesn't need quotation marks
+            -   option: Quotation marks are missing in line 2
+                feedback: Correct
+            -   option: Quotation marks are missing in both line 2 and 3
+                feedback: Line 3 doesn't need quotation marks because it's not printed literally
+            -   option: Nothing, this code has no mistakes
+                feedback: You missed one!
+            correct_answer: B
+            hint: One line needs quotation marks, because you want it to be printed literally.
+            question_score: '10'
+    5:
+        2:
+            mp_choice_options:
+            -   option: fun
+                feedback: That's right!
+            -   option: less fun
+                feedback: If the name is Hedy, it will say 'fun''
+            -   option: Hedy
+                feedback: No, it doesn't print the name
+            -   feedback: Fortunately not!
+                option: Error
+            question_text: What appears in your output screen when you type in the name Hedy?
+            code: "name {is} {ask} 'What is your name?'\n{if} name {is} Hedy {print} 'fun' {else} {print} 'less fun'"
+            correct_answer: A
+            hint: '`{if}` name `{is}` Hedy `{print}` ...?'
+            question_score: '10'
+        1:
+            question_text: Which command should be filled in on the _?_?
+            code: "number {is} {ask} 'What is your lucky number?'\n{if} number {is} 5 {print} 'Mine too!'\n_?_ {print} 'My lucky number is 5!'"
+            mp_choice_options:
+            -   option: "```\n{print}\n```\n"
+                feedback: There already is a `{print}` command.
+            -   option: "```\n{if}\n```\n"
+                feedback: The `{if}` command is used in the line above.
+            -   option: "```\n{sleep}\n```\n"
+                feedback: That's not it!
+            -   option: "```\n{else}\n```\n"
+                feedback: That's right!
+            correct_answer: D
+            hint: Which one goes together with the `{if}` command?
+            question_score: '10'
+        3:
+            question_text: What is the right password?
+            code: "password {is} {ask} 'What is the password?'\n{if} password {is} SECRET {print} 'Correct!'\n{else} {print} 'ALARM! INTRUDER!'"
+            mp_choice_options:
+            -   option: Correct!
+                feedback: This is printed when you type in the correct password
+            -   option: SECRET
+                feedback: That's right!'
+            -   option: password
+                feedback: The password isn't password...
+            -   option: ALARM INTRUDER
