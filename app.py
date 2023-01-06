@@ -704,6 +704,15 @@ def version_page():
                            heroku_release_time=the_date,
                            commit=commit)
 
+@app.route('/commands/<id>')
+def all_commands(id):
+    program = DATABASE.program_by_id(id)
+    code = program.get('code')
+    level = program.get('level')
+    lang = program.get('lang')
+    return render_template(
+        'commands.html',
+        commands=hedy.all_commands(code, level, lang))
 
 @app.route('/my-achievements')
 def achievements_page():
