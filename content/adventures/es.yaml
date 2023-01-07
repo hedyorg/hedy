@@ -406,7 +406,7 @@ adventures:
                     ```
 
                 start_code: "{print} '¡Vamos a cantar!'"
-                example_code_2: "```\nnumero = 6\nnumero = numero - 1\nprint numero ' monos saltando en la ventana'\nprint 'Uno se calló y se golpeó su cabeza'\nprint 'Mamá llamo al doctor y el doctor dijo'\nprint 'NO MÁS MONOS SALTANDO EN LA CAMA'\nsleep\n```\n"
+                example_code_2: "```\nnúmero = 6\nnúmero = número - 1\n{print} número 'pequeños monos saltando en la cama'\n{print} 'Uno se cayó y se golpeó la cabeza'\n{print} 'Mamá llamó al doctor y el doctor dijo'\n{print} '¡NO MÁS MONOS SALTANDO EN LA CAMA!'\n{sleep}\n```\n"
                 story_text_2: "## 5 Monos saltando en la cama\nEsta canción de niños cuenta desde 5 monos hasta un mono.\n¡Si copias las líneas 2 a 7 debajo del código, puedes cantar toda la canción!\n"
             12:
                 example_code: "```\n_ acciones = 'aplaude', 'mueve los pies así', '¡grita hurra!'\n_ {for} accion {in} acciones\n_ {for} i {in} {range} 1 {to} 2\n_ {print} 'si estás feliz y lo sabes'\n_ {print} accion\n_ {print} 'Si en verdad estas contento tu sonrisa es el reflejo'\n_ {print} 'si estás feliz y lo sabes'\n_ {print} accion\n```\n"
@@ -720,11 +720,11 @@ adventures:
                 example_code_2: "## Avances\n\n¿Pudiste calcular la puntuación para los 8 dados? Eso necesito que copiaras y pegaras mucho, ¿verdad? ¡Vamos a hacer eso más fácil en el nivel 7!\n"
             5:
                 story_text: |
-                    ## Dados
-                    También puedes hacer un dado otra vez en este nivel usando el `{if}`
-                    Completa el código de ejemplo de forma que diga "Puedes dejar de tirar" una vez te sale un gusanito.
+                    ## Dado
+                    También puede volver a programar el cubo en este nivel, esta vez con `{if}`.
+                    Complete el código de muestra para que imprima "Puedes dejar de rodar" una vez que hayas rodado una lombriz.
 
-                    Pero quizás quieres recrear el dado de un juego completamente diferente. ¡Eso está bien también! Luego haz tu propia reacción. Por ejemplo, 'sí' para 6 y 'oh no' {else} (sino).
+                    También es posible que desee recrear un cubo de un juego completamente diferente. ¡Eso también es genial! Luego inventa tu propia reacción. Por ejemplo, 'sí' con un 6 y 'muy mal' para todo lo demás.
                 example_code: |
                     ```
                     opciones {is} 1, 2, 3, 4, 5, gusanito
@@ -1364,32 +1364,32 @@ adventures:
                 start_code: '# pon tu código aquí'
             9:
                 story_text: "Ahora que sabes cómo anidar varias instrucciones, ¡también puedes hacerlo con {pressed}!\nAl anidar un pulsado en un bucle {repeat}, puedes pulsar botones repetidamente y hacer que algo suceda.\nAhora sabemos que podrías hacerlo antes, ¡pero al usar los sangrados tienes mucha más visibilidad!\n¡Inténtalo contando hasta 5, por ejemplo!\n"
-                example_code: "```\ntotal = 1\n{repeat} 5 veces\n    {if} x {is} {pressed}\n        {print} total\n        {print} '¡sigue presionando!'\n        total = total + 1\n```\n"
+                example_code: "```\ntotal = 1\n{repeat} 5 {times}\n    {if} x {is} {pressed}\n        {print} total\n        {print} '¡sigue presionando!'\n        total = total + 1\n```\n"
                 story_text_2: "Además de contar, ¡ahora también puedes mover la tortuga de muchas más maneras que solo hacia adelante o hacia atrás!\n¡Intenta hacer algunas figuras moviendo la tortuga!\n"
-                example_code_2: "```\nstepsize = 25\nleft = -90\nright = 90\naround = 180\nrepeat 40 times\n    {if} w {is} {pressed}\n        forward stepsize\n    {if} s {is} {pressed}\n        turn around\n    {if} a {is} {pressed}\n        turn left\n    {if} d {is} {pressed}\n        turn right\n```\n"
+                example_code_2: "```\ntamaño de paso = 25\nizquierda = -90\nderecha = 90\nalrededor = 180\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} tamaño de paso\n    {if} s {is} {pressed}\n        {turn} alrededor\n    {if} a {is} {pressed}\n        {turn} a la izquierda\n    {if} d {is} {pressed} {turn} a la derecha\n        {turn} a la derecha\n```\n"
                 start_code: '# pon tu código aquí'
             10:
                 story_text: "En este nivel puedes hacer que la tortuga te dibuje una figura. La tortuga está ansiosa por empezar.\nDale la señal de inicio a la tortuga pulsando la tecla x o y de tu teclado.\n¿Puedes hacer que la tortuga te dibuje otra figura?\n"
-                example_code: "```\ndistances = 100, 80, 60, 40, 20, 10\n{if} x {is} {pressed}\n    for distance in distances\n        {forward} distance\n        {turn} -90\n{if} y {is} {pressed}\n    for distance in distances\n        {forward} distance\n        {turn} 90\n```\n"
+                example_code: "```\ndistancias = 100, 80, 60, 40, 20, 10\n{if} x {is} {pressed}\n    {for} distancia {in} distancias\n        {forward} distancia\n        {turn} -90\n{if} y {is} {pressed}\n    {for} distancia {in} distancias\n        {forward} distancia\n        {turn} 90\n```\n"
                 start_code: '# pon tu código aquí'
             11:
                 story_text: "Ahora que conoce la regla `{for} ... {in} {range} ... {to} ...`, puede usarla para `{pressed}`\n¡también! por ejemplo, ¡intenta mover la tortuga! La tortuga crece cada vez que presionas un botón vinculado.\n¡De esta manera la tortuga puede avanzar más a cada paso!\n"
-                example_code: "```\nleft = -90\nright = 90\naround = 180\nfor counter in range 1 to 15\n    stepsize = counter * 5\n    {if} w {is} {pressed}\n        forward stepsize\n    {if} s {is} {pressed}\n        turn around\n    {if} a {is} {pressed}\n        turn left\n    {if} d {is} {pressed}\n        turn right\n```\n"
+                example_code: "```\nizquierda = -90\nderecha = 90\nalrededor = 180\n{for} contador {in} {range} 1 {to} 15\n    tamaño de paso = contador * 5\n    {if} w {is} {forward}\n        {forward} número de pasos\n    {if} s {is} {forward}\n        {turn} alrededor\n    {if} a {is} {pressed}\n        {turn} a la izquierda\n    {if} d {is} {pressed} \n        {turn} a la derecha\n```\n"
                 start_code: '# pon tu código aquí'
             12:
                 story_text: "¿Tienes experiencia con los videojuegos? Entras en una hierba alta y de la nada se te acerca\nun ratón muy sospechoso. ¿Qué harías?\nEn este nivel crearemos un pequeño menú con diferentes opciones.\nAlmacenar texto en una variable es muy útil para repetir su uso.\nOpción, ¡te elijo a ti!\n"
-                example_code: "```\nchoose = 'You chose option: '\nprint 'A wild mouse appeared!'\nprint 'Choose an option and press first letter: (n)et, (c)at, (b)ag, (r)un'\n{if} n {is} {pressed}\n    {print} choose + 'net'\n    {print} 'You attempt to catch the mouse with a net..'\n    sleep\n    {print} 'Congratulations you did it!'\n{if} c {is} {pressed}\n    {print} choose + 'cat'\n    {print} 'You send out your cat'\n    sleep\n    {print} 'The mouse got scared and ran away!'\n{if} b {is} {pressed}\n    {print} choose + 'bag'\n    {print} 'The mouse jumped into you bag!'\n{if} r {is} {pressed}\n    {print} choose + 'run'\n    {print} 'You got away safely!'\n```\n"
+                example_code: "```\nescoger = 'Has elegido la opción: '\n{print} '¡Apareció un ratón salvaje!'\n{print} 'Elige una opción y pulsa la primera letra: (n)et, (c)at, (b)ag, (r)un'\n{if} n {is} {pressed}\n    {print} elegir + 'red'\n    {print} 'Intentas atrapar al ratón con una red..'\n    {sleep}\n    {print} '¡Enhorabuena lo has conseguido!'\n{if} c {is} {pressed}\n    {print} elegir + 'cat'\n    {print} 'Envías a tu gato'\n    {sleep}\n    {print} '¡El ratón se asustó y huyó!'\n{if} b {is} {pressed}\n    {print} elegir + 'bag'\n    {print} '¡El ratón saltó a tu bolsa!'\n{if} r {is} {pressed}\n    {print} elegir + 'run'\n    {print} `¡Has escapado sano y salvo!\n```\n"
                 start_code: '# pon tu código aquí'
             6:
                 start_code: '# coloque su código aquí'
                 story_text: "¿Sabías que también puedes hacer una calculadora con la tecla `{pressed}`?\nDale a la calculadora dos números y pulsa la tecla m para multiplicar.\n¡Ahora ya no tienes que traer la tuya!\nPrueba con otras teclas y ¡a ver qué pasa! ¿Obtienes un resultado diferente?\n"
-                example_code: "```\nprimero = {ask} '¿cuál es tu primer número?'\nsegundo = {ask} '¿cuál es tu segundo número?'\nprint 'pulsa a para sumar, s para restar, d para dividir, m para multiplicar'\nif a {is} {pressed} resultado = primero + segundo\nif s {is} {pressed} resultado = primero - segundo\nif d {is} {pressed} resultado = primero / segundo\nif m {is} {pressed} resultado = primero * segundo\nprint 'La respuesta es ' resultado\n```\n"
+                example_code: "```\nprimero = {ask} '¿Cuál es tu primer número?'\nsegundo = {ask} '¿Cuál es tu segundo número?'\n{print} 'presione a para sumar, s para restar, d para dividir, m para multiplicar'\n{if} un {is} {pressed} resultado = primero + segundo\n{if} s {is} {pressed} resultado = primero - segundo\n{if} d {is} {pressed} resultado = primero / segundo\n{if} m {is} {pressed} resultado = primero * segundo\n{print}'La respuesta es' resultado\n```\n"
             5:
                 story_text_2: "## Si se presiona más\nTambién puede asignar una instrucción `{else}` a `{pressed}`. La instrucción `{else}` se ejecutará cada vez que presione una tecla que no sea la tecla que asignó.\n"
                 example_code_2: "```\n{if} y {is} {pressed} {print} '¡Genial! ¡Presionaste la tecla y!'\n{else} {print} '¡Oh, no! No presionaste la tecla y.\n```\n"
                 start_code: '# coloque aquí su código'
                 story_text: "## ¡Presiónelo!\n¡En la introducción también se le informó acerca de la nueva palabra clave `{pressed}`! Usando `{pressed}`\npuede hacer que la codificación sea mucho más interactiva, ¡y puede tener control en vivo de lo que se ejecuta!\nEn los próximos niveles, aprenderá cómo `{pressed}` lo hace posible y qué utiliza `{pressed}`.\nposee.\nAdemás de imprimir texto, hay toda una variedad de usos para `{pressed}`\nPor ejemplo, ¡también puede vincular los comandos de tortuga a las teclas! ¡Intentalo!\n"
-                example_code: "```\nsi x {is} {pressed} {forward} 50\n```\n"
+                example_code: "```\n{if} x {is} {pressed} {forward} 50\n```\n"
         name: ¡Presiónalo!
         description: ¡Intenta vincular una tecla del teclado a un comando!
         default_save_name: Presione
