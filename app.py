@@ -1635,6 +1635,7 @@ def nl2br(x):
 
 SLUGIFY_RE = re.compile('[^a-z0-9_]+')
 
+
 @app.template_filter()
 def slugify(s):
     """Convert arbitrary text into a text that's safe to use in a URL."""
