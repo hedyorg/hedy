@@ -2637,8 +2637,8 @@ adventures:
     pressit:
         levels:
             8:
-                start_code: '# place your code here'
-                story_text: "## Press It!\nNow that you need to use indents for the {if} and {else} statements,\nyou will also have to indent code when using {pressed}! Don't worry,\nit works te same as with the other statements, see the example!\nPress another key instead of x and see what happens.\n"
+                start_code: '# Platziere deinen Code hier'
+                story_text: "## Drück es!\nJetzt wo du Einrückungen für {if} und {else} Befehle nutzen musst,\nwirst du auch Code einrücken müssen, wenn du {pressed} nutzt! Keine Bange,\nes funktioniert wie bei den anderen Befehlen. Schau dir das Beispiel an!\nDrück eine andere Taste anstelle von x und sieh was passiert.\n"
                 example_code: "```\n{if} x {is} {pressed}\n    {print} 'Only the cool kids press the x key.'\n{else}\n    {print} 'The adventurous kids press something else.'\n```\n"
             9:
                 start_code: '# place your code here'
@@ -2689,9 +2689,9 @@ adventures:
                 example_code: "```\nerstes = {ask} 'Was ist deine erste Zahl?'\nzweites = {ask} 'Was ist deine zweite Zahl?'\n{print} 'press a to add, s to substract, d to divide, m to multiply'\n{if} a {is} {pressed} ergebnis = erstes + zweites\n{if} s {is} {pressed} ergebnis = erstes - zweites\n{if} d {is} {pressed} ergebnis = erstes / zweites\n{if} m {is} {pressed} ergebnis = erstes * zweites\n{print}'Die Antwort ist ' ergebnis\n```\n"
                 start_code: '# Platziere deinen Code hier'
             7:
-                example_code: "```\n{repeat} 3 {times} {if} x {is} {pressed} forward 15\n```\n"
-                start_code: '# place your code here'
-                story_text: "You might have tried it in level 5 and 6, pressing the key linked to ```pressed``` multiple\ntimes. If you did, you noticed that this did nothing. but now that you have learned about repeat, we\ncan press keys multiple times! Make the turtle walk forward!\n"
+                example_code: "```\n{repeat} 3 {times} {if} x {is} {pressed} {forward} 15\n```\n"
+                start_code: '# Platziere deinen Code hier'
+                story_text: "Du hast vielleicht in Level 5 und 6 probiert die Taste, die an `{pressed}` gebunden war, mehrfach zu drücken. Falls dem so ist, ist dir aufgefallen, dass nichts passierte. Aber nun da du `{repeat}` kennen gelernt hast, können wir Tasten mehrfach drücken! Mach, dass die Schildkröte vorwärts geht!\n"
         name: Drück es!
         description: Versuche eine Taste an einen Befehl zu binden!
         default_save_name: Drückes
