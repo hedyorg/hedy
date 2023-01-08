@@ -8,36 +8,36 @@ adventures:
                 story_text: |
                     ## Bienvenue Hedy !
                     Au niveau 1, tu peux utiliser les commandes `{print}`,`{ask}` et `{echo}`.
-                    Ecris ton code dans le programme field. Ou appuie sur le bouton vert dans l'exemple du bloc de code et le code se fera automatiquement pour toi !
-                    Essaye le code toi-même avec le bouton vert "executer le code"situé sous le champ de programmation.
+                    Écris ton code dans le champ de programmation. Ou appuie sur le bouton vert dans l'exemple du bloc de code et le code se fera automatiquement pour toi !
+                    Essaye le code toi-même avec le bouton vert "exécuter le code" situé sous le champ de programmation.
 
-                    Tu peux afficher du texte à l'écran en utilisant la commande `{print}`.
+                    Tu peux afficher du texte à l'écran en utilisant la commande `{print}`.     
                 start_code: "{print} bonjour le monde !"
                 example_code: "```\n{print} Bonjour !\n{print} Bienvenue sur Hedy !\n```\n"
-                story_text_2: "Tu peux aussi demander une entrée avec `{ask}` et la répété avec une commande `{echo}`.\n"
-                example_code_2: "```\n{ask} Quel est ton nom ?\n{echo} hello\n```\n"
+                story_text_2: "Tu peux aussi demander une entrée avec `{ask}` et la répéter avec une commande `{echo}`.\n"
+                example_code_2: "```\n{ask} Quel est ton nom ?\n{echo} bonjour\n```\n"
                 story_text_3: "Commençons  ! Tu ne sais pas quoi créer ? Tu trouveras des idées de programmes à réaliser dans les onglets suivants.\n"
             2:
                 story_text: |
                     ## Variables
-                    Au niveau 2, nous apprenons deux nouvelles comandes : `{is}` et `{sleep}`.  
-                    Tu peux nommer un mot avec `{is}`. C'est ce que l'on appelle une variable. Dans cet exemple, on a fait une variable appelé nom et une variable appelé age. Tu peux utiliser le mot nom n'importe où dans ton code et il sera remplacé par Hedy comme cela :
+                    Au niveau 2, nous apprenons deux nouvelles commandes : `{is}` et `{sleep}`.  
+                    Tu peux nommer un mot avec `{is}`. C'est ce que l'on appelle une variable. Dans cet exemple, on a fait une variable appelée nom et une variable appelée age. Tu peux utiliser le mot nom n'importe où dans ton code et il sera remplacé par Hedy comme cela :
 
                     De cette manière, tu n'as plus besoin de la commande `{echo}` !
                 start_code: "{print} bonjour le monde !"
-                story_text_2: "`{print}` fonctionne toujours de la même manière, mais la commande `{ask}` a changé. Tu as besoin d’une variable pour stocker la réponse. Voici à quoi cela ressemble :\n"
-                example_code: "```\nname {is} Hedy\nage {is} 15\n{print} name is age years old\n```\n"
+                story_text_2: "`{print}` fonctionne toujours de la même manière, mais la commande `{ask}` a changé. Tu as besoin d’une variable pour stocker la réponse dans `{ask}`. Voici à quoi cela ressemble :\n"
+                example_code: "```\nnom {is} Hedy\nage {is} 15\n{print} nom à age ans\n```\n"
                 example_code_2: "```\nreponse {is} {ask} Comment t'appelles-tu ?\n{print} Salut reponse\n```\n"
-                story_text_3: "Une autre nouvelle commande de ce niveau est `{sleep}`, qui te permet de mettre le programme en pause pendant un certain temps. Lorsque tu tapes un chiffre après la commande {sleep}, le programme s’interrompt pendant ce nombre de secondes.\n"
+                story_text_3: "Une autre nouvelle commande de ce niveau est `{sleep}`, qui te permet de mettre le programme en pause pendant un certain temps. Lorsque tu tapes un chiffre après la commande {sleep}, le programme s’interrompt durant ce nombre de secondes.\n"
                 example_code_3: "```\n{print} Ma couleur préférée est...\n{sleep} 2\n{print} le vert !\n```\n"
             3:
                 story_text: |
                     ## Fais une liste !
-                    Au niveau 3, tu peux faire une liste. tu peux ensuite laisser l'ordinateur choisir au hasard dans la liste. tu fais cela avec `{at} {random}`.
+                    Au niveau 3, tu peux faire une liste. tu peux ensuite laisser l'ordinateur choisir au hasard dans la liste. Tu fais ça avec `{at} {random}`.
                 start_code: "{print} bonjour le monde !"
-                example_code: "```\nanimals {is} dog, cat, kangaroo\n{print} animals {at} {random}\n```\n"
+                example_code: "```\nanimaux {is} chien, chat, kangourou\n{print} animaux {at} {random}\n```\n"
                 story_text_2: Dans ce niveau, tu peux aussi ajouter des éléments à une liste par la commande `{add}` et en supprimer avec la commande `{remove}`.
-                example_code_2: "```\nanimals {is} dog, cat, kangaroo\n{add} penguin {to_list} animals\n{remove} cat {from} animals\n{print} animals {at} {random}\n```\n"
+                example_code_2: "```\nanimaux {is} chien, chat, kangourou\n{add} pingouin {to_list} animaux\n{remove} chat {from} animaux\n{print} animaux {at} {random}\n```\n"
             4:
                 start_code: "{print} 'Bonjour le monde'"
                 story_text: |
@@ -65,8 +65,8 @@ adventures:
                 example_code_3: "```\njolies_couleurs {is} vert, jaune\ncouleur_préférée {is} {ask} 'Quelle est ta couleur préférée ?'\n{if} couleur_préférée {in} jolies_couleurs {print} 'joli !'\n{else} {print} 'mouais'\n```\n"
                 story_text_2: "Parfois, le code avec un `{if}` devient vraiment long et ne tient plus très bien dans la zone de texte. Tu peux alors le répartir sur deux lignes en commençant la seconde au `{else}`, comme ceci :\n"
                 example_code_2: "```\nnom {is} {ask} 'quel est ton nom ?'\n{if} nom {is} Hedy {print} 'chouette'\n{else} {print} 'moins amusant !'\n```\n"
-                example_code_4: "```\n{if} x {is} {pressed} {print} 'it worked!'\n```\n"
-                story_text_4: "Something else that works with `{if}` is `pressed`! With pressed you can link any letter in\nthe alphabet and any number key on your keyboard to a command. If you link it, and press the key,\nsomething will happen. Try it out!\n"
+                example_code_4: "```\n{if} x {is} {pressed} {print} 'ça fonctionne!'\n```\n"
+                story_text_4: "Quelque chose qui fonctionne quand `{if}` est `{pressed}`! Avec `{pressed}` tu peux lier une lettre de l'alphabet et un nombre sur ton clavier via une commande. Si tu les lies, et que tu appuies sur la touche, quelque chose va se passer. Essaie !\n"
             6:
                 start_code: "{print} '5 fois 5 font ' 5 * 5"
                 story_text: |
@@ -96,8 +96,8 @@ adventures:
                         {print} 'Ceci sera affiché 5 fois'
                 story_text: |
                     ## Indentation
-                    `{ask}` et `{print}` fonctionnent comme tu y es habitué. Mais `{if}`, `{else}` et `{repeat}` ont changé !
-                    Tu peux maintenant exécuter des groupes de commandes ensemble, mais tu dois indenter ces commandes.
+                    `{ask}` et `{print}` fonctionnent comme tu y es habitué. Mais `{if}`, `{else}`, {pressed} et `{repeat}` ont changé!
+                    Tu peux maintenant exécuter des groupes de commandes ensemble, mais tu dois *indenter* ces commandes.
                     Cela veut dire que tu dois mettre 4 espaces au début des lignes. Tu devras aussi indenter même si tu veux créer un bloc d'une seule ligne.
                 example_code: |
                     Voici comment la commande `{repeat}` fonctionne maintenant :
@@ -146,7 +146,7 @@ adventures:
                 start_code: |-
                     {for} counter {in} {range} 1 {to} 5
                         {print} counter
-                story_text: "## Loops !  \n`{print}` fonctionne encore comme avant, mais on a ajouté une nouvelle forme pour le `{for}`. Tu peux maintenant taper `{for} counter {in} {range} 1 {to} 5` et utiliser `counter` dans ton programme.  \nEssaie le et regarde le résultat ! Rappelle toi que tu dois encore toujours indenter toutes les lignes après les `{for}` et les `{if}` (cela signifie qu'elles doivent commencer par quatre espaces)"
+                story_text: "## Boucle !\n`{print}` fonctionne encore comme avant, mais on a ajouté une nouvelle forme pour le `{for}`. Tu peux maintenant taper `{for} counter {in} {range} 1 {to} 5` à la place de `{repeat} 5 {times}` et utiliser `counter` dans ton programme. \nEssaie-le et regarde le résultat ! Rappelle-toi que tu dois encore toujours indenter toutes les lignes après les `{for}` et les `{if}` (cela signifie qu'elles doivent commencer par quatre espaces)."
                 example_code: "```\n{for} counter {in} {range} 1 {to} 5\n    {print} counter\n```\n"
             12:
                 start_code: "{print} 'on utilise un point pour les nombres décimaux'\n{print} 2.5 + 2.5"
@@ -214,19 +214,19 @@ adventures:
                     ```
 
                 story_text_3: |-
-                    ##  Input
-                    The final change we will need to make to get Python code is changing `{ask}` into `{input}`.
+                    ## Entrée
+                    Le changement final que l'on aura besoin pour avoir ce code en Python, c'est de changer `{ask}` en `{input}`.
 
                 example_code_3: |
                     ```
-                    {print}('My name is Hedy!')
-                    name = {input}('What is your name?')
-                    {print}('So your name is ', name)
+                    {print}('Mon nom est Hedy!')
+                    nom = {input}('Quel est ton nom?')
+                    {print}('Donc tu t'appelles ', nom)
                     ```
     story:
-        name: "Story"
-        description: "Story"
-        default_save_name: "Story"
+        name: "Histoire"
+        description: "Histoire"
+        default_save_name: "Histoire"
         levels:
             1:
                 story_text: |
@@ -245,16 +245,19 @@ adventures:
                     {print} He hears crazy noises everywhere
                     {print} He's afraid this is a haunted forest
                     ```
-                start_code: "{print} Your story starts here"
-                story_text_2: "## Challenge\nCan you make your own story in Hedy now by using `{print}` , `{ask}` and `{echo}`?\n"
+                start_code: "{print} Ton histoire commence ici"
+                story_text_2: "## Défi\nPeux-tu créer ta propre histoire dans Hedy en utilisant `{print}`,`{ask}` et `{echo}`?\n"
             2:
                 story_text: |
-                    ## Story
-                    In level 2 you can make your story more fun. Your main character's name can now be anywhere in the sentence.
+                    ## Histoire
+                    Dans le niveau 2 tu peux créer une histoire plus drôle. Le nom de ton personnage principal peut être dans n'importe quel endroit de la phrase
 
-                    You do have to program a little bit extra for that. You must now name your main character first.
+                    Tu devras programmer un petit peu plus pour ça. Tu dois d'abord donner un nom à ton personnage principal.
 
-                    You can then put that name anywhere in a sentence.
+                    Tu peux ensuite mettre ce nom n'importe où dans la phrase.
+
+                    ## Défi
+                    Peux-tu créer une histoire en utilisant une variable toi-même ? Tu peux ajouter plusieurs variables ?
                 example_code: |-
                     ```
                     name {is} {ask} What is the name of the main character?
@@ -264,7 +267,7 @@ adventures:
                     {sleep}
                     {print} name is afraid this is a haunted forest
                     ```
-                start_code: "{print} Your story"
+                start_code: "{print} Ton histoire"
             3:
                 story_text: |
                     ## Story
@@ -1991,7 +1994,7 @@ adventures:
                         {print} name ' will get a ' pets {at} {random} ' as their pet.'
                         {sleep}
                     ```
-                story_text_2: We can also make a Harry Potter themed fortune teller.
+                story_text_2: "## Défi\nOn peut aussi recréer le choixpeau de Harry Potter. Complète le code sur la ligne 5 et ajoute une bonne indentation de la ligne 6 à 8 et ce programme sera comme la choixpeau magique !\n"
                 example_code_2: |
                     ```
                     houses = Gryffindor, Slytherin, Hufflepuff, Ravenclaw
