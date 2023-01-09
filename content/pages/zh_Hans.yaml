@@ -354,16 +354,16 @@ sections:
     -   level: '13'
         sections:
         -   example:
-                solution_code: "game is ask 'Do you want to play a game?'\ntime is ask 'Do you have time to play?'\nif game is 'yes' and time is 'yes'\n    print 'Lets play!'\n"
+                solution_code: "游戏是问“你想玩游戏吗？”\n时间是问'你有时间玩吗？\n如果游戏是“是”或时间是“是”\n     打印“让我们玩吧！”\n"
                 error_text: "两个指令虽然可能看起来类似，然而它们拥有不同的功能.\n"
-                error_code: "game is ask 'Do you want to play a game?'\ntime is ask 'Do you have time to play?'\nif game is 'yes' or time is 'yes'\n    print 'Lets play!'\n"
-                solution_text: "In this case, the person should answer yes on both questions, so you should use `and`.\n"
+                error_code: "游戏是问“你想玩游戏吗？”\n时间是问'你有时间玩吗？\n如果游戏是“是”或时间是“是”\n     打印“让我们玩吧！”\n"
+                solution_text: "在这种情况下，这个人应该在两个问题上都回答“是”，所以你应该使用“and”。\n"
             title: 学生搞混了 `和` 与 `或`
     -   level: '14'
         sections:
-        -   title: Students confuse the < and > signs
+        -   title: 学生混淆“<” 和 “> ”符号
             example:
-                error_text: "Often, students are already familiar with these signs from maths class. But if your students don't know these signs yet, they might have a challenge with it.\n"
+                error_text: "通常，学生已经从数学课上熟悉了这些符号。 但是，如果您的学生还不知道这些标志，他们可能会遇到挑战。\n"
                 error_code: "age = ask 'How old are you?'\nif age < 12\n    print 'You are older than I am!'\n"
                 solution_text: "This is the correct code:\n"
                 solution_code: "age = ask 'How old are you?'\nif age > 12\n    print 'You are older than I am!'\n"

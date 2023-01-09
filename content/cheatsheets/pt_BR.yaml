@@ -179,21 +179,21 @@
 12:
 -   name: "números reais"
     explanation: "Números decimais."
-    demo_code: |
+    demo_code: |-
         {print} 'Venha calcular!'
         {print} 'Dois e meio mais dois e meio são...'
         {print} 2.5 + 2.5
 -   name: "atribuição de texto"
     explanation: "Texto com aspas simples depois de `=`"
-    demo_code: |
+    demo_code: |-
         nome = 'Hedy a Robô'
         {print} 'Olá ' nome
--   demo_code: "nome = {ask} 'Quem é você?'\n{if} nome = 'Hedy'\n    {print} 'Olá!'\n"
+-   demo_code: "nome = {ask} 'Quem é você?'\n{if} nome = 'Hedy'\n    {print} 'Olá!'"
     name: aspas simples depois da comparação com {if}
     explanation: Texto com aspas simples depois de `{if}`.
 -   name: texto com aspas dentro de uma lista
     explanation: Uma lista com aspas simples.
-    demo_code: "super_heróis = 'Homem de Ferro', 'Batman', 'Super-Homem'\n{print} super_heróis {at} {random}\n"
+    demo_code: "super_heróis = 'Homem de Ferro', 'Batman', 'Super-Homem'\n{print} super_heróis {at} {random}"
 13:
 -   name: "{and}"
     explanation: "Ambas as partes precisam ser verdadeiras."
