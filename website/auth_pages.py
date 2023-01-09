@@ -1,4 +1,5 @@
 import datetime
+import random
 
 from flask import jsonify, make_response, redirect, request, session
 from flask_babel import gettext
@@ -428,6 +429,7 @@ class AuthModule(WebsiteModule):
             "email": email,
             "language": account["language"],
             "keyword_language": account["keyword_language"],
+            "test_group": random.randint(0,1),
             "created": timems(),
             "teacher_request": True if account.get("is_teacher") else None,
             "third_party": True if account.get("agree_third_party") else None,

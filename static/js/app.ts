@@ -449,7 +449,14 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
         showAchievements(response.achievements, false, "");
       }
       if (response.Error) {
-        error.show(ErrorMessages['Transpile_error'], response.Error);
+        // To Do: extract as helper function for all A-B
+        if(Math.random() > 0.5){
+          error.show(ErrorMessages['Transpile_error_B'], response.Error);
+        }
+        else {
+          error.show(ErrorMessages['Transpile_error'], response.Error);
+        }
+         
         if (response.Location && response.Location[0] != "?") {
           //storeFixedCode(response, level);
           // Location can be either [row, col] or just [row].
