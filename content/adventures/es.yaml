@@ -1374,7 +1374,7 @@ adventures:
                 start_code: '# pon tu código aquí'
             11:
                 story_text: "Ahora que conoce la regla `{for} ... {in} {range} ... {to} ...`, puede usarla para `{pressed}`\n¡también! por ejemplo, ¡intenta mover la tortuga! La tortuga crece cada vez que presionas un botón vinculado.\n¡De esta manera la tortuga puede avanzar más a cada paso!\n"
-                example_code: "```\nizquierda = -90\nderecha = 90\nalrededor = 180\n{for} contador {in} {range} 1 {to} 15\n    tamaño_de_paso = contador * 5\n    {if} w {is} {forward}\n        {forward} tamaño_de_paso\n    {if} s {is} {forward}\n        {turn} alrededor\n    {if} a {is} {pressed}\n        {turn} a la izquierda\n    {if} d {is} {pressed} \n        {turn} a la derecha\n```\n"
+                example_code: "```\nizquierda = -90\nderecha = 90\nalrededor = 180\n{for} contador {in} {range} 1 {to} 15\n    tamaño_de_paso = contador * 5\n    {if} w {is} {forward}\n        {forward} tamaño_de_paso\n    {if} s {is} {forward}\n        {turn} alrededor\n    {if} a {is} {pressed}\n        {turn} izquierda\n    {if} d {is} {pressed} \n        {turn} derecha\n```\n"
                 start_code: '# pon tu código aquí'
             12:
                 story_text: "¿Tienes experiencia con los videojuegos? Entras en una hierba alta y de la nada se te acerca\nun ratón muy sospechoso. ¿Qué harías?\nEn este nivel crearemos un pequeño menú con diferentes opciones.\nAlmacenar texto en una variable es muy útil para repetir su uso.\nOpción, ¡te elijo a ti!\n"
