@@ -5,8 +5,8 @@ describe('Is able to see teacher page', () => {
   it('Passes', () => {
     loginForTeacher();
     goToPage('/for-teachers/manual');
-    cy.get('#button-4').should('be.visible');
-    cy.get('#button-4').click();
+    cy.contains('Frequently made mistakes').should('be.visible');
+    cy.contains('Frequently made mistakes').click();
 
   })
 })
