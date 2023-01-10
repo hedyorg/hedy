@@ -94,7 +94,7 @@ def password_hash(password, salt):
 # You can remove the current user from the Flask session with the `forget_current_user`.
 def remember_current_user(db_user):
     session["user-ttl"] = times() + 5 * 60
-    session["user"] = pick(db_user, "username", "email", "is_teacher")
+    session["user"] = pick(db_user, "username", "email", "is_teacher", "test_group")
     session["lang"] = db_user.get("language", "en")
     session["keyword_lang"] = db_user.get("keyword_language", "en")
 

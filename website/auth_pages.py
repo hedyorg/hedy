@@ -7,7 +7,7 @@ from flask_babel import gettext
 from config import config
 from safe_format import safe_format
 from hedy_content import ALL_LANGUAGES, COUNTRIES
-from utils import extract_bcrypt_rounds, is_heroku, is_testing_request, timems, times
+from utils import extract_bcrypt_rounds, is_heroku, is_testing_request, timems, times, ColoredConsole
 from website.auth import (
     MAILCHIMP_API_URL,
     RESET_LENGTH,
@@ -102,6 +102,14 @@ class AuthModule(WebsiteModule):
             path="/",
             max_age=365 * 24 * 60 * 60,
         )
+
+        # Get test group to send it via cookie to client
+        # If test group not exists, create and save it into database
+        if "test_group" not in user.keys():
+            test_group = True if random.random() > 0.7 else False
+            self.db.update_user(user["username"], {"test_group": test_group})
+        resp.set_cookie('test_group', str(user['test_group']))
+        # ColoredConsole.log("TEEEEEEEST!")
 
         # Remember the current user on the session. This is "new style" logins, which should ultimately
         # replace "old style" logins (with the cookie above), as it requires fewer database calls.
@@ -429,7 +437,7 @@ class AuthModule(WebsiteModule):
             "email": email,
             "language": account["language"],
             "keyword_language": account["keyword_language"],
-            "test_group": random.randint(0,1),
+            "test_group": True if random.random() > 0.7 else False,
             "created": timems(),
             "teacher_request": True if account.get("is_teacher") else None,
             "third_party": True if account.get("agree_third_party") else None,

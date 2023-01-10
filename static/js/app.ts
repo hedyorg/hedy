@@ -450,12 +450,9 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
       }
       if (response.Error) {
         // To Do: extract as helper function for all A-B
-        if(Math.random() > 0.5){
-          error.show(ErrorMessages['Transpile_error_B'], response.Error);
-        }
-        else {
-          error.show(ErrorMessages['Transpile_error'], response.Error);
-        }
+        // To Do: Fallback to default message
+        
+        error.show(ErrorMessages[getClientMessage('Transpile_error', response.test_group, lang)], response.Error);
          
         if (response.Location && response.Location[0] != "?") {
           //storeFixedCode(response, level);
@@ -2208,3 +2205,13 @@ const clearTimeouts = () => {
   timers.forEach(clearTimeout);
   timers = [];
 };
+
+function getClientMessage(clMsg: string, testGroup: boolean, lang: string){
+  console.log("LANG", lang);
+  console.log("TG", testGroup);
+  
+  if(testGroup && lang == "en"){
+    return clMsg + '_TEST';
+  }
+  return clMsg;
+}

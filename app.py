@@ -442,6 +442,10 @@ def parse():
 
     if "Error" in response and error_check:
         response["message"] = gettext('program_contains_error')
+
+    if username:
+        response["test_group"] = session["user"]["test_group"]
+
     return jsonify(response)
 
 
