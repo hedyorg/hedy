@@ -1,4 +1,19 @@
-{% extends "level-page.html" %}
+{% if not raw %}
+    {% extends "level-page.html" %}
+{% else %}
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&display=swap">
+    <link rel="stylesheet" href="{{static('/css/generated.css')}}">
+    <link rel="stylesheet" href="{{static('/css/additional.css')}}">
+    <link rel="shortcut icon" type="image/png" href="{{static('/images/Hedy-logo-96x96.png')}}"/>
+    <link rel="stylesheet" href="{{static('/vendor/gh-fork-ribbon.min.css')}}"/>
+    <link rel="stylesheet" href="{{static('/fontawesome/css/all.min.css')}}"/>
+    <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+    <script src="{{static('/vendor/js-confetti.browser.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+</head>
+
+{% endif %}
 {% block levelbody %}
 {% if intro_tutorial or tutorial %}
 <div id="tutorial-pop-up" class="z-50 fixed hidden" style="width: 500px; top: 20%; left: 50%; transform: translate(-50%, -50%);">
@@ -11,8 +26,9 @@
 {% endif %}
 <div tabindex="0" class="flex-grow p-4 overflow-y">
     {# When we're NOT in adventure mode but DO have adventures, render them in tabs #}
-    {% include "incl-adventure-tabs.html" %}
-
+    {% if not raw %}
+        {% include "incl-adventure-tabs.html" %}
+    {% endif %}
     {% include "incl-editor-and-output.html" %}
 
     {% if latest %}
