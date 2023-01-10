@@ -82,6 +82,10 @@ TUTORIALS = collections.defaultdict(hedy_content.NoSuchTutorial)
 for lang in ALL_LANGUAGES.keys():
     TUTORIALS[lang] = hedy_content.Tutorials(lang)
 
+SLIDES = collections.defaultdict(hedy_content.NoSuchSlides)
+for lang in ALL_LANGUAGES.keys():
+    SLIDES[lang] = hedy_content.Slides(lang)
+
 ACHIEVEMENTS_TRANSLATIONS = hedyweb.AchievementTranslations()
 DATABASE = database.Database()
 ACHIEVEMENTS = achievements.Achievements(DATABASE, ACHIEVEMENTS_TRANSLATIONS)
@@ -1104,9 +1108,10 @@ def view_program(user, id):
     return render_template("view-program-page.html", blur_button_available=True, **arguments_dict)
 
 
-@app.route('/adventure/<name>', methods=['GET'], defaults={'level': 1})
-@app.route('/adventure/<name>/<level>', methods=['GET'])
-def get_specific_adventure(name, level):
+@app.route('/adventure/<name>', methods=['GET'], defaults={'level': 1, 'mode': 'full'})
+@app.route('/adventure/<name>/<level>', methods=['GET'], defaults={'mode': 'full'})
+@app.route('/adventure/<name>/<level>/<mode>', methods=['GET'])
+def get_specific_adventure(name, level, mode):
     try:
         level = int(level)
     except BaseException:
@@ -1131,6 +1136,7 @@ def get_specific_adventure(name, level):
 
     # Add the commands to enable the language switcher dropdown
     commands = hedy.commands_per_level.get(level)
+    raw = mode == 'raw'
 
     return hedyweb.render_specific_adventure(
         commands=commands,
@@ -1138,7 +1144,8 @@ def get_specific_adventure(name, level):
         adventure=adventure,
         version=version(),
         prev_level=prev_level,
-        next_level=next_level)
+        next_level=next_level,
+        raw=raw)
 
 
 @app.route('/cheatsheet/', methods=['GET'], defaults={'level': 1})
@@ -1516,6 +1523,26 @@ def change_language():
     body = request.json
     session['lang'] = body.get('lang')
     return jsonify({'succes': 200})
+
+
+@app.route('/slides', methods=['GET'], defaults={'level': '1'})
+@app.route('/slides/<level>', methods=['GET'])
+def get_slides(level):
+    # In case of a "forced keyword language" -> load that one, otherwise: load
+    # the one stored in the g object
+
+    keyword_language = request.args.get('keyword_language', default=g.keyword_lang, type=str)
+
+    try:
+        level = int(level)
+    except ValueError:
+        return utils.error_page(error=404, ui_message="Slides do not exist!")
+
+    if not SLIDES[g.lang].get_slides_for_level(level, keyword_language):
+        return utils.error_page(error=404, ui_message="Slides do not exist!")
+
+    slides = SLIDES[g.lang].get_slides_for_level(level, keyword_language)
+    return render_template('slides.html', slides=slides)
 
 
 @app.route('/translate_keywords', methods=['POST'])

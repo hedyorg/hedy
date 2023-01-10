@@ -796,7 +796,11 @@ adventures:
                     {ask} _
                     {echo}
                     {echo}
-                start_code: "{print} Im Hedy the parrot"
+                start_code: |
+                    {print} Im Hedy the parrot
+                    {ask} What is your name?
+                    {echo}
+                    {echo}
             2:
                 story_text: |
                     ## Parrot
@@ -1872,7 +1876,9 @@ adventures:
                     {ask} choose from _
                     {echo} so your choice was:
                     ```
-                start_code: "{print} Welcome to your own rock scissors paper!"
+                start_code: |
+                    {print} Welcome to your own rock scissors paper!
+                    {ask} What will you choose?
             2:
                 story_text: |
                     ## Rock, paper, scissors
