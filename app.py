@@ -1525,8 +1525,8 @@ def change_language():
     return jsonify({'succes': 200})
 
 
-@app.route('/hedy/slides', methods=['GET'], defaults={'level': '1'})
-@app.route('/hedy/slides/<level>', methods=['GET'])
+@app.route('/slides', methods=['GET'], defaults={'level': '1'})
+@app.route('/slides/<level>', methods=['GET'])
 def get_slides(level):
     # In case of a "forced keyword language" -> load that one, otherwise: load
     # the one stored in the g object
