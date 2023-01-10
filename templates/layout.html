@@ -86,17 +86,17 @@
     </div>
     <div id="achievement_pop-up" class="z-30 fixed hidden" style="width: 500px; top: 40%; left: 50%; transform: translate(-50%, -50%);">
         <div class="absolute top-2 right-2 cursor-pointer" onclick="hedyApp.closeAchievement();">
-            <svg class="fill-current h-8 w-8 text-white" id="modal-repair-button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+            <svg class="fill-current h-8 w-8 text-blue-600" id="modal-repair-button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
             <title>Close</title>
             <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/>
             </svg>
         </div>
-        <div class="bg-blue-600 border-2 border-black rounded-lg px-8 pt-0 pb-4 text-center">
-            <h3 class="text-white">{{_('achievement_earned')}}</h3>
-            <img id="achievement_reached_image" src="{{static('/images/achievement-320x320.png')}}" loading="lazy" class="h-32 mx-auto" alt="{{_('achievements_logo_alt')}}">
-            <h4 class="text-white italic" id="achievement_reached_title"></h4>
-            <p id="achievement_reached_text"></p>
-            <p id="achievement_reached_statics" class="text-white italic"></p>
+        <div class="border-blue-600 border-8 bg-white border-black rounded-lg p-8 text-center text-black shadow-2xl">
+            <div>{{_('achievement_earned')}}</div>
+            <h3 class="text-pink-500 text-2xl mb-4" id="achievement_reached_title">&lt;achievement_reached_title&gt;</h3>
+            <img id="achievement_reached_image" src="{{static('/images/achievement-320x320.png')}}" loading="lazy" class="h-32 my-8 mx-auto" alt="{{_('achievements_logo_alt')}}">
+            <div id="achievement_reached_text" class="text-xl my-4">&lt;achievement_reached_text&gt;</div>
+            <div id="achievement_reached_statics" class="text-sm text-gray-500" class="italic">&lt;achievement_reached_statics&gt;</div>
         </div>
     </div>
     <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>

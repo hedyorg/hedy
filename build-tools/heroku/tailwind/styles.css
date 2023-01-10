@@ -107,6 +107,12 @@ strong {
   @apply bg-white;
 }
 
+.text-links-plain a {
+  color: inherit;
+  text-decoration: none;
+  font-weight: inherit;
+}
+
 
 .tooltip {
   position: relative;
@@ -308,7 +314,7 @@ code {
 }
 
 .dropdown-item {
-  @apply text-gray-800 no-underline hover:bg-blue-600 py-2 px-4 block;
+  @apply text-gray-800 no-underline hover:bg-blue-600 py-2 px-4 block whitespace-nowrap;
   @apply cursor-pointer w-52 font-medium rounded-md;
   @apply grow-0;
 }
