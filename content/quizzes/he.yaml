@@ -589,19 +589,18 @@ levels:
             hint: What are Hedy's options to randomly pick from?
     5:
         1:
+            question_text: "What is true?"
             mp_choice_options:
-            -   option: "```\n{print}\n```\n"
-                feedback: There already is a `{print}` command.
-            -   option: "```\n{if}\n```\n"
-                feedback: The `{if}` command is used in the line above.
-            -   option: "```\n{sleep}\n```\n"
-                feedback: That's not it!
-            -   feedback: That's right!
-                option: "```\n{else}\n```\n"
-            correct_answer: D
-            hint: Which one goes together with the `{if}` command?
-            code: "number {is} {ask} 'What is your lucky number?'\n{if} number {is} 5 {print} Mine too!\n_?_ {print} My lucky number is 5!"
-            question_text: Which command should be filled in on the _?_?
+            -   option: "In level 5 `{print}` works differently than in level 4"
+                feedback: "`{print}` is still the same"
+            -   option: "In level 5 `{ask}` works differently than in level 4"
+                feedback: "`{ask}` is still the same"
+            -   option: "In level 5 `{ask}` and `{print}` work differently than in level 4"
+                feedback: "`No these commands remain the same"
+            -   option: "In level 5 `{ask}` and `{print}` work the same as in level 4"
+                feedback: "Correct!"
+            correct_answer: "D"
+            hint: "We have only learned a new command in level 5."
             question_score: '10'
         4:
             mp_choice_options:
