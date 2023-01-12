@@ -348,26 +348,7 @@ export function save_customizations(class_id: string) {
         if ($(this).hasClass("green-btn")) {
             levels.push(<string>$(this).val());
         }
-    });
-    let adventures: Record<string, string[]> = {};
-    $('.adventure_keys').each(function() {
-        const name = <string>$(this).attr('adventure') as string;
-        adventures[name] = [];
-    });
-    $('.adventure_level_input').each(function() {
-        const name = <string>$(this).attr('adventure');
-        let current_list = adventures[name];
-        if ($(this).prop("checked")) {
-            current_list.push(<string>$(this).attr('level'));
-            adventures[name] = current_list;
-        }
-    });
-    let teacher_adventures: string[] = [];
-    $('.teacher_adventures_checkbox').each(function() {
-        if ($(this).prop("checked")) {
-            teacher_adventures.push(<string>$(this).attr('id'));
-        }
-    });
+    });    
     let other_settings: string[] = [];
     $('.other_settings_checkbox').each(function() {
         if ($(this).prop("checked")) {
@@ -408,8 +389,6 @@ export function save_customizations(class_id: string) {
       data: JSON.stringify({
           levels: levels,
           opening_dates: opening_dates,
-          adventures: adventures,
-          teacher_adventures: teacher_adventures,
           other_settings: other_settings,
           level_thresholds: level_thresholds,
           sorted_adventures: sorted_adventures
