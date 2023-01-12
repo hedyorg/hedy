@@ -449,9 +449,6 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
         showAchievements(response.achievements, false, "");
       }
       if (response.Error) {
-        // To Do: extract as helper function for all A-B
-        // To Do: Fallback to default message
-        
         error.show(ErrorMessages[getClientMessage('Transpile_error', response.test_group, lang)], response.Error);
          
         if (response.Location && response.Location[0] != "?") {

@@ -368,6 +368,10 @@ def parse():
     username = current_user()['username'] or None
     exception = None
 
+    test_group = False
+    if username:
+        test_group = session["user"]["test_group"]
+
     querylog.log_value(level=level, lang=lang,
                        session_id=utils.session_id(), username=username)
 
@@ -443,8 +447,7 @@ def parse():
     if "Error" in response and error_check:
         response["message"] = gettext('program_contains_error')
 
-    if username:
-        response["test_group"] = session["user"]["test_group"]
+    response["test_group"] = test_group
 
     return jsonify(response)
 
@@ -603,8 +606,17 @@ def translate_error(code, arguments, keyword_lang):
         'is',
         'repeat']
 
+    lang = session['lang']
+    test_group = session['user']['test_group']
+    test_group_ending = "_1"
+    message_variation_id = str(code) + test_group_ending
+    translation_file = open('translations/' + lang + '/LC_MESSAGES/messages.po').read()
+    is_variation_in_translation = message_variation_id in translation_file
+    if not test_group or not is_variation_in_translation:
+        test_group_ending = ""
+
     # Todo TB -> We have to find a more delicate way to fix this: returns some gettext() errors
-    error_template = gettext('' + str(code))
+    error_template = gettext('' + str(code) + test_group_ending)
 
     # Fetch tip if it exists and merge into template, since it can also contain placeholders
     # that need to be translated/highlighted
