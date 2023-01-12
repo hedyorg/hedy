@@ -1,24 +1,25 @@
       {# TABS #}
       <div id="adventures">
         <div class="flex flex-row overflow-x-scroll overflow-y-hidden mb-2 px-2 pt-2" id="adventures-buttons">
-            {% for adventure in adventures %}
-              {% if 'adventures' not in customizations or (customizations['adventures'][adventure.short_name] and level|int in customizations['adventures'][adventure.short_name]) %}
-                <div class="tab {% if loop.index == 1 %}tab-selected{% endif %} z-10 whitespace-nowrap flex items-center justify-center" id="adventure{{ loop.index }}" tabindex="0" data-tab="{{adventure.short_name}}">
-                    {{ adventure.name }}
-                </div>
-              {% endif %}
-            {% endfor %}
+            {% if 'sorted_adventures' in customizations %}                
+                {% for adventure in customizations['sorted_adventures'][level_nr] %}
+                    <div class="tab {% if loop.index == 1 %}tab-selected{% endif %} {% if adventure['from_teacher'] %}teacher_tab{% endif %} z-10 whitespace-nowrap flex items-center justify-center" id="adventure{{ loop.index }}" tabindex="0" data-tab="{% if adventure.from_teacher %}{{adventures_names[adventure.name]}}{% else %}{{adventure.name}}{% endif %}">
+                        {{ adventures_names[adventure['name']] }}
+                    </div>
+                {% endfor %}
+            {% else %}
+                    {% for adventure in adventures_per_level %}
+                    <div class="tab {% if loop.index == 1 %}tab-selected{% endif %} z-10 whitespace-nowrap flex items-center justify-center" id="adventure{{ loop.index }}" tabindex="0" data-tab="{{adventure}}">
+                        {{ adventures_names[adventure]}}
+                    </div>
+                    {% endfor %}
+            {% endif %}
             <!-- Add the tab for the parsons problem (if it exists) -->
             {% if parsons %}
                 <div class="tab special_tab z-10 whitespace-nowrap flex items-center justify-center" tabindex="0" data-tab="parsons">
                     {{_('parsons_title')}}
                 </div>
             {% endif %}
-            {% for adventure in teacher_adventures %}
-                <div class="tab teacher_tab z-10 whitespace-nowrap flex items-center justify-center" tabindex="0" data-tab="{{adventure.name}}">
-                    {{ adventure.name }}
-                </div>
-            {% endfor %}
             <!-- Add the tab for the quiz -->
             {% if quiz %}
                 <div class="tab special_tab z-10 whitespace-nowrap flex items-center justify-center" tabindex="0" data-tab="quiz">
@@ -29,8 +30,12 @@
       {# PANES #}
       <div id="adventures-tab" class="w-full overflow-auto bg-white p-4 mb-8 shadow-md turn-pre-into-ace" style="max-height: 20em;">
         {% for adventure in adventures %}
-          {% if 'adventures' not in customizations or customizations['adventures'][adventure.short_name] and level|int in customizations['adventures'][adventure.short_name]  %}
-            <div data-tabtarget="{{adventure.short_name}}" {% if loop.index != 1 %}class="hidden"{% endif %}>
+          {% if 'sorted_adventures' not in customizations or {'name': adventure.short_name, 'from_teacher': False} in customizations['sorted_adventures'][level_nr]  %}
+            <div data-tabtarget="{{adventure.short_name}}" {% if 'sorted_adventures' not in customizations %} 
+                                                                {% if loop.index != 1 %}class="hidden"{% endif %} 
+                                                            {% else %} 
+                                                                {% if adventure.short_name != customizations['sorted_adventures'][level_nr][0].name %}class="hidden"{% endif %} 
+                                                            {% endif %}>
               <div class="lg:flex lg:flex-row">
                   <div class="{% if adventure.example_code %}lg:w-1/2 {% endif %}w-full p-2 ltr:mr-2 rtl:ml-2">
                       {{ adventure.text|commonmark }}
@@ -68,7 +73,13 @@
             </div>
         {% endif %}
         {% for adventure in teacher_adventures %}
-            <div data-tabtarget="{{adventure.name}}" class="hidden">
+            <div data-tabtarget="{{adventure.name}}" {%if 'sorted_adventures' not in customizations%} 
+                                                        class="hidden" 
+                                                    {% else %} 
+                                                        {% if adventure.id != customizations['sorted_adventures'][level_nr][0].name %}
+                                                            class="hidden"
+                                                        {% endif %}
+                                                    {% endif %}>
                 <div>
                     {{ adventure.content|commonmark }}
                 </div>
