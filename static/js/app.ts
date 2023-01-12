@@ -449,7 +449,7 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
         showAchievements(response.achievements, false, "");
       }
       if (response.Error) {
-        var errorCaption = getCaptionAlternativeIfExist('Transpile_error', response.test_group, lang)
+        var errorCaption = getAlternativeCaptionIfExist('Transpile_error', response.test_group, lang)
         error.show(errorCaption, response.Error);
          
         if (response.Location && response.Location[0] != "?") {
@@ -2204,17 +2204,13 @@ const clearTimeouts = () => {
   timers = [];
 };
 
-function getCaptionAlternativeIfExist(clMsg: string, testGroup: boolean, lang: string){
+function getAlternativeCaptionIfExist(clMsg: string, testGroup: boolean, lang: string){
   console.log("LANG", lang);
   console.log("TG", testGroup);
 
 
   var alternativeErrorMessage = null;
   alternativeErrorMessage = ErrorMessages[clMsg + '_TEST_' + lang];
-
-  console.log(alternativeErrorMessage);
-  
-  
   
   if(alternativeErrorMessage && testGroup){
     return alternativeErrorMessage;
