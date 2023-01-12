@@ -1,53 +1,69 @@
 {% extends "auth.html" %}
 
-{% block regular_content %}
-<div class="text-display-copy copy-container" id="teacher_documentation">
-        <h2 class="text-center">{{ content['title'] }}</h2>
-        <div class="flex flex-wrap gap-2 justify-center mb-16 border-b">
-        {% for section in content['sections'] %}
-            <button class="{% if loop.index != 1 %}green-btn{% else %}blue-btn{% endif %} p-4 section-button" id="button-{{loop.index}}" onclick="hedyApp.show_doc_section('{{loop.index}}')">{{section.title}}</button>
-        {% endfor %}
+{% block full_width_content %}
+    <div class="bg-blue-200 mb-4">
+        <div class="py-4 flex items-center w-full copy-container mx-auto">
+            <div class="tracking-wide text-xl font-extralight">{{ page_title }}</div>
         </div>
-        {% for section in content['sections'] %}
-            <div class="section {% if loop.index != 1 %}hidden{% endif %}" id="section-{{loop.index}}">
-            {% if section.key != "common_mistakes" %}
-                {% for subsection in section['subsections'] %}
-                    <h2>{{ subsection.title }}</h2>
+    </div>
+    <div class="copy-container text-business-copy" id="teacher_documentation">
+        <div class="flex gap-8">
+            <div class="flex-0 w-1/4 text-links-plain rounded-md bg-gray-200 p-4">
+                {# Section nav #}
+                {% for key, title in section_titles %}
+                {% if key == section_key %}
+                    <div class="font-bold my-2"><a href="/for-teachers/manual/{{key}}"><i class="fa-solid fa-chevron-down w-4"></i> {{ title }}</a></div>
+                    {# Subsection nav #}
+                    {% for title in subsection_titles %}
+                        <div class="ltr:ml-8 rtl:mr-8 text-sm"><a href="#{{title|slugify}}">· {{ title }}</a></div>
+                    {% endfor %}
+                {% else %}
+                    <div class="my-2"><a href="/for-teachers/manual/{{key}}"><i class="fa-solid fa-chevron-right w-4"></i> {{ title }}</a></div>
+                {% endif %}
+                {% endfor %}
+            </div>
+
+            <div class="flex-1">
+                {# Main content #}
+                <h2>{{ section_title }}</h2>
+
+                {% if intro %}
+                    <p>{{ intro|commonmark }}</p>
+                {% endif %}
+
+                {# Plain text content #}
+                {% for subsection in subsections %}
+                    <h3 id="{{subsection.title|slugify}}">{{ subsection.title }}</h3>
                     <p>{{ subsection.text|commonmark }}</p>
                 {% endfor %}
-            {% else %}
-                <p>{{ section.intro|commonmark }}</p>
-                <div class="flex flex-col gap-4 mx-0 mb-4 lg:mx-16">
-                    {% for level in section['levels'] %}
-                        <h1 class="section-header" onclick="$('#common_mistakes-{{loop.index}}').slideToggle();">Level {{ level.level }}</h1>
-                        <div class="common-mistakes-section flex flex-col gap-4 mx-0 lg:mx-16" id="common_mistakes-{{loop.index}}">
-                        {% for mistake_section in level.sections %}
-                            <div>
-                                <h2>{{ mistake_section.title }}</h2>
-                                {% if mistake_section.example %} <!-- In this case we expect an error/solution combination -->
-                                    <p>{{ mistake_section.example.error_text|commonmark }}</p>
-                                    <div class="w-full lg:w-1/2 turn-pre-into-ace my-5">
-                                        <pre class="common-mistakes no-copy-button" level="{{ level.level }}" style="font-size: 0.95em;">{{ mistake_section.example.error_code }}</pre>
-                                    </div>
-                                    <p>{{ mistake_section.example.solution_text|commonmark }}</p>
-                                    <div class="w-full lg:w-1/2 turn-pre-into-ace my-5">
-                                        <pre class="common-mistakes no-copy-button" level="{{ level.level }}" style="font-size: 0.95em;">{{ mistake_section.example.solution_code }}</pre>
-                                    </div>
-                                {% else %}
-                                    <p>{{ mistake_section.text|commonmark }}</p>
-                                    {% if mistake_section.code %}
-                                         <div class="w-full lg:w-1/2 turn-pre-into-ace my-5">
-                                             <pre class="common-mistakes no-copy-button" level="{{ level.level }}" style="font-size: 0.95em;">{{ mistake_section.code }}</pre>
-                                         </div>
-                                    {% endif %}
+
+                {# Per-level content, has different structure #}
+                {% for level in levels %}
+                    <h3 id="{{level.title|slugify}}">{{ level.title }}</h3>
+                    {% for mistake_section in level.sections %}
+                        <div>
+                            <h4>{{ mistake_section.title }}</h4>
+                            {% if mistake_section.example %} <!-- In this case we expect an error/solution combination -->
+                                <p>{{ mistake_section.example.error_text|commonmark }}</p>
+                                <div class="w-full lg:w-1/2 turn-pre-into-ace my-5">
+                                    <pre class="common-mistakes no-copy-button" level="{{ level.level }}" style="font-size: 0.95em;">{{ mistake_section.example.error_code }}</pre>
+                                </div>
+                                <p>{{ mistake_section.example.solution_text|commonmark }}</p>
+                                <div class="w-full lg:w-1/2 turn-pre-into-ace my-5">
+                                    <pre class="common-mistakes no-copy-button" level="{{ level.level }}" style="font-size: 0.95em;">{{ mistake_section.example.solution_code }}</pre>
+                                </div>
+                            {% else %}
+                                <p>{{ mistake_section.text|commonmark }}</p>
+                                {% if mistake_section.code %}
+                                        <div class="w-full lg:w-1/2 turn-pre-into-ace my-5">
+                                            <pre class="common-mistakes no-copy-button" level="{{ level.level }}" style="font-size: 0.95em;">{{ mistake_section.code }}</pre>
+                                        </div>
                                 {% endif %}
-                            </div>
-                        {% endfor %}
+                            {% endif %}
                         </div>
                     {% endfor %}
-                </div>
-            {% endif %}
+                {% endfor %}
             </div>
-        {% endfor %}
+        </div>
     </div>
 {% endblock %}
