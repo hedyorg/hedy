@@ -1,5 +1,5 @@
 <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
-<div id="editor-area" class="relative grid grid-cols-1 lg:grid-cols-2 lg:grid-flow-row-dense gap-4 mt-5">
+<div id="editor-area" class="relative grid grid-cols-1 md:grid-cols-2 md:grid-flow-row-dense gap-4 mt-5">
     <div id="fold_out_toggle_container" class="hidden absolute z-10 top-16 ltr:-left-2 rtl:-right-2 cursor-pointer" onclick="hedyApp.show_editor();">
      <div class="bg-green-500 text-white py-3 rounded-lg text-sm">
          <span>→</span>
@@ -7,7 +7,7 @@
     </div>
     <!-- Row 1: editor, output pane -->
     <div class="flex flex-col order-1 relative" id="code_editor" style="min-height: 22rem;">
-        <div id="fold_in_toggle_container" class="hidden lg:flex absolute z-10 top-16 ltr:-right-1 rtl:-left-1 cursor-pointer" onclick="hedyApp.hide_editor();">
+        <div id="fold_in_toggle_container" class="hidden md:flex absolute z-10 top-16 ltr:-right-1 rtl:-left-1 cursor-pointer" onclick="hedyApp.hide_editor();">
          <div id="text_field" class="bg-green-500 text-white py-3 rounded-lg text-sm">
              <span>←</span>
          </div>
@@ -144,7 +144,7 @@
       </div>
     </div>
     <!-- Col 2: run button (move below editor in single-column layout), level buttons -->
-    <div class="order-2 lg:order-4" id="code_related_buttons">
+    <div class="order-2 md:order-4" id="code_related_buttons">
       <div class="flex justify-between gap-2 items-start h-12 overflow-visible">
         <div id="runButtonContainer">
           <button id="runit" class="green-btn" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {{_('already_program_running')|tojson}})'>{{_('run_code_button')}} </button>
@@ -203,18 +203,21 @@
             {% endif %}
           </div>
       {% else %}
-          <div class="flex {% if prev_level %}justify-between{% else %}justify-end{%endif%}">
-            {% if prev_level %}
-              <button class="green-btn" onclick="hedyApp.prompt_unsaved (function () {window.location = '/adventure/{{ adventures[0].short_name}}/{{prev_level}}'})">{{_('regress_button')|replace("{level}", prev_level)}}</button>
+           {% if not raw %}
+                  <div class="flex {% if prev_level %}justify-between{% else %}justify-end{%endif%}">
+                    {% if prev_level %}
+                      <button class="green-btn" onclick="hedyApp.prompt_unsaved (function () {window.location = '/adventure/{{ adventures[0].short_name}}/{{prev_level}}'})">{{_('regress_button')|replace("{level}", prev_level)}}</button>
+                    {% endif %}
+                    {% if next_level %}
+                    <button class="green-btn ltr:ml-1 rtl:mr-1" onclick="hedyApp.prompt_unsaved (function () {window.location = '/adventure/{{ adventures[0].short_name}}/{{next_level}}'})">{{_('advance_button')|replace("{level}", next_level)}}</button>
+                    {% endif %}
+                  </div>
             {% endif %}
-            {% if next_level %}
-            <button class="green-btn ltr:ml-1 rtl:mr-1" onclick="hedyApp.prompt_unsaved (function () {window.location = '/adventure/{{ adventures[0].short_name}}/{{next_level}}'})">{{_('advance_button')|replace("{level}", next_level)}}</button>
-            {% endif %}
-          </div>
       {% endif %}
     </div>
   </div>
 <!-- developer mode toggle -->
+{% if not raw %}
 <div class="mx-auto mt-4 w-64 border-gray-400 border-2 rounded-full py-2 px-4{% if editor_readonly or enforce_developers_mode %} hidden{% endif %}" id="developers_toggle_container">
   <label for="developers_toggle" class="flex flex-row items-center justify-center cursor-pointer">
     <div class="relative">
@@ -225,6 +228,7 @@
     <div class="ltr:ml-3 rtl:mr-3">{{_('developers_mode')}}</div>
   </label>
 </div>
+{% endif %}
 <script>
 document.addEventListener('DOMContentLoaded', (event) => {
      function handleDragStart(e){

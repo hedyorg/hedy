@@ -317,15 +317,17 @@ class Commands(StructuredDataFile):
         return deep_translate_keywords(self.file.get(int(level), {}), keyword_lang)
 
 
-def deep_translate_keywords(x, kwlang):
+def deep_translate_keywords(yaml, keyword_language):
     """Recurse through a data structure and replace keyword placeholders in any strings we encounter."""
-    if isinstance(x, str):
-        return safe_format(x, **KEYWORDS.get(kwlang))
-    if isinstance(x, list):
-        return [deep_translate_keywords(e, kwlang) for e in x]
-    if isinstance(x, dict):
-        return {k: deep_translate_keywords(v, kwlang) for k, v in x.items()}
-    return x
+    if isinstance(yaml, str):
+        # this is used to localize adventures linked in slides (PR 3860)
+        yaml = yaml.replace('/raw', f'/raw?keyword_language={keyword_language}')
+        return safe_format(yaml, **KEYWORDS.get(keyword_language))
+    if isinstance(yaml, list):
+        return [deep_translate_keywords(e, keyword_language) for e in yaml]
+    if isinstance(yaml, dict):
+        return {k: deep_translate_keywords(v, keyword_language) for k, v in yaml.items()}
+    return yaml
 
 
 # Todo TB -> We don't need these anymore as we guarantee with Weblate that
@@ -415,4 +417,18 @@ class Tutorials(StructuredDataFile):
 
 class NoSuchTutorial:
     def get_tutorial_for_level(self, level, keyword_lang):
+        return {}
+
+
+class Slides(StructuredDataFile):
+    def __init__(self, language):
+        self.language = language
+        super().__init__(f'content/slides/{self.language}.yaml')
+
+    def get_slides_for_level(self, level, keyword_lang="en"):
+        return deep_translate_keywords(self.file.get('levels', {}).get(level), keyword_lang)
+
+
+class NoSuchSlides:
+    def get_slides_for_level(self, level, keyword_lang):
         return {}

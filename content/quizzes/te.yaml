@@ -589,19 +589,18 @@ levels:
             question_score: '10'
     5:
         1:
-            question_text: Which command should be filled in on the _?_?
-            code: "number {is} {ask} 'What is your lucky number?'\n{if} number {is} 5 {print} 'Mine too!'\n_?_ {print} 'My lucky number is 5!'"
+            question_text: "What is true?"
             mp_choice_options:
-            -   option: "```\n{print}\n```\n"
-                feedback: There already is a `{print}` command.
-            -   option: "```\n{if}\n```\n"
-                feedback: The `{if}` command is used in the line above.
-            -   option: "```\n{sleep}\n```\n"
-                feedback: That's not it!
-            -   option: "```\n{else}\n```\n"
-                feedback: That's right!
-            correct_answer: D
-            hint: Which one goes together with the `{if}` command?
+            -   option: "In level 5 `{print}` works differently than in level 4"
+                feedback: "`{print}` is still the same"
+            -   option: "In level 5 `{ask}` works differently than in level 4"
+                feedback: "`{ask}` is still the same"
+            -   option: "In level 5 `{ask}` and `{print}` work differently than in level 4"
+                feedback: "`No these commands remain the same"
+            -   option: "In level 5 `{ask}` and `{print}` work the same as in level 4"
+                feedback: "Correct!"
+            correct_answer: "D"
+            hint: "We have only learned a new command in level 5."
             question_score: '10'
         2:
             question_text: What appears in your output screen when you type in the name Hedy?

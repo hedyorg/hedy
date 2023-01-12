@@ -863,34 +863,18 @@ levels:
             question_score: '10'
     5:
         1:
-            question_text: "Which command should be filled in on the _?_?"
-            code: |-
-                数字 {is} {ask} '你的幸运数字是多少？'
-                {if} 数字 {is} 5 {print} '我也是！'
-                _?_ {print} '我的幸运数字是 5！'
+            question_text: "What is true?"
             mp_choice_options:
-            -   option: |
-                    ```
-                    {print}
-                    ```
-                feedback: "已经有一个 `{print}` 命令。"
-            -   option: |
-                    ```
-                    {if}
-                    ```
-                feedback: "在上面一行里使用了 `{if}` 命令。"
-            -   option: |
-                    ```
-                    {sleep}
-                    ```
-                feedback: "That's not it!"
-            -   option: |
-                    ```
-                    {else}
-                    ```
-                feedback: "这就对了!"
+            -   option: "In level 5 `{print}` works differently than in level 4"
+                feedback: "`{print}` is still the same"
+            -   option: "In level 5 `{ask}` works differently than in level 4"
+                feedback: "`{ask}` is still the same"
+            -   option: "In level 5 `{ask}` and `{print}` work differently than in level 4"
+                feedback: "`No these commands remain the same"
+            -   option: "In level 5 `{ask}` and `{print}` work the same as in level 4"
+                feedback: "Correct!"
             correct_answer: "D"
-            hint: "哪一个与`{if}`命令一起使用？"
+            hint: "We have only learned a new command in level 5."
             question_score: '10'
         2:
             question_text: "What appears in your output screen when you type in the name Hedy?"
