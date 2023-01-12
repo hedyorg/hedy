@@ -63,9 +63,12 @@ class ForTeachersModule(WebsiteModule):
     @route("/manual/<section_key>", methods=["GET"])
     def get_teacher_manual(self, section_key):
         content = hedyweb.PageTranslations("for-teachers").get_page_translations(g.lang)
-        page_title = content['title']
+
+        # Code very defensively around types here -- Weblate has a tendency to mess up the YAML,
+        # so the structure cannot be trusted.
+        page_title = content.get('title', '')
         sections = {section['key']: section for section in content['sections']}
-        section_titles = [(section['key'], section['title']) for section in content['sections']]
+        section_titles = [(section['key'], section.get('title', '')) for section in content['sections']]
         current_section = sections.get(section_key)
 
         if not current_section:
@@ -76,11 +79,13 @@ class ForTeachersModule(WebsiteModule):
         # Some pages have 'subsections', others have 'levels'. We're going to treat them ~the same.
         # Give levels a 'title' field as well (doesn't have it in the YAML).
         subsections = current_section.get('subsections', [])
+        for subsection in subsections:
+            subsection.setdefault('title', '')
         levels = current_section.get('levels', [])
         for level in levels:
             level['title'] = gettext('level') + ' ' + str(level['level'])
 
-        subsection_titles = [x.get('title') for x in subsections + levels]
+        subsection_titles = [x.get('title', '') for x in subsections + levels]
 
         return render_template("teacher-manual.html",
                                current_page="teacher-manual",
