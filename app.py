@@ -4,6 +4,7 @@ import copy
 import datetime
 import json
 import logging
+import re
 import os
 import sys
 import textwrap
@@ -33,7 +34,7 @@ from hedy_content import (ADVENTURE_ORDER_PER_LEVEL, ALL_KEYWORD_LANGUAGES,
                           ALL_LANGUAGES, COUNTRIES,
                           NON_LATIN_LANGUAGES)
 from logging_config import LOGGING_CONFIG
-from utils import dump_yaml_rt, is_debug_mode, load_yaml_rt, timems, version
+from utils import dump_yaml_rt, is_debug_mode, load_yaml_rt, timems, version, strip_accents
 from website import (ab_proxying, achievements, admin, auth_pages, aws_helpers,
                      cdn, classes, database, for_teachers, jsonbin, parsons,
                      profile, programs, querylog, quiz, statistics,
@@ -1657,6 +1658,17 @@ def nl2br(x):
     if not isinstance(x, Markup):
         x = Markup.escape(x)
     return x.replace('\n', Markup('<br />'))
+
+
+SLUGIFY_RE = re.compile('[^a-z0-9_]+')
+
+
+@app.template_filter()
+def slugify(s):
+    """Convert arbitrary text into a text that's safe to use in a URL."""
+    if s is None:
+        return None
+    return SLUGIFY_RE.sub('-', strip_accents(s).lower())
 
 
 @app.template_filter()

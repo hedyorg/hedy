@@ -75,6 +75,17 @@ strong {
   @apply text-2xl;
 }
 
+/**
+ * text-business-copy
+ *
+ * For Real Business Value(tm).
+ */
+.text-business-copy { }
+
+.text-business-copy h3:first-child { @apply mt-0; }
+
+.text-business-copy * + h3 { @apply mt-8; }
+
 
 .btn-shape {
   @apply font-slab leading-6 font-normal tracking-wide;
