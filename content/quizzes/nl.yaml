@@ -1502,13 +1502,13 @@ levels:
                     {print} 'Hallo'
                     {print} 'Ik ben Hedy!'
             mp_choice_options:
-            -   option: "Hallo \n Ik ben Hedy"
+            -   option: "Hallo\nIk ben Hedy"
                 feedback: "Helaas. Alles wordt 2x herhaald."
-            -   option: "Hallo \n Hallo \n Ik ben Hedy"
+            -   option: "Hallo\nHallo\nIk ben Hedy"
                 feedback: "Helaas. Ook de tweede zin wordt 2x herhaald."
-            -   option: "Hallo \n ik ben Hedy \n Hallo \n Ik ben Hedy"
+            -   option: "Hallo\nIk ben Hedy\nHallo\nIk ben Hedy"
                 feedback: "Super!\""
-            -   option: "Hallo \n Ik ben Hedy \n Ik ben Hedy"
+            -   option: "Hallo\nIk ben Hedy\nIk ben Hedy"
                 feedback: "Helaas. Beide zinnen worden 2x herhaald"
             correct_answer: "C"
             hint: "Beide zinnen onder het {repeat} commando worden 2x herhaald."
@@ -1537,13 +1537,13 @@ levels:
                     {print} 'Baby shark tututudutudu'
                 {print} 'Baby shark'
             mp_choice_options:
-            -   option: "Baby shark tututudutudu \n Baby shark"
+            -   option: "Baby shark tututudutudu\nBaby shark"
                 feedback: "Helaas. Let op het `{repeat}` commando!"
-            -   option: "Baby shark tututudutudu \n Baby shark \n Baby shark tututudutudu \n Baby shark \n Baby shark tututudutudu \n Baby shark"
+            -   option: "Baby shark tututudutudu\nBaby shark\nBaby shark tututudutudu\nBaby shark\nBaby shark tututudutudu\nBaby shark"
                 feedback: "Helaas. het zinnetje 'Baby shark' sprint niet in, en wordt dus niet herhaald."
-            -   option: "Baby shark tututudutudu \n Baby shark tututudutudu \n Baby shark tututudutudu \n Baby shark"
+            -   option: "Baby shark tututudutudu\nBaby shark tututudutudu\nBaby shark tututudutudu\nBaby shark"
                 feedback: "Juist!"
-            -   option: "Baby shark tututudutudu \n Baby shark \n Baby shark \n Baby shark"
+            -   option: "Baby shark tututudutudu\nBaby shark\nBaby shark\nBaby shark"
                 feedback: "Helaas, kijk goed naar wat er wel en niet herhaald wordt."
             correct_answer: "C"
             hint: "Regel 2 springt in en wordt dus drie keer herhaald. Daarna komt regel 3 pas, die niet inspringt en dus ook niet herhaald wordt."
@@ -1556,13 +1556,13 @@ levels:
                     {print} 'Hoera!'
                     {print} 'We gaan op vakantie!'
             mp_choice_options:
-            -   option: "De kinderen riepen: \n Hoera! \n We gaan op vakantie!"
+            -   option: "De kinderen riepen:\nHoera!\nWe gaan op vakantie!"
                 feedback: "Helaas. Let op het {repeat} commando!"
-            -   option: "De kinderen riepen: \n Hoera! \n We gaan op vakantie! \n Hoera! \n We gaan op vakantie!"
+            -   option: "De kinderen riepen:\nHoera!\nWe gaan op vakantie!\nHoera!\nWe gaan op vakantie!"
                 feedback: "Correct!"
-            -   option: "De kinderen riepen: \n Hoera! \n Hoera! \n We gaan op vakantie! \n We gaan op vakantie"
+            -   option: "De kinderen riepen:\nHoera!\nHoera!\nWe gaan op vakantie!\nWe gaan op vakantie"
                 feedback: "Helaas. Deze volgorde klopt niet."
-            -   option: "De kinderen riepen: \n Hoera! \n Hoera! \n We gaan op vakantie!"
+            -   option: "De kinderen riepen:\nHoera!\nHoera!\nWe gaan op vakantie!"
                 feedback: "Helaas. Ook de laatste zin wordt 2x herhaald."
             correct_answer: "B"
             hint: "Het blokje onder het {repeat} commando wordt 2x herhaald."
@@ -2222,13 +2222,13 @@ levels:
         2:
             question_text: What will be printed after entering the correct password?
             mp_choice_options:
-            -   option: "Good job! \n Good job!"
+            -   option: "Good job!\nGood job!"
                 feedback: That's not it!
             -   option: The computer will explode in 5... 4... 3... 2... 1...
                 feedback: That's not it!
-            -   option: "Good job! \n Good job! \n You can use the computer!"
+            -   option: "Good job!\nGood job!\nYou can use the computer!"
                 feedback: That's not it!
-            -   option: "Good job! \n You can use the computer! \n Good job! \n You can use the computer!"
+            -   option: "Good job!\nYou can use the computer!\nGood job!\nYou can use the computer!"
                 feedback: Correct!
             question_score: '10'
             code: "password = {ask} 'What is the password?'\ncorrect_password = Hedy\n{if} password {is} correct_password\n    {repeat} 2 {times}\n        {print} 'Good job!'\n        {print} 'You can use the computer!'\n{else}\n    {print} 'The computer will explode in 5... 4... 3... 2... 1...'"

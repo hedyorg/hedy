@@ -35,7 +35,7 @@ adventures:
                 story_text: "## Hvis... ellers...\nPå nivå 5 er det noe nytt å lære seg, `{if}`! Med `{if}` kommandoen kan du velge mellom to forskjellige valg.\nDenne koden skriver ut 'nice' hvis du skriver inn Hedy som navn, og 'buu!' hvis du skriver noe annet.\n`{ask}` and `{print}` vil fungere på samme måte som de gjorde i nivå 4.\n"
                 example_code: "```\nnavn {is} {ask} 'Hva heter du?'\n{if} navn {is} Hedy {print} 'wow!' {else} {print} 'fysj!'\n```\n"
                 story_text_3: "## Lister\nHvis vi skal sjekke om noe er i en liste så kan vi nå bruke `{in}` kommandoen.\nDenne koden skriver ut 'Vakkert!' hvis du velger grønn eller gul, og 'meh' hvis du skriver noe annet.\n"
-                example_code_3: "```\nvakre_farger {is} grønn, gul\nfarge{is} {ask} 'Hva er din favorittfarge?'\n{if} farge {in} vakre_farger {print} 'Vakert!'\n{else} {print} 'meh'\n```\n"
+                example_code_3: "```\nvakre_farger {is} grønn, gul\nfarge {is} {ask} 'Hva er din favorittfarge?'\n{if} farge {in} vakre_farger {print} 'Vakert!'\n{else} {print} 'meh'\n```\n"
                 story_text_2: "Noen ganger kan kode som bruker `{if}` bli veldig lang. <br>Du kan splitte koden over to linjer og begynne neste linje med `{else}` slik som dette:\n"
                 example_code_2: "```\nnavn {is} {ask} 'Hva heter du?'\n{if} navn {is} Hedy {print} 'nice'\n{else} {print} 'boo!'\n```\n"
                 example_code_4: "```\n{if} x {is} {pressed} {print} 'it worked!'\n```\n"

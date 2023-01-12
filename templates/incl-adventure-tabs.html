@@ -16,19 +16,16 @@
             {% endif %}
             <!-- Add the tab for the parsons problem (if it exists) -->
             {% if parsons %}
-                <div class="tab special_tab z-10 whitespace-nowrap flex items-center justify-center" tabindex="0" data-tab="parsons">
-                    {{_('parsons_title')}}
-                </div>
+                {{ adventure_tab('parsons', _('parsons_title'), False, 'parsons', True) }}
             {% endif %}
             <!-- Add the tab for the quiz -->
             {% if quiz %}
-                <div class="tab special_tab z-10 whitespace-nowrap flex items-center justify-center" tabindex="0" data-tab="quiz">
-                        {{_('quiz_tab')}}
-                </div>
+                {{ adventure_tab('quiz', _('quiz_tab'), False, 'quiz', True) }}
             {% endif %}
         </div>
+        </div>
       {# PANES #}
-      <div id="adventures-tab" class="w-full overflow-auto bg-white p-4 mb-8 shadow-md turn-pre-into-ace" style="max-height: 20em;">
+      <div id="adventures-tab" class="w-full overflow-auto bg-white p-4 mb-8 shadow-md turn-pre-into-ace">
         {% for adventure in adventures %}
           {% if 'sorted_adventures' not in customizations or {'name': adventure.short_name, 'from_teacher': False} in customizations['sorted_adventures'][level_nr]  %}
             <div data-tabtarget="{{adventure.short_name}}" {% if 'sorted_adventures' not in customizations %} 
@@ -38,7 +35,9 @@
                                                             {% endif %}>
               <div class="lg:flex lg:flex-row">
                   <div class="{% if adventure.example_code %}lg:w-1/2 {% endif %}w-full p-2 ltr:mr-2 rtl:ml-2">
+                    <div class="max-w-prose">
                       {{ adventure.text|commonmark }}
+                    </div>
                   </div>
                   {% if adventure.example_code %}
                       <div class="border"></div>
@@ -51,7 +50,9 @@
             {% for story in adventure.extra_stories %}
                 <div class="lg:flex lg:flex-row border-t-2">
                     <div class="lg:w-1/2 w-full p-2 ltr:mr-2 rtl:ml-2">
-                      {{ story.text|commonmark }}
+                        <div class="max-w-prose">
+                            {{ story.text|commonmark }}
+                        </div>
                   </div>
                   {% if story.example_code %}
                       <div class="border"></div>

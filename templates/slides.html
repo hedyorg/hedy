@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hedy - Slides</title>
+    <link rel="stylesheet" href="{{static('css/reveal-js-custom.css')}}">
+    <link rel="stylesheet" href="{{static('vendor/reveal/dist/reset.css')}}">
+    <link rel="stylesheet" href="{{static('vendor/reveal/dist/reveal.css')}}">
+    <link rel="stylesheet" href="{{static('vendor/reveal/dist/theme/simple.css')}}">
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="{{static('vendor/reveal/plugin/highlight/monokai.css')}}">
+</head>
+<body>
+    <div class="reveal">
+      <div class="slides">
+          {% for index, slide in slides.items() %}
+            <section data-markdown style="text-align: left; height: 1018px; left: 91.5px; top: 0px;">
+                {{ slide['header'] }}
+                <textarea data-template>
+                    ### {{ slide['header'] }}
+
+                    {{ slide['text'] }}
+
+                    {{ slide['editor'] }}
+                </textarea>
+            </section>
+          {% endfor %}
+      </div>
+    </div>
+    <script src="{{static('vendor/reveal/dist/reveal.js')}}"></script>
+    <script src="{{static('vendor/reveal/plugin/notes/notes.js')}}"></script>
+    <script src="{{static('vendor/reveal/plugin/markdown/markdown.js')}}"></script>
+    <script src="{{static('vendor/reveal/plugin/highlight/highlight.js')}}"></script>
+    <script>
+        // More info about initialization & config:
+        // - https://revealjs.com/initialization/
+        // - https://revealjs.com/config/
+        Reveal.initialize({
+            hash: true,
+            transition: 'none',
+            slideNumber: true,
+            keyboard: true,
+            // Learn about plugins: https://revealjs.com/plugins/
+            plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+        });
+    </script>
+</body>
+
+</html>

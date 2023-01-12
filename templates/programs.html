@@ -1,8 +1,7 @@
 {% extends "layout.html" %}
 
-{% block body %}
-<div class="px-8 py-12">
-<div class="px-8">
+{% block full_width_content %}
+<div class="px-8 py-12 max-w-screen-xl mx-auto">
   {% if from_user %}<h2>{{from_user}}'s recent programs</h2>
   {% else %}<h2>{{_('recent')}}</h2>{% endif %}
   <div class="w-full mb-8" id="program_filter">
@@ -99,7 +98,6 @@
   </p>
   {% endif %}
   </div>
-</div>
 </div>
 {% endblock %}
 {% block scripts %}

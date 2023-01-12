@@ -1,8 +1,7 @@
 import logging
 import os
 
-from babel import Locale, languages
-import iso3166
+import static_babel_content
 
 from utils import customize_babel_locale
 from website.yaml_file import YamlFile
@@ -10,28 +9,7 @@ from safe_format import safe_format
 
 logger = logging.getLogger(__name__)
 
-# Define and load all countries
-COUNTRIES = {k: v.name for k, v in iso3166.countries_by_alpha2.items()}
-# Iterate through all found country abbreviations
-for country in COUNTRIES.keys():
-    # Get all spoken languages in this "territory"
-    spoken_languages = languages.get_territory_language_info(country).keys()
-    found = False
-    country_name = None
-    # For each language, try to parse the country name -> if correct: adjust in dict and break
-    # If we don't find any, keep the English one
-    for language in spoken_languages:
-        if found:
-            break
-        try:
-            value = language + "_" + country
-            lang = Locale.parse(value)
-            country_name = lang.get_territory_name(value)
-            found = True
-        except BaseException:
-            pass
-    if country_name:
-        COUNTRIES[country] = country_name
+COUNTRIES = static_babel_content.COUNTRIES
 
 # Define dictionary for available languages. Fill dynamically later.
 ALL_LANGUAGES = {}
@@ -277,11 +255,8 @@ for folder in os.listdir('translations'):
     if not os.path.isdir(locale_dir):
         continue
     if filter(lambda x: x.endswith('.mo'), os.listdir(locale_dir)):
-        if folder in CUSTOM_LANGUAGE_TRANSLATIONS.keys():
-            languages[folder] = CUSTOM_LANGUAGE_TRANSLATIONS.get(folder)
-            continue
-        locale = Locale.parse(folder)
-        languages[folder] = locale.display_name.title()
+        languages[folder] = CUSTOM_LANGUAGE_TRANSLATIONS.get(folder,
+                                                             static_babel_content.LANGUAGE_NAMES.get(folder, folder))
 
 
 for lang in sorted(languages):
@@ -292,7 +267,7 @@ for lang in sorted(languages):
 # Load and cache all keyword yamls
 KEYWORDS = {}
 for lang in ALL_KEYWORD_LANGUAGES.keys():
-    KEYWORDS[lang] = dict(YamlFile.for_file(f'content/keywords/{lang}.yaml'))
+    KEYWORDS[lang] = YamlFile.for_file(f'content/keywords/{lang}.yaml').to_dict()
     for k, v in KEYWORDS[lang].items():
         if isinstance(v, str) and "|" in v:
             # when we have several options, pick the first one as default
@@ -324,15 +299,17 @@ class Commands(StructuredDataFile):
         return deep_translate_keywords(self.file.get(int(level), {}), keyword_lang)
 
 
-def deep_translate_keywords(x, kwlang):
+def deep_translate_keywords(yaml, keyword_language):
     """Recurse through a data structure and replace keyword placeholders in any strings we encounter."""
-    if isinstance(x, str):
-        return safe_format(x, **KEYWORDS.get(kwlang))
-    if isinstance(x, list):
-        return [deep_translate_keywords(e, kwlang) for e in x]
-    if isinstance(x, dict):
-        return {k: deep_translate_keywords(v, kwlang) for k, v in x.items()}
-    return x
+    if isinstance(yaml, str):
+        # this is used to localize adventures linked in slides (PR 3860)
+        yaml = yaml.replace('/raw', f'/raw?keyword_language={keyword_language}')
+        return safe_format(yaml, **KEYWORDS.get(keyword_language))
+    if isinstance(yaml, list):
+        return [deep_translate_keywords(e, keyword_language) for e in yaml]
+    if isinstance(yaml, dict):
+        return {k: deep_translate_keywords(v, keyword_language) for k, v in yaml.items()}
+    return yaml
 
 
 # Todo TB -> We don't need these anymore as we guarantee with Weblate that
@@ -422,4 +399,18 @@ class Tutorials(StructuredDataFile):
 
 class NoSuchTutorial:
     def get_tutorial_for_level(self, level, keyword_lang):
+        return {}
+
+
+class Slides(StructuredDataFile):
+    def __init__(self, language):
+        self.language = language
+        super().__init__(f'content/slides/{self.language}.yaml')
+
+    def get_slides_for_level(self, level, keyword_lang="en"):
+        return deep_translate_keywords(self.file.get('levels', {}).get(level), keyword_lang)
+
+
+class NoSuchSlides:
+    def get_slides_for_level(self, level, keyword_lang):
         return {}

@@ -6,7 +6,7 @@
 {% set is_teacher = None %}
 {% endif %}
 
-{% block main %}
+{% block regular_content %}
 <div class="w-full mx-auto flex flex-col items-center gap-4">
     {% if not request.args.get('teacher') %}
         <div class="bg-white shadow-md rounded-lg rounded py-4 px-0 md:px-4 lg:px-8" id="role_selection">

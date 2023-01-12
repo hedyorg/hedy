@@ -99,16 +99,16 @@ def collect_snippets(path, filtered_language=None):
 
     return Hedy_snippets
 
-# filtered_language = 'nl'
+# filtered_language = 'te'
 # use this to filter on 1 lang, zh_Hans for Chinese, nb_NO for Norwegian, pt_PT for Portuguese
 
 
 Hedy_snippets = [(s.name, s) for s in collect_snippets(path='../../content/adventures',
                                                        filtered_language=filtered_language)]
-
-# level = 18
-# if level:
-#     Hedy_snippets = [(name, snippet) for (name, snippet) in Hedy_snippets if snippet.level == level]
+#
+# level = 5
+if level:
+    Hedy_snippets = [(name, snippet) for (name, snippet) in Hedy_snippets if snippet.level == level]
 
 # This allows filtering out languages locally, but will throw an error
 # on GitHub Actions (or other CI system) so nobody accidentally commits this.
@@ -151,3 +151,4 @@ class TestsAdventurePrograms(HedyTester):
                         print(f'\n----\n{snippet.code}\n----')
                         print(f'in language {snippet.language} from level {snippet.level} gives error:')
                         print(f'{error_message} at line {location}')
+                        raise E
