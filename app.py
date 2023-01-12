@@ -107,12 +107,6 @@ def load_adventures_per_level(level, keyword_lang):
     for short_name, adventure in adventures.items():
         if level not in adventure['levels']:
             continue
-        # end adventure is the quiz
-        # if quizzes are not enabled, do not load it
-        # Todo TB -> Is this still relevant? Teachers can simply "disable"
-        # adventures in customizations!
-        if short_name == 'end' and not config['quiz-enabled']:
-            continue
         current_adventure = {
             'short_name': short_name,
             'name': adventure['name'],
@@ -1002,6 +996,14 @@ def index(level, program_id):
                 pass
             teacher_adventures.append(current_adventure)
 
+    adventures_names = {}
+    for adventure in adventures:
+        adventures_names[adventure['short_name']] = adventure['name']
+    for adventure in teacher_adventures:
+        adventures_names[adventure['id']] = adventure['name']
+
+    adventures_per_level = hedy_content.ADVENTURE_ORDER_PER_LEVEL[int(level)]
+
     enforce_developers_mode = False
     if 'other_settings' in customizations and 'developers_mode' in customizations['other_settings']:
         enforce_developers_mode = True
@@ -1045,7 +1047,9 @@ def index(level, program_id):
         enforce_developers_mode=enforce_developers_mode,
         teacher_adventures=teacher_adventures,
         loaded_program=loaded_program,
-        adventure_name=adventure_name)
+        adventure_name=adventure_name,
+        adventures_names=adventures_names,
+        adventures_per_level=adventures_per_level)
 
 
 @app.route('/hedy/<id>/view', methods=['GET'])

@@ -61,7 +61,9 @@ def render_code_editor_with_tabs(
         hide_cheatsheet,
         enforce_developers_mode,
         teacher_adventures,
-        adventure_name):
+        adventure_name,
+        adventures_names,
+        adventures_per_level):
     arguments_dict = {}
 
     # Meta stuff
@@ -81,10 +83,11 @@ def render_code_editor_with_tabs(
     arguments_dict['parsons_exercises'] = parsons_exercises
     arguments_dict['tutorial'] = tutorial
     arguments_dict['adventure_name'] = adventure_name
+    arguments_dict['adventures_names'] = adventures_names
     arguments_dict['latest'] = version
     arguments_dict['quiz'] = quiz
     arguments_dict['quiz_questions'] = quiz_questions
-
+    arguments_dict['adventures_per_level'] = adventures_per_level
     return render_template(
         "code-page.html",
         **arguments_dict,

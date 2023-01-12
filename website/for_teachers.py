@@ -148,24 +148,51 @@ class ForTeachersModule(WebsiteModule):
 
         teacher_adventures = self.db.get_teacher_adventures(user["username"])
         customizations = self.db.get_class_customizations(class_id)
-        print(adventures.items())
-        adventure_names = {i: [] for i in range(1, hedy.HEDY_MAX_LEVEL + 1)}
-        for adv_key, adv_dic in adventures.items():
-            for name, levels in adv_dic.items():
-                for level in levels:
-                    adventure_names[level].append(name)
-        print(adventure_names)
 
+        adventure_names = {}
+        for adv_key, adv_dic in adventures.items():
+            for name, _ in adv_dic.items():
+                adventure_names[adv_key] = name
+        for adventure in teacher_adventures:
+            adventure_names[adventure['id']] = adventure['name']
+
+        # Available adventures will hold the adventures that are not included in the customizations
+        available_adventures = {i: [] for i in range(1, hedy.HEDY_MAX_LEVEL+1)}
+
+        teacher_adventures_formatted = []
+        for adventure in teacher_adventures:
+            teacher_adventures_formatted.append({"id": adventure['id'], "level": adventure['level']})
+
+        if customizations:
+            # in case this class has thew new way to select adventures
+            if 'sorted_adventures' in customizations:
+                for level, adventure_list in hedy_content.ADVENTURE_ORDER_PER_LEVEL.items():
+                    for adventure in adventure_list:
+                        if {"name": adventure, "from_teacher": False} not in \
+                                customizations['sorted_adventures'][str(level)] and adventure != 'end':
+                            available_adventures[level].append({"name": adventure, "from_teacher": False})
+
+                for adventure in teacher_adventures:
+                    if {"name": adventure['id'], "from_teacher": True} not in \
+                            customizations['sorted_adventures'][adventure['level']]:
+                        available_adventures[int(adventure['level'])].append(
+                            {"name": adventure['id'], "from_teacher": True})
+
+            # it uses the old way so convert it to the new one
+            else:
+                pass
         return render_template(
             "customize-class.html",
             page_title=gettext("title_customize-class"),
             class_info={"name": Class["name"], "id": Class["id"], "teacher": Class["teacher"]},
             max_level=hedy.HEDY_MAX_LEVEL,
             adventures=adventures,
-            teacher_adventures=teacher_adventures,
+            teacher_adventures=teacher_adventures_formatted,
             customizations=customizations,
             current_page="my-profile",
             adventure_names=adventure_names,
+            available_adventures=available_adventures,
+            adventures_default_order=hedy_content.ADVENTURE_ORDER_PER_LEVEL
         )
 
     @route("/customize-class/<class_id>", methods=["DELETE"])
@@ -201,7 +228,8 @@ class ForTeachersModule(WebsiteModule):
             return "Opening dates must be a dict", 400
         if not isinstance(body.get("level_thresholds"), dict):
             return "Level thresholds must be a dict", 400
-
+        if not isinstance(body.get("sorted_adventures"), dict):
+            return "Adventures must be a dict", 400
         # Values are always strings from the front-end -> convert to numbers
         levels = [int(i) for i in body["levels"]]
 
@@ -239,6 +267,7 @@ class ForTeachersModule(WebsiteModule):
             "teacher_adventures": body["teacher_adventures"],
             "other_settings": body["other_settings"],
             "level_thresholds": level_thresholds,
+            "sorted_adventures": body["sorted_adventures"]
         }
 
         self.db.update_class_customizations(customizations)
