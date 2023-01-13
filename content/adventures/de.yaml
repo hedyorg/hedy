@@ -949,12 +949,6 @@ adventures:
                     ```
                 start_code: |-
                     Ecken = {ask} 'Wie viele Ecken soll die Form haben?'
-            7:
-                example_code: |
-                    ```
-                    {print} 'Formen zeichnen'
-                    _ 3 _ {forward} 10
-                    ```
             6:
                 story_text: |
                     ## Lass uns zeichnen!
@@ -2420,7 +2414,6 @@ adventures:
                     ```
                 start_code: "# setze hier deinen Code hin"
     next:
-        description: "Was kommt als nächstes?"
         levels:
             1:
                 story_text: |
@@ -2430,7 +2423,6 @@ adventures:
                     Im ersten Level hast du vielleicht gemerkt, dass der `{echo}` Befehl nur eine Information auf einmal speichern kann.
                     Im Restaurant-Abenteuer zum Beispiel konntest du nur entweder wiedergeben was der Kunde essen wollte, oder was er trinken wollte, aber nicht beides in einem Satz.
 
-                example_code: "```\n{print} Willkommen bei Hedy's\n{ask} Was würden Sie gerne essen?\n{echo} Sie hätten also gerne \n{ask} Was würden Sie gerne trinken?\n{echo} Sie hätten also gerne \n```\n"
             2:
                 story_text: |
                     ## Was kommt als nächstes?
@@ -2438,19 +2430,6 @@ adventures:
                     Aber... das ist nicht das Einzige was du mit Variablen anfangen kannst! Du kannst Variablen auch verwenden um Listen zu machen.
                     Und du kannst sogar Hedy ein zufälliges Wort aus einer Liste auswählen lassen, womit du richtige Spiele machen kannst!
                     Schau dir dafür einfach mal das nächste Level an!
-            3:
-                story_text: |
-                    ## Was kommt als Nächstes?
-                    In diesem Level hast du mit Variablen geübt, aber vielleicht bist du diesem Fehler über den Weg gelaufen.
-
-                    Probier mal diesen Code aus:
-                    ```
-                    Name {is} Sophie
-                    {print} Mein Name ist Name
-                    ```
-                    Natürlich wolltest du `Mein Name ist Sophie` ausgeben, aber Hedy schreibt `Mein Sophie ist Sophie`.
-                    Im nächsten Level wird diese Problem gelöst. Dazu benutzen wir Anführungszeichen.
-
             4:
                 story_text: |
                     ## What's next?
@@ -2464,51 +2443,21 @@ adventures:
                     password {is} {ask} 'What is the correct password?'
                     ```
             5:
-                story_text: |
-                    ## Was kommt als Nächstes?
-                    Du bist jetzt am Ende dieses Levels angekommen. Dabei hast du `{ask}` and `{if}` gelernt. Zum Beispiel kannst du jetzt Gäste fragen, was sie gerne essen würden.
-                    Du kannst aber noch nicht den Preis für das Abendessen von jedem ausrechnen.
-
-                    Das nächste Level ermöglicht es, Addition, Subtraktion und Multiplikation in deinen Programmen zu verwenden. So kannst du die Preise im Restaurant ausrechnen, aber du könntest auch Geheimcode einfügen der deinen Freunden und deiner Familie einen Rabatt gibt.
-                    Eine andere Möglichkeit im nächsten Level ist ein eigenes Mathespiel zu programmieren, für deinen kleinen Bruder oder deine kleine Schwester, damit sie Multiplikation üben.
-                    Schau es dir selbst an, im nächsten Level!
                 example_code: "## Freigetränke!\n```\n{print} 'Willkommen bei McHedy'\nBestellung {is} {ask} 'Was würden Sie gerne essen?'\n{print} 'Sie hätten gerne ' Bestellung\n{if} Bestellung {is} Hamburger Preis {is} 5\n{if} Bestellung {is} Pommes Preis {is} 2\nGetränke {is} {ask} 'Was würden Sie gerne dazu trinken?'\n{print} 'Sie hätten gerne ' Getränke\n{print} 'Das macht dann ' Preis ' Euro für Ihre ' Bestellung ' bitte'\n{print} 'Die Getränke sind gratis in diesem Level weil Hedy noch nicht den Preis ausrechnen kann...'\n```\n"
-            6:
-                start_code: "{print} 'On to the next level!'"
             7:
                 story_text: |
                     ## Was kommt als Nächstes?
                     Jetzt hast du gelernt, wie du eine Zeile Code wiederholen kannst. Das wird sich noch als nützlich erweisen, reicht aber nicht immer aus. Manchmal musst du mehrere Zeilen auf einmal wiederholen.
                     Das nächste Level erlaubt dir, ein paar Zeilen Code zu einer Gruppe zusammenzufügen und diese kleine Gruppe dann auf einmal zu wiederholen!
 
-                example_code: "```\n{repeat} 5 {times} {print} 'Im nächsten Level kannst du mehrere Zeilen Code auf einmal wiederholen!'\n```\n"
             8:
                 start_code: "{print} 'Lets go to the next level!'"
             9:
-                story_text: |
-                    ## Was kommt als Nächstes?
-                    Du machst das super! In diesem Level begegnet uns noch ein kleines Problem. Du hast das Wiederholen einer Zeile gelernt, aber was wenn du eine Zeile ein wenig ändern wolltest?
-                    Wenn du zum Beispiel das Lied 'if you're happy and you know it' singen würdest, sähe das so aus:
-
-                    Wenn du auch noch den nächsten Verse 'stomp your feet' wolltest, und den nächsten, und den nächsten, dann müsstest du den Code komplett ändern.
-                    Im nächsten Level lernst du den `{for}` Befehl, der es dir erlaubt eine Liste von Aktionen zu machen und den Code jedes Mal mit einer anderen Aktion zu wiederholen!
-                    Schau es dir an!
                 example_code: "```\n{repeat} 2 {times}\n    {print} 'Wenn du glücklich bist, dann klatsche in die Hand'\n{print} 'Zeig mir, wenn du bei mir bist, wie dir so zumute ist'\n{print} 'Wenn du glücklich bist, dann klatsche in die Hand'\n```\n"
-            10:
-                start_code: "{print} 'Lets go to the next level!'"
             11:
                 start_code: "{print} 'Lets go to the next level!'"
             12:
-                story_text: |
-                    ## Was kommt als Nächstes?
-                    In den letzten Leveln hast du gelernt, wie du zwei `{if}` Befehle ineinanderfügen kannst. Das funktioniert soweit gut, aber so bekommst du ziemlich lange und unhandliche Codes, so wie diesen hier:
-
-                    In diesem System musst du sowohl den richtigen Nutzernamen als auch das richtige Passwort angeben.
-                    Im nächsten Level lernst du den Befehl `{and}`, der deinen Code ein ganzes Stück kürzer und verständlicher machen wird!
-                    Sieh für dich selbst!
                 example_code: "```\nNutzername {is} {ask} 'Was ist dein Nutzername?'\nPasswort {is} {ask} 'Was ist dein Passwort?'\n{if} Nutzername {is} 'Hedy'\n    {if} Passwort {is} 'geheim'\n        {print} 'Willkommen Hedy!'\n    {else}\n        {print} 'Zugang gesperrt!'\n{else}\n    {print} 'Zugang gesperrt!'\n```\n"
-            13:
-                start_code: "{print} 'Lets go to the next level!'"
             14:
                 story_text: |
                     ## Was kommt als Nächstes?
@@ -2516,19 +2465,10 @@ adventures:
                     Aber der Code ist ineffizient und viel zu lang. Und was, wenn der Spieler 101 Spiele und nicht 100 spielen möchte?
                     Kann man nicht bis unendlich spielen?
                     Im nächsten Level lernst du einen Befehl der das alles ein ganzes Stück einfacher macht.
-                example_code: "```\nSpiel {is} 'läuft'\n{for} i {in} {range} 1 {to} 100\n    {if} Spiel {is} 'läuft'\n        Antwort = {ask} 'Möchtest du weiterspielen?'\n        {if} Antwort {is} 'nein'\n            Spiel {is} 'vorbei'\n        {if} Antwort {is} 'ja'\n            {print} 'Ok dann machen wir weiter.'\n```\n"
             15:
                 start_code: "{print} 'Lets go to the next level!'"
             16:
-                story_text: |
-                    ## Was kommt als Nächstes?
-                    Im nächsten Level wird es Zeit für einen neuen Befehl. Vielleicht ist dir in den vorherigen Leveln schon aufgefallen, dass `{if}` und `{else}`manchmal nicht ausreichen.
-                    Schau dir zum Beispiel mal diesen Code an:
                 story_text_2: In diesem Code wäre es toll, zweimal ein `{else}` zu haben, damit du eine Option für den Brokkoli und eine für die Grünen Bohnen haben kannst. Das nächste Level bringt den Befehl `{elif}` mit, der genau das möglich macht! Also nichts wie los zum nächsten Level!
-            17:
-                story_text: |
-                    ## What's next?
-                    In the next level you will learn a real Python way to use `{print}`.
             18:
                 story_text: |
                     ## Was kommt als nächstes?

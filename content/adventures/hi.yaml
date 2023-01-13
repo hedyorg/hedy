@@ -802,10 +802,6 @@ adventures:
                     ```
                 start_code: |
                     hoeken = {ask} 'How many angles should I draw?'
-            7:
-                start_code: |
-                    {print} 'Draw figures'
-                    {repeat} 3 {times} {forward} 10
             6:
                 example_code: |
                     ```
@@ -2027,29 +2023,8 @@ adventures:
                 start_code: "# place your code here"
     next:
         levels:
-            5:
-                story_text: |
-                    ## What's next?
-                    Now you've reached the end of this level, so you have learned `{ask}` and `{if}`. For example you can {ask} guests what they would like to eat.
-                    What you can't yet do though, is calculate the price for everyone's dinner.
-
-                    The next level makes it possible to use addition, subtraction and multiplication in your programs. This way you can calculate the prices in your restaurant, but you could also add a secret code to give your friends and family a discount.
-                    Another option in the next level is programming your own maths game, for your little brother or sister to practice their multiplications.
-                    Go see for yourself in the next level!
-                    ```
-                    {print} 'Welcome at McHedy'
-                    order {is} {ask} 'What would you like to eat?'
-                    {print} 'You would like ' order
-                    {if} order {is} hamburger price {is} 5
-                    {if} order {is} fries price {is} 2
-                    drinks {is} {ask} 'What would you like to drink?'
-                    {print} 'You would like ' drinks
-                    {print} 'That will be ' price ' dollars for your ' order ' please'
-                    {print} 'The drinks are free in this level because Hedy cant calculate the price yet...'
-                    ```
             13:
                 start_code: "{print} 'Lets go to the next level!'"
-                example_code: "```\nfirst_grade = {ask} 'What score did you get on your first test?'\nsecond_grade = {ask} 'What score did you get on your second test?'\nadded {is} first_grade + second_grade\nmean_grade {is} added / 2\n{if} mean_grade = 1 {or} mean_grade = 2 {or} mean_grade = 3 {or} mean_grade = 4 {or} mean_grade = 5\n    {print} 'Oh no! You have failed the subject...'\n{else}\n    {print} 'Great! You have passed the subject!'\n```\n"
             14:
                 story_text: |
                     ## What's next?
@@ -2068,15 +2043,7 @@ adventures:
                                 {print} 'Ok we will continue'
                     ```
             1:
-                start_code: "{print} Let's go!"
                 story_text_2: "If the player types a hamburger and coke, you can't say `so you would like a hamburger and coke`, but you have to make two separate line. \nAlso, the `{echo}` command only echoes the word at the end of the sentence. So you can't say `your hamburger is coming right up!`.\n\nThat changes in level 2. In level 2 you'll learn to work with variables, that allow you to save multiple pieces of information and print them in any place you want.\nSo let's go to the next level!\n"
-            2:
-                story_text: |
-                    ## What's next?
-                    In this level you've learned what a variable is and how you can use it to make your adventures more interactive.
-                    But... that's not the only thing you can do with variables! You can also use variables to make lists.
-                    And you can even let Hedy pick a random word out of a list, which allows you to make real games!
-                    Take a quick look at the next level!
             4:
                 story_text: |
                     ## What's next?
@@ -2089,21 +2056,8 @@ adventures:
                     ```
                     password {is} {ask} 'What is the correct password?'
                     ```
-            3:
-                story_text: |
-                    ## What's next?
-                    In this level you've been practising with variables, but maybe you've come across this mistake.
-
-                    Try to run this code:
-                    ```
-                    name {is} Sophie
-                    {print} My name is name
-                    ```
-                    Of course you wanted to print `My name is Sophie` but Hedy prints `My Sophie is Sophie`. 
-                    In the next level this problem is fixed by using quotation marks.
             6:
                 start_code: "{print} 'On to the next level!'"
-                example_code: " ```\n {print} 'happy birthday to you'\n {print} 'happy birthday to you'\n {print} 'happy birthday dear Hedy'\n {print} 'happy birthday to you'\n ```\n"
             7:
                 story_text: |
                     ## What's next?
@@ -2114,36 +2068,14 @@ adventures:
                     {repeat} 5 {times} {print} 'In the next level you can repeat multiple lines of code at once!'
                     ```
             8:
-                start_code: "{print} 'Lets go to the next level!'"
                 example_code: "```\nanswer = {ask} 'Would you like to go to the next level?'\n{if} answer {is} yes\n    {print} 'Great! You can use the {repeat} commando in the {if} command!'\n    {print} 'Hooray!'\n    {print} 'Hooray!'\n    {print} 'Hooray!'\n{else}\n    {print} 'Okay, you can stay here for a little longer!'\n```\n"
-            9:
-                start_code: "{print} 'Lets go to the next level!'"
             10:
                 story_text: |
                     ## What's next?
                     You have reached the end of this level, you're doing great! You are about to go to the next level. In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.
                     In Python there is no `{repeat}` command, but there is a command that works like {repeat}. Are you curious to find out how to say `{repeat}` in Python language? Quickly go on to find out!
             11:
-                start_code: "{print} 'Lets go to the next level!'"
                 example_code: "```\nname = {ask} 'Who is your favorite cartoon character?'\n{print} 'I love watching ' name\n```\nBut you couldn't use multiple words in a variable like the example below. This program does not work yet in this level!\n```\nshow = SpongeBob SquarePants\n{print} show 'is my favorite show!'\n```\nGo to the next level to make this code work!\n"
-            12:
-                story_text: |
-                    ## What's next?
-                    In the previous levels you learned how to put two `{if}`commands inside each other. This works fine, but it does give you very long and unhandy codes like this one:
-                    ```
-                    username {is} {ask} 'What is your username?'
-                    password {is} {ask} 'What is your password?'
-                    {if} username {is} 'Hedy'
-                        {if} password {is} 'secret'
-                            {print} 'Welcome Hedy!'
-                        {else}
-                            {print} 'Access denied'
-                    {else}
-                        {print} 'Access denied!'
-                    ```
-                    In this system you have to give both the correct username and the correct password.
-                    In the next level you will learn the `{and}` command that will make this code a ot shorter and more understandable!
-                    Check it out!
             15:
                 story_text: |
                     ## What's next?
@@ -2164,14 +2096,10 @@ adventures:
                         {for} sound {in} sounds
                             {print} 'A ' animal ' says ' sound
                     ```
-                example_code: "```\nanimals = 'chicken', 'horse', 'cow'\nsounds = 'cluck', 'neigh', 'moo'\n{for} animal {in} animals\n    {print} 'A ' animal ' says ' sounds {at} {random}\n```\nYou could also try to make it work this way, but....\n```\nanimals = 'chicken', 'horse', 'cow'\nsounds = 'cluck', 'neigh', 'moo'\n{for} animal {in} animals\n    {for} sound {in} sounds\n        {print} 'A ' animal ' says ' sound\n```\n"
             16:
                 start_code: "{print} 'Lets go to the next level!'"
-                story_text_2: In this code it would be great to have 2x an `{else}` so you could have one option for the broccoli and one for the green beans. The next level comes with the new command `{elif}` that makes this possible! So check out the next level now!
             17:
                 start_code: "{print} 'Lets go to the next level!'"
-            18:
-                start_code: "{print} ('Great job!!!')"
         description: What's Next?
     parrot:
         name: तोता

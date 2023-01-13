@@ -371,8 +371,6 @@ adventures:
                 example_code_2: "```\n边 = {ask} '你想要几边形？'\n角度 = 360 / 边\n{repeat} 角度 {times}\n    {turn} _\n    {forward} _\n```\n"
                 story_text_2: "## 交互\n另外，我们现在还可以改进之前的能画不同图案的程序。\n你能看出这里海龟需要转多少度吗？完成这段代码，你就能画出任何你想要的多边形！\n"
                 start_code: "边 = {ask} '我应该画几边形？'"
-            7:
-                example_code: "```\n{print} '绘图'\n{repeat} 3 {times} {forward} 10\n```\n"
             6:
                 story_text: "## 让我们来画画\n在这一级，你可以使用算术来绘制不同的图案。\n你可能在学校里学过，旋转一圈是360度。如果没学过，那你现在知道了！\n这就是为什么你可以用90度来画方形。360除以4是90。\n现在我们可以用海迪做数学，我们就能画出所有想要的图案！\n"
                 example_code: "```\n边 = {ask} '你想要画几边形？'\n角度 = 360 / 边\n{forward} 50\n{turn} 角度\n{forward} 50\n{turn} 角度\n{forward} 50\n{turn} 角度\n{forward} 50\n{turn} 角度\n{forward} 50\n{turn} 角度\n{forward} 50\n{turn} 角度\n```\n"
@@ -1335,49 +1333,31 @@ adventures:
                 example_code: "```\nfrench_words = ['bonjour', 'ordinateur', 'pomme de terre']\ntranslation = ['hello', 'computer', 'potato']\nscore = 0\n{for} i {in} {range} 1 {to} 3\n    answer = {ask} 'What does ' french_words[i] ' mean?'\n    correct = translation[i]\n    {if} answer == correct\n        {print} 'Correct!'\n        score = score + 1\n    {else}\n        {print} 'Wrong, ' french_words[i] ' means ' translation[i]\n{print} 'You gave ' score ' correct answers.'\n```\n"
                 start_code: '# place your code here'
     next:
-        name: What's next?
         levels:
             1:
                 start_code: "{print} Let's go!"
-                example_code: "```\n{print} Welcome at Hedy's\n{ask} What would you like to eat?\n{echo} So you want \n{ask} what would you like to drink?\n{echo} So you want \n```\n"
             2:
-                start_code: "{print} Let's go to the next level!"
-            3:
                 start_code: "{print} Let's go to the next level!"
             4:
                 story_text: "## What's next?\nIn the previous levels you've already learned to use `{at} {random}` which made your games different every time you ran the code.\nBut it's not really interactive, the player doesn't have any influence on what happens in the game.\n\nIn the next level you'll learn the `{if}` command, that allows you to give different responses in your program. This way you can program a secret password for your computer for example.\nSo let's take a peak!\n\n```\npassword {is} {ask} 'What is the correct password?'\n```\n"
             5:
-                story_text: "## 下一个级别是什么？\n现在你已经达到了这一级的终点，所以你已经学习了`{ask}`和`{if}`。例如，您可以{ask}客人想吃什么。\n但是，您还不能计算出每个人晚餐的费用。\n\n在下一级中，我们可以在程序中使用加法，减法和乘法。通过这种方式，您可以计算每个人每一餐的费用，但您也可以添加一个折扣码，为您的朋友和家人提供折扣。\n在下一个级别中，我们的另一个选择是编写自己的数学游戏，让你的弟弟或妹妹学习乘法。\n去看看下一个级别！\n"
                 example_code: "## Free drinks!\n```\n{print} 'Welcome at McHedy'\norder {is} {ask} 'What would you like to eat?'\n{print} 'You would like ' order\n{if} order {is} hamburger price {is} 5\n{if} order {is} fries price {is} 2\ndrinks {is} {ask} 'What would you like to drink?'\n{print} 'You would like ' drinks\n{print} 'That will be ' price ' dollars for your ' order ' please'\n{print} 'The drinks are free in this level because Hedy cant calculate the price yet...'\n```\n"
-            8:
-                story_text: "## 下一个级别是什么？\n干得好！你已经到达了另一个级别的终点！在此级别中，您已经学习了如何在 {if} 或 {repeat} 命令中使用多行代码。但是您还不能将两者结合起来...\n好消息！在下一级中，您将被允许将{if}命令嵌入{if}或{repeat}命令中。\n"
             9:
                 start_code: "{print} 'Lets go to the next level!'"
-                example_code: "```\n{repeat} 2 {times}\n    {print} '{if} youre happy and you know it clap your hands'\n{print} '{if} youre happy and you know it and you really want to show it'\n{print} '{if} youre happy and you know it clap your hands'\n```\n"
             10:
                 story_text: "## What's next?\nYou have reached the end of this level, you're doing great! You are about to go to the next level. In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.\nIn Python there is no `{repeat}` command, but there is a command that works like {repeat}. Are you curious to find out how to say `{repeat}` in Python language? Quickly go on to find out!\n"
-            11:
-                start_code: "{print} 'Lets go to the next level!'"
             13:
                 start_code: "{print} 'Lets go to the next level!'"
-                example_code: "```\nfirst_grade = {ask} 'What score did you get on your first test?'\nsecond_grade = {ask} 'What score did you get on your second test?'\nadded {is} first_grade + second_grade\nmean_grade {is} added / 2\n{if} mean_grade = 1 {or} mean_grade = 2 {or} mean_grade = 3 {or} mean_grade = 4 {or} mean_grade = 5\n    {print} 'Oh no! You have failed the subject...'\n{else}\n    {print} 'Great! You have passed the subject!'\n```\n"
             14:
                 story_text: "## 下一步是什么？\n在下面这个游戏中，已经有了一个代码，以确保玩家可以玩下去，只要他/她想...\n但这个代码是无效的，而且太长了。另外，{if} 玩家想玩101场而不是100场那会怎样？ \n你能玩无限场吗？ \n在下一级中，你将学习一个命令，使这一切变得更容易!\n"
             15:
-                start_code: "{print} 'Lets go to the next level!'"
                 example_code: "```\nanimals = 'chicken', 'horse', 'cow'\nsounds = 'cluck', 'neigh', 'moo'\n{for} animal {in} animals\n    {print} 'A ' animal ' says ' sounds {at} {random}\n```\nYou could also try to make it work this way, but....\n```\nanimals = 'chicken', 'horse', 'cow'\nsounds = 'cluck', 'neigh', 'moo'\n{for} animal {in} animals\n    {for} sound {in} sounds\n        {print} 'A ' animal ' says ' sound\n```\n"
             16:
-                story_text: "## 下一步是什么？\n在下一个级别中，是时候使用新命令了。您可能已经注意到，在前面的一级中，只用`{if}` 和 `{else}` 有时还不够。\n例如，在此代码中：\n"
                 story_text_2: In this code it would be great to have 2x an `{else}` so you could have one option for the broccoli and one for the green beans. The next level comes with the new command `{elif}` that makes this possible! So check out the next level now!
-            6:
-                start_code: "{print} 'On to the next level!'"
             7:
                 story_text: "## 接下来是什么？\n现在你已经学会了如何重复一行代码。这很方便，但这并不总是足够。有时你想一次重复多行代码。\n在下一级，允许你将几行代码组成一组，并一次性重复这一组代码！\n"
-                example_code: "```\n{repeat} 5 {times} {print} 'In the next level you can repeat multiple lines of code at once!'\n```\n"
             12:
                 start_code: "{print} 'Lets go to the next level!'"
-            18:
-                start_code: "{print} ('Great job!!!')"
             17:
                 story_text: "## What's next?\nIn the next level you will learn a real Python way to use `{print}`.\n"
     parrot:

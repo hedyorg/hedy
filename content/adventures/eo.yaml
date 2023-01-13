@@ -131,8 +131,6 @@ adventures:
                 story_text: "## Ni desegnu\nEn ĉi tiu nivelo vi povas uzi kalkulojn por desegni malsamajn figurojn.\nVi eble lernis en la lernejo, ke turni plenan cirklon estas 360 gradoj. Se ne, nun vi scias!\nTial vi ankaŭ uzas 90 gradojn por kvadrato. 360 dividita per 4 estas 90.\nNun kiam ni povas fari matematikon kun Hedy, ni povas desegni ĉiujn figurojn, kiujn ni volas!\n"
                 example_code: "```\nanguloj = {ask} 'Kiom da anguloj vi deziras?'\nangulo = 360 / anguloj\n{forward} 50\n{turn} angulo\n{forward} 50\n{turn} angulo\n{forward} 50\n{turn} angulo\n{forward} 50\n{turn} angulo\n{forward} 50\n{turn} angulo\n{forward} 50\n{turn} angulo\n```\n"
                 start_code: "{print} 'Desegnante figurojn'"
-            7:
-                example_code: "```\n{print} 'Desegnante figurojn'\n{repeat} 3 {times} {forward} 10\n```\n"
             8:
                 story_text: "## Ni desegnu\nNun ni povas ripeti plurajn liniojn; tial ni povas fari figurojn pli facile.\nNi devas nur unufoje agordi la angulon kaj poste uzi tiun variablon en la `{repeat}`.\n"
                 example_code: "```\nangulo = 90\n{repeat} 10 {times}\n    {turn} angulo\n    {forward} 50\n```\n"
@@ -523,48 +521,29 @@ adventures:
                 example_code_3: "```\n{print}('Mia nomo estas Hedy!')\nnomo = {input}('Kio estas via nomo?')\n{print}('Do via nomo estas ', nomo)\n```\n"
     next:
         levels:
-            13:
-                story_text: "## What's next?\nWith the program below you can calulate {if} you've passed a subject at school (so, a grade of six or higher).\nYou can see this code is extremely inefficient, du to the very long code in line 5.\nAll the different grades from 1 to 5 had to be programmed seperately. Lucky for you, in the next level you'll learn how to do this without this extremely long code!\n"
             18:
                 start_code: "{print} ('Bonege!!!')"
             1:
-                story_text: "## Kio sekvos?\nGratulon! Vi atingis la finon de Nivelo 1. Espereble vi jam faris kelkajn mirindajn kodojn, sed Hedy havas multe pli por malkovri.\n\nEn la unua nivelo vi eble rimarkos, ke la komando `{echo}` povas konservi nur unu peceton da informo samtempe.\nEkzemple en la restoracio aventuro, vi povus {echo} kion la kostumanto volis manĝi, aŭ kion ili volis trinki, sed ne ambaŭ en unu frazo.\n"
                 story_text_2: "Se la ludanto tajpas hamburgeron kaj kolaon, oni ne povas diri \"do vi ŝatus hamburgeron kaj kolaon\", sed vi devas fari du apartajn liniojn.\nAnkaŭ la komando `{echo}` nur eĥas la vorton fine de la frazo. Do vi ne povas diri \"via hamburgero tuj venas!\".\n\nTio ŝanĝiĝas en la nivelo 2. En la nivelo 2 vi lernos labori kun variabloj, kiuj ebligas al vi konservi plurajn informojn kaj presi ilin en ajna loko, kiun vi volas.\nDo ni iru al la sekva nivelo!\n"
-            2:
-                story_text: "## Kio sekvos?\nEn ĉi tiu nivelo vi lernis kio estas variablo kaj kiel vi povas uzi ĝin por fari viajn aventurojn pli interagaj.\nSed... tio ne estas la sola afero, kiun vi povas fari kun variabloj! Vi ankaŭ povas uzi variablojn por fari listojn.\nKaj vi eĉ povas lasi Hedy elekti hazardan vorton el listo, kio permesas vin fari realajn ludojn!\nRigardu rapide la sekvan nivelon!\n"
             3:
                 story_text: "## Kio sekvos?\nEn ĉi tiu nivelo, vi ekzercis vin pri variabloj, sed eble vi foje renkontis la jenan eraron.\n\nProvu ruli ĉi tiun kodon:\n```\nnomo {is} Sofio\n{print} Mia nomo estas nomo\n```\nKompreneble vi volis presi `Mia nomo estas Sofio`, sed Hedy presas `Mia Sofio estas Sofio`.\nEn la sekva nivelo, ĉi tiu problemo estos riparebla per citiloj.\n"
-            4:
-                story_text: "## Kio sekvos?\nEn la antaŭaj niveloj, vi jam lernis uzi `{at} {random}` kiu igis viajn ludojn malsamaj ĉiufoje kiam vi rulis la kodon.\nSed ĝi ne estas vere interaga, la ludanto ne havas ajnan influon sur kio okazas en la ludo.\n\nEn la sekva nivelo, vi lernos la komandon `{if}`, kiu ebligas al vi doni malsamajn respondojn en via programo. Tiel vi povas programi sekretan pasvorton por via komputilo ekzemple.\nDo ni prenu pinton!\n\n```\npasvorto {is} {ask} 'Kio estas la ĝusta pasvorto?'\n```\n"
             5:
                 story_text: "## Kio sekvos?\nNun vi atingis la finon de ĉi tiu nivelo kaj lernis `{ask}` kaj `{if}`. Ekzemple oni povas uzi `{ask}` por demandi al gastoj, kion ili ŝatus manĝi.\nTamen, oni ankoraŭ ne povas kalkuli la prezon de ĉies vespermanĝo.\n\nLa sekva nivelo ebligas uzi adicion, subtrahon kaj multiplikon en oniaj programoj. Tiel oni povas kalkuli la prezojn en sia restoracio, kaj oni ankaŭ povas aldoni sekretan kodon por doni rabaton al siaj amikoj kaj familio.\nAlia eblo en la sekva nivelo estas programi propran matematikan ludon, por ke via frato aŭ fratino praktiku siajn multiplikojn.\nEk al la sekva nivelo!\n"
-                start_code: "{print} 'Al la sekva nivelo!'"
             6:
                 example_code: "```\n{print} 'feliĉan naskiĝtagon al vi'\n{print} 'feliĉan naskiĝtagon al vi'\n{print} 'feliĉan naskiĝtagon kara Hedy'\n{print} 'feliĉan naskiĝtagon al vi'\n```\n"
             7:
-                story_text: "## Kio sekvos?\nNun vi lernis kiel ripeti unu linion da kodo. Tio utilas sed ne ĉiam sufiĉas. Kelkfoje oni volas ripeti plurajn liniojn samtempe.\nLa sekva nivelo permesos al vi grupigi kelkajn liniojn da kodo kaj ripeti tiun grupon da linioj samtempe!\n"
                 start_code: "{print} 'Al la sekva nivelo!'"
-            8:
-                example_code: "```\nrespondo = {ask} 'Ĉu vi volas iri al la sekva nivelo?'\n{if} respondo {is} jes\n    {print} 'Bonege! Vi povas uzi la komandon {repeat} en la komando {if}!'\n    {print} 'Hura!'\n    {print} 'Hura!'\n    {print} 'Hura!'\n{else}\n    {print} 'Bone, vi povas resti ĉi tie iom pli longe!'\n```\n"
             9:
                 story_text: "## Kio sekvos?\nVi fartas bonege! En ĉi tiu nivelo ni ankoraŭ alfrontas malgrandan problemon. Vi lernis ripeti liniojn, sed kio se vi volus iomete ŝanĝi la linion.\nEkzemple se vi volas kanti la kanton «Se vi estas feliĉa kaj vi scias ĝin». Ĝi aspektus jene:<!--{if}-->\n\nSe vi ankaŭ dezirus la sekvan verson 'stumu viajn piedojn', kaj la sekvan, kaj la sekvan, vi devus tute ŝanĝi la kodon.\nEn la sekva nivelo vi lernos la komandon `{for}`, kiu ebligas al vi fari liston de agoj kaj ripeti la kodon per alia ago ĉiufoje!\nBonvolu rigardi!\n"
-                start_code: "{print} 'Al la sekva nivelo!'"
             10:
                 start_code: "{print} 'Al la sekva nivelo!'"
-            11:
-                example_code: "```\nhamburgero {is} 5\ntrinkaĵo {is} 2\ntotalo {is} hamburgero + trinkaĵo\n{print} 'Vi mendis hamburgeron kaj trinkaĵon'\n{print} 'La totalo estas ' totalo ' spesmiloj'\n```\nLa ĉi-supra kodo funkcias, ĉar la hamburgero estas 5 spesmiloj kaj la trinkaĵo estas 2 dolaroj. Sed se vi ŝargus duonon da spesmilo pli, la programo ne plu funkcius, jen:\n```\nhamburgero {is} 5.50\ntrinkaĵo {is} 2.30\ntotalo {is} hamburgero + trinkaĵo\n{print} 'Vi mendis hamburgeron kaj trinkaĵon'\n{print} 'La totalo estas ' totalo ' spesmiloj'\n```\nEk al la sekva nivelo por ke ĉi tiu kodo funkciu!\n"
             12:
                 story_text: "## What's next?\nIn the previous levels you learned how to put two `{if}`commands inside each other. This works fine, but it does give you very long and unhandy codes like this one:\n\nIn this system you have to give both the correct username and the correct password.\nIn the next level you will learn the `{and}` command that will make this code a ot shorter and more understandable!\nCheck it out!\n"
-                start_code: "{print} 'Al la sekva nivelo!'"
             14:
                 example_code: "```\nludo {is} 'daŭranta'\n{for} i {in} {range} 1 {to} 100\n    {if} ludo {is} 'daŭranta'\n        respondo = {ask} 'Ĉu vi volas daŭrigi la ludon?'\n        {if} respondo {is} 'ne'\n            ludo {is} 'finita'\n        {if} respondo {is} 'jes'\n            {print} 'Bone, ni daŭrigos la ludon'\n```\n"
             15:
-                story_text: "## What's next?\nIn the next level we will grow a bit more towards real Python code. thon code. You will also learn how to match two lists together.\nThis way you can program a code in which the correct animal is matched to the right sound.\nBecause the two codes below... Are obviously nonsense!\n"
                 start_code: "{print} 'Al la sekva nivelo!'"
             16:
-                example_code: "```\n{print} 'Kion manĝi ĉi-nokte?'\nopcioj = ['pico', 'brokolo', 'fazeoloj']\nelekto = opcioj {at} {random}\n{if} elekto = 'pico'\n    {print} 'Bonguste! Pico!'\n{else}\n    {print} 'Fi…'\n```\n"
-                start_code: "{print} 'Al la sekva nivelo!'"
-            17:
                 start_code: "{print} 'Al la sekva nivelo!'"
         description: Kio sekvos?
     parrot:

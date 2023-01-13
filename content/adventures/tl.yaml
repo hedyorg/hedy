@@ -140,8 +140,6 @@ adventures:
                 story_text: "## Let's draw\nIn this level you can use calculations to draw different figures.\nYou may have learned in school that turning a full circle is 360 degrees. If not, now you know!\nThat's why you also use 90 degrees for a square. 360 divided by 4 is 90.\nNow that we can do math with Hedy, we can draw all the figures we want!\n"
                 example_code: "```\nangles = {ask} 'How many angles do you want?'\nangle = 360 / angles\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n```\n"
                 start_code: "{print} 'Drawing figures'"
-            7:
-                example_code: "```\n{print} 'Draw figures'\n_ 3 _ {forward} 10\n```\n"
             8:
                 story_text: "## Let's draw\nNow that we can repeat several lines, we can make figures more easily.\nWe only have to set the angle once and then use that variable in the `{repeat}`.\n"
                 example_code: "```\nangle = 90\n{repeat} 10 {times}\n    {turn} angle\n    {forward} 50\n```\n"
@@ -665,48 +663,29 @@ adventures:
         default_save_name: Tic
     next:
         levels:
-            2:
-                story_text: "## What's next?\nIn this level you've learned what a variable is and how you can use it to make your adventures more interactive.\nBut... that's not the only thing you can do with variables! You can also use variables to make lists.\nAnd you can even let Hedy pick a random word out of a list, which allows you to make real games!\nTake a quick look at the next level!\n"
             3:
                 story_text: "## What's next?\nIn this level you've been practising with variables, but maybe you've come across this mistake.\n\nTry to run this code:\n```\nname {is} Sophie\n{print} My name is name\n```\nOf course you wanted to print `My name is Sophie` but Hedy prints `My Sophie is Sophie`.\nIn the next level this problem is fixed by using quotation marks.\n"
-            5:
-                story_text: "## What's next?\nNow you've reached the end of this level, so you have learned `{ask}` and `{if}`. For example you can ask guests what they would like to eat.\nWhat you can't yet do though, is calculate the price for everyone's dinner.\n\nThe next level makes it possible to use addition, subtraction and multiplication in your programs. This way you can calculate the prices in your restaurant, but you could also add a secret code to give your friends and family a discount.\nAnother option in the next level is programming your own maths game, for your little brother or sister to practice their multiplications.\nGo see for yourself in the next level!\n"
             8:
                 start_code: "{print} 'Lets go to the next level!'"
-                example_code: "```\nanswer = {ask} 'Would you like to go to the next level?'\n{if} answer {is} yes\n    {print} 'Great! You can use the {repeat} commando in the {if} command!'\n    {print} 'Hooray!'\n    {print} 'Hooray!'\n    {print} 'Hooray!'\n{else}\n    {print} 'Okay, you can stay here for a little longer!'\n```\n"
             18:
                 story_text: "## What's next?\nCongratulations! You have reached the last level of Hedy! The code you have created here can be copied to real Python environments like replit or PyCharm, and you can continue learning there!\nNote however that Python can only read English commands, so if you have been using other languages, you will need to switch to English now.\n"
             1:
-                example_code: "```\n{print} Welcome at Hedy's\n{ask} What would you like to eat?\n{echo} So you want \n{ask} what would you like to drink?\n{echo} So you want \n```\n"
                 start_code: "{print} Let's go!"
-            4:
-                start_code: "{print} 'Lets go to the next level!'"
             6:
                 example_code: "```\n{print} 'happy birthday to you'\n{print} 'happy birthday to you'\n{print} 'happy birthday dear Hedy'\n{print} 'happy birthday to you'\n```\n"
             7:
-                story_text: "## What's next?\nNow you've learned how to repeat one single line of code. This comes in handy, but it's not always enough. Sometimes you want to repeat multiple lines at once.\nThe next level allows you to group a couple of lines of code, and repeat that little group of lines all at once!\n"
                 start_code: "{print} 'Lets go to the next level!'"
-            9:
-                example_code: "```\n{repeat} 2 {times}\n    {print} 'if youre happy and you know it clap your hands'\n{print} 'if youre happy and you know it and you really want to show it'\n{print} 'if youre happy and you know it clap your hands'\n```\n"
             10:
                 start_code: "{print} 'Lets go to the next level!'"
             11:
-                story_text: "## What's next?\nMaybe you have tried using decimal numbers in your restaurant adventure. If you did, you probably noticed that Hedy didn't understand them yet and always rounded off.\nFrom the next level on you can use decimal numbers.\n"
                 example_code: "```\nburger {is} 5\ndrink {is} 2\ntotal {is} burger + drink\nprint 'You have ordered a burger and a drink'\nprint 'That costs ' total ' dollars please'\n```\nThe code above works, because the burger is 5 dollars and the drink is 2 dollar. But if you charge 50 cents more, the program doesn't work anymore! Like the code below:\n```\nburger {is} 5.50\ndrink {is} 2.30\ntotal {is} burger + drink\nprint 'You have ordered a burger and a drink'\nprint 'That costs ' total ' dollars please'\n```\nGo to the next level to make this code work!\n"
-            12:
-                example_code: "```\nusername {is} {ask} 'What is your username?'\npassword {is} {ask} 'What is your password?'\n{if} username {is} 'Hedy'\n    {if} password {is} 'secret'\n        {print} 'Welcome Hedy!'\n    {else}\n        {print} 'Access denied'\n{else}\n    {print} 'Access denied!'\n```\n"
             13:
                 story_text: "## What's next?\nWith the program below you can calculate if you've passed a subject at school (so, a grade of six or higher).\nYou can see this code is extremely inefficient, due to the very long code in line 5.\nAll the different grades from 1 to 5 had to be programmed separately. Lucky for you, in the next level you'll learn how to do this without this extremely long code!\n"
-                example_code: "```\nfirst_grade = {ask} 'What score did you get on your first test?'\nsecond_grade = {ask} 'What score did you get on your second test?'\nadded {is} first_grade + second_grade\nmean_grade {is} added / 2\n{if} mean_grade = 1 {or} mean_grade = 2 {or} mean_grade = 3 {or} mean_grade = 4 {or} mean_grade = 5\n    {print} 'Oh no! You have failed the subject...'\n{else}\n    {print} 'Great! You have passed the subject!'\n```\n"
             14:
                 start_code: "{print} 'Lets go to the next level!'"
             15:
-                story_text: "## What's next?\nIn the next level we will grow a bit more towards real Python code. You will also learn how to match two lists together.\nThis way you can program a code in which the correct animal is matched to the right sound.\nBecause the two codes below... Are obviously nonsense!\n"
                 start_code: "{print} 'Lets go to the next level!'"
             16:
-                example_code: "```\n{print} 'What is for dinner tonight?'\noptions = ['pizza', 'broccoli', 'green beans']\nchosen = options {at} {random}\n{if} chosen = 'pizza'\n    {print} 'Yummy! Pizza!'\n{else}\n    {print} 'Yikes...'\n```\n"
-                start_code: "{print} 'Lets go to the next level!'"
-            17:
                 start_code: "{print} 'Lets go to the next level!'"
         description: What's Next?
     blackjack:
