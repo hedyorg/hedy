@@ -1,4 +1,4 @@
-from flask import session, request
+from flask import session, request, current_app, abort
 from flask_helpers import render_template
 from bs4 import BeautifulSoup
 import contextlib
@@ -15,6 +15,8 @@ import uuid
 from flask_babel import gettext, format_date, format_datetime, format_timedelta
 from ruamel import yaml
 import commonmark
+
+from functools import wraps
 
 commonmark_parser = commonmark.Parser()
 commonmark_renderer = commonmark.HtmlRenderer()
@@ -169,6 +171,18 @@ def set_debug_mode(debug_mode):
     """Switch debug mode to given value."""
     global DEBUG_MODE
     DEBUG_MODE = debug_mode
+
+# Annotation to run functions just in dev mode.
+# Useful to deactivate some helper endpoints in prod mode.
+def debug_only(f):
+    @wraps(f)
+    def wrapped(**kwargs):
+        if not current_app.debug:
+            abort(404)
+
+        return f(**kwargs)
+
+    return wrapped
 
 
 def load_yaml_rt(filename):

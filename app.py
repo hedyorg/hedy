@@ -33,7 +33,8 @@ from hedy_content import (ADVENTURE_ORDER_PER_LEVEL, ALL_KEYWORD_LANGUAGES,
                           ALL_LANGUAGES, COUNTRIES,
                           NON_LATIN_LANGUAGES)
 from logging_config import LOGGING_CONFIG
-from utils import dump_yaml_rt, is_debug_mode, load_yaml_rt, timems, version
+from utils import dump_yaml_rt, is_debug_mode, load_yaml_rt, timems, version, debug_only
+import alternative_error_messages
 from website import (ab_proxying, achievements, admin, auth_pages, aws_helpers,
                      cdn, classes, database, for_teachers, jsonbin, parsons,
                      profile, programs, querylog, quiz, statistics,
@@ -368,9 +369,7 @@ def parse():
     username = current_user()['username'] or None
     exception = None
 
-    test_group = False
-    if username:
-        test_group = session["user"]["test_group"]
+    alt_err_msgs = alternative_error_messages.is_available()
 
     querylog.log_value(level=level, lang=lang,
                        session_id=utils.session_id(), username=username)
@@ -437,6 +436,7 @@ def parse():
         'code': code,
         'server_error': response.get('Error'),
         'exception': get_class_name(exception),
+        'alternative_error_message': alt_err_msgs,
         'version': version(),
         'username': username,
         'read_aloud': read_aloud,
@@ -446,8 +446,6 @@ def parse():
 
     if "Error" in response and error_check:
         response["message"] = gettext('program_contains_error')
-
-    response["test_group"] = test_group
 
     return jsonify(response)
 
@@ -1509,6 +1507,12 @@ def change_language():
     session['lang'] = body.get('lang')
     return jsonify({'succes': 200})
 
+@app.route('/change_language/<lang>', methods=['GET'])
+@debug_only
+def change_language_to(lang):
+    session['lang'] = lang
+    return redirect('/hedy')
+
 
 @app.route('/translate_keywords', methods=['POST'])
 def translate_keywords():
@@ -1576,6 +1580,15 @@ def client_messages():
     d.update(YamlFile.for_file('content/client-messages/en.yaml').to_dict())
     d.update(YamlFile.for_file(
         f'content/client-messages/{g.lang}.yaml').to_dict())
+    
+    # A/B testing
+    # If alternative error messages are available for this user
+    # use alternative file for translation
+    if alternative_error_messages.is_available():
+        d.update(YamlFile.for_file(f'content/client-messages/{g.lang}_test.yaml').to_dict())
+
+    # If alternative error message is set use alternative .yaml file
+    
 
     response = make_response(render_template(
         "client_messages.js", error_messages=json.dumps(d)))
