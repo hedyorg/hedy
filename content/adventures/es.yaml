@@ -1117,7 +1117,15 @@ adventures:
             1:
                 story_text: "## Loro\n¡Crea tu propia mascota online, un loro que copiará lo que digas!\n"
                 example_code: "```\n{print} Soy Hedy la lora\n{ask} ¿Cuál es tu nombre?\n{echo}\n{echo}\n```\n"
-                start_code: '{print} Soy Hedy la lora'
+                start_code: '{print} Soy Hedy la lora
+
+                    {ask} Cómo te llamas?
+
+                    {echo}
+
+                    {echo}
+
+                    '
                 story_text_2: "## Desafío\n¿Puedes hacer que el loro pregunte diferentes preguntas? ¡Llena lo que falta en este ejemplo!\n"
                 example_code_2: "```\n{print} Soy Hedy la lora\n{ask} _\n{echo}\n{echo}\n"
             5:
@@ -1339,7 +1347,7 @@ adventures:
                 start_code: '# pon tu código aquí'
                 story_text: "Ahora que aprendiste a usar `{and}` y `{or}`, ¡también podemos usarlo con `{pressed}`!\nImagina que la tortuga puede hacer un supersalto hacia adelante.\n¡Al presionar `p` la tortuga puede hacer un supersalto!\nSin embargo, ¡la tortuga solo puede hacer este salto si primero gira a la izquierda y a la derecha!\n"
             14:
-                example_code: "```\nstepsize = 15\nleft = -90\nright = 90\naround = 180\njumptime = 5\nspins = 4\nrepeat 40 times\n    {if} w {is} {pressed}\n        forward stepsize\n        jumptime = jumptime - 1\n    {if} s {is} {pressed}\n        turn around\n    {if} a {is} {pressed}\n        turn left\n        spins = spins - 1\n    {if} d {is} {pressed}\n        turn right\n        spins = spins - 1\n    {if} p {is} {pressed}\n        {if} jumptime <= 0 or spins <= 0\n            forward stepsize * 3\n            jumptime = 5\n            spins = 4\n```\n"
+                example_code: "```\ntamaño_de_paso = 15\nizquierda = -90\nderecha = 90\nalrededor = 180\ntiempo_para_salto = 5\ngiros = 4\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} tamaño_de_paso\n        tiempo_para_salto = tiempo_para_salto - 1\n    {if} s {is} {pressed}\n        {turn} alrededor\n    {if} a {is} {pressed}\n        {turn} izquierda\n        giros = giros - 1\n    {if} d {is} {pressed}\n        {turn} derecha\n        giros = giros - 1\n    {if} p {is} {pressed}\n        {if} tiempo_para_salto <= 0 or giros <= 0\n            {forward} tamaño_de_paso * 3\n            tiempo_para_salto = 5\n            giros = 4\n```\n"
                 story_text: "Ahora que has aprendido a usar operadores, ¡lo podemos usar también con`{pressed}`!\nimagina que la tortuga puede hacer un super salto hacia adelante. ¡Al pulsar ``p``, la tortuga puede hacer un\nsuper salto! Sin embargo, la tortuga solo puede hacer este salto cada 5 pasos o cada 4 giros\n"
                 start_code: '# pon tu código aquí'
             15:

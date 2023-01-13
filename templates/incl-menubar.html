@@ -4,10 +4,14 @@
         <li class="ltr:mr-2 rtl:ml-2"><a href="/" class="inline-block w-10 lg:w-12"><img src="{{static('/images/Hedy-logo-96x96.png')}}" height="48px" width="48px" alt="{{_('hedy_logo_alt')}}"></a></li>
         <li class="menubar-item{% if current_page == 'start' %} active{% endif %}"><a class="menubar-text" href="/">{{_('nav_start')}}</a></li>
         <li class="menubar-item{% if current_page == 'hedy' %} active{% endif %}"><a class="menubar-text" id="hedybutton" href="/hedy">{{_('nav_hedy')}}</a></li>
+        <li class="menubar-item{% if current_page == 'explore' %} active{% endif %}"><a class="menubar-text" id="explorebutton" href="/explore">{{_('nav_explore')}}</a></li>
+        {% if is_teacher %}
+            <li class="menubar-item{% if current_page == 'for-teachers' %} active{% endif %}"><a class="menubar-text" href="/for-teachers">{{_('for_teachers')}}</a></li>
+            <li class="menubar-item{% if current_page == 'teacher-manual' %} active{% endif %}"><a class="menubar-text" href="/for-teachers/manual">{{_('teacher_manual')}}</a></li>
+        {% endif %}
         {% if is_admin %}
             <li class="menubar-item{% if current_page == 'admin' %} active{% endif %}"><a class="menubar-text" href="/admin">Admin</a></li>
         {% endif %}
-        <li class="menubar-item{% if current_page == 'explore' %} active{% endif %}"><a class="menubar-text" id="explorebutton" href="/explore">{{_('nav_explore')}}</a></li>
         <div class="flex-1"></div><!-- divider -->
 
 
@@ -32,10 +36,6 @@
                 <a class="dropdown-item" href="/highscores"><span class="fas fa-trophy ltr:mr-4 rtl:ml-4"></span>{{_('highscores')}}</a>
                 <a class="dropdown-item" href="/my-achievements"><span class="fas fa-fw fa-list-alt ltr:mr-4 rtl:ml-4"></span>{{_('my_achievements')}}</a>
                 <a class="dropdown-item" href="/my-profile"><span class="fas fa-user-cog ltr:mr-4 rtl:ml-4"></span>{{_('my_account')}} {% if get_user_messages() %} ({{ get_user_messages() }}){% endif %}</a>
-                {% if is_teacher %}
-                    <a class="dropdown-item" href="/for-teachers"><span class="fas fa-chalkboard-teacher ltr:mr-4 rtl:ml-4"></span>{{_('for_teachers')}}</a>
-                    <a class="dropdown-item" href="/for-teachers/manual"><span class="fas fa-notes-medical ltr:mr-4 rtl:ml-4"></span>{{_('teacher_manual')}}</a>
-                {% endif %}
                 <a class="dropdown-item" id="logout_button" href="#" onclick="hedyApp.logout();"><span class="fas fa-fw fa-sign-out-alt ltr:mr-4 rtl:ml-4"></span>{{_('logout')}}</a>
             </div>
         </li>
