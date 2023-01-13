@@ -1519,7 +1519,6 @@ adventures:
                     {print} 'Yes! You have thrown 6 in ' tries ' tries.'
                     ```
                 start_code: "# place your code here"
-
     pressit:
         name: "Press it!"
         description: "Try linking a keyboard key to a command!"
@@ -2697,15 +2696,10 @@ adventures:
                     ```
                 story_text_2: |
                     ### Excercise
-                    As you can see, the questions aren't printed in this example. That's because the variable `question` was changed 3 times.
-                    Every time the player fills in the new answer, Hedy overwrites the previous one, so the first answer the player gave is forgotten.
-                    This means you can't print all the questions this way.
+                    The example program asks three questions but... Does not give three answers.
+                    Make a list of answers and print a random one, three times. Think of fun answers yourself.
 
-                    By using 3 different variables instead of 1 (for example `question_1` , `question_2` and `question_3`), you could solve the problem and print the questions.
-                    This does mean that you can only use `{repeat}` for the answers, and you will have to ask and print all the questions separately.
-                    Can you do it?
-
-                    In the upcoming levels the layout of `{repeat}` command will change, which enables you to repeat multiple lines at once.
+                    Sadly we cannot yet show the answers pairwise. In the upcoming levels the layout of `{repeat}` command will change, soving that problem.
                 start_code: "# place your code here"
             8:
                 story_text: |

@@ -1875,26 +1875,19 @@ adventures:
             7:
                 story_text: |
                     ## Hedy de Waarzegger
-                    Nu kun je het `{repeat}` commando gebruiken om meerdere voorspellingen te doen. Kijk maar naar het voorbeeld:
+                    Nu kun je het a`{repeat}` commando gebruiken om meerdere voorspellingen te doen. Kijk maar naar het voorbeeld.
                 example_code: |
                     ```
                     {print} 'Ik ben Hedy de waarzegger'
                     {print} 'Je mag 3 vragen stellen!'
                     {repeat} 3 {times} vraag = {ask} 'Wat wil je weten?'
-                    antwoorden = ja, nee, misschien
-                    {repeat} 3 {times} {print} 'Mijn glazen bol zegt... ' antwoorden {at} {random}
                     ```
                 story_text_2: |
                     ### Opdracht
-                    Zoals je ziet worden de vragen niet geprint in dit voorbeeld. Dat komt omdat de variabele `vraag` 3 keer veranderd wordt.
-                    Elke keer als een speler een nieuw antwoord geeft, wordt de variabele namelijk overschreven, waardoor het vorige antwoord verloren gaat.
-                    Dit betekent dat je dus niet alle vragen kunt printen op deze manier.
+                    Er worden in het voorbeeldprogramma drie vragen gesteld, maar... er zijn nog geen antwoorden bij.
+                    Maak een lijst met antwoorden en print drie keer een willekeurig antwoord. Je mag de antwoorden zelf bedenken.
 
-                    Als je 3 verschillende variabelen gebruikt, in plaats van eentje (bijvoorbeeld `vraag_1`, `vraag_2` en `vraag_3`), kun je dit probleem oplossen en de vragen wel printen.
-                    Dit betekent wel dat je het `{repeat}` commando alleen bij de antwoorden kunt gebruiken en alle vragen apart moet stellen.
-                    Lukt het jou dit te maken?
-
-                    In het volgende level verandert de opmaak van het `{repeat}`-commando, waardoor dit probleem verdwijnt!
+                    Helaas kunnen we de vragen en antwoorden niet per keer laten zien. In het volgende level verandert het `{repeat}`-commando, waardoor dit probleem verdwijnt!
                 start_code: "# Schrijf jouw code hier"
             8:
                 story_text: |
