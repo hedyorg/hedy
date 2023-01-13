@@ -103,14 +103,6 @@ class AuthModule(WebsiteModule):
             max_age=365 * 24 * 60 * 60,
         )
 
-        # Get test group to send it via cookie to client
-        # If test group not exists, create and save it into database
-        if "test_group" not in user.keys():
-            test_group = True if random.random() > 0.7 else False
-            self.db.update_user(user["username"], {"test_group": test_group})
-        resp.set_cookie('test_group', str(user['test_group']))
-        # ColoredConsole.log("TEEEEEEEST!")
-
         # Remember the current user on the session. This is "new style" logins, which should ultimately
         # replace "old style" logins (with the cookie above), as it requires fewer database calls.
         remember_current_user(user)
@@ -437,7 +429,6 @@ class AuthModule(WebsiteModule):
             "email": email,
             "language": account["language"],
             "keyword_language": account["keyword_language"],
-            "test_group": True if random.random() > 0.7 else False,
             "created": timems(),
             "teacher_request": True if account.get("is_teacher") else None,
             "third_party": True if account.get("agree_third_party") else None,
