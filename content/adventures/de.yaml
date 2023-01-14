@@ -285,17 +285,17 @@ adventures:
                     ```
 
                 start_code: "{print} Deine Geschichte beginnt hier"
-                story_text_2: "## Challenge\nKannst du deine eigene Geschichte in Hedy erstellen, indem du `{print}` , `{ask}` und `{echo}` verwendest?\n"
+                story_text_2: "## Übung\nKannst du deine eigene Geschichte in Hedy erstellen, indem du `{print}` , `{ask}` und `{echo}` verwendest?\n"
             2:
                 story_text: |
                     ## Schreibe eine Geschichte
-                    In Level 2 kannst Du deine Geschichte noch etwas spannender machen. Der Name Deiner Hauptfigur kann nun an jeder Stelle im Satz auftauchen.
+                    In Level 2 kannst du deine Geschichte noch etwas spannender machen. Der Name deiner Hauptfigur kann nun an jeder Stelle im Satz auftauchen.
 
-                    Dafür musst Du aber auch ein kleines bisschen mehr programmieren. Du musst Dir jetzt seinen oder ihren Namen richtig merken.
+                    Dafür musst du aber auch ein kleines bisschen mehr programmieren. Du musst dir jetzt seinen oder ihren Namen richtig merken.
 
-                    Dafür kannst Du den Namen irgendwo im Satz verwenden.
+                    Dafür kannst du den Namen irgendwo im Satz verwenden.
 
-                    ## Challenge
+                    ### Übung
                     Kannst du selbst eine Geschichte schreiben, die eine Variable verwendet? Kannst du noch mehr Variablen hinzufügen?
 
                 example_code: |-
@@ -353,7 +353,7 @@ adventures:
                     ## Geschichte
                     In diesem Level kannst Du mehrere Zeilen zu einem {if}-Befehl hinzufügen. So kannst Du Deine guten und schlechten Enden etwas erweitern.
 
-                    ## Challenge
+                    ### Übung
                     Kannst du deine eigene Geschichte mit zwei verschiedenen Enden schreiben?
 
                 example_code: |
@@ -377,8 +377,8 @@ adventures:
                     In einer Geschichte kommt es manchmal vor, dass jemand ein Wort mehrmals hintereinander sagt. So zum Beispiel, wenn jemand um Hilfe ruft, oder etwas singt.
                     Solche Wiederholungen kannst Du mit dem Befehl `{repeat}` in Deine Geschichte einfügen. Repeat bedeutet wiederholen.
 
-                    ## Challenge
-                    Kannst du deine eigene Geschichte mit Wiederholungen schreiben?
+                    ## Übung
+                    Füge Wiederholungen zu deiner eigenen Geschichte hinzu. Gehe zurück zu deinen gespeicherten Programmen, wähle deine Geschichte-Programm aus Level 6 aus und finde eine Zeile die {print} enthält und wiederhole sie.
 
                 example_code: |
                     ```
@@ -393,7 +393,7 @@ adventures:
                     ## Geschichte
                     In diesem Level programmierst Du unterschiedliche Enden, was Deine Geschichte noch spannender werden lässt.
 
-                    ## Challenge
+                    ## Übung
                     Denke Dir einfach eine Geschichte mit zwei möglichen Enden aus, zum Beispiel:
 
                     - Die Prinzessin läuft durch den Wald.
@@ -455,7 +455,7 @@ adventures:
                 story_text_3: |
                     Das ist ein Beispiel für den `{remove}` Befehl in deiner Geschichte
 
-                    ## Challenge
+                    ## Übung
                     Kannst du die 3 neuen Befehle `{at} {random}`, `{add} {to}` und `{remove} {from}` in deiner eigenen Geschichte verwenden?
                 example_code_3: |
                     ```
@@ -492,7 +492,7 @@ adventures:
                     ## Geschichte
                     Mit den Befehlen `{and}` und `{or}` kannst Du Deine Geschichte etwas abkürzen. Sieh Dir zum Beispiel noch einmal die Geschichte mit dem Drachen an.
 
-                    ## Challenge
+                    ### Übung
                     Kannst Du dein eigenes Adventure-Minispiel wie dieses entwickeln?
 
                 example_code: |
@@ -539,9 +539,9 @@ adventures:
                     {echo}
                     {echo}
                     ```
-                start_code: "{print} Ich bin Hedy der Papagei"
+                start_code: "{print} Ich bin Hedy der Papagei\n{ask} Was ist dein Name?\n{echo}\n{echo}\n"
                 example_code_2: "```\n{print} Ich bin Hedy der Papagei\n{ask} _\n{echo}\n{echo}\n"
-                story_text_2: "## Challenge\nKannst du den Papagei dazu bringen, eine andere Frage zu stellen? Fülle die Lücken im Beispiel aus!\n"
+                story_text_2: "### Übung\nKannst du den Papagei dazu bringen, eine andere Frage zu stellen? Fülle die Lücken im Beispiel aus!\n"
             2:
                 story_text: |
                     ## Papagei
@@ -558,13 +558,13 @@ adventures:
                     {print} Name
                     ```
                 start_code: "{print} Ich bin Hedy der Papagei!"
-                story_text_2: "## Challenge\nDu kannst Variablen verwenden, damit der Papagei mehr als nur deinen Namen sagt. Kannst Du diesen Code vervollständigen?\n"
+                story_text_2: "### Übung\nDu kannst Variablen verwenden, damit der Papagei mehr als nur deinen Namen sagt. Kannst Du diesen Code vervollständigen?\n"
                 example_code_2: "```\n{print} Ich bin Hedy der Papagei\nname {is} {ask} Wie heißt du?\n{print} name\n{sleep}\n{print} name\nNachname {is} {ask} Wie ist dein Nachname?\n_\n{sleep}\n_\n```\n"
             3:
                 story_text: |
                     ## Papagei
                     Bringe Deinem Papageien mit dem Befehl `{add}` neue Wörter bei.
-                    ## Challenge
+                    ### Übung
                     Wie kannst Du deinen Papagei dazu bringen, mehrere Wörter zu sagen?
 
                 example_code: |
@@ -750,7 +750,7 @@ adventures:
 
                     Tipp: Nutze die Laut-Vorlesen-Funktion um Hedy das Lied für dich singen zu lassen.
 
-                    ## Herausforderung
+                    ### Übung
                     Du kannst nun die Zeilen 2 bis 7 so oft wie du möchtest wiederholen, indem du sie kopierst.
 
                 example_code: |
@@ -2415,14 +2415,6 @@ adventures:
                 start_code: "# setze hier deinen Code hin"
     next:
         levels:
-            1:
-                story_text: |
-                    ## Was kommt als Nächstes?
-                    Herzlichen Glückwunsch! Du bist zum Ende von Level 1 gekommen. Hoffentlich hast du schon jetzt ein paar coole Codes geschrieben, aber bei Hedy gibt es noch eine Menge zu entdecken.
-
-                    Im ersten Level hast du vielleicht gemerkt, dass der `{echo}` Befehl nur eine Information auf einmal speichern kann.
-                    Im Restaurant-Abenteuer zum Beispiel konntest du nur entweder wiedergeben was der Kunde essen wollte, oder was er trinken wollte, aber nicht beides in einem Satz.
-
             2:
                 story_text: |
                     ## Was kommt als nächstes?
@@ -2430,34 +2422,12 @@ adventures:
                     Aber... das ist nicht das Einzige was du mit Variablen anfangen kannst! Du kannst Variablen auch verwenden um Listen zu machen.
                     Und du kannst sogar Hedy ein zufälliges Wort aus einer Liste auswählen lassen, womit du richtige Spiele machen kannst!
                     Schau dir dafür einfach mal das nächste Level an!
-            4:
-                story_text: |
-                    ## What's next?
-                    In the previous levels you've already learned to use `{at} {random}` which made your games different every time you ran the code.
-                    But it's not really interactive, the player doesn't have any influence on what happens in the game.
-
-                    In the next level you'll learn the `{if}` command, that allows you to give different responses in your program. This way you can program a secret password for your computer for example.
-                    So let's take a peak!
-
-                    ```
-                    password {is} {ask} 'What is the correct password?'
-                    ```
             5:
                 example_code: "## Freigetränke!\n```\n{print} 'Willkommen bei McHedy'\nBestellung {is} {ask} 'Was würden Sie gerne essen?'\n{print} 'Sie hätten gerne ' Bestellung\n{if} Bestellung {is} Hamburger Preis {is} 5\n{if} Bestellung {is} Pommes Preis {is} 2\nGetränke {is} {ask} 'Was würden Sie gerne dazu trinken?'\n{print} 'Sie hätten gerne ' Getränke\n{print} 'Das macht dann ' Preis ' Euro für Ihre ' Bestellung ' bitte'\n{print} 'Die Getränke sind gratis in diesem Level weil Hedy noch nicht den Preis ausrechnen kann...'\n```\n"
-            7:
-                story_text: |
-                    ## Was kommt als Nächstes?
-                    Jetzt hast du gelernt, wie du eine Zeile Code wiederholen kannst. Das wird sich noch als nützlich erweisen, reicht aber nicht immer aus. Manchmal musst du mehrere Zeilen auf einmal wiederholen.
-                    Das nächste Level erlaubt dir, ein paar Zeilen Code zu einer Gruppe zusammenzufügen und diese kleine Gruppe dann auf einmal zu wiederholen!
-
             8:
                 start_code: "{print} 'Lets go to the next level!'"
-            9:
-                example_code: "```\n{repeat} 2 {times}\n    {print} 'Wenn du glücklich bist, dann klatsche in die Hand'\n{print} 'Zeig mir, wenn du bei mir bist, wie dir so zumute ist'\n{print} 'Wenn du glücklich bist, dann klatsche in die Hand'\n```\n"
             11:
                 start_code: "{print} 'Lets go to the next level!'"
-            12:
-                example_code: "```\nNutzername {is} {ask} 'Was ist dein Nutzername?'\nPasswort {is} {ask} 'Was ist dein Passwort?'\n{if} Nutzername {is} 'Hedy'\n    {if} Passwort {is} 'geheim'\n        {print} 'Willkommen Hedy!'\n    {else}\n        {print} 'Zugang gesperrt!'\n{else}\n    {print} 'Zugang gesperrt!'\n```\n"
             14:
                 story_text: |
                     ## Was kommt als Nächstes?
@@ -2465,15 +2435,8 @@ adventures:
                     Aber der Code ist ineffizient und viel zu lang. Und was, wenn der Spieler 101 Spiele und nicht 100 spielen möchte?
                     Kann man nicht bis unendlich spielen?
                     Im nächsten Level lernst du einen Befehl der das alles ein ganzes Stück einfacher macht.
-            15:
-                start_code: "{print} 'Lets go to the next level!'"
             16:
                 story_text_2: In diesem Code wäre es toll, zweimal ein `{else}` zu haben, damit du eine Option für den Brokkoli und eine für die Grünen Bohnen haben kannst. Das nächste Level bringt den Befehl `{elif}` mit, der genau das möglich macht! Also nichts wie los zum nächsten Level!
-            18:
-                story_text: |
-                    ## Was kommt als nächstes?
-                    Herzlichen Glückwunsch! Du hast das letzte Level von Hedy erreicht! Der Code, den du geschrieben hast, kann in echte Python-Umgebungen wie Replit oder PyCharm kopiert werden, wo du dann weiterüben kannst!
-                    Beachte jedoch, dass Python nur englische Befehle auslesen kann. Wenn du sonst also mit anderen Sprachen gearbeitet hast, musst du jetzt auch Englisch wechseln.
     secret:
         default_save_name: Sprache
         levels:
@@ -2584,6 +2547,6 @@ adventures:
         default_save_name: Neujahrs-Countdown
         levels:
             11:
-                story_text: "## Songs\nIn diesem Level kannst du den Befehl `{for} i {in} {range}` benutzen, um zum neuen Jahr runterzuzählen.\n\n## Herausforderung\nFülle die Lücken und bring den Code zum Laufen!\n"
+                story_text: "## Songs\nIn diesem Level kannst du den Befehl `{for} i {in} {range}` benutzen, um zum neuen Jahr runterzuzählen.\n\n### Übung\nFülle die Lücken und bring den Code zum Laufen!\n"
                 example_code: "## Countdown\n```\n{for} _ {in} _ 10 {to} 1\n    {print} i\n{print} 'Frohes neues Jahr!'\n```\n"
                 start_code: '# Platziere deinen Code hier'
