@@ -1862,3 +1862,76 @@ levels:
             question_score: '10'
         6:
             question_text: Which statement about this code is true?
+            mp_choice_options:
+            -   option: Michael is a boy with glasses
+                feedback: Try again
+            -   option: Marleen is a girl with glasses
+                feedback: Try again
+            -   feedback: Try again
+                option: Wouter is a boy without glasses
+            -   option: Sophie is a girl with glasses
+                feedback: Great job!
+            code: "print 'Let me guess which family member you are!'\nglasses = ask 'Do you wear glasses?'\nfemale = ask 'Are you female?'\nif glasses = 'yes' and female = 'yes'\n    print 'You must be Sophie!'\nif glasses = 'no' and female = 'yes'\n   print 'You must be Marleen!'\nif glasses = 'yes' and female = 'no'\n    print 'You must be Wouter!'\nif glasses = 'no' and female = 'no'\n    print 'You must be Michael!'"
+            correct_answer: D
+            hint: Take a good look! Or do you need glasses?
+            question_score: '10'
+        7:
+            mp_choice_options:
+            -   option: The grey cat is called Abby
+                feedback: This is true!
+            -   option: Milo the orange cat eats 4 scoops of cat nibbles
+                feedback: This is true
+            -   option: The black hamster needs to be fed a piece of carrot
+                feedback: Great job!
+            -   option: The yellow bird was fed this morning
+                feedback: This is true
+            question_text: Which statement is false?
+            code: "print 'Thank you for helping me take care of my pets'\nprint 'Here is a program to help feed them'\nanimal is ask 'What kind of animal are they?'\ncolor is ask 'What colour are they?'\nif animal is 'cat' and color = 'grey'\n    print 'That is Abby. She eats 3 scoops of cat nibbles'\nif animal is 'cat' and color = 'orange'\n    print 'That is Milo. He eats 4 scoops of cat nibbles'\nif animal is 'bird' or color is 'black'\n    print 'I fed them this moring! They do not need more food today'\nif animal is 'hamster' and color is 'brown'\n    print 'You can feed them a piece of carrot'"
+            correct_answer: C
+            hint: Read the last 4 lines carefully
+            question_score: '10'
+        8:
+            mp_choice_options:
+            -   feedback: You have paid too much!
+                option: "Welcome to the movie theater\nThat will be 8 dollars please\nEnjoy the movie"
+            -   feedback: Amazing!
+                option: "Welcome to the movie theater\nThat will be 5 dollars please\nEnjoy the movie"
+            -   option: "Welcome to the movie theater\nThat will be 3 dollars please\nEnjoy the movie"
+                feedback: That's not enough money!
+            -   option: "Welcome to the movie theater\nOk\nEnjoy the movie"
+                feedback: You have to pay for your popcorn!
+            question_text: What output do you get if you order popcorn but no drink?
+            code: "print 'Welcome to the movie theater'\npopcorn = ask 'Would you like some popcorn?'\ndrink = ask 'Would you like a drink?'\nif popcorn = 'yes' and drink = 'yes'\n    print 'That will be 8 dollars please'\nif popcorn = 'no' and drink = 'yes'\n   print 'That will be 3 dollars please'\nif popcorn = 'yes' and drink = 'no'\n    print 'That will be 5 dollars please'\nif popcorn = 'no' and drink = 'no'\n    print 'Ok'\nprint 'Enjoy the movie'"
+            correct_answer: B
+            hint: popcorn = yes and drink = no
+            question_score: '10'
+        10:
+            code: "print 'Welcome to the product finder of this supermarkt'\nitem is ask 'What product are you looking for?'\nbakery = 'bread', 'buns', 'muffins'\ndrinks = 'soda', 'water', 'lemonade'\nsnacks = 'chips', 'nuts', 'dips'\nfrozen = 'fries', 'icecream', 'pizza'\nfruit = 'bananas', 'apples', 'oranges'\nif item in snacks ??? item in drinks\n    print 'This item is in aile 3'\nif item in bakery or item in bakery\n    print 'This item in in the back of the store'\nif item in fruit\n    print 'The fruit is sold near the register'"
+            mp_choice_options:
+            -   option: and
+                feedback: There are no items that are both the list of snacks and the list of drinks
+            -   option: or
+                feedback: Great job!
+            -   option: in
+                feedback: No
+            -   option: if
+                feedback: No
+            question_text: Which command needs to be in line 8 at the place of the ??? ?
+            correct_answer: B
+            hint: The item is either in the list of snacks, or in the list of drinks
+            question_score: '10'
+        9:
+            question_text: What is wrong with this code?
+            code: "1  chocolate = ask 'Would you like chocolate sauce on your ice cream?'\n2  sprinkles = ask 'Would you like sprinkles on your ice cream?'\n3  if chocolate and sprinkles = 'yes'\n4      print 'Ice cream with chocolate sauce and sprinkles, coming up!'\n5  if chocolate = 'yes' and sprinkles = 'no'\n6      print 'Ice cream with chocolate sauce, coming up!'\n7  if chocolate = 'no' and sprinkles = 'yes'\n8      print 'Ice cream with sprinkles, coming up'\n9  if chocolate = 'no' and sprinkles = 'no'\n10     print 'Just plain icecream, coming up!'"
+            mp_choice_options:
+            -   option: "Line 3 should be: if chocolate = 'yes' and sprinkles is 'no'"
+                feedback: Correct!
+            -   option: "Line 3 should be: if chocolate = 'no' and sprinkles is 'no'"
+                feedback: This is not what I ordered!
+            -   option: "Line 5 should be: if chocolate = 'yes' and sprinkles is 'yes'"
+                feedback: This is not what I ordered!
+            -   option: "Line 7 should be: if chocolate = 'yes' and sprinkles is 'no'"
+                feedback: This is not what I ordered!
+            correct_answer: A
+            hint: There is a mistake in line 3
+            question_score: '10'
