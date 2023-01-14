@@ -1,0 +1,85 @@
+{
+  "title": "JSON Schema for Hedy Teacher Manual, Learn More pages, Front Page, And Helping",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "title": { "type": "string" },
+    "sections": { "type": "array", "items": { "$ref": "#/definitions/DocSection" } },
+
+    "learn-more-sections": { "$ref": "#/definitions/BasicSections" },
+    "join-sections": { "$ref": "#/definitions/BasicSections" },
+    "start-sections": { "$ref": "#/definitions/BasicSections" }
+  },
+  "required": [
+    "title", "sections", "learn-more-sections", "join-sections", "start-sections"
+  ],
+
+  "definitions": {
+    "BasicSections": { "type": "array", "items": { "$ref": "#/definitions/BasicSection" } },
+    "BasicSection": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "title": { "type": "string" },
+        "text": { "type": "string" }
+      },
+      "required": ["title", "text"]
+    },
+    "DocSection": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "title": { "type": "string" },
+        "key": { "type": "string" },
+        "intro": { "type": "string" },
+        "subsections": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/DocSubSection" }
+        },
+        "levels": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/DocMistakeLevel" }
+        }
+      },
+      "required": ["title", "key"]
+    },
+    "DocSubSection": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "title": { "type": "string" },
+        "text": { "type": "string" }
+      },
+      "required": ["title", "text"]
+    },
+    "DocMistakeLevel": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "level": { "type": "string" },
+        "sections": { "type": "array", "items": { "$ref": "#/definitions/DocMistakeLevelSection" } }
+      },
+      "required": ["level", "sections"]
+    },
+    "DocMistakeLevelSection": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "title": { "type": "string" },
+        "example": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "error_text": { "type": "string" },
+            "error_code": { "type": "string" },
+            "solution_text": { "type": "string" },
+            "solution_code": { "type": "string" }
+          },
+          "required": ["error_text", "error_code", "solution_text", "solution_code"]
+        }
+      },
+      "required": ["title", "example"]
+    }
+  }
+}
+
