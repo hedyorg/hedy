@@ -2415,26 +2415,10 @@ adventures:
                 start_code: "# setze hier deinen Code hin"
     next:
         levels:
-            2:
-                story_text: |
-                    ## Was kommt als nächstes?
-                    In diesem Level hast du gelernt was eine Variable ist und wie du sie benutzen kannst um deine Abenteuer interaktiver zu machen.
-                    Aber... das ist nicht das Einzige was du mit Variablen anfangen kannst! Du kannst Variablen auch verwenden um Listen zu machen.
-                    Und du kannst sogar Hedy ein zufälliges Wort aus einer Liste auswählen lassen, womit du richtige Spiele machen kannst!
-                    Schau dir dafür einfach mal das nächste Level an!
             5:
                 example_code: "## Freigetränke!\n```\n{print} 'Willkommen bei McHedy'\nBestellung {is} {ask} 'Was würden Sie gerne essen?'\n{print} 'Sie hätten gerne ' Bestellung\n{if} Bestellung {is} Hamburger Preis {is} 5\n{if} Bestellung {is} Pommes Preis {is} 2\nGetränke {is} {ask} 'Was würden Sie gerne dazu trinken?'\n{print} 'Sie hätten gerne ' Getränke\n{print} 'Das macht dann ' Preis ' Euro für Ihre ' Bestellung ' bitte'\n{print} 'Die Getränke sind gratis in diesem Level weil Hedy noch nicht den Preis ausrechnen kann...'\n```\n"
-            8:
-                start_code: "{print} 'Lets go to the next level!'"
             11:
                 start_code: "{print} 'Lets go to the next level!'"
-            14:
-                story_text: |
-                    ## Was kommt als Nächstes?
-                    In diesem Spiel unten wurde der Code so gemacht, dass der Spieler solange spielen kann wie er oder sie möchte...
-                    Aber der Code ist ineffizient und viel zu lang. Und was, wenn der Spieler 101 Spiele und nicht 100 spielen möchte?
-                    Kann man nicht bis unendlich spielen?
-                    Im nächsten Level lernst du einen Befehl der das alles ein ganzes Stück einfacher macht.
             16:
                 story_text_2: In diesem Code wäre es toll, zweimal ein `{else}` zu haben, damit du eine Option für den Brokkoli und eine für die Grünen Bohnen haben kannst. Das nächste Level bringt den Befehl `{elif}` mit, der genau das möglich macht! Also nichts wie los zum nächsten Level!
     secret:

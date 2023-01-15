@@ -630,31 +630,18 @@ adventures:
         default_save_name: Tic
     next:
         levels:
-            3:
-                start_code: "{print} Let's go to the next level!"
             5:
-                start_code: "{print} 'On to the next level!'"
-            6:
                 start_code: "{print} 'On to the next level!'"
             8:
                 example_code: "```\nanswer = {ask} 'Would you like to go to the next level?'\n{if} answer {is} yes\n    {print} 'Great! You can use the {repeat} commando in the {if} command!'\n    {print} 'Hooray!'\n    {print} 'Hooray!'\n    {print} 'Hooray!'\n{else}\n    {print} 'Okay, you can stay here for a little longer!'\n```\n"
-            9:
-                story_text: "## What's next?\nYou're doing great! In this level we still face a small problem. You have learned to repeat lines, but what if you'd want to slightly change the line.\nFor example if you want to sing the song '{if} you're happy and you know it'. It would look like this:\n\nIf you'd also want the next verse 'stomp your feet', and the next one, and the next one, you'd have to change the code completely.\nIn the next level you'll learn the `{for}` command, which allows you to make a list of actions and repeat the code with another action each time!\nPlease take a look!\n"
             12:
                 story_text: "## What's next?\nIn the previous levels you learned how to put two `{if}`commands inside each other. This works fine, but it does give you very long and unhandy codes like this one:\n\nIn this system you have to give both the correct username and the correct password.\nIn the next level you will learn the `{and}` command that will make this code a ot shorter and more understandable!\nCheck it out!\n"
-            15:
-                story_text: "## What's next?\nIn the next level we will grow a bit more towards real Python code. thon code. You will also learn how to match two lists together.\nThis way you can program a code in which the correct animal is matched to the right sound.\nBecause the two codes below... Are obviously nonsense!\n"
             18:
                 start_code: "{print} ('Great job!!!')"
-            1:
-                start_code: "{print} Let's go!"
             11:
-                start_code: "{print} 'Lähme järgmisele tasemele!'"
-            14:
                 start_code: "{print} 'Lähme järgmisele tasemele!'"
             16:
                 story_text: "## What's next?\nIn the next level it's time for a new command. You might have noticed in the previous levels that `{if}` and `{else}` sometimes aren't enough.\nFor example in this code:\n"
-        description: What's Next?
     parrot:
         name: Parrot
         description: Create your own online pet parrot that will copy you!

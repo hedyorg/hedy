@@ -1669,28 +1669,6 @@ adventures:
                 example_code_2: "```\nmonster_1 {is} _\nmonster_2 {is} _\nmonster_3 {is} _\n{print} You enter the haunted house.\n{print} Suddenly you see a monster_1\n{print} You run into the other room, but a monster_2 is waiting there for you!\n{print} Oh no! Quickly get to the kitchen.\n{print} But as you enter monster_3 attacks you!\n```\n"
     next:
         levels:
-            1:
-                story_text: |-
-                    ## Apa berikutnya?
-                    Selamat! Kamu sudah berhasil menyelesaikan level 1. Besar harapan kamu sudah membuat beberapa kode-kode keren. Tapi Hedy masih punya banyak hal yang dapat kamu pelajari.
-
-                    Pada level 1 kamu mungkin sadar bahwa perintah `echo` hanya dapat menyimpan satu informasi dalam satu satuan waktu.
-                    Sebagai contoh pada petualangan rumah makan, kamu dapat menampilkan apa yang pembeli mau makan atau minum, namun tidak keduanya dalam satu kalimat.
-
-                    ```
-                    print Selamat datang di Hedy
-                    ask Apa yang ingin kamu makan?
-                    echo Jadi kamu ingin makan 
-                    ask Apa yang ingin kamu minum?
-                    echo Jadi kamu ingin minum 
-                    ```
-
-                    Jika pembeli menuliskan hamburger dan coke, kamu tidak dapat menampilkan 'jadi kamu mau hamburger dan coke', tapi kamu harus membuat dua baris berbeda.
-                    Lalu, perintah `echo` hanya menampilkan informasi pada akhir kalimat. Jadi kamu tidak bisa mengatakan 'hamburger pesanan sedang dipersiapkan!'
-
-                    Hal ini akan berubah di level 2. Pada level tersebut kamu akan belajar menggunakan variabel, yang memungkinkan kamu untuk menyimpan beberapa informasi dan menampilkannya di lokasi manapun yang kamu mau.
-                    Selain itu, kamu juga akan belajar bagaimana menggunakan perintah `at random` yang dapat digunakan untuk membuat permainan.
-                    Maka, mari kita ke level berikutnya!
             2:
                 story_text: |-
                     ## Apa berikutnya?
@@ -1703,8 +1681,6 @@ adventures:
                     ```
                     Tentu kamu ingin menampilkan 'nama saya adalah Sophie', tapi Hedy menampilkan 'Sophie saya adalah Sophie'.
                     Pada level 3, masalah ini dapat dipecahkan dengan tanda kutip satu.
-            8:
-                example_code: "```\nanswer = {ask} 'Would you like to go to the next level?'\n{if} answer {is} yes\n    {print} 'Great! You can use the {repeat} commando in the {if} command!'\n    {print} 'Hooray!'\n    {print} 'Hooray!'\n    {print} 'Hooray!'\n{else}\n    {print} 'Okay, you can stay here for a little longer!'\n```\n"
             6:
                 story_text: |-
                     ## Apa berikutnya?
@@ -1719,8 +1695,6 @@ adventures:
                      ```
 
                     Kodenya cukup panjang walau sebagian besar hanya mengulang kata-kata yang sama. Untungnya level 6 memiliki solusi dengan perintah `repeat`, yang memungkinkan kamu mengulang satu baris kode beberapa kali.
-            5:
-                start_code: print 'Ke level berikutnya!'
             3:
                 story_text: |-
                     ## Apa berikutnya?
@@ -1733,20 +1707,12 @@ adventures:
                     ```
                     Tentu kamu ingin menampilkan 'nama saya adalah Sophie', tapi Hedy menampilkan 'Sophie saya adalah Sophie'.
                     Pada level 3, masalah ini dapat dipecahkan dengan tanda kutip satu.
-            13:
-                example_code: "```\nfirst_grade = {ask} 'What score did you get on your first test?'\nsecond_grade = {ask} 'What score did you get on your second test?'\nadded {is} first_grade + second_grade\nmean_grade {is} added / 2\n{if} mean_grade = 1 {or} mean_grade = 2 {or} mean_grade = 3 {or} mean_grade = 4 {or} mean_grade = 5\n    {print} 'Oh no! You have failed the subject...'\n{else}\n    {print} 'Great! You have passed the subject!'\n```\n"
             16:
                 story_text_2: In this code it would be great to have 2x an `{else}` so you could have one option for the broccoli and one for the green beans. The next level comes with the new command `{elif}` that makes this possible! So check out the next level now!
-            10:
-                start_code: "{print} 'Lets go to the next level!'"
             12:
                 story_text: "## What's next?\nIn the previous levels you learned how to put two `{if}`commands inside each other. This works fine, but it does give you very long and unhandy codes like this one:\n```\nusername {is} {ask} 'What is your username?'\npassword {is} {ask} 'What is your password?'\n{if} username {is} 'Hedy'\n    {if} password {is} 'secret'\n        {print} 'Welcome Hedy!'\n    {else}\n        {print} 'Access denied'\n{else}\n    {print} 'Access denied!'\n```\nIn this system you have to give both the correct username and the correct password.\nIn the next level you will learn the `{and}` command that will make this code a ot shorter and more understandable!\nCheck it out!\n"
-            14:
-                start_code: "{print} 'Lets go to the next level!'"
             15:
                 example_code: "```\nanimals = 'chicken', 'horse', 'cow'\nsounds = 'cluck', 'neigh', 'moo'\n{for} animal {in} animals\n    {print} 'A ' animal ' says ' sounds {at} {random}\n```\nYou could also try to make it work this way, but....\n```\nanimals = 'chicken', 'horse', 'cow'\nsounds = 'cluck', 'neigh', 'moo'\n{for} animal {in} animals\n    {for} sound {in} sounds\n        {print} 'A ' animal ' says ' sound\n```\n"
-            17:
-                story_text: "## What's next?\nIn the next level you will learn a real Python way to use `{print}`.\n"
     parrot:
         name: Parrot
         description: Create your own online pet parrot that will copy you!

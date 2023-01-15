@@ -1334,32 +1334,18 @@ adventures:
                 start_code: '# place your code here'
     next:
         levels:
-            1:
-                start_code: "{print} Let's go!"
             2:
                 start_code: "{print} Let's go to the next level!"
-            4:
-                story_text: "## What's next?\nIn the previous levels you've already learned to use `{at} {random}` which made your games different every time you ran the code.\nBut it's not really interactive, the player doesn't have any influence on what happens in the game.\n\nIn the next level you'll learn the `{if}` command, that allows you to give different responses in your program. This way you can program a secret password for your computer for example.\nSo let's take a peak!\n\n```\npassword {is} {ask} 'What is the correct password?'\n```\n"
             5:
                 example_code: "## Free drinks!\n```\n{print} 'Welcome at McHedy'\norder {is} {ask} 'What would you like to eat?'\n{print} 'You would like ' order\n{if} order {is} hamburger price {is} 5\n{if} order {is} fries price {is} 2\ndrinks {is} {ask} 'What would you like to drink?'\n{print} 'You would like ' drinks\n{print} 'That will be ' price ' dollars for your ' order ' please'\n{print} 'The drinks are free in this level because Hedy cant calculate the price yet...'\n```\n"
-            9:
-                start_code: "{print} 'Lets go to the next level!'"
             10:
                 story_text: "## What's next?\nYou have reached the end of this level, you're doing great! You are about to go to the next level. In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.\nIn Python there is no `{repeat}` command, but there is a command that works like {repeat}. Are you curious to find out how to say `{repeat}` in Python language? Quickly go on to find out!\n"
-            13:
-                start_code: "{print} 'Lets go to the next level!'"
             14:
                 story_text: "## 下一步是什么？\n在下面这个游戏中，已经有了一个代码，以确保玩家可以玩下去，只要他/她想...\n但这个代码是无效的，而且太长了。另外，{if} 玩家想玩101场而不是100场那会怎样？ \n你能玩无限场吗？ \n在下一级中，你将学习一个命令，使这一切变得更容易!\n"
-            15:
-                example_code: "```\nanimals = 'chicken', 'horse', 'cow'\nsounds = 'cluck', 'neigh', 'moo'\n{for} animal {in} animals\n    {print} 'A ' animal ' says ' sounds {at} {random}\n```\nYou could also try to make it work this way, but....\n```\nanimals = 'chicken', 'horse', 'cow'\nsounds = 'cluck', 'neigh', 'moo'\n{for} animal {in} animals\n    {for} sound {in} sounds\n        {print} 'A ' animal ' says ' sound\n```\n"
             16:
                 story_text_2: In this code it would be great to have 2x an `{else}` so you could have one option for the broccoli and one for the green beans. The next level comes with the new command `{elif}` that makes this possible! So check out the next level now!
-            7:
-                story_text: "## 接下来是什么？\n现在你已经学会了如何重复一行代码。这很方便，但这并不总是足够。有时你想一次重复多行代码。\n在下一级，允许你将几行代码组成一组，并一次性重复这一组代码！\n"
             12:
                 start_code: "{print} 'Lets go to the next level!'"
-            17:
-                story_text: "## What's next?\nIn the next level you will learn a real Python way to use `{print}`.\n"
     parrot:
         name: 鹦鹉
         description: 创造属于你的在线宠物鹦鹉，它会学你说话！

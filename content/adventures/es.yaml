@@ -1131,31 +1131,17 @@ adventures:
         default_save_name: Loro
     next:
         levels:
-            2:
-                story_text: "## ¿Qué es lo siguiente?\nEn este nivel aprendiste qué es una variable y como la puedes usar para hacer tus aventuras más interactivas.\nPero... ¡esa no es la única cosa que puedes hacer con variables! También puedes usar variables para hacer listas.\n¡Incluso puedes dejar que Hedy escoja una palabra aleatoria de una lista, lo que te permite hacer juegos reales!\n¡Echa un vistazo rápido del próximo nivel!\n"
             13:
                 example_code: "```\nprimera_nota = {ask} '¿Que nota tuviste en el primer examen?'\nsegunda_nota = {ask} '¿Que nota tuviste en la segunda nota?'\ntotal {is} primera_nota + segunda_nota\nnota_promedio {is} total / 2\n{if} nota_promedio = 1 {or} nota_promedio = 2 {or} nota_promedio = 3 {or} nota_promedio = 4 {or} nota_promedio = 5\n    {print} '¡Oh no! Reprobaste la materia...'\n{else}\n    {print} '¡Genial! ¡Aprobaste la materia!'\n```\n"
-            9:
-                story_text: "## What's next?\n¡Lo estás haciendo genial! En este nivel nos enfrentamos con un pequeño problema. Aprendiste a repetir líneas, pero ¿que tal si solo quieres cambiar la línea un poquito?:\nPor ejemplo, si quieres cantar la canción 'if you're happy and you know it'. Luciría así:\n\nSi también quieres decir el verso 'stomp your feet', y el siguiente, y el siguiente, tendrías que cambiar el código por completo.\nEn en el siguiente nivel aprenderás el comando `{for}` ¡que te permitirá hacer una lista de acciones y repetir el código con otra acción cada vez!\n¡Por favor, échale un vistazo!\n"
             14:
                 example_code: "```\njuego {is} 'en marcha'\n{for} i {in} {range} 1 {to} 100\n    {if} juego {is} 'en marcha'\n        respuesta = {ask} '¿Quieres continuar?'\n        {if} respuesta {is} 'no'\n            juego {is} 'terminado'\n        {if} respuesta {is} 'sí'\n            {print} 'Ok vamos a continuar'\n```\n"
-            1:
-                example_code: "```\n{print} Bienvenido a Hedy's\n{ask} ¿Qué te gustaría comer?\n{echo} Entonces quieres \n{ask} ¿Qué te gustaría beber?\n{echo} Entonces quieres \n```\n"
             5:
                 start_code: "{print} '¡Al próximo nivel!'"
-            6:
-                example_code: "```\n {print} 'Cumpleaños feliz'\n {print} 'Cumpleaños feliz'\n {print} 'Feliz cumpleaños Hedy'\n {print} 'Cumpleaños feliz'\n ```\n"
             11:
                 story_text: "## ¿Qué es lo siguiente?\nQuizás has tratado de usar números decimales en tu aventura del restaurant. Si lo hiciste, probablemente te diste cuenta que Hedy aún no los entiende y siempre los redondea.\nA partir del próximo nivel puedes usar números decimales.\n"
-            12:
-                start_code: "{print} '¡Vamos al siguiente nivel!'"
             15:
                 story_text: "## ¿Qué es lo siguiente?\nEn el siguiente nivel nos estamos acercando un poco más a código de Python real. También vas a aprender a unir dos listas.\nDe esta manera puedes programar código en el que el animal está emparejado al sonido correcto.\nPorque los dos programas de abajo, ¡no tienen sentido!\n"
-            16:
-                start_code: "{print} '¡Vamos al próximo nivel!'"
             7:
-                start_code: "{print} '¡Vamos al siguiente nivel!'"
-            17:
                 start_code: "{print} '¡Vamos al siguiente nivel!'"
     haunted:
         levels:
