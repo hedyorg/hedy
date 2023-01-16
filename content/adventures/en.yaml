@@ -1261,29 +1261,35 @@ adventures:
                     ## Let's draw
                     Now that we can repeat several lines, we can make figures more easily.
                     We only have to set the angle once and then use that variable in the `{repeat}`.
+                    
+                    ### Exercise 1
+                    The example code creates a square. Change the code so that it create another figure, such as a triangle or a hexagon. 
+                    This requires a change to two lines of code.
+                    Tip: An entire circle is 360 degrees.
+                   
+                    ### Exercise 2
+                    Now create a drawing consisting of at least two polygons.
 
                 example_code: |
                     ```
                     angle = 90
-                    {repeat} 10 {times}
+                    {repeat} 4 {times}
                         {turn} angle
                         {forward} 50
                     ```
                 story_text_2: |
-                    ## Interaction
-                    Also, we can now improve the program that draws different figures.
-                    Can you figure out how far the turtle has to turn here? Finish the code and you can draw any polygon you'd like!
+                    **(extra)** We can now improve the program that draws different figures. Finish the code and you can draw any polygon you'd like!
 
                 example_code_2: |
                     ```
-                    angles = {ask} 'How many angles should I draw?'
-                    angle = 360 / angles
-                    {repeat} angle {times}
+                    figure = {ask} 'How many angles should I draw?'
+                    angle = 360 / figure
+                    {repeat} figure {times}
                         {turn} _
                         {forward} _
                     ```
                 start_code: |-
-                    angles = {ask} 'How many angles should I draw?'
+                    figure = {ask} 'How many angles should I draw?'
     dishes:
         name: "Dishes?"
         description: "Use the computer to see who does the dishes"
@@ -1581,21 +1587,6 @@ adventures:
                 example_code: |
                     ```
                     {if} x {is} {pressed} {forward} 15 {else} {turn} 90
-                    ```
-                start_code: "# place your code here"
-            8:
-                story_text: |
-                    ## Press It!
-                    Now that you need to use indents for the {if} and {else} statements,
-                    you will also have to indent code when using {pressed}! Don't worry,
-                    it works te same as with the other statements, see the example!
-                    Press another key instead of x and see what happens.
-                example_code: |
-                    ```
-                    {if} x {is} {pressed}
-                        {print} 'Only the cool kids press the x key.'
-                    {else}
-                        {print} 'The adventurous kids press something else.'
                     ```
                 start_code: "# place your code here"
             9:
@@ -2267,7 +2258,7 @@ adventures:
                     ## Example Hedy Restaurant
                     ```
                     _ Add the quotation marks to this code _
-                    {print} Welcome to Hedys restaurant!
+                    {print} Welcome to Restaurant Chez Hedy!
                     {print} Today we are serving pizza or lasagna.
                     food {is} {ask} What would you like to eat?
                     {print} Great choice! The  food  is my favorite!
@@ -2286,7 +2277,7 @@ adventures:
 
                 example_code: |
                     ```
-                    {print} 'Welcome to Hedys restaurant!'
+                    {print} 'Welcome to Restaurant Chez Hedy!'
                     special {is} {ask} 'Would you like to hear our specials today?'
                     {if} special {is} yes {print} 'Todays special is chicken piri piri and rice.' {else} {print} 'No problem.'
                     food {is} {ask} 'What would you like to eat?'
@@ -2314,7 +2305,7 @@ adventures:
 
                     You can make a simple restaurant code, like this:
                     ```
-                    {print} 'Welcome to Hedys restaurant'
+                    {print} 'Welcome to Restaurant Chez Hedy'
                     {print} 'Here is our menu:'
                     {print} 'Our main courses are pizza, lasagne, or spaghetti'
                     main = {ask} 'Which main course would you like?'
@@ -2340,7 +2331,7 @@ adventures:
 
                     In this example there are three courses, which requires more code and more additions in calculating the price.
                     ```
-                    {print} 'Welcome to Hedys restaurant'
+                    {print} 'Welcome to Restaurant Chez Hedy'
                     {print} 'Here is our menu:'
                     {print} 'Our starters are salad, soup, or carpaccio'
                     {print} 'Our main courses are pizza, lasagne, or spaghetti'
@@ -2372,7 +2363,7 @@ adventures:
                     **(extra)** Expand your code with more questions, for example about drinks or sauce.
                 example_code: |
                     ```
-                    {print} 'Welcome to Hedys restaurant!'
+                    {print} 'Welcome to Restaurant Chez Hedy'
                     people = {ask} 'How many people are joining us today?'
                     ```
                 start_code: "# place your code here"
@@ -2382,7 +2373,7 @@ adventures:
                     In this level you can make your virtual restaurant more elaborate by repeating multiple lines of code. Like this:
                 example_code: |
                     ```
-                    {print} 'Welcome to Hedys restaurant!'
+                    {print} 'Welcome to Restaurant Chez Hedy!'
                     people = {ask} 'How many people will be joining us today?'
                     {print} 'Great!'
                     {repeat} people {times}
@@ -2393,7 +2384,8 @@ adventures:
                     ```
                 story_text_2: |
                     ### Exercise
-                    Of course, this code can be expanded with more items on the menu, offering drinks, and/or multiple courses, so feel free to add as many options as you like!
+                    This code can be expanded with more items on the menu, for example offering drinks, and/or multiple courses or desserts. Add at least one more item.
+                    **(extra)** Add even more items, as many options as you like!
                 start_code: "# place your code here"
             9:
                 story_text: |
@@ -2408,7 +2400,7 @@ adventures:
                     TIP: If the customer orders pizza, Hedy shouldn't ask what sauce the costumer wants.
                 example_code: |
                     ```
-                    {print} 'Welcome to Hedys restaurant!'
+                    {print} 'Welcome to Restaurant Chez Hedy!'
                     people = {ask} 'How many people will be joining us today?'
                     {print} 'Great!'
                     price = 0

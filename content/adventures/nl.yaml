@@ -1174,7 +1174,15 @@ adventures:
                 story_text: |
                     ## Tekenen maar
                     Nu we meerdere regels kunnen herhalen, kunnen we makkelijker figuren maken.
-                    Want we hoeven maar één keer in te stellen wat de hoek is en dan steeds die variabele gebruiken in de `{repeat}`.
+                    Want we hoeven maar één keer in te stellen wat de hoek is, en die variabele steeds gebruiken in de `{repeat}`.
+
+                    ### Opdracht 1
+                    De voorbeeldcode tekent een vierkant. Verander dat in een ander figuur zoals een driehoek of zeshoek. Je moet daarvoor twee regels veranderen!
+                    Tip: een heel rondje is 360 graden.                   
+
+                    ### Opdracht 2
+                    Maak nu een tekening naar je eigen inzicht, met minstens twee verschillende veelhoeken.
+
                 example_code: |
                     ```
                     hoek = 90
@@ -1183,14 +1191,14 @@ adventures:
                         {forward} 50
                     ```
                 story_text_2: |
-                    ## Interactie
-                    Ook kunnen we nu het programma verbeteren dat verschillende figuren tekent.
-                    Week jij hoe ver de schildpad hier moet draaien? Maak de code af en je kunt iedere veelhoek tekenen.
+                    **(extra)** We kunnen nu het programma verbeteren dat verschillende figuren tekent.
+                    Maak de code af en je kunt iedere veelhoek tekenen.
+
                 example_code_2: |
                     ```
-                    hoeken = {ask} 'Hoeveel hoeken krijgt dit figuur?'
-                    hoek = 360 / hoeken
-                    {repeat} hoeken {times}
+                    kanten = {ask} 'Hoeveel hoeken krijgt dit figuur?'
+                    hoek = 360 / kanten
+                    {repeat} kanten {times}
                         {turn} _
                         {forward} _
                     ```
@@ -2175,7 +2183,8 @@ adventures:
                     ```
                 story_text_2: |
                     ### Opdracht
-                    Natuurlijk kan je de code uitbreiden met meer dingen op het menu, vragen of ze drinken willen, toetjes, enzovoort. Voeg zoveel dingen toe aan het menu als je wil!
+                    Breid je code uit met meer dingen op het menu. Bijvoorbeeld: vragen of ze drinken willen, of toetjes. Voeg minstens nog een extra vraag toe. 
+                    **(extra)** Voeg alles toe aan het menu dat je kan verzinnen, zoveel dingen als je wil!
                 start_code: "{print} 'Welkom bij McHedy!'"
             9:
                 story_text: |
@@ -3083,10 +3092,6 @@ adventures:
                     ```
                 start_code: "# place your code here"
 
-            8:
-                start_code: '# place your code here'
-                story_text: "## Press It!\nNow that you need to use indents for the {if} and {else} statements,\nyou will also have to indent code when using {pressed}! Don't worry,\nit works te same as with the other statements, see the example!\nPress another key instead of x and see what happens.\n"
-                example_code: "```\n{if} x {is} {pressed}\n    {print} 'Only the cool kids press the x key.'\n{else}\n    {print} 'The adventurous kids press something else.'\n```\n"
             9:
                 story_text_2: "Besides counting, you can now also move the turtle in many more ways than only forward or backwards!\nTry making some figures by walking the turtle around!\n"
                 example_code_2: "```\nstepsize = 25\nleft = -90\nright = 90\naround = 180\nrepeat 40 times\n    {if} w {is} {pressed}\n        forward stepsize\n    {if} s {is} {pressed}\n        turn around\n    {if} a {is} {pressed}\n        turn left\n    {if} d {is} {pressed}\n        turn right\n```\n"
