@@ -1,0 +1,33 @@
+{
+  "title": "JSON Schema for Client Messages",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "intro": { "$ref": "#/definitions/Tutorial" },
+    "teacher": { "$ref": "#/definitions/Tutorial" }
+  },
+  "definitions": {
+    "Tutorial": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "steps": {
+          "type": "object",
+          "patternProperties": {
+            "\\d+": { "$ref": "#/definitions/Step" }
+          }
+        }
+      }
+    },
+    "Step": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "title": { "type": "string" },
+        "text": { "type": "string" }
+      },
+      "required": ["title", "text"]
+    }
+  }
+}
+

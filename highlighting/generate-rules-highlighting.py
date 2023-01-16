@@ -163,8 +163,10 @@ def get_translations(KEYWORDS_PATH, KEYWORDS_PATTERN):
 
     # get content
     for language_file in list_language_file:
-        language_code = re.search(KEYWORDS_PATTERN, language_file).group(1)
-        tmp[language_code] = get_yaml_content(os.path.join(KEYWORDS_PATH, language_file))
+        # Only check *.yaml files
+        if m := re.search(KEYWORDS_PATTERN, language_file):
+            language_code = m.group(1)
+            tmp[language_code] = get_yaml_content(os.path.join(KEYWORDS_PATH, language_file))
 
     # english is ref
     reference = tmp["en"]
