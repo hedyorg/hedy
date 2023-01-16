@@ -128,8 +128,8 @@
           <!--Body-->
           <form>
             <div class="my-2 flex">
-              <input type="text" class="border border-green-400 rounded p-2 px-3 w-3/4" placeholder="{{_('enter_text')}}">
-              <input type="submit" onclick="hedyApp.ScrollOutputToBottom()" class="green-btn ltr:ml-3 rtl:mr-3" value="{{_('enter')}}"></p>
+              <input type="text" class="border border-green-400 rounded p-2 px-3 flex-1" placeholder="{{_('enter_text')}}">
+              <input type="submit" onclick="hedyApp.ScrollOutputToBottom()" class="flex-0 green-btn ltr:ml-3 rtl:mr-3" value="{{_('enter')}}"></p>
             </div>
           </form>
         </div>
@@ -197,8 +197,11 @@
             {% elif next_level and not (not customizations or next_level in customizations['available_levels']) %}
                 <div class="relative">
                     <button class="green-btn ltr:ml-1 rtl:mr-1" id="next_level_button" disabled>{{_('advance_button')|replace("{level}", next_level)}}</button>
-                    <div class="absolute flex items-center w-40 inset-0 z-10 opacity-0 hover:opacity-100 duration-300 -mt-36 ltr:-ml-8 rtl:-mr-8">
-                      <span class="text-red-500 text-center font-bold bg-gray-100 px-2 py-1 rounded-lg border border-black text-sm">{{_('disabled_button_quiz') if customizations["below_threshold"] else _('disabled_button_locked')}} </span>
+                    <div class="absolute w-80 z-10 opacity-0 hover:opacity-100 duration-300 top-0 ltr:right-0 rtl:left-0">
+                      <div class="text-red-500 text-center font-bold bg-gray-100 px-2 py-1 rounded-lg border-4 border-yellow-600 text-sm">
+                          {{_('disabled_button_quiz') if customizations["below_threshold"] else _('disabled_button_locked')}}
+                       </div>
+                    </div>
                 </div>
             {% endif %}
           </div>
