@@ -80,16 +80,6 @@ export interface State {
   adventures?: Adventure[];
 
   /**
-   * <unused>
-   */
-  default_program?: string;
-
-  /**
-   * <unused by virtue of default_program being unused>
-   */
-  default_program_name?: string;
-
-  /**
    * Load program info
    *
    * Written: on page load, if a program has been loaded by ID.

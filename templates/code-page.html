@@ -34,7 +34,6 @@
       {% if loaded_program %}
       loaded_program: {{ loaded_program|tojson }},
       {% endif %}
-      default_program_name: {{ (_('level_title') + ' ' + level_nr)|tojson }},
     });
   </script>
   <!-- If we are in tutorial mode -> hide most features, slowly release them -->

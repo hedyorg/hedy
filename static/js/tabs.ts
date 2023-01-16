@@ -147,11 +147,6 @@ function switchToTab(tabName: string) {
     $ ('#program_name').val (adventures[tabName].loaded_program!.name);
     theGlobalEditor?.setValue (adventures[tabName].loaded_program!.code);
   }
-  // If there's no loaded program (either requested by id or associated to the adventure/level), load defaults.
-  else if (window.State.default_program_name && window.State.default_program) {
-    $ ('#program_name').val(window.State.default_program_name);
-    theGlobalEditor?.setValue(window.State.default_program);
-  }
   else {
     if (tab.hasClass('teacher_tab')) {
       $ ('#program_name').val (tabName);
