@@ -1407,20 +1407,6 @@ adventures:
                 story_text: "## Piggybank\nIn this level you can let Hedy tell you {if} you have saved up enough money!\n"
                 example_code: "\n```\nmoney = {ask} 'How much money have you saved?'\nwish = {ask} 'How much money do you need?'\nallowance = {ask} 'How much pocket money do you get each week?'\nto_save = wish - money\nweeks = to_save / allowance\n{if} wish > money\n    {print} 'You need to save up some more!'\n    {print} 'Youll need ' weeks ' more weeks.'\n{else}\n    {print} 'Great! You have enough'\n    {print} 'Lets go shopping!'\n```\n"
                 start_code: '# place your code here'
-    next:
-        levels:
-            9:
-                start_code: "{print} 'Lets go to the next level!'"
-            14:
-                story_text: "## What's next?\nIn this game below a code has been made to make sure the player can play on as long as he/she wants...\nBut the code is ineffective and way too long. Also, what {if} the player wants to play 101 games instead of 100?\nYou can't play to infinity?\nIn the next level you will learn a command that makes all of this a lot easier!\n```\ngame {is} 'on'\n{for} i {in} {range} 1 {to} 100\n    {if} game {is} 'on'\n        answer = {ask} 'Do you want to continue?'\n        {if} answer {is} 'no'\n            game {is} 'over'\n        {if} answer {is} 'yes'\n            {print} 'Ok we will continue'\n```\n"
-            17:
-                start_code: "{print} 'Lets go to the next level!'"
-            6:
-                story_text: "## What's next?\n Great job! You've reached the end of this level, which means you have practiced with `{if}` and `{else}`. You have probably noticed that your codes are getting longer and longer.\n For example {if} you want to program 'Happy Birthday'\n\n ```\n {print} 'happy birthday to you'\n {print} 'happy birthday to you'\n {print} 'happy birthday dear Hedy'\n {print} 'happy birthday to you'\n\n ```\n That's a lot of code for mainly the same words over and over again. Luckily in the next level has a solution with the `{repeat}` command, that allows you to repeat a line of code multiple times.\n"
-            11:
-                example_code: "```\nname = {ask} 'Who is your favorite cartoon character?'\n{print} 'I love watching ' name\n```\nBut you couldn't use multiple words in a variable like the example below. This program does not work yet in this level!\n```\nshow = SpongeBob SquarePants\n{print} show 'is my favorite show!'\n```\nGo to the next level to make this code work!\n"
-            8:
-                example_code: "```\nanswer = {ask} 'Would you like to go to the next level?'\n{if} answer {is} yes\n    {print} 'Great! You can use the {repeat} commando in the {if} command!'\n    {print} 'Hooray!'\n    {print} 'Hooray!'\n    {print} 'Hooray!'\n{else}\n    {print} 'Okay, you can stay here for a little longer!'\n```\n"
     fortune:
         name: Fortune teller
         description: Let Hedy predict the future

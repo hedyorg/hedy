@@ -2413,14 +2413,6 @@ adventures:
                     {print} 'You gave ' score ' correct answers.'
                     ```
                 start_code: "# setze hier deinen Code hin"
-    next:
-        levels:
-            5:
-                example_code: "## Freigetränke!\n```\n{print} 'Willkommen bei McHedy'\nBestellung {is} {ask} 'Was würden Sie gerne essen?'\n{print} 'Sie hätten gerne ' Bestellung\n{if} Bestellung {is} Hamburger Preis {is} 5\n{if} Bestellung {is} Pommes Preis {is} 2\nGetränke {is} {ask} 'Was würden Sie gerne dazu trinken?'\n{print} 'Sie hätten gerne ' Getränke\n{print} 'Das macht dann ' Preis ' Euro für Ihre ' Bestellung ' bitte'\n{print} 'Die Getränke sind gratis in diesem Level weil Hedy noch nicht den Preis ausrechnen kann...'\n```\n"
-            11:
-                start_code: "{print} 'Lets go to the next level!'"
-            16:
-                story_text_2: In diesem Code wäre es toll, zweimal ein `{else}` zu haben, damit du eine Option für den Brokkoli und eine für die Grünen Bohnen haben kannst. Das nächste Level bringt den Befehl `{elif}` mit, der genau das möglich macht! Also nichts wie los zum nächsten Level!
     secret:
         default_save_name: Sprache
         levels:

@@ -1667,52 +1667,6 @@ adventures:
                 example_code: "```\nmonster_1 {is} \U0001F47B\nmonster_2 {is} \U0001F921\nmonster_3 {is} \U0001F476\n{print} You enter the haunted house.\n{print} Suddenly you see a monster_1\n{print} You run into the other room, but a monster_2 is waiting there for you!\n{print} Oh no! Quickly get to the kitchen.\n{print} But as you enter monster_3 attacks you!\n```\n"
                 story_text_2: "## Challenge\nIn the example above the monsters are predetermined. So each time you run your code, the output is the same.\nCan you add `{ask}` commands to make the haunted house interactive and have the players choose the monsters they come across?\n"
                 example_code_2: "```\nmonster_1 {is} _\nmonster_2 {is} _\nmonster_3 {is} _\n{print} You enter the haunted house.\n{print} Suddenly you see a monster_1\n{print} You run into the other room, but a monster_2 is waiting there for you!\n{print} Oh no! Quickly get to the kitchen.\n{print} But as you enter monster_3 attacks you!\n```\n"
-    next:
-        levels:
-            2:
-                story_text: |-
-                    ## Apa berikutnya?
-                    Pada level 2 kamu telah berlatih menggunakan variabel, tapi kamu mungkin menemukan beberapa masalah.
-
-                    Cobalah jalankan kode berikut 
-                    ```
-                    nama is Sophie
-                    print nama saya adalah nama
-                    ```
-                    Tentu kamu ingin menampilkan 'nama saya adalah Sophie', tapi Hedy menampilkan 'Sophie saya adalah Sophie'.
-                    Pada level 3, masalah ini dapat dipecahkan dengan tanda kutip satu.
-            6:
-                story_text: |-
-                    ## Apa berikutnya?
-                    Bagus! Kamu telah mencapai level 5, artinya kamu telah berlatih menggunakan perintah `if` dan `else`. Kamu mungkin menyadari bahwa kode kamu semakin panjang. Misal ketika kamu perlu membuat program lagu ulang tahun.
-
-                     ```
-                     print 'selamat ulang tahun'
-                     print 'selamat ulang tahun'
-                     print 'selamat ulang tahun Hedy'
-                     print 'selamat ulang tahun'
-
-                     ```
-
-                    Kodenya cukup panjang walau sebagian besar hanya mengulang kata-kata yang sama. Untungnya level 6 memiliki solusi dengan perintah `repeat`, yang memungkinkan kamu mengulang satu baris kode beberapa kali.
-            3:
-                story_text: |-
-                    ## Apa berikutnya?
-                    Pada level 2 kamu telah berlatih menggunakan variabel, tapi kamu mungkin menemukan beberapa masalah.
-
-                    Cobalah jalankan kode berikut 
-                    ```
-                    nama is Sophie
-                    print nama saya adalah nama
-                    ```
-                    Tentu kamu ingin menampilkan 'nama saya adalah Sophie', tapi Hedy menampilkan 'Sophie saya adalah Sophie'.
-                    Pada level 3, masalah ini dapat dipecahkan dengan tanda kutip satu.
-            16:
-                story_text_2: In this code it would be great to have 2x an `{else}` so you could have one option for the broccoli and one for the green beans. The next level comes with the new command `{elif}` that makes this possible! So check out the next level now!
-            12:
-                story_text: "## What's next?\nIn the previous levels you learned how to put two `{if}`commands inside each other. This works fine, but it does give you very long and unhandy codes like this one:\n```\nusername {is} {ask} 'What is your username?'\npassword {is} {ask} 'What is your password?'\n{if} username {is} 'Hedy'\n    {if} password {is} 'secret'\n        {print} 'Welcome Hedy!'\n    {else}\n        {print} 'Access denied'\n{else}\n    {print} 'Access denied!'\n```\nIn this system you have to give both the correct username and the correct password.\nIn the next level you will learn the `{and}` command that will make this code a ot shorter and more understandable!\nCheck it out!\n"
-            15:
-                example_code: "```\nanimals = 'chicken', 'horse', 'cow'\nsounds = 'cluck', 'neigh', 'moo'\n{for} animal {in} animals\n    {print} 'A ' animal ' says ' sounds {at} {random}\n```\nYou could also try to make it work this way, but....\n```\nanimals = 'chicken', 'horse', 'cow'\nsounds = 'cluck', 'neigh', 'moo'\n{for} animal {in} animals\n    {for} sound {in} sounds\n        {print} 'A ' animal ' says ' sound\n```\n"
     parrot:
         name: Parrot
         description: Create your own online pet parrot that will copy you!

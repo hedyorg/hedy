@@ -640,20 +640,6 @@ adventures:
                 story_text: "## Superspy\nThe code you made in the previous level can be made a lot easier in this one with the `{and}` command.\n"
                 example_code: "```\nname is ask 'Hva heter du??'\npassord is ask 'Hva er ditt passord?'\nif name is 'Agent007' and passord is 'TOPSECRET'\n    print 'Go to the airport at 02.00'\nelse\n    print 'Go to the trainstation at 10.00'\n ```\n"
                 start_code: '## skriv koden din her'
-    next:
-        levels:
-            11:
-                example_code: "```\nname = {ask} 'Who is your favorite cartoon character?'\n{print} 'I love watching ' name\n```\nBut you couldn't use multiple words in a variable like the example below. This program does not work yet in this level!\n```\nshow = SpongeBob SquarePants\n{print} show 'is my favorite show!'\n```\nGo to the next level to make this code work!\n"
-            3:
-                start_code: "{print} Videre til neste nivå!"
-            8:
-                example_code: "```\nanswer = {ask} 'Would you like to go to the next level?'\n{if} answer {is} yes\n    {print} 'Great! You can use the {repeat} commando in the {if} command!'\n    {print} 'Hooray!'\n    {print} 'Hooray!'\n    {print} 'Hooray!'\n{else}\n    {print} 'Okay, you can stay here for a little longer!'\n```\n"
-            10:
-                story_text: "## What's next?\nYou have reached the end of this level, you're doing great! You are about to go to the next level. In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.\nIn Python there is no `{repeat}` command, but there is a command that works like {repeat}. Are you curious to find out how to say `{repeat}` in Python language? Quickly go on to find out!\n"
-            15:
-                story_text: "## What's next?\nIn the next level we will grow a bit more towards real Python code. thon code. You will also learn how to match two lists together.\nThis way you can program a code in which the correct animal is matched to the right sound.\nBecause the two codes below... Are obviously nonsense!\n"
-            17:
-                start_code: "{print} 'Videre til neste nivå!'"
     tic:
         name: Tic Tac Toe
         description: Play a game of Tic Tac Toe!

@@ -803,20 +803,14 @@ adventures:
         name: لغة
         description: تدرب على كلمات من لغة جديدة
         default_save_name: لغة
-    next:
-        levels:
-            5:
-                example_code: "##  أشربة مجانية !\n```\n{print} 'اهلًا وسهلًا في مطعم هيدي'\nالطلب {is} {ask} 'ماذا تحب ان تطلب ؟'\n{print} 'طلبك هو ' الطلب\n{if} الطلب {is} همبورجر السعر {is} ٥\n{if} الطلب {is} بطاطس مقلية السعر {is} ۲\nالأشربة {is} {ask} 'ماذا تريد ان تشرب ؟'\n{print} 'انت تريد ' الأشربة\n{print} 'هذا سيكلفك ' السعر' قروش لطلبك ' الطلب ' لو سمحت'\n{print} 'المشروبات مجانية في هذا المستوى لأن هيدي لا تستطيع حساب السعر بعد ...'\n```\n"
-            12:
-                story_text: "## What's next?\nIn the previous levels you learned how to put two `{if}`commands inside each other. This works fine, but it does give you very long and unhandy codes like this one:\n```\nusername {is} {ask} 'What is your username?'\npassword {is} {ask} 'What is your password?'\n{if} username {is} 'Hedy'\n    {if} password {is} 'secret'\n        {print} 'Welcome Hedy!'\n    {else}\n        {print} 'Access denied'\n{else}\n    {print} 'Access denied!'\n```\nIn this system you have to give both the correct username and the correct password.\nIn the next level you will learn the `{and}` command that will make this code a ot shorter and more understandable!\nCheck it out!\n"
-            1:
-                start_code: "{print} هيا بنا!"
-            6:
-                example_code: "```\n {print} 'عيد ميلاد سعيد'\n {print} 'عيد ميلاد سعيد'\n {print} 'عيد ميلاد سعيد عزيزتي هيدي'\n {print} 'عيد ميلاد سعيد'\n ```\n"
-            10:
-                start_code: "{print} 'Lets go to the next level!'"
-            16:
-                story_text: "## What's next?\nIn the next level it's time for a new command. You might have noticed in the previous levels that `{if}` and `{else}` sometimes aren't enough.\nFor example in this code:\n```\n{print} 'What is for dinner tonight?'\noptions = ['pizza', 'broccoli', 'green beans']\nchosen = options {at} {random}\n{if} chosen = pizza\n    {print} 'Yummy! Pizza!'\n{else}\n    {print} 'Yikes...'\n```\nIn this code it would be great to have 2x an `{else}` so you could have one option for the broccoli and one for the green beans. The next level comes with the new command `{elif}` that makes this possible!\nSo check out the next level now!\n"
+#    next:
+#        levels:
+#            5:
+#                example_code: "##  أشربة مجانية !\n```\n{print} 'اهلًا وسهلًا في مطعم هيدي'\nالطلب {is} {ask} 'ماذا تحب ان تطلب ؟'\n{print} 'طلبك هو ' الطلب\n{if} الطلب {is} همبورجر السعر {is} ٥\n{if} الطلب {is} بطاطس مقلية السعر {is} ۲\nالأشربة {is} {ask} 'ماذا تريد ان تشرب ؟'\n{print} 'انت تريد ' الأشربة\n{print} 'هذا سيكلفك ' السعر' قروش لطلبك ' الطلب ' لو سمحت'\n{print} 'المشروبات مجانية في هذا المستوى لأن هيدي لا تستطيع حساب السعر بعد ...'\n```\n"
+#             1:
+#                start_code: "{print} هيا بنا!"
+#            6:
+#                example_code: "```\n {print} 'عيد ميلاد سعيد'\n {print} 'عيد ميلاد سعيد'\n {print} 'عيد ميلاد سعيد عزيزتي هيدي'\n {print} 'عيد ميلاد سعيد'\n ```\n"
     secret:
         levels:
             12:

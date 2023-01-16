@@ -731,26 +731,4 @@ adventures:
                 story_text: "## Tic Tac Toe\nIn the previous levels the tic tac toe game had an annoying feature. After every move, you had to fill in yourself if you had won or not.\nThis made the game playable, but also quite slow. In this level we have learned the `{elif}` command, that could solve that problem.\nTo use the {elif} to let Hedy check whether or not a player has won is fun, but it also requires a fair amount of extra lines.\n\nIn the example code you see that we added the requirements to win (3 spots in a row horizontally, vertically or diagonally).\nYou can find them in line 46 to 69. You can see that each time the requirement is met (so if a player has won) the variable game is set to 'over'.\nThis means that the {while} loop will be stopped and the game ends.\n"
         description: Play a game of Tic Tac Toe!
         default_save_name: Tic
-    next:
-        levels:
-            5:
-                start_code: "{print} 'On to the next level!'"
-            7:
-                start_code: "{print} 'Lets go to the next level!'"
-            10:
-                story_text: "## What's next?\nYou have reached the end of this level, you're doing great! You are about to go to the next level. In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.\nIn Python there is no `{repeat}` command, but there is a command that works like {repeat}. Are you curious to find out how to say `{repeat}` in Python language? Quickly go on to find out!\n"
-            14:
-                story_text: "## What's next?\nIn this game below a code has been made to make sure the player can play on as long as he/she wants...\nBut the code is ineffective and way too long. Also, what if the player wants to play 101 games instead of 100?\nYou can't play to infinity?\nIn the next level you will learn a command that makes all of this a lot easier!\n"
-            16:
-                example_code: "```\n{print} 'What is for dinner tonight?'\noptions = ['pizza', 'broccoli', 'green beans']\nchosen = options {at} {random}\n{if} chosen = 'pizza'\n    {print} 'Yummy! Pizza!'\n{else}\n    {print} 'Yikes...'\n```\n"
-            3:
-                start_code: "{print} Let's go to the next level!"
-    years:
-        name: New Year's
-        description: Countdown to the new year!
-        default_save_name: New Year's Countdown
-        levels:
-            11:
-                example_code: "## Countdown\n```\n{for} _ {in} _ 10 {to} 1\n    {print} i\n{print} 'Happy New Year!'\n```\n"
-                start_code: '# place your code here'
-                story_text: "## Songs\nIn this level you can use the `{for} i {in} {range}` command to countdown to the New Year.\n\n## Challenge\nFill in the blanks and make the code work!\n"
+

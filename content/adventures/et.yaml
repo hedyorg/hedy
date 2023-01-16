@@ -628,20 +628,6 @@ adventures:
         name: Tic Tac Toe
         description: Play a game of Tic Tac Toe!
         default_save_name: Tic
-    next:
-        levels:
-            5:
-                start_code: "{print} 'On to the next level!'"
-            8:
-                example_code: "```\nanswer = {ask} 'Would you like to go to the next level?'\n{if} answer {is} yes\n    {print} 'Great! You can use the {repeat} commando in the {if} command!'\n    {print} 'Hooray!'\n    {print} 'Hooray!'\n    {print} 'Hooray!'\n{else}\n    {print} 'Okay, you can stay here for a little longer!'\n```\n"
-            12:
-                story_text: "## What's next?\nIn the previous levels you learned how to put two `{if}`commands inside each other. This works fine, but it does give you very long and unhandy codes like this one:\n\nIn this system you have to give both the correct username and the correct password.\nIn the next level you will learn the `{and}` command that will make this code a ot shorter and more understandable!\nCheck it out!\n"
-            18:
-                start_code: "{print} ('Great job!!!')"
-            11:
-                start_code: "{print} 'Lähme järgmisele tasemele!'"
-            16:
-                story_text: "## What's next?\nIn the next level it's time for a new command. You might have noticed in the previous levels that `{if}` and `{else}` sometimes aren't enough.\nFor example in this code:\n"
     parrot:
         name: Parrot
         description: Create your own online pet parrot that will copy you!

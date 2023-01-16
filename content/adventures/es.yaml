@@ -1129,20 +1129,6 @@ adventures:
                 example_code: "```\npalabras {is} croac, Hedy\n{print} _ ¡Entrena a tu loro! _\nnueva_palabra {is} {ask} _ ¿Qué palabra le quieres enseñar? _\n{add} nueva_palabra {to_list} palabras\n{print} _ \U0001F9D2 ¡Di _ new_word _, Hedy!_\n{print} _ \U0001F99C _ palabras {at} {random}\n```\n"
         description: ¡Crea tu propia mascota loro que copiará lo que digas!
         default_save_name: Loro
-    next:
-        levels:
-            13:
-                example_code: "```\nprimera_nota = {ask} '¿Que nota tuviste en el primer examen?'\nsegunda_nota = {ask} '¿Que nota tuviste en la segunda nota?'\ntotal {is} primera_nota + segunda_nota\nnota_promedio {is} total / 2\n{if} nota_promedio = 1 {or} nota_promedio = 2 {or} nota_promedio = 3 {or} nota_promedio = 4 {or} nota_promedio = 5\n    {print} '¡Oh no! Reprobaste la materia...'\n{else}\n    {print} '¡Genial! ¡Aprobaste la materia!'\n```\n"
-            14:
-                example_code: "```\njuego {is} 'en marcha'\n{for} i {in} {range} 1 {to} 100\n    {if} juego {is} 'en marcha'\n        respuesta = {ask} '¿Quieres continuar?'\n        {if} respuesta {is} 'no'\n            juego {is} 'terminado'\n        {if} respuesta {is} 'sí'\n            {print} 'Ok vamos a continuar'\n```\n"
-            5:
-                start_code: "{print} '¡Al próximo nivel!'"
-            11:
-                story_text: "## ¿Qué es lo siguiente?\nQuizás has tratado de usar números decimales en tu aventura del restaurant. Si lo hiciste, probablemente te diste cuenta que Hedy aún no los entiende y siempre los redondea.\nA partir del próximo nivel puedes usar números decimales.\n"
-            15:
-                story_text: "## ¿Qué es lo siguiente?\nEn el siguiente nivel nos estamos acercando un poco más a código de Python real. También vas a aprender a unir dos listas.\nDe esta manera puedes programar código en el que el animal está emparejado al sonido correcto.\nPorque los dos programas de abajo, ¡no tienen sentido!\n"
-            7:
-                start_code: "{print} '¡Vamos al siguiente nivel!'"
     haunted:
         levels:
             14:
