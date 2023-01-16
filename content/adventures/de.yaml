@@ -94,9 +94,9 @@ adventures:
                         {print} 'Das wird 5 mal ausgegeben'
                 story_text: |
                     ## Die Einrückung 
-                    `{ask}` und `{print}` funktionieren immer noch wie du es gewohnt bist. Aber `{if}`,`{else}`, {pressed} und `{repeat}` haben sich verändert! 
-                    Du kannst jetzt Befehlsgruppen zusammen ausführen, aber du musst den Code dafür *einrücken*. 
-                    Das bedeutet dass du die Befehlszeilen mit vier Leerzeichen beginnen musst. Das gilt auch, wenn du einen Block mit nur einer Zeile schreiben möchtest.
+                    `{ask}` und `{print}` funktionieren immer noch wie du es gewohnt bist. Aber `{if}`,`{else}`, {pressed} und `{repeat}` haben sich verändert!
+                    Du kannst jetzt mehrere Zeilen gruppieren, aber du musst den Code dafür *einrücken*.
+                    Das bedeutet, dass du die Befehlszeilen mit vier Leerzeichen beginnen musst. Das gilt auch, wenn du einen Block mit nur einer Zeile schreiben möchtest.
                 example_code: "Der `{repeat}` Befehl funktioniert jetzt so:\n```\n{repeat} 5 {times}\n    {print} 'Hallo zusammen'\n    {print} 'Das hier wird fünf Mal wiederholt'\n```\nDie Befehle `{if}` und `{else}` funktionieren jetzt so:\n\n```\nname {is} {ask} 'Wie heißt du?'\n{if} name {is} Hedy\n    {print} 'Willkommen Hedy'\n    {print} 'Du kannst an deinem Computer spielen'\n{else}\n    {print} 'EINDRINGLING!'\n    {print} 'Du darfst diesen Rechner nicht benutzen!'\n```\n"
             9:
                 start_code: |-
@@ -285,7 +285,7 @@ adventures:
                     ```
 
                 start_code: "{print} Deine Geschichte beginnt hier"
-                story_text_2: "## Übung\nKannst du deine eigene Geschichte in Hedy erstellen, indem du `{print}` , `{ask}` und `{echo}` verwendest?\n"
+                story_text_2: "### Übung\nKannst du deine eigene Geschichte in Hedy erstellen, indem du `{print}` , `{ask}` und `{echo}` verwendest?\n"
             2:
                 story_text: |
                     ## Schreibe eine Geschichte
@@ -351,34 +351,36 @@ adventures:
             8:
                 story_text: |
                     ## Geschichte
-                    In diesem Level kannst Du mehrere Zeilen zu einem {if}-Befehl hinzufügen. So kannst Du Deine guten und schlechten Enden etwas erweitern.
+                    In diesem Level kannst du mehrere Zeilen zu einem {if}-Befehl hinzufügen. So kannst du deine guten und schlechten Enden etwas erweitern.
 
-                    ### Übung
-                    Kannst du deine eigene Geschichte mit zwei verschiedenen Enden schreiben?
+                    ### Übung 1
+                    Der Beispiel-Code zeigt zwei verschiedene Enden; eines bei dem die Figuren in eine Zeitmaschine springen und eines wo sie es nicht tun.
+                    Vervollständige die Lücken mit mindestens einem Satz pro Ende.
+                    **(extra)** Mach die Geschichte länger. Was passiert in der Geschichte? Du kannst auch ein zweites `{ask}` mit verschiedenen Auswahlmöglichkeiten hinzufügen.
+
+                    ### Übung 2
+                    Gehe zurück zu deinen gespeicherten Programmen und wähle deine Geschichte-Programm aus Level 5 aus. Schreibe nun ein gutes und ein schlechtes Ende mit jeweils mindestens drei Zeilen Länge! 
 
                 example_code: |
                     ```
-                    {print} 'OH NEIN! Der T-rex kommt immer näher!'
+                    {print} 'OH NEIN! Der T-Rex kommt immer näher!'
                     Ende = {ask} 'Soll das Ende gut oder schlecht sein?'
                     {if} Ende {is} gut
                         {print} 'Richard springt gerade noch rechtzeitig zurück in seine Zeitmaschine.'
-                        {print} 'Michael gibt den Code ein und...'
-                        {print} 'ZAP!'
-                        {print} '...sind sie zurück in ihrer Garage.'
+                        {print} _
                     {else}
-                        {print} 'Michael schreit LOS RICHARD! LAUF SCHNELLER!'
-                        {print} 'Aber Richard ist zu langsam...'
-                        {print} 'Der T-rex holt ihn ein und verschlingt ihn mit einem Biss.'
+                        {print} 'Oh nein! Richard ist zu langsam...'
+                        {print} _
                     ```
                 start_code: "# setze hier deinen Code hin"
             7:
                 story_text: |
                     ## Geschichte
                     In einer Geschichte kommt es manchmal vor, dass jemand ein Wort mehrmals hintereinander sagt. So zum Beispiel, wenn jemand um Hilfe ruft, oder etwas singt.
-                    Solche Wiederholungen kannst Du mit dem Befehl `{repeat}` in Deine Geschichte einfügen. Repeat bedeutet wiederholen.
+                    Solche Wiederholungen kannst du mit dem Befehl `{repeat}` in diesem Level in deine Geschichte einfügen.
 
-                    ## Übung
-                    Füge Wiederholungen zu deiner eigenen Geschichte hinzu. Gehe zurück zu deinen gespeicherten Programmen, wähle deine Geschichte-Programm aus Level 6 aus und finde eine Zeile die {print} enthält und wiederhole sie.
+                    ### Übung
+                    Füge Wiederholungen zu deiner eigenen Geschichte hinzu. Gehe zurück zu deinen gespeicherten Programmen, wähle dein Geschichte-Programm aus Level 6 aus und finde eine Zeile die {print} enthält und wiederhole sie.
 
                 example_code: |
                     ```
@@ -393,7 +395,7 @@ adventures:
                     ## Geschichte
                     In diesem Level programmierst Du unterschiedliche Enden, was Deine Geschichte noch spannender werden lässt.
 
-                    ## Übung
+                    ### Übung
                     Denke Dir einfach eine Geschichte mit zwei möglichen Enden aus, zum Beispiel:
 
                     - Die Prinzessin läuft durch den Wald.
@@ -455,7 +457,7 @@ adventures:
                 story_text_3: |
                     Das ist ein Beispiel für den `{remove}` Befehl in deiner Geschichte
 
-                    ## Übung
+                    ### Übung
                     Kannst du die 3 neuen Befehle `{at} {random}`, `{add} {to}` und `{remove} {from}` in deiner eigenen Geschichte verwenden?
                 example_code_3: |
                     ```
@@ -558,7 +560,7 @@ adventures:
                     {print} Name
                     ```
                 start_code: "{print} Ich bin Hedy der Papagei!"
-                story_text_2: "### Übung\nDu kannst Variablen verwenden, damit der Papagei mehr als nur deinen Namen sagt. Kannst Du diesen Code vervollständigen?\n"
+                story_text_2: "### Übung\nDu kannst Variablen verwenden, damit der Papagei mehr als nur deinen Namen sagt. Kannst du diesen Code vervollständigen?\n"
                 example_code_2: "```\n{print} Ich bin Hedy der Papagei\nname {is} {ask} Wie heißt du?\n{print} name\n{sleep}\n{print} name\nNachname {is} {ask} Wie ist dein Nachname?\n_\n{sleep}\n_\n```\n"
             3:
                 story_text: |
