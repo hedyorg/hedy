@@ -2636,11 +2636,6 @@ def preprocess_blocks(code, level, lang):
         else:
             next_line_needs_indentation = False
 
-        if line_requires_indentation(line, lang):
-            next_line_needs_indentation = True
-        else:
-            next_line_needs_indentation = False
-
         # save to compare for next line
         previous_number_of_indents = current_number_of_indents
 
