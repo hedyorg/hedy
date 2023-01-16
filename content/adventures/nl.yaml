@@ -179,6 +179,7 @@ adventures:
                     `{ask}` en `{print}` werken nog steeds zoals je gewend bent. Maar bij  `{if}`, `{else}` en `{repeat}` is er iets veranderd!
                     Je kunt vanaf dit level meerdere regels samen uitvoeren. Daarvoor moet je deze regels *inspringen*, dat betekent dat ze moeten beginnen met vier spaties.
                     Ook als je maar één regel in een `{if}`, `{else}` of `{repeat}` wil zetten, moet je inspringen!
+
                 example_code: |
                     Zo werkt het `{repeat}` commando vanaf nu:
                     ```
@@ -559,8 +560,12 @@ adventures:
                     ## Verhaal
                     In dit level kun je je verhaal écht interactief maken! In dit level is het `{if}` commando namelijk veranderd, waardoor je meerdere regels kan printen na een `{if}`. Zo kun je de lezer van je verhaal een keuze laten maken. Na de keuze gaat het verhaal verder op basis van die keuze. Kijk maar naar het voorbeeld.
 
-                    ### Opdracht
-                    Kun jij jouw eigen interactieve verhaal maken met twee verschillende eindes?
+                    ### Opdracht 1
+                    In de voorbeeldcode zie je hoe je twee verschillende verhalen kunt maken; eentje waarbij je op het geluid afgaat en eentje waarbij je je verstopt. Vul zelf lege plekken in! **(extra)** Maak het verhaal nog langer. Wat gebeurt er verder? Je kan ook een tweede vraag toevoegen met een tweede keuze.
+
+                    ### Opdracht 2
+                    Oefen met het inspringen. Ga terug naar level 5, zoek je verhaalprogramma op. Maak dan je goede én slechte einde ieder minstens drie regels.
+
                 example_code: |
                     ```
                     hoofdpersoon = {ask} 'Hoe heet de hoofdpersoon in dit verhaal?'
@@ -574,7 +579,6 @@ adventures:
                         {print} 'Snel zoekt ' hoofdpersoon ' een verstopplek'
                         {print} _
                     ```
-                    In dit voorbeeld zie je hoe je twee verschillende verhalen kunt maken; eentje waarbij je op het geluid afgaat en eentje waarbij je je verstopt. Vul zelf lege plekken in! Wat gebeurt er verder?
                 start_code: "# Schrijf jouw code hier"
             9:
                 story_text: |
@@ -878,18 +882,24 @@ adventures:
                 story_text: |
                     ## Zing een liedje!
                     Nu kun je meerdere regels herhalen, wat heel fijn is in liedjes!
+                    
+                    ### Opdracht
+                    Zet het juiste commando op de streepjes, en zorg dat de code op de juiste manier inspringt.
+                    
+                    **(extra)** Is Billie Boem gelukt? Probeer dan 10 kleine visjes.
+
                 example_code: |
                     ```
                     _ 3 {times}
-                        dier = {ask} 'Welk dier kies je?'
-                        {print} 'En wie rijdt er op zijn ' dier ' door de prairie?'
-                        {print} 'Dat is cowboy Billie Boem, door de boeven zeer gevreesd!'
-                        {print} 'Er is nooit in het Wilde Westen een cowboy geweest, die zo dapper was als Cowboy Billie Boem.'
-                        {print} 'Van je hotsie knotsie knetter!'
-                        {print} 'Van je jippie jippie jeej!'
-                        {print} 'Maar zijn ' dier ' was zeer vermoeid en die kon niet langer mee'
-                        {print} 'Maar hij moest de boeven vangen, dus koos hij een ander beest'
-                        {print} 'en nu mag je zelf bedenken wat voor beest dat is geweest!'
+                    dier = {ask} 'Welk dier kies je?'
+                    {print} 'En wie rijdt er op zijn ' dier ' door de prairie?'
+                    {print} 'Dat is cowboy Billie Boem, door de boeven zeer gevreesd!'
+                    {print} 'Er is nooit in het Wilde Westen een cowboy geweest, die zo dapper was als Cowboy Billie Boem.'
+                    {print} 'Van je hotsie knotsie knetter!'
+                    {print} 'Van je jippie jippie jeej!'
+                    {print} 'Maar zijn ' dier ' was zeer vermoeid en die kon niet langer mee'
+                    {print} 'Maar hij moest de boeven vangen, dus koos hij een ander beest'
+                    {print} 'en nu mag je zelf bedenken wat voor beest dat is geweest!'
                     ```
                 start_code: "# Schrijf jouw code hier"
             10:
@@ -1892,13 +1902,13 @@ adventures:
             8:
                 story_text: |
                     ## Hedy de waarzegger
-                    Weet je nog dat je in voorgaande levels een waarzegger hebt gemaakt die drie vragen tegelijk kon stellen?
-                    Het enige probleem dat we tegenkwamen is dat Hedy toen eerst de drie vragen printte en daarna pas de drie antwoorden.
-                    Nu is dat probleem opgelost en kan Hedy na een vraag meteen een antwoord printen, omdat je nu niet maar één regel code kunt herhalen met {repeat}, maar een heel stuk van je code!
+                    Weet je nog dat je in voorgaande levels een waarzegger hebt gemaakt die drie vragen kon stellen?
+                    Het probleem dat we tegenkwamen is dat Hedy toen eerst de drie vragen printte en daarna pas de drie antwoorden.
+                    Nu is dat probleem opgelost en kan Hedy na een vraag meteen een antwoord printen, omdat je nu een heel stuk code mag herhalen.
                     Kijk maar:
 
                     ### Opdracht
-                    Kun jij het `{repeat}` commando op de juiste wijze toevoegen aan de code?
+                    Voeg het juiste commando toevoegen op de streepjes?
                 example_code: |
                     ```
                     {print} 'Ik ben Hedy de waarzegger!'
