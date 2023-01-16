@@ -8,28 +8,51 @@
 export interface State {
   /**
    * Current language
+   *
+   * Written: by every page, on page load.
+   * Used: on the code page, to do speech synthesis and to send to the server.
    */
   lang: string;
 
   /**
    * Current level
+   *
+   * Written: by every page, on page load.
+   *
+   * Used: on the code page, to initialize the highlighter, to translate the program,
+   * to determine timeouts, to load the quiz iframe, to show the variable inspector,
+   * to show a debugger,  to load parsons exercises, to initialize a default save name.
    */
   level: number;
 
   /**
    * Current keyword language
+   *
+   * Written: by every page, on page load.
+   *
+   * Used: set on the Ace editor, and then is used to do some magic that I don't
+   * quite understand.
    */
   keyword_language: string;
 
   /**
-   * Title of current level
+   * The translation of the word 'level' in the current language
+   *
+   * Written: on page load
+   *
+   * Used: when building strings.
    */
   level_title?: string;
 
   /**
-   * ?
+   * The keyword name of the currently displayed adventure, if displaying an adventure.
    *
-   * (Only available in code page)
+   * "default" if the first tab, not updated if showing parsons or quiz tabs.
+   *
+   * Written: on page load (from a loaded program), and when switching tabs.
+   *
+   * Used: on page load, to select the right tab, and to send to server for
+   * storing a program under an adventure,
    */
   adventure_name?: string;
 
@@ -39,16 +62,60 @@ export interface State {
    * Not affected by switching tabs.
    *
    * (Only available in code page)
+   *
+   * Written: on page load.
+   *
+   * Used: in tabs.ts to set loaded program code into the editor.
    */
   adventure_name_onload?: string;
+
+  /**
+   * The adventure data available on the current page
+   *
+   * Written: We set Adventure.loaded_program in app.ts to the
+   * code of the loaded program, on load.
+   *
+   * Used: when switching tabs, to set one of the programs values.
+   */
   adventures?: Adventure[];
+
+  /**
+   * <unused>
+   */
   default_program?: string;
-  loaded_program?: Program;
+
+  /**
+   * <unused by virtue of default_program being unused>
+   */
   default_program_name?: string;
+
+  /**
+   * Load program info
+   *
+   * Written: on page load, if a program has been loaded by ID.
+   *
+   * Used: to initialize the code page, and the viewer.
+   */
+  loaded_program?: Program;
+
+  /**
+   * Represents whether there's an open 'ask' prompt
+   */
   disable_run?: boolean;
+
+  /**
+   * Used in very many places to make the "leave this page?" popup appear
+   */
   unsaved_changes?: boolean;
+
+  /**
+   * Prevent the unsaved changes prompt
+   */
   no_unload_prompt?: boolean;
-  programsInExecution?: number;
+
+  /**
+   * Used to record and undo pygame-related settings
+   */
   pygame_running?: boolean;
 }
 
