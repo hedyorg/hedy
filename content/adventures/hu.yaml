@@ -1732,42 +1732,6 @@ adventures:
                 start_code: "monster1 {is} _"
                 story_text_2: "## Challenge\nIn the example above the monsters are predetermined. So each time you run your code, the output is the same.\nCan you add `{ask}` commands to make the haunted house interactive and have the players choose the monsters they come across?\n"
                 example_code_2: "```\nmonster_1 {is} _\nmonster_2 {is} _\nmonster_3 {is} _\n{print} You enter the haunted house.\n{print} Suddenly you see a monster_1\n{print} You run into the other room, but a monster_2 is waiting there for you!\n{print} Oh no! Quickly get to the kitchen.\n{print} But as you enter monster_3 attacks you!\n```\n"
-    next:
-        levels:
-            2:
-                story_text: |-
-                    ## Mi a következő lépés?
-                    A 2. szinten a változókkal gyakoroltál, de talán találkoztál ezzel a hibával.
-
-                    Próbálja meg futtatni ezt a kódot:
-                    ```
-                    nevem is Zita
-                    print A nevem nevem
-                    ```
-                    Természetesen azt akartad kiíratni, hogy  "A nevem Zita", de Hedy az írja ki, hogy "A Zita Zita".
-                    A 3. szinten ezt a problémát idézőjelek segítségével oldják meg.
-            6:
-                story_text: |-
-                    ## Mi a következő lépés?
-                    Most elérted az 5. szint végét, tehát megtanultad, hogyan kell megismételni egy kód sort. Például kódolhatod az éttermedett, hogy több vendégtől megkérdezhesd, mit szeretne enni.
-                    Amit azonban még nem tehetsz meg, az, hogy kiszámítsd mindenkinek a vacsorája árát.
-
-                    A 6. szint lehetővé teszi az összeadás, kivonás és szorzás használatát a programokban. Így kiszámíthatod az étteremben az árakat, de hozzáadhat egy titkos kódot is, hogy barátaid és családjuk kedvezményben részesülhessenek.
-                    Egy másik lehetőség a 6. szinten a saját matematikai játék programozása, hogy a kistestvéred gyakorolja a szorzást.
-                    Menj és nézd meg magadnak ezt a következő szinten!
-            3:
-                story_text: |-
-                    ## Mi a következő lépés?
-                    A 2. szinten a változókkal gyakoroltál, de talán találkoztál ezzel a hibával.
-
-                    Természetesen azt akartad kiíratni, hogy  "A nevem Zita", de Hedy az írja ki, hogy "A Zita Zita".
-                    A 3. szinten ezt a problémát idézőjelek segítségével oldják meg.
-            14:
-                story_text: "## What's next?\nIn this game below a code has been made to make sure the player can play on as long as he/she wants...\nBut the code is ineffective and way too long. Also, what {if} the player wants to play 101 games instead of 100?\nYou can't play to infinity?\nIn the next level you will learn a command that makes all of this a lot easier!\n```\ngame {is} 'on'\n{for} i {in} {range} 1 {to} 100\n    {if} game {is} 'on'\n        answer = {ask} 'Do you want to continue?'\n        {if} answer {is} 'no'\n            game {is} 'over'\n        {if} answer {is} 'yes'\n            {print} 'Ok we will continue'\n```\n"
-            15:
-                story_text: "## What's next?\nIn the next level we will grow a bit more towards real Python code. thon code. You will also learn how to match two lists together.\nThis way you can program a code in which the correct animal is matched to the right sound.\nBecause the two codes below... Are obviously nonsense!\n```\nanimals = 'chicken', 'horse', 'cow'\nsounds = 'cluck', 'neigh', 'moo'\n{for} animal {in} animals\n    {print} 'A ' animal ' says ' sounds {at} {random}\n```\nYou could also try to make it work this way, but....\n```\nanimals = 'chicken', 'horse', 'cow'\nsounds = 'cluck', 'neigh', 'moo'\n{for} animal {in} animals\n    {for} sound {in} sounds\n        {print} 'A ' animal ' says ' sound\n```\n"
-            16:
-                story_text: "## What's next?\nIn the next level it's time for a new command. You might have noticed in the previous levels that `{if}` and `{else}` sometimes aren't enough.\nFor example in this code:\n```\n{print} 'What is for dinner tonight?'\noptions = ['pizza', 'broccoli', 'green beans']\nchosen = options {at} {random}\n{if} chosen = pizza\n    {print} 'Yummy! Pizza!'\n{else}\n    {print} 'Yikes...'\n```\nIn this code it would be great to have 2x an `{else}` so you could have one option for the broccoli and one for the green beans. The next level comes with the new command `{elif}` that makes this possible!\nSo check out the next level now!\n"
     parrot:
         name: Parrot
         levels:

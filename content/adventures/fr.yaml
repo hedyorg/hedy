@@ -2780,57 +2780,7 @@ adventures:
                     ```
 
                 start_code: "## place your code here"
-    next:
-        levels:
-            2:
-                story_text: |
-                    ## What's next?
-                    In this level you've learned what a variable is and how you can use it to make your adventures more interactive.
-                    But... that's not the only thing you can do with variables! You can also use variables to make lists.
-                    And you can even let Hedy pick a random word out of a list, which allows you to make real games!
-                    Take a quick look at the next level!
-            5:
-                start_code: "{print} 'On to the next level!'"
-            8:
-                example_code: |
-                    ```
-                    answer = {ask} 'Would you like to go to the next level?'
-                    {if} answer {is} yes
-                        {print} 'Great! You can use the {repeat} commando in the {if} command!'
-                        {print} 'Hooray!'
-                        {print} 'Hooray!'
-                        {print} 'Hooray!'
-                    {else}
-                        {print} 'Okay, you can stay here for a little longer!'
-                    ```
-            11:
-                example_code: |
-                    ```
-                    burger is 5
-                    boisson is 2
-                    total is burger + boisson
-                    print 'Tu as commandé un burger et une boisson'
-                    print 'Cela coute ' total ' dollars s il te plait'
-                    ```
-                    Le code ci-dessus fonctionne car un burger coute 5 dollars et une boisson 2 dollars. Mais si on augmente de 50 centimes, le programme de fonctionne plus ! Comme le code ci-dessous :
-                    ```
-                    burger is 5.50
-                    boisson is 2.30
-                    total is burger + boisson
-                    print 'Tu as commandé un burger et une boisson'
-                    print 'Cela coute ' total ' dollars s il te plait'
-                    ```
-                    Va au prochain niveau pour faire fonctionner ce code !
-            14:
-                story_text: |
-                    ## What's next?
-                    In this game below a code has been made to make sure the player can play on as long as he/she wants...
-                    But the code is ineffective and way too long. Also, what {if} the player wants to play 101 games instead of 100?
-                    You can't play to infinity?
-                    In the next level you will learn a command that makes all of this a lot easier!
-            16:
-                story_text_2: In this code it would be great to have 2x an `{else}` so you could have one option for the broccoli and one for the green beans. The next level comes with the new command `{elif}` that makes this possible! So check out the next level now!
-    pressit:
+   pressit:
         default_save_name: Pressit
         levels:
             5:

@@ -576,20 +576,6 @@ adventures:
         name: Restaurant
         description: Create your own virtual restaurant
         default_save_name: Restaurant
-    next:
-        levels:
-            6:
-                start_code: "{print} 'On to the next level!'"
-            13:
-                example_code: "```\nfirst_grade = {ask} 'What score did you get on your first test?'\nsecond_grade = {ask} 'What score did you get on your second test?'\nadded {is} first_grade + second_grade\nmean_grade {is} added / 2\n{if} mean_grade = 1 {or} mean_grade = 2 {or} mean_grade = 3 {or} mean_grade = 4 {or} mean_grade = 5\n    {print} 'Oh no! You have failed the subject...'\n{else}\n    {print} 'Great! You have passed the subject!'\n```\n"
-            4:
-                start_code: "{print} 'Lets go to the next level!'"
-            8:
-                story_text: "## What's next?\nGreat job! You've reached the end of another level! In this level you've learned to use multiple lines of code in an {if} or {repeat} command. But you can't yet combine the two...\nGood news! In the next level you will be allowed to put an {if} inside an {if}, or inside a {repeat} command.\n"
-            15:
-                story_text: "## What's next?\nIn the next level we will grow a bit more towards real Python code. thon code. You will also learn how to match two lists together.\nThis way you can program a code in which the correct animal is matched to the right sound.\nBecause the two codes below... Are obviously nonsense!\n"
-            17:
-                start_code: "{print} 'Lets go to the next level!'"
     piggybank:
         default_save_name: Piggy Bank
         levels:

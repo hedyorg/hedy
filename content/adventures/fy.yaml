@@ -885,19 +885,6 @@ adventures:
                 story_text: "## Learn a new language\nMake your own program to practice your vocabulary in a new language.\n\n```\n{print} 'Learn French!'\ncat {is} {ask} '\U0001F431'\n{if} cat {is} chat {print} 'Terrific!'\n{else} {print} 'No, cat is chat'\nfrog {is} {ask} '\U0001F438'\n{if} frog {is} grenouille {print} 'Super!'\n{else} {print} 'No, frog is grenouille'\n```\n"
                 start_code: '# place your code here'
                 example_code: "```\n{print} 'Learn French!'\ncat {is} {ask} '\U0001F431'\n{if} cat {is} chat {print} 'Terrific!'\n{else} {print} 'No, cat is chat'\nfrog {is} {ask} '\U0001F438'\n{if} frog {is} grenouille {print} 'Super!'\n{else} {print} 'No, frog is grenouille'\n```\n"
-    next:
-        levels:
-            8:
-                story_text: "## What's next?\nGreat job! You've reached the end of another level! In this level you've learned to use multiple lines of code in an {if} or {repeat} command. But you can't yet combine the two...\nGood news! In the next level you will be allowed to put an {if} inside an {if}, or inside a {repeat} command.\n\nFor example:\n```\nanswer = {ask} 'Would you like to go to teh next level?'\n{if} answer {is} 'yes'\n    {print} 'Great! You can use the {repeat} commando in the {if} command!'\n    {print} 'Hooray!'\n    {print} 'Hooray!'\n    {print} 'Hooray!'\n{else}\n    {print} 'Okay, you can stay here for a little longer!'\n```\nIn this code Hedy will still say 'Your drink is on its way' even {if} you didn't even want to drink something! In the next level this will be fixed!\n"
-            11:
-                start_code: "{print} 'Lets go to the next level!'"
-            13:
-                example_code: "```\nfirst_grade = {ask} 'What score did you get on your first test?'\nsecond_grade = {ask} 'What score did you get on your second test?'\nadded {is} first_grade + second_grade\nmean_grade {is} added / 2\n{if} mean_grade = 1 {or} mean_grade = 2 {or} mean_grade = 3 {or} mean_grade = 4 {or} mean_grade = 5\n    {print} 'Oh no! You have failed the subject...'\n{else}\n    {print} 'Great! You have passed the subject!'\n```\n"
-
-            14:
-                start_code: "{print} 'Lets go to the next level!'"
-            18:
-                start_code: "{print} ('Great job!!!')"
     rock:
         name: Rock, paper, scissors
         description: Make your own rock, paper, scissors game
