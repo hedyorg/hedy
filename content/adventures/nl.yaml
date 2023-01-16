@@ -179,6 +179,7 @@ adventures:
                     `{ask}` en `{print}` werken nog steeds zoals je gewend bent. Maar bij  `{if}`, `{else}` en `{repeat}` is er iets veranderd!
                     Je kunt vanaf dit level meerdere regels samen uitvoeren. Daarvoor moet je deze regels *inspringen*, dat betekent dat ze moeten beginnen met vier spaties.
                     Ook als je maar één regel in een `{if}`, `{else}` of `{repeat}` wil zetten, moet je inspringen!
+
                 example_code: |
                     Zo werkt het `{repeat}` commando vanaf nu:
                     ```
@@ -559,8 +560,12 @@ adventures:
                     ## Verhaal
                     In dit level kun je je verhaal écht interactief maken! In dit level is het `{if}` commando namelijk veranderd, waardoor je meerdere regels kan printen na een `{if}`. Zo kun je de lezer van je verhaal een keuze laten maken. Na de keuze gaat het verhaal verder op basis van die keuze. Kijk maar naar het voorbeeld.
 
-                    ### Opdracht
-                    Kun jij jouw eigen interactieve verhaal maken met twee verschillende eindes?
+                    ### Opdracht 1
+                    In de voorbeeldcode zie je hoe je twee verschillende verhalen kunt maken; eentje waarbij je op het geluid afgaat en eentje waarbij je je verstopt. Vul zelf lege plekken in! **(extra)** Maak het verhaal nog langer. Wat gebeurt er verder? Je kan ook een tweede vraag toevoegen met een tweede keuze.
+
+                    ### Opdracht 2
+                    Oefen met het inspringen. Ga terug naar level 5, zoek je verhaalprogramma op. Maak dan je goede én slechte einde ieder minstens drie regels.
+
                 example_code: |
                     ```
                     hoofdpersoon = {ask} 'Hoe heet de hoofdpersoon in dit verhaal?'
@@ -574,7 +579,6 @@ adventures:
                         {print} 'Snel zoekt ' hoofdpersoon ' een verstopplek'
                         {print} _
                     ```
-                    In dit voorbeeld zie je hoe je twee verschillende verhalen kunt maken; eentje waarbij je op het geluid afgaat en eentje waarbij je je verstopt. Vul zelf lege plekken in! Wat gebeurt er verder?
                 start_code: "# Schrijf jouw code hier"
             9:
                 story_text: |
@@ -878,18 +882,24 @@ adventures:
                 story_text: |
                     ## Zing een liedje!
                     Nu kun je meerdere regels herhalen, wat heel fijn is in liedjes!
+                    
+                    ### Opdracht
+                    Zet het juiste commando op de streepjes, en zorg dat de code op de juiste manier inspringt.
+                    
+                    **(extra)** Is Billie Boem gelukt? Probeer dan 10 kleine visjes.
+
                 example_code: |
                     ```
                     _ 3 {times}
-                        dier = {ask} 'Welk dier kies je?'
-                        {print} 'En wie rijdt er op zijn ' dier ' door de prairie?'
-                        {print} 'Dat is cowboy Billie Boem, door de boeven zeer gevreesd!'
-                        {print} 'Er is nooit in het Wilde Westen een cowboy geweest, die zo dapper was als Cowboy Billie Boem.'
-                        {print} 'Van je hotsie knotsie knetter!'
-                        {print} 'Van je jippie jippie jeej!'
-                        {print} 'Maar zijn ' dier ' was zeer vermoeid en die kon niet langer mee'
-                        {print} 'Maar hij moest de boeven vangen, dus koos hij een ander beest'
-                        {print} 'en nu mag je zelf bedenken wat voor beest dat is geweest!'
+                    dier = {ask} 'Welk dier kies je?'
+                    {print} 'En wie rijdt er op zijn ' dier ' door de prairie?'
+                    {print} 'Dat is cowboy Billie Boem, door de boeven zeer gevreesd!'
+                    {print} 'Er is nooit in het Wilde Westen een cowboy geweest, die zo dapper was als Cowboy Billie Boem.'
+                    {print} 'Van je hotsie knotsie knetter!'
+                    {print} 'Van je jippie jippie jeej!'
+                    {print} 'Maar zijn ' dier ' was zeer vermoeid en die kon niet langer mee'
+                    {print} 'Maar hij moest de boeven vangen, dus koos hij een ander beest'
+                    {print} 'en nu mag je zelf bedenken wat voor beest dat is geweest!'
                     ```
                 start_code: "# Schrijf jouw code hier"
             10:
@@ -1164,7 +1174,15 @@ adventures:
                 story_text: |
                     ## Tekenen maar
                     Nu we meerdere regels kunnen herhalen, kunnen we makkelijker figuren maken.
-                    Want we hoeven maar één keer in te stellen wat de hoek is en dan steeds die variabele gebruiken in de `{repeat}`.
+                    Want we hoeven maar één keer in te stellen wat de hoek is, en die variabele steeds gebruiken in de `{repeat}`.
+
+                    ### Opdracht 1
+                    De voorbeeldcode tekent een vierkant. Verander dat in een ander figuur zoals een driehoek of zeshoek. Je moet daarvoor twee regels veranderen!
+                    Tip: een heel rondje is 360 graden.                   
+
+                    ### Opdracht 2
+                    Maak nu een tekening naar je eigen inzicht, met minstens twee verschillende veelhoeken.
+
                 example_code: |
                     ```
                     hoek = 90
@@ -1173,14 +1191,14 @@ adventures:
                         {forward} 50
                     ```
                 story_text_2: |
-                    ## Interactie
-                    Ook kunnen we nu het programma verbeteren dat verschillende figuren tekent.
-                    Week jij hoe ver de schildpad hier moet draaien? Maak de code af en je kunt iedere veelhoek tekenen.
+                    **(extra)** We kunnen nu het programma verbeteren dat verschillende figuren tekent.
+                    Maak de code af en je kunt iedere veelhoek tekenen.
+
                 example_code_2: |
                     ```
-                    hoeken = {ask} 'Hoeveel hoeken krijgt dit figuur?'
-                    hoek = 360 / hoeken
-                    {repeat} hoeken {times}
+                    kanten = {ask} 'Hoeveel hoeken krijgt dit figuur?'
+                    hoek = 360 / kanten
+                    {repeat} kanten {times}
                         {turn} _
                         {forward} _
                     ```
@@ -1892,13 +1910,13 @@ adventures:
             8:
                 story_text: |
                     ## Hedy de waarzegger
-                    Weet je nog dat je in voorgaande levels een waarzegger hebt gemaakt die drie vragen tegelijk kon stellen?
-                    Het enige probleem dat we tegenkwamen is dat Hedy toen eerst de drie vragen printte en daarna pas de drie antwoorden.
-                    Nu is dat probleem opgelost en kan Hedy na een vraag meteen een antwoord printen, omdat je nu niet maar één regel code kunt herhalen met {repeat}, maar een heel stuk van je code!
+                    Weet je nog dat je in voorgaande levels een waarzegger hebt gemaakt die drie vragen kon stellen?
+                    Het probleem dat we tegenkwamen is dat Hedy toen eerst de drie vragen printte en daarna pas de drie antwoorden.
+                    Nu is dat probleem opgelost en kan Hedy na een vraag meteen een antwoord printen, omdat je nu een heel stuk code mag herhalen.
                     Kijk maar:
 
                     ### Opdracht
-                    Kun jij het `{repeat}` commando op de juiste wijze toevoegen aan de code?
+                    Voeg het juiste commando toevoegen op de streepjes?
                 example_code: |
                     ```
                     {print} 'Ik ben Hedy de waarzegger!'
@@ -2165,7 +2183,8 @@ adventures:
                     ```
                 story_text_2: |
                     ### Opdracht
-                    Natuurlijk kan je de code uitbreiden met meer dingen op het menu, vragen of ze drinken willen, toetjes, enzovoort. Voeg zoveel dingen toe aan het menu als je wil!
+                    Breid je code uit met meer dingen op het menu. Bijvoorbeeld: vragen of ze drinken willen, of toetjes. Voeg minstens nog een extra vraag toe. 
+                    **(extra)** Voeg alles toe aan het menu dat je kan verzinnen, zoveel dingen als je wil!
                 start_code: "{print} 'Welkom bij McHedy!'"
             9:
                 story_text: |
@@ -3073,10 +3092,6 @@ adventures:
                     ```
                 start_code: "# place your code here"
 
-            8:
-                start_code: '# place your code here'
-                story_text: "## Press It!\nNow that you need to use indents for the {if} and {else} statements,\nyou will also have to indent code when using {pressed}! Don't worry,\nit works te same as with the other statements, see the example!\nPress another key instead of x and see what happens.\n"
-                example_code: "```\n{if} x {is} {pressed}\n    {print} 'Only the cool kids press the x key.'\n{else}\n    {print} 'The adventurous kids press something else.'\n```\n"
             9:
                 story_text_2: "Besides counting, you can now also move the turtle in many more ways than only forward or backwards!\nTry making some figures by walking the turtle around!\n"
                 example_code_2: "```\nstepsize = 25\nleft = -90\nright = 90\naround = 180\nrepeat 40 times\n    {if} w {is} {pressed}\n        forward stepsize\n    {if} s {is} {pressed}\n        turn around\n    {if} a {is} {pressed}\n        turn left\n    {if} d {is} {pressed}\n        turn right\n```\n"
