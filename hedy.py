@@ -1713,7 +1713,6 @@ class ConvertToPython_4(ConvertToPython_3):
 class ConvertToPython_5(ConvertToPython_4):
     def __init__(self, lookup, numerals_language):
         super().__init__(lookup, numerals_language)
-        self.ifpressed_prefix_added = False
 
     def ifs(self, meta, args):
         return f"""if {args[0]}:
@@ -1754,7 +1753,7 @@ else:
         return f"""create_button({button_name})"""
 
     def make_ifpressed_command(self, command, button=False):
-        command_suffix = (f"""\
+        command_prefix = (f"""\
 while not pygame_end:
   pygame.display.update()
   event = pygame.event.wait()
@@ -1772,11 +1771,7 @@ while not pygame_end:
   if event.type == pygame.KEYDOWN:
 {ConvertToPython.indent(command, 4)}"""
 
-        if self.ifpressed_prefix_added:
-            return command
-        else:
-            self.ifpressed_prefix_added = True
-            return command_suffix + "\n" + command
+        return command_prefix + "\n" + command
 
     def ifpressed(self, meta, args):
         button_name = self.process_variable(args[0], meta.line)
