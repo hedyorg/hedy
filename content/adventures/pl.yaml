@@ -790,10 +790,6 @@ adventures:
                 example_code: "```\n{repeat} 3 {times} {if} x {is} {pressed} {forward} 15\n```\n"
                 story_text: "W poziomie 5 i 6 mogłeś spróbować nacisnąć kilka razy klawisz powiązany z `{pressed}`. Jeżeli to zrobiłeś to mogłeś też zauważyć, że nic się nie działo. Teraz, kiedy już nauczyłeś się polecenia `{repeat}`, możesz nacisnąć klawisz kilka razy! Spraw, aby żółw chodził do przodu!\n"
                 start_code: '# umieść tutaj swój kod'
-            8:
-                example_code: "```\n{if} x {is} {pressed}\n    {print} 'Only the cool kids press the x key.'\n{else}\n    {print} 'The adventurous kids press something else.'\n```\n"
-                story_text: "## Naciśnij!\nJako, że teraz musisz używać wcięć dla poleceń `{if}` i `{else}`, musisz także wciąć kod polecenia `{pressed}`. Nie martw się, ten kod działa w ten sam sposób jak pozostałe polecenia, zobacz przykład!\nNaciśnij inny klawisz zamiast x i zobacz co się stanie.\n"
-                start_code: '# umieść tutaj swój kod'
             9:
                 story_text_2: "Poza liczeniem możesz teraz ruszać żółwiem w wiele innych sposobów niż tylko do przodu lub do tyłu.\nSpróbuj narysować jakieś figury poprzez ruszenie żółwiem dookoła.\n"
                 example_code_2: "```\nstepsize = 25\nleft = -90\nright = 90\naround = 180\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} stepsize\n    {if} s {is} {pressed}\n        {turn} around\n    {if} a {is} {pressed}\n        {turn} left\n    {if} d {is} {pressed}\n        {turn} right\n```\n"
