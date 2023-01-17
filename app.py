@@ -8,6 +8,7 @@ import re
 import os
 import sys
 import textwrap
+import alternative_error_messages
 import traceback
 import zipfile
 from logging.config import dictConfig as logConfig
