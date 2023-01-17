@@ -2202,12 +2202,6 @@ class ConvertToPython_14(ConvertToPython_13):
         arg0 = self.process_variable_for_comparisons(args[0])
         arg1 = self.process_variable_for_comparisons(args[1])
 
-        # zfill(100) in process_variable_for_comparisons leftpads variables to length 100 with zeroes (hence the z fill)
-        # that is to make sure that string comparison works well "ish" for numbers
-        # this at one point could be improved with a better type system, of course!
-        # the issue is that we can't do everything in here because
-        # kids submit things with the ask command that wew do not ask them to cast (yet)
-
         simple_comparison = arg0 + operator + arg1
 
         if len(args) == 2:
