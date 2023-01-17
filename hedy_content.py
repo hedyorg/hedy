@@ -19,7 +19,7 @@ ALL_KEYWORD_LANGUAGES = {}
 # a way to automate this as well
 NON_LATIN_LANGUAGES = ['ar', 'bg', 'bn', 'el', 'fa', 'hi', 'he', 'pa_PK', 'ru', 'zh_Hans']
 
-# Define a list of languages where alternative error headings/messages are available. 
+# Define a list of languages where alternative error headings/messages are available.
 # Important for A/B tests.
 ALTERNATIVE_ERROR_LANGUAGES = ['en', 'de']
 

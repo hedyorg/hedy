@@ -1624,7 +1624,7 @@ def client_messages():
     d.update(YamlFile.for_file('content/client-messages/en.yaml').to_dict())
     d.update(YamlFile.for_file(
         f'content/client-messages/{g.lang}.yaml').to_dict())
-    
+
     # A/B testing
     # If alternative error messages are available for this user
     # use alternative file for translation
@@ -1632,7 +1632,6 @@ def client_messages():
         d.update(YamlFile.for_file(f'content/client-messages/{g.lang}_test.yaml').to_dict())
 
     # If alternative error message is set use alternative .yaml file
-    
 
     response = make_response(render_template(
         "client_messages.js", error_messages=json.dumps(d)))

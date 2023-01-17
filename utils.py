@@ -114,6 +114,7 @@ class Timer:
         delta = time.time() - self.start
         print(f'{self.name}: {delta}s')
 
+
 class ColoredConsole:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
@@ -175,6 +176,8 @@ def set_debug_mode(debug_mode):
 
 # Annotation to run functions just in dev mode.
 # Useful to deactivate some helper endpoints in prod mode.
+
+
 def debug_only(f):
     @wraps(f)
     def wrapped(**kwargs):
