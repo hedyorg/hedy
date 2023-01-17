@@ -1014,7 +1014,6 @@ def index(level, program_id):
                     # We don't want teacher being able to break the student UI -> pass this adventure
                     pass
                 teacher_adventures.append(current_adventure)
-    print(teacher_adventures)
     adventures_names = {}
     for adventure in adventures:
         adventures_names[adventure['short_name']] = adventure['name']
