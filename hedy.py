@@ -2198,7 +2198,6 @@ class ConvertToPython_13(ConvertToPython_12):
 class ConvertToPython_14(ConvertToPython_13):
     def process_comparison(self, meta, args, operator):
 
-        # we are generating an fstring now
         arg0 = self.process_variable_for_comparisons(args[0])
         arg1 = self.process_variable_for_comparisons(args[1])
 
