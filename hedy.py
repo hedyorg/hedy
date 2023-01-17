@@ -1276,14 +1276,14 @@ class ConvertToPython(Transformer):
         else:
             return process_characters_needing_escape(variable_name)
 
-    def process_variable_for_fstring_padded(self, name):
+    def process_variable_for_comparisons(self, name):
         # used to transform variables in comparisons
         if self.is_variable(name):
-            return f"convert_numerals('{self.numerals_language}', {escape_var(name)}).zfill(100)"
+            return f"convert_numerals('{self.numerals_language}', {escape_var(name)})"
         elif ConvertToPython.is_float(name):
-            return f"convert_numerals('{self.numerals_language}', {name}).zfill(100)"
+            return f"convert_numerals('{self.numerals_language}', {name})"
         elif ConvertToPython.is_quoted(name):
-            return f"{name}.zfill(100)"
+            return f"{name}"
 
     def make_f_string(self, args):
         argument_string = ''
@@ -2199,10 +2199,10 @@ class ConvertToPython_14(ConvertToPython_13):
     def process_comparison(self, meta, args, operator):
 
         # we are generating an fstring now
-        arg0 = self.process_variable_for_fstring_padded(args[0])
-        arg1 = self.process_variable_for_fstring_padded(args[1])
+        arg0 = self.process_variable_for_comparisons(args[0])
+        arg1 = self.process_variable_for_comparisons(args[1])
 
-        # zfill(100) in process_variable_for_fstring_padded leftpads variables to length 100 with zeroes (hence the z fill)
+        # zfill(100) in process_variable_for_comparisons leftpads variables to length 100 with zeroes (hence the z fill)
         # that is to make sure that string comparison works well "ish" for numbers
         # this at one point could be improved with a better type system, of course!
         # the issue is that we can't do everything in here because

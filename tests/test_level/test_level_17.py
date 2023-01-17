@@ -367,7 +367,7 @@ class TestsLevel17(HedyTester):
           leeftijd = float(leeftijd)
         except ValueError:
           pass
-      if convert_numerals('Latin', leeftijd).zfill(100){comparison}convert_numerals('Latin', 12).zfill(100):
+      if convert_numerals('Latin', leeftijd){comparison}convert_numerals('Latin', 12):
         print(f'''Dan ben je jonger dan ik!''')""")
 
         self.single_level_tester(code=code, expected=expected)
@@ -389,7 +389,7 @@ class TestsLevel17(HedyTester):
     if 'quoted' != 'string':
       sleep""")
         expected = textwrap.dedent(f"""\
-    if 'quoted'.zfill(100)!='string'.zfill(100):
+    if 'quoted'!='string':
       time.sleep(1)""")
 
         self.multi_level_tester(
@@ -408,7 +408,7 @@ class TestsLevel17(HedyTester):
         expected = textwrap.dedent(f"""\
       a = {arg}
       b = {arg}
-      if convert_numerals('Latin', a).zfill(100)!=convert_numerals('Latin', b).zfill(100):
+      if convert_numerals('Latin', a)!=convert_numerals('Latin', b):
         b = 1""")
 
         self.multi_level_tester(
