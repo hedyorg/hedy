@@ -2,12 +2,24 @@ import { initializeSyntaxHighlighter } from './syntaxModesRules';
 
 import { modal, error, success } from './modal';
 import { Markers } from './markers';
+import { APP_STATE, hasUnsavedChanges, markUnsavedChanges, clearUnsavedChanges } from './state';
 
 export let theGlobalEditor: AceAjax.Editor;
 export let theModalEditor: AceAjax.Editor;
 let markers: Markers;
 
 let last_code: string;
+
+/**
+ * Used to record and undo pygame-related settings
+ */
+let pygameRunning = false;
+
+/**
+ * Represents whether there's an open 'ask' prompt
+ */
+let askPromptOpen = false;
+
 
 const turtle_prefix =
 `# coding=utf8
@@ -108,7 +120,7 @@ export function initializeApp() {
   for (const preview of $('.turn-pre-into-ace pre').get()) {
     $(preview).addClass('text-lg rounded');
     // We set the language of the editor to the current keyword_language -> needed when copying to main editor
-    $(preview).attr('lang', <string>window.State.keyword_language);
+    $(preview).attr('lang', APP_STATE.keyword_language);
     $(preview).addClass('overflow-x-hidden');
     const exampleEditor = turnIntoAceEditor(preview, true);
 
@@ -193,31 +205,20 @@ export function initializeApp() {
 
       // If prompt is shown and user enters text in the editor, hide the prompt.
       editor.on('change', function () {
-        if (window.State.disable_run) {
+        if (askPromptOpen) {
           stopit();
           editor.focus(); // Make sure the editor has focus, so we can continue typing
         }
-        if ($('#ask-modal').is (':visible')) $('#inline-modal').hide();
-        window.State.disable_run = false;
+        if ($('#ask-modal').is(':visible')) $('#inline-modal').hide();
+        askPromptOpen = false;
         $ ('#runit').css('background-color', '');
-        window.State.unsaved_changes = true;
+        markUnsavedChanges();
 
         clearErrors(editor);
         //removing the debugging state when loading in the editor
         stopDebug();
       });
     }
-
-    // *** PROMPT TO SAVE CHANGES ***
-
-    window.onbeforeunload = () => {
-      // The browser doesn't show this message, rather it shows a default message.
-      if (window.State.unsaved_changes && !window.State.no_unload_prompt) {
-        return ErrorMessages['Unsaved_Changes'];
-      } else {
-        return undefined;
-      }
-    };
 
     // *** KEYBOARD SHORTCUTS ***
 
@@ -231,10 +232,10 @@ export function initializeApp() {
         return;
       }
       if (keyCode === 13 && altPressed) {
-        if (!window.State.level || !window.State.lang) {
+        if (!APP_STATE.level || !APP_STATE.lang) {
           throw new Error('Oh no');
         }
-        runit (window.State.level, window.State.lang, "", function () {
+        runit (APP_STATE.level, APP_STATE.lang, "", function () {
           $ ('#output').focus ();
         });
       }
@@ -291,8 +292,8 @@ export function initializeApp() {
     if (highlighter == 1) {
       // Everything turns into 'ace/mode/levelX', except what's in
       // this table. Yes the numbers are strings. That's just JavaScript for you.
-      if (window.State.level) {
-        const mode = getHighlighter(window.State.level);
+      if (APP_STATE.level) {
+        const mode = getHighlighter(APP_STATE.level);
         editor.session.setMode(mode);
       }
     }
@@ -321,12 +322,12 @@ function clearErrors(editor: AceAjax.Editor) {
 }
 
 export function stopit() {
-  if (window.State.pygame_running) {
+  if (pygameRunning) {
       // when running pygame, raise the pygame quit event
       Sk.insertPyGameEvent("quit");
       Sk.unbindPygameListeners();
 
-      window.State.pygame_running = false;
+      pygameRunning = false;
       document.onkeydown = null;
       $('#pygame-modal').hide();
       $('#stopit').hide();
@@ -348,7 +349,7 @@ export function stopit() {
       }
   }
 
-  window.State.disable_run = false;
+  askPromptOpen = false;
 }
 
 function clearOutput() {
@@ -371,7 +372,7 @@ function clearOutput() {
 }
 
 export function runit(level: string, lang: string, disabled_prompt: string, cb: () => void) {
-  if (window.State.disable_run) {
+  if (askPromptOpen) {
     // If there is no message -> don't show a prompt
     if (disabled_prompt) {
       return modal.alert(disabled_prompt, 3000, true);
@@ -395,7 +396,7 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
     var editor = theGlobalEditor;
     var code = "";
     if ($('#parsons_container').is(":visible")) {
-      window.State.unsaved_changes = false; // We don't want to throw this pop-up
+      clearUnsavedChanges(); // We don't want to throw this pop-up
       code = get_parsons_code();
       // We return no code if all lines are empty or there is a mistake -> clear errors and do nothing
       if (!code) {
@@ -430,7 +431,7 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
         lang: lang,
         tutorial: $('#code_output').hasClass("z-40"), // if so -> tutorial mode
         read_aloud : !!$('#speak_dropdown').val(),
-        adventure_name: window.State.adventure_name
+        adventure_name: APP_STATE.adventure_name
       }),
       contentType: 'application/json',
       dataType: 'json'
@@ -481,9 +482,9 @@ export function saveMachineFiles() {
     type: 'POST',
     url: '/generate_machine_files',
     data: JSON.stringify({
-      level: window.State.level,
+      level: APP_STATE.level,
       code: get_active_and_trimmed_code(),
-      lang: window.State.lang,
+      lang: APP_STATE.lang,
     }),
     contentType: 'application/json',
     dataType: 'json'
@@ -618,12 +619,12 @@ export function tryPaletteCode(exampleCode: string) {
       $('#editor').attr('lang', 'en');
       update_view("main_editor_keyword_selector", "en");
   }
-  window.State.unsaved_changes = false;
+  clearUnsavedChanges();
 }
 
 function storeProgram(level: number | [number, string], lang: string, name: string, code: string, shared: boolean, force_save: boolean, cb?: (err: any, resp?: any) => void) {
-  window.State.unsaved_changes = false;
-  var adventure_name = window.State.adventure_name;
+  clearUnsavedChanges();
+  var adventure_name = APP_STATE.adventure_name;
   // If saving a program for an adventure after a signup/login, level is an array of the form [level, adventure_name]. In that case, we unpack it.
   if (Array.isArray(level)) {
      adventure_name = level [1];
@@ -668,7 +669,7 @@ function storeProgram(level: number | [number, string], lang: string, name: stri
     // To avoid this, we'd have to perform a page refresh to retrieve the info from the server again, which would be more cumbersome.
     // The name of the program might have been changed by the server, so we use the name stated by the server.
     $ ('#program_name').val (response.name);
-    window.State.adventures?.map (function (adventure) {
+    APP_STATE.adventures?.map (function (adventure) {
       if (adventure.short_name === (adventure_name || 'level')) {
         adventure.loaded_program = {name: response.name, code: code};
       }
@@ -707,8 +708,8 @@ export function saveit(level: number | [number, string], lang: string, name: str
       if (err.status == 403) { // The user is not allowed -> so not logged in
         return modal.confirm (err.responseText, function () {
            // If there's an adventure_name, we store it together with the level, because it won't be available otherwise after signup/login.
-           if (window.State && window.State.adventure_name && !Array.isArray(level)) {
-             level = [level, window.State.adventure_name];
+           if (APP_STATE && APP_STATE.adventure_name && !Array.isArray(level)) {
+             level = [level, APP_STATE.adventure_name];
            }
            localStorage.setItem ('hedy-first-save', JSON.stringify ([level, lang, name, code, shared]));
            window.location.pathname = '/login';
@@ -1077,7 +1078,7 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
     }
 
     document.onkeydown = animateKeys;
-    window.State.pygame_running = true;
+    pygameRunning = true;
   }
 
   code = code_prefix + code;
@@ -1105,7 +1106,7 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
     // In levels 1-6 users are unable to create loops and programs with a lot of lines are caught server-sided
     // So: a very large limit in these levels, keep the limit on other onces.
     execLimit: (function () {
-      const level = Number(window.State.level) || 0;
+      const level = Number(APP_STATE.level) || 0;
       if (hasTurtle || hasPygame) {
         // We don't want a timeout when using the turtle or pygame -> just set one for 10 minutes
         return (6000000);
@@ -1224,14 +1225,14 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
     Sk.execStart = new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 365);
     $('#turtlecanvas').hide();
 
-    if (window.State.pygame_running) {
+    if (pygameRunning) {
       Sk.unbindPygameListeners();
       document.onkeydown = null;
       $('#pygame-modal').hide();
     }
 
     return new Promise(function(ok) {
-      window.State.disable_run = true;
+      askPromptOpen = true;
 
       const input = $('#ask-modal input[type="text"]');
       $('#ask-modal .caption').text(prompt);
@@ -1243,7 +1244,7 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
         input.focus();
       }, 0);
       $('#ask-modal form').one('submit', function(event) {
-        window.State.disable_run = false;
+        askPromptOpen = false;
         event.preventDefault();
         $('#ask-modal').hide();
 
@@ -1251,7 +1252,7 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
           $('#turtlecanvas').show();
         }
 
-        if (window.State.pygame_running) {
+        if (pygameRunning) {
           Sk.bindPygameListeners();
           document.onkeydown = animateKeys;
 
@@ -1389,7 +1390,7 @@ function speak(text: string) {
 
 (() => {
   if (!window.speechSynthesis) { return; /* No point in even trying */ }
-  if (!window.State.lang) { return; /* Not on a code page */ }
+  if (!APP_STATE.lang) { return; /* Not on a code page */ }
 
   /**
    * Show the "speak" checkbox if we find that we have speech support for the
@@ -1404,7 +1405,7 @@ function speak(text: string) {
   const timer = setInterval(function() {
     attempts += 1;
 
-    const voices = findVoices(window.State.lang ?? '');
+    const voices = findVoices(APP_STATE.lang ?? '');
 
     if (voices.length > 0) {
       for (const voice of voices) {
@@ -1433,11 +1434,15 @@ function speak(text: string) {
   }
 })();
 
+/**
+ * Used on the editor page when clicking leave button
+ */
 export function prompt_unsaved(cb: () => void) {
-  // This variable avoids showing the generic native `onbeforeunload` prompt
-  window.State.no_unload_prompt = true;
-  if (! window.State.unsaved_changes) return cb ();
-  modal.confirm(ErrorMessages['Unsaved_Changes'], cb);
+  if (!hasUnsavedChanges()) return cb();
+  modal.confirm(ErrorMessages['Unsaved_Changes'], () => {
+    clearUnsavedChanges();
+    cb();
+  });
 }
 
 export function load_quiz(level: string) {
@@ -1459,8 +1464,8 @@ export function showVariableView() {
 //Feature flag for variable and values view
 var variable_view = false;
 
-if(window.State.level != null){
-  let level = Number(window.State.level);
+if(APP_STATE.level != null){
+  let level = Number(APP_STATE.level);
   variable_view = level >= 2;
   hide_if_no_variables();
 }
@@ -1482,8 +1487,8 @@ if (!variable_view) {
 
 //Feature flag for step by step debugger. Becomes true automatically for level 7 and below.
 var step_debugger = false;
-if(window.State.level != null){
-  let level = Number(window.State.level);
+if(APP_STATE.level != null){
+  let level = Number(APP_STATE.level);
   step_debugger = level <= 7;
 }
 
@@ -1561,7 +1566,7 @@ function store_parsons_attempt(order: Array<string>, correct: boolean) {
     type: 'POST',
     url: '/store_parsons_order',
     data: JSON.stringify({
-      level: window.State.level,
+      level: APP_STATE.level,
       exercise: $('#next_parson_button').attr('current_exercise'),
       order: order,
       correct: correct
@@ -1727,8 +1732,8 @@ export function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean): Ac
     if (highlighter == 1) {
       // Everything turns into 'ace/mode/levelX', except what's in
       // this table. Yes the numbers are strings. That's just JavaScript for you.
-      if (window.State.level) {
-        const mode = getHighlighter(window.State.level);
+      if (APP_STATE.level) {
+        const mode = getHighlighter(APP_STATE.level);
         editor.session.setMode(mode);
       }
     }
@@ -1770,15 +1775,6 @@ export function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean): Ac
         }
     }
 
-    window.onbeforeunload = () => {
-      // The browser doesn't show this message, rather it shows a default message.
-      if (window.State.unsaved_changes && !window.State.no_unload_prompt) {
-        return ErrorMessages['Unsaved_Changes'];
-      } else {
-        return undefined;
-      }
-    };
-
     // *** KEYBOARD SHORTCUTS ***
 
     let altPressed: boolean | undefined;
@@ -1791,10 +1787,10 @@ export function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean): Ac
         return;
       }
       if (keyCode === 13 && altPressed) {
-        if (!window.State.level || !window.State.lang) {
+        if (!APP_STATE.level || !APP_STATE.lang) {
           throw new Error('Oh no');
         }
-        runit (window.State.level, window.State.lang, "", function () {
+        runit (APP_STATE.level, APP_STATE.lang, "", function () {
           $ ('#output').focus ();
         });
       }
@@ -1889,7 +1885,7 @@ export function change_keyword_language(start_lang: string, new_lang: string) {
       code: ace.edit('editor').getValue(),
       start_lang: start_lang,
       goal_lang: new_lang,
-      level: window.State.level
+      level: APP_STATE.level
     }),
     contentType: 'application/json',
     dataType: 'json'
@@ -2056,9 +2052,9 @@ function updateBreakpointVisuals(editor: AceAjax.Editor) {
 }
 
 function debugRun() {
-  let language = window.State.lang ?? window.State.keyword_language;
-  if (window.State.level != null && language != null) {
-    runit(window.State.level, language, "", function () {
+  let language = APP_STATE.lang ?? APP_STATE.keyword_language;
+  if (APP_STATE.level != null && language != null) {
+    runit(APP_STATE.level, language, "", function () {
       $('#output').focus();
     });
   }

@@ -3,30 +3,6 @@
 declare const ErrorMessages: Record<string, string>;
 
 declare interface Window {
-  State: State;
   width: int;
   editor?: AceAjax.Editor;
-}
-
-interface Adventure {
-  example_code: string;
-  short_name: string;
-  loaded_program?: Program;
-  default_save_name: string;
-  start_code: string;
-  extra_stories?: ExtraStory[];
-  image?: string | null;
-  name: string; // Translated name
-  text?: string;
-}
-
-interface ExtraStory {
-  example_code?: string;
-  text?: string;
-}
-
-interface Program {
-  name: string;
-  code: string;
-  adventure_name?: string;
 }

@@ -1,6 +1,7 @@
 import { modal } from './modal';
 import { theGlobalEditor } from './app';
 import {loadParsonsExercise} from "./parsons";
+import { Adventure, APP_STATE, clearUnsavedChanges, hasUnsavedChanges } from './state';
 
 /**
  * Activate tabs
@@ -28,8 +29,11 @@ export function initializeTabs() {
     e.preventDefault ();
 
     // If there are unsaved changes, we warn the user before changing tabs.
-    if (window.State.unsaved_changes) modal.confirm(ErrorMessages['Unsaved_Changes'], () => switchToTab(tabName));
-    else switchToTab(tabName);
+    if (hasUnsavedChanges()) {
+      modal.confirm(ErrorMessages['Unsaved_Changes'], () => switchToTab(tabName));
+    } else {
+      switchToTab(tabName);
+    }
 
     // Do a 'replaceState' to add a '#anchor' to the URL
     const hashFragment = tabName !== 'level' ? tabName : '';
@@ -38,8 +42,8 @@ export function initializeTabs() {
 
   // If we're opening an adventure from the beginning (either through a link to /hedy/adventures or through a saved program for an adventure), we click on the relevant tab.
   // We click on `level` to load a program associated with level, if any.
-  if (window.State && window.State.adventure_name) {
-    switchToTab(window.State.adventure_name);
+  if (APP_STATE.adventure_name) {
+    switchToTab(APP_STATE.adventure_name);
   }
   else if (window.location.hash) {
     // If we have an '#anchor' in the URL, switch to that tab
@@ -71,7 +75,7 @@ function resetWindow() {
   $('#turtlecanvas').empty();
   output.append(variable_button);
   output.append(variables);
-  window.State.unsaved_changes = false;
+  clearUnsavedChanges();
 }
 
 function switchToTab(tabName: string) {
@@ -91,7 +95,7 @@ function switchToTab(tabName: string) {
   target.removeClass('hidden');
 
   const adventures: Record<string, Adventure> = {};
-  window.State.adventures?.map (function(adventure: Adventure) {
+  APP_STATE.adventures?.map (function(adventure: Adventure) {
     adventures [adventure.short_name] = adventure;
   });
 
@@ -115,7 +119,7 @@ function switchToTab(tabName: string) {
     $ ('#level-header input').hide ();
     $ ('#editor').hide();
     $ ('#editor-area').show ();
-    loadParsonsExercise(<number>(window.State.level || 1), 1);
+    loadParsonsExercise(<number>(APP_STATE.level || 1), 1);
     $ ('#parsons_code_container').show();
     $ ('#adventures-tab').css('height', '');
     $ ('#adventures-tab').css('min-height', '14em');
@@ -138,9 +142,9 @@ function switchToTab(tabName: string) {
 
 
   // If the loaded program (directly requested by link with id) matches the currently selected tab, use that, overriding the loaded program that came in the adventure or level.
-  if (window.State.loaded_program && (window.State.adventure_name_onload) === tabName) {
-    $ ('#program_name').val (window.State.loaded_program.name);
-    theGlobalEditor?.setValue (window.State.loaded_program.code);
+  if (APP_STATE.loaded_program && (APP_STATE.adventure_name_onload) === tabName) {
+    $ ('#program_name').val (APP_STATE.loaded_program.name);
+    theGlobalEditor?.setValue (APP_STATE.loaded_program.code);
   }
   // If there's a loaded program for the adventure or level now selected, use it.
   else if (adventures[tabName]?.loaded_program) {
@@ -150,21 +154,22 @@ function switchToTab(tabName: string) {
   else {
     if (tab.hasClass('teacher_tab')) {
       $ ('#program_name').val (tabName);
-      window.State.adventure_name = tabName;
+      APP_STATE.adventure_name = tabName;
       theGlobalEditor?.setValue ("");
     } else {
       if (adventures[tabName].default_save_name == 'intro') {
-        $('#program_name').val(window.State.level_title + ' ' + window.State.level);
+        $('#program_name').val(APP_STATE.level_translation + ' ' + APP_STATE.level);
       } else {
-        $('#program_name').val(adventures [tabName].default_save_name + ' - ' + window.State.level_title + ' ' + window.State.level);
+        $('#program_name').val(adventures [tabName].default_save_name + ' - ' + APP_STATE.level_translation + ' ' + APP_STATE.level);
       }
       theGlobalEditor?.setValue(adventures [tabName].start_code);
     }
   }
 
-  window.State.adventure_name = tabName === 'intro' ? undefined : tabName;
+  APP_STATE.adventure_name = tabName === 'intro' ? undefined : tabName;
   theGlobalEditor?.clearSelection();
   theGlobalEditor?.session.clearBreakpoints();
+
   // If user wants to override the unsaved program, reset unsaved_changes
-  window.State.unsaved_changes = false;
+  clearUnsavedChanges();
 }

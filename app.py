@@ -886,7 +886,6 @@ def index(level, program_id):
         return utils.error_page(error=404, ui_message=gettext('no_such_level'))
 
     loaded_program = ''
-    adventure_name = ''
 
     if program_id:
         result = DATABASE.program_by_id(program_id)
@@ -905,8 +904,6 @@ def index(level, program_id):
 
         loaded_program = {'code': result['code'], 'name': result['name'],
                           'adventure_name': result.get('adventure_name')}
-        if 'adventure_name' in result:
-            adventure_name = result['adventure_name']
 
     # In case of a "forced keyword language" -> load that one, otherwise: load
     # the one stored in the g object
@@ -1040,8 +1037,7 @@ def index(level, program_id):
         hide_cheatsheet=hide_cheatsheet,
         enforce_developers_mode=enforce_developers_mode,
         teacher_adventures=teacher_adventures,
-        loaded_program=loaded_program,
-        adventure_name=adventure_name)
+        loaded_program=loaded_program)
 
 
 @app.route('/hedy/<id>/view', methods=['GET'])

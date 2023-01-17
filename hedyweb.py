@@ -60,8 +60,7 @@ def render_code_editor_with_tabs(
         customizations,
         hide_cheatsheet,
         enforce_developers_mode,
-        teacher_adventures,
-        adventure_name):
+        teacher_adventures):
     arguments_dict = {}
 
     # Meta stuff
@@ -80,7 +79,6 @@ def render_code_editor_with_tabs(
     arguments_dict['parsons'] = parsons
     arguments_dict['parsons_exercises'] = parsons_exercises
     arguments_dict['tutorial'] = tutorial
-    arguments_dict['adventure_name'] = adventure_name
     arguments_dict['latest'] = version
     arguments_dict['quiz'] = quiz
     arguments_dict['quiz_questions'] = quiz_questions

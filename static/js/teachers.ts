@@ -1,12 +1,13 @@
 import { modal } from './modal';
 import {getHighlighter, showAchievements, turnIntoAceEditor} from "./app";
+import { APP_STATE, markUnsavedChanges, clearUnsavedChanges } from './state';
 
 import DOMPurify from 'dompurify'
 
 export function initializeTeacherPage() {
     // Use this to make sure that we return a prompt when a user leaves the page without saving
     $( "input" ).change(function() {
-        window.State.unsaved_changes = true;
+      markUnsavedChanges();
     });
 }
 
@@ -406,7 +407,7 @@ export function save_customizations(class_id: string) {
           showAchievements(response.achievement, false, "");
       }
       modal.alert(response.success, 3000, false);
-      window.State.unsaved_changes = false;
+      clearUnsavedChanges();
       $('#remove_customizations_button').removeClass('hidden');
     }).fail(function (err) {
       modal.alert(err.responseText, 3000, true);
@@ -442,7 +443,7 @@ export function remove_customizations(class_id: string, prompt: string) {
 }
 
 export function select_all_levels_adventure(adventure_name: string) {
-    window.State.unsaved_changes = true;
+    markUnsavedChanges();
     let first_input = true;
     let checked = true;
     $('.adventure_level_input').each(function() {
@@ -458,7 +459,7 @@ export function select_all_levels_adventure(adventure_name: string) {
 }
 
 export function select_all_level_adventures(level: string) {
-    window.State.unsaved_changes = true;
+    markUnsavedChanges();
     // It is not selected yet -> select all and change color
     if ($('#level_button_' + level).hasClass('blue-btn')) {
         $('.adventure_level_' + level).each(function(){

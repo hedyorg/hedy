@@ -42,7 +42,7 @@ export interface State {
    *
    * Used: when building strings.
    */
-  level_title?: string;
+  level_translation?: string;
 
   /**
    * The keyword name of the currently displayed adventure, if displaying an adventure.
@@ -55,19 +55,6 @@ export interface State {
    * storing a program under an adventure,
    */
   adventure_name?: string;
-
-  /**
-   * Adventure name at the time the page was loaded.
-   *
-   * Not affected by switching tabs.
-   *
-   * (Only available in code page)
-   *
-   * Written: on page load.
-   *
-   * Used: in tabs.ts to set loaded program code into the editor.
-   */
-  adventure_name_onload?: string;
 
   /**
    * The adventure data available on the current page
@@ -87,26 +74,29 @@ export interface State {
    * Used: to initialize the code page, and the viewer.
    */
   loaded_program?: Program;
+}
 
-  /**
-   * Represents whether there's an open 'ask' prompt
-   */
-  disable_run?: boolean;
+export interface Adventure {
+  example_code: string;
+  short_name: string;
+  loaded_program?: Program;
+  default_save_name: string;
+  start_code: string;
+  extra_stories?: ExtraStory[];
+  image?: string | null;
+  name: string; // Translated name
+  text?: string;
+}
 
-  /**
-   * Used in very many places to make the "leave this page?" popup appear
-   */
-  unsaved_changes?: boolean;
+export interface ExtraStory {
+  example_code?: string;
+  text?: string;
+}
 
-  /**
-   * Prevent the unsaved changes prompt
-   */
-  no_unload_prompt?: boolean;
-
-  /**
-   * Used to record and undo pygame-related settings
-   */
-  pygame_running?: boolean;
+export interface Program {
+  name: string;
+  code: string;
+  adventure_name?: string;
 }
 
 /**
@@ -141,4 +131,32 @@ export function passStateFromHtml(stateUpdate: Partial<State>) {
 
 function identity<A>(x: A): A {
   return x;
+}
+
+function unloadHandler(event: BeforeUnloadEvent) {
+  event.preventDefault();
+  return event.returnValue = ErrorMessages['Unsaved_Changes'];
+}
+
+let unsavedChanges = false;
+
+export function hasUnsavedChanges() {
+  return unsavedChanges;
+}
+
+/**
+ * Whether there are unsaved changes (used by the HTML)
+ */
+export function markUnsavedChanges() {
+  unsavedChanges = true;
+  addEventListener('beforeunload', unloadHandler, { capture: true });
+}
+
+/**
+ * Clear unsaved changes marker
+ */
+export function clearUnsavedChanges() {
+  unsavedChanges = false;
+  // MDN tells me to add and remove this listener as necessary: https://developer.mozilla.org/en-US/docs/Web/API/Window/beforeunload_event
+  removeEventListener('beforeunload', unloadHandler, { capture: true });
 }
