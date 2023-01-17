@@ -1,21 +1,21 @@
 levels:
     1:
         1:
-            question_text: "Como se llama este lenguaje de programación?"
+            question_text: "¿Cómo se llama este lenguaje de programación?"
             mp_choice_options:
             -   option: "Hedy"
-                feedback: "Buen Trabajo!"
+                feedback: "¡Buen trabajo!"
             -   option: "Heddy"
                 feedback: "este no!"
             -   option: "Haydie"
                 feedback: "Este no!"
             -   option: "Heidi"
-                feedback: "Este no!"
+                feedback: "¡Este no!"
             correct_answer: "A"
             hint: "Es nombrado en honor de Hedy Lamarr."
             question_score: '10'
         2:
-            question_text: "Cual comando hace que aparezca el texto?"
+            question_text: "¿Qué debe introducirse en los huecos para que aparezca el texto \"Hello!\"?"
             mp_choice_options:
             -   option: |
                     ```
@@ -42,23 +42,23 @@ levels:
             question_score: '10'
             code: "```\n___ Hello!\n```\n"
         3:
-            question_text: "Como le preguntas cuál es el color favorito de alguien ?"
+            question_text: "¿Cómo preguntas cuál el color favorito de alguien?"
             mp_choice_options:
             -   option: |
                     ```
-                    {print} Cuál es tu color favorito?
+                    {print} ¿Cuál es tu color favorito?
                     ```
                 feedback: "`{print}` imprime texto, pero no pregunta preguntas."
             -   option: |
                     ```
-                    {ask} {print} Cuál es tu color favorito?
+                    {ask} {print} ¿Cuál es tu color favorito?
                     ```
                 feedback: "Solo necesitas un comando, no dos."
             -   option: |
                     ```
                     {ask} ¿Cuál es tu color favorito?
                     ```
-                feedback: "Bueno !"
+                feedback: "¡Genial!"
             -   option: |
                     ```
                     {echo} ¿Cuál es tu color favorito?
@@ -68,27 +68,27 @@ levels:
             hint: "Puedes preguntar algo con el comando `{ask}`"
             question_score: '10'
         4:
-            question_text: "Qué pasa de malo con este código ?"
+            question_text: "¿Qué está mal en este código?"
             code: |-
-                Hola soy Hedy !
-                {ask} Quien eres ?
+                ¡Hola, soy Hedy!
+                {ask} ¿Quién eres?
                 {echo} Hola...
             mp_choice_options:
             -   option: "`{print}` faltante en la línea 1."
-                feedback: "Correcto !"
+                feedback: "¡Correcto!"
             -   option: "La línea 1 está mal escrita."
                 feedback: "Yo soy esta escribido incorrecto a propósito; Hedy todavia no entiende las apóstrofes."
             -   option: "`{echo}` no es un comando."
                 feedback: "`{echo}` es un comando, hay otro error."
-            -   option: "Nada! Este código es perfecto!"
-                feedback: "Incorrecto, mira con más cuidado !"
+            -   option: "¡Nada! ¡Este código está perfecto!"
+                feedback: "Incorrecto, ¡presta atención!"
             correct_answer: "A"
-            hint: "La línea 1 no se mira correcta"
+            hint: "La línea 1 no parece correcta"
             question_score: '10'
         5:
-            question_text: "Cuál comando hace falta en la línea 2?"
+            question_text: "¿Qué comando falta en la línea 2?"
             code: |-
-                {ask} Cuál es tu mascota favorita ?
+                {ask} ¿Cuál es tu mascota favorita?
                 _?_ Entonces tu mascota favorita es..."
             mp_choice_options:
             -   option: |
@@ -863,35 +863,20 @@ levels:
             question_score: '10'
     5:
         1:
-            question_text: "Which command should be filled in on the _?_?"
-            code: |-
-                number {is} {ask} 'What is your lucky number?'
-                {if} number {is} 5 {print} Mine too!
-                _?_ {print} My lucky number is 5!
+            question_text: "What is true?"
             mp_choice_options:
-            -   option: |
-                    ```
-                    {print}
-                    ```
-                feedback: "There already is a `{print}` command."
-            -   option: |
-                    ```
-                    {if}
-                    ```
-                feedback: "The `{if}` command is used in the line above."
-            -   option: |
-                    ```
-                    {sleep}
-                    ```
-                feedback: "That's not it!"
-            -   option: |
-                    ```
-                    {else}
-                    ```
-                feedback: "That's right!"
+            -   option: "In level 5 `{print}` works differently than in level 4"
+                feedback: "`{print}` is still the same"
+            -   option: "In level 5 `{ask}` works differently than in level 4"
+                feedback: "`{ask}` is still the same"
+            -   option: "In level 5 `{ask}` and `{print}` work differently than in level 4"
+                feedback: "`No these commands remain the same"
+            -   option: "In level 5 `{ask}` and `{print}` work the same as in level 4"
+                feedback: "Correct!"
             correct_answer: "D"
-            hint: "Which one goes together with the `{if}` command?"
+            hint: "We have only learned a new command in level 5."
             question_score: '10'
+            code: "number {is} {ask} 'What is your lucky number?'\n{if} number {is} 5 {print} 'Mine too!'\n_?_ {print} 'My lucky number is 5!'"
         2:
             question_text: "What appears in your output screen when you type in the name Hedy?"
             code: |-
@@ -1545,13 +1530,13 @@ levels:
                     {print} 'Hello'
                     {print} 'Im Hedy!'
             mp_choice_options:
-            -   option: "Hello \n Im Hedy!"
+            -   option: "Hello\nIm Hedy!"
                 feedback: "Everything is printed twice."
-            -   option: "Hello \n Hello \n Im Hedy"
+            -   option: "Hello\nHello\nIm Hedy"
                 feedback: "The second line is repeated twice as well."
-            -   option: "Hello \n Im Hedy! \n Hello \n Im Hedy!"
+            -   option: "Hello\nIm Hedy!\nHello\nIm Hedy!"
                 feedback: "Super!"
-            -   option: "Hello \n Hello \n Im Hedy! \n Im Hedy!"
+            -   option: "Hello\nHello\nIm Hedy!\nIm Hedy!"
                 feedback: "Everything is printed twice"
             correct_answer: "C"
             hint: "Both lines are repeated twice."
@@ -1580,13 +1565,13 @@ levels:
                     {print} 'Baby shark tututudutudu'
                 {print} 'Baby shark'
             mp_choice_options:
-            -   option: "Baby shark tututudutudu \n Baby shark"
+            -   option: "Baby shark tututudutudu\nBaby shark"
                 feedback: "Mind the `{repeat}` command!"
-            -   option: "Baby shark tututudutudu \n Baby shark \n Baby shark tututudutudu \n Baby shark \n Baby shark tututudutudu \n Baby shark"
+            -   option: "Baby shark tututudutudu\nBaby shark\nBaby shark tututudutudu\nBaby shark\nBaby shark tututudutudu\nBaby shark"
                 feedback: "The last line has no indentation, so it's not repeated."
-            -   option: "Baby shark tututudutudu \n Baby shark tututudutudu \n Baby shark tututudutudu \n Baby shark"
+            -   option: "Baby shark tututudutudu\nBaby shark tututudutudu\nBaby shark tututudutudu\nBaby shark"
                 feedback: "Right!"
-            -   option: "Baby shark tututudutudu \n Baby shark \n Baby shark \n Baby shark"
+            -   option: "Baby shark tututudutudu\nBaby shark\nBaby shark\nBaby shark"
                 feedback: "What is being repeated and what isn't."
             correct_answer: "C"
             hint: "What is being repeated and what is not?."
@@ -1599,13 +1584,13 @@ levels:
                     {print} 'Yay!'
                     {print} 'Were going on holiday!'
             mp_choice_options:
-            -   option: "The children went: \n Yay! \n Were going on holiday!"
+            -   option: "The children went:\nYay!\nWere going on holiday!"
                 feedback: "Mind the `{repeat}` command !"
-            -   option: "The children went: \n Yay! \n Were going on holiday! \n Yay! \n Were going on holiday!"
+            -   option: "The children went:\nYay!\nWere going on holiday!\nYay!\nWere going on holiday!"
                 feedback: "Correct!"
-            -   option: "The children went: \n Yay! \n Yay! \n Were going on holiday! \n Were going on holiday!"
+            -   option: "The children went:\nYay!\nYay!\nWere going on holiday!\nWere going on holiday!"
                 feedback: "This order is incorrect."
-            -   option: "The children went: \n Yay! \n Yay! \n Were going on holiday!"
+            -   option: "The children went:\nYay!\nYay!\nWere going on holiday!"
                 feedback: "The last line is repeated too."
             correct_answer: "B"
             hint: "The block under the `{repeat}` command is repeated twice."
@@ -1810,13 +1795,13 @@ levels:
                 {else}
                     {print} 'The computer will explode in 5... 4... 3... 2... 1...'
             mp_choice_options:
-            -   option: "Good job! \n Good job!"
+            -   option: "Good job!\nGood job!"
                 feedback: "That's not it!"
             -   option: "The computer will explode in 5... 4... 3... 2... 1..."
                 feedback: "That's not it!"
-            -   option: "Good job ! \n Good job! \n You can use the computer!"
+            -   option: "Good job !\nGood job!\nYou can use the computer!"
                 feedback: "That's not it!"
-            -   option: "Good job! \n You can use the computer! \n Good job! \n You can use the computer!"
+            -   option: "Good job!\nYou can use the computer!\nGood job!\nYou can use the computer!"
                 feedback: "Correct!"
             correct_answer: "D"
             hint: "Everything under the `{repeat}` command is repeated twice."

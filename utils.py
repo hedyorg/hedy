@@ -11,6 +11,7 @@ import re
 import string
 import random
 import uuid
+import unicodedata
 
 from flask_babel import gettext, format_date, format_datetime, format_timedelta
 from ruamel import yaml
@@ -113,6 +114,7 @@ class Timer:
         delta = time.time() - self.start
         print(f'{self.name}: {delta}s')
 
+
 class ColoredConsole:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
@@ -174,6 +176,8 @@ def set_debug_mode(debug_mode):
 
 # Annotation to run functions just in dev mode.
 # Useful to deactivate some helper endpoints in prod mode.
+
+
 def debug_only(f):
     @wraps(f)
     def wrapped(**kwargs):
@@ -400,3 +404,8 @@ def customize_babel_locale(custom_locales: dict):
 
         babel.localedata.exists = exists
         babel.localedata.load = load
+
+
+def strip_accents(s):
+    return ''.join(c for c in unicodedata.normalize('NFD', s)
+                   if unicodedata.category(c) != 'Mn')

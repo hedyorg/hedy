@@ -262,10 +262,6 @@ adventures:
                 story_text: "## Le të vizatojmë\nNë këtë nivel mund të përdorni kalkulime për të vizatuar figura të ndryshme.\nMund të keni mësuar në shkollë se nëse ktheni komplet rreth ,është 360 shkalle. Nëse jo, tani e dini!\nPër këtë shkak përdorni 90 shkallë për një katror. 360 pjesëtuar me 4 është 90.\nTani mund të bëjmë matematikë me Hady, mund të vizatojmë të gjithë figurat që duam!\n"
                 example_code: "```\nkëndet = {ask} 'Sa kënde doni?'\nkëndi = 360 / këndet\n{forward} 50\n{turn} këndi\n{forward} 50\n{turn} këndi\n{forward} 50\n{turn} këndi\n{forward} 50\n{turn} këndi\n{forward} 50\n{turn} këndi\n{forward} 50\n{turn} këndi\n```\n"
                 start_code: "{print} 'Duke vizatuar figura'"
-            7:
-                story_text: "## Le të vizatojmë\nNë këtë nivel mund të përsërisni një rresht kodi me komandën `{repeat}`.\n"
-                example_code: "```\n{print} 'Vizato figura'\n_ 3 _ {forward} 10\n```\n"
-                start_code: "{print} 'Vizato figura'\n{repeat} 3 {times} {forward} 10"
             8:
                 story_text: "## Le të vizatojmë\nTani që mund të përsërisim shumë rreshta, mund të bëjmë figura më lehtë.\nDuhet vetëm të vendosim këndin një herë, pastaj mund ta përdorim at variabël në komandën `{repeat}`.\n"
                 example_code: "```\nkëndi = 90\n{repeat} 10 {times}\n    {turn} këndi\n    {forward} 50\n```\n"
@@ -663,79 +659,6 @@ adventures:
                 start_code: '## Vendoseni kodin tuaj këtu'
         description: Luani lojën e Tik tak tou!
         default_save_name: Tik
-    next:
-        levels:
-            3:
-                start_code: "{print} Le të shkojmë në nivelin tjetër!"
-                story_text: "## Ç'pritet më tej?\nNë këtë nivel ju keni praktikuar me variabla, por ndoshta keni hasur në këtë gabim.\n\nProvoni të ekzekutoni këtë kod:\n```\nemri {is} Saranda\n{print} Emri im është emri\n```\nSigurisht që keni dashur të printoni `My name is Sophie`, por Hedy printon `My Sophie is Sophie`.\nNë nivelin tjetër, ky problem zgjidhet duke përdorur thonjëza.\n"
-            7:
-                example_code: "```\n{repeat} 5 {times} {print} 'Në nivelin tjetër mund të përsërisni disa rreshta kodi në të njëjtën kohë!'\n```\n"
-                story_text: "## Ç'pritet më tej?\nTani keni mësuar se si të `{repeat}` një rresht të vetëm kodi. Kjo është e dobishme, por jo gjithmonë mjafton. Ndonjëherë dëshironi të `{repeat}`(përsërisni) disa rreshta në të njëjtën kohë.\nniveli tjetër ju lejon të gruponi disa rreshta kodi dhe të përsërisni atë grup të vogël rreshtash të gjitha menjëherë!\n"
-                start_code: "{print}'Le të shkojmë në nivelin tjetër!'"
-            11:
-                start_code: "{print} 'Le të shkojmë në nivelin tjetër!'"
-                story_text: "## Ç'pritet më tej?\nNdoshta ju keni provuar të përdorni numra dhjetorë në aventurën tuaj në restorant. Nëse e keni kuptuar, me siguri keni vënë re se Hedy nuk i ka kuptuar ende dhe gjithmonë i ka rrumbullakosur.\nNga niveli tjetër mund të përdorni numra dhjetorë.\n"
-                example_code: "```\nhamburger {is} 5\npija {is} 2\ntotali {is} hamburger + pije\nprint 'Ke porositur një hamburger dhe një pije'\nprint 'Kjo kushton ' totali ' lek ju lutem'\n```\nKodi i mësipërm funksionon, sepse hamburgeri kushton 5 lekë dhe pija 2 lekë . Por nëse ngarkoni 0.5 lek më shumë, programi nuk funksionon më! Ashtu si kodi më poshtë:\n```\nhamburger {is} 5.50\npije {is} 2.30\ntotali {is} hamburger + pije\nprint 'Ke porositur një hamburger dhe një pije'\nprint 'Kjo kushton ' totali ' lekë ju lutem'\n```\nShkoni në nivelin tjetër për ta bërë këtë kod të funksionojë!\n"
-            14:
-                start_code: "{print} 'Le të shkojmë në nivelin tjetër!'"
-                story_text: "## Ç'pritet më tej?\nNë këtë lojë më poshtë është bërë një kod për t'u siguruar që lojtari mund të luajë për aq kohë sa ai/ajo dëshiron...\nPor kodi është i paefektshëm dhe shumë i gjatë. Gjithashtu, çfarë {if}(nëse) lojtari dëshiron të luajë 101 lojëra në vend të 100?\nNuk mund të luash deri në pafundësi?\nNë nivelin tjetër do të mësoni një komandë që e bën të gjithë këtë shumë më të lehtë!\n"
-                example_code: "```\nloja {is} 'ndezur'\n{for} i {in} {range} 1 {to} 100\n     {if} loja {is} 'ndezur'\n         përgjigje = {ask} 'Dëshiron të vazhdosh?'\n         {if} përgjigjje {is} 'jo'\n             loja {is} 'mbaroi'\n         {if} përgjigjje {is} 'po'\n             {print} 'Ok do të vazhdojmë'\n```\n"
-            1:
-                story_text: "## Ç'pritet më tej?\nurime! Ju keni arritur në fund të nivelit 1. Shpresojmë që tashmë keni bërë disa kode të mrekullueshme, por Hedy ka shumë më tepër për të zbuluar.\n\nNë nivelin e parë mund të keni vënë re se komanda `{echo}` mund të ruajë vetëm një pjesë të informacionit në të njëjtën kohë.\nPër shembull, në aventurën e restorantit, ju mund të {echo} atë që klienti donte të hante, ose atë që donte të pinte, por jo të dyja në një fjali.\n"
-                example_code: "```\n{print} Mirë se vini tek Hedy\n{ask} Çfarë do të dëshironit të hani?\n{echo} Kështu që ju dëshironi\n{ask} çfarë do të dëshironit të pini?\n{echo} Kështu që ju dëshironi\n```\n"
-                story_text_2: "Nëse lojtari shkruan një hamburger dhe kola, ju nuk mund të thoni \"kështu do të dëshironit një hamburger dhe kola\", por duhet të bëni dy rreshta të veçantë.\nGjithashtu, komanda `{echo}` i bën jehonë vetëm fjalës në fund të fjalisë. Pra, nuk mund të thuash \"hamburgeri juaj po vjen menjëherë!\".\n\nKjo ndryshon në nivelin 2. Në nivelin 2 do të mësoni të punoni me variabla, që ju lejojnë të ruani disa pjesë informacioni dhe t'i printoni ato në çdo vend që dëshironi.\nPra, le të shkojmë në nivelin tjetër!\n"
-                start_code: "{print} Shkojme!"
-            2:
-                story_text: "## Ç'pritet më tej?\nNë këtë nivel ju keni mësuar se çfarë është një variabël dhe si mund ta përdorni atë për t'i bërë aventurat tuaja më ndërvepruese.\nPor... kjo nuk është e vetmja gjë që mund të bësh me variablat! Ju gjithashtu mund të përdorni variabla për të krijuar lista.\nDhe madje mund ta lini Hedy të zgjedhë një fjalë të rastësishme nga një listë, e cila ju lejon të bëni lojëra reale!\nHidhni një sy të shpejtë në nivelin tjetër!\n"
-                start_code: "{print} Le të shkojmë në nivelin tjetër!"
-            4:
-                story_text: "## Ç'pritet më tej?\nNë nivelet e mëparshme ju keni mësuar tashmë të përdorni `{at} {random}` që i bënte lojërat tuaja të ndryshme sa herë që përdorni kodin.\nPor nuk është vërtet interaktive, lojtari nuk ka ndonjë ndikim në atë që ndodh në lojë.\n\nNë nivelin tjetër do të mësoni komandën `{if}`, që ju lejon të jepni përgjigje të ndryshme në programin tuaj. Në këtë mënyrë ju mund të programoni një fjalëkalim sekret për kompjuterin tuaj për shembull.\nPra, le të shikojmë!\n\n```\nfjalëkalimi {is} {ask} 'Cili është fjalëkalimi i saktë?'\n```\n"
-                start_code: "{print} 'Le të shkojmë në nivelin tjetër!'"
-            5:
-                story_text: "## Ç'pritet më tej?\nTani keni arritur në fund të këtij niveli, kështu që keni mësuar `{ask}` dhe `{if}`. Për shembull, ju mund të {ask}(pyesni) mysafirët se çfarë do të donin të hanin.\nAjo që nuk mund të bësh ende, është të llogarisësh çmimin për darkën e të gjithëve.\n\nNiveli tjetër bën të mundur përdorimin e mbledhjes, zbritjes dhe shumëzimit në programet tuaja. Në këtë mënyrë ju mund të llogaritni çmimet në restorantin tuaj, por gjithashtu mund të shtoni një kod sekret për t'u dhënë miqve dhe familjes suaj një zbritje.\nNjë tjetër mundësi në nivelin tjetër është programimi i lojës suaj matematikore, që vëllai ose motra juaj e vogël të praktikojë shumëzimet e tyre.\nShkoni shikoni vetë në nivelin tjetër!\n"
-                example_code: "## Pije falas!\n```\n{print} 'Mirëserdhe në McHedy'\nporosia {is} {ask} 'Çfarë do të dëshironit të hani?'\n{print} \"Do të dëshironit\" porosia\n{if} porosia {is} hamburger çmimi {is} 5\n{if} porosia {is} patate çmimi {is} 2\npijet {is} {ask} 'Çfarë do të dëshironit të pini?'\n{print} 'Do të donit' pijet\n{print} 'Ky do të jetë 'çmimi ' lek për ' porosia ' tuaj, ju lutem'\n{print} 'Pijet janë falas në këtë nivel sepse Hedy nuk mund të llogarisë ende çmimin...'\n```\n"
-                start_code: "{print} 'Në nivelin tjetër!'"
-            6:
-                story_text: "## Ç'pritet më tej?\n  Punë e mrekullueshme! Ju keni arritur në fund të këtij niveli, që do të thotë se keni ushtruar me komandat `{if}` dhe `{else}`. Ju ndoshta keni vënë re se kodet tuaja po bëhen gjithnjë e më të gjata.\n  Për shembull, {if}(nëse) dëshironi të programoni 'Happy Birthday'.\n\nKy është shumë kod për kryesisht të njëjtat fjalë pa pushim. Për fat të mirë në nivelin tjetër ka një zgjidhje me komandën `{repeat}`, që ju lejon të përsërisni një rresht kodi disa herë.\n"
-                example_code: "```\n{print} 'Gezuar Ditelindjen'\n{print} 'Gezuar Ditelindjen'\n{print} 'Gëzuar ditëlindjen e dashur Hedy'\n{print} 'Gezuar Ditelindjen'\n```\n"
-                start_code: "{print} 'Në nivelin tjetër!'"
-            8:
-                story_text: "## Ç'pritet më tej?\nPunë e mrekullueshme! Ju keni arritur në fund të një niveli tjetër! Në këtë nivel ju keni mësuar të përdorni disa rreshta kodi në një komandë {if} ose {repeat}. Por ju ende nuk mund t'i kombinoni të dyja ...\nLajme te mira! Në nivelin tjetër do t'ju lejohet të vendosni një {if} brenda një komande {if}, ose brenda një komande {repeat}.\n"
-                example_code: "```\npërgjigje = {ask} 'Dëshiron të shkosh në nivelin tjetër?'\n{if} përgjigjje {is} po\n     {print} 'Shkëlqyeshëm! Ju mund të përdorni komandën {repeat} në komandën {if}!'\n     {print} 'Ura!'\n     {print} 'Ura!'\n     {print} 'Ura!'\n{else}\n     {print} 'Mirë, mund të qëndroni këtu për pak më gjatë!'\n```\n"
-                start_code: "{print} 'Le të shkojmë në nivelin tjetër!'"
-            9:
-                story_text: "## Ç'pritet më tej?\nJu jeni duke bërë shumë! Në këtë nivel ne ende përballemi me një problem të vogël. Ju keni mësuar të përsërisni rreshtat, por çfarë nëse dëshironi të ndryshoni pak rreshtin.\nPër shembull, nëse doni të këndoni këngën '{if}(nëse) jeni të lumtur dhe e dini'. Do të dukej kështu:\n\nNëse do të dëshironit gjithashtu vargun tjetër 'shtypni këmbët', dhe tjetri dhe tjetri, duhet ta ndryshoni plotësisht kodin.\nNë nivelin tjetër do të mësoni komandën `{for}`, e cila ju lejon të bëni një listë veprimesh dhe të përsërisni kodin me një veprim tjetër çdo herë!\nJu lutemi hidhini një sy!\n"
-                example_code: "```\n{repeat} 2 {times}\n     {print} 'nëse je i lumtur dhe e di, duartrokit'\n{print} 'nëse je i lumtur dhe e di dhe dëshiron vërtet ta tregosh'\n{print} 'nëse je i lumtur dhe e di, duartrokit'\n```\n"
-                start_code: "{print} 'Le të shkojmë në nivelin tjetër!'"
-            10:
-                story_text: "## Ç'pritet më tej?\nJu keni arritur në fund të këtij niveli, ju jeni duke bërë shumë! Ju jeni gati për të shkuar në nivelin tjetër. Në nivelet më të larta, Hedy po fokusohet gjithnjë e më shumë në mësimin e gjuhës së programimit Python.\nNë Python nuk ka komandë `{repeat}`, por ka një komandë që funksionon si {repeat}. Jeni kurioz të mësoni se si të thoni `{repeat}` në gjuhën Python? Shpejt vazhdoni të zbuloni!\n"
-                start_code: "{print} 'Le të shkojmë në nivelin tjetër!'"
-            12:
-                story_text: "## Ç'pritet më tej?\nNë nivelet e mëparshme keni mësuar se si të vendosni dy komanda `{if}` brenda njëri-tjetrit. Kjo funksionon mirë, por ju jep kode shumë të gjata dhe të padobishme si ky:\n\nNë këtë sistem ju duhet të jepni emrin e saktë të përdoruesit dhe fjalëkalimin e saktë.\nNë nivelin tjetër do të mësoni komandën `{and}` që do ta bëjë këtë kod pak më të shkurtër dhe më të kuptueshëm!\nKontrolloje!\n"
-                example_code: "```\nemri_përdoruesit {is} {ask} 'Cili është emri juaj i përdoruesit?'\nfjalëkalimi {is} {ask} 'Cili është fjalëkalimi juaj?'\n{if} emri_përdoruesit {is} 'Hedy'\n     {if} fjalëkalimi {is} 'sekret'\n         {print} 'Mirë se vjen Hedy!'\n     {else}\n         {print} 'Qasja u refuzua'\n{else}\n     {print} 'Qasja u refuzua!'\n```\n"
-                start_code: "{print} 'Le të shkojmë në nivelin tjetër!'"
-            13:
-                story_text: "## Ç'pritet më tej?\nMe programin e mëposhtëm mund të llogaritni {if} keni kaluar një lëndë në shkollë (pra, një notë gjashtë ose më e lartë).\nJu mund të shihni se ky kod është jashtëzakonisht joefikas, për shkak të kodit shumë të gjatë në rreshtin 5.\nTë gjitha notat e ndryshme nga 1 deri në 5 duhej të programoheshin veçmas. Me fat për ju, në nivelin tjetër do të mësoni se si ta bëni këtë pa këtë kod jashtëzakonisht të gjatë!\n"
-                example_code: "```\nnota_parë = {ask} 'Çfarë rezultati morët në testin tuaj të parë?'\nnota_dytë = {ask} 'Çfarë rezultati morët në testin tuaj të dytë?'\nshuma {is} nota_parë + nota_dytë\nnota_mesatare {is} shuma / 2\n{if} nota_mesatare = 1 {or} nota_mesatare = 2 {or} nota_mesatare = 3 {or} nota_mesatare = 4 {or} nota_mesatare = 5\n     {print} 'Oh jo! E ke dështuar temën...'\n{else}\n     {print} 'Shkëlqyeshëm! E keni kaluar temën!'\n```\n"
-                start_code: "{print} 'Le të shkojmë në nivelin tjetër!'"
-            15:
-                story_text: "## Ç'pritet më tej?\nNë nivelin tjetër do të rritemi pak më shumë drejt kodit real Python. kodi thon. Do të mësoni gjithashtu se si të përputhni dy lista së bashku.\nNë këtë mënyrë ju mund të programoni një kod në të cilin kafsha e duhur përputhet me tingullin e duhur.\nSepse dy kodet më poshtë... Janë padyshim të pakuptimta!\n"
-                example_code: "```\nkafshët = 'pula', 'kali', 'lopa'\ntingujt = 'kllak', 'neiihh', 'muuuuu'\n{for} kafsha {in} kafshët\n     {print} 'Një ' kafsha ' thotë ' tingujt {at} {random}\n```\nJu gjithashtu mund të përpiqeni ta bëni atë të funksionojë në këtë mënyrë, por....\n```\nkafshët = 'pula', 'kali', 'lopa'\ntingujt = 'kllak', 'neiihh', 'muuuuu'\n{for} kafsha {in} kafshët\n     {for} tingull {in} tingujt\n         {print} 'Një ' kafsha ' thotë ' tingull\n```\n"
-                start_code: "{print} 'Le të shkojmë në nivelin tjetër!'"
-            16:
-                story_text: "## Ç'pritet më tej?\nNë nivelin tjetër është koha për një komandë të re. Ju mund të keni vënë re në nivelet e mëparshme se komandat `{if}` dhe `{else}` ndonjëherë nuk mjaftojnë.\nPër shembull në këtë kod:\n"
-                example_code: "```\n{print} 'Çfarë është për darkë sonte?'\nopsione = ['pica', 'brokoli', 'bishtaja']\nzgjedhur = opsione {at} {random}\n{if} zgjedhur = 'pica'\n     {print} 'E shijshme! Pica!'\n{else}\n     {print} 'Po...'\n```\n"
-                story_text_2: Në këtë kod do të ishte mirë të kishim 2 herë `{else}` kështu që mund të keni një opsion për brokolin dhe një për bishtajat. Niveli tjetër vjen me komandën e re `{elif}` që e bën të mundur këtë! Pra, shikoni nivelin tjetër tani!
-                start_code: "{print} 'Le të shkojmë në nivelin tjetër!'"
-            17:
-                story_text: "## Ç'pritet më tej?\nNë nivelin tjetër do të mësoni një mënyrë të vërtetë të përdorni komandën `{print}` si në gjuhën Python.\n"
-                start_code: "{print} 'Le të shkojmë në nivelin tjetër!'"
-            18:
-                story_text: "## Ç'pritet më tej?\nUrime! Ju keni arritur nivelin e fundit të Hedy! Kodi që keni krijuar këtu mund të kopjohet në mjedise reale Python, ose PyCharm, dhe mund të vazhdoni \ntë mësoni atje! Megjithatë, vini re se Python mund të lexojë vetëm komandat në anglisht, kështu që nëse keni përdorur gjuhë të tjera, do t'ju duhet të kaloni në anglisht tani.\n"
-                start_code: "{print} ('Punë e mrekullueshme!!!')"
-        name: Ç'pritet më tej?
-        description: Ç'pritet më tej?
-        default_save_name: Tjetra
     quizmaster:
         name: Drejtues konkursi
         description: Bëni kuizin tuaj!
@@ -784,10 +707,7 @@ adventures:
                 story_text: "You might have tried it in level 5 and 6, pressing the key linked to ```pressed``` multiple\ntimes. If you did, you noticed that this did nothing. but now that you have learned about repeat, we\ncan press keys multiple times! Make the turtle walk forward!\n"
                 start_code: '# place your code here'
                 example_code: "```\n{repeat} 3 {times} {if} x {is} {pressed} forward 15\n```\n"
-            8:
-                story_text: "## Press It!\nNow that you need to use indents for the {if} and {else} statements,\nyou will also have to indent code when using {pressed}! Don't worry,\nit works te same as with the other statements, see the example!\nPress another key instead of x and see what happens.\n"
-                example_code: "```\n{if} x {is} {pressed}\n    {print} 'Only the cool kids press the x key.'\n{else}\n    {print} 'The adventurous kids press something else.'\n```\n"
-                start_code: '# place your code here'
+
             9:
                 story_text: "Now that you know how to nest multiple statements, you can also do this with {pressed}!\nBy nesting a pressed in a {repeat} loop, you can repeatedly press buttons and make something happen.\nNow we know you could do this before, but by using the indents you have much more overview!\nTry it counting to 5, for example!\n"
                 story_text_2: "Besides counting, you can now also move the turtle in many more ways than only forward or backwards!\nTry making some figures by walking the turtle around!\n"
