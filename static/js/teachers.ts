@@ -2,7 +2,6 @@ import { modal } from './modal';
 import {getHighlighter, showAchievements, turnIntoAceEditor} from "./app";
 
 import DOMPurify from 'dompurify'
-import { stringify } from 'postcss';
 
 (function() {
     // Use this to make sure that we return a prompt when a user leaves the page without saving
