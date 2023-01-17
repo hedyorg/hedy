@@ -40,9 +40,9 @@ class TestsLevel3(HedyTester):
         dieren is Hond, Kat, Kangoeroe
         print dieren at random""")
 
-        expected = textwrap.dedent("""\
-        dieren = ['Hond', 'Kat', 'Kangoeroe']
-        print(f'{random.choice(dieren)}')""")
+        expected = HedyTester.dedent("dieren = ['Hond', 'Kat', 'Kangoeroe']",
+                                     HedyTester.list_access_transpiled("random.choice(dieren)"),
+                                     "print(f'{random.choice(dieren)}')")
 
         # check if result is in the expected list
         check_in_list = (lambda x: HedyTester.run_code(x) in ['Hond', 'Kat', 'Kangoeroe'])
@@ -59,9 +59,9 @@ class TestsLevel3(HedyTester):
         dieren is Hond, Kat, Kangoeroe
         print dieren at 1""")
 
-        expected = textwrap.dedent("""\
-        dieren = ['Hond', 'Kat', 'Kangoeroe']
-        print(f'{dieren[1-1]}')""")
+        expected = HedyTester.dedent("dieren = ['Hond', 'Kat', 'Kangoeroe']",
+                                     HedyTester.list_access_transpiled('dieren[1-1]'),
+                                     "print(f'{dieren[1-1]}')")
 
         check_in_list = (lambda x: HedyTester.run_code(x) == 'Hond')
 
@@ -77,9 +77,9 @@ class TestsLevel3(HedyTester):
         animaux est chien, chat, kangourou
         affiche animaux au hasard""")
 
-        expected = textwrap.dedent("""\
-        animaux = ['chien', 'chat', 'kangourou']
-        print(f'{random.choice(animaux)}')""")
+        expected = HedyTester.dedent("animaux = ['chien', 'chat', 'kangourou']",
+                                     HedyTester.list_access_transpiled('random.choice(animaux)'),
+                                     "print(f'{random.choice(animaux)}')")
 
         # check if result is in the expected list
         check_in_list = (lambda x: HedyTester.run_code(x) in ['chien', 'chat', 'kangourou'])
@@ -113,19 +113,34 @@ class TestsLevel3(HedyTester):
         code = textwrap.dedent("""\
             n is 1, 2, 3
             sleep n at 1""")
-        expected = HedyTester.dedent(
-            "n = ['1', '2', '3']",
-            HedyTester.sleep_command_transpiled("n[1-1]"))
+        expected = textwrap.dedent("""\
+        n = ['1', '2', '3']
+        try:
+          try:
+            n[1-1]
+          except IndexError:
+            raise Exception('catch_index_exception')
+          time.sleep(int(n[1-1]))
+        except ValueError:
+          raise Exception(f'While running your program the command <span class=\"command-highlighted\">sleep</span> received the value <span class=\"command-highlighted\">{n[1-1]}</span> which is not allowed. Try changing the value to a number.')""")
 
         self.multi_level_tester(max_level=11, code=code, expected=expected)
 
     def test_sleep_with_list_random(self):
+        self.maxDiff = None
         code = textwrap.dedent("""\
             n is 1, 2, 3
             sleep n at random""")
-        expected = HedyTester.dedent(
-            "n = ['1', '2', '3']",
-            HedyTester.sleep_command_transpiled("random.choice(n)"))
+        expected = textwrap.dedent("""\
+        n = ['1', '2', '3']
+        try:
+          try:
+            random.choice(n)
+          except IndexError:
+            raise Exception('catch_index_exception')
+          time.sleep(int(random.choice(n)))
+        except ValueError:
+          raise Exception(f'While running your program the command <span class=\"command-highlighted\">sleep</span> received the value <span class=\"command-highlighted\">{random.choice(n)}</span> which is not allowed. Try changing the value to a number.')""")
 
         self.multi_level_tester(max_level=11, code=code, expected=expected)
 
@@ -163,9 +178,9 @@ class TestsLevel3(HedyTester):
         állatok is kutya, macska, kenguru
         print állatok at random""")
 
-        expected = textwrap.dedent("""\
-        állatok = ['kutya', 'macska', 'kenguru']
-        print(f'{random.choice(állatok)}')""")
+        expected = HedyTester.dedent("állatok = ['kutya', 'macska', 'kenguru']",
+                                     HedyTester.list_access_transpiled("random.choice(állatok)"),
+                                     "print(f'{random.choice(állatok)}')")
 
         self.multi_level_tester(max_level=11, code=code, expected=expected)
 
@@ -183,10 +198,10 @@ class TestsLevel3(HedyTester):
         dier is dieren at random
         print dier""")
 
-        expected = textwrap.dedent("""\
-        dieren = ['hond', 'kat', 'kangoeroe']
-        dier = random.choice(dieren)
-        print(f'{dier}')""")
+        expected = HedyTester.dedent("dieren = ['hond', 'kat', 'kangoeroe']",
+                                     HedyTester.list_access_transpiled("random.choice(dieren)"),
+                                     "dier = random.choice(dieren)",
+                                     "print(f'{dier}')")
 
         self.multi_level_tester(
             max_level=11,
@@ -235,9 +250,9 @@ class TestsLevel3(HedyTester):
         antwoorden is ja, NEE!, misschien
         print antwoorden at random""")
 
-        expected = textwrap.dedent("""\
-        antwoorden = ['ja', 'NEE!', 'misschien']
-        print(f'{random.choice(antwoorden)}')""")
+        expected = HedyTester.dedent("antwoorden = ['ja', 'NEE!', 'misschien']",
+                                     HedyTester.list_access_transpiled("random.choice(antwoorden)"),
+                                     "print(f'{random.choice(antwoorden)}')")
 
         self.multi_level_tester(max_level=11, code=code, expected=expected)
 
@@ -246,9 +261,9 @@ class TestsLevel3(HedyTester):
         taart is 'appeltaart, choladetaart, kwarktaart'
         print 'we bakken een' taart at random""")
 
-        expected = textwrap.dedent("""\
-        taart = ['\\'appeltaart', 'choladetaart', 'kwarktaart\\'']
-        print(f'\\'we bakken een\\' {random.choice(taart)}')""")
+        expected = HedyTester.dedent("taart = ['\\'appeltaart', 'choladetaart', 'kwarktaart\\'']",
+                                     HedyTester.list_access_transpiled("random.choice(taart)"),
+                                     "print(f'\\'we bakken een\\' {random.choice(taart)}')")
 
         self.single_level_tester(code=code, expected=expected)
 
@@ -257,9 +272,9 @@ class TestsLevel3(HedyTester):
         taart is "appeltaart, choladetaart, kwarktaart"
         print 'we bakken een' taart at random""")
 
-        expected = textwrap.dedent("""\
-        taart = ['"appeltaart', 'choladetaart', 'kwarktaart"']
-        print(f'\\'we bakken een\\' {random.choice(taart)}')""")
+        expected = HedyTester.dedent("taart = ['\"appeltaart', 'choladetaart', 'kwarktaart\"']",
+                                     HedyTester.list_access_transpiled("random.choice(taart)"),
+                                     "print(f'\\'we bakken een\\' {random.choice(taart)}')")
 
         self.single_level_tester(code=code, expected=expected)
 
@@ -268,9 +283,9 @@ class TestsLevel3(HedyTester):
         taart is 'appeltaart', 'choladetaart', 'kwarktaart'
         print 'we bakken een' taart at random""")
 
-        expected = textwrap.dedent("""\
-        taart = ['\\'appeltaart\\'', '\\'choladetaart\\'', '\\'kwarktaart\\'']
-        print(f'\\'we bakken een\\' {random.choice(taart)}')""")
+        expected = HedyTester.dedent("taart = ['\\'appeltaart\\'', '\\'choladetaart\\'', '\\'kwarktaart\\'']",
+                                     HedyTester.list_access_transpiled('random.choice(taart)'),
+                                     "print(f'\\'we bakken een\\' {random.choice(taart)}')")
 
         self.single_level_tester(code=code, expected=expected)
 
@@ -279,9 +294,9 @@ class TestsLevel3(HedyTester):
         taart is "appeltaart", "choladetaart", "kwarktaart"
         print "we bakken een" taart at random""")
 
-        expected = textwrap.dedent("""\
-        taart = ['"appeltaart"', '"choladetaart"', '"kwarktaart"']
-        print(f'"we bakken een" {random.choice(taart)}')""")
+        expected = HedyTester.dedent("taart = ['\"appeltaart\"', '\"choladetaart\"', '\"kwarktaart\"']",
+                                     HedyTester.list_access_transpiled('random.choice(taart)'),
+                                     "print(f'\"we bakken een\" {random.choice(taart)}')")
 
         self.single_level_tester(code=code, expected=expected)
 
@@ -310,10 +325,10 @@ class TestsLevel3(HedyTester):
         directions is 10, 100, 360
         forward directions at random""")
 
-        expected = HedyTester.dedent("""\
-        directions = ['10', '100', '360']""",
+        expected = HedyTester.dedent("directions = ['10', '100', '360']",
+                                     HedyTester.list_access_transpiled('random.choice(directions)'),
                                      HedyTester.forward_transpiled('random.choice(directions)', self.level))
-
+        print(expected)
         self.multi_level_tester(
             max_level=11,
             code=code,
@@ -340,8 +355,8 @@ class TestsLevel3(HedyTester):
         directions is 10, 100, 360
         turn directions at random""")
 
-        expected = HedyTester.dedent("""\
-        directions = ['10', '100', '360']""",
+        expected = HedyTester.dedent("directions = ['10', '100', '360']",
+                                     HedyTester.list_access_transpiled('random.choice(directions)'),
                                      HedyTester.turn_transpiled('random.choice(directions)', self.level))
 
         self.multi_level_tester(
@@ -404,10 +419,10 @@ class TestsLevel3(HedyTester):
         add muis to dieren
         print dieren at random""")
 
-        expected = textwrap.dedent("""\
-        dieren = ['koe', 'kiep']
-        dieren.append('muis')
-        print(f'{random.choice(dieren)}')""")
+        expected = HedyTester.dedent("dieren = ['koe', 'kiep']",
+                                     "dieren.append('muis')",
+                                     HedyTester.list_access_transpiled("random.choice(dieren)"),
+                                     "print(f'{random.choice(dieren)}')")
 
         self.multi_level_tester(
             code=code,
@@ -426,18 +441,12 @@ class TestsLevel3(HedyTester):
         add 4 to numbers
         print numbers at random""")
 
-        expected = textwrap.dedent("""\
-        numbers = ['1', '2']
-        try:
-          numbers.remove('1')
-        except:
-          pass
-        try:
-          numbers.remove('2')
-        except:
-          pass
-        numbers.append('4')
-        print(f'{random.choice(numbers)}')""")
+        expected = HedyTester.dedent("numbers = ['1', '2']",
+                                     HedyTester.remove_transpiled('numbers', "'1'"),
+                                     HedyTester.remove_transpiled('numbers', "'2'"),
+                                     "numbers.append('4')",
+                                     HedyTester.list_access_transpiled("random.choice(numbers)"),
+                                     "print(f'{random.choice(numbers)}')")
 
         self.multi_level_tester(
             code=code,
@@ -452,10 +461,10 @@ class TestsLevel3(HedyTester):
         add mui's to dieren
         print dieren at random""")
 
-        expected = textwrap.dedent("""\
-        dieren = ['koe', 'kiep']
-        dieren.append('mui\\\'s')
-        print(f'{random.choice(dieren)}')""")
+        expected = HedyTester.dedent("dieren = ['koe', 'kiep']",
+                                     "dieren.append('mui\\\'s')",
+                                     HedyTester.list_access_transpiled("random.choice(dieren)"),
+                                     "print(f'{random.choice(dieren)}')")
 
         self.multi_level_tester(
             code=code,
@@ -470,10 +479,10 @@ class TestsLevel3(HedyTester):
         add mui"s to dieren
         print dieren at random""")
 
-        expected = textwrap.dedent("""\
-        dieren = ['koe', 'kiep']
-        dieren.append('mui"s')
-        print(f'{random.choice(dieren)}')""")
+        expected = HedyTester.dedent("dieren = ['koe', 'kiep']",
+                                     "dieren.append('mui\"s')",
+                                     HedyTester.list_access_transpiled("random.choice(dieren)"),
+                                     "print(f'{random.choice(dieren)}')")
 
         self.multi_level_tester(
             code=code,
@@ -488,10 +497,10 @@ class TestsLevel3(HedyTester):
         add 5 to dieren
         print dieren at random""")
 
-        expected = textwrap.dedent("""\
-        dieren = ['koe', 'kiep']
-        dieren.append('5')
-        print(f'{random.choice(dieren)}')""")
+        expected = HedyTester.dedent("dieren = ['koe', 'kiep']",
+                                     "dieren.append('5')",
+                                     HedyTester.list_access_transpiled("random.choice(dieren)"),
+                                     "print(f'{random.choice(dieren)}')")
 
         self.multi_level_tester(
             code=code,
@@ -506,13 +515,10 @@ class TestsLevel3(HedyTester):
         remove kiep from dieren
         print dieren at random""")
 
-        expected = textwrap.dedent("""\
-        dieren = ['koe', 'kiep']
-        try:
-          dieren.remove('kiep')
-        except:
-          pass
-        print(f'{random.choice(dieren)}')""")
+        expected = HedyTester.dedent("dieren = ['koe', 'kiep']",
+                                     HedyTester.remove_transpiled('dieren', "'kiep'"),
+                                     HedyTester.list_access_transpiled('random.choice(dieren)'),
+                                     "print(f'{random.choice(dieren)}')")
 
         self.multi_level_tester(
             code=code,
@@ -526,14 +532,10 @@ class TestsLevel3(HedyTester):
         dieren is koe, kiep's
         remove kiep's from dieren
         print dieren at random""")
-
-        expected = textwrap.dedent("""\
-        dieren = ['koe', 'kiep\\\'s']
-        try:
-          dieren.remove('kiep\\\'s')
-        except:
-          pass
-        print(f'{random.choice(dieren)}')""")
+        expected = HedyTester.dedent("dieren = ['koe', 'kiep\\\'s']",
+                                     HedyTester.remove_transpiled('dieren', "'kiep\\\'s'"),
+                                     HedyTester.list_access_transpiled('random.choice(dieren)'),
+                                     "print(f'{random.choice(dieren)}')")
 
         self.multi_level_tester(
             code=code,
@@ -548,13 +550,10 @@ class TestsLevel3(HedyTester):
         remove kiep"s from dieren
         print dieren at random""")
 
-        expected = textwrap.dedent("""\
-        dieren = ['koe', 'kiep"s']
-        try:
-          dieren.remove('kiep"s')
-        except:
-          pass
-        print(f'{random.choice(dieren)}')""")
+        expected = HedyTester.dedent("dieren = ['koe', 'kiep\"s']",
+                                     HedyTester.remove_transpiled('dieren', "'kiep\"s'"),
+                                     HedyTester.list_access_transpiled("random.choice(dieren)"),
+                                     "print(f'{random.choice(dieren)}')")
 
         self.multi_level_tester(
             code=code,
@@ -569,10 +568,10 @@ class TestsLevel3(HedyTester):
         add absoluut niet to opties
         print opties at random""")
 
-        expected = textwrap.dedent("""\
-        opties = ['zeker weten', 'misschien wel']
-        opties.append('absoluut niet')
-        print(f'{random.choice(opties)}')""")
+        expected = HedyTester.dedent("opties = ['zeker weten', 'misschien wel']",
+                                     "opties.append('absoluut niet')",
+                                     HedyTester.list_access_transpiled("random.choice(opties)"),
+                                     "print(f'{random.choice(opties)}')")
 
         self.multi_level_tester(
             max_level=11,
@@ -595,11 +594,11 @@ class TestsLevel3(HedyTester):
         add color to colors
         print colors at random""")
 
-        expected = textwrap.dedent("""\
-        color = input('what is your favorite color?')
-        colors = ['green', 'red', 'blue']
-        colors.append(color)
-        print(f'{random.choice(colors)}')""")
+        expected = HedyTester.dedent("color = input('what is your favorite color?')",
+                                     "colors = ['green', 'red', 'blue']",
+                                     "colors.append(color)",
+                                     HedyTester.list_access_transpiled("random.choice(colors)"),
+                                     "print(f'{random.choice(colors)}')")
 
         self.single_level_tester(code=code, expected=expected)
 
@@ -610,14 +609,11 @@ class TestsLevel3(HedyTester):
         remove color from colors
         print colors at random""")
 
-        expected = textwrap.dedent("""\
-        colors = ['green', 'red', 'blue']
-        color = input('what color to remove?')
-        try:
-          colors.remove(color)
-        except:
-          pass
-        print(f'{random.choice(colors)}')""")
+        expected = HedyTester.dedent("colors = ['green', 'red', 'blue']",
+                                     "color = input('what color to remove?')",
+                                     HedyTester.remove_transpiled('colors', 'color'),
+                                     HedyTester.list_access_transpiled('random.choice(colors)'),
+                                     "print(f'{random.choice(colors)}')")
 
         self.single_level_tester(code=code, expected=expected)
 
@@ -704,3 +700,23 @@ class TestsLevel3(HedyTester):
             code=code,
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
+
+    def test_3778_at_index(self):
+        code = textwrap.dedent("""\
+        l is 1, 2, 3
+        print l at 3""")
+        expected = HedyTester.dedent("l = ['1', '2', '3']",
+                                     HedyTester.list_access_transpiled("l[3-1]"),
+                                     "print(f'{l[3-1]}')")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=11)
+
+    def test_3778_at_random(self):
+        code = textwrap.dedent("""\
+        l is 1, 2, 3
+        print l at random""")
+        expected = HedyTester.dedent("l = ['1', '2', '3']",
+                                     HedyTester.list_access_transpiled("random.choice(l)"),
+                                     "print(f'{random.choice(l)}')")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=11)

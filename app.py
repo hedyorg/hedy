@@ -4,6 +4,7 @@ import copy
 import datetime
 import json
 import logging
+import re
 import os
 import sys
 import textwrap
@@ -12,7 +13,7 @@ import zipfile
 from logging.config import dictConfig as logConfig
 from os import path
 
-from babel import Locale
+import static_babel_content
 from flask import (Flask, Markup, Response, abort, after_this_request, g,
                    jsonify, make_response, redirect, request, send_file,
                    send_from_directory, session)
@@ -33,8 +34,7 @@ from hedy_content import (ADVENTURE_ORDER_PER_LEVEL, ALL_KEYWORD_LANGUAGES,
                           ALL_LANGUAGES, COUNTRIES,
                           NON_LATIN_LANGUAGES)
 from logging_config import LOGGING_CONFIG
-from utils import dump_yaml_rt, is_debug_mode, load_yaml_rt, timems, version, debug_only
-import alternative_error_messages
+from utils import dump_yaml_rt, is_debug_mode, load_yaml_rt, timems, version, strip_accents
 from website import (ab_proxying, achievements, admin, auth_pages, aws_helpers,
                      cdn, classes, database, for_teachers, jsonbin, parsons,
                      profile, programs, querylog, quiz, statistics,
@@ -82,6 +82,10 @@ for lang in ALL_LANGUAGES.keys():
 TUTORIALS = collections.defaultdict(hedy_content.NoSuchTutorial)
 for lang in ALL_LANGUAGES.keys():
     TUTORIALS[lang] = hedy_content.Tutorials(lang)
+
+SLIDES = collections.defaultdict(hedy_content.NoSuchSlides)
+for lang in ALL_LANGUAGES.keys():
+    SLIDES[lang] = hedy_content.Slides(lang)
 
 ACHIEVEMENTS_TRANSLATIONS = hedyweb.AchievementTranslations()
 DATABASE = database.Database()
@@ -274,9 +278,7 @@ def setup_language():
     # Switch to "right-to-left" if one of the language is rtl according to Locale (from Babel) settings.
     # This is the only place to expand / shrink the list of RTL languages ->
     # front-end is fixed based on this value
-    g.dir = "ltr"
-    if Locale(g.lang).text_direction in ["ltr", "rtl"]:
-        g.dir = Locale(g.lang).text_direction
+    g.dir = static_babel_content.TEXT_DIRECTIONS.get(g.lang, 'ltr')
 
     # Check that requested language is supported, otherwise return 404
     if g.lang not in ALL_LANGUAGES.keys():
@@ -720,6 +722,7 @@ def version_page():
                            commit=commit)
 
 
+@app.route('/my-achievements')
 def achievements_page():
     user = current_user()
     username = user['username']
@@ -1118,9 +1121,10 @@ def view_program(user, id):
     return render_template("view-program-page.html", blur_button_available=True, **arguments_dict)
 
 
-@app.route('/adventure/<name>', methods=['GET'], defaults={'level': 1})
-@app.route('/adventure/<name>/<level>', methods=['GET'])
-def get_specific_adventure(name, level):
+@app.route('/adventure/<name>', methods=['GET'], defaults={'level': 1, 'mode': 'full'})
+@app.route('/adventure/<name>/<level>', methods=['GET'], defaults={'mode': 'full'})
+@app.route('/adventure/<name>/<level>/<mode>', methods=['GET'])
+def get_specific_adventure(name, level, mode):
     try:
         level = int(level)
     except BaseException:
@@ -1145,6 +1149,7 @@ def get_specific_adventure(name, level):
 
     # Add the commands to enable the language switcher dropdown
     commands = hedy.commands_per_level.get(level)
+    raw = mode == 'raw'
 
     return hedyweb.render_specific_adventure(
         commands=commands,
@@ -1152,7 +1157,8 @@ def get_specific_adventure(name, level):
         adventure=adventure,
         version=version(),
         prev_level=prev_level,
-        next_level=next_level)
+        next_level=next_level,
+        raw=raw)
 
 
 @app.route('/cheatsheet/', methods=['GET'], defaults={'level': 1})
@@ -1227,12 +1233,6 @@ def internal_error(exception):
     import traceback
     print(traceback.format_exc())
     return utils.error_page(error=500)
-
-
-@app.route('/index.html')
-@app.route('/')
-def default_landing_page():
-    return main_page('start')
 
 
 @app.route('/signup', methods=['GET'])
@@ -1322,41 +1322,72 @@ def get_research(filename):
     return send_from_directory('content/research/', filename)
 
 
-@app.route('/<page>')
-def main_page(page):
-    if page == 'favicon.ico':
-        abort(404)
+@app.route('/favicon.ico')
+def favicon(page):
+    abort(404)
 
-    if page == "my-achievements":
-        return achievements_page()
 
-    if page == 'learn-more':
-        learn_more_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
-        return render_template(
-            'learn-more.html',
-            papers=hedy_content.RESEARCH,
-            page_title=gettext('title_learn-more'),
-            current_page='learn-more',
-            content=learn_more_translations)
+@app.route('/')
+@app.route('/start')
+@app.route('/index.html')
+def main_page():
+    sections = hedyweb.PageTranslations('start').get_page_translations(g.lang)['start-sections']
 
-    if page == 'join':
-        join_translations = hedyweb.PageTranslations(page).get_page_translations(g.lang)
-        return render_template('join.html', page_title=gettext('title_learn-more'),
-                               current_page='join', content=join_translations)
+    sections = sections[:]
 
-    if page == 'privacy':
-        privacy_translations = hedyweb.PageTranslations(
-            page).get_page_translations(g.lang)
-        return render_template('privacy.html', page_title=gettext('title_privacy'),
-                               content=privacy_translations)
+    # Sections have 'title', 'text'
+    # Annotate sections with display styles, based on the order which we know sections will appear
+    # Styles are one of: 'block', 'pane-with-image-{left,right}', 'columns'
+    # Do this by mutating the list in place
+    content = []
+    content.append(dict(style='block', **sections.pop(0)))
 
-    requested_page = hedyweb.PageTranslations(page)
-    if not requested_page.exists():
-        abort(404)
+    section_images = [
+        '/images/hedy-multilang.png',
+        '/images/hedy-grows.png',
+        '/images/hedy-classroom.png'
+    ]
 
-    main_page_translations = requested_page.get_page_translations(g.lang)
+    for i, image in enumerate(section_images):
+        if not sections:
+            break
+        content.append(dict(
+            style='pane-with-image-' + ('right' if i % 2 == 0 else 'left'),
+            image=image,
+            **sections.pop(0)))
+
+    if sections:
+        content.append(dict(style='block', **sections.pop(0)))
+    if sections:
+        content.append(dict(style='columns', columns=sections))
+
     return render_template('main-page.html', page_title=gettext('title_start'),
-                           current_page='start', content=main_page_translations)
+                           current_page='start', content=content)
+
+
+@app.route('/learn-more')
+def learn_more():
+    learn_more_translations = hedyweb.PageTranslations('learn-more').get_page_translations(g.lang)
+    return render_template(
+        'learn-more.html',
+        papers=hedy_content.RESEARCH,
+        page_title=gettext('title_learn-more'),
+        current_page='learn-more',
+        content=learn_more_translations)
+
+
+@app.route('/join')
+def join():
+    join_translations = hedyweb.PageTranslations('join').get_page_translations(g.lang)
+    return render_template('join.html', page_title=gettext('title_learn-more'),
+                           current_page='join', content=join_translations)
+
+
+@app.route('/privacy')
+def privacy():
+    privacy_translations = hedyweb.PageTranslations('privacy').get_page_translations(g.lang)
+    return render_template('privacy.html', page_title=gettext('title_privacy'),
+                           content=privacy_translations)
 
 
 @app.route('/landing-page/', methods=['GET'], defaults={'first': False})
@@ -1506,11 +1537,25 @@ def change_language():
     session['lang'] = body.get('lang')
     return jsonify({'succes': 200})
 
-@app.route('/change_language/<lang>', methods=['GET'])
-@debug_only
-def change_language_to(lang):
-    session['lang'] = lang
-    return redirect('/hedy')
+
+@app.route('/slides', methods=['GET'], defaults={'level': '1'})
+@app.route('/slides/<level>', methods=['GET'])
+def get_slides(level):
+    # In case of a "forced keyword language" -> load that one, otherwise: load
+    # the one stored in the g object
+
+    keyword_language = request.args.get('keyword_language', default=g.keyword_lang, type=str)
+
+    try:
+        level = int(level)
+    except ValueError:
+        return utils.error_page(error=404, ui_message="Slides do not exist!")
+
+    if not SLIDES[g.lang].get_slides_for_level(level, keyword_language):
+        return utils.error_page(error=404, ui_message="Slides do not exist!")
+
+    slides = SLIDES[g.lang].get_slides_for_level(level, keyword_language)
+    return render_template('slides.html', slides=slides)
 
 
 @app.route('/translate_keywords', methods=['POST'])
@@ -1636,6 +1681,23 @@ def nl2br(x):
     return x.replace('\n', Markup('<br />'))
 
 
+SLUGIFY_RE = re.compile('[^a-z0-9_]+')
+
+
+@app.template_filter()
+def slugify(s):
+    """Convert arbitrary text into a text that's safe to use in a URL."""
+    if s is None:
+        return None
+    return SLUGIFY_RE.sub('-', strip_accents(s).lower())
+
+
+@app.template_filter()
+def chunk(x, size):
+    """Chunk a list into groups of size at most 'size'."""
+    return (x[pos:pos + size] for pos in range(0, len(x), size))
+
+
 @app.template_global()
 def hedy_link(level_nr, assignment_nr, subpage=None):
     """Make a link to a Hedy page."""
@@ -1655,23 +1717,27 @@ def all_countries():
 
 @app.template_global()
 def other_languages():
+    """Return a list of language objects that are NOT the current language."""
     current_lang = g.lang
     return [make_lang_obj(lang) for lang in ALL_LANGUAGES.keys() if lang != current_lang]
 
 
 @app.template_global()
 def other_keyword_languages():
+    """Return a list of language objects that are NOT the current language, and that have translated keywords."""
     current_lang = g.lang
     return [make_lang_obj(lang) for lang in ALL_KEYWORD_LANGUAGES.keys() if lang != current_lang]
 
 
 @app.template_global()
 def keyword_languages():
+    """Return a list of language objects that have translated keywords."""
     return [make_lang_obj(lang) for lang in ALL_KEYWORD_LANGUAGES.keys()]
 
 
 @app.template_global()
 def keyword_languages_keys():
+    """Return the language codes for all languages that have translated keywords."""
     return [lang for lang in ALL_KEYWORD_LANGUAGES.keys()]
 
 

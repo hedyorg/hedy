@@ -1712,13 +1712,13 @@ levels:
             question_score: '10'
         3:
             mp_choice_options:
-            -   option: "Baby shark tututudutudu \n Baby shark"
+            -   option: "Baby shark tututudutudu\nBaby shark"
                 feedback: Mind the `{repeat}` command!
-            -   option: "Baby shark tututudutudu \n Baby shark \n Baby shark tututudutudu \n Baby shark \n Baby shark tututudutudu \n Baby shark"
+            -   option: "Baby shark tututudutudu\nBaby shark\nBaby shark tututudutudu\nBaby shark\nBaby shark tututudutudu\nBaby shark"
                 feedback: The last line has no indentation, so it's not repeated.
-            -   option: "Baby shark tututudutudu \n Baby shark tututudutudu \n Baby shark tututudutudu \n Baby shark"
+            -   option: "Baby shark tututudutudu\nBaby shark tututudutudu\nBaby shark tututudutudu\nBaby shark"
                 feedback: Right!
-            -   option: "Baby shark tututudutudu \n Baby shark \n Baby shark \n Baby shark"
+            -   option: "Baby shark tututudutudu\nBaby shark\nBaby shark\nBaby shark"
                 feedback: What is being repeated and what isn't.
             question_text: What output will be produced when you run this program?
             code: "{repeat} 3 {times}\n    {print} 'Baby shark tututudutudu'\n{print} 'Baby shark'"
@@ -1727,13 +1727,13 @@ levels:
             question_score: '10'
         1:
             mp_choice_options:
-            -   option: "Hello \n Im Hedy!"
+            -   option: "Hello\nIm Hedy!"
                 feedback: Everything is printed twice.
-            -   option: "Hello \n Hello \n Im Hedy"
+            -   option: "Hello\nHello\nIm Hedy"
                 feedback: The second line is repeated twice as well.
-            -   option: "Hello \n Im Hedy! \n Hello \n Im Hedy!"
+            -   option: "Hello\nIm Hedy!\nHello\nIm Hedy!"
                 feedback: Super!
-            -   option: "Hello \n Hello \n Im Hedy! \n Im Hedy!"
+            -   option: "Hello\nHello\nIm Hedy!\nIm Hedy!"
                 feedback: Everything is printed twice
             question_text: Which output will be produced by this code?
             code: "{repeat} 2 {times}\n    {print} 'Hello'\n    {print} 'Im Hedy!'"
@@ -1742,13 +1742,13 @@ levels:
             question_score: '10'
         4:
             mp_choice_options:
-            -   option: "The children went: \n Yay! \n Were going on holiday!"
+            -   option: "The children went:\nYay!\nWere going on holiday!"
                 feedback: Mind the `{repeat}` command !
-            -   option: "The children went: \n Yay! \n Were going on holiday! \n Yay! \n Were going on holiday!"
+            -   option: "The children went:\nYay!\nWere going on holiday!\nYay!\nWere going on holiday!"
                 feedback: Correct!
             -   feedback: This order is incorrect.
-                option: "The children went: \n Yay! \n Yay! \n Were going on holiday! \n Were going on holiday!"
-            -   option: "The children went: \n Yay! \n Yay! \n Were going on holiday!"
+                option: "The children went:\nYay!\nYay!\nWere going on holiday!\nWere going on holiday!"
+            -   option: "The children went:\nYay!\nYay!\nWere going on holiday!"
                 feedback: The last line is repeated too.
             question_text: Which output is correct?
             code: "{print} 'The children went:'\n{repeat} 2 {times}\n    {print} 'Yay!'\n    {print} 'Were going on holiday!'"
@@ -1876,13 +1876,13 @@ levels:
             correct_answer: D
         2:
             mp_choice_options:
-            -   option: "Good job! \n Good job!"
+            -   option: "Good job!\nGood job!"
                 feedback: That's not it!
             -   option: The computer will explode in 5... 4... 3... 2... 1...
                 feedback: That's not it!
-            -   option: "Good job ! \n Good job! \n You can use the computer!"
+            -   option: "Good job !\nGood job!\nYou can use the computer!"
                 feedback: That's not it!
-            -   option: "Good job! \n You can use the computer! \n Good job! \n You can use the computer!"
+            -   option: "Good job!\nYou can use the computer!\nGood job!\nYou can use the computer!"
                 feedback: Correct!
             question_text: What will be printed after entering the correct password?
             code: "password = {ask} 'What is the password?'\ncorrect_password = Hedy\n{if} password {is} correct_password\n    {repeat} 2 {times}\n        {print} 'Good job!'\n        {print} 'You can use the computer!'\n{else}\n    {print} 'The computer will explode in 5... 4... 3... 2... 1...'"

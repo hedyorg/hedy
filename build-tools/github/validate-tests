@@ -13,7 +13,6 @@ echo "------> Python unit tests"
 if [[ "${1:-}" == "--all" ]]; then
   python -m pytest --ignore=tests/test_public_programs
 elif [[ "${1:-}" == "--weblate" ]]; then
-  export only_new_snippets=1   # set environment var, will not work on Windows, but defaults to 0/False in tests!
   python -m pytest tests/test_snippets/test_adventures.py -s --tb=no -rN
   python -m pytest tests/test_snippets/test_cheatsheets.py -s --tb=no -rN
   python -m pytest tests/test_snippets/test_parsons.py -s --tb=no -rN

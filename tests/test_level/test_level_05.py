@@ -493,13 +493,13 @@ class TestsLevel5(HedyTester):
         else
         print 'luckily no dishes because' dishwasher 'is already washing up'""")
 
-        expected = textwrap.dedent("""\
-        people = ['mom', 'dad', 'Emma', 'Sophie']
-        dishwasher = random.choice(people)
-        if dishwasher == 'Sophie':
-          print(f'too bad I have to do the dishes')
-        else:
-          print(f'luckily no dishes because{dishwasher}is already washing up')""")
+        expected = HedyTester.dedent("people = ['mom', 'dad', 'Emma', 'Sophie']",
+                                     HedyTester.list_access_transpiled('random.choice(people)'),
+                                     "dishwasher = random.choice(people)",
+                                     "if dishwasher == 'Sophie':",
+                                     ("print(f'too bad I have to do the dishes')", '  '),
+                                     "else:",
+                                     ("print(f'luckily no dishes because{dishwasher}is already washing up')", '  '))
 
         self.single_level_tester(code=code, expected=expected)
 
@@ -697,8 +697,9 @@ class TestsLevel5(HedyTester):
 
         expected = HedyTester.dedent(
             """\
-            angle = ['90', '180', '270']
-            direction = random.choice(angle)""",
+            angle = ['90', '180', '270']""",
+            HedyTester.list_access_transpiled('random.choice(angle)'),
+            "direction = random.choice(angle)",
             HedyTester.turn_transpiled('direction', self.level),
             "if direction == '180':",
             (HedyTester.forward_transpiled(100, self.level), '  '))
@@ -714,9 +715,10 @@ class TestsLevel5(HedyTester):
 
         expected = HedyTester.dedent(
             """\
-            angle = ['90', '180', '270']
-            direction = random.choice(angle)
-            if direction == '180':""",
+            angle = ['90', '180', '270']""",
+            HedyTester.list_access_transpiled('random.choice(angle)'),
+            "direction = random.choice(angle)",
+            "if direction == '180':",
             (HedyTester.forward_transpiled('direction', self.level), '  '),
             "else:",
             (HedyTester.turn_transpiled('direction', self.level), '  '))
@@ -729,10 +731,10 @@ class TestsLevel5(HedyTester):
         friend is friends at 2
         print friend""")
 
-        expected = textwrap.dedent("""\
-        friends = ['Hedy', 'Lola', 'Frida']
-        friend = friends[2-1]
-        print(f'{friend}')""")
+        expected = HedyTester.dedent("friends = ['Hedy', 'Lola', 'Frida']",
+                                     HedyTester.list_access_transpiled('friends[2-1]'),
+                                     "friend = friends[2-1]",
+                                     "print(f'{friend}')")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 

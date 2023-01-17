@@ -98,8 +98,8 @@
         kolor {is} {ask} 'Jaki {is} twój ulubiony kolor?'
         {if} kolor {in} ładne_kolory {print} 'ładny!' {else} {print} 'meh'
 -   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
-    demo_code: "{if} a {is} {pressed} {print} 'You pressed A!' {else} {print} 'You pressed another key!'"
+    explanation: Sprawdza czy dany klawisz na klawiaturze jest `{pressed}`.
+    demo_code: "{if} a {is} {pressed} {print} 'Nacisnąłeś A!' {else} {print} 'Nacisnąłeś inny klawisz!'"
 6:
 -   name: "{print}"
     explanation: "Napisz dokładnie używając apostrofów."
@@ -153,9 +153,9 @@
         {repeat} 4 {times}
             {turn} 90
             {forward} 50
--   demo_code: "{if} a {is} {pressed}\n    {print} 'You pressed A!'\n{else}\n    {print} 'You pressed another key!'"
+-   demo_code: "{if} a {is} {pressed}\n    {print} 'Nacisnąłeś A!'\n{else}\n    {print} 'Nacisnąłeś inny klawisz!'"
     name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
+    explanation: Sprawdza czy dany klawisz jest `{pressed}`.
 9:
 -   name: "{if} z wieloma liniami"
     explanation: "Odpowiedź sumy pytań za pomocą `{ask}` i sprawdź czy są poprawne. Teraz drukujemy dwie linie."
@@ -202,24 +202,24 @@
 12:
 -   name: "float directly"
     explanation: "Liczby dziesiętne."
-    demo_code: |
+    demo_code: |-
         {print} 'Wykalkuluj!'
         {print} 'Dwa i pół plus dwa i pół to...'
         {print} 2.5 + 2.5
 -   name: "assign text"
     explanation: "Tekst z apostrofami po `=`"
-    demo_code: |
+    demo_code: |-
         imię = 'Robot Hedy'
         {print} 'Witaj ' imię
 -   name: "nawiasy po porównaniu {if}"
     explanation: "Tekst z apostrofami po `{if}`."
-    demo_code: |
+    demo_code: |-
         imię = {ask} 'Kim jesteś?'
         {if} imię = 'Hedy'
             {print} 'Witaj!'
 -   name: "apostrofy w liście"
     explanation: "Lista wykorzystująca apostrofy."
-    demo_code: |
+    demo_code: |-
         superbohaterowie = 'Iron Man', 'Batman', 'Superman'
         {print} superbohaterowie {at} {random}
 13:

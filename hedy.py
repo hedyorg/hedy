@@ -1,6 +1,7 @@
 import textwrap
 
 import lark
+from flask_babel import gettext
 from lark import Lark
 from lark.exceptions import UnexpectedEOF, UnexpectedCharacters, VisitError
 from lark import Tree, Transformer, visitors, v_args
@@ -178,7 +179,6 @@ class Command:
     remove_from_list = 'remove from list'
     list_access = 'at random'
     in_list = 'in list'
-    not_in_list = 'not in list'
     equality = 'is (equality)'
     repeat = 'repeat'
     for_list = 'for in'
@@ -206,7 +206,6 @@ translatable_commands = {Command.print: ['print'],
                          Command.remove_from_list: ['remove', 'from'],
                          Command.list_access: ['at', 'random'],
                          Command.in_list: ['in'],
-                         Command.not_in_list: ['not in', 'not'],
                          Command.equality: ['is', '=', '=='],
                          Command.repeat: ['repeat', 'times'],
                          Command.for_list: ['for', 'in'],
@@ -290,7 +289,6 @@ commands_and_types_per_level = {
     Command.sleep: {1: [HedyType.integer, HedyType.input]},
     Command.list_access: {1: [HedyType.list]},
     Command.in_list: {1: [HedyType.list]},
-    Command.not_in_list: {1: [HedyType.list]},
     Command.add_to_list: {1: [HedyType.list]},
     Command.remove_from_list: {1: [HedyType.list]},
     Command.equality: {1: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float],
@@ -650,10 +648,6 @@ class TypeValidator(Transformer):
 
     def in_list_check(self, tree):
         self.validate_args_type_allowed(Command.in_list, tree.children[1], tree.meta)
-        return self.to_typed_tree(tree, HedyType.boolean)
-
-    def not_in_list_check(self, tree):
-        self.validate_args_type_allowed(Command.not_in_list, tree.children[1], tree.meta)
         return self.to_typed_tree(tree, HedyType.boolean)
 
     def equality_check(self, tree):
@@ -1030,8 +1024,6 @@ class AllCommands(Transformer):
             return 'while'
         if keyword == 'in_list_check':
             return 'in'
-        if keyword == 'not_in_list_check':
-            return 'not_in'
         if keyword == 'input_empty_brackets':
             return 'input'
         if keyword == 'print_empty_brackets':
@@ -1452,20 +1444,23 @@ class ConvertToPython_1(ConvertToPython):
                                                           allowed_types=get_allowed_types(Command.turn, self.level))
 
     def make_turn(self, parameter):
-        return self.make_turtle_command(parameter, Command.turn, 'right', False)
+        return self.make_turtle_command(parameter, Command.turn, 'right', False, 'int')
 
     def make_forward(self, parameter):
-        return self.make_turtle_command(parameter, Command.forward, 'forward', True)
+        return self.make_turtle_command(parameter, Command.forward, 'forward', True, 'int')
 
     def make_color(self, parameter):
         return self.make_turtle_color_command(parameter, Command.color, 'pencolor')
 
-    def make_turtle_command(self, parameter, command, command_text, add_sleep):
+    def make_turtle_command(self, parameter, command, command_text, add_sleep, type):
+        exception = ''
+        if isinstance(parameter, str):
+            exception = self.make_catch_exception([parameter])
         variable = self.get_fresh_var('__trtl')
-        transpiled = textwrap.dedent(f"""\
+        transpiled = exception + textwrap.dedent(f"""\
             {variable} = {parameter}
             try:
-              {variable} = int({variable})
+              {variable} = {type}({variable})
             except ValueError:
               raise Exception(f'While running your program the command {style_command(command)} received the value {style_command('{' + variable + '}')} which is not allowed. Try changing the value to a number.')
             t.{command_text}(min(600, {variable}) if {variable} > 0 else max(-600, {variable}))""")
@@ -1480,6 +1475,35 @@ class ConvertToPython_1(ConvertToPython):
             if {variable} not in {command_make_color}:
               raise Exception(f'While running your program the command {style_command(command)} received the value {style_command('{' + variable + '}')} which is not allowed. Try using another color.')
             t.{command_text}({variable})""")
+
+    def make_catch_exception(self, args):
+        lists_names = []
+        list_args = []
+        var_regex = r"[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_]+|[\p{Mn}\p{Mc}\p{Nd}\p{Pc}·]+"
+        # List usage comes in indexation and random choice
+        list_regex = fr"(({var_regex})+\[({var_regex})-1\])|(random\.choice\(({var_regex})\))"
+        for arg in args:
+            # Expressions come inside a Tree object, so unpack them
+            if isinstance(arg, Tree):
+                arg = arg.children[0]
+            for group in regex.findall(list_regex, arg):
+                if group[0] != '':
+                    list_args.append(group[0])
+                    lists_names.append(group[1])
+                else:
+                    list_args.append(group[3])
+                    lists_names.append(group[4])
+        code = ""
+        exception_text_template = gettext('catch_index_exception')
+        for i, list_name in enumerate(lists_names):
+            exception_text = exception_text_template.replace('{list_name}', style_command(list_name))
+            code += textwrap.dedent(f"""\
+            try:
+              {list_args[i]}
+            except IndexError:
+              raise Exception('{exception_text}')
+            """)
+        return code
 
 
 @v_args(meta=True)
@@ -1543,10 +1567,9 @@ class ConvertToPython_2(ConvertToPython_1):
                 res = regex.findall(
                     r"[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}\p{Mn}\p{Mc}\p{Nd}\p{Pc}]+|[^\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}]+", a)
                 args_new.append(''.join([self.process_variable_for_fstring(x, meta.line) for x in res]))
-
+        exception = self.make_catch_exception(args)
         argument_string = ' '.join(args_new)
-
-        return f"print(f'{argument_string}')"
+        return exception + f"print(f'{argument_string}')"
 
     def ask(self, meta, args):
         var = args[0]
@@ -1569,7 +1592,8 @@ class ConvertToPython_2(ConvertToPython_1):
         parameter = args[0]
         value = args[1]
         if self.is_random(value) or self.is_list(value):
-            return parameter + " = " + value
+            exception = self.make_catch_exception([value])
+            return exception + parameter + " = " + value
         else:
             if self.is_variable(value):
                 value = self.process_variable(value, meta.line)
@@ -1584,11 +1608,13 @@ class ConvertToPython_2(ConvertToPython_1):
             return "time.sleep(1)"
         else:
             value = f'"{args[0]}"' if self.is_int(args[0]) else args[0]
-            return textwrap.dedent(f"""\
-                try:
+            exceptions = self.make_catch_exception(args)
+            try_prefix = "try:\n" + textwrap.indent(exceptions, "  ")
+            code = try_prefix + textwrap.dedent(f"""\
                   time.sleep(int({value}))
                 except ValueError:
                   raise Exception(f'While running your program the command {style_command(Command.sleep)} received the value {style_command('{' + value + '}')} which is not allowed. Try changing the value to a number.')""")
+            return code
 
 
 @v_args(meta=True)
@@ -1611,7 +1637,8 @@ class ConvertToPython_3(ConvertToPython_2):
             return args[0] + '[' + args[1] + '-1]'
 
     def process_argument(self, meta, arg):
-        # only call process_variable if arg is a string, else keep as is (ie. don't change 5 into '5', my_list[1] into 'my_list[1]')
+        # only call process_variable if arg is a string, else keep as is (ie.
+        # don't change 5 into '5', my_list[1] into 'my_list[1]')
         if arg.isnumeric() and isinstance(arg, int):  # is int/float
             return arg
         elif (self.is_list(arg)):  # is list indexing
@@ -1669,7 +1696,8 @@ class ConvertToPython_4(ConvertToPython_3):
 
     def print(self, meta, args):
         argument_string = self.print_ask_args(meta, args)
-        return f"print(f'{argument_string}')"
+        exceptions = self.make_catch_exception(args)
+        return exceptions + f"print(f'{argument_string}')"
 
     def ask(self, meta, args):
         var = args[0]
@@ -1825,7 +1853,11 @@ class ConvertToPython_6(ConvertToPython_5):
         else:
             if self.is_variable(value):
                 value = self.process_variable(value, meta.line)
-                return parameter + " = " + value
+                if self.is_list(value) or self.is_random(value):
+                    exception = self.make_catch_exception([value])
+                    return exception + parameter + " = " + value
+                else:
+                    return parameter + " = " + value
             else:
                 # if the assigned value is not a variable and contains single quotes, escape them
                 value = process_characters_needing_escape(value)
@@ -2068,7 +2100,8 @@ class ConvertToPython_12(ConvertToPython_11):
 
     def print(self, meta, args):
         argument_string = self.print_ask_args(meta, args)
-        return f"print(f'''{argument_string}''')"
+        exception = self.make_catch_exception(args)
+        return exception + f"print(f'''{argument_string}''')"
 
     def ask(self, meta, args):
         var = args[0]
@@ -2108,10 +2141,12 @@ class ConvertToPython_12(ConvertToPython_11):
                 raise exceptions.UnquotedAssignTextException(text=args[1])
 
         if isinstance(right_hand_side, Tree):
-            return left_hand_side + " = " + right_hand_side.children[0]
+            exception = self.make_catch_exception([right_hand_side.children[0]])
+            return exception + left_hand_side + " = " + right_hand_side.children[0]
         else:
             # we no longer escape quotes here because they are now needed
-            return left_hand_side + " = " + right_hand_side + ""
+            exception = self.make_catch_exception([right_hand_side])
+            return exception + left_hand_side + " = " + right_hand_side + ""
 
     def var(self, meta, args):
         name = args[0]
@@ -2138,18 +2173,11 @@ class ConvertToPython_12(ConvertToPython_11):
             return self.make_forward(arg.children[0])
         return self.make_forward(float(args[0]))
 
-    def make_turtle_command(self, parameter, command, command_text, add_sleep):
-        variable = self.get_fresh_var('__trtl')
-        transpiled = textwrap.dedent(f"""\
-            {variable} = {parameter}
-            try:
-              {variable} = float({variable})
-            except ValueError:
-              raise Exception(f'While running your program the command {style_command(command)} received the value {style_command('{'+variable+'}')} which is not allowed. Try changing the value to a number.')
-            t.{command_text}(min(600, {variable}) if {variable} > 0 else max(-600, {variable}))""")
-        if add_sleep:
-            return sleep_after(transpiled, False)
-        return transpiled
+    def make_turn(self, parameter):
+        return self.make_turtle_command(parameter, Command.turn, 'right', False, 'float')
+
+    def make_forward(self, parameter):
+        return self.make_turtle_command(parameter, Command.forward, 'forward', True, 'float')
 
     def division(self, meta, args):
         return self.process_calculation(args, '/')
@@ -2214,7 +2242,8 @@ class ConvertToPython_15(ConvertToPython_14):
         all_lines = [ConvertToPython.indent(x) for x in args[1:]]
         body = "\n".join(all_lines)
         body = sleep_after(body)
-        return "while " + args[0] + ":\n" + body
+        exceptions = self.make_catch_exception([args[0]])
+        return exceptions + "while " + args[0] + ":\n" + body
 
 
 @v_args(meta=True)
@@ -2226,7 +2255,21 @@ class ConvertToPython_16(ConvertToPython_15):
         return parameter + " = [" + ", ".join(values) + "]"
 
     def change_list_item(self, meta, args):
-        return args[0] + '[' + args[1] + '-1] = ' + args[2]
+        left_side = args[0] + '[' + args[1] + '-1]'
+        right_side = args[2]
+        exception_text = gettext('catch_index_exception').replace('{list_name}', style_command(args[0]))
+        exception = textwrap.dedent(f"""\
+        try:
+          {left_side}
+        except IndexError:
+          raise Exception('{exception_text}')
+        """)
+        return exception + left_side + ' = ' + right_side
+
+    def ifs(self, meta, args):
+        all_lines = [ConvertToPython.indent(x) for x in args[1:]]
+        exceptions = self.make_catch_exception([args[0]])
+        return exceptions + "if " + args[0] + ":\n" + "\n".join(all_lines)
 
 
 @v_args(meta=True)
@@ -2648,7 +2691,6 @@ def preprocess_ifs(code, lang='en'):
                 if contains(c, line):
                     return True
             return False
-
     for i in range(len(lines) - 1):
         line = lines[i]
         next_line = lines[i + 1]
@@ -2873,7 +2915,6 @@ def transpile_inner(input_string, level, lang="en"):
 
         has_turtle = UsesTurtle().transform(abstract_syntax_tree)
         has_pygame = UsesPyGame().transform(abstract_syntax_tree)
-
         return ParseResult(python, has_turtle, has_pygame)
     except VisitError as E:
         # Exceptions raised inside visitors are wrapped inside VisitError. Unwrap it if it is a

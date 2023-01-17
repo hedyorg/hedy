@@ -35,9 +35,16 @@ export function loadQuizQuestion(level: number, question: number) {
     // If we get the request from the feedback page -> always hide the feedback container
     $('#quiz_feedback_container').hide();
 
+    // If we have a forced keyword language, sent this info to the back-end to get the correct question
+    let parameters = new URLSearchParams(window.location.search)
+    let url = "/quiz/get-question/" + level + '/' + question;
+    if (parameters.has('keyword_language')) {
+        url += "/" + parameters.get('keyword_language')
+    }
+
     $.ajax({
       type: 'GET',
-      url: '/quiz/get-question/' + level + '/' + question,
+      url: url,
       dataType: 'json'
     }).done(function(response: any) {
         $('#quiz_container').show();

@@ -37,14 +37,6 @@ jobs:
     - name: Compiling Babel translations
       run: |
         pybabel compile -f -d translations
-    - name: Check for changed files in grammar related directories
-      shell: pwsh
-      id: check_file_changed
-      run: |
-        $diff = git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.sha }}
-        $SourceDiff = $diff | Where-Object { $_ -match '^content/' -or $_ -match '^grammars/' -or $_ -match '^highlighting/' -or $_ -match '^tests/' -or $_ -match '^app.py' -or $_ -match '^hedy.py'}
-        $HasDiff = $SourceDiff.Length -gt 0
-        Write-Host "::set-output name=docs_changed::$HasDiff"
     - name: Run weblate tests
       shell: pwsh
       id: weblate_tests
@@ -53,11 +45,6 @@ jobs:
         build-tools/github/validate --weblate
     - name: Run all tests
       shell: pwsh
-      if: ${{ ((steps.check_file_changed.outputs.docs_changed == 'True' && github.event.pull_request.user.login != 'weblate') || github.event.label.name == 'force_tests') }}
+      if: ${{ ((github.event.pull_request.user.login != 'weblate') || github.event.label.name == 'force_tests') }}
       run: |
         build-tools/github/validate --all
-    - name: Run non-code related tests
-      shell: pwsh
-      if: ${{ (steps.check_file_changed.outputs.docs_changed != 'True' && github.event.pull_request.user.login != 'weblate') }}
-      run: |
-        build-tools/github/validate
