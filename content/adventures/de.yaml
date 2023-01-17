@@ -48,7 +48,6 @@ adventures:
 
                     Das ist nützlich, denn nun kannst du alle Wörter ausgeben, die du möchtest. Auch die Wörter, mit denen du etwas mit `{is}` gespeichert hast.
 
-
                     Die meisten Programmiersprachen verwenden ebenfalls Anführungszeichen bei ihren Ausgabebefehlen, sodass wir dem echten Programmieren einen Schritt näher kommen!
                 example_code: "```\n{print} 'Ab jetzt musst du Anführungszeichen verwenden!'\nAntwort {is} {ask} 'Was müssen wir ab jetzt verwenden?'\n{print} 'Wir müssen ' Antwort ' verwenden.'\n```\n"
                 story_text_2: "## Abenteuer werden immer schwieriger\nDie Abenteuer werden jetzt immer schwieriger in den nächsten Tabs.\nDeswegen ist es am Besten wenn du dich von links nach rechts vorarbeitest, um immer mehr herausgefordert zu werden.\n"
@@ -66,7 +65,7 @@ adventures:
                 example_code_3: "``` \nschöne_Farben {is} grün, gelb \nFarbe {is} {ask} 'Was ist deine Lieblingsfarbe?' \n{if} Farbe {in} schöne_Farben {print} 'schön!' \n{else} {print} 'na ja' \n```\n"
                 story_text_2: "Machmal wir Code mit einem`{if}`ziemlich lang und passt nicht gut in eine Zeile. <br> Du kannst den Code auch auf zwei Teilen aufteilen, beginnend mit der zweiten Zeile beim `{else}` Befehl, und zwar so:\n"
                 example_code_2: "```\nName {is} {ask} 'Wie heißt du?'\n{if} Name {is} Hedy {print} 'Schön'\n{else} {print} 'Buh!'\n```\n"
-                story_text_4: "Etwas anderes das mit `{if}` funktioniert ist `{pressed}`! Mit `{pressed}` kannst du jeden beliebigen Buchstaben\ndes Alphabets und jede Zifferntaste auf deiner Tastatur an einen Befehl binden. Wenn du es bindest und die Taste drückst,\nwird etwas passieren. Probiere es aus!\n"
+                story_text_4: "Etwas anderes das mit `{if}` funktioniert ist `{pressed}`! Mit `{pressed}` kannst du jeden beliebigen Buchstaben des Alphabets und jede Zifferntaste auf deiner Tastatur an einen Befehl binden. Wenn du es bindest und die Taste drückst, wird etwas passieren. Probiere es aus!\n"
                 example_code_4: "```\n{if} x {is} {pressed} {print} 'es hat geklappt!'\n```\n"
             6:
                 start_code: "{print} '5 mal 5 ist ' 5 * 5"
@@ -78,7 +77,7 @@ adventures:
 
                     Das Mal ist etwas anders, da auf deiner Tastatur kein Malzeichen vorhanden ist. Suche mal, das gibt es wirklich nicht!
                     Deshalb multiplizieren wir mit dem Stern (auf der Tastatur über dem Plus): `5 * 5`. Lies das als "5 mal 5", dann kannst du dich am einfachsten daran erinnern.
-                example_code: "```\n{print} '5 plus 5 macht ' 5 + 5\n{print} '5 minus 5 macht ' 5 - 5\n{print} '5 {times} 5 macht ' 5 * 5\n```\n"
+                example_code: "```\n{print} '5 plus 5 macht ' 5 + 5\n{print} '5 minus 5 macht ' 5 - 5\n{print} '5 mal 5 macht ' 5 * 5\n```\n"
                 story_text_2: "Wir verändern auch wie du ein Wort in einer Variable speichern kannst! Du darfst jetzt `=`anstatt `{is}` verwenden, wenn du ein Wort oder eine Zahl in einer Variable speicherst, und zwar so:\n"
                 example_code_2: "```\nName = Hedy\nAntwort = 20 + 4\n```\n"
             7:
@@ -235,7 +234,7 @@ adventures:
                     Wir sind bei richtigem Python Code angekommen! Das bedeutet dass wir ab jetzt rund Klammern mit den Befehlen {print} und {range} benutzen müssen.
 
                 story_text_2: |-
-                    Wenn du mehr als ein Objekt mit dem {print}-Befehl ausgeben möchtest, musst du sie mit einem Komma trennen.
+                    Wenn du mehr als ein Objekt ausgeben möchtest, musst du sie mit einem Komma trennen.
 
                 example_code_2: |
                     ```
@@ -380,7 +379,8 @@ adventures:
                     Solche Wiederholungen kannst du mit dem Befehl `{repeat}` in diesem Level in deine Geschichte einfügen.
 
                     ### Übung
-                    Füge Wiederholungen zu deiner eigenen Geschichte hinzu. Gehe zurück zu deinen gespeicherten Programmen, wähle dein Geschichte-Programm aus Level 6 aus und finde eine Zeile die {print} enthält und wiederhole sie.
+                    Füge Wiederholungen zu deiner eigenen Geschichte hinzu. Gehe zurück zu deinen gespeicherten Programmen, wähle dein Geschichte-Programm aus Level 6 aus und
+                    finde eine Zeile die {print} enthält und wiederhole sie.
 
                 example_code: |
                     ```
@@ -609,10 +609,10 @@ adventures:
         levels:
             12:
                 story_text: |
-                    ## Lieder
-                    Jetzt machen wir es uns richtig einfach und programmieren 'Wenn Du glücklich bist, dann klatsche in die Hand'. Alles, was wir tun möchten, wenn wir glücklich sind, speichern wir in einer Variablen. Sieh es Dir an:
+                    ## Sing ein Lied!
+                    Jetzt machen wir es uns richtig einfach und programmieren 'Wenn du glücklich bist, dann klatsche in die Hand'. Alles, was wir tun möchten, wenn wir glücklich sind, speichern wir in einer Variablen. Sieh es dir an:
 
-                    ## Herausforderung
+                    ### Übung
                     Kannst du die richtige Anzahl Leerzeichen zum Einrücken hinzufügen, damit das Lied richtig spielt?
                     Beachte: Nicht jede Zeile braucht Einrückung.
 
@@ -633,7 +633,7 @@ adventures:
                     ## Lieder
                     In diesem Level nutzt du den Befehl `{for} i {in} {range}` für Lieder, in denen gezählt wird, wie z.B. bei 'Fünf kleine Affen'.
 
-                    ## Herausforderung
+                    ### Übung
                     Fülle die Lücken und mach, dass der Code funktioniert.
 
                 example_code: |
@@ -658,7 +658,7 @@ adventures:
 
 
 
-                    ## Herausforderungen
+                    ### Übung
                     Kannst du die Strophe der Affen auf dem Bett hinzufügen, wo nur noch ein Affe übrig ist?
 
                     Kannst du den Babyhai-Code noch kürzer machen, indem du `{repeat}` verwendest?
@@ -709,45 +709,49 @@ adventures:
             8:
                 story_text: |
                     ## Lieder
-                    In einem vorigen Level hast du das Lied über die Bierflaschen programmiert. Du hast eine Strophe geschrieben und musstest sie dann 99 mal kopieren. In diesem Level kannst du das Lied 99 mal wiederholen, indem du nur eine einfache Zeile hinzufügst!
-                    Weißt du welche Zeile Code du in die Lücken füllen musst?
+                    In einem vorigen Level hast du das Lied über die Bierflaschen programmiert. Aber ohne den `{repeat}` Befehl musstest du die Strophen viele Male kopieren.
+                    In diesem Level kannst du das Lied 99 mal wiederholen, indem du nur eine einfache Zeile hinzufügst!
+
+                    ### Übung
+                    Füge den richtigen Befehl in die Lücken ein und rücke den Code korrekt ein.
 
                 example_code: |
                     ```
                     Strophe = 99
-                    _ _ _
-                        {print} Strophe ' Flaschen Bier an der Wand'
-                        {print} Strophe ' Flaschen Bier'
-                        {print} 'Nimm eine runter, reich sie herum'
-                        Strophe = Strophe - 1
-                        {print} Strophe ' Flaschen Bier an der Wand'
+                    _ 99 {times}
+                    {print} Strophe ' Flaschen Bier an der Wand'
+                    {print} Strophe ' Flaschen Bier'
+                    {print} 'Nimm eine runter, reich sie herum'
+                    Strophe = Strophe - 1
+                    {print} Strophe ' Flaschen Bier an der Wand'
                     ```
                 start_code: "# setze hier deinen Code hin"
             7:
                 story_text: |
                     ## Lieder
-                    In Liedern wiederholt sich oft einiges. So auch im Lied "Baby Hai"! Wenn Du es singst, singst Du eigentlich immer das gleiche:
+                    In Liedern wiederholt sich oft einiges. So auch im Lied "Baby Hai"! Wenn du es singst, singst du eigentlich immer das gleiche:
 
                     Baby Hai tututudutudu <br>
                     Baby Hai tututudutudu <br>
                     Baby Hai tututudutudu <br>
                     Baby Hai 
 
-                    Mit dem Befehl `{repeat}` kannst Du den Song abkürzen. Kannst Du den Code vervollständigen?
+                    ### Übung
+                    Kannst du das Lied mit Hilfe des `{repeat}` Befehls ausgeben? Vervollständige den Code, indem du die Lücken füllst!
+                    **Extra** Nach dem Baby-Hai kannst du natürlich auch andere Lieder programmieren. Es gibt viele Lieder mit Wiederholung!
+                    Kannst du an ein weiteres Lied denken und es ausgeben?
 
                 example_code: |
                     ```
                     {repeat} _ _ {print} 'Baby Hai tututudutudu'
-                    {print} 'Baby Shark'
+                    {print} 'Baby Hai'
                     ```
-
-                    Du kannst natürlich auch andere Lieder programmieren. In vielen Liedern wiederholt sich etwas. Fällt Dir eins ein?
 
                 start_code: "{print} 'Baby Hai'"
             6:
                 story_text: |
                     ## Lieder
-                    In Liedern wiederholt sich oft einiges. Manchmal beinhaltet die Wiederholung auch, dass etwas gezählt wird.
+                    In Liedern wiederholt sich oft einiges. Manchmal basiert die Wiederholung auch darauf, dass etwas gezählt wird.
                     So zum Beispiel im Lied über die Bierflaschen. Dies ist eigentlich ein englisches Lied und hat den Titel "99 bottles of beer". Dieses Lied kannst du mit ein klein wenig Mathematik programmieren.
 
                     Tipp: Nutze die Laut-Vorlesen-Funktion um Hedy das Lied für dich singen zu lassen.
@@ -816,13 +820,16 @@ adventures:
                     ## Lass uns zeichnen
                     Du kannst mit Hedy auch zeichnen. Indem Du Drehungen und Linien kombinierst, kannst Du ein Quadrat oder eine Treppe zeichnen.
 
-                    Mit `{forward}` ziehst Du eine Linie vorwärts. Die Zahl dahinter legt fest, wie weit die Schildkröte wandert. Mit `{turn} {right}` ("drehe Dich nach rechts") macht sie eine Viertelumdrehung im Uhrzeigersinn, mit `{turn} {left}` ("drehe Dich nach links") entgegen dem Uhrzeigersinn. Wenn du zurück laufen möchtest, benutzt du den `{forward}`-Befehl mit einer negativen Zahl., wie zum Beispiel `{forward} -100`.
+                    Mit `{forward}` ziehst Du eine Linie vorwärts. Die Zahl dahinter legt fest, wie weit die Schildkröte wandert. Mit `{turn} {right}` ("drehe Dich nach rechts") macht sie eine Viertelumdrehung im Uhrzeigersinn, mit `{turn} {left}` ("drehe Dich nach links") entgegen dem Uhrzeigersinn.
 
-                    ## Challenge
+                    Wenn du zurück laufen möchtest, benutzt du den `{forward}`-Befehl mit einer negativen Zahl., wie zum Beispiel `{forward} -100`.
+
+                    ### Übung
                     Das ist der Anfang einer kleinen Treppe. Kannst Du sie so zeichnen, dass sie 5 Stufen hat?
 
                 example_code: |
                     ```
+                    {forward} 50
                     {turn} {right}
                     {forward} 50
                     {turn} {left}
@@ -840,27 +847,22 @@ adventures:
 
                 example_code: |
                     ```
-                    {print} Formen zeichnen
-                    Winkel {is} 90
-                    {turn} Winkel
-                    {forward} 25
-                    {turn} Winkel
-                    {forward} 25
+                    antwort {is} {ask} Wie viele Schritte soll die Schildkröte machen?
+                    {forward} antwort
                     ```
                 start_code: |-
                     {print} Schildkrötenrennen!
                     Winkel {is} 90
                     {turn} Winkel
                     {forward} 25
-                story_text_2: "In Level 1 konnte sich die Schildkröte außerdem nur nach links oder rechts drehen. Das ist ein bisschen langweilig!\nIn level 2 kann sie ihre Nase in alle Richtungen strecken.\n\nBenutze 90 für eine Vierteldrehung. Dies wird Grad genannt. Eine komplette Drehung sind 360 Grad.\nKannst du mit diesem Code eine Figur erstellen? Vielleicht einen Kreis oder ein Dreieck?\n\n## Herausforderung\nKannst du mit diesem Code eine Form gestalten? Vielleicht ein Dreieck oder einen Kreis?\n"
+                story_text_2: "In Level 1 konnte sich die Schildkröte außerdem nur nach links oder rechts drehen. Das ist ein bisschen langweilig!\nIn level 2 kann sie ihre Nase in alle Richtungen strecken.\n\nBenutze 90 für eine Vierteldrehung. Dies wird Grad genannt. Eine komplette Drehung sind 360 Grad.\n\n### Übung\nKannst du mit diesem Code eine Form gestalten? Vielleicht ein Dreieck oder einen Kreis?\n"
                 example_code_2: "```\n{print} Figuren werden gezeichnet\nwinkel {is} 90\n{turn} winkel\n{forward} 25\n{turn} winkel\n{forward} 25\n```\n"
             3:
                 story_text: |
                     ## Suchende Schildkröte
                     In diesem Level kannst Du `{at} {random}` nutzen, während die Schildkröte etwas zeichnet. Durch eine zufällige Wahl nimmt die Schildkröte jedes Mal einen anderen Weg.
                     Nutze `{at} {random}` um einen zufälligen Wert aus einer Liste zu wählen.
-
-                    ## Herausforderung
+                    ### Übung
                     Kannst du die Zeilen 2 und 3 kopieren und wieder einfügen, um einen längeren, zufälligen Pfad zu erzeugen?
 
                 example_code: |
@@ -929,17 +931,23 @@ adventures:
                     Jetzt, da wir einzelne Linien wiederholen können, fällt uns das Zeichnen einzelner Formen leichter.
                     Wir setzen den Winkel einmalig und nutzen dann die Variable im `{repeat}`.
 
+                    ### Übung 1
+                    Der Beispiel-Code erstellt ein Quadrat. Ändere den Code, sodass er eine andere Figur erstellt, wie ein Dreieck oder ein Sechseck.
+                    Dies bedarf einer Änderung in zwei Zeilen Code.
+                    Tipp: Ein voller Kreis hat 360 Grad.
+
+                    ### Übung 2
+                    Erstelle nun eine Zeichnung aus mindestens zwei Polygonen.
+
                 example_code: |
                     ```
                     Winkel = 90
-                    {repeat} 10 {times}
+                    {repeat} 4 {times}
                         {turn} Winkel
                         {forward} 50
                     ```
                 story_text_2: |
-                    ## Interaktiv
-                    Wir können auch das Programm verbessern, das verschiedene Formen zeichnet.
-                    Bekommst Du raus, wie weit die Schildkröte sich drehen muss? Vervollständige den Code und sie zeichnet jedes Vieleck, das Du möchtest.
+                    **(extra)**Wir können auch das Programm verbessern, das verschiedene Formen zeichnet. Vervollständige den Code und du kannst jedes Vieleck zeichnen, das du möchtest!
 
                 example_code_2: |
                     ```
@@ -980,7 +988,7 @@ adventures:
                     {print} 'Formen zeichnen'
     dishes:
         name: "Abwasch?"
-        description: "Nutze den Computer, um zu sehen, wer abwaschen muss (Beginne bei Level 3)"
+        description: "Nutze den Computer, um zu sehen, wer abwäscht"
         default_save_name: "Abwasch"
         levels:
             10:
@@ -999,12 +1007,15 @@ adventures:
             7:
                 story_text: |
                     ## Abwaschen
-                    Mit dem Befehl `{repeat}` kannst Du Code-Zeilen wiederholen. Das kannst Du nutzen, um für jeden Tag der Woche zu bestimmen, wer abwäscht.
+                    Mit dem Befehl `{repeat}` kannst du Code-Zeilen wiederholen. Das kannst du nutzen, um für mehrere Tage zu berechnen, wer abwäscht.
+                    ### Übung
+                    Benutze den `{repeat}` Befehl um zu entscheiden wer die ganze Woche abwaschen muss. Jede Lücke muss mit einem Befehl oder einer Zahl gefüllt werden!
+                    **(extra)** Kannst du an eine andere Aufgabe im Haushalt denken? Passe den Code an, sodass er drei Haushaltsaufgaben entscheidet. Vergiss nicht auszugeben um welche Aufgaben es sich handelt!
 
                 example_code: |
                     ```
                     Familienmitglieder = Mama, Papa, Emma, Sophie
-                    {repeat} _ _ {print} _ ' ist mit dem Abwasch dran'
+                    {repeat} _ _ {print} 'Abgewaschen wird von' _ _ _
                     ```
                 start_code: "{print} 'Wer macht den Abwasch?'"
             6:
@@ -1042,6 +1053,7 @@ adventures:
                     Tellerwäscher = Familienmitglieder {at} {random}
                     {print} 'Am Dienstag macht ' Tellerwäscher ' den Abwasch.'
                     {remove} Tellerwäscher {from} Familienmitglieder
+                    Tellerwäscher = Familienmitglieder {at} {random}
                     ```
 
                 start_code: "{print} 'Wer wäscht ab?'"
@@ -1075,7 +1087,7 @@ adventures:
                     Familienmitglieder {is} Mama, Papa, Emma, Sophie
                     {print} _ den Abwasch macht heute _
                     {sleep}
-                    {print} Familienmitglieder {at} {random}
+                    {print} Familienmitglieder {at} _
                     ```
                 start_code: "{print} 'Wer macht den Abwasch?'"
             3:
@@ -1125,15 +1137,15 @@ adventures:
             7:
                 story_text: |
                     ## Würfel
-                    Auch in Level 7 kannst Du wieder einen Würfel programmieren. Mit dem Befehl `{repeat}` kannst Du ganz einfach eine ganze Handvoll Würfel werfen.
-                    Versuche, den Beispiel-Code zu vervollständigen. Die Unterstriche müssen durch mehrere Befehle und Zeichen ersetzt werden.
+                    Auch in Level 5 kannst du wieder einen Würfel programmieren. Mit dem Befehl `{repeat}` kannst du ganz einfach eine ganze Handvoll Würfel werfen.
 
-                    Vielleicht willst Du aber auch einen ganz anderen Würfel erstellen. Das geht natürlich auch!
+                    ### Übung
+                    Versuche, den Beispiel-Code zu vervollständigen!  **(extra)** Denke an ein Spiel, das du kennst, bei dem es um Würfel geht und programmiere es mit dem Befehl `{repeat}.` .
 
                 example_code: |
                     ```
-                    Würfelseiten = 1, 2, 3, 4, 5, Regenwurm
-                    {repeat} _ _ {print} _ _ _
+                    Würfelseiten = 1, 2, 3, 4, 5, 6
+                    _ _ _ _ _ _ _
                     ```
                 start_code: "{print} 'Was wird der Würfel diesmal anzeigen?'"
             6:
@@ -1143,7 +1155,7 @@ adventures:
                     Vielleicht weißt Du ja, dass der Wurm 5 Punkte zählt. Jetzt kannst Du nach jedem Wurf direkt berechnen, wie viele Punkte Du bekommst.
                     Hier ist der Code zur Berechnung der Punkte für einen Würfel:
 
-                    ## Herausforderung
+                    ### Übung
                     Kannst du den Code verändern, um die Gesamtpunktzahl für 8 Würfel zu bekommen? Um das zu machen musst du einige Zeilen Code kopieren und einfügen.
 
                 example_code: |
@@ -1156,7 +1168,7 @@ adventures:
                     {print} 'Jetzt hast Du ' Punkte ' Punkte.'
                     ```
 
-                start_code: "print 'Was wird der Würfel diesmal anzeigen?'"
+                start_code: "{print} 'Was wird der Würfel diesmal anzeigen?'"
                 example_code_2: "## Vorschau\n\nIst es dir gelungen, die Gesamtpunktzahl für 8 Würfel auszurechnen? Dafür musstest du ganz schön viel hin und her kopieren, oder?In Level 7 machen wir das einfacher!\n"
             5:
                 story_text: |
@@ -1205,7 +1217,7 @@ adventures:
                     ```
 
                 start_code: "{print} Was zeigt der Würfel diesmal?"
-                story_text_2: "## Herausforderung\nDie Würfel im Beispiel oben sind die Würfel für ein bestimmtes Spiel. Kannst du normale Würfel machen?\nOder andere Spezialwürfel von einem anderen Spiel?\n"
+                story_text_2: "### Übung\nDie Würfel im Beispiel oben sind die Würfel für ein bestimmtes Spiel. Kannst du normale Würfel machen?\nOder andere Spezialwürfel von einem anderen Spiel?\n"
                 example_code_2: "```\nAuswahlmöglichkeiten {is} _\n```\n"
             15:
                 story_text: |
@@ -2512,7 +2524,7 @@ adventures:
                 example_code: "```\n{repeat} 3 {times} {if} x {is} {pressed} {forward} 15\n```\n"
                 start_code: '# Platziere deinen Code hier'
                 story_text: "Du hast vielleicht in Level 5 und 6 probiert die Taste, die an `{pressed}` gebunden war, mehrfach zu drücken. Falls dem so ist, ist dir aufgefallen, dass nichts passierte. Aber nun da du `{repeat}` kennen gelernt hast, können wir Tasten mehrfach drücken! Mach, dass die Schildkröte vorwärts geht!\n"
-        name: Drück es!
+        name: Tastengedrücke
         description: Versuche eine Taste an einen Befehl zu binden!
         default_save_name: Drückes
     years:
