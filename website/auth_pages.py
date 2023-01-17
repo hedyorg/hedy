@@ -1,5 +1,4 @@
 import datetime
-import random
 
 from flask import jsonify, make_response, redirect, request, session
 from flask_babel import gettext
@@ -7,7 +6,7 @@ from flask_babel import gettext
 from config import config
 from safe_format import safe_format
 from hedy_content import ALL_LANGUAGES, COUNTRIES
-from utils import extract_bcrypt_rounds, is_heroku, is_testing_request, timems, times, ColoredConsole
+from utils import extract_bcrypt_rounds, is_heroku, is_testing_request, timems, times
 from website.auth import (
     MAILCHIMP_API_URL,
     RESET_LENGTH,

@@ -1,9 +1,9 @@
 from random import random as random
 
-from flask import (g, session)
+from flask import session
 from hedy_content import ALTERNATIVE_ERROR_LANGUAGES
 from website.auth import (current_user)
-from utils import ColoredConsole as clog
+#from utils import ColoredConsole as clog
 
 
 def is_available():
