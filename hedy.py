@@ -1978,7 +1978,7 @@ if event.unicode == {args[0]}:
 if event.unicode == '{args[0]}':
 {all_lines}
   break""")
-        else: # otherwise we mean a button
+        else:  # otherwise we mean a button
             button_name = self.process_variable(args[0], met.line)
             return self.make_ifpressed_command(f"""\
 if event.key == {button_name}:
