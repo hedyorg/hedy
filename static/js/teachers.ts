@@ -472,7 +472,7 @@ export function select_all_levels_adventure(adventure_name: string) {
     });
 }
 
-export function select_all_level_adventures(level: string) {
+export function enable_level(level: string) {
     window.State.unsaved_changes = true;
     // It is not selected yet -> select all and change color
     if ($('#level_button_' + level).hasClass('blue-btn')) {
