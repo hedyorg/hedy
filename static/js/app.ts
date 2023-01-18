@@ -1,9 +1,11 @@
 import { initializeSyntaxHighlighter } from './syntaxModesRules';
+import { ClientMessages } from './client-messages';
 
 import { modal, error, success } from './modal';
 import { Markers } from './markers';
 import { APP_STATE, hasUnsavedChanges, markUnsavedChanges, clearUnsavedChanges } from './state';
 import { currentTab } from './tabs';
+import { MessageKey } from './message-translations';
 
 export let theGlobalEditor: AceAjax.Editor;
 export let theModalEditor: AceAjax.Editor;
@@ -440,13 +442,13 @@ export function runit(level: number, lang: string, disabled_prompt: string, cb: 
       console.log('Response', response);
       if (response.Warning && $('#editor').is(":visible")) {
         //storeFixedCode(response, level);
-        error.showWarning(ErrorMessages['Transpile_warning'], response.Warning);
+        error.showWarning(ClientMessages['Transpile_warning'], response.Warning);
       }
       if (response.achievements) {
         showAchievements(response.achievements, false, "");
       }
       if (response.Error) {
-        error.show(ErrorMessages['Transpile_error'], response.Error);
+        error.show(ClientMessages['Transpile_error'], response.Error);
         if (response.Location && response.Location[0] != "?") {
           //storeFixedCode(response, level);
           // Location can be either [row, col] or just [row].
@@ -459,7 +461,7 @@ export function runit(level: number, lang: string, disabled_prompt: string, cb: 
       runPythonProgram(response.Code, response.has_turtle, response.has_pygame, response.has_sleep, response.Warning, cb).catch(function(err) {
         // The err is null if we don't understand it -> don't show anything
         if (err != null) {
-          error.show(ErrorMessages['Execute_error'], err.message);
+          error.show(ClientMessages['Execute_error'], err.message);
           reportClientError(level, code, err.message);
         }
       });
@@ -467,9 +469,9 @@ export function runit(level: number, lang: string, disabled_prompt: string, cb: 
       console.error(xhr);
        // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState
       if (xhr.readyState < 4) {
-        error.show(ErrorMessages['Connection_error'], ErrorMessages['CheckInternet']);
+        error.show(ClientMessages['Connection_error'], ClientMessages['CheckInternet']);
       } else {
-        error.show(ErrorMessages['Other_error'], ErrorMessages['ServerError']);
+        error.show(ClientMessages['Other_error'], ClientMessages['ServerError']);
       }
     });
 
@@ -677,7 +679,7 @@ function storeProgram(level: number | [number, string], lang: string, name: stri
     });
   }).fail(function(err) {
     console.error(err);
-    error.show(ErrorMessages['Connection_error'], JSON.stringify(err));
+    error.show(ClientMessages['Connection_error'], JSON.stringify(err));
     if (err.status === 403) {
        localStorage.setItem ('hedy-first-save', JSON.stringify ([adventure_name ? [level, adventure_name] : level, lang, name, code]));
        localStorage.setItem ('hedy-save-redirect', 'hedy');
@@ -1099,7 +1101,7 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
       $('#runit').show();
       if (Sk.execLimit != 1) {
         pushAchievement("hedy_hacking");
-        return ErrorMessages ['Program_too_long'];
+        return ClientMessages ['Program_too_long'];
       } else {
         return null;
       }
@@ -1148,7 +1150,7 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
     if ($('#output').is(':empty') && $('#turtlecanvas').is(':empty')) {
       if(!debug){
         pushAchievement("error_or_empty");
-        error.showWarning(ErrorMessages['Transpile_warning'], ErrorMessages['Empty_output']);
+        error.showWarning(ClientMessages['Transpile_warning'], ClientMessages['Empty_output']);
       }
       return;
     }
@@ -1441,7 +1443,7 @@ function speak(text: string) {
  */
 export function prompt_unsaved(cb: () => void) {
   if (!hasUnsavedChanges()) return cb();
-  modal.confirm(ErrorMessages['Unsaved_Changes'], () => {
+  modal.confirm(ClientMessages['Unsaved_Changes'], () => {
     clearUnsavedChanges();
     cb();
   });
@@ -1666,7 +1668,7 @@ export function confetti_cannon(){
     let customLevels = ['turtle', 'rock', 'haunted', 'restaurant', 'fortune', 'songs', 'dice']
 
     if(customLevels.includes(currentAdventure!)){
-      let currentAdventureConfetti = getConfettiForAdventure(currentAdventure?? '');
+      let currentAdventureConfetti = getConfettiForAdventure(currentAdventure ?? '' as any);
 
       jsConfetti.addConfetti({
         emojis: currentAdventureConfetti,
@@ -1685,10 +1687,9 @@ export function confetti_cannon(){
   }
 }
 
-function getConfettiForAdventure(adventure: string){
-  let emoji = Array.from(ErrorMessages[adventure])
-  if (emoji != null){
-    return emoji;
+function getConfettiForAdventure(adventure: MessageKey){
+  if (ClientMessages[adventure]) {
+    return Array.from(ClientMessages[adventure]).filter(x => x !== ',' && x !== ' ');
   }
   return [['🌈'], ['⚡️'], ['💥'], ['✨'], ['💫']];
 }
@@ -1706,14 +1707,14 @@ export function modalStepOne(level: number){
 
 function showSuccesMessage(){
   removeBulb();
-  var allsuccessmessages = ErrorMessages['Transpile_success'];
+  var allsuccessmessages = ClientMessages['Transpile_success'].split('\n');
   var randomnum: number = Math.floor(Math.random() * allsuccessmessages.length);
   success.show(allsuccessmessages[randomnum]);
 }
 
 function createModal(level:number ){
   let editor = "<div id='modal-editor' data-lskey=\"level_{level}__code\" class=\"w-full flex-1 text-lg rounded\" style='height:200px; width:50vw;'></div>".replace("{level}", level.toString());
-  let title = ErrorMessages['Program_repair'];
+  let title = ClientMessages['Program_repair'];
   modal.repair(editor, 0, title);
 }
 export function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean): AceAjax.Editor {

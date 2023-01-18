@@ -25,7 +25,6 @@
 {% block additional_scripts %}
   <script>
     hedyApp.passStateFromHtml({
-      level_translation: "{{ _('level_title') }}",
       // We load the adventures into the js to have access to their saved programs (if any).
       adventures: {{ adventures|tojson }},
       {% if loaded_program %}

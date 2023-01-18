@@ -1,6 +1,7 @@
 import { modal } from './modal';
 import { getHighlighter, showAchievements, turnIntoAceEditor } from "./app";
 import { markUnsavedChanges, clearUnsavedChanges } from './state';
+import { ClientMessages } from './client-messages';
 
 import DOMPurify from 'dompurify'
 
@@ -120,7 +121,7 @@ export function join_class(id: string, name: string) {
             window.location.pathname = '/login';
          });
       } else {
-          modal.alert(ErrorMessages['Connection_error'], 3000, true);
+          modal.alert(ClientMessages['Connection_error'], 3000, true);
       }
     });
 }

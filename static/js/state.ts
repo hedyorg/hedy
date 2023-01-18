@@ -1,3 +1,5 @@
+import { ClientMessages } from './client-messages';
+
 /**
  * The global state we keep
  *
@@ -34,15 +36,6 @@ export interface State {
    * quite understand.
    */
   keyword_language: string;
-
-  /**
-   * The translation of the word 'level' in the current language
-   *
-   * Written: on page load
-   *
-   * Used: when building strings.
-   */
-  level_translation?: string;
 
   /**
    * The adventure data available on the current page
@@ -123,7 +116,7 @@ function identity<A>(x: A): A {
 
 function unloadHandler(event: BeforeUnloadEvent) {
   event.preventDefault();
-  return event.returnValue = ErrorMessages['Unsaved_Changes'];
+  return event.returnValue = ClientMessages['Unsaved_Changes'];
 }
 
 let unsavedChanges = false;

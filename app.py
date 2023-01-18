@@ -1570,23 +1570,6 @@ def store_parsons_order():
     return jsonify({}), 200
 
 
-@app.route('/client_messages.js', methods=['GET'])
-def client_messages():
-    # Not really nice, but we don't call this often as it is cached
-    d = collections.defaultdict(lambda: 'Unknown Exception')
-    d.update(YamlFile.for_file('content/client-messages/en.yaml').to_dict())
-    d.update(YamlFile.for_file(
-        f'content/client-messages/{g.lang}.yaml').to_dict())
-
-    response = make_response(render_template(
-        "client_messages.js", error_messages=json.dumps(d)))
-
-    if not is_debug_mode():
-        # Cache for longer when not developing
-        response.cache_control.max_age = 60 * 60  # Seconds
-    return response
-
-
 @app.template_global()
 def current_language():
     return make_lang_obj(g.lang)

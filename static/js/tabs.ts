@@ -2,6 +2,7 @@ import { modal } from './modal';
 import { theGlobalEditor } from './app';
 import {loadParsonsExercise} from "./parsons";
 import { Adventure, APP_STATE, clearUnsavedChanges, hasUnsavedChanges } from './state';
+import { ClientMessages } from './client-messages';
 
 let _currentTab: string | undefined;
 
@@ -32,7 +33,7 @@ export function initializeTabs() {
 
     // If there are unsaved changes, we warn the user before changing tabs.
     if (hasUnsavedChanges()) {
-      modal.confirm(ErrorMessages['Unsaved_Changes'], () => switchToTab(tabName));
+      modal.confirm(ClientMessages['Unsaved_Changes'], () => switchToTab(tabName));
     } else {
       switchToTab(tabName);
     }
@@ -143,9 +144,9 @@ function switchToTab(tabName: string) {
       theGlobalEditor?.setValue ("");
     } else {
       if (adventures[tabName].default_save_name == 'intro') {
-        $('#program_name').val(APP_STATE.level_translation + ' ' + APP_STATE.level);
+        $('#program_name').val(`${ClientMessages.level_title} ${APP_STATE.level}`);
       } else {
-        $('#program_name').val(adventures [tabName].default_save_name + ' - ' + APP_STATE.level_translation + ' ' + APP_STATE.level);
+        $('#program_name').val(`${adventures[tabName].default_save_name} - ${ClientMessages.level_title} ${APP_STATE.level}`);
       }
       theGlobalEditor?.setValue(adventures [tabName].start_code);
     }
