@@ -11,15 +11,19 @@
         <div class="flex flex-row w-min" id="adventures-buttons">        
             {% if 'sorted_adventures' in customizations %}                
                 {% for adventure in customizations['sorted_adventures'][level_nr] %}
-                    <div class="tab {% if loop.index == 1 %}tab-selected{% endif %} {% if adventure['from_teacher'] %}teacher_tab{% endif %} z-10 whitespace-nowrap flex items-center justify-center" id="adventure{{ loop.index }}" tabindex="0" data-tab="{% if adventure.from_teacher %}{{adventures_names[adventure.name]}}{% else %}{{adventure.name}}{% endif %}">
-                        {{ adventures_names[adventure['name']] }}
-                    </div>
+                    {% if  adventure.name in adventures_names %}
+                        <div class="tab {% if loop.index == 1 %}tab-selected{% endif %} {% if adventure['from_teacher'] %}teacher_tab{% endif %} z-10 whitespace-nowrap flex items-center justify-center" id="adventure{{ loop.index }}" tabindex="0" data-tab="{% if adventure.from_teacher %}{{adventures_names[adventure.name]}}{% else %}{{adventure.name}}{% endif %}">
+                            {{ adventures_names[adventure['name']] }}
+                        </div>
+                    {% endif %}
                 {% endfor %}
             {% else %}
                     {% for adventure in adventures_per_level %}
-                    <div class="tab {% if loop.index == 1 %}tab-selected{% endif %} z-10 whitespace-nowrap flex items-center justify-center" id="adventure{{ loop.index }}" tabindex="0" data-tab="{{adventure}}">
-                        {{ adventures_names[adventure]}}
-                    </div>
+                        {% if  adventure in adventures_names %}    
+                            <div class="tab {% if loop.index == 1 %}tab-selected{% endif %} z-10 whitespace-nowrap flex items-center justify-center" id="adventure{{ loop.index }}" tabindex="0" data-tab="{{adventure}}">
+                                {{ adventures_names[adventure]}}
+                            </div>
+                        {% endif %}
                     {% endfor %}
             {% endif %}
             <!-- Add the tab for the parsons problem (if it exists) -->
