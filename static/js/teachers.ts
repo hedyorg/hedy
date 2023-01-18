@@ -1,6 +1,6 @@
 import { modal } from './modal';
-import {getHighlighter, showAchievements, turnIntoAceEditor} from "./app";
-import { APP_STATE, markUnsavedChanges, clearUnsavedChanges } from './state';
+import { getHighlighter, showAchievements, turnIntoAceEditor } from "./app";
+import { markUnsavedChanges, clearUnsavedChanges } from './state';
 
 import DOMPurify from 'dompurify'
 
@@ -245,8 +245,11 @@ export function update_adventure(adventure_id: string, first_edit: boolean, prom
 }
 
 function show_preview(content: string) {
-    const name = <string>$('#custom_adventure_name').val();
-    const level = <string>$('#custom_adventure_level').val();
+    const name = $('#custom_adventure_name').val();
+    if (typeof name !== 'string') { throw new Error(`Expected name to be string, got '${name}'`); }
+    const level = $('#custom_adventure_level').val();
+    if (typeof level !== 'string') { throw new Error(`Expected level to be string, got '${name}'`); }
+
     let container = $('<div>');
     container.addClass('preview border border-black px-8 py-4 text-left rounded-lg bg-gray-200 text-black');
     container.css('white-space', 'pre-wrap');
@@ -261,7 +264,7 @@ function show_preview(content: string) {
         exampleEditor.setOptions({ maxLines: Infinity });
         exampleEditor.setOptions({ minLines: 2 });
         exampleEditor.setValue(exampleEditor.getValue().replace(/\n+$/, ''), -1);
-        const mode = getHighlighter(level);
+        const mode = getHighlighter(parseInt(level, 10));
         exampleEditor.session.setMode(mode);
     }
 }

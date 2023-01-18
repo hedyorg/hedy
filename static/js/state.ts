@@ -45,18 +45,6 @@ export interface State {
   level_translation?: string;
 
   /**
-   * The keyword name of the currently displayed adventure, if displaying an adventure.
-   *
-   * "default" if the first tab, not updated if showing parsons or quiz tabs.
-   *
-   * Written: on page load (from a loaded program), and when switching tabs.
-   *
-   * Used: on page load, to select the right tab, and to send to server for
-   * storing a program under an adventure,
-   */
-  adventure_name?: string;
-
-  /**
    * The adventure data available on the current page
    *
    * Written: We set Adventure.loaded_program in app.ts to the

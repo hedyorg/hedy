@@ -3,6 +3,7 @@ import { initializeSyntaxHighlighter } from './syntaxModesRules';
 import { modal, error, success } from './modal';
 import { Markers } from './markers';
 import { APP_STATE, hasUnsavedChanges, markUnsavedChanges, clearUnsavedChanges } from './state';
+import { currentTab } from './tabs';
 
 export let theGlobalEditor: AceAjax.Editor;
 export let theModalEditor: AceAjax.Editor;
@@ -160,9 +161,10 @@ export function initializeApp() {
         clearOutput();
       });
     }
-    if($(preview).attr('level')){
-      let level = String($(preview).attr('level'));
-      exampleEditor.session.setMode(getHighlighter(level));
+
+    const levelStr = $(preview).attr('level');
+    if (levelStr) {
+      exampleEditor.session.setMode(getHighlighter(parseInt(levelStr, 10)));
     }
   }
 
@@ -310,8 +312,8 @@ export function initializeApp() {
   });
 }
 
-export function getHighlighter(level: string) {
-  return `ace/mode/level` + level;
+export function getHighlighter(level: number) {
+  return `ace/mode/level${level}`;
 }
 
 function clearErrors(editor: AceAjax.Editor) {
@@ -371,7 +373,7 @@ function clearOutput() {
   buttonsDiv.hide();
 }
 
-export function runit(level: string, lang: string, disabled_prompt: string, cb: () => void) {
+export function runit(level: number, lang: string, disabled_prompt: string, cb: () => void) {
   if (askPromptOpen) {
     // If there is no message -> don't show a prompt
     if (disabled_prompt) {
@@ -392,7 +394,6 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
   clearOutput();
 
   try {
-    level = level.toString();
     var editor = theGlobalEditor;
     var code = "";
     if ($('#parsons_container').is(":visible")) {
@@ -426,12 +427,12 @@ export function runit(level: string, lang: string, disabled_prompt: string, cb: 
       type: 'POST',
       url: '/parse',
       data: JSON.stringify({
-        level: level,
+        level: `${level}`,
         code: code,
         lang: lang,
         tutorial: $('#code_output').hasClass("z-40"), // if so -> tutorial mode
         read_aloud : !!$('#speak_dropdown').val(),
-        adventure_name: APP_STATE.adventure_name
+        adventure_name: currentTab(),
       }),
       contentType: 'application/json',
       dataType: 'json'
@@ -624,7 +625,7 @@ export function tryPaletteCode(exampleCode: string) {
 
 function storeProgram(level: number | [number, string], lang: string, name: string, code: string, shared: boolean, force_save: boolean, cb?: (err: any, resp?: any) => void) {
   clearUnsavedChanges();
-  var adventure_name = APP_STATE.adventure_name;
+  var adventure_name = currentTab();
   // If saving a program for an adventure after a signup/login, level is an array of the form [level, adventure_name]. In that case, we unpack it.
   if (Array.isArray(level)) {
      adventure_name = level [1];
@@ -708,8 +709,9 @@ export function saveit(level: number | [number, string], lang: string, name: str
       if (err.status == 403) { // The user is not allowed -> so not logged in
         return modal.confirm (err.responseText, function () {
            // If there's an adventure_name, we store it together with the level, because it won't be available otherwise after signup/login.
-           if (APP_STATE && APP_STATE.adventure_name && !Array.isArray(level)) {
-             level = [level, APP_STATE.adventure_name];
+           const curTab = currentTab();
+           if (curTab && !Array.isArray(level)) {
+             level = [level, curTab];
            }
            localStorage.setItem ('hedy-first-save', JSON.stringify ([level, lang, name, code, shared]));
            window.location.pathname = '/login';
@@ -944,12 +946,12 @@ export function copy_to_clipboard (string: string, prompt: string) {
 /**
  * Do a POST with the error to the server so we can log it
  */
-function reportClientError(level: string, code: string, client_error: string) {
+function reportClientError(level: number, code: string, client_error: string) {
   $.ajax({
     type: 'POST',
     url: '/report_error',
     data: JSON.stringify({
-      level: level,
+      level: `${level}`,
       code: code,
       page: window.location.href,
       client_error: client_error,

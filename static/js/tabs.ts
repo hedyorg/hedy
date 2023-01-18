@@ -3,6 +3,8 @@ import { theGlobalEditor } from './app';
 import {loadParsonsExercise} from "./parsons";
 import { Adventure, APP_STATE, clearUnsavedChanges, hasUnsavedChanges } from './state';
 
+let _currentTab: string | undefined;
+
 /**
  * Activate tabs
  *
@@ -22,7 +24,7 @@ import { Adventure, APP_STATE, clearUnsavedChanges, hasUnsavedChanges } from './
  * TARGET by the *absence* of the '.hidden' class.
  */
 export function initializeTabs() {
-  $('*[data-tab]').click(function (e) {
+  $('*[data-tab]').on('click', (e) => {
     const tab = $(e.target);
     const tabName = tab.data('tab');
 
@@ -42,8 +44,8 @@ export function initializeTabs() {
 
   // If we're opening an adventure from the beginning (either through a link to /hedy/adventures or through a saved program for an adventure), we click on the relevant tab.
   // We click on `level` to load a program associated with level, if any.
-  if (APP_STATE.adventure_name) {
-    switchToTab(APP_STATE.adventure_name);
+  if (APP_STATE.loaded_program?.adventure_name) {
+    switchToTab(APP_STATE.loaded_program?.adventure_name);
   }
   else if (window.location.hash) {
     // If we have an '#anchor' in the URL, switch to that tab
@@ -58,6 +60,10 @@ export function initializeTabs() {
       switchToTab(tabname);
     }
   }
+}
+
+export function currentTab() {
+  return _currentTab;
 }
 
 /**
@@ -79,6 +85,8 @@ function resetWindow() {
 }
 
 function switchToTab(tabName: string) {
+  _currentTab = tabName;
+
   // Find the tab that leads to this selection, and its siblings
   const tab = $('*[data-tab="' + tabName + '"]');
   const allTabs = tab.siblings('*[data-tab]');
@@ -101,48 +109,26 @@ function switchToTab(tabName: string) {
 
   resetWindow();
 
-  if (tabName === 'quiz') {
-      // If the developer's mode is still on -> make sure we do show the tab
-      if ($('#developers_toggle').is(":checked")) {
-        $('#adventures-tab').show();
-      }
-    $ ('#adventures-tab').css('height', '');
-    $ ('#adventures-tab').css('min-height', '14em');
-    $ ('#adventures-tab').css('max-height', '100%');
-    $ ('#level-header input').hide ();
-    $ ('#editor-area').hide ();
-    $ ('#developers_toggle_container').hide ();
-    return;
-  }
+  const isCodeTab = !(tabName === 'quiz' || tabName === 'parsons');
+
+  // .toggle(bool) sets visibility based on the boolean
+
+  // Explanation area is visible for non-code tabs, or when we are NOT in developer's mode
+  $('#adventures-tab').toggle(!(isCodeTab && $('#developers_toggle').is(":checked")));
+  $('#developers_toggle_container').toggle(isCodeTab);
+  $('#level-header input').toggle(isCodeTab);
+  $('#parsons_code_container').toggle(tabName === 'parsons');
+  $('#editor-area').toggle(isCodeTab || tabName === 'parsons');
+  $('#editor').toggle(isCodeTab);
+  $('#debug_container').toggle(isCodeTab);
 
   if (tabName === 'parsons') {
-    $ ('#level-header input').hide ();
-    $ ('#editor').hide();
-    $ ('#editor-area').show ();
-    loadParsonsExercise(<number>(APP_STATE.level || 1), 1);
-    $ ('#parsons_code_container').show();
-    $ ('#adventures-tab').css('height', '');
-    $ ('#adventures-tab').css('min-height', '14em');
-    $ ('#adventures-tab').css('max-height', '100%');
-    $ ('#debug_container').hide();
+    loadParsonsExercise(APP_STATE.level, 1);
     return;
-  } else {
-    $ ('#editor').show();
-    $ ('#level-header input').show();
-    $ ('#parsons_code_container').hide();
-    $ ('#debug_container').show();
   }
-
-  // Make sure that the adventure tab is hidden when switching and developer's mode is toggled on
-  if ($('#developers_toggle').is(":checked")) {
-    $('#adventures-tab').hide();
-  }
-  $('#developers_toggle_container').show ();
-  $ ('#editor-area').show ();
-
 
   // If the loaded program (directly requested by link with id) matches the currently selected tab, use that, overriding the loaded program that came in the adventure or level.
-  if (APP_STATE.loaded_program && (APP_STATE.adventure_name_onload) === tabName) {
+  if (APP_STATE.loaded_program?.adventure_name === tabName) {
     $ ('#program_name').val (APP_STATE.loaded_program.name);
     theGlobalEditor?.setValue (APP_STATE.loaded_program.code);
   }
@@ -154,7 +140,6 @@ function switchToTab(tabName: string) {
   else {
     if (tab.hasClass('teacher_tab')) {
       $ ('#program_name').val (tabName);
-      APP_STATE.adventure_name = tabName;
       theGlobalEditor?.setValue ("");
     } else {
       if (adventures[tabName].default_save_name == 'intro') {
@@ -166,7 +151,6 @@ function switchToTab(tabName: string) {
     }
   }
 
-  APP_STATE.adventure_name = tabName === 'intro' ? undefined : tabName;
   theGlobalEditor?.clearSelection();
   theGlobalEditor?.session.clearBreakpoints();
 
