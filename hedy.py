@@ -1966,18 +1966,24 @@ class ConvertToPython_8_9(ConvertToPython_7):
 
         all_lines = '\n'.join([x for x in args[1:]])
         all_lines = ConvertToPython.indent(all_lines)
-
-        if (len(args[0]) > 1):
+        var_or_key = args[0]
+        # if the length is more that 1 or, it is a variable, we mean a key
+        if self.is_variable(var_or_key):
+            return self.make_ifpressed_command(f"""\
+if event.unicode == {args[0]}:
+{all_lines}
+  break""")
+        elif len(var_or_key) == 1:
+            return self.make_ifpressed_command(f"""\
+if event.unicode == '{args[0]}':
+{all_lines}
+  break""")
+        else: # otherwise we mean a button
             button_name = self.process_variable(args[0], met.line)
             return self.make_ifpressed_command(f"""\
 if event.key == {button_name}:
 {all_lines}
   break""", True)
-        else:
-            return self.make_ifpressed_command(f"""\
-if event.unicode == '{args[0]}':
-{all_lines}
-  break""")
 
     def ifpressed_else(self, met, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
