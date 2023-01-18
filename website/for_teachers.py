@@ -181,7 +181,9 @@ class ForTeachersModule(WebsiteModule):
 
         teacher_adventures = self.db.get_teacher_adventures(user["username"])
         customizations = self.db.get_class_customizations(class_id)
-
+        print("*"*100)
+        print(adventures)
+        print("*"*100)
         adventure_names = {}
         for adv_key, adv_dic in adventures.items():
             for name, _ in adv_dic.items():
@@ -198,6 +200,7 @@ class ForTeachersModule(WebsiteModule):
         if customizations:
             # in case this class has thew new way to select adventures
             if 'sorted_adventures' in customizations:
+                self.purge_customizations(customizations['sorted_adventures'], adventures)
                 available_adventures = self.get_unused_adventures(customizations, teacher_adventures)
             # it uses the old way so convert it to the new one
             else:
@@ -221,6 +224,12 @@ class ForTeachersModule(WebsiteModule):
             adventures_default_order=hedy_content.ADVENTURE_ORDER_PER_LEVEL,
             current_page="for-teachers",
         )
+
+    def purge_customizations(self, sorted_adventures, adventures):
+        for _, adventure_list in sorted_adventures.items():
+            for adventure in list(adventure_list):
+                if not adventure['from_teacher'] and adventure['name'] not in adventures:
+                    adventure_list.remove(adventure)
 
     def get_unused_adventures(self, customizations, teacher_adventures):
         available_adventures = {i: [] for i in range(1, hedy.HEDY_MAX_LEVEL+1)}
