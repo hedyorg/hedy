@@ -56,6 +56,9 @@ interface State {
    */
   readonly default_program_name?: string;
 
+  available_adventures?: Record<string, Record<string, string | boolean>[]>;
+  readonly adventure_names?: Record<string, string>;
+  readonly adventures_default_order? : Record<number, string[]>
 
   disable_run?: boolean;
 
