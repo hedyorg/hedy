@@ -41,7 +41,7 @@ from website import (ab_proxying, achievements, admin, auth_pages, aws_helpers,
                      profile, programs, querylog, quiz, statistics,
                      translating)
 from website.auth import (current_user, is_admin, is_teacher,
-                          login_user_from_token_cookie, requires_login, requires_teacher, remember_current_user)
+                          login_user_from_token_cookie, requires_login, requires_teacher)
 from website.log_fetcher import log_fetcher
 from website.yaml_file import YamlFile
 
@@ -197,12 +197,8 @@ def initialize_session():
     utils.session_id()
     login_user_from_token_cookie()
 
-    # If user has no test_group field, create and save it into database
-    user = current_user()
-    if ("test_group" not in user.keys() or user.get('test_group') is None) and user['username']:
-        test_group = alternative_error_messages.select_users_test_group()
-        g.db.update_user(user['username'], {'test_group': test_group})
-        remember_current_user(g.db.user_by_username(user['username']))
+    # Creation of test_group field if it doesn't exist in session or db user
+    alternative_error_messages.update_users_test_group(g.db)
 
 
 if os.getenv('IS_PRODUCTION'):
