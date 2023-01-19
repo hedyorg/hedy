@@ -42,7 +42,7 @@ from website import (ab_proxying, achievements, admin, auth_pages, aws_helpers,
                      profile, programs, querylog, quiz, statistics,
                      translating)
 from website.auth import (current_user, is_admin, is_teacher,
-                          login_user_from_token_cookie, requires_login, requires_teacher)
+                          login_user_from_token_cookie, requires_login, requires_teacher, remember_current_user)
 from website.log_fetcher import log_fetcher
 from website.yaml_file import YamlFile
 
@@ -197,6 +197,13 @@ def initialize_session():
     # Invoke session_id() for its side effect
     utils.session_id()
     login_user_from_token_cookie()
+
+    # If user has no test_group field, create and save it into database
+    user = current_user()
+    if ("test_group" not in user.keys() or user.get('test_group') == None) and user['username']:
+        test_group = alternative_error_messages.select_users_test_group()
+        g.db.update_user(user['username'], {'test_group': test_group})
+        remember_current_user(g.db.user_by_username(user['username']))
 
 
 if os.getenv('IS_PRODUCTION'):
@@ -372,13 +379,6 @@ def parse():
     response = {}
     username = current_user()['username'] or None
     exception = None
-
-    user = DATABASE.user_by_username(username)
-
-    # If user has no  test_group field, create and save it into database
-    if "test_group" not in user.keys():
-        test_group = alternative_error_messages.select_users_test_group()
-        DATABASE.update_user(username, {"test_group": test_group})
 
     # Check if alternative error messages are available in this parse
     alt_err_msgs = alternative_error_messages.is_available()
@@ -1638,9 +1638,12 @@ def client_messages():
     response = make_response(render_template(
         "client_messages.js", error_messages=json.dumps(d)))
 
-    if not is_debug_mode():
+    if is_debug_mode():
+        response.cache_control.max_age = 0
+    else:
         # Cache for longer when not developing
         response.cache_control.max_age = 60 * 60  # Seconds
+
     return response
 
 
