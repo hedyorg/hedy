@@ -1753,14 +1753,14 @@ else:
         return f"""create_button({button_name})"""
 
     def make_ifpressed_command(self, command, button=False):
-        command_prefix = (f"""\
-while not pygame_end:
-  pygame.display.update()
-  event = pygame.event.wait()
-  if event.type == pygame.QUIT:
-    pygame_end = True
-    pygame.quit()
-    break""")
+        command_prefix = textwrap.dedent(f"""\
+        while not pygame_end:
+          pygame.display.update()
+          event = pygame.event.wait()
+          if event.type == pygame.QUIT:
+            pygame_end = True
+            pygame.quit()
+            break""")
 
         if button:
             command = f"""\
@@ -1784,10 +1784,9 @@ if event.key == {button_name}:
             return self.make_ifpressed_command(f"""\
 if event.unicode == '{args[0]}':
 {ConvertToPython.indent(args[1])}
-  break""") + "\n" + self.make_ifpressed_command(f"""\
-if event.key == {button_name}:
-{ConvertToPython.indent(args[1])}
-  break""", True)
+  break
+else:
+  break""")
 
     def ifpressed_else(self, meta, args):
         if (len(args[0]) > 1):
