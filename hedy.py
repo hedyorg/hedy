@@ -1783,16 +1783,15 @@ while not pygame_end:
         var_or_button = args[0]
         # for now we assume a var is a letter, we can check this lateron by searching for a ... = button
         if self.is_variable(var_or_button):
-            return self.make_ifpressed_command(textwrap.dedent(f"""\
-            if event.unicode == {args[0]}:
-            {ConvertToPython.indent(args[1])}
-              break"""), False)
-
+            return self.make_ifpressed_command(f"""\
+if event.unicode == {args[0]}:
+{ConvertToPython.indent(args[1])}
+  break""", False)
         elif len(var_or_button) > 1:
-            return self.make_ifpressed_command(textwrap.dedent(f"""\
-            if event.key == {button_name}:
-            {ConvertToPython.indent(args[1])}
-              break"""), True)
+            return self.make_ifpressed_command(f"""\
+if event.key == {button_name}:
+{ConvertToPython.indent(args[1])}
+  break""", True)
         else:
             return self.make_ifpressed_command(f"""\
 if event.unicode == '{args[0]}':
