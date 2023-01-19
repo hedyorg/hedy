@@ -1781,7 +1781,8 @@ while not pygame_end:
     def ifpressed(self, meta, args):
         button_name = self.process_variable(args[0], meta.line)
         var_or_button = args[0]
-        if self.is_variable(var_or_button): # for now we assume a var is a letter, we can check this lateron by searching for a ... = button
+        # for now we assume a var is a letter, we can check this lateron by searching for a ... = button
+        if self.is_variable(var_or_button):
             return self.make_ifpressed_command(f"""\
 if event.unicode == {args[0]}:
 {ConvertToPython.indent(args[1])}
@@ -1985,7 +1986,7 @@ class ConvertToPython_8_9(ConvertToPython_7):
 if event.unicode == {args[0]}:
 {all_lines}
   break""")
-        elif len(var_or_key) == 1: #one character? also a key!
+        elif len(var_or_key) == 1:  # one character? also a key!
             return self.make_ifpressed_command(f"""\
 if event.unicode == '{args[0]}':
 {all_lines}
