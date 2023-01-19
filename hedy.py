@@ -1787,16 +1787,17 @@ while not pygame_end:
             if event.unicode == {args[0]}:
             {ConvertToPython.indent(args[1])}
               break"""), False)
+
         elif len(var_or_button) > 1:
             return self.make_ifpressed_command(textwrap.dedent(f"""\
             if event.key == {button_name}:
             {ConvertToPython.indent(args[1])}
               break"""), True)
         else:
-            return self.make_ifpressed_command(textwrap.dedent(f"""\
-            if event.unicode == '{args[0]}':
-            {ConvertToPython.indent(args[1])}
-              break"""))
+            return self.make_ifpressed_command(f"""\
+if event.unicode == '{args[0]}':
+{ConvertToPython.indent(args[1])}
+  break""")
 
     def ifpressed_else(self, meta, args):
         var_or_button = args[0]
