@@ -1781,14 +1781,11 @@ while not pygame_end:
     def ifpressed(self, meta, args):
         button_name = self.process_variable(args[0], meta.line)
         var_or_button = args[0]
-        if self.is_variable(var_or_button):
+        if self.is_variable(var_or_button): # for now we assume a var is a letter, we can check this lateron by searching for a ... = button
             return self.make_ifpressed_command(f"""\
-            if event.unicode == {args[0]}:
-            {ConvertToPython.indent(args[1])}
-              break""", False) + "\n" + self.make_ifpressed_command(f"""\
-            if event.key == {button_name}:
-            {ConvertToPython.indent(args[1])}
-              break""", False)
+if event.unicode == {args[0]}:
+{ConvertToPython.indent(args[1])}
+  break""", False)
         elif len(var_or_button) > 1:
             return self.make_ifpressed_command(f"""\
 if event.key == {button_name}:
@@ -1798,10 +1795,7 @@ if event.key == {button_name}:
             return self.make_ifpressed_command(f"""\
 if event.unicode == '{args[0]}':
 {ConvertToPython.indent(args[1])}
-  break""") + "\n" + self.make_ifpressed_command(f"""\
-if event.key == {button_name}:
-{ConvertToPython.indent(args[1])}
-  break""", True)
+  break""")
 
     def ifpressed_else(self, meta, args):
         var_or_button = args[0]

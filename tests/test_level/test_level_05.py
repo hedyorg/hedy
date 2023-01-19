@@ -844,6 +844,27 @@ class TestsLevel5(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=7)
 
+    def test_if_pressed_x_is_variable(self):
+        code = textwrap.dedent("""\
+        x is a
+        if x is pressed print 'it is a letter key'""")
+
+        expected = HedyTester.dedent("""\
+        x = 'a'
+        while not pygame_end:
+          pygame.display.update()
+          event = pygame.event.wait()
+          if event.type == pygame.QUIT:
+            pygame_end = True
+            pygame.quit()
+            break
+          if event.type == pygame.KEYDOWN:
+            if event.unicode == x:
+              print(f'it is a letter key')
+              break""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=7)
+
     def test_double_if_pressed(self):
         code = textwrap.dedent("""\
         if x is pressed print 'first key'
@@ -861,16 +882,8 @@ class TestsLevel5(HedyTester):
             if event.unicode == 'x':
               print(f'first key')
               break
-          if event.type == pygame.USEREVENT:
-            if event.key == 'x':
-              print(f'first key')
-              break
           if event.type == pygame.KEYDOWN:
             if event.unicode == 'y':
-              print(f'second key')
-              break
-          if event.type == pygame.USEREVENT:
-            if event.key == 'y':
               print(f'second key')
               break""")
 
