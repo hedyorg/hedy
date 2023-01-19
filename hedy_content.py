@@ -60,8 +60,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'restaurant',
         'fortune',
         'haunted',
-        'next',
-        'end'
+        'next'
     ],
     2: [
         'default',
@@ -70,9 +69,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'story',
         'haunted',
         'restaurant',
-        'turtle',
-        'next',
-        'end'
+        'turtle'
     ],
     3: [
         'default',
@@ -84,9 +81,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'story',
         'parrot',
         'haunted',
-        'restaurant',
-        'next',
-        'end'
+        'restaurant'
     ],
     4: [
         'default',
@@ -98,9 +93,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'story',
         'haunted',
         'fortune',
-        'restaurant',
-        'next',
-        'end'
+        'restaurant'
     ],
     5: [
         'default',
@@ -114,9 +107,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'haunted',
         'restaurant',
         'turtle',
-        'pressit',
-        'next',
-        'end'
+        'pressit'
     ],
     6: [
         'default',
@@ -126,21 +117,16 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'turtle',
         'calculator',
         'fortune',
-        'restaurant',
-        'next',
-        'end'
+        'restaurant'
     ],
     7: [
         'default',
         'story',
         'songs',
         'dishes',
-        'dice',
-        'turtle',
+        'dice'
         'fortune',
-        'restaurant',
-        'next',
-        'end'
+        'restaurant'
     ],
     8: [
         'default',
@@ -149,9 +135,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'songs',
         'haunted',
         'restaurant',
-        'turtle',
-        'next',
-        'end'
+        'turtle'
     ],
     9: [
         'default',
@@ -159,9 +143,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'story',
         'calculator',
         'haunted',
-        'restaurant',
-        'next',
-        'end'
+        'restaurant'
     ],
     10: [
         'default',
@@ -172,18 +154,14 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'story',
         'fortune',
         'restaurant',
-        'calculator',
-        'next',
-        'end'
+        'calculator'
     ],
     11: [
         'default',
         'years',
         'songs',
         'haunted',
-        'restaurant',
-        'next',
-        'end'
+        'restaurant'
     ],
     12: [
         'default',
@@ -193,9 +171,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'restaurant',
         'calculator',
         'piggybank',
-        'secret',
-        'next',
-        'end'
+        'secret'
     ],
     13: [
         'default',
@@ -203,9 +179,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'secret',
         'rock',
         'story',
-        'tic',
-        'next',
-        'end'
+        'tic'
     ],
     14: [
         'default',
@@ -213,9 +187,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'calculator',
         'piggybank',
         'quizmaster',
-        'tic',
-        'next',
-        'end'
+        'tic'
     ],
     15: [
         'default',
@@ -224,29 +196,21 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'dice',
         'rock',
         'calculator',
-        'tic',
-        'next',
-        'end'
+        'tic'
     ],
     16: [
         'default',
         'haunted',
         'songs',
-        'language',
-        'next',
-        'end'
+        'language'
     ],
     17: [
         'default',
         'tic',
-        'blackjack',
-        'next',
-        'end'
+        'blackjack'
     ],
     18: [
-        'default',
-        'next',
-        'end'
+        'default'
     ]
 }
 

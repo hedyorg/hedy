@@ -1418,10 +1418,9 @@ class TestCustomizeClasses(AuthHelper):
             {},
             {'levels': 1},
             {'levels': [1, 2, 3]},
-            {'levels': [1, 2, 3], 'adventures': []},
-            {'levels': [1, 2, 3], 'adventures': {}},
-            {'levels': [1, 2, 3], 'adventures': {}, 'opening_dates': {}},
-            {'levels': [1, 2, 3], 'adventures': {}, 'opening_dates': {}, 'teacher_adventures': []}
+            {'levels': [1, 2, 3], 'sorted_adventures': []},
+            {'levels': [1, 2, 3], 'sorted_adventures': {}},
+            {'levels': [1, 2, 3], 'sorted_adventures': {}, 'opening_dates': {}},
         ]
 
         for invalid_body in invalid_bodies:
@@ -1450,65 +1449,65 @@ class TestCustomizeClasses(AuthHelper):
         valid_bodies = [
             {
                 'levels': [],
-                'adventures': {},
+                'sorted_adventures': {},
                 'opening_dates': {},
-                'teacher_adventures': [],
                 'other_settings': [],
                 'level_thresholds': {}
             },
             {
                 'levels': ['1'],
-                'adventures': {'story': ['1']},
+                'sorted_adventures': {'1': [{'name': 'story', 'from_teacher': False}]},
                 'opening_dates': {'1': '2022-03-16'},
-                'teacher_adventures': [],
                 'other_settings': [],
                 'level_thresholds': {}
             },
             {
                 'levels': ['1', '2', '3'],
                 'opening_dates': {'1': '', '2': '', '3': ''},
-                'adventures': {
-                    'story': [],
-                    'parrot': [],
-                    'songs': [],
-                    'turtle': [],
-                    'dishes': [],
-                    'dice': [],
-                    'rock': [],
-                    'calculator': [],
-                    'restaurant': [],
-                    'fortune': [],
-                    'haunted': [],
-                    'piggybank': [],
-                    'quizmaster': [],
-                    'language': [],
-                    'next': [],
-                    'end': []
+                'sorted_adventures': {
+                    '1': [],
+                    '2': [],
+                    '3': [],
+                    '4': [],
+                    '5': [],
+                    '6': []
                 },
-                'teacher_adventures': [],
                 'other_settings': [],
                 'level_thresholds': {}
             },
             {
                 'levels': ['1', '2', '3'],
                 'opening_dates': {'1': '', '2': '', '3': ''},
-                'adventures': {
-                    'story': ['1', '2', '3'],
-                    'parrot': ['1', '2', '3'],
-                    'songs': [],
-                    'turtle': ['1', '2', '3'],
-                    'dishes': ['3'],
-                    'dice': ['3'],
-                    'rock': ['1', '2', '3'],
-                    'calculator': [],
-                    'restaurant': ['1', '2', '3'],
-                    'fortune': ['1', '3'],
-                    'haunted': ['1', '2', '3'],
-                    'piggybank': [],
-                    'quizmaster': [],
-                    'language': [],
-                    'next': ['1', '2', '3'],
-                    'end': ['1', '2', '3']
+                'sorted_adventures': {
+                    "1": [
+                        {"name": "next", "from_teacher": False},
+                        {"name": "default", "from_teacher": False},
+                        {"name": "story", "from_teacher": False},
+                        {"name": "restaurant", "from_teacher": False},
+                        {"name": "fortune", "from_teacher": False},
+                        {"name": "haunted", "from_teacher": False}
+                    ],
+                    "2": [
+                        {"name": "turtle", "from_teacher": False},
+                        {"name": "default", "from_teacher": False},
+                        {"name": "rock", "from_teacher": False},
+                        {"name": "parrot", "from_teacher": False},
+                        {"name": "story", "from_teacher": False},
+                        {"name": "haunted", "from_teacher": False},
+                        {"name": "restaurant", "from_teacher": False}
+                    ],
+                    "3": [
+                        {"name": "default", "from_teacher": False},
+                        {"name": "rock", "from_teacher": False},
+                        {"name": "dice", "from_teacher": False},
+                        {"name": "dishes", "from_teacher": False},
+                        {"name": "fortune", "from_teacher": False},
+                        {"name": "turtle", "from_teacher": False},
+                        {"name": "story", "from_teacher": False},
+                        {"name": "parrot", "from_teacher": False},
+                        {"name": "haunted", "from_teacher": False},
+                        {"name": "restaurant", "from_teacher": False},
+                        {"name": "next", "from_teacher": False}]
                 },
                 'teacher_adventures': [],
                 'other_settings': ['developers_mode', 'hide_cheatsheet'],
@@ -1539,9 +1538,8 @@ class TestCustomizeClasses(AuthHelper):
         # THEN receive an OK response code with the server
         body = {
             'levels': [],
-            'adventures': {},
+            'sorted_adventures': {},
             'opening_dates': {},
-            'teacher_adventures': [],
             'other_settings': [],
             'level_thresholds': {}}
         self.post_data('for-teachers/customize-class/' + class_id, body, expect_http_code=200)
