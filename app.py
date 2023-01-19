@@ -199,7 +199,7 @@ def initialize_session():
 
     # If user has no test_group field, create and save it into database
     user = current_user()
-    if ("test_group" not in user.keys() or user.get('test_group') == None) and user['username']:
+    if ("test_group" not in user.keys() or user.get('test_group') is None) and user['username']:
         test_group = alternative_error_messages.select_users_test_group()
         g.db.update_user(user['username'], {'test_group': test_group})
         remember_current_user(g.db.user_by_username(user['username']))
