@@ -26,7 +26,9 @@ def select_users_test_group():
             return True
     return False
 
-### Creation of test_group field if it doesn't exist in session or db user
+# Creation of test_group field if it doesn't exist in session or db user
+
+
 def update_users_test_group(db):
     user = current_user()
     # Check if there is a logged-in user
