@@ -52,18 +52,51 @@ class ForTeachersModule(WebsiteModule):
 
         return render_template(
             "for-teachers.html",
-            current_page="my-profile",
+            current_page="for-teachers",
             page_title=gettext("title_for-teacher"),
             teacher_classes=teacher_classes,
             teacher_adventures=adventures,
             welcome_teacher=welcome_teacher,
         )
 
-    @route("/manual", methods=["GET"])
-    @requires_login
-    def get_teacher_manual(self, user):
-        page_translations = hedyweb.PageTranslations("for-teachers").get_page_translations(g.lang)
-        return render_template("teacher-manual.html", current_page="my-profile", content=page_translations)
+    @route("/manual", methods=["GET"], defaults={'section_key': 'intro'})
+    @route("/manual/<section_key>", methods=["GET"])
+    def get_teacher_manual(self, section_key):
+        content = hedyweb.PageTranslations("for-teachers").get_page_translations(g.lang)
+
+        # Code very defensively around types here -- Weblate has a tendency to mess up the YAML,
+        # so the structure cannot be trusted.
+        page_title = content.get('title', '')
+        sections = {section['key']: section for section in content['sections']}
+        section_titles = [(section['key'], section.get('title', '')) for section in content['sections']]
+        current_section = sections.get(section_key)
+
+        if not current_section:
+            return utils.error_page(error=404, ui_message=gettext("page_not_found"))
+
+        intro = current_section.get('intro')
+
+        # Some pages have 'subsections', others have 'levels'. We're going to treat them ~the same.
+        # Give levels a 'title' field as well (doesn't have it in the YAML).
+        subsections = current_section.get('subsections', [])
+        for subsection in subsections:
+            subsection.setdefault('title', '')
+        levels = current_section.get('levels', [])
+        for level in levels:
+            level['title'] = gettext('level') + ' ' + str(level['level'])
+
+        subsection_titles = [x.get('title', '') for x in subsections + levels]
+
+        return render_template("teacher-manual.html",
+                               current_page="teacher-manual",
+                               page_title=page_title,
+                               section_titles=section_titles,
+                               section_key=section_key,
+                               section_title=current_section['title'],
+                               intro=intro,
+                               subsection_titles=subsection_titles,
+                               subsections=subsections,
+                               levels=levels)
 
     @route("/class/<class_id>", methods=["GET"])
     @requires_login
@@ -119,7 +152,7 @@ class ForTeachersModule(WebsiteModule):
 
         return render_template(
             "class-overview.html",
-            current_page="my-profile",
+            current_page="for-teachers",
             page_title=gettext("title_class-overview"),
             achievement=achievement,
             invites=invites,
@@ -157,7 +190,7 @@ class ForTeachersModule(WebsiteModule):
             adventures=adventures,
             teacher_adventures=teacher_adventures,
             customizations=customizations,
-            current_page="my-profile",
+            current_page="for-teachers",
         )
 
     @route("/customize-class/<class_id>", methods=["DELETE"])
@@ -314,7 +347,7 @@ class ForTeachersModule(WebsiteModule):
             "view-adventure.html",
             adventure=adventure,
             page_title=gettext("title_view-adventure"),
-            current_page="my-profile",
+            current_page="for-teachers",
         )
 
     @route("/customize-adventure/<adventure_id>", methods=["GET"])
@@ -342,7 +375,7 @@ class ForTeachersModule(WebsiteModule):
             adventure=adventure,
             class_data=class_data,
             max_level=hedy.HEDY_MAX_LEVEL,
-            current_page="my-profile",
+            current_page="for-teachers",
         )
 
     @route("/customize-adventure", methods=["POST"])

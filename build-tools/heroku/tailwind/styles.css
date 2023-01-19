@@ -75,6 +75,17 @@ strong {
   @apply text-2xl;
 }
 
+/**
+ * text-business-copy
+ *
+ * For Real Business Value(tm).
+ */
+.text-business-copy { }
+
+.text-business-copy h3:first-child { @apply mt-0; }
+
+.text-business-copy * + h3 { @apply mt-8; }
+
 
 .btn-shape {
   @apply font-slab leading-6 font-normal tracking-wide;
@@ -314,7 +325,7 @@ code {
 }
 
 .dropdown-item {
-  @apply text-gray-800 no-underline hover:bg-blue-600 py-2 px-4 block;
+  @apply text-gray-800 no-underline hover:bg-blue-600 py-2 px-4 block whitespace-nowrap;
   @apply cursor-pointer w-52 font-medium rounded-md;
   @apply grow-0;
 }

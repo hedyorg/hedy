@@ -437,10 +437,6 @@ adventures:
                 start_code: "{print} \"رسم الأشكال\"\nالزاوية هي ٩٠\n{turn} الزاوية\n{forward} ٢٥"
                 example_code_2: "```\n{color} {white}\n{forward} -80\n{color} {green}\n{forward} 50\n{color} {yellow}\n{forward} 50\n{color} {red}\n{forward} 50\n```\n"
                 story_text_2: "## الألوان\nيمكنك أيضًا تغيير لون الخطوط باستخدام الأمر `{color}`. انظر للمثال التوضيحي\nبالإضافة إلى ذلك، يمكنك استخدام الأمر `{color} {white}` لرسم خطوط غير مرئية، وبالتالي يمكنك تحريك السلحفاة لأي مكان تريده على الشاشة قبل البدء بالرسم.\n"
-            7:
-                story_text: "## فلنرسم!\nفي هذا المستوى يمكننا تكرار سطر واحد من الكود باستخدام الأمر `{repeat}`.\n"
-                example_code: "\n\n```\n{print} \"رسم الأشكال\"\n{repeat} ٣ {times} {forward} ١٠\n```\n"
-                start_code: "{print} \"رسم الأشكال\"\n{repeat} ٣ {times} {forward} ١٠"
             5:
                 story_text: "## فلنرسم!\nفي المستوى الخامس يمكننا الاختيار بناء على فحص معين من خلال الأمر `{if}`. على سبيل المثال الإحتيار بين عدة أنواع من أشكال الرسم.\n"
                 example_code: "\n\n```\n{print} \"رسم الأشكال\"\nالشكل {is} {ask} \"هل تريد مربعاً أم مثلثاً؟\"\n{if} الشكل {is} مثلث الزاوية هي ١٢٠\n{else} الزاوية هي ٩٠\n{turn} الزاوية\n{forward} ٢٥\n{turn} الزاوية\n{forward} ٢٥\n{turn} الزاوية\n{forward} ٢٥\n{turn} الزاوية\n{forward} ٢٥\n```\n"
@@ -807,79 +803,14 @@ adventures:
         name: لغة
         description: تدرب على كلمات من لغة جديدة
         default_save_name: لغة
-    next:
-        name: ما التالي؟
-        levels:
-            3:
-                story_text: "## ما التالي؟\nلقد تدربت على إستخدام المتغيرات في هذا المستوى، ولكنك ربما مررت بهذا الخطأ خلال كتابتك للأمثلة السابقة.\n\nجرب تنفيذ هذا البرنامج:\n```\nاسمي {is} مريم\n{print} اسمي هو اسمي\n```\nبالتأكيد اردت طباعة `اسمي هو مريم` ولكن هيدي طبعت `مريم هو مريم`\nفي المستوى القادم سيتم حل تلك المشكلة بإستخدام علامات التنصيص (\"\")\n"
-                start_code: "{print} هيا بنا إلى المستوى التالي!"
-            4:
-                story_text: "## What's next?\nIn the previous levels you've already learned to use `{at} {random}` which made your games different every time you ran the code.\nBut it's not really interactive, the player doesn't have any influence on what happens in the game.\n\nIn the next level you'll learn the `{if}` command, that allows you to give different responses in your program. This way you can program a secret password for your computer for example.\nSo let's take a peak!\n\n```\npassword {is} {ask} 'What is the correct password?'\n```\n"
-                start_code: "{print} 'هيا بنا إلى المستوى التالي!'"
-            5:
-                start_code: "{print} 'On to the next level!'"
-                story_text: "## ما التالي ؟\nلقد وصلت الآن إلى نهاية هذا المستوى ، لذلك تعلمت `{ask}` و `{if}`. على سبيل المثال يمكنك `{ask}` الضيوف عما يرغبون في تناوله.\nلكن ما لا يمكنك فعله بعد هو حساب سعر عشاء الجميع.\n\nالمستوى التالي يجعل من الممكن استخدام الجمع والطرح والضرب في برامجك. بهذه الطريقة يمكنك حساب الأسعار في مطعمك ، ولكن يمكنك أيضًا إضافة رمز سري لمنح أصدقائك وعائلتك خصمًا.\nهناك خيار آخر في المستوى التالي وهو برمجة لعبة الرياضيات الخاصة بك ، لأخيك الصغير أو أختك لممارسة الضرب.\nاذهب وانظر بنفسك في المستوى التالي!\n"
-                example_code: "##  أشربة مجانية !\n```\n{print} 'اهلًا وسهلًا في مطعم هيدي'\nالطلب {is} {ask} 'ماذا تحب ان تطلب ؟'\n{print} 'طلبك هو ' الطلب\n{if} الطلب {is} همبورجر السعر {is} ٥\n{if} الطلب {is} بطاطس مقلية السعر {is} ۲\nالأشربة {is} {ask} 'ماذا تريد ان تشرب ؟'\n{print} 'انت تريد ' الأشربة\n{print} 'هذا سيكلفك ' السعر' قروش لطلبك ' الطلب ' لو سمحت'\n{print} 'المشروبات مجانية في هذا المستوى لأن هيدي لا تستطيع حساب السعر بعد ...'\n```\n"
-            8:
-                start_code: "{print} 'Lets go to the next level!'"
-                story_text: "## What's next?\nGreat job! You've reached the end of another level! In this level you've learned to use multiple lines of code in an {if} or {repeat} command. But you can't yet combine the two...\nGood news! In the next level you will be allowed to put an {if} inside an {if}, or inside a {repeat} command.\n\nFor example:\n```\nanswer = {ask} 'Would you like to go to teh next level?'\n{if} answer {is} 'yes'\n    {print} 'Great! You can use the {repeat} commando in the {if} command!'\n    {print} 'Hooray!'\n    {print} 'Hooray!'\n    {print} 'Hooray!'\n{else}\n    {print} 'Okay, you can stay here for a little longer!'\n```\nIn this code Hedy will still say 'Your drink is on its way' even {if} you didn't even want to drink something! In the next level this will be fixed!\n"
-                example_code: "```\nanswer = {ask} 'Would you like to go to the next level?'\n{if} answer {is} yes\n    {print} 'Great! You can use the {repeat} commando in the {if} command!'\n    {print} 'Hooray!'\n    {print} 'Hooray!'\n    {print} 'Hooray!'\n{else}\n    {print} 'Okay, you can stay here for a little longer!'\n```\n"
-            11:
-                start_code: "{print} 'Lets go to the next level!'"
-                story_text: "## What's next?\nMaybe you have tried using decimal numbers in your restaurant adventure. If you did, you probably noticed that Hedy didn't understand them yet and always rounded off.\nFrom the next level on you can use decimal numbers.\n\nAnother cool feauture in the next level is that you can use mulitiple words in a variable.\nFor intance, you could already do this...\n```\nname = {ask} 'Who is your favorite cartoon character?'\n{print} 'I love watching ' name\n```\nBut you couldn't use multiple words in a variable like the example below. This program does not work yet in this level!\n```\nshow = SpongeBob SquarePants\n{print} show 'is my favorite show!'\n```\nGo to the next level to make this code work!\n"
-                example_code: "```\nname = {ask} 'Who is your favorite cartoon character?'\n{print} 'I love watching ' name\n```\nBut you couldn't use multiple words in a variable like the example below. This program does not work yet in this level!\n```\nshow = SpongeBob SquarePants\n{print} show 'is my favorite show!'\n```\nGo to the next level to make this code work!\n"
-            12:
-                start_code: "{print} 'Lets go to the next level!'"
-                story_text: "## What's next?\nIn the previous levels you learned how to put two `{if}`commands inside each other. This works fine, but it does give you very long and unhandy codes like this one:\n```\nusername {is} {ask} 'What is your username?'\npassword {is} {ask} 'What is your password?'\n{if} username {is} 'Hedy'\n    {if} password {is} 'secret'\n        {print} 'Welcome Hedy!'\n    {else}\n        {print} 'Access denied'\n{else}\n    {print} 'Access denied!'\n```\nIn this system you have to give both the correct username and the correct password.\nIn the next level you will learn the `{and}` command that will make this code a ot shorter and more understandable!\nCheck it out!\n"
-                example_code: "```\nusername {is} {ask} 'What is your username?'\npassword {is} {ask} 'What is your password?'\n{if} username {is} 'Hedy'\n    {if} password {is} 'secret'\n        {print} 'Welcome Hedy!'\n    {else}\n        {print} 'Access denied'\n{else}\n    {print} 'Access denied!'\n```\n"
-            13:
-                start_code: "{print} 'Lets go to the next level!'"
-                story_text: "## What's next?\nWith the program below you can calulate {if} you've passed a subject at school (so, a grade of six or higher).\nYou can see this code is extremely inefficient, du to the very long code in line 5.\nAll the different grades from 1 to 5 had to be programmed seperately. Lucky for you, in the next level you'll learn how to do this without this extremely long code!\n```\nfirst_grade = {ask} 'What score did you get on your first test?'\nsecond_grade = {ask} 'What score did you get on your second test?'\nadded {is} first_grade + second_grade\nmean_grade {is} added / 2\n{if} mean_grade = 1 {or} mean_grade = 2 {or} mean_grade = 3 {or} mean_grade = 4 {or} mean_grade = 5\n    {print} 'Oh no! You have failed the subject...'\n{else}\n    {print} 'Great! You have passed the subject!'\n```\n"
-                example_code: "```\nfirst_grade = {ask} 'What score did you get on your first test?'\nsecond_grade = {ask} 'What score did you get on your second test?'\nadded {is} first_grade + second_grade\nmean_grade {is} added / 2\n{if} mean_grade = 1 {or} mean_grade = 2 {or} mean_grade = 3 {or} mean_grade = 4 {or} mean_grade = 5\n    {print} 'Oh no! You have failed the subject...'\n{else}\n    {print} 'Great! You have passed the subject!'\n```\n"
-            14:
-                start_code: "{print} 'Lets go to the next level!'"
-                story_text: "## What's next?\nIn this game below a code has been made to make sure the player can play on as long as he/she wants...\nBut the code is ineffective and way too long. Also, what {if} the player wants to play 101 games instead of 100?\nYou can't play to infinity?\nIn the next level you will learn a command that makes all of this a lot easier!\n```\ngame {is} 'on'\n{for} i {in} {range} 1 {to} 100\n    {if} game {is} 'on'\n        answer = {ask} 'Do you want to continue?'\n        {if} answer {is} 'no'\n            game {is} 'over'\n        {if} answer {is} 'yes'\n            {print} 'Ok we will continue'\n```\n"
-                example_code: "```\ngame {is} 'on'\n{for} i {in} {range} 1 {to} 100\n    {if} game {is} 'on'\n        answer = {ask} 'Do you want to continue?'\n        {if} answer {is} 'no'\n            game {is} 'over'\n        {if} answer {is} 'yes'\n            {print} 'Ok we will continue'\n```\n"
-            1:
-                start_code: "{print} هيا بنا!"
-                story_text: "## ما التالي؟\nتهانينا! لقد وصلت إلى نهاية المستوى ١. نتمنى أنك قد تمكنت بالفعل من كتابة بعض البرامج الرائعة، ولكن هيدي لازال لديها الكثير لتكتشفه.\n\nفي المستوى الاول، ربما لاحظت ان الامر `{echo}` يمكنه حفظ معلومة واحدة في كل مرة.\nعلى سبيل المثال، في مغامرة المطعم تمكنت من استخدام `{echo}` مع ما يود الضيف تناوله، او ما يود شربه على حدٍ سواء.. ولكن ليس الاثنين معاً في نفس الجملة.\n"
-                example_code: "```\n{print} مرحبًا بك في هيدي\n{ask} ماذا تود ان تطلب؟\n{echo} إذًا انت تريد \n{ask} وماذا تود ان تشرب؟\n{echo} إذًا انت تريد \n```\n"
-                story_text_2: "إذا طلب اللاعب بطاطا مقلية ومن ثم قام بطلب شيء اخر عصير مثلا، فلن تستطيع قول \"إذاً انت تريد بطاطا مقلية و أيضا تريد عصير\"، يجب ان تضعهم في سطرين منفردين.\nو كذلك الامر `{echo}` يمكنه ترديد الكلمة في اخر الجملة فقط. إذاً فلن تستطيع ايضاً قول \"البطاطا المقلية قادمة حالاً!\" في اول الجملة.\n\nسنغير هذه الامور في المستوى ٢. في المستوى 2 ستتعلم كيفية استخدام المتغيرات، وستتمكن من حفظ اكثر من معلومة واحدة وطباعتها في أي جزء تريده من الجملة.\nلذا هيا بنا لإستكشاف المستوى التالي!\n"
-            2:
-                story_text: "## ما التالي؟\nلقد تعلمت في هذا المستوى عن المتغيرات وكيفية استخدامها لجعل البرامج الخاصة بك أكثر تشويقًا.\nلكن يمكنك فعل ما هو أكثر بالمتغيرات، حيث يمكنك إنشاء قوائم ويمكنك جعل هيدي تختار كلمة عشوائية من قائمة قد قمت بإنشائها، فتصنع لعبًا أكثر إثارة.\nألقِ نظرة سريعة على المستوى التالي!\n"
-                start_code: "{print} هيا بنا إلى المستوى التالي!"
-            6:
-                start_code: "{print} 'هيا بنا للمستوى التالي!'"
-                story_text: "## ما التالي؟\n عمل رائع! لقد تمكنت من الوصول لنهاية هذا المستوى، مما يعني أنك تدربت على `{if}` و `{else}`. من المؤكد أنك لاحظت أن طول الكود الآن اصبح أطول وأطول.\n على سبيل المثال {if} أردت صنع برنامج 'عيد ميلاد سعيد'\n ```\n هذا يحتاج الكثير من الكتابة لصنع كود يحتوي على نفس الجملة مراراً و تكراراً. لحسن الحظ في المستوى القادم سيكون هناك حل لهذه الحالة بإستخدام الأمر `{repeat}`، وبذلك ستتمكن من تكرار أي سطر تحتاجه مرات عديدة.\n"
-                example_code: "```\n {print} 'عيد ميلاد سعيد'\n {print} 'عيد ميلاد سعيد'\n {print} 'عيد ميلاد سعيد عزيزتي هيدي'\n {print} 'عيد ميلاد سعيد'\n ```\n"
-            7:
-                story_text: "## What's next?\nNow you've learned how to repeat one single line of code. This comes in handy, but it's not always enough. Sometimes you want to repeat multiple lines at once.\nthe next level allows you to group a couple of lines of code, and repeat that little group of lines all at once!\n\n```\n{repeat} 5 {times} {print} 'In the next level you can repeat multiple lines of code at once!'\n```\n"
-                start_code: "{print} 'Lets go to the next level!'"
-                example_code: "```\n{repeat} 5 {times} {print} 'In the next level you can repeat multiple lines of code at once!'\n```\n"
-            9:
-                start_code: "{print} 'Lets go to the next level!'"
-                story_text: "## What's next?\nYou're doing great! In this level we still face a small problem. You have learned to repeat lines, but what {if} you'd want to slightly change the line.\nFor example {if} you want to sing the song '{if} you're happy and you knwo it'\n\nIt would look like this:\n```\n{repeat} 2 {times}\n    {print} '{if} youre happy and you know it clap your hands'\n{print} '{if} youre happy and you know it and you really want to show it'\n{print} '{if} youre happy and you know it clap your hands'\n```\n\nIf you'd also want the next verse 'stomp your feet', and the next one, and the next one, you'd have to change the code completely.\nIn the next level you'll learn the `{for}` command, which allows you to make a list of actions and repeat the code with another action each time!\nPlease take a look!\n"
-                example_code: "```\n{repeat} 2 {times}\n    {print} '{if} youre happy and you know it clap your hands'\n{print} '{if} youre happy and you know it and you really want to show it'\n{print} '{if} youre happy and you know it clap your hands'\n```\n"
-            10:
-                story_text: "## What's next?\nYou have reached the end of this level, you're doing great! You are about to go to the next level. In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.\nIn Python there is no `{repeat}` command, but there is a command that works like {repeat}. Are you curious to find out how to say `{repeat}` in Python language? Quickly go on to find out!\n"
-                start_code: "{print} 'Lets go to the next level!'"
-            17:
-                story_text: "## What's next?\nIn the next level you will learn a real Python way to use `{print}`.\n"
-                start_code: "{print} 'Lets go to the next level!'"
-            18:
-                story_text: "## What's next?\nCongratulations! You have reached the last level of Hedy! But no worries, we are working very hard to create more levels and new adventures. So please come back later to check out the newest levels!\n"
-                start_code: "{print} ('Great job!!!')"
-            15:
-                story_text: "## What's next?\nIn the next level we will grow a bit more towards real Python code. thon code. You will also learn how to match two lists together.\nThis way you can program a code in which the correct animal is matched to the right sound.\nBecause the two codes below... Are obviously nonsense!\n```\nanimals = 'chicken', 'horse', 'cow'\nsounds = 'cluck', 'neigh', 'moo'\n{for} animal {in} animals\n    {print} 'A ' animal ' says ' sounds {at} {random}\n```\nYou could also try to make it work this way, but....\n```\nanimals = 'chicken', 'horse', 'cow'\nsounds = 'cluck', 'neigh', 'moo'\n{for} animal {in} animals\n    {for} sound {in} sounds\n        {print} 'A ' animal ' says ' sound\n```\n"
-                start_code: "{print} 'Lets go to the next level!'"
-                example_code: "```\nanimals = 'chicken', 'horse', 'cow'\nsounds = 'cluck', 'neigh', 'moo'\n{for} animal {in} animals\n    {print} 'A ' animal ' says ' sounds {at} {random}\n```\nYou could also try to make it work this way, but....\n```\nanimals = 'chicken', 'horse', 'cow'\nsounds = 'cluck', 'neigh', 'moo'\n{for} animal {in} animals\n    {for} sound {in} sounds\n        {print} 'A ' animal ' says ' sound\n```\n"
-            16:
-                story_text: "## What's next?\nIn the next level it's time for a new command. You might have noticed in the previous levels that `{if}` and `{else}` sometimes aren't enough.\nFor example in this code:\n```\n{print} 'What is for dinner tonight?'\noptions = ['pizza', 'broccoli', 'green beans']\nchosen = options {at} {random}\n{if} chosen = pizza\n    {print} 'Yummy! Pizza!'\n{else}\n    {print} 'Yikes...'\n```\nIn this code it would be great to have 2x an `{else}` so you could have one option for the broccoli and one for the green beans. The next level comes with the new command `{elif}` that makes this possible!\nSo check out the next level now!\n"
-                start_code: "{print} 'Lets go to the next level!'"
-                example_code: "```\n{print} 'What is for dinner tonight?'\noptions = ['pizza', 'broccoli', 'green beans']\nchosen = options {at} {random}\n{if} chosen = 'pizza'\n    {print} 'Yummy! Pizza!'\n{else}\n    {print} 'Yikes...'\n```\n"
-                story_text_2: In this code it would be great to have 2x an `{else}` so you could have one option for the broccoli and one for the green beans. The next level comes with the new command `{elif}` that makes this possible! So check out the next level now!
-        description: ما التالي؟
-        default_save_name: next
+#    next:
+#        levels:
+#            5:
+#                example_code: "##  أشربة مجانية !\n```\n{print} 'اهلًا وسهلًا في مطعم هيدي'\nالطلب {is} {ask} 'ماذا تحب ان تطلب ؟'\n{print} 'طلبك هو ' الطلب\n{if} الطلب {is} همبورجر السعر {is} ٥\n{if} الطلب {is} بطاطس مقلية السعر {is} ۲\nالأشربة {is} {ask} 'ماذا تريد ان تشرب ؟'\n{print} 'انت تريد ' الأشربة\n{print} 'هذا سيكلفك ' السعر' قروش لطلبك ' الطلب ' لو سمحت'\n{print} 'المشروبات مجانية في هذا المستوى لأن هيدي لا تستطيع حساب السعر بعد ...'\n```\n"
+#             1:
+#                start_code: "{print} هيا بنا!"
+#            6:
+#                example_code: "```\n {print} 'عيد ميلاد سعيد'\n {print} 'عيد ميلاد سعيد'\n {print} 'عيد ميلاد سعيد عزيزتي هيدي'\n {print} 'عيد ميلاد سعيد'\n ```\n"
     secret:
         levels:
             12:
@@ -941,10 +872,7 @@ adventures:
                 example_code: "```\n{repeat} 3 {times} {if} x {is} {pressed} forward 15\n```\n"
                 story_text: "You might have tried it in level 5 and 6, pressing the key linked to ```pressed``` multiple\ntimes. If you did, you noticed that this did nothing. but now that you have learned about repeat, we\ncan press keys multiple times! Make the turtle walk forward!\n"
                 start_code: '# place your code here'
-            8:
-                story_text: "## Press It!\nNow that you need to use indents for the {if} and {else} statements,\nyou will also have to indent code when using {pressed}! Don't worry,\nit works te same as with the other statements, see the example!\nPress another key instead of x and see what happens.\n"
-                example_code: "```\n{if} x {is} {pressed}\n    {print} 'Only the cool kids press the x key.'\n{else}\n    {print} 'The adventurous kids press something else.'\n```\n"
-                start_code: '# place your code here'
+
             9:
                 story_text_2: "Besides counting, you can now also move the turtle in many more ways than only forward or backwards!\nTry making some figures by walking the turtle around!\n"
                 example_code_2: "```\nstepsize = 25\nleft = -90\nright = 90\naround = 180\nrepeat 40 times\n    {if} w {is} {pressed}\n        forward stepsize\n    {if} s {is} {pressed}\n        turn around\n    {if} a {is} {pressed}\n        turn left\n    {if} d {is} {pressed}\n        turn right\n```\n"

@@ -4,6 +4,7 @@ import copy
 import datetime
 import json
 import logging
+import re
 import os
 import sys
 import textwrap
@@ -33,7 +34,7 @@ from hedy_content import (ADVENTURE_ORDER_PER_LEVEL, ALL_KEYWORD_LANGUAGES,
                           ALL_LANGUAGES, COUNTRIES,
                           NON_LATIN_LANGUAGES)
 from logging_config import LOGGING_CONFIG
-from utils import dump_yaml_rt, is_debug_mode, load_yaml_rt, timems, version
+from utils import dump_yaml_rt, is_debug_mode, load_yaml_rt, timems, version, strip_accents
 from website import (ab_proxying, achievements, admin, auth_pages, aws_helpers,
                      cdn, classes, database, for_teachers, jsonbin, parsons,
                      profile, programs, querylog, quiz, statistics,
@@ -81,6 +82,10 @@ for lang in ALL_LANGUAGES.keys():
 TUTORIALS = collections.defaultdict(hedy_content.NoSuchTutorial)
 for lang in ALL_LANGUAGES.keys():
     TUTORIALS[lang] = hedy_content.Tutorials(lang)
+
+SLIDES = collections.defaultdict(hedy_content.NoSuchSlides)
+for lang in ALL_LANGUAGES.keys():
+    SLIDES[lang] = hedy_content.Slides(lang)
 
 ACHIEVEMENTS_TRANSLATIONS = hedyweb.AchievementTranslations()
 DATABASE = database.Database()
@@ -1097,9 +1102,10 @@ def view_program(user, id):
     return render_template("view-program-page.html", blur_button_available=True, **arguments_dict)
 
 
-@app.route('/adventure/<name>', methods=['GET'], defaults={'level': 1})
-@app.route('/adventure/<name>/<level>', methods=['GET'])
-def get_specific_adventure(name, level):
+@app.route('/adventure/<name>', methods=['GET'], defaults={'level': 1, 'mode': 'full'})
+@app.route('/adventure/<name>/<level>', methods=['GET'], defaults={'mode': 'full'})
+@app.route('/adventure/<name>/<level>/<mode>', methods=['GET'])
+def get_specific_adventure(name, level, mode):
     try:
         level = int(level)
     except BaseException:
@@ -1124,6 +1130,7 @@ def get_specific_adventure(name, level):
 
     # Add the commands to enable the language switcher dropdown
     commands = hedy.commands_per_level.get(level)
+    raw = mode == 'raw'
 
     return hedyweb.render_specific_adventure(
         commands=commands,
@@ -1131,7 +1138,8 @@ def get_specific_adventure(name, level):
         adventure=adventure,
         version=version(),
         prev_level=prev_level,
-        next_level=next_level)
+        next_level=next_level,
+        raw=raw)
 
 
 @app.route('/cheatsheet/', methods=['GET'], defaults={'level': 1})
@@ -1511,6 +1519,26 @@ def change_language():
     return jsonify({'succes': 200})
 
 
+@app.route('/slides', methods=['GET'], defaults={'level': '1'})
+@app.route('/slides/<level>', methods=['GET'])
+def get_slides(level):
+    # In case of a "forced keyword language" -> load that one, otherwise: load
+    # the one stored in the g object
+
+    keyword_language = request.args.get('keyword_language', default=g.keyword_lang, type=str)
+
+    try:
+        level = int(level)
+    except ValueError:
+        return utils.error_page(error=404, ui_message="Slides do not exist!")
+
+    if not SLIDES[g.lang].get_slides_for_level(level, keyword_language):
+        return utils.error_page(error=404, ui_message="Slides do not exist!")
+
+    slides = SLIDES[g.lang].get_slides_for_level(level, keyword_language)
+    return render_template('slides.html', slides=slides)
+
+
 @app.route('/translate_keywords', methods=['POST'])
 def translate_keywords():
     body = request.json
@@ -1606,6 +1634,17 @@ def nl2br(x):
     if not isinstance(x, Markup):
         x = Markup.escape(x)
     return x.replace('\n', Markup('<br />'))
+
+
+SLUGIFY_RE = re.compile('[^a-z0-9_]+')
+
+
+@app.template_filter()
+def slugify(s):
+    """Convert arbitrary text into a text that's safe to use in a URL."""
+    if s is None:
+        return None
+    return SLUGIFY_RE.sub('-', strip_accents(s).lower())
 
 
 @app.template_filter()

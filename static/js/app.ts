@@ -121,53 +121,64 @@ export function initializeApp() {
   // Any code blocks we find inside 'turn-pre-into-ace' get turned into
   // read-only editors (for syntax highlighting)
   for (const preview of $('.turn-pre-into-ace pre').get()) {
-    $(preview).addClass('text-lg rounded');
-    // We set the language of the editor to the current keyword_language -> needed when copying to main editor
-    $(preview).attr('lang', APP_STATE.keyword_language);
-    $(preview).addClass('overflow-x-hidden');
-    const exampleEditor = turnIntoAceEditor(preview, true);
+    $(preview)
+      .addClass('text-lg rounded overflow-x-hidden')
+      // We set the language of the editor to the current keyword_language -> needed when copying to main editor
+      .attr('lang', APP_STATE.keyword_language);
 
-    // Fits to content size
-    exampleEditor.setOptions({ maxLines: Infinity });
-    if ($(preview).hasClass('common-mistakes')) {
-      exampleEditor.setOptions({ minLines: 5 });
-    } else if ($(preview).hasClass('cheatsheet')) {
-      exampleEditor.setOptions({ minLines: 1 });
-    } else if ($(preview).hasClass('parsons')) {
-      exampleEditor.setOptions({
-        minLines: 1,
-        showGutter: false,
-        showPrintMargin: false,
-        highlightActiveLine: false
-      });
-    } else {
-      exampleEditor.setOptions({ minLines: 2 });
-    }
+    // Only turn into an editor if the editor scrolls into view
+    // Otherwise, the teacher manual Frequent Mistakes page is SUPER SLOW to load.
+    onElementBecomesVisible(preview, () => {
+      const exampleEditor = turnIntoAceEditor(preview, true);
 
-    if (dir === "rtl") {
-         exampleEditor.setOptions({ rtl: true });
-    }
-    // Strip trailing newline, it renders better
-    exampleEditor.setValue(exampleEditor.getValue().replace(/\n+$/, ''), -1);
-    // And add an overlay button to the editor, if the no-copy-button attribute isn't there
-    if (! $(preview).hasClass('no-copy-button')) {
-      const buttonContainer = $('<div>').addClass('absolute ltr:-right-1 rtl:left-2 w-16').css({top: 5}).appendTo(preview);
-      let symbol = "⇥";
-      if (dir === "rtl") {
-        symbol = "⇤";
+      // Fits to content size
+      exampleEditor.setOptions({ maxLines: Infinity });
+      if ($(preview).hasClass('common-mistakes')) {
+        exampleEditor.setOptions({
+          showGutter: true,
+          showPrintMargin: true,
+          highlightActiveLine: true,
+          minLines: 5,
+        });
+      } else if ($(preview).hasClass('cheatsheet')) {
+        exampleEditor.setOptions({ minLines: 1 });
+      } else if ($(preview).hasClass('parsons')) {
+        exampleEditor.setOptions({
+          minLines: 1,
+          showGutter: false,
+          showPrintMargin: false,
+          highlightActiveLine: false
+        });
+      } else {
+        exampleEditor.setOptions({ minLines: 2 });
       }
-      $('<button>').css({ fontFamily: 'sans-serif' }).addClass('yellow-btn').text(symbol).appendTo(buttonContainer).click(function() {
-        theGlobalEditor?.setValue(exampleEditor.getValue() + '\n');
-        update_view("main_editor_keyword_selector", <string>$(preview).attr('lang'));
-        stopit();
-        clearOutput();
-      });
-    }
 
-    const levelStr = $(preview).attr('level');
-    if (levelStr) {
-      exampleEditor.session.setMode(getHighlighter(parseInt(levelStr, 10)));
-    }
+      if (dir === "rtl") {
+          exampleEditor.setOptions({ rtl: true });
+      }
+
+      // Strip trailing newline, it renders better
+      exampleEditor.setValue(exampleEditor.getValue().replace(/\n+$/, ''), -1);
+      // And add an overlay button to the editor, if the no-copy-button attribute isn't there
+      if (! $(preview).hasClass('no-copy-button')) {
+        const buttonContainer = $('<div>').addClass('absolute ltr:-right-1 rtl:left-2 w-16').css({top: 5}).appendTo(preview);
+        let symbol = "⇥";
+        if (dir === "rtl") {
+          symbol = "⇤";
+        }
+        $('<button>').css({ fontFamily: 'sans-serif' }).addClass('yellow-btn').text(symbol).appendTo(buttonContainer).click(function() {
+          theGlobalEditor?.setValue(exampleEditor.getValue() + '\n');
+          update_view("main_editor_keyword_selector", <string>$(preview).attr('lang'));
+          stopit();
+          clearOutput();
+        });
+      }
+
+      const levelStr = $(preview).attr('level');
+      if (levelStr) {
+        exampleEditor.session.setMode(getHighlighter(parseInt(levelStr, 10)));
+      }
+    });
   }
 
   /**
@@ -177,7 +188,7 @@ export function initializeApp() {
     if (!$editor.length) return;
 
     // We expose the editor globally so it's available to other functions for resizing
-    var editor = turnIntoAceEditor($editor.get(0)!, $editor.data('readonly'));
+    var editor = turnIntoAceEditor($editor.get(0)!, $editor.data('readonly'), true);
     theGlobalEditor = editor;
     theGlobalEditor.setShowPrintMargin(false);
     theGlobalEditor.renderer.setScrollMargin(0, 0, 0, 20)
@@ -259,51 +270,6 @@ export function initializeApp() {
     return editor;
   }
 
-  /**
-   * Turn an HTML element into an Ace editor
-   */
-  function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean): AceAjax.Editor {
-    const editor = ace.edit(element);
-    editor.setTheme("ace/theme/monokai");
-    if (isReadOnly) {
-      // Remove the cursor
-      editor.renderer.$cursorLayer.element.style.display = "none";
-      editor.setOptions({
-        readOnly: true,
-        showGutter: false,
-        showPrintMargin: false,
-        highlightActiveLine: false
-      });
-      // When it is the main editor -> we want to show line numbers!
-      if (element.getAttribute('id') === "editor") {
-        editor.setOptions({
-          showGutter: true
-        });
-      }
-      if ($(element).hasClass('common-mistakes')) {
-        $(element).height("22rem");
-        editor.setOptions({
-          showGutter: true,
-          showPrintMargin: true,
-          highlightActiveLine: true
-        });
-      }
-    }
-
-    // a variable which turns on(1) highlighter or turns it off(0)
-    var highlighter = 1;
-
-    if (highlighter == 1) {
-      // Everything turns into 'ace/mode/levelX', except what's in
-      // this table. Yes the numbers are strings. That's just JavaScript for you.
-      if (APP_STATE.level) {
-        const mode = getHighlighter(APP_STATE.level);
-        editor.session.setMode(mode);
-      }
-    }
-
-    return editor;
-  }
 
   // Close the dropdown menu if the user clicks outside of it
   $(document).on("click", function(event){
@@ -1717,101 +1683,107 @@ function createModal(level:number ){
   let title = ClientMessages['Program_repair'];
   modal.repair(editor, 0, title);
 }
-export function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean): AceAjax.Editor {
-    const editor = ace.edit(element);
-    editor.setTheme("ace/theme/monokai");
-    if (isReadOnly) {
+
+/**
+ * Turn an HTML element into an Ace editor
+ */
+export function turnIntoAceEditor(element: HTMLElement, isReadOnly: boolean, isMainEditor = false): AceAjax.Editor {
+  const editor = ace.edit(element);
+  editor.setTheme("ace/theme/monokai");
+  if (isReadOnly) {
+    // Remove the cursor
+    editor.renderer.$cursorLayer.element.style.display = "none";
+    editor.setOptions({
+      readOnly: true,
+      showGutter: false,
+      showPrintMargin: false,
+      highlightActiveLine: false
+    });
+    // When it is the main editor -> we want to show line numbers!
+    if (isMainEditor) {
       editor.setOptions({
-        readOnly: true,
-        showGutter: false,
-        showPrintMargin: false,
-        highlightActiveLine: false
+        showGutter: true
       });
     }
-
-    // a variable which turns on(1) highlighter or turns it off(0)
-    var highlighter = 1;
-
-    if (highlighter == 1) {
-      // Everything turns into 'ace/mode/levelX', except what's in
-      // this table. Yes the numbers are strings. That's just JavaScript for you.
-      if (APP_STATE.level) {
-        const mode = getHighlighter(APP_STATE.level);
-        editor.session.setMode(mode);
-      }
-    }
-    return editor;
   }
 
-  function initializeModalEditor($editor: JQuery) {
-    if (!$editor.length) return;
-    // We expose the editor globally so it's available to other functions for resizing
-    let editor = turnIntoAceEditor($editor.get(0)!, true);
-    theModalEditor = editor;
-    error.setEditor(editor);
-    //small timeout to make sure the call with fixed code is complete.
-    setTimeout(function(){}, 2000);
-
-    window.Range = ace.require('ace/range').Range // get reference to ace/range
-
-    // Load existing code from session, if it exists
-    const storage = window.sessionStorage;
-    if (storage) {
-      const levelKey = $editor.data('lskey');
-        let tempIndex = 0;
-        let resultString = "";
-
-        if(storage.getItem('fixed_{lvl}'.replace("{lvl}", levelKey))){
-          resultString = storage.getItem('fixed_{lvl}'.replace("{lvl}", levelKey))?? "";
-          let tempString = ""
-          for (let i = 0; i < resultString.length + 1; i++) {
-            setTimeout(function() {
-              editor.setValue(tempString,tempIndex);
-              tempString += resultString[tempIndex];
-              tempIndex++;
-            }, 150 * i);
-          }
-        }
-        else{
-          resultString = storage.getItem('warning_{lvl}'.replace("{lvl}", levelKey))?? "";
-          editor.setValue(resultString);
-        }
-    }
-
-    // *** KEYBOARD SHORTCUTS ***
-
-    let altPressed: boolean | undefined;
-
-    // alt is 18, enter is 13
-    window.addEventListener ('keydown', function (ev) {
-      const keyCode = ev.keyCode;
-      if (keyCode === 18) {
-        altPressed = true;
-        return;
-      }
-      if (keyCode === 13 && altPressed) {
-        if (!APP_STATE.level || !APP_STATE.lang) {
-          throw new Error('Oh no');
-        }
-        runit (APP_STATE.level, APP_STATE.lang, "", function () {
-          $ ('#output').focus ();
-        });
-      }
-      // We don't use jquery because it doesn't return true for this equality check.
-      if (keyCode === 37 && document.activeElement === document.getElementById ('output')) {
-        editor.focus ();
-        editor.navigateFileEnd ();
-      }
-    });
-    window.addEventListener ('keyup', function (ev) {
-      const keyCode = ev.keyCode;
-      if (keyCode === 18) {
-        altPressed = false;
-        return;
-      }
-    });
-    return editor;
+  // Everything turns into 'ace/mode/levelX', except what's in
+  // this table. Yes the numbers are strings. That's just JavaScript for you.
+  if (APP_STATE.level) {
+    const mode = getHighlighter(APP_STATE.level);
+    editor.session.setMode(mode);
   }
+
+  return editor;
+}
+
+function initializeModalEditor($editor: JQuery) {
+  if (!$editor.length) return;
+  // We expose the editor globally so it's available to other functions for resizing
+  let editor = turnIntoAceEditor($editor.get(0)!, true);
+  theModalEditor = editor;
+  error.setEditor(editor);
+  //small timeout to make sure the call with fixed code is complete.
+  setTimeout(function(){}, 2000);
+
+  window.Range = ace.require('ace/range').Range // get reference to ace/range
+
+  // Load existing code from session, if it exists
+  const storage = window.sessionStorage;
+  if (storage) {
+    const levelKey = $editor.data('lskey');
+      let tempIndex = 0;
+      let resultString = "";
+
+      if(storage.getItem('fixed_{lvl}'.replace("{lvl}", levelKey))){
+        resultString = storage.getItem('fixed_{lvl}'.replace("{lvl}", levelKey))?? "";
+        let tempString = ""
+        for (let i = 0; i < resultString.length + 1; i++) {
+          setTimeout(function() {
+            editor.setValue(tempString,tempIndex);
+            tempString += resultString[tempIndex];
+            tempIndex++;
+          }, 150 * i);
+        }
+      }
+      else{
+        resultString = storage.getItem('warning_{lvl}'.replace("{lvl}", levelKey))?? "";
+        editor.setValue(resultString);
+      }
+  }
+
+  // *** KEYBOARD SHORTCUTS ***
+
+  let altPressed: boolean | undefined;
+
+  // alt is 18, enter is 13
+  window.addEventListener ('keydown', function (ev) {
+    const keyCode = ev.keyCode;
+    if (keyCode === 18) {
+      altPressed = true;
+      return;
+    }
+    if (keyCode === 13 && altPressed) {
+      runit (APP_STATE.level, APP_STATE.lang, "", function () {
+        $ ('#output').focus ();
+      });
+    }
+    // We don't use jquery because it doesn't return true for this equality check.
+    if (keyCode === 37 && document.activeElement === document.getElementById ('output')) {
+      editor.focus ();
+      editor.navigateFileEnd ();
+    }
+  });
+  window.addEventListener ('keyup', function (ev) {
+    const keyCode = ev.keyCode;
+    if (keyCode === 18) {
+      altPressed = false;
+      return;
+    }
+  });
+  return editor;
+}
+
 export function toggle_developers_mode(enforced: boolean) {
   if ($('#developers_toggle').is(":checked") || enforced) {
       $('#adventures-tab').hide();
@@ -2195,3 +2167,34 @@ const clearTimeouts = () => {
   timers.forEach(clearTimeout);
   timers = [];
 };
+
+const onElementBecomesVisible = (() => {
+  const SCROLL_HANDLERS = new Array<[HTMLElement, () => void]>();
+
+  function isInView(elem: HTMLElement) {
+    var docViewTop = $(window).scrollTop()!;
+    var docViewBottom = docViewTop + $(window).height()!;
+    var elemTop = $(elem).offset()!.top;
+    return ((elemTop <= docViewBottom) && (elemTop >= docViewTop));
+  }
+
+  $(window).on('scroll', () => {
+    for (let i = 0; i < SCROLL_HANDLERS.length; ) {
+      const [element, handler] = SCROLL_HANDLERS[i];
+      if (isInView(element)) {
+        handler();
+        SCROLL_HANDLERS.splice(i, 1);
+      } else {
+        i += 1;
+      }
+    }
+  });
+
+  return function onElementBecomesVisible(element: HTMLElement, handler: () => void) {
+    if (isInView(element)) {
+      handler();
+    } else {
+      SCROLL_HANDLERS.push([element, handler]);
+    }
+  }
+})();
