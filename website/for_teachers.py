@@ -203,7 +203,7 @@ class ForTeachersModule(WebsiteModule):
                 self.purge_customizations(customizations['sorted_adventures'], adventures)
                 available_adventures = self.get_unused_adventures(customizations, teacher_adventures)
             # it uses the old way so convert it to the new one
-            else:
+            elif 'adventures' in customizations:
                 customizations['sorted_adventures'] = {str(i): [] for i in range(1, hedy.HEDY_MAX_LEVEL + 1)}
                 for adventure, levels in customizations['adventures'].items():
                     for level in levels:
