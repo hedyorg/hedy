@@ -97,7 +97,7 @@ adventures:
                 story_text: |
                     ## Sangría
                     `{ask}` y `{print}` siguen funcionando como los conoces. Pero `{if}`, `{else}`, {pressed} y `{repeat}` han cambiado.
-                    Ahora puedes ejecutar grupos de código juntos, pero tendrás que *sangrar* el código.
+                    Ahora puedes agrupar varias líneas, pero tendrás que *sangrar* el código.
                     Eso significa poner cuatro espacios al principio de la línea. También tendrás que sangrar cuando sólo quieras crear un bloque de una línea.
                 example_code: |
                     Así es como funciona ahora el comando `{repeat}`:
@@ -228,12 +228,12 @@ adventures:
                 start_code: "{print} Aquí viene tu historia"
             7:
                 story_text: |
-                    ## Una historia
+                    ## Historia
                     En una historia, a veces es necesario repetir algo. Por ejemplo, si alguien pide ayuda, o si se canta una canción.
                     Eso lo puedes hacer ahora en el nivel 6 usando `{repeat}`.
 
-                    ## Desafío
-                    ¿Puedes hacer tu propia historia con repetición?
+                    ### Desafío
+                    Añade repetición a tu propia historia. En tu carpeta de historias guardadas, abre la del Nivel 6, encuentra una línea que contenga {print} y repítela.
                 example_code: |
                     ```
                     {print} 'La princesa grita pidiendo ayuda'
@@ -244,8 +244,8 @@ adventures:
                 start_code: "{repeat} 5 {times} {print} 'Ayuda!'"
             5:
                 story_text: |
-                    ## Una historia
-                    Lo que también puedes hacer para hacer tu historia todavía más interesante es darle distintos finales posibles.
+                    ##Historia
+                    En este nivel puedes programar distintos finales, lo que hará que tu historia sea aún más interesante.
 
                     ## Desafío
                     Escribe una historia con dos finales, por ejemplo:
@@ -253,10 +253,10 @@ adventures:
                     - La princesa camina por el bosque
                     - Ella se topa con un monstruo
 
-                    - Final feliz: ella desenfunda su espada y el monstruo se va corriendo
-                    - Final triste: el monstruo se come a la princesa
+                    - Final feliz: Ella desenfunda su espada y el monstruo se va corriendo
+                    - Final triste: El monstruo se come a la princesa
 
-                    Puedes también hacer que se ingrese un nombre para el protagonista. Eso sigue funcionando igual que en el nivel 3. Puedes combinar eso con un `{if}`.
+                    También puedes asegurarte de que sea posible introducir un nombre de nuevo. Eso sigue funcionando igual que en niveles anteriores. Puedes combinar eso con un `{if}`, y con ello habrás creado un programa entero.
                 example_code: |
                     ```
                     nombre {is} {ask} '¿Quién camina por el bosque?'
@@ -305,10 +305,10 @@ adventures:
                     {print} fue un animales {at} {random}
                     ```
                 story_text_3: |
-                    Este es un ejemplo del comando `{remove}`en tu historia
+                    Este es un ejemplo del comando `{remove}` en tu historia
 
                     ## Desafío
-                    ¿Puedes utilizar los 3 nuevos comandos `{at} {random}` , `{add} {to}` y `{remove} {from}` en tú historia?
+                    ¿Puedes utilizar los 3 nuevos comandos `{at} {random}` , `{add} {to}` y `{remove} {from}` en tu historia?
                 example_code_3: |
                     ```
                     {print} Su mochila se hizo muy pesada.
@@ -328,8 +328,8 @@ adventures:
                 example_code: "```\nnombre = 'La Reina de Inglaterra'\n{print} nombre ' estaba comiendo un pedazo de pastel, cuando de pronto...'\n```\n"
                 start_code: '# coloca tu código aquí'
             8:
-                story_text: "## Historia\nEn este nivel puedes usar múltiples líneas en tu comandos {if}, ¡de esta manera puedes mejorar tu final triste o feliz!\n\n## Desafío\n¿Puedes hacer tu historia con dos finales diferentes?\n"
-                example_code: "```\n{print} '¡OH NO! ¡El T-rex se está acercando!'\nfinal = {ask} '¿Quieres un final triste o feliz?'\n{if} final {is} feliz\n    {print} 'Justo a tiempo Richard salta de vuelta en la máquina del tiempo!'\n    {print} 'Michael escribe el código y...'\n    {print} '\U0001F4A5¡ZAP!\U0001F4A5'\n    {print} 'Están de vuelta en su garage'\n{else}\n    {print} 'Michael grita ¡VAMOS RICHARD! ¡CORRE MÁS RÁPIDO!'\n    {print} 'Pero Richard es muy lento...'\n    {print} '¡El T-rex se acerca y se lo come en un una gran mordida!\U0001F996'\n```\n"
+                story_text: "## Historia\nEn este nivel puedes usar múltiples líneas en tu comandos {if}, de esta manera puedes mejorar tu final triste o feliz.\n\n## Desafío 1\nEl código de ejemplo muestra dos finales diferentes; uno donde los personajes usan una máquina del tiempo y otro en el que no.\nCompleta los espacios vacíos con al menos una frase por final. \n**(extra)** Haz la historia más larga. ¿Qué ocurre en la historia? Puedes también añadir un segundo `{ask}` con diferentes opciones.\n\n###Desafío 2\nVuelve a tus historias guardadas y escoge la del Nivel 5. Escribe un final bueno y uno malo de al menos tres líneas cada uno. \n"
+                example_code: "```\n{print} '¡OH NO! ¡El T-rex se está acercando!'\nfinal = {ask} '¿Quieres un final triste o feliz?'\n{if} final {is} feliz\n    {print} 'Justo a tiempo Richard salta de vuelta en la máquina del tiempo!'\n    {print} _\n{else}\n    {print} '¡Oh, no! Richard es demasiado lento...\n    {print} _\n```\n"
                 start_code: '# coloca tu código aquí'
             15:
                 story_text: "## Historia\nUsar un bucle `{while}` puede hacer que tus historias sean más interesantes. Por ejemplo, puedes usar `{while} game {is} 'on'` para seguir jugando hasta que termine.\nO puedes usar `{while} sword {is} 'lost'` para evitar que el jugador continúe el juego hasta que encuentre algo.\n"
@@ -337,7 +337,7 @@ adventures:
                 start_code: '# coloca tú código aquí'
             13:
                 example_code: "```\nespada = 'perdida'\njuego = 'en marcha'\n{print} 'Nuestra heroína está caminando en el bosque'\n{print} 'El camino se divide en dos'\n{for} i {in} {range} 0 {to} 2\n    {if} juego {is} 'en marcha'\n        camino = {ask} '¿Que camino debería escoger ella?'\n        {if} camino {is} 'izquierda' {and} espada {is} 'encontrada'\n            {print} '¡Nuestra heroína se encuentra a un dragón!'\n            {print} '¡Por suerte nuestra heroína tiene una espada para vencer a la bestia!'\n            juego = 'acabado'\n        {if} camino {is} 'izquierda' {and} espada {is} 'perdida'\n            {print} '¡Nuestra heroína, encuentra un dragón, pero no tiene ningún arma!'\n            {print} 'Nuestra heroína es vencida por el dragón...'\n            {print} 'Intenta de nuevo'\n            juego = 'acabado'\n        {if} camino {is} 'derecha' {and} espada {is} 'encontrada'\n            {print} 'Ya encontraste la espada. No queda nada aquí.'\n            {print} 'Ella camina de vuelta'\n        {if} camino {is} 'derecha' {and} espada {is} 'perdida'\n            {print} 'Nuestra heroína encuentra una espada'\n            {print} 'Esto podría resultar muy útil'\n            espada = 'encontrada'\n```\n"
-                story_text: "## Historia\nUsando los comandos `{and}` y `{or}`puedes acortar tus historias. Por ejemplo, mira la historia del dragón.\n\n## Desafío\n¿Puedes hacer tu propio mini-juego de aventura?\n"
+                story_text: "## Historia\nUsando los comandos `{and}` y `{or}` puedes acortar tus historias. Por ejemplo, mira la historia del dragón.\n\n## Desafío\n¿Puedes hacer tu propio mini-juego de aventura?\n"
                 start_code: '# coloca tu código aquí'
             10:
                 story_text: "## Historia\nEn este nivel puedes usar el comando {for} en tu historia. De esta manera puedes programar fácilmente el libro para niños 'oso pardo, oso pardo, ¿qué ves?'\n"
@@ -351,8 +351,11 @@ adventures:
             8:
                 story_text: |
                     ## Canciones
-                    En un nivel anterior programamos la canción de los elefantes. Hicimos un verso y lo copiamos un montón de veces. En el nivel 7 vamos a repetir la canción ¡Simplemente agregado una linea!
-                    ¡Sabes qué línea añadir?
+                    En un nivel anterior programamos la canción de los elefantes. Pero sin el comando `{repeat}` tuvimos que copiar los versos muchas veces.
+                    En este nivel puedes repetir la canción 99 veces, simplemente añadiendo una línea.
+
+                    ### Desafío
+                    Añade el comando correcto en los espacios en blanco y sangra el código correctamente.
                 example_code: |
                     ```
                     verso = 99
@@ -368,31 +371,32 @@ adventures:
             7:
                 story_text: |
                     ## Canciones
-                    Las canciones suelen tener mucha repetición. Por ejemplo... ¡Baby Shark! Si la cantas, sigues cantando lo mismo:
+                    Las canciones suelen tener mucha repetición. Por ejemplo... ¡Baby Shark! Si la cantas, dirás una y otra vez lo mismo:
 
                     Baby Shark tututudutudu <br>
                     Baby Shark tututudutudu <br>
                     Baby Shark tututudutudu <br>
                     Baby Shark
 
-                    ¡Puedes hacer esta canción mucho más corta con un `{repeat}`! ¿Puedes terminar el código?
+                    ### Desafío
+                    Puedes acortar Baby Shark con un `{repeat}`. Acaba el código rellenando los espacios vacíos.
+                    **Extra** Tras Baby Shark puedes, por supuesto, programar otras canciones. ¡Hay muchas con repetición!
+                    ¿Puedes pensar en alguna y programarla también?
                 example_code: |
                     ```
                     {repeat} _ _ {print} 'Baby Shark tututudutudu'
                     {print} 'Baby Shark'
                     ```
-
-                    Luego de Baby Shark puedes intentar programar otras canciones. Hay muchas canciones con repetición.
                 start_code: "{print} 'Baby Shark'"
             6:
                 story_text: |
                     ## Canciones
-                    En las canciones hay a menudo mucha repetición. Algunas veces la repetición se basa en contar.
+                    En las canciones hay a menudo mucha repetición. Algunas veces la repetición se basa también en contar.
                     Por ejemplo, en la canción el elefante se balancea en la tela de una araña. Puedes programar esta canción con un poco de matemáticas.
 
                     Consejo: ¡Utiliza la función de "leer en voz alta" para que Hedy te cante la canción!
 
-                    ## Desafío
+                    ### Desafío
                     Puedes repetir las líneas 2 a 7 cuantas veces quieras copiando las líneas.
                 example_code: |
                     ```
@@ -1099,7 +1103,7 @@ adventures:
                 story_text: "## Loro\nCrea tu propia mascota online, ¡un loro que copiará lo que digas!\n"
                 example_code: "```\n{print} Soy Hedy la lora\nnombre {is} {ask} ¿Cuál es tu nombre?\n{print} nombre\n{sleep}\n{print} squawk\n{sleep}\n{print} nombre\n```\n"
                 start_code: '{print} ¡Soy Hedy la lora!'
-                story_text_2: "## Desafío\nPuedes utilizar variables para hacer que el loro diga más cosas. ¿Puedes completar este código?\n"
+                story_text_2: "### Desafío\nPuedes utilizar variables para hacer que el loro diga más cosas aparte de tu nombre. ¿Puedes completar este código?\n"
                 example_code_2: "```\n{print} Soy Hedy la lora\nnombre {is} {ask} ¿Cuál es tu nombre?\n{print} nombre\n{sleep}\n{print} nombre\napellido {is} {ask} ¿Cuál es tu apellido?\n_\n{sleep}\n_\n```\n"
             1:
                 story_text: "## Loro\n¡Crea tu propia mascota online, un loro que copiará lo que digas!\n"
@@ -1113,14 +1117,14 @@ adventures:
                     {echo}
 
                     '
-                story_text_2: "## Desafío\n¿Puedes hacer que el loro pregunte diferentes preguntas? ¡Llena lo que falta en este ejemplo!\n"
+                story_text_2: "### Desafío\n¿Puedes hacer que el loro haga una pregunta diferente? ¡Rellena los espacios en blanco en este ejemplo!\n"
                 example_code_2: "```\n{print} Soy Hedy la lora\n{ask} _\n{echo}\n{echo}\n"
             5:
                 example_code: "```\npalabras {is} squawk, Hedy\n{print} '¡Entrena a tu lora'\nnueva_palabra {is} {ask} '¿Que palabra le quieres enseñar?'\n{add} nueva_palabra {to_list} palabras\npalabra_dicha {is} palabras {at} {random}\n{print} '\U0001F9D2 Say ' nueva_palabra ', Hedy!'\n{print} '\U0001F99C ' palabra_dicha\n_ palabra_dicha {is} nueva_palabra _ '\U0001F9D2 ¡Gran trabajo, Hedy!\U0001F36A'\n_ _ '\U0001F9D2 No, Hedy, di ' nueva_palabra\n```\n"
                 story_text: "## Loro\n¡Recompensa tu loro si dice la ¡palabra correcta!\nFinaliza el código llenando los 4 comandos que faltan.\n"
                 start_code: '# pon tu código aquí'
             3:
-                story_text: "## Loro\nEnseña a tu loro una nueva palabra con `{add}`.\n## Desafío\n¿Cómo puedes hacer que tu loro diga muchas palabras?\n"
+                story_text: "## Loro\nEnseña a tu loro una nueva palabra con `{add}`.\n### Desafío\n¿Cómo puedes hacer que tu loro diga varias palabras?\n"
                 example_code: "```\npalabras {is} squawk, Hedy\n{print} ¡Entrena a tu lora!\nnueva_palabra {is} {ask} ¿Que palabra le quieres enseñar?\n{add} nueva_palabra {to_list} palabras\n{print} \U0001F9D2 ¡Di nueva_palabra, Hedy!\n{print} \U0001F99C palabras {at} {random}\n```\n"
                 start_code: '# pon tu código aquí'
             4:
