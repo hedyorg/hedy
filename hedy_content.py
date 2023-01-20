@@ -158,8 +158,10 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'rock',
         'story',
         'calculator',
-        'haunted',
         'restaurant',
+        'haunted',
+        'turtle',
+        'pressit',
         'next',
         'end'
     ],
