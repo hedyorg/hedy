@@ -1566,6 +1566,7 @@ adventures:
                     ```
                     keuzes {is} steen, papier, schaar
                     jouw_keuze {is} {ask} 'Wat kies jij?'
+                    computer_keuze {is} keuzes {at} {random}
                     {print} 'Jij kiest ' jouw_keuze
                     {print} 'De computer kiest ' computer_keuze
                     {if} computer_keuze {is} jouw_keuze
@@ -3141,7 +3142,7 @@ adventures:
                         _
                         _
                     ```
-                start_code: "Zet jouw code hier"
+                start_code: "#Zet jouw code hier"
             10:
                 start_code: '# place your code here'
                 story_text: "In this level you can make the turtle draw you a figure. The turtle is raring to go.\nGive the turtle the starting signal by pressing the x or y key on your keyboard.\nCan you let the turtle draw you another figure?\n"
