@@ -1181,6 +1181,7 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
 
   function addToOutput(text: string, color: string) {
     $('<span>').text(text).css({ color }).appendTo(outputDiv);
+    outputDiv.scrollTop(outputDiv.prop('scrollHeight'));
   }
 
   // output functions are configurable.  This one just appends some text
