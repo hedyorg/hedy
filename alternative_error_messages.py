@@ -2,13 +2,13 @@ from random import random as random
 
 from flask import session
 from hedy_content import ALTERNATIVE_ERROR_LANGUAGES
-from website.auth import (current_user, remember_current_user)
-# from utils import ColoredConsole as clog
+from website.auth import (current_user, update_test_group_in_session)
+#from utils import ColoredConsole as clog
 
 
 def is_available():
-    user = current_user()
-    is_test_group = user.get('test_group')
+    # get test_group field from session user
+    is_test_group = current_user().get('test_group')
 
     lang = session.get('lang')
 
@@ -26,19 +26,17 @@ def select_users_test_group():
             return True
     return False
 
-# Creation of test_group field if it doesn't exist in session or db user
-
-
+# Creation of test_group entry if it doesn't exist in session or db
 def update_users_test_group(db):
     user = current_user()
     # Check if there is a logged-in user
     if user['username']:
-        # Check if test_group field exists or is filled properly
-        if 'test_group' not in user.keys() or user.get('test_group') is None:
-            db_user = db.user_by_username(user['username'])
-            # Double check if test_group field also doesn't exist in db user
-            if 'test_group' not in db_user.keys():
+        # Check if test_group field exists or is filled properly in session
+        if 'test_group' not in session.keys() or session.get('test_group') is None:
+            test_group = db.test_group_by_username(user['username'])
+            # Double check if test_group field also doesn't exist in db entry
+            if test_group is None:
                 test_group = select_users_test_group()
-                db.update_user(user['username'], {'test_group': test_group})
+                db.add_test_group_to_username(user['username'], test_group)
             # Anyway update session user now with test_group field
-            remember_current_user(db_user)
+            update_test_group_in_session(test_group)
