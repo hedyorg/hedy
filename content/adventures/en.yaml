@@ -622,7 +622,17 @@ adventures:
             9:
                 story_text: |
                     ## Story
-                    In this level you can use nesting to put `{if}`, `{repeat}` or `{for}` commands inside other `{if}`, `{repeat}` or `{for}` commands. This gives you many options and really helps you to make your story interactive.
+                    In this level you can use `{if}` and `{repeat}` commands inside other `{if}` and `{repeat}` commands. 
+                    This gives you many options and really helps you to make your story interactive.
+                    
+                    ### Exercise 1
+                    Finish the code so the `{if}` works correctly.
+                    
+                    ### Exercise 2
+                    Add an `{if}` and `{else}` for the part of the story where Robin goes home too.
+
+                    ### Exercise 3
+                    Go back to your level 8 story and use at least two `{if}`s inside another `{if}`.
                 example_code: |
                     ```
                     {print} 'Robin is walking downtown'
@@ -632,42 +642,11 @@ adventures:
                         {print} 'Robin sees an interesting looking book'
                         book = {ask} 'Does Robin buy the book?'
                         {if} book {is} yes
-                            {print} 'Robin buys the book and goes home'
-                        {else}
-                            {print} 'Robin leaves the shop and goes home'
+                        _ {print} 'Robin buys the book and goes home'
+                        _ {else}
+                        _ {print} 'Robin leaves the shop and goes home'
                     {else}
                         {print} 'Robin goes home'
-                    ```
-                story_text_2: |-
-                    The example above is pretty straightforward, but by nesting {if} you can really elaborate your code and turn your story into a real game. Check out this example!
-                example_code_2: |
-                    ## Elaborate code
-                    ```
-                    sword = lost
-                    game = on
-                    {print} 'Our hero is walking through the forest'
-                    {print} 'The path splits two ways'
-                    {repeat} 2 {times}
-                        {if} game {is} on
-                            path = {ask} 'Which path should she choose?'
-                            {if} path {is} left
-                                {if} sword {is} found
-                                    {print} 'Our hero comes across a dragon!'
-                                    {print} 'Luckily our hero has a sword to defeat the beast!'
-                                    game = over
-                                {else}
-                                    {print} 'Our hero finds a dragon, but she doesnt have any weapons!'
-                                    {print} 'Our hero is beaten by the dragon...'
-                                    {print} 'Try again'
-                                    game = over
-                            {if} path {is} right
-                                {if} sword {is} lost
-                                    {print} 'Our hero finds a sword'
-                                    {print} 'This could come in very handy'
-                                    sword = found
-                                {else}
-                                    {print} 'You have already found the sword. There is nothing left here.'
-                                    {print} 'She walks back'
                     ```
                 start_code: "# place your code here"
             10:
@@ -1945,7 +1924,12 @@ adventures:
             9:
                 story_text: |
                     ## Rock, paper, scissors
-                    In this level you can program the whole rock, paper, scissors game by nesting the `{if}` commands. Can you finish the code?
+                    In this level you can program the whole rock, paper, scissors game by nesting the `{if}` commands. 
+                    
+                    ### Exercise
+                    Can you finish the code? The program must tell who has won for every combination.
+                    
+                    **(extra)** Want to play more than one game? Expand the code so that you can play multiple rounds. You can even use an `{ask}` to ask the user how many rounds they want to play.
                 example_code: |
                     ```
                     choices {is} rock, paper, scissors
@@ -2068,9 +2052,13 @@ adventures:
             9:
                 story_text: |
                     ## Calculator
-                    In previous levels you've learned how to make a calculator, in this level you can expand that code and make it into a little maths game.
-                    ### Exercise
+                    In level 6 you created a calculator, in this level you can expand that code so it asks multiple questions.
+                    
+                    ### Exercise 1
                     Can you finish line 10 to make to program work?
+
+                    ### Exercise 2
+                    Give the played feedback when the enter a right or wrong answer. To achieve that, expand your program with an `{else}`.
                 example_code: |
                     ```
                     score = 0

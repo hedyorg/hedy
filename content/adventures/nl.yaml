@@ -208,7 +208,9 @@ adventures:
                 story_text: |
                     ## En nu alles tegelijk!
                     In dit level kun je niet alleen meerdere regels gebruiken bij `{if}` en `{repeat}`, maar je kunt ze ook nog eens in elkaar zetten!
-                    In het voorbeeldje zie je een `{if}` commando in een `{repeat}` commando staan. Andersom mag het ook en een `{if}` mag ook in een `{if}` en een `{repeat}` in een `{repeat}`.
+                    In het voorbeeldje zie je een `{if}` commando in een `{repeat}` commando staan. 
+                    
+                    Andersom mag het ook en een `{if}` mag ook in een `{if}` en een `{repeat}` in een `{repeat}`.
                     Probeer het maar eens!
                 example_code: |
                     ```
@@ -583,7 +585,17 @@ adventures:
             9:
                 story_text: |
                     ## Verhaal
-                    In dit level kun je `{if}`, `{repeat}` en `{for}` commando's in andere `{if}`, `{repeat}` en `{for}` commando's stoppen. Hierdoor krijg je nog meer mogelijkheden om je verhaal echt interactief te maken!
+                    In dit level kun je `{if}` and `{repeat}` commando's in andere `{if}` en `{repeat}` commando's stoppen. 
+                    Hierdoor krijg je nog meer mogelijkheden om je verhaal echt interactief te maken!
+                    
+                    ### Opdracht 1
+                    Maak de code af op de streepjes zodat de `{if}` het doet.
+                    
+                    ### Opdracht 2
+                    Voeg een `{if}` en een `{else}` toe aan het gedeelte van het verhaal waar Robin naar huis gaat.
+                    
+                    ### Opdracht 3
+                    Ga terug naar je verhaal van level 8 en gebruik ook minstens twee keer een `{if}` in een `{if}`.
                 example_code: |
                     ```
                     {print} 'Robin loopt door de stad'
@@ -599,36 +611,6 @@ adventures:
                     {else}
                         {print} 'Robin gaat naar huis'
                     ```
-                story_text_2: Het voorbeeld hierboven is nog een simpel verhaaltje. Maar door {if} commando's in elkaar te zetten, kun je ook een super uitgebreid verhaal maken, dat al echt op een game lijkt!
-                example_code_2: |
-                    ## Uitgebreide code
-                    ```
-                    zwaard = kwijt
-                    spel = aan
-                    {print} 'Onze held loopt door het bos'
-                    {print} 'Ineens komt ze bij een splitsing...'
-                    {repeat} 2 {times}
-                        {if} spel {is} aan
-                            pad = {ask} 'Welk pad moet onze held kiezen?'
-                            {if} pad {is} links
-                                {if} zwaard {is} gevonden
-                                    {print} 'Onze held komt een draak tegen op het pad!'
-                                    {print} 'Gelukkig heeft ze een zwaard om het beest te verslaan!'
-                                    spel = over
-                                {else}
-                                    {print} 'Onze held vindt een draak, maar ze heeft geen wapens!'
-                                    {print} 'Onze held wordt met huid en haar verslonden...'
-                                    spel = over
-                            {if} pad {is} rechts
-                                {if} zwaard {is} kwijt
-                                    {print} 'Onze held vindt een zwaard'
-                                    {print} 'Die kan nog goed van pas komen'
-                                    zwaard = gevonden
-                                {else}
-                                    {print} 'Je hebt het zwaard al gevonden. Er is hier niks meer.'
-                                    {print} 'Ze loopt terug'
-                    ```
-                start_code: "# Schrijf jouw code hier"
             10:
                 story_text: |
                     ## Verhaal
@@ -1536,13 +1518,18 @@ adventures:
             9:
                 story_text: |
                     ## Steen, papier, schaar
-                    In dit level kun je het hele steen, papier, schaar programma maken door de {if} commando's in elkaar te zetten!
+                    In dit level kun je het hele steen, papier, schaar programma maken door de `{if}` commando's in elkaar te zetten!
+                    
+                    ### Opdracht
+                    Maak de code af zodat het programma bij iedere combinatie vertelt wie er heeft gewonnen.
+                    
+                    **(extra)** Is één potje voor jou niet genoeg? Breid de code uit zodat je meerdere potjes kan spelen. Je kan zelfs met een `{ask}` beginnen en
+                    vragen hoeveel potjes er gespeeld gaan worden.
                 example_code: |
                     ```
                     keuzes {is} steen, papier, schaar
                     jouw_keuze {is} {ask} 'Wat kies jij?'
                     {print} 'Jij kiest ' jouw_keuze
-                    computer_keuze {is} keuzes {at} {random}
                     {print} 'De computer kiest ' computer_keuze
                     {if} computer_keuze {is} jouw_keuze
                         {print} 'Gelijkspel'
@@ -1657,9 +1644,13 @@ adventures:
             9:
                 story_text: |
                     ## Rekenmachine
-                    In dit level kun je een score bijhouden bij je rekenspelletje!
-                    ### Opdracht
+                    In dit level kunnen we de rekenmachine van level 6 uitbreiden en meerdere sommen achter elkaar vragen.
+                    
+                    ### Opdracht 1
                     Kun jij regel 10 afmaken zodat het programma werkt?
+
+                    ### Opdracht 2
+                    Geef de speler feedback over een goed en over een fout antwoord. Breid je programma daarvoor uit met een `{else}`.
                 example_code: |
                     ```
                     score = 0
