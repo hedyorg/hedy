@@ -9,7 +9,8 @@ import gettext
 
 # Import packages from the website app
 import sys
-sys.path.append(path.join(path.dirname(__file__), '..', '..'))
+print(path.abspath(path.join(path.dirname(__file__), '..', '..')))
+sys.path.append(path.abspath(path.join(path.dirname(__file__), '..', '..')))
 from website.yaml_file import YamlFile
 
 OUTPUT_FILE = 'static/js/message-translations.ts'
