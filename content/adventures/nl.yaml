@@ -1654,12 +1654,11 @@ adventures:
                     {else} {print} 'foutje! het was ' goede_antwoord
                     ```
                 start_code: "{print} 'Welkom bij jouw rekenmachine'"
-
             9:
                 story_text: |
                     ## Rekenmachine
                     In dit level kun je een score bijhouden bij je rekenspelletje!
-                    # Uitdaging
+                    ### Opdracht
                     Kun jij regel 10 afmaken zodat het programma werkt?
                 example_code: |
                     ```
@@ -1673,7 +1672,7 @@ adventures:
                         antwoord = {ask} 'Vul hier het antwoord in:'
                         {print} 'Jouw antwoord is ' antwoord
                         {if} _ {is} _
-                            score = score +1
+                            score = score + 1
                     {print} 'Je score is ' score ' van 10!'
                     ```
                 start_code: "{print} 'Welkom bij de rekenmachine!'"
@@ -2189,15 +2188,16 @@ adventures:
             9:
                 story_text: |
                     ## Restaurant
-                    In dit level kun je het restaurant interactiever en leuker maken.
-                    Je kunt bijvoorbeeld de `{ask}` stellen of er saus bij `{if}` iemand friet besteld, maar dat niet doen `{if}` iemand pizza besteld.
-                    Bekijk het voorbeeld en probeer het uit in jouw eigen restaurant.
+                    In dit level kun je het restaurant nog beter maken.
 
                     ### Opdracht
-                    Deze opdracht is voor de echte slimmeriken onder ons! Elke regel waarbij moet worden ingesprongen heeft een streepje gekregen.
-                    Kun jij uitvinden hoeveel spaties er aan het begin van de regel moeten komen om een werkend programma te krijgen?
-                    Succes!
-                    TIP: Als de klant pizza besteld, moet Hedy niet vragen welke saus de klant daarij wil.
+                    Alle inspringcode is verdwenen! Kan jij het repareren?
+                    Het restaurant moeet zo werken dat als de klant friet bestelt, moet Hedy vraagt welke saus de klant daarbij wil, maar niet bij pizza.
+
+                    **(extra)** Een restaurant heeft natuurlijk niet alles op voorraad. Maak een lijstje met sauzen en kijk bij iedere bestelling of je die saus wel verkoopt. <br>
+                    **(extra)** Op een pizza kan ook van alles! Vraag de klant bij een pizza wat voor beleg hij wil.<br>
+                    **(extra)** Willen de klanten ook wat drinken? Vraag dat ook.<br>
+
                 example_code: |
                     ```
                     {print} 'Welkom bij restaurant Hedy'
