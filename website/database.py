@@ -91,6 +91,8 @@ QUIZ_STATS = dynamo.Table(
     storage, "quiz-stats", partition_key="id#level", sort_key="week", indexes=[dynamo.Index("id", "week")]
 )
 
+TEST_GROUP = dynamo.Table(storage, "test_group", partition_key="username")
+
 
 class Database:
     def record_quiz_answer(self, attempt_id, username, level, question_number, answer, is_correct):
@@ -730,3 +732,14 @@ class Database:
     def get_username_role(self, username):
         role = "teacher" if USERS.get({"username": username}).get("teacher_request") is True else "student"
         return role
+
+    def test_group_by_username(self, username):
+        return TEST_GROUP.get({"username": username})
+
+    def add_test_group_to_username(self, username, test_group):
+        user_test_group = TEST_GROUP.get({"username": username})
+        if not user_test_group:
+            user_test_group = {"username": username, "test_group": test_group}
+            TEST_GROUP.create(user_test_group)
+            return True
+        return False
