@@ -8,7 +8,8 @@
     "url": "git+https://github.com/Felienne/hedy.git"
   },
   "scripts": {
-    "build": "build-tools/heroku/on-deploy.sh"
+    "build": "build-tools/heroku/on-deploy.sh",
+    "cypress": "cd tests && cypress run --spec \"cypress/e2e/**/*\""
   },
   "devDependencies": {
     "@types/ace": "^0.0.47",
