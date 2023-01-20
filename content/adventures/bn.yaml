@@ -439,35 +439,6 @@ adventures:
                     {else}
                         {print} 'Robin goes home'
                     ```
-                example_code_2: |
-                    ## Elaborate code
-                    ```
-                    sword = lost
-                    game = on
-                    {print} 'Our hero is walking through the forest'
-                    {print} 'The path splits two ways'
-                    {repeat} 2 {times}
-                        {if} game {is} on
-                            path = {ask} 'Which path should she choose?'
-                            {if} path {is} left
-                                {if} sword {is} found
-                                    {print} 'Our hero comes across a dragon!'
-                                    {print} 'Luckily our hero has a sword to defeat the beast!'
-                                    game = over
-                                {else}
-                                    {print} 'Our hero finds a dragon, but she doesnt have any weapons!'
-                                    {print} 'Our hero is beaten by the dragon...'
-                                    {print} 'Try again'
-                                    game = over
-                            {if} path {is} right
-                                {if} sword {is} lost
-                                    {print} 'Our hero finds a sword'
-                                    {print} 'This could come in very handy'
-                                    sword = found
-                                {else}
-                                    {print} 'You have already found the sword. There is nothing left here.'
-                                    {print} 'She walks back'
-                    ```
                 start_code: "# place your code here"
             10:
                 story_text: |

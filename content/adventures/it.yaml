@@ -610,35 +610,6 @@ adventures:
                     {else}
                         {print} 'Robin goes home'
                     ```
-                example_code_2: |
-                    ## Codice più elaborato
-                    ```
-                    spada = persa
-                    gioco = iniziato
-                    {print} 'Il nostro eroe sta camminando nel bosco'
-                    {print} 'Il percorso si divide in due'
-                    {repeat} 2 {times}
-                        {if} gioco {is} iniziato
-                            percorso = {ask} 'Da che parte bisogna andare?'
-                            {if} percorso {is} sinistra
-                                {if} spada {is} trovata
-                                    {print} 'Il nostro eroe si imbatte in un drago!'
-                                    {print} 'Fortunatamente ha una spada per sconfiggere il mostro!'
-                                    gioco = finito
-                                {else}
-                                    {print} 'Il nostro eroe si imbatte in un drago, ma non ha un'arma!'
-                                    {print} 'Il nostro eroe é sconfitto dal drago...'
-                                    {print} 'Ritenta'
-                                    gioco = finito
-                            {if} percorso {is} destra
-                                {if} spada {is} persa
-                                    {print} 'Il nostro eroe trova una spada'
-                                    {print} 'Questo potrà tornarci molto utile'
-                                    spada = trovata
-                                {else}
-                                    {print} 'Hai già trovato la spada. Non c'è nient'altro qui.'
-                                    {print} 'Torna indietro'
-                    ```
                 start_code: "# scrivi il tuo codice qui"
             10:
                 story_text: |

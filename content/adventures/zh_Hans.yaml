@@ -281,7 +281,6 @@ adventures:
             9:
                 story_text: "## 故事\n在这一级，你可以通过嵌套，在一个 `{if}`，`{repeat}` 或 `{for}`命令里包含其它 `{if}`，`{repeat}`或`{for}` 命令。这让你有了很多选择，极大地提高了故事地互动性。\n"
                 example_code: "```\n{print} '罗宾来到了市区'\n地点 = {ask} '罗宾是要去商店还是回家？'\n{if} 地点 {is} 商店\n    {print} '她走进了商店。'\n    {print} '罗宾发现了一本有趣的书'\n    书 = {ask} '罗宾买了这本书吗？'\n    {if} 书 {is} 是\n        {print} '罗宾买了这本书，回家了'\n    {else}\n        {print} '罗宾离开商店，回家了'\n{else}\n    {print} '罗宾回了家'\n```\n"
-                example_code_2: "## Elaborate code\n```\n剑 = 丢失\n游戏 = 进行中\n{print} '我们的英雄走在森林中'\n{print} '遇到了两条岔路'\n{repeat} 2 {times}\n    {if} 游戏 {is} 进行中\n        路 = {ask} '她选了哪条路？'\n        {if} 路 {is} 左\n            {if} 剑 {is} 找到\n                {print} '我们的英雄遇上了一条龙！'\n                {print} '幸运的是她带着剑，可以消灭这个怪兽！'\n                游戏 = 结束\n            {else}\n                {print} '我们的英雄找到了一条龙，但是她手里没有武器！'\n                {print} '我们的英雄被龙打败了……'\n                {print} '再试一次'\n                游戏 = 结束\n        {if} 路 {is} 右\n            {if} 剑 {is} 丢失\n                {print} '我们的英雄找到了一把剑'\n                {print} '它可能派上大用场'\n                剑 = 找到\n            {else}\n                {print} '你已经找打了剑。这里什么都没有。'\n                {print} '她走了回去'\n```\n"
                 start_code: '# 在这里写你的代码'
             8:
                 story_text: "## 故事\n在这一关，你可以在{if}命令里使用多行代码，这样就能升级你的好结局和坏结局了！\n"
