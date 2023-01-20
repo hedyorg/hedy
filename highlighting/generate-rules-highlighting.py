@@ -22,14 +22,12 @@ KEYWORDS_PATTERN = '(\\w+).yaml$'
 def main():
     os.chdir(os.path.dirname(__file__) + "/..")
 
-
     print("Generation of translations.....................", end="")
     language_keywords = get_translations(KEYWORDS_PATH, KEYWORDS_PATTERN)
     # Saving the rules in the corresponding file
     with open(OUTPUT_PATH_TRANSLATION, "w", encoding='utf8') as file_lang:
         file_lang.write(json.dumps(language_keywords, indent=4, ensure_ascii=False))
     print(" Done !")
-
 
     print("Generation of syntax highlighting rules........", end="")
 
@@ -210,7 +208,6 @@ def get_translations(KEYWORDS_PATH, KEYWORDS_PATTERN):
         result[language_code]["DIGIT"] = get_digits(tmp[language_code], reference)
 
     return result
-
 
 
 if __name__ == '__main__':
