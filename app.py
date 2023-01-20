@@ -2,7 +2,6 @@
 import collections
 import copy
 import datetime
-import json
 import logging
 import re
 import os
@@ -15,7 +14,7 @@ from os import path
 
 import static_babel_content
 from flask import (Flask, Markup, Response, abort, after_this_request, g,
-                   jsonify, make_response, redirect, request, send_file,
+                   jsonify, redirect, request, send_file,
                    send_from_directory, session)
 from flask_babel import Babel, gettext
 from flask_commonmark import Commonmark
@@ -31,8 +30,8 @@ from safe_format import safe_format
 from config import config
 from flask_helpers import render_template
 from hedy_content import (ADVENTURE_ORDER_PER_LEVEL, ALL_KEYWORD_LANGUAGES,
-                          ALL_LANGUAGES, COUNTRIES,
-                          NON_LATIN_LANGUAGES)
+                          ALL_LANGUAGES, COUNTRIES)
+
 from logging_config import LOGGING_CONFIG
 from utils import dump_yaml_rt, is_debug_mode, load_yaml_rt, timems, version, strip_accents
 from website import (ab_proxying, achievements, admin, auth_pages, aws_helpers,
@@ -42,7 +41,6 @@ from website import (ab_proxying, achievements, admin, auth_pages, aws_helpers,
 from website.auth import (current_user, is_admin, is_teacher,
                           login_user_from_token_cookie, requires_login, requires_teacher)
 from website.log_fetcher import log_fetcher
-from website.yaml_file import YamlFile
 
 logConfig(LOGGING_CONFIG)
 logger = logging.getLogger(__name__)
