@@ -226,12 +226,6 @@ class TestsLevel7(HedyTester):
               for __i__ in range(int('5')):
                 print(f'doe het 5 keer!')
                 time.sleep(0.1)
-              break
-          if event.type == pygame.USEREVENT:
-            if event.key == 'x':
-              for __i__ in range(int('5')):
-                print(f'doe het 5 keer!')
-                time.sleep(0.1)
               break""")
 
         self.single_level_tester(
