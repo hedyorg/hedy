@@ -855,7 +855,7 @@ def tutorial_index():
     parsons = len(PARSONS[g.lang].get_parsons_data_for_level(level))
     adventures_per_level = hedy_content.ADVENTURE_ORDER_PER_LEVEL[int(level)]
 
-    adventures_names = { a['short_name']: a['name'] for a in adventures }
+    adventures_names = {a['short_name']: a['name'] for a in adventures}
 
     return render_template(
         "code-page.html",
@@ -1177,20 +1177,20 @@ def get_specific_adventure(name, level, mode):
     raw = mode == 'raw'
 
     return render_template("code-page.html",
-        specific_adventure=True,
-        level_nr=str(level),
-        commands=commands,
-        level=level,
-        prev_level=prev_level,
-        next_level=next_level,
-        customizations=[],
-        hide_cheatsheet=None,
-        enforce_developers_mode=None,
-        teacher_adventures=[],
-        adventures=adventure,
-        latest=version(),
-        raw=raw,
-        blur_button_available=False)
+                           specific_adventure=True,
+                           level_nr=str(level),
+                           commands=commands,
+                           level=level,
+                           prev_level=prev_level,
+                           next_level=next_level,
+                           customizations=[],
+                           hide_cheatsheet=None,
+                           enforce_developers_mode=None,
+                           teacher_adventures=[],
+                           adventures=adventure,
+                           latest=version(),
+                           raw=raw,
+                           blur_button_available=False)
 
 
 @app.route('/cheatsheet/', methods=['GET'], defaults={'level': 1})
