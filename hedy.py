@@ -1276,14 +1276,14 @@ class ConvertToPython(Transformer):
         else:
             return process_characters_needing_escape(variable_name)
 
-    def process_variable_for_fstring_padded(self, name):
+    def process_variable_for_comparisons(self, name):
         # used to transform variables in comparisons
         if self.is_variable(name):
-            return f"convert_numerals('{self.numerals_language}', {escape_var(name)}).zfill(100)"
+            return f"convert_numerals('{self.numerals_language}', {escape_var(name)})"
         elif ConvertToPython.is_float(name):
-            return f"convert_numerals('{self.numerals_language}', {name}).zfill(100)"
+            return f"convert_numerals('{self.numerals_language}', {name})"
         elif ConvertToPython.is_quoted(name):
-            return f"{name}.zfill(100)"
+            return f"{name}"
 
     def make_f_string(self, args):
         argument_string = ''
@@ -1780,7 +1780,14 @@ while not pygame_end:
 
     def ifpressed(self, meta, args):
         button_name = self.process_variable(args[0], meta.line)
-        if (len(args[0]) > 1):
+        var_or_button = args[0]
+        # for now we assume a var is a letter, we can check this lateron by searching for a ... = button
+        if self.is_variable(var_or_button):
+            return self.make_ifpressed_command(f"""\
+if event.unicode == {args[0]}:
+{ConvertToPython.indent(args[1])}
+  break""", False)
+        elif len(var_or_button) > 1:
             return self.make_ifpressed_command(f"""\
 if event.key == {button_name}:
 {ConvertToPython.indent(args[1])}
@@ -1789,13 +1796,19 @@ if event.key == {button_name}:
             return self.make_ifpressed_command(f"""\
 if event.unicode == '{args[0]}':
 {ConvertToPython.indent(args[1])}
-  break""") + "\n" + self.make_ifpressed_command(f"""\
-if event.key == {button_name}:
-{ConvertToPython.indent(args[1])}
-  break""", True)
+  break""")
 
     def ifpressed_else(self, meta, args):
-        if (len(args[0]) > 1):
+        var_or_button = args[0]
+        if self.is_variable(var_or_button):
+            return self.make_ifpressed_command(f"""\
+if event.key == {var_or_button}:
+{ConvertToPython.indent(args[1])}
+  break
+else:
+{ConvertToPython.indent(args[2])}
+  break""", False)
+        elif len(var_or_button) > 1:
             button_name = self.process_variable(args[0], meta.line)
             return self.make_ifpressed_command(f"""\
 if event.key == {button_name}:
@@ -1966,18 +1979,24 @@ class ConvertToPython_8_9(ConvertToPython_7):
 
         all_lines = '\n'.join([x for x in args[1:]])
         all_lines = ConvertToPython.indent(all_lines)
-
-        if (len(args[0]) > 1):
+        var_or_key = args[0]
+        # if this is a variable, we assume it is a key (for now)
+        if self.is_variable(var_or_key):
+            return self.make_ifpressed_command(f"""\
+if event.unicode == {args[0]}:
+{all_lines}
+  break""")
+        elif len(var_or_key) == 1:  # one character? also a key!
+            return self.make_ifpressed_command(f"""\
+if event.unicode == '{args[0]}':
+{all_lines}
+  break""")
+        else:  # otherwise we mean a button
             button_name = self.process_variable(args[0], met.line)
             return self.make_ifpressed_command(f"""\
 if event.key == {button_name}:
 {all_lines}
   break""", True)
-        else:
-            return self.make_ifpressed_command(f"""\
-if event.unicode == '{args[0]}':
-{all_lines}
-  break""")
 
     def ifpressed_else(self, met, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
@@ -2198,15 +2217,8 @@ class ConvertToPython_13(ConvertToPython_12):
 class ConvertToPython_14(ConvertToPython_13):
     def process_comparison(self, meta, args, operator):
 
-        # we are generating an fstring now
-        arg0 = self.process_variable_for_fstring_padded(args[0])
-        arg1 = self.process_variable_for_fstring_padded(args[1])
-
-        # zfill(100) in process_variable_for_fstring_padded leftpads variables to length 100 with zeroes (hence the z fill)
-        # that is to make sure that string comparison works well "ish" for numbers
-        # this at one point could be improved with a better type system, of course!
-        # the issue is that we can't do everything in here because
-        # kids submit things with the ask command that wew do not ask them to cast (yet)
+        arg0 = self.process_variable_for_comparisons(args[0])
+        arg1 = self.process_variable_for_comparisons(args[1])
 
         simple_comparison = arg0 + operator + arg1
 

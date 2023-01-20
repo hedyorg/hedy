@@ -36,14 +36,13 @@ def main():
 
     # Gettext translations
     for lang, trans in translations.items():
-        # candidate = path.join('translations', lang, 'LC_MESSAGES', 'messages.mo')
-        # if not path.exists(candidate):
-        #     raise RuntimeError(f'Expecting {candidate} to exist, but not found')
-
-        translator = gettext.translation('messages', localedir='translations', languages=[lang, 'en'])
-        for key in ADDITIONAL_GETTEXT_KEYS:
-            trans[key] = translator.gettext(key)
-            message_keys.add(key)
+        try:
+            translator = gettext.translation('messages', localedir='translations', languages=[lang, 'en'])
+            for key in ADDITIONAL_GETTEXT_KEYS:
+                trans[key] = translator.gettext(key)
+                message_keys.add(key)
+        except Exception as e:
+            raise RuntimeError(f"Not able to load translations for '{lang}'") from e
 
 
     # Write file

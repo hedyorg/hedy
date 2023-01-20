@@ -48,18 +48,16 @@
                   <th class="p-2">{{_('level')}}</th>
                   <th class="p-2 hidden sm:block">{{_('last_update')}}</th>
                   <th class="p-2">{{_('view')}}</th>
-                  <th class="p-2">{{_('edit')}}</th>
                   <th class="p-2">{{_('remove')}}</th>
               </tr>
             </thead>
             <tbody>
               {% for adventure in teacher_adventures %}
                 <tr>
-                  <td class="px-4 py-2">{{adventure.name|e}}</td>
+                  <td class="px-4 py-2"><a href="for-teachers/customize-adventure/{{adventure.id}}" class="no-underline" data-cy="edit-link">{{adventure.name|e}}</a></td>
                   <td class="text-center p-2">{% if adventure.level %}{{adventure.level}}{% else %}-{% endif %}</td>
                   <td class="text-center p-2 hidden sm:block">{{adventure.date}}</td>
-                  <td class="text-center p-2"><a class="no-underline cursor-pointer" onclick="window.open('/for-teachers/customize-adventure/view/{{ adventure.id }}');">👁</a></td>
-                  <td class="text-center p-2"><a href="for-teachers/customize-adventure/{{adventure.id}}" class="no-underline">✏️</a></td>
+                  <td class="text-center p-2"><a class="no-underline cursor-pointer" href="/for-teachers/customize-adventure/view/{{ adventure.id }}">👁</a></td>
                   <td class="text-center p-2"><a class="no-underline cursor-pointer" onclick='hedyApp.delete_adventure("{{adventure.id}}", {{_('delete_adventure_prompt')|tojson}})'>🗑️</a></td>
                 </tr>
               {% endfor %}

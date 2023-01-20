@@ -78,12 +78,28 @@ NORMAL_PREFIX_CODE = textwrap.dedent("""\
         }
 
         number = str(number)
-        if number.isnumeric():
+        T = str
+
+        sign = ''
+        if number[0] == '-':
+            sign = '-'
+            number = number[1:]
+
+        if number.replace('.', '', 1).isnumeric():
             numerals_list = numerals_dict_return[alphabet]
-            all_numerals_converted = [numerals_list[int(digit)] for digit in number]
-            return ''.join(all_numerals_converted)
-        else:
-            return number
+            if '.' in number:
+                tokens = number.split('.')
+                all_numerals_converted = [numerals_list[int(digit)] for digit in tokens[0]]
+                all_numerals_converted.append('.')
+                all_numerals_converted.extend(numerals_list[int(digit)] for digit in tokens[1])
+                if alphabet == 'Latin':
+                    T = float
+            else:
+                all_numerals_converted = [numerals_list[int(digit)] for digit in number]
+                if alphabet == 'Latin':
+                    T = int
+            number = ''.join(all_numerals_converted)
+        return T(f'{sign}{number}')
         """)
 
 # Define code that will be used if a presssed command is used
