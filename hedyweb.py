@@ -3,7 +3,6 @@ import collections
 from website.yaml_file import YamlFile
 import glob
 from os import path
-from flask_helpers import render_template
 
 
 class AchievementTranslations:
