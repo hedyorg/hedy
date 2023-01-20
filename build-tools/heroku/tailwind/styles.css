@@ -695,3 +695,20 @@ input:checked ~ .toggle-path {
   0%   {bottom:15px; font-size: 1em; opacity: 1}
   100% {bottom:100%; font-size: 4em; opacity: 0}
 }
+
+.drop-adventures-hint {
+  @apply bg-blue-100 border-blue-300;
+}
+
+.drop-adventures-active {
+  @apply bg-yellow-100 border-yellow-300;
+}
+
+.adventures-tab {
+  @apply flex flex-row w-auto overflow-x-auto overflow-y-hidden;
+  display :none;
+}
+
+.adventures-tab[style*='display: block'] {
+  display: flex !important;
+}

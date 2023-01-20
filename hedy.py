@@ -1780,7 +1780,14 @@ while not pygame_end:
 
     def ifpressed(self, meta, args):
         button_name = self.process_variable(args[0], meta.line)
-        if (len(args[0]) > 1):
+        var_or_button = args[0]
+        # for now we assume a var is a letter, we can check this lateron by searching for a ... = button
+        if self.is_variable(var_or_button):
+            return self.make_ifpressed_command(f"""\
+if event.unicode == {args[0]}:
+{ConvertToPython.indent(args[1])}
+  break""", False)
+        elif len(var_or_button) > 1:
             return self.make_ifpressed_command(f"""\
 if event.key == {button_name}:
 {ConvertToPython.indent(args[1])}
@@ -1789,13 +1796,19 @@ if event.key == {button_name}:
             return self.make_ifpressed_command(f"""\
 if event.unicode == '{args[0]}':
 {ConvertToPython.indent(args[1])}
-  break""") + "\n" + self.make_ifpressed_command(f"""\
-if event.key == {button_name}:
-{ConvertToPython.indent(args[1])}
-  break""", True)
+  break""")
 
     def ifpressed_else(self, meta, args):
-        if (len(args[0]) > 1):
+        var_or_button = args[0]
+        if self.is_variable(var_or_button):
+            return self.make_ifpressed_command(f"""\
+if event.key == {var_or_button}:
+{ConvertToPython.indent(args[1])}
+  break
+else:
+{ConvertToPython.indent(args[2])}
+  break""", False)
+        elif len(var_or_button) > 1:
             button_name = self.process_variable(args[0], meta.line)
             return self.make_ifpressed_command(f"""\
 if event.key == {button_name}:
@@ -1966,18 +1979,24 @@ class ConvertToPython_8_9(ConvertToPython_7):
 
         all_lines = '\n'.join([x for x in args[1:]])
         all_lines = ConvertToPython.indent(all_lines)
-
-        if (len(args[0]) > 1):
+        var_or_key = args[0]
+        # if this is a variable, we assume it is a key (for now)
+        if self.is_variable(var_or_key):
+            return self.make_ifpressed_command(f"""\
+if event.unicode == {args[0]}:
+{all_lines}
+  break""")
+        elif len(var_or_key) == 1:  # one character? also a key!
+            return self.make_ifpressed_command(f"""\
+if event.unicode == '{args[0]}':
+{all_lines}
+  break""")
+        else:  # otherwise we mean a button
             button_name = self.process_variable(args[0], met.line)
             return self.make_ifpressed_command(f"""\
 if event.key == {button_name}:
 {all_lines}
   break""", True)
-        else:
-            return self.make_ifpressed_command(f"""\
-if event.unicode == '{args[0]}':
-{all_lines}
-  break""")
 
     def ifpressed_else(self, met, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens

@@ -112,12 +112,6 @@ def load_adventures_per_level(level, keyword_lang):
     for short_name, adventure in adventures.items():
         if level not in adventure['levels']:
             continue
-        # end adventure is the quiz
-        # if quizzes are not enabled, do not load it
-        # Todo TB -> Is this still relevant? Teachers can simply "disable"
-        # adventures in customizations!
-        if short_name == 'end' and not config['quiz-enabled']:
-            continue
         current_adventure = {
             'short_name': short_name,
             'name': adventure['name'],
@@ -995,16 +989,38 @@ def index(level, program_id):
 
     teacher_adventures = []
     # Todo: TB It would be nice to improve this by using level as a sort key
-    for adventure in customizations.get('teacher_adventures', []):
-        current_adventure = DATABASE.get_adventure(adventure)
-        if current_adventure.get('level') == str(level):
-            try:
-                current_adventure['content'] = safe_format(current_adventure['content'],
-                                                           **hedy_content.KEYWORDS.get(g.keyword_lang))
-            except BaseException:
-                # We don't want teacher being able to break the student UI -> pass this adventure
-                pass
-            teacher_adventures.append(current_adventure)
+    if 'sorted_adventures' in customizations:
+        sorted_adventures = customizations['sorted_adventures']
+        adventures_level = sorted_adventures.get(str(level), [])
+        for adventure in adventures_level:
+            if adventure['from_teacher']:
+                current_adventure = DATABASE.get_adventure(adventure['name'])
+                try:
+                    current_adventure['content'] = safe_format(current_adventure['content'],
+                                                               **hedy_content.KEYWORDS.get(g.keyword_lang))
+                except BaseException:
+                    # We don't want teacher being able to break the student UI -> pass this adventure
+                    pass
+                teacher_adventures.append(current_adventure)
+
+    elif 'teacher_adventures' in customizations:
+        for adventure in customizations.get('teacher_adventures', []):
+            current_adventure = DATABASE.get_adventure(adventure)
+            if current_adventure.get('level') == str(level):
+                try:
+                    current_adventure['content'] = safe_format(current_adventure['content'],
+                                                               **hedy_content.KEYWORDS.get(g.keyword_lang))
+                except BaseException:
+                    # We don't want teacher being able to break the student UI -> pass this adventure
+                    pass
+                teacher_adventures.append(current_adventure)
+    adventures_names = {}
+    for adventure in adventures:
+        adventures_names[adventure['short_name']] = adventure['name']
+    for adventure in teacher_adventures:
+        adventures_names[adventure['id']] = adventure['name']
+
+    adventures_per_level = hedy_content.ADVENTURE_ORDER_PER_LEVEL[int(level)]
 
     enforce_developers_mode = False
     if 'other_settings' in customizations and 'developers_mode' in customizations['other_settings']:
@@ -1049,7 +1065,9 @@ def index(level, program_id):
         enforce_developers_mode=enforce_developers_mode,
         teacher_adventures=teacher_adventures,
         loaded_program=loaded_program,
-        adventure_name=adventure_name)
+        adventure_name=adventure_name,
+        adventures_names=adventures_names,
+        adventures_per_level=adventures_per_level)
 
 
 @app.route('/hedy/<id>/view', methods=['GET'])
