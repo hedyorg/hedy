@@ -181,9 +181,7 @@ class ForTeachersModule(WebsiteModule):
 
         teacher_adventures = self.db.get_teacher_adventures(user["username"])
         customizations = self.db.get_class_customizations(class_id)
-        print("*"*100)
-        print(adventures)
-        print("*"*100)
+
         adventure_names = {}
         for adv_key, adv_dic in adventures.items():
             for name, _ in adv_dic.items():
@@ -195,7 +193,7 @@ class ForTeachersModule(WebsiteModule):
         for adventure in teacher_adventures:
             teacher_adventures_formatted.append({"id": adventure['id'], "level": adventure['level']})
 
-        available_adventures = {}
+        available_adventures = {i: [] for i in range(1, hedy.HEDY_MAX_LEVEL+1)}
 
         if customizations:
             # in case this class has thew new way to select adventures
@@ -203,13 +201,17 @@ class ForTeachersModule(WebsiteModule):
                 self.purge_customizations(customizations['sorted_adventures'], adventures)
                 available_adventures = self.get_unused_adventures(customizations, teacher_adventures)
             # it uses the old way so convert it to the new one
-            else:
+            elif 'adventures' in customizations:
                 customizations['sorted_adventures'] = {str(i): [] for i in range(1, hedy.HEDY_MAX_LEVEL + 1)}
                 for adventure, levels in customizations['adventures'].items():
                     for level in levels:
                         customizations['sorted_adventures'][str(level)].append(
                             {"name": adventure, "from_teacher": False})
                 available_adventures = self.get_unused_adventures(customizations, teacher_adventures)
+        else:
+            for adventure in teacher_adventures:
+                available_adventures[int(adventure['level'])].append(
+                    {"name": adventure['id'], "from_teacher": True})
 
         return render_template(
             "customize-class.html",
