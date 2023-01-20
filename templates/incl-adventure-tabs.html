@@ -1,15 +1,15 @@
       {# TABS #}
       <div id="adventures">
-        
+
         {% macro adventure_tab(tabname, title, selected, id, special) %}
             <div class="tab {% if selected %}tab-selected{% endif %} flex items-center justify-center whitespace-nowrap {% if special %}special_tab{% endif %}" id="{{ id }}" tabindex="0" data-tab="{{ tabname }}">
                 {{title}}
             </div>
         {% endmacro %}
-        
+
         <div class="overflow-x-auto overflow-y-hidden px-2 pt-2">
-        <div class="flex flex-row w-min" id="adventures-buttons">        
-            {% if 'sorted_adventures' in customizations %}                
+        <div class="flex flex-row w-min" id="adventures-buttons">
+            {% if 'sorted_adventures' in customizations %}
                 {% for adventure in customizations['sorted_adventures'][level_nr] %}
                     {% if  adventure.name in adventures_names %}
                         <div class="tab {% if loop.index == 1 %}tab-selected{% endif %} {% if adventure['from_teacher'] %}teacher_tab{% endif %} z-10 whitespace-nowrap flex items-center justify-center" id="adventure{{ loop.index }}" tabindex="0" data-tab="{% if adventure.from_teacher %}{{adventures_names[adventure.name]}}{% else %}{{adventure.name}}{% endif %}">
@@ -19,7 +19,7 @@
                 {% endfor %}
             {% else %}
                     {% for adventure in adventures_per_level %}
-                        {% if  adventure in adventures_names %}    
+                        {% if  adventure in adventures_names %}
                             <div class="tab {% if loop.index == 1 %}tab-selected{% endif %} z-10 whitespace-nowrap flex items-center justify-center" id="adventure{{ loop.index }}" tabindex="0" data-tab="{{adventure}}">
                                 {{ adventures_names[adventure]}}
                             </div>
@@ -40,10 +40,10 @@
       <div id="adventures-tab" class="w-full overflow-auto bg-white p-4 mb-8 shadow-md turn-pre-into-ace">
         {% for adventure in adventures %}
           {% if 'sorted_adventures' not in customizations or {'name': adventure.short_name, 'from_teacher': False} in customizations['sorted_adventures'][level_nr]  %}
-            <div data-tabtarget="{{adventure.short_name}}" {% if 'sorted_adventures' not in customizations %} 
-                                                                {% if loop.index != 1 %}class="hidden"{% endif %} 
-                                                            {% else %} 
-                                                                {% if adventure.short_name != customizations['sorted_adventures'][level_nr][0].name %}class="hidden"{% endif %} 
+            <div data-tabtarget="{{adventure.short_name}}" {% if 'sorted_adventures' not in customizations %}
+                                                                {% if loop.index != 1 %}class="hidden"{% endif %}
+                                                            {% else %}
+                                                                {% if adventure.short_name != customizations['sorted_adventures'][level_nr][0].name %}class="hidden"{% endif %}
                                                             {% endif %}>
               <div class="lg:flex lg:flex-row">
                   <div class="{% if adventure.example_code %}lg:w-1/2 {% endif %}w-full p-2 ltr:mr-2 rtl:ml-2">
@@ -86,9 +86,9 @@
             </div>
         {% endif %}
         {% for adventure in teacher_adventures %}
-            <div data-tabtarget="{{adventure.name}}" {%if 'sorted_adventures' not in customizations%} 
-                                                        class="hidden" 
-                                                    {% else %} 
+            <div data-tabtarget="{{adventure.name}}" {%if 'sorted_adventures' not in customizations%}
+                                                        class="hidden"
+                                                    {% else %}
                                                         {% if adventure.id != customizations['sorted_adventures'][level_nr][0].name %}
                                                             class="hidden"
                                                         {% endif %}

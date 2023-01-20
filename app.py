@@ -92,7 +92,14 @@ DATABASE = database.Database()
 ACHIEVEMENTS = achievements.Achievements(DATABASE, ACHIEVEMENTS_TRANSLATIONS)
 
 
-def load_adventures_per_level(level, keyword_lang):
+def load_adventures_for_level(level):
+    """Load the adventures for the given level.
+
+    Adventures are loaded in the current language, with the keywords in the code
+    translated to the default (or explicitly requested) keyword language.
+    """
+    keyword_lang = request.args.get('keyword_language', default=g.keyword_lang, type=str)
+
     loaded_programs = {}
     # If user is logged in, we iterate their programs that belong to the
     # current level. Out of these, we keep the latest created program for both
@@ -844,11 +851,27 @@ def tutorial_index():
     level = 1
     cheatsheet = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
     commands = hedy.commands_per_level.get(level)
-    adventures = load_adventures_per_level(level, g.keyword_lang)
+    adventures = load_adventures_for_level(level)
     parsons = len(PARSONS[g.lang].get_parsons_data_for_level(level))
+    adventures_per_level = hedy_content.ADVENTURE_ORDER_PER_LEVEL[int(level)]
 
-    return hedyweb.render_tutorial_mode(level=level, cheatsheet=cheatsheet, commands=commands,
-                                        adventures=adventures, parsons_exercises=parsons)
+    adventures_names = {a['short_name']: a['name'] for a in adventures}
+
+    return render_template(
+        "code-page.html",
+        intro_tutorial=True,
+        next_level=2,
+        level_nr=str(level),
+        level=str(level),
+        adventures=adventures,
+        adventures_names=adventures_names,
+        commands=commands,
+        quiz=True,
+        parsons=True if parsons else False,
+        parsons_exercises=parsons,
+        cheatsheet=cheatsheet,
+        adventures_per_level=adventures_per_level,
+        blur_button_available=False)
 
 
 @app.route('/teacher-tutorial', methods=['GET'])
@@ -912,11 +935,7 @@ def index(level, program_id):
 
     # In case of a "forced keyword language" -> load that one, otherwise: load
     # the one stored in the g object
-    keyword_language = request.args.get('keyword_language', default=None, type=str)
-    if keyword_language:
-        adventures = load_adventures_per_level(level, keyword_language)
-    else:
-        adventures = load_adventures_per_level(level, g.keyword_lang)
+    adventures = load_adventures_for_level(level)
 
     # Sort the adventures based on the ordering defined
     adventures_order = ADVENTURE_ORDER_PER_LEVEL[level]
@@ -1047,27 +1066,35 @@ def index(level, program_id):
     if 'other_settings' in customizations and 'hide_quiz' in customizations['other_settings']:
         quiz = False
 
+    max_level = hedy.HEDY_MAX_LEVEL
+    level_number = int(level)
+
     commands = hedy.commands_per_level.get(level)
-    return hedyweb.render_code_editor_with_tabs(
-        cheatsheet=cheatsheet,
-        commands=commands,
-        max_level=hedy.HEDY_MAX_LEVEL,
-        level_number=level,
-        version=version(),
-        quiz=quiz,
-        quiz_questions=quiz_questions,
-        adventures=adventures,
-        parsons=parsons,
-        parsons_exercises=parson_exercises,
-        tutorial=tutorial,
+    return render_template(
+        "code-page.html",
+        level_nr=str(level_number),
+        level=level_number,
+        current_page='hedy',
+        prev_level=level_number - 1 if level_number > 1 else None,
+        next_level=level_number + 1 if level_number < max_level else None,
         customizations=customizations,
         hide_cheatsheet=hide_cheatsheet,
         enforce_developers_mode=enforce_developers_mode,
         teacher_adventures=teacher_adventures,
         loaded_program=loaded_program,
+        adventures=adventures,
+        commands=commands,
+        parsons=parsons,
+        parsons_exercises=parson_exercises,
+        tutorial=tutorial,
         adventure_name=adventure_name,
         adventures_names=adventures_names,
-        adventures_per_level=adventures_per_level)
+        latest=version(),
+        quiz=quiz,
+        quiz_questions=quiz_questions,
+        adventures_per_level=adventures_per_level,
+        cheatsheet=cheatsheet,
+        blur_button_available=False)
 
 
 @app.route('/hedy/<id>/view', methods=['GET'])
@@ -1136,35 +1163,34 @@ def get_specific_adventure(name, level, mode):
     except BaseException:
         return utils.error_page(error=404, ui_message=gettext('no_such_level'))
 
-    # In case of a "forced keyword language" -> load that one, otherwise: load
-    # the one stored in the g object
-    keyword_language = request.args.get('keyword_language', default=None, type=str)
-    if keyword_language:
-        adventure = [x for x in load_adventures_per_level(
-            level, keyword_language) if x.get('short_name') == name]
-    else:
-        adventure = [x for x in load_adventures_per_level(
-            level, g.keyword_lang) if x.get('short_name') == name]
+    adventure = [x for x in load_adventures_for_level(level) if x.get('short_name') == name]
     if not adventure:
         return utils.error_page(error=404, ui_message=gettext('no_such_adventure'))
 
-    prev_level = level - 1 if [x for x in load_adventures_per_level(
-        level - 1, g.keyword_lang) if x.get('short_name') == name] else False
-    next_level = level + 1 if [x for x in load_adventures_per_level(
-        level + 1, g.keyword_lang) if x.get('short_name') == name] else False
+    prev_level = level - 1 if [x for x in load_adventures_for_level(
+        level - 1) if x.get('short_name') == name] else False
+    next_level = level + 1 if [x for x in load_adventures_for_level(
+        level + 1) if x.get('short_name') == name] else False
 
     # Add the commands to enable the language switcher dropdown
     commands = hedy.commands_per_level.get(level)
     raw = mode == 'raw'
 
-    return hedyweb.render_specific_adventure(
-        commands=commands,
-        level_number=level,
-        adventure=adventure,
-        version=version(),
-        prev_level=prev_level,
-        next_level=next_level,
-        raw=raw)
+    return render_template("code-page.html",
+                           specific_adventure=True,
+                           level_nr=str(level),
+                           commands=commands,
+                           level=level,
+                           prev_level=prev_level,
+                           next_level=next_level,
+                           customizations=[],
+                           hide_cheatsheet=None,
+                           enforce_developers_mode=None,
+                           teacher_adventures=[],
+                           adventures=adventure,
+                           latest=version(),
+                           raw=raw,
+                           blur_button_available=False)
 
 
 @app.route('/cheatsheet/', methods=['GET'], defaults={'level': 1})
@@ -1583,7 +1609,8 @@ def translate_keywords():
 def get_tutorial_translation(level, step):
     # Keep this structure temporary until we decide on a nice code / parse structure
     if step == "code_snippet":
-        return jsonify({'code': gettext('tutorial_code_snippet')}), 200
+        code = hedy_content.deep_translate_keywords(gettext('tutorial_code_snippet'), g.keyword_lang)
+        return jsonify({'code': code}), 200
     try:
         step = int(step)
     except ValueError:
