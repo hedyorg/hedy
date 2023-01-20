@@ -622,7 +622,17 @@ adventures:
             9:
                 story_text: |
                     ## Story
-                    In this level you can use nesting to put `{if}`, `{repeat}` or `{for}` commands inside other `{if}`, `{repeat}` or `{for}` commands. This gives you many options and really helps you to make your story interactive.
+                    In this level you can use `{if}` and `{repeat}` commands inside other `{if}` and `{repeat}` commands. 
+                    This gives you many options and really helps you to make your story interactive.
+                    
+                    ### Exercise 1
+                    Finish the code so the `{if}` works correctly.
+                    
+                    ### Exercise 2
+                    Add an `{if}` and `{else}` for the part of the story where Robin goes home too.
+
+                    ### Exercise 3
+                    Go back to your level 8 story and use at least two `{if}`s inside another `{if}`.
                 example_code: |
                     ```
                     {print} 'Robin is walking downtown'
@@ -632,42 +642,11 @@ adventures:
                         {print} 'Robin sees an interesting looking book'
                         book = {ask} 'Does Robin buy the book?'
                         {if} book {is} yes
-                            {print} 'Robin buys the book and goes home'
-                        {else}
-                            {print} 'Robin leaves the shop and goes home'
+                        _ {print} 'Robin buys the book and goes home'
+                        _ {else}
+                        _ {print} 'Robin leaves the shop and goes home'
                     {else}
                         {print} 'Robin goes home'
-                    ```
-                story_text_2: |-
-                    The example above is pretty straightforward, but by nesting {if} you can really elaborate your code and turn your story into a real game. Check out this example!
-                example_code_2: |
-                    ## Elaborate code
-                    ```
-                    sword = lost
-                    game = on
-                    {print} 'Our hero is walking through the forest'
-                    {print} 'The path splits two ways'
-                    {repeat} 2 {times}
-                        {if} game {is} on
-                            path = {ask} 'Which path should she choose?'
-                            {if} path {is} left
-                                {if} sword {is} found
-                                    {print} 'Our hero comes across a dragon!'
-                                    {print} 'Luckily our hero has a sword to defeat the beast!'
-                                    game = over
-                                {else}
-                                    {print} 'Our hero finds a dragon, but she doesnt have any weapons!'
-                                    {print} 'Our hero is beaten by the dragon...'
-                                    {print} 'Try again'
-                                    game = over
-                            {if} path {is} right
-                                {if} sword {is} lost
-                                    {print} 'Our hero finds a sword'
-                                    {print} 'This could come in very handy'
-                                    sword = found
-                                {else}
-                                    {print} 'You have already found the sword. There is nothing left here.'
-                                    {print} 'She walks back'
                     ```
                 start_code: "# place your code here"
             10:
@@ -1290,6 +1269,41 @@ adventures:
                     ```
                 start_code: |-
                     figure = {ask} 'How many angles should I draw?'
+            9:
+                story_text: |
+                    ## Turtle
+                    Now that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.
+                    
+                    ### Exercise 1
+                    This code creates three black triangles, change that into five pink squares.
+                    
+                     **(extra)** Create a figure of your own choosing consisting of at least two different shapes types.
+                example_code: |
+                    ```
+                    {color} {black}
+                    {repeat} 3 {times}
+                        {repeat} 3 {times}
+                            {forward} 10
+                            {turn} 120
+                        {color} {white}
+                        {forward} 50
+                        {color} {black}
+                    ```
+                story_text_2: |
+                    ## Turtle Control
+                    You can now also move the turtle in many more ways than only forward or backwards!
+                    ### Exercise 2
+                    Finish the code so you can control the turtle with keys. w for forward, s for backward, a for left and d for right. 
+                    Tip: For left and right, you will need to use three lines of code!
+                example_code_2: |
+                    ```
+                    {repeat} 40 {times}
+                        {if} w {is} {pressed}
+                            {forward} 10
+                        {if} a {is} {pressed}
+                            _ _
+                    ```
+                start_code: "# place your code here"
     dishes:
         name: "Dishes?"
         description: "Use the computer to see who does the dishes"
@@ -1591,37 +1605,23 @@ adventures:
                 start_code: "# place your code here"
             9:
                 story_text: |
-                    Now that you know how to nest multiple statements, you can also do this with {pressed}!
-                    By nesting a pressed in a {repeat} loop, you can repeatedly press buttons and make something happen.
-                    Now we know you could do this before, but by using the indents you have much more overview!
-                    Try it counting to 5, for example!
+                    ## Touch type game
+                    Now that you know how to combine statements, you can create a touch type tool with `{pressed}`. 
+                    
+                    ### Exercise
+                    Finish the code. Each time a random letter should be chosen, which you have to press. You get a point for a correct press, and and two points deduction for a wrong press.
+
                 example_code: |
                     ```
-                    total = 1
-                    {repeat} 5 {times}
-                        {if} x {is} {pressed}
-                            {print} total
-                            {print} 'keep pressing!'
-                            total = total + 1
-                    ```
-                story_text_2: |
-                    Besides counting, you can now also move the turtle in many more ways than only forward or backwards!
-                    Try making some figures by walking the turtle around!
-                example_code_2: |
-                    ```
-                    stepsize = 25
-                    left = -90
-                    right = 90
-                    around = 180
-                    {repeat} 40 {times}
-                        {if} w {is} {pressed}
-                            {forward} stepsize
-                        {if} s {is} {pressed}
-                            {turn} around
-                        {if} a {is} {pressed}
-                            {turn} left
-                        {if} d {is} {pressed}
-                            {turn} right
+                    points = 1
+                    letters = a, b, c, d, e
+                    {repeat} 10 {times}
+                        letter = _ _ _ 
+                        {print} 'Press the letter ' letter
+                        {if} letter {is} {pressed}
+                        _
+                        _
+                        _
                     ```
                 start_code: "# place your code here"
             10:
@@ -1943,7 +1943,12 @@ adventures:
             9:
                 story_text: |
                     ## Rock, paper, scissors
-                    In this level you can program the whole rock, paper, scissors game by nesting the `{if}` commands. Can you finish the code?
+                    In this level you can program the whole rock, paper, scissors game by nesting the `{if}` commands. 
+                    
+                    ### Exercise
+                    Can you finish the code? The program must tell who has won for every combination.
+                    
+                    **(extra)** Want to play more than one game? Expand the code so that you can play multiple rounds. You can even use an `{ask}` to ask the user how many rounds they want to play.
                 example_code: |
                     ```
                     choices {is} rock, paper, scissors
@@ -2066,9 +2071,13 @@ adventures:
             9:
                 story_text: |
                     ## Calculator
-                    In previous levels you've learned how to make a calculator, in this level you can expand that code and make it into a little maths game.
-                    ### Exercise
+                    In level 6 you created a calculator, in this level you can expand that code so it asks multiple questions.
+                    
+                    ### Exercise 1
                     Can you finish line 10 to make to program work?
+
+                    ### Exercise 2
+                    Give the played feedback when the enter a right or wrong answer. To achieve that, expand your program with an `{else}`.
                 example_code: |
                     ```
                     score = 0
@@ -2391,13 +2400,16 @@ adventures:
                 story_text: |
                     ## Restaurant
                     In this level you can use nesting to make your restaurant more realistic and more fun!
-                    For example you would ask for sauce if somebody orders fries, but you wouldn't if someone orders pizza!
 
                     ### Exercise
-                    This is a challenge for the real brainiacs! Each line that needs indentation has been given a blank.
-                    Can you figure out how much indentation each line needs in order for the code to work propperly?
-                    Good luck!
-                    TIP: If the customer orders pizza, Hedy shouldn't ask what sauce the costumer wants.
+                    The indentation was removed in the example code. 
+                    Can you figure out how much indentation each line needs in order for the code to work properly?
+                    If the customer orders pizza, Hedy shouldn't ask what sauce the costumer wants.
+
+                    **(extra)** A restaurant does not stock all sauces. Make a list of available sauces and give a reply with each order whether you sell it. <br>
+                    **(extra)** Pizzas have toppings. Ask customers what they want.<br>
+                    **(extra)** Do customers want a drink? Ask them too! <br>                    
+
                 example_code: |
                     ```
                     {print} 'Welcome to Restaurant Chez Hedy!'
@@ -2911,7 +2923,9 @@ adventures:
 
                     ### Exercise
                     Now it's very hard to win this game, can you make it easier to win?
-                    For example by only having 1 wrong door and 2 correct doors instead of 1 correct door and 2 wrong ones?
+                    Change your code so it only has one wrong door and two correct doors instead of one correct door and two wrong ones? 
+                    Tip: This means changing the variable correct_door into wrong_door, and switching the `{if}` and `{else}` code.
+                    And of course you may also change the story and make it your own. Change the monsters or make it a happy game show where you get a gift!
                 example_code: |
                     ```
                     {print} 'Escape from the Haunted House!'
