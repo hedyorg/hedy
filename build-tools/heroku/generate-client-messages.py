@@ -10,7 +10,7 @@ import gettext
 # Import packages from the website app (AutoPep8 will mess this up, so disable it)
 import sys
 sys.path.append(path.abspath(path.join(path.dirname(__file__), '..', '..')))  # noqa
-from website.yaml_file import YamlFile # nopep8
+from website.yaml_file import YamlFile  # nopep8
 
 OUTPUT_FILE = 'static/js/message-translations.ts'
 ADDITIONAL_GETTEXT_KEYS = [
