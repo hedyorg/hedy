@@ -2,16 +2,15 @@
 #
 # This file is compiled from the YAMLs found in content/client-messages/*.yaml,
 # plus gettext-translated messages we found elsewhere.
-from website.yaml_file import YamlFile
 import glob
 from os import path
 import json
 import gettext
 
-# Import packages from the website app
+# Import packages from the website app (AutoPep8 will mess this up, so disable it)
 import sys
-print(path.abspath(path.join(path.dirname(__file__), '..', '..')))
-sys.path.append(path.abspath(path.join(path.dirname(__file__), '..', '..')))
+sys.path.append(path.abspath(path.join(path.dirname(__file__), '..', '..')))  # noqa
+from website.yaml_file import YamlFile # nopep8
 
 OUTPUT_FILE = 'static/js/message-translations.ts'
 ADDITIONAL_GETTEXT_KEYS = [
