@@ -43,10 +43,12 @@
                     {% for level, adventures in customizations['sorted_adventures'].items() %}
                         <div id="level-{{ level }}" class="adventures-tab">
                             {% for adventure in adventures %}
-                                <div draggable="true" class="tab {% if adventure['from_teacher'] %}teacher_tab{% endif %} z-10 whitespace-nowrap flex items-center justify-left relative" tabindex="0" adventure="{{ adventure['name'] }}" level = "{{ level }}" from-teacher = "{% if adventure['from_teacher'] %}true{% else %}false{% endif %}">
-                                    <span id="remove" class="absolute top-0.5 right-0.5 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark"></span>
-                                    {{ adventure_names[adventure['name']] }}
-                                </div>
+                               {% if adventure.name in adventure_names %} 
+                                    <div draggable="true" class="tab {% if adventure['from_teacher'] %}teacher_tab{% endif %} z-10 whitespace-nowrap flex items-center justify-left relative" tabindex="0" adventure="{{ adventure['name'] }}" level = "{{ level }}" from-teacher = "{% if adventure['from_teacher'] %}true{% else %}false{% endif %}">
+                                        <span id="remove" class="absolute top-0.5 right-0.5 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark"></span>
+                                        {{ adventure_names[adventure['name']] }}
+                                    </div>
+                                {% endif %}
                             {% endfor %}
                         </div>
                     {% endfor %}
