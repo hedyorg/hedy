@@ -3,7 +3,7 @@ from random import random as random
 from flask import session
 from hedy_content import ALTERNATIVE_ERROR_LANGUAGES
 from website.auth import (current_user, update_test_group_in_session)
-#from utils import ColoredConsole as clog
+# from utils import ColoredConsole as clog
 
 
 def is_available():
@@ -27,6 +27,8 @@ def select_users_test_group():
     return False
 
 # Creation of test_group entry if it doesn't exist in session or db
+
+
 def update_users_test_group(db):
     user = current_user()
     # Check if there is a logged-in user

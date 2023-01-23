@@ -120,6 +120,7 @@ def current_user():
 
     return user
 
+
 def update_test_group_in_session(test_group):
     session["user"]["test_group"] = test_group
 
