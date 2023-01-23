@@ -1,19 +1,19 @@
 levels:
     1:
         1:
-            story: Du är kund hos bageriet Hedy. \nDu går in på bageriet och välkomnas av bagaren. \nHan frågar vilken sorts paj du vill beställa. \nSedan förbereds din order.\n
-            code: |
+            story: "Du är kund hos bageriet Hedy.\nDu går in på bageriet och välkomnas av bagaren.\nHan frågar vilken sorts paj du vill beställa.\nSedan förbereds din order.\n"
+            code: |-
                 {print} Välkommen till bageriet Hedy!
                 {ask} Vilken typ av paj vill du beställa?
-                {echo} So you want
-                {print} Your order is being prepared!
+                {echo} Så du vill ha
+                {print} Din beställning görs i ordning nu!
         2:
             story: You're at the DJ Booth requesting a song. Create a program that asks if you are ready to party and then asks which song you would like to hear.\n
-            code: |
-                {print} This is DJ Hedy
-                {ask} Are you ready to party?
-                {ask} What song would you like to hear?
-                {echo} Great choice! I love
+            code: |-
+                {print} Det här är DJ Hedy
+                {ask} Är du redo att festa?
+                {ask} Vilken sång vill du höra?
+                {echo} Bra val! Jag älskar
     3:
         2:
             code: |

@@ -141,8 +141,6 @@ adventures:
                 story_text: "## Berättelse\nI en berättelse säger någon ord flera gånger. Till exempel, när någon ropar på hjälp eller sjunger en sång.\nDu kan lägga såna repetitioner i din berättelse med hjälp av `{repeat}` från denna nivå och framåt.\n"
             9:
                 story_text: "## Berättelse\nI denna nivå kan du använda nästning för att placera `{if}`-, `{repeat}`- eller `{for}`-kommandon inuti ett annat `{if}`-, `{repeat}`- eller `{for}`-kommando. Detta ger dig många valmöjligheter och hjälper dig verkligen göra handlingen interaktiv.\n"
-                story_text_2: Exemplet ovan är ganska okomplicerad, men genom att nästa {if} så kan du verkligen utveckla din kod och göra din berättelse till ett riktigt spel. Kolla in detta exempel!
-                example_code_2: "## Utförlig kod\n```\nsvärd = förlorat\nspel = på\n{print} 'Vår hjälte går igenom skogen'\n{print} 'Vägen delar på sig åt höger och vänster'\n{repeat} 2 {times}\n    {if} spel {is} på\n        väg = {ask} 'Vilken väg ska hon gå?'\n        {if} väg {is} vänster\n            {if} svärd {is} hittat\n                {print} 'Vår hjälte stöter på en drake!'\n                {print} 'Vilken tur att hon har ett svärd att besegra denna best med!'\n                spel = slut\n            {else}\n                {print} 'Vår hjälte hittar en drake, men hon har inget svärd!'\n                {print} 'Vår hjälte blir besegrad av draken...'\n                {print} 'Försök igen'\n                spel = slut\n        {if} väg {is} höger\n            {if} svärd {is} förlorat\n                {print} 'Vår hjälte hittar ett svärd'\n                {print} 'Det kan komma till väl användning'\n                svärd = hittat\n            {else}\n                {print} 'Du har redan tagit svärdet. Det finns inget kvar här.'\n                {print} 'Hon går tillbaka'\n```\n"
                 example_code: "```\n{print} 'Robyn promenerar ned för kvarteret'\nplats = {ask} 'Går Robyn till en affär eller går hon hem?'\n{if} plats {is} affär\n    {print} 'Hon går in i affären'\n    {print} 'Robyn ser en intressant bok'\n    bok = {ask} 'Köper Robyn boken?'\n    {if} bok {is} ja\n        {print} 'Robyn köper boken och går sedan hem'\n    {else}\n        {print} 'Robyn lämnar affären och går hem'\n{else}\n    {print} 'Robyn går hem'\n```\n"
                 start_code: '# placera din kod här'
             13:
@@ -275,6 +273,12 @@ adventures:
                 story_text: "## Let's draw\nIn this level you can use calculations to draw different figures.\nYou may have learned in school that turning a full circle is 360 degrees. If not, now you know!\nThat's why you also use 90 degrees for a square. 360 divided by 4 is 90.\nNow that we can do math with Hedy, we can draw all the figures we want!\n"
                 example_code: "```\nangles = {ask} 'How many angles do you want?'\nangle = 360 / angles\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n```\n"
                 start_code: "{print} 'Drawing figures'"
+            9:
+                story_text_2: "## Turtle Control\nYou can now also move the turtle in many more ways than only forward or backwards!\n### Exercise 2\nFinish the code so you can control the turtle with keys. w for forward, s for backward, a for left and d for right. \nTip: For left and right, you will need to use three lines of code!\n"
+                example_code_2: "```\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} 10\n    {if} a {is} {pressed}\n        _ _\n```\n"
+                start_code: '# place your code here'
+                story_text: "## Turtle\nNow that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.\n\n### Exercise 1\nThis code creates three black triangles, change that into five pink squares.\n\n **(extra)** Create a figure of your own choosing consisting of at least two different shapes types.\n"
+                example_code: "```\n{color} {black}\n{repeat} 3 {times}\n    {repeat} 3 {times}\n        {forward} 10\n        {turn} 120\n    {color} {white}\n    {forward} 50\n    {color} {black}\n```\n"
     dishes:
         name: Dishes?
         levels:
@@ -693,10 +697,8 @@ adventures:
 
             9:
                 story_text: "Now that you know how to nest multiple statements, you can also do this with {pressed}!\nBy nesting a pressed in a {repeat} loop, you can repeatedly press buttons and make something happen.\nNow we know you could do this before, but by using the indents you have much more overview!\nTry it counting to 5, for example!\n"
-                example_code_2: "```\nstepsize = 25\nleft = -90\nright = 90\naround = 180\nrepeat 40 times\n    {if} w {is} {pressed}\n        forward stepsize\n    {if} s {is} {pressed}\n        turn around\n    {if} a {is} {pressed}\n        turn left\n    {if} d {is} {pressed}\n        turn right\n```\n"
                 start_code: '# place your code here'
                 example_code: "```\ntotal = 1\n{repeat} 5 times\n    {if} x {is} {pressed}\n        {print} total\n        {print} 'keep pressing!'\n        total = total + 1\n```\n"
-                story_text_2: "Besides counting, you can now also move the turtle in many more ways than only forward or backwards!\nTry making some figures by walking the turtle around!\n"
             10:
                 story_text: "In this level you can make the turtle draw you a figure. The turtle is raring to go.\nGive the turtle the starting signal by pressing the x or y key on your keyboard.\nCan you let the turtle draw you another figure?\n"
                 example_code: "```\ndistances = 100, 80, 60, 40, 20, 10\n{if} x {is} {pressed}\n    for distance in distances\n        {forward} distance\n        {turn} -90\n{if} y {is} {pressed}\n    for distance in distances\n        {forward} distance\n        {turn} 90\n```\n"

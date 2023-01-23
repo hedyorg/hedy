@@ -18,7 +18,7 @@ class TestsLevel15(HedyTester):
       print 'Goed gedaan!'""")
         expected = textwrap.dedent("""\
     antwoord = 0
-    while convert_numerals('Latin', antwoord).zfill(100)!=convert_numerals('Latin', 25).zfill(100):
+    while convert_numerals('Latin', antwoord)!=convert_numerals('Latin', 25):
       antwoord = input(f'''Wat is 5 keer 5?''')
       try:
         antwoord = int(antwoord)
@@ -48,7 +48,7 @@ class TestsLevel15(HedyTester):
         # Splitting like this to wrap the line around 120 characters max
         expected = textwrap.dedent(f"""\
         answer = 7
-        while convert_numerals('Latin', answer).zfill(100)>convert_numerals('Latin', 5).zfill(100) {op} convert_numerals('Latin', answer).zfill(100)<convert_numerals('Latin', 10).zfill(100):
+        while convert_numerals('Latin', answer)>convert_numerals('Latin', 5) {op} convert_numerals('Latin', answer)<convert_numerals('Latin', 10):
           answer = input(f'''What is 5 times 5?''')
           try:
             answer = int(answer)
@@ -76,7 +76,7 @@ class TestsLevel15(HedyTester):
         affiche 'Goed gedaan!'""")
         expected = textwrap.dedent("""\
       antwoord = 0
-      while convert_numerals('Latin', antwoord).zfill(100)!=convert_numerals('Latin', 25).zfill(100):
+      while convert_numerals('Latin', antwoord)!=convert_numerals('Latin', 25):
         antwoord = input(f'''Wat is 5 keer 5?''')
         try:
           antwoord = int(antwoord)
@@ -115,7 +115,7 @@ class TestsLevel15(HedyTester):
       print 'Hoog he?'""")
         expected = textwrap.dedent("""\
     getal = 0
-    while convert_numerals('Latin', getal).zfill(100)<convert_numerals('Latin', 100000).zfill(100):
+    while convert_numerals('Latin', getal)<convert_numerals('Latin', 100000):
       getal = input(f'''HOGER!!!!!''')
       try:
         getal = int(getal)
@@ -162,7 +162,7 @@ class TestsLevel15(HedyTester):
 
         expected = textwrap.dedent("""\
       stop = 0
-      while convert_numerals('Latin', stop).zfill(100)!=convert_numerals('Latin', 1).zfill(100):
+      while convert_numerals('Latin', stop)!=convert_numerals('Latin', 1):
         while not pygame_end:
           pygame.display.update()
           event = pygame.event.wait()

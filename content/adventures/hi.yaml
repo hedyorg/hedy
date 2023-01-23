@@ -531,37 +531,6 @@ adventures:
                     {else}
                         {print} 'रॉबिन घर जाता है'
                     ```
-                story_text_2: |
-                    ऊपर दिया गया उदाहरण बहुत सीधा है, लेकिन नेस्टिंग के साथ आप वास्तव में अपने कोड को विस्तृत कर सकते हैं और अपनी कहानी को एक वास्तविक खेल में बदल सकते हैं। इस उदाहरण को देखें!
-                example_code_2: |-
-                    ## विस्तृत कोड
-                    ```
-                    तलवार = खोया
-                    खेल = चालू
-                    {print} 'हमारा हीरो जंगल में घूम रहा है'
-                    {print} 'रास्ता दो हिस्सों में बंट जाता है'
-                    {repeat} 2 {times}
-                        {if} खेल {is} चालू
-                            पथ = {ask} 'उसे कौन सा रास्ता चुनना चाहिए?'
-                            {if} पथ {is} बाएं
-                                {if} तलवार {is} पाया
-                                    {print} 'हमारा हीरो एक ड्रैगन से मिलता है!'
-                                    {print} 'सौभाग्य से हमारे नायक के पास जानवर को हराने के लिए तलवार है!'
-                                    खेल = खत्म
-                                {else}
-                                    {print} 'हमारे नायक को एक अजगर मिल गया है, लेकिन उसके पास कोई हथियार नहीं है!'
-                                    {print} 'हमारे हीरो को ड्रैगन ने पीटा है...'
-                                    {print} 'फिर से कोशिश करें'
-                                    खेल = खत्म
-                            {if} पथ {is} दांए
-                                {if} तलवार {is} खोया
-                                    {print} 'हमारे नायक को तलवार मिल गई'
-                                    {print} 'यह बहुत काम आ सकता है'
-                                    तलवार = पाया
-                                {else}
-                                    {print} 'आपको तलवार पहले ही मिल गई है। यहाँ कुछ नहीं बचा है।'
-                                    {print} 'वह वापस चलती है'
-                    ```
                 start_code: '#अपना कोड यहां डालें'
             8:
                 story_text: |
@@ -828,6 +797,12 @@ adventures:
                     You may have learned in school that turning a full circle is 360 degrees. If not, now you know!
                     That's why you also use 90 degrees for a square. 360 divided by 4 is 90.
                     Now that we can do math with Hedy, we can draw all the figures we want!
+            9:
+                story_text: "## Turtle\nNow that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.\n\n### Exercise 1\nThis code creates three black triangles, change that into five pink squares.\n\n **(extra)** Create a figure of your own choosing consisting of at least two different shapes types.\n"
+                example_code: "```\n{color} {black}\n{repeat} 3 {times}\n    {repeat} 3 {times}\n        {forward} 10\n        {turn} 120\n    {color} {white}\n    {forward} 50\n    {color} {black}\n```\n"
+                story_text_2: "## Turtle Control\nYou can now also move the turtle in many more ways than only forward or backwards!\n### Exercise 2\nFinish the code so you can control the turtle with keys. w for forward, s for backward, a for left and d for right. \nTip: For left and right, you will need to use three lines of code!\n"
+                example_code_2: "```\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} 10\n    {if} a {is} {pressed}\n        _ _\n```\n"
+                start_code: '# place your code here'
         name: Turtle
         description: Make your own drawing
         default_save_name: turtle
@@ -2563,9 +2538,7 @@ adventures:
 
             9:
                 story_text: "Now that you know how to nest multiple statements, you can also do this with {pressed}!\nBy nesting a pressed in a {repeat} loop, you can repeatedly press buttons and make something happen.\nNow we know you could do this before, but by using the indents you have much more overview!\nTry it counting to 5, for example!\n"
-                story_text_2: "Besides counting, you can now also move the turtle in many more ways than only forward or backwards!\nTry making some figures by walking the turtle around!\n"
                 example_code: "```\ntotal = 1\n{repeat} 5 times\n    {if} x {is} {pressed}\n        {print} total\n        {print} 'keep pressing!'\n        total = total + 1\n```\n"
-                example_code_2: "```\nstepsize = 25\nleft = -90\nright = 90\naround = 180\nrepeat 40 times\n    {if} w {is} {pressed}\n        forward stepsize\n    {if} s {is} {pressed}\n        turn around\n    {if} a {is} {pressed}\n        turn left\n    {if} d {is} {pressed}\n        turn right\n```\n"
                 start_code: '# place your code here'
             10:
                 story_text: "In this level you can make the turtle draw you a figure. The turtle is raring to go.\nGive the turtle the starting signal by pressing the x or y key on your keyboard.\nCan you let the turtle draw you another figure?\n"

@@ -21,7 +21,7 @@ import {loadParsonsExercise} from "./parsons";
  * TARGET by the *absence* of the '.hidden' class.
  */
 $(function() {
-function resetWindow() {
+  function resetWindow() {
     $ ('#warningbox').hide ();
     $ ('#errorbox').hide ();
     $ ('#okbox').hide ();

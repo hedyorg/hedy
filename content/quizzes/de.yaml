@@ -15,7 +15,7 @@ levels:
             hint: "Es ist nach Hedy Lamarr benannt."
             question_score: '10'
         2:
-            question_text: "Welcher Befehl lässt Text erscheinen?"
+            question_text: "Welche müssen in die Lücken gefüllt werden, um den Text Hello! erscheinen zu lassen?"
             mp_choice_options:
             -   option: |
                     ```
@@ -76,8 +76,8 @@ levels:
             mp_choice_options:
             -   option: "`{print}` fehlt in Zeile 1."
                 feedback: "Richtig!"
-            -   option: "Im in line 1 is spelled wrong."
-                feedback: "Im is spelled wrong on purpose; Hedy doesn't understand the apostrophes yet."
+            -   option: "Im in Zeile 1 ist falsch geschrieben."
+                feedback: "Im ist absichtlich falsch geschrieben; Hedy versteht die einfach Anführungszeichen noch nicht."
             -   option: "`{echo}` ist kein Befehl."
                 feedback: "`{echo}` ist ein Befehl, es gibt noch einen weiteren Fehler."
             -   option: "Nichts! Der Code ist perfekt!"
@@ -88,8 +88,8 @@ levels:
         5:
             question_text: "Welcher Befehl fehlt in Zeile 2?"
             code: |-
-                {ask} What is your favorite pet?
-                _?_ So your favorite pet is...
+                {ask} Was ist dein Lieblingstier?
+                _?_ Also ist dein Lieblingstier...
             mp_choice_options:
             -   option: |
                     ```
