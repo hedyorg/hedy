@@ -22,8 +22,6 @@ adventures:
                 start_code: '# via kodo ĉi tie'
                 story_text: "## Rakonto\nEn ĉi tiu nivelo vi povas uzi nestadon por meti {if}, {repeat} aŭ {for} komandojn en aliajn {if}, {repeat} aŭ {for}. Ĉi tio donas al vi multajn eblojn kaj vere helpas vin fari vian rakonton interaga.\n"
                 example_code: "```\n{print} 'Robertino promenas urbocentre'\nloko = {ask} 'Ĉu Robertino iras en butikon, aŭ ĉu ŝi iras hejmen?'\n{if} loko {is} butiko\n    {print} 'Ŝi eniras la butikon.'\n    {print} 'Robertino vidas interesan libron'\n    libro = {ask} 'Ĉu Robertino aĉetas la libron?'\n    {if} libro {is} jes\n        {print} 'Robertino aĉetas la libron kaj iras hejmen'\n    {else}\n        {print} 'Robertino eliras la butikon kaj iras hejmen'\n{else}\n    {print} 'Robertino iras hejmen'\n```\n"
-                story_text_2: La ĉi-supra ekzemplo estas sufiĉe simpla, sed per uzo de `{if}` ene de aliaj `{if}`-blokoj, oni povas ellabori vian kodon kaj igi sian rakonton vera ludo. Rigardu la jenan ekzemplon!
-                example_code_2: "## Ellaborita kodo\n```\nglavo = perdita\nludo = daŭranta\n{print} 'Nia heroo promenas tra la arbaro'\n{print} 'La vojo forkiĝas en du vojojn'\n{repeat} 2 {times}\n    {if} ludo {is} daŭranta\n        vojo = {ask} 'Kiun vojon ŝi elektu?'\n        {if} vojo {is} maldekstra\n            {if} glavo {is} trovita\n                {print} 'Nia heroo renkontas drakon!'\n                {print} 'Feliĉe nia heroo havas glavon por venki la beston!'\n                ludo = finita\n            {else}\n                {print} 'Nia heroo trovas drakon, sed ŝi ne havas armilojn!'\n                {print} 'Nian heroon venkas la drako…'\n                {print} 'Provu denove'\n                ludo = finita\n        {if} vojo {is} dekstra\n            {if} glavo {is} perdita\n                {print} 'Nia heroo trovas glavon'\n                {print} 'Ĉi tio povus esti tre oportuna'\n                glavo = trovita\n            {else}\n                {print} 'Vi jam trovis la glavon. Ĉi tie restas nenio.'\n                {print} 'Ŝi reiras'\n```\n"
             10:
                 start_code: '# via kodo ĉi tie'
                 story_text: "## Rakonto\nEn ĉi tiu nivelo, vi povas uzi la komandon `{for}` en via rakonto. Tiel vi povas facile programi la infanlibron «Bruna urso, bruna urso, kion vi vidas?».\n"
@@ -137,6 +135,12 @@ adventures:
                 story_text_2: "## Interago\nAnkaŭ ni nun povas plibonigi la programon, kiu desegnas malsamajn figurojn.\nĈu vi povas eltrovi kiom malproksimen la testudo devas turni ĉi tien? Finu la kodon kaj vi povas desegni ajnan plurangulon, kiun vi ŝatus!\n"
                 example_code_2: "```\nanguloj = {ask} 'Kiom da anguloj mi desegnu?'\nangulo = 360 / anguloj\n{repeat} angulo {times}\n    {turn} _\n    {forward} _\n```\n"
                 start_code: anguloj = {ask} 'Kiom da anguloj desegni?'
+            9:
+                story_text: "## Turtle\nNow that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.\n\n### Exercise 1\nThis code creates three black triangles, change that into five pink squares.\n\n **(extra)** Create a figure of your own choosing consisting of at least two different shapes types.\n"
+                example_code: "```\n{color} {black}\n{repeat} 3 {times}\n    {repeat} 3 {times}\n        {forward} 10\n        {turn} 120\n    {color} {white}\n    {forward} 50\n    {color} {black}\n```\n"
+                story_text_2: "## Turtle Control\nYou can now also move the turtle in many more ways than only forward or backwards!\n### Exercise 2\nFinish the code so you can control the turtle with keys. w for forward, s for backward, a for left and d for right. \nTip: For left and right, you will need to use three lines of code!\n"
+                example_code_2: "```\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} 10\n    {if} a {is} {pressed}\n        _ _\n```\n"
+                start_code: '# place your code here'
         name: Testudo
         description: Faru vian propran desegnaĵon
         default_save_name: Testudo
@@ -691,8 +695,6 @@ adventures:
             9:
                 story_text: "Now that you know how to nest multiple statements, you can also do this with {pressed}!\nBy nesting a pressed in a {repeat} loop, you can repeatedly press buttons and make something happen.\nNow we know you could do this before, but by using the indents you have much more overview!\nTry it counting to 5, for example!\n"
                 example_code: "```\ntotal = 1\n{repeat} 5 times\n    {if} x {is} {pressed}\n        {print} total\n        {print} 'keep pressing!'\n        total = total + 1\n```\n"
-                story_text_2: "Besides counting, you can now also move the turtle in many more ways than only forward or backwards!\nTry making some figures by walking the turtle around!\n"
-                example_code_2: "```\nstepsize = 25\nleft = -90\nright = 90\naround = 180\nrepeat 40 times\n    {if} w {is} {pressed}\n        forward stepsize\n    {if} s {is} {pressed}\n        turn around\n    {if} a {is} {pressed}\n        turn left\n    {if} d {is} {pressed}\n        turn right\n```\n"
                 start_code: '# place your code here'
             10:
                 example_code: "```\ndistances = 100, 80, 60, 40, 20, 10\n{if} x {is} {pressed}\n    for distance in distances\n        {forward} distance\n        {turn} -90\n{if} y {is} {pressed}\n    for distance in distances\n        {forward} distance\n        {turn} 90\n```\n"

@@ -583,37 +583,6 @@ adventures:
                     {else}
                         {print} 'Robin goes home'
                     ```
-                story_text_2: |-
-                    The example above is pretty straightforward, but by nesting {if} you can really elaborate your code and turn your story into a real game. Check out this example!
-                example_code_2: |
-                    ## Elaborate code
-                    ```
-                    sword = lost
-                    game = on
-                    {print} 'Our hero is walking through the forest'
-                    {print} 'The path splits two ways'
-                    {repeat} 2 {times}
-                        {if} game {is} on
-                            path = {ask} 'Which path should she choose?'
-                            {if} path {is} left
-                                {if} sword {is} found
-                                    {print} 'Our hero comes across a dragon!'
-                                    {print} 'Luckily our hero has a sword to defeat the beast!'
-                                    game = over
-                                {else}
-                                    {print} 'Our hero finds a dragon, but she doesnt have any weapons!'
-                                    {print} 'Our hero is beaten by the dragon...'
-                                    {print} 'Try again'
-                                    game = over
-                            {if} path {is} right
-                                {if} sword {is} lost
-                                    {print} 'Our hero finds a sword'
-                                    {print} 'This could come in very handy'
-                                    sword = found
-                                {else}
-                                    {print} 'You have already found the sword. There is nothing left here.'
-                                    {print} 'She walks back'
-                    ```
                 start_code: "# place your code here"
             10:
                 story_text: |
@@ -1107,6 +1076,12 @@ adventures:
                     ```
                 start_code: |-
                     angles = {ask} 'How many angles should I draw?'
+            9:
+                story_text: "## Turtle\nNow that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.\n\n### Exercise 1\nThis code creates three black triangles, change that into five pink squares.\n\n **(extra)** Create a figure of your own choosing consisting of at least two different shapes types.\n"
+                example_code: "```\n{color} {black}\n{repeat} 3 {times}\n    {repeat} 3 {times}\n        {forward} 10\n        {turn} 120\n    {color} {white}\n    {forward} 50\n    {color} {black}\n```\n"
+                story_text_2: "## Turtle Control\nYou can now also move the turtle in many more ways than only forward or backwards!\n### Exercise 2\nFinish the code so you can control the turtle with keys. w for forward, s for backward, a for left and d for right. \nTip: For left and right, you will need to use three lines of code!\n"
+                example_code_2: "```\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} 10\n    {if} a {is} {pressed}\n        _ _\n```\n"
+                start_code: '# place your code here'
     dishes:
         name: "Dishes?"
         description: "Use the computer to see who does the dishes (Start at level 2)"
@@ -2974,8 +2949,6 @@ adventures:
                 start_code: '# place your code here'
                 story_text: "Now that you know how to nest multiple statements, you can also do this with {pressed}!\nBy nesting a pressed in a {repeat} loop, you can repeatedly press buttons and make something happen.\nNow we know you could do this before, but by using the indents you have much more overview!\nTry it counting to 5, for example!\n"
                 example_code: "```\ntotal = 1\n{repeat} 5 times\n    {if} x {is} {pressed}\n        {print} total\n        {print} 'keep pressing!'\n        total = total + 1\n```\n"
-                story_text_2: "Besides counting, you can now also move the turtle in many more ways than only forward or backwards!\nTry making some figures by walking the turtle around!\n"
-                example_code_2: "```\nstepsize = 25\nleft = -90\nright = 90\naround = 180\nrepeat 40 times\n    {if} w {is} {pressed}\n        forward stepsize\n    {if} s {is} {pressed}\n        turn around\n    {if} a {is} {pressed}\n        turn left\n    {if} d {is} {pressed}\n        turn right\n```\n"
             11:
                 start_code: '# place your code here'
                 story_text: "Now that you have learned of the ```for ... in range ... to ...``` rule, you can use it for ```pressed```\ntoo! for example, try moving the turtle! The turtle grows everytime you press a linked button.\nThis way the turtle can move further every step!\n"
