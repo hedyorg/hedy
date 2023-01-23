@@ -59,8 +59,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'turtle',
         'restaurant',
         'fortune',
-        'haunted',
-        'next'
+        'haunted'
     ],
     2: [
         'default',
@@ -124,7 +123,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'story',
         'songs',
         'dishes',
-        'dice'
+        'dice',
         'fortune',
         'restaurant'
     ],
@@ -145,9 +144,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'restaurant',
         'haunted',
         'turtle',
-        'pressit',
-        'next',
-        'end'
+        'pressit'
     ],
     10: [
         'default',
