@@ -185,7 +185,7 @@
                         <button class="blue-btn" onclick="hedyApp.save_customizations('{{class_info.id}}')">{{_('save')}}</button>
                     </div>
                     <div class="flex flex-row ml-auto gap-2">
-                        <button class="red-btn {% if not customizations %}hidden{% endif %}" id="remove_customizations_button" onclick='hedyApp.remove_customizations("{{class_info.id}}", {{_('remove_customizations_prompt')|tojson}}, adventures_default_order, adventure_names, available_adventures, teacher_adventures)'>
+                        <button class="red-btn {% if not customizations %}hidden{% endif %}" id="remove_customizations_button" onclick='hedyApp.remove_customizations("{{class_info.id}}", {{_('remove_customizations_prompt')|tojson}})'>
                         {{_('remove_customization')}}</button>
                         <button class="green-btn" onclick="validate_changes()">{{_('back_to_class')}}</button>
                     </div>
@@ -212,11 +212,11 @@ function validate_changes() {
     }
 }
 window.addEventListener("DOMContentLoaded", () => {
-    hedyApp.initializeCustomizeClassPage({
-      available_adventures: {{ available_adventures|tojson }},
-      adventure_names: {{ adventure_names|tojson }},
-      available_adventures_level_translation: {{_('available_adventures_level')|tojson}},
-    });
+    hedyApp.initializeCustomizeClassPage({{_('available_adventures_level')|tojson}});
+    window.State.teacher_adventures = {{ teacher_adventures|tojson }};
+    window.State.adventures_default_order = {{ adventures_default_order|tojson }};
+    window.State.adventure_names = {{ adventure_names|tojson }};
+    window.State.available_adventures = {{ available_adventures|tojson }};
 });
 </script>
 {% endblock %}
