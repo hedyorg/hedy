@@ -67,8 +67,8 @@
     name: '{in}'
     explanation: Check elements with `{in}`.
 -   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
-    demo_code: "{if} a {is} {pressed} {print} 'You pressed A!' {else} {print} 'You pressed another key!'"
+    explanation: Kontrollera om en viss tangent är `{pressed}`.
+    demo_code: "{if} a {is} {pressed} {print} 'Du tryckte på A!' {else} {print} 'Du tryckte på en annan tangent!'"
 6:
 -   name: '{print}'
     explanation: Print exactly using quotation marks.
@@ -89,16 +89,16 @@
 12:
 -   name: float directly
     explanation: Decimal numbers.
-    demo_code: "{print} 'Calculate away!'\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n"
+    demo_code: "{print} 'Räkna på!'\n{print} 'Två och en halv plus två och en halv är...'\n{print} 2.5 + 2.5"
 -   name: assign text
     explanation: Text with quotation marks after `=`
-    demo_code: "name = 'Hedy the Robot'\n{print} 'Hello ' name\n"
+    demo_code: "namn = 'Roboten Hedy'\n{print} 'Hej ' namn"
 -   name: quotes after {if} comparison
     explanation: Text with quotation marks after `{if}`.
-    demo_code: "name = {ask} 'Who are you?'\n{if} name = 'Hedy'\n    {print} 'Hi there!'\n"
+    demo_code: "namn = {ask} 'Vem är du?'\n{if} namn = 'Hedy'\n    {print} 'Hallå där!'"
 -   name: quotes in list
     explanation: A list with quotation marks.
-    demo_code: "superheroes = 'Iron Man', 'Batman', 'Superman'\n{print} superheroes {at} {random}\n"
+    demo_code: "superhjältar = 'Iron Man', 'Batman', 'Stålmannen'\n{print} superhjältar {at} {random}"
 13:
 -   name: '{and}'
     explanation: Two parts both need to be correct.
@@ -189,8 +189,8 @@
     explanation: Repeat multiple lines.
     demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
 -   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
-    demo_code: "{if} a {is} {pressed}\n    {print} 'You pressed A!'\n{else}\n    {print} 'You pressed another key!'"
+    explanation: Kontrollera om en viss tangent är `{pressed}`.
+    demo_code: "{if} a {is} {pressed}\n    {print} 'Du tryckte på A!'\n{else}\n    {print} 'Du tryckte på en annan tangent'"
 10:
 -   name: '{print}'
     explanation: Print something. Remember to use a quotation mark for literal printing.

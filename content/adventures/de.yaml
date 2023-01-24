@@ -342,11 +342,19 @@ adventures:
             9:
                 story_text: |
                     ## Geschichte
-                    In diesem Level nutzt du Verschachtelungen, um `{if}`-, `{repeat}`- oder `{for}`-Befehle in anderen `{if}`-, `{repeat}`- oder `{for}`-Befehlen zu verwenden. Das eröffnet dir viele Möglichkeiten und hilft dir, deine Geschichte richtig interaktiv werden zu lassen.
+                    In diesem Level kannst du `{if}` und `{repeat}` innerhalb anderer `{if}` und `{repeat}` Befehle verwenden.
+                    Das eröffnet dir viele Möglichkeiten und hilft dir, deine Geschichte wirklich interaktiv werden zu lassen.
+
+                    ### Übung 1
+                    Vervollständige den Code, damit das `{if}` korrekt funktioniert.
+
+                    ### Übung 2
+                    Füge ein `{if}` und `{else}` in den Teil der Geschichte hinzu, wo Robin auch nach Hause geht.
+
+                    ### Übung 3
+                    Gehe zurück zu deiner Geschichte aus Level 8 und benutze mindestens zwei `{if}`s innerhalb eines anderen `{if}`.
                 start_code: "# setze hier deinen Code hin"
-                example_code: "```\n{print} 'Robin läuft durch die Innenstadt.'\nOrt = {ask} 'Geht Robin in ein Geschäft oder nach Hause?'\n{if} Ort {is} Geschäft\n    {print} 'Sie betritt ein Geschäft.'\n    {print} 'Robin sieht ein Buch, das spanned wirkt.'\n    Buch = {ask} 'Kauft Robin das Buch?'\n    {if} Buch {is} ja\n        {print} 'Robin kauft das Buch und geht nach Hause.'\n    {else}\n        {print} 'Robin verlässt das Geschäft und geht nach Hause.'\n{else}\n    {print} 'Robin geht nach Hause.'\n```\n"
-                story_text_2: "Das obige Beispiel ist recht simpel, doch mit verschachtelten {if} kannst Du richtig aufwendigen Code schreiben und aus Deiner Geschichte ein richtiges Spiel machen. Sieh Dir einmal dieses Beispiel an!"
-                example_code_2: "## Ausgebauter Code\n```\nSchwert = verloren\nSpiel = läuft\n{print} 'Unsere Heldin läuft durch den Wald.'\n{print} 'Der Weg gabelt sich.'\n{repeat} 2 {times}\n    {if} Spiel {is} läuft\n        Weg = {ask} 'In welche Richtung soll sie gehen?'\n        {if} Weg {is} links\n            {if} Schwert {is} gefunden\n                {print} 'Unsere Heldin trifft auf einen Drachen!'\n                {print} 'Zum Glück hat unsere Heldin ein Schwert um die Bestie zu besiegen!'\n                Spiel = vorbei\n            {else}\n                {print} 'Unsere Heldin findet einen Drachen, hat aber keine Waffe!'\n                {print} 'Unsere Heldin wird vom Drachen geschlagen...'\n                {print} 'Versuch es nochmal.'\n                Spiel = vorbei\n        {if} Weg {is} rechts\n            {if} Schwert {is} verloren\n                {print} 'Unsere Heldin findet ein Schwert.'\n                {print} 'Das könnte sich noch als nützlich erweisen.'\n                Schwert = gefunden\n            {else}\n                {print} 'Du hast das Schwert schon gefunden. Hier gibt es nichts weiter zu entdecken.'\n                {print} 'Sie läuft zurück'\n```\n"
+                example_code: "```\n{print} 'Robin läuft durch die Innenstadt.'\nOrt = {ask} 'Geht Robin in ein Geschäft oder nach Hause?'\n{if} Ort {is} Geschäft\n    {print} 'Sie betritt ein Geschäft.'\n    {print} 'Robin sieht ein Buch, das spanned wirkt.'\n    Buch = {ask} 'Kauft Robin das Buch?'\n    {if} Buch {is} ja\n    _ {print} 'Robin kauft das Buch und geht nach Hause.'\n    _ {else}\n    _ {print} 'Robin verlässt das Geschäft und geht nach Hause.'\n{else}\n    {print} 'Robin geht nach Hause.'\n```\n"
             8:
                 story_text: |
                     ## Geschichte
@@ -986,6 +994,12 @@ adventures:
                     ```
                 start_code: |-
                     {print} 'Formen zeichnen'
+            9:
+                start_code: '# schreibe deinen Code hier'
+                story_text: "## Schildkröte\nNun da wir ein `{repeat}` innerhalb eines `{repeat}` verwenden können, können wir komplexere Figuren erstellen.\n\n### Übung 1\nDieser Code erzeugt drei schwarze Dreiecke, ändere dies zu fünf pinken Quadraten.\n\n **(extra)** Erstelle eine Figur deiner Wahl, die aus mindestens zwei verschiedenen Formtypen besteht.\n"
+                example_code: "```\n{color} {black}\n{repeat} 3 {times}\n    {repeat} 3 {times}\n        {forward} 10\n        {turn} 120\n    {color} {white}\n    {forward} 50\n    {color} {black}\n```\n"
+                story_text_2: "## Schildkrötensteuerung\nNun kannst du die Schildkröte auch auf viele weitere Arten bewegen als nur vorwärts oder rückwärts!\n### Übung 2\nVervollständige den Code, um die Schildkröte mit den Tasten zu steuern. w für vorwärts, s für rückwärts, a für links und d für rechts. \nTipp: Für links und rechts wirst du drei Zeilen Code benötigen!\n"
+                example_code_2: "```\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} 10\n    {if} a {is} {pressed}\n        _ _\n```\n"
     dishes:
         name: "Abwasch?"
         description: "Nutze den Computer, um zu sehen, wer abwäscht"
@@ -2473,20 +2487,18 @@ adventures:
         levels:
             9:
                 start_code: '# platziere deinen Code hier'
-                story_text: "Now that you know how to nest multiple statements, you can also do this with {pressed}!\nBy nesting a pressed in a {repeat} loop, you can repeatedly press buttons and make something happen.\nNow we know you could do this before, but by using the indents you have much more overview!\nTry it counting to 5, for example!\n"
-                example_code: "```\ngesamt = 1\n{repeat} 5 {times}\n    {if} x {is} {pressed}\n        {print} gesamt\n        {print} 'Drück weiter!'\n        gesamt = gesamt + 1\n```\n"
-                story_text_2: "Besides counting, you can now also move the turtle in many more ways than only forward or backwards!\nTry making some figures by walking the turtle around!\n"
-                example_code_2: "```\nschrittweite = 25\nlinks = -90\nrechts = 90\numdrehen = 180\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} schrittweite\n    {if} s {is} {pressed}\n        {turn} umdrehen\n    {if} a {is} {pressed}\n        {turn} links\n    {if} d {is} {pressed}\n        {turn} rechts\n```\n"
+                story_text: "## Blindtippspiel\nNun da du weißt wie man Befehle kombiniert, kannst du mit Hilfe von `{pressed}` ein Blindtippwerkzeug erstellen. \n\n### Übung\nVervollständige den Code. Jedes Mal soll ein zufälliger Buchstabe ausgewählt werden. Diesen muss man drücken. Du bekommst einen Punkt für die richtige Taste und zwei Punkte Abzug für die falsche Taste.\n"
+                example_code: "```\nPunkte = 1\nBuchstaben = a, b, c, d, e\n{repeat} 10 {times}\n    Buchstabe = _ _ _ \n    {print} 'Drück den Buchstaben ' Buchstabe\n    {if} Buchstabe {is} {pressed}\n    _\n    _\n    _\n```\n"
             10:
                 start_code: '# platziere deinen Code hier'
                 example_code: "```\nentfernungen = 100, 80, 60, 40, 20, 10\n{if} x {is} {pressed}\n    {for} entfernung {in} entfernungen\n        {forward} entfernung\n        {turn} -90\n{if} y {is} {pressed}\n    {for} entfernung {in} entfernungen\n        {forward} entfernung\n        {turn} 90\n```\n"
-                story_text: "In this level you can make the turtle draw you a figure. The turtle is raring to go.\nGive the turtle the starting signal by pressing the x or y key on your keyboard.\nCan you let the turtle draw you another figure?\n"
+                story_text: "In diesem Level kannst du die Schildkröte eine Figur für dich zeichnen lassen. Die Schildkröte wartet nur darauf loszulegen.\nGib der Schildkröte das Startsignal, indem du die X oder Y Taste auf deiner Tastatur drückst.\nKannst du die Schildkröte eine andere Figur zeichnen lassen?\n"
             11:
                 start_code: '# platziere deinen Code hier'
-                story_text: "Now that you have learned of the ```for ... in range ... to ...``` rule, you can use it for ```pressed```\ntoo! for example, try moving the turtle! The turtle grows everytime you press a linked button.\nThis way the turtle can move further every step!\n"
+                story_text: "Nun da du die `{for} ... {in} {range} ... {to} ...` Regel gelernt hast, kannst du sie auch mit `{pressed}` benutzen!\nVersuche zum Beispiel die Schildkröte zu bewegen! Die Schildkröte wächst jedes Mal, wenn du einen verbundenen Knopf drückst.\nAuf diese Weise kann die Schildkröte jeden Schritt weiter gehen!\n"
                 example_code: "```\nlinks = -90\nrechts = 90\numdrehen = 180\n{for} zähler {in} {range} 1 {to} 15\n    schrittweite = zähler * 5\n    {if} w {is} {pressed}\n        {forward} schrittweite\n    {if} s {is} {pressed}\n        {turn} umdrehen\n    {if} a {is} {pressed}\n        {turn} links\n    {if} d {is} {pressed}\n        {turn} rechts\n```\n"
             14:
-                example_code: "```\nstepsize = 15\nleft = -90\nright = 90\naround = 180\njumptime = 5\nspins = 4\nrepeat 40 times\n    {if} w {is} {pressed}\n        forward stepsize\n        jumptime = jumptime - 1\n    {if} s {is} {pressed}\n        turn around\n    {if} a {is} {pressed}\n        turn left\n        spins = spins - 1\n    {if} d {is} {pressed}\n        turn right\n        spins = spins - 1\n    {if} p {is} {pressed}\n        {if} jumptime <= 0 or spins <= 0\n            forward stepsize * 3\n            jumptime = 5\n            spins = 4\n```\n"
+                example_code: "```\nschrittweite = 15\nlinks = -90\nrechts = 90\numdrehen = 180\nsprungzeit = 5\ndrehungen = 4\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} schrittweite\n        sprungzeit = sprungzeit - 1\n    {if} s {is} {pressed}\n        {turn} umdrehen\n    {if} a {is} {pressed}\n        {turn} links\n        drehungen = drehungen - 1\n    {if} d {is} {pressed}\n        {turn} rechts\n        drehungen = drehungen - 1\n    {if} p {is} {pressed}\n        {if} sprungzeit <= 0 {or} drehungen <= 0\n            {forward} schrittweite * 3\n            sprungzeit = 5\n            drehungen = 4\n```\n"
                 start_code: '# platziere deinen Code hier'
                 story_text: "Now that you learned how to use operators, we can use it with ```pressed```too!\nimagine the turtle being able to do a superjump forward. by pressing ```p``` the turtle can make a\nsuperjump! However, the turtle can only do this jump every 5 steps or every 4 turns\n"
             15:
@@ -2502,12 +2514,12 @@ adventures:
                 start_code: '# platziere deinen Code hier'
                 example_code: "```\nstepsize = 15\nleft = -90\nright = 90\naround = 180\njumptime = 5\nspins = 4\nrepeat 40 times\n    {if} w {is} {pressed}:\n        forward stepsize\n        jumptime = jumptime - 1\n    {if} s {is} {pressed}:\n        turn around\n    {if} a {is} {pressed}:\n        turn left\n        spins = spins - 1\n    {if} d {is} {pressed}:\n        turn right\n        spins = spins - 1\n    {if} p {is} {pressed}:\n        {if} jumptime <= 0 or spins <= 0:\n            forward stepsize * 3\n            jumptime = 5\n            spins = 4\n        {elif} jumptime > 0:\n            print \"you need to take more steps or turns before you can superjump!\"\n```\n"
             12:
-                story_text: "Are you familiar with videogames? You walk into tall grass and are suddenly approached by\na very suspicious mouse. What will you do?\nIn this level we will make a small menu with different kinds of options.\nStoring text into a variable is quite handy for repeated uses.\nOption, I choose you!\n"
+                story_text: "Kennst du Videospiele? Du gehst in hohes Gras und plötzlich geht eine sehr verdächtige Maus auf dich zu.\nWas wirst du tun?\nIn diesem Level werden wir ein kleines Menü mit verschiedenen Auswahlmöglichkeiten erstellen.\nEs ist echt praktisch Text in einer Variablen zu speichern, um ihn mehrfach zu benutzen.\nAuswahlmöglichkeit, ich wähle dich!\n"
                 example_code: "```\nauswahl = 'Du wählst Option: '\n{print} 'Eine wilde Maus erscheint!'\n{print} 'Wähle eine Option und drücke den ersten Buchstaben: (n)etz, (k)atze, (b)eutel, (r)ennen'\n{if} n {is} {pressed}\n    {print} auswahl + 'Netz'\n    {print} 'Du versuchst die Maus mit einem Netz zu fangen..'\n    {sleep}\n    {print} 'Glückwunsch! Du hast es geschafft!'\n{if} c {is} {pressed}\n    {print} auswahl + 'Katze'\n    {print} 'Du schickst deine Katze los'\n    {sleep}\n    {print} 'Die Maus hat sich erschreckt und ist weggelaufen!'\n{if} b {is} {pressed}\n    {print} auswahl + 'Beutel'\n    {print} 'Die Maus ist in den Beutel gesprungen!'\n{if} r {is} {pressed}\n    {print} auswahl + 'rennen'\n    {print} 'Du bist davongekommen!'\n```\n"
                 start_code: '# platziere deinen Code hier'
             13:
-                story_text: "Now that you learned how to use ```and``` and ```or```, we can use it with ```pressed```too!\nimagine the turtle being able to do a superjump forward. by pressing ```p``` the turtle can make a\nsuperjump! However, the turtle can only do this jump if he turns left and right first!\n"
-                example_code: "```\nstepsize = 10\nleft = -90\nright = 90\naround = 180\nlooked_left = 0\nlooked_right = 0\nrepeat 40 times\n    {if} w {is} {pressed}\n        forward stepsize\n    {if} s {is} {pressed}\n        turn around\n    {if} a {is} {pressed}\n        turn left\n        looked_left = 1\n    {if} d {is} {pressed}\n        turn right\n        looked_right = 1\n    {if} p {is} {pressed}\n        {if} looked_left is 1 and looked_right is 1\n            forward 40\n            looked_left = 0\n            looked_right = 0\n```\n"
+                story_text: "Nun da du gelernt hast, wie man `{and}` und `{or}` benutzt, können wir sie auch mit `{pressed}` benutzen!\nStell dir vor, dass die Schildkröte einen Supersprung vorwärts machen könnte.\nWenn man `p` drückt, macht die Schildkröte einen Supersprung!\nJedoch kann die Schildkröte diesen Sprung nur machen, wenn sie sich zuerst nach links oder rechts dreht!\n"
+                example_code: "```\nschrittweite = 10\nlinks = -90\nrechts = 90\numdrehen = 180\nlinks_geschaut = 0\nrechts_geschaut = 0\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} schrittweite\n    {if} s {is} {pressed}\n        {turn} umdrehen\n    {if} a {is} {pressed}\n        {turn} links\n        links_geschaut = 1\n    {if} d {is} {pressed}\n        {turn} rechts\n        rechts_geschaut = 1\n    {if} p {is} {pressed}\n        {if} links_geschaut {is} 1 {and} rechts_geschaut {is} 1\n            {forward} 40\n            links_geschaut = 0\n            rechts_geschaut = 0\n```\n"
                 start_code: '# platziere deinen Code hier'
             5:
                 start_code: '# platziere deinen Code hier'
@@ -2522,7 +2534,7 @@ adventures:
             7:
                 example_code: "```\n{if} x {is} {pressed} {forward} 15 {else} {turn} 90\n```\n"
                 start_code: '# Platziere deinen Code hier'
-                story_text: "Du hast vielleicht in Level 5 und 6 probiert die Taste, die an `{pressed}` gebunden war, mehrfach zu drücken. Falls dem so ist, ist dir aufgefallen, dass nichts passierte. Aber nun da du `{repeat}` kennen gelernt hast, können wir Tasten mehrfach drücken! Mach, dass die Schildkröte vorwärts geht!\n"
+                story_text: "## Die Schildkröte steuern\nNun da du `{repeat}` kennengelernt hast, können wir Tasten mehrfach drücken! Du kannst es benutzen, um die Schildkröte vorwärts gehen und sich drehen zu lassen.\n\n### Übung\nDer Beispiel-Code prüft die Taste nur ein Mal. Ändere den Code, um die Tasten viele Male drücken zu können und benutze Code, um etwas nettes zu zeichnen.\n"
         name: Tastengedrücke
         description: Versuche eine Taste an einen Befehl zu binden!
         default_save_name: Drückes

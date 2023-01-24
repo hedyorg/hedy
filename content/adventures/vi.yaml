@@ -150,8 +150,6 @@ adventures:
             9:
                 story_text: "## Story\nIn this level you can use nesting to put `{if}`, `{repeat}` or `{for}` commands inside other `{if}`, `{repeat}` or `{for}` commands. This gives you many options and really helps you to make your story interactive.\n"
                 example_code: "```\n{print} 'Robin is walking downtown'\nlocation = {ask} 'Is Robin going into a shop, or does she go home?'\n{if} location {is} shop\n    {print} 'She enters the shop.'\n    {print} 'Robin sees an interesting looking book'\n    book = {ask} 'Does Robin buy the book?'\n    {if} book {is} yes\n        {print} 'Robin buys the book and goes home'\n    {else}\n        {print} 'Robin leaves the shop and goes home'\n{else}\n    {print} 'Robin goes home'\n```\n"
-                story_text_2: The example above is pretty straightforward, but by nesting {if} you can really elaborate your code and turn your story into a real game. Check out this example!
-                example_code_2: "## Elaborate code\n```\nsword = lost\ngame = on\n{print} 'Our hero is walking through the forest'\n{print} 'The path splits two ways'\n{repeat} 2 {times}\n    {if} game {is} on\n        path = {ask} 'Which path should she choose?'\n        {if} path {is} left\n            {if} sword {is} found\n                {print} 'Our hero comes across a dragon!'\n                {print} 'Luckily our hero has a sword to defeat the beast!'\n                game = over\n            {else}\n                {print} 'Our hero finds a dragon, but she doesnt have any weapons!'\n                {print} 'Our hero is beaten by the dragon...'\n                {print} 'Try again'\n                game = over\n        {if} path {is} right\n            {if} sword {is} lost\n                {print} 'Our hero finds a sword'\n                {print} 'This could come in very handy'\n                sword = found\n            {else}\n                {print} 'You have already found the sword. There is nothing left here.'\n                {print} 'She walks back'\n```\n"
                 start_code: '# place your code here'
             15:
                 example_code: "```\nkeys = 'lost'\n{print} 'You are standing in your garden and you have lost your keys.'\n{print} 'Where do you want to look for them?'\n{print} 'You can choose: tree, flowerbed, rock, postbox'\n{while} keys == 'lost'\n    location = {ask} 'Where do you want to look?'\n    {if} location == 'flowerbed'\n        {print} 'Here they are!'\n        keys = 'found'\n    {else}\n        {print} 'Nope they are not at the ' location\n{print} 'Now you can enter the house!'\n```\n"
@@ -273,6 +271,12 @@ adventures:
                 story_text: "## Searching turtle\nIn this level you can use use `{at} {random}` with the drawing turtle. A random choice makes the turtle walk a different path each time.\nUse `{at} {random}` to choose a value from a list.\n## Challenge\nCan you copy and paste lines 2 and 3 to create a longer random path?\n"
                 example_code: "```\nangles {is} 10, 50, 90, 150, 250\n{turn} angles {at} {random}\n{forward} 25\n```\n"
                 start_code: "angles {is} 10, 50, 90, 150, 250\n{turn} angles {at} {random}\n{forward} 25"
+            9:
+                example_code_2: "```\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} 10\n    {if} a {is} {pressed}\n        _ _\n```\n"
+                story_text: "## Turtle\nNow that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.\n\n### Exercise 1\nThis code creates three black triangles, change that into five pink squares.\n\n **(extra)** Create a figure of your own choosing consisting of at least two different shapes types.\n"
+                example_code: "```\n{color} {black}\n{repeat} 3 {times}\n    {repeat} 3 {times}\n        {forward} 10\n        {turn} 120\n    {color} {white}\n    {forward} 50\n    {color} {black}\n```\n"
+                story_text_2: "## Turtle Control\nYou can now also move the turtle in many more ways than only forward or backwards!\n### Exercise 2\nFinish the code so you can control the turtle with keys. w for forward, s for backward, a for left and d for right. \nTip: For left and right, you will need to use three lines of code!\n"
+                start_code: '# place your code here'
         description: Make your own drawing
         default_save_name: Turtle
     dishes:
@@ -720,8 +724,6 @@ adventures:
             9:
                 story_text: "Now that you know how to nest multiple statements, you can also do this with {pressed}!\nBy nesting a pressed in a {repeat} loop, you can repeatedly press buttons and make something happen.\nNow we know you could do this before, but by using the indents you have much more overview!\nTry it counting to 5, for example!\n"
                 example_code: "```\ntotal = 1\n{repeat} 5 times\n    {if} x {is} {pressed}\n        {print} total\n        {print} 'keep pressing!'\n        total = total + 1\n```\n"
-                story_text_2: "Besides counting, you can now also move the turtle in many more ways than only forward or backwards!\nTry making some figures by walking the turtle around!\n"
-                example_code_2: "```\nstepsize = 25\nleft = -90\nright = 90\naround = 180\nrepeat 40 times\n    {if} w {is} {pressed}\n        forward stepsize\n    {if} s {is} {pressed}\n        turn around\n    {if} a {is} {pressed}\n        turn left\n    {if} d {is} {pressed}\n        turn right\n```\n"
                 start_code: '# place your code here'
             10:
                 story_text: "In this level you can make the turtle draw you a figure. The turtle is raring to go.\nGive the turtle the starting signal by pressing the x or y key on your keyboard.\nCan you let the turtle draw you another figure?\n"

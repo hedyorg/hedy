@@ -19,9 +19,9 @@ adventures:
                 story_text: "## Story\nPå niveau 2 kan du gøre din historie sjovere. Din hovedperson kan nu være hvor som helst i sætningen.\n\nDu bliver nødt til at programmere en lille smule mere for at få det til at ske. Du skal nu først give en hovedperson et navn.\n\nSå kan du sætte det navn ind alle steder i en sætning.\n\n### Opgave\nKan du selv lave en historie hvor du bruger en variabel? Kan du tilføje endnu flere variabler?\n"
                 example_code: "```\nnavn {is} {ask} Hvad hedder hovedpersonen?\n{print} navn løber nu rundt i skoven\n{print} navn er lidt bange\n{print} Pludselig hører han en mærkelig lyd...\n{sleep}\n{print} navn er bange for at det er en hjemsøgt skov\n```"
             5:
-                start_code: "{print} 'Here your story will start!'"
-                story_text: "## Story\nIn this level you can program different endings, which will make your story even more fun.\n\n### Excercise\nThink of two endings for your story, for example:\n\n- The princess is walking through the forest\n- She runs into a monster\n\n- Happy ending: She takes her sword and the monster quickly runs away\n- Bad Ending: The monster eats the princess\n\nYou can also ensure that a name can be entered again. That works just like in the previous levels. You can combine that with an `{if}`, and then you have already made a whole program!\n"
-                example_code: "```\nname {is} {ask} 'Who is walking in the forest?'\n{print} name ' walks through the forest'\n{print} name ' encounters a monster'\nend {is} {ask} 'Would you like a good or a bad ending?'\n{if} end {is} good {print} name ' takes the sword and the monster quickly runs away'\n{else} {print} 'The monster eats ' name\n```\n"
+                start_code: "{print} 'Her begynder din historie!'"
+                story_text: "## Historie\nPå dette niveau kan du programmere forskellige slutninger, hvilket vil gøre din historie endnu sjovere.\n\n### Opgave\nFind på to forskellige slutninger til din historie, for eksempel:\n\n- Prinsessen går gennem skoven\n- Hun møder et monster\n\n- Lykkelig slutning: Hun griber sit sværd og monstret løber hurtigt sin vej\n- Ulykkelig slutning: Monstret spiser prinsessen\n\nDu kan også sikre at et navn bliver indtastet igen. Det fungerer ligesom på det forrige niveau. Du kan kombinere det med `{if}`, og så har du allerede lavet et helt program!\n"
+                example_code: "```\nnavn {is} {ask} 'Hvem går i skoven?'\n{print} navn ' går gennem skoven'\n{print} navn ' møder et monster'\nslutning {is} {ask} 'Vil du have en lykkelig eller ulykkelig slutning?'\n{if} slutning {is} lykkelig {print} navn ' griber sit sværd og monstret løber hurtigt sin vej'\n{else} {print} 'Monstret æder ' navn\n```\n"
             8:
                 start_code: '# place your code here'
                 story_text: "## Story\nIn this level you can use multiple lines in your {if} commands, this way you can upgrade your happy or sad ending!\n\n### Excercise\nCan you make your own story with two different endings?\n"
@@ -30,8 +30,6 @@ adventures:
                 start_code: '# place your code here'
                 story_text: "## Story\nIn this level you can use nesting to put `{if}`, `{repeat}` or `{for}` commands inside other `{if}`, `{repeat}` or `{for}` commands. This gives you many options and really helps you to make your story interactive.\n"
                 example_code: "```\n{print} 'Robin is walking downtown'\nlocation = {ask} 'Is Robin going into a shop, or does she go home?'\n{if} location {is} shop\n    {print} 'She enters the shop.'\n    {print} 'Robin sees an interesting looking book'\n    book = {ask} 'Does Robin buy the book?'\n    {if} book {is} yes\n        {print} 'Robin buys the book and goes home'\n    {else}\n        {print} 'Robin leaves the shop and goes home'\n{else}\n    {print} 'Robin goes home'\n```\n"
-                story_text_2: The example above is pretty straightforward, but by nesting {if} you can really elaborate your code and turn your story into a real game. Check out this example!
-                example_code_2: "## Elaborate code\n```\nsword = lost\ngame = on\n{print} 'Our hero is walking through the forest'\n{print} 'The path splits two ways'\n{repeat} 2 {times}\n    {if} game {is} on\n        path = {ask} 'Which path should she choose?'\n        {if} path {is} left\n            {if} sword {is} found\n                {print} 'Our hero comes across a dragon!'\n                {print} 'Luckily our hero has a sword to defeat the beast!'\n                game = over\n            {else}\n                {print} 'Our hero finds a dragon, but she doesnt have any weapons!'\n                {print} 'Our hero is beaten by the dragon...'\n                {print} 'Try again'\n                game = over\n        {if} path {is} right\n            {if} sword {is} lost\n                {print} 'Our hero finds a sword'\n                {print} 'This could come in very handy'\n                sword = found\n            {else}\n                {print} 'You have already found the sword. There is nothing left here.'\n                {print} 'She walks back'\n```\n"
             3:
                 story_text: "## Historie\nPå niveau 3 kan du gøre din historie endnu sjovere. Du kan bruge tilfældighed til et monster, dyr eller anden forhindring, sådan her:\n"
                 example_code: "```\ndyr {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} Nu hører han lyden af et dyr {at} {random}\n```\n"
@@ -45,7 +43,7 @@ adventures:
                 example_code: "```\nnavn {is} Hans\n{print}  _ Hovedpersonens navn er _ navn\n{print} navn  _ går nu ind i skoven _\n{print} navn _ er en smule bange _\ndyr {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} _ Han hører lyden af _ dyr {at} {random}\n{print} navn _ er bange for at det er en hjemsøgt skov _\n```\n"
                 start_code: "{print} 'Din historie vil blive printet her!'"
             7:
-                story_text: "## Story\nIn a story, someone says words several times. For example, when someone calls for help or sings a song.\nYou can put such repetitions in your story, in this level with `{repeat}`.\n\n### Excercise\nAdd repetition to your own story. Go back to your saved programs, choose your story program from level 6 and\nfind a line containing {print} and repeat it!\n"
+                story_text: "## Historie\nI en historie, gentages nogle ord flere gange. For eksempel, når nogen råber på hjælp eller synger en sang.\nDu kan indsætte disse gentagelser i din historie, på dette niveau med `{repeat}`.\n\n### Opgave\nTilføj en gentagelse til din egen historie. Gå tilbage til dine gemte programmer, vælg dit historieprogram fra niveau 6 og\nfind en linje der indeholder {print} og gentag det!\n"
                 example_code: "```\n{print} 'The prince kept calling for help'\n{repeat} 5 {times} {print} 'Help!'\n{print} 'Why is nobody helping me?'\n```\n"
                 start_code: "{repeat} 5 {times} {print} 'Help!'"
             10:
@@ -99,8 +97,6 @@ adventures:
             9:
                 story_text: "Now that you know how to nest multiple statements, you can also do this with {pressed}!\nBy nesting a pressed in a {repeat} loop, you can repeatedly press buttons and make something happen.\nNow we know you could do this before, but by using the indents you have much more overview!\nTry it counting to 5, for example!\n"
                 example_code: "```\ntotal = 1\n{repeat} 5 {times}\n    {if} x {is} {pressed}\n        {print} total\n        {print} 'keep pressing!'\n        total = total + 1\n```\n"
-                story_text_2: "Besides counting, you can now also move the turtle in many more ways than only forward or backwards!\nTry making some figures by walking the turtle around!\n"
-                example_code_2: "```\nstepsize = 25\nleft = -90\nright = 90\naround = 180\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} stepsize\n    {if} s {is} {pressed}\n        {turn} around\n    {if} a {is} {pressed}\n        {turn} left\n    {if} d {is} {pressed}\n        {turn} right\n```\n"
                 start_code: '# place your code here'
             10:
                 story_text: "In this level you can make the turtle draw you a figure. The turtle is raring to go.\nGive the turtle the starting signal by pressing the x or y key on your keyboard.\nCan you let the turtle draw you another figure?\n"
@@ -232,8 +228,8 @@ adventures:
                 start_code: '# place your code here'
             16:
                 story_text: "## Sing a song!\nIn this level, you can program a song like OldMacDonald even more quickly. You can connect the right animal to the right sound by simply putting them in the same place in the list.\nThe Drunken Sailor is also quickly made in this level. You only need 8 lines for the entire song, check it out!\n"
-                example_code: "## Old MacDonald\n```\nanimals = ['pig', 'dog', 'cow']\nsounds = ['oink', 'woof', 'moo']\n{for} i {in} {range} 1 {to} 3\n    animal = animals[i]\n    sound = sounds[i]\n    {print} 'Old McDonald had a farm'\n    {print} 'E I E I O!'\n    {print} 'and on that farm he had a ' animal\n    {print} 'E I E I O!'\n    {print} 'with a ' sound sound ' here'\n    {print} 'and a ' sound sound ' there'\n    {print} 'here a ' sound\n    {print} 'there a ' sound\n    {print} 'everywhere a ' sound sound\n```\n\n## Drunken Sailor\n```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines\n    {for} i {in} {range} 1 {to} 3\n        {print} line\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
-                start_code: '# place your code here'
+                example_code: "## Jens Hansen\n```\nalle_dyr = ['gris', 'hund', 'ko']\nlyde = ['øh', 'vuf', 'muh']\n{for} i {in} {range} 1 {to} 3\n    dyr = alle_dyr[i]\n    lyd = lyde[i]\n    {print} 'Jens Hansen havde en bondegård'\n    {print} 'ih ah ih ah oh!'\n    {print} 'og på den gård der var en ' dyr\n    {print} 'ih ah ih ah oh!'\n    {print} 'Der var ' lyd lyd' her'\n    {print} 'og ' lyd lyd' der'\n    {print} lyde ' her'\n    {print} lyde ' der'\n    {print} 'alle steder ' lyde lyde\n```\n\n## Fulde sømand\n```\nlinjer = ['Hvad skal vi gøre med den fulde sømand', 'Smid ham i brummen til han vågner', 'Han skal klynges op i masten']\n{for} linje {in} linjer\n    {for} i {in} {range} 1 {to} 3\n        {print} linje \n    {print} 'Tidligt om morgnen.'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'Hu hej, se hun sejler'\n    {print} 'Tidligt om morgnen.'\n```\n"
+                start_code: '# placer din kode her'
         name: Sing a song!
     calculator:
         description: Create a calculator
@@ -343,84 +339,90 @@ adventures:
                 example_code_2: "```\ndrinks = {ask} 'What would you like to drink?'\n{if} drinks {is} 'water' {or} drinks {is} 'juice'\n    {print} 'Thats a healthy choice'\n```\n"
                 start_code: '# place your code here'
     turtle:
-        default_save_name: Turtle
+        default_save_name: Skildpadde
         levels:
             1:
-                story_text: "## Let's draw\nYou can also use Hedy to draw. By combining turns and lines, you can make a square or stairs!\n\nUsing `{forward}` you draw a line forwards. The number behind it determines how far the turtle will walk. `{turn} {right}` turns a quarter turn in clockwise direction, `{turn} {left}` turns counter clockwise.\n\nIf you want to go backwards, you use the `{forward}` command but with a negative number. So for example `{forward} -100`\n\n### Excercise\nThis is the start of a little staircase. Can you make it have 5 steps?\n"
+                story_text: "## Lad os tegne\nDu kan også bruge Hedy til at tegne. Ved at kombinere hjørner og streger, kan du lave et kvadrat eller trapper!\n\nVed at bruge `{forward}` tegner du en streg fremad. Tallet bagefter bestemmer hvor langt skildpadden vil gå. `{turn} {right}` drejer en kvart omgang med uret, `{turn} {left}` drejer mod uret.\n\nHvis du vil baglæns, bruger du `{forward}` kommandoen sammen med et negativt tal. For eksempel `{forward} -100`\n\n### Opgave\nDette er starten på en lille trappe. Kan du lave den med 5 trin?\n"
                 example_code: "```\n{forward} 50\n{turn} {right}\n{forward} 50\n{turn} {left}\n{forward} 50\n```\n"
                 start_code: "{forward} 50\n{turn} {left}"
             2:
-                story_text: "## Turtle\nIn this level you can use variables to make the turtle interactive. For example you can ask the player how many steps the turtle must make.\n"
-                example_code: "```\nanswer {is} {ask} How many steps should the turtle make?\n{forward} answer\n```\n"
-                story_text_2: "Also, in level 1 the turtle could only turn left or right. That is a bit boring!\nIn level 2 he can point his nose in all directions.\n\nUse 90 to turn a quarter. We call this degrees. A full turn is 360 degrees.\n\n### Excercise\nCan you make a figure with this code? Maybe a triangle or a circle?\n"
-                example_code_2: "```\n{print} Drawing figures\nangle {is} 90\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n```\n"
-                start_code: "{print} Turtle race!\nangle {is} 90\n{turn} angle\n{forward} 25"
+                story_text: "## Skildpadde\nPå dette niveau kan du bruge variabler. For eksempel kan du spørge hvor mange skridt skildpadden skal tage.\n"
+                example_code: "```\nsvar {is} {ask} Hvor mange skridt skal skildpadden tage?\n{forward} svar\n```\n"
+                story_text_2: "På niveau 1 kunne skildpadden også kun dreje til højre eller venstre. Det er en smule kedeligt!\nPå niveau 2 kan den se i alle retninger.\n\nBrug 90 til at dreje en kvart omgang. Det kalder vi grader. En hel omgang er 360 grader.\n\n### Opgave\nKan du lave en figur med denne kode? Måske en trekant eller cirkel?\n"
+                example_code_2: "```\n{print} Tegner figurer\nvinkel {is} 90\n{turn} vinkel\n{forward} 25\n{turn} vinkel\n{forward} 25\n```\n"
+                start_code: "{print} Skildpaddeløb!\nvinkel {is} 90\n{turn} vinkel\n{forward} 25"
             3:
-                story_text: "## Searching turtle\nIn this level you can use `{at} {random}` with the drawing turtle. A random choice makes the turtle walk a different path each time.\nUse `{at} {random}` to choose a value from a list.\n### Excercise\nCan you copy and paste lines 2 and 3 to create a longer random path?\n"
-                example_code: "```\nangles {is} 10, 50, 90, 150, 250\n{turn} angles {at} {random}\n{forward} 25\n```\n"
-                start_code: "angles {is} 10, 50, 90, 150, 250\n{turn} angles {at} {random}\n{forward} 25"
+                story_text: "## Ledende skildpadde\nPå dette niveau kan du bruge `{at} {random}` med tegneskildpadden. Et tilfældigt valg får skildpadden til at gå en ny vej hver gang.\nBrug `{at} {random}` for at vælge et element fra en liste.\n### Opgave\nKan du lave den tilfældige sti længere ved at copy-paste linje 2 og 3?\n"
+                example_code: "```\nvinkler {is} 10, 50, 90, 150, 250\n{turn} vinkler {at} {random}\n{forward} 25\n```\n"
+                start_code: "vinkler {is} 10, 50, 90, 150, 250\n{turn} vinkler {at} {random}\n{forward} 25"
             4:
-                story_text: "## Let's draw\nIn level 4 you have to use quotation marks with `{print}` and `{ask}`. Also when drawing!\n"
-                story_text_2: "## Colors\nYou can also change the color of the lines with the command `{color}`. Check out the example.\nYou can also use the command `{color} {white}` to make 'invisible' lines. You could use these white lines to move the turtle anywhere in the screen before you start drawing.\n"
-                start_code: "{print} 'Drawing figures'\nangle {is} 90\n{turn} angle\n{forward} 25"
-                example_code: "```\n{print} _ Drawing figures _\nangle {is} 90\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n```\n"
+                story_text: "## Lad os tegne\nPå niveau 4 skal du bruge anførselstegn sammen med `{print}` og `{ask}`. Også når du tegner!\n"
+                story_text_2: "## Farver\nDu kan også skifte farve på stregerne med kommandoen `{color}`. Se eksemplet.\nDu kan også bruge kommandoen `{color} {white}` til at lave 'usynlige' streger. Du kan bruge de hvide streger til at flytte skildpadden hvor som helst på skærmen før du begynder at tegne.\n"
+                start_code: "{print} 'Tegner figurer'\nvinkel {is} 90\n{turn} vinkel\n{forward} 25"
+                example_code: "```\n{print} _ Tegner figurer _\nvinkel {is} 90\n{turn} vinkel\n{forward} 25\n{turn} vinkel\n{forward} 25\n```\n"
                 example_code_2: "```\n{color} {white}\n{forward} -80\n{color} {green}\n{forward} 50\n{color} {yellow}\n{forward} 50\n{color} {red}\n{forward} 50\n```\n"
             5:
-                story_text: "## Let's draw\nIn level 5 you can make a choice with `{if}`. For example between different types of figures.\n"
-                example_code: "```\n{print} 'Drawing Figures'\nfigure {is} {ask} 'Do you want a square or a triangle?'\n{if} figure {is} triangle angle {is} 120\n{else} angle {is} 90\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n```\n"
-                start_code: "{print} 'Drawing Figures'\nfigure {is} {ask} 'Do you want a square or a triangle?'\n{if} figure {is} triangle angle {is} 120 {else} angle {is} 90\n{turn} angle\n{forward} 25"
+                story_text: "## Lad os tegne\nPå niveau 5 kan du lave et valg med `{if}`. For eksempel mellem forskellige typer figurer.\n"
+                example_code: "```\n{print} 'Tegner figurer'\nfigur {is} {ask} 'Vil du have en firkant eller en trekant?'\n{if} figur {is} trekant vinkel {is} 120\n{else} vinkel {is} 90\n{turn} vinkel\n{forward} 25\n{turn} vinkel\n{forward} 25\n{turn} vinkel\n{forward} 25\n{turn} vinkel\n{forward} 25\n```\n"
+                start_code: "{print} 'Tegner figurer'\nfigur {is} {ask} 'Vil du tegne en firkant eller en trekant?'\n{if} figur {is} trekant vinkel {is} 120 {else} vinkel {is} 90\n{turn} vinkel\n{forward} 25"
             6:
-                story_text: "## Let's draw\nIn this level you can use calculations to draw different figures.\nYou may have learned in school that turning a full circle is 360 degrees. If not, now you know!\nThat's why you also use 90 degrees for a square. 360 divided by 4 is 90.\nNow that we can do math with Hedy, we can draw all the figures we want!\n"
-                example_code: "```\nangles = {ask} 'How many angles do you want?'\nangle = 360 / angles\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n{forward} 50\n{turn} angle\n```\n"
-                start_code: "{print} 'Drawing figures'"
+                story_text: "## Lad os tegne\nPå dette niveau kan du bruge beregninger til at tegne forskellige figurer.\nDu kan måske lært i skolen at dreje en hel omgang er 360 grader. Hvis ikke, ved du det nu!\nDet er også derfor du bruger 90 grader til en firkant. 360 divideret med 4 er 90.\nNu hvor vi kan lave matematik med Hedy kan vi tegne alle de figurer vi ønsker!\n"
+                example_code: "```\nhjørner = {ask} 'Hvor mange hjørne kunne du tænke dig?'\nvinkel = 360 / hjørner\n{forward} 50\n{turn} vinkel\n{forward} 50\n{turn} vinkel\n{forward} 50\n{turn} vinkel\n{forward} 50\n{turn} vinkel\n{forward} 50\n{turn} vinkel\n{forward} 50\n{turn} vinkel\n```\n"
+                start_code: "{print} 'Tegner figurer'"
             8:
-                story_text: "## Let's draw\nNow that we can repeat several lines, we can make figures more easily.\nWe only have to set the angle once and then use that variable in the `{repeat}`.\n"
-                example_code: "```\nangle = 90\n{repeat} 10 {times}\n    {turn} angle\n    {forward} 50\n```\n"
-                story_text_2: "## Interaction\nAlso, we can now improve the program that draws different figures.\nCan you figure out how far the turtle has to turn here? Finish the code and you can draw any polygon you'd like!\n"
-                example_code_2: "```\nangles = {ask} 'How many angles should I draw?'\nangle = 360 / angles\n{repeat} angle {times}\n    {turn} _\n    {forward} _\n```\n"
-                start_code: angles = {ask} 'How many angles should I draw?'
-        name: Turtle
-        description: Make your own drawing
+                story_text: "## Lad os tegne\nNu hvor vi kan gentage flere streger, kan vi lave lettere lave figurer.\nVi skal kun sætte vinklen en gang og så bruge den variabel i `{repeat}` kommandoen.\n\n### Opgave 1\nKoden i eksemplet skaber et kvadrat. Ændrer koden så den skaber en anden figur, så som en trekant eller sekskant. \nDette kræver at du ændrer to linjer i koden.\nTip: En hel omgang er 360 grader.\n\n### Opgave 2\nLav nu en tegning der består af mindst på polygoner.\n"
+                example_code: "```\nvinkel = 90\n{repeat} 4 {times}\n    {turn} vinkel\n    {forward} 50\n```\n"
+                story_text_2: "## Interaktion\nVi kan nu forbedre programmet der tegner forskellige figurer\nKan du regne ud hvor meget skildpadden skal dreje til højre her? Færdiggør koden og du kan tegne hvilken som helst polygon du kunne tænke dig!\n"
+                example_code_2: "```\nkanter = {ask} 'Hvor mange kanter skal jeg tegne?'\nvinkel = 360 / hjørner\n{repeat} kanter {times}\n    {turn} _\n    {forward} _\n```\n"
+                start_code: kanter = {ask} 'Hvor mange kanter skal jeg tegne?'
+            9:
+                story_text: "## Skildpadde\nNu hvor vi kan bruge `{repeat}` inden i en `{repeat}`, kan vi lave mere komplekse figurer.\n\n### Opgave 1\nDenne kode skaber tre sorte trekanter og fem lyserøde firkanter.\n\n **(ekstra)** Lav en figur du selv vælger bestående af mindst to forskellige former.\n"
+                example_code: "```\n{color} {black}\n{repeat} 3 {times}\n    {repeat} 3 {times}\n        {forward} 10\n        {turn} 120\n    {color} {white}\n    {forward} 50\n    {color} {black}\n```\n"
+                story_text_2: "## Skildpaddestyring\nDu kan også bevæge skildpadden på mange andre måder end frem og tilbage!\n### Opgave 2\nFærdiggør koden så du kan styre skildpadden med taster. w til fremad, s til baglæns, a til venstre og d til højre. \nTip: Til højre og venstre, får du brug for 3 linjer kode!\n"
+                example_code_2: "```\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} 10\n    {if} a {is} {pressed}\n        _ _\n```\n"
+                start_code: '# placer din kode her'
+        name: Skildpadde
+        description: Lav din egen tegning
     dishes:
-        name: Dishes?
+        name: Opvask?
         levels:
             3:
-                story_text: "## Dishwashing\nDo you always disagree at home about who should wash the dishes or change the litter box today?\nThen you can let the computer choose very fairly. You can program that in this level!\nYou first make a list of the members of your family. Then choose `{at} {random}` from the list.\n"
-                story_text_2: "## Hack the dishwashing program!\nDon't feel like doing the dishes yourself? Hack the program by removing your name from the list with the `{remove}` `{from}` command.\n"
-                example_code_2: "```\npeople {is} mom, dad, Emma, Sophie\nyour_name {is} {ask} Who are you?\n_ your_name _ people\n{print} _ _ _ does the dishes\n```\n"
-                example_code: "```\npeople {is} mom, dad, Emma, Sophie\n{print} people {at} {random}\n```\n"
-                start_code: '{print} Who does the dishes?'
+                story_text: "## Opvask\nEr i altid uenige om hvem der skal tage opvasken eller tømme kattebakken derhjemme?\nSå kan du lade computeren vælge retfærdigt. Du kan programmere det på dette niveau!\nFørst laver du en liste med alle medlemmerne af din familie. Derefter tag fra listen med `{at} {random}`.\n"
+                story_text_2: "## Hack opvaskeprogrammet!\nHar du ikke lyst til at tage opvasken? Hack programmet ved at fjerne dit navn fra listen med `{remove}` `{from}` kommandoen.\n"
+                example_code_2: "```\npersoner {is} mor, far, Emma, Sophie\ndit_navn {is} {ask} Hvem er du?\n_ dit_navn _ personer\n{print} _ _ _ tager opvasken\n```\n"
+                example_code: "```\npersoner {is} mor, far, Emma, Sophie\n{print} personer {at} {random}\n```\n"
+                start_code: '{print} Hvem tager opvasken?'
             4:
-                story_text: "## Dishwashing\nWith quotation marks you can make your dishwashing planning more beautiful.\nThis time the sample code is not quite complete.\n\nCan you complete the code by filling the blanks? Every blank must be replaced with one word of symbol.\n\nTip: Don't forget the quotation marks!\n"
-                example_code: "```\npeople {is} mom, dad, Emma, Sophie\n{print} _ the dishes are done by _\n{sleep}\n{print} people {at} _\n```\n"
-                start_code: "{print} 'Who does the dishes?'"
+                story_text: "## Opvask\nMed anførselstegn kan du lave din opvaskeplan pænere.\nDenne gang er eksemplet ikke helt færdig.\n\nKan du færdiggøre koden ved at udfylde de tomme felter? Hvert af de tomme felter skal erstattes med et ord eller symbol.\n\nTip: Glem ikke anførselstegn!\n"
+                example_code: "```\npersoner {is} mor, far, Emma, Sophie\n{print} _ opvasken tages af _\n{sleep}\n{print} personer {at} _\n```\n"
+                start_code: "{print} 'Hvem tager opvasken?'"
             5:
-                story_text: "## Dishwashing\nWith the `{if}` you can now have more fun with choice in the program. You can have your program respond to the choice that the computer has made.\n\nCan you finish the code so that it prints 'too bad' when it is your turn and otherwise 'yes!'?\nDon't forget the quotes!\n"
-                example_code: "```\npeople {is} mom, dad, Emma, Sophie\ndishwasher {is} people {at} {random}\n{if} dishwasher {is} Sophie {print} _ too bad I have to do the dishes _ \n{else} {print} 'luckily no dishes because' _ 'is already washing up'\n```\n"
-                start_code: "{print} 'Who does the dishes?'"
+                story_text: "## Opvasken\nMed `{if}` kan du nu have endnu mere sjov med valg i dit program. Du kan få dit program til at reagere på et valg lavet af computeren.\n\nKan du færdigøre koden så den printer 'ærgerligt' når det er din tur og ellers 'sådan!'?\nGlem ikke anførselstegn!\n"
+                example_code: "```\npersoner {is} mor, far, Emma, Sophie\nopvasker {is} personer {at} {random}\n{if} opvasker {is} Sophie {print} _ ærgerligt jeg skal tage opvasken _ \n{else} {print} 'heldigvis ingen opvask for ' _ ' er allerede i gang'\n```\n"
+                start_code: "{print} 'Hvem tager opvasken?'"
             6:
-                story_text: "## Dishwashing\nHow often is everyone going to do the dishes? Is that fair? You can count it in this level.\n"
-                example_code: "```\npeople = mom, dad, Emma, Sophie\nemma_washes = 0\ndishwasher = people {at} {random}\n{print} 'The dishwasher is' dishwasher\n{if} dishwasher {is} Emma emma_washes = emma_washes + 1\n{print} 'Emma will do the dishes this week' emma_washes 'times'\n```\n\nNow you can copy lines 3 to 5 a few times (e.g. 7 times for a whole week) to calculate for a whole week again.\nDo you make the code for the whole week?\n"
-                story_text_2: "## Make it fair\nIf you are extremely unlucky the previous program might choose you to to the dishes for the whole week! That's not fair!\nTo create a fairer system you can use the `{remove}` command to remove the chosen person from the list. This way you don't have to do the dishes again untill everybody has had a turn.\n\nMonday and tuesday are ready for you! Can you add the rest of the week?\nAnd... can you come up with a solution for when your list is empty?\n"
-                example_code_2: "```\npeople = mom, dad, Emma, Sophie\ndishwasher = people {at} {random}\n{print} 'Monday the dishes are done by: ' dishwasher\n{remove} dishwasher {from} people\ndishwasher = people {at} {random}\n{print} 'Tuesday the dishes are done by: ' dishwasher\n{remove} dishwasher {from} people\ndishwasher = people {at} {random}\n```\n"
-                start_code: "{print} 'Who does the dishes?'"
+                story_text: "## Opvask\nHvor ofte skal alle tage opvasken? Er det retfærdigt? Du kan tælle det på dette niveau.\n"
+                example_code: "```\npersoner = mor, far, Emma, Sophie\nemma_tager_den = 0\nopvasker = personer {at} {random}\n{print} 'Opvaskeren er ' opvasker\n{if} opvasker {is} Emma emma_tager_den = emma_tager_den + 1\n{print} 'Emma tager opvasken ' emma_tager_den ' gange denne uge'\n```\n\nDu kan nu kopiere linje 3 til 5 nogle gange (e.g. 7 gange for en hel uge) for at beregne en hel uge igen.\nLaver du koden for hele ugen?\n"
+                story_text_2: "## Gør det retfærdigt\nHvis du er ekstremt uheldig vil det forrige program måske vælge dig til at tage opvasken hele ugen! Det er ikke retfærdigt!\nFor at lave et mere retfærdigt system can du bruge `{remove}` kommandoen til at fjerne den valgte person fra listen. På den måde skal du ikke tage opvasken igen før alle har taget deres tur.\n\nMandag og tirsdag er klar til dig! Kan du tilføje resten af ugen?\nOg... kan du finde på en løsning til når listen er tom?\n"
+                example_code_2: "```\npersoner = mor, far, Emma, Sophie\nopvasker = personer {at} {random}\n{print} 'Mandag tages opvasken af: ' opvasker\n{remove} opvasker {from} personer\nopvasker = personer {at} {random}\n{print} 'Tirsdag tages opvasken af: ' opvasker\n{remove} opvasker {from} personer\nopvasker = personer {at} {random}\n```\n"
+                start_code: "{print} 'Hvem tager opvasken?'"
             7:
-                story_text: "## Dishwashing\nWith the `{repeat}` you can repeat pieces of code. You can use this to calculate who will be washing dishes for multiple days!\n### Exercise\nUse the `{repeat}` command to decide on who needs to wash the dishes for an entire week. Each blank needs to be filled with one command or number!\n**(extra)** Can you think of other tasks in the house? Adapt the code so it decides on three household chores. Do not forget to print what tasks it concerns!\n"
-                start_code: "{print} 'Who does the dishes?'"
-                example_code: "```\npeople = mom, dad, Emma, Sophie\n{repeat} _ _ {print} 'Dishwashing will be done by ' _ _ _\n```\n"
+                story_text: "## Opvask\nMed `{repeat}` kan du gentage stykker af kode. Du kan bruge dette til at beregne hvem der skal tage opvasken i flere dage!\n### Opgave\nBrug `{repeat}` kommandoen til at beslutte hvem der skal tage opvasken en hel uge. Hver blanke felt skal udskiftes med en kommando eller et tal!\n**(ekstra)** Kan du finde på flere opgaver i huset? Ret koden så den beslutter hvem der klarer tre husholdningsopgaver. Glem ikke at printe hvilken opgave det handler om!\n"
+                start_code: "{print} 'Hvem tager opvasken?'"
+                example_code: "```\npersoner = mor, far, Emma, Sophie\n{repeat} _ _ {print} 'Opvasken tages af ' _ _ _\n```\n"
             10:
-                story_text: "## Dishwashing\nIn this level you could make an even better dish washing shedule.\n"
-                example_code: "```\ndays = Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday\nnames = mom, dad, Emma, Sophie\n_ day _ days\n    {print} names {at} {random} ' does the dishes on ' day\n```\n"
-                start_code: '# place your code here'
-        description: Use the computer to see who does the dishes
-        default_save_name: Dishes
+                story_text: "## Opvask\nPå dette niveau kan du lave et endnu bedre opvaske skema.\n"
+                example_code: "```\ndage = mandag, tirsdag, onsdag, torsdag, fredag, lørdag, søndag\nnavne = mor, far, Emma, Sophie\n_ dag _ dage\n    {print} navne {at} {random} ' tager opvasken på ' day\n```\n"
+                start_code: '# placer din kode her'
+        description: Brug computeren til at se hvem der tager opvasken
+        default_save_name: Opvask
     dice:
-        default_save_name: Dice
+        default_save_name: Terninger
         levels:
             5:
                 example_code: "```\nchoices {is} 1, 2, 3, 4, 5, earthworm\nthrow {is} _\n{print} 'you have' _ 'thrown'\n{if} _ {is} earthworm {print} 'You can stop throwing.' _ {print} 'You have to hear it again!'\n```\n"
                 start_code: "{print} 'What will the die indicate this time?'"
-                story_text: "## Dice\nYou can also make a die again in this level using the `{if}`.\nComplete the sample code so that the code says \"You can stop throwing\" once you have thrown an earthworm.\n\nBut maybe you want to recreate a die from a completely different game. That's fine too! Then make up your own reaction, e.g. 'yes' for 6 and 'pity' for something else.\n"
+                story_text: "## Terninger\nDu kan også lave en terning igen på dette niveau ved at bruge `{if}`.\nFærdiggør kodeeksemplet så programmet siger \"Du kan stoppe med at kaste\" når du har slået en regnorm.\n\nMen måske du gerne vil genskabe en terning fra et helt andet spil. Det er også helt fint! Så find på din egen reaktion, f.eks. 'jubii' ved en 6'er og 'ærgerligt' ved noget andet.\n"
             6:
                 story_text: "## Dice\nYou can also make an Earthworm die again in this, but now you can also calculate how many points have been rolled.\nYou may know that the worm counts 5 points for Earthworms. Now after a roll you can immediately calculate how many points you have thrown.\nThis is the code to calculate points for one die:\n\n### Excercise\nCan you make the code so that you get the total score for 8 dice? To do that, you have to cut and paste some lines of the code.\n"
                 example_code: "```\nchoices = 1, 2, 3, 4, 5, earthworm\npoints = 0\nthrow = choices {at} {random}\n{print} 'you threw' throw\n{if} throw {is} earthworm points = points + 5 {else} points = points + throw\n{print} 'those are' points ' point'\n```\n"
@@ -439,17 +441,17 @@ adventures:
                 example_code: "```\noptions = 1, 2, 3, 4, 5, 6\n{print} 'Throw 6 as fast as you can!'\nthrown = 0\ntries = 0\n{while} thrown != 6\n    thrown = options {at} {random}\n    {print} 'You threw ' thrown\n    tries = tries + 1\n{print} 'Yes! You have thrown 6 in ' tries ' tries.'\n```\n"
                 start_code: '# place your code here'
             3:
-                story_text: "## Dice\nIn this level we can choose from a list. With that we can let the computer choose one side of the die.\nTake a look at the games you have in your closet at home.\nAre there games with a (special) die? You can also copy it with this code.\nFor example, the dice of the game Earthworms with the numbers 1 to 5 and an earthworm on it.\n\n![Die of earthworms with 1 to 5 and an earthworm on it](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)\n"
-                example_code: "```\nchoices {is} 1, 2, 3, 4, 5, earthworm\n{print} choices {at} {random}\n```\n"
-                story_text_2: "### Excercise\nThe dice in the example above are dice for a specific game. Can you make normal dice?\nOr other special dice from a different game?\n"
-                example_code_2: "```\nchoices {is} _\n```\n"
-                start_code: '{print} What will the die indicate this time?'
+                story_text: "## Terninger\nPå dette niveau kan vi vælge fra en liste. På denne måde kan vi lade computeren vælge en side på en terning.\nSe på de brætspil du har i skabet derhjemme.\nEr der spil med en (speciel) terning? Du kan også lave sådan en med denne kode.\nFor eksempel, terningerne til spillet Earthworms med tallene 1 til 5 og en regnorm på.\n\n![Terning fra Earthworms med 1 til 5 og en regnorm på](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)\n"
+                example_code: "```\nmuligheder {is} 1, 2, 3, 4, 5, regnorm\n{print} muligheder {at} {random}\n```\n"
+                story_text_2: "### Opgave\nTerningerne fra eksemplet ovenfor er terninger til et specifikt spil. Kan du lave en normal terning?\nEller en anden speciel terning fra et andet spil?\n"
+                example_code_2: "```\nmuligheder {is} _\n```\n"
+                start_code: '{print} Hvad vil terningen vise denne gang?'
             4:
-                story_text: "## Dice\nIn this level we can make sentences with the die value in the sentence, with quotes of course.\nThis time the sample code is not quite complete. Can you finish the code?\n"
-                example_code: "```\nchoices {is} 1, 2, 3, 4, 5, earthworm\n{print} _ you threw _\n{print} _ _ _ <- here you have to program the choice\n```\n"
-                start_code: "{print} 'What will the die indicate this time?'"
-        name: Dice
-        description: Make your own dice
+                story_text: "## Ternigner\nPå dette niveau kan vi lave sætninger med terningeværdien i en sætning, med anførselstegn selvfølgelig.\nDenne gang er kodeeksemplet ikke helt færdigt. Kan du færdiggøre den?\n"
+                example_code: "```\nmuligheder {is} 1, 2, 3, 4, 5, regnorm\n{print} _ du slog _\n{print} _ _ _ <- her skal du programmere udfaldet\n```\n"
+                start_code: "{print} 'Hvad vil terningen vise denne gang?'"
+        name: Terninger
+        description: Lav din egen terning
     default:
         name: Introduktion
         levels:
@@ -521,7 +523,7 @@ adventures:
                 example_code: "```\n{for} tæller {in} {range} 1 {to} 5\n    {print} tæller\n```\n"
             8:
                 start_code: "{repeat} 5 {times}\n    {print} 'Hej folkens'\n    {print} 'Dette vil blive printet 5 gange'"
-                story_text: "## Indrykning\n`{ask}` og`{print}` virker stadig som du kender dem. Men `{if}`, `{else}`, {pressed} og `{repeat}` har ændret sig!\nDu kan nu udføre en gruppe kode sammen, men du skal *indrykke* koden.\nDet betyder at sætte fire mellemrum i begyndelsen af linjen. Du skal også indrykke når du blot vil lave gruppe med en enkelt linje.\n"
+                story_text: "## Indrykning\n`{ask}` og`{print}` virker stadig som du kender dem. Men `{if}`, `{else}`, {pressed} og `{repeat}` har ændret sig!\nDu kan nu udføre en gruppe kode sammen, men du skal *indrykke* koden.\nDet betyder at sætte fire mellemrum i begyndelsen af linjen. Du skal også indrykke når du blot vil lave en gruppe med en enkelt linje.\n"
                 example_code: "Sådan virker `{repeat}` kommandoen nu:\n```\n{repeat} 5 {times}\n    {print} 'Hej alle'\n    {print} 'Dette gentages 5 gange'\n```\nSådan virker `{if}` og `{else}` kommandoerne nu:\n\n```\nnavn {is} {ask} 'Hvad hedder du?'\n{if} navn {is} Hedy\n    {print} 'Velkommen Hedy'\n    {print} 'Du må spille på din computer!'\n{else}\n    {print} 'ADVARSEL!'\n    {print} 'Du må ikke bruge denne computer!'\n```\n"
             9:
                 start_code: "{repeat} 3 {times}\n    mad = {ask} 'Hvad kunne do tænke dig?'\n    {if} mad {is} pizza\n        {print} 'lækkert!'\n    {else}\n        {print} 'pizza er bedre'"

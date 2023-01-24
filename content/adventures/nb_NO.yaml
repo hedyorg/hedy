@@ -143,8 +143,6 @@ adventures:
             9:
                 story_text: "## Fortelling\nPå dette nivået kan du bruke nøsting til å putte {if}, {repeat} eller {for}kommandoer inne i andre {if}, {repeat} eller {for}kommandoer. Dette gir deg mange muligheter og virkelig gjør fortellingen din interaktiv.\n"
                 example_code: "```\n{print} 'Robin er på tur i byen'\nplassering = {ask} 'Skal Robin gå inn i en butikk eller går hun hjem?'\n{if} plassering {is} butikk\n    {print} 'Hun går inn i butikken.'\n    {print} 'Robin ser en bok som ser interessant ut'\n    bok = {ask} 'Kjøper Robin boken?'\n    {if} bok {is} ja\n        {print} 'Robin kjøper boken og går hjem'\n    {else}\n        {print} 'Robin forlater butikken og går hjem'\n{else}\n    {print} 'Robin går hjem'\n```\n"
-                story_text_2: "Eksempelet over er ganske rett frem, men med `{if}` inni `{if}` kan du virkelig utdype koden og gjøre fortellingen din om til et skikkelig spill. Sjekk ut dette eksempelet!\n"
-                example_code_2: "## Forseggjort kode\n```\nsverd = tapt\nspill = kjører\n{print} 'Helten vår går gjennom skogen'\n{print} 'Veien deler seg i to'\n{repeat} 2 {times}\n    {if} spill {is} kjører\n        vei = {ask} 'Hvilken vei skal hun velge?'\n        {if} vei {is} venstre\n            {if} sverd {is} funnet\n                {print} 'Helten vår treffer på en drage!'\n                {print} 'Heldigvis har helten vår et sverd til å beseire monsteret!'\n                spill = ferdig\n            {else}\n                {print} 'Helten vår treffer på en drage, men hun har ingen våpen!'\n                {print} 'Helten vår blir tatt av dragen...'\n                {print} 'Prøv igjen'\n                spill = ferdig\n        {if} vei {is} høyre\n            {if} sverd {is} tapt\n                {print} 'Helten vår finner et sverd'\n                {print} 'Dette kan være veldig nyttig'\n                sverd = funnet\n            {else}\n                {print} 'Hun har allerede funnet sverdet. Det er ikke noe mer der.'\n                {print} 'Hun går tilbake'\n```\n"
                 start_code: '# skriv koden din her'
             8:
                 story_text: "## Fortelling\nPå dette nivået kan du bruke flere linjer i din {if} kommando. På denne måten kan du oppgradere din lykkelige eller triste slutt!\n"
@@ -208,6 +206,12 @@ adventures:
                 story_text: "## La oss tegne\nPå dette nivået kan du bruke regning for å tegne forskjellige figurer.\nDu kan ha lært på skolen at å snu en full sirkel er 360 grader. Hvis ikke så vet du det nå!\nDet er derfor du bruker 90 grader for en firkant. 360 grader delt på 4 er 90.\nNå som vi kan gjøre matte med Hedy så kan vi tegne alle figurene vi vil!\n"
                 example_code: "```\nhjørner = {ask} 'Hvor mange hjørner vil du ha?'\ngrader = 360 / hjørner\n{forward} 50\n{turn} grader\n{forward} 50\n{turn} grader\n{forward} 50\n{turn} grader\n{forward} 50\n{turn} grader\n{forward} 50\n{turn} grader\n{forward} 50\n{turn} grader\n```\n"
                 start_code: "{print} 'Tegner figurer'\n"
+            9:
+                story_text: "## Turtle\nNow that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.\n\n### Exercise 1\nThis code creates three black triangles, change that into five pink squares.\n\n **(extra)** Create a figure of your own choosing consisting of at least two different shapes types.\n"
+                example_code: "```\n{color} {black}\n{repeat} 3 {times}\n    {repeat} 3 {times}\n        {forward} 10\n        {turn} 120\n    {color} {white}\n    {forward} 50\n    {color} {black}\n```\n"
+                story_text_2: "## Turtle Control\nYou can now also move the turtle in many more ways than only forward or backwards!\n### Exercise 2\nFinish the code so you can control the turtle with keys. w for forward, s for backward, a for left and d for right. \nTip: For left and right, you will need to use three lines of code!\n"
+                example_code_2: "```\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} 10\n    {if} a {is} {pressed}\n        _ _\n```\n"
+                start_code: '# place your code here'
         name: Skilpadde
         description: Lag din egen tegning
         default_save_name: Skilpadde
@@ -674,8 +678,6 @@ adventures:
         levels:
             9:
                 example_code: "```\ntotal = 1\n{repeat} 5 times\n    {if} x {is} {pressed}\n        {print} total\n        {print} 'keep pressing!'\n        total = total + 1\n```\n"
-                story_text_2: "Besides counting, you can now also move the turtle in many more ways than only forward or backwards!\nTry making some figures by walking the turtle around!\n"
-                example_code_2: "```\nstepsize = 25\nleft = -90\nright = 90\naround = 180\nrepeat 40 times\n    {if} w {is} {pressed}\n        forward stepsize\n    {if} s {is} {pressed}\n        turn around\n    {if} a {is} {pressed}\n        turn left\n    {if} d {is} {pressed}\n        turn right\n```\n"
                 story_text: "Now that you know how to nest multiple statements, you can also do this with {pressed}!\nBy nesting a pressed in a {repeat} loop, you can repeatedly press buttons and make something happen.\nNow we know you could do this before, but by using the indents you have much more overview!\nTry it counting to 5, for example!\n"
                 start_code: '# place your code here'
             10:
