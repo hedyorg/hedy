@@ -37,15 +37,16 @@
                         <option id="select-{{i}}" {% if customizations and i not in customizations['levels'] %}class="hidden"{% endif %}value="{{ i }}">{{ _('level_title') }} {{ i }}</option>
                     {% endfor %}
                 </select>
-            </div>        
+            </div>
             <div id="sortadventures" class="flex flex-row w-9/12">
                 {% if customizations and customizations['sorted_adventures'] %}
                     {% for level, adventures in customizations['sorted_adventures'].items() %}
                         <div id="level-{{ level }}" class="adventures-tab">
                             {% for adventure in adventures %}
-                               {% if adventure.name in adventure_names %} 
-                                    <div draggable="true" class="tab {% if adventure['from_teacher'] %}teacher_tab{% endif %} z-10 whitespace-nowrap flex items-center justify-left relative" tabindex="0" adventure="{{ adventure['name'] }}" level = "{{ level }}" from-teacher = "{% if adventure['from_teacher'] %}true{% else %}false{% endif %}">
-                                        <span id="remove" class="absolute top-0.5 right-0.5 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark"></span>
+                               {% if adventure.name in adventure_names %}
+                                    {# Note: this code is copy/pasted in teachers.ts. If you change it here, also change it there #}
+                                    <div draggable="true" class="tab {% if adventure['from_teacher'] %}teacher_tab{% endif %} z-10 whitespace-nowrap flex items-center justify-left relative" tabindex="0" adventure="{{ adventure['name'] }}" level="{{ level }}" from-teacher = "{% if adventure['from_teacher'] %}true{% else %}false{% endif %}">
+                                        <span class="absolute top-0.5 right-0.5 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark"></span>
                                         {{ adventure_names[adventure['name']] }}
                                     </div>
                                 {% endif %}
@@ -72,7 +73,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="flex flex-col lg:flex-row gap-4">
         <div class="flex flex-col">
             <h3 class="px-4">{{_('opening_dates')}}</h3>
@@ -184,9 +185,9 @@
                         <button class="blue-btn" onclick="hedyApp.save_customizations('{{class_info.id}}')">{{_('save')}}</button>
                     </div>
                     <div class="flex flex-row ml-auto gap-2">
-                        <button class="red-btn {% if not customizations %}hidden{% endif %}" id="remove_customizations_button" onclick='hedyApp.remove_customizations("{{class_info.id}}", {{_('remove_customizations_prompt')|tojson}}, adventures_default_order, adventure_names, available_adventures, teacher_adventures)'>
+                        <button class="red-btn {% if not customizations %}hidden{% endif %}" id="remove_customizations_button" onclick='hedyApp.remove_customizations("{{class_info.id}}", {{_('remove_customizations_prompt')|tojson}})'>
                         {{_('remove_customization')}}</button>
-                        <button class="green-btn" onclick=validate_changes()>{{_('back_to_class')}}</button>
+                        <button class="green-btn" onclick="validate_changes()">{{_('back_to_class')}}</button>
                     </div>
                 </div>
             {% endif %}
@@ -196,13 +197,13 @@
 <script>
 // If we return something a pop-up will be given: "are you sure you want to leave?"
 // Best we can do as the beforeunload doesn't allow the call of functions or other methods
-$(window).bind('beforeunload', function(){
+$(window).bind('beforeunload', () => {
     if (window.State.unsaved_changes) {
         return " ";
     };
 });
 function validate_changes() {
-    if(window.State.unsaved_changes || isDirty) {
+    if(window.State.unsaved_changes) {
         hedyApp.modal.confirm({{_('unsaved_class_changes')|tojson}}, function(){
             window.location = "/for-teachers/class/{{class_info.id}}";
         });
@@ -210,70 +211,12 @@ function validate_changes() {
         window.location = "/for-teachers/class/{{class_info.id}}";
     }
 }
-</script>
-<script>
-    window.addEventListener("DOMContentLoaded", () => {
-      hedyApp.drag_list(document.getElementById("sortadventures"));
-    });
-</script>
-<script>
-    $(document).ready(function(){
-        $('#adventures').on('change', function(){
-            var level = $(this).val(); 
-            $("div.adventures-tab").hide();
-            $("#level-"+level).show({
-                start: function() {
-                    $(this).css('display', 'flex');
-                }
-            });
-            $('#available').empty();
-            $('#available').append(`<option value="none" selected>{{_('available_adventures_level')}} ${level}</option>`);
-            adventures = available_adventures[level];
-            for(let i = 0; i < adventures.length; i++) {
-                $('#available').append(`<option id="remove-${adventures[i]['name']}" value="${adventures[i]['name']}-${level}-${adventures[i]['from_teacher']}">${adventure_names[adventures[i]['name']]}</option>`);
-            }
-            hedyApp.drag_list(document.getElementById("level-"+level));
-        });
-    });
-</script>
-<script>
-    $('#sortadventures').on('click', 'span', (function(event){ 
-        event.preventDefault();
-        const adventure = $(this).parent().attr('adventure');
-        const level = $(this).parent().attr('level');
-        const from_teacher_attr = $(this).parent().attr('from-teacher');
-        const from_teacher = $(this).parent().attr('from-teacher') === "false" ? false : true;
-        available_adventures[level].push({"name": adventure, "from_teacher": from_teacher});
-        $('#available').append(`<option id="remove-${adventure}" value="${adventure}-${level}-${from_teacher}">${adventure_names[adventure]}</option>`);
-        $(this).parent().remove();
-        window.State.unsaved_changes = true;
-    }));
-</script>
-<script>
-    $(document).ready(function(){
-        $('#available').on('change', function(){
-            const values = $(this).val().split('-');
-            const adventure = values[0]
-            const level = values[1]
-            const from_teacher = values[2] === "true";
-            const adventure_div = 
-            `<div draggable="true" class="tab ${from_teacher ? 'teacher_tab' : ''} z-10 whitespace-nowrap flex items-center justify-left relative" tabindex="0" adventure="${adventure}" level="${level}" from-teacher="${from_teacher}">
-                <span id="remove" class="absolute top-0.5 right-0.5 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark"></span>
-                    ${adventure_names[adventure]}
-            </div>`;
-            $('#level-'+level).append(adventure_div);
-            const index = available_adventures[level].indexOf({"name": adventure, "from-teacher": from_teacher});
-            available_adventures[level].splice(index, 1);
-            $('#remove-'+adventure).remove();
-            hedyApp.drag_list(document.getElementById("level-"+level));
-            window.State.unsaved_changes = true;
-        });
-    });
-</script>
-<script>   
-    var available_adventures = {{ available_adventures|tojson }};
-    const adventure_names = {{ adventure_names|tojson }};
-    const adventures_default_order = {{ adventures_default_order|tojson }};
-    const teacher_adventures = {{ teacher_adventures|tojson }};
+window.addEventListener("DOMContentLoaded", () => {
+    hedyApp.initializeCustomizeClassPage({{_('available_adventures_level')|tojson}});
+    window.State.teacher_adventures = {{ teacher_adventures|tojson }};
+    window.State.adventures_default_order = {{ adventures_default_order|tojson }};
+    window.State.adventure_names = {{ adventure_names|tojson }};
+    window.State.available_adventures = {{ available_adventures|tojson }};
+});
 </script>
 {% endblock %}

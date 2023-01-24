@@ -52,7 +52,7 @@
                   <input id="search_language" placeholder="{{_('search')}}" class="border text-black border-gray-500 rounded h-8 px-2 w-full">
               </div>
               <!-- Flexbox wrapping in columns doesn't properly set the width -- we'll have to manually match max-height and width here when the list grows... -->
-              <div class="flex flex-col flex-wrap w-min justify-start content-start items-start" style="max-height: 38rem; width: 39rem;">
+              <div class="flex flex-row flex-wrap w-min justify-start content-start items-start" style="max-height: 38rem; width: 39rem;">
                 {% for lang in other_languages() %}
                     <div class="dropdown-item language" onclick="hedyApp.change_language ('{{lang.lang}}');event.preventDefault();">{{ lang.sym }}</div>
                 {% endfor %}
