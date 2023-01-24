@@ -198,13 +198,13 @@ levels:
         1:
             question_text: "Which statement is true?"
             mp_choice_options:
-            -   option: "In level 2 the `{print}` command doesn't exist anymore"
-                feedback: "`{print}` still works"
-            -   option: "Du kannst das`{ask}`-Kommando benutzen um eine Antwort auszugeben."
+            -   option: "Du kannst den {print} Befehl benutzen, um Fragen zu stellen."
+                feedback: "Dazu ist `{ask}` da"
+            -   option: "Du kannst den {ask} Befehl benutzen um eine Antwort auszugeben."
                 feedback: "Das ist nicht richtig"
-            -   option: "In level 2 the `{echo}` command doesn't exist anymore"
+            -   option: "Mit dem {print} Befehl kannst du Text erscheinen lassen"
                 feedback: "Good"
-            -   option: "In level 2 all the level 1 commands still work"
+            -   option: "Mit dem {sleep} Befehl kannst du Text vom Bildschirm entfernen."
                 feedback: "No one command doesn't work anymore."
             correct_answer: "C"
             hint: "`{print}` funktioniert genauso wie in Level 1"
@@ -865,16 +865,16 @@ levels:
         1:
             question_text: "What is true?"
             mp_choice_options:
-            -   option: "In level 5 `{print}` works differently than in level 4"
-                feedback: "`{print}` is still the same"
-            -   option: "In level 5 `{ask}` works differently than in level 4"
-                feedback: "`{ask}` is still the same"
-            -   option: "In level 5 `{ask}` and `{print}` work differently than in level 4"
-                feedback: "`No these commands remain the same"
-            -   option: "In level 5 `{ask}` and `{print}` work the same as in level 4"
+            -   option: "```\n{print}\n```\n"
+                feedback: "Es gibt schon einen `{print}` Befehl."
+            -   option: "```\n{if}\n```\n"
+                feedback: "Der `{if}` Befehl wird in der Zeile darüber benutzt."
+            -   option: "```\n{sleep}\n```\n"
+                feedback: "Das ist es nicht!"
+            -   option: "```\n{else}\n```\n"
                 feedback: "Correct!"
             correct_answer: "D"
-            hint: "We have only learned a new command in level 5."
+            hint: "Welches passt zum `{if}` Befehl?"
             question_score: '10'
             code: "number {is} {ask} 'What is your lucky number?'\n{if} number {is} 5 {print} 'Mine too!'\n_?_ {print} 'My lucky number is 5!'"
         2:
@@ -1441,12 +1441,12 @@ levels:
         9:
             question_text: "Welke Hedy code hoort bij dit resultaat ?"
             code: |-
-                Batman was flying through Gotham.
-                When suddenly he heard someone screaming...
-                Help !
-                Help !
-                Help !
-                Please help me !"
+                Batman flog durch Gotham.
+                Als er plötzlich jemanden schreien hörte...
+                Hilfe!
+                Hilfe!
+                Hilfe!
+                Bitte helft mir!
             mp_choice_options:
             -   option: |
                     ```
@@ -1463,7 +1463,7 @@ levels:
                     {repeat} 3 {times} 'Help !'
                     {print} 'Please help me !'
                     ```
-                feedback: "Het commando `{print}` mist op regel 3"
+                feedback: "Der `{print}` Befehl fehlt in Zeile 3."
             -   option: |
                     ```
                     {print} Batman was flying through Gotham.
@@ -1584,7 +1584,7 @@ levels:
                     {print} 'Yay!'
                     {print} 'Were going on holiday!'
             mp_choice_options:
-            -   option: "The children went:\nYay!\nWere going on holiday!"
+            -   option: "Die Kinder sagten:\nJuchhuu!\nWir fahren in den Urlaub!\n"
                 feedback: "Mind the `{repeat}` command !"
             -   option: "The children went:\nYay!\nWere going on holiday!\nYay!\nWere going on holiday!"
                 feedback: "Richtig!"
