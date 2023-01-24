@@ -21,7 +21,7 @@ NON_LATIN_LANGUAGES = ['ar', 'bg', 'bn', 'el', 'fa', 'hi', 'he', 'pa_PK', 'ru', 
 
 # Define a list of languages where alternative error headings/messages are available.
 # Important for A/B tests.
-ALTERNATIVE_ERROR_LANGUAGES = ['en', 'de']
+ALTERNATIVE_ERROR_LANGUAGES = ['en', 'de', 'nl']
 
 # Babel has a different naming convention than Weblate and doesn't support some languages -> fix this manually
 CUSTOM_BABEL_LANGUAGES = {'pa_PK': 'pa_Arab_PK', 'tn': 'en', 'tl': 'en'}
