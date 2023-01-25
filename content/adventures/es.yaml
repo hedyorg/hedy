@@ -319,9 +319,7 @@ adventures:
                     ```
             9:
                 story_text: "## Historia\nEn este nivel puedes usar anidamiento para poner comandos `{if}`, `{repeat}` o `{for}` dentro de otros comandos `{if}`, `{repeat}` o `{for}`. Esto te permite muchas opciones y te ayuda a hacer tu historia más interactiva.\n"
-                story_text_2: "El ejemplo de arriba es bastante sencillo, pero con la anidación de {if} puedes realmente elaborar tu código y convertir la historia en un juego real. ¡Mira este ejemplo!"
                 example_code: "```\n{print} 'Robin está caminando hacia el centro de la ciudad'\nlugar = {ask} '¿Robin va a ir a una tienda, o va a ir a casa?'\n{if} lugar {is} tienda\n    {print} 'Ella entra en la tienda.'\n    {print} 'Robin ve un libro que luce interesante'\n    libro = {ask} '¿Compra el libro Robin?'\n    {if} libro {is} si\n        {print} 'Robin compra el libro y se va a casa'\n    {else}\n        {print} 'Robin deja la tienda y se va a casa'\n{else}\n    {print} 'Robin se va a casa'\n```\n"
-                example_code_2: "## Elabora el código\n```\nespada = perdida\njuego = en marcha\n{print} 'Nuestra heroína está caminando en el bosque'\n{print} 'El camino se divide en dos'\n{repeat} 2 {times}\n    {if} juego {is} en marcha\n        camino = {ask} '¿Cuál camino debería escoger ella?'\n        {if} camino {is} izquierda\n            {if} espada {is} encontrada\n                {print} '¡Nuestra heroína se encuentra a un dragón!'\n                {print} '¡Por suerte nuestra heroína tiene una espada para vencer a la bestia!'\n                juego = finalizado\n            {else}\n                {print} '¡Nuestra heroína se encuentra a un dragón, pero no tiene ningún arma!'\n                {print} 'Nuestra heroína es vencida por el dragón...'\n                {print} 'Intenta de nuevo'\n                juego = finalizado\n        {if} camino {is} derecha\n            {if} espada {is} perdida\n                {print} 'Nuestra heroína se encuentra una espada'\n                {print} 'Esto podría ser muy útil'\n                espada = encontrada\n            {else}\n                {print} 'Ya encontraste la espada. No queda nada aquí.'\n                {print} 'Ella se devuelve'\n```\n"
                 start_code: '# coloca tú código aquí'
             12:
                 story_text: "## Historia\nEn este nivel puedes usar las comillas para almacenar múltiples palabras en una variable."
@@ -591,6 +589,12 @@ adventures:
                     angulo {is} 10, 50, 90, 150, 250
                     {turn} angulo {at} {random}
                     {forward} 25
+            9:
+                story_text: "## Turtle\nNow that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.\n\n### Exercise 1\nThis code creates three black triangles, change that into five pink squares.\n\n **(extra)** Create a figure of your own choosing consisting of at least two different shapes types.\n"
+                example_code: "```\n{color} {black}\n{repeat} 3 {times}\n    {repeat} 3 {times}\n        {forward} 10\n        {turn} 120\n    {color} {white}\n    {forward} 50\n    {color} {black}\n```\n"
+                story_text_2: "## Turtle Control\nYou can now also move the turtle in many more ways than only forward or backwards!\n### Exercise 2\nFinish the code so you can control the turtle with keys. w for forward, s for backward, a for left and d for right. \nTip: For left and right, you will need to use three lines of code!\n"
+                example_code_2: "```\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} 10\n    {if} a {is} {pressed}\n        _ _\n```\n"
+                start_code: '# place your code here'
     dishes:
         name: "¿Platos?"
         description: "Usa la computadora para ver quien ha de lavar los platos (Comienza en el nivel 2)"
@@ -1287,8 +1291,6 @@ adventures:
             9:
                 story_text: "Ahora que sabes cómo anidar varias instrucciones, ¡también puedes hacerlo con {pressed}!\nAl anidar un pulsado en un bucle {repeat}, puedes pulsar botones repetidamente y hacer que algo suceda.\nAhora sabemos que podrías hacerlo antes, ¡pero al usar los sangrados tienes mucha más visibilidad!\n¡Inténtalo contando hasta 5, por ejemplo!\n"
                 example_code: "```\ntotal = 1\n{repeat} 5 {times}\n    {if} x {is} {pressed}\n        {print} total\n        {print} '¡sigue presionando!'\n        total = total + 1\n```\n"
-                story_text_2: "Además de contar, ¡ahora también puedes mover la tortuga de muchas más maneras que solo hacia adelante o hacia atrás!\n¡Intenta hacer algunas figuras moviendo la tortuga!\n"
-                example_code_2: "```\ntamaño_de_paso = 25\nizquierda = -90\nderecha = 90\nalrededor = 180\n{repeat} 40 {times}\n    {if} w {is} {pressed}\n        {forward} tamaño_de_paso\n    {if} s {is} {pressed}\n        {turn} alrededor\n    {if} a {is} {pressed}\n        {turn} izquierda\n    {if} d {is} {pressed} {turn} derecha\n        {turn} derecha\n```\n"
                 start_code: '# pon tu código aquí'
             10:
                 story_text: "En este nivel puedes hacer que la tortuga te dibuje una figura. La tortuga está ansiosa por empezar.\nDale la señal de inicio a la tortuga pulsando la tecla x o y de tu teclado.\n¿Puedes hacer que la tortuga te dibuje otra figura?\n"
