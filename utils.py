@@ -1,4 +1,4 @@
-from flask import session, request, current_app, abort
+from flask import session, request
 from flask_helpers import render_template
 from bs4 import BeautifulSoup
 import contextlib
@@ -16,8 +16,6 @@ import unicodedata
 from flask_babel import gettext, format_date, format_datetime, format_timedelta
 from ruamel import yaml
 import commonmark
-
-from functools import wraps
 
 commonmark_parser = commonmark.Parser()
 commonmark_renderer = commonmark.HtmlRenderer()
