@@ -30,7 +30,7 @@ levels:
                 {print} Sorteringshatten är redo att sortera in dig i ett elevhem.
                 elevhem {is} Gryffindor, Hufflepuff, Ravenclaw, Slytherin
                 {sleep} 2
-                {print} Och det blir {at} {random}
+                {print} Och det elevhem {at} {random}
     4:
         1:
             story: You are the newest Pokémon trainer from Pallet Town!\nMake a program that selects your first Pokémon.\nLet the program wait a minute before revealing your first pokémon.\n
@@ -85,10 +85,10 @@ levels:
                 spelare = Liam, Noah, Sophie
                 spelare1 = spelare {at} {random}
                 spelare2 = spelare {at} {random}
-                {print} spelare1 ' spelar först mot ' player2
+                {print} spelare1 ' spelar först mot ' spelare2
                 {remove} spelare1 {from} spelare
                 {remove} spelare2 {from} spelare
-                {print} 'Vinnaren spelar mot' spelare {at} {random}
+                {print} 'Vinnaren spelar mot ' spelare {at} {random}
         2:
             story: Create the song 'The wheels on the bus go round and round'\n
             code: |-
@@ -108,7 +108,7 @@ levels:
             story: This is the webshop of a toy store. Create a program where costumers can add an item to their shopping cart.\n
             code: |-
                 {print} Välkommen till vår leksaksaffär
-                leksak {är} {ask} Vad vill du köpa?
+                leksak {is} {ask} Vad vill du köpa?
                 {print} Leksaken är tillagd i din kundvagn.
                 {print} Tack för att du handlar hos oss!
     8:
