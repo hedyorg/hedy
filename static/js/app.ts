@@ -1710,7 +1710,7 @@ $("#output").animate({ scrollTop: $(document).height() }, "slow");
 export function modalStepOne(level: number){
   createModal(level);
   let modal_editor = $('#modal-editor');
-  initializeModalEditor(modal_editor);  
+  initializeModalEditor(modal_editor);
 }
 
 function showSuccesMessage(){

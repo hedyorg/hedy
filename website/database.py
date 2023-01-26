@@ -736,13 +736,10 @@ class Database:
     def test_group_by_username(self, username):
         test_group = TEST_GROUP.get({"username": username})
         if test_group:
-            return test_group["test_group"]
-        return None
+            return test_group.get('test_group')
 
     def add_test_group_to_username(self, username, test_group: bool):
         user_test_group = self.test_group_by_username(username)
         if not user_test_group:
             user_test_group = {"username": username, "test_group": test_group}
             TEST_GROUP.create(user_test_group)
-            return True
-        return False

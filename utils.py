@@ -190,20 +190,6 @@ def set_debug_mode(debug_mode):
     global DEBUG_MODE
     DEBUG_MODE = debug_mode
 
-# Annotation to run functions just in dev mode.
-# Useful to deactivate some helper endpoints in prod mode.
-
-
-def debug_only(f):
-    @wraps(f)
-    def wrapped(**kwargs):
-        if not current_app.debug:
-            abort(404)
-
-        return f(**kwargs)
-
-    return wrapped
-
 
 def load_yaml_rt(filename):
     """Load YAML with the round trip loader."""
