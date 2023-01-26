@@ -5,7 +5,7 @@ from hedy_content import ALTERNATIVE_ERROR_LANGUAGES
 from website.auth import current_user, update_test_group_in_session
 # from utils import ColoredConsole as clog
 
-PERCENTAGE_IN_TEST_GROUP = 1/3 # One third of the users should be in the test group
+PERCENTAGE_IN_TEST_GROUP = 1/3  # One third of the users should be in the test group
 
 
 def is_available():
