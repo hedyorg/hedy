@@ -1236,11 +1236,13 @@ def get_certificate_page(username):
                            longest_program=longest_program, number_achievements=number_achievements,
                            quiz_level=quiz_level, congrats_message=congrats_message)
 
+
 def get_highest_quiz_level(username):
     quiz_scores = DATABASE.get_quiz_stats([username])
     # Verify if the user did finish any quiz before getting the max() of the finished levels
     finished_quizzes = any("finished" in x for x in quiz_scores)
     return max([x.get("level") for x in quiz_scores if x.get("finished")]) if finished_quizzes else "-"
+
 
 def get_highest_quiz_score(username):
     max = 0
