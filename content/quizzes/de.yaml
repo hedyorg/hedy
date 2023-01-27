@@ -198,13 +198,13 @@ levels:
         1:
             question_text: "Which statement is true?"
             mp_choice_options:
-            -   option: "In level 2 the `{print}` command doesn't exist anymore"
-                feedback: "`{print}` still works"
-            -   option: "Du kannst das`{ask}`-Kommando benutzen um eine Antwort auszugeben."
+            -   option: "Du kannst den {print} Befehl benutzen, um Fragen zu stellen."
+                feedback: "Dazu ist frage da"
+            -   option: "Du kannst den {ask} Befehl benutzen um eine Antwort auszugeben."
                 feedback: "Das ist nicht richtig"
-            -   option: "In level 2 the `{echo}` command doesn't exist anymore"
+            -   option: "Mit dem {print} Befehl kannst du Text erscheinen lassen"
                 feedback: "Good"
-            -   option: "In level 2 all the level 1 commands still work"
+            -   option: "Mit dem {sleep} Befehl kannst du Text vom Bildschirm entfernen."
                 feedback: "No one command doesn't work anymore."
             correct_answer: "C"
             hint: "`{print}` funktioniert genauso wie in Level 1"
@@ -865,16 +865,16 @@ levels:
         1:
             question_text: "What is true?"
             mp_choice_options:
-            -   option: "In level 5 `{print}` works differently than in level 4"
-                feedback: "`{print}` is still the same"
-            -   option: "In level 5 `{ask}` works differently than in level 4"
-                feedback: "`{ask}` is still the same"
-            -   option: "In level 5 `{ask}` and `{print}` work differently than in level 4"
-                feedback: "`No these commands remain the same"
-            -   option: "In level 5 `{ask}` and `{print}` work the same as in level 4"
+            -   option: "```\n{print}\n```\n"
+                feedback: "Es gibt schon einen `{print}` Befehl."
+            -   option: "```\n{if}\n```\n"
+                feedback: "Der `{if}` Befehl wird in der Zeile darüber benutzt."
+            -   option: "```\n{sleep}\n```\n"
+                feedback: "Das ist es nicht!"
+            -   option: "```\n{else}\n```\n"
                 feedback: "Correct!"
             correct_answer: "D"
-            hint: "We have only learned a new command in level 5."
+            hint: "Welches passt zum `{if}` Befehl?"
             question_score: '10'
             code: "number {is} {ask} 'What is your lucky number?'\n{if} number {is} 5 {print} 'Mine too!'\n_?_ {print} 'My lucky number is 5!'"
         2:
@@ -1441,12 +1441,12 @@ levels:
         9:
             question_text: "Welke Hedy code hoort bij dit resultaat ?"
             code: |-
-                Batman was flying through Gotham.
-                When suddenly he heard someone screaming...
-                Help !
-                Help !
-                Help !
-                Please help me !"
+                Batman flog durch Gotham.
+                Als er plötzlich jemanden schreien hörte...
+                Hilfe!
+                Hilfe!
+                Hilfe!
+                Bitte helft mir!
             mp_choice_options:
             -   option: |
                     ```
@@ -1463,7 +1463,7 @@ levels:
                     {repeat} 3 {times} 'Help !'
                     {print} 'Please help me !'
                     ```
-                feedback: "Het commando `{print}` mist op regel 3"
+                feedback: "Der `{print}` Befehl fehlt in Zeile 3."
             -   option: |
                     ```
                     {print} Batman was flying through Gotham.
@@ -1584,13 +1584,13 @@ levels:
                     {print} 'Yay!'
                     {print} 'Were going on holiday!'
             mp_choice_options:
-            -   option: "The children went:\nYay!\nWere going on holiday!"
+            -   option: "Die Kinder sagten:\nJuchhuu!\nWir fahren in den Urlaub!\n"
                 feedback: "Mind the `{repeat}` command !"
-            -   option: "The children went:\nYay!\nWere going on holiday!\nYay!\nWere going on holiday!"
+            -   option: "Die Kinder gingen:\nJuchhuu!\nWir fahren in den Urlaub!\nJuchhuu!\nWir fahren in den Urlaub!\n"
                 feedback: "Richtig!"
-            -   option: "The children went:\nYay!\nYay!\nWere going on holiday!\nWere going on holiday!"
+            -   option: "Die Kinder gingen:\nJuchhuu!\nJuchhuu!\nWir fahren in den Urlaub!\nWir fahren in den Urlaub!\n"
                 feedback: "This order is incorrect."
-            -   option: "The children went:\nYay!\nYay!\nWere going on holiday!"
+            -   option: "Die Kinder gingen:\nJuchhuu!\nJuchhuu!\nWir fahren in den Urlaub!\n"
                 feedback: "The last line is repeated too."
             correct_answer: "B"
             hint: "The block under the `{repeat}` command is repeated twice."
@@ -1666,7 +1666,7 @@ levels:
             -   option: "Nothing this code is correct!"
                 feedback: "Something is wrong!."
             -   option: "You're not allowed to use an `{if}` command after an `{ask}` command."
-                feedback: "You are!."
+                feedback: "Du bist!"
             -   option: "You don't have to use indentation twice. Only in the first `{if}` command."
                 feedback: "You always have to use indentation."
             -   option: "The indentation is wrong in the first `{if}` command."
@@ -1679,42 +1679,42 @@ levels:
             mp_choice_options:
             -   option: |
                     ```
-                    {if} answer is right
-                       {print} You are...
-                          sleep
-                              {print} right!
+                    {if} antwort {is} 32
+                       {print} 'Du bist...'
+                          {sleep}
+                              {print} 'richtig!'
                           {else}
-                              {print} You are wrong!
+                              {print} 'Du liegst falsch!'
                     ```
                 feedback: "You are wrong!"
             -   option: |
                     ```
-                    {if} answer is right
-                    {print} You are...
-                    sleep
-                    {print} right!
+                    {if} antwort {is} 32
+                    {print} 'Du bist...'
+                    {sleep}
+                    {print} 'richtig!'
                     {else}
-                    {print} You are wrong!
+                    {print} 'Du liegst falsch!'
                     ```
                 feedback: "You are wrong!"
             -   option: |
                     ```
-                    {if} answer is right
-                        {print} You are...
-                        sleep
-                        {print} right!
+                    {if} antwort {is} 32
+                        {print} 'Du bist...'
+                        {sleep}
+                        {print} 'richtig!'
                     {else}
-                        {print} You are wrong!
+                        {print} 'Du liegst falsch!'
                     ```
                 feedback: "You are... right!"
             -   option: |
                     ```
-                    {if} answer is right
-                        {print} You are...
-                        sleep
-                    {print} right!
+                    {if} antwort {is} 32
+                        {print} 'Du bist...'
+                        {sleep}
+                    {print} 'richtig!'
                     {else}
-                        {print} You are wrong!
+                        {print} 'Du liegst falsch!'
                     ```
                 feedback: "You are wrong!"
             correct_answer: "C"
@@ -1724,7 +1724,7 @@ levels:
             question_text: "What line(s) in this code should start with 4 spaces?"
             code: |-
                 1 music = {ask} 'What is your favorite music genre?'
-                2 {if} music is rock
+                2 {if} music {is} rock
                 3 {print} '🤘'
                 4 {else}
                 5 {print} '👎'
@@ -1743,9 +1743,9 @@ levels:
         10:
             question_text: "Which statement is true?"
             code: |-
-                1 level = {ask} 'What level are you on?"
+                1 level = {ask} 'What level are you on?'
                 2 {if} level {is} 8
-                3 {print} Great job!
+                3 {print} 'Great job!'
             mp_choice_options:
             -   option: "All lines should start with 4 spaces"
                 feedback: "That's not true"
@@ -1797,11 +1797,11 @@ levels:
             mp_choice_options:
             -   option: "```\nGut gemacht!\nGut gemacht!\n```"
                 feedback: "That's not it!"
-            -   option: "The computer will explode in 5... 4... 3... 2... 1..."
+            -   option: "```\nThe computer will explode in 5... 4... 3... 2... 1...\n```"
                 feedback: "That's not it!"
-            -   option: "Good job !\nGood job!\nYou can use the computer!"
+            -   option: "```\nGood job!\nGood job!\nYou can use the computer!\n```"
                 feedback: "That's not it!"
-            -   option: "Good job!\nYou can use the computer!\nGood job!\nYou can use the computer!"
+            -   option: "```\nGood job!\nYou can use the computer!\nGood job!\nYou can use the computer!\n```"
                 feedback: "Richtig!"
             correct_answer: "D"
             hint: "Everything under the `{repeat}` command is repeated twice."
@@ -2478,7 +2478,7 @@ levels:
             hint: "Mind the quotation marks and the names of the variables"
             question_score: '10'
         9:
-            question_text: "What is the first question Hedy will `{ask}` you when you run the program?"
+            question_text: "What is the first question Hedy will ask you when you run the program?"
             code: |-
                 courses = appetizer, main course, dessert
                 names = Timon, Onno
