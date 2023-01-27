@@ -624,10 +624,10 @@ adventures:
                     ## Story
                     In this level you can use `{if}` and `{repeat}` commands inside other `{if}` and `{repeat}` commands. 
                     This gives you many options and really helps you to make your story interactive.
-                    
+
                     ### Exercise 1
                     Finish the code so the `{if}` works correctly.
-                    
+
                     ### Exercise 2
                     Add an `{if}` and `{else}` for the part of the story where Robin goes home too.
 
@@ -1240,12 +1240,12 @@ adventures:
                     ## Let's draw
                     Now that we can repeat several lines, we can make figures more easily.
                     We only have to set the angle once and then use that variable in the `{repeat}`.
-                    
+
                     ### Exercise 1
                     The example code creates a square. Change the code so that it create another figure, such as a triangle or a hexagon. 
                     This requires a change to two lines of code.
                     Tip: An entire circle is 360 degrees.
-                   
+
                     ### Exercise 2
                     Now create a drawing consisting of at least two polygons.
 
@@ -1273,10 +1273,10 @@ adventures:
                 story_text: |
                     ## Turtle
                     Now that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.
-                    
+
                     ### Exercise 1
                     This code creates three black triangles, change that into five pink squares.
-                    
+
                      **(extra)** Create a figure of your own choosing consisting of at least two different shapes types.
                 example_code: |
                     ```
@@ -1607,7 +1607,7 @@ adventures:
                 story_text: |
                     ## Touch type game
                     Now that you know how to combine statements, you can create a touch type tool with `{pressed}`. 
-                    
+
                     ### Exercise
                     Finish the code. Each time a random letter should be chosen, which you have to press. You get a point for a correct press, and and two points deduction for a wrong press.
 
@@ -1944,10 +1944,10 @@ adventures:
                 story_text: |
                     ## Rock, paper, scissors
                     In this level you can program the whole rock, paper, scissors game by nesting the `{if}` commands. 
-                    
+
                     ### Exercise
                     Can you finish the code? The program must tell who has won for every combination.
-                    
+
                     **(extra)** Want to play more than one game? Expand the code so that you can play multiple rounds. You can even use an `{ask}` to ask the user how many rounds they want to play.
                 example_code: |
                     ```
@@ -2072,7 +2072,7 @@ adventures:
                 story_text: |
                     ## Calculator
                     In level 6 you created a calculator, in this level you can expand that code so it asks multiple questions.
-                    
+
                     ### Exercise 1
                     Can you finish line 10 to make to program work?
 
@@ -3273,9 +3273,9 @@ adventures:
                                 points = points + 1
                         {else}:
                             points = points + card_3
-                        print 'You get an extra ' card_3 ' (' points ' points)'
+                        {print} 'You get an extra ' card_3 ' (' points ' points)'
                     {else}:
-                        print 'No extra cards'
+                        {print} 'No extra cards'
                     # Winner
                     {if} points > 21 {or} dealer_points > points {or} dealer_points == 21:
                         {print} 'You lose'
