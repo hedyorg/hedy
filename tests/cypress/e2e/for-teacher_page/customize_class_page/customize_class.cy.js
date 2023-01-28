@@ -34,10 +34,10 @@ describe('customize class page', () => {
         .should('have.value', '1');    
     
       // level 1 should be visible and level 2 not
-      cy.get("#level-1")
+      cy.getBySel("level-1")
         .should('be.visible');
     
-      cy.get("#level-2")
+      cy.getBySel("level-2")
         .should('not.be.visible');
     
       // after selecting level 2 it should be visible and level 1 not
@@ -45,20 +45,20 @@ describe('customize class page', () => {
         .select('2')
         .should('have.value', '2');
 
-      cy.get("#level-1")
+      cy.getBySel("level-1")
         .should('not.be.visible');
     
-      cy.get("#level-2")
+      cy.getBySel("level-2")
         .should('be.visible');
     });
 
     it('tests if the opening tests are not empty', () => {
       // The following line has a bug in cypress:
-      // cy.get("#opening_date_level_" + index).type("2023-01-01").should("have.value", "2023-01-01")
+      // cy.getBySel("opening_date_level_" + index).type("2023-01-01").should("have.value", "2023-01-01")
       // The following tests only checks if the field is not empty using a for loop:
       var levelarray = Array.from({length:18},(v, k)=>k+1) // length reflects how many levels there are
       cy.wrap(levelarray).each((index) => {
-        cy.get("#opening_date_level_" + index).type("2023-01-01").should("not.be.empty");
+        cy.getBySel("opening_date_level_" + index).type("2023-01-01").should("not.be.empty");
       });
     });
 
@@ -84,12 +84,12 @@ describe('customize class page', () => {
         .should('have.length', 1)
     
       // store the name of the adventure we're going to delete
-      cy.get('#level-2 div:first')
+      cy.get('[data-cy="level-2"] div:first')
         .invoke('attr', 'adventure')
         .as('adventure')
         .then(adventure => {        
           // Get the first adventure, and click its remove button
-          cy.get("#level-2 div:first span")
+          cy.get('[data-cy="level-2"] div:first span')
             .click();
           
           // The available adventures dropdown should now include the new adventure
@@ -108,7 +108,7 @@ describe('customize class page', () => {
             .should('have.length', 1);
           
           // the adventure should now be last
-          cy.get("#level-2 div:last")
+          cy.get('[data-cy="level-2"] div:last')
             .should('have.attr', 'adventure')
             .and('eq', adventure);
       });
@@ -154,16 +154,16 @@ describe('customize class page', () => {
         .should('have.value', '1');
 
       // Now it should be visible
-      cy.get('#level-1').should('be.visible');
+      cy.getBySel('level-1').should('be.visible');
 
       // Get the first and second adventure
-      cy.get('#level-1')
+      cy.getBySel('level-1')
         .children()
         .eq(0)
         .invoke('attr', 'adventure')
         .as('first_adventure');
 
-      cy.get('#level-1')
+      cy.getBySel('level-1')
         .children()
         .eq(1)
         .invoke('attr', 'adventure')
@@ -174,7 +174,7 @@ describe('customize class page', () => {
         cy.get('@second_adventure').then(second_adventure => {
         
           // Move the second adventure to the first place
-          cy.get('#level-1')
+          cy.getBySel('level-1')
             .children()
             .eq(1)
             .trigger('dragstart')
@@ -182,20 +182,20 @@ describe('customize class page', () => {
             .should('have.attr', 'class')
             .and('contain', 'drop-adventures-hint');
     
-          cy.get('#level-1')
+          cy.getBySel('level-1')
             .children()
             .eq(0)      
             .trigger('drop')
             .trigger('dragend');
           
           // they should be inverted now
-          cy.get('#level-1')
+          cy.getBySel('level-1')
             .children()
             .eq(0)
             .should('have.attr', 'adventure')
             .and('eq', second_adventure);
             
-          cy.get('#level-1')
+          cy.getBySel('level-1')
             .children()
             .eq(1)
             .should('have.attr', 'adventure')
