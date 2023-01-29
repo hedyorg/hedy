@@ -1711,6 +1711,7 @@ class ConvertToPython_4(ConvertToPython_3):
     def clear(self, meta, args):
         return 'extensions.clear()'
 
+
 @v_args(meta=True)
 @hedy_transpiler(level=5)
 class ConvertToPython_5(ConvertToPython_4):
