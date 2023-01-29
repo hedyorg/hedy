@@ -1143,6 +1143,7 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
     console.log('Program executed');
     const pythonVariables = Sk.globals;
     load_variables(pythonVariables);
+    highlight_variables(pythonVariables);
     $('#stopit').hide();
     $('#runit').show();
 
@@ -1528,6 +1529,19 @@ export function load_variables(variables: any) {
       }
     }
     hide_if_no_variables();
+  }
+}
+
+export function highlight_variables(variables: any) {
+  if (variable_view === true) {
+    variables = clean_variables(variables);
+    for (const i in variables) {
+      // Only highlight if the variable contains any data (and is not undefined)
+      if (variables[i][1]) {
+        let variableSpanList = $( `#code_editor span:contains('${variables[i][0]}')` );
+        variableSpanList.addClass('ace_variable');
+      }
+    }
   }
 }
 
