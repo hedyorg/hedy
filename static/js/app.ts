@@ -1539,7 +1539,7 @@ export function highlight_variables(variables: any) {
       // Only highlight if the variable contains any data (and is not undefined)
       if (variables[i][1]) {
         let variableSpanList = $( `#code_editor span:contains('${variables[i][0]}')` );
-        variableSpanList.addClass('ace_variable');
+        variableSpanList.addClass('ace_hedy_variable');
       }
     }
   }
