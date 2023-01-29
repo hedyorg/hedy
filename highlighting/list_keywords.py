@@ -46,6 +46,7 @@ LEVELS = {
         "space_before": ["print", "sleep", "forward", "turn", "random"],
         "space_after": [],
         "constant": ["black", "blue", "brown", "gray", "green", "orange", "pink", "purple", "red", "white", "yellow"],
+        "event": ["clear"],
         "number": False,
         "number_with_decimal": False,
         "extra_rules": [ask_after_is]
@@ -56,7 +57,7 @@ LEVELS = {
         "space_before": ["print", "sleep", "forward", "turn", "random"],
         "space_after": [],
         "constant": ["black", "blue", "brown", "gray", "green", "orange", "pink", "purple", "red", "white", "yellow"],
-        "event": ["pressed"],
+        "event": ["pressed", "clear"],
         "number": False,
         "number_with_decimal": False,
         "extra_rules": [ask_after_is]
@@ -67,7 +68,7 @@ LEVELS = {
         "space_before": ["print", "sleep", "forward", "turn", "random"],
         "space_after": [],
         "constant": ["black", "blue", "brown", "gray", "green", "orange", "pink", "purple", "red", "white", "yellow"],
-        "event": ["pressed"],
+        "event": ["pressed", "clear"],
         "number": True,
         "number_with_decimal": False,
         "extra_rules": [ask_after_is, ask_after_equal]
@@ -78,7 +79,7 @@ LEVELS = {
         "space_before": ["print", "sleep", "forward", "turn", "random"],
         "space_after": [],
         "constant": ["black", "blue", "brown", "gray", "green", "orange", "pink", "purple", "red", "white", "yellow"],
-        "event": ["pressed"],
+        "event": ["pressed", "clear"],
         "number": True,
         "number_with_decimal": False,
         "extra_rules": [ask_after_is, ask_after_equal]
@@ -89,7 +90,7 @@ LEVELS = {
         "space_before": ["print", "sleep", "forward", "turn", "random", "else", "times"],
         "space_after": [],
         "constant": ["black", "blue", "brown", "gray", "green", "orange", "pink", "purple", "red", "white", "yellow"],
-        "event": ["pressed"],
+        "event": ["pressed", "clear"],
         "number": True,
         "number_with_decimal": False,
         "extra_rules": [ask_after_is, ask_after_equal]
@@ -100,7 +101,7 @@ LEVELS = {
         "space_before": ["print", "sleep", "forward", "turn", "random", "else", "times"],
         "space_after": [],
         "constant": ["black", "blue", "brown", "gray", "green", "orange", "pink", "purple", "red", "white", "yellow"],
-        "event": ["pressed"],
+        "event": ["pressed", "clear"],
         "number": True,
         "number_with_decimal": False,
         "extra_rules": [ask_after_is, ask_after_equal]
@@ -111,7 +112,7 @@ LEVELS = {
         "space_before": ["print", "sleep", "forward", "turn", "random", "else", "times"],
         "space_after": [],
         "constant": ["black", "blue", "brown", "gray", "green", "orange", "pink", "purple", "red", "white", "yellow"],
-        "event": ["pressed"],
+        "event": ["pressed", "clear"],
         "number": True,
         "number_with_decimal": False,
         "extra_rules": [ask_after_is, ask_after_equal]
@@ -122,7 +123,7 @@ LEVELS = {
         "space_before": ["print", "sleep", "forward", "turn", "random", "else", "times"],
         "space_after": [],
         "constant": ["black", "blue", "brown", "gray", "green", "orange", "pink", "purple", "red", "white", "yellow"],
-        "event": ["pressed"],
+        "event": ["pressed", "clear"],
         "number": True,
         "number_with_decimal": False,
         "extra_rules": [ask_after_is, ask_after_equal]
@@ -133,7 +134,7 @@ LEVELS = {
         "space_before": ["print", "sleep", "forward", "turn", "random", "else", "times"],
         "space_after": [],
         "constant": ["black", "blue", "brown", "gray", "green", "orange", "pink", "purple", "red", "white", "yellow"],
-        "event": ["pressed"],
+        "event": ["pressed", "clear"],
         "number": True,
         "number_with_decimal": True,
         "extra_rules": [ask_after_is, ask_after_equal]
@@ -144,7 +145,7 @@ LEVELS = {
         "space_before": ["print", "sleep", "forward", "turn", "random", "else", "times"],
         "space_after": [],
         "constant": ["black", "blue", "brown", "gray", "green", "orange", "pink", "purple", "red", "white", "yellow"],
-        "event": ["pressed"],
+        "event": ["pressed", "clear"],
         "number": True,
         "number_with_decimal": True,
         "extra_rules": [ask_after_is, ask_after_equal]
@@ -155,7 +156,7 @@ LEVELS = {
         "space_before": ["print", "sleep", "forward", "turn", "random", "times"],
         "space_after": [],
         "constant": ["black", "blue", "brown", "gray", "green", "orange", "pink", "purple", "red", "white", "yellow"],
-        "event": ["pressed"],
+        "event": ["pressed", "clear"],
         "number": True,
         "number_with_decimal": True,
         "extra_rules": [ask_after_is, ask_after_equal]
@@ -166,7 +167,7 @@ LEVELS = {
         "space_before": ["print", "sleep", "forward", "turn", "random", "else", "times"],
         "space_after": [],
         "constant": ["black", "blue", "brown", "gray", "green", "orange", "pink", "purple", "red", "white", "yellow"],
-        "event": ["pressed"],
+        "event": ["pressed", "clear"],
         "number": True,
         "number_with_decimal": True,
         "extra_rules": [ask_after_is, ask_after_equal]
@@ -177,7 +178,7 @@ LEVELS = {
         "space_before": ["print", "sleep", "forward", "turn", "random", "times"],
         "space_after": [],
         "constant": ["black", "blue", "brown", "gray", "green", "orange", "pink", "purple", "red", "white", "yellow"],
-        "event": ["pressed"],
+        "event": ["pressed", "clear"],
         "number": True,
         "number_with_decimal": True,
         "extra_rules": [ask_after_is, ask_after_equal]
@@ -188,7 +189,7 @@ LEVELS = {
         "space_before": ["print", "sleep", "forward", "turn", "random", "times"],
         "space_after": ["elif"],
         "constant": ["black", "blue", "brown", "gray", "green", "orange", "pink", "purple", "red", "white", "yellow"],
-        "event": ["pressed"],
+        "event": ["pressed", "clear"],
         "number": True,
         "number_with_decimal": True,
         "extra_rules": [ask_after_is, ask_after_equal]
@@ -199,7 +200,7 @@ LEVELS = {
         "space_before": ["print", "sleep", "forward", "turn", "random", "times"],
         "space_after": ["elif"],
         "constant": ["black", "blue", "brown", "gray", "green", "orange", "pink", "purple", "red", "white", "yellow"],
-        "event": ["pressed"],
+        "event": ["pressed", "clear"],
         "number": True,
         "number_with_decimal": True,
         "extra_rules": [ask_after_is, ask_after_equal]
