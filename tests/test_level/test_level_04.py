@@ -635,3 +635,8 @@ class TestsLevel4(HedyTester):
             code=code,
             exception=hedy.exceptions.LonelyTextException
         )
+
+    def test_clear(self):
+        code = "clear"
+        expected = "extensions.clear()"
+        self.multi_level_tester(code=code, expected=expected)
