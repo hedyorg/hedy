@@ -638,5 +638,15 @@ class TestsLevel4(HedyTester):
 
     def test_clear(self):
         code = "clear"
-        expected = "extensions.clear()"
+        expected = textwrap.dedent("""\
+        extensions.clear()
+        try:
+            # If turtle is being used, reset canvas
+            t.hideturtle()
+            turtle.resetscreen()
+            t.left(90)
+            t.showturtle()
+        except NameError:
+            pass""")
+
         self.multi_level_tester(code=code, expected=expected)
