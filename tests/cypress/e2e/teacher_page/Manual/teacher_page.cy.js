@@ -20,7 +20,7 @@ describe('Teacher page', () => {
   });
 
   it('contains a link to Preparations', () => {
-    cy.contains('Preparations').should('be.visible').and('have.attr', 'href');
+    cy.contains('Teaching preparations').should('be.visible').and('have.attr', 'href');
   });
 
   it('contains a link to Teaching', () => {
@@ -28,11 +28,11 @@ describe('Teacher page', () => {
   });
 
   it('contains a link to Frequently Made Mistakes', () => {
-    cy.contains('Frequently made mistakes').should('be.visible').and('have.attr', 'href');
+    cy.contains('Common mistakes').should('be.visible').and('have.attr', 'href');
   });
 
   it('contains Levels under Frequently Made Mistakes', () => {
-    cy.contains('Frequently made mistakes').click();
+    cy.contains('Common mistakes').click();
     cy.contains('Level 1').should('be.visible');
   });
 });

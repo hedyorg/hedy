@@ -27,7 +27,7 @@
             <tbody>
               {% for class in teacher_classes %}
                 <tr>
-                  <td class="px-4 py-2"><a href="for-teachers/class/{{class.id}}" class="view_class">{{class.name|e}}</a></td>
+                  <td class="px-4 py-2"><a href="for-teachers/class/{{class.id}}" class="view_class" data-cy="view_class_link">{{class.name|e}}</a></td>
                   <td class="text-center p-2">{{class.students|length}}</td>
                   <td class="text-center p-2"><a class="no-underline cursor-pointer" onclick='hedyApp.duplicate_class("{{class.id}}", {{_('class_name_prompt')|tojson}})')><span class="fas fa-copy"></span></a></td>
                   <td class="text-center p-2"><a class="no-underline cursor-pointer" onclick='hedyApp.delete_class("{{class.id}}", {{_('delete_class_prompt')|tojson}})'>🗑️</a></td>

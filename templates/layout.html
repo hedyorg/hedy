@@ -23,7 +23,7 @@
        <div id="modal-confirm" class="hidden">
           <div id="modal-confirm-text" class="text-white mb-8 text-xl"></div>
           <div class="ltr:ml-auto rtl:mr-auto ltr:mr-auto rtl:ml-auto mt-4 flex flex-row justify-center">
-            <button id="modal-yes-button" class="green-btn block m-4 w-40 pb-4 pt-4">{{_('yes')}}</button>
+            <button id="modal-yes-button" data-cy="modal_yes_button" class="green-btn block m-4 w-40 pb-4 pt-4">{{_('yes')}}</button>
             <button id="modal-no-button" class="red-btn block m-4 w-40 pb-4 pt-4">{{_('no')}}</button>
           </div>
        </div>
@@ -71,7 +71,7 @@
     <div id="modal-alert" class="z-50 fixed hidden" role="alert" style="top: 10%; left: 50%; transform: translate(-50%, -50%);">
         <div id="modal_alert_container" class="mx-auto text-center bg-green-100 border-green-400 text-green-700 border rounded px-4 py-3">
             <span id="modal_alert_title" class="block sm:inline"></span>
-            <span id="modal_alert_text" class="block sm:inline"></span>
+            <span id="modal_alert_text" data-cy="modal_alert_text" class="block sm:inline"></span>
             <svg class="fill-current h-6 w-6 text-green-500 block sm:inline" id="modal-alert-button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
         </div>
     </div>

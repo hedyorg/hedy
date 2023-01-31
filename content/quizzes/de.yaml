@@ -95,7 +95,7 @@ levels:
                     ```
                     {print}
                     ```
-                feedback: "No, you would like the answer to be repeated back to you."
+                feedback: "Nein, du möchtest, dass dir die Antwort laut zurückgegeben wird."
             -   option: |
                     ```
                     Hedy
@@ -112,29 +112,29 @@ levels:
                     ```
                 feedback: "Right on!"
             correct_answer: "D"
-            hint: "You want to see the answer at the end of line 2..."
+            hint: "Du möchtest die Antwort am Ende von Zeile 2 sehen..."
             question_score: '10'
         6:
-            question_text: "What's wrong with this code?"
+            question_text: "Was stimmt mit diesem Code nicht?"
             code: |-
-                {print} Hi im Hedy!
-                {print} Which football team do you support?
-                {echo} You support...
-                {print} Cool! Me too!
+                {print} Hi ich bin Hedy!
+                {print} Welches Fußball-Team unterstützt du?
+                {echo} Du unterstützt...
+                {print} Cool! Ich auch!
             mp_choice_options:
             -   option: "In line 1 `{print}` should be replaced with `{ask}`."
                 feedback: "`{print}` in Zeile 1 ist richtig."
             -   option: "In line 2, `{print}` should be replaced with `{ask}`."
-                feedback: "Great! You paid attention!"
-            -   option: "Line 3 has to begin with `{print}` instead of `{echo}`."
+                feedback: "Großartig! Du hast aufgepasst!"
+            -   option: "Zeile 3 muss mit `{print}` anstelle von `{echo}` losgehen."
                 feedback: "`{echo}` ist richtig."
-            -   option: "In line 4, `{print}` is spelled wrong."
-                feedback: "No, there is a mistake somewhere else"
+            -   option: "In Zeile 4, `{print}` ist falsch geschrieben."
+                feedback: "Nein, der Fehler liegt woanders"
             correct_answer: "B"
-            hint: "Check the `{print}` commands."
+            hint: "Prüfe die `{print}` Befehle."
             question_score: '10'
         7:
-            question_text: "What's wrong with this code?"
+            question_text: "Was stimmt mit diesem Code nicht?"
             code: |-
                 {print} Welcome at Hedys restaurant!
                 {ask} What would you like to eat?

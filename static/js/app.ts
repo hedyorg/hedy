@@ -48,7 +48,7 @@ pygame.quit()
 
 const normal_prefix =
 `# coding=utf8
-import random, time
+import random, time, extensions
 global int_saver
 global convert_numerals # needed for recursion to work
 int_saver = int
@@ -1003,7 +1003,11 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
   outputDiv.append(variables);
 
   const storage = window.localStorage;
-  let skulptExternalLibraries:{[index: string]:any} = {};
+  let skulptExternalLibraries:{[index: string]:any} = {
+      './extensions.js': {
+        path: "/vendor/skulpt-stdlib-extensions.js",
+      },
+  };
   let debug = storage.getItem("debugLine");
 
   Sk.pre = "output";
@@ -1036,6 +1040,9 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
 
   if (hasPygame){
     skulptExternalLibraries = {
+      './extensions.js': {
+        path: "/vendor/skulpt-stdlib-extensions.js",
+      },
       './pygame.js': {
         path: "/vendor/pygame_4_skulpt/init.js",
       },
