@@ -1,42 +1,34 @@
 adventures:
     default:
-        name: "Introduction"
+        name: "Pengantar"
         description: "Penjelasan level"
         default_save_name: "intro"
         levels:
             1:
-                story_text: |-
-                    Selamat datang di Hedy! Pada level 1 kamu dapat menggunakan perintah `print`, `ask` dan `echo`.
+                story_text: |
+                    ## Selamat datang di Hedy! 
+                    Pada level 1 kamu dapat menggunakan perintah `{print}`, `{ask}` dan `{echo}`.
+                    Tulis kodingan kamu di bagian tampilan kode. Atau tekan tombol hijau di contoh kode, dan kode akan dituliskan sendiri!
+                    Coba jalankan kodenya dengan menekan tombol 'Run code' di bawah tampilan kode.
 
-                    Pada bagian kiri kamu dapat melihat semua perintah untuk level 1.
-
-                    Tekan tombol biru dan kodenya akan dituliskan secara otomatis untukmu!
-
-                    Coba jalankan kodenya sendiri dengan menekan tombol 'Run code' di bawah kiri tampilan kode.
-
-                    Tidak tahu apa yang mau dibuat? Pada tab-tab berikutnya kamu akan menemukan beberapa ide tentang apa yang bisa dibuat.
-                start_code: print halo dunia!
+                    Anda dapat print text di tampilan dengan menggunakan perintah `{print}` .     
+                start_code: '{print} hallo dunia!'
                 example_code: "```\n{print} Hallo!\n{print} Selamat datang di Hedy!\n```\n"
-                story_text_2: "You can also ask for input and repeat it back with an `{echo}` command.\nTry the code to your left again.\n\nDon't know what to create? In the next tabs you will find ideas for programs to build.\n"
-                example_code_2: "```\n{ask} What is your name?\n{echo} hello\n```\n"
+                story_text_2: "Kamu juga bisa  menginput dengan `{ask}` dan menggulang lagi dengan perintah `{echo}`.\n"
+                example_code_2: "```\n{ask} Siapa nama kamu?\n{echo} hallo\n```\n"
                 story_text_3: "Mari kita mulai! Tidak tahu apa yang harus dibuat? Di tab berikutnya anda akan menemukan ide untuk membuat program.\n"
             2:
-                story_text: |-
-                    Pada level 2, kita belajar hal baru. Kamu dapat menamai sebuah kata dengan `is`.
+                story_text: |
+                    ## Variabel
+                    Pada level 2 kita akan belajar perintah baru yaitu: `{is}` dan `{sleep}`.
+                    Kamu bisa menamakan kata dengan `{is}`. Ini disebut dengan variabel. Dalam contoh variabel yang kami buat, variabel nama dan variabel umur. Kamu bisa gunakan kata nama dimana saja dalam kode kamu dan mengganti kata Hedy, seperti ini 
 
-                    Jika kamu menggunakan kode `nama is Hedy`, kamu dapat menggunakan 'nama' tersebut dimanapun pada kodemu dan semuanya akan digantikan dengan 'Hedy'.
-
-                    Catatan: perintah `ask` sudah diupdate. Kamu juga dapat menyimpan jawaban dari perintah tersebut dengan sebuah nama, seperti ini:
-                    ```
-                    jawaban is ask What is your name?
-                    ```
-
-                    `print` tetap berfungsi sama dengan di level 1, dan kamu tidak lagi membutuhkan `echo`.
+                    Disini kamu tidak perlu lagi  menggunakan perintah `{echo}`
 
                 start_code: print halo dunia!
-                example_code: "```\nname {is} Hedy\nage {is} 15\n{print} name is age years old\n```\n"
-                story_text_2: "`{print}` masih berfungsi sama, tetapi `{ask}` perintah telah berubah. Anda juga perlu menggunakan variabel dalam `{ask}` perintah. Terlihat seperti ini:\n"
-                example_code_2: "```\njawab {is} {ask} Siapa namamu?\n{print} Halo jawab\n```\n"
+                example_code: "```\nnama {is} Hedy\numur {is} 15\n{print} nama adalah umur\n```\n"
+                story_text_2: "`{print}` masih berfungsi sama, tetapi perintah `{ask}` telah berubah. Kamu juga perlu menggunakan variabel dalam perintah `{ask}`. Maka akan terlihat seperti ini:\n"
+                example_code_2: "```\njawab {is} {ask} Siapa nama kamu?\n{print} Halo jawab\n```\n"
                 story_text_3: "Perintah baru lainnya di level ini adalah `{sleep}`, yang menghentikan sementara program anda beberapa detik. Jika Anda mengetikkan angka di belakang {sleep} perintah, program akan berhenti sejenak selama beberapa detik.\n"
                 example_code_3: "```\n{print} Warna favorit saya adalah...\n{sleep} 2\n{print} hijau!\n```\n"
             3:
@@ -68,7 +60,7 @@ adventures:
                     Kamu akan menemukan semua perintah di bagian kiri lagi dan tugas-tugas di tab-tab yang disediakan. Tugas-tugas tersebut sekarang akan menjadi lebih kompleks semakin ke kanan tabnya.
                     Jadi adalah baik untuk memulai dari tab tugas paling kiri, dan mengerjakannya satu per satu ke kanan, supaya tantangan yang diberikan setara dengan kemampuan kamu.
                 example_code: "```\nprint 'You need to use quotation marks from now on!'\nanswer is ask 'What do we need to use from now on?'\nprint 'We need to use ' answer\n```\n"
-                story_text_2: "## Petualangan semakin sulit\nPetualangan sekarang semakin sulit di tab yang berurutan.\nJadi yang terbaik adalah memulai dari kiri dengan cerita, dan bekerja ke kanan, untuk ditantang lebih dan lebih.\n"
+                story_text_2: "## Petualangan semakin luas dan semakin sulit\nPetualangan sekarang semakin luas dan semakin sulit di tab yang berurutan.\nJadi yang terbaik adalah memulai dari kiri dan bekerja ke kanan, agar semakin tertantang.\n"
             5:
                 start_code: |-
                     nama is ask 'siapa nama kamu?'
@@ -97,7 +89,7 @@ adventures:
                     ## Tugas-tugas akan menjadi semakin kompleks
 
                     Pada level 5, tugas-tugas yang ada pada tab-tab terlampir akan menjadi makin kompleks semakin posisi tabnya ke kanan. Jadi, pastikan untuk mengerjakan mulai dari kiri ke kanan.
-                example_code_2: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice'\n{else} {print} 'boo!'\n```\n"
+                example_code_2: "```\nnama {is} {ask} 'siapa nama kamu?'\n{if} nama {is} Hedy {print} 'bagus'\n{else} {print} 'boo!'\n```\n"
                 example_code: "```\nname {is} {ask} 'what is your name?'\n{if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'\n```\n"
                 story_text_3: "## Daftar\nSaat kita ingin memeriksa apakah ada sesuatu dalam daftar, kita sekarang dapat menggunakan `{in}` perintah.\nKode ini dicetak cantik! jika anda memilih hijau atau kuning, dan sebaliknya.\n"
                 example_code_3: "```\npretty_colors {is} hijau, kuning\nfavorite_color {is} {ask} 'Apa warna favoritmu?'\n{if} favorite_color {in} pretty_colors {print} 'cantik!'\n{else} {print} 'meh'\n```\n"
@@ -124,7 +116,7 @@ adventures:
                     ```
                 example_code: "```\n{print} '5 plus 5 is ' 5 + 5\n{print} '5 minus 5 is ' 5 - 5\n{print} '5 {times} 5 is ' 5 * 5\n```\n"
                 story_text_2: "Kami juga membuat perubahan dalam menyimpan kata dalam variabel! Anda sekarang dapat menggunakan `=` alih-alih `{is}` saat kami menyimpan nama atau nomor dalam variabel, seperti ini:\n"
-                example_code_2: "```\nname = Hedy\nanswer = 20 + 4\n```\n"
+                example_code_2: "```\nnama = Hedy\njawaban = 20 + 4\n```\n"
             7:
                 start_code: repeat 3 times print 'Hedy itu menyenangkan!'
                 story_text: |-
@@ -150,15 +142,15 @@ adventures:
                         print 'halo semua'
                         print 'Ini akan ditampilkan lima kali'
                     ```
-                example_code: "```\n{repeat} 5 {times}\n    {print} 'Hello everyone'\n    {print} 'This is all repeated 5 times'\n```\n"
+                example_code: "Ini adalah cara perintah `{repeat}` bekerja:\n```\n{repeat} 5 {times}\n    {print} 'Halo semua'\n    {print} 'Ini adalah pengulangan 5 kali'\n```\nIni bagaimana perintah `{if}` dan `{else}` bekerja:\n\n```\nnama {is} {ask} 'Siapa nama kamu?'\n{if} nama {is} Hedy\n    {print} 'Selamat datang Hedy'\n    {print} 'Kamu bisa bermain di komputer kamu!'\n{else}\n    {print} 'PENGACAU!'\n    {print} 'Kamu tidak bisa menggunakan komputer ini!'\n```\n"
             9:
                 start_code: |-
-                    repeat 3 times
-                        makanan = ask 'Apa yang kamu mau?'
-                        if makanan is 'pizza'
-                            print 'bagus!'
-                        else
-                            print 'pizza lebih enak'
+                    {repeat} 3 {times}
+                        makanan = {ask} 'Apa yang kamu inginkan?'
+                        {if} makanan {is} pizza
+                            {print} 'Bagus!'
+                        {else}
+                            {print} 'pizza lebih enak'
                 story_text: |-
                     Pada level ini kamu tidak hanya bisa menggunakan beberapa baris baru untuk  `if` and `repeat`, namun juga dapat menggabungkan mereka!
                     Pada contoh kamu lihat sebuah perintah `if` didalam perintah `repeat`. Kamu juga dimungkinkan untuk melakukan sebaliknya, dan `if` juga boleh didalam `if` dan `repeat` didalam `repeat`.
@@ -192,33 +184,21 @@ adventures:
                 start_code: |-
                     for pembilang in range 1 to 5
                         print pembilang
-                story_text: "`print` berfungsi sama namun `repeat` kali ini diganti dengan `for`! Kamu sekarang dapat menulis `for pembilang in range 1 to 5` dan menggunakan `pembilang` pada program kamu. Cobalah lihat apa yang terjadi! Ingat untuk menggunakan indentasi sesudah perintah `for` dan `if` (Ini artinya mengawali baris dengan empat spasi)."
+                story_text: "##Pengulangan!\n`{print}` berfungsi sama namun kita menambahkan form baru di `{for}`. Sekarang kamu bisa menuliskan `{for} counter {in} {range} 1 {to} 5` maupun `{reapeat} 5 {times}` dan gunakan `counter` pada program kamu.\nCobalah lihat apa yang terjadi! Ingat untuk menggunakan indentasi sesudah perintah `{for}` dan `{if}` statements( Artinya mengawali baris dengan empat spasi)."
                 example_code: "```\nfor counter in range 1 to 5\n    print counter\n```\n"
             12:
                 start_code: |-
                     print 'angka-angka desimal kini harus menggunakan titik'
                     print 2.5 + 2.5
                 story_text: |-
-                    Sejauh ini, Hedy tidak mengijinkan penggunaan angka desimal seperti 1.5, tapi sekarang bisa.
-                    Perlu diingat bahwa komputer menggunakan titik (.) untuk menandai angka desimal.
-
-                    Pada level ini kamu juga perlu menggunakan kutip satu ketika menyimpan teks dengan `is`:
-
-                    ```
-                    nama = 'Hedy'
-                    print 'Halo ' nama
-                    ```
-
-                    Untuk angka, kamu tidak perlu menggunakan kutip satu untuk `is`:
-                    ```
-                    skor = 25
-                    print 'Kamu mendapatkan ' skor
-                    ```
+                    ## Angka dan teks
+                    **Angka Desimal**
+                    Sejauh ini, Hedy tidak diperbolehkan untuk menggunakan angka desimal seperti 1.5, tapi sekarang kita diperbolehkan untuk itu. Catatan untuk itu gunakan `.` untuk angka desimal itu
                 example_code_5: "```\nscore = 25\n{print} 'You got ' score\n```\n"
                 story_text_5: "**Numbers don't need quotation marks**\nFor numbers, you do not use quotation marks in the `=`:\n"
                 example_code: "```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n"
-                story_text_2: "**All texts need to be in quotation marks**\nFor this level on you will also have to use quotation marks when storing a text with `=`:\n"
-                example_code_2: "```\nname = 'Hedy the Robot'\n{print} 'Hello ' name\n```\n"
+                story_text_2: "**Semua teks harus dalam tanda kutip**\nUntuk level ini, Anda juga harus menggunakan tanda kutip saat menyimpan teks dengan `=`:\n"
+                example_code_2: "```\nnama = 'Robot Hedy'\n{print} 'Hallo ' nama\n```\n"
                 story_text_3: "**All items in lists need quotation marks too**\nLists are texts, so they need quotation marks too. Mind that each single item on the list has quotation marks.\nThis allows you to save two words as 1 item on the list, for example 'Iron Man'.\n"
                 example_code_3: "```\nsuperheroes = 'Spiderman', 'Batman', 'Iron Man'\n{print} superheroes {at} {random}\n```\n"
                 story_text_4: "**All text after `{if}` comparisons need quotation marks too**\n"

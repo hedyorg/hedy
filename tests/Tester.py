@@ -228,7 +228,8 @@ class HedyTester(unittest.TestCase):
                 all_commands = hedy.all_commands(code, level, lang)
                 if expected_commands is not None:
                     self.assertEqual(expected_commands, all_commands)
-                if ('ask' not in all_commands) and ('input' not in all_commands):  # <- use this to run tests locally with unittest
+                # <- use this to run tests locally with unittest
+                if ('ask' not in all_commands) and ('input' not in all_commands) and ('clear' not in all_commands):
                     self.assertTrue(self.validate_Python_code(result))
                 if output is not None:
                     if extra_check_function is None:  # most programs have no turtle so make that the default

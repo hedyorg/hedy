@@ -4,7 +4,7 @@ env:
 name: Periodically generate hashes
 on:
   schedule:
-    - cron: "0 0 * * *"
+    - cron: "0 3 * * 1-5" # Run this job every workday at 3am
   workflow_dispatch: {} # Allow running the workflow on-demand
 jobs:
   build:
