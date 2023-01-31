@@ -1,13 +1,20 @@
 import { modal } from './modal';
 import {getHighlighter, showAchievements, turnIntoAceEditor} from "./app";
-
+import { parse as parse_csv } from 'papaparse';
 import DOMPurify from 'dompurify'
+
+interface Account {
+  username: string,
+  password: string
+}
+const EMPTY_ACCOUNT = {username:'', password: ''};
 
 (function() {
     // Use this to make sure that we return a prompt when a user leaves the page without saving
     $( "input" ).change(function() {
         window.State.unsaved_changes = true;
     });
+    reset_create_accounts_form();
 })();
 
 export function create_class(class_name_prompt: string) {
@@ -522,46 +529,107 @@ export function enable_level(level: string) {
     }
 }
 
-export function add_account_placeholder() {
-    let row = $("#account_row_unique").clone();
-    row.removeClass('hidden');
-    row.attr('id', "");
-    // Set all inputs except class to required
-    row.find(':input').each(function() {
-       if ($(this).prop('id') != 'classes') {
-           $(this).prop('required', true);
-       }
-    });
-    // Append 5 rows at once
-    for (let x = 0; x < 5; x++) {
-        row.clone().appendTo("#account_rows_container");
-    }
+export function add_account_placeholder(accounts: Array<Account> | void) {
+  accounts = accounts || new Array(5).fill(EMPTY_ACCOUNT);
+  const rows_container = $("#account_rows_container");
+  const row_tpl = $("#account_row_unique").contents().clone();
+  row_tpl.removeClass('hidden').attr('id', "");
+  accounts.forEach( account => {
+      const new_row = row_tpl.clone();
+      new_row.find(":input[name='username']").val(account.username);
+      new_row.find(":input[name='password']").val(account.password);
+      new_row.appendTo(rows_container);
+  });
+  if ($('#passwords_toggle').is(":checked")) {
+    generate_passwords()
+  }
 }
 
 export function generate_passwords() {
+    const password_inputs = $("#account_rows_container").find('.passwords_input');
     if (!$('#passwords_toggle').is(":checked")) {
-        $('.passwords_input').val('');
-        $('.passwords_input').prop('disabled', false);
+        password_inputs.val('');
+        password_inputs.prop('disabled', false);
         return;
     }
-    $('.account_row').each(function () {
-        if ($(this).is(':visible')) {
-            $(this).find(':input').each(function () {
-                if ($(this).attr('id') == "password") {
-                    const random_password = generateRandomString(6);
-                    $(this).val(random_password);
-                }
-            });
-        }
+    password_inputs.each(function () {
+      const random_password = generateRandomString(6);
+      $(this).val(random_password);
     });
-    $('.passwords_input').prop('disabled', true);
+    password_inputs.prop('disabled', true);
 }
 
-export function append_classname() {
-    const classname = <string>$('#classes').val();
-    $('.usernames_input').each(function () {
-        $(this).val($(this).val() + "_" + classname);
-    });
+export function append_classname(classname: string) {
+  $("#account_rows_container").find('.usernames_input').each(function () {
+      $(this).val($(this).val() + "_" + classname);
+  });
+}
+
+export function reset_create_accounts_form(data: Array<Account> | void){
+  data = data || new Array(4).fill(EMPTY_ACCOUNT);
+  $('#passwords_toggle').prop('checked', false);
+  $('#download_credentials_yes').prop('checked', true);
+
+  // remove all current account rows
+  $('#account_rows_container').empty();
+
+  // if data is not supplied, create 4 empty rows.
+  add_account_placeholder(data);
+}
+
+export function display_upload_accounts_csv_ui_elements(show: boolean){
+  const upload_accounts_csv_ui_elements = $('.upload_accounts_csv_ui_element');
+  const create_accounts_form_ui_elements = $('.create_accounts_form_ui_element');
+  if(show) {
+    upload_accounts_csv_ui_elements.removeClass("hidden");
+    create_accounts_form_ui_elements.addClass("hidden");
+  } else {
+    upload_accounts_csv_ui_elements.addClass("hidden");
+    create_accounts_form_ui_elements.removeClass("hidden");
+  }
+}
+
+export function handle_drop_accounts_csv(e: DragEvent){
+  console.log('Dropped', e.dataTransfer?.files);
+  const f = $('#accounts_csv_file_input');
+  f.prop("files", e.dataTransfer?.files);
+  f.trigger('change');
+}
+
+export function process_accounts_csv(f: HTMLInputElement, prompt: string, invalid_msg: string){
+  const files = f.files;
+  if (!files || files.length < 1 || files.length > 1 || files.item(0)?.type !== 'text/csv') {
+    alert(invalid_msg);
+    return;
+  }
+  const file = <File>files.item(0);
+  f.value = '';
+  parse_csv(file, {
+    header: true,
+    delimiter: ",",
+    skipEmptyLines: true,
+    transformHeader: header => {
+      return header.trim().toLowerCase();
+    },
+    complete: results => {
+      const headers = results.meta.fields;
+      if (results.errors.length || headers?.length !== 2 || headers[0] !== 'username' || headers[1] !== 'password') {
+        // TODO : display error
+        return;
+      }
+      modal.confirm(
+        prompt, 
+        function(){
+          // YES
+          // 0. reset the form
+          reset_create_accounts_form(<Array<{username: string, password: string}>>results.data);
+          // 1. populate the accounts form
+          // 2. hide upload-csv div
+          // 3. show accounts form
+          display_upload_accounts_csv_ui_elements(false);
+      });
+    }
+  });
 }
 
 export function create_accounts(prompt: string) {
