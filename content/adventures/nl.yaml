@@ -616,19 +616,15 @@ adventures:
                 story_text: |
                     ## Verhaal
                     In dit level kun je het commando `{for}` in je verhaal gebruiken. Op deze manier kun je gemakkelijk het kinderboek 'Beertje bruin, wat zie jij daar?' programmeren.
+                    
+                    ### Opdracht 
+                    Kijk naar <a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf"> het verhaal</a>, als je het niet kent, en zorg dat dit hele verhaal wordt uitgeprint.
                 example_code: |
                     ```
-                    dieren = rode vogel, zwart schaap, groene kikker, gele eend, klein kind
-                    {print} 'Beertje bruin'
-                    {print} 'Beertje bruin'
-                    {print} 'Wat zie jij daar?'
-                    {for} dier {in} dieren
-                        {print} 'Ik zie een ' dier
-                        {print} 'En daar kijk ik naar!'
-                        {print} dier
-                        {print} dier
-                        {print} 'Wat zie jij daar?'
-                    {print} 'Ik zie alle dieren en daar kijk ik naar!'
+                    dieren = _ , _ , _
+                    {print} 'Brown Bear, Brown Bear'
+                    _
+
                     ```
                 start_code: "# Schrijf jouw code hier"
             12:
@@ -888,58 +884,24 @@ adventures:
             10:
                 story_text: |
                     ## Zing een liedje!
-                    Ook in dit level kunnen we weer liedjes zingen, bijv. Baby Shark.
-                    Met de nieuwe code `{for}` kunnen we voor de hele familie in een keer printen. Eerst zetten we alle dieren in een lijst familie. Nu gaan we steeds voor een van de familieleden het liedje printen.
-                    Dat scheelt een hoop regels code!
+                    Ook in dit level kunnen we weer liedjes zingen, bijv. Baby Shark. Met `{for}` kunnen we het liedje met maar 6 regels code printen. 
 
+                    ### Opdracht 1
+                    Kun jij baby shark printen met een `{for}`? Vul de streepjes in en maak de codes verder af.
+                story_text_2: |                    
+                    ### Opdracht 2
+                    Print het liedjes 10 kleine visjes met een `{for}`. Zoek de tekst op als je die niet kent. 
 
-
-                    ### Opdrachten
-                    Kun jij ook het laatste couplet maken bij de 10 kleine visjes? Waarbij er nog maar 1 visje over is?
-
-                    Kun jij de code van baby shark nòg korter maken met een {repeat} commando?
-
-                    Kun jij nog wat dieren toevoegen aan de boerderij van Old McDonald?
-                example_code: |
-                    ## 10 kleine visjes
+                    **(extra)** Print het liedje Old MacDonals had a farm. Zoek de tekst op als je die niet kent, en zorg dat alle dieren ook het goede geluid maken, met een `{if}`.
+                example_code_2: |
                     ```
                     visjes = 10, 9, 8, 7, 6, 5, 4, 3, 2
-                    {for} vis {in} visjes
-                        {print} vis ' kleine visjes zwommen naar de zee'
-                        {print} 'Moeder zei ik ga niet mee!'
-                        {print} 'Ik blijf liever in de vieze oude sloop want in de zee daar zwemmen haaien en die bijten je'
-                        {print} 'BLUB BLUB BLUB BLUB BLUB BLUB BLUB BLUB BLUB BLUB BLUB BLUB BLUB'
                     ```
-
-                    ## Baby Shark
+                example_code: |
                     ```
                     familie = baby, mama, papa, opa, oma
-                    {for} shark {in} familie
-                      {print} shark ' shark tudutudutudu'
-                      {print} shark ' shark tudutudutudu'
-                      {print} shark ' shark tudutudutudu'
-                      {print} shark ' shark'
-                    ```
-
-                    ## Old McDonald
-                    ```
-                    dieren = big, hond, koe
-                    {for} dier {in} dieren
-                        {if} dier {is} big
-                            geluid = knor
-                        {if} dier {is} hond
-                            geluid = woef
-                        {if} dier {is} koe
-                            geluid = boe
-                        {print} 'De oude boer die had een wei'
-                        {print} 'hi ja hi ja ho!'
-                        {print} 'En in die wei daar stond een ' dier
-                        {print} 'hi ja hi ja ho!'
-                        {print} 'met een ' geluid geluid ' hier'
-                        {print} 'en een ' geluid geluid ' daar'
-                        {print} 'hier een ' geluid
-                        {print} 'daar een ' geluid
-                        {print} 'overal een ' geluid geluid
+                    _ _ _ _ 
+                      {print} _
                     ```
                 start_code: "# Schrijf jouw code hier"
             11:
@@ -1331,13 +1293,18 @@ adventures:
             10:
                 story_text: |
                     ## Afwasprogramma
-                    In dit level kun je je afwasrooster nog beter maken.
+                    In dit level kun je je afwasrooster nog makkelijker programmeren en het rooster netjes voor de hele week uitprinten.
+                    
+                    ### Opdracht
+                    Voeg nog een tweede klusje toe, bijvoorbeeld afdrogen, opruimen of stofzuigen. 
+                    <br> **(extra)** Het programma is nu niet zo eerlijk, je kan zomaar pech hebben en heel vaak moeten afwassen. Hoe zou je het eerlijk kunnen maken zodat niemand meer dan twee keer afwast?
+
                 example_code: |
                     ```
                     dagen = maandag, dinsdag, woensdag, donderdag, vrijdag, zaterdag, zondag
                     namen = mama, papa, Emma, Sophie
-                    _ dag _ dagen
-                        {print} namen {at} {random} ' doet de afwas op ' dag
+                    for dag in dagen
+                        {print} 'Op ' dag ' doet ' namen {at} {random} ' de afwas.'
                     ```
                 start_code: "# Schrijf jouw code hier"
     dice:
@@ -1430,6 +1397,9 @@ adventures:
                 story_text: |
                     ## Dobbelsteen
                     Treuzelen je medespelers altijd bij het gooien van de dobbelstenen en duurt je spel te lang? In dit level kun je Hedy in een keer laten gooien voor alle spelers!'
+
+                    ### Opdracht
+                    Verander de namen in jouw eigen vrienden, en maak de code af.
                 example_code: |
                     ```
                     spelers = Anne, Jonneke, Jessie, Ilona
@@ -1719,7 +1689,7 @@ adventures:
                     ## Rekenmachine
                     Met dit rekenspelletje kun je de tafels oefenen.
                     Hoe meer getallen je aan de lijst toevoegt, hoe meer tafels je kunt oefenen.
-                    # Uitdaging
+                    ### Opdracht
                     Kun jij meer getallen toevoegen aan de lijst, zodat je alle tafels tot 10 kunt oefenen?
                 example_code: |
                     ```
@@ -2266,22 +2236,26 @@ adventures:
             10:
                 story_text: |
                     ## Restaurant
-                    In dit level kun je gemakkelijk de bestelling opnemen van alle gasten in een korte code.
+                    In dit level kun je gemakkelijk de bestelling opnemen van gasten voor verschillende gangen.
+                    
+                    ### Opdracht 1
+                    Voeg op de streepjes een `{ask}` in zodat er om de bestelling gevraagd wordt en print de bestelling uit in een mooie zin.
                 example_code: |
                     ```
-                    gangen = voorgerecht, hoofdgerecht, nagerecht
+                    gangen = voorgerecht, hoofdgerecht
                     {for} gang {in} gangen
-                        eten = {ask} 'Wat wilt u bestellen als ' gang '?'
-                        {print} eten ' wordt uw ' gang
+                        {print} 'Wat wilt u voor ' gang '?'
+                        _
+                        _
                     ```
                 story_text_2: |
-                    ### Opdracht
+                    ### Opdracht 2
                     Dit kun je uiteraard ook voor meerdere mensen toepassen!
                     Kun jij elke regel inspringen met de goede hoeveelheid spaties?
-                    TIP: Sommige regels hebben geen spaties nodig.
+                    Tip: Sommige regels hebben geen spaties nodig.
                 example_code_2: |
                     ```
-                    _ gangen = voorgerecht, hoofdgerecht, nagerecht
+                    _ gangen = voorgerecht, hoofdgerecht
                     _ namen = Timon, Onno
                     _ {for} naam {in} namen
                     _ {for} gang {in} gangen
