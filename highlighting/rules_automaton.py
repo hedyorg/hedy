@@ -305,6 +305,10 @@ def rule_level4():
         'token': ["text", 'keyword'],
         'next': 'valRemove',
         'unicode': True
+    }, {
+        'regex': START_LINE + get_translated_keyword("clear"),
+        'token': ['text', 'event'],
+        'unicode': True
     }],
         "value": [{
             'regex': START_WORD + get_translated_keyword("at") + SPACE + get_translated_keyword("random"),

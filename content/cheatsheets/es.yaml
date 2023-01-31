@@ -81,7 +81,7 @@
     explanation: Haga una elección con `{if}`.
 -   name: '{in}'
     explanation: Comprobar elementos con `{in}`.
-    demo_code: "colores_bonitos {is} verde, amarillo\ncolor {is} {ask} '¿Cuál es tu color favorito?'\n{if} color {in} colores_bonitos {print} '¡Bonito!' {else} {print} 'No es tan bonito'"
+    demo_code: "pretty_colors {is} green, yellow\ncolor {is} {ask} 'What {is} your favorite color?'\n{if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'"
 -   name: '{pressed}'
     explanation: Comprueba si una tecla determinada del teclado está `{pressed}`.
     demo_code: "{if} a {is} {pressed} {print} '¡Presionas A!' {else} {print} '¡Presionaste otra tecla!'"

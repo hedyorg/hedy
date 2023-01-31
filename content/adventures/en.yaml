@@ -624,10 +624,10 @@ adventures:
                     ## Story
                     In this level you can use `{if}` and `{repeat}` commands inside other `{if}` and `{repeat}` commands. 
                     This gives you many options and really helps you to make your story interactive.
-                    
+
                     ### Exercise 1
                     Finish the code so the `{if}` works correctly.
-                    
+
                     ### Exercise 2
                     Add an `{if}` and `{else}` for the part of the story where Robin goes home too.
 
@@ -652,20 +652,17 @@ adventures:
             10:
                 story_text: |
                     ## Story
-                    In this level you can use the {for} command in your story. In this way you could easily program the children's book 'brown bear, brown bear, what do you see'.
+                    In this level you can use the {for} command in your story. In this way you could easily program the children's book 'Brown bear, Brown bear, what do you see'.
+                    
+                    ### Exercise
+                    
+                    Look at <a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf"> the story</a> if you do not know it, and make sure it is printed as in the book.
 
                 example_code: |
                     ```
-                    animals = red bird, black sheep, green frog, yellow duck, little child
-                    {print} 'brown bear'
-                    {print} 'brown bear'
+                    animals = _ , _ , _ 
+                    {print} 'Brown bear, Brown bear'
                     {print} 'What do you see?'
-                    {for} animal {in} animals
-                        {print} 'I see a ' animal ' looking at me'
-                        {print} animal
-                        {print} animal
-                        {print} 'What do you see?'
-                    {print} 'I see all the animals looking at me!'
                     ```
                 start_code: "# place your code here"
             12:
@@ -945,58 +942,24 @@ adventures:
             10:
                 story_text: |
                     ## Songs
-                    In this level you can easily make the childrens' song 'Five little monkeys'. Can you make the last chorus?
-                    You can also make the whole baby shark song (including all the other sharks in the family) in only 6 lines, using `{for}`!
-                    Or you can make Old McDonald with all the different animals.
+                    With `{for}` you can print make the whole baby shark song (including all the other sharks in the family) in only 6 lines!
+                    
+                    ### Exercise 1
+                    Can you make the baby shark code even shorter by using a `{for}` command? Finish the example code.
 
+                    ### Exercise 2
+                    Print the song Five little moneys jumping on the bed. Look up the text if you don't remember.
 
-
-                    ### Exercises
-                    Can you add the last verse of the monkeys on the bed, when there is only one monkey left?
-
-                    Can you make the baby shark code even shorter by using a `{repeat}` command?
-
-                    Can you add new animals to Old MacDonald's farm?
-
+                    **(extra)** Print the song Old MacDonald had a farm, and make sure all animals make a different sound, using an `{if}`.
+                example_code_2: |
+                    ```
+                    monkeys = 5, 4, 3, 2, 1
+                    ```
                 example_code: |
-                    ## 5 Little Monkeys Jumping on the bed
                     ```
-                    monkeys = 5, 4, 3, 2
-                    {for} monkey {in} monkeys
-                        {print} monkey ' little monkeys jumping on the bed'
-                        {print} 'One fell off and bumped his head'
-                        {print} 'Mama called the doctor and the doctor said'
-                        {print} 'NO MORE MONKEYS JUMPING ON THE BED!'
-                    ```
-
-                    ## Baby Shark
-                    ```
-                    sharks = baby, mommy, daddy, grandma, grandpa
-                    {for} shark {in} sharks
-                        {print} shark ' shark tututututudu'
-                        {print} shark ' shark tututututudu'
-                        {print} shark ' shark tututututudu'
-                        {print} shark ' shark'
-                    ```
-                    ## Old McDonald
-                    ```
-                    animals = pig, dog, cow
-                    {for} animal {in} animals
-                        {if} animal {is} pig
-                            sound = oink
-                        {if} animal {is} dog
-                            sound = woof
-                        {if} animal {is} cow
-                            sound = moo
-                        {print} 'Old McDonald had a farm'
-                        {print} 'E I E I O!'
-                        {print} 'and on that farm he had a ' animal
-                        {print} 'E I E I O!'
-                        {print} 'with a ' sound sound ' here'
-                        {print} 'and a ' sound sound ' there'
-                        {print} 'here a ' sound
-                        {print} 'there a ' sound
-                        {print} 'everywhere a ' sound sound
+                    family = baby, mammy, daddy, grandma, grandpa
+                    _ _ _ _ 
+                      {print} _
                     ```
                 start_code: "# place your code here"
             11:
@@ -1240,12 +1203,12 @@ adventures:
                     ## Let's draw
                     Now that we can repeat several lines, we can make figures more easily.
                     We only have to set the angle once and then use that variable in the `{repeat}`.
-                    
+
                     ### Exercise 1
                     The example code creates a square. Change the code so that it create another figure, such as a triangle or a hexagon. 
                     This requires a change to two lines of code.
                     Tip: An entire circle is 360 degrees.
-                   
+
                     ### Exercise 2
                     Now create a drawing consisting of at least two polygons.
 
@@ -1273,10 +1236,10 @@ adventures:
                 story_text: |
                     ## Turtle
                     Now that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.
-                    
+
                     ### Exercise 1
                     This code creates three black triangles, change that into five pink squares.
-                    
+
                      **(extra)** Create a figure of your own choosing consisting of at least two different shapes types.
                 example_code: |
                     ```
@@ -1414,12 +1377,17 @@ adventures:
             10:
                 story_text: |
                     ## Dishwashing
-                    In this level you could make an even better dish washing shedule.
+                    In this level you can make a schedule for the whole week in an easy way!
+                    
+                    ### Exercise
+                    Add a second chore, such as vacuuming or tidying up, and make sure it is also divided for the whole week.
+                    <br> **(extra)** The program is not fair, you can be unlucky and wash up all week. How could you make the program more fair?
+
                 example_code: |
                     ```
                     days = Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
                     names = mom, dad, Emma, Sophie
-                    _ day _ days
+                    for day in days
                         {print} names {at} {random} ' does the dishes on ' day
                     ```
                 start_code: "# place your code here"
@@ -1518,12 +1486,14 @@ adventures:
                 story_text: |
                     ## Dice
                     Is everybody taking too long throwing the dice? In this level you can let Hedy throw all the dice at once!
-                    Can you fill in the correct line of code on the blanks?
+                    
+                    ### Exercise 
+                    Change the names into names of your friends or family, and finish the code so they each roll.
                 example_code: |
                     ```
                     players = Ann, John, Jesse
                     choices = 1, 2, 3, 4, 5, 6
-                    _
+                    _ _ _ _
                         {print} player ' throws ' choices {at} {random}
                         {sleep}
                     ```
@@ -1607,7 +1577,7 @@ adventures:
                 story_text: |
                     ## Touch type game
                     Now that you know how to combine statements, you can create a touch type tool with `{pressed}`. 
-                    
+
                     ### Exercise
                     Finish the code. Each time a random letter should be chosen, which you have to press. You get a point for a correct press, and and two points deduction for a wrong press.
 
@@ -1944,10 +1914,10 @@ adventures:
                 story_text: |
                     ## Rock, paper, scissors
                     In this level you can program the whole rock, paper, scissors game by nesting the `{if}` commands. 
-                    
+
                     ### Exercise
                     Can you finish the code? The program must tell who has won for every combination.
-                    
+
                     **(extra)** Want to play more than one game? Expand the code so that you can play multiple rounds. You can even use an `{ask}` to ask the user how many rounds they want to play.
                 example_code: |
                     ```
@@ -1970,7 +1940,15 @@ adventures:
                 story_text: |
                     ## Rock, Paper, Scissors
                     Feeling too lazy to play the game yourself? Let Hedy play it for you!
-                    You only have to fill in the names of the players.
+                    You only have to fill in the names of the players and they get a random choice.
+                    
+                    ### Exercise 1
+                    Finish the program by filling in a list of names.
+
+                    ### Exercise 2
+                    Add a computer player that chooses with each player.
+
+                    **(extra)** Go back to your code and decide who wins in each round: the computer or the named person.
                 example_code: |
                     ```
                     choices = rock, paper, scissors
@@ -2072,7 +2050,7 @@ adventures:
                 story_text: |
                     ## Calculator
                     In level 6 you created a calculator, in this level you can expand that code so it asks multiple questions.
-                    
+
                     ### Exercise 1
                     Can you finish line 10 to make to program work?
 
@@ -2099,7 +2077,7 @@ adventures:
                     ## Calculator
                     This calculator game helps you practise your tables of multiplication!
                     ### Exercise
-                    Can you add more numbers to the list, so you can practise all the multiplications?
+                    Can you add more numbers to the list, so you can practise the multiplication tables until 10?
                 example_code: |
                     ```
                     numbers = 1, 2, 3
@@ -2110,7 +2088,7 @@ adventures:
                             {if} answer {is} correct
                                 {print} 'Great job!'
                             {else}
-                                {print} 'Thats wrong. The right answer is ' correct
+                                {print} 'That is wrong. The right answer is ' correct
                     ```
                 start_code: "# place your code here"
             12:
@@ -2436,19 +2414,23 @@ adventures:
             10:
                 story_text: |
                     ## Restaurant
-                    In this level you'll learn how to easily {ask} your guests' orders in a short code.
+                    In this level you'll learn how to easily ask orders for different courses.
+                    
+                    ### Exercise 1
+                    Finish the code with an `{ask}` on the blanks such that the customer is asked what they wnat to eat for each course.
                 example_code: |
                     ```
                     courses = appetizer, main course, dessert
                     {for} course {in} courses
-                        food = {ask} 'What would you like to eat as your ' course '?'
-                        {print} food ' will be your ' course
+                        {print} 'What is your order for ' course '?'
+                        _ 
+                        _
                     ```
                 story_text_2: |
                     ### Exercise
                     Of course, you could also order for multiple people!
                     Can you add the correct amount of indentation before each line to make the code work properly?
-                    TIP: some lines don't need any indentation at all.
+                    Tip: some lines don't need any indentation at all.
                 example_code_2: |
                     ```
                     _ courses = appetizer, main course, dessert
@@ -2738,7 +2720,10 @@ adventures:
             10:
                 story_text: |
                     ## Fortune Teller
-                    In this level you'll learn how to program the game MASH (mansion, apartement, shack, house). In this game you can predict for all the players at once, what their future will look like.
+                    In this level you'll learn how to program the game MASH (mansion, apartment, shack, house). In this game you can predict for all the players at once, what their future will look like.
+
+                    ### Exercise 1
+                    Add two names to the list and see how the output of the program changes when you run it.
                 example_code: |
                     ```
                     houses = mansion, apartment, shack, house
@@ -2752,8 +2737,9 @@ adventures:
                         {sleep}
                     ```
                 story_text_2: |
-                    ### Exercise
-                    We can also make a Harry Potter themed fortune teller. Fill in the correct line of code in line 5 and add the correct indentation to line 6 - 8 and this program will act like the sorting hat!
+                    ### Exercise 2
+                    We can also make a Harry Potter themed fortune teller. Fill in blanks such that 9 lines are printed.
+                    **(extra)** Change the theme of the fortune teller into something else, such as your favorite book, film or tv show.
                 example_code_2: |
                     ```
                     houses = Gryffindor, Slytherin, Hufflepuff, Ravenclaw
@@ -3273,9 +3259,9 @@ adventures:
                                 points = points + 1
                         {else}:
                             points = points + card_3
-                        print 'You get an extra ' card_3 ' (' points ' points)'
+                        {print} 'You get an extra ' card_3 ' (' points ' points)'
                     {else}:
-                        print 'No extra cards'
+                        {print} 'No extra cards'
                     # Winner
                     {if} points > 21 {or} dealer_points > points {or} dealer_points == 21:
                         {print} 'You lose'
