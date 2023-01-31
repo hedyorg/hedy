@@ -1709,7 +1709,15 @@ class ConvertToPython_4(ConvertToPython_3):
         return ConvertToPython_2.print(self, meta, args)
 
     def clear(self, meta, args):
-        return 'extensions.clear()'
+        return f"""extensions.clear()
+try:
+    # If turtle is being used, reset canvas
+    t.hideturtle()
+    turtle.resetscreen()
+    t.left(90)
+    t.showturtle()
+except NameError:
+    pass"""
 
 
 @v_args(meta=True)
