@@ -322,20 +322,17 @@ adventures:
                 # Anybody has a good idea that works well in German?
                 story_text: |
                     ## Geschichte
-                    In diesem Level kannst Du den {for} Befehl für Deine Geschichte nutzen. Damit kannst Du zum Beispiel ganz einfach das Kinderbuch "Brauner Bär, brauner Bär, wen siehst denn Du?" programmieren.
+                    In diesem Level kannst du den {for} Befehl für deine Geschichte nutzen. Damit kannst du zum Beispiel ganz einfach das Kinderbuch "Braunbär, Braunbär, was siehst du?" programmieren.
+
+                    ### Übung
+
+                    Schau dir <a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf">die Geschichte</a> an, falls du sie nicht kennst und stelle sicher, dass es wie im Buch ausgegeben wird.
 
                 example_code: |
                     ```
-                    Tiere = roter Vogel, schwarzes Schaf, grüner Frosch, gelbe Ente, kleines Kind
-                    {print} 'Brauner Bär'
-                    {print} 'Brauner Bär'
-                    {print} 'Wen siehst denn Du?'
-                    {for} Tier {in} Tiere
-                        {print} 'Ich sehen ein/e/n ' Tier '. Der/die/das schaut mir zu.'
-                        {print} Tier
-                        {print} Tier
-                        {print} 'Wen siehst denn Du?'
-                    {print} 'Ich sehe all die Tiere. Die schauen mir zu.'
+                    tiere = _ , _ , _ 
+                    {print} 'Braunbär, Braunbär'
+                    {print} 'Was siehst du?'
                     ```
                 start_code: "# setze hier deinen Code hin"
             9:
@@ -659,61 +656,24 @@ adventures:
             10:
                 story_text: |
                     ## Lieder
-                    In diesem Level kannst du ganz einfach das Kinderlied 'Fünf kleine Affen' programmieren. Kriegst du die letzte Strophe erstellen?
-                    Du kannst auch das ganze Lied über den Babyhai (mit allen Mitgliedern der Haifamilie) in nur sechs Zeilen machen, indem du `{for}` benutzt!
-                    Oder du kannst "Old MacDonald hat 'ne Farm" mit all den verschiedenen Tieren machen.
+                    Mit `{for}` kannst du den ganzen Babyhai-Song (inklusive aller anderen Haie in der Familie) in nur 6 Zeilen Code ausgeben.
 
+                    ### Übung 1
+                    Kannst du den Babyhai-Code noch kürzer machen, indem du `{for}` verwendest? Vervollständige den Beispiel-Code.
 
+                    ### Übung 2
+                    Gib das Lied Fünf kleine Affen springen auf dem Bett aus. Schlag den Text nach, falls du dich nicht daran erinnerst.
 
-                    ### Übung
-                    Kannst du die Strophe der Affen auf dem Bett hinzufügen, wo nur noch ein Affe übrig ist?
-
-                    Kannst du den Babyhai-Code noch kürzer machen, indem du `{repeat}` verwendest?
-
-                    Kannst du neue Tiere zu "Old MacDonald hat 'ne Farm" hinzufügen?
+                    **(extra)** Gib das Lied Old MacDonald hat 'ne Farm aus und stelle sicher, dass alle Tiere ein unterschiedliches Geräusch machen, indem du `{if}` benutzt.
 
                 example_code: |
-                    ## Fünf kleine Affen springen auf dem Bett
                     ```
-                    Affen = 5, 4, 3, 2
-                    {for} Affe {in} Affen
-                        {print} Affe ' kleine Affen springen auf dem Bett'
-                        {print} 'Einer fiel herunter und stieß sich am Brett'
-                        {print} 'Mama rief den Arzt und der Arzt hat gesagt'
-                        {print} 'KEIN AFFE SPRINGT MEHR AUF DEM BETT!'
-                    ```
-
-                    ## Baby Hai
-                    ```
-                    Haie = Baby, Mami, Papi, Omi, Opi
-                    {for} Hai {in} Haie
-                        {print} Hai ' Hai tututututudu'
-                        {print} Hai ' Hai tututututudu'
-                        {print} Hai ' Hai tututututudu'
-                        {print} Hai ' Hai'
-                    ```
-                    ## Old MacDonald hat ne Farm
-                    ```
-                    Tiere = Schweine, Hunde, Kühe
-                    {for} Tier {in} Tiere
-                        {if} Tier {is} Schweine
-                            Geräusch = grunz
-                        {if} Tier {is} Hunde
-                            Geräusch = wuff
-                        {if} Tier {is} Kühe
-                            Geräusch = muh
-                        {print} 'Old MacDonald hat ne Farm'
-                        {print} 'I A I A O!'
-                        {print} 'und auf der Farm da gibt es ' Tier
-                        {print} 'I A I A O!'
-                        {print} 'mit nem ' Geräusch Geräusch ' hier'
-                        {print} 'und nem ' Geräusch Geräusch ' da'
-                        {print} 'hier ein ' Geräusch
-                        {print} 'dort ein ' Geräusch
-                        {print} 'überall ein ' Geräusch Geräusch
+                    familie = Baby, Mami, Papi, Omi, Opi
+                    _ _ _ _ 
+                      {print} _
                     ```
                 start_code: "# setze hier deinen Code hin"
-                example_code_2: "```\nmonkeys = 5, 4, 3, 2, 1\n```\n"
+                example_code_2: "```\naffen = 5, 4, 3, 2, 1\n```\n"
             8:
                 story_text: |
                     ## Lieder
@@ -1007,15 +967,19 @@ adventures:
         levels:
             10:
                 story_text: |
-                    ## Abwasch
-                    In diesem Level kannst Du deinen Abwaschplan noch etwas verbessern.
+                    ## Abwaschen
+                    In diesem Level kannst du einen Ablauf für die ganze Woche auf eine einfache Art und Weise erstellen!
+
+                    ### Übung
+                    Füge eine zweite Hauspflicht hinzu, wie z.B. Staubsaugen oder Aufräumen, und stelle sicher, dass sie ebenfalls für die ganze Woche aufgeteilt ist.
+                    <br> **(extra)** Das Programm ist nicht fair, du kannst Pech haben und die ganze Woche abwaschen. Wie könntest du das Programm fairer machen?
 
                 example_code: |
                     ```
-                    Wochentage = Montag, Dienstag, Mittwoch, Donnerstag, Freitag, Samstag, Sonntag
-                    Familienmitglieder = Mama, Papa, Emma, Sophie
-                    _ Tag _ Wochentage
-                        {print} Familienmitglieder {at} {random} ' ist am ' Tag ' mit dem Abwasch dran.'
+                    tage = Montag, Dienstag, Mittwoch, Donnerstag, Freitag, Samstag, Sonntag
+                    namen = Mama, Papa, Emma, Sophie
+                    {for} tag {in} tage
+                        {print} namen {at} {random} ' ist am ' tag ' mit dem Abwasch dran.'
                     ```
                 start_code: "# setze hier deinen Code hin"
             7:
@@ -1137,13 +1101,15 @@ adventures:
                 story_text: |
                     ## Würfel
                     Brauchen alle zu lange, um zu würfeln? In diesem Level kannst du Hedy alle Würfel auf einmal werfen lassen.
-                    Kannst du die korrekte Zeile Code in die Lücken füllen?
+
+                    ### Übung
+                    Ändere die Namen zu den Namen deiner Freunde oder Familienmitglieder und vervollständige den Code, sodass sie alle würfeln.
 
                 example_code: |
                     ```
                     Spielerliste = Ann, John, Jesse
                     Würfelseiten = 1, 2, 3, 4, 5, 6
-                    _
+                    _ _ _ _
                         {print} Spieler ' würfelt ' Würfelseiten {at} {random}
                         {sleep}
                     ```
@@ -1276,7 +1242,15 @@ adventures:
                 story_text: |
                     ## Schere, Stein, Papier
                     Bist du zu faul, um das Spiel selbst zu spielen? Lass Hedy es für dich spielen!
-                    Du musst nur die Namen der Spieler ausfüllen.
+                    Du musst nur die Namen der Spieler ausfüllen und sie bekommen eine zufällige Auswahl.
+
+                    ### Übung 1
+                    Vervollständige das Programm, indem du eine Liste von Namen ausfüllst.
+
+                    ### Übung 2
+                    Füge einen Computerspieler hinzu, der mit jedem Spieler auswählt.
+
+                    **(extra)** Gehe zurück zu deinem Code und entscheide, wer in jeder Runde gewinnt: der Computer oder die benannte Person.
 
                 example_code: |
                     ```
@@ -1465,7 +1439,7 @@ adventures:
                     ## Taschenrechner
                     Dieses Taschenrechnerspiel hilft dir deine Multiplikationstabellen zu üben!
                     ### Übung
-                    Kannst du mehr Nummern zur Liste hinzufügen, um alle Multiplikationen zu üben?
+                    Kannst du mehr Nummern zur Liste hinzufügen, um alle Malfolgen bis 10 zu üben?
 
                 example_code: |
                     ```
@@ -1639,21 +1613,25 @@ adventures:
             10:
                 story_text: |
                     ## Restaurant
-                    In diesem Level wirst du lernen, wie du deine Gäste mit wenig Code nach ihren Bestellungen {ask}.
+                    In diesem Level wirst du lernen, wie du leicht nach Bestellungen für verschiedene Gänge fragst.
+
+                    ### Übung 1
+                    Vervollständige den Code mit einem `{ask}` in den Lücken, sodass der Kunde für jeden Gang gefragt wird, was er essen möchte.
 
                 example_code: |
                     ```
-                    courses = appetizer, main course, dessert
-                    {for} course {in} courses
-                        food = {ask} 'What would you like to eat as your ' course '?'
-                        {print} food ' will be your ' course
+                    gänge = Vorspeise, Hauptgericht, Nachtisch
+                    {for} gang {in} gänge
+                        {print} 'Was ist Ihre Bestellung als ' gang '?'
+                        _ 
+                        _
                     ```
 
                 story_text_2: |
                     ### Übung
                     Natürlich kannst auch für mehrere Personen bestellen!
                     Kannst du die richtige Anzahl an Leerzeichen zur Einrückung vor jeder Zeile hinzufügen, damit der Code richtig läuft?
-                    TIPP: manche Zeilen brauchen gar keine Einrückung.
+                    Tipp: manche Zeilen brauchen gar keine Einrückung.
 
                 example_code_2: |
                     ```
@@ -1935,7 +1913,10 @@ adventures:
             10:
                 story_text: |
                     ## Wahrsagerin
-                    In diesem Level wirst du lernen, das englische Spiel MASH zu programmieren. In diesem Spiel geht es darum, für alle Spieler die Zukunft vorauszusagen. Auf Englisch stehen die Buchstaben für mansion, apartement, shack, und house, was auf Deutsch Schloss, Wohnung, Schuppen und Haus bedeutet.
+                    In diesem Level wirst du lernen, das englische Spiel MASH zu programmieren. In diesem Spiel geht es darum, für alle Spieler die Zukunft vorauszusagen. Auf Englisch stehen die Buchstaben für mansion, apartment, shack, und house, was auf Deutsch Schloss, Wohnung, Schuppen und Haus bedeutet.
+
+                    ### Übung 1
+                    Füge zwei Namen zur Liste hinzu und sieh wie die Ausgabe des Programms sich verändert, wenn du es ausführst.
 
                 example_code: |
                     ```
@@ -1949,7 +1930,7 @@ adventures:
                         {print} Name ' wird eine(n) ' Haustiere {at} {random} ' als Haustier haben.'
                         {sleep}
                     ```
-                story_text_2: "### Übung\nWir können auch eine Harry-Potter-Wahrsagerin machen. Fülle die Zeile 5 richtig aus und füge die richtige Einrückung in den Zeilen 6 - 8 hinzu und dieses Programm verhält sich wie der Sortierhut!\n"
+                story_text_2: "### Übung 2\nWir können auch eine Harry-Potter-Wahrsagerin machen. Fülle die Lücken so, dass 9 Zeilen ausgegeben werden.\n**(extra)** Ändere das Thema der Wahrsagerin zu etwas anderem, wie zum Beispiel deinem Lieblingsbuch, -film oder -serie.\n"
 
                 example_code_2: |
                     ```
@@ -2471,7 +2452,7 @@ adventures:
         levels:
             13:
                 story_text: "## Tic Tac Toe\nIn diesem Abenteuer kannst du ein Tic-Tac-Toe-Spiel programmieren. Du kannst mit zwei Leuten spielen. Ihr wählt abwechselnd die Zahl (zwischen 1 und 9) des Feldes, in das ihr euer Symbol (X oder O) einsetzen wollt.\nDie erste Person, die 3 Symbole in einer Reihe (horizontal, vertikal oder diagonal) hat, gewinnt!\n"
-                example_code: "```\nsign = 'x'\nopen_spots = 1, 2, 3, 4, 5, 6, 7, 8, 9\ngame = 'on'\nspot_1 = '.'\nspot_2 = '.'\nspot_3 = '.'\nspot_4 = '.'\nspot_5 = '.'\nspot_6 = '.'\nspot_7 = '.'\nspot_8 = '.'\nspot_9 = '.'\n{print} 'TIC TAC TOE!'\n{print} spot_1 spot_2 spot_3\n{print} spot_4 spot_5 spot_6\n{print} spot_7 spot_8 spot_9\n{print} ' '\n{for} i {in} {range} 1 {to} 9\n    {if} game {is} 'on'\n        choice = {ask} 'Player ' sign ', which spot?'\n        {if} choice {in} open_spots\n            {remove} choice {from} open_spots\n            {if} choice {is} 1\n                spot_1 = sign\n            {if} choice {is} 2\n                spot_2 = sign\n            {if} choice {is} 3\n                spot_3 = sign\n            {if} choice {is} 4\n                spot_4 = sign\n            {if} choice {is} 5\n                spot_5 = sign\n            {if} choice {is} 6\n                spot_6 = sign\n            {if} choice {is} 7\n                spot_7 = sign\n            {if} choice {is} 8\n                spot_8 = sign\n            {if} choice {is} 9\n                spot_9 = sign\n        {else}\n            {print} 'That spot was already taken'\n        {print} spot_1 spot_2 spot_3\n        {print} spot_4 spot_5 spot_6\n        {print} spot_7 spot_8 spot_9\n        {print} ' '\n        winner = {ask} 'Did you win?'\n        {if} winner {is} 'yes'\n            {print} 'Good job, player ' sign '!'\n            game = 'over'\n        {else}\n            {if} sign {is} 'x'\n                sign = 'o'\n            {else}\n                sign = 'x'\n```\n"
+                example_code: "```\nsymbol = 'x'\noffene_felder = 1, 2, 3, 4, 5, 6, 7, 8, 9\nspiel = 'an'\nfeld_1 = '.'\nfeld_2 = '.'\nfeld_3 = '.'\nfeld_4 = '.'\nfeld_5 = '.'\nfeld_6 = '.'\nfeld_7 = '.'\nfeld_8 = '.'\nfeld_9 = '.'\n{print} 'TIC TAC TOE!'\n{print} feld_1 feld_2 feld_3\n{print} feld_4 feld_5 feld_6\n{print} feld_7 feld_8 feld_9\n{print} ' '\n{for} i {in} {range} 1 {to} 9\n    {if} spiel {is} 'an'\n        wahl = {ask} 'Spieler ' symbol ', welches Feld?'\n        {if} wahl {in} offene_felder\n            {remove} wahl {from} offene_felder\n            {if} wahl {is} 1\n                feld_1 = symbol\n            {if} wahl {is} 2\n                feld_2 = symbol\n            {if} wahl {is} 3\n                feld_3 = symbol\n            {if} wahl {is} 4\n                feld_4 = symbol\n            {if} wahl {is} 5\n                feld_5 = symbol\n            {if} wahl {is} 6\n                feld_6 = symbol\n            {if} wahl {is} 7\n                feld_7 = symbol\n            {if} wahl {is} 8\n                feld_8 = symbol\n            {if} wahl {is} 9\n                feld_9 = symbol\n        {else}\n            {print} 'Das Feld ist bereits besetzt'\n        {print} feld_1 feld_2 feld_3\n        {print} feld_4 feld_5 feld_6\n        {print} feld_7 feld_8 feld_9\n        {print} ' '\n        gewinner = {ask} 'Hast du gewonnen?'\n        {if} gewinner {is} 'ja'\n            {print} 'Gut gemacht, Spieler ' symbol '!'\n            spiel = 'vorbei'\n        {else}\n            {if} symbol {is} 'x'\n                symbol = 'o'\n            {else}\n                symbol = 'x'\n```\n"
                 start_code: '## schreibe deinen Code hier'
             14:
                 start_code: '## Schreibe deinen Code hier'
