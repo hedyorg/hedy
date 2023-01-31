@@ -181,9 +181,7 @@ class ForTeachersModule(WebsiteModule):
 
         teacher_adventures = self.db.get_teacher_adventures(user["username"])
         customizations = self.db.get_class_customizations(class_id)
-        print("*"*100)
-        print(adventures)
-        print("*"*100)
+
         adventure_names = {}
         for adv_key, adv_dic in adventures.items():
             for name, _ in adv_dic.items():
