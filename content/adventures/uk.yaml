@@ -29,7 +29,7 @@ adventures:
                 story_text: "## Рівень 7! Сьомий рівень!\nРівень 7 додає команду `{repeat}`.  Команда `{repeat}` може бути використана для виконання одного рядка коду декілька разів.\n"
             8:
                 example_code: "Ось як тепер працює команда `{repeat}`:\n```\n{repeat} 5 {times}\n    {print} 'Всім привіт'\n    {print} 'Це все повторюється 5 разів'\n```\nА ось як команди `{if}` і `{else}` тепер працюють:\n\n```\nімʼя {is} {ask} 'Як тебе звати?'\n{if} імʼя {is} Хейді\n    {print} 'Вітаємо Хейді'\n    {print} 'Можеш гратися на своєму компʼютері!'\n{else}\n    {print} 'ПОРУШНИК!'\n    {print} 'Не можеш користуватись цим компʼютером!'\n```\n"
-                story_text: "## Відступ\n`{ask}` і `{print}` все ще працюють, як ви їх знаєте. Але `{if}`, `{else}`, {pressed} і `{repeat}` змінилися!\nТепер ви можете виконувати групи коду разом, але вам потрібно буде зробити *відступ* у коді.\nЦе означає поставити чотири пробіли на початку рядка. Вам також доведеться зробити відступ, якщо ви просто хочете створити блок з одного рядка.\n"
+                story_text: "## Відступ\n`{ask}` і `{print}` все ще працюють так, як ви їх знаєте. Але `{if}`, `{else}`, {pressed} і `{repeat}` змінилися!\nТепер ви можете виконувати групи коду разом, але вам потрібно буде зробити *відступ* у коді.\nЦе означає поставити чотири пробіли на початку рядка. Вам також доведеться зробити відступ, якщо ви просто хочете створити блок з одного рядка.\n"
                 start_code: "{repeat} 5 {times}\n    {print} 'Hello folks'\n    {print} 'This will be printed 5 times'"
             9:
                 start_code: "{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    {else}\n        {print} 'pizza is better'"
@@ -76,8 +76,8 @@ adventures:
                 start_code: "імʼя {is} {ask} 'як тебе звати?'\n{if} імʼя {is} Хейді {print} 'круто!' {else} {print} 'пф'"
                 story_text: "## Якщо... то....\nУ 5 рівні з'явилося дещо нове - `{if}`! За допомогою `{if}` ви можете вибирати між двома різними варіантами.\nЦей код чудово друкується, якщо ви введете Hedy як ім'я, і бум! Якщо ви введете щось інше.\n`{ask}` і `{print}` все ще працюють так само як і на 4-му рівні.\n"
                 example_code_2: "```\nімʼя {is} {ask} 'як тебе звати?'\n{if} імʼя {is} Хейді {print} 'класно'\n{else} {print} 'фе!'\n```\n"
-                story_text_4: "Ще щось, що працює з ```if``` is ```pressed```! За допомогою pressed ви можете зв’язати будь-яку літеру алфавіту та будь-яку цифрову клавішу на клавіатурі до команди. Якщо зв’язати його та натиснути клавішу,\nщось станеться. Спробуй!\n"
-                example_code_4: "```\nякщо x натиснуто, то надрукує \"це працює!\"\n```\n"
+                story_text_4: "Ще щось, що працює з `{if}`is `{pressed}`! За допомогою `{pressed}` Ви можете зв’язати будь-яку літеру алфавіту та будь-яку цифрову клавішу на клавіатурі до команди. Якщо зв’язати його та натиснути клавішу, щось станеться. Спробуй!\n"
+                example_code_4: "```\n{if} x {is} {pressed} {print} 'це спрацювало!'\n```\n"
             10:
                 start_code: "animals {is} dog, cat, blobfish\n{for} animal {in} animals\n  {print} 'I love ' animal"
                 story_text: "## `{for}`\nУ цьому рівні ми вивчаємо новий код, який називається `{for}`. За допомогою `{for}` можна скласти список і використовувати всі елементи.\n`{for}` створює блок, як і `{repeat}` та `{if}`, тому всі рядки в блоці повинні починатися з пробілів."
@@ -108,22 +108,22 @@ adventures:
                 example_code: "```\n{print}('Hello!')\n{for} i {in} {range}(1, 10):\n    {print}('This is line ', i)\n```\n"
                 story_text_2: Якщо ви хочете надрукувати більше одного елемента, потрібно розділити їх комами.
                 example_code_2: "```\nтемпература = 25\n{print}('Зараз ', температура, 'градуси на вулиці')\n```\n"
-                story_text_3: "##  Input\nThe final change we will need to make to get Python code is changing `{ask}` into `{input}`."
-                example_code_3: "```\n{print}('My name is Hedy!')\nname = {input}('What is your name?')\n{print}('So your name is ', name)\n```\n"
+                story_text_3: "##  Input\nОстанньою зміною, яку нам потрібно зробити, щоб отримати код на Python, є зміна `{ask}` на `{input}`."
+                example_code_3: "```\n{print}('Мене звати Геді!')\nname = {input}('Як тебе звати?')\n{print}('Отже, тебе звуть ', name)\n```\n"
         name: Вступ
         description: Пояснення рівнів
     story:
-        name: Story
+        name: Історія
         levels:
             5:
-                start_code: "{print} 'Here your story will start!'"
-                story_text: "##Історія\nУ цьому рівні ви можете запрограмувати різні кінцівки, що зробить вашу історію ще веселішою.\n\n## Виклик\nПридумайте, наприклад, дві кінцівки для своєї історії:\n\n- Принцеса йде лісом\n- Вона натрапляє на монстра\n\n- Щасливий кінець: Вона дістає свій меч і монстр швидко тікає\n- Поганий кінець: Монстр з'їдає принцесу\n\nВи також можете зробити так, щоб ім'я можна було ввести повторно. Це працює так само, як і на попередніх рівнях. Ви можете об'єднати це з `{if}`, і тоді ви вже створили цілу програму!\n"
-                example_code: "```\nname {is} {ask} 'Who is walking in the forest?'\n{print} name 'walks through the forest'\n{print} name 'encounter a monster'\nend {is} {ask} 'Would you like a good or a bad ending?'\n{if} end {is} good {print} name 'takes the sword and the monster quickly runs away'\n{else} {print} 'The monster eats' name\n```\n"
+                start_code: "{print} 'Тут почнеться твоя історія!'"
+                story_text: "## Історія\nУ цьому рівні ви можете запрограмувати різні кінцівки, які зроблять вашу історію ще веселішою.\n\n### Вправа\nПридумайте дві кінцівки для вашої історії, наприклад:\n\n- Принцеса йде лісом\n- Вона натрапляє на чудовисько\n\n- Щасливий кінець: Принцеса дістає свій меч, і чудовисько швидко тікає\n- Поганий кінець: Чудовисько з'їдає принцесу\n\nВи також можете зробити так, щоб ім'я можна було ввести ще раз. Це працює так само, як і на попередніх рівнях. Ви можете об'єднати це з `{if}`, і тоді ви вже створили цілу програму!\n"
+                example_code: "```\nмення {is} {ask} 'Хто йде лісом?'\n{print} мення 'гуляє лісом'\n{print}  'зустрічає монстра'\nкінець {is} {ask} 'Ви хочете гарний чи поганий кінець?'\n{if} кінець {is} хороший {print} мення 'бере меч і монстр швидко тікає'\n{else} {print} \"Монстр з'їдає\" мення\n```\n"
             1:
-                story_text: "## Make a story\nIn level 1 you can make a story with a different main character that you enter yourself.\n\nIn the first line, use `{ask}` and ask who the main character of the story will be.\n\nAfter that first line, start with `{print}` if the sentence needs to be printed.\nYou use `{echo}` if you want your main character to be at the end of the sentence.\n"
-                example_code: "```\n{ask} The main character of this story is\n{print} The main character is now going to walk in the forest\n{echo} He's a bit scared,\n{print} He hears crazy noises everywhere\n{print} He's afraid this is a haunted forest\n```\n"
-                start_code: '{print} Your story starts here'
-                story_text_2: "## Challenge\nCan you make your own story in Hedy now by using `{print}` , `{ask}` and `{echo}`?\n"
+                story_text: "## Створіть історію\nНа першому рівні ви можете створити історію з іншим головним героєм, якого ви вводите самостійно.\n\nУ першому рядку використовуйте `{ask}` і запитайте, хто буде головним героєм історії.\n\nПісля першого рядка почніть з `{print}`, якщо речення потрібно вивести на екран.\nВикористовуйте `{echo}`, якщо ви хочете, щоб ваш головний герой знаходився в кінці речення.\n"
+                example_code: "```\n{ask} Головним героєм цієї історії є\n{print} Головний герой тепер збирається прогулятися лісом\n{echo} Він трохи наляканий,\n{print} Він чує божевільні звуки звідусіль\n{print} Він боїться, що це ліс з привидами\n```\n"
+                start_code: '{print} Твоя історія розпочинається тут'
+                story_text_2: "### Вправа\nЧи можете ви зараз створити власну історію у Hedy за допомогою `{print}`, `{ask}` та `{echo}`?\n"
             2:
                 story_text: "## Історія\nУ 2 рівні ви можете зробити свою історію ще веселішою. Ім'я вашого головного героя тепер може бути в будь-якому місці речення.\n\nДля цього вам доведеться запрограмувати трохи більше. Тепер ви повинні спочатку назвати свого головного героя.\n\nПотім ви можете вставити це ім'я в будь-яке місце в реченні.\n\n## Виклик\nЧи можеш ти сам скласти історію, користуючись перемінними? Чи можете ви додати ще більше перемінних?\n"
                 example_code: "```\nname {is} {ask} What is the name of the main character?\n{print} name is now going to run in the woods\n{print} name is a bit scared\n{print} Suddenly he hears a crazy noise...\n{sleep}\n{print} name is afraid this is a haunted forest\n```"
@@ -141,11 +141,11 @@ adventures:
                 example_code: "```\nname {is} Hans\n{print} 'The name of the main character is' name\n{print} name 'is now going to walk in the woods'\n{print} name 'is a bit scared'\nanimals {is} \U0001F994, \U0001F43F, \U0001F989, \U0001F987\n{print} 'He hears the sound of an' animals {at} {random}\n{print} name 'is afraid this is a haunted forest'\n```\n"
                 start_code: "{print} 'Your story will be printed here!'"
             7:
-                story_text: "## Історія\nУ казці хтось вимовляє слова кілька разів. Наприклад, коли хтось кличе на допомогу або співає пісню.\nВи можете помістити такі повтори в свою історію, в цей рівень за допомогою `{repeat}`.\n\n##Виклик\nЧи можете ви створити власну історію за допомогою повторів?\n"
-                example_code: "```\n{print} 'The prince kept calling for help'\n{repeat} 5 {times} {print} 'Help!'\n{print} 'Why is nobody helping me?'\n```\n"
-                start_code: "{repeat} 5 {times} {print} 'Help!'"
+                story_text: "## Розповідь\nВ історії хтось вимовляє слова кілька разів. Наприклад, коли хтось кличе на допомогу або співає пісню.\nВи можете вставити такі повтори у свою історію на цьому рівні за допомогою `{repeat}`.\n\n### Вправа\nДодайте повторення до власної історії. Поверніться до збережених програм, виберіть свою програму розповіді з рівня 6 і\nзнайдіть рядок, що містить {print} і повторіть його!\n"
+                example_code: "```\n{print} 'Принц продовжував кликати на допомогу!'\n{repeat} 5 {times} {print} 'Допоможіть!!!'\n{print} 'Чому мені ніхто не допомагає?'\n```\n"
+                start_code: "{repeat} 5 {times} {print} 'Допоможіть!!!'"
             8:
-                story_text: "## Story\nIn this level you can use multiple lines in your {if} commands, this way you can upgrade your happy or sad ending!\n"
+                story_text: "## Історія\nУ цьому рівні ви можете використовувати декілька рядків у командах {if}, таким чином ви можете покращити свій щасливий або сумний кінець!\n\n### Вправа 1\nУ прикладі коду показано дві різні кінцівки: одна, де герої стрибають у машині часу, а інша, де вони не стрибають.\nЗаповніть пропуски принаймні одним реченням для кожної кінцівки.\n**(додатково)** Зробіть історію довшою. Що відбувається в історії? Ви також можете додати друге `{ask}` з різними варіантами.\n\n### Вправа 2\nПоверніться до збережених програм, виберіть свою програму з 5-го рівня. Тепер напишіть гарну і погану кінцівки довжиною не менше трьох рядків кожна! \n"
                 example_code: "```\n{print} 'OH NO! The T-rex is closing in!'\nend = {ask} 'Do you want a happy or a sad ending?'\n{if} end {is} happy\n    {print} 'Just in time Richard jumps back into the time machine!'\n    {print} 'Michael types in the code and...'\n    {print} '\U0001F4A5ZAP!\U0001F4A5'\n    {print} 'They are back in their garage'\n{else}\n    {print} 'Michael yells COME ON RICHARD! RUN FASTER!'\n    {print} 'But Richard is too slow...'\n    {print} 'The T-rex closes in and eats him in one big bite!\U0001F996'\n```\n"
                 start_code: '# place your code here'
             9:
@@ -168,8 +168,8 @@ adventures:
                 story_text: "## Story\nUsing the `{while}` loop can make your stories more interesting. For example, you can use `{while} game {is} 'on'` so you can play until the game is over.\nOr you can use `{while} sword {is} 'lost'` so the player can't continu the game until they have found something.\n"
                 example_code: "```\nkeys = 'lost'\n{print} 'You are standing in your garden and you have lost your keys.'\n{print} 'Where do you want to look for them?'\n{print} 'You can choose: tree, flowerbed, rock, postbox'\n{while} keys == 'lost'\n    location = {ask} 'Where do you want to look?'\n    {if} location == 'flowerbed'\n        {print} 'Here they are!'\n        keys = 'found'\n    {else}\n        {print} 'Nope they are not at the ' location\n{print} 'Now you can enter the house!'\n```\n"
                 start_code: '# place your code here'
-        description: Story
-        default_save_name: Story
+        description: Створіть коротку історію
+        default_save_name: Історія
     songs:
         name: Sing a song!
         levels:
