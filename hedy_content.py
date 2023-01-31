@@ -148,12 +148,12 @@ ADVENTURE_ORDER_PER_LEVEL = {
     ],
     10: [
         'default',
+        'fortune',
         'rock',
         'dishes',
         'dice',
         'songs',
         'story',
-        'fortune',
         'restaurant',
         'calculator'
     ],
