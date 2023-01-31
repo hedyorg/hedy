@@ -16,117 +16,117 @@ levels:
                 {echo} Bra val! Jag älskar
     3:
         2:
-            code: |
-                food {is} pizza, icecream, salad, sandwich
-                toppings {is} chocolate, cheese, tuna, sprinkles
-                {print} Your random meal for today is...'
+            code: |-
+                mat {is} pizza, glass, sallad, macka
+                tillbehör {is} choklad, ost, tonfisk, strössel
+                {print} Din slumpade måltid för dagen är...
                 {sleep} 2
-                {print} food at random with toppings at random
+                {print} mat {at} {random} med tillbehör {at} {random}
             story: Create a program that chooses a random meal for you. Make a list of food and a list of toppings and let the program decide what you'll have!\n
         1:
             story: The new school year at Hogwarts is starting! \nIt is the job of the sorting hat to sort you into one of the houses.\nWhich house will you be sorted into?\nAre you a Gryffindor, Hufflepuf, Ravenclaw or Slytherin.\nLet the program wait a short period before revealing your house.\n
-            code: |
-                {print} The new school year at Hogwarts is starting!'
-                {print} The sorting hat is ready to sort you into a Hogwarts house.'
-                houses {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin
+            code: |-
+                {print} Det nya skolåret på Hogwarts börjar!
+                {print} Sorteringshatten är redo att sortera in dig i ett elevhem.
+                blir {is} Gryffindor, Hufflepuff, Ravenclaw, Slytherin
                 {sleep} 2
-                {print} And it is houses {at} {random}
+                {print} Och det blir {at} {random}
     4:
         1:
             story: You are the newest Pokémon trainer from Pallet Town!\nMake a program that selects your first Pokémon.\nLet the program wait a minute before revealing your first pokémon.\n
-            code: |
-                pokemons {is} Pikachu, Charmander, Bulbasaur, Squirtle
-                {print} 'This is going to be your first pokémon!'
+            code: |-
+                pokemon {is} Pikachu, Charmander, Bulbasaur, Squirtle
+                {print} 'Det här blir din första Pokémon!'
                 {sleep}
-                {print} pokemons {at} {random}
+                {print} pokemon {at} {random}
         2:
             story: Create a lottery that lets you choose an extra price that you might win.\n
-            code: |
-                prices {is} car, hamster, 1 million euros
-                price {is} {ask} 'What would you like to win?'
-                {add} price {to_list} prices
-                {print} 'You won a ' prices {at} {random}
+            code: |-
+                priser {is} bil, hamster, 1 miljon kronor
+                pris {is} {ask} 'Vad vill du vinna?'
+                {add} pris {to_list} priser
+                {print} 'Du vann en ' priser {at} {random}
     5:
         2:
-            code: |
-                answer {is} {ask} '88 - 16 = ?'
-                {if} answer {is} 72 {print} 'Correct!'
-                {else} print 'Wrong! The answer was 72'
-                {print} 'Solve this problem'
+            code: |-
+                {print} 'Lös det här problemet'
+                svar {is} {ask} '88 - 16 = ?'
+                {if} svar {is} 72 {print} 'Rätt!'
+                {else} {print} 'Fel! Svaret var 72'
             story: Create a maths game.\n
         1:
-            code: |
-                favorite_movies {is} Batman, Spiderman, The Avengers, Jurassic Park
-                movie {is} {ask} 'What is your favourite movie?'
-                {if} movie {in} favorite_movies {print} 'You have great taste!'
-                {else} {print} 'Such a shame that your favourite movie is not in the list, we will add it right away!'
-                {add} movie {to_list} favorite_movies
+            code: |-
+                favoritfilmer {is} Batman, Spiderman, The Avengers, Jurassic Park
+                film {is} {ask} 'Vad är din favoritfilm'
+                {if} film {in} favoritfilmer {print} 'Du har bra smak'
+                {else} {print} 'Synd att din favoritfilm inte finns i listan. Vi lägger till den direkt!'
+                {add} film {to_list} favoritfilmer
             story: Make a program that checks if your favourite movie is already in the list of the computer.\nIf so, print that you have great taste, otherwise add the movie to the list.\n
     6:
         1:
             story: Make a program that calculates how old you are in dog and cat years.\nFirst ask the age of the user and start calculating.\nFirst calculate the dogyears then the catyears.\nShow the user the different ages.\n
-            code: |
-                age = {ask} 'How old are you?'
-                dog_age = age * 7
-                cat_age = age * 5
-                {print} 'In dogyears you are ' dog_age ' years old.'
-                {print} 'In catyears you are ' cat_age ' years old.'
+            code: |-
+                ålder = {ask} 'Hur gammal är du?'
+                hundålder = ålder * 7
+                kattålder = ålder * 5
+                {print} 'I hundår är du ' hundålder ' år gammal.'
+                {print} 'I kattår är du ' kattålder ' år gammal.'
         2:
             story: Create a program that helps you calculate how many cakes you should buy for your birthday party.\n
-            code: |
-                {print} 'It is your birthday!'
-                people = {ask} 'How many people do you want to give a slice of cake?'
-                cakes_amount is people/8
-                {print} 'You will have to buy ' cakes_amount ' cakes'
+            code: |-
+                {print} 'Det är din födelsedag!'
+                personer = {ask} 'Hur många personer vill du ge en tårtbit?'
+                tårtmängd {is} personer/8
+                {print} 'Då behöver du köpa' tårtmängd ' tårtor'
     7:
         1:
             story: In a chess tournament there are three players left.\nCreate a program that decides which two players first play against each other.\nFirst print the two players who play the first match, then print against which player the winner will play.\n
-            code: |
-                players = Liam, Noah, Sophie
-                player1 = players {at} {random}
-                player2 = players {at} {random}
-                {print} player1 ' first plays against ' player2
-                {remove} player1 {from} players
-                {remove} player2 {from} players
-                {print} 'The winner plays against ' players {at} {random}
+            code: |-
+                spelare = Liam, Noah, Sophie
+                spelare1 = spelare {at} {random}
+                spelare2 = spelare {at} {random}
+                {print} spelare1 ' spelar först mot ' spelare2
+                {remove} spelare1 {from} spelare
+                {remove} spelare2 {from} spelare
+                {print} 'Vinnaren spelar mot ' spelare {at} {random}
         2:
             story: Create the song 'The wheels on the bus go round and round'\n
-            code: |
-                {print} 'the wheels on the bus go'
-                {repeat} 3 {times} {print} 'round and round'
-                {print} 'the wheels of the bus go round and round'
-                {print} 'all through the town '
+            code: |-
+                {print} 'hjulen på bussen snurrar'
+                {repeat} 3 {times} {print} 'runt, runt, runt'
+                {print} 'hjulen på bussen snurrar runt, runt, runt'
+                {print} 'genom hela staden '
     2:
         1:
             story: You and your friends are going to watch some Netflix.\nShow which movie you're about to watch and wish the viewers lot of fun!\n
-            code: |
-                {print} It is time for an evening of Netflix'
-                film {is} Sonic the Hedgehog 2'
-                {print} We're going to film
-                {print} Have lot of fun!'
+            code: |-
+                {print} Det är dags för en Netflix-kväll
+                film {is} Sonic the Hedgehog 2
+                {print} Vi ska se film
+                {print} Ha det så roligt!
         2:
             story: This is the webshop of a toy store. Create a program where costumers can add an item to their shopping cart.\n
-            code: |
-                {print} Welcome to our toystore'
-                toy is {ask} What would you like to buy?'
-                {print} The toy is added to your shopping cart.'
-                {print} Thank you for shopping with us!'
+            code: |-
+                {print} Välkommen till vår leksaksaffär
+                leksak {is} {ask} Vad vill du köpa?
+                {print} Leksaken är tillagd i din kundvagn.
+                {print} Tack för att du handlar hos oss!
     8:
         1:
             story: You and four other friends are playing Pokémon Go! Create a program that decides in which team each of you will play.\nEither red, yellow or blue! Take a little pauze after announcing a team.\n
-            code: |
-                teams = red, yellow, blue
-                {print} 'Red, Yellow of Blue?'
+            code: |-
+                lag = röd, gul, blå
+                {print} 'Röd, Gul eller Blå?'
                 {repeat} 5 {times}
-                    {print} 'You are selected in team... '
-                    {print} teams {at} {random}
+                    {print} 'Du väljs i... '
+                    {print} lag {at} {random}
                     sleep 2
         2:
             story: Print the countdown for a  game of hide and seek.\n
-            code: |
-                counter = 11
+            code: |-
+                räknare = 11
                 {repeat} 10 {times}
-                    counter = counter - 1
-                    {print} counter
+                    räknare = räknare - 1
+                    {print} räknare
                     {sleep} 1
-                {print} 'Ready or not here I come!'
+                {print} 'Nu kommer jag!'
