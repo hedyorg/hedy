@@ -41,25 +41,22 @@ adventures:
                     ```
 
                     Kamu bisa menemukan semua kode contoh level 3 pada bagian kiri. Ada juga diberikan latihan pada tab-tab diatas.
-                start_code: print halo dunia!
+                start_code: '{print} halo dunia!'
                 example_code: "```\nanimals {is} dog, cat, kangaroo\n{print} animals {at} {random}\n```\n"
                 story_text_2: Anda juga dapat menambahkan item ke daftar dengan `{add}` dan menghapus item dengan `{remove}`.
-                example_code_2: "```\nanimals {is} dog, cat, kangaroo\n{add} penguin {to_list} animals\n{remove} cat {from} animals\n{print} animals {at} {random}\n```\n"
+                example_code_2: "```\nHewan {is} anjing, kucing, kanguru\n{add} pinguin {to_list} hewan\n{remove} kucing {from} hewan\n{print} hewan {at} {random}\n```\n"
             4:
-                start_code: print 'Halo dunia'
-                story_text: |-
-                    Pada level 4 perintah `ask` dan `print` sudah diupdate.
+                start_code: "{print} 'Halo dunia'"
+                story_text: |
+                    ## 'Tanda kutip'
+                    Pada level 4 `{ask}` dan `{print}` sudah diubah.
 
-                    Kamu harus memasukkan teks yang mau kamu tampilkan diantara tanda kutip satu.
+                    Kamu harus memasukkan teks yang mau kamu tampilkan diantara tanda kutip.
 
-                    Ini berguna, karena sekarang kamu bisa menampilkan semua kata yang kamu mau, termasuk kata yang sebelumnya digunakan untuk menyimpan sesuatu dengan `is`.
+                    Ini berguna, karena sekarang kamu bisa menampilkan semua kata yang kamu mau, termasuk kata yang sebelumnya digunakan untuk menyimpan sesuatu dengan `{is}`.
 
                     Kebanyakan bahasa pemrograman juga menggunakan tanda kutip ketika menampilkan, jadi sebenarnya kita satu langkah lebih dekat dengan pemrograman yang sebenarnya!
-
-                    ### Tugas-tugas akan menjadi makin kompleks
-                    Kamu akan menemukan semua perintah di bagian kiri lagi dan tugas-tugas di tab-tab yang disediakan. Tugas-tugas tersebut sekarang akan menjadi lebih kompleks semakin ke kanan tabnya.
-                    Jadi adalah baik untuk memulai dari tab tugas paling kiri, dan mengerjakannya satu per satu ke kanan, supaya tantangan yang diberikan setara dengan kemampuan kamu.
-                example_code: "```\nprint 'You need to use quotation marks from now on!'\nanswer is ask 'What do we need to use from now on?'\nprint 'We need to use ' answer\n```\n"
+                example_code: "```\n{print}'You need to use quotation marks from now on!'\nanswer {is} {ask} 'What do we need to use from now on?'\nprint 'We need to use ' answer\n```\n"
                 story_text_2: "## Petualangan semakin luas dan semakin sulit\nPetualangan sekarang semakin luas dan semakin sulit di tab yang berurutan.\nJadi yang terbaik adalah memulai dari kiri dan bekerja ke kanan, agar semakin tertantang.\n"
             5:
                 start_code: |-
@@ -513,6 +510,7 @@ adventures:
                 example_code: "## 5 Little Monkeys Jumping on the bed\n```\nmonkeys = 5, 4, 3, 2\n{for} monkey {in} monkeys\n    {print} monkey ' little monkeys jumping on the bed'\n    {print} 'One fell off and bumped his head'\n    {print} 'Mama called the doctor and the doctor said'\n    {print} 'NO MORE MONKEYS JUMPING ON THE BED!'\n```\n\n## Baby Shark\n```\nsharks = baby, mommy, daddy, grandma, grandpa\n{for} shark {in} sharks\n    {print} shark 'tututututudu'\n    {print} shark 'tututututudu'\n    {print} shark 'tututututudu'\n    {print} shark\n```\n## Old McDonald\n```\nanimals = pig, dog, cow\n{for} animal {in} animals\n    {if} animal {is} pig\n        sound = oink\n    {if} animal {is} dog\n        sound = woof\n    {if} animal {is} cow\n        sound = moo\n    {print} 'Old McDonald had a farm'\n    {print} 'E I E I O!'\n    {print} 'and on that farm he had a ' animal\n    {print} 'E I E I O!'\n    {print} 'with a ' sound sound ' here'\n    {print} 'and a ' sound sound ' there'\n    {print} 'here a ' sound\n    {print} 'there a ' sound\n    {print} 'everywhere a ' sound sound\n```\n"
                 story_text: "## Songs\nIn this level you can easily make the childrens' song 'Five little monkeys'. Can you make the last chorus?\nYou can also make the whole baby shark song (including all the other sharks in the family) in only 6 lines!\nOr you can make Old McDonald with all the different animals.\n"
                 start_code: '# place your code here'
+                example_code_2: "```\nmonkeys = 5, 4, 3, 2, 1\n```\n"
             11:
                 story_text: "## Songs\nIn this level you can use the `{for} i {in} {range}` command to make songs that use counting.\n"
                 example_code: "## 5 little monkeys\n```\n{for} i {in} {range} 5 {to} 1\n    {print} i ' little monkeys jumping on the bed'\n    {print} 'One fell off and bumped his head'\n    {print} 'Mama called the doctor and the doctor said'\n    {if} i {is} 1\n        {print} 'PUT THOSE MONKEYS RIGHT TO BED!'\n    {else}\n        {print} 'NO MORE MONKEYS JUMPING ON THE BED!'\n```\n"
