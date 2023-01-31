@@ -1146,7 +1146,7 @@ export function runPythonProgram(this: any, code: string, hasTurtle: boolean, ha
     highlight_variables(pythonVariables);
     $('#stopit').hide();
     $('#runit').show();
-
+  
     if (hasPygame) {
       document.onkeydown = null;
       $('#pygame-modal').hide();
@@ -1536,10 +1536,14 @@ export function highlight_variables(variables: any) {
   if (variable_view === true) {
     variables = clean_variables(variables);
     for (const i in variables) {
-      // Only highlight if the variable contains any data (and is not undefined)
       if (variables[i][1]) {
-        let variableSpanList = $( `#code_editor span:contains('${variables[i][0]}')` );
-        variableSpanList.addClass('ace_hedy_variable');
+        // Only highlight if the variable contains any data (and is not undefined)
+        let variableName = variables[i][0];
+        let re = new RegExp(`${variableName}`, 'g')
+
+        $(`#code_editor span:contains('${variableName}')`).html(function(_, html) {
+           return html.replace(re, `<span class="ace_hedy_variable">${variableName}</span>`);
+        });
       }
     }
   }
