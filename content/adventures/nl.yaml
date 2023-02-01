@@ -243,12 +243,15 @@ adventures:
                     {print} 'Wie niet weg is, is gezien'
                 story_text: |-
                     ## Lussen!
-                    We gaan nu een extra vorm van de `{for}` toevoegen! Je mag ook `{for} i {in} {range} 1 {to} 5` typen in plaats van `{repeat} 5 {times}`. Het leuke is dat je die variabele `i` ook in je programma kan gebruiken!
-                    Je moet nog steeds alle regels die na `{for}` en `{if}` komen, inspringen. Dat betekent dat ze moeten beginnen met vier spaties.
+                    We gaan nu een extra vorm van de `{for}` toevoegen! In vorige levels gebruikten we de `{for}` altijd met een lijst. Maar nu mag je `{for}` ook gebruiken met getallen.
+                    We doen dat met een variabele, maar gevolgd door `{in}` en `{range}`. Daarna komt het begingetal, `{to}` en dan het eindgetal.
+
+                    Probeer het voorbeeld eens uit. Je moet nog steeds alle regels die na `{for}`komen, inspringen. Dat betekent dat ze moeten beginnen met vier spaties.
                 example_code: |
                     ```
-                    {for} teller {in} {range} 1 {to} 5
-                        {print} teller
+                    {for} i {in} {range} 1 {to} 10
+                        {print} i
+                    {print} 'Wie niet weg is, is gezien'
                     ```
             12:
                 start_code: |-
@@ -1703,6 +1706,23 @@ adventures:
                                 {print} 'Foutje! Het was... ' goed
                     ```
                 start_code: "# Schrijf jouw code hier"
+            11:
+                story_text: |
+                    ## Rekenmachine
+                    Met een `{for}` kan je jouw tafeloefenprogramma met nog minder regels code maken.
+
+                    ### Opdracht 1
+                    Verbeter de voorbeeldcode zodat een nette tafel geprint wordt: <br> "1 keer 10 is 10", "2 keer 10 is 20", enz.
+
+                    ### Opdracht 2
+                    Ga terug naar jouw code van level 10, en pas de code aan zodat het een `{for}` en `{range}` gebruikt.
+                example_code: |
+                    ```
+                    nummer = 10
+                    {for} i {in} {range} 1 to 10
+                        {print} i * nummer
+                    ```
+                start_code: "# Jouw code komt hier"
             12:
                 story_text: |
                     ## Rekenmachine
@@ -3164,11 +3184,22 @@ adventures:
         description: Try linking a keyboard key to a command!
         default_save_name: Pressit
     years:
-        name: New Year's
-        description: Countdown to the new year!
-        default_save_name: New Year's Countdown
+        name: "Oud en Nieuw"
+        description: "Aftellen naar het nieuwe jaar"
+        default_save_name: "Oud en Nieuw"
         levels:
             11:
-                story_text: "## Songs\nIn this level you can use the `{for} i {in} {range}` command to countdown to the New Year.\n\n## Challenge\nFill in the blanks and make the code work!\n"
-                example_code: "## Countdown\n```\nfor _ in _ 10 to 1\n    {print} i\n{print} 'Happy New Year!'\n```\n"
-                start_code: '# place your code here'
+                story_text: |
+                    ## Oud en Nieuw
+                    In this level can je `{for}` en `{range}` gebruiken om af te tellen met Oud en Nieuw.
+
+                    ### Opdracht
+                    Maak de code af zodat er wordt afgeteld. Je mag zelf kiezen vanaf welk getal.
+                    Voeg ook een `{sleep}` toe zodat er steeds een tel voorbij gaat voor er een nieuw getal komt.
+                example_code: |
+                    ```
+                    {for} getal {in} {range} _ {to} _
+                        {print} getal
+                    {print} 'Gelukkig Nieuwjaar!
+                    ```
+                start_code: "# place your code here"
