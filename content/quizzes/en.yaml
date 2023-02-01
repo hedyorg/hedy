@@ -1952,24 +1952,24 @@ levels:
             mp_choice_options:
             -   option: |
                     ```
-                    desert = {ask} 'What is your favorite type of desert?'
-                    {if} desert {is} icecream
+                    dessert = {ask} 'What is your favorite type of dessert?'
+                    {if} dessert {is} icecream
                         {repeat} 3 {times}
                         {print} 'Icecream is the best!'
                     ```
                 feedback: "Don't forget the indentation after `{repeat}` commands."
             -   option: |
                     ```
-                    desert = {ask} 'What is your favorite type of desert?'
-                    {if} desert {is} icecream
+                    dessert = {ask} 'What is your favorite type of dessert?'
+                    {if} dessert {is} icecream
                     {repeat} 3 {times}
                         {print} 'Icecream is the best!'
                     ```
                 feedback: "Use indentation after an `{if}` command"
             -   option: |
                     ```
-                    desert = {ask} 'What is your favorite type of desert?'
-                    {if} desert {is} icecream
+                    dessert = {ask} 'What is your favorite type of dessert?'
+                    {if} dessert {is} icecream
                         {repeat} 3 {times}
                             {print} 'Icecream is the best!'
                     ```
@@ -1977,8 +1977,8 @@ levels:
             -   option: |
                     ```
                     {repeat} 3 {times}
-                        desert = {ask} 'What is your favorite type of desert?'
-                        {if} desert {is} icecream
+                        dessert = {ask} 'What is your favorite type of dessert?'
+                        {if} dessert {is} icecream
                             {repeat} 3 {times}
                             {print} 'Icecream is the best!'
                     ```
@@ -2006,14 +2006,14 @@ levels:
                 {if} food {is} pizza
                 {if} size {is} medium
                 {if} drink {is} coke
-                price = price - 2
+                price = price - 5
             mp_choice_options:
             -   option: |
                     ```
                     {if} food {is} pizza
                         {if} size {is} medium
                             {if} drink {is} coke
-                                price = price - 2
+                                price = price - 5
                     ```
                 feedback: "Amazing!"
             -   option: |
@@ -2021,7 +2021,7 @@ levels:
                     {if} food {is} pizza
                         {if} size {is} medium
                     {if} drink {is} coke
-                        price = price - 2
+                        price = price - 5
                     ```
                 feedback: "Try again!"
             -   option: |
@@ -2029,7 +2029,7 @@ levels:
                     {if} food {is} pizza
                     {if} size {is} medium
                     {if} drink {is} coke
-                            price = price - 2
+                            price = price - 5
                     ```
                 feedback: "Try again"
             -   option: |
@@ -2037,7 +2037,7 @@ levels:
                     {if} food {is} pizza
                         {if} size {is} medium
                             {if} drink {is} coke
-                            price = price - 2
+                            price = price - 5
                     ```
                 feedback: "Try again"
             correct_answer: "A"
