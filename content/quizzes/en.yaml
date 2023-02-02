@@ -1838,16 +1838,16 @@ levels:
                        {print} 'One pizza with ' topping
                 {print} 'Thank you for your order'
             mp_choice_options:
-            -   option: "Nothing this code is correct!"
+            -   option: "Nothing, this code is correct!"
                 feedback: "That's right!."
             -   option: "You're not allowed to use an `{if}` command after an `{ask}` command."
                 feedback: "You are!."
             -   option: "You don't have to use indentation twice."
                 feedback: "You always have to use indentation."
             -   option: "The indentation is wrong in the last `{if}` command."
-                feedback: "It not, though."
+                feedback: "It is not the indentation."
             correct_answer: "A"
-            hint: "all the indentation is done correctly."
+            hint: "All the indentation is done correctly."
             question_score: '10'
         2:
             question_text: "What will be printed after entering the correct password?"
@@ -1934,12 +1934,12 @@ levels:
             mp_choice_options:
             -   option: "Sleeping Beauty with shoe size 38 gets the output 'Ill keep looking'"
                 feedback: "No, she gets 'You are not the one!'"
-            -   option: "Cinderella with shoe size 40 gets the output: 'I was looking for you!'"
+            -   option: "Cinderella with shoe size 40 gets the output 'I was looking for you!'"
                 feedback: "No, she gets 'Ill keep looking'"
             -   option: "Sleeping Beauty with shoe size 40 gets the output 'Ill keep looking'"
                 feedback: "That's right!"
-            -   option: "Cinderella with shoe size 40 gets the output 'I was looking for you!'"
-                feedback: "No she gets 'Ill keep looking'"
+            -   option: "Cinderella with shoe size 38 gets the output 'Ill keep looking'"
+                feedback: "No she gets 'I was looking for you'"
             correct_answer: "C"
             hint: "No matter what your name is, if you have shoe size 40 you will get the message 'Ill keep looking'."
             question_score: '10'
