@@ -458,9 +458,15 @@ adventures:
                     Je moet daar wel een klein beetje extra voor programmeren. Je moet je hoofdpersoon nu eerst een naam geven.
 
                     Die naam kun je dan overal in een zin neerzetten.
-
+                story_text_2: |
                     ### Opdracht
-                    Kun jij zelf ook een verhaaltje maken met een variabele erin? Kun je misschien zelfs nog meer variabelen toevoegen?
+                    Het is tijd om variabelen toe te voegen aan jouw eigen verhaal, dat je in level 1 hebt geschreven.
+                    Ga naar 'Mijn programma's', zoek jouw level 1 verhaal avontuur op en kopieer de code. Plak de code daarna in het invoerscherm hier in dit level.
+
+                    Deze code werkt nog niet, omdat je nog geen variabelen gebruikt hebt.
+                    Verander de `{ask}` en `{echo}` commando's in jouw code naar de juiste vorm, die je in dit level geleerd hebt.
+
+                    **Extra** Voeg een slaapcommando toe aan jouw code om spanning in het verhaal op te bouwen.
                 example_code: |-
                     ```
                     naam {is} {ask} Hoe heet de hoofdpersoon?
@@ -712,7 +718,7 @@ adventures:
                     ### Opdracht
                     Kopieer de voorbeeldcode naar jouw invoerscherm door op de gele knop te klikken.
                     Laat de papegaai nu een andere vraag stellen dan in het voorbeeld. Vul de vraag in op het lijntje.
-                    **Extra** Je kunt de papegaai ook meerdere vragen laten stellen. Typ onder jouw code nog meer regels code. 
+                    **Extra** Je kunt de papegaai ook meerdere vragen laten stellen. Typ onder jouw code nog meer regels code.
                 example_code_2: |
                     ```
                     {print} Ik ben Hedy de papegaai
@@ -1433,7 +1439,7 @@ adventures:
         description: "Maak jouw eigen steen, papier, schaar spel"
         default_save_name: "Steen"
         levels:
-            v1:
+            1:
                 story_text: |
                     ## Steen, papier, schaar
                     In level 1 kun je een begin maken met een steen, papier, schaar spel.
@@ -1463,12 +1469,16 @@ adventures:
             2:
                 story_text: |
                     ## Steen, papier, schaar
-                    In dit level kun je variabelen gebruiken om alvast een stukje van de spelletje te programmeren. In het volgende level leer je het spelletje maken.
+                    In dit level kun je variabelen gebruiken om alvast een stukje van het spelletje te programmeren. In het volgende level leer je het spelletje maken.
                 example_code: |
                     ```
                     _ {is} {ask} steen, papier of schaar?
                     {print} ik kies _
                     ```
+                story_text_2: |
+                    ### Opdracht
+                    Kopieer de voorbeeldcode naar jouw invoerscherm door op de gele knop te klikken.
+                    Maak de code af door de juist commando's in te vullen.
                 start_code: "# Schrijf jouw code hier"
             3:
                 story_text: |
@@ -2026,21 +2036,15 @@ adventures:
                 start_code: "# Schrijf jouw code hier"
                 story_text_2: |
                     ### Opdracht
-                    Kopieer de voorbeeldcode naar jouw invoerscherm door op de gele knop te klikken.
-                    Voeg minsteds 4 regels code toe aan het restaurant programma.
-                    Vraag de klanten wat ze willen drinken en vraag of ze willen pinnen.
-                    Bedenk tot slot een aardige manier om de klant gedag te zeggen.
-                example_code_2: |
-                    ```
-                    {print} Welkom bij Hedy's restaurant!
-                    {print} Vandaag serveren we pizza of lasagne.
-                    eten {is} {ask} Wat wilt u eten?
-                    {print} Heerlijk! eten is ook mijn favoriet!
-                    topping {is} {ask} Wilt eten met groente of vlees?
-                    {print} eten met topping komt eraan!
-                    drinken {is} _
-                    ```
+                    Kopieer jouw restaurantcode van het vorige level naar het invoerscherm hier beneden.
+                    Maak de code kloppend door de `{ask}` en `{echo}` commando's te vervangen door variabelen zoals je in dit level geleerd hebt.
 
+                    Nu je code weer werkt is het tijd om er iets aan toe te voegen.
+                    Kijk naar de laatste zin van de voorbeeldcode `{print} eten met topping komt eraan!`
+                    In deze regel zijn 2 variabelen in 1 regel gebruikt om een opsomming te maken van de bestelling.
+                    Voeg nu in jouw code ook zo'n opsomming toe van het eten en het drinken dat de klant heeft besteld.
+
+                    **Extra** Nu je variabelen hebt leren gebruiken, kun je zoveel variabelen als je wil toevoegen aan één regel. Kun jij nog meer variabelen toevoegen aan je regel, zoals hier opeten of meenemen, pinnen of cash, met of zonder rietje etc.?
             3:
                 story_text: |
                     ## Willekeurig restaurant

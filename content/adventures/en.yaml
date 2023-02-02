@@ -493,9 +493,15 @@ adventures:
                     You do have to program a little bit extra for that. You must now name your main character first.
 
                     You can then put that name anywhere in a sentence.
-
+                story_text_2: |
                     ### Exercise
-                    Can you make a story using a variable yourself? Can you add even more variables?
+                    Now it's time to add variables to your own story that you've made in the previous level.
+                    Go to 'My programs', look for your level 1 story adventure and copy the code. Paste the code in your input screen in this level.
+
+                    This code won't work in this level, because you have not used variables yet.
+                    Change the `{ask}` commands and `{echo}` commands in your code to the correct form that you've learned in this level.
+
+                    **Extra** Add a sleep command to your code to build up tension in your story.
                 example_code: |-
                     ```
                     name {is} {ask} What is the name of the main character?
@@ -1857,6 +1863,10 @@ adventures:
                     _ {is} {ask} rock, paper, or scissors?
                     {print} I choose _
                     ```
+                story_text_2: |
+                    ### Exercise
+                    Copy the example code to your input screen by clicking the yellow button.
+                    Finish the code by filling in the right commands on the blanks.
                 start_code: "# place your code here"
             3:
                 story_text: |
@@ -2194,18 +2204,16 @@ adventures:
                     ```
                 story_text_2: |
                     ### Exercise
-                    Can you make this code more elaborate? For example by adding drinks to the order? Or...?
+                    Copy your own restaurant code from to previous level to the input screen below.
+                    Fix the code by replacing the `{ask}` and `{echo}` commands and using variables, like you've learned in this level.
 
-                example_code_2: |
-                    ```
-                    {print} Welcome to Hedy's restaurant!
-                    {print} Today we're serving pizza or lasagna.
-                    food {is} {ask} What would you like to eat?
-                    {print} Great choice! The food is my favorite!
-                    topping {is} {ask} Would you like meat or veggies on that?
-                    {print} food with topping is on its way!
-                    drinks {is} _
-                    ```
+                    Now that your code is working again, it's time to add something more.
+                    Look at the last line of the example code: `{print} food with topping is on its way!`
+                    In this single line 2 variables have been used to create a summary of the order.
+                    Now add your own summary of the food and drinks ordered by the customer.
+
+                    **Extra** Now that you've learned how to use variables, you can use as many variables in one line as you'd like. Can you add more variables to your code, like eat in or take-away, cash or card, with or without a straw etc.?
+
                 start_code: "# place your code here"
             3:
                 story_text: |
